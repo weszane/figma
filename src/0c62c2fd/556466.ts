@@ -19,10 +19,10 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { tc } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { F2 } from "../905/389382";
+import { getMinimumBundle } from "../905/389382";
 import { hasRootPath } from "../figma_app/528509";
 import { i as _$$i } from "../905/46262";
 var m = (e => (e.CAN_CREATE = "CAN_CREATE", e.CANNOT_CREATE = "CANNOT_CREATE", e.CAN_AUTO_UPGRADE = "CAN_AUTO_UPGRADE", e.CAN_REQUEST_UPGRADE = "CAN_REQUEST_UPGRADE", e.UPGRADE_PENDING = "UPGRADE_PENDING", e))(m || {});
@@ -221,9 +221,9 @@ export function $$R0({
           })();
           return {
             ...r,
-            trackingDescriptor: _$$c.CREATE_FILE,
+            trackingDescriptor: UpgradeAction.CREATE_FILE,
             licenseType: a,
-            billableProductKey: a && F2(a),
+            billableProductKey: a && getMinimumBundle(a),
             needsUpgrade: s
           };
         }({

@@ -14,7 +14,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { WD4 } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
 import { uM } from "../905/738636";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { getNewFileConfig } from "../905/766303";
 import { oe, RJ, I7 } from "../figma_app/630951";
 import { aV } from "../figma_app/722362";
@@ -174,7 +174,7 @@ function j({
     totalNumSteps: j,
     primaryCtaProps: {
       ctaText: renderI18nText("tooltips_plus_onboarding.done"),
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     }
   }) : jsx(_$$J, {
     onPrimaryCtaClick: () => {
@@ -362,7 +362,7 @@ function K({
           useLoadingBar: !0,
           primaryCtaProps: {
             ctaText: renderI18nText("tooltips_plus_onboarding.done"),
-            ctaTrackingDescriptor: _$$c.DONE
+            ctaTrackingDescriptor: UpgradeAction.DONE
           }
         });else return jsx(iF, {
           markComplete: F
@@ -549,7 +549,7 @@ function en({
       totalNumSteps: 5,
       primaryCtaProps: {
         ctaText: renderI18nText("tooltips_plus_onboarding.done"),
-        ctaTrackingDescriptor: _$$c.DONE
+        ctaTrackingDescriptor: UpgradeAction.DONE
       },
       forStartingPoints: !0
     }) : jsx(et, {

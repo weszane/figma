@@ -19,7 +19,7 @@ import { p9, n1 } from "../figma_app/88768";
 import { rq } from "../905/351260";
 import { getUserState } from "../figma_app/502247";
 import { AccessLevelEnum } from "../905/557142";
-import { UpgradeAction } from "../figma_app/707808";
+import { CreateUpgradeAction } from "../figma_app/707808";
 import { G } from "../figma_app/66216";
 import { c as _$$c } from "../905/467776";
 export let $$N1 = createOptimistThunk((e, t) => {
@@ -84,7 +84,7 @@ export function $$C2(e, t, r) {
     level: r.inviteLevel,
     source: "new_team_creation_modal",
     teamId: e.id
-  })) : r.teamFlowType === UpgradeAction.CREATE && r.inviteEmails?.length && t.dispatch(rq({
+  })) : r.teamFlowType === CreateUpgradeAction.CREATE && r.inviteEmails?.length && t.dispatch(rq({
     emails: r.inviteEmails,
     emailsToExclude: n ? new Set([n.email]) : void 0,
     resourceType: FResourceCategoryType.TEAM,
@@ -112,7 +112,7 @@ export function $$C2(e, t, r) {
       }));
     } else if (r.onSuccess && (t.dispatch(r1({
       loading: !1
-    })), r.onSuccess()), s || r.teamFlowType === UpgradeAction.CREATE) {
+    })), r.onSuccess()), s || r.teamFlowType === CreateUpgradeAction.CREATE) {
       t.dispatch(r1({
         loading: !1
       }));

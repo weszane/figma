@@ -7,7 +7,7 @@ import { ce, Fe } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { f3 } from "../figma_app/504640";
 import { fullscreenValue } from "../figma_app/455680";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { i_ } from "../905/187165";
 import { J } from "../figma_app/391827";
 import { Z } from "../905/224161";
@@ -20,7 +20,7 @@ export function $$_0() {
   useEffect(() => {
     Qf(_);
   }, [_]);
-  let A = _6();
+  let A = getSelectedView();
   let y = f3();
   useEffect(() => {
     desktopAPIInstance && e && desktopAPIInstance.setTabColor(t);

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, createContext, useState, useMemo, useContext, useEffect, useRef, memo, createRef, forwardRef, useId } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Y9, r1, qj, jk, vo, nB } from "../figma_app/272243";
+import { DialogHeader, DialogHiddenTitle, DialogTabStrip, DialogActionStrip, DialogContents, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
@@ -32,7 +32,7 @@ import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figm
 import { Um } from "../905/848862";
 import { dH, eY as _$$eY, s6 } from "../figma_app/722362";
 import { useCurrentUserOrgId } from "../905/845253";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { vL } from "../905/826900";
@@ -54,7 +54,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { FJ } from "../905/508367";
 import { h as _$$h2 } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -179,7 +179,7 @@ function ey({
         e();
         complete();
       },
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
       dataTestId: "video-fill-callout-primary-cta"
     },
     secondaryCta: {
@@ -189,7 +189,7 @@ function ey({
         FJ("https://help.figma.com/hc/articles/33666207487767", "_blank");
         complete();
       },
-      ctaTrackingDescriptor: _$$c.LEARN_MORE,
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE,
       dataTestId: "video-fill-callout-secondary-cta"
     },
     targetKey: eg,
@@ -1740,10 +1740,10 @@ function it({
   tabManager: i,
   tabProps: r
 }) {
-  return jsxs(Y9, {
-    children: [jsx(r1, {
+  return jsxs(DialogHeader, {
+    children: [jsx(DialogHiddenTitle, {
       children: renderI18nText("fullscreen.color_picker")
-    }), jsxs(qj, {
+    }), jsxs(DialogTabStrip, {
       manager: i,
       children: [jsx(_$$t.Tab, {
         ...r.custom_color,
@@ -1758,7 +1758,7 @@ function it({
         recordingKey: generateRecordingKey(t, "viewTabs.dakota"),
         children: renderI18nText("variables.binding_ui.variable_dakota_tab_name")
       })]
-    }), e && jsx(jk, {
+    }), e && jsx(DialogActionStrip, {
       children: jsx("div", {
         className: "color_picker_v2--headerButtonsWrapper--yKED7",
         children: e
@@ -1968,12 +1968,12 @@ export let $$ii1 = forwardRef(function ({
         htmlAttributes: {
           "data-testid": J ? "paint-picker-v2-style-modal" : "paint-picker-v2-modal"
         },
-        children: jsxs(vo, {
+        children: jsxs(DialogContents, {
           allowOverflow: !0,
           className: _()({
             "color_picker_v2--hideCloseButton--Q1-f0": es
           }),
-          children: [eN, jsx(nB, {
+          children: [eN, jsx(DialogBody, {
             padding: 0,
             children: eO
           })]
@@ -2066,7 +2066,7 @@ function ia({
   let Y = useRef(null);
   let q = trackDefinedFileEventWithStore();
   let $ = useCurrentUserOrgId();
-  let Z = ol()?.id;
+  let Z = getCurrentTeam()?.id;
   let X = Ou(e);
   let Q = x$(e);
   let J = y7(e);
@@ -2272,7 +2272,7 @@ export function $$io0({
         "outside" === e && t && t.closest("#fullscreen-root") || Y();
       },
       recordingKey: generateRecordingKey(h, "modal"),
-      children: jsxs(vo, {
+      children: jsxs(DialogContents, {
         allowOverflow: !0,
         children: [jsx(it, {
           rightButtons: function () {
@@ -2290,7 +2290,7 @@ export function $$io0({
           recordingKey: h,
           tabManager: P,
           tabProps: R
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsxs(_$$t.TabPanel, {
             ...N.custom_color,

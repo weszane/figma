@@ -11,7 +11,7 @@ import { Oz, Lp, sg, wc, tH } from "../905/251509";
 import { Cc, lX, lu } from "../905/545842";
 import { Ok, ux, uW, NY } from "../figma_app/851625";
 import { getRequest } from "../905/910117";
-import { OC } from "../figma_app/386952";
+import { selectedViewAtom } from "../figma_app/386952";
 import { isFigmascopeView } from "../905/694285";
 import { MultiValueMap } from "../905/810750";
 import { Sd, H$, AJ, jI, JN, bA, gg, q as _$$q } from "../905/235262";
@@ -55,7 +55,7 @@ import { TextWithTruncation } from "../905/984674";
 import { zr, Pd, _H, io, _t, S3, xK } from "../905/440046";
 var b = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e.NeverFetched = 2] = "NeverFetched", e))(b || {});
 let y = atom(e => {
-  let t = e(OC);
+  let t = e(selectedViewAtom);
   return "fullscreen" === t.view ? `/api/file/scenegraph_validations/${t.fileKey}` : isFigmascopeView(t) && t.urlParams?.type === "server_file" ? `/api/admin/scenegraph_validations/${t.urlParams.key}` : null;
 });
 let v = atom(e => null != e(y));

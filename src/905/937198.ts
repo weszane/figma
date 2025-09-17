@@ -1,18 +1,40 @@
-import { logDebug, logError, logWarning } from "../905/714362";
-export function $$r0(...e) {
-  logDebug("CMS", ...e);
+import { logDebug, logError, logWarning } from '../905/714362'
+
+/**
+ * Logs a debug message for CMS.
+ * @param args - Arguments to log.
+ * @originalName $$r0
+ */
+export function logCmsDebug(...args: any[]) {
+  logDebug('CMS', ...args)
 }
-export function $$a2(...e) {
-  let t = [...e];
-  t[2]?.reportAsSentryError == null && (t[2] = {
-    ...t[2],
-    reportAsSentryError: !0
-  });
-  logError("CMS", ...t);
+
+/**
+ * Logs an error message for CMS and ensures Sentry error reporting.
+ * @param args - Arguments to log. The third argument may be augmented.
+ * @originalName $$a2
+ */
+export function logCmsError(...args: any[]) {
+  const logArgs = [...args]
+  if (logArgs[2]?.reportAsSentryError == null) {
+    logArgs[2] = {
+      ...logArgs[2],
+      reportAsSentryError: true,
+    }
+  }
+  logError('CMS', ...logArgs)
 }
-export function $$s1(...e) {
-  logWarning("CMS", ...e);
+
+/**
+ * Logs a warning message for CMS.
+ * @param args - Arguments to log.
+ * @originalName $$s1
+ */
+export function logCmsWarning(...args: unknown[]) {
+  logWarning('CMS', ...args)
 }
-export const FU = $$r0;
-export const Q2 = $$s1;
-export const sD = $$a2;
+
+// Export aliases for backward compatibility and refactored usage
+export const FU = logCmsDebug
+export const Q2 = logCmsWarning
+export const sD = logCmsError

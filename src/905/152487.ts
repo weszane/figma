@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
 import { postUserFlag } from "../905/985254";
@@ -37,7 +37,7 @@ export function $$g0(e) {
       ignoreParent: !0,
       children: jsx(EventShield, {
         eventListeners: ["onClick"],
-        children: jsx(J, {
+        children: jsx(setupThemeContext, {
           brand: e.forceEditorTheme,
           children: jsx("div", {
             "data-testid": testId,

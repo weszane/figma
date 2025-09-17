@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { J } from "../905/614223";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { tH, H4 } from "../905/751457";
 import { $z } from "../figma_app/617427";
@@ -18,11 +18,11 @@ import { RR } from "../figma_app/307841";
 import { k as _$$k2 } from "../figma_app/618031";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { ju } from "../905/389382";
+import { getEditorTheme } from "../905/389382";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { w as _$$w } from "../figma_app/171404";
@@ -64,7 +64,7 @@ export let $$O0 = registerModal(function ({
       logAndTrackCTA({
         ...D,
         trackingContext: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
-        trackingDescriptor: _$$c.CANCEL
+        trackingDescriptor: UpgradeAction.CANCEL
       });
       i();
     }
@@ -80,7 +80,7 @@ export let $$O0 = registerModal(function ({
     trackingProperties: {
       ...D,
       trackingContext: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
-      trackingDescriptor: _$$c.OTHER_PRODUCTS
+      trackingDescriptor: UpgradeAction.OTHER_PRODUCTS
     },
     children: getI18nString("admin_auto_upgrade_confirmation_modal.body.other_products")
   });
@@ -101,17 +101,17 @@ export let $$O0 = registerModal(function ({
       name: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
       properties: D,
       trackingOptions: B,
-      children: jsx(J, {
-        brand: ju(e),
+      children: jsx(setupThemeContext, {
+        brand: getEditorTheme(e),
         children: jsxs(ModalRootComponent, {
           manager: K,
           width: 360,
-          children: [jsxs(vo, {
-            children: [jsx(Y9, {
-              children: jsx(hE, {
+          children: [jsxs(DialogContents, {
+            children: [jsx(DialogHeader, {
+              children: jsx(DialogTitle, {
                 children: q
               })
-            }), jsxs(nB, {
+            }), jsxs(DialogBody, {
               padding: 0,
               children: [jsx(_$$T, {
                 licenseType: e
@@ -127,21 +127,21 @@ export let $$O0 = registerModal(function ({
                   children: [Z, " ", Y]
                 })
               })]
-            }), jsx(wi, {
-              children: jsx(jk, {
+            }), jsx(DialogFooter, {
+              children: jsx(DialogActionStrip, {
                 children: jsx($z, {
                   onClick: W,
                   trackingProperties: {
-                    trackingDescriptor: _$$c.UPGRADE
+                    trackingDescriptor: UpgradeAction.UPGRADE
                   },
                   trackingOptions: B,
                   children: renderI18nText("auto_upgrade_confirmation_modal.cta_text")
                 })
               })
             })]
-          }), getFeatureFlags().is_extended_social_proof_enabled && z.seatType && jsx(vo, {
+          }), getFeatureFlags().is_extended_social_proof_enabled && z.seatType && jsx(DialogContents, {
             className: "x1xmf6yo xh8yej3",
-            children: jsx(nB, {
+            children: jsx(DialogBody, {
               padding: 0,
               children: jsx(_$$w, {
                 seatType: z.seatType,

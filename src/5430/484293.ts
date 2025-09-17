@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { a as _$$a } from "../figma_app/215667";
+import { DropdownThemeProvider } from "../figma_app/215667";
 import { Z } from "../5430/993414";
 import { OQ } from "../5430/903660";
 import { y } from "../5430/173892";
@@ -24,7 +24,7 @@ export function $$u0({
   } = t;
   return jsx(TrackingProvider, {
     name: e0.RESOURCE_HUB_FEED_FILTERS,
-    children: jsx(_$$a, {
+    children: jsx(DropdownThemeProvider, {
       mode: "match",
       children: jsxs("div", {
         className: "x78zum5",

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { mc, YJ, q7 } from "../figma_app/860955";
+import { MenuContainerComp, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
 import { Ay } from "@stylexjs/stylex";
 import { TrackingProvider } from "../figma_app/831799";
 import { w } from "../figma_app/883622";
@@ -18,11 +18,11 @@ export function $$d1({
   trackedContext: r,
   onTrackedItemClick: o
 }) {
-  return jsx(mc, {
+  return jsx(MenuContainerComp, {
     children: jsx(TrackingProvider, {
       name: r,
-      children: e.map(e => jsx(YJ, {
-        children: e.items.map(e => jsx(q7, {
+      children: e.map(e => jsx(MenuGroupComp, {
+        children: e.items.map(e => jsx(MenuItemComp, {
           disabled: e.disabled,
           onClick: () => {
             e.onClick();

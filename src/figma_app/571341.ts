@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { HistoryChangesBindings, FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -173,12 +173,12 @@ export function $$$2({
     manager: a,
     width: windowInnerWidth - c,
     height: "full",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: e
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         className: Hb,
         children: i
       })]

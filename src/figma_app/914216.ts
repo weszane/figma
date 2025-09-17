@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
@@ -134,7 +134,7 @@ function F({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   if (useEffect(() => {
     e.onSubmenuOpenClose?.(manager.isOpen);
   }, [manager.isOpen, e]), 0 === e.items.length) return null;
@@ -143,7 +143,7 @@ function F({
     item: e,
     recordingKey: t
   }, e.recordingKey));
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsxs(ButtonPrimitive, {
       ...getTriggerProps(),
@@ -155,9 +155,9 @@ function F({
       }),
       recordingKey: t,
       children: [e.icon, jsx(_$$O, {})]
-    }), jsx(mc, {
-      children: jsx(YJ, {
-        title: s ? jsx(hE, {
+    }), jsx(MenuContainerComp, {
+      children: jsx(MenuGroupComp, {
+        title: s ? jsx(MenuTitleComp, {
           children: s
         }) : void 0,
         children: c

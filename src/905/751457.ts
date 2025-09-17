@@ -3,7 +3,7 @@ import { Component, useMemo, createContext, useContext } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N } from "../905/438674";
 import { Button } from "../905/521428";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { reportError, SeverityLevel } from "../905/11";
@@ -118,7 +118,7 @@ export function $$I2(e) {
     }
   }, []);
   let n = e.isGoogleTranslateError && getFeatureFlags().error_boundary_google_translate;
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     mode: t,
     children: jsx("div", {
       className: "error_boundary--rootErrorBoundary--AMgla",

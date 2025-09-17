@@ -28,7 +28,7 @@ import { M as _$$M } from "../905/152487";
 import { xT, Yh, g_, Ye } from "../figma_app/32128";
 import { t as _$$t, c as _$$c } from "../905/722657";
 import { k as _$$k2 } from "../905/443820";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { isColorDark, colorToRgbaString } from "../figma_app/191804";
 import { useSubscription } from "../figma_app/288654";
@@ -38,7 +38,7 @@ import { sx as _$$sx2 } from "../905/941192";
 import { DialogLabel } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { FileDevModeTrialRequestPending, FileIsInDevModeTrial, FileDevModeRequestDenied, FileAccountTypeRequest, DeveloperRelatedLinksForNode, DeveloperRelatedLinks, FileCanExport } from "../figma_app/43951";
 import { U as _$$U } from "../figma_app/65327";
 import { I as _$$I } from "../3674/466343";
@@ -47,7 +47,7 @@ import { J as _$$J3 } from "../figma_app/261874";
 import { BC, w_, Gu } from "../3674/61752";
 import { FProductAccessType, FOrganizationLevelType, FBuildStatusType, FFileType } from "../figma_app/191312";
 import { isTeamLocked } from "../figma_app/345997";
-import { H7 } from "../figma_app/598018";
+import { getTeamById } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
 import { J as _$$J4 } from "../905/202542";
 import { qm } from "../figma_app/431689";
@@ -217,7 +217,7 @@ import { hasSingleSceneGraphSelection, INSPECT_PANEL } from "../figma_app/80938"
 import { o as _$$o } from "../9410/925362";
 import { i as _$$i2, s as _$$s4 } from "../figma_app/553327";
 import { isNotNullish } from "../figma_app/95419";
-import { b as _$$b4, bL as _$$bL2, mc, q7, wv, ME, N_, hE as _$$hE2 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuSubText, MenuLinkComp, MenuTitleComp } from "../figma_app/860955";
 import { d as _$$d3 } from "../905/976845";
 import { r as _$$r3 } from "../905/571562";
 import { J as _$$J5 } from "../905/125993";
@@ -331,7 +331,7 @@ import { A as _$$A17 } from "../6828/85206";
 import { t as _$$t5 } from "../905/150656";
 import { y$ } from "../figma_app/835219";
 import { aq as _$$aq } from "../figma_app/399472";
-import { h as _$$h2, AF as _$$AF } from "../figma_app/212807";
+import { selectIsExportRestricted, selectIsCopyExportAllowed } from "../figma_app/212807";
 import { d4 as _$$d8, be, vT, GR } from "../figma_app/474636";
 import { jv, Wh } from "../figma_app/985200";
 import { PluginUIManager } from "../905/261467";
@@ -363,12 +363,12 @@ import { F_ as _$$F_ } from "../905/858282";
 import { WZ } from "../905/893645";
 import { Y6 } from "../figma_app/91703";
 import { wg } from "../figma_app/101956";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { exitVersionHistoryMode, CURRENT_VERSION_ID, setActiveVersion } from "../figma_app/841351";
 import { lF as _$$lF } from "../figma_app/915202";
 import { jP, YL, s3 as _$$s8, yU } from "../figma_app/221114";
-import { S as _$$S3 } from "../905/262176";
-import { S as _$$S4, y as _$$y5 } from "../figma_app/504415";
+import { handleCopyViewUrl } from "../905/262176";
+import { DevModeSavepointModalContainer, SavepointModalContainer } from "../figma_app/504415";
 import { g as _$$g2 } from "../905/125190";
 import { pc as _$$pc } from "../figma_app/715641";
 import { Fe, r_ as _$$r_ } from "../469e6e40/936617";
@@ -423,7 +423,7 @@ import { mO } from "../figma_app/410317";
 import { G as _$$G3 } from "../figma_app/953068";
 import { e as _$$e7 } from "../905/194891";
 import { f$ } from "../figma_app/836943";
-import { p as _$$p5 } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { LinkPrimitive } from "../figma_app/496441";
 import { H_ } from "../905/963340";
 import { G as _$$G4 } from "../905/800369";
@@ -558,7 +558,7 @@ function Q() {
     primaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: r,
-      trackingDescriptor: _$$c2.BACK_TO_DESIGN,
+      trackingDescriptor: UpgradeAction.BACK_TO_DESIGN,
       type: "back to design"
     }
   });
@@ -584,7 +584,7 @@ function Y() {
     primaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: t,
-      trackingDescriptor: _$$c2.BACK_TO_DESIGN,
+      trackingDescriptor: UpgradeAction.BACK_TO_DESIGN,
       type: "back to design"
     }
   });
@@ -632,13 +632,13 @@ function eu({
           s();
         });
       },
-      trackingDescriptor: _$$c2.SEND_REMINDER,
+      trackingDescriptor: UpgradeAction.SEND_REMINDER,
       type: "send reminder"
     },
     secondaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: r,
-      trackingDescriptor: _$$c2.BACK_TO_DESIGN,
+      trackingDescriptor: UpgradeAction.BACK_TO_DESIGN,
       type: "back to design"
     }
   });
@@ -665,7 +665,7 @@ function eh() {
     primaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: n,
-      trackingDescriptor: _$$c2.BACK_TO_DESIGN,
+      trackingDescriptor: UpgradeAction.BACK_TO_DESIGN,
       type: "back to design"
     }
   });
@@ -729,7 +729,7 @@ function e_() {
   let e = useAtomWithSubscription(_$$t);
   let t = useCurrentFileKey() ?? "";
   let n = _$$J3();
-  let l = useSelector(e => isTeamLocked(H7(e)?.id ?? "", e));
+  let l = useSelector(e => isTeamLocked(getTeamById(e)?.id ?? "", e));
   let s = useSubscription(FileAccountTypeRequest, {
     key: t
   });
@@ -769,7 +769,7 @@ function e_() {
 function ev() {
   let e = getSingletonSceneGraph().getCurrentPage();
   let t = isColorDark(e?.backgroundColor ?? "");
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: t ? "dark" : "light",
     children: jsx("div", {
       "data-testid": "loading-spinner",
@@ -5416,7 +5416,7 @@ let lD = memo(({
                 height: thumbnailData.height,
                 alt: getI18nString("design_systems.playground.thumbnail_alt"),
                 "data-testid": "playground-thumbnail"
-              }), jsx(_$$J, {
+              }), jsx(setupThemeContext, {
                 mode: theme,
                 children: jsx("div", {
                   className: "playground_modal--themeButton---BLzd",
@@ -6814,11 +6814,11 @@ function s3() {
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
+  } = setupMenu();
   let h = useCallback(() => c(showModalHandler({
     type: sU
   })), [c]);
-  return jsxs(_$$bL2, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d3, {
       "aria-label": getI18nString("dev_handoff.layer_options"),
@@ -6829,24 +6829,24 @@ function s3() {
       recordingKey: "headerDropdownTrigger",
       ...getTriggerProps(),
       children: jsx(_$$J5, {})
-    }), jsxs(mc, {
-      children: [jsx(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsx(MenuItemComp, {
         onClick: function () {
           e && t && (window.location.href = `vscode://figma.figma-vscode-extension/open/${e.key}/${e.name}/${t}`);
         },
         disabled: r,
         children: renderI18nText("dev_handoff.inspect_panel.open_in_vs_code.link")
-      }), jsx(wv, {}), jsx(q7, {
+      }), jsx(MenuSeparator, {}), jsx(MenuItemComp, {
         onClick: s,
         recordingKey: "addDevRelatedLink",
         children: n ? jsxs("div", {
           className: "header--relatedLinkComponentMenuHint--Baq-o",
-          children: [renderI18nText("dev_handoff.developer_related_links.add_link_button"), jsx(ME, {
+          children: [renderI18nText("dev_handoff.developer_related_links.add_link_button"), jsx(MenuSubText, {
             children: renderI18nText("dev_handoff.developer_related_links.component_inherited_links_desc")
           })]
         }) : renderI18nText("dev_handoff.developer_related_links.add_link_button")
       }), l && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsx(q7, {
+        children: [jsx(MenuSeparator, {}), jsx(MenuItemComp, {
           onClick: h,
           disabled: d,
           children: renderI18nText("dev_handoff.detached_component.unlink_from_main_component")
@@ -8103,7 +8103,7 @@ function rX() {
 }
 function rJ() {
   let e = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
-  let t = _$$h2();
+  let t = selectIsExportRestricted();
   let n = UX();
   let s = useAtomWithSubscription(_$$d8);
   let d = "LOADING" === s;
@@ -8505,7 +8505,7 @@ function dw({
   padded: u,
   dataTestId: p
 }) {
-  let h = _$$AF();
+  let h = selectIsCopyExportAllowed();
   let f = v4();
   let g = e ?? f;
   let x = useMemo(() => g.id === _$$uz && "first-party" === g.type ? {
@@ -8756,7 +8756,7 @@ function dD() {
       label: renderI18nText("general.got_it"),
       type: "button",
       onClick: d,
-      ctaTrackingDescriptor: _$$c2.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     }
   });
 }
@@ -8786,13 +8786,13 @@ function dH() {
     label: renderI18nText("dev_handoff.workflows.focus_view.onboarding.secondary_cta_label"),
     type: "button",
     onClick: s,
-    ctaTrackingDescriptor: _$$c2.CANCEL
+    ctaTrackingDescriptor: UpgradeAction.CANCEL
   }), [s]);
   let d = useMemo(() => ({
     label: renderI18nText("dev_handoff.workflows.focus_view.onboarding.last_primary_cta_label"),
     type: "button",
     onClick: l,
-    ctaTrackingDescriptor: _$$c2.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   }), [l]);
   let c = [{
     title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.viewing.title"),
@@ -9065,7 +9065,7 @@ function ca({
   focusNodeId: c
 }) {
   let u = useDispatch();
-  let p = _6();
+  let p = getSelectedView();
   let h = useSelector(e => e.versionHistory);
   let f = e.version?.id ?? void 0;
   let g = d7();
@@ -9075,7 +9075,7 @@ function ca({
   let v = function (e, t, n) {
     let a = _$$hA();
     let s = useDispatch();
-    let r = _6();
+    let r = getSelectedView();
     let d = d4();
     let c = trackFileEventWithStore();
     return useCallback((i, o) => {
@@ -9119,35 +9119,35 @@ function ca({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
-  let A = f ? jsxs(_$$bL2, {
+  } = setupMenu();
+  let A = f ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("collaboration.feedback.more_options"),
       children: jsx(_$$J5, {})
-    }), jsxs(mc, {
-      children: [!s && (_ ? jsx(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [!s && (_ ? jsx(MenuItemComp, {
         onClick: b,
         children: renderI18nText("dev_handoff.workflows.focus_view.back_to_current")
-      }) : jsx(q7, {
+      }) : jsx(MenuItemComp, {
         onClick: () => v(_, "dropdown_option"),
         children: renderI18nText("dev_handoff.workflows.focus_view.inspect_version")
-      })), (!s || j) && jsx(q7, {
+      })), (!s || j) && jsx(MenuItemComp, {
         onClick: y,
         children: s ? renderI18nText("dev_handoff.workflows.focus_view.compare_previous_menu_item") : renderI18nText("dev_handoff.workflows.focus_view.compare_latest")
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: () => {
           m("Dev Mode Activity Copy Link To Version");
-          _$$S3(u, p, f);
+          handleCopyViewUrl(u, p, f);
         },
         children: renderI18nText("dev_handoff.workflows.focus_view.copy_link_to_version")
-      }), x && jsx(q7, {
+      }), x && jsx(MenuItemComp, {
         onClick: () => {
           if (!x) return;
           let t = e.version;
           t && u(showModalHandler({
-            type: _$$S4,
+            type: DevModeSavepointModalContainer,
             data: {
               label: d5(e),
               description: t.description,
@@ -9409,11 +9409,11 @@ let c9 = memo(({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
+  } = setupMenu();
   let {
     getTriggerProps: _getTriggerProps,
     manager: _manager
-  } = _$$b4();
+  } = setupMenu();
   let M = useCallback(async e => {
     f || (e.stopPropagation(), trackEventAnalytics("Asset Panel Export Clicked"), p(!0), await Dc(_$$hV.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
       guids: [w],
@@ -9519,7 +9519,7 @@ let c9 = memo(({
             })]
           }), (!getFeatureFlags().dt_insp_impr_assets || !n) && jsx("div", {
             className: "asset_panel--exportIcon--aQQXS",
-            children: $ ? jsxs(_$$bL2, {
+            children: $ ? jsxs(MenuRootComp, {
               manager,
               children: [jsxs(ButtonPrimitive, {
                 "aria-label": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
@@ -9532,15 +9532,15 @@ let c9 = memo(({
                 recordingKey: `export-${assetId}`,
                 ...getTriggerProps(),
                 children: [jsx(_$$b7, {}), jsx(_$$r3, {})]
-              }), jsxs(mc, {
+              }), jsxs(MenuContainerComp, {
                 children: [t.map(e => jsx(ue, {
                   asset: e,
                   onClose: () => manager.setOpen(!1)
-                }, e.hash)), jsx(q7, {
+                }, e.hash)), jsx(MenuItemComp, {
                   onClick: M,
                   recordingKey: "asset-export-layer",
                   children: jsxs("div", {
-                    children: [getI18nString("fullscreen.export.layer_export"), jsx(ME, {
+                    children: [getI18nString("fullscreen.export.layer_export"), jsx(MenuSubText, {
                       children: jsxs("div", {
                         className: c0,
                         children: [jsx($R, {
@@ -9594,7 +9594,7 @@ let c9 = memo(({
               "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$b7, {})
-          }) : t.length > 1 ? jsxs(_$$bL2, {
+          }) : t.length > 1 ? jsxs(MenuRootComp, {
             manager: _manager,
             children: [jsxs(ButtonPrimitive, {
               "aria-label": getI18nString("fullscreen.export.export"),
@@ -9606,7 +9606,7 @@ let c9 = memo(({
               recordingKey: `export-${assetId}`,
               ..._getTriggerProps(),
               children: [jsx(_$$b7, {}), jsx(_$$r3, {})]
-            }), jsx(mc, {
+            }), jsx(MenuContainerComp, {
               children: t.map(e => jsx(ue, {
                 asset: e,
                 onClose: () => _manager.setOpen(!1)
@@ -9664,14 +9664,14 @@ function ue({
     t();
     l(_$$aK());
   }, [l, t]);
-  return jsx(N_, {
+  return jsx(MenuLinkComp, {
     href: Me(n, e.hash),
     download: e.name,
     onClick: p,
     htmlAttributes: d,
     recordingKey: "asset-export-source",
     children: jsxs("div", {
-      children: [getI18nString("fullscreen.export.source"), jsx(ME, {
+      children: [getI18nString("fullscreen.export.source"), jsx(MenuSubText, {
         children: jsxs("div", {
           className: c0,
           children: [jsx(yP, {
@@ -10077,7 +10077,7 @@ function up({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
+  } = setupMenu();
   let d = useAtomWithSubscription(g6);
   let [c, u] = useState(!1);
   let {
@@ -10108,7 +10108,7 @@ function up({
   let _ = ud(e);
   let v = ul(e);
   return jsxs(Fragment, {
-    children: [jsxs(_$$bL2, {
+    children: [jsxs(MenuRootComp, {
       manager,
       children: [jsx(IconButton, {
         "aria-label": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
@@ -10119,19 +10119,19 @@ function up({
         disabled: x,
         ...getTriggerProps(),
         children: jsx(_$$J5, {})
-      }), jsxs(mc, {
-        children: [jsx(q7, {
+      }), jsxs(MenuContainerComp, {
+        children: [jsx(MenuItemComp, {
           onClick: onExportAll,
           disabled: tooManyMediaToExport || nothingToExport,
           children: jsxs("div", {
             className: "asset_panel--downloadAllMenuItem--8NlXq",
-            children: [v, tooManyMediaToExport ? jsx(ME, {
+            children: [v, tooManyMediaToExport ? jsx(MenuSubText, {
               children: renderI18nText("dev_handoff.assets.too_many_image_sources_disabled")
-            }) : nothingToExport ? jsx(ME, {
+            }) : nothingToExport ? jsx(MenuSubText, {
               children: renderI18nText("dev_handoff.assets.nothing_to_export")
             }) : null]
           })
-        }), e !== assetTypeEnum.ASSET_GIF && jsx(q7, {
+        }), e !== assetTypeEnum.ASSET_GIF && jsx(MenuItemComp, {
           onClick: () => u(!0),
           children: _
         })]
@@ -10916,7 +10916,7 @@ function u6() {
     primaryCta: {
       label: renderI18nText("dev_handoff.mcp.upsell_confirmation"),
       type: "button",
-      ctaTrackingDescriptor: _$$c2.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       onClick: complete
     },
     shouldDisableAnimation: !0,
@@ -11064,7 +11064,7 @@ function pd() {
       className: pn,
       htmlFor: e,
       children: renderI18nText("dev_handoff.mcp.image_source.write_to_disk_path")
-    }), jsx(_$$p5, {
+    }), jsx(InputComponent, {
       id: e,
       value: t,
       onChange: n
@@ -11188,7 +11188,7 @@ function pf() {
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
+  } = setupMenu();
   let [n, o] = useAtomValueAndSetter(_$$tz);
   let [l, d] = useAtomValueAndSetter(SV);
   let [c, u] = useAtomValueAndSetter(_$$lk2);
@@ -11200,7 +11200,7 @@ function pf() {
   let y = getObservableOrFallback(UK().enableCodegenMcpServer);
   let b = [{
     visible: !0,
-    element: jsx(_$$hE2, {
+    element: jsx(MenuTitleComp, {
       children: renderI18nText("dev_handoff.mcp.settings")
     })
   }, {
@@ -11248,23 +11248,23 @@ function pf() {
     })
   }, {
     visible: !0,
-    element: jsx(wv, {})
+    element: jsx(MenuSeparator, {})
   }, {
     visible: y,
-    element: jsx(q7, {
+    element: jsx(MenuItemComp, {
       onClick: () => {
         fullscreenValue.triggerAction("toggle-enable-codegen-mcp-server");
       },
       children: y ? getI18nString("dev_handoff.mcp.disable_option") : getI18nString("dev_handoff.mcp.enable_button")
     })
   }].filter(e => e.visible);
-  return 0 === b.length ? null : jsxs(_$$bL2, {
+  return 0 === b.length ? null : jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("dev_handoff.mcp.configure"),
       children: jsx(_$$J5, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: b.map((e, t) => jsx(_$$Fragment, {
         children: e.element
       }, t))
@@ -11310,7 +11310,7 @@ function pv({
 }
 function py() {
   let e = useDispatch();
-  let t = _$$AF();
+  let t = selectIsCopyExportAllowed();
   return getFeatureFlags().dt_multi_node && t ? jsx(ButtonWide, {
     onClick: () => e(showModalHandler({
       type: cc,
@@ -11486,7 +11486,7 @@ function pA({
       onClose: u,
       addSavepoint: () => {
         r(showModalHandler({
-          type: _$$y5,
+          type: SavepointModalContainer,
           data: {}
         }));
         pN();
@@ -12166,7 +12166,7 @@ function hf({
   let {
     codeLanguageApi
   } = _$$Q4();
-  let i = _$$AF();
+  let i = selectIsCopyExportAllowed();
   let o = AC(codeLanguageApi?.codeLanguage);
   let l = Pt(o);
   let s = !!hg(e)?.length;
@@ -12311,7 +12311,7 @@ function hT(e) {
   });
 }
 function hS() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useDispatch();
   return useCallback(() => {
     "fullscreen" === e.view && t(selectViewAction({
@@ -12420,7 +12420,7 @@ function hD({
 }
 function hO() {
   let e = _$$uQ();
-  return _$$h2() ? jsx(rO, {}) : e ? jsxs("div", {
+  return selectIsExportRestricted() ? jsx(rO, {}) : e ? jsxs("div", {
     className: hN,
     children: [jsxs(hD, {
       forSmallScreen: !0,
@@ -13006,7 +13006,7 @@ function fh() {
   let r = selectCurrentFile();
   let d = _$$uQ();
   let c = _$$hA();
-  let u = _6();
+  let u = getSelectedView();
   let p = isFullscreenDevHandoffView(u) ? u.focusViewBackNavigation : void 0;
   let h = TP(p?.toEditorType);
   let f = _$$U("focus_view_show_on_page");

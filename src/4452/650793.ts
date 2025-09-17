@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { b, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { J } from "../905/125993";
 import i, { a } from "../905/964520";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Hv, Ib, oi } from "../figma_app/527041";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -23,11 +23,11 @@ export function $$m3({
   let {
     getTriggerProps,
     manager
-  } = b();
+  } = setupMenu();
   let {
     isOpen
   } = i;
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     "data-testid": "multi-select-list-menu",
     children: [jsx("div", {
@@ -38,11 +38,11 @@ export function $$m3({
         "data-testid": "multi-select-list-menu-cell-icon",
         "data-onboarding-key": e,
         trackingProperties: {
-          trackingDescriptor: _$$c.MORE
+          trackingDescriptor: UpgradeAction.MORE
         },
         children: jsx(J, {})
       })
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: t
     })]
   });
@@ -60,7 +60,7 @@ export function $$p2() {
   return jsx(Me, {
     "aria-label": getI18nString("multi_select_list.manage"),
     trackingProperties: {
-      trackingDescriptor: _$$c.MANAGE
+      trackingDescriptor: UpgradeAction.MANAGE
     },
     children: jsx(a, {})
   });

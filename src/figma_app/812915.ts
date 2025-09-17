@@ -14,7 +14,7 @@ import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
 import { eY } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
 import { AppView } from "../figma_app/707808";
 import { B } from "../figma_app/398600";
@@ -47,7 +47,7 @@ export function $$N6() {
   };
 }
 export function $$C2() {
-  let e = _6();
+  let e = getSelectedView();
   return {
     figmakeInFullscreen: useIsFigmakeFullscreenPreview(e),
     openFigmakeFullscreenInNewTab: function () {
@@ -65,7 +65,7 @@ export function $$C2() {
     }(),
     exitFigmakeFullscreenView: function () {
       let e = useDispatch();
-      let t = _6();
+      let t = getSelectedView();
       let r = useIsSelectedFigmakeFullscreen();
       return useCallback(() => {
         r && "fullscreen" === t.view && e(selectViewAction({
@@ -77,17 +77,17 @@ export function $$C2() {
   };
 }
 export function $$w4() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useIsSelectedFigmakeFullscreen();
   return useMemo(() => t && "fullscreen" === e.view && e.figmakeView === AppView.SETTINGS, [t, e]);
 }
 export function $$O5() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useIsSelectedFigmakeFullscreen();
   return useMemo(() => t && "fullscreen" === e.view && (!e.figmakeView || e.figmakeView === AppView.FILE), [t, e]);
 }
 export function $$R0() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useDispatch();
   let r = useIsSelectedFigmakeFullscreen();
   return n => {

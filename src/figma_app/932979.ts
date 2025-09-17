@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
 import { Z } from "../905/279476";
@@ -55,12 +55,12 @@ function C() {
       width: "sm",
       onClose: () => t(!1),
       defaultPosition: r.current,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("dev_handoff.mcp.sse_deprecation_modal.title")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           children: [jsx("div", {
             className: "mcp_sse_deprecation_banner--deprecationModalDescription--tIgfy",
             children: getI18nString("dev_handoff.mcp.sse_deprecation_modal.body.text")

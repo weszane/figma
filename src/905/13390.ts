@@ -46,7 +46,7 @@ import { copyShareLinkOptimistic } from '../figma_app/78808';
 import { yN } from '../figma_app/88484';
 import { GI } from '../figma_app/147337';
 import { FFileType } from '../figma_app/191312';
-import { FC } from '../figma_app/212807';
+import { selectPermissionsState } from '../figma_app/212807';
 import { vt } from '../figma_app/231614';
 import { MG } from '../figma_app/277330';
 import { ce } from '../figma_app/347146';
@@ -121,7 +121,7 @@ export function $$eT1() {
   return BK(e);
 }
 export function $$ek0(e) {
-  let t = FC();
+  let t = selectPermissionsState();
   let i = useDispatch();
   let {
     user,

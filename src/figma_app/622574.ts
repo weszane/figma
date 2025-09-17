@@ -17,7 +17,7 @@ import { liveStoreInstance } from "../905/713695";
 import { G7 } from "../figma_app/336853";
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
 import { AC, tz } from "../figma_app/803787";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { checkForVisibleChanges } from "../figma_app/841351";
 import { n as _$$n } from "../905/79930";
 import { s as _$$s } from "../905/82276";
@@ -35,7 +35,7 @@ function L() {
 }
 export function $$P2() {
   let e = useCurrentUserOrg();
-  let t = ol();
+  let t = getCurrentTeam();
   if (L()) {
     if (e) return {
       type: "org",

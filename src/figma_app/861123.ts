@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useMemo, forwardRef } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { A } from "../vendor/723372";
 import { DialogContext } from "../905/749786";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
@@ -42,7 +42,7 @@ export function $$p0({
     value: r,
     children: jsx(PopoverPrimitiveContainer, {
       ...getContainerProps(),
-      children: jsx(J, {
+      children: jsx(setupThemeContext, {
         mode: void 0,
         children: jsxs("div", {
           className: A({

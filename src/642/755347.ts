@@ -40,7 +40,7 @@ import { m as _$$m } from "../642/871982";
 import { b as _$$b } from "../642/94505";
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
-import { bL, mc } from "../figma_app/860955";
+import { MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { SU } from "../figma_app/451499";
@@ -200,7 +200,7 @@ function eh({
   } = getTriggerProps();
   return qg(s, ep) || manager.isOpen ? jsx(EventShield, {
     eventListeners: ["onWheel"],
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$d, {
         recordingKey: e,
@@ -218,7 +218,7 @@ function eh({
           value: s,
           defaultBlendMode: ep
         })
-      }), jsx(mc, {
+      }), jsx(MenuContainerComp, {
         children: jsx(_$$m2, {
           selectedItem: valueBeforePreview ?? s,
           options: eu,

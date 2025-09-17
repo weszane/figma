@@ -32,7 +32,7 @@ import { z as _$$z } from '../905/316889';
 import { g as _$$g } from '../905/317997';
 import { P as _$$P } from '../905/347284';
 import { H as _$$H, S as _$$S2 } from '../905/348433';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { _ as _$$_ } from '../905/381235';
 import { f as _$$f } from '../905/405189';
 import { bj as _$$bj } from '../905/420347';
@@ -122,7 +122,7 @@ import { useSubscription } from '../figma_app/288654';
 import { lo } from '../figma_app/297733';
 import { f9 } from '../figma_app/328188';
 import { Oe } from '../figma_app/336853';
-import { _6 } from '../figma_app/386952';
+import { getSelectedView } from '../figma_app/386952';
 import { se } from '../figma_app/435826';
 import { assert, throwError, throwTypeError } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
@@ -134,7 +134,7 @@ import { MB } from '../figma_app/525558';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { P as _$$P3 } from '../figma_app/582341';
 import { lX } from '../figma_app/588397';
-import { ol } from '../figma_app/598018';
+import { getCurrentTeam } from '../figma_app/598018';
 import { createTrackedAtom } from '../figma_app/615482';
 import { $z as _$$$z } from '../figma_app/617427';
 import { PublishStatusEnum, isTeamLibrary, isPublishedTeamLibrary, PrimaryWorkflowEnum, LibraryPublishStatusEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
@@ -319,7 +319,7 @@ function eo({
   }, [e.library_key, a.data]);
   let [l, d] = _$$e(!1);
   let c = function (e, t) {
-    let i = ol();
+    let i = getCurrentTeam();
     let n = sv();
     let {
       workspaces
@@ -1643,7 +1643,7 @@ function td({
 }
 function tc() {
   let e = useDispatch();
-  let t = ol();
+  let t = getCurrentTeam();
   let i = selectCurrentFile();
   let {
     sessionId
@@ -1731,7 +1731,7 @@ function tE({
   recommendedLibraries: e
 }) {
   let t = sv();
-  let i = ol();
+  let i = getCurrentTeam();
   let a = i?.workspace_id;
   let o = _$$P2(t?.id ?? null, a);
   let l = o.data && o.data !== 'Unassigned' ? o.data : null;
@@ -1985,7 +1985,7 @@ let tH = () => {
   let {
     sessionId
   } = sz() ?? {};
-  let n = ol();
+  let n = getCurrentTeam();
   let a = useCallback(() => {
     e(showModalHandler({
       type: dD,
@@ -2340,7 +2340,7 @@ function il({
 }
 function id() {
   let e = function () {
-    let e = ol();
+    let e = getCurrentTeam();
     let t = useDispatch();
     let {
       sessionId
@@ -2372,7 +2372,7 @@ function id() {
     }, [t, a, e, n, sessionId]);
   }();
   let t = function () {
-    let e = ol();
+    let e = getCurrentTeam();
     let t = _$$x();
     return useMemo(() => e && Object.values(t).some(t => t.id === e.id), [e, t]);
   }();
@@ -2435,7 +2435,7 @@ function ic() {
       variant: 'link',
       onClick: e,
       trackingProperties: {
-        trackingDescriptor: _$$c.UPGRADE,
+        trackingDescriptor: UpgradeAction.UPGRADE,
         upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
@@ -2450,7 +2450,7 @@ function iu() {
       newTab: !0,
       trusted: !0,
       trackingProperties: {
-        trackingDescriptor: _$$c.LEARN_MORE,
+        trackingDescriptor: UpgradeAction.LEARN_MORE,
         upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
@@ -2464,7 +2464,7 @@ function ip() {
     hasProAccess
   } = mG();
   let i = t$();
-  let r = _6();
+  let r = getSelectedView();
   let a = r.view === 'fullscreen' && r.editorType !== FEditorType.Slides && r.editorType !== FEditorType.Cooper;
   return e && a ? hasProAccess ? jsxs(Fragment, {
     children: [jsx('h3', {

@@ -19,7 +19,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { K } from "../905/3140";
 import { vp } from "../905/967587";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { getUserCurrency } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
@@ -34,7 +34,7 @@ function O(e) {
   let [n, h] = useState(getUserCurrency());
   let g = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
-  let D = getEditableTeamsWithoutPaidAccess(FC());
+  let D = getEditableTeamsWithoutPaidAccess(selectPermissionsState());
   let L = _$$h.useTrackingContext({
     trigger: e.upsellSource,
     upgradePoint: _$$h.MonetizationUpgradePoint.PLAN_COMPARISON_MODAL

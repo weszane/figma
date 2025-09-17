@@ -9,7 +9,7 @@ import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { useLocalStorageSync } from "../905/657224";
 import E from "../vendor/116389";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { Wn, ql } from "../figma_app/88484";
 import { isLocalCluster, getSlidesDefaultBlankTemplate } from "../figma_app/169182";
 import { Point } from "../905/736624";
@@ -230,7 +230,7 @@ let er = new CN({
 export function $$e_0() {
   let [e, t] = useAtomValueAndSetter(OR);
   let r = e.trim();
-  let [u] = _$$A(r, 200);
+  let [u] = useDebounce(r, 200);
   let l = $$ei14();
   let {
     teamTemplates,
@@ -295,7 +295,7 @@ export var $$eu3 = (e => (e[e.LOADING = 0] = "LOADING", e[e.NO_RECENT_FILES = 1]
 export function $$el8(e) {
   let [t, r] = useAtomValueAndSetter(M0);
   let u = t.trim();
-  let [l] = _$$A(u, 200);
+  let [l] = useDebounce(u, 200);
   let n = en(e);
   let c = useMemo(() => n.unwrapOr([]), [n]);
   let [i, a] = useState([]);

@@ -9,7 +9,7 @@ import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanFeatures, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
@@ -25,7 +25,7 @@ export function $$T0() {
   let t = useTeamPlanFeatures();
   let r = useTeamPlanUser();
   let T = RR();
-  let E = _6();
+  let E = getSelectedView();
   let I = useSelector(e => getPermissionsStateMemoized(e));
   let N = useSelector(e => e.teams);
   let C = useIsOrgAdminUser(r);

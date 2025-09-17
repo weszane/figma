@@ -11,7 +11,7 @@ import { Dw } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { FStudentTeamStatusType } from "../figma_app/191312";
@@ -23,7 +23,7 @@ var o = i;
 export let $$k0 = registerModal(function (e) {
   let t = selectCurrentUser();
   let n = useDispatch();
-  let i = _6();
+  let i = getSelectedView();
   let w = useSubscription(EduOffboardingData, {});
   let k = useSubscription(EduOffboardingTeam, {
     teamId: e.teamId || ""

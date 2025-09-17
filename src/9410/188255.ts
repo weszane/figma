@@ -44,7 +44,7 @@ import { Bl } from "../figma_app/967857";
 import { IntegrationUtils } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { openFileAtom, selectCurrentFile, useCurrentFileKey, useFullscreenViewFile, openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
-import { yF } from "../figma_app/386952";
+import { modalTypeAtom } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A3 } from "../905/920142";
@@ -60,7 +60,7 @@ import { buildUploadUrl, isDevEnvironment, buildStaticUrl, getInitialOptions } f
 import { V as _$$V } from "../905/223767";
 import { showModalHandler, hideModal, showModal } from "../905/156213";
 import { hn } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { mp as _$$mp, t as _$$t2, tH as _$$tH, Ot, M$, Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
@@ -118,7 +118,7 @@ import { Q as _$$Q2 } from "../5132/668270";
 import { D as _$$D2 } from "../figma_app/908415";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB as _$$nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { N as _$$N4 } from "../905/482239";
 import { USER_FLAG_V2 } from "../1250/200830";
 import { jO, Ai } from "../figma_app/242339";
@@ -196,14 +196,14 @@ import { A as _$$A0 } from "../svg/430011";
 import { A as _$$A1 } from "../svg/519128";
 import { A as _$$A10 } from "../svg/221042";
 import { getStorage } from "../905/657224";
-import { Xk } from "../figma_app/107215";
+import { SEEN_TRY_ONBOARDING_KEY } from "../figma_app/107215";
 import { setTagGlobal, captureMessage } from "../905/11";
 import { XZ } from "../figma_app/176973";
 import { WB } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { IT } from "../905/713695";
-import { ol as _$$ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { k as _$$k3 } from "../905/443820";
 import { V3 } from "../figma_app/976345";
@@ -739,13 +739,13 @@ function eD() {
         }));
         complete();
       },
-      ctaTrackingDescriptor: _$$c.SEE_PLANS
+      ctaTrackingDescriptor: UpgradeAction.SEE_PLANS
     },
     secondaryCta: {
       label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/14506587589399-Use-variables-in-prototypes",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     title: renderI18nText("upsell.advanced_prototyping.title"),
     trackingContextName: "Advanced Prototype Upsell Popup",
@@ -1080,13 +1080,13 @@ function tC() {
         p();
         customHistory.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
       },
-      ctaTrackingDescriptor: _$$c.DESKTOP_APP_DOWNLOAD
+      ctaTrackingDescriptor: UpgradeAction.DESKTOP_APP_DOWNLOAD
     },
     secondaryCta: {
       label: renderI18nText("desktop_download_modal_prompt.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5601429983767-Guide-to-the-Figma-desktop-app",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     title: renderI18nText("desktop_download_modal_prompt.download_the_figma_desktop_app"),
     trackingContextName: "Desktop Download Modal Prompt",
@@ -1287,8 +1287,8 @@ function t$(e) {
       manager: t,
       width: 420,
       height: "fixed",
-      children: jsx(vo, {
-        children: jsxs(_$$nB, {
+      children: jsx(DialogContents, {
+        children: jsxs(DialogBody, {
           padding: 32,
           children: [jsx("div", {
             className: tZ,
@@ -1404,14 +1404,14 @@ function ir() {
       label: jsx(Fragment, {
         children: renderI18nText("fullscreen.glass_onboarding.cta_playground")
       }),
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
       href: "https://www.figma.com/community/file/1522715486231239473"
     } : {
       type: "button",
       label: jsx(Fragment, {
         children: renderI18nText("fullscreen.glass_onboarding.cta_playground")
       }),
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
       onClick: () => {
         a(void 0, t => {
           null != t && (e(renameFileOptimistic({
@@ -1428,7 +1428,7 @@ function ir() {
       label: jsx(Fragment, {
         children: renderI18nText("fullscreen.glass_onboarding.cta_ui_kit")
       }),
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
       href: "https://www.figma.com/community/file/1527721578857867021"
     },
     onClose: complete,
@@ -1503,13 +1503,13 @@ function ic() {
         }));
         b();
       },
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("rcs.upsell_libraries.not_now"),
       type: "button",
       onClick: b,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: _$$D,
     title: renderI18nText("rcs.upsell_libraries.reuse_components_across_all_files"),
@@ -1574,7 +1574,7 @@ function i_() {
       label: renderI18nText("fullscreen.link_shortcuts_onboarding.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     testId: "linkShortcutOverlay",
     title: renderI18nText("fullscreen.link_shortcuts_onboarding.title"),
@@ -1640,7 +1640,7 @@ function iw() {
       label: renderI18nText("design_systems.assets_panel.got_it"),
       type: "button",
       onClick: v,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     onClose: v,
     trackingContextName: "Local Component Asset Panel Pointer",
@@ -1696,13 +1696,13 @@ function ik() {
       label: renderI18nText("mobile_download_prompts.email_me"),
       type: "button",
       onClick: () => m(),
-      ctaTrackingDescriptor: _$$c.MOBILE_APP_DOWNLOAD_COMMENT_PROMPT_CLICKED
+      ctaTrackingDescriptor: UpgradeAction.MOBILE_APP_DOWNLOAD_COMMENT_PROMPT_CLICKED
     },
     secondaryCta: {
       label: renderI18nText("mobile_download_prompts.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/1500007537281-Guide-to-the-Figma-mobile-app",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     title: renderI18nText("mobile_download_prompts.never_miss_a_comment"),
     trackingContextName: "Mobile Comment Download Modal Prompt",
@@ -4938,7 +4938,7 @@ async function nD(e) {
   return !r && !r && !(() => {
     let e = getStorage();
     try {
-      return !!e.get(Xk);
+      return !!e.get(SEEN_TRY_ONBOARDING_KEY);
     } catch (e) {}
     return !1;
   })();
@@ -4955,7 +4955,7 @@ function nP(e, t) {
 }
 function nF(e) {
   let t = useCurrentUserOrgId();
-  let i = _$$ol()?.id;
+  let i = getCurrentTeam()?.id;
   let [a] = IT(XZ({
     currentOrgId: t || void 0,
     currentTeamId: i,
@@ -5070,7 +5070,7 @@ function nB() {
 let nK = _$$D3(() => {
   let e = getStorage();
   try {
-    return !!e.get(Xk);
+    return !!e.get(SEEN_TRY_ONBOARDING_KEY);
   } catch (e) {}
   return !1;
 });
@@ -7199,7 +7199,7 @@ function s_({
       label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: i,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     title: renderI18nText("whiteboard.section_presets_onboarding.picker_callout.title"),
     trackingContextName: "section_preset_picker_callout",
@@ -7267,7 +7267,7 @@ function sb({
       label: renderI18nText("whiteboard.google_classroom.onboarding.show_me"),
       type: "button",
       onClick: t,
-      ctaTrackingDescriptor: _$$c.SHOW_ME
+      ctaTrackingDescriptor: UpgradeAction.SHOW_ME
     },
     onClose: i
   });
@@ -7392,13 +7392,13 @@ function sM({
         });
         e();
       },
-      ctaTrackingDescriptor: _$$c.SHOW_ME
+      ctaTrackingDescriptor: UpgradeAction.SHOW_ME
     },
     secondaryCta: {
       type: "link",
       label: renderI18nText("ui3_and_ai_tour.ai_callout.playground_link"),
       href: "https://www.figma.com/community/file/1375505114072192161",
-      ctaTrackingDescriptor: _$$c.AI_PLAYGROUND
+      ctaTrackingDescriptor: UpgradeAction.AI_PLAYGROUND
     },
     targetKey: _$$Ij,
     testId: T4,
@@ -7426,7 +7426,7 @@ function sF({
         Bd();
         e();
       },
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT
     },
     targetKey: _$$Ij,
     testId: "fragmentSearchCallout",
@@ -7511,13 +7511,13 @@ function sB() {
       type: "button",
       label: renderI18nText("general.next"),
       onClick: next,
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     };
     let i = {
       type: "button",
       label: renderI18nText("general.done"),
       onClick: A,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     };
     return e.map((r, a) => createElement(r, {
       primaryCta: a === e.length - 1 ? i : t,
@@ -7585,13 +7585,13 @@ function sK() {
         type: "button",
         label: renderI18nText("ui3_reactivation_overlay.ui2_primary_cta"),
         onClick: next,
-        ctaTrackingDescriptor: _$$c.SWITCH_TO_UI3
+        ctaTrackingDescriptor: UpgradeAction.SWITCH_TO_UI3
       },
       secondaryCta: {
         type: "link",
         label: renderI18nText("ui3_reactivation_overlay.secondary_cta"),
         href: "https://www.figma.com/blog/making-the-move-to-ui3-a-guide-to-figmas-next-chapter/",
-        ctaTrackingDescriptor: _$$c.LEARN_MORE
+        ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
       },
       targetKey: J_,
       title: renderI18nText("ui3_reactivation_overlay.ui2_title"),
@@ -7619,13 +7619,13 @@ function sK() {
         type: "button",
         label: renderI18nText("ui3_reactivation_overlay.ui3_primary_cta"),
         onClick: next,
-        ctaTrackingDescriptor: _$$c.GOT_IT
+        ctaTrackingDescriptor: UpgradeAction.GOT_IT
       },
       secondaryCta: {
         type: "link",
         label: renderI18nText("ui3_reactivation_overlay.secondary_cta"),
         href: "https://www.figma.com/blog/making-the-move-to-ui3-a-guide-to-figmas-next-chapter/",
-        ctaTrackingDescriptor: _$$c.LEARN_MORE
+        ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
       },
       targetKey: J_,
       title: renderI18nText("ui3_reactivation_overlay.ui3_title"),
@@ -8308,7 +8308,7 @@ function o2({
       label: renderI18nText("slides.templates.pro_templates_announcement.button.done"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     targetKey: w1,
     title: renderI18nText("slides.templates.pro_templates_announcement.header"),
@@ -8355,7 +8355,7 @@ function o7() {
       type: "button",
       label: renderI18nText("rcs.got_it"),
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     shouldDisableAnimation: !0,
@@ -8439,7 +8439,7 @@ export let $$le0 = memo(function ({
     }, [o, e, l]);
   })(isDesignEditor);
   let d = useFullscreenViewFile();
-  let c = useAtomWithSubscription(yF);
+  let c = useAtomWithSubscription(modalTypeAtom);
   let u = _$$I();
   return z4.getIsExtension() || "loaded" !== d.status || IntegrationUtils.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
     fallback: null,

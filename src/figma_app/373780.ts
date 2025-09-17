@@ -4,7 +4,7 @@ import { useSelector, useStore, useDispatch, shallowEqual } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mergeRefs } from "../figma_app/706870";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { h as _$$h, f as _$$f } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { isAnyMobile } from "../figma_app/778880";
@@ -1403,7 +1403,7 @@ function e6({
       }
     }, [label]);
   }();
-  let [p] = _$$A(o, 500, {
+  let [p] = useDebounce(o, 500, {
     trailing: !0
   });
   let _ = getObservableOrFallback(UK().accessibilityDomDebug);

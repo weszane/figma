@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import n from "classnames";
 import { LoadingSpinner } from "../figma_app/858013";
 import { n as _$$n } from "../5430/496973";
@@ -17,7 +17,7 @@ export function $$u0({
   isLoading: _ = !1
 }) {
   let p = _$$n(n);
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: p,
     children: jsx(TrackedButton, {
       className: o()({

@@ -95,7 +95,7 @@ import { VisualBellIcon, VisualBellType } from '../905/576487';
 import { x as _$$x4 } from '../905/587214';
 import { getFeatureFlags } from '../905/601108';
 import { buildFileUrl } from '../905/612685';
-import { J as _$$J4 } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { _G, Pv } from '../905/619652';
 import { VU } from '../905/625959';
 import { D as _$$D } from '../905/629114';
@@ -237,7 +237,7 @@ import { StyleIdHandler } from '../figma_app/243058';
 import { dR, Gt } from '../figma_app/248118';
 import { PE } from '../figma_app/251115';
 import { Z1 } from '../figma_app/253220';
-import { nB as _$$nB, r1 as _$$r2, hE, vo, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogHiddenTitle, DialogTitle, DialogContents, DialogHeader } from '../figma_app/272243';
 import { rgbToNormalized } from '../figma_app/273493';
 import { Rm } from '../figma_app/274217';
 import { sg as _$$sg } from '../figma_app/276332';
@@ -293,11 +293,11 @@ import { O as _$$O4, S as _$$S5 } from '../figma_app/568977';
 import { $P, D6 as _$$D4, ix as _$$ix2, pB as _$$pB, Rt as _$$Rt, EA, Hq, Ke, LE, qc, Tk, V4, Vu, w8, wn, ZR } from '../figma_app/575164';
 import { xE } from '../figma_app/581520';
 import { jz as _$$jz } from '../figma_app/587765';
-import { ol as _$$ol } from '../figma_app/598018';
+import { getCurrentTeam } from '../figma_app/598018';
 import { Bu, dd, Lk, Rt } from '../figma_app/604494';
 import { R as _$$R4 } from '../figma_app/612938';
 import { Ih } from '../figma_app/617427';
-import { fk } from '../figma_app/618433';
+import { hasCmsCollection } from '../figma_app/618433';
 import { J3, JU, kD, kN } from '../figma_app/622574';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { v9 } from '../figma_app/623300';
@@ -1091,12 +1091,12 @@ function tS() {
     onClose: p,
     draggable: 'header',
     defaultPosition: h,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('fullscreen.properties_panel.export')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: m
       })]
@@ -2536,7 +2536,7 @@ function iG({
 }) {
   let i = useCurrentFileKey();
   let a = selectCurrentUser();
-  let s = _$$ol();
+  let s = getCurrentTeam();
   let o = _$$O();
   let l = trackFileEventWithStore();
   let d = _$$U3('upsell');
@@ -4798,7 +4798,7 @@ function nj({
   recordingKey: i,
   onClick: n
 }) {
-  return jsx(_$$J4, {
+  return jsx(setupThemeContext, {
     brand: 'design',
     mode: 'dark',
     children: jsx('div', {
@@ -4954,7 +4954,7 @@ function nV({
       };
     }
   }, [h]);
-  return jsx(_$$J4, {
+  return jsx(setupThemeContext, {
     brand: u ? 'dev-handoff' : 'design',
     mode: 'dark',
     children: jsxs('div', {
@@ -7841,7 +7841,7 @@ function sR({
   let p = e => e ? KeyboardLayout[e] : KeyboardLayout.UNKNOWN;
   return jsx('div', {
     className: 'keyboard_shortcut_panel_layout_tab--selectorRow--QPlYR',
-    children: jsxs(_$$J4, {
+    children: jsxs(setupThemeContext, {
       mode: 'dark',
       children: [jsx(Label, {
         className: 'keyboard_shortcut_panel_layout_tab--selectorLabelText--3jkuk',
@@ -9023,7 +9023,7 @@ function oV({
   }, [e, t]);
   return jsx('div', {
     className: `${_$$h5} ${_$$M3}`,
-    children: jsx(_$$J4, {
+    children: jsx(setupThemeContext, {
       mode: 'dark',
       children: jsxs(_$$bL2, {
         children: [jsx(_$$k4, {}), jsx(QB, {
@@ -9037,7 +9037,7 @@ function oW() {
   trackFileEventWithStore()('waiting_for_sync_modal_shown');
   return jsx('div', {
     className: `${_$$h5}`,
-    children: jsx(_$$J4, {
+    children: jsx(setupThemeContext, {
       mode: 'dark',
       children: jsxs(_$$bL2, {
         children: [jsx(_$$k4, {}), jsx(QB, {
@@ -9343,9 +9343,9 @@ let li = {
       defaultPosition: e,
       width: _$$i2,
       recordingKey: 'createStyleWindow',
-      children: jsxs(vo, {
-        children: [jsxs(Y9, {
-          children: [jsx(_$$r2, {
+      children: jsxs(DialogContents, {
+        children: [jsxs(DialogHeader, {
+          children: [jsx(DialogHiddenTitle, {
             children: renderI18nText('design_systems.create_style.title')
           }), jsxs(_$$t7.TabStrip, {
             manager: b,
@@ -9357,7 +9357,7 @@ let li = {
               children: renderI18nText('variables.create_modal.title')
             })]
           })]
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsx(_$$t7.TabPanel, {
             ...y.createStyle,
@@ -9408,7 +9408,7 @@ export function $$lr0({
       t.openFile.canEdit && i === FPermissionLevelType.EDIT && r && !n && !a && (N = !0);
     }
   }
-  fk(T);
+  hasCmsCollection(T);
   let A = t.openFile?.editorType === 'design';
   let O = l7();
   let B = _$$e();

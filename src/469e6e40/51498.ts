@@ -15,7 +15,7 @@ import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { p as _$$p2 } from '../905/185998';
+import { InputComponent } from '../905/185998';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { BannerMessage } from '../905/363675';
@@ -424,10 +424,10 @@ function eo(e) {
     className: 'x78zum5 xdt5ytf x13ruybi x1nfngrj',
     children: [jsx('div', {
       className: 'x1wizv2a',
-      children: jsxs(_$$p2.Root, {
+      children: jsxs(InputComponent.Root, {
         children: [jsx(_$$h, {
           className: 'xmauxvm'
-        }), jsx(_$$p2, {
+        }), jsx(InputComponent, {
           'type': 'search',
           'placeholder': getI18nString('idp_management.flyout.search_domains'),
           'aria-label': getI18nString('idp_management.flyout.search_domains'),

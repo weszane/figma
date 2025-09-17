@@ -31,7 +31,7 @@ import { HF, E2 } from "../figma_app/646357";
 import { aB, jx } from "../905/576221";
 import { maybeCreateSavepoint } from "../905/294113";
 import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
-import { H7 } from "../figma_app/598018";
+import { getTeamById } from "../figma_app/598018";
 import { O as _$$O } from "../905/566074";
 import { StagingStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, PublishStatusEnum, DEFAULT_LIBRARY_LIMIT, NO_CONTAINING_STATE_GROUP_ID } from "../figma_app/633080";
 import { Z as _$$Z } from "../905/939602";
@@ -477,7 +477,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     savepointId: r.id
   });
   let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => E2(e) || NO_CONTAINING_STATE_GROUP_ID);
-  let eh = H7(A);
+  let eh = getTeamById(A);
   let {
     orderedUpdates
   } = function (e) {

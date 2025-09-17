@@ -5,7 +5,7 @@ import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
 import { TabLoop } from "../905/718764";
 import { D as _$$D } from "../905/555681";
 import { O as _$$O } from "../905/969533";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { Multiplayer, Command } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -52,13 +52,13 @@ import { rJv } from "../figma_app/27776";
 import { isIpadDevice } from "../figma_app/778880";
 import { showModalHandler } from "../905/156213";
 import { trackFileEvent } from "../figma_app/314264";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { FFileType } from "../figma_app/191312";
 import { _2 } from "../9410/635666";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { projectPermissionEnum } from "../figma_app/630077";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { A as _$$A2 } from "../3276/51271";
 import { K as _$$K } from "../3276/330497";
 import { WF, tL, sl, Te, iw, iG, zc } from "../9410/132424";
@@ -100,14 +100,14 @@ function eg(e) {
         });
         let r = o === FEditorType.Whiteboard ? FFileType.WHITEBOARD : FFileType.DESIGN;
         c(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: e,
-            resource: Bi.AUDIO,
+            resource: FeatureFlag.AUDIO,
             action: projectPermissionEnum.USE_AUDIO,
             editorType: r,
-            currentPlan: _$$F.Plan.STARTER,
-            upsellPlan: _$$F.Plan.PRO
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO
           }
         }));
       },
@@ -331,7 +331,7 @@ function eI({
   useEffect(() => {
     F((er ? 1 : 0) + ("" !== en && ec ? 1 : 0) + (ed ? 1 : 0));
   }, [er, en, ec, ed]);
-  let ep = jsxs(_$$J, {
+  let ep = jsxs(setupThemeContext, {
     mode: "dark",
     children: [jsxs("div", {
       ref: x,
@@ -543,7 +543,7 @@ function ek({
       hidePopover: S
     }, e.sessionID);
   };
-  let eb = jsxs(_$$J, {
+  let eb = jsxs(setupThemeContext, {
     mode: "dark",
     children: [jsxs("div", {
       ref: O,

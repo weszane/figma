@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
@@ -42,14 +42,14 @@ export function $$A0(e) {
   return jsx(ModalRootComponent, {
     manager: r,
     width: 408,
-    children: jsx(Wk, {
+    children: jsx(DialogCustomContents, {
       className: "x15fnm84 xwxc41k x78zum5 xdt5ytf x1665zp3 x87ps6o",
       children: jsx(TrackingProvider, {
         name: "figmake_paywall_modal",
         properties: {
           teamId: team.id
         },
-        children: jsxs(J, {
+        children: jsxs(setupThemeContext, {
           brand: "bake-filebrowser",
           children: [jsx("div", {
             className: "xh8yej3 x1n2onr6 xamitd3",

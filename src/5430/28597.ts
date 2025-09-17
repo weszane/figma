@@ -30,7 +30,7 @@ import { A as _$$A } from "../5430/202447";
 import { AuthFlowStep } from "../905/862321";
 import { FL } from "../figma_app/248365";
 import { b as _$$b } from "../5430/872214";
-import { A as _$$A2 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { IW } from "../figma_app/563413";
 import { lH, r4 } from "../figma_app/229259";
@@ -440,7 +440,7 @@ function em({
 }) {
   let [t, r] = useState(et.COMPONENTS);
   let [n, o] = useState("");
-  let [a] = _$$A2(n, 300, {
+  let [a] = useDebounce(n, 300, {
     trailing: !0,
     leading: !1
   });

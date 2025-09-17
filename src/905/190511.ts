@@ -1,21 +1,21 @@
 import { useMemo } from "react";
-import { Q2 } from "../905/937198";
-import { G } from "../905/707993";
+import { logCmsWarning } from "../905/937198";
+import { getCollectionView } from "../905/707993";
 export function $$s0({
   fieldSchemaStableId: e,
   collectionStableId: t
 }) {
-  "" === e && Q2("itemStableId should not be an empty string", {
+  "" === e && logCmsWarning("itemStableId should not be an empty string", {
     fieldSchemaStableId: e
   }, {
     reportAsSentryError: !0
   });
-  "" === t && Q2("collectionStableId should not be an empty string", {
+  "" === t && logCmsWarning("collectionStableId should not be an empty string", {
     collectionStableId: t
   }, {
     reportAsSentryError: !0
   });
-  let i = G({
+  let i = getCollectionView({
     collectionStableId: t
   });
   return useMemo(() => {

@@ -10,7 +10,7 @@ import { LogLevelStr } from "../905/361972";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
 import { z } from "../905/239603";
-import { tc } from "../figma_app/386952";
+import { getSelectedViewDeepEqual } from "../figma_app/386952";
 import { n as _$$n, V } from "../905/788423";
 let f = [_$$n("RecentFiles"), _$$n("SharedFiles"), _$$n("SharedProjects"), _$$n("Drafts"), _$$n("OrgAllWorkspaces"), _$$n("Workspace"), _$$n("Team"), _$$n("Folder")];
 let E = [V("Sidebar"), V("MainBodyContent"), V("FileCreateEntrypoint")];
@@ -181,7 +181,7 @@ function k({
   isLoaded: t,
   contextArgs: r
 }) {
-  let i = tc();
+  let i = getSelectedViewDeepEqual();
   let a = F(r);
   useEffect(() => {
     M({

@@ -28,7 +28,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { xT, Q3 } from "../figma_app/199513";
 import { useCurrentUserOrg } from "../905/845253";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType, FPlanNameType } from "../figma_app/191312";
 import { FolderPermissions } from "../figma_app/43951";
@@ -61,7 +61,7 @@ import { R as _$$R } from "../905/11928";
 import { F_ } from "../905/858282";
 import { SqV, BWk } from "../figma_app/6204";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
@@ -146,7 +146,7 @@ function eC() {
     label: renderI18nText("rcs.sharing_clarity.learn_more"),
     type: "link",
     href: "https://help.figma.com/hc/articles/360038006494-Create-a-new-project",
-    ctaTrackingDescriptor: _$$c.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   let c = [{
     title: renderI18nText("rcs.sharing_clarity.project_permissions_modal_step_1_title"),
@@ -402,7 +402,7 @@ export let $$eK0 = registerModal(function (e) {
   let J = useSelector(e => e.contacts);
   let ee = useSelector(e => e.dropdownShown);
   let et = useSelector(e => e.orgDomains);
-  let ei = FC();
+  let ei = selectPermissionsState();
   let en = liveStoreInstance.Folder.useValue(folderId).data;
   let er = useSelector(e => en?.team_id && e.teams[en.team_id] || null);
   let ea = useCurrentUserOrg() || null;

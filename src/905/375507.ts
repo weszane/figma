@@ -42,7 +42,7 @@ import { A as _$$A } from "../6828/493300";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { oN } from "../905/777093";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { X as _$$X2 } from "../905/698965";
 import { registerModal } from "../905/102752";
 import { A as _$$A2 } from "../svg/562672";
@@ -50,7 +50,7 @@ import { A as _$$A3 } from "../svg/57540";
 import { throwTypeError } from "../figma_app/465776";
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
-import { J as _$$J2 } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { useSubscription } from "../figma_app/288654";
 import { P as _$$P } from "../905/347284";
 import { SharedFontsModalTeamPermissions, SharedFontsModalOrgPermissions } from "../figma_app/43951";
@@ -759,7 +759,7 @@ function eR(e) {
             numErrors: unsuccessfulUploads.length
           })
         }), jsx("div", {
-          children: jsxs(_$$J2, {
+          children: jsxs(setupThemeContext, {
             mode: "dark",
             children: [jsx(Button, {
               onClick: onReviewUploadErrors,
@@ -1250,7 +1250,7 @@ let eB = registerModal(function (e) {
   } = e;
   let i = useModalManager(e);
   let d = useSelector(e => e.sharedFonts);
-  let c = FC();
+  let c = selectPermissionsState();
   let p = d.warnings[0];
   let m = useDispatch();
   let h = useCallback(() => {

@@ -4,7 +4,7 @@ import { useAtomWithSubscription, Rq, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -89,7 +89,7 @@ export function $$k2({
       label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: E,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: e,
     title: renderI18nText("whiteboard.ai_onboarding.new_file_modal.title"),

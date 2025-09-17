@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import o from "classnames";
 import { isGovCluster } from "../figma_app/169182";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Z } from "../905/224161";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { ju } from "../905/187165";
 import { x6, zB, as, Hg, _d, Kk, IO } from "../905/410210";
 import { A } from "../5724/721563";
@@ -19,11 +19,11 @@ export function $$E0({
   brandTextColor: r,
   ...o
 }) {
-  let E = _6();
+  let E = getSelectedView();
   let y = useRef(null);
   Z("light", y);
   let b = ju(E);
-  return isGovCluster() ? null : jsx(J, {
+  return isGovCluster() ? null : jsx(setupThemeContext, {
     mode: "light",
     brand: b,
     children: jsx("div", {
@@ -51,11 +51,11 @@ export function $$E0({
   });
 }
 export function $$y1(e) {
-  let t = _6();
+  let t = getSelectedView();
   let r = useRef(null);
   Z("light", r);
   let o = ju(t);
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     mode: "light",
     brand: o,
     children: jsx("div", {

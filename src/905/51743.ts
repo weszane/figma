@@ -24,7 +24,7 @@ import { u as _$$u } from "../905/704456";
 import { A as _$$A } from "../905/721854";
 import { is, Oq } from "../905/904596";
 import { F } from "../905/382217";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { h as _$$h } from "../905/207101";
 import { y as _$$y2 } from "../figma_app/13082";
 function P({
@@ -49,7 +49,7 @@ function P({
   }, [i, p, l.state]);
   return jsx(_$$y, {
     onDismiss: i,
-    children: jsx(J, {
+    children: jsx(setupThemeContext, {
       brand: "dev-handoff",
       children: jsxs(_$$B2, {
         justify: "space-between",

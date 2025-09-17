@@ -109,7 +109,7 @@ let modalIdCounter = 0
  */
 export function registerModal(
   Component: React.ComponentType<any>,
-  typeOrOptions: string | { supportsBackgroundVisible?: ModalSupportsBackgroundEnum },
+  typeOrOptions?: string | { supportsBackgroundVisible?: ModalSupportsBackgroundEnum },
   supportsBackgroundVisible?: ModalSupportsBackgroundEnum,
 ): { type: string } {
   if (typeof typeOrOptions === 'string') {

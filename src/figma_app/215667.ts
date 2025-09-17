@@ -1,18 +1,19 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useContext } from "react";
-let $$a = createContext("dark");
-export function $$s0() {
-  return useContext($$a);
+import { createContext, useContext } from 'react'
+import { jsx } from 'react/jsx-runtime'
+
+let darkThemeContext = createContext('dark')
+export function useDarkContext() {
+  return useContext(darkThemeContext)
 }
-export function $$o1({
+export function DropdownThemeProvider({
   mode: e,
-  children: t
+  children: t,
 }) {
-  return jsx($$a.Provider, {
+  return jsx(darkThemeContext.Provider, {
     value: e,
-    children: t
-  });
+    children: t,
+  })
 }
-$$o1.displayName = "DropdownThemeProvider";
-export const S = $$s0;
-export const a = $$o1;
+DropdownThemeProvider.displayName = 'DropdownThemeProvider'
+export const S = useDarkContext
+export const a = DropdownThemeProvider

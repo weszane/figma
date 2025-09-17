@@ -11,7 +11,7 @@ import { analyticsEventManager } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
 import { useSingleEffect } from '../905/791079';
 import { postUserFlag } from '../905/985254';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $z } from '../figma_app/617427';
 
@@ -88,12 +88,12 @@ export function AppleEulaModal({
   return jsx(ModalRootComponent, {
     manager: modalManager,
     width: 600,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: featureFlags.dse_sf_pro_font ? renderI18nText('community.eula.component_license_agreement') : renderI18nText('community.eula.license_agreement_v2')
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs('div', {
           style: {
             maxHeight: '360px'
@@ -109,13 +109,13 @@ export function AppleEulaModal({
             children: renderI18nText('community.eula.license_agreement_preamble')
           }), jsx(AppleEulaContent, {})]
         })
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [eulasToShow !== undefined && eulaShown !== undefined && eulasToShow > 1 && jsx('div', {
           children: renderI18nText('community.eula.i_of_count', {
             i: eulaShown,
             count: eulasToShow
           })
-        }), jsxs(jk, {
+        }), jsxs(DialogActionStrip, {
           children: [jsx($z, {
             onClick: () => {
               trackEulaClick('decline');

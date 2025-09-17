@@ -48,7 +48,7 @@ import { Vb } from "../905/151685";
 import { RecordableDiv } from "../905/511649";
 import { Ay } from "@stylexjs/stylex";
 import { Ij } from "../figma_app/359943";
-import { b as _$$b, bL as _$$bL2, mc as _$$mc, wv, r1 as _$$r2, YJ } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuSeparator, MenuHiddenTitleComp, MenuGroupComp } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
 import { EventShield } from "../905/821217";
 import { H_, z6, CU } from "../905/963340";
@@ -71,7 +71,7 @@ import { z as _$$z } from "../905/489760";
 import { p as _$$p } from "../figma_app/353099";
 import { A as _$$A3 } from "../905/920142";
 import { buildUploadUrl } from "../figma_app/169182";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy, mp } from "../figma_app/579169";
 import { y7 } from "../figma_app/385874";
@@ -1347,7 +1347,7 @@ function eH(e) {
   let {
     manager,
     getTriggerProps
-  } = _$$b();
+  } = setupMenu();
   let x = eV(resizeToFit, isSection);
   let C = isInvalidValue(width) || isInvalidValue(height) ? null : fS({
     width,
@@ -1378,7 +1378,7 @@ function eH(e) {
   }, [isSection, resizeToFit]);
   return jsx(_$$E, {
     name: "frame_preset_select",
-    children: jsxs(_$$bL2, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsxs(ButtonPrimitive, {
         "aria-label": getI18nString("presets.selection_trigger_with_selected", {
@@ -1391,7 +1391,7 @@ function eH(e) {
         children: [jsx("span", {
           children: ej(isMixedOverride ? MIXED_MARKER : x)
         }), jsx(_$$r3, {})]
-      }), jsx(_$$mc, {
+      }), jsx(MenuContainerComp, {
         children: jsxs(EventShield, {
           eventListeners: ["onWheel"],
           children: [(isMixedOverride || isInvalidValue(x)) && jsxs(Fragment, {
@@ -1400,9 +1400,9 @@ function eH(e) {
               disabled: !0,
               onChange: lQ,
               children: ej(MIXED_MARKER)
-            }), jsx(wv, {})]
+            }), jsx(MenuSeparator, {})]
           }), jsxs(z6, {
-            title: jsx(_$$r2, {
+            title: jsx(MenuHiddenTitleComp, {
               children: getI18nString("presets.group_titles.layout_options")
             }),
             onChange: R,
@@ -1449,8 +1449,8 @@ function ez({
     children: eF.map(({
       groupName: i,
       presets: a
-    }, s) => jsx(YJ, {
-      title: jsx(_$$r2, {
+    }, s) => jsx(MenuGroupComp, {
+      title: jsx(MenuHiddenTitleComp, {
         children: i?.i18nName()
       }),
       children: a.map(i => jsx(eW, {
@@ -1590,13 +1590,13 @@ function tc() {
       type: "button",
       onClick: closeModal,
       variantOverride: "primary",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5731482952599#suggest",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     targetKey: to,
     title: jsx("p", {

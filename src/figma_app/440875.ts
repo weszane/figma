@@ -19,7 +19,7 @@ import { z4 } from "../905/37051";
 import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
-import { z3 } from "../figma_app/386952";
+import { getSelectedViewType } from "../figma_app/386952";
 import { Z } from "../905/116724";
 var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
 let $$N10 = createOptimistThunk((e, t) => {
@@ -45,7 +45,7 @@ let w = (e, t, r, n) => {
   return i && !a && !o;
 };
 function O() {
-  let e = z3();
+  let e = getSelectedViewType();
   let t = useDispatch();
   let r = useSelector(e => e.multiplayer);
   let a = useCallback(e => {
@@ -68,7 +68,7 @@ export function $$R12(e) {
     }
   } = e;
   let c = useDispatch();
-  let _ = z3();
+  let _ = getSelectedViewType();
   let h = useAtomWithSubscription(Dv);
   let [m, g] = useState("initial");
   let f = useLatestRef(presenterSessionID);
@@ -182,7 +182,7 @@ export function $$F7({
     return !!t && !r && !n && !i && !a && !s && !e;
   }();
   let r = e.presenterSessionID === e.sessionID;
-  let i = z3();
+  let i = getSelectedViewType();
   let a = useCallback(() => {
     "prototype" === i ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
   }, [i]);

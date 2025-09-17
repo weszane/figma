@@ -12,7 +12,7 @@ import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from "../figm
 import { d as _$$d, cR, hv } from "../figma_app/715641";
 import { h as _$$h } from "../905/207101";
 import { l7, X0, U0, ZI, Xd } from "../figma_app/88239";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { nT, o5 } from "../figma_app/433401";
@@ -52,13 +52,13 @@ function w({
     label: renderI18nText("dev_handoff.workflows.overview.onboarding.primary_cta"),
     type: "button",
     onClick: complete,
-    ctaTrackingDescriptor: _$$c.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   let m = {
     label: renderI18nText("dev_handoff.workflows.overview.onboarding.secondary_cta"),
     type: "link",
     href: "https://help.figma.com/hc/articles/23918228264855",
-    ctaTrackingDescriptor: _$$c.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,

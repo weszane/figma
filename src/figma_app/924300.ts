@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { b, bL } from "../figma_app/860955";
+import { setupMenu, MenuRootComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { J } from "../905/125993";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -14,8 +14,8 @@ export function $$_0(e) {
   let {
     getTriggerProps,
     manager
-  } = b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       recordingKey: generateRecordingKey(e, "toggleOverflowMenu"),

@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 import { n0 } from "../figma_app/32128";
 import { VS } from "../1250/506456";
 import { _$, Ep } from "../figma_app/379850";
 export function $$m0(e, t) {
-  let n = _6();
+  let n = getSelectedView();
   return "fullscreen" === n.view ? {
     ...n,
     editorType: e ?? n.editorType,
@@ -23,7 +23,7 @@ export function $$m0(e, t) {
   } : n;
 }
 export function $$p2(e, t) {
-  let n = _6();
+  let n = getSelectedView();
   return "fullscreen" === n.view ? {
     ...n,
     editorType: FEditorType.DevHandoff,
@@ -40,14 +40,14 @@ export function $$p2(e, t) {
 }
 export function $$g3() {
   let e = useDispatch();
-  let t = _6();
+  let t = getSelectedView();
   return useCallback(n => {
     _$(e, t, n);
   }, [e, t]);
 }
 export function $$f4() {
   let e = useDispatch();
-  let t = _6();
+  let t = getSelectedView();
   return useCallback(() => {
     Ep(e, t);
   }, [e, t]);

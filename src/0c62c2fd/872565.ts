@@ -39,7 +39,7 @@ import { hasRootPathOptional, findOwnerFolder, getSidebarPath, isTeamFolderV2 } 
 import { z as _$$z2 } from "../905/875422";
 import { MoveFileCurrentProject, AccessibleFoldersV2, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { isRecentsAndSharingView } from "../figma_app/193867";
-import { n$, Cz, aW, sK } from "../figma_app/598018";
+import { sortItemsByOrder, DEFAULT_TEAM_FILE_COUNTS, isTeamAllowedToAddFiles, AddOperationType } from "../figma_app/598018";
 import { b as _$$b, A as _$$A } from "../figma_app/965813";
 import { X as _$$X } from "../905/698965";
 import { OrganizationType } from "../905/833838";
@@ -349,7 +349,7 @@ let eS = async (e, t, r, a, s = !1, i = !1, o, l, d, c) => {
     (g = Object.keys(u = e[1])).length && g.sort(eC(m));
   } else {
     u = eT(a, s, !!c, e.dispatch);
-    a.user ? (g.push(HK), g = g.concat(n$(Object.values(a.teams), a.fileBrowserPreferences?.orderedTeamIds || [])), u[iK].length > 0 && g.push(iK)) : (g = Object.keys(u)).sort(eN(a.teams));
+    a.user ? (g.push(HK), g = g.concat(sortItemsByOrder(Object.values(a.teams), a.fileBrowserPreferences?.orderedTeamIds || [])), u[iK].length > 0 && g.push(iK)) : (g = Object.keys(u)).sort(eN(a.teams));
   }
   let h = (() => {
     switch (t.type) {
@@ -1315,9 +1315,9 @@ export function $$e95(e) {
   }, {
     enabled: !!team?.id
   });
-  let d = l.data?.team?.teamFileCounts || Cz;
-  let c = e.fileNotInTeam && e.fileEditorType && team && !aW(team, {
-    type: sK.ADD_FILE,
+  let d = l.data?.team?.teamFileCounts || DEFAULT_TEAM_FILE_COUNTS;
+  let c = e.fileNotInTeam && e.fileEditorType && team && !isTeamAllowedToAddFiles(team, {
+    type: AddOperationType.ADD_FILE,
     editorType: e.fileEditorType,
     teamFileCounts: d
   });

@@ -23,7 +23,7 @@ import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { $0, dR, Ww, y as _$$y, oW, D_, HG, By, VA, Pi } from "../figma_app/440875";
 import { T as _$$T, N as _$$N2 } from "../905/847283";
-import { _6, z3 } from "../figma_app/386952";
+import { getSelectedView, getSelectedViewType } from "../figma_app/386952";
 import { a8, $i } from "../figma_app/467440";
 import { h0, JJ } from "../figma_app/61403";
 import { rK } from "../figma_app/631279";
@@ -42,7 +42,7 @@ let K = (e, t) => {
   let r = Av();
   let a = _o();
   let s = p8("showUi");
-  let o = _6();
+  let o = getSelectedView();
   let l = function ({
     isUI3: e,
     prototypeHeaderHidden: t,
@@ -145,7 +145,7 @@ function V(e) {
     children,
     prototypeHeaderHidden
   } = e;
-  let n = z3();
+  let n = getSelectedViewType();
   let a = 0;
   "prototype" === n ? a = 2 : isAnyMobile && (a = 1);
   let s = K(a, prototypeHeaderHidden || !1);
@@ -197,7 +197,7 @@ function J(e) {
   let a = $0();
   let s = dR();
   let o = Ww();
-  let l = _6();
+  let l = getSelectedView();
   let d = 0;
   "prototype" === l.view ? d = l.isPresenterView ? 3 : 2 : isAnyMobile && (d = 1);
   let c = z((() => {
@@ -219,7 +219,7 @@ function J(e) {
 var q = (e => (e.PRESENTING = "presenting", e.PROMPT_TO_ACCEPT_NOMINATION = "prompt_to_accept_nomination", e.SHOWING_EXPLAINER = "showing_explainer", e.NONE = "none", e))(q || {});
 var X = (e => (e.PENDING_AUTO_FOLLOW = "pending_auto_follow", e.FOLLOWING = "following", e.PROMPT_TO_REJOIN = "prompt_to_rejoin", e.NONE = "none", e))(X || {});
 function Z() {
-  return "prototype" !== z3() && !isMobileNotFigmaMobile();
+  return "prototype" !== getSelectedViewType() && !isMobileNotFigmaMobile();
 }
 function Q(e, t, i, r) {
   let a = useLatestRef(e);
@@ -299,7 +299,7 @@ function $(e) {
     !d && t && i(!1);
     let c = d && 0 === r && !t;
     let u = _$$T();
-    let p = z3();
+    let p = getSelectedViewType();
     let h = useCallback(() => {
       u(_$$N2.STOP);
       "prototype" === p ? hk()?.stopPresenting() : Multiplayer.stopPresenting();

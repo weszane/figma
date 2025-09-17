@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { VisualBellActions } from "../905/302958";
 import { R } from "../905/687502";
 import { y4 } from "../figma_app/298277";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 var l = o;
 function f({
   isSticky: e,
@@ -34,11 +34,11 @@ export function $$_0(e) {
     containerStyle: "file_browser_page_view--tabletOptimizedContainer--EYJ4F file_browser_page_view--container--ktTUu",
     metaContainerStyle: "file_browser_page_view--tabletOptimizedMetaContainer--zpv8C file_browser_page_view--metaContainer--0kBjx"
   } : {
-      mobileToolBarSpacerStyle: "file_browser_page_view--mobileToolBarSpacer--bfkn5",
-      containerStyle: "file_browser_page_view--container--ktTUu",
-      metaContainerStyle: "file_browser_page_view--metaContainer--0kBjx"
-    };
-  let u = _6();
+    mobileToolBarSpacerStyle: "file_browser_page_view--mobileToolBarSpacer--bfkn5",
+    containerStyle: "file_browser_page_view--container--ktTUu",
+    metaContainerStyle: "file_browser_page_view--metaContainer--0kBjx"
+  };
+  let u = getSelectedView();
   let _ = useDispatch();
   let [A, y] = useState(!1);
   let b = window.performance.getEntriesByType("navigation")[0];

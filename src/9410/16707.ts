@@ -11,14 +11,14 @@ import { SecureLink } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { d2 } from "../figma_app/579169";
 import { orgSubscriptionAtom } from "../905/296690";
 import { fullscreenValue } from "../figma_app/455680";
 import { getObservableValue } from "../figma_app/84367";
-import { Me } from "../figma_app/598018";
+import { currentTeamAtom } from "../figma_app/598018";
 import { N as _$$N } from "../figma_app/268271";
 import { qo } from "../905/696396";
 import { U as _$$U } from "../905/455766";
@@ -108,7 +108,7 @@ export function $$H1({
   let v = useDispatch();
   let T = x.data === qo.ORG;
   let S = atomStoreManager.get(orgSubscriptionAtom);
-  let j = atomStoreManager.get(Me);
+  let j = atomStoreManager.get(currentTeamAtom);
   let k = debugState.getState().openFile;
   let N = !k || !k.canEdit;
   let A = isGovCluster();
@@ -190,13 +190,13 @@ export function $$H1({
       type: "button",
       label: renderI18nText("slides.onboarding.welcome.primary_cta"),
       onClick: G,
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: A ? void 0 : {
       type: "button",
       label: renderI18nText("slides.onboarding.welcome.secondary_cta"),
       onClick: K,
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     title: M,
     trackingContextName: "Slides Onboarding > Welcome"
@@ -226,13 +226,13 @@ function z({
         e();
         a && AppStateTsApi?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
       },
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: {
       type: "button",
       label: renderI18nText("slides.onboarding.callout.close"),
       onClick: t,
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     shouldDisableAnimation: !0,
     stepCounter: {
@@ -266,13 +266,13 @@ function V({
         fullscreenValue.triggerAction("enter-focus-view");
         e();
       },
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: {
       type: "button",
       label: renderI18nText("slides.onboarding.callout.close"),
       onClick: t,
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     shouldDisableAnimation: !0,
     stepCounter: {
@@ -308,7 +308,7 @@ function W({
         e();
         a && o(SelfDesignType.DESIGN);
       },
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: {
       type: "button",
@@ -316,7 +316,7 @@ function W({
       onClick: () => {
         t();
       },
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     shouldDisableAnimation: !0,
@@ -353,7 +353,7 @@ function Y({
         e();
         a(SelfDesignType.DESIGN);
       },
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: {
       type: "button",
@@ -361,7 +361,7 @@ function Y({
       onClick: () => {
         t();
       },
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     shouldDisableAnimation: !0,
@@ -394,7 +394,7 @@ function J({
       type: "button",
       label: renderI18nText("slides.onboarding.callout.done"),
       onClick: e,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     shouldDisableAnimation: !0,
     stepCounter: {

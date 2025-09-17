@@ -35,7 +35,7 @@ import { A as _$$A } from "../905/891805";
 import { e as _$$e } from "../905/149844";
 import { adjustHue } from "../figma_app/273493";
 import { getSingletonSceneGraph } from "../905/700578";
-import { A as _$$A2 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { trackEventAnalytics } from "../905/449184";
 import { whiteColor, getColorBrightness } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
@@ -332,7 +332,7 @@ function ey({
     let e = getSingletonSceneGraph().get(t.node_id);
     e && !fontsAreLoading && T(e.hasMissingFont);
   }, [t.node_id, T, fontsAreLoading]);
-  let [R, N] = _$$A2(C, 200);
+  let [R, N] = useDebounce(C, 200);
   useEffect(() => {
     (void 0 === k || k && !C) && N.flush();
   }, [k, C, N]);

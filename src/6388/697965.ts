@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Button } from "../905/521428";
 import { E as _$$E } from "../905/730894";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { uY } from "../figma_app/164260";
 import { ie } from "../figma_app/524655";
 import { tH } from "../905/751457";
@@ -55,7 +55,7 @@ function v({
   let x = function (e, t, l, o, s) {
     let [r, i] = useState(!1);
     let a = useMemo(() => !!e && !!t.length && !t.includes(j(e, l)), [l, t, e]);
-    let [d, c] = _$$A(a, 5e3);
+    let [d, c] = useDebounce(a, 5e3);
     useEffect(() => {
       a || c.flush();
     }, [a, c]);

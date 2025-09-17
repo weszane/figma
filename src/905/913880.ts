@@ -6,7 +6,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { openFileTeamAtom } from "../figma_app/516028";
 import { zt } from "../figma_app/84580";
 import { JU } from "../figma_app/626177";
@@ -53,7 +53,7 @@ export function $$y0() {
           "data-testid": "video-error-panel-upgrade-team-button"
         },
         trackingProperties: {
-          trackingDescriptor: _$$c.UPGRADE,
+          trackingDescriptor: UpgradeAction.UPGRADE,
           key: "video-error-panel-upgrade-team-button"
         },
         onClick: showVideosModal,

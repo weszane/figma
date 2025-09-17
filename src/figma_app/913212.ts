@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -24,15 +24,15 @@ export let $$h0 = registerModal(function () {
   return jsx(ModalRootComponent, {
     manager: h,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("figmake.supabase_disconnect_required_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: getI18nString("figmake.supabase_disconnect_required_modal.body")
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: r,

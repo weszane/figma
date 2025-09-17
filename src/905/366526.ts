@@ -288,7 +288,7 @@ import { useCurrentUserOrg } from '../905/845253';
 import { mergeWithObject } from '../905/848904';
 import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
-import { D as _$$D2 } from '../905/852057';
+import { fileUpdateSavepointAction } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
@@ -385,7 +385,7 @@ import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFi
 import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, getTeamIdFromPath, isRecentsAndSharingView, mapPathToSelectedView, selectedViewToPath } from '../figma_app/193867';
 import { P0 } from '../figma_app/198387';
 import { iT as _$$iT, Q3, xT } from '../figma_app/199513';
-import { FC } from '../figma_app/212807';
+import { selectPermissionsState } from '../figma_app/212807';
 import { bO as _$$bO, Cg as _$$Cg, xA as _$$xA, jt, LC, qy } from '../figma_app/216057';
 import { wJ as _$$wJ } from '../figma_app/216696';
 import { N as _$$N9 } from '../figma_app/240060';
@@ -393,7 +393,7 @@ import { $I, $V, $w, aB as _$$aB, bE as _$$bE2, ii as _$$ii, Jt as _$$Jt, mw as 
 import { m as _$$m2 } from '../figma_app/247343';
 import { tB as _$$tB, wc, Zp } from '../figma_app/253220';
 import { N as _$$N0 } from '../figma_app/268271';
-import { hE as _$$hE2, nB as _$$nB, vo as _$$vo, jk, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogBody, DialogContents, DialogActionStrip, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h2 } from '../figma_app/275739';
 import { Gk } from '../figma_app/277330';
@@ -416,7 +416,7 @@ import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
 import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { Tm } from '../figma_app/385874';
-import { _6, z3 } from '../figma_app/386952';
+import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
@@ -453,7 +453,7 @@ import { Tf } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { l7 as _$$l8, uV as _$$uV, uw as _$$uw, fs, GV, KJ, L4, Qi, Vx } from '../figma_app/559491';
-import { cD as _$$cD, n$ as _$$n$, BU } from '../figma_app/598018';
+import { getCurrentTeamId, sortItemsByOrder, hasTeamPermissions } from '../figma_app/598018';
 import { $l, $o, bE as _$$bE, yJ as _$$yJ2, HA, IU, Kc, MR, Q2, y2, yH } from '../figma_app/598926';
 import { Dl as _$$Dl, i_ as _$$i_2 } from '../figma_app/610446';
 import { aZ as _$$aZ2 } from '../figma_app/613182';
@@ -1044,7 +1044,7 @@ function eJ({
   let s = !_$$pF() || initialized;
   let [o, l] = useState(null);
   let c = useAtomWithSubscription(processSelector)?.initCompletedPromise;
-  let u = z3();
+  let u = getSelectedViewType();
   let p = u === 'fullscreen';
   let m = useMemo(() => viewKeys.includes(u), [u]);
   let [h, g] = useState(!1);
@@ -1179,7 +1179,7 @@ function e1({
   fallback: t
 }) {
   let i = getInitialOptions().user_data?.id ?? '';
-  let r = _$$cD();
+  let r = getCurrentTeamId();
   let a = null;
   let s = null;
   let l = getInitialOptions().statsig_plan_key;
@@ -1197,7 +1197,7 @@ function e1({
     a = getInitialOptions().org_id ?? null;
     _$$tU() && (a ? s = `organization::${a}` : r && (s = `team::${r}`));
   }
-  let p = _6();
+  let p = getSelectedView();
   _$$h(() => {
     trackStatsigPlanKeyBootstrap(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
   });
@@ -1220,7 +1220,7 @@ function e1({
         if (!a) return r;
         let s = a.filter(e => e.team?.orgId === t && !e.team?.deletedAt && !e.pending).map(e => e.team).filter(isNotNullish);
         let o = n.data.currentUser.fileBrowserPreferences?.orderedTeamIds;
-        _$$n$(s, o || []).slice(0, _$$oM - 1).forEach(n => {
+        sortItemsByOrder(s, o || []).slice(0, _$$oM - 1).forEach(n => {
           let a = i;
           _$$tU() && (t == null || t === '') && (a = `team::${n}`);
           r.push({
@@ -1965,7 +1965,7 @@ let iz = e => t => function (i) {
       };
       trackFileCopyEvent(n ? 'File Trashed' : 'File Deleted', s, e.getState());
     }
-  } else if (_$$D2.matches(i)) {
+  } else if (fileUpdateSavepointAction.matches(i)) {
     let n = XHR.put(`/api/versions/${i.payload.fileKey}/${i.payload.savepointID}`, {
       label: i.payload.label,
       description: i.payload.description
@@ -2562,12 +2562,12 @@ let nK = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: i,
     width: 'lg',
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE2, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('webgl_error.message.we_cant_open_that_file_header')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: (t = e.result, desktopAPIInstance && t !== xt.SUCCESS ? jsxs('p', {
           children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')]
         }) : t === xt.NO_WEBGL ? jsx('p', {
@@ -2582,8 +2582,8 @@ let nK = registerModal(e => {
         }) : t === xt.STENCIL_TEST_FAILURE ? jsxs('span', {
           children: [renderI18nText('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.figma_is_working_with_the_browser_developers')]
         }) : void 0)
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: 'primary',
             onClick: e.onClose,
@@ -3092,7 +3092,7 @@ function r0({
   let y = useRef(getStorage()).current;
   let {
     fileByKey
-  } = FC();
+  } = selectPermissionsState();
   let [v, I] = useState(() => y.get(rJ) ?? {
     sortBy: isSearching ? 'search' : 'alpha',
     prevCol: null,
@@ -3412,7 +3412,7 @@ let ar = () => ({
 class aa extends _$$o5 {}
 let as = registerModal(e => {
   let t = useDispatch();
-  let i = _6();
+  let i = getSelectedView();
   let r = useCurrentUserOrg();
   let a = useSelector(e => e.sharedFonts);
   let o = useSelector(e => getPermissionsStateMemoized(e));
@@ -8980,7 +8980,7 @@ function dt(e = {}, t) {
           ...e
         };
         r[n][t.email].team_role = void 0;
-        i.pending && BU(r[n][t.email]) || delete r[n][t.email];
+        i.pending && hasTeamPermissions(r[n][t.email]) || delete r[n][t.email];
       }
     }
   }
@@ -9011,7 +9011,7 @@ function dt(e = {}, t) {
           ...t,
           team_user: l
         };
-        if (d?.team_user?.whiteboard_paid_status !== FPlanRestrictionType.FULL && d?.team_user?.design_paid_status !== FPlanRestrictionType.FULL && !BU(t)) {
+        if (d?.team_user?.whiteboard_paid_status !== FPlanRestrictionType.FULL && d?.team_user?.design_paid_status !== FPlanRestrictionType.FULL && !hasTeamPermissions(t)) {
           delete n[d.email];
           s[teamId] = n;
           return;
@@ -9432,7 +9432,7 @@ function dV(e = dB, t) {
       ...e,
       docHasChanged: t.payload.status
     };
-  } else if (_$$D2.matches(t)) {
+  } else if (fileUpdateSavepointAction.matches(t)) {
     let {
       savepointID,
       label,
@@ -13708,7 +13708,7 @@ function mW() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _6();
+  let t = getSelectedView();
   useEffect(() => {
     t.view === 'prototype' && getFeatureFlags().perf_sentiment_survey && Sprig('track', 'enter_prototype');
   }, [Sprig, t.view]);
@@ -13745,7 +13745,7 @@ function m5() {
   } = useSprigWithSampling();
   let t = selectCurrentUser();
   let i = t && !_$$cn(t);
-  let n = z3() === 'teamUpgrade';
+  let n = getSelectedViewType() === 'teamUpgrade';
   let r = _$$f4('entered_pro_cart_flow');
   let a = _$$f4('completed_pro_cart_flow');
   useEffect(() => {
@@ -14073,17 +14073,17 @@ let hj = registerModal(e => {
     children: jsx(ModalRootComponent, {
       manager: t,
       width: 'md',
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE2, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('desktop_version_support.update_recommended')
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           children: [jsx('p', {
             children: o
           }), jsx('br', {})]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: 'secondary',
               onClick: () => {

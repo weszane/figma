@@ -4,7 +4,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { hideModal } from "../905/156213";
 import { bE } from "../figma_app/375098";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { selectCurrentUser } from "../905/372672";
 import { S } from "../5885/332447";
 import { registerModal } from "../905/102752";
@@ -82,7 +82,7 @@ export let $$b0 = registerModal(function ({
         fontSize: 13,
         children: renderI18nText("pro_onboarding.get_started")
       }),
-      ctaTrackingDescriptor: _$$c.GET_STARTED,
+      ctaTrackingDescriptor: UpgradeAction.GET_STARTED,
       onClick: g
     },
     trackingContextName: "Pro Onboarding Team Upgrader Welcome Modal",

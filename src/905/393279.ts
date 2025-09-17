@@ -6,7 +6,7 @@ import o from "classnames";
 import { ButtonWhite, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { yO, TD } from "../905/331019";
 import { F5 } from "../figma_app/761870";
 import { P, D } from "../905/392438";
@@ -116,7 +116,7 @@ export class $$A0 extends PureComponent {
           className: this.props.joinLinkShown ? "token_form--buttonFtrV2--UWPO3" : r,
           trackingProperties: {
             numInvites: this.props.autocomplete.tokens.length,
-            trackingDescriptor: _$$c.SEND_INVITES
+            trackingDescriptor: UpgradeAction.SEND_INVITES
           },
           disabled: !i,
           type: "submit",

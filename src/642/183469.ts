@@ -49,7 +49,7 @@ import { vo } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
 import { S as _$$S2 } from "../figma_app/420927";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { $$in } from "../figma_app/76123";
@@ -64,7 +64,7 @@ import { uK } from "../figma_app/178273";
 import { jq } from "../figma_app/32128";
 import { w as _$$w } from "../642/994749";
 import ex from "../vendor/267721";
-import { A as _$$A2 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { I6, lp } from "../figma_app/688398";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { X as _$$X, C as _$$C } from "../642/70391";
@@ -185,13 +185,13 @@ function ep() {
       type: "button",
       onClick: complete,
       variantOverride: "primary",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5731482952599#suggest",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     targetKey: vx,
     title: jsx("p", {
@@ -213,7 +213,7 @@ function ej({
 }) {
   let a = useCurrentFileKey();
   let [o, d] = useState([]);
-  let [c] = _$$A2(o, 100, {
+  let [c] = useDebounce(o, 100, {
     equalityFn: ew
   });
   useEffect(() => {
@@ -254,7 +254,7 @@ function ek({
   requestThumbnailGeneration: s
 }) {
   let [i, l] = useAtomValueAndSetter(eS(e));
-  let [a] = _$$A2(t, 400);
+  let [a] = useDebounce(t, 400);
   useEffect(() => () => {
     l(a);
   }, [a, l]);

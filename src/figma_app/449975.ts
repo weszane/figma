@@ -4,7 +4,7 @@ import { ViewType } from "../figma_app/763686";
 import { H } from "../905/620380";
 import { I } from "../figma_app/583780";
 import { useLatestRef } from "../figma_app/922077";
-import { q0 } from "../figma_app/107215";
+import { setStarterKitHasBeenHidden } from "../figma_app/107215";
 import { N } from "../figma_app/659940";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { $K } from "../figma_app/247611";
@@ -142,7 +142,7 @@ export function $$w4(e, t, r) {
   let [i, a] = useState(!1);
   let s = I(1 === e);
   useEffect(() => {
-    (t || 0 !== s) && !i && (r(q0()), a(!0));
+    (t || 0 !== s) && !i && (r(setStarterKitHasBeenHidden()), a(!0));
   }, [e, s, i, r, t]);
 }
 export const jm = $$v0;

@@ -28,7 +28,7 @@ import { isSubscriptionActive } from "../figma_app/808294";
 import { getResourceActionText, isApplePublisherAccepted, isResourceBlocked } from "../figma_app/777551";
 import { mapVtToFileTypeEnum } from "../figma_app/427318";
 import { YW } from "../figma_app/350203";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { cs } from "../figma_app/740025";
 import { IE } from "../5430/231178";
@@ -232,7 +232,7 @@ export function $$Q0({
   }) => jsx(TrackingProvider, {
     name: "Duplicate button",
     properties: {
-      trackingDescriptor: _$$c.HUB_FILE_DUPLICATE_BUTTON,
+      trackingDescriptor: UpgradeAction.HUB_FILE_DUPLICATE_BUTTON,
       ...x
     },
     children: jsx("div", {

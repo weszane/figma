@@ -32,7 +32,7 @@ import { X as _$$X } from "../figma_app/668312";
 import { f as _$$f } from "../905/809171";
 import { A as _$$A2 } from "../figma_app/180822";
 import { k as _$$k2 } from "../figma_app/962894";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { ViewType, DesignGraphElements, LayoutTabType, SelfDesignType, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -690,7 +690,7 @@ function e9({
       transition: "transform 0.2s",
       transform: i ? "translateX(" + (s - r) / 2 + "px)" : "translateX(0px)"
     },
-    children: jsx(_$$J, {
+    children: jsx(setupThemeContext, {
       brand: t,
       children: e
     })

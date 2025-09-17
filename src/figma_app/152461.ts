@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { ignoreUndefinedEqual } from "../905/382883";
-import { b, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { H_ } from "../905/963340";
 import { J } from "../905/125993";
@@ -15,12 +15,12 @@ export function $$g1() {
   let {
     getTriggerProps,
     manager
-  } = b();
+  } = setupMenu();
   let {
     updateDefaultCodegenSettings,
     isSetToDefault
   } = $$f0();
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       "aria-label": getI18nString("dev_handoff.code.settings.options"),
@@ -30,7 +30,7 @@ export function $$g1() {
       },
       ...getTriggerProps(),
       children: jsx(J, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: jsx(H_, {
         onChange: updateDefaultCodegenSettings,
         checked: isSetToDefault,

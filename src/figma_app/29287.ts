@@ -11,7 +11,7 @@ import { getPermissionsAndView } from "../905/766303";
 import { dh } from "../figma_app/186343";
 import { openFileKeyAtom, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { ol, Me } from "../figma_app/598018";
+import { getCurrentTeam, currentTeamAtom } from "../figma_app/598018";
 import { ai } from "../figma_app/915202";
 import { S, E as _$$E } from "../figma_app/999099";
 import { V } from "../figma_app/761984";
@@ -21,7 +21,7 @@ export function $$b3() {
   let r = debugState.getState();
   let l = getPermissionsAndView(r);
   let d = dh();
-  let c = ol() ?? void 0;
+  let c = getCurrentTeam() ?? void 0;
   return useCallback(() => {
     e && I({
       figjamData: {
@@ -44,7 +44,7 @@ export function $$T0({
   source: n
 }) {
   let i = atomStoreManager.get(openFileKeyAtom);
-  let a = atomStoreManager.get(Me);
+  let a = atomStoreManager.get(currentTeamAtom);
   let l = debugState.getState();
   I({
     figjamData: {
@@ -101,7 +101,7 @@ function A({
   })) return !1;
   if (!e) {
     let e = atomStoreManager.get(openFileAtom);
-    let t = !atomStoreManager.get(Me)?.starter_team && e?.viewerExportRestricted;
+    let t = !atomStoreManager.get(currentTeamAtom)?.starter_team && e?.viewerExportRestricted;
     if (e && !e.canEditCanvas && t) return !1;
   }
   return !0;

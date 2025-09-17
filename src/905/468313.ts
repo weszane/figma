@@ -11,7 +11,7 @@ import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { X as _$$X } from "../905/190511";
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
@@ -235,7 +235,7 @@ function q({
     fieldSchema
   } = i;
   if (null == fieldSchema) {
-    sD("Expected field schema to exist.", {
+    logCmsError("Expected field schema to exist.", {
       collectionId: e,
       fieldSchemaId: t
     });

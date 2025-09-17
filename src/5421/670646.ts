@@ -7,7 +7,7 @@ import { isValidSessionLocalID } from "../905/871411";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, withTracking } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
@@ -1021,7 +1021,7 @@ function e9({
   let a = 0 === r && !e;
   let l = 0 !== r && !t;
   let s = !n;
-  let d = useMemo(() => a ? _$$c.CREATING_A_CONNECTION : l ? _$$c.REMOVING_A_CONNECTION : s ? _$$c.RUNNING_YOUR_PROTOTYPE : null, [a, l, s]);
+  let d = useMemo(() => a ? UpgradeAction.CREATING_A_CONNECTION : l ? UpgradeAction.REMOVING_A_CONNECTION : s ? UpgradeAction.RUNNING_YOUR_PROTOTYPE : null, [a, l, s]);
   return d ? jsx(TrackingProvider, {
     name: "Prototype Onboarding Hint Panel V1",
     properties: {

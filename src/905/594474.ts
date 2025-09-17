@@ -84,7 +84,7 @@ import { A as _$$A1 } from "../905/144978";
 import { isResourceApprovedPublic, isResourcePendingPublishing } from "../figma_app/777551";
 import { r as _$$r3 } from "../905/783627";
 import { isNotNullish } from "../figma_app/95419";
-import { b as _$$b4, bL, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { J as _$$J4 } from "../905/125993";
 import { NU } from "../figma_app/204891";
 import { J as _$$J5 } from "../905/896954";
@@ -1090,28 +1090,28 @@ function tp({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(ButtonPrimitive, {
       className: "playground_file_select--playgroundFileOverflowMenuButton--IQqZM",
       ref: a,
       ...getTriggerProps(),
       children: jsx(_$$J4, {})
-    }), jsxs(mc, {
-      children: [jsx(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsx(MenuItemComp, {
         onClick: () => {
           let e = r?.url;
           e && customHistory.redirect(e, "_blank");
         },
         children: getI18nString("community.publishing.playground_file.dropdown.open_file")
-      }), t ? jsx(q7, {
+      }), t ? jsx(MenuItemComp, {
         onClick: t,
         children: getI18nString("community.publishing.playground_file.dropdown.revert_to_previous_version")
-      }) : void 0, i ? jsx(q7, {
+      }) : void 0, i ? jsx(MenuItemComp, {
         onClick: i,
         children: getI18nString("community.publishing.playground_file.dropdown.update_to_latest_version")
-      }) : void 0, jsx(q7, {
+      }) : void 0, jsx(MenuItemComp, {
         onClick: e,
         children: getI18nString("community.publishing.playground_file.dropdown.remove")
       })]

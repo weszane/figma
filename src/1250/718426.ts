@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ButtonSecondary } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackedDiv } from "../figma_app/831799";
 import { STANDARD_LIMIT } from "../figma_app/345997";
 import { Ro } from "../figma_app/805373";
@@ -42,7 +42,7 @@ export function $$m0({
         onClick: () => n(t),
         trackingProperties: {
           teamId: t.id,
-          trackingDescriptor: _$$c.UPGRADE
+          trackingDescriptor: UpgradeAction.UPGRADE
         },
         innerText: "Upgrade",
         children: [jsxs("div", {

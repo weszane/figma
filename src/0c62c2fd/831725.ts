@@ -9,7 +9,7 @@ import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";
 import { selectViewAction } from "../905/929976";
 import { trackTeamEvent } from "../figma_app/314264";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { Ro } from "../figma_app/805373";
 import { rP } from "../figma_app/697906";
@@ -17,7 +17,7 @@ function x(e) {
   let [t, r] = useState(!1);
   let i = useDispatch();
   let n = useSelector(e => e.selectedView);
-  let o = FC();
+  let o = selectPermissionsState();
   let x = e.team;
   let b = () => {
     trackTeamEvent("file_browser_team_click", x.id, o, {

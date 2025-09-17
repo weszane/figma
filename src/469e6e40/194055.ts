@@ -36,11 +36,11 @@ import { SvgComponent } from "../905/714743";
 import { lQ } from "../905/934246";
 import { z as _$$z2 } from "../905/239603";
 import { c$, ms } from "../figma_app/236327";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType } from "../figma_app/191312";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { Ro } from "../figma_app/805373";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { A as _$$A4 } from "../6828/154709";
 import { h1 } from "../905/986103";
 import { getUserId, selectCurrentUser } from "../905/372672";
@@ -484,12 +484,12 @@ function ea({
   let o = jsx(SecureLink, {
     onClick: () => {
       s(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: null,
-          resource: "widget" === a ? Bi.WIDGET_ANALYTICS : Bi.PLUGIN_ANALYTICS,
-          currentPlan: _$$F2.Plan.ORG,
-          upsellPlan: _$$F2.Plan.ENTERPRISE,
+          resource: "widget" === a ? FeatureFlag.WIDGET_ANALYTICS : FeatureFlag.PLUGIN_ANALYTICS,
+          currentPlan: consumptionPaywallUtils.Plan.ORG,
+          upsellPlan: consumptionPaywallUtils.Plan.ENTERPRISE,
           editorType: null
         }
       }));

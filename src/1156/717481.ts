@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/263184";
 import { _ as _$$_2 } from "../905/410717";
@@ -45,7 +45,7 @@ function L({
       })
     }), jsx("div", {
       className: "x78zum5 xdt5ytf x1jnr06f",
-      children: jsx(_$$p, {
+      children: jsx(InputComponent, {
         type: "text",
         id: i,
         value: e,
@@ -94,7 +94,7 @@ function z({
       })]
     }), jsxs("div", {
       className: "x1n2onr6 x1rg5ohu",
-      children: [jsx(_$$p, {
+      children: [jsx(InputComponent, {
         type: g ? "text" : "password",
         id: a,
         value: e,
@@ -324,11 +324,11 @@ let $$O0 = registerModal(function (e) {
     width: 386,
     children: jsxs(ModalFormContents, {
       onSubmit: B,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("figmake.settings.create_project_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         scrolling: "none",
         children: jsxs("div", {
           className: "x1ib1h6n x78zum5 xdt5ytf x1c1vhfx",
@@ -346,8 +346,8 @@ let $$O0 = registerModal(function (e) {
             disabled: C
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
           children: [C && jsx("p", {
             ...Ay.props(F.textBodyMediumSecondary),

@@ -3,12 +3,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
@@ -51,20 +51,20 @@ export let $$h0 = registerModal(function (e) {
         planId: e.plan.key.parentId,
         entryPoint: e.entryPoint
       },
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.title")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: t
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: b,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.cancel")
             }), jsx($z, {
@@ -74,7 +74,7 @@ export let $$h0 = registerModal(function (e) {
                 e.onConfirm();
               },
               trackingProperties: {
-                trackingDescriptor: _$$c.APPROVE_ALL
+                trackingDescriptor: UpgradeAction.APPROVE_ALL
               },
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.approve_number_of_requests", {
                 numRequests: e.numRequestsToApprove

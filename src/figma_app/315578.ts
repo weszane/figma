@@ -14,7 +14,7 @@ import { Fj } from "../figma_app/793429";
 import { selectViewAction } from "../905/929976";
 import { hideModalHandler, showModal } from "../905/156213";
 import { isVsCodeEnvironment } from "../905/858738";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
@@ -150,7 +150,7 @@ export function $$L1({
   } = function (e, t, r) {
     let n = useDispatch();
     let s = useSelector(e => e.modalShown);
-    let o = _6();
+    let o = getSelectedView();
     let l = !!s && s.type === VariableDetailModal;
     let d = l && s.data.variableId === t && s.data.rowRef.current === (r?.current ?? e?.current) || !!o.variableIdForDetailsPanel && o.variableIdForDetailsPanel === t;
     return {
@@ -222,7 +222,7 @@ export function $$L1({
   } = function (e, t, r, n, s) {
     let o = useDispatch();
     let l = useSelector(e => e.modalShown);
-    let d = _6();
+    let d = getSelectedView();
     let u = !!l && l.type === StyleDetailModal;
     let p = u && l.data?.rowRef && l.data.rowRef.current === (s?.current ?? e?.current) || d.styleForDetailsPanel?.styleId === t;
     let {

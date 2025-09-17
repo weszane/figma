@@ -12,7 +12,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { pI, nx, _E } from "../figma_app/443991";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { A as _$$A2 } from "../905/639174";
 import { uW } from "../905/187165";
 import { hv, Pf, ck } from "../905/952832";
@@ -257,7 +257,7 @@ class w extends Component {
                 className: pL,
                 ref: this.buttonRef,
                 trackingProperties: {
-                  trackingDescriptor: _$$c.SAVE_PROFILE_PICTURE
+                  trackingDescriptor: UpgradeAction.SAVE_PROFILE_PICTURE
                 },
                 children: renderI18nText("avatar_editor.save_image")
               })]

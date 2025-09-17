@@ -19,7 +19,7 @@ import { dh, $P } from "../figma_app/186343";
 import { Ht } from "../figma_app/701001";
 import { Fy } from "../figma_app/623300";
 import { selectCurrentFile } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { Jc, c0 } from "../0c62c2fd/239014";
@@ -258,7 +258,7 @@ export function $$L1({
   let a = _$$E();
   let s = trackFileEventWithStore();
   let l = useDispatch();
-  let d = _6();
+  let d = getSelectedView();
   let _ = dh();
   let u = useSelector(e => e.versionHistory);
   return useCallback(r => $P(r, _, u, l, Fy(e, r) === DataLoadStatus.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
@@ -272,7 +272,7 @@ export function $$F0({
   let s = _$$E();
   let l = trackFileEventWithStore();
   let d = useDispatch();
-  let _ = _6();
+  let _ = getSelectedView();
   let u = dh(n);
   let m = useSelector(e => e.versionHistory);
   return useCallback(async r => {

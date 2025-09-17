@@ -6,7 +6,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { useCurrentUserOrgId } from "../905/845253";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { Dd } from "../905/519092";
 import { n as _$$n } from "../905/316557";
@@ -41,7 +41,7 @@ let A = registerModal(function ({
   onCancel: i
 }) {
   let a = s1();
-  let l = cD();
+  let l = getCurrentTeamId();
   let p = useCurrentUserOrgId();
   let [f, _] = useState(a);
   let A = useCallback(() => {

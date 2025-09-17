@@ -35,7 +35,7 @@ import { Lv, ps, yz, i5, uH, V7, z7, ZY, Xv, r1, OL, L8, Bk, MI, YC, dC, lJ, Zm,
 import { E as _$$E2 } from "../4452/428395";
 import { xo, OW } from "../figma_app/425283";
 import { isMobileUA } from "../figma_app/778880";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E3 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -118,7 +118,7 @@ function Z(e) {
       label: renderI18nText("general.done"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     ...c[0]
   }) : jsx(Fragment, {

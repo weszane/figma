@@ -1,37 +1,109 @@
-import { useSelector } from "react-redux";
-import { atom } from "../figma_app/27355";
-import a from "../vendor/128080";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-var s = a;
-let l = e => e.selectedView;
-let d = e => e.selectedView.view;
-export function $$c4() {
-  return useSelector(l);
+import { isEqual } from 'lodash-es'
+import { useSelector } from 'react-redux'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+
+import { atom } from '../figma_app/27355'
+
+/**
+ * Selector for the selectedView property from Redux state.
+ * @param state - The Redux state object.
+ * @returns The selectedView object.
+ * (Original: l)
+ */
+const selectSelectedView = (state: any) => state.selectedView
+
+/**
+ * Selector for the view property inside selectedView.
+ * @param state - The Redux state object.
+ * @returns The view string.
+ * (Original: d)
+ */
+const selectSelectedViewType = (state: any) => state.selectedView.view
+
+/**
+ * Returns the selectedView from Redux state.
+ * @returns The selectedView object.
+ * (Original: $$c4)
+ */
+export function getSelectedView() {
+  return useSelector(selectSelectedView)
 }
-export function $$u6() {
-  return useSelector(l, s());
+
+/**
+ * Returns the selectedView from Redux state, using deep equality check.
+ * @returns The selectedView object.
+ * (Original: $$u6)
+ */
+export function getSelectedViewDeepEqual() {
+  return useSelector(selectSelectedView, isEqual)
 }
-export function $$p5() {
-  let e = $$c4();
-  if ("prototype" !== e.view) throw Error(`Unexpected non-prototype view: ${e.view}`);
-  return e;
+
+/**
+ * Returns the selectedView if its view is 'prototype', otherwise throws an error.
+ * @returns The selectedView object.
+ * @throws Error if view is not 'prototype'.
+ * (Original: $$p5)
+ */
+export function getPrototypeSelectedView() {
+  const selectedView = getSelectedView()
+  if (selectedView.view !== 'prototype')
+    throw new Error(`Unexpected non-prototype view: ${selectedView.view}`)
+  return selectedView
 }
-let $$_1 = createReduxSubscriptionAtomWithState(l);
-let $$h3 = createReduxSubscriptionAtomWithState(e => e.modalShown);
-let $$m7 = atom(e => e($$h3)?.type || null);
-let $$g0 = createReduxSubscriptionAtomWithState(e => e.notifications?.[0]?.type ?? null);
-export function $$f8() {
-  return useSelector(d);
+
+/**
+ * Atom for subscribing to selectedView changes.
+ * (Original: $$_1)
+ */
+const selectedViewAtom = createReduxSubscriptionAtomWithState(selectSelectedView)
+
+/**
+ * Atom for subscribing to modalShown changes.
+ * (Original: $$h3)
+ */
+const modalShownAtom = createReduxSubscriptionAtomWithState(state => state.modalShown)
+
+/**
+ * Atom for the type of the currently shown modal.
+ * (Original: $$m7)
+ */
+const modalTypeAtom = atom(get => get(modalShownAtom)?.type || null)
+
+/**
+ * Atom for the type of the first notification.
+ * (Original: $$g0)
+ */
+const notificationTypeAtom = createReduxSubscriptionAtomWithState(state => state.notifications?.[0]?.type ?? null)
+
+/**
+ * Returns the selectedView.view value from Redux state.
+ * @returns The view string.
+ * (Original: $$f8)
+ */
+export function getSelectedViewType() {
+  return useSelector(selectSelectedViewType)
 }
-export function $$E2() {
-  return useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.fileKey ? e.selectedView.fileKey : null);
+
+/**
+ * Returns the fileKey if the selectedView is 'fullscreen', otherwise null.
+ * @returns The fileKey string or null.
+ * (Original: $$E2)
+ */
+export function getFullscreenFileKey() {
+  return useSelector<{ selectedView: { view: string, fileKey: string | null } }>(state =>
+    state.selectedView.view === 'fullscreen' && state.selectedView.fileKey
+      ? state.selectedView.fileKey
+      : null,
+  )
 }
-export const AN = $$g0;
-export const OC = $$_1;
-export const Td = $$E2;
-export const Uc = $$h3;
-export const _6 = $$c4;
-export const mr = $$p5;
-export const tc = $$u6;
-export const yF = $$m7;
-export const z3 = $$f8;
+
+// Exported variables with refactored names
+export const AN = notificationTypeAtom
+export const OC = selectedViewAtom
+export const Td = getFullscreenFileKey
+export const Uc = modalShownAtom
+export const _6 = getSelectedView
+export const mr = getPrototypeSelectedView
+export const tc = getSelectedViewDeepEqual
+export const yF = modalTypeAtom
+export const z3 = getSelectedViewType

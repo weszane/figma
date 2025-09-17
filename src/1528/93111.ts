@@ -8,7 +8,7 @@ import { isNullish } from "../figma_app/95419";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { gL } from "../figma_app/618433";
+import { getCollectionViewStatus } from "../figma_app/618433";
 import { _j } from "../figma_app/843119";
 import { Mw, f4 } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
@@ -43,7 +43,7 @@ export function $$b0() {
   let x = f();
   let {
     data
-  } = gL(t || "");
+  } = getCollectionViewStatus(t || "");
   let C = data?.fieldSchemas ?? [];
   let S = OU(InsertSourceType.CMS_CONNECT_MODE);
   !function () {
@@ -58,7 +58,7 @@ export function $$b0() {
     let N = Mw();
     let {
       data
-    } = gL(i);
+    } = getCollectionViewStatus(i);
     let {
       name
     } = data ?? {};
@@ -398,7 +398,7 @@ export function $$b0() {
         for (let e of s) if ("RESPONSIVE_SET" === e.type && "/" !== e.name) permissionScopeHandler.user("dakota-set-collection-binding", () => {
           e.setDakotaSelectorCollection(t, InsertSourceType.CMS_CONNECT_MODE);
           o = !0;
-        }); else {
+        });else {
           S(t);
           o = !0;
           break;

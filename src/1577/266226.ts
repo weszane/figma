@@ -17,7 +17,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { z5 } from "../905/713722";
 import { getUserId } from "../905/372672";
 import { ColorPalettesForTeam } from "../figma_app/43951";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { fJ } from "../figma_app/616107";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
@@ -53,7 +53,7 @@ let M = registerModal(function ({
   paletteUuid: t
 }) {
   let i = useDispatch();
-  let o = cD();
+  let o = getCurrentTeamId();
   let r = useSelector(e => e.teams[o]?.name);
   r || console.error("No team name found for team id", o);
   return jsx(ConfirmationModal2, {
@@ -188,7 +188,7 @@ export let $$B0 = registerModal(function ({
   ...c
 }) {
   let d = getUserId();
-  let u = cD();
+  let u = getCurrentTeamId();
   let _ = useModalManager(c);
   let h = useDispatch();
   let [y] = setupResourceAtomHandler(ColorPalettesForTeam({

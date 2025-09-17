@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getI18nString } from "../905/303541";
@@ -42,12 +42,12 @@ export let $$f0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("sites.panel.make.attach_design")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(s3, {
           name: "chatAssetSearch",

@@ -9,7 +9,7 @@ import { Jo, If } from "../figma_app/565242";
 import { _j } from "../figma_app/843119";
 import { oj, Hb } from "../figma_app/986594";
 import { getSingletonSceneGraph } from "../905/700578";
-import { gL } from "../figma_app/618433";
+import { getCollectionViewStatus } from "../figma_app/618433";
 import { dx } from "../figma_app/649254";
 import { U } from "../905/492359";
 import { wv } from "../figma_app/328825";
@@ -30,7 +30,7 @@ export function $$b0({
     let e = getSingletonSceneGraph();
     let t = oj(e.getDirectlySelectedNodes());
     let i = t[0]?.getNearestDakotaCollectionId();
-    let n = gL(i ?? "");
+    let n = getCollectionViewStatus(i ?? "");
     let a = t[0]?.getNearestDakotaCollectionItemId();
     let s = dx({
       collectionId: i,

@@ -32,18 +32,18 @@ import { r as _$$r } from "../905/210851";
 import { resolveTeamId } from "../905/515860";
 import { eE } from "../figma_app/952446";
 import { selectCurrentFile, useCurrentFileKey, selectOpenFile } from "../figma_app/516028";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { B as _$$B } from "../905/524020";
 import { d as _$$d } from "../905/647058";
 import { FFileType } from "../figma_app/191312";
 import { getPermissionsState } from "../figma_app/642025";
 import { p9 } from "../figma_app/803787";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { f6, ai } from "../figma_app/915202";
 import { Yh } from "../figma_app/357047";
 import { C as _$$C } from "../figma_app/444297";
 import { getSelectedEditorType, getCurrentFileType } from "../figma_app/976749";
-import { $ as _$$$ } from "../905/47975";
+import { checkFileCmsCollections } from "../905/47975";
 import { c4, fS, TJ } from "../figma_app/805925";
 export function $$J1({
   debugMenuItems: e
@@ -85,11 +85,11 @@ export function $$Z2() {
     let t = TY();
     let r = _$$d();
     let a = selectCurrentFile();
-    let s = FC();
+    let s = selectPermissionsState();
     let o = getSelectedEditorType();
     let l = useSelector(e => e.mirror.appModel.topLevelMode);
     let d = useSelector(e => e.mirror.appModel.multiplayerSessionState);
-    let c = cD() || null;
+    let c = getCurrentTeamId() || null;
     let u = useMemo(() => gW(a, s, o, e, l, d, t, c, r, null), [a, s, o, e, l, d, t, c, r]);
     let p = $n();
     return getFeatureFlags().branching_update_status_lg ? p : u;
@@ -304,7 +304,7 @@ function Q({
     let {
       hasCollection,
       status
-    } = _$$$({
+    } = checkFileCmsCollections({
       fileKey: e ?? ""
     });
     return "loaded" === status && hasCollection;

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { B } from "../905/950875";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -70,14 +70,14 @@ export let $$A0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: A,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("resource_connection.confirm_modal.connect_with_host_plan", {
               hostPlanName: R.name
             })
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsx(oW, {
             src: buildUploadUrl("79f17ef7df0c5ed50af97e6c5e98651536c94352"),

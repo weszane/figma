@@ -54,7 +54,7 @@ import { H8 } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { V as _$$V2 } from '../905/604512';
 import { PerfTimer } from '../905/609396';
-import { J as _$$J2 } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { ButtonPrimitive } from '../905/632989';
 import { DP } from '../905/640017';
 import { oW } from '../905/675859';
@@ -150,7 +150,7 @@ import { bq, Gn, hY, L_, qt } from '../figma_app/349969';
 import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
 import { _$, S7 } from '../figma_app/379850';
 import { B4 } from '../figma_app/385215';
-import { _6 } from '../figma_app/386952';
+import { getSelectedView } from '../figma_app/386952';
 import { c as _$$c2 } from '../figma_app/391827';
 import { Hr, Oi } from '../figma_app/394327';
 import { bi } from '../figma_app/425489';
@@ -186,7 +186,7 @@ import { nd, sD } from '../figma_app/826998';
 import { TrackingProvider } from '../figma_app/831799';
 import { dX } from '../figma_app/837840';
 import { u as _$$u, BQ, Kd, yp } from '../figma_app/852050';
-import { b as _$$b, bL, mc, q7 } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from '../figma_app/860955';
 import { TR } from '../figma_app/867292';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, SKIP_RECORDING, useHandleMouseEvent } from '../figma_app/878298';
@@ -553,7 +553,7 @@ function ea() {
   let i = Dl(t);
   let [n, a] = Vc('componentBrowserOnboardingSelection', null);
   let s = useOpenFileLibraryKey();
-  let o = _6();
+  let o = getSelectedView();
   return i && s ? n ? jsx(TrackingProvider, {
     name: 'Component Browser',
     children: jsx('div', {
@@ -1280,7 +1280,7 @@ function th({
   let s = useSelector(e => e.multiplayer);
   let o = selectCurrentFile();
   let l = selectCurrentUser();
-  let d = _6();
+  let d = getSelectedView();
   let c = useDispatch();
   let u = useSelector(e => 'devModeVariablesTableBackFocusId' in e.selectedView ? e.selectedView.devModeVariablesTableBackFocusId : void 0);
   let p = Xr(_$$$);
@@ -1723,7 +1723,7 @@ function iQ() {
       }), iR.start());
     }, [e, t]);
   }();
-  let c = _6();
+  let c = getSelectedView();
   let u = useDispatch();
   _$$O3();
   let p = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusForFile);
@@ -2106,7 +2106,7 @@ function i0({
   value: e,
   onChange: t
 }) {
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: 'dev-handoff',
     children: jsxs('div', {
       className: 'overview--searchBar--NX8cb',
@@ -2186,7 +2186,7 @@ function i2({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   return jsxs('div', {
     className: 'overview--overviewNodeCardHeader--C-KTf',
     children: [jsxs(LinkPrimitive, {
@@ -2223,17 +2223,17 @@ function i2({
       })]
     }), jsxs('div', {
       className: 'overview--overviewNodeCardHeaderRight--wRNMN',
-      children: [jsxs(bL, {
+      children: [jsxs(MenuRootComp, {
         manager,
         children: [jsx(IconButton, {
           ...getTriggerProps(),
           'aria-label': getI18nString('dev_handoff.workflows.more_actions_tooltip'),
           'children': jsx(_$$J, {})
-        }), jsxs(mc, {
-          children: [jsx(q7, {
+        }), jsxs(MenuContainerComp, {
+          children: [jsx(MenuItemComp, {
             onClick: () => b('Dev Mode Overview Card Go To Canvas Clicked', nodeId, pageId),
             children: renderI18nText('dev_handoff.workflows.overview.show_on_page_action')
-          }), jsx(q7, {
+          }), jsx(MenuItemComp, {
             onClick: () => y?.(),
             children: renderI18nText('dev_handoff.status.copy_focus_link')
           })]
@@ -2409,7 +2409,7 @@ function i4({
       },
       'alt': getI18nString('dev_handoff.nodes_panel.thumbnail_aria_label'),
       'aria-label': getI18nString('dev_handoff.nodes_panel.thumbnail_aria_label')
-    }), jsx(_$$J2, {
+    }), jsx(setupThemeContext, {
       mode: 'dark',
       children: jsx('div', {
         'className': 'overview--previewExpandIcon--nqhxn',
@@ -2454,7 +2454,7 @@ function i7({
   });
 }
 function i8() {
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: 'dev-handoff',
     children: jsxs(LinkPrimitive, {
       href: 'https://form.asana.com/?k=dyYqSpHdZqetESFQzNb8hQ&d=10497086658021',

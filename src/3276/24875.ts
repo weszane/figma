@@ -12,7 +12,7 @@ import { Xt } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
-import { yF } from "../figma_app/386952";
+import { modalTypeAtom } from "../figma_app/386952";
 import { ViewerRestrictedDraftAccessLog } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { q as _$$q } from "../905/202542";
@@ -77,7 +77,7 @@ export function $$N0({
   } = wH({
     entryPoint: tc.IN_EDITOR_RESTRICTED_DRAFT
   });
-  let p = useAtomWithSubscription(yF);
+  let p = useAtomWithSubscription(modalTypeAtom);
   if (p && E.includes(p) || !n || "loaded" !== l.status) return null;
   let h = getResourceDataOrFallback(l.data.viewerRestrictedDraftAccessLog);
   if (!h || a || !e.parentOrgId && !e.teamId || !l.data.file?.isDraftFile) return null;

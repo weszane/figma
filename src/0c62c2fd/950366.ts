@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { WX } from "../figma_app/515363";
 import { Q } from "../1250/227834";
-import { b as _$$b, bL } from "../figma_app/860955";
+import { setupMenu, MenuRootComp } from "../figma_app/860955";
 import { f as _$$f } from "../figma_app/859253";
 import { forwardRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
@@ -75,9 +75,9 @@ function x({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   _$$n(manager);
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(f, {
       ...getTriggerProps(),

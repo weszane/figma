@@ -6,7 +6,7 @@ import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
@@ -33,7 +33,7 @@ import { DashboardSections } from "../905/548208";
 import { e0 } from "../905/696396";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
-import { wv } from "../figma_app/860955";
+import { MenuSeparator } from "../figma_app/860955";
 import { p as _$$p2 } from "../469e6e40/348454";
 import { O as _$$O2 } from "../905/142086";
 import { Fh } from "../905/191601";
@@ -149,7 +149,7 @@ function V(e) {
         onClick: _,
         children: getI18nString("abandoned_drafts_table.move")
       })]
-    }), jsx(wv, {}), jsx(_$$p2, {
+    }), jsx(MenuSeparator, {}), jsx(_$$p2, {
       onClick: u,
       children: getI18nString("project_menu.permanently_delete")
     })]
@@ -381,7 +381,7 @@ function ee(e) {
 }
 export function $$et0(e) {
   let t = useDispatch();
-  let a = _6();
+  let a = getSelectedView();
   let g = useSelector(e => getPermissionsStateMemoized(e));
   let h = useSelector(e => e.teams);
   let x = useTeamPlanUser();

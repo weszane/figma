@@ -1,4 +1,3 @@
-import type { Fn } from '../../../types/global'
 import { ResourceStatus } from '../905/957591'
 
 /**

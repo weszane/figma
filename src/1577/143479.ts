@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuItemComp, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { PopoverOutlet } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
@@ -38,7 +38,7 @@ export function $$R1(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let B = selectCurrentUser();
   let S = useSelector(e => F ? e.plans : B ? e.authedUsers.byId[B.id]?.plans : null);
   let O = useSelector(selectTeams);
@@ -94,7 +94,7 @@ export function $$R1(e) {
     e.stopPropagation();
     onPlanFilterUpdate(t);
   };
-  let $ = H.map(e => jsxs(q7, {
+  let $ = H.map(e => jsxs(MenuItemComp, {
     onClick: t => {
       Q(t, e);
     },
@@ -112,7 +112,7 @@ export function $$R1(e) {
     className: N,
     ref: D,
     children: [jsx(PopoverOutlet, {
-      children: jsxs(bL, {
+      children: jsxs(MenuRootComp, {
         manager,
         children: [jsxs(ButtonPrimitive, {
           "aria-label": getI18nString("user_notifications.notif_filter_label", {
@@ -128,7 +128,7 @@ export function $$R1(e) {
             className: "notifs_plan_filter--chevronIcon--0Rqnp"
           })]
         }), jsx(UI3ConditionalWrapper, {
-          children: jsx(mc, {
+          children: jsx(MenuContainerComp, {
             children: $
           })
         })]

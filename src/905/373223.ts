@@ -4,7 +4,7 @@ import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { e5 } from "../figma_app/297957";
 import { getUserId } from "../905/372672";
 import { f as _$$f } from "../905/940356";
-import { Ct } from "../figma_app/598018";
+import { hasMultipleOwners } from "../figma_app/598018";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { qe, zN } from "../figma_app/416935";
@@ -17,13 +17,13 @@ import { S as _$$S } from "../905/339549";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { UpsellModalType } from "../905/165519";
-import { Pj } from "../905/652992";
+import { TeamCreationSpeedBump } from "../905/652992";
 import { registerModal } from "../905/102752";
 import w from "classnames";
 import { ModalContainer } from "../figma_app/918700";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { A as _$$A } from "../4711/867985";
 var C = w;
 function T(e) {
@@ -134,11 +134,11 @@ let D = registerModal(function (e) {
   let p = () => {
     l();
     t(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
-        resource: Pj.TEAM_CREATION_SPEED_BUMP,
-        currentPlan: F.Plan.STARTER,
-        upsellPlan: F.Plan.PRO,
+        resource: TeamCreationSpeedBump.TEAM_CREATION_SPEED_BUMP,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: e.editorType,
         upsellSource: UpsellModalType.TEAM_CREATION_SPEED_BUMP
       }
@@ -241,7 +241,7 @@ export function $$L0() {
       ignoreCurrentPlan: !0
     }));
   };
-  return e && !i && Ct(e, Object.values(c), u) && !e5({
+  return e && !i && hasMultipleOwners(e, Object.values(c), u) && !e5({
     userId: e,
     teams: Object.values(c),
     rolesByTeamId: u

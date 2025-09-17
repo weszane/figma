@@ -6,13 +6,13 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { UserAvatarView } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { rK } from "../figma_app/72338";
 import { Yr } from "../figma_app/325912";
 import { lA, TT, YF } from "../figma_app/952035";
 export function $$m9() {
   let e = useCurrentUserOrgId();
-  let t = ol();
+  let t = getCurrentTeam();
   let r = useCurrentFileKey() || "";
   return () => {
     let n = Yr;

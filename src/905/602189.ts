@@ -19,7 +19,7 @@ import { TextWithTruncation } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
 import { U2 } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
@@ -58,7 +58,7 @@ export function $$M1({
       newTab: !0,
       href: s,
       trackingProperties: {
-        trackingDescriptor: _$$c.LEARN_MORE_ABOUT_SEATS
+        trackingDescriptor: UpgradeAction.LEARN_MORE_ABOUT_SEATS
       },
       children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more_about_seats")
     })]

@@ -71,7 +71,7 @@ import { U_, vG, zq, VR } from "../figma_app/938628";
 import { If, _i } from "../figma_app/319440";
 import { x as _$$x } from "../573/916234";
 import { B as _$$B2 } from "../7a72fc59/288229";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
@@ -395,7 +395,7 @@ function eD(e) {
     type: "button",
     label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c2.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   return jsx(rq, {
     arrowPadding: 4,

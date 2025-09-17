@@ -55,7 +55,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app
 import { parsePxNumber } from "../figma_app/783094";
 import { hO } from "../figma_app/545293";
 import { showModalHandler, hideModalHandler } from "../905/156213";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { z5, L8, q4 } from "../905/124270";
 import { K as _$$K } from "../905/328468";
 import { Y as _$$Y } from "../905/720957";
@@ -818,7 +818,7 @@ export function $$e53({
 }) {
   let r = useDispatch();
   let s = useSelector(e => e.modalShown);
-  let o = _6();
+  let o = getSelectedView();
   let l = function () {
     let e = useDispatch();
     let t = UP();

@@ -12,7 +12,7 @@ import { AuthFlowStep, AuthField } from "../905/862321";
 import { sT } from "../905/694658";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useTracking } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { createNoOpValidator } from "../figma_app/181241";
@@ -126,7 +126,7 @@ export function $$w0(e) {
     w(`${e}@${t}`);
     i(null);
     trackEvent(CTA_CLICKED, {
-      trackingDescriptor: _$$c.USE_SUGGESTED_EMAIL,
+      trackingDescriptor: UpgradeAction.USE_SUGGESTED_EMAIL,
       previousDomain: e,
       newDomain: t
     });

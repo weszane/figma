@@ -6,7 +6,7 @@ import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { nB, r1, wi, jk } from "../figma_app/272243";
+import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { ButtonPrimitive } from "../905/632989";
 import m from "classnames";
 import g from "lodash-es/mapValues";
@@ -33,7 +33,7 @@ import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
 import { zz } from "../figma_app/80683";
 import { selectViewAction } from "../905/929976";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz } from "../figma_app/84966";
@@ -187,7 +187,7 @@ function ea(e) {
           O(!0);
           Q(y);
         },
-        children: [jsxs(nB, {
+        children: [jsxs(DialogBody, {
           padding: {
             top: 40,
             left: 24,
@@ -210,7 +210,7 @@ function ea(e) {
                   imgUrl: i.imgUrl
                 }
               })
-            }), jsx(r1, {
+            }), jsx(DialogHiddenTitle, {
               children: en
             }), jsx("div", {
               className: _$$s.textHeadingMedium.$,
@@ -309,20 +309,20 @@ function ea(e) {
               children: ei
             })
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               children: getI18nString("general.cancel")
             }), jsx($z, {
               type: "submit",
               disabled: C,
               trackingProperties: {
-                trackingDescriptor: _$$c.CONFIRM_RENEWAL
+                trackingDescriptor: UpgradeAction.CONFIRM_RENEWAL
               },
               children: getI18nString("billing_modals.renewal.cta.confirm_seat_renewal")
             })]

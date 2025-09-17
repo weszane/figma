@@ -42,7 +42,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app
 import { PY, go, Px, Bl, kO, HO, aN } from "../figma_app/57551";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Z as _$$Z } from "../905/104740";
 import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { INSPECT_PANEL } from "../figma_app/80938";
@@ -400,7 +400,7 @@ function ef(e) {
     onClose: e.onClose,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.next_button"),
-      ctaTrackingDescriptor: _$$c.NEXT,
+      ctaTrackingDescriptor: UpgradeAction.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
       dataTestId: es,
@@ -409,7 +409,7 @@ function ef(e) {
     },
     secondaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.back_button"),
-      ctaTrackingDescriptor: _$$c.BACK,
+      ctaTrackingDescriptor: UpgradeAction.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick,
       dataTestId: eu,
@@ -471,7 +471,7 @@ function e_(e) {
     pointToTopEdge: !0,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.done_button"),
-      ctaTrackingDescriptor: _$$c.DONE,
+      ctaTrackingDescriptor: UpgradeAction.DONE,
       type: "button",
       onClick: e.onPrimaryCtaClick,
       dataTestId: es,
@@ -480,7 +480,7 @@ function e_(e) {
     },
     secondaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.back_button"),
-      ctaTrackingDescriptor: _$$c.BACK,
+      ctaTrackingDescriptor: UpgradeAction.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick
     },
@@ -532,7 +532,7 @@ function eC(e) {
     onTargetLost: e.onClose,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.next_button"),
-      ctaTrackingDescriptor: _$$c.NEXT,
+      ctaTrackingDescriptor: UpgradeAction.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
       dataTestId: es,
@@ -541,7 +541,7 @@ function eC(e) {
     },
     secondaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.back_button"),
-      ctaTrackingDescriptor: _$$c.BACK,
+      ctaTrackingDescriptor: UpgradeAction.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick,
       dataTestId: eu,
@@ -572,7 +572,7 @@ function eT(e) {
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.start_button"),
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
       dataTestId: es,
@@ -581,7 +581,7 @@ function eT(e) {
     },
     secondaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.not_now_button"),
-      ctaTrackingDescriptor: _$$c.NOT_NOW,
+      ctaTrackingDescriptor: UpgradeAction.NOT_NOW,
       type: "button",
       onClick: e.onClose,
       dataTestId: eu,
@@ -657,7 +657,7 @@ function ej(e) {
     onClose: e.onClose,
     primaryCta: {
       label: renderI18nText("dev_mode_demo_file.tour.next_button"),
-      ctaTrackingDescriptor: _$$c.NEXT,
+      ctaTrackingDescriptor: UpgradeAction.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
       dataTestId: es,

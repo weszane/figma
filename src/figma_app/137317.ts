@@ -15,7 +15,7 @@ import { v as _$$v } from "../905/50227";
 import { yt } from "../figma_app/451499";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
-import { AF } from "../figma_app/212807";
+import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { d as _$$d } from "../905/480825";
 import { VZ } from "../figma_app/727192";
 import { c$, l6 } from "../905/794875";
@@ -99,7 +99,7 @@ function C({
   preferencesApi: t,
   hidePreferencesForList: r
 }) {
-  let i = AF();
+  let i = selectIsCopyExportAllowed();
   let a = z4.getIsExtension();
   let {
     preferenceOptions,

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
@@ -61,7 +61,7 @@ export function $$j0() {
       label: renderI18nText("onboarding_pointers.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: ko,
     title: renderI18nText("rcs.visual_assets.drag_visual_assets_title"),

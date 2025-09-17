@@ -19,7 +19,7 @@ import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { tc, i$, PE } from "../905/15667";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
-import { F2 } from "../905/389382";
+import { getMinimumBundle } from "../905/389382";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FUserRoleType, FPlanNameType, FMemberRoleType, FOrganizationLevelType, FFileType } from "../figma_app/191312";
@@ -723,7 +723,7 @@ function W({
     licenseType: e,
     entryPoint: t
   });
-  return F2(r);
+  return getMinimumBundle(r);
 }
 function K({
   licenseType: e,

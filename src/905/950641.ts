@@ -15,7 +15,7 @@ import { lk } from "../figma_app/109538";
 import { B } from "../905/380801";
 import { D as _$$D } from "../905/251759";
 import { showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
@@ -267,7 +267,7 @@ function O({
               onClick: () => d(t),
               "data-testid": "plan-information-upgrade-existing",
               trackingProperties: {
-                trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
+                trackingDescriptor: UpgradeAction.UPGRADE_EXISTING_TEAM
               },
               trusted: !0,
               children: renderI18nText("plan_comparison.plans.pro.upgrade_an_existing_team")
@@ -309,7 +309,7 @@ function D({
     onClick: t,
     trackingProperties: {
       plan: r,
-      trackingDescriptor: _$$c.CHOOSE_PLAN
+      trackingDescriptor: UpgradeAction.CHOOSE_PLAN
     },
     htmlAttributes: {
       "data-testid": `plan-information-${r}-button`,

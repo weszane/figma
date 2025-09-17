@@ -4,7 +4,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
-import { M_ } from "../905/32091";
+import { isWhiteboardEditingEnabled } from "../905/32091";
 import { a as _$$a } from "../905/692930";
 import { transformAtom, mapAndAggregateResources } from "../905/401885";
 import { _s, KI } from "../figma_app/33126";
@@ -44,7 +44,7 @@ let $$T0 = mapAndAggregateResources([KI, b], ([e, t], r) => {
     student_team: !!t.studentTeamAt,
     grace_period_end: t.gracePeriodEnd?.toDateString() || null
   } : null;
-  return M_({
+  return isWhiteboardEditingEnabled({
     editorType: n?.editorType ?? null,
     org: i,
     team: s

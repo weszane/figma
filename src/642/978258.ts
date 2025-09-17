@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { UserActionState, AppStateTsApi, Positioning, Fullscreen } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { FQ } from "../9410/571209";
 import { getCurrentFileType } from "../figma_app/976749";
 import { kl } from "../905/275640";
@@ -163,7 +163,7 @@ function b({
     d === a || v || (a = R(d, i, n));
     return [a.left(), a.top()];
   }, [g, v, t.height, t.width, t.x, t.y, R, K, G]);
-  let [V] = _$$A(isRectInside(O, t), 500);
+  let [V] = useDebounce(isRectInside(O, t), 500);
   if (!V) return jsx(C_, {
     disableAnimation: S,
     ref: s,

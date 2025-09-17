@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { b as _$$b, q7, mc, bL } from "../figma_app/860955";
+import { setupMenu, MenuItemComp, MenuContainerComp, MenuRootComp } from "../figma_app/860955";
 import { u as _$$u } from "../905/65923";
 import { bL as _$$bL, O6, HG } from "../905/598775";
 import { J as _$$J } from "../905/125993";
@@ -56,7 +56,7 @@ function V(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let H = E.allUsers.length > 1;
   let V = A?.id === user.userID;
   let [q, z] = useState(!1);
@@ -121,7 +121,7 @@ function V(e) {
     })
   }) : null;
   let ee = () => {
-    let e = secondaryActions?.map(e => jsx(q7, {
+    let e = secondaryActions?.map(e => jsx(MenuItemComp, {
       onClick: t => {
         t.stopPropagation();
         t.preventDefault();
@@ -130,11 +130,11 @@ function V(e) {
       disabled: e.disabled,
       children: e.text
     }, e.key));
-    return jsx(mc, {
+    return jsx(MenuContainerComp, {
       children: e
     });
   };
-  let et = () => jsxs(bL, {
+  let et = () => jsxs(MenuRootComp, {
     manager,
     children: [jsx("div", {
       className: G7,

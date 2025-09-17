@@ -13,7 +13,7 @@ import { B as _$$B } from '../905/261906';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
@@ -35,7 +35,7 @@ import { i as _$$i } from '../figma_app/127401';
 import { FPlanNameType, FOrganizationLevelType } from '../figma_app/191312';
 import { c$, Ve, wv } from '../figma_app/236327';
 import { b as _$$b } from '../figma_app/246400';
-import { jk, nB, vo, wi } from '../figma_app/272243';
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter } from '../figma_app/272243';
 import { useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { _ as _$$_, S as _$$S } from '../figma_app/490799';
@@ -303,9 +303,9 @@ function er(e) {
     children: jsx(ModalRootComponent, {
       manager: p,
       width: 480,
-      children: jsxs(vo, {
+      children: jsxs(DialogContents, {
         allowOverflow: !0,
-        children: [jsx(nB, {
+        children: [jsx(DialogBody, {
           children: jsxs('div', {
             'className': _$$s.pt32.pb8.px8.flex.flexColumn.$,
             'data-testid': 'auto-approval-settings-modal-header',
@@ -351,22 +351,22 @@ function er(e) {
               })]
             })]
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: 'secondary',
               onClick: () => p.props?.close({
                 source: 'button'
               }),
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText('plan_settings.auto_approval_settings.cancel')
             }), jsx($z, {
               variant: 'primary',
               onClick: X,
               trackingProperties: {
-                trackingDescriptor: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? _$$c.SAVE_FOR_ORGANIZATION : _$$c.SAVE_FOR_TEAM : _$$c.SAVE
+                trackingDescriptor: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? UpgradeAction.SAVE_FOR_ORGANIZATION : UpgradeAction.SAVE_FOR_TEAM : UpgradeAction.SAVE
               },
               children: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? renderI18nText('plan_settings.auto_approval_settings.save_for_plan.organization') : renderI18nText('plan_settings.auto_approval_settings.save_for_plan.team') : renderI18nText('plan_settings.auto_approval_settings.save_for_plan.no_plan')
             })]
@@ -458,8 +458,8 @@ let eu = registerModal(e => {
     children: jsx(ModalRootComponent, {
       manager: a,
       width: 480,
-      children: jsxs(vo, {
-        children: [jsx(nB, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogBody, {
           children: jsxs('div', {
             'className': _$$s.pt32.px8.pb8.flex.flexColumn.$,
             'data-testid': 'auto-approval-settings-modal-header',
@@ -479,8 +479,8 @@ let eu = registerModal(e => {
               children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.description')
             })]
           })
-        }), jsx(wi, {
-          children: jsx(jk, {
+        }), jsx(DialogFooter, {
+          children: jsx(DialogActionStrip, {
             children: jsx(Button, {
               variant: 'primary',
               onClick: () => a.props?.close({

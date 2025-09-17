@@ -25,7 +25,7 @@ import { T as _$$T } from "../905/486858";
 import { FPlanNameType, FOrganizationRoleType } from "../figma_app/191312";
 import { useCurrentPlanUser, useCurrentPublicPlan, useIsOrgAdminUser } from "../figma_app/465071";
 import { Qh } from "../figma_app/155728";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { M } from "../905/540025";
 import { l6, sK, c$ } from "../905/794875";
 let O = "subscription_toggle--subscriptionToggleAddedButton_v2--iAiH0 subscription_toggle--subscriptionToggleButton_v2--QLPZH subscription_toggle--subscriptionToggleButton--5TqX3";
@@ -454,7 +454,7 @@ let H = e => ({
   openFile: e.openFile
 });
 let W = (e, t, i) => {
-  let n = ol();
+  let n = getCurrentTeam();
   let a = n?.id;
   let s = useCurrentPlanUser("useWillWarnTeamAdminAboutOverride");
   let o = useCurrentPublicPlan("useWillWarnTeamAdminAboutOverride");

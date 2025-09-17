@@ -21,7 +21,7 @@ import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
 import { tI } from "../figma_app/599327";
 import { P8, a8, vt } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
@@ -85,7 +85,7 @@ function M(e) {
     variant: e.variant ?? "secondary",
     trackingProperties: {
       ...e.trackingProperties,
-      trackingDescriptor: _$$c.MANAGE_SEATS
+      trackingDescriptor: UpgradeAction.MANAGE_SEATS
     },
     children: getI18nString("admin_settings.seat_counts.manage_button_label")
   });
@@ -96,7 +96,7 @@ function P(e) {
     variant: "secondary",
     trackingProperties: {
       ...e.trackingProperties,
-      trackingDescriptor: _$$c.ADD_SEATS
+      trackingDescriptor: UpgradeAction.ADD_SEATS
     },
     children: getI18nString("admin_settings.seat_counts.add_seats_label")
   });
@@ -417,7 +417,7 @@ function em(e) {
       }));
     },
     trackingProperties: {
-      trackingDescriptor: _$$c.VIEW_PLANS
+      trackingDescriptor: UpgradeAction.VIEW_PLANS
     },
     children: getI18nString("admin_settings.plan_information_widget_card.cta.view_plans")
   }) : jsx(pW, {
@@ -425,7 +425,7 @@ function em(e) {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/360040328273",
     trackingProperties: {
-      trackingDescriptor: _$$c.LEARN_MORE
+      trackingDescriptor: UpgradeAction.LEARN_MORE
     },
     children: getI18nString("admin_settings.plan_information_widget_card.cta.learn_more")
   }), [t, c, o?.id]);
@@ -438,7 +438,7 @@ function em(e) {
         });
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.CONVERT_MONTHLY_TO_ANNUAL
+        trackingDescriptor: UpgradeAction.CONVERT_MONTHLY_TO_ANNUAL
       },
       children: getI18nString("admin_settings.plan_information_widget_card.seat_terms.adding_seats_to_annual_plan_link")
     });
@@ -655,7 +655,7 @@ function ek(e) {
             t(a);
           },
           trackingProperties: {
-            trackingDescriptor: _$$c.PREVIEW_RENEWAL
+            trackingDescriptor: UpgradeAction.PREVIEW_RENEWAL
           },
           children: getI18nString("admin_settings.plan_subscription_card.preview")
         });
@@ -664,7 +664,7 @@ function ek(e) {
         variant: "primary",
         href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
         trackingProperties: {
-          trackingDescriptor: _$$c.CONTACT_SUPPORT
+          trackingDescriptor: UpgradeAction.CONTACT_SUPPORT
         },
         trusted: !0,
         newTab: !0,
@@ -673,7 +673,7 @@ function ek(e) {
         variant: "primary",
         onClick: e.adjustRenewalSeats,
         trackingProperties: {
-          trackingDescriptor: _$$c.REVIEW_RENEWAL
+          trackingDescriptor: UpgradeAction.REVIEW_RENEWAL
         },
         "data-testid": "plan-subscription-review-renewal",
         children: getI18nString("admin_settings.plan_subscription_card.review")
@@ -689,7 +689,7 @@ function ek(e) {
     let d = e.annualSeats?.total ?? 0;
     let c = e.manageAnnualSeats && {
       onClick: e.manageAnnualSeats,
-      ctaTrackingDescriptor: _$$c.ANNUAL_SEATS,
+      ctaTrackingDescriptor: UpgradeAction.ANNUAL_SEATS,
       ariaLabel: getI18nString("admin_settings.plan_subscription_card.annual_seats_aria_label")
     };
     if (e.planStarting && e.upcomingAnnualInvoice) return {
@@ -768,7 +768,7 @@ function eI(e) {
       variant: "secondary",
       onClick: e.viewAllInvoices,
       trackingProperties: {
-        trackingDescriptor: _$$c.VIEW_ALL
+        trackingDescriptor: UpgradeAction.VIEW_ALL
       },
       children: getI18nString("admin_settings.upcoming_invoice_card.view_all_button_label")
     });
@@ -780,7 +780,7 @@ function eI(e) {
           o(t);
         },
         trackingProperties: {
-          trackingDescriptor: _$$c.VIEW_INVOICE
+          trackingDescriptor: UpgradeAction.VIEW_INVOICE
         },
         children: getI18nString("admin_settings.upcoming_invoice_card.preview_button_label")
       });
@@ -800,7 +800,7 @@ function eI(e) {
     let d = Bf(e.upcomingInvoice);
     let c = t && 0 !== s && e.manageMonthlySeats && e.planType === FOrganizationLevelType.TEAM && {
       onClick: e.manageMonthlySeats,
-      ctaTrackingDescriptor: _$$c.MONTHLY_SEATS,
+      ctaTrackingDescriptor: UpgradeAction.MONTHLY_SEATS,
       ariaLabel: getI18nString("admin_settings.upcoming_invoice_card.manage_monthly_seats_aria_label")
     };
     let _ = e.planType === FOrganizationLevelType.TEAM ? {
@@ -938,7 +938,7 @@ function eq(e) {
     },
     variant: "secondary",
     trackingProperties: {
-      trackingDescriptor: _$$c.VIEW_INVOICE
+      trackingDescriptor: UpgradeAction.VIEW_INVOICE
     },
     children: getI18nString("plan_invoices.view_button_label")
   });
@@ -1054,7 +1054,7 @@ function ez(e) {
     }), jsx(eG, {
       onClick: o,
       trackingProperties: {
-        trackingDescriptor: i ? _$$c.REACTIVATE_PLAN : _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN,
+        trackingDescriptor: i ? UpgradeAction.REACTIVATE_PLAN : UpgradeAction.REACTIVATE_YOUR_PROFESSIONAL_PLAN,
         orgId: a?.type === FOrganizationLevelType.ORG ? a.key.parentId : void 0,
         teamId: a?.type === FOrganizationLevelType.TEAM ? a.key.parentId : void 0
       },

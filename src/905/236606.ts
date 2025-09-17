@@ -14,7 +14,7 @@ import { Z4, M$, NT, Q6 } from "../905/77776";
 import { kt } from "../figma_app/711907";
 import { G6, P1 } from "../905/246310";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { je } from "../figma_app/155728";
 import { eT } from "../figma_app/617506";
 import { ON, gs } from "../figma_app/31103";
@@ -30,7 +30,7 @@ import { a as _$$a } from "../figma_app/289605";
 import { ZGX } from "../figma_app/27776";
 import { selectViewAction } from "../905/929976";
 import { isVsCodeEnvironment } from "../905/858738";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
@@ -147,12 +147,12 @@ let L = registerModal(function (e) {
         maxHeight: ModalMaxHeight,
         onClose: i,
         recordingKey: "variableDetailsWindow",
-        children: jsxs(vo, {
-          children: [jsx(Y9, {
-            children: jsx(hE, {
+        children: jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
+            children: jsx(DialogTitle, {
               children: renderI18nText("dev_handoff.variables.suggested_variables.title")
             })
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             padding: 0,
             children: jsx("div", {
               className: "matching_vars_modal--matchingVarsModal--1krq8",
@@ -188,12 +188,12 @@ let B = registerModal(function (e) {
       maxHeight: ModalMaxHeight,
       onClose: o,
       recordingKey: "variableDetailsWindow",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("dev_handoff.variables.details_title")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsx(_$$a, {
             variableId: e.variableId,
@@ -332,7 +332,7 @@ function ee({
   } = useContext($$J0);
   let d = useDispatch();
   let u = _$$P();
-  let m = _6();
+  let m = getSelectedView();
   let h = useRef(null);
   let g = useCallback(() => {
     if (ref?.current && h?.current && "fullscreen" === m.view) {
@@ -390,7 +390,7 @@ function et({
   } = useContext($$J0);
   let u = _$$P();
   let m = useRef(null);
-  let h = _6();
+  let h = getSelectedView();
   let f = useDispatch();
   let _ = useSelector(e => e.modalShown);
   let A = !!_ && _.type === StyleDetailModal;

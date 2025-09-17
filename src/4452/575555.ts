@@ -17,7 +17,7 @@ import { V as _$$V } from '../905/223767';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
 import { $S } from '../905/351260';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { k as _$$k } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -81,7 +81,7 @@ import { Bq } from '../figma_app/482142';
 import { Jd, UF } from '../figma_app/494261';
 import { kb } from '../figma_app/502247';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
-import { cD, pG } from '../figma_app/598018';
+import { getCurrentTeamId, getActiveTeamMembers } from '../figma_app/598018';
 import { X8 } from '../figma_app/634656';
 import { SecureLink } from '../figma_app/637027';
 import { canAdminTeam, getPermissionsState } from '../figma_app/642025';
@@ -648,7 +648,7 @@ function eN(e) {
       color: 'secondary',
       fontSize: 12,
       children: [e.team.name, renderI18nText('file_browser.team_settings_modal.members_tab_header', {
-        numMembers: pG(t, e.team.id).length
+        numMembers: getActiveTeamMembers(t, e.team.id).length
       })]
     })
   });
@@ -661,7 +661,7 @@ let tn = {
 };
 let tr = registerModal(() => {
   let e = useDispatch();
-  let t = cD();
+  let t = getCurrentTeamId();
   let a = useSubscription(TeamAdminSettingsPage, {
     teamId: t
   });
@@ -1272,7 +1272,7 @@ function tf(e) {
               className: t_,
               onClick: U,
               trackingProperties: {
-                trackingDescriptor: _$$c.UPGRADE,
+                trackingDescriptor: UpgradeAction.UPGRADE,
                 upsellSource: UpsellModalType.TEAM_SETTINGS_MODAL
               },
               children: renderI18nText('upgrade.view_plans')
@@ -1292,7 +1292,7 @@ function tf(e) {
             className: t_,
             onClick: U,
             trackingProperties: {
-              trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
+              trackingDescriptor: UpgradeAction.UPGRADE_TO_ORGANIZATION,
               upsellSource: UpsellModalType.TEAM_SETTINGS_MODAL
             },
             children: renderI18nText('file_browser.team_settings_modal.upgrade')

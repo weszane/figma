@@ -1,9 +1,9 @@
 import { generateUUIDv4 } from "../905/871474";
-import { Qw } from "../figma_app/618433";
+import { createCollectionOptimistically } from "../figma_app/618433";
 import { Tj, _Z } from "../figma_app/649254";
 import { X } from "../905/145028";
 import { J } from "../905/539754";
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 import { useCurrentFileKey } from "../figma_app/516028";
 export async function $$c0() {
   let e = await navigator.clipboard.readText();
@@ -26,7 +26,7 @@ export function $$u1() {
       collectionStableId: t
     });
     if (null == i) {
-      sD("items is collection", {
+      logCmsError("items is collection", {
         collectionId: t
       });
       return null;
@@ -43,7 +43,7 @@ export function $$u1() {
     let d = await J({
       collectionStableId: t
     });
-    return null == d ? (sD("items is null", {
+    return null == d ? (logCmsError("items is null", {
       collectionId: t
     }), null) : JSON.stringify({
       name: r,
@@ -78,7 +78,7 @@ export function $$p2() {
       action: "create",
       version: "1"
     }));
-    let o = await Qw({
+    let o = await createCollectionOptimistically({
       id: null,
       name: t.name,
       description: t.description,
@@ -91,7 +91,7 @@ export function $$p2() {
       collectionStableId: d
     });
     if (null == c) {
-      sD("newCollection is null", {
+      logCmsError("newCollection is null", {
         newCollectionId: d
       });
       return;
@@ -108,21 +108,21 @@ export function $$p2() {
           value
         } = i;
         if (null == value) {
-          sD("Field value is null during import", {
+          logCmsError("Field value is null during import", {
             fieldSchemaId: i.fieldSchemaId
           });
           continue;
         }
         let r = p[i.fieldSchemaId];
         if (null == r) {
-          sD("Field schema ID mapping not found during import", {
+          logCmsError("Field schema ID mapping not found during import", {
             fieldSchemaId: i.fieldSchemaId
           });
           continue;
         }
         let n = c.fieldSchemas.find(e => e.id === r);
         if (null == n) {
-          sD("Field schema not found during import", {
+          logCmsError("Field schema not found during import", {
             newFieldSchemaId: r
           });
           continue;

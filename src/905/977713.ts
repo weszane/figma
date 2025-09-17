@@ -23,7 +23,7 @@ import { throwTypeError } from '../figma_app/465776';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { $P, $t, Aw, b6, Hg, ij, L0, Lz, Pe, qf, Ri, ve, w4, yh, Z9 } from '../figma_app/770359';
 import { BrowserInfo } from '../figma_app/778880';
-import { b as _$$b, bL, mc, ME, Ov, q7, YJ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuSubText, MenuItemTrail, MenuItemComp, MenuGroupComp } from '../figma_app/860955';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { useDispatch } from 'react-redux';
 var C = (e => (e.MATCH_CASE = 'MATCH_CASE', e.USE_REGEX = 'USE_REGEX', e.MATCH_WHOLE_WORDS = 'MATCH_WHOLE_WORDS', e))(C || {});
@@ -320,12 +320,12 @@ function O({
       };
     }
   };
-  return jsx(bL, {
+  return jsx(MenuRootComp, {
     manager: e,
-    children: jsxs(mc, {
+    children: jsxs(MenuContainerComp, {
       'data-testid': 'code-editor-context-menu',
-      'children': [jsxs(YJ, {
-        children: [jsxs(q7, {
+      'children': [jsxs(MenuGroupComp, {
+        children: [jsxs(MenuItemComp, {
           disabled: !t,
           onClick: () => {
             let e = s();
@@ -340,12 +340,12 @@ function O({
             }];
             i?.current?.dispatch(i?.current?.state.update(...t));
           },
-          children: [getI18nString('sites.code_component.editor_context_menu.cut'), jsx(Ov, {
-            children: jsx(ME, {
+          children: [getI18nString('sites.code_component.editor_context_menu.cut'), jsx(MenuItemTrail, {
+            children: jsx(MenuSubText, {
               children: `${a}X`
             })
           })]
-        }), jsxs(q7, {
+        }), jsxs(MenuItemComp, {
           'data-testid': 'code-editor-context-menu-copy',
           'disabled': !t,
           'onClick': () => {
@@ -353,12 +353,12 @@ function O({
             let e = s();
             e && navigator.clipboard.writeText(e.text);
           },
-          'children': [getI18nString('sites.code_component.editor_context_menu.copy'), jsx(Ov, {
-            children: jsx(ME, {
+          'children': [getI18nString('sites.code_component.editor_context_menu.copy'), jsx(MenuItemTrail, {
+            children: jsx(MenuSubText, {
               children: `${a}C`
             })
           })]
-        }), jsxs(q7, {
+        }), jsxs(MenuItemComp, {
           onClick: () => {
             navigator.clipboard.readText().then(e => {
               let t = s();
@@ -373,12 +373,12 @@ function O({
               i?.current?.dispatch(i?.current?.state.update(...n));
             });
           },
-          children: [getI18nString('sites.code_component.editor_context_menu.paste'), jsx(Ov, {
-            children: jsx(ME, {
+          children: [getI18nString('sites.code_component.editor_context_menu.paste'), jsx(MenuItemTrail, {
+            children: jsx(MenuSubText, {
               children: `${a}V`
             })
           })]
-        }), jsxs(q7, {
+        }), jsxs(MenuItemComp, {
           onClick: () => {
             i?.current?.dispatch(i?.current?.state.update({
               selection: {
@@ -387,14 +387,14 @@ function O({
               }
             }));
           },
-          children: [getI18nString('sites.code_component.editor_context_menu.select_all'), jsx(Ov, {
-            children: jsx(ME, {
+          children: [getI18nString('sites.code_component.editor_context_menu.select_all'), jsx(MenuItemTrail, {
+            children: jsx(MenuSubText, {
               children: `${a}A`
             })
           })]
         })]
-      }), jsx(YJ, {
-        children: jsx(q7, {
+      }), jsx(MenuGroupComp, {
+        children: jsx(MenuItemComp, {
           'data-testid': 'code-editor-context-menu-format-code',
           'onClick': () => {
             r?.();
@@ -437,7 +437,7 @@ export function $$M0({
   let {
     getContextMenuTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let H = useCurrentFileKey();
   let W = useMemo(() => Lz.theme({
     '&': {

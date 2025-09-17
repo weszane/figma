@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { isWhiteboardFileType, isDesignFileType } from "../figma_app/976749";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { pk, Qr } from "../figma_app/598952";
 import { isFullscreenSitesView } from "../905/561485";
 import { U } from "../figma_app/964810";
@@ -47,7 +47,7 @@ export function $$x3({
   });
 }
 export function $$v4(e, t) {
-  let s = _6();
+  let s = getSelectedView();
   let {
     showPublish,
     showLayersPanel,

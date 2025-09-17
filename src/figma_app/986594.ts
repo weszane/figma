@@ -4,7 +4,7 @@ import { CmsRepeaterHelpers, ChildRelationshipStatus } from "../figma_app/763686
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
-import { c$ } from "../figma_app/618433";
+import { getCollectionSummaryStatus } from "../figma_app/618433";
 import { w1 } from "../figma_app/649254";
 import { e as _$$e2 } from "../905/810361";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -39,7 +39,7 @@ export function $$T7(e) {
 }
 export function $$I3(e) {
   let t = useCurrentFileKey();
-  let r = c$(t).data;
+  let r = getCollectionSummaryStatus(t).data;
   return useCallback(async (t, n) => {
     let i = await w1(t);
     if (!i) return;

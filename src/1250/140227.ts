@@ -8,9 +8,9 @@ import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
@@ -22,7 +22,7 @@ export let $$w0 = registerModal(function (e) {
     teamId
   } = e;
   let n = useDispatch();
-  let b = _6();
+  let b = getSelectedView();
   let w = useSelector(e => e.folders);
   let T = useSubscription(TeamFileCountsByTeamId, {
     teamId
@@ -95,7 +95,7 @@ export let $$w0 = registerModal(function (e) {
               }));
             },
             trackingProperties: {
-              trackingDescriptor: _$$c.UPGRADE_TO_PROFESSIONAL
+              trackingDescriptor: UpgradeAction.UPGRADE_TO_PROFESSIONAL
             },
             trusted: !0,
             children: renderI18nText("payments_modal.upgrade_to_professional")

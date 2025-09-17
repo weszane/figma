@@ -5,7 +5,7 @@ import { useUndoRedoAtom, atom, useAtomWithSubscription, useAtomValueAndSetter }
 import { useMemoStable } from "../905/19536";
 import { selectViewAction } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { SW, c1 } from "../905/589717";
 import { isFigmascopeView } from "../905/694285";
 import { G2 } from "../figma_app/314591";
@@ -40,7 +40,7 @@ export function $$I7({
 }
 function E() {
   let e = useDispatch();
-  let t = _6();
+  let t = getSelectedView();
   let [i, n] = useAtomValueAndSetter(valueAtom);
   let o = useRef(!0);
   useEffect(() => {

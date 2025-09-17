@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, Children, memo } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import s from "classnames";
 import { RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
@@ -29,7 +29,7 @@ export function $$g2({
   darkModePreferred: E,
   editorTheme: y
 }) {
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: y,
     mode: E ? "dark" : void 0,
     children: jsx("div", {

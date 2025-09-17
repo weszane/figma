@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { Gu } from "../figma_app/262240";
-import { bL, mc, q7 } from "../figma_app/860955";
+import { MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { AnimationTriggerType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
@@ -79,10 +79,10 @@ export function $$x1({
     slideId,
     targetNodeId
   });
-  return jsx(bL, {
+  return jsx(MenuRootComp, {
     manager: t,
-    children: jsx(mc, {
-      children: o.map(e => jsx(q7, {
+    children: jsx(MenuContainerComp, {
+      children: o.map(e => jsx(MenuItemComp, {
         onClick: () => {
           e.callback && e.callback();
         },

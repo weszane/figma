@@ -68,7 +68,7 @@ import { popModalStack, showModalHandler, hideModalHandler, hideModal, showModal
 import { KV } from "../figma_app/548615";
 import { u as _$$u } from "../905/712485";
 import { A as _$$A } from "../905/389851";
-import { T as _$$T } from "../905/909590";
+import { Textarea } from "../905/909590";
 import { Button } from "../905/521428";
 import { X as _$$X } from "../905/999307";
 import { truncate } from "../figma_app/930338";
@@ -77,10 +77,10 @@ import { j as _$$j } from "../figma_app/398600";
 import { p as _$$p } from "../905/536283";
 import { getWorkshopModeStatus } from "../figma_app/789";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { F as _$$F } from "../905/224";
-import { Q9, M_, kA } from "../905/32091";
-import { Bi } from "../905/652992";
-import { DV } from "../905/739964";
+import { consumptionPaywallUtils } from "../905/224";
+import { WhiteboardErrorState, isWhiteboardEditingEnabled, getWhiteboardErrorState } from "../905/32091";
+import { FeatureFlag } from "../905/652992";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
@@ -96,7 +96,7 @@ import { VisualBellActions } from "../905/302958";
 import { L as _$$L2 } from "../905/92291";
 import { A as _$$A2 } from "../5724/600086";
 import { h as _$$h } from "../905/142086";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { K as _$$K } from "../905/851274";
 import { I as _$$I } from "../905/932503";
 import { K as _$$K2 } from "../905/987240";
@@ -520,7 +520,7 @@ function eM({
   }, [i, e.key, s, o]);
   return jsxs("div", {
     className: "embed--embedTabWrapper--ETzIt",
-    children: [d ? jsx(_$$T, {
+    children: [d ? jsx(Textarea, {
       "aria-label": getI18nString("permissions.embed.copy_public_embed_code"),
       autoFocus: !0,
       htmlAttributes: {
@@ -717,13 +717,13 @@ function eJ({
       canUserAccessProFeature: i
     }), !i) {
       r(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: e,
           editorType: t.editor_type,
-          resource: Bi.OPEN_SESSION,
-          currentPlan: _$$F.Plan.STARTER,
-          upsellPlan: _$$F.Plan.PRO
+          resource: FeatureFlag.OPEN_SESSION,
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO
         }
       }));
       return;
@@ -998,16 +998,16 @@ function tu({
     });
     let t = null;
     switch (i) {
-      case Q9.ORG_DISABLED:
+      case WhiteboardErrorState.ORG_DISABLED:
         t = getI18nString("file_permissions_modal.screenshare_to_google_device.open_sessions_disabled");
         break;
-      case Q9.TEAM_NOT_PRO:
+      case WhiteboardErrorState.TEAM_NOT_PRO:
         t = getI18nString("file_permissions_modal.screenshare_to_google_device.only_pro_teams");
         break;
-      case Q9.CANNOT_EDIT_FILE:
+      case WhiteboardErrorState.CANNOT_EDIT_FILE:
         t = getI18nString("file_permissions_modal.screenshare_to_google_device.only_admins");
         break;
-      case Q9.ERROR:
+      case WhiteboardErrorState.ERROR:
         t = getI18nString("file_permissions_modal.screenshare_to_google_device.generic_error");
     }
     return jsx(TrackingProvider, {
@@ -1192,13 +1192,13 @@ let tW = registerModal(function (e) {
             href: "#",
             onClick: () => {
               e.team && e.editorType && i(showModalHandler({
-                type: DV,
+                type: ConsumptionPaywallModalPlansPricing,
                 data: {
                   team: e.team,
                   editorType: e.editorType,
-                  resource: Bi.PROTOTYPE_SHARING,
-                  currentPlan: _$$F.Plan.STARTER,
-                  upsellPlan: _$$F.Plan.PRO
+                  resource: FeatureFlag.PROTOTYPE_SHARING,
+                  currentPlan: consumptionPaywallUtils.Plan.STARTER,
+                  upsellPlan: consumptionPaywallUtils.Plan.PRO
                 }
               }));
             },
@@ -1339,7 +1339,7 @@ function t9({
 function ie(e) {
   let t = kD();
   let i = useCurrentUserOrgId();
-  let r = cD();
+  let r = getCurrentTeamId();
   let a = t ? jsx(tQ, {}) : jsx(_$$n2, {});
   let s = t ? getI18nString("file_permissions_modal.share_as.publish_template.published") : getI18nString("file_permissions_modal.share_as.publish_template");
   return jsx(TrackingProvider, {
@@ -1652,12 +1652,12 @@ function is({
     }, [o, c, l, p, d, u]);
     let g = selectCurrentFile();
     let f = !!g && Qy(g);
-    let _ = M_({
+    let _ = isWhiteboardEditingEnabled({
       editorType: l,
       team: t,
       org: i
     }) && e.canEdit;
-    let A = kA({
+    let A = getWhiteboardErrorState({
       editorType: l,
       team: t,
       org: i,
@@ -1685,7 +1685,7 @@ function is({
     team: i,
     org: s
   };
-  let Q = M_({
+  let Q = isWhiteboardEditingEnabled({
     editorType: u.file.editor_type,
     team: u.team,
     org: u.org
@@ -1720,7 +1720,7 @@ function is({
   });
   let et = function (e) {
     let t = useDispatch();
-    let i = cD();
+    let i = getCurrentTeamId();
     return e.file.isDraftFileLG && e.file.canMove && (e.org || i && hasTeamPaidAccess(e.team)) ? jsx(tf, {
       onClick: () => {
         _$$h(e.file, e.repo, t);
@@ -2884,13 +2884,13 @@ function na({
                 return;
               }
               p(showModalHandler({
-                type: DV,
+                type: ConsumptionPaywallModalPlansPricing,
                 data: {
                   team: o || null,
                   editorType: e.editor_type,
-                  resource: Bi.PROTOTYPE_SHARING,
-                  currentPlan: _$$F.Plan.STARTER,
-                  upsellPlan: _$$F.Plan.PRO
+                  resource: FeatureFlag.PROTOTYPE_SHARING,
+                  currentPlan: consumptionPaywallUtils.Plan.STARTER,
+                  upsellPlan: consumptionPaywallUtils.Plan.PRO
                 }
               }));
               return;
@@ -5585,13 +5585,13 @@ function a$({
           return;
         }
         u(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: s,
             editorType: e.editor_type,
-            resource: Bi.PROTOTYPE_SHARING,
-            currentPlan: _$$F.Plan.STARTER,
-            upsellPlan: _$$F.Plan.PRO
+            resource: FeatureFlag.PROTOTYPE_SHARING,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO
           }
         }));
         return;
@@ -5852,13 +5852,13 @@ function a2({
         onClick: n => {
           n.preventDefault();
           i(showModalHandler({
-            type: DV,
+            type: ConsumptionPaywallModalPlansPricing,
             data: {
               team: t,
               editorType: e.editor_type,
-              resource: Bi.PROTOTYPE_SHARING,
-              currentPlan: _$$F.Plan.STARTER,
-              upsellPlan: _$$F.Plan.PRO
+              resource: FeatureFlag.PROTOTYPE_SHARING,
+              currentPlan: consumptionPaywallUtils.Plan.STARTER,
+              upsellPlan: consumptionPaywallUtils.Plan.PRO
             }
           }));
         },

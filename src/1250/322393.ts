@@ -38,7 +38,7 @@ import { trackFileEventWithStore } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
 import { useSelector, useDispatch } from 'react-redux';
-import { A as _$$A } from '../vendor/850789';
+import { useDebounce } fromuse-debounce89';
 function $(e) {
   let t = new Map();
   let n = new Map();
@@ -113,7 +113,7 @@ export function $$J18() {
   let [l, d] = useAtomValueAndSetter(xB);
   let [c, _] = useAtomValueAndSetter(Fs);
   let m = n.trim();
-  let [h] = _$$A(m, 200);
+  let [h] = useDebounce(m, 200);
   let b = $$Z20();
   let x = Gi();
   let {

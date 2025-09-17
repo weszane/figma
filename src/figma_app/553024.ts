@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { createMetaValidator } from "../figma_app/181241";
-import { D } from "../905/412108";
+import { convertSinatraModel } from "../905/412108";
 let s = z.object({
   id: z.string().uuid(),
   collectionId: z.string().uuid(),
@@ -40,13 +40,13 @@ let d = z.object({
 });
 let $$c0 = new class {
   constructor() {
-    this.CollectionItemResponseSchemaValidator = createMetaValidator("CollectionItemResponseSchemaValidator", D(s), null);
-    this.BulkImportResponseSchemaValidator = createMetaValidator("BulkImportResponseSchemaValidator", D(z.object({
+    this.CollectionItemResponseSchemaValidator = createMetaValidator("CollectionItemResponseSchemaValidator", convertSinatraModel(s), null);
+    this.BulkImportResponseSchemaValidator = createMetaValidator("BulkImportResponseSchemaValidator", convertSinatraModel(z.object({
       count: z.number()
     })), null);
-    this.CollectionFieldResponseSchemaValidator = createMetaValidator("CollectionFieldResponseSchemaValidator", D(o), null);
+    this.CollectionFieldResponseSchemaValidator = createMetaValidator("CollectionFieldResponseSchemaValidator", convertSinatraModel(o), null);
     this.ItemValidateResponseSchemaValidator = createMetaValidator("ItemValidateResponseSchemaValidator", l, null);
-    this.CsvValidationResponseValidator = createMetaValidator("CsvValidationResponseValidator", D(d), null);
+    this.CsvValidationResponseValidator = createMetaValidator("CsvValidationResponseValidator", convertSinatraModel(d), null);
   }
   createItem({
     collection: e,

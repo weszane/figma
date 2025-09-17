@@ -6,11 +6,11 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { FileIsEligibleForDevModeTrial } from "../figma_app/43951";
 import { useTeamPlanUser, useTeamPlanPublicInfo } from "../figma_app/465071";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 export function $$p0() {
   let e = useTeamPlanUser();
   let t = useTeamPlanPublicInfo();
-  let i = cD();
+  let i = getCurrentTeamId();
   let p = useCurrentUserOrg()?.id;
   let m = O();
   let h = hA() ? "focus_view" : "dev_mode";

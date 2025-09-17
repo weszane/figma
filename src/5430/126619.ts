@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { bL, mc, q7, YJ, b as _$$b } from "../figma_app/860955";
+import { MenuRootComp, MenuContainerComp, MenuItemComp, MenuGroupComp, setupMenu } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
 import { Jm, BY } from "../figma_app/387599";
 import { getResourceUserCount, getResourceName } from "../figma_app/777551";
@@ -205,11 +205,11 @@ function M({
     }));
   }, [c, r]);
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(bL, {
+    children: jsx(MenuRootComp, {
       manager: e,
-      children: jsx(mc, {
+      children: jsx(MenuContainerComp, {
         children: hasDesktopAPI() ? jsxs(Fragment, {
-          children: [jsx(q7, {
+          children: [jsx(MenuItemComp, {
             onClick: d,
             children: jsx("div", {
               style: {
@@ -217,13 +217,13 @@ function M({
               },
               children: getI18nString("tile.dropdown.open")
             })
-          }), jsx(q7, {
+          }), jsx(MenuItemComp, {
             onClick: _,
             children: getI18nString("file_browser.copy_link")
           })]
         }) : jsxs(Fragment, {
-          children: [jsxs(YJ, {
-            children: [jsx(q7, {
+          children: [jsxs(MenuGroupComp, {
+            children: [jsx(MenuItemComp, {
               onClick: d,
               children: jsx("div", {
                 style: {
@@ -231,11 +231,11 @@ function M({
                 },
                 children: getI18nString("tile.dropdown.open")
               })
-            }), jsx(q7, {
+            }), jsx(MenuItemComp, {
               onClick: m,
               children: getI18nString("file_browser.open_in_new_tab")
             })]
-          }), jsx(q7, {
+          }), jsx(MenuItemComp, {
             onClick: _,
             children: getI18nString("file_browser.copy_link")
           })]
@@ -280,7 +280,7 @@ export function $$F0({
   let {
     getContextMenuTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let T = (t, r) => {
     let s = !!f && (r.ctrlKey || r.metaKey);
     FM(x, t, s ? {

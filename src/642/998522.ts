@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -50,7 +50,7 @@ export function $$S0() {
     onClose: complete,
     primaryCta: {
       label: renderI18nText("general.got_it"),
-      ctaTrackingDescriptor: _$$c.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       type: "button",
       onClick: complete
     },

@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VC, uE } from "../figma_app/565242";
-import { G as _$$G } from "../905/707993";
+import { getCollectionView } from "../905/707993";
 import { J6, qs, fn, WI } from "../figma_app/986594";
 import { isInvalidValue } from "../905/216495";
 import { Um } from "../905/848862";
@@ -183,7 +183,7 @@ export function $$q0({
       return !!(i && i.start !== i.end && t?.characters) && t.characters.length !== i.end - i.start;
     }(a, s[0]);
     let l = s[0]?.getNearestAncestorDakotaCollectionId() ?? null;
-    let d = _$$G({
+    let d = getCollectionView({
       collectionStableId: l
     });
     let c = d?.collection?.name;

@@ -29,10 +29,10 @@ import { Zr } from '../figma_app/114522';
 import { getInitialOptions } from '../figma_app/169182';
 import { BG, Ct } from '../figma_app/205280';
 import { f as _$$f2 } from '../figma_app/246112';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { w as _$$w } from '../figma_app/331365';
 import { nC, sF } from '../figma_app/357655';
-import { Td } from '../figma_app/386952';
+import { getFullscreenFileKey } from '../figma_app/386952';
 import { MV } from '../figma_app/396372';
 import { g as _$$g2 } from '../figma_app/411986';
 import { c3, LE } from '../figma_app/427737';
@@ -79,14 +79,14 @@ function z() {
     }), jsx(ModalRootComponent, {
       manager: s,
       width: 'lg',
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('sites.lint.errors.materialization_error', {
               errorCount: errors.length
             })
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsx('div', {
             className: _$$s.flex.flexColumn.gap8.$,
             children: errors.map((e, t) => jsxs('div', {
@@ -100,8 +100,8 @@ function z() {
               })]
             }, e.nodeId || t))
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: 'secondary',
               onClick: () => {
@@ -263,7 +263,7 @@ export function $$er1({
 }) {
   let b = getFeatureFlags().sts_runtime_debug_tools ?? !1;
   let I = useAtomWithSubscription($$Q3);
-  let S = Td();
+  let S = getFullscreenFileKey();
   let v = useIsSelectedFigmakeFullscreen();
   let [A, x] = useState(() => ++et);
   let N = useMemo(() => new $$ee0(), []);

@@ -20,7 +20,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
 import { BannerMessage } from '../905/363675';
-import { F2 } from '../905/389382';
+import { getMinimumBundle } from '../905/389382';
 import { z as _$$z } from '../905/404751';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A3 } from '../905/408320';
@@ -75,7 +75,7 @@ import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { ds, sb, t$, TF } from '../figma_app/863319';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { $V } from '../figma_app/990058';
-import { A as _$$A } from '../vendor/850789';
+import { useDebounce } fromuse-debounce89';
 var X = (e => (e.BASE_TAB = 'base_tab', e.ALL_TEAM = 'all_team', e.STARRED_TEAM = 'starred_team', e))(X || {});
 var Q = (e => (e.SUGGESTED = 'Suggested', e.STARRED = 'Starred', e.ALL = 'All', e))(Q || {});
 let en = new class {
@@ -498,7 +498,7 @@ let eR = registerModal(e => {
   let [eF, eM] = useState(!1);
   let [ej, eU] = useState(null);
   let eB = useRef(null);
-  let [eV] = _$$A(ej, 400);
+  let [eV] = useDebounce(ej, 400);
   let [eG, ez] = useState(null);
   let [eH, eW] = useState(null);
   let [eK, eY] = useState(!1);
@@ -970,7 +970,7 @@ let eR = registerModal(e => {
         }), (() => {
           let e = destinationPlan?.key.parentId;
           if (!licenseType || !e || tT) return null;
-          let i = F2(licenseType);
+          let i = getMinimumBundle(licenseType);
           if (!i) return null;
           let r = null;
           let s = null;

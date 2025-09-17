@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { b, bL } from "../figma_app/860955";
+import { setupMenu, MenuRootComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { xk } from "@stylexjs/stylex";
@@ -30,7 +30,7 @@ export function $$y0({
   let {
     getTriggerProps,
     manager
-  } = b({
+  } = setupMenu({
     config2025CuratorHacks: getFeatureFlags().fpl_menu_under_curator
   });
   useEventSubscription(f, useCallback(() => manager.setOpen(!0), [manager]));
@@ -42,7 +42,7 @@ export function $$y0({
   });
   return jsx("div", {
     ...xk(!t && v.hidden),
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(IconButton, {
         htmlAttributes: {

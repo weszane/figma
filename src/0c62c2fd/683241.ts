@@ -8,7 +8,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { isIOSUA } from "../figma_app/778880";
 import { pW } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 var o = n;
 let g = "mobile_download_prompt--mobilePromptTitle--7Tgsn text--fontPos13--xW8hS text--_fontBase--QdLsd";
@@ -85,7 +85,7 @@ export function $$v0(e) {
             trackingProperties: {
               userId: e.userIdForTracking,
               appLink: r,
-              trackingDescriptor: _$$c.MOBILE_WEB_MOBILE_APP_DOWNLOAD_PROMPT_CLICKED
+              trackingDescriptor: UpgradeAction.MOBILE_WEB_MOBILE_APP_DOWNLOAD_PROMPT_CLICKED
             },
             width: "fill",
             href: r,

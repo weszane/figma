@@ -5,18 +5,18 @@ import { W } from '../905/82276'
 import { FAccessLevelType, FBasicPermissionType, FDomainVerificationStatusType, FPaymentHealthStatusType, FPermissionLevelType, FPlanFeatureType, FPlanLimitationType, FStudentTeamStatusType, FTrialType } from '../figma_app/191312'
 
 // Enum schemas for various types (l, d, c, u, p, _, h, m, g)
-const trialTypeSchema = nativeEnum(FTrialType) // l
-const permissionLevelSchema = nativeEnum(FPermissionLevelType) // d
-const accessLevelSchema = nativeEnum(FAccessLevelType) // c
-const planFeatureSchema = nativeEnum(FPlanFeatureType) // u
-const studentTeamStatusSchema = nativeEnum(FStudentTeamStatusType) // p
-const paymentHealthStatusSchema = nativeEnum(FPaymentHealthStatusType) // _
-const domainVerificationStatusSchema = nativeEnum(FDomainVerificationStatusType) // h
-const basicPermissionSchema = nativeEnum(FBasicPermissionType) // m
-const planLimitationSchema = nativeEnum(FPlanLimitationType) // g
+export const trialTypeSchema = nativeEnum(FTrialType) // l
+export const permissionLevelSchema = nativeEnum(FPermissionLevelType) // d
+export const accessLevelSchema = nativeEnum(FAccessLevelType) // c
+export const planFeatureSchema = nativeEnum(FPlanFeatureType) // u
+export const studentTeamStatusSchema = nativeEnum(FStudentTeamStatusType) // p
+export const paymentHealthStatusSchema = nativeEnum(FPaymentHealthStatusType) // _
+export const domainVerificationStatusSchema = nativeEnum(FDomainVerificationStatusType) // h
+export const basicPermissionSchema = nativeEnum(FBasicPermissionType) // m
+export const planLimitationSchema = nativeEnum(FPlanLimitationType) // g
 
 /** Constant value for internal use (original: $$f8) */
-const teamConstant = 118 // $$f8
+export const teamConstant = 118 // $$f8
 
 /**
  * Enum for payment action requirements (original: $$E7)
@@ -114,7 +114,7 @@ export function isTeamEligibleForUpgrade(team: {
  * Enum for file actions (original: $$S2)
  * @enum {string}
  */
-const fileActionEnum = {
+export const fileActionEnum = {
   MOVE_FILES: 'move_files',
   DUPLICATE_FILES: 'duplicate_files',
   RESTORE_FILES: 'restore_files',

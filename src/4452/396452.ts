@@ -10,8 +10,8 @@ import { getRumLoggingConfig } from "../905/16237";
 import { S as _$$S, d as _$$d } from "../4452/304860";
 import { ps } from "../figma_app/845611";
 import { selectViewAction } from "../905/929976";
-import { c as _$$c } from "../905/370443";
-import { z3 } from "../figma_app/386952";
+import { UpgradeAction } from "../905/370443";
+import { getSelectedViewType } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
 import { IX } from "../905/712921";
 import { DashboardSection } from "../figma_app/650409";
@@ -19,7 +19,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$b2() {
   let e = useDispatch();
-  let t = z3();
+  let t = getSelectedViewType();
   return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx($z, {
     variant: "secondary",
     onClick: () => {
@@ -33,7 +33,7 @@ export function $$b2() {
       "data-testid": "admin-dashboard-view-history-button"
     },
     trackingProperties: {
-      trackingDescriptor: _$$c.VIEW_HISTORY
+      trackingDescriptor: UpgradeAction.VIEW_HISTORY
     },
     children: getI18nString("admin_dashboard.requests.view_history")
   });
@@ -66,7 +66,7 @@ function j() {
     }),
     variant: "secondary",
     trackingProperties: {
-      trackingDescriptor: _$$c.APPROVAL_SETTINGS
+      trackingDescriptor: UpgradeAction.APPROVAL_SETTINGS
     },
     trackingOptions: i,
     children: renderI18nText("admin_dashboard.requests.approval_settings")
@@ -96,7 +96,7 @@ function I({
     onClick: _,
     variant: "secondary",
     trackingProperties: {
-      trackingDescriptor: _$$c.APPROVAL_SETTINGS
+      trackingDescriptor: UpgradeAction.APPROVAL_SETTINGS
     },
     trackingOptions: p,
     children: renderI18nText("admin_dashboard.requests.approval_settings")

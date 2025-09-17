@@ -66,7 +66,7 @@ import { w as _$$w2 } from "../7021/108292";
 import { filterNotNullish } from "../figma_app/656233";
 import { selectViewAction } from "../905/929976";
 import { Ti } from "../figma_app/658324";
-import { cD, ol } from "../figma_app/598018";
+import { getCurrentTeamId, getCurrentTeam } from "../figma_app/598018";
 import { DashboardSections } from "../905/548208";
 import { KindEnum } from "../905/129884";
 import { R as _$$R2 } from "../figma_app/522082";
@@ -80,7 +80,7 @@ import { postUserFlag } from "../905/985254";
 import { bE } from "../figma_app/375098";
 import { Tb } from "../figma_app/350203";
 import { C9 } from "../figma_app/8833";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { V6 } from "../1250/12342";
 import { a9 } from "../figma_app/741211";
@@ -88,7 +88,7 @@ import { y as _$$y } from "../1250/295724";
 import { isOrgFolderV2 } from "../figma_app/528509";
 import { T as _$$T2 } from "../905/378189";
 import { p8, aV } from "../figma_app/722362";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { f as _$$f } from "../905/940356";
 import { q as _$$q } from "../905/236878";
 import { isTeamLocked, hasValidSubscription, hasFolderOrTeamRestrictions } from "../figma_app/345997";
@@ -127,7 +127,7 @@ import { B as _$$B } from "../905/352524";
 import { t as _$$t3 } from "../figma_app/32680";
 import { v as _$$v } from "../1250/140227";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { V as _$$V2 } from "../1250/925098";
 import { Q as _$$Q3 } from "../5132/668270";
 import { hr } from "../905/352022";
@@ -227,7 +227,7 @@ function th() {
     className: "x78zum5 xjwf9q1 xx99whi xl56j7k x6s0dn4 x19y5rnk x1r7xphn x1a33sea",
     onClick: () => openCooperPublishFlow("editor-pre-publish-banner"),
     trackingProperties: {
-      trackingDescriptor: _$$c2.PUBLISH_TEMPLATE,
+      trackingDescriptor: UpgradeAction.PUBLISH_TEMPLATE,
       buttonContext: getI18nString("slides.templates.banner.publish_template_button"),
       productType: FFileType.COOPER
     },
@@ -239,7 +239,7 @@ function tb() {
     className: "x78zum5 xjwf9q1 xx99whi xl56j7k x6s0dn4 x19y5rnk xkq88pg x1tk3asg x1ypdohk",
     onClick: () => FJ(qv, "_blank"),
     trackingProperties: {
-      trackingDescriptor: _$$c2.SHOW_ME_HOW,
+      trackingDescriptor: UpgradeAction.SHOW_ME_HOW,
       buttonContext: getI18nString("cooper.templates.show_me_how"),
       productType: FFileType.COOPER
     },
@@ -264,17 +264,17 @@ function tk({
   return jsx(ModalRootComponent, {
     manager: e,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: t ? getI18nString("multiplayer_upgrade_modal.content_saving") : getI18nString("multiplayer_upgrade_modal.content_reloading")
         })
       }), n || jsx(Fragment, {
-        children: jsx(nB, {
+        children: jsx(DialogBody, {
           children: getI18nString("multiplayer_upgrade_modal.content_offline")
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(_$$k2, {
             size: "md"
           })
@@ -482,9 +482,9 @@ let tz = {
   bannerId: om.ProTeamPastDue,
   Banner: function (e) {
     let t = useDispatch();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = FC();
+    let i = selectPermissionsState();
     let o = n && canAdminTeam(n, i);
     let l = selectCurrentFile();
     let d = !!l?.canEdit;
@@ -588,9 +588,9 @@ let tq = {
   bannerId: om.ProTeamChargeFailed,
   Banner: function (e) {
     let t = useDispatch();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = FC();
+    let i = selectPermissionsState();
     let o = n && canAdminTeam(n, i);
     let s = r && r.subscription === FPaymentHealthStatusType.GRACE_PERIOD;
     let l = {
@@ -635,9 +635,9 @@ let tV = {
   bannerId: om.ProTeamNoMonthlySubEditorCountExceeded,
   Banner: function (e) {
     let t = useDispatch();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let o = FC();
+    let o = selectPermissionsState();
     let s = n && canAdminTeam(n, o);
     if (r && r.subscription === FPaymentHealthStatusType.NO_MONTHLY_SUB_EDITOR_COUNT_EXCEEDED) {
       let a = s ? jsx("span", {
@@ -682,9 +682,9 @@ let tH = {
   Banner: function (e) {
     let t = useDispatch();
     let n = selectCurrentFile();
-    let r = cD();
+    let r = getCurrentTeamId();
     let i = useSelector(e => r ? e.teams[r] : null);
-    let o = FC();
+    let o = selectPermissionsState();
     let l = useSelector(e => e.userTeamFlags);
     let d = useStore();
     let _ = _$$q({
@@ -777,9 +777,9 @@ let tK = {
   bannerId: om.StarterTeamOverFreeLimitAndLocked,
   Banner: function (e) {
     let t = useDispatch();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = FC();
+    let i = selectPermissionsState();
     let l = isDevHandoffEditorType();
     let d = isWhiteboardFileType();
     let _ = useStore();
@@ -939,7 +939,7 @@ let tQ = {
     let t = selectCurrentFile();
     let n = useCurrentUserOrgId();
     let a = getResourceDataOrFallback(t?.isAbandonedDraftFile);
-    let r = ol();
+    let r = getCurrentTeam();
     if (r && !n && a) {
       let n = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
         children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(BaseLinkComponent, {
@@ -973,11 +973,11 @@ let tZ = {
   bannerId: om.PersonalProjectDeprecatedFile,
   Banner: function (e) {
     let t = selectCurrentFile();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = useCurrentUserOrgId();
     let o = useDispatch();
-    let d = FC();
+    let d = selectPermissionsState();
     if (!(i && t?.project && isOrgFolderV2(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
       let t = {
         bannerType: x1.WARN,
@@ -1011,7 +1011,7 @@ let tX = {
   bannerId: om.EduGracePeriodAccessRestricted,
   Banner: function (e) {
     let t = selectCurrentFile();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectCurrentUser();
     let o = useCurrentFileWorkshopModeStatus();
@@ -1043,7 +1043,7 @@ let tJ = {
   bannerId: om.EduGracePeriodShowReminder,
   Banner: function (e) {
     let t = selectCurrentFile();
-    let n = cD();
+    let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectCurrentUser();
     let o = useCurrentFileWorkshopModeStatus();
@@ -1391,7 +1391,7 @@ function t9({
     to: `/community/file/${e.id}${n}`,
     children: jsx(ButtonSecondaryTracked, {
       trackingProperties: {
-        trackingDescriptor: t ? _$$c2.OPEN_IN_COMMUNITY : _$$c2.BUY_THE_RESOURCE
+        trackingDescriptor: t ? UpgradeAction.OPEN_IN_COMMUNITY : UpgradeAction.BUY_THE_RESOURCE
       },
       children: t ? renderI18nText("banner.freemium_preview.open_in_community") : renderI18nText("banner.freemium_preview.buy_the_resource")
     })
@@ -1501,7 +1501,7 @@ let nt = {
           });
         }
       },
-      trackingDescriptor: _$$c2.USE_IN_NEW_FILE,
+      trackingDescriptor: UpgradeAction.USE_IN_NEW_FILE,
       buttonText: T
     };
     if (w) {
@@ -1521,7 +1521,7 @@ let nt = {
         onClick: () => {
           YM(t, r.fileKey, m, "editor-republish-banner");
         },
-        trackingDescriptor: _$$c2.PUBLISH_CHANGES,
+        trackingDescriptor: UpgradeAction.PUBLISH_CHANGES,
         buttonText: getI18nString("templates.banner.republish.republish_action")
       };
       return jsx(_$$f2, {
@@ -1586,7 +1586,7 @@ let nn = {
     let m = u ? {
       type: MA.STRUCTURED,
       onClick: () => openSlidesPublishFlow("editor-pre-publish-banner"),
-      trackingDescriptor: _$$c2.PUBLISH_TEMPLATE,
+      trackingDescriptor: UpgradeAction.PUBLISH_TEMPLATE,
       buttonText: getI18nString("slides.templates.banner.publish_template_button")
     } : {
       type: MA.CUSTOM,
@@ -1750,7 +1750,7 @@ let nr = {
 let ni = {
   bannerId: om.TeamAdminOpenInvoiceReminder,
   Banner: function () {
-    let e = ol();
+    let e = getCurrentTeam();
     let t = _$$R2(e?.id);
     let n = _$$n();
     return e && t && n ? jsx(eE, {

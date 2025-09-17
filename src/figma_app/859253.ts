@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { mc, YJ } from "../figma_app/860955";
-import { a as _$$a } from "../figma_app/215667";
+import { MenuContainerComp, MenuGroupComp } from "../figma_app/860955";
+import { DropdownThemeProvider } from "../figma_app/215667";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
@@ -21,9 +21,9 @@ export function $$u0({
     ...e.$$import
   }) : null;
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(_$$a, {
+    children: jsx(DropdownThemeProvider, {
       mode: "match",
-      children: jsx(mc, {
+      children: jsx(MenuContainerComp, {
         htmlAttributes: {
           "data-onboarding-key": t
         },
@@ -34,7 +34,7 @@ export function $$u0({
             fileCreationDefaultsDropdownType: $$c1
           },
           onlyOnce: !0,
-          children: [jsx(YJ, {
+          children: [jsx(MenuGroupComp, {
             children: u
           }), p]
         })

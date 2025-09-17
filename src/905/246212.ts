@@ -1,72 +1,124 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, forwardRef, useState, useMemo, useContext, useLayoutEffect } from "react";
-import { o as _$$o } from "../905/695226";
-import { useRecording } from "../905/959312";
-import { useExposedRef } from "../905/581092";
-import { defaultComponentAttribute } from "../905/577641";
-import { hasTextSelection } from "../905/914656";
-let c = createContext(null);
-let u = forwardRef(({
-  onPointerDown: e,
-  spellCheck: t = !1,
-  ...i
-}, s) => {
-  let [o, d] = useState(!1);
-  let u = useMemo(() => ({
-    setDisabled: d
-  }), []);
-  let p = _$$o(e);
-  return jsx(c.Provider, {
-    value: u,
-    children: jsx("div", {
-      ...i,
+import { createContext, forwardRef, useContext, useLayoutEffect, useMemo, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { defaultComponentAttribute } from '../905/577641'
+import { useExposedRef } from '../905/581092'
+import { setupFauxFocusHandler } from '../905/695226'
+import { hasTextSelection } from '../905/914656'
+import { useRecording } from '../905/959312'
+/**
+ * Context for InputPrimitive state management.
+ * @originalName c
+ */
+const InputPrimitiveContext = createContext<{ setDisabled: React.Dispatch<React.SetStateAction<boolean>> } | null>(null)
+
+/**
+ * Root component for InputPrimitive.
+ * Provides context and handles faux focus and disabled state.
+ * @originalName u
+ */
+export const InputPrimitiveRoot = forwardRef<HTMLDivElement, {
+  onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void
+  spellCheck?: boolean
+  [key: string]: any
+}>(({
+  onPointerDown,
+  spellCheck = false,
+  ...props
+}, ref) => {
+  const [disabled, setDisabled] = useState(false)
+  const contextValue = useMemo(() => ({ setDisabled }), [])
+  const handlePointerDown = setupFauxFocusHandler(onPointerDown)
+
+  return jsx(InputPrimitiveContext.Provider, {
+    value: contextValue,
+    children: jsx('div', {
+      ...props,
       ...defaultComponentAttribute,
-      ref: s,
-      onPointerDown: p,
-      spellCheck: t,
-      "data-fpl-disabled": o || void 0
-    })
-  });
-});
-u.displayName = "InputPrimitive.Root";
-export let $$p0 = Object.assign(forwardRef(({
-  type: e = "text",
-  onChange: t,
-  disabled: i,
-  spellCheck: a = !1,
-  recordingKey: u,
-  htmlAttributes: p,
-  ...m
-}, h) => {
-  let g = useContext(c);
-  let f = useExposedRef(h);
-  !function (e, t) {
+      ref,
+      'onPointerDown': handlePointerDown,
+      spellCheck,
+      'data-fpl-disabled': disabled || undefined,
+    }),
+  })
+})
+InputPrimitiveRoot.displayName = 'InputPrimitive.Root'
+
+/**
+ * InputPrimitive component.
+ * Handles input logic, context, recording, and selection.
+ * @originalName $$p0
+ */
+export const InputPrimitive = Object.assign(
+  forwardRef<HTMLInputElement, {
+    type?: string
+    onChange?: (value: string, options?: { event: React.ChangeEvent<HTMLInputElement> }) => void
+    disabled?: boolean
+    spellCheck?: boolean
+    recordingKey?: string
+    htmlAttributes?: React.InputHTMLAttributes<HTMLInputElement>
+    autoFocus?: boolean
+    [key: string]: any
+  }>(({
+    type = 'text',
+    onChange,
+    disabled,
+    spellCheck = false,
+    recordingKey,
+    htmlAttributes,
+    autoFocus,
+    ...props
+  }, ref) => {
+    const context = useContext(InputPrimitiveContext)
+    const inputRef = useExposedRef(ref)
+
+    /**
+     * Selects input text on autoFocus if no text is selected.
+     * @originalName anonymous function in $$p0
+     */
     useLayoutEffect(() => {
-      t && !hasTextSelection(e.current) && e.current.select();
-    }, []);
-  }(f, m.autoFocus);
-  let _ = useRecording(t, {
-    eventName: "change",
-    recordingKey: u
-  }, [t]);
-  useLayoutEffect(() => g?.setDisabled(i ?? !1), [g, i]);
-  return jsx("input", {
-    ...m,
-    ...p,
-    ...defaultComponentAttribute,
-    ref: f,
-    size: 1,
-    type: e,
-    onChange: _ ? e => _(e.target.value, {
-      event: e
-    }) : void 0,
-    readOnly: i,
-    "aria-disabled": i || void 0,
-    spellCheck: a,
-    "data-1p-ignore": "password" !== e || void 0
-  });
-}), {
-  Root: u
-});
-$$p0.displayName = "InputPrimitive";
-export const Y = $$p0;
+      if (autoFocus && inputRef.current && !hasTextSelection(inputRef.current)) {
+        inputRef.current.select()
+      }
+    }, [])
+
+    /**
+     * Handles recording logic for input changes.
+     * @originalName _
+     */
+    const handleChange = useRecording(onChange, {
+      eventName: 'change',
+      recordingKey,
+    }, [onChange])
+
+    /**
+     * Updates disabled state in context.
+     * @originalName useLayoutEffect in $$p0
+     */
+    useLayoutEffect(() => {
+      context?.setDisabled(disabled ?? false)
+    }, [context, disabled])
+
+    return jsx('input', {
+      ...props,
+      ...htmlAttributes,
+      ...defaultComponentAttribute,
+      'ref': inputRef,
+      'size': 1,
+      type,
+      'onChange': handleChange
+        ? e => handleChange(e.target.value, { event: e })
+        : undefined,
+      'readOnly': disabled,
+      'aria-disabled': disabled || undefined,
+      spellCheck,
+      'data-1p-ignore': type !== 'password' || undefined,
+    })
+  }),
+  {
+    Root: InputPrimitiveRoot,
+  },
+)
+InputPrimitive.displayName = 'InputPrimitive'
+
+/** Export InputPrimitive as Y for compatibility. @originalName Y */
+export const Y = InputPrimitive

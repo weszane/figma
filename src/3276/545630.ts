@@ -66,7 +66,7 @@ import { useSubscription } from "../figma_app/288654";
 import { y as _$$y } from "../figma_app/705249";
 import { j as _$$j } from "../draftjs_composer/390258";
 import { O1, KD } from "../figma_app/317394";
-import { z3, _6 } from "../figma_app/386952";
+import { getSelectedViewType, getSelectedView } from "../figma_app/386952";
 import { t0 as _$$t3 } from "../figma_app/198840";
 import { FileCanEdit } from "../figma_app/43951";
 import { throwTypeError } from "../figma_app/465776";
@@ -1570,7 +1570,7 @@ let ns = memo(e => {
   });
 });
 function nr(e) {
-  let t = z3();
+  let t = getSelectedViewType();
   let n = useSelector(e => e.comments.activeThread?.source);
   let s = useSelector(e => e.comments.activeThread?.id);
   let r = useSelector(e => e.comments.threads);
@@ -2767,7 +2767,7 @@ function nO(e) {
   let s = _B();
   let r = _$$eW();
   let l = useMemo(() => vl(n, e.thread, !0, r.paddingRight), [e.thread, n, r.paddingRight]);
-  let d = _6();
+  let d = getSelectedView();
   let m = "communityHub" === d.view;
   let u = _$$eR(e.thread.id);
   let p = useRef(null);

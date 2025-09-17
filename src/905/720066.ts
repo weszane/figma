@@ -4,9 +4,9 @@ import { S } from "../905/539306";
 import { mv, AR } from "../905/182534";
 import { ky } from "../905/977218";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { vj } from "../905/574958";
 function m(e, t, i, n, r, a, o) {
   let l = mv(e);
@@ -26,7 +26,7 @@ function m(e, t, i, n, r, a, o) {
 export function $$h0(e, t, i) {
   let s = useDispatch();
   let l = useSelector(e => e.search);
-  let c = _6();
+  let c = getSelectedView();
   let u = useSelector(e => S(e));
   return useCallback(n => {
     s(ky());
@@ -37,9 +37,9 @@ export function $$g1() {
   let e = useDispatch();
   let t = selectCurrentUser();
   let i = useCurrentUserOrgId();
-  let p = ol()?.id;
+  let p = getCurrentTeam()?.id;
   let h = useSelector(e => e.search);
-  let g = _6();
+  let g = getSelectedView();
   let f = useSelector(e => S(e));
   return useCallback((n, r, a) => {
     if (e(ky()), !a) return;

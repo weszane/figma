@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Hg } from "../figma_app/304955";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { FJ } from "../905/508367";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
@@ -12,7 +12,7 @@ import { TextWithTruncation } from "../905/984674";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { IT, gY } from "../905/713695";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { nc } from "../figma_app/570630";
 import { TT, rY, lA } from "../figma_app/952035";
@@ -39,7 +39,7 @@ let $$S0 = registerModal(function (e) {
   let H = !!U.isLoading;
   let [z, W] = useState(!1);
   let K = useCurrentUserOrgId();
-  let Y = ol();
+  let Y = getCurrentTeam();
   useEffect(() => {
     G || H ? W(!0) : W(!1);
   }, [G, H]);
@@ -205,12 +205,12 @@ let $$S0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: "Supabase"
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           style: {
             padding: "16px"

@@ -4,7 +4,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
 import { ButtonPrimitive } from "../905/632989";
 import { UI3ConditionalWrapper } from "../905/341359";
@@ -46,8 +46,8 @@ let v = registerModal(function (e) {
       children: jsx(ModalRootComponent, {
         manager: s,
         width: j,
-        children: jsx(vo, {
-          children: jsx(nB, {
+        children: jsx(DialogContents, {
+          children: jsx(DialogBody, {
             children: jsxs("div", {
               className: Rj,
               children: [jsx("div", {

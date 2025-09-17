@@ -19,7 +19,7 @@ import { z as _$$z } from "../6268/891724";
 import { v as _$$v } from "../1250/232926";
 import { OG, w6 } from "../1250/340571";
 import { A as _$$A } from "../1250/29260";
-import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { S as _$$S } from "../905/711470";
 import { KindEnum } from "../905/129884";
@@ -35,7 +35,7 @@ import { J as _$$J2 } from "../905/125993";
 import { g as _$$g } from "../905/757007";
 import { A as _$$A2 } from "../905/251970";
 import { $P } from "../vendor/218029";
-import { A as _$$A3 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { R as _$$R } from "../905/621802";
 import { f as _$$f } from "../905/54715";
@@ -93,7 +93,7 @@ function T({
   let {
     manager,
     getTriggerProps
-  } = _$$b({
+  } = setupMenu({
     initialPosition: "bottom"
   });
   let c = [{
@@ -103,7 +103,7 @@ function T({
     value: "insertions",
     label: getI18nString("dev_handoff.component_browser.sort_by_insertions")
   }];
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       ...getTriggerProps(),
@@ -114,7 +114,7 @@ function T({
         "data-testid": "component_browser_sort_by"
       },
       children: jsx(_$$S, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: jsx(z6, {
         title: jsx("div", {}),
         onChange: n,
@@ -467,7 +467,7 @@ let et = forwardRef(function (e, n) {
     entrypoint
   } = e;
   let [h, u] = useState("");
-  let [b] = _$$A3(h, 300);
+  let [b] = useDebounce(h, 300);
   let f = (selectedRepositories?.length ?? 0) > 0;
   let v = component?.code_connect_info.v1.state === "ignored";
   let {
@@ -576,8 +576,8 @@ function em({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       "aria-label": getI18nString("dev_handoff.component_browser.bulk_icon_connect.more_options"),
@@ -587,8 +587,8 @@ function em({
       },
       ...getTriggerProps(),
       children: jsx(_$$J2, {})
-    }), jsx(mc, {
-      children: jsx(q7, {
+    }), jsx(MenuContainerComp, {
+      children: jsx(MenuItemComp, {
         onClick: function () {
           for (let t of e) t.component.isIcon && n({
             codeConnectId: t.component.code_connect_info.v1.id,
@@ -1278,7 +1278,7 @@ function nw({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let l = _$$e3();
   let [d, _] = useState(!1);
   let p = async () => {
@@ -1295,31 +1295,31 @@ function nw({
   };
   let u = {
     [w6.Connected]: jsxs(Fragment, {
-      children: [c && jsx(q7, {
+      children: [c && jsx(MenuItemComp, {
         onClick: e,
         children: getI18nString("dev_handoff.component_browser.settings.change_repository")
-      }), getFeatureFlags().dt_component_browser_inline_suggestions && jsx(q7, {
+      }), getFeatureFlags().dt_component_browser_inline_suggestions && jsx(MenuItemComp, {
         onClick: n,
         children: getI18nString("dev_handoff.component_browser.settings.change_github_directories")
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: h,
         children: getI18nString("dev_handoff.component_browser.settings.disconnect")
       })]
     }),
     [w6.NeedsInfo]: jsx(Fragment, {
-      children: jsx(q7, {
+      children: jsx(MenuItemComp, {
         onClick: e,
         children: getI18nString("dev_handoff.component_browser.settings.select_repository")
       })
     }),
     [w6.Pending]: jsx(Fragment, {
-      children: jsx(q7, {
+      children: jsx(MenuItemComp, {
         onClick: h,
         children: getI18nString("dev_handoff.component_browser.settings.manage_request")
       })
     }),
     [w6.NotSetup]: jsx(Fragment, {
-      children: jsx(q7, {
+      children: jsx(MenuItemComp, {
         onClick: p,
         children: d ? jsx(_$$k2, {
           size: "sm"
@@ -1327,13 +1327,13 @@ function nw({
       })
     })
   };
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(Button, {
       variant: "ghost",
       ...getTriggerProps(),
       children: jsx(_$$J2, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: u[o]
     })]
   });
@@ -1343,7 +1343,7 @@ function nj() {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let c = useCallback(() => {
     e(showModalHandler({
       type: nn
@@ -1356,17 +1356,17 @@ function nj() {
   }, [e]);
   return jsx("div", {
     className: "component_browser_settings_panel--setupIngestionButton---keGz",
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(Button, {
         variant: "ghost",
         ...getTriggerProps(),
         children: jsx(_$$J2, {})
-      }), jsxs(mc, {
-        children: [jsx(q7, {
+      }), jsxs(MenuContainerComp, {
+        children: [jsx(MenuItemComp, {
           onClick: c,
           children: getI18nString("dev_handoff.component_browser.settings.setup")
-        }), jsx(q7, {
+        }), jsx(MenuItemComp, {
           onClick: r,
           children: getI18nString("dev_handoff.codebase_suggestions.delete_all_codebase_suggestions")
         })]

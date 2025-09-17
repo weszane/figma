@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { a as _$$a } from "../905/5627";
@@ -36,12 +36,12 @@ export let $$y0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: y,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("universal_insert.manifest_error_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs(AutoLayout, {
           direction: "horizontal",
           horizontalAlignItems: "space-between",
@@ -72,8 +72,8 @@ export let $$y0 = registerModal(function (e) {
             children: jsx(_$$a, {})
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => r(popModalStack()),
             variant: "secondary",

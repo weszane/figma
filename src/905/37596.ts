@@ -46,14 +46,14 @@ import { C as _$$C2 } from "../905/138077";
 import { V as _$$V } from "../905/633585";
 import { d as _$$d } from "../905/693444";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { Ct } from "../figma_app/199513";
 import { b as _$$b } from "../905/388233";
 import { N as _$$N2 } from "../figma_app/55043";
 import { ProjectByIdForFolderSettings } from "../figma_app/43951";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { KindEnum } from "../905/129884";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 var p = u;
 let Y = registerModal(function (e) {
   let t = useTeamPlanFeatures().unwrapOr(null);
@@ -378,12 +378,12 @@ let eo = (e, t) => {
   };
   let R = () => {
     a(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: o.team,
-        resource: Bi.PROJECT_TRANSFER,
-        currentPlan: _$$F2.Plan.STARTER,
-        upsellPlan: _$$F2.Plan.PRO,
+        resource: FeatureFlag.PROJECT_TRANSFER,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: null
       }
     }));

@@ -16,7 +16,7 @@ import { Fh, Mw, U1 } from "../905/191601";
 import { an, y$ } from "../905/81009";
 import { Tf, nb, hi, c_, Y6, YC } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
 import { isRecentsAndSharingView } from "../figma_app/193867";
 import { yH } from "../figma_app/722141";
@@ -29,7 +29,7 @@ import { TextWithTruncation } from "../905/984674";
 import { E as _$$E2 } from "../905/53857";
 import { z as _$$z } from "../905/947624";
 import { r as _$$r } from "../905/571838";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { w4 } from "../905/445814";
 import { C as _$$C } from "../905/226458";
@@ -384,7 +384,7 @@ function eI({
   let c = t || i;
   let [u, m] = useState(!1);
   let g = _$$C(e);
-  let f = _6();
+  let f = getSelectedView();
   let _ = Tf.getTeamId(e);
   let A = Tf.getOrgId(e);
   let b = c_(e).unwrapOr(!1);
@@ -454,7 +454,7 @@ function eE({
       size: 24
     });
     let r = Tf.getEditorType(e);
-    return e.type === nb.FILE && e.file.isPublishedSite && r ? jsx(_$$J, {
+    return e.type === nb.FILE && e.file.isPublishedSite && r ? jsx(setupThemeContext, {
       brand: _$$K2(r),
       children: jsx(_$$E2, {
         variant: "brandFilled",
@@ -544,7 +544,7 @@ export function $$eT0({
   sortBy: L
 }) {
   let F = useDispatch();
-  let M = _6();
+  let M = getSelectedView();
   let j = useCurrentUserOrgId();
   let U = Xr(yH);
   let B = _$$v();

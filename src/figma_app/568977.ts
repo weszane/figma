@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { HiddenLabel } from "../905/270045";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { bL as _$$bL, D0 } from "../905/4410";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
@@ -122,12 +122,12 @@ export function $$x1(e) {
     draggable: "header",
     defaultPosition: L,
     recordingKey: generateRecordingKey(e, "modal"),
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("fullscreen.nudge.nudge_amount")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: {
           left: 0,
           right: 0

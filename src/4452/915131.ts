@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { T as _$$T } from "../905/909590";
+import { Textarea } from "../905/909590";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Ay } from "../905/865071";
@@ -184,7 +184,7 @@ export let $$K0 = registerModal(function (e) {
     imgUrl: null
   }));
   let eC = useId();
-  let ek = getFeatureFlags().fpl_textarea_migration ? jsx(_$$T, {
+  let ek = getFeatureFlags().fpl_textarea_migration ? jsx(Textarea, {
     onChange: eN,
     value: ew,
     placeholder: getI18nString("team_creation.optional"),

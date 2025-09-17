@@ -4,32 +4,32 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { FRequestStatusType } from "../figma_app/191312";
-import { D } from "../905/412108";
+import { convertSinatraModel } from "../905/412108";
 import { PluginVersionsRecordSchema } from "../figma_app/155287";
 var u = (e => (e.PENDING = "pending", e.APPROVED = "approved", e.REJECTED = "rejected", e))(u || {});
-let p = D(z.object({
+let p = convertSinatraModel(z.object({
   prompt: z.string(),
   inputType: z.literal("single_select"),
   options: z.array(z.lazy(() => f))
 }));
-let m = D(z.object({
+let m = convertSinatraModel(z.object({
   prompt: z.string(),
   inputType: z.literal("multi_select"),
   options: z.array(z.lazy(() => f))
 }));
-let h = D(z.object({
+let h = convertSinatraModel(z.object({
   prompt: z.string().nullish(),
   inputType: z.literal("text"),
   value: z.string().nullish(),
   placeholder: z.string()
 }));
-let g = D.discriminatedUnion("inputType", [p, m, h]);
-let f = D(z.object({
+let g = convertSinatraModel.discriminatedUnion("inputType", [p, m, h]);
+let f = convertSinatraModel(z.object({
   label: z.string(),
   subQuestions: z.array(g).nullish(),
   isSelected: z.boolean().optional()
 }));
-let _ = D(z.object({
+let _ = convertSinatraModel(z.object({
   version: z.string(),
   questions: z.array(g)
 }));
@@ -41,13 +41,13 @@ let y = {
   responses: $$A0,
   formVersion: z.union([z.string(), z.number()])
 };
-let b = D(z.object(y));
+let b = convertSinatraModel(z.object(y));
 let v = {
   ...y,
   plugin: PluginVersionsRecordSchema
 };
-D(z.object(v));
-D(z.object({
+convertSinatraModel(z.object(v));
+convertSinatraModel(z.object({
   ...v,
   id: z.string(),
   createdAt: z.coerce.date(),

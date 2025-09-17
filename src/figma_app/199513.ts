@@ -20,17 +20,17 @@ import { showModalHandler } from "../905/156213";
 import { nX } from "../905/466026";
 import { uo as _$$uo } from "../905/98702";
 import { trackFolderEvent } from "../figma_app/314264";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { validateFolderName } from "../figma_app/528509";
 import { convertTeamToRaw } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
 import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
 import { liveStoreInstance, IT } from "../905/713695";
-import { rR, sK } from "../figma_app/598018";
+import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { W$ } from "../905/970170";
 import { Y7 } from "../905/438864";
-import { vL } from "../905/652992";
+import { PageFolderFile } from "../905/652992";
 import { fileEntityModel } from "../905/806985";
 import { FolderSchema } from "../905/316062";
 import { repositoryDefinition } from "../905/954314";
@@ -40,7 +40,7 @@ import { fileActionEnum } from "../figma_app/630077";
 import { folderAPIInstance } from "../905/522628";
 import { teamAPIClient } from "../905/834575";
 import { z as _$$z3 } from "../905/40865";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { o as _$$o } from "../905/29370";
 let Y = createOptimistThunk((e, {
   folderId: t,
@@ -508,13 +508,13 @@ let $$el3 = createOptimistThunk(async (e, t) => {
     });
   } catch (t) {
     t.data?.failure_info?.code === "ERR_FILE_LIMIT" || t.data?.failure_info?.code === "ERR_PROJECT_LIMIT" ? e.dispatch(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: i,
-        resource: vL.FOLDER,
+        resource: PageFolderFile.FOLDER,
         action: fileActionEnum.MOVE_FOLDER,
-        currentPlan: _$$F2.Plan.STARTER,
-        upsellPlan: _$$F2.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: null,
         upsellSource: UpsellModalType.FOLDER_MOVE_MODAL
       }
@@ -594,8 +594,8 @@ let $$ec6 = createOptimistThunk((e, t) => {
   let a = r.creatingNewFolder && r.creatingNewFolder.where === n && r.creatingNewFolder.teamId === i;
   let s = t.team;
   if (!a) {
-    if (s.canEdit) rR(s, {
-      type: sK.ADD_PROJECT
+    if (s.canEdit) checkTeamFileRestrictions(s, {
+      type: AddOperationType.ADD_PROJECT
     }) ? (e.dispatch(sf({
       where: n,
       teamId: i
@@ -607,13 +607,13 @@ let $$ec6 = createOptimistThunk((e, t) => {
         onFolderCreated: t.onFolderCreated
       }
     }))) : e.dispatch(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: s,
-        resource: vL.FOLDER,
+        resource: PageFolderFile.FOLDER,
         action: fileActionEnum.CREATE_FOLDER,
-        currentPlan: _$$F2.Plan.STARTER,
-        upsellPlan: _$$F2.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         editorType: null
       }
     }));else {

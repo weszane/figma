@@ -7,7 +7,7 @@ import { createOptimistThunk } from "../905/350402";
 import { le } from "../905/904854";
 import { fileImporter } from "../905/642505";
 import { GR } from "../905/81459";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { hasFolderRestrictions } from "../figma_app/345997";
 import { Mk } from "../905/163189";
 import { z } from "../905/875422";
@@ -29,7 +29,7 @@ export function $$b0() {
   let t = e?.id;
   let r = useProjectFileCreationPermissions(t);
   let a = useSelector(e => e.selectedView.view);
-  let l = FC();
+  let l = selectPermissionsState();
   return useMemo(() => "recentsAndSharing" === a ? resourceUtils.loaded(!0) : "folder" === a ? !e || hasFolderRestrictions(e, l) ? resourceUtils.loaded(!1) : r.transform(e => !!e && $$I4(e)) : resourceUtils.loaded(!1), [r, l, e, a]);
 }
 export function $$T3(e, t, r) {

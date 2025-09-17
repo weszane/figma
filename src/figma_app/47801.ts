@@ -2,7 +2,7 @@ import { jsx } from 'react/jsx-runtime';
 import { y as _$$y } from '../905/129046';
 import { h as _$$h } from '../905/207101';
 import { renderI18nText } from '../905/303541';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { rq } from '../905/425180';
 import { e as _$$e } from '../905/621515';
 import { LQ8 } from '../figma_app/6204';
@@ -49,13 +49,13 @@ export function $$f0({
       type: 'button',
       label: renderI18nText('general.got_it'),
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: void 0 !== e ? {
       type: 'link',
       label: renderI18nText('resource_connection.view_project'),
       href: e,
-      ctaTrackingDescriptor: _$$c.VIEW_PROJECT
+      ctaTrackingDescriptor: UpgradeAction.VIEW_PROJECT
     } : void 0,
     targetKey: t,
     title: c,

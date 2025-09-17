@@ -12,7 +12,7 @@ import { Fragment as _$$Fragment, Children, createContext, createElement, forwar
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { B as _$$B9 } from '../7a72fc59/288229';
 import { _ as _$$_ } from '../441/351942';
 import { u as _$$u } from '../441/357009';
@@ -48,7 +48,7 @@ import { R as _$$R1 } from '../897/631032';
 import { dR as _$$dR2 } from '../897/641331';
 import { BP } from '../897/934363';
 import { reportError, setTagGlobal } from '../905/11';
-import { F as _$$F4 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { t as _$$t9 } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
 import { r as _$$r9 } from '../905/11924';
@@ -104,7 +104,7 @@ import { ScreenReaderOnly } from '../905/172252';
 import { F as _$$F9 } from '../905/172964';
 import { y as _$$y2 } from '../905/175043';
 import { lk as _$$lk } from '../905/182453';
-import { p as _$$p5 } from '../905/185998';
+import { InputComponent } from '../905/185998';
 import { a3 as _$$a15, ow as _$$ow } from '../905/188421';
 import { d as _$$d10 } from '../905/189168';
 import { permissionScopeHandler as _$$l, zk } from '../905/189185';
@@ -125,7 +125,7 @@ import { n6 as _$$n3 } from '../905/234821';
 import { E as _$$E10 } from '../905/235326';
 import { o as _$$o0 } from '../905/237202';
 import { z as _$$z11 } from '../905/239603';
-import { Y as _$$Y3 } from '../905/246212';
+import { InputPrimitive } from '../905/246212';
 import { trackAuthEvent } from '../905/248178';
 import { A as _$$A7 } from '../905/251970';
 import { z as _$$z6 } from '../905/252950';
@@ -157,7 +157,7 @@ import { P as _$$P2 } from '../905/347284';
 import { a as _$$a18 } from '../905/361302';
 import { BannerMessage } from '../905/363675';
 import { O as _$$O0 } from '../905/365108';
-import { c as _$$c8 } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser, selectUser } from '../905/372672';
 import { W as _$$W6 } from '../905/378870';
 import { k as _$$k4 } from '../905/381239';
@@ -231,14 +231,14 @@ import { G as _$$G8 } from '../905/594445';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
-import { J as _$$J } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { compareVersions } from '../905/616700';
 import { e as _$$e5 } from '../905/621515';
 import { R as _$$R0 } from '../905/621802';
 import { ButtonPrimitive } from '../905/632989';
 import { z as _$$z9 } from '../905/634240';
 import { A as _$$A10 } from '../905/639174';
-import { Bi } from '../905/652992';
+import { FeatureFlag } from '../905/652992';
 import { i as _$$i3 } from '../905/661697';
 import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N0 } from '../905/670143';
@@ -251,7 +251,7 @@ import { e0 as _$$e4 } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { s as _$$s6 } from '../905/702260';
 import { L as _$$L2 } from '../905/704296';
-import { G as _$$G6 } from '../905/707993';
+import { getCollectionView } from '../905/707993';
 import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { pn as _$$pn } from '../905/714538';
@@ -260,7 +260,7 @@ import { TabLoop } from '../905/718764';
 import { h4 as _$$h11, Nz as _$$Nz2 } from '../905/720338';
 import { N as _$$N1 } from '../905/720559';
 import { Point } from '../905/736624';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { A as _$$A22 } from '../905/744692';
 import { T as _$$T3 } from '../905/745591';
 import { l as _$$l4 } from '../905/745972';
@@ -313,13 +313,13 @@ import { A as _$$A21 } from '../905/920165';
 import { X as _$$X4 } from '../905/924044';
 import { A as _$$A16 } from '../905/925160';
 import { a as _$$a11 } from '../905/925868';
-import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
+import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { z as _$$z8 } from '../905/931953';
 import { q as _$$q2 } from '../905/932270';
 import { I as _$$I4 } from '../905/932503';
 import { lQ as _$$lQ } from '../905/934246';
 import { O as _$$O } from '../905/936515';
-import { sD as _$$sD } from '../905/937198';
+import { logCmsError } from '../905/937198';
 import { f as _$$f0 } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
 import { R as _$$R3 } from '../905/943003';
@@ -494,7 +494,7 @@ import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtom
 import { MGP } from '../figma_app/27776';
 import { AssetAtomMap } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
-import { isPanelDisabled, getLoadingAndReadOnlyState } from '../figma_app/32891';
+import { getLoadingAndReadOnlyState, isPanelDisabled } from '../figma_app/32891';
 import { Y9 as _$$Y } from '../figma_app/42724';
 import { pO as _$$pO } from '../figma_app/42945';
 import { c as _$$c7 } from '../figma_app/43065';
@@ -506,9 +506,9 @@ import { kF as _$$kF2 } from '../figma_app/48566';
 import { rH as _$$rH } from '../figma_app/49598';
 import { R as _$$R7 } from '../figma_app/53049';
 import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
-import { BannerInsetModal, BannerFullWidth, BannerInline } from '../figma_app/59509';
+import { BannerFullWidth, BannerInline, BannerInsetModal } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
-import { addViewportOffset, getViewportInfo, computeFullscreenViewportForNode } from '../figma_app/62612';
+import { addViewportOffset, computeFullscreenViewportForNode, getViewportInfo } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
 import { renameFileOptimistic } from '../figma_app/78808';
@@ -525,7 +525,7 @@ import { Fz } from '../figma_app/106207';
 import { S as _$$S9 } from '../figma_app/106763';
 import { om as _$$om, ON } from '../figma_app/109413';
 import { b5 as _$$b4, hi as _$$hi, iI as _$$iI, T_ as _$$T_, wh as _$$wh, xB as _$$xB, yq as _$$yq, zl as _$$zl, DW, Jl, LS, OY, UM, US, Wn, Xq, Y3, ZY, Zy } from '../figma_app/114522';
-import { ViewActionType, booleanAtomFamily, sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
+import { booleanAtomFamily, Nl, sitesViewSetterAtomFamily, ViewActionType } from '../figma_app/115923';
 import { bm as _$$bm, g$ as _$$g$, Lc } from '../figma_app/116234';
 import { _9 as _$$_6, qQ } from '../figma_app/119420';
 import { n8 as _$$n7, Py as _$$Py, xG as _$$xG } from '../figma_app/121043';
@@ -578,7 +578,7 @@ import { a as _$$a2 } from '../figma_app/258808';
 import { e as _$$e0 } from '../figma_app/259678';
 import { gs as _$$gs2, lt as _$$lt, Z0 } from '../figma_app/263905';
 import { N as _$$N5 } from '../figma_app/268271';
-import { hE as _$$hE, i3 as _$$i2, jk as _$$jk, nB as _$$nB, Pt as _$$Pt, vo as _$$vo, wi as _$$wi, Wk, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogArrow, DialogActionStrip, DialogBody, DialogCustomFooter, DialogContents, DialogFooter, DialogCustomContents, DialogHeader } from '../figma_app/272243';
 import { s4 as _$$s10, Zk as _$$Zk2 } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
@@ -657,7 +657,7 @@ import { P as _$$P } from '../figma_app/483257';
 import { clamp, nearlyEqual } from '../figma_app/492908';
 import { LinkPrimitive } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
-import { y as _$$y5 } from '../figma_app/504415';
+import { SavepointModalContainer } from '../figma_app/504415';
 import { selectCurrentFile, useCurrentFileKey, useIsCurrentUserCreator, useOpenFileLibraryKey } from '../figma_app/516028';
 import { z as _$$z2 } from '../figma_app/516075';
 import { h0 as _$$h10, o3 as _$$o7, Yu as _$$Yu, Zr as _$$Zr, B_ } from '../figma_app/525810';
@@ -687,7 +687,7 @@ import { q as _$$q8 } from '../figma_app/590592';
 import { S as _$$S5 } from '../figma_app/590972';
 import { W as _$$W2 } from '../figma_app/592474';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
-import { ol as _$$ol } from '../figma_app/598018';
+import { getCurrentTeam } from '../figma_app/598018';
 import { v4 as _$$v9, Qr } from '../figma_app/598952';
 import { f7 as _$$f8, j4 as _$$j3, jr as _$$jr, Tn as _$$Tn, MO, Rv, Z7 } from '../figma_app/599979';
 import { mU as _$$mU, x7 as _$$x6 } from '../figma_app/600968';
@@ -697,7 +697,7 @@ import { Bu } from '../figma_app/604494';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { $z, c as _$$c9, Ih } from '../figma_app/617427';
 import { lV as _$$lV, AD, H5, MK } from '../figma_app/617606';
-import { c5 as _$$c, c$ as _$$c$, gL as _$$gL, Tx as _$$Tx, Qw } from '../figma_app/618433';
+import { renameCollectionOptimistically, getCollectionSummaryStatus, getCollectionViewStatus, deleteCollectionOptimistically, createCollectionOptimistically } from '../figma_app/618433';
 import { _b as _$$_b, uP as _$$uP, Dw, HA, IX, Og, q9 } from '../figma_app/618665';
 import { Fy } from '../figma_app/623300';
 import { Jr, Mj, UD } from '../figma_app/624361';
@@ -709,7 +709,7 @@ import { ay as _$$ay } from '../figma_app/628987';
 import { n as _$$n2 } from '../figma_app/630671';
 import { JT } from '../figma_app/632248';
 import { LibraryTabEnum } from '../figma_app/633080';
-import { SecureLink, BigTextInputForwardRef, linkWithTracking } from '../figma_app/637027';
+import { BigTextInputForwardRef, linkWithTracking, SecureLink } from '../figma_app/637027';
 import { g as _$$g8 } from '../figma_app/638268';
 import { UK } from '../figma_app/638601';
 import { xn as _$$xn } from '../figma_app/644079';
@@ -767,9 +767,9 @@ import { W as _$$W8 } from '../figma_app/854365';
 import { LoadingSpinner } from '../figma_app/858013';
 import { n as _$$n1 } from '../figma_app/859750';
 import { q as _$$q7 } from '../figma_app/860297';
-import { b as _$$b5, bL as _$$bL3, mc as _$$mc, q7, Q$ } from '../figma_app/860955';
+import { MenuContainerComp, MenuItemComp, MenuItemLead, MenuRootComp, setupMenu } from '../figma_app/860955';
 import { DF } from '../figma_app/861252';
-import { A2 } from '../figma_app/872077';
+import { collectionService } from '../figma_app/872077';
 import { y as _$$y3 } from '../figma_app/873852';
 import { wh as _$$wh2, AP, OG } from '../figma_app/876589';
 import { createRecordingCallback, generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
@@ -785,7 +785,7 @@ import { z0 } from '../figma_app/914216';
 import { zy } from '../figma_app/915202';
 import { KJ } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
-import { BadgeSize, Badge, BadgeColor } from '../figma_app/919079';
+import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { f as _$$f7 } from '../figma_app/924252';
 import { capitalize, formatList, slugify } from '../figma_app/930338';
@@ -834,7 +834,6 @@ import { d as _$$d0 } from '../vendor/683721';
 import { a as _$$a9 } from '../vendor/683966';
 import { $convertFromMarkdownString, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, HEADING, ITALIC_STAR, ITALIC_UNDERSCORE, LINK, ORDERED_LIST, QUOTE, STRIKETHROUGH, UNORDERED_LIST } from '../vendor/693164';
 import { E as _$$E0 } from '../vendor/807288';
-import { A as _$$A4 } from '../vendor/850789';
 import { Q as _$$Q7 } from '../vendor/898216';
 import { $ as _$$$3 } from '../vendor/909072';
 import { N as _$$N10 } from '../vendor/930821';
@@ -898,7 +897,7 @@ function E({
   guid: n,
   repeater: s
 }) {
-  let o = _$$gL(i).data;
+  let o = getCollectionViewStatus(i).data;
   let {
     zoomScale,
     selectedNodeId,
@@ -1038,7 +1037,7 @@ let K = memo(({
     hoveredNodeId: r,
     selectedNodeParentResponsiveSetId: n
   }), [o, i, r, n]);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: 'seascape',
     children: jsx('div', {
       style: {
@@ -1293,7 +1292,7 @@ function en({
   let a = n.data;
   let s = VC(t);
   let r = getSingletonSceneGraph().get(i);
-  r == null ? _$$sD('No node found', {
+  r == null ? logCmsError('No node found', {
     nodeId: i
   }) : n.status === 'loaded' && a && _$$l.system('dakota-set-item-ids', () => {
     _$$n(() => {
@@ -1336,7 +1335,7 @@ function el({
   }) : [];
   e.limit > 0 && s.length > e.limit && s.splice(e.limit);
   let r = getSingletonSceneGraph().get(t);
-  r == null ? _$$sD('No node found', {
+  r == null ? logCmsError('No node found', {
     nodeId: t
   }) : _$$l.system('dakota-set-item-ids', () => {
     _$$n(() => {
@@ -2152,7 +2151,7 @@ function iD({
     let [{
       windowInnerWidth: t,
       windowInnerHeight: i
-    }] = _$$A4(_$$l4(), 300, {
+    }] = useDebounce(_$$l4(), 300, {
       equalityFn: deepEqual
     });
     let [n, l] = useAtomValueAndSetter(_$$yq);
@@ -2248,8 +2247,8 @@ function iD({
     recordingKey: 'sites-code-window',
     draggable: 'header',
     constraints: p.constraints,
-    children: jsxs(_$$vo, {
-      children: [jsxs(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
         children: [jsx(DialogLabel, {
           ref: A,
           ..._$$Ay.props(iA.windowTitle),
@@ -2285,7 +2284,7 @@ function iD({
             }
           })]
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         scrolling: 'none',
         children: jsx(iF, {
@@ -2744,7 +2743,7 @@ function nD() {
 function nz() {
   return getFeatureFlags().make_mobile_blocking_banner ? jsx(TrackingProvider, {
     name: 'Figmake Mobile Blocking Popup',
-    children: jsx(_$$J, {
+    children: jsx(setupThemeContext, {
       mode: 'light',
       children: jsx('div', {
         className: 'x78zum5 xixxii4 x13vifvy xu96u03 xh8yej3 x1dr59a3 xl56j7k xfo81ep xj4c5ne',
@@ -2801,7 +2800,7 @@ function nz() {
                 children: jsx(_$$pW, {
                   size: 'lg',
                   trackingProperties: {
-                    trackingDescriptor: _$$c8.GO_BACK
+                    trackingDescriptor: UpgradeAction.GO_BACK
                   },
                   width: 'fill',
                   href: '/files/recents',
@@ -3036,7 +3035,7 @@ function lG({
   useEffect(() => () => {
     d.current?.();
   }, []);
-  return jsx(_$$p5, {
+  return jsx(InputComponent, {
     value: r,
     onChange: e => {
       o(e);
@@ -3307,7 +3306,7 @@ function am({
         id
       } = e.siteBundle?.fileVersion ?? {};
       id && x(showModalHandler({
-        type: _$$y5,
+        type: SavepointModalContainer,
         data: {
           label: label ?? void 0,
           description: description ?? void 0,
@@ -3548,7 +3547,7 @@ function aj(e) {
   });
 }
 function ak(e) {
-  return jsx(_$$nB, {
+  return jsx(DialogBody, {
     padding: 0,
     children: jsx(Suspense, {
       fallback: jsx(_$$j$2, {}),
@@ -3780,7 +3779,7 @@ function aV() {
   let a = setupMemoizedAtomSubscription(n);
   if (i.length === 0 || a.some(e => e.status === 'loading') || a.every(e => e.status === 'errors')) return null;
   let s = e.color === 'dark';
-  return jsxs(Wk, {
+  return jsxs(DialogCustomContents, {
     className: 'x1w7iyvz xdz8niu xa3vuyk x10e4vud',
     children: [jsxs('div', {
       className: 'show_love_modal--header--5nCB3',
@@ -4025,7 +4024,7 @@ function se() {
 }
 function st() {
   let [e] = useAtomValueAndSetter(lZ);
-  let t = _$$ol();
+  let t = getCurrentTeam();
   let i = _$$h7.useTrackingContext({
     trigger: UpsellModalType.FIGMAKE_PUBLISH_SITE
   });
@@ -4038,7 +4037,7 @@ function st() {
         className: _$$s4.noWrap.cursorDefault.$,
         onClick: s,
         trackingProperties: {
-          trackingDescriptor: _$$c8.PROFESSIONAL_PLAN,
+          trackingDescriptor: UpgradeAction.PROFESSIONAL_PLAN,
           ...i
         },
         trusted: !0,
@@ -4157,7 +4156,7 @@ function sp({
   let [S, C] = useState('main');
   let T = useTeamPlanFeatures();
   let I = useIsStarterPlan(T).unwrapOr(!1);
-  let E = _$$ol();
+  let E = getCurrentTeam();
   let N = selectCurrentUser();
   let R = useCurrentUserOrg();
   let A = useIsSelectedFigmakeFullscreen();
@@ -4171,7 +4170,7 @@ function sp({
   let M = null;
   switch (S) {
     case 'main':
-      M = jsx(_$$nB, {
+      M = jsx(DialogBody, {
         children: jsxs('div', {
           className: _$$s4.py4.$,
           children: [jsx(sc, {
@@ -4279,7 +4278,7 @@ function sp({
       });
       break;
     case 'page-selection':
-      M = jsx(_$$nB, {
+      M = jsx(DialogBody, {
         children: jsx('div', {
           className: _$$s4.py4.$,
           children: jsx(al, {
@@ -4298,7 +4297,7 @@ function sp({
       });
       break;
     case 'publish-history':
-      M = jsx(_$$nB, {
+      M = jsx(DialogBody, {
         padding: {
           right: 8
         },
@@ -4356,13 +4355,13 @@ function sp({
     width: 380,
     onClose: t,
     defaultPosition: P,
-    children: [jsxs(_$$vo, {
-      children: [jsx(Y9, {
+    children: [jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsx(sm, {
           view: S,
           setPublishModalView: C
         })
-      }), M, S === 'main' && jsx(_$$Pt, {
+      }), M, S === 'main' && jsx(DialogCustomFooter, {
         className: 'xi4r6k5',
         children: jsxs('div', {
           className: 'xh8yej3',
@@ -4402,13 +4401,13 @@ function sp({
               'variant': 'secondary',
               'onClick': () => {
                 I ? k(showModalHandler({
-                  type: DV,
+                  type: ConsumptionPaywallModalPlansPricing,
                   data: {
                     team: E,
-                    resource: Bi.CONNECT_DOMAIN,
+                    resource: FeatureFlag.CONNECT_DOMAIN,
                     editorType: _$$_Y.SITES,
-                    currentPlan: _$$F4.Plan.STARTER,
-                    upsellPlan: _$$F4.Plan.PRO,
+                    currentPlan: consumptionPaywallUtils.Plan.STARTER,
+                    upsellPlan: consumptionPaywallUtils.Plan.PRO,
                     upsellSource: UpsellModalType.SITES_PUBLISH_MODAL
                   }
                 })) : (n(), t());
@@ -4452,7 +4451,7 @@ function sm({
   let s = i && !n ? jsx(sx, {}) : null;
   switch (e) {
     case 'main':
-      return jsxs(_$$hE, {
+      return jsxs(DialogTitle, {
         children: [a, s]
       });
     case 'page-selection':
@@ -4643,7 +4642,7 @@ function sv(e) {
         trackingProperties: {
           fileKey: t,
           productType: 'sites',
-          trackingDescriptor: _$$c8.PUBLISH
+          trackingDescriptor: UpgradeAction.PUBLISH
         }
       }
     };
@@ -4652,12 +4651,12 @@ function sv(e) {
     return {
       handlePublish: () => {
         i(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: e.team,
-            resource: Bi.PUBLISH_SITE,
-            currentPlan: _$$F4.Plan.STARTER,
-            upsellPlan: _$$F4.Plan.PRO,
+            resource: FeatureFlag.PUBLISH_SITE,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             editorType: o ? _$$_Y.SITES : _$$_Y.FIGMAKE,
             upsellSource: r ? UpsellModalType.FIGMAKE_PUBLISH_SITE : UpsellModalType.UNSET
           }
@@ -4704,7 +4703,7 @@ function sv(e) {
       trackingProperties: {
         fileKey: t,
         productType: 'sites',
-        trackingDescriptor: _$$c8.PUBLISH
+        trackingDescriptor: UpgradeAction.PUBLISH
       }
     }
   };
@@ -4769,7 +4768,7 @@ function sA({
   let {
     getTriggerProps,
     manager
-  } = _$$b5({
+  } = setupMenu({
     initialPosition: 'bottom-end'
   });
   let n = useCurrentFileKey();
@@ -4794,7 +4793,7 @@ function sA({
     c.addEventListener(_$$hj, e);
     return () => c.removeEventListener(_$$hj, e);
   }, [manager, c]);
-  return jsxs(_$$bL3, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$c9, {
       'children': renderI18nText('figmake.header.publish'),
@@ -4806,22 +4805,22 @@ function sA({
       },
       ...r.publishButtonProps,
       ...getTriggerProps()
-    }), jsxs(_$$mc, {
-      children: [jsxs(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsxs(MenuItemComp, {
         onClick: d,
         htmlAttributes: {
           'data-onboarding-key': NR
         },
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx(_$$K3, {})
         }), getI18nString('sites.toolbar.make_publish_menu.preview_in_new_tab')]
-      }), jsxs(q7, {
+      }), jsxs(MenuItemComp, {
         disabled: r.isPublishingDisabled,
         onClick: r.handlePublish ?? _$$lQ,
         htmlAttributes: {
           'data-onboarding-key': _$$eq
         },
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx(_$$J8, {})
         }), getI18nString('sites.toolbar.make_publish_menu.publish_to_web')]
       })]
@@ -5097,21 +5096,21 @@ function s2() {
   let {
     getTriggerProps,
     manager
-  } = _$$b5();
+  } = setupMenu();
   let {
     exitFigmakeFullscreenView
   } = Ve();
   return jsxs('div', {
     className: 'x78zum5 x195vfkc',
-    children: [jsx(_$$o3, {}), jsxs(_$$bL3, {
+    children: [jsx(_$$o3, {}), jsxs(MenuRootComp, {
       manager,
       children: [jsx(IconButton, {
         ...getTriggerProps(),
         'aria-label': getI18nString('fullscreen.filename_view.edit_file_menu'),
         'data-tooltip': void 0,
         'children': jsx(_$$r2, {})
-      }), jsx(_$$mc, {
-        children: jsx(q7, {
+      }), jsx(MenuContainerComp, {
+        children: jsx(MenuItemComp, {
           onClick: exitFigmakeFullscreenView,
           children: getI18nString('figmake.open_in_editor_2')
         })
@@ -5207,35 +5206,35 @@ function s9() {
   let {
     getTriggerProps,
     manager
-  } = _$$b5();
+  } = setupMenu();
   let s = Gu();
-  return getFeatureFlags().bake_m2d ? getFeatureFlags().bake_m2d_local ? jsxs(_$$bL3, {
+  return getFeatureFlags().bake_m2d ? getFeatureFlags().bake_m2d_local ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$J6, {
       'aria-label': getI18nString('sites.panel.copy_make_as_design'),
       'disabled': isProcessing || s || !isEnabled,
       ...getTriggerProps(),
       'children': jsx(_$$a3, {})
-    }), jsxs(_$$mc, {
-      children: [jsx(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsx(MenuItemComp, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.API,
           target: 'clipboard'
         }),
         children: getI18nString('sites.panel.copy_make_as_design_api')
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.RESPONSIVE,
           target: 'clipboard'
         }),
         children: getI18nString('sites.panel.copy_make_as_design_responsive')
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.ABSOLUTE,
           target: 'clipboard'
         }),
         children: getI18nString('sites.panel.copy_make_as_design_absolute')
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.MIXED,
           target: 'clipboard'
@@ -6075,19 +6074,19 @@ let rQ = registerModal(({
         e.preventDefault();
         x();
       },
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('sites.metadata.fonts.remove_font_from_this_site')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx('div', {
           ..._$$xk(r0.bodyText),
           children: renderI18nText('sites.metadata.fonts.text_set_in_font_name_will_revert_to_a_default_sans_serif_font_when_this_site_is_published_you_ll_need_to_upload_the_file_again_to_use_it_later', {
             fontName: t
           })
         })
-      }), jsx(_$$wi, {
-        children: jsxs(_$$jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: n,
@@ -7202,15 +7201,15 @@ let oG = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'md',
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('sites.metadata.domains.change_url_confirmation_modal.title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText('sites.metadata.domains.change_url_confirmation_modal.body')
-      }), jsx(_$$wi, {
-        children: jsxs(_$$jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: () => t.props.close({
@@ -7520,9 +7519,9 @@ function oY({
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv x1nfngrj',
       children: [jsx('div', {
         className: 'x98rzlu',
-        children: jsxs(_$$Y3.Root, {
+        children: jsxs(InputPrimitive.Root, {
           ..._$$xk(oW.inputRoot, m?.type === 'warning' && oW.inputRootWarning, m?.type === 'error' && oW.inputRootError),
-          children: [jsx(_$$Y3, {
+          children: [jsx(InputPrimitive, {
             id: 'subdomain-input',
             value: c,
             ..._$$xk(oW.inputField),
@@ -7936,7 +7935,7 @@ function dn({
       className: 'xwib8y2',
       children: [jsxs('div', {
         className: 'x78zum5 x6s0dn4',
-        children: [jsx(_$$p5, {
+        children: [jsx(InputComponent, {
           id: 'domain',
           className: _$$s4.wFull.ellipsis.$,
           style: _$$sx2.py8.hAuto.$,
@@ -7973,7 +7972,7 @@ function dn({
           type: 'button',
           disabled: p,
           trackingProperties: {
-            trackingDescriptor: _$$c8.CANCEL
+            trackingDescriptor: UpgradeAction.CANCEL
           },
           children: renderI18nText('sites.metadata.domains.cancel')
         })
@@ -7981,7 +7980,7 @@ function dn({
         type: 'submit',
         disabled: p,
         trackingProperties: {
-          trackingDescriptor: _$$c8.SAVE
+          trackingDescriptor: UpgradeAction.SAVE
         },
         children: p ? jsx(_$$k7, {}) : renderI18nText('sites.metadata.domains.save')
       })]
@@ -7998,7 +7997,7 @@ function dl({
   let [o, d] = useState(!1);
   let c = useTeamPlanFeatures();
   let p = useIsStarterPlan(c);
-  let x = _$$ol();
+  let x = getCurrentTeam();
   let m = getCurrentFileType();
   let h = i.status === 'loading';
   let g = i.status === 'loaded' && i.data.limitReached;
@@ -8017,13 +8016,13 @@ function dl({
       'disabled': _,
       'onClick': () => {
         p.unwrapOr(!1) && g ? r(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: x,
-            resource: Bi.CONNECT_DOMAIN,
+            resource: FeatureFlag.CONNECT_DOMAIN,
             editorType: m,
-            currentPlan: _$$F4.Plan.STARTER,
-            upsellPlan: _$$F4.Plan.PRO,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             upsellSource: UpsellModalType.SITES_DOMAIN_SETTINGS
           }
         })) : d(!0);
@@ -8031,7 +8030,7 @@ function dl({
       'recordingKey': 'add-domain',
       'data-testid': 'add-connected-domain-cta',
       'trackingProperties': {
-        trackingDescriptor: _$$c8.ADD_CONNECTED_DOMAIN
+        trackingDescriptor: UpgradeAction.ADD_CONNECTED_DOMAIN
       },
       'children': f ? jsx(_$$k7, {
         'data-testid': 'loading-spinner'
@@ -8061,15 +8060,15 @@ let ds = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: i,
     width: 'md',
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: x
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: m
-      }), jsx(_$$wi, {
-        children: jsxs(_$$jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: () => n(hideModalHandler()),
@@ -9543,18 +9542,18 @@ function ci({
     width: 320,
     onClose: t,
     defaultPosition: n,
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: o
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx('div', {
           className: _$$s4.py8.$,
           children: p
         })
-      }), jsx(_$$wi, {
-        children: jsxs(_$$jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
@@ -11310,13 +11309,13 @@ function u_({
           type: 'button',
           onClick: t,
           variantOverride: 'white',
-          ctaTrackingDescriptor: _$$c8.DONE
+          ctaTrackingDescriptor: UpgradeAction.DONE
         } : {
           label: renderI18nText('general.next'),
           type: 'button',
           onClick: next,
           variantOverride: 'white',
-          ctaTrackingDescriptor: _$$c8.NEXT
+          ctaTrackingDescriptor: UpgradeAction.NEXT
         },
         stepCounter: {
           stepNum: n + 1,
@@ -11672,7 +11671,7 @@ function uM() {
         type: 'button',
         onClick: complete,
         variantOverride: 'white',
-        ctaTrackingDescriptor: _$$c8.DONE
+        ctaTrackingDescriptor: UpgradeAction.DONE
       },
       targetKey: _$$HB,
       title: renderI18nText('figmake.onboarding_v2.give_it_a_try.title'),
@@ -11736,7 +11735,7 @@ function uU() {
   } = u$;
   return jsx(TrackingProvider, {
     name: uB,
-    children: jsx(_$$J, {
+    children: jsx(setupThemeContext, {
       mode: 'light',
       children: jsx(_$$rq, {
         ...u$,
@@ -12430,15 +12429,15 @@ let pw = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: i
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: n
-      }), jsx(_$$wi, {
-        children: jsxs(_$$jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: e.onClose,
@@ -13004,7 +13003,7 @@ function xg(e) {
     }(n, function (e) {
       if (!(e != null && typeof e == 'object' && 'properties' in e && e.properties != null && typeof e.properties == 'object' && 'dateType' in e.properties)) return null;
       let t = e.properties.dateType;
-      return Object.values(_$$ap).includes(t) ? t : (_$$sD('Invalid or missing dateType in fieldSchema.', {
+      return Object.values(_$$ap).includes(t) ? t : (logCmsError('Invalid or missing dateType in fieldSchema.', {
         fieldSchema: e,
         dateType: t
       }), null);
@@ -13037,7 +13036,7 @@ function xf({
 function x_(e) {
   let t = e.colDef?.context;
   if (!(t != null && typeof t == 'object' && 'id' in t && typeof t.id == 'string')) {
-    _$$sD('fieldSchema ID is missing.', {
+    logCmsError('fieldSchema ID is missing.', {
       params: e
     });
     return null;
@@ -13313,7 +13312,7 @@ let xE = memo(({
     suppressKeyboardEvent: e => e.event.key === 'Enter',
     onCellClicked: e => {
       if (e.data == null) {
-        _$$sD('Data is missing.', {
+        logCmsError('Data is missing.', {
           evt: e
         });
         return;
@@ -13323,7 +13322,7 @@ let xE = memo(({
     },
     onCellDoubleClicked: e => {
       if (e.data == null) {
-        _$$sD('Data is missing.', {
+        logCmsError('Data is missing.', {
           evt: e
         });
         return;
@@ -13376,7 +13375,7 @@ let xE = memo(({
       ...l,
       cellRenderer: xg,
       editable: !1
-    } : (_$$sD('Unexpected field type', {
+    } : (logCmsError('Unexpected field type', {
       field: e
     }), {
       ...l
@@ -13392,7 +13391,7 @@ let xE = memo(({
     if (i !== 'edit') return;
     let l = t.context;
     if (!(l != null && typeof l == 'object' && 'id' in l && typeof l.id == 'string' && 'databaseId' in l && typeof l.databaseId == 'string')) {
-      _$$sD('fs is not a WebFieldSchema', {
+      logCmsError('fs is not a WebFieldSchema', {
         colDef: t
       });
       return;
@@ -13403,7 +13402,7 @@ let xE = memo(({
     } = n;
     let r = fieldByFieldSchemaId[l.id];
     if (r == null) {
-      _$$sD('field is nullish', {
+      logCmsError('field is nullish', {
         data: n,
         colDef: t
       });
@@ -13429,7 +13428,7 @@ let xE = memo(({
     p(e => e && data?.item.id ? new Set([data.item.id]) : e);
     let n = colDef.context;
     if (!(n != null && typeof n == 'object' && 'id' in n && typeof n.id == 'string')) {
-      _$$sD('fieldSchema ID is missing.', {
+      logCmsError('fieldSchema ID is missing.', {
         evt: e
       });
       return;
@@ -13471,14 +13470,14 @@ let xE = memo(({
           } = e.data;
           let a = fieldByFieldSchemaId[i];
           if (a == null) {
-            _$$sD('field is null', {
+            logCmsError('field is null', {
               params: e
             });
             return !1;
           }
           let s = e.colDef.context;
           if (!(s != null && typeof s == 'object' && 'databaseId' in s && typeof s.databaseId == 'string')) {
-            _$$sD('fs is not a WebFieldSchema', {
+            logCmsError('fs is not a WebFieldSchema', {
               params: e
             });
             return !1;
@@ -13497,7 +13496,7 @@ let xE = memo(({
         break;
       case 'enter':
         if (t.preventDefault(), e.data == null) {
-          _$$sD('Data is missing.', {
+          logCmsError('Data is missing.', {
             params: e
           });
           return;
@@ -13542,7 +13541,7 @@ let xE = memo(({
   let T = useCallback(e => {
     x || p(new Set(e.api.getSelectedRows().map(e => {
       if (!(e != null && typeof e == 'object' && 'item' in e && e.item != null && typeof e.item == 'object' && 'id' in e.item && typeof e.item.id == 'string')) {
-        _$$sD('Row is missing item ID.', {
+        logCmsError('Row is missing item ID.', {
           row: e
         });
         return;
@@ -13658,11 +13657,11 @@ function xR() {
   let {
     collection,
     status
-  } = _$$G6({
+  } = getCollectionView({
     collectionStableId: e
   });
   let n = useAtomWithSubscription(_$$lT);
-  return !e || n ? null : collection == null ? (status === 'loaded' && _$$sD('Collection for table not found', {
+  return !e || n ? null : collection == null ? (status === 'loaded' && logCmsError('Collection for table not found', {
     selectedCollectionId: e
   }), null) : jsx(Suspense, {
     fallback: jsx(Fragment, {}),
@@ -13964,16 +13963,16 @@ function x7({
     onClose: e,
     defaultPosition: r,
     width: 240,
-    children: jsxs(_$$vo, {
-      children: [jsx(_$$i2, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogArrow, {
         position: 'top',
         offset: '50%'
-      }), jsx(Y9, {
+      }), jsx(DialogHeader, {
         children: jsxs('div', {
           className: 'x78zum5 x6s0dn4 x13a6bvl x1nfngrj xh8yej3 x82l30n',
           children: [jsx('div', {
             className: 'x5inmi5 x1mazlvb',
-            children: jsx(_$$hE, {
+            children: jsx(DialogTitle, {
               children: title
             })
           }), jsx('div', {
@@ -14007,7 +14006,7 @@ function x7({
             })]
           })]
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 8,
         children: jsx(x3, {
           state: n
@@ -14359,18 +14358,18 @@ function mp({
     onClose: d,
     defaultPosition: t,
     recordingKey: c,
-    children: jsxs(_$$vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: getI18nString('dakota.image_detail_modal.image')
-        }), jsx(_$$jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(IconButton, {
             'onClick': e.deleteImage,
             'aria-label': getI18nString('dakota.image_detail_modal.delete_image_tooltip'),
             'children': jsx(_$$z7, {})
           })
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: '16px',
         children: jsxs('div', {
           className: 'x78zum5 xdt5ytf xou54vl',
@@ -14383,7 +14382,7 @@ function mp({
           }), jsx(x$, {
             id: s,
             label: getI18nString('dakota.image_detail_modal.filename'),
-            children: jsx(_$$p5, {
+            children: jsx(InputComponent, {
               id: s,
               type: 'text',
               value: p,
@@ -14395,7 +14394,7 @@ function mp({
           }), jsx(x$, {
             id: s,
             label: getI18nString('dakota.image_detail_modal.alt_text'),
-            children: jsx(_$$p5, {
+            children: jsx(InputComponent, {
               id: s,
               type: 'text',
               value: m,
@@ -14643,7 +14642,7 @@ function mf({
       stripTrailingHyphens: t.stripSlugLeadingTrailingHyphens,
       stripLeadingHyphens: t.stripSlugLeadingTrailingHyphens
     })), !K5(n)) {
-      _$$sD('Unknown field schema type', {
+      logCmsError('Unknown field schema type', {
         fieldSchema: i
       });
       return;
@@ -14652,9 +14651,9 @@ function mf({
   }
   let S = useHandleGenericEvent(d, 'blur', r);
   return jsxs(Fragment, {
-    children: [jsx(_$$Y3.Root, {
+    children: [jsx(InputPrimitive.Root, {
       className: k ? 'dakota_item_panel--fieldset__hasErrors--Y0QK5' : void 0,
-      children: jsx(_$$p5, {
+      children: jsx(InputComponent, {
         recordingKey: d,
         id: j,
         autoFocus: n === j,
@@ -14712,7 +14711,7 @@ function mv({
     return t != null && !(i.size > 1) && i.has(t);
   }(r);
   let [c, u] = useAtomValueAndSetter(pE(r));
-  d ? c == null ? (_$$sD('pendingCmsItemId is null'), s = mm(generateUUIDv4())) : s = mm(c) : s = i.item;
+  d ? c == null ? (logCmsError('pendingCmsItemId is null'), s = mm(generateUUIDv4())) : s = mm(c) : s = i.item;
   let p = _$$uE(r);
   let [x, m] = useAtomValueAndSetter(pT(s?.id));
   let h = useAtomWithSubscription(pC(s?.id));
@@ -14729,7 +14728,7 @@ function mv({
     });
   }
   if (s == null) {
-    _$$sD('Item is null', {
+    logCmsError('Item is null', {
       itemQuery: i
     });
     return null;
@@ -14771,11 +14770,11 @@ function mv({
       pass,
       fail
     } = noop(Object.keys(x), e => !h.has(e));
-    let n = Object.fromEntries(pass.map(e => (x[e] == null && _$$sD('pending update is missing', {
+    let n = Object.fromEntries(pass.map(e => (x[e] == null && logCmsError('pending update is missing', {
       pendingUpdatedFields: x,
       fieldSchemaId: e
     }), [e, x[e]])).filter(isNotNullish));
-    let l = Object.fromEntries(fail.map(e => (x[e] == null && _$$sD('pending update is missing', {
+    let l = Object.fromEntries(fail.map(e => (x[e] == null && logCmsError('pending update is missing', {
       pendingUpdatedFields: x,
       fieldSchemaId: e
     }), [e, x[e]])).filter(isNotNullish));
@@ -14902,16 +14901,16 @@ function mw({
   let i = _$$a0(t);
   let n = i?.collectionStableId;
   let s = i?.itemStableId;
-  let r = _$$G6({
+  let r = getCollectionView({
     collectionStableId: n
   });
   let o = _$$H6({
     itemStableId: s,
     collectionStableId: n
   });
-  return i && n && s && r.status === 'loaded' && o.status === 'loaded' ? r.collection == null ? (_$$sD('Collection is nullish', {
+  return i && n && s && r.status === 'loaded' && o.status === 'loaded' ? r.collection == null ? (logCmsError('Collection is nullish', {
     selection: e
-  }), null) : o.item == null ? (_$$sD('Item is nullish', {
+  }), null) : o.item == null ? (logCmsError('Item is nullish', {
     selection: e
   }), null) : jsx(_$$Zk, {
     children: jsx(mj, {
@@ -14973,7 +14972,7 @@ function mI({
   let a = useAtomWithSubscription(UU);
   let s = useAtomWithSubscription(_$$dC);
   let r = useAtomWithSubscription(pE(n ?? ''));
-  let d = _$$G6({
+  let d = getCollectionView({
     collectionStableId: n
   });
   let c = r ?? Array.from(a)[0];
@@ -14985,7 +14984,7 @@ function mI({
   let {
     collection
   } = d;
-  return collection == null ? (_$$sD('Collection is null', {
+  return collection == null ? (logCmsError('Collection is null', {
     selectedCollectionId: n
   }), null) : jsxs(_$$wV, {
     className: 'dakota_table_item_panel--itemPanel--MvyPa',
@@ -15439,7 +15438,7 @@ let mW = registerModal(({
   let [x, m] = useState(!1);
   let h = useRef(null);
   let g = useRef(null);
-  let f = _$$gL(i ?? '').data;
+  let f = getCollectionViewStatus(i ?? '').data;
   let _ = r ?? f?.name;
   let b = useDispatch();
   let y = Xr(_$$iO);
@@ -15486,7 +15485,7 @@ let mW = registerModal(({
       p(!0);
       let e = null;
       try {
-        e = await Qw({
+        e = await createCollectionOptimistically({
           id: null,
           name: _,
           description: '',
@@ -15495,7 +15494,7 @@ let mW = registerModal(({
         });
       } catch (t) {
         let e = t instanceof Error ? t.message : String(t);
-        _$$sD('failed to create collection', {
+        logCmsError('failed to create collection', {
           fileKey: n,
           message: e
         });
@@ -15503,7 +15502,7 @@ let mW = registerModal(({
       }
       e != null && y(e.id);
     } else {
-      _$$sD('fileKey not null invariant violated in CollectionFieldEditorModal');
+      logCmsError('fileKey not null invariant violated in CollectionFieldEditorModal');
     }
     p(!1);
     b(hideModal());
@@ -15514,12 +15513,12 @@ let mW = registerModal(({
     children: jsx(ModalRootComponent, {
       manager: d,
       width: 'lg',
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: _
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsxs('div', {
             className: v()(_$$s4.flex.flexRow.$),
@@ -15564,8 +15563,8 @@ let mW = registerModal(({
               }, O ?? 'no-field-selected')
             })]
           })
-        }), jsxs(_$$wi, {
-          children: [!1, jsxs(_$$jk, {
+        }), jsxs(DialogFooter, {
+          children: [!1, jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               disabled: c,
               variant: 'secondary',
@@ -15610,11 +15609,11 @@ let mY = registerModal(e => {
             }
           }));
         },
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('dakota.new_collection_modal.new_collection')
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           children: jsxs(Label, {
             htmlFor: 'collectionName',
             children: [renderI18nText('dakota.new_collection_modal.name'), jsx('br', {}), jsx(_$$jT, {
@@ -15624,8 +15623,8 @@ let mY = registerModal(e => {
               name: 'collectionName'
             })]
           })
-        }), jsx(_$$wi, {
-          children: jsx(_$$jk, {
+        }), jsx(DialogFooter, {
+          children: jsx(DialogActionStrip, {
             children: jsx(Button, {
               disabled: !r || !r.trim(),
               type: 'submit',
@@ -15640,7 +15639,7 @@ let mY = registerModal(e => {
 function mJ() {
   let e = useDispatch();
   let t = useCurrentFileKey();
-  let i = _$$c$(t);
+  let i = getCollectionSummaryStatus(t);
   let n = (i.data?.length ?? 0) + 1;
   return () => e(showModalHandler({
     type: mY,
@@ -15742,7 +15741,7 @@ async function m4(e, t, i) {
         return e;
     }
   } catch (n) {
-    _$$sD('Failed to format value from CSV', {
+    logCmsError('Failed to format value from CSV', {
       value: e,
       fieldType: t,
       collectionId: i.id
@@ -16142,12 +16141,12 @@ let hd = registerModal(e => {
     children: jsx(ModalRootComponent, {
       manager: i,
       width: 'lg',
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('dakota.import_csv_modal.title')
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsxs('div', {
             ..._$$xk(_$$A16.flex, _$$A16.flexRow),
@@ -16225,8 +16224,8 @@ let hd = registerModal(e => {
               }
             })]
           })
-        }), jsx(_$$wi, {
-          children: jsxs(_$$jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: 'secondary',
               onClick: e.onClose,
@@ -16395,7 +16394,7 @@ function hp() {
       fieldSchemasByIndex: i,
       rows: n
     }) {
-      return e && n.length !== 0 ? await Qw({
+      return e && n.length !== 0 ? await createCollectionOptimistically({
         id: null,
         name: t,
         description: '',
@@ -16495,7 +16494,7 @@ class hm {
         fileKey: this.fileKey,
         fields: null
       };
-      let i = await Qw(t);
+      let i = await createCollectionOptimistically(t);
       return i == null ? 'Failed to create collection' : (this._collection = i, null);
     };
     this._aiFieldTypeToFieldType = e => {
@@ -16520,7 +16519,7 @@ class hm {
       if (t == null) return 'Collection has not been created yet';
       let i = this._aiFieldTypeToFieldType(e.fieldType);
       if (!i) return 'Invalid field type';
-      let n = await A2.createFieldSchema({
+      let n = await collectionService.createFieldSchema({
         collection: t,
         attributes: {
           name: e.name,
@@ -16921,7 +16920,7 @@ function hN(e) {
   return jsx(_$$Cf, {
     targetRect: e.targetRect,
     closeDropdown: e.onClose,
-    children: jsx(_$$J, {
+    children: jsx(setupThemeContext, {
       mode: 'dark',
       children: jsxs('div', {
         className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k xqyf9gi',
@@ -16975,7 +16974,7 @@ function hL({
   let i = useAtomWithSubscription(_$$iO);
   let {
     collection
-  } = _$$G6({
+  } = getCollectionView({
     collectionStableId: i
   });
   return t ? i ? collection == null ? null : jsx(hO, {
@@ -17003,7 +17002,7 @@ function hO({
   recordingKey: i
 }) {
   let n = useDispatch();
-  let a = _$$c$(t).data;
+  let a = getCollectionSummaryStatus(t).data;
   let r = a?.find(t => t.id === e.id);
   let d = pL(r?.name ?? '', 'header', e.id);
   let c = Xr(UU);
@@ -17050,7 +17049,7 @@ function hF() {
   let {
     status,
     data
-  } = _$$c$(s);
+  } = getCollectionSummaryStatus(s);
   let u = useAtomWithSubscription(UU);
   let p = useRef(null);
   let x = _$$wY(p)?.width;
@@ -17789,7 +17788,7 @@ function ga() {
   let _ = useAtomWithSubscription(_$$lT);
   let b = useCurrentFileKey();
   b || reportError(_$$e2.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
-  let y = _$$c$(b);
+  let y = getCollectionSummaryStatus(b);
   let k = e => {
     e.stopPropagation();
     i();
@@ -17915,7 +17914,7 @@ function go({
       t.$$delete(d);
       return t;
     });
-    _$$Tx({
+    deleteCollectionOptimistically({
       collection: e
     });
   };
@@ -17977,7 +17976,7 @@ function go({
       stopRenaming: (t, i, n) => {
         if (t && T && i) {
           let t = i.trim();
-          t !== n && t.length > 0 && _$$c({
+          t !== n && t.length > 0 && renameCollectionOptimistically({
             collection: e,
             name: t
           });
@@ -17992,7 +17991,7 @@ function go({
 }
 function gd() {
   let e = useCurrentFileKey();
-  let t = _$$c$(e).data;
+  let t = getCollectionSummaryStatus(e).data;
   let [i, n] = useAtomValueAndSetter(_$$iO);
   let s = useAtomWithSubscription(_$$ou);
   useEffect(() => {
@@ -19281,12 +19280,12 @@ function fs() {
   return jsx(_$$bL2, {
     defaultPosition: new Point(window.innerWidth / 2 - 120, window.innerHeight / 2 - 120),
     onClose: g,
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('sites.add_breakpoint_modal.title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsxs('form', {
           autoComplete: 'off',
@@ -19321,7 +19320,7 @@ function fs() {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-name',
               children: getI18nString('sites.add_breakpoint_modal.name')
-            }), jsx(_$$p5, {
+            }), jsx(InputComponent, {
               'id': 'breakpoint-name',
               'value': d,
               'onChange': c,
@@ -19331,7 +19330,7 @@ function fs() {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-width',
               children: getI18nString('sites.add_breakpoint_modal.width')
-            }), jsx(_$$p5, {
+            }), jsx(InputComponent, {
               'id': 'breakpoint-width',
               'value': p,
               'onChange': x,
@@ -19462,7 +19461,7 @@ function fy() {
         complete();
         p || d(!0);
       },
-      ctaTrackingDescriptor: _$$c8.AGREE
+      ctaTrackingDescriptor: UpgradeAction.AGREE
     },
     secondaryCta: {
       type: 'button',
@@ -19473,7 +19472,7 @@ function fy() {
       onClick: () => {
         g('close_button_clicked');
       },
-      ctaTrackingDescriptor: _$$c8.DECLINE
+      ctaTrackingDescriptor: UpgradeAction.DECLINE
     },
     title: jsxs('div', {
       children: [renderI18nText('sites.onboarding.welcome.title'), _$$z0() === 'BETA' ? jsx(Badge, {
@@ -19643,7 +19642,7 @@ function fw({
     type: 'button',
     label: l,
     onClick: e,
-    ctaTrackingDescriptor: n ? _$$c8.NEXT : _$$c8.FINISH
+    ctaTrackingDescriptor: n ? UpgradeAction.NEXT : UpgradeAction.FINISH
   };
 }
 function fS(e) {
@@ -19651,7 +19650,7 @@ function fS(e) {
     type: 'link',
     label: renderI18nText('sites.onboarding.callout.learn_more'),
     href: e,
-    ctaTrackingDescriptor: _$$c8.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
 }
 function fC({
@@ -19761,7 +19760,7 @@ function fI({
       type: 'button',
       label: renderI18nText('sites.onboarding.code.try_it_out'),
       onClick: e,
-      ctaTrackingDescriptor: r ? _$$c8.NEXT : _$$c8.FINISH
+      ctaTrackingDescriptor: r ? UpgradeAction.NEXT : UpgradeAction.FINISH
     } : fw({
       onClickPrimaryCta: e,
       currentStep: n,
@@ -22833,7 +22832,7 @@ function yS() {
   let s = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector() ?? null);
   let r = s?.collectionId;
   let o = useCurrentFileKey();
-  let d = _$$c$(o).data ?? [];
+  let d = getCollectionSummaryStatus(o).data ?? [];
   let c = d.find(e => e.id === r) || null;
   let u = !r || i;
   let p = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'RESPONSIVE_SET' && e.name !== '/' && !e.getDakotaSelectorCollectionId()));
@@ -28949,15 +28948,15 @@ function Td({
     draggable: 'header',
     onClose: t,
     recordingKey: 'code-preset-picker-window',
-    children: jsxs(_$$vo, {
-      children: [shouldPin ? null : jsx(_$$i2, {
+    children: jsxs(DialogContents, {
+      children: [shouldPin ? null : jsx(DialogArrow, {
         position: 'top',
         offset: o / 2
-      }), jsx(Y9, {
-        children: jsx(_$$hE, {
+      }), jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: s
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: {
           top: 8,
           bottom: 8,

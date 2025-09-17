@@ -3,7 +3,7 @@ import { Spacing, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_ap
 import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Fb, b0, F0, Pr, Zy, eA, x } from "../figma_app/81441";
 import { A } from "../c5e2cae0/100203";
 if (443 == require.j) {}
@@ -22,21 +22,21 @@ export function $$_1({
       subtitle: renderI18nText("all_carts.create_team.after_creating_a_team"),
       placeholder: getI18nString("pro_cart.create_team.enter_a_name_for_your_working_group"),
       next: renderI18nText("all_carts.create_team.create_team"),
-      trackingDescriptor: _$$c.SEND_INVITES
+      trackingDescriptor: UpgradeAction.SEND_INVITES
     },
     pro: {
       title: renderI18nText("pro_cart.create_team.create_a_professional_team"),
       subtitle: renderI18nText("pro_cart.create_team.itll_have_unlimited_files_and_collaborative_features"),
       placeholder: getI18nString("pro_cart.create_team.enter_a_name_for_your_working_group"),
       next: u ? renderI18nText("pro_cart.sidebar.next_review") : renderI18nText("pro_cart.create_team.next_set_editors.seat_rename"),
-      trackingDescriptor: u ? _$$c.REVIEW : _$$c.SET_EDITORS
+      trackingDescriptor: u ? UpgradeAction.REVIEW : UpgradeAction.SET_EDITORS
     },
     org: {
       title: renderI18nText("org_self_serve.create_team_step.create_an_org_team"),
       subtitle: renderI18nText("org_self_serve.create_team_step.itll_have_unlimited_files_and_advanced_security"),
       placeholder: getI18nString("org_self_serve.create_team_step.enter_a_name_for_your_team"),
       next: renderI18nText("org_self_serve.create_team_step.next_select_team"),
-      trackingDescriptor: _$$c.SELECT_TEAM
+      trackingDescriptor: UpgradeAction.SELECT_TEAM
     }
   }[e];
   return jsxs(Fragment, {
@@ -72,7 +72,7 @@ export function $$_1({
       onClick: _,
       trusted: !0,
       trackingProperties: {
-        trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
+        trackingDescriptor: UpgradeAction.UPGRADE_EXISTING_TEAM
       },
       children: renderI18nText("pro_cart.create_team.upgrade_an_existing_team_instead")
     })]

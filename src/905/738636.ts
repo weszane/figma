@@ -13,21 +13,21 @@ import { registerModal } from "../905/102752";
 import { showModalHandler } from "../905/156213";
 import { getNewFileConfig } from "../905/766303";
 import { M as _$$M } from "../905/58217";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { N as _$$N, L as _$$L } from "../905/293182";
 import { isIntegrationContext } from "../figma_app/469876";
 import { _I, $N, J5 } from "../905/327855";
 import { Yu } from "../figma_app/139113";
 import { FPlanLimitationType, FFileType } from "../figma_app/191312";
-import { rR, sK } from "../figma_app/598018";
+import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { B } from "../905/18613";
-import { vL, Bi } from "../905/652992";
+import { PageFolderFile, FeatureFlag } from "../905/652992";
 import { f6, ai } from "../figma_app/915202";
 import { fileActionEnum } from "../figma_app/630077";
 import { t as _$$t } from "../figma_app/32680";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { W } from "../905/442612";
 import { i as _$$i } from "../figma_app/43065";
 import { M as _$$M2 } from "../figma_app/854365";
@@ -56,8 +56,8 @@ let $$j0 = createOptimistThunk((e, {
   newFileDataLocalStorageKey: A,
   figmakeInitialMessage: b
 }) => {
-  if (s && !rR(s, {
-    type: sK.ADD_FILE,
+  if (s && !checkTeamFileRestrictions(s, {
+    type: AddOperationType.ADD_FILE,
     editorType: n,
     isDestinationTeamDrafts: !!c
   })) {
@@ -78,14 +78,14 @@ let $$j0 = createOptimistThunk((e, {
         team: s
       }
     })) : e.dispatch(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: s,
-        resource: n !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
+        resource: n !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? PageFolderFile.FILE : FeatureFlag.FIGMAKE,
         action: fileActionEnum.CREATE_FILE,
         editorType: n,
-        currentPlan: _$$F.Plan.STARTER,
-        upsellPlan: _$$F.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         upsellSource: UpsellModalType.CREATE_NEW_FILE
       }
     }));

@@ -16,7 +16,7 @@ import { R } from "../figma_app/612938";
 import { Lx } from "../figma_app/474636";
 import { s as _$$s } from "../figma_app/961559";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
+import { DialogBody, DialogFooter, DialogActionStrip, DialogContents, DialogHeader, DialogTitle } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -71,14 +71,14 @@ let w = registerModal(function ({
   switch (r) {
     case "stop-auto-run-from-user":
       s = jsxs(Fragment, {
-        children: [jsx(nB, {
+        children: [jsx(DialogBody, {
           children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_desc", g)
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
@@ -103,14 +103,14 @@ let w = registerModal(function ({
       break;
     case "enable-auto-run":
       s = jsxs(Fragment, {
-        children: [jsx(nB, {
+        children: [jsx(DialogBody, {
           children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.enable_auto_run_desc", f)
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
@@ -129,14 +129,14 @@ let w = registerModal(function ({
       break;
     case "confirm-replace":
       s = jsxs(Fragment, {
-        children: [jsx(nB, {
+        children: [jsx(DialogBody, {
           children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.confirm_replace", E)
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
@@ -155,14 +155,14 @@ let w = registerModal(function ({
       break;
     case "stop-auto-run-from-org":
       s = jsxs(Fragment, {
-        children: [jsx(nB, {
+        children: [jsx(DialogBody, {
           children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_from_org", f)
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
@@ -205,9 +205,9 @@ let w = registerModal(function ({
     htmlAttributes: {
       "data-testid": "autorun-confirm-modal"
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: o
         })
       }), s]

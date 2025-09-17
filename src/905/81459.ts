@@ -20,7 +20,7 @@ import { cu, zX, pl, MS } from "../905/615657";
 import { Ij } from "../905/902099";
 import { FFileType } from "../figma_app/191312";
 import { FileImport } from "../figma_app/43951";
-import { aW, sK } from "../figma_app/598018";
+import { isTeamAllowedToAddFiles, AddOperationType } from "../figma_app/598018";
 import { kI, Y5, mO, dv, NU } from "../905/163189";
 zip.workerScriptsPath = "/js/zip/";
 let $$C6 = createOptimistThunk(async e => {
@@ -62,8 +62,8 @@ let $$C6 = createOptimistThunk(async e => {
   let R = NU(o);
   let N = k.team;
   let D = N?.id;
-  if (N && !aW(N, {
-    type: sK.ADD_FILE,
+  if (N && !isTeamAllowedToAddFiles(N, {
+    type: AddOperationType.ADD_FILE,
     editorType: R,
     isDestinationTeamDrafts: isTeamFolderV2(k)
   })) {

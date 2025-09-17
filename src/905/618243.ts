@@ -11,7 +11,7 @@ import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { k as _$$k } from "../905/443820";
 import { Button } from "../905/521428";
 import { KeyCodes } from "../905/63728";
@@ -105,7 +105,7 @@ function N(e) {
           children: renderI18nText("collaboration.branching_create.title")
         })
       }), jsx(DialogBody, {
-        children: jsx(_$$p, {
+        children: jsx(InputComponent, {
           className: "branch_create_modal--input--USZQ9",
           ref: O,
           value: i,

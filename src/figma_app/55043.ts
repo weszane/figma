@@ -6,13 +6,13 @@ import { useSubscription } from "../figma_app/288654";
 import { u as _$$u } from "../905/918498";
 import { b } from "../905/723768";
 import { showModalHandler } from "../905/156213";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { PlanCanConnectView } from "../figma_app/43951";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
-import { Bi } from "../905/652992";
-import { DV } from "../905/739964";
+import { FeatureFlag } from "../905/652992";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 export function $$E1(e, t) {
   let [r, a] = useState(!1);
   let o = useDispatch();
@@ -25,16 +25,16 @@ export function $$E1(e, t) {
       planTier: l.tier,
       resourceConnectionInviteId: t
     }), o(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: {
           id: l.key.parentId || "",
           name: l.name || ""
         },
-        resource: Bi.CONNECTED_PROJECTS,
+        resource: FeatureFlag.CONNECTED_PROJECTS,
         editorType: null,
-        currentPlan: F.Plan.STARTER,
-        upsellPlan: F.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         upsellSource: UpsellModalType.CONNECTED_PROJECT_INVITE
       }
     })), a(!0)) : e();

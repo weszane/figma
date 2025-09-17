@@ -13,7 +13,7 @@ import { AutoLayout } from "../905/470281";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { TeamFileLimitsInfo } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT, ZERO_VALUE, DEFAULT_ZERO } from "../figma_app/345997";
@@ -138,7 +138,7 @@ function x(e) {
       variant: "primary",
       trackingProperties: {
         teamId: e.teamId,
-        trackingDescriptor: S ? _$$c.UPGRADE_TO_PROFESSIONAL : _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN
+        trackingDescriptor: S ? UpgradeAction.UPGRADE_TO_PROFESSIONAL : UpgradeAction.REACTIVATE_YOUR_PROFESSIONAL_PLAN
       },
       children: F
     })]

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { b as _$$b, q7, Q$, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuItemComp, MenuItemLead, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { s as _$$s } from "../905/551945";
 import { e as _$$e } from "../905/149844";
@@ -39,12 +39,12 @@ export function $$y0({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let S = useCallback(async e => {
     let t = e.target.files?.[0];
     t && (await z(t, b), k.current && (k.current.value = ""));
   }, [b]);
-  let N = e ? jsxs(q7, {
+  let N = e ? jsxs(MenuItemComp, {
     onClick: () => {
       v(showModalHandler({
         type: H,
@@ -54,7 +54,7 @@ export function $$y0({
       }));
     },
     disabled: y || n.length >= qQ,
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: jsx(o, {})
     }), jsx("div", {
       className: "xifkd7f",
@@ -64,12 +64,12 @@ export function $$y0({
     })]
   }) : null;
   let w = t ? jsx(Fragment, {
-    children: jsxs(q7, {
+    children: jsxs(MenuItemComp, {
       disabled: y || n.length >= qQ,
       onClick: () => {
         k.current?.click();
       },
-      children: [jsx(Q$, {
+      children: [jsx(MenuItemLead, {
         children: jsx(_$$s, {})
       }), jsx("div", {
         className: "xifkd7f",
@@ -79,7 +79,7 @@ export function $$y0({
       })]
     })
   }) : null;
-  return t || e ? jsxs(bL, {
+  return t || e ? jsxs(MenuRootComp, {
     manager,
     children: [j ? jsx(j, {
       ...getTriggerProps()
@@ -96,7 +96,7 @@ export function $$y0({
       ref: k,
       accept: xp.join(","),
       onChange: S
-    }), jsxs(mc, {
+    }), jsxs(MenuContainerComp, {
       children: [N, w]
     })]
   }) : null;

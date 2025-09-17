@@ -40,12 +40,12 @@ import { k as _$$k2 } from "../4452/48052";
 import { W as _$$W } from "../4452/420937";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z, Me } from "../figma_app/617427";
 import { getRumLoggingConfig } from "../905/16237";
 import { hideModal, showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
@@ -108,20 +108,20 @@ let ee = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.title")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: t
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: d,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               trackingOptions: c,
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.cancel")
@@ -132,7 +132,7 @@ let ee = registerModal(function (e) {
                 e.onConfirm();
               },
               trackingProperties: {
-                trackingDescriptor: _$$c.APPROVE
+                trackingDescriptor: UpgradeAction.APPROVE
               },
               trackingOptions: c,
               children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.approve_number_of_requests", {
@@ -171,7 +171,7 @@ function eR(e) {
       label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: qf,
     title: renderI18nText("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.title"),
@@ -213,7 +213,7 @@ function eM({
     },
     disabled: m,
     trackingProperties: {
-      trackingDescriptor: _$$c.APPROVE
+      trackingDescriptor: UpgradeAction.APPROVE
     },
     htmlAttributes: {
       "data-testid": "approve-button-single",
@@ -235,7 +235,7 @@ function eL({
       t(e.id);
     },
     trackingProperties: {
-      trackingDescriptor: _$$c.REQUEST_DETAILS,
+      trackingDescriptor: UpgradeAction.REQUEST_DETAILS,
       requestId: e.id
     },
     trackingOptions: a,
@@ -871,7 +871,7 @@ export function $$e$0({
       dataTestId: "approve-all-button",
       disabled: null === tL || !!e$,
       trackingProperties: {
-        trackingDescriptor: _$$c.APPROVE_ALL
+        trackingDescriptor: UpgradeAction.APPROVE_ALL
       },
       trackingOptions: eE,
       children: jsx(Zu, {
@@ -1028,7 +1028,7 @@ export function $$e$0({
               innerText: "Decline",
               dataTestId: "decline-button-multiple",
               trackingProperties: {
-                trackingDescriptor: _$$c.DECLINE
+                trackingDescriptor: UpgradeAction.DECLINE
               },
               trackingOptions: eE,
               children: jsx(Zu, {
@@ -1055,7 +1055,7 @@ export function $$e$0({
               innerText: "Review",
               dataTestId: "approve-button-multiple",
               trackingProperties: {
-                trackingDescriptor: _$$c.REVIEW
+                trackingDescriptor: UpgradeAction.REVIEW
               },
               trackingOptions: eE,
               children: Zm({

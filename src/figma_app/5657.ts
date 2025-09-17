@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { Xr } from "../figma_app/27355";
 import o from "classnames";
 import { Spacing } from "../figma_app/637027";
@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { f as _$$f } from "../905/940356";
 import { Ai } from "../figma_app/242339";
@@ -48,7 +48,7 @@ function A(e) {
             [_$$s.colorTextSecondary.$]: !t
           }),
           children: e.lowerLeftText
-        }), jsx(Spacer, {}), e.onSecondaryCtaClick && jsx(J, {
+        }), jsx(Spacer, {}), e.onSecondaryCtaClick && jsx(setupThemeContext, {
           mode: t ? "dark" : void 0,
           children: jsx("div", {
             ref: r ? void 0 : e.showMeCtaRef,
@@ -56,19 +56,19 @@ function A(e) {
               variant: "secondary",
               onClick: e.onSecondaryCtaClick,
               trackingProperties: {
-                ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || _$$c.BACK
+                ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.BACK
               },
               children: e.secondaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.back")
             })
           })
-        }), e.onPrimaryCtaClick && jsx(J, {
+        }), e.onPrimaryCtaClick && jsx(setupThemeContext, {
           mode: t ? "light" : void 0,
           children: jsx("div", {
             ref: r ? e.showMeCtaRef : void 0,
             children: jsx($z, {
               onClick: e.onPrimaryCtaClick,
               trackingProperties: {
-                ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || _$$c.NEXT
+                ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.NEXT
               },
               variant: "primary",
               disabled: t,

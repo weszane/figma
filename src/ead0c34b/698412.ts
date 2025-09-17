@@ -3,7 +3,7 @@ import { useEffect, Suspense } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, r1, nB } from "../figma_app/272243";
+import { DialogContents, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
 import { tH } from "../905/751457";
 import { reportError } from "../905/11";
 import { N } from "../905/809096";
@@ -48,10 +48,10 @@ function C(e) {
   }) : jsx(ModalRootComponent, {
     manager: r,
     width: 480,
-    children: jsxs(vo, {
-      children: [jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHiddenTitle, {
         children: f()
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           style: {
             height: 480

@@ -19,7 +19,7 @@ import { GR } from "../figma_app/330108";
 import { trackTeamEvent } from "../figma_app/314264";
 import { BK } from "../905/848862";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { getTeamUrl } from "../figma_app/630077";
 import { ViewMode } from "../figma_app/756995";
@@ -30,7 +30,7 @@ import { p as _$$p } from "../905/195198";
 export function $$P0(e) {
   let t = useCurrentUserOrgId();
   let i = useSelector(e => e.teams);
-  let P = _6();
+  let P = getSelectedView();
   let O = e.orgTeams;
   let D = useDispatch();
   let {

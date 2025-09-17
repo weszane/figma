@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import { FOrganizationLevelType, FStudentTeamStatusType } from "../figma_app/191312";
 import { isTeamLocked, hasTeamStatePaidAccess } from "../figma_app/345997";
 import { useCurrentPrivilegedPlan, useIsProOrStudentPlan } from "../figma_app/465071";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 export function $$l1(e) {
   let t = useCurrentPrivilegedPlan("useIsTeamLockedDueToStarterLimits");
   let r = t.unwrapOr(null);
   let l = r?.key.type === FOrganizationLevelType.TEAM ? r?.key.parentId : void 0;
-  let d = cD();
+  let d = getCurrentTeamId();
   let c = useSelector(e => !!d && isTeamLocked(d, e));
   let u = useIsProOrStudentPlan(t).unwrapOr(!1);
   let p = r?.studentTeamState === FStudentTeamStatusType.STUDENT_TEAM_CURRENT || r?.studentTeamState === FStudentTeamStatusType.STUDENT_TEAM_EXPIRED;

@@ -15,7 +15,7 @@ import { A as _$$A } from "../905/920165";
 import { c$, bL, l9, mc } from "../905/493196";
 import { ButtonPrimitive } from "../905/632989";
 import { bL as _$$bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { K as _$$K2 } from "../figma_app/291291";
 import { yG } from "../905/859698";
 import { RR, Jr } from "../figma_app/338442";
@@ -1119,12 +1119,12 @@ function e0({
     width: "sm",
     onClose: a,
     defaultPosition: t,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("design_systems.component_properties.image")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           className: l1,
           children: jsx(_$$Y, {

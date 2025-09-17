@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
@@ -30,11 +30,11 @@ export function $$T1(e) {
   return jsx(ModalRootComponent, {
     manager: r,
     width: 408,
-    children: jsx(Wk, {
+    children: jsx(DialogCustomContents, {
       className: "x15fnm84 xwxc41k x78zum5 xdt5ytf x1665zp3 x87ps6o",
       children: jsx(TrackingProvider, {
         name: "sites_paywall_modal",
-        children: jsxs(J, {
+        children: jsxs(setupThemeContext, {
           brand: "seascape",
           children: [jsx("div", {
             className: "x1r1mewj xyajsyi x19y5rnk",

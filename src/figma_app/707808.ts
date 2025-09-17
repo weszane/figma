@@ -107,7 +107,7 @@ export enum EntityType {
  * Enum for upgrade actions.
  * Original: $$h5
  */
-export enum UpgradeAction {
+export enum CreateUpgradeAction {
   UPGRADE_EXISTING_TEAM = 'upgrade_existing_team',
   CREATE_AND_UPGRADE = 'create_and_upgrade',
   CREATE = 'create',
@@ -130,7 +130,7 @@ export enum TeamType {
  * @param e - Action string
  */
 export function isCreateOrUpgrade(e: string): boolean {
-  return e === UpgradeAction.CREATE || e === UpgradeAction.CREATE_AND_UPGRADE
+  return e === CreateUpgradeAction.CREATE || e === CreateUpgradeAction.CREATE_AND_UPGRADE
 }
 
 /**
@@ -139,7 +139,7 @@ export function isCreateOrUpgrade(e: string): boolean {
  * @param e - Action string
  */
 export function isUpgradeExistingTeam(e: string): boolean {
-  return e === UpgradeAction.UPGRADE_EXISTING_TEAM
+  return e === CreateUpgradeAction.UPGRADE_EXISTING_TEAM
 }
 
 /**
@@ -149,7 +149,7 @@ export function isUpgradeExistingTeam(e: string): boolean {
  * @param step - UpgradeSteps enum value
  */
 export function isCreateOrPlanComparison(action: string, step: string): boolean {
-  return (action === UpgradeAction.CREATE
+  return (action === CreateUpgradeAction.CREATE
     && (step === UpgradeSteps.CREATE_TEAM
       || step === UpgradeSteps.ADD_COLLABORATORS))
     || step === UpgradeSteps.PLAN_COMPARISON
@@ -235,7 +235,7 @@ export const Ft = EntityType
 export const G4 = PreviewMode
 export const Gn = teamViews
 export const QB = isIncludedView
-export const SC = UpgradeAction
+export const SC = CreateUpgradeAction
 export const Sc = TeamType
 export const T8 = draftViews
 export const U6 = OnboardingStep

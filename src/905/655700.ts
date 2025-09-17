@@ -5,14 +5,14 @@ import { getOrgByCurrentUserId } from "../905/845253";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { kA } from "../figma_app/336853";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { UQ } from "../figma_app/598018";
+import { getCurrentTeamUserInfo } from "../figma_app/598018";
 export function $$u0() {
   return useSelector(p);
 }
 function p(e) {
   let t = selectOpenFile(e);
   let i = getCurrentUserOrgUser(e);
-  let n = UQ(e);
+  let n = getCurrentTeamUserInfo(e);
   let u = e.teams[resolveTeamId(e)] || null;
   let p = hasTeamPaidAccess(u) && !u?.org_id;
   let m = getOrgByCurrentUserId(e.currentUserOrgId, e.orgById);

@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { k } from "../905/443820";
 import { bL, QB } from "../905/174266";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import d from "classnames";
 import { IQ } from "../figma_app/569743";
 import { d as _$$d } from "../figma_app/550089";
@@ -13,7 +13,7 @@ function _({
   shown: t
 }) {
   let r = IQ();
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     mode: "dark",
     children: jsx("div", {
       className: c()({

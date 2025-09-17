@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
@@ -21,15 +21,15 @@ import { popModalStack } from "../905/156213";
 import { $V } from "../figma_app/990058";
 import { tc, PE, Q7, i$ } from "../905/15667";
 import { Nu } from "../905/584989";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { VG, A7, F2, E2, ju } from "../905/389382";
+import { getProductName, getDefaultRequestModalTitle, getMinimumBundle, getProductBackgroundImgUrl, getEditorTheme } from "../905/389382";
 import { throwTypeError } from "../figma_app/465776";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { FProductAccessType, FOrganizationLevelType, FPlanNameType, FMemberRoleType, FFileType } from "../figma_app/191312";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { ConfiguredUpgradeRequestModalView } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { isStarterUserAtom } from "../figma_app/864723";
@@ -72,23 +72,23 @@ function L(e, t, i, n) {
     case tc.IN_EDITOR_RESTRICTED_DRAFT:
     case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
       return getI18nString("request_upgrade.header.license_type.share_drafts", {
-        licenseType: VG(e)
+        licenseType: getProductName(e)
       });
     case PE.FileMoveUpsell:
       return getI18nString("request_upgrade.header.license_type.move_drafts", {
-        licenseType: VG(e)
+        licenseType: getProductName(e)
       });
     case Q7.RUN_PLUGIN:
       return getI18nString("request_upgrade.header.license_type.run_plugins", {
-        licenseType: VG(e)
+        licenseType: getProductName(e)
       });
     case Q7.RUN_WIDGET:
       return getI18nString("request_upgrade.header.license_type.run_widgets", {
-        licenseType: VG(e)
+        licenseType: getProductName(e)
       });
     case Q7.MANAGE_EXTENSIONS:
       return getI18nString("request_upgrade.header.license_type.manage_extensions", {
-        licenseType: VG(e)
+        licenseType: getProductName(e)
       });
     case tc.USER_SETTINGS:
     case tc.DOWNGRADE_EMAIL:
@@ -116,7 +116,7 @@ function L(e, t, i, n) {
     case tc.SITE_SETTINGS:
       if (e === FProductAccessType.FIGMAKE) return getI18nString("request_upgrade.header.figmake.publish");
   }
-  return n && (e === FProductAccessType.DESIGN || e === FProductAccessType.DEV_MODE) ? getI18nString("1_click_expansion.request_sent_add_details_to") : A7(e);
+  return n && (e === FProductAccessType.DESIGN || e === FProductAccessType.DEV_MODE) ? getI18nString("1_click_expansion.request_sent_add_details_to") : getDefaultRequestModalTitle(e);
 }
 let el = new class {
   constructor() {
@@ -158,7 +158,7 @@ function eh(e) {
   let _ = licenseType === FProductAccessType.DEV_MODE;
   let A = iS(licenseType);
   let y = useCurrentFileKey();
-  let v = F2(licenseType);
+  let v = getMinimumBundle(licenseType);
   let I = isFullscreenView();
   let x = DP();
   let w = licenseType === FProductAccessType.WHITEBOARD && I ? "light" : i_(x);
@@ -205,7 +205,7 @@ function eh(e) {
     children: [jsxs("div", {
       className: "request_upgrade_modal--curfHeader--xqBWN",
       children: [jsx(oW, {
-        src: E2(licenseType, w),
+        src: getProductBackgroundImgUrl(licenseType, w),
         className: "request_upgrade_modal--imgPositioning---Y2Z-"
       }), jsx("div", {
         className: "request_upgrade_modal--avatarPositioning--aK7ex",
@@ -311,7 +311,7 @@ export function $$eb0(e) {
   } = e;
   let P = planType === FOrganizationLevelType.ORG;
   let [O, W] = useState("");
-  let q = _6();
+  let q = getSelectedView();
   let $ = e.licenseType === FProductAccessType.DEV_MODE || e.entryPoint.startsWith("dev_mode");
   let Z = $ ? FProductAccessType.DEV_MODE : e.licenseType;
   let X = q.editorType === FEditorType.DevHandoff;
@@ -459,7 +459,7 @@ export function $$eb0(e) {
     logAndTrackCTA({
       ...eM,
       trackingContext: eF,
-      trackingDescriptor: _$$c.CANCEL
+      trackingDescriptor: UpgradeAction.CANCEL
     });
     er ? ew() : (t(popModalStack()), ex?.());
   };
@@ -519,8 +519,8 @@ export function $$eb0(e) {
       name: eF,
       properties: eM,
       trackingOptions: eR,
-      children: jsx(_$$J, {
-        brand: ju(Z),
+      children: jsx(setupThemeContext, {
+        brand: getEditorTheme(Z),
         children: eL ? jsx(eh, {
           actionOnProvisionalAccessGranted: e.actionOnProvisionalAccessGranted,
           customMessage: eP?.orgSharedSetting?.permittedConfiguredUpgradeRequestMessage,
@@ -582,7 +582,7 @@ export function $$eb0(e) {
                 trackingOptions: eR,
                 trackingProperties: {
                   ...eM,
-                  trackingDescriptor: _$$c.UPGRADE
+                  trackingDescriptor: UpgradeAction.UPGRADE
                 },
                 children: er ? renderI18nText("request_upgrade.continue_button") : hasPendingRequest(Z) ? renderI18nText("request_upgrade.send_request_button_already_requested") : renderI18nText("request_upgrade.send_request_button")
               })]

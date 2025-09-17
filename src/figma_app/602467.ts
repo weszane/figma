@@ -4,7 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { U1 } from "../figma_app/343967";
 import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
 import { L as _$$L } from "../905/704296";
 import { T as _$$T } from "../905/2124";
 import { getFeatureFlags } from "../905/601108";
@@ -330,16 +330,16 @@ let $$ea1 = memo(function ({
     width: 240,
     onClose: e,
     draggable: "header",
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: renderI18nText("slides.properties_panel.rewrite_text.adjust_tone")
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(_$$v, {
             location: "SLIDES_REWRITE_MODAL"
           })
         })]
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx(es, {
           recordingKey: "slidesToneDial"
         })

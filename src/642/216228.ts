@@ -45,7 +45,7 @@ import { T as _$$T4 } from '../905/336775';
 import { selectTeams } from '../905/338617';
 import { I as _$$I } from '../905/342732';
 import { P as _$$P5 } from '../905/347284';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { jp, qF, WS } from '../905/370597';
 import { selectCurrentUser, getUserId } from '../905/372672';
 import { u as _$$u3 } from '../905/389684';
@@ -110,7 +110,7 @@ import { A as _$$A3 } from '../905/925160';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { q as _$$q2 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
-import { sD as _$$sD } from '../905/937198';
+import { logCmsError } from '../905/937198';
 import { lY as _$$lY } from '../905/939482';
 import { f as _$$f } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
@@ -203,7 +203,7 @@ import { selectExperimentConfigHook } from '../figma_app/594947';
 import { y as _$$y } from '../figma_app/598297';
 import { Ev, JA } from '../figma_app/608944';
 import { createTrackedAtom } from '../figma_app/615482';
-import { c$ as _$$c$, gL } from '../figma_app/618433';
+import { getCollectionSummaryStatus, getCollectionViewStatus } from '../figma_app/618433';
 import { RJ } from '../figma_app/630951';
 import { PrimaryWorkflowEnum, LibraryTabEnum } from '../figma_app/633080';
 import { J as _$$J2 } from '../figma_app/636279';
@@ -289,7 +289,7 @@ function M() {
       label: renderI18nText('onboarding_pointers.got_it'),
       type: 'button',
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: Bs,
     title: renderI18nText('rcs.visual_assets.elevate_your_designs'),
@@ -3905,7 +3905,7 @@ function nv({
   let i = function (e) {
     let {
       data
-    } = gL(e);
+    } = getCollectionViewStatus(e);
     return useMemo(() => data ? function (e) {
       let t = e.sort((e, t) => Ez(t.position, e.position));
       let s = t.filter(e => e.fieldType === 'plain_text');
@@ -3943,7 +3943,7 @@ function nv({
           let l = secondaryTextFieldId !== null;
           let a = i || l;
           let o = imageFieldId !== null;
-          return (l && !i && _$$sD('Unexpected CMS block fields', {
+          return (l && !i && logCmsError('Unexpected CMS block fields', {
             primaryTextFieldId,
             secondaryTextFieldId,
             imageFieldId
@@ -4087,7 +4087,7 @@ function nP() {
   let {
     data,
     status
-  } = _$$c$(e);
+  } = getCollectionSummaryStatus(e);
   let {
     libraryKey,
     assets,

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { b as _$$b, bL, mc, YJ, q7, Q$, Ov, N_, g8, ZP, MJ } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemComp, MenuItemLead, MenuItemTrail, MenuLinkComp, MenuSubMenu, MenuSubTrigger, MenuSubContainerComp } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
 import { EventShield } from "../905/821217";
 import { t as _$$t } from "../905/947268";
@@ -114,13 +114,13 @@ export function $$Y1() {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let A = useDispatch();
   let L = CI();
   let M = useAtomWithSubscription(V).data;
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(TrackingProvider, {
     name: "organize_menu_dropdown",
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$V, {
         variant: "menu",
@@ -148,8 +148,8 @@ export function $$Y1() {
             })
           })]
         })
-      }), jsxs(mc, {
-        children: [jsx(YJ, {
+      }), jsxs(MenuContainerComp, {
+        children: [jsx(MenuGroupComp, {
           children: S.map(e => {
             if (!e) return null;
             let {
@@ -165,7 +165,7 @@ export function $$Y1() {
             let h = Ef(e);
             return type === Uj.OPEN_CLUSTER_BY_MORE_MENU ? jsx($, {
               disabled
-            }, type) : jsxs(q7, {
+            }, type) : jsxs(MenuItemComp, {
               disabled,
               onClick: () => u(e),
               recordingKey: Z(type),
@@ -178,12 +178,12 @@ export function $$Y1() {
                 "data-tooltip-text-left": !0,
                 "data-tooltip-tip-align-left": !0
               },
-              children: [fplIcon && jsx(Q$, {
+              children: [fplIcon && jsx(MenuItemLead, {
                 children: jsx("div", {
                   className: "x30jfuo",
                   children: fplIcon
                 })
-              }), displayText, h && jsx(Ov, {
+              }), displayText, h && jsx(MenuItemTrail, {
                 children: jsx(EventShield, {
                   eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
                   children: jsx(N, {})
@@ -191,7 +191,7 @@ export function $$Y1() {
               })]
             }, type);
           })
-        }), jsx(N_, {
+        }), jsx(MenuLinkComp, {
           href: $$H0,
           newTab: !0,
           trusted: !0,
@@ -525,20 +525,20 @@ function $({
   let n = PX();
   return t ? jsx(TrackingProvider, {
     name: K,
-    children: jsxs(g8, {
-      children: [jsxs(ZP, {
+    children: jsxs(MenuSubMenu, {
+      children: [jsxs(MenuSubTrigger, {
         disabled: e,
         recordingKey: Z(Uj.OPEN_CLUSTER_BY_MORE_MENU),
         "data-testid": Z(Uj.OPEN_CLUSTER_BY_MORE_MENU),
         "aria-label": getI18nString("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx("div", {
             className: "x30jfuo",
             children: jsx(u, {})
           })
         }), getI18nString("whiteboard.inline_menu.sort_by_dropdown_button_text_2")]
-      }), jsx(MJ, {
-        children: jsx(YJ, {
+      }), jsx(MenuSubContainerComp, {
+        children: jsx(MenuGroupComp, {
           children: i.map(e => {
             if (!e) return null;
             let {
@@ -548,20 +548,20 @@ function $({
               svgSrc
             } = e;
             let l = Ef(e);
-            return jsxs(q7, {
+            return jsxs(MenuItemComp, {
               disabled,
               onClick: () => n(e),
               recordingKey: Z(type),
               "data-testid": Z(type),
               "aria-label": displayText,
-              children: [svgSrc && jsx(Q$, {
+              children: [svgSrc && jsx(MenuItemLead, {
                 children: jsx("div", {
                   className: "x30jfuo",
                   children: jsx(SvgComponent, {
                     svg: svgSrc
                   })
                 })
-              }), displayText, l && jsx(Ov, {
+              }), displayText, l && jsx(MenuItemTrail, {
                 children: jsx(EventShield, {
                   eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
                   children: jsx(N, {})

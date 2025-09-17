@@ -5,7 +5,7 @@ import { WhiteboardStarterKitCppBindings, WhiteboardSectionPresetPickerCppBindin
 import { useAtomWithSubscription, Rq } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { mp } from "../figma_app/579169";
@@ -93,7 +93,7 @@ export function $$R2() {
       label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("whiteboard.section_presets_onboarding.feature_announcement.secondary"),
@@ -103,7 +103,7 @@ export function $$R2() {
         WhiteboardSectionPresetPickerCppBindings.createSectionForOnboarding();
         complete();
       },
-      ctaTrackingDescriptor: _$$c.SECTION_PRESET_PICKER_SHOW_ME
+      ctaTrackingDescriptor: UpgradeAction.SECTION_PRESET_PICKER_SHOW_ME
     },
     targetKey: $$A1,
     title: renderI18nText("whiteboard.section_presets_onboarding.feature_announcement.title"),

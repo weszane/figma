@@ -3,7 +3,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
-import { A7 } from "../905/87821";
+import { showFileBrowserOrError } from "../905/87821";
 import { _ } from "../905/401345";
 let n;
 export function $$u2() {
@@ -32,7 +32,7 @@ export function $$h1(e, t) {
       type: "web",
       title: getI18nString("403.file_permissions_error.title"),
       description: getI18nString("404.file_no_access.title")
-    }) : A7(getI18nString("404.file_no_access.title"), t)));
+    }) : showFileBrowserOrError(getI18nString("404.file_no_access.title"), t)));
     return;
   }
   let E = wasInUnclaimedTryFile && !openFile.isTryFile;

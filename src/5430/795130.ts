@@ -13,7 +13,7 @@ import { getResourceActionText } from "../figma_app/777551";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { showModalHandler } from "../905/156213";
 import { YW } from "../figma_app/350203";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { IE } from "../5430/231178";
 import { selectCurrentUser } from "../905/372672";
@@ -70,7 +70,7 @@ export function $$T0({
     return jsx(TrackingProvider, {
       name: "slide_template_use_button",
       properties: {
-        trackingDescriptor: _$$c.SLIDE_TEMPLATE_USE_BUTTON,
+        trackingDescriptor: UpgradeAction.SLIDE_TEMPLATE_USE_BUTTON,
         ...r,
         isEnabled: !1
       },
@@ -85,7 +85,7 @@ export function $$T0({
   return jsx(TrackingProvider, {
     name: "slide_template_use_button",
     properties: {
-      trackingDescriptor: _$$c.SLIDE_TEMPLATE_USE_BUTTON,
+      trackingDescriptor: UpgradeAction.SLIDE_TEMPLATE_USE_BUTTON,
       ...r,
       isEnabled: !0
     },

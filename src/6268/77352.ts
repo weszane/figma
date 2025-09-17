@@ -15,7 +15,7 @@ import { S as _$$S } from "../5132/525530";
 import { O as _$$O } from "../905/666679";
 import { o as _$$o } from "../905/89370";
 import { useTheme } from "../905/289770";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { $w } from "../figma_app/935144";
@@ -352,7 +352,7 @@ function V({
   useEffect(() => {
     c(n.color);
   }, [n.color]);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: o,
     children: jsxs("div", {
       className: "component_browser_detail_view--componentThumbnailPanel--tlaYl",

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { fileEntityDataMapper } from "../905/943101";
 import { FPermissionLevelType, FViewPermissionType } from "../figma_app/191312";
-import { PS } from "../figma_app/598018";
+import { hasValidTeamPaymentStatus } from "../figma_app/598018";
 import { C } from "../905/222694";
 function l(e, t) {
   return !!t.fileByKey[e]?.trashed_at;
@@ -20,7 +20,7 @@ export function $$u3(e, t, i) {
   return (!i || !!t.parent_org_id || !t.parent_team || !!t.parent_team.subscription) && (!i || !!t.parent_org_id || !!t.parent_team) && e;
 }
 export function $$p1(e, t) {
-  return !!e && (!!PS(e) || !t);
+  return !!e && (!!hasValidTeamPaymentStatus(e) || !t);
 }
 export function $$m9(e) {
   return !!e && !e.parent_org_id && (e.link_access === FPermissionLevelType.VIEW || e.link_access === FPermissionLevelType.EDIT);

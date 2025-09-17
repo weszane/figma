@@ -12,10 +12,10 @@ import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
 import { z4 } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { liveStoreInstance } from "../905/713695";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { U } from "../905/18613";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai } from "../figma_app/915202";
@@ -23,8 +23,8 @@ import { OrganizationType } from "../905/833838";
 export function $$S0() {
   let e = selectCurrentUser();
   let t = useCurrentUserOrgId();
-  let i = cD();
-  let a = _6();
+  let i = getCurrentTeamId();
+  let a = getSelectedView();
   let s = useDispatch();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   return useCallback(async (n, r) => {

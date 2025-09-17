@@ -21,7 +21,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
@@ -405,7 +405,7 @@ function B(e) {
                 children: jsxs(rb, {
                   onClick: n,
                   trackingProperties: {
-                    trackingDescriptor: _$$c2.LEARN_MORE
+                    trackingDescriptor: UpgradeAction.LEARN_MORE
                   },
                   "aria-label": i,
                   children: [i, " \u2192"]
@@ -421,7 +421,7 @@ function B(e) {
                   trusted: !0,
                   newTab: !0,
                   trackingProperties: {
-                    trackingDescriptor: _$$c2.CONTACT_SUPPORT
+                    trackingDescriptor: UpgradeAction.CONTACT_SUPPORT
                   },
                   children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.contacting_support")
                 })
@@ -435,14 +435,14 @@ function B(e) {
             variant: "link",
             onClick: e.onClose,
             trackingProperties: {
-              trackingDescriptor: _$$c2.KEEP_PLAN
+              trackingDescriptor: UpgradeAction.KEEP_PLAN
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
           }), jsx(_$$c, {
             variant: "secondary",
             onClick: s,
             trackingProperties: {
-              trackingDescriptor: _$$c2.CONTINUE
+              trackingDescriptor: UpgradeAction.CONTINUE
             },
             children: getI18nString("general.continue")
           })]
@@ -458,25 +458,25 @@ function G(e) {
     graphic: jsx(_$$L, {}),
     label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.design_systems"),
     href: "https://help.figma.com/hc/articles/360040529593-Share-libraries-in-an-organization",
-    trackingDescriptor: _$$c2.DESIGN_SYSTEMS
+    trackingDescriptor: UpgradeAction.DESIGN_SYSTEMS
   }, {
     id: "branching",
     graphic: jsx(O, {}),
     label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.branching"),
     href: "https://help.figma.com/hc/articles/360063144053-Guide-to-branching",
-    trackingDescriptor: _$$c2.BRANCHING
+    trackingDescriptor: UpgradeAction.BRANCHING
   }, {
     id: "unlimited_teams",
     graphic: jsx(L, {}),
     label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.unlimited_teams"),
     href: "https://help.figma.com/hc/articles/360053463173-Manage-teams-in-an-organization",
-    trackingDescriptor: _$$c2.UNLIMITED_TEAMS
+    trackingDescriptor: UpgradeAction.UNLIMITED_TEAMS
   }, {
     id: "security",
     graphic: jsx(_$$I, {}),
     label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.security"),
     href: "https://help.figma.com/hc/articles/360040056294-Privacy-and-security-in-organizations",
-    trackingDescriptor: _$$c2.SECURITY
+    trackingDescriptor: UpgradeAction.SECURITY
   }];
   let n = useCallback(() => e.setStep("confirm_cancel"), [e.setStep]);
   return jsx(ModalRootComponent, {
@@ -522,14 +522,14 @@ function G(e) {
             variant: "link",
             onClick: e.onClose,
             trackingProperties: {
-              trackingDescriptor: _$$c2.KEEP_PLAN
+              trackingDescriptor: UpgradeAction.KEEP_PLAN
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
           }), jsx(_$$c, {
             variant: "secondary",
             onClick: n,
             trackingProperties: {
-              trackingDescriptor: _$$c2.CONTINUE
+              trackingDescriptor: UpgradeAction.CONTINUE
             },
             children: getI18nString("general.continue")
           })]
@@ -599,7 +599,7 @@ function z(e) {
               trusted: !0,
               newTab: !0,
               trackingProperties: {
-                trackingDescriptor: _$$c2.CONTACT_SUPPORT
+                trackingDescriptor: UpgradeAction.CONTACT_SUPPORT
               },
               children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.contact_support")
             })
@@ -611,14 +611,14 @@ function z(e) {
             variant: "secondary",
             onClick: e.onClose,
             trackingProperties: {
-              trackingDescriptor: _$$c2.GO_BACK
+              trackingDescriptor: UpgradeAction.GO_BACK
             },
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.go_back")
           }), jsx($z, {
             variant: "destructive",
             onClick: i,
             trackingProperties: {
-              trackingDescriptor: _$$c2.CANCEL_PLAN
+              trackingDescriptor: UpgradeAction.CANCEL_PLAN
             },
             disabled: t,
             children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.cancel_plan")
@@ -721,14 +721,14 @@ function W(e) {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
-                trackingDescriptor: _$$c2.GO_BACK
+                trackingDescriptor: UpgradeAction.GO_BACK
               },
               children: getI18nString("modal.cancel")
             }), jsx($z, {
               variant: "primary",
               onClick: c,
               trackingProperties: {
-                trackingDescriptor: _$$c2.REACTIVATE_PLAN
+                trackingDescriptor: UpgradeAction.REACTIVATE_PLAN
               },
               disabled: n,
               children: getI18nString("org_admin_settings.unschedule_cancellation_modal.reactivate_plan")

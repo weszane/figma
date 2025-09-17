@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { A as _$$A } from "../905/956262";
 import { M } from "../905/152487";
 import { on } from "../905/425180";
@@ -52,12 +52,12 @@ export function $$u0(e) {
     label: g.primaryCtaLabel ?? renderI18nText("rcs.rcs_shared.done"),
     type: "button",
     onClick: next,
-    ctaTrackingDescriptor: _$$c.DONE
+    ctaTrackingDescriptor: UpgradeAction.DONE
   } : {
     label: g.primaryCtaLabel ?? renderI18nText("rcs.rcs_shared.next"),
     type: "button",
     onClick: next,
-    ctaTrackingDescriptor: _$$c.NEXT
+    ctaTrackingDescriptor: UpgradeAction.NEXT
   };
   return jsx(M, {
     isShowing: e.isShowing,

@@ -8,7 +8,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { interactiveAnchorTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { P4, L3, Dr, S6 } from "../905/18800";
@@ -44,7 +44,7 @@ function T(e) {
         cookiesEnabled: !0
       });
       v.current(CTA_CLICKED, {
-        trackingDescriptor: _$$c.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
+        trackingDescriptor: UpgradeAction.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
       });
     }, 1e4));
   }, [t]);
@@ -54,7 +54,7 @@ function T(e) {
       consentRegion: "implicit",
       cookiesEnabled: !0
     }), v.current(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
     }));
   }, [s]);
   useEffect(() => {
@@ -75,7 +75,7 @@ function T(e) {
       cookiesEnabled: !1
     });
     v.current(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_IMPLICIT_CONSENT_OPT_OUT
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_IMPLICIT_CONSENT_OPT_OUT
     });
   };
   let C = async () => {
@@ -86,7 +86,7 @@ function T(e) {
       cookiesEnabled: !0
     });
     v.current(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_IMPLICIT_CONSENT_DISMISS
     });
   };
   return t ? jsxs("div", {

@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import s from "../vendor/267721";
-import { A } from "../vendor/850789";
+import { useDebouncuse-debouncedor/850789";
 import { I6 } from "../figma_app/688398";
 import { useCurrentFileKey } from "../figma_app/516028";
 var r = s;
@@ -15,7 +15,7 @@ export function $$c0({
 }) {
   let p = useCurrentFileKey();
   let [g, f] = useState([]);
-  let [m] = A(g, 100, {
+  let [m] = useDebounce(g, 100, {
     equalityFn: x
   });
   useEffect(() => {
@@ -47,7 +47,7 @@ function u({
   editCount: t,
   requestThumbnailGeneration: l
 }) {
-  let [s] = A(t, 400);
+  let [s] = useDebounce(t, 400);
   useEffect(() => {
     l(e);
   }, [e, s, l]);

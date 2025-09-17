@@ -15,7 +15,7 @@ import { x as _$$x } from "../905/695363";
 import { ViewMode, SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../905/971482";
 import { GR, hZ } from "../figma_app/330108";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { Lk, PublicModelType, ProjectSortField } from "../figma_app/162807";
 import { jn } from "../figma_app/522082";
 import { vt } from "../figma_app/231614";
@@ -46,8 +46,8 @@ import { W as _$$W } from "../905/307631";
 import { h2, $b } from "../905/820960";
 import { showModalHandler } from "../905/156213";
 import { trackTeamEvent } from "../figma_app/314264";
-import { FC } from "../figma_app/212807";
-import { _6 } from "../figma_app/386952";
+import { selectPermissionsState } from "../figma_app/212807";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { VP } from "../905/18797";
 import { p9 } from "../figma_app/88768";
@@ -313,8 +313,8 @@ let ep = memo(function (e) {
     onJoin,
     onLeave
   } = em(r.id, e.canUserViewTeam);
-  let d = FC();
-  let c = _6();
+  let d = selectPermissionsState();
+  let c = getSelectedView();
   let u = ignoreCommandOrShift(t => {
     t.preventDefault();
     trackTeamEvent("file_browser_team_click", e.searchResult.model.id, d, {
@@ -395,7 +395,7 @@ let eh = _$$h({
       let t = e.id;
       let i = useSelector(e => e.loadingState);
       let n = useMemo(() => VP(i, p9(t)), [i, t]);
-      let s = FC();
+      let s = selectPermissionsState();
       let o = hasViewerRoleAccessOnTeam(e.id, s);
       return {
         canUserViewTeam: canMemberOrg(e.org_id, s) && e.org_access === bUL.PUBLIC || o,
@@ -931,7 +931,7 @@ function te(e) {
 export function $$tt0(e) {
   let t = e.searchResults;
   let [i, s] = useState(void 0);
-  let o = cD();
+  let o = getCurrentTeamId();
   let d = vt(o);
   let c = jn();
   let p = useMemo(() => e.searchModelType === PublicModelType.TEAMS ? t.map(e => ({

@@ -29,7 +29,7 @@ import { w as _$$w6 } from '../0c62c2fd/912149';
 import { a as _$$a1, R as _$$R7 } from '../0c62c2fd/950366';
 import { I as _$$I, SidebarRow } from '../451de8f0/94979';
 import { reportError, SeverityLevel } from '../905/11';
-import { F as _$$F7 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { O as _$$O7 } from '../905/6519';
 import { R as _$$R5 } from '../905/11928';
 import { K as _$$K2 } from '../905/12775';
@@ -86,7 +86,7 @@ import { Be as _$$Be } from '../905/172516';
 import { Cm } from '../905/174697';
 import { ResourceTypes, ResourceTypeSubset } from '../905/178090';
 import { Z as _$$Z5 } from '../905/184216';
-import { p as _$$p8 } from '../905/185998';
+import { InputComponent } from '../905/185998';
 import { HM } from '../905/190597';
 import { w as _$$w3 } from '../905/191841';
 import { p as _$$p5 } from '../905/195198';
@@ -121,7 +121,7 @@ import { R as _$$R0 } from '../905/304671';
 import { T as _$$T2, v as _$$v2 } from '../905/309844';
 import { C as _$$C5 } from '../905/314082';
 import { m3 as _$$m4 } from '../905/315794';
-import { FolderViewType, FolderSortKey, getProjectUrl } from '../905/316062';
+import { FolderSortKey, FolderViewType, getProjectUrl } from '../905/316062';
 import { y8 } from '../905/327522';
 import { N_ as _$$N_ } from '../905/332483';
 import { a as _$$a12 } from '../905/332662';
@@ -139,13 +139,13 @@ import { V as _$$V6 } from '../905/355181';
 import { LogLevelStr } from '../905/361972';
 import { Yg } from '../905/362959';
 import { BannerMessage } from '../905/363675';
-import { c as _$$c3 } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser, selectUser } from '../905/372672';
 import { S as _$$S1 } from '../905/373189';
 import { $ as _$$$4 } from '../905/379902';
 import { FRequestsStr } from '../905/384551';
 import { b as _$$b7 } from '../905/388233';
-import { F2 } from '../905/389382';
+import { getMinimumBundle } from '../905/389382';
 import { E as _$$E3 } from '../905/391888';
 import { r as _$$r4 } from '../905/398386';
 import { x6 as _$$x5 } from '../905/403166';
@@ -213,7 +213,7 @@ import { Timer } from '../905/609396';
 import { i as _$$i4 } from '../905/610691';
 import { customHistory, getPreviousSelectedView } from '../905/612521';
 import { buildFileUrl, getDesignFileUrlConditional } from '../905/612685';
-import { J as _$$J2 } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { e as _$$e3 } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
 import { ButtonPrimitive } from '../905/632989';
@@ -221,7 +221,7 @@ import { A as _$$A30, y as _$$y5 } from '../905/638715';
 import { DP } from '../905/640017';
 import { g_ as _$$g_ } from '../905/646788';
 import { d as _$$d2 } from '../905/647058';
-import { vL } from '../905/652992';
+import { PageFolderFile } from '../905/652992';
 import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
 import { oW as _$$oW } from '../905/675859';
@@ -244,7 +244,7 @@ import { X as _$$X6 } from '../905/718513';
 import { tT as _$$tT } from '../905/723791';
 import { a as _$$a14, hp as _$$hp2 } from '../905/725909';
 import { NA } from '../905/738636';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { c as _$$c9, s as _$$s7 } from '../905/744710';
 import { l as _$$l4 } from '../905/745972';
 import { F_ as _$$F_ } from '../905/748636';
@@ -439,7 +439,7 @@ import { rL as _$$rL } from '../figma_app/49598';
 import { c as _$$c8 } from '../figma_app/52714';
 import { FEditorType, mapFileTypeToEditorType, SITES_STRING } from '../figma_app/53721';
 import { t as _$$t9 } from '../figma_app/55043';
-import { BannerInline, BannerFullWidth } from '../figma_app/59509';
+import { BannerFullWidth, BannerInline } from '../figma_app/59509';
 import { $$, nR as _$$nR, vd } from '../figma_app/60079';
 import { $ as _$$$2, E as _$$E4 } from '../figma_app/61705';
 import { batchPutFileAction, copyShareLinkOptimistic, filePutAction, setActiveFileUsersAction } from '../figma_app/78808';
@@ -465,14 +465,14 @@ import { createNoOpValidator } from '../figma_app/181241';
 import { categoryBySlugQuery } from '../figma_app/188671';
 import { FAccessLevelType, FEntityType, FFileType, FMemberRoleType, FOrganizationLevelType, FOrganizationRoleType, FPaymentHealthStatusType, FPlanLimitationType, FPlanNameType, FProductAccessType, FResourceCategoryType, FStudentTeamStatusType, FTemplateCategoryType, FUserRoleType } from '../figma_app/191312';
 import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '../figma_app/191804';
-import { isRecentsAndSharingView, getSelectedViewUrl } from '../figma_app/193867';
+import { getSelectedViewUrl, isRecentsAndSharingView } from '../figma_app/193867';
 import { a6 as _$$a11 } from '../figma_app/198840';
 import { o as _$$o6 } from '../figma_app/198885';
 import { BU, jl, LK, SX, Xg } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
 import { lg as _$$lg, ng as _$$ng2 } from '../figma_app/205827';
-import { FC } from '../figma_app/212807';
-import { a as _$$a9 } from '../figma_app/215667';
+import { selectPermissionsState } from '../figma_app/212807';
+import { DropdownThemeProvider } from '../figma_app/215667';
 import { Dw as _$$Dw, sz as _$$sz } from '../figma_app/216696';
 import { bW } from '../figma_app/223206';
 import { vt } from '../figma_app/231614';
@@ -482,7 +482,7 @@ import { p as _$$p4 } from '../figma_app/243977';
 import { T as _$$T5 } from '../figma_app/257703';
 import { ZF } from '../figma_app/258114';
 import { N as _$$N } from '../figma_app/268271';
-import { DialogBody, DialogHiddenTitle, DialogHeader, DialogContents } from '../figma_app/272243';
+import { DialogBody, DialogContents, DialogHeader, DialogHiddenTitle } from '../figma_app/272243';
 import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSearchEnabled, isResourceHubProfilesEnabled, isTntSavingEnabled } from '../figma_app/275462';
 import { DesignToolType } from '../figma_app/277543';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
@@ -493,8 +493,8 @@ import { ResourceTypeEnum } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
 import { hp as _$$hp, vg as _$$vg, xs as _$$xs, DF, LP } from '../figma_app/310688';
 import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAndTrackCTA, TEAM_CREATION_BUTTON_HOVERED_TIMEOUT, trackFileBrowserFileClick, trackFileBrowserFileClicked, trackFileBrowserLoaded, trackFileBrowserPageVisit, trackUserEvent } from '../figma_app/314264';
-import { useSafeRouteStateInstance, useRouteStateInstance, useRouteQuery, useRouteMatchExists, useSafeRouteParams, useRouteParams } from '../figma_app/321395';
-import { SortOptions, getAllTimeSortOption } from '../figma_app/324237';
+import { useRouteMatchExists, useRouteParams, useRouteQuery, useRouteStateInstance, useSafeRouteParams, useSafeRouteStateInstance } from '../figma_app/321395';
+import { getAllTimeSortOption, SortOptions } from '../figma_app/324237';
 import { fO as _$$fO, ZM } from '../figma_app/329496';
 import { Jt as _$$Jt2, GR, HD } from '../figma_app/330108';
 import { h as _$$h7 } from '../figma_app/334471';
@@ -511,14 +511,14 @@ import { s$ as _$$s$ } from '../figma_app/361035';
 import { z as _$$z1 } from '../figma_app/369596';
 import { bE as _$$bE } from '../figma_app/375098';
 import { V as _$$V3 } from '../figma_app/385855';
-import { _6 as _$$_, z3 } from '../figma_app/386952';
+import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { BY, Jm } from '../figma_app/387599';
 import { adminPermissionConfig, createComparator, defaultComparator, setupShadowRead, useShadowRead, useShadowReadLoaded } from '../figma_app/391338';
 import { xF as _$$xF, WG } from '../figma_app/405906';
 import { QJ } from '../figma_app/411744';
 import { aq as _$$aq } from '../figma_app/412189';
 import { o8 as _$$o2, sm as _$$sm } from '../figma_app/425283';
-import { hasLibraryKey, mapVtToFileType, getMainContent, hasResourceType, hasContent, isFigmakeTemplate } from '../figma_app/427318';
+import { getMainContent, hasContent, hasLibraryKey, hasResourceType, isFigmakeTemplate, mapVtToFileType } from '../figma_app/427318';
 import { zE as _$$zE, Jw } from '../figma_app/435872';
 import { f as _$$f5 } from '../figma_app/436731';
 import { $n as _$$$n, wv } from '../figma_app/439493';
@@ -558,7 +558,7 @@ import { Lm as _$$Lm } from '../figma_app/579169';
 import { oN as _$$oN } from '../figma_app/583114';
 import { aH as _$$aH } from '../figma_app/591738';
 import { getExperimentConfigAsync, selectExperimentConfigHook } from '../figma_app/594947';
-import { cD as _$$cD, cU as _$$cU, ol as _$$ol, zs } from '../figma_app/598018';
+import { getCurrentTeamId, hasWhiteboardFilesBetaLimitation, getCurrentTeam, hasLegacyFilesLimitation } from '../figma_app/598018';
 import { getCurrentLocale } from '../figma_app/598412';
 import { z6 as _$$z10, MR, qp } from '../figma_app/598926';
 import { bP, IQ } from '../figma_app/600006';
@@ -591,7 +591,7 @@ import { A as _$$A9, K as _$$K3 } from '../figma_app/694593';
 import { hF as _$$hF, j as _$$j2, VY as _$$VY, CJ } from '../figma_app/698052';
 import { EO } from '../figma_app/701982';
 import { w as _$$w5 } from '../figma_app/705249';
-import { draftViews, EntityType, SidebarSection, TeamType, teamViews, UpgradeAction } from '../figma_app/707808';
+import { CreateUpgradeAction, draftViews, EntityType, SidebarSection, TeamType, teamViews } from '../figma_app/707808';
 import { wY } from '../figma_app/708845';
 import { q as _$$q2 } from '../figma_app/712384';
 import { hJ as _$$hJ } from '../figma_app/713624';
@@ -603,14 +603,14 @@ import { M as _$$M, s as _$$s4 } from '../figma_app/749682';
 import { FileType, FilterType, getFileTypeIndex, getResourceSortField, getSortFieldKey, getSortFieldProperty, getSortOrderKey, getViewModeKey, PermissionAction, PermissionType, SortField, SortOrder, ViewMode } from '../figma_app/756995';
 import { ColorOptions } from '../figma_app/763686';
 import { syncEditorResourceWithHistory } from '../figma_app/773663';
-import { getResourceUserCount, getResourceTypesForBrowse, getResourceName } from '../figma_app/777551';
+import { getResourceName, getResourceTypesForBrowse, getResourceUserCount } from '../figma_app/777551';
 import { K0 } from '../figma_app/778125';
 import { BrowserInfo, getIsAndroidOrIphoneNotFigmaMobile, isAndroidOrIphoneNotFigmaMobile, isMobilePlatformNotFigmaMobile } from '../figma_app/778880';
 import { parseMsNumber, parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { R as _$$R10 } from '../figma_app/787018';
 import { gY as _$$gY2 } from '../figma_app/797994';
 import { az as _$$az, md as _$$md2, rE as _$$rE, Ro, z6 } from '../figma_app/805373';
-import { useCategoryResourceHandler, ResourceHubCategoryRoute } from '../figma_app/805898';
+import { ResourceHubCategoryRoute, useCategoryResourceHandler } from '../figma_app/805898';
 import { memoizeByArgs } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
@@ -625,7 +625,7 @@ import { ps as _$$ps, ZY } from '../figma_app/845611';
 import { SW } from '../figma_app/846003';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { defaultSectionKey, DUserRole, TGroupType } from '../figma_app/858344';
-import { b as _$$b5, bL as _$$bL, mc as _$$mc2, q7, YJ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuGroupComp } from '../figma_app/860955';
 import { ds as _$$ds, gV as _$$gV, sb as _$$sb, t$ as _$$t$, D6, kK, R3, T0, TF } from '../figma_app/863319';
 import { VE } from '../figma_app/869776';
 import { desktopAPIInstance, OpenTarget } from '../figma_app/876459';
@@ -648,7 +648,7 @@ import { getAdminUsers, getCurrentUserOrgUser, getTopAdminUsers } from '../figma
 import { E as _$$E7, J as _$$J4 } from '../figma_app/953812';
 import { Wf as _$$Wf, zq as _$$zq, FK, zx } from '../figma_app/961422';
 import { _l as _$$_l, dm as _$$dm, eP as _$$eP, gN as _$$gN, h3 as _$$h2, p5 as _$$p2, Dj, Dw, RH, T5, UN, V3 } from '../figma_app/976345';
-import { ResourceHubHomeRouteClass, useResourceFuid, useResourceRouteParams, RESOURCE_ROUTE } from '../figma_app/979714';
+import { RESOURCE_ROUTE, ResourceHubHomeRouteClass, useResourceFuid, useResourceRouteParams } from '../figma_app/979714';
 import { o8 as _$$o4 } from '../figma_app/982327';
 import { yJ as _$$yJ2, I1, Pg } from '../figma_app/990058';
 import { L as _$$L7 } from '../figma_app/990299';
@@ -666,10 +666,10 @@ import { A as _$$A8 } from '../svg/507015';
 import { A as _$$A18 } from '../svg/616591';
 import { A as _$$A26 } from '../svg/792557';
 import { A as _$$A16 } from '../svg/821527';
-import { Switch, Redirect, Route } from '../vendor/130505';
+import { Redirect, Route, Switch } from '../vendor/130505';
 import gr from '../vendor/223926';
 import { eJ as _$$eJ } from '../vendor/352483';
-import { A as _$$A1 } from '../vendor/850789';
+import { useDebounce } from 'use-debounce';
 import oc from '../vendor/879378';
 import { z as _$$z9 } from '../vendor/999105';
 let U = B;
@@ -704,13 +704,13 @@ function ej() {
       label: renderI18nText('general.got_it'),
       type: 'button',
       onClick: complete,
-      ctaTrackingDescriptor: _$$c3.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     secondaryCta: {
       label: renderI18nText('general.learn_more'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/4420549259799',
-      ctaTrackingDescriptor: _$$c3.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: _$$sm,
@@ -733,7 +733,7 @@ function eN({
 }
 function eO() {
   let e = useDispatch();
-  let t = z3();
+  let t = getSelectedViewType();
   return jsx(SidebarRow, {
     onClick: () => {
       e(selectViewAction({
@@ -784,7 +784,7 @@ function e0(e) {
         e.openConnectedProjectsTab();
         complete();
       },
-      ctaTrackingDescriptor: _$$c3.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     targetKey: eZ,
     trackingContextName: 'Connected Projects Admin Settings Onboarding',
@@ -1023,13 +1023,13 @@ function tg(e) {
       onClick: () => {
         complete();
       },
-      ctaTrackingDescriptor: _$$c3.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     secondaryCta: {
       label: renderI18nText('file_browser.drafts_to_move.viewbar_learn_more_link'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/18409526530967',
-      ctaTrackingDescriptor: _$$c3.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     targetKey: _$$uZ,
     title: n,
@@ -2067,7 +2067,7 @@ function rH(e) {
   let g = _$$f2(useAtomWithSubscription(_$$yH));
   let [h, x] = useState(!1);
   let b = e.favorite.resourceType;
-  let v = _$$_();
+  let v = getSelectedView();
   let [y, w] = useState(!1);
   let j = e.rearrangeDragState?.draggedOverFavoriteId === e.favorite.resource.id && !y;
   let [T, I] = useState(!1);
@@ -2287,7 +2287,7 @@ function rq(e) {
   let r = useSelector(e => e.currentTeamId);
   let n = useCurrentUserOrgId() ?? null;
   let o = _$$sb(e.favorites, e.order);
-  let l = _$$_();
+  let l = getSelectedView();
   let [d, c] = useState(!1);
   let u = useSelector(e => e.favorites.movingResource);
   let m = useSelector(e => e.favorites.collapsedCustomSections);
@@ -3015,13 +3015,13 @@ function ap() {
       label: renderI18nText('general.got_it'),
       type: 'button',
       onClick: complete,
-      ctaTrackingDescriptor: _$$c3.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     secondaryCta: {
       label: renderI18nText('general.learn_more'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/4420549259799',
-      ctaTrackingDescriptor: _$$c3.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: af,
@@ -3078,7 +3078,7 @@ function ag(e) {
 function aI({
   onClickCta: e
 }) {
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: 'seascape',
     children: jsx('div', {
       className: 'xk0qfmw x1bamp8i x19y5rnk x1v8gsql xb3r6kr x1n2onr6',
@@ -3367,7 +3367,7 @@ function a8(e) {
       open();
     },
     trackingProperties: {
-      trackingDescriptor: _$$c3.WORK_IN_ONE_OF_YOUR_PAID_TEAMS
+      trackingDescriptor: UpgradeAction.WORK_IN_ONE_OF_YOUR_PAID_TEAMS
     },
     children: renderI18nText('upgrade.work_in_one_of_your_paid_teams')
   });
@@ -3392,7 +3392,7 @@ function a8(e) {
       }));
     },
     ctaTrackingProperties: {
-      trackingDescriptor: _$$c3.VIEW_ALL_PLANS
+      trackingDescriptor: UpgradeAction.VIEW_ALL_PLANS
     },
     onDismiss: () => {
       t(_$$bE({
@@ -3468,7 +3468,7 @@ function si({
     ctaDataTestId: 'user-churning-cta',
     ctaText: renderI18nText('resubscription_section.cta_text'),
     ctaTrackingProperties: {
-      trackingDescriptor: paymentMethod ? _$$c3.REACTIVATE_YOUR_PROFESSIONAL_PLAN : _$$c3.UPDATE_PAYMENT
+      trackingDescriptor: paymentMethod ? UpgradeAction.REACTIVATE_YOUR_PROFESSIONAL_PLAN : UpgradeAction.UPDATE_PAYMENT
     },
     demure: 'very',
     header: x,
@@ -3536,7 +3536,7 @@ function sd({
     bodyText: n,
     ctaText: renderI18nText('upgrade.view_plans'),
     ctaTrackingProperties: {
-      trackingDescriptor: _$$c3.UPGRADE
+      trackingDescriptor: UpgradeAction.UPGRADE
     },
     ctaDataTestId: 'redesigned-upgrade-button',
     onClickCTA: () => {
@@ -3606,7 +3606,7 @@ function sw(e) {
 }
 function sj() {
   let e = function () {
-    let e = _$$ol();
+    let e = getCurrentTeam();
     let t = useDispatch();
     let r = useSelector(e => e.teamBilling.summary);
     let a = useSelector(e => e.loadingState);
@@ -3644,8 +3644,8 @@ function sj() {
   }();
   let t = function () {
     let e = selectCurrentUser();
-    let t = _$$ol();
-    let r = FC();
+    let t = getCurrentTeam();
+    let r = selectPermissionsState();
     let a = useSubscription(EduOffboardingData, {});
     let s = a.data?.currentUser?.eduPeriodEnd;
     let n = useSelector(e => e.userFlags);
@@ -3677,7 +3677,7 @@ function sj() {
   let r = function () {
     let e = selectCurrentUser();
     let t = useSelector(e => e.teams);
-    let r = _$$ol();
+    let r = getCurrentTeam();
     let a = useAtomWithSubscription(sb);
     let s = useAtomWithSubscription(_$$Lm);
     let n = useSubscription(TeamCanEdit, {
@@ -3698,7 +3698,7 @@ function sj() {
   let a = function () {
     let e = useSelector(e => e.userFlags);
     let t = function () {
-      let e = FC();
+      let e = selectPermissionsState();
       let t = selectWithShallowEqual(e => ({
         orgUsersByOrgId: e.orgUsersByOrgId,
         user: e.user,
@@ -3725,7 +3725,7 @@ function sj() {
   let s = function () {
     let e = selectCurrentUser();
     let t = useSelector(e => e.teams);
-    let r = _$$ol();
+    let r = getCurrentTeam();
     let a = useAtomWithSubscription(_$$Lm);
     let s = useSelector(e => e.userTeamFlags);
     let n = useSubscription(TeamCanEdit, {
@@ -3744,7 +3744,7 @@ function sj() {
   }();
   let n = function () {
     let e = selectCurrentUser();
-    let t = _$$ol();
+    let t = getCurrentTeam();
     let r = _$$d2();
     let a = useSelector(e => e.userTeamFlags);
     return e && t && r ? _$$gY2(a, aq, t.id, 7776e6) ? null : {
@@ -3931,7 +3931,7 @@ function sV(e) {
 }
 function sH(e) {
   let t = useDispatch();
-  let r = _$$_();
+  let r = getSelectedView();
   let s = useSelector(e => e.currentUserOrgId);
   let n = useSelector(e => e.teamFeedBellStates);
   let o = !!(s && n[s]);
@@ -4016,9 +4016,9 @@ function sZ(e) {
   let r = useCurrentUserOrgId();
   let n = useSelector(e => e.currentTeamId);
   let l = useSelector(e => e.userFlags);
-  let d = FC();
+  let d = selectPermissionsState();
   let c = useSelector(e => e.userStateLoaded);
-  let u = _$$_();
+  let u = getSelectedView();
   let m = useSelector(e => e.dragState);
   let _ = eN({
     project: 'drafts'
@@ -4656,7 +4656,7 @@ function iB({
   workspaceId: e,
   onlyJoinedTeams: t
 }) {
-  let r = FC();
+  let r = selectPermissionsState();
   let a = useCurrentPublicPlan('useFilteredOrgTeamsQuery').unwrapOr(null);
   let i = getParentOrgIdIfOrgLevel(a);
   let n = !canMemberOrg(i ?? null, r);
@@ -4789,7 +4789,7 @@ var iq = (e => (e.NEW_FILE = 'NEW_FILE', e.NEW_RESOURCE = 'NEW_RESOURCE', e.PROJ
 function iX(e) {
   let t = useDispatch();
   let r = useSelector(e => e.currentUserOrgId);
-  let a = _$$_();
+  let a = getSelectedView();
   return () => {
     r ? t(showModalHandler({
       type: Uc,
@@ -4891,11 +4891,11 @@ function ni({
   let {
     manager,
     getTriggerProps
-  } = _$$b5({
+  } = setupMenu({
     initialPosition: 'bottom'
   });
   let n = useTracking();
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d3, {
       ...getTriggerProps(),
@@ -5544,7 +5544,7 @@ function nB(e) {
     style: {
       backgroundColor: f
     },
-    children: jsx(_$$J2, {
+    children: jsx(setupThemeContext, {
       mode: f ? g : x.color,
       children: jsx(iV, {
         avatar: d ? jsx(_$$j3, {
@@ -5846,7 +5846,7 @@ let n2 = registerModal(({
   let r = useCurrentPrivilegedPlan('ChooseFileToPinModal').unwrapOr(null);
   let o = r?.name ?? null;
   let [l, d] = useState('');
-  let [c] = _$$A1(l, 400);
+  let [c] = useDebounce(l, 400);
   let [u, m] = useState(null);
   let _ = useCallback(e => {
     m(e);
@@ -5977,7 +5977,7 @@ function os({
   suggestedFiles: e
 }) {
   let t = e.slice(0, 8);
-  let r = _$$_();
+  let r = getSelectedView();
   let n = useDispatch();
   let {
     showing,
@@ -6348,7 +6348,7 @@ function oE({
   workspace: e
 }) {
   let t = useDispatch();
-  let r = _$$_();
+  let r = getSelectedView();
   let n = getUserId();
   let {
     showing,
@@ -6813,7 +6813,7 @@ function lo({
   let {
     getTriggerProps,
     manager
-  } = _$$b5();
+  } = setupMenu();
   let o = useRouteParams(ResourceHubCategoryRoute);
   let l = o?.categorySlug;
   let d = o?.tagSlug;
@@ -6824,7 +6824,7 @@ function lo({
     let r = WG(e);
     return e === LJ.whiteboarding ? t === ResourceTypes.BrowseResourceTypes.WIDGETS ? o9.PLUGINS_AND_WIDGETS : o9.WHITEBOARDING : o8.has(r) ? o9.WHITEBOARDING : o6.has(r) ? o9.PLUGINS_AND_WIDGETS : o5.has(r) ? o9.DESIGN_RESOURCES : o3.has(r) ? o9.PRESENTATIONS : o7.has(r) ? o9.WEBSITES : null;
   }(l, m) === e;
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(ln, {
       defaultText: t,
@@ -6834,9 +6834,9 @@ function lo({
       resourceType: m,
       getTriggerProps,
       isSelected: manager.isOpen
-    }), jsx(_$$mc2, {
-      children: s.map((e, t) => jsx(YJ, {
-        children: e.map((e, t) => jsx(q7, {
+    }), jsx(MenuContainerComp, {
+      children: s.map((e, t) => jsx(MenuGroupComp, {
+        children: e.map((e, t) => jsx(MenuItemComp, {
           onClick: () => {
             _$$pt(e?.href ?? '');
             customHistory.push(e?.href ?? '');
@@ -7207,7 +7207,7 @@ function lx() {
 function lb() {
   let e = isTntSavingEnabled();
   let t = isMakeDiscoveryEnabled();
-  return jsx(_$$a9, {
+  return jsx(DropdownThemeProvider, {
     mode: 'match',
     children: jsxs('div', {
       className: 'x78zum5 x1q0g3np x167g77z x1a02dak',
@@ -7767,7 +7767,7 @@ function lH({
   userJobTitle: d
 }) {
   let [c, m] = useState(!1);
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: o,
     children: createElement(ButtonPrimitive, {
       'aria-label': t,
@@ -9639,7 +9639,7 @@ function d2({
       label: renderI18nText('community.resource_hub.got_it'),
       type: 'button',
       onClick: () => complete(),
-      ctaTrackingDescriptor: _$$c3.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: d5,
     title: renderI18nText('community.resource_hub.get_more_inspiration'),
@@ -9718,7 +9718,7 @@ function cs({
     d(o);
     e?.(o);
   }, [o, e]);
-  return jsx(_$$a9, {
+  return jsx(DropdownThemeProvider, {
     mode: 'match',
     children: jsx('div', {
       className: 'x1iog12x x1db2dqx',
@@ -9828,7 +9828,7 @@ function cn({
   useEffect(() => {
     c || y();
   }, [y, c]);
-  return jsxs(_$$p8.Root, {
+  return jsxs(InputComponent.Root, {
     size: 'lg',
     onFocus: () => {
       h(!0);
@@ -9845,7 +9845,7 @@ function cn({
         orgOrTeamName: o,
         onSelect: t
       })
-    }), !x && v, jsx(_$$p8, {
+    }), !x && v, jsx(InputComponent, {
       'value': _,
       'onChange': e => {
         p(e);
@@ -11036,7 +11036,7 @@ function un(e) {
   let n = selectCurrentUser();
   let o = useSelector(e => e.teamFeedRefreshNonce);
   let [l, d] = useState(null);
-  let c = _$$_();
+  let c = getSelectedView();
   let u = c.view === 'teamFeed';
   let m = c.view === 'user';
   useEffect(() => {
@@ -11493,8 +11493,8 @@ function uA({
   isDraftsFolder: t
 }) {
   let r = useDispatch();
-  let s = _$$ol();
-  let n = _$$_();
+  let s = getCurrentTeam();
+  let n = getSelectedView();
   return t || !s || hasTeamPaidAccess(s) || n.view !== 'folder' ? null : jsx(uO, {
     folderId: n.folderId,
     showPlanComparisonModal: () => {
@@ -11573,7 +11573,7 @@ function uO({
           }), jsx(uR, {
             onClick: t,
             trackingProperties: {
-              trackingDescriptor: _$$c3.VIEW_PLANS,
+              trackingDescriptor: UpgradeAction.VIEW_PLANS,
               numFiles: m
             },
             children: renderI18nText('upgrade.view_plans')
@@ -11759,7 +11759,7 @@ function me({
   tiles: v
 }) {
   let y = selectCurrentUser();
-  let w = _$$_();
+  let w = getSelectedView();
   let j = w.view === 'folder' ? w.folderId : null;
   let T = liveStoreInstance.Folder.useValue(j).data;
   let C = [y?.drafts_folder_id, y?.personal_drafts_folder_id].includes(T?.id);
@@ -11768,8 +11768,8 @@ function me({
     show,
     data
   } = _$$L2();
-  let A = FC();
-  let O = _$$ol();
+  let A = selectPermissionsState();
+  let O = getCurrentTeam();
   let F = T?.team_id || O?.id;
   let P = useSubscription(TeamById(isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && F ? {
     teamId: F
@@ -12149,7 +12149,7 @@ function me({
     sortedFilteredTilesLength: r
   }) {
     let [a, i] = useState(null);
-    let n = _$$_().view;
+    let n = getSelectedView().view;
     let o = useRef(!1);
     useEffect(() => {
       let s = o.current;
@@ -12173,7 +12173,7 @@ function me({
     sortedFilteredTilesLength: et.length
   });
   if (Cm(eo), !function (e) {
-    let t = _$$_();
+    let t = getSelectedView();
     let r = useDispatch();
     let a = useMemoStable(() => {
       if (t.view === 'deletedFiles') return [];
@@ -12562,8 +12562,8 @@ function mc({
 }) {
   let t;
   let r = useDispatch();
-  let s = _$$ol();
-  let n = z3();
+  let s = getCurrentTeam();
+  let n = getSelectedViewType();
   let o = selectExperimentConfigHook('exp_fbg_project_limit_upsell');
   let l = _$$h3.useTrackingContext({
     trigger: UpsellModalType.FOLDER_UPSELL_CARD
@@ -12582,7 +12582,7 @@ function mc({
       }));
     },
     trackingProperties: {
-      trackingDescriptor: _$$c3.PROFESSIONAL_PLAN,
+      trackingDescriptor: UpgradeAction.PROFESSIONAL_PLAN,
       ...l
     },
     trusted: !0,
@@ -12595,20 +12595,20 @@ function mc({
       className: U()(_$$s.flex.flexColumn.alignLeft.p24.$, 'folder_upsell--card--m7-Lh'),
       onClick: () => {
         r(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: s,
-            resource: vL.FOLDER,
+            resource: PageFolderFile.FOLDER,
             action: fileActionEnum.CREATE_FOLDER,
-            currentPlan: _$$F7.Plan.STARTER,
-            upsellPlan: _$$F7.Plan.PRO,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             editorType: null,
             upsellSource: UpsellModalType.FOLDER_UPSELL_CARD
           }
         }));
       },
       trackingProperties: {
-        trackingDescriptor: _$$c3.FOLDER_UPSELL_CARD
+        trackingDescriptor: UpgradeAction.FOLDER_UPSELL_CARD
       },
       dataTestId: 'folder_upsell_button',
       children: [jsxs('div', {
@@ -12661,8 +12661,8 @@ function mm({
   canEditTeam: e
 }) {
   let t = useDispatch();
-  let r = _$$ol();
-  let s = z3();
+  let r = getCurrentTeam();
+  let s = getSelectedViewType();
   let n = _$$h3.useTrackingContext({
     trigger: UpsellModalType.FOLDER_UPSELL_CARD
   });
@@ -12681,7 +12681,7 @@ function mm({
       }));
     },
     trackingProperties: {
-      trackingDescriptor: _$$c3.PROFESSIONAL_PLAN,
+      trackingDescriptor: UpgradeAction.PROFESSIONAL_PLAN,
       ...n
     },
     trusted: !0,
@@ -12699,20 +12699,20 @@ function mm({
         className: U()(_$$s.flex.alignLeft.gap12.py24.px16.bRadius8.wFull.pl36.$, 'folder_upsell--list--2Higk'),
         onClick: () => {
           t(showModalHandler({
-            type: DV,
+            type: ConsumptionPaywallModalPlansPricing,
             data: {
               team: r,
-              resource: vL.FOLDER,
+              resource: PageFolderFile.FOLDER,
               action: fileActionEnum.CREATE_FOLDER,
-              currentPlan: _$$F7.Plan.STARTER,
-              upsellPlan: _$$F7.Plan.PRO,
+              currentPlan: consumptionPaywallUtils.Plan.STARTER,
+              upsellPlan: consumptionPaywallUtils.Plan.PRO,
               editorType: null,
               upsellSource: UpsellModalType.FOLDER_UPSELL_CARD
             }
           }));
         },
         trackingProperties: {
-          trackingDescriptor: _$$c3.FOLDER_UPSELL_CARD
+          trackingDescriptor: UpgradeAction.FOLDER_UPSELL_CARD
         },
         dataTestId: 'folder_upsell_button',
         children: [jsxs('div', {
@@ -12997,7 +12997,7 @@ function mv(e) {
 }
 function my() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = _$$ol();
+  let t = getCurrentTeam();
   let r = useSubscription(TeamCanEdit, {
     id: t ? t.id : ''
   }, {
@@ -13009,7 +13009,7 @@ function my() {
     enabled: !!t?.id
   });
   let n = useSelector(e => e.tileSortFilterStateByView);
-  let o = _$$_();
+  let o = getSelectedView();
   let l = _$$R3(t?.id);
   let d = n.trashedFolders;
   let [{
@@ -13048,7 +13048,7 @@ function my() {
 }
 var mw = (e => (e.FILES = 'files', e.FOLDERS = 'folders', e))(mw || {});
 function mj(e) {
-  let t = _$$_();
+  let t = getSelectedView();
   if (t.view !== 'deletedFiles' && t.view !== 'trashedFolders') return jsx(Fragment, {});
   let r = jsx(uy, {
     currView: t
@@ -13145,7 +13145,7 @@ let mW = registerModal(e => {
     hideCancel: !0,
     confirmText: getI18nString('payments.got_it'),
     trackedConfirmationProperties: {
-      trackingDescriptor: _$$c3.CONFIRM_VERIFY_PAYMENT,
+      trackingDescriptor: UpgradeAction.CONFIRM_VERIFY_PAYMENT,
       trackingContextName: 'Confirm Verify Payment'
     },
     children: renderI18nText('payments.pending_subscription_modal_description')
@@ -13334,10 +13334,10 @@ function m9(e, t, r, i, n, l) {
     }));
     let B = isGracePeriodEndingSoon(l);
     let U = l && l.subscription_raw !== FPaymentHealthStatusType.OK && isTeamInGracePeriod(l) && y && _$$ng2.getProTrialStatus(l) !== _$$a10.IN_TRIAL && B;
-    let W = ['team', 'folder'].includes(e) && w && _$$cU(l);
+    let W = ['team', 'folder'].includes(e) && w && hasWhiteboardFilesBetaLimitation(l);
     let $ = w && function (e, t) {
       let r = e && t[e.id]?.dismissed_legacy_team_upgrade_notice_banner;
-      return zs(e) && !r;
+      return hasLegacyFilesLimitation(e) && !r;
     }(l, s.userTeamFlags);
     let G = isExternalRestricted(s.user, s.currentUserOrgId);
     let V = _$$ng2.canSeeExpiredProTrialBanner(s.userTeamFlags, l, s);
@@ -13557,7 +13557,7 @@ function m9(e, t, r, i, n, l) {
         learnMoreUrl: '/pricing',
         cta: w ? getI18nString('payments.upgrade_now') : getI18nString('payments.contact_admin_for_details'),
         ctaTrackingProperties: w ? {
-          trackingDescriptor: _$$c3.UPGRADE_NOW,
+          trackingDescriptor: UpgradeAction.UPGRADE_NOW,
           upsellSource: UpsellModalType.BANNER
         } : void 0,
         onClickCta: w ? P : null
@@ -13619,7 +13619,7 @@ function m9(e, t, r, i, n, l) {
         message: r,
         cta: getI18nString('payments.upgrade_now'),
         ctaTrackingProperties: {
-          trackingDescriptor: _$$c3.UPGRADE_NOW,
+          trackingDescriptor: UpgradeAction.UPGRADE_NOW,
           upsellSource: UpsellModalType.BANNER
         },
         onClickCta: P,
@@ -13663,7 +13663,7 @@ function m9(e, t, r, i, n, l) {
         message: e,
         cta: jsx(_$$V6, {
           trackingProperties: {
-            trackingDescriptor: _$$c3.VERIFY_PAYMENT,
+            trackingDescriptor: UpgradeAction.VERIFY_PAYMENT,
             trackingContextName: 'Verify Payment Banner'
           },
           onClick: () => i?.(showModalHandler({
@@ -13682,7 +13682,7 @@ function m9(e, t, r, i, n, l) {
   }(e, t, r, i, n, l)), [m, c, e, t, r, i, n]);
 }
 function _e(e) {
-  let t = FC();
+  let t = selectPermissionsState();
   let r = useSelector(e => e.userEduGracePeriods);
   let a = useSelector(e => e.userFlags);
   let n = useSelector(e => e.userTeamFlags);
@@ -13957,7 +13957,7 @@ function _o() {
   let n = _n();
   r ? e = n?.currentUser.baseOrgUser?.draftsProject : s && (e = n?.currentUser.currentTeamUser?.draftsProject);
   let o = useSelector(e => e.tileSortFilterStateByView);
-  let l = _$$_();
+  let l = getSelectedView();
   if (!n || !e) {
     return jsx(uf, {
       viewbarActions: []
@@ -14997,7 +14997,7 @@ function _q({
     onClose: complete,
     primaryCta: {
       label: renderI18nText('general.got_it'),
-      ctaTrackingDescriptor: _$$c3.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       type: 'button',
       onClick: complete
     },
@@ -15085,7 +15085,7 @@ function _Z({
   tileActions: r
 }) {
   let n = useDispatch();
-  let o = _$$_();
+  let o = getSelectedView();
   let l = getUserId();
   let {
     showing,
@@ -15473,7 +15473,7 @@ function pp(e) {
         children: jsx('div', {
           className: U()('templates_bar--useTemplateButton--4KFhz', _$$s.bRadius6.$),
           tabIndex: -1,
-          children: jsx(_$$J2, {
+          children: jsx(setupThemeContext, {
             brand: p_(r.viewer_mode),
             children: jsx(Button, {
               onClick: d,
@@ -15555,9 +15555,9 @@ function pI(e) {
     let t = getUpgradeEligibility(FProductAccessType.DESIGN, _);
     return t === _$$q5.CAN_UPGRADE ? (logAndTrackCTA({
       ...properties,
-      trackingDescriptor: _$$c3.CREATE_FILE,
+      trackingDescriptor: UpgradeAction.CREATE_FILE,
       licenseType: FProductAccessType.DESIGN,
-      billableProductKey: F2(FProductAccessType.DESIGN),
+      billableProductKey: getMinimumBundle(FProductAccessType.DESIGN),
       needsUpgrade: !0
     }), handleUpgrade({
       afterUpgradeCallback: e,
@@ -16198,7 +16198,7 @@ function p8({
       r && _$$hL(r);
     }, [r]);
   }(e);
-  let r = FC();
+  let r = selectPermissionsState();
   let [n, l] = function (e) {
     let t = !!getFeatureFlags().file_browser_paginated_folder_full_reads;
     let r = LK(e, !t);
@@ -16217,7 +16217,7 @@ function p8({
   let m = useSubscription(FolderCanView, {
     id: e
   });
-  let _ = _$$_();
+  let _ = getSelectedView();
   let h = m.status === 'loaded' && !m.data.project?.hasPermission || c?.trashedAt;
   let x = c?.trashedAt;
   let b = c?.isAbandonedDrafts && c?.currentPlanUser?.permission === FMemberRoleType.ADMIN;
@@ -16351,7 +16351,7 @@ function p8({
 function p6() {
   let e;
   let t = useSelector(e => e.currentTeamId);
-  let r = _$$_();
+  let r = getSelectedView();
   let s = useSubscription(LimitedSpaceSharedProjectsView, {
     teamId: t ?? ''
   }, {
@@ -16939,7 +16939,7 @@ function fk(e) {
 }
 function fR() {
   let e = useDispatch();
-  let t = FC();
+  let t = selectPermissionsState();
   let r = useCurrentUserOrgId();
   let n = Au(r);
   let {
@@ -17258,7 +17258,7 @@ function fG(e) {
 function fV(e) {
   let t = e.isDisabled || e.isLoading;
   let r = _$$O5();
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: e.brand,
     children: jsx(ButtonPrimitive, {
       ..._$$xk(fz.button, e.brand === 'bake-filebrowser' && fz.buttonFigmake, t && fz.buttonDisabled),
@@ -18428,7 +18428,7 @@ function gD({
       children: [jsx(gM, {}), jsx(gR.BannerContent, {
         copy: s
       })]
-    }), jsx(_$$J2, {
+    }), jsx(setupThemeContext, {
       brand: 'bake-filebrowser',
       children: jsx(_$$pW, {
         href: i,
@@ -18494,9 +18494,9 @@ function gU() {
         copy: getI18nString('banner.marketing_promo.figmake_launch.content'),
         beta: n
       })]
-    }), jsx(_$$J2, {
+    }), jsx(setupThemeContext, {
       brand: 'bake-filebrowser',
-      children: jsx(_$$J2, {
+      children: jsx(setupThemeContext, {
         mode: 'light',
         children: jsx(ButtonLarge, {
           onClick: e,
@@ -18534,7 +18534,7 @@ function gV(e) {
   };
 }
 function gz(e) {
-  let t = _$$_();
+  let t = getSelectedView();
   let r = useSelector(e => e.tileSortFilterStateByView);
   let n = t.view === 'recentsAndSharing' ? r.recentsAndSharing.sharedFiles : r.sharedWithYou;
   let o = {
@@ -18720,8 +18720,8 @@ function gz(e) {
   });
 }
 function gH(e) {
-  let t = _$$_();
-  let r = _$$ol();
+  let t = getSelectedView();
+  let r = getCurrentTeam();
   let n = useSubscription(TeamCanEdit, {
     id: r?.id || ''
   }, {
@@ -19077,7 +19077,7 @@ function hr(e) {
 function ha(e) {
   let t = e.selectedTab;
   let r = useDispatch();
-  let n = _$$_();
+  let n = getSelectedView();
   let l = useSelector(e => e.tileSortFilterStateByView);
   let d = t === ViewTypeEnum.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
   let c = function (e) {
@@ -19408,7 +19408,7 @@ function hp({
     },
     'trusted': !0,
     'trackingProperties': {
-      trackingDescriptor: _$$c3.UPGRADE_TO_A_PAID_PLAN
+      trackingDescriptor: UpgradeAction.UPGRADE_TO_A_PAID_PLAN
     },
     'data-testid': 'starterTeamUpsellFooterUpgradeLink',
     'children': renderI18nText('file_browser.starter_team.upgrade_link')
@@ -19577,7 +19577,7 @@ let hO = (e, t, r) => {
 };
 function hF() {
   let e = useDispatch();
-  let t = _$$_();
+  let t = getSelectedView();
   let r = hO(e, useSelector(e => e.tileSortFilterStateByView), t);
   return jsx(_$$g4, {
     leftSide: null,
@@ -19679,7 +19679,7 @@ function hD({
   let c = useSelector(e => l && l.org_id && e.orgById[l.org_id] || null);
   let u = useSelector(e => e.loadingState);
   let _ = useDispatch();
-  let f = _$$_();
+  let f = getSelectedView();
   let [g, h] = useState(!1);
   _$$r0(e);
   let x = _$$Z4(o);
@@ -19849,7 +19849,7 @@ function hM({
   let T = jn();
   let E = useSelector(e => e.teamBilling);
   let C = useDispatch();
-  let S = _$$_();
+  let S = getSelectedView();
   let k = useCallback(t => {
     let r = {
       view: 'team',
@@ -21009,7 +21009,7 @@ function xm({
 function x_({
   showingFileBrowserLoader: e
 }) {
-  let t = _$$_();
+  let t = getSelectedView();
   useEffect(() => {
     trackFileBrowserPageVisit(t);
   }, [t]);
@@ -21017,8 +21017,8 @@ function x_({
     let e = useDispatch();
     let t = selectUser();
     let r = useCurrentUserOrgId();
-    let n = _$$_();
-    let o = _$$cD();
+    let n = getSelectedView();
+    let o = getCurrentTeamId();
     let l = useCurrentUserOrg();
     let d = useSelector(e => e.search);
     let c = function () {
@@ -21563,7 +21563,7 @@ function xT({
 let xA = ['folder', 'team', 'search', 'recentsAndSharing'];
 function xO() {
   let e = useSelector(e => e.autosave);
-  let t = _$$_();
+  let t = getSelectedView();
   let r = yZ();
   let {
     unsyncedFiles,
@@ -21589,7 +21589,7 @@ function xP(e) {
       }));
     };
   }, [t]);
-  let r = _$$_();
+  let r = getSelectedView();
   let [n, o] = useState(!1);
   useEffect(() => {
     xF || (xF = !0, Mw());
@@ -22047,7 +22047,7 @@ function xq(e) {
           name: 'Upgrade New Team',
           properties: {
             teamId: p,
-            trackingDescriptor: _$$c3.UPGRADE_YOUR_TEAM
+            trackingDescriptor: UpgradeAction.UPGRADE_YOUR_TEAM
           },
           children: jsxs('div', {
             className: U()(e.className, 'step_upgrade_new_team--container--BixhQ'),
@@ -22297,7 +22297,7 @@ export function $$bo0() {
   let t = useCurrentUserOrgId();
   let r = Um();
   let E = selectCurrentUser();
-  let I = _$$_();
+  let I = getSelectedView();
   let C = q_.useIsLoading();
   let S = useSelector(e => e.payment);
   let k = useSelector(e => e.currentTeamId);
@@ -22405,7 +22405,7 @@ export function $$bo0() {
   }, [I, e]);
   let W = isMobilePlatformNotFigmaMobile;
   if (!function () {
-    let e = _$$_();
+    let e = getSelectedView();
     let t = useDispatch();
     let r = getUserId();
     let a = null;

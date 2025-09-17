@@ -14,7 +14,7 @@ import { isLibraryResource } from "../figma_app/471982";
 import { Dy } from "../905/977218";
 import { Q1 } from "../905/201596";
 import { nb } from "../figma_app/543100";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
 import { mapRecentFilesAndRepos, filterValidRecentFiles } from "../figma_app/349248";
@@ -101,7 +101,7 @@ export function $$P2({
   searchResults: o,
   editorTypes: l
 }) {
-  let c = FC();
+  let c = selectPermissionsState();
   let p = useSelector(e => e.authedProfilesById);
   let _ = useSelector(e => e.figFileDuplicatedFromHubFile);
   let g = useMemo(() => (o || []).map(({

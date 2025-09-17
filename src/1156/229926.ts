@@ -3,7 +3,7 @@ import { useCallback, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -72,10 +72,10 @@ let b = registerModal(function (e) {
     manager: E,
     width: "fit-content",
     height: "full",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: null
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         scrolling: "none",
         padding: 0,
         children: jsx("div", {

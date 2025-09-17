@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, S } from "../figma_app/490799";
 import { P } from "../905/347284";
@@ -56,14 +56,14 @@ function I(e) {
     children: jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("asset_transfers.editor_admin_list_modal.admins_at_entity", {
               entity: E
             })
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           scrolling: "none",
           children: [jsx(_$$_, {
             color: S.INFORMATION,

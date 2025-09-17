@@ -15,7 +15,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { AppliedColorPaletteForFile } from "../figma_app/43951";
 import { findTeamById } from "../905/613917";
 import { canViewTeam } from "../figma_app/642025";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { fJ, Yv } from "../figma_app/616107";
 import { v as _$$v } from "../figma_app/314838";
 import { D } from "../905/347702";
@@ -123,7 +123,7 @@ export function $$P6(e, t) {
   return e && t;
 }
 export function $$D3() {
-  let e = cD();
+  let e = getCurrentTeamId();
   let t = useSelector(t => findTeamById(e, t));
   let r = useSelector(t => e && canViewTeam(e, t));
   return !!(t?.org_id && r);

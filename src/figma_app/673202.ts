@@ -9,7 +9,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { interactiveAnchorTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText, getLocalizedPath } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { P4, L3, Dr, S6 } from "../905/18800";
@@ -36,7 +36,7 @@ function I(e) {
       cookiesEnabled: !1
     });
     trackEvent(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_OUT
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_OUT
     });
   };
   let S = async () => {
@@ -46,7 +46,7 @@ function I(e) {
       cookiesEnabled: !0
     });
     trackEvent(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_IN
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_IN
     });
   };
   let v = async () => {
@@ -56,7 +56,7 @@ function I(e) {
       cookiesEnabled: !1
     });
     trackEvent(CTA_CLICKED, {
-      trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_DISMISS
+      trackingDescriptor: UpgradeAction.COOKIE_BANNER_EXPLICIT_CONSENT_DISMISS
     });
   };
   return t ? jsxs("div", {

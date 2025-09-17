@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
@@ -12,7 +12,7 @@ import { isMobileUA, BrowserInfo, isFigmaMobileApp } from "../figma_app/778880";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { z4 } from "../905/37051";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { aq } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
 import { ju } from "../905/187165";
@@ -44,7 +44,7 @@ function O() {
   return getFeatureFlags().pride_inclusive_loading_bar ? DT : "";
 }
 export function $$R1() {
-  let e = _6();
+  let e = getSelectedView();
   if ("fullscreen" !== e.view) return null;
   let t = ju(e);
   return jsx(k, {
@@ -107,7 +107,7 @@ function D(e) {
 }
 function k(e) {
   let t = "whiteboard" === e.editorType ? FFileType.WHITEBOARD : e.isViewer ? "viewer" : FFileType.DESIGN;
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: e.editorTheme,
     children: jsxs("div", {
       className: c()(A7, e.shouldNotOverflow ? ZT : null),

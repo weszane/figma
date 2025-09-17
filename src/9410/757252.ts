@@ -5,7 +5,7 @@ import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app
 import { yE } from "../905/125333";
 import { V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -16,11 +16,11 @@ import { FFileType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { fileActionEnum } from "../figma_app/630077";
 import { dF } from "../figma_app/275938";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { n as _$$n } from "../905/347702";
 import { oh, Yg as _$$Yg } from "../905/526509";
 import { oW, Ai, Hf, Rg, Gn } from "../figma_app/204478";
@@ -142,17 +142,17 @@ export function $$U10() {
 export function $$G11() {
   let e = selectCurrentFile();
   let t = useDispatch();
-  let i = F.useShouldHideStarterCtaForOpenFile();
+  let i = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   return useCallback(() => {
     e && t(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: e.team,
-        resource: Bi.ADVANCED_SHAPES,
+        resource: FeatureFlag.ADVANCED_SHAPES,
         action: fileActionEnum.INSERT_ADVANCED_SHAPE,
         editorType: FFileType.WHITEBOARD,
-        currentPlan: F.Plan.STARTER,
-        upsellPlan: F.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         hideUpsellPlanCta: i
       }
     }));

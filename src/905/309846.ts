@@ -26,14 +26,14 @@ import { z as _$$z } from "../905/404751";
 import { kP, Y6, XQ, ho } from "../figma_app/91703";
 import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
 import { yJ as _$$yJ } from "../figma_app/240735";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { trackDefinedFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { mu, yn } from "../figma_app/840917";
 import { isBranchAlt } from "../905/760074";
 import { Xg } from "../figma_app/199513";
 import { W as _$$W } from "../905/242083";
 import { setupFileObject } from "../905/628874";
-import { A7 } from "../905/87821";
+import { showFileBrowserOrError } from "../905/87821";
 import { getFeatureFlags } from "../905/601108";
 import { getFontMetadataList } from "../905/165290";
 import { bE } from "../905/466026";
@@ -595,7 +595,7 @@ let eH = createOptimistThunk(async (e, {
     } : {
       type: "http",
       statusCode: i
-    }) : 404 === i ? A7(getI18nString("user_facing_error.404_loading_a_file"), e.dispatch) : A7(getI18nString("user_facing_error.opening_editor"), e.dispatch);
+    }) : 404 === i ? showFileBrowserOrError(getI18nString("user_facing_error.404_loading_a_file"), e.dispatch) : showFileBrowserOrError(getI18nString("user_facing_error.opening_editor"), e.dispatch);
     trackDefinedFileEvent("scenegraph_and_sync.fullscreen_open_error", t.key, A, {
       error: n instanceof Error ? void 0 !== n.cause ? `${n.message}: ${n.cause.message}` : n.message : JSON.stringify(n),
       statusCode: Number.isNaN(i) ? void 0 : i
@@ -645,7 +645,7 @@ export async function $$eW1(e, t, i, n, r) {
           logAndTrackCTA({
             text: "Publish components",
             name: "Publish draft after team upgrade",
-            trackingDescriptor: _$$c.PUBLISH_COMPONENTS_AFTER_TEAM_UPGRADE,
+            trackingDescriptor: UpgradeAction.PUBLISH_COMPONENTS_AFTER_TEAM_UPGRADE,
             inPublishDraftExp: !0
           }, "cta_clicked");
           n.dispatch(showModalHandler({

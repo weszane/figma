@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, memo } from "react";
-import { b, YJ } from "../figma_app/860955";
+import { setupMenu, MenuGroupComp } from "../figma_app/860955";
 import { H_ } from "../905/963340";
 import { useHandleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { SU } from "../figma_app/451499";
@@ -15,7 +15,7 @@ export function $$p0({
   let {
     getTriggerProps,
     manager
-  } = b();
+  } = setupMenu();
   let {
     updatePreview,
     clearPreview,
@@ -47,7 +47,7 @@ let $$$$m1 = memo(function ({
 }) {
   let o = useIsFullscreenSitesView();
   return jsx(Fragment, {
-    children: t.map((t, l) => jsx(YJ, {
+    children: t.map((t, l) => jsx(MenuGroupComp, {
       children: t.map(t => jsx(h, {
         option: t,
         checked: t === e,

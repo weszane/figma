@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
 import { D as _$$D } from "../905/251759";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
 import { Um } from "../905/848862";
 import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
@@ -142,7 +142,7 @@ export function $$b0({
           "data-testid": "cart-sidebar-button"
         },
         trackingProperties: {
-          trackingDescriptor: _$$c2.CART_SIDEBAR,
+          trackingDescriptor: UpgradeAction.CART_SIDEBAR,
           ...M
         },
         children: w ? V : x

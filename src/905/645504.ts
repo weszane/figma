@@ -3,7 +3,7 @@ import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { $X, fF } from "../figma_app/425283";
 import { l4, l_ } from "../figma_app/982327";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { N } from "../figma_app/268271";
@@ -52,7 +52,7 @@ export function $$g0({
         label: renderI18nText("general.got_it"),
         type: "button",
         onClick: complete,
-        ctaTrackingDescriptor: _$$c.GOT_IT
+        ctaTrackingDescriptor: UpgradeAction.GOT_IT
       },
       shouldCenterArrow: EL.BEST_EFFORT,
       targetKey: f.targetKey,

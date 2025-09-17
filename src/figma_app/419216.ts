@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect, forwardRef, useLayoutEffect } from "react";
 import { lQ } from "../905/934246";
 import { Button } from "../905/521428";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
@@ -10,7 +10,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { ww } from "../figma_app/194956";
 import { pW } from "../905/160095";
 import { getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackedButton, withTrackedClick } from "../figma_app/831799";
 import { Yk } from "../figma_app/644079";
 import { DP } from "../905/640017";
@@ -211,7 +211,7 @@ export function $$P4(e) {
   let E = e.backgroundColor ? {
     backgroundColor: e.backgroundColor
   } : {};
-  return e.hideIfArrowPositionDoesNotMatch && h.pointerPosition !== e.arrowPosition ? null : jsx(J, {
+  return e.hideIfArrowPositionDoesNotMatch && h.pointerPosition !== e.arrowPosition ? null : jsx(setupThemeContext, {
     mode: e.colorMode || "dark",
     children: jsx("div", {
       className: u()(e.className || Lq, e.noPadding && $T, e.noAnimation && gh),
@@ -399,7 +399,7 @@ export let $$k1 = forwardRef(function (e, t) {
           innerText: "close",
           "aria-label": getI18nString("general.close"),
           trackingProperties: {
-            trackingDescriptor: _$$c.CLOSE_BUTTON
+            trackingDescriptor: UpgradeAction.CLOSE_BUTTON
           }
         })
       })]

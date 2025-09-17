@@ -5,7 +5,7 @@ import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { G } from "../figma_app/361869";
 import { Spacing, linkWithTracking } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { m as _$$m } from "../figma_app/160942";
 import { FFileType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
@@ -19,7 +19,7 @@ export function $$f3({
 }) {
   var i;
   return e ? {
-    trackingDescriptor: _$$c.START_PRO_PLAN_FOR_FREE,
+    trackingDescriptor: UpgradeAction.START_PRO_PLAN_FOR_FREE,
     buttonText: renderI18nText("pro_cart.review.start_professional_plan_for_free"),
     finePrint: jsxs(Fragment, {
       children: [renderI18nText("pro_cart.review.offer_redeem_agree", {
@@ -35,11 +35,11 @@ export function $$f3({
       })]
     })
   } : t ? {
-    trackingDescriptor: _$$c.COMPLETE_UPGRADE,
+    trackingDescriptor: UpgradeAction.COMPLETE_UPGRADE,
     buttonText: renderI18nText("pro_cart.review.complete_upgrade"),
     finePrint: renderI18nText("pro_cart.review.all_editors_on_an_education_team_must_be_verified.seat_rename")
   } : {
-    trackingDescriptor: _$$c.COMPLETE_PURCHASE,
+    trackingDescriptor: UpgradeAction.COMPLETE_PURCHASE,
     buttonText: renderI18nText("pro_cart.review.complete_purchase"),
     finePrint: renderI18nText("pro_cart.review.your_subscription_will_automatically_renew_without_link.seat_rename")
   };

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { b as _$$b, bL, mc, YJ, hE, Q$, Ov, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp, MenuItemLead, MenuItemTrail, MenuItemComp } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r as _$$r } from "../905/571562";
@@ -90,7 +90,7 @@ function W({
   let {
     manager,
     getTriggerProps
-  } = _$$b({
+  } = setupMenu({
     config2025CuratorHacks: !0
   });
   let {
@@ -125,7 +125,7 @@ function W({
     dtmPlanParentType
   } = _$$V(getResourceDataOrFallback(j.data) || void 0);
   let L = !isDraftsToMovePlan && dtmMigrationCompleted && getFeatureFlags().dtm_deprecation_post_migration_onboarding;
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager: T,
     children: [jsxs($, {
       children: [jsxs(ButtonPrimitive, {
@@ -138,7 +138,7 @@ function W({
         workspace: t,
         planTier: r.data.tier
       })]
-    }), jsxs(mc, {
+    }), jsxs(MenuContainerComp, {
       "data-onboarding-key": K,
       children: [jsx(z6, {
         title: null,
@@ -146,22 +146,22 @@ function W({
           onChange(e);
         },
         value: v,
-        children: menuGroups.map(e => jsx(YJ, {
-          title: e.title ? jsx(hE, {
+        children: menuGroups.map(e => jsx(MenuGroupComp, {
+          title: e.title ? jsx(MenuTitleComp, {
             children: e.title
           }) : null,
           children: e.items.map(e => jsxs(CU, {
             value: e.planId,
-            children: [jsx(Q$, {
+            children: [jsx(MenuItemLead, {
               children: e.icon
-            }), H(e.displayText), e.badge ? jsx(Ov, {
+            }), H(e.displayText), e.badge ? jsx(MenuItemTrail, {
               children: e.badge
             }) : null]
           }, e.planId))
         }, e.key))
-      }), onCreateTeam ? jsxs(q7, {
+      }), onCreateTeam ? jsxs(MenuItemComp, {
         onClick: () => onCreateTeam(),
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx(_$$x, {})
         }), getI18nString("navbar.navbar.create_new")]
       }) : null]

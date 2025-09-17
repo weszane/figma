@@ -25,13 +25,13 @@ import { z as _$$z2 } from "../905/404751";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { getCurrentFileType } from "../figma_app/976749";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FPlanLimitationType } from "../figma_app/191312";
 import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDraftsNudgeV2OverlayRecentFilesLegacyView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
-import { vL, Bi } from "../905/652992";
+import { PageFolderFile, FeatureFlag } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
@@ -39,7 +39,7 @@ import { eg, O0, Lh } from "../figma_app/452252";
 import { s as _$$s2 } from "../figma_app/825649";
 import { RG } from "../figma_app/146384";
 import { EL } from "../905/748636";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { OA, CR } from "../figma_app/419216";
 import { v4 } from "../figma_app/598952";
 import { A as _$$A } from "../6041/578888";
@@ -325,13 +325,13 @@ export function $$ee2({
           label: getI18nString("rcs.move_drafts_nudge.upgrade_to_continue"),
           onClick: () => {
             d(showModalHandler({
-              type: DV,
+              type: ConsumptionPaywallModalPlansPricing,
               data: {
                 team: w,
-                resource: p !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
+                resource: p !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? PageFolderFile.FILE : FeatureFlag.FIGMAKE,
                 action: fileActionEnum.MOVE_FILES,
-                currentPlan: _$$F2.Plan.STARTER,
-                upsellPlan: _$$F2.Plan.PRO,
+                currentPlan: consumptionPaywallUtils.Plan.STARTER,
+                upsellPlan: consumptionPaywallUtils.Plan.PRO,
                 editorType: p,
                 multipleResources: !1
               }

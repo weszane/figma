@@ -19,7 +19,7 @@ import { o as _$$o } from "../905/298519";
 import { e as _$$e } from "../905/483726";
 import { V as _$$V2 } from "../905/751103";
 import { P as _$$P } from "../905/175083";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { scopeAwareFunction } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -152,7 +152,7 @@ export function $$B0(e) {
     }), n) : a;
   }(bell, E);
   let x = !!bell?.role;
-  let k = jsx(J, {
+  let k = jsx(setupThemeContext, {
     mode: "dark",
     children: jsxs(bL, {
       timeout: S,

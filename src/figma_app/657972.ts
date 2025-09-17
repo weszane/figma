@@ -14,7 +14,7 @@ import { u2, $K } from "../figma_app/223206";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { Me } from "../figma_app/598018";
+import { currentTeamAtom } from "../figma_app/598018";
 import { f6, ai } from "../figma_app/915202";
 import { R as _$$R } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
@@ -22,7 +22,7 @@ import { o as _$$o } from "../905/556276";
 import { Bn } from "../figma_app/835688";
 export function $$A0(e, t) {
   !function (e, t) {
-    let r = atomStoreManager.get(Me);
+    let r = atomStoreManager.get(currentTeamAtom);
     let n = debugState.getState();
     let i = getPermissionsAndView(n);
     e(zE({

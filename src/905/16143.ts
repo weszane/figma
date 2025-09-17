@@ -9,11 +9,11 @@ import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { R } from "../905/731725";
 import { getSidebarPath } from "../figma_app/528509";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { KindEnum } from "../905/129884";
 var s = a;
 export function $$_0(e) {
-  let t = _6();
+  let t = getSelectedView();
   let i = R({
     folderId: e.folder.id,
     shouldShowOnlyTrashedFiles: "trashedFolders" === t.view

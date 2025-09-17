@@ -23,7 +23,7 @@ import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
 import { isTeamFolderV2 } from "../figma_app/528509";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { FPlanLimitationType, FPlanNameType, FFileType } from "../figma_app/191312";
 import { STANDARD_LIMIT, hasTeamStatePaidAccess } from "../figma_app/345997";
@@ -36,7 +36,7 @@ import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { E9 } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { h as _$$h } from "../905/864281";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { EL } from "../905/748636";
@@ -259,7 +259,7 @@ function ee(e) {
           },
           dataTestId: "fileTrackerUpsellModalCta",
           trackingProperties: {
-            trackingDescriptor: _$$c.COMPARE_PLANS
+            trackingDescriptor: UpgradeAction.COMPARE_PLANS
           },
           children: renderI18nText("fullscreen.file_tracker_modal.compare_plans")
         })]
@@ -302,7 +302,7 @@ function ei({
           className: "pro_trial_upsell_modal--btnContainer--wZVCK",
           children: jsx(ButtonBasePrimaryTracked, {
             trackingProperties: {
-              trackingDescriptor: _$$c.UPGRADE_FROM_FILENAME_PRO_BADGE,
+              trackingDescriptor: UpgradeAction.UPGRADE_FROM_FILENAME_PRO_BADGE,
               ...ng.getTrackingProperties("Upgrade now")
             },
             onClick: () => {
@@ -327,7 +327,7 @@ function ea({
   openFile: e,
   team: t
 }) {
-  let i = FC();
+  let i = selectPermissionsState();
   let n = TN(t.id);
   let s = t.restrictionsList?.includes(FPlanLimitationType.LOCKED);
   let o = useSelector(e => e.isOpenFileLoadedFromLiveGraph);

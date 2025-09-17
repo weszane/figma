@@ -14,7 +14,7 @@ import { hO } from "../figma_app/545293";
 import { selectViewAction } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { _z, W0 } from "../905/977218";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { InputType } from "../figma_app/162807";
 import { isSearchView } from "../figma_app/707808";
 import { KindEnum } from "../905/129884";
@@ -31,7 +31,7 @@ export function $$P0({
   hideSearchPreview: e
 }) {
   let t = useDispatch();
-  let i = _6();
+  let i = getSelectedView();
   let [c, P] = useState(!1);
   let O = useRef(null);
   let D = useRef(null);

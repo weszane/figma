@@ -4,11 +4,11 @@ import { throwTypeError } from "../figma_app/465776";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
@@ -252,12 +252,12 @@ export class $$B5 extends PureComponent {
       },
       defaultPosition: t,
       width: $$O11,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("fullscreen.properties_panel.export")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: {
             left: 0,
             right: 0
@@ -483,7 +483,7 @@ function J({
         className: hD,
         children: getI18nString("fullscreen.properties_panel.export_suffix_label")
       }),
-      right: jsx(_$$p.Lazy, {
+      right: jsx(InputComponent.Lazy, {
         id: a,
         value: e,
         onChange: t,

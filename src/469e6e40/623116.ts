@@ -36,7 +36,7 @@ import { p as _$$p } from "../905/597320";
 import { q as _$$q } from "../905/749058";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { kd, Pc, Jb, E7 } from "../figma_app/425283";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -104,7 +104,7 @@ import { dW } from "../4452/331328";
 import { V as _$$V } from "../figma_app/312987";
 import { n as _$$n } from "../4452/511872";
 import { am } from "../4452/575555";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { noop } from "../905/834956";
 import { hP, cE, $u, ld } from "../figma_app/527041";
 import { A as _$$A3 } from "../6828/493300";
@@ -154,7 +154,7 @@ function ee(e) {
       label: renderI18nText("onboarding_pointers.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     description: renderI18nText("onboarding_pointers.teams_access_onboarding")
   });
@@ -216,7 +216,7 @@ function eu(e) {
           label: renderI18nText("general.next"),
           onClick: next,
           type: "button",
-          ctaTrackingDescriptor: _$$c.NEXT
+          ctaTrackingDescriptor: UpgradeAction.NEXT
         },
         stepCounter: {
           stepNum: 1,
@@ -238,7 +238,7 @@ function eu(e) {
           label: renderI18nText("general.got_it"),
           onClick: complete,
           type: "button",
-          ctaTrackingDescriptor: _$$c.GOT_IT
+          ctaTrackingDescriptor: UpgradeAction.GOT_IT
         },
         stepCounter: {
           stepNum: 2,
@@ -888,7 +888,7 @@ function tc({
   let h = useSelector(e => getPermissionsState(e));
   let x = useSelector(e => e.teamBilling);
   let b = useSelector(e => e.teams[r.id]);
-  let v = _6();
+  let v = getSelectedView();
   let f = useTeamPlanUser();
   let j = useIsOrgAdminUser(f).unwrapOr(!1);
   let y = useMemo(() => ({

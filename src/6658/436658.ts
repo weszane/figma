@@ -16,7 +16,7 @@ import { I as _$$I } from "../6658/358099";
 import { I as _$$I2 } from "../6658/286262";
 import { A as _$$A2 } from "../6658/341273";
 import { selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { mO } from "../figma_app/410317";
 import { d as _$$d } from "../6658/928537";
@@ -44,7 +44,7 @@ export function $$E2({
   useEffect(() => {
     x.current = x.current.slice(0, o.length);
   }, [o.length]);
-  let N = _6();
+  let N = getSelectedView();
   let A = useDispatch();
   let O = getAtomMutate(RL);
   let B = getAtomMutate(S6);

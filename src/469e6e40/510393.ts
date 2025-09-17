@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
 import { e0 } from "../905/696396";
@@ -70,7 +70,7 @@ let $$w0 = registerModal(function (e) {
               variant: "secondary",
               onClick: e.onClose,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               children: renderI18nText("payments.cancel")
             }), jsx($z, {
@@ -90,7 +90,7 @@ let $$w0 = registerModal(function (e) {
                 });
               },
               trackingProperties: {
-                trackingDescriptor: _$$c.SAVE
+                trackingDescriptor: UpgradeAction.SAVE
               },
               children: renderI18nText("payments.save")
             })]

@@ -8,7 +8,7 @@ import { HiddenLabel } from "../905/270045";
 import { k as _$$k } from "../905/443820";
 import { ox } from "../905/163832";
 import { bL as _$$bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { PopoverContext } from "../905/691059";
 import { y7 } from "../figma_app/343967";
 import { r as _$$r } from "../905/571562";
@@ -349,12 +349,12 @@ let $$X0 = registerModal(function ({
     htmlAttributes: {
       "data-testid": "sites-lint-error-modal"
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("sites.panel.sites_issues")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         padding: 0,
         children: [jsx("div", {
           ref: d

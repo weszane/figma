@@ -11,7 +11,7 @@ import { _I, PY } from "../905/34809";
 import { E as _$$E, J } from "../figma_app/953812";
 import { A5, J5 } from "../figma_app/623414";
 import { selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { FRequestsStr } from "../905/384551";
 import { UserGroupRole } from "../905/441038";
@@ -22,7 +22,7 @@ import { DashboardSections } from "../905/548208";
 import { DUserRole } from "../figma_app/858344";
 var d = l;
 export function $$x1() {
-  let e = _6();
+  let e = getSelectedView();
   let t = _$$E();
   let r = useTeamPlanUser();
   let n = useIsOrgAdminUser(r).unwrapOr(!1);
@@ -223,7 +223,7 @@ function M() {
 }
 export function $$F0() {
   let e = useDispatch();
-  let t = _6();
+  let t = getSelectedView();
   let r = useTeamPlanUser();
   let a = useIsOrgAdminUser(r).unwrapOr(!1);
   let s = _$$E();

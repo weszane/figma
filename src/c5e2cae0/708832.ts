@@ -32,7 +32,7 @@ import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { Ju, IX } from "../905/712921";
 import { X1 } from "../figma_app/736948";
 import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
-import { UpgradeAction } from "../figma_app/707808";
+import { CreateUpgradeAction } from "../figma_app/707808";
 import { Nd, li, Uu, kH, K6, ER, i9, $y, uD, Bb } from "../c5e2cae0/763339";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { j as _$$j } from "../c5e2cae0/282622";
@@ -47,7 +47,7 @@ import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { Mh } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { jv } from "../905/84777";
 import { wn } from "../9420/795870";
 import { trackUserEvent } from "../figma_app/314264";
@@ -119,7 +119,7 @@ function U(e) {
       name: getI18nString("org_self_serve.headers.create_team")
     };
     switch (e.newTeamProps?.teamFlowType) {
-      case UpgradeAction.CREATE:
+      case CreateUpgradeAction.CREATE:
         t.push({
           step: X1.PseudoCreateTeam,
           name: getI18nString("org_self_serve.headers.create_team")
@@ -130,12 +130,12 @@ function U(e) {
         });
         t.push(s);
         break;
-      case UpgradeAction.CREATE_AND_UPGRADE:
+      case CreateUpgradeAction.CREATE_AND_UPGRADE:
         t.push(s);
         t.push(r);
         a = X1.CreateTeam;
         break;
-      case UpgradeAction.UPGRADE_EXISTING_TEAM:
+      case CreateUpgradeAction.UPGRADE_EXISTING_TEAM:
         t.push(s);
     }
   }
@@ -379,7 +379,7 @@ export class $$eM2 extends Component {
   constructor(e) {
     super(e);
     this.canSeeTeamAndSeatSelectionSteps = () => Object.keys(this.state.eligibleTeamsByTeamId).length > 0 || this.state.loading || !!this.props.newTeamProps;
-    this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
+    this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === CreateUpgradeAction.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
     this.setStep = e => {
       this.props.dispatch(selectViewAction({
         view: "orgSelfServe",
@@ -1080,7 +1080,7 @@ export class $$eM2 extends Component {
               ...this.props.newTeamProps?.previousView,
               view: "teamUpgrade",
               paymentStep: e,
-              teamFlowType: this.props.newTeamProps?.teamFlowType || UpgradeAction.CREATE_AND_UPGRADE
+              teamFlowType: this.props.newTeamProps?.teamFlowType || CreateUpgradeAction.CREATE_AND_UPGRADE
             }));
           },
           isCampfireCart: !0
@@ -1164,7 +1164,7 @@ export function $$eO0({
     let t = jsx(Ph, {
       href: "/pricing",
       trackingProperties: {
-        trackingDescriptor: _$$c.LEARN_MORE_ABOUT_SEATS
+        trackingDescriptor: CreateUpgradeAction.LEARN_MORE_ABOUT_SEATS
       },
       newTab: !0,
       trusted: !0,

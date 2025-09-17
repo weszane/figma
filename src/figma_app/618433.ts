@@ -1,77 +1,132 @@
-import { useMemo } from "react";
-import { WB } from "../905/761735";
-import { G } from "../905/707993";
-import { X } from "../905/880040";
-import { $ } from "../905/47975";
-import { b } from "../905/148729";
-import { A2 } from "../figma_app/872077";
-export function $$c5(e) {
-  let {
-    collection,
-    status
-  } = G({
-    collectionStableId: e
-  });
+import { useMemo } from 'react'
+import { checkFileCmsCollections } from '../905/47975'
+import { toCollectionSummary } from '../905/148729'
+import { getCollectionView } from '../905/707993'
+import { WB } from '../905/761735'
+import { setupCollectionSummary } from '../905/880040'
+import { collectionService } from '../figma_app/872077'
+/**
+ * Types for collection operations
+ */
+export interface Collection {
+  databaseId: string
+  [key: string]: any
+}
+
+export interface CollectionViewResult {
+  collection: any
+  status: string
+}
+
+export interface CollectionSummaryResult {
+  collections: any
+  status: string
+}
+
+/**
+ * Returns collection view status and data.
+ * @param collectionStableId - The stable ID of the collection.
+ * @returns Memoized status and collection data.
+ * (Original: $$c5)
+ */
+export function getCollectionViewStatus(collectionStableId: string) {
+  const { collection, status }: CollectionViewResult = getCollectionView({ collectionStableId })
   return useMemo(() => ({
     status,
-    data: collection
-  }), [collection, status]);
+    data: collection,
+  }), [collection, status])
 }
-export function $$u4(e) {
-  let {
-    hasCollection
-  } = $({
-    fileKey: e
-  });
-  return hasCollection ?? !1;
+
+/**
+ * Checks if a file has a CMS collection.
+ * @param fileKey - The file key.
+ * @returns Boolean indicating presence of collection.
+ * (Original: $$u4)
+ */
+export function hasCmsCollection(fileKey: string): boolean {
+  const { hasCollection } = checkFileCmsCollections({ fileKey })
+  return hasCollection ?? false
 }
-export function $$p2(e) {
-  let {
-    collections,
-    status
-  } = X({
-    fileKey: e
-  });
+
+/**
+ * Returns collection summary status and data.
+ * @param fileKey - The file key.
+ * @returns Memoized status and collections data.
+ * (Original: $$p2)
+ */
+export function getCollectionSummaryStatus(fileKey: string) {
+  const { collections, status }: CollectionSummaryResult = setupCollectionSummary({ fileKey })
   return useMemo(() => ({
     status,
-    data: collections
-  }), [collections, status]);
+    data: collections,
+  }), [collections, status])
 }
-export function $$_0(e) {
-  return WB().optimisticallyCreate({}, A2.createCollection(e)).then(e => e.data.meta).then(b);
+
+/**
+ * Creates a new collection optimistically and returns its summary.
+ * @param collectionData - Data for the new collection.
+ * @returns Collection summary.
+ * (Original: $$_0)
+ */
+export function createCollectionOptimistically(collectionData: any) {
+  return WB()
+    .optimisticallyCreate({}, collectionService.createCollection(collectionData))
+    .then(res => res.data.meta)
+    .then(toCollectionSummary)
 }
-export function $$h3({
-  collection: e,
-  name: t
+
+/**
+ * Renames a collection optimistically.
+ * @param params - Collection and new name.
+ * @returns Updated collection meta.
+ * (Original: $$h3)
+ */
+export function renameCollectionOptimistically({
+  collection,
+  name,
+}: {
+  collection: Collection
+  name: string
 }) {
-  let r = {
+  const updatePayload = {
     CollectionV2: {
-      [e.databaseId]: {
-        name: t,
-        updatedAt: new Date()
-      }
-    }
-  };
-  return WB().optimisticallyUpdate(r, A2.renameCollection({
-    collection: e,
-    name: t
-  })).then(e => e.data.meta);
+      [collection.databaseId]: {
+        name,
+        updatedAt: new Date(),
+      },
+    },
+  }
+  return WB()
+    .optimisticallyUpdate(updatePayload, collectionService.renameCollection({ collection, name }))
+    .then(res => res.data.meta)
 }
-export function $$m1({
-  collection: e
+
+/**
+ * Deletes a collection optimistically.
+ * @param params - Collection to delete.
+ * @returns Promise for deletion.
+ * (Original: $$m1)
+ */
+export function deleteCollectionOptimistically({
+  collection,
+}: {
+  collection: Collection
 }) {
-  let t = e.databaseId;
-  return WB().optimisticallyDelete({
-    CollectionV2: {
-      [t]: null
-    }
-  }, A2.deleteCollection({
-    collection: e
-  }));
+  const databaseId = collection.databaseId
+  return WB().optimisticallyDelete(
+    {
+      CollectionV2: {
+        [databaseId]: null,
+      },
+    },
+    collectionService.deleteCollection({ collection }),
+  )
 }
-export const Qw = $$_0;
-export const Tx = $$m1;
-export const c$ = $$p2;
-export const c5 = $$h3;
-export const fk = $$u4;
-export const gL = $$c5;
+
+// Exported aliases for backward compatibility
+export const Qw = createCollectionOptimistically
+export const Tx = deleteCollectionOptimistically
+export const c$ = getCollectionSummaryStatus
+export const c5 = renameCollectionOptimistically
+export const fk = hasCmsCollection
+export const gL = getCollectionViewStatus

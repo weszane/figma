@@ -18,7 +18,7 @@ import { getI18nState } from "../figma_app/363242";
 import { CA } from "../figma_app/327588";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
-import { fk } from "../figma_app/618433";
+import { hasCmsCollection } from "../figma_app/618433";
 import { sw, Zs } from "../figma_app/914957";
 import { B as _$$B } from "../905/330741";
 import { Dm } from "../figma_app/8833";
@@ -809,7 +809,7 @@ function e4({
   U && x && (K = !1);
   let W = p8("showUi");
   let $ = useCurrentFileKey();
-  let Y = fk($);
+  let Y = hasCmsCollection($);
   let X = o3(nt.newResizablePanel);
   let q = getObservableValue(UK().renderRulers, !1);
   let J = _$$T();

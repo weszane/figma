@@ -17,7 +17,7 @@ import { BranchingPermissionsView, RepoFiles } from "../figma_app/43951";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { FEditorType } from "../figma_app/53721";
 import { TY } from "../figma_app/701001";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { d as _$$d } from "../905/647058";
 import { XD } from "../905/981217";
 import { isExportRestricted } from "../figma_app/12796";
@@ -306,7 +306,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
   };
 }
 export function $$C0() {
-  let e = FC();
+  let e = selectPermissionsState();
   let t = selectCurrentFile();
   let i = _$$d();
   let a = useSelector(e => e.selectedView.editorType);

@@ -6,7 +6,7 @@ import { setupDragHandler } from "../905/97346";
 import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { NY, ux } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
@@ -19,7 +19,7 @@ import { dB } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { expandNodeToRoot, clearSelection } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { nt } from "../9314/278494";
 import { Xt } from "../figma_app/889655";
@@ -93,10 +93,10 @@ function I({
   appSelection: t,
   setAppSelection: l
 }) {
-  let c = _6();
+  let c = getSelectedView();
   let m = useCurrentFileKey();
   let f = getObservableOrFallback(figmaScopeBindings.sceneGeneration());
-  let [w] = _$$A(f, 500, {
+  let [w] = useDebounce(f, 500, {
     trailing: !0
   });
   let b = Xr(lu);

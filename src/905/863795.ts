@@ -7,7 +7,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { ApprovedLibrariesForWorkspaceView, ApprovedLibrariesForOrgViewV2 } from "../figma_app/43951";
 import { mainWorkspaceIdAtom } from "../figma_app/951233";
 import { Oe } from "../figma_app/336853";
-import { Me } from "../figma_app/598018";
+import { currentTeamAtom } from "../figma_app/598018";
 let $$m4 = atom(e => {
   let t = (() => {
     let t = e(orgSubscriptionAtom);
@@ -17,7 +17,7 @@ let $$m4 = atom(e => {
       let n = i.team?.workspaceId;
       return i.parentOrgId && !n ? e(mainWorkspaceIdAtom) : n;
     }
-    let n = e(Me);
+    let n = e(currentTeamAtom);
     if (Oe(t)) return n?.workspace_id;
   })();
   if (!t) return;

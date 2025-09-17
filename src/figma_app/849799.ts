@@ -5,15 +5,15 @@ import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { N as _$$N } from "../905/438674";
-import { p as _$$p } from "../905/185998";
-import { T as _$$T } from "../905/909590";
+import { InputComponent } from "../905/185998";
+import { Textarea } from "../905/909590";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
 import { ButtonLarge } from "../905/521428";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { J as _$$J2 } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { z } from "../905/239603";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
@@ -117,7 +117,7 @@ function R(e, t, r) {
   });
 }
 export let $$L0 = function (e) {
-  let t = _6();
+  let t = getSelectedView();
   let r = selectCurrentUser();
   let [S, v] = useState(b.ABUSE_TYPE_UNSPECIFIED);
   let A = S > 0 && S !== b.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK;
@@ -152,7 +152,7 @@ export let $$L0 = function (e) {
   return jsx("div", {
     className: "form-module--formContainer--Eas7T",
     children: jsx(UI3ConditionalWrapper, {
-      children: jsxs(_$$J2, {
+      children: jsxs(setupThemeContext, {
         brand: "design",
         children: [null !== W && jsx(BannerInsetModal, {
           variant: W ? "success" : "danger",
@@ -201,7 +201,7 @@ export let $$L0 = function (e) {
               className: N,
               children: [R(renderI18nText("report_abuse.reported_content_input_label"), "reportedContent"), jsx("div", {
                 className: C,
-                children: jsx(_$$p, {
+                children: jsx(InputComponent, {
                   id: "reportedContent",
                   size: "lg",
                   placeholder: getI18nString("report_abuse.reported_content_placeholder"),
@@ -216,7 +216,7 @@ export let $$L0 = function (e) {
               className: N,
               children: [R(renderI18nText("report_abuse.additional_description_input_label"), "additionalDescription"), jsx("div", {
                 className: C,
-                children: jsx(_$$T, {
+                children: jsx(Textarea, {
                   id: "additionalDescription",
                   placeholder: getI18nString("report_abuse.additional_description_placeholder"),
                   value: k || "",
@@ -230,7 +230,7 @@ export let $$L0 = function (e) {
               className: N,
               children: [R(renderI18nText("report_abuse.email_input_label"), "email"), jsx("div", {
                 className: C,
-                children: jsx(_$$p, {
+                children: jsx(InputComponent, {
                   id: "email",
                   size: "lg",
                   placeholder: getI18nString("report_abuse.email_placeholder"),

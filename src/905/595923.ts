@@ -16,7 +16,7 @@ import { k as _$$k2 } from "../figma_app/618031";
 import { N as _$$N } from "../figma_app/28806";
 import { un, kI } from "../figma_app/457899";
 import { hY } from "../figma_app/80683";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { ViewAccessTypeEnum } from "../905/513035";
@@ -24,7 +24,7 @@ import { i as _$$i } from "../figma_app/127401";
 import { Ye } from "../905/332483";
 import { h as _$$h } from "../figma_app/603561";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
-import { F2 } from "../905/389382";
+import { getMinimumBundle } from "../905/389382";
 import { O as _$$O } from "../figma_app/710329";
 import { P as _$$P } from "../905/842406";
 import { FProductAccessType, FOrganizationLevelType } from "../figma_app/191312";
@@ -44,7 +44,7 @@ export let $$W0 = atom(null);
 export function $$K1(e) {
   let t = useAtomWithSubscription($$W0);
   let i = isDevHandoffEditorType() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(e.editorType);
-  let a = F2(i);
+  let a = getMinimumBundle(i);
   let s = !!e.org;
   let d = s ? {
     parentId: e.org?.id || "",
@@ -259,7 +259,7 @@ function $(e) {
             onConfirmClick();
           },
           trackingProperties: {
-            trackingDescriptor: _$$c.CONFIRM
+            trackingDescriptor: UpgradeAction.CONFIRM
           },
           children: getI18nString("file_permissions_modal.update_seat_tab.confirm")
         })

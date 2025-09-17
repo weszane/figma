@@ -445,8 +445,8 @@ import { TabLoop } from "../905/718764";
 import { N as _$$N3 } from "../905/57692";
 import { Zr } from "../figma_app/678782";
 import { lJ as _$$lJ2, kl, A5 } from "../905/275640";
-import { p as _$$p5 } from "../905/185998";
-import { J as _$$J0 } from "../905/614223";
+import { InputComponent } from "../905/185998";
+import { setupThemeContext } from "../905/614223";
 import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../905/216495";
 import { k as _$$k6 } from "../642/978258";
 import { bo as _$$bo } from "../figma_app/447445";
@@ -461,7 +461,7 @@ import { _3 as _$$_7, pf as _$$pf2, JI, Vq as _$$Vq, B9, Pi, $x, _E as _$$_E, MY
 import { yp as _$$yp, xp as _$$xp2, bE as _$$bE, LK, MC, FC, zD as _$$zD2, p6 as _$$p6, E5, tj as _$$tj, U9 as _$$U3, k as _$$k7, X4 } from "../figma_app/340893";
 import { dA as _$$dA, Ay as _$$Ay6, nG as _$$nG2, s_ as _$$s_ } from "../figma_app/967857";
 import { isNullish, isNotNullish } from "../figma_app/95419";
-import { b as _$$b7, bL as _$$bL3, mc as _$$mc2, r1 as _$$r4, wv as _$$wv3, Ov, ME, YJ, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp, MenuSeparator, MenuItemTrail, MenuSubText, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { r as _$$r5, Q as _$$Q3 } from "../figma_app/67145";
 import { generateUUIDv4 } from "../905/871474";
@@ -560,7 +560,7 @@ import { A as _$$A48 } from "../svg/39247";
 import { O as _$$O3 } from "../905/301080";
 import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { A as _$$A49 } from "../svg/483451";
-import { A as _$$A50 } from "../vendor/850789";
+import { useDebounce } from "use-debounce";
 import { A as _$$A51 } from "../1291/23528";
 import { $L, us as _$$us } from "../figma_app/136698";
 import { uL as _$$uL, k6, w8 } from "../figma_app/565197";
@@ -602,7 +602,7 @@ import { A as _$$A66 } from "../svg/915517";
 import { A as _$$A67 } from "../svg/130563";
 import { P as _$$P5 } from "../figma_app/483257";
 import { A as _$$A68 } from "../svg/681750";
-import { a as _$$a0 } from "../figma_app/215667";
+import { DropdownThemeProvider } from "../figma_app/215667";
 import { Aw } from "../figma_app/383828";
 import { mJ as _$$mJ, _H as _$$_H } from "../2b17fec9/432935";
 import { A as _$$A69 } from "../4711/136271";
@@ -693,7 +693,7 @@ import { Lx, v7 as _$$v4 } from "../9410/896213";
 import { w as _$$w4 } from "../9410/519056";
 import { y as _$$y7 } from "../9410/656872";
 import { C as _$$C6 } from "../905/47358";
-import { c as _$$c0 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { f as _$$f0 } from "../905/940356";
 import { Fj } from "../905/763714";
 import { e2 as _$$e1 } from "../905/486443";
@@ -10263,9 +10263,9 @@ function u6(e) {
       className: `${x} ${Dm}`,
       children: getFeatureFlags().figjam_a11y_inline_toolbar ? jsx("div", {
         className: "xt7dq6l xs1vzh6 xfifm61",
-        children: jsx(_$$J0, {
+        children: jsx(setupThemeContext, {
           mode: "dark",
-          children: jsx(_$$p5, {
+          children: jsx(InputComponent, {
             id: s,
             value: g,
             onChange: f,
@@ -13861,7 +13861,7 @@ function _K({
   onSelect: e
 }) {
   let [t, i] = useState("");
-  let [n] = _$$A50(t, 200);
+  let [n] = useDebounce(t, 200);
   let {
     faceStampServerSideSearch,
     faceStampSearchIsLoading,
@@ -15303,7 +15303,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let {
     getTriggerProps,
     manager
-  } = _$$b7();
+  } = setupMenu();
   if (!e || isInvalidValue(e)) return null;
   let c = pP(e);
   let p = e => {
@@ -15327,7 +15327,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let b = j ? getI18nString("whiteboard.inline_menu.font_family_label", {
     currentFont: j.toLocaleLowerCase()
   }) : getI18nString("whiteboard.inline_menu.font_family");
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$V4, {
       variant: "menu",
@@ -15336,9 +15336,9 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       ariaLabel: b,
       recordingKey: "fontFamilyControl",
       children: pH(e)
-    }), jsx(_$$mc2, {
+    }), jsx(MenuContainerComp, {
       children: jsxs(z6, {
-        title: jsx(_$$r4, {
+        title: jsx(MenuHiddenTitleComp, {
           children: getI18nString("whiteboard.inline_menu.font_family")
         }),
         onChange: p,
@@ -15360,7 +15360,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             }) : t.getLabel()
           }, e);
         }), g && jsxs(Fragment, {
-          children: [jsx(_$$wv3, {}), c.map(e => jsx(CU, {
+          children: [jsx(MenuSeparator, {}), c.map(e => jsx(CU, {
             value: e,
             "aria-label": getI18nString("whiteboard.inline_menu.font_family_label", {
               currentFont: e.toLocaleLowerCase()
@@ -15490,7 +15490,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let {
     getTriggerProps,
     manager
-  } = _$$b7();
+  } = setupMenu();
   let h = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let [m, f] = _$$lJ2("whiteboardFontSizes");
   if (!m || !isValidValue(m)) return null;
@@ -15536,7 +15536,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let E = 1 === _.length ? _[0] : void 0;
   let S = E ? hg.format(E) : y.customMixedText;
   let w = e => x(e ? parseInt(e) : void 0);
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$V4, {
       variant: "menu",
@@ -15550,9 +15550,9 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         className: "x1exxlbk",
         children: S
       })
-    }), jsxs(_$$mc2, {
+    }), jsxs(MenuContainerComp, {
       children: [jsx(z6, {
-        title: jsx(_$$r4, {
+        title: jsx(MenuHiddenTitleComp, {
           children: T
         }),
         onChange: w,
@@ -15564,15 +15564,15 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
           children: [jsx("div", {
             style: hf(e),
             children: hg.format(e)
-          }), b && jsx(Ov, {
-            children: jsx(ME, {
+          }), b && jsx(MenuItemTrail, {
+            children: jsx(MenuSubText, {
               children: e
             })
           })]
         }, e))
       }), jsx("div", {
         className: "x1xq1gxn",
-        children: jsx(_$$p5, {
+        children: jsx(InputComponent, {
           type: "number",
           "aria-label": getI18nString("whiteboard.inline_menu.custom_font_size"),
           placeholder: C,
@@ -15582,7 +15582,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
           value: 1 === _.length ? _[0]?.toString() : void 0,
           onKeyDown: g
         })
-      }), hj(_).length > 0 && jsx(_$$wv3, {}), jsx(z6, {
+      }), hj(_).length > 0 && jsx(MenuSeparator, {}), jsx(z6, {
         title: "",
         onChange: w,
         children: hj(_).map(e => jsx(CU, {
@@ -16064,9 +16064,9 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let {
     getTriggerProps,
     manager
-  } = _$$b7();
+  } = setupMenu();
   let a = useMemo(() => isInvalidValue(e) ? getI18nString("whiteboard.code_blocks.mixed") : _$$lR.format(e ?? _$$jW), [e]);
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$V4, {
       variant: "menu",
@@ -16078,9 +16078,9 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         className: "xj35x94",
         children: a
       })
-    }), jsx(_$$mc2, {
+    }), jsx(MenuContainerComp, {
       children: jsx(z6, {
-        title: jsx(_$$r4, {
+        title: jsx(MenuHiddenTitleComp, {
           children: getI18nString("whiteboard.inline_menu.programming_language")
         }),
         onChange: n => {
@@ -16327,13 +16327,13 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let {
     getTriggerProps,
     manager
-  } = _$$b7();
+  } = setupMenu();
   let d = () => {
     e ? fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes") : fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
   };
   if (!t) {
     var c;
-    return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
+    return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$V4, {
         variant: "menu",
@@ -16347,10 +16347,10 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         recordingKey: "lockUnlockOptions",
         dataTestId: "lock-control-inline-options-v2",
         children: jsx(_$$$4, {})
-      }), jsx(_$$mc2, {
-        children: jsxs(YJ, {
+      }), jsx(MenuContainerComp, {
+        children: jsxs(MenuGroupComp, {
           "aria-label": getI18nString("whiteboard.inline_menu.lock_options"),
-          children: [jsx(q7, {
+          children: [jsx(MenuItemComp, {
             onClick: () => {
               fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
@@ -16358,7 +16358,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             recordingKey: generateRecordingKey("lockOption", "lock_all"),
             "aria-label": getI18nString("whiteboard.inline_menu.lock_all"),
             children: getI18nString("whiteboard.inline_menu.lock_all")
-          }), jsx(q7, {
+          }), jsx(MenuItemComp, {
             onClick: () => {
               fullscreenValue.triggerActionInUserEditScope("lock-selected-section-only");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
@@ -16677,11 +16677,11 @@ let x4 = memo(function () {
   let {
     getTriggerProps,
     manager
-  } = _$$b7();
+  } = setupMenu();
   let a = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
-  return a?.allStates && a?.selectedStates ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$a0, {
+  return a?.allStates && a?.selectedStates ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(DropdownThemeProvider, {
     mode: "match",
-    children: jsxs(_$$bL3, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$V4, {
         variant: "menu",
@@ -16692,7 +16692,7 @@ let x4 = memo(function () {
         children: jsx(SvgComponent, {
           svg: _$$A69
         })
-      }), jsx(_$$mc2, {
+      }), jsx(MenuContainerComp, {
         children: jsx(x5, {
           onClose: _$$lQ
         })
@@ -22677,7 +22677,7 @@ function yW() {
     isActive: e === Wl.TOP_BAR,
     onClick: n,
     trackingProperties: {
-      trackingDescriptor: _$$c0.FIGJAM_AI_TOOLBAR_ITEM
+      trackingDescriptor: UpgradeAction.FIGJAM_AI_TOOLBAR_ITEM
     },
     onboardingKey: _$$bX,
     innerText: "AI Toolbar Entrypoint",

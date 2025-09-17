@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { KeyCodes } from "../905/63728";
 import { BigTextInputForwardRef } from "../figma_app/637027";
@@ -45,12 +45,12 @@ function h(e) {
   return jsx(ModalRootComponent, {
     manager: S,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: E
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         scrolling: "none",
         children: [subtitle, jsx(BigTextInputForwardRef, {
           autoFocus: !0,
@@ -72,8 +72,8 @@ function h(e) {
             })
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: T,
             variant: "secondary",

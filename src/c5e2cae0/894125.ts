@@ -7,14 +7,14 @@ import { On } from "../9420/975542";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { _l } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
 import { Al } from "../9420/394825";
 import { selectCurrentUser } from "../905/372672";
 import { OI, Mt } from "../c5e2cae0/2942";
 import { Ju } from "../905/712921";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
-import { UpgradeAction, TeamType, isCreateOrUpgrade, isCreateOrPlanComparison, isUpgradeExistingTeam } from "../figma_app/707808";
+import { CreateUpgradeAction, TeamType, isCreateOrUpgrade, isCreateOrPlanComparison, isUpgradeExistingTeam } from "../figma_app/707808";
 import { Nd, N6 } from "../figma_app/81441";
 if (443 == require.j) {}
 function j(e) {
@@ -22,7 +22,7 @@ function j(e) {
     type: "button",
     className: Nd,
     trackingProperties: {
-      trackingDescriptor: _$$c.CANCEL
+      trackingDescriptor: UpgradeAction.CANCEL
     },
     onClick: e.onClick,
     dataTestId: "upgrade-breadcrumb-menu-cancel",

@@ -6,13 +6,13 @@ import { c$, bL, l9, mc, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { IconButton } from "../905/443068";
 import { W } from "../905/63398";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { AppStateTsApi, Thumbnail, Fullscreen, Command, DistributionType } from "../figma_app/763686";
 import { oY } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { oW } from "../905/675859";
@@ -147,7 +147,7 @@ export function $$G1(e) {
   let i = X7();
   let s = Kt();
   let [d, c] = lJ("variableWidthPoints");
-  let [f] = _$$A(d, 200);
+  let [f] = useDebounce(d, 200);
   let _ = j(d);
   let v = kl("strokeCap");
   let L = "dark" === DP();
@@ -182,7 +182,7 @@ export function $$G1(e) {
   }, [F, f]);
   let H = useMemo(() => Object.entries(U).map(([e, i]) => jsx(c$, {
     value: e,
-    children: jsx(_$$J, {
+    children: jsx(setupThemeContext, {
       mode: "dark",
       children: jsx(B, {
         roundEndcaps: "ROUND" === v,

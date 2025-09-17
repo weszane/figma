@@ -1,7 +1,7 @@
 import { selectWithShallowEqual } from "../905/103090";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 export function $$a0() {
-  let e = FC();
+  let e = selectPermissionsState();
   let t = selectWithShallowEqual(e => ({
     selectedView: e.selectedView,
     currentOrgId: e.currentUserOrgId,

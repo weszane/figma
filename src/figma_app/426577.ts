@@ -25,7 +25,7 @@ import { hg, zk } from "../figma_app/947348";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
 import { handleAtomEvent } from "../905/502364";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N3 } from "../figma_app/268271";
@@ -87,13 +87,13 @@ function V(e) {
     type: "button",
     label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c2.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   let d = {
     type: "link",
     label: renderI18nText("draw.onboarding.first_time.learn_more"),
     href: "https://help.figma.com/hc/articles/360039957634",
-    ctaTrackingDescriptor: _$$c2.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   return jsx(rq, {
     description: renderI18nText("draw.onboarding.variable_width_stroke.description"),
@@ -139,7 +139,7 @@ function H() {
     type: "button",
     label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: a,
-    ctaTrackingDescriptor: _$$c2.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   return jsx(rq, {
     description: renderI18nText("draw.onboarding.secondary_toolbelt.description"),

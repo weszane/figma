@@ -6,7 +6,7 @@ import { uQ } from "../figma_app/311375";
 import { selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { Pw } from "../905/782020";
 let _ = createLocalStorageAtom("last-used-dev-mode-variable-set", null);
 let $$h5 = "ALL_VARIABLES";
@@ -25,7 +25,7 @@ export function $$f1() {
   return e.find(e => e.node_id === t)?.variableSetId;
 }
 export function $$E6() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useDispatch();
   return useCallback(r => {
     t(selectViewAction({

@@ -14,19 +14,19 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { K } from "../905/3140";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
 import { bP } from "../905/739964";
@@ -66,7 +66,7 @@ function V(e) {
         onClick: e.onUpgrade,
         className: E8,
         trackingProperties: {
-          trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
+          trackingDescriptor: UpgradeAction.UPGRADE_TO_ORGANIZATION,
           upsellSource: e.upsellSource
         },
         children: renderI18nText("org_upgrade.single_team.upgrade_to_an_organization")
@@ -249,7 +249,7 @@ function U(e) {
 }
 export let $$z0 = withTracking(function (e) {
   let t = sx();
-  let a = ol();
+  let a = getCurrentTeam();
   return jsx(tH, {
     boundaryKey: "OrgUpgradeSingleTeamModal",
     team: _$$e.BILLING_EXPERIENCE,
@@ -262,9 +262,9 @@ export let $$z0 = withTracking(function (e) {
       }),
       children: t ? jsx(bP, {
         team: a,
-        resource: Bi.ORG,
-        currentPlan: F.Plan.PRO,
-        upsellPlan: F.Plan.ORG,
+        resource: FeatureFlag.ORG,
+        currentPlan: consumptionPaywallUtils.Plan.PRO,
+        upsellPlan: consumptionPaywallUtils.Plan.ORG,
         editorType: FFileType.DESIGN,
         upsellSource: e.upsellSource
       }) : jsx(U, {

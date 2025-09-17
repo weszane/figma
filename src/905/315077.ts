@@ -11,7 +11,7 @@ import { G } from "../905/720066";
 import { Q } from "../905/61477";
 import { EN, AR, K4 } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FileSearchResult } from "../figma_app/43951";
 import { vj } from "../905/574958";
 import { cr } from "../905/703676";
@@ -30,7 +30,7 @@ export function $$v0({
   let E = useSelector(e => e.search.sessionId);
   let x = useAtomWithSubscription(Q);
   let S = $E();
-  let w = _6();
+  let w = getSelectedView();
   let C = EN(e);
   let T = C ? e.model : e;
   let k = C ? e : T;

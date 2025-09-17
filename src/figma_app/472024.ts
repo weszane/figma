@@ -12,7 +12,7 @@ import { hideModal, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/782411";
 import { selectCurrentFile } from "../figma_app/516028";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
 import { isAccountSettingsModalShown } from "../figma_app/193867";
@@ -126,7 +126,7 @@ function F({
   let o = useSelector(e => _$$p(e));
   let l = useCurrentPlanUser("TeamLibraryPreferencesModal").unwrapOr(null);
   let d = !!(l && checkOrgUserPermission(l, FMemberRoleType.ADMIN));
-  let c = FC();
+  let c = selectPermissionsState();
   let u = useMemo(() => {
     let e = [LibraryTabEnum.LIBRARIES];
     o && e.push(LibraryTabEnum.FONTS);

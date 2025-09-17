@@ -15,7 +15,7 @@ import { BannerMessage } from "../905/363675";
 import { BannerButton } from "../905/692618";
 import { r } from "../905/784543";
 import { g as _$$g } from "../figma_app/479056";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -64,7 +64,7 @@ import { QU, bf } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
 import { H as _$$H } from "../905/56919";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { TabsPrimitiveTabStrip } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
@@ -657,7 +657,7 @@ let eC = registerModal(function (e) {
     },
     manager: d,
     width: 800,
-    children: jsx(Wk, {
+    children: jsx(DialogCustomContents, {
       children: jsxs("div", {
         className: kL,
         children: [jsxs("div", {
@@ -768,7 +768,7 @@ function ek({
     newTab: !0,
     children: renderI18nText("dev_handoff.figmadocs.learn_more")
   });
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "dev-handoff",
     mode: "dark",
     children: jsx("div", {

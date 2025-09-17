@@ -17,14 +17,14 @@ import { sx } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { N_, Oq } from "../905/332483";
 import { K as _$$K } from "../905/3140";
 import { CurrencyFormatter, createUserCurrencyFormatter } from "../figma_app/514043";
-import { _L } from "../figma_app/598018";
+import { getFilteredTeamMemberIds } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
@@ -430,7 +430,7 @@ function ea(e) {
         onClick: _,
         className: "org_upgrade_multi_team_modal--continueButton--Zo9V7",
         trackingProperties: {
-          trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
+          trackingDescriptor: UpgradeAction.UPGRADE_TO_ORGANIZATION,
           upsellSource: e.upsellSource
         },
         children: renderI18nText("org_upgrade.multi_team.continue")
@@ -484,7 +484,7 @@ export let $$er0 = connect(e => {
   } = e;
   return {
     teams,
-    unsortedTeamIds: _L(e.user, e.roles, e.teams)
+    unsortedTeamIds: getFilteredTeamMemberIds(e.user, e.roles, e.teams)
   };
 })(withTracking(function (e) {
   return jsx(tH, {

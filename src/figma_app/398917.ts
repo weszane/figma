@@ -4,7 +4,7 @@ import { flushSync } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
@@ -249,12 +249,12 @@ function ee({
     onClose: t,
     defaultPosition: r,
     width: 240,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("sites.panel.responsive_text_style.custom_breakpoint")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsxs("div", {
           className: X,
@@ -411,12 +411,12 @@ function er({
     },
     defaultPosition: u,
     width: 240,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("sites.panel.responsive_text_style.settings")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsxs("div", {
           className: X,

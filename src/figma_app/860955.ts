@@ -1,218 +1,358 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { getThemeContextOrDefault } from "../905/158740";
-import { useTheme } from "../905/289770";
-import { J } from "../905/614223";
-import { A } from "../vendor/723372";
-import { S } from "../figma_app/215667";
-import { c as _$$c } from "../905/453572";
-import { r as _$$r } from "../905/571562";
-import { R } from "../905/621802";
-import { a as _$$a } from "../905/339331";
-import { useMenu, SubMenu, SubTrigger, MenuSubContainer, ScrollArrow, MenuContainer, MenuRoot, MenuTitle, MenuGroup, MenuItemPrimitive, MenuPrimitiveLink } from "../905/465888";
-import { loadFeatureFlags } from "../905/586361";
-import { s as _$$s } from "../905/536340";
-import { AS, iM, rv, p$, AR, CT, zc, kL, BB, XT, Th, Ji, DD, Os, Pq, _5, Sv, me } from "../905/379736";
-export function $$E7(e) {
-  return useMenu({
-    ...e,
-    offset: 4
-  });
+import type { ForwardedRef, ReactNode } from 'react'
+import classNames from 'classnames'
+import { forwardRef } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { getThemeContextOrDefault } from '../905/158740'
+import { useTheme } from '../905/289770'
+import { a as SVG } from '../905/339331'
+import { _5, AR, AS, BB, CT, DD, iM, Ji, kL, me, Os, p$, Pq, rv, Sv, Th, XT, zc } from '../905/379736'
+import { c as SVG2 } from '../905/453572'
+import { MenuContainer, MenuGroup, MenuItemPrimitive, MenuPrimitiveLink, MenuRoot, MenuSubContainer, MenuTitle, ScrollArrow, SubMenu, SubTrigger, useMenu } from '../905/465888'
+import { s as _$$s } from '../905/536340'
+import { r as SCG3 } from '../905/571562'
+import { loadFeatureFlags } from '../905/586361'
+import { setupThemeContext } from '../905/614223'
+import { R as SVG4 } from '../905/621802'
+import { useDarkContext } from '../figma_app/215667'
+
+/**
+ * Menu utilities and components for figma_app.
+ * Original function/component names are preserved in comments for traceability.
+ * All exports are renamed for clarity and maintainability.
+ */
+
+/** Types for menu props */
+export interface MenuProps {
+  children?: ReactNode
+  [key: string]: any
 }
-export function $$y9(e) {
-  let {
-    version
-  } = getThemeContextOrDefault();
+
+export interface SubTriggerProps extends MenuProps {
+  hasChecked?: boolean
+}
+
+export interface MenuItemProps extends MenuProps {}
+
+export interface MenuLinkProps extends MenuProps {}
+
+export interface MenuGroupProps extends MenuProps {}
+
+export interface MenuTitleProps extends MenuProps {}
+
+export interface MenuContainerProps extends MenuProps {
+  rareUseIndentOptOut?: boolean
+}
+
+/**
+ * Setup menu hook with offset.
+ * Original: $$E7
+ */
+export function setupMenu(props: any) {
+  return useMenu({
+    ...props,
+    offset: 4,
+  })
+}
+
+/**
+ * SubMenu component with offset based on theme version.
+ * Original: $$y9
+ */
+export function MenuSubMenu(props: any) {
+  const { version } = getThemeContextOrDefault()
   return jsx(SubMenu, {
     offset: {
-      mainAxis: "ui2" === version ? 0 : 4,
-      alignmentAxis: -8
+      mainAxis: version === 'ui2' ? 0 : 4,
+      alignmentAxis: -8,
     },
-    ...e
-  });
-}
-$$y9.displayName = "Menu.SubMenu";
-export let $$b6 = forwardRef(({
-  children: e,
-  hasChecked: t,
-  ...r
-}, i) => jsx(SubTrigger, {
-  className: A(AS, iM),
-  ...r,
-  ref: i,
-  hasChecked: t,
-  children: jsxs("span", {
-    className: A(rv, p$),
-    children: [jsxs("span", {
-      className: AR,
-      children: [void 0 !== t && jsx(_$$c, {
-        className: CT,
-        "aria-hidden": !0
-      }), e]
-    }), jsx("span", {
-      className: zc,
-      children: jsx(R, {})
-    })]
+    ...props,
   })
-}));
-$$b6.displayName = "Menu.SubTrigger";
-export let $$T1 = forwardRef(({
-  children: e,
-  ...t
-}, r) => {
-  let i = S();
-  let {
-    color
-  } = useTheme();
-  return jsx(MenuSubContainer, {
-    className: A(kL, "light" === ("dark" === i ? "dark" : color) ? BB : XT),
-    ...t,
-    ref: r,
-    children: jsxs(J, {
-      mode: "dark" === i ? "dark" : void 0,
-      children: [jsx(ScrollArrow, {
-        className: Th,
-        direction: "up",
-        children: jsx(_$$a, {})
-      }), e, jsx(ScrollArrow, {
-        className: Th,
-        direction: "down",
-        children: jsx(_$$r, {})
-      })]
-    })
-  });
-});
-$$T1.displayName = "Menu.SubContainer";
-export let $$I11 = forwardRef(({
-  children: e,
-  ...t
-}, r) => {
-  let i = S();
-  let {
-    color
-  } = useTheme();
-  let {
-    fpl_consistent_menu_indent_by_default
-  } = loadFeatureFlags();
-  return jsx(MenuContainer, {
-    className: A(kL, "light" === ("dark" === i ? "dark" : color) ? BB : XT, {
-      [Ji]: fpl_consistent_menu_indent_by_default && !t.rareUseIndentOptOut
+}
+MenuSubMenu.displayName = 'Menu.SubMenu'
+
+/**
+ * SubTrigger component for menu.
+ * Original: $$b6
+ */
+export const MenuSubTrigger = forwardRef((
+  { children, hasChecked, ...rest }: SubTriggerProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(SubTrigger, {
+    className: classNames(AS, iM),
+    ...rest,
+    ref,
+    hasChecked,
+    children: jsxs('span', {
+      className: classNames(rv, p$),
+      children: [
+        jsxs('span', {
+          className: AR,
+          children: [
+            hasChecked !== undefined && jsx(SVG2, {
+              'className': CT,
+              'aria-hidden': true,
+            }),
+            children,
+          ],
+        }),
+        jsx('span', {
+          className: zc,
+          children: jsx(SVG4, {}),
+        }),
+      ],
     }),
-    ...t,
-    ref: r,
-    children: jsxs(J, {
-      mode: "dark" === i ? "dark" : void 0,
-      children: [jsx(ScrollArrow, {
-        className: Th,
-        direction: "up",
-        children: jsx(_$$a, {})
-      }), e, jsx(ScrollArrow, {
-        className: Th,
-        direction: "down",
-        children: jsx(_$$r, {})
-      })]
-    })
-  });
-});
-export function $$S8(e) {
-  return jsx(MenuRoot, {
-    ...e
-  });
-}
-$$I11.displayName = "Menu.Container";
-$$S8.displayName = "Menu.Root";
-export let $$v10 = forwardRef((e, t) => jsx(MenuTitle, {
-  className: DD,
-  ...e,
-  ref: t
-}));
-$$v10.displayName = "Menu.Title";
-export let $$A13 = forwardRef((e, t) => jsx(MenuTitle, {
-  className: _$$s,
-  ...e,
-  ref: t
-}));
-$$A13.displayName = "Menu.HiddenTitle";
-export let $$x5 = forwardRef((e, t) => jsx(MenuGroup, {
-  className: Os,
-  ...e,
-  ref: t
-}));
-$$x5.displayName = "Menu.Group";
-export let $$N12 = forwardRef(({
-  children: e,
-  ...t
-}, r) => jsx(MenuItemPrimitive, {
-  className: AS,
-  ...t,
-  ref: r,
-  children: jsx("span", {
-    className: rv,
-    children: e
   })
-}));
-$$N12.displayName = "Menu.Item";
-export let $$C2 = forwardRef(({
-  children: e,
-  ...t
-}, r) => jsx(MenuPrimitiveLink, {
-  className: AS,
-  ...t,
-  ref: r,
-  children: jsx("span", {
-    className: rv,
-    children: e
+})
+MenuSubTrigger.displayName = 'Menu.SubTrigger'
+
+/**
+ * SubContainer for submenu.
+ * Original: $$T1
+ */
+export const MenuSubContainerComp = forwardRef((
+  { children, ...rest }: MenuProps,
+  ref: ForwardedRef<any>,
+) => {
+  const mode = useDarkContext()
+  const { color } = useTheme()
+  return jsx(MenuSubContainer, {
+    className: classNames(
+      kL,
+      (mode === 'dark' ? 'dark' : color) === 'light' ? BB : XT,
+    ),
+    ...rest,
+    ref,
+    children: jsxs(setupThemeContext, {
+      mode: mode === 'dark' ? 'dark' : undefined,
+      children: [
+        jsx(ScrollArrow, {
+          className: Th,
+          direction: 'up',
+          children: jsx(SVG, {}),
+        }),
+        children,
+        jsx(ScrollArrow, {
+          className: Th,
+          direction: 'down',
+          children: jsx(SCG3, {}),
+        }),
+      ],
+    }),
   })
-}));
-export function $$w3(e) {
-  return jsx("span", {
+})
+MenuSubContainerComp.displayName = 'Menu.SubContainer'
+
+/**
+ * Menu container with feature flag for indent.
+ * Original: $$I11
+ */
+export const MenuContainerComp = forwardRef((
+  { children, rareUseIndentOptOut, ...rest }: MenuContainerProps,
+  ref: ForwardedRef<any>,
+) => {
+  const mode = useDarkContext()
+  const { color } = useTheme()
+  const { fpl_consistent_menu_indent_by_default } = loadFeatureFlags()
+  return jsx(MenuContainer, {
+    className: classNames(
+      kL,
+      (mode === 'dark' ? 'dark' : color) === 'light' ? BB : XT,
+      {
+        [Ji]: fpl_consistent_menu_indent_by_default && !rareUseIndentOptOut,
+      },
+    ),
+    ...rest,
+    ref,
+    children: jsxs(setupThemeContext, {
+      mode: mode === 'dark' ? 'dark' : undefined,
+      children: [
+        jsx(ScrollArrow, {
+          className: Th,
+          direction: 'up',
+          children: jsx(SVG, {}),
+        }),
+        children,
+        jsx(ScrollArrow, {
+          className: Th,
+          direction: 'down',
+          children: jsx(SCG3, {}),
+        }),
+      ],
+    }),
+  })
+})
+MenuContainerComp.displayName = 'Menu.Container'
+
+/**
+ * Menu root component.
+ * Original: $$S8
+ */
+export const MenuRootComp = (props: any) => jsx(MenuRoot, { ...props })
+MenuRootComp.displayName = 'Menu.Root'
+
+/**
+ * Menu title.
+ * Original: $$v10
+ */
+export const MenuTitleComp = forwardRef((
+  props: MenuTitleProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(MenuTitle, {
+    className: DD,
+    ...props,
+    ref,
+  })
+})
+MenuTitleComp.displayName = 'Menu.Title'
+
+/**
+ * Hidden menu title.
+ * Original: $$A13
+ */
+export const MenuHiddenTitleComp = forwardRef((
+  props: MenuTitleProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(MenuTitle, {
+    className: _$$s,
+    ...props,
+    ref,
+  })
+})
+MenuHiddenTitleComp.displayName = 'Menu.HiddenTitle'
+
+/**
+ * Menu group.
+ * Original: $$x5
+ */
+export const MenuGroupComp = forwardRef((
+  props: MenuGroupProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(MenuGroup, {
+    className: Os,
+    ...props,
+    ref,
+  })
+})
+MenuGroupComp.displayName = 'Menu.Group'
+
+/**
+ * Menu item primitive.
+ * Original: $$N12
+ */
+export const MenuItemComp = forwardRef((
+  { children, ...rest }: MenuItemProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(MenuItemPrimitive, {
+    className: AS,
+    ...rest,
+    ref,
+    children: jsx('span', {
+      className: rv,
+      children,
+    }),
+  })
+})
+MenuItemComp.displayName = 'Menu.Item'
+
+/**
+ * Menu link primitive.
+ * Original: $$C2
+ */
+export const MenuLinkComp = forwardRef((
+  { children, ...rest }: MenuLinkProps,
+  ref: ForwardedRef<any>,
+) => {
+  return jsx(MenuPrimitiveLink, {
+    className: AS,
+    ...rest,
+    ref,
+    children: jsx('span', {
+      className: rv,
+      children,
+    }),
+  })
+})
+MenuLinkComp.displayName = 'Menu.Link'
+
+/**
+ * Menu item trail.
+ * Original: $$w3
+ */
+export function MenuItemTrail(props: any) {
+  return jsx('span', {
     className: Pq,
-    ...e
-  });
+    ...props,
+  })
 }
-export function $$O4(e) {
-  return jsx("span", {
+MenuItemTrail.displayName = 'Menu.ItemTrail'
+
+/**
+ * Menu item lead.
+ * Original: $$O4
+ */
+export function MenuItemLead(props: any) {
+  return jsx('span', {
     className: _5,
-    ...e
-  });
+    ...props,
+  })
 }
-export function $$R0(e) {
-  return jsx("div", {
+MenuItemLead.displayName = 'Menu.ItemLead'
+
+/**
+ * Menu subtext.
+ * Original: $$R0
+ */
+export function MenuSubText(props: any) {
+  return jsx('div', {
     className: Sv,
-    ...e
-  });
+    ...props,
+  })
 }
-export function $$L14(e) {
-  return jsx("div", {
+MenuSubText.displayName = 'Menu.SubText'
+
+/**
+ * Menu shortcut.
+ * Original: $$L14
+ */
+export function MenuShortcut(props: any) {
+  return jsx('div', {
     className: Sv,
-    ...e
-  });
+    ...props,
+  })
 }
-export function $$P15() {
-  return jsx("li", {
+MenuShortcut.displayName = 'Menu.Shortcut'
+
+/**
+ * Menu separator.
+ * Original: $$P15
+ */
+export function MenuSeparator() {
+  return jsx('li', {
     className: me,
-    role: "separator"
-  });
+    role: 'separator',
+  })
 }
-$$C2.displayName = "Menu.Link";
-$$w3.displayName = "Menu.ItemTrail";
-$$O4.displayName = "Menu.ItemLead";
-$$R0.displayName = "Menu.SubText";
-$$L14.displayName = "Menu.Shortcut";
-$$P15.displayName = "Menu.Separator";
-export const ME = $$R0;
-export const MJ = $$T1;
-export const N_ = $$C2;
-export const Ov = $$w3;
-export const Q$ = $$O4;
-export const YJ = $$x5;
-export const ZP = $$b6;
-export const b = $$E7;
-export const bL = $$S8;
-export const g8 = $$y9;
-export const hE = $$v10;
-export const mc = $$I11;
-export const q7 = $$N12;
-export const r1 = $$A13;
-export const rm = $$L14;
-export const wv = $$P15;
+MenuSeparator.displayName = 'Menu.Separator'
+
+/** Exported aliases for refactored components/functions */
+export const ME = MenuSubText
+export const MJ = MenuSubContainerComp
+export const N_ = MenuLinkComp
+export const Ov = MenuItemTrail
+export const Q$ = MenuItemLead
+export const YJ = MenuGroupComp
+export const ZP = MenuSubTrigger
+export const b = setupMenu
+export const bL = MenuRootComp
+export const g8 = MenuSubMenu
+export const hE = MenuTitleComp
+export const mc = MenuContainerComp
+export const q7 = MenuItemComp
+export const r1 = MenuHiddenTitleComp
+export const rm = MenuShortcut
+export const wv = MenuSeparator

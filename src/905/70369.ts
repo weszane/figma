@@ -3,7 +3,7 @@ import _require from "../905/10835";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { N } from "../905/438674";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -77,7 +77,7 @@ export function $$I2(e, t) {
             style: {
               display: "inline-block"
             },
-            children: jsx(J, {
+            children: jsx(setupThemeContext, {
               brand: "seascape",
               mode: "dark",
               children: jsx(N, {
@@ -94,7 +94,7 @@ export function $$I2(e, t) {
             style: {
               display: "inline-block"
             },
-            children: jsx(J, {
+            children: jsx(setupThemeContext, {
               brand: "seascape",
               mode: "dark",
               children: jsx(N, {

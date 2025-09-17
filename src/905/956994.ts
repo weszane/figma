@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Qr, Lz } from "../905/690539";
 import { sK } from "../905/794875";
 export function $$p1({
@@ -30,7 +30,7 @@ export function $$m0() {
       newTab: !0,
       trusted: !1,
       trackingProperties: {
-        trackingDescriptor: _$$c.FIGMA_AGENT_TROUBLESHOOT_LEARN_MORE
+        trackingDescriptor: UpgradeAction.FIGMA_AGENT_TROUBLESHOOT_LEARN_MORE
       },
       children: renderI18nText("fullscreen.font_settings.troubleshoot_agent_fonts.link")
     })
@@ -43,7 +43,7 @@ export function $$h2() {
       newTab: !0,
       trusted: !1,
       trackingProperties: {
-        trackingDescriptor: _$$c.FIGMA_AGENT_INSTALL_LEARN_MORE
+        trackingDescriptor: UpgradeAction.FIGMA_AGENT_INSTALL_LEARN_MORE
       },
       children: renderI18nText("fullscreen.properties_panel.font_picker.install_agent.link")
     })

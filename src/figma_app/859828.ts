@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { useLatestRef } from "../figma_app/922077";
-import { z3 } from "../figma_app/386952";
+import { getSelectedViewType } from "../figma_app/386952";
 let o = createContext(null);
 export function $$l0() {
   return useContext(o);
@@ -12,7 +12,7 @@ export function $$d1({
   let [t, r] = useState(null);
   let [l, d] = useState(null);
   let [c, u] = useState(null);
-  let p = z3();
+  let p = getSelectedViewType();
   let _ = useLatestRef(p);
   useEffect(() => {
     _ !== p && "fullscreen" === _ && (r(null), d(null), u(null));

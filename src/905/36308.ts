@@ -1,6 +1,6 @@
 import { createElement, memo, useCallback, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { F as _$$F5 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { a as _$$a } from '../905/5627';
 import { r as _$$r3 } from '../905/11890';
 import { R as _$$R2 } from '../905/16785';
@@ -114,7 +114,7 @@ import { _ as _$$_ } from '../905/607842';
 import { D as _$$D5 } from '../905/629114';
 import { R as _$$R } from '../905/649743';
 import { logger } from '../905/651849';
-import { Bi } from '../905/652992';
+import { FeatureFlag } from '../905/652992';
 import { z as _$$z } from '../905/653569';
 import { i } from '../905/661697';
 import { o5 } from '../905/664512';
@@ -135,7 +135,7 @@ import { R as _$$R3 } from '../905/726507';
 import { E as _$$E } from '../905/730894';
 import { X as _$$X } from '../905/736922';
 import { E as _$$E2 } from '../905/737393';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { d as _$$d } from '../905/758967';
 import { N as _$$N6 } from '../905/778966';
 import { r as _$$r4 } from '../905/784543';
@@ -5829,14 +5829,14 @@ export function $$nN0(e) {
       propertyValue: !0,
       callback: (e, t, i) => {
         i(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: fileMenuArgs?.openFile?.team ?? null,
             editorType: fileMenuArgs?.openFile?.editorType ?? null,
-            resource: Bi.MCP,
+            resource: FeatureFlag.MCP,
             action: fileActionEnum.ENABLE_MCP,
-            currentPlan: _$$F5.Plan.STARTER,
-            upsellPlan: _$$F5.Plan.PRO,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             upsellSource: UpsellModalType.MCP_MODAL,
             hideUpsellPlanCta: !1
           }

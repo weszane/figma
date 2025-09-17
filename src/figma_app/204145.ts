@@ -7,7 +7,7 @@ import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/217163";
 import { eY } from "../figma_app/722362";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { $ } from "../905/330495";
 import { Bv, wS } from "../figma_app/221240";
 import { uQ } from "../figma_app/311375";
@@ -64,7 +64,7 @@ export function $$E2() {
 }
 export function $$y0() {
   let e = useDispatch();
-  let t = _6();
+  let t = getSelectedView();
   let r = eY();
   let n = $$E2();
   let a = uQ();

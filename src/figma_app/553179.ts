@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
-import { c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { A2, xI } from "../figma_app/989514";
 export function $$o0(e) {
   let t = renderI18nText("tooltips_plus_onboarding.outro.title");
@@ -14,11 +14,11 @@ export function $$o0(e) {
       onPrimaryCtaClick: e.onPrimaryCtaClick,
       secondaryCtaProps: {
         ctaText: renderI18nText("tooltips_plus_onboarding.outro.practice_more_btn"),
-        ctaTrackingDescriptor: c.PRACTICE_MORE_HERE
+        ctaTrackingDescriptor: UpgradeAction.PRACTICE_MORE_HERE
       },
       primaryCtaProps: {
         ctaText: renderI18nText("tooltips_plus_onboarding.outro.start_new_file_btn"),
-        ctaTrackingDescriptor: c.START_A_NEW_FILE
+        ctaTrackingDescriptor: UpgradeAction.START_A_NEW_FILE
       },
       children: r
     })

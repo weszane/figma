@@ -7,7 +7,7 @@ import { useCurrentUserOrg } from '../905/845253';
 import { getInitialDynamicConfig } from '../3973/389215';
 import { atomStoreManager } from '../figma_app/27355';
 import { isWorkshopModeActive } from '../figma_app/193867';
-import { Me, ol } from '../figma_app/598018';
+import { currentTeamAtom, getCurrentTeam } from '../figma_app/598018';
 
 /**
  * Checks if AI features are disabled for the current org or team.
@@ -47,7 +47,7 @@ export function isEditDisabled({
   const state = debugState.getState();
   return !!isWorkshopModeActive(state.selectedView) || !state.user || isAIFeaturesDisabled({
     currentOrg: atomStoreManager.get(orgSubscriptionAtom),
-    currentTeam: atomStoreManager.get(Me),
+    currentTeam: atomStoreManager.get(currentTeamAtom),
     isViewer: atomStoreManager.get(canvasEditDisabledAtom),
     isDisabledForViewers
   });
@@ -61,7 +61,7 @@ export function isEditDisabled({
 export function isAIFeaturesEnabledForCurrentUser(): boolean {
   const enabled = !isAIFeaturesDisabled({
     currentOrg: useCurrentUserOrg() || null,
-    currentTeam: ol(),
+    currentTeam: getCurrentTeam(),
     isViewer: useIsCanvasEditDisabled()
   });
   return !!useSelector((state: any) => isWorkshopModeActive(state.selectedView) || !state.user) || !enabled;

@@ -9,7 +9,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { G } from "../905/971006";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { qE } from "../figma_app/152745";
 import { H } from "../905/216861";
@@ -21,7 +21,7 @@ import { A as _$$A } from "../905/289352";
 export let $$w0 = registerModal(function (e) {
   let t = useDispatch();
   let r = selectCurrentUser();
-  let g = _6();
+  let g = getSelectedView();
   let w = H();
   let [C, L] = useState("");
   let [T, I] = useState("");

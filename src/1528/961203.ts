@@ -36,7 +36,7 @@ import { Z7 } from "../9410/626378";
 import { Vi } from "../figma_app/955650";
 import { A as _$$A } from "../b2835def/22707";
 import { go } from "../figma_app/524655";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { permissionScopeHandler } from "../905/189185";
 import { isCommandEvent } from "../905/63728";
@@ -272,7 +272,7 @@ function et({
       ...xk(ee.rowTitleContentWrapper, u && ee.stateGroupTitleContentWrapper, m && ee.rowTitleContentWrapperEditing),
       children: [u && jsx(V, {
         ...xk(j ? ee.stateGroupIconDarkMode : ee.stateGroupIcon)
-      }), m ? jsx(_$$J, {
+      }), m ? jsx(setupThemeContext, {
         brand: "design",
         children: jsx("input", {
           className: "xh8yej3 xxk0z11 x9f619 x3zlzjp x19y5rnk xx99whi",

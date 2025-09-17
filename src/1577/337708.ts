@@ -7,7 +7,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Label } from "../905/270045";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { useModalManager } from "../905/437088";
 import { L as _$$L } from "../905/704296";
 import { rgbToHsl, hslToRgb } from "../figma_app/273493";
@@ -25,7 +25,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
 import { dH } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
 import { FEditorType } from "../figma_app/53721";
 import { e0 } from "../905/696396";
@@ -154,7 +154,7 @@ function Q({
       }
     }));
   }, [x, k, Q, f]);
-  let ea = cD();
+  let ea = getCurrentTeamId();
   let en = getUserId();
   let eo = Bw();
   let er = useCallback(() => {
@@ -214,7 +214,7 @@ function Q({
           children: renderI18nText("whiteboard.color_palettes.modal.name")
         }), jsx("div", {
           className: "edit_color_palette_modal--nameInput--iRWoM",
-          children: jsx(_$$p, {
+          children: jsx(InputComponent, {
             id: "palette-name-input",
             placeholder: getI18nString("whiteboard.color_palettes.modal.palette_name"),
             value: k || "",
@@ -297,7 +297,7 @@ export let $$$0 = registerModal(function ({
 }) {
   let l = useDispatch();
   let s = getUserId();
-  let c = cD();
+  let c = getCurrentTeamId();
   let d = useModalManager(r);
   let u = dH();
   let _ = useAtomWithSubscription(_$$B);

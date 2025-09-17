@@ -10,7 +10,7 @@ import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { $ as _$$$ } from "../figma_app/61705";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
@@ -119,7 +119,7 @@ export function $$I0() {
         onAcknowledge();
         M();
       },
-      ctaTrackingDescriptor: _$$c.OPEN_FIGMAKE,
+      ctaTrackingDescriptor: UpgradeAction.OPEN_FIGMAKE,
       variantOverride: "custom",
       customVariantStyles: E.button
     },

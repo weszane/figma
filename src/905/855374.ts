@@ -20,7 +20,7 @@ import { P as _$$P } from "../905/201667";
 import { throwTypeError } from "../figma_app/465776";
 import { t } from "../905/150656";
 import { bL, _L } from "../905/911410";
-import { vo, Y9, r1, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { PlatformType, VariableResolvedDataType, VariableDataType, VariablesBindings, PropertyScope, ColumnInteraction } from "../figma_app/763686";
@@ -104,7 +104,7 @@ import { Flg } from "../figma_app/27776";
 import { Q as _$$Q } from "../905/717951";
 import { A as _$$A } from "../svg/182908";
 import { E as _$$E2 } from "../905/53857";
-import { b as _$$b2, bL as _$$bL, mc, q7 as _$$q2, wv as _$$wv, hE, r1 as _$$r, Q$, YJ } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp, MenuItemLead, MenuGroupComp } from "../figma_app/860955";
 import { Ay } from "@stylexjs/stylex";
 import { P as _$$P4 } from "../905/537307";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -137,7 +137,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { deepEqual } from "../905/382883";
 import { ox, bL as _$$bL2 } from "../905/163832";
-import { A as _$$A2 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { k9 } from "../905/182598";
 import { l as _$$l } from "../905/745972";
 import { c as _$$c } from "../905/210851";
@@ -654,9 +654,9 @@ function ep(e) {
     defaultPosition: initialPosition ?? new Point(),
     width: parsePxNumber($),
     recordingKey: e.recordingKey,
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogHiddenTitle, {
           children: renderI18nText("variables.edit_modal.title")
         }), jsxs(t.TabStrip, {
           manager: y,
@@ -670,7 +670,7 @@ function ep(e) {
             children: renderI18nText("variables.edit_modal.tabs.scoping")
           })]
         })]
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         scrolling: "none",
         children: jsx(_$$P2, {
@@ -1651,36 +1651,36 @@ function tM({
   let {
     manager,
     getContextMenuTriggerProps
-  } = _$$b2();
+  } = setupMenu();
   let l = useCallback(() => {
     t(e.node_id);
   }, [e.node_id, t]);
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx("div", {
       className: "x78zum5 x6s0dn4 x1tzdv60 x10w6t97 x87ps6o",
       ...getContextMenuTriggerProps(),
       onClick: l,
       children: e.name
-    }, e.id), jsxs(mc, {
-      children: [jsxs(_$$q2, {
+    }, e.id), jsxs(MenuContainerComp, {
+      children: [jsxs(MenuItemComp, {
         disabled: !0,
         onClick: lQ,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.copy_link_to_collection")]
-      }), jsxs(_$$q2, {
+      }), jsxs(MenuItemComp, {
         disabled: !0,
         onClick: lQ,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.go_to_collection")]
-      }), jsx(_$$wv, {}), jsxs(_$$q2, {
+      }), jsx(MenuSeparator, {}), jsxs(MenuItemComp, {
         disabled: !0,
         onClick: lQ,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.duplicate_collection")]
-      }), jsx(_$$q2, {
+      }), jsx(MenuItemComp, {
         onClick: () => {
           i?.(e.node_id);
         },
         children: renderI18nText("variables.authoring_modal.sidebar.context_menu.extend_collection")
-      }), jsx(_$$wv, {}), jsxs(_$$q2, {
+      }), jsx(MenuSeparator, {}), jsxs(MenuItemComp, {
         disabled: !0,
         onClick: lQ,
         children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.export_modes")]
@@ -2932,21 +2932,21 @@ function iI({
   let {
     manager,
     getTriggerProps
-  } = _$$b2({
+  } = setupMenu({
     initialPosition: "bottom-end"
   });
   let o = getFeatureFlags().ds_extended_collections && e && isExtension(e);
   let d = z7(t);
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(iE, {
       isActive: d,
       triggerProps: getTriggerProps()
-    }), jsxs(mc, {
+    }), jsxs(MenuContainerComp, {
       children: [jsx(iv, {}), jsx(ix, {
-        title: o ? jsx(hE, {
+        title: o ? jsx(MenuTitleComp, {
           children: getI18nString("variables.authoring_modal.filters.type")
-        }) : jsx(_$$r, {
+        }) : jsx(MenuHiddenTitleComp, {
           children: getI18nString("variables.authoring_modal.filters.type")
         }),
         filterState: t,
@@ -2982,7 +2982,7 @@ function ix({
   }]) => jsxs(H_, {
     checked: t.filters.typeFilters.includes(e),
     onChange: () => i(e),
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: jsx(iS, {
         type: a
       })
@@ -2991,7 +2991,7 @@ function ix({
       children: r
     })]
   }, e));
-  return jsxs(YJ, {
+  return jsxs(MenuGroupComp, {
     children: [e, r]
   });
 }
@@ -3010,7 +3010,7 @@ function iw({
     label: t
   }]) => jsxs(CU, {
     value: e,
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: jsx(iC, {
         collectionFilter: e
       })
@@ -3020,7 +3020,7 @@ function iw({
     })]
   }, e));
   return jsx(z6, {
-    title: jsx(hE, {
+    title: jsx(MenuTitleComp, {
       children: getI18nString("variables.authoring_modal.filters.extended_collection_filter")
     }),
     onChange: t,
@@ -3363,7 +3363,7 @@ function i0() {
   let [{
     windowInnerWidth: e,
     windowInnerHeight: t
-  }] = _$$A2(_$$l(), 300, {
+  }] = useDebounce(_$$l(), 300, {
     equalityFn: deepEqual
   });
   return {
@@ -3678,13 +3678,13 @@ function i2({
           });
         },
         recordingKey: "variablesModal",
-        children: jsxs(vo, {
-          children: [jsx(Y9, {
+        children: jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
             children: t({
               setIsMaximized: E,
               isMaximized: I
             })
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             padding: 0,
             scrolling: "none",
             children: jsx("div", {

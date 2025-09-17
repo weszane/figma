@@ -3,7 +3,7 @@ import { useState, useEffect, useId } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
@@ -103,12 +103,12 @@ export let $$M0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: u,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("cooper.toolbar.export_modal.export_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(_$$k3, {
           name: "cooper_export_modal",
@@ -123,8 +123,8 @@ export let $$M0 = registerModal(function (e) {
             setShouldAddPrintMarks: Y
           })
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "primary",
             onClick: () => {

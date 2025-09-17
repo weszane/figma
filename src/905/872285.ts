@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, forwardRef } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { A } from "../vendor/723372";
 import { ButtonPrimitive } from "../905/632989";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
@@ -48,7 +48,7 @@ export let $$p0 = forwardRef(({
   children: t,
   htmlAttributes: i,
   ...r
-}, s) => jsx(J, {
+}, s) => jsx(setupThemeContext, {
   mode: "dark",
   children: jsxs(PopoverPrimitiveContainer, {
     ...defaultComponentAttribute,
@@ -71,7 +71,7 @@ export let $$m1 = forwardRef(({
   iconLead: t,
   htmlAttributes: i,
   ...r
-}, o) => jsx(J, {
+}, o) => jsx(setupThemeContext, {
   mode: "dark",
   children: jsxs("div", {
     ...defaultComponentAttribute,
@@ -98,7 +98,7 @@ forwardRef(({
   htmlAttributes: e,
   children: t,
   ...i
-}, r) => jsx(J, {
+}, r) => jsx(setupThemeContext, {
   mode: "dark",
   children: jsx("span", {
     ...i,
@@ -113,7 +113,7 @@ forwardRef(({
   htmlAttributes: e,
   children: t,
   ...i
-}, r) => jsx(J, {
+}, r) => jsx(setupThemeContext, {
   mode: "dark",
   children: jsx("div", {
     ...i,

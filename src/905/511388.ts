@@ -18,7 +18,7 @@ import { Rs as _$$Rs } from "../905/991973";
 import { N as _$$N2 } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { BaseLinkComponent } from "../figma_app/637027";
 import { b as _$$b } from "../905/217163";
 import { getProviderConfigType } from "../figma_app/155411";
@@ -79,7 +79,7 @@ let C = ex("community_fragment_license_tooltip", function () {
   });
   return jsx("div", {
     className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
-    children: jsx(J, {
+    children: jsx(setupThemeContext, {
       mode: "dark",
       children: jsx("div", {
         children: renderI18nText("community.community_license_text", {

@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { q7, N_, ZP } from "../figma_app/860955";
+import { MenuItemComp, MenuLinkComp, MenuSubTrigger } from "../figma_app/860955";
 import { CU } from "../905/963340";
 export function $$s2({
   children: e,
   ...t
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     ...t,
     children: jsxs("span", {
       className: "xhs4bwn xh8yej3 x78zum5",
@@ -17,7 +17,7 @@ export function $$o1({
   children: e,
   ...t
 }) {
-  return jsx(N_, {
+  return jsx(MenuLinkComp, {
     ...t,
     children: jsxs("span", {
       className: "xhs4bwn xh8yej3 x78zum5",
@@ -29,7 +29,7 @@ export function $$l3({
   children: e,
   ...t
 }) {
-  return jsx(ZP, {
+  return jsx(MenuSubTrigger, {
     ...t,
     children: jsxs("span", {
       className: "x15botz4 xh8yej3 x78zum5",

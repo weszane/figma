@@ -1,399 +1,743 @@
-import { useSelector } from 'react-redux';
-import { createReduxSubscriptionAtomWithState } from '../905/270322';
-import { getI18nString } from '../905/303541';
-import { extractPropertyFromNestedObjects } from '../905/504360';
-import { resolveTeamId } from '../905/515860';
-import { BillingSections, DashboardSections, MemberSections } from '../905/548208';
-import { subscribeAndAwaitData } from '../905/553831';
-import { AccessLevelEnum } from '../905/557142';
-import { getFeatureFlags } from '../905/601108';
-import { liveStoreInstance } from '../905/713695';
-import { getResourceDataOrFallback } from '../905/723791';
-import { createLoadedResource } from '../905/957591';
-import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from '../figma_app/43951';
-import { isReduxDeprecationCutover, ConfigGroups } from '../figma_app/121751';
-import { UserFieldEnum } from '../figma_app/135698';
-import { FFileType, FPaymentHealthStatusType, FPlanLimitationType } from '../figma_app/191312';
-import { hasTeamStatePaidAccess, STANDARD_LIMIT } from '../figma_app/345997';
-import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338';
-import { throwTypeError } from '../figma_app/465776';
-import { isTeamFolder } from '../figma_app/528509';
-import { canAdminTeam } from '../figma_app/642025';
-import { filterNotNullish } from '../figma_app/656233';
-import { memoizeByArgs } from '../figma_app/815945';
-export async function $$x10(e) {
-  let t = [];
-  let r = {};
-  await Promise.all(e.map(async e => {
-    let n = await liveStoreInstance.fetchFile(e);
-    if (!n?.trashed_at || !n?.team_id) return;
-    t.push(n);
-    let i = (await subscribeAndAwaitData(TeamFileLimitsInfo, {
-      teamId: n.team_id
-    })).team;
-    i?.id && (r[i.id] = i);
-  }));
-  return await w(t, r);
+import { useSelector } from 'react-redux'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { getI18nString } from '../905/303541'
+import { extractPropertyFromNestedObjects } from '../905/504360'
+import { resolveTeamId } from '../905/515860'
+import { BillingSections, DashboardSections, MemberSections } from '../905/548208'
+import { subscribeAndAwaitData } from '../905/553831'
+import { AccessLevelEnum } from '../905/557142'
+import { getFeatureFlags } from '../905/601108'
+import { liveStoreInstance } from '../905/713695'
+import { getResourceDataOrFallback } from '../905/723791'
+import { createLoadedResource } from '../905/957591'
+import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from '../figma_app/43951'
+import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751'
+import { UserFieldEnum } from '../figma_app/135698'
+import { FFileType, FPaymentHealthStatusType, FPlanLimitationType } from '../figma_app/191312'
+import { hasTeamStatePaidAccess, STANDARD_LIMIT } from '../figma_app/345997'
+import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338'
+import { throwTypeError } from '../figma_app/465776'
+import { isTeamFolder } from '../figma_app/528509'
+import { canAdminTeam } from '../figma_app/642025'
+import { filterNotNullish } from '../figma_app/656233'
+import { memoizeByArgs } from '../figma_app/815945'
+
+/**
+ * Fetches trashed files and checks team file limits for each file's team.
+ * @param fileIds - Array of file IDs to process
+ * @returns Team ID that has file limit restrictions, or undefined if none
+ */
+export async function checkTrashedFilesTeamLimits(fileIds: string[]) {
+  const trashedFiles = []
+  const teamInfoMap = {}
+
+  await Promise.all(fileIds.map(async (fileId) => {
+    const file = await liveStoreInstance.fetchFile(fileId)
+    if (!file?.trashed_at || !file?.team_id)
+      return
+
+    trashedFiles.push(file)
+
+    const teamData = (await subscribeAndAwaitData(TeamFileLimitsInfo, {
+      teamId: file.team_id,
+    })).team
+
+    if (teamData?.id) {
+      teamInfoMap[teamData.id] = teamData
+    }
+  }))
+
+  return await validateTeamFileLimits(trashedFiles, teamInfoMap)
 }
-export let $$N3 = Object.freeze({
+
+/**
+ * Default team file counts structure
+ */
+export const DEFAULT_TEAM_FILE_COUNTS = Object.freeze({
   designFileCount: 0,
   whiteboardFileCount: 0,
   slideFileCount: '0',
   sitesFileCount: '0',
-  totalFileCount: createLoadedResource(0)
-});
-export async function $$C19(e) {
-  let t = [];
-  let r = {};
-  await Promise.all(e.map(async e => {
-    let n = {
-      ...(await liveStoreInstance.fetchFile(e.key)),
-      folder_id: e.folderId
-    };
-    if (n && t.push(n), !e.folderId) return;
-    let i = await subscribeAndAwaitData(TeamFileLimitsInfoByProject, {
-      projectId: e.folderId
-    });
-    let a = i.project?.team;
-    a?.id && (r[a.id] = a);
-  }));
-  return await w(t, r);
+  totalFileCount: createLoadedResource(0),
+})
+
+/**
+ * Fetches files with folder information and checks team file limits.
+ * @param fileRequests - Array of objects containing file key and folder ID
+ * @returns Team ID that has file limit restrictions, or undefined if none
+ */
+export async function checkFilesWithFolderLimits(fileRequests: { key: string, folderId: string }[]) {
+  const filesWithFolders = []
+  const teamInfoMap = {}
+
+  await Promise.all(fileRequests.map(async (request) => {
+    const file = {
+      ...(await liveStoreInstance.fetchFile(request.key)),
+      folder_id: request.folderId,
+    }
+
+    if (file) {
+      filesWithFolders.push(file)
+    }
+
+    if (!request.folderId)
+      return
+
+    const projectData = await subscribeAndAwaitData(TeamFileLimitsInfoByProject, {
+      projectId: request.folderId,
+    })
+
+    const team = projectData.project?.team
+    if (team?.id) {
+      teamInfoMap[team.id] = team
+    }
+  }))
+
+  return await validateTeamFileLimits(filesWithFolders, teamInfoMap)
 }
-let w = async (e, t) => {
-  let r = {};
-  let n = {};
-  for (let t of e) {
-    let {
+
+/**
+ * Validates team file limits based on file types and counts.
+ * @param files - Array of files to check
+ * @param teamInfoMap - Map of team information
+ * @returns Team ID that has restrictions, or undefined if none
+ */
+async function validateTeamFileLimits(files: any[], teamInfoMap: Record<string, any>) {
+  const teamFileCounts = {}
+  const folderCache = {}
+
+  for (const file of files) {
+    const {
       folder_id,
       team_id,
-      editor_type
-    } = t;
-    if (!folder_id || !team_id || !editor_type) continue;
-    let s = n[folder_id] ?? (await liveStoreInstance.fetchFolder(folder_id));
-    n[folder_id] = s;
-    r[team_id] = r[team_id] ?? {};
-    r[team_id][editor_type] = r[team_id][editor_type] ?? {
+      editor_type,
+    } = file
+
+    if (!folder_id || !team_id || !editor_type)
+      continue
+
+    const folder = folderCache[folder_id] ?? (await liveStoreInstance.fetchFolder(folder_id))
+    folderCache[folder_id] = folder
+
+    teamFileCounts[team_id] = teamFileCounts[team_id] ?? {}
+    teamFileCounts[team_id][editor_type] = teamFileCounts[team_id][editor_type] ?? {
       draft: 0,
-      nonDraft: 0
-    };
-    isTeamFolder(s) ? r[team_id][editor_type].draft += 1 : r[team_id][editor_type].nonDraft += 1;
+      nonDraft: 0,
+    }
+
+    isTeamFolder(folder)
+      ? teamFileCounts[team_id][editor_type].draft += 1
+      : teamFileCounts[team_id][editor_type].nonDraft += 1
   }
-  let i = Object.entries(r).find(([e, r]) => {
-    let n = t[e];
-    return !!n && Object.entries(r).some(([e, t]) => !$$M14(n, {
-      type: 3,
-      editorType: e,
-      teamFileCounts: n.teamFileCounts || $$N3,
-      nNonDraftFilesToAdd: t.nonDraft
-    }));
-  });
-  return i?.[0];
-};
-export function $$O0(e) {
-  return !!(e.team_role || (e?.edit_roles?.design_files?.length || 0) > 0 || (e?.edit_roles?.whiteboard_files?.length || 0) > 0 || (e?.edit_roles?.folders?.length || 0) > 0 || (e?.view_roles?.file_count || 0) > 0 || (e?.view_roles?.folder_count || 0) > 0);
+
+  const restrictedTeam = Object.entries(teamFileCounts).find(([teamId, fileTypeCounts]) => {
+    const teamInfo = teamInfoMap[teamId]
+    return !!teamInfo && Object.entries(fileTypeCounts).some(([fileType, counts]) =>
+      !isTeamAllowedToAddFiles(teamInfo, {
+        type: 3, // ADD_N_FILES
+        editorType: fileType,
+        teamFileCounts: teamInfo.teamFileCounts || DEFAULT_TEAM_FILE_COUNTS,
+        nNonDraftFilesToAdd: (counts as any).nonDraft,
+      }),
+    )
+  })
+
+  return restrictedTeam?.[0]
 }
-let $$R26 = e => !!e?.restrictions_list?.includes(FPlanLimitationType.FILES_LIMITED_LEGACY);
-let $$L16 = e => !!e?.restrictions_list?.includes(FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA);
-var $$P25 = (e => (e[e.ADD_PROJECT = 0] = 'ADD_PROJECT', e[e.ADD_EDITOR = 1] = 'ADD_EDITOR', e[e.ADD_FILE = 2] = 'ADD_FILE', e[e.ADD_N_FILES = 3] = 'ADD_N_FILES', e))($$P25 || {});
-var D = (e => (e.NO_RESTRICTIONS = 'noRestrictions', e.FULLY_RESTRICTED = 'fullyRestricted', e.FILE_COUNT_LIMIT = 'fileCountLimit', e))(D || {});
-function k(e) {
-  switch (e) {
+
+/**
+ * Checks if user has any team role or edit/view permissions
+ * @param user - User object to check
+ * @returns True if user has any permissions
+ */
+export function hasTeamPermissions(user: any): boolean {
+  return !!(user.team_role
+    || (user?.edit_roles?.design_files?.length || 0) > 0
+    || (user?.edit_roles?.whiteboard_files?.length || 0) > 0
+    || (user?.edit_roles?.folders?.length || 0) > 0
+    || (user?.view_roles?.file_count || 0) > 0
+    || (user?.view_roles?.folder_count || 0) > 0)
+}
+
+/**
+ * Checks if team has legacy files limitation
+ * @param team - Team object to check
+ * @returns True if team has legacy files limitation
+ */
+function hasLegacyFilesLimitation(team: any): boolean {
+  return !!team?.restrictions_list?.includes(FPlanLimitationType.FILES_LIMITED_LEGACY)
+}
+
+/**
+ * Checks if team has whiteboard files beta limitation
+ * @param team - Team object to check
+ * @returns True if team has whiteboard files beta limitation
+ */
+function hasWhiteboardFilesBetaLimitation(team: any): boolean {
+  return !!team?.restrictions_list?.includes(FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA)
+}
+
+/**
+ * Enum for different add operations
+ */
+export enum AddOperationType {
+  ADD_PROJECT = 0,
+  ADD_EDITOR = 1,
+  ADD_FILE = 2,
+  ADD_N_FILES = 3,
+
+}
+
+/**
+ * Restriction types
+ */
+export enum RestrictionType {
+  NO_RESTRICTIONS = 'noRestrictions',
+  FULLY_RESTRICTED = 'fullyRestricted',
+  FILE_COUNT_LIMIT = 'fileCountLimit',
+}
+
+/**
+ * Gets file type configuration based on editor type
+ * @param editorType - File editor type
+ * @returns Configuration object for the file type
+ */
+function getFileTypeConfig(editorType: FFileType) {
+  switch (editorType) {
     case FFileType.DESIGN:
       return {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'designFileCount'
-      };
+        starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+        teamRestrictions: new Set([
+          FPlanLimitationType.FILES_LIMITED_LEGACY,
+          FPlanLimitationType.FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+        ]),
+        teamFileCountsKey: 'designFileCount',
+      }
     case FFileType.WHITEBOARD:
       return {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA, FPlanLimitationType.WHITEBOARD_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'whiteboardFileCount'
-      };
+        starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+        teamRestrictions: new Set([
+          FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA,
+          FPlanLimitationType.WHITEBOARD_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+        ]),
+        teamFileCountsKey: 'whiteboardFileCount',
+      }
     case FFileType.SLIDES:
       return {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.SLIDE_FILES_LIMITED_BETA, FPlanLimitationType.SLIDE_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'slideFileCount'
-      };
+        starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+        teamRestrictions: new Set([
+          FPlanLimitationType.SLIDE_FILES_LIMITED_BETA,
+          FPlanLimitationType.SLIDE_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+        ]),
+        teamFileCountsKey: 'slideFileCount',
+      }
     case FFileType.SITES:
       if (!getFeatureFlags().sts_starter_enabled) {
         return {
-          starterRestrictionType: 'fullyRestricted'
-        };
+          starterRestrictionType: RestrictionType.FULLY_RESTRICTED,
+        }
       }
       if (getFeatureFlags().sites_design_starter_combined_file_limit) {
         return {
-          starterRestrictionType: 'fileCountLimit',
-          teamRestrictions: new Set([FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-          teamFileCountsKey: 'sitesFileCount'
-        };
+          starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+          teamRestrictions: new Set([
+            FPlanLimitationType.FILES_LIMITED_LEGACY,
+            FPlanLimitationType.FILES_LIMITED,
+            FPlanLimitationType.GLOBAL_FILES_LIMITED,
+            FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+          ]),
+          teamFileCountsKey: 'sitesFileCount',
+        }
       }
       return {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'totalFileCount'
-      };
+        starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+        teamRestrictions: new Set([
+          FPlanLimitationType.GLOBAL_FILES_LIMITED,
+          FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+        ]),
+        teamFileCountsKey: 'totalFileCount',
+      }
     case FFileType.COOPER:
-      return getFeatureFlags().cooper ? {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'totalFileCount'
-      } : {
-        starterRestrictionType: 'fullyRestricted'
-      };
+      return getFeatureFlags().cooper
+        ? {
+            starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+            teamRestrictions: new Set([
+              FPlanLimitationType.GLOBAL_FILES_LIMITED,
+              FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+            ]),
+            teamFileCountsKey: 'totalFileCount',
+          }
+        : {
+            starterRestrictionType: RestrictionType.FULLY_RESTRICTED,
+          }
     case FFileType.FIGMAKE:
-      return getFeatureFlags().bake_starter_limit ? {
-        starterRestrictionType: 'fileCountLimit',
-        teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: 'totalFileCount'
-      } : {
-        starterRestrictionType: 'fullyRestricted'
-      };
+      return getFeatureFlags().bake_starter_limit
+        ? {
+            starterRestrictionType: RestrictionType.FILE_COUNT_LIMIT,
+            teamRestrictions: new Set([
+              FPlanLimitationType.GLOBAL_FILES_LIMITED,
+              FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY,
+            ]),
+            teamFileCountsKey: 'totalFileCount',
+          }
+        : {
+            starterRestrictionType: RestrictionType.FULLY_RESTRICTED,
+          }
     default:
-      throwTypeError(e);
+      throwTypeError(editorType)
   }
 }
-export function $$M14(e, t) {
-  if (!e || e.restrictionsList?.includes(FPlanLimitationType.LOCKED)) return !1;
-  if (hasTeamStatePaidAccess(e)) return !0;
-  switch (t.type) {
-    case 0:
-      return !e.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED) && !e.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED_LEGACY);
-    case 1:
-      return !e.restrictionsList?.includes(FPlanLimitationType.EDITORS_LIMITED);
-    case 2:
-      {
-        let r = k(t.editorType);
-        switch (r.starterRestrictionType) {
-          case 'fullyRestricted':
-            return !1;
-          case 'noRestrictions':
-            return !0;
-          case 'fileCountLimit':
-            if (t.isDestinationTeamDrafts) return !0;
-            if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (getResourceDataOrFallback(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
-            if (t.teamFileCounts) {
-              let e = Number(t.teamFileCounts[r.teamFileCountsKey]);
-              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? e += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (e += Number(t.teamFileCounts.designFileCount ?? 0))), e >= STANDARD_LIMIT) return !1;
+
+/**
+ * Checks if team is allowed to perform an operation based on restrictions
+ * @param team - Team information
+ * @param operation - Operation details
+ * @returns True if team is allowed to perform the operation
+ */
+export function isTeamAllowedToAddFiles(team: any, operation: any) {
+  if (!team || team.restrictionsList?.includes(FPlanLimitationType.LOCKED))
+    return false
+
+  if (hasTeamStatePaidAccess(team))
+    return true
+
+  switch (operation.type) {
+    case AddOperationType.ADD_PROJECT:
+      return !team.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED)
+        && !team.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED_LEGACY)
+    case AddOperationType.ADD_EDITOR:
+      return !team.restrictionsList?.includes(FPlanLimitationType.EDITORS_LIMITED)
+    case AddOperationType.ADD_FILE:
+    {
+      const config = getFileTypeConfig(operation.editorType)
+      switch (config.starterRestrictionType) {
+        case RestrictionType.FULLY_RESTRICTED:
+          return false
+        case RestrictionType.NO_RESTRICTIONS:
+          return true
+        case RestrictionType.FILE_COUNT_LIMIT:
+          if (operation.isDestinationTeamDrafts)
+            return true
+          if (team.restrictionsList?.some((restriction: FPlanLimitationType) => config.teamRestrictions.has(restriction))
+            || (FPlanLimitationType.GLOBAL_FILES_MUST_CHECK
+              && team.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK)
+              && operation.teamFileCounts
+              && (getResourceDataOrFallback(operation.teamFileCounts.totalFileCount) as number ?? 0) >= STANDARD_LIMIT)) {
+            return false
+          }
+          if (operation.teamFileCounts) {
+            let fileCount = Number(operation.teamFileCounts[config.teamFileCountsKey])
+            if (getFeatureFlags().sites_design_starter_combined_file_limit
+              && operation.editorType === FFileType.DESIGN) {
+              fileCount += Number(operation.teamFileCounts.sitesFileCount ?? 0)
             }
-            return !0;
-          default:
-            throwTypeError(r);
-        }
-      }
-    case 3:
-      {
-        let r = k(t.editorType);
-        switch (r.starterRestrictionType) {
-          case 'fullyRestricted':
-            return !1;
-          case 'noRestrictions':
-            return !0;
-          case 'fileCountLimit':
-            {
-              if (t.nNonDraftFilesToAdd === 0) return !0;
-              if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (getResourceDataOrFallback(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
-              let n = Number(t.teamFileCounts[r.teamFileCountsKey]);
-              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? n += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (n += Number(t.teamFileCounts.designFileCount ?? 0))), n + t.nNonDraftFilesToAdd > STANDARD_LIMIT) return !1;
-              return !0;
+            else if (getFeatureFlags().sites_design_starter_combined_file_limit
+              && operation.editorType === FFileType.SITES) {
+              fileCount += Number(operation.teamFileCounts.designFileCount ?? 0)
             }
-          default:
-            throwTypeError(r);
-        }
+
+            if (fileCount >= STANDARD_LIMIT) {
+              return false
+            }
+          }
+          return true
+        default:
+          throwTypeError(config)
       }
+    }
+    case AddOperationType.ADD_N_FILES:
+    {
+      const config = getFileTypeConfig(operation.editorType)
+      switch (config.starterRestrictionType) {
+        case RestrictionType.FULLY_RESTRICTED:
+          return false
+        case RestrictionType.NO_RESTRICTIONS:
+          return true
+        case RestrictionType.FILE_COUNT_LIMIT:
+        {
+          if (operation.nNonDraftFilesToAdd === 0)
+            return true
+          if (team.restrictionsList?.some((restriction: FPlanLimitationType) => config.teamRestrictions.has(restriction))
+            || (FPlanLimitationType.GLOBAL_FILES_MUST_CHECK
+              && team.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK)
+              && operation.teamFileCounts
+              && (getResourceDataOrFallback(operation.teamFileCounts.totalFileCount) as number ?? 0) >= STANDARD_LIMIT)) {
+            return false
+          }
+          let fileCount = Number(operation.teamFileCounts[config.teamFileCountsKey])
+          if (getFeatureFlags().sites_design_starter_combined_file_limit
+            && operation.editorType === FFileType.DESIGN) {
+            fileCount += Number(operation.teamFileCounts.sitesFileCount ?? 0)
+          }
+          else if (getFeatureFlags().sites_design_starter_combined_file_limit
+            && operation.editorType === FFileType.SITES) {
+            fileCount += Number(operation.teamFileCounts.designFileCount ?? 0)
+          }
+
+          if (fileCount + operation.nNonDraftFilesToAdd > STANDARD_LIMIT) {
+            return false
+          }
+          return true
+        }
+        default:
+      }
+      break
+    }
     default:
-      throwTypeError(t);
+      throwTypeError(operation)
   }
 }
-export function $$F24(e, t) {
-  return $$M14({
-    subscription: e.subscription,
-    restrictionsList: e.restrictions_list || [],
-    studentTeamAt: e.student_team ? new Date() : null,
-    gracePeriodEnd: e.grace_period_end ? new Date(e.grace_period_end) : null
-  }, t);
+
+/**
+ * Wrapper function for checking team file restrictions
+ * @param team - Team information
+ * @param operation - Operation details
+ * @returns True if team is allowed to perform the operation
+ */
+export function checkTeamFileRestrictions(team: any, operation: any) {
+  return isTeamAllowedToAddFiles({
+    subscription: team.subscription,
+    restrictionsList: team.restrictions_list || [],
+    studentTeamAt: team.student_team ? new Date() : null,
+    gracePeriodEnd: team.grace_period_end ? new Date(team.grace_period_end) : null,
+  }, operation)
 }
-export function $$j5(e, t) {
-  if (!e.teams || !e.authedTeamsById) return null;
-  let r = Object.values(e.teams);
-  let n = Object.values(e.authedTeamsById);
+
+/**
+ * Gets the appropriate team based on user permissions
+ * @param state - Application state
+ * @param team - Team information
+ * @returns Team object or null
+ */
+export function getAuthorizedTeam(state: any, team: any) {
+  if (!state.teams || !state.authedTeamsById)
+    return null
+
+  const teams = Object.values(state.teams)
+  const authedTeams = Object.values(state.authedTeamsById)
+
   if (setupShadowRead({
-    oldValue: r.length === 1 && canAdminTeam(r[0].id, e),
-    newValue: t?.canAdmin,
+    oldValue: teams.length === 1 && canAdminTeam((teams[0] as any).id, state),
+    newValue: team?.canAdmin,
     label: adminPermissionConfig.gen0OnboardingOnlyTeam.canAdmin,
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     maxReports: 1,
     contextArgs: {
-      currentTeamId: t?.id,
-      userId: e.user?.id,
-      teams: String(r.map(e => e.id))
-    }
+      currentTeamId: team?.id,
+      userId: state.user?.id,
+      teams: String(teams.map((t: any) => t.id)),
+    },
   })) {
     return setupShadowRead({
-      oldValue: r[0],
-      newValue: r.find(e => e.id === t?.id) || null,
+      oldValue: teams[0],
+      newValue: teams.find((t: any) => t.id === team?.id) || null,
       label: adminPermissionConfig.gen0OnboardingOnlyTeam.currentTeamFromState,
       enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
       maxReports: 1,
       contextArgs: {
-        currentTeamId: t?.id,
-        userId: e.user?.id,
-        teams: String(r.map(e => e.id))
-      }
-    });
+        currentTeamId: team?.id,
+        userId: state.user?.id,
+        teams: String(teams.map((t: any) => t.id)),
+      },
+    })
   }
-  if (r.length === 0 && n.length === 1) {
-    let t = e.user?.id;
-    if (t) return e.teamAdminRolesForAuthedUsers && e.teamAdminRolesForAuthedUsers[t].find(e => e.team_id === n[0].id) ? n[0] : null;
-  }
-  return null;
-}
-export function $$U9(e) {
-  return !!e.student_team || !!e && !!e.subscription && [FPaymentHealthStatusType.OK, FPaymentHealthStatusType.GRACE_PERIOD].includes(e.subscription);
-}
-export function $$B12(e) {
-  let t = e.user?.id;
-  let r = e.openFile?.key;
-  if (!t || !r) return null;
-  let n = e.fileByKey?.[r]?.team_id;
-  return n ? e.teamUserByTeamId?.[n]?.[t] : null;
-}
-export function $$G11(e) {
-  switch (e) {
-    case UserFieldEnum.NAME:
-      return getI18nString('team_view.team_members_table_column.name');
-    case UserFieldEnum.ACTIVE_AT:
-      return getI18nString('team_view.team_members_table_column.active_at');
-    case UserFieldEnum.DESIGN_PAID_STATUS:
-      return getI18nString('team_view.team_members_table_column.design_role.seat_rename');
-    case UserFieldEnum.FIGJAM_PAID_STATUS:
-      return getI18nString('team_view.team_members_table_column.figjam_role.seat_rename');
-    case UserFieldEnum.BILLING_INTERVAL:
-      return getI18nString('team_view.team_members_table_column.billing_interval');
-  }
-}
-export function $$V23(e, t) {
-  switch (e) {
-    case DashboardSections.DASHBOARD:
-      return getI18nString('team_view.toolbar.dashboard');
-    case DashboardSections.MEMBERS:
-      return getI18nString('team_view.toolbar.members');
-    case DashboardSections.DRAFTS:
-      return getI18nString('team_view.toolbar.drafts');
-    case DashboardSections.CONTENT:
-      switch (t) {
-        case MemberSections.ABANDONED_DRAFTS:
-          return getI18nString('team_view.toolbar.drafts');
-        case MemberSections.CONNECTED_PROJECTS:
-          return getI18nString('team_view.toolbar.connected_projects');
-        default:
-          return getI18nString('team_view.toolbar.content');
-      }
-    case DashboardSections.SETTINGS:
-      return getI18nString('team_view.toolbar.settings');
-    case DashboardSections.BILLING:
-      switch (t) {
-        case BillingSections.OVERVIEW:
-          return getI18nString('team_view.toolbar.billing.overview');
-        case BillingSections.INVOICES:
-          return getI18nString('team_view.toolbar.billing.invoices');
-        default:
-          return getI18nString('team_view.toolbar.billing');
-      }
-    default:
-      throwTypeError(e);
-  }
-}
-let H = new RegExp(/[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/([A-z0-9]*)\/team\/(\d+)/);
-let z = new RegExp(/[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/team\/(\d+)/);
-export function $$W7(e) {
-  return H.test(e);
-}
-export function $$K1(e) {
-  return z.test(e);
-}
-export function $$Y4(e) {
-  let t = new URL(e).pathname.match('team/([A-z0-9]*)');
-  return t ? t[1] : null;
-}
-export function $$$15() {
-  return useSelector(e => resolveTeamId(e)) || '';
-}
-export function $$X21() {
-  return useSelector(e => {
-    let t = resolveTeamId(e);
-    return t === '' || e.teams == null ? null : e.teams[t];
-  }) || null;
-}
-export let $$q8 = createReduxSubscriptionAtomWithState(e => e.teams[resolveTeamId(e)] || null);
-export function $$J6(e) {
-  return e.teams[resolveTeamId(e)] || null;
-}
-export function $$Z13(e, t, r) {
-  return e ? Object.keys(extractPropertyFromNestedObjects(t.byTeamId, e.id)).filter(e => r[e]) : [];
-}
-export let $$Q17 = memoizeByArgs((e, t, r) => {
-  return e ? $$Z13(e, t, r).map(e => r[e]) : [];
-});
-export function $$ee20(e, t) {
-  let r = [];
-  let n = {};
-  for (let t of e) t && (n[t.id] = t, r.push(t.id));
-  e.sort((e, r) => {
-    let n = t.indexOf(e.id);
-    let i = t.indexOf(r.id);
-    return n === -1 && i === -1 ? e.createdAt < r.createdAt ? 1 : -1 : n - i;
-  });
-  return e.map(e => e.id);
-}
-export function $$et22(e, t) {
-  let r = e.byTeamId[t] || {};
-  return filterNotNullish(Object.keys(r).map(e => {
-    let t = r[e];
-    return t ? !0 === t.pending ? null : t.user : null;
-  }));
-}
-export function $$er2(e, t, r) {
-  let n = 0;
-  let i = {};
-  for (let a of (t.forEach(e => i[e.id] = e), Object.keys(r))) {
-    let t = i[a];
-    let s = r[a][e];
-    if (t && s) {
-      if (t.pro_team || t.org_access || t.student_team) return !1;
-      s.level === AccessLevelEnum.OWNER && n++;
+
+  if (teams.length === 0 && authedTeams.length === 1) {
+    const userId = state.user?.id
+    if (userId) {
+      return state.teamAdminRolesForAuthedUsers
+        && state.teamAdminRolesForAuthedUsers[userId].find((role: any) => role.team_id === (authedTeams[0] as any).id)
+        ? authedTeams[0]
+        : null
     }
   }
-  return n > 1;
+
+  return null
 }
-export function $$en18(e) {
-  return !!e && !!e.match(/^\d+$/);
+
+/**
+ * Checks if team has valid payment status
+ * @param team - Team object to check
+ * @returns True if team has valid payment status
+ */
+export function hasValidTeamPaymentStatus(team: any): boolean {
+  return !!team.student_team
+    || !!team
+    && !!team.subscription
+    && [FPaymentHealthStatusType.OK, FPaymentHealthStatusType.GRACE_PERIOD].includes(team.subscription)
 }
-export const BU = $$O0;
-export const Cl = $$K1;
-export const Ct = $$er2;
-export const Cz = $$N3;
-export const Eq = $$Y4;
-export const FQ = $$j5;
-export const H7 = $$J6;
-export const HE = $$W7;
-export const Me = $$q8;
-export const PS = $$U9;
-export const R5 = $$x10;
-export const Rq = $$G11;
-export const UQ = $$B12;
-export const _L = $$Z13;
-export const aW = $$M14;
-export const cD = $$$15;
-export const cU = $$L16;
-export const dE = $$Q17;
-export const jv = $$en18;
-export const mx = $$C19;
-export const n$ = $$ee20;
-export const ol = $$X21;
-export const pG = $$et22;
-export const pe = $$V23;
-export const rR = $$F24;
-export const sK = $$P25;
-export const zs = $$R26;
+
+/**
+ * Gets team user information for the open file
+ * @param state - Application state
+ * @returns Team user information or null
+ */
+export function getCurrentTeamUserInfo(state: any) {
+  const userId = state.user?.id
+  const fileKey = state.openFile?.key
+
+  if (!userId || !fileKey)
+    return null
+
+  const teamId = state.fileByKey?.[fileKey]?.team_id
+  return teamId ? state.teamUserByTeamId?.[teamId]?.[userId] : null
+}
+
+/**
+ * Gets localized string for user field
+ * @param field - User field enum
+ * @returns Localized string
+ */
+export function getUserFieldLabel(field: UserFieldEnum) {
+  switch (field) {
+    case UserFieldEnum.NAME:
+      return getI18nString('team_view.team_members_table_column.name')
+    case UserFieldEnum.ACTIVE_AT:
+      return getI18nString('team_view.team_members_table_column.active_at')
+    case UserFieldEnum.DESIGN_PAID_STATUS:
+      return getI18nString('team_view.team_members_table_column.design_role.seat_rename')
+    case UserFieldEnum.FIGJAM_PAID_STATUS:
+      return getI18nString('team_view.team_members_table_column.figjam_role.seat_rename')
+    case UserFieldEnum.BILLING_INTERVAL:
+      return getI18nString('team_view.team_members_table_column.billing_interval')
+  }
+}
+
+/**
+ * Gets localized string for dashboard section
+ * @param section - Dashboard section
+ * @param subSection - Sub-section (optional)
+ * @returns Localized string
+ */
+export function getDashboardSectionLabel(section: DashboardSections, subSection?: MemberSections | BillingSections) {
+  switch (section) {
+    case DashboardSections.DASHBOARD:
+      return getI18nString('team_view.toolbar.dashboard')
+    case DashboardSections.MEMBERS:
+      return getI18nString('team_view.toolbar.members')
+    case DashboardSections.DRAFTS:
+      return getI18nString('team_view.toolbar.drafts')
+    case DashboardSections.CONTENT:
+      switch (subSection) {
+        case MemberSections.ABANDONED_DRAFTS:
+          return getI18nString('team_view.toolbar.drafts')
+        case MemberSections.CONNECTED_PROJECTS:
+          return getI18nString('team_view.toolbar.connected_projects')
+        default:
+          return getI18nString('team_view.toolbar.content')
+      }
+    case DashboardSections.SETTINGS:
+      return getI18nString('team_view.toolbar.settings')
+    case DashboardSections.BILLING:
+      switch (subSection) {
+        case BillingSections.OVERVIEW:
+          return getI18nString('team_view.toolbar.billing.overview')
+        case BillingSections.INVOICES:
+          return getI18nString('team_view.toolbar.billing.invoices')
+        default:
+          return getI18nString('team_view.toolbar.billing')
+      }
+    default:
+      throwTypeError(section)
+  }
+}
+
+// URL patterns for team file links
+const TEAM_FILE_URL_PATTERN = /[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/[A-Za-z0-9]*\/team\/\d+/
+const TEAM_URL_PATTERN = /[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/team\/\d+/
+
+/**
+ * Checks if URL matches team file pattern
+ * @param url - URL to check
+ * @returns True if URL matches pattern
+ */
+export function isTeamFileUrl(url: string): boolean {
+  return TEAM_FILE_URL_PATTERN.test(url)
+}
+
+/**
+ * Checks if URL matches team pattern
+ * @param url - URL to check
+ * @returns True if URL matches pattern
+ */
+export function isTeamUrl(url: string): boolean {
+  return TEAM_URL_PATTERN.test(url)
+}
+
+/**
+ * Extracts team ID from URL
+ * @param url - URL to parse
+ * @returns Team ID or null
+ */
+export function extractTeamIdFromUrl(url: string): string | null {
+  const match = new URL(url).pathname.match('team/([A-z0-9]*)')
+  return match ? match[1] : null
+}
+
+/**
+ * Gets current team ID from Redux state
+ * @returns Team ID
+ */
+export function getCurrentTeamId(): string {
+  return useSelector((state: any) => resolveTeamId(state)) || ''
+}
+
+/**
+ * Gets current team from Redux state
+ * @returns Team object or null
+ */
+export function getCurrentTeam(): any {
+  return useSelector((state: any) => {
+    const teamId = resolveTeamId(state)
+    return teamId === '' || state.teams == null ? null : state.teams[teamId]
+  }) || null
+}
+
+/**
+ * Redux subscription atom for current team
+ */
+export const currentTeamAtom = createReduxSubscriptionAtomWithState(state => state.teams[resolveTeamId(state)] || null)
+
+/**
+ * Gets team by ID from state
+ * @param state - Application state
+ * @returns Team object or null
+ */
+export function getTeamById(state: any) {
+  return state.teams[resolveTeamId(state)] || null
+}
+
+/**
+ * Gets filtered team member IDs
+ * @param team - Team object
+ * @param membersData - Members data
+ * @param filter - Filter function
+ * @returns Array of member IDs
+ */
+export function getFilteredTeamMemberIds(team: any, membersData: any, filter: (id: string) => boolean) {
+  return team ? Object.keys(extractPropertyFromNestedObjects(membersData.byTeamId, team.id)).filter(filter) : []
+}
+
+/**
+ * Memoized function to get filtered team members
+ */
+export const getFilteredTeamMembers = memoizeByArgs((team: any, membersData: any, filter: (id: string) => boolean) => {
+  return team ? getFilteredTeamMemberIds(team, membersData, filter).map(id => filter[id]) : []
+})
+
+/**
+ * Sorts items by specified order
+ * @param items - Array of items to sort
+ * @param order - Array of item IDs defining the order
+ * @returns Array of sorted item IDs
+ */
+export function sortItemsByOrder(items: any[], order: string[]) {
+  const itemMap = {}
+  const itemIds = []
+
+  for (const item of items) {
+    if (item) {
+      itemMap[item.id] = item
+      itemIds.push(item.id)
+    }
+  }
+
+  items.sort((a, b) => {
+    const indexA = order.indexOf(a.id)
+    const indexB = order.indexOf(b.id)
+
+    return indexA === -1 && indexB === -1
+      ? a.createdAt < b.createdAt ? 1 : -1
+      : indexA - indexB
+  })
+
+  return items.map(item => item.id)
+}
+
+/**
+ * Gets active team members
+ * @param membersData - Members data
+ * @param teamId - Team ID
+ * @returns Array of active members
+ */
+export function getActiveTeamMembers(membersData: any, teamId: string) {
+  const teamMembers = membersData.byTeamId[teamId] || {}
+  return filterNotNullish(Object.keys(teamMembers).map((memberId) => {
+    const member = teamMembers[memberId]
+    return member ? !true === member.pending ? null : member.user : null
+  }))
+}
+
+/**
+ * Checks if team has multiple owners
+ * @param roleType - Role type to check
+ * @param users - Array of users
+ * @param roles - User roles
+ * @returns True if team has multiple owners
+ */
+export function hasMultipleOwners(roleType: any, users: any[], roles: any) {
+  let ownerCount = 0
+  const userMap = {}
+
+  users.forEach(user => userMap[user.id] = user)
+
+  for (const userId of Object.keys(roles)) {
+    const user = userMap[userId]
+    const userRole = roles[userId][roleType]
+
+    if (user && userRole) {
+      if (user.pro_team || user.org_access || user.student_team)
+        return false
+
+      if (userRole.level === AccessLevelEnum.OWNER) {
+        ownerCount++
+      }
+    }
+  }
+
+  return ownerCount > 1
+}
+
+/**
+ * Checks if string is numeric
+ * @param value - String to check
+ * @returns True if string contains only digits
+ */
+export function isNumericString(value: string): boolean {
+  return !!value && !!value.match(/^\d+$/)
+}
+
+// Export aliases (keeping original names on the right)
+export const BU = hasTeamPermissions
+export const Cl = isTeamUrl
+export const Ct = hasMultipleOwners
+export const Cz = DEFAULT_TEAM_FILE_COUNTS
+export const Eq = extractTeamIdFromUrl
+export const FQ = getAuthorizedTeam
+export const H7 = getTeamById
+export const HE = isTeamFileUrl
+export const Me = currentTeamAtom
+export const PS = hasValidTeamPaymentStatus
+export const R5 = checkTrashedFilesTeamLimits
+export const Rq = getUserFieldLabel
+export const UQ = getCurrentTeamUserInfo
+export const _L = getFilteredTeamMemberIds
+export const aW = isTeamAllowedToAddFiles
+export const cD = getCurrentTeamId
+export const cU = hasWhiteboardFilesBetaLimitation
+export const dE = getFilteredTeamMembers
+export const jv = isNumericString
+export const mx = checkFilesWithFolderLimits
+export const n$ = sortItemsByOrder
+export const ol = getCurrentTeam
+export const pG = getActiveTeamMembers
+export const pe = getDashboardSectionLabel
+export const rR = checkTeamFileRestrictions
+export const sK = AddOperationType
+export const zs = hasLegacyFilesLimitation

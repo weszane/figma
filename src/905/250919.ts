@@ -1,14 +1,14 @@
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 import { getOpenFileKey } from "../905/622391";
 import { isNotNullish } from "../figma_app/95419";
 import { subscribeAndAwaitData } from "../905/553831";
 import { ListCollectionsView } from "../figma_app/43951";
-import { b } from "../905/148729";
+import { toCollectionSummary } from "../905/148729";
 async function d({
   fileKey: e
 }) {
   if ("" === e) {
-    sD("fileKey is being passed as an empty string", {
+    logCmsError("fileKey is being passed as an empty string", {
       fileKey: e
     });
     return null;
@@ -16,7 +16,7 @@ async function d({
   let t = (await subscribeAndAwaitData(ListCollectionsView, {
     fileKey: e
   })).fileCmsCollections;
-  return t?.map(e => e.collectionV2).map(b).filter(isNotNullish);
+  return t?.map(e => e.collectionV2).map(toCollectionSummary).filter(isNotNullish);
 }
 export async function $$c0({
   collectionStableId: e
@@ -24,7 +24,7 @@ export async function $$c0({
   if ("" === e) return null;
   let t = getOpenFileKey();
   if (null == t) {
-    sD("fileKey is null", {
+    logCmsError("fileKey is null", {
       collectionStableId: e
     });
     return null;
@@ -33,13 +33,13 @@ export async function $$c0({
     fileKey: t
   });
   if (null == i) {
-    sD("collections is null", {
+    logCmsError("collections is null", {
       fileKey: t
     });
     return null;
   }
   let a = i.find(t => t.stableId === e);
-  return null == a ? (sD("collection is null", {
+  return null == a ? (logCmsError("collection is null", {
     collections: i,
     collectionStableId: e
   }), null) : {

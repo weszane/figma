@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { A as _$$A } from "../905/920142";
@@ -186,12 +186,12 @@ function F() {
     children: jsx(ModalRootComponent, {
       manager: h,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("collaboration.branching_modal.title")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsx("div", {
             className: $,
@@ -206,7 +206,7 @@ function F() {
               }), jsx(_$$t.Tab, {
                 ...m.archived,
                 children: renderI18nText("collaboration.branching_modal.tab_archived")
-              }), W && jsx(jk, {
+              }), W && jsx(DialogActionStrip, {
                 children: jsx(IconButton, {
                   "aria-label": getI18nString("collaboration.branching_modal.create_branch_tooltip"),
                   onClick: () => {

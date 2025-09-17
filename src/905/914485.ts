@@ -19,7 +19,7 @@ import { Q8, sC, R9 } from "../905/61477";
 import { XW, Yb } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
 import { Dy, uL } from "../905/977218";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { vj } from "../905/574958";
 import { cr } from "../905/703676";
 import { A as _$$A } from "../1617/512130";
@@ -30,7 +30,7 @@ function T({
   recentSearch: s
 }) {
   let o = useDispatch();
-  let l = _6();
+  let l = getSelectedView();
   let c = Xr(Q8);
   let u = useAtomWithSubscription(sC);
   let p = useAtomWithSubscription(R9);

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { b as _$$b, bL, mc, YJ, hE, q7, Q$, N_ } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp, MenuItemComp, MenuItemLead, MenuLinkComp } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
 import { EventShield } from "../905/821217";
 import { N as _$$N } from "../905/438674";
@@ -10,7 +10,7 @@ import { O as _$$O } from "../figma_app/114128";
 import { $ as _$$$ } from "../figma_app/183557";
 import { r } from "../figma_app/6042";
 import { C as _$$C } from "../905/47358";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -135,7 +135,7 @@ export function $$ea0() {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(TrackingProvider, {
     name: "ai_quick_actions_dropdown",
     children: [jsx(_$$V, {
@@ -163,11 +163,11 @@ export function $$ea0() {
           })
         })]
       })
-    }), jsx(bL, {
+    }), jsx(MenuRootComp, {
       manager,
-      children: jsxs(mc, {
-        children: [jsx(YJ, {
-          title: jsx(hE, {
+      children: jsxs(MenuContainerComp, {
+        children: [jsx(MenuGroupComp, {
+          title: jsx(MenuTitleComp, {
             children: getI18nString("whiteboard.inline_menu.ai_quick_actions_header_text")
           }),
           children: u.map(e => {
@@ -181,7 +181,7 @@ export function $$ea0() {
               disabledTooltipText,
               icon
             } = Q(type);
-            return jsxs(q7, {
+            return jsxs(MenuItemComp, {
               disabled: !enabled,
               onClick: () => r(e),
               "data-testid": `ai-quick-action-${type}`,
@@ -190,7 +190,7 @@ export function $$ea0() {
                 "data-tooltip": disabledTooltipText,
                 "data-tooltip-type": KindEnum.TEXT
               },
-              children: [icon && jsx(Q$, {
+              children: [icon && jsx(MenuItemLead, {
                 children: jsx("div", {
                   className: "x78zum5 x6s0dn4 xl56j7k x1t68hxm",
                   children: icon
@@ -198,7 +198,7 @@ export function $$ea0() {
               }), displayText]
             }, type);
           })
-        }), jsx(N_, {
+        }), jsx(MenuLinkComp, {
           href: $$J1,
           newTab: !0,
           trusted: !0,
@@ -372,7 +372,7 @@ function el() {
         children: [jsx("span", {
           className: "ai_quick_actions_control--dropdownFooterDisclaimer--UVXvJ",
           children: getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer")
-        }), "\xa0", jsx(J, {
+        }), "\xa0", jsx(setupThemeContext, {
           brand: "whiteboard",
           mode: "dark",
           children: jsx(_$$N, {

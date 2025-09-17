@@ -12,12 +12,12 @@ import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
-import { FC } from "../figma_app/212807";
-import { _6 } from "../figma_app/386952";
+import { selectPermissionsState } from "../figma_app/212807";
+import { getSelectedView } from "../figma_app/386952";
 import { getUserCurrency } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { UpgradeSteps } from "../figma_app/831101";
-import { UpgradeAction, TeamType } from "../figma_app/707808";
+import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { ModalView } from "../figma_app/918700";
 import { debounce } from "../905/915765";
 import { XHR } from "../905/910117";
@@ -145,8 +145,8 @@ function V(e) {
 export function $$z0(e) {
   let [t, a] = useState("selectTeam");
   let N = useDispatch();
-  let b = _6();
-  let C = FC();
+  let b = getSelectedView();
+  let C = selectPermissionsState();
   let w = useSelector(e => e.payment.promo);
   let E = useSelector(e => e.payment.billingPeriod);
   let A = () => {
@@ -159,9 +159,9 @@ export function $$z0(e) {
   let k = t => {
     "teamUpgrade" === b.view ? N(selectViewAction({
       ...b,
-      teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
+      teamFlowType: CreateUpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
-      paymentStep: kR(b.paymentStep, UpgradeAction.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || TeamType.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
+      paymentStep: kR(b.paymentStep, CreateUpgradeAction.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || TeamType.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
       billingPeriod: e.billingPeriod || E,
       entryPoint: e.entryPoint
     })) : N(WX({

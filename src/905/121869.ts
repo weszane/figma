@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { U } from "../905/405962";
 import { useCurrentUserOrg } from "../905/845253";
@@ -51,21 +51,21 @@ export function $$x0(e) {
     href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
     target: "_blank",
     trackingProperties: {
-      trackingDescriptor: _$$c.CONTACT_SUPPORT
+      trackingDescriptor: UpgradeAction.CONTACT_SUPPORT
     },
     children: renderI18nText("payments_modal.contact_support")
   }, "contact_support"), jsx(ButtonLinkTracked, {
     href: x.invoice_url,
     target: "_blank",
     trackingProperties: {
-      trackingDescriptor: _$$c.PAY_INVOICE
+      trackingDescriptor: UpgradeAction.PAY_INVOICE
     },
     children: renderI18nText("payments_modal.pay_invoice")
   }, "pay_invoice")] : [jsx(ButtonLinkTracked, {
     href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
     target: "_blank",
     trackingProperties: {
-      trackingDescriptor: _$$c.CONTACT_SUPPORT
+      trackingDescriptor: UpgradeAction.CONTACT_SUPPORT
     },
     children: renderI18nText("payments_modal.contact_support")
   }, "contact_support")]);

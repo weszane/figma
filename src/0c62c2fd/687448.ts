@@ -19,7 +19,7 @@ import { l as _$$l } from "../905/767868";
 import { C as _$$C } from "../905/226458";
 import { selectViewAction } from "../905/929976";
 import { fA } from "../figma_app/543100";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { DUserRole, TGroupType } from "../figma_app/858344";
 import { lQ } from "../905/934246";
 import { atomStoreManager } from "../figma_app/27355";
@@ -247,7 +247,7 @@ export function $$U0({
 }
 export function $$W1(e, t) {
   let r = useDispatch();
-  let a = _6();
+  let a = getSelectedView();
   return useCallback(s => {
     let i;
     ("workspace" !== a.view || a.subView !== DUserRole.DIRECTORY) && (i = {

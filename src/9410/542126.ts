@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
-import { b as _$$b, bL, mc, YJ, Q$, Ov, ME } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemLead, MenuItemTrail, MenuSubText } from "../figma_app/860955";
 import { z6, CU, H_ } from "../905/963340";
 import { A as _$$A } from "../905/891805";
 import { EditAction } from "../figma_app/763686";
@@ -217,7 +217,7 @@ function F({
   let {
     manager,
     getTriggerProps
-  } = _$$b({
+  } = setupMenu({
     initialPosition: t
   });
   let I = e => {
@@ -236,7 +236,7 @@ function F({
   }, [h, f, C]);
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseUp"],
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$d, {
         "aria-label": getI18nString("canvas_search.settings"),
@@ -247,7 +247,7 @@ function F({
         },
         ...getTriggerProps(),
         children: jsx(_$$A, {})
-      }), jsxs(mc, {
+      }), jsxs(MenuContainerComp, {
         children: [!f && jsx(Fragment, {
           children: jsxs(z6, {
             value: C.toString(),
@@ -282,7 +282,7 @@ function F({
               })
             }, "replace")]
           })
-        }), L && jsxs(YJ, {
+        }), L && jsxs(MenuGroupComp, {
           children: [jsx(B, {
             recordingKey: generateRecordingKey(a, "settings", "All"),
             checked: !b4.some(e => !!y[e]),
@@ -302,7 +302,7 @@ function F({
             count: x[t],
             minWidth: e
           }, t))]
-        }), jsx(YJ, {
+        }), jsx(MenuGroupComp, {
           children: _V.map(e => jsx(B, {
             recordingKey: generateRecordingKey(a, "settings", kM[e]),
             checked: !!y[e],
@@ -339,13 +339,13 @@ function B({
           minWidth: `${o}px`
         } : {})
       },
-      children: [i && jsx(Q$, {
+      children: [i && jsx(MenuItemLead, {
         children: jsx(SvgComponent, {
           className: H9,
           svg: i
         })
-      }), n, !!a && jsx(Ov, {
-        children: jsx(ME, {
+      }), n, !!a && jsx(MenuItemTrail, {
+        children: jsx(MenuSubText, {
           "data-testid": generateRecordingKey(s, "count"),
           children: a
         })

@@ -78,7 +78,7 @@ import { C$ } from '../figma_app/457074';
 import { isEmptyObject } from '../figma_app/493477';
 import { kb } from '../figma_app/502247';
 import { handleStatusChangeEffect } from '../figma_app/566371';
-import { cD } from '../figma_app/598018';
+import { getCurrentTeamId } from '../figma_app/598018';
 import { qr } from '../figma_app/608944';
 import { PrimaryWorkflowEnum, initialLibraryStats } from '../figma_app/633080';
 import { $j, td as _$$td, _B, GA, iw, kw, lG, Mb, Ve, vu, Ys } from '../figma_app/646357';
@@ -1595,7 +1595,7 @@ let $$tj42 = function () {
     let t = _data?.orgLibrarySubscriptions;
     $$tk34(e, c?.orgLibrarySubscriptions, t);
   }, [e, _data, c]);
-  let u = cD();
+  let u = getCurrentTeamId();
   let p = useSubscription(LibraryTeamSubscriptions, {});
   let {
     data: _data2

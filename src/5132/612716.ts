@@ -12,7 +12,7 @@ import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { V } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackedAnchor, TrackedDiv, TrackingProvider } from "../figma_app/831799";
 import { SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
@@ -269,7 +269,7 @@ export function $$N0({
                     dispatch: M,
                     onClose: w,
                     trackingProperties: {
-                      trackingDescriptor: _$$c.CLOSE
+                      trackingDescriptor: UpgradeAction.CLOSE
                     }
                   })]
                 }), jsx("div", {

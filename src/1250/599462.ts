@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
@@ -64,13 +64,13 @@ export function $$f0(e) {
         e.navigateToPlan && e.navigateToPlan();
         complete();
       },
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     secondaryCta: {
       label: renderI18nText("file_browser.drafts_to_move.viewbar_learn_more_link"),
       type: "link",
       href: "https://help.figma.com/hc/articles/18409526530967",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     targetKey: e.targetKey || "dtm_deprecation_post_migration_overlay_drafts_key",
     title: h,

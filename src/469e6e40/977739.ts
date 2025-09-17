@@ -15,7 +15,7 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { liveStoreInstance, IT } from "../905/713695";
 import { handleErrorWithToast } from "../figma_app/345997";
@@ -384,14 +384,14 @@ let $$z0 = registerModal(function ({
               variant: "secondary",
               onClick: a.onClose,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               children: getI18nString("general.cancel")
             }), jsx($z, {
               type: "submit",
               disabled: V || "loaded" !== T.status || "" !== F.inputValue,
               trackingProperties: {
-                trackingDescriptor: _$$c.SAVE
+                trackingDescriptor: UpgradeAction.SAVE
               },
               children: getI18nString("general.save")
             })]

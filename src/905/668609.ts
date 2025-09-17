@@ -2,7 +2,7 @@ import { t_ } from "../905/75293";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, memo, useContext, useCallback, useMemo } from "react";
 import { Q as _$$Q } from "../figma_app/104130";
-import { q7, b as _$$b, bL, mc } from "../figma_app/860955";
+import { MenuItemComp, setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { O as _$$O } from "../905/969533";
 import { getI18nString } from "../905/303541";
 import { Bf } from "../905/937445";
@@ -78,7 +78,7 @@ function C({
   isSelected: a,
   recordingKey: s
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: i,
     disabled: n,
     recordingKey: s,
@@ -255,17 +255,17 @@ let $$ec0 = ed(function ({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let s = useCallback(t => {
     e(IK(t));
   }, [e]);
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: Bf().map(e => {
         let i = R[e];
         if (!i) return null;
@@ -289,14 +289,14 @@ let $$eu1 = ed(function ({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: Object.keys(N).map(t => {
         let {
           icon,
@@ -318,14 +318,14 @@ let $$ep2 = ed(function ({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: Object.keys(j).map(i => {
         if (!j[i]) return null;
         let {
@@ -379,7 +379,7 @@ let $$em4 = ed(function ({
   let {
     manager,
     getTriggerProps
-  } = _$$b();
+  } = setupMenu();
   let T = useMemo(() => ({
     Basic: () => {
       E();
@@ -408,14 +408,14 @@ let $$em4 = ed(function ({
       Sprig("setAttribute", "is_assets_visual_style_user", !0);
     }
   }), [s, p, m, g, h, b, v, I, e, E, Sprig, activeToolId, activateTool]);
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       recordingKey: generateRecordingKey(i, "triggerButton"),
       children: jsx(_$$O, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: Object.keys(el).map(e => {
         if (!el[e]) return null;
         let {
@@ -439,14 +439,14 @@ let $$eh3 = ed(function ({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: Object.keys(H).map(t => {
         let {
           icon

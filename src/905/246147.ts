@@ -6,14 +6,14 @@ import { $ } from "../905/532878";
 import { KP } from "../figma_app/31103";
 import { hA } from "../figma_app/88239";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 export function $$m0({
   onShow: e,
   entryPoint: t,
   variableId: i
 }) {
-  let m = _6();
+  let m = getSelectedView();
   let h = B4();
   let g = useDispatch();
   let f = hA();

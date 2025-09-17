@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { permissionScopeHandler } from "../905/189185";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -16,12 +16,12 @@ export let $$u0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_component")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           children: e.movedToFile ? jsxs("p", {
             children: [renderI18nText("fullscreen.fullscreen_view.restore_component_modal.this_component_was_moved", {
@@ -33,8 +33,8 @@ export let $$u0 = registerModal(function (e) {
             children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_the_main_component_to_continue_making_edits_to_it")
           })
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",

@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../905/521428";
 import { f as _$$f } from "../905/809171";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom } from "../figma_app/27355";
@@ -26,7 +26,7 @@ import { DEV_HAND, DevHandoffInspectPanelPluginsHint } from "../figma_app/910914
 import { $ as _$$$ } from "../figma_app/61705";
 import { postUserFlag } from "../905/985254";
 import { oW } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { DP } from "../905/640017";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { _Z, eC, $1 } from "../905/539601";
@@ -220,13 +220,13 @@ let eg = [{
       asset: c,
       description: getI18nString("upsell.figma_make_prototype_announcement.description"),
       layoutStyle: "brand",
-      mainButtonOverride: jsx(_$$J, {
+      mainButtonOverride: jsx(setupThemeContext, {
         brand: "seascape",
         children: jsx(lR, {
           variant: "primary",
           onClick: d,
           trackingProperties: {
-            trackingDescriptor: _$$c.TRY_FIGMA_MAKE
+            trackingDescriptor: UpgradeAction.TRY_FIGMA_MAKE
           },
           children: getI18nString("upsell.figma_make_prototype_announcement.button_title")
         })
@@ -351,7 +351,7 @@ let eg = [{
       layoutStyle: "brand",
       mainButtonOverride: jsx("div", {
         className: _$$s.wFull.$,
-        children: jsx(_$$J, {
+        children: jsx(setupThemeContext, {
           brand: "dev-handoff",
           children: jsx(lR, {
             variant: "primary",
@@ -445,7 +445,7 @@ let eg = [{
       },
       description: getI18nString("dev_mode_demo_file.check_out_our_interactive_test"),
       layoutStyle: "brand",
-      mainButtonOverride: jsx(_$$J, {
+      mainButtonOverride: jsx(setupThemeContext, {
         brand: "dev-handoff",
         children: jsx(lR, {
           variant: "primary",

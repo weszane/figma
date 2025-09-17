@@ -8,10 +8,10 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { getI18nString, renderI18nText } from "../905/303541";
 import { up } from "../figma_app/692987";
 import { C8 } from "../figma_app/920435";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { lo, wn, Ix } from "../9420/795870";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { getUserIsoCodeIfNonUsd } from "../figma_app/514043";
 import { selectedViewToPath } from "../figma_app/193867";
 let v = withTrackedClick(Button);
@@ -29,7 +29,7 @@ export function $$j0(e) {
     canSeeBillingAddressExp
   } = e;
   let w = useDispatch();
-  let E = _6();
+  let E = getSelectedView();
   let A = useSelector(e => selectedViewToPath(e, E));
   let [I, k] = useState(!1);
   let {
@@ -104,7 +104,7 @@ export function $$j0(e) {
                 });
               },
               trackingProperties: {
-                trackingDescriptor: _$$c.UPDATE_PAYMENT
+                trackingDescriptor: UpgradeAction.UPDATE_PAYMENT
               },
               children: renderI18nText("resubscribe_modal.different_payment_method")
             }), jsx(v, {
@@ -120,7 +120,7 @@ export function $$j0(e) {
                 t();
               },
               trackingProperties: {
-                trackingDescriptor: _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN
+                trackingDescriptor: UpgradeAction.REACTIVATE_YOUR_PROFESSIONAL_PLAN
               },
               children: renderI18nText("resubscribe_modal.reactivate_plan")
             })]

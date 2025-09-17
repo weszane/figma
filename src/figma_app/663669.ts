@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { A } from "../vendor/850789";
+import { useDebouncuse-debouncedor/850789";
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 let $$o0 = "1.2";
 let l = {
@@ -106,7 +106,7 @@ export function $$p4(e, t) {
   });
   let [i, {
     isPending: o
-  }] = A(n, r.noPanningZoomingMs, {
+  }] = useDebounce(n, r.noPanningZoomingMs, {
     equalityFn: (e, t) => e.x === t.x && e.y === t.y && e.width === t.width && e.height === t.height && e.offsetX === t.offsetX && e.offsetY === t.offsetY && e.zoomScale === t.zoomScale
   });
   return {

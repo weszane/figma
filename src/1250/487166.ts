@@ -12,7 +12,7 @@ import { rX, vz, Q5, sJ } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { DP } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
@@ -71,7 +71,7 @@ function O(e) {
           }
         }));
       },
-      ctaTrackingDescriptor: _$$c.UPDATE_LANGUAGE_SETTINGS
+      ctaTrackingDescriptor: UpgradeAction.UPDATE_LANGUAGE_SETTINGS
     },
     media: jsx(oW, {
       width: 332,

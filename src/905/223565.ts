@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { tc } from "../905/15667";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { VG } from "../905/389382";
+import { getProductName } from "../905/389382";
 import { FProductAccessType } from "../figma_app/191312";
 let $$c6 = {
   type: "RequestOrgUpgradeModal"
@@ -22,7 +22,7 @@ export function $$p11(e, t, i, c, u) {
   }
   if (getFeatureFlags().ai_ga && c === tc.PUBLISH_SITES && e === FProductAccessType.FIGMAKE) return renderI18nText("request_upgrade_modal.body.figmake.publish");
   if (getFeatureFlags().ai_ga && c === tc.CODE_CHAT_LIMIT && u === ProductAccessTypeEnum.EXPERT) return renderI18nText("request_upgrade_modal.body.ai_ga.higher_limits", {
-    productName: VG(e)
+    productName: getProductName(e)
   });
   if (t) switch (e) {
     case FProductAccessType.DESIGN:
@@ -239,7 +239,7 @@ export function $$A1(e, t, i, c, u) {
           numDays: 3
         });
         if (c === tc.CODE_CHAT_LIMIT && u === ProductAccessTypeEnum.EXPERT) return renderI18nText("request_upgrade_modal.body.ai_ga.provisional_access.higher_limits", {
-          productName: VG(e),
+          productName: getProductName(e),
           numDays: 3
         });
       }

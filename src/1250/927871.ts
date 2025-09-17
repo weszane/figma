@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -136,7 +136,7 @@ export function $$j0(e) {
     }),
     overrideFooter: jsxs("div", {
       className: "whats_new_v2--ctaRow--8jvr-",
-      children: [jsx(_$$J, {
+      children: [jsx(setupThemeContext, {
         brand: "whiteboard",
         children: jsx($z, {
           onClick: () => {

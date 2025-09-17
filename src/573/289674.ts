@@ -23,7 +23,7 @@ import { getCurrentFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
 import { r as _$$r } from "../905/955316";
-import { Td } from "../figma_app/386952";
+import { getFullscreenFileKey } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { useTeamPlanPublicInfo } from "../figma_app/465071";
 import { JT } from "../figma_app/632248";
@@ -561,7 +561,7 @@ export function $$X0() {
   let e = getFeatureFlags().ai_assistant_server_side_chat ?? !1;
   let t = Xr(mC("0:1"));
   let s = selectCurrentUser();
-  let n = Td();
+  let n = getFullscreenFileKey();
   let o = getCurrentFileType();
   let l = trackDefinedFileEventWithStore();
   let d = useTeamPlanPublicInfo().unwrapOr(null);

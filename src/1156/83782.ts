@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Hg } from "../figma_app/304955";
 import { range } from "../figma_app/492908";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import { g as _$$g } from "../905/687265";
@@ -66,12 +66,12 @@ let B = registerModal(function (e) {
     manager: t,
     width: "lg",
     height: "fixed",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("figmake.ds_imports.library_selector_warning_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl x1xmf6yo x1e56ztr",
           children: [jsxs("div", {
@@ -94,8 +94,8 @@ let B = registerModal(function (e) {
             children: getI18nString("figmake.ds_imports.library_selector_warning_modal.body")
           })]
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             onClick: x,
             children: getI18nString("figmake.ds_imports.library_selector_warning_modal.continue")
@@ -262,12 +262,12 @@ export let $$W0 = registerModal(function (e) {
     width: 332,
     maxHeight: 336,
     onClose: d,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("sites.modal.select_library")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx("div", {
           className: "x78zum5 xdt5ytf xou54vl x2ozue6 xh8yej3 x9f619",

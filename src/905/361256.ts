@@ -53,7 +53,7 @@ import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { ButtonWide, Button } from "../905/521428";
 import { A as _$$A3 } from "../905/920165";
-import { hE, oq, r1, qj, vo, Y9, nB } from "../figma_app/272243";
+import { DialogTitle, DialogBackButton, DialogHiddenTitle, DialogTabStrip, DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/911410";
 import { ScrollContainer } from "../905/143421";
 import { f as _$$f } from "../905/335032";
@@ -962,7 +962,7 @@ let tV = "type_settings_tab_header--parentTab--PaIkC";
 let tG = "type_settings_tab_header--drillInRow--l9OdD";
 let tz = "type_settings_tab_header--separator--9hO5J";
 function tH() {
-  return getFeatureFlags().ce_tv_fpl_type_settings ? jsx(hE, {
+  return getFeatureFlags().ce_tv_fpl_type_settings ? jsx(DialogTitle, {
     children: getI18nString("type_settings.type_settings")
   }) : jsx("div", {
     className: tB,
@@ -985,9 +985,9 @@ function tW({
   });
   let l = e.length > 1;
   let d = getFeatureFlags().ce_tv_fpl_type_settings ? jsxs(Fragment, {
-    children: [jsx(oq, {
+    children: [jsx(DialogBackButton, {
       onClick: s
-    }), jsx(hE, {
+    }), jsx(DialogTitle, {
       children: jsxs("div", {
         className: tG,
         children: [jsx("span", {
@@ -2623,9 +2623,9 @@ function t6(e) {
       }
     };
     let i = getFeatureFlags().ce_tv_fpl_type_settings ? jsxs(Fragment, {
-      children: [jsx(r1, {
+      children: [jsx(DialogHiddenTitle, {
         children: getI18nString("type_settings.type_settings")
-      }), jsx(qj, {
+      }), jsx(DialogTabStrip, {
         manager: e.tabManager,
         children: tX().map(i => jsx(_$$t.Tab, {
           ...e.tabPropsMap[i],
@@ -2726,13 +2726,13 @@ function t6(e) {
     recordingKey: e.recordingKey,
     width: $6,
     defaultPosition: it,
-    children: jsxs(vo, {
+    children: jsxs(DialogContents, {
       style: {
         height: 506
       },
-      children: [jsx(Y9, {
+      children: [jsx(DialogHeader, {
         children: tQ()
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         style: {
           display: "flex",

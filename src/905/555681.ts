@@ -2,11 +2,11 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { ButtonPrimitive } from "../905/632989";
-import { M } from "../905/850310";
+import { useDebouncedValue } from "../905/850310";
 import { useExposedRef } from "../905/581092";
 import { w } from "../905/955293";
 import { h as _$$h } from "../905/994594";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { preventAndStopEvent, preventEvent } from "../905/955878";
 let m = {
   md: void 0,
@@ -31,14 +31,14 @@ let g = forwardRef(({
     });
     d.current.value = "";
   };
-  return jsxs(_$$p.Root, {
+  return jsxs(InputComponent.Root, {
     size: i,
     className: _$$A("search-input__root__BJAlh", h[r]),
     children: [jsx("div", {
       "aria-hidden": !0,
       className: _$$A("search-input__icon__pkEK-", m[i]),
       children: jsx(_$$h, {})
-    }), jsx(_$$p, {
+    }), jsx(InputComponent, {
       ...s,
       ref: d,
       type: "text",
@@ -58,7 +58,7 @@ let g = forwardRef(({
 });
 g.displayName = "SearchInput";
 let f = forwardRef((e, t) => {
-  let i = M(e);
+  let i = useDebouncedValue(e);
   return jsx(g, {
     ...i,
     ref: t

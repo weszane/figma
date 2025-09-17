@@ -21,7 +21,7 @@ import { UK } from "../figma_app/740163";
 import { useCurrentUserOrgId } from "../905/845253";
 import { Xo } from "../figma_app/482495";
 import { F as _$$F2 } from "../905/258517";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { Pd, j5 } from "../figma_app/178475";
@@ -117,7 +117,7 @@ export function $$Q2({
   let V = X7();
   let W = trackDefinedFileEventWithStore();
   let K = useCurrentUserOrgId();
-  let $ = ol()?.id;
+  let $ = getCurrentTeam()?.id;
   let Q = useSelector(e => !!e.eyedropper) || t.preventAutoFocus;
   let et = {
     ...t,

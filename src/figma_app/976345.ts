@@ -27,7 +27,7 @@ import { trackFileBrowserFileClicked, trackUserEvent } from '../figma_app/314264
 import { openInBrowser } from '../figma_app/415217';
 import { isIntegrationContext } from '../figma_app/469876';
 import { setRecentUserData } from '../figma_app/502247';
-import { allViews, UpgradeAction } from '../figma_app/707808';
+import { allViews, CreateUpgradeAction } from '../figma_app/707808';
 import { d9 } from '../figma_app/740025';
 import { UpgradeSteps } from '../figma_app/831101';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -274,7 +274,7 @@ let $$et3 = createOptimistThunk((e, {
   })) {
     e.dispatch(selectViewAction({
       view: 'teamUpgrade',
-      teamFlowType: UpgradeAction.CREATE_AND_UPGRADE,
+      teamFlowType: CreateUpgradeAction.CREATE_AND_UPGRADE,
       teamId: null,
       paymentStep: UpgradeSteps.PLAN_COMPARISON,
       previousView: t,
@@ -285,7 +285,7 @@ let $$et3 = createOptimistThunk((e, {
   }
   o.user && Mk(o.user.id, Object.values(o.teams), o.roles.byTeamId) ? e.dispatch(selectViewAction({
     view: 'teamUpgrade',
-    teamFlowType: UpgradeAction.CREATE,
+    teamFlowType: CreateUpgradeAction.CREATE,
     teamId: null,
     paymentStep: UpgradeSteps.CREATE_TEAM,
     previousView: t,

@@ -8,7 +8,7 @@ import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { lT } from "../figma_app/494261";
 import { GR } from "../figma_app/330108";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { YP, gO } from "../figma_app/88768";
 import { getPermissionsState } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
@@ -22,7 +22,7 @@ export function $$v0(e) {
   let u = useSelector(e => e.teamRoleRequests);
   let p = useSelector(e => e.currentUserOrgId);
   let m = useSelector(e => getPermissionsState(e));
-  let A = _6();
+  let A = getSelectedView();
   let y = useTeamPlanUser();
   let v = useIsOrgAdminUser(y).unwrapOr(!1);
   let x = YP(e.team, u[e.team.id], m, v);

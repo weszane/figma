@@ -121,7 +121,7 @@ import { q as _$$q } from "../905/932270";
 import { X as _$$X } from "../905/606795";
 import { $z } from "../figma_app/617427";
 import { v as _$$v } from "../905/318279";
-import { b as _$$b2, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { J as _$$J3 } from "../905/125993";
 import i$ from "../vendor/946678";
 import { KeyCodes } from "../905/63728";
@@ -2530,16 +2530,16 @@ function ng(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b2();
+  } = setupMenu();
   return jsx(nc, {
-    button: e.archivedBranch ? void 0 : i && (e.reviewer.approved_at || e.reviewer.changes_requested_at) ? jsxs(_$$bL2, {
+    button: e.archivedBranch ? void 0 : i && (e.reviewer.approved_at || e.reviewer.changes_requested_at) ? jsxs(MenuRootComp, {
       manager,
       children: [jsx(IconButton, {
         ...getTriggerProps(),
         "aria-label": getI18nString("collaboration.branching_to_source.more_options_label"),
         children: jsx(_$$J3, {})
-      }), jsx(mc, {
-        children: jsx(q7, {
+      }), jsx(MenuContainerComp, {
+        children: jsx(MenuItemComp, {
           onClick: () => {
             s(!0);
           },
@@ -2981,7 +2981,7 @@ function nv(e) {
   let {
     manager,
     getTriggerProps
-  } = _$$b2();
+  } = setupMenu();
   let d = useRef(null);
   if (!e.mergeRequest || !e.mergeRequest.owner || !e.mergeRequest.requested_at) return null;
   let c = getTriggerProps();
@@ -2992,7 +2992,7 @@ function nv(e) {
       children: [jsx("span", {
         className: nr,
         children: renderI18nText("collaboration.branching_to_source.review_request")
-      }), s && jsxs(_$$bL2, {
+      }), s && jsxs(MenuRootComp, {
         manager,
         children: [jsx("div", {
           className: no,
@@ -3005,8 +3005,8 @@ function nv(e) {
             },
             children: jsx(_$$J3, {})
           })
-        }), jsx(mc, {
-          children: jsx(q7, {
+        }), jsx(MenuContainerComp, {
+          children: jsx(MenuItemComp, {
             onClick: () => {
               i(!0);
             },

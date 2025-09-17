@@ -34,9 +34,9 @@ import { bq, dl as _$$dl, Kn, i0 } from "../figma_app/65182";
 import { D as _$$D2 } from "../905/589275";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { Label } from "../905/270045";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { KindEnum } from "../905/129884";
 import { u as _$$u } from "../905/419626";
 import { useHideContextMenu } from "../figma_app/380814";
@@ -95,7 +95,7 @@ function K({
     propName: t?.propName ?? "Slot",
     propDescription: t?.propDescription ?? ""
   });
-  let [u] = _$$A(o, 50);
+  let [u] = useDebounce(o, 50);
   let p = useMemo(() => u.propName.length > 0, [u.propName]);
   let m = useCallback(e => {
     c(t => ({
@@ -120,7 +120,7 @@ function K({
     className: "x78zum5 xdt5ytf xh8yej3 x167g77z",
     children: [jsx(Y, {
       label: getI18nString("variables.create_modal.name_label"),
-      children: jsx(_$$p, {
+      children: jsx(InputComponent, {
         "aria-label": getI18nString("design_systems.component_properties.name"),
         defaultValue: u.propName,
         autoFocus: !0,

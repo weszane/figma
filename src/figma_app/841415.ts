@@ -9,7 +9,7 @@ import { SecureLink } from "../figma_app/637027";
 import { M } from "../905/649795";
 import { renderI18nText } from "../905/303541";
 import { RK } from "../figma_app/815170";
-import { z3 } from "../figma_app/386952";
+import { getSelectedViewType } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
 import { PositionEnum, KindEnum } from "../905/129884";
@@ -28,7 +28,7 @@ let $$S2 = memo(e => {
     hyperlink
   } = e;
   let s = useMemo(() => x6(text), [text]);
-  let o = z3();
+  let o = getSelectedViewType();
   let l = useDispatch();
   return jsx(SecureLink, {
     "data-tooltip": PositionEnum.HYPERLINK_POPUP,

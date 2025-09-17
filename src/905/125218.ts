@@ -9,7 +9,7 @@ import { reportError } from "../905/11";
 import { startPerformanceSpan, endPerformanceSpan } from "../905/670985";
 import { getTrackingSessionId, incrementSessionCounter } from "../905/471229";
 import { setLoadID, resetReconnectCounter, getReconnectId } from "../figma_app/314264";
-import { ds } from "../905/87821";
+import { getRandomString } from "../905/87821";
 import { dd, PH } from "../905/550523";
 class f {
   constructor(e) {
@@ -67,7 +67,7 @@ let $$y1 = new class {
       trackEventAnalytics("Fullscreen File Abandon", {
         fileKey: this.fileKey,
         loadID: this.loadID(),
-        randomID: ds(),
+        randomID: getRandomString(),
         fileOpenIndex: this.fileOpenIndex,
         abandonTime: e,
         fullLoadTime: this.timeEvents.fullLoadTime,
@@ -84,7 +84,7 @@ let $$y1 = new class {
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
       trackEventAnalytics("Fullscreen Loading Lost Focus", {
         fileKey: this.fileKey,
-        randomID: ds(),
+        randomID: getRandomString(),
         fileOpenIndex: this.fileOpenIndex,
         focusLostTime: e,
         fullLoadTime: this.timeEvents.fullLoadTime,
@@ -98,7 +98,7 @@ let $$y1 = new class {
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
       trackEventAnalytics("Fullscreen Loading Gained Focus", {
         fileKey: this.fileKey,
-        randomID: ds(),
+        randomID: getRandomString(),
         fileOpenIndex: this.fileOpenIndex,
         focusedTime: e,
         fullLoadTime: this.timeEvents.fullLoadTime,
@@ -372,7 +372,7 @@ let $$y1 = new class {
         teamId: this.teamId,
         orgId: this.orgId,
         productType: t,
-        randomID: ds(),
+        randomID: getRandomString(),
         isVisibleLoad: this.isVisibleLoad,
         fileOpenIndex: this.fileOpenIndex,
         wsUrl: this.wsUrl,

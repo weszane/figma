@@ -5,7 +5,7 @@ import s from "classnames";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { Ai } from "../figma_app/242339";
 import { CR, NJ } from "../figma_app/419216";
@@ -56,14 +56,14 @@ function y(e) {
         children: [e.lowerLeftText, jsx(Spacer, {}), e.onSecondaryCtaClick && jsx($z, {
           onClick: e.onSecondaryCtaClick,
           trackingProperties: {
-            ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || _$$c.BACK
+            ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.BACK
           },
           variant: "secondary",
           children: e.secondaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.back")
         }), e.onPrimaryCtaClick && jsx($z, {
           onClick: e.onPrimaryCtaClick,
           trackingProperties: {
-            ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || _$$c.NEXT
+            ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || UpgradeAction.NEXT
           },
           variant: "primary",
           children: e.primaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.next")

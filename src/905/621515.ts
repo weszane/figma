@@ -5,7 +5,7 @@ import { a as _$$a, D as _$$D2 } from "../905/12032";
 import { Z3, FQ, Oi, oE } from "../905/953718";
 import { getLaunchDarklyFlagsExport, getInitialOptions, isDevEnvironment } from "../figma_app/169182";
 import { y as _$$y, t as _$$t } from "../905/958284";
-import { OC, yF, AN } from "../figma_app/386952";
+import { selectedViewAtom, modalTypeAtom, notificationTypeAtom } from "../figma_app/386952";
 import { NT } from "../figma_app/579169";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { trackEventAnalytics } from "../905/449184";
@@ -81,9 +81,9 @@ let R = new _$$m("DenyInKillSwitch", "Don't show any overlays that belong to the
   return !n || !(n instanceof Array) || !n.includes(i);
 });
 let O = atom(e => {
-  let t = e(OC);
-  let i = e(yF);
-  let n = e(AN);
+  let t = e(selectedViewAtom);
+  let i = e(modalTypeAtom);
+  let n = e(notificationTypeAtom);
   let r = e(NT);
   let a = e(_$$a);
   let o = "string" == typeof r || void 0 === r ? r : "loaded" === r.status ? r.data : void 0;

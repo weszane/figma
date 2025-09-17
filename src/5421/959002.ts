@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect } from "react";
-import { q7, bL, mc, b as _$$b } from "../figma_app/860955";
+import { MenuItemComp, MenuRootComp, MenuContainerComp, setupMenu } from "../figma_app/860955";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -27,7 +27,7 @@ var v = b;
 function E({
   path: e
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: () => {
       permissionScopeHandler.user("create-new-code-file", () => {
         let t;
@@ -48,7 +48,7 @@ function E({
 function j({
   path: e
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: () => {
       navigator.clipboard.writeText(e);
     },
@@ -59,7 +59,7 @@ function N({
   node: e,
   disabled: t
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: () => {
       permissionScopeHandler.user("delete-code-file", () => {
         Fullscreen?.deleteCodeFile(e.guid);
@@ -79,7 +79,7 @@ function T(e) {
 function $$S({
   fileOrFolder: e
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: () => {
       let {
         name,
@@ -130,7 +130,7 @@ function A({
   handleRename: e,
   disabled: t
 }) {
-  return jsx(q7, {
+  return jsx(MenuItemComp, {
     onClick: e,
     htmlAttributes: {
       onPointerUp: e => e.preventDefault()
@@ -146,9 +146,9 @@ function k({
 }) {
   let i = getSingletonSceneGraph().get(t.guid);
   let l = Q();
-  return jsx(bL, {
+  return jsx(MenuRootComp, {
     manager: e,
-    children: jsxs(mc, {
+    children: jsxs(MenuContainerComp, {
       children: [jsx(j, {
         path: t.codeFilePath ? t.codeFilePath + "/" + t.name : t.name
       }), jsx($$S, {
@@ -213,7 +213,7 @@ function O({
   let {
     getContextMenuTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let [v, I] = useState(!1);
   let C = getSingletonSceneGraph().get(t.guid);
   return jsxs("button", {
@@ -266,9 +266,9 @@ function V({
   folder: t,
   rootPath: n
 }) {
-  return jsx(bL, {
+  return jsx(MenuRootComp, {
     manager: e,
-    children: jsxs(mc, {
+    children: jsxs(MenuContainerComp, {
       children: [jsx(E, {
         path: (n ? n + "/" : "") + t.path.slice(1)
       }), jsx(j, {
@@ -310,7 +310,7 @@ function H({
   let {
     getContextMenuTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let x = useMemo(() => w_([...t.children]), [t.children]);
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x195vfkc xkh2ocl",
@@ -372,9 +372,9 @@ function U({
   rootPath: t,
   codeProject: n
 }) {
-  return jsx(bL, {
+  return jsx(MenuRootComp, {
     manager: e,
-    children: jsxs(mc, {
+    children: jsxs(MenuContainerComp, {
       children: [jsx(E, {
         path: t
       }), jsx($$S, {
@@ -391,7 +391,7 @@ export function $$F0({
   let {
     getContextMenuTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let m = Fk((e, n) => Ns(e, n, t?.belongsToCodeLibrary?.guid), n);
   let [x, g] = useAtomValueAndSetter(wy);
   let y = useCallback(e => {

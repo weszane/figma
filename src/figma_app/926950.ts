@@ -40,7 +40,7 @@ import { lW } from '../figma_app/11182';
 import { atom, useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
 import { getInitialOptions } from '../figma_app/169182';
-import { _6 } from '../figma_app/386952';
+import { getSelectedView } from '../figma_app/386952';
 import { ButtonBaseReversedContainer, BigTextInputForwardRef } from '../figma_app/637027';
 import { generateRecordingKey, useHandleChangeEvent, useHandleFocusEvent, useHandleKeyboardEvent, useHandleMouseEvent, useSetupPlayback } from '../figma_app/878298';
 import { A as _$$A6 } from '../svg/237029';
@@ -152,7 +152,7 @@ function eu({
 }) {
   let x = useSelector(e => e.multiplayer.allUsers.length);
   let N = useSelector(e => e.user?.id);
-  let R = _6();
+  let R = getSelectedView();
   let D = useDispatch();
   let {
     windowInnerHeight

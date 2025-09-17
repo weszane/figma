@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { ButtonLarge } from "../905/521428";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -120,7 +120,7 @@ function B({
       manager: U,
       width: "fit-content",
       height: "fixed",
-      children: jsx(Wk, {
+      children: jsx(DialogCustomContents, {
         children: jsxs("div", {
           className: "job_title_prompt_overlay--container--Chyt7",
           children: [jsxs("div", {

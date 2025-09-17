@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { b, bL, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { customHistory } from "../905/612521";
 import { v$ } from "../figma_app/455722";
 import { gM } from "../5430/823351";
@@ -35,17 +35,17 @@ export function $$x0({
   let {
     getTriggerProps,
     manager
-  } = b();
+  } = setupMenu();
   let f = useRouteStateInstance(ResourceHubCategoryRoute);
   let y = v$();
   let g = e === gM.CATEGORY ? f : e === gM.SEARCH ? y : null;
-  return g || _ ? jsxs(bL, {
+  return g || _ ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(h, {
       text: r ? d.find(e => e.key === r)?.label ?? t : t,
       getTriggerProps
-    }), jsx(mc, {
-      children: d.map(e => jsx(q7, {
+    }), jsx(MenuContainerComp, {
+      children: d.map(e => jsx(MenuItemComp, {
         onClick: () => {
           _ ? _(e.key) : g && customHistory.replace(g.copyWith({}, u(e.key)).href);
           m && m(e.key, r);

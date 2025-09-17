@@ -1,4 +1,5 @@
-import type { Dispatch } from 'redux'
+import type { Action, Dispatch } from 'redux'
+import type { ThunkAction, ThunkActionDispatch, ThunkDispatch } from 'redux-thunk'
 import { BEGIN } from 'redux-optimist'
 import { createActionCreator, createOptimistAction as createOptimistActionUtil, generateUniqueType } from '../905/73481'
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456'
@@ -12,7 +13,7 @@ const thunkTestAction = createActionCreator('_THUNK_FOR_TEST_')
  * Context passed to thunk handler in createOptimistThunk
  * @originalName context
  */
-export interface OptimistThunkContext {
+export interface OptimistThunkContext<State, Extra, BasicAction extends Action> {
   /**
    * 支持 dispatch action 或 thunk（函数）
    * @originalName dispatch
@@ -21,14 +22,15 @@ export interface OptimistThunkContext {
    * 支持 dispatch action 或 thunk（函数）
    * @originalName dispatch
    */
-  dispatch: <T = any>(action: any) => T
-  getState: () => any
+  dispatch: ThunkDispatch<State, Extra, BasicAction>
+  getState: () => State
   optimisticDispatch: (action: { type: string, payload?: any }) => {
     optimistId: number | string
     revert: () => void
     commit: () => void
   }
 }
+interface ExtraArg { loadingKey: string, [key: string]: any }
 
 /**
  * Generates an optimist thunk action creator.
@@ -38,11 +40,11 @@ export interface OptimistThunkContext {
  * @returns An optimist thunk action creator with loading key support.
  * @originalName $$l1
  */
-export function createOptimistThunk<P = any, R = any>(
+export function createOptimistThunk<S = any, P = any, Extra extends ExtraArg = any, R = any>(
   handler: (
-    context: OptimistThunkContext,
+    context: OptimistThunkContext<S, Extra, any>,
     payload: P,
-    extra?: Record<string, any>
+    extra?: Extra,
   ) => R,
   loadingKeySelector?: (payload: P) => string,
 ) {
@@ -56,7 +58,7 @@ export function createOptimistThunk<P = any, R = any>(
   const optimistThunkAction = (payload?: P) => {
     const loadingKey = getLoadingKey(payload)
 
-    return (dispatch: OptimistThunkContext['dispatch'], getState: () => any, extra?: Record<string, any>) => {
+    const res: ThunkAction<R, S, Extra, any> = (dispatch, getState, extra?: Extra) => {
       // For testing: dispatch a test action if getFalseValue() returns true
       if (getFalseValue()) {
         dispatch(thunkTestAction({
@@ -93,6 +95,7 @@ export function createOptimistThunk<P = any, R = any>(
         },
       )
     }
+    return res
   }
 
   // Attach loading key selector for payloads

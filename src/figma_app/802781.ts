@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { bL, mc as _$$mc, c$ } from "../905/493196";
 import { v as _$$v } from "../905/213481";
-import { b as _$$b, bL as _$$bL, mc as _$$mc2, YJ, hE } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp } from "../figma_app/860955";
 import { H_ } from "../905/963340";
 import { O } from "../905/969533";
 import { trackEventAnalytics } from "../905/449184";
@@ -328,7 +328,7 @@ export function $$M6(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let y = (e, r) => {
     trackEventAnalytics("Sort Changed - Dropdown", {
       oldValueString: `${options.tileSortFilterConfig.sort.key}`,
@@ -337,7 +337,7 @@ export function $$M6(e) {
     });
     _(e, r);
   };
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$v, {
       trailing: jsx(O, {}),
@@ -345,9 +345,9 @@ export function $$M6(e) {
       children: jsx("span", {
         children: m[options.tileSortFilterConfig.sort.key]
       })
-    }), jsxs(_$$mc2, {
-      children: [options.sortKeys.length > 1 && jsx(YJ, {
-        title: jsx(hE, {
+    }), jsxs(MenuContainerComp, {
+      children: [options.sortKeys.length > 1 && jsx(MenuGroupComp, {
+        title: jsx(MenuTitleComp, {
           children: getI18nString("tile.sort_filter.sort_by_label")
         }),
         children: options.sortKeys.map(e => jsx(H_, {
@@ -355,8 +355,8 @@ export function $$M6(e) {
           checked: e === options.tileSortFilterConfig.sort.key,
           children: m[e]
         }, `sort-filter-label-${e}`))
-      }, "sort-filter-label"), jsx(YJ, {
-        title: jsx(hE, {
+      }, "sort-filter-label"), jsx(MenuGroupComp, {
+        title: jsx(MenuTitleComp, {
           children: getI18nString("tile.sort_filter.order_label")
         }),
         children: $$C2.sortOptions.map((e, r) => jsx(H_, {

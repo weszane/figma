@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { wv, hE, g8, ZP, Q$, MJ, q7, b as _$$b, bL, mc } from "../figma_app/860955";
+import { MenuSeparator, MenuTitleComp, MenuSubMenu, MenuSubTrigger, MenuItemLead, MenuSubContainerComp, MenuItemComp, setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { MenuItemPrimitive } from "../905/465888";
 import { HiddenLabel } from "../905/270045";
 import { l as _$$l } from "../905/479687";
@@ -96,13 +96,13 @@ export function $$v3({
     activatePathOnMount: "local-plugin" !== codeLanguage.type ? [formatter.format(codeLanguage)] : codeLanguageOptions[0] ? [codeLanguageOptions[0].displayText] : void 0
   });
 }
-let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? jsx(hE, {
+let A = (e, t, r) => e.separator ? jsx(MenuSeparator, {}, `${t}_separator`) : e.header ? jsx(MenuTitleComp, {
   children: e.displayText
-}) : e.children ? jsxs(g8, {
-  children: [jsxs(ZP, {
+}) : e.children ? jsxs(MenuSubMenu, {
+  children: [jsxs(MenuSubTrigger, {
     hasChecked: e.isChildChecked || e.isChecked || !1,
     recordingKey: generateRecordingKey(r, e?.recordingKey ?? ""),
-    children: [e.icon && jsx(Q$, {
+    children: [e.icon && jsx(MenuItemLead, {
       children: e.icon
     }), jsx("div", {
       className: _d,
@@ -110,13 +110,13 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
         children: e.displayText
       })
     })]
-  }), jsx(MJ, {
+  }), jsx(MenuSubContainerComp, {
     children: e.children.map(e => A(e, `${t}-${e.name}`, r))
   })]
-}, t) : void 0 === e.isChecked ? jsxs(q7, {
+}, t) : void 0 === e.isChecked ? jsxs(MenuItemComp, {
   onClick: e.callback,
   recordingKey: generateRecordingKey(r, e?.recordingKey ?? ""),
-  children: [e.icon && jsx(Q$, {
+  children: [e.icon && jsx(MenuItemLead, {
     children: e.icon
   }), jsx("div", {
     className: _d,
@@ -134,7 +134,7 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
     children: [jsx(_$$l, {
       className: aC,
       "aria-hidden": !0
-    }), e.icon && jsx(Q$, {
+    }), e.icon && jsx(MenuItemLead, {
       children: e.icon
     }), jsx("div", {
       className: _d,
@@ -156,7 +156,7 @@ export function $$x2({
   let {
     manager,
     getTriggerProps
-  } = _$$b();
+  } = setupMenu();
   let g = useId();
   let E = useDispatch();
   useEffect(() => E(aq()), [E]);
@@ -164,7 +164,7 @@ export function $$x2({
   let b = y ? getI18nString("dev_handoff.code.language_named", {
     codeLanguage: y
   }) : getI18nString("dev_handoff.code.language");
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(HiddenLabel, {
       htmlFor: e,
@@ -181,7 +181,7 @@ export function $$x2({
       disabled: d,
       "aria-label": b,
       children: y ?? getI18nString("dev_handoff.code.language")
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: t.map(e => A(e, e.name, "preferencesDropdown"))
     })]
   });
@@ -197,7 +197,7 @@ export function $$N4({
   let {
     manager,
     getTriggerProps
-  } = _$$b();
+  } = setupMenu();
   let m = useId();
   let g = useDispatch();
   useEffect(() => g(aq()), [g]);
@@ -205,7 +205,7 @@ export function $$N4({
   let y = E ? getI18nString("dev_handoff.code.settings.language_dropdown_with_unit", {
     unit: E
   }) : getI18nString("dev_handoff.code.options");
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(HiddenLabel, {
       htmlFor: e,
@@ -221,7 +221,7 @@ export function $$N4({
       },
       disabled: c,
       children: E ?? getI18nString("dev_handoff.code.options")
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: t.map(e => A(e, e.name, "preferencesDropdown"))
     })]
   });

@@ -22,7 +22,7 @@ import { e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
 import { ce, Lm, U_, mF } from "../figma_app/755939";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { KindEnum } from "../905/129884";
 import { zA, o6, VU } from "../1250/322393";
@@ -483,7 +483,7 @@ function en({
       })
     },
     trackingProperties: {
-      trackingDescriptor: _$$c.TEMPLATE_COVER_TILE
+      trackingDescriptor: UpgradeAction.TEMPLATE_COVER_TILE
     },
     children: [i && jsx(ea, {
       variant: "add",

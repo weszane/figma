@@ -33,7 +33,7 @@ import { V1 } from "../figma_app/834392";
 import { A as _$$A } from "../905/79603";
 import { DF } from "../figma_app/146384";
 import { getProjectUrl } from "../figma_app/528509";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 export let $$n6;
 var _ = p;
 let I = "CONNECTED_PROJECTS_FILE_EDITOR_ONBOARDING_KEY";
@@ -198,7 +198,7 @@ export function $$q4({
   let n = r.length > 25 ? r : void 0;
   let o = function () {
     let e = useSelector(selectOpenFile);
-    let t = FC();
+    let t = selectPermissionsState();
     let r = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
     return useMemo(() => {
       let n = !!e?.project;

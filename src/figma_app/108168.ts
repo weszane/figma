@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useId } from "react";
 import { useSelector } from "react-redux";
-import { b as _$$b, bL, mc, r1, Q$, Ov, rm } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp, MenuItemLead, MenuItemTrail, MenuShortcut } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/428849";
@@ -89,7 +89,7 @@ export function $$B1(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let E = useCallback(() => {
     u(null);
   }, []);
@@ -128,7 +128,7 @@ export function $$B1(e) {
       HK(t) || e.set(t.action, t);
     });
     let i = item.flyoutShowItemIcons || void 0 === item.flyoutShowItemIcons;
-    return jsxs(bL, {
+    return jsxs(MenuRootComp, {
       manager,
       children: [jsx(V, {
         item,
@@ -138,9 +138,9 @@ export function $$B1(e) {
         recordingKey,
         styleActiveItem,
         getTriggerProps
-      }), jsx(mc, {
+      }), jsx(MenuContainerComp, {
         children: jsx(z6, {
-          title: jsx(r1, {
+          title: jsx(MenuHiddenTitleComp, {
             children: item.name
           }),
           value: I.action,
@@ -185,10 +185,10 @@ function G(e) {
   } = z(item, showItemIcon);
   return jsxs(CU, {
     value: item.action,
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: icons && icons.ui3FlyoutIcon
-    }), text, jsx(Ov, {
-      children: jsx(rm, {
+    }), text, jsx(MenuItemTrail, {
+      children: jsx(MenuShortcut, {
         children: shortcutText
       })
     })]

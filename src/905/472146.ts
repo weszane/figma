@@ -1,5 +1,5 @@
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { FPlanNameType } from "../figma_app/191312";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
@@ -67,7 +67,7 @@ let _ = {
   hasAnnualOnlyMessage: !1,
   highlightBadgeText: $$f8.MOST_POPULAR,
   canContactSales: !1,
-  trackingDescriptor: _$$c.UPGRADE_TO_PROFESSIONAL
+  trackingDescriptor: UpgradeAction.UPGRADE_TO_PROFESSIONAL
 };
 let $$A10 = {
   [FPlanNameType.STARTER]: {
@@ -88,7 +88,7 @@ let $$A10 = {
     highlightBadgeText: e => $$f8[e](),
     canContactSales: !0,
     hasAnnualOnlyMessage: !0,
-    trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION
+    trackingDescriptor: UpgradeAction.UPGRADE_TO_ORGANIZATION
   },
   [FPlanNameType.ENTERPRISE]: {
     name: () => getI18nString("plan_details.enterprise"),
@@ -96,12 +96,12 @@ let $$A10 = {
     buttonText: () => getI18nString("plan_comparison.plans.ent.choose_button"),
     canContactSales: !1,
     hasAnnualOnlyMessage: !0,
-    trackingDescriptor: _$$c.CONTACT_SALES
+    trackingDescriptor: UpgradeAction.CONTACT_SALES
   },
   [FPlanNameType.STUDENT]: {
     ..._,
     additionalMessage: () => getI18nString("plan_details.free_for_students_and_educators"),
-    trackingDescriptor: _$$c.UPGRADE_TO_EDUCATION
+    trackingDescriptor: UpgradeAction.UPGRADE_TO_EDUCATION
   }
 };
 let $$y11 = [FPlanNameType.STARTER, FPlanNameType.PRO, FPlanNameType.ORG];

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useState, useRef } from "react";
 import { ButtonWide } from "../905/521428";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/749682";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -83,7 +83,7 @@ export function $$f0(e) {
       "aria-labelledby": S,
       children: [tileOverlayResource && jsx(Mr, {
         resource: tileOverlayResource
-      }), jsx(J, {
+      }), jsx(setupThemeContext, {
         mode: dark ? "dark" : "light",
         children: jsx("img", {
           className: l()("publish_file_resource_modal_card--publishFileResourceModalCardThumbnail--6dVq9", {
@@ -97,7 +97,7 @@ export function $$f0(e) {
           },
           crossOrigin: "anonymous"
         })
-      }), (enableRestore || R) && jsx(J, {
+      }), (enableRestore || R) && jsx(setupThemeContext, {
         mode: dark ? "dark" : "light",
         children: jsxs("div", {
           className: l()("publish_file_resource_modal_card--publishFileResourceModalCardThumbnailCTA--NJyB0", {

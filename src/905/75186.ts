@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
@@ -42,12 +42,12 @@ let $$A0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("help_widget.menu.set_commit_sha")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         htmlAttributes: {
           "data-testid": "set-commit-sha-modal"
         },
@@ -75,8 +75,8 @@ let $$A0 = registerModal(function (e) {
           onKeyDown: S,
           "data-testid": "set-feature-flags-input"
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "primary",
             onClick: x,

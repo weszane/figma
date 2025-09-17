@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { A as _$$A } from "../vendor/21595";
@@ -110,11 +110,11 @@ export let $$w2 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: I,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: getI18nString("dev_handoff.alternative_units.unit_settings_modal_title")
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx("div", {
             className: DT,
             children: jsx(ls, {
@@ -123,7 +123,7 @@ export let $$w2 = registerModal(function (e) {
             })
           })
         })]
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [x ? jsxs("div", {
           className: iF,
           children: [jsx($$N1, {

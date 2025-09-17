@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { D } from "../905/412108";
+import { convertSinatraModel } from "../905/412108";
 let o = z.object({
   id: z.string(),
   name: z.string().nullable(),
@@ -13,7 +13,7 @@ let o = z.object({
 });
 let $$l0 = new class {
   constructor() {
-    this.ColorPaletteSchemaValidator = createMetaValidator("ColorPaletteSchemaValidator", D(o), null);
+    this.ColorPaletteSchemaValidator = createMetaValidator("ColorPaletteSchemaValidator", convertSinatraModel(o), null);
   }
   createColorPalette(e) {
     return this.ColorPaletteSchemaValidator.validate(async ({

@@ -3,7 +3,7 @@ import { useCallback, useState, useRef, useMemo, useEffect } from "react";
 import { xw, TU } from "../905/585727";
 import { y1 } from "../905/869092";
 import { lQ } from "../905/934246";
-import { b as _$$b, bL, mc, hE, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp, MenuItemComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { bL as _$$bL, c$ } from "../905/575478";
@@ -95,7 +95,7 @@ export function $$ec2({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let h = useCallback(async t => {
     let r = t.target.files;
     if (!r || 0 === r.length) return;
@@ -117,7 +117,7 @@ export function $$ec2({
     disabled: t,
     children: jsx(_$$s, {})
   });
-  let g = jsxs(bL, {
+  let g = jsxs(MenuRootComp, {
     manager,
     children: [jsx("div", {
       className: "x19y5rnk x1q3zegg",
@@ -129,14 +129,14 @@ export function $$ec2({
         disabled: t,
         children: jsx(_$$s, {})
       })
-    }), jsxs(mc, {
-      children: [jsx(hE, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsx(MenuTitleComp, {
         children: getI18nString("image_ai.edit_image.attach_reference_image")
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: () => e.current?.click(),
         disabled: t,
         children: getI18nString("image_ai.edit_image.upload_image")
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: lQ,
         disabled: t,
         children: getI18nString("image_ai.edit_image.select_from_canvas")

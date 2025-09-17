@@ -10,7 +10,7 @@ import { t as _$$t } from "../905/331623";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { Q } from "../905/346809";
 import { nV, fI, hl } from "../figma_app/626177";
@@ -73,7 +73,7 @@ class T extends RecordingPureComponent {
               "aria-label": getI18nString("fullscreen.properties_panel.hint_panel.close"),
               recordingKey: generateRecordingKey(this.props.recordingKey, "x"),
               trackingProperties: {
-                trackingDescriptor: _$$c.CLOSE_BUTTON,
+                trackingDescriptor: UpgradeAction.CLOSE_BUTTON,
                 ...e
               },
               children: jsx(A, {})

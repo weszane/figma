@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { selectWithShallowEqual } from "../905/103090";
 import { linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -40,8 +40,8 @@ export function $$$$P1(e) {
   return jsx(ModalRootComponent, {
     manager: i,
     width: "fit-content",
-    children: jsx(vo, {
-      children: jsx(nB, {
+    children: jsx(DialogContents, {
+      children: jsx(DialogBody, {
         children: jsx($$D0, {
           ...e
         })

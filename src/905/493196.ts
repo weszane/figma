@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { useTheme } from "../905/289770";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
-import { S as _$$S } from "../figma_app/215667";
+import { useDarkContext } from "../figma_app/215667";
 import { Description } from "../905/21985";
 import { generateInputId } from "../905/786321";
 import { useSelectionProvider } from "../905/751750";
@@ -60,7 +60,7 @@ export let $$U0 = forwardRef(({
   children: e,
   ...t
 }, i) => {
-  let n = _$$S();
+  let n = useDarkContext();
   let {
     color
   } = useTheme();
@@ -68,7 +68,7 @@ export let $$U0 = forwardRef(({
     className: _$$A(w, "light" === ("dark" === n ? "dark" : color) ? S : E),
     ...t,
     ref: i,
-    children: jsxs(J, {
+    children: jsxs(setupThemeContext, {
       mode: "dark" === n ? "dark" : void 0,
       children: [e, jsx(SelectPrimitiveScrollArrow, {
         className: D,

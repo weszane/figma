@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, memo, useMemo, useCallback, Fragment as _$$Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { YJ, hE, Ov, rm, g8, MJ, r1, mc, b as _$$b, bL } from "../figma_app/860955";
+import { MenuGroupComp, MenuTitleComp, MenuItemTrail, MenuShortcut, MenuSubMenu, MenuSubContainerComp, MenuHiddenTitleComp, MenuContainerComp, setupMenu, MenuRootComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/969533";
 import { getFeatureFlags } from "../905/601108";
@@ -88,7 +88,7 @@ import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/300562";
 import { T0, gV, t$ } from "../figma_app/863319";
 import { getProjectUrl } from "../figma_app/528509";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
@@ -153,8 +153,8 @@ function em(e, t) {
     header: "",
     items: []
   }, i.push(n)) : gN(t) ? n.header = t.name : n.items.push(t);
-  return 1 === i.length || i.every(e => !e.header) ? e.map(e => ef(e, t)) : i.map(e => jsx(YJ, {
-    title: jsx(hE, {
+  return 1 === i.length || i.every(e => !e.header) ? e.map(e => ef(e, t)) : i.map(e => jsx(MenuGroupComp, {
+    title: jsx(MenuTitleComp, {
       children: e.header
     }),
     children: e.items.map(e => ef(e, t))
@@ -168,18 +168,18 @@ function ef(e, t) {
   return _o(e) ? jsxs(Pu, {
     onClick: () => e.callback?.(e.action, {}, t.dispatch),
     recordingKey: e.recordingKey || e.action || e.name,
-    children: [(TV(e) || _o(e)) && e.displayText || formatI18nMessage(n, e.args), e.rightIcon && jsx(Ov, {
+    children: [(TV(e) || _o(e)) && e.displayText || formatI18nMessage(n, e.args), e.rightIcon && jsx(MenuItemTrail, {
       children: e.rightIcon
-    }), e.rightText && jsx(Ov, {
+    }), e.rightText && jsx(MenuItemTrail, {
       children: e.rightText
-    }), e.shortcutText && jsx(rm, {
+    }), e.shortcutText && jsx(MenuShortcut, {
       children: e.shortcutText
     })]
-  }, e.name) : TV(e) && e.children ? jsxs(g8, {
+  }, e.name) : TV(e) && e.children ? jsxs(MenuSubMenu, {
     children: [jsx(Qq, {
       recordingKey: e.childDropdown && e.childDropdown.recordingKey || e.name,
       children: e.displayText
-    }), jsx(MJ, {
+    }), jsx(MenuSubContainerComp, {
       children: em(e.children, t)
     })]
   }, e.name) : null;
@@ -197,13 +197,13 @@ let eI = memo(function () {
     value: ColorProfileEnum.DISPLAY_P3,
     label: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
   }].sort((t, i) => t.value === e && i.value !== e ? -1 : t.value !== e && i.value === e ? 1 : 0);
-  return jsx(YJ, {
-    children: jsxs(g8, {
+  return jsx(MenuGroupComp, {
+    children: jsxs(MenuSubMenu, {
       children: [jsx(Qq, {
         children: getI18nString("fullscreen.filename_view.color_management.file_color_profile")
-      }), jsx(MJ, {
+      }), jsx(MenuSubContainerComp, {
         children: jsxs(z6, {
-          title: jsx(r1, {
+          title: jsx(MenuHiddenTitleComp, {
             children: getI18nString("fullscreen.filename_view.color_management.file_color_profile")
           }),
           value: ColorProfileEnum[e],
@@ -296,7 +296,7 @@ let e6 = memo(function () {
   if (e9 || !o) return null;
   let b = !x && !!p && !(h && !d);
   let C = "loaded" === y.status && y.data && u;
-  return b || C ? jsxs(YJ, {
+  return b || C ? jsxs(MenuGroupComp, {
     children: [b && jsx(e7, {
       isFavorited: d,
       favoriteSection: _,
@@ -336,10 +336,10 @@ let e7 = memo(function ({
   let l = getI18nString("favorited_resources.add_to_sidebar");
   e && (l = `${getI18nString("favorited_resources.indicate_section_prefix")}: ${t?.name || getI18nString("sidebar.starred")}`);
   return jsxs(Fragment, {
-    children: [jsxs(g8, {
+    children: [jsxs(MenuSubMenu, {
       children: [jsx(Qq, {
         children: l
-      }), jsx(MJ, {
+      }), jsx(MenuSubContainerComp, {
         children: jsxs(z6, {
           title: jsx(HiddenLabel, {
             children: l
@@ -540,7 +540,7 @@ let ti = memo(function ({
     }(),
     projectUrl: function () {
       let e = selectCurrentFile();
-      let t = FC();
+      let t = selectPermissionsState();
       let i = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
       return useMemo(() => {
         if (!e) return;
@@ -742,7 +742,7 @@ let ti = memo(function ({
       ...ty,
       slideConversionDropdownEntrypoint: th
     },
-    children: jsx(mc, {
+    children: jsx(MenuContainerComp, {
       children: jsxs(EventShield, {
         eventListeners: ["onPointerEnter", "onPointerLeave", "onMouseEnter", "onMouseLeave"],
         children: [tU.map((e, t) => jsx(_$$Fragment, {
@@ -754,7 +754,7 @@ let ti = memo(function ({
           recordingKey: generateRecordingKey(e, "toggleVersionHistory"),
           onClick: toggleVersionHistory,
           children: Ah(t.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show")
-        }), jsxs(YJ, {
+        }), jsxs(MenuGroupComp, {
           children: [!!tf && Z5({
             dispatch: _,
             fileKey: tf?.fileKey || "",
@@ -773,10 +773,10 @@ let ti = memo(function ({
             fileNeedsMovingBeforePublish: tx,
             source: "filename-context-menu"
           }), tC && jsx(Fragment, {
-            children: tv ? jsxs(g8, {
+            children: tv ? jsxs(MenuSubMenu, {
               children: [jsx(Qq, {
                 children: getI18nString("fullscreen.filename_view.library_actions")
-              }), jsxs(MJ, {
+              }), jsxs(MenuSubContainerComp, {
                 children: [tE, tT, tw]
               })]
             }) : jsxs(Fragment, {
@@ -790,8 +790,8 @@ let ti = memo(function ({
                 source: "toolbar"
               });
             },
-            children: [getI18nString("fullscreen.filename_view.export"), jsx(Ov, {
-              children: jsx(rm, {
+            children: [getI18nString("fullscreen.filename_view.export"), jsx(MenuItemTrail, {
+              children: jsx(MenuShortcut, {
                 children: c1(t.keyboardShortcuts, "export-selected-exportables")
               })
             })]
@@ -808,11 +808,11 @@ let ti = memo(function ({
             disabled: !eK,
             children: getI18nString("slides.general.copy_current_page_to_figma_slides")
           })]
-        }), jsx(e6, {}), !tA && tG.length > 0 && jsx(YJ, {
+        }), jsx(e6, {}), !tA && tG.length > 0 && jsx(MenuGroupComp, {
           children: tG.map((e, t) => jsx(_$$Fragment, {
             children: e
           }, `branching-group-${t}`))
-        }), tB && jsx(eI, {}), jsxs(YJ, {
+        }), tB && jsx(eI, {}), jsxs(MenuGroupComp, {
           children: [g && !tt && !tP && (!getFeatureFlags().filter_pro_plus_sites_make_web || tb.canDuplicate) && jsx(Pu, {
             disabled: !l || tk,
             recordingKey: generateRecordingKey(e, "duplicate"),
@@ -841,7 +841,7 @@ let ti = memo(function ({
             "data-onboarding-key": "FILENAME_VIEW_MOVE_TO_PROJECT",
             recordingKey: generateRecordingKey(e, "moveToProject"),
             onClick: RG(_, c, m, tn),
-            children: [getI18nString("fullscreen.filename_view.move_file"), ts && jsx(Ov, {
+            children: [getI18nString("fullscreen.filename_view.move_file"), ts && jsx(MenuItemTrail, {
               children: zS(ti, tc, tr)
             })]
           }), g && !tt && !tD && !tP && userCanTrashFile && jsx(Pu, {
@@ -854,7 +854,7 @@ let ti = memo(function ({
             onClick: deleteBranch,
             children: tA ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash")
           })]
-        }), !!tF && jsx(YJ, {
+        }), !!tF && jsx(MenuGroupComp, {
           children: jsx(Pu, {
             recordingKey: generateRecordingKey(e, "resetFileThumbnail"),
             onClick: resetFileThumbnail,
@@ -876,7 +876,7 @@ export function $$tr0(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let k = getTriggerProps();
   let N = getFeatureFlags().eu_filename_dropdown;
   return useMemo(() => v ? null : jsx("div", {
@@ -894,7 +894,7 @@ export function $$tr0(e) {
       children: [isZoomIntegration() && jsx(S, {
         isUI3: !0,
         targetKey: O0
-      }), N ? jsxs(bL, {
+      }), N ? jsxs(MenuRootComp, {
         manager,
         children: [jsx(IconButton, {
           ...k,

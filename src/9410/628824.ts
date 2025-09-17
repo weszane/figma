@@ -8,7 +8,7 @@ import { wH } from "../figma_app/680166";
 import { hV } from "../figma_app/822177";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { kD, tS } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { aV } from "../figma_app/722362";
@@ -82,7 +82,7 @@ function w() {
           });
         },
         trackingProperties: {
-          trackingDescriptor: _$$c2.USE_IN_NEW_FILE
+          trackingDescriptor: UpgradeAction.USE_IN_NEW_FILE
         },
         children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
       })]

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useState, forwardRef, useContext, useLayoutEffect } from "react";
 import { QT } from "../905/687992";
 import { setupRefUpdater } from "../905/823680";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { E } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { C } from "../905/294086";
@@ -22,7 +22,7 @@ function p({
 }
 p.displayName = "FormattedInputContext";
 export let $$h1 = forwardRef((e, t) => jsx(p, {
-  children: jsx(_$$p.Root, {
+  children: jsx(InputComponent.Root, {
     ...e,
     ref: t
   })
@@ -36,7 +36,7 @@ let g = forwardRef((e, t) => {
     inputProps
   } = a;
   let c = setupRefUpdater(t, inputProps.ref);
-  return jsx(_$$p, {
+  return jsx(InputComponent, {
     ...inputProps,
     ref: c
   });

@@ -8,7 +8,7 @@ import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { JT } from "../figma_app/847597";
 import { Z } from "../figma_app/903114";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 export function $$h0({
   seatType: e,
   userInfo: t,
@@ -25,7 +25,7 @@ export function $$h0({
     trusted: !0,
     newTab: !0,
     trackingProperties: {
-      trackingDescriptor: _$$c.LEARN_MORE
+      trackingDescriptor: UpgradeAction.LEARN_MORE
     },
     children: getI18nString("file_permissions_modal.update_seat_tab.learn_more")
   });
@@ -45,7 +45,7 @@ export function $$h0({
       children: [jsxs(e6, {
         onClick: f,
         trackingProperties: {
-          trackingDescriptor: _$$c.SEAT_COST_MESSAGING
+          trackingDescriptor: UpgradeAction.SEAT_COST_MESSAGING
         },
         className: "x78zum5 x1q0g3np x1qughib xh8yej3",
         children: [g, jsx(O, {
@@ -58,7 +58,7 @@ export function $$h0({
     }) : jsxs(e6, {
       onClick: f,
       trackingProperties: {
-        trackingDescriptor: _$$c.SEAT_COST_MESSAGING
+        trackingDescriptor: UpgradeAction.SEAT_COST_MESSAGING
       },
       className: "x78zum5 x1q0g3np x1qughib xh8yej3",
       children: [jsx(BannerMessage, {

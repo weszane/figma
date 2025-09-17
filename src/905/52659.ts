@@ -17,7 +17,7 @@ import { A as _$$A } from "../905/351112";
 import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Ct } from "../figma_app/199513";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { mapProjectProperties } from "../figma_app/349248";
 import { Mz } from "../vendor/925040";
 import { FolderSortKey } from "../905/316062";
@@ -49,7 +49,7 @@ let k = Mz(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateB
 function B({
   folderId: e
 }) {
-  let t = "trashedFolders" === _6().view;
+  let t = "trashedFolders" === getSelectedView().view;
   let i = _$$x(e, t);
   return "loaded" !== i.status ? jsx(Wi, {
     className: _$$s2.w48.$,
@@ -240,7 +240,7 @@ export function $$ea0(e) {
   let [t, i] = useState([]);
   let s = useDispatch();
   let x = useSelector(k);
-  let S = _6();
+  let S = getSelectedView();
   let w = getAtomMutate(Ct);
   let C = MD(t);
   let T = useSelector(e => e.teams);

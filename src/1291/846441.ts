@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
@@ -101,7 +101,7 @@ export function $$z0() {
     tabManager,
     searchQuery
   } = cX();
-  let [s] = _$$A(searchQuery, 200);
+  let [s] = useDebounce(searchQuery, 200);
   let i = F5();
   let {
     setQuery

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { A as _$$A } from "../905/251970";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
@@ -133,7 +133,7 @@ export function $$A3() {
               children: [jsx("div", {
                 className: "x1n9xxwz xxymvpz xb3r6kr xlyipyv xuxw1ft xygnafs",
                 children: R[e]
-              }), t && n ? jsx(J, {
+              }), t && n ? jsx(setupThemeContext, {
                 mode: "dark",
                 children: jsx("div", {
                   className: "x1n9xxwz xxymvpz x1hr2gdg x1n0bwc9 xuxw1ft",

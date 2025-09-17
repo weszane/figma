@@ -16,7 +16,7 @@ import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { KH } from "../figma_app/722362";
 import { vE, W as _$$W, UH, Lk } from "../figma_app/156285";
 import { h as _$$h } from "../905/207101";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
@@ -33,7 +33,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { P as _$$P } from "../905/347284";
 import { fullscreenValue } from "../figma_app/455680";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { b as _$$b, bL as _$$bL, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A2 } from "../905/215698";
 import { l as _$$l } from "../905/479687";
@@ -62,13 +62,13 @@ function R() {
     type: "button",
     label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   let s = {
     type: "link",
     label: renderI18nText("draw.onboarding.first_time.learn_more"),
     href: "https://help.figma.com/hc/articles/31440438150935",
-    ctaTrackingDescriptor: _$$c.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   return jsx(rq, {
     arrowPadding: 8,
@@ -134,8 +134,8 @@ function Z(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(_$$bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       "aria-label": getI18nString("fullscreen.properties_panel.edit_brush"),
@@ -145,13 +145,13 @@ function Z(e) {
       },
       ...getTriggerProps(),
       children: jsx(_$$A2, {})
-    }), jsxs(mc, {
-      children: [jsx(q7, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsx(MenuItemComp, {
         onClick: e.onStartRenamingBrush,
         children: jsx(Fragment, {
           children: getI18nString("fullscreen.properties_panel.rename_brush")
         })
-      }), jsx(q7, {
+      }), jsx(MenuItemComp, {
         onClick: e.onDeleteBrush,
         children: jsx(Fragment, {
           children: getI18nString("fullscreen.properties_panel.delete_brush")

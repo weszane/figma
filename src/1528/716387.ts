@@ -44,7 +44,7 @@ import { p8, eY } from "../figma_app/722362";
 import { lH, Fy } from "../figma_app/623300";
 import { FileKindEnum } from "../figma_app/162807";
 import { KindEnum } from "../905/129884";
-import { b as _$$b2, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { EventShield } from "../905/821217";
 import { H_ } from "../905/963340";
 import { O as _$$O } from "../905/969533";
@@ -86,11 +86,11 @@ let er = memo(function (e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b2();
+  } = setupMenu();
   let u = es(l);
   return jsx(EventShield, {
     eventListeners: ["onClick"],
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsxs(ButtonPrimitive, {
         recordingKey: "figma_design_search_page_scope_dropdown",
@@ -101,7 +101,7 @@ let er = memo(function (e) {
         "data-testid": "figma-design-search-scope-dropdown",
         ...getTriggerProps(),
         children: [u, jsx(_$$O, {})]
-      }), jsxs(mc, {
+      }), jsxs(MenuContainerComp, {
         children: [jsx(ei, {
           option: PageViewMode.ACTIVE_PAGE,
           activeOption: l,

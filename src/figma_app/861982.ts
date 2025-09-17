@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { g8, MJ } from "../figma_app/860955";
+import { MenuSubMenu, MenuSubContainerComp } from "../figma_app/860955";
 import { getI18nString } from "../905/303541";
 import { jd } from "../figma_app/106207";
 import { x } from "../905/619833";
@@ -117,10 +117,10 @@ export function $$E0({
       fileNeedsMovingBeforePublish: s
     });
   };
-  return r ? jsxs(g8, {
+  return r ? jsxs(MenuSubMenu, {
     children: [jsx(Qq, {
       children: getI18nString("tile.dropdown.manage_template")
-    }), jsxs(MJ, {
+    }), jsxs(MenuSubContainerComp, {
       children: [jsx(Pu, {
         onClick: l,
         recordingKey: "publishCustomTemplate",

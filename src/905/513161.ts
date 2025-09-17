@@ -13,7 +13,7 @@ import { VisualBellActions } from "../905/302958";
 import { BellId } from "../905/576487";
 import { h as _$$h } from "../905/142086";
 import { hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { getRepoByIdAlt } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
 export let $$b0 = registerModal(function ({
@@ -53,7 +53,7 @@ export let $$b0 = registerModal(function ({
             v(hideModal());
           },
           trackingProperties: {
-            trackingDescriptor: _$$c.CANCEL
+            trackingDescriptor: UpgradeAction.CANCEL
           },
           children: renderI18nText("upsell.shared.cancel")
         }), jsx("div", {

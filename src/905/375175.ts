@@ -1,8 +1,8 @@
 import { nb, Tf } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 export function $$s0(e) {
-  let t = _6();
+  let t = getSelectedView();
   return $$o2(e, useCurrentUserOrgId()) && $$l1(t);
 }
 export function $$o2(e, t) {

@@ -23,7 +23,7 @@ import { trackContextViewed, trackFileBrowserPlanFilterSelected, logAndTrackCTA,
 import { H as _$$H } from "../905/422284";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
 import { mapPathToSelectedView } from "../figma_app/193867";
 import { gN, X2, Zo, td } from "../figma_app/273118";
@@ -1034,7 +1034,7 @@ function eW(e, t) {
     let l = useSelector(e => a ? e.authedUsers.byId[a.id]?.plans : null);
     let s = useStore();
     let d = useDispatch();
-    let u = FC();
+    let u = selectPermissionsState();
     let _ = selectCurrentFile();
     let m = useCurrentUserOrg();
     let b = t => {

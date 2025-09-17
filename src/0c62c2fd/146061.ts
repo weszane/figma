@@ -15,7 +15,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { Nr } from "../figma_app/199513";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { FolderMoveModalView } from "../figma_app/43951";
 import { mapProjectProperties } from "../figma_app/349248";
 import { UpsellModalType } from "../905/165519";
@@ -56,7 +56,7 @@ export function $$M0(e) {
   });
   let H = {};
   let K = [];
-  let Y = FC();
+  let Y = selectPermissionsState();
   if (V) {
     let e = [];
     (V.teamRoles ?? []).forEach(t => {

@@ -19,7 +19,7 @@ import { V as _$$V } from "../figma_app/473391";
 import { qp, hN } from "../905/977779";
 import { resolveTeamId } from "../905/515860";
 import { openFileAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
-import { OC } from "../figma_app/386952";
+import { selectedViewAtom } from "../figma_app/386952";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { X0, WV, Gg } from "../figma_app/646357";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
@@ -115,7 +115,7 @@ let es = createReduxSubscriptionAtomWithState(e => {
 });
 let eo = createReduxSubscriptionAtomWithState(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
 let el = createReduxSubscriptionAtomWithState(e => e.search.sessionId);
-let ed = selectAtom(OC, e => getEditorTypeFromView(e) === FEditorType.Design);
+let ed = selectAtom(selectedViewAtom, e => getEditorTypeFromView(e) === FEditorType.Design);
 let ec = selectAtom(openFileAtom, f$, deepEqual);
 let eu = createRemovableAtomFamily(e => atom(void 0));
 let ep = createRemovableAtomFamily(e => atom(t => {
@@ -198,7 +198,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
     } = e(et(t));
     let n = sessionId ?? atomStoreManager.get(el);
     let r = e(openFileLibraryKeyAtom);
-    let a = atomStoreManager.get(OC);
+    let a = atomStoreManager.get(selectedViewAtom);
     let s = e(Z(t).debouncedValueAtom);
     let d = e(ed);
     let c = e(ec);
@@ -377,7 +377,7 @@ let ex = createRemovableAtomFamily(e => atom(async t => {
   let n = t(Z(e).debouncedValueAtom);
   let r = t(ei);
   let a = t(ec);
-  let s = atomStoreManager.get(OC);
+  let s = atomStoreManager.get(selectedViewAtom);
   let o = t(ep(e));
   let {
     sessionId,

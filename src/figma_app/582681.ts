@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { useTheme } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -60,12 +60,12 @@ export let $$C0 = registerModal(function ({
     manager: U,
     width: "md",
     ...V,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("fullscreen.accessibility_settings.dialog_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: _$$s.pb8.$,
           children: [H && jsxs(_$$d, {
@@ -113,7 +113,7 @@ export let $$C0 = registerModal(function ({
             className: "x78zum5 x1gskr33",
             children: [jsx("div", {
               className: "xdvn7xf xctkrei",
-              children: jsx(_$$p, {
+              children: jsx(InputComponent, {
                 type: "number",
                 value: (C / 1e3).toString(),
                 onChange: e => {

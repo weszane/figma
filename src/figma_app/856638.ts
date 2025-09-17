@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
-import { mc, YJ, hE, g8, ZP, Q$, MJ, q7, Ov, rm } from "../figma_app/860955";
+import { MenuContainerComp, MenuGroupComp, MenuTitleComp, MenuSubMenu, MenuSubTrigger, MenuItemLead, MenuSubContainerComp, MenuItemComp, MenuItemTrail, MenuShortcut } from "../figma_app/860955";
 import { V } from "../905/291719";
 import { generateRecordingKey } from "../figma_app/878298";
 import { VU } from "../905/625959";
@@ -11,7 +11,7 @@ import { Jg } from "../figma_app/108168";
 import { fT, ZU } from "../figma_app/986347";
 let h = "overflowMenuDropdown";
 export function $$m0(e) {
-  return jsx(mc, {
+  return jsx(MenuContainerComp, {
     htmlAttributes: {
       "data-testid": "overflowMenuDropdownContainer"
     },
@@ -31,8 +31,8 @@ function g({
     item: e,
     recordingKey: t
   }, e.recordingKey));
-  return jsx(YJ, {
-    title: r ? jsx(hE, {
+  return jsx(MenuGroupComp, {
+    title: r ? jsx(MenuTitleComp, {
       children: r
     }) : void 0,
     children: i
@@ -73,13 +73,13 @@ function E({
       item: t
     }) : null;
   }
-  return jsxs(g8, {
-    children: [jsxs(ZP, {
+  return jsxs(MenuSubMenu, {
+    children: [jsxs(MenuSubTrigger, {
       recordingKey: generateRecordingKey(t || h, e.recordingKey),
-      children: [jsx(Q$, {
+      children: [jsx(MenuItemLead, {
         children: e.icon
       }), e.getTitle()]
-    }), jsx(MJ, {
+    }), jsx(MenuSubContainerComp, {
       children: jsx(g, {
         groupItems: e.items,
         recordingKey: t
@@ -93,14 +93,14 @@ function y({
 }) {
   let r = useSelector(nj);
   let _ = Yh(r, e.action);
-  return jsxs(q7, {
+  return jsxs(MenuItemComp, {
     disabled: !_,
     onClick: VU.get(e.action, "toolbar"),
     recordingKey: generateRecordingKey(t || h, e.recordingKey),
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: bs(e.action)?.ui3Icon || jsx(V, {})
-    }), Jg(e.getDisplayAction?.() ?? e.action), jsx(Ov, {
-      children: jsx(rm, {
+    }), Jg(e.getDisplayAction?.() ?? e.action), jsx(MenuItemTrail, {
+      children: jsx(MenuShortcut, {
         children: c1(r.keyboardShortcuts, e.action)
       })
     })]
@@ -110,15 +110,15 @@ function b({
   action: e,
   recordingKey: t
 }) {
-  return jsxs(q7, {
+  return jsxs(MenuItemComp, {
     onClick: t => {
       e.onClick(t);
     },
     recordingKey: generateRecordingKey(t || h, e.recordingKey),
     disabled: e.disabled,
-    children: [jsx(Q$, {
+    children: [jsx(MenuItemLead, {
       children: e.icon
-    }), e.getTitle(), jsx(Ov, {
+    }), e.getTitle(), jsx(MenuItemTrail, {
       children: e.rightIcon
     })]
   });

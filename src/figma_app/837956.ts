@@ -14,14 +14,14 @@ import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { k4, jl } from "../figma_app/199513";
-import { rR, sK } from "../figma_app/598018";
-import { vL } from "../905/652992";
+import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
+import { PageFolderFile } from "../905/652992";
 import { getProjectUrl } from "../905/316062";
 import { fileActionEnum } from "../figma_app/630077";
 import { j } from "../905/834956";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { W } from "../905/25249";
 import { tgj } from "../figma_app/27776";
 export function $$w1(e) {
@@ -55,16 +55,16 @@ export function $$w1(e) {
           teamId: i,
           orgId: l
         });
-        o && !rR(o, {
-          type: sK.ADD_PROJECT
+        o && !checkTeamFileRestrictions(o, {
+          type: AddOperationType.ADD_PROJECT
         }) ? w(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: o,
-            resource: vL.FOLDER,
+            resource: PageFolderFile.FOLDER,
             action: fileActionEnum.CREATE_FOLDER,
-            currentPlan: F.Plan.STARTER,
-            upsellPlan: F.Plan.PRO,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             editorType: null
           }
         })) : u({

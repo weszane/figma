@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, Children, useRef, useEffect, useCallback, cloneElement, forwardRef, PureComponent } from "react";
 import { lQ } from "../905/934246";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { Ay } from "../figma_app/272902";
 import l from "classnames";
 import { handleUrlAction } from "../905/280005";
@@ -389,7 +389,7 @@ export class $$D1 extends RecordingPureComponent {
       className: d()(_$$o, "Checkbox" === this.props.displayType && this.props.nested && cY, this.props.className),
       "aria-checked": this.props.checked,
       role: "role" in this.props ? this.props.role : void 0,
-      children: ["Checkbox" === this.props.displayType ? jsx(J, {
+      children: ["Checkbox" === this.props.displayType ? jsx(setupThemeContext, {
         mode: "dark",
         children: jsx("span", {
           className: z6,

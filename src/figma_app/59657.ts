@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { Y9, hE, nB, wi, jk, vo } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogContents } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
 import { M, getFeatureFlags } from "../905/601108";
@@ -208,11 +208,11 @@ let $$f0 = registerModal(function (e) {
     });
   }, [y, r]);
   let N = () => jsxs(Fragment, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: "Feature Flag Bisector"
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: jsxs("div", {
         className: section,
         children: [jsx("h3", {
@@ -237,8 +237,8 @@ let $$f0 = registerModal(function (e) {
           children: f
         })]
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: () => t.props.close({
@@ -258,11 +258,11 @@ let $$f0 = registerModal(function (e) {
     if (!y) return null;
     let e = y.testingComplement ? y.currentComplement : y.currentSubset;
     return jsxs(Fragment, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: "Feature Flag Bisector - Testing"
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: section,
           children: [jsx("h3", {
@@ -308,8 +308,8 @@ let $$f0 = registerModal(function (e) {
             }, t))]
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: A,
@@ -328,11 +328,11 @@ let $$f0 = registerModal(function (e) {
     });
   };
   let w = () => y ? jsxs(Fragment, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: "Feature Flag Bisector - Complete"
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: jsxs("div", {
         className: section,
         children: [jsx("h3", {
@@ -375,8 +375,8 @@ let $$f0 = registerModal(function (e) {
           }, t))]
         })]
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: A,
@@ -392,11 +392,11 @@ let $$f0 = registerModal(function (e) {
     })]
   }) : null;
   let O = () => y ? jsxs(Fragment, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: "Feature Flag Bisector - Complex Interaction"
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: jsxs("div", {
         className: section,
         children: [jsx("h3", {
@@ -439,8 +439,8 @@ let $$f0 = registerModal(function (e) {
           }, t))]
         })]
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: A,
@@ -458,7 +458,7 @@ let $$f0 = registerModal(function (e) {
   return getFeatureFlags().internal_prototyping_debug_tool || getFeatureFlags().internal_only_debug_tools ? jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsx(vo, {
+    children: jsx(DialogContents, {
       children: (() => {
         if (y && "input" !== y.phase) {
           if ("bisecting" === y.phase) return C();

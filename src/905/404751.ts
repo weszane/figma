@@ -11,13 +11,13 @@ import { createOptimistThunk } from "../905/350402";
 import { Cy } from "../905/844322";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { mE } from "../905/561087";
 import { isTeamFolder, isTeamFolderV2, hasRootPathOptional } from "../figma_app/528509";
 import { FPermissionDenialReason, FFileType } from "../figma_app/191312";
 import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../figma_app/43951";
 import { Y9, fm } from "../figma_app/680166";
-import { Bi, vL } from "../905/652992";
+import { FeatureFlag, PageFolderFile } from "../905/652992";
 import { TeamOrgType } from "../figma_app/10554";
 import { fileActionEnum } from "../figma_app/630077";
 import { J } from "../905/202542";
@@ -26,7 +26,7 @@ import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { ConfirmationModal } from "../905/441305";
 import { registerModal } from "../905/102752";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { W as _$$W2 } from "../905/442612";
 import { i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
@@ -288,15 +288,15 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     if (team && _.isEditingLockedForUser && !R) {
       let t = files.some(e => e.editor_type === FFileType.FIGMAKE);
       e.dispatch(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team,
-          resource: t && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
+          resource: t && !getFeatureFlags().bake_starter_limit ? FeatureFlag.FIGMAKE : PageFolderFile.FILE,
           action: fileActionEnum.MOVE_FILES,
           editorType: files.every(e => e.editor_type === files[0].editor_type) ? files[0].editor_type : null,
           multipleResources: files.length > 1,
-          currentPlan: _$$F2.Plan.STARTER,
-          upsellPlan: _$$F2.Plan.PRO
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO
         }
       }));
       return;
@@ -334,13 +334,13 @@ let $$K0 = createOptimistThunk(async (e, t) => {
               team
             }
           })) : e.dispatch(showModalHandler({
-            type: DV,
+            type: ConsumptionPaywallModalPlansPricing,
             data: {
               team,
-              resource: u > 0 && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
+              resource: u > 0 && !getFeatureFlags().bake_starter_limit ? FeatureFlag.FIGMAKE : PageFolderFile.FILE,
               action: fileActionEnum.MOVE_FILES,
-              currentPlan: _$$F2.Plan.STARTER,
-              upsellPlan: _$$F2.Plan.PRO,
+              currentPlan: consumptionPaywallUtils.Plan.STARTER,
+              upsellPlan: consumptionPaywallUtils.Plan.PRO,
               editorType: files.every(e => e.editor_type === files[0].editor_type) ? files[0].editor_type : null,
               multipleResources: files.length > 1
             }

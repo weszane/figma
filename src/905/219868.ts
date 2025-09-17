@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, r1, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
 import { registerModal } from "../905/102752";
 let $$l1 = "/legal/privacy";
 let $$d3 = "/legal/tos";
@@ -12,12 +12,12 @@ let $$p0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 420,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogHiddenTitle, {
           children: e.title
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx("iframe", {
           className: "google_device_disclaimer_modals--iframeContainer--0XCRs",

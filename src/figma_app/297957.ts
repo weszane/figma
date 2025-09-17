@@ -23,7 +23,7 @@ import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { OrgSharedSettingView, ExpOneClickAskToEditTeamView, ExpOneClickAskToEditOrgView, ExpSocialProofExpansionTeamView, ExpSocialProofExpansionOrgView } from "../figma_app/43951";
 import { hasTeamStatePaidAccess } from "../figma_app/345997";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../905/606579";
 import { w as _$$w } from "../905/917761";
@@ -139,7 +139,7 @@ export function $$q36() {
   let i = useTeamPlanUser().unwrapOr(null);
   let a = useCurrentUserOrgId();
   let s = !!a;
-  let l = cD();
+  let l = getCurrentTeamId();
   let u = !s;
   let p = useSubscription(OrgSharedSettingView({
     orgId: a

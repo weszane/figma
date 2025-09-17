@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useMemo, Suspense, useCallback, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { b as _$$b, bL, mc, N_, q7, wv } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuLinkComp, MenuItemComp, MenuSeparator } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -22,7 +22,7 @@ import { selectExperimentConfigHook } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { A as _$$A2 } from "../figma_app/849799";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -131,12 +131,12 @@ let D = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("report_abuse.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           className: "modal-module--abuseReportFormWrapper--l0oSc",
           children: jsx(_$$A2, {})
@@ -492,12 +492,12 @@ let eB = registerModal(function (e) {
     manager: t,
     width: "lg",
     height: "dynamic",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("reset_user_flags_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx(ej, {
           userFlags: r
         })
@@ -2162,8 +2162,8 @@ let tw = registerModal(function () {
     children: jsx(ModalRootComponent, {
       manager: s,
       width: 480,
-      children: jsx(vo, {
-        children: jsx(nB, {
+      children: jsx(DialogContents, {
+        children: jsx(DialogBody, {
           children: jsxs("div", {
             className: "figjam_try_faq_modal--menuContent--C9Ew5",
             children: [!e && jsxs(Fragment, {
@@ -3422,10 +3422,10 @@ function rr({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let g = useDispatch();
   return jsxs(Fragment, {
-    children: [e && jsxs(bL, {
+    children: [e && jsxs(MenuRootComp, {
       manager,
       children: [jsx(ButtonPrimitive, {
         ...getTriggerProps(),
@@ -3439,19 +3439,19 @@ function rr({
         },
         "data-fullscreen-intercept": !0,
         children: jsx(d, {})
-      }), jsx(mc, {
+      }), jsx(MenuContainerComp, {
         children: t.map((e, t) => {
           if ("option" === e.type) {
-            if (e.href) return jsx(N_, {
+            if (e.href) return jsx(MenuLinkComp, {
               href: e.href,
               newTab: "_blank" === e.target,
               children: e.label
             }, t);
-            if (e.onClick) return jsx(q7, {
+            if (e.onClick) return jsx(MenuItemComp, {
               onClick: e.onClick,
               children: e.label
             }, t);
-          } else if ("separator" === e.type) return jsx(wv, {}, t);
+          } else if ("separator" === e.type) return jsx(MenuSeparator, {}, t);
         })
       })]
     }), jsx(_$$F, {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { languageCodes } from "../905/816253";
 import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { O } from "../3591/240710";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -84,12 +84,12 @@ function g(e) {
       top: 16,
       right: 16
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("string_inspector.string_inspector")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl x1l90r2v",
           children: [jsx("div", {

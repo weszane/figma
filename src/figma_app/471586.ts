@@ -4,7 +4,7 @@ import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
@@ -33,7 +33,7 @@ export function $$y0(e) {
     label: renderI18nText("file_browser.drafts_to_move.viewbar_learn_more_link"),
     type: "link",
     href: "https://help.figma.com/hc/articles/18409526530967",
-    ctaTrackingDescriptor: _$$c.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   let T = e.isOwner ? {
     label: renderI18nText("file_browser.drafts_to_move.move_files"),
@@ -42,7 +42,7 @@ export function $$y0(e) {
       complete();
       customHistory.redirect("/files/drafts-to-move");
     },
-    ctaTrackingDescriptor: _$$c.DONE
+    ctaTrackingDescriptor: UpgradeAction.DONE
   } : b;
   let I = jsxs("div", {
     style: {

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useMemo } from "react";
 import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
-import { bL, mc } from "../figma_app/860955";
+import { MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { N as _$$N } from "../905/852320";
 import { l as _$$l } from "../905/803103";
@@ -135,7 +135,7 @@ function P({
   });
   return jsx(EventShield, {
     eventListeners: ["onWheel"],
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$d, {
         recordingKey: i,
@@ -150,7 +150,7 @@ function P({
           value: normalizeValue(e),
           defaultBlendMode: "NORMAL"
         })
-      }), jsx(mc, {
+      }), jsx(MenuContainerComp, {
         children: jsx(_$$m, {
           selectedItem: valueBeforePreview ?? e,
           options: L,

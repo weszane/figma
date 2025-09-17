@@ -15,19 +15,19 @@ import { showModalHandler } from "../905/156213";
 import { i as _$$i } from "../905/182187";
 import { an } from "../905/81009";
 import { trackFileCopied } from "../figma_app/314264";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { extractValuesByKey } from "../905/439650";
 import { _ as _$$_ } from "../905/780571";
 import { FFileType } from "../figma_app/191312";
 import { FileOperationsView } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
-import { R5, mx } from "../figma_app/598018";
+import { checkTrashedFilesTeamLimits, checkFilesWithFolderLimits } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
-import { Bi, vL } from "../905/652992";
+import { FeatureFlag, PageFolderFile } from "../905/652992";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { fileActionEnum } from "../figma_app/630077";
 import { F as _$$F3 } from "../905/915030";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { W } from "../905/442612";
 import { i as _$$i2 } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
@@ -39,7 +39,7 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
   } = t;
   if (fileKeys.length > 0) {
     let t = e.getState();
-    let [n, ...a] = await Promise.all([R5(fileKeys), ...fileKeys.map(e => liveStoreInstance.fetchFile(e))]);
+    let [n, ...a] = await Promise.all([checkTrashedFilesTeamLimits(fileKeys), ...fileKeys.map(e => liveStoreInstance.fetchFile(e))]);
     if (n) {
       let s = t.teams[n];
       let o = new Set(a.map(e => e.editor_type));
@@ -55,15 +55,15 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
           team: s
         }
       })) : e.dispatch(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: s,
           action: fileActionEnum.RESTORE_FILES,
           editorType: o.has(FFileType.FIGMAKE) ? FFileType.FIGMAKE : l,
-          resource: o.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
+          resource: o.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? FeatureFlag.FIGMAKE : PageFolderFile.FILE,
           multipleResources: fileKeys.length > 1,
-          currentPlan: _$$F2.Plan.STARTER,
-          upsellPlan: _$$F2.Plan.PRO,
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO,
           upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
       }));
@@ -151,7 +151,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
     state: r,
     toDraft: t.toDraft
   });
-  let A = await mx(copyFiles);
+  let A = await checkFilesWithFolderLimits(copyFiles);
   if (A) {
     let t = r.teams[A];
     let n = editorTypes.size > 1 ? null : editorTypes.has(FFileType.WHITEBOARD) ? FFileType.WHITEBOARD : FFileType.DESIGN;
@@ -166,15 +166,15 @@ let $$U3 = createOptimistThunk(async (e, t) => {
         team: t
       }
     })) : e.dispatch(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: t,
         action: fileActionEnum.DUPLICATE_FILES,
         editorType: n,
-        resource: editorTypes.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
+        resource: editorTypes.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? FeatureFlag.FIGMAKE : PageFolderFile.FILE,
         multipleResources: copyFiles.length > 1,
-        currentPlan: _$$F2.Plan.STARTER,
-        upsellPlan: _$$F2.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         upsellSource: UpsellModalType.CREATE_NEW_FILE
       }
     }));

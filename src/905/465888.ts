@@ -416,13 +416,13 @@ export function useMenu(options: UseMenuOptions): UseMenuReturn {
 }
 
 // Define types for better clarity and maintainability
-interface UseMenuOptions {
+export interface UseMenuOptions {
   offset?: number
   initialPosition?: string
   config2025CuratorHacks?: boolean
 }
 
-interface UseMenuReturn {
+export interface UseMenuReturn {
   manager: {
     getItemProps: any
     getContainerProps: any
@@ -853,7 +853,7 @@ function canScroll(floatingRef: React.RefObject<HTMLElement>, direction: string,
  * @param {React.Ref} ref - Forwarded ref for the arrow element.
  * @returns {JSX.Element} The scroll arrow element.
  */
-const ScrollArrow = forwardRef<HTMLDivElement, {
+export const ScrollArrow = forwardRef<HTMLDivElement, {
   direction: 'up' | 'down'
   children: React.ReactNode
   className?: string

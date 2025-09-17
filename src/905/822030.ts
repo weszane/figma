@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useCallback, useMemo, useRef, useContext } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -107,7 +107,7 @@ let k = memo(function ({
       children: d && jsx("div", {
         className: "overlay_highlight--highlightOverlay--QsoQT"
       })
-    }), l && C.state && jsx(J, {
+    }), l && C.state && jsx(setupThemeContext, {
       mode: "added" !== C.state ? "light" : "dark",
       children: jsx(ButtonPrimitive, {
         onClick: L,

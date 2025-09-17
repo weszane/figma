@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import o from "classnames";
-import { A as _$$A2 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { IW } from "../figma_app/563413";
@@ -57,7 +57,7 @@ export function $$L2(e) {
     maxResults: 20
   });
   let [u, _] = useState("");
-  let [x] = _$$A2(u, 200);
+  let [x] = useDebounce(u, 200);
   useEffect(() => {
     queryFromAllSearch && !n ? (faceStampServerSideSearch(queryFromAllSearch), _(queryFromAllSearch), r(!0)) : faceStampServerSideSearch(x);
   }, [faceStampServerSideSearch, queryFromAllSearch, x, n]);

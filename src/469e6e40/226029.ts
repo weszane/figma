@@ -30,9 +30,9 @@ import { MX, RG, EQ, EO } from "../figma_app/684446";
 import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { AdminSettingsSelectorView } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { useCurrentUserOrg } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { oh } from "../905/18797";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { DUserRole, SectionType } from "../figma_app/858344";
@@ -51,7 +51,7 @@ import { handleAtomEvent } from "../905/502364";
 import { o as _$$o } from "../469e6e40/744116";
 import { Ii } from "../figma_app/425283";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rq } from "../905/425180";
 import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
@@ -282,7 +282,7 @@ let ej = {
         label: renderI18nText("general.got_it"),
         type: "button",
         onClick: complete,
-        ctaTrackingDescriptor: _$$c.DONE
+        ctaTrackingDescriptor: UpgradeAction.DONE
       },
       shouldCenterArrow: EL.FALLBACK,
       targetKey: Rb,
@@ -302,7 +302,7 @@ function ey(e) {
     webEventId
   } = e;
   let d = useDispatch();
-  let c = _6();
+  let c = getSelectedView();
   let _ = "workspace" !== c.view && "licenseGroup" !== c.view && c.view === e.selectViewArgs.view && ("orgAdminSettings" === c.view && "orgAdminSettings" === e.selectViewArgs.view ? c.orgAdminSettingsViewTab === e.selectViewArgs.orgAdminSettingsViewTab : "teamAdminConsole" === c.view && "teamAdminConsole" === e.selectViewArgs.view ? c.teamAdminConsoleViewTab === e.selectViewArgs.teamAdminConsoleViewTab : void 0);
   let u = useCallback(() => {
     !_ && (preNavAction && preNavAction(), d(selectViewAction(selectViewArgs)), webEventId && handleAtomEvent({
@@ -420,7 +420,7 @@ function eI(e) {
 }
 function eT(e) {
   let t = useDispatch();
-  let a = _6();
+  let a = getSelectedView();
   let s = useCallback(e => {
     t(selectViewAction({
       view: "licenseGroup",
@@ -453,7 +453,7 @@ function eT(e) {
 }
 function eA(e) {
   let t = useDispatch();
-  let a = _6();
+  let a = getSelectedView();
   let s = useCallback(e => {
     t(selectViewAction({
       view: "workspace",
@@ -499,14 +499,14 @@ let eO = memo(() => jsx(Fragment, {
 function eL() {
   let e = useCurrentUserOrg();
   let t = a9();
-  let a = _6();
+  let a = getSelectedView();
   let s = useRef(!1);
   let {
     isOrgAdmin,
     licenseGroups,
     workspaces
   } = function () {
-    let e = FC();
+    let e = selectPermissionsState();
     let t = e.orgById[e.currentUserOrgId];
     let a = useCurrentPlanUser("useCurrentAdminSettingsViews").unwrapOr(null);
     let n = !!(a && checkOrgUserPermission(a, FMemberRoleType.ADMIN));

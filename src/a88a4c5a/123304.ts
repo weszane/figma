@@ -46,7 +46,7 @@ import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
 import { D as _$$D } from '../905/169680';
 import { T as _$$T } from '../905/172092';
-import { p as _$$p3 } from '../905/185998';
+import { InputComponent } from '../905/185998';
 import { permissionScopeHandler as _$$l6 } from '../905/189185';
 import { W as _$$W } from '../905/200727';
 import { P as _$$P } from '../905/201667';
@@ -66,7 +66,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { v as _$$v } from '../905/318279';
 import { X as _$$X2 } from '../905/319582';
 import { n as _$$n2 } from '../905/347702';
-import { c as _$$c2 } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser, getUserId } from '../905/372672';
 import { _ as _$$_ } from '../905/381235';
 import { deepEqual } from '../905/382883';
@@ -104,7 +104,7 @@ import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
 import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
-import { J as _$$J2 } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { Pv } from '../905/619652';
 import { e as _$$e2 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
@@ -263,7 +263,7 @@ import { tw as _$$tw, isInteractionOrEvalMode } from '../figma_app/897289';
 import { r0 as _$$r5, yU as _$$yU, d9, GM, kR, LG, qQ, QU } from '../figma_app/257614';
 import { J as _$$J3 } from '../figma_app/261874';
 import { N as _$$N } from '../figma_app/268271';
-import { nB as _$$nB, hE, jk, vo, wi, Wk, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogCustomContents, DialogHeader } from '../figma_app/272243';
 import { A5 } from '../figma_app/274104';
 import { alwaysFalseCallback2 } from '../figma_app/275462';
 import { s4 as _$$s2 } from '../figma_app/276332';
@@ -371,7 +371,7 @@ import { d4, wA } from 'react-redux';
 import { Zk as _$$Zk, TW, YZ } from '../vendor/677121';
 import io from '../vendor/805353';
 import { Te } from '../vendor/813803';
-import { A as _$$A5 } from '../vendor/850789';
+import { useDebounce } from 'use-debounce';
 let j = atom(0);
 function v() {
   atomStoreManager.set(j, e => e + 1);
@@ -1059,11 +1059,11 @@ function eU({
       })]
     }), jsx('div', {
       className: JP,
-      children: jsx(_$$J2, {
+      children: jsx(setupThemeContext, {
         brand: 'dev-handoff',
         children: jsx($z, {
           trackingProperties: {
-            trackingDescriptor: _$$c2.MARK_READY_FOR_DEV
+            trackingDescriptor: UpgradeAction.MARK_READY_FOR_DEV
           },
           variant: 'primary',
           onClick() {
@@ -1277,7 +1277,7 @@ function e7() {
         a(!0);
         complete();
       },
-      ctaTrackingDescriptor: _$$c2.OPEN_DEV_MODE,
+      ctaTrackingDescriptor: UpgradeAction.OPEN_DEV_MODE,
       type: 'button'
     },
     testId: 'dev-mode-contextual-upsell-tooltip',
@@ -1367,7 +1367,7 @@ function th() {
   return jsx(_$$M, {
     testId: 'rfd-upsell-upsell',
     isShowing,
-    children: jsxs(_$$J2, {
+    children: jsxs(setupThemeContext, {
       brand: 'dev-handoff',
       children: [jsx(OM, {}), jsx(TrackingProvider, {
         name: 'RFD Upsell Modal',
@@ -1380,7 +1380,7 @@ function th() {
         children: jsx(ModalRootComponent, {
           width: 392,
           manager: S,
-          children: jsxs(Wk, {
+          children: jsxs(DialogCustomContents, {
             children: [jsx('div', {
               className: XV,
               children: jsx('div', {
@@ -1461,7 +1461,7 @@ function tk() {
     onClose: complete,
     testId: 'viewer-dev-mode-status-changed-tooltip',
     primaryCta: {
-      ctaTrackingDescriptor: _$$c2.TRY_DEV_MODE,
+      ctaTrackingDescriptor: UpgradeAction.TRY_DEV_MODE,
       label: renderI18nText('upsell.view_only_developer_notifications.tooltip_cta'),
       onClick: () => {
         complete();
@@ -1477,7 +1477,7 @@ function tq({
   onClick: e,
   complete: t
 }) {
-  return jsx(_$$J2, {
+  return jsx(setupThemeContext, {
     brand: 'dev-handoff',
     children: jsxs('div', {
       'data-testid': 'dev-mode-demo-file-entrypoint-popup',
@@ -1497,7 +1497,7 @@ function tq({
         })]
       }), jsx(_$$e, {
         trackingProperties: {
-          trackingDescriptor: _$$c2.DEMO_FILE_THUMBNAIL
+          trackingDescriptor: UpgradeAction.DEMO_FILE_THUMBNAIL
         },
         onClick: e,
         className: 'x11g6tue xzjbwwf x3w9dv2',
@@ -1509,7 +1509,7 @@ function tq({
       }), jsx('div', {
         children: jsx(_$$e, {
           trackingProperties: {
-            trackingDescriptor: _$$c2.CHECK_IT_OUT
+            trackingDescriptor: UpgradeAction.CHECK_IT_OUT
           },
           onClick: e,
           className: 'x1iakgj3 x19y5rnk x78zum5 xx99whi xl56j7k x6s0dn4 x4wtjwi x11g6tue x1qxcl5b x1tk3asg',
@@ -1677,7 +1677,7 @@ function t4() {
     isShowing,
     children: jsx(TrackingProvider, {
       name: 'FigmaMakeUpsellInDesignEditor',
-      children: jsx(_$$J2, {
+      children: jsx(setupThemeContext, {
         brand: 'seascape',
         children: jsxs('div', {
           'data-testid': 'figma-make-upsell-in-design-editor-overlay',
@@ -1703,7 +1703,7 @@ function t4() {
           }), jsx(_$$e, {
             'data-testid': 'figma-make-upsell-in-design-editor-overlay-asset',
             'trackingProperties': {
-              trackingDescriptor: _$$c2.FIGMA_MAKE_UPSELL_ASSET
+              trackingDescriptor: UpgradeAction.FIGMA_MAKE_UPSELL_ASSET
             },
             'onClick': y,
             ...xk(t1.assetContainer, d ? t1.assetBackgroundDark : t1.assetBackgroundLight),
@@ -1715,13 +1715,13 @@ function t4() {
               'loop': !0,
               'muted': !0
             })
-          }), jsx(_$$J2, {
+          }), jsx(setupThemeContext, {
             brand: 'seascape',
             mode: 'dark',
             children: jsx(_$$e, {
               'data-testid': 'figma-make-upsell-in-design-editor-overlay-cta',
               'trackingProperties': {
-                trackingDescriptor: _$$c2.TRY_IT_NOW
+                trackingDescriptor: UpgradeAction.TRY_IT_NOW
               },
               'onClick': y,
               ...xk(t1.button),
@@ -1887,7 +1887,7 @@ function lw({
   let D = jsx(TrackedButton, {
     onClick: () => V('basics'),
     trackingProperties: {
-      trackingDescriptor: _$$c2.LEARN_THE_BASICS
+      trackingDescriptor: UpgradeAction.LEARN_THE_BASICS
     },
     children: renderI18nText('starting_points.learn_the_basics')
   });
@@ -1965,7 +1965,7 @@ function lw({
               onMouseEnter: () => H('website'),
               onMouseLeave: M,
               trackingProperties: {
-                trackingDescriptor: _$$c2.WEBSITE_TEMPLATES
+                trackingDescriptor: UpgradeAction.WEBSITE_TEMPLATES
               },
               children: [jsx('div', {
                 className: lj,
@@ -1981,7 +1981,7 @@ function lw({
               onMouseEnter: () => H('mobile'),
               onMouseLeave: M,
               trackingProperties: {
-                trackingDescriptor: _$$c2.MOBILE_APP_TEMPLATES
+                trackingDescriptor: UpgradeAction.MOBILE_APP_TEMPLATES
               },
               children: [jsx('div', {
                 className: lj,
@@ -1997,7 +1997,7 @@ function lw({
               onMouseEnter: () => H('desktop'),
               onMouseLeave: M,
               trackingProperties: {
-                trackingDescriptor: _$$c2.DESKTOP_APP_TEMPLATES
+                trackingDescriptor: UpgradeAction.DESKTOP_APP_TEMPLATES
               },
               children: [jsx('div', {
                 className: lj,
@@ -2134,7 +2134,7 @@ function lV() {
         }));
         complete();
       },
-      ctaTrackingDescriptor: _$$c2.PRESETS_TRY_IT
+      ctaTrackingDescriptor: UpgradeAction.PRESETS_TRY_IT
     },
     trackingContextName: 'Visual Assets Intro Tooltip',
     userFlagOnShow: bo,
@@ -2902,9 +2902,9 @@ function l9() {
       x: (window.innerWidth - 400) / 2,
       y: (window.innerHeight - 496) / 2
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsxs('div', {
             className: 'x78zum5 x167g77z x6s0dn4',
             children: [renderI18nText('design_linter.title'), jsx(_$$E3, {
@@ -2912,9 +2912,9 @@ function l9() {
             })]
           })
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [m && jsx(nt, {}), p === 'noNodesSelected' && jsx(nr, {}), p === 'layerLimitExceeded' && jsx(ns, {})]
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: shouldShowLayerCount ? jsxs('div', {
           className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 xh8yej3',
           children: [shouldShowLayerCount && jsx(ni, {}), jsx(ne, {
@@ -2924,7 +2924,7 @@ function l9() {
             doesExceedLimit,
             isButtonDisabled
           })]
-        }) : jsx(jk, {
+        }) : jsx(DialogActionStrip, {
           children: jsx(ne, {
             onContinue: b,
             step: p,
@@ -3653,9 +3653,9 @@ function nQ() {
   return jsx(ModalRootComponent, {
     manager: s,
     width: 385,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsxs('div', {
             className: 'x78zum5 x6s0dn4 x167g77z',
             children: [renderI18nText('design_linter.title'), jsx(_$$E3, {
@@ -3663,7 +3663,7 @@ function nQ() {
             })]
           })
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx(nJ, {
           subscribedLibraries,
           usedInThisFile: usedInFileLibraries,
@@ -3674,8 +3674,8 @@ function nQ() {
           setSubscribeCallbacks: p,
           hasLocalAssets: v
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [w && jsx(Button, {
             variant: 'secondary',
             onClick: r,
@@ -3879,11 +3879,11 @@ function iC() {
     maxHeight: 320,
     onClose: a,
     defaultPosition: u,
-    children: jsxs(vo, {
+    children: jsxs(DialogContents, {
       children: [jsxs(ik, {
-        children: [jsx(hE, {
+        children: [jsx(DialogTitle, {
           children: o.title
-        }), jsx(_$$p3, {
+        }), jsx(InputComponent, {
           type: 'search',
           size: 'md',
           placeholder: p,
@@ -3892,7 +3892,7 @@ function iC() {
           value: e,
           onChange: e => t(e)
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         scrolling: 'none',
         padding: 0,
         children: jsx(iE, {
@@ -9772,7 +9772,7 @@ function oB() {
     let [{
       windowInnerHeight: n,
       windowInnerWidth: r
-    }] = _$$A5(_$$l5(), 300, {
+    }] = useDebounce(_$$l5(), 300, {
       equalityFn: deepEqual
     });
     let s = 915;
@@ -9845,10 +9845,10 @@ function oB() {
       e !== 'outside' && (Zz(e), s(FR.ALL_VISUAL_GROUPS_VIEW));
     },
     onTransform: u,
-    children: [jsxs(vo, {
-      children: [jsx(Y9, {
+    children: [jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsx(oF, {})
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         scrolling: 'none',
         className: 'xb3r6kr',
@@ -9945,12 +9945,12 @@ function oP() {
     }), jsx(_$$bL2, {
       manager,
       variant: 'strong',
-      children: jsxs(vo, {
+      children: jsxs(DialogContents, {
         className: 'xafpxmx x1y1aw1k',
-        children: [jsx(_$$nB, {
+        children: [jsx(DialogBody, {
           children: getI18nString('design_linter.library_selector.callout.description')
         }), jsx(_$$wi, {
-          children: jsx(jk, {
+          children: jsx(DialogActionStrip, {
             children: jsx(Button, {
               onClick: () => s(!1),
               children: getI18nString('design_linter.library_selector.callout.button')
@@ -10564,7 +10564,7 @@ function dy({
     let [{
       windowInnerWidth: t,
       windowInnerHeight: l
-    }] = _$$A5(_$$l5(), 300, {
+    }] = useDebounce(_$$l5(), 300, {
       equalityFn: deepEqual
     });
     let [n, r] = useAtomValueAndSetter(yq);
@@ -10636,8 +10636,8 @@ function dy({
     recordingKey: 'sites-code-window',
     draggable: 'anywhere',
     constraints: x.constraints,
-    children: jsx(vo, {
-      children: jsx(_$$nB, {
+    children: jsx(DialogContents, {
+      children: jsx(DialogBody, {
         padding: 0,
         scrolling: 'none',
         children: jsxs(YZ, {

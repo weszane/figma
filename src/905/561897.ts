@@ -11,7 +11,7 @@ import { DQ } from "../905/872904";
 import { FPlanNameType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2, LibraryOrgSubscriptions, WorkspaceSubscribedLibrariesForTeam, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions } from "../figma_app/43951";
 import { getPlanFeaturesAtomFamily } from "../905/276025";
-import { Me, jv } from "../figma_app/598018";
+import { currentTeamAtom, isNumericString } from "../figma_app/598018";
 let _ = atom(e => {
   let t = e(DQ);
   let i = getProviderConfigType();
@@ -82,8 +82,8 @@ let v = atom(e => {
   let t = e(LibraryTeamSubscriptions.Query({}));
   let i = e(JB);
   let n = e(DQ);
-  let r = e(Me);
-  let a = jv(r?.id) ? r?.id : "";
+  let r = e(currentTeamAtom);
+  let a = isNumericString(r?.id) ? r?.id : "";
   if ("loaded" !== t.status) return t;
   let s = t.data.allTeamRoles?.filter(e => e.team && !e.team.deletedAt && (e.team.orgId === n || e.team.id === a)).map(e => e.team);
   let o = {};

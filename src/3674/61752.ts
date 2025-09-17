@@ -15,13 +15,13 @@ import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { i$ } from "../905/15667";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { hasTeamPaidAccess, isTeamLocked } from "../figma_app/345997";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { FUserTypeClassification } from "../figma_app/421473";
-import { ol, H7 } from "../figma_app/598018";
+import { getCurrentTeam, getTeamById } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
 import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
@@ -46,7 +46,7 @@ export function $$z0({
     let n = useCurrentPlanUser("useUpgradeForDevMode").unwrapOr(null);
     let r = n?.key.type === FUserTypeClassification.TEAM_USER && n?.planKey.parentId === t?.teamId;
     let u = n?.key.type === FUserTypeClassification.ORG_USER && n?.planKey.parentId === t?.parentOrgId;
-    let g = ol();
+    let g = getCurrentTeam();
     let x = hasTeamPaidAccess(g) && !g?.org_id;
     let y = trackFileEventWithStore();
     let C = useDispatch();
@@ -117,7 +117,7 @@ export function $$z0({
   } = wH();
   let W = [_$$J.AUTO_PATHWAY, _$$J.ADMIN_AUTO_PATHWAY].includes(getUpgradePathway(FProductAccessType.DEV_MODE));
   let G = _$$n();
-  let U = useSelector(e => isTeamLocked(H7(e)?.id ?? "", e));
+  let U = useSelector(e => isTeamLocked(getTeamById(e)?.id ?? "", e));
   let K = _$$J2();
   let X = useCallback(() => {
     t?.();
@@ -144,26 +144,26 @@ export function $$z0({
     return e ? {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.not_now"),
       onClick: e,
-      trackingDescriptor: _$$c.NOT_NOW
+      trackingDescriptor: UpgradeAction.NOT_NOW
     } : t ? {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_summary"),
       onClick: p,
-      trackingDescriptor: _$$c.BACK_TO_SUMMARY
+      trackingDescriptor: UpgradeAction.BACK_TO_SUMMARY
     } : n ? {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.not_now"),
       onClick: c,
-      trackingDescriptor: _$$c.NOT_NOW
+      trackingDescriptor: UpgradeAction.NOT_NOW
     } : {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: c,
-      trackingDescriptor: _$$c.BACK_TO_DESIGN
+      trackingDescriptor: UpgradeAction.BACK_TO_DESIGN
     };
   }(t);
   return K ? {
     primaryButtonProps: {
       label: W ? renderI18nText("auto_upgrade_confirmation.dev_mode.cta_text") : renderI18nText("dev_handoff.paywall.blocking_modal.button.request_access"),
       onClick: X,
-      trackingDescriptor: W ? _$$c.GET_DEV_MODE : _$$c.REQUEST_ACCESS
+      trackingDescriptor: W ? UpgradeAction.GET_DEV_MODE : UpgradeAction.REQUEST_ACCESS
     },
     secondaryButtonProps: J
   } : G ? U ? {
@@ -173,14 +173,14 @@ export function $$z0({
     primaryButtonProps: {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.learn_more"),
       onClick: V,
-      trackingDescriptor: _$$c.LEARN_MORE
+      trackingDescriptor: UpgradeAction.LEARN_MORE
     },
     secondaryButtonProps: J
   } : {
     primaryButtonProps: {
       label: U ? renderI18nText("dev_handoff.paywall.blocking_modal.button.locked.reactivate") : renderI18nText("payments_modal.upgrade_to_professional"),
       onClick: X,
-      trackingDescriptor: U ? _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN : _$$c.UPGRADE_TO_PROFESSIONAL
+      trackingDescriptor: U ? UpgradeAction.REACTIVATE_YOUR_PROFESSIONAL_PLAN : UpgradeAction.UPGRADE_TO_PROFESSIONAL
     },
     secondaryButtonProps: J
   };

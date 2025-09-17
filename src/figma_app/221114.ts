@@ -4,7 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
-import { b as _$$b, bL, mc, r1 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
 import { u as _$$u } from "../905/65923";
 import { z6, CU, H_ } from "../905/963340";
@@ -43,13 +43,13 @@ import { D0 } from "../figma_app/867292";
 import { selectViewAction } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
-import { D as _$$D } from "../905/852057";
+import { fileUpdateSavepointAction } from "../905/852057";
 import { Dm } from "../figma_app/8833";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { removeOptimist } from "../905/766303";
-import { F as _$$F2 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { ud } from "../905/862913";
 import { fullscreenValue } from "../figma_app/455680";
 import { FPlanNameType } from "../figma_app/191312";
@@ -57,7 +57,7 @@ import { MAX_USERS } from "../figma_app/345997";
 import { hM } from "../905/851937";
 import { UpsellModalType } from "../905/165519";
 import { CURRENT_VERSION_ID, setActiveVersion, exitVersionHistoryMode, startCompareChanges, fetchVersionHistory } from "../figma_app/841351";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { KindEnum } from "../905/129884";
@@ -66,11 +66,11 @@ import { isFullscreenDevHandoffView } from "../905/782918";
 import { isFullscreenWhiteboard } from "../905/870666";
 import { xX, $_ } from "../figma_app/597338";
 import { rb } from "../figma_app/151869";
-import { DV } from "../905/739964";
-import { y as _$$y } from "../figma_app/504415";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
+import { SavepointModalContainer } from "../figma_app/504415";
 import { K as _$$K2 } from "../905/373605";
 import { e as _$$e2, M as _$$M } from "../905/298379";
-import { D as _$$D2 } from "../905/62437";
+import { useSavepointMenuItems } from "../905/62437";
 import { pq, vR } from "../figma_app/973219";
 import { Lw, qC, at, qv, AS as _$$AS, Y0, j$, SU, kD, Nh, lV, LF, h_, zL, lw, EB, N5, y5, pi, p8, zj, IF, Ov, UY, sh, KD, $D as _$$$D, RI, Pf, VM, DS, HK, B0, yT, kr, RV, mP, Tc, eF, nw, Gl, B_, Ob, BI, eP as _$$eP, NM, s6, ot, Ao, QQ, Jt, aJ, UX, nf, kL, fy, u1, N1, qd } from "../905/447412";
 import { A as _$$A } from "../6828/315990";
@@ -155,13 +155,13 @@ export class $$eR4 extends RecordingComponent {
           return;
         }
         this.props.dispatch(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: this.props.team,
             editorType: this.props.editorType,
-            resource: Bi.VERSION_HISTORY,
-            currentPlan: _$$F2.Plan.STARTER,
-            upsellPlan: _$$F2.Plan.PRO
+            resource: FeatureFlag.VERSION_HISTORY,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO
           }
         }));
       }
@@ -537,11 +537,11 @@ function eL({
   let {
     manager,
     getContextMenuTriggerProps
-  } = _$$b();
-  let u = _$$D2(s);
+  } = setupMenu();
+  let u = useSavepointMenuItems(s);
   return jsx("div", {
     className: BI,
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsxs(ButtonPrimitive, {
         ...(r ? {} : getContextMenuTriggerProps()),
@@ -551,7 +551,7 @@ function eL({
         "data-testid": r ? "version-row-button-current" : "version-row-button",
         className: _$$eP,
         children: [i, a]
-      }), jsx(mc, {
+      }), jsx(MenuContainerComp, {
         children: u
       })]
     })
@@ -564,9 +564,9 @@ function eP({
   let {
     manager,
     getTriggerProps
-  } = _$$b();
-  let a = _$$D2(t);
-  return a ? jsxs(bL, {
+  } = setupMenu();
+  let a = useSavepointMenuItems(t);
+  return a ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       "aria-label": getI18nString("collaboration.feedback.more_options"),
@@ -576,7 +576,7 @@ function eP({
       "data-test-id": "dots-menu-icon-button",
       ...getTriggerProps(),
       children: jsx(_$$J, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: a
     })]
   }) : null;
@@ -606,7 +606,7 @@ function eD({
               className: s6,
               onClick: t,
               trackingProperties: {
-                trackingDescriptor: _$$c.UPGRADE,
+                trackingDescriptor: UpgradeAction.UPGRADE,
                 upsellSource: UpsellModalType.HISTORY_UPSELL,
                 canUserAccessProFeature: !1
               },
@@ -876,7 +876,7 @@ class eM extends RecordingComponent {
       }));
     };
     this.clearVersion = e => {
-      this.props.dispatch(_$$D({
+      this.props.dispatch(fileUpdateSavepointAction({
         fileKey: this.getOpenFile().key,
         savepointID: e,
         label: "",
@@ -885,7 +885,7 @@ class eM extends RecordingComponent {
     };
     this.addSavepoint = () => {
       this.canEditFile() && this.props.dispatch(showModalHandler({
-        type: _$$y,
+        type: SavepointModalContainer,
         data: {}
       }));
     };
@@ -895,7 +895,7 @@ class eM extends RecordingComponent {
         t?.label && (this.label = t.label);
         t?.description && (this.description = t.description);
         this.props.dispatch(showModalHandler({
-          type: _$$y,
+          type: SavepointModalContainer,
           data: {
             description: this.description,
             label: this.label,
@@ -1239,12 +1239,12 @@ function eU(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let {
     ref,
     ...a
   } = getTriggerProps();
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$u, {
       ...a,
@@ -1257,9 +1257,9 @@ function eU(e) {
       }),
       "aria-label": getI18nString("collaboration.feedback.filter_tooltip"),
       children: jsx(_$$S, {})
-    }), jsxs(mc, {
+    }), jsxs(MenuContainerComp, {
       children: [jsxs(z6, {
-        title: jsx(r1, {
+        title: jsx(MenuHiddenTitleComp, {
           children: getI18nString("collaboration.feedback.filter_menu_title")
         }),
         onChange: t => {

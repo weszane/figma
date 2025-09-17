@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { c$, bL, l9, mc } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { W } from "../6658/358099";
@@ -15,7 +15,7 @@ function _({
     value: n,
     children: jsxs("div", {
       className: "component_browser_filters--option--0cVym",
-      children: [e, jsx(J, {
+      children: [e, jsx(setupThemeContext, {
         mode: "dark",
         children: jsx("span", {
           className: "component_browser_filters--count--opEnb",

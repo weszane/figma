@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
 import { StatusType } from "../figma_app/175992";
@@ -50,7 +50,7 @@ export function $$E0(e) {
   let E = useDispatch();
   let S = useSelector(e => e.userFlags);
   let R = selectCurrentUser();
-  let k = _6();
+  let k = getSelectedView();
   let [A, P] = useState(!1);
   let M = v || e.isFirstTimeLoading;
   let O = "isFirstTimeLoading" in e;

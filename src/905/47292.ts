@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { useCurrentPrivilegedPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { SF } from "../905/55862";
 import { w } from "../905/768636";
 import { h5, yz } from "../905/42209";
@@ -77,7 +77,7 @@ function x({
   let s = useCurrentPrivilegedPlan("FilterRow").unwrapOr(null);
   let o = getParentOrgIdIfOrgLevel(s);
   let l = s?.name;
-  let m = cD();
+  let m = getCurrentTeamId();
   let x = useMemo(() => SF(e, l), [e, l]);
   let S = useCallback(() => {
     trackEventAnalytics("CTA Clicked", {

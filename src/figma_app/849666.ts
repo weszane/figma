@@ -14,7 +14,7 @@ import { Kx } from "../figma_app/546509";
 import { selectOpenFile, useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Button } from "../905/521428";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { l as _$$l } from "../905/728491";
 import { useSubscription } from "../figma_app/288654";
 import { SvgComponent } from "../905/714743";
@@ -45,12 +45,12 @@ import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { H as _$$H } from "../figma_app/423008";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import ei from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
@@ -80,7 +80,7 @@ function D(e) {
     buttonOnClick,
     message
   } = e;
-  let a = jsx(_$$J, {
+  let a = jsx(setupThemeContext, {
     mode: "dark",
     children: jsx(Button, {
       variant: "secondary",
@@ -181,8 +181,8 @@ let eE = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: p,
       width: 420,
-      children: jsx(vo, {
-        children: jsxs(nB, {
+      children: jsx(DialogContents, {
+        children: jsxs(DialogBody, {
           padding: 32,
           children: [jsx("div", {
             className: FS,
@@ -273,8 +273,8 @@ let eb = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: o,
       width: 420,
-      children: jsx(vo, {
-        children: jsxs(nB, {
+      children: jsx(DialogContents, {
+        children: jsxs(DialogBody, {
           padding: 32,
           children: [jsx("img", {
             src: buildUploadUrl("b0feff5e4abc5e66f99064463f2ad5d0a7f6c072.png"),
@@ -367,7 +367,7 @@ function ex({
   isFigJamTry: e
 }) {
   let t = useCurrentFileWorkshopModeStatus();
-  let r = _6();
+  let r = getSelectedView();
   let i = I4(e, t);
   let a = getSelectedEditorType();
   let s = BrowserInfo.isMeetDevice;
@@ -548,7 +548,7 @@ function eD({
   let p = dR(customHistory.location.pathname, u);
   let _ = e ? p : jM();
   let h = useCurrentFileWorkshopModeStatus(!0);
-  let m = _6();
+  let m = getSelectedView();
   let g = I4(e, h);
   let f = getI18nString("footer_banner.welcome_to_figma");
   let E = "DUPLICATE" === m.landingState ? getI18nString("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : getI18nString("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");

@@ -1,6 +1,68 @@
-var $$n2 = (e => (e.FILE = "file", e.FOLDER = "folder", e.PAGE = "page", e))($$n2 || {});
-var $$r0 = (e => (e.TEAM_LIBRARY = "team_library", e.AUDIO = "audio", e.VIEW_ONLY_PROJECT = "view_only_project", e.INVITE_ONLY_PROJECT = "invite_only_project", e.VOTING = "voting", e.PUBLISH_STYLES = "publish_styles", e.PROTOTYPING_MULTIPLE_ACTIONS = "prototyping_multiple_actions", e.PROTOTYPING_VARIABLES = "prototyping_variables", e.PROTOTYPING_CONDITIONAL_ACTIONS = "prototyping_conditional_actions", e.VARIABLES_MODES = "variables_modes", e.OPEN_SESSION = "open_session", e.PROJECT_TRANSFER = "project_transfer", e.PROTOTYPE_SHARING = "prototype_sharing", e.PASSWORD_PROTECTION = "password_protection", e.VERSION_HISTORY = "version_history", e.VIDEOS_IN_PROTOTYPES = "videos_in_prototypes", e.VIDEOS_IN_SLIDES = "videos_in_slides", e.VIDEOS_IN_WHITEBOARD = "videos_in_whiteboard", e.VIDEOS_IN_BUZZ = "videos_in_buzz", e.PLUGIN_ANALYTICS = "plugin_analytics", e.WIDGET_ANALYTICS = "widget_analytics", e.SHARED_FONTS = "shared_fonts", e.DEV_MODE = "dev_mode", e.DEV_MODE_ADMIN_SETTINGS = "dev_mode_admin_settings", e.CONNECTED_PROJECTS = "connected_projects", e.ADVANCED_SHAPES = "advanced_shapes", e.ORG = "org", e.FIGMAKE = "figmake", e.PROMPT_LIMIT = "prompt_limit", e.PUBLISH_SITE = "publish_site", e.MCP = "mcp", e.CODE_CHAT_LIBRARY_IMPORT = "code_chat_library_import", e.CONNECT_DOMAIN = "connect_domain", e))($$r0 || {});
-var $$a1 = (e => (e.TEAM_CREATION_SPEED_BUMP = "team_creation_speed_bump", e))($$a1 || {});
-export const Bi = $$r0;
-export const Pj = $$a1;
-export const vL = $$n2;
+/**
+ * @fileoverview
+ * Refactored enums for file types, feature flags, and team creation speed bump.
+ * Original variable names: $$n2, $$r0, $$a1
+ */
+
+/**
+ * Enum representing different file types.
+ * Original variable name: $$n2
+ */
+export enum PageFolderFile {
+  FILE = 'file',
+  FOLDER = 'folder',
+  PAGE = 'page',
+}
+
+/**
+ * Enum representing various feature flags.
+ * Original variable name: $$r0
+ */
+export enum FeatureFlag {
+  TEAM_LIBRARY = 'team_library',
+  AUDIO = 'audio',
+  VIEW_ONLY_PROJECT = 'view_only_project',
+  INVITE_ONLY_PROJECT = 'invite_only_project',
+  VOTING = 'voting',
+  PUBLISH_STYLES = 'publish_styles',
+  PROTOTYPING_MULTIPLE_ACTIONS = 'prototyping_multiple_actions',
+  PROTOTYPING_VARIABLES = 'prototyping_variables',
+  PROTOTYPING_CONDITIONAL_ACTIONS = 'prototyping_conditional_actions',
+  VARIABLES_MODES = 'variables_modes',
+  OPEN_SESSION = 'open_session',
+  PROJECT_TRANSFER = 'project_transfer',
+  PROTOTYPE_SHARING = 'prototype_sharing',
+  PASSWORD_PROTECTION = 'password_protection',
+  VERSION_HISTORY = 'version_history',
+  VIDEOS_IN_PROTOTYPES = 'videos_in_prototypes',
+  VIDEOS_IN_SLIDES = 'videos_in_slides',
+  VIDEOS_IN_WHITEBOARD = 'videos_in_whiteboard',
+  VIDEOS_IN_BUZZ = 'videos_in_buzz',
+  PLUGIN_ANALYTICS = 'plugin_analytics',
+  WIDGET_ANALYTICS = 'widget_analytics',
+  SHARED_FONTS = 'shared_fonts',
+  DEV_MODE = 'dev_mode',
+  DEV_MODE_ADMIN_SETTINGS = 'dev_mode_admin_settings',
+  CONNECTED_PROJECTS = 'connected_projects',
+  ADVANCED_SHAPES = 'advanced_shapes',
+  ORG = 'org',
+  FIGMAKE = 'figmake',
+  PROMPT_LIMIT = 'prompt_limit',
+  PUBLISH_SITE = 'publish_site',
+  MCP = 'mcp',
+  CODE_CHAT_LIBRARY_IMPORT = 'code_chat_library_import',
+  CONNECT_DOMAIN = 'connect_domain',
+}
+
+/**
+ * Enum for team creation speed bump feature.
+ * Original variable name: $$a1
+ */
+export enum TeamCreationSpeedBump {
+  TEAM_CREATION_SPEED_BUMP = 'team_creation_speed_bump',
+}
+
+// Refactored exports to match new names
+export const vL = PageFolderFile
+export const Bi = FeatureFlag
+export const Pj = TeamCreationSpeedBump

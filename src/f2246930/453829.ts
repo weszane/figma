@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { t as _$$t } from "../905/150656";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
-import { T } from "../905/909590";
+import { Textarea } from "../905/909590";
 import { E } from "../905/53857";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { X } from "../905/736922";
@@ -116,7 +116,7 @@ export function $$b0({
         height: "fill",
         children: jsx("div", {
           className: "x98rzlu x78zum5 xdt5ytf xf7z5ut x2lwn1j",
-          children: jsx(T, {
+          children: jsx(Textarea, {
             id: "raw-chat-messages",
             value: c,
             readOnly: !0,

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { b, bL } from "../figma_app/860955";
+import { setupMenu, MenuRootComp } from "../figma_app/860955";
 import { e as _$$e } from "../905/428849";
 import { generateRecordingKey } from "../figma_app/878298";
 import { n6 } from "../905/234821";
@@ -12,7 +12,7 @@ export function $$u0(e) {
   let {
     getTriggerProps,
     manager
-  } = b();
+  } = setupMenu();
   let _ = useMemo(() => [e.flyoutConfig.actions], [e.flyoutConfig.actions]);
   if (!t) return null;
   let h = jsx(QE, {
@@ -20,7 +20,7 @@ export function $$u0(e) {
     numUnreadComments: r,
     recordingKey: generateRecordingKey(e.recordingKey, "default")
   }, t.recordingKey);
-  return 1 === e.flyoutConfig.actions.length ? h : jsxs(bL, {
+  return 1 === e.flyoutConfig.actions.length ? h : jsxs(MenuRootComp, {
     manager,
     children: [jsxs(_$$e, {
       "aria-label": e.flyoutConfig.getTooltip(),

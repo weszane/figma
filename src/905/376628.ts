@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Ho } from "../figma_app/236178";
 import { rq } from "../905/425180";
 import { R } from "../905/11928";
@@ -22,7 +22,7 @@ export function $$c0(e) {
       label: jsx(TextWithTruncation, {
         children: renderI18nText("design_systems.libraries_modal.confirm_override.button_confirm")
       }),
-      ctaTrackingDescriptor: c.CONFIRM_LIBRARY_OVERRIDE,
+      ctaTrackingDescriptor: UpgradeAction.CONFIRM_LIBRARY_OVERRIDE,
       type: "button",
       onClick: e.onConfirm
     },
@@ -30,7 +30,7 @@ export function $$c0(e) {
       label: jsx(TextWithTruncation, {
         children: renderI18nText("design_systems.libraries_modal.confirm_override.button_cancel")
       }),
-      ctaTrackingDescriptor: c.CANCEL_LIBRARY_OVERRIDE,
+      ctaTrackingDescriptor: UpgradeAction.CANCEL_LIBRARY_OVERRIDE,
       type: "button",
       onClick: e.onCancel
     },

@@ -3,7 +3,7 @@ import { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { IconButton } from "../905/443068";
-import { Y9, hE, jk, vo, nB } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogActionStrip, DialogContents, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/911410";
 import { ButtonPrimitive } from "../905/632989";
@@ -94,10 +94,10 @@ function q({
   title: e,
   rightButtons: t
 }) {
-  return jsxs(Y9, {
-    children: [jsx(hE, {
+  return jsxs(DialogHeader, {
+    children: [jsx(DialogTitle, {
       children: e
-    }), t && jsx(jk, {
+    }), t && jsx(DialogActionStrip, {
       children: jsx("div", {
         children: t
       })
@@ -142,14 +142,14 @@ export function $$J0({
       defaultPosition: o,
       onClose: P,
       recordingKey: D,
-      children: jsxs(vo, {
+      children: jsxs(DialogContents, {
         allowOverflow: !0,
         children: [jsx(q, {
           title: M,
           rightButtons: jsx($, {
             editVar: R
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsxs("div", {
             className: "x78zum5 x1qughib xe8ttls x1kgkb76",

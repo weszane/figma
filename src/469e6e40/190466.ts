@@ -10,7 +10,7 @@ import { Button } from "../905/521428";
 import { t as _$$t } from "../905/150656";
 import { s as _$$s } from "../905/403855";
 import { B as _$$B } from "../905/950875";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import b from "classnames";
@@ -464,7 +464,7 @@ function eF(e) {
         }),
         children: [jsx(PopoverPrimitiveArrow, {
           ...getArrowProps()
-        }), jsx(_$$J, {
+        }), jsx(setupThemeContext, {
           mode: "dark",
           children: jsx("div", {
             ...xk(eB.longText),

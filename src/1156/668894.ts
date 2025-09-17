@@ -21,7 +21,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b, c as _$$c } from "../905/308099";
@@ -171,8 +171,8 @@ let G = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 394,
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
         children: [a && jsx(IconButton, {
           "aria-label": getI18nString("figmake.supabase.pause_project_modal.back"),
           onClick: () => {
@@ -189,10 +189,10 @@ let G = registerModal(function (e) {
             }));
           },
           children: jsx(_$$C, {})
-        }), jsx(hE, {
+        }), jsx(DialogTitle, {
           children: getI18nString("figmake.pause_project_modal.title")
         })]
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         scrolling: "none",
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl",
@@ -210,8 +210,8 @@ let G = registerModal(function (e) {
             setProjectIdToPause: o
           })]
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
           children: jsx(P, {
             props: e,
@@ -259,12 +259,12 @@ let V = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 386,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("figmake.supabase_cost_warning_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           children: jsxs("p", {
             ...Ay.props(W.textBodyMedium),
@@ -275,8 +275,8 @@ let V = registerModal(function (e) {
             })]
           })
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
           children: [jsx(Button, {
             variant: "secondary",

@@ -20,7 +20,7 @@ import { trackUserEvent } from "../figma_app/314264";
 import { kF } from "../figma_app/915202";
 import { $2 } from "../3276/545630";
 import { yL } from "../figma_app/242062";
-import { Y as _$$Y } from "../905/246212";
+import { InputPrimitive } from "../905/246212";
 import { F as _$$F } from "../905/634016";
 import { O as _$$O } from "../905/969533";
 import { l as _$$l } from "../905/479687";
@@ -30,7 +30,7 @@ import { v as _$$v } from "../figma_app/45501";
 import { C as _$$C } from "../figma_app/630916";
 import { G as _$$G } from "../figma_app/80900";
 import { N as _$$N } from "../905/995635";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import M from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -398,11 +398,11 @@ function ei(e) {
     containerStyle,
     measurerRef,
     editingName,
-    children: jsxs(_$$J, {
+    children: jsxs(setupThemeContext, {
       brand: "design",
       children: [jsxs("div", {
         className: "on_canvas_name_editor--gridTrackSizeComboboxContainer--XhG0G",
-        children: [jsx(_$$Y, {
+        children: [jsx(InputPrimitive, {
           id: `on-canvas-name-editor-${e.name}`,
           ...d.getInputProps({
             ref: c,
@@ -514,7 +514,7 @@ function eh() {
   });
 }
 function em() {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: eh()
   });

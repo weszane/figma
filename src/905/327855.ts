@@ -40,7 +40,7 @@ import { trackFileEvent, trackFileObjEvent } from "../figma_app/314264";
 import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
 import { setupFileObject } from "../905/628874";
-import { ds as _$$ds } from "../905/87821";
+import { getRandomString } from "../905/87821";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { liveStoreInstance } from "../905/713695";
 import { w2, i_ } from "../905/187165";
@@ -120,7 +120,7 @@ export function $$eI10(e, t, i) {
   let n = JSON.stringify(getPreviousSelectedView() || {});
   let r = "fullscreen" === t.selectedView.view ? t.selectedView.trackingInfo?.source : "";
   trackFileEvent("File Opened", e.key, t, {
-    randomID: _$$ds(),
+    randomID: getRandomString(),
     prevView: n,
     source: r,
     authenticatedUserIds: t.authedUsers.orderedIds.filter(e => e !== t.user?.id)
@@ -179,7 +179,7 @@ export function $$eS6({
   } = xK.logOpenFileAction(e, o, t, i, n);
   _$$N.loadTimer.logOpenFileAction(e);
   trackFileEvent("Fullscreen File Opened", e, a, {
-    randomID: _$$ds(),
+    randomID: getRandomString(),
     fileOpenIndex,
     isColdBoot,
     concurrentLoadingTabsCount: s,

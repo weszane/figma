@@ -22,7 +22,7 @@ import { Xo } from "../figma_app/482495";
 import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { ei as _$$ei } from "../figma_app/795674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { isDesignFileType } from "../figma_app/976749";
 import { e } from "../905/621515";
 import { UK } from "../figma_app/740163";
@@ -87,7 +87,7 @@ function G() {
       type: "button",
       label: renderI18nText("general.got_it"),
       onClick: () => complete(),
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       type: "button",
@@ -97,7 +97,7 @@ function G() {
         });
       },
       label: s ? renderI18nText("ui3_labels_curator.secondary_cta.turn_off") : renderI18nText("ui3_labels_curator.secondary_cta.turn_on"),
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     shouldDisableAnimation: !0,
     shouldRepositionOnTargetLost: !1,

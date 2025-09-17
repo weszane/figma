@@ -8,7 +8,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 import { dG } from "../figma_app/753501";
 import { u as _$$u } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
@@ -50,7 +50,7 @@ export function $$E0({
   if ("loaded" !== a.status || e?.dataType !== "CMS_ALIAS") return null;
   let s = a.fieldSchema;
   if (null == s) {
-    sD("Expected fieldSchema to be present.", {
+    logCmsError("Expected fieldSchema to be present.", {
       boundPaintVariable: e
     });
     return null;

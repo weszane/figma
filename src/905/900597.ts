@@ -15,7 +15,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { IconButton } from "../905/443068";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { r as _$$r } from "../905/520829";
 import { LazyInputForwardRef } from "../905/408237";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -158,7 +158,7 @@ let z = registerModal(function (e) {
   let [c, u] = useState(null);
   let [_, O] = useState(null);
   let D = useRef(null);
-  let [L] = _$$A(_, 400);
+  let [L] = useDebounce(_, 400);
   let [F, M] = useState(null);
   let [j, U] = useState(!1);
   let [B, z] = useState(null);

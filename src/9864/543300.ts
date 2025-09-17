@@ -10,7 +10,7 @@ import { MS } from "../figma_app/797994";
 import { isReduxDeprecationShadowreadOrCutover, ConfigGroups } from "../figma_app/121751";
 import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_app/191312";
 import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../figma_app/43951";
-import { aW, sK, cD, FQ } from "../figma_app/598018";
+import { isTeamAllowedToAddFiles, AddOperationType, getCurrentTeamId, getAuthorizedTeam } from "../figma_app/598018";
 import { TabLoop } from "../905/718764";
 import { useLatestRef } from "../figma_app/922077";
 import { postUserFlag } from "../905/985254";
@@ -28,7 +28,7 @@ import { reportError } from "../905/11";
 import { fr } from "../figma_app/297957";
 import { eS as _$$eS } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { Aj } from "../figma_app/336853";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { usePreventScrollOnIOS } from "../905/772711";
@@ -56,12 +56,12 @@ import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
 import { tc as _$$tc } from "../905/15667";
 import { yJ } from "../figma_app/24841";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { selectViewAction } from "../905/929976";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { UpsellModalType } from "../905/165519";
 import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
-import { UpgradeAction, TeamType } from "../figma_app/707808";
+import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { ProductAccessTypeEnum, ViewAccessTypeEnum, ProductAccessTypeMap } from "../905/513035";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
@@ -76,14 +76,14 @@ import { XZ } from "../figma_app/176973";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getNewFileConfig } from "../905/766303";
 import { useCurrentUserOrgId } from "../905/845253";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { liveStoreInstance } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { B as _$$B } from "../905/524020";
 import { i as _$$i2 } from "../905/46262";
 import { k as _$$k3 } from "../905/443820";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { xk, Ay as _$$Ay2 } from "@stylexjs/stylex";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/546647";
@@ -139,7 +139,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents } from "../figma_app/272243";
 import { wY } from "../figma_app/708845";
 import { getI18nResourceKey } from "../905/528121";
-import { b as _$$b3, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { r as _$$r3 } from "../905/571562";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { Tq, B1, Vb, Q5, sJ, QS, vz, rX as _$$rX, EK, Kz as _$$Kz } from "../9864/183809";
@@ -438,8 +438,8 @@ async function eq(e, r) {
   } = i;
   if (!projects || 1 !== projects.length) return null;
   let o = projects[0];
-  return o && canCreateFileType(o, r) && aW(i, {
-    type: sK.ADD_FILE,
+  return o && canCreateFileType(o, r) && isTeamAllowedToAddFiles(i, {
+    type: AddOperationType.ADD_FILE,
     editorType: r
   }) ? o : null;
 }
@@ -592,7 +592,7 @@ function eX({
   ...a
 }) {
   let d = useMemo(() => "primary" === e ? "primary" : n ? "ghostMobile" : "ghost", [e, n]);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: i,
     children: jsx(_$$e2, {
       ...a,
@@ -757,9 +757,9 @@ function eJ(e) {
   }) {
     let r = useStore();
     let t = useCurrentUserOrgId() ?? void 0;
-    let i = cD();
-    let s = FC();
-    let n = _6();
+    let i = getCurrentTeamId();
+    let s = selectPermissionsState();
+    let n = getSelectedView();
     return useCallback(async o => {
       let l;
       let a = async () => {
@@ -949,12 +949,12 @@ function eJ(e) {
   let eo = () => {
     let r = {
       signupSource: e.signupSource,
-      trackingDescriptor: _$$c2.CONTINUE
+      trackingDescriptor: UpgradeAction.CONTINUE
     };
     G && T && (r.jobTitleList = T.toString());
     e.currentQuestion === pu.CHOOSE_PLAN && (r.plan = u);
     e.currentQuestion === pu.CHOOSE_PRODUCT && (r.productType = x);
-    Y() && (r.trackingDescriptor = _$$c2.FINISH);
+    Y() && (r.trackingDescriptor = UpgradeAction.FINISH);
     return r;
   };
   let eC = e.currentQuestion === pu.HAVE_USED_FIGMA_PRODUCTS_BEFORE;
@@ -2200,7 +2200,7 @@ function r4({
   c.forEach((e, r) => {
     f.current[r] || (f.current[r] = createRef());
   });
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: a || "design",
     children: jsxs("span", {
       className: "choose_seat_card--chooseSeatCardWrapper--rLQHw",
@@ -2762,7 +2762,7 @@ function tm(e) {
       }));
     },
     trackingProperties: {
-      trackingDescriptor: _$$c2.COPY_LINK_TO_INVITE
+      trackingDescriptor: UpgradeAction.COPY_LINK_TO_INVITE
     },
     trusted: !0,
     className: `team_welcome--copyLinkText--NZlNM ${e.adtlClassName}`,
@@ -3469,7 +3469,7 @@ function tW(e) {
     },
     trackingProperties: {
       signupSource: e.signupSource,
-      trackingDescriptor: _$$c2.SKIP
+      trackingDescriptor: UpgradeAction.SKIP
     },
     "data-testid": F$.skipBtn,
     children: getI18nString("new_user_experience.button.skip")
@@ -3743,7 +3743,7 @@ function t7({
   let {
     getTriggerProps,
     manager
-  } = _$$b3({
+  } = setupMenu({
     initialPosition: "right-end"
   });
   let d = Xr(ni);
@@ -3813,7 +3813,7 @@ function t7({
     }
   };
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(_$$bL2, {
+    children: jsx(MenuRootComp, {
       manager,
       children: jsxs("div", {
         className: "LanguagePickerNew",
@@ -3843,8 +3843,8 @@ function t7({
               children: jsx(_$$r3, {})
             })]
           })]
-        }), jsx(mc, {
-          children: _.map(e => jsx(q7, {
+        }), jsx(MenuContainerComp, {
+          children: _.map(e => jsx(MenuItemComp, {
             onClick: () => g(e),
             children: jsxs("div", {
               ...xk(t8.menuItem),
@@ -4478,7 +4478,7 @@ function iE({
   }) {
     let l = useAtomWithSubscription(_$$eS);
     let a = useAtomWithSubscription($B);
-    let d = _6();
+    let d = getSelectedView();
     let c = null !== getFileKeyFromSelectedView(d);
     let [u, x] = useAtomValueAndSetter(S0);
     let [h, _] = useAtomValueAndSetter(bk);
@@ -4606,7 +4606,7 @@ export function $$ij0(e) {
   let b = useMemo(() => E.transform(({
     team: e
   }) => e), [E]);
-  let j = useSelector(r => e.isGen1 || isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
+  let j = useSelector(r => e.isGen1 || isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && "loaded" !== b.status ? null : getAuthorizedTeam(r, b.data));
   let C = useSelector(e => null !== e.user && cn(e.user));
   let w = useRef();
   let k = useIsSelectedFigmakeFullscreen();

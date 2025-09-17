@@ -18,7 +18,7 @@ import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, set
 import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, CommunityLibraryModules } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { gM } from "../figma_app/155728";
-import { Me } from "../figma_app/598018";
+import { currentTeamAtom } from "../figma_app/598018";
 import { LibrarySourceEnum } from "../figma_app/633080";
 var o = s;
 let $$x0 = atom(e => {
@@ -35,7 +35,7 @@ let $$x0 = atom(e => {
     group: getProviderConfigType() ?? null
   }));
   let s = e(JB);
-  let o = e(Me);
+  let o = e(currentTeamAtom);
   let d = hasTeamPaidAccess(o);
   return gM(a, n, i, s, r, d);
 });

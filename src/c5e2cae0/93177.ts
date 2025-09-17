@@ -47,7 +47,7 @@ import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142
 import { S_, gk } from "../5885/925885";
 import { postUserFlag } from "../905/985254";
 import { e5, Mh, Dj } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { withTrackedInput, TrackingProvider } from "../figma_app/831799";
 import { jv, vu } from "../905/84777";
 import { lo, wn, dl } from "../9420/795870";
@@ -56,7 +56,7 @@ import { N_ } from "../905/332483";
 import { kt, pI, Al, lX, dT } from "../9420/394825";
 import { KQ } from "../figma_app/475472";
 import { y4 } from "../figma_app/298277";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
 import { liveStoreInstance } from "../905/713695";
@@ -69,7 +69,7 @@ import { selectedViewToPath } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { Ju } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
-import { UpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
+import { CreateUpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
 import { e0 } from "../905/696396";
 import { V as _$$V } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
@@ -479,7 +479,7 @@ function eY(e) {
   let L = B.data?.permission === FMemberRoleType.ADMIN;
   let [V, $] = useState(n?.team_name ?? "");
   let [z, G] = useState(kt);
-  let ee = getEditableTeamsWithoutPaidAccess(FC());
+  let ee = getEditableTeamsWithoutPaidAccess(selectPermissionsState());
   let ed = e5({
     userId: l,
     teams: Object.values(j),
@@ -1095,7 +1095,7 @@ function eZ({
   let i = jsx(Ph, {
     href: "/pricing",
     trackingProperties: {
-      trackingDescriptor: _$$c.LEARN_MORE_ABOUT_SEATS
+      trackingDescriptor: UpgradeAction.LEARN_MORE_ABOUT_SEATS
     },
     newTab: !0,
     trusted: !0,

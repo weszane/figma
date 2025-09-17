@@ -6,7 +6,7 @@ import { isValidValue, isInvalidValue } from "../905/216495";
 import { UT } from "../figma_app/95266";
 import { On } from "../figma_app/323320";
 import { u3 } from "../figma_app/152690";
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 export function $$p0() {
   let e = useMemo(On, []);
   let t = selectWithShallowEqual(t => e(t, RR.TEXT));
@@ -19,7 +19,7 @@ export function $$p0() {
   return isInvalidValue(g) ? null : h || t ? h ? f ? function (e) {
     let t = e && isValidValue(e) ? e.value.fieldSchemaId : null;
     let i = e && isValidValue(e) ? e.value.collectionId : null;
-    return null == t || null == i ? (sD("Expected fieldSchemaId and collectionId to be present.", {
+    return null == t || null == i ? (logCmsError("Expected fieldSchemaId and collectionId to be present.", {
       fieldSchemaId: t,
       collectionId: i
     }), null) : {

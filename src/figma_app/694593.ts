@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { k } from "../905/443820";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import s from "classnames";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -60,7 +60,7 @@ export function $$m1(e) {
       action: e.action
     })
   }, e.action.key);
-  return e.action.editorThemeMode ? jsx(J, {
+  return e.action.editorThemeMode ? jsx(setupThemeContext, {
     brand: e.action.editorThemeMode,
     children: r
   }) : r;

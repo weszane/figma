@@ -22,7 +22,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { isExportRestricted } from "../figma_app/12796";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { useSingleEffect } from "../905/791079";
 import { k as _$$k2 } from "../905/582200";
 import { $ as _$$$ } from "../1528/660656";
@@ -35,7 +35,7 @@ import { eY } from "../figma_app/722362";
 import { registerModal } from "../905/102752";
 import { Yj, JI } from "../905/416496";
 import { k as _$$k3 } from "../905/443820";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { pw } from "../1528/157131";
 import U from "lodash-es/mapValues";
 import { oe } from "../figma_app/376315";
@@ -661,7 +661,7 @@ function eu({
                 inExportView: !0
               }), c && jsx("div", {
                 className: "x10l6tqk x8ow593 xibut22 x78zum5 x6s0dn4 xl56j7k xxk0z11 xvy4d1p x19y5rnk x68m4m9",
-                children: jsx(_$$J, {
+                children: jsx(setupThemeContext, {
                   brand: "cooper",
                   mode: "dark",
                   children: jsx(_$$k3, {})
@@ -736,12 +736,12 @@ let ep = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("cooper.toolbar.export_modal.export_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(_$$k2, {
           name: "cooper_export_modal",
@@ -751,8 +751,8 @@ let ep = registerModal(function (e) {
             updateFrameConfig: g
           })
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "primary",
             onClick: () => {

@@ -18,11 +18,11 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { z5, TI } from "../905/713722";
 import { e } from "../905/621515";
 import { useCurrentUserOrgId } from "../905/845253";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { N as _$$N } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
@@ -81,7 +81,7 @@ export function $$Z0({
 }) {
   let o = trackDefinedFileEventWithStore();
   let l = useCurrentUserOrgId();
-  let d = ol()?.id;
+  let d = getCurrentTeam()?.id;
   let c = useCallback(() => {
     o("color_contrast.toggle", {
       contrast_tool: !e,
@@ -141,7 +141,7 @@ export function $$Q2({
 }) {
   let a = trackDefinedFileEventWithStore();
   let u = useCurrentUserOrgId();
-  let p = ol()?.id;
+  let p = getCurrentTeam()?.id;
   let m = useContext($$X1);
   let {
     foregroundColor,
@@ -638,7 +638,7 @@ function et() {
       children: jsx(Ph, {
         href: "https://help.figma.com/hc/articles/360041003774-Apply-paints-with-the-color-picker",
         trackingProperties: {
-          trackingDescriptor: _$$c.LEARN_MORE
+          trackingDescriptor: UpgradeAction.LEARN_MORE
         },
         newTab: !0,
         trusted: !0,

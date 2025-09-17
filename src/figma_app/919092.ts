@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { q7 } from "../figma_app/860955";
+import { MenuItemComp } from "../figma_app/860955";
 import { useTheme } from "../905/289770";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { Badge, BadgeColor } from "../figma_app/919079";
@@ -18,9 +18,9 @@ export var $$u0 = (e => (e.REQUEST_UPGRADE = "REQUEST_UPGRADE", e.REQUEST_SENT =
 export function $$p1(e) {
   let t = useTheme();
   let r = e.isDisabled || e.isLoading;
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: e.brand,
-    children: jsx(q7, {
+    children: jsx(MenuItemComp, {
       ...xk(h.item, "dark" === t.color && h.itemDark, !!e.brand && h.itemBrand),
       onClick: e.onClick,
       "data-testid": e.isLoading ? void 0 : e.dataTestId,

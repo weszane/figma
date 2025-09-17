@@ -8,11 +8,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { wrapWithTracking, TrackingProvider } from "../figma_app/831799";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { SECONDARY_LIMIT, STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { DashboardSections } from "../905/548208";
 import { projectPermissionEnum, fileActionEnum } from "../figma_app/630077";
 import { registerLegacyModal, registerModal } from "../905/102752";
@@ -62,7 +62,7 @@ function T(e) {
           onClick: s,
           trackingProperties: {
             teamId: i.id,
-            trackingDescriptor: _$$c.CANCEL
+            trackingDescriptor: UpgradeAction.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
         }), h && jsx(ButtonLinkTracked, {
@@ -76,7 +76,7 @@ function T(e) {
           },
           trackingProperties: {
             teamId: i.id,
-            trackingDescriptor: _$$c.UPGRADE
+            trackingDescriptor: UpgradeAction.UPGRADE
           },
           children: renderI18nText("payments_modal.upgrade")
         })]
@@ -91,7 +91,7 @@ function T(e) {
           onClick: s,
           trackingProperties: {
             teamId: i.id,
-            trackingDescriptor: _$$c.CANCEL
+            trackingDescriptor: UpgradeAction.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
         }), g && jsx(ButtonLinkTracked, {
@@ -124,10 +124,10 @@ registerLegacyModal($$w1, e => {
   } = e.modalShown.data;
   return jsx(bP, {
     team,
-    resource: Bi.INVITE_ONLY_PROJECT,
+    resource: FeatureFlag.INVITE_ONLY_PROJECT,
     action: projectPermissionEnum.INVITE_ONLY_PROJECT,
-    currentPlan: F.Plan.STARTER,
-    upsellPlan: F.Plan.PRO,
+    currentPlan: consumptionPaywallUtils.Plan.STARTER,
+    upsellPlan: consumptionPaywallUtils.Plan.PRO,
     editorType,
     upsellSource
   });
@@ -140,10 +140,10 @@ registerLegacyModal($$C2, e => {
   } = e.modalShown.data;
   return jsx(bP, {
     team,
-    resource: Bi.VIEW_ONLY_PROJECT,
+    resource: FeatureFlag.VIEW_ONLY_PROJECT,
     action: projectPermissionEnum.VIEW_ONLY_PROJECT,
-    currentPlan: F.Plan.STARTER,
-    upsellPlan: F.Plan.PRO,
+    currentPlan: consumptionPaywallUtils.Plan.STARTER,
+    upsellPlan: consumptionPaywallUtils.Plan.PRO,
     editorType,
     upsellSource
   });
@@ -240,7 +240,7 @@ registerModal(function (e) {
         children: [jsx(ButtonSecondaryTracked, {
           onClick: c,
           trackingProperties: {
-            trackingDescriptor: _$$c.CANCEL
+            trackingDescriptor: UpgradeAction.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
         }), jsx(ButtonBasePrimaryTracked, {
@@ -258,7 +258,7 @@ registerModal(function (e) {
           },
           trackingProperties: {
             teamId: g.id,
-            trackingDescriptor: _$$c.UPGRADE
+            trackingDescriptor: UpgradeAction.UPGRADE
           },
           children: renderI18nText("payments_modal.upgrade")
         })]

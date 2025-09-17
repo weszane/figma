@@ -27,7 +27,7 @@ import { buildUploadUrl } from '../figma_app/169182';
 import { E_ } from '../figma_app/177697';
 import { whiteColor } from '../figma_app/191804';
 import { s1 } from '../figma_app/226737';
-import { hE, nB, vo, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogBody, DialogContents, DialogHeader } from '../figma_app/272243';
 import { adjustHue, colorsEqual } from '../figma_app/273493';
 import { k1, kO, lK, nE, UZ } from '../figma_app/687767';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
@@ -99,12 +99,12 @@ export function $$W0({
         r();
       },
       recordingKey: p,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString('slides.properties_panel.fill')
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsxs('div', {
             ref: T,

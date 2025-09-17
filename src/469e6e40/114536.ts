@@ -62,7 +62,7 @@ import { ny } from '../figma_app/819458';
 import { TrackingProvider } from '../figma_app/831799';
 import { Bk, MI } from '../figma_app/845611';
 import { LoadingOverlay } from '../figma_app/858013';
-import { wv } from '../figma_app/860955';
+import { MenuSeparator } from '../figma_app/860955';
 import { BadgeColor } from '../figma_app/919079';
 function D() {
   return jsx('a', {
@@ -1271,7 +1271,7 @@ function eq({
       children: getI18nString('domain_management.copy_domains.label', {
         domainCount: 1
       })
-    }), jsx(wv, {}), jsx(_$$p, {
+    }), jsx(MenuSeparator, {}), jsx(_$$p, {
       onClick: o,
       children: getI18nString('domain_management.remove_domain')
     })]

@@ -36,16 +36,16 @@ import { DP } from "../905/640017";
 import { getSelectedFile } from "../905/766303";
 import { D as _$$D } from "../figma_app/740163";
 import { z4 } from "../905/37051";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { getObservableValue } from "../figma_app/84367";
 import { hasOrgUsersForUser } from "../figma_app/951233";
-import { dE } from "../figma_app/598018";
+import { getFilteredTeamMembers } from "../figma_app/598018";
 import { m as _$$m2 } from "../905/99004";
 import { x as _$$x2 } from "../905/106997";
 import { C as _$$C } from "../figma_app/859828";
 import { S as _$$S2 } from "../5132/525530";
 import { e6 } from "../figma_app/617427";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { gh } from "../figma_app/598952";
 import { Px, Bl, go, HO, aN } from "../figma_app/57551";
 import { isFullscreenDevHandoffView } from "../905/782918";
@@ -172,7 +172,7 @@ function es() {
     },
     "data-onboarding-key": gh,
     trackingProperties: {
-      trackingDescriptor: _$$c.RESTART_TOUR
+      trackingDescriptor: UpgradeAction.RESTART_TOUR
     },
     children: jsx(_$$S2, {
       className: "dev_mode_demo_file_restart_button--restartIcon--alSdl"
@@ -205,7 +205,7 @@ let $$eh0 = memo(function () {
   let C = useIsSelectedViewFullscreenCooper();
   let w = !useSelector(e => e.mirror.appModel.showUi) || v;
   let R = "dark" === DP();
-  let L = _6();
+  let L = getSelectedView();
   let F = useIsFigmakeFullscreenPreview(L);
   let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
   let U = $$eg1();
@@ -255,7 +255,7 @@ export function $$em2() {
     modalShown: e.modalShown,
     orgUser: hasOrgUsersForUser(e),
     user: e.user,
-    unsortedTeams: dE(e.user, e.roles, e.teams)
+    unsortedTeams: getFilteredTeamMembers(e.user, e.roles, e.teams)
   }));
 }
 export function $$eg1() {

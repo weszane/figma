@@ -7,7 +7,7 @@ import _require5 from '../6db9f521/460010';
 import _require3 from '../7a72fc59/824430';
 import _require from '../451de8f0/94979';
 import { reportError, captureException } from '../905/11';
-import { F as _$$F4 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { s as _$$s5 } from '../905/6512';
 import { a as _$$a1 } from '../905/10468';
 import { D as _$$D7 } from '../905/12032';
@@ -86,7 +86,7 @@ import { X as _$$X4 } from '../905/350405';
 import { V as _$$V4 } from '../905/355181';
 import { BannerMessage } from '../905/363675';
 import { n as _$$n } from '../905/366526';
-import { c as _$$c5 } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser, getUserId } from '../905/372672';
 import { k as _$$k2 } from '../905/381239';
 import { deepEqual } from '../905/382883';
@@ -155,7 +155,7 @@ import { QL } from '../905/609392';
 import { i as _$$i3 } from '../905/610691';
 import { customHistory } from '../905/612521';
 import { getDesignFileUrl } from '../905/612685';
-import { J as _$$J5 } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { b as _$$b4, c as _$$c4 } from '../905/618904';
 import { e as _$$e8 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
@@ -163,7 +163,7 @@ import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634
 import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
 import { dB as _$$dB, DP, yM } from '../905/640017';
 import { u as _$$u } from '../905/644087';
-import { Bi, vL } from '../905/652992';
+import { FeatureFlag, PageFolderFile } from '../905/652992';
 import { getSessionStorage } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { Z as _$$Z4 } from '../905/658753';
@@ -186,7 +186,7 @@ import { a as _$$a3 } from '../905/720941';
 import { getResourceDataOrFallback, tT as _$$tT, gB } from '../905/723791';
 import { Point } from '../905/736624';
 import { Ji } from '../905/739314';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { H as _$$H7 } from '../905/740869';
 import { R as _$$R2 } from '../905/741991';
 import { c as _$$c0, s as _$$s7 } from '../905/744710';
@@ -348,7 +348,7 @@ import { NM } from '../figma_app/204891';
 import { gR } from '../figma_app/204937';
 import { Vm } from '../figma_app/209965';
 import { C5 } from '../figma_app/213643';
-import { a as _$$a7 } from '../figma_app/215667';
+import { DropdownThemeProvider } from '../figma_app/215667';
 import { Zx } from '../figma_app/217457';
 import { vt } from '../figma_app/231614';
 import { a as _$$a9 } from '../figma_app/234156';
@@ -362,7 +362,7 @@ import { J as _$$J6 } from '../figma_app/261874';
 import { X as _$$X2 } from '../figma_app/266084';
 import { z5 } from '../figma_app/268172';
 import { N as _$$N5 } from '../figma_app/268271';
-import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h3 } from '../figma_app/276445';
 import { W6 } from '../figma_app/287316';
@@ -393,7 +393,7 @@ import { Tl } from '../figma_app/357433';
 import { $v } from '../figma_app/370763';
 import { r as _$$r5 } from '../figma_app/375550';
 import { LH as _$$LH, zm } from '../figma_app/384673';
-import { _6, Td, z3 } from '../figma_app/386952';
+import { getSelectedView, getFullscreenFileKey, getSelectedViewType } from '../figma_app/386952';
 import { T as _$$T2 } from '../figma_app/399971';
 import { Cj } from '../figma_app/407993';
 import { aq as _$$aq } from '../figma_app/412189';
@@ -452,7 +452,7 @@ import { FP } from '../figma_app/580736';
 import { xE } from '../figma_app/581520';
 import { iw as _$$iw } from '../figma_app/582563';
 import { ConfigManagerProxy } from '../figma_app/594947';
-import { ol as _$$ol, rR as _$$rR, sK as _$$sK } from '../figma_app/598018';
+import { getCurrentTeam, checkTeamFileRestrictions, AddOperationType } from '../figma_app/598018';
 import { MR } from '../figma_app/598926';
 import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
 import { d1 as _$$d4 } from '../figma_app/603466';
@@ -528,7 +528,7 @@ import { ip as _$$ip } from '../figma_app/857454';
 import { LoadingSpinner } from '../figma_app/858013';
 import { w as _$$w2 } from '../figma_app/859828';
 import { r as _$$r2 } from '../figma_app/860474';
-import { b as _$$b5, bL as _$$bL, hE as _$$hE, ZP as _$$ZP, g8, mc, MJ, q7, Q$, wv, YJ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuTitleComp, MenuSubTrigger, MenuSubMenu, MenuContainerComp, MenuSubContainerComp, MenuItemComp, MenuItemLead, MenuSeparator, MenuGroupComp } from '../figma_app/860955';
 import { mv } from '../figma_app/861252';
 import { bellFeedAPIInstance, hasDesktopAPI } from '../figma_app/876459';
 import { t7 as _$$t3 } from '../figma_app/880974';
@@ -2083,10 +2083,10 @@ function iL() {
         'data-testid': 'pluginModalWindow'
       },
       recordingKey: 'pluginModal',
-      children: jsxs(vo, {
-        children: [jsxs(Y9, {
+      children: jsxs(DialogContents, {
+        children: [jsxs(DialogHeader, {
           ref: m,
-          children: [jsx(hE, {
+          children: [jsx(DialogTitle, {
             children: jsx('div', {
               className: _$$s3.flex.justifyBetween.alignCenter.cursorDefault.selectNone.$,
               children: jsxs('div', {
@@ -2116,10 +2116,10 @@ function iL() {
                 })]
               })
             })
-          }), jsx(jk, {
+          }), jsx(DialogActionStrip, {
             children: jsx(iD, {})
           })]
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsx(_$$j2, {
             iframeId: PluginIframeMode.MODAL,
@@ -2183,7 +2183,7 @@ function iW() {
   let t;
   let r;
   let n;
-  let i = _6();
+  let i = getSelectedView();
   if (!_$$uz(i)) return null;
   let {
     redirectUrl,
@@ -3419,7 +3419,7 @@ async function a7(e, t) {
   }
 }
 function si() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useDispatch();
   let r = useCallback(e => {
     t(selectViewAction({
@@ -4200,7 +4200,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
               trackingProperties: {
                 ...e.trackingProperties,
                 ...d,
-                trackingDescriptor: _$$c5.SUBMIT_FREE_FORM
+                trackingDescriptor: UpgradeAction.SUBMIT_FREE_FORM
               },
               innerText: getI18nString('rcs.surveys.submit_free_form'),
               variant: e.usePrimaryButton ? 'primary' : 'secondary',
@@ -4751,7 +4751,7 @@ function oj(e) {
         },
         dataTestId: 'submit-validation-button',
         trackingProperties: {
-          trackingDescriptor: _$$c5.AGREE,
+          trackingDescriptor: UpgradeAction.AGREE,
           orgId: e.orgTrial.resourceId
         },
         children: m
@@ -4862,16 +4862,16 @@ function oZ({
     'manager': a,
     'width': 380,
     'data-testid': 'product_trial_pending_modal',
-    'children': jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    'children': jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             fontSize: 11,
             fontWeight: 'bold',
             children: renderI18nText('payments_modal.product_trial_pending.welcome_to_your_figma_trial')
           })
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 16,
@@ -4918,7 +4918,7 @@ function oZ({
             })
           })]
         })
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: jsxs(AutoLayout, {
           direction: 'horizontal',
           horizontalAlignItems: 'space-between',
@@ -4933,7 +4933,7 @@ function oZ({
             onClick: s,
             dataTestId: 'submit-validation-button',
             trackingProperties: {
-              trackingDescriptor: _$$c5.AGREE,
+              trackingDescriptor: UpgradeAction.AGREE,
               orgId: e.resourceId
             },
             children: c
@@ -5013,13 +5013,13 @@ function l_({
   teamsWithEditableProjects: t,
   setSelectedFolder: r
 }) {
-  let n = _$$ol();
+  let n = getCurrentTeam();
   let i = vt(n?.id);
   let a = jn();
   let {
     getTriggerProps,
     manager
-  } = _$$b5();
+  } = setupMenu();
   let [d, c] = useMemo(() => {
     let e = t.map(e => {
       let t = e.projects?.[0];
@@ -5035,9 +5035,9 @@ function l_({
   };
   let p = e ? `${e.team.name} / ${e.project.path}` : getI18nString('desktop_new_tab.drafts');
   return jsx(Fragment, {
-    children: jsx(_$$a7, {
+    children: jsx(DropdownThemeProvider, {
       mode: 'match',
-      children: jsxs(_$$bL, {
+      children: jsxs(MenuRootComp, {
         manager,
         children: [jsx(Button, {
           'variant': 'ghost',
@@ -5061,17 +5061,17 @@ function l_({
               })
             }), p, jsx(_$$O2, {})]
           })
-        }), jsxs(mc, {
-          children: [jsxs(YJ, {
-            title: jsx(_$$hE, {
+        }), jsxs(MenuContainerComp, {
+          children: [jsxs(MenuGroupComp, {
+            title: jsx(MenuTitleComp, {
               children: renderI18nText('desktop_new_tab.create_new_file_in')
             }),
-            children: [d.map(e => jsxs(q7, {
+            children: [d.map(e => jsxs(MenuItemComp, {
               onClick: u({
                 team: e,
                 project: e.project
               }),
-              children: [jsx(Q$, {
+              children: [jsx(MenuItemLead, {
                 children: jsx('div', {
                   className: lp,
                   children: jsx(_$$nl2, {
@@ -5089,18 +5089,18 @@ function l_({
                 truncate: !0,
                 children: [e.name, ' / ', e.project.path]
               })]
-            }, e.id)), c && c.length > 0 && jsxs(g8, {
-              children: [jsx(_$$ZP, {
+            }, e.id)), c && c.length > 0 && jsxs(MenuSubMenu, {
+              children: [jsx(MenuSubTrigger, {
                 children: renderI18nText('file_browser.tool_bar.see_more_editable_projects', {
                   numberOfEditableProjects: c.length
                 })
-              }), jsx(MJ, {
-                children: c.map(e => jsxs(q7, {
+              }), jsx(MenuSubContainerComp, {
+                children: c.map(e => jsxs(MenuItemComp, {
                   onClick: u({
                     team: e,
                     project: e.project
                   }),
-                  children: [jsx(Q$, {
+                  children: [jsx(MenuItemLead, {
                     children: jsx('div', {
                       className: lp,
                       children: jsx(_$$nl2, {
@@ -5121,9 +5121,9 @@ function l_({
                 }, e.id))
               })]
             })]
-          }), !i && !a && jsxs(q7, {
+          }), !i && !a && jsxs(MenuItemComp, {
             onClick: u(null),
-            children: [jsx(Q$, {
+            children: [jsx(MenuItemLead, {
               children: jsx(_$$A8, {})
             }), jsx(TextWithTruncation, {
               truncate: !0,
@@ -5174,8 +5174,8 @@ function lF({
       throwTypeError(e);
   }
   let d = r ? r.project.id : void 0;
-  let c = !!r && !_$$rR(normalizeTeamData(r.team), {
-    type: _$$sK.ADD_FILE,
+  let c = !!r && !checkTeamFileRestrictions(normalizeTeamData(r.team), {
+    type: AddOperationType.ADD_FILE,
     editorType: e
   });
   let u = n && !i;
@@ -5190,7 +5190,7 @@ function lF({
   let h = e === FFileType.SITES && _$$z2() === 'BETA';
   let g = _$$a8();
   let f = h || e === FFileType.COOPER || g && e === FFileType.FIGMAKE;
-  return jsx(_$$J5, {
+  return jsx(setupThemeContext, {
     brand: _$$K4(e),
     children: jsx(ButtonPrimitive, {
       'ref': setKeyboardNavigationElement,
@@ -5213,14 +5213,14 @@ function lF({
                 team: r.team
               }
             })) : o(showModalHandler({
-              type: DV,
+              type: ConsumptionPaywallModalPlansPricing,
               data: {
                 team: r.team,
-                resource: e !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
+                resource: e !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? PageFolderFile.FILE : FeatureFlag.FIGMAKE,
                 action: fileActionEnum.CREATE_FILE_FROM_DROPDOWN,
                 editorType: e,
-                currentPlan: _$$F4.Plan.STARTER,
-                upsellPlan: _$$F4.Plan.PRO,
+                currentPlan: consumptionPaywallUtils.Plan.STARTER,
+                upsellPlan: consumptionPaywallUtils.Plan.PRO,
                 upsellSource: UpsellModalType.CREATE_NEW_FILE
               }
             }));
@@ -6259,7 +6259,7 @@ let dX = {
   }
 };
 function dJ() {
-  let e = Td();
+  let e = getFullscreenFileKey();
   let [t] = _$$IT(OpenEditorFileData({
     fileKey: e
   }), {
@@ -6420,7 +6420,7 @@ function ci({
     show
   } = _$$L3();
   let i = data?.tile ?? null;
-  let a = Td();
+  let a = getFullscreenFileKey();
   let s = _$$v4();
   let o = useCallback(e => {
     i && s(i, e);
@@ -6476,7 +6476,7 @@ function ca() {
   });
 }
 function cs() {
-  return Td() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(_$$tH, {
     boundaryKey: 'file-list-other-files',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6515,7 +6515,7 @@ function cd() {
   });
 }
 function cc() {
-  return Td() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(_$$tH, {
     boundaryKey: 'file-list-pinned-files',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6587,7 +6587,7 @@ let ch = {
   }
 };
 function cm() {
-  return Td() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(_$$tH, {
     boundaryKey: 'file-drawer-header',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6651,7 +6651,7 @@ function cE() {
   let r = _$$o(_$$nt.interopFiles);
   let n = Xr(V1);
   let i = useAtomWithSubscription(XU);
-  return r ? jsxs(_$$J5, {
+  return r ? jsxs(setupThemeContext, {
     mode: 'dark',
     children: [jsx(_$$N7, {
       children: t && jsxs(_$$P.div, {
@@ -7081,13 +7081,13 @@ function uy(e) {
     type: 'button',
     label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c5.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   let c = {
     type: 'link',
     label: renderI18nText('draw.onboarding.first_time.learn_more'),
     href: 'https://help.figma.com/hc/articles/31440394517143',
-    ctaTrackingDescriptor: _$$c5.LEARN_MORE
+    ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
   };
   return jsx(_$$rq, {
     description: jsx('span', {
@@ -7146,7 +7146,7 @@ function uT(e) {
     type: 'button',
     label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c5.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   return jsx(_$$rq, {
     description: jsx('span', {
@@ -7207,7 +7207,7 @@ function uv(e) {
     type: 'button',
     label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
-    ctaTrackingDescriptor: _$$c5.GOT_IT
+    ctaTrackingDescriptor: UpgradeAction.GOT_IT
   };
   return jsx(_$$rq, {
     description: renderI18nText('draw.onboarding.back_to_design.description'),
@@ -7488,7 +7488,7 @@ function u8() {
   let p = useCallback(({
     preset: e,
     isSelected: t
-  }) => jsx(q7, {
+  }) => jsx(MenuItemComp, {
     onClick: () => u(e.name),
     children: jsxs('div', {
       className: RS,
@@ -7502,7 +7502,7 @@ function u8() {
       })]
     })
   }, e.name), [u]);
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsxs('button', {
       className: j()(zH, _$$rr),
@@ -7515,7 +7515,7 @@ function u8() {
         className: FH,
         children: jsx(_$$O2, {})
       })]
-    }), jsxs(mc, {
+    }), jsxs(MenuContainerComp, {
       children: [defaultStrokes.map(e => {
         let t = e.name === c;
         return p({
@@ -7523,7 +7523,7 @@ function u8() {
           isSelected: t
         });
       }), !d && currentStroke && jsxs(Fragment, {
-        children: [jsx(wv, {}), p({
+        children: [jsx(MenuSeparator, {}), p({
           preset: currentStroke,
           isSelected: !0
         })]
@@ -8712,7 +8712,7 @@ function _A() {
 };
 loadFeatureFlags().fpl_sentry_reporting;
 let _x = memo(() => {
-  let e = _6();
+  let e = getSelectedView();
   let t = _$$N4();
   if (isMainView(e) && t) return jsx(_I, {});
   if (e.view === 'fullscreen') {
@@ -8742,7 +8742,7 @@ let _x = memo(() => {
   return jsx(IF, {});
 });
 function _N(e) {
-  let t = _6();
+  let t = getSelectedView();
   let r = useAtomWithSubscription(_$$h3);
   if (t.view === 'fullscreen' && r !== 'ok') {
     let {
@@ -8760,7 +8760,7 @@ function _N(e) {
 let _C = memo(() => {
   let e = useDispatch();
   let t = useSelector(e => e.flashes);
-  let r = _6();
+  let r = getSelectedView();
   let n = useSelector(e => e.interactionTestDialogShown);
   let i = useSelector(e => e.blockedUILoadingIndicator);
   let a = useSelector(e => e.mirror.appModel.showUi);
@@ -9027,7 +9027,7 @@ window.addEventListener('load', () => {
 LH();
 let _R = !1;
 function _L() {
-  let e = z3();
+  let e = getSelectedViewType();
   let t = _$$s();
   yw();
   e !== 'prototype' || isInteractionOrEvalMode() || _R || (reportError(_$$e.PROTOTYPING, new Error('Loading PrototypeAppView as part of AppView')), _R = !0);
@@ -9037,7 +9037,7 @@ function _L() {
   });
 }
 function _P() {
-  let e = z3();
+  let e = getSelectedViewType();
   let t = _$$s();
   return jsx(_$$uW.Provider, {
     value: t,

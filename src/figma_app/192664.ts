@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
@@ -103,12 +103,12 @@ let R = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: L,
       width: "md",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("fullscreen.color_management.user_color_profile_modal.title")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           children: [jsx("form", {
             children: jsx(_$$b, {
               legend: jsx(_$$s, {

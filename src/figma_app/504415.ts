@@ -1,256 +1,399 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "react-redux";
-import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
-import { Label } from "../905/270045";
-import { p as _$$p } from "../905/185998";
-import { T as _$$T } from "../905/909590";
-import { ButtonPrimitive } from "../905/632989";
-import { Button } from "../905/521428";
-import { useModalManager } from "../905/437088";
-import { ModalRootComponent } from "../905/38914";
-import { ViewType } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { RecordingComponent, handleFocusEvent, generateRecordingKey } from "../figma_app/878298";
-import { logError } from "../905/714362";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { fk } from "../figma_app/618433";
-import { popModalStack } from "../905/156213";
-import { D, m as _$$m } from "../905/852057";
-import { selectCurrentFile } from "../figma_app/516028";
-import { enterVersionHistoryMode } from "../figma_app/841351";
-import { registerModal } from "../905/102752";
-import { B } from "../905/867899";
-import { u as _$$u, R } from "../905/375517";
-let x = class e extends RecordingComponent {
-  constructor(t) {
-    super(t);
-    this.onConfirmSavepointModal = (e, t) => {
-      let r = e || "";
-      let n = t || "";
-      this.props.editingSavepointID && this.props.fileKey ? (this.props.dispatch(D({
+import type { ThunkActionDispatch } from 'redux-thunk'
+import { useDispatch, useSelector } from 'react-redux'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { ModalRootComponent } from '../905/38914'
+import { registerModal } from '../905/102752'
+import { popModalStack } from '../905/156213'
+import { InputComponent } from '../905/185998'
+import { Label } from '../905/270045'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { u as _$$u, R } from '../905/375517'
+import { useModalManager } from '../905/437088'
+import { trackEventAnalytics } from '../905/449184'
+import { Button } from '../905/521428'
+import { ButtonPrimitive } from '../905/632989'
+import { logError } from '../905/714362'
+import { fileUpdateSavepointAction, savepointOptimistThunk } from '../905/852057'
+import { B } from '../905/867899'
+import { Textarea } from '../905/909590'
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243'
+import { selectCurrentFile } from '../figma_app/516028'
+import { hasCmsCollection } from '../figma_app/618433'
+import { ViewType } from '../figma_app/763686'
+import { enterVersionHistoryMode } from '../figma_app/841351'
+import { generateRecordingKey, handleFocusEvent, RecordingComponent } from '../figma_app/878298'
+
+/**
+ * SavepointModalProps - Props for SavepointModal component (originally class e)
+ */
+interface SavepointModalProps {
+  description?: string
+  dispatch: ThunkActionDispatch<any>
+  editingSavepointID?: string
+  fileKey?: string
+  hasCMSData?: boolean
+  hideShowFullVersionHistoryCTA?: boolean
+  isEditingMergeSavepoint?: boolean
+  isHistoryMode?: boolean
+  isLabelReadOnly?: boolean
+  isViewOnly?: boolean
+  label?: string
+  recordingKey?: string
+}
+
+/**
+ * SavepointModalState - State for SavepointModal component (originally class e)
+ */
+interface SavepointModalState {
+  label: string
+  description: string
+  disableConfirm: boolean
+}
+
+/**
+ * SavepointModal - Modal for creating/editing savepoints (originally class e)
+ */
+class SavepointModal extends RecordingComponent<SavepointModalProps, SavepointModalState> {
+  static displayName = 'SavepointModal'
+  static keepSavepointModalInput = false
+  static savedLabelInput = ''
+  static savedDescriptionInput = ''
+
+  constructor(props: SavepointModalProps) {
+    super(props)
+    this.state = {
+      label: '',
+      description: '',
+      disableConfirm: !props.isLabelReadOnly,
+    }
+  }
+
+  /**
+   * Handles confirming the savepoint modal (originally onConfirmSavepointModal)
+   */
+  onConfirmSavepointModal = (label?: string, description?: string) => {
+    const r = label || ''
+    const n = description || ''
+    if (this.props.editingSavepointID && this.props.fileKey) {
+      this.props.dispatch(fileUpdateSavepointAction({
         fileKey: this.props.fileKey,
         savepointID: this.props.editingSavepointID,
         label: r,
-        description: n
-      })), this.hideModal(), trackEventAnalytics("History Version Edited Information", {
+        description: n,
+      }))
+      this.hideModal()
+      trackEventAnalytics('History Version Edited Information', {
         savepointId: this.props.editingSavepointID,
         labelLength: r.length,
-        descriptionLength: n.length
-      })) : r.length > 0 && this.props.fileKey && (this.props.dispatch(_$$m({
+        descriptionLength: n.length,
+      })
+    }
+    else if (r.length > 0 && this.props.fileKey) {
+      this.props.dispatch(savepointOptimistThunk({
         fileKey: this.props.fileKey,
         label: r,
-        description: n
-      })), this.hideModal(), trackEventAnalytics(`History Version Created from ${this.props.isHistoryMode ? "History Mode" : "Keyboard Shortcut"}`, {
+        description: n,
+      }))
+      this.hideModal()
+      trackEventAnalytics(`History Version Created from ${this.props.isHistoryMode ? 'History Mode' : 'Keyboard Shortcut'}`, {
         savepointId: this.props.editingSavepointID,
         labelLength: r.length,
-        descriptionLength: n.length
-      }));
-      this.clearSavedInputs();
-    };
-    this.hideModal = () => {
-      this.props.dispatch(popModalStack());
-    };
-    this.onSubmit = handleFocusEvent(this, "submit", () => {
-      this.onConfirmSavepointModal(this.state.label, this.state.description);
-    });
-    this.onCancel = () => {
-      this.clearSavedInputs();
-      this.hideModal();
-    };
-    this.saveHistoryInputs = () => {
-      e.keepSavepointModalInput = !0;
-      e.savedLabelInput = this.state.label;
-      e.savedDescriptionInput = this.state.description;
-    };
-    this.clearSavedInputs = () => {
-      e.keepSavepointModalInput = !1;
-      e.savedLabelInput = "";
-      e.savedDescriptionInput = "";
-    };
-    this.onLabelChange = e => {
-      this.setState({
-        label: e
-      });
-    };
-    this.onLabelBlur = e => {
-      this.onLabelChange(e.target.value);
-    };
-    this.onDescriptionChange = e => {
-      this.setState({
-        description: e
-      });
-    };
-    this.onDescriptionBlur = e => {
-      this.onDescriptionChange(e.target.value);
-    };
-    this.goHistoryMode = () => {
-      this.props.isHistoryMode || (this.props.dispatch(enterVersionHistoryMode()), this.saveHistoryInputs(), this.hideModal());
-    };
-    this.state = {
-      label: "",
-      description: "",
-      disableConfirm: !this.props.isLabelReadOnly
-    };
+        descriptionLength: n.length,
+      })
+    }
+    this.clearSavedInputs()
   }
+
+  /**
+   * Hides the modal (originally hideModal)
+   */
+  hideModal = () => {
+    this.props.dispatch(popModalStack())
+  }
+
+  /**
+   * Handles submit event (originally onSubmit)
+   */
+  onSubmit = handleFocusEvent(this, 'submit', () => {
+    this.onConfirmSavepointModal(this.state.label, this.state.description)
+  })
+
+  /**
+   * Handles cancel event (originally onCancel)
+   */
+  onCancel = () => {
+    this.clearSavedInputs()
+    this.hideModal()
+  }
+
+  /**
+   * Saves current inputs for history (originally saveHistoryInputs)
+   */
+  saveHistoryInputs = () => {
+    SavepointModal.keepSavepointModalInput = true
+    SavepointModal.savedLabelInput = this.state.label
+    SavepointModal.savedDescriptionInput = this.state.description
+  }
+
+  /**
+   * Clears saved inputs (originally clearSavedInputs)
+   */
+  clearSavedInputs = () => {
+    SavepointModal.keepSavepointModalInput = false
+    SavepointModal.savedLabelInput = ''
+    SavepointModal.savedDescriptionInput = ''
+  }
+
+  /**
+   * Handles label change (originally onLabelChange)
+   */
+  onLabelChange = (label: string) => {
+    this.setState({ label })
+  }
+
+  /**
+   * Handles label blur (originally onLabelBlur)
+   */
+  onLabelBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    this.onLabelChange(e.target.value)
+  }
+
+  /**
+   * Handles description change (originally onDescriptionChange)
+   */
+  onDescriptionChange = (description: string) => {
+    this.setState({ description })
+  }
+
+  /**
+   * Handles description blur (originally onDescriptionBlur)
+   */
+  onDescriptionBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    this.onDescriptionChange(e.target.value)
+  }
+
+  /**
+   * Switches to history mode (originally goHistoryMode)
+   */
+  goHistoryMode = () => {
+    if (!this.props.isHistoryMode) {
+      this.props.dispatch(enterVersionHistoryMode())
+      this.saveHistoryInputs()
+      this.hideModal()
+    }
+  }
+
+  /**
+   * Hydrates label and description from props or saved inputs (originally hydrateLabelAndDescription)
+   */
   hydrateLabelAndDescription() {
-    this.state.label.length < 1 && this.state.description.length < 1 && (e.keepSavepointModalInput ? this.setState({
-      label: e.savedLabelInput,
-      description: e.savedDescriptionInput
-    }) : this.setState({
-      label: this.props.label,
-      description: this.props.description
-    }));
+    if (this.state.label.length < 1 && this.state.description.length < 1) {
+      if (SavepointModal.keepSavepointModalInput) {
+        this.setState({
+          label: SavepointModal.savedLabelInput,
+          description: SavepointModal.savedDescriptionInput,
+        })
+      }
+      else {
+        this.setState({
+          label: this.props.label || '',
+          description: this.props.description || '',
+        })
+      }
+    }
   }
+
   componentDidMount() {
-    this.hydrateLabelAndDescription();
-    super.componentDidMount();
+    this.hydrateLabelAndDescription()
+    super.componentDidMount()
   }
+
   UNSAFE_componentWillReceiveProps() {
-    this.hydrateLabelAndDescription();
+    this.hydrateLabelAndDescription()
   }
+
+  /**
+   * Renders the SavepointModal (originally render)
+   */
   render() {
-    if (this.props.isViewOnly) return null;
-    let e = this.state.disableConfirm;
-    this.state.label && this.state.label.length > 0 && (e = !1);
-    let t = renderI18nText("collaboration.feedback.save_modal.save");
-    let r = renderI18nText("collaboration.feedback.save_modal.cancel");
+    if (this.props.isViewOnly)
+      return null
+    let disableConfirm = this.state.disableConfirm
+    if (this.state.label && this.state.label.length > 0)
+      disableConfirm = false
+    const saveText = renderI18nText('collaboration.feedback.save_modal.save')
+    const cancelText = renderI18nText('collaboration.feedback.save_modal.cancel')
     return jsxs(Fragment, {
-      children: [jsxs(nB, {
-        children: [jsxs("div", {
-          className: _$$u,
-          children: [this.props.isEditingMergeSavepoint && jsx(Label, {
-            htmlFor: "savepoint-modal-title",
-            children: renderI18nText("collaboration.feedback.save_modal.merge_name_placeholder")
-          }), jsx(_$$p, {
-            id: "savepoint-modal-title",
-            disabled: this.props.isLabelReadOnly,
-            onChange: this.onLabelChange,
-            htmlAttributes: {
-              onBlur: this.onLabelBlur
-            },
-            placeholder: getI18nString("fullscreen.savepoint_modal.title"),
-            "aria-label": getI18nString("fullscreen.savepoint_modal.title_label"),
-            recordingKey: generateRecordingKey(this.props, "title"),
-            value: this.state.label
-          })]
-        }), jsxs("div", {
-          className: _$$u,
-          children: [this.props.isEditingMergeSavepoint && jsx(Label, {
-            htmlFor: "savepoint-modal-description",
-            children: renderI18nText("fullscreen.savepoint_modal.give_this_merge_a_description")
-          }), jsx(_$$T, {
-            id: "savepoint-modal-description",
-            "aria-label": getI18nString("fullscreen.savepoint_modal.description_label"),
-            value: this.state.description,
-            placeholder: getI18nString("collaboration.feedback.save_modal.description_placeholder"),
-            onChange: this.onDescriptionChange,
-            htmlAttributes: {
-              onBlur: this.onDescriptionBlur
-            },
-            recordingKey: generateRecordingKey(this.props, "description")
-          })]
-        }), this.props.hasCMSData && jsx("div", {
-          className: _$$u,
-          children: jsx(B, {})
-        }), jsx("div", {
-          className: _$$u,
-          children: !this.props.isHistoryMode && !this.props.hideShowFullVersionHistoryCTA && jsx(ButtonPrimitive, {
-            className: R,
-            onClick: this.goHistoryMode,
-            children: renderI18nText("fullscreen.savepoint_modal.show_full_version_history")
-          })
-        })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
-          children: [jsx(Button, {
-            variant: "secondary",
-            onClick: this.onCancel,
-            children: r
-          }), jsx(Button, {
-            type: "submit",
-            disabled: e,
-            "data-testid": "savepoint-modal-submit",
-            onClick: this.onSubmit,
-            children: t
-          })]
-        })
-      })]
-    });
+      children: [
+        jsxs(DialogBody, {
+          children: [
+            jsxs('div', {
+              className: _$$u,
+              children: [
+                this.props.isEditingMergeSavepoint && jsx(Label, {
+                  htmlFor: 'savepoint-modal-title',
+                  children: renderI18nText('collaboration.feedback.save_modal.merge_name_placeholder'),
+                }),
+                jsx(InputComponent, {
+                  'id': 'savepoint-modal-title',
+                  'disabled': this.props.isLabelReadOnly,
+                  'onChange': this.onLabelChange,
+                  'htmlAttributes': { onBlur: this.onLabelBlur },
+                  'placeholder': getI18nString('fullscreen.savepoint_modal.title'),
+                  'aria-label': getI18nString('fullscreen.savepoint_modal.title_label'),
+                  'recordingKey': generateRecordingKey(this.props, 'title'),
+                  'value': this.state.label,
+                }),
+              ],
+            }),
+            jsxs('div', {
+              className: _$$u,
+              children: [
+                this.props.isEditingMergeSavepoint && jsx(Label, {
+                  htmlFor: 'savepoint-modal-description',
+                  children: renderI18nText('fullscreen.savepoint_modal.give_this_merge_a_description'),
+                }),
+                jsx(Textarea, {
+                  'id': 'savepoint-modal-description',
+                  'aria-label': getI18nString('fullscreen.savepoint_modal.description_label'),
+                  'value': this.state.description,
+                  'placeholder': getI18nString('collaboration.feedback.save_modal.description_placeholder'),
+                  'onChange': this.onDescriptionChange,
+                  'htmlAttributes': { onBlur: this.onDescriptionBlur },
+                  'recordingKey': generateRecordingKey(this.props, 'description'),
+                }),
+              ],
+            }),
+            this.props.hasCMSData && jsx('div', {
+              className: _$$u,
+              children: jsx(B, {}),
+            }),
+            jsx('div', {
+              className: _$$u,
+              children: !this.props.isHistoryMode && !this.props.hideShowFullVersionHistoryCTA && jsx(ButtonPrimitive, {
+                className: R,
+                onClick: this.goHistoryMode,
+                children: renderI18nText('fullscreen.savepoint_modal.show_full_version_history'),
+              }),
+            }),
+          ],
+        }),
+        jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
+            children: [
+              jsx(Button, {
+                variant: 'secondary',
+                onClick: this.onCancel,
+                children: cancelText,
+              }),
+              jsx(Button, {
+                'type': 'submit',
+                'disabled': disableConfirm,
+                'data-testid': 'savepoint-modal-submit',
+                'onClick': this.onSubmit,
+                'children': saveText,
+              }),
+            ],
+          }),
+        }),
+      ],
+    })
   }
-};
-function N(e, t) {
-  return e ? t ? renderI18nText("collaboration.feedback.save_modal.edit_merge_details") : renderI18nText("collaboration.feedback.save_modal.edit_version_information") : renderI18nText("collaboration.feedback.save_modal.add_to_version_history");
 }
-x.displayName = "SavepointModal";
-x.keepSavepointModalInput = !1;
-x.savedLabelInput = "";
-x.savedDescriptionInput = "";
-let $$C1 = registerModal(function (e) {
-  let t = useModalManager(e);
-  let r = selectCurrentFile();
-  let s = useDispatch();
-  let o = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
-  let l = e.description || "";
-  let d = e.label || "";
-  let c = e.savepointID;
-  let h = e.isEditingMergeSavepoint || !1;
-  let m = e.hideShowFullVersionHistoryCTA || !1;
-  let f = r?.key;
-  let y = fk(f);
-  let b = N(c, h);
-  return r && null != f ? jsx(ModalRootComponent, {
-    manager: t,
-    width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
-          children: b
-        })
-      }), jsx(x, {
-        description: l,
-        dispatch: s,
-        editingSavepointID: c,
-        fileKey: f,
-        hasCMSData: y,
-        hideShowFullVersionHistoryCTA: m,
-        isEditingMergeSavepoint: h,
-        isHistoryMode: o,
-        isViewOnly: !r.canEdit,
-        label: d,
-        recordingKey: "savepointModal"
-      })]
-    })
-  }) : (logError("Save Point Modal", "File key is missing.", {}, {
-    reportAsSentryError: !0
-  }), null);
-});
-let $$w0 = registerModal(function (e) {
-  let t = selectCurrentFile();
-  let r = useDispatch();
-  let s = useModalManager(e);
-  let o = N(e.savepointID, !1);
-  return t ? jsx(ModalRootComponent, {
-    manager: s,
-    width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
-          children: o
-        })
-      }), jsx(x, {
-        description: e.description ?? "",
-        dispatch: r,
-        editingSavepointID: e.savepointID,
-        fileKey: t.key,
-        hasCMSData: !1,
-        isHistoryMode: !0,
-        isLabelReadOnly: !0,
-        isViewOnly: !t.canEdit,
-        label: e.label ?? "",
-        recordingKey: "savepointModal"
-      })]
-    })
-  }) : null;
-}, "DevModeSavepointModal");
-export const S = $$w0;
-export const y = $$C1;
+
+/**
+ * getSavepointModalTitle - Returns the modal title based on context (originally N)
+ */
+function getSavepointModalTitle(savepointID?: string, isEditingMergeSavepoint?: boolean) {
+  if (savepointID) {
+    return isEditingMergeSavepoint
+      ? renderI18nText('collaboration.feedback.save_modal.edit_merge_details')
+      : renderI18nText('collaboration.feedback.save_modal.edit_version_information')
+  }
+  return renderI18nText('collaboration.feedback.save_modal.add_to_version_history')
+}
+
+/**
+ * SavepointModalContainer - Modal registration for SavepointModal (originally $$C1)
+ */
+export const SavepointModalContainer = registerModal((props) => {
+  const manager = useModalManager(props)
+  const file = selectCurrentFile()
+  const dispatch = useDispatch()
+  const isHistoryMode = useSelector<ObjectOf>(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY)
+  const description = props.description || ''
+  const label = props.label || ''
+  const savepointID = props.savepointID
+  const isEditingMergeSavepoint = props.isEditingMergeSavepoint || false
+  const hideShowFullVersionHistoryCTA = props.hideShowFullVersionHistoryCTA || false
+  const fileKey = file?.key
+  const hasCMSData = hasCmsCollection(fileKey)
+  const modalTitle = getSavepointModalTitle(savepointID, isEditingMergeSavepoint)
+
+  return file && fileKey != null
+    ? jsx(ModalRootComponent, {
+        manager,
+        width: 'lg',
+        children: jsxs(DialogContents, {
+          children: [
+            jsx(DialogHeader, {
+              children: jsx(DialogTitle, { children: modalTitle }),
+            }),
+            jsx(SavepointModal, {
+              description,
+              dispatch,
+              editingSavepointID: savepointID,
+              fileKey,
+              hasCMSData,
+              hideShowFullVersionHistoryCTA,
+              isEditingMergeSavepoint,
+              isHistoryMode,
+              isViewOnly: !file.canEdit,
+              label,
+              recordingKey: 'savepointModal',
+            }),
+          ],
+        }),
+      })
+    : (logError('Save Point Modal', 'File key is missing.', {}, { reportAsSentryError: true }), null)
+})
+
+/**
+ * DevModeSavepointModalContainer - Modal registration for dev mode (originally $$w0)
+ */
+export const DevModeSavepointModalContainer = registerModal((props) => {
+  const file = selectCurrentFile()
+  const dispatch = useDispatch()
+  const manager = useModalManager(props)
+  const modalTitle = getSavepointModalTitle(props.savepointID, false)
+
+  return file
+    ? jsx(ModalRootComponent, {
+        manager,
+        width: 'lg',
+        children: jsxs(DialogContents, {
+          children: [
+            jsx(DialogHeader, {
+              children: jsx(DialogTitle, { children: modalTitle }),
+            }),
+            jsx(SavepointModal, {
+              description: props.description ?? '',
+              dispatch,
+              editingSavepointID: props.savepointID,
+              fileKey: file.key,
+              hasCMSData: false,
+              isHistoryMode: true,
+              isLabelReadOnly: true,
+              isViewOnly: !file.canEdit,
+              label: props.label ?? '',
+              recordingKey: 'savepointModal',
+            }),
+          ],
+        }),
+      })
+    : null
+}, 'DevModeSavepointModal')
+
+// Export refactored modal containers with original export names
+export const S = DevModeSavepointModalContainer
+export const y = SavepointModalContainer

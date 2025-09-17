@@ -25,7 +25,7 @@ import { P as _$$P2 } from '../469e6e40/816817';
 import r from '../469e6e40/850004';
 import { q as _$$q2 } from '../469e6e40/977739';
 import { s as _$$s6 } from '../469e6e40/993242';
-import { F as _$$F3 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { K as _$$K2 } from '../905/3140';
 import { CloseButton } from '../905/17223';
 import { ModalRootComponent } from '../905/38914';
@@ -37,7 +37,7 @@ import { M as _$$M } from '../905/130634';
 import { ScrollContainer } from '../905/143421';
 import { Ey, To } from '../905/148137';
 import { showModalHandler, hideModal, popModalStack } from '../905/156213';
-import { p as _$$p2 } from '../905/185998';
+import { InputComponent } from '../905/185998';
 import { resolveMessage } from '../905/231762';
 import { Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
@@ -53,7 +53,7 @@ import { N_ as _$$N_2, Oq } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
 import { $ as _$$$ } from '../905/355181';
 import { BannerMessage } from '../905/363675';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
@@ -75,7 +75,7 @@ import { getFeatureFlags } from '../905/601108';
 import { K as _$$K } from '../905/628118';
 import { ButtonPrimitive } from '../905/632989';
 import { F as _$$F2 } from '../905/634016';
-import { Bi } from '../905/652992';
+import { FeatureFlag } from '../905/652992';
 import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
 import { g as _$$g2 } from '../905/687265';
@@ -84,7 +84,7 @@ import { S3 } from '../905/708054';
 import { Ju as _$$Ju, IX } from '../905/712921';
 import { SvgComponent } from '../905/714743';
 import { getResourceDataOrFallback } from '../905/723791';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { q as _$$q } from '../905/749058';
 import { tH as _$$tH } from '../905/751457';
 import { s as _$$s4 } from '../905/761565';
@@ -153,7 +153,7 @@ import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { p3 } from '../figma_app/588582';
 import { selectExperimentConfigHook } from '../figma_app/594947';
-import { ol } from '../figma_app/598018';
+import { getCurrentTeam } from '../figma_app/598018';
 import { $z } from '../figma_app/617427';
 import { Eh } from '../figma_app/617654';
 import { ButtonBasePrimary, BaseLinkComponent, ButtonSecondary, ButtonWhite, SecureLink, BigTextInputForwardRef, ButtonNegative, ButtonBasePrimaryTracked } from '../figma_app/637027';
@@ -942,8 +942,8 @@ function tk(e) {
   return jsxs('div', {
     ref: l,
     className: 'xh8yej3',
-    children: [jsxs(_$$p2.Root, {
-      children: [jsx(_$$p2, {
+    children: [jsxs(InputComponent.Root, {
+      children: [jsx(InputComponent, {
         placeholder: getI18nString('settings_tab.add_workspace_label'),
         id: o,
         ...d.getInputProps({
@@ -2539,7 +2539,7 @@ let aH = registerModal(() => {
     codegenEnabled: f.data?.pluginPreferences?.codegenEnabled,
     pinnedPluginsEnabled: f.data?.pluginPreferences?.pinnedPluginsEnabled
   }), [f.data, k, y]);
-  let N = ol();
+  let N = getCurrentTeam();
   let I = trackOrgEventWithStore();
   let A = () => {
     a?.setCodegenSettings(null);
@@ -2591,12 +2591,12 @@ let aH = registerModal(() => {
         }), jsx(SecureLink, {
           onClick: () => {
             t(showModalHandler({
-              type: DV,
+              type: ConsumptionPaywallModalPlansPricing,
               data: {
                 team: N,
-                resource: Bi.DEV_MODE_ADMIN_SETTINGS,
-                currentPlan: _$$F3.Plan.ORG,
-                upsellPlan: _$$F3.Plan.ENTERPRISE,
+                resource: FeatureFlag.DEV_MODE_ADMIN_SETTINGS,
+                currentPlan: consumptionPaywallUtils.Plan.ORG,
+                upsellPlan: consumptionPaywallUtils.Plan.ENTERPRISE,
                 editorType: null
               }
             }));
@@ -5130,7 +5130,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_table.cancel_plan'),
     description: getI18nString('settings_table.cancel_plan_description_org'),
     trackingProperties: {
-      trackingDescriptor: _$$c.CANCEL_PLAN
+      trackingDescriptor: UpgradeAction.CANCEL_PLAN
     },
     onClick: () => {
       ea.perform({
@@ -5143,7 +5143,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_table.reactivate_plan'),
     description: getI18nString('settings_table.reactivate_plan_description_org'),
     trackingProperties: {
-      trackingDescriptor: _$$c.REACTIVATE_PLAN
+      trackingDescriptor: UpgradeAction.REACTIVATE_PLAN
     },
     onClick: () => {
       ea.perform({

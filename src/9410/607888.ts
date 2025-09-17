@@ -17,13 +17,13 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { Me } from "../figma_app/598018";
+import { currentTeamAtom } from "../figma_app/598018";
 import { ai } from "../figma_app/915202";
 import { t as _$$t2 } from "../905/825647";
 import { R as _$$R } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
 export function $$j2(e, t, i) {
-  let r = atomStoreManager.get(Me);
+  let r = atomStoreManager.get(currentTeamAtom);
   let n = debugState.getState();
   let a = getPermissionsAndView(n);
   e(zE({

@@ -277,7 +277,7 @@ import { dR as _$$dR } from '../figma_app/248118';
 import { GM, PE } from '../figma_app/251115';
 import { lM as _$$lM, q8 as _$$q6, S3, U4, Xq } from '../figma_app/254872';
 import { dt as _$$dt, fC, he, QS, VA } from '../figma_app/259578';
-import { nB as _$$nB, hE, vo, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogTitle, DialogContents, DialogHeader } from '../figma_app/272243';
 import { rgbToHsl, rgbToHsv, colorToRgb } from '../figma_app/273493';
 import { DesignToolType, mapEditorToType } from '../figma_app/277543';
 import { p as _$$p2 } from '../figma_app/284426';
@@ -405,7 +405,7 @@ import ez from '../vendor/260986';
 import ay from '../vendor/267721';
 import { P as _$$P2 } from '../vendor/348225';
 import { useDispatch, useSelector } from 'react-redux';
-import { A as _$$A17 } from '../vendor/850789';
+import { useDebounce } from 'use-debounce';
 import { N as _$$N } from '../vendor/930821';
 import dc from '../vendor/946678';
 import n_ from '../vendor/950573';
@@ -4839,12 +4839,12 @@ function sm({
       bottom: window.innerHeight - t.y - 16,
       right: window.innerWidth - t.x + 16
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('first_draft.reference_settings')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 8,
         children: jsx(_$$v2, {
           placeholder: getI18nString('first_draft.reference_settings.placeholder'),
@@ -10090,7 +10090,7 @@ function dv({
   let r = useAtomWithSubscription(Lk);
   let l = useAtomWithSubscription(_$$dd);
   let d = useAtomWithSubscription(Q8);
-  let [u] = _$$A17(d, 300);
+  let [u] = useDebounce(d, 300);
   let p = u.trim();
   let h = useAtomWithSubscription(Rt);
   let m = useSelector(_$$l);

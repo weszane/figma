@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { A as _$$A } from "../905/920165";
-import { b as _$$b, bL, mc, r1, Ov, ME, wv } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp, MenuItemTrail, MenuSubText, MenuSeparator } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { T as _$$T } from "../905/256551";
 import { R as _$$R } from "../905/649743";
 import { g as _$$g } from "../905/125190";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { NodePropertyCategory, Fullscreen, LayoutTabType } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
@@ -259,7 +259,7 @@ function Y({
       transform: i
     }, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
   };
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(J, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(setupThemeContext, {
     mode: "dark",
     children: [jsx("div", {
       className: "x2pejg6 xchqr0g",
@@ -287,7 +287,7 @@ function Y({
       recordingKey: "toolbarStopCropping",
       children: jsx(_$$g, {})
     })]
-  }) : jsxs(J, {
+  }) : jsxs(setupThemeContext, {
     mode: "dark",
     children: [jsx("div", {
       className: "x2pejg6 xchqr0g",
@@ -398,8 +398,8 @@ function ee() {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return e && r ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(bL, {
+  } = setupMenu();
+  return e && r ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(V, {
       variant: "menu",
@@ -408,9 +408,9 @@ function ee() {
       getTriggerProps,
       recordingKey: "cropPresetsControl",
       children: jsx(h, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: jsx(z6, {
-        title: jsx(r1, {
+        title: jsx(MenuHiddenTitleComp, {
           children: getI18nString("whiteboard.inline_menu.aspect_ratio")
         }),
         onChange: r,
@@ -421,12 +421,12 @@ function ee() {
             value: e,
             "aria-label": $$q5(e),
             disabled: "Circle" === e && !t,
-            children: [$$q5(e), $$X4(e) && jsx(Ov, {
-              children: jsx(ME, {
+            children: [$$q5(e), $$X4(e) && jsx(MenuItemTrail, {
+              children: jsx(MenuSubText, {
                 children: $$X4(e)
               })
             })]
-          }), "Custom" === e && jsx(wv, {})]
+          }), "Custom" === e && jsx(MenuSeparator, {})]
         }, e))
       })
     })]

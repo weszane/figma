@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { P } from "../vendor/348225";
 export let $$o0 = forwardRef((e, t) => {
   let r = e.shouldDisableAnimation ? {
@@ -12,7 +12,7 @@ export let $$o0 = forwardRef((e, t) => {
       duration: 1
     }
   };
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     mode: e.isTooltip ? "dark" : void 0,
     children: jsx(P.div, {
       ref: t,

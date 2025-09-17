@@ -3,7 +3,7 @@ import { sx } from "../905/941192";
 import { clickableBaseLinkTracked, linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { Ju } from "../905/712921";
 import { isAddressEmpty, BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
@@ -50,7 +50,7 @@ function _(e) {
       onClick: e.navigateToEditDetails,
       className: _$$s.font13.py12.$,
       trackingProperties: {
-        trackingDescriptor: _$$c.EDIT_PLAN_DETAILS
+        trackingDescriptor: UpgradeAction.EDIT_PLAN_DETAILS
       },
       "data-testid": "cart-plan-details-edit-details",
       trusted: !0,
@@ -144,7 +144,7 @@ function A({
         "data-testid": "cart-review-submit-button"
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.COMPLETE_PURCHASE,
+        trackingDescriptor: UpgradeAction.COMPLETE_PURCHASE,
         ...y
       },
       children: u ? k : renderI18nText("checkout.complete_purchase")

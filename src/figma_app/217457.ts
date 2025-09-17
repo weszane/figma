@@ -13,7 +13,7 @@ import { ProductAccessTypeEnum, ViewAccessTypeEnum, B6 } from "../905/513035";
 import { N_ } from "../905/332483";
 import { a as _$$a } from "../905/584964";
 import { compareProductAccessOrder, getProductAccessTypeOrDefault } from "../figma_app/765689";
-import { lG, F2 } from "../905/389382";
+import { shouldShowSeatDescription, getMinimumBundle } from "../905/389382";
 let y = {
   design: ProductAccessTypeEnum.DESIGN,
   whiteboard: ProductAccessTypeEnum.FIGJAM,
@@ -100,7 +100,7 @@ export function $$O3(e) {
     }), []);
     return useMemo(() => N_.dict(e => {
       let r = o[e];
-      "seat_description" === t && (r = r.filter(e => lG(e, s)));
+      "seat_description" === t && (r = r.filter(e => shouldShowSeatDescription(e, s)));
       return r;
     }), [t, o, s]);
   }(e);
@@ -134,7 +134,7 @@ export function $$k6(e, t) {
   return useMemo(() => r(e), [e, r]);
 }
 export function $$M8(e, t) {
-  switch (F2(e)) {
+  switch (getMinimumBundle(e)) {
     case ProductAccessTypeEnum.EXPERT:
       return {
         header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.full_seat"),
@@ -161,7 +161,7 @@ export function $$M8(e, t) {
   }
 }
 export function $$F4(e, t) {
-  let r = F2(getProductAccessTypeOrDefault(t));
+  let r = getMinimumBundle(getProductAccessTypeOrDefault(t));
   return !r || !B6(r, e);
 }
 export const AG = $$N0;

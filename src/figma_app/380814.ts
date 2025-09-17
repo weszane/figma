@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
@@ -108,12 +108,12 @@ function K({
     defaultPosition: e,
     width: r,
     recordingKey: a,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("variables.create_modal.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx($$J0, {
           resolvedType: i,

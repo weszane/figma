@@ -37,7 +37,7 @@ import { h as _$$h2 } from "../905/284399";
 import { Rx, IY, q9 } from "../1556/690522";
 import { q3, M_ } from "../figma_app/450829";
 import { S as _$$S } from "../1556/805548";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { X as _$$X } from "../905/482718";
 import { Q as _$$Q, R as _$$R } from "../905/11928";
 import { EventShield } from "../905/821217";
@@ -89,7 +89,7 @@ import { customHistory } from "../905/612521";
 import { TextWithTruncation } from "../905/984674";
 import { rq } from "../905/425180";
 import { xX, j9 } from "../figma_app/211146";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { f as _$$f2 } from "../905/940356";
 import { ng as _$$ng, u_, $g, Jy, v$ } from "../figma_app/205827";
 import { AutoLayout } from "../905/470281";
@@ -116,7 +116,7 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Hj } from "../figma_app/336229";
 import { useMultiSubscription } from "../figma_app/288654";
 import { I as _$$I } from "../c5e2cae0/718426";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { canEditTeam } from "../figma_app/642025";
 import { b0 } from "../905/763690";
 import { useResourceRouteParams, useResourceFuid, ResourceHubHomeRouteClass } from "../figma_app/979714";
@@ -139,7 +139,7 @@ import { _l, B$ } from "../figma_app/995208";
 import { C5 } from "../7021/95197";
 import { $ as _$$$ } from "../1250/770005";
 import { x$ } from "../figma_app/141320";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { ZL } from "../1250/272654";
 import { Dw } from "../figma_app/976345";
 import { QL, EM } from "../905/609392";
@@ -252,13 +252,13 @@ function en(e) {
       label: renderI18nText("rcs.take_tour.let_s_go"),
       type: "button",
       onClick: e.onClickPrimaryCta,
-      ctaTrackingDescriptor: _$$c.LETS_GO
+      ctaTrackingDescriptor: UpgradeAction.LETS_GO
     },
     secondaryCta: {
       label: renderI18nText("rcs.take_tour.no_thanks"),
       type: "button",
       onClick: e.onManualDismiss,
-      ctaTrackingDescriptor: _$$c.NO_THANKS
+      ctaTrackingDescriptor: UpgradeAction.NO_THANKS
     },
     testId: "TakeTourOfFileBrowserOverlay",
     title: renderI18nText("rcs.take_tour.take_a_quick_tour_of_the_file_browser"),
@@ -730,7 +730,7 @@ function eZ() {
       label: renderI18nText("rcs.rcs_shared.done"),
       type: "button",
       onClick: n.complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     title: renderI18nText("rcs.org_welcome.welcome_to_your_figma_organization"),
     trackingContextName: "Orgs Welcome Onboarding Modal",
@@ -792,7 +792,7 @@ function ti({
       children: [jsx(_$$tM, {
         onClick: t,
         trackingProperties: {
-          trackingDescriptor: _$$c.SKIP
+          trackingDescriptor: UpgradeAction.SKIP
         },
         children: renderI18nText("onboarding.skip")
       }), jsx(_$$vd, {
@@ -803,7 +803,7 @@ function ti({
         },
         disabled: null === n,
         trackingProperties: {
-          trackingDescriptor: _$$c.JOIN
+          trackingDescriptor: UpgradeAction.JOIN
         },
         children: renderI18nText("onboarding.workspace_step.join")
       })]
@@ -836,7 +836,7 @@ function ti({
         className: _$$s.absolute.top0.right0.mt8.mr8.$,
         onClick: t,
         trackingProperties: {
-          trackingDescriptor: _$$c.CLOSE_BUTTON
+          trackingDescriptor: UpgradeAction.CLOSE_BUTTON
         }
       })]
     })
@@ -2021,7 +2021,7 @@ function nm(e) {
   });
 }
 function np() {
-  let e = _6();
+  let e = getSelectedView();
   let t = useSelector(e => e.userTeamFlags);
   let n = useSelector(e => !!e.modalShown);
   let r = _$$f2(Jy);
@@ -2172,7 +2172,7 @@ function nA({
     selectedView: e
   }) => e);
   let r = useSelector(e => e.teams);
-  let i = FC();
+  let i = selectPermissionsState();
   let o = useMemo(() => Object.values(r).filter(e => !hasTeamPaidAccess(e) && canEditTeam(e.id, i)), [r, i]);
   let s = [];
   let l = useMemo(() => o.map(e => ({
@@ -2255,13 +2255,13 @@ function nL() {
         }, d).href);
         complete();
       },
-      ctaTrackingDescriptor: _$$c.SHOW_ME_MORE
+      ctaTrackingDescriptor: UpgradeAction.SHOW_ME_MORE
     },
     secondaryCta: {
       label: renderI18nText("community.resource_hub.promotion.cancel"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.CANCEL
+      ctaTrackingDescriptor: UpgradeAction.CANCEL
     },
     targetKey: "resource_hub_link",
     title: renderI18nText("community.resource_hub.promotion.title"),
@@ -2350,13 +2350,13 @@ function n0() {
       label: renderI18nText("starter_plan_updates_modal.primary_cta_button"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("starter_plan_updates_modal.secondary_cta_button"),
       type: "link",
       href: "https://help.figma.com/hc/categories/31823555275671-Figma-Sites",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     title: renderI18nText("starter_plan_updates_modal.title"),
     trackingContextName: "starter_plan_updates_overlay",
@@ -2369,7 +2369,7 @@ function n6() {
   let e = useAtomWithSubscription(userFlagsAtom);
   let t = useAtomWithSubscription(Qm);
   let n = useAtomWithSubscription(zN);
-  let a = ol();
+  let a = getCurrentTeam();
   let r = useDispatch();
   let o = _$$e({
     overlay: Ult,
@@ -2462,7 +2462,7 @@ function ao() {
       label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: _$$U3,
     testId: "limited_plan_spaces_onboarding_test_id",

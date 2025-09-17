@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useId, useCallback, useEffect } from "react";
-import { p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { IconButton } from "../905/443068";
 import { U } from "../905/708285";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
@@ -34,13 +34,13 @@ export function $$p0(e) {
       left: location.x,
       top: location.y
     },
-    children: jsx(J, {
+    children: jsx(setupThemeContext, {
       mode: "dark",
       children: jsxs("div", {
         className: `hyperlink_editor--popup--CHv-O _overlayBase--_overlayBase--Rkj8l ${Dm}`,
         children: [getFeatureFlags().figjam_a11y_inline_toolbar ? jsx("div", {
           className: "xt7dq6l x3smdqs xfifm61",
-          children: jsx(p, {
+          children: jsx(InputComponent, {
             id: _,
             value: url,
             onChange: A,

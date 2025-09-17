@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { CorePerfInfo, DocumentMode } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
@@ -87,12 +87,12 @@ export function $$C2(e) {
   return e.isBranching ? jsx(_$$E, {}) : jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: L.title
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsxs("div", {
           className: j,
           children: [jsxs("div", {

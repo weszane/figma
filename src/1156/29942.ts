@@ -155,7 +155,7 @@ import { w as _$$w } from "../905/433065";
 import { Z as _$$Z3 } from "../1156/98576";
 import { AP } from "../1156/717481";
 import { A as _$$A6 } from "../b2835def/114344";
-import { p as _$$p2 } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { m as _$$m } from "../905/636019";
 import { G as _$$G } from "../905/750789";
 import { R as _$$R } from "../905/943003";
@@ -184,7 +184,7 @@ import { p as _$$p3 } from "../1156/298326";
 import { Ay as _$$Ay3 } from "../figma_app/432652";
 import { Vc } from "../figma_app/211694";
 import { Z as _$$Z4 } from "../1156/154963";
-import { b as _$$b3, bL, mc as _$$mc, q7, Q$, ME } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead, MenuSubText } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
 import { g as _$$g3 } from "../905/496772";
 import { G as _$$G2 } from "../905/865520";
@@ -194,16 +194,16 @@ import { l as _$$l2 } from "../905/509505";
 import { Fullscreen } from "../figma_app/13528";
 import { Point } from "../905/736624";
 import { e as _$$e5 } from "../905/621515";
-import { F as _$$F4 } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { N as _$$N5 } from "../figma_app/268271";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { q6k } from "../figma_app/6204";
 import { nM as _$$nM, nc as _$$nc, NJ } from "../figma_app/570630";
 import { jx, Ic } from "../figma_app/198516";
 import { u as _$$u } from "../1156/83782";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { rq as _$$rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { kC, dY, x1 } from "../1156/116225";
@@ -2635,7 +2635,7 @@ function nJ({
   };
   return jsxs("form", {
     className: "x78zum5 xdt5ytf x1cy8zhl xl56j7k x167g77z xkh2ocl xy13l1i",
-    children: [jsx(_$$p2, {
+    children: [jsx(InputComponent, {
       type: "password",
       id: "password",
       value: c,
@@ -4253,7 +4253,7 @@ function im({
       href: kC,
       type: "link",
       variantOverride: "white",
-      ctaTrackingDescriptor: _$$c2.DS_IMPORT_LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.DS_IMPORT_LEARN_MORE
     },
     targetKey: e,
     title: renderI18nText("figmake.design_system_imports.selected_design_system_overlay.title"),
@@ -4452,7 +4452,7 @@ function iy({
   let {
     getTriggerProps,
     manager
-  } = _$$b3();
+  } = setupMenu();
   let L = e => {
     let t = Hg(_$$nc)[e] || null;
     t && (Zr(t), E(Ic.CODE), t.codeFilePath && ci(t.codeFilePath));
@@ -4461,12 +4461,12 @@ function iy({
   let M = () => {
     if (z) {
       N(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: m?.team ?? null,
-          resource: Bi.CODE_CHAT_LIBRARY_IMPORT,
-          currentPlan: _$$F4.Plan.STARTER,
-          upsellPlan: _$$F4.Plan.PRO,
+          resource: FeatureFlag.CODE_CHAT_LIBRARY_IMPORT,
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO,
           editorType: FFileType.FIGMAKE,
           upsellSource: UpsellModalType.CODE_CHAT_LIBRARY_IMPORT
         }
@@ -4508,7 +4508,7 @@ function iy({
     complete();
     O(e);
   };
-  let D = jsxs(bL, {
+  let D = jsxs(MenuRootComp, {
     manager,
     children: [createElement(ButtonPrimitive, {
       ...Ay.props(ih.editButton, !a && A && ih.editButtonFrozen),
@@ -4516,8 +4516,8 @@ function iy({
       key: "editButton",
       ...F,
       "data-onboarding-key": oD
-    }, jsx(_$$g3, {})), jsxs(_$$mc, {
-      children: [jsxs(q7, {
+    }, jsx(_$$g3, {})), jsxs(MenuContainerComp, {
+      children: [jsxs(MenuItemComp, {
         onClick: () => {
           analyticsEventManager.trackDefinedEvent("ds_import.edit_styles_menu_item_clicked", {
             library_key: libraryImport?.library.library_key,
@@ -4525,14 +4525,14 @@ function iy({
           });
           L("/styles/globals.css");
         },
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx(_$$G2, {})
         }), jsxs("div", {
-          children: [getI18nString("sites.modal.edit_styles_menu_title"), jsx(ME, {
+          children: [getI18nString("sites.modal.edit_styles_menu_title"), jsx(MenuSubText, {
             children: getI18nString("sites.modal.edit_styles_menu_subtitle")
           })]
         })]
-      }), jsxs(q7, {
+      }), jsxs(MenuItemComp, {
         onClick: () => {
           analyticsEventManager.trackDefinedEvent("ds_import.edit_guidelines_menu_item_clicked", {
             library_key: libraryImport?.library.library_key,
@@ -4541,10 +4541,10 @@ function iy({
           let e = _$$W(ip, NJ, dY) || _$$W(ip, NJ, x1);
           e && L(e.codeFileFullPathWithoutScheme);
         },
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: jsx(_$$A7, {})
         }), jsxs("div", {
-          children: [getI18nString("sites.modal.edit_guidelines_menu_title"), jsx(ME, {
+          children: [getI18nString("sites.modal.edit_guidelines_menu_title"), jsx(MenuSubText, {
             children: getI18nString("sites.modal.edit_guidelines_menu_subtitle")
           })]
         })]

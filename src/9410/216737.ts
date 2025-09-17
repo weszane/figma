@@ -1,6 +1,6 @@
 import { Fullscreen } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { f } from "../905/940356";
 export function $$o0({
   isReplay: e,
@@ -16,10 +16,10 @@ export function $$o0({
     Fullscreen.triggerActionInUserEditScope("set-tool-default", null);
   };
   let p = t.isFollowUp ? getI18nString("cursor_bot.got_it") : getI18nString("tooltips_plus_onboarding.next");
-  let h = t.isFollowUp ? _$$c.GOT_IT : _$$c.NEXT;
+  let h = t.isFollowUp ? UpgradeAction.GOT_IT : UpgradeAction.NEXT;
   c ? (i = {
     ctaText: e ? getI18nString("cursor_bot.show_me_again") : getI18nString("cursor_bot.show_me"),
-    ctaTrackingDescriptor: e ? _$$c.SHOW_ME_AGAIN : _$$c.SHOW_ME
+    ctaTrackingDescriptor: e ? UpgradeAction.SHOW_ME_AGAIN : UpgradeAction.SHOW_ME
   }, o = {
     ctaText: p,
     ctaTrackingDescriptor: h
@@ -28,7 +28,7 @@ export function $$o0({
     ctaTrackingDescriptor: h
   }, o = {
     ctaText: e ? getI18nString("cursor_bot.show_me_again") : getI18nString("cursor_bot.show_me"),
-    ctaTrackingDescriptor: e ? _$$c.SHOW_ME_AGAIN : _$$c.SHOW_ME
+    ctaTrackingDescriptor: e ? UpgradeAction.SHOW_ME_AGAIN : UpgradeAction.SHOW_ME
   }, l = u, d = t.onClickShowMe);
   return {
     primaryCtaProps: i,

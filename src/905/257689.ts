@@ -2,7 +2,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Ez } from "../figma_app/766708";
 import { X } from "../905/145028";
 import { J } from "../905/539754";
-import { sD } from "../905/937198";
+import { logCmsError } from "../905/937198";
 import { $$if } from "../figma_app/97020";
 export async function $$d0(e) {
   let t = Object.values(e.nodeById).reduce((e, t) => (t.cmsCollectionBindingProperties?.collectionId && e.add(t.cmsCollectionBindingProperties.collectionId), t.cmsItemFieldBindingProperties?.collectionId && e.add(t.cmsItemFieldBindingProperties.collectionId), e), new Set());
@@ -16,14 +16,14 @@ export async function $$d0(e) {
       collectionStableId: r
     })]);
     if (null == l) {
-      sD("collection is null", {
+      logCmsError("collection is null", {
         cmsCollectionIds: t,
         bundle: e
       });
       return;
     }
     if (null == d) {
-      sD("items is null", {
+      logCmsError("items is null", {
         cmsCollectionIds: t,
         bundle: e
       });
@@ -82,7 +82,7 @@ async function c(e) {
     collectionStableId: e
   });
   if (null == t) {
-    sD("collection is null", {
+    logCmsError("collection is null", {
       collectionId: e
     });
     return null;
@@ -92,7 +92,7 @@ async function c(e) {
     collectionStableId: e
   });
   if (null == n) {
-    sD("items is null", {
+    logCmsError("items is null", {
       collectionId: e
     });
     return null;
@@ -109,13 +109,13 @@ async function u(e, t) {
   if (!i || !$$if(i)) return null;
   let r = i.getDakotaSelector()?.collectionId;
   if (!r) {
-    sD("collectionId is null", {
+    logCmsError("collectionId is null", {
       nodeId: e
     });
     return null;
   }
   let a = await c(r);
-  return null == a ? (sD("slugToItemIdMap is null", {
+  return null == a ? (logCmsError("slugToItemIdMap is null", {
     collectionId: r
   }), null) : a[t] ?? null;
 }

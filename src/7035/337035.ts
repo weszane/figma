@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -70,7 +70,7 @@ export function $$S0({
     orgEntity: k,
     useShortenedLabel: BrowserInfo.mobile
   }) : jsx(Fragment, {
-    children: jsxs(_$$J, {
+    children: jsxs(setupThemeContext, {
       brand: function (e) {
         switch (e) {
           case FEditorType.Whiteboard:

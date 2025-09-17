@@ -29,7 +29,7 @@ import { getSidebarPath } from '../figma_app/528509'
 import { setupFiltersFromQuery, setupGroupsFromFilters } from '../figma_app/585126'
 import { canAdminTeam, getPermissionsStateMemoized } from '../figma_app/642025'
 import { BillingSectionEnum, DashboardSection, FigResourceType, MemberView, WorkspaceTab } from '../figma_app/650409'
-import { EntityType, isCreateOrPlanComparison, isUpgradeExistingTeam, SidebarSection, TeamType, UpgradeAction } from '../figma_app/707808'
+import { EntityType, isCreateOrPlanComparison, isUpgradeExistingTeam, SidebarSection, TeamType, CreateUpgradeAction } from '../figma_app/707808'
 import { UpgradeSteps } from '../figma_app/831101'
 import { DUserRole, sectionKeys, SectionType, TeamGroupTypes, TGroupType } from '../figma_app/858344'
 import { encodeUri } from '../figma_app/930338'
@@ -596,10 +596,10 @@ export class ViewPathManager {
         const loopholeEnabled =
           !!getFeatureFlags().redirect_starter_team_loophole &&
           !getFeatureFlags().close_starter_team_loophole_v2
-        const teamFlowType = Object.values(UpgradeAction).includes(parts[4] as UpgradeAction)
+        const teamFlowType = Object.values(CreateUpgradeAction).includes(parts[4] as CreateUpgradeAction)
           ? parts[4]
-          : UpgradeAction.UPGRADE_EXISTING_TEAM
-        if (loopholeEnabled && teamFlowType !== UpgradeAction.UPGRADE_EXISTING_TEAM) {
+          : CreateUpgradeAction.UPGRADE_EXISTING_TEAM
+        if (loopholeEnabled && teamFlowType !== CreateUpgradeAction.UPGRADE_EXISTING_TEAM) {
           reportError(ServiceCategories.MONETIZATION_UPGRADES, new Error('Invalid team flow type while parsing selected view from path'), {
             extra: { matchingViewName: viewKey, parts },
           })
@@ -612,7 +612,7 @@ export class ViewPathManager {
         const planType =
           params.get('planType')
             ? parseInt(params.get('planType'))
-            : teamFlowType === UpgradeAction.UPGRADE_EXISTING_TEAM
+            : teamFlowType === CreateUpgradeAction.UPGRADE_EXISTING_TEAM
               ? TeamType.TEAM
               : undefined
         const planTypeFinal = isCreateOrPlanComparison(teamFlowType, step) ? undefined : planType
@@ -1212,7 +1212,7 @@ export class ViewPathManager {
           getI18nString('view_selectors.file_browser.team_admin_console_generic')
         )
       case 'teamUpgrade':
-        if (view.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE || view.teamId === null) {
+        if (view.teamFlowType === CreateUpgradeAction.CREATE_AND_UPGRADE || view.teamId === null) {
           return getI18nString('view_selectors.file_browser.create_new_team')
         }
         const upgradeTeamName = state.teams[view.teamId]?.name

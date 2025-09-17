@@ -9,18 +9,18 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { showModalHandler } from "../905/156213";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 import { dq } from "../figma_app/316316";
 import { selectCurrentFile, openFileTeamAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { uQ } from "../figma_app/151869";
 import { zZ } from "../figma_app/299859";
 import { R as _$$R } from "../905/550439";
 import { P } from "../905/498777";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { zL, pL } from "../figma_app/369750";
 import { sO } from "../figma_app/21029";
 import { HS, Ay } from "../figma_app/976110";
@@ -231,16 +231,16 @@ function ea(e, t) {
   let r;
   let a = useDispatch();
   switch (e) {
-    case Bi.PROTOTYPING_MULTIPLE_ACTIONS:
+    case FeatureFlag.PROTOTYPING_MULTIPLE_ACTIONS:
       r = UpsellModalType.PROTOTYPING_MULTIPLE_ACTIONS;
       break;
-    case Bi.PROTOTYPING_CONDITIONAL_ACTIONS:
+    case FeatureFlag.PROTOTYPING_CONDITIONAL_ACTIONS:
       r = UpsellModalType.PROTOTYPING_CONDITIONAL_ACTIONS;
       break;
-    case Bi.PROTOTYPING_VARIABLES:
+    case FeatureFlag.PROTOTYPING_VARIABLES:
       r = UpsellModalType.PROTOTYPING_VARIABLES;
       break;
-    case Bi.VIDEOS_IN_PROTOTYPES:
+    case FeatureFlag.VIDEOS_IN_PROTOTYPES:
       r = UpsellModalType.ADD_VIDEO;
       break;
     default:
@@ -248,13 +248,13 @@ function ea(e, t) {
   }
   return useCallback(() => {
     a(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: t,
         resource: e,
         editorType: FFileType.DESIGN,
-        currentPlan: _$$F.Plan.STARTER,
-        upsellPlan: _$$F.Plan.PRO,
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO,
         upsellSource: r
       }
     }));
@@ -276,9 +276,9 @@ export function $$es23() {
   let c = sO();
   let p = isWhiteboardFileType();
   let h = useIsSelectedViewFullscreenCooper();
-  let m = ea(Bi.PROTOTYPING_MULTIPLE_ACTIONS, s);
-  let g = ea(Bi.PROTOTYPING_CONDITIONAL_ACTIONS, s);
-  let E = ea(Bi.PROTOTYPING_VARIABLES, s);
+  let m = ea(FeatureFlag.PROTOTYPING_MULTIPLE_ACTIONS, s);
+  let g = ea(FeatureFlag.PROTOTYPING_CONDITIONAL_ACTIONS, s);
+  let E = ea(FeatureFlag.PROTOTYPING_VARIABLES, s);
   let y = ea(P(c, p, h), s);
   return {
     shouldShowAdvancedPrototypingPaywall: n,

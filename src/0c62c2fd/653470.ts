@@ -12,7 +12,7 @@ import { WhiteboardIntegrationType } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 export function $$x0({
   fileImportDescription: e,
   onConfirm: t,
@@ -92,7 +92,7 @@ export function $$x0({
             variant: "secondary",
             onClick: r,
             trackingProperties: {
-              trackingDescriptor: _$$c2.FILE_IMPORT_X_BUTTON,
+              trackingDescriptor: UpgradeAction.FILE_IMPORT_X_BUTTON,
               text: "dismiss"
             },
             children: renderI18nText("modal.cancel")

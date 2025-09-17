@@ -18,7 +18,7 @@ import { A as _$$A2 } from '../vendor/308491';
 import { A as _$$A4 } from '../vendor/520489';
 import { A as _$$A3 } from '../vendor/527842';
 import { DefaultEventPriority } from '../vendor/846192';
-import { A as _$$A } from '../vendor/850789';
+import { useDebounce } fromuse-debounce89';
 let p = new ReconciliationRuntime({
   resourceStatus: {
     loadedFonts: {},
@@ -483,8 +483,8 @@ function L({
   let a = mn(e);
   let s = Fk((e, t) => e.get(t)?.size.x || 0, e);
   let c = Fk((e, t) => e.get(t)?.size.y || 0, e);
-  let [u] = _$$A(s, 100);
-  let [h] = _$$A(c, 100);
+  let [u] = useDebounce(s, 100);
+  let [h] = useDebounce(c, 100);
   let m = useLatestRef(a);
   let [g, y] = useState(0);
   useEffect(() => {

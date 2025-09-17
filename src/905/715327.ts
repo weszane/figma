@@ -12,7 +12,7 @@ import { handleAtomEvent } from "../905/502364";
 import { nz, Yx, Tn } from "../figma_app/933328";
 import { TrackingProvider } from "../figma_app/831799";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { LH } from "../905/872904";
 import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
@@ -43,7 +43,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { g7, Ev } from "../905/939482";
 import { getSelectedFile } from "../905/766303";
 import { getRepoById, isBranch, getDisplayNameAlt } from "../905/760074";
@@ -68,7 +68,7 @@ import { Um } from "../905/848862";
 import { N as _$$N2 } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { l6, c$ } from "../905/794875";
 import { SF, CK, Yy, is, mJ, mo, TW } from "../905/55862";
 import { UDe } from "../figma_app/6204";
@@ -166,7 +166,7 @@ function ew({
   let s = useCurrentPrivilegedPlan("SubscriptionListFilterSelect").unwrapOr(null);
   let o = s?.key.type === FOrganizationLevelType.ORG ? s?.key.parentId : void 0;
   let l = s?.name;
-  let d = cD();
+  let d = getCurrentTeamId();
   let u = useSelector(e => e.dropdownShown);
   let p = useDispatch();
   let m = useCallback(e => {
@@ -261,7 +261,7 @@ function e4({
   isLibraryUpsell: c
 }) {
   var u;
-  let m = FC();
+  let m = selectPermissionsState();
   let h = getRepoById(e, m.repos);
   let g = isBranch(e);
   let f = _$$l2(e);
@@ -823,7 +823,7 @@ function tS(e) {
   let x = useCurrentUserOrg();
   let {
     fileByKey
-  } = FC();
+  } = selectPermissionsState();
   let w = Yy(showingDefaultSubscriptionsForTeamId, !!mapFromLibraryKeyToSharingGroupData);
   let C = Fl();
   let [T, k] = useState(w && w.length > 0 ? w[0] : null);
@@ -1094,7 +1094,7 @@ function tT({
                   }));
                 },
                 trackingProperties: {
-                  trackingDescriptor: _$$c.UPGRADE,
+                  trackingDescriptor: UpgradeAction.UPGRADE,
                   upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
                   canUserAccessProFeature: !1
                 },
@@ -1298,7 +1298,7 @@ export function $$tM0({
     openFile: e.openFile
   }));
   let L = LH();
-  let F = FC();
+  let F = selectPermissionsState();
   let [M, j] = useState(null);
   let [U, B] = useState(!1);
   let [V, G] = useState(!1);

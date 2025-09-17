@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { getResourceDataOrFallback } from "../905/663269";
 import { xf } from "../figma_app/416935";
 import { isGovCluster } from "../figma_app/169182";
@@ -24,7 +24,7 @@ import { trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
 import { TeamHasPublishedSite } from "../figma_app/43951";
 import { mg, nX } from "../figma_app/336853";
-import { HE, Cl, Eq } from "../figma_app/598018";
+import { isTeamFileUrl, isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
@@ -205,12 +205,12 @@ function B(e) {
     children: jsx(ModalRootComponent, {
       manager: ed,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: eA
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           children: [(() => {
             if (ep && "loading" === eu.status || !ep && "loading" === ec.status) return null;
             let t = e.shouldTransferCopy ? "" : ep ? getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_team_it_can_t_be_undone") : getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_organization_it_can_t_be_undone");
@@ -288,8 +288,8 @@ function B(e) {
                   ee(null);
                   el(!1);
                   ei(null);
-                  let t = HE(Y);
-                  let r = Cl(Y);
+                  let t = isTeamFileUrl(Y);
+                  let r = isTeamUrl(Y);
                   let n = mg(Y);
                   if (ep && !r && !t || !n && !ep) {
                     ei("url_format");
@@ -310,7 +310,7 @@ function B(e) {
                       q(e);
                       e === P || ep || (Z(t.meta), el(!0));
                     }), ep) {
-                      let e = Eq(Y);
+                      let e = extractTeamIdFromUrl(Y);
                       teamAPIClient.getTeamName({
                         teamId: e
                       }).then(({
@@ -368,7 +368,7 @@ function B(e) {
               placeholder: getI18nString("asset_transfers.request_modal.add_a_message_if_you_d_like")
             })]
           })]
-        }), jsx(wi, {
+        }), jsx(DialogFooter, {
           children: jsxs("div", {
             className: _$$s.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {

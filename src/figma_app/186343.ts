@@ -11,7 +11,7 @@ import { showModalHandler } from "../905/156213";
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_PAGE_LOADING } from "../905/784363";
 import { Fr } from "../figma_app/297957";
 import { J } from "../905/445197";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { subscribeToContainingPage } from "../figma_app/582924";
@@ -25,10 +25,10 @@ import { F as _$$F2 } from "../905/258517";
 import { Fk } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
 import { getActiveVersion, loadVersionIncrementally } from "../figma_app/841351";
-import { vL } from "../905/652992";
+import { PageFolderFile } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { ob, kh } from "../figma_app/571341";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 export function $$D5(e, t) {
   return !!e && !!t.match(/^(-+|\u2013+|\u2014+|\*+|\s+)$/);
 }
@@ -61,18 +61,18 @@ export function $$F7() {
     })));
   }();
   let r = useDispatch();
-  let s = _$$F.useShouldHideStarterCtaForOpenFile();
+  let s = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   return useCallback(n => {
     if (t && e) {
       r(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: e.team,
-          resource: vL.PAGE,
+          resource: PageFolderFile.PAGE,
           action: fileActionEnum.CREATE_PAGE,
           editorType: e.editorType,
-          currentPlan: _$$F.Plan.STARTER,
-          upsellPlan: _$$F.Plan.PRO,
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO,
           hideUpsellPlanCta: s,
           upsellSource: UpsellModalType.CREATE_NEW_PAGE
         }

@@ -47,7 +47,7 @@ import { aB } from "../905/576221";
 import { setupLoadingStateHandler } from "../905/696711";
 import { maybeCreateSavepoint } from "../905/294113";
 import { AC, x6, jO } from "../figma_app/803787";
-import { rR, sK } from "../figma_app/598018";
+import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UploadStatusEnum } from "../figma_app/10554";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { FDocumentType, ITemplateType } from "../905/862883";
@@ -146,8 +146,8 @@ let $$eT18 = createOptimistThunk((e, t) => {
     let r = n.folders[t.folderId]?.team_id;
     let i = r ? n.teams[r] : null;
     let a = _$$N(n.hubFiles[t.hubFileId].viewer_mode);
-    if (i && !rR(i, {
-      type: sK.ADD_FILE,
+    if (i && !checkTeamFileRestrictions(i, {
+      type: AddOperationType.ADD_FILE,
       editorType: a
     })) {
       e.dispatch(showModalHandler({

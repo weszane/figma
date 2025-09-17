@@ -2,7 +2,7 @@ import { FlashActions } from "../905/573154";
 import { G } from "../905/134161";
 import { showModalHandler } from "../905/156213";
 import { versionHandlerInstance } from "../905/985740";
-import { y } from "../figma_app/504415";
+import { SavepointModalContainer } from "../figma_app/504415";
 import { createOptimistThunk } from "../905/350402";
 let $$d0 = createOptimistThunk((e, {
   fileKey: t,
@@ -16,7 +16,7 @@ let $$d0 = createOptimistThunk((e, {
   }) => {
     let r = t.meta.version;
     e.dispatch(showModalHandler({
-      type: y,
+      type: SavepointModalContainer,
       data: {
         description: r.description,
         label: r.label,

@@ -1,13 +1,13 @@
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { getSidebarPath } from "../figma_app/528509";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { ProjectNameById } from "../figma_app/43951";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 export function $$d0(e) {
   let t = useCurrentPublicPlan("useFolderDisplayName").unwrapOr(null);
   let i = getParentOrgIdIfOrgLevel(t);
-  let d = "folder" === _6().view;
+  let d = "folder" === getSelectedView().view;
   let c = useSubscription(ProjectNameById, {
     projectId: e
   }, {
@@ -21,7 +21,7 @@ export function $$d0(e) {
 export function $$c1(e) {
   let t = useCurrentPublicPlan("useFolderDisplayNameAndTrashedStatus").unwrapOr(null);
   let i = getParentOrgIdIfOrgLevel(t);
-  let d = "folder" === _6().view;
+  let d = "folder" === getSelectedView().view;
   let c = useSubscription(ProjectNameById, {
     projectId: e
   }, {

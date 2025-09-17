@@ -94,7 +94,7 @@ import { PG } from "../figma_app/453508";
 import { useLatestRef } from "../figma_app/922077";
 import { S as _$$S } from "../5132/668270";
 import { showModal, showModalHandler } from "../905/156213";
-import { cq, QA } from "../figma_app/107215";
+import { updateWorkshopUserName, setMultiplayerName } from "../figma_app/107215";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { QL } from "../905/609392";
 import { isUIHiddenOrLocked } from "../905/868547";
@@ -408,7 +408,7 @@ function tm(e) {
     let u = selectCurrentFile()?.isTryFile;
     let p = QL("name");
     useEffect(() => {
-      i && u && o && p && l && e(cq({
+      i && u && o && p && l && e(updateWorkshopUserName({
         name: p
       }));
     }, [i, u, p, o, e, l]);
@@ -430,7 +430,7 @@ function tm(e) {
     useEffect(() => {
       if (s && !isUIHiddenOrLocked(c) && "loaded" === f.status) {
         let t = localStorage.getItem(generateAnonymouseName(o));
-        i ? t ? QA(t) : e(showModal({
+        i ? t ? setMultiplayerName(t) : e(showModal({
           type: _$$e2
         })) : f.data?.canEdit || h || e(showModal({
           type: _$$e2

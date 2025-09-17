@@ -62,7 +62,7 @@ import { E as _$$E } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrg } from "../905/845253";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { fO } from "../figma_app/329496";
 import { X as _$$X2 } from "../905/257331";
 import { k as _$$k3 } from "../905/443820";
@@ -153,7 +153,7 @@ function e_({
   assetLibraryKey: e,
   assetNodeId: t
 }) {
-  let s = ol();
+  let s = getCurrentTeam();
   let l = useCurrentUserOrg();
   let a = !!l || hasTeamPaidAccess(s);
   let o = l?.id;

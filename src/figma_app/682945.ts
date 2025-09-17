@@ -13,7 +13,7 @@ import { N as _$$N } from "../905/200059";
 import { s as _$$s } from "../905/817498";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
-import { ds } from "../905/87821";
+import { getRandomString } from "../905/87821";
 import { f as _$$f } from "../905/70820";
 import { Jr } from "../figma_app/624361";
 let T = {
@@ -210,7 +210,7 @@ export function $$eI18() {
       recentInteractions: FullscreenPerfMetrics.getRecentInteractions(),
       secondsSinceLoaded: (performance.now() - N) / 1e3,
       version: 1,
-      randomID: ds(),
+      randomID: getRandomString(),
       reportCount: C
     }, FullscreenPerfMetrics.getSlowInteractions()] : [{
       gpuDeviceInfo: _$$l(),
@@ -222,7 +222,7 @@ export function $$eI18() {
       recentInteractions: [],
       secondsSinceLoaded: (performance.now() - N) / 1e3,
       version: 1,
-      randomID: ds(),
+      randomID: getRandomString(),
       reportCount: C
     }, []];
     if (null == t) return;

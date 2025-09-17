@@ -35,7 +35,7 @@ import { useCurrentFileKey, selectCurrentFile, selectOpenFileKey } from "../figm
 import { getUserId, selectCurrentUser } from "../905/372672";
 import { isCommentStateUpdatable, isCommentStateActive, ThreadType, isCommentStatePostable } from "../905/380385";
 import { ButtonPrimitive } from "../905/632989";
-import { q7, mc, b as _$$b, bL as _$$bL, Ov, ME, rm, wv, hE, r1 } from "../figma_app/860955";
+import { MenuItemComp, MenuContainerComp, setupMenu, MenuRootComp, MenuItemTrail, MenuSubText, MenuShortcut, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { g as _$$g } from "../905/757007";
@@ -327,28 +327,28 @@ function ex(e) {
     }));
   }, [h, onDeleteThread, onDeleteThreadCancel, onDeleteThreadComplete, thread]);
   let y = useMemo(() => {
-    if (_ === thread.comments[0].user_id && !thread.isCanvasMention && isCommentStateUpdatable(thread.sidebarItemType)) return jsx(q7, {
+    if (_ === thread.comments[0].user_id && !thread.isCanvasMention && isCommentStateUpdatable(thread.sidebarItemType)) return jsx(MenuItemComp, {
       onClick: b,
       children: renderI18nText("comments.delete_thread")
     }, "deleteThread");
   }, [thread, _, b]);
   let C = useMemo(() => {
     let e = [];
-    m && f && thread.isCanvasMention ? e.push(jsx(q7, {
+    m && f && thread.isCanvasMention ? e.push(jsx(MenuItemComp, {
       onClick: v,
       children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
-    }, "toggleUnreadCanvasMention")) : commentReceipts && f && !thread.isCanvasMention && isCommentStateActive(thread.sidebarItemType) && e.push(jsx(q7, {
+    }, "toggleUnreadCanvasMention")) : commentReceipts && f && !thread.isCanvasMention && isCommentStateActive(thread.sidebarItemType) && e.push(jsx(MenuItemComp, {
       onClick: g,
       children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
     }, "toggleUnreadComment"));
-    e.push(jsx(q7, {
+    e.push(jsx(MenuItemComp, {
       onClick: x,
       children: renderI18nText("comments.copy_link")
     }, "copyCommentLink"));
     y && e.push(y);
     return e;
   }, [commentReceipts, m, f, x, y, thread.isCanvasMention, thread.sidebarItemType, v, g, isUnread]);
-  return jsx(mc, {
+  return jsx(MenuContainerComp, {
     children: C
   });
 }
@@ -441,8 +441,8 @@ let eS = memo(function (e) {
   let {
     manager,
     getTriggerProps
-  } = _$$b();
-  let S = jsxs(_$$bL, {
+  } = setupMenu();
+  let S = jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       "aria-label": getI18nString("comments.more_actions"),
@@ -1101,8 +1101,8 @@ function tp() {
   if (useEffect(() => {
     v("Properties Panel Comments Tab Settings Opened");
   }, [v]), !e || !t) return null;
-  if ("loaded" !== n.status) return jsx(mc, {
-    children: jsx(q7, {
+  if ("loaded" !== n.status) return jsx(MenuContainerComp, {
+    children: jsx(MenuItemComp, {
       disabled: !0,
       onClick: lQ,
       children: renderI18nText("comments.error_loading_notification_preferences")
@@ -1152,20 +1152,20 @@ function tp() {
       fileKey: e
     });
   };
-  return jsxs(mc, {
+  return jsxs(MenuContainerComp, {
     children: [jsxs(H_, {
       checked: !m,
       onChange: h,
-      children: [renderI18nText("comments.hide_comments"), _ && jsx(Ov, {
-        children: jsx(ME, {
-          children: jsx(rm, {
+      children: [renderI18nText("comments.hide_comments"), _ && jsx(MenuItemTrail, {
+        children: jsx(MenuSubText, {
+          children: jsx(MenuShortcut, {
             children: _
           })
         })
       })]
-    }, "preference"), jsx(wv, {}), jsxs(z6, {
+    }, "preference"), jsx(MenuSeparator, {}), jsxs(z6, {
       onChange: e => y(e),
-      title: jsx(hE, {
+      title: jsx(MenuTitleComp, {
         children: renderI18nText("comments.comment_notifications")
       }),
       value: x,
@@ -1180,7 +1180,7 @@ function tp() {
         children: renderI18nText("comments.nothing_option")
       }, "notification-none")]
     }, "comment-notification-title"), d && jsxs(z6, {
-      title: jsx(hE, {
+      title: jsx(MenuTitleComp, {
         children: renderI18nText("comments.dev_mode_notifications")
       }),
       onChange: e => C("true" === e),
@@ -1192,7 +1192,7 @@ function tp() {
         value: "false",
         children: renderI18nText("comments.nothing_option")
       }, "notification-dm-none")]
-    }, "dev-mode-notification-title"), jsx(q7, {
+    }, "dev-mode-notification-title"), jsx(MenuItemComp, {
       onClick: () => {
         let e = s.commentReceipts;
         e && r && c(Tb({
@@ -1212,7 +1212,7 @@ function tg(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let r = isUserNotLoggedInAndEditorSupported();
   let l = WN();
   _$$Z2(manager);
@@ -1222,7 +1222,7 @@ function tg(e) {
       if (r) return l("SELECT_COMMENT_SIDEBAR");
       t(UU());
     }
-  }, [t, r, manager.isOpen, d, l]), e.hideSettingsDropdown) ? null : jsxs(_$$bL, {
+  }, [t, r, manager.isOpen, d, l]), e.hideSettingsDropdown) ? null : jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       ...getTriggerProps(),
@@ -1241,7 +1241,7 @@ function tb({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let l = useMemo(() => {
     let t = new Set(e);
     e.has(mW.RESOLVED) ? t.$$delete(mW.RESOLVED) : t.add(mW.RESOLVED);
@@ -1253,7 +1253,7 @@ function tb({
   let h = useMemo(() => {
     let e = [];
     t.sorts.length > 0 && e.push(jsx(z6, {
-      title: jsx(r1, {
+      title: jsx(MenuHiddenTitleComp, {
         children: getI18nString("comments.sort")
       }),
       onChange: t.threadManager.setSort,
@@ -1264,7 +1264,7 @@ function tb({
       }, `sort-option-${e}`))
     }, "sort-group"));
     t.filters.length > 0 && e.push(jsx($Q, {
-      title: jsx(r1, {
+      title: jsx(MenuHiddenTitleComp, {
         children: getI18nString("comments.filter")
       }),
       onChange: e => {
@@ -1280,7 +1280,7 @@ function tb({
       }, `filter-option-${e}`))
     }, "filter-group"));
     t.modes && t.modes.length > 0 && e.push(jsx(z6, {
-      title: jsx(r1, {
+      title: jsx(MenuHiddenTitleComp, {
         children: getI18nString("comments.mode")
       }),
       onChange: t.threadManager.setMode,
@@ -1296,7 +1296,7 @@ function tb({
   useEffect(() => {
     f !== manager.isOpen && n(UU());
   }, [n, manager.isOpen, f]);
-  return jsxs(_$$bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       ...getTriggerProps(),
@@ -1305,7 +1305,7 @@ function tb({
         className: W()(m ? "comments_sidebar_header--sortButtonActive--sPnuw" : tf, manager.isOpen && t_),
         svg: m ? _$$A8 : _$$A7
       })
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: h
     })]
   });

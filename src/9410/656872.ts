@@ -5,7 +5,7 @@ import { Q } from "../1250/220026";
 import { TransactionCommand } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { hideModal, showModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { oW } from "../figma_app/247611";
 import { RD } from "../figma_app/198840";
 import { KindEnum } from "../905/129884";
@@ -33,7 +33,7 @@ export function $$_1() {
     isActive: t,
     onClick: i,
     trackingProperties: {
-      trackingDescriptor: _$$c.TEMPLATES_TOOLBAR_ITEM_CLICKED
+      trackingDescriptor: UpgradeAction.TEMPLATES_TOOLBAR_ITEM_CLICKED
     },
     onboardingKey: $$g0,
     children: jsx(Q, {})

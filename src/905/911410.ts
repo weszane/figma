@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { Jn } from "../figma_app/272243";
+import { DialogCloseButton } from "../figma_app/272243";
 import { toRem } from "../905/893109";
 import { bL as _$$bL, cM } from "../905/163832";
 let d = {
@@ -30,7 +30,7 @@ let $$c1 = forwardRef(({
     className: A("window__root__KsyeI", p, {
       window__fullHeight__aDy3i: h
     }),
-    children: [i, jsx(Jn, {})]
+    children: [i, jsx(DialogCloseButton, {})]
   });
 });
 $$c1.displayName = "Window.Root";

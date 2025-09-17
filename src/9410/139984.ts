@@ -34,7 +34,7 @@ import { C7, e7, HX, b7, mg, Ur, xK, g1, $5, ok, qw, A8, $j, N1 } from "../9410/
 import { e as _$$e } from "../figma_app/278289";
 import { cy } from "../figma_app/387100";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
 import { b as _$$b3 } from "../figma_app/5657";
 import { p as _$$p } from "../9410/889115";
@@ -172,7 +172,7 @@ function z(e) {
       onClick: e.onBackCtaClick,
       className: _$$s2.textInherit.bgTransparent.$,
       trackingProperties: {
-        ctaTrackingDescriptor: _$$c.BACK
+        ctaTrackingDescriptor: UpgradeAction.BACK
       },
       children: renderI18nText("general.back")
     }),
@@ -428,7 +428,7 @@ let en = memo(({
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("cursor_bot.stop_tutorial"),
           trackingProperties: {
-            trackingDescriptor: _$$c.STOP_TUTORIAL,
+            trackingDescriptor: UpgradeAction.STOP_TUTORIAL,
             tutorialName: e.name
           },
           "aria-label": getI18nString("cursor_bot.stop_tutorial"),

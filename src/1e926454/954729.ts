@@ -3,7 +3,7 @@ import { useCallback, Suspense, useMemo, useId, useState, useEffect } from "reac
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Y9, hE, nB, wi, jk, r1, vo } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogHiddenTitle, DialogContents } from "../figma_app/272243";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
@@ -372,8 +372,8 @@ function er({
   });
   let S = useId();
   return jsxs(Fragment, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: jsx("div", {
           className: "xec8gl8",
           children: jsx("div", {
@@ -382,7 +382,7 @@ function er({
           })
         })
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: jsxs("div", {
         ...xk(ea.container),
         children: [jsx("div", {
@@ -406,8 +406,8 @@ function er({
           plan: e
         })]
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx($z, {
           variant: "secondary",
           onClick: n,
@@ -536,8 +536,8 @@ function eb({
     return e;
   }
   return jsxs(Fragment, {
-    children: [jsxs(Y9, {
-      children: [jsx(r1, {
+    children: [jsxs(DialogHeader, {
+      children: [jsx(DialogHiddenTitle, {
         children: getI18nString("plan_invite_modal.team.hidden_title")
       }), jsxs(_$$t2.TabStrip, {
         manager: F,
@@ -549,7 +549,7 @@ function eb({
           children: getI18nString("plan_invite_modal.invite_by_link")
         })]
       })]
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [jsx(_$$t2.TabPanel, {
         ...O.inviteByEmail,
         children: _$$r(p) ? jsx(_$$X, {
@@ -605,8 +605,8 @@ function eb({
           teamPermissions: M
         })
       })]
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx($z, {
           variant: "secondary",
           onClick: s,
@@ -666,7 +666,7 @@ function eT(e) {
       manager: n,
       width: "lg",
       height: "dynamic",
-      children: jsxs(vo, {
+      children: jsxs(DialogContents, {
         children: [p?.type === FOrganizationLevelType.TEAM && p && jsx(eb, {
           ...e,
           plan: p

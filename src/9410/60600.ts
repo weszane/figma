@@ -12,7 +12,7 @@ import { Tw } from "../figma_app/755939";
 import { yB } from "../figma_app/334505";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { DP } from "../905/640017";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -90,13 +90,13 @@ export function $$N2() {
         complete();
         m(!0);
       },
-      ctaTrackingDescriptor: _$$c.TRY_IT_OUT
+      ctaTrackingDescriptor: UpgradeAction.TRY_IT_OUT
     },
     secondaryCta: {
       type: "button",
       label: renderI18nText("cooper.onboarding.welcome.secondary_cta"),
       onClick: S,
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     title: jsxs("div", {
       className: "x78zum5 x6s0dn4 x1pulhmw",
@@ -156,7 +156,7 @@ export function $$A0({
       label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     shouldDisableAnimation: !0,
     targetKey: o ?? "",
@@ -197,7 +197,7 @@ export function $$O3() {
       label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     shouldDisableAnimation: !0,
     targetKey: s ?? "",
@@ -233,7 +233,7 @@ export function $$L1() {
       label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: D9,
     title: renderI18nText("cooper.onboarding.publish_templates_to_your_team"),

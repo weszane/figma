@@ -6,7 +6,7 @@ import { $ } from "../905/455748";
 import { isInvalidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { KH } from "../figma_app/722362";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
 import { Sh } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -44,7 +44,7 @@ export function $$b1() {
     selection,
     selectedChildCount
   } = $$y2();
-  let c = isFullscreenSitesView(_6());
+  let c = isFullscreenSitesView(getSelectedView());
   let p = T(e, "CENTER", e => !e || isInvalidValue(e) || rO(e));
   return useCallback((e, n, s = yesNoTrackingEnum.YES) => {
     let d = getFeatureFlags().ce_stack_justify_space_between || c ? "SPACE_BETWEEN" : "SPACE_EVENLY";

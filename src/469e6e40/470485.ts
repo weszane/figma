@@ -11,7 +11,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Bq } from "../figma_app/482142";
 import { vt } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { FBillingPeriodType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures, useTeamPlanUser } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
@@ -44,13 +44,13 @@ export function $$j0(e) {
     className: E,
     trackingProperties: {
       ...C,
-      trackingDescriptor: _$$c.LEARN_MORE
+      trackingDescriptor: UpgradeAction.LEARN_MORE
     },
     children: getI18nString("admin_settings.billing_plan_tier.learn_more_label")
   });
   let N = {
     ...C,
-    trackingDescriptor: _$$c.UPGRADE
+    trackingDescriptor: UpgradeAction.UPGRADE
   };
   l.tier === FPlanNameType.PRO ? t = jsx(e6, {
     onClick: k,

@@ -3,7 +3,7 @@ import { createContext, useContext, forwardRef, useMemo, Fragment, useEffect } f
 import { TabLoop } from "../905/718764";
 import { DialogRoot, DialogLabel } from "../905/799737";
 import { IconButton } from "../905/443068";
-import { r1 } from "../figma_app/272243";
+import { DialogHiddenTitle } from "../figma_app/272243";
 import { A } from "../905/251970";
 import c from "classnames";
 import { N } from "../vendor/930821";
@@ -112,7 +112,7 @@ export let $$I0 = {
       children: e.children
     });
   },
-  HiddenTitle: r1,
+  HiddenTitle: DialogHiddenTitle,
   Title: function (e) {
     return jsx(DialogLabel, {
       className: _$$s.textBodyMediumStrong.pl16.pr4.wFull.noWrap.ellipsis.overflowHidden.$,

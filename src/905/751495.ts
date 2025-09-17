@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useDialogClose } from "../905/749786";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { setupAutofocusHandler } from "../905/128376";
@@ -77,15 +77,15 @@ let T = () => {
 function k() {
   let e = useDispatch();
   let t = T();
-  return jsxs(vo, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+  return jsxs(DialogContents, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.two_factor_authentication_enabled")
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: renderI18nText("auth.two-factor-setup.continue-to-recovery-code-setup")
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: t,
@@ -110,12 +110,12 @@ function R() {
   let t = selectCurrentUser();
   let i = Z();
   let r = T();
-  return t ? jsxs(vo, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+  return t ? jsxs(DialogContents, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.download_mobile_app")
       })
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [renderI18nText("auth.two-factor-setup.authenticator-app-needed"), jsxs("ul", {
         className: p_,
         children: [jsx("li", {
@@ -138,7 +138,7 @@ function R() {
           })
         })]
       })]
-    }), jsx(wi, {
+    }), jsx(DialogFooter, {
       children: jsxs("div", {
         className: Hx,
         children: ["gov" !== window.INITIAL_OPTIONS.cluster_name && jsx(Button, {
@@ -188,11 +188,11 @@ function N() {
         otp: i.value
       }));
     },
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.scan_qr_code")
       })
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [o ? jsxs("div", {
         children: [jsx("div", {
           children: renderI18nText("auth.two-factor-setup.scan_the_qr_code_into_your_app")
@@ -236,8 +236,8 @@ function N() {
         className: z3,
         children: t.currentError || ""
       })]
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: s,

@@ -9,7 +9,7 @@ import { BannerMessage } from "../905/363675";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { nB, r1, wi, jk } from "../figma_app/272243";
+import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { S as _$$S } from "../905/794163";
 import { getFeatureFlags } from "../905/601108";
@@ -190,7 +190,7 @@ function H(e) {
           onFailure: ee
         }));
       },
-      children: [jsxs(nB, {
+      children: [jsxs(DialogBody, {
         padding: {
           top: 40,
           left: 24,
@@ -213,7 +213,7 @@ function H(e) {
                 imgUrl: d.imgUrl
               }
             })
-          }), jsx(r1, {
+          }), jsx(DialogHiddenTitle, {
             children: Z
           }), jsx("div", {
             className: _$$s.textHeadingMedium.$,
@@ -323,8 +323,8 @@ function H(e) {
             children: K
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,

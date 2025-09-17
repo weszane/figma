@@ -9,7 +9,7 @@ import { SidebarRow } from "../451de8f0/94979";
 import { useResourceRouteParams, useResourceFuid, ResourceHubHomeRouteClass } from "../figma_app/979714";
 import { postUserFlag } from "../905/985254";
 import { N$ } from "../figma_app/350203";
-import { z3 } from "../figma_app/386952";
+import { getSelectedViewType } from "../figma_app/386952";
 import { w3 } from "../figma_app/692865";
 import { P } from "../1250/15189";
 if (443 == require.j) {}
@@ -17,7 +17,7 @@ if (443 == require.j) {}
 export let $$h0 = "resource_hub_link";
 export function $$b1() {
   let e = useDispatch();
-  let t = z3();
+  let t = getSelectedViewType();
   let n = useSelector(e => e.userFlags);
   let b = useResourceRouteParams();
   let x = useResourceFuid();

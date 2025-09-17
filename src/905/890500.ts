@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { b, q7, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuItemComp, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ export function $$y0(e) {
   let {
     manager,
     getTriggerProps
-  } = b();
+  } = setupMenu();
   VX(manager);
   let I = t => () => {
     switch (t) {
@@ -89,20 +89,20 @@ export function $$y0(e) {
   };
   let w = e.comment.parent_id ? getI18nString("comments.delete_comment") : getI18nString("comments.delete_thread");
   let C = e.isUnread ? getI18nString("comments.mark_as_read") : getI18nString("comments.mark_as_unread");
-  let T = (!e.possibleActions || e.possibleActions.includes("toggle_unread")) && jsx(q7, {
+  let T = (!e.possibleActions || e.possibleActions.includes("toggle_unread")) && jsx(MenuItemComp, {
     onClick: I("toggle_unread"),
     children: C
   }, "toggle_unread");
-  let k = (!e.possibleActions || e.possibleActions.includes("copy_link")) && jsx(q7, {
+  let k = (!e.possibleActions || e.possibleActions.includes("copy_link")) && jsx(MenuItemComp, {
     onClick: I("copy_link"),
     children: renderI18nText("comments.copy_link")
   }, "copy_link");
-  let R = (!e.possibleActions || e.possibleActions.includes("edit")) && jsx(q7, {
+  let R = (!e.possibleActions || e.possibleActions.includes("edit")) && jsx(MenuItemComp, {
     onClick: I("edit"),
     recordingKey: "commentOverflowMenu.editComment",
     children: renderI18nText("comments.edit")
   }, "edit");
-  let N = (!e.possibleActions || e.possibleActions.includes("delete")) && jsx(q7, {
+  let N = (!e.possibleActions || e.possibleActions.includes("delete")) && jsx(MenuItemComp, {
     onClick: I("delete"),
     recordingKey: "commentOverflowMenu.deleteComment",
     children: w
@@ -126,14 +126,14 @@ export function $$y0(e) {
     onPointerDown,
     ...F
   } = getTriggerProps();
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d, {
       "aria-label": e.label,
       recordingKey: e.recordingKey,
       ...F,
       children: jsx(J, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: O
     })]
   });

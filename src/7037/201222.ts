@@ -24,7 +24,7 @@ import { o8 } from "../figma_app/12220";
 import { E as _$$E } from "../905/881732";
 import { hL } from "../905/697795";
 import { useCurrentUserOrgId } from "../905/845253";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FeedPostWithDetails } from "../figma_app/43951";
 import { M8 } from "../905/772425";
@@ -219,7 +219,7 @@ function eC() {
 export let $$eb0 = registerModal(function (e) {
   let t = useDispatch();
   let n = useCurrentUserOrgId();
-  let u = _6();
+  let u = getSelectedView();
   useEffect(() => {
     "teamFeed" !== u.view && "user" !== u.view && ("fullscreen" === u.view && e.inFileView || t(hideModal()));
   }, [t, u, e.inFileView]);

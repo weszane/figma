@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useEffect } from "react";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { usePreviousValue } from "../figma_app/922077";
-import { OC } from "../figma_app/386952";
+import { selectedViewAtom } from "../figma_app/386952";
 import { createTrackedAtom } from "../figma_app/615482";
 import { Mk, yW } from "../figma_app/644808";
 import { G as _$$G } from "../figma_app/923271";
@@ -20,7 +20,7 @@ let T = createTrackedAtom(!1);
 let I = createTrackedAtom("Blocks");
 let $$S6 = atom(e => {
   let t = e(I);
-  let r = e(OC);
+  let r = e(selectedViewAtom);
   return isFullscreenSitesView(r) ? t : "Libraries";
 }, (e, t, r) => {
   t(I, r);

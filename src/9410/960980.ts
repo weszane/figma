@@ -6,13 +6,13 @@ import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { getWorkshopModeStatus } from "../figma_app/789";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { inputValue } from "../figma_app/455680";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { PS } from "../figma_app/598018";
-import { Bi } from "../905/652992";
-import { DV } from "../905/739964";
+import { hasValidTeamPaymentStatus } from "../figma_app/598018";
+import { FeatureFlag } from "../905/652992";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { shouldOptimizeForIpad } from "../905/355607";
 import { Qs, iN } from "../905/992395";
 import { qU } from "../figma_app/913518";
@@ -51,7 +51,7 @@ export function $$I7() {
   let r = getWorkshopModeStatus(e?.key || "").enabled;
   let a = e?.isTryFile;
   let s = !!e && (e.canEdit || r);
-  return a || !s ? "featureDisabled" : e.parentOrgId ? "eligible" : t ? PS(t) ? "eligible" : "eligibleWithUpgrade" : i ? "eligibleWithUpgrade" : "eligibleWithMoveFileToPaidTeam";
+  return a || !s ? "featureDisabled" : e.parentOrgId ? "eligible" : t ? hasValidTeamPaymentStatus(t) ? "eligible" : "eligibleWithUpgrade" : i ? "eligibleWithUpgrade" : "eligibleWithMoveFileToPaidTeam";
 }
 export function $$k8() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
@@ -111,13 +111,13 @@ export function $$D5(e) {
   let s = useDispatch();
   return useCallback(() => {
     if ("eligibleWithUpgrade" === t) s(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: a,
-        resource: Bi.VOTING,
+        resource: FeatureFlag.VOTING,
         editorType: FFileType.WHITEBOARD,
-        currentPlan: F.Plan.STARTER,
-        upsellPlan: F.Plan.PRO
+        currentPlan: consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.PRO
       }
     }));else if ("eligible" === t) {
       e();

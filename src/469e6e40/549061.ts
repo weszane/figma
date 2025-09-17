@@ -20,7 +20,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
 import { BannerMessage } from '../905/363675';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
 import { _ as _$$_ } from '../905/410717';
@@ -419,14 +419,14 @@ function eu({
             variant: 'secondary',
             onClick: s,
             trackingProperties: {
-              trackingDescriptor: _$$c.ADD_SEATS
+              trackingDescriptor: UpgradeAction.ADD_SEATS
             },
             trackingOptions: g,
             children: getI18nString('admin_dashboard.seat_counts_overview_card.add_seats')
           }), jsx($z, {
             onClick: i,
             trackingProperties: {
-              trackingDescriptor: _$$c.MANAGE_SEATS
+              trackingDescriptor: UpgradeAction.MANAGE_SEATS
             },
             trackingOptions: g,
             children: getI18nString('admin_dashboard.seat_counts_overview_card.manage')
@@ -485,7 +485,7 @@ function eO({
       label: renderI18nText('general.got_it'),
       onClick: complete,
       type: 'button',
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     targetKey: LX,
     title: renderI18nText('admin_dashboard.onboarding_overlay.title'),
@@ -608,7 +608,7 @@ function ti({
         ...Td(s, i, r, l)
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.APPROVE,
+        trackingDescriptor: UpgradeAction.APPROVE,
         requestId: e
       },
       trackingOptions: c,
@@ -624,7 +624,7 @@ function ti({
         'data-testid': 'seat-requests-mini-view-row-more-details'
       },
       'trackingProperties': {
-        trackingDescriptor: _$$c.REQUEST_DETAILS,
+        trackingDescriptor: UpgradeAction.REQUEST_DETAILS,
         requestId: e
       },
       'trackingOptions': c,
@@ -708,7 +708,7 @@ function t_({
         'data-onboarding-key': LX
       },
       trackingProperties: {
-        trackingDescriptor: t && s ? _$$c.ALL_REQUESTS : _$$c.VIEW_ALL
+        trackingDescriptor: t && s ? UpgradeAction.ALL_REQUESTS : UpgradeAction.VIEW_ALL
       },
       trackingOptions: l,
       children: t && s ? renderI18nText('admin_dashboard.requests.all_requests') : renderI18nText('admin_dashboard.requests.view_all')
@@ -1272,7 +1272,7 @@ function tu({
                   'data-testid': 'approve-all-button'
                 },
                 trackingProperties: {
-                  trackingDescriptor: _$$c.APPROVE_ALL
+                  trackingDescriptor: UpgradeAction.APPROVE_ALL
                 },
                 trackingOptions: tw,
                 disabled: !!y,

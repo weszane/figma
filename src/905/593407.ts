@@ -28,7 +28,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 let D = {
   body: {
     ..._$$g.textBodyMedium,
@@ -97,7 +97,7 @@ function L({
           onClick: a,
           dataTestId: "accept-tos-button",
           trackingProperties: {
-            trackingDescriptor: _$$c.AGREE
+            trackingDescriptor: UpgradeAction.AGREE
           },
           children: getI18nString("tos_agreement.modal_accept_button")
         })

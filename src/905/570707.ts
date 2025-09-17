@@ -1,7 +1,7 @@
 import { getFileKey } from "../905/412913";
 import { useState, useEffect, useMemo } from "react";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { trackEventAnalytics } from "../905/449184";
 import { handleAtomEvent } from "../905/502364";
 import { openFileAtom } from "../figma_app/516028";
@@ -56,7 +56,7 @@ function b(e, t) {
 }
 export function $$v2() {
   let [e, t] = useState("");
-  let [i] = _$$A(e, 100);
+  let [i] = useDebounce(e, 100);
   useEffect(() => {
     handleAtomEvent({
       id: "Library Search Query Changed",

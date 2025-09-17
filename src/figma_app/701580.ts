@@ -3,10 +3,10 @@ import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { isEmptyObject } from "../figma_app/493477";
-import { Y9, Wk } from "../figma_app/272243";
+import { DialogHeader, DialogCustomContents } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import _ from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
@@ -469,7 +469,7 @@ function eo({
   });
 }
 function eu(e) {
-  return jsx(Y9, {
+  return jsx(DialogHeader, {
     children: e.previewTemplateId ? jsx(IconButton, {
       "aria-label": getI18nString("general.back"),
       onClick: e.goBack,
@@ -637,7 +637,7 @@ function em(e) {
     templateInsertionLocation: e.templateInsertionLocation,
     templates: L
   });
-  return jsxs(Wk, {
+  return jsxs(DialogCustomContents, {
     className: h()({
       [hW]: "newFile" === e.triggeredFrom
     }),
@@ -681,7 +681,7 @@ function eg(e) {
     ...e,
     onClose: s
   });
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "whiteboard",
     children: jsx(ModalRootComponent, {
       width: 888,

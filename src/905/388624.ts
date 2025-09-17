@@ -15,7 +15,7 @@ import { _l } from "../figma_app/976345";
 import { cs, UP, T9, nR } from "../figma_app/740025";
 import { nm } from "../905/352022";
 import { O_ } from "../905/967587";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
 import { j as _$$j } from "../905/834956";
 import { Dg } from "../figma_app/530167";
@@ -75,7 +75,7 @@ function z() {
   let d = useSelector(e => e.dropdownShown?.data?.targetRect);
   let x = useSelector(e => e.authedUsers);
   let z = useSelector(e => e.authedProfilesById);
-  let H = FC();
+  let H = selectPermissionsState();
   let W = selectUser();
   let K = useSelector(e => e.orgById);
   let Y = useSelector(e => e.authedTeamsById);

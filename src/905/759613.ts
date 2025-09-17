@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
@@ -61,7 +61,7 @@ export function $$h0(e) {
       });
     };
   } else if ("white" === f) t = function (e) {
-    return jsx(J, {
+    return jsx(setupThemeContext, {
       mode: "light",
       children: jsx(e6, {
         ...e,

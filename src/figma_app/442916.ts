@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { TabLoop } from "../905/718764";
 import { getStorage } from "../905/657224";
 import u from "classnames";
@@ -21,7 +21,7 @@ import { lR, $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S as _$$S } from "../5132/668270";
 import { showModalHandler, hideModal } from "../905/156213";
-import { cq } from "../figma_app/107215";
+import { updateWorkshopUserName } from "../figma_app/107215";
 import { TrackingProvider } from "../figma_app/831799";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -73,7 +73,7 @@ function V({
         d(!0);
         return;
       }
-      p ? (r(cq({
+      p ? (r(updateWorkshopUserName({
         name: s
       })), _ && t?.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
         userName: s,
@@ -92,7 +92,7 @@ function V({
     onClose: e => {
       e.preventDefault();
       e.stopPropagation();
-      r(cq({
+      r(updateWorkshopUserName({
         name: getI18nString("figjam_try.google_meet_user_name")
       }));
       _ && t?.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
@@ -301,8 +301,8 @@ export function $$W0(e) {
       manager: u,
       width: 400,
       height: "fixed",
-      children: jsx(vo, {
-        children: jsx(nB, {
+      children: jsx(DialogContents, {
+        children: jsx(DialogBody, {
           padding: 40,
           children: jsx(TabLoop, {
             children: i ? jsx(H, {

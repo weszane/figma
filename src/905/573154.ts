@@ -38,9 +38,9 @@ function resolveFlashMessage(input: string | { i18n: string, fallback_text?: str
 }
 
 // First define the action creators
-const flashAddAction = createActionCreator('FLASH_ADD')
-const flashRemoveAction = createActionCreator('FLASH_REMOVE')
-const flashRemoveAllAction = createActionCreator('FLASH_REMOVE_ALL')
+export const flashAddAction = createActionCreator('FLASH_ADD')
+export const flashRemoveAction = createActionCreator('FLASH_REMOVE')
+export const flashRemoveAllAction = createActionCreator('FLASH_REMOVE_ALL')
 
 // Forward declare FlashActions to avoid circular reference issues
 
@@ -48,7 +48,7 @@ const flashRemoveAllAction = createActionCreator('FLASH_REMOVE_ALL')
  * Handles adding/removing flash messages with timeout
  * (original: p)
  */
-const handleFlash = createOptimistThunk<FlashMessage, number>(
+export const handleFlash = createOptimistThunk<FlashMessage, number>(
   /**
    * @param context - OptimistThunkContext
    * @param flash - FlashMessage
@@ -142,7 +142,7 @@ export const FlashActions = {
  * Handles promise errors and dispatches error flash
  * (original: $$m0)
  */
-const handlePromiseError = createOptimistThunk<{ promise: Promise<any>, fallbackError?: string }, void>(
+export const handlePromiseError = createOptimistThunk<{ promise: Promise<any>, fallbackError?: string }, void>(
   /**
    * @param context - OptimistThunkContext
    * @param payload - { promise, fallbackError }

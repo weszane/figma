@@ -12,10 +12,10 @@ import { G } from '../905/594445';
 import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N } from '../905/670143';
 import { getSingletonSceneGraph } from '../905/700578';
-import { G as _$$G } from '../905/707993';
+import { getCollectionView } from '../905/707993';
 import { I as _$$I } from '../905/783004';
 import { generateUUIDv4 } from '../905/871474';
-import { sD } from '../905/937198';
+import { logCmsError } from '../905/937198';
 import { hl, lf } from '../figma_app/11329';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { p as _$$p } from '../figma_app/304289';
@@ -23,7 +23,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { SceneGraphHelpers, VariableResolvedDataType, VariableDataType } from '../figma_app/763686';
 import { e6, Ez, hu, kI, TZ } from '../figma_app/766708';
 import { _j, ap, rU } from '../figma_app/843119';
-import { A2 } from '../figma_app/872077';
+import { collectionService } from '../figma_app/872077';
 import { oj } from '../figma_app/986594';
 function O(e) {
   return e.sort((e, t) => Ez(t.position, e.position));
@@ -33,10 +33,10 @@ export function $$R3(e) {
     let {
       collection,
       status
-    } = _$$G({
+    } = getCollectionView({
       collectionStableId: e
     });
-    return useMemo(() => status !== 'loaded' ? null : collection == null ? (sD('collection is null', {
+    return useMemo(() => status !== 'loaded' ? null : collection == null ? (logCmsError('collection is null', {
       collectionId: e,
       fieldName: t
     }), null) : collection.fieldSchemas.find(e => e.name === t) ?? null, [collection, e, t, status]);
@@ -45,7 +45,7 @@ export function $$R3(e) {
 function L(e, t) {
   let {
     collection
-  } = _$$G({
+  } = getCollectionView({
     collectionStableId: e
   });
   return useMemo(() => {
@@ -63,7 +63,7 @@ export function $$D4(e) {
   return L(e, rU.Title);
 }
 export function $$k7(e) {
-  let t = _$$G({
+  let t = getCollectionView({
     collectionStableId: e
   });
   return t.status === ResourceStatus.Loaded ? O((getResourceDataOrFallback(t.collection)?.fieldSchemas ?? []).map(e => ({
@@ -263,7 +263,7 @@ export function $$F0(e) {
     submitFieldChanges: () => {
       if (t) {
         for (let t of r) {
-          t.action === 'create' ? A2.createFieldSchema({
+          t.action === 'create' ? collectionService.createFieldSchema({
             collection: e,
             attributes: {
               name: t.name,
@@ -272,7 +272,7 @@ export function $$F0(e) {
               fieldType: t.fieldType,
               properties: t.properties
             }
-          }) : t.action === 'update' && A2.updateFieldSchema({
+          }) : t.action === 'update' && collectionService.updateFieldSchema({
             collection: e,
             fieldSchema: t,
             newAttributes: {
@@ -285,7 +285,7 @@ export function $$F0(e) {
           });
         }
         for (let t of l) {
-          A2.deleteFieldSchema({
+          collectionService.deleteFieldSchema({
             collection: e,
             fieldSchema: t
           });

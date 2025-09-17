@@ -1,7 +1,7 @@
 import { UpsellModalType } from '../905/165519'
 import { getI18nString } from '../905/303541'
 import { parseQuery, serializeQuery } from '../905/634134'
-import { UpgradeAction } from '../figma_app/707808'
+import { CreateUpgradeAction } from '../figma_app/707808'
 import { X1 } from '../figma_app/736948'
 import { UpgradeSteps } from '../figma_app/831101'
 /**
@@ -36,7 +36,7 @@ export class OrgSelfServePathHandler {
 
       const teamFlowType = params.get('team_flow_type')
       if (teamFlowType) {
-        if (teamFlowType === UpgradeAction.CREATE) {
+        if (teamFlowType === CreateUpgradeAction.CREATE) {
           return {
             view: 'teamUpgrade',
             teamFlowType,
@@ -48,7 +48,7 @@ export class OrgSelfServePathHandler {
       }
       else if (routeParts[2] === 'create-team') {
         selectedView.newTeamProps = {
-          teamFlowType: UpgradeAction.CREATE_AND_UPGRADE,
+          teamFlowType: CreateUpgradeAction.CREATE_AND_UPGRADE,
         }
       }
 

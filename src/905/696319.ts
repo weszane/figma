@@ -4,7 +4,7 @@ import { useMemo, forwardRef, useState, useEffect, createContext, useContext, us
 import { A as _$$A2 } from "../vendor/723372";
 import { mb, ql, Jq, iL, Fi, QT } from "../905/687992";
 import { setupRefUpdater } from "../905/823680";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { addEventlistenerWithCleanup, preventAndStopEvent, createCleanupExecutor } from "../905/955878";
 import { mergeProps } from "../905/475481";
 import { multiplyPoint, originPoint, addPoints, pointFromMovement, roundToDevicePixel, pointFromMouseEvent } from "../905/268491";
@@ -229,7 +229,7 @@ function z({
   let i = U();
   return jsx(O, {
     manager: i?.manager ?? null,
-    children: jsx(_$$p.Root, {
+    children: jsx(InputComponent.Root, {
       ref: e,
       ...t
     })
@@ -563,7 +563,7 @@ let H = forwardRef(({
     inputProps
   } = p;
   let O = setupRefUpdater(i, inputProps.ref);
-  return jsx(_$$p, {
+  return jsx(InputComponent, {
     ...inputProps,
     ref: O,
     "data-faux-focus": _.scrubbing || void 0

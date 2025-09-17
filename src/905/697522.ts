@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 export let $$s0 = memo(function (e) {
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: "dev-handoff",
     children: jsxs("svg", {
       width: "16",

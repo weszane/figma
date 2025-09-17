@@ -6,7 +6,7 @@ import { e } from "../905/435763";
 import { v as _$$v } from "../905/92662";
 import { p as _$$p } from "../905/110044";
 import { K as _$$K } from "../905/389903";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { v as _$$v2 } from "../905/399666";
 import { k as _$$k } from "../905/649323";
 import { j as _$$j } from "../905/206476";
@@ -23,7 +23,7 @@ import { tS } from "../figma_app/622574";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType } from "../figma_app/191312";
 let p = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "piper",
     children: jsxs("svg", {
       width: "32",
@@ -42,7 +42,7 @@ let p = memo(function (e) {
   });
 });
 let m = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "piper",
     children: jsxs("svg", {
       width: "16",
@@ -61,7 +61,7 @@ let m = memo(function (e) {
   });
 });
 let h = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "piper",
     children: jsxs("svg", {
       width: "24",
@@ -80,7 +80,7 @@ let h = memo(function (e) {
   });
 });
 let g = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "piper",
     children: jsxs("svg", {
       width: "32",
@@ -99,7 +99,7 @@ let g = memo(function (e) {
   });
 });
 let A = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "seascape",
     children: jsxs("svg", {
       width: "32",
@@ -118,7 +118,7 @@ let A = memo(function (e) {
   });
 });
 let v = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "whiteboard",
     children: jsxs("svg", {
       width: "32",
@@ -137,7 +137,7 @@ let v = memo(function (e) {
   });
 });
 let I = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "whiteboard",
     children: jsxs("svg", {
       width: "16",
@@ -156,7 +156,7 @@ let I = memo(function (e) {
   });
 });
 let E = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "whiteboard",
     children: jsxs("svg", {
       width: "24",
@@ -175,7 +175,7 @@ let E = memo(function (e) {
   });
 });
 let x = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "whiteboard",
     children: jsxs("svg", {
       width: "32",
@@ -194,7 +194,7 @@ let x = memo(function (e) {
   });
 });
 let C = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "dev-handoff",
     children: jsxs("svg", {
       width: "32",
@@ -261,7 +261,7 @@ let R = memo(function (e) {
   });
 });
 let P = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "24",
@@ -280,7 +280,7 @@ let P = memo(function (e) {
   });
 });
 let O = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "32",
@@ -299,7 +299,7 @@ let O = memo(function (e) {
   });
 });
 let D = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "16",
@@ -318,7 +318,7 @@ let D = memo(function (e) {
   });
 });
 let L = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "24",
@@ -337,7 +337,7 @@ let L = memo(function (e) {
   });
 });
 let F = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "32",
@@ -356,7 +356,7 @@ let F = memo(function (e) {
   });
 });
 let M = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "16",
@@ -375,7 +375,7 @@ let M = memo(function (e) {
   });
 });
 let j = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "24",
@@ -394,7 +394,7 @@ let j = memo(function (e) {
   });
 });
 let U = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "design",
     children: jsxs("svg", {
       width: "32",
@@ -413,7 +413,7 @@ let U = memo(function (e) {
   });
 });
 let G = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "cooper",
     children: jsxs("svg", {
       width: "32",
@@ -432,7 +432,7 @@ let G = memo(function (e) {
   });
 });
 let z = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "cooper",
     children: jsxs("svg", {
       width: "16",
@@ -451,7 +451,7 @@ let z = memo(function (e) {
   });
 });
 let H = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "cooper",
     children: jsxs("svg", {
       width: "24",
@@ -470,7 +470,7 @@ let H = memo(function (e) {
   });
 });
 let W = memo(function (e) {
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: "cooper",
     children: jsxs("svg", {
       width: "32",

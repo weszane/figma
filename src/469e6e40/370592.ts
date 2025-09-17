@@ -3,7 +3,7 @@ import { useCallback, useId, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/53857";
 import { Label } from "../905/270045";
-import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { MeasurementUnit } from "../figma_app/763686";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
@@ -14,7 +14,7 @@ import { NH } from "../figma_app/755395";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { useApplyCodeExtensionPreferences, isCodegenSupportedForLanguage, useUpdateCodeExtensionPreferences, getMeasurementUnit, getLanguageUnitLabel, useCodegenPreferencesSettings } from "../figma_app/120227";
 import { BK } from "../905/848862";
-import { AF } from "../figma_app/212807";
+import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { KindEnum } from "../905/129884";
 import { u as _$$u } from "../figma_app/152461";
 import { j as _$$j } from "../905/834956";
@@ -29,7 +29,7 @@ export function $$N0({
 }) {
   useApplyCodeExtensionPreferences();
   let a = isCodegenSupportedForLanguage();
-  let s = AF();
+  let s = selectIsCopyExportAllowed();
   return jsx(VZ, {
     title: getI18nString("dev_handoff.code.settings"),
     recordingKey: "codeSettings",
@@ -121,10 +121,10 @@ export function $$R2({
   let {
     manager,
     getTriggerProps
-  } = _$$b({
+  } = setupMenu({
     initialPosition: "bottom"
   });
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$e, {
       ...getTriggerProps({
@@ -140,8 +140,8 @@ export function $$R2({
       },
       disabled: a,
       children: d
-    }), jsx(mc, {
-      children: CODEGEN_MEASUREMENT_UNITS.map(a => jsx(q7, {
+    }), jsx(MenuContainerComp, {
+      children: CODEGEN_MEASUREMENT_UNITS.map(a => jsx(MenuItemComp, {
         onClick: () => t(a),
         "aria-checked": a === e,
         children: l.format(a)

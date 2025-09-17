@@ -5,7 +5,7 @@ import { ModalRootComponent } from '../905/38914';
 import { registerModal } from '../905/102752';
 import { h as _$$h } from '../905/207101';
 import { renderI18nText } from '../905/303541';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { T } from '../905/434246';
 import { useModalManager } from '../905/437088';
 import { g as _$$g } from '../905/687265';
@@ -59,7 +59,7 @@ function I(e) {
             variant: 'primary',
             onClick: e.onRequestUpgrade || e.onClose,
             trackingProperties: {
-              trackingDescriptor: _$$c.CONTINUE
+              trackingDescriptor: UpgradeAction.CONTINUE
             },
             children: renderI18nText('request_upgrade.continue_button')
           })

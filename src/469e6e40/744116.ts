@@ -8,7 +8,7 @@ import { y3 } from "../figma_app/307841";
 import { eC } from "../figma_app/982327";
 import { Ut } from "../figma_app/425283";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { d as _$$d } from "../figma_app/603561";
@@ -63,7 +63,7 @@ function k({
       label: renderI18nText("billing_modals.seat_approval_overlay.cta"),
       type: "button",
       onClick: N,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     targetKey: e ? eC : Ut,
     title: renderI18nText("billing_modals.seat_approval_overlay.title"),

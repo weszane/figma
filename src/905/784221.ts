@@ -7,13 +7,13 @@ import { VisualBellActions } from "../905/302958";
 import { X } from "../905/859195";
 import { filePutAction } from "../figma_app/78808";
 import { showModalHandler, hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileTemplateView } from "../figma_app/43951";
-import { cD } from "../figma_app/598018";
+import { getCurrentTeamId } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { r as _$$r } from "../905/149895";
@@ -62,7 +62,7 @@ let x = registerModal(function ({
 }) {
   let i = selectCurrentFile();
   let s = useCurrentUserOrgId();
-  let y = cD();
+  let y = getCurrentTeamId();
   let b = useSubscription(FileTemplateView, {
     fileKey: t
   }, {
@@ -116,7 +116,7 @@ let x = registerModal(function ({
       destructive: !0,
       onConfirm: S && unpublishTemplate ? () => unpublishTemplate(t) : w && _unpublishTemplate ? () => _unpublishTemplate(t) : T,
       trackedConfirmationProperties: {
-        trackingDescriptor: _$$c.UNPUBLISH,
+        trackingDescriptor: UpgradeAction.UNPUBLISH,
         fileKey: C.fileKey,
         productType: i?.editorType
       }

@@ -5,13 +5,13 @@ import { H } from "../905/474029";
 import { Mv, jv } from "../figma_app/909778";
 import { fn, ih } from "../figma_app/297957";
 import { jm } from "../905/697795";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FEntityType } from "../figma_app/191312";
 export function $$p0(e) {
   let {
     folder
   } = e;
-  let i = _6();
+  let i = getSelectedView();
   let p = useSelector(e => e.currentUserOrgId);
   let m = useDispatch();
   let h = "recentsAndSharing" === i.view && "shared-projects" === i.tab ? e.folder.parent_org?.id ?? null : p;

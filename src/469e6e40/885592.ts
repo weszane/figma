@@ -14,7 +14,7 @@ import { ScreenReaderOnly } from '../905/172252';
 import { h as _$$h } from '../905/207101';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { BannerMessage } from '../905/363675';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { b as _$$b2 } from '../905/484176';
 import { DashboardSections } from '../905/548208';
 import { getFeatureFlags } from '../905/601108';
@@ -250,7 +250,7 @@ function z(e) {
             trusted: !0,
             newTab: !0,
             trackingProperties: {
-              trackingDescriptor: _$$c.LEARN_MORE
+              trackingDescriptor: UpgradeAction.LEARN_MORE
             },
             children: getI18nString('general.learn_more')
           })
@@ -422,7 +422,7 @@ function er(e) {
     className: 'xt0psk2 xjbqb8w x1quhyk7 x1ypdohk x5hs570 xy9f4xx',
     onClick: e.onDiscountClick,
     trackingProperties: {
-      trackingDescriptor: _$$c.CONVERT_MONTHLY_TO_ANNUAL,
+      trackingDescriptor: UpgradeAction.CONVERT_MONTHLY_TO_ANNUAL,
       adjustAnnualSeatsActionId: e.adjustAnnualSeatsActionId
     },
     children: getI18nString('plan_invoices.monthly_to_annual_cta.discount')
@@ -454,7 +454,7 @@ function el(e) {
       trusted: !0,
       newTab: !0,
       trackingProperties: {
-        trackingDescriptor: _$$c.DOWNLOAD_PDF
+        trackingDescriptor: UpgradeAction.DOWNLOAD_PDF
       },
       children: jsxs('span', {
         className: 'x3nfvp2 x6s0dn4 x1n2onr6 xnajj62 x1l3h6vc',
@@ -476,7 +476,7 @@ function el(e) {
         }));
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.MANAGE_SEATS
+        trackingDescriptor: UpgradeAction.MANAGE_SEATS
       },
       children: getI18nString('plan_invoices.manage_seats')
     })
@@ -495,7 +495,7 @@ function el(e) {
         }));
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.VIEW_NEW_SEATS
+        trackingDescriptor: UpgradeAction.VIEW_NEW_SEATS
       },
       children: getI18nString('plan_invoices.view_new_seat_charges_updated')
     })
@@ -519,7 +519,7 @@ function el(e) {
         }));
       },
       trackingProperties: {
-        trackingDescriptor: _$$c.REVIEW_AND_FINALIZE_INVOICE
+        trackingDescriptor: UpgradeAction.REVIEW_AND_FINALIZE_INVOICE
       },
       children: getI18nString('org_admin_details.billing_banner.details.upcoming_invoice.button.review_and_finalize_invoice')
     })

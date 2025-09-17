@@ -64,7 +64,7 @@ import { i as _$$i } from '../figma_app/472709';
 import { s as _$$s3 } from '../figma_app/483328';
 import { selectCurrentFile, useCurrentFileKey } from '../figma_app/516028';
 import { s as _$$s2 } from '../figma_app/553327';
-import { c$ } from '../figma_app/618433';
+import { getCollectionSummaryStatus } from '../figma_app/618433';
 import { Zk } from '../figma_app/626177';
 import { e as _$$e } from '../figma_app/630744';
 import { R as _$$R2 } from '../figma_app/636548';
@@ -79,7 +79,7 @@ import { bw, gc, jw, Xl } from '../figma_app/781981';
 import { generateRecordingKey } from '../figma_app/878298';
 import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { t as _$$t2 } from '../figma_app/856638';
-import { b as _$$b, bL, mc, YJ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp } from '../figma_app/860955';
 import { W as _$$W } from '../figma_app/896386';
 import { QE } from '../figma_app/914216';
 import { S as _$$S } from '../figma_app/924300';
@@ -103,7 +103,7 @@ function F() {
   s.length === 0 && (s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_CHILDREN) ?? [], r = !0);
   let o = useDispatch();
   let u = useCurrentFileKey();
-  let p = c$(u).data;
+  let p = getCollectionSummaryStatus(u).data;
   let _ = getFeatureFlags().dakota_repeaters && s.length > 0 || U(t);
   let m = t?.getDakotaSelector()?.collectionId;
   let g = useSetAtom(_$$C);
@@ -249,7 +249,7 @@ function ek() {
     let t = kk(e);
     let r = Fk(e => e.getDirectlySelectedNodes().every(e => U(e)));
     let a = useCurrentFileKey();
-    let s = c$(a).data;
+    let s = getCollectionSummaryStatus(a).data;
     let o = t?.getDakotaSelector()?.collectionId;
     let d = useCallback(e => {
       e && t && t.type === 'RESPONSIVE_SET' && permissionScopeHandler.user('dakota-set-text-binding', () => {
@@ -299,14 +299,14 @@ function eB() {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let r = j();
   if (!getFeatureFlags().cms_bindings_ux_improvements || !r) return null;
   let i = [jsx(_$$t2, {
     item: r,
     recordingKey: r.recordingKey
   }, r.recordingKey)];
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx(ButtonPrimitive, {
       ...getTriggerProps(),
@@ -316,8 +316,8 @@ function eB() {
       }),
       'recordingKey': 'cms_page_unbind_button',
       'children': jsx(_$$J2, {})
-    }), jsx(mc, {
-      children: jsx(YJ, {
+    }), jsx(MenuContainerComp, {
+      children: jsx(MenuGroupComp, {
         children: i
       })
     })]

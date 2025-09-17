@@ -10,7 +10,7 @@ import { s as _$$s } from "../905/645504";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { cF, fF, BZ } from "../figma_app/425283";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
@@ -50,7 +50,7 @@ function I() {
       label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: cF,

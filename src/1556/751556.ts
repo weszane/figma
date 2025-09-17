@@ -4,7 +4,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { q7, Q$, ME, g8, MJ, ZP, r1, hE, YJ, b as _$$b, bL, mc } from "../figma_app/860955";
+import { MenuItemComp, MenuItemLead, MenuSubText, MenuSubMenu, MenuSubContainerComp, MenuSubTrigger, MenuHiddenTitleComp, MenuTitleComp, MenuGroupComp, setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { UI3ConditionalWrapper } from "../905/341359";
@@ -438,16 +438,16 @@ let eH = (e, t) => e.map(e => {
   };
   let o = `@${e.profile_handle}`;
   return {
-    element: jsxs(q7, {
+    element: jsxs(MenuItemComp, {
       onClick: n,
-      children: [jsx(Q$, {
+      children: [jsx(MenuItemLead, {
         children: ez(jsx(_$$e2, {
           entity: l,
           size: 16
         }))
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf xeuugli x98rzlu xb3r6kr",
-        children: [eQ(e.name), jsx(ME, {
+        children: [eQ(e.name), jsx(MenuSubText, {
           children: eQ(o)
         })]
       })]
@@ -478,16 +478,16 @@ let eq = (e, t) => {
     }));
   };
   return {
-    element: jsxs(q7, {
+    element: jsxs(MenuItemComp, {
       onClick: l,
-      children: [jsx(Q$, {
+      children: [jsx(MenuItemLead, {
         children: ez(jsx(H8, {
           user: e,
           size: Pf.SMALL16
         }))
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf xeuugli x98rzlu xb3r6kr",
-        children: [n, jsx(ME, {
+        children: [n, jsx(MenuSubText, {
           children: eQ(e.email)
         })]
       })]
@@ -513,11 +513,11 @@ function eW(e, t, n) {
   return {
     element: jsxs(CU, {
       value: e.id,
-      children: [jsx(Q$, {
+      children: [jsx(MenuItemLead, {
         children: l
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf xeuugli x98rzlu xb3r6kr",
-        children: [eQ(e.name), jsx(ME, {
+        children: [eQ(e.name), jsx(MenuSubText, {
           children: eQ(e.email)
         })]
       })]
@@ -556,24 +556,24 @@ function eX() {
     return [{
       key: "profile-settings",
       items: S()([{
-        element: getFeatureFlags().figpal_avatars_mw25 ? jsxs(g8, {
+        element: getFeatureFlags().figpal_avatars_mw25 ? jsxs(MenuSubMenu, {
           children: [jsx(eT, {
             user: n,
             dispatch: e
-          }, "profile"), jsxs(MJ, {
-            children: [jsxs(q7, {
+          }, "profile"), jsxs(MenuSubContainerComp, {
+            children: [jsxs(MenuItemComp, {
               onClick: () => console.warn("upload photo"),
-              children: [jsx(Q$, {
+              children: [jsx(MenuItemLead, {
                 children: jsx(_$$A2, {})
               }), getI18nString("account_switcher.upload_photo")]
-            }), jsxs(q7, {
+            }), jsxs(MenuItemComp, {
               onClick: () => console.warn("customize figpal"),
-              children: [jsx(Q$, {
+              children: [jsx(MenuItemLead, {
                 children: jsx(_$$J2, {})
               }), getI18nString("account_switcher.customize_photo")]
-            }), jsxs(q7, {
+            }), jsxs(MenuItemComp, {
               onClick: () => console.warn("reset to default"),
-              children: [jsx(Q$, {
+              children: [jsx(MenuItemLead, {
                 children: jsx(_$$x2, {})
               }), getI18nString("account_switcher.reset_to_default_photo")]
             })]
@@ -596,14 +596,14 @@ function eX() {
         let n = getI18nString("navbar.settings_dropdown.theme");
         let l = "theme";
         return {
-          element: jsxs(g8, {
-            children: [jsxs(ZP, {
-              children: [jsx(Q$, {
+          element: jsxs(MenuSubMenu, {
+            children: [jsxs(MenuSubTrigger, {
+              children: [jsx(MenuItemLead, {
                 children: eD(l)
               }), n]
-            }), jsx(MJ, {
+            }), jsx(MenuSubContainerComp, {
               children: jsx(z6, {
-                title: jsx(r1, {
+                title: jsx(MenuHiddenTitleComp, {
                   children: n
                 }),
                 value: e ?? void 0,
@@ -643,10 +643,10 @@ function eX() {
           }));
         };
         return {
-          element: jsxs(q7, {
+          element: jsxs(MenuItemComp, {
             onClick: o,
             "data-onboarding-key": l,
-            children: [jsx(Q$, {
+            children: [jsx(MenuItemLead, {
               children: eD(n)
             }), t]
           }, "settings"),
@@ -664,9 +664,9 @@ function eX() {
           customHistory.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
         };
         return {
-          element: jsxs(q7, {
+          element: jsxs(MenuItemComp, {
             onClick: n,
-            children: [jsx(Q$, {
+            children: [jsx(MenuItemLead, {
               children: eD(t)
             }), e]
           }, "desktop-download"),
@@ -699,12 +699,12 @@ function eX() {
       return {
         key: "community-profiles",
         items: [{
-          element: jsxs(g8, {
-            children: [jsxs(ZP, {
-              children: [jsx(Q$, {
+          element: jsxs(MenuSubMenu, {
+            children: [jsxs(MenuSubTrigger, {
+              children: [jsx(MenuItemLead, {
                 children: eD(r)
               }), a]
-            }), jsx(MJ, {
+            }), jsx(MenuSubContainerComp, {
               children: s.map(e => e.element)
             })]
           }, "community-profile-menu-trigger"),
@@ -750,9 +750,9 @@ function eX() {
         let d = eW(e, !0, () => o(e.id));
         return {
           element: jsxs(z6, {
-            title: r ? jsx(hE, {
+            title: r ? jsx(MenuTitleComp, {
               children: a
-            }) : jsx(r1, {
+            }) : jsx(MenuHiddenTitleComp, {
               children: a
             }),
             onChange: o,
@@ -775,10 +775,10 @@ function eX() {
           })) : t ? n(rq()) : customHistory.redirect("/login?cont=", "_blank");
         };
         return {
-          element: jsxs(q7, {
+          element: jsxs(MenuItemComp, {
             onClick: a,
             "data-onboarding-key": s,
-            children: [jsx(Q$, {
+            children: [jsx(MenuItemLead, {
               children: eD(o)
             }), l]
           }, "add-account"),
@@ -806,9 +806,9 @@ function eX() {
             a(n);
           };
           return {
-            element: jsxs(q7, {
+            element: jsxs(MenuItemComp, {
               onClick: e,
-              children: [jsx(Q$, {
+              children: [jsx(MenuItemLead, {
                 children: eD(o)
               }), l]
             }, "logout"),
@@ -824,21 +824,21 @@ function eX() {
           t(S5());
         };
         return {
-          element: jsxs(g8, {
-            children: [jsxs(ZP, {
-              children: [jsx(Q$, {
+          element: jsxs(MenuSubMenu, {
+            children: [jsxs(MenuSubTrigger, {
+              children: [jsx(MenuItemLead, {
                 children: eD(o)
               }), l]
-            }), jsxs(MJ, {
-              children: [jsx(YJ, {
+            }), jsxs(MenuSubContainerComp, {
+              children: [jsx(MenuGroupComp, {
                 children: e.orderedIds.map(t => {
                   let n = e.byId[t];
-                  return n ? jsx(q7, {
+                  return n ? jsx(MenuItemComp, {
                     onClick: () => a(n),
                     children: eQ(n.email)
                   }, t) : null;
                 })
-              }), jsx(q7, {
+              }), jsx(MenuItemComp, {
                 onClick: d,
                 children: r
               })]
@@ -913,7 +913,7 @@ function eK({
   let {
     getTriggerProps,
     manager
-  } = _$$b({
+  } = setupMenu({
     config2025CuratorHacks: !0
   });
   let s = {
@@ -932,7 +932,7 @@ function eK({
   };
   _$$T$(s);
   return jsx(UI3ConditionalWrapper, {
-    children: jsxs(bL, {
+    children: jsxs(MenuRootComp, {
       manager: s,
       children: [jsxs(ButtonPrimitive, {
         ..._$$Ay.props(eG.button, manager.isOpen && eG.buttonActive),
@@ -941,9 +941,9 @@ function eK({
         children: [t, jsx(_$$O, {
           className: "x2lah0s"
         })]
-      }), jsx(mc, {
-        children: n.map(e => 0 === e.items.length ? null : jsx(YJ, {
-          title: e.title ? jsx(hE, {
+      }), jsx(MenuContainerComp, {
+        children: n.map(e => 0 === e.items.length ? null : jsx(MenuGroupComp, {
+          title: e.title ? jsx(MenuTitleComp, {
             children: e.title
           }) : null,
           children: e.items.map(e => e.element)

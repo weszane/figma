@@ -1,7 +1,7 @@
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { gL } from "../figma_app/618433";
-import { X } from "../905/880040";
+import { getCollectionViewStatus } from "../figma_app/618433";
+import { setupCollectionSummary } from "../905/880040";
 import { _j } from "../figma_app/843119";
 import { ZS, o6, Rj } from "../figma_app/986594";
 import { U } from "../905/492359";
@@ -14,7 +14,7 @@ export function $$_0() {
   let e = ZS(["TEXT", "CMS_RICH_TEXT"]);
   let {
     collections
-  } = X({
+  } = setupCollectionSummary({
     fileKey: useCurrentFileKey()
   });
   let r = o6();
@@ -41,12 +41,12 @@ export function $$h1() {
   let t = function () {
     let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     let t = e[0]?.getNearestDakotaCollectionId();
-    let r = gL(t ?? "");
+    let r = getCollectionViewStatus(t ?? "");
     return !!(r.data?.fieldSchemas ?? []).some(e => _j.IMAGE === e.fieldType);
   }();
   let {
     collections
-  } = X({
+  } = setupCollectionSummary({
     fileKey: useCurrentFileKey()
   });
   return {

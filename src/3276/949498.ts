@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { useRef, useLayoutEffect } from "react";
@@ -100,7 +100,7 @@ function N({
   markRequestsAsRead: t,
   editRequestPermissionsData: n
 }) {
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     mode: "dark",
     children: jsxs("div", {
       className: "edit_request_tooltip--contentContainer--IClWV",

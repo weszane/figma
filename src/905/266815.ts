@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { selectCurrentFile } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { sn } from "../905/301347";
 export function $$p1() {
   let e = useDispatch();
   let t = sn();
-  let i = _6();
+  let i = getSelectedView();
   let a = "prototype" === i.view;
   let p = selectCurrentFile();
   let m = a ? i.file.editor_type : p?.editorType;

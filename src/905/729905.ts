@@ -9,7 +9,7 @@ import { Fl } from "../figma_app/236178";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { je, fi } from "../figma_app/155728";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { isPublishedTeamLibrary, isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { L } from "../905/773253";
 import { er, sz, zm } from "../905/753512";
@@ -80,7 +80,7 @@ var d = l;
     return [...e, t].filter(e => !!e).join(" > ");
   }
   function x() {
-    let e = ol() ?? void 0;
+    let e = getCurrentTeam() ?? void 0;
     let t = LH() ?? void 0;
     return {
       fileKey: useCurrentFileKey() ?? void 0,

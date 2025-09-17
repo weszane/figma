@@ -8,7 +8,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
 import m from "../vendor/674128";
-import { A } from "../vendor/850789";
+import { useDebouncuse-debouncedor/850789";
 import { trackEventAnalytics } from "../905/449184";
 import { UD } from "../figma_app/624361";
 import { tB } from "../figma_app/731583";
@@ -142,8 +142,8 @@ function D({
   flappDomElement: a,
   isReadOnly: s
 }) {
-  let [u] = A(t, 500);
-  let [c] = A(i, 500);
+  let [u] = useDebounce(t, 500);
+  let [c] = useDebounce(i, 500);
   let m = useCurrentFileKey();
   useEffect(() => {
     var t;

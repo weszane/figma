@@ -2,7 +2,7 @@ import _require from "@stylexjs/stylex";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useId } from "react";
 import { Button } from "../905/521428";
-import { p as _$$p } from "../905/185998";
+import { InputComponent } from "../905/185998";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
@@ -131,8 +131,8 @@ function w(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: "xazcve0",
-      children: jsxs(_$$p.Root, {
-        children: [jsx(_$$p, {
+      children: jsxs(InputComponent.Root, {
+        children: [jsx(InputComponent, {
           "aria-label": inputLabel,
           value: inputValue,
           onChange

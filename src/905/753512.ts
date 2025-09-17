@@ -3,7 +3,7 @@ import { createContext, useState, useRef, useEffect, useCallback, useMemo, useCo
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
@@ -19,7 +19,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { XD } from "../905/842072";
 import { Q_ } from "../905/570707";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { mG, Qj, ry } from "../905/825399";
 import { S as _$$S } from "../905/612212";
 let w = resourceUtils.loading();
@@ -94,7 +94,7 @@ export function $$N0({
     let _ = useCallback(() => {
       n && t.setActiveTab("search");
     }, [n, t]);
-    let [k] = _$$A(n, 100);
+    let [k] = useDebounce(n, 100);
     let {
       results,
       queryId
@@ -161,7 +161,7 @@ export function $$N0({
         let [a, s] = useState(void 0);
         let [o, l] = useState(!0);
         let d = useCurrentFileKey() ?? void 0;
-        let c = ol()?.id;
+        let c = getCurrentTeam()?.id;
         let u = LH() ?? void 0;
         useEffect(function () {
           t ? (s(generateUUIDv4()), l(!1)) : (s(void 0), l(!0));

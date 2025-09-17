@@ -9,7 +9,7 @@ import { Dw } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { getEditableUnpaidTeams } from "../figma_app/345997";
 import { OJ } from "../905/519092";
 function h({
@@ -30,7 +30,7 @@ function h({
   });
 }
 export function $$x0() {
-  let e = FC();
+  let e = selectPermissionsState();
   let t = useDispatch();
   let r = sx();
   let x = useCallback(() => {

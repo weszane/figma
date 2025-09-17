@@ -16,7 +16,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { hY } from "../figma_app/349969";
 import { eo } from "../905/505138";
-import { mr } from "../figma_app/386952";
+import { getPrototypeSelectedView } from "../figma_app/386952";
 import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
 import { I as _$$I } from "../905/537408";
@@ -119,7 +119,7 @@ export function $$L0(e) {
   });
 }
 export function $$A1(e) {
-  let t = mr();
+  let t = getPrototypeSelectedView();
   let i = hk();
   let a = e.nodeId;
   let [o, s] = useState(i?.isActiveSlidesEmbeddedPrototype(a) || !1);

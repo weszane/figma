@@ -1,5 +1,5 @@
 import { tc } from "../905/15667";
-import { F2 } from "../905/389382";
+import { getMinimumBundle } from "../905/389382";
 export function $$a0({
   seatType: e,
   licenseType: t,
@@ -10,12 +10,12 @@ export function $$a0({
     entryPoint: i,
     licenseType: void 0,
     planData: a,
-    seatType: F2(t)
+    seatType: getMinimumBundle(t)
   } : {
     licenseType: t,
     entryPoint: i,
     planData: a,
-    seatType: e ?? F2(t)
+    seatType: e ?? getMinimumBundle(t)
   };
 }
 export const R = $$a0;

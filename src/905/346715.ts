@@ -22,7 +22,7 @@ import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { mg, nX } from "../figma_app/336853";
-import { Cl, Eq } from "../figma_app/598018";
+import { isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { c as _$$c } from "../905/32166";
 import { teamAPIClient } from "../905/834575";
@@ -89,7 +89,7 @@ let $$F0 = registerModal(function (e) {
     Y(null);
     $(null);
     en(!1);
-    let t = Cl(G);
+    let t = isTeamUrl(G);
     let i = mg(G);
     if (!(i || t)) {
       X("url_format");
@@ -116,7 +116,7 @@ let $$F0 = registerModal(function (e) {
         en(!0);
       });
     } else if (t) {
-      if ($(FOrganizationLevelType.TEAM), (n = Eq(G) || null) === e.folder.teamId) {
+      if ($(FOrganizationLevelType.TEAM), (n = extractTeamIdFromUrl(G) || null) === e.folder.teamId) {
         X("url_same_plan");
         return;
       }

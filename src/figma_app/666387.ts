@@ -29,7 +29,7 @@ import { $n } from '../figma_app/439493';
 import { isOrgOrEnterprisePlan } from '../figma_app/465071';
 import { selectCurrentFile } from '../figma_app/516028';
 import { setupResourceAtomHandler } from '../figma_app/566371';
-import { cD } from '../figma_app/598018';
+import { getCurrentTeamId } from '../figma_app/598018';
 import { fJ } from '../figma_app/616107';
 import { $v, Bw, US, VR, WR, X8, Z9 } from '../figma_app/634656';
 import { cd } from '../figma_app/650460';
@@ -43,7 +43,7 @@ function H({
   closeColorPalettePicker: t,
   paletteType: r
 }) {
-  let a = cD();
+  let a = getCurrentTeamId();
   let s = useSelector(e => findTeamById(a, e));
   let [o, d] = useAtomValueAndSetter(Ze);
   let [u, p] = useState(!1);
@@ -197,7 +197,7 @@ function W(e) {
   });
 }
 export function $$K0(e) {
-  let t = cD();
+  let t = getCurrentTeamId();
   let r = useSelector(e => !!e.user);
   let a = VR();
   let s = selectCurrentFile();

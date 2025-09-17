@@ -199,7 +199,7 @@ import { getOrgByCurrentUserId } from '../905/845253';
 import { Um } from '../905/848862';
 import { f8 } from '../905/850476';
 import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
-import { m as _$$m3 } from '../905/852057';
+import { savepointOptimistThunk } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
 import { n3 as _$$n, F7, Rf } from '../905/859698';
 import { FDocumentType, isSupportedBlockType, ITemplateType } from '../905/862883';
@@ -347,7 +347,7 @@ import { T as _$$T2 } from '../figma_app/472024';
 import { rd as _$$rd, v7 } from '../figma_app/475303';
 import { _ as _$$_2 } from '../figma_app/485258';
 import { pP } from '../figma_app/492354';
-import { y as _$$y3 } from '../figma_app/504415';
+import { SavepointModalContainer } from '../figma_app/504415';
 import { ZH } from '../figma_app/504823';
 import { transformOpenFileObject, getFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
 import { ZS } from '../figma_app/519839';
@@ -458,7 +458,7 @@ import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
 import { useSelector, useDispatch } from 'react-redux';
 import oA from '../vendor/805353';
-import { A as _$$A5 } from '../vendor/850789';
+import { useDebounce } from 'use-debounce';
 import { unmountComponentAtNode } from 'react-dom';
 let n;
 let r;
@@ -1962,7 +1962,7 @@ let rx = registerModal(() => {
     let [{
       windowInnerWidth: e,
       windowInnerHeight: t
-    }] = _$$A5(_$$l4(), 300);
+    }] = useDebounce(_$$l4(), 300);
     let i = getSessionStorage();
     let n = window.innerWidth - 2 * rv;
     let r = window.innerHeight - parsePxNumber('20px') - rI - parsePxNumber('60px') - 2 * rv;
@@ -2179,12 +2179,12 @@ let r3 = e => {
   }
 };
 function r6(e, t, i, n, r) {
-  switch (r && e(t === ColorProfileEnum.LEGACY ? _$$m3({
+  switch (r && e(t === ColorProfileEnum.LEGACY ? savepointOptimistThunk({
     fileKey: r,
     label: getI18nString('fullscreen.color_management.file_history.label'),
     description: r5(i),
     hideVisualBell: !0
-  }) : _$$m3({
+  }) : savepointOptimistThunk({
     fileKey: r,
     label: getI18nString('fullscreen.color_management.file_history.label'),
     description: `${r2(t)} \u2192 ${r2(i)}`,
@@ -7551,7 +7551,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showSavepointModal() {
     this.dispatch(showModalHandler({
-      type: _$$y3,
+      type: SavepointModalContainer,
       data: {}
     }));
   }

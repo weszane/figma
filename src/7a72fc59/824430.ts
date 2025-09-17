@@ -17,7 +17,7 @@ import { noop } from '../642/671529';
 import { o as _$$o3 } from '../642/854123';
 import { k as _$$k5 } from '../642/978258';
 import { reportError } from '../905/11';
-import { F as _$$F4 } from '../905/224';
+import { consumptionPaywallUtils } from '../905/224';
 import { T as _$$T2 } from '../905/2124';
 import { useMemoStable } from '../905/19536';
 import { zD, zz } from '../905/32188';
@@ -83,7 +83,7 @@ import { a as _$$a9 } from '../905/339331';
 import { I as _$$I2 } from '../905/342732';
 import { P as _$$P } from '../905/347284';
 import { P as _$$P3 } from '../905/351996';
-import { c as _$$c2 } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser } from '../905/372672';
 import { W as _$$W2 } from '../905/378870';
 import { deepEqual } from '../905/382883';
@@ -148,7 +148,7 @@ import { D as _$$D2 } from '../905/591570';
 import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
 import { customHistory } from '../905/612521';
-import { J as _$$J } from '../905/614223';
+import { setupThemeContext } from '../905/614223';
 import { BT } from '../905/618447';
 import { jS, Q1 } from '../905/619652';
 import { R as _$$R3 } from '../905/621802';
@@ -161,7 +161,7 @@ import { eo as _$$eo, fp as _$$fp2 } from '../905/634218';
 import { DP } from '../905/640017';
 import { X as _$$X3 } from '../905/647103';
 import { R as _$$R7 } from '../905/649743';
-import { Bi } from '../905/652992';
+import { FeatureFlag } from '../905/652992';
 import { y as _$$y2 } from '../905/661502';
 import { communityShelfService } from '../905/665703';
 import { oW as _$$oW } from '../905/675859';
@@ -184,7 +184,7 @@ import { S as _$$S } from '../905/720922';
 import { E as _$$E7 } from '../905/730894';
 import { Point } from '../905/736624';
 import { E as _$$E3 } from '../905/737393';
-import { DV } from '../905/739964';
+import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { tH as _$$tH, H4 } from '../905/751457';
 import { H as _$$H2, i as _$$i3 } from '../905/777871';
 import { I as _$$I3 } from '../905/783004';
@@ -462,7 +462,7 @@ import { F as _$$F2 } from '../figma_app/832508';
 import { WH } from '../figma_app/836943';
 import { dM as _$$dM, Eh } from '../figma_app/837840';
 import { rE as _$$rE, bW, Oj } from '../figma_app/850075';
-import { b as _$$b4, bL as _$$bL2, mc as _$$mc3, q7, Q$, YJ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead, MenuGroupComp } from '../figma_app/860955';
 import { Ag as _$$Ag, B3 } from '../figma_app/862289';
 import { s as _$$s0 } from '../figma_app/874592';
 import { generateRecordingKey, SKIP_RECORDING } from '../figma_app/878298';
@@ -490,7 +490,7 @@ import { A as _$$A19 } from '../vendor/21595';
 import { useDebouncedCallback } from 'use-debounce';
 import { P as _$$P6 } from '../vendor/348225';
 import s, { useDispatch, useSelector } from 'react-redux';
-import { A as _$$A17 } from '../vendor/850789';
+import { useDebounce } from 'use-debounce';
 import xh from '../vendor/907065';
 import { N as _$$N3 } from '../vendor/930821';
 import { createPortal } from 'react-dom';
@@ -896,7 +896,7 @@ function J() {
   let v = Q(e, t);
   let S = ee(leftOffset, rightOffset, l + 10);
   let A = v.progressUnits > 0 ? t / v.progressUnits : 0;
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: 'dark',
     brand: 'cooper',
     children: showProgressToast && jsx('div', {
@@ -1258,7 +1258,7 @@ function e0({
     rightOffset
   } = _$$h();
   let r = _$$xn();
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     brand: t,
     children: jsx('div', {
       className: em()(Dm, _$$s.fixed.flex.justifyCenter.eventsNone.$),
@@ -1685,7 +1685,7 @@ function tQ({
           'aria-label': getI18nString('cooper.templates.header.back'),
           'onClick': t,
           'trackingProperties': {
-            trackingDescriptor: _$$c2.BACK,
+            trackingDescriptor: UpgradeAction.BACK,
             ...r
           },
           'children': jsx(_$$t4, {})
@@ -1839,7 +1839,7 @@ function t8({
       'recordingKey': n,
       ...Ay.props(d.button),
       'trackingProperties': {
-        trackingDescriptor: _$$c2.NEW_TEMPLATE_DROPDOWN_OPENED,
+        trackingDescriptor: UpgradeAction.NEW_TEMPLATE_DROPDOWN_OPENED,
         ...i
       },
       'children': [jsx('h3', {
@@ -2721,7 +2721,7 @@ function nY({
     variant: 'secondary',
     onClick: n,
     trackingProperties: {
-      trackingDescriptor: _$$c2.ADD_ALL_TEMPLATES,
+      trackingDescriptor: UpgradeAction.ADD_ALL_TEMPLATES,
       libraryKey: e.library_key,
       source: t ? 'left_rail' : 'modal'
     },
@@ -3020,7 +3020,7 @@ function n4({
     'variant': t,
     'iconPrefix': jsx(_$$x2, {}),
     'trackingProperties': {
-      trackingDescriptor: _$$c2.NEW_TEMPLATE,
+      trackingDescriptor: UpgradeAction.NEW_TEMPLATE,
       source: e
     },
     'children': renderI18nText('cooper.templates.new_template')
@@ -5410,13 +5410,13 @@ let oO = memo(({
       })]
     });
     e(showModalHandler({
-      type: DV,
+      type: ConsumptionPaywallModalPlansPricing,
       data: {
         team: U,
-        resource: Bi.SHARED_FONTS,
+        resource: FeatureFlag.SHARED_FONTS,
         editorType: FFileType.DESIGN,
-        currentPlan: hasValidSubscription(convertTeamToRaw(U)) ? _$$F4.Plan.PRO : _$$F4.Plan.STARTER,
-        upsellPlan: _$$F4.Plan.ORG,
+        currentPlan: hasValidSubscription(convertTeamToRaw(U)) ? consumptionPaywallUtils.Plan.PRO : consumptionPaywallUtils.Plan.STARTER,
+        upsellPlan: consumptionPaywallUtils.Plan.ORG,
         upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
         hideUpsellPlanCta: !t,
         modalFooter: n
@@ -8253,8 +8253,8 @@ function sM({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
-  return t ? jsxs(_$$bL2, {
+  } = setupMenu();
+  return t ? jsxs(MenuRootComp, {
     manager,
     children: [jsx(IconButton, {
       ...getTriggerProps(),
@@ -8265,12 +8265,12 @@ function sM({
         'data-testid': 'buzz-ai-image-tools-button'
       },
       'children': jsx(_$$V3, {})
-    }), jsxs(_$$mc3, {
-      children: [jsxs(YJ, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsxs(MenuGroupComp, {
         children: [jsx(sF, {}), jsx(sB, {
           trackingSource: e
         })]
-      }), jsx(YJ, {
+      }), jsx(MenuGroupComp, {
         children: jsx(sD, {})
       })]
     })]
@@ -8281,14 +8281,14 @@ function sF() {
   let t = MK(JT.REMOVE_BACKGROUND);
   return jsx(_$$E2, {
     name: _$$_2.AIRemoveBackground,
-    children: jsxs(q7, {
+    children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.image.remove_background'),
       'data-testid': 'buzz-ai-image-tools-remove-background-button',
       'disabled': !e || !t,
       'data-tooltip': t ? void 0 : getI18nString('figmake.meter_limit.primary'),
       'data-tooltip-type': 'text',
       'onClick': () => fullscreenValue.triggerActionInUserEditScope(JT.REMOVE_BACKGROUND),
-      'children': [jsx(Q$, {
+      'children': [jsx(MenuItemLead, {
         children: jsx(_$$$3, {})
       }), renderI18nText('cooper.inline_menu.image.remove_background')]
     })
@@ -8301,7 +8301,7 @@ function sB({
   let n = MK(JT.UPSCALE_IMAGE);
   return jsx(_$$E2, {
     name: _$$_2.AIUpscaleImage,
-    children: jsxs(q7, {
+    children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.image.boost_resolution'),
       'data-testid': 'buzz-ai-image-tools-upscale-image-button',
       'disabled': !t || !n,
@@ -8331,7 +8331,7 @@ function sB({
           }
         });
       },
-      'children': [jsx(Q$, {
+      'children': [jsx(MenuItemLead, {
         children: jsx(_$$X3, {})
       }), renderI18nText('cooper.inline_menu.image.boost_resolution')]
     })
@@ -8343,14 +8343,14 @@ function sD() {
   let n = ii();
   return jsx(_$$E2, {
     name: _$$_2.AIEditImage,
-    children: jsxs(q7, {
+    children: jsxs(MenuItemComp, {
       'aria-label': getI18nString('cooper.inline_menu.edit_image'),
       'data-testid': 'buzz-ai-image-tools-edit-image-button',
       'disabled': !e || !t,
       'data-tooltip': t ? void 0 : getI18nString('figmake.meter_limit.primary'),
       'data-tooltip-type': 'text',
       'onClick': n,
-      'children': [jsx(Q$, {
+      'children': [jsx(MenuItemLead, {
         children: jsx(rW, {})
       }), renderI18nText('cooper.inline_menu.edit_image')]
     })
@@ -8397,9 +8397,9 @@ function sH({
   let {
     getTriggerProps,
     manager
-  } = _$$b4();
+  } = setupMenu();
   return jsx(_$$R4, {
-    children: jsxs(_$$bL2, {
+    children: jsxs(MenuRootComp, {
       manager,
       children: [jsx(_$$E2, {
         name: _$$_2.ChooseMediaEntryPoint,
@@ -8499,38 +8499,38 @@ function sY({
     m();
     n();
   }, [m, n]);
-  return jsxs(_$$mc3, {
+  return jsxs(MenuContainerComp, {
     children: [jsx(_$$E2, {
       name: _$$_2.UploadMedia,
-      children: jsxs(q7, {
+      children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.upload'),
         'data-testid': 'buzz-inline-menu-choose-media-upload-button',
         'data-paint-type': t?.type,
         'onClick': g,
-        'children': [jsx(Q$, {
+        'children': [jsx(MenuItemLead, {
           children: jsx(_$$A15, {})
         }), renderI18nText('buzz.inline_menu.choose_media.upload')]
       })
     }), r && jsx(_$$E2, {
       name: _$$_2.BrowseStockPhotos,
-      children: jsxs(q7, {
+      children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.browse'),
         'data-testid': 'buzz-inline-menu-choose-media-browse-button',
         'onClick': f,
-        'children': [jsx(Q$, {
+        'children': [jsx(MenuItemLead, {
           children: jsx(_$$s4, {})
         }), renderI18nText('buzz.inline_menu.choose_media.browse')]
       })
     }), i && d && jsx(_$$E2, {
       name: _$$_2.AIMakeImage,
-      children: jsxs(q7, {
+      children: jsxs(MenuItemComp, {
         'aria-label': getI18nString('buzz.inline_menu.choose_media.make_image'),
         'data-testid': 'buzz-inline-menu-choose-media-make-image-button',
         'disabled': !u,
         'data-tooltip': u ? void 0 : getI18nString('figmake.meter_limit.primary'),
         'data-tooltip-type': 'text',
         'onClick': b,
-        'children': [jsx(Q$, {
+        'children': [jsx(MenuItemLead, {
           children: jsx(_$$T3, {})
         }), renderI18nText('buzz.inline_menu.choose_media.make_image')]
       })
@@ -10204,7 +10204,7 @@ function cL({
   let {
     setQuery
   } = _$$I2(Cn.FigJam);
-  let [u] = _$$A17(searchQuery, 200);
+  let [u] = useDebounce(searchQuery, 200);
   let x = useCallback(e => {
     setSearchQuery(e);
   }, [setSearchQuery]);
@@ -10503,7 +10503,7 @@ function cH({
     searchQuery,
     setSearchQuery
   } = Rz();
-  let [l] = _$$A17(searchQuery, 200);
+  let [l] = useDebounce(searchQuery, 200);
   let r = useCallback(e => {
     setSearchQuery(e.trim());
   }, [setSearchQuery]);
@@ -12702,7 +12702,7 @@ function xH() {
     let [n, l] = useAtomValueAndSetter(d9);
     let [r, i] = useAtomValueAndSetter(cl);
     let o = n.trim();
-    let [d] = _$$A17(o, 200);
+    let [d] = useDebounce(o, 200);
     let c = t && !!e.trim();
     let u = !!d;
     let x = u ? cm.UnsplashPaginatedSearchQuery({

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useTheme } from "../905/289770";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { h as _$$h } from "../905/207101";
@@ -15,7 +15,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { tI } from "../figma_app/599327";
 import { hideSpecificModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -150,7 +150,7 @@ let $$L0 = registerModal(function (e) {
       error: !0
     }));
   };
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: P[e.seatType],
     children: jsx(TrackingProvider, {
       name: "Post NUX Seat Request Confirmation Modal Outer",
@@ -168,7 +168,7 @@ let $$L0 = registerModal(function (e) {
           type: "button",
           label: renderI18nText("seat_selection_in_nux.continue"),
           onClick: w,
-          ctaTrackingDescriptor: _$$c.CONTINUE
+          ctaTrackingDescriptor: UpgradeAction.CONTINUE
         },
         onClose: () => c(hideSpecificModal($$L0)),
         trackingContextName: "Post NUX Seat Request Confirmation Modal",

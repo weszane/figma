@@ -3,7 +3,7 @@ import { useRef, useLayoutEffect, useState, useMemo, useCallback, useEffect } fr
 import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import o from "classnames";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { colorToRgbaString, parseColor, getThemeBackgroundColor } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
@@ -729,7 +729,7 @@ export function $$ec1(e) {
   } else ek = {
     transform: `scale(${1 / i})`
   };
-  let [eR] = _$$A(eg, 200, {
+  let [eR] = useDebounce(eg, 200, {
     leading: !0
   });
   let eN = useMemo(() => eR && Z && showEditPreviewControls ? es(Z.height, eR, ee, eA && eA in k ? eA : void 0) : void 0, [eA, eR, ee, Z, showEditPreviewControls]);

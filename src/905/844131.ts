@@ -3,7 +3,7 @@ import { globalPerfTimer } from "../905/542194";
 import { selectViewAction } from "../905/929976";
 import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
-import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
+import { clearTryPlugin, setWorkshopModeUntil, SEEN_TRY_ONBOARDING_KEY, setWorkshopUserName, setStarterKitHasBeenHidden, setFigmaEditorOnboardingStarted, setFigmaEditorOnboardingFinishedOrDismissed } from "../figma_app/107215";
 import { mapFileSummary } from "../figma_app/349248";
 import { generateAnonymouseName } from "../905/301652";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
@@ -28,7 +28,7 @@ export function $$m0(e = $$p1, t) {
     mapEditorTypeToFileType(e.editorType) !== mapEditorTypeToFileType(t.payload.fullscreenEditorType) && (i.editorType = t.payload.fullscreenEditorType);
     return i;
   }
-  if (MV.matches(t)) return {
+  if (clearTryPlugin.matches(t)) return {
     ...e,
     tryPluginId: void 0,
     tryPluginName: void 0,
@@ -49,12 +49,12 @@ export function $$m0(e = $$p1, t) {
   } else if (ST.matches(t) && ("fullscreen" === e.view || "prototype" === e.view)) return {
     ...e,
     commentThreadId: void 0
-  };else if (lX.matches(t) && "fullscreen" === e.view) {
+  };else if (setWorkshopModeUntil.matches(t) && "fullscreen" === e.view) {
     let i = e.workshopUserNames || {};
     let r = !!t.payload && t.payload.id;
     let a = !!r && localStorage.getItem(generateAnonymouseName(r));
     r && a && (i[r] = a);
-    let s = !!getStorage().get(Xk);
+    let s = !!getStorage().get(SEEN_TRY_ONBOARDING_KEY);
     return {
       ...e,
       workshopModeInfo: r ? {
@@ -67,7 +67,7 @@ export function $$m0(e = $$p1, t) {
       figjamEditorOnboardingStarted: s,
       figjamEditorOnboardingFinishedOrDismissed: s
     };
-  } else if (zU.matches(t) && "fullscreen" === e.view) {
+  } else if (setWorkshopUserName.matches(t) && "fullscreen" === e.view) {
     let i = e.workshopModeInfo?.id;
     let n = e.workshopUserNames || {};
     i && (n[i] = t.payload.name);
@@ -75,13 +75,13 @@ export function $$m0(e = $$p1, t) {
       ...e,
       workshopUserNames: n
     };
-  } else if (q0.matches(t)) return {
+  } else if (setStarterKitHasBeenHidden.matches(t)) return {
     ...e,
     starterKitHasBeenHidden: !0
-  };else if (N.matches(t)) return {
+  };else if (setFigmaEditorOnboardingStarted.matches(t)) return {
     ...e,
     figjamEditorOnboardingStarted: !0
-  };else if (hh.matches(t)) return {
+  };else if (setFigmaEditorOnboardingFinishedOrDismissed.matches(t)) return {
     ...e,
     figjamEditorOnboardingFinishedOrDismissed: !0
   };

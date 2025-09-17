@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { Pt, xJ } from "../figma_app/422471";
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { J } from "../figma_app/261874";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
@@ -73,14 +73,14 @@ export function $$E0() {
         R("handoff");
         complete();
       },
-      ctaTrackingDescriptor: _$$c.EXPLORE_NOW,
+      ctaTrackingDescriptor: UpgradeAction.EXPLORE_NOW,
       type: "button"
     },
     secondaryCta: {
       label: renderI18nText("dev_mode.onboarding_callout.read_the_guide"),
       type: "link",
       href: $$A1,
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: L,

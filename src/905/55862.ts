@@ -14,7 +14,7 @@ import { compareWithKey } from "../905/760074";
 import { NX, k9 } from "../figma_app/777207";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { eO } from "../figma_app/518077";
 import { gi, r9, fc } from "../figma_app/646357";
 import { PG, Q_ } from "../905/570707";
@@ -88,7 +88,7 @@ export function $$R5({
   }
 }) {
   let s = selectCurrentFile();
-  let o = FC();
+  let o = selectPermissionsState();
   let {
     fileByKey
   } = o;

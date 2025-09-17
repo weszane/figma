@@ -6,7 +6,7 @@ import { Fk, x3 } from "../figma_app/167249";
 import { ButtonPrimitive } from "../905/632989";
 import { l as _$$l } from "../905/103989";
 import { f as _$$f } from "../905/640587";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import j from "classnames";
 import { LazyInputForwardRef } from "../905/408237";
@@ -24,7 +24,7 @@ import { gD, wL, lu, DR, E$ } from "../441/430710";
 import { customHistory } from "../905/612521";
 import { isMobilePlatformNotFigmaMobile } from "../figma_app/778880";
 import { hk } from "../figma_app/632319";
-import { Y as _$$Y } from "../905/246212";
+import { InputPrimitive } from "../905/246212";
 import { oW } from "../905/675859";
 import { A as _$$A2 } from "../b2835def/363895";
 import { ButtonLarge } from "../905/521428";
@@ -244,7 +244,7 @@ function B({
     setConfigData("resultsShown", (!g).toString());
   });
   let j = aF(configData);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: j.preferredTokenTheme,
     children: jsxs("div", {
       className: b()(_$$s.wFull.flex.flexColumn.justifyCenter.itemsCenter.$, "alignment_scale--alignmentScaleThemeWrapper--1VvHW"),
@@ -494,7 +494,7 @@ function et({
   let {
     nodeId
   } = p();
-  return jsx(_$$Y, {
+  return jsx(InputPrimitive, {
     id: f(nodeId, "facepile-prompt-input"),
     "aria-label": getI18nString("slides.flapp.facepile.input_label"),
     className: b()(Qx, Uu),
@@ -563,7 +563,7 @@ function ea({
     });
   }(r, isViewer);
   let c = aF(configData);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: c.preferredTokenTheme,
     children: jsxs("div", {
       className: b()("facepile--container--k1p6f", "facepile--facepileThemeWrapper--dG-S8"),
@@ -872,7 +872,7 @@ function eF({
         }
       }), jsxs("div", {
         className: eI,
-        children: [jsx(_$$Y, {
+        children: [jsx(InputPrimitive, {
           id: r,
           className: b()(eP, Qx, Uu),
           value: e,
@@ -1048,7 +1048,7 @@ function eL({
       firstVoteByTimestamp: a
     };
   }(u?.id, configData, participantData);
-  return jsx(_$$J, {
+  return jsx(setupThemeContext, {
     mode: e,
     children: jsxs("div", {
       className: b()("poll--pollThemeWrapper--z0UVm", "poll--container--UKRlY"),
@@ -1116,7 +1116,7 @@ function eB() {
   return isViewer ? jsx("h1", {
     className: ej,
     children: n
-  }) : jsx(_$$Y, {
+  }) : jsx(InputPrimitive, {
     id: f(nodeId, "questionInput"),
     className: b()(ej, Qx, Uu),
     value: n,

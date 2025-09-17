@@ -27,7 +27,7 @@ import { E as _$$E } from "../905/370356";
 import { TH } from "../figma_app/95367";
 import { RR } from "../figma_app/307841";
 import { YJ } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { aV } from "../figma_app/722362";
 import { e0 } from "../905/696396";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -182,7 +182,7 @@ function V(e) {
         width: "fill-parent",
         trackingOptions: h,
         trackingProperties: {
-          trackingDescriptor: d ? _$$c.ASK_TO_EDIT_ONE_CLICK : _$$c.ASK_TO_EDIT
+          trackingDescriptor: d ? UpgradeAction.ASK_TO_EDIT_ONE_CLICK : UpgradeAction.ASK_TO_EDIT
         },
         children: _
       })
@@ -209,7 +209,7 @@ function J({
     type: "button",
     label: renderI18nText("fullscreen.toolbar.send_reminder"),
     onClick: i,
-    ctaTrackingDescriptor: _$$c.NUDGE_ACCOUNT_TYPE_REQUEST
+    ctaTrackingDescriptor: UpgradeAction.NUDGE_ACCOUNT_TYPE_REQUEST
   };
   return jsx(rq, {
     arrowPosition: F_.TOP,

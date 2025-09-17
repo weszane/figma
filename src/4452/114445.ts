@@ -22,7 +22,7 @@ import { lR, e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zu } from "../4452/396452";
 import { getRumLoggingConfig } from "../905/16237";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { trackEventAnalytics } from "../905/449184";
 import { capitalize, toTitleCase } from "../figma_app/930338";
 import { Ak } from "../905/986103";
@@ -60,7 +60,7 @@ function w({
       },
       disabled: l,
       trackingProperties: {
-        trackingDescriptor: _$$c.APPROVE
+        trackingDescriptor: UpgradeAction.APPROVE
       },
       trackingOptions: o,
       children: jsx(Zu, {
@@ -75,7 +75,7 @@ function w({
       variant: "secondary",
       disabled: l,
       trackingProperties: {
-        trackingDescriptor: _$$c.DECLINE
+        trackingDescriptor: UpgradeAction.DECLINE
       },
       trackingOptions: o,
       children: jsx(Zu, {

@@ -3,7 +3,7 @@ import { forwardRef, useRef, useCallback, useId, useImperativeHandle } from "rea
 import { throwTypeError } from "../figma_app/465776";
 import { EventShield } from "../905/821217";
 import { ScreenReaderOnly } from "../905/172252";
-import { Y } from "../905/246212";
+import { InputPrimitive } from "../905/246212";
 import d from "classnames";
 import { _ as _$$_ } from "../905/142361";
 import { X } from "../figma_app/313269";
@@ -79,7 +79,7 @@ let $$b0 = forwardRef(function ({
           toolbarOptions: [_$$_.Bold, _$$_.Italic, _$$_.Strikethrough, _$$_.BulletedList, _$$_.OrderedList, _$$_.Link, _$$_.Code, _$$_.CodeBlock]
         })
       }), jsx(ScreenReaderOnly, {
-        children: jsx(Y, {
+        children: jsx(InputPrimitive, {
           id: C,
           placeholder: S,
           value: k.current,

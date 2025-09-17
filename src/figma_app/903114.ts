@@ -5,7 +5,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { HB, lb } from "../3973/538504";
@@ -29,7 +29,7 @@ import { Qf } from "../figma_app/80683";
 import { getRumLoggingConfig } from "../905/16237";
 import { tb } from "../905/848667";
 import { U2 } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
@@ -115,8 +115,8 @@ function $$Z(e) {
       height: "dynamic",
       manager: t,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(nB, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogBody, {
           children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
@@ -290,14 +290,14 @@ function ee({
   });
   let L = selectCurrentUser();
   let P = getRumLoggingConfig();
-  return jsx(wi, {
-    children: jsxs(jk, {
+  return jsx(DialogFooter, {
+    children: jsxs(DialogActionStrip, {
       children: [jsx($z, {
         disabled: A,
         onClick: () => d(null),
         variant: "secondary",
         trackingProperties: {
-          trackingDescriptor: _$$c.BACK
+          trackingDescriptor: UpgradeAction.BACK
         },
         children: getI18nString("modify_plan_user_seat_modal.button.back")
       }), jsx($z, {
@@ -320,7 +320,7 @@ function ee({
         },
         variant: "primary",
         trackingProperties: {
-          trackingDescriptor: _$$c.CONFIRM,
+          trackingDescriptor: UpgradeAction.CONFIRM,
           isDiscouragedAnnualSeatSwap: g,
           previousSeatType: _,
           nextSeatType: e

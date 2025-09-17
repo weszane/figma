@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -9,7 +9,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { cR } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { z4 } from "../905/37051";
@@ -80,11 +80,11 @@ function k({
       })
     }), jsx("div", {
       className: JP,
-      children: jsx(J, {
+      children: jsx(setupThemeContext, {
         brand: "dev-handoff",
         children: jsx($z, {
           trackingProperties: {
-            trackingDescriptor: _$$c.MARK_READY_FOR_DEV
+            trackingDescriptor: UpgradeAction.MARK_READY_FOR_DEV
           },
           variant: "primary",
           onClick: function () {
@@ -208,11 +208,11 @@ export function $$$$A1() {
       })]
     }), jsx("div", {
       className: JP,
-      children: jsx(J, {
+      children: jsx(setupThemeContext, {
         brand: "dev-handoff",
         children: jsx($z, {
           trackingProperties: {
-            trackingDescriptor: _$$c.SHOW_ME_HOW
+            trackingDescriptor: UpgradeAction.SHOW_ME_HOW
           },
           variant: "primary",
           onClick: U,

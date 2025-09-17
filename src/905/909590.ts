@@ -1,128 +1,194 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef, useState, useMemo, createContext, useContext, useCallback, useLayoutEffect } from "react";
-import { A as _$$A } from "../vendor/723372";
-import { M } from "../905/850310";
-import { o as _$$o } from "../905/695226";
-import { useRecording } from "../905/959312";
-import { useExposedRef } from "../905/581092";
-import { defaultComponentAttribute } from "../905/577641";
-let u = forwardRef(({
-  htmlAttributes: e = {},
-  children: t,
-  ...i
-}, a) => {
-  let [s, l] = useState(!1);
-  let [d, u] = useState(!1);
-  let m = useMemo(() => ({
-    setDisabled: l,
-    setReadOnly: u
-  }), []);
-  let h = _$$o(e?.onPointerDown);
-  return jsx(p.Provider, {
-    value: m,
-    children: jsx("div", {
-      ...i,
-      ...defaultComponentAttribute,
-      ref: a,
-      onPointerDown: h,
-      "data-fpl-disabled": s || void 0,
-      "data-fpl-readOnly": d || void 0,
-      children: t
+import classNames from 'classnames'
+import { createContext, forwardRef, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { defaultComponentAttribute } from '../905/577641'
+import { useExposedRef } from '../905/581092'
+import { setupFauxFocusHandler } from '../905/695226'
+import { useDebouncedValue } from '../905/850310'
+import { useRecording } from '../905/959312'
+
+/**
+ * Context for TextareaPrimitive state management (original: p)
+ */
+const TextareaContext = createContext<{
+  setDisabled: React.Dispatch<React.SetStateAction<boolean>>
+  setReadOnly: React.Dispatch<React.SetStateAction<boolean>>
+} | null>(null)
+
+/**
+ * Root component for TextareaPrimitive (original: u)
+ * Provides context for disabled/readOnly state.
+ */
+const TextareaPrimitiveRoot = forwardRef<HTMLDivElement, {
+  htmlAttributes?: { onPointerDown?: React.PointerEventHandler<HTMLDivElement> }
+  children?: React.ReactNode
+} & React.HTMLAttributes<HTMLDivElement>>(
+  ({ htmlAttributes = {}, children, ...rest }, ref) => {
+    const [disabled, setDisabled] = useState(false)
+    const [readOnly, setReadOnly] = useState(false)
+    const contextValue = useMemo(() => ({
+      setDisabled,
+      setReadOnly,
+    }), [])
+    const handlePointerDown = setupFauxFocusHandler(htmlAttributes?.onPointerDown)
+    return jsx(TextareaContext.Provider, {
+      value: contextValue,
+      children: jsx('div', {
+        ...rest,
+        ...defaultComponentAttribute,
+        ref,
+        'onPointerDown': handlePointerDown,
+        'data-fpl-disabled': disabled || undefined,
+        'data-fpl-readOnly': readOnly || undefined,
+        children,
+      }),
     })
-  });
-});
-u.displayName = "TextareaPrimitive.Root";
-let p = createContext(null);
-let m = Object.assign(forwardRef(({
-  className: e,
-  disabled: t,
-  expandable: i,
-  htmlAttributes: s,
-  maxHeight: o,
-  onChange: u,
-  recordingKey: m,
-  rows: g = 3,
-  spellCheck: f = !0,
-  style: _,
-  readOnly: A,
-  ...y
-}, b) => {
-  let v = useContext(p);
-  let I = useExposedRef(b);
-  let E = useCallback((...e) => {
-    u?.(...e);
-    i && I.current && h(I.current);
-  }, [i, u, I]);
-  let x = useRecording(E, {
-    eventName: "change",
-    recordingKey: m
-  }, [E]);
-  useLayoutEffect(() => {
-    i && I.current && h(I.current);
-  }, [i, I]);
-  useLayoutEffect(() => {
-    v?.setDisabled(t ?? !1);
-    v?.setReadOnly(A ?? !1);
-  }, [v, t, A]);
-  return jsx("textarea", {
-    ...y,
-    ...s,
-    ...defaultComponentAttribute,
-    rows: g,
-    className: _$$A("textarea-reset__textareaReset__SBluM", e),
-    style: {
-      ..._,
-      maxHeight: o
+  },
+)
+TextareaPrimitiveRoot.displayName = 'TextareaPrimitive.Root'
+
+/**
+ * Helper to auto-expand textarea height (original: h)
+ * @param textarea HTMLTextAreaElement
+ */
+function autoExpandTextarea(textarea: HTMLTextAreaElement) {
+  textarea.style.height = 'auto'
+  textarea.style.height = `${textarea?.scrollHeight}px`
+}
+
+/**
+ * Main TextareaPrimitive component (original: m)
+ * Handles expandable, recording, and context state.
+ */
+const TextareaPrimitive = Object.assign(
+  forwardRef<HTMLTextAreaElement, {
+    className?: string
+    disabled?: boolean
+    expandable?: boolean
+    htmlAttributes?: React.TextareaHTMLAttributes<HTMLTextAreaElement>
+    maxHeight?: number | string
+    onChange?: (...args: any[]) => void
+    recordingKey?: string
+    rows?: number
+    spellCheck?: boolean
+    style?: React.CSSProperties
+    readOnly?: boolean
+  } & React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
+    ({
+      className,
+      disabled,
+      expandable,
+      htmlAttributes,
+      maxHeight,
+      onChange,
+      recordingKey,
+      rows = 3,
+      spellCheck = true,
+      style,
+      readOnly,
+      ...rest
+    }, ref) => {
+      const context = useContext(TextareaContext)
+      const exposedRef = useExposedRef(ref)
+      const handleChange = useCallback((...args: any[]) => {
+        onChange?.(...args)
+        if (expandable && exposedRef.current)
+          autoExpandTextarea(exposedRef.current)
+      }, [expandable, onChange, exposedRef])
+      const recordingHandler = useRecording(handleChange, {
+        eventName: 'change',
+        recordingKey,
+      }, [handleChange])
+      useLayoutEffect(() => {
+        if (expandable && exposedRef.current)
+          autoExpandTextarea(exposedRef.current)
+      }, [expandable, exposedRef])
+      useLayoutEffect(() => {
+        context?.setDisabled(disabled ?? false)
+        context?.setReadOnly(readOnly ?? false)
+      }, [context, disabled, readOnly])
+      return jsx('textarea', {
+        ...rest,
+        ...htmlAttributes,
+        ...defaultComponentAttribute,
+        rows,
+        'className': classNames('textarea-reset__textareaReset__SBluM', className),
+        'style': {
+          ...style,
+          maxHeight,
+        },
+        'ref': exposedRef,
+        'onChange': recordingHandler
+          ? e => recordingHandler(e.target.value, { event: e })
+          : undefined,
+        'readOnly': readOnly || disabled,
+        'aria-disabled': disabled || undefined,
+        spellCheck,
+      })
     },
-    ref: I,
-    onChange: x ? e => x(e.target.value, {
-      event: e
-    }) : void 0,
-    readOnly: A || t,
-    "aria-disabled": t || void 0,
-    spellCheck: f
-  });
-}), {
-  Root: u
-});
-function h(e) {
-  e.style.height = "auto";
-  e.style.height = `${e?.scrollHeight}px`;
-}
-m.displayName = "TextareaPrimitive";
-export let $$g0 = Object.assign(forwardRef(({
-  size: e,
-  rows: t,
-  ...i
-}, r) => jsx(m, {
-  ...i,
-  ref: r,
-  rows: t ?? ("lg" === e ? 6 : 3),
-  className: _$$A("textarea__textarea__-mOWC", {
-    textarea__large__BJYMW: "lg" === e
+  ),
+  {
+    Root: TextareaPrimitiveRoot,
+  },
+)
+TextareaPrimitive.displayName = 'TextareaPrimitive'
+
+/**
+ * Textarea Root wrapper (original: f)
+ * @param props
+ */
+function TextareaRoot({
+  className,
+  htmlAttributes,
+  ...rest
+}: {
+  className?: string
+  htmlAttributes?: React.HTMLAttributes<HTMLDivElement>
+} & React.HTMLAttributes<HTMLDivElement>) {
+  return jsx(TextareaPrimitive.Root, {
+    ...htmlAttributes,
+    ...rest,
+    className: classNames('textarea__root__kusdD', className),
   })
-})), {
-  Root: f,
-  Lazy: _
-});
-function f({
-  className: e,
-  htmlAttributes: t,
-  ...i
-}) {
-  return jsx(m.Root, {
-    ...t,
-    ...i,
-    className: _$$A("textarea__root__kusdD", e)
-  });
 }
-function _(e) {
-  let t = M(e);
-  return jsx($$g0, {
-    ...t
-  });
+TextareaRoot.displayName = 'Textarea.Root'
+
+/**
+ * Lazy Textarea with debounced value (original: _)
+ * @param props
+ */
+function TextareaLazy(props: any) {
+  const debouncedProps = useDebouncedValue(props)
+  return jsx(Textarea, {
+    ...debouncedProps,
+  })
 }
-$$g0.displayName = "Textarea";
-f.displayName = "Textarea.Root";
-_.displayName = "Textarea.Lazy";
-export const T = $$g0;
+TextareaLazy.displayName = 'Textarea.Lazy'
+
+/**
+ * Main exported Textarea component (original: $$g0)
+ * Handles size, rows, and className.
+ */
+export const Textarea = Object.assign(
+  forwardRef<HTMLTextAreaElement, {
+    size?: 'lg' | string
+    rows?: number
+  } & React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
+    ({ size, rows, ...rest }, ref) =>
+      jsx(TextareaPrimitive, {
+        ...rest,
+        ref,
+        rows: rows ?? (size === 'lg' ? 6 : 3),
+        className: classNames('textarea__textarea__-mOWC', {
+          textarea__large__BJYMW: size === 'lg',
+        }),
+      }),
+  ),
+  {
+    Root: TextareaRoot,
+    Lazy: TextareaLazy,
+  },
+)
+Textarea.displayName = 'Textarea'
+
+export const T = Textarea

@@ -79,7 +79,7 @@ import { A as _$$A0 } from "../svg/541014";
 import { A as _$$A1 } from "../2854/77351";
 import { A as _$$A10 } from "../svg/275646";
 import { useMenu, MenuRoot, MenuContainer, MenuItemPrimitive } from "../905/465888";
-import { bL as _$$bL, mc as _$$mc, YJ, q7 as _$$q } from "../figma_app/860955";
+import { MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
 import { N as _$$N } from "../905/438674";
 import { IconButton } from "../905/443068";
@@ -120,7 +120,7 @@ import { jT } from "../figma_app/626177";
 import { A as _$$A14 } from "../6828/154709";
 import { A as _$$A15 } from "../5724/713301";
 import { J as _$$J3 } from "../905/526136";
-import { A as _$$A16 } from "../vendor/850789";
+import { useDebounce } from "use-debounce";
 import { wY } from "../figma_app/708845";
 import { clearSelection, addToSelection, getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode } from "../figma_app/741237";
 import { BK } from "../905/848862";
@@ -2810,7 +2810,7 @@ function n$({
     data
   } = BK(tM);
   let F = data?.annotationId === t;
-  let [z] = _$$A16(P, 60);
+  let [z] = useDebounce(P, 60);
   let V = M || F || (w ? P && (z || j) : P);
   let H = useAtomWithSubscription(_$$m);
   let W = _$$wA((e, t) => {
@@ -3281,7 +3281,7 @@ function n5({
       has_opened_annotation_visibility_learn_more_link: !0
     }));
   }, [m]);
-  let eO = jsxs(_$$bL, {
+  let eO = jsxs(MenuRootComp, {
     manager,
     children: [jsx(_$$d2, {
       "aria-label": getI18nString("dev_handoff.annotations.more_actions"),
@@ -3292,12 +3292,12 @@ function n5({
       },
       ...getTriggerProps({}),
       children: jsx(_$$J2, {})
-    }), jsxs(_$$mc, {
-      children: [jsxs(YJ, {
-        children: [jsx(_$$q, {
+    }), jsxs(MenuContainerComp, {
+      children: [jsxs(MenuGroupComp, {
+        children: [jsx(MenuItemComp, {
           onClick: ev,
           children: getI18nString("dev_handoff.annotations.copy_link")
-        }), jsx(_$$q, {
+        }), jsx(MenuItemComp, {
           onClick: () => {
             D(e, x);
           },

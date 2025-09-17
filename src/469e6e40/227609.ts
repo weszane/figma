@@ -53,7 +53,7 @@ import { R as _$$R } from '../905/304671';
 import { N_ } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
 import { $S } from '../905/351260';
-import { c as _$$c } from '../905/370443';
+import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser } from '../905/372672';
 import { b as _$$b5 } from '../905/388233';
 import { r as _$$r2 } from '../905/398386';
@@ -136,7 +136,7 @@ import { getFutureDateOrNull, hasValidSubscription, isTeamInGracePeriod } from '
 import { p as _$$p3 } from '../figma_app/353099';
 import { z as _$$z2 } from '../figma_app/369596';
 import { bE } from '../figma_app/375098';
-import { _6 } from '../figma_app/386952';
+import { getSelectedView } from '../figma_app/386952';
 import { useShadowReadLoaded } from '../figma_app/391338';
 import { bv, IU } from '../figma_app/421401';
 import { isSelectedTeamAdminConsoleMissingResources } from '../figma_app/422062';
@@ -147,7 +147,7 @@ import { R as _$$R2 } from '../figma_app/522082';
 import { cE, oi } from '../figma_app/527041';
 import { k as _$$k6, Q as _$$Q3 } from '../figma_app/527200';
 import { y2 } from '../figma_app/563413';
-import { ol, pe, Rq } from '../figma_app/598018';
+import { getCurrentTeam, getDashboardSectionLabel, getUserFieldLabel } from '../figma_app/598018';
 import { k as _$$k4 } from '../figma_app/618031';
 import { isTeamEligibleForUpgrade } from '../figma_app/630077';
 import { SecureLink } from '../figma_app/637027';
@@ -163,7 +163,7 @@ import { TrackingProvider, TrackedDiv, withTracking } from '../figma_app/831799'
 import { ps } from '../figma_app/845611';
 import { vS } from '../figma_app/846003';
 import { LoadingSpinner } from '../figma_app/858013';
-import { wv as _$$wv } from '../figma_app/860955';
+import { MenuSeparator } from '../figma_app/860955';
 import { v as _$$v2 } from '../figma_app/899624';
 import { getMemberSection, getBillingSection } from '../figma_app/915977';
 import { Badge, BadgeColor } from '../figma_app/919079';
@@ -296,7 +296,7 @@ let eq = registerModal(e => {
   });
 }, 'ConfirmMembersRemoveModal');
 function eJ() {
-  let e = ol();
+  let e = getCurrentTeam();
   let t = e?.pro_team === void 0 ? Xm() : gB(e.pro_team);
   let {
     show,
@@ -319,7 +319,7 @@ function eJ() {
     onClose: complete,
     primaryCta: {
       label: renderI18nText('general.got_it'),
-      ctaTrackingDescriptor: _$$c.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       type: 'button',
       onClick: complete
     },
@@ -490,7 +490,7 @@ let e5 = withTracking(e => {
   let y = () => {
     let t = e.team;
     return [{
-      name: Rq(UserFieldEnum.NAME),
+      name: getUserFieldLabel(UserFieldEnum.NAME),
       className: Mc,
       getSortValue: e => e.member.name || e.member.email,
       cellComponent: M
@@ -501,13 +501,13 @@ let e5 = withTracking(e => {
       currency: e.billing.summary.currency,
       forceHidePendingSeats: e.forceHidePendingSeats
     }) : []), ...(j ? [{
-      name: Rq(UserFieldEnum.BILLING_INTERVAL),
+      name: getUserFieldLabel(UserFieldEnum.BILLING_INTERVAL),
       className: Mc,
       getSortValue: e => 'current_seat_billing_interval' in e.member ? e.member.current_seat_billing_interval?.toString() ?? '-' : '-',
       sortReversed: !0,
       cellComponent: D
     }] : []), {
-      name: Rq(UserFieldEnum.ACTIVE_AT),
+      name: getUserFieldLabel(UserFieldEnum.ACTIVE_AT),
       className: dG,
       getSortValue: e => e.member.last_active || 0,
       sortNumerically: !0,
@@ -717,7 +717,7 @@ let e5 = withTracking(e => {
           placeholder: getI18nString('team_view.search_bar.search_members_with_ellipsis')
         })
       }), jsx(bv, {
-        label: Rq(UserFieldEnum.ACTIVE_AT),
+        label: getUserFieldLabel(UserFieldEnum.ACTIVE_AT),
         dispatch: e.dispatch,
         dropdownShown: e.dropdownShown,
         dropdownType: 'FILTER_LAST_ACTIVE_DROPDOWN',
@@ -746,7 +746,7 @@ let e5 = withTracking(e => {
         filterCounts: e.filterCounts,
         onFilter: e.onFilter
       }), j && jsx(bv, {
-        label: Rq(UserFieldEnum.BILLING_INTERVAL),
+        label: getUserFieldLabel(UserFieldEnum.BILLING_INTERVAL),
         dispatch: e.dispatch,
         dropdownShown: e.dropdownShown,
         dropdownType: 'FILTER_BILLING_INTERVAL_DROPDOWN',
@@ -814,7 +814,7 @@ let e5 = withTracking(e => {
   let $ = useCallback(e => {
     let t = L(e);
     return jsx(zx, {
-      children: t.map((e, t) => e.isDivider ? jsx(_$$wv, {}, `divider${t}`) : jsx(_$$p, {
+      children: t.map((e, t) => e.isDivider ? jsx(MenuSeparator, {}, `divider${t}`) : jsx(_$$p, {
         onClick: e.callback,
         children: e.text
       }, e.text))
@@ -825,7 +825,7 @@ let e5 = withTracking(e => {
     'data-testid': 'team-members-table',
     'children': jsx(e3, {
       initialSortState: {
-        columnName: Rq(UserFieldEnum.NAME),
+        columnName: getUserFieldLabel(UserFieldEnum.NAME),
         isReversed: !1
       },
       items: w,
@@ -912,7 +912,7 @@ function e3({
 }
 function e8(e) {
   let [t, a] = function () {
-    let e = _6();
+    let e = getSelectedView();
     let [t, a] = useState({
       ...Ok,
       ...(e.view === 'teamAdminConsole' ? e.membersTabInitialFilters : void 0)
@@ -1750,7 +1750,7 @@ function an() {
     description: renderI18nText('team_admin_authority_overlay.description'),
     primaryCta: {
       label: renderI18nText('general.got_it'),
-      ctaTrackingDescriptor: _$$c.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       type: 'button',
       onClick: complete
     },
@@ -1779,7 +1779,7 @@ function ah({
   return jsxs('div', {
     'data-testid': 'team-admin-console-header',
     'children': [jsx(_$$K, {
-      title: e === DashboardSections.MEMBERS ? renderI18nText('team_admin.members_tab.header') : pe(e),
+      title: e === DashboardSections.MEMBERS ? renderI18nText('team_admin.members_tab.header') : getDashboardSectionLabel(e),
       rightActions: jsxs(Fragment, {
         children: [e === DashboardSections.MEMBERS && jsxs(AutoLayout, {
           width: 'hug-contents',
@@ -2193,7 +2193,7 @@ export function $$aG0(e) {
     teamAdminConsoleViewTab: e.selectedTab,
     teams: n
   });
-  let S = _6();
+  let S = getSelectedView();
   let N = vS(S);
   useEffect(() => {
     C && a(selectViewAction({

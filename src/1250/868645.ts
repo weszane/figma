@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
@@ -86,13 +86,13 @@ export function $$I1() {
         children: renderI18nText("figmake.legal_onboarding_modal.try_figmake_button")
       }),
       onClick: onAcknowledge,
-      ctaTrackingDescriptor: _$$c.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     secondaryCta: {
       type: "button",
       label: renderI18nText("figmake.legal_onboarding_modal.back_to_files"),
       onClick: onClose,
-      ctaTrackingDescriptor: _$$c.CLOSE
+      ctaTrackingDescriptor: UpgradeAction.CLOSE
     },
     title: jsx(S, {}),
     trackingContextName: "Rev Onboarding > Terms of Service"

@@ -17,12 +17,12 @@ import { useSubscription } from "../figma_app/288654";
 import { sendMetric } from "../905/485103";
 import { g3, zI } from "../figma_app/304207";
 import { UC } from "../figma_app/91703";
-import { lX } from "../figma_app/107215";
+import { setWorkshopModeUntil } from "../figma_app/107215";
 import { workshopModeExpirationAtom } from "../figma_app/789";
 import { Be } from "../figma_app/844435";
 import { rB } from "../figma_app/236178";
 import { selectCurrentFile } from "../figma_app/516028";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { o as _$$o, n as _$$n } from "../figma_app/264395";
 import { DeveloperRelatedLinks, FileWorkshopMode, OpenEditorFileData } from "../figma_app/43951";
 import { X_ } from "../figma_app/197432";
@@ -35,7 +35,7 @@ function O() {
   return jsx(Fragment, {});
 }
 function L(e) {
-  let t = _6();
+  let t = getSelectedView();
   let i = "fullscreen" === t.view ? t.fileKey : null;
   let o = useDispatch();
   let l = useSelector(e => e.fileByKey);
@@ -78,7 +78,7 @@ function L(e) {
     let e = M.data.figFileWorkshopMode;
     D(e ? e.expiresAt : null);
     e && e.expiresAt > new Date() && (R.current = !0);
-    o(lX(e ? {
+    o(setWorkshopModeUntil(e ? {
       id: e.id,
       until: e.expiresAt,
       loaded: !0

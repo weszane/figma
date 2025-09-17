@@ -9,21 +9,21 @@ import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { PK } from "../figma_app/124493";
 import { Dm } from "../figma_app/8833";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { HZ } from "../figma_app/186343";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { hasReachedPageLimit } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
-import { vL } from "../905/652992";
+import { PageFolderFile } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { Q } from "../figma_app/320600";
 import { hZ } from "../0c62c2fd/646972";
 import { cT } from "../figma_app/32128";
 import { J } from "../905/521144";
 import { A as _$$A } from "../figma_app/965813";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { E as _$$E } from "../figma_app/999099";
 import { HZ as _$$HZ, $t } from "../figma_app/29287";
 if (443 == require.j) {}
@@ -41,7 +41,7 @@ export function $$A0({
   let L = selectCurrentFile();
   let D = p8("pagesList");
   let M = HZ();
-  let B = _$$F.useShouldHideStarterCtaForOpenFile();
+  let B = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   let U = cT();
   let W = hZ();
   let $ = 1 === r.length && void 0 !== r[0] ? function ({
@@ -118,14 +118,14 @@ export function $$A0({
       name: "page-duplicate",
       callback: () => {
         n(showModalHandler({
-          type: DV,
+          type: ConsumptionPaywallModalPlansPricing,
           data: {
             team: a,
-            resource: vL.PAGE,
+            resource: PageFolderFile.PAGE,
             action: fileActionEnum.DUPLICATE_PAGE,
             editorType: t.editorType,
-            currentPlan: _$$F.Plan.STARTER,
-            upsellPlan: _$$F.Plan.PRO,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
             hideUpsellPlanCta: l,
             upsellSource: UpsellModalType.CREATE_NEW_PAGE
           }

@@ -15,7 +15,7 @@ import { getSelectedFile } from "../905/766303";
 import { Fl } from "../figma_app/236178";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { fi } from "../figma_app/155728";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { ev } from "../905/909811";
 import { Yt } from "../905/712714";
 import { c as _$$c } from "../905/511370";
@@ -58,7 +58,7 @@ export function $$F0({
   let K = useSelector(e => e.selectedView);
   let Y = useSelector(e => getSelectedFile(e));
   let q = _$$W2();
-  let $ = ol();
+  let $ = getCurrentTeam();
   let Z = !l && !F;
   let [X] = setupResourceAtomHandler(Yt(e));
   let Q = useMemo(() => "loaded" !== X.status ? [] : Tf(X.data.components, X.data.stateGroups), [X]);

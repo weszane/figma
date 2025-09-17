@@ -3,7 +3,7 @@ import { oW } from "../905/675859";
 import { H8, Pf } from "../905/590952";
 import { isFullscreenView } from "../figma_app/976749";
 import { DP } from "../905/640017";
-import { FN, E2 } from "../905/389382";
+import { getProductIcon, getProductBackgroundImgUrl } from "../905/389382";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { i_ } from "../905/187165";
@@ -33,11 +33,11 @@ export function $$m0({
         return p;
     }
   })();
-  let f = FN(e);
+  let f = getProductIcon(e);
   return jsxs("div", {
     className: "avatar_with_product_background--imgComponent--uUymq",
     children: [jsx(oW, {
-      src: E2(e, h),
+      src: getProductBackgroundImgUrl(e, h),
       className: "avatar_with_product_background--imgPositioning--M---c",
       "aria-hidden": !0
     }), t && jsxs(Fragment, {

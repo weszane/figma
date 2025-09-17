@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { C as _$$C } from "../905/504203";
 import { l as _$$l } from "../905/479687";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { CooperTemplateTypesTsBindings, SocialMediaFormats, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -84,7 +84,7 @@ export function $$Q1({
         }), jsx(_$$r, {})]
       })
     }),
-    renderPopoverContents: () => jsx(_$$J, {
+    renderPopoverContents: () => jsx(setupThemeContext, {
       brand: "cooper",
       mode: "dark",
       children: jsx(z, {

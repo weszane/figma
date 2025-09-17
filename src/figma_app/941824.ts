@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, Children, useMemo, useContext, createContext, useCallback } from "react";
 import { fI, V6 } from "../905/201252";
 import { fh } from "../905/127493";
-import { b, bL, mc } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
 import { SV } from "../figma_app/272902";
 import d from "classnames";
 import { SvgComponent } from "../905/714743";
@@ -364,16 +364,16 @@ function S({
   let {
     manager,
     getContextMenuTriggerProps
-  } = b();
+  } = setupMenu();
   let {
     isDragging
   } = useContext($$v9);
   return e || t && !isDragging ? null : jsx(_$$e, {
     condition: menuItems.length > 0,
     wrapper: e => jsxs(Fragment, {
-      children: [jsx(bL, {
+      children: [jsx(MenuRootComp, {
         manager,
-        children: jsxs(mc, {
+        children: jsxs(MenuContainerComp, {
           ...getMenuContainerProps(),
           children: [...menuItems]
         })

@@ -1,9 +1,9 @@
 import { showModalHandler } from "../905/156213";
-import { F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { FViewPermissionType, FPermissionLevelType } from "../figma_app/191312";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 export function $$d1(e) {
   let t = {
     audience: "inherit",
@@ -16,13 +16,13 @@ export function $$d1(e) {
 }
 export function $$c0(e, t, r) {
   e(showModalHandler({
-    type: DV,
+    type: ConsumptionPaywallModalPlansPricing,
     data: {
       team: r,
       editorType: mapEditorTypeToFileType(t),
-      resource: Bi.PASSWORD_PROTECTION,
-      currentPlan: F.Plan.STARTER,
-      upsellPlan: F.Plan.PRO
+      resource: FeatureFlag.PASSWORD_PROTECTION,
+      currentPlan: consumptionPaywallUtils.Plan.STARTER,
+      upsellPlan: consumptionPaywallUtils.Plan.PRO
     }
   }));
 }

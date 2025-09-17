@@ -233,8 +233,8 @@ export async function checkForVisibleChanges(versionId: string, dispatch: any): 
 /**
  * Thunk to maybe show version diff notification.
  */
-const maybeShowVersionDiffNotification = createOptimistThunk(async (dispatch: any, { openFileKey }: { openFileKey: string }) => {
-  const state = dispatch.getState()
+export const maybeShowVersionDiffNotification = createOptimistThunk(async ({ dispatch, getState }, { openFileKey }: { openFileKey: string }) => {
+  const state = getState()
   const clearSelection = () => dispatch(selectViewAction({ ...state.selectedView, compareLatest: undefined }))
   const exit = () => {
     dispatch(Y6({ mode: UIVisibilitySetting.OFF }))
@@ -274,8 +274,8 @@ const maybeShowVersionDiffNotification = createOptimistThunk(async (dispatch: an
 /**
  * Thunk to track version diffing changes.
  */
-const trackVersionDiffingChanges = createOptimistThunk(async (dispatch: any, { openFileKey, versionHistory }: { openFileKey: string, versionHistory: any }) => {
-  const state = dispatch.getState()
+export const trackVersionDiffingChanges = createOptimistThunk(async ({ dispatch, getState }, { openFileKey, versionHistory }: { openFileKey: string, versionHistory: any }) => {
+  const state = getState()
   const user = state.user
   if (!getFeatureFlags().version_diffing || !user || state.selectedView.view !== 'fullscreen' || state.selectedView.editorType === FEditorType.Whiteboard || state.mirror.appModel.topLevelMode === ViewType.HISTORY || state.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES)
     return
@@ -336,7 +336,7 @@ let currentLoadPromise: Promise<any> | null = null // Original: er
  * @param eventType - Optional event type.
  * @returns Promise resolving to void.
  */
-function loadVersionIntoScene(version: any, store: any, fetchedPageIds: Set<string>, currentPageNodeId: string, nodeId?: string, eventType?: string): Promise<void> {
+export function loadVersionIntoScene(version: any, store: any, fetchedPageIds: Set<string>, currentPageNodeId: string, nodeId?: string, eventType?: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const canvasUrl = version.canvas_url
     if (!canvasUrl)
@@ -448,7 +448,7 @@ const fetchVersionHistory = createOptimistThunk((dispatch: any, { direction }: {
 /**
  * Thunk to reset version history.
  */
-const resetVersionHistory = createOptimistThunk((dispatch: any) => {
+export const resetVersionHistory = createOptimistThunk(({ dispatch }) => {
   dispatch(VERSION_HISTORY_RESET_VERSIONS())
   dispatch(fetchVersionHistory({ direction: PAGINATION_PREV })) // Original: es
 })
@@ -456,11 +456,11 @@ const resetVersionHistory = createOptimistThunk((dispatch: any) => {
 /**
  * Thunk to enter version history mode.
  */
-const enterVersionHistoryMode = createOptimistThunk((dispatch: any, { source }: { source?: string } = {}) => {
+export const enterVersionHistoryMode = createOptimistThunk(({ dispatch, getState }, { source }: { source?: string } = {}) => {
   fullscreenValue.triggerAction('enter-history-mode')
   fullscreenValue.triggerAction('deselect-all')
   dispatch(resetVersionHistory())
-  if (isFullscreenSitesView(dispatch.getState().selectedView))
+  if (isFullscreenSitesView(getState().selectedView))
     atomStoreManager.set(sitesViewSetterAtomFamily, PanelType.FILE)
   AppStateTsApi?.uiState().showPropertiesPanel.set(true)
   trackEventAnalytics('Toggle Version History', { source: source || null }) // Original: $$eo6
@@ -469,16 +469,16 @@ const enterVersionHistoryMode = createOptimistThunk((dispatch: any, { source }: 
 /**
  * Thunk to exit version history mode.
  */
-const exitVersionHistoryMode = createOptimistThunk((dispatch: any) => {
+export const exitVersionHistoryMode = createOptimistThunk(({ dispatch, getState }) => {
   dispatch(resetCompareMode())
   dispatch(VisualBellActions.dequeue({ matchType: 'versions' }))
-  Fullscreen.exitVersionHistoryMode(dispatch.getState().openFile?.canEdit ?? false) // Original: $$el0
+  Fullscreen.exitVersionHistoryMode(getState().openFile?.canEdit ?? false) // Original: $$el0
 })
 
 /**
  * Thunk to reset compare mode.
  */
-const resetCompareMode = createOptimistThunk((dispatch: any) => {
+export const resetCompareMode = createOptimistThunk(({ dispatch }) => {
   dispatch(setActiveVersion({ id: CURRENT_VERSION_ID }))
   dispatch(startCompareChanges({ fromVersionId: undefined }))
   SceneGraphHelpers.clearSelection()
@@ -490,17 +490,17 @@ const resetCompareMode = createOptimistThunk((dispatch: any) => {
 /**
  * Thunk to set active version.
  */
-const setActiveVersion = createOptimistThunk(async (dispatch: any, { id, versions, eventType, nodeId }: { id: string, versions?: any[], eventType?: string, nodeId?: string }) => {
+const setActiveVersion = createOptimistThunk(async ({ dispatch, getState }, { id, versions, eventType, nodeId }: { id: string, versions?: any[], eventType?: string, nodeId?: string }) => {
   if (id === CURRENT_VERSION_ID) {
     atomStoreManager.set(versionHistoryKeyAtom, '')
     Fullscreen.loadFigFileForPreview(new Uint8Array())
-    const state = dispatch.getState()
+    const state = getState()
     dispatch(selectViewAction({ ...state.selectedView, versionId: undefined, compareVersionId: undefined }))
     dispatch(VERSION_HISTORY_SET_ACTIVE({ id }))
     return
   }
   dispatch(VERSION_HISTORY_SET_ACTIVE({ id }))
-  const state = dispatch.getState()
+  const state = getState()
   const version = versions ? versions.find(v => v.id === id) : getActiveVersion(state.versionHistory)
   if (!version)
     return
@@ -522,7 +522,7 @@ const setActiveVersion = createOptimistThunk(async (dispatch: any, { id, version
 /**
  * Thunk to load version incrementally.
  */
-const loadVersionIncrementally = createOptimistThunk((dispatch: any, { version, currentPageNodeId, fetchedPageIds, eventType }: { version: any, currentPageNodeId: string, fetchedPageIds: Set<string>, eventType: string }) => {
+const loadVersionIncrementally = createOptimistThunk(({ dispatch }, { version, currentPageNodeId, fetchedPageIds, eventType }: { version: any, currentPageNodeId: string, fetchedPageIds: Set<string>, eventType: string }) => {
   loadVersionIntoScene(version, dispatch, fetchedPageIds, currentPageNodeId, undefined, eventType).then(() => {
     dispatch(VERSION_HISTORY_SET_LINKED_VERSION({ version }))
   }).catch((error) => {
@@ -535,14 +535,14 @@ const loadVersionIncrementally = createOptimistThunk((dispatch: any, { version, 
 /**
  * Thunk to start compare changes.
  */
-const startCompareChanges = createOptimistThunk(async (dispatch: any, { fromVersionId }: { fromVersionId?: string }) => {
+const startCompareChanges = createOptimistThunk(async ({ dispatch, getState }, { fromVersionId }: { fromVersionId?: string }) => {
   if (!getFeatureFlags().version_diffing) {
     dispatch(VERSION_HISTORY_COMPARE_CHANGES({ fromVersionId }))
     return
   }
   if (!fromVersionId)
     return
-  const version = findVersionById(fromVersionId, dispatch.getState().versionHistory)
+  const version = findVersionById(fromVersionId, getState().versionHistory)
   if (!version)
     return
   const startTime = new Date().getTime()
@@ -552,7 +552,7 @@ const startCompareChanges = createOptimistThunk(async (dispatch: any, { fromVers
     return
   }
   const endTime = new Date().getTime()
-  const editorType = dispatch.getState().selectedView.editorType
+  const editorType = getState().selectedView.editorType
   const source = CompareViewType[CompareViewType.COMPARE_CHANGES]
   trackEventAnalytics('versioning_performance_metrics', {
     name: 'load_diff',
@@ -575,7 +575,7 @@ const startCompareChanges = createOptimistThunk(async (dispatch: any, { fromVers
     dispatch(FlashActions.error(compareError))
     return
   }
-  const state = dispatch.getState()
+  const state = getState()
   dispatch(selectViewAction({ ...state.selectedView, compareVersionId: fromVersionId, compareLatest: undefined }))
   trackEventAnalytics('Version History Compare Start', { fromVersionId })
   dispatch(VERSION_HISTORY_COMPARE_CHANGES({ fromVersionId })) // Original: $$ep16

@@ -1,8 +1,12 @@
-import { z } from "../905/239603";
-import { createMetaValidator } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-import { D } from "../905/412108";
-let o = z.object({
+import { z } from 'zod'
+import { convertSinatraModel } from '../905/412108'
+import { XHR } from '../905/910117'
+import { createMetaValidator } from '../figma_app/181241'
+
+/**
+ * CollectionSchema - Zod schema for collection validation.
+ */
+export const CollectionSchema = z.object({
   id: z.string().uuid(),
   stableId: z.string().uuid(),
   createdAt: z.string(),
@@ -10,9 +14,13 @@ let o = z.object({
   description: z.string().nullable(),
   updatedAt: z.string(),
   orgId: z.string().nullable(),
-  teamId: z.string().nullable()
-});
-let l = z.object({
+  teamId: z.string().nullable(),
+})
+
+/**
+ * FieldSchema - Zod schema for field validation.
+ */
+export const FieldSchema = z.object({
   id: z.string().uuid(),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -22,81 +30,154 @@ let l = z.object({
   collectionId: z.string().uuid(),
   properties: z.object({
     characterLimit: z.string().optional(),
-    placeholder: z.string().optional()
+    placeholder: z.string().optional(),
   }),
   position: z.string(),
-  fieldType: z.string()
-});
-let $$d0 = new class {
-  constructor() {
-    this.CollectionResponseSchemaValidator = createMetaValidator("CollectionSchemaValidator", D(o), null);
-    this.FieldSchemaResponseValidator = createMetaValidator("FieldSchemaResponseValidator", D(l), null);
-  }
-  createCollection({
-    id: e,
-    name: t,
-    description: r,
-    fields: n,
-    fileKey: i
+  fieldType: z.string(),
+})
+
+/**
+ * CollectionService - Handles collection and field schema operations.
+ */
+export class CollectionService {
+  public CollectionResponseSchemaValidator = createMetaValidator(
+    'CollectionSchemaValidator',
+    convertSinatraModel(CollectionSchema),
+    null,
+  )
+
+  public FieldSchemaResponseValidator = createMetaValidator(
+    'FieldSchemaResponseValidator',
+    convertSinatraModel(FieldSchema),
+    null,
+  )
+
+  /**
+   * Creates a new collection.
+   * @param params - Collection creation parameters.
+   */
+  createCollection(params: {
+    id: string
+    name: string
+    description?: string | null
+    fields?: any[]
+    fileKey: string
   }) {
-    return this.CollectionResponseSchemaValidator.validate(async ({
-      xr: a
-    }) => await a.post(`/api/file/${i}/collections`, {
-      collection_id: e,
-      name: t,
-      description: r ?? "",
-      fields: n ?? []
-    }));
+    // createCollection
+    const { id, name, description, fields, fileKey } = params
+    return this.CollectionResponseSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(`/api/file/${fileKey}/collections`, {
+        collection_id: id,
+        name,
+        description: description ?? '',
+        fields: fields ?? [],
+      }),
+    )
   }
-  renameCollection({
-    collection: e,
-    name: t
+
+  /**
+   * Renames an existing collection.
+   * @param params - Rename parameters.
+   */
+  renameCollection(params: {
+    collection: { databaseId: string }
+    name: string
   }) {
-    return this.CollectionResponseSchemaValidator.validate(async ({
-      xr: r
-    }) => await r.put(`/api/collections/${e.databaseId}`, {
-      name: t
-    }));
+    // renameCollection
+    const { collection, name } = params
+    return this.CollectionResponseSchemaValidator.validate(async ({ xr }) =>
+      await xr.put(`/api/collections/${collection.databaseId}`, {
+        name,
+      }),
+    )
   }
-  async deleteCollection({
-    collection: e
+
+  /**
+   * Deletes a collection.
+   * @param params - Delete parameters.
+   */
+  async deleteCollection(params: { collection: { databaseId: string } }) {
+    // deleteCollection
+    const { collection } = params
+    await XHR.del(`/api/collections/${collection.databaseId}`)
+  }
+
+  /**
+   * Creates a new field schema.
+   * @param params - Field schema creation parameters.
+   */
+  createFieldSchema(params: {
+    collection: { databaseId: string }
+    attributes: {
+      name: string
+      fieldType: string
+      position: string
+      required?: boolean | null
+      properties?: Record<string, any>
+    }
   }) {
-    await XHR.del(`/api/collections/${e.databaseId}`);
+    // createFieldSchema
+    const { collection, attributes } = params
+    return this.FieldSchemaResponseValidator.validate(async ({ xr }) =>
+      await xr.post(`/api/collections/${collection.databaseId}/field_schemas`, {
+        name: attributes.name,
+        field_type: attributes.fieldType,
+        position: attributes.position,
+        required: attributes.required,
+        properties: attributes.properties ?? {},
+      }),
+    )
   }
-  createFieldSchema({
-    collection: e,
-    attributes: t
+
+  /**
+   * Updates an existing field schema.
+   * @param params - Update parameters.
+   */
+  updateFieldSchema(params: {
+    collection: { databaseId: string }
+    fieldSchema: { databaseId: string }
+    newAttributes: {
+      name: string
+      fieldType: string
+      position: string
+      required?: boolean | null
+      properties?: Record<string, any>
+    }
   }) {
-    return this.FieldSchemaResponseValidator.validate(async ({
-      xr: r
-    }) => await r.post(`/api/collections/${e.databaseId}/field_schemas`, {
-      name: t.name,
-      field_type: t.fieldType,
-      position: t.position,
-      required: t.required,
-      properties: t.properties ?? {}
-    }));
+    // updateFieldSchema
+    const { collection, fieldSchema, newAttributes } = params
+    return this.FieldSchemaResponseValidator.validate(async ({ xr }) =>
+      await xr.put(
+        `/api/collections/${collection.databaseId}/field_schemas/${fieldSchema.databaseId}`,
+        {
+          name: newAttributes.name,
+          field_type: newAttributes.fieldType,
+          position: newAttributes.position,
+          required: newAttributes.required,
+          properties: newAttributes.properties,
+        },
+      ),
+    )
   }
-  updateFieldSchema({
-    collection: e,
-    fieldSchema: t,
-    newAttributes: r
+
+  /**
+   * Deletes a field schema.
+   * @param params - Delete parameters.
+   */
+  async deleteFieldSchema(params: {
+    collection: { databaseId: string }
+    fieldSchema: { databaseId: string }
   }) {
-    return this.FieldSchemaResponseValidator.validate(async ({
-      xr: n
-    }) => await n.put(`/api/collections/${e.databaseId}/field_schemas/${t.databaseId}`, {
-      name: r.name,
-      field_type: r.fieldType,
-      position: r.position,
-      required: r.required,
-      properties: r.properties
-    }));
+    // deleteFieldSchema
+    const { collection, fieldSchema } = params
+    await XHR.del(
+      `/api/collections/${collection.databaseId}/field_schemas/${fieldSchema.databaseId}`,
+    )
   }
-  async deleteFieldSchema({
-    collection: e,
-    fieldSchema: t
-  }) {
-    await XHR.del(`/api/collections/${e.databaseId}/field_schemas/${t.databaseId}`);
-  }
-}();
-export const A2 = $$d0;
+}
+
+/**
+ * Exported instance for collection operations.
+ */
+export const collectionService = new CollectionService()
+export const A2 = collectionService

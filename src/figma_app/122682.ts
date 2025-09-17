@@ -6,7 +6,7 @@ import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nState } from "../figma_app/363242";
 import { t7 } from "../905/989765";
 import { selectCurrentFile } from "../figma_app/516028";
-import { PS } from "../figma_app/598018";
+import { hasValidTeamPaymentStatus } from "../figma_app/598018";
 import { MK } from "../figma_app/120529";
 let _ = () => !(isIpadDevice() || getIsMobile());
 export function $$h1() {
@@ -38,7 +38,7 @@ export function $$g5(e) {
   }
   if (t.teamId) {
     let r = e.teams[t.teamId];
-    return r ? PS(r) ? 4 : 3 : 0;
+    return r ? hasValidTeamPaymentStatus(r) ? 4 : 3 : 0;
   }
   return 2;
 }

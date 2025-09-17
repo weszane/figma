@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { C as _$$C } from "../905/520159";
 import { a as _$$a } from "../905/964520";
 import { A as _$$A } from "../905/251970";
@@ -42,7 +42,7 @@ function v({
   return jsx(ModalRootComponent, {
     manager: l,
     width: v,
-    children: jsx(Wk, {
+    children: jsx(DialogCustomContents, {
       className: b()("stepped_modal--animatedModalFadeIn--HPT3R", {
         "stepped_modal--borderRadius--rmCvw": y
       }),

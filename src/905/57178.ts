@@ -16,7 +16,7 @@ import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { HG } from "../figma_app/440875";
 import { T as _$$T, N as _$$N } from "../905/847283";
-import { z3 } from "../figma_app/386952";
+import { getSelectedViewType } from "../figma_app/386952";
 import { a as _$$a } from "../905/298663";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -163,7 +163,7 @@ let L = {
   },
   "start-presenting": function (e) {
     let t = _$$T();
-    let i = z3();
+    let i = getSelectedViewType();
     return jsx(N, {
       actionText: renderI18nText("collaboration.spotlight.tooltip.spotlight_me"),
       actionCallback: e => {

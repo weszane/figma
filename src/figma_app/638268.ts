@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { TextDecorationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { compareLibraryKeyWithString } from "../905/709171";
@@ -40,7 +40,7 @@ export let $$O0 = memo(function ({
   let M = useRef(null);
   let [F, j] = useState(!1);
   let U = _$$P();
-  let B = _$$A(U, 500);
+  let B = useDebounce(U, 500);
   let {
     useLargePreviewRows
   } = useContext(_$$Q);

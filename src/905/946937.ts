@@ -14,23 +14,23 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler, hideModal } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { getRepoByIdAlt } from "../905/760074";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { isTeamFolderV2 } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
-import { FC } from "../figma_app/212807";
-import { _6 } from "../figma_app/386952";
+import { selectPermissionsState } from "../figma_app/212807";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType, FProductAccessType, FPlanAccessType } from "../figma_app/191312";
 import { PublishUpsellTeamPlan, PublishUpsellTeamRoles } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { UpsellModalType } from "../905/165519";
-import { Bi } from "../905/652992";
+import { FeatureFlag } from "../905/652992";
 import { projectPermissionEnum } from "../figma_app/630077";
 import { registerModal } from "../905/102752";
 import { RR } from "../905/514666";
@@ -43,7 +43,7 @@ export let $$V0 = registerModal(function (e) {
     afterFileMove
   } = e;
   let s = useDispatch();
-  let o = FC();
+  let o = selectPermissionsState();
   let l = selectCurrentUser();
   let d = !!team && canEditTeam(team?.id, o);
   let p = hasTeamPaidAccess(team);
@@ -75,7 +75,7 @@ export let $$V0 = registerModal(function (e) {
       userId: l?.id
     }
   });
-  let y = _6();
+  let y = getSelectedView();
   let b = () => {
     s(showModalHandler({
       type: dD,
@@ -86,12 +86,12 @@ export let $$V0 = registerModal(function (e) {
   };
   return !t || team && "loaded" !== f.status && "loaded" !== _.status ? jsx(Fragment, {}) : team && f.data && !_.data ? jsx(bP, {
     team,
-    resource: Bi.TEAM_LIBRARY,
+    resource: FeatureFlag.TEAM_LIBRARY,
     action: projectPermissionEnum.PUBLISH_COMPONENTS,
     editorType: FFileType.DESIGN,
     onStarterPlanCtaClick: b,
-    currentPlan: _$$F.Plan.STARTER,
-    upsellPlan: _$$F.Plan.PRO,
+    currentPlan: consumptionPaywallUtils.Plan.STARTER,
+    upsellPlan: consumptionPaywallUtils.Plan.PRO,
     onBillingCompleteRedirectInfo: {
       fileKey: t.key,
       nodeId: "fullscreen" === y.view && y.nodeId || ""
@@ -125,7 +125,7 @@ function G(e) {
   })).unwrapOr(!1), [h, t]);
   let y = !!c;
   let b = g && isTeamFolderV2(g.project);
-  let v = _6();
+  let v = getSelectedView();
   if (!g) return jsx(Fragment, {});
   if ("loaded" !== h.status) return jsx(ModalRootComponent, {
     manager: i,
@@ -146,12 +146,12 @@ function G(e) {
   let E = "fullscreen" === v.view ? v.nodeId ?? "" : void 0;
   return void 0 !== E ? jsx(bP, {
     team: e.team,
-    resource: Bi.TEAM_LIBRARY,
+    resource: FeatureFlag.TEAM_LIBRARY,
     action: projectPermissionEnum.PUBLISH_COMPONENTS,
     editorType: FFileType.DESIGN,
     onStarterPlanCtaClick: onStylesClick,
-    currentPlan: _$$F.Plan.STARTER,
-    upsellPlan: _$$F.Plan.PRO,
+    currentPlan: consumptionPaywallUtils.Plan.STARTER,
+    upsellPlan: consumptionPaywallUtils.Plan.PRO,
     onBillingCompleteRedirectInfo: {
       fileKey: g.key,
       nodeId: E
@@ -196,7 +196,7 @@ function z(e) {
             children: [jsx($z, {
               onClick: i,
               trackingProperties: {
-                trackingDescriptor: _$$c.CANCEL
+                trackingDescriptor: UpgradeAction.CANCEL
               },
               variant: "secondary",
               children: renderI18nText("upsell.shared.cancel")

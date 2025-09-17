@@ -28,7 +28,7 @@ import { Z as _$$Z } from "../905/909123";
 import { ResourceHubResourceRoute } from "../figma_app/354658";
 import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { showModalHandler, hideModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
@@ -127,7 +127,7 @@ function Q({
     "aria-label": getI18nString("file_browser.open_in_new_tab"),
     trackingProperties: {
       ...Kj(s, r),
-      trackingDescriptor: _$$c.OPEN_IN_NEW_TAB
+      trackingDescriptor: UpgradeAction.OPEN_IN_NEW_TAB
     },
     children: jsx("span", {
       className: "lightbox_rdp--icon--imaRw",

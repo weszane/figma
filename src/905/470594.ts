@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { K } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
@@ -119,18 +119,18 @@ let N = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: i,
     width: 360,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("check_network_compatibility.title")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           style: sx.mt8.mb16.selectNone.$,
           children: a
         }), e.results.map(e => s(e))]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,

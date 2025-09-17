@@ -24,10 +24,10 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
 import { hideModal, showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { F as _$$F } from "../905/224";
+import { consumptionPaywallUtils } from "../905/224";
 import { isRootPath } from "../figma_app/528509";
 import { cY, yD, _9, AU } from "../905/81459";
 import { buildFileUrl } from "../905/612685";
@@ -36,10 +36,10 @@ import { FileByKey } from "../figma_app/43951";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { isRecentsAndSharingView } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
-import { Bi, vL } from "../905/652992";
+import { FeatureFlag, PageFolderFile } from "../905/652992";
 import { Y5, mO, kI, NU } from "../905/163189";
 import { fileActionEnum } from "../figma_app/630077";
-import { DV } from "../905/739964";
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { uf, yA } from "../905/769";
@@ -319,7 +319,7 @@ export function $$ee2({
     onClose: () => {
       logAndTrackCTA({
         trackingContext: Q,
-        trackingDescriptor: _$$c.FILE_IMPORT_X_BUTTON,
+        trackingDescriptor: UpgradeAction.FILE_IMPORT_X_BUTTON,
         text: "dismiss"
       });
       e.queue.length ? r() : t();
@@ -386,15 +386,15 @@ export function $$et4({
     onClick: () => {
       r();
       null != s && i(showModalHandler({
-        type: DV,
+        type: ConsumptionPaywallModalPlansPricing,
         data: {
           team: s,
-          resource: n.hasMakeFile && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
+          resource: n.hasMakeFile && !getFeatureFlags().bake_starter_limit ? FeatureFlag.FIGMAKE : PageFolderFile.FILE,
           action: fileActionEnum.IMPORT_FILES,
           editorType: n.editorType,
           multipleResources: n.failedFiles > 1,
-          currentPlan: _$$F.Plan.STARTER,
-          upsellPlan: _$$F.Plan.PRO,
+          currentPlan: consumptionPaywallUtils.Plan.STARTER,
+          upsellPlan: consumptionPaywallUtils.Plan.PRO,
           upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
       }));

@@ -13,7 +13,7 @@ import { Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
 import { c$, bL, l9, mc, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { selectExperimentConfigHook } from "../figma_app/594947";
@@ -68,7 +68,7 @@ function S({
       className: "x78zum5 x6s0dn4 x167g77z",
       children: [jsx("div", {
         className: "x78zum5 x6s0dn4 x1kky2od xlup9mm",
-        children: jsx(_$$J, {
+        children: jsx(setupThemeContext, {
           mode: "dark",
           children: "MIXED" === t ? jsx("div", {
             className: "x1kky2od xlup9mm"

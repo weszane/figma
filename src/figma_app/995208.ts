@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo } from "../figma_app/272243";
+import { DialogContents } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { Spacing } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { registerModal } from "../905/102752";
@@ -89,7 +89,7 @@ function C(e) {
             ...(null != n ? {
               trackingContext: n
             } : {}),
-            trackingDescriptor: _$$c.CLOSE,
+            trackingDescriptor: UpgradeAction.CLOSE,
             text: "Close"
           });
           return e.onClose("close_button_clicked");
@@ -108,7 +108,7 @@ function C(e) {
     width: e.width ?? 700,
     overrideCloseButtonColor: e.closeButtonColor,
     height: e.dynamicHeight ? "dynamic" : void 0,
-    children: jsx(vo, {
+    children: jsx(DialogContents, {
       children: e.children
     })
   });

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { selectWithShallowEqual } from "../905/103090";
 import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
@@ -196,7 +196,7 @@ export function $$F0() {
     setSearchQuery,
     setPreviewResource
   } = Rz();
-  let [I] = _$$A(searchQuery, 200);
+  let [I] = useDebounce(searchQuery, 200);
   let [T, w] = useState(universalInsertModal.initialSelectedCategory ?? o);
   useEffect(() => {
     o = T;

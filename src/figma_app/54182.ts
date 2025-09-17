@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { isWorkshopModeEnabled } from "../figma_app/789";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
 import { AccessLevelEnum } from "../905/557142";
@@ -65,7 +65,7 @@ export function $$f0(e) {
       tooltipUser: e,
       multiplayer: useSelector(e => e.multiplayer),
       isInWorkshop: isWorkshopModeEnabled(),
-      selectedView: _6()
+      selectedView: getSelectedView()
     });
   }(f);
   let v = `/files${a}/user/${f.id}`;

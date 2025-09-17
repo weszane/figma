@@ -16,7 +16,7 @@ import { showModalHandler } from "../905/156213";
 import { trackTeamEvent } from "../figma_app/314264";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowRead, adminPermissionConfig } from "../figma_app/391338";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { FEntityType, FAccessLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
 import { x as _$$x } from "../905/695363";
@@ -32,7 +32,7 @@ export function $$O2(e) {
   let t;
   let i = useDispatch();
   let O = useSelector(e => e.currentUserOrgId);
-  let D = FC();
+  let D = selectPermissionsState();
   let L = _$$x();
   let F = useSelector(e => e.orgById);
   let M = useSelector(({

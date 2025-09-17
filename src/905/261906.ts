@@ -5,9 +5,9 @@ import { K } from "../905/276259";
 import { M } from "../905/413543";
 import { u as _$$u } from "../905/158787";
 import { e } from "../905/240303";
-import { J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
-import { JW, ju } from "../905/389382";
+import { getSeatDescriptionIcon, getEditorTheme } from "../905/389382";
 let s = memo(function (e) {
   return jsx("svg", {
     width: "16",
@@ -268,14 +268,14 @@ export function $$C1(e) {
   let g = jsx(p, {
     style: t
   });
-  return brand ? jsx(J, {
+  return brand ? jsx(setupThemeContext, {
     brand,
     children: g
   }) : g;
 }
 export function $$T0(e) {
-  let t = JW(e.type, e.size);
-  let i = ju(e.type);
+  let t = getSeatDescriptionIcon(e.type, e.size);
+  let i = getEditorTheme(e.type);
   if (!t) return null;
   let {
     iconColor,
@@ -287,7 +287,7 @@ export function $$T0(e) {
     background: backgroundColor,
     borderRadius: S(e.size)
   };
-  return jsx(J, {
+  return jsx(setupThemeContext, {
     brand: i,
     children: jsx(t, {
       style: s

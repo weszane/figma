@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
@@ -38,7 +38,7 @@ export function $$_0() {
       }));
     },
     trackingProperties: {
-      trackingDescriptor: _$$c.UPGRADE_TO_PROFESSIONAL
+      trackingDescriptor: UpgradeAction.UPGRADE_TO_PROFESSIONAL
     },
     trusted: !0,
     role: "button",

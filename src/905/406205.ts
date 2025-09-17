@@ -43,8 +43,8 @@ import { eU } from "../figma_app/863319";
 import { Tf, fA } from "../figma_app/543100";
 import { Um } from "../905/848862";
 import { x as _$$x2 } from "../905/98916";
-import { FC } from "../figma_app/212807";
-import { _6 } from "../figma_app/386952";
+import { selectPermissionsState } from "../figma_app/212807";
+import { getSelectedView } from "../figma_app/386952";
 import { B as _$$B3 } from "../905/524020";
 import { getUserId } from "../905/372672";
 import { FEntityType, FFileType } from "../figma_app/191312";
@@ -93,8 +93,8 @@ function ec() {
 }
 function em(e) {
   let t = useDispatch();
-  let i = FC();
-  let o = _6();
+  let i = selectPermissionsState();
+  let o = getSelectedView();
   let d = useSelector(e => e.currentUserOrgId);
   let u = useSelector(e => e.currentTeamId);
   let g = getUserId();
@@ -252,7 +252,7 @@ export function $$eh1(e) {
 }
 export function $$eg0(e) {
   let t = useSelector(t => _$$Z(t, e.folder));
-  let i = _6();
+  let i = getSelectedView();
   let r = _$$R({
     folderId: e.folder.id,
     shouldShowOnlyTrashedFiles: "trashedFolders" === i.view
@@ -330,7 +330,7 @@ function eA({
   folder: e,
   folderTeamName: t
 }) {
-  let i = "trashedFolders" === _6().view;
+  let i = "trashedFolders" === getSelectedView().view;
   let r = _$$x2(e.id, i);
   if ("loaded" !== r.status) return jsx(Wi, {
     className: _$$s.h16.w150.$,
@@ -356,7 +356,7 @@ function eA({
 }
 function ey(e) {
   let t = useDispatch();
-  let i = _6();
+  let i = getSelectedView();
   let {
     showing,
     show,

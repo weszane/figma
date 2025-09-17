@@ -49,7 +49,7 @@ import { FL, hv } from "../figma_app/544744";
 import { p as _$$p } from "../9410/505291";
 import { Q as _$$Q } from "../1250/220026";
 import { V as _$$V } from "../905/355181";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { kD, tS as _$$tS2 } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { ITemplateType } from "../905/862883";
@@ -217,7 +217,7 @@ function el(e) {
       onClick: e.onCopyClick,
       variant: "primary",
       trackingProperties: {
-        trackingDescriptor: _$$c.USE_IN_NEW_FILE
+        trackingDescriptor: UpgradeAction.USE_IN_NEW_FILE
       },
       children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
     })]

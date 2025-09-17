@@ -14,7 +14,7 @@ import { uX, Rk, Un, MY, I_ } from "../905/759470";
 import { useCurrentUserOrg } from "../905/845253";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
 import { getCurrentPluginVersion } from "../figma_app/300692";
-import { ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { ContainerTypeMap } from "../905/186961";
 import { T as _$$T } from "../905/943304";
@@ -214,7 +214,7 @@ function P({
 }) {
   let s;
   let l = useCurrentUserOrg();
-  let d = ol();
+  let d = getCurrentTeam();
   let p = k(e, t);
   i && (s = "publishing_status" in i ? i.publishing_status : FPublicationStatusType.ORG_PRIVATE);
   return jsx(_$$N, {

@@ -23,7 +23,7 @@ import { g as _$$g } from "../4452/983384";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Ytf, URh, YEj } from "../figma_app/27776";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -67,7 +67,7 @@ import { vu, YM } from "../figma_app/741211";
 import { N_, Ye, Oq } from "../905/332483";
 import { Um } from "../905/848862";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { NJ } from "../figma_app/518077";
 import { getGroupOrDefault } from "../905/817247";
@@ -246,7 +246,7 @@ function V(e) {
           }),
           type: "button",
           onClick: next,
-          ctaTrackingDescriptor: _$$c.NEXT
+          ctaTrackingDescriptor: UpgradeAction.NEXT
         },
         shouldCenterArrow: EL.FALLBACK,
         stepCounter: {
@@ -277,7 +277,7 @@ function V(e) {
           }),
           type: "button",
           onClick: complete,
-          ctaTrackingDescriptor: _$$c.DONE
+          ctaTrackingDescriptor: UpgradeAction.DONE
         },
         shouldCenterArrow: EL.FALLBACK,
         stepCounter: {
@@ -364,7 +364,7 @@ function K() {
     description: renderI18nText("org_admin_authority_overlay.description"),
     primaryCta: {
       label: renderI18nText("general.got_it"),
-      ctaTrackingDescriptor: _$$c.GOT_IT,
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT,
       type: "button",
       onClick: complete
     },
@@ -573,13 +573,13 @@ function eK() {
       label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     secondaryCta: {
       label: renderI18nText("rcs.rcs_shared.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/360040450293-Create-a-team-in-an-organization",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     title: renderI18nText("rcs.sharing_clarity.admin_overlay.new_language_for_team_access"),
     trackingContextName: "Sharing Clarity Admin Onboarding Overlay",
@@ -3113,7 +3113,7 @@ function nS() {
       label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: d1,
@@ -3814,7 +3814,7 @@ function nX() {
       label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
-      ctaTrackingDescriptor: _$$c.DONE
+      ctaTrackingDescriptor: UpgradeAction.DONE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: _R,
@@ -4894,7 +4894,7 @@ let sD = liveStoreInstance.Query({
 function sP(e) {
   let t = useDispatch();
   let a = Um();
-  let n = FC();
+  let n = selectPermissionsState();
   let l = useSelector(({
     sharedFonts: e
   }) => e);
@@ -4963,7 +4963,7 @@ function sP(e) {
 }
 export function $$s$0(e) {
   let t = useDispatch();
-  let a = FC();
+  let a = selectPermissionsState();
   let n = useTeamPlanUser();
   let l = useIsOrgAdminUser(n);
   let o = useCurrentUserOrg();
@@ -5001,7 +5001,7 @@ function sB(e) {
     loadingState: e
   }) => e);
   let w = Um();
-  let k = FC();
+  let k = selectPermissionsState();
   let E = useSelector(({
     sharedFonts: e
   }) => e);

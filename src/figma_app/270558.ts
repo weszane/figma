@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { M } from "../905/456042";
@@ -37,8 +37,8 @@ export let $$f0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: E,
       width: "lg",
-      children: jsx(vo, {
-        children: jsxs(nB, {
+      children: jsx(DialogContents, {
+        children: jsxs(DialogBody, {
           className: planPickerModalBody,
           children: [jsx("div", {
             className: workspaceSelectorModalInner,

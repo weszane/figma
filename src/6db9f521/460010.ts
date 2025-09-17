@@ -84,7 +84,7 @@ import { A as _$$A2 } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
-import { ol as _$$ol } from "../figma_app/598018";
+import { getCurrentTeam } from "../figma_app/598018";
 import { D as _$$D2 } from "../7222/938408";
 import { nv, Ci, qm, Ji } from "../figma_app/553488";
 import { bL } from "../905/911410";
@@ -139,7 +139,7 @@ import { Y9 as _$$Y2, JU, X0, UC, bL as _$$bL2 } from "../figma_app/322555";
 import { EventShield } from "../905/821217";
 import { B as _$$B } from "../1250/314515";
 import { Z as _$$Z2 } from "../905/279476";
-import { A as _$$A3 } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { OI, Dm, Yr } from "../figma_app/8833";
 import { VF } from "../figma_app/679183";
 import { Bf } from "../figma_app/249941";
@@ -176,7 +176,7 @@ import { H as _$$H3 } from "../905/821118";
 import { _ as _$$_4 } from "../9410/16707";
 import { showDropdownThunk } from "../905/929976";
 import { postUserFlag } from "../905/985254";
-import { c as _$$c2 } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { hX, xn } from "../figma_app/644079";
 import { J3, JU as _$$JU } from "../figma_app/622574";
 import { E as _$$E2 } from "../905/453826";
@@ -401,7 +401,7 @@ import { z as _$$z3 } from "../905/626016";
 import { Z as _$$Z8 } from "../905/801075";
 import { CK } from "../figma_app/952764";
 import { li as _$$li } from "../figma_app/998161";
-import { b as _$$b5, bL as _$$bL4, mc as _$$mc, hE as _$$hE } from "../figma_app/860955";
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp } from "../figma_app/860955";
 import { $Q, a2 as _$$a5 } from "../905/963340";
 import { Fe } from "../905/284552";
 import { Y as _$$Y6 } from "../905/506207";
@@ -2419,7 +2419,7 @@ function ip() {
     let d = function () {
       let e = selectCurrentUser();
       let t = useCurrentUserOrg();
-      let i = _$$ol();
+      let i = getCurrentTeam();
       return {
         date: new Date().toISOString().split("T")[0] ?? "",
         author: e?.name ?? "",
@@ -3229,7 +3229,7 @@ function n$({
     nodeId: E
   });
   i || o || I && Object.keys(S).length > 1 ? g = i0.FULL : (T || k) && !f && (g = i0.OUTLINE_ONLY);
-  let [L] = _$$A3(i || n, 150);
+  let [L] = useDebounce(i || n, 150);
   let P = !L && (f || o);
   useEffect(() => {
     E && updateHoveredNode(f ? E : defaultSessionLocalIDString);
@@ -3342,7 +3342,7 @@ function nB({
     nodeId: T
   });
   i || j || k && Object.keys(N).length > 1 ? _ = i0.FULL : (I || O) && !g && (_ = i0.OUTLINE_ONLY);
-  let [P] = _$$A3(i || n, 150);
+  let [P] = useDebounce(i || n, 150);
   let D = !P && (g || j);
   useEffect(() => {
     T && updateHoveredNode(g ? T : defaultSessionLocalIDString);
@@ -4150,7 +4150,7 @@ function rM({
           }
         })), e()) : t();
       },
-      ctaTrackingDescriptor: _$$c2.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     stepCounter: {
       stepNum: 1,
@@ -4187,7 +4187,7 @@ function rF({
       type: "button",
       label: renderI18nText("general.done"),
       onClick: e,
-      ctaTrackingDescriptor: _$$c2.NEXT
+      ctaTrackingDescriptor: UpgradeAction.NEXT
     },
     stepCounter: {
       stepNum: 2,
@@ -8317,7 +8317,7 @@ function cd() {
   let {
     getTriggerProps,
     manager
-  } = _$$b5();
+  } = setupMenu();
   let i = kl("videoMediaLoop");
   let n = kl("videoAutoplay");
   let s = kl("videoMuted");
@@ -8330,7 +8330,7 @@ function cd() {
     !0 === a && e.push("showControls");
     return e;
   }, [i, n, s, a]);
-  return jsxs(_$$bL4, {
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsx("div", {
       className: "x78zum5 x1ikimyq",
@@ -8342,9 +8342,9 @@ function cd() {
           children: [jsx(_$$A9, {}), getI18nString("proto.prototype_panel.video_playback_settings")]
         })
       })
-    }), jsx(_$$mc, {
+    }), jsx(MenuContainerComp, {
       children: jsxs($Q, {
-        title: jsx(_$$hE, {
+        title: jsx(MenuTitleComp, {
           children: getI18nString("proto.prototype_panel.video_playback_settings")
         }),
         onChange: e => {
@@ -9251,7 +9251,7 @@ function cz() {
     let r = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
     let o = getObservableValue(AppStateTsApi?.slideThumbnailEdits(), lF);
     let d = r[0]?.[0] || "-1:-1";
-    let [u] = _$$A3(o.get(d) || 0, 1e3);
+    let [u] = useDebounce(o.get(d) || 0, 1e3);
     useEffect(() => {
       if (!n || u <= 1 || !Fullscreen) return;
       let e = documentStateTsApi?.getMutableActiveDocument();

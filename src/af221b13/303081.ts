@@ -26,10 +26,10 @@ import { ts as _$$ts, Sb } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { YW, _O, s0, EX } from "../figma_app/350203";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../figma_app/831799";
 import { QL } from "../905/609392";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { mC } from "../905/18797";
 import { _q } from "../figma_app/242339";
@@ -108,7 +108,7 @@ import { getIconColor } from "../905/499018";
 import { A as _$$A9 } from "../6828/523860";
 import { A as _$$A0 } from "../svg/951803";
 import { A as _$$A1 } from "../svg/228383";
-import { J as _$$J2 } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -450,7 +450,7 @@ function M(e) {
         type: "button",
         role: "button",
         trackingProperties: {
-          trackingDescriptor: _$$c.CONTINUE_TO_FILE
+          trackingDescriptor: UpgradeAction.CONTINUE_TO_FILE
         },
         children: renderI18nText("community.duplicate_modal.continue_to_file")
       })]
@@ -464,7 +464,7 @@ let $ = registerModal(function (e) {
   let o = mC(_$$ts.loadingKeyForPayload({
     hubFileId: e.hubFileId
   }));
-  let c = _6();
+  let c = getSelectedView();
   let d = () => {
     i(hideModal());
   };
@@ -2063,7 +2063,7 @@ function ih(e) {
           href: url,
           onClick: e => e.preventDefault(),
           children: title
-        }), newProductBadgeTheme && jsx(_$$J2, {
+        }), newProductBadgeTheme && jsx(setupThemeContext, {
           brand: newProductBadgeTheme,
           children: jsx(_$$E2, {
             variant: "brandFilled",
@@ -2976,7 +2976,7 @@ function iB({
           className: e9()("nav_category_selector_2--newDotIndicator--uYS0W", {
             "nav_category_selector_2--newDotIndicatorHidden--PXXwr": !y
           })
-        }), e, n && jsx(_$$J2, {
+        }), e, n && jsx(setupThemeContext, {
           brand: "seascape",
           children: jsx("div", {
             className: "nav_category_selector_2--newBadge--3isz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -3081,7 +3081,7 @@ function iq() {
     children: [jsx(TrackedButton, {
       className: "auth_buttons--logInButton--ln482 shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       trackingProperties: {
-        trackingDescriptor: _$$c.LOGGED_OUT_NAV_LOGIN
+        trackingDescriptor: UpgradeAction.LOGGED_OUT_NAV_LOGIN
       },
       onClick: () => FL(AuthFlowStep.SIGN_IN, {
         preventDefaultRedirect: !0,
@@ -3100,7 +3100,7 @@ function iq() {
         }
       }),
       trackingProperties: {
-        trackingDescriptor: _$$c.LOGGED_OUT_NAV_SIGN_UP
+        trackingDescriptor: UpgradeAction.LOGGED_OUT_NAV_SIGN_UP
       },
       type: "button",
       children: getI18nString("community.signed_out_modal.sign_up")
@@ -3269,7 +3269,7 @@ function i7({
     onClick: () => customHistory.push(m.href),
     children: [jsxs("div", {
       className: "buzz_sites_promo_banner--leftColumn--EAgWg",
-      children: [jsx(_$$J2, {
+      children: [jsx(setupThemeContext, {
         brand: _$$n2(e),
         children: jsx("div", {
           className: "buzz_sites_promo_banner--iconContainer--JQrLE",
@@ -5009,7 +5009,7 @@ function au() {
             })
           })]
         })
-      }), ("loading" === e.status || "loaded" === e.status && e.canCreateFigmakeFile) && jsx(_$$J2, {
+      }), ("loading" === e.status || "loaded" === e.status && e.canCreateFigmakeFile) && jsx(setupThemeContext, {
         brand: "bake-filebrowser",
         children: jsx(ButtonLarge, {
           disabled: "loading" === e.status,
@@ -6004,7 +6004,7 @@ function st() {
       href: i?.profile_handle ? new ProfileRouteState({
         profileHandle: i.profile_handle
       }).href : "",
-      ctaTrackingDescriptor: _$$c.UPDATE_MY_RESOURCES,
+      ctaTrackingDescriptor: UpgradeAction.UPDATE_MY_RESOURCES,
       trackingProperties: {
         userId: t?.id
       }
@@ -6013,7 +6013,7 @@ function st() {
       type: "link",
       label: renderI18nText("community.learn_more"),
       href: "https://help.figma.com/hc/articles/22166943560983-Grow-your-audience-on-Community#mediapreviews",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE,
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE,
       trackingProperties: {
         userId: t?.id,
         profileId: i?.id

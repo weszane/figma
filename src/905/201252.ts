@@ -4,7 +4,7 @@ import { Nz, h4 } from "../905/720338";
 import { useRecording } from "../905/959312";
 import { setupRefUpdater } from "../905/823680";
 import { ensureContext } from "../905/61417";
-import { q7 } from "../figma_app/860955";
+import { MenuItemComp } from "../figma_app/860955";
 import { useFplStrings } from "../figma_app/415899";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent, stopEventPropagation } from "../905/955878";
@@ -306,28 +306,28 @@ export function $$S0(e) {
     }
   };
   let W = [];
-  B && W.push([jsx(q7, {
+  B && W.push([jsx(MenuItemComp, {
     onClick: () => {
       C(M);
     },
     "data-move-action": x.UP,
     children: k
   }, "moveUp")]);
-  V && W.push([jsx(q7, {
+  V && W.push([jsx(MenuItemComp, {
     onClick: () => {
       C(F);
     },
     "data-move-action": x.DOWN,
     children: R
   }, "moveDown")]);
-  G && W.push([jsx(q7, {
+  G && W.push([jsx(MenuItemComp, {
     onClick: () => {
       C(D);
     },
     "data-move-action": x.TOP,
     children: T
   }, "moveToTop")]);
-  z && W.push([jsx(q7, {
+  z && W.push([jsx(MenuItemComp, {
     onClick: () => {
       C(L);
     },

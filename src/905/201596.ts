@@ -11,7 +11,7 @@ import { Rv } from "../figma_app/599979";
 import { Jj, bY } from "../figma_app/2023";
 import { $T } from "../figma_app/12535";
 import { fullscreenValue } from "../figma_app/455680";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { FFileType } from "../figma_app/191312";
 import { PublishedHubFileForFile } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
@@ -50,7 +50,7 @@ export function $$C2(e) {
   };
 }
 export function $$T1(e) {
-  let t = FC();
+  let t = selectPermissionsState();
   let i = useSelector(e => e.authedProfilesById);
   let a = useSelector(e => e.figFileDuplicatedFromHubFile);
   let s = useSubscription(PublishedHubFileForFile({

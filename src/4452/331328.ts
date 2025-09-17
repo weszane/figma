@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -45,9 +45,9 @@ export let $$S0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: c,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: e.goBack ? jsx(w, {
               title: getI18nString("team_view.team_permissions_modal.access_settings"),
               onClick: e.goBack
@@ -58,7 +58,7 @@ export let $$S0 = registerModal(function (e) {
               })
             })
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: a ? a.org && jsx($$T1, {
             team: e.team,
             org: a.org,

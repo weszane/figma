@@ -12,7 +12,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { BaseLinkComponent } from "../905/551536";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { ol, cD } from "../figma_app/598018";
+import { getCurrentTeam, getCurrentTeamId } from "../figma_app/598018";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { memo, useMemo, useCallback, useState, useEffect, useRef, useLayoutEffect } from "react";
 import { sha1Hex } from "../905/125019";
@@ -28,7 +28,7 @@ import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/859195";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { T6 } from "../905/201596";
 import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
@@ -113,7 +113,7 @@ let y = registerModal(function ({
   open: e
 }) {
   let t = useDispatch();
-  let i = ol();
+  let i = getCurrentTeam();
   let n = i?.student_team ? renderI18nText("templates.limit_modal.student") : renderI18nText("templates.limit_modal.professional");
   let a = () => {
     t(hideModal());
@@ -282,7 +282,7 @@ function eU({
   publishScopeField: e
 }) {
   let t = useCurrentUserOrg();
-  let i = ol();
+  let i = getCurrentTeam();
   let n = Lz(e, void 0);
   return jsx(_$$A8, {
     label: getI18nString("templates.publishing.scope.label"),
@@ -556,7 +556,7 @@ function tr({
 }) {
   let t = selectCurrentFile();
   let i = selectCurrentUser();
-  let n = cD();
+  let n = getCurrentTeamId();
   let r = useCurrentUserOrg();
   let a = t?.template || void 0;
   let s = t?.libraryKey || void 0;
@@ -1069,7 +1069,7 @@ function tO({
   var a;
   let o = _$$Et(e) ? e.template : null;
   let l = mZ(e);
-  let h = cD();
+  let h = getCurrentTeamId();
   let g = e.name;
   let A = e.team;
   let y = useDispatch();
@@ -1389,7 +1389,7 @@ function tO({
               type: "submit",
               ref: E,
               trackingProperties: {
-                trackingDescriptor: _$$c.PUBLISH,
+                trackingDescriptor: UpgradeAction.PUBLISH,
                 hasExistingTemplate: !!o,
                 fileKey: e.key,
                 productType: e.editorType

@@ -14,7 +14,7 @@ import { Button } from "../905/521428";
 import { $ } from "../905/953280";
 import { Te } from "../vendor/813803";
 import { getFeatureFlags, M as _$$M } from "../905/601108";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { getFeatureFlagRulesExport, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -107,7 +107,7 @@ let L = (e, t, i) => {
 function F(e) {
   let t = setupAutofocusHandler();
   let [i, a] = useState("");
-  let [s] = _$$A(i, 100);
+  let [s] = useDebounce(i, 100);
   let [d, c] = useState(!1);
   let {
     currentFlagValues,

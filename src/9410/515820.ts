@@ -34,7 +34,7 @@ import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { FC } from "../figma_app/212807";
+import { selectPermissionsState } from "../figma_app/212807";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { hasTeamStatePaidAccess, getMaxPagesAllowed, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
@@ -116,7 +116,7 @@ function W({
 }) {
   let t = useDispatch();
   let i = selectCurrentFile();
-  let a = FC();
+  let a = selectPermissionsState();
   let s = p8("pagesList").length;
   let o = isDevHandoffEditorType();
   let l = Fr();

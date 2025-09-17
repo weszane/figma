@@ -56,7 +56,7 @@ import { ignoreCommandOrShift, KeyCodes, isCommandEvent } from "../905/63728";
 import { ex as _$$ex } from "../905/524523";
 import { clamp } from "../figma_app/492908";
 import { jr, W0, VA } from "../figma_app/896988";
-import { _6 } from "../figma_app/386952";
+import { getSelectedView } from "../figma_app/386952";
 import { isFullscreenSitesView, useIsFullscreenSitesView } from "../905/561485";
 import eC from "classnames";
 import { sR, uV } from "../figma_app/694588";
@@ -69,12 +69,12 @@ import { setupToggleButton } from "../905/167712";
 import { E as _$$E2 } from "../905/53857";
 import { C as _$$C } from "../8826/771306";
 import { g as _$$g } from "../8826/914688";
-import { J as _$$J } from "../905/614223";
+import { setupThemeContext } from "../905/614223";
 import { p as _$$p } from "../figma_app/353099";
 import { A as _$$A } from "../905/920142";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy, mp } from "../figma_app/579169";
 import { N as _$$N2 } from "../figma_app/268271";
@@ -911,7 +911,7 @@ function ez({
   let w = uV();
   let C = trackFileEventWithUser();
   let S = useSelector(Sh);
-  let j = isFullscreenSitesView(_6());
+  let j = isFullscreenSitesView(getSelectedView());
   let b = rO(s);
   let N = "BASELINE" === u;
   let I = useCallback((e, t) => {
@@ -1123,13 +1123,13 @@ function tl() {
       label: renderI18nText("general.got_it"),
       type: "button",
       onClick: a,
-      ctaTrackingDescriptor: _$$c.GOT_IT
+      ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
     secondaryCta: {
       label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/31289469907863",
-      ctaTrackingDescriptor: _$$c.LEARN_MORE
+      ctaTrackingDescriptor: UpgradeAction.LEARN_MORE
     },
     targetKey: tn,
     title: jsx("p", {
@@ -1309,7 +1309,7 @@ let tp = _$$ex("grid_beta_special_tooltip", function ({
 }) {
   return jsxs("span", {
     className: Hh,
-    children: [e, jsx(_$$J, {
+    children: [e, jsx(setupThemeContext, {
       mode: "light",
       children: jsx(_$$E2, {
         variant: "inverseFilled",

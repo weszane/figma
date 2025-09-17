@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useEffect, useRef } from "react";
-import { mc, r1, Q$, ME, Ov, rm, b as _$$b, bL } from "../figma_app/860955";
+import { MenuContainerComp, MenuHiddenTitleComp, MenuItemLead, MenuSubText, MenuItemTrail, MenuShortcut, setupMenu, MenuRootComp } from "../figma_app/860955";
 import { Jo, rN } from "../905/872033";
 import { h as _$$h } from "../905/207101";
 import { usePersistentValue } from "../figma_app/922077";
@@ -75,9 +75,9 @@ function S(e) {
     onSelect,
     recordingKey
   } = e;
-  return jsx(mc, {
+  return jsx(MenuContainerComp, {
     children: jsx(z6, {
-      title: jsx(r1, {
+      title: jsx(MenuHiddenTitleComp, {
         children: tooltipText
       }),
       value: selectedTool.text,
@@ -92,14 +92,14 @@ function S(e) {
         value: e.text,
         disabled: e.disabled,
         "data-onboarding-key": e.onboardingKey,
-        children: [jsx(Q$, {
+        children: [jsx(MenuItemLead, {
           children: e.smallIcon || e.icon
         }), jsxs("div", {
-          children: [e.text, jsx(ME, {
+          children: [e.text, jsx(MenuSubText, {
             children: e.subtext
           })]
-        }), jsx(Ov, {
-          children: jsx(rm, {
+        }), jsx(MenuItemTrail, {
+          children: jsx(MenuShortcut, {
             children: e.shortcutText
           })
         })]
@@ -145,8 +145,8 @@ function x(e) {
   let {
     getTriggerProps,
     manager
-  } = _$$b();
-  return jsxs(bL, {
+  } = setupMenu();
+  return jsxs(MenuRootComp, {
     manager,
     children: [jsxs(rN, {
       className: "tool_group--toolGroup--qWm-s",

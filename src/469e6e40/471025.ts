@@ -9,7 +9,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { x as _$$x } from "../905/811596";
 import { _ as _$$_ } from "../469e6e40/422718";
-import { A as _$$A } from "../vendor/850789";
+import { useDebounce } from 'use-debounce';
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
@@ -44,7 +44,7 @@ function C(e) {
   let _ = e.seatCountByBillingInterval ? Object.values(e.seatCountByBillingInterval).reduce((e, t) => e + t.assigned, 0) : e.seatCount.assigned;
   let u = e.seatCountByBillingInterval ? Object.values(e.seatCountByBillingInterval).reduce((e, t) => e + t.total, 0) : e.seatCount.total;
   let m = e.isELA ? _ : u;
-  let [g] = _$$A(m, 1e3, {
+  let [g] = useDebounce(m, 1e3, {
     trailing: !0
   });
   return jsxs(Fragment, {

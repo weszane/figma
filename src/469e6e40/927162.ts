@@ -3,7 +3,7 @@ import { E as _$$E } from "../905/53857";
 import { v4, AC } from "../figma_app/655139";
 import { x1 } from "../469e6e40/936617";
 import { sQ } from "../905/191741";
-import { AF } from "../figma_app/212807";
+import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { w$ } from "../figma_app/646357";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { d as _$$d } from "../905/480825";
@@ -54,7 +54,7 @@ export function $$b1({
 }
 export function $$v0() {
   let e = sQ();
-  let t = AF();
+  let t = selectIsCopyExportAllowed();
   let a = v4();
   let s = AC(a);
   let r = "SECTION" === rb();

@@ -8,7 +8,7 @@ import { e6 } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { lx } from "../figma_app/297957";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { useCurrentPlanUser, useIsAdminUser } from "../figma_app/465071";
 import { AccessLevelEnum } from "../905/557142";
@@ -59,7 +59,7 @@ export function $$x2(e) {
         children: e.userName
       }, `name-${e.id}`), p && S ? jsxs(e6, {
         trackingProperties: {
-          trackingDescriptor: _$$c.UPGRADE_SEAT
+          trackingDescriptor: UpgradeAction.UPGRADE_SEAT
         },
         className: yR,
         onClick: () => {

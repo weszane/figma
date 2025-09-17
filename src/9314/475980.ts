@@ -59,7 +59,7 @@ import { dG, ft } from '../figma_app/753501';
 import { DesignGraphElements, Fullscreen, LayoutTabType } from '../figma_app/763686';
 import { parsePxInt } from '../figma_app/783094';
 import { memoizeByArgs } from '../figma_app/815945';
-import { b as _$$b, bL, mc, q7, Q$ } from '../figma_app/860955';
+import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead } from '../figma_app/860955';
 import { generateRecordingKey, useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { e as _$$e, q as _$$q } from '../figma_app/905311';
@@ -827,7 +827,7 @@ function eF({
   let {
     getTriggerProps,
     manager
-  } = _$$b();
+  } = setupMenu();
   let {
     onClick,
     ...d
@@ -879,23 +879,23 @@ function eO({
   onMenuItemClick: l,
   recordingKey: s
 }) {
-  return jsxs(bL, {
+  return jsxs(MenuRootComp, {
     manager: e,
     children: [jsx(_$$d, {
       'aria-label': getI18nString('design_systems.create_style.create_style'),
       'recordingKey': generateRecordingKey(s, 'addButton'),
       ...t,
       'children': jsx(_$$e2, {})
-    }), jsx(mc, {
+    }), jsx(MenuContainerComp, {
       children: og.map(e => {
         let {
           icon,
           label
         } = eK(e);
-        return jsxs(q7, {
+        return jsxs(MenuItemComp, {
           onClick: () => l(e),
           recordingKey: generateRecordingKey(s, `menu-item-${e}`),
-          children: [jsx(Q$, {
+          children: [jsx(MenuItemLead, {
             children: icon
           }), label]
         }, e);

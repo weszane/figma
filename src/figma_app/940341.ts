@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
 import { i as _$$i } from "../905/22844";
 import { n3, VariableStyleId } from "../905/859698";
@@ -64,11 +64,11 @@ export function $$w1() {
         defaultPosition: new Point(stylePreviewShown.rowLeft - N, stylePreviewShown.rowTop),
         onClose: M,
         draggable: "header",
-        children: jsxs(vo, {
-          children: [jsxs(Y9, {
-            children: [jsx(hE, {
+        children: jsxs(DialogContents, {
+          children: [jsxs(DialogHeader, {
+            children: [jsx(DialogTitle, {
               children: renderI18nText("slides.properties_panel.text_style.edit_text_style")
-            }), jsx(jk, {
+            }), jsx(DialogActionStrip, {
               children: jsx(IconButton, {
                 htmlAttributes: {
                   "data-tooltip-type": KindEnum.TEXT,
@@ -80,7 +80,7 @@ export function $$w1() {
                 children: jsx(_$$i, {})
               })
             })]
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             padding: 0,
             children: jsx(_f, {
               type: selectedStyleProperties.styleType,

@@ -24,7 +24,7 @@ import { In } from "../905/672640";
 import { lk } from "../figma_app/109538";
 import { B as _$$B2 } from "../905/380801";
 import { showModalHandler } from "../905/156213";
-import { c as _$$c } from "../905/370443";
+import { UpgradeAction } from "../905/370443";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import W from "lodash-es/mapValues";
@@ -162,7 +162,7 @@ function G() {
         }
       })),
       trackingProperties: {
-        trackingDescriptor: _$$c.ENTERPRISE_PLAN_BANNER_CONTACT_SALES
+        trackingDescriptor: UpgradeAction.ENTERPRISE_PLAN_BANNER_CONTACT_SALES
       },
       children: renderI18nText("universal_upgrade.enterpise_plan_banner.contact_sales")
     })]
@@ -448,7 +448,7 @@ function el({
         onClick: t,
         "data-testid": "plan-information-upgrade-existing",
         trackingProperties: {
-          trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
+          trackingDescriptor: UpgradeAction.UPGRADE_EXISTING_TEAM
         },
         trusted: !0,
         children: renderI18nText("plan_comparison.plans.pro.upgrade_an_existing_team")
