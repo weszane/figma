@@ -2,7 +2,7 @@ import { reportError } from '../905/11';
 import { pluginAPIService } from '../905/3209';
 import { createActionCreator } from '../905/73481';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { Qi } from '../905/172918';
+import { mergePublishedPluginThunk } from '../905/172918';
 import { resolveMessage } from '../905/231762';
 import { c as _$$c } from '../905/289751';
 import { VisualBellActions } from '../905/302958';
@@ -42,7 +42,7 @@ let $$F29 = createOptimistThunk((e, t, {
     data: t
   }) => {
     let r = t.meta;
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: r,
       src: 'initializeUserPublishedPlugins'
     }));
@@ -51,7 +51,7 @@ let $$F29 = createOptimistThunk((e, t, {
     data: t
   }) => {
     let r = t.meta;
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: r,
       src: 'initializeUserPublishedWidgets'
     }));
@@ -114,7 +114,7 @@ let $$G32 = createOptimistThunk(async (e, {
     data
   } = await n;
   let a = data.meta.find(e => e.id === t);
-  a && e.dispatch(Qi({
+  a && e.dispatch(mergePublishedPluginThunk({
     publishedPlugins: [a],
     src: 'getPublishedResource'
   }));
@@ -152,7 +152,7 @@ let $$K18 = createOptimistThunk(async (e, {
     try {
       let e = await pluginAPIService.postPluginsBatch(i, currentUserOrgId);
       let t = e.data?.meta ?? [];
-      debugState.dispatch(Qi({
+      debugState.dispatch(mergePublishedPluginThunk({
         publishedPlugins: t,
         src: 'fetchPublishedPlugins',
         overrideInstallStatus: !0
@@ -175,7 +175,7 @@ let $$Y8 = createOptimistThunk(async (e, {
         org_id: currentUserOrgId
       });
       let t = e.data?.meta ?? [];
-      debugState.dispatch(Qi({
+      debugState.dispatch(mergePublishedPluginThunk({
         publishedPlugins: t,
         src: 'fetchPublishedWidgets',
         overrideInstallStatus: !0
@@ -216,7 +216,7 @@ let $$X26 = createOptimistThunk((e, t, {
     data: t
   }) => {
     let r = [...(await i), ...t.meta];
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: r,
       src: 'getCommunityProfilePlugins'
     }));
@@ -238,7 +238,7 @@ createOptimistThunk((e, t, {
     data: t
   }) => {
     let r = [...(await i), ...t.meta];
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: r,
       src: 'getCommunityProfileWidgets'
     }));
@@ -258,7 +258,7 @@ let $$q7 = createOptimistThunk((e, t, {
     data: t
   }) => {
     let r = t.meta;
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: r,
       src: 'getOrgPublishedPlugins'
     }));
@@ -276,7 +276,7 @@ let $$J14 = createOptimistThunk(async (e, t, {
       orgId: t
     });
     let i = n?.data?.meta || [];
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: i,
       src: 'getOrgPublishedWidgets'
     }));
@@ -587,7 +587,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
       publishedPlugin,
       profile
     } = await Q(pluginId, localFileId, pluginVersion, commentsSetting, categoryId, tags, tagsV2, agreedToTos, orgId, isWidget, playgroundFilePublishType);
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [publishedPlugin],
       src: 'publishPluginVersion'
     }));
@@ -640,7 +640,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
       profile,
       publishedPlugin
     } = await Z(resource, pluginVersion, playgroundFilePublishType);
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [publishedPlugin],
       src: 'updatePublishedPluginRole'
     }));
@@ -693,7 +693,7 @@ let $$eo35 = createOptimistThunk(async (e, {
       needApproval: isResourcePendingPublishing(n),
       isWidget: a
     });
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [n],
       src: 'updatePublishedPluginRole'
     }));
@@ -740,7 +740,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
     data: r
   }) => {
     let n = r.meta;
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [n],
       src: 'updatePublishedPlugin'
     }));
@@ -764,7 +764,7 @@ let $$ed17 = createOptimistThunk((e, {
     data: r
   }) => {
     let n = r.meta;
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [n],
       src: 'unpublishPublishedPlugin'
     }));
@@ -790,7 +790,7 @@ let $$ec15 = createOptimistThunk((e, {
 }, {
   loadingKey: n
 }) => {
-  let i = t => e.dispatch(Qi({
+  let i = t => e.dispatch(mergePublishedPluginThunk({
     publishedPlugins: [t],
     src: 'getResourceVersions',
     overrideInstallStatus: !0
@@ -828,7 +828,7 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
       accepted: [],
       pending: []
     });
-    e.dispatch(Qi({
+    e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [t],
       src: 'setPluginPublisherRole'
     }));

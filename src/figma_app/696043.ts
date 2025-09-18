@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { s as _$$s } from "../905/58247";
-import { gU, RH } from "../figma_app/147952";
+import { addPluginToRecentsThunk, addWidgetToRecentsThunk } from "../figma_app/147952";
 import { isVsCodeEnvironment } from "../905/858738";
 import { M } from "../figma_app/170366";
 import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
@@ -72,13 +72,13 @@ let $$y0 = createOptimistThunk(async (e, {
     let E = s.editorType;
     E?.forEach(r => {
       let n = resolveFrameworkType(r);
-      t === HubTypeEnum.PLUGIN ? e.dispatch(gU({
+      t === HubTypeEnum.PLUGIN ? e.dispatch(addPluginToRecentsThunk({
         storeInRecentsKey: n,
         id: s.id || "",
         version: "",
         isDevelopment: !0,
         currentUserId: getSelectedView()
-      })) : t === HubTypeEnum.WIDGET && e.dispatch(RH({
+      })) : t === HubTypeEnum.WIDGET && e.dispatch(addWidgetToRecentsThunk({
         storeInRecentsKey: n,
         id: s.id || "",
         version: "",

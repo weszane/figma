@@ -188,9 +188,9 @@ import { useLatestRef } from "../figma_app/922077";
 import { PricingOptions } from "../905/237873";
 import { generateUUIDv4 } from "../905/871474";
 import { a as _$$a5 } from "../905/925868";
-import { Qi } from "../905/172918";
+import { mergePublishedPluginThunk } from "../905/172918";
 import { getResourceName } from "../figma_app/777551";
-import { S as _$$S4, $O } from "../figma_app/701107";
+import { ResourceTypeMap, ViewSectionMap } from "../figma_app/701107";
 import { Z as _$$Z2 } from "../905/909123";
 import { Ay as _$$Ay7 } from "../5430/231178";
 import { $ as _$$$3 } from "../5430/953899";
@@ -6109,7 +6109,7 @@ function so() {
   useEffect(() => {
     let e = customHistory.listen(() => {
       let [e, t] = getCommunityPathSegments();
-      _$$S4.hasOwnProperty(e) && (i(i => i.apiResourceType === e && i.resourceId === t ? i : {
+      ResourceTypeMap.hasOwnProperty(e) && (i(i => i.apiResourceType === e && i.resourceId === t ? i : {
         apiResourceType: e,
         resourceId: t
       }), setTimeout(() => window.scrollTo(0, 0), 100));
@@ -6139,14 +6139,14 @@ function so() {
     e && t && u && m && (hasClientMeta(m) ? n(Sb({
       hubFiles: [m],
       src: "resourcePage"
-    })) : n(Qi({
+    })) : n(mergePublishedPluginThunk({
       publishedPlugins: [m],
       src: "resourcePage"
     })), document.title = getResourceName(u) + "\xa0| Figma", document.body.removeAttribute("data-hide"));
   }, [e, t, n, u, m]);
   let [h, x] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
-    x($O.DescriptionView);
+    x(ViewSectionMap.DescriptionView);
   }, [e, t, x]);
   let _ = useRef(null);
   let y = useCallback(() => {

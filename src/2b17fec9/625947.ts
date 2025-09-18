@@ -282,7 +282,7 @@ import { d as _$$d5 } from "../5430/535653";
 import { q as _$$q } from "../1291/18399";
 import { L as _$$L3 } from "../figma_app/520315";
 import { debugState } from "../905/407919";
-import { HQ, aF as _$$aF } from "../figma_app/147952";
+import { syncRecentPluginsThunk, syncRecentWidgetsThunk } from "../figma_app/147952";
 import { RECENT_PLUGINS_FIGJAM, RECENT_WIDGETS_FIGJAM } from "../figma_app/190980";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser, useIsOrgGuestUser } from "../figma_app/465071";
 import { n as _$$n7 } from "../2b17fec9/3836";
@@ -5758,11 +5758,11 @@ function oU() {
 function oF() {
   useEffect(() => {
     function e(e) {
-      e.key === RECENT_PLUGINS_FIGJAM && debugState.dispatch(HQ({
+      e.key === RECENT_PLUGINS_FIGJAM && debugState.dispatch(syncRecentPluginsThunk({
         storeInRecentsKey: FDocumentType.FigJam
       }));
     }
-    debugState.dispatch(HQ({
+    debugState.dispatch(syncRecentPluginsThunk({
       storeInRecentsKey: FDocumentType.FigJam
     }));
     window.addEventListener("storage", e, !1);
@@ -6564,11 +6564,11 @@ function lC() {
 function lT() {
   useEffect(() => {
     function e(e) {
-      e.key === RECENT_WIDGETS_FIGJAM && debugState.dispatch(_$$aF({
+      e.key === RECENT_WIDGETS_FIGJAM && debugState.dispatch(syncRecentWidgetsThunk({
         storeInRecentsKey: FDocumentType.FigJam
       }));
     }
-    debugState.dispatch(_$$aF({
+    debugState.dispatch(syncRecentWidgetsThunk({
       storeInRecentsKey: FDocumentType.FigJam
     }));
     window.addEventListener("storage", e, !1);

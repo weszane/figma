@@ -14,7 +14,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { loadingStatePutLoading, loadingStateDelete } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
-import { Hx } from "../figma_app/147952";
+import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { postUserFlag } from "../905/985254";
 import { B } from "../figma_app/750676";
 import { T as _$$T, _ as _$$_ } from "../905/793009";
@@ -126,7 +126,7 @@ export async function $$U2({
         templateCategory: n.type === _$$n2.HubFile ? n.category : void 0
       }), s) && (t(postUserFlag({
         inserted_figjam_template: !0
-      })), n.type === _$$n2.TeamTemplate && t(_$$D([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(Hx({
+      })), n.type === _$$n2.TeamTemplate && t(_$$D([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(addTemplateToRecentsThunkAction({
         storeInRecentsKey: FDocumentType.FigJam,
         ...j(n)
       })));
@@ -270,7 +270,7 @@ async function W({
     } = n.meta;
     r();
     e(_$$D([template]));
-    e(Hx({
+    e(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       ...t
     }));

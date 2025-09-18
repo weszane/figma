@@ -18,7 +18,7 @@ import { getCurrentVersion, buildCommunityPathById, TransparentGifDataUri } from
 import { buildSearchUrl, defaultSearchOptions } from "../figma_app/640564";
 import { PerfTimer } from "../905/609396";
 import { VisualBellActions } from "../905/302958";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { SortOptions } from "../figma_app/324237";
 import { PF } from "../figma_app/930386";
 import { zj, bT, AS } from "../5430/438185";
@@ -322,7 +322,7 @@ let J = function (e, t) {
       } = r;
       limit && !isNaN(limit) && (s.max_num_results = limit);
       isPreview && (s.limit_associations = !0);
-      return $W.getCommunityLegacyResources(s);
+      return searchAPIHandler.getCommunityLegacyResources(s);
     }(i, n, e), function (e, t, r) {
       let {
         profileLimit
@@ -333,7 +333,7 @@ let J = function (e, t) {
         queryId: t,
         maxNumResults: profileLimit || 50
       };
-      return $W.getHubProfiles(i);
+      return searchAPIHandler.getHubProfiles(i);
     }(i, n, e)]).then(r => {
       "unattributed" !== i && t(pY());
       let n = s.stop();

@@ -7,7 +7,7 @@ import { MT } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { isRecordingEnabled } from "../figma_app/878298";
-import { Vi } from "../figma_app/364284";
+import { isValidWidgetType } from "../figma_app/364284";
 import { K3 } from "../figma_app/678300";
 import { vo } from "../figma_app/164212";
 import { n as _$$n } from "../figma_app/583890";
@@ -207,7 +207,7 @@ export function $$S2(e) {
           e.nextNodeGuid = m.guid;
           f = e.guid;
         }
-        let E = "WIDGET" === m.type && (m.widgetVersionId || m.widgetId && Vi(m.widgetId));
+        let E = "WIDGET" === m.type && (m.widgetVersionId || m.widgetId && isValidWidgetType(m.widgetId));
         let S = $$I0(t.sceneGraph, m) && !t.showImmutableFrameSublayers || E;
         if ("SECTION" === m.type && 1 === m.uiOrderedChildren.length) {
           let e = t.sceneGraph.get(nodeGuid);

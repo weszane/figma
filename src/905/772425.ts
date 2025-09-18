@@ -1,7 +1,7 @@
 import { dN } from "../vendor/291472";
 import { KH } from "../905/81982";
 import { U } from "../figma_app/477548";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 class o {
   constructor(e, t, i, n, r, s, o = {
     list: U.getAtMentions,
@@ -121,7 +121,7 @@ export class $$d1 {
         data: {
           meta
         }
-      } = await $W.getCommunityMentions({
+      } = await searchAPIHandler.getCommunityMentions({
         query: e
       });
       return meta.results.map(e => e.model);

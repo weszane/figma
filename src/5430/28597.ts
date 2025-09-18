@@ -17,7 +17,7 @@ import { M as _$$M } from "../905/722875";
 import { isApplePublisherAccepted, isFigmaPublisherAccepted, getResourceName, getResourceDescription } from "../figma_app/777551";
 import { hasContent, getMainContent, isUIKitLibrary, isPluginResource, isPluginOrWidget, isSiteTemplate, hasHubFile, getResourceType, getPluginOrWidgetContent, getHubFile, isFigmakeTemplate, isMonetizedFigJamTemplate, isSlideTemplate, isWidgetResource, hasResourceType, isCooperTemplateFile } from "../figma_app/427318";
 import { Ay } from "../905/506641";
-import { $O, bK } from "../figma_app/701107";
+import { ViewSectionMap, SCORE_OFFSET } from "../figma_app/701107";
 import { COMMUNITY_WIDTH, COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { getDynamicContentTranslation, normalizeSearchString, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
@@ -1325,7 +1325,7 @@ function tA({
 let tM = _$$y;
 let tO = _$$l;
 function tB(e, t) {
-  if (e.preventDefault(), t === $O.DescriptionView) {
+  if (e.preventDefault(), t === ViewSectionMap.DescriptionView) {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -1334,7 +1334,7 @@ function tB(e, t) {
   }
   let r = document.getElementById(t);
   if (r) {
-    let e = bK;
+    let e = SCORE_OFFSET;
     let t = r.getBoundingClientRect().top + window.scrollY + e;
     window.scrollTo({
       top: t,
@@ -1349,10 +1349,10 @@ function tD({
   let [r, o] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
     let e = () => {
-      let e = document.getElementById($O.CommentsView);
+      let e = document.getElementById(ViewSectionMap.CommentsView);
       if (e) {
         let t = e.getBoundingClientRect().top;
-        fitsInViewer(t, window.innerHeight, window.scrollY) ? o($O.CommentsView) : o($O.DescriptionView);
+        fitsInViewer(t, window.innerHeight, window.scrollY) ? o(ViewSectionMap.CommentsView) : o(ViewSectionMap.DescriptionView);
       }
     };
     window.addEventListener("scroll", e);
@@ -1364,23 +1364,23 @@ function tD({
     className: MW,
     "data-testid": "anchor-tabs",
     children: [jsx("button", {
-      onClick: e => tB(e, $O.DescriptionView),
+      onClick: e => tB(e, ViewSectionMap.DescriptionView),
       children: jsx("div", {
         className: a()(Vj, {
-          [k9]: r === $O.DescriptionView
+          [k9]: r === ViewSectionMap.DescriptionView
         }),
         children: getI18nString("community.resource_page.about")
       })
     }), t && jsx("button", {
-      onClick: e => tB(e, $O.CommentsView),
+      onClick: e => tB(e, ViewSectionMap.CommentsView),
       children: jsx("div", {
         className: a()(Vj, {
-          [k9]: r === $O.CommentsView
+          [k9]: r === ViewSectionMap.CommentsView
         }),
         children: renderI18nText("community.resource_page.comments", {
           numComments: jsx("span", {
             className: a()(p9, {
-              [_$$sB]: r === $O.CommentsView
+              [_$$sB]: r === ViewSectionMap.CommentsView
             }),
             children: e
           })
@@ -1475,9 +1475,9 @@ function tV({
       children: [jsxs("div", {
         className: zu,
         ref: externalCommentScrollRef,
-        id: $O.DescriptionView,
+        id: ViewSectionMap.DescriptionView,
         children: [n, o, a, l, jsx("div", {
-          id: $O.CommentsView,
+          id: ViewSectionMap.CommentsView,
           children: c
         })]
       }), jsxs("div", {
@@ -1506,9 +1506,9 @@ function tW({
       children: jsxs("div", {
         className: zt,
         "data-mobile-view": !0,
-        id: $O.DescriptionView,
+        id: ViewSectionMap.DescriptionView,
         children: [i, n, c, o, a, jsx("div", {
-          id: $O.CommentsView,
+          id: ViewSectionMap.CommentsView,
           children: l
         }), d, u]
       })
@@ -1534,7 +1534,7 @@ function tG({
       "data-mobile-view": !0,
       ref: externalCommentScrollRef,
       children: [t, t && jsx(ey, {}), e, a, r, n, jsx("div", {
-        id: $O.CommentsView,
+        id: ViewSectionMap.CommentsView,
         children: o
       }), l, c]
     })

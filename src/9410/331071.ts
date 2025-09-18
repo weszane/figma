@@ -23,7 +23,7 @@ import { g as _$$g3 } from '../905/125190';
 import { J as _$$J5 } from '../905/125993';
 import { KindEnum } from '../905/129884';
 import { _ as _$$_5 } from '../905/136246';
-import { $W } from '../905/144933';
+import { searchAPIHandler } from '../905/144933';
 import { e as _$$e2 } from '../905/149844';
 import { t as _$$t3 } from '../905/150656';
 import { hideModalHandler, popModalStack, showModalHandler, updateModal } from '../905/156213';
@@ -10037,7 +10037,7 @@ function dd({
 }
 let du = dc;
 let dy = liveStoreInstance.Query({
-  fetch: async e => (await $W.getExtensions(e)).data.meta,
+  fetch: async e => (await searchAPIHandler.getExtensions(e)).data.meta,
   enabled: () => !getFeatureFlags().ext_extended_plugin_editor_types,
   output: ({
     data: e
@@ -10056,7 +10056,7 @@ let db = liveStoreInstance.Query({
       include_content: !0,
       consolidate_org_search: !0
     };
-    return (await $W.getResources(t)).data.meta;
+    return (await searchAPIHandler.getResources(t)).data.meta;
   },
   enabled: () => !!getFeatureFlags().ext_extended_plugin_editor_types,
   output: ({

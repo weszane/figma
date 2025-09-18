@@ -7,7 +7,7 @@ import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { qC } from "../figma_app/972736";
 import { hideSpecificModal, showModal } from "../905/156213";
-import { ay } from "../figma_app/147952";
+import { addWhiteboardToolToRecentsAction } from "../figma_app/147952";
 import { BI } from "../figma_app/546509";
 import { M as _$$M } from "../9410/228122";
 import { kg } from "../9410/139332";
@@ -138,7 +138,7 @@ function B(e) {
   let h = !!AE(e.resourceType);
   let y = t && isSupportedBlockType(t) && h;
   let E = () => {
-    y && t && a(ay({
+    y && t && a(addWhiteboardToolToRecentsAction({
       currentUserId: d,
       storeInRecentsKey: FDocumentType.FigJam,
       item: {

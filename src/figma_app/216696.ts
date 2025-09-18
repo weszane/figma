@@ -1,7 +1,7 @@
 import { createActionCreator } from "../905/73481";
 import { logError } from "../905/714362";
 import { Sb } from "../905/359847";
-import { Qi } from "../905/172918";
+import { mergePublishedPluginThunk } from "../905/172918";
 import { createOptimistThunk } from "../905/350402";
 import { getResourceTypeV2 } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
@@ -79,7 +79,7 @@ function m(e, t) {
     hubFiles: r,
     src: "fetchShelvesForShelfType"
   }));
-  e(Qi({
+  e(mergePublishedPluginThunk({
     publishedPlugins: [...n, ...i],
     src: "fetchShelvesForShelfType"
   }));

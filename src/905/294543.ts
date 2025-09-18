@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { createOptimistThunk } from "../905/350402";
-import { gU } from "../figma_app/147952";
+import { addPluginToRecentsThunk } from "../figma_app/147952";
 import { cW } from "../figma_app/844435";
 import { trackFileEvent } from "../figma_app/314264";
 import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
@@ -25,7 +25,7 @@ export let $$A0 = createOptimistThunk((e, t) => {
   } = t;
   let a = getUserOrAnonymousId(i);
   let s = _(codeLanguage);
-  "published-plugin" === s.type && plugin && !hasLocalFileId(plugin) && e.dispatch(gU({
+  "published-plugin" === s.type && plugin && !hasLocalFileId(plugin) && e.dispatch(addPluginToRecentsThunk({
     storeInRecentsKey: FDocumentType.Handoff,
     id: plugin.plugin_id,
     version: plugin.version,
@@ -49,7 +49,7 @@ export function $$y1() {
         localExtensionsByFileId: void 0,
         publishedExtensions: t
       });
-      e && !hasLocalFileId(e) && i(gU({
+      e && !hasLocalFileId(e) && i(addPluginToRecentsThunk({
         storeInRecentsKey: FDocumentType.Handoff,
         id: e.plugin_id,
         version: e.version,

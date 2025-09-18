@@ -19,7 +19,7 @@ import { fileEntityDataMapper } from "../905/943101";
 import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
 import { mapRecentFilesAndRepos, filterValidRecentFiles } from "../figma_app/349248";
 import { Lk, PublicModelType } from "../figma_app/162807";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { GQ, lJ } from "../905/50159";
 import { bx, Uz as _$$Uz, SL, Vg, g4, ZF, Tm, qc, Rt, i3 } from "../figma_app/312949";
 import { A as _$$A } from "../1617/586892";
@@ -163,7 +163,7 @@ export function $$D0(e) {
   let u = useCallback(() => {
     query && (d(Dy({
       entryPoint: "community:universal_posting"
-    })), setSearchResults(null), $W.getFullResults({
+    })), setSearchResults(null), searchAPIHandler.getFullResults({
       query,
       desc: !0,
       sort: Lk.RELEVANCY,

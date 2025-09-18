@@ -13,7 +13,7 @@ import { BE, YW } from "../figma_app/844435";
 import { s7 } from "../905/551193";
 import { Rm } from "../figma_app/86989";
 import { x as _$$x } from "../905/239551";
-import { Vi } from "../figma_app/364284";
+import { isValidWidgetType } from "../figma_app/364284";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { canRunPluginWithinOrg, formatPluginName, filterResourcesByMatch, getCurrentPluginVersionId } from "../figma_app/300692";
@@ -263,7 +263,7 @@ export function $$M1({
     pluginID,
     widgetID
   } = e;
-  if (Vi(pluginID)) return [];
+  if (isValidWidgetType(pluginID)) return [];
   let o = !!e;
   if (o) {
     let {

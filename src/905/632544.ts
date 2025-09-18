@@ -1,8 +1,16 @@
-export var $$n0;
-(e => {
-  e.CODEGEN = "codegen";
-  e.INSPECT = "inspect";
-  e.TEXTREVIEW = "textreview";
-  e.VSCODE = "vscode";
-})($$n0 || ($$n0 = {}));
-export const h = $$n0;
+/**
+ * Enum representing different modes.
+ * Original variable: $$n0
+ */
+export enum EditorTargetMode {
+  CODEGEN = 'codegen',
+  INSPECT = 'inspect',
+  TEXTREVIEW = 'textreview',
+  VSCODE = 'vscode',
+}
+
+/**
+ * Exported alias for Mode enum.
+ * Original export: h
+ */
+export const h = EditorTargetMode

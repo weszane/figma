@@ -2,7 +2,7 @@ import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { FAccessRequestStatusType } from "../figma_app/191312";
 import { SortingCriteria } from "../figma_app/162807";
-import { Sm } from "../905/144933";
+import { XhrRetryPolicy } from "../905/144933";
 export let $$l0 = new class {
   constructor() {
     this.FolderSearchSchemaValidator = createNoOpValidator();
@@ -23,7 +23,7 @@ export let $$l0 = new class {
         max_num_results: maxNumResults,
         team_id: teamId
       }), {
-        retryStrategyOverride: Sm
+        retryStrategyOverride: XhrRetryPolicy
       }));
     };
   }

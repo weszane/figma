@@ -8,7 +8,7 @@ import { debugState } from "../905/407919";
 import { getResourceDataOrFallback } from "../905/723791";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { Vg } from "../figma_app/147952";
+import { syncFetchedVersionsThunk } from "../figma_app/147952";
 import { nl, cW, ZT } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { RecentlyUsedActionsView } from "../figma_app/43951";
@@ -29,11 +29,11 @@ export function $$S1() {
   let A = [];
   let x = [];
   let N = useDebouncedCallback(() => {
-    A.length > 0 && v(Vg({
+    A.length > 0 && v(syncFetchedVersionsThunk({
       resourceType: HubTypeEnum.PLUGIN,
       resourceIds: A
     }));
-    x.length > 0 && v(Vg({
+    x.length > 0 && v(syncFetchedVersionsThunk({
       resourceType: HubTypeEnum.WIDGET,
       resourceIds: x
     }));

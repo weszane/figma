@@ -13,7 +13,7 @@ import { selectEditorResource } from "../figma_app/773663";
 import { w2, eK } from "../905/977218";
 import { HubEventType } from "../figma_app/350203";
 import { Ei } from "../905/574958";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { Jm } from "../figma_app/387599";
 function v(e) {
   return 0 === e.length ? [] : e.map(e => e.model);
@@ -89,7 +89,7 @@ let E = async (e, t, r, s, i) => {
       include_content: i,
       resource_editor_type: mapEditorToType(t.editor_type)
     };
-    let x = $W.getResources(h);
+    let x = searchAPIHandler.getResources(h);
     N(s, r);
     return await x;
   } catch (e) {
@@ -110,7 +110,7 @@ let R = async (e, t, r, s) => {
   let a = null;
   i.start();
   try {
-    let i = await Promise.all([E(ResourceTypes.SearchResourceTypes.MIXED, e, t, s), $W.getHubProfiles({
+    let i = await Promise.all([E(ResourceTypes.SearchResourceTypes.MIXED, e, t, s), searchAPIHandler.getHubProfiles({
       query: e.query,
       sessionId: t,
       queryId: r,

@@ -18,7 +18,7 @@ import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { l0 } from "../figma_app/610446";
 import { um, E$, ez } from "../figma_app/835718";
-import { Ux } from "../figma_app/864246";
+import { ClusterEventType } from "../figma_app/864246";
 let A = e => ({
   ...e,
   width: e.w,
@@ -56,7 +56,7 @@ export function $$x1() {
   return {
     clusterCanvasSelection: () => {
       if (!Fullscreen) return;
-      let n = new PerfTimer(Ux.TIME_TAKEN_TO_COMPLETE, {});
+      let n = new PerfTimer(ClusterEventType.TIME_TAKEN_TO_COMPLETE, {});
       n.start();
       N(e => !e);
       let s = Fullscreen.getSelectionBounds();
@@ -93,7 +93,7 @@ export function $$x1() {
         Sprig("track", l0);
         N(!1);
         let g = n.stop();
-        g && C(Ux.TIME_TAKEN_TO_COMPLETE, {
+        g && C(ClusterEventType.TIME_TAKEN_TO_COMPLETE, {
           elapsed_ms: g
         }, {
           forwardToDatadog: !0

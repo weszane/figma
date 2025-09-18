@@ -12,7 +12,7 @@ import { h as _$$h } from "../figma_app/198885";
 import { k1, vx } from "../905/91038";
 import { kb } from "../figma_app/502247";
 import { NO_TEAM, LIBRARY_PREFERENCES_MODAL } from "../figma_app/633080";
-import { $W, yX, YQ as _$$YQ } from "../905/144933";
+import { searchAPIHandler, mapVariableToWorkflow, createVariableResConfig as _$$YQ } from "../905/144933";
 var n;
 let A = getFileKey();
 function y(e, t, i) {
@@ -81,7 +81,7 @@ export function $$v2() {
     }) => {
       let r = Date.now();
       await kb.promise;
-      let a = await $W.getLibraryAssets({
+      let a = await searchAPIHandler.getLibraryAssets({
         query: e,
         fv: t || 0,
         orgId: i || void 0,
@@ -105,7 +105,7 @@ export function $$v2() {
         components: y(e.components, e.num_components_by_file, i),
         stateGroups: y(e.state_groups, e.num_state_groups_by_file, i),
         styles: y(e.styles, e.num_styles_by_file, i),
-        variables: y(e.variables ? e.variables.map(e => yX(e)) : [], e.num_variables_by_file ?? {}, i),
+        variables: y(e.variables ? e.variables.map(e => mapVariableToWorkflow(e)) : [], e.num_variables_by_file ?? {}, i),
         variableSets: y(e.variable_sets ? e.variable_sets.map(e => _$$YQ(e)) : [], e.num_variable_sets_by_file ?? {}, i)
       };
     }
@@ -119,7 +119,7 @@ export function $$v2() {
     }) => {
       let r = Date.now();
       await kb.promise;
-      let a = await $W.getLibraryAssetsByLibraryKey({
+      let a = await searchAPIHandler.getLibraryAssetsByLibraryKey({
         query: e,
         fv: t || 0,
         orgId: i || void 0,
@@ -140,7 +140,7 @@ export function $$v2() {
       components: b(e.components, e.num_components_by_library_key),
       stateGroups: b(e.state_groups, e.num_state_groups_by_library_key),
       styles: b(e.styles, e.num_styles_by_library_key),
-      variables: b(e.variables ? e.variables.map(e => yX(e)) : [], e.num_variables_by_library_key ?? {}),
+      variables: b(e.variables ? e.variables.map(e => mapVariableToWorkflow(e)) : [], e.num_variables_by_library_key ?? {}),
       variableSets: b(e.variable_sets ? e.variable_sets.map(e => _$$YQ(e)) : [], e.num_variable_sets_by_library_key ?? {})
     })
   });

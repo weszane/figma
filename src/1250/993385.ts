@@ -3,10 +3,10 @@ import { hasContent, isCooperTemplateAsset } from "../figma_app/427318";
 import { bj } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 if (443 == require.j) {}
 export let $$d0 = liveStoreInstance.Query({
-  fetch: async e => (await $W.getResources(e)).data.meta.results
+  fetch: async e => (await searchAPIHandler.getResources(e)).data.meta.results
 });
 export function $$c1(e) {
   let t = new Set();

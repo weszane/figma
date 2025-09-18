@@ -20,7 +20,7 @@ import { PrePurchaseUserSelectorModal } from '../905/750915'
 import { FreemiumApiPreCheckoutModal, ModalType } from '../905/837980'
 import { getCommunityResourcePayment } from '../figma_app/4253'
 import { hasClientMeta, hasFreemiumCode, hasMonetizedResourceMetadata, isPlugin, isThirdPartyMonetized, isWidget } from '../figma_app/45218'
-import { fR } from '../figma_app/147952'
+import { addResourceToRecentsByEditorType } from '../figma_app/147952'
 import { isMigratingPlugin, manifestContainsWidget } from '../figma_app/155287'
 import { getPluginMetadata, getPluginVersion } from '../figma_app/300692'
 import { mapResourceType } from '../figma_app/471982'
@@ -37,7 +37,7 @@ function P(e, t, r, n) {
         resource: t,
         onSuccess: () => {
           i((r) => {
-            (isPlugin(t) || isWidget(t)) && r(fR(t, e.id))
+            (isPlugin(t) || isWidget(t)) && r(addResourceToRecentsByEditorType(t, e.id))
           })
           r && r()
         },

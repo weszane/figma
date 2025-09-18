@@ -65,7 +65,7 @@ import { deepEqual } from '../905/382883';
 import { e as _$$e } from '../905/383776';
 import { P as _$$P4 } from '../905/392438';
 import { pB } from '../905/395919';
-import { k as _$$k3 } from '../905/403797';
+import { WidgetTypes } from '../905/403797';
 import { yZ } from '../905/407352';
 import { debugState } from '../905/407919';
 import { browserCapabilities } from '../905/409121';
@@ -239,7 +239,7 @@ import { PE } from '../figma_app/251115';
 import { Z1 } from '../figma_app/253220';
 import { DialogBody, DialogHiddenTitle, DialogTitle, DialogContents, DialogHeader } from '../figma_app/272243';
 import { rgbToNormalized } from '../figma_app/273493';
-import { Rm } from '../figma_app/274217';
+import { handlePreviewTracking } from '../figma_app/274217';
 import { sg as _$$sg } from '../figma_app/276332';
 import { F as _$$F2 } from '../figma_app/284426';
 import { useSubscription } from '../figma_app/288654';
@@ -3214,7 +3214,7 @@ let ns = class e extends PureComponent {
     };
   }
   selectedEmbedOrLinkPreviewHasValidUrl() {
-    return this.props.widgetSelectionInfo?.pluginID === _$$k3.EMBED_WIDGET && this.props.embedData && (this.props.embedData.url || this.props.embedData.srcUrl) || this.props.widgetSelectionInfo?.pluginID === _$$k3.LINK_PREVIEW_WIDGET && this.props.linkPreviewData && this.props.linkPreviewData.url;
+    return this.props.widgetSelectionInfo?.pluginID === WidgetTypes.EMBED_WIDGET && this.props.embedData && (this.props.embedData.url || this.props.embedData.srcUrl) || this.props.widgetSelectionInfo?.pluginID === WidgetTypes.LINK_PREVIEW_WIDGET && this.props.linkPreviewData && this.props.linkPreviewData.url;
   }
   isFigjam() {
     return this.props.selectedView.view === 'fullscreen' && this.props.selectedView.editorType === FEditorType.Whiteboard;
@@ -3443,7 +3443,7 @@ let ns = class e extends PureComponent {
         !function (e, t) {
           let i = decodeURIComponent(t);
           copyTextToClipboard(i);
-          Rm(LinkMetadataEvent.COPY_LINK, i);
+          handlePreviewTracking(LinkMetadataEvent.COPY_LINK, i);
           e(VisualBellActions.enqueue({
             type: 'copy-preview',
             message: getI18nString('visual_bell.copy_hyperlink', {
@@ -3456,7 +3456,7 @@ let ns = class e extends PureComponent {
     };
   }
   getMaybeEmbedDeactivateMenu() {
-    return this.props.widgetSelectionInfo?.pluginID === _$$k3.EMBED_WIDGET && AppStateTsApi && this.props.widgetSelectionInfo.widgetID === AppStateTsApi.embedUiState().activeEmbedData.getCopy().embedNodeId ? {
+    return this.props.widgetSelectionInfo?.pluginID === WidgetTypes.EMBED_WIDGET && AppStateTsApi && this.props.widgetSelectionInfo.widgetID === AppStateTsApi.embedUiState().activeEmbedData.getCopy().embedNodeId ? {
       name: 'labeled-menu-item',
       args: {
         label: 'Deactivate preview'

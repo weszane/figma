@@ -13,7 +13,7 @@ import { AuthError, InternalError, RequestError } from '../905/845428';
 import { loadAndReconcileResources } from '../905/866640';
 import { isDevEnvironment } from '../figma_app/169182';
 import { getWidgetVersionData } from '../figma_app/300692';
-import { Vi } from '../figma_app/364284';
+import { isValidWidgetType } from '../figma_app/364284';
 import { assert } from '../figma_app/465776';
 import { gH } from '../figma_app/985200';
 
@@ -620,7 +620,7 @@ export class WidgetManager {
    * Is this a first-party widget? (isFirstPartyWidget)
    */
   isFirstPartyWidget(): boolean {
-    return Vi(this.pluginId);
+    return isValidWidgetType(this.pluginId);
   }
 
   /**

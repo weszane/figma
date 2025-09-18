@@ -13,7 +13,7 @@ import { isViewerModeResource, getCurrentVersion, fitsInViewer } from "../figma_
 import { isTntSavingEnabled } from "../figma_app/275462";
 import { getResourceName } from "../figma_app/777551";
 import { getPluginOrWidgetContent, getResourceType, isOrgPrivatePluginOrWidget, hasContent, isPluginOrWidget, isPluginResource, isWidgetResource, getMainContent, hasResourceType, getTemplateType, isFigmakeTemplate } from "../figma_app/427318";
-import { $O, bK } from "../figma_app/701107";
+import { ViewSectionMap, SCORE_OFFSET } from "../figma_app/701107";
 import { getOrgAdminAccess, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "../figma_app/45218";
 import { e0 } from "../905/696396";
@@ -1147,10 +1147,10 @@ function eV({
   let [r, n] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
     let e = () => {
-      let e = document.getElementById($O.CommentsView);
+      let e = document.getElementById(ViewSectionMap.CommentsView);
       if (e) {
         let t = e.getBoundingClientRect().top;
-        fitsInViewer(t, window.innerHeight, window.scrollY) ? n($O.CommentsView) : n($O.DescriptionView);
+        fitsInViewer(t, window.innerHeight, window.scrollY) ? n(ViewSectionMap.CommentsView) : n(ViewSectionMap.DescriptionView);
       }
     };
     window.addEventListener("scroll", e);
@@ -1159,7 +1159,7 @@ function eV({
     };
   }, [n]);
   let a = (e, t) => {
-    if (e.preventDefault(), t === $O.DescriptionView) {
+    if (e.preventDefault(), t === ViewSectionMap.DescriptionView) {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -1168,7 +1168,7 @@ function eV({
     }
     let r = document.getElementById(t);
     if (r) {
-      let e = bK;
+      let e = SCORE_OFFSET;
       let t = r.getBoundingClientRect().top + window.scrollY + e;
       window.scrollTo({
         top: t,
@@ -1179,23 +1179,23 @@ function eV({
   return jsxs("div", {
     className: dD,
     children: [jsx("button", {
-      onClick: e => a(e, $O.DescriptionView),
+      onClick: e => a(e, ViewSectionMap.DescriptionView),
       children: jsx("div", {
         className: l()(_$$qY, {
-          [kO]: r === $O.DescriptionView
+          [kO]: r === ViewSectionMap.DescriptionView
         }),
         children: getI18nString("community.resource_page.about")
       })
     }), e && jsx("button", {
-      onClick: e => a(e, $O.CommentsView),
+      onClick: e => a(e, ViewSectionMap.CommentsView),
       children: jsx("div", {
         className: l()(_$$qY, {
-          [kO]: r === $O.CommentsView
+          [kO]: r === ViewSectionMap.CommentsView
         }),
         children: renderI18nText("community.resource_page.comments", {
           numComments: jsx("span", {
             className: l()(p9, {
-              [sB]: r === $O.CommentsView
+              [sB]: r === ViewSectionMap.CommentsView
             }),
             children: t
           })

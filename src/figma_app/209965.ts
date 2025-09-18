@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
-import { Aq } from "../figma_app/274571";
+import { formatSummaryText } from "../figma_app/274571";
 export let $$n0;
 class l {
   getSummaryAsClipboardText(e) {
@@ -14,7 +14,7 @@ class l {
     } catch (e) {
       reportError(_$$e.AI_PRODUCTIVITY, Error(`Could not parse summary data, error: ${e}`));
     }
-    return Aq(t, l);
+    return formatSummaryText(t, l);
   }
 }
 export function $$d1() {

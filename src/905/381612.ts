@@ -9,7 +9,7 @@ import { W9, b6 } from "../figma_app/559491";
 import { PI } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
-import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "../figma_app/147952";
+import { setRecentTemplatesAction, addWidgetsToRecentsAction, setRecentWidgetsAction, removeRecentlyUsedWidgetAction, syncRecentWidgetsAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, setRecentPluginsAction, removeRecentlyUsedPluginAction, syncRecentPluginsAction, addFetchedPluginVersionAction, addTemplateToRecentsWithUserIdThunk, addFaceStampToRecentsAction, setRecentFaceStampsAction, addWhiteboardToolToRecentsAction, setRecentWhiteboardToolsAction } from "../figma_app/147952";
 import { MF } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
@@ -78,7 +78,7 @@ let T = createOptimistThunk(async (e, t, {
     let i = new Set();
     for (let e of c) i.add(e);
     let n = s.filter(e => e.type === ITemplateType.TeamTemplate ? !m && !_.has(e.key) : !i.has(e.id));
-    e.dispatch(nM({
+    e.dispatch(setRecentTemplatesAction({
       storeInRecentsKey: t.key,
       recentTemplates: n
     }));
@@ -260,7 +260,7 @@ let $$H0 = HY({
     return e;
   },
   widgets: function (e = L, t) {
-    if (QN.matches(t)) {
+    if (addWidgetsToRecentsAction.matches(t)) {
       let {
         storeInRecentsKey
       } = t.payload;
@@ -278,11 +278,11 @@ let $$H0 = HY({
         [t.payload.storeInRecentsKey]: r
       };
     }
-    if (Vu.matches(t)) return {
+    if (setRecentWidgetsAction.matches(t)) return {
       ...e,
       [t.payload.storeInRecentsKey]: t.payload.recentResources
     };
-    if (Kq.matches(t)) {
+    if (removeRecentlyUsedWidgetAction.matches(t)) {
       let {
         resourceId,
         storeInRecentsKey
@@ -293,10 +293,10 @@ let $$H0 = HY({
         [storeInRecentsKey]: r
       };
     }
-    return jS.matches(t) ? {
+    return syncRecentWidgetsAction.matches(t) ? {
       ...e,
       [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.WIDGET)
-    } : f0.matches(t) ? {
+    } : addFetchedWidgetVersionAction.matches(t) ? {
       ...e,
       fetchedResources: {
         ...e.fetchedResources,
@@ -308,7 +308,7 @@ let $$H0 = HY({
     } : e;
   },
   plugins: function (e = F, t) {
-    if (jX.matches(t)) {
+    if (addPluginToRecentsAction.matches(t)) {
       let {
         storeInRecentsKey
       } = t.payload;
@@ -326,11 +326,11 @@ let $$H0 = HY({
         [t.payload.storeInRecentsKey]: r
       };
     }
-    if (Ks.matches(t)) return {
+    if (setRecentPluginsAction.matches(t)) return {
       ...e,
       [t.payload.storeInRecentsKey]: t.payload.recentResources
     };
-    if (lD.matches(t)) {
+    if (removeRecentlyUsedPluginAction.matches(t)) {
       let {
         resourceId,
         storeInRecentsKey
@@ -341,10 +341,10 @@ let $$H0 = HY({
         [storeInRecentsKey]: r
       };
     }
-    return WR.matches(t) ? t.payload.storeInRecentsKey === FDocumentType.Design ? e : {
+    return syncRecentPluginsAction.matches(t) ? t.payload.storeInRecentsKey === FDocumentType.Design ? e : {
       ...e,
       [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
-    } : cu.matches(t) ? {
+    } : addFetchedPluginVersionAction.matches(t) ? {
       ...e,
       fetchedResources: {
         ...e.fetchedResources,
@@ -356,7 +356,7 @@ let $$H0 = HY({
     } : e;
   },
   templates: function (e = M, t) {
-    if (pj.matches(t)) {
+    if (addTemplateToRecentsWithUserIdThunk.matches(t)) {
       let i;
       let {
         storeInRecentsKey
@@ -414,13 +414,13 @@ let $$H0 = HY({
         [t.payload.storeInRecentsKey]: h
       };
     }
-    return nM.matches(t) ? {
+    return setRecentTemplatesAction.matches(t) ? {
       ...e,
       [t.payload.storeInRecentsKey]: t.payload.recentTemplates
     } : e;
   },
   faceStamps: function (e = j, t) {
-    if (F9.matches(t)) {
+    if (addFaceStampToRecentsAction.matches(t)) {
       if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw Error("Recently used facestamps currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.user.id === t.payload.item.user.id);
       let a = [{
@@ -440,13 +440,13 @@ let $$H0 = HY({
         [t.payload.storeInRecentsKey]: a
       };
     }
-    return v8.matches(t) ? {
+    return setRecentFaceStampsAction.matches(t) ? {
       ...e,
       [t.payload.storeInRecentsKey]: t.payload.recentFaceStamps
     } : e;
   },
   whiteboardTools: function (e = U, t) {
-    if (ay.matches(t)) {
+    if (addWhiteboardToolToRecentsAction.matches(t)) {
       if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw Error("Recently used whiteboard tools currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.id === t.payload.item.id);
       let a = [{
@@ -465,7 +465,7 @@ let $$H0 = HY({
         [t.payload.storeInRecentsKey]: a
       };
     }
-    return KA.matches(t) ? {
+    return setRecentWhiteboardToolsAction.matches(t) ? {
       ...e,
       [t.payload.storeInRecentsKey]: t.payload.recentWhiteboardTools
     } : e;

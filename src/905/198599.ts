@@ -27,7 +27,7 @@ import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { h as _$$h } from "../figma_app/198885";
 import { vx, t_ } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { r6 } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
@@ -232,7 +232,7 @@ async function K(e, t, i) {
   let a = await yt(e.imageFile);
   let o = m1(new Point(a.width, a.height));
   let l = await SW(a, o, e.imageFile);
-  return (await $W.postComponentsFromImage(l, {
+  return (await searchAPIHandler.postComponentsFromImage(l, {
     openFileKey: e.openFile?.key || "",
     searchSessionId: t || "",
     queryId: i,
@@ -250,7 +250,7 @@ async function Y(e, t, i) {
     usedProductComponentsOnPage,
     usedProductComponentsFromUnsubscribedLibrary
   } = await cu(debugState.getState(), YG.subscribedLibraryKeys, e.openFile?.libraryKey ? _$$l(e.openFile.libraryKey) : _$$l(""));
-  return (await $W.postComponentsFromImage({
+  return (await searchAPIHandler.postComponentsFromImage({
     type: "image",
     value: n
   }, {

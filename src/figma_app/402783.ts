@@ -15,14 +15,14 @@ import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { zp } from "../figma_app/847014";
-import { Gw, WN } from "../figma_app/274571";
+import { setSummarizedAt, setSummaryItems } from "../figma_app/274571";
 import { Z } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/347702";
 import { AM } from "../figma_app/610446";
 import { tE, ez, xQ, E$, um } from "../figma_app/835718";
-import { mr, sh } from "../figma_app/864246";
+import { AiSummaryEventType, getJsonStringLength } from "../figma_app/864246";
 import { b7 } from "../figma_app/101849";
 class w {
   static generateLocalRequestId() {
@@ -33,7 +33,7 @@ let O = D((e, t, r) => {
   let n = permissionScopeHandler.user("insert-ai-summary-node", () => Fullscreen.insertAISummaryInCanvas(t, r));
   let s = e.get(n);
   s && (permissionScopeHandler.user("set-ai-summary-timestamp", () => {
-    Gw(s, new Date());
+    setSummarizedAt(s, new Date());
   }), Fullscreen.triggerAction("commit", {}));
   return s;
 });
@@ -107,7 +107,7 @@ async function R({
       let t = F % 5 == 0;
       P || (P = await M());
       t && permissionScopeHandler.system("stream-ai-summary", () => {
-        P && WN(P, v);
+        P && setSummaryItems(P, v);
       });
       F++;
     }
@@ -116,10 +116,10 @@ async function R({
     return;
   }
   if (permissionScopeHandler.system("stream-ai-summary", () => {
-    v && P && WN(P, v);
+    v && P && setSummaryItems(P, v);
   }), v) {
     let e = _.stop();
-    e && trackEventAnalytics(mr.TIME_TAKEN_TO_COMPLETE, {
+    e && trackEventAnalytics(AiSummaryEventType.TIME_TAKEN_TO_COMPLETE, {
       elapsed_ms: e
     }, {
       forwardToDatadog: !0
@@ -141,8 +141,8 @@ export function $$L0(e, t = !0, r) {
   let g = function () {
     let e = trackFileEventWithUser();
     return useCallback((t, r, n) => {
-      let i = sh(r);
-      e(mr.REQUEST, {
+      let i = getJsonStringLength(r);
+      e(AiSummaryEventType.REQUEST, {
         local_summary_id: n,
         num_characters_input: i,
         nodes_summarized: t
@@ -159,12 +159,12 @@ export function $$L0(e, t = !0, r) {
         num_themes_output: r.filter(e => "h2" === e.type).length,
         num_supporting_points_output: r.filter(e => "li" === e.type).length
       };
-      e(mr.CREATE, i);
+      e(AiSummaryEventType.CREATE, i);
     }, [e]);
   }();
   return {
     summarizeCanvasSelection: async () => {
-      let n = new PerfTimer(mr.TIME_TAKEN_TO_COMPLETE, {});
+      let n = new PerfTimer(AiSummaryEventType.TIME_TAKEN_TO_COMPLETE, {});
       n.start();
       let {
         v,

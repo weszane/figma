@@ -11,7 +11,7 @@ import { getCodegenLanguagePreference } from "../905/515076";
 import { createOptimistThunk } from "../905/350402";
 import { W9 } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
-import { TN } from "../figma_app/147952";
+import { fetchAndSyncVersions } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
@@ -74,7 +74,7 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
     });
     return;
   }
-  let $ = (await TN(e, {
+  let $ = (await fetchAndSyncVersions(e, {
     resourceType: HubTypeEnum.PLUGIN,
     resourceIds: [tryPluginId]
   }))[tryPluginId];

@@ -17,7 +17,7 @@ import { Hb, tH as _$$tH, H4 } from "../905/751457";
 import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { oQ } from "../figma_app/332085";
 import { PQ, sx } from "../figma_app/91703";
-import { HQ, gr, vZ, aF } from "../figma_app/147952";
+import { syncRecentPluginsThunk, syncRecentFaceStampsThunk, syncRecentWhiteboardToolsThunk, syncRecentWidgetsThunk } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
 import { TrackingProvider, wrapWithTracking } from "../figma_app/831799";
 import { useMappedEditorTypeA } from "../905/808775";
@@ -1112,15 +1112,15 @@ export function $$t80({
   let Y = useMappedEditorTypeA();
   useEffect(() => {
     if (Y) {
-      i(HQ({
+      i(syncRecentPluginsThunk({
         storeInRecentsKey: Y
       }));
-      h === FEditorType.Whiteboard && (i(gr({
+      h === FEditorType.Whiteboard && (i(syncRecentFaceStampsThunk({
         storeInRecentsKey: Y
-      })), i(vZ({
+      })), i(syncRecentWhiteboardToolsThunk({
         storeInRecentsKey: Y
       })));
-      h !== FEditorType.DevHandoff && i(aF({
+      h !== FEditorType.DevHandoff && i(syncRecentWidgetsThunk({
         storeInRecentsKey: Y
       }));
       window.addEventListener("storage", e, !1);
@@ -1133,23 +1133,23 @@ export function $$t80({
         case RECENT_PLUGINS_FIGMA_DESIGN:
         case RECENT_PLUGINS_FIGJAM:
         case RECENT_PLUGINS_SLIDES:
-          i(HQ({
+          i(syncRecentPluginsThunk({
             storeInRecentsKey: Y
           }));
           break;
         case RECENT_WIDGETS_FIGMA_DESIGN:
         case RECENT_WIDGETS_FIGJAM:
-          i(aF({
+          i(syncRecentWidgetsThunk({
             storeInRecentsKey: Y
           }));
           break;
         case RECENT_FACE_STAMPS_FIGJAM:
-          i(gr({
+          i(syncRecentFaceStampsThunk({
             storeInRecentsKey: Y
           }));
           break;
         case RECENT_WHITEBOARD_TOOLS_FIGJAM:
-          i(vZ({
+          i(syncRecentWhiteboardToolsThunk({
             storeInRecentsKey: Y
           }));
       }

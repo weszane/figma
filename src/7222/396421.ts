@@ -28,7 +28,7 @@ import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
 import { Lk, PublicModelType } from "../figma_app/162807";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { uW } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
 import { jY } from "../figma_app/21029";
@@ -304,7 +304,7 @@ export function $$el8(e) {
   useEffect(() => {
     l && (d(!0), t());
     async function t() {
-      a((await $W.getFullResults({
+      a((await searchAPIHandler.getFullResults({
         query: l,
         desc: !0,
         sort: Lk.RELEVANCY,

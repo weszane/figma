@@ -266,7 +266,7 @@ import { zs } from '../figma_app/106634';
 import { sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
 import { Ed } from '../figma_app/139113';
 import { h8 } from '../figma_app/144974';
-import { ay as _$$ay, RH } from '../figma_app/147952';
+import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../figma_app/147952';
 import { H as _$$H } from '../figma_app/147959';
 import { IJ } from '../figma_app/149304';
 import { Dc as _$$Dc, hV } from '../figma_app/151766';
@@ -324,7 +324,7 @@ import { pi as _$$pi, TY, Yh } from '../figma_app/357047';
 import { pH } from '../figma_app/357433';
 import { IU } from '../figma_app/357655';
 import { getI18nState } from '../figma_app/363242';
-import { uE as _$$uE, Vi as _$$Vi } from '../figma_app/364284';
+import { widgetHandlerMap, isValidWidgetType } from '../figma_app/364284';
 import { Yg } from '../figma_app/365713';
 import { vE } from '../figma_app/376315';
 import { n_ as _$$n_2 } from '../figma_app/385874';
@@ -4287,7 +4287,7 @@ let lw = new class {
     lifecycleCommand: t,
     pluginVersionID: i
   }) {
-    let n = _$$uE[e];
+    let n = widgetHandlerMap[e];
     let {
       addShutdownAction,
       closePlugin,
@@ -4640,7 +4640,7 @@ let lM = new class {
   }
   runUserInitiatedWidget(e) {
     let t = e.pluginID;
-    if (_$$Vi(t)) {
+    if (isValidWidgetType(t)) {
       lw.runWidget({
         ...e,
         pluginID: t
@@ -4851,14 +4851,14 @@ class lV {
     return this.mountWidget(e, t, i, n, r, a, !0);
   }
   onInsertFromExisting(e, t) {
-    _$$Vi(e.widgetID) || (this.addWidgetToRecentlyUsed(e.widgetVersionID, e.widgetID), lp.trackInsertsFromExisting(e, t));
+    isValidWidgetType(e.widgetID) || (this.addWidgetToRecentlyUsed(e.widgetVersionID, e.widgetID), lp.trackInsertsFromExisting(e, t));
   }
   trackSelectionStateInteraction(e, t) {
-    _$$Vi(e.widgetID) || lp.trackSelectionStateInteraction(e, t);
+    isValidWidgetType(e.widgetID) || lp.trackSelectionStateInteraction(e, t);
   }
   async onImpression(e) {
     let t = e.filter(e => !!e.widgetVersionID);
-    lp.trackImpression(e.filter(e => !_$$Vi(e.widgetID)));
+    lp.trackImpression(e.filter(e => !isValidWidgetType(e.widgetID)));
     this.trackLocalWidgetsInPlaygroundFile(e);
     let i = await getFullscreenViewFile(debugState);
     i?.canEditCanvas && (debugState?.dispatch(Cf({
@@ -4936,7 +4936,7 @@ class lV {
     });
   }
   clickWidget(e, t, i) {
-    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     _$$z3.startInteraction(e, 'click');
     lM.runUserInitiatedWidget({
       pluginID: e,
@@ -4955,7 +4955,7 @@ class lV {
     });
   }
   runPropertyMenuCallback(e, t, i, n) {
-    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
+    if (!isValidWidgetType(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     this.didCallTextEditEnd = !1;
     Fullscreen.setDefaultEditMode();
     let r = {
@@ -4987,7 +4987,7 @@ class lV {
     let i = debugState.getState().selectedView.editorType;
     if (void 0 !== i) {
       let n = mapEditorTypeTo(i);
-      debugState?.dispatch(RH({
+      debugState?.dispatch(addWidgetToRecentsThunk({
         storeInRecentsKey: n,
         id: t,
         version: e || '',
@@ -8085,7 +8085,7 @@ let lX = class e extends sP(sN(sR)) {
     let {
       user
     } = this._store.getState();
-    user && this.dispatch(_$$ay({
+    user && this.dispatch(addWhiteboardToolToRecentsAction({
       currentUserId: user.id,
       storeInRecentsKey: FDocumentType.FigJam,
       item: {

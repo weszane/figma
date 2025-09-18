@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { Lk, x as _$$x } from "../figma_app/639711";
-import { RH, gU } from "../figma_app/147952";
+import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/147952";
 import { mapEditorTypeTo } from "../905/808775";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
@@ -563,7 +563,7 @@ export let $$eo4 = _$$n(async e => {
             version: e.version,
             currentUserId: getSelectedView()
           };
-          isWidget ? debugState.dispatch(RH(y)) : debugState.dispatch(gU(y));
+          isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y));
           let b = debugState.getState().publishedPlugins[e.plugin_id];
           let v = hasMonetizedResourceMetadata(b);
           let x = {
@@ -725,7 +725,7 @@ async function ec({
     version: "",
     currentUserId: getSelectedView()
   };
-  isWidget ? debugState.dispatch(RH(_)) : debugState.dispatch(gU(_));
+  isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_));
   try {
     let a = e.testCode ? e.manifest : await loadPluginManifest(e.localFileId, {
       resourceType: isWidget ? "widget" : "plugin",

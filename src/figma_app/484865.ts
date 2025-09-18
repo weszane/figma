@@ -15,7 +15,7 @@ import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "
 import { Q } from "../905/618914";
 import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
 import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { HX, ad, Xe, kN } from "../figma_app/97042";
 import { tz, Lw, rx, DR } from "../figma_app/342355";
 import { w6 } from "../905/372596";
@@ -165,7 +165,7 @@ async function N(e, t) {
       numResultsPerAsset: 3
     };
     try {
-      let e = await $W.getCodeSuggestionsBulk(a);
+      let e = await searchAPIHandler.getCodeSuggestionsBulk(a);
       Object.entries(e.data.meta.results ?? {}).forEach(([e, t]) => {
         let r = c.get(e);
         if (!r) return;

@@ -1,5 +1,5 @@
 import { ImageIOWorkerManager } from '../905/22729'
-import { Y } from '../905/270066'
+import { detectColorSpace } from '../905/270066'
 import { normalizeRGBA, setAlphaToOpaque } from '../905/271299'
 import { extractIccProfileFromJpeg, extractIccProfileFromPng, isAnimatedGif } from '../905/515659'
 import { decodeBase64 } from '../905/561685'
@@ -176,7 +176,7 @@ async function fallbackDecode(
     data = result.withoutColorSpace
     if (result.iccProfileRawData) {
       try {
-        colorProfile = Y(result.iccProfileRawData)
+        colorProfile = detectColorSpace(result.iccProfileRawData)
       }
       catch {}
     }
@@ -186,7 +186,7 @@ async function fallbackDecode(
     try {
       const icc = extractIccProfileFromJpeg(data)
       if (icc)
-        colorProfile = Y(icc) ?? ColorSpaceEnum.SRGB
+        colorProfile = detectColorSpace(icc) ?? ColorSpaceEnum.SRGB
     }
     catch {}
     orientation = ImageOrientationUtils.getOrientation(data)

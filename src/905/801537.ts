@@ -5,7 +5,7 @@ import { MZ } from "../figma_app/925970";
 import { wf } from "../905/124270";
 import { IT, liveStoreInstance } from "../905/713695";
 import { CreatorResourceType } from "../figma_app/162807";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { A as _$$A } from "../905/421315";
 export function $$p0(e, t) {
   let [i, d] = useState(e);
@@ -33,7 +33,7 @@ export function $$p0(e, t) {
   return f;
 }
 let m = liveStoreInstance.Query({
-  fetch: async e => (await $W.getFacetSearchResults({
+  fetch: async e => (await searchAPIHandler.getFacetSearchResults({
     query: e.query,
     facetType: e.facetType,
     restrictOrgId: e.restrictOrgId,

@@ -6,7 +6,7 @@ import { appendSearchParam } from "../905/508367";
 import { parsePxNumber } from "../figma_app/783094";
 import { oW } from "../905/675859";
 import { O7 } from "../figma_app/578832";
-import { ay } from "../figma_app/147952";
+import { addWhiteboardToolToRecentsAction } from "../figma_app/147952";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
 import { M as _$$M } from "../9410/228122";
@@ -278,7 +278,7 @@ function G({
   let s = useDispatch();
   let r = useSelector(e => e.user?.id);
   let l = useCallback(() => {
-    s(ay({
+    s(addWhiteboardToolToRecentsAction({
       currentUserId: r,
       storeInRecentsKey: FDocumentType.FigJam,
       item: {

@@ -123,7 +123,7 @@ import { $$ as _$$$$, nR as _$$nR2 } from '../figma_app/60079';
 import { aY as _$$aY, JA } from '../figma_app/78725';
 import { getCodegenPreferencesSettings, isCodegenSupportedForLanguage } from '../figma_app/120227';
 import { G as _$$G } from '../figma_app/124713';
-import { gU, HQ } from '../figma_app/147952';
+import { addPluginToRecentsThunk, syncRecentPluginsThunk } from '../figma_app/147952';
 import { I2, Xf } from '../figma_app/153916';
 import { isGovCluster } from '../figma_app/169182';
 import { J as _$$J3 } from '../figma_app/179602';
@@ -2311,7 +2311,7 @@ function az({
   let [p, g] = useState('');
   let [h, x] = useState(void 0);
   useEffect(() => {
-    e?.loaded && e?.localCodegenSettings && !c && _(() => (e.localCodegenSettings?.language.type === 'published-plugin' && (x(e.localCodegenSettings.language), a(gU({
+    e?.loaded && e?.localCodegenSettings && !c && _(() => (e.localCodegenSettings?.language.type === 'published-plugin' && (x(e.localCodegenSettings.language), a(addPluginToRecentsThunk({
       storeInRecentsKey: FDocumentType.Handoff,
       id: e.localCodegenSettings.language.id,
       version: void 0,
@@ -2320,7 +2320,7 @@ function az({
     }))), !0));
   }, [e?.loaded, e?.localCodegenSettings, c, a]);
   useEffect(() => {
-    a(HQ({
+    a(syncRecentPluginsThunk({
       storeInRecentsKey: FDocumentType.Handoff
     }));
   }, [a]);
@@ -2362,7 +2362,7 @@ function az({
                 d(null);
                 let t = getCodegenLanguagePreference(n);
                 e?.setCodegenSettingsLanguage(t);
-                a(gU({
+                a(addPluginToRecentsThunk({
                   storeInRecentsKey: FDocumentType.Handoff,
                   id: n.plugin_id,
                   version: n.version,

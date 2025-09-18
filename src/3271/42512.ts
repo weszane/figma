@@ -117,7 +117,7 @@ import { Me } from "../figma_app/617427";
 import { PricingOptions } from "../905/237873";
 import { getPluginContent, getWidgetContent } from "../figma_app/427318";
 import { SortOptions } from "../figma_app/324237";
-import { h as _$$h2 } from "../905/632544";
+import { EditorTargetMode } from "../905/632544";
 import { DesignToolType } from "../figma_app/277543";
 import { liveStoreInstance } from "../905/713695";
 import { z as _$$z, a as _$$a2 } from "../figma_app/601188";
@@ -1057,7 +1057,7 @@ let tY = async (e, t) => {
     sortBy: SortOptions.Browse.POPULAR,
     includeContent: !0
   };
-  e && t && (s.capabilityType = _$$h2.CODEGEN);
+  e && t && (s.capabilityType = EditorTargetMode.CODEGEN);
   let [r, a] = await Promise.all([liveStoreInstance.fetch(_$$a2.ResourcesPaginatedQuery({
     ...s,
     price: PricingOptions.FREE,

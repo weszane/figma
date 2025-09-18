@@ -15,7 +15,7 @@ import { FFileType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { $W, $$in } from "../905/144933";
+import { searchAPIHandler, mapStateToVariant } from "../905/144933";
 import { I as _$$I } from "../figma_app/130633";
 import { Z } from "../905/387928";
 var s = a;
@@ -61,7 +61,7 @@ export async function $$N2(e, t, r, i, a, s, o, l, u, p) {
       entryPoint: u,
       tier: $$G1()
     };
-    return (await $W.postComponents(b)).data.meta;
+    return (await searchAPIHandler.postComponents(b)).data.meta;
   } catch (t) {
     analyticsEventManager.trackDefinedEvent("assets_panel.server_search_for_all_components_failure", {
       query: e
@@ -184,9 +184,9 @@ export async function $$D8(e, t, r = !1) {
     if (!atomStoreManager.get(JB)) return [];
     let {
       results
-    } = (await $W.getAssetsFromCommunityLibraries({
+    } = (await searchAPIHandler.getAssetsFromCommunityLibraries({
       query: e,
-      assetTypes: $$in([PrimaryWorkflowEnum.COMPONENT, PrimaryWorkflowEnum.STATE_GROUP]).join(","),
+      assetTypes: mapStateToVariant([PrimaryWorkflowEnum.COMPONENT, PrimaryWorkflowEnum.STATE_GROUP]).join(","),
       includeVisualAssets: !!r || void 0
     })).data.meta;
     return results;
@@ -214,9 +214,9 @@ export let $$M14 = liveStoreInstance.Query({
   }) => {
     let {
       results
-    } = (await $W.getAssetsFromCommunityLibraries({
+    } = (await searchAPIHandler.getAssetsFromCommunityLibraries({
       query: e,
-      assetTypes: $$in(r).join(","),
+      assetTypes: mapStateToVariant(r).join(","),
       hubFileIds: [t]
     }).catch(() => ({
       data: {
@@ -290,7 +290,7 @@ export async function $$B4(e, t, r, n, i, a, s, o) {
       entryPoint: s,
       tier: $$G1()
     };
-    return (await $W.postComponentsFromFile(_)).data.meta;
+    return (await searchAPIHandler.postComponentsFromFile(_)).data.meta;
   } catch (r) {
     analyticsEventManager.trackDefinedEvent("assets_panel.server_search_for_file_failure", {
       query: e,

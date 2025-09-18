@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { liveStoreInstance } from "../905/713695";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Q } from "../905/577205";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 async function i(e) {
   await new Promise(e => setTimeout(e, 500));
@@ -66,7 +66,7 @@ let $$f0 = liveStoreInstance.Query({
   key: "bulkSuggestions"
 });
 liveStoreInstance.Query({
-  fetch: async e => (await $W.getCodeSuggestions(e)).data.meta.results
+  fetch: async e => (await searchAPIHandler.getCodeSuggestions(e)).data.meta.results
 });
 let $$h1 = liveStoreInstance.Query({
   fetch: async e => (await Q.getGithubSourceFileContents(e)).data.meta

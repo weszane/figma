@@ -1,207 +1,331 @@
-import { createActionCreator } from '../905/73481';
-import { resolveMessage } from '../905/231762';
-import { addTemplateToRecentsThunk, addTemplateToRecentsWithUserId, setRecentTemplates } from '../905/321397';
-import { createOptimistThunk } from '../905/350402';
-import { pluginAddFirstRanAtAction } from '../905/542113';
-import { logger } from '../905/651849';
-import { FaceToolType, FetchStatus } from '../905/862883';
-import { XHR } from '../905/910117';
-import { HubTypeEnum, isWidget } from '../figma_app/45218';
-import { enrichPluginWithPublishers, getRecentItems } from '../figma_app/190980';
-import { getPluginVersion, resolveFrameworkType } from '../figma_app/300692';
-import { Vi } from '../figma_app/364284';
-import { Qi } from '../figma_app/559491';
-import { getHubTypeString } from '../figma_app/740025';
-let $$f3 = createActionCreator('SET_RECENT_WHITEBOARD_TOOLS');
-let $$E25 = createOptimistThunk((e, t) => {
-  let r = getRecentItems(t.storeInRecentsKey, FaceToolType.WHITEBOARD_TOOL);
-  e.dispatch($$f3({
-    storeInRecentsKey: t.storeInRecentsKey,
-    recentWhiteboardTools: r
-  }));
-});
-let $$y13 = createActionCreator('ADD_WHITEBOARD_TOOL_TO_RECENTS');
-let $$b24 = createActionCreator('SET_RECENT_FACE_STAMPS');
-let $$T18 = createOptimistThunk((e, t) => {
-  let r = getRecentItems(t.storeInRecentsKey, FaceToolType.FACE_STAMP);
-  e.dispatch($$b24({
-    storeInRecentsKey: t.storeInRecentsKey,
-    recentFaceStamps: r
-  }));
-});
-let $$I0 = createActionCreator('ADD_FACE_STAMP_TO_RECENTS');
-let $$S11 = createActionCreator('SYNC_RECENT_PLUGINS');
-let $$v1 = createOptimistThunk((e, t) => {
-  let r = getRecentItems(t.storeInRecentsKey, HubTypeEnum.PLUGIN);
-  e.dispatch($$N5({
-    storeInRecentsKey: t.storeInRecentsKey,
-    recentResources: r
-  }));
-  let n = r.map(e => e.id);
-  e.dispatch($$D9({
+import { createActionCreator } from '../905/73481'
+import { mergePublishedPluginThunk } from '../905/172918'
+import { resolveMessage } from '../905/231762'
+import { addTemplateToRecentsThunk, addTemplateToRecentsWithUserId, setRecentTemplates } from '../905/321397'
+import { createOptimistThunk } from '../905/350402'
+import { pluginAddFirstRanAtAction } from '../905/542113'
+import { logger } from '../905/651849'
+import { FaceToolType, FetchStatus } from '../905/862883'
+import { XHR } from '../905/910117'
+import { HubTypeEnum, isWidget } from '../figma_app/45218'
+import { enrichPluginWithPublishers, getRecentItems } from '../figma_app/190980'
+import { getPluginVersion, resolveFrameworkType } from '../figma_app/300692'
+import { isValidWidgetType } from '../figma_app/364284'
+import { getHubTypeString } from '../figma_app/740025'
+
+/**
+ * Recent Whiteboard Tools Actions and Thunks
+ */
+export const setRecentWhiteboardToolsAction = createActionCreator('SET_RECENT_WHITEBOARD_TOOLS')
+export const syncRecentWhiteboardToolsThunk = createOptimistThunk((api, payload) => {
+  // syncRecentWhiteboardToolsThunk (original: $$E25)
+  const recentWhiteboardTools = getRecentItems(payload.storeInRecentsKey, FaceToolType.WHITEBOARD_TOOL)
+  api.dispatch(setRecentWhiteboardToolsAction({
+    storeInRecentsKey: payload.storeInRecentsKey,
+    recentWhiteboardTools,
+  }))
+})
+
+export const addWhiteboardToolToRecentsAction = createActionCreator('ADD_WHITEBOARD_TOOL_TO_RECENTS')
+
+/**
+ * Recent Face Stamps Actions and Thunks
+ */
+export const setRecentFaceStampsAction = createActionCreator('SET_RECENT_FACE_STAMPS')
+export const syncRecentFaceStampsThunk = createOptimistThunk((api, payload) => {
+  // syncRecentFaceStampsThunk (original: $$T18)
+  const recentFaceStamps = getRecentItems(payload.storeInRecentsKey, FaceToolType.FACE_STAMP)
+  api.dispatch(setRecentFaceStampsAction({
+    storeInRecentsKey: payload.storeInRecentsKey,
+    recentFaceStamps,
+  }))
+})
+
+export const addFaceStampToRecentsAction = createActionCreator('ADD_FACE_STAMP_TO_RECENTS')
+
+/**
+ * Recent Plugins Actions and Thunks
+ */
+export const syncRecentPluginsAction = createActionCreator('SYNC_RECENT_PLUGINS')
+export const syncRecentPluginsThunk = createOptimistThunk((api, payload) => {
+  // syncRecentPluginsThunk (original: $$v1)
+  const recentResources = getRecentItems(payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
+  api.dispatch(setRecentPluginsAction({
+    storeInRecentsKey: payload.storeInRecentsKey,
+    recentResources,
+  }))
+  const resourceIds = recentResources.map(item => item.id)
+  api.dispatch(syncFetchedVersionsThunk({
     resourceType: HubTypeEnum.PLUGIN,
-    resourceIds: n
-  }));
-  e.dispatch($$S11(t));
-});
-let $$A19 = createActionCreator('SYNC_RECENT_WIDGETS');
-let $$x12 = createOptimistThunk((e, t) => {
-  let r = getRecentItems(t.storeInRecentsKey, HubTypeEnum.WIDGET);
-  e.dispatch($$C10({
-    storeInRecentsKey: t.storeInRecentsKey,
-    recentResources: r
-  }));
-  let n = r.map(e => e.id);
-  e.dispatch($$D9({
+    resourceIds,
+  }))
+  api.dispatch(syncRecentPluginsAction(payload))
+})
+
+export const setRecentPluginsAction = createActionCreator('SET_RECENT_PLUGINS')
+
+/**
+ * Recent Widgets Actions and Thunks
+ */
+export const syncRecentWidgetsAction = createActionCreator('SYNC_RECENT_WIDGETS')
+export const syncRecentWidgetsThunk = createOptimistThunk((api, payload) => {
+  // syncRecentWidgetsThunk (original: $$x12)
+  const recentResources = getRecentItems(payload.storeInRecentsKey, HubTypeEnum.WIDGET)
+  api.dispatch(setRecentWidgetsAction({
+    storeInRecentsKey: payload.storeInRecentsKey,
+    recentResources,
+  }))
+  const resourceIds = recentResources.map(item => item.id)
+  api.dispatch(syncFetchedVersionsThunk({
     resourceType: HubTypeEnum.WIDGET,
-    resourceIds: n
-  }));
-  e.dispatch($$A19(t));
-});
-let $$N5 = createActionCreator('SET_RECENT_PLUGINS');
-let $$C10 = createActionCreator('SET_RECENT_WIDGETS');
-let $$w22 = setRecentTemplates;
-let $$O23 = addTemplateToRecentsWithUserId;
-let $$R2 = addTemplateToRecentsThunk;
-let $$L14 = createActionCreator('ADD_FETCHED_PLUGIN_VERSION');
-let $$P15 = createActionCreator('ADD_FETCHED_WIDGET_VERSION');
-let $$D9 = createOptimistThunk((e, t) => {
-  $$H8(e, t);
-});
-let $$k20 = createActionCreator('ADD_PLUGIN_TO_RECENTS');
-let $$M17 = createOptimistThunk((e, t) => {
-  e.dispatch($$D9({
+    resourceIds,
+  }))
+  api.dispatch(syncRecentWidgetsAction(payload))
+})
+
+export const setRecentWidgetsAction = createActionCreator('SET_RECENT_WIDGETS')
+
+/**
+ * Recent Templates Actions and Thunks
+ */
+export const setRecentTemplatesAction = setRecentTemplates
+export const addTemplateToRecentsWithUserIdThunk = addTemplateToRecentsWithUserId
+export const addTemplateToRecentsThunkAction = addTemplateToRecentsThunk
+
+/**
+ * Fetched Version Actions
+ */
+export const addFetchedPluginVersionAction = createActionCreator('ADD_FETCHED_PLUGIN_VERSION')
+export const addFetchedWidgetVersionAction = createActionCreator('ADD_FETCHED_WIDGET_VERSION')
+
+/**
+ * Sync Fetched Versions Thunk
+ */
+export const syncFetchedVersionsThunk = createOptimistThunk((api, payload) => {
+  // syncFetchedVersionsThunk (original: $$D9)
+  fetchAndSyncVersions(api, payload)
+})
+
+/**
+ * Add Plugin/Widget to Recents Actions and Thunks
+ */
+export const addPluginToRecentsAction = createActionCreator('ADD_PLUGIN_TO_RECENTS')
+export const addPluginToRecentsThunk = createOptimistThunk((api, payload) => {
+  // addPluginToRecentsThunk (original: $$M17)
+  api.dispatch(syncFetchedVersionsThunk({
     resourceType: HubTypeEnum.PLUGIN,
-    resourceIds: [t.id]
-  }));
-  t.skipPluginRun || G(t.id, t.currentUserId, e.getState().currentUserOrgId, e.getState().publishedPlugins[t.id], e.getState().recentlyUsed.plugins[t.storeInRecentsKey], !!t.isDevelopment, e.dispatch);
-  e.dispatch($$k20(t));
-});
-let $$F6 = createActionCreator('ADD_WIDGETS_TO_RECENTS');
-let $$j7 = createOptimistThunk((e, t) => {
-  e.dispatch($$D9({
-    resourceType: HubTypeEnum.WIDGET,
-    resourceIds: [t.id]
-  }));
-  t.skipPluginRun || G(t.id, t.currentUserId, e.getState().currentUserOrgId, e.getState().publishedWidgets[t.id], e.getState().recentlyUsed.widgets[t.storeInRecentsKey], !!t.isDevelopment, e.dispatch);
-  e.dispatch($$F6(t));
-});
-let $$U21 = createActionCreator('REMOVE_RECENTLY_USED_PLUGIN');
-let $$B4 = createActionCreator('REMOVE_RECENTLY_USED_WIDGET');
-let G = (e, t, r, n, o, l, d) => {
-  if (n && n.current_user_has_run || !t || Vi(e) || l) return;
-  let u = o.find(t => t.id === e);
-  u?.run_by_user_ids?.includes(t) || XHR.post(`/api/plugin_runs/${e}`, {
-    org_id: r
-  }).then(({
-    data: t
-  }) => {
-    d(pluginAddFirstRanAtAction({
-      resourceId: e,
-      userFirstRanAt: t.meta.created_at
-    }));
-  }).catch(e => {
-    logger.error(resolveMessage(e));
-  });
-};
-let $$V16 = (e, t) => r => {
-  let n = getPluginVersion(e);
-  let i = (n.manifest?.editorType ?? []).map(resolveFrameworkType);
-  let a = isWidget(e) ? $$j7 : $$M17;
-  i.forEach(i => r(a({
-    storeInRecentsKey: i,
-    id: e.id,
-    version: n.id,
-    currentUserId: t
-  })));
-};
-export function $$H8(e, t) {
-  let r = {};
-  let n = ({
-    id: n,
-    version: i,
-    status: a
-  }) => {
-    let s = t.resourceType === HubTypeEnum.PLUGIN ? $$L14 : $$P15;
-    i && (r[n] = i);
-    return e.dispatch(s({
-      id: n,
-      version: i,
-      status: a
-    }));
-  };
-  let i = [];
-  if (t.resourceIds.forEach(a => {
-    let s = t.resourceType === HubTypeEnum.PLUGIN ? e.getState().installedPluginVersions.plugins[a] : void 0;
-    if (s) {
-      n({
-        id: a,
-        version: s,
-        status: FetchStatus.FETCHED
-      });
-      return;
-    }
-    let o = t.resourceType === HubTypeEnum.PLUGIN ? e.getState().recentlyUsed.plugins.fetchedResources[a] : e.getState().recentlyUsed.widgets.fetchedResources[a];
-    o && o.status !== FetchStatus.NOT_FETCHED && o.status !== FetchStatus.FETCHING && (o.status !== FetchStatus.FETCHED || o.version) ? o.version && (r[a] = o.version) : i.push(a);
-  }), !i.length) {
-    return Promise.resolve(r);
+    resourceIds: [payload.id],
+  }))
+  if (!payload.skipPluginRun) {
+    handlePluginRun(
+      payload.id,
+      payload.currentUserId,
+      api.getState().currentUserOrgId,
+      api.getState().publishedPlugins[payload.id],
+      api.getState().recentlyUsed.plugins[payload.storeInRecentsKey],
+      !!payload.isDevelopment,
+      api.dispatch,
+    )
   }
-  i.forEach(e => {
-    n({
-      id: e,
-      status: FetchStatus.FETCHING
-    });
-  });
-  let s = {
-    ids: i,
-    org_id: e.getState().currentUserOrgId,
-    include_pending: !0
-  };
-  return XHR.post(`/api/${getHubTypeString(t.resourceType)}/batch`, s).then(({
-    data: t
-  }) => (e.dispatch(Qi({
-    publishedPlugins: t.meta,
-    src: 'fetchExtensionVersions',
-    overrideInstallStatus: !0
-  })), i.forEach(e => {
-    let r;
-    let i = t.meta.find(t => t.id === e);
-    i && (r = enrichPluginWithPublishers(i));
-    n({
-      id: e,
-      version: r,
-      status: FetchStatus.FETCHED
-    });
-  }), r)).catch(() => (i.forEach(e => {
-    n({
-      id: e,
-      status: FetchStatus.NOT_FETCHED
-    });
-  }), {}));
+  api.dispatch(addPluginToRecentsAction(payload))
+})
+
+export const addWidgetsToRecentsAction = createActionCreator('ADD_WIDGETS_TO_RECENTS')
+export const addWidgetToRecentsThunk = createOptimistThunk((api, payload) => {
+  // addWidgetToRecentsThunk (original: $$j7)
+  api.dispatch(syncFetchedVersionsThunk({
+    resourceType: HubTypeEnum.WIDGET,
+    resourceIds: [payload.id],
+  }))
+  if (!payload.skipPluginRun) {
+    handlePluginRun(
+      payload.id,
+      payload.currentUserId,
+      api.getState().currentUserOrgId,
+      api.getState().publishedWidgets[payload.id],
+      api.getState().recentlyUsed.widgets[payload.storeInRecentsKey],
+      !!payload.isDevelopment,
+      api.dispatch,
+    )
+  }
+  api.dispatch(addWidgetsToRecentsAction(payload))
+})
+
+/**
+ * Remove Recently Used Actions
+ */
+export const removeRecentlyUsedPluginAction = createActionCreator('REMOVE_RECENTLY_USED_PLUGIN')
+export const removeRecentlyUsedWidgetAction = createActionCreator('REMOVE_RECENTLY_USED_WIDGET')
+
+/**
+ * Handles plugin run logic for first run tracking.
+ * @param id Plugin/widget id
+ * @param userId Current user id
+ * @param orgId Current user org id
+ * @param publishedResource Published plugin/widget
+ * @param recentResources Recently used resources
+ * @param isDevelopment Is development mode
+ * @param dispatch Redux dispatch
+ */
+function handlePluginRun(
+  id: string,
+  userId: string,
+  orgId: string,
+  publishedResource: any,
+  recentResources: any[],
+  isDevelopment: boolean,
+  dispatch: Fn,
+) {
+  // handlePluginRun (original: G)
+  if (publishedResource?.current_user_has_run || !userId || isValidWidgetType(id) || isDevelopment)
+    return
+  const resource = recentResources.find(item => item.id === id)
+  if (resource?.run_by_user_ids?.includes(userId))
+    return
+  XHR.post(`/api/plugin_runs/${id}`, { org_id: orgId })
+    .then(({ data }) => {
+      dispatch(pluginAddFirstRanAtAction({
+        resourceId: id,
+        userFirstRanAt: data.meta.created_at,
+      }))
+    })
+    .catch((err) => {
+      logger.error(resolveMessage(err))
+    })
 }
-export const F9 = $$I0;
-export const HQ = $$v1;
-export const Hx = $$R2;
-export const KA = $$f3;
-export const Kq = $$B4;
-export const Ks = $$N5;
-export const QN = $$F6;
-export const RH = $$j7;
-export const TN = $$H8;
-export const Vg = $$D9;
-export const Vu = $$C10;
-export const WR = $$S11;
-export const aF = $$x12;
-export const ay = $$y13;
-export const cu = $$L14;
-export const f0 = $$P15;
-export const fR = $$V16;
-export const gU = $$M17;
-export const gr = $$T18;
-export const jS = $$A19;
-export const jX = $$k20;
-export const lD = $$U21;
-export const nM = $$w22;
-export const pj = $$O23;
-export const v8 = $$b24;
-export const vZ = $$E25;
+
+/**
+ * Dispatches add to recents for all editor types of a plugin/widget.
+ * @param resource Plugin/widget resource
+ * @param userId Current user id
+ */
+export function addResourceToRecentsByEditorType(resource: any, userId: string) {
+  return (dispatch: Fn) => {
+  // addResourceToRecentsByEditorType (original: $$V16)
+    const versionInfo = getPluginVersion(resource)
+    const editorTypes = (versionInfo.manifest?.editorType ?? []).map(resolveFrameworkType)
+    const addToRecentsThunk = isWidget(resource) ? addWidgetToRecentsThunk : addPluginToRecentsThunk
+    editorTypes.forEach((editorType) => {
+      dispatch(addToRecentsThunk({
+        storeInRecentsKey: editorType,
+        id: resource.id,
+        version: versionInfo.id,
+        currentUserId: userId,
+      }))
+    })
+  }
+}
+
+/**
+ * Fetches and syncs plugin/widget versions.
+ * @param api Redux thunk API
+ * @param payload Resource type and ids
+ * @returns Promise resolving to version map
+ */
+export function fetchAndSyncVersions(api: any, payload: { resourceType: HubTypeEnum, resourceIds: string[] }) {
+  // fetchAndSyncVersions (original: $$H8)
+  const versionMap: Record<string, any> = {}
+  const dispatchVersion = ({
+    id,
+    version,
+    status,
+  }: { id: string, version?: any, status: FetchStatus }) => {
+    const action = payload.resourceType === HubTypeEnum.PLUGIN
+      ? addFetchedPluginVersionAction
+      : addFetchedWidgetVersionAction
+    if (version)
+      versionMap[id] = version
+    return api.dispatch(action({ id, version, status }))
+  }
+
+  const toFetch: string[] = []
+  payload.resourceIds.forEach((id) => {
+    const installedVersion = payload.resourceType === HubTypeEnum.PLUGIN
+      ? api.getState().installedPluginVersions.plugins[id]
+      : undefined
+    if (installedVersion) {
+      dispatchVersion({ id, version: installedVersion, status: FetchStatus.FETCHED })
+      return
+    }
+    const fetchedResource = payload.resourceType === HubTypeEnum.PLUGIN
+      ? api.getState().recentlyUsed.plugins.fetchedResources[id]
+      : api.getState().recentlyUsed.widgets.fetchedResources[id]
+    if (
+      fetchedResource
+      && fetchedResource.status !== FetchStatus.NOT_FETCHED
+      && fetchedResource.status !== FetchStatus.FETCHING
+      && (fetchedResource.status !== FetchStatus.FETCHED || fetchedResource.version)
+    ) {
+      if (fetchedResource.version)
+        versionMap[id] = fetchedResource.version
+    }
+    else {
+      toFetch.push(id)
+    }
+  })
+
+  if (!toFetch.length) {
+    return Promise.resolve(versionMap)
+  }
+
+  toFetch.forEach((id) => {
+    dispatchVersion({ id, status: FetchStatus.FETCHING })
+  })
+
+  const requestPayload = {
+    ids: toFetch,
+    org_id: api.getState().currentUserOrgId,
+    include_pending: true,
+  }
+
+  return XHR.post(`/api/${getHubTypeString(payload.resourceType)}/batch`, requestPayload)
+    .then(({ data }) => {
+      api.dispatch(mergePublishedPluginThunk({
+        publishedPlugins: data.meta,
+        src: 'fetchExtensionVersions',
+        overrideInstallStatus: true,
+      }))
+      toFetch.forEach((id) => {
+        let version
+        const meta = data.meta.find((item: any) => item.id === id)
+        if (meta)
+          version = enrichPluginWithPublishers(meta)
+        dispatchVersion({ id, version, status: FetchStatus.FETCHED })
+      })
+      return versionMap
+    })
+    .catch(() => {
+      toFetch.forEach((id) => {
+        dispatchVersion({ id, status: FetchStatus.NOT_FETCHED })
+      })
+      return {}
+    })
+}
+
+// Exported variable names refactored to match new function/constant names
+export const F9 = addFaceStampToRecentsAction
+export const HQ = syncRecentPluginsThunk
+export const Hx = addTemplateToRecentsThunkAction
+export const KA = setRecentWhiteboardToolsAction
+export const Kq = removeRecentlyUsedWidgetAction
+export const Ks = setRecentPluginsAction
+export const QN = addWidgetsToRecentsAction
+export const RH = addWidgetToRecentsThunk
+export const TN = fetchAndSyncVersions
+export const Vg = syncFetchedVersionsThunk
+export const Vu = setRecentWidgetsAction
+export const WR = syncRecentPluginsAction
+export const aF = syncRecentWidgetsThunk
+export const ay = addWhiteboardToolToRecentsAction
+export const cu = addFetchedPluginVersionAction
+export const f0 = addFetchedWidgetVersionAction
+export const fR = addResourceToRecentsByEditorType
+export const gU = addPluginToRecentsThunk
+export const gr = syncRecentFaceStampsThunk
+export const jS = syncRecentWidgetsAction
+export const jX = addPluginToRecentsAction
+export const lD = removeRecentlyUsedPluginAction
+export const nM = setRecentTemplatesAction
+export const pj = addTemplateToRecentsWithUserIdThunk
+export const v8 = setRecentFaceStampsAction
+export const vZ = syncRecentWhiteboardToolsThunk

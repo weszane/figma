@@ -40,7 +40,7 @@ import { X6 } from "../5430/28597";
 import { Y as _$$Y } from "../5430/601486";
 import { Q as _$$Q } from "../5430/117345";
 import { Y as _$$Y2 } from "../5430/229344";
-import { qG } from "../figma_app/701107";
+import { HubResourceTypeMap } from "../figma_app/701107";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { lx } from "../figma_app/558929";
 import { jd } from "../figma_app/106207";
@@ -264,7 +264,7 @@ export function $$ea2(e, t) {
     if (!t) return null;
     if (!hasResourceType(e)) return new ResourceHubResourceRoute({
       ...t,
-      apiResourceType: qG[getResourceType(e)],
+      apiResourceType: HubResourceTypeMap[getResourceType(e)],
       resourceId: e.id
     });
     {
@@ -308,7 +308,7 @@ export function $$el1(e, t, r) {
     var a;
     var l;
     a = t.id;
-    l = qG[getResourceType(t)];
+    l = HubResourceTypeMap[getResourceType(t)];
     e(showModalHandler({
       type: Z,
       data: {

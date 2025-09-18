@@ -4,7 +4,7 @@ import { reportError } from "../905/11";
 import { createMetaValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { getAllTimeSortOption } from "../figma_app/324237";
-import { S } from "../figma_app/701107";
+import { ResourceTypeMap } from "../figma_app/701107";
 import { ResourceWithContentSchema, ResourceWithOptionalContentListSchema, RecommendationDimensionsSchema, RecommendedResourcesSchema } from "../figma_app/306946";
 import { liveStoreInstance } from "../905/713695";
 import { PluginDetailsSchema } from "../figma_app/155287";
@@ -78,7 +78,7 @@ let $$m0 = new class {
         skipRelatedContent,
         includeFullCategory
       } = e;
-      return await t.get(`/api/resources/${S[resourceType]}/${contentId}`, APIParameterUtils.toAPIParameters({
+      return await t.get(`/api/resources/${ResourceTypeMap[resourceType]}/${contentId}`, APIParameterUtils.toAPIParameters({
         skipRelatedContent,
         includeFullCategory
       }));

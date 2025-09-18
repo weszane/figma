@@ -9,7 +9,7 @@ import { UserAPIHandlers } from '../905/93362';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { f as _$$f2, r as _$$r2 } from '../905/136283';
-import { $W } from '../905/144933';
+import { searchAPIHandler } from '../905/144933';
 import { hideModal, hideSpecificModal, popModalStack, showModalHandler } from '../905/156213';
 import { UpsellModalType } from '../905/165519';
 import { J as _$$J } from '../905/202542';
@@ -525,7 +525,7 @@ let eR = registerModal(e => {
       return;
     }
     eM(!0);
-    $W.getFileMoveSearchResults({
+    searchAPIHandler.getFileMoveSearchResults({
       query: eV,
       orgId: e.orgId ?? null,
       maxNumResults: 50

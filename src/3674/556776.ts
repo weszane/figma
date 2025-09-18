@@ -18,7 +18,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Vg } from "../figma_app/147952";
+import { syncFetchedVersionsThunk } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { p as _$$p } from "../469e6e40/489933";
 import { dG } from "../figma_app/753501";
@@ -126,7 +126,7 @@ function G(e) {
   let y = shownPlugins[shownPlugins.length - 1]?.plugin_id;
   let b = useMemoStable(() => new Set(pinnedPlugins.map(e => e.plugin_id)), [pinnedPlugins]);
   useEffect(() => {
-    p(Vg({
+    p(syncFetchedVersionsThunk({
       resourceType: HubTypeEnum.PLUGIN,
       resourceIds: Array.from(b)
     }));

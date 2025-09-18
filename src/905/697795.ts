@@ -25,7 +25,7 @@ import { P as _$$P } from "../905/200237";
 import { f as _$$f } from "../figma_app/252485";
 import { getFullscreenFile } from "../905/766303";
 import { GT } from "../figma_app/840917";
-import { AE, Nn } from "../905/225144";
+import { extractFirstEmoji, removePrefixAndVariation } from "../905/225144";
 import { getUserId } from "../905/372672";
 import { getSelectedViewName, mapPathToSelectedView } from "../figma_app/193867";
 let n;
@@ -40,10 +40,10 @@ function L(e, t, i = "") {
   if (e !== (n ? n + document.title : document.title)) {
     if ("safari" !== BrowserInfo.browserType) {
       let t;
-      let i = AE(e);
+      let i = extractFirstEmoji(e);
       t = document.getElementById("custom-emoji-favicon");
       i ? (n = i, t || ((t = document.createElement("link")).id = "custom-emoji-favicon", t.rel = "icon", document.head.appendChild(t)), t.href = "data:image/svg+xml," + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">{text}</text></svg>'.replace("{text}", i)) : (t && t.remove(), n = void 0);
-      i && (e = Nn(e, i));
+      i && (e = removePrefixAndVariation(e, i));
     }
     document.title = e;
     desktopAPIInstance && t && desktopAPIInstance.setTitle(t, i);

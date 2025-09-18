@@ -17,7 +17,7 @@ import { Dm } from "../figma_app/8833";
 import { z5 } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { x as _$$x } from "../905/239551";
-import { Vi, kZ } from "../figma_app/364284";
+import { isValidWidgetType, getWidgetMenuI18nString } from "../figma_app/364284";
 import { Um } from "../905/848862";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
@@ -251,10 +251,10 @@ export function $$$0() {
       let {
         pluginID
       } = e;
-      if (!Vi(pluginID)) return e;
+      if (!isValidWidgetType(pluginID)) return e;
       let n = e.propertyMenu.map(e => "separator" === e.itemType ? e : {
         ...e,
-        tooltip: kZ(pluginID, e.propertyName) || e.tooltip
+        tooltip: getWidgetMenuI18nString(pluginID, e.propertyName) || e.tooltip
       });
       return {
         ...e,

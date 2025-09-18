@@ -53,7 +53,7 @@ import { AUTH_COMPLETE } from '../905/194276';
 import { W as _$$W4 } from '../905/200727';
 import { h as _$$h9 } from '../905/207101';
 import { Z as _$$Z2 } from '../905/224161';
-import { AE, Nn } from '../905/225144';
+import { extractFirstEmoji, removePrefixAndVariation } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { nt as _$$nt, o3 as _$$o } from '../905/226610';
 import { delay } from '../905/236856';
@@ -6358,7 +6358,7 @@ let cr = memo(({
 }) => {
   let n = NN();
   let i = e.file.name;
-  let a = AE(i);
+  let a = extractFirstEmoji(i);
   let s = n(e.file);
   let o = a ? jsx('div', {
     ..._$$Ay3.props(ct.emojiIcon),
@@ -6368,7 +6368,7 @@ let cr = memo(({
     type: s
   });
   let d = _$$v4();
-  let c = a ? Nn(i, a) : i;
+  let c = a ? removePrefixAndVariation(i, a) : i;
   let u = useCallback(t => {
     d(e, t);
   }, [d, e]);

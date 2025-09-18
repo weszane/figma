@@ -95,7 +95,7 @@ import { h as _$$h } from '../905/207101';
 import { H as _$$H5 } from '../905/209153';
 import { x as _$$x8 } from '../905/211326';
 import { V as _$$V4 } from '../905/223767';
-import { AE, Nn } from '../905/225144';
+import { extractFirstEmoji, removePrefixAndVariation } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { Z as _$$Z3 } from '../905/236383';
 import { delay } from '../905/236856';
@@ -1646,13 +1646,13 @@ function rR(e) {
     }
   });
   let w = d.name;
-  let j = AE(w);
+  let j = extractFirstEmoji(w);
   let E = e.favorite.file ? m(e.favorite.file) : y1.DESIGN;
   let I = j ? rk(j) : jsx(w4, {
     size: 16,
     type: E
   });
-  let S = j ? Nn(w, j) : w;
+  let S = j ? removePrefixAndVariation(w, j) : w;
   let k = e.favorite.file?.project?.path;
   let R = getSidebarStringOrValue(k);
   let A = R ? tG : 'favorited_section--titleWithoutSubtitle--BXdOW ellipsis--ellipsis--Tjyfa text--fontPos13--xW8hS text--_fontBase--QdLsd';
@@ -1777,8 +1777,8 @@ function rL(e) {
       a ? t(Mv(i)) : t(jv(i));
     }
   });
-  let p = AE(r.path);
-  let f = p ? Nn(r.path, p) : r.path;
+  let p = extractFirstEmoji(r.path);
+  let f = p ? removePrefixAndVariation(r.path, p) : r.path;
   let g = e.favorite.project.activeProjectResourceConnections?.[0];
   return jsxs('div', {
     children: [jsx(SidebarRow, {

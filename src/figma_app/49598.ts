@@ -31,7 +31,7 @@ import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
 import { showModalHandler } from "../905/156213";
-import { Hx } from "../figma_app/147952";
+import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { uo } from "../905/98702";
 import { HubEventType } from "../figma_app/350203";
 import { N as _$$N } from "../figma_app/23271";
@@ -112,7 +112,7 @@ let $$eb16 = createOptimistThunk((e, t, {
       figFileKey: i.key,
       searchSessionId: wr(n)
     });
-    "whiteboard" === i.editor_type && e.dispatch(Hx({
+    "whiteboard" === i.editor_type && e.dispatch(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
       type: ITemplateType.CommunityResource
@@ -183,7 +183,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
       source: t.source
     });
     t.callback && t.callback(i?.key);
-    "whiteboard" === i.editor_type && e.dispatch(Hx({
+    "whiteboard" === i.editor_type && e.dispatch(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
       type: ITemplateType.CommunityResource

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { qR } from "../figma_app/696043";
-import { RH, gU, Kq, lD } from "../figma_app/147952";
+import { addWidgetToRecentsThunk, addPluginToRecentsThunk, removeRecentlyUsedWidgetAction, removeRecentlyUsedPluginAction } from "../figma_app/147952";
 import { _i } from "../figma_app/120210";
 import { getUserId } from "../905/372672";
 import { getCurrentDocumentType } from "../figma_app/190980";
@@ -27,7 +27,7 @@ export function $$g0(e) {
           let {
             extension
           } = e;
-          r((manifestContainsWidget(extension) ? RH : gU)({
+          r((manifestContainsWidget(extension) ? addWidgetToRecentsThunk : addPluginToRecentsThunk)({
             storeInRecentsKey: a,
             id: extension.plugin_id,
             version: e.extension.id,
@@ -79,7 +79,7 @@ function y(e) {
   return {
     displayText: p ? getI18nString("universal_insert.remove_local_version") : getI18nString("universal_insert.remove"),
     callback: () => {
-      !(types.has(Ag.LOCAL) && hasLocalFileId(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((manifestContainsWidget(extension) ? Kq : lD)({
+      !(types.has(Ag.LOCAL) && hasLocalFileId(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((manifestContainsWidget(extension) ? removeRecentlyUsedWidgetAction : removeRecentlyUsedPluginAction)({
         storeInRecentsKey: r,
         resourceId: extension.plugin_id
       })), types.has(Ag.USER_SAVED) && unsave());

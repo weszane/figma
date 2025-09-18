@@ -13,7 +13,7 @@ import { wr, Ux } from "../figma_app/387599";
 import { y as _$$y } from "../905/444931";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { RH, gU } from "../figma_app/147952";
+import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/147952";
 import { mapEditorTypeTo } from "../905/808775";
 import { hb, VT } from "../905/551193";
 import { setupAuthedUserPlanLoader } from "../905/352022";
@@ -169,7 +169,7 @@ createOptimistThunk((e, t) => {
       version: a.id,
       currentUserId: r.id
     };
-    i ? e.dispatch(RH(s)) : e.dispatch(gU(s));
+    i ? e.dispatch(addWidgetToRecentsThunk(s)) : e.dispatch(addPluginToRecentsThunk(s));
   })();
 });
 let $$H0 = createOptimistThunk((e, t) => {
@@ -186,7 +186,7 @@ let $$H0 = createOptimistThunk((e, t) => {
       version: o.id,
       currentUserId: n.id
     };
-    s ? e.dispatch(RH(r)) : e.dispatch(gU(r));
+    s ? e.dispatch(addWidgetToRecentsThunk(r)) : e.dispatch(addPluginToRecentsThunk(r));
   };
   let d = "hasPlaygroundFile" in o ? o.hasPlaygroundFile : o.playground_file_version_id;
   let c = t.fullscreenEditorType === FEditorType.DevHandoff;
@@ -260,7 +260,7 @@ let $$z3 = createOptimistThunk((e, t) => {
       version: s.id,
       currentUserId: n.id
     };
-    a ? e.dispatch(RH(r)) : e.dispatch(gU(r));
+    a ? e.dispatch(addWidgetToRecentsThunk(r)) : e.dispatch(addPluginToRecentsThunk(r));
   })();
 });
 let $$W1 = createOptimistThunk(async (e, t) => {
@@ -285,7 +285,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
       version: p.id,
       currentUserId: user.id
     };
-    u ? e.dispatch(RH(r)) : e.dispatch(gU(r));
+    u ? e.dispatch(addWidgetToRecentsThunk(r)) : e.dispatch(addPluginToRecentsThunk(r));
   };
   let m = [];
   let g = null;

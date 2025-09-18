@@ -13,7 +13,7 @@ import { isCommunitySearchView } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
 import { DEFAULT_PAGE_SIZE, Lk, Lr, PublicModelType, SortingCriteria, SearchTypeMode, SpaceAccessType } from "../figma_app/162807";
 import { vj as _$$vj, Ei } from "../905/574958";
-import { $W } from "../905/144933";
+import { searchAPIHandler } from "../905/144933";
 let $$y28 = createOptimistThunk(async (e, t) => {
   let {
     orgId,
@@ -187,7 +187,7 @@ let P = (e, t, i, n, r, s) => {
       sessionId: e || "",
       ...h,
       searchModelType: t
-    }, $W.getFullResults(m)).then(e => {
+    }, searchAPIHandler.getFullResults(m)).then(e => {
       e.data || p(getI18nString("search.invalid_search_endpoint_result"));
       let n = r.getState().search.parameters.facetFilters?.searchModelType ?? PublicModelType.FILES;
       if (n === t && (r.dispatch($$X12({
@@ -233,7 +233,7 @@ let O = (e, t, i, n, r, a) => {
       queryId: a,
       sessionId: e || "",
       ...p
-    }, $W.getPreviewResults(u)).then(e => {
+    }, searchAPIHandler.getPreviewResults(u)).then(e => {
       e.data || c(getI18nString("search.invalid_search_endpoint_result"));
       r.dispatch($$Z32({
         parameters: {

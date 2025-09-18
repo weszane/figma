@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
-import { F9 } from "../figma_app/147952";
+import { addFaceStampToRecentsAction } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../3276/966473";
 import { getUserId } from "../905/372672";
@@ -54,7 +54,7 @@ export function $$j0({
   let T = _$$b();
   let j = useDispatch();
   let O = useCallback(() => {
-    j(F9({
+    j(addFaceStampToRecentsAction({
       currentUserId: b ?? void 0,
       storeInRecentsKey: FDocumentType.FigJam,
       item: {
