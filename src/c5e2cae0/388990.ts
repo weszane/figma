@@ -18,7 +18,7 @@ import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { Oq } from "../905/332483";
+import { designSet } from "../905/332483";
 import { K } from "../905/3140";
 import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
@@ -137,7 +137,7 @@ function U(e) {
   let c = vu(n);
   if (null === c.data) throw Error("Contract prices currency was null");
   let _ = c.data;
-  let u = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
+  let u = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let h = u.dict(e => ({
     currency: _,
     billableProductKey: e,
@@ -148,7 +148,7 @@ function U(e) {
   }));
   let x = ic(h, a, Fq.UPSELL_MODALS_CONTRACT);
   let y = jv({
-    billableProductKeys: Oq,
+    billableProductKeys: designSet,
     baseQuery: {
       currency: _,
       tier: Ju.ORG,
@@ -200,7 +200,7 @@ function U(e) {
           dataTestId: "org-prices",
           name: getI18nString("org_upgrade.single_team.organization_plan"),
           subtitle: getI18nString("org_upgrade.single_team.annual_billing_only"),
-          prices: Oq.dict(e => `${L.formatMoney(M[e]?.amount ?? 0)}`),
+          prices: designSet.dict(e => `${L.formatMoney(M[e]?.amount ?? 0)}`),
           padding: "16px 32px 16px 33px"
         })]
       }), jsx("div", {

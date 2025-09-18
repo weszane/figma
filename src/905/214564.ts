@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
 import { il } from "../vendor/291472";
 import { parsePxNumber } from "../figma_app/783094";
-import { iA, PC, OV } from "../905/403166";
+import { unifiedToEmoji, buildEmojiImageUrl, highlightEmojiIdMatch } from "../905/403166";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Hn, f6, xD, ri } from "../905/337179";
 import { useState, useCallback, useEffect } from "react";
@@ -140,14 +140,14 @@ export class $$A0 extends RecordingPureComponent {
         recordingKey: generateRecordingKey(this.props.recordingKey, t, "item"),
         children: [this.props.isComments ? jsx("p", {
           className: _,
-          children: iA(r)
+          children: unifiedToEmoji(r)
         }) : jsx("img", {
-          src: PC(r, this.props.emojiImageSet),
+          src: buildEmojiImageUrl(r, this.props.emojiImageSet),
           className: _,
           alt: ""
         }), jsx("p", {
           className: "emoji_typeahead--emojiName--hDLxK",
-          children: OV(e, this.props.typeahead.query)
+          children: highlightEmojiIdMatch(e, this.props.typeahead.query)
         })]
       }, e.id);
     });
@@ -156,7 +156,7 @@ export class $$A0 extends RecordingPureComponent {
       let e = this.props.typeahead.emojis[this.props.typeahead.index];
       return e.skins.map((t, i) => ({
         emojiName: e.id,
-        src: PC(t.unified, this.props.emojiImageSet),
+        src: buildEmojiImageUrl(t.unified, this.props.emojiImageSet),
         skin: i
       }));
     };

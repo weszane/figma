@@ -9,7 +9,7 @@ import { t as _$$t } from "../5132/435788";
 import { R } from "../1250/835893";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { gN } from "../figma_app/976345";
+import { selectFolderView } from "../figma_app/976345";
 import { L } from "../figma_app/990299";
 import { FFileType } from "../figma_app/191312";
 import { SITES_STRING, COOPER_STRING, FIGMAKE_STRING } from "../figma_app/53721";
@@ -97,7 +97,7 @@ export function $$v1({
     key: "import-file",
     isLoading: e,
     onClick: () => {
-      n && t(gN(n));
+      n && t(selectFolderView(n));
       t(L());
     },
     title: getI18nString("file_browser.creation_buttons.import"),

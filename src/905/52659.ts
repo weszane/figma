@@ -7,7 +7,7 @@ import { MD } from "../figma_app/672951";
 import { getAtomMutate } from "../figma_app/566371";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { kg } from "../figma_app/976345";
+import { trackNavTreeClicked } from "../figma_app/976345";
 import { U as _$$U } from "../905/926550";
 import { V as _$$V } from "../905/633585";
 import { E as _$$E } from "../905/391888";
@@ -19,7 +19,7 @@ import { showModalHandler } from "../905/156213";
 import { Ct } from "../figma_app/199513";
 import { getSelectedView } from "../figma_app/386952";
 import { mapProjectProperties } from "../figma_app/349248";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { FolderSortKey } from "../905/316062";
 import { SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../figma_app/198885";
@@ -35,8 +35,8 @@ import { t as _$$t2 } from "../905/53773";
 import { x as _$$x } from "../905/98916";
 import { H8, Pf } from "../905/590952";
 import { wW } from "../figma_app/656450";
-let T = Mz(_$$h, e => "team" === e.view ? `${e.view}-${e.teamId}` : e.view);
-let k = Mz(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateByView, (e, t, i, n) => {
+let T = createSelector(_$$h, e => "team" === e.view ? `${e.view}-${e.teamId}` : e.view);
+let k = createSelector(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateByView, (e, t, i, n) => {
   if ("team" === e.view) {
     let e = n.team;
     return {
@@ -335,7 +335,7 @@ export function $$ea0(e) {
     },
     handleDeleteKey: L,
     handleOpenItem: (e, t) => {
-      "trashedFolders" !== S.view && (s(kg({
+      "trashedFolders" !== S.view && (s(trackNavTreeClicked({
         clickedResourceType: "team",
         resourceIdOrKey: e.id
       })), P(e.id, t));

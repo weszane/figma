@@ -9,7 +9,7 @@ import { v } from "../905/755077";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { aP } from "../figma_app/530167";
-import { GH, aF, VP } from "../905/18797";
+import { isSuccess, isFailure, isLoading } from "../905/18797";
 import { Bj } from "../905/708054";
 import { qw, Py, H5, BU, Ng as _$$Ng, rh, qr, PJ, GC, u1 } from "../905/599844";
 var n;
@@ -134,7 +134,7 @@ export function $$v3(e) {
       };
     }
     UNSAFE_componentWillUpdate(e) {
-      this.state.didTriggerChangeProfileHandle && (GH(e.loadingState, this.loadingKey()) ? e.onHandleSet() : aF(e.loadingState, this.loadingKey()) && this.setState({
+      this.state.didTriggerChangeProfileHandle && (isSuccess(e.loadingState, this.loadingKey()) ? e.onHandleSet() : isFailure(e.loadingState, this.loadingKey()) && this.setState({
         didTriggerChangeProfileHandle: !1
       }));
     }
@@ -165,7 +165,7 @@ export function $$v3(e) {
         primaryButton: {
           onClick: this.onSaveHandleClick,
           text: getI18nString("general.save"),
-          disabled: this.state.disableSubmit || VP(this.props.loadingState, this.loadingKey()),
+          disabled: this.state.disableSubmit || isLoading(this.props.loadingState, this.loadingKey()),
           dataTestId: "save-community-profile-handle"
         },
         footerLeftSide: this.getFooterText(),

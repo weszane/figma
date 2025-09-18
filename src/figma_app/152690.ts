@@ -19,7 +19,7 @@ import { VisualBellActions } from "../905/302958";
 import { v4, xv } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { Q } from "../905/217916";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { showModalHandler } from "../905/156213";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { trackDefinedFileEvent } from "../figma_app/314264";
@@ -27,9 +27,9 @@ import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../9
 import { b as _$$b } from "../figma_app/755529";
 import { A5, lJ, kl } from "../905/275640";
 import { u as _$$u, G6, jI, iC } from "../figma_app/852050";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { I7, P1 } from "../figma_app/745458";
-import { dK, $u } from "../figma_app/889655";
+import { selectSceneGraph, $u } from "../figma_app/889655";
 import { LibraryTabEnum, getSubscribedVariableInfo, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
@@ -79,7 +79,7 @@ export function $$et7() {
   };
 }
 export function $$er24(e) {
-  let t = useSelector(dK);
+  let t = useSelector(selectSceneGraph);
   let [r] = lJ("variableConsumptionInfo");
   let a = useCallback(r => {
     for (let n of e) {
@@ -216,8 +216,8 @@ export function $$ec17(e = 0) {
   let t = useDispatch();
   let r = lJ("numSelectedByType")[0];
   let s = function () {
-    let e = hA();
-    let t = Fk((e, t) => {
+    let e = useDevModeFocusId();
+    let t = useDeepEqualSceneValue((e, t) => {
       let r = e.get(t);
       return r ? r.type : null;
     }, e);

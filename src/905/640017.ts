@@ -1,34 +1,63 @@
-import { useState, useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import { n4, uW } from "../905/187165";
-import { C_ } from "../905/345933";
-export function $$o1() {
-  let e = useSelector(e => e.theme.themePreference);
-  return C_.includes(e) ? e : "light";
+import { useContext, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { DARK_THEME_MEDIA_QUERY, ThemeContext } from '../905/187165'
+import { C_ as themeVariants } from '../905/345933'
+
+/**
+ * Returns the user's theme preference from Redux store.
+ * Original name: $$o1
+ */
+export function getThemePreference() {
+  const themePreference = useSelector(state => state.theme.themePreference)
+  return themeVariants.includes(themePreference) ? themePreference : 'light'
 }
-export function $$l0() {
-  return useSelector(e => e.theme?.visibleTheme);
+
+/**
+ * Returns the currently visible theme from Redux store.
+ * Original name: $$l0
+ */
+export function getVisibleTheme() {
+  return useSelector(state => state.theme?.visibleTheme)
 }
-export function $$d2() {
-  let e = $$l0();
-  let [t, i] = useState(e ?? n4.matches ? "dark" : "light");
+
+/**
+ * Determines and tracks the current theme, updating on system theme changes.
+ * Original name: $$d2
+ */
+export function useCurrentTheme() {
+  const visibleTheme = getVisibleTheme()
+  const [currentTheme, setCurrentTheme] = useState(
+    visibleTheme ?? (DARK_THEME_MEDIA_QUERY.matches ? 'dark' : 'light'),
+  )
+
   useEffect(() => {
-    if (e) {
-      i(e);
-      return;
+    if (visibleTheme) {
+      setCurrentTheme(visibleTheme)
+      return
     }
-    let t = e => {
-      i(e.matches ? "dark" : "light");
-    };
-    n4.addEventListener("change", t);
-    return () => n4.removeEventListener("change", t);
-  }, [e]);
-  return t;
+    /**
+     * Handles system theme changes.
+     */
+    const handleThemeChange = (event: MediaQueryListEvent) => {
+      setCurrentTheme(event.matches ? 'dark' : 'light')
+    }
+    DARK_THEME_MEDIA_QUERY.addEventListener('change', handleThemeChange)
+    return () => DARK_THEME_MEDIA_QUERY.removeEventListener('change', handleThemeChange)
+  }, [visibleTheme])
+
+  return currentTheme
 }
-export function $$c3() {
-  return useContext(uW);
+
+/**
+ * Returns the current theme context value.
+ * Original name: $$c3
+ */
+export function useThemeContext() {
+  return useContext(ThemeContext)
 }
-export const DP = $$l0;
-export const am = $$o1;
-export const dB = $$d2;
-export const yM = $$c3;
+
+// Exported aliases for backward compatibility
+export const DP = getVisibleTheme
+export const am = getThemePreference
+export const dB = useCurrentTheme
+export const yM = useThemeContext

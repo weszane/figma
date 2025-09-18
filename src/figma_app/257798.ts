@@ -19,7 +19,7 @@ import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr, vm, yU } from "../figma_app/678782";
 import { Xo } from "../figma_app/482495";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { ei as _$$ei } from "../figma_app/795674";
 import { UpgradeAction } from "../905/370443";
@@ -27,7 +27,7 @@ import { isDesignFileType } from "../figma_app/976749";
 import { e } from "../905/621515";
 import { UK } from "../figma_app/740163";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { N as _$$N } from "../figma_app/268271";
 import { pN } from "../figma_app/433401";
@@ -45,8 +45,8 @@ let B = () => {
   let e = _$$V2();
   let t = isDesignFileType();
   let r = "1" === localStorage.getItem("property-labels-visible");
-  let n = _$$f(pN);
-  let a = _$$f("did_sign_up_as_ui3_user");
+  let n = selectUserFlag(pN);
+  let a = selectUserFlag("did_sign_up_as_ui3_user");
   let s = selectCurrentUser();
   let o = useMemo(() => {
     if (!s) return 0;
@@ -224,7 +224,7 @@ function q(e) {
     alignVerCenterEnabled: o,
     alignBottomEnabled: l
   });
-  let g = Fk(e => {
+  let g = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (t.some(e => !e.isGridChild || "ABSOLUTE" === e.stackPositioning)) return null;
     let r = e => {

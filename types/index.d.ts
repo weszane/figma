@@ -1,4 +1,4 @@
-import type { Store } from 'redux'
+import type { Dispatch, Store } from 'redux'
 import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
 
 declare global {
@@ -7,7 +7,8 @@ declare global {
   let scheduler: any
   let createFileImporter: any
   let Fig: FigType
-
+  type AppDispatch = Dispatch<any>
+  let mpGlobal: any
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs

@@ -1,8 +1,8 @@
-import { Zm } from "../905/270781";
-import { dK, Sh } from "../figma_app/889655";
-export let $$a1 = Zm(e => {
-  let t = dK(e);
-  let i = Sh(e);
+import { memoizeWithDeepEquality } from "../905/270781";
+import { selectSceneGraph, selectSceneGraphSelectionKeys } from "../figma_app/889655";
+export let $$a1 = memoizeWithDeepEquality(e => {
+  let t = selectSceneGraph(e);
+  let i = selectSceneGraphSelectionKeys(e);
   let n = [];
   i.forEach(e => {
     let i = t.get(e);

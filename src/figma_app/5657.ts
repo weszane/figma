@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { Ai } from "../figma_app/242339";
 import { jK } from "../figma_app/989514";
 import { jr, Sf, H7 } from "../figma_app/467440";
@@ -22,7 +22,7 @@ var l = o;
 let v = "cursor_bot_tooltip--textInverseColor--sNGZA";
 function A(e) {
   let t = e.shouldInverseColors ?? !1;
-  let r = _$$f("cursor_bot_v2_make_show_me_primary_cta");
+  let r = selectUserFlag("cursor_bot_v2_make_show_me_primary_cta");
   return jsxs(Fragment, {
     children: [jsx("h2", {
       className: l()(wx, {
@@ -159,7 +159,7 @@ export function $$x0(e) {
     }
   };
   let N = Ai(["exp_cursor_bot_onboarding"]);
-  let C = _$$f("cursor_bot_v2_make_show_me_primary_cta");
+  let C = selectUserFlag("cursor_bot_v2_make_show_me_primary_cta");
   return jsxs(TrackingProvider, {
     name: e.trackingContextName,
     properties: {

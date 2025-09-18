@@ -8,7 +8,7 @@ import { T as _$$T } from "../905/594474";
 import { createOptimistThunk } from "../905/350402";
 import { Qi, fy } from "../figma_app/559491";
 import { showModal, showModalHandler } from "../905/156213";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { trackUserEvent } from "../figma_app/314264";
 import { canRunExtensions } from "../figma_app/12796";
 import { getPermissionsState } from "../figma_app/642025";
@@ -31,7 +31,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   localSnapshotBlob: w,
   widgetNodeId: O
 }) => {
-  if (c === PageTypeEnum.EDITOR && !canRunExtensions(e.getState())) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+  if (c === PageTypeEnum.EDITOR && !canRunExtensions(e.getState())) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
   if (null != r) {
     let [t, n] = await Promise.all([pluginAPIService.getPlugins({
       id: r

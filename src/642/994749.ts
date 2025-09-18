@@ -11,10 +11,10 @@ import { Ay } from "@stylexjs/stylex";
 import { oW } from "../905/675859";
 import { Qp, JR } from "../figma_app/162641";
 import { getI18nString } from "../905/303541";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { ic } from "../figma_app/688398";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 let c = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -33,10 +33,10 @@ let c = memo(function (e) {
 export let $$b0 = ["TEXT", "SECTION", "SLICE", "STICKY", "CONNECTOR", "STAMP"];
 export function $$C1(e) {
   let t;
-  let s = Fk((e, t) => e.get(t)?.visible, e.guid);
-  let b = Fk((e, t) => e.get(t)?.type, e.guid);
+  let s = useDeepEqualSceneValue((e, t) => e.get(t)?.visible, e.guid);
+  let b = useDeepEqualSceneValue((e, t) => e.get(t)?.type, e.guid);
   let C = useCurrentFileKey();
-  let v = DP();
+  let v = getVisibleTheme();
   let S = ic(e.guid);
   if (!b) return null;
   switch (b) {

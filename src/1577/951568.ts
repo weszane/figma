@@ -5,7 +5,7 @@ import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
-import { CT } from "../figma_app/297957";
+import { useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
 import { OrgProductTermsEligibleInfo } from "../figma_app/43951";
@@ -16,7 +16,7 @@ export let $$p1 = createRemovableAtomFamily(e => atom(t => e ? t(OrgProductTerms
   org: e
 }) => !!getResourceDataOrFallback(e?.isSalesAssistedPlanProperty)?.value && !getResourceDataOrFallback(e?.subscriptionShouldNotAutoRenewPlanProperty) && getResourceDataOrFallback(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025) : resourceUtils.disabled()));
 export function $$h0(e, t) {
-  let i = CT();
+  let i = useSeatBillingTermsExperiment();
   let o = Xf(e?.id);
   let _ = _$$n();
   let m = useAtomWithSubscription($$p1(e?.id ?? null));

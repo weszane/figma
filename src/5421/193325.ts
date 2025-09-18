@@ -38,7 +38,7 @@ import { DxS } from "../figma_app/27776";
 import { X7 } from "../897/50897";
 import { ButtonPrimitive } from "../905/632989";
 import { Y1 } from "../905/143116";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { KN } from "../figma_app/741785";
 import { Op } from "../figma_app/405038";
 import { YT, Oz, zt, LH, kM, uU, hU, oc, GB, Fp } from "../figma_app/84580";
@@ -56,7 +56,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { updateHoveredNode } from "../figma_app/741237";
 import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
-import { Sh, dK } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys, selectSceneGraph } from "../figma_app/889655";
 import { D as _$$D } from "../figma_app/335489";
 import { lS } from "../figma_app/218448";
 import { cP as _$$cP } from "../figma_app/264776";
@@ -490,7 +490,7 @@ function eh({
   handleMouseDownUI3: v
 }) {
   let I = useDispatch();
-  let C = p8("currentPage");
+  let C = useAppModelProperty("currentPage");
   let E = YT() === Oz.TWO_COL;
   let j = E ? x.equals(h) : void 0;
   let {
@@ -767,8 +767,8 @@ let ek = memo(function (e) {
   let t = useCurrentFileKey();
   let n = useOpenFileLibraryKey();
   let l = useSelector(eP);
-  let s = useSelector(Sh);
-  let d = useSelector(dK);
+  let s = useSelector(selectSceneGraphSelectionKeys);
+  let d = useSelector(selectSceneGraph);
   let c = useIsSelectedViewFullscreenCooper();
   let p = _$$D(s, d);
   let u = useSelector(eO);

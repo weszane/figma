@@ -1,16 +1,16 @@
 import { isNotNullish } from "../figma_app/95419";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { CurrencyFormatter } from "../figma_app/514043";
 export function $$s1(e, t) {
   let r = 0;
-  N_.forEach(i => {
+  collaboratorSet.forEach(i => {
     isNotNullish(t[i]) && (r += Math.round((e[i] || 0) * t[i]));
   });
   return r;
 }
 export function $$o2(e, t, r) {
   let a = 0;
-  N_.forEach(i => {
+  collaboratorSet.forEach(i => {
     isNotNullish(t[i]) && (a += Math.round((e[i] || 0) * t[i] * (.01 * r)));
   });
   return a;

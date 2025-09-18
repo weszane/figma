@@ -5,11 +5,11 @@ import { getFeatureFlags } from "../905/601108";
 import { RecordingPureComponent, handlePointerEvent, SKIP_RECORDING, handleWheelEvent, handleKeyboardEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { n as _$$n } from "../905/734251";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { dG } from "../figma_app/753501";
 import { dM } from "../figma_app/837840";
-import { rl } from "../905/248569";
-import { p3, VG } from "../figma_app/622881";
+import { createColorDataUri } from "../905/248569";
+import { shouldUsePolyfill, getColorSpaceString } from "../figma_app/622881";
 function g(e) {
   return jsx(f, {
     ...e,
@@ -270,7 +270,7 @@ let $$y1 = 16;
 let $$b0 = 4;
 let v = "0 0 0 .6px rgba(0, 0, 0, 0.2)";
 let I = "var(--elevation-200-canvas)";
-let E = F;
+let E = colorCSSManipulatorInstance;
 export function $$x2({
   hitBoxMargin: e,
   width: t,
@@ -296,7 +296,7 @@ export function $$x2({
       t.style.borderColor = "white";
       t.style.borderWidth = `${$$b0}px`;
       let i = x(e);
-      I === ColorSpaceEnum.DISPLAY_P3 && p3() ? t.style.backgroundImage = `url(${rl(i, I || ColorSpaceEnum.SRGB)})` : t.style.background = E.format(i, VG(I || ColorSpaceEnum.SRGB));
+      I === ColorSpaceEnum.DISPLAY_P3 && shouldUsePolyfill() ? t.style.backgroundImage = `url(${createColorDataUri(i, I || ColorSpaceEnum.SRGB)})` : t.style.background = E.format(i, getColorSpaceString(I || ColorSpaceEnum.SRGB));
     }
   }, [x, I, "ui3"]);
   let C = $$_3("ui3");

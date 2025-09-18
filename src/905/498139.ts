@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { DD } from "../905/211095";
 import { vS } from "../figma_app/323320";
@@ -191,7 +191,7 @@ function U({
   let j = WB(i);
   let U = selectWithShallowEqual(e => vS(e, j, g));
   let V = function (e) {
-    let t = useSelector(Sh);
+    let t = useSelector(selectSceneGraphSelectionKeys);
     let i = useSelector(e => {
       let i = t.length ? t[0] : null;
       let n = i ? e.mirror.sceneGraph.get(i) : null;

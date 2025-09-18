@@ -16,7 +16,7 @@ import { resourceUtils } from "../905/989992";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { V } from "../905/223767";
-import { dm } from "../figma_app/976345";
+import { selectTeamView } from "../figma_app/976345";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -192,7 +192,7 @@ function R(e) {
       return jsx("button", {
         onClick: a => {
           a.stopPropagation();
-          t(dm(_.id));
+          t(selectTeamView(_.id));
           W(UpsellModalType.STARTER_TEAM_BADGE);
           trackEventAnalytics("Starter Team Badge Clicked", {
             userId: n.id,

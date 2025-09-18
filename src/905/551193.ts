@@ -3,7 +3,7 @@ import { mV } from "../905/837497";
 import { a8 } from "../figma_app/559491";
 import { gI } from "../figma_app/399472";
 import { findProfile } from "../figma_app/740025";
-import { D2 } from "../905/18797";
+import { isLoaded } from "../905/18797";
 import { isWidget } from "../figma_app/45218";
 import { getWidgetAllowListKey, hasLocalFileId, PluginInstallStatus } from "../figma_app/155287";
 import { $u, Hr, E2 } from "../905/257019";
@@ -20,7 +20,7 @@ async function p(e) {
   });
   let u = openFile?.key ?? null;
   let p = getWidgetAllowListKey(e, u);
-  D2(loadingState, p) || (await debugState.dispatch(mV({
+  isLoaded(loadingState, p) || (await debugState.dispatch(mV({
     orgId: e,
     profileId: d?.id
   })));
@@ -29,7 +29,7 @@ async function m(e) {
   let {
     loadingState
   } = debugState.getState();
-  D2(loadingState, a8.loadingKeyForPayload(e)) || (await debugState.dispatch(gI()));
+  isLoaded(loadingState, a8.loadingKeyForPayload(e)) || (await debugState.dispatch(gI()));
 }
 export function $$h2(e, t) {
   if (hasLocalFileId(e)) return !1;

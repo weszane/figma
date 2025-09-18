@@ -5,7 +5,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { reportError } from "../905/11";
-import { eY, T3 } from "../figma_app/722362";
+import { useSceneGraphSelector, usePlaygroundSceneGraph } from "../figma_app/722362";
 import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Vr } from "../figma_app/151869";
 import { ph, Bn, Gl, Ji, kN } from "../figma_app/97042";
@@ -30,8 +30,8 @@ function f(e, t, r) {
 }
 export function $$E0(e, t, r) {
   let a = Vr() ?? null;
-  let d = eY();
-  let _ = T3();
+  let d = useSceneGraphSelector();
+  let _ = usePlaygroundSceneGraph();
   let f = Fullscreen.getPlaygroundNodeData();
   r && (a = (d = _).get(f?.playgroundGUID ?? ""));
   let E = !!getFeatureFlags().dt_code_connect_inline_instances;

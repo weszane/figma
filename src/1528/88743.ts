@@ -31,7 +31,7 @@ import { h as _$$h2 } from "../905/207101";
 import { t9 } from "../figma_app/334505";
 import { hg, u7 } from "../figma_app/425489";
 import { e as _$$e } from "../9410/707590";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { registerModal } from "../905/102752";
 import { Yj, JI } from "../905/416496";
 import { k as _$$k3 } from "../905/443820";
@@ -690,7 +690,7 @@ function eu({
 let ep = registerModal(function (e) {
   let t = useModalManager(e);
   let n = useDispatch();
-  let i = eY();
+  let i = useSceneGraphSelector();
   let o = function () {
     let [{
       currentPresentedNode: e

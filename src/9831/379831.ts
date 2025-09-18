@@ -5,7 +5,7 @@ import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, 
 import { analyticsEventManager } from "../905/449184";
 import { l as _$$l } from "../905/745972";
 import { KeyCodes } from "../905/63728";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { sx } from "../905/941192";
 import { Oz, Lp, sg, wc, tH } from "../905/251509";
 import { Cc, lX, lu } from "../905/545842";
@@ -63,7 +63,7 @@ let C = (() => {
   let e = atom(Ok());
   return atom(t => t(e), async (t, r) => {
     let n;
-    if (t(e).status === _$$r.LOADING) return;
+    if (t(e).status === APILoadingStatus.LOADING) return;
     let s = t(y);
     if (s) {
       r(e, ux());
@@ -992,7 +992,7 @@ function e1({
 }
 function e3() {
   let [e, t] = useAtomValueAndSetter(C);
-  let r = e.status === _$$r.LOADING;
+  let r = e.status === APILoadingStatus.LOADING;
   useEffect(() => {
     t();
   }, [t]);
@@ -1055,15 +1055,15 @@ export let $$e60 = memo(function ({
 }) {
   let a = useAtomWithSubscription(lu);
   switch (a.status) {
-    case _$$r.INIT:
+    case APILoadingStatus.INIT:
       return t ?? jsx(zG, {});
-    case _$$r.LOADING:
+    case APILoadingStatus.LOADING:
       return jsx(zG, {});
-    case _$$r.FAILURE:
+    case APILoadingStatus.FAILURE:
       return jsx(rf, {
         error: a.error
       });
-    case _$$r.SUCCESS:
+    case APILoadingStatus.SUCCESS:
   }
   if (0 === a.value.primaryResource.rootObjects.length) return jsx(rf, {
     error: "No root objects found. This is likely a bug - please report in #figmascope."
@@ -1120,7 +1120,7 @@ function e9({
   window.figmaScopeScene = T;
   (function (e) {
     let [t, r] = useAtomValueAndSetter(C);
-    t.status === _$$r.SUCCESS && e?.setSceneGraphValidationInfo?.(t.value);
+    t.status === APILoadingStatus.SUCCESS && e?.setSceneGraphValidationInfo?.(t.value);
     useEffect(() => {
       r();
     }, [r]);

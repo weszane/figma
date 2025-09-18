@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { UL, iB, O$ } from "../figma_app/361035";
 import { Tj, gS, gu } from "../figma_app/441925";
 import { getRumLoggingConfig } from "../905/16237";
-import { Dj } from "../figma_app/297957";
+import { useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { Ju } from "../905/712921";
 import { e0 } from "../905/696396";
@@ -26,7 +26,7 @@ import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
 import { $z } from "../figma_app/617427";
 import { AutoLayout } from "../905/470281";
 import { showModalHandler } from "../905/156213";
-import { AG } from "../figma_app/217457";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { registerModal } from "../905/102752";
 import { $$ } from "../c5e2cae0/705272";
 import { ButtonPrimitive } from "../905/632989";
@@ -80,7 +80,7 @@ let R = registerModal(function (e) {
           padding: {
             bottom: 16
           },
-          children: Object.keys(c).sort(AG).map(e => isNullish(seatTypes[e]) || isNullish(c[e]) ? null : jsx("div", {
+          children: Object.keys(c).sort(compareProductAccessTypes).map(e => isNullish(seatTypes[e]) || isNullish(c[e]) ? null : jsx("div", {
             "data-testid": `additional-seats--${e}`,
             children: jsx(_$$s2, {
               billableProductKey: e,
@@ -237,7 +237,7 @@ function Z({
   let n = useDispatch();
   let d = getUserId();
   let o = e.id === d;
-  let c = Dj();
+  let c = useCartSeatSelectionClarityExperiment();
   let u = i === Ju.PRO && c();
   let p = () => {
     n(showModalHandler({
@@ -350,7 +350,7 @@ export function $$q0({
   }, [e, E]);
   let k = UL(iB(a.selectedUserSeatTypes));
   let P = UL(a.additionalSeatCounts);
-  let M = Dj();
+  let M = useCartSeatSelectionClarityExperiment();
   let R = S === Ju.PRO && M();
   return jsx(TrackingProvider, {
     name: e0.SELECT_SEATS_TABLE,

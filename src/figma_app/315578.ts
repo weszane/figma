@@ -15,7 +15,7 @@ import { selectViewAction } from "../905/929976";
 import { hideModalHandler, showModal } from "../905/156213";
 import { isVsCodeEnvironment } from "../905/858738";
 import { getSelectedView } from "../figma_app/386952";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { P } from "../905/647955";
@@ -234,7 +234,7 @@ export function $$L1({
       key,
       version: content_hash
     } : void 0, [key, content_hash]);
-    let A = Fk((e, t) => t ? e?.getStyleNodeByRef(t)?.guid : void 0, S) ?? r;
+    let A = useDeepEqualSceneValue((e, t) => t ? e?.getStyleNodeByRef(t)?.guid : void 0, S) ?? r;
     return {
       toggleStyleDetailModal: useCallback(r => {
         if (r.stopPropagation(), e?.current && t && A && n) {

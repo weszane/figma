@@ -21,8 +21,8 @@ import { tI } from "../figma_app/847597";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { FBillingPeriodType, FOrganizationLevelType } from "../figma_app/191312";
 import { hY, ww, Vt, II } from "../figma_app/80683";
-import { C3 } from "../figma_app/297957";
-import { Ye } from "../905/332483";
+import { useSeatManagementWidgetProExperiment } from "../figma_app/297957";
+import { viewCollaboratorSet } from "../905/332483";
 import { d as _$$d } from "../figma_app/603561";
 let E = sx.flex.flexRow.justifyBetween.gap16.p4.add({
   width: "calc(100% - 8px)"
@@ -208,7 +208,7 @@ function I({
 }
 export function $$L1(e) {
   let t = hY(e.planParentId, e.planType);
-  let a = C3();
+  let a = useSeatManagementWidgetProExperiment();
   let s = ww(e.planType === FOrganizationLevelType.TEAM && a(e.isActiveAnnualPlan ?? !1) ? {
     teamId: e.planParentId
   } : null);
@@ -236,7 +236,7 @@ function M(e) {
     return jsx(AutoLayout, {
       direction: "horizontal",
       spacing: 16,
-      children: Ye.map(s => jsx(C, {
+      children: viewCollaboratorSet.map(s => jsx(C, {
         seatType: s,
         seatCount: {
           total: 0,
@@ -257,7 +257,7 @@ function M(e) {
   return jsx(AutoLayout, {
     direction: "horizontal",
     spacing: 16,
-    children: Ye.map(s => jsx(C, {
+    children: viewCollaboratorSet.map(s => jsx(C, {
       seatType: s,
       seatCount: a[s] ?? {
         total: 0,

@@ -29,7 +29,7 @@ import { R as _$$R } from "../905/304671";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { Dl } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { ju } from "../figma_app/88239";
+import { useComponentBrowserEntrypoint } from "../figma_app/88239";
 import { n6 } from "../905/234821";
 import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
@@ -611,7 +611,7 @@ let ti = memo(function ({
   let eU = _$$m2();
   let eK = o.user;
   let eV = Dl(c);
-  let eW = ju("filename_menu");
+  let eW = useComponentBrowserEntrypoint("filename_menu");
   let eq = useSelector(F9);
   let eQ = jT(c, eq).unwrapOr(!1);
   let e$ = useSubscription(FileNameViewDropdown, {

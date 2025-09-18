@@ -17,8 +17,8 @@ import { UR } from "../figma_app/307841";
 import { TrackingProvider } from "../figma_app/831799";
 import { jv } from "../905/84777";
 import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { Ju } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
@@ -36,7 +36,7 @@ export function $$E0({
 }) {
   let o = UR();
   let x = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: a,
       tier: l,
@@ -45,7 +45,7 @@ export function $$E0({
     }
   });
   let N = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: a,
       tier: l,
@@ -92,7 +92,7 @@ export function $$E0({
         style: sx.add({
           marginBottom: "24px"
         }).$,
-        children: Object.keys(e).sort(AG).map(t => jsx(A, {
+        children: Object.keys(e).sort(compareProductAccessTypes).map(t => jsx(A, {
           billableProductKey: t,
           count: e[t] || 0,
           currency: a,

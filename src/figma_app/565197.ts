@@ -7,12 +7,12 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { logInfo, logWarning } from "../905/714362";
 import { T } from "../figma_app/409248";
-import { w6, Dl } from "../figma_app/291892";
+import { createImageFromUrl, Dl } from "../figma_app/291892";
 import { A } from "../905/426471";
 import { $C, PN } from "../figma_app/728075";
 let m = Object.create(null);
 function g(e) {
-  return w6(e).catch(() => null);
+  return createImageFromUrl(e).catch(() => null);
 }
 let f = new A();
 let E = buildUploadUrl("cbbdc3ccc2f650369332a454328722aa11cbd78a");

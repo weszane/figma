@@ -8,7 +8,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
-import { yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { UM, vr } from "../figma_app/475472";
 import { n1, p9 } from "../figma_app/88768";
 import { setupLoadingStateHandler } from "../905/696711";
@@ -149,7 +149,7 @@ let $$A2 = createOptimistThunk((e, t, {
   setupLoadingStateHandler(s, e, r);
   s.then(t => {
     let r = t.data.meta;
-    e.dispatch(yJ({
+    e.dispatch(setTeamOptimistThunk({
       team: r,
       userInitiated: !1
     }));

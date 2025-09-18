@@ -15,7 +15,7 @@ import { k } from "../figma_app/449815";
 import { Pv } from "../905/619652";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
-import { AF } from "../figma_app/889655";
+import { selectSingleSelectedNode } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 var N = (e => (e.GENERIC = "GENERIC", e.OFFLINE = "OFFLINE", e.THUMBNAIL_TIMEOUT = "THUMBNAIL_TIMEOUT", e))(N || {});
 export function $$y0(e) {
@@ -227,7 +227,7 @@ export function $$T1({
   }, [L, n, hasThumbnailErrors, R, playgroundNodeData, thumbnailData, l, hasChangesToReset, j, u]);
 }
 export function $$L3() {
-  let e = useSelector(AF);
+  let e = useSelector(selectSingleSelectedNode);
   let t = e?.guid;
   let n = wS();
   let r = "loaded" === n.status ? n.result : void 0;

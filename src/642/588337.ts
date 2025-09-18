@@ -16,7 +16,7 @@ import { setupAdvancedLazyLoader, NONE_SYMBOL } from "../905/992467";
 import { oW } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { zR } from "../figma_app/817077";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Cd, $H } from "../048e062c/416936";
 import { ZN } from "../048e062c/444406";
 import v from "../b2835def/987714";
@@ -47,7 +47,7 @@ export function $$I0({
   let v = useRef(null);
   let [I, A] = useState(null);
   let [P, L] = useState(null);
-  let R = useSelector(Sh);
+  let R = useSelector(selectSceneGraphSelectionKeys);
   let {
     importFile,
     isLoading

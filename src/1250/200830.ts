@@ -80,7 +80,7 @@ import { P as _$$P2 } from "../1250/527167";
 import { j0 } from "../1250/524544";
 import { U as _$$U3 } from "../1250/641541";
 import { FY } from "../figma_app/24841";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { d as _$$d } from "../905/647058";
 import { OrganizationType } from "../905/833838";
 import { WZ } from "../905/893645";
@@ -90,7 +90,7 @@ import { TextWithTruncation } from "../905/984674";
 import { rq } from "../905/425180";
 import { xX, j9 } from "../figma_app/211146";
 import { getSelectedView } from "../figma_app/386952";
-import { f as _$$f2 } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { ng as _$$ng, u_, $g, Jy, v$ } from "../figma_app/205827";
 import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
@@ -126,7 +126,7 @@ import { HH } from "../7222/418961";
 import { p as _$$p2 } from "../figma_app/353099";
 import { A as _$$A5 } from "../1250/487166";
 import { Ay as _$$Ay2 } from "../1250/615231";
-import { fn, ih } from "../figma_app/297957";
+import { useFBGNavigationUpdatesTreatment, FBGNavigationUpdatesVariants } from "../figma_app/297957";
 import { P as _$$P5 } from "../1250/232298";
 import { A as _$$A6 } from "../1250/545022";
 import { C as _$$C } from "../1250/50098";
@@ -141,7 +141,7 @@ import { $ as _$$$ } from "../1250/770005";
 import { getDaysUntilExpiration } from "../figma_app/141320";
 import { getCurrentTeam } from "../figma_app/598018";
 import { ZL } from "../1250/272654";
-import { Dw } from "../figma_app/976345";
+import { openCreateTeamFlow } from "../figma_app/976345";
 import { QL, EM } from "../905/609392";
 import { q as _$$q } from "../figma_app/712384";
 import { V as _$$V } from "../905/223767";
@@ -1025,7 +1025,7 @@ function tS() {
   let n = useSelector(e => e.userFlags.personal_draft_migration_scheduled);
   let r = e.filter(e => e.plan_type === OrganizationType.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
   let s = useDispatch();
-  let l = DP();
+  let l = getVisibleTheme();
   let d = useAtomWithSubscription(mp);
   let _ = e.some(e => e.plan_type === OrganizationType.ORG);
   let u = 1 === r.length && r[0].starter_team && !_;
@@ -2024,7 +2024,7 @@ function np() {
   let e = getSelectedView();
   let t = useSelector(e => e.userTeamFlags);
   let n = useSelector(e => !!e.modalShown);
-  let r = _$$f2(Jy);
+  let r = selectUserFlag(Jy);
   let i = xX();
   let {
     ongoingTrials,
@@ -2274,8 +2274,8 @@ let nW = "seen_team_project_link_overlay";
 let nz = userFlagExistsAtomFamily(nW);
 function n$() {
   let e = useAtomWithSubscription(nz);
-  let t = fn();
-  let n = () => t === ih.CONTROL;
+  let t = useFBGNavigationUpdatesTreatment();
+  let n = () => t === FBGNavigationUpdatesVariants.CONTROL;
   let {
     show,
     isShowing,
@@ -2413,7 +2413,7 @@ function an() {
     let a = QL(ae.key);
     n === n7.value ? e.show({
       onShow: () => {
-        t(Dw({
+        t(openCreateTeamFlow({
           isEduTeam: !0
         }));
         EM(n7.key);

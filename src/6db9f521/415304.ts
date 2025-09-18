@@ -9,8 +9,8 @@ import { replaceSelection } from "../figma_app/741237";
 import { tB } from "../figma_app/731583";
 import { y7 } from "../figma_app/385874";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
-import { Mw, KH } from "../figma_app/722362";
-import { wA } from "../figma_app/167249";
+import { useStableSelectedNode, useSceneGraphSelection } from "../figma_app/722362";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { isSupportedNodeType } from "../905/321380";
 import { mc, DD, ZU } from "../9410/640042";
 import { AppStateTsApi } from "../figma_app/763686";
@@ -28,7 +28,7 @@ function S(e) {
 }
 export function $$I0() {
   let e = function () {
-    let e = Mw();
+    let e = useStableSelectedNode();
     let t = useSelector(S);
     return useMemo(() => {
       let i = [...t];
@@ -71,11 +71,11 @@ function k({
 }) {
   let [u, T] = useState(!1);
   let S = sO();
-  let I = KH();
+  let I = useSceneGraphSelection();
   let N = useMemo(() => Object.keys(I), [I]);
   let k = useSelector(e => e.mirror.sceneGraph);
   let C = useMemo(() => scaleRect(i, t), [i, t]);
-  let w = wA((e, t) => {
+  let w = useStrictDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     if (!i || !i.hasEnabledVideoPaint) return null;
     let n = i.fills.findIndex(e => y7(e)?.video?.hash);

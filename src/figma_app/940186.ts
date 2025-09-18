@@ -5,7 +5,7 @@ import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { UT } from "../figma_app/95266";
 import { Tv } from "../figma_app/151869";
 import { c as _$$c } from "../figma_app/94664";
@@ -19,7 +19,7 @@ export function $$g0() {
     showBindingUI
   } = useContext(_$$p) ?? {};
   let f = Tv() || [];
-  let E = Fk((e, t) => {
+  let E = useDeepEqualSceneValue((e, t) => {
     for (let r of t) {
       if (!r) continue;
       let t = e.get(r);

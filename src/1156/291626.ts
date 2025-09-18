@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Ay } from "@stylexjs/stylex";
 import { w4, y1 } from "../905/445814";
 import { yh } from "../9410/974031";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { v, M } from "../905/981847";
 import { oz, aZ } from "../figma_app/119420";
 import { N } from "../1156/229926";
@@ -80,7 +80,7 @@ export function $$h1({
   onClick: s,
   attachmentType: c
 }) {
-  let d = eY().get(e);
+  let d = useSceneGraphSelector().get(e);
   let x = yh({
     nodeId: d?.guid || "",
     width: 512,

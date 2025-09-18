@@ -18,8 +18,8 @@ import { j as _$$j } from "../905/261906";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { Hl, YT } from "../figma_app/217457";
-import { a as _$$a2 } from "../905/584964";
+import { useGetLicenseTypesForSeatType, SeatDescriptionVisibility } from "../figma_app/217457";
+import { formatSortedProductNames } from "../905/584964";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { e0 } from "../905/696396";
 import { linkWithTracking } from "../figma_app/637027";
@@ -209,7 +209,7 @@ function M({
   iconSize: u,
   showDivider: m = !0
 }) {
-  let _ = useMemo(() => _$$a2(l), [l]);
+  let _ = useMemo(() => formatSortedProductNames(l), [l]);
   let p = a[r];
   if (isNullish(p)) return jsx(Fragment, {});
   let h = new CurrencyFormatter(p.currency).formatMoney(p.amount);
@@ -260,8 +260,8 @@ export function $$B0({
 }) {
   let h = useDispatch();
   let [g, x] = useState(1);
-  let b = Hl({
-    visibility: YT.SEAT_DESCRIPTION
+  let b = useGetLicenseTypesForSeatType({
+    visibility: SeatDescriptionVisibility.SEAT_DESCRIPTION
   });
   let f = () => {
     p.onClose();

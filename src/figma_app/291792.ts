@@ -11,7 +11,7 @@ import { t as _$$t } from "../5132/435788";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackFullScreenAnalytics } from "../905/449184";
-import { ce } from "../figma_app/347146";
+import { isChromebookTabbed } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { zE } from "../905/738636";
 import { n6 } from "../905/234821";
 import { p as _$$p } from "../905/36308";
-import { _p } from "../figma_app/297957";
+import { useSendToMakeExperiment } from "../figma_app/297957";
 import { $n, gW } from "../905/930279";
 import { fullscreenValue } from "../figma_app/455680";
 import { f as _$$f } from "../figma_app/990299";
@@ -56,7 +56,7 @@ export function $$J1({
   });
   let a = useSelector(e => e.userStateLoaded);
   let s = useMemo(() => ({
-    shouldShowBackToFiles: (!ck() || isZoomIntegration() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !desktopAPIInstance && !ce(),
+    shouldShowBackToFiles: (!ck() || isZoomIntegration() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !desktopAPIInstance && !isChromebookTabbed(),
     isDisabled: !a
   }), [a]);
   let o = c4();
@@ -141,7 +141,7 @@ function Q({
     } = useProjectFileCreationPermissions(g);
     let A = _$$h(data);
     let w = Zr("send-to-make-from-design");
-    let R = _p();
+    let R = useSendToMakeExperiment();
     let D = void 0 !== A.find(e => e.editorType === FFileType.FIGMAKE);
     let k = e === f6.EDITOR_QUICK_ACTIONS && D && w && R();
     let F = useMemo(() => {

@@ -17,7 +17,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { toArray, normalizeMixedValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { wA, Fk } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { iM } from "../figma_app/405546";
 var u = c;
 var _ = p;
@@ -91,7 +91,7 @@ let M = e => {
   });
 };
 export function $$F1() {
-  return wA(e => {
+  return useStrictDeepEqualSceneValue(e => {
     let t = e.getInternalCanvas();
     return t && getFilteredFeatureFlags().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== DistributionType.SCATTER || getFilteredFeatureFlags().ce_il_scatter)).map(e => {
       let t = {
@@ -176,7 +176,7 @@ export function $$V9() {
   }, [e.strokeBrushGuid, r, t]);
 }
 export function $$H2() {
-  let e = Fk(e => !!e.getInternalCanvas());
+  let e = useDeepEqualSceneValue(e => !!e.getInternalCanvas());
   let [t, r] = useAtomValueAndSetter($$N11);
   let [i, c] = useAtomValueAndSetter($$G6);
   let u = $$F1();

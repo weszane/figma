@@ -169,3 +169,5 @@ export const f6 = EvaluationReason
 export const Bf = ConfigManagerProxy
 export const iO = DynamicConfig
 export const w$ = FrozenConfigManager
+
+export { FrozenConfigManager }

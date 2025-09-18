@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { p8, dH } from "../figma_app/722362";
+import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanViewAnnotations, FileCanEditAnnotations, FileCanViewAnnotationsMegadot } from "../figma_app/43951";
 import { getObservableValue } from "../figma_app/84367";
@@ -27,8 +27,8 @@ export function $$h1() {
   return !!t.data?.file && "error" !== t.data.file.status && (t.data?.file?.data?.hasPermission ?? !1);
 }
 export function $$m4() {
-  let e = p8("isReadOnly");
-  let t = p8("activeCanvasEditModeType");
+  let e = useAppModelProperty("isReadOnly");
+  let t = useAppModelProperty("activeCanvasEditModeType");
   let r = $$h1();
   let a = isDevModeFocusViewActive();
   return useMemo(() => r && (!e || t === LayoutTabType.DEV_HANDOFF) && !a, [e, t, r, a]);
@@ -50,7 +50,7 @@ export function $$g0() {
   }, [e, t, r]);
 }
 export function $$f3() {
-  let e = dH();
+  let e = useCurrentTool();
   let t = isDevHandoffEditorType();
   let r = $$_2();
   let n = getObservableValue(AppStateTsApi?.uiState().showAnnotationsInDevMode, !0);

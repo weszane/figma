@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { Me } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { af } from "../figma_app/559491";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
@@ -41,7 +41,7 @@ let P = class e extends PureComponent {
       let t = this.props.openFileKey;
       if (!t) return;
       if (!checkCanRunExtensions()) {
-        _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+        _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         return;
       }
       let {

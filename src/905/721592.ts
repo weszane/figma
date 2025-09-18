@@ -2,7 +2,7 @@ import { ColorSpaceEnum, ColorConversionEnum, Fullscreen } from "../figma_app/76
 import { jg } from "../905/707098";
 import { nk } from "../905/432392";
 import { t2 } from "../905/8035";
-import { Qf } from "../905/248569";
+import { FormatDisplayP3Color } from "../905/248569";
 import { kz } from "../905/77776";
 export let $$d0 = {
   colorProfile: ColorSpaceEnum.SRGB,
@@ -48,7 +48,7 @@ export class $$h2 {
     return new $$h2(this.color, this.preferences, this.opacity, this.colorManagement);
   }
   get value() {
-    return this.hasResolvedVariable() ? new kz(this.variableValue.name, this.rawColor, this.preferences, this.variableValue?.status === jg.Resolved ? this.variableValue : void 0).value : this.colorManagement.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? Qf(this.color, this.opacity) : p(this.color) || 1 !== this.opacity ? function (e, t = 1) {
+    return this.hasResolvedVariable() ? new kz(this.variableValue.name, this.rawColor, this.preferences, this.variableValue?.status === jg.Resolved ? this.variableValue : void 0).value : this.colorManagement.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? FormatDisplayP3Color(this.color, this.opacity) : p(this.color) || 1 !== this.opacity ? function (e, t = 1) {
       let {
         r: _r,
         g,

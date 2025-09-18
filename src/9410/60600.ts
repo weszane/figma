@@ -13,7 +13,7 @@ import { yB } from "../figma_app/334505";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
@@ -47,7 +47,7 @@ export function $$N2() {
   useEffect(() => {
     e || (show(), m(!1));
   }, [e, m, show]);
-  let N = "dark" === DP();
+  let N = "dark" === getVisibleTheme();
   return w || !E ? null : jsx(_l, {
     description: jsx("span", {
       style: {

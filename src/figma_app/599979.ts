@@ -9,7 +9,7 @@ import { H } from '../905/473998';
 import { encodeBase64 } from '../905/561685';
 import { getFeatureFlags } from '../905/601108';
 import { s as _$$s } from '../905/608932';
-import { VV } from '../905/623179';
+import { uploadVideoToPresignedPost } from '../905/623179';
 import { j } from '../905/659729';
 import { liveStoreInstance } from '../905/713695';
 import { en, GT } from '../905/759470';
@@ -17,7 +17,7 @@ import { aB, yr } from '../905/827765';
 import { v as _$$v } from '../905/871922';
 import { getValueOrFallback } from '../905/872825';
 import { XHR } from '../905/910117';
-import { VY, yj } from '../905/966582';
+import { VIDEO_TYPE_VALUES, IMAGE_TYPES } from '../905/966582';
 import { O_ } from '../905/967587';
 import { i as _$$i } from '../905/970229';
 import { TeamOrgType } from '../figma_app/10554';
@@ -302,14 +302,14 @@ export function $$eu37(e, t) {
     return n ? n.profile_handle : r?.handle || null;
   }
 }
-export let $$ep3 = [yj.PNG, yj.JPEG];
+export let $$ep3 = [IMAGE_TYPES.PNG, IMAGE_TYPES.JPEG];
 export function $$e_26(e, t = 'Image') {
   if (!e) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_not_found', {
       filename: t
     }));
   }
-  let r = getValueOrFallback(e.type, yj);
+  let r = getValueOrFallback(e.type, IMAGE_TYPES);
   if (!r || !$$ep3.includes(r)) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_wrong_format', {
       filename: t
@@ -355,7 +355,7 @@ export async function $$ef9(e, t, r = en) {
             filename: t
           }));
         }
-        if (!VY.includes(e.type)) {
+        if (!VIDEO_TYPE_VALUES.includes(e.type)) {
           throw new Error(getI18nString('community.publishing.error_video_wrong_format', {
             filename: t
           }));
@@ -691,7 +691,7 @@ export async function $$eD7(e, t, r, n, s) {
         }
       }).then(() => fields.key || '');
     } else {
-      c = VV(url, fields, r, 'video/mp4');
+      c = uploadVideoToPresignedPost(url, fields, r, 'video/mp4');
     }
   }
   let p = new Blob([n], {

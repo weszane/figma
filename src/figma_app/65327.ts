@@ -6,7 +6,7 @@ import { globalPerfTimer } from "../905/542194";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { useSubscription } from "../figma_app/288654";
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma_app/473493";
-import { Ym } from "../figma_app/806075";
+import { handleEnterMode } from "../figma_app/806075";
 import { W as _$$W } from "../905/200727";
 import { d as _$$d } from "../905/692836";
 import { t as _$$t, c as _$$c } from "../905/722657";
@@ -85,7 +85,7 @@ export function $$k0(e, t) {
       n && r(IN({
         fdPreviewResource: n
       }));
-      Ym(i, FEditorType.DevHandoff, e, t, ee);
+      handleEnterMode(i, FEditorType.DevHandoff, e, t, ee);
       return !0;
     }
     if ("illustration" === n) {
@@ -99,7 +99,7 @@ export function $$k0(e, t) {
         editorType: FEditorType.Illustration
       }));
       r(_$$r);
-      Ym(n, FEditorType.Illustration, e, t, ee);
+      handleEnterMode(n, FEditorType.Illustration, e, t, ee);
       return !0;
     }
     {
@@ -125,7 +125,7 @@ export function $$k0(e, t) {
       G || (H || r(postUserFlag({
         dev_mode_should_see_paywall_reminder: !0
       })), B || setPropertiesPanelTab(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));
-      Ym(Q.getState(), FEditorType.Design, e, t, ee);
+      handleEnterMode(Q.getState(), FEditorType.Design, e, t, ee);
       return !0;
     }
   }, [M, j, $, Z, V, Q, r, K, Y, e, t, ee, G, H, B, W, close]);

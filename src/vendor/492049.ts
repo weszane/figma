@@ -1,95 +1,99 @@
-var i = "NOT_FOUND";
+let i = 'NOT_FOUND'
 function s(e) {
-  var r;
+  let r
   return {
-    get: function (n) {
-      return r && e(r.key, n) ? r.value : i;
+    get(n) {
+      return r && e(r.key, n) ? r.value : i
     },
-    put: function (e, n) {
+    put(e, n) {
       r = {
         key: e,
-        value: n
-      };
+        value: n,
+      }
     },
-    getEntries: function () {
-      return r ? [r] : [];
+    getEntries() {
+      return r ? [r] : []
     },
-    clear: function () {
-      r = void 0;
-    }
-  };
+    clear() {
+      r = void 0
+    },
+  }
 }
 function o(e, r) {
-  var n = [];
+  let n = []
   function s(e) {
-    var s = n.findIndex(function (n) {
-      return r(e, n.key);
-    });
+    let s = n.findIndex((n) => {
+      return r(e, n.key)
+    })
     if (s > -1) {
-      var o = n[s];
-      s > 0 && (n.splice(s, 1), n.unshift(o));
-      return o.value;
+      let o = n[s]
+      s > 0 && (n.splice(s, 1), n.unshift(o))
+      return o.value
     }
-    return i;
+    return i
   }
   function o(r, o) {
     s(r) === i && (n.unshift({
       key: r,
-      value: o
-    }), n.length > e && n.pop());
+      value: o,
+    }), n.length > e && n.pop())
   }
   return {
     get: s,
     put: o,
-    getEntries: function () {
-      return n;
+    getEntries() {
+      return n
     },
-    clear: function () {
-      n = [];
-    }
-  };
+    clear() {
+      n = []
+    },
+  }
 }
-var a = function (e, r) {
-  return e === r;
-};
+let a = function (e, r) {
+  return e === r
+}
 function h(e) {
   return function (r, n) {
-    if (null === r || null === n || r.length !== n.length) return !1;
+    if (r === null || n === null || r.length !== n.length)
+      return !1
     for (i = r.length, s = 0, void 0; s < i; s++) {
-      var i;
-      var s;
-      if (!e(r[s], n[s])) return !1;
+      var i
+      var s
+      if (!e(r[s], n[s]))
+        return !1
     }
-    return !0;
-  };
+    return !0
+  }
 }
-export function $$d0(e, r) {
-  var n = "object" == typeof r ? r : {
-    equalityCheck: r
-  };
-  var d = n.equalityCheck;
-  var p = void 0 === d ? a : d;
-  var g = n.maxSize;
-  var m = void 0 === g ? 1 : g;
-  var v = n.resultEqualityCheck;
-  var y = h(p);
-  var b = 1 === m ? s(y) : o(m, y);
+export function weakMapMemoize(e, r) {
+  let n = typeof r == 'object'
+    ? r
+    : {
+        equalityCheck: r,
+      }
+  let d = n.equalityCheck
+  let p = void 0 === d ? a : d
+  let g = n.maxSize
+  let m = void 0 === g ? 1 : g
+  let v = n.resultEqualityCheck
+  let y = h(p)
+  let b = m === 1 ? s(y) : o(m, y)
   function O() {
-    var r = b.get(arguments);
+    let r = b.get(arguments)
     if (r === i) {
       if (r = e.apply(null, arguments), v) {
-        var n = b.getEntries().find(function (e) {
-          return v(e.value, r);
-        });
-        n && (r = n.value);
+        let n = b.getEntries().find((e) => {
+          return v(e.value, r)
+        })
+        n && (r = n.value)
       }
-      b.put(arguments, r);
+      b.put(arguments, r)
     }
-    return r;
+    return r
   }
   O.clearCache = function () {
-    return b.clear();
-  };
-  return O;
+    return b.clear()
+  }
+  return O
 }
-export const UI = $$d0;
+export const UI = weakMapMemoize

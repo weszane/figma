@@ -6,13 +6,13 @@ import { DiagramElementType, InteractionCpp, Fullscreen, AppStateTsApi, LayoutSi
 import { memoizeByArgs } from "../figma_app/815945";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
-import { l7, ZO } from "../figma_app/88239";
+import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { mV } from "../905/837497";
 import { gI } from "../figma_app/399472";
 import { showModalHandler, hideModal } from "../905/156213";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { debugState } from "../905/407919";
@@ -804,7 +804,7 @@ export let $$eL4 = memoizeByArgs((e, t, i) => {
   e(mV({}));
 });
 export function $$eR2() {
-  switch (p8("onCanvasNameEditorInfo").mode) {
+  switch (useAppModelProperty("onCanvasNameEditorInfo").mode) {
     case DiagramElementType.FRAME_NAME:
       return jsx(eh, {});
     case DiagramElementType.FLOW_STARTING_POINT_NAME:
@@ -911,14 +911,14 @@ export function $$eB6(e, t) {
 export function $$eU1({
   commentsDetailContainerRef: e
 }) {
-  let t = p8("topLevelMode") === ViewType.HISTORY;
+  let t = useAppModelProperty("topLevelMode") === ViewType.HISTORY;
   let i = selectCurrentFile();
   let n = useSelector(e => e.user);
-  let o = p8("currentPage");
+  let o = useAppModelProperty("currentPage");
   let u = useSelector(e => e.comments);
-  let p = l7();
+  let p = useIsFullscreenOverview();
   let h = _$$e();
-  let f = ZO();
+  let f = useIsFullscreenDevModeComponentBrowser();
   let x = isUserNotLoggedInAndEditorSupported();
   let y = useCanUseDevModeDemoFile();
   let b = u.activeThread?.id || null;

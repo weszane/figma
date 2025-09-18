@@ -1,5 +1,5 @@
 import { prototypeInternal, FontSourceType, initializeFigmaServices, bindings } from "../figma_app/763686";
-import { jS } from "../figma_app/762706";
+import { initializeTsApiBindings } from "../figma_app/762706";
 import { createDeferredPromise } from "../905/874553";
 import { getFeatureFlags } from "../905/601108";
 import { isInteractionPathCheck } from "../figma_app/897289";
@@ -62,7 +62,7 @@ export async function $$v0(e, t) {
     e && (e.fullscreenEvents.fullscreenIsReady = Math.round(performance.now()));
     _$$r.loadTimer.report();
     return initializeFigmaServices();
-  })() : bindings && !isInteractionPathCheck() ? jS({
+  })() : bindings && !isInteractionPathCheck() ? initializeTsApiBindings({
     callMain: () => {
       bindings.refreshJsCppBindings();
     },

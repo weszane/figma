@@ -23,7 +23,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { Ow } from "../905/921418";
-import { oh, mC, D2, Sc } from "../905/18797";
+import { useIsLoading, useIsLoaded, isLoaded, isNullOrFailure } from "../905/18797";
 import { MH } from "../figma_app/803787";
 import { Rt } from "../figma_app/979658";
 import { FDocumentType } from "../905/862883";
@@ -302,12 +302,12 @@ export function $$eo1({
     productComponents
   } = g5(t);
   let ee = ik(productComponents, "components", (e, t) => !t.some(t => t.id === e.id), Y ? 9 : 10);
-  let eo = oh(fi);
-  let el = mk(ee, [!eo, mC(fC)]);
+  let eo = useIsLoading(fi);
+  let el = mk(ee, [!eo, useIsLoaded(fC)]);
   let ed = el.length > 0 || !s;
   let ec = (!V.query || !e) && getInitialOptions().user_data;
   let em = cX().setSelectedCategory;
-  let e_ = !q || !fileVersion || U && !D2(loadingState, yD(q.key));
+  let e_ = !q || !fileVersion || U && !isLoaded(loadingState, yD(q.key));
   let eg = hY();
   let {
     onToggleLibraryModal
@@ -487,7 +487,7 @@ export function $$ec0() {
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));
-  let o = t && fileVersion && Sc(loadingState, yD(t.key));
+  let o = t && fileVersion && isNullOrFailure(loadingState, yD(t.key));
   useEffect(() => {
     o && e(zK());
   }, [e, o]);
@@ -495,7 +495,7 @@ export function $$ec0() {
     productComponents
   } = g5(FDocumentType.FigJam);
   let d = ik(productComponents, "components", (e, t) => !t.some(t => t.id === e.id), 10);
-  let c = mk(d, [mC(fi), mC(fC)]);
+  let c = mk(d, [useIsLoaded(fi), useIsLoaded(fC)]);
   return jsx(lU, {
     items: {
       "": c

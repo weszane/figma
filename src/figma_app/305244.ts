@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { logInfo, logWarning } from "../905/714362";
 import { trackFileEvent } from "../figma_app/314264";
 import { II } from "../905/687477";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 let h = null;
 let m = 0;
 let g = 0;
@@ -67,14 +67,14 @@ export let $$A0 = {
     mpGlobal.sock = null;
     mpGlobal.msgs = [];
     mpGlobal.perfMetrics = [];
-    xK.setWsUrl(e);
+    fullscreenPerfManager.setWsUrl(e);
     let E = debugState?.getState();
     if (t && b(t.url, e) && (t.readyState === WebSocket.CONNECTING || t.readyState === WebSocket.OPEN)) {
       for (let {
         key,
         ts,
         nBytes
-      } of (h = t, g = 0, r)) xK.logWsMsg(key, nBytes, ts);
+      } of (h = t, g = 0, r)) fullscreenPerfManager.logWsMsg(key, nBytes, ts);
       f();
       let e = p.length;
       for (let [t, r] of p.entries()) if (logInfo("multiplayer", "Replaying websocket message", {
@@ -83,7 +83,7 @@ export let $$A0 = {
         len: r.byteLength
       }), y(r), !h) return;
       h.readyState === WebSocket.CONNECTING && (h.onopen = () => {
-        xK.logWsMsg("mp-ws-onopen");
+        fullscreenPerfManager.logWsMsg("mp-ws-onopen");
       });
     } else {
       if (trackFileEvent("multiplayer_connect_attempt_ws_start", E?.openFile?.key, E, {
@@ -134,7 +134,7 @@ export let $$A0 = {
       h.onopen = () => {
         g = 0;
         f();
-        xK.logWsMsg("mp-ws-onopen");
+        fullscreenPerfManager.logWsMsg("mp-ws-onopen");
         trackFileEvent("multiplayer_connect_ws_open", E?.openFile?.key, E, {
           connectAttemptId: m
         });
@@ -143,7 +143,7 @@ export let $$A0 = {
     }
     h.onmessage = e => {
       let t = new Uint8Array(e.data);
-      xK.logWsMsg("mp-ws-onmessage", t.length * t.BYTES_PER_ELEMENT);
+      fullscreenPerfManager.logWsMsg("mp-ws-onmessage", t.length * t.BYTES_PER_ELEMENT);
       y(t);
     };
     h.onclose = () => {

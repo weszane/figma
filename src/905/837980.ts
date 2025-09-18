@@ -7,7 +7,7 @@ import { hideModal } from '../905/156213';
 import { renderI18nText } from '../905/303541';
 import { RecordableButton } from '../905/511649';
 import { ButtonLargeWide } from '../905/521428';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { Point } from '../905/736624';
 import { Xj } from '../905/748636';
 import { A as _$$A } from '../1617/568132';
@@ -416,7 +416,7 @@ function LightThemeIcon() {
  * @returns JSX element representing the appropriate theme icon
  */
 function ThemeIcon() {
-  const currentTheme = DP();
+  const currentTheme = getVisibleTheme();
   const isDarkTheme = currentTheme === 'dark';
   return isDarkTheme ? jsx(DarkThemeIcon, {}) : jsx(LightThemeIcon, {});
 }

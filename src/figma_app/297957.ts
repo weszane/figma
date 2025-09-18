@@ -9,496 +9,612 @@ import { getFirstActiveProjectResourceConnection } from '../905/606579'
 import { ResourceStatus } from '../905/663269'
 import { useCurrentUserOrgId } from '../905/845253'
 import { getExperimentExposureCallback } from '../905/917761'
-import { f as _$$f } from '../905/940356'
+import { selectUserFlag } from '../905/940356'
 import { ExpOneClickAskToEditOrgView, ExpOneClickAskToEditTeamView, ExpSocialProofExpansionOrgView, ExpSocialProofExpansionTeamView, OrgSharedSettingView } from '../figma_app/43951'
-import { Fk } from '../figma_app/167249'
+import { useDeepEqualSceneValue } from '../figma_app/167249'
 import { FFileType, FOrganizationLevelType, FPlanNameType, FProductAccessType, FVisibilityType } from '../figma_app/191312'
-import { JR } from '../figma_app/217457'
+import { isSeatTypeRestrictedForUser } from '../figma_app/217457'
 import { useSubscription } from '../figma_app/288654'
 import { hasTeamStatePaidAccess } from '../figma_app/345997'
 import { getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useCurrentPublicPlan, useIsStarterOrStudentPlan, useIsTeamAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071'
 import { throwTypeError } from '../figma_app/465776'
 import { useCanAccessFullDevMode } from '../figma_app/473493'
-import { h as _$$h } from '../figma_app/496854'
+import { hasFilteredPlans } from '../figma_app/496854'
 import { selectCurrentFile } from '../figma_app/516028'
 import { isTeamFolderV2 } from '../figma_app/528509'
 import { selectExperimentConfigHook } from '../figma_app/594947'
 import { getCurrentTeamId } from '../figma_app/598018'
-import { g as _$$g } from '../figma_app/618031'
-import { vD } from '../figma_app/889655'
+import { isProrationBillingEnabled } from '../figma_app/618031'
+import { getSingleSelectedKey } from '../figma_app/889655'
 import { isDesignFileType } from '../figma_app/976749'
 
-let L = () => !!useCurrentUserOrgId()
-export function $$P11() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_at_mention_invited_users')
-  return useCallback(t => !!(function ({
-    showExpAtMentionInvite: e,
-    isDraftFile: t,
-    isFigmaDesign: r,
-    inOrg: n,
-    isMobile: i,
-  }) {
-    return !(t || i || !e || !r || n)
-  }(t)) && getConfig().get('treatment', '') === 'variant', [getConfig])
+// Original file: /Users/allen/github/fig/src/figma_app/297957.ts
+// Refactored to improve readability, maintainability, and organization.
+// Grouped related functions logically (e.g., experiment checks, user/org checks, feature flags).
+// Renamed functions to descriptive names based on their purpose.
+// Added JSDoc comments and inline comments referencing original names.
+// Simplified conditionals with early returns where applicable.
+// Converted to named arrow functions for consistency.
+// Ensured all exports match the new function names.
+
+// User and Organization Checks
+/**
+ * Checks if the user is in an organization.
+ * Original: CheckUserOrganization
+ */
+const checkUserOrganization = () => !!useCurrentUserOrgId()
+
+/**
+ * Determines if the experiment for at-mention invited users is enabled.
+ * Original: $$P11
+ */
+export function useAtMentionInviteExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_at_mention_invited_users')
+  return useCallback((params: { showExpAtMentionInvite: boolean, isDraftFile: boolean, isFigmaDesign: boolean, inOrg: boolean, isMobile: boolean }) => {
+    if (params.isDraftFile || params.isMobile || !params.showExpAtMentionInvite || !params.isFigmaDesign || params.inOrg)
+      return false
+    return getConfig().get('treatment', '') === 'variant'
+  }, [getConfig])
 }
-export function $$D21() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_plan_user_creation_context_org_member_flyout')
-  return useCallback(t => t === FOrganizationLevelType.ORG && getConfig().get('enabled', !1), [getConfig])
+
+/**
+ * Checks if the plan user creation context experiment is enabled for org level.
+ * Original: $$D21
+ */
+export function usePlanUserCreationContextExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_plan_user_creation_context_org_member_flyout')
+  return useCallback((level: FOrganizationLevelType) => level === FOrganizationLevelType.ORG && getConfig().get('enabled', false), [getConfig])
 }
-export function $$k10() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_cart_optimizations_sticker_shock')
-  return !!getConfig().getValue('enabled', !1)
+
+/**
+ * Checks if the cart optimizations experiment is enabled.
+ * Original: $$k10
+ */
+export function useCartOptimizationsExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_cart_optimizations_sticker_shock')
+  return !!getConfig().getValue('enabled', false)
 }
-export function $$M2({
-  userId: e,
-  teams: t,
-  rolesByTeamId: r,
-}) {
-  return !!getFeatureFlags().close_starter_team_loophole_v2 && F(e, t, r) > 0
+
+/**
+ * Checks if the user has starter team loophole access.
+ * Original: $$M2
+ */
+export function hasStarterTeamLoopholeAccess({ userId, teams, rolesByTeamId }: { userId: string, teams: any[], rolesByTeamId: Record<string, any> }) {
+  return !!getFeatureFlags().close_starter_team_loophole_v2 && countStarterTeams(userId, teams, rolesByTeamId) > 0
 }
-function F(e, t, r) {
-  let n = 0
-  let i = {}
-  for (let a of (t.forEach(e => i[e.id] = e), Object.keys(r))) {
-    let t = i[a]
-    let s = r[a][e]
-    t && s && s.level === AccessLevelEnum.OWNER && t.starter_team && !t.org_team && !t.student_team && t.subscription === null && t.deleted_at === null && n++
+
+/**
+ * Counts the number of starter teams for the user.
+ * Original: F (helper function)
+ */
+function countStarterTeams(userId: string, teams: any[], rolesByTeamId: Record<string, any>) {
+  let count = 0
+  const teamMap: Record<string, any> = {}
+  teams.forEach(team => teamMap[team.id] = team)
+  for (const teamId of Object.keys(rolesByTeamId)) {
+    const team = teamMap[teamId]
+    const role = rolesByTeamId[teamId][userId]
+    if (team && role && role.level === AccessLevelEnum.OWNER && team.starter_team && !team.org_team && !team.student_team && team.subscription === null && team.deleted_at === null) {
+      count++
+    }
   }
-  return n
+  return count
 }
-export function $$j3(e, t, r) {
-  return !!getFeatureFlags().close_starter_team_loophole_v2 && F(e, t, r) === 0 && getFeatureFlags().close_starter_loophole_team_one
+
+/**
+ * Checks if the user is eligible for starter loophole team one.
+ * Original: $$j3
+ */
+export function isEligibleForStarterLoopholeTeamOne(userId: string, teams: any[], rolesByTeamId: Record<string, any>) {
+  return !!getFeatureFlags().close_starter_team_loophole_v2 && countStarterTeams(userId, teams, rolesByTeamId) === 0 && getFeatureFlags().close_starter_loophole_team_one
 }
-export function $$U1(e, t) {
-  return !!e && !t
+
+/**
+ * Checks if the user has access based on flags.
+ * Original: $$U1
+ */
+export const hasUserAccess = (flag1: boolean, flag2: boolean) => !!flag1 && !flag2
+
+// Experiment and Feature Checks
+/**
+ * Checks if the advanced prototyping upsell experiment is enabled.
+ * Original: $$B15
+ */
+export function useAdvancedPrototypingUpsellExperiment() {
+  const configHook = selectExperimentConfigHook('exp_adv_prototyping_upsell')
+  return useCallback(() => !!configHook.getConfig().getValue('showUpsell', false), [configHook])
 }
-export function $$B15() {
-  let e = selectExperimentConfigHook('exp_adv_prototyping_upsell')
-  return useCallback(() => !!e.getConfig().getValue('showUpsell', !1), [e])
+
+/**
+ * Enum for FBG navigation updates experiment.
+ * Original: $$G0
+ */
+export const FBGNavigationUpdatesVariants = (() => {
+  const variants = {
+    CONTROL: 'control',
+    VARIANT_A: 'variantA',
+    VARIANT_B: 'variantB',
+  } as const
+  return variants
+})()
+
+/**
+ * Gets the treatment for FBG navigation updates experiment.
+ * Original: $$V8
+ */
+export function useFBGNavigationUpdatesTreatment() {
+  const { getConfig } = selectExperimentConfigHook('exp_fbg_navigation_updates')
+  const plan = useCurrentPrivilegedPlan('useFBGNavigationUpdatesTreatment').unwrapOr(null)
+  const isTeam = plan?.key.type === FOrganizationLevelType.TEAM
+  const isStarter = plan?.tier === FPlanNameType.STARTER
+  return isTeam && isStarter ? getConfig().getValue('treatment', 'control') : 'control'
 }
-export var $$G0 = (e => (e.CONTROL = 'control', e.VARIANT_A = 'variantA', e.VARIANT_B = 'variantB', e))($$G0 || {})
-export function $$V8() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_fbg_navigation_updates')
-  let t = useCurrentPrivilegedPlan('useFBGNavigationUpdatesTreatment').unwrapOr(null)
-  let r = t?.key.type === FOrganizationLevelType.TEAM
-  let n = t?.tier === FPlanNameType.STARTER
-  return r && n ? getConfig().getValue('treatment', 'control') : 'control'
+
+/**
+ * Checks if separate billing and shipping addresses experiment is enabled.
+ * Original: $$H6
+ */
+export function useSeparateBillingShippingExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_separate_billing_and_shipping_addresses')
+  return !!getConfig().getValue('is_enabled', false)
 }
-export function $$H6() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_separate_billing_and_shipping_addresses')
-  return !!getConfig().getValue('is_enabled', !1)
+
+/**
+ * Checks if seat billing terms experiment is enabled.
+ * Original: $$z32
+ */
+export function useSeatBillingTermsExperiment() {
+  const { getConfig } = selectExperimentConfigHook('seat_billing_terms')
+  return !!getConfig().getValue('enabled', false)
 }
-export function $$z32() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('seat_billing_terms')
-  return !!getConfig().getValue('enabled', !1)
+
+/**
+ * Checks if drafts page limit experiment is enabled.
+ * Original: $$W14
+ */
+export function useDraftsPageLimitExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_drafts_page_limit_v1')
+  return useCallback((file: any) => {
+    if (!getFeatureFlags().exp_drafts_page_limit_v1_new_user || file.parentOrgId || file.editorType !== FFileType.DESIGN || !isTeamFolderV2(file.project))
+      return false
+    return !!file.team && !hasTeamStatePaidAccess(file.team) && !!file.canEdit && getConfig().get('apply_drafts_page_limit', false)
+  }, [getConfig])
 }
-export function $$W14() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_drafts_page_limit_v1')
-  return useCallback(t => !!(getFeatureFlags().exp_drafts_page_limit_v1_new_user && !t.parentOrgId && t.editorType === FFileType.DESIGN && isTeamFolderV2(t.project)) && !!t.team && !hasTeamStatePaidAccess(t.team) && !!t.canEdit && getConfig().get('apply_drafts_page_limit', !1), [getConfig])
+
+/**
+ * Checks if starter global file limits experiment is enabled.
+ * Original: $$K27
+ */
+export function useStarterGlobalFileLimitsExperiment() {
+  const configHook = selectExperimentConfigHook('starter_global_file_limits')
+  return !!configHook?.getConfig().getValue('enabled', false)
 }
-export function $$K27() {
-  let e = selectExperimentConfigHook('starter_global_file_limits')
-  return !!e?.getConfig().getValue('enabled', !1)
+
+/**
+ * Checks if SCIM group experiment is enabled.
+ * Original: $$Y22
+ */
+export function useScimGroupExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_scim_group')
+  return useCallback(() => !!getConfig().getValue('enabled', false), [getConfig])
 }
-export function $$Y22() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_scim_group')
-  return useCallback(() => !!getConfig().getValue('enabled', !1), [getConfig])
+
+/**
+ * Checks if drafts copy link experiment is enabled.
+ * Original: $$$18
+ */
+export function useDraftsCopyLinkExperiment(isOrg: boolean) {
+  const { getConfig } = selectExperimentConfigHook(isOrg ? 'exp_drafts_copy_link_v2_org' : 'exp_drafts_copy_link_v2_team')
+  // getFeatureFlags().statsig_aa_flag_plan_key_web
+  return !!getConfig().getValue('has_drafts_copy_link_experience', false)
 }
-export function $$$18(e) {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook(e ? 'exp_drafts_copy_link_v2_org' : 'exp_drafts_copy_link_v2_team')
-  getFeatureFlags().statsig_aa_flag_plan_key_web
-  return !!getConfig().getValue('has_drafts_copy_link_experience', !1)
+
+/**
+ * Checks if dismissible UUB experiment is enabled.
+ * Original: $$X17
+ */
+export function useDismissibleUUBExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_dismissible_uub')
+  return useCallback(() => getConfig().get('enabled', false), [getConfig])
 }
-export function $$X17() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_dismissible_uub')
-  return useCallback(() => getConfig().get('enabled', !1), [getConfig])
-}
-export function $$q36() {
-  let e = selectCurrentFile()
-  let t = useTeamPlanPublicInfo()
-  let r = useIsStarterOrStudentPlan(t)
-  let i = useTeamPlanUser().unwrapOr(null)
-  let a = useCurrentUserOrgId()
-  let s = !!a
-  let l = getCurrentTeamId()
-  let u = !s
-  let p = useSubscription(OrgSharedSettingView({
-    orgId: a,
-  }), {
-    enabled: !!a,
-  }).unwrapOr(null)
-  let _ = p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded ? p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null
-  let h = _ === FVisibilityType.ALL_USERS || _ === FVisibilityType.MEMBERS
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_seat_choice_in_nux_team_id')
-  let {
-    getConfig: _getConfig,
-  } = selectExperimentConfigHook('exp_seat_choice_in_nux_org_id')
-  let y = u ? getConfig : _getConfig
+
+/**
+ * Checks if seat choice in NUX experiment is enabled.
+ * Original: $$q36
+ */
+export function useSeatChoiceInNuxExperiment() {
+  const file = selectCurrentFile()
+  const teamPlan = useTeamPlanPublicInfo()
+  const isStarterOrStudent = useIsStarterOrStudentPlan(teamPlan)
+  const teamUser = useTeamPlanUser().unwrapOr(null)
+  const orgId = useCurrentUserOrgId()
+  const inOrg = !!orgId
+  const teamId = getCurrentTeamId()
+  const isTeam = !inOrg
+  const orgSettings = useSubscription(OrgSharedSettingView({ orgId }), { enabled: !!orgId }).unwrapOr(null)
+  const upgradeRequestSetting = orgSettings?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded
+    ? orgSettings?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data
+    : null
+  const isUpgradeVisible = upgradeRequestSetting === FVisibilityType.ALL_USERS || upgradeRequestSetting === FVisibilityType.MEMBERS
+  const { getConfig: teamConfig } = selectExperimentConfigHook('exp_seat_choice_in_nux_team_id')
+  const { getConfig: orgConfig } = selectExperimentConfigHook('exp_seat_choice_in_nux_org_id')
+  const config = isTeam ? teamConfig : orgConfig
   return useCallback(() => {
-    let t = !!i?.licenseTypes?.length
-    return !(!e || e?.project?.activeProjectResourceConnections?.length) && !h && !t && r.status === 'loaded' && (i != null || !!e.canEdit) && !r.data && (!u || !!l) && y().get('enabled', !1)
-  }, [y, u, l, r, e, i, h])
+    const hasLicense = !!teamUser?.licenseTypes?.length
+    if (!file || file?.project?.activeProjectResourceConnections?.length || isUpgradeVisible || hasLicense || isStarterOrStudent.status !== 'loaded' || (!teamUser && !file.canEdit) || isStarterOrStudent.data || (isTeam && !teamId))
+      return false
+    return config().get('enabled', false)
+  }, [config, isTeam, teamId, isStarterOrStudent, file, teamUser, isUpgradeVisible])
 }
-export function $$J35() {
-  let e = L()
-  let t = useSelector(e => e.currentTeamId)
-  let r = !e
-  let a = !!_$$f('has_marked_ready_for_dev')
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_rfd_signals_upsell_team_id')
-  let {
-    getConfig: _getConfig2,
-  } = selectExperimentConfigHook('exp_rfd_signals_upsell_org_id')
-  let l = r ? getConfig : _getConfig2
-  return useCallback(() => !a && (!r || !!t) && l().get('enabled', !1), [l, r, t, a])
+
+/**
+ * Checks if RFD signals upsell experiment is enabled.
+ * Original: $$J35
+ */
+export function useRfdSignalsUpsellExperiment() {
+  const inOrg = checkUserOrganization()
+  const teamId = useSelector((state: any) => state.currentTeamId)
+  const isTeam = !inOrg
+  const hasMarkedReady = !!selectUserFlag('has_marked_ready_for_dev')
+  const { getConfig: teamConfig } = selectExperimentConfigHook('exp_rfd_signals_upsell_team_id')
+  const { getConfig: orgConfig } = selectExperimentConfigHook('exp_rfd_signals_upsell_org_id')
+  const config = isTeam ? teamConfig : orgConfig
+  return useCallback(() => !hasMarkedReady && (!isTeam || !!teamId) && config().get('enabled', false), [config, isTeam, teamId, hasMarkedReady])
 }
-export function $$Z4() {
-  let e = selectCurrentFile()
-  let t = e?.planPublicInfo
-  let {
-    type,
-  } = t?.key ?? {}
-  let {
-    getConfig,
-  } = selectExperimentConfigHook(type === FOrganizationLevelType.TEAM ? 'exp_approve_in_file_pro_team' : 'exp_approve_in_file_org')
-  return void 0 !== type && !!getConfig().getValue('show_request_in_file', !1)
+
+/**
+ * Checks if approve in file experiment is enabled.
+ * Original: $$Z4
+ */
+export function useApproveInFileExperiment() {
+  const file = selectCurrentFile()
+  const planKey = file?.planPublicInfo?.key
+  const type = planKey?.type
+  const { getConfig } = selectExperimentConfigHook(type === FOrganizationLevelType.TEAM ? 'exp_approve_in_file_pro_team' : 'exp_approve_in_file_org')
+  return type !== undefined && !!getConfig().getValue('show_request_in_file', false)
 }
-export function $$Q7() {
-  let e = getExperimentExposureCallback({
+
+/**
+ * Checks if developer contextual upsells experiment is enabled.
+ * Original: $$Q7
+ */
+export function useDeveloperContextualUpsellsExperiment() {
+  const exposureCallback = getExperimentExposureCallback({
     teamXP: 'exp_developer_contextual_upsells_team_id_with_user',
     orgXP: 'exp_developer_contextual_upsells_org_id_with_user',
   }, {
-    allowStarterPlans: !1,
-    allowCurfPlans: !0,
-    allowFigmaConnectPlans: !0,
+    allowStarterPlans: false,
+    allowCurfPlans: true,
+    allowFigmaConnectPlans: true,
   })
   return useCallback(() => {
-    let t = e?.()
-    return t?.get('enabled', !1) ?? !1
-  }, [e])
+    const config = exposureCallback?.()
+    return config?.get('enabled', false) ?? false
+  }, [exposureCallback])
 }
-export function $$ee37() {
-  return useCallback(() => !!getFeatureFlags().show_team_account_credit_banner, [])
+
+/**
+ * Checks if team account credit banner should be shown.
+ * Original: $$ee37
+ */
+export const useTeamAccountCreditBanner = () => useCallback(() => !!getFeatureFlags().show_team_account_credit_banner, [])
+
+/**
+ * Checks if pro annual improvements experiment is enabled.
+ * Original: $$et29
+ */
+export function useProAnnualImprovementsExperiment() {
+  const plan = useCurrentPrivilegedPlan('useIsExpProAnnualImprovementsEnabled').unwrapOr(null)
+  const prorationEnabled = isProrationBillingEnabled(plan)
+  const { getConfig } = selectExperimentConfigHook('exp_pro_annual_improvements_may_2025')
+  const isEnabled = useCallback(() => plan?.tier === FPlanNameType.PRO && !!prorationEnabled && !!getConfig().getValue('enabled', false), [plan, prorationEnabled, getConfig])
+  return useCallback(() => isEnabled() || !!getFeatureFlags().new_annual_seats_ctas, [isEnabled])
 }
-export function $$et29() {
-  let e = (function () {
-    let e = useCurrentPrivilegedPlan('useIsExpProAnnualImprovementsEnabled').unwrapOr(null)
-    let t = _$$g(e)
-    let {
-      getConfig,
-    } = selectExperimentConfigHook('exp_pro_annual_improvements_may_2025')
-    return useCallback(() => e?.tier === FPlanNameType.PRO && !!t && !!getConfig().getValue('enabled', !1), [e, t, getConfig])
-  }())
-  return useCallback(() => e() || !!getFeatureFlags().new_annual_seats_ctas, [e])
+
+/**
+ * Checks if cart seat selection clarity experiment is enabled.
+ * Original: $$er16
+ */
+export function useCartSeatSelectionClarityExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_cart_seat_selection_clarity')
+  return useCallback(() => !!getConfig().getValue('enabled', false), [getConfig])
 }
-export function $$er16() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_cart_seat_selection_clarity')
-  return useCallback(() => !!getConfig().getValue('enabled', !1), [getConfig])
-}
-export function $$en26({
-  disableExposureLogging: e,
-} = {}) {
-  let t = useTeamPlanPublicInfo()
-  let r = useIsStarterOrStudentPlan(t)
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_pro_admin_plan_invite_with_seat', void 0, e)
-  let {
-    getConfig: _getConfig3,
-  } = selectExperimentConfigHook('exp_org_admin_plan_invite_with_seat', void 0, e)
-  return useCallback(({
-    isPlanAdmin: e,
-  }) => {
+
+/**
+ * Checks if plan invite with seat experiment is enabled.
+ * Original: $$en26
+ */
+export function usePlanInviteWithSeatExperiment({ disableExposureLogging = false } = {}) {
+  const teamPlan = useTeamPlanPublicInfo()
+  const isStarterOrStudent = useIsStarterOrStudentPlan(teamPlan)
+  const { getConfig: proConfig } = selectExperimentConfigHook('exp_pro_admin_plan_invite_with_seat', undefined, disableExposureLogging)
+  const { getConfig: orgConfig } = selectExperimentConfigHook('exp_org_admin_plan_invite_with_seat', undefined, disableExposureLogging)
+  return useCallback(({ isPlanAdmin }: { isPlanAdmin: boolean }) => {
     if (getFeatureFlags().plan_invite_modal_revamp)
-      return !0
-    if (t.status !== 'loaded' || r.data || !e)
-      return !1
-    let n = t.data.key.type
-    switch (n) {
+      return true
+    if (teamPlan.status !== 'loaded' || isStarterOrStudent.data || !isPlanAdmin)
+      return false
+    const type = teamPlan.data.key.type
+    switch (type) {
       case FOrganizationLevelType.ORG:
-        return _getConfig3().get('enabled', !1)
+        return orgConfig().get('enabled', false)
       case FOrganizationLevelType.TEAM:
-        return getConfig().get('enabled', !1)
+        return proConfig().get('enabled', false)
       default:
-        throwTypeError(n)
+        throwTypeError(type)
     }
-  }, [t, _getConfig3, getConfig, r])
+  }, [teamPlan, orgConfig, proConfig, isStarterOrStudent])
 }
-export function $$ei25() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_pro_admin_file_invite_with_seat')
-  let {
-    getConfig: _getConfig4,
-  } = selectExperimentConfigHook('exp_org_admin_file_invite_with_seat')
-  let r = useCurrentPublicPlan('useIsInviteToFileWithSeatExpEnabled').unwrapOr(null)
-  return useCallback(({
-    rolePending: n,
-    inviteBillableProductKey: i,
-    editorType: a,
-    filePlanKey: s,
-    userNeedsUpgrade: o,
-    hasEditRole: l,
-  }) => {
-    if (!a || !l || !s || !o || n && i && JR(i, a) || s.type !== r?.key.type || s.parentId !== r?.key.parentId)
-      return !1
-    let d = r?.tier === FPlanNameType.PRO
-    let c = r?.tier === FPlanNameType.ORG || r?.tier === FPlanNameType.ENTERPRISE
-    return d ? getConfig().get('enabled', !1) : !!c && _getConfig4().get('enabled', !1)
-  }, [r, getConfig, _getConfig4])
+
+/**
+ * Checks if file invite with seat experiment is enabled.
+ * Original: $$ei25
+ */
+export function useFileInviteWithSeatExperiment() {
+  const { getConfig: proConfig } = selectExperimentConfigHook('exp_pro_admin_file_invite_with_seat')
+  const { getConfig: orgConfig } = selectExperimentConfigHook('exp_org_admin_file_invite_with_seat')
+  const plan = useCurrentPublicPlan('useIsInviteToFileWithSeatExpEnabled').unwrapOr(null)
+  return useCallback(({ rolePending, inviteBillableProductKey, editorType, filePlanKey, userNeedsUpgrade, hasEditRole }: any) => {
+    if (!editorType || !hasEditRole || !filePlanKey || !userNeedsUpgrade || (rolePending && inviteBillableProductKey && isSeatTypeRestrictedForUser(inviteBillableProductKey, editorType)) || filePlanKey.type !== plan?.key.type || filePlanKey.parentId !== plan?.key.parentId)
+      return false
+    const isPro = plan?.tier === FPlanNameType.PRO
+    const isOrgOrEnterprise = plan?.tier === FPlanNameType.ORG || plan?.tier === FPlanNameType.ENTERPRISE
+    return isPro ? proConfig().get('enabled', false) : !!isOrgOrEnterprise && orgConfig().get('enabled', false)
+  }, [plan, proConfig, orgConfig])
 }
-export function $$ea19(e) {
-  let t = useTeamPlanPublicInfo().unwrapOr(null)
-  let r = selectCurrentUser()
-  let i = selectCurrentFile()
-  let a = getParentOrgIdIfOrgLevel(t) ?? null
-  let s = useSubscription(OrgSharedSettingView({
-    orgId: a,
-  }), {
-    enabled: !!a,
-  }).unwrapOr(null)
-  let c = s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded ? s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null
-  let u = c === FVisibilityType.ALL_USERS || c === FVisibilityType.MEMBERS
-  let p = getFirstActiveProjectResourceConnection()
-  let _ = t?.tier === FPlanNameType.PRO
-  let h = t?.tier === FPlanNameType.ORG || t?.tier === FPlanNameType.ENTERPRISE
-  let f = useSubscription(ExpOneClickAskToEditTeamView({
-    teamId: t?.key.parentId || '',
-  }), {
-    enabled: _ && !u && !p && e,
-  }).unwrapOr(null)
-  let E = useSubscription(ExpOneClickAskToEditOrgView({
-    orgId: t?.key.parentId || '',
-  }), {
-    enabled: h && !u && !p && e,
-  }).unwrapOr(null)
-  let y = useRef(!1)
-  let b = E?.orgPublicInfo?.expOneClickAskToEditOrgId.status === ResourceStatus.Loaded ? E.orgPublicInfo.expOneClickAskToEditOrgId.data : null
-  let T = f?.teamPublicInfo?.expOneClickAskToEditTeamIdPublic.status === ResourceStatus.Loaded ? f.teamPublicInfo.expOneClickAskToEditTeamIdPublic.data : null
-  return useCallback(() => (!y.current && (b || T) && (analyticsEventManager.trackDefinedEvent('activation.experiment_exposure_for_user', {
-    userId: r?.id,
-    fileKey: i?.key,
-    orgId: a || void 0,
-    teamId: h ? void 0 : t?.key.parentId,
-    ruleId: b?.treatment ?? T?.treatment,
-    experimentName: b?.id ?? T?.id,
-  }), y.current = !0), h)
-    ? b?.treatment === 'variant'
-    : !!_ && T?.treatment === 'variant', [T, b, h, _, t, r, i, a])
+
+/**
+ * Checks if one-click ask to edit experiment is enabled.
+ * Original: $$ea19
+ */
+export function useOneClickAskToEditExperiment(enabled: boolean) {
+  const teamPlan = useTeamPlanPublicInfo().unwrapOr(null)
+  const user = selectCurrentUser()
+  const file = selectCurrentFile()
+  const orgId = getParentOrgIdIfOrgLevel(teamPlan) ?? null
+  const orgSettings = useSubscription(OrgSharedSettingView({ orgId }), { enabled: !!orgId }).unwrapOr(null)
+  const upgradeSetting = orgSettings?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded
+    ? orgSettings?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data
+    : null
+  const isUpgradeVisible = upgradeSetting === FVisibilityType.ALL_USERS || upgradeSetting === FVisibilityType.MEMBERS
+  const resourceConnection = getFirstActiveProjectResourceConnection()
+  const isPro = teamPlan?.tier === FPlanNameType.PRO
+  const isOrgOrEnterprise = teamPlan?.tier === FPlanNameType.ORG || teamPlan?.tier === FPlanNameType.ENTERPRISE
+  const teamExp = useSubscription(ExpOneClickAskToEditTeamView({ teamId: teamPlan?.key.parentId || '' }), { enabled: isPro && !isUpgradeVisible && !resourceConnection && enabled }).unwrapOr(null)
+  const orgExp = useSubscription(ExpOneClickAskToEditOrgView({ orgId: teamPlan?.key.parentId || '' }), { enabled: isOrgOrEnterprise && !isUpgradeVisible && !resourceConnection && enabled }).unwrapOr(null)
+  const exposedRef = useRef(false)
+  const orgData = orgExp?.orgPublicInfo?.expOneClickAskToEditOrgId.status === ResourceStatus.Loaded ? orgExp.orgPublicInfo.expOneClickAskToEditOrgId.data : null
+  const teamData = teamExp?.teamPublicInfo?.expOneClickAskToEditTeamIdPublic.status === ResourceStatus.Loaded ? teamExp.teamPublicInfo.expOneClickAskToEditTeamIdPublic.data : null
+  return useCallback(() => {
+    if (!exposedRef.current && (orgData || teamData)) {
+      analyticsEventManager.trackDefinedEvent('activation.experiment_exposure_for_user', {
+        userId: user?.id,
+        fileKey: file?.key,
+        orgId: orgId || undefined,
+        teamId: isOrgOrEnterprise ? undefined : teamPlan?.key.parentId,
+        ruleId: orgData?.treatment ?? teamData?.treatment,
+        experimentName: orgData?.id ?? teamData?.id,
+      })
+      exposedRef.current = true
+    }
+    return isOrgOrEnterprise ? orgData?.treatment === 'variant' : !!isPro && teamData?.treatment === 'variant'
+  }, [teamData, orgData, isOrgOrEnterprise, isPro, teamPlan, user, file, orgId])
 }
-export function $$es23({
-  planType: e,
-  planParentId: t,
-  isOrgGuest: r,
-  licenseType: i,
-  entryPoint: a,
-}) {
-  let s = i === FProductAccessType.DEV_MODE && a === 'dev-mode-blocking-modal'
-  let c = selectCurrentUser()
-  let u = c?.id
-  let p = getFirstActiveProjectResourceConnection()
-  let _ = !s && !p && e === FOrganizationLevelType.TEAM && !!t
-  let h = useSubscription(ExpSocialProofExpansionTeamView({
-    teamId: t,
-  }), {
-    enabled: _,
-  }).unwrapOr(null)
-  let g = !s && !p && !r && e === FOrganizationLevelType.ORG && !!t
-  let f = useSubscription(ExpSocialProofExpansionOrgView({
-    orgId: t,
-  }), {
-    enabled: g,
-  }).unwrapOr(null)
-  let E = useRef(!1)
-  useEffect(() => () => {
-    E.current = !1
-  }, [u, e, t])
-  let y = useCallback((r) => {
-    u && !E.current && (analyticsEventManager.trackDefinedEvent('activation.experiment_exposure_for_user', {
-      userId: u,
-      orgId: e === FOrganizationLevelType.ORG ? t : void 0,
-      teamId: e === FOrganizationLevelType.TEAM ? t : void 0,
-      ruleId: r ? 'test' : 'control',
-      experimentName: e === FOrganizationLevelType.ORG ? 'exp_social_proof_expansion_org_id' : 'exp_social_proof_expansion_team_id',
-    }), E.current = !0)
-  }, [u, e, t])
-  if (s)
-    return !0
-  if (r || p)
-    return !1
-  let b = h?.team?.expSocialProofExpansionTeamId.status === ResourceStatus.Loaded ? h.team.expSocialProofExpansionTeamId.data.enabled : null
-  let T = f?.org?.expSocialProofExpansionOrgId.status === ResourceStatus.Loaded ? f.org.expSocialProofExpansionOrgId.data.enabled : null
-  return T !== null && e === FOrganizationLevelType.ORG ? (y(T), T) : b !== null && e === FOrganizationLevelType.TEAM && (y(b), b)
+
+/**
+ * Checks if social proof expansion experiment is enabled.
+ * Original: $$es23
+ */
+export function useSocialProofExpansionExperiment({ planType, planParentId, isOrgGuest, licenseType, entryPoint }: any) {
+  const isDevModeBlocking = licenseType === FProductAccessType.DEV_MODE && entryPoint === 'dev-mode-blocking-modal'
+  const user = selectCurrentUser()
+  const userId = user?.id
+  const resourceConnection = getFirstActiveProjectResourceConnection()
+  const enableTeamExp = !isDevModeBlocking && !resourceConnection && planType === FOrganizationLevelType.TEAM && !!planParentId
+  const teamExp = useSubscription(ExpSocialProofExpansionTeamView({ teamId: planParentId }), { enabled: enableTeamExp }).unwrapOr(null)
+  const enableOrgExp = !isDevModeBlocking && !resourceConnection && !isOrgGuest && planType === FOrganizationLevelType.ORG && !!planParentId
+  const orgExp = useSubscription(ExpSocialProofExpansionOrgView({ orgId: planParentId }), { enabled: enableOrgExp }).unwrapOr(null)
+  const exposedRef = useRef(false)
+  useEffect(() => () => { exposedRef.current = false }, [userId, planType, planParentId])
+  const logExposure = useCallback((enabled: boolean) => {
+    if (userId && !exposedRef.current) {
+      analyticsEventManager.trackDefinedEvent('activation.experiment_exposure_for_user', {
+        userId,
+        orgId: planType === FOrganizationLevelType.ORG ? planParentId : undefined,
+        teamId: planType === FOrganizationLevelType.TEAM ? planParentId : undefined,
+        ruleId: enabled ? 'test' : 'control',
+        experimentName: planType === FOrganizationLevelType.ORG ? 'exp_social_proof_expansion_org_id' : 'exp_social_proof_expansion_team_id',
+      })
+      exposedRef.current = true
+    }
+  }, [userId, planType, planParentId])
+  if (isDevModeBlocking)
+    return true
+  if (isOrgGuest || resourceConnection)
+    return false
+  const teamEnabled = teamExp?.team?.expSocialProofExpansionTeamId.status === ResourceStatus.Loaded ? teamExp.team.expSocialProofExpansionTeamId.data.enabled : null
+  const orgEnabled = orgExp?.org?.expSocialProofExpansionOrgId.status === ResourceStatus.Loaded ? orgExp.org.expSocialProofExpansionOrgId.data.enabled : null
+  if (orgEnabled !== null && planType === FOrganizationLevelType.ORG) {
+    logExposure(orgEnabled)
+    return orgEnabled
+  }
+  if (teamEnabled !== null && planType === FOrganizationLevelType.TEAM) {
+    logExposure(teamEnabled)
+    return teamEnabled
+  }
+  return false
 }
-export function $$eo24() {
-  let e = getExperimentExposureCallback({
+
+/**
+ * Checks if pro user context in downgrade flow experiment is enabled.
+ * Original: $$eo24
+ */
+export function useProUserContextInDowngradeExperiment() {
+  const exposureCallback = getExperimentExposureCallback({
     teamXP: 'exp_pro_user_context_in_downgrade_flow',
     orgXP: 'exp_org_user_context_in_downgrade_flow',
   }, {
-    allowStarterPlans: !1,
-    allowCurfPlans: !0,
-    allowFigmaConnectPlans: !0,
+    allowStarterPlans: false,
+    allowCurfPlans: true,
+    allowFigmaConnectPlans: true,
   })
-  return useCallback(() => !!e && (e().get('enabled', !1) ?? !1), [e])
+  return useCallback(() => !!exposureCallback && (exposureCallback().get('enabled', false) ?? false), [exposureCallback])
 }
-export function $$el33() {
-  let e = useCanAccessFullDevMode()
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_dt_mcp_callout')
-  let r = !!_$$f('dev_mode_has_enabled_mcp_server')
-  return useCallback(() => !!e && !r && getConfig().getValue('enabled', !1), [getConfig, e, r])
+
+/**
+ * Checks if DT MCP callout experiment is enabled.
+ * Original: $$el33
+ */
+export function useDtMcpCalloutExperiment() {
+  const canAccessDevMode = useCanAccessFullDevMode()
+  const { getConfig } = selectExperimentConfigHook('exp_dt_mcp_callout')
+  const hasEnabledMcp = !!selectUserFlag('dev_mode_has_enabled_mcp_server')
+  return useCallback(() => !!canAccessDevMode && !hasEnabledMcp && getConfig().getValue('enabled', false), [getConfig, canAccessDevMode, hasEnabledMcp])
 }
-export function $$ed20() {
-  let e = (function () {
-    let e = useTeamPlanFeatures().unwrapOr(null)
-    let t = useTeamPlanUser()
-    let r = useIsTeamAdminUser(t).unwrapOr(!1)
-    let i = e?.tier === FPlanNameType.PRO
-    let a = _$$g(e)
-    return useCallback(e => i && a && r && e, [i, a, r])
-  }())
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('seat_management_widget_pro')
-  return useCallback(r => e(r) && !!getFeatureFlags().seat_billing_interval_people_tab && getConfig().get('enabled', !1), [e, getConfig])
+
+/**
+ * Checks if seat management widget experiment is enabled for pro.
+ * Original: $$ed20
+ */
+export function useSeatManagementWidgetProExperiment() {
+  const planFeatures = useTeamPlanFeatures().unwrapOr(null)
+  const teamUser = useTeamPlanUser()
+  const isAdmin = useIsTeamAdminUser(teamUser).unwrapOr(false)
+  const isPro = planFeatures?.tier === FPlanNameType.PRO
+  const prorationEnabled = isProrationBillingEnabled(planFeatures)
+  const checkEligibility = useCallback((enabled: boolean) => isPro && prorationEnabled && isAdmin && enabled, [isPro, prorationEnabled, isAdmin])
+  const { getConfig } = selectExperimentConfigHook('seat_management_widget_pro')
+  return useCallback((enabled: boolean) => checkEligibility(enabled) && !!getFeatureFlags().seat_billing_interval_people_tab && getConfig().get('enabled', false), [checkEligibility, getConfig])
 }
-export function $$ec5() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('seat_management_widget_pro')
-  let {
-    getConfig: _getConfig5,
-  } = selectExperimentConfigHook('seat_management_widget_org')
-  let r = useTeamPlanFeatures().unwrapOr(null)?.type
+
+/**
+ * Checks if seat management widget experiment is enabled.
+ * Original: $$ec5
+ */
+export function useSeatManagementWidgetExperiment() {
+  const { getConfig: proConfig } = selectExperimentConfigHook('seat_management_widget_pro')
+  const { getConfig: orgConfig } = selectExperimentConfigHook('seat_management_widget_org')
+  const planType = useTeamPlanFeatures().unwrapOr(null)?.type
   return useCallback(() => {
     if (!getFeatureFlags().billing_page_updates_jul_2025)
-      return !1
-    switch (r) {
+      return false
+    switch (planType) {
       case FOrganizationLevelType.TEAM:
-        return getConfig().get('enabled', !1)
+        return proConfig().get('enabled', false)
       case FOrganizationLevelType.ORG:
-        return _getConfig5().get('enabled', !1)
+        return orgConfig().get('enabled', false)
       default:
-        return !1
+        return false
     }
-  }, [getConfig, _getConfig5, r])
+  }, [proConfig, orgConfig, planType])
 }
-export function $$eu34() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_send_to_make')
-  let t = (function () {
-    let e = isDesignFileType()
-    let t = useDraftsFolderProject().transform(e => e?.canCreateFigmakeFileWithReasons.result ?? !1).unwrapOr(!1)
-    let r = useSelector(vD)
-    let n = Fk((e, t) => e.get(t)?.isTopLevelFrame() ?? !1, r)
-    let a = useTeamPlanPublicInfo().unwrapOr(null)
-    return !!e && !!n && !!a && (a.tier !== FPlanNameType.STARTER || !!getFeatureFlags().bake_starter_limit) && t
-  }())
-  return useCallback(() => !!t && (getConfig().get('enabled', !1) ?? !1), [getConfig, t])
+
+/**
+ * Checks if send to make experiment is enabled.
+ * Original: $$eu34
+ */
+export function useSendToMakeExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_send_to_make')
+  const isDesign = isDesignFileType()
+  const canCreate = useDraftsFolderProject().transform(project => project?.canCreateFigmakeFileWithReasons.result ?? false).unwrapOr(false)
+  const selectedKey = useSelector(getSingleSelectedKey)
+  const isTopLevelFrame = useDeepEqualSceneValue((scene, key) => scene.get(key)?.isTopLevelFrame() ?? false, selectedKey)
+  const teamPlan = useTeamPlanPublicInfo().unwrapOr(null)
+  const isEligible = !!isDesign && !!isTopLevelFrame && !!teamPlan && (teamPlan.tier !== FPlanNameType.STARTER || !!getFeatureFlags().bake_starter_limit) && canCreate
+  return useCallback(() => !!isEligible && (getConfig().get('enabled', false) ?? false), [getConfig, isEligible])
 }
-export function $$ep9({
-  logExposure: e,
-}) {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_make_empty_state_refresh', void 0, e)
-  return useCallback(() => getConfig().get('enabled', !1) ?? !1, [getConfig])
+
+/**
+ * Checks if make empty state refresh experiment is enabled.
+ * Original: $$ep9
+ */
+export function useMakeEmptyStateRefreshExperiment({ logExposure = false } = {}) {
+  const { getConfig } = selectExperimentConfigHook('exp_make_empty_state_refresh', undefined, logExposure)
+  return useCallback(() => getConfig().get('enabled', false) ?? false, [getConfig])
 }
-export function $$e_12() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_figma_make_prototype_tab_upsell')
-  return useCallback(() => getConfig().get('enabled', !1), [getConfig])
+
+/**
+ * Checks if Figma make prototype tab upsell experiment is enabled.
+ * Original: $$e_12
+ */
+export function useFigmaMakePrototypeTabUpsellExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_figma_make_prototype_tab_upsell')
+  return useCallback(() => getConfig().get('enabled', false), [getConfig])
 }
-export function $$eh28() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_make_file_creation_tooltip')
-  return useCallback(() => getConfig().get('enabled', !1), [getConfig])
+
+/**
+ * Checks if make file creation tooltip experiment is enabled.
+ * Original: $$eh28
+ */
+export function useMakeFileCreationTooltipExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_make_file_creation_tooltip')
+  return useCallback(() => getConfig().get('enabled', false), [getConfig])
 }
-export function $$$$em13() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_figma_make_design_editor_popout_upsell')
-  return useCallback(() => getConfig().get('enabled', !1), [getConfig])
+
+/**
+ * Checks if Figma make design editor popout upsell experiment is enabled.
+ * Original: $$$$em13
+ */
+export function useFigmaMakeDesignEditorPopoutUpsellExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_figma_make_design_editor_popout_upsell')
+  return useCallback(() => getConfig().get('enabled', false), [getConfig])
 }
-export function $$eg30(e) {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_high_pri_notifs_v2')
-  return !!_$$h() && !!e && getConfig().getValue('has_high_priority_filter', !1)
+
+/**
+ * Checks if high priority notifications experiment is enabled.
+ * Original: $$eg30
+ */
+export function useHighPriorityNotificationsExperiment(hasFiltered: boolean) {
+  const { getConfig } = selectExperimentConfigHook('exp_high_pri_notifs_v2')
+  return !!hasFilteredPlans() && !!hasFiltered && getConfig().getValue('has_high_priority_filter', false)
 }
-export function $$ef31() {
-  let {
-    getConfig,
-  } = selectExperimentConfigHook('exp_one_click_resubscribe', !1, !0)
-  let {
-    can_one_click_resubscribe,
-  } = getFeatureFlags()
-  return !!can_one_click_resubscribe && getConfig().get('can_one_click_resubscribe', !1)
+
+/**
+ * Checks if one-click resubscribe experiment is enabled.
+ * Original: $$ef31
+ */
+export function useOneClickResubscribeExperiment() {
+  const { getConfig } = selectExperimentConfigHook('exp_one_click_resubscribe', false, true)
+  const { can_one_click_resubscribe } = getFeatureFlags()
+  return !!can_one_click_resubscribe && getConfig().get('can_one_click_resubscribe', false)
 }
-export const ih = $$G0
-export const mw = $$U1
-export const e5 = $$M2
-export const Mk = $$j3
-export const dI = $$Z4
-export const vt = $$ec5
-export const Mh = $$H6
-export const lS = $$Q7
-export const fn = $$V8
-export const em = $$ep9
-export const Ik = $$k10
-export const y = $$P11
-export const oW = $$e_12
-export const RI = $$$$em13
-export const Fr = $$W14
-export const hn = $$B15
-export const Dj = $$er16
-export const Mi = $$X17
-export const Xt = $$$18
-export const YJ = $$ea19
-export const C3 = $$ed20
-export const UV = $$D21
-export const t4 = $$Y22
-export const wu = $$es23
-export const U2 = $$eo24
-export const lx = $$ei25
-export const Z5 = $$en26
-export const E9 = $$K27
-export const Np = $$eh28
-export const P8 = $$et29
-export const Ow = $$eg30
-export const Lm = $$ef31
-export const CT = $$z32
-export const pT = $$el33
-export const _p = $$eu34
-export const cR = $$J35
-export const fr = $$q36
-export const a8 = $$ee37
+
+// Updated exports to match new function names
+export const ih = FBGNavigationUpdatesVariants
+export const mw = hasUserAccess
+export const e5 = hasStarterTeamLoopholeAccess
+export const Mk = isEligibleForStarterLoopholeTeamOne
+export const dI = useApproveInFileExperiment
+export const vt = useSeatManagementWidgetExperiment
+export const Mh = useSeparateBillingShippingExperiment
+export const lS = useDeveloperContextualUpsellsExperiment
+export const fn = useFBGNavigationUpdatesTreatment
+export const em = useMakeEmptyStateRefreshExperiment
+export const Ik = useCartOptimizationsExperiment
+export const y = useAtMentionInviteExperiment
+export const oW = useFigmaMakePrototypeTabUpsellExperiment
+export const RI = useFigmaMakeDesignEditorPopoutUpsellExperiment
+export const Fr = useDraftsPageLimitExperiment
+export const hn = useAdvancedPrototypingUpsellExperiment
+export const Dj = useCartSeatSelectionClarityExperiment
+export const Mi = useDismissibleUUBExperiment
+export const Xt = useDraftsCopyLinkExperiment
+export const YJ = useOneClickAskToEditExperiment
+export const C3 = useSeatManagementWidgetProExperiment
+export const UV = usePlanUserCreationContextExperiment
+export const t4 = useScimGroupExperiment
+export const wu = useSocialProofExpansionExperiment
+export const U2 = useProUserContextInDowngradeExperiment
+export const lx = useFileInviteWithSeatExperiment
+export const Z5 = usePlanInviteWithSeatExperiment
+export const E9 = useStarterGlobalFileLimitsExperiment
+export const Np = useMakeFileCreationTooltipExperiment
+export const P8 = useProAnnualImprovementsExperiment
+export const Ow = useHighPriorityNotificationsExperiment
+export const Lm = useOneClickResubscribeExperiment
+export const CT = useSeatBillingTermsExperiment
+export const pT = useDtMcpCalloutExperiment
+export const _p = useSendToMakeExperiment
+export const cR = useRfdSignalsUpsellExperiment
+export const fr = useSeatChoiceInNuxExperiment
+export const a8 = useTeamAccountCreditBanner

@@ -10,7 +10,7 @@ import { duplicateFileOptimistic } from "../figma_app/78808";
 import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { consumptionPaywallUtils } from "../905/224";
-import { hr } from "../905/352022";
+import { setupOptimistPlanLoader } from "../905/352022";
 import { fullscreenValue } from "../figma_app/455680";
 import { canCreateTeamFile } from "../905/87821";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -64,7 +64,7 @@ export function $$k1() {
   let j = useSelector(e => e.plans);
   let U = useSelector(e => e.teams);
   useEffect(() => {
-    t(hr({
+    t(setupOptimistPlanLoader({
       loadedPlans: j
     }));
   }, []);

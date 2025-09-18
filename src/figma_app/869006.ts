@@ -7,7 +7,7 @@ import { getResourceDataOrFallback } from "../905/723791";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V, $ as _$$$ } from "../905/355181";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { BI } from "../figma_app/546509";
@@ -26,9 +26,9 @@ import { A as _$$A } from "../3850/566892";
 import { E as _$$E } from "../905/370356";
 import { TH } from "../figma_app/95367";
 import { RR } from "../figma_app/307841";
-import { YJ } from "../figma_app/297957";
+import { useOneClickAskToEditExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { e0 } from "../905/696396";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -128,10 +128,10 @@ function R({
   });
 }
 function V(e) {
-  let t = !aV();
+  let t = !useIsProgressBarHiddenOrLocked();
   let r = useContext(TH);
   let a = e.upgradePathway === _$$J.RE_REQUEST_PATHWAY;
-  let s = YJ(r && e.licenseType === FProductAccessType.DESIGN);
+  let s = useOneClickAskToEditExperiment(r && e.licenseType === FProductAccessType.DESIGN);
   let o = e.upgradePathway === _$$J.AUTO_PATHWAY || e.upgradePathway === _$$J.ADMIN_AUTO_PATHWAY;
   let l = RR({
     preferOpenFilePlan: !0
@@ -376,13 +376,13 @@ export function $$et3(e) {
             afterUpgradeCallback: () => {},
             licenseType: _,
             upgradeReason: _$$i.EDIT_BUTTON,
-            entryPoint: tc.ASK_TO_EDIT
+            entryPoint: DeepLinkType.ASK_TO_EDIT
           }),
           upgradeOneClick: handleUpgrade({
             afterUpgradeCallback: () => {},
             licenseType: _,
             upgradeReason: _$$i.EDIT_BUTTON,
-            entryPoint: tc.ASK_TO_EDIT_ONE_CLICK
+            entryPoint: DeepLinkType.ASK_TO_EDIT_ONE_CLICK
           }),
           upgradePathway: f,
           fileKey: t.key,

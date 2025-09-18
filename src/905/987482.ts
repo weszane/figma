@@ -5,10 +5,10 @@ import { colorToRgb, desaturateColor } from "../figma_app/273493";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { Eh } from "../figma_app/837840";
 import { Ep } from "../figma_app/504823";
-import { VG } from "../figma_app/622881";
+import { getColorSpaceString } from "../figma_app/622881";
 import { MX, Kf } from "../905/306220";
 import { W } from "../905/979098";
 let f = class e extends RecordingPureComponent {
@@ -27,7 +27,7 @@ let f = class e extends RecordingPureComponent {
       }, !0);
     };
     this.renderCanvas = t => {
-      let i = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
+      let i = this.props.colorProfile ? getColorSpaceString(this.props.colorProfile) : "srgb";
       let n = Eh(t, i);
       if (!n) return;
       let r = MX(this.props.uiVersion);
@@ -76,7 +76,7 @@ export function $$_0(e) {
   });
 }
 function A(e) {
-  let t = e.colorProfile ? VG(e.colorProfile) : "srgb";
+  let t = e.colorProfile ? getColorSpaceString(e.colorProfile) : "srgb";
   let {
     h
   } = e.color;
@@ -121,8 +121,8 @@ function y(e, t) {
     l: .5,
     a: 1
   });
-  return F.format(i, t);
+  return colorCSSManipulatorInstance.format(i, t);
 }
 f.displayName = "HueControl";
-f.formatter = F;
+f.formatter = colorCSSManipulatorInstance;
 export const e = $$_0;

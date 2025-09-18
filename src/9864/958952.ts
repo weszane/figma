@@ -3,7 +3,7 @@ import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { getI18nString } from "../905/303541";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { $B } from "../figma_app/545877";
 import { FFileType } from "../figma_app/191312";
 import { TE } from "../7021/724859";
@@ -957,7 +957,7 @@ export function $$ed0({
   } : {};
   let b = R6();
   let j = useAtomWithSubscription($B);
-  let C = "dark" === DP();
+  let C = "dark" === getVisibleTheme();
   let L = l === pu.CHOOSE_PRODUCT && !!_;
   let v = _ === FFileType.DESIGN;
   let w = _ === FFileType.WHITEBOARD;

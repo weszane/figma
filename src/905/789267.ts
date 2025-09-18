@@ -15,7 +15,7 @@ import { AutoLayout } from "../905/470281";
 import { RR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
@@ -67,7 +67,7 @@ export let $$N0 = registerModal(function ({
   })) return null;
   let H = mV(e);
   let W = KL(e, O);
-  D && D === tc.USER_SETTINGS && (H = k0(e), W = m3(e, O));
+  D && D === DeepLinkType.USER_SETTINGS && (H = k0(e), W = m3(e, O));
   return jsx(tH, {
     boundaryKey: "AutoUpgradeConfirmationModal",
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,

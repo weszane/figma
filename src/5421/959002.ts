@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { QK, Ns, wy, kv } from "../figma_app/259678";
 import { $W } from "../figma_app/325537";
 import { i as _$$i } from "../905/661697";
@@ -392,7 +392,7 @@ export function $$F0({
     getContextMenuTriggerProps,
     manager
   } = setupMenu();
-  let m = Fk((e, n) => Ns(e, n, t?.belongsToCodeLibrary?.guid), n);
+  let m = useDeepEqualSceneValue((e, n) => Ns(e, n, t?.belongsToCodeLibrary?.guid), n);
   let [x, g] = useAtomValueAndSetter(wy);
   let y = useCallback(e => {
     g(t => {

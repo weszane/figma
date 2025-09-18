@@ -25,7 +25,7 @@ import { filePutAction, markFileViewedOptimistic } from "../figma_app/78808";
 import { z as _$$z } from "../905/404751";
 import { kP, Y6, XQ, ho } from "../figma_app/91703";
 import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
-import { yJ as _$$yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { UpgradeAction } from "../905/370443";
 import { trackDefinedFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { mu, yn } from "../figma_app/840917";
@@ -37,14 +37,14 @@ import { showFileBrowserOrError } from "../905/87821";
 import { getFeatureFlags } from "../905/601108";
 import { getFontMetadataList } from "../905/165290";
 import { bE } from "../905/466026";
-import { yJ as _$$yJ2 } from "../905/584989";
+import { putTeamUser } from "../905/584989";
 import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
 import { getSelectedFile } from "../905/766303";
 import { nk } from "../figma_app/2023";
 import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { buildFileUrl } from "../905/612685";
 import { maybeShowVersionDiffNotification } from "../figma_app/841351";
 import { mapEditorTypeToWorkspaceType, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
@@ -58,8 +58,8 @@ import { zR, DH, BL } from "../905/327855";
 import { Bz } from "../figma_app/298277";
 import { OpenEditorFileData } from "../figma_app/43951";
 import { hasProjectRestrictions } from "../figma_app/345997";
-import { xN } from "../905/672897";
-import { w2, i_ } from "../905/187165";
+import { fetchTeamRoles } from "../905/672897";
+import { getBackgroundColorForTheme, getVisibleTheme } from "../905/187165";
 import { Ob } from "../figma_app/111825";
 import { m as _$$m } from "../905/84999";
 import { fileApiHandler } from "../figma_app/787550";
@@ -107,7 +107,7 @@ async function ea(e, t, i) {
   })), s.file_repo && t.dispatch(bE({
     repo: s.file_repo
   })), s.script !== Fig.fullscreenScriptHash && (await customHistory.reloadAndWaitForever("Fullscreen version mismatch", {
-    isInProgressVisibleLoad: xK.isInProgressVisibleLoad(),
+    isInProgressVisibleLoad: fullscreenPerfManager.isInProgressVisibleLoad(),
     latestFullscreenVersion: s.script,
     currentFullscreenVersion: Fig.fullscreenScriptHash
   })), c && (l.reload_when_feature_flags_change || c.reload_when_feature_flags_change)) {
@@ -120,7 +120,7 @@ async function ea(e, t, i) {
   await fullscreenValue.loadAndStartFullscreenIfNecessary();
   Fullscreen.setEditorType(mapEditorTypeToWorkspaceType(i));
   let m = s.team;
-  m && t.dispatch(_$$yJ({
+  m && t.dispatch(setTeamOptimistThunk({
     team: m,
     userInitiated: !1
   }));
@@ -169,7 +169,7 @@ async function ea(e, t, i) {
     }
   }));
   let E = s.current_team_user;
-  E && h?.team_id && t.dispatch(_$$yJ2({
+  E && h?.team_id && t.dispatch(putTeamUser({
     teamUsers: [E],
     teamId: h.team_id
   }));
@@ -178,7 +178,7 @@ async function ea(e, t, i) {
   desktopAPIInstance?.setIsTeamTemplate(!!x);
   Fullscreen.setEditorTheme(n.theme.visibleTheme || "");
   ColorStateTsApi && ky.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
-  xK.time("openFileWithMetadata", () => Fullscreen.openFileWithServerMetadata({
+  fullscreenPerfManager.time("openFileWithMetadata", () => Fullscreen.openFileWithServerMetadata({
     metadata: {
       file_key: s.file_key,
       source_file_key: s.source_file_key
@@ -464,11 +464,11 @@ let $$ej0 = createOptimistThunk(async (e, {
           teamId: teamToMoveFileToOnNavigate
         });
         C = data.meta;
-        e.dispatch(_$$yJ({
+        e.dispatch(setTeamOptimistThunk({
           team: data.meta,
           userInitiated: !1
         }));
-        await xN(teamToMoveFileToOnNavigate, e);
+        await fetchTeamRoles(teamToMoveFileToOnNavigate, e);
       } else C = teamToMoveFileToOnNavigate ? teams[teamToMoveFileToOnNavigate] : null;
       if (!C) return;
       let t = (await i.fetch(Xg({
@@ -519,7 +519,7 @@ function eB(e) {
   let t = _$$m.getFileMetadata({
     fileKey: e
   });
-  return xK.timeAsync("fileMetadataRequest", () => t);
+  return fullscreenPerfManager.timeAsync("fileMetadataRequest", () => t);
 }
 let eV = jW.exec(customHistory.location.pathname);
 let eG = null;
@@ -546,7 +546,7 @@ let eH = createOptimistThunk(async (e, {
     });
     i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : "";
-    let v = w2(i_(A.theme.themePreference));
+    let v = getBackgroundColorForTheme(getVisibleTheme(A.theme.themePreference));
     BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
       logInfo("image", "Failed to generate compressed textures", {
         fileKey: t.key,

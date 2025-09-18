@@ -18,7 +18,7 @@ import { getCollectionView } from "../905/707993";
 import { J6, qs, fn, WI } from "../figma_app/986594";
 import { isInvalidValue } from "../905/216495";
 import { Um } from "../905/848862";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { a3, ow } from "../905/188421";
 import { c$, sK } from "../905/794875";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -144,14 +144,14 @@ export function $$z1() {
   return !!getSingletonSceneGraph().getDirectlySelectedNodes().find(H);
 }
 export function $$V3() {
-  return Fk(e => e.getDirectlySelectedNodes().some(H));
+  return useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().some(H));
 }
 let W = e => !!("TEXT" === e.type && e.textData?.styleOverrideTable?.length) && !!e.textData.styleOverrideTable.find(e => !!e.hyperlink && !!e.hyperlink.url || !!e.hyperlink?.guid);
 export function $$Y2() {
   return !!getSingletonSceneGraph().getDirectlySelectedNodes().find(W);
 }
 export function $$J4() {
-  return Fk(e => e.getDirectlySelectedNodes().some(W));
+  return useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().some(W));
 }
 export function $$q0({
   id: e,

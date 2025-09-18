@@ -15,7 +15,7 @@ import { O2, OE } from "../figma_app/164212";
 import { e6 } from "../figma_app/545190";
 import { I9 } from "../figma_app/151869";
 import { selectWithShallowEqual } from "../905/103090";
-import { g0 } from "../figma_app/167249";
+import { useSingleSceneValue } from "../figma_app/167249";
 import { Lg } from "../figma_app/505098";
 import { n as _$$n } from "../642/665823";
 import { x as _$$x } from "../642/848308";
@@ -70,7 +70,7 @@ export let $$M0 = memo(function (e) {
 function A(e) {
   let t = function () {
     let e = selectWithShallowEqual(Lg);
-    return g0(e);
+    return useSingleSceneValue(e);
   }();
   return t && ("SYMBOL" === t.type && !t.isState || t.isStateGroup) ? jsx(IconButton, {
     recordingKey: generateRecordingKey(e.recordingKey, "goToParent"),

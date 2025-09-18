@@ -34,15 +34,15 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { BannerInsetModal, BannerInset } from '../figma_app/59509';
 import { isNotNullish } from '../figma_app/95419';
 import { FBillingPeriodType, FOrganizationLevelType } from '../figma_app/191312';
-import { AG } from '../figma_app/217457';
-import { P8, vt } from '../figma_app/297957';
+import { compareProductAccessTypes } from '../figma_app/217457';
+import { useProAnnualImprovementsExperiment, useSeatManagementWidgetExperiment } from '../figma_app/297957';
 import { Tj } from '../figma_app/342207';
 import { useTeamPlanFeatures } from '../figma_app/465071';
 import { CurrencyFormatter } from '../figma_app/514043';
 import { R as _$$R } from '../figma_app/522082';
 import { tI } from '../figma_app/599327';
 import { e6, lR } from '../figma_app/617427';
-import { k as _$$k2 } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { DashboardSection } from '../figma_app/650409';
 import { RG } from '../figma_app/684446';
 import { BillingCycle } from '../figma_app/831101';
@@ -112,7 +112,7 @@ function B(e) {
       style: {
         display: 'contents'
       },
-      children: [...e.lines].sort((e, t) => AG(e.bpKey, t.bpKey)).map(t => {
+      children: [...e.lines].sort((e, t) => compareProductAccessTypes(e.bpKey, t.bpKey)).map(t => {
         let a = r.formatMoney(t.amount, {
           showCents: !0,
           currencySign: 'accounting'
@@ -159,7 +159,7 @@ function z(e) {
     subheading: getI18nString('plan_invoices.cost_breakdown.seats_subheading', i)
   }, [e.invoice, i]);
   let l = useMemo(() => {
-    let t = rK(e.invoice).sort(AG);
+    let t = rK(e.invoice).sort(compareProductAccessTypes);
     let s = new Set(o0(e.invoice));
     if (a) {
       let a;
@@ -437,7 +437,7 @@ function er(e) {
 }
 function el(e) {
   let t = useDispatch();
-  let a = _$$k2();
+  let a = isProrationBillingEnabledForCurrentPlan();
   let r = useTeamPlanFeatures().unwrapOr(null);
   let l = r?.key?.type;
   let o = r?.key?.parentId;
@@ -529,7 +529,7 @@ function el(e) {
   let g = function (e) {
     let t = useDispatch();
     let a = e.adjustAnnualSeatsAction;
-    let s = P8();
+    let s = useProAnnualImprovementsExperiment();
     let r = e.invoice.billing_interval === FBillingPeriodType.MONTH && e5(e.invoice) > 0;
     if (!a || e.invoice.state !== qH.PENDING || !r || !s()) return null;
     switch (a.id) {
@@ -942,7 +942,7 @@ function eS(e) {
 }
 let eN = 'InvoiceFlyout';
 export function $$eI0(e) {
-  let t = vt();
+  let t = useSeatManagementWidgetExperiment();
   let a = _$$B();
   let r = useRef(null);
   let l = useRef(null);

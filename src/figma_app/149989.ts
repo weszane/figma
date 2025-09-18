@@ -21,7 +21,7 @@ import { NX, k9 } from "../figma_app/777207";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { dH } from "../figma_app/722362";
+import { useCurrentTool } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { Oe } from "../figma_app/336853";
@@ -877,7 +877,7 @@ export function $$eu0({
     t();
     e.stopPropagation();
   }, [t]));
-  return dH() === DesignGraphElements.DROPPER_COLOR ? null : jsx(_$$n.div, {
+  return useCurrentTool() === DesignGraphElements.DROPPER_COLOR ? null : jsx(_$$n.div, {
     className: ZA,
     onMouseDown: r
   });

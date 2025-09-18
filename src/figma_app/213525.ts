@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { Mb, El } from "../figma_app/646357";
-import { D2 } from "../905/18797";
+import { isLoaded } from "../905/18797";
 import { je } from "../figma_app/155728";
 import { D } from "../905/367723";
 import { Yl } from "../figma_app/10098";
@@ -12,7 +12,7 @@ export function $$p0() {
   let t = useSelector(e => e.loadingState);
   return !!D() && (!e.data || e.data.some(e => {
     let r = Mb(e.libraryKey);
-    return !D2(t, r);
+    return !isLoaded(t, r);
   }));
 }
 export function $$_1() {
@@ -23,7 +23,7 @@ export function $$_1() {
   return useCallback(r => {
     if (!r || r === Yl || l?.has(r) || t === r) return !1;
     let n = Mb(r);
-    return !D2(e, n) && !El("", r);
+    return !isLoaded(e, n) && !El("", r);
   }, [l, t, e]);
 }
 export const U = $$p0;

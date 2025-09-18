@@ -1,9 +1,18 @@
-import { createActionCreator } from "../905/73481";
-let $$r2 = createActionCreator("ROLE_DELETE");
-let $$a1 = createActionCreator("ROLE_BATCH_PUT");
-let $$s3 = createActionCreator("ROLE_PUT");
-let $$o0 = createActionCreator("ROLE_POST");
-export const bE = $$o0;
-export const uo = $$a1;
-export const yH = $$r2;
-export const yJ = $$s3;
+import { createActionCreator } from '../905/73481'
+/**
+ * Action creators for role management.
+ * Original variable names: $$r2, $$a1, $$s3, $$o0
+ */
+export const roleDeleteAction = createActionCreator('ROLE_DELETE')
+export const roleBatchPutAction = createActionCreator('ROLE_BATCH_PUT')
+export const rolePutAction = createActionCreator('ROLE_PUT')
+export const rolePostAction = createActionCreator('ROLE_POST')
+
+/**
+ * Exported action creators with refactored names.
+ * Original export names: bE, uo, yH, yJ
+ */
+export const bE = rolePostAction
+export const uo = roleBatchPutAction
+export const yH = roleDeleteAction
+export const yJ = rolePutAction

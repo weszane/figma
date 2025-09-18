@@ -12,7 +12,7 @@ import _ from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
-import { dT } from "../figma_app/889655";
+import { selectInstanceKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { Yj, kt, xA, _F } from "../figma_app/92985";
@@ -21,7 +21,7 @@ import { u as _$$u } from "../figma_app/398802";
 var h = _;
 let v = "ui3_instance_attribution_button--iconDefault--0g0Lj";
 export function $$A0(e) {
-  let t = useSelector(dT);
+  let t = useSelector(selectInstanceKeys);
   let {
     backingSymbolGUID,
     backingStateGroupGUID

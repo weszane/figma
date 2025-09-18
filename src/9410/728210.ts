@@ -14,12 +14,12 @@ import { BrowserInfo, isMobileNotFigmaMobile, isAnyMobile } from "../figma_app/7
 import { y7, oJ, $ as _$$$, jA, NB, L3, KI } from "../figma_app/385215";
 import { Fj, Dv, ah, uc } from "../905/763714";
 import { Av } from "../905/149328";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { O1, KD } from "../figma_app/317394";
 import { _o } from "../figma_app/701001";
 import { getBasicViewportRect } from "../figma_app/62612";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { $0, dR, Ww, y as _$$y, oW, D_, HG, By, VA, Pi } from "../figma_app/440875";
 import { T as _$$T, N as _$$N2 } from "../905/847283";
@@ -41,7 +41,7 @@ let K = (e, t) => {
   let i = getBasicViewportRect();
   let r = Av();
   let a = _o();
-  let s = p8("showUi");
+  let s = useAppModelProperty("showUi");
   let o = getSelectedView();
   let l = function ({
     isUI3: e,
@@ -70,7 +70,7 @@ function H(e) {
   let t;
   let i = getBasicViewportRect();
   let r = _o();
-  p8("showUi");
+  useAppModelProperty("showUi");
   let a = 0;
   (BrowserInfo.isIpad || isMobileNotFigmaMobile()) && (a = _$$VA());
   let s = i.y + r + a;
@@ -302,7 +302,7 @@ function $(e) {
     let p = getSelectedViewType();
     let h = useCallback(() => {
       u(_$$N2.STOP);
-      "prototype" === p ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
+      "prototype" === p ? getViewerInstance()?.stopPresenting() : Multiplayer.stopPresenting();
     }, [u, p]);
     let m = useCallback(() => !!c && (h(), !0), [h, c]);
     O1(m, KD.MULTIPLAYER_SPOTLIGHT);

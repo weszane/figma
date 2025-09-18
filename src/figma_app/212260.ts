@@ -19,7 +19,7 @@ import { j as _$$j } from "../905/813868";
 import { gR } from "../figma_app/120210";
 import { Um } from "../905/848862";
 import { Kx } from "../figma_app/546509";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { getPluginVersion } from "../figma_app/300692";
 import { Vq } from "../figma_app/979658";
 import { HubTypeEnum, hasMonetizedResourceMetadata } from "../figma_app/45218";
@@ -58,7 +58,7 @@ export function $$G2(e) {
     }));
   }, [r, w, l]);
   let J = _$$b();
-  if (oh(af.loadingKeyForPayload({
+  if (useIsLoading(af.loadingKeyForPayload({
     id: r,
     resourceType: HubTypeEnum.WIDGET
   })) && !l) return jsx(_$$L, {});

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { analyticsEventManager } from "../905/449184";
 import { h } from "../905/207101";
 import { iN, Zl, Z4 } from "../905/211621";
@@ -24,7 +24,7 @@ var $$n0;
     e.EDIT_COMPONENT_PROP_PICKER = "Edit Component Prop Picker > Preferred Values Select";
   })(e.PreferredValuesPickerEntrypoint || (e.PreferredValuesPickerEntrypoint = {}));
   e.useOpenFileProperties = t;
-  e.selectOpenFileProperties = Mz([e => e.user?.id, e => e.openFile?.parentOrgId ?? void 0, e => e.openFile?.key, e => e.openFile?.teamId ?? void 0, e => e.openFile?.libraryKey], (e, t, i, n, r) => ({
+  e.selectOpenFileProperties = createSelector([e => e.user?.id, e => e.openFile?.parentOrgId ?? void 0, e => e.openFile?.key, e => e.openFile?.teamId ?? void 0, e => e.openFile?.libraryKey], (e, t, i, n, r) => ({
     userId: e,
     teamId: n,
     orgId: t,

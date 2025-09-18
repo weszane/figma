@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { d as _$$d, cR, hv } from "../figma_app/715641";
 import { h as _$$h } from "../905/207101";
-import { l7, X0, U0, ZI, Xd } from "../figma_app/88239";
+import { useIsFullscreenOverview, useHasReadyNodesWithParentOrg, useSelectedViewWithOverview, useTotalReadyAndCompletedNodes, useDevModeOverviewEntryClick } from "../figma_app/88239";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
@@ -31,7 +31,7 @@ var d = l;
 function w({
   devFocusedOnboarding: e
 }) {
-  let t = l7();
+  let t = useIsFullscreenOverview();
   let i = useDispatch();
   let n = useAtomWithSubscription(_$$d);
   let s = useAtomWithSubscription(cR);
@@ -90,20 +90,20 @@ export function $$D0({
 export function $$M1({
   devFocusedOnboarding: e
 }) {
-  let t = X0();
+  let t = useHasReadyNodesWithParentOrg();
   let i = !useCanAccessDevModeEntryPoint();
   let l = useDispatch();
-  let u = U0();
+  let u = useSelectedViewWithOverview();
   let p = useSelector(e => i ? void 0 : selectedViewToPath(e, u));
-  let g = l7();
-  let x = ZI();
+  let g = useIsFullscreenOverview();
+  let x = useTotalReadyAndCompletedNodes();
   let y = useAtomWithSubscription(hv)?.data;
   let [b, v] = useAtomValueAndSetter(cR);
   let E = useCanUseDevModeDemoFile();
   let T = useAtomWithSubscription(_$$d);
   let M = isWhiteboardFileType();
   let P = _$$n();
-  let F = Xd();
+  let F = useDevModeOverviewEntryClick();
   let B = useCallback(e => {
     if (e.stopPropagation(), e.preventDefault(), i) return;
     let {

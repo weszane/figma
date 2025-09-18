@@ -74,7 +74,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { F as _$$F2 } from "../905/258517";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { K0, YW } from "../figma_app/778125";
 import { iL } from "../905/824449";
 import { A as _$$A, h as _$$h2 } from "../905/226345";
@@ -143,7 +143,7 @@ let eD = memo(function ({
     let r = v.current?.getBoundingClientRect();
     r && showStyleDetails(e, r, "styleListClick");
   }, [e, showStyleDetails]);
-  let U = useSelector(Sh);
+  let U = useSelector(selectSceneGraphSelectionKeys);
   let B = useCallback(t => {
     t.stopPropagation();
     debug(null != e.content_hash, "style does not have a hash");

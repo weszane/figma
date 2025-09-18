@@ -1,8 +1,8 @@
 import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$s0() {
-  return Fk(e => e.getRoot().slideThemeId);
+  return useDeepEqualSceneValue(e => e.getRoot().slideThemeId);
 }
 export function $$o2() {
   let [e] = lJ("themeId");

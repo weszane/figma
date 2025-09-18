@@ -25,7 +25,7 @@ import { hideModalHandler } from "../905/156213";
 import { ZH } from "../figma_app/504823";
 import { replaceSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { registerModal } from "../905/102752";
 import { JI, Yj } from "../905/416496";
 import { J5, K8, F4, vl } from "../905/920793";
@@ -36,7 +36,7 @@ export let $$M0 = registerModal(function (e) {
   let [t, i] = useState(!1);
   let u = useModalManager(e);
   let p = useDispatch();
-  let m = eY();
+  let m = useSceneGraphSelector();
   let h = Pc();
   let g = gI();
   let y = dS();

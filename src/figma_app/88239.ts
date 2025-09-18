@@ -1,143 +1,270 @@
-import { useEffect, useMemo, useCallback } from "react";
-import { useSelector, useStore, useDispatch } from "react-redux";
-import { AppStateTsApi, HandoffBindingsCpp, AutosaveEventType } from "../figma_app/763686";
-import { useAtomValueAndSetter } from "../figma_app/27355";
-import o from "../vendor/523035";
-import { trackFileEventWithStore } from "../figma_app/901889";
-import { selectWithShallowEqual } from "../905/103090";
-import { useCanAccessDevModeEntryPoint } from "../figma_app/473493";
-import { useHasParentOrgId } from "../905/882262";
-import { Ym } from "../figma_app/806075";
-import { selectViewAction } from "../905/929976";
-import { subscribeToGuidsAndTrack } from "../figma_app/582924";
-import { aV } from "../figma_app/722362";
-import { getObservableOrFallback } from "../figma_app/84367";
-import { FEditorType } from "../figma_app/53721";
-import { SelectorType } from "../figma_app/707808";
-import { isFullscreenDevHandoffView } from "../905/782918";
-import { gk } from "../figma_app/715641";
-import { _o } from "../figma_app/879363";
-var l = o;
-export function $$S12() {
-  return useSelector(e => $$C4(e.selectedView));
+import { sum } from 'lodash-es'
+import { useCallback, useEffect, useMemo } from 'react'
+import { useDispatch, useSelector, useStore } from 'react-redux'
+import { selectWithShallowEqual } from '../905/103090'
+import { isFullscreenDevHandoffView } from '../905/782918'
+import { useHasParentOrgId } from '../905/882262'
+import { selectViewAction } from '../905/929976'
+import { useAtomValueAndSetter } from '../figma_app/27355'
+import { FEditorType } from '../figma_app/53721'
+import { getObservableOrFallback } from '../figma_app/84367'
+import { useCanAccessDevModeEntryPoint } from '../figma_app/473493'
+import { subscribeToGuidsAndTrack } from '../figma_app/582924'
+import { SelectorType } from '../figma_app/707808'
+import { gk } from '../figma_app/715641'
+import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362'
+import { AppStateTsApi, AutosaveEventType, HandoffBindingsCpp } from '../figma_app/763686'
+import { handleEnterMode } from '../figma_app/806075'
+import { atomH1 } from '../figma_app/879363'
+import { trackFileEventWithStore } from '../figma_app/901889'
+
+/**
+ * Returns true if the selected view is fullscreen and showOverview is true.
+ * @param selectedView - The selected view object from state.
+ * @returns boolean
+ * @originalName $$C4
+ */
+export function isFullscreenOverview(selectedView: any): boolean {
+  return !!selectedView && selectedView?.view === 'fullscreen' && selectedView?.showOverview === true
 }
-export function $$v8() {
-  return useSelector(e => {
-    var t;
-    return !!(t = e.selectedView) && t?.view === "fullscreen" && t?.showDevModeComponentBrowser === !0;
-  });
+
+/**
+ * Selector for checking if the selected view is fullscreen and showDevModeComponentBrowser is true.
+ * @returns boolean
+ * @originalName $$v8
+ */
+export function useIsFullscreenDevModeComponentBrowser(): boolean {
+  return useSelector((state) => {
+    const selectedView = state.selectedView
+    return !!selectedView && selectedView.view === 'fullscreen' && selectedView.showDevModeComponentBrowser === true
+  })
 }
-export function $$A1() {
-  return useSelector(e => function (e) {
-    if (e) return e?.view === "fullscreen" ? e?.componentKey : void 0;
-  }(e.selectedView));
+
+/**
+ * Selector for getting the componentKey if the selected view is fullscreen.
+ * @returns string | undefined
+ * @originalName $$A1
+ */
+export function useFullscreenComponentKey(): string | undefined {
+  return useSelector((state) => {
+    const selectedView = state.selectedView
+    if (selectedView && selectedView.view === 'fullscreen') {
+      return selectedView.componentKey
+    }
+    return undefined
+  })
 }
-export function $$x14() {
-  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 && e.selectedView?.githubRepositorySelectorMode !== void 0 && e.selectedView?.githubRepositorySelectorMode !== SelectorType.NONE);
+
+/**
+ * Selector for checking if the github repository selector mode is active in fullscreen dev mode component browser.
+ * @returns boolean
+ * @originalName $$x14
+ */
+export function useIsGithubRepositorySelectorActive(): boolean {
+  return useSelector((state) => {
+    const selectedView = state.selectedView
+    return (
+      selectedView?.view === 'fullscreen'
+      && selectedView?.showDevModeComponentBrowser === true
+      && selectedView?.githubRepositorySelectorMode !== undefined
+      && selectedView?.githubRepositorySelectorMode !== SelectorType.NONE
+    )
+  })
 }
-export function $$N11() {
-  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 ? e.selectedView?.githubRepositorySelectorMode ?? SelectorType.NONE : SelectorType.NONE);
+
+/**
+ * Selector for getting the github repository selector mode in fullscreen dev mode component browser.
+ * @returns SelectorType
+ * @originalName $$N11
+ */
+export function useGithubRepositorySelectorMode(): SelectorType {
+  return useSelector((state) => {
+    const selectedView = state.selectedView
+    return selectedView?.view === 'fullscreen' && selectedView?.showDevModeComponentBrowser === true
+      ? selectedView?.githubRepositorySelectorMode ?? SelectorType.NONE
+      : SelectorType.NONE
+  })
 }
-export function $$C4(e) {
-  return !!e && e?.view === "fullscreen" && e?.showOverview === !0;
+
+/**
+ * Selector for checking if the selected view is fullscreen and showOverview is true.
+ * @returns boolean
+ * @originalName $$S12
+ */
+export function useIsFullscreenOverview(): boolean {
+  return useSelector(state => isFullscreenOverview(state.selectedView))
 }
-export function $$w9() {
-  return useSelector(e => $$O13(e.selectedView) ?? null);
+
+/**
+ * Selector for getting the devModeFocusId if the selected view is a fullscreen dev handoff view.
+ * @returns string | undefined
+ * @originalName $$O13
+ */
+export function getDevModeFocusId(selectedView: any): string | undefined {
+  if (selectedView && isFullscreenDevHandoffView(selectedView)) {
+    return selectedView.devModeFocusId
+  }
+  return undefined
 }
-export function $$O13(e) {
-  if (e) return isFullscreenDevHandoffView(e) ? e.devModeFocusId : void 0;
+
+/**
+ * Selector for getting the devModeFocusId from state.
+ * @returns string | null
+ * @originalName $$w9
+ */
+export function useDevModeFocusId(): string | null {
+  return useSelector(state => getDevModeFocusId(state.selectedView) ?? null)
 }
-export function $$R3() {
-  let e = aV();
-  let t = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusLoaded);
+
+/**
+ * Loads all nodes with statuses and subscribes to their GUIDs for tracking.
+ * @returns Observable<any>
+ * @originalName $$R3
+ */
+export function useNodesWithStatusLoaded(): any {
+  const isProgressBarHiddenOrLocked = useIsProgressBarHiddenOrLocked()
+  const nodesWithStatusLoaded = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusLoaded)
+
   useEffect(() => {
-    if (e || t) return;
-    let r = HandoffBindingsCpp.getAllNodesWithStatusesByPage();
-    let n = new Set();
-    r.forEach(e => {
-      e.forEach(e => {
-        n.add(e);
-      });
-    });
-    subscribeToGuidsAndTrack(n, AutosaveEventType.DEV_HANDOFF_STATUS).then(() => {
-      HandoffBindingsCpp.onAllNodesWithStatusesLoaded(r);
-    });
-  }, [e, t]);
-  return t;
+    if (isProgressBarHiddenOrLocked || nodesWithStatusLoaded)
+      return
+    const allNodesWithStatusesByPage = HandoffBindingsCpp.getAllNodesWithStatusesByPage()
+    const nodeSet = new Set<string>()
+    allNodesWithStatusesByPage.forEach((pageNodes) => {
+      pageNodes.forEach(nodeId => nodeSet.add(nodeId))
+    })
+    subscribeToGuidsAndTrack(nodeSet, AutosaveEventType.DEV_HANDOFF_STATUS).then(() => {
+      HandoffBindingsCpp.onAllNodesWithStatusesLoaded(allNodesWithStatusesByPage)
+    })
+  }, [isProgressBarHiddenOrLocked, nodesWithStatusLoaded])
+
+  return nodesWithStatusLoaded
 }
-export function $$L7() {
-  let e = getObservableOrFallback(AppStateTsApi.currentSceneState().numReadyNodesByPage);
-  let t = getObservableOrFallback(AppStateTsApi.currentSceneState().numCompletedNodesByPage);
-  return useMemo(() => l()([...e.values(), ...t.values()]), [e, t]);
+
+/**
+ * Returns the sum of ready and completed nodes by page.
+ * @returns number
+ * @originalName $$L7
+ */
+export function useTotalReadyAndCompletedNodes(): number {
+  const numReadyNodesByPage = getObservableOrFallback(AppStateTsApi.currentSceneState().numReadyNodesByPage)
+  const numCompletedNodesByPage = getObservableOrFallback(AppStateTsApi.currentSceneState().numCompletedNodesByPage)
+
+  return useMemo(() => sum([...numReadyNodesByPage.values(), ...numCompletedNodesByPage.values()]), [numReadyNodesByPage, numCompletedNodesByPage])
 }
-export function $$P5() {
-  let e = useHasParentOrgId();
-  let t = $$L7();
-  return e && t > 0;
+
+/**
+ * Returns true if the user has a parent org ID and there are ready/completed nodes.
+ * @returns boolean
+ * @originalName $$P5
+ */
+export function useHasReadyNodesWithParentOrg(): boolean {
+  const hasParentOrgId = useHasParentOrgId()
+  const totalNodes = useTotalReadyAndCompletedNodes()
+  return hasParentOrgId && totalNodes > 0
 }
-export function $$D2() {
-  let e = useSelector(e => e.mirror.appModel.currentPage);
-  return selectWithShallowEqual(t => "fullscreen" === t.selectedView.view ? {
-    ...t.selectedView,
-    showOverview: !0,
-    overviewBackButtonTargetNodeId: e
-  } : t.selectedView);
+
+/**
+ * Selector for getting the selected view with overview enabled if in fullscreen.
+ * @returns any
+ * @originalName $$D2
+ */
+export function useSelectedViewWithOverview(): any {
+  const currentPage = useSelector(state => state.mirror.appModel.currentPage)
+  return selectWithShallowEqual(state => state.selectedView.view === 'fullscreen'
+    ? {
+        ...state.selectedView,
+        showOverview: true,
+        overviewBackButtonTargetNodeId: currentPage,
+      }
+    : state.selectedView)
 }
-export function $$k6() {
-  let e = useStore();
-  let t = trackFileEventWithStore();
-  let r = !useCanAccessDevModeEntryPoint();
-  let [, a] = useAtomValueAndSetter(_o);
-  let o = useDispatch();
-  let [l, c] = useAtomValueAndSetter(gk);
-  let p = $$D2();
+
+/**
+ * Callback for handling Dev Mode Overview entry click.
+ * @returns () => void
+ * @originalName $$k6
+ */
+export function useDevModeOverviewEntryClick(): () => void {
+  const store = useStore()
+  const trackEvent = trackFileEventWithStore()
+  const cannotAccessDevModeEntry = !useCanAccessDevModeEntryPoint()
+  const [, setAtomH1] = useAtomValueAndSetter(atomH1)
+  const dispatch = useDispatch()
+  const [_, setGk] = useAtomValueAndSetter(gk)
+  const selectedViewWithOverview = useSelectedViewWithOverview()
+
   return useCallback(() => {
-    if (r) return;
-    t("Dev Mode Overview Entry Clicked");
-    let n = e.getState();
-    "editorType" in n.selectedView && n.selectedView.editorType === FEditorType.Design && Ym(n, FEditorType.DevHandoff, "overview_entry");
-    a("entry_clicked");
-    c(void 0);
-    o(selectViewAction(p));
-  }, [r, o, p, c, a, e, t]);
+    if (cannotAccessDevModeEntry)
+      return
+    trackEvent('Dev Mode Overview Entry Clicked')
+    const state = store.getState()
+    if ('editorType' in state.selectedView && state.selectedView.editorType === FEditorType.Design) {
+      handleEnterMode(state, FEditorType.DevHandoff, 'overview_entry')
+    }
+    setAtomH1('entry_clicked')
+    setGk(undefined)
+    dispatch(selectViewAction(selectedViewWithOverview))
+  }, [cannotAccessDevModeEntry, dispatch, selectedViewWithOverview, setGk, setAtomH1, store, trackEvent])
 }
-export function $$M10(e) {
-  let t = useDispatch();
-  let r = function (e) {
-    let t = useSelector(e => e.mirror.appModel.currentPage);
-    return selectWithShallowEqual(r => "fullscreen" === r.selectedView.view ? {
-      ...r.selectedView,
-      showDevModeComponentBrowser: !0,
-      componentBrowserBackButtonTargetNodeId: t,
-      componentBrowserEntrypoint: e
-    } : r.selectedView);
-  }(e);
+
+/**
+ * Callback for selecting the component browser entrypoint.
+ * @param entrypoint - The entrypoint value.
+ * @returns () => void
+ * @originalName $$M10
+ */
+export function useComponentBrowserEntrypoint(entrypoint: any): () => void {
+  const dispatch = useDispatch()
+  const selectedView = (() => {
+    const currentPage = useSelector(state => state.mirror.appModel.currentPage)
+    return selectWithShallowEqual(state => state.selectedView.view === 'fullscreen'
+      ? {
+          ...state.selectedView,
+          showDevModeComponentBrowser: true,
+          componentBrowserBackButtonTargetNodeId: currentPage,
+          componentBrowserEntrypoint: entrypoint,
+        }
+      : state.selectedView)
+  })()
+
   return useCallback(() => {
-    t(selectViewAction(r));
-  }, [t, r]);
+    dispatch(selectViewAction(selectedView))
+  }, [dispatch, selectedView])
 }
-export function $$F0() {
-  let e = useDispatch();
-  let t = useSelector(e => e.selectedView);
-  return useCallback(r => {
-    "fullscreen" === t.view && e(selectViewAction({
-      ...t,
-      githubRepositorySelectorMode: r
-    }));
-  }, [e, t]);
+
+/**
+ * Callback for updating the github repository selector mode.
+ * @returns (mode: SelectorType) => void
+ * @originalName $$F0
+ */
+export function useUpdateGithubRepositorySelectorMode(): (mode: SelectorType) => void {
+  const dispatch = useDispatch()
+  const selectedView = useSelector(state => state.selectedView)
+
+  return useCallback((mode: SelectorType) => {
+    if (selectedView.view === 'fullscreen') {
+      dispatch(selectViewAction({
+        ...selectedView,
+        githubRepositorySelectorMode: mode,
+      }))
+    }
+  }, [dispatch, selectedView])
 }
-export const Bt = $$F0;
-export const NZ = $$A1;
-export const U0 = $$D2;
-export const US = $$R3;
-export const Wl = $$C4;
-export const X0 = $$P5;
-export const Xd = $$k6;
-export const ZI = $$L7;
-export const ZO = $$v8;
-export const hA = $$w9;
-export const ju = $$M10;
-export const kZ = $$N11;
-export const l7 = $$S12;
-export const s4 = $$O13;
-export const xV = $$x14;
+
+// Exported variables with refactored names
+export const Bt = useUpdateGithubRepositorySelectorMode
+export const NZ = useFullscreenComponentKey
+export const U0 = useSelectedViewWithOverview
+export const US = useNodesWithStatusLoaded
+export const Wl = isFullscreenOverview
+export const X0 = useHasReadyNodesWithParentOrg
+export const Xd = useDevModeOverviewEntryClick
+export const ZI = useTotalReadyAndCompletedNodes
+export const ZO = useIsFullscreenDevModeComponentBrowser
+export const hA = useDevModeFocusId
+export const ju = useComponentBrowserEntrypoint
+export const kZ = useGithubRepositorySelectorMode
+export const l7 = useIsFullscreenOverview
+export const s4 = getDevModeFocusId
+export const xV = useIsGithubRepositorySelectorActive

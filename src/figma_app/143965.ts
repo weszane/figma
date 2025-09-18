@@ -11,12 +11,12 @@ import { s as _$$s } from "../figma_app/429226";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { el, VG, js, _r, mj, cP } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { hU, x6 } from "../figma_app/84580";
 import { _i, E8, U8 } from "../figma_app/800999";
@@ -178,7 +178,7 @@ function F(e) {
     e.stopPropagation();
     action && onClick && onClick(action);
   }, [onClick, action]);
-  let _ = Fk((e, t) => {
+  let _ = useDeepEqualSceneValue((e, t) => {
     if (!t) return;
     let r = e.get(t);
     if (r) return r.type;
@@ -195,7 +195,7 @@ function F(e) {
     "aria-label": m ?? getI18nString("proto.action"),
     children: jsx(_$$A, {})
   }) : action?.type === "URL" && g ? jsx(IconButton, {
-    onClick: () => u(RK({
+    onClick: () => u(setupHyperlinkHandler({
       rawInput: g
     })),
     htmlAttributes: {

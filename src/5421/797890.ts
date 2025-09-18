@@ -23,7 +23,7 @@ import { o$ } from "../figma_app/8833";
 import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4 } from "../figma_app/540726";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isInvalidValue } from "../905/216495";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
 import { _P } from "../figma_app/2590";
@@ -52,7 +52,7 @@ import { A as _$$A3 } from "../figma_app/121266";
 import { Y as _$$Y2 } from "../5421/483739";
 import { RU } from "../figma_app/740163";
 import { W4, qd } from "../figma_app/178475";
-import { L as _$$L } from "../905/550169";
+import { GameControllerListener } from "../905/550169";
 import { _i, E8, U8 as _$$U, RI, pu, wb } from "../figma_app/800999";
 import { A as _$$A4 } from "../897/590880";
 import { selectWithShallowEqual } from "../905/103090";
@@ -117,7 +117,7 @@ function es({
   }, [o, n, t]);
   useEffect(() => {
     if (!d) return () => {};
-    let t = new _$$L();
+    let t = new GameControllerListener();
     let n = t.onPress(t => {
       e({
         keyCodes: [t.buttons[0]],
@@ -976,7 +976,7 @@ let e7 = memo(function ({
     firstVariableSetMode,
     firstVariableSetID
   } = _$$b();
-  let ts = p8("currentPage");
+  let ts = useAppModelProperty("currentPage");
   let td = useCallback((e, t, n, o) => {
     V(_P({
       name: "Prototype delete action",

@@ -6,7 +6,7 @@ import { registerModal } from '../905/102752';
 import { Alignment, KindEnum, PositionEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { Oq } from '../905/332483';
+import { designSet } from '../905/332483';
 import { S as _$$S } from '../905/339549';
 import { P as _$$P } from '../905/347284';
 import { AutoLayout } from '../905/470281';
@@ -22,7 +22,7 @@ import { s as _$$s } from '../c5e2cae0/341232';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { nR } from '../figma_app/60079';
 import { $L, us } from '../figma_app/136698';
-import { AG, Zx } from '../figma_app/217457';
+import { compareProductAccessTypes, getProductAccessTypeByKey } from '../figma_app/217457';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { G } from '../figma_app/361869';
 import { CurrencyFormatter } from '../figma_app/514043';
@@ -172,7 +172,7 @@ export function $$H2(e) {
   });
 }
 registerModal(e => {
-  let t = e.isProTeam ? Oq.exclude([ProductAccessTypeEnum.DEV_MODE]) : Oq;
+  let t = e.isProTeam ? designSet.exclude([ProductAccessTypeEnum.DEV_MODE]) : designSet;
   let [a, i] = useState(t.dict(t => e.seatDataByLicenseType[t]?.currentSeats || 0));
   let [o, c] = useState(null);
   let m = e => {
@@ -262,7 +262,7 @@ registerModal(e => {
           }))]
         })]
       })
-    }), t.sort(AG).map(t => {
+    }), t.sort(compareProductAccessTypes).map(t => {
       let r = f[t];
       let l = e.seatDataByLicenseType[t];
       let o = a[t];
@@ -280,7 +280,7 @@ registerModal(e => {
           height: 12
         }), jsx(_$$s, {
           'data-testid': `${t}-seat_counter`,
-          'billableProductKey': Zx(t),
+          'billableProductKey': getProductAccessTypeByKey(t),
           'incrementSeats': () => m(t),
           'decrementSeats': () => _(t),
           'numSeats': o,

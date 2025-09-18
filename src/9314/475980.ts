@@ -54,7 +54,7 @@ import { selectCurrentFile } from '../figma_app/516028';
 import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { Kw, LX, og, QT, XV } from '../figma_app/646357';
-import { p8 } from '../figma_app/722362';
+import { useAppModelProperty } from '../figma_app/722362';
 import { dG, ft } from '../figma_app/753501';
 import { DesignGraphElements, Fullscreen, LayoutTabType } from '../figma_app/763686';
 import { parsePxInt } from '../figma_app/783094';
@@ -492,7 +492,7 @@ function ey({
   setDefaultToolOnCreateStyle: t,
   children: l
 }) {
-  let s = !p8('isReadOnly');
+  let s = !useAppModelProperty('isReadOnly');
   return jsxs('div', {
     className: 'styles--styleTypeSection--jPjTq component_tiles--section--qMua7',
     children: [s ? jsx(em, {
@@ -708,7 +708,7 @@ function eP({
 }) {
   let t = useDispatch();
   let l = useContext(lk);
-  let r = !p8('isReadOnly');
+  let r = !useAppModelProperty('isReadOnly');
   let a = useRef(null);
   let i = useRef(null);
   let d = a.current;
@@ -832,7 +832,7 @@ function eF({
     onClick,
     ...d
   } = getTriggerProps();
-  let c = !p8('isReadOnly');
+  let c = !useAppModelProperty('isReadOnly');
   let u = Bs().length === 0;
   let y = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let m = u && !manager.isOpen && !y;
@@ -910,7 +910,7 @@ export function $$eU0({
   recordingKey: l
 }) {
   let s = Bs();
-  let o = p8('isReadOnly');
+  let o = useAppModelProperty('isReadOnly');
   return s.length === 0 && o ? null : jsx(_$$k, {
     name: 'local_styles_panel',
     children: jsx(Zk, {
@@ -1117,7 +1117,7 @@ function ez({
   recordingKey: $
 }) {
   let U = selectCurrentFile();
-  let Y = !p8('isReadOnly');
+  let Y = !useAppModelProperty('isReadOnly');
   let z = useDispatch();
   let W = useSelector(e => e.stylePreviewShown);
   let q = useSelector(t => i4(t, e));

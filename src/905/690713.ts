@@ -9,7 +9,7 @@ import { _0, PI, sZ } from "../figma_app/948389";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { handleUrlAction } from "../905/280005";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { _t, d7 } from "../figma_app/632248";
 import { cq } from "../905/794154";
 import { hm, zQ } from "../905/487011";
@@ -149,7 +149,7 @@ export function $$R1({
       let e = useDispatch();
       return useCallback(() => {
         let t = getFeatureFlags().ai_ga ? _t : d7;
-        handleUrlAction(t) || e(RK({
+        handleUrlAction(t) || e(setupHyperlinkHandler({
           rawInput: t
         }));
       }, [e]);

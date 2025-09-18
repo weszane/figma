@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { StateGroupErrorType, Fullscreen, StateHierarchy } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { trackEventAnalytics } from "../905/449184";
 import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { fullscreenValue } from "../figma_app/455680";
@@ -170,7 +170,7 @@ export function $$N7(e, t, r, n, a) {
   };
 }
 createContext(null);
-let $$C13 = Mz([e => e.mirror.selectionProperties.stateGroupSelectionInfo, selectOpenFileKey, selectOpenFileLibraryKey, isSelectedViewFullscreenCooper], $$N7);
+let $$C13 = createSelector([e => e.mirror.selectionProperties.stateGroupSelectionInfo, selectOpenFileKey, selectOpenFileLibraryKey, isSelectedViewFullscreenCooper], $$N7);
 let $$w2 = [["yes", "no"], ["true", "false"], ["on", "off"]];
 let $$O3 = $$w2.reduce((e, t) => e.concat(t), []);
 export const A = $$f0;

@@ -12,7 +12,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Gp } from "../figma_app/646357";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { e_ } from "../figma_app/803787";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { Cq } from "../figma_app/161708";
@@ -31,7 +31,7 @@ export function $$$$N1() {
   let b = isDevHandoffEditorType();
   let v = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKeyForStroke"));
   let A = useSelector(e => e.mirror.selectionProperties.styleIdForStrokeFill);
-  let x = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
+  let x = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
   let N = useSelector(e_);
   let w = kl("inheritFillStyleKeyForStroke");
   let L = w && isValidValue(w) ? Gp(w, x ? [x] : [], N) : void 0;

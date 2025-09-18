@@ -12,7 +12,7 @@ import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
-import { k as _$$k2 } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { N as _$$N } from "../figma_app/28806";
 import { un, kI } from "../figma_app/457899";
 import { hY } from "../figma_app/80683";
@@ -21,7 +21,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
-import { Ye } from "../905/332483";
+import { viewCollaboratorSet } from "../905/332483";
 import { h as _$$h } from "../figma_app/603561";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { getMinimumBundle } from "../905/389382";
@@ -53,7 +53,7 @@ export function $$K1(e) {
     parentId: e.team?.id || "",
     type: FOrganizationLevelType.TEAM
   };
-  let c = _$$k2();
+  let c = isProrationBillingEnabledForCurrentPlan();
   let u = _$$h({
     planType: d.type,
     planParentId: d.parentId
@@ -172,7 +172,7 @@ function q(e) {
     onFailure: () => Q(I)
   });
   let S = hY(planKey.parentId, planKey.type);
-  let C = "loaded" === S.status ? Ye.dict(e => S.data[e]?.available ?? 0) : Ye.dict(() => 0);
+  let C = "loaded" === S.status ? viewCollaboratorSet.dict(e => S.data[e]?.available ?? 0) : viewCollaboratorSet.dict(() => 0);
   let T = isNotNullish(C[neededSeatType]) && C[neededSeatType] > 0;
   if (!m) return jsx(Fragment, {});
   let k = kI({

@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { dh, nn } from "../figma_app/186343";
@@ -34,7 +34,7 @@ export function $$v0({
   let N = dh();
   let A = nn();
   let O = isDevHandoffEditorType();
-  let L = l7();
+  let L = useIsFullscreenOverview();
   let R = O || L;
   let D = o || getFeatureFlags().interop_pages;
   let M = (e || R) && !!w;

@@ -17,7 +17,7 @@ import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
-import { Sc } from "../905/18797";
+import { isNullOrFailure } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt, Vq as _$$Vq } from "../figma_app/979658";
 import { SubscriptionStatus } from "../905/272080";
@@ -63,7 +63,7 @@ export function $$k4() {
       shouldSearchDefaultLibraries: !0
     }));
   }, [e]);
-  let u = t && fileVersion && Sc(loadingState, yD(t.key));
+  let u = t && fileVersion && isNullOrFailure(loadingState, yD(t.key));
   useEffect(() => {
     u && e(zK());
   }, [e, u]);

@@ -11,7 +11,7 @@ import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { shouldSkipWorkspaceSelection } from "../figma_app/275462";
 import { y as _$$y } from "../905/444931";
 import { HubEventType } from "../figma_app/350203";
-import { nm } from "../905/352022";
+import { setupAuthedUserPlanLoader } from "../905/352022";
 import { F as _$$F } from "../905/504462";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
@@ -23,7 +23,7 @@ async function j(e, l, i, t, a, r) {
   let s = [];
   let c = null;
   try {
-    c = await nm(!0)(i);
+    c = await setupAuthedUserPlanLoader(!0)(i);
     s = _$$F(t, l, c);
   } catch (l) {
     let e = l?.data?.message || getI18nString("file_browser.error_try_again");

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { PE } from '../905/15667';
+import { UISection } from '../905/15667';
 import { i as _$$i2 } from '../905/46262';
 import { B as _$$B } from '../905/55104';
 import { getPrefetchPlanKeyHandler } from '../905/86266';
@@ -30,9 +30,9 @@ import { trackEventAnalytics } from '../905/449184';
 import { useWebLoggerTimerEffect } from '../905/485103';
 import { x as _$$x } from '../905/505155';
 import { OJ } from '../905/519092';
-import { r as _$$r } from '../905/520829';
+import { APILoadingStatus } from '../905/520829';
 import { v as _$$v } from '../905/556792';
-import { Nu } from '../905/584989';
+import { requestUpgrade } from '../905/584989';
 import { getFeatureFlags } from '../905/601108';
 import { eb as _$$eb, _Z, Al, bV, BY, Er, IS, KF, mt, qr, rJ, Rt, rx, Ub, Uo, Xv, Yf, Zg } from '../905/615608';
 import { getResourceDataOrFallback } from '../905/663269';
@@ -56,13 +56,13 @@ import { $$, nR, vd } from '../figma_app/60079';
 import { Q as _$$Q2 } from '../figma_app/113686';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { FAccessLevelType, FFileType, FOrganizationLevelType, FPermissionDenialReason, FProductAccessType } from '../figma_app/191312';
-import { Uw } from '../figma_app/217457';
+import { getUpgradeMessage } from '../figma_app/217457';
 import { useSubscription } from '../figma_app/288654';
 import { Ki } from '../figma_app/328188';
 import { KQ } from '../figma_app/475472';
 import { _ as _$$_, S as _$$S } from '../figma_app/490799';
 import { hasRootPathOptional } from '../figma_app/528509';
-import { k as _$$k2 } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { teamConstant } from '../figma_app/630077';
 import { SecureLink, BigTextInputForwardRef } from '../figma_app/637027';
 import { filterNotNullish } from '../figma_app/656233';
@@ -472,7 +472,7 @@ let ek = (e, t) => {
 let eR = registerModal(e => {
   let t = useDispatch();
   let i = _$$s2();
-  let n = _$$k2();
+  let n = isProrationBillingEnabledForCurrentPlan();
   let {
     files,
     repos,
@@ -600,7 +600,7 @@ let eR = registerModal(e => {
     enabled: e5,
     orgId: e2 ?? ''
   });
-  let e7 = useMemo(() => status === _$$r.SUCCESS ? teams.map(e => ({
+  let e7 = useMemo(() => status === APILoadingStatus.SUCCESS ? teams.map(e => ({
     id: e.id || '',
     name: e.name || ''
   })) : [], [status, teams]);
@@ -977,7 +977,7 @@ let eR = registerModal(e => {
           let o = null;
           switch (tC) {
             case LU.ADMIN_SELF_UPGRADE:
-              let l = Uw(licenseType, to);
+              let l = getUpgradeMessage(licenseType, to);
               if (!l) break;
               let d = n ? renderI18nText('upgrades.drafts_move.admin_self_upgrade_body.proration_billing_mechanics') : renderI18nText('upgrades.drafts_move.admin_self_upgrade_body.legacy_billing_mechanics');
               r = l.header;
@@ -993,7 +993,7 @@ let eR = registerModal(e => {
                   destinationPlanUser && fm({
                     licenseType,
                     dispatch: t,
-                    entryPoint: PE.FileMoveUpsell,
+                    entryPoint: UISection.FileMoveUpsell,
                     plan: destinationPlan,
                     planUser: destinationPlanUser,
                     fileKey: ey.key,
@@ -1026,7 +1026,7 @@ let eR = registerModal(e => {
                 destinationPlanUser?.id && destinationPlan.key && destinationPlan.key.type === FOrganizationLevelType.ORG ? shouldShowCurf ? fm({
                   licenseType,
                   dispatch: t,
-                  entryPoint: PE.FileMoveUpsell,
+                  entryPoint: UISection.FileMoveUpsell,
                   plan: destinationPlan,
                   planUser: destinationPlanUser,
                   fileKey: ey.key,
@@ -1035,18 +1035,18 @@ let eR = registerModal(e => {
                   getIsEligibleForProvisionalAccess
                 })({}) : t($V({
                   orgId: e,
-                  entryPoint: PE.FileMoveUpsell,
+                  entryPoint: UISection.FileMoveUpsell,
                   licenseType,
                   seatTypeKey: i,
                   fileKey: ey.key,
                   suppressVisualBell: !0,
                   folderId: eS?.id
-                })) : destinationPlan.key && destinationPlan.key.type === FOrganizationLevelType.TEAM && t(Nu({
+                })) : destinationPlan.key && destinationPlan.key.type === FOrganizationLevelType.TEAM && t(requestUpgrade({
                   teamId: e,
                   licenseType,
                   seatTypeKey: i,
                   fileKey: ey.key,
-                  entryPoint: PE.FileMoveUpsell,
+                  entryPoint: UISection.FileMoveUpsell,
                   hideSuccessMessage: !0,
                   folderId: eS?.id
                 }));
@@ -1235,7 +1235,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
       licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
       upgradePathway: _$$J.ADMIN_AUTO_PATHWAY,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       upgradeReason: _$$i2.RESOURCE_MOVED_FROM_DRAFTS,
       plan: draftsMoveData.destinationPlan ?? null,
       onUpgrade: () => {
@@ -1251,7 +1251,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
     fm({
       licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       plan: draftsMoveData.destinationPlan ?? null,
       planUser: draftsMoveData.destinationPlanUser ?? null,
       fileKey: e.key,
@@ -1268,7 +1268,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
       licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
       upgradePathway: _$$J.AUTO_PATHWAY,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       upgradeReason: _$$i2.RESOURCE_MOVED_FROM_DRAFTS,
       plan: draftsMoveData.destinationPlan ?? null,
       onUpgrade: () => {

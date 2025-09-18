@@ -14,10 +14,10 @@ import { k as _$$k } from "../905/582200";
 import { Point } from "../905/736624";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sw } from "../figma_app/914957";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { IW } from "../figma_app/646357";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { Nr } from "../figma_app/463500";
 import { zK, zM } from "../905/182453";
@@ -26,7 +26,7 @@ let N = Gf;
 let $$C0 = "slides-edit-text-style-modal";
 export function $$w1() {
   let e = useDispatch();
-  let t = p8("isReadOnly");
+  let t = useAppModelProperty("isReadOnly");
   let r = useCurrentFileKey();
   let w = "slidesEditStyleModal";
   let {
@@ -41,7 +41,7 @@ export function $$w1() {
     selectedStyleProperties: e.mirror.selectedStyleProperties
   }));
   let D = sessionLocalIDToString(selectedStyleProperties.guid);
-  let k = Fk((e, t) => {
+  let k = useDeepEqualSceneValue((e, t) => {
     let r = e.get(t);
     return r?.name || "";
   }, D);

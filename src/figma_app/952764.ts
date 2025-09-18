@@ -11,7 +11,7 @@ import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFall
 import { Tm, bn } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { bL } from "../figma_app/852050";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { AH } from "../905/571648";
 import { WH } from "../figma_app/836943";
@@ -99,7 +99,7 @@ export function $$O3(e, t, r) {
 export function $$R9(e, t) {
   let r = useDispatch();
   let a = useAtomWithSubscription(E_);
-  let s = eY();
+  let s = useSceneGraphSelector();
   return useCallback((n, i) => {
     a ? r(nh({
       style: n,

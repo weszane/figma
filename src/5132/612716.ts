@@ -16,7 +16,7 @@ import { UpgradeAction } from "../905/370443";
 import { TrackedAnchor, TrackedDiv, TrackingProvider } from "../figma_app/831799";
 import { SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { Oq } from "../905/332483";
+import { designSet } from "../905/332483";
 import { K } from "../905/3140";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
@@ -91,7 +91,7 @@ function C({
 }
 function E() {
   let e = getUserCurrency();
-  let l = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]).dict(l => ({
+  let l = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]).dict(l => ({
     currency: e,
     billableProductKey: l,
     billableProductVariantKey: null,

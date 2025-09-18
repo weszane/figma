@@ -30,7 +30,7 @@ import { useCurrentFileKey } from '../figma_app/516028';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { Gi, qY } from '../figma_app/622574';
-import { eY } from '../figma_app/722362';
+import { useSceneGraphSelector } from '../figma_app/722362';
 import { setNodeExpanded } from '../figma_app/741237';
 import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
@@ -82,7 +82,7 @@ export function $$H19() {
   return Wn().length === 0;
 }
 export function $$K5() {
-  let e = eY();
+  let e = useSceneGraphSelector();
   let t = gI();
   if (t.length === 0) return null;
   let n = t[0];

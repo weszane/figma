@@ -17,7 +17,7 @@ import { en } from "../905/759470";
 import { $$in, PublishModalState, FileInputDropType } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
-import { VY } from "../905/966582";
+import { VIDEO_TYPE_VALUES } from "../905/966582";
 import { L as _$$L } from "../905/597048";
 import { A as _$$A } from "../905/567946";
 var u = c;
@@ -77,7 +77,7 @@ export let $$C0 = forwardRef(function ({
   let B = useCallback(() => {
     M.current?.click();
   }, []);
-  let V = useMemo(() => [...CW, ...(deps.allowVideos ? VY : [])], [deps.allowVideos]);
+  let V = useMemo(() => [...CW, ...(deps.allowVideos ? VIDEO_TYPE_VALUES : [])], [deps.allowVideos]);
   let G = useRef(null);
   let z = useRef(null);
   let H = useId();

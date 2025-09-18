@@ -3,13 +3,13 @@ import { createContext, useState, useContext, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { h as _$$h } from "../905/207101";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { XHR } from "../905/910117";
 import { batchPutFileAction } from "../figma_app/78808";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { dU, GS } from "../figma_app/803787";
 let $$m3 = createContext({
-  status: _$$r.SUCCESS,
+  status: APILoadingStatus.SUCCESS,
   nodeIdToValidatedMoveInfo: Object.create(null)
 });
 let h = (e, t) => {
@@ -31,7 +31,7 @@ export function $$g2({
   let i = useCurrentFileKey();
   let p = useDispatch();
   let [g, f] = useState({
-    status: _$$r.SUCCESS,
+    status: APILoadingStatus.SUCCESS,
     nodeIdToValidatedMoveInfo: Object.create(null)
   });
   _$$h(() => {
@@ -40,7 +40,7 @@ export function $$g2({
     let r = e(Object.values(t.local.stateGroups));
     let a = e(Object.values(t.local.styles));
     Object.keys(n).length + Object.keys(r).length + Object.keys(a).length !== 0 && (f({
-      status: _$$r.LOADING
+      status: APILoadingStatus.LOADING
     }), XHR.post("/api/design_systems/move_validity", {
       component_moves: n,
       state_group_moves: r,
@@ -58,12 +58,12 @@ export function $$g2({
         subscribeToRealtime: !0
       }));
       f({
-        status: _$$r.SUCCESS,
+        status: APILoadingStatus.SUCCESS,
         nodeIdToValidatedMoveInfo: h(valid_move_id_to_file_key, t)
       });
     }).catch(() => {
       f({
-        status: _$$r.FAILURE
+        status: APILoadingStatus.FAILURE
       });
     }));
   });
@@ -74,7 +74,7 @@ export function $$g2({
 }
 export function $$f1() {
   let e = useContext($$m3);
-  return useMemo(() => e.status === _$$r.SUCCESS ? e.nodeIdToValidatedMoveInfo : void 0, [e]);
+  return useMemo(() => e.status === APILoadingStatus.SUCCESS ? e.nodeIdToValidatedMoveInfo : void 0, [e]);
 }
 export function $$_0() {
   let e = $$f1();

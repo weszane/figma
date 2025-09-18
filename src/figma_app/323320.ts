@@ -1,30 +1,30 @@
 import { ComponentPropType } from "../figma_app/763686";
-import { Mz } from "../vendor/925040";
-import { P8 } from "../905/270781";
+import { createSelector } from "../vendor/925040";
+import { createDeepEqualSelector } from "../905/270781";
 import { sortWithCollator } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { MIXED_MARKER, isValidValue } from "../905/216495";
 import { g as _$$g } from "../905/578436";
-import { Sh, dK, AF } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys, selectSceneGraph, selectSingleSelectedNode } from "../figma_app/889655";
 import { eM, xP, k4, Yi, xb, ZH, wd } from "../figma_app/164212";
 import { xJ } from "../figma_app/264776";
 import { C1, Lg, tK, d as _$$d, VC, tc, X9, Yw } from "../figma_app/505098";
-let h = P8([C1, (e, t) => t], (e, t) => e && t && e[t]?.defs || {});
+let h = createDeepEqualSelector([C1, (e, t) => t], (e, t) => e && t && e[t]?.defs || {});
 export function $$m3() {
-  return P8([h], e => Object.values(e).sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1));
+  return createDeepEqualSelector([h], e => Object.values(e).sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1));
 }
-let g = P8([C1, Lg], (e, t) => e && t ? e[t]?.defs ?? {} : {});
-let f = P8([g], e => Object.values(e).sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1).map(e => e.name));
-let E = () => P8([C1, tK(), _$$d()], (e, t, r) => {
+let g = createDeepEqualSelector([C1, Lg], (e, t) => e && t ? e[t]?.defs ?? {} : {});
+let f = createDeepEqualSelector([g], e => Object.values(e).sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1).map(e => e.name));
+let E = () => createDeepEqualSelector([C1, tK(), _$$d()], (e, t, r) => {
   let n = r ?? t;
   return e && n ? Object.values(e[n]?.defs || {}).sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1) : [];
 });
 let $$y5 = (() => {
   let e = E();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
 export function $$b7() {
-  return P8([h, (e, t, r) => r], (e, t) => {
+  return createDeepEqualSelector([h, (e, t, r) => r], (e, t) => {
     let r = eM(t).types;
     let n = Object.values(e).filter(({
       type: e
@@ -33,8 +33,8 @@ export function $$b7() {
     return n;
   });
 }
-Mz([C1, Sh, (e, t) => t], (e, t, r) => {});
-let $$T6 = () => Mz([C1, VC(), tc(), X9(), (e, t, r) => t, (e, t, r) => r], (e, t, r, n, i, a) => {
+createSelector([C1, selectSceneGraphSelectionKeys, (e, t) => t], (e, t, r) => {});
+let $$T6 = () => createSelector([C1, VC(), tc(), X9(), (e, t, r) => t, (e, t, r) => r], (e, t, r, n, i, a) => {
   if (!e) return null;
   if (t) {
     let r = xP(t => {
@@ -60,9 +60,9 @@ let I = (e, t, r) => {
 };
 export function $$S2() {
   let e = $$T6();
-  return (t, r) => e(t, Sh(t), r);
+  return (t, r) => e(t, selectSceneGraphSelectionKeys(t), r);
 }
-let $$v4 = () => Mz([C1, (e, t, r) => t, (e, t, r) => r], (e, t, r) => {
+let $$v4 = () => createSelector([C1, (e, t, r) => t, (e, t, r) => r], (e, t, r) => {
   if (!e) return !1;
   let n = [];
   for (let r of t) {
@@ -72,7 +72,7 @@ let $$v4 = () => Mz([C1, (e, t, r) => t, (e, t, r) => r], (e, t, r) => {
   }
   return n.some(t => !!e[t]?.refs?.[r]?.explicitDefID);
 });
-let A = () => P8([C1, dK, (e, t) => t], (e, t, r) => {
+let A = () => createDeepEqualSelector([C1, selectSceneGraph, (e, t) => t], (e, t, r) => {
   if (!e || 0 === r.length) return {};
   let n = k4(r, t);
   let i = Yi(r, t) ?? n;
@@ -110,7 +110,7 @@ let A = () => P8([C1, dK, (e, t) => t], (e, t, r) => {
   }
   return s;
 });
-let $$x8 = Mz([(e, t) => t, (e, t, r) => r, f, AF], (e, t, r, i) => {
+let $$x8 = createSelector([(e, t) => t, (e, t, r) => r, f, selectSingleSelectedNode], (e, t, r, i) => {
   if (e === ComponentPropType.BOOL && t) {
     let e = i?.name ? getI18nString("design_systems.component_properties.boolean_property_default_name", {
       selectedNodeName: i.name
@@ -133,7 +133,7 @@ let $$x8 = Mz([(e, t) => t, (e, t, r) => r, f, AF], (e, t, r, i) => {
   }
 });
 export function $$N1() {
-  return P8([dK, E(), A(), C1, (e, t) => t], (e, t, r, i, a) => {
+  return createDeepEqualSelector([selectSceneGraph, E(), A(), C1, (e, t) => t], (e, t, r, i, a) => {
     if (!i) return [];
     let s = ZH(a, i);
     return t.filter(e => !s.has(e.explicitDefID)).map(t => {
@@ -154,7 +154,7 @@ export function $$N1() {
     });
   });
 }
-export let $$C0 = () => Mz([C1, Yw, dK, (e, t) => t], (e, t, r, n) => {
+export let $$C0 = () => createSelector([C1, Yw, selectSceneGraph, (e, t) => t], (e, t, r, n) => {
   let i = {};
   if (!e || !t) return i;
   for (let a of n) for (let n in t[a]) {

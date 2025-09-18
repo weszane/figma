@@ -12,7 +12,7 @@ import { mp } from "../figma_app/579169";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { useFullscreenReady } from "../905/924253";
 import { zC, re } from "../figma_app/186343";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../905/129046";
 import { rq } from "../905/425180";
@@ -32,7 +32,7 @@ let $$L0 = userFlagAtomFamily(O);
 export function $$R2() {
   let e = useAtomWithSubscription(_$$P) === iH.TRUE;
   let t = useSelector(e => e.mirror.appModel.currentPage);
-  let i = Fk((t, i) => zC(t, i) || e && re(t, i), t);
+  let i = useDeepEqualSceneValue((t, i) => zC(t, i) || e && re(t, i), t);
   let m = useFullscreenReady();
   let R = useAtomWithSubscription(Rq(Sb));
   let D = useAtomWithSubscription($$L0);

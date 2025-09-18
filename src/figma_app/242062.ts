@@ -17,7 +17,7 @@ import { zw } from "../figma_app/682945";
 import { viewportToScreen, getViewportInfo, useLatestViewportRef } from "../figma_app/62612";
 import { R9 } from "../905/977824";
 import { XM } from "../905/486443";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { KP, _E } from "../figma_app/440875";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
@@ -54,7 +54,7 @@ import { mZ, AS } from "../figma_app/991227";
 import { JR, p4, De } from "../905/496627";
 import { ft } from "../figma_app/753501";
 import { F as _$$F } from "../905/258517";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Y as _$$Y } from "../905/1768";
 var n = {};
 require.d(n, {
@@ -1219,7 +1219,7 @@ function td({
   let r = R9.useReactionsBySessionId();
   let n = Object.keys(r);
   let s = KP();
-  let o = Fk(e => e.getCurrentPage()?.guid);
+  let o = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   return jsx(Fragment, {
     children: n.map(n => {
       let l = r[n];
@@ -1574,7 +1574,7 @@ function t_() {
   let d = XM();
   let c = useSelector(e => e.multiplayerEmoji);
   let u = !getObservableValue(AppStateTsApi?.uiState().hideMultiplayerCursors, !1);
-  let p = p8("currentTool");
+  let p = useAppModelProperty("currentTool");
   let _ = ed();
   let [h, g, f, y] = function () {
     let [e] = useState(ei);
@@ -1867,7 +1867,7 @@ function tm({
       allUsers: t
     }
   }) => t.find(t => t.sessionID === e));
-  let l = p8("currentPage");
+  let l = useAppModelProperty("currentPage");
   let c = usePrefersReducedMotion();
   let u = getCurrentFileType();
   let p = getObservableOrFallback(_$$d().showOutlines);

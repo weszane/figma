@@ -43,7 +43,7 @@ import { l as _$$l } from "../7021/223482";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { vK, jv } from "../905/84777";
-import { N_ as _$$N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanLimitationType, FOrganizationLevelType, FFileType, FPaymentHealthStatusType, FStudentTeamStatusType, FUserRoleType } from "../figma_app/191312";
 import { wA as _$$wA, kA } from "../figma_app/336853";
@@ -87,9 +87,9 @@ import { a9 } from "../figma_app/741211";
 import { y as _$$y } from "../1250/295724";
 import { isOrgFolderV2 } from "../figma_app/528509";
 import { T as _$$T2 } from "../905/378189";
-import { p8, aV } from "../figma_app/722362";
+import { useAppModelProperty, useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectPermissionsState } from "../figma_app/212807";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { q as _$$q } from "../905/236878";
 import { isTeamLocked, hasValidSubscription, hasFolderOrTeamRestrictions } from "../figma_app/345997";
 import { isExternalRestricted } from "../figma_app/12796";
@@ -102,7 +102,7 @@ import { A as _$$A3 } from "../905/389851";
 import { Ay as _$$Ay2 } from "@stylexjs/stylex";
 import { FlashActions } from "../905/573154";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { buildFileUrl } from "../905/612685";
 import { getUserPlan } from "../figma_app/502247";
 import { fileApiHandler } from "../figma_app/787550";
@@ -130,7 +130,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { V as _$$V2 } from "../1250/925098";
 import { Q as _$$Q3 } from "../5132/668270";
-import { hr } from "../905/352022";
+import { setupOptimistPlanLoader } from "../905/352022";
 import { rc } from "../figma_app/531331";
 import { h as _$$h2 } from "../figma_app/270558";
 import { Y as _$$Y } from "../figma_app/932979";
@@ -1108,8 +1108,8 @@ function t0(e) {
 let t1 = {
   bannerId: om.MultiplayerSessionUpgrade,
   Banner: function (e) {
-    let t = p8("multiplayerSessionState") !== SchemaJoinStatus.UNJOINED;
-    let n = !p8("isReadOnly");
+    let t = useAppModelProperty("multiplayerSessionState") !== SchemaJoinStatus.UNJOINED;
+    let n = !useAppModelProperty("isReadOnly");
     let i = useSelector(e => e.showingUpgradeBanner);
     let o = selectCurrentFile()?.editorType;
     let [l, d] = useState(!1);
@@ -1192,7 +1192,7 @@ let t4 = {
     let n = selectCurrentFile();
     let r = useCurrentFileWorkshopModeStatus();
     let i = selectCurrentUser();
-    let o = _$$f("dismissed_figjam_try_drafts_banner");
+    let o = selectUserFlag("dismissed_figjam_try_drafts_banner");
     let l = _$$R("minute");
     if (!r?.enabled || !n || !i) return null;
     if (!n.isTryFile && !n.parentOrgId && n.folderId === i.drafts_folder_id && !o) {
@@ -1241,7 +1241,7 @@ let t2 = {
       let t = useDispatch();
       let n = useSelector(e => e.plans);
       useEffect(() => {
-        t(hr({
+        t(setupOptimistPlanLoader({
           loadedPlans: n
         }));
       }, []);
@@ -1276,7 +1276,7 @@ let t2 = {
     let i = selectCurrentFile();
     let o = useCurrentFileWorkshopModeStatus();
     let l = selectCurrentUser();
-    let d = _$$f("dismissed_figjam_try_claim_banner");
+    let d = selectUserFlag("dismissed_figjam_try_claim_banner");
     let u = _$$R("minute");
     let m = i?.key;
     if (!i?.isTryFile || BrowserInfo.isMeetDevice || !l || !o?.enabled || !m || d) return null;
@@ -1449,7 +1449,7 @@ let nt = {
   bannerId: om.FileIsTeamTemplate,
   Banner: function (e) {
     let t = useDispatch();
-    let n = aV();
+    let n = useIsProgressBarHiddenOrLocked();
     let r = kD();
     let i = b4();
     let l = selectCurrentFile();
@@ -1567,7 +1567,7 @@ let nt = {
 let nn = {
   bannerId: om.TemplatePublishingNudgeBanner,
   Banner: function (e) {
-    let t = aV();
+    let t = useIsProgressBarHiddenOrLocked();
     let n = kD();
     let a = selectCurrentFile();
     let {
@@ -1667,7 +1667,7 @@ let nr = {
     });
     let m = !!u.data;
     let p = jv({
-      billableProductKeys: _$$N_,
+      billableProductKeys: collaboratorSet,
       baseQuery: {
         tier: kA(n) ? Ju.ENTERPRISE : Ju.ORG,
         currency: u.data,
@@ -1763,7 +1763,7 @@ let no = {
   bannerId: om.DevModeDemoFileUpsellBanner,
   Banner: function (e) {
     let t = useCanUseDevModeDemoFile();
-    let n = !!hA();
+    let n = !!useDevModeFocusId();
     let r = getUserId();
     let i = function () {
       let e = useCanUseDevModeDemoFile();

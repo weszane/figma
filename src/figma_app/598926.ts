@@ -12,7 +12,7 @@ import { validateFolderName, generateTempId } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { rq } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
-import { G } from "../figma_app/66216";
+import { roleServiceAPI } from "../figma_app/66216";
 import { createOptimistThunk } from "../905/350402";
 import { bE as _$$bE } from "../905/98702";
 let $$b10 = createOptimistThunk((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
@@ -121,7 +121,7 @@ let $$w11 = createOptimistThunk((e, t) => {
         source: "new_project_creation_modal",
         teamId: t.teamId
       }));
-      G.getRoles({
+      roleServiceAPI.getRoles({
         resourceId: r.id,
         resourceType: FResourceCategoryType.FOLDER
       }).then(({

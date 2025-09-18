@@ -14,12 +14,12 @@ import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
 import { AssetAtomMap } from "../figma_app/31188";
 import { R9 } from "../905/977824";
-import { f9 } from "../figma_app/722362";
+import { getSingleSelectedNode } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { PrimaryWorkflowEnum } from "../905/497152";
 import { sM, pS } from "../figma_app/346422";
 import { sitesViewSetterAtomFamily } from "../figma_app/115923";
@@ -65,17 +65,17 @@ export function $$V19() {
     multiplayer: {
       allUsers: e
     }
-  }) => e), t[e], f9());
+  }) => e), t[e], getSingleSelectedNode());
 }
 export function $$H7(e) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     if (t) return t.collaborativeSourceCode;
   }, e);
   let r = t?.handle;
   return useMemo(() => t, [r]);
 }
 export function $$z9(e) {
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     if (!t || !t.isAlive) return {};
     try {
       return _$$jT(t);
@@ -93,14 +93,14 @@ export function $$W16(e) {
   let [o, l] = useState(null);
   let d = null;
   e?.isCodeInstance ? d = e?.backingCodeComponent : e?.isCodeComponent && (d = e);
-  let c = Object.keys((t = d, Fk((e, t) => t && t.isAlive ? t.componentPropertyDefinitions() : {}, t))).length;
+  let c = Object.keys((t = d, useDeepEqualSceneValue((e, t) => t && t.isAlive ? t.componentPropertyDefinitions() : {}, t))).length;
   useEffect(() => {
     d && (d.guid === o && c > a && (r(!0), i("properties")), l(d.guid));
     s(c);
   }, [c, a, d, o, r, i]);
 }
 export function $$K8(e) {
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     if (!t || !t.isAlive) return {};
     try {
       return K8(t);
@@ -149,7 +149,7 @@ export async function $$$1({
 export function $$X20(e) {
   let t = getSingletonSceneGraph();
   let [r, n] = useAtomValueAndSetter(KL);
-  let i = Fk((e, t, r) => {
+  let i = useDeepEqualSceneValue((e, t, r) => {
     if (!t) return null;
     if (t in r) return r[t];
     let i = e.get(t);
@@ -239,7 +239,7 @@ export function $$et10() {
       });
     }
   }, [t, e]);
-  let c = Fk((e, t, r) => !i.current && (!!t || !!r) && !!e.get(t || r || ""), o, a);
+  let c = useDeepEqualSceneValue((e, t, r) => !i.current && (!!t || !!r) && !!e.get(t || r || ""), o, a);
   useEffect(() => {
     if (e || !c || i.current) return;
     i.current = !0;
@@ -317,7 +317,7 @@ export function $$ei11(e, t) {
   }, [T, l, t]);
 }
 export function $$ea15(e) {
-  return Fk((e, t) => !!t && (!t.isMainComponentLikeCodeNode && !t.isLayerLikeCodeNode || t.isInstanceSublayer), e);
+  return useDeepEqualSceneValue((e, t) => !!t && (!t.isMainComponentLikeCodeNode && !t.isLayerLikeCodeNode || t.isInstanceSublayer), e);
 }
 export const S4 = $$M0;
 export const gz = $$$1;

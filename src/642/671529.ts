@@ -26,10 +26,10 @@ import { qw, UK } from "../figma_app/740163";
 import { q as _$$q, T as _$$T } from "../figma_app/590592";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
-import { p8, dH, KH, eY as _$$eY, aV } from "../figma_app/722362";
+import { useAppModelProperty, useCurrentTool, useSceneGraphSelection, useSceneGraphSelector, useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
-import R, { VP } from "../905/18797";
+import R, { isLoading } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
 import { t as _$$t } from "../figma_app/501766";
 import { yU } from "../figma_app/221114";
@@ -65,7 +65,7 @@ import { tA, rp } from "../figma_app/229710";
 import { Ao } from "../905/748636";
 import { FY, lf, Lp, Ph, ux, KE, eu as _$$eu, eh as _$$eh, By, w1, gq, jG, Mf, yR, iV, A7, tq, wR, qq, R as _$$R, dn, Fo, Ar, K8, ew as _$$ew, Jq, IV } from "../figma_app/386160";
 import { At as _$$At } from "../905/973142";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b2 } from "../905/217163";
 import { Zk, fI } from "../figma_app/626177";
@@ -253,11 +253,11 @@ function e_({
   let o = useSelector(e => e.mirror.selectedStyleProperties);
   let d = IW(l);
   let u = sessionLocalIDToString(o.guid);
-  let p = p8("isReadOnly");
+  let p = useAppModelProperty("isReadOnly");
   let h = !!d || !e || p;
   let m = "";
   let g = "";
-  let [f, x] = Fk((e, t) => {
+  let [f, x] = useDeepEqualSceneValue((e, t) => {
     if (d) return ["", ""];
     let s = e.get(t);
     return [s?.name || "", s?.description || ""];
@@ -311,7 +311,7 @@ function eS({
 }) {
   let s = selectCurrentFile();
   let n = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
-  let l = p8("topLevelMode");
+  let l = useAppModelProperty("topLevelMode");
   let a = useSelector(e => e.library);
   let d = useSelector(e => e.stylePreviewShown);
   let u = _$$b("guid");
@@ -436,8 +436,8 @@ function eK({
 }) {
   var d;
   let c = useDispatch();
-  let u = p8("isReadOnly");
-  let h = p8("topLevelMode");
+  let u = useAppModelProperty("isReadOnly");
+  let h = useAppModelProperty("topLevelMode");
   let m = Um();
   let f = Xo();
   let [x, y] = useAtomValueAndSetter(_$$j);
@@ -582,8 +582,8 @@ function eJ({
   let s = _$$e();
   let l = G$();
   let a = useSelector(e => e.mirror.appModel.topLevelMode);
-  let d = dH();
-  let c = p8("isReadOnly");
+  let d = useCurrentTool();
+  let c = useAppModelProperty("isReadOnly");
   let u = isDevHandoffEditorType();
   let p = c && !u;
   let h = sO();
@@ -595,9 +595,9 @@ function eJ({
     t = e.selectedView;
     return !!getFilteredFeatureFlags().ce_il_root && "fullscreen" === t.view && t.editorType === FEditorType.Illustration;
   });
-  let y = KH();
+  let y = useSceneGraphSelection();
   let _ = useMemo(() => Object.keys(y), [y]);
-  let b = _$$eY();
+  let b = useSceneGraphSelector();
   let [C, S] = useState(!1);
   let k = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
   useEffect(() => {
@@ -675,7 +675,7 @@ function eZ({
     recordingKey: generateRecordingKey(t, "tabs")
   });
   let u = useIsFullscreenSitesView();
-  let p = dH();
+  let p = useCurrentTool();
   let h = useSelector(e => e.mirror.appModel.topLevelMode);
   return jsxs("div", {
     className: A7,
@@ -709,14 +709,14 @@ export function $$e20({
   shouldDeferCanvasUpdateOnPanelResize: h
 }) {
   let m = useDispatch();
-  let g = aV();
+  let g = useIsProgressBarHiddenOrLocked();
   let f = _$$b("guid");
   let _ = isValidSessionLocalID(normalizeValue(f));
   let b = useCallback(e => {
     _ && (e.event.keyCode === KeyCodes.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID)) : e.event.keyCode === KeyCodes.F && Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [_]);
   let C = useSelector(e => e.loadingState);
-  let j = VP(C, "edit_button_upgrading_to_edit");
+  let j = isLoading(C, "edit_button_upgrading_to_edit");
   let v = g || j;
   let S = useCallback(() => {
     Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
@@ -726,8 +726,8 @@ export function $$e20({
   let T = e === DesignWorkspace.COMMENT;
   let N = useCallback(() => void 0, []);
   let I = function (e) {
-    let t = p8("currentPage") || "0:1";
-    let s = KH();
+    let t = useAppModelProperty("currentPage") || "0:1";
+    let s = useSceneGraphSelection();
     let r = e();
     return useCallback(() => ({
       pageId: t,
@@ -790,7 +790,7 @@ function e4({
   let m = _$$b("guid");
   let f = isValidSessionLocalID(normalizeValue(m));
   let x = e === DesignWorkspace.COMMENT;
-  let y = p8("topLevelMode") === ViewType.HISTORY;
+  let y = useAppModelProperty("topLevelMode") === ViewType.HISTORY;
   let b = function () {
     let e = qw();
     return "number" != typeof e || e < e9 ? (UK().propertiesPanelSplitPosition.set(e9), e9) : e;
@@ -807,7 +807,7 @@ function e4({
   let U = useIsSelectedViewFullscreenCooper();
   let z = CA();
   U && x && (K = !1);
-  let W = p8("showUi");
+  let W = useAppModelProperty("showUi");
   let $ = useCurrentFileKey();
   let Y = hasCmsCollection($);
   let X = o3(nt.newResizablePanel);

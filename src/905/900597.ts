@@ -16,7 +16,7 @@ import { registerModal } from "../905/102752";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { IconButton } from "../905/443068";
 import { useDebounce } from 'use-debounce';
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { LazyInputForwardRef } from "../905/408237";
 import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
@@ -307,7 +307,7 @@ let z = registerModal(function (e) {
       }, `search-folder-${e.model.id}}`))]
     })
   });
-  let er = W && status === _$$r.LOADING || j || !H;
+  let er = W && status === APILoadingStatus.LOADING || j || !H;
   return jsx(TrackingProvider, {
     name: "Connected Project Select Project Modal",
     children: jsx(ModalRootComponent, {

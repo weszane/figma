@@ -21,10 +21,10 @@ import { ro } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku, UK } from "../figma_app/740163";
 import { isInvalidValue } from "../905/216495";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { Gp } from "../figma_app/646357";
 import { getStyleThumbnail } from "../905/405710";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { e_ as _$$e_ } from "../figma_app/803787";
 import { $u } from "../figma_app/889655";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
@@ -517,7 +517,7 @@ export function $$eu10() {
   let s = useSelector(_$$e_);
   let o = useSelector(e => e.mirror.selectionProperties.inheritFillStyleKey);
   let l = useSelector(e => e.mirror.selectionProperties.styleIdForFill);
-  let d = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, l?.assetRef);
+  let d = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, l?.assetRef);
   let c = t && _$$Ku(t);
   let u = Ig();
   let _ = o ? Gp(o, d ? [d] : [], s) : void 0;
@@ -666,7 +666,7 @@ export function $$eE6({
 }) {
   let i = isDevHandoffEditorType();
   let a = uQ();
-  let s = eY().get(a ?? "")?.type;
+  let s = useSceneGraphSelector().get(a ?? "")?.type;
   let o = $$eu10();
   let l = $$ep11();
   let d = Q();

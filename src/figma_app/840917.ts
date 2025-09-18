@@ -29,7 +29,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { userIdAtom } from "../figma_app/864723";
 import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "../figma_app/582924";
 import { awaitSync } from "../905/412815";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { FileCanEdit } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { maybeCreateSavepoint } from "../905/294113";
@@ -155,7 +155,7 @@ async function q(e, t, r) {
 async function J(e, t) {
   let r = Zt(e, t);
   let n = [];
-  await xK.timeAsync("checkForAutosave", async () => {
+  await fullscreenPerfManager.timeAsync("checkForAutosave", async () => {
     let e = await Z4();
     if (!e) return;
     let t = e.transaction(Sp);
@@ -173,7 +173,7 @@ async function J(e, t) {
   return n;
 }
 async function Z(e) {
-  return await xK.timeAsync("filterAutosaveSessions", async () => {
+  return await fullscreenPerfManager.timeAsync("filterAutosaveSessions", async () => {
     let t = await Promise.all(e.map(e => mc(e)));
     let r = Date.now() - $$Y11();
     let n = e.filter((e, n) => !t[n] && e.lastUpdatedAt > r);

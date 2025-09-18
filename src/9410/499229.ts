@@ -22,8 +22,8 @@ import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Z } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
 import { L3 } from "../figma_app/701001";
-import { p8 } from "../figma_app/722362";
-import { lH } from "../figma_app/623300";
+import { useAppModelProperty } from "../figma_app/722362";
+import { hasNotLoaded } from "../figma_app/623300";
 import { FFileType } from "../figma_app/191312";
 import { H1 as _$$H } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
@@ -99,7 +99,7 @@ export function $$U1() {
     setHidden: i,
     inputRef: useRef(null),
     navDisabled: !query || total <= 1,
-    showUi: p8("showUi")
+    showUi: useAppModelProperty("showUi")
   };
 }
 export function $$G5() {
@@ -123,17 +123,17 @@ export function $$K7() {
   } = useSelector(e => e.canvasSearch);
   let p = useDispatch();
   let m = useRef(!1);
-  let _ = p8("currentPage");
+  let _ = useAppModelProperty("currentPage");
   let x = L3();
-  let b = p8("pagesList");
+  let b = useAppModelProperty("pagesList");
   let [C, v] = useState(!1);
   let [k, N] = useState(AppStateTsApi.uiState().isRecovery.getCopy());
   let [A, O] = useState(!1);
   let D = H();
   let M = trackFileEventWithUser();
   let P = yZ();
-  let F = useMemo(() => P && lH(b), [P, b]) || P && Multiplayer?.isValidatingIncremental();
-  let B = useMemo(() => !P && lH(b), [P, b]);
+  let F = useMemo(() => P && hasNotLoaded(b), [P, b]) || P && Multiplayer?.isValidatingIncremental();
+  let B = useMemo(() => !P && hasNotLoaded(b), [P, b]);
   useLayoutEffect(() => {
     scope !== PageViewMode.ALL_PAGES || A || !F && k ? CanvasSearchHelpers.setSearchScope(scope) : (O(!0), scheduler.postTask(async () => {
       F && (await handleLoadAllPagesWithVersionCheck(PluginModalType.FIND_AND_REPLACE));
@@ -210,7 +210,7 @@ function H() {
     filters,
     mode
   } = useSelector(e => e.canvasSearch);
-  let r = p8("currentPage");
+  let r = useAppModelProperty("currentPage");
   let l = trackFileEventWithUser();
   let d = getCurrentFileType();
   let c = useSelector(e => e.mirror.appModel.pagesList);

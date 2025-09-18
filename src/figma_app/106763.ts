@@ -4,7 +4,7 @@ import { SceneGraphHelpers, ViewType } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { trackFileEvent } from "../figma_app/314264";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -39,7 +39,7 @@ export function $$h1(e) {
     };
   });
   let S = useCanAccessFullDevMode();
-  let v = !!hA();
+  let v = !!useDevModeFocusId();
   let A = useStore();
   let x = useRef("");
   let N = useRef(0);

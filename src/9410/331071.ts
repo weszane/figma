@@ -4,7 +4,7 @@ import { createContext, createRef, forwardRef, lazy, memo, Suspense, useCallback
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { T as _$$T2 } from '../905/2124';
-import { Q7 } from '../905/15667';
+import { PluginAction } from '../905/15667';
 import { useMemoStable, useStableMemo } from '../905/19536';
 import { editorUtilities as _$$k6 } from '../905/22009';
 import { o as _$$o4 } from '../905/40561';
@@ -115,7 +115,7 @@ import { VU } from '../905/625959';
 import { T as _$$T3 } from '../905/632137';
 import { ButtonPrimitive } from '../905/632989';
 import { M as _$$M } from '../905/637515';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { X as _$$X } from '../905/647103';
 import { z as _$$z3 } from '../905/654860';
 import { getSessionStorage } from '../905/657224';
@@ -170,19 +170,19 @@ import { A as _$$A0 } from '../905/929620';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
-import { f as _$$f7 } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx } from '../905/941192';
 import { ou as _$$ou } from '../905/942991';
 import { BY, Jc, Sn } from '../905/946805';
 import { b as _$$b3 } from '../905/946806';
 import { a as _$$a4 } from '../905/964520';
-import { xp } from '../905/966582';
+import { IMAGE_TYPE_VALUES } from '../905/966582';
 import { qp } from '../905/977779';
 import { v as _$$v3 } from '../905/981847';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { e as _$$e5 } from '../905/987482';
-import { F as _$$F4 } from '../905/989956';
+import { colorCSSManipulatorInstance } from '../905/989956';
 import { Rz } from '../905/990497';
 import _require4 from '../951/130951';
 import { bG } from '../1250/506456';
@@ -248,7 +248,7 @@ import { HubTypeEnum } from '../figma_app/45218';
 import { YJ } from '../figma_app/50224';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { getObservableOrFallback } from '../figma_app/84367';
-import { ZO } from '../figma_app/88239';
+import { useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
 import { isNotNullish } from '../figma_app/95419';
 import { BB, kp, PV, Sk, Z7 } from '../figma_app/98578';
 import { wo } from '../figma_app/109130';
@@ -261,7 +261,7 @@ import { h8, KK } from '../figma_app/144974';
 import { I9, Vr } from '../figma_app/151869';
 import { z as _$$z2 } from '../figma_app/153551';
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget, ManifestEditorType } from '../figma_app/155287';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { iC as _$$iC, Do, mr } from '../figma_app/169086';
 import { s3 as _$$s2, kz } from '../figma_app/171177';
 import { APIParameterUtils } from '../figma_app/181241';
@@ -283,7 +283,7 @@ import { DesignToolType, mapEditorToType } from '../figma_app/277543';
 import { p as _$$p2 } from '../figma_app/284426';
 import { FX as _$$FX } from '../figma_app/291792';
 import { eg as _$$eg, i6 as _$$i2, lw as _$$lw, Ev, F$, HD, mi, Mq, NH, vI } from '../figma_app/297822';
-import { _p } from '../figma_app/297957';
+import { useSendToMakeExperiment } from '../figma_app/297957';
 import { filterArrayByEditorType, getCurrentPluginVersion, getPluginByFileId, injectHtmlOrUiFiles, PluginPermissions } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
 import { Tv } from '../figma_app/311375';
@@ -351,7 +351,7 @@ import { JZ } from '../figma_app/696043';
 import { ER, jF, K4, Ne, NT, pz, X4, Xy } from '../figma_app/702372';
 import { AR as _$$AR, Db } from '../figma_app/705029';
 import { wY as _$$wY } from '../figma_app/708845';
-import { eY as _$$eY, f4, KH, p8 } from '../figma_app/722362';
+import { useSceneGraphSelector, useOnSelectionChange, useSceneGraphSelection, useAppModelProperty } from '../figma_app/722362';
 import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
 import { jR as _$$jR, k0 as _$$k5, N0, RO, Sb } from '../figma_app/728075';
 import { $L, mP, Sq } from '../figma_app/737746';
@@ -379,7 +379,7 @@ import { b as _$$b4 } from '../figma_app/873852';
 import { hasDesktopAPI } from '../figma_app/876459';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { Jj, vj } from '../figma_app/883990';
-import { Sh } from '../figma_app/889655';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { PN } from '../figma_app/897289';
 import { f6 as _$$f2 } from '../figma_app/915202';
 import { D as _$$D2, p as _$$p4 } from '../figma_app/930185';
@@ -1469,7 +1469,7 @@ var iL = (e => (e.DESIGN_EDITOR_AI = 'DESIGN_EDITOR_AI', e.DESIGN_EDITOR_NO_AI =
 function iR() {
   let e = AppStateTsApi?.singleSlideView().isFocusedNodeViewFocused();
   let t = Vr();
-  let i = useSelector(Sh);
+  let i = useSelector(selectSceneGraphSelectionKeys);
   return (!t || !t.isSlide || !e) && i.length > 0;
 }
 function iD(e, t) {
@@ -1752,8 +1752,8 @@ async function na({
   }
 }
 function nl() {
-  let e = _$$eY();
-  let t = Object.entries(KH()).filter(([e, t]) => t).map(([e]) => e);
+  let e = useSceneGraphSelector();
+  let t = Object.entries(useSceneGraphSelection()).filter(([e, t]) => t).map(([e]) => e);
   let i = null;
   for (let r of t) {
     if (i = function (t) {
@@ -1923,7 +1923,7 @@ function nU({
 }
 let nz = [_$$jR, N0, _$$k5, RO, Sb].map(e => ({
   string: e,
-  color: _$$F4.parse(e)
+  color: colorCSSManipulatorInstance.parse(e)
 }));
 function nV({
   theme: e,
@@ -1998,7 +1998,7 @@ function nY({
     activeColorOutline
   } = useMemo(() => ({
     activeColorIdx: nz.findIndex(e => areColorsEqual(e.color, o)),
-    activeColorOutline: `2px solid ${_$$F4.format(o)}`,
+    activeColorOutline: `2px solid ${colorCSSManipulatorInstance.format(o)}`,
     value: o
   }), [o]);
   let c = Math.max(activeColorIdx, 0);
@@ -2213,7 +2213,7 @@ function n7({
   });
 }
 function n9(e) {
-  let t = DP();
+  let t = getVisibleTheme();
   let i = e.brandColor;
   let r = ER.get(Math.round(2 * e.cornerRadiusStop) / 2);
   let s = NT.get(Math.round(2 * e.spacingStop) / 2);
@@ -2281,7 +2281,7 @@ function n9(e) {
 }
 let ae = {
   [nq.COLOR](e) {
-    let t = DP();
+    let t = getVisibleTheme();
     let [i, r] = useState(!1);
     let {
       focusParent
@@ -2544,7 +2544,7 @@ function al(e) {
   let {
     close
   } = cq();
-  f4(i => {
+  useOnSelectionChange(i => {
     if (e) {
       for (let e of Object.keys(i.mirror.sceneGraphSelection)) {
         let i = getSingletonSceneGraph().get(e);
@@ -2670,12 +2670,12 @@ function af(e) {
   let i = t.clientLifecycleId;
   let [r, l] = useState('');
   let c = useCurrentFileKey();
-  let u = _$$eY();
+  let u = useSceneGraphSelector();
   let {
     allUsableKitEntries
   } = _$$sI();
   let h = nl() || e.initialRootGuid;
-  let m = KH();
+  let m = useSceneGraphSelection();
   let f = useMemo(() => h ? u.get(h) : null, [u, h]);
   let {
     applyMakeChanges,
@@ -5398,7 +5398,7 @@ function sw({
     aiTrackingContext
   } = t;
   let u = aiTrackingContext.clientLifecycleId;
-  let h = _$$eY();
+  let h = useSceneGraphSelector();
   let m = useCurrentFileKey();
   let f = useRef(null);
   let g = sv(u);
@@ -5532,7 +5532,7 @@ function sw({
       }
     }, {});
   }, [aiTrackingContext, w, u, h, m]);
-  let eo = Fk((e, t) => {
+  let eo = useDeepEqualSceneValue((e, t) => {
     for (let i of t) {
       if (i) {
         let t = e.get(i);
@@ -6328,7 +6328,7 @@ function s0({
   return jsx('input', {
     type: 'file',
     ref: e,
-    accept: xp.join(','),
+    accept: IMAGE_TYPE_VALUES.join(','),
     onChange: t,
     multiple: !1,
     className: _$$s3.hidden.$
@@ -7688,9 +7688,9 @@ function ov() {
       return _;
     }().sort((e, t) => oE(e) - oE(t));
     let t = {
-      seen_no_ai_org_disabled: _$$f7('seen_no_ai_org_disabled'),
-      seen_no_ai_team_or_org_user: _$$f7('seen_no_ai_team_or_org_user'),
-      seen_no_ai_rolling_out: _$$f7('seen_no_ai_rolling_out')
+      seen_no_ai_org_disabled: selectUserFlag('seen_no_ai_org_disabled'),
+      seen_no_ai_team_or_org_user: selectUserFlag('seen_no_ai_team_or_org_user'),
+      seen_no_ai_rolling_out: selectUserFlag('seen_no_ai_rolling_out')
     };
     return useMemo(() => {
       for (let i of e) {
@@ -7878,7 +7878,7 @@ function oF({
   } = cq();
   let h = getObservableOrFallback(UK().showQuickCommandRankDebug);
   let m = V2();
-  let f = p8('keyboardShortcuts');
+  let f = useAppModelProperty('keyboardShortcuts');
   let _ = useCallback(() => {
     close();
   }, [close]);
@@ -7905,7 +7905,7 @@ function oF({
     if (x.isPending() && x.cancel(), e.disabled) return;
     if (e.name === 'plugins-menu-item' && !m) {
       _();
-      _$$R2.instance.handleUpgrade(Q7.RUN_PLUGIN);
+      _$$R2.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       return;
     }
     let s = !!e.itemParameterArgs;
@@ -8226,7 +8226,7 @@ function oB({
       }), [e, t, i]);
     }();
     let r = function () {
-      let e = p8('pagesList');
+      let e = useAppModelProperty('pagesList');
       let t = bG({
         pagesList: e,
         isComparingChanges: !1
@@ -8251,7 +8251,7 @@ function oB({
       })) : [], [e, t]);
     }();
     let o = function () {
-      let e = _p();
+      let e = useSendToMakeExperiment();
       let t = Zr('send-to-make-from-design');
       let i = function () {
         let e = getSingletonSceneGraph().getDirectlySelectedNodes();
@@ -8274,7 +8274,7 @@ function oB({
       let e = Zr('send-to-buzz-from-design');
       let t = useSelector(selectOpenFile);
       let i = useSelector(vx);
-      let r = _$$eY();
+      let r = useSceneGraphSelector();
       let o = r.getDirectlySelectedNodes();
       let l = useMemo(() => ({
         tags: [_$$$.BETA],
@@ -8349,7 +8349,7 @@ function oB({
         let o = function () {
           let e = isDevHandoffEditorType();
           let t = _$$e3();
-          let i = ZO();
+          let i = useIsFullscreenDevModeComponentBrowser();
           let r = selectCurrentFile()?.canEdit;
           let n = PE();
           return t ? 'VARIABLES_TABLE' : i ? 'COMPONENT_BROWSER' : e ? 'DEV' : !1 === r ? 'DESIGN_VIEWER' : r && n ? 'DESIGN_EDITOR_AI' : r && !n ? 'DESIGN_EDITOR_NO_AI' : 'NONE';
@@ -8364,7 +8364,7 @@ function oB({
             } = fJ();
             let n = Tv();
             let o = _$$C2();
-            let l = _p();
+            let l = useSendToMakeExperiment();
             return useCallback((a, s) => {
               if (s) return [];
               let d = a.map(e);
@@ -8438,7 +8438,7 @@ function oB({
         }(e, l);
         let u = function () {
           let e = I9();
-          let t = p8('activeCanvasEditModeType');
+          let t = useAppModelProperty('activeCanvasEditModeType');
           let i = _$$C2();
           return useCallback(() => {
             if (!e?.length) {
@@ -10754,7 +10754,7 @@ function dP() {
       forwardToDatadog: !0
     });
   }, [f, I]);
-  f4(e => {
+  useOnSelectionChange(e => {
     p?.guid && !e.mirror.sceneGraphSelection[p.guid] && KY();
   });
   let O = useCallback(() => {

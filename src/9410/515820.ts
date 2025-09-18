@@ -8,7 +8,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { dh, nn, rE } from "../figma_app/186343";
 import { uF } from "../9410/398228";
 import { generateRecordingKey } from "../figma_app/878298";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { _ as _$$_ } from "../9410/218531";
@@ -18,7 +18,7 @@ import { W as _$$W } from "../9410/94839";
 import { V as _$$V } from "../905/506207";
 import { P as _$$P } from "../905/347284";
 import { updateHoveredNode } from "../figma_app/741237";
-import { _Z } from "../figma_app/623300";
+import { useCurrentViewState } from "../figma_app/623300";
 import { o3, nt } from "../905/226610";
 import { wV } from "../figma_app/779965";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,13 +26,13 @@ import { F as _$$F } from "../905/680873";
 import { linkWithTracking } from "../figma_app/637027";
 import { V as _$$V2 } from "../905/223767";
 import { showModalHandler } from "../905/156213";
-import { Fr } from "../figma_app/297957";
+import { useDraftsPageLimitExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectPermissionsState } from "../figma_app/212807";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
@@ -60,7 +60,7 @@ function C({
   let E = dh();
   let T = nn();
   let w = isDevHandoffEditorType();
-  let S = l7();
+  let S = useIsFullscreenOverview();
   let j = a || getFeatureFlags().interop_pages;
   let I = (e || w || S) && !!d;
   let k = useCallback(e => {
@@ -117,9 +117,9 @@ function W({
   let t = useDispatch();
   let i = selectCurrentFile();
   let a = selectPermissionsState();
-  let s = p8("pagesList").length;
+  let s = useAppModelProperty("pagesList").length;
   let o = isDevHandoffEditorType();
-  let l = Fr();
+  let l = useDraftsPageLimitExperiment();
   let u = _$$h.useTrackingContext({
     trigger: UpsellModalType.PAGE_TRACKER_UPSELL
   });
@@ -238,7 +238,7 @@ function Z({
   filterState: h,
   onHeightChange: m
 }) {
-  let f = _Z().isLoading;
+  let f = useCurrentViewState().isLoading;
   let g = useRef(null);
   _$$a({
     pagesList: e,

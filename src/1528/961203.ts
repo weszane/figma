@@ -23,10 +23,10 @@ import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { z7, Uo } from "../figma_app/334505";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { ic } from "../figma_app/688398";
 import { x as _$$x } from "../9410/705473";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -43,7 +43,7 @@ import { isCommandEvent } from "../905/63728";
 import { b as _$$b } from "../1528/127188";
 import { f7 } from "../figma_app/896988";
 import { renameNode, replaceSelection } from "../figma_app/741237";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { w as _$$w } from "../1528/606183";
 let s = memo(function (e) {
   return _$$O() ? jsx("svg", {
@@ -194,7 +194,7 @@ function et({
   isSelected: c,
   isStateGroupRow: u
 }) {
-  let p = p8("isReadOnly");
+  let p = useAppModelProperty("isReadOnly");
   let [m, E] = useState(!1);
   let [x, g] = useState(i || "");
   let [v, I] = useState(!0);
@@ -228,7 +228,7 @@ function et({
   let O = e => {
     R && permissionScopeHandler.user("rename-row", () => renameNode(o, e));
   };
-  let j = "dark" === DP();
+  let j = "dark" === getVisibleTheme();
   return jsxs(_$$b, {
     tag: "div",
     className: f()("row_title--rowTitle--yb97n", {
@@ -351,14 +351,14 @@ let $$el0 = forwardRef(function ({
     children
   } = t;
   let eE = useRef(null);
-  let ex = "dark" === DP();
+  let ex = "dark" === getVisibleTheme();
   let eg = getFeatureFlags().slide_chapters;
   let ef = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection));
   let ev = SlideConstantsCppBindings?.singleSlideThumbnailNumberWidth() ?? 0;
   let eI = function (e) {
     let t = AppStateTsApi?.slideAnimationBindings().getSlideTransition(e);
     let n = null != t && (t.type !== SlideTransitionType.NONE || t.trigger.type === AnimationEventType.AFTER_DELAY);
-    let a = Fk((e, t) => {
+    let a = useDeepEqualSceneValue((e, t) => {
       let n = e.get(t);
       return !!n?.objectAnimations?.length;
     }, e);
@@ -366,7 +366,7 @@ let $$el0 = forwardRef(function ({
   }(guid);
   let [eN, ey] = go(t);
   let eb = children.length > 0 || !t.parentGuid;
-  let eC = Fk(e => {
+  let eC = useDeepEqualSceneValue(e => {
     let t = e.get(guid);
     if (!t) return {
       name: "",
@@ -386,7 +386,7 @@ let $$el0 = forwardRef(function ({
   let eR = !!eL && ef.includes(eL);
   let eD = n && n?.children.length && n.children[n.children.length - 1]?.guid === guid;
   eR && (p = !1, _ = !1);
-  let eO = Fk((e, t) => {
+  let eO = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return _$$Y(n) && n.isSkippedSlide;
   }, guid);
@@ -399,7 +399,7 @@ let $$el0 = forwardRef(function ({
   let eA = r && i;
   let ew = r && u && !i;
   let eP = (u || c) && !eA || Y && eR;
-  let eF = Fk(e => ["FRAME", "SLIDE", "MODULE"].includes(e.get(guid)?.type ?? ""));
+  let eF = useDeepEqualSceneValue(e => ["FRAME", "SLIDE", "MODULE"].includes(e.get(guid)?.type ?? ""));
   let eM = "var(--color-bordertranslucent)";
   let eB = "var(--color-bg)";
   let ez = "var(--color-text-secondary";

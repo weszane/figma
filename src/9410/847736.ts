@@ -31,7 +31,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { eE as _$$eE } from "../figma_app/106207";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
 import { getRecentTemplateCount } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
@@ -310,7 +310,7 @@ function et() {
   let l = JU(s);
   let d = s === kN.FILE_IN_DRAFTS;
   let c = 0 === getObservableValue(AppStateTsApi?.canvasGrid()?.canvasGridArray, []).length;
-  let u = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let u = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.Slides
   }));
   return 0 === t ? null : u || !a ? jsx(kM, {

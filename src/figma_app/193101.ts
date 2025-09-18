@@ -13,7 +13,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { rT, dT } from "../figma_app/889655";
+import { getInstanceKeys, selectInstanceKeys } from "../figma_app/889655";
 import { Xn } from "../905/429125";
 import { Fv } from "../figma_app/164212";
 import { Yc, m as _$$m, oX, MB } from "../figma_app/930914";
@@ -40,7 +40,7 @@ export function $$L2() {
 }
 let P = () => {
   let e = useMemo($H, []);
-  let t = selectWithShallowEqual(t => e(t, rT(Object.keys(t.mirror.sceneGraphSelection), t.mirror.sceneGraph)));
+  let t = selectWithShallowEqual(t => e(t, getInstanceKeys(Object.keys(t.mirror.sceneGraphSelection), t.mirror.sceneGraph)));
   return useMemo(() => {
     let e = [];
     for (let r in t) for (let i in t[r]) {
@@ -62,7 +62,7 @@ let P = () => {
 };
 var D = (e => (e[e.NO_SELECTIONS_ARE_INSTANCES = 0] = "NO_SELECTIONS_ARE_INSTANCES", e[e.SOME_SELECTIONS_ARE_INSTANCES = 1] = "SOME_SELECTIONS_ARE_INSTANCES", e[e.ALL_SELECTIONS_ARE_TOPLEVEL_INSTANCES = 2] = "ALL_SELECTIONS_ARE_TOPLEVEL_INSTANCES", e))(D || {});
 export function $$k0() {
-  let e = useSelector(dT);
+  let e = useSelector(selectInstanceKeys);
   let {
     restoreType
   } = _$$$(e);
@@ -82,9 +82,9 @@ function M(e) {
 export function $$F1(e) {
   let t = useRef(null);
   let r = useAtomWithSubscription(_$$c);
-  let s = useSelector(dT);
+  let s = useSelector(selectInstanceKeys);
   let o = function (e) {
-    let t = useSelector(dT);
+    let t = useSelector(selectInstanceKeys);
     let {
       needsUpdate
     } = vr(t);
@@ -121,7 +121,7 @@ export function $$F1(e) {
 export function $$j3(e) {
   let t = useRef(null);
   let r = useAtomWithSubscription(_$$c);
-  let s = useSelector(dT);
+  let s = useSelector(selectInstanceKeys);
   let o = _B(s);
   let l = Yc(RR.OVERRIDDEN_SYMBOL_ID, s);
   let d = _$$m(RR.OVERRIDDEN_SYMBOL_ID);

@@ -1,19 +1,40 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { hr } from "../905/352022";
-import { FPlanNameType } from "../figma_app/191312";
-export function $$o1() {
-  let e = useSelector(e => e.plans);
-  let t = useDispatch();
+import type { Dispatch } from 'redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setupOptimistPlanLoader } from '../905/352022'
+import { FPlanNameType } from '../figma_app/191312'
+
+/**
+ * Filters plans to exclude STUDENT and STARTER tiers.
+ * Original function: $$o1
+ * @returns {Array} Filtered plans
+ */
+export function getFilteredPlans(): any[] {
+  const plans = useSelector((state: any) => state.plans)
+  const dispatch = useDispatch<Dispatch<any>>()
+
   useEffect(() => {
-    t(hr({
-      loadedPlans: e
-    }));
-  }, [t, e]);
-  return e.filter(e => e.tier !== FPlanNameType.STUDENT && e.tier !== FPlanNameType.STARTER);
+    dispatch(setupOptimistPlanLoader({
+      loadedPlans: plans,
+    }))
+  }, [dispatch, plans])
+
+  return plans.filter(
+    (plan: any) =>
+      plan.tier !== FPlanNameType.STUDENT
+      && plan.tier !== FPlanNameType.STARTER,
+  )
 }
-export function $$l0() {
-  return $$o1().length > 0;
+
+/**
+ * Checks if there are any filtered plans.
+ * Original function: $$l0
+ * @returns {boolean}
+ */
+export function hasFilteredPlans(): boolean {
+  return getFilteredPlans().length > 0
 }
-export const h = $$l0;
-export const j = $$o1;
+
+// Export aliases for compatibility with original exports
+export const h = hasFilteredPlans
+export const j = getFilteredPlans

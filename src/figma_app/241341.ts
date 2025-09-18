@@ -47,7 +47,7 @@ import { w1 } from '../figma_app/449837';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { HISTORY_DOCUMENT_INDEX } from '../figma_app/518682';
 import { _W, DS, q0, Q4, Qp, R$, t$ } from '../figma_app/571341';
-import { eY } from '../figma_app/722362';
+import { useSceneGraphSelector } from '../figma_app/722362';
 import { DiffImpl, SceneGraphHelpers, Fullscreen, FileSourceType, UIVisibilitySetting } from '../figma_app/763686';
 import { loadCanvasForVersion, canvasCache, setActiveVersion, versionHistoryKeyAtom, CURRENT_VERSION_ID, invalidateCanvasCache } from '../figma_app/841351';
 import { lF } from '../figma_app/915202';
@@ -106,7 +106,7 @@ function eu({
   discreteDiffing: a,
   setChunkChanges: d
 }) {
-  let c = eY();
+  let c = useSceneGraphSelector();
   let [u, p] = useAtomValueAndSetter(Ib);
   let m = useMemo(() => a ? SceneGraphHelpers.getLayerGUIDMapping(t, r.scene, e, c.scene) : void 0, [a, e, t, r.scene, c.scene]);
   useEffect(() => {

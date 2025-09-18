@@ -5,13 +5,13 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { aN, V4, D3 } from "../4452/846771";
 import { n as _$$n } from "../4452/550447";
 import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
 import { I1 } from "../figma_app/990058";
-import { m$ } from "../figma_app/240735";
+import { fetchTeamMembersThunk } from "../figma_app/240735";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { d as _$$d } from "../figma_app/603561";
 import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
@@ -415,11 +415,11 @@ let er = {
     let M = _$$d({
       reportErrorsToTeam: _$$e.SCALE
     });
-    let O = _$$k();
+    let O = isProrationBillingEnabledForCurrentPlan();
     let [L, P] = useState();
     useEffect(() => {
       async function t() {
-        await T(m$({
+        await T(fetchTeamMembersThunk({
           teamId: A?.key.parentId ?? ""
         }));
       }

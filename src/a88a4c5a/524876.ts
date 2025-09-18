@@ -11,7 +11,7 @@ import { showModalHandler } from '../905/156213';
 import { h as _$$h } from '../905/207101';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { l } from '../905/348437';
+import { fileCommentAttachmentAPI } from '../905/348437';
 import { selectCurrentUser } from '../905/372672';
 import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
@@ -22,16 +22,16 @@ import { Button } from '../905/521428';
 import { s as _$$s } from '../905/551945';
 import { getFeatureFlags } from '../905/601108';
 import { tI } from '../905/603628';
-import { qW } from '../905/623179';
+import { UploadError } from '../905/623179';
 import { K as _$$K2 } from '../905/659729';
 import { H as _$$H } from '../905/674803';
 import { Point } from '../905/736624';
 import { A as _$$A } from '../905/744692';
 import { fG } from '../905/772425';
 import { JZ, xS } from '../905/901964';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { kG } from '../905/958668';
-import { Wn, xp } from '../905/966582';
+import { UPLOAD_ERRORS, IMAGE_TYPE_VALUES } from '../905/966582';
 import { v as _$$v } from '../905/981847';
 import { postUserFlag } from '../905/985254';
 import { iX } from '../6443/426443';
@@ -39,7 +39,7 @@ import { n as _$$n } from '../draftjs_composer/589474';
 import { eR as _$$eR } from '../figma_app/12220';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
-import { y as _$$y } from '../figma_app/297957';
+import { useAtMentionInviteExperiment } from '../figma_app/297957';
 import { trackUserEvent } from '../figma_app/314264';
 import { $W, KD } from '../figma_app/317394';
 import { Y as _$$Y2 } from '../figma_app/433187';
@@ -49,7 +49,7 @@ import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { i4, RI, uz, We } from '../figma_app/770088';
 import { BrowserInfo } from '../figma_app/778880';
 import { generateRecordingKey, useSetupPlayback } from '../figma_app/878298';
-import { I as _$$I, q as _$$q } from '../figma_app/819288';
+import { isMessageMetaEmpty, isMessageMetaTooLong } from '../figma_app/819288';
 import { isPrototypeView, getCurrentFileType } from '../figma_app/976749';
 import { dN } from '../vendor/291472';
 let c = memo(e => {
@@ -86,7 +86,7 @@ function J(e) {
   };
   let s = (t, n) => {
     let i = attachments[n];
-    return e.fileKey ? l.put(e.fileKey, i.id, t).then(l => (l.status === 200 && e.onUpdate({
+    return e.fileKey ? fileCommentAttachmentAPI.put(e.fileKey, i.id, t).then(l => (l.status === 200 && e.onUpdate({
       ...i,
       altText: t
     }), l)) : Promise.resolve(void 0);
@@ -122,16 +122,16 @@ export function $$eo0(e) {
 }
 let ea = e => {
   switch (e.type) {
-    case Wn.MAX_UPLOADS_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_UPLOADS_EXCEEDED:
       return getI18nString('comments.upload_error.media_file_maximum', e.params);
-    case Wn.MAX_IMAGE_SIZE_EXCEEDED:
-    case Wn.MAX_VIDEO_SIZE_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_IMAGE_SIZE_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_VIDEO_SIZE_EXCEEDED:
       return getI18nString('comments.upload_error.media_file_size_limit_MB', e.params);
-    case Wn.INVALID_FILE_TYPE:
+    case UPLOAD_ERRORS.INVALID_FILE_TYPE:
       return getI18nString('comments.upload_error.media_file_types');
-    case Wn.DUPLICATE_FILE_UPLOAD:
+    case UPLOAD_ERRORS.DUPLICATE_FILE_UPLOAD:
       return getI18nString('comments.upload_error.already_uploaded_items', e.params);
-    case Wn.FAILED_TO_UPLOAD:
+    case UPLOAD_ERRORS.FAILED_TO_UPLOAD:
       return getI18nString('comments.upload_error.failed_to_upload', e.params);
     default:
       throwTypeError(e);
@@ -143,7 +143,7 @@ export function $$ed1(e) {
   let g = useRef(null);
   let K = useRef(null);
   let X = selectCurrentUser();
-  let Z = _$$f('has_opened_comments_modal');
+  let Z = selectUserFlag('has_opened_comments_modal');
   let {
     threadPosition,
     dispatch,
@@ -160,14 +160,14 @@ export function $$ed1(e) {
   let ey = useSelector(e => e.orgUsersByOrgId);
   let e_ = _$$i();
   let eb = useSelector(e => e.comments.editingComment);
-  let ej = !!_$$f('has_mentioned_pending_user_invite');
-  let ev = !!_$$f('has_mentioned_pending_user_invite_twice');
+  let ej = !!selectUserFlag('has_mentioned_pending_user_invite');
+  let ev = !!selectUserFlag('has_mentioned_pending_user_invite_twice');
   let eC = Xr(_$$H);
   let [ek, eE] = useState(!1);
   let eS = getCurrentFileType();
   let ew = isPrototypeView();
   let eR = useSelector(e => e.comments.activeDragTarget);
-  let eL = _$$y();
+  let eL = useAtMentionInviteExperiment();
   let eT = useAtomWithSubscription(_$$H);
   let eI = _$$eR(e.threadId) && eL({
     isDraftFile: !ef,
@@ -277,7 +277,7 @@ export function $$ed1(e) {
     eZ.hasOwnProperty(e.id) ? deleteAttachment && deleteAttachment(e.id, eZ[e.id]) : deleteAttachment && deleteAttachment(e.id);
   }, [deleteAttachment, eZ]);
   let e1 = useCallback((e, t) => {
-    if (e instanceof qW) {
+    if (e instanceof UploadError) {
       MZ(dispatch, getI18nString('check_network_compatibility.error_bell.comment_attachments.message'));
       return;
     }
@@ -288,10 +288,10 @@ export function $$ed1(e) {
   }, [dispatch, e0]);
   let e2 = useCallback(t => {
     if (!eG || !updateAttachment || t.length === 0) return;
-    let l = _$$K2(t, eK, xS, xp, e1);
+    let l = _$$K2(t, eK, xS, IMAGE_TYPE_VALUES, e1);
     eX(e => e + l.length);
     l.forEach((t, l) => {
-      if (xp.includes(t.type)) {
+      if (IMAGE_TYPE_VALUES.includes(t.type)) {
         let n = URL.createObjectURL(t);
         let i = new Date();
         i.setMilliseconds(i.getMilliseconds() + l);
@@ -313,8 +313,8 @@ export function $$ed1(e) {
     e.current && (e.current.value = '');
   }, [e2]);
   let e3 = isUserNotLoggedInAndEditorSupported();
-  let e4 = () => e.isDisabled || eQ || e7(e.messageMeta) || _$$q(e.messageMeta) || e3;
-  let e7 = e => _$$I(e);
+  let e4 = () => e.isDisabled || eQ || e7(e.messageMeta) || isMessageMetaTooLong(e.messageMeta) || e3;
+  let e7 = e => isMessageMetaEmpty(e);
   let e8 = e4();
   let e6 = e7(e.messageMeta) && (!eG || eW.length === 0);
   let e9 = eG && eR === e.recordingKey && !_$$eR(e.threadId);
@@ -472,7 +472,7 @@ export function $$ed1(e) {
         }), eG && jsx(_$$n, {
           'svgAltText': getI18nString('comments.upload_images'),
           'isDisabled': eW.length >= xS,
-          'acceptedFileTypes': xp.join(','),
+          'acceptedFileTypes': IMAGE_TYPE_VALUES.join(','),
           'inputRef': eJ,
           'inputId': `fileUploadIconInput-${e.recordingKey}`,
           'onFileInputChange': e5,

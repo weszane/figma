@@ -11,7 +11,7 @@ import p from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { lR, e6 } from "../figma_app/617427";
 import { sx } from "../905/941192";
-import { DP as _$$DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { J } from "../905/273120";
 import { UD, Jm, zr } from "../3674/371829";
 import { W as _$$W } from "../905/200727";
@@ -41,7 +41,7 @@ function y({
   secondaryButtonOnClick: c,
   secondaryButtonTrackingProperties: p
 }) {
-  let g = "light" === _$$DP();
+  let g = "light" === getVisibleTheme();
   let y = "ui3" === getThemeContextOrDefault().version;
   return jsxs("div", {
     className: _$$s.py24.px16.cursorDefault.selectNone.flex.flexColumn.gap24.$,
@@ -281,7 +281,7 @@ function C({
   maxShow: n = 3,
   isTooltip: i
 }) {
-  let o = _$$DP();
+  let o = getVisibleTheme();
   let l = e.slice(0, n);
   let s = i ? "avatarTooltipBorder" : "dark" === o ? "avatarBorderDark" : "avatarBorderLight";
   return jsx(AutoLayout, {
@@ -444,7 +444,7 @@ function W({
   totalActiveDevModeUsers: e,
   numAvatars: t
 }) {
-  let n = _$$DP();
+  let n = getVisibleTheme();
   let {
     isLoading,
     isError,

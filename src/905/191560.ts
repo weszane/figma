@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { a as _$$a } from '../905/10468';
-import { GH, VP } from '../905/18797';
+import { isSuccess, isLoading } from '../905/18797';
 import { UserAPIHandlers } from '../905/93362';
 import { popModalStack } from '../905/156213';
 import { _G, Kf, nb } from '../905/164233';
@@ -1038,7 +1038,7 @@ function ex({
       token: e,
       userId: n
     });
-    VP(i, r) || GH(i, r) || t(redeemTeamJoinLink({
+    isLoading(i, r) || isSuccess(i, r) || t(redeemTeamJoinLink({
       token: e,
       userId: n
     }));

@@ -22,7 +22,7 @@ import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
@@ -175,7 +175,7 @@ export let $$L0 = function (t) {
     useSinatraType: !0
   });
   let p = useSelector(t => t.mirror.appModel.currentSelectedProperty);
-  let d = eY();
+  let d = useSceneGraphSelector();
   let c = isDevHandoffEditorType();
   let [m, f] = useState(null);
   let w = useDispatch();

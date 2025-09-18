@@ -1,8 +1,8 @@
 import { parseColor, setAlpha } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { AUTO_MARKER, isInvalidValue, isAutoMarker } from "../905/216495";
-import { A } from "../905/550748";
-class o extends A {
+import { ColorManipulator } from "../905/550748";
+class o extends ColorManipulator {
   constructor(e = {}) {
     super();
     this.options = e;

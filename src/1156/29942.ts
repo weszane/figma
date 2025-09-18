@@ -26,9 +26,9 @@ import { Y as _$$Y } from "../905/506207";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { O1, Zl, uQ, Tv } from "../figma_app/311375";
 import { showModalHandler } from "../905/156213";
-import { eY as _$$eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
-import { xp } from "../905/966582";
+import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { f3, YD, Vo } from "../figma_app/690664";
 import { mC, A5, YZ, Z3, s0, $W, lA } from "../figma_app/325537";
 import { _H, Tk, ee as _$$ee, ry as _$$ry } from "../figma_app/408883";
@@ -63,7 +63,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { isDevEnvironment } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
-import { tc as _$$tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { yy } from "../figma_app/543529";
 import { y as _$$y } from "../1250/295724";
@@ -115,7 +115,7 @@ import { _9, hH, yM, qQ, NC } from "../figma_app/119420";
 import { T_, tk as _$$tk } from "../figma_app/883638";
 import { Tf } from "../figma_app/396432";
 import { postUserFlag } from "../905/985254";
-import { f as _$$f3 } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { Pe } from "../1156/713925";
 import { Ng, YT, vG } from "../figma_app/176302";
 import { S as _$$S } from "../1156/521776";
@@ -978,7 +978,7 @@ function tD({
     curfCtaLabel
   } = mT(e);
   let u = l;
-  shouldShowCurf || getPendingRequest(e)?.entryPoint !== _$$tc.CODE_CHAT_LIMIT || (u = getI18nString("fullscreen.toolbar_banner.provisional_access.code_chat"));
+  shouldShowCurf || getPendingRequest(e)?.entryPoint !== DeepLinkType.CODE_CHAT_LIMIT || (u = getI18nString("fullscreen.toolbar_banner.provisional_access.code_chat"));
   return jsx(TrackingProvider, {
     name: "ChatBoxProvisionalAccessBanner",
     properties: {
@@ -1055,7 +1055,7 @@ function t$() {
     handleUpgrade,
     getIsUpgradeHandlerLoading
   } = wH({
-    entryPoint: _$$tc.CODE_CHAT_LIMIT,
+    entryPoint: DeepLinkType.CODE_CHAT_LIMIT,
     folderId: null
   });
   let n = useIsSelectedFigmakeFullscreen() ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
@@ -1068,7 +1068,7 @@ function t$() {
     onClick: handleUpgrade({
       licenseType: n,
       upgradeReason: _$$i.CODE_CHAT_LIMIT,
-      entryPoint: _$$tc.CODE_CHAT_LIMIT
+      entryPoint: DeepLinkType.CODE_CHAT_LIMIT
     }),
     children: renderI18nText("figmake.meter_limit.request_full_seat")
   });
@@ -1554,7 +1554,7 @@ let tQ = forwardRef((e, t) => {
     onCloseChatSoftLimitBanner
   } = function (e) {
     let t = useDispatch();
-    let n = _$$f3(th);
+    let n = selectUserFlag(th);
     let r = useTeamPlanPublicInfo();
     let i = r.unwrapOr(null)?.tier;
     let {
@@ -1982,7 +1982,7 @@ function ni({
   } = _$$L2();
   let d = n.trim();
   let u = t === lV.AI_ASSISTANT && o && o.length > 0 && !l;
-  let x = _$$eY();
+  let x = useSceneGraphSelector();
   let m = useMemo(() => o && Array.isArray(o) ? o.map(e => Zl(x, e)).filter(e => null !== e) : [], [o, x]);
   let h = _$$N3();
   let p = e => {
@@ -4723,7 +4723,7 @@ function ik({
       type: "file",
       className: "x1s85apg",
       ref: N,
-      accept: xp.join(","),
+      accept: IMAGE_TYPE_VALUES.join(","),
       onChange: D
     }), jsx(IconButton, {
       "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
@@ -4798,7 +4798,7 @@ export function $$iC0({
     codeLibraryInstance
   } = oA();
   let J = Xr(St);
-  let Z = _$$eY();
+  let Z = useSceneGraphSelector();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -5167,7 +5167,7 @@ export default function App() {
   let eG = async e => {
     if (V || eE || !g || !v || 0 === e.files.length || e.files.length > qQ) return;
     let t = Array.from(e.files).map(async e => {
-      e && xp.some(t => e.type.startsWith(t.replace("*", ""))) && (await _$$z3(e, createLoadedAttachment));
+      e && IMAGE_TYPE_VALUES.some(t => e.type.startsWith(t.replace("*", ""))) && (await _$$z3(e, createLoadedAttachment));
     });
     await Promise.all(t);
     eU(!1);

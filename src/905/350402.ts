@@ -30,7 +30,7 @@ export interface OptimistThunkContext<State, Extra, BasicAction extends Action> 
     commit: () => void
   }
 }
-interface ExtraArg { loadingKey: string, [key: string]: any }
+export interface ExtraArg { loadingKey: string, [key: string]: any }
 
 /**
  * Generates an optimist thunk action creator.

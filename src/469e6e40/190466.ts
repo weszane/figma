@@ -52,7 +52,7 @@ import { tb } from "../905/848667";
 import { II } from "../figma_app/11182";
 import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
-import { C3, UV } from "../figma_app/297957";
+import { useSeatManagementWidgetProExperiment, usePlanUserCreationContextExperiment } from "../figma_app/297957";
 import { useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { ViewAccessTypeEnum } from "../905/513035";
@@ -1008,7 +1008,7 @@ function eQ(e) {
 function eZ(e) {
   let t = useSelector(e => e.selectedView.view);
   let a = useSelector(e => e.teamBilling);
-  let r = C3();
+  let r = useSeatManagementWidgetProExperiment();
   let l = !1;
   useEffect(() => {
     e.planType === FOrganizationLevelType.TEAM && l && trackEventAnalytics("member_flyout_hide_job_title", {
@@ -1142,7 +1142,7 @@ function e0(e) {
   });
 }
 function e1(e) {
-  let t = UV()(e.planType);
+  let t = usePlanUserCreationContextExperiment()(e.planType);
   let a = ["manage"];
   e.planType === FOrganizationLevelType.ORG && a.push("activity");
   let [s, i, r] = _$$t.useTabs(a.reduce((e, t) => ({

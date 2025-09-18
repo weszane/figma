@@ -36,11 +36,11 @@ import { K as _$$K2 } from '../905/12775';
 import { L as _$$L2 } from '../905/13390';
 import { cz as _$$cz, i8 as _$$i6 } from '../905/14017';
 import { um as _$$um } from '../905/14223';
-import { tc as _$$tc } from '../905/15667';
+import { DeepLinkType } from '../905/15667';
 import { CloseButton } from '../905/17223';
 import { H as _$$H6 } from '../905/17478';
 import { U as _$$U6 } from '../905/18613';
-import { mC as _$$mC, oh as _$$oh, D2, VP } from '../905/18797';
+import { useIsLoaded, useIsLoading, isLoaded, isLoading } from '../905/18797';
 import { useMemoStable } from '../905/19536';
 import { editorUtilities as _$$k4 } from '../905/22009';
 import { W as _$$W5 } from '../905/25249';
@@ -101,7 +101,7 @@ import { Z as _$$Z3 } from '../905/236383';
 import { delay } from '../905/236856';
 import { PricingOptions } from '../905/237873';
 import { z as _$$z7 } from '../905/239603';
-import { F as _$$F6, p as _$$p6 } from '../905/241044';
+import { sanitizeInput, sanitizeHtml } from '../905/241044';
 import { l as _$$l3 } from '../905/241412';
 import { UNASSIGNED } from '../905/247093';
 import { A as _$$A } from '../905/251970';
@@ -123,7 +123,7 @@ import { C as _$$C5 } from '../905/314082';
 import { m3 as _$$m4 } from '../905/315794';
 import { FolderSortKey, FolderViewType, getProjectUrl } from '../905/316062';
 import { y8 } from '../905/327522';
-import { N_ as _$$N_ } from '../905/332483';
+import { collaboratorSet } from '../905/332483';
 import { a as _$$a12 } from '../905/332662';
 import { S as _$$S8 } from '../905/335273';
 import { selectTeams } from '../905/338617';
@@ -148,7 +148,7 @@ import { b as _$$b7 } from '../905/388233';
 import { getMinimumBundle } from '../905/389382';
 import { E as _$$E3 } from '../905/391888';
 import { r as _$$r4 } from '../905/398386';
-import { x6 as _$$x5 } from '../905/403166';
+import { renderEmojiShortcodes } from '../905/403166';
 import { s as _$$s5 } from '../905/403855';
 import { z as _$$z3 } from '../905/404751';
 import { yZ } from '../905/407352';
@@ -188,7 +188,7 @@ import { l as _$$l7 } from '../905/509505';
 import { z as _$$z11 } from '../905/510753';
 import { T as _$$T7 } from '../905/514205';
 import { Dd, OJ } from '../905/519092';
-import { r as _$$r1 } from '../905/520829';
+import { APILoadingStatus } from '../905/520829';
 import { Button, ButtonLarge, ButtonWide } from '../905/521428';
 import { I as _$$I3 } from '../905/531560';
 import { P as _$$P5 } from '../905/537307';
@@ -218,7 +218,7 @@ import { e as _$$e3 } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
 import { ButtonPrimitive } from '../905/632989';
 import { A as _$$A30, y as _$$y5 } from '../905/638715';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { g_ as _$$g_ } from '../905/646788';
 import { d as _$$d2 } from '../905/647058';
 import { PageFolderFile } from '../905/652992';
@@ -291,7 +291,7 @@ import { I as _$$I2 } from '../905/932503';
 import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
 import { lQ as _$$lQ } from '../905/934246';
 import { v as _$$v4 } from '../905/939922';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
 import { fileEntityDataMapper } from '../905/943101';
 import { t as _$$t2 } from '../905/947268';
@@ -477,7 +477,7 @@ import { Dw as _$$Dw, sz as _$$sz } from '../figma_app/216696';
 import { bW } from '../figma_app/223206';
 import { vt } from '../figma_app/231614';
 import { c$ as _$$c$, ms as _$$ms, MM, Ve } from '../figma_app/236327';
-import { bE as _$$bE2, Jt as _$$Jt, m$ as _$$m$, r1 as _$$r9, I9 } from '../figma_app/240735';
+import { postTeamAction, getTeamAction, fetchTeamMembersThunk, setTeamCreationLoadingAction, restoreTeamThunk } from '../figma_app/240735';
 import { p as _$$p4 } from '../figma_app/243977';
 import { T as _$$T5 } from '../figma_app/257703';
 import { ZF } from '../figma_app/258114';
@@ -486,7 +486,7 @@ import { DialogBody, DialogContents, DialogHeader, DialogHiddenTitle } from '../
 import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSearchEnabled, isResourceHubProfilesEnabled, isTntSavingEnabled } from '../figma_app/275462';
 import { DesignToolType } from '../figma_app/277543';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
-import { fn as _$$fn, ih as _$$ih, E9, Lm, Mh, Mi } from '../figma_app/297957';
+import { useFBGNavigationUpdatesTreatment, FBGNavigationUpdatesVariants, useStarterGlobalFileLimitsExperiment, useOneClickResubscribeExperiment, useSeparateBillingShippingExperiment, useDismissibleUUBExperiment } from '../figma_app/297957';
 import { y4 } from '../figma_app/298277';
 import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
@@ -501,11 +501,11 @@ import { h as _$$h7 } from '../figma_app/334471';
 import { LM as _$$LM, wA as _$$wA, yK } from '../figma_app/336853';
 import { Il, Tj } from '../figma_app/342207';
 import { getEditableUnpaidTeams, hasFolderRestrictions, hasTeamPaidAccess, hasValidSubscription, isGracePeriodEndingSoon, isOrgDelinquent, isTeamInGracePeriod, isTeamLocked, isTeamSubscribed, PRIMARY_LIMIT, STANDARD_LIMIT } from '../figma_app/345997';
-import { ce as _$$ce, lH as _$$lH, Bb } from '../figma_app/347146';
+import { isChromebookTabbed, useChromeOSTabbed, chromeInstallPromptAtom } from '../figma_app/347146';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
 import { convertCamelToSnakeWithLeading, generateProtoLinkUrl, mapProjectSummary } from '../figma_app/349248';
-import { MAX_CAROUSEL_MEDIA, MAX_DESCRIPTION_LENGTH, MAX_WIDGETS, PublishSourceType, MAX_TAGS, MAX_BANNER_CLICKS } from '../figma_app/350203';
+import { MAX_CAROUSEL_MEDIA, MAX_DESCRIPTION_LENGTH2, MAX_WIDGETS, PublishSourceType, MAX_TAGS, MAX_BANNER_CLICKS } from '../figma_app/350203';
 import { ResourceHubResourceRoute } from '../figma_app/354658';
 import { s$ as _$$s$ } from '../figma_app/361035';
 import { z as _$$z1 } from '../figma_app/369596';
@@ -612,7 +612,7 @@ import { gY as _$$gY2 } from '../figma_app/797994';
 import { az as _$$az, md as _$$md2, rE as _$$rE, Ro, z6 } from '../figma_app/805373';
 import { ResourceHubCategoryRoute, useCategoryResourceHandler } from '../figma_app/805898';
 import { memoizeByArgs } from '../figma_app/815945';
-import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
+import { flattenMessageMeta, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
 import { BillingCycle, UpgradeSteps, UpsellSourceType } from '../figma_app/831101';
 import { TrackedAnchor, TrackedButton, TrackedLink, TrackingProvider, useTracking, withTrackedClick, wrapWithTracking } from '../figma_app/831799';
@@ -647,7 +647,7 @@ import { qW } from '../figma_app/932285';
 import { getAdminUsers, getCurrentUserOrgUser, getTopAdminUsers } from '../figma_app/951233';
 import { E as _$$E7, J as _$$J4 } from '../figma_app/953812';
 import { Wf as _$$Wf, zq as _$$zq, FK, zx } from '../figma_app/961422';
-import { _l as _$$_l, dm as _$$dm, eP as _$$eP, gN as _$$gN, h3 as _$$h2, p5 as _$$p2, Dj, Dw, RH, T5, UN, V3 } from '../figma_app/976345';
+import { switchAccountAndNavigate, selectTeamView, selectLimitedTeamSharedProjectsView, selectFolderView, loadTrashedFiles, trashedFoldersQuery, handleOrgMigration, openCreateTeamFlow, ReloadReasonEnum, trackRecentFileClicked, trackFileClicked, openUrlInContext } from '../figma_app/976345';
 import { RESOURCE_ROUTE, ResourceHubHomeRouteClass, useResourceFuid, useResourceRouteParams } from '../figma_app/979714';
 import { o8 as _$$o4 } from '../figma_app/982327';
 import { yJ as _$$yJ2, I1, Pg } from '../figma_app/990058';
@@ -950,7 +950,7 @@ function ta(e) {
   return t ? jsx(SidebarRow, {
     'isSelected': e.selectedView && e.selectedView.view === 'team',
     'onClick': () => {
-      r(_$$dm(t));
+      r(selectTeamView(t));
       r(trackSidebarClick({
         clickedResourceType: 'allProjects'
       }));
@@ -1039,7 +1039,7 @@ function tg(e) {
   });
 }
 function tv(e) {
-  let t = _$$f('file_browser_onboarded');
+  let t = selectUserFlag('file_browser_onboarded');
   let [r, i] = useState(!1);
   let n = _$$e5();
   let l = useTeamPlanFeatures();
@@ -1094,7 +1094,7 @@ function tv(e) {
       'isSelected': e.selectedView.view === 'folder' && e.selectedView.folderId === e.folder.id,
       'onClick': t => {
         let r = e.folder;
-        t.metaKey || t.ctrlKey || t.button !== 0 || (e.dispatch(_$$gN(r.id)), e.dispatch(trackSidebarClick({
+        t.metaKey || t.ctrlKey || t.button !== 0 || (e.dispatch(selectFolderView(r.id)), e.dispatch(trackSidebarClick({
           clickedResourceType: 'drafts',
           resourceIdOrKey: r.id
         })));
@@ -1299,7 +1299,7 @@ function rh(e) {
     DF('open');
     LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
     Tq(t, n);
-  }), ...rf(!desktopAPIInstance && !_$$ce(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
+  }), ...rf(!desktopAPIInstance && !isChromebookTabbed(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
     _$$nz(buildFileUrl({
       file: n,
       allowDefaulting: !0
@@ -1467,7 +1467,7 @@ function rj(e) {
   let c = useCallback((e, r) => {
     LP(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, _$$vg);
     let a = getTeamUrl(r.resourceId, r.orgId);
-    isCommandOrShift(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(_$$dm(r.resourceId)), e.preventDefault());
+    isCommandOrShift(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(selectTeamView(r.resourceId)), e.preventDefault());
   }, [t]);
   let m = useCallback(e => {
     e.stopPropagation();
@@ -1602,11 +1602,11 @@ function rR(e) {
   });
   let b = (e, r) => {
     LP(r.file?.key, FEntityType.FILE, r.sidebarSectionId ?? void 0, _$$vg, r.file?.editorType ?? void 0);
-    isCommandOrShift(e) ? (t(UN({
+    isCommandOrShift(e) ? (t(trackFileClicked({
       fileKey: r.file?.key ?? '',
       entrypoint: _$$vg
     })), e.stopPropagation()) : e.preventDefault();
-    r.file && (customHistory.redirect(x, '_blank'), t(UN({
+    r.file && (customHistory.redirect(x, '_blank'), t(trackFileClicked({
       fileKey: r.file.key,
       entrypoint: _$$vg
     })));
@@ -2932,7 +2932,7 @@ function an(e) {
   return t ? jsx(SidebarRow, {
     isSelected: e.selectedView && e.selectedView.view === 'limitedTeamSharedProjects',
     onClick: () => {
-      r(_$$eP());
+      r(selectLimitedTeamSharedProjectsView());
       r(trackSidebarClick({
         clickedResourceType: 'limitedTeamSharedProjects'
       }));
@@ -3209,7 +3209,7 @@ function az(e) {
         type: _$$q2
       }));
     } : () => {
-      t(Dw({
+      t(openCreateTeamFlow({
         isEduTeam: !0
       }));
     },
@@ -3225,7 +3225,7 @@ function aH({
   daysLeft: e
 }) {
   let t = useDispatch();
-  let r = !!_$$f('edu_hide_verification');
+  let r = !!selectUserFlag('edu_hide_verification');
   if (e < 0) return null;
   let s = () => {
     t(showModalHandler({
@@ -3410,7 +3410,7 @@ function a8(e) {
 function ss(e, t, r) {
   let a = function (e, t) {
     let r = _$$jv({
-      billableProductKeys: _$$N_,
+      billableProductKeys: collaboratorSet,
       baseQuery: {
         currency: e,
         tier: _$$Ju.PRO,
@@ -3423,7 +3423,7 @@ function ss(e, t, r) {
     if (s.data === null) throw new Error('Price data is null');
     return _$$s$(s.data);
   }(e, t);
-  let s = _$$N_.dict(e => r?.[e] || 0);
+  let s = collaboratorSet.dict(e => r?.[e] || 0);
   return Vh(s, a);
 }
 function si({
@@ -3431,7 +3431,7 @@ function si({
   data: t
 }) {
   let r = useDispatch();
-  let s = Mh();
+  let s = useSeparateBillingShippingExperiment();
   let n = useSelector(e => e.teamBilling.summary);
   let {
     currency,
@@ -3613,8 +3613,8 @@ function sj() {
     let s = Be.loadingKeyForPayload({
       teamId: e?.id ?? ''
     });
-    let n = VP(a, s);
-    let o = D2(a, s);
+    let n = isLoading(a, s);
+    let o = isLoaded(a, s);
     let l = {
       type: so.RESUBSCRIPTION,
       overrideLocation: sl.IN_FOOTER
@@ -3626,7 +3626,7 @@ function sj() {
         data: null
       }
     };
-    return Lm() && e ? n ? d : o ? r.resubscription && (r.annual_subscription || r.monthly_subscription) ? {
+    return useOneClickResubscribeExperiment() && e ? n ? d : o ? r.resubscription && (r.annual_subscription || r.monthly_subscription) ? {
       ...l,
       props: {
         loading: !1,
@@ -3733,7 +3733,7 @@ function sj() {
     }, {
       enabled: !!r
     });
-    let o = Mi();
+    let o = useDismissibleUUBExperiment();
     return !e || !r || a.status !== 'loaded' || a.data || isStudentValidated(e) || hasTeamPaidAccess(t[r.id]) || n.status !== 'loaded' || !n.data.team?.hasPermission || !o() ? null : _$$gY2(s, a5, r.id, 7776e6) ? null : {
       type: so.PAID_FREE_SPACE,
       props: {
@@ -3760,7 +3760,7 @@ function sj() {
 let sI = atom(!1);
 function sN() {
   let [e, t] = useAtomValueAndSetter(sI);
-  let r = useAtomWithSubscription(Bb);
+  let r = useAtomWithSubscription(chromeInstallPromptAtom);
   if (!r) return null;
   let s = async () => {
     t(!0);
@@ -3900,8 +3900,8 @@ function sW(e) {
   let r = useCurrentPrivilegedPlan('SidebarFooter');
   let s = _$$LQ(r);
   let i = function () {
-    let e = _$$lH();
-    let t = useAtomWithSubscription(Bb);
+    let e = useChromeOSTabbed();
+    let t = useAtomWithSubscription(chromeInstallPromptAtom);
     return !!BrowserInfo.chromeos && !!BrowserInfo.chrome && !e && !!t;
   }();
   let n = function () {
@@ -3968,7 +3968,7 @@ function sK({
   return t && r ? jsx(SidebarRow, {
     'isSelected': e && e.view === 'folder' && e.folderId === t,
     'onClick': () => {
-      s(_$$gN(t));
+      s(selectFolderView(t));
       s(trackSidebarClick({
         clickedResourceType: 'folder'
       }));
@@ -4076,9 +4076,9 @@ function sZ(e) {
   let D = I ? e.dataDriftCorrectedTeamResources?.favoritedFiles : e.sidebarUser?.favoritedFiles;
   let M = I ? e.dataDriftCorrectedTeamResources?.favoritedPrototypes : e.sidebarUser?.favoritedPrototypes;
   let B = I ? e.dataDriftCorrectedTeamResources?.favoritedProjects : e.sidebarUser?.favoritedProjects;
-  B && e.FBGNavigationUpdatesTreatment !== _$$ih.CONTROL && (B = B.filter(t => t.project?.id !== e.teamFolderId));
+  B && e.FBGNavigationUpdatesTreatment !== FBGNavigationUpdatesVariants.CONTROL && (B = B.filter(t => t.project?.id !== e.teamFolderId));
   let W = D?.length === 0 && M?.length === 0 && B?.length === 0;
-  let $ = e.FBGNavigationUpdatesTreatment === _$$ih.CONTROL || !W;
+  let $ = e.FBGNavigationUpdatesTreatment === FBGNavigationUpdatesVariants.CONTROL || !W;
   let V = () => c ? jsxs(Fragment, {
     children: [r ? jsx(rZ, {
       fileBrowserPreferences: e.sidebarUser?.fileBrowserPreferences,
@@ -4110,9 +4110,9 @@ function sZ(e) {
   });
   let H = sj();
   let K = {
-    [_$$ih.CONTROL]: sl.BETWEEN_CONTENT,
-    [_$$ih.VARIANT_A]: sl.IN_FOOTER,
-    [_$$ih.VARIANT_B]: sl.AFTER_CONTENT
+    [FBGNavigationUpdatesVariants.CONTROL]: sl.BETWEEN_CONTENT,
+    [FBGNavigationUpdatesVariants.VARIANT_A]: sl.IN_FOOTER,
+    [FBGNavigationUpdatesVariants.VARIANT_B]: sl.AFTER_CONTENT
   }[e.FBGNavigationUpdatesTreatment];
   let J = H?.overrideLocation ?? K;
   let q = !!m.data && (m.type === _$$R4.Folder || m.type === _$$R4.Team || m.type === _$$R4.Favorite);
@@ -4168,7 +4168,7 @@ function sZ(e) {
                       selectedView: u
                     }), jsx(sJ, {}), jsx(ag, {
                       selectedView: u
-                    }), e.FBGNavigationUpdatesTreatment !== _$$ih.CONTROL && jsx(sK, {
+                    }), e.FBGNavigationUpdatesTreatment !== FBGNavigationUpdatesVariants.CONTROL && jsx(sK, {
                       selectedView: u,
                       teamFolderId: e.teamFolderId,
                       teamFolderName: e.teamFolderName
@@ -4221,7 +4221,7 @@ function sZ(e) {
                     selectedView: u
                   }), jsx(sJ, {}), jsx(ag, {
                     selectedView: u
-                  }), e.FBGNavigationUpdatesTreatment !== _$$ih.CONTROL && jsx(sK, {
+                  }), e.FBGNavigationUpdatesTreatment !== FBGNavigationUpdatesVariants.CONTROL && jsx(sK, {
                     selectedView: u,
                     teamFolderId: e.teamFolderId,
                     teamFolderName: e.teamFolderName
@@ -4326,7 +4326,7 @@ function s0(e) {
     o ? y = w.currentTeamUser?.draftsProject ?? null : r && (y = w.baseOrgUser?.draftsProject ?? null);
   }
   return jsx(sZ, {
-    FBGNavigationUpdatesTreatment: _$$fn(),
+    FBGNavigationUpdatesTreatment: useFBGNavigationUpdatesTreatment(),
     dataDriftCorrectedTeamResources: T,
     draftsProject: y,
     isOrgWithWorkspaces: j,
@@ -4490,7 +4490,7 @@ function iN(e) {
     }, [e]);
   }();
   let _ = _$$n() || r.view === 'litmus';
-  let p = !e.showingFileBrowserLoader && !_ && (!!desktopAPIInstance || _$$ce() || e.pageHeaderContent);
+  let p = !e.showingFileBrowserLoader && !_ && (!!desktopAPIInstance || isChromebookTabbed() || e.pageHeaderContent);
   useEffect(() => {
     let e = e => {
       e.keyCode === KeyCodes.PERIOD && document.activeElement?.tagName === 'BODY' && getFeatureFlags().internal_only_debug_tools && getFeatureFlags().figment_debugger && toggleFigmentDebugger();
@@ -4796,7 +4796,7 @@ function iX(e) {
       data: {
         workspaceId: e ?? UNASSIGNED
       }
-    })) : t(Dw({
+    })) : t(openCreateTeamFlow({
       previousView: a
     }));
   };
@@ -5104,7 +5104,7 @@ function nT({
   }))];
   let l = useRef(null);
   let [d, c] = useState(!1);
-  let u = DP();
+  let u = getVisibleTheme();
   let m = function (e) {
     try {
       if (e) return parseColor(e);
@@ -6190,7 +6190,7 @@ function ob({
         }), jsx('div', {
           className: _$$s.textBodyLarge.overflowBreakWord.$,
           dangerouslySetInnerHTML: {
-            __html: _$$p6(_$$sP(e.description))
+            __html: sanitizeHtml(_$$sP(e.description))
           }
         })]
       })]
@@ -6363,7 +6363,7 @@ function oE({
       selectedView: r.view,
       resourceType: 'workspace',
       resourceId: e.id,
-      pinDescription: _$$_Z(a.description)
+      pinDescription: flattenMessageMeta(a.description)
     });
   }, [c, r.view, e.id]);
   let m = useCallback((e, t) => {
@@ -9193,7 +9193,7 @@ function dL({
   } = _$$e13({
     orgId: r,
     areWorkspacesEnabled: t === FPlanNameType.ENTERPRISE,
-    numTemplatesPerTeam: MAX_DESCRIPTION_LENGTH + 1,
+    numTemplatesPerTeam: MAX_DESCRIPTION_LENGTH2 + 1,
     editorType: l,
     filterByIds: null,
     enabled: !!l
@@ -9302,7 +9302,7 @@ function dM({
     isFetchingNextPage
   } = _$$yH2({
     resourceTypes: e,
-    limit: MAX_DESCRIPTION_LENGTH,
+    limit: MAX_DESCRIPTION_LENGTH2,
     caller: _$$z8.RESOURCE_HUB,
     orgId: t,
     teamId: r,
@@ -9562,7 +9562,7 @@ function dZ() {
   useEffect(() => {
     u && !_ && l(u);
   }, [u, _]);
-  let p = _$$V5(r, d, MAX_DESCRIPTION_LENGTH);
+  let p = _$$V5(r, d, MAX_DESCRIPTION_LENGTH2);
   let g = p.filterState;
   return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_CATEGORY,
@@ -10136,7 +10136,7 @@ function cT({
     resourceType: getResourceTypesForBrowse(e),
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: t,
-    pageSize: MAX_DESCRIPTION_LENGTH,
+    pageSize: MAX_DESCRIPTION_LENGTH2,
     includeContent: e === ResourceTypeSubset.PLUGINS
   }), {
     enabled: !!t
@@ -10839,7 +10839,7 @@ function us(e) {
   let u = _$$q4();
   let m = useCallback((e = [], t) => e ? e.map((e, r) => {
     let i = (e.user_annotated ? e.user_annotated.handle : e.t) || '';
-    let n = _$$F6(i);
+    let n = sanitizeInput(i);
     let o = null;
     let l = e.link && _$$xT(e.link);
     if (e.user_annotated && n) {
@@ -10865,7 +10865,7 @@ function us(e) {
         })
       });
     } else {
-      let e = _$$x5(n?.replace(/\n\s*\n/g, '\n').split('\n').join(' ') || '');
+      let e = renderEmojiShortcodes(n?.replace(/\n\s*\n/g, '\n').split('\n').join(' ') || '');
       o = jsx('span', {
         children: e
       });
@@ -11514,7 +11514,7 @@ function uO({
   showPlanComparisonModal: t,
   canEditTeam: r
 }) {
-  let s = E9();
+  let s = useStarterGlobalFileLimitsExperiment();
   let i = useSubscription(TeamFileLimitsInfoByProject({
     projectId: e
   }));
@@ -11700,13 +11700,13 @@ function u1({
   currentSharedByFilter: i,
   isListView: n
 }) {
-  e.type === _$$nb.FILE && (r(UN({
+  e.type === _$$nb.FILE && (r(trackFileClicked({
     fileKey: e.file.key,
     entrypoint: 'file tile',
     currentPlanFilter: s,
     currentSharedByFilter: i,
     viewMode: void 0 !== n ? n ? 'list' : 'grid' : void 0
-  })), isRecentsAndSharingView(a) && r(T5({
+  })), isRecentsAndSharingView(a) && r(trackRecentFileClicked({
     index: t
   })), desktopAPIInstance && trackEventAnalytics('Open File Click', {
     fileKey: e.file.key,
@@ -13015,7 +13015,7 @@ function my() {
   let [{
     data: c,
     status: u
-  }] = setupResourceAtomHandler(_$$p2({
+  }] = setupResourceAtomHandler(trashedFoldersQuery({
     orgId: e,
     teamId: t?.id ?? null,
     roleFilter: d.filters.role
@@ -14392,7 +14392,7 @@ function _L(e) {
 function _D({
   currentFileTransferState: e
 }) {
-  let t = DP() === 'dark';
+  let t = getVisibleTheme() === 'dark';
   let r = e => jsxs(Fragment, {
     children: [jsx(LoadingSpinner, {
       size: 'large'
@@ -14477,7 +14477,7 @@ function _M() {
     f && _$$rO(f.updatedAt, g?.updatedAt) ? P('ASYNC_FILE_MIGRATION') : h && _$$rO(h.updatedAt, b?.updatedAt) ? P('ASYNC_FILE_DELETION ') : L ? P('SYNCHRONOUS_DELETION_OR_MIGRATION') : P('NONE');
   }, [f, g, h, b, L]);
   useEffect(() => {
-    e(_$$h2({
+    e(loadTrashedFiles({
       orgId: null
     }));
   }, [e]);
@@ -15045,7 +15045,7 @@ function _X(e) {
   let w = Be.loadingKeyForPayload({
     teamId
   });
-  let j = VP(y, w);
+  let j = isLoading(y, w);
   useEffect(() => {
     !j && teamId && !h && x && v && u(Be({
       teamId
@@ -15258,8 +15258,8 @@ function pc(e) {
   let t = useDispatch();
   let r = pa(selectCurrentUser());
   let n = pr(!1, r);
-  let o = _$$oh(n);
-  let l = _$$mC(n);
+  let o = useIsLoading(n);
+  let l = useIsLoaded(n);
   let d = pt.has(r) ? r : UserRole.ALL;
   let c = Xr(pd);
   useEffect(() => (c(!0), () => c(!1)), [c]);
@@ -15563,7 +15563,7 @@ function pI(e) {
       afterUpgradeCallback: e,
       licenseType: FProductAccessType.DESIGN,
       upgradeReason: _$$i5.CREATE_FILE,
-      entryPoint: _$$tc.CREATE_FILE_EMPTY_CONNECTED_PROJECT
+      entryPoint: DeepLinkType.CREATE_FILE_EMPTY_CONNECTED_PROJECT
     })) : t === _$$q5.CANNOT_UPGRADE ? () => o(VisualBellActions.enqueue({
       message: 'Can\'t upgrade',
       error: !0
@@ -15597,7 +15597,7 @@ function pI(e) {
       }), x && jsx(pN, {
         title: getI18nString('file_browser.folder.use_existing_work'),
         onClick: () => {
-          lgFolder && (o(_$$gN(lgFolder.id)), o(_$$L7()));
+          lgFolder && (o(selectFolderView(lgFolder.id)), o(_$$L7()));
         },
         subtitle: getI18nString('file_browser.folder.import_images_sketch_files_and_pdfs')
       })]
@@ -15964,7 +15964,7 @@ function p5({
   _$$h(() => {
     o && u();
   });
-  let _ = _$$fn() === _$$ih.CONTROL;
+  let _ = useFBGNavigationUpdatesTreatment() === FBGNavigationUpdatesVariants.CONTROL;
   let p = useSelector(e => e.currentUserOrgId);
   let f = useSelector(e => e.teamRoleRequests);
   let g = t.team?.org?.id;
@@ -16249,7 +16249,7 @@ function p8({
   }, [u, m, c, h, x, b]);
   let v = r.teams[c?.teamId || ''] || null;
   useEffect(() => {
-    c && !c.inviteOnlyAt && c.teamId && !v && u(_$$Jt({
+    c && !c.inviteOnlyAt && c.teamId && !v && u(getTeamAction({
       teamId: c.teamId
     }));
   }, [u, c, v]);
@@ -18320,7 +18320,7 @@ let gR = {
     });
   },
   useShouldShowBanner(e, t) {
-    return !!(!_$$f(e) && getFeatureFlags()[t]);
+    return !!(!selectUserFlag(e) && getFeatureFlags()[t]);
   }
 };
 Il.textBodyLargeFontFamily;
@@ -18401,7 +18401,7 @@ function gL({
   isoCode: e
 }) {
   let t = _$$uk.includes(e || 'UNKNOWN');
-  let r = DP() === 'dark';
+  let r = getVisibleTheme() === 'dark';
   return jsx(gD, {
     trackingContextName: 'July Release Notes Banner',
     darkModeBgColor: r ? Tj.bgFigjamSecondary : Tj.bgSecondary,
@@ -18417,7 +18417,7 @@ function gD({
   copy: s,
   registrationLink: i
 }) {
-  let n = DP() === 'dark';
+  let n = getVisibleTheme() === 'dark';
   return jsxs(gR.Banner, {
     trackingContextName: e,
     bgColor: n ? t : r,
@@ -19714,7 +19714,7 @@ function hD({
   });
   useEffect(() => {
     let e = _$$um.loadingKeyForPayload();
-    VP(u, e) || D2(u, e) || _(_$$um());
+    isLoading(u, e) || isLoaded(u, e) || _(_$$um());
   }, [_, u]);
   useEffect(() => {
     d && _(Rw());
@@ -19730,15 +19730,15 @@ function hD({
       d && !u[t] ? _(HD({
         teamId: e,
         disableFlashError: !0
-      })) : VP(u, t) || VP(u, r) || h(!0);
+      })) : isLoading(u, t) || isLoading(u, r) || h(!0);
     }
   }, [_, u, l, e, d]);
   useEffect(() => {
     if (!l || l.org_id) return;
-    let e = _$$m$.loadingKeyForPayload({
+    let e = fetchTeamMembersThunk.loadingKeyForPayload({
       teamId: l.id
     });
-    if (VP(u, e) || D2(u, e) || _(_$$m$({
+    if (isLoading(u, e) || isLoaded(u, e) || _(fetchTeamMembersThunk({
       teamId: l.id
     })), t === NavigationRoutes.BILLING) {
       setupShadowRead({
@@ -19750,21 +19750,21 @@ function hD({
       let e = Be.loadingKeyForPayload({
         teamId: l.id
       });
-      D2(u, e) || VP(u, e) || _(Be({
+      isLoaded(u, e) || isLoading(u, e) || _(Be({
         teamId: l.id
       }));
     } else if (t === NavigationRoutes.MEMBERS) {
-      let e = _$$m$.loadingKeyForPayload({
+      let e = fetchTeamMembersThunk.loadingKeyForPayload({
         teamId: l.id
       });
-      VP(u, e) || D2(u, e) || _(_$$m$({
+      isLoading(u, e) || isLoaded(u, e) || _(fetchTeamMembersThunk({
         teamId: l.id
       }));
     } else if (t === NavigationRoutes.SETTINGS) {
       let e = Be.loadingKeyForPayload({
         teamId: l.id
       });
-      T.canAdminTeam && v && !VP(u, e) && !D2(u, e) && _(Be({
+      T.canAdminTeam && v && !isLoading(u, e) && !isLoaded(u, e) && _(Be({
         teamId: l.id
       }));
     }
@@ -20196,7 +20196,7 @@ function hq(e, t = {}) {
   let n = useMemo(() => ({
     metaKey: e => {
       let t = getSelectedViewUrl(a.getState(), e);
-      r(V3({
+      r(openUrlInContext({
         url: t
       }));
     },
@@ -20343,12 +20343,12 @@ function h5(e) {
   }));
   let r = useMemo(() => {
     let t = new Set();
-    for (let r of e.files.status === _$$r1.SUCCESS ? e.files.value : []) r.folder_id && t.add(r.folder_id);
+    for (let r of e.files.status === APILoadingStatus.SUCCESS ? e.files.value : []) r.folder_id && t.add(r.folder_id);
     return Array.from(t).slice(0, 10);
   }, [e.files]);
-  let i = _$$Cm(r, e.files.status === _$$r1.SUCCESS && !!e.files.value);
+  let i = _$$Cm(r, e.files.status === APILoadingStatus.SUCCESS && !!e.files.value);
   let n = useMemo(() => {
-    if (e.files.status !== _$$r1.SUCCESS || i.status === 'loading') return [];
+    if (e.files.status !== APILoadingStatus.SUCCESS || i.status === 'loading') return [];
     let t = [];
     let a = [];
     if (!e.files) return t;
@@ -20368,7 +20368,7 @@ function h5(e) {
     return t.concat(a);
   }, [e.files, i, r]);
   return jsx(_$$x8, {
-    isLoading: e.files.status === _$$r1.LOADING || i.status === 'loading',
+    isLoading: e.files.status === APILoadingStatus.LOADING || i.status === 'loading',
     children: () => jsxs('div', {
       children: [n.length === 0 && jsx('div', {
         className: 'org_user_meta_content--projectEmptyState--zusT6 text--fontPos11--2LvXf text--_fontBase--QdLsd',
@@ -20696,12 +20696,12 @@ let xr = e => {
     }
   }), [v, h]);
   let $ = useMemo(() => C ? {
-    status: _$$r1.FAILURE,
+    status: APILoadingStatus.FAILURE,
     error: C
   } : T ? {
-    status: _$$r1.LOADING
+    status: APILoadingStatus.LOADING
   } : {
-    status: _$$r1.SUCCESS,
+    status: APILoadingStatus.SUCCESS,
     value: W
   }, [T, C, W]);
   let G = _$$J8(() => m && m.community_profile_id ? r(_$$pZ({
@@ -20772,7 +20772,7 @@ let xr = e => {
       }
     });
   }, [show]);
-  let et = useMemo(() => $.status === _$$r1.SUCCESS ? $.value.map(e => function (e) {
+  let et = useMemo(() => $.status === APILoadingStatus.SUCCESS ? $.value.map(e => function (e) {
     let t = {
       ...e,
       name: e.source_file_name ? `${e.source_file_name}: ${e.name}` : e.name,
@@ -20803,7 +20803,7 @@ let xr = e => {
       children: [jsx('div', {
         className: 'internal_user_profile_page_view--viewbar--eprew',
         children: J
-      }), f === InterProfileType.INTERNAL_PROFILE && (G.status === _$$r1.SUCCESS && $.status === _$$r1.SUCCESS ? jsxs(Fragment, {
+      }), f === InterProfileType.INTERNAL_PROFILE && (G.status === APILoadingStatus.SUCCESS && $.status === APILoadingStatus.SUCCESS ? jsxs(Fragment, {
         children: [m && jsx(h9, {
           userId: t,
           org: m,
@@ -21496,7 +21496,7 @@ function xT({
       level: AccessLevelEnum.EDITOR,
       teamId: n.id,
       onSuccess: () => {
-        d(_$$r9({
+        d(setTeamCreationLoadingAction({
           loading: !1
         }));
         _();
@@ -21870,7 +21870,7 @@ function xz({
     }).then(({
       data: e
     }) => {
-      n(_$$bE2({
+      n(postTeamAction({
         team: e.meta
       }));
       l(!1);
@@ -21905,7 +21905,7 @@ function xz({
       m = jsx(ButtonBasePrimaryTracked, {
         className: xV,
         onClick: () => {
-          n(I9({
+          n(restoreTeamThunk({
             teamId: d
           }));
         },
@@ -21985,7 +21985,7 @@ function xq(e) {
         orgId: null,
         teamId: e.selectedView.teamId
       };
-      l(_$$_l({
+      l(switchAccountAndNavigate({
         workspace: t,
         view: {
           view: 'allProjects'
@@ -22026,7 +22026,7 @@ function xq(e) {
             let s = {
               view: 'recentsAndSharing'
             };
-            r && a ? l(_$$_l({
+            r && a ? l(switchAccountAndNavigate({
               workspace: {
                 userId: r,
                 teamId: a,
@@ -22342,15 +22342,15 @@ export function $$bo0() {
               message: s
             }));
             setTimeout(() => {
-              e.dispatch(_$$_l({
+              e.dispatch(switchAccountAndNavigate({
                 workspace: r,
                 view: a
               }));
             }, 2e3);
           } else {
-            e.dispatch(Dj({
+            e.dispatch(handleOrgMigration({
               reason: 'asset transfer reload',
-              delay: RH.DEFAULT
+              delay: ReloadReasonEnum.DEFAULT
             }));
           }
         }
@@ -22380,7 +22380,7 @@ export function $$bo0() {
     e(hideModalHandler());
   }));
   useEffect(() => {
-    if (desktopAPIInstance || _$$ce()) {
+    if (desktopAPIInstance || isChromebookTabbed()) {
       let e = document.createElement('div');
       e.classList.add('file_browser_view--desktopBackground--kte3I');
       document.body.appendChild(e);
@@ -22396,7 +22396,7 @@ export function $$bo0() {
     U && U !== I && (SW(U, I) && window.scrollTo(0, 0), M ? B(!1) : (P(L + 1), D(L + 1)));
   }, [U, I, M, L]);
   useEffect(() => {
-    I.view === 'teamCreation' && I.fromNewTab && e(Dw({
+    I.view === 'teamCreation' && I.fromNewTab && e(openCreateTeamFlow({
       previousView: I.previousView,
       onSubmitReturnToPrevView: I.onSubmitReturnToPrevView,
       isEduTeam: I.isEduTeam,
@@ -22421,7 +22421,7 @@ export function $$bo0() {
       return e.canAdmin || e.canEdit && t;
     }), [n]);
     useEffect(() => {
-      o.status === 'loaded' && !o.data && a && (r ? t(_$$_l({
+      o.status === 'loaded' && !o.data && a && (r ? t(switchAccountAndNavigate({
         workspace: {
           userId: r,
           teamId: a,

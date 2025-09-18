@@ -20,10 +20,10 @@ import { R } from "../9410/515820";
 import { K as _$$K } from "../9410/153133";
 import { d as _$$d2 } from "../9410/162990";
 import { _$ } from "../figma_app/379850";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { $ } from "../9410/841699";
 export function $$j0() {
-  let e = l7();
+  let e = useIsFullscreenOverview();
   let t = F(e);
   let i = n0();
   let j = _$$K();

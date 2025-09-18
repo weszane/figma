@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { renderI18nText } from "../905/303541";
-import { dT } from "../figma_app/889655";
+import { selectInstanceKeys } from "../figma_app/889655";
 import { Bf } from "../figma_app/249941";
 import { F } from "../905/280165";
 import { Cj, jY, Vr } from "../figma_app/151869";
@@ -12,7 +12,7 @@ import { M_, TN, hh, kv, VZ, kh, bd } from "../905/522134";
 var l = o;
 let m = e => e && Array.isArray(e.selection);
 let $$g1 = forwardRef((e, t) => {
-  let r = useSelector(dT);
+  let r = useSelector(selectInstanceKeys);
   let i = m(e) ? void 0 : e.selection?.name || e.title;
   let o = Cj(i);
   let g = e.className || M_;

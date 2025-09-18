@@ -7,7 +7,7 @@ import { s as _$$s } from "../905/551945";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { xp } from "../905/966582";
+import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { wj } from "../1156/721826";
 import { H } from "../1156/461363";
 import { qQ } from "../figma_app/119420";
@@ -94,7 +94,7 @@ export function $$y0({
       type: "file",
       className: "x1s85apg",
       ref: k,
-      accept: xp.join(","),
+      accept: IMAGE_TYPE_VALUES.join(","),
       onChange: S
     }), jsxs(MenuContainerComp, {
       children: [N, w]

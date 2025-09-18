@@ -6,7 +6,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { M, n as _$$n } from "../3674/214307";
 import { BC } from "../3674/61752";
-import { i$ } from "../905/15667";
+import { DevModeUI } from "../905/15667";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
@@ -79,7 +79,7 @@ export function $$k1() {
     primaryButtonProps,
     secondaryButtonProps
   } = BC({
-    entryPoint: i$.BlockingModal
+    entryPoint: DevModeUI.BlockingModal
   });
   let {
     imgSrc,

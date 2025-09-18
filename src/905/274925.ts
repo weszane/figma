@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { n7 } from "../905/926523";
-import { GH, VP } from "../905/18797";
+import { isSuccess, isLoading } from "../905/18797";
 import { UploadStatusEnum } from "../figma_app/10554";
 import { selectCurrentUser } from "../905/372672";
 var $$n0;
@@ -36,7 +36,7 @@ var $$n0;
     }, [forceParentRender]);
     useEffect(() => {
       let e = resourcePublishingStatusCode === UploadStatusEnum.SUCCESS && (2 === u || 3 === u) && resource && publisher;
-      let t = 5 === u && g && GH(n, g);
+      let t = 5 === u && g && isSuccess(n, g);
       m && (e || t) && v(m);
     }, [resource, publisher, m, u, g, n, v, resourcePublishingStatusCode]);
     return {
@@ -46,7 +46,7 @@ var $$n0;
       },
       setNextStep: h,
       takeStep: v,
-      loading: !(e.resourcePublishingStatusCode !== UploadStatusEnum.UPLOADING) || !!(g && VP(n, g)),
+      loading: !(e.resourcePublishingStatusCode !== UploadStatusEnum.UPLOADING) || !!(g && isLoading(n, g)),
       step: u,
       nextStep: m
     };

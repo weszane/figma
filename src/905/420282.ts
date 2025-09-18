@@ -26,7 +26,7 @@ import { Pf } from "../905/590952";
 import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { selectViewAction } from "../905/929976";
 import { H3 } from "../figma_app/920435";
 import { UpgradeAction } from "../905/370443";
@@ -34,8 +34,8 @@ import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz, $$in } from "../figma_app/84966";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { DashboardSections } from "../905/548208";
@@ -80,7 +80,7 @@ function J(e) {
   let p = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });
-  let m = _$$k();
+  let m = isProrationBillingEnabledForCurrentPlan();
   let h = useSelector(e => e.teamBilling);
   let g = p.key.parentId;
   let v = _$$g(h.summary.total_upgraded_user_counts, {
@@ -110,8 +110,8 @@ function J(e) {
     if (!prices || !localizeCurrency) return [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
-    let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
-    return N_.toArray().some(e => isNullish(a[e])) ? [null, {
+    let a = collaboratorSet.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
+    return collaboratorSet.toArray().some(e => isNullish(a[e])) ? [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
@@ -214,7 +214,7 @@ function J(e) {
             minColumnWidth: 48,
             columnGaps: ["default", 40]
           },
-          items: N_.toArray().sort(AG),
+          items: collaboratorSet.toArray().sort(compareProductAccessTypes),
           columns: [{
             id: "billableProductKey",
             name: jsx(TextWithTruncation, {

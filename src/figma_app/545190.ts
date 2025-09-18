@@ -78,7 +78,7 @@ import { eP as _$$eP } from '../figma_app/613182';
 import { an, RB } from '../figma_app/626952';
 import { aO, BY, c6, FG, g1, K8, Me, p3, Ro, tP, zJ } from '../figma_app/631970';
 import { ZE } from '../figma_app/689119';
-import { eY as _$$eY } from '../figma_app/722362';
+import { useSceneGraphSelector } from '../figma_app/722362';
 import { renameNode, setHoveredComponentPropDef } from '../figma_app/741237';
 import { y3 } from '../figma_app/741785';
 import { iN } from '../figma_app/760428';
@@ -88,7 +88,7 @@ import { Ad, fn, oO, Y9 } from '../figma_app/811257';
 import { u as _$$u, BQ } from '../figma_app/852050';
 import { generateRecordingKey, useHandleInputEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { Og } from '../figma_app/882817';
-import { Sh } from '../figma_app/889655';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { q as _$$q } from '../figma_app/905311';
 import { formatList } from '../figma_app/930338';
 import { Yi } from '../figma_app/933328';
@@ -239,7 +239,7 @@ function ew(e) {
     allStates,
     propertySortOrder
   } = selectWithShallowEqual(e => {
-    let t = Sh(e);
+    let t = selectSceneGraphSelectionKeys(e);
     let r = t.length === 1 ? T(e, t[0]) : [];
     return {
       pickerShown: e.pickerShown,
@@ -467,7 +467,7 @@ function eO({
   preferredValuesUnpublishedError: ee,
   recordingKey: et
 }) {
-  let er = _$$eY();
+  let er = useSceneGraphSelector();
   let en = [];
   let ei = I || K;
   let eo = e && !ei && r;
@@ -1485,7 +1485,7 @@ export function $$tm3({
     statePropertyValues,
     productComponentGUID
   } = an(e, t);
-  let A = _$$eY();
+  let A = useSceneGraphSelector();
   if (!typedPropDefsExcludingHidden.length && !variantPropDefs.length) return null;
   let N = jsx(iN, {
     containerWide: r === O2.WIDE,
@@ -1559,7 +1559,7 @@ export function $$tf1({
     statePropertyValues,
     productComponentGUID
   } = an(t, e);
-  let v = _$$eY();
+  let v = useSceneGraphSelector();
   return jsx($$tE2, {
     allStateVariantProps,
     assignmentValues: assignmentValuesByDefId,

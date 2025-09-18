@@ -31,7 +31,7 @@ import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../fig
 import { QL } from "../905/609392";
 import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
-import { mC } from "../905/18797";
+import { useIsLoaded } from "../905/18797";
 import { _q } from "../figma_app/242339";
 import { FileTypeEnum } from "../905/71785";
 import { registerModal } from "../905/102752";
@@ -99,7 +99,7 @@ import { CommunityRoute, ResourceType } from "../figma_app/354658";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { n6 as _$$n } from "../figma_app/600006";
 import { getFeatureFlags } from "../905/601108";
-import { ce } from "../figma_app/347146";
+import { isChromebookTabbed } from "../figma_app/347146";
 import { parsePxNumber } from "../figma_app/783094";
 import { Z as _$$Z } from "../905/498136";
 import { isMakeDiscoveryEnabled, isPluginsPageEnabled, isRelatedContentExperimentEnabled } from "../figma_app/275462";
@@ -116,7 +116,7 @@ import { w4, QK, Xt } from "../figma_app/692865";
 import { E as _$$E2 } from "../905/53857";
 import { xF, Jm as _$$Jm, uD, J7, If } from "../figma_app/405906";
 import { Ay as _$$Ay3 } from "../905/506641";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { A as _$$A11 } from "../6828/364616";
 import { BrowserInfo } from "../figma_app/778880";
 import { S as _$$S2 } from "../5430/582465";
@@ -461,7 +461,7 @@ let $ = registerModal(function (e) {
   let t = useSelector(e => e.user?.email);
   let i = useDispatch();
   let n = useSelector(t => t.hubFiles[e.hubFileId]);
-  let o = mC(_$$ts.loadingKeyForPayload({
+  let o = useIsLoaded(_$$ts.loadingKeyForPayload({
     hubFileId: e.hubFileId
   }));
   let c = getSelectedView();
@@ -2324,7 +2324,7 @@ iw.displayName = "PluginsRoute";
 iw.path = "/community/plugins";
 let iE = withCommunityRoute(iw);
 function iN() {
-  let e = DP();
+  let e = getVisibleTheme();
   let t = isPluginsPageEnabled();
   let {
     editingEffectsRoute,
@@ -3168,7 +3168,7 @@ let iV = i;
 let iK = Xg;
 function iZ({}) {
   let e = _$$M();
-  let t = !!desktopAPIInstance || ce();
+  let t = !!desktopAPIInstance || isChromebookTabbed();
   let i = usePrefersMediaQuery(`(max-width: ${_C6})`);
   let n = parsePxNumber(qvA) + (t ? parsePxNumber(ngI) : 0);
   let s = usePrefersMediaQuery(`(max-width: ${n}px)`);
@@ -5470,7 +5470,7 @@ function aE({
   linkTo: r
 }) {
   let [o, l] = useState(!1);
-  let c = "dark" === DP();
+  let c = "dark" === getVisibleTheme();
   return e ? jsx(Link, {
     to: r,
     className: "x1hl2dhg x1heor9g",

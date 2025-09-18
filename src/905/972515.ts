@@ -43,10 +43,10 @@ import { ButtonPrimitive } from "../905/632989";
 import { ph } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Qx } from "../figma_app/8833";
-import { F as _$$F } from "../905/989956";
-import { DP } from "../905/640017";
+import { colorCSSManipulatorInstance } from "../905/989956";
+import { getVisibleTheme } from "../905/640017";
 import { jr } from "../figma_app/896988";
-import { uW, pw } from "../905/187165";
+import { ThemeContext, getThemeBorderStyle } from "../905/187165";
 import { KindEnum } from "../905/129884";
 import { C as _$$C } from "../905/520159";
 import { R as _$$R } from "../905/307199";
@@ -326,9 +326,9 @@ let el = memo(function (e) {
   let [C, T] = useState(!1);
   let k = renderName && gridLayoutMode !== rp.SMALL;
   let R = getBackgroundColorForLeafItemThumbnail?.(drilldownItem.item);
-  let N = useContext(uW);
-  let P = DP();
-  let O = useMemo(() => !!R && !!pw(N, R, P), [R, N, P]);
+  let N = useContext(ThemeContext);
+  let P = getVisibleTheme();
+  let O = useMemo(() => !!R && !!getThemeBorderStyle(N, R, P), [R, N, P]);
   let {
     setKeyboardNavigationElement
   } = n.useKeyboardNavigationItemForLeaf(_i, numCols, !visible);
@@ -389,7 +389,7 @@ let el = memo(function (e) {
         "drilldown_item--showBorder--Ksu3C": O
       }),
       style: {
-        backgroundColor: _$$F.format(R || void 0),
+        backgroundColor: colorCSSManipulatorInstance.format(R || void 0),
         ...(gridLayoutMode ? Y : listItemThumbnailStylesOverride)
       },
       children: z

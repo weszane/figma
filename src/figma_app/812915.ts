@@ -12,7 +12,7 @@ import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/2735
 import { openWindow } from "../905/508367";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
@@ -24,7 +24,7 @@ import { td, St } from "../figma_app/558805";
 import { useIsFigmakeFullscreenPreview, useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 export function $$N6() {
   let e = useAtomWithSubscription(Jl);
-  let t = eY();
+  let t = useSceneGraphSelector();
   let r = useMemo(() => {
     if (!e || "-1:-1" === e) {
       let e = atomStoreManager.get(nM);

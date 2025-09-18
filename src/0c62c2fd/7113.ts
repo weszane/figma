@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { customHistory } from "../905/612521";
 import { isCommandEvent } from "../905/63728";
-import { kg } from "../figma_app/976345";
+import { trackNavTreeClicked } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { useCurrentUserOrgId } from "../905/845253";
 import { DUserRole, TGroupType } from "../figma_app/858344";
@@ -13,7 +13,7 @@ export function $$m0() {
   let e = useCurrentUserOrgId();
   let t = useDispatch();
   return useCallback((r, a) => {
-    if (t(kg({
+    if (t(trackNavTreeClicked({
       clickedResourceType: "workspace",
       resourceIdOrKey: r ?? void 0
     })), isCommandEvent(a) || a.shiftKey) {

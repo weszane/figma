@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { Hm, Bs, AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
-import { eY as _$$eY, p8, aV as _$$aV, s6 as _$$s, f4 } from "../figma_app/722362";
+import { useSceneGraphSelector, useAppModelProperty, useIsProgressBarHiddenOrLocked, useAppModelPropsShallow, useOnSelectionChange } from "../figma_app/722362";
 import { selectCurrentFile, openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { W as _$$W } from "../441/503702";
 import { getObservableValue } from "../figma_app/84367";
@@ -121,7 +121,7 @@ import { s as _$$s5 } from "../cssbuilder/589278";
 import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeValue } from "../905/216495";
 import { A5, lJ as _$$lJ, kl, pw, DQ, Gt, fC } from "../905/275640";
-import { Fk, wA as _$$wA } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
 import { cn as _$$cn } from "../905/959568";
 import { q as _$$q2 } from "../figma_app/905311";
@@ -151,7 +151,7 @@ import { t as _$$t2 } from "../905/1946";
 import { bL as _$$bL3, RT, c$ as _$$c$2 } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
 import { Tj } from "../figma_app/342207";
-import { AF, Sh, dT as _$$dT } from "../figma_app/889655";
+import { selectSingleSelectedNode, selectSceneGraphSelectionKeys, selectInstanceKeys } from "../figma_app/889655";
 import { N as _$$N2 } from "../905/720559";
 import { o as _$$o2 } from "../905/89370";
 import { v as _$$v2 } from "../905/439487";
@@ -3105,7 +3105,7 @@ let nD = new class {
 function nR({
   recordingKey: e
 }) {
-  let t = useSelector(AF);
+  let t = useSelector(selectSingleSelectedNode);
   let [i, n] = _$$lJ("objectAnimationType");
   let l = _$$tx2();
   if (!i) return null;
@@ -3215,7 +3215,7 @@ function n$({
   let [f, j] = useState(!1);
   let b = !n && f || i;
   let E = Gu(e.action.transitionNodeID) || "";
-  let v = Fk((e, t) => e.get(t)?.name, E);
+  let v = useDeepEqualSceneValue((e, t) => e.get(t)?.name, E);
   let T = useSelector(e => e.mirror.appModel.hoveredNode === E);
   let S = useSelector(e => e.mirror.sceneGraphSelection);
   let I = void 0 !== S[E];
@@ -3319,7 +3319,7 @@ function nB({
   let E = Xr(iV);
   let v = !n && g || i;
   let T = Gu(e.action.transitionNodeID) || "";
-  let S = Fk((e, t) => e.get(t)?.name, T);
+  let S = useDeepEqualSceneValue((e, t) => e.get(t)?.name, T);
   let I = useSelector(e => e.mirror.appModel.hoveredNode === T);
   let N = useSelector(e => e.mirror.sceneGraphSelection);
   let k = void 0 !== N[T];
@@ -3473,7 +3473,7 @@ function nH({
   slideId: t,
   recordingKey: i
 }) {
-  let n = _$$eY();
+  let n = useSceneGraphSelector();
   let l = D0();
   return jsx("div", {
     className: "x1cmmqis",
@@ -3578,12 +3578,12 @@ function nq({
 function nW({
   recordingKey: e
 }) {
-  let t = _$$eY();
+  let t = useSceneGraphSelector();
   let i = useSelector(e => e.mirror.sceneGraphSelection);
   let n = useRef(null);
   let o = Xr(iV);
   let d = Jb() ?? null;
-  let c = Fk((e, t) => {
+  let c = useDeepEqualSceneValue((e, t) => {
     let i = t ? e.get(t) : null;
     return i?.objectAnimations;
   }, d);
@@ -3812,7 +3812,7 @@ function nQ({
   recordingKey: n
 }) {
   let s = D0();
-  let a = _$$eY();
+  let a = useSceneGraphSelector();
   let o = useCallback(() => {
     let n = a.get(e);
     if (!n) return;
@@ -3921,7 +3921,7 @@ function n5(e, t) {
 }
 function n6() {
   let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
-  return _$$wA((e, t) => t.reduce((t, i) => {
+  return useStrictDeepEqualSceneValue((e, t) => t.reduce((t, i) => {
     let n = i.filter(t => {
       let i = e.get(t);
       return _$$Y3(i) && !i.isSkippedSlide;
@@ -3990,7 +3990,7 @@ function ra() {
 function rp({
   nodeIDs: e
 }) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     let i = t.map(t => e.get(t)).filter(isNotNullish);
     if (void 0 !== i[0]) {
       let e = i[0].interactiveSlideElementType;
@@ -4035,7 +4035,7 @@ function rh({
 function rm({
   nodeIDs: e
 }) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     let i = t.map(t => e.get(t)).filter(isNotNullish);
     if (void 0 !== i[0]) {
       let e = i[0].type;
@@ -4043,7 +4043,7 @@ function rm({
     }
     return null;
   }, e);
-  let i = Fk((e, t) => {
+  let i = useDeepEqualSceneValue((e, t) => {
     if (1 !== t.length || void 0 === t[0]) return !1;
     let i = e.get(t[0]);
     return !!i && !i.isInstance && !i.isInstanceSublayer && !i.isInImmutableFrame && !i.isSymbolSublayer && !i.isInWidget && 0 !== i.childCount && (i.isStack || i.isGroup) && ("FRAME" === i.type || "GROUP" === i.type);
@@ -4423,7 +4423,7 @@ function lN({
   let [t] = useLexicalComposerContext();
   let [i, n] = useState(() => t.getRootElement() === document.activeElement);
   useLayoutEffect(() => (n(t.getRootElement() === document.activeElement), mergeRegister(t.registerCommand(FOCUS_COMMAND, () => (n(!0), !0), COMMAND_PRIORITY_EDITOR), t.registerCommand(BLUR_COMMAND, () => (n(!1), fullscreenValue.commit(), !0), COMMAND_PRIORITY_EDITOR))), [t]);
-  let r = Fk((e, t) => {
+  let r = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i ? i.slideSpeakerNotes : "";
   }, e) || lj;
@@ -4497,8 +4497,8 @@ function lk({
       AppStateTsApi?.editorPreferences().speakerNotesHeight.set(t);
     }
   });
-  let E = p8("showUi");
-  let v = _$$aV();
+  let E = useAppModelProperty("showUi");
+  let v = useIsProgressBarHiddenOrLocked();
   let [T, S] = _$$d2();
   let I = Math.round(s / 400 * 100);
   return jsxs("div", {
@@ -5802,7 +5802,7 @@ function a_({
   let O = kl("exportSettings");
   let A = Gt("stateGroupSelectionInfo");
   let L = SJ();
-  let P = _$$s("currentPage", "currentSelectedProperty");
+  let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   return y[ItemType.FRAME_PRESETS] ? jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
@@ -6027,7 +6027,7 @@ function ay({
 }) {
   let E = useDispatch();
   let [v, T] = useAtomValueAndSetter(_$$b4);
-  let S = _$$s("currentPage", "currentSelectedProperty");
+  let S = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   let I = qh();
   let N = So(y, !0);
   let k = hD();
@@ -6269,8 +6269,8 @@ function af(e) {
 let a0 = memo(function ({
   recordingKey: e
 }) {
-  let t = useSelector(Sh);
-  let i = useSelector(_$$dT);
+  let t = useSelector(selectSceneGraphSelectionKeys);
+  let i = useSelector(selectInstanceKeys);
   let n = useSelector(Z3);
   let l = normalizeValue(kl("resettableInstanceOverrides"));
   let {
@@ -6617,8 +6617,8 @@ function oz({
 }) {
   let m = useDispatch();
   let [_, g] = useState(!1);
-  let y = Fk((e, t) => e.get(t || "")?.fontSize, e.node_id);
-  let f = Fk((e, t) => e.get(t || "")?.hasMissingFont || !1, e.node_id);
+  let y = useDeepEqualSceneValue((e, t) => e.get(t || "")?.fontSize, e.node_id);
+  let f = useDeepEqualSceneValue((e, t) => e.get(t || "")?.hasMissingFont || !1, e.node_id);
   let j = createRef();
   let b = bf(e);
   let E = !n && (_ || b);
@@ -6854,7 +6854,7 @@ function oQ({
 }) {
   let i = _$$s6();
   let n = e.node_id;
-  let s = Fk((e, t) => e.get(t)?.name ?? "", n);
+  let s = useDeepEqualSceneValue((e, t) => e.get(t)?.name ?? "", n);
   let [a, o] = useAtomValueAndSetter(q0);
   let d = a[n];
   let c = useMemoStable(() => ({
@@ -7517,7 +7517,7 @@ let dt = memo(() => {
   }();
   let h = function () {
     let e = Tv();
-    let t = _$$wA((e, t) => {
+    let t = useStrictDeepEqualSceneValue((e, t) => {
       if (!t) return null;
       let i = t[0];
       if (1 !== t.length || !i) return null;
@@ -7634,7 +7634,7 @@ function df({
     }), []);
     let [u, p] = useState(() => dj(e, s, d));
     let x = useMemoStable(() => o ? dy : dg, [o]);
-    f4(() => {
+    useOnSelectionChange(() => {
       p(dj(e, s, d));
     });
     return {
@@ -7913,9 +7913,9 @@ function dO({
 }
 let dM = "slides_flapp_prop_panel--panelSelectorRow--8JJYh";
 function dF() {
-  let e = useSelector(AF);
+  let e = useSelector(selectSingleSelectedNode);
   let t = e?.guid;
-  let i = Fk((e, t) => {
+  let i = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i?.interactiveSlideConfigData ? i.interactiveSlideConfigData : void 0;
   }, t);
@@ -8456,7 +8456,7 @@ function ch({
       fillPaints: []
     }) : cx[e] && g(Tm.initPaint(cx[e], _$$li.color, valueOrFallback(d, {}), "slides-fill-panel"), yesNoTrackingEnum.YES), j(e));
   }, [d, g, f]);
-  f4(() => {
+  useOnSelectionChange(() => {
     j(y(o));
   });
   let E = f && isValidValue(o) && ("SOLID" === f || "GRADIENT" === f);
@@ -8513,7 +8513,7 @@ function cf({
 }) {
   let t = useMemo(() => Object.keys(e), [e]);
   let i = t[0];
-  let n = Fk((e, t) => function (e) {
+  let n = useDeepEqualSceneValue((e, t) => function (e) {
     let t;
     if (!e) return;
     let i = e.interactiveSlideElementType;
@@ -8989,7 +8989,7 @@ function cF({
     getActiveTab: x
   });
   let _ = useCallback(() => h === DesignWorkspace.DESIGN ? "design_view" : "slide_view", [h]);
-  let g = p8("topLevelMode");
+  let g = useAppModelProperty("topLevelMode");
   let f = G$();
   let j = g !== ViewType.PREVIEW && (g !== ViewType.BRANCHING || !f) && g !== ViewType.DEV_HANDOFF;
   let b = j && h === DesignWorkspace.DESIGN;
@@ -9074,13 +9074,13 @@ let cK = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
   let t = useSelector(e => e.progressBarState);
-  let i = p8("loadingEmbeds");
+  let i = useAppModelProperty("loadingEmbeds");
   let n = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let k = Lk();
   let O = useRef(null);
   let A = selectCurrentFile();
   let L = A ? A.key : "";
-  let G = p8("showUi");
+  let G = useAppModelProperty("showUi");
   let H = useSelector(e => e.universalInsertModal);
   let Y = useDispatch();
   let q = wd();
@@ -9210,8 +9210,8 @@ function cz() {
       let n = !!i && i !== getI18nString("fullscreen.filename_view.title_placeholder");
       let r = useSelector(e => e.isRenaming);
       let o = useRef(n);
-      let d = Fk(e => !!e.get(AppStateTsApi?.canvasGrid().gridGUID() || "-1:-1"));
-      let u = !p8("isReadOnly");
+      let d = useDeepEqualSceneValue(e => !!e.get(AppStateTsApi?.canvasGrid().gridGUID() || "-1:-1"));
+      let u = !useAppModelProperty("isReadOnly");
       let p = useRef(u);
       p.current = u;
       useEffect(() => {
@@ -9242,7 +9242,7 @@ function cz() {
         })));
       }, [r, a, c]);
     }(e, t);
-    let n = Fk(e => {
+    let n = useDeepEqualSceneValue(e => {
       let t = AppStateTsApi?.canvasGrid().gridGUID();
       if (!t) return !1;
       let i = e.get(t);

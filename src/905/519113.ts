@@ -20,7 +20,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { buildUploadUrl } from "../figma_app/169182";
 import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { BrowserInfo } from "../figma_app/778880";
 import { logError } from "../905/714362";
 import { oW } from "../905/675859";
@@ -91,7 +91,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { G as _$$G } from "../905/750789";
 import { p as _$$p } from "../905/927118";
 import { useMemoStable } from "../905/19536";
-import { wA as _$$wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Nz } from "../figma_app/915774";
 import { LinkPrimitive } from "../figma_app/496441";
 import { SvgComponent } from "../905/714743";
@@ -1376,7 +1376,7 @@ function tJ(e) {
   let e1 = useAtomWithSubscription(_$$x$(eQ));
   let e2 = useLatestRef(eY);
   useEffect(() => {
-    e2?.status === _$$r.LOADING && eY.status === _$$r.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
+    e2?.status === APILoadingStatus.LOADING && eY.status === APILoadingStatus.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
   }, [e1, eY, initiallyCheckedItemIDs, e2?.status]);
   let e5 = useSelector(e => _$$oB(e, eQ));
   let e4 = useSelector(e => JI(e, eQ));
@@ -1436,7 +1436,7 @@ function tJ(e) {
     e1.length === te.size ? tt(new Set()) : tt(new Set(e1));
   }, [e1, te.size]);
   let tl = useCallback((e, t) => {
-    eY.status === _$$r.SUCCESS && eY.nodeIdToValidatedMoveInfo[e] && (eY.nodeIdToValidatedMoveInfo[e].publishType = t);
+    eY.status === APILoadingStatus.SUCCESS && eY.nodeIdToValidatedMoveInfo[e] && (eY.nodeIdToValidatedMoveInfo[e].publishType = t);
   }, [eY]);
   let td = useCallback(e => {
     ea(e.target.value);
@@ -1484,7 +1484,7 @@ function tJ(e) {
           return;
         }
       }
-      if (eY.status === _$$r.SUCCESS) {
+      if (eY.status === APILoadingStatus.SUCCESS) {
         let e = Object.keys(eY.nodeIdToValidatedMoveInfo).filter(e => te.has(e) && "MOVE" === eY.nodeIdToValidatedMoveInfo[e].publishType);
         let i = [...Object.values(eA), ...Object.values(ey), ...Object.values(e_)].reduce((e, t) => (eY.nodeIdToValidatedMoveInfo[t.node_id] && t.old_key && (e[t.node_id] = t.old_key), e), Object.create(null));
         let n = e5.filter(ad);
@@ -1544,7 +1544,7 @@ function tJ(e) {
       publishingMode: s
     });
     o = useMemoStable(() => [...e.map(e => e.node_id), ...t.map(e => e.node_id)], [e, t]);
-    let d = _$$wA(e => new Set(o.filter(t => {
+    let d = useStrictDeepEqualSceneValue(e => new Set(o.filter(t => {
       let i = e.get(t);
       return i?.hasCodeInstanceDescendant;
     })), o);
@@ -1577,7 +1577,7 @@ function tJ(e) {
   let tR = _$$z();
   if (!em) return null;
   let tN = b === LibrarySourceEnum.HUBFILE ? renderI18nText("design_systems.publishing_modal.modal_header_community_library") : renderI18nText("design_systems.publishing_modal.modal_header");
-  if (eY.status === _$$r.LOADING) return jsx(Fragment, {
+  if (eY.status === APILoadingStatus.LOADING) return jsx(Fragment, {
     children: jsx(ModalRootComponent, {
       manager: g,
       width: "lg",

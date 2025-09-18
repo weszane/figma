@@ -5,7 +5,7 @@ import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
 import { isFigmaEmail } from "../figma_app/416935";
 import { getInitialOptions } from "../figma_app/169182";
-import { qW } from "../905/623179";
+import { UploadError } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
@@ -33,7 +33,7 @@ import { FEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/877554";
 import { canCreateFileTypeAsync } from "../figma_app/687776";
 import { VisualBellActions } from "../905/302958";
-import { gN } from "../figma_app/976345";
+import { selectFolderView } from "../figma_app/976345";
 import { bE } from "../905/466026";
 import { y$ } from "../905/81009";
 import { fA } from "../figma_app/543100";
@@ -1530,7 +1530,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         button: n ? {
           text: getI18nString("fullscreen.file_import.go_to_drafts"),
           action: () => {
-            e.dispatch(gN(i));
+            e.dispatch(selectFolderView(i));
           }
         } : void 0
       }));
@@ -1785,7 +1785,7 @@ async function eW(e, t, i, n, a, s, o, l) {
   try {
     await m;
   } catch (t) {
-    t instanceof qW && MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message"));
+    t instanceof UploadError && MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message"));
     return t;
   }
   try {

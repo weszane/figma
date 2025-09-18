@@ -16,7 +16,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { y as _$$y } from "../figma_app/404310";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { lW } from "../figma_app/11182";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { selectOpenFileKey } from "../figma_app/516028";
@@ -58,7 +58,7 @@ function P({
       editorType: "fullscreen" !== e.selectedView.view ? FEditorType.Design : e.selectedView.editorType
     };
   });
-  let A = !!hA();
+  let A = !!useDevModeFocusId();
   let x = r => {
     e && trackEventAnalytics("inspection_panel_shortcut", {
       ...r,

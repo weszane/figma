@@ -19,7 +19,7 @@ import { xn } from "../figma_app/644079";
 import { C_ } from "../figma_app/290668";
 import { LR, gR } from "../figma_app/120210";
 import { XM } from "../905/486443";
-import { aV, dH } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
@@ -43,7 +43,7 @@ import { Button } from "../905/521428";
 import { a as _$$a2 } from "../905/948337";
 import { s as _$$s } from "../cssbuilder/589278";
 import { showModalHandler } from "../905/156213";
-import { PE } from "../905/15667";
+import { UISection } from "../905/15667";
 import { YG } from "../figma_app/186402";
 import { FL, hv } from "../figma_app/544744";
 import { p as _$$p } from "../9410/505291";
@@ -89,7 +89,7 @@ import { wg } from "../figma_app/101956";
 import { aE } from "../figma_app/433401";
 import { a as _$$a3 } from "../2b17fec9/927391";
 import { GI, qL } from "../905/125333";
-import { F as _$$F2 } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { eq as _$$eq, bm, vp } from "../figma_app/671837";
 import { W as _$$W } from "../905/866915";
 import { s as _$$s2 } from "../figma_app/30255";
@@ -146,7 +146,7 @@ function Q(e) {
           planUserPermission: planUser.permission,
           licenseType: e,
           fileKey: o ?? "",
-          entryPoint: PE.CurfProvisionalAccessBanner,
+          entryPoint: UISection.CurfProvisionalAccessBanner,
           getIsEligibleForProvisionalAccess
         },
         showModalsBeneath: !0
@@ -175,7 +175,7 @@ function Q(e) {
   });
 }
 let eo = memo(function () {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = kD();
   let i = b4();
   let r = selectCurrentFile();
@@ -290,7 +290,7 @@ let eS = memo(function (e) {
   let {
     dltRef
   } = e;
-  let i = aV();
+  let i = useIsProgressBarHiddenOrLocked();
   let [a, s] = useState(!0);
   useEffect(() => {
     let e = dltRef.current;
@@ -324,7 +324,7 @@ let eA = memo(function (e) {
   let {
     dltRef
   } = e;
-  let i = aV();
+  let i = useIsProgressBarHiddenOrLocked();
   let [a, s] = useState(!0);
   let o = _$$N2() === _$$Q2.REQUEST_NEEDED;
   useEffect(() => {
@@ -448,7 +448,7 @@ let eA = memo(function (e) {
   });
 });
 function eX() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useAtomWithSubscription(wg);
   let [i, a] = useAtomValueAndSetter(gT);
   let s = _$$N2();
@@ -547,7 +547,7 @@ let e9 = memo(function ({
     onTouchEnd
   } = _$$W(v, !1, !1);
   let N = "set-tool-pencil" === y ? "set-tool-marker" : y;
-  let A = _$$F2.format(paints?.[0]?.color);
+  let A = colorCSSManipulatorInstance.format(paints?.[0]?.color);
   let O = jsx(_$$eq, {
     action: y
   });
@@ -628,7 +628,7 @@ function tu({
     openColorPalettePicker,
     closeColorPalettePicker
   } = $J(o);
-  let p = _$$F2.format(i);
+  let p = colorCSSManipulatorInstance.format(i);
   useEffect(() => {
     closeColorPalettePicker();
   }, [t, closeColorPalettePicker]);
@@ -666,7 +666,7 @@ function tu({
         children: jsx("div", {
           className: Bp,
           children: j.map((t, i) => {
-            let r = _$$F2.format(t);
+            let r = colorCSSManipulatorInstance.format(t);
             let a = _ ? AF(i, "sticky") : V_(t, "sticky");
             return jsx(kk, {
               size: "medium",
@@ -676,11 +676,11 @@ function tu({
               background: "light",
               tooltip: a,
               recordingKey: generateRecordingKey(e, a)
-            }, _$$F2.format(t) + "-" + i);
+            }, colorCSSManipulatorInstance.format(t) + "-" + i);
           })
         })
       }) : j.map((t, i) => {
-        let r = _$$F2.format(t);
+        let r = colorCSSManipulatorInstance.format(t);
         let a = _ ? AF(i, "sticky") : V_(t, "sticky");
         return jsx(_$$cd, {
           size: "medium",
@@ -691,7 +691,7 @@ function tu({
           onClick: () => m(t),
           tooltip: a,
           recordingKey: generateRecordingKey(e, a)
-        }, _$$F2.format(t) + "-" + i);
+        }, colorCSSManipulatorInstance.format(t) + "-" + i);
       })), jsx(_$$s3, {
         colorPalettePickerState: {
           openColorPalettePicker,
@@ -740,13 +740,13 @@ function th({
   let t = bu();
   let i = sT();
   let a = useAtomWithSubscription(qL);
-  let s = aV();
+  let s = useIsProgressBarHiddenOrLocked();
   let [o, c] = useState(!1);
   let [p, h] = useState(!1);
   let [m, f] = useState(_$$k.DEFAULT);
   let _ = 240 / rX;
   let x = zS(a, "sticky");
-  let g = _$$F2.format(a);
+  let g = colorCSSManipulatorInstance.format(a);
   let j = s || !x ? "rgba(230, 230, 230, 1)" : MV(x, g);
   let {
     state
@@ -1020,7 +1020,7 @@ let tw = memo(function () {
   }), [Y, X]);
   C_(I);
   let J = 414 >= (L?.width || 0);
-  let Q = dH();
+  let Q = useCurrentTool();
   let ee = useSelector(e => e.multiplayerEmoji.type);
   let et = AE();
   let ei = "closed" === W.state ? void 0 : W.tool;

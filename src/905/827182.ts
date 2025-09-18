@@ -18,12 +18,12 @@ import { debugState } from "../905/407919";
 import { oW } from "../905/675859";
 import { Qp } from "../figma_app/162641";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { il, X7 } from "../figma_app/789050";
@@ -150,10 +150,10 @@ export function $$G1(e) {
   let [f] = useDebounce(d, 200);
   let _ = j(d);
   let v = kl("strokeCap");
-  let L = "dark" === DP();
+  let L = "dark" === getVisibleTheme();
   let F = getObservableValue(AppStateTsApi?.widthProfilePreviewState().widthProfilePreviewNodeId, void 0);
   let [M, G] = useState();
-  let z = Fk(e => {
+  let z = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     return t && t.every(e => oY(e.type));
   });

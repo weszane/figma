@@ -7,13 +7,13 @@ import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027"
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Dw } from "../figma_app/976345";
+import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { EduOffboardingData, EduOffboardingTeam } from "../figma_app/43951";
 import { registerModal } from "../905/102752";
@@ -30,7 +30,7 @@ export let $$k0 = registerModal(function (e) {
   }, {
     enabled: !!e.teamId
   });
-  let E = !!_$$f("edu_hide_verification");
+  let E = !!selectUserFlag("edu_hide_verification");
   if ("loaded" !== w.status || "loaded" !== k.status || !t) return null;
   let C = getDaysUntilExpiration(w.data.currentUser?.eduPeriodEnd, isStudentValidated(t));
   if (C === 1 / 0 || !k.data.team) return null;
@@ -68,7 +68,7 @@ export let $$k0 = registerModal(function (e) {
   };
   let N = () => {
     S();
-    n(Dw({}));
+    n(openCreateTeamFlow({}));
   };
   return jsx(TrackingProvider, {
     name: "Edu Offboarding Modal",

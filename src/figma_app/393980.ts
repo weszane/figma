@@ -17,7 +17,7 @@ import { P as _$$P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { ay } from "../905/879323";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { A as _$$A } from "../905/639174";
 import { splitAndJoinPath } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
@@ -102,7 +102,7 @@ export function $$$3({
   let s = e.styleType;
   let o = "TEXT" === s;
   let l = "FILL" === s;
-  let d = "dark" === DP();
+  let d = "dark" === getVisibleTheme();
   let {
     containerClassName,
     previewClassName

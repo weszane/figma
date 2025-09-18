@@ -5,8 +5,8 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { handleAtomEvent } from "../905/502364";
 import { A as _$$A } from "../573/289674";
-import { X0 } from "../figma_app/88239";
-import { eY as _$$eY, KH, aV, p8 } from "../figma_app/722362";
+import { useHasReadyNodesWithParentOrg } from "../figma_app/88239";
+import { useSceneGraphSelector, useSceneGraphSelection, useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { selectOpenFile, selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { F9, e_ as _$$e_, MH, dM, Xh } from "../figma_app/803787";
@@ -67,7 +67,7 @@ import { TeamCanEdit } from "../figma_app/43951";
 import { jO } from "../figma_app/242339";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { h as _$$h2 } from "../figma_app/198885";
-import { dK, Xt } from "../figma_app/889655";
+import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
 import { r6 } from "../figma_app/517115";
@@ -143,7 +143,7 @@ import { g as _$$g } from "../642/216228";
 import { C as _$$C } from "../905/108595";
 import { vv } from "../905/508457";
 import { y0 } from "../figma_app/718307";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Tv } from "../figma_app/151869";
 import { A as _$$A6 } from "../9410/103334";
 import { m as _$$m2 } from "../1156/605578";
@@ -464,7 +464,7 @@ function tS({
     query,
     searchOption
   } = _$$I(Cn.AssetsPanel);
-  let _ = useSelector(dK);
+  let _ = useSelector(selectSceneGraph);
   let T = useSelector(F9);
   let k = useAtomWithSubscription(_$$T2);
   let S = searchOption?.type === _$$I2.ALL;
@@ -1109,8 +1109,8 @@ function t9({
   let u = useSelector(e => e.dropdownShown);
   let p = useSelector(_$$e_);
   let y = useSelector(_$$h2);
-  let m = useSelector(dK);
-  let f = useSelector(Xt);
+  let m = useSelector(selectSceneGraph);
+  let f = useSelector(selectSceneGraphSelection);
   let b = useSelector(selectTeams);
   let x = useSelector(e => e.userFlags.has_dismissed_component_sidebar_library_upsell_banner);
   let v = useSelector(e => e.isFreeUser);
@@ -1732,12 +1732,12 @@ function sw({
     clearFocusedNodes
   } = function () {
     let e = Tv();
-    let t = _$$eY();
+    let t = useSceneGraphSelector();
     let s = sd();
     let n = function () {
-      let e = KH();
+      let e = useSceneGraphSelection();
       let t = sd();
-      let s = Fk((e, s) => {
+      let s = useDeepEqualSceneValue((e, s) => {
         if (!t) return [];
         let n = new Set();
         Object.keys(s).forEach(t => {
@@ -1912,12 +1912,12 @@ function sN({
 export let $$sC0 = memo(function () {
   let e = useAtomWithSubscription(Xh(void 0));
   let t = selectCurrentFile();
-  let s = aV();
+  let s = useIsProgressBarHiddenOrLocked();
   bi();
-  let E = X0();
+  let E = useHasReadyNodesWithParentOrg();
   let S = !!t && e;
   let w = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
-  let N = p8("showUi");
+  let N = useAppModelProperty("showUi");
   let I = useAtomWithSubscription(_$$G);
   useEffect(() => {
     S && handleAtomEvent({

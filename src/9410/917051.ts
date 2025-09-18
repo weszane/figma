@@ -5,7 +5,7 @@ import { V } from "../1577/311426";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
@@ -23,7 +23,7 @@ export function $$y1() {
   let i = kl("embedData");
   let r = createEmbedAnalyticsHandler(i);
   return useCallback(() => {
-    t && (r(LinkMetadataEvent.OPEN_PREVIEW), e(RK({
+    t && (r(LinkMetadataEvent.OPEN_PREVIEW), e(setupHyperlinkHandler({
       rawInput: t
     })));
   }, [t, e, r]);

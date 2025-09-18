@@ -1,7 +1,7 @@
 import { debounce } from "../905/915765";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { ce } from "../figma_app/347146";
+import { isChromebookTabbed } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { S as _$$S } from "../905/539306";
@@ -13,7 +13,7 @@ import { FFileType } from "../figma_app/191312";
 import { mapFileSummary } from "../figma_app/349248";
 import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
 import { getSelectedViewUrl } from "../figma_app/193867";
-import { w2 } from "../905/187165";
+import { getBackgroundColorForTheme } from "../905/187165";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { PublicModelType, SpaceAccessType } from "../figma_app/162807";
@@ -114,7 +114,7 @@ let $$P1 = createOptimistThunk(async (e, t, {
 let $$D10 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.desktopNewTab.isCreatingFile) {
-    let n = ce() ? ai.SAME_TAB : ai.NEW_TAB;
+    let n = isChromebookTabbed() ? ai.SAME_TAB : ai.NEW_TAB;
     let i = getNewFileConfig({
       state: e.getState(),
       openNewFileIn: n,
@@ -135,7 +135,7 @@ export function $$k5(e) {
   return t.currentUserOrgId ? canMemberOrg(t.currentUserOrgId, t) ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST : SpaceAccessType.PERSONAL;
 }
 export function $$M9(e, t) {
-  return null == t ? "#00000000" : "whiteboard" === t ? "#ffffff" : `#${w2(e)}`;
+  return null == t ? "#00000000" : "whiteboard" === t ? "#ffffff" : `#${getBackgroundColorForTheme(e)}`;
 }
 export let $$F4 = debounce((e, t) => {
   e.dispatch(x({

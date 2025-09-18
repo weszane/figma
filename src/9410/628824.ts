@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { kD, tS } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { ITemplateType } from "../905/862883";
 import { RJ } from "../figma_app/869006";
@@ -51,7 +51,7 @@ function T({
   });
 }
 function w() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = kD();
   let i = b4();
   let n = selectCurrentFile();

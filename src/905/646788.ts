@@ -4,7 +4,7 @@ import { useSelector, useDispatch, connect } from "react-redux";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { M3 } from "../figma_app/91703";
-import { tc as _$$tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, TrackedAnchor } from "../figma_app/831799";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
@@ -43,7 +43,7 @@ import { Hz, Of, Yw, Pb } from "../905/201596";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FilePublishSitePermissions, PublishedHubFileForFile } from "../figma_app/43951";
 import { td as _$$td } from "../figma_app/558805";
-import { Wl, l7, hA, ZO, NZ } from "../figma_app/88239";
+import { isFullscreenOverview, useIsFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser, useFullscreenComponentKey } from "../figma_app/88239";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { o as _$$o } from "../905/382697";
 import { r as _$$r } from "../905/857502";
@@ -101,7 +101,7 @@ import { K as _$$K } from "../905/851274";
 import { I as _$$I } from "../905/932503";
 import { K as _$$K2 } from "../905/987240";
 import { selectExperimentConfigHook } from "../figma_app/594947";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { h as _$$h2 } from "../905/207101";
 import { postUserFlag } from "../905/985254";
 import { E as _$$E } from "../905/453826";
@@ -306,7 +306,7 @@ function X() {
   return useSelector(e => {
     var t;
     t = e.selectedView;
-    return Wl(t) || isFullscreenDevHandoffView(t);
+    return isFullscreenOverview(t) || isFullscreenDevHandoffView(t);
   });
 }
 function Q(e) {
@@ -358,11 +358,11 @@ function eA({
   let o = wD()?.id;
   let l = isPrototypeView();
   let d = X();
-  let c = l7();
-  let u = hA();
+  let c = useIsFullscreenOverview();
+  let u = useDevModeFocusId();
   let p = _$$e();
-  let m = ZO();
-  let g = NZ();
+  let m = useIsFullscreenDevModeComponentBrowser();
+  let g = useFullscreenComponentKey();
   let f = A8();
   let _ = selectWithShallowEqual(e => "prototype" === e.selectedView.view ? {
     scalingInfo: e.selectedView.scalingInfo,
@@ -1235,7 +1235,7 @@ let tW = registerModal(function (e) {
 function tK(e) {
   let [t, i] = useState(!1);
   let s = useDispatch();
-  let o = !!_$$f("prototype_share_warning_dismissed");
+  let o = !!selectUserFlag("prototype_share_warning_dismissed");
   let l = tv(e.planTier === FPlanNameType.STARTER && !o);
   let d = jsx(_$$K, {});
   let c = jsx("button", {
@@ -1428,7 +1428,7 @@ function is({
   let _ = X();
   let b = eU();
   let v = function () {
-    let e = l7();
+    let e = useIsFullscreenOverview();
     let t = _$$o();
     return BrowserInfo.isIpadNative || e ? null : jsx(eL, {
       onClick: () => t(ShareAction.EMBED_CODE)
@@ -4531,7 +4531,7 @@ function rM({
       fm({
         licenseType: i,
         dispatch: r,
-        entryPoint: _$$tc.SHARE_DRAFTS,
+        entryPoint: DeepLinkType.SHARE_DRAFTS,
         plan,
         planUser,
         fileKey: e,
@@ -6439,7 +6439,7 @@ function sp({
       afterUpgradeCallback: lQ,
       licenseType: et,
       upgradeReason: _$$i.DRAFTS_SHARE,
-      entryPoint: _$$tc.SHARE_DRAFTS
+      entryPoint: DeepLinkType.SHARE_DRAFTS
     })({}), ea(!0));
     return null;
   }

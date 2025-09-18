@@ -74,7 +74,7 @@ import { P as _$$P2 } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { Ku, sT } from "../figma_app/740163";
 import { pw, zj, tN as _$$tN, wR, kl } from "../905/275640";
-import { f4 } from "../figma_app/722362";
+import { useOnSelectionChange } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { e as _$$e2 } from "../905/579635";
 import { k as _$$k4 } from "../905/336528";
@@ -1227,7 +1227,7 @@ function t2({
 function t3(e) {
   let t = useDispatch();
   let i = useRef();
-  f4(() => {
+  useOnSelectionChange(() => {
     i.current = void 0;
   });
   let n = kl("textAutoResize");

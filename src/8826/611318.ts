@@ -16,8 +16,8 @@ import { Kl } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { kl, lJ } from "../905/275640";
-import { KH, f4 } from "../figma_app/722362";
-import { Sh, F4 } from "../figma_app/889655";
+import { useSceneGraphSelection, useOnSelectionChange } from "../figma_app/722362";
+import { selectSceneGraphSelectionKeys, selectSelectedNodes } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { hw } from "../figma_app/359943";
 import { b7, aW } from "../figma_app/803054";
@@ -290,7 +290,7 @@ function ea(e) {
   let n = function () {
     let [e, t] = useAtomValueAndSetter(_$$Kl);
     let n = Wr();
-    let l = KH();
+    let l = useSceneGraphSelection();
     let r = useMemo(() => ({
       selection: l,
       height: {
@@ -910,7 +910,7 @@ function ez({
   let f = sR();
   let w = uV();
   let C = trackFileEventWithUser();
-  let S = useSelector(Sh);
+  let S = useSelector(selectSceneGraphSelectionKeys);
   let j = isFullscreenSitesView(getSelectedView());
   let b = rO(s);
   let N = "BASELINE" === u;
@@ -1169,7 +1169,7 @@ function td({
   isSelectionStackOrGrid: t
 }) {
   let n = kl("stackMode");
-  let i = useSelector(Sh);
+  let i = useSelector(selectSceneGraphSelectionKeys);
   let a = b7();
   let o = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   let s = kl("isInstanceSelected");
@@ -1186,7 +1186,7 @@ function td({
     isGridControlReadOnly
   } = function () {
     let e = useIsFullscreenSitesView();
-    let t = useSelector(F4);
+    let t = useSelector(selectSelectedNodes);
     let n = getSingletonSceneGraph();
     let l = {
       isNoLayoutControlReadOnly: !1,
@@ -1279,7 +1279,7 @@ function tu(e) {
   let t = kl("stackMode");
   let n = kl("stackWrap");
   let i = trackFileEventWithUser();
-  let a = useSelector(Sh);
+  let a = useSelector(selectSceneGraphSelectionKeys);
   let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   return "HORIZONTAL" !== t ? null : jsx(setupToggleButton, {
     variant: "highlighted",
@@ -1327,7 +1327,7 @@ function t_({
   let [t, n] = useState(!1);
   let [a, s] = useState(!1);
   let c = _$$U();
-  f4(e => {
+  useOnSelectionChange(e => {
     let {
       stackHorizontalPadding,
       stackPaddingRight,
@@ -1339,7 +1339,7 @@ function t_({
     n(isInvalidValue(a) || isInvalidValue(o) || c);
   });
   let u = trackFileEventWithUser();
-  let g = useSelector(Sh);
+  let g = useSelector(selectSceneGraphSelectionKeys);
   let m = jsx(_$$d, {
     onClick: () => {
       n(!t);
@@ -1647,7 +1647,7 @@ function tE() {
   useEffect(() => {
     tA || (t("stack_v2_migration_info_shown"), tA = !0);
   }, [t]);
-  f4(() => {
+  useOnSelectionChange(() => {
     r(!1);
   });
   let h = useCallback(() => {

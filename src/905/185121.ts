@@ -29,7 +29,7 @@ import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
-import { ax } from "../figma_app/722362";
+import { useHasSceneGraphSelection } from "../figma_app/722362";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -514,7 +514,7 @@ function eB(e) {
 }
 function eV(e) {
   let t = useDispatch();
-  let i = ax();
+  let i = useHasSceneGraphSelection();
   let l = new eU();
   let d = useId();
   let {

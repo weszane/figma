@@ -13,7 +13,7 @@ import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { z5, rC } from "../905/713722";
 import { o1 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
@@ -506,7 +506,7 @@ $$en3.displayName = "RgbInputs";
 export class $$ei6 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.formatter = _$$F;
+    this.formatter = colorCSSManipulatorInstance;
   }
   render() {
     return jsx(et, {

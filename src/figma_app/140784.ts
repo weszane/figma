@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { c6 } from "../figma_app/659187";
 import { Jr } from "../figma_app/624361";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 var c = (e => (e.VALID = "valid", e.GENERATING = "generating", e.ERROR = "error", e))(c || {});
 let u = atom({});
 export function $$p0() {
@@ -18,7 +18,7 @@ export function $$_1({
   scale: r,
   ...c
 }) {
-  let p = Fk((e, t) => {
+  let p = useDeepEqualSceneValue((e, t) => {
     let r = t ? e?.get(t) : null;
     return r ? {
       width: r.size.x,

@@ -1,11 +1,11 @@
 import { A } from "../905/920142";
 import { uF, LP, a8 } from "../figma_app/559491";
-import { Sc } from "../905/18797";
+import { isNullOrFailure } from "../905/18797";
 export let $$s1 = new class {
   loadPluginsPublishedByUser(e) {
     let t = e.getState().loadingState;
     let r = uF.loadingKeyForPayload();
-    Sc(t, r) && e.dispatch(uF());
+    isNullOrFailure(t, r) && e.dispatch(uF());
   }
   async loadPluginsAuthoredByCurrentOrg(e) {
     let {
@@ -14,7 +14,7 @@ export let $$s1 = new class {
     } = e.getState();
     if (!currentUserOrgId) return;
     let n = LP.loadingKeyForPayload(currentUserOrgId);
-    Sc(loadingState, n) && (await e.dispatch(LP(currentUserOrgId)));
+    isNullOrFailure(loadingState, n) && (await e.dispatch(LP(currentUserOrgId)));
   }
   loadWidgetsAuthoredByCurrentOrg(e) {
     let {
@@ -23,7 +23,7 @@ export let $$s1 = new class {
     } = e.getState();
     if (!currentUserOrgId) return;
     let n = a8.loadingKeyForPayload(currentUserOrgId);
-    Sc(loadingState, n) && e.dispatch(a8(currentUserOrgId));
+    isNullOrFailure(loadingState, n) && e.dispatch(a8(currentUserOrgId));
   }
 }();
 export class $$o0 {

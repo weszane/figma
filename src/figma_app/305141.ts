@@ -3,14 +3,14 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useDebouncedCallback } from "use-debounce";
 import { Z } from "../905/521211";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { OG } from "../figma_app/876589";
 export function $$c0() {
   let e = Z();
   let {
     guid,
     title
-  } = Fk(e => {
+  } = useDeepEqualSceneValue(e => {
     let t = e.getCurrentPage();
     let r = t?.responsiveSetSettings;
     return {

@@ -25,7 +25,7 @@ import R from "../vendor/128080";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { R as _$$R } from "../905/165069";
 import { reportError } from "../905/11";
-import { fr } from "../figma_app/297957";
+import { useSeatChoiceInNuxExperiment } from "../figma_app/297957";
 import { eS as _$$eS } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
 import { getSelectedView } from "../figma_app/386952";
@@ -41,7 +41,7 @@ import { g as _$$g } from "../7037/183814";
 import { oC, F$, OO, zy, Io, u_ } from "../7021/95197";
 import { R6, pV } from "../7021/970540";
 import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
-import { VD } from "../905/550523";
+import { getWindowDeviceInfo } from "../905/550523";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance, hasDesktopAPI } from "../figma_app/876459";
@@ -54,7 +54,7 @@ import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
-import { tc as _$$tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { yJ } from "../figma_app/24841";
 import { UpgradeAction } from "../905/370443";
 import { selectViewAction } from "../905/929976";
@@ -64,13 +64,13 @@ import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { ProductAccessTypeEnum, ViewAccessTypeEnum, ProductAccessTypeMap } from "../905/513035";
 import { selectCurrentFile } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { rq as _$$rq } from "../905/351260";
 import { wH } from "../figma_app/680166";
 import { AccessLevelEnum } from "../905/557142";
 import { subscribeAndAwaitData } from "../905/553831";
 import { canCreateFileType } from "../figma_app/687776";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { zE, uM } from "../905/738636";
 import { XZ } from "../figma_app/176973";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -101,8 +101,8 @@ import { FlashActions } from "../905/573154";
 import { sx as _$$sx2 } from "../905/941192";
 import { B as _$$B3 } from "../905/261906";
 import { jv } from "../905/84777";
-import { Oq, N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { designSet, collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { rI as _$$rI, Jg, OA, QM, Gz, wd, sV, Sd, On, ik, qD, Mg, B_, MY as _$$MY, dv, yG, Oj, PB, O0, X3, TB, m$, Vz, yo, f6 as _$$f2, kr, _7, w9, XI, Q2, PG as _$$PG, PJ, xx, y8, ih as _$$ih, rv as _$$rv, dD, XK, HN, $r, HS, h0, DM, jG, Bi, nc, ZA, Bu, Pm, _t, pR, Gr, mx } from "../7021/762792";
@@ -124,7 +124,7 @@ import { f as _$$f4 } from "../905/931050";
 import { F0 } from "../905/178707";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { jx, wZ } from "../figma_app/869776";
-import { r as _$$r2 } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { LN as _$$LN, Kq } from "../905/941249";
 import { A as _$$A4 } from "../quill_composer/816110";
 import { Checkbox } from "../905/274480";
@@ -609,7 +609,7 @@ function eX({
 function eJ(e) {
   let r = useDispatch();
   let t = getUserId();
-  let i = !!_$$f("not_gen_0");
+  let i = !!selectUserFlag("not_gen_0");
   let a = useAtomWithSubscription(S0);
   let d = useAtomWithSubscription($l);
   let u = useAtomWithSubscription(aV);
@@ -709,7 +709,7 @@ function eJ(e) {
       handleUpgrade
     } = wH({
       folderId: t?.folderId || null,
-      entryPoint: _$$tc.NUX
+      entryPoint: DeepLinkType.NUX
     });
     let s = useSubscription(FileCanEditIgnorePaidStatus({
       key: t?.key ?? ""
@@ -738,7 +738,7 @@ function eJ(e) {
         },
         licenseType: ProductAccessTypeMap[r],
         upgradeReason: _$$i2.NUX_SEAT_CHOICE,
-        entryPoint: _$$tc.NUX
+        entryPoint: DeepLinkType.NUX
       })(null));
       return e;
     };
@@ -801,7 +801,7 @@ function eJ(e) {
           source: e
         });
       }
-      l ? isCommandOrShift(o) ? r.dispatch(V3({
+      l ? isCommandOrShift(o) ? r.dispatch(openUrlInContext({
         url: l.url
       })) : r.dispatch(selectViewAction({
         view: "fullscreen",
@@ -1041,7 +1041,7 @@ let rh = {
 function r_() {
   let e = useDispatch();
   let r = getUserCurrency();
-  let t = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
+  let t = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let i = {
     currency: r,
     tier: Ju.PRO,
@@ -1094,14 +1094,14 @@ function rp() {
     unit: IX.MONTH
   };
   let s = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: t
   });
   let n = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: i
   });
-  let a = N_.dict(() => null);
+  let a = collaboratorSet.dict(() => null);
   let d = resourceUtils.all([s, n]);
   let {
     status
@@ -1176,7 +1176,7 @@ function rm({
   let t = getUserCurrency();
   let i = new CurrencyFormatter(t);
   return jsx("div", {
-    children: N_.sort(AG).map(t => {
+    children: collaboratorSet.sort(compareProductAccessTypes).map(t => {
       let o = e[t];
       if (!o) return jsx(Wi, {
         className: sV
@@ -2344,18 +2344,18 @@ function te() {
     getIsUpgradeHandlerLoading
   } = wH({
     folderId: h?.folderId || null,
-    entryPoint: _$$tc.NUX
+    entryPoint: DeepLinkType.NUX
   });
   e9();
   _$$R(() => {
-    x(N_.reduce((e, r) => {
+    x(collaboratorSet.reduce((e, r) => {
       let t = getUpgradeEligibility(ProductAccessTypeMap[r]);
       e[r] = t;
       return e;
     }, {}));
   }, [getIsUpgradeHandlerLoading, getUpgradeEligibility], () => !getIsUpgradeHandlerLoading());
   useEffect(() => {
-    N_.forEach(e => {
+    collaboratorSet.forEach(e => {
       let r = getUpgradePathway(ProductAccessTypeMap[e]) === _$$J2.AUTO_PATHWAY;
       t(t => ({
         ...t,
@@ -2749,9 +2749,9 @@ function tm(e) {
   let {
     joinLink
   } = e;
-  if (joinLink.status !== _$$r2.SUCCESS || joinLink.status === _$$r2.SUCCESS && (joinLink.value.disabled || !joinLink.value.link)) return null;
+  if (joinLink.status !== APILoadingStatus.SUCCESS || joinLink.status === APILoadingStatus.SUCCESS && (joinLink.value.disabled || !joinLink.value.link)) return null;
   let i = null;
-  joinLink.status === _$$r2.SUCCESS && joinLink.value.link && (i = jx(joinLink.value.link));
+  joinLink.status === APILoadingStatus.SUCCESS && joinLink.value.link && (i = jx(joinLink.value.link));
   return jsxs(_$$o, {
     href: "#",
     onClick: () => {
@@ -3016,7 +3016,7 @@ function tR(e) {
   let t = tS.has(r);
   let [i, l] = useAtomValueAndSetter(BG);
   let a = Xr(kd);
-  let [d] = useState(!!_$$f("tos_accepted"));
+  let [d] = useState(!!selectUserFlag("tos_accepted"));
   let c = !!getInitialOptions().tos_agreement_required && !d;
   useEffect(() => {
     c && a(!0);
@@ -3392,7 +3392,7 @@ let tV = forwardRef(function (e, r) {
   return jsx(TrackingProvider, {
     name: e.currentQuestion,
     properties: {
-      ...VD(),
+      ...getWindowDeviceInfo(),
       signupSource: e.signupSource
     },
     children: jsxs("div", {
@@ -3749,7 +3749,7 @@ function t7({
   let d = Xr(ni);
   let c = getUserId();
   let u = selectCurrentUser();
-  let x = !_$$f("not_gen_0");
+  let x = !selectUserFlag("not_gen_0");
   let h = getInitialOptions().dictionary_url_by_locale || {};
   let _ = [languageCodes.EN, ...Object.keys(h)];
   let p = useRef(manager.isOpen);
@@ -4227,7 +4227,7 @@ function ic(e) {
   return jsx(TrackingProvider, {
     name: currentQuestion,
     properties: {
-      ...VD(),
+      ...getWindowDeviceInfo(),
       signupSource: e.signupSource
     },
     trackingOptions: l,
@@ -4482,7 +4482,7 @@ function iE({
     let c = null !== getFileKeyFromSelectedView(d);
     let [u, x] = useAtomValueAndSetter(S0);
     let [h, _] = useAtomValueAndSetter(bk);
-    let p = fr();
+    let p = useSeatChoiceInNuxExperiment();
     let f = useIsSelectedFigmakeFullscreen();
     let g = useMemo(() => {
       let i = [];

@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { A } from "../vendor/737188";
 import { s as _$$s } from "../cssbuilder/589278";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Vt } from "../905/780715";
 export let $$c0 = memo(e => {
   let t = useDispatch();
@@ -12,7 +12,7 @@ export let $$c0 = memo(e => {
       rel: "noopener nofollow noreferrer ugc",
       onClick: e => {
         let i = e.target;
-        i && "A" === i.tagName && (t(RK({
+        i && "A" === i.tagName && (t(setupHyperlinkHandler({
           rawInput: i.href
         })), e.stopPropagation(), e.preventDefault());
       }

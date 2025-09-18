@@ -13,7 +13,7 @@ import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
-import { F4 } from "../figma_app/889655";
+import { selectSelectedNodes } from "../figma_app/889655";
 import { Lg, od } from "../figma_app/505098";
 import { isInvalidValue } from "../905/216495";
 import { fI } from "../figma_app/626177";
@@ -242,7 +242,7 @@ function G(e) {
   } = e;
   let p = useSelector(i$);
   let _ = pickerShown.id === uA;
-  let h = useSelector(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : F4(e));
+  let h = useSelector(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : selectSelectedNodes(e));
   let g = useCallback((e, t) => {
     permissionScopeHandler.user("set-description", () => {
       for (let r of h) r.setDescriptionRich(e, t);

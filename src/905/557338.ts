@@ -1,8 +1,8 @@
 import { isNotNullish } from "../figma_app/95419";
-import { Mz } from "../vendor/925040";
-import { Zm } from "../905/270781";
+import { createSelector } from "../vendor/925040";
+import { memoizeWithDeepEquality } from "../905/270781";
 import { aK } from "../figma_app/524618";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 export function $$l1(e, t) {
   let i = t.get(e);
   let {
@@ -18,15 +18,15 @@ export function $$l1(e, t) {
     libraryKey: o
   } : null;
 }
-let $$d3 = Zm(e => Object.keys(e.mirror.selectionProperties.symbolGUIDsBackingSelection ?? {}));
-let c = Mz([dK, $$d3], (e, t) => t.map(t => $$l1(t, e)).filter(isNotNullish));
+let $$d3 = memoizeWithDeepEquality(e => Object.keys(e.mirror.selectionProperties.symbolGUIDsBackingSelection ?? {}));
+let c = createSelector([selectSceneGraph, $$d3], (e, t) => t.map(t => $$l1(t, e)).filter(isNotNullish));
 export function $$u2() {
-  return Mz([dK, (e, t) => t], (e, t) => t.filter(t => {
+  return createSelector([selectSceneGraph, (e, t) => t], (e, t) => t.filter(t => {
     let i = e.get(t);
     return i?.isPrimaryInstance || i?.isSwappedNestedInstance;
   }).map(t => aK(t, e)).filter(isNotNullish));
 }
-export let $$p0 = Mz([c], e => {
+export let $$p0 = createSelector([c], e => {
   if (e.length < 1) return null;
   let t = e[0]?.libraryKey;
   if (!t) return null;

@@ -28,7 +28,7 @@ import { LN, wf } from "../figma_app/975811";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { R as _$$R2 } from "../figma_app/313269";
-import { p as _$$p } from "../905/241044";
+import { sanitizeHtml } from "../905/241044";
 import { LoadingSpinner } from "../figma_app/858013";
 import { WD } from "../figma_app/571341";
 import { NU, X$, iM } from "../905/945781";
@@ -157,7 +157,7 @@ function ed(e, t) {
 function ec(e, t) {
   if (null != e) {
     let t = e.toString();
-    let i = _$$p(t);
+    let i = sanitizeHtml(t);
     return jsx(_$$R2, {
       fallback: jsx(LoadingSpinner, {}),
       errorFallback: null,

@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { textOnDarkCanvas } from "../figma_app/191804";
 import { usePrefersReducedMotion } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { k_ } from "../figma_app/242062";
 import { a8, jr, Sf, nG, Ds, iB, H7 } from "../figma_app/467440";
@@ -75,7 +75,7 @@ function y() {
 export function $$b1(e) {
   let t = usePrefersReducedMotion();
   let r = XC(useAtomWithSubscription(a8));
-  let i = !_$$f("cursor_bot_v2_has_greeted_with_wave") && !e.manualControl;
+  let i = !selectUserFlag("cursor_bot_v2_has_greeted_with_wave") && !e.manualControl;
   let s = useAtomWithSubscription(jr);
   let l = useAtomWithSubscription(Sf);
   let m = useAtomWithSubscription(nG);

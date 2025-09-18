@@ -2,19 +2,19 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { oW } from "../905/675859";
 import { H8, Pf } from "../905/590952";
 import { isFullscreenView } from "../figma_app/976749";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { getProductIcon, getProductBackgroundImgUrl } from "../905/389382";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
-import { i_ } from "../905/187165";
+import { getVisibleTheme } from "../905/187165";
 let p = "avatar_with_product_background--brandIconContainerDesign--5S-TM avatar_with_product_background--brandIconContainer--CMT3e";
 export function $$m0({
   licenseType: e
 }) {
   let t = selectCurrentUser();
   let i = isFullscreenView();
-  let m = DP();
-  let h = e === FProductAccessType.WHITEBOARD && i ? "light" : i_(m);
+  let m = getVisibleTheme();
+  let h = e === FProductAccessType.WHITEBOARD && i ? "light" : getVisibleTheme(m);
   let g = (() => {
     switch (e) {
       case FProductAccessType.DESIGN:

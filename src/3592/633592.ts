@@ -27,7 +27,7 @@ import { H8 } from "../905/590952";
 import { uQ } from "../figma_app/311375";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { wV } from "../figma_app/779965";
 import { d as _$$d } from "../905/977713";
@@ -521,7 +521,7 @@ export default App
 function ec() {
   let e = selectCurrentFile()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
   let t = uQ();
-  let s = Fk((e, t) => e?.get(t ?? "")?.name, t);
+  let s = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name, t);
   return jsx(DialogTitle, {
     children: jsxs("div", {
       className: _$$s.flex.itemsCenter.fontSemiBold.$,

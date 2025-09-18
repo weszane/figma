@@ -3,7 +3,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { isValidAccessType } from "../905/513035";
-import { TA, Zx } from "../figma_app/217457";
+import { convertLgSeatTypeProduct, getProductAccessTypeByKey } from "../figma_app/217457";
 import { FUserRoleType, FCostCenterType, FPlanFeatureType, FProductAccessType, FResourceTargetType } from "../figma_app/191312";
 import { mapAccessLevelToProductType, AccessLevelSchema } from "../figma_app/576636";
 import { Wd } from "../figma_app/617654";
@@ -73,7 +73,7 @@ export function $$p0(e, t, r = !1, n) {
     workspace_users: e.workspaceUsers.map(h),
     is_dev_mode_beta_user: !!e.devModeBetaUsedEvent,
     is_mfa_restricted: !!getResourceDataOrFallback(e.isMfaRestricted, !1),
-    active_seat_type: TA(t?.orgUser?.activeSeatTypeUpgrade?.billableProduct),
+    active_seat_type: convertLgSeatTypeProduct(t?.orgUser?.activeSeatTypeUpgrade?.billableProduct),
     scim_seat_type: r ? $$f(o?.seatType) : null,
     active_seat_upgrade_date: E(t?.orgUser?.activeSeatTypeUpgrade, n) || void 0,
     active_seat_upgrade_method: function (e, t) {
@@ -134,7 +134,7 @@ export function $$_1(e, t) {
         org_id: _.orgId,
         email: _.email,
         account_type: _.accountType,
-        billable_product_key: h ? Zx(h) : null,
+        billable_product_key: h ? getProductAccessTypeByKey(h) : null,
         created_at: _.createdAt.toISOString(),
         updated_at: _.updatedAt.toISOString(),
         license_group_id: _.licenseGroupId,

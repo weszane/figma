@@ -10,7 +10,7 @@ import { tI } from "../figma_app/599327";
 import { hideModal } from "../905/156213";
 import { Z } from "../469e6e40/184197";
 import { TrackingProvider } from "../figma_app/831799";
-import { AG } from "../figma_app/217457";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { _k, tB } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
@@ -122,7 +122,7 @@ export let $$E0 = registerModal(function (e) {
         children: r ? getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.true_up") : getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.annual")
       }), jsx("ul", {
         className: _$$s.ml16.$,
-        children: a.sort(AG).map(e => {
+        children: a.sort(compareProductAccessTypes).map(e => {
           let t = tI(e);
           let a = y[e] ?? 0;
           return jsx("li", {

@@ -1,11 +1,11 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { K } from "../905/621769";
 import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/217163";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { $ } from "../905/330495";
@@ -45,14 +45,14 @@ export function $$f1({
   return N && w && S && (!A || C.data?.link) ? () => {
     if (t && t(), A) {
       let e = C.data?.link;
-      e && T(V3({
+      e && T(openUrlInContext({
         url: e
       }));
     } else Fullscreen.goToSymbolOrStateGroupById(N, !0);
   } : null;
 }
 export function $$E2() {
-  let e = eY();
+  let e = useSceneGraphSelector();
   let t = useOpenFileLibraryKey();
   return useCallback(r => {
     let {
@@ -65,7 +65,7 @@ export function $$E2() {
 export function $$y0() {
   let e = useDispatch();
   let t = getSelectedView();
-  let r = eY();
+  let r = useSceneGraphSelector();
   let n = $$E2();
   let a = uQ();
   let _ = useOpenFileLibraryKey();
@@ -84,7 +84,7 @@ export function $$y0() {
   });
   return f ? () => {
     let t = b.data?.link;
-    t && e(V3({
+    t && e(openUrlInContext({
       url: t
     }));
   } : () => {

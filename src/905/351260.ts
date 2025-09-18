@@ -7,7 +7,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { cL } from "../905/748726";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { bE, yH } from "../905/98702";
+import { rolePostAction, roleDeleteAction } from "../905/98702";
 import { trackFileEvent, trackRoleEvent } from "../figma_app/314264";
 import { mapResourceCategoryToRole, arrayToIdMap } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
@@ -239,7 +239,7 @@ let $$M3 = createOptimistThunk((e, {
     };
     k[t] = r;
     R = [...R, r];
-    e.dispatch(bE({
+    e.dispatch(rolePostAction({
       role: r
     }));
   }
@@ -286,7 +286,7 @@ let $$M3 = createOptimistThunk((e, {
       }, {
         forwardToDatadog: !0
       });
-      e.dispatch(bE({
+      e.dispatch(rolePostAction({
         role: n
       }));
     }
@@ -325,7 +325,7 @@ let $$M3 = createOptimistThunk((e, {
           teamId: s,
           canEditTeam: void 0
         }
-      })); else {
+      }));else {
         let t = s && {
           ...n.teams[s],
           canEdit: hasEditorRoleAccessOnTeam(s, n),
@@ -341,7 +341,7 @@ let $$M3 = createOptimistThunk((e, {
         }));
       }
     } else e.dispatch(FlashActions.error(n.message));
-    for (let t of N) e.dispatch(yH({
+    for (let t of N) e.dispatch(roleDeleteAction({
       role: k[t]
     }));
     v?.();
@@ -363,7 +363,7 @@ let $$M3 = createOptimistThunk((e, {
   }, O);
 });
 let j = (e, t, i) => {
-  if (i) for (let n of e) t(yH({
+  if (i) for (let n of e) t(roleDeleteAction({
     role: i[n.email]
   }));
 };

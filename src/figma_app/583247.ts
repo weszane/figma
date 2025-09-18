@@ -1,17 +1,17 @@
 import { uN } from "../figma_app/338442";
 import { ComponentPropType, VariableSetErrorType } from "../figma_app/763686";
-import { Mz } from "../vendor/925040";
-import { P8 } from "../905/270781";
+import { createSelector } from "../vendor/925040";
+import { createDeepEqualSelector } from "../905/270781";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { g } from "../905/578436";
-import { dK, Sh } from "../figma_app/889655";
+import { selectSceneGraph, selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yi, aO, f3 } from "../figma_app/164212";
 import { s as _$$s } from "../figma_app/335489";
 import { uL, NE, xJ } from "../figma_app/264776";
 import { C1, nM, tK, d as _$$d } from "../figma_app/505098";
 export function $$m0() {
-  return P8([uL, C1, dK, (e, t) => t], (e, t, r, n) => {
+  return createDeepEqualSelector([uL, C1, selectSceneGraph, (e, t) => t], (e, t, r, n) => {
     if (!t || 0 === n.length) return [];
     let a = Yi(n, r) ?? nM(r, n);
     if (!a || n.includes(a)) return [];
@@ -43,16 +43,16 @@ export function $$m0() {
     });
   });
 }
-let $$g3 = () => P8([C1, tK(), _$$d()], (e, t, r) => {
+let $$g3 = () => createDeepEqualSelector([C1, tK(), _$$d()], (e, t, r) => {
   if (!e) return [];
   let n = r ?? t;
   return n ? $$y1(n, e) : [];
 });
 let $$f4 = (() => {
   let e = $$g3();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-let $$E2 = Mz([$$f4], e => {
+let $$E2 = createSelector([$$f4], e => {
   let t = e.map(e => e.name);
   let r = getI18nString("design_systems.component_properties.variant_property_default_name");
   return g(r, t);

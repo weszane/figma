@@ -7,7 +7,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { Point } from "../905/736624";
 import { GI, IZ, SK } from "../905/125333";
 import { SvgComponent } from "../905/714743";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { jS, Pv } from "../905/619652";
 import { R as _$$R } from "../figma_app/640506";
 import { uM, Iz } from "../905/888175";
@@ -42,8 +42,8 @@ export function $$S1({
 }) {
   let t = useAtomWithSubscription(GI);
   let r = useAtomWithSubscription(IZ);
-  let i = F.format(t.paints?.[0]?.color);
-  let a = F.format(r.paints?.[0]?.color);
+  let i = colorCSSManipulatorInstance.format(t.paints?.[0]?.color);
+  let a = colorCSSManipulatorInstance.format(r.paints?.[0]?.color);
   return "set-tool-eraser" === e ? jsx($$N2, {
     type: "Eraser",
     size: "Big"

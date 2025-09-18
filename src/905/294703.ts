@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, Fragment as _$$Fragment } from "react";
 import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jM, CZ, L8 } from "../905/124270";
 import { GX } from "../905/171315";
@@ -312,7 +312,7 @@ export function $$z0({
     });
     let a = useSelector(e => e.loadingState[r]);
     let l = useAtomWithSubscription(L8);
-    a === _$$r.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(ej({
+    a === APILoadingStatus.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(ej({
       lastAckedQueryId: t.queryId
     })), e(w2({
       sessionId: t.sessionId,
@@ -323,7 +323,7 @@ export function $$z0({
   }();
   let C = useAtomWithSubscription(sC);
   let T = _$$y("file_browser", C, !0);
-  let k = useMemo(() => !w || w === _$$r.LOADING || !deepEqual(b, v), [v, w, b]);
+  let k = useMemo(() => !w || w === APILoadingStatus.LOADING || !deepEqual(b, v), [v, w, b]);
   let R = useMemo(() => {
     if (!E) return !1;
     for (let e of I) {

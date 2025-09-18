@@ -7,7 +7,7 @@ import { SvgComponent } from "../905/714743";
 import { e6 } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { nl, Pf } from "../905/590952";
-import { lx } from "../figma_app/297957";
+import { useFileInviteWithSeatExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { useCurrentPlanUser, useIsAdminUser } from "../figma_app/465071";
@@ -24,7 +24,7 @@ export function $$x2(e) {
   let i = "level-change-dropdown";
   let s = useDispatch();
   let o = _$$o();
-  let p = lx()({
+  let p = useFileInviteWithSeatExperiment()({
     rolePending: e.pending,
     inviteBillableProductKey: e.invite?.billableProductKey,
     editorType: e.editorType,

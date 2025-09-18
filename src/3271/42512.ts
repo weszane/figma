@@ -101,7 +101,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { s7 } from "../905/551193";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FUserRoleType } from "../figma_app/191312";
-import { mC } from "../905/18797";
+import { useIsLoaded } from "../905/18797";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getWidgetAllowListKey, getPluginAllowListKey } from "../figma_app/155287";
 import { A as _$$A8 } from "../svg/987294";
@@ -904,7 +904,7 @@ function tM(e) {
   let g = c ? o : l;
   let h = c ? getWidgetAllowListKey : getPluginAllowListKey;
   let v = useCurrentFileKey();
-  let f = mC(h(currentOrgId, v));
+  let f = useIsLoaded(h(currentOrgId, v));
   let j = ll();
   let y = bT(Object.values(j)).map(e => e.plugin_id);
   let w = U6();

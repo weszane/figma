@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import utc from 'dayjs/plugin/utc'
 import d from '../vendor/157822'
 import _ from '../vendor/173414'
@@ -12,7 +13,7 @@ import y from '../vendor/979683'
 
 let s = a
 let l = o
-let c = d
+
 let p = u
 let h = m
 let f = g
@@ -22,7 +23,7 @@ dayjs.extend(f())
 dayjs.extend(utc)
 dayjs.extend(s())
 dayjs.extend(l())
-dayjs.extend(c())
+dayjs.extend(isSameOrAfter)
 dayjs.extend(p())
 dayjs.extend(h())
 dayjs.extend($$A())

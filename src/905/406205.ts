@@ -24,7 +24,7 @@ import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { kg, UN } from "../figma_app/976345";
+import { trackNavTreeClicked, trackFileClicked } from "../figma_app/976345";
 import { R as _$$R } from "../905/731725";
 import { W as _$$W } from "../905/95038";
 import { E as _$$E2 } from "../905/391888";
@@ -111,7 +111,7 @@ function em(e) {
   let x = YO(e.folder.id);
   let S = _$$E2();
   let w = n => {
-    "trashedFolders" !== o.view && (t(kg({
+    "trashedFolders" !== o.view && (t(trackNavTreeClicked({
       clickedResourceType: "team",
       resourceIdOrKey: e.folder.id
     })), trackFolderEvent("file_browser_folder_click", e.folder.id, e.folder.team_id, i, {
@@ -124,7 +124,7 @@ function em(e) {
   let C = "loaded" === x.status && !!x.data?.canEdit;
   let T = useCallback(e => {
     if ("trashedFolders" === o.view) return;
-    t(UN({
+    t(trackFileClicked({
       fileKey: e.key,
       entrypoint: "folder list card"
     }));

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { atom } from "../figma_app/27355";
-import { O5 } from "../figma_app/632319";
+import { useEventListener } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
 import { getI18nString } from "../905/303541";
 import { createOptimistThunk } from "../905/350402";
@@ -31,10 +31,10 @@ export function $$m6(e, t = !1) {
   let E = useCallback(() => {
     t && f();
   }, [f, t]);
-  O5(e, "navigationInfoInvalidated", f);
-  O5(e, "topLevelFramesListInvalidated", f);
-  O5(e, "topLevelFrameChange", f);
-  O5(e, "baseScreenChanged", E);
+  useEventListener(e, "navigationInfoInvalidated", f);
+  useEventListener(e, "topLevelFramesListInvalidated", f);
+  useEventListener(e, "topLevelFrameChange", f);
+  useEventListener(e, "baseScreenChanged", E);
   useEffect(() => {
     f();
   }, [f]);

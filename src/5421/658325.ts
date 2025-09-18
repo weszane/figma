@@ -19,12 +19,12 @@ import { X } from "../905/190511";
 import { _j } from "../figma_app/843119";
 import { normalizeValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { R1, u3 } from "../figma_app/152690";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { TrackingProvider } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { kl, lJ } from "../905/275640";
-import { KH, eY } from "../figma_app/722362";
-import { UA } from "../905/250387";
+import { useSceneGraphSelection, useSceneGraphSelector } from "../figma_app/722362";
+import { copyHyperlinkToClipboard } from "../905/250387";
 import { xT } from "../figma_app/841415";
 import { k as _$$k2 } from "../5421/193325";
 import { Bs } from "../figma_app/84580";
@@ -62,8 +62,8 @@ export function $$z0({
   recordingKey: t
 }) {
   let n = useSelector(Cy);
-  let a = KH();
-  let l = eY();
+  let a = useSceneGraphSelection();
+  let l = useSceneGraphSelector();
   let s = function () {
     let e = trackFileEventWithStore();
     return useCallback(t => {
@@ -376,7 +376,7 @@ function Z({
   recordingKey: f
 }) {
   let [v, E] = lJ("hyperlink");
-  let j = KH();
+  let j = useSceneGraphSelection();
   let {
     variableConsumptionMap,
     setVariableConsumptionMap
@@ -498,7 +498,7 @@ function G({
   let j = e && !isInvalidValue(e) && ("url" === e.type || "cms_link_field_alias" === e.type);
   let N = e && !isInvalidValue(e) && e?.type === "url" && (e?.url.startsWith("mailto:") || e?.url.startsWith("tel:"));
   let A = useCallback(t => {
-    !e || isInvalidValue(e) || e?.type !== "url" || (N ? UA(E, e.url, "sites-link-panel") : E(RK({
+    !e || isInvalidValue(e) || e?.type !== "url" || (N ? copyHyperlinkToClipboard(E, e.url, "sites-link-panel") : E(setupHyperlinkHandler({
       rawInput: e.url,
       event: t
     })));

@@ -6,10 +6,10 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useWebLoggerTimer } from "../905/485103";
 import { EH } from "../905/985374";
-import { wu } from "../figma_app/297957";
+import { useSocialProofExpansionExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { isFullscreenView } from "../figma_app/976749";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { ProductAccessTypeMap } from "../905/513035";
 import { NT } from "../figma_app/579169";
 import { FProductAccessType } from "../figma_app/191312";
@@ -167,9 +167,9 @@ export function $$v0(e) {
   }) : null;
 }
 function A(e) {
-  let t = DP();
+  let t = getVisibleTheme();
   let r = isFullscreenView();
-  let o = wu({
+  let o = useSocialProofExpansionExperiment({
     licenseType: e.licenseType,
     entryPoint: e.entryPoint,
     isOrgGuest: e.planData.isOrgGuest,

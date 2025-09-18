@@ -1,4 +1,13 @@
-import { atom } from "../figma_app/27355";
-import { r as _$$r } from "../905/520829";
-export let $$a0 = atom(_$$r.INIT);
-export const g = $$a0;
+import { atom } from '../figma_app/27355'
+
+/**
+ * Atom representing the initial state.
+ * Original export: $$a0
+ */
+export const initialStateAtom = atom('INIT')
+
+/**
+ * Alias for initialStateAtom.
+ * Original export: g
+ */
+export const g = initialStateAtom

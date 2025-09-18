@@ -1,8 +1,8 @@
 import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { P8 } from "../905/270781";
+import { createDeepEqualSelector } from "../905/270781";
 import { getProductType, getSlideViewAnalytics, getLoadID, getReconnectId } from "../figma_app/314264";
-export let $$o0 = P8([({
+export let $$o0 = createDeepEqualSelector([({
   openFile: e,
   fileByKey: t,
   selectedView: i

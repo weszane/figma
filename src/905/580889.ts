@@ -7,7 +7,7 @@ import { PerfTimer } from "../905/609396";
 import { fi } from "../figma_app/913823";
 import { selectCurrentFile } from "../figma_app/516028";
 import { createTrackedAtom } from "../figma_app/615482";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 let m = "performance.ds_eco.instance_swap_picker_loading";
 let h = new PerfTimer(m, {});
 let g = createTrackedAtom(!1);
@@ -15,7 +15,7 @@ export function $$f0(e) {
   let t = selectCurrentFile();
   let i = useSelector(e => e.loadingState);
   let [l, u] = useAtomValueAndSetter(g);
-  let f = e || VP(i, fi);
+  let f = e || isLoading(i, fi);
   _$$h(() => {
     if (!l) {
       h.start();

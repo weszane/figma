@@ -26,7 +26,7 @@ import { BannerMessage } from "../905/363675";
 import { N as _$$N2 } from "../905/572042";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { JT, tI } from "../figma_app/599327";
 import { I as _$$I } from "../905/343211";
 import { h as _$$h2, d as _$$d } from "../figma_app/603561";
@@ -40,8 +40,8 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { zz } from "../figma_app/80683";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { Ye } from "../905/332483";
-import { AG, _w } from "../figma_app/217457";
+import { viewCollaboratorSet } from "../905/332483";
+import { compareProductAccessTypes, useFormatProductNamesForSeatType } from "../figma_app/217457";
 import { t as _$$t2 } from "../905/150656";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { T as _$$T } from "../figma_app/257703";
@@ -79,7 +79,7 @@ function T({
 }
 function W(e) {
   let [n] = handleSuspenseRetainRelease(function (e) {
-    let n = _$$k();
+    let n = isProrationBillingEnabledForCurrentPlan();
     let t = _$$h2({
       planType: e.type,
       planParentId: e.key.parentId
@@ -154,7 +154,7 @@ function Q({
   });
   let a = W(e);
   return jsx(mc, {
-    children: Ye.sort(AG).map(r => r === ViewAccessTypeEnum.VIEW ? jsx(U, {
+    children: viewCollaboratorSet.sort(compareProductAccessTypes).map(r => r === ViewAccessTypeEnum.VIEW ? jsx(U, {
       planTier: e.tier,
       seatType: r
     }, r) : jsx(U, {
@@ -174,7 +174,7 @@ function U({
   let s = useMemo(() => t ? new CurrencyFormatter(t.currency).formatMoney(t.amount, {
     showCents: !1
   }) : null, [t]);
-  let l = _w({
+  let l = useFormatProductNamesForSeatType({
     overridePlanTier: n
   });
   return jsx(c$, {
@@ -262,7 +262,7 @@ function en({
   seatType: n,
   hideCostMessaging: t
 }) {
-  let s = _$$k();
+  let s = isProrationBillingEnabledForCurrentPlan();
   let l = _$$I(e);
   let o = "loaded" === l.status && !l.data;
   let d = _$$d({

@@ -13,7 +13,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
 import { Wo } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
@@ -22,7 +22,7 @@ import { ol } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { U as _$$U } from "../905/506188";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -240,8 +240,8 @@ export function $$G0(e) {
   }(showLibrarySets, consumptionTarget, recordingKey);
   let M = Um();
   let G = trackDefinedFileEventWithStore();
-  let H = hA();
-  let z = Fk((e, t) => {
+  let H = useDevModeFocusId();
+  let z = useDeepEqualSceneValue((e, t) => {
     let r = e.get(t);
     return r?.type;
   }, H);

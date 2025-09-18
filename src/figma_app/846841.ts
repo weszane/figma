@@ -29,7 +29,7 @@ import { fi } from "../figma_app/913823";
 import { u as _$$u } from "../905/389684";
 import { g5 } from "../figma_app/178752";
 import { selectCurrentFile, openFileKeyAtom } from "../figma_app/516028";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
@@ -373,7 +373,7 @@ export function $$eR6({
       children: renderI18nText("assets_in_actions.detail_view.community_tab.title")
     })]
   });
-  let tO = oh(fi);
+  let tO = useIsLoading(fi);
   let tR = g5(FDocumentType.Design).productComponents;
   let tL = !currentSearch && !tO && (!tR.length || kK());
   let tP = !Q || tL;

@@ -4,7 +4,7 @@ import { uN } from "../figma_app/338442";
 import { ComponentPropType, ComponentType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { createOptimistThunk } from "../905/350402";
 import { tL } from "../figma_app/933328";
 import { CG, NY } from "../figma_app/646357";
@@ -50,7 +50,7 @@ let w = createOptimistThunk((e, {
 }) => {
   tL(r, t, e, C(e, n));
 });
-let O = () => Mz([Qp, (e, t) => t], (e, t) => {
+let O = () => createSelector([Qp, (e, t) => t], (e, t) => {
   let r = [];
   let n = [];
   t.forEach(t => {

@@ -44,7 +44,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { isDesignFileType } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { J as _$$J } from "../5132/948584";
 import { l as _$$l } from "../905/241412";
 import { ed as _$$ed, nK, UY, th, BA, EG, iw, OW, UU, eF, so, aD, jL, Zd, Dc, fI as _$$fI, p1, bI, cl, dj, VW } from "../figma_app/391215";
@@ -125,9 +125,9 @@ function er(e) {
 function en() {
   let e = isDesignFileType();
   let t = useIsCurrentUserCreator();
-  let r = _$$f(Z);
-  let n = _$$f(Q);
-  let i = _$$f(ee);
+  let r = selectUserFlag(Z);
+  let n = selectUserFlag(Q);
+  let i = selectUserFlag(ee);
   return !!e && !!t && !r && !n && !i;
 }
 function ei() {

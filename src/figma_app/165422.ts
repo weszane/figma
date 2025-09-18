@@ -15,7 +15,7 @@ import { z4 } from "../905/37051";
 import { getSelectedView } from "../figma_app/386952";
 import { aq } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
-import { ju } from "../905/187165";
+import { getEditorViewType } from "../905/187165";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { isFullscreenDevHandoffView } from "../905/782918";
@@ -46,7 +46,7 @@ function O() {
 export function $$R1() {
   let e = getSelectedView();
   if ("fullscreen" !== e.view) return null;
-  let t = ju(e);
+  let t = getEditorViewType(e);
   return jsx(k, {
     editorType: mapEditorTypeToFileType(e.editorType),
     progressPaused: !0,

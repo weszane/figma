@@ -20,7 +20,7 @@ import { CZ } from "../905/294085";
 import { hO, G4, Hl } from "../figma_app/545293";
 import { useCurrentFileKey, openFileKeyAtom } from "../figma_app/516028";
 import { C as _$$C } from "../905/758411";
-import { xp } from "../905/966582";
+import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { I as _$$I } from "../figma_app/130633";
 import { Ee } from "../figma_app/392189";
 import { b as _$$b } from "../figma_app/598297";
@@ -366,7 +366,7 @@ export let $$eu0 = forwardRef(({
   return jsx("input", {
     type: "file",
     ref: s,
-    accept: xp.join(","),
+    accept: IMAGE_TYPE_VALUES.join(","),
     onChange: d,
     multiple: !1,
     className: _$$s2.hidden.$

@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { revokeThumbnailUrl, generateNodeThumbnail } from "../figma_app/80990";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { J } from "../905/273120";
 let p = createRemovableAtomFamily(e => atom(null, (t, i, n) => {
   let r = t(p(e));
@@ -15,7 +15,7 @@ let p = createRemovableAtomFamily(e => atom(null, (t, i, n) => {
 export function $$m0(e) {
   let t = e.pageId;
   let [i, m] = useAtomValueAndSetter(p(t));
-  let h = Fk(e => e.get(t)?.thumbnailInfo);
+  let h = useDeepEqualSceneValue(e => e.get(t)?.thumbnailInfo);
   let g = getFeatureFlags().dse_library_pg_thumbnails && h?.nodeID !== defaultSessionLocalIDString;
   let f = useCallback(() => {
     requestAnimationFrame(() => {

@@ -1,56 +1,108 @@
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import { r as _$$r } from "../905/520829";
-import { createOptimistThunk } from "../905/350402";
-import { uo } from "../905/395917";
-import { batchPutPlan } from "../905/93909";
-import { uo as _$$uo2 } from "../figma_app/240735";
-import { xN } from "../905/672897";
-import { UserAPIHandlers } from "../905/93362";
-import { g as _$$g } from "../905/347448";
-let $$m0 = createOptimistThunk(async (e, {
-  loadedPlans: t
+import { UserAPIHandlers } from '../905/93362';
+import { batchPutPlan } from '../905/93909';
+import { initialStateAtom } from '../905/347448';
+import { createOptimistThunk } from '../905/350402';
+import { orgsBatchPut } from '../905/395917';
+import { APILoadingStatus } from '../905/520829';
+import { getFeatureFlags } from '../905/601108';
+import { fetchTeamRoles } from '../905/672897';
+import { atomStoreManager } from '../figma_app/27355';
+import { batchPutTeamAction } from '../figma_app/240735';
+
+/**
+ * Types for plan, team, and org meta data.
+ */
+interface PlanMeta {
+  plans: any[];
+  teams: TeamMeta[];
+  orgs: OrgMeta[];
+}
+interface TeamMeta {
+  id: string;
+  // Add other team properties as needed
+}
+interface OrgMeta {
+  // Add org properties as needed
+}
+
+/**
+ * Thunk to optimistically load plans, teams, and orgs if not already loaded.
+ * Original: $$m0
+ */
+export const setupOptimistPlanLoader = createOptimistThunk(async (dispatchContext, {
+  loadedPlans
 }) => {
-  if (!t || !(t.length > 0)) try {
-    let t = await UserAPIHandlers.getPlans();
-    e.dispatch(batchPutPlan({
-      plans: t.data.meta.plans
-    }));
-    e.dispatch(_$$uo2({
-      teams: t.data.meta.teams
-    }));
-    e.dispatch(uo({
-      orgs: t.data.meta.orgs
-    }));
-    let i = t.data.meta.teams;
-    getFeatureFlags().close_starter_team_loophole_v2 && (await Promise.all(i.map(t => xN(t.id, e))));
-  } catch (e) {}
-});
-let $$h1 = (e = !1) => async t => {
-  try {
-    return await g(t, e);
-  } catch (e) {
-    return Promise.reject(e);
+  if (!loadedPlans || loadedPlans.length === 0) {
+    try {
+      const response = await UserAPIHandlers.getPlans();
+      const meta: PlanMeta = response.data.meta;
+      dispatchContext.dispatch(batchPutPlan({
+        plans: meta.plans
+      }));
+      dispatchContext.dispatch(batchPutTeamAction({
+        teams: meta.teams
+      }));
+      dispatchContext.dispatch(orgsBatchPut({
+        orgs: meta.orgs
+      }));
+
+      // If feature flag is enabled, close starter team loophole for each team
+      if (getFeatureFlags().close_starter_team_loophole_v2) {
+        await Promise.all(meta.teams.map(team => fetchTeamRoles(team.id, dispatchContext)));
+      }
+    } catch {
+      // Silently fail
+    }
   }
-};
-async function g(e, t = !1) {
-  let i = atomStoreManager.get(_$$g);
-  if (!t && i !== _$$r.INIT && i !== _$$r.LOADING) return i;
+});
+
+/**
+ * Returns a thunk that loads plans for authenticated users.
+ * Original: $$h1
+ * @param forceReload - Whether to force reload plans
+ */
+export function setupAuthedUserPlanLoader(forceReload = false) {
+  return async (dispatch: Fn) => {
+    try {
+      return await loadAuthedUserPlans(dispatch, forceReload);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+}
+
+/**
+ * Loads plans for authenticated users, updating atom state and dispatching team/org actions.
+ * Original: g
+ * @param dispatch - Redux dispatch function
+ * @param forceReload - Whether to force reload plans
+ */
+async function loadAuthedUserPlans(dispatch: Fn, forceReload = false) {
+  let apiStatus = atomStoreManager.get(initialStateAtom);
+
+  // Only proceed if forced or status is INIT/LOADING
+  if (!forceReload && apiStatus !== APILoadingStatus.INIT && apiStatus !== APILoadingStatus.LOADING) {
+    return apiStatus;
+  }
   try {
-    i === _$$r.INIT && atomStoreManager.set(_$$g, _$$r.LOADING);
-    let t = await UserAPIHandlers.getPlansForAuthedUsers();
-    atomStoreManager.set(_$$g, t);
-    e(_$$uo2({
-      teams: t.teams
+    if (apiStatus === APILoadingStatus.INIT) {
+      atomStoreManager.set(initialStateAtom, APILoadingStatus.LOADING);
+    }
+    const plansData = await UserAPIHandlers.getPlansForAuthedUsers();
+    atomStoreManager.set(initialStateAtom, plansData);
+    dispatch(batchPutTeamAction({
+      teams: plansData.teams
     }));
-    e(uo({
-      orgs: t.orgs
+    dispatch(orgsBatchPut({
+      orgs: plansData.orgs
     }));
-    return t;
-  } catch (e) {
-    i === _$$r.LOADING && atomStoreManager.set(_$$g, _$$r.INIT);
-    return Promise.reject(e);
+    return plansData;
+  } catch (error) {
+    if (apiStatus === APILoadingStatus.LOADING) {
+      atomStoreManager.set(initialStateAtom, APILoadingStatus.INIT);
+    }
+    return Promise.reject(error);
   }
 }
-export const hr = $$m0;
-export const nm = $$h1;
+export const hr = setupOptimistPlanLoader;
+export const nm = setupAuthedUserPlanLoader;

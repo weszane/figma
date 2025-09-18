@@ -5,12 +5,12 @@ import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { ez, SK, U9, wp } from "../905/125333";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { LR } from "../figma_app/120210";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
 import { Wd_ } from "../figma_app/6204";
@@ -163,7 +163,7 @@ let ec = memo(function ({
       source: fK
     }));
   }, [p, d]);
-  let j = _$$F.format(l);
+  let j = colorCSSManipulatorInstance.format(l);
   let [y, v] = useState(!1);
   let {
     openColorPalettePicker,
@@ -445,7 +445,7 @@ function ep({
         }
       },
       children: x && !j ? !k && jsx(A.Icon, {
-        color: _$$F.format(t),
+        color: colorCSSManipulatorInstance.format(t),
         toolbarIconScale: .2,
         isBeingDraggedForPlacement: x,
         shapeStrokeProps: {
@@ -554,7 +554,7 @@ let eS = memo(function ({
   let _ = _$$C();
   let x = AE();
   let j = useAtomWithSubscription(ez);
-  let C = _$$F.format(j);
+  let C = colorCSSManipulatorInstance.format(j);
   let T = useAtomWithSubscription(U9);
   let E = Qd().get(h);
   let [S, w] = useAtomValueAndSetter(oh);
@@ -735,13 +735,13 @@ function eN({
   let {
     state
   } = useContext(nS);
-  let l = aV();
+  let l = useIsProgressBarHiddenOrLocked();
   let p = Uo();
   let h = _$$C();
   let m = AE();
   let x = useAtomWithSubscription(SK).connectorToolLineStyle;
   let j = useAtomWithSubscription(wp);
-  let C = _$$F.format(j);
+  let C = colorCSSManipulatorInstance.format(j);
   let [T, E] = useAtomValueAndSetter(oh);
   let S = "open" === T.state && "shape" === T.tool;
   let w = LR();

@@ -8,7 +8,7 @@ import { partitionByPredicate } from "../905/918929";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { bj } from "../905/420347";
 import { e6, _x, qE } from "../905/404538";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 import { C9, jf, MH } from "../figma_app/141508";
 import { Fullscreen } from "../figma_app/763686";
 import { useMultiSubscription } from "../figma_app/288654";
@@ -18,7 +18,7 @@ import { LH } from "../905/872904";
 import { StyleByKey } from "../figma_app/43951";
 let g = e => useMemo(() => "loaded" === e.status ? new Set(e.data) : new Set(), [e]);
 let f = D(() => {
-  let e = useSelector(dK);
+  let e = useSelector(selectSceneGraph);
   let t = useSelector(C9);
   let i = useSelector(jf);
   return useMemo(() => {
@@ -28,7 +28,7 @@ let f = D(() => {
   }, [e, t, i]);
 });
 let E = D(() => {
-  let e = useSelector(dK);
+  let e = useSelector(selectSceneGraph);
   let t = useSelector(MH);
   return useMemo(() => {
     let i = new Set();

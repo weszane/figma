@@ -6,7 +6,7 @@ import { mG } from "../figma_app/15924";
 import { getBuyOrSubscribeLabel } from "../figma_app/808294";
 import { handleStripeManageSubscription } from "../905/581647";
 import { showModalHandler } from "../905/156213";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { a as _$$a } from "../figma_app/453187";
 import { Gt } from "../figma_app/248118";
 import { V2 } from "../figma_app/844435";
@@ -70,7 +70,7 @@ export function $$O0({
   let Y = V2();
   let $ = useCallback(() => {
     close();
-    _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+    _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
   }, [close]);
   let X = useCallback(() => {
     manifestContainsWidget(extension) ? permissionScopeHandler.user("insert-widget", () => R(extension)) : H && t ? W(t.current) : V();

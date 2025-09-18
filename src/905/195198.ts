@@ -9,7 +9,7 @@ import { ButtonBasePrimary } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../905/192768";
 import { showModalHandler, popModalStack, hideSpecificModal } from "../905/156213";
-import { yH } from "../figma_app/240735";
+import { deleteTeamAction } from "../figma_app/240735";
 import { TrackingProvider } from "../figma_app/831799";
 import { FAccessLevelType, FPaymentHealthStatusType } from "../figma_app/191312";
 import { TeamById } from "../figma_app/43951";
@@ -49,7 +49,7 @@ let $$S0 = registerModal(function (e) {
   });
   let w = S.data;
   let C = () => {
-    i(yH({
+    i(deleteTeamAction({
       team: o,
       userInitiated: !0
     }));

@@ -1,7 +1,7 @@
 import { Fullscreen } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 export function $$o0({
   isReplay: e,
   props: t
@@ -10,7 +10,7 @@ export function $$o0({
   let o;
   let l;
   let d;
-  let c = f("cursor_bot_v2_make_show_me_primary_cta");
+  let c = selectUserFlag("cursor_bot_v2_make_show_me_primary_cta");
   let u = () => {
     t.onClickNext?.();
     Fullscreen.triggerActionInUserEditScope("set-tool-default", null);

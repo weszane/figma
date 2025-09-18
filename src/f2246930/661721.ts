@@ -10,19 +10,19 @@ import { useDebounce } from 'use-debounce';
 import { NY, ux } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
-import { P8 } from "../905/270781";
+import { createDeepEqualSelector } from "../905/270781";
 import { Bn } from "../905/879323";
 import { Dm } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Z } from "../905/224161";
-import { dB } from "../905/640017";
+import { useCurrentTheme } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { expandNodeToRoot, clearSelection } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { nt } from "../9314/278494";
-import { Xt } from "../figma_app/889655";
+import { selectSceneGraphSelection } from "../figma_app/889655";
 import { G2 } from "../figma_app/314591";
 import { multiValueMapAtom } from "../905/755472";
 import { lu } from "../905/545842";
@@ -125,7 +125,7 @@ function I({
       }));
     } else b(ux());
   }, [w, b, S, E, m, O, L]);
-  let M = dB();
+  let M = useCurrentTheme();
   let F = useRef(null);
   Z("legacy" === M ? "light" : M, F, c);
   let I = getCurrentFileType();
@@ -193,7 +193,7 @@ class D extends PureComponent {
     return this.state.hasError ? null : this.props.children;
   }
 }
-let J = P8([Xt, nt], (e, t) => {
+let J = createDeepEqualSelector([selectSceneGraphSelection, nt], (e, t) => {
   let l = Object.keys(e);
   if (l.length > 0) return {
     selectionType: "canvas",

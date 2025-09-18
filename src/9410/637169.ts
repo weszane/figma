@@ -8,7 +8,7 @@ import { analyticsEventManager } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { cR } from "../figma_app/297957";
+import { useRfdSignalsUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -109,7 +109,7 @@ export function $$O1() {
   let O = useAtomWithSubscription(Sp);
   let L = Xr(Sp);
   let R = Z("dev-handoff-rfd-signals-page-upsell");
-  let D = cR();
+  let D = useRfdSignalsUpsellExperiment();
   let {
     show,
     complete,

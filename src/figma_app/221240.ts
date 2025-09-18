@@ -7,10 +7,10 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { ReduxSceneGraph } from "../905/700578";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { teamLibraryCache } from "../figma_app/80990";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { liveStoreInstance } from "../905/713695";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Z } from "../905/939602";
 import { Yi } from "../figma_app/164212";
 import { nM } from "../figma_app/505098";
@@ -69,7 +69,7 @@ export function $$v3({
   let t = function (e) {
     let t = useSelector(selectOpenFileKey);
     let r = useOpenFileLibraryKey();
-    let n = Fk((e, t) => {
+    let n = useDeepEqualSceneValue((e, t) => {
       let r = e?.get(t ?? "");
       return r?.type === "SYMBOL" || r?.type === "INSTANCE" ? void 0 : r?.detachedInfo;
     }, e);
@@ -174,7 +174,7 @@ export function $$x0(e, t) {
         backingStateGroup: null
       };
     }
-  }(eY(), r) || {
+  }(useSceneGraphSelector(), r) || {
     backingSymbol: e,
     backingStateGroup: t
   };
@@ -190,7 +190,7 @@ export function $$C2(e, t) {
   };
 }
 export function $$w1() {
-  let e = eY();
+  let e = useSceneGraphSelector();
   let t = $$A4();
   let [r, n] = Bx();
   if ("loaded" === t.status) {

@@ -2,7 +2,7 @@ import { shuffle } from "../figma_app/656233";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { eS } from "../figma_app/33126";
-import { f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { useCurrentPublicPlan, useIsOrgOrEnterprisePlan } from "../figma_app/465071";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 let c = atom(() => ({
@@ -121,7 +121,7 @@ function b() {
 export function $$f0(e) {
   let t = useIsSelectedFigmakeFullscreen();
   let a = useAtomWithSubscription(eS);
-  let s = f("not_gen_0");
+  let s = selectUserFlag("not_gen_0");
   let u = function () {
     let {
       questionKey,

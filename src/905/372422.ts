@@ -2,7 +2,7 @@ import { useMemo, useRef, useEffect } from "react";
 import { DesignWorkspace, Fullscreen, PrototypingTsApi } from "../figma_app/763686";
 import { Z } from "../905/104740";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { Y } from "../905/462154";
 import { x } from "../905/628884";
 export function $$c0({
@@ -14,7 +14,7 @@ export function $$c0({
     generatedInteractions
   } = e;
   let u = useMemo(() => generatedInteractions.map(e => e.id), [generatedInteractions]);
-  let p = useRef(eY());
+  let p = useRef(useSceneGraphSelector());
   useEffect(() => {
     setPropertiesPanelTab(DesignWorkspace.PROTOTYPE);
     i(Y(generatedInteractions.map(e => e.mapping), p.current));

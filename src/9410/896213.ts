@@ -27,8 +27,8 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W } from "../3276/514864";
-import { gR } from "../figma_app/976345";
-import { ZO } from "../figma_app/88239";
+import { toggleDropdown } from "../figma_app/976345";
+import { useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { hideDropdownAction } from "../905/929976";
 import { J4 } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
@@ -650,7 +650,7 @@ let $$eO0 = memo(function (e) {
   let w = useRef(null);
   let j = useRef(null);
   let I = wF();
-  let k = ZO();
+  let k = useIsFullscreenDevModeComponentBrowser();
   let N = isUserNotLoggedInAndEditorSupported();
   let O = WN();
   let M = useDispatch();
@@ -679,7 +679,7 @@ let $$eO0 = memo(function (e) {
     if (dG(e), !_.current) return;
     x.current = _.current.getBoundingClientRect();
     let t = dropdownShown?.type === eA;
-    M(gR({
+    M(toggleDropdown({
       type: eA
     }));
     t || eu("Multiplayer Tools Opened", {

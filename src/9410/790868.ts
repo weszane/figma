@@ -8,7 +8,7 @@ import { handleAtomEvent } from "../905/502364";
 import { Yh } from "../figma_app/888478";
 import { J } from "../905/445197";
 import { dh, rE, zO, CQ, $P } from "../figma_app/186343";
-import { Fy } from "../figma_app/623300";
+import { getNodeStatus } from "../figma_app/623300";
 import { selectCurrentFile } from "../figma_app/516028";
 import { W, d as _$$d } from "../figma_app/833988";
 import { l7, oZ } from "../figma_app/932601";
@@ -61,14 +61,14 @@ export function $$_0(e) {
         r += 1;
         n = e[r];
       }
-      if (n) J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T));else {
+      if (n) J(() => $P(n.nodeId, t, E, C, getNodeStatus(e, n.nodeId) === DataLoadStatus.LOADED, T));else {
         let r = i - 1;
         let n = e[r];
         for (; n && n.isDivider;) {
           r -= 1;
           n = e[r];
         }
-        n ? J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T)) : v(null);
+        n ? J(() => $P(n.nodeId, t, E, C, getNodeStatus(e, n.nodeId) === DataLoadStatus.LOADED, T)) : v(null);
       }
     }
     _(e => e === i ? null : e);

@@ -13,7 +13,7 @@ import { sT } from "../figma_app/740163";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
-import { f4 } from "../figma_app/722362";
+import { useOnSelectionChange } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { $j } from "../figma_app/178475";
@@ -40,7 +40,7 @@ export function $$N0({
   useEffect(() => {
     e !== om.CUSTOM && h !== e && i(h);
   }, [h, i]);
-  f4(() => {
+  useOnSelectionChange(() => {
     i(h);
   });
   let g = u?.type === R;

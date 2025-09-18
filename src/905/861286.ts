@@ -5,7 +5,7 @@ import { h as _$$h } from "../905/207101";
 import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S } from "../905/339549";
-import { yM, DP } from "../905/640017";
+import { useThemeContext, getVisibleTheme } from "../905/640017";
 import { E } from "../905/712094";
 import { zY } from "../905/148137";
 import { isAddressEmpty, createEmptyAddress } from "../figma_app/831101";
@@ -134,8 +134,8 @@ function b(e) {
   });
 }
 export function $$v0(e) {
-  let t = yM();
-  let i = DP();
+  let t = useThemeContext();
+  let i = getVisibleTheme();
   let r = y("colorText", i, t);
   let a = y("colorIcon", i, t);
   let s = y("colorTextSecondary", i, t);

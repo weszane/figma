@@ -8,7 +8,7 @@ import { FOrganizationLevelType } from '../figma_app/421473';
 import { un } from '../figma_app/457899';
 import { CurrencyFormatter } from '../figma_app/514043';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
-import { k } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { I1 } from '../figma_app/990058';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$h0(e, t) {
@@ -19,7 +19,7 @@ export function $$h0(e, t) {
   let {
     seatAvailability
   } = _$$k(e);
-  let f = k();
+  let f = isProrationBillingEnabledForCurrentPlan();
   let [v, b] = useState();
   let y = e.key.type === FOrganizationLevelType.ORG;
   let j = Xf(e.key.parentId, y);

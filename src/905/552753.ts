@@ -4,7 +4,7 @@ import { Fragment as _$$Fragment, forwardRef, useRef, useState, useLayoutEffect 
 import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A } from "../905/744692";
 import o from "classnames";
-import { UF } from "../905/403166";
+import { getEmojiData } from "../905/403166";
 import { formatCount, formatList } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dN } from "../vendor/291472";
@@ -99,7 +99,7 @@ let v = forwardRef(function (e, t) {
   let i = A(e.reaction) ? e.reaction.numUsers : e.reaction.users.length;
   let r = Object.keys(e.reaction.skinTonesToUsers).length;
   let s = r > 0 ? Object.keys(e.reaction.skinTonesToUsers) : [""];
-  let o = s.map(t => UF(`${e.reaction.emoji}${t}`)[0]);
+  let o = s.map(t => getEmojiData(`${e.reaction.emoji}${t}`)[0]);
   let c = {
     emojiUnicodeList: [],
     emojiShortcodeToUsers: []
@@ -109,11 +109,11 @@ let v = forwardRef(function (e, t) {
     let i = [];
     if (r > 0) s.forEach(n => {
       let a = `${e.reaction.emoji}${n}`;
-      t.push(UF(a)[0].unicode);
+      t.push(getEmojiData(a)[0].unicode);
       let s = b(e.reaction.skinTonesToUsers[n], Math.floor(40 / r));
       i.push([a, s]);
     });else {
-      t.push(UF(e.reaction.emoji)[0].unicode);
+      t.push(getEmojiData(e.reaction.emoji)[0].unicode);
       let n = b(e.reaction.users, 40);
       i.push([e.reaction.emoji, n]);
     }

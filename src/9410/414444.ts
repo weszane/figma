@@ -4,13 +4,13 @@ import { ei } from "../figma_app/9054";
 import { i as _$$i } from "../figma_app/553327";
 import { dU } from "../9410/461336";
 import { uQ } from "../figma_app/311375";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { P } from "../905/647955";
 import { DS } from "../figma_app/571341";
 import { L$ } from "../figma_app/241341";
 export function $$h0() {
   let e = useDispatch();
-  let t = aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let i = useSelector(e => e.selectedView.compareChangesVersionId);
   let h = useSelector(e => e.selectedView.compareChangesActivityId);
   let m = useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView.compareChangesNodeId || null);

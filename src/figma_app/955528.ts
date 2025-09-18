@@ -26,7 +26,7 @@ import { Gc, nl, fN } from "../figma_app/456871";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { TJ } from "../figma_app/482495";
-import { Fk, wA as _$$wA } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
 import { cn, qo } from "../905/959568";
 import { h as _$$h } from "../figma_app/203891";
@@ -50,7 +50,7 @@ export function $$$12() {
   let n = isDesignFileType();
   let a = isWhiteboardFileType();
   let s = r || !!getFeatureFlags().aip_tone_dial_fd && n || a;
-  return Fk((e, t, r, n) => {
+  return useDeepEqualSceneValue((e, t, r, n) => {
     if (!t || !r || !n) return !1;
     let i = e.getDirectlySelectedNodes();
     return Gc(i, {
@@ -167,7 +167,7 @@ export function $$Z14(e) {
     setOriginalNodeInfos
   } = function (e) {
     let [t, r] = useState(() => new Map());
-    let i = _$$wA(e => e.getCurrentPage()?.originalNodeInfos ?? []);
+    let i = useStrictDeepEqualSceneValue(e => e.getCurrentPage()?.originalNodeInfos ?? []);
     let a = useMemo(() => new Map(i.map(e => [e.nodeId, e])), [i]);
     let s = useCallback(e => {
       let t = getSingletonSceneGraph().getCurrentPage();
@@ -522,7 +522,7 @@ export function $$ed2(e) {
 }
 export function $$ec17() {
   let [e, t] = useState(() => [0, 0]);
-  let r = _$$wA(e => {
+  let r = useStrictDeepEqualSceneValue(e => {
     let t = e.getCurrentPage()?.tonePosition;
     return t ? [es(t.x), es(t.y)] : [0, 0];
   });

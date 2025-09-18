@@ -23,16 +23,16 @@ import { TextWithTruncation } from "../905/984674";
 import { j as _$$j } from "../905/584270";
 import { l as _$$l, m as _$$m } from "../905/602189";
 import { JT, Qi, mb } from "../figma_app/847597";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { N as _$$N } from "../figma_app/28806";
 import { Qf } from "../figma_app/80683";
 import { getRumLoggingConfig } from "../905/16237";
 import { tb } from "../905/848667";
-import { U2 } from "../figma_app/297957";
+import { useProUserContextInDowngradeExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
-import { Ye, N_ } from "../905/332483";
+import { viewCollaboratorSet, collaboratorSet } from "../905/332483";
 import { I as _$$I } from "../905/343211";
 import { d as _$$d } from "../figma_app/603561";
 import { selectCurrentUser } from "../905/372672";
@@ -46,7 +46,7 @@ import { registerModal } from "../905/102752";
 import { N as _$$N2 } from "../905/809096";
 import { UL, un, kI } from "../figma_app/457899";
 let $$q0 = "https://help.figma.com/hc/articles/360039960434-Manage-seats-in-Figma";
-let J = Ye.dict(() => 0);
+let J = viewCollaboratorSet.dict(() => 0);
 function $$Z(e) {
   let t = useModalManager(e);
   let r = (e.planUser.handle || e.planUser.name) ?? "";
@@ -67,7 +67,7 @@ function $$Z(e) {
     reportError(_$$e.SCALE, e);
     return e;
   }
-  let y = _$$k();
+  let y = isProrationBillingEnabledForCurrentPlan();
   let T = _$$I(f);
   let I = UL({
     planType: f.key.type,
@@ -87,9 +87,9 @@ function $$Z(e) {
   });
   let [L] = handleSuspenseRetainRelease(R);
   let P = Qf(f.key.parentId, f.key.type);
-  let D = "loaded" === P.status ? Ye.dict(e => P.data[e]?.available ?? 0) : J;
+  let D = "loaded" === P.status ? viewCollaboratorSet.dict(e => P.data[e]?.available ?? 0) : J;
   let B = new CurrencyFormatter(e.currency);
-  let z = N_.dict(e => {
+  let z = collaboratorSet.dict(e => {
     let t = L.data?.[e]?.amount ?? 0;
     return {
       amount: t,
@@ -363,7 +363,7 @@ function er({
   currentSeatType: o,
   jobTitle: l
 }) {
-  if (!U2()()) return null;
+  if (!useProUserContextInDowngradeExperiment()()) return null;
   let d = t && 7 >= _$$A().diff(_$$A(t), "days");
   let c = a ? tb(a.toISOString()) : null;
   let u = l && "other" !== normalizeJobRole(l);

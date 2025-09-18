@@ -8,8 +8,8 @@ import { sx } from "../905/941192";
 import { EK, tg } from "../figma_app/396432";
 import { B } from "../905/261906";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { FPlanNameType } from "../figma_app/191312";
 import { isSitesFeatureEnabled } from "../905/561485";
 let $$_4 = renderI18nText("plan_comparison.campfire.starter.price.free");
@@ -116,7 +116,7 @@ function C() {
     }),
     name: renderI18nText("plan_comparison.campfire.content_seat.name")
   };
-  let r = N_.sort(AG);
+  let r = collaboratorSet.sort(compareProductAccessTypes);
   let a = {
     [ProductAccessTypeEnum.COLLABORATOR]: e,
     [ProductAccessTypeEnum.DEVELOPER]: t,
@@ -172,7 +172,7 @@ export function $$T7() {
     [ProductAccessTypeEnum.EXPERT]: i,
     [ProductAccessTypeEnum.CONTENT]: n
   };
-  return N_.sort((e, t) => -AG(e, t)).map(e => r[e]);
+  return collaboratorSet.sort((e, t) => -compareProductAccessTypes(e, t)).map(e => r[e]);
 }
 export function $$k2(e) {
   return [0, 1, 2, 3, 5, 4].map(t => {

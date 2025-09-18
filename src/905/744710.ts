@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { BuyerAPIHandler } from '../905/180';
-import { tc as _$$tc } from '../905/15667';
+import { DeepLinkType } from '../905/15667';
 import { ModalCloseButton } from '../905/17223';
 import { lW as _$$lW } from '../905/31837';
 import { X as _$$X } from '../905/33014';
@@ -50,7 +50,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b2, c as _$$c } from '../905/308099';
 import { a as _$$a } from '../905/329735';
-import { N_ } from '../905/332483';
+import { collaboratorSet } from '../905/332483';
 import { UI3ConditionalWrapper } from '../905/341359';
 import { C_ } from '../905/345933';
 import { P as _$$P } from '../905/347284';
@@ -85,7 +85,7 @@ import { handleStripeManageSubscription } from '../905/581647';
 import p, { getFeatureFlags } from '../905/601108';
 import { ButtonPrimitive } from '../905/632989';
 import { m as _$$m } from '../905/636019';
-import { am } from '../905/640017';
+import { getThemePreference } from '../905/640017';
 import { B7, Bb, zd } from '../905/651696';
 import { getResourceDataOrFallback } from '../905/663269';
 import { L as _$$L3 } from '../905/671373';
@@ -117,7 +117,7 @@ import { A as _$$A6 } from '../905/920142';
 import { G0, Gu } from '../905/926523';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx } from '../905/941192';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
@@ -146,7 +146,7 @@ import { StatusType } from '../figma_app/175992';
 import { S as _$$S } from '../figma_app/179602';
 import { createNoOpValidator } from '../figma_app/181241';
 import { FDomainVerificationStatusType, FMemberRoleType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
-import { Zx } from '../figma_app/217457';
+import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { c$, MM, ms, wv } from '../figma_app/236327';
 import l, { DialogBody, DialogTitle, DialogActionStrip, DialogHiddenTitle, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
@@ -159,7 +159,7 @@ import { useCurrentPrivilegedPlan } from '../figma_app/465071';
 import { isEmptyAddress } from '../figma_app/471982';
 import { T as _$$T } from '../figma_app/472024';
 import { _ as _$$_2, S as _$$S4 } from '../figma_app/490799';
-import { j as _$$j } from '../figma_app/496854';
+import { getFilteredPlans } from '../figma_app/496854';
 import { selectCurrentFile } from '../figma_app/516028';
 import { Au } from '../figma_app/518077';
 import { getAtomMutate, handleSuspenseRetainRelease } from '../figma_app/566371';
@@ -182,7 +182,7 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { ModalContainer, ConfirmationModal2 } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { b8 } from '../figma_app/926061';
-import { Ef, Fs } from '../figma_app/976345';
+import { trackFontInstallerDownloaded, trackFontUninstallerDownloaded } from '../figma_app/976345';
 import { AW } from '../figma_app/990058';
 import { a$H, EJS, qgA } from '../vendor/285761';
 import { A as _$$A7 } from '../vendor/723372';
@@ -1628,7 +1628,7 @@ let tR = {
 };
 function tN() {
   let e = useDispatch();
-  let t = !!_$$f('opted_in_email');
+  let t = !!selectUserFlag('opted_in_email');
   let i = useCallback(t => {
     e(postUserFlag({
       opted_in_email: t
@@ -3746,10 +3746,10 @@ function ro() {
       showModalsBeneath: !0
     }));
   };
-  let s = () => e(Ef({
+  let s = () => e(trackFontInstallerDownloaded({
     isMac: BrowserInfo.mac
   }));
-  let o = () => e(Fs());
+  let o = () => e(trackFontUninstallerDownloaded());
   return jsxs('div', {
     className: Q,
     children: [jsx('h3', {
@@ -3928,7 +3928,7 @@ function rP(e) {
   });
 }
 function rO(e) {
-  let t = _$$j();
+  let t = getFilteredPlans();
   let {
     user
   } = e;
@@ -3958,12 +3958,12 @@ function rO(e) {
       if (!planPermissions || !planUser) return null;
       let s = null;
       planUser.billableProductKeys && (s = planUser.billableProductKeys.find(e => isCollaboratorType(e)));
-      let o = planUser.pendingAccountTypeRequest?.billableProductKey ? Zx(planUser.pendingAccountTypeRequest?.billableProductKey) : null;
+      let o = planUser.pendingAccountTypeRequest?.billableProductKey ? getProductAccessTypeByKey(planUser.pendingAccountTypeRequest?.billableProductKey) : null;
       let l = planUser.latestProvisionalAccess?.billableProductKey ?? null;
-      let d = o !== null && l !== null && o === Zx(l);
+      let d = o !== null && l !== null && o === getProductAccessTypeByKey(l);
       let c = {
         permission: planUser.permission,
-        currentSeat: s ? Zx(s) : null,
+        currentSeat: s ? getProductAccessTypeByKey(s) : null,
         pendingAccountTypeRequest: o,
         hasProvisionalAccess: d
       };
@@ -4013,7 +4013,7 @@ function rD(e) {
     pendingAccountTypeRequest,
     hasProvisionalAccess
   } = n;
-  let l = N_.toArray().filter(e => function (e, t) {
+  let l = collaboratorSet.toArray().filter(e => function (e, t) {
     switch (e) {
       case ProductAccessTypeEnum.COLLABORATOR:
         return t.canUpgradeCollaborator;
@@ -4032,7 +4032,7 @@ function rD(e) {
   let {
     handleUpgrade
   } = wH({
-    entryPoint: _$$tc.USER_SETTINGS,
+    entryPoint: DeepLinkType.USER_SETTINGS,
     plan: parentId ? {
       id: parentId,
       type
@@ -4155,7 +4155,7 @@ function rD(e) {
                 handleUpgrade({
                   licenseType: ProductAccessTypeMap[e],
                   upgradeReason: _$$i.USER_SETTINGS,
-                  entryPoint: _$$tc.USER_SETTINGS,
+                  entryPoint: DeepLinkType.USER_SETTINGS,
                   afterUpgradeCallback: () => {
                     t(VisualBellActions.enqueue({
                       message: getI18nString('user_settings.plan_sections.auto_pathway_success_toast')
@@ -4212,7 +4212,7 @@ function rF({
   user: e
 }) {
   let t = useDispatch();
-  let i = am();
+  let i = getThemePreference();
   let {
     enhancedContrast
   } = useTheme();

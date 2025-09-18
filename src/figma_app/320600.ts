@@ -37,7 +37,7 @@ import { kL, zN, Pf } from "../905/326616";
 import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { useCurrentFileKey, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
@@ -268,7 +268,7 @@ let ec = () => {
   let t = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
-  let r = _$$f("cursor_bot_v2_make_show_me_primary_cta");
+  let r = selectUserFlag("cursor_bot_v2_make_show_me_primary_cta");
   return useMemo(() => {
     let n = [{
       name: "toggle-comments-debug-settings",

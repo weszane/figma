@@ -6,17 +6,17 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { useLatestRef } from "../figma_app/922077";
 import { LU, jw } from "../figma_app/327588";
 import { Lk, x } from "../figma_app/639711";
 import { gI, Pc } from "../figma_app/396464";
 import { isValidValue, MIXED_MARKER } from "../905/216495";
 import { y7 } from "../figma_app/385874";
-import { KH, eY } from "../figma_app/722362";
+import { useSceneGraphSelection, useSceneGraphSelector } from "../figma_app/722362";
 import { uN } from "../figma_app/646357";
-import { Fk } from "../figma_app/167249";
-import { Sh } from "../figma_app/889655";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { C1 } from "../figma_app/505098";
 import { HW } from "../figma_app/357367";
 function v(e, t, r = !0) {
@@ -41,7 +41,7 @@ var C = (e => (e.INSTANCE = "INSTANCE", e.DETACHED = "DETACHED", e.MIXED = "MIXE
 export function $$w1() {
   let e = getSingletonSceneGraph();
   let t = gI();
-  let r = useSelector(Sh);
+  let r = useSelector(selectSceneGraphSelectionKeys);
   let a = null;
   let s = !1;
   for (let r of t) {
@@ -62,7 +62,7 @@ export function $$w1() {
   }), [l, d, p, u, s]);
 }
 export function $$O14() {
-  let e = KH();
+  let e = useSceneGraphSelection();
   return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
@@ -74,7 +74,7 @@ export function $$O14() {
   }, [e]);
 }
 export function $$R2(e) {
-  return P(Fk(t => t.get(e)?.fills ?? []));
+  return P(useDeepEqualSceneValue(t => t.get(e)?.fills ?? []));
 }
 export function $$L8(e) {
   return P(e.fills);
@@ -96,20 +96,20 @@ function P(e) {
   };
 }
 export function $$D6(e) {
-  let t = Fk((e, t) => t.map(t => {
+  let t = useDeepEqualSceneValue((e, t) => t.map(t => {
     let r = e.get(t);
     return r ? v(r, $$A10).map(e => e.guid) : [];
   }).flat(), e);
   return useMemoStable(() => t, [t]);
 }
 export function $$k9(e) {
-  let t = Fk((e, t) => t.map(t => {
+  let t = useDeepEqualSceneValue((e, t) => t.map(t => {
     let r = e.get(t);
     return r ? $$x11(r).map(e => e.guid) : [];
   }).flat(), e);
   return useMemoStable(() => t, [t]);
 }
-export let $$M12 = Mz([C1], e => {
+export let $$M12 = createSelector([C1], e => {
   if (!e) return [];
   let t = new Set();
   Object.keys(e).forEach(e => {
@@ -121,7 +121,7 @@ export let $$M12 = Mz([C1], e => {
 });
 export function $$F4() {
   let e = gI();
-  let t = eY();
+  let t = useSceneGraphSelector();
   if (1 === e.length) {
     let r = t.get(e[0] ?? "");
     let n = t.get(r?.symbolId ?? "");
@@ -145,7 +145,7 @@ export function $$U7() {
   let t = jw();
   let r = HW();
   e = $$j16();
-  let a = Fk((e, t) => t.every(t => {
+  let a = useDeepEqualSceneValue((e, t) => t.every(t => {
     let r = e.get(t);
     return !!r && !!r.isInstance;
   }), e) && !!e.length;
@@ -169,14 +169,14 @@ export function $$B17() {
   return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COOPER_BULK_CREATE);
 }
 export function $$G5(e) {
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     let r = e.get(t);
     return r?.hasVideoPaintOrHasVideoPaintDescendant;
   }, e);
 }
 export function $$V15() {
-  let e = useSelector(Sh);
-  let t = eY();
+  let e = useSelector(selectSceneGraphSelectionKeys);
+  let t = useSceneGraphSelector();
   return useMemo(() => e.length > 0 && e.every(e => {
     let r = t.get(e);
     return r?.fills?.some(e => "VIDEO" === e.type);
@@ -184,14 +184,14 @@ export function $$V15() {
 }
 export function $$H0() {
   let e = Pc();
-  let t = eY();
+  let t = useSceneGraphSelector();
   return e.some(e => {
     let r = t.get(e);
     return r?.hasVideoPaintOrHasVideoPaintDescendant;
   });
 }
 export function $$z13(e) {
-  let t = eY();
+  let t = useSceneGraphSelector();
   return e.some(e => {
     let r = t.get(e);
     return r?.hasVideoPaintOrHasVideoPaintDescendant;

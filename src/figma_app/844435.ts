@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reportError } from '../905/11';
-import { mn, oh } from '../905/18797';
+import { isDefined, useIsLoading } from '../905/18797';
 import { selectWithShallowEqual } from '../905/103090';
 import { $W } from '../905/144933';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -32,7 +32,7 @@ import { BI as getFigmaMobile } from '../figma_app/546509';
 import { f1, O8, Qi } from '../figma_app/559491';
 import { isPendingPublisher } from '../figma_app/564095';
 import { CR, kA } from '../figma_app/684168';
-import { p8 } from '../figma_app/722362';
+import { useAppModelProperty } from '../figma_app/722362';
 import { isResourcePendingPublishing } from '../figma_app/777551';
 import { getEditorTypeOrNull, getSelectedEditorType, isDevHandoffEditorType, selectEditorType } from '../figma_app/976749';
 export function $$V0(e) {
@@ -790,7 +790,7 @@ export function $$eM39() {
   let o = useDispatch();
   let l = useCurrentFileKey();
   let d = getPluginAllowListKey(t?.id ?? '', l);
-  let c = useSelector(e => !!t && mn(e.loadingState, d));
+  let c = useSelector(e => !!t && isDefined(e.loadingState, d));
   useEffect(() => {
     a && !c && o(Vl({}));
   }, [a, o, c]);
@@ -805,7 +805,7 @@ export function $$eF19() {
   let o = useDispatch();
   let l = useCurrentFileKey();
   let d = getWidgetAllowListKey(t?.id ?? '', l);
-  let c = useSelector(e => !!t && mn(e.loadingState, d));
+  let c = useSelector(e => !!t && isDefined(e.loadingState, d));
   useEffect(() => {
     a && !c && o(mV({}));
   }, [a, o, c]);
@@ -1015,7 +1015,7 @@ export function $$eY23() {
     selectedView: e.selectedView,
     openFile: e.openFile
   }));
-  let a = p8('isReadOnly');
+  let a = useAppModelProperty('isReadOnly');
   return useCallback(n => {
     let {
       canRun
@@ -1091,7 +1091,7 @@ export function $$e036(e) {
   let d = e ? i : r;
   let c = t?.id ?? '';
   let u = useCurrentFileKey();
-  let p = oh(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u));
+  let p = useIsLoading(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u));
   let _ = useCallback(e => d ? e.filter(e => !isPublicPlugin(e) || !!l[e.plugin_id]) : e, [l, d]);
   let h = useCallback(e => a ? e.filter(e => !isPublicPlugin(e)) : e, [a]);
   return {

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { isIllustrationEditorType } from "../figma_app/976749";
-import { KH } from "../figma_app/722362";
-import { Fk } from "../figma_app/167249";
+import { useSceneGraphSelection } from "../figma_app/722362";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { ZU, uo, IF, gc, Xz } from "../figma_app/986347";
 var l = (e => (e[e.TOOLBELT = 0] = "TOOLBELT", e[e.TOOLBAR = 1] = "TOOLBAR", e[e.NONE = 2] = "NONE", e))(l || {});
 function d(e) {
@@ -149,9 +149,9 @@ let g = {
 };
 export function $$f6() {
   let e = isIllustrationEditorType();
-  let t = KH();
+  let t = useSceneGraphSelection();
   let r = useMemo(() => Object.keys(t), [t]);
-  return Fk((t, r) => {
+  return useDeepEqualSceneValue((t, r) => {
     if (!e || !r) return p;
     let n = [];
     for (let e of r) {

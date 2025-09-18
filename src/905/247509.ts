@@ -13,7 +13,7 @@ import { yT } from "../figma_app/332598";
 import { X } from "../figma_app/953068";
 import { n2 } from "../figma_app/137317";
 import { _r } from "../figma_app/451499";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { lE } from "../905/945781";
 import { Pp } from "../vendor/330821";
 import { trackEventAnalytics } from "../905/449184";
@@ -63,7 +63,7 @@ export function $$O2({
   displayableChanges: l,
   preferencesApi: d
 }) {
-  let c = eY();
+  let c = useSceneGraphSelector();
   let m = a?.get(t ?? "") ?? c.get(t ?? "");
   let g = i?.get(e ?? "") ?? c.get(e ?? "");
   let A = m?.type === "TEXT" || g?.type === "TEXT";

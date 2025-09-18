@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { DeviceTryFileView } from "../figma_app/43951";
 import { setupLoadingStateHandler } from "../905/696711";
 import { Uy } from "../figma_app/685921";
@@ -54,7 +54,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
         userId: user.id,
         orgId: org_id
       };
-      e.dispatch(_l({
+      e.dispatch(switchAccountAndNavigate({
         workspace: l,
         view: selectedView
       }));

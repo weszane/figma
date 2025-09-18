@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { Be } from "../figma_app/920435";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
-import { VP, GH } from "../905/18797";
+import { isLoading, isSuccess } from "../905/18797";
 export function $$c0(e) {
   let t = e.key.type === FOrganizationLevelType.ORG;
   let i = Xf(t ? e.key.parentId : null, t);
@@ -28,8 +28,8 @@ export function $$c0(e) {
         let t = Be.loadingKeyForPayload({
           teamId: e.key.parentId
         });
-        if (VP(c, t)) return p;
-        if (GH(c, t) && !u) return h;
+        if (isLoading(c, t)) return p;
+        if (isSuccess(c, t) && !u) return h;
         return m;
       }
     case FPlanNameType.STARTER:

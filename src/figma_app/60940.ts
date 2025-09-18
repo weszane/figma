@@ -1,12 +1,12 @@
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { isValidValue } from "../905/216495";
 import { XV } from "../figma_app/383828";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 import { i2 } from "../905/557338";
 import { nD } from "../905/92359";
 let d = e => e.library;
 export function $$c0() {
-  return Mz([(e, t, r) => t, (e, t, r) => r, d], (e, t, r) => {
+  return createSelector([(e, t, r) => t, (e, t, r) => r, d], (e, t, r) => {
     if (!t.get(e)) return null;
     let {
       selectedItem
@@ -14,7 +14,7 @@ export function $$c0() {
     return selectedItem;
   });
 }
-export let $$u1 = Mz([d, dK, i2], (e, t, r) => {
+export let $$u1 = createSelector([d, selectSceneGraph, i2], (e, t, r) => {
   let n = null;
   let {
     backingSymbolGUID,

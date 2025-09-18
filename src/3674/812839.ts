@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { rW } from "../figma_app/591738";
 import { Zr } from "../figma_app/678782";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { o3, nt } from "../905/226610";
 import { t as _$$t } from "../figma_app/501766";
 import { N as _$$N } from "../905/301843";
@@ -166,7 +166,7 @@ export function $$G0() {
   let {
     isLeftPanelCollapsed
   } = useContext(_$$t);
-  let t = aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let n = useSelector(e => e.mirror.appModel.showUi);
   let l = o3(nt.designNavBar);
   return t || !n ? null : jsxs(_$$_2, {

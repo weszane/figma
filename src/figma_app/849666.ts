@@ -54,7 +54,7 @@ import { DialogContents, DialogBody } from "../figma_app/272243";
 import ei from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { isValidEmail } from "../figma_app/416935";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
@@ -166,7 +166,7 @@ let eE = registerModal(function (e) {
   let u = useSelector(e => c ? e.loadingState[_$$f.loadingKeyForPayload({
     fileKey: c,
     emailAddress: r
-  })] === _$$r.LOADING : null);
+  })] === APILoadingStatus.LOADING : null);
   let p = useModalManager({
     ...e,
     onClose: () => {

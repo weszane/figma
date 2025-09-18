@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _Z } from "../figma_app/819288";
+import { flattenMessageMeta } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { FlashActions } from "../905/573154";
@@ -62,7 +62,7 @@ export function $$y0({
         resourceType: AH,
         resourceId: I.id,
         source: t,
-        pinDescription: _Z(e)
+        pinDescription: flattenMessageMeta(e)
       });
       y(I.id);
     } catch (e) {

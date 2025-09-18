@@ -16,7 +16,7 @@ import { Fy, g5, NT } from "../figma_app/579169";
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { d as _$$d } from "../905/14910";
@@ -587,7 +587,7 @@ function q({
   });
 }
 export function $$$$X0() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useIsCanvasEditDisabled();
   let i = useSelector(e => e.isMakeSomethingV2Active);
   return t || e || i ? null : jsx(et, {});

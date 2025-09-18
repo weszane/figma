@@ -28,8 +28,8 @@ import { M as _$$M3 } from "../figma_app/634148";
 import { zj, lJ, kl } from "../905/275640";
 import { o as _$$o } from "../905/237202";
 import { F as _$$F } from "../905/258517";
-import { Fk } from "../figma_app/167249";
-import { Sh } from "../figma_app/889655";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { A as _$$A2 } from "../2854/975852";
 import { A as _$$A3 } from "../2854/549639";
@@ -139,7 +139,7 @@ export function $$Z18() {
 }
 export function $$Q4(e) {
   let t = function () {
-    let e = useSelector(Sh);
+    let e = useSelector(selectSceneGraphSelectionKeys);
     let {
       stackPaddingBottom,
       stackVerticalPadding,
@@ -449,7 +449,7 @@ export function $$e_22() {
   }), [minWidth, maxWidth, minHeight, maxHeight]);
 }
 export function $$eh40() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (0 === t.length) return !1;
     for (let e of t) if (!e.isGridChild) return !1;
@@ -457,7 +457,7 @@ export function $$eh40() {
   });
 }
 export function $$em11() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (0 === t.length) return !1;
     for (let e of t) if (!e.isGrid) return !1;
@@ -465,7 +465,7 @@ export function $$em11() {
   });
 }
 export function $$eg3() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (!t || 0 === t.length) return !1;
     for (let e of t) {
@@ -476,7 +476,7 @@ export function $$eg3() {
   });
 }
 export function $$ef21() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (0 === t.length) return !1;
     let r = !0;
@@ -488,19 +488,19 @@ export function $$ef21() {
   });
 }
 export function $$eE42() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     for (let t of e.getDirectlySelectedNodes()) if ("ABSOLUTE" !== t.stackPositioning) return !1;
     return !0;
   });
 }
 export function $$ey30() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     for (let t of e.getDirectlySelectedNodes()) if (!t.isStack) return !1;
     return !0;
   });
 }
 export function $$eb35() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     for (let t of e.getDirectlySelectedNodes()) if (!t.isLayoutContainer && !t.isLayoutChild) return !1;
     return !0;
   });

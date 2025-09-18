@@ -1,37 +1,71 @@
-export class $$n0 {
+/**
+ * Manages a Web Worker for handling image I/O operations.
+ * This class creates a worker from a blob script that imports the image I/O worker URL,
+ * handles message passing with callbacks, and provides methods to send messages and terminate the worker.
+ */
+export class ImageIOWorkerManager {
+  private nextID: number
+  private callbacks: Map<number, (data: any) => void>
+  private worker: Worker
+
   constructor() {
-    this.nextID = 0;
-    this.callbacks = new Map();
-    let e = new Blob([`try {
-          importScripts("${new URL(Fig.imageIOWorkerURL, document.baseURI).href}");
-         } catch (e) {
-          console.warn("Could not load image worker blob", e)
-         }`], {
-      type: "application/javascript"
-    });
-    this.worker = new Worker(URL.createObjectURL(e));
-    this.worker.onmessage = e => {
-      let t = e.data;
-      let i = this.callbacks.get(t.id);
-      this.callbacks.$$delete(t.id);
-      void 0 !== i && i(t);
-    };
+    this.nextID = 0
+    this.callbacks = new Map()
+
+    // Create a blob with a script to import the image I/O worker
+    const scriptBlob = new Blob([
+      `try {
+        importScripts("${new URL(Fig.imageIOWorkerURL, document.baseURI).href}");
+      } catch (error) {
+        console.warn("Could not load image worker blob", error);
+      }`,
+    ], {
+      type: 'application/javascript',
+    })
+
+    this.worker = new Worker(URL.createObjectURL(scriptBlob))
+
+    // Handle messages from the worker
+    this.worker.onmessage = (event: MessageEvent) => {
+      const messageData = event.data
+      const callback = this.callbacks.get(messageData.id)
+      this.callbacks.delete(messageData.id)
+      if (callback) {
+        callback(messageData)
+      }
+    }
   }
-  forgetCallbacks() {
-    this.callbacks.clear();
+
+  /**
+   * Clears all pending callbacks.
+   */
+  forgetCallbacks(): void {
+    this.callbacks.clear()
   }
-  sendMessage(e) {
-    return new Promise(t => {
-      let i = this.nextID++;
-      this.callbacks.set(i, t);
+
+  /**
+   * Sends a message to the worker and returns a promise that resolves with the response.
+   * @param message - The message object to send to the worker.
+   * @returns A promise that resolves with the worker's response data.
+   */
+  sendMessage(message: any): Promise<any> {
+    return new Promise((resolve) => {
+      const id = this.nextID++
+      this.callbacks.set(id, resolve)
       this.worker.postMessage({
-        ...e,
-        id: i
-      });
-    });
+        ...message,
+        id,
+      })
+    })
   }
-  terminate() {
-    this.worker.terminate();
+
+  /**
+   * Terminates the worker.
+   */
+  terminate(): void {
+    this.worker.terminate()
   }
 }
-export const o = $$n0;
+
+// Original export name maintained for compatibility
+export const o = ImageIOWorkerManager

@@ -10,11 +10,11 @@ import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { V as _$$V } from "../905/223767";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { i$ } from "../905/15667";
+import { DevModeUI } from "../905/15667";
 import { UpgradeAction } from "../905/370443";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
@@ -59,7 +59,7 @@ export function $$z0({
       handleUpgrade,
       getUpgradeEligibility
     } = wH();
-    return useCallback((n = i$.DevMode, a) => {
+    return useCallback((n = DevModeUI.DevMode, a) => {
       if (t && !e) try {
         if (t.parentOrgId && u || x && r) {
           B();
@@ -90,7 +90,7 @@ export function $$z0({
             forwardToDatadog: !0
           });
           let e = g?.id;
-          n !== i$.DowngradeEmail && e ? C(WX({
+          n !== DevModeUI.DowngradeEmail && e ? C(WX({
             teamId: e,
             openInNewTab: !0,
             entryPoint: UpsellSourceType.DEV_MODE_MODAL
@@ -124,7 +124,7 @@ export function $$z0({
     O(e, n);
   }, [t, n, O, e]);
   let J = function (e) {
-    let t = !!hA();
+    let t = !!useDevModeFocusId();
     let n = useAtomWithSubscription(_$$R2);
     let l = _$$U2("blocking_modal");
     let s = useDispatch();

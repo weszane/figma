@@ -15,11 +15,11 @@ import { getStyleThumbnail } from "../905/405710";
 import { M as _$$M } from "../905/771870";
 import { forwardRef } from "react";
 import { ColorSpaceEnum } from "../figma_app/763686";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { LN } from "../figma_app/975811";
-import { yM } from "../905/640017";
+import { useThemeContext } from "../905/640017";
 import { Ep } from "../figma_app/504823";
-import { Pv as _$$Pv } from "../figma_app/622881";
+import { isCSSDisplayP3Supported } from "../figma_app/622881";
 import { eE, wr, GW, b4 } from "../905/767147";
 import { m as _$$m } from "../figma_app/726115";
 import { x7, X3 } from "../figma_app/492929";
@@ -33,7 +33,7 @@ let T = forwardRef(function ({
   ...r
 }, s) {
   let o = Ep();
-  yM();
+  useThemeContext();
   let l = function (e, t) {
     let i = t.transform;
     let n = t.stops;
@@ -53,7 +53,7 @@ let T = forwardRef(function ({
       a = 1 / o;
       r = (o - 1) / 2;
     } else s = "radial-gradient(circle closest-side";
-    1 === n.length && (s += ", " + _$$F.format(n[0].color, e));
+    1 === n.length && (s += ", " + colorCSSManipulatorInstance.format(n[0].color, e));
     let o = n[0];
     for (let t of n) {
       if (o.position !== t.position && o.color.a !== t.color.a && (o.color.r !== t.color.r || o.color.g !== t.color.g || o.color.b !== t.color.b)) for (let i = 1; i < 5; i++) {
@@ -65,16 +65,16 @@ let T = forwardRef(function ({
           a: GW(o.color.a, t.color.a, n)
         };
         let d = GW(o.position, t.position, n);
-        s += ", " + _$$F.format(l, e) + " " + C.format(d * a + r);
+        s += ", " + colorCSSManipulatorInstance.format(l, e) + " " + C.format(d * a + r);
       }
-      s += ", " + _$$F.format(t.color, e) + " " + C.format(t.position * a + r);
+      s += ", " + colorCSSManipulatorInstance.format(t.color, e) + " " + C.format(t.position * a + r);
       o = t;
     }
     return {
       stops: n,
       background: s += ")"
     };
-  }(o === ColorSpaceEnum.DISPLAY_P3 && _$$Pv() ? "display-p3" : "srgb", e);
+  }(o === ColorSpaceEnum.DISPLAY_P3 && isCSSDisplayP3Supported() ? "display-p3" : "srgb", e);
   if (!l) return null;
   let {
     background

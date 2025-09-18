@@ -7,14 +7,14 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
 import { pH, GI } from "../figma_app/147337";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { Dl } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { ju } from "../figma_app/88239";
+import { useComponentBrowserEntrypoint } from "../figma_app/88239";
 import { qP, Fb } from "../figma_app/909778";
 import { hideDropdownAction } from "../905/929976";
 import { $m } from "../figma_app/78808";
@@ -116,7 +116,7 @@ export function $$eO1({
   let eZ = _$$F3();
   let eQ = _$$e4();
   let e0 = Dl(eM);
-  let e1 = ju("filename_menu");
+  let e1 = useComponentBrowserEntrypoint("filename_menu");
   let e2 = BI();
   let e5 = m0();
   let e3 = useSubscription(FileManagePermission({
@@ -503,7 +503,7 @@ export function $$eO1({
     callback: () => {
       if (tq) {
         let e = getProjectUrl(tq.id, tq.orgId ?? null, tq.teamId, eD, !!tq?.team?.canView, "FilenameViewDropdown._goToProject", eF);
-        z(V3({
+        z(openUrlInContext({
           url: e
         }));
       }

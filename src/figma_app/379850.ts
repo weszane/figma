@@ -1,9 +1,9 @@
 import { HandoffBindingsCpp } from "../figma_app/763686";
 import { normalizedToRgb } from "../figma_app/273493";
 import { debugState } from "../905/407919";
-import { Ym } from "../figma_app/806075";
+import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { trackFileEvent } from "../figma_app/314264";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
@@ -13,7 +13,7 @@ export function $$p3(e, t, r) {
   n.selectedView?.showOverview && "overview_search_clicked" === r && trackFileEvent("Dev Mode Overview Pages Search Clicked", n.openFile?.key, n, {
     pageId: t.nodeId
   });
-  "editorType" in t && t.editorType === FEditorType.Design && Ym(n, FEditorType.Design, r);
+  "editorType" in t && t.editorType === FEditorType.Design && handleEnterMode(n, FEditorType.Design, r);
   e(selectViewAction({
     ...t,
     showOverview: !1,
@@ -32,10 +32,10 @@ export function $$_0(e, t) {
 export function $$h1(e, t, r) {
   let a = function (e, t) {
     let r = e.get(t)?.backgroundColor;
-    return r ? F.format(r) : null;
+    return r ? colorCSSManipulatorInstance.format(r) : null;
   }(e, r);
   let s = HandoffBindingsCpp.backgroundColorOverride(t);
-  return s ? F.format(normalizedToRgb(s)) : a;
+  return s ? colorCSSManipulatorInstance.format(normalizedToRgb(s)) : a;
 }
 export const Ep = $$_0;
 export const S7 = $$h1;

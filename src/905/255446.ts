@@ -11,16 +11,16 @@ import { getThemeBackgroundColor } from "../figma_app/191804";
 import { f as _$$f } from "../905/931050";
 import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { uP, nh } from "../figma_app/933328";
 import { compareWithGeneratedKey } from "../905/709171";
 import { Z } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { Av, Dg, eS, aD } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
-import { f5, t, $4, O1 } from "../figma_app/889655";
+import { isNodeNotVisible, getStylePublishInfoSelector, $4, selectLocalStylesWithUsagesOnLoadedPages } from "../figma_app/889655";
 import { bd } from "../905/557338";
 import { _Q, kc } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -132,7 +132,7 @@ export function $$F1(e) {
   }, [v, t]);
   let k = useSelector(e => {
     let t = getSingletonSceneGraph().guidFromDeveloperFriendlyId(v?.instanceId ?? _$$v.INVALID);
-    return f5(e, t);
+    return isNodeNotVisible(e, t);
   });
   let N = p[outerArrayIndex]?.updateAsset ?? null;
   return {
@@ -153,7 +153,7 @@ export function $$F1(e) {
   };
 }
 export function $$M8(e, t, i, a, o) {
-  let l = eY();
+  let l = useSceneGraphSelector();
   let c = useMemo(() => !!t && V(a, Fullscreen.getBackingAssetRef(t.instanceId)), [a, t, l]);
   let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(Fullscreen.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
   let m = useRef(new LRUCache(100));
@@ -202,13 +202,13 @@ export function $$j2(e) {
     incrementOuterArrayIndex
   } = L(useMemo(() => d ? [d.styleGUIDs] : [], [d]));
   let E = d ? d.styleGUIDs[innerArrayIndex] : "";
-  let x = useMemo(t, []);
+  let x = useMemo(getStylePublishInfoSelector, []);
   let w = useSelector(e => E ? x(e, E) : null);
   let T = useMemo($4, []);
   let k = useSelector(e => d ? T(e, d.styleGUIDs) : new Map());
   let N = !!d && !!Object.keys(d).length && !!E;
   let P = useSelector(kc);
-  let O = useSelector(O1);
+  let O = useSelector(selectLocalStylesWithUsagesOnLoadedPages);
   let D = useMemo(() => !!E && G(updateStyle, P, O, E, w?.version ?? null, w?.key ?? null), [P, O, updateStyle, E, w]);
   let F = useMemo(() => !!d && d.styleGUIDs.every(e => G(d.updateAsset, P, O, e, k?.get(e)?.version ?? null, k?.get(e)?.key ?? null)), [k, d, P, O]);
   let {
@@ -252,7 +252,7 @@ export function $$j2(e) {
     return {
       beforeImage: b,
       afterImage: useMemo(() => {
-        if (v.status !== _$$r.SUCCESS) return v;
+        if (v.status !== APILoadingStatus.SUCCESS) return v;
         let t = y ? e.node_id : LibraryPubSub.getOrCreateSubscribedStyleNodeId(e.key, e.content_hash ?? VariableStyleId.INVALID, e.library_key, v.value, SceneIdentifier.ACTIVE_SCENE)?.localGUID ?? "";
         let [i, n] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {
           type: "UNCOMPRESSED",

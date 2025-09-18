@@ -44,7 +44,7 @@ import { h_, Ie, qG, jb, _D, Cj } from "../905/291654";
 import { Kk, Rt } from "../905/777093";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Um } from "../905/848862";
-import { QR } from "../figma_app/623300";
+import { fontLoadingAtom } from "../figma_app/623300";
 import { KindEnum } from "../905/129884";
 import { pn } from "../905/714538";
 import { e0 as _$$e2 } from "../905/696396";
@@ -68,7 +68,7 @@ import { postUserFlag } from "../905/985254";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { TeamCanAdmin } from "../figma_app/43951";
 import { gg, Rk } from "../905/981217";
 import { UpsellModalType } from "../905/165519";
@@ -269,7 +269,7 @@ export let $$eZ0 = registerModal(function (e) {
     let [u, p] = useState({});
     let [m, h] = useState(!1);
     let [g, f] = useState(n && !l ? PageSelectionType.CURRENT_SELECTION : PageSelectionType.CURRENT_PAGE);
-    let [v, I] = useAtomValueAndSetter(QR);
+    let [v, I] = useAtomValueAndSetter(fontLoadingAtom);
     useEffect(() => () => {
       I(!1);
       o(VisualBellActions.dequeue({
@@ -458,7 +458,7 @@ export let $$eZ0 = registerModal(function (e) {
   let [ek, eF] = useState({});
   let eM = useRef(null);
   let ej = function () {
-    let e = _$$f("seen_missing_fonts_org_upsell_banner");
+    let e = selectUserFlag("seen_missing_fonts_org_upsell_banner");
     let t = useCurrentUserOrg() ?? null;
     let i = selectCurrentFile()?.team ?? null;
     let n = selectCurrentUser();

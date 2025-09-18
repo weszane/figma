@@ -2,7 +2,7 @@ import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { wQ } from "../figma_app/385874";
 import { lJ } from "../905/275640";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$l1({
   getTypeCountAndNodeOverrides: e,
   getNodeTypeStringOverrides: t
@@ -11,7 +11,7 @@ export function $$l1({
   let [c] = lJ("rightEndCap");
   let u = isValidValue(r) ? r : void 0;
   let p = isValidValue(c) ? c : void 0;
-  return Fk((e, t, r) => {
+  return useDeepEqualSceneValue((e, t, r) => {
     let {
       nodeType,
       count,

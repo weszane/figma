@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { cP, Xi, mj } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
 import { av } from "../figma_app/316316";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { Zh } from "../figma_app/2590";
 import { J } from "../905/980942";
 import { Ay } from "../figma_app/976110";
@@ -38,7 +38,7 @@ export function $$k0({
     });
   }));
   let R = useDispatch();
-  let N = eY();
+  let N = useSceneGraphSelector();
   let {
     close
   } = cq();

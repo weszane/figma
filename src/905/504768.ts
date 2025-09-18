@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { Pq, _Z, Rc, l5, vj } from "../figma_app/819288";
+import { trimLastMessageMeta, flattenMessageMeta, Rc, getMessageType, MessageType } from "../figma_app/819288";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
@@ -47,7 +47,7 @@ let $$y3 = createOptimistThunk((e, t) => {
   }, a);
 });
 let $$b4 = createOptimistThunk((e, t) => {
-  t.messageMeta = Pq(t.messageMeta);
+  t.messageMeta = trimLastMessageMeta(t.messageMeta);
   let i = e.getState().user;
   let n = WB();
   let r = t.uuid;
@@ -57,7 +57,7 @@ let $$b4 = createOptimistThunk((e, t) => {
     attachment_updates: getAttachmentChanges(t.attachmentUpdates)
   }));
   trackEventAnalytics("Team Feed Comment Edited", {
-    text: _Z(t.messageMeta)
+    text: flattenMessageMeta(t.messageMeta)
   });
   let c = Rc(t.messageMeta);
   n.optimisticallyUpdateWithUUID({
@@ -69,7 +69,7 @@ let $$b4 = createOptimistThunk((e, t) => {
   }, l);
 });
 let $$v6 = createOptimistThunk((e, t) => {
-  t.messageMeta = Pq(t.messageMeta);
+  t.messageMeta = trimLastMessageMeta(t.messageMeta);
   let i = e.getState().user;
   let n = WB();
   if (!i || !n) return;
@@ -79,12 +79,12 @@ let $$v6 = createOptimistThunk((e, t) => {
     uuid: r,
     attachment_ids: t.attachmentIds
   });
-  let u = !!t.messageMeta.find(e => l5(e) === vj.EMOJI);
-  let p = !!t.messageMeta.find(e => l5(e) === vj.EDITOR_MENTION);
+  let u = !!t.messageMeta.find(e => getMessageType(e) === MessageType.EMOJI);
+  let p = !!t.messageMeta.find(e => getMessageType(e) === MessageType.EDITOR_MENTION);
   trackEventAnalytics("Team Feed Comment Added", {
     emojiUsed: u,
     mentionUsed: p,
-    text: _Z(t.messageMeta),
+    text: flattenMessageMeta(t.messageMeta),
     postUuid: t.postUuid
   });
   let m = Rc(t.messageMeta);

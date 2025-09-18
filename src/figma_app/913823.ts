@@ -17,7 +17,7 @@ import { LC, Ve, iw, kG } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { YG } from "../905/921418";
 import { withParsedMeta } from "../905/405710";
-import { Sc, D2, VP } from "../905/18797";
+import { isNullOrFailure, isLoaded, isLoading } from "../905/18797";
 import { isWorkshopModeActive } from "../figma_app/193867";
 import { kb } from "../figma_app/502247";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
@@ -35,7 +35,7 @@ async function R(e, t) {
     return;
   }
   let d = yD(t);
-  if (!Sc(e.getState().loadingState, d)) {
+  if (!isNullOrFailure(e.getState().loadingState, d)) {
     LC();
     return;
   }
@@ -117,7 +117,7 @@ async function L(e) {
   if (!t) return;
   let r = iw(t.key);
   let i = e.getState().loadingState;
-  if (!(D2(i, r) || VP(i, r))) {
+  if (!(isLoaded(i, r) || isLoading(i, r))) {
     e.dispatch(loadingStatePutLoading({
       key: r
     }));
@@ -182,7 +182,7 @@ let $$M3 = createOptimistThunk(e => {
 let $$F1 = "FETCH_RECENTLY_USED_LIBRARY_ITEMS";
 async function j(e, t) {
   let r;
-  if (VP(e.getState().loadingState, $$F1)) return;
+  if (isLoading(e.getState().loadingState, $$F1)) return;
   atomStoreManager.set($$k2, "loading");
   e.dispatch(loadingStatePutLoading({
     key: $$F1

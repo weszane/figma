@@ -5,16 +5,16 @@ import { Fullscreen, ItemType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { blackColor } from "../figma_app/191804";
-import { F } from "../905/989956";
-import { yM } from "../905/640017";
+import { colorCSSManipulatorInstance } from "../905/989956";
+import { useThemeContext } from "../905/640017";
 import { lk } from "../905/182453";
 import { GV } from "../figma_app/159296";
 import { sd } from "../figma_app/509285";
 export function $$m0() {
-  let e = yM().colorText;
+  let e = useThemeContext().colorText;
   return useMemo(() => {
     if (e) {
-      let t = F.parse(e);
+      let t = colorCSSManipulatorInstance.parse(e);
       if (t.a > 0) return rgbToNormalized(t);
     }
     return rgbToNormalized(blackColor);

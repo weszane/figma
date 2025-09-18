@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { DT } from "../figma_app/8833";
-import { l as _$$l } from "../905/348437";
+import { fileCommentAttachmentAPI } from "../905/348437";
 import { q } from "../905/70772";
 import { M } from "../905/981847";
 import { KK } from "../905/649567";
@@ -28,7 +28,7 @@ export function $$h0(e) {
   };
   let g = (t, n) => {
     let r = attachments[n];
-    return _$$l.put(e.fileKey, r.id, t);
+    return fileCommentAttachmentAPI.put(e.fileKey, r.id, t);
   };
   let f = (e, i) => {
     e.preventDefault();

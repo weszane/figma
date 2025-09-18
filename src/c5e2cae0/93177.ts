@@ -39,20 +39,20 @@ import { FPlanNameType, FMemberRoleType, FAccessLevelType } from "../figma_app/1
 import { hK } from "../figma_app/211706";
 import { UR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142";
 import { S_, gk } from "../5885/925885";
 import { postUserFlag } from "../905/985254";
-import { e5, Mh, Dj } from "../figma_app/297957";
+import { hasStarterTeamLoopholeAccess, useSeparateBillingShippingExperiment, useCartSeatSelectionClarityExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { withTrackedInput, TrackingProvider } from "../figma_app/831799";
 import { jv, vu } from "../905/84777";
 import { lo, wn, dl } from "../9420/795870";
 import { isCollaboratorType, ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { kt, pI, Al, lX, dT } from "../9420/394825";
 import { KQ } from "../figma_app/475472";
 import { y4 } from "../figma_app/298277";
@@ -480,7 +480,7 @@ function eY(e) {
   let [V, $] = useState(n?.team_name ?? "");
   let [z, G] = useState(kt);
   let ee = getEditableTeamsWithoutPaidAccess(selectPermissionsState());
-  let ed = e5({
+  let ed = hasStarterTeamLoopholeAccess({
     userId: l,
     teams: Object.values(j),
     rolesByTeamId: O
@@ -509,13 +509,13 @@ function eY(e) {
     ...e.selectedView,
     paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
   }));
-  let eO = Mh();
+  let eO = useSeparateBillingShippingExperiment();
   let eD = void 0 === x.cartSelections;
   let eB = useLatestRef(eD);
-  let eL = N_.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
+  let eL = collaboratorSet.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
   let e$ = eA && getBillingCycleFromSubscriptionType(eA) || BillingCycle.YEAR;
   let eU = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: eC,
       tier: Ju.PRO,
@@ -926,7 +926,7 @@ function eY(e) {
                     to(_$$Ay({
                       promo: null
                     }));
-                    l ? e.selectedView.previousView ? selectViewAction(e.selectedView.previousView) : _l({
+                    l ? e.selectedView.previousView ? selectViewAction(e.selectedView.previousView) : switchAccountAndNavigate({
                       workspace: {
                         userId: l,
                         orgId: null,
@@ -1091,7 +1091,7 @@ function eZ({
   teamName: t,
   renewalTerm: a
 }) {
-  let r = Dj();
+  let r = useCartSeatSelectionClarityExperiment();
   let i = jsx(Ph, {
     href: "/pricing",
     trackingProperties: {

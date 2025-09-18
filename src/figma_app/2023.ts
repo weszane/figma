@@ -4,7 +4,7 @@ import a from "../vendor/961736";
 import { A } from "../905/920142";
 import { encodeUri } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { Zx } from "../figma_app/217457";
+import { getProductAccessTypeByKey } from "../figma_app/217457";
 import { fileEntityDataMapper } from "../905/943101";
 import { FTeamAccessPermissionType, FPlanFeatureType, FPermissionLevelType } from "../figma_app/191312";
 import { mapUserProperties, mapFileLinkExpirationConfigWithPrevious, mapResourceAccess, mapFileView, mapRepoSummary, mapOrgDomainProperties, mapFileExportAndLinkControls } from "../figma_app/349248";
@@ -361,7 +361,7 @@ function w(e) {
   return e ? {
     id: e.id,
     redeemedBy: e.redeemedBy,
-    billableProductKey: e.billableProductKey ? Zx(e.billableProductKey) : null,
+    billableProductKey: e.billableProductKey ? getProductAccessTypeByKey(e.billableProductKey) : null,
     inviteeUserId: e.inviteeUserId
   } : null;
 }

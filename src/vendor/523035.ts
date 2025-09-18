@@ -1,6 +1,8 @@
-import i from "../vendor/13685";
-import s from "../vendor/240820";
+import i from '../vendor/13685'
+import s from '../vendor/240820'
+
 function o(e) {
-  return e && e.length ? i(e, s) : 0;
+  return e && e.length ? i(e, s) : 0
 }
-module.exports = o;
+// lodash sum
+module.exports = o

@@ -6,7 +6,7 @@ import { deepEqual } from "../905/382883";
 import { BrowserInfo } from "../figma_app/778880";
 import { r } from "../905/398386";
 import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
-import { VP, GH, aF, Fl } from "../905/18797";
+import { isLoading, isSuccess, isFailure, getValue } from "../905/18797";
 import { PublicModelType, getModelTypeEmptyStateI18n, SearchTypeMode, InputType, SpaceAccessType } from "../figma_app/162807";
 import { ViewMode, FileType } from "../figma_app/756995";
 import { o as _$$o } from "../905/668706";
@@ -43,7 +43,7 @@ import { ne } from "../figma_app/563413";
 import { XW } from "../905/182534";
 import { gt, Ri, j3, Gb, ht } from "../figma_app/327577";
 import { filePutAction } from "../figma_app/78808";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { getDesignFileUrl } from "../905/612685";
 import { uQ, eM as _$$eM, J1 } from "../figma_app/20203";
 import { Fm, Cg, nS } from "../figma_app/476677";
@@ -275,10 +275,10 @@ class V extends Component {
     this.getLoadingKey = () => $P.loadingKeyForPayload({
       parameters: this.props.parameters
     });
-    this.isLoading = () => VP(this.props.loadingState, this.getLoadingKey());
-    this.didSucceed = () => GH(this.props.loadingState, this.getLoadingKey());
-    this.didFail = () => aF(this.props.loadingState, this.getLoadingKey());
-    this.getFailedReason = () => Fl(this.props.loadingStateFailureReasons, this.getLoadingKey());
+    this.isLoading = () => isLoading(this.props.loadingState, this.getLoadingKey());
+    this.didSucceed = () => isSuccess(this.props.loadingState, this.getLoadingKey());
+    this.didFail = () => isFailure(this.props.loadingState, this.getLoadingKey());
+    this.getFailedReason = () => getValue(this.props.loadingStateFailureReasons, this.getLoadingKey());
     let t = this.getFilteredResults(e.searchResults ?? [], e.sortFilterConfig);
     this.state = {
       showContainer: !this.shouldScroll(),
@@ -418,7 +418,7 @@ export function $$e_0() {
     let i = useSelector(e => e.desktopNewTab.searchQuery);
     let s = e.completedQueries[PublicModelType.FILES];
     return {
-      isLoading: n === _$$r.LOADING || i !== s,
+      isLoading: n === APILoadingStatus.LOADING || i !== s,
       searchResults: (e.responses.files?.results ?? []).slice(0, 5)
     };
   }();

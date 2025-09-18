@@ -1,16 +1,16 @@
 import { isNotNullish } from "../figma_app/95419";
 import { Vh, kV, N9 } from "../figma_app/692987";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 export function $$l7(e) {
-  return N_.dict(t => e[t]?.amount ?? 0);
+  return collaboratorSet.dict(t => e[t]?.amount ?? 0);
 }
 export function $$d8(e) {
   return Object.values(e).map(e => e.key);
 }
 export function $$c6(e) {
-  let t = N_.dict(() => 0);
+  let t = collaboratorSet.dict(() => 0);
   Object.values(e).filter(e => isNotNullish(e)).forEach(e => {
     "view" !== e && (t[e] = (t[e] || 0) + 1);
   });
@@ -19,7 +19,7 @@ export function $$c6(e) {
 export function $$u1(e, t) {
   let r = $$c6(e);
   Object.entries(t).forEach(([e, t]) => {
-    N_.has(e) && (r[e] ||= 0, r[e] += t);
+    collaboratorSet.has(e) && (r[e] ||= 0, r[e] += t);
   });
   return r;
 }
@@ -27,7 +27,7 @@ export function $$p2(e) {
   return Object.entries(e).filter(([e, t]) => e !== ViewAccessTypeEnum.VIEW).map(([e, t]) => t).reduce((e, t) => e + t, 0);
 }
 export function $$_3(e) {
-  return e.filter(e => e !== ViewAccessTypeEnum.VIEW).sort((e, t) => AG(e, t))[0] ?? ViewAccessTypeEnum.VIEW;
+  return e.filter(e => e !== ViewAccessTypeEnum.VIEW).sort((e, t) => compareProductAccessTypes(e, t))[0] ?? ViewAccessTypeEnum.VIEW;
 }
 export function $$h4(e) {
   let t = {};

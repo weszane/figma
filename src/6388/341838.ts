@@ -7,7 +7,7 @@ import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
 import { ts, zo, gR } from "../figma_app/120210";
 import { selectCurrentFile } from "../figma_app/516028";
-import { Sc } from "../905/18797";
+import { isNullOrFailure } from "../905/18797";
 import { FDocumentType } from "../905/862883";
 import { yD } from "../905/92359";
 import { wR } from "../figma_app/293326";
@@ -229,7 +229,7 @@ export function $$F0() {
       shouldSearchDefaultLibraries: !0
     }));
   }, [R]);
-  let V = e && fileVersion && Sc(loadingState, yD(e.key));
+  let V = e && fileVersion && isNullOrFailure(loadingState, yD(e.key));
   useEffect(() => {
     V && R(zK());
   }, [R, V]);

@@ -1,4 +1,4 @@
-import { Nd } from "../figma_app/291892";
+import { fetchImageData } from "../figma_app/291892";
 export async function $$i0(e, t) {
   if (e in t) {
     let r = t[e];
@@ -9,7 +9,7 @@ export async function $$i0(e, t) {
         return r.promise;
     }
   }
-  let r = Nd(e);
+  let r = fetchImageData(e);
   t[e] = {
     type: "promise",
     promise: r

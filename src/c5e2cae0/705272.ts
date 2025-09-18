@@ -1,6 +1,6 @@
 import s from "../vendor/128080";
 import { isValidAccessType, ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 var r = s;
 let $$n4 = 1;
 let $$d3 = 1;
@@ -71,7 +71,7 @@ export function $$h0(e, t, a) {
   };
 }
 export function $$g1(e) {
-  let t = new Set(N_.toArray());
+  let t = new Set(collaboratorSet.toArray());
   let a = new Set(Object.keys(e));
   return !(!r()(t, a) || Object.values(e).find(e => Number.isNaN(e) || e < 0));
 }

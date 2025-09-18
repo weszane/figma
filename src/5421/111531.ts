@@ -44,7 +44,7 @@ import Y from "classnames";
 import { wY } from "../figma_app/708845";
 import { VisualBellActions } from "../905/302958";
 import { c as _$$c } from "../7a72fc59/376662";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { $5 } from "../figma_app/504321";
 import { q as _$$q2 } from "../5421/116496";
 import { D as _$$D2 } from "../figma_app/446411";
@@ -91,7 +91,7 @@ import { Y as _$$Y } from "../905/1768";
 import { s as _$$s } from "../905/551945";
 import { oW } from "../905/675859";
 import { A as _$$A2 } from "../905/639174";
-import { xp } from "../905/966582";
+import { IMAGE_TYPE_VALUES } from "../905/966582";
 import { z as _$$z } from "../905/634240";
 import { R as _$$R3 } from "../905/726507";
 import { s as _$$s2 } from "../8826/112372";
@@ -1000,7 +1000,7 @@ function tr({
       children: [jsx("input", {
         type: "file",
         ref: a,
-        accept: xp.join(","),
+        accept: IMAGE_TYPE_VALUES.join(","),
         onChange: s,
         className: "x1s85apg"
       }), jsx(oW, {
@@ -2570,7 +2570,7 @@ function nT({
     d.current && (A(nN(e, d, t)), k(d.current));
   }, [e, t]);
   let P = _ === _$$D2.Enabled;
-  let O = Fk((e, t, n, o) => t.includes(tF.Image) && function (e, t, n, o, i) {
+  let O = useDeepEqualSceneValue((e, t, n, o) => t.includes(tF.Image) && function (e, t, n, o, i) {
     if (!t) return !1;
     let {
       folderPath,

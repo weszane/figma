@@ -10,7 +10,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { getCollectionViewStatus } from "../figma_app/618433";
 import { _j } from "../figma_app/843119";
-import { Mw, f4 } from "../figma_app/722362";
+import { useStableSelectedNode, useOnSelectionChange } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { If, Jo } from "../figma_app/565242";
 import { OU, oj, HA } from "../figma_app/986594";
@@ -55,7 +55,7 @@ export function $$b0() {
     let x = getObservableOrFallback(n.bindingFieldSchema);
     let v = useSelector(e => e.mirror.appModel.hoveredNode);
     let I = v ? e.get(v) : null;
-    let N = Mw();
+    let N = useStableSelectedNode();
     let {
       data
     } = getCollectionViewStatus(i);
@@ -388,7 +388,7 @@ export function $$b0() {
       });
     }, [checkTransitions, i, x?.id, I, N, l, name, _name, fieldType, L]);
   }();
-  f4(() => {
+  useOnSelectionChange(() => {
     if (!SceneGraphHelpers || !t || !i) return;
     let e = getSingletonSceneGraph();
     let s = oj(e.getDirectlySelectedNodes());

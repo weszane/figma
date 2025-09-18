@@ -7,7 +7,7 @@ import { CloseButton } from "../905/17223";
 import { Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
-import { Dw } from "../figma_app/976345";
+import { openCreateTeamFlow } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
@@ -25,13 +25,13 @@ import { I as _$$I } from "../c5e2cae0/393403";
 import { LazyInputForwardRef } from "../905/408237";
 import { LoadingSpinner } from "../figma_app/858013";
 import { createOptimistThunk } from "../905/350402";
-import { bE } from "../905/98702";
-import { bE as _$$bE } from "../figma_app/240735";
-import { e5 } from "../figma_app/297957";
+import { rolePostAction } from "../905/98702";
+import { postTeamAction } from "../figma_app/240735";
+import { hasStarterTeamLoopholeAccess } from "../figma_app/297957";
 import { trackTeamEvent } from "../figma_app/314264";
 import { getUserId } from "../905/372672";
 import { selectTeams } from "../905/338617";
-import { G } from "../figma_app/66216";
+import { roleServiceAPI } from "../figma_app/66216";
 import { KV, $g, Eh, DI, u1, GK, b as _$$b } from "../c5e2cae0/62130";
 import { I as _$$I2 } from "../905/641938";
 import { I as _$$I3 } from "../c5e2cae0/718426";
@@ -48,14 +48,14 @@ let L = createOptimistThunk((e, {
     team_name: t
   }).then(({
     data: t
-  }) => (n = "team" in t.meta ? t.meta.team : t.meta, e.dispatch(_$$bE({
+  }) => (n = "team" in t.meta ? t.meta.team : t.meta, e.dispatch(postTeamAction({
     team: n
-  })), trackTeamEvent("Team Created", n.id, e.getState()), G.getTeam({
+  })), trackTeamEvent("Team Created", n.id, e.getState()), roleServiceAPI.getTeam({
     teamId: n.id
   }))).then(({
     data: t
   }) => {
-    for (let a of t.meta) e.dispatch(bE({
+    for (let a of t.meta) e.dispatch(rolePostAction({
       role: a
     }));
     r();
@@ -98,7 +98,7 @@ function V(e) {
       onBillingCompleteRedirectInfo: e.onBillingCompleteRedirectInfo
     })) : (m(!1), u(!0));
   });
-  return a && !e5({
+  return a && !hasStarterTeamLoopholeAccess({
     userId: a,
     teams: Object.values(l),
     rolesByTeamId: n
@@ -177,7 +177,7 @@ export function $$z0(e) {
     I();
   };
   let P = () => {
-    0 === getEditableTeamsWithoutPaidAccess(C).length ? (N(Dw({
+    0 === getEditableTeamsWithoutPaidAccess(C).length ? (N(openCreateTeamFlow({
       openInNewTab: !desktopAPIInstance
     })), a("createTeam")) : a("selectTeam");
   };

@@ -9,20 +9,20 @@ import { VisualBellActions } from "../905/302958";
 import { _$ } from "../figma_app/379850";
 import { showModalHandler } from "../905/156213";
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_PAGE_LOADING } from "../905/784363";
-import { Fr } from "../figma_app/297957";
+import { useDraftsPageLimitExperiment } from "../figma_app/297957";
 import { J } from "../905/445197";
 import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { subscribeToContainingPage } from "../figma_app/582924";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { P3 } from "../figma_app/952446";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { hasPageLimitations, hasReachedPageLimit, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
 import { F as _$$F2 } from "../905/258517";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
 import { getActiveVersion, loadVersionIncrementally } from "../figma_app/841351";
 import { PageFolderFile } from "../905/652992";
@@ -50,7 +50,7 @@ export function $$F7() {
   let e = selectCurrentFile();
   let t = function () {
     let e = selectCurrentFile();
-    let t = p8("pagesList").length;
+    let t = useAppModelProperty("pagesList").length;
     let r = $$j3();
     return !!(e && (hasReachedPageLimit({
       openFile: e,
@@ -90,7 +90,7 @@ export function $$F7() {
   }, [e, r, s, t]);
 }
 export function $$j3() {
-  let e = Fr();
+  let e = useDraftsPageLimitExperiment();
   return useCallback(({
     openFile: t,
     pageCount: r
@@ -186,21 +186,21 @@ export function $$H10(e, t) {
   return r?.childCount === 0 && !n;
 }
 export function $$z4(e = !0) {
-  return Fk(t => {
+  return useDeepEqualSceneValue(t => {
     if (!e) return "0:1";
     let r = t.getCurrentPage();
     return r ? r.guid : "0:1";
   });
 }
 export function $$W1(e = !0) {
-  return Fk(t => {
+  return useDeepEqualSceneValue(t => {
     if (!e) return "0:2";
     let r = t.getInternalCanvas();
     return r ? r.guid : "0:2";
   });
 }
 export function $$K6() {
-  return Fk(e => e.getCurrentPage()?.name || null);
+  return useDeepEqualSceneValue(e => e.getCurrentPage()?.name || null);
 }
 export const $P = $$G0;
 export const A$ = $$W1;

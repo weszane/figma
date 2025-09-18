@@ -14,7 +14,7 @@ import { y as _$$y } from "../figma_app/705249";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { useFullscreenReady } from "../905/924253";
-import { dH } from "../figma_app/722362";
+import { useCurrentTool } from "../figma_app/722362";
 import { e0 as _$$e } from "../905/696396";
 import { i$, Z5, uw } from "../figma_app/582377";
 import { hB, Ue, Lc, Qj, Yo, lM } from "../905/301347";
@@ -29,7 +29,7 @@ import { HG, bL, O6 } from "../905/598775";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { useLatestRef } from "../figma_app/922077";
 import { yZ } from "../905/407352";
-import { F as _$$F } from "../905/241044";
+import { sanitizeInput } from "../905/241044";
 import { WN } from "../figma_app/638601";
 import { useCurrentFileKey, selectCurrentFile, selectOpenFileKey } from "../figma_app/516028";
 import { getUserId, selectCurrentUser } from "../905/372672";
@@ -42,7 +42,7 @@ import { g as _$$g } from "../905/757007";
 import { W as _$$W } from "../905/569454";
 import { H as _$$H } from "../905/855344";
 import K from "classnames";
-import { I as _$$I } from "../figma_app/819288";
+import { isMessageMetaEmpty } from "../figma_app/819288";
 import { SvgComponent } from "../905/714743";
 import { KindEnum } from "../905/129884";
 import { HH } from "../figma_app/841415";
@@ -74,7 +74,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { hideDropdownAction } from "../905/929976";
 import { Z as _$$Z } from "../905/104740";
 import { dh } from "../figma_app/186343";
-import { Fy } from "../figma_app/623300";
+import { getNodeStatus } from "../figma_app/623300";
 import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { viewportNavigatorContext } from "../figma_app/298911";
@@ -381,7 +381,7 @@ let eE = memo(function (e) {
     children: [e.postTitle && jsx("div", {
       className: "comments_row_presentation--postTitle--9oNMe",
       children: e.postTitle
-    }), !_$$I(e.messageMeta) && jsx(HH, {
+    }), !isMessageMetaEmpty(e.messageMeta) && jsx(HH, {
       className: "comments_row_presentation--commentMessage--q-YaC text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsisAfter3Lines--h405C ellipsis--_ellipsisAfterNLines--LzI7k comment_message--commentMessage--kZCzD",
       messageMeta: e.messageMeta,
       commentId: e.commentId
@@ -564,7 +564,7 @@ let eS = memo(function (e) {
 });
 function eJ(e) {
   let t = useSelector(e => e.mirror.appModel.pagesList);
-  return null === e.page || Fy(t, e.page) === DataLoadStatus.LOADED;
+  return null === e.page || getNodeStatus(t, e.page) === DataLoadStatus.LOADED;
 }
 let e0 = memo(function (e) {
   let {
@@ -798,13 +798,13 @@ let e0 = memo(function (e) {
   let ei = element.comments.length - 1;
   let er = m ? getI18nString("comments.aria_label_select_comment_descriptive_unread", {
     authorString: l[0].avatar_user_handle,
-    contentString: _$$F(element.comments[0].message_meta[0]?.t) ?? "",
+    contentString: sanitizeInput(element.comments[0].message_meta[0]?.t) ?? "",
     replyString: getI18nString("comments.reply_count", {
       replyCount: ei
     })
   }) : getI18nString("comments.aria_label_select_comment_descriptive", {
     authorString: l[0].avatar_user_handle,
-    contentString: _$$F(element.comments[0].message_meta[0]?.t) ?? "",
+    contentString: sanitizeInput(element.comments[0].message_meta[0]?.t) ?? "",
     replyString: getI18nString("comments.reply_count", {
       replyCount: ei
     })
@@ -1384,7 +1384,7 @@ function tk({
   loadedSidebarItems: e,
   ...t
 }) {
-  let n = dH();
+  let n = useCurrentTool();
   let {
     activeQuery,
     activeFilters

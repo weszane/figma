@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/270214";
 import { Ay } from "@stylexjs/stylex";
 import { M } from "../figma_app/749682";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { Oh } from "../figma_app/144692";
 import { xG } from "../figma_app/121043";
@@ -15,7 +15,7 @@ export function $$x0({
   loadingShimmerCounts: t = [5],
   hasNoopFigmaMenu: l = !1
 }) {
-  let r = aV();
+  let r = useIsProgressBarHiddenOrLocked();
   let d = U1();
   if (useEffect(() => {
     let e = document.documentElement.style;

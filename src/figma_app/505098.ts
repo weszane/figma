@@ -1,13 +1,13 @@
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { Ul } from "../905/973142";
 import { p } from "../905/778115";
 import { isInvalidValue } from "../905/216495";
 import { LI, FS } from "../figma_app/646357";
-import { dK, Sh, F4 } from "../figma_app/889655";
+import { selectSceneGraph, selectSceneGraphSelectionKeys, selectSelectedNodes } from "../figma_app/889655";
 import { xP } from "../figma_app/164212";
 let $$c0 = e => e.mirror.selectionProperties.componentProps;
 let $$u12 = e => e.mirror.selectionProperties.resettableComponentPropAssignments;
-let $$p21 = Mz([dK, Sh], F);
+let $$p21 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], F);
 export function $$_14(e) {
   let {
     description,
@@ -15,8 +15,8 @@ export function $$_14(e) {
   } = e.mirror.selectionProperties;
   return isInvalidValue(description) || isInvalidValue(symbolDescription) ? description ?? "" : description && description && (description.startsWith("<") && description.endsWith(">") || description.startsWith("{") && description.endsWith("}") || Ul(symbolDescription) === description) ? description : isInvalidValue(symbolDescription) ? symbolDescription : Ul(symbolDescription ?? "");
 }
-let $$h4 = Mz([dK, Sh], $$j17);
-let $$m6 = Mz([dK, Sh], (e, t) => {
+let $$h4 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], $$j17);
+let $$m6 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], (e, t) => {
   let r = new Set();
   for (let n of t) {
     let t = e.get(n)?.containingSymbolId;
@@ -24,16 +24,16 @@ let $$m6 = Mz([dK, Sh], (e, t) => {
   }
   return Array.from(r);
 });
-let $$g10 = () => Mz([dK, (e, t) => t], $$f16);
+let $$g10 = () => createSelector([selectSceneGraph, (e, t) => t], $$f16);
 export function $$f16(e, t) {
   return $$j17(e, t) ?? F(e, t);
 }
 let $$E1 = (() => {
   let e = $$g10();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-let $$y7 = Mz([$$p21, $$h4], (e, t) => e ?? t);
-let b = () => Mz([(e, t) => t, dK], (e, t) => {
+let $$y7 = createSelector([$$p21, $$h4], (e, t) => e ?? t);
+let b = () => createSelector([(e, t) => t, selectSceneGraph], (e, t) => {
   let r = p(e, e => {
     let r = t.get(e);
     return !!r && LI(r);
@@ -45,44 +45,44 @@ let b = () => Mz([(e, t) => t, dK], (e, t) => {
   }
   return r ?? void 0;
 });
-let T = () => Mz([(e, t) => t, dK], (e, t) => p(e, e => {
+let T = () => createSelector([(e, t) => t, selectSceneGraph], (e, t) => p(e, e => {
   let r = t.get(e);
   return !!r && FS(r);
 }) ?? void 0);
 (() => {
   let e = b();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-let $$I19 = () => Mz([$$g10(), b()], (e, t) => e ?? t);
-let S = () => Mz([T()], e => e);
+let $$I19 = () => createSelector([$$g10(), b()], (e, t) => e ?? t);
+let S = () => createSelector([T()], e => e);
 let v = (() => {
   let e = $$I19();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-let $$A18 = Mz([v, dK], (e, t) => e ? t.get(e) : null);
+let $$A18 = createSelector([v, selectSceneGraph], (e, t) => e ? t.get(e) : null);
 let x = (() => {
   let e = S();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-Mz([x, dK], (e, t) => e ? t.get(e) : null);
-let $$N9 = Mz([$$c0, Sh], (e, t) => {
+createSelector([x, selectSceneGraph], (e, t) => e ? t.get(e) : null);
+let $$N9 = createSelector([$$c0, selectSceneGraphSelectionKeys], (e, t) => {
   if (e) return xP(t => e[t]?.containingInstance, t) ?? void 0;
 });
-let $$C20 = () => Mz([$$c0, (e, t) => t], (e, t) => {
+let $$C20 = () => createSelector([$$c0, (e, t) => t], (e, t) => {
   if (e) return xP(t => e[t]?.containingInstanceBackingSymbol, t) ?? void 0;
 });
-let $$w11 = () => Mz([$$c0, dK, (e, t) => t], (e, t, r) => {
+let $$w11 = () => createSelector([$$c0, selectSceneGraph, (e, t) => t], (e, t, r) => {
   if (!e) return;
   let n = r.map(t => e[t]?.containingInstance || t);
   return U(e, n, t);
 });
-let O = Mz([$$c0, Sh], (e, t) => {
+let O = createSelector([$$c0, selectSceneGraphSelectionKeys], (e, t) => {
   if (e) return B(e, t);
 });
-let R = Mz([$$c0, Sh, dK], (e, t, r) => {
+let R = createSelector([$$c0, selectSceneGraphSelectionKeys, selectSceneGraph], (e, t, r) => {
   if (e) return U(e, t, r);
 });
-let $$L15 = () => Mz([$$c0, (e, t) => t, dK], (e, t, r) => {
+let $$L15 = () => createSelector([$$c0, (e, t) => t, selectSceneGraph], (e, t, r) => {
   if (!e) return;
   let n = [];
   for (let e of t) {
@@ -92,13 +92,13 @@ let $$L15 = () => Mz([$$c0, (e, t) => t, dK], (e, t, r) => {
   }
   return U(e, n, r) ?? B(e, n);
 });
-let $$P8 = Mz([R, O], (e, t) => t ?? e);
-let $$D3 = () => Mz([dK, (e, t) => t], (e, t) => t.some(t => e.get(t)?.isInstanceSublayer ?? !1));
+let $$P8 = createSelector([R, O], (e, t) => t ?? e);
+let $$D3 = () => createSelector([selectSceneGraph, (e, t) => t], (e, t) => t.some(t => e.get(t)?.isInstanceSublayer ?? !1));
 let $$k5 = (() => {
   let e = $$D3();
-  return t => e(t, Sh(t));
+  return t => e(t, selectSceneGraphSelectionKeys(t));
 })();
-let $$M2 = Mz([F4], e => e.some(e => "SYMBOL" === e.type || !!e.isStateGroup));
+let $$M2 = createSelector([selectSelectedNodes], e => e.some(e => "SYMBOL" === e.type || !!e.isStateGroup));
 function F(e, t) {
   return xP(t => e.get(t)?.containingSymbolId, t) ?? void 0;
 }
@@ -114,7 +114,7 @@ function U(e, t, r) {
 function B(e, t) {
   return xP(t => e[t]?.backingSymbol ?? e[t]?.containingInstanceBackingSymbol, t) ?? void 0;
 }
-export let $$G13 = Mz([F4], e => e.every(e => "SYMBOL" === e.type || "INSTANCE" === e.type || !!e.isSymbolSublayer || !!e.isInstanceSublayer));
+export let $$G13 = createSelector([selectSelectedNodes], e => e.every(e => "SYMBOL" === e.type || "INSTANCE" === e.type || !!e.isSymbolSublayer || !!e.isInstanceSublayer));
 export const C1 = $$c0;
 export const Lg = $$E1;
 export const Ln = $$M2;

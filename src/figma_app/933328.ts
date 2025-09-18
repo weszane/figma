@@ -3,7 +3,7 @@ import n, { useEffect, useMemo } from 'react';
 import { reportError } from '../905/11';
 import { gi } from '../905/2848';
 import { createActionCreator } from '../905/73481';
-import { Sc, VP } from '../905/18797';
+import { isNullOrFailure, isLoading } from '../905/18797';
 import { cI, Dl } from '../905/49792';
 import { qB } from '../905/63598';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
@@ -1170,7 +1170,7 @@ let $$t_45 = async (e, t, r, n) => {
   }
   atomStoreManager.set($$tg22, 'loading');
   let a = (n = n ?? lG(r)).loadingKey;
-  VP(r.getState().loadingState, a) && (await n.promise);
+  isLoading(r.getState().loadingState, a) && (await n.promise);
   r.dispatch(loadingStatePutLoading({
     key: a
   }));
@@ -1353,7 +1353,7 @@ export async function $$tA52(e) {
     return;
   }
   let n = Mb(_$$l(r.libraryKey));
-  if (!Sc(loadingState, n)) {
+  if (!isNullOrFailure(loadingState, n)) {
     atomStoreManager.set($$tf14, 'loaded');
     return;
   }

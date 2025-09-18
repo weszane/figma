@@ -5,7 +5,7 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { SelectionState, Modifier, EditorState, convertToRaw, convertFromRaw, KeyBindingUtil, CompositeDecorator, getDefaultKeyBinding, convertFromHTML, ContentState, RichUtils, Editor } from "../vendor/279643";
 import { trackEventAnalytics } from "../905/449184";
-import { l5, vj, Wf } from "../figma_app/819288";
+import { getMessageType, MessageType, Wf } from "../figma_app/819288";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { getFalseValue } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
@@ -22,8 +22,8 @@ import { PositionEnum, KindEnum } from "../905/129884";
 import { xT } from "../figma_app/841415";
 import { tI as _$$tI } from "../905/603628";
 import { il } from "../vendor/291472";
-import { xM, Lg as _$$Lg, wd, UF } from "../905/403166";
-import { F as _$$F2 } from "../905/241044";
+import { isValidEmojiShortcode, Lg as _$$Lg, splitEmojiAndText, getEmojiData } from "../905/403166";
+import { sanitizeInput } from "../905/241044";
 import B from "../vendor/426804";
 import { createRect } from "../905/508367";
 import { splitIntoCharacters } from "../figma_app/930338";
@@ -176,7 +176,7 @@ function V(t) {
               lengthOfText: i,
               token: _token
             };
-          } else n[r].t ? i += n[r].t?.replace(/\n/g, "").length || 0 : i += _$$F2(n[r].user_annotated?.handle)?.length || 0;
+          } else n[r].t ? i += n[r].t?.replace(/\n/g, "").length || 0 : i += sanitizeInput(n[r].user_annotated?.handle)?.length || 0;
           if ((i += "profile_id" in n[r] ? 1 : 0) > e) return {
             lengthOfText: i,
             token: n[r]
@@ -193,9 +193,9 @@ function V(t) {
       }(t, e, n, r), i);
       return token;
     }(p, l, y.index, c, g);
-    y = t && l5(t) === vj.PLAIN_TEXT ? y : null;
+    y = t && getMessageType(t) === MessageType.PLAIN_TEXT ? y : null;
   }
-  y ? (e = "MENTION", n = y.search, i = y.index, r = h) : u ? (e = "EMOJI", n = u[1], i = u.index, r = h) : f && xM(f[1]) && (e = "COMPLETE_EMOJI", n = f[1], i = f.index, r = h);
+  y ? (e = "MENTION", n = y.search, i = y.index, r = h) : u ? (e = "EMOJI", n = u[1], i = u.index, r = h) : f && isValidEmojiShortcode(f[1]) && (e = "COMPLETE_EMOJI", n = f[1], i = f.index, r = h);
   return {
     type: e,
     search: n,
@@ -418,7 +418,7 @@ function tl(t) {
   let a = convertToRaw(t.getCurrentContent());
   let h = "";
   a.blocks.forEach(t => {
-    let a = splitIntoCharacters(_$$F2(t.text) || "");
+    let a = splitIntoCharacters(sanitizeInput(t.text) || "");
     ["ordered-list-item", "unordered-list-item"].includes(t.type) ? (t.type !== r && (n && i.push({
       styles: ["ordered-list-item" === r ? "ol" : "ul"],
       children: e
@@ -522,7 +522,7 @@ let th = (t, e, n, i, r, s = "default") => {
   (function (t) {
     let e = [];
     t.forEach(t => {
-      let n = _$$F2(t.t);
+      let n = sanitizeInput(t.t);
       if (n) {
         let i = n.split("\n");
         1 === i.length ? e.push(t) : i.forEach((n, r) => {
@@ -539,7 +539,7 @@ let th = (t, e, n, i, r, s = "default") => {
     });
     return e;
   })(t).forEach(t => {
-    let h = _$$F2(t.t);
+    let h = sanitizeInput(t.t);
     if (t.children?.length) {
       "" !== l && (r.push({
         text: l,
@@ -554,7 +554,7 @@ let th = (t, e, n, i, r, s = "default") => {
         t.children?.length && th(t.children, e, n, i, r, h);
       });
     } else if (t.user_annotated || t.profile_id) {
-      let e = t.user_annotated ? _$$F2(t.user_annotated.handle) || "" : "@" + h;
+      let e = t.user_annotated ? sanitizeInput(t.user_annotated.handle) || "" : "@" + h;
       let n = t.user_annotated ? t.user_annotated : {
         id: t.profile_id,
         profile_handle: h
@@ -598,13 +598,13 @@ let th = (t, e, n, i, r, s = "default") => {
           });
         }
       });else if (_$$Lg(h)) {
-        let t = wd(h);
+        let t = splitEmojiAndText(h);
         let e = 0;
         let n = "";
         for (let r of t) {
           let t = "";
           let s = "";
-          xM(r) && (UF(r).forEach(e => {
+          isValidEmojiShortcode(r) && (getEmojiData(r).forEach(e => {
             t += e.unicode;
             s += e.meta;
           }), o.push({
@@ -680,7 +680,7 @@ let tg = t => {
 let tu = t => t.getAttribute("data-tooltip-url-string");
 function tf(t, e) {
   let n = V(t);
-  let i = UF(e)[0].unicode;
+  let i = getEmojiData(e)[0].unicode;
   let r = t.getCurrentContent().createEntity("EMOJI", "IMMUTABLE", {
     text: e,
     unicode: i
@@ -880,14 +880,14 @@ export class $$tA0 extends Component {
             mention: e
           }).getLastCreatedEntityKey();
           let r = V(t);
-          return ty(t, r, i, _$$F2(e.handle) || "", !1);
+          return ty(t, r, i, sanitizeInput(e.handle) || "", !1);
         }
         let i = n.createEntity("MENTION", "IMMUTABLE", {
           mention: e
         }).getLastCreatedEntityKey();
         let r = V(t);
         let s = "profile_handle" in e ? `@${e.profile_handle}` : e.handle;
-        return ty(t, r, i, _$$F2(s) || "", !1);
+        return ty(t, r, i, sanitizeInput(s) || "", !1);
       }(this.state.editorState, t);
       "profile_handle" in t && this.props.dispatch(Hx(t));
       this.onChange(i);

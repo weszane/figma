@@ -7,7 +7,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { isValidValue } from "../905/216495";
 import { u as _$$u } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { t } from "../905/62933";
 import { Yc } from "../figma_app/930914";
 import { O4 } from "../figma_app/264776";
@@ -37,7 +37,7 @@ export function $$T4(e) {
     mapVariableIdToTypedValue: eT,
     metadata: e
   }, void 0, function () {
-    let e = selectWithShallowEqual(e => Sh(e));
+    let e = selectWithShallowEqual(e => selectSceneGraphSelectionKeys(e));
     let t = !Yc(RR.VISIBLE, e);
     let r = useCallback(e => {
       permissionScopeHandler.user("add-prop-ref", () => Fullscreen.addComponentPropRef(RR.VISIBLE, e.value.explicitDefId));
@@ -51,7 +51,7 @@ export function $$I1() {
     consumedVariable
   } = u3(["VISIBLE"]);
   if (consumedVariable) {
-    if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value; else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
+    if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value;else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
       for (let r of Pr(consumedVariable)) if (r.type === VariableDataType.ALIAS) {
         e = r.value;
         break;

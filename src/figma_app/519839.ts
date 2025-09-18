@@ -10,7 +10,7 @@ import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { sendHistogram, sendMetric } from "../905/485103";
 import { PerfTimer } from "../905/609396";
-import { ET, qW } from "../905/623179";
+import { uploadToPresignedPost, UploadError } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError, logWarning } from "../905/714362";
 import { handleAtomEvent } from "../905/502364";
@@ -185,10 +185,10 @@ async function ee(e, t, r, n) {
       return;
     }
     try {
-      T.push(await ET(_$$e.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
+      T.push(await uploadToPresignedPost(_$$e.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
       sendHistogram("publish.thumbnails_buffer.bytes", r.buffer.byteLength);
     } catch (e) {
-      e instanceof qW && (S = !0);
+      e instanceof UploadError && (S = !0);
       c.push(...r.guids);
     }
   }));
@@ -737,9 +737,9 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   }
   try {
     let e = new TextEncoder();
-    T = await ET(_$$e.DESIGN_SYSTEMS_EDITOR, "publishChanges.params", p, y, e.encode(JSON.stringify(eA)), "application/json");
+    T = await uploadToPresignedPost(_$$e.DESIGN_SYSTEMS_EDITOR, "publishChanges.params", p, y, e.encode(JSON.stringify(eA)), "application/json");
   } catch (t) {
-    let e = t instanceof qW;
+    let e = t instanceof UploadError;
     ea("Unable to upload publishing params" + (e ? " (non-s3 error)" : ""), "upload_params", r.id, {
       error: t,
       encounteredNonS3PresignedPostError: e

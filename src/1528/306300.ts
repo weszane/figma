@@ -16,7 +16,7 @@ import { showModalHandler } from "../905/156213";
 import { UK } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { r6 } from "../905/542608";
@@ -139,7 +139,7 @@ export function $$$0({
   let d = iR();
   let c = d2();
   let u = getObservableOrFallback(UK().showGuids);
-  let p = useSelector(Sh);
+  let p = useSelector(selectSceneGraphSelectionKeys);
   let m = useMemo(() => JSON.stringify(p), [p]);
   let _ = hZ();
   let E = Object.entries(o);

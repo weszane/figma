@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ResourceStatus } from "../905/957591";
 import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
-import { h3 } from "../figma_app/976345";
+import { loadTrashedFiles } from "../figma_app/976345";
 import { jl } from "../figma_app/199513";
 import { selectCurrentUser } from "../905/372672";
 import { FileKeysInProject } from "../figma_app/43951";
@@ -56,7 +56,7 @@ export function $$f0() {
     }));
   }, [loadedFolders, _, m]);
   useEffect(() => {
-    _(h3({
+    _(loadTrashedFiles({
       orgId: null,
       teamId: null
     }));

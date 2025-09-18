@@ -13,7 +13,7 @@ import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
 import { NT, mp } from "../figma_app/579169";
 import { o9 } from "../figma_app/621201";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { y as _$$y } from "../905/129046";
 import { rq } from "../905/425180";
@@ -25,7 +25,7 @@ let $$A1 = "https://help.figma.com/hc/articles/15023124644247-Guide-to-Dev-Mode"
 let I = buildUploadUrl("31fafead8c196706e91abf57cbdece011da1a199");
 export function $$E0() {
   let e = useAtomWithSubscription(LZ);
-  let t = aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let n = useCanAccessFullDevMode();
   let l = useAtomWithSubscription(Pt);
   let E = useAtomWithSubscription(xJ);

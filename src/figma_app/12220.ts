@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeWeak } from "../figma_app/815945";
-import { L4 } from "../figma_app/819288";
+import { containsDash } from "../figma_app/819288";
 import { parsePxNumber } from "../figma_app/783094";
 import { gB, getResourceDataOrFallback } from "../905/723791";
 import { isPointInRect, Point } from "../905/736624";
@@ -116,7 +116,7 @@ let C = (e, t, r) => {
 };
 export function $$w2(e, t, r, n, a, o, l) {
   let d = C(r, n, e);
-  let c = L4(r.id);
+  let c = containsDash(r.id);
   let u = r.messageMeta;
   r.messageMetaStylized?.length && (u = r.messageMetaStylized);
   let p = getFeatureFlags().comments_faster_saving_ux ? !!r.uuid && a.has(r.uuid) : void 0;
@@ -190,7 +190,7 @@ export function $$L14(e, t, r, n, a, o, d, c) {
       let n = m[r.id] ?? (r.uuid && m[r.uuid]);
       return $$w2(e, t, r, b, d, c, n);
     });
-    let I = L4(t.id);
+    let I = containsDash(t.id);
     let S = getFeatureFlags().comments_faster_saving_ux ? !!t.uuid && d.has(t.uuid) : void 0;
     let v = getFeatureFlags().comments_faster_saving_ux_v2 ? I || !!t.uuid && t.uuid in c : void 0;
     return {

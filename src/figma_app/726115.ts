@@ -3,13 +3,13 @@ import { forwardRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { TI } from "../905/713722";
-import { DP, yM } from "../905/640017";
-import { rl } from "../905/248569";
+import { getVisibleTheme, useThemeContext } from "../905/640017";
+import { createColorDataUri } from "../905/248569";
 import { Ep } from "../figma_app/504823";
-import { p3 } from "../figma_app/622881";
-import { pw } from "../905/187165";
+import { shouldUsePolyfill } from "../figma_app/622881";
+import { getThemeBorderStyle } from "../905/187165";
 import { b4 } from "../905/767147";
 import { f$, lo } from "../figma_app/492929";
 export let $$f1 = forwardRef(function ({
@@ -18,15 +18,15 @@ export let $$f1 = forwardRef(function ({
   forceNonInteractive: r,
   ...i
 }, o) {
-  let d = DP();
-  let f = yM();
+  let d = getVisibleTheme();
+  let f = useThemeContext();
   let y = Ep();
   let b = {
     ...e,
     a: 1
   };
-  let T = F.format(b);
-  let I = 1 !== e.a || t ? void 0 : pw(f, T, d);
+  let T = colorCSSManipulatorInstance.format(b);
+  let I = 1 !== e.a || t ? void 0 : getThemeBorderStyle(f, T, d);
   let S = !r && b4(i);
   let v = jsxs(Fragment, {
     children: [jsx("div", {
@@ -41,12 +41,12 @@ export let $$f1 = forwardRef(function ({
       }
     })]
   });
-  let A = (y ?? ColorSpaceEnum.SRGB) === ColorSpaceEnum.DISPLAY_P3 ? p3() ? {
-    backgroundImage: `url(${rl(b, ColorSpaceEnum.DISPLAY_P3)})`
+  let A = (y ?? ColorSpaceEnum.SRGB) === ColorSpaceEnum.DISPLAY_P3 ? shouldUsePolyfill() ? {
+    backgroundImage: `url(${createColorDataUri(b, ColorSpaceEnum.DISPLAY_P3)})`
   } : {
-    backgroundColor: F.format(b, "display-p3")
+    backgroundColor: colorCSSManipulatorInstance.format(b, "display-p3")
   } : {
-    backgroundColor: F.format(b)
+    backgroundColor: colorCSSManipulatorInstance.format(b)
   };
   return S ? jsx(ButtonPrimitive, {
     style: A,

@@ -9,7 +9,7 @@ import { gI, dS, Pc } from "../figma_app/396464";
 import { ZH } from "../figma_app/504823";
 import { clearSelection, addToSelection, removeFromSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { l6, c$, sK } from "../905/794875";
 import { pu, OL } from "../figma_app/123994";
 import { wB, be, Uk } from "../905/257620";
@@ -31,7 +31,7 @@ export function $$v0({
 }) {
   let t = useDispatch();
   let i = Um();
-  let l = eY();
+  let l = useSceneGraphSelector();
   let u = null;
   let f = gI();
   let v = dS();
@@ -62,7 +62,7 @@ export function $$v0({
     multipleSelections: S.concat(C ? A : []),
     onChange: e => {
       if (e === A) {
-        if (C) clearSelection(); else for (let e of x) S.includes(e) || addToSelection([e]);
+        if (C) clearSelection();else for (let e of x) S.includes(e) || addToSelection([e]);
       } else if (S.includes(e)) {
         let t = l.get(e)?.parentGuid;
         if (t && v.includes(t)) {

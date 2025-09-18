@@ -21,7 +21,7 @@ import { XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP } from "../figma_app/933328";
 import { hideModal } from "../905/156213";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
 import { S as _$$S } from "../905/459477";
@@ -203,7 +203,7 @@ let $$X0 = registerModal(function (e) {
     refField,
     propType
   });
-  let H = eY();
+  let H = useSceneGraphSelector();
   let [K, Y] = useState(defaultPropName);
   let X = useCallback(e => Y(e.target.value), []);
   let {

@@ -17,12 +17,12 @@ import { reportError } from "../905/11";
 import { base64ToUint8Array, uint8ArrayToBase64 } from "../figma_app/930338";
 import { GI, IZ, SK } from "../905/125333";
 import { KE, En, jx } from "../905/116101";
-import { F as _$$F2 } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { Ii } from "../figma_app/644079";
 import { CB } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
 import { A5 } from "../905/275640";
-import { aV, dH } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
 import { Ef, se, HS, yx } from "../figma_app/546509";
 import { WC, T$, wi } from "../figma_app/792783";
 import { getObservableValue } from "../figma_app/84367";
@@ -1454,7 +1454,7 @@ function eu(e, t) {
   }
 }
 function ep(e, t, r) {
-  let n = e.find(([e, r]) => _$$F2.format(t) === _$$F2.format(e));
+  let n = e.find(([e, r]) => colorCSSManipulatorInstance.format(t) === colorCSSManipulatorInstance.format(e));
   return n ? {
     settingsType: Ud.presetColor,
     presetIdentifier: n[1],
@@ -1652,7 +1652,7 @@ export function $$eE0() {
     t.flush();
   }, [t]);
   e_();
-  let o = aV();
+  let o = useIsProgressBarHiddenOrLocked();
   useEffect(() => {
     e?.nativeToolbarUpdateEnabled?.(!o);
   }, [o, e]);
@@ -1691,7 +1691,7 @@ export function $$eE0() {
   useEffect(() => {
     !_ || E && arraysEqual(E, _) || e?.nativeToolbarUpdateEnabledActions?.(_);
   }, [e, _, E]);
-  let y = $$ea2(dH());
+  let y = $$ea2(useCurrentTool());
   _$$h(() => {
     y && (e?.nativeToolbarUpdateActiveTool?.(y), e?.nativeToolbarUpdateMultiselectActive?.("MULTISELECT" === y));
   });
@@ -1708,7 +1708,7 @@ export function $$eE0() {
         a: L.strokeOpacity
       } : t;
       eg(jsx(W, {
-        color: _$$F2.format(r)
+        color: colorCSSManipulatorInstance.format(r)
       })).then(r => {
         r && (e?.nativeToolbarUpdateToolSettings?.("PENCIL", ep(N, t, r)), e?.nativeToolbarUpdateToolSettings?.("PRIMARY_PENCIL_OPACITY", ep(N, t, r)));
       }).catch(console.error);
@@ -1719,7 +1719,7 @@ export function $$eE0() {
   useEffect(() => {
     let t = j.paints?.[0]?.color;
     t && eg(jsx(K, {
-      color: _$$F2.format(t)
+      color: colorCSSManipulatorInstance.format(t)
     })).then(r => {
       r && e?.nativeToolbarUpdateToolSettings?.("HIGHLIGHTER", ep(F, t, r));
     }).catch(console.error);

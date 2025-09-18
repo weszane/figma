@@ -30,10 +30,10 @@ import { AccessLevelEnum } from '../905/557142';
 import { FlashActions } from '../905/573154';
 import { nl } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { adminPermissionConfig } from '../905/654645';
 import { getResourceDataOrFallback } from '../905/663269';
-import { xN } from '../905/672897';
+import { fetchTeamRoles } from '../905/672897';
 import { d as _$$d } from '../905/693444';
 import { S3 } from '../905/708054';
 import { IT } from '../905/713695';
@@ -819,7 +819,7 @@ let t_ = 'settings_view--blueLinkForBanner--b0V8l settings_view--blueLink--F3vR6
 let tp = 'settings_view--accessIcon--7RIy3';
 function tf(e) {
   let t = useDispatch();
-  let a = DP();
+  let a = getVisibleTheme();
   let i = e.team;
   let l = useSelector(e => getPermissionsState(e));
   let o = i.org_id ? l.orgById[i.org_id] : null;
@@ -1309,7 +1309,7 @@ let tj = createOptimistThunk(async (e, {
   canViewTeam: a
 }) => {
   await kb.promise;
-  t && a && xN(t, e);
+  t && a && fetchTeamRoles(t, e);
 });
 function tI(e) {
   let t = {

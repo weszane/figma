@@ -5,14 +5,14 @@ import { Button } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { n5, zE, HF } from "../figma_app/646357";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { dD } from "../905/519113";
 import { RR } from "../905/514666";
 import { z } from "../905/454433";
 function g() {
   let e = useSelector(e => e.library.local);
-  let t = useSelector(Sh);
+  let t = useSelector(selectSceneGraphSelectionKeys);
   let s = useMemo(() => {
     let s = new Set();
     for (let r of t) {
@@ -42,7 +42,7 @@ export function $$f0() {
     onClick
   } = g();
   let s = useSelector(e => e.library.local);
-  let n = useSelector(Sh).some(e => {
+  let n = useSelector(selectSceneGraphSelectionKeys).some(e => {
     let t = n5(e, s);
     return t && !HF(t.status);
   });

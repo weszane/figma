@@ -6,7 +6,7 @@ import { bL } from "../905/911410";
 import { DesignGraphElements } from "../figma_app/763686";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { n as _$$n } from "../905/734251";
-import { dH } from "../figma_app/722362";
+import { useCurrentTool } from "../figma_app/722362";
 function p({
   hiddenTitle: e,
   tabManager: t,
@@ -105,7 +105,7 @@ function g({
     t();
     e.stopPropagation();
   }, [t]));
-  return dH() === DesignGraphElements.DROPPER_COLOR ? null : jsx(_$$n.div, {
+  return useCurrentTool() === DesignGraphElements.DROPPER_COLOR ? null : jsx(_$$n.div, {
     className: "asset_binding_picker--pickerCloser--PiA1S",
     onMouseDown: i
   });

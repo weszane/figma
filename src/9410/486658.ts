@@ -11,11 +11,11 @@ import { initializeStub } from "../figma_app/757801";
 import { Ns, isInteractionPathCheck } from "../figma_app/897289";
 import { kG } from "../figma_app/327588";
 import { fullscreenValue } from "../figma_app/455680";
-import { KH, p8 } from "../figma_app/722362";
+import { useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { useSyncedRef } from "../905/633914";
 import { U3 } from "../figma_app/412189";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
-import { wA, Fk } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { I as _$$I } from "../figma_app/827540";
 import { _j as _$$_j, Wh } from "../figma_app/524655";
 import { N8 } from "../figma_app/784857";
@@ -42,7 +42,7 @@ export function $$w2({
     onMouseDownItem,
     onMouseUpItem
   } = function (e, t, i, l, c, u, p, h) {
-    let m = KH();
+    let m = useSceneGraphSelection();
     let [f, x] = useState(l);
     let C = e.indexOf(f);
     let w = getObservableOrFallback(AppStateTsApi.singleSlideView().isCarouselFocused);
@@ -250,7 +250,7 @@ export function $$w2({
       detachedCarouselItemGuids: d,
       indentSelectionBy: S
     };
-  }(selectedItemIds, carouselItemGuids, P, carouselItemsById, j, p8("isReadOnly"));
+  }(selectedItemIds, carouselItemGuids, P, carouselItemsById, j, useAppModelProperty("isReadOnly"));
   return useMemo(() => ({
     carouselItemsById,
     carouselItemGuids,
@@ -327,7 +327,7 @@ export function $$A3(e, t, i, d) {
   let {
     collapsedCarouselItemIds,
     skippedCarouselItemIds
-  } = wA((e, t) => t.flat().reduce((t, i) => {
+  } = useStrictDeepEqualSceneValue((e, t) => t.flat().reduce((t, i) => {
     let r = e.get(i);
     r && !r.isExpanded && (t.collapsedCarouselItemIds[i] = !0);
     r && r?.isSkippedSlide && (t.skippedCarouselItemIds[i] = !0);
@@ -337,7 +337,7 @@ export function $$A3(e, t, i, d) {
     skippedCarouselItemIds: {}
   }), e);
   let b = AppStateTsApi?.canvasGrid().gridGUID();
-  let v = Fk((e, t) => !!b && (e.get(t)?.areSlidesManuallyIndented || !1), b ?? "");
+  let v = useDeepEqualSceneValue((e, t) => !!b && (e.get(t)?.areSlidesManuallyIndented || !1), b ?? "");
   c = e;
   u = _ || i ? {} : collapsedCarouselItemIds;
   p = _ || i ? {} : skippedCarouselItemIds;

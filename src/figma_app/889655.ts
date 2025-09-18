@@ -1,82 +1,224 @@
-import { Mz } from "../vendor/925040";
-import { Zm, P8 } from "../905/270781";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-let $$s9 = e => e.mirror.sceneGraphSelection;
-let $$o11 = e => e.mirror.sceneGraph;
-let $$l14 = e => e.mirror.appModel;
-let $$d7 = Zm(e => Object.keys($$s9(e)));
-export function $$c19(e) {
-  let t = $$d7(e);
-  let r = t[0];
-  return 1 === t.length && r ? r : null;
+import { createSelector } from 'reselect'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { createDeepEqualSelector, memoizeWithDeepEquality } from '../905/270781'
+
+/**
+ * Selector for sceneGraphSelection from mirror.
+ * (Original: $$s9)
+ */
+export const selectSceneGraphSelection = (state: any) => state.mirror.sceneGraphSelection
+
+/**
+ * Selector for sceneGraph from mirror.
+ * (Original: $$o11)
+ */
+export const selectSceneGraph = (state: any) => state.mirror.sceneGraph
+
+/**
+ * Selector for appModel from mirror.
+ * (Original: $$l14)
+ */
+export const selectAppModel = (state: any) => state.mirror.appModel
+
+/**
+ * Memoized selector for keys of sceneGraphSelection.
+ * (Original: $$d7)
+ */
+export const selectSceneGraphSelectionKeys = memoizeWithDeepEquality(
+  (state: any): string[] => Object.keys(selectSceneGraphSelection(state)),
+)
+
+/**
+ * Returns the single selected key, or null if not exactly one.
+ * (Original: $$c19)
+ * @param state
+ */
+export function getSingleSelectedKey(state: any): string | null {
+  const keys: any = selectSceneGraphSelectionKeys(state)
+  const firstKey = keys[0]
+  return keys.length === 1 && firstKey ? firstKey : null
 }
-export function $$u10(e) {
-  let t = $$d7(e);
-  return t.length > 1 ? t : null;
+
+/**
+ * Returns multiple selected keys, or null if not more than one.
+ * (Original: $$u10)
+ * @param state
+ */
+export function getMultipleSelectedKeys(state: any): string[] | null {
+  const keys: any = selectSceneGraphSelectionKeys(state)
+  return keys.length > 1 ? keys : null
 }
-let $$p2 = Mz([$$o11, $$c19], (e, t) => t ? e.get(t) : null);
-let _ = () => (e, t) => $$o11(e).get(t);
-export function $$h16() {
-  let e = _();
-  return Zm((t, r) => {
-    let n = e(t, r);
-    return null == n ? null : {
-      key: n.styleKeyForPublish,
-      version: n.styleVersionHash
-    };
-  });
+
+/**
+ * Selector for a single selected node from sceneGraph.
+ * (Original: $$p2)
+ */
+export const selectSingleSelectedNode = createSelector(
+  [selectSceneGraph, getSingleSelectedKey],
+  (sceneGraph, key) => key ? sceneGraph.get(key) : null,
+)
+
+/**
+ * Returns a function to get a node by key from sceneGraph.
+ * (Original: _)
+ */
+export const getNodeByKey = () => (state: any, key: string) => selectSceneGraph(state).get(key)
+
+/**
+ * Memoized selector for style publish info for a node.
+ * (Original: $$h16)
+ */
+export function getStylePublishInfoSelector() {
+  const getNode = getNodeByKey()
+  return memoizeWithDeepEquality((state: any, key: string) => {
+    const node = getNode(state, key)
+    return node == null
+      ? null
+      : {
+          key: node.styleKeyForPublish,
+          version: node.styleVersionHash,
+        }
+  })
 }
-export function $$m0() {
-  let e = $$h16();
-  return Zm((t, r) => new Map(r.map(r => [r, e(t, r)])));
+
+/**
+ * Memoized selector for mapping keys to style publish info.
+ * (Original: $$m0)
+ */
+export function getStylePublishInfoMapSelector() {
+  const getStylePublishInfo = getStylePublishInfoSelector()
+  return memoizeWithDeepEquality((state: any, keys: string[]) =>
+    new Map(keys.map(key => [key, getStylePublishInfo(state, key)])),
+  )
 }
-export function $$g1(e) {
-  return e.mirror.selectionProperties.numSelected || 0;
+
+/**
+ * Selector for number of selected items.
+ * (Original: $$g1)
+ */
+export function getNumSelected(state: any) {
+  return state.mirror.selectionProperties.numSelected || 0
 }
-export let $$f12 = P8([$$d7, $$o11], $$E15);
-export function $$E15(e, t) {
-  let r = [];
-  e.forEach(e => {
-    let n = t.get(e);
-    (n?.type === "INSTANCE" || n?.isInstanceSublayer) && r.push(e);
-  });
-  return r;
+
+/**
+ * Deep equal selector for instance keys.
+ * (Original: $$f12)
+ */
+export const selectInstanceKeys = createDeepEqualSelector(
+  [selectSceneGraphSelectionKeys, selectSceneGraph],
+  getInstanceKeys,
+)
+
+/**
+ * Returns keys of selected nodes that are instances.
+ * (Original: $$E15)
+ * @param keys
+ * @param sceneGraph
+ */
+export function getInstanceKeys(keys: string[], sceneGraph: Map<string, any>): string[] {
+  const result: string[] = []
+  keys.forEach((key) => {
+    const node = sceneGraph.get(key)
+    if (node?.type === 'INSTANCE' || node?.isInstanceSublayer) {
+      result.push(key)
+    }
+  })
+  return result
 }
-let $$y4 = Mz([$$o11, $$d7], (e, t) => {
-  let r = [];
-  t.forEach(t => {
-    let n = e.get(t);
-    n && r.push(n);
-  });
-  return r;
-});
-let $$b6 = Zm(e => e.library.publishableStyles.map(e => e.nodeId));
-let $$T5 = Zm(e => e.library.localStylesThatHaveUsagesOnLoadedPages);
-let $$I17 = Zm(e => new Set(e.library.localStylesThatHaveUsagesOnCurrentPage));
-let $$S18 = createReduxSubscriptionAtomWithState($$T5);
-let $$v8 = Zm(e => e.library.localSymbolsThatHaveUsagesOnLoadedPages);
-let $$A3 = Zm(e => new Set(e.library.localSymbolsThatHaveUsagesOnCurrentPage));
-export function $$x13(e, t) {
-  let r = $$o11(e);
-  return !r.get(t)?.visible;
+
+/**
+ * Selector for selected nodes.
+ * (Original: $$y4)
+ */
+export const selectSelectedNodes = createSelector(
+  [selectSceneGraph, selectSceneGraphSelectionKeys],
+  (sceneGraph, keys) => {
+    const result: any[] = []
+    keys.forEach((key) => {
+      const node = sceneGraph.get(key)
+      if (node)
+        result.push(node)
+    })
+    return result
+  },
+)
+
+/**
+ * Memoized selector for publishable style node IDs.
+ * (Original: $$b6)
+ */
+export const selectPublishableStyleNodeIds = memoizeWithDeepEquality(
+  (state: any) => state.library.publishableStyles.map((style: any) => style.nodeId),
+)
+
+/**
+ * Memoized selector for local styles with usages on loaded pages.
+ * (Original: $$T5)
+ */
+export const selectLocalStylesWithUsagesOnLoadedPages = memoizeWithDeepEquality(
+  (state: any) => state.library.localStylesThatHaveUsagesOnLoadedPages,
+)
+
+/**
+ * Memoized selector for local styles with usages on current page.
+ * (Original: $$I17)
+ */
+export const selectLocalStylesWithUsagesOnCurrentPage = memoizeWithDeepEquality(
+  (state: any) => new Set(state.library.localStylesThatHaveUsagesOnCurrentPage),
+)
+
+/**
+ * Redux subscription atom for local styles with usages on loaded pages.
+ * (Original: $$S18)
+ */
+export const localStylesWithUsagesOnLoadedPagesAtom
+  = createReduxSubscriptionAtomWithState(selectLocalStylesWithUsagesOnLoadedPages)
+
+/**
+ * Memoized selector for local symbols with usages on loaded pages.
+ * (Original: $$v8)
+ */
+export const selectLocalSymbolsWithUsagesOnLoadedPages = memoizeWithDeepEquality(
+  (state: any) => state.library.localSymbolsThatHaveUsagesOnLoadedPages,
+)
+
+/**
+ * Memoized selector for local symbols with usages on current page.
+ * (Original: $$A3)
+ */
+export const selectLocalSymbolsWithUsagesOnCurrentPage = memoizeWithDeepEquality(
+  (state: any) => new Set(state.library.localSymbolsThatHaveUsagesOnCurrentPage),
+)
+
+/**
+ * Returns true if the node is not visible.
+ * (Original: $$x13)
+ * @param state
+ * @param key
+ */
+export function isNodeNotVisible(state: any, key: string): boolean {
+  const sceneGraph = selectSceneGraph(state)
+  return !sceneGraph.get(key)?.visible
 }
-export const $4 = $$m0;
-export const $u = $$g1;
-export const AF = $$p2;
-export const BA = $$A3;
-export const F4 = $$y4;
-export const O1 = $$T5;
-export const RW = $$b6;
-export const Sh = $$d7;
-export const T_ = $$v8;
-export const Xt = $$s9;
-export const a$ = $$u10;
-export const dK = $$o11;
-export const dT = $$f12;
-export const f5 = $$x13;
-export const nj = $$l14;
-export const rT = $$E15;
-export const t = $$h16;
-export const tX = $$I17;
-export const tn = $$S18;
-export const vD = $$c19;
+
+// Exported variables with refactored names
+export const YJ = getStylePublishInfoMapSelector
+export const YU = getNumSelected
+export const AF = selectSingleSelectedNode
+export const BA = selectLocalSymbolsWithUsagesOnCurrentPage
+export const F4 = selectSelectedNodes
+export const O1 = selectLocalStylesWithUsagesOnLoadedPages
+export const RW = selectPublishableStyleNodeIds
+export const Sh = selectSceneGraphSelectionKeys
+export const T_ = selectLocalSymbolsWithUsagesOnLoadedPages
+export const Xt = selectSceneGraphSelection
+export const a$ = getMultipleSelectedKeys
+export const dK = selectSceneGraph
+export const dT = selectInstanceKeys
+export const f5 = isNodeNotVisible
+export const nj = selectAppModel
+export const rT = getInstanceKeys
+export const t = getStylePublishInfoSelector
+export const tX = selectLocalStylesWithUsagesOnCurrentPage
+export const tn = localStylesWithUsagesOnLoadedPagesAtom
+export const vD = getSingleSelectedKey

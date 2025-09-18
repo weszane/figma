@@ -1,5 +1,5 @@
 import { GLContextType } from "../figma_app/763686";
-import { zD, j9 } from "../905/686312";
+import { getPreferredWebGLContext, createWebGLContext } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { customHistory } from "../905/612521";
@@ -10,7 +10,7 @@ import { getInitialDynamicConfig } from "../figma_app/594947";
 import { PN } from "../figma_app/897289";
 import { X } from "../905/683920";
 import { D } from "../905/347702";
-import { l as _$$l } from "../905/190247";
+import { getGpuDeviceInfo } from "../905/190247";
 var $$g9 = (e => (e[e.SUCCESS = 0] = "SUCCESS", e[e.NO_WEBGL = 1] = "NO_WEBGL", e[e.STENCIL_TEST_FAILURE = 2] = "STENCIL_TEST_FAILURE", e))($$g9 || {});
 export let $$f2 = D(() => {
   if ($$A0() !== GLContextType.WebGPU) {
@@ -86,7 +86,7 @@ class S {
   }
   isJSLUHDChromeOS() {
     if (!getIsChromeOS() || !$$f2() || !getFeatureFlags().use_webgpu_chromeos_jsl_override) return !1;
-    let e = zD($$y5());
+    let e = getPreferredWebGLContext($$y5());
     if (!e) return !1;
     let t = e.getExtension("WEBGL_debug_renderer_info");
     if (!t) return !1;
@@ -116,7 +116,7 @@ let $$v4 = D(() => {
 });
 let $$A0 = D(() => I.getInstance().graphicsBackendOverride());
 export function $$x8() {
-  let e = j9($$y5());
+  let e = createWebGLContext($$y5());
   return !!e?.getExtension("WEBGL_compressed_texture_astc");
 }
 export function $$N1(e) {
@@ -126,7 +126,7 @@ export function $$N1(e) {
   let i = "unknown";
   if (0 === window.webGLTestResult) {
     t = X.initializationStatus();
-    let e = _$$l();
+    let e = getGpuDeviceInfo();
     e && (r = e.graphicsCardName, n = e.vendor, i = e.webGLVersion);
   }
   "webgpu_success" === e && (t = "webgpu_success");

@@ -8,7 +8,7 @@ import { zm } from "../figma_app/384673";
 import { P4 } from "../905/18800";
 import { r as _$$r } from "../figma_app/375550";
 import { isInteractionReady } from "../figma_app/433958";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { isWhiteboardFileType, isDevHandoffEditorType } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
 import { getViewportY } from "../figma_app/62612";
@@ -47,7 +47,7 @@ export function $$P0() {
   let u = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
   let p = lq();
   let g = useAtomWithSubscription(_$$O);
-  let E = !!hA();
+  let E = !!useDevModeFocusId();
   let T = 0;
   u && (T = parsePxNumber(yNw));
   T += (n ? g : 0) + r;

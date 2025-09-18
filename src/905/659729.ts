@@ -1,9 +1,9 @@
-import { Wn, VY, yi, xp, id, Vx, PD } from "../905/966582";
-import { EC } from "../figma_app/291892";
+import { UPLOAD_ERRORS, VIDEO_TYPE_VALUES, MAX_VIDEO_SIZE, IMAGE_TYPE_VALUES, MAX_TOTAL_SIZE, MAX_IMAGE_SIZE, MAX_UPLOADS } from "../905/966582";
+import { imageProcessor } from "../figma_app/291892";
 export function $$a0(e, t, i, r, s, o = []) {
   if (e.length > i) {
     s({
-      type: Wn.MAX_UPLOADS_EXCEEDED,
+      type: UPLOAD_ERRORS.MAX_UPLOADS_EXCEEDED,
       params: {
         maxNum: i
       }
@@ -14,7 +14,7 @@ export function $$a0(e, t, i, r, s, o = []) {
   let d = e.filter(e => !o.some(t => t && t.name === e.name && t.lastModified === e.lastModified) || (l.push(e.name), !1));
   if (t + d.length > i) {
     s({
-      type: Wn.MAX_UPLOADS_EXCEEDED,
+      type: UPLOAD_ERRORS.MAX_UPLOADS_EXCEEDED,
       params: {
         maxNum: i
       }
@@ -24,27 +24,27 @@ export function $$a0(e, t, i, r, s, o = []) {
   let c = !1;
   let u = !1;
   let p = !1;
-  let m = d.filter(e => r.includes(e.type) ? VY.includes(e.type) ? !(e.size > yi) || (c = !0, !1) : xp.includes(e.type) ? !(e.size > id) || (u = !0, !1) : (p = !0, !1) : (p = !0, !1));
+  let m = d.filter(e => r.includes(e.type) ? VIDEO_TYPE_VALUES.includes(e.type) ? !(e.size > MAX_VIDEO_SIZE) || (c = !0, !1) : IMAGE_TYPE_VALUES.includes(e.type) ? !(e.size > MAX_TOTAL_SIZE) || (u = !0, !1) : (p = !0, !1) : (p = !0, !1));
   l.length > 0 && s({
-    type: Wn.DUPLICATE_FILE_UPLOAD,
+    type: UPLOAD_ERRORS.DUPLICATE_FILE_UPLOAD,
     params: {
       numFiles: l.length,
       fileNames: l.join(", ")
     }
   });
   p && s({
-    type: Wn.INVALID_FILE_TYPE
+    type: UPLOAD_ERRORS.INVALID_FILE_TYPE
   });
   c && s({
-    type: Wn.MAX_VIDEO_SIZE_EXCEEDED,
+    type: UPLOAD_ERRORS.MAX_VIDEO_SIZE_EXCEEDED,
     params: {
-      maxFileSizeMB: Vx
+      maxFileSizeMB: MAX_IMAGE_SIZE
     }
   });
   u && s({
-    type: Wn.MAX_IMAGE_SIZE_EXCEEDED,
+    type: UPLOAD_ERRORS.MAX_IMAGE_SIZE_EXCEEDED,
     params: {
-      maxFileSizeMB: PD
+      maxFileSizeMB: MAX_UPLOADS
     }
   });
   return m;
@@ -80,8 +80,8 @@ export function $$s1(e) {
     i.height = e instanceof HTMLCanvasElement ? e.height : e.videoHeight;
     t.drawImage(e, 0, 0, i.width, i.height);
     let n = new Uint8Array(t.getImageData(0, 0, i.width, i.height).data.buffer);
-    return EC.encodeInPlace(i.width, i.height, n, !1, 100, !1);
+    return imageProcessor.encodeInPlace(i.width, i.height, n, !1, 100, !1);
   });
 }
 export const K = $$a0;
-export const j = $$s1; 
+export const j = $$s1;

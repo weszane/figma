@@ -9,7 +9,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { K } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
-import { ET, qW } from "../905/623179";
+import { uploadToPresignedPost, UploadError } from "../905/623179";
 import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -170,7 +170,7 @@ export function $$D0(e) {
       feature: i
     }) => {
       try {
-        await ET(_$$e.SCENEGRAPH_AND_SYNC, "test", e, t, R, "image/png");
+        await uploadToPresignedPost(_$$e.SCENEGRAPH_AND_SYNC, "test", e, t, R, "image/png");
         return {
           url: e,
           fields: t,
@@ -183,7 +183,7 @@ export function $$D0(e) {
           url: e,
           fields: t,
           feature: i,
-          error: n instanceof qW ? w.NON_S3_RESPONSE : w.OTHER,
+          error: n instanceof UploadError ? w.NON_S3_RESPONSE : w.OTHER,
           type: "POST"
         };
       }

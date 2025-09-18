@@ -2,7 +2,7 @@ import { zRx } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
 import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
-import { Gj } from "../figma_app/217457";
+import { getFProductAccessTypeByKey } from "../figma_app/217457";
 import { FUpgradeReasonType, FApprovalMethodType, FSeatAssignmentReasonType } from "../figma_app/191312";
 import { $ } from "../figma_app/126651";
 let $$c10 = "Seat";
@@ -12,7 +12,7 @@ export function $$p11(e) {
     case ProductAccessTypeEnum.DESIGN:
     case ProductAccessTypeEnum.FIGJAM:
     case ProductAccessTypeEnum.DEV_MODE:
-      return $(Gj(e));
+      return $(getFProductAccessTypeByKey(e));
     case ProductAccessTypeEnum.SLIDES:
       return getI18nString("general.figma_slides");
     case ProductAccessTypeEnum.EXPERT:

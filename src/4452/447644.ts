@@ -28,7 +28,7 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { V as _$$V } from "../905/355181";
 import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { tI as _$$tI } from "../figma_app/599327";
 import { Y as _$$Y2 } from "../figma_app/515088";
 import { aN, V4, Td, kl, Z4, x9, A$, BC, W4 } from "../4452/846771";
@@ -56,8 +56,8 @@ import { b as _$$b } from "../4452/320061";
 import { B as _$$B2 } from "../4452/541264";
 import { K as _$$K } from "../905/628118";
 import { ProductAccessTypeEnum, isValidAccessType, ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { Zx, AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { getProductAccessTypeByKey, compareProductAccessTypes } from "../figma_app/217457";
 import { d as _$$d } from "../figma_app/603561";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
@@ -275,7 +275,7 @@ export function $$e$0({
   let W = _$$B2();
   let z = useRef(null);
   let H = useRef(null);
-  let J = _$$k();
+  let J = isProrationBillingEnabledForCurrentPlan();
   let eI = RR();
   let eE = getRumLoggingConfig();
   let eS = useDispatch();
@@ -470,7 +470,7 @@ export function $$e$0({
         return t;
       }
       if (!l.billableProductKey) return t;
-      let d = Zx(l.billableProductKey);
+      let d = getProductAccessTypeByKey(l.billableProductKey);
       if (e.has(s)) return t;
       if ("pending" !== l.status) {
         e.has(s) || e.add(s);
@@ -944,7 +944,7 @@ export function $$e$0({
             checked: null === eq,
             onClick: () => eO(null),
             children: getI18nString("admin_dashboard.requests.filter.seats_all_option")
-          }), jsx(wv, {}), N_.sort(AG).map(e => jsx(MM, {
+          }), jsx(wv, {}), collaboratorSet.sort(compareProductAccessTypes).map(e => jsx(MM, {
             checked: eq === e,
             onClick: () => eO(e),
             children: _$$tI(e)

@@ -8,7 +8,7 @@ import { VisualBellActions } from "../905/302958";
 import { Y } from "../figma_app/887000";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
-import { yJ, F6 } from "../905/395917";
+import { putOrgs, patchOrgs } from "../905/395917";
 import { vr } from "../figma_app/475472";
 import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../figma_app/52714";
@@ -80,7 +80,7 @@ let $$A19 = createOptimistThunk((e, {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.meta
     }));
   });
@@ -91,7 +91,7 @@ let $$x22 = createOptimistThunk((e, {
 }) => {
   let n = e.getState().currentUserOrgId;
   XHR.put(`/api/orgs/${n}`, t).then(t => {
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.data.meta
     }));
     r && e.dispatch(VisualBellActions.enqueue({
@@ -115,7 +115,7 @@ let $$N11 = createOptimistThunk((e, {
     data: t
   }) => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_authentication_settings")));
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.meta
     }));
   }).catch(t => {
@@ -132,7 +132,7 @@ let $$C14 = createOptimistThunk((e, {
     mfa_required: n
   }).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_authentication_settings")));
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.data.meta
     }));
   }).catch(t => {
@@ -146,7 +146,7 @@ let $$w4 = createOptimistThunk((e, {
   XHR.put(`/api/orgs/${t}`, {
     featured_scim_metadata: r
   }).then(t => {
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.data.meta
     }));
   }).catch(t => {
@@ -165,7 +165,7 @@ export function $$O1(e) {
       regional_vat_gst_id: i
     }).then(() => {
       s = !0;
-      dispatch(F6({
+      dispatch(patchOrgs({
         id: org.id,
         vat_gst_id: e
       }));
@@ -192,7 +192,7 @@ let $$R12 = createOptimistThunk((e, {
     idle_timeout_duration_in_secs: i
   }).then(t => {
     e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_idle_session_timeout")));
-    e.dispatch(yJ({
+    e.dispatch(putOrgs({
       org: t.data.meta
     }));
     r();
@@ -214,7 +214,7 @@ let $$L6 = createOptimistThunk((e, {
     ...e.getState().orgById[t].shared_container_setting,
     ip_allowlist: r
   };
-  e.dispatch(F6({
+  e.dispatch(patchOrgs({
     id: t,
     shared_container_setting: a
   }));
@@ -353,7 +353,7 @@ let $$U20 = createOptimistThunk((e, {
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
-    e.dispatch(F6({
+    e.dispatch(patchOrgs({
       id: t,
       is_slides_disabled: r
     }));

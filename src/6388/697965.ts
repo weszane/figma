@@ -21,7 +21,7 @@ import { LU, kG, Hf } from "../figma_app/327588";
 import { tc } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { l5 } from "../figma_app/224338";
 import { A7 } from "../1528/961203";
@@ -149,7 +149,7 @@ function K(e) {
   } = Q;
   let Z = "boolean" != typeof isCarouselFocused || isCarouselFocused;
   let ee = getObservableOrFallback(UK().showGuids);
-  let et = p8("isReadOnly");
+  let et = useAppModelProperty("isReadOnly");
   useLayoutEffect(() => {
     Q.selectedItemIds.forEach(e => {
       Q.expandParent(e);

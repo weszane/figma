@@ -1,28 +1,57 @@
-import { customHistory } from "../905/612521";
-import { getInitialOptions } from "../figma_app/169182";
-let a = class e {
-  static initialize() {
-    let t = getInitialOptions().user_data?.email;
-    if (t && (-1 !== t.indexOf("@figma)") || -1 !== t.indexOf("@test.figma"))) {
-      let t = new URLSearchParams(customHistory.location.search).get("safeModeRenderLimitMs");
-      t && (e.getForcedRenderTimeMsValue = parseInt(t));
+import { customHistory } from '../905/612521'
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * SafeModeOptions class (originally 'e')
+ * Handles forced render time configuration for safe mode.
+ */
+class SafeModeOptions {
+  /** Stores the forced render time value (ms) */
+  private static forcedRenderTimeMsValue: number | null = null
+
+  /**
+   * Initializes SafeModeOptions by checking user email and URL params.
+   */
+  static initialize(): void {
+    const email = getInitialOptions().user_data?.email
+    // Only apply for Figma or test Figma users
+    if (email && (email.includes('@figma') || email.includes('@test.figma'))) {
+      const param = new URLSearchParams(customHistory.location.search).get('safeModeRenderLimitMs')
+      if (param) {
+        SafeModeOptions.forcedRenderTimeMsValue = parseInt(param)
+      }
     }
   }
-  getForcedRenderTimeMs() {
-    return e.getForcedRenderTimeMsValue;
+
+  /**
+   * Returns the forced render time value (ms), or null if not set.
+   */
+  getForcedRenderTimeMs(): number | null {
+    return SafeModeOptions.forcedRenderTimeMsValue
   }
-};
-a.getForcedRenderTimeMsValue = null;
-a.initialize();
-let $$s1 = new a();
-let $$o0 = new class {
-  constructor(e) {
-    this.safeModeOptions = e;
+}
+
+// Initialize SafeModeOptions on module load
+SafeModeOptions.initialize()
+
+/**
+ * SafeModeRenderController (originally unnamed class)
+ * Provides forced render time value, defaulting to -1 if unset.
+ */
+class SafeModeRenderController {
+  constructor(private safeModeOptions: SafeModeOptions) {}
+
+  /**
+   * Returns the forced render time value (ms), or -1 if not set.
+   */
+  getForcedRenderTimeMs(): number {
+    const value = this.safeModeOptions.getForcedRenderTimeMs()
+    return value != null ? value : -1
   }
-  getForcedRenderTimeMs() {
-    let e = this.safeModeOptions.getForcedRenderTimeMs();
-    return null != e ? e : -1;
-  }
-}($$s1);
-export const iw = $$o0;
-export const ld = $$s1;
+}
+
+// Exported instances (originally ld and iw)
+export const safeModeInstance = new SafeModeOptions()
+export const safeModeRenderController = new SafeModeRenderController(safeModeInstance)
+export const ld = safeModeInstance
+export const iw = safeModeRenderController

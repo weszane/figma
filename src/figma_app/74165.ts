@@ -4,7 +4,7 @@ import { AppStateTsApi, DesignGraphElements, UserActionState } from "../figma_ap
 import { useLatestRef } from "../figma_app/922077";
 import { L3 } from "../figma_app/385215";
 import { clearSelection } from "../figma_app/741237";
-import { aV, ax, dH } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useHasSceneGraphSelection, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
 import { sO } from "../figma_app/21029";
@@ -56,9 +56,9 @@ export function $$m0() {
 export function $$g2() {
   let e = isWhiteboardFileType();
   let t = Ye();
-  let r = aV();
-  let n = ax();
-  let s = dH();
+  let r = useIsProgressBarHiddenOrLocked();
+  let n = useHasSceneGraphSelection();
+  let s = useCurrentTool();
   let o = s === DesignGraphElements.FRAME || s === DesignGraphElements.COMMENTS || s === DesignGraphElements.VECTOR_PENCIL;
   return !!useSelector(e => e.mirror.appModel.activeUserAction === UserActionState.DEFAULT) && !!t && !r && !e && !n && !o;
 }

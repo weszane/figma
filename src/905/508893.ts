@@ -9,7 +9,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString } from "../905/303541";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { Z as _$$Z } from "../905/823863";
 import { o as _$$o } from "../905/237202";
 import { p as _$$p } from "../figma_app/378458";
@@ -446,7 +446,7 @@ export function $$ec1(e) {
   let [Y, q] = useState(null);
   let $ = useRef(null);
   let [Z, X] = useState(null);
-  let Q = DP();
+  let Q = getVisibleTheme();
   let J = e.initialSnapshotState?.backgroundColor ?? e.pageBackgroundColor ?? parseColor(getThemeBackgroundColor(Q));
   let [ee, et] = useState(J);
   let ec = useRef();

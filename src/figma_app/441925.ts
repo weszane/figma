@@ -1,5 +1,5 @@
 import { analyticsEventManager } from "../905/449184";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 export function $$a3(e) {
   return e ? JSON.stringify(Object.keys(e).sort().reduce((t, r) => ({
     ...t,
@@ -16,7 +16,7 @@ export function $$o4(e) {
   return JSON.stringify(e.sort());
 }
 export function $$l0(e) {
-  let t = N_.dict(t => e[t]?.key);
+  let t = collaboratorSet.dict(t => e[t]?.key);
   return JSON.stringify(Object.keys(t).sort().reduce((e, r) => ({
     ...e,
     [r]: t[r]

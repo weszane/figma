@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { Sc } from '../905/18797';
+import { isNullOrFailure } from '../905/18797';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { createOptimistThunk } from '../905/350402';
 import { D3 } from '../905/359847';
@@ -16,7 +16,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
   } = t;
   let h = e.getState().loadingState;
   let g = Mb(libraryKey);
-  if (!Sc(h, g)) return;
+  if (!isNullOrFailure(h, g)) return;
   let f = Z.getLibraryPublishedComponentsV2({
     libraryKey,
     includeThumbnail,

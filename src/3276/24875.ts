@@ -7,8 +7,8 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { e6, lR } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
-import { tc } from "../905/15667";
-import { Xt } from "../figma_app/297957";
+import { DeepLinkType } from "../905/15667";
+import { useDraftsCopyLinkExperiment } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
@@ -75,7 +75,7 @@ export function $$N0({
     handleUpgrade,
     getUpgradeEligibility
   } = wH({
-    entryPoint: tc.IN_EDITOR_RESTRICTED_DRAFT
+    entryPoint: DeepLinkType.IN_EDITOR_RESTRICTED_DRAFT
   });
   let p = useAtomWithSubscription(modalTypeAtom);
   if (p && E.includes(p) || !n || "loaded" !== l.status) return null;
@@ -88,7 +88,7 @@ export function $$N0({
   let k = handleUpgrade({
     licenseType: d,
     upgradeReason: _$$i.DRAFTS_SHARE,
-    entryPoint: tc.IN_EDITOR_RESTRICTED_DRAFT
+    entryPoint: DeepLinkType.IN_EDITOR_RESTRICTED_DRAFT
   });
   return jsx(S, {
     target: t,
@@ -108,7 +108,7 @@ function S({
   handleUpgrade: r
 }) {
   let m = ic(e);
-  let u = Xt(!!i);
+  let u = useDraftsCopyLinkExperiment(!!i);
   let [f, _] = useState(!1);
   if (!u || f || !m) return null;
   let g = i?.org ?? s?.team;

@@ -2,7 +2,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { extractHostname } from "../figma_app/916560";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { trackFileEvent } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
 import { parseDomain, LinkRenderType, LinkMetadataEvent } from "../figma_app/671547";
@@ -177,7 +177,7 @@ export function $$A1({
     let G = hasTitleOrDescription ? extractHostname(url) : fullUrlProvider;
     let V = () => {
       $$h2(LinkMetadataEvent.OPEN_PREVIEW, url);
-      debugState.dispatch(RK({
+      debugState.dispatch(setupHyperlinkHandler({
         rawInput: url
       }));
     };

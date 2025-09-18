@@ -8,7 +8,7 @@ import { reactTimerGroup } from "../905/542194";
 import { jY, AH } from "../figma_app/725044";
 import { zF, xV, q5, l$, vu, H0 as _$$H, as, nc, Pn, eO, I7, t8, bF, vw, Ti, W, Fy } from "../905/967662";
 import { getInitialOptions } from "../figma_app/169182";
-import { q, l as _$$l } from "../905/190247";
+import { addDeviceInfoToTarget, getGpuDeviceInfo } from "../905/190247";
 import { N as _$$N } from "../905/200059";
 import { s as _$$s } from "../905/817498";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
@@ -170,7 +170,7 @@ function ey(e) {
     reportCount: C
   };
   for (let e = 0; e < recentInteractions.length; e++) c[`recentInteractions.${e}`] = JSON.stringify(recentInteractions[e]);
-  q(e.gpuDeviceInfo, c);
+  addDeviceInfoToTarget(e.gpuDeviceInfo, c);
   flattenObjectToTarget(e.nodeTypeHistogram, c, "nodeTypeHistogram");
   return c;
 }
@@ -201,7 +201,7 @@ export function $$eI18() {
   !function () {
     if (r / 1e3 < .2) return;
     let [t, n] = null === A || null === N ? [null, []] : FullscreenPerfMetrics ? [{
-      gpuDeviceInfo: _$$l(),
+      gpuDeviceInfo: getGpuDeviceInfo(),
       fileKey: A,
       fileNodeCount: FullscreenPerfMetrics.getFileNodeCount(),
       multiplayerUserCount: S,
@@ -213,7 +213,7 @@ export function $$eI18() {
       randomID: getRandomString(),
       reportCount: C
     }, FullscreenPerfMetrics.getSlowInteractions()] : [{
-      gpuDeviceInfo: _$$l(),
+      gpuDeviceInfo: getGpuDeviceInfo(),
       fileKey: A,
       fileNodeCount: 0,
       multiplayerUserCount: S,

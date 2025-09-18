@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
 import { sz } from "../figma_app/216696";
 import { CommunityProfileView } from "../figma_app/43951";
-import { oh, mC } from "../905/18797";
+import { useIsLoading, useIsLoaded } from "../905/18797";
 export function $$c0(e) {
   let t = useDispatch();
   let r = useSelector(t => t.communityHub.shelves[e] || []);
   let n = sz.loadingKeyForPayload({
     shelfType: e
   });
-  let a = oh(n);
-  let c = mC(n);
+  let a = useIsLoading(n);
+  let c = useIsLoaded(n);
   useEffect(() => {
     a || c || t(sz({
       shelfType: e

@@ -29,7 +29,7 @@ import { Yl, W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { fl, Ht, Pd } from "../figma_app/178475";
@@ -622,7 +622,7 @@ export function $$ey1(e) {
     onChange
   } = e;
   let o = useCurrentFileKey();
-  let l = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
+  let l = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().map(e => e.guid));
   let d = useCallback(e => {
     trackEventAnalytics("editor-layout-guide-changed", {
       fileKey: o,

@@ -18,7 +18,7 @@ import { I as _$$I } from "../905/343721";
 import { A as _$$A2 } from "../905/658244";
 import { createModalConfig, registerLegacyModal, registerModal } from "../905/102752";
 import { hideModal, showModalHandler } from "../905/156213";
-import { E9 } from "../figma_app/297957";
+import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { TrackedAnchor, TrackingProvider } from "../figma_app/831799";
 import { ChurnFrictionPersonalizedModalView } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
@@ -333,7 +333,7 @@ export let $$z0 = registerModal(function ({
   let t = useSubscription(ChurnFrictionPersonalizedModalView, {
     teamId: e
   });
-  let i = E9();
+  let i = useStarterGlobalFileLimitsExperiment();
   let y = useSelector(e => {
     let t = e.teamBilling.summary.annual_subscription?.current_period_end || e.teamBilling.summary.monthly_subscription?.current_period_end;
     return t ? _$$A(t).format("LL") : void 0;

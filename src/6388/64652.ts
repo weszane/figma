@@ -16,9 +16,9 @@ import { Te } from "../1250/12342";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { expandNodeToRoot, renameNode } from "../figma_app/741237";
-import { aV, p8 } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { EA } from "../9410/499229";
 import { f as _$$f } from "../1528/716387";
 import { P as _$$P } from "../3271/828600";
@@ -189,7 +189,7 @@ let ev = "slides_left_panel_island--fileControls--5YIoW";
 let eb = "slides_left_panel_island--rightSection--XFjHm";
 function ej() {
   let e = Ye();
-  let t = aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let l = useSelector(e => e.mirror.appModel.showUi);
   return !t && l ? jsxs(_$$_, {
     isCollapsed: e,
@@ -250,7 +250,7 @@ function eS(e, t) {
   return l;
 }
 export let $$eI2 = memo(function () {
-  let e = p8("isReadOnly");
+  let e = useAppModelProperty("isReadOnly");
   let t = useRef(null);
   let l = useRef(null);
   eE({
@@ -328,7 +328,7 @@ export function $$eT3() {
   let i = eS(e, window.innerHeight);
   let a = eS(s, 95);
   let c = SlideConstantsCppBindings?.singleSlideThumbnailPadding() ?? 0;
-  let u = p8("isReadOnly");
+  let u = useAppModelProperty("isReadOnly");
   let x = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
   let h = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let p = X() && h;
@@ -433,11 +433,11 @@ function eR({
   width: e,
   guid: t
 }) {
-  let l = p8("isReadOnly");
-  let r = p8("currentPage");
+  let l = useAppModelProperty("isReadOnly");
+  let r = useAppModelProperty("currentPage");
   let [i, a] = useState(null);
   let d = useSelector(e => e.versionHistory);
-  let u = Fk((e, t) => {
+  let u = useDeepEqualSceneValue((e, t) => {
     let l = e.get(t);
     return l ? {
       guid: l.guid,
@@ -476,7 +476,7 @@ export function $$eA0({
   guid: e
 }) {
   let t = Ye();
-  let l = aV();
+  let l = useIsProgressBarHiddenOrLocked();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = useSelector(e => e.mirror.appModel.showUi);
   let [a, c] = useState(230);
@@ -512,13 +512,13 @@ function eB({
   width: e,
   height: t
 }) {
-  let l = p8("isReadOnly");
-  let r = p8("currentPage");
+  let l = useAppModelProperty("isReadOnly");
+  let r = useAppModelProperty("currentPage");
   let [i, a] = useState(null);
   let x = useSelector(e => e.versionHistory);
   let h = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, [[]]);
   let p = rY(h);
-  let g = Fk((e, t) => {
+  let g = useDeepEqualSceneValue((e, t) => {
     let l = e.get(t);
     return l?.childrenGuids.filter(t => e.get(t)?.type !== "SLIDE_GRID") ?? [];
   }, r);

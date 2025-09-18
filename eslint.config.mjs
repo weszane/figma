@@ -18,5 +18,6 @@ export default antfu({
     'no-console': 'off',
     'ts/no-use-before-define': 'off',
     'unicorn/prefer-dom-node-text-content': 'off',
+
   },
 })

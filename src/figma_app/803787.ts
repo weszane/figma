@@ -1,6 +1,6 @@
 import { dv, tj } from '../905/210500';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
-import { P8 } from '../905/270781';
+import { createDeepEqualSelector } from '../905/270781';
 import { selectTeams } from '../905/338617';
 import { t as _$$t } from '../905/340158';
 import { n as _$$n } from '../905/347702';
@@ -23,11 +23,11 @@ import { ad, CG, E2, gA, Hb, HF, i_, LB, lg, Lk, MA, pD, Q_, rC, RQ, w8, zE } fr
 import { sortByMultiple } from '../figma_app/656233';
 import { VariableErrorType } from '../figma_app/763686';
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186';
-import { Xt } from '../figma_app/889655';
+import { selectSceneGraphSelection } from '../figma_app/889655';
 import g from '../vendor/149674';
 import c from '../vendor/223926';
 import p from '../vendor/890446';
-import { Mz } from '../vendor/925040';
+import { createSelector } from '../vendor/925040';
 import h from '../vendor/946678';
 let u = c;
 let _ = p;
@@ -42,15 +42,15 @@ let H = e => e.library.openHubFilePublished__LIVEGRAPH.styles;
 let z = e => e.library.openHubFilePublished__LIVEGRAPH.variables;
 let W = e => e.library.openHubFilePublished__LIVEGRAPH.variableSets;
 let K = e => e.library.openHubFilePublished__LIVEGRAPH.modules;
-let $$Y15 = Mz([$$G13, H, z, W, $$V14], (e, t, r, n, a) => !isEmptyObject(e) || !isEmptyObject(t) || !isEmptyObject(r) || !isEmptyObject(n) || !isEmptyObject(a));
-let $ = Mz([selectOpenFileLibraryKey, qV], (e, t) => e && t[e] || {});
-let X = Mz([selectOpenFileLibraryKey, ZA], (e, t) => e && t[e] || {});
+let $$Y15 = createSelector([$$G13, H, z, W, $$V14], (e, t, r, n, a) => !isEmptyObject(e) || !isEmptyObject(t) || !isEmptyObject(r) || !isEmptyObject(n) || !isEmptyObject(a));
+let $ = createSelector([selectOpenFileLibraryKey, qV], (e, t) => e && t[e] || {});
+let X = createSelector([selectOpenFileLibraryKey, ZA], (e, t) => e && t[e] || {});
 let q = e => e.library.local.thumbnails;
 let J = e => e.library.openFilePublished__LIVEGRAPH.styles;
 let Z = e => e.library.openFilePublished__LIVEGRAPH.variableSets;
 let Q = e => e.library.openFilePublished__LIVEGRAPH.modules;
-let $$ee5 = Mz([$, J, Z, Q], (e, t, r, n) => !isEmptyObject(t) || !isEmptyObject(e) || !isEmptyObject(r) || !isEmptyObject(n));
-let et = Mz([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
+let $$ee5 = createSelector([$, J, Z, Q], (e, t, r, n) => !isEmptyObject(t) || !isEmptyObject(e) || !isEmptyObject(r) || !isEmptyObject(n));
+let et = createSelector([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
   if (r === LibrarySourceEnum.HUBFILE && a) {
     let r = _$$l(a.libraryKey);
     let {
@@ -60,8 +60,8 @@ let et = Mz([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.librar
   }
   return e;
 });
-let er = Mz([J, H, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
-let $$en21 = Mz([et, er], (e, t) => {
+let er = createSelector([J, H, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
+let $$en21 = createSelector([et, er], (e, t) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let r = {};
   for (let n of Object.values(e)) {
@@ -73,7 +73,7 @@ let $$en21 = Mz([et, er], (e, t) => {
   }
   return r;
 });
-let ei = Mz([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B, e => e.library.publishableSymbols, q, isSelectedViewFullscreenCooper], (e, t, r, n, i, a, s, l) => {
+let ei = createSelector([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B, e => e.library.publishableSymbols, q, isSelectedViewFullscreenCooper], (e, t, r, n, i, a, s, l) => {
   if (r === LibrarySourceEnum.HUBFILE && i) {
     let r = _$$l(i.libraryKey);
     let {
@@ -83,8 +83,8 @@ let ei = Mz([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B,
   }
   return e;
 });
-let ea = Mz([$, $$G13, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
-let es = Mz([function (e) {
+let ea = createSelector([$, $$G13, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
+let es = createSelector([function (e) {
   return e.library.local.stateGroups;
 }, selectOpenFileKey, $$U8, $$V14, B, e => e.library.publishableStateGroups, q], (e, t, r, n, i, a, s) => {
   if (r === LibrarySourceEnum.HUBFILE && i) {
@@ -96,8 +96,8 @@ let es = Mz([function (e) {
   }
   return e;
 });
-let eo = Mz([X, $$V14, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
-let $$el11 = Mz([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i) => {
+let eo = createSelector([X, $$V14, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
+let $$el11 = createSelector([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let a = {};
   let s = (e, t) => {
@@ -126,7 +126,7 @@ let $$el11 = Mz([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i
   }
   return a;
 });
-let $$ed22 = Mz([es, eo], (e, t) => {
+let $$ed22 = createSelector([es, eo], (e, t) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let r = {};
   for (let n of Object.values(e)) {
@@ -138,7 +138,7 @@ let $$ed22 = Mz([es, eo], (e, t) => {
   }
   return r;
 });
-let $$ec33 = P8([e => {
+let $$ec33 = createDeepEqualSelector([e => {
   let t = {};
   Object.entries(e.library.localVariablesById).forEach(([e, r]) => {
     r.isSoftDeleted || (t[e] = r);
@@ -182,8 +182,8 @@ let $$ec33 = P8([e => {
   }
   return s;
 });
-let eu = Mz([$$ec33], e => u()(Object.values(e), e => e.variableSetId));
-let $$ep20 = P8([e => {
+let eu = createSelector([$$ec33], e => u()(Object.values(e), e => e.variableSetId));
+let $$ep20 = createDeepEqualSelector([e => {
   let t = {};
   Object.entries(e.library.localVariableSetsById).forEach(([e, r]) => {
     r.isSoftDeleted || (t[e] = r);
@@ -245,7 +245,7 @@ let $$ep20 = P8([e => {
   }
   return h;
 });
-let $$e_18 = Mz([$$el11], e => {
+let $$e_18 = createSelector([$$el11], e => {
   let t = {};
   for (let r of Object.values(e)) {
     let e = E2(r);
@@ -253,7 +253,7 @@ let $$e_18 = Mz([$$el11], e => {
   }
   return t;
 });
-let eh = Mz([$$el11], e => f()(e, e => !ad(e)));
+let eh = createSelector([$$el11], e => f()(e, e => !ad(e)));
 let em = e => e.library.local.modules;
 function eg(e, t) {
   if (!t) return !1;
@@ -286,19 +286,19 @@ function ef(e, t, r, n, i) {
   }
   return a;
 }
-let $$eE37 = Mz([em, Q, K, B, $$U8], (e, t, r, n, i) => getFeatureFlags().dse_module_publish ? ef(e, t, r, n, i) : {});
-let $$ey26 = Mz([em, Q, K, B, (e, t) => t], (e, t, r, n, i) => ef(e, t, r, n, i));
-let $$eb6 = Mz([eh, $$ed22], (e, t) => ({
+let $$eE37 = createSelector([em, Q, K, B, $$U8], (e, t, r, n, i) => getFeatureFlags().dse_module_publish ? ef(e, t, r, n, i) : {});
+let $$ey26 = createSelector([em, Q, K, B, (e, t) => t], (e, t, r, n, i) => ef(e, t, r, n, i));
+let $$eb6 = createSelector([eh, $$ed22], (e, t) => ({
   ...e,
   ...t
 }));
-let eT = Mz([$$eb6], e => _()(e, e => CG(e)));
-let eI = Mz([$$eb6], e => Object.values(e).some(e => HF(e.status)));
-let eS = Mz([$$eE37], e => Object.values(e).some(e => HF(e.status)));
-let $$ev4 = Mz([eI, eS], (e, t) => e || t);
-let eA = Mz([$$eb6, Xt], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
-let ex = Mz([$$eE37, Xt], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
-let eN = Mz([$$en21, $$eb6, $$ep20, $$eE37], (e, t, r, n) => Object.keys(e).length > 0 || Object.keys(t).length > 0 || Object.keys(r).length > 0 || Object.keys(n).length > 0);
+let eT = createSelector([$$eb6], e => _()(e, e => CG(e)));
+let eI = createSelector([$$eb6], e => Object.values(e).some(e => HF(e.status)));
+let eS = createSelector([$$eE37], e => Object.values(e).some(e => HF(e.status)));
+let $$ev4 = createSelector([eI, eS], (e, t) => e || t);
+let eA = createSelector([$$eb6, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
+let ex = createSelector([$$eE37, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
+let eN = createSelector([$$en21, $$eb6, $$ep20, $$eE37], (e, t, r, n) => Object.keys(e).length > 0 || Object.keys(t).length > 0 || Object.keys(r).length > 0 || Object.keys(n).length > 0);
 let eC = createReduxSubscriptionAtomWithState(eN);
 let $$ew0 = atom(e => {
   if (e(eC)) return !0;
@@ -311,14 +311,14 @@ let $$ew0 = atom(e => {
   }
   return !1;
 });
-let eO = _$$n(Mz([$$eb6, $$eE37], (e, t) => Object.keys(e).length > 0 || Object.keys(t).length > 0));
+let eO = _$$n(createSelector([$$eb6, $$eE37], (e, t) => Object.keys(e).length > 0 || Object.keys(t).length > 0));
 let $$eR17 = createReduxSubscriptionAtomWithState(eO);
 let eL = (e, t) => e.status != null && (!!lg(e.status) || !!Hb(e.status) && (t ? t.has(e.node_id) : !!e.old_key));
 let eP = (e, t) => eL(e, t) && HF(e.status);
 let eD = createReduxSubscriptionAtomWithState(e => e.userStateLoaded);
 let $$ek30 = atom(e => e(eD) && e(openFileAtom)?.canEdit && (e($$tj32) || e($$ew0)));
-let $$eM23 = Mz([$$el11, $$ed22, $$en21, (e, t) => t], ej);
-let $$eF7 = Mz([$$el11, $$ed22, $$en21], (e, t, r) => ej(e, t, r, void 0));
+let $$eM23 = createSelector([$$el11, $$ed22, $$en21, (e, t) => t], ej);
+let $$eF7 = createSelector([$$el11, $$ed22, $$en21], (e, t, r) => ej(e, t, r, void 0));
 function ej(e, t, r, n) {
   let i = {
     ...e,
@@ -389,8 +389,8 @@ let $$eY38 = createRemovableAtomFamily(e => {
     };
   });
 });
-let e$ = Mz([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eM23, (e, t) => t], eq);
-let eX = Mz([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eF7], (e, t, r, n, i, a, s, o) => eq(e, t, r, n, i, a, s, o, void 0));
+let e$ = createSelector([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eM23, (e, t) => t], eq);
+let eX = createSelector([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eF7], (e, t, r, n, i, a, s, o) => eq(e, t, r, n, i, a, s, o, void 0));
 function eq(e, t, r, n, i, a, s, o, l) {
   let d = (e, t) => {
     if (!l) return 0;
@@ -410,49 +410,49 @@ function eq(e, t, r, n, i, a, s, o, l) {
     modules: eW(o, _$$O(PrimaryWorkflowEnum.MODULE) ? Object.values(s) : [], () => !1, [gA])
   };
 }
-let eJ = P8([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [MA])])));
-let $$eZ12 = () => P8([eJ, (e, t) => t], (e, t) => {
+let eJ = createDeepEqualSelector([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [MA])])));
+let $$eZ12 = () => createDeepEqualSelector([eJ, (e, t) => t], (e, t) => {
   let r = e[t];
   return r ? r.modified.wellFormed : [];
 });
-let $$eQ27 = () => P8([eJ, (e, t) => t], (e, t) => {
+let $$eQ27 = () => createDeepEqualSelector([eJ, (e, t) => t], (e, t) => {
   let r = e[t];
   return r ? r.unmodified.unpublished.filter(e => !e.isPublishable) : [];
 });
-let e0 = Mz([eK], e => e.styles.modified.wellFormed);
-let e1 = Mz([$$en21], e => Object.values(e).filter(e => eP(e)));
-let e2 = Mz([eK], e => e.components.modified.wellFormed);
-let e5 = Mz([eK], e => e.stateGroups.modified.wellFormed);
-let e3 = Mz([eK], e => e.productComponents.modified.wellFormed);
-let e4 = Mz([e3], e => e.filter(e => HF(e.status)));
-let e8 = Mz([eK], e => e.variableSets.modified.wellFormed);
-let e6 = Mz([e8], e => e.filter(e => HF(e.status)));
-let e7 = Mz([eK], e => _$$O(PrimaryWorkflowEnum.MODULE) ? e.modules.modified.wellFormed : []);
-let e9 = Mz([e7], e => e.filter(e => HF(e.status)));
-let $$te25 = Mz([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !isTeamFolderV2(e?.project) && !!(e && hasTeamPaidAccess(e.teamId ? t[e.teamId] : null)));
+let e0 = createSelector([eK], e => e.styles.modified.wellFormed);
+let e1 = createSelector([$$en21], e => Object.values(e).filter(e => eP(e)));
+let e2 = createSelector([eK], e => e.components.modified.wellFormed);
+let e5 = createSelector([eK], e => e.stateGroups.modified.wellFormed);
+let e3 = createSelector([eK], e => e.productComponents.modified.wellFormed);
+let e4 = createSelector([e3], e => e.filter(e => HF(e.status)));
+let e8 = createSelector([eK], e => e.variableSets.modified.wellFormed);
+let e6 = createSelector([e8], e => e.filter(e => HF(e.status)));
+let e7 = createSelector([eK], e => _$$O(PrimaryWorkflowEnum.MODULE) ? e.modules.modified.wellFormed : []);
+let e9 = createSelector([e7], e => e.filter(e => HF(e.status)));
+let $$te25 = createSelector([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !isTeamFolderV2(e?.project) && !!(e && hasTeamPaidAccess(e.teamId ? t[e.teamId] : null)));
 let $$tt3 = e0;
-let tr = Mz([$$tt3], e => e.length > 0);
+let tr = createSelector([$$tt3], e => e.length > 0);
 let tn = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tr(t, e)));
-let ti = Mz([e1], e => e.length > 0);
+let ti = createSelector([e1], e => e.length > 0);
 let ta = createReduxSubscriptionAtomWithState(ti);
-let $$ts28 = Mz([e2, $$te25], (e, t) => t ? e : []);
-let $$to10 = Mz([e5, $$te25], (e, t) => t ? e : []);
-let tl = Mz([e3, $$te25], (e, t) => t ? e : []);
-let td = Mz([tl], e => e.length > 0);
+let $$ts28 = createSelector([e2, $$te25], (e, t) => t ? e : []);
+let $$to10 = createSelector([e5, $$te25], (e, t) => t ? e : []);
+let tl = createSelector([e3, $$te25], (e, t) => t ? e : []);
+let td = createSelector([tl], e => e.length > 0);
 let tc = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => td(t, e)));
-let tu = Mz([e4, $$te25], (e, t) => t ? e : []);
-let tp = Mz([tu], e => e.length > 0);
+let tu = createSelector([e4, $$te25], (e, t) => t ? e : []);
+let tp = createSelector([tu], e => e.length > 0);
 let t_ = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tp(t, e)));
-let th = Mz([e8], e => e);
-let tm = Mz([th], e => e.length > 0);
+let th = createSelector([e8], e => e);
+let tm = createSelector([th], e => e.length > 0);
 let tg = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tm(t, e)));
-let tf = Mz([e6], e => e);
-let tE = Mz([tf], e => e.length > 0);
+let tf = createSelector([e6], e => e);
+let tE = createSelector([tf], e => e.length > 0);
 let ty = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tE(t, e)));
-let tb = Mz([e7, $$te25], (e, t) => t ? e : []);
-let tT = Mz([tb], e => e.length > 0);
+let tb = createSelector([e7, $$te25], (e, t) => t ? e : []);
+let tT = createSelector([tb], e => e.length > 0);
 let tI = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tT(t, e)));
-let tS = Mz([e9], e => e.length > 0);
+let tS = createSelector([e9], e => e.length > 0);
 let tv = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tS(t, e)));
 let tA = createRemovableAtomFamily(e => atom(t => {
   for (let r of Object.values(t($$eY38(e)).libraryAssets)) {
@@ -484,17 +484,17 @@ let $$tN36 = createRemovableAtomFamily(e => {
 });
 let $$tC9 = createRemovableAtomFamily(e => atom(t => t(tn(e)) || t(tc(e)) || t(tg(e)) || t(tI(e)) || t(tA(e))));
 let $$tw19 = createRemovableAtomFamily(e => atom(t => t(ta) || t(t_(e)) || t(ty(e)) || t(tv(e)) || t(tx(e))));
-let $$tO2 = Mz([eA, tl], (e, t) => t.some(t => e[t.node_id]));
-Mz([ex, tb], (e, t) => t.some(t => e[t.node_id]));
-let $$tR16 = Mz([eT, c5], (e, t) => ({
+let $$tO2 = createSelector([eA, tl], (e, t) => t.some(t => e[t.node_id]));
+createSelector([ex, tb], (e, t) => t.some(t => e[t.node_id]));
+let $$tR16 = createSelector([eT, c5], (e, t) => ({
   ...t,
   ...e
 }));
-let $$tL1 = Mz([tb], e => e.map(e => e.node_id));
-Mz([$$to10], e => e.map(e => e.node_id));
-let $$tP35 = Mz([$$ts28, () => XR()], (e, t) => e.filter(e => e.deletedFromSceneGraph || t.includes(e.node_id)).map(e => e.node_id));
-let $$tD34 = Mz([$$tP35, () => Wn()], (e, t) => e.concat(t.filter(e => e.type !== 'SYMBOL').map(e => e.guid)));
-let $$tk29 = Mz([$$el11, () => XR()], (e, t) => f()(e, e => t.includes(e.node_id)));
+let $$tL1 = createSelector([tb], e => e.map(e => e.node_id));
+createSelector([$$to10], e => e.map(e => e.node_id));
+let $$tP35 = createSelector([$$ts28, () => XR()], (e, t) => e.filter(e => e.deletedFromSceneGraph || t.includes(e.node_id)).map(e => e.node_id));
+let $$tD34 = createSelector([$$tP35, () => Wn()], (e, t) => e.concat(t.filter(e => e.type !== 'SYMBOL').map(e => e.guid)));
+let $$tk29 = createSelector([$$el11, () => XR()], (e, t) => f()(e, e => t.includes(e.node_id)));
 let tM = atom(e => Object.values(e(_$$t).data ?? {}).some(e => HF(e.status)));
 let tF = createReduxSubscriptionAtomWithState($$ee5);
 let $$tj32 = atom(e => e(tF) || e(tM));

@@ -4,7 +4,7 @@ import { UserAppType } from "../figma_app/763686";
 import { EU, tz, Rx, rb, CJ, WF, Lz, eZ, jw, TC, tg, nn, A2, V3, qQ, w4, tO, dJ, d1, yy, pG, RU, yR, lM, c2, di, Vm, Ag, sG, d_, p6, rf, k0, IW, l5, ZD, RN, LY, mk, Fe, uH, Z3, vv, qV, b_, Bj, be, wm, Gh, aO, $C, xJ, Ud, Iz, A1, _L, rm, qP, W3, M0, a5, S_, uG, gQ, Bz } from "../figma_app/548577";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { iw } from "../figma_app/582563";
+import { safeModeRenderController } from "../figma_app/582563";
 import { captureException } from "../905/11";
 import { logCustom } from "../905/714362";
 import { getI18nString } from "../905/303541";
@@ -337,7 +337,7 @@ export let $$K0 = {
   WhiteboardThemeTsBindings: () => new aO(),
   QuickActionsBindings: () => new $C(),
   BranchingWebBindings: () => _$$B,
-  SafeModeOptions: () => iw,
+  SafeModeOptions: () => safeModeRenderController,
   DSAWebBindings: () => new xJ(),
   WhiteboardDltConstantBindings: () => new Ud(),
   SlidesTsBindings: () => new Iz(),

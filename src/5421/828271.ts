@@ -35,7 +35,7 @@ import { e7, av } from "../figma_app/316316";
 import { NE } from "../3276/373312";
 import { selectCurrentFile } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
-import { dK, Xt } from "../figma_app/889655";
+import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
 import { KindEnum } from "../905/129884";
@@ -157,8 +157,8 @@ let $$eT0 = memo(function ({
   let a = useSelector(n9);
   let l = useSelector(DV);
   let s = useSelector(ek);
-  let d = useSelector(dK);
-  let c = useSelector(Xt);
+  let d = useSelector(selectSceneGraph);
+  let c = useSelector(selectSceneGraphSelection);
   let p = a2();
   let u = _$$R();
   let y = useSelector(eO);
@@ -413,7 +413,7 @@ function eA({
   let Y = a2();
   let X = useSelector(ew);
   let Q = X?.id === o$ ? X : null;
-  let et = useSelector(dK);
+  let et = useSelector(selectSceneGraph);
   let [en, eo] = useState(!1);
   let ei = useAtomWithSubscription(NE) ? ej : eE;
   let er = useContext(qd);
@@ -726,8 +726,8 @@ function eO(e) {
   return e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0;
 }
 function eL() {
-  let e = useSelector(Xt);
-  let t = useSelector(dK);
+  let e = useSelector(selectSceneGraphSelection);
+  let t = useSelector(selectSceneGraph);
   for (let n of Object.keys(e)) {
     let e = t.get(n);
     if (e && ("INSTANCE" === e.type || e.isInstanceSublayer)) return !0;

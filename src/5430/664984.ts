@@ -1,21 +1,21 @@
 import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { logError } from "../905/714362";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { ek, MJ } from "../figma_app/657017";
-import { g } from "../905/347448";
-import { nm } from "../905/352022";
+import { initialStateAtom } from "../905/347448";
+import { setupAuthedUserPlanLoader } from "../905/352022";
 import { selectCurrentUser } from "../905/372672";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { OrganizationType } from "../905/833838";
 var $$h3 = (e => (e.SITES_DISABLED_FOR_STARTER = "sites_disabled_for_starter", e.SITES_DISABLED_FOR_ORG = "sites_disabled_for_org", e.COOPER_DISABLED_FOR_ORG = "cooper_disabled_for_org", e.FIGMAKE_DISABLED_FOR_ORG = "figmake_disabled_for_org", e))($$h3 || {});
 function x(e) {
-  let t = useAtomWithSubscription(g);
+  let t = useAtomWithSubscription(initialStateAtom);
   let r = selectCurrentUser();
   useEffect(() => {
-    t === _$$r.INIT && nm()(e).catch(e => {
+    t === APILoadingStatus.INIT && setupAuthedUserPlanLoader()(e).catch(e => {
       logError("Error loading plans for authed users", e, {
         reportErrorToSentry: !0
       });
@@ -24,7 +24,7 @@ function x(e) {
   return useMemo(() => {
     let e = [];
     let s = [];
-    if (!r || t === _$$r.LOADING || t === _$$r.INIT) return {
+    if (!r || t === APILoadingStatus.LOADING || t === APILoadingStatus.INIT) return {
       teams: e,
       orgs: s
     };
@@ -67,16 +67,16 @@ export function $$y2(e) {
 export function $$g0(e) {
   let t = useDispatch();
   let r = function (e) {
-    let t = useAtomWithSubscription(g);
+    let t = useAtomWithSubscription(initialStateAtom);
     let r = selectCurrentUser();
     useEffect(() => {
-      t === _$$r.INIT && nm()(e).catch(e => {
+      t === APILoadingStatus.INIT && setupAuthedUserPlanLoader()(e).catch(e => {
         logError("Error loading plans for authed users", e, {
           reportErrorToSentry: !0
         });
       });
     }, [e, t]);
-    return useMemo(() => r && t !== _$$r.LOADING && t !== _$$r.INIT ? t.plansByUserId[r.id] : [], [t, r]);
+    return useMemo(() => r && t !== APILoadingStatus.LOADING && t !== APILoadingStatus.INIT ? t.plansByUserId[r.id] : [], [t, r]);
   }(t);
   let {
     teams

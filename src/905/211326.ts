@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { LoadingSpinner } from "../figma_app/858013";
 function s(e) {
   return e.isLoading ? jsx("div", {
@@ -9,18 +9,18 @@ function s(e) {
 }
 function o(e) {
   switch (e.state.status) {
-    case _$$r.FAILURE:
+    case APILoadingStatus.FAILURE:
       if (e.failure) return jsx(e.failure, {});
       return jsx("div", {
         className: e.className,
         children: jsx(LoadingSpinner, {})
       });
-    case _$$r.LOADING:
+    case APILoadingStatus.LOADING:
       return jsx("div", {
         className: e.className,
         children: jsx(LoadingSpinner, {})
       });
-    case _$$r.SUCCESS:
+    case APILoadingStatus.SUCCESS:
       return e.children(e.state.value);
   }
 }

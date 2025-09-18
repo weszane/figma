@@ -25,9 +25,9 @@ import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { DEV_HAND, DevHandoffInspectPanelPluginsHint } from "../figma_app/910914";
 import { $ as _$$$ } from "../figma_app/61705";
 import { postUserFlag } from "../905/985254";
-import { oW } from "../figma_app/297957";
+import { useFigmaMakePrototypeTabUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { _Z, eC, $1 } from "../905/539601";
 import { ck as _$$ck } from "../905/87821";
@@ -196,7 +196,7 @@ let eg = [{
   }) {
     let t = useDispatch();
     let n = selectCurrentFile();
-    let a = "dark" === DP();
+    let a = "dark" === getVisibleTheme();
     let {
       folderId,
       isDraftsFolder
@@ -328,7 +328,7 @@ let eg = [{
   }) {
     let n = useDispatch();
     let a = _$$U("announcement");
-    let s = "dark" === DP();
+    let s = "dark" === getVisibleTheme();
     let r = () => {
       t ? _Z(t) : n(postUserFlag({
         [e]: !0
@@ -514,7 +514,7 @@ export function $$ex0(e) {
     Prototype: "loading" === status
   };
   let K = {};
-  let W = oW();
+  let W = useFigmaMakePrototypeTabUpsellExperiment();
   if (K.isInFigmaMakePrototypeTabUpsellExp = W, k) return jsxs("div", {
     className: "announcement--loggedOutSignupCta--qrt2V",
     children: [jsx(_$$f, {}), getI18nString("auth.create_account_to_view_reply_comments"), jsx(Button, {

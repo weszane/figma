@@ -10,12 +10,12 @@ import { cU } from "../figma_app/646357";
 import { LH } from "../905/872904";
 import { liveStoreInstance } from "../905/713695";
 import { e6 } from "../905/404538";
-import { Mz } from "../vendor/925040";
-import { dK } from "../figma_app/889655";
+import { createSelector } from "../vendor/925040";
+import { selectSceneGraph } from "../figma_app/889655";
 import { C9, jf, MH } from "../figma_app/141508";
 import { D } from "../905/347702";
-let f = Mz([e => e.library.used__LIVEGRAPH], e => Object.values(e.styles));
-let _ = Mz([f], e => {
+let f = createSelector([e => e.library.used__LIVEGRAPH], e => Object.values(e.styles));
+let _ = createSelector([f], e => {
   let t = {};
   for (let i of e) "loaded" === i.status && (t[i.data.key] = i.data);
   return t;
@@ -24,7 +24,7 @@ let $$v0 = createContext(null);
 let $$I1 = D(() => {
   let e = useDispatch();
   let [t, i] = useState(null);
-  let g = useSelector(dK);
+  let g = useSelector(selectSceneGraph);
   let f = useSelector(C9);
   let b = useSelector(jf);
   let v = selectCurrentFile();

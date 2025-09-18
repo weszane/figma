@@ -1,6 +1,6 @@
 import { $V } from "../figma_app/990058";
-import { tc } from "../905/15667";
-import { Nu } from "../905/584989";
+import { DeepLinkType } from "../905/15667";
+import { requestUpgrade } from "../905/584989";
 import { ProductAccessTypeMap } from "../905/513035";
 import { FOrganizationLevelType } from "../figma_app/191312";
 export async function $$l0({
@@ -15,7 +15,7 @@ export async function $$l0({
       let a = l.key.parentId;
       e($V({
         orgId: a,
-        entryPoint: tc.NUX,
+        entryPoint: DeepLinkType.NUX,
         licenseType: ProductAccessTypeMap[d],
         seatTypeKey: d,
         fileKey: t ?? void 0,
@@ -28,9 +28,9 @@ export async function $$l0({
       }));
     } else {
       let n = l.key.parentId;
-      e(Nu({
+      e(requestUpgrade({
         teamId: n,
-        entryPoint: tc.NUX,
+        entryPoint: DeepLinkType.NUX,
         licenseType: ProductAccessTypeMap[d],
         seatTypeKey: d,
         fileKey: t ?? void 0,

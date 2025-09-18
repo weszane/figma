@@ -12,12 +12,12 @@ import { V6, i6, bY, ux } from "../figma_app/60023";
 import { Ji } from "../figma_app/553488";
 import { yt, WS, S7, NG } from "../7222/396421";
 import g from "classnames";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { $K } from "../9410/989613";
 import { R } from "../figma_app/53049";
 var _ = g;
 function y() {
-  let e = "dark" === DP();
+  let e = "dark" === getVisibleTheme();
   return jsx("div", {
     className: _()("slides_ai_shimmer_overlay--shimmer--R2Ru3", e ? "slides_ai_shimmer_overlay--shimmerDark--hd6lU" : "slides_ai_shimmer_overlay--shimmerLight--PGzix")
   });

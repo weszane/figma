@@ -38,8 +38,8 @@ import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz } from "../figma_app/84966";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -92,7 +92,7 @@ function ea(e) {
     });
   }(p, e.renewalDate, _);
   let [C, O] = useState(!1);
-  let V = useMemo(() => N_.dict(e => (g[e] ?? 0) + (y[e] || 0)), [g, y]);
+  let V = useMemo(() => collaboratorSet.dict(e => (g[e] ?? 0) + (y[e] || 0)), [g, y]);
   let Q = function (e, t, i) {
     let n = useDispatch();
     return r => {
@@ -136,8 +136,8 @@ function ea(e) {
     if (!prices || !localizeCurrency) return [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
-    let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
-    return N_.toArray().some(e => isNullish(a[e])) ? [null, {
+    let a = collaboratorSet.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
+    return collaboratorSet.toArray().some(e => isNullish(a[e])) ? [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
@@ -224,7 +224,7 @@ function ea(e) {
               minColumnWidth: 48,
               columnGaps: ["default", 40]
             },
-            items: N_.toArray().sort(AG),
+            items: collaboratorSet.toArray().sort(compareProductAccessTypes),
             columns: [{
               id: "billableProductKey",
               name: jsx(TextWithTruncation, {

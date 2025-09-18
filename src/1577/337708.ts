@@ -23,7 +23,7 @@ import { TextWithTruncation } from "../905/984674";
 import { showModal, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
-import { dH } from "../figma_app/722362";
+import { useCurrentTool } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
@@ -299,7 +299,7 @@ export let $$$0 = registerModal(function ({
   let s = getUserId();
   let c = getCurrentTeamId();
   let d = useModalManager(r);
-  let u = dH();
+  let u = useCurrentTool();
   let _ = useAtomWithSubscription(_$$B);
   let f = u === DesignGraphElements.DROPPER_COLOR && _ === ToolType.EDIT_PALETTE_MODAL;
   let p = useCallback(() => {

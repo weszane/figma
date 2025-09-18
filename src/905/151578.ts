@@ -1,80 +1,161 @@
-import { deepEqual } from "../905/382883";
-import { RevisionNumberAccessor } from "../figma_app/763686";
-import a from "../vendor/128080";
-function s(e, t, i) {
-  t in e ? Object.defineProperty(e, t, {
-    value: i,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = i;
-  return e;
+import isEqual from 'lodash-es/isEqual'
+import { deepEqual } from '../905/382883'
+import { RevisionNumberAccessor } from '../figma_app/763686'
+
+/**
+ * Compares two values for equality, handling nulls and using lodash's isEqual.
+ * @param a - First value.
+ * @param b - Second value.
+ * @returns True if equal, false otherwise.
+ * @originalName o
+ */
+export function areValuesEqual(a: any, b: any): boolean {
+  if (b === null)
+    return a === null || a.length === 0
+  return isEqual(a, b)
 }
-function o(e, t) {
-  return null === t ? null === e || 0 === e.length : a(e, t);
+
+/**
+ * Options for SceneValueTracker.
+ */
+export interface SceneValueTrackerOptions {
+  deepEqual?: boolean
+  allowDeferral?: boolean
 }
-export class $$l1 {
-  checkForUpdates(e) {
-    var t;
-    let i = this.scene !== this.lastSceneInstance;
-    let a = "function" == typeof (t = this.scene).getRevisionNumber ? t.getRevisionNumber() : RevisionNumberAccessor && "function" == typeof RevisionNumberAccessor.getRevisionNumber ? RevisionNumberAccessor.getRevisionNumber() : 0;
-    if (null === this.lastRevision || this.lastRevision !== a || !o(e, this.lastArgs || null) || i) {
-      if (null !== this.lastValue && !this.scene.hasValidScene()) return;
-      this.lastSceneInstance = this.scene;
-      this.lastArgs = e;
-      let t = this.computeValue(this.scene, ...e);
-      this.deepEqual && deepEqual(t, this.lastValue) || (this.lastValue = t);
-      this.lastRevision = a;
+
+/**
+ * Tracks scene value changes and computes new values when needed.
+ * @originalName $$l1
+ */
+export class SceneValueTracker {
+  private lastArgs: any[] | null = null
+  private lastValue: any = null
+  private lastRevision: number | null | undefined = null
+  private lastSceneInstance: any = null
+  private scene: any
+  private computeValue: (...args: any[]) => any
+  private deepEqual: boolean
+  private allowDeferral: boolean
+
+  /**
+   * @param scene - The scene object.
+   * @param computeValue - Function to compute the value.
+   * @param options - Tracker options.
+   */
+  constructor(
+    scene: any,
+    computeValue: (...args: any[]) => any,
+    options: SceneValueTrackerOptions = {},
+  ) {
+    this.lastRevision = null
+    this.lastSceneInstance = scene
+    this.scene = scene
+    this.computeValue = computeValue
+    this.deepEqual = options.deepEqual ?? true
+    this.allowDeferral = options.allowDeferral ?? true
+  }
+
+  /**
+   * Checks if the value needs to be updated based on scene and arguments.
+   * @param args - Arguments for computeValue.
+   */
+  checkForUpdates(args: any[]) {
+    const sceneChanged = this.scene !== this.lastSceneInstance
+    const revision
+      = typeof this.scene.getRevisionNumber === 'function'
+        ? this.scene.getRevisionNumber()
+        : RevisionNumberAccessor
+          && typeof RevisionNumberAccessor.getRevisionNumber === 'function'
+          ? RevisionNumberAccessor.getRevisionNumber()
+          : 0
+
+    if (
+      this.lastRevision === null
+      || this.lastRevision !== revision
+      || !areValuesEqual(args, this.lastArgs || null)
+      || sceneChanged
+    ) {
+      if (this.lastValue !== null && !this.scene.hasValidScene())
+        return
+      this.lastSceneInstance = this.scene
+      this.lastArgs = args
+      const newValue = this.computeValue(this.scene, ...args)
+      if (!this.deepEqual || !deepEqual(newValue, this.lastValue)) {
+        this.lastValue = newValue
+      }
+      this.lastRevision = revision
     }
   }
-  readValue(...e) {
-    this.checkForUpdates(e);
-    return this.lastValue;
+
+  /**
+   * Reads the current value, updating if necessary.
+   * @param args - Arguments for computeValue.
+   * @returns The current value.
+   */
+  readValue(...args: any[]) {
+    this.checkForUpdates(args)
+    return this.lastValue
   }
-  subscribe(e) {
-    return this.scene.onChange(e, {
-      allowDeferral: this.allowDeferral
-    });
-  }
-  constructor(e, t, i = {}) {
-    s(this, "lastArgs", null);
-    s(this, "lastValue", null);
-    s(this, "lastRevision", void 0);
-    s(this, "lastSceneInstance", null);
-    s(this, "scene", void 0);
-    s(this, "computeValue", void 0);
-    s(this, "deepEqual", void 0);
-    s(this, "allowDeferral", void 0);
-    this.lastRevision = null;
-    this.lastSceneInstance = e;
-    this.scene = e;
-    this.computeValue = t;
-    this.deepEqual = i.deepEqual ?? !0;
-    this.allowDeferral = i.allowDeferral ?? !0;
+
+  /**
+   * Subscribes to scene changes.
+   * @param callback - Change handler.
+   * @returns Unsubscribe function.
+   */
+  subscribe(callback: (...args: any[]) => void) {
+    return this.scene.onChange(callback, {
+      allowDeferral: this.allowDeferral,
+    })
   }
 }
-export class $$d0 {
-  checkForUpdates(e) {
-    let t = this.scene !== this.lastSceneInstance;
-    if (!o(e, this.lastArgs || null) || t) {
-      if (this.lastSceneInstance = this.scene, this.lastArgs = e, null !== this.lastValue && !this.scene.hasValidScene()) return;
-      this.lastValue = this.computeValue(this.scene, ...e);
+
+/**
+ * Tracks scene value changes without revision or deep equality checks.
+ * @originalName $$d0
+ */
+export class SimpleSceneValueTracker {
+  private lastArgs: any[] | null = null
+  private lastValue: any = null
+  private lastSceneInstance: any = null
+  private scene: any
+  private computeValue: (...args: any[]) => any
+
+  /**
+   * @param scene - The scene object.
+   * @param computeValue - Function to compute the value.
+   */
+  constructor(scene: any, computeValue: (...args: any[]) => any) {
+    this.lastSceneInstance = scene
+    this.scene = scene
+    this.computeValue = computeValue
+  }
+
+  /**
+   * Checks if the value needs to be updated based on scene and arguments.
+   * @param args - Arguments for computeValue.
+   */
+  checkForUpdates(args: any[]) {
+    const sceneChanged = this.scene !== this.lastSceneInstance
+    if (!areValuesEqual(args, this.lastArgs || null) || sceneChanged) {
+      this.lastSceneInstance = this.scene
+      this.lastArgs = args
+      if (this.lastValue !== null && !this.scene.hasValidScene())
+        return
+      this.lastValue = this.computeValue(this.scene, ...args)
     }
   }
-  readValue(...e) {
-    this.checkForUpdates(e);
-    return this.lastValue;
-  }
-  constructor(e, t) {
-    s(this, "lastArgs", null);
-    s(this, "lastValue", null);
-    s(this, "lastSceneInstance", null);
-    s(this, "scene", void 0);
-    s(this, "computeValue", void 0);
-    this.lastSceneInstance = e;
-    this.scene = e;
-    this.computeValue = t;
+
+  /**
+   * Reads the current value, updating if necessary.
+   * @param args - Arguments for computeValue.
+   * @returns The current value.
+   */
+  readValue(...args: any[]) {
+    this.checkForUpdates(args)
+    return this.lastValue
   }
 }
-export const L = $$d0;
-export const M = $$l1;
+
+// Export refactored names for external usage
+export const L = SimpleSceneValueTracker
+export const M = SceneValueTracker

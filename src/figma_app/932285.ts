@@ -7,7 +7,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { RecordableButton } from "../905/511649";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { z5 } from "../905/713722";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
@@ -455,7 +455,7 @@ function P({
         "data-tooltip": e.tooltip || V_(e.option, O),
         "data-tooltip-show-above": !0
       }),
-      key: _$$F.format(e.option) + e.tooltip,
+      key: colorCSSManipulatorInstance.format(e.option) + e.tooltip,
       "aria-label": e.tooltip || V_(e.option, O),
       "aria-selected": l,
       className: o()(_$$s, {
@@ -465,7 +465,7 @@ function P({
       onPointerUp: e => {
         K && t(e);
       },
-      recordingKey: generateRecordingKey(s, "colorSelectorOption", _$$F.format(e.option)),
+      recordingKey: generateRecordingKey(s, "colorSelectorOption", colorCSSManipulatorInstance.format(e.option)),
       role: "option",
       tabIndex: -1
     }, jsx(cd, {

@@ -5,9 +5,9 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { S } from "../0c62c2fd/596856";
 import { $ } from "../figma_app/61705";
-import { Np } from "../figma_app/297957";
+import { useMakeFileCreationTooltipExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { FFileType } from "../figma_app/191312";
 import { N as _$$N } from "../figma_app/268271";
@@ -41,8 +41,8 @@ export function $$C0({
       return !(a || (s.lifecycleState?.count ?? 0) > 0 && _$$A(s.lifecycleState?.updatedAt).isAfter(_$$A().subtract(3, "day"))) && e;
     });
   }();
-  let r = Np();
-  let T = "dark" === DP();
+  let r = useMakeFileCreationTooltipExperiment();
+  let T = "dark" === getVisibleTheme();
   let {
     show,
     isShowing,

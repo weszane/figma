@@ -45,10 +45,10 @@ import { TrackingProvider } from "../figma_app/831799";
 import { replaceSelection } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
-import { eY as _$$eY, T3 } from "../figma_app/722362";
+import { useSceneGraphSelector, usePlaygroundSceneGraph } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f2 } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { bj } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
@@ -69,7 +69,7 @@ import { TabsPrimitiveTabStrip } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { lW } from "../figma_app/11182";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Gg, MC, gY, YN, v_, M7, uw, G5, jt, cL, fq, as, kL, pz, tb, J$, gy, xR, s6, Sd, X4, jH, Iw, F9, Qs } from "../905/610227";
 import { mapPlatformToFramework as _$$yT } from "../905/359509";
@@ -702,7 +702,7 @@ let eC = registerModal(function (e) {
               variant: "primary",
               onClick: () => {
                 s("code_connect.connect_to_codebase.view_docs_github_clicked");
-                o(RK({
+                o(setupHyperlinkHandler({
                   rawInput: "https://github.com/figma/code-connect"
                 }));
               },
@@ -974,14 +974,14 @@ function eK({
   let c = selectCurrentUser();
   let u = selectCurrentFile();
   let p = uQ();
-  let _ = _$$eY();
+  let _ = useSceneGraphSelector();
   let {
     backingNodeId,
     backingComponentKey,
     backingStateGroupKey,
     backingLibraryKey
   } = HX(p ?? "", _, null);
-  let E = T3();
+  let E = usePlaygroundSceneGraph();
   s && (_ = E);
   let I = Ur(e.template, a, s);
   let S = _$$l(backingLibraryKey ?? "");
@@ -1172,7 +1172,7 @@ function eJ({
     }, [e]);
   }();
   let s = useDispatch();
-  let o = _$$f2(eq);
+  let o = selectUserFlag(eq);
   let l = useCallback(() => {
     s(postUserFlag({
       [eq]: !0
@@ -1216,8 +1216,8 @@ export function $$eQ0({
   onInstancePillClick: t
 }) {
   let r = getFeatureFlags().dt_component_browser_in_context ? getI18nString("dev_handoff.component_browser.in_context_section_title") : getI18nString("dev_handoff.figmadocs.section_title");
-  let o = _$$eY();
-  let l = T3();
+  let o = useSceneGraphSelector();
+  let l = usePlaygroundSceneGraph();
   let d = Fullscreen.getPlaygroundNodeData();
   let c = uQ();
   let {
@@ -1270,7 +1270,7 @@ export function $$eQ0({
     };
     let p = function (e = !0) {
       let t = useAtomWithSubscription(openFileLibraryKeyAtom);
-      let r = _$$eY();
+      let r = useSceneGraphSelector();
       let n = Vr();
       let i = [];
       let a = n;
@@ -1379,7 +1379,7 @@ export function $$eQ0({
     "inspect-panel" !== D.view || O || P(!0);
   }, [D.view, O, P]);
   let j = useRef(null);
-  let U = _$$eY();
+  let U = useSceneGraphSelector();
   let B = uQ();
   let {
     backingLibraryKey

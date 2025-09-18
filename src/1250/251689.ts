@@ -21,7 +21,7 @@ import { CH, g4 } from "../figma_app/770359";
 import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
 import { lW } from "../figma_app/11182";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { k as _$$k } from "../905/443820";
 import { g as _$$g } from "../905/125190";
 import { VisualBellActions } from "../905/302958";
@@ -130,7 +130,7 @@ javascript:(function()%7Bfunction%20callback()%7BCodeConnect%3F.default%3F.init(
 function M({
   code: e
 }) {
-  let t = DP();
+  let t = getVisibleTheme();
   let n = useDispatch();
   let {
     onAction

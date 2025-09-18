@@ -8,7 +8,7 @@ import { e as _$$e } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { Lh, D8, WO } from "../figma_app/242339";
 import { N as _$$N } from "../figma_app/268271";
 import { WD4 } from "../figma_app/6204";
@@ -17,7 +17,7 @@ import { uM } from "../905/738636";
 import { UpgradeAction } from "../905/370443";
 import { getNewFileConfig } from "../905/766303";
 import { oe, RJ, I7 } from "../figma_app/630951";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { FFileType } from "../figma_app/191312";
 import { ai, f6 } from "../figma_app/915202";
 import { VF, uY, TG } from "../figma_app/989514";
@@ -129,14 +129,14 @@ function j({
 }) {
   let t = useDispatch();
   let r = useStore();
-  let s = _$$f("figma_basics_tooltips_onboarding");
-  let l = _$$f(F.FRAME);
-  let d = _$$f(F.TEXT);
-  let c = _$$f(F.FORMAT_TEXT);
-  let u = _$$f(F.DESIGN_PANEL);
-  let p = _$$f(F.UI_KITS_ENDING);
-  let h = !!_$$f("started_figma_basics_onboarding");
-  let m = aV();
+  let s = selectUserFlag("figma_basics_tooltips_onboarding");
+  let l = selectUserFlag(F.FRAME);
+  let d = selectUserFlag(F.TEXT);
+  let c = selectUserFlag(F.FORMAT_TEXT);
+  let u = selectUserFlag(F.DESIGN_PANEL);
+  let p = selectUserFlag(F.UI_KITS_ENDING);
+  let h = !!selectUserFlag("started_figma_basics_onboarding");
+  let m = useIsProgressBarHiddenOrLocked();
   let [g, O] = useState(_$$en.FORWARD);
   let L = useSelector(e => e.mirror.sceneGraph);
   let {
@@ -276,15 +276,15 @@ function K({
   completeOverlay: e
 }) {
   let t = useDispatch();
-  let r = _$$f("no_figma_basics_tooltips_onboarding");
-  let s = aV();
+  let r = selectUserFlag("no_figma_basics_tooltips_onboarding");
+  let s = useIsProgressBarHiddenOrLocked();
   let [l, d] = useState(_$$en.FORWARD);
-  let c = _$$f(W.FRAME);
-  let u = _$$f(W.TEXT);
-  let p = _$$f(W.FORMAT_TEXT);
-  let h = _$$f(W.DESIGN_PANEL);
-  let m = _$$f(W.UI_KITS);
-  let g = _$$f(W.UI_KITS_ENDING);
+  let c = selectUserFlag(W.FRAME);
+  let u = selectUserFlag(W.TEXT);
+  let p = selectUserFlag(W.FORMAT_TEXT);
+  let h = selectUserFlag(W.DESIGN_PANEL);
+  let m = selectUserFlag(W.UI_KITS);
+  let g = selectUserFlag(W.UI_KITS_ENDING);
   let {
     hasAnyUiKit,
     status
@@ -508,14 +508,14 @@ function en({
   completeOverlay: e
 }) {
   let t = useDispatch();
-  let r = _$$f("seen_starting_points_tooltips_onboarding");
-  let s = _$$f(er.EDIT_TEXT);
-  let l = _$$f(er.PROPERTIES);
-  let d = _$$f(er.FILLS);
-  let c = _$$f(er.TOOLBAR);
-  let u = _$$f(er.ASSETS);
-  let p = !!_$$f("started_figma_basics_onboarding");
-  let h = aV();
+  let r = selectUserFlag("seen_starting_points_tooltips_onboarding");
+  let s = selectUserFlag(er.EDIT_TEXT);
+  let l = selectUserFlag(er.PROPERTIES);
+  let d = selectUserFlag(er.FILLS);
+  let c = selectUserFlag(er.TOOLBAR);
+  let u = selectUserFlag(er.ASSETS);
+  let p = !!selectUserFlag("started_figma_basics_onboarding");
+  let h = useIsProgressBarHiddenOrLocked();
   let [m, g] = useState(_$$en.FORWARD);
   let E = useSelector(e => e.mirror.sceneGraph);
   let b = (e, r = _$$en.FORWARD) => {
@@ -597,11 +597,11 @@ export function $$ea1() {
     overlay: WD4,
     priority: _$$N.OVERRIDING_MODAL
   }, [E, f]);
-  let S = !!_$$f("editor_onboarded");
-  let v = !!_$$f("figma_basics_tooltips_onboarding");
-  let A = !!_$$f("no_figma_basics_tooltips_onboarding");
-  let x = !!_$$f("seen_starting_points_tooltips_onboarding");
-  let N = !!_$$f("started_figma_basics_onboarding");
+  let S = !!selectUserFlag("editor_onboarded");
+  let v = !!selectUserFlag("figma_basics_tooltips_onboarding");
+  let A = !!selectUserFlag("no_figma_basics_tooltips_onboarding");
+  let x = !!selectUserFlag("seen_starting_points_tooltips_onboarding");
+  let N = !!selectUserFlag("started_figma_basics_onboarding");
   let C = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });

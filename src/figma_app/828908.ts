@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { postUserFlag } from "../905/985254";
-import { f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 function l(e) {
   switch (e) {
     case "default":
@@ -45,10 +45,10 @@ export function $$u1(e) {
   }, t);
 }
 export function $$p0() {
-  let e = !!f(l("default"));
-  let t = !!f(l("unmanaged"));
-  let r = !!f(l("managed"));
-  let a = !!f(l("srgb"));
+  let e = !!selectUserFlag(l("default"));
+  let t = !!selectUserFlag(l("unmanaged"));
+  let r = !!selectUserFlag(l("managed"));
+  let a = !!selectUserFlag(l("srgb"));
   let s = useDispatch();
   let d = useCallback(n => {
     c(s, {

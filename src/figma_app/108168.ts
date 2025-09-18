@@ -18,7 +18,7 @@ import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { LW, bs } from "../figma_app/553940";
 import { Um } from "../905/848862";
-import { nj } from "../figma_app/889655";
+import { selectAppModel } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { Yh, TY, c1 } from "../figma_app/357047";
 import { c as _$$c } from "../figma_app/740884";
@@ -318,7 +318,7 @@ function H(e) {
   });
 }
 function z(e, t) {
-  let r = useSelector(nj);
+  let r = useSelector(selectAppModel);
   let n = !!useSelector(t => Zk(e) && e.isActive && e.isActive(t));
   let {
     action,

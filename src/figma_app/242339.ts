@@ -1,7 +1,7 @@
 import { D } from "../905/347702";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 export function $$o0(e) {
   let t = selectCurrentUser();
   let r = useOpenFileObjectWithSinatraType({
@@ -17,30 +17,30 @@ export function $$c2(e, t) {
   return e + "-" + t.toLowerCase().replace(" ", "-");
 }
 export function $$u6() {
-  let e = f("editor_onboarded");
-  let t = f("figma_basics_tooltips_onboarding");
-  let r = f("no_figma_basics_tooltips_onboarding");
+  let e = selectUserFlag("editor_onboarded");
+  let t = selectUserFlag("figma_basics_tooltips_onboarding");
+  let r = selectUserFlag("no_figma_basics_tooltips_onboarding");
   return $$h5({
     editor_onboarded: e,
     figma_basics_tooltips_onboarding: t,
     no_figma_basics_tooltips_onboarding: r,
-    cursor_bot_v2__basics_onboarded: f("cursor_bot_v2__basics_onboarded"),
-    cursor_bot_v2__no_basics_onboarded: f("cursor_bot_v2__no_basics_onboarded"),
-    seen_starting_points_tooltips_onboarding: f("seen_starting_points_tooltips_onboarding")
+    cursor_bot_v2__basics_onboarded: selectUserFlag("cursor_bot_v2__basics_onboarded"),
+    cursor_bot_v2__no_basics_onboarded: selectUserFlag("cursor_bot_v2__no_basics_onboarded"),
+    seen_starting_points_tooltips_onboarding: selectUserFlag("seen_starting_points_tooltips_onboarding")
   });
 }
 export function $$p4() {
-  let e = f("editor_onboarded");
+  let e = selectUserFlag("editor_onboarded");
   return $$h5({
     editor_onboarded: e,
-    figma_basics_tooltips_onboarding: f("figma_basics_tooltips_onboarding"),
-    no_figma_basics_tooltips_onboarding: f("no_figma_basics_tooltips_onboarding"),
-    seen_starting_points_tooltips_onboarding: f("seen_starting_points_tooltips_onboarding")
+    figma_basics_tooltips_onboarding: selectUserFlag("figma_basics_tooltips_onboarding"),
+    no_figma_basics_tooltips_onboarding: selectUserFlag("no_figma_basics_tooltips_onboarding"),
+    seen_starting_points_tooltips_onboarding: selectUserFlag("seen_starting_points_tooltips_onboarding")
   });
 }
 export function $$_7(e) {
-  let t = !!f("cursor_bot_v2__basics_onboarded");
-  let r = !!f("cursor_bot_v2__no_basics_onboarded");
+  let t = !!selectUserFlag("cursor_bot_v2__basics_onboarded");
+  let r = !!selectUserFlag("cursor_bot_v2__no_basics_onboarded");
   return t || !e && r;
 }
 export function $$h5(e) {

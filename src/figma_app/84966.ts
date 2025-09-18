@@ -12,7 +12,7 @@ import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_
 import { reportError } from "../905/11";
 import { T as _$$T } from "../1577/951568";
 import { Az } from "../5132/863145";
-import { k as _$$k2 } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { hY } from "../figma_app/80683";
 import { Y$, Ln, SG, Tc } from "../905/84777";
 import { FOrganizationLevelType, FOrganizationEntityType } from "../figma_app/191312";
@@ -22,10 +22,10 @@ import { getFutureDateOrNull } from "../figma_app/345997";
 import { IX } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { ProductAccessTypeEnum, isValidAccessType, ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 var d = l;
 function w(e, t, r, n) {
-  let i = (e === Y$.CURRENT ? Ln : SG)(t, N_, {
+  let i = (e === Y$.CURRENT ? Ln : SG)(t, collaboratorSet, {
     renewalTerm: r,
     unit: n
   });
@@ -105,8 +105,8 @@ function G(e, t) {
   if (!t) return null;
   let r = e.pendingConfirmedRenewalSeatCounts?.filter(e => _$$A(e.billingPeriodStart).add(1, "day").toDate() > t && _$$A(e.billingPeriodStart).subtract(1, "day").toDate() < t);
   if (!r || !r.length) return null;
-  let n = N_.dict(e => 0);
-  let i = N_.dict(e => 0);
+  let n = collaboratorSet.dict(e => 0);
+  let i = collaboratorSet.dict(e => 0);
   r.forEach(e => {
     if (!e.billableProductKey || !isValidAccessType(e.billableProductKey)) {
       reportError(_$$e.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
@@ -187,7 +187,7 @@ export function $$Y10(e) {
   let a = Az(e);
   let s = "loaded" === r.status && !!i?.show && !a.data?.isEligible;
   let l = t?.data?.non_adjustable_renewal_seats;
-  let u = l ? d()(N_.toArray(), e => l[e] ?? 0) : 0;
+  let u = l ? d()(collaboratorSet.toArray(), e => l[e] ?? 0) : 0;
   let p = hY(e?.id ?? "", FOrganizationLevelType.ORG, {
     enabled: s
   });
@@ -240,7 +240,7 @@ export function $$$1(e) {
     return useMemo(() => $$j14(e), [e]);
   }();
   let a = r ? 32 : 30;
-  let s = $$B3(_$$k2());
+  let s = $$B3(isProrationBillingEnabledForCurrentPlan());
   let l = $$z7(t ? {
     planKey: {
       type: FOrganizationLevelType.TEAM,

@@ -4,7 +4,7 @@ import { Button } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { _A } from "../figma_app/65182";
 import { warningOfflineContainer, warning, offlineIcon, trying } from "../figma_app/527659";
 import { A } from "../6828/699531";
@@ -12,7 +12,7 @@ export function $$_0({
   onRetry: e,
   recordingKey: t
 }) {
-  let r = useSelector(e => VP(e.loadingState, _A(e.openFile?.key)));
+  let r = useSelector(e => isLoading(e.loadingState, _A(e.openFile?.key)));
   return jsx("div", {
     className: warningOfflineContainer,
     children: jsxs("div", {

@@ -6,12 +6,12 @@ import { useLatestRef } from "../figma_app/922077";
 import { uh as _$$uh, Kh } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { isDevHandoffEditorType, isIllustrationEditorType, getSelectedEditorType } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { w4, Fj, go } from "../figma_app/927140";
 import { N as _$$N, Q } from "../figma_app/287368";
 import { U } from "../figma_app/65327";
@@ -36,7 +36,7 @@ export function $$v0(e) {
 export function $$A3() {
   let e = isUserNotLoggedInAndEditorSupported();
   let t = useCanAccessFullDevMode();
-  let r = !!hA() && t;
+  let r = !!useDevModeFocusId() && t;
   return !e && (r || isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev);
 }
 export function $$x4() {
@@ -59,7 +59,7 @@ export function $$C2() {
   let i = getSelectedEditorType();
   let a = useLatestRef(i);
   let [l, d] = useState(null);
-  let c = p8("isReadOnly");
+  let c = useAppModelProperty("isReadOnly");
   let u = U("ui3_toolbelt");
   let _ = useCallback(n => {
     ("design" !== n || e) && ("handoff" !== n || t) && ("illustration" !== n || r) ? (u(n), N(n, {

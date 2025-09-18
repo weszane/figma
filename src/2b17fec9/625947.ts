@@ -11,7 +11,7 @@ import { tH as _$$tH, H4 } from "../905/751457";
 import { VisualBellActions } from "../905/302958";
 import { uO as _$$uO, Gb } from "../figma_app/933328";
 import { isVsCodeEnvironment } from "../905/858738";
-import { aV as _$$aV, p8 as _$$p, eY as _$$eY, KH, dH as _$$dH } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useAppModelProperty, useSceneGraphSelector, useSceneGraphSelection, useCurrentTool } from "../figma_app/722362";
 import { Kx, BI, rN as _$$rN, kM, yx as _$$yx, F4 } from "../figma_app/546509";
 import { IT } from "../905/713695";
 import { W as _$$W } from "../441/503702";
@@ -189,7 +189,7 @@ import { gR as _$$gR, LR, ts as _$$ts, zo } from "../figma_app/120210";
 import { useCurrentUserOrg } from "../905/845253";
 import { RD, Ve, a6 as _$$a4 } from "../figma_app/198840";
 import { _Y as _$$_Y, OL, _D as _$$_D } from "../figma_app/191312";
-import { Sc, mC as _$$mC, oh as _$$oh } from "../905/18797";
+import { isNullOrFailure, useIsLoaded, useIsLoading } from "../905/18797";
 import { G7 } from "../figma_app/336853";
 import { n as _$$n4 } from "../905/79930";
 import { Vq, Rt } from "../figma_app/979658";
@@ -433,7 +433,7 @@ import { $ as _$$$3, h as _$$h8 } from "../905/455748";
 import { Tv, uQ as _$$uQ } from "../figma_app/311375";
 import { zD as _$$zD } from "../figma_app/109758";
 import { Z as _$$Z4 } from "../905/104740";
-import { Fk as _$$Fk, g0 as _$$g5 } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useSingleSceneValue } from "../figma_app/167249";
 import { qq as _$$qq } from "../figma_app/514229";
 import { O as _$$O2 } from "../905/353086";
 import { d as _$$d6 } from "../c5e2cae0/368426";
@@ -651,7 +651,7 @@ import { getRepoById } from "../905/760074";
 import { d1 as _$$d0 } from "../figma_app/603466";
 import { wQ, PK, H1, $c, hL as _$$hL, D6 as _$$D8, vt as _$$vt2, $l, gA as _$$gA, Vw, w9, Ev, U6 as _$$U4, rT as _$$rT2 } from "../figma_app/124493";
 import { C3, NE, jz as _$$jz2 } from "../figma_app/587765";
-import { gR as _$$gR2 } from "../figma_app/976345";
+import { toggleDropdown } from "../figma_app/976345";
 import { v as _$$v3, m as _$$m7 } from "../3276/99493";
 import { A as _$$A77 } from "../svg/391784";
 import { l as _$$l1 } from "../905/745972";
@@ -662,7 +662,7 @@ import { Qs, iN as _$$iN, sx as _$$sx3 } from "../905/992395";
 import { qU, OO, MR, II, qM } from "../figma_app/913518";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { h1 as _$$h0 } from "../905/986103";
-import { F as _$$F9 } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { ai as _$$ai3 } from "../9410/974031";
 import { kw } from "../figma_app/298911";
 import { e as _$$e0 } from "../3276/460810";
@@ -694,7 +694,7 @@ import { w as _$$w4 } from "../9410/519056";
 import { y as _$$y7 } from "../9410/656872";
 import { C as _$$C6 } from "../905/47358";
 import { UpgradeAction } from "../905/370443";
-import { f as _$$f0 } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { Fj } from "../905/763714";
 import { e2 as _$$e1 } from "../905/486443";
 import { m as _$$m8 } from "../3276/310657";
@@ -3062,11 +3062,11 @@ function nd({
   });
 }
 let nc = memo(function () {
-  let e = _$$aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = Ye();
   let i = _$$cT();
   let n = _$$n();
-  let r = _$$p("showUi");
+  let r = useAppModelProperty("showUi");
   let a = Yg();
   if (_$$bi(), !r) return null;
   if (e) return jsx(nd, {
@@ -4517,7 +4517,7 @@ function aQ() {
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));
-  let u = a && fileVersion && Sc(loadingState, _$$yD(a.key));
+  let u = a && fileVersion && isNullOrFailure(loadingState, _$$yD(a.key));
   return (useEffect(() => {
     u && r(zK());
   }, [r, u]), 0 === i.length) ? null : jsxs(Fragment, {
@@ -5053,9 +5053,9 @@ function sD() {
 function sP() {
   let e = _$$eE(FDocumentType.FigJam);
   let t = _$$ik(e, "templates", (e, t) => !t.some(t => t.type === _$$n4.HubFile && t.template.id === e.id), 4);
-  let i = _$$mk(t, [_$$mC(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let i = _$$mk(t, [useIsLoaded(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
-  })), _$$mC(_$$fC)]);
+  })), useIsLoaded(_$$fC)]);
   return jsx(_$$g3, {
     templates: i,
     templateInsertionLocation: RD.CURRENT_FILE
@@ -5089,12 +5089,12 @@ let sK = "browse_resources_all_tab--sectionBottomPadding--3jqXm";
 function sW() {
   let e = qZ();
   let t = Gi();
-  let i = _$$oh(_$$fC);
-  let n = _$$oh(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let i = useIsLoading(_$$fC);
+  let n = useIsLoading(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
-  let r = _$$oh(_$$fi);
-  let a = _$$oh(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let r = useIsLoading(_$$fi);
+  let a = useIsLoading(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   let s = useSelector(e => e.figjamDefaultInserts.useCases);
@@ -5459,7 +5459,7 @@ function ol(e) {
   let n = useMemo(() => Object.keys(i), [i]);
   let r = useCurrentFileKey();
   let a = (e.extensionType === PluginType.Plugin ? getPluginAllowListKey : getWidgetAllowListKey)(orgId, r);
-  let s = _$$mC(a);
+  let s = useIsLoaded(a);
   let d = Be();
   let c = e.extensionType === PluginType.Plugin ? d.orgPlugins : d.orgWidgets;
   let u = useMemo(() => e.dedupeOrgSaves ? n.filter(e => !c[e]) : n, [n, e.dedupeOrgSaves, c]);
@@ -5620,9 +5620,9 @@ function oI({
   let a = Object.keys(r);
   let s = useCurrentFileKey();
   let c = getPluginAllowListKey(e?.id ?? "", s);
-  let u = _$$mC(c);
+  let u = useIsLoaded(c);
   let p = LP.loadingKeyForPayload(e?.id ?? "");
-  let h = _$$mC(p);
+  let h = useIsLoaded(p);
   let m = Be().orgPlugins;
   let f = useMemo(() => {
     let e = Object.values(m).filter(e => !r[e.plugin_id]);
@@ -5772,12 +5772,12 @@ function oF() {
   }, []);
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
-  let i = _$$oh(_$$sz2.loadingKeyForPayload({
+  let i = useIsLoading(_$$sz2.loadingKeyForPayload({
     shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL
   }));
   let n = useCurrentFileKey();
-  let r = _$$oh(getPluginAllowListKey(t, n));
-  let a = _$$oh(LP.loadingKeyForPayload(t));
+  let r = useIsLoading(getPluginAllowListKey(t, n));
+  let a = useIsLoading(LP.loadingKeyForPayload(t));
   return i || r || a ? jsx(VR, {}) : jsx(TrackingProvider, {
     name: "plugins",
     children: jsx(oU, {})
@@ -6479,9 +6479,9 @@ function lb({
   let a = _$$h7("widget");
   let s = useCurrentFileKey();
   let d = getWidgetAllowListKey(e?.id ?? "", s);
-  let c = _$$mC(d);
+  let c = useIsLoaded(d);
   let u = _$$a3.loadingKeyForPayload(e.id ?? "");
-  let p = _$$mC(u);
+  let p = useIsLoaded(u);
   let h = !e.public_plugins_allowed || e.widgets_whitelist_enforced && c && 0 === Object.keys(r).length;
   let m = i || p && 0 === a.length;
   let f = Be().orgWidgets;
@@ -6578,13 +6578,13 @@ function lT() {
   }, []);
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
-  let i = _$$oh(_$$sz2.loadingKeyForPayload({
+  let i = useIsLoading(_$$sz2.loadingKeyForPayload({
     shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL
   }));
   let n = useCurrentFileKey();
-  let r = _$$oh(getWidgetAllowListKey(t, n));
-  let a = _$$oh(_$$a3.loadingKeyForPayload(t));
-  let s = _$$mC(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let r = useIsLoading(getWidgetAllowListKey(t, n));
+  let a = useIsLoading(_$$a3.loadingKeyForPayload(t));
+  let s = useIsLoaded(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   return i || r || a || !s ? jsx(_$$i2, {}) : jsx(TrackingProvider, {
@@ -7055,7 +7055,7 @@ function lF({
       shouldSearchDefaultLibraries: !0
     }));
   }, [$]);
-  let em = m && fileVersion && Sc(loadingState, _$$yD(m.key));
+  let em = m && fileVersion && isNullOrFailure(loadingState, _$$yD(m.key));
   useEffect(() => {
     em && $(zK());
   }, [$, em]);
@@ -7575,7 +7575,7 @@ function dj({
 }) {
   let t = dx();
   let i = useAtomWithSubscription(_$$dO);
-  let n = _$$p("keyboardShortcuts");
+  let n = useAppModelProperty("keyboardShortcuts");
   let r = _$$c5(n, "quick-create");
   return jsx("div", {
     className: "ai_modal--generateButtonContainer--TZ5A4",
@@ -8333,7 +8333,7 @@ function ci({
 let cn = [buildUploadUrl("25d8a30c44eab356d393ee997bc62cd0c85b4a28"), buildUploadUrl("3d959a21151e0b11ad486bd688e54f88d625c00a"), buildUploadUrl("9e7571f06975aa64d8e90ac0289a1b152dcc4dad")];
 function cr() {
   let e = useFullscreenReady();
-  let t = _$$aV();
+  let t = useIsProgressBarHiddenOrLocked();
   return !!e && !t;
 }
 function ca() {
@@ -8370,7 +8370,7 @@ function co() {
       t();
     }, [e, t]);
   })();
-  let n = _$$p("showUi");
+  let n = useAppModelProperty("showUi");
   let r = useAtomWithSubscription(_$$zS);
   if (r === Wl.NONE || r === Wl.TOP_BAR) return null;
   if (r === Wl.NEW_FILE) e = jsx(cc, {
@@ -9147,7 +9147,7 @@ function um({
 }
 function uv() {
   let e = Tv();
-  let t = _$$eY();
+  let t = useSceneGraphSelector();
   let i = useRef([]);
   let n = useRef(null);
   return useCallback(async () => {
@@ -9461,7 +9461,7 @@ function uB() {
   let {
     promptHistory
   } = _$$a8(_$$i7, e => e);
-  let n = KH();
+  let n = useSceneGraphSelection();
   !function () {
     let [{
       longRunningAction: e,
@@ -9470,7 +9470,7 @@ function uB() {
     }] = uh();
     let n = e?.state ?? qy.INITIAL;
     let r = uI();
-    let a = KH();
+    let a = useSceneGraphSelection();
     let s = _$$$3(a);
     let o = _$$$3(i);
     let d = uN();
@@ -9501,7 +9501,7 @@ function uB() {
     } = _$$a8(_$$i7, e => e);
     let t = RL(JT.CREATE_IDEAS, us);
     let i = uv();
-    let n = _$$eY();
+    let n = useSceneGraphSelector();
     let r = uS();
     let [{
       prompt: a
@@ -10049,8 +10049,8 @@ function uY() {
         appModel: e
       }
     }) => e.showUi);
-    let t = KH();
-    let i = _$$Fk((e, t) => {
+    let t = useSceneGraphSelection();
+    let i = useDeepEqualSceneValue((e, t) => {
       let i = Object.keys(t);
       let n = i.length > 0;
       let r = i.map(e => WhiteboardCanvasAIBindings?.getCanvasAiElibilityForNode(e) ?? EligibilityStatus.Ineligible);
@@ -10059,7 +10059,7 @@ function uY() {
     let n = uC();
     let r = function (e) {
       let t = uI();
-      return _$$Fk((e, t, i) => {
+      return useDeepEqualSceneValue((e, t, i) => {
         let n = Object.keys(t);
         return n.length > 0 && i.length > 0 && i.some(e => n.includes(e));
       }, e, t);
@@ -10074,7 +10074,7 @@ function uY() {
         appModel: e
       }
     }) => e.activeCanvasEditModeType);
-    let o = _$$Fk((e, t, i) => {
+    let o = useDeepEqualSceneValue((e, t, i) => {
       let n = Object.keys(t);
       return i === LayoutTabType.TEXT && n.some(t => e.get(t)?.isStickyText);
     }, t, s);
@@ -10110,7 +10110,7 @@ function uX() {
       });
     }, [e]);
   }();
-  let e = Object.keys(KH());
+  let e = Object.keys(useSceneGraphSelection());
   let t = function () {
     let e = useSelector(({
       mirror: {
@@ -10120,12 +10120,12 @@ function uX() {
     let t = uC();
     return e && t;
   }();
-  let i = _$$dH();
+  let i = useCurrentTool();
   let n = function (e, t) {
     let i = getViewportInfo({
       subscribeToUpdates_expensive: e
     });
-    let n = _$$Fk((e, t) => uT(t ?? [], e), t);
+    let n = useDeepEqualSceneValue((e, t) => uT(t ?? [], e), t);
     return useMemo(() => scaleRect(i, n), [i, n]);
   }(t, e);
   let [{
@@ -13169,7 +13169,7 @@ function fR() {
       position: T
     }));
   }, [T, k, e, R]);
-  let M = _$$p("showUi");
+  let M = useAppModelProperty("showUi");
   useEffect(() => {
     e && (e._native_contextual_toolbar_perform_menu_action = (e, t, i) => {
       switch (e) {
@@ -14283,7 +14283,7 @@ function xh({
   onChange: n,
   isOpen: r = !1
 }) {
-  let [a, s] = _$$Fk((e, t) => {
+  let [a, s] = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return [i?.mainComponent?.sourceLibraryKey, i?.mainComponent?.name];
   }, e);
@@ -14532,7 +14532,7 @@ function xf({
   isOpen: a = !1
 }) {
   var s;
-  let d = _$$Fk((e, t) => {
+  let d = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i?.mainComponent?.sourceLibraryKey;
   }, e);
@@ -15168,7 +15168,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
 }], [WhiteboardFeatures.WHITEBOARD_PLATFORM_SHAPE, function () {
   let e = _$$es();
   let t = _$$uQ();
-  let i = _$$Fk((e, t) => {
+  let i = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let i = e.get(t);
     return i?.type;
@@ -15177,7 +15177,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     let e = xg(t);
     e && (t = e.guid ?? "", i = e.type);
   }
-  let n = _$$Fk((e, t) => {
+  let n = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let i = e.get(t);
     return i?.mainComponent?.name;
@@ -19624,7 +19624,7 @@ function jd(e) {
   let i = gq(t?.selectedSongID || "");
   let n = gJ();
   let r = i && i.album_art;
-  return _$$p("showUi") ? jsxs("div", {
+  return useAppModelProperty("showUi") ? jsxs("div", {
     className: ex()("turntable--spinningAlbum--N7jwa", {
       "turntable--spinningAlbumXSmall--vzhVj": "xsmall" === e.size,
       "turntable--spinningAlbumLarge--SWUZ2": "large" === e.size
@@ -20556,7 +20556,7 @@ function bs({
   let t = C3();
   let i = useDispatch();
   let n = useCurrentFileKey();
-  let r = _$$oh(wQ(n || ""));
+  let r = useIsLoading(wQ(n || ""));
   let a = useCallback(() => {
     i(PK({
       uiSurface: "MeetingsPanel"
@@ -20721,7 +20721,7 @@ let bv = e => {
   return {
     isDropdownOpen: useSelector(e => e.dropdownShown?.type === bT),
     handleTargetClick: () => {
-      t(_$$gR2({
+      t(toggleDropdown({
         type: bT
       }));
     }
@@ -21439,7 +21439,7 @@ function bF() {
     userVoteLimit
   } = useSelector(e => e.voting.votingParams);
   let r = useSelector(e => !e.user);
-  let a = _$$oh($c(t || ""));
+  let a = useIsLoading($c(t || ""));
   let [s, c] = useState(userVoteLimit.toString());
   useEffect(() => {
     let t = bU(s);
@@ -21464,9 +21464,9 @@ function bH(e) {
   let i = useDispatch();
   let n = useCurrentFileKey();
   let r = useSelector(e => !e.user);
-  let a = _$$oh($c(n || ""));
+  let a = useIsLoading($c(n || ""));
   let s = useSelector(e => e.multiplayer.allUsers.length);
-  let c = _$$Fk(e => e.getCurrentPage()?.guid);
+  let c = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let u = NE()?.id;
   let p = r || a || !c;
   let {
@@ -21884,7 +21884,7 @@ function b7({
   isMostVoted: i
 }) {
   let n = e.guid;
-  let r = _$$g5(n);
+  let r = useSingleSceneValue(n);
   let a = _$$Z4("figjam_voting");
   let s = useDispatch();
   let c = useSelector(e => e.voting.selectedVotePinId === n);
@@ -21903,7 +21903,7 @@ function b7({
     if (!e) return _$$xr;
     let t = e.whiteboardColor;
     let i = BV(t, "STICKY" === e.type ? "sticky" : "base");
-    return i ? _$$F9.format(i) : _$$xr;
+    return i ? colorCSSManipulatorInstance.format(i) : _$$xr;
   }(r);
   let x = r ? "SHAPE_WITH_TEXT" === r.type ? function (e) {
     switch (e) {
@@ -22813,7 +22813,7 @@ function y0() {
   } = function (e) {
     let [t, i] = useState(!1);
     let n = useSelector(yZ);
-    let r = _$$f0(y$);
+    let r = selectUserFlag(y$);
     let a = useDispatch();
     let s = n > 1 && !r;
     useEffect(() => {
@@ -23072,7 +23072,7 @@ function y8() {
   let a = selectCurrentUser();
   let s = useMemo(() => n.allUsers.find(e => e.sessionID === n.sessionID) || null, [n.allUsers, n.sessionID]);
   let u = B4();
-  let p = _$$aV();
+  let p = useIsProgressBarHiddenOrLocked();
   let f = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let _ = !isAIFeaturesEnabledForCurrentUser() && Uy() && !Cd();
   let x = BrowserInfo.isMeetDevice;
@@ -23180,7 +23180,7 @@ let va = "whiteboard_ui--rightSidebar--CJHYf";
 let vs = memo(function () {
   let e = Vi();
   let t = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
-  let i = _$$p("showUi");
+  let i = useAppModelProperty("showUi");
   (function () {
     let e = Kx();
     let t = useSelector(e => e.timer.modalState);
@@ -23399,7 +23399,7 @@ let vg = memo(function () {
   let {
     pageIdForNodeId
   } = useContext(kw);
-  let s = _$$Fk(e => e.getCurrentPage()?.guid);
+  let s = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let u = useMemo(() => {
     var e;
     return i.votingStage === SessionStatus.JOINED ? (e = i.votedNodes, t ? e.filter(e => e.userIdToNodeVotes[t]?.length).map(e => ({
@@ -24089,7 +24089,7 @@ function vB({
   isFromNewFile: e
 }) {
   let t = useAtomWithSubscription(_$$P6);
-  let i = _$$dH();
+  let i = useCurrentTool();
   let n = useCurrentFileKey() || void 0;
   let r = useDispatch();
   let [a, s] = useState(!1);
@@ -24251,9 +24251,9 @@ function vV() {
 }
 function vK() {
   let e = useSelector(e => e.multiplayerEmoji);
-  let t = _$$p("showUi");
-  let i = _$$p("topLevelMode");
-  let n = _$$p("currentTool") === DesignGraphElements.COMMENTS;
+  let t = useAppModelProperty("showUi");
+  let i = useAppModelProperty("topLevelMode");
+  let n = useAppModelProperty("currentTool") === DesignGraphElements.COMMENTS;
   let r = i === ViewType.HISTORY;
   let a = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let s = getFeatureFlags().figjam_quick_actions_v2;
@@ -24270,11 +24270,11 @@ function vK() {
 let vW = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = _$$p("isReadOnly");
+  let t = useAppModelProperty("isReadOnly");
   let i = useSelector(e => e.progressBarState);
-  let n = _$$p("loadingEmbeds");
+  let n = useAppModelProperty("loadingEmbeds");
   let r = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
-  let a = _$$aV();
+  let a = useIsProgressBarHiddenOrLocked();
   let s = useRef(null);
   let p = useSelector(e => e.openFile);
   let m = p ? p.key : "";
@@ -24322,7 +24322,7 @@ let vW = memo(({
   });
 });
 export function $$vz0() {
-  let e = _$$dH();
+  let e = useCurrentTool();
   let [t, i] = useState(!1);
   IT(_$$oH({}));
   return jsx(_$$c, {

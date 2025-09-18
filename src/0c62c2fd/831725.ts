@@ -4,7 +4,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { renderI18nText } from "../905/303541";
 import { X } from "../0c62c2fd/409644";
 import { useDispatch, useSelector } from "react-redux";
-import { kg } from "../figma_app/976345";
+import { trackNavTreeClicked } from "../figma_app/976345";
 import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";
 import { selectViewAction } from "../905/929976";
@@ -24,7 +24,7 @@ function x(e) {
       selectedView: "recentsAndSharing" === n.view ? n.tab || ViewTypeEnum.RECENTLY_VIEWED : n.view,
       viewMode: "grid"
     });
-    i(kg({
+    i(trackNavTreeClicked({
       clickedResourceType: "team",
       resourceIdOrKey: x.id
     }));

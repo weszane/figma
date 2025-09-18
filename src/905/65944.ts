@@ -30,7 +30,7 @@ import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
 import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figma_app/385874";
 import { Um } from "../905/848862";
-import { dH, eY as _$$eY, s6 } from "../figma_app/722362";
+import { useCurrentTool, useSceneGraphSelector, useAppModelPropsShallow } from "../figma_app/722362";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getCurrentTeam } from "../figma_app/598018";
 import { KindEnum } from "../905/129884";
@@ -114,10 +114,10 @@ import { Qh } from "../figma_app/228217";
 import { bL as _$$bL2, c$ as _$$c$3 } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { Point } from "../905/736624";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { rC } from "../905/713722";
-import { DP, yM } from "../905/640017";
-import { pw } from "../905/187165";
+import { getVisibleTheme, useThemeContext } from "../905/640017";
+import { getThemeBorderStyle } from "../905/187165";
 import { AN } from "../905/203369";
 import { cS, Zo } from "../figma_app/334459";
 import { Button } from "../905/521428";
@@ -1266,21 +1266,21 @@ function tz(e) {
       opacity: t.a
     });
   }
-  let c = DP();
-  let u = yM();
+  let c = getVisibleTheme();
+  let u = useThemeContext();
   let p = {
     ...e.paint.color,
     a: 1
   };
-  let m = _$$F.format(p);
-  let h = pw(u, m, c);
+  let m = colorCSSManipulatorInstance.format(p);
+  let h = getThemeBorderStyle(u, m, c);
   let g = {
     r: 1 - e.paint.color.r,
     g: 1 - e.paint.color.g,
     b: 1 - e.paint.color.b,
     a: 1
   };
-  let f = _$$F.format(g);
+  let f = colorCSSManipulatorInstance.format(g);
   let _ = new rC({
     parseAlpha: !1
   });
@@ -1480,8 +1480,8 @@ function t9(e) {
     Sprig
   } = useSprigWithSampling();
   let [i, a] = useState(e.paint.patternSpacing.x === e.paint.patternSpacing.y);
-  let s = dH();
-  let o = _$$eY();
+  let s = useCurrentTool();
+  let o = useSceneGraphSelector();
   let l = sessionLocalIDToString(e.paint.sourceNodeId);
   let c = isValidSessionLocalID(e.paint.sourceNodeId);
   let u = useMemo(() => l && c ? o.get(l) : null, [l, c, o]);
@@ -1812,7 +1812,7 @@ export let $$ii1 = forwardRef(function ({
     filteredFieldTypes
   } = ZI();
   let em = isSitesFileType();
-  let eh = s6("currentPage", "currentSelectedProperty").currentSelectedProperty.type === NodePropertyCategory.STROKE;
+  let eh = useAppModelPropsShallow("currentPage", "currentSelectedProperty").currentSelectedProperty.type === NodePropertyCategory.STROKE;
   let [eg, ef, e_] = _$$t.useTabs({
     custom_color: !0,
     library: !0,
@@ -2217,7 +2217,7 @@ export function $$io0({
   let v = useDispatch();
   let I = Um();
   let S = Ku();
-  let C = dH();
+  let C = useCurrentTool();
   let T = useMemo(() => f ? ["custom_color", "library"] : ["custom_color"], [f]);
   let [R, N, P] = _$$t.useTabs({
     custom_color: T.includes("custom_color"),

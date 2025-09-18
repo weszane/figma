@@ -10,7 +10,7 @@ import { J } from "../905/931050";
 import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
 import { Xm, gB, e1, tT } from "../905/723791";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { generateUUIDv4 } from "../905/871474";
 import { FlashActions } from "../905/573154";
@@ -281,9 +281,9 @@ export function $$G0({
     filter: t
   }), [t, a, e]);
   let b = useSubscription(OrgAdminUserMinimalFieldsView, y);
-  let T = _$$r.LOADING;
-  if ("loaded" === b.status && b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? T = _$$r.SUCCESS : ("errors" === b.status || b.data?.orgAdminUsersMinimalFields?.status === tT.Error) && (T = _$$r.FAILURE), useEffect(() => {
-    if (T !== _$$r.SUCCESS) return;
+  let T = APILoadingStatus.LOADING;
+  if ("loaded" === b.status && b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? T = APILoadingStatus.SUCCESS : ("errors" === b.status || b.data?.orgAdminUsersMinimalFields?.status === tT.Error) && (T = APILoadingStatus.FAILURE), useEffect(() => {
+    if (T !== APILoadingStatus.SUCCESS) return;
     let e = b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? function (e) {
       let t = [];
       for (let r of e) {
@@ -310,15 +310,15 @@ export function $$G0({
     });
     b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded && b.data.orgAdminUsersMinimalFields.data.hasNextPage() && b.data.orgAdminUsersMinimalFields.data.loadNext(400);
   }, [T, b.data, _]), E) return {
-    status: _$$r.INIT,
+    status: APILoadingStatus.INIT,
     users: [],
     totalSelectable: null
   };
-  let I = T === _$$r.SUCCESS && b.data && b.data.orgAdminUsersMinimalFields && b.data.orgAdminUsersMinimalFields.status === tT.Loaded && b.data.orgAdminUsersMinimalFields.data && !b.data.orgAdminUsersMinimalFields.data.hasNextPage();
+  let I = T === APILoadingStatus.SUCCESS && b.data && b.data.orgAdminUsersMinimalFields && b.data.orgAdminUsersMinimalFields.status === tT.Loaded && b.data.orgAdminUsersMinimalFields.data && !b.data.orgAdminUsersMinimalFields.data.hasNextPage();
   let S = null;
   I && (S = Object.keys(s).length);
   return {
-    status: I ? _$$r.SUCCESS : T === _$$r.SUCCESS ? _$$r.LOADING : T,
+    status: I ? APILoadingStatus.SUCCESS : T === APILoadingStatus.SUCCESS ? APILoadingStatus.LOADING : T,
     users: Object.values(s),
     totalSelectable: S
   };

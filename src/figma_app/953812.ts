@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
-import { ce } from "../figma_app/347146";
+import { isChromebookTabbed } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { f } from "../figma_app/316722";
 import { Y } from "../figma_app/667500";
 export function $$l0() {
-  return !!desktopAPIInstance || ce();
+  return !!desktopAPIInstance || isChromebookTabbed();
 }
 export function $$d1({
   parentBackgroundColor: e

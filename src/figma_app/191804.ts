@@ -2,7 +2,7 @@
 import { labToRgb, labToXyz } from '../figma_app/273493'
 import { clamp, nearlyEqual, positiveMod } from '../figma_app/492908'
 
-interface Color {
+export interface Color {
   r: number
   g: number
   b: number
@@ -16,7 +16,7 @@ const blackColor: Color = {
   a: 1,
 }
 
-const whiteColor: Color = {
+export const whiteColor: Color = {
   r: 1,
   g: 1,
   b: 1,
@@ -66,7 +66,7 @@ const borderLight: string = 'inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15)'
 const borderDark: string = 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)'
 const borderTranslucent: string = 'inset 0px 0px 0px 2px var(--color-bordertranslucent)'
 
-const namedColors: Record<string, string> = {
+export const namedColors: Record<string, string> = {
   aliceblue: '#F0F8FF',
   antiquewhite: '#FAEBD7',
   aqua: '#00FFFF',
@@ -628,7 +628,7 @@ export function calculateColorDifference(color1: Color, color2: Color): number {
  * @param color - The color.
  * @returns The LAB object.
  */
-function rgbToLab(color: Color): { l: number; a: number; b: number } {
+function rgbToLab(color: Color): { l: number, a: number, b: number } {
   let r: number = 1 - (1 - color.r) * color.a
   let g: number = 1 - (1 - color.g) * color.a
   let b: number = 1 - (1 - color.b) * color.a
@@ -659,7 +659,7 @@ function rgbToLab(color: Color): { l: number; a: number; b: number } {
  * @param lab2 - Second LAB.
  * @returns The Delta E value.
  */
-function calculateDeltaE(lab1: { l: number; a: number; b: number }, lab2: { l: number; a: number; b: number }): number {
+function calculateDeltaE(lab1: { l: number, a: number, b: number }, lab2: { l: number, a: number, b: number }): number {
   const deltaL: number = lab1.l - lab2.l
   const deltaA: number = lab1.a - lab2.a
   const deltaB: number = lab1.b - lab2.b
@@ -851,7 +851,7 @@ function createRGBAColor(r: number, g: number, b: number, a: number = 1): Color 
  * @param color - The color.
  * @returns The integer values.
  */
-function colorToIntegerValues(color: Color): { r: number; g: number; b: number; a: number } {
+function colorToIntegerValues(color: Color): { r: number, g: number, b: number, a: number } {
   return {
     r: Math.round(255 * color.r),
     g: Math.round(255 * color.g),
@@ -867,7 +867,7 @@ function colorToIntegerValues(color: Color): { r: number; g: number; b: number; 
  * @returns The RGBA string.
  */
 export function colorToRgbaString(color: Color): string {
-  const { r, g, b }: { r: number; g: number; b: number } = colorToIntegerValues(color)
+  const { r, g, b }: { r: number, g: number, b: number } = colorToIntegerValues(color)
   return `rgba(${r}, ${g}, ${b}, ${color.a})`
 }
 
@@ -878,7 +878,7 @@ export function colorToRgbaString(color: Color): string {
  * @returns The hex string.
  */
 export function colorToHexString(color: Color): string {
-  const { r, g, b, a }: { r: number; g: number; b: number; a: number } = colorToIntegerValues(color)
+  const { r, g, b, a }: { r: number, g: number, b: number, a: number } = colorToIntegerValues(color)
 
   const red: number = clampValue(r, 0, 255)
   const green: number = clampValue(g, 0, 255)
@@ -1034,4 +1034,3 @@ export const tK = parseHex
 export const tM = borderLight
 export const ty = isColorTransparent
 export const x1 = borderTranslucent
-

@@ -8,7 +8,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../905/339549";
 import { V8, $c, Wy, Um } from "../figma_app/681712";
 import { sx } from "../figma_app/307841";
-import { Ik } from "../figma_app/297957";
+import { useCartOptimizationsExperiment } from "../figma_app/297957";
 import { s as _$$s } from "../cssbuilder/589278";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -143,7 +143,7 @@ export function $$E0(e) {
   let x = useSelector(e => e.payment);
   let y = useSelector(e => e.payment, (e, t) => h || e === t);
   let j = useSelector(t => e.selectedView.teamId ? t.teams[e.selectedView.teamId].name : e.teamName) ?? "";
-  let S = Ik();
+  let S = useCartOptimizationsExperiment();
   let T = x.displayName || j;
   let N = x.legalName || j;
   let E = x.billingPeriod === SubscriptionType.STUDENT;

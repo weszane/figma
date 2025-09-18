@@ -8,7 +8,7 @@ import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { JT } from "../905/913055";
 import { Yh } from "../figma_app/357047";
 import { Bf } from "../figma_app/249941";
@@ -37,7 +37,7 @@ function E({
     close();
   }, [e, close]);
   let f = useCallback(e => {
-    handleUrlAction(e) || h(RK({
+    handleUrlAction(e) || h(setupHyperlinkHandler({
       rawInput: e
     }));
   }, [h]);

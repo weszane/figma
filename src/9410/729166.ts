@@ -7,14 +7,14 @@ import { e as _$$e5 } from '../905/74460';
 import { setupDragHandler } from '../905/97346';
 import { Z as _$$Z } from '../905/104740';
 import { t as _$$t3 } from '../905/117577';
-import { xK } from '../905/125218';
+import { fullscreenPerfManager } from '../905/125218';
 import { J as _$$J } from '../905/125993';
 import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { ju } from '../905/187165';
+import { getEditorViewType } from '../905/187165';
 import { h as _$$h3 } from '../905/207101';
 import { nt, o3 } from '../905/226610';
 import { o as _$$o2 } from '../905/237202';
@@ -56,7 +56,7 @@ import { V as _$$V2 } from '../905/604512';
 import { PerfTimer } from '../905/609396';
 import { setupThemeContext } from '../905/614223';
 import { ButtonPrimitive } from '../905/632989';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { oW } from '../905/675859';
 import { getSingletonSceneGraph } from '../905/700578';
 import { L as _$$L } from '../905/704296';
@@ -78,7 +78,7 @@ import { A as _$$A9 } from '../905/891805';
 import { e as _$$e6 } from '../905/916195';
 import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
-import { f as _$$f4 } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { Ak } from '../905/986103';
 import { h as _$$h2 } from '../905/994594';
@@ -128,12 +128,12 @@ import { BannerInset } from '../figma_app/59509';
 import { getViewportX, computeFullscreenViewportForNode, getViewportY } from '../figma_app/62612';
 import { U as _$$U2 } from '../figma_app/65327';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
-import { l7, US, ZO } from '../figma_app/88239';
+import { useIsFullscreenOverview, useNodesWithStatusLoaded, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
 import { ap } from '../figma_app/149304';
 import { Cj } from '../figma_app/151869';
 import { Ig } from '../figma_app/155647';
 import { JR, Qp } from '../figma_app/162641';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, isDevEnvironment } from '../figma_app/169182';
 import { is as _$$is, BX, Ho } from '../figma_app/170018';
 import { FEventType } from '../figma_app/191312';
@@ -172,7 +172,7 @@ import { eb as _$$eb, i_ as _$$i_, A8, bE, EB, R6, vo, zL } from '../figma_app/6
 import { flatten } from '../figma_app/656233';
 import { zy } from '../figma_app/656450';
 import { gk } from '../figma_app/715641';
-import { eY as _$$eY } from '../figma_app/722362';
+import { useSceneGraphSelector } from '../figma_app/722362';
 import { dP, Ku, UK } from '../figma_app/740163';
 import { clearSelection } from '../figma_app/741237';
 import { AppStateTsApi, BuildStatus, Fullscreen, FullscreenPerfMetrics, HandoffBindingsCpp, Multiplayer, PresetType, PrototypingTsApi, RotationType, SelfDesignType, UIVisibilitySetting, VariableDataType, VariableResolvedDataType, webGPUBindings } from '../figma_app/763686';
@@ -190,7 +190,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from '../fig
 import { TR } from '../figma_app/867292';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, SKIP_RECORDING, useHandleMouseEvent } from '../figma_app/878298';
-import { _6 as _$$_2, _o, c7, oz, wz, zz } from '../figma_app/879363';
+import { SortBy, atomH1, trackOverviewStats, OverviewTab, atomM4, trackOverviewAvatars } from '../figma_app/879363';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
 import { trackFileEventWithStore, trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { fq, Ou } from '../figma_app/953049';
@@ -247,7 +247,7 @@ function Z({
   onOptionSelected: i,
   installMethods: n
 }) {
-  let a = DP() === 'dark';
+  let a = getVisibleTheme() === 'dark';
   return jsxs('div', {
     className: z,
     children: [jsx('div', {
@@ -311,7 +311,7 @@ function Q({
   availableInstallMethods: n,
   setMethod: a
 }) {
-  let s = DP() === 'dark';
+  let s = getVisibleTheme() === 'dark';
   let o = n.reduce((e, t) => (e[t.installMethod] = !0, e), {});
   let l = i.installMethod;
   let [d, c, u] = _$$t2.useManagedTabs(o, l, a, {
@@ -428,7 +428,7 @@ let en = function ({
   libraryKey: s
 }) {
   let o = getFeatureFlags().dt_github_app;
-  let l = DP() === 'dark';
+  let l = getVisibleTheme() === 'dark';
   let c = l ? buildUploadUrl('a4446c7782c49b4efdf224dcecfe5fab21d2ab4e') : buildUploadUrl('425e98504f0df618c12eca5c175ef2d544816a4f');
   let u = l ? buildUploadUrl('2848c36c172ebe0bb220551b04d9deb0c8d5784a') : buildUploadUrl('6725539f65217d1d1f70276e9e806ac4a6743a1f');
   let p = l ? buildUploadUrl('16a8f19f5d3abcf181665a9120e0cdd7c330de3f') : buildUploadUrl('2829401d868dbdfc29b4ffea16bc52f6fad2b338');
@@ -1335,7 +1335,7 @@ function tm(e) {
 }
 function t9() {
   let e = useDispatch();
-  return _$$f4('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(TrackingProvider, {
+  return selectUserFlag('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(TrackingProvider, {
     name: 'Dev Mode Overview Banner',
     properties: {
       severity: _$$c.EVENT
@@ -1448,7 +1448,7 @@ function iw({
   isFallbackForLegacyStatus: n,
   onClick: a
 }) {
-  let s = Fk(t => t.get(e)?.getStatusInfo(), e);
+  let s = useDeepEqualSceneValue(t => t.get(e)?.getStatusInfo(), e);
   let o = _$$ei(e);
   let l = Ak(o?.lastEditedAt);
   let d = selectCurrentFile();
@@ -1491,7 +1491,7 @@ function iS({
   isFallbackForLegacyStatus: a,
   onClick: s
 }) {
-  let o = Fk(t => t.get(e)?.getStatusInfo(), e);
+  let o = useDeepEqualSceneValue(t => t.get(e)?.getStatusInfo(), e);
   let d = o?.lastUpdateUnixTimestamp ? 1e3 * o.lastUpdateUnixTimestamp : null;
   let c = Ak(d);
   let u = selectCurrentFile();
@@ -1613,10 +1613,10 @@ let iH = iG / 8;
 let iz = iK / 8;
 function iV(e) {
   let t = useMemo(() => e.tabs.reduce((e, t) => (e[t.key] = !0, e), {
-    [oz.ALL]: !1,
-    [oz.RECENTLY_VIEWED]: !1,
-    [oz.BUILD]: !1,
-    [oz.COMPLETED]: !1
+    [OverviewTab.ALL]: !1,
+    [OverviewTab.RECENTLY_VIEWED]: !1,
+    [OverviewTab.BUILD]: !1,
+    [OverviewTab.COMPLETED]: !1
   }), [e.tabs]);
   let [i, a, s] = _$$t2.useManagedTabs(t, e.selected, e.onTabSelected);
   return jsx(_$$t2.TabStrip, {
@@ -1664,11 +1664,11 @@ function iY() {
     })]
   });
 }
-let iJ = createValidatedLocalStorageAtom('workflows_summary_tab', oz.ALL, _$$z.nativeEnum(oz));
+let iJ = createValidatedLocalStorageAtom('workflows_summary_tab', OverviewTab.ALL, _$$z.nativeEnum(OverviewTab));
 let iq = setupRemovableAtomFamily(() => atom({}), {
   preserveValue: !0
 });
-let iX = createValidatedLocalStorageAtom('workflows_overview_sorted_by', _$$_2.RECENT, _$$z.nativeEnum(_$$_2));
+let iX = createValidatedLocalStorageAtom('workflows_overview_sorted_by', SortBy.RECENT, _$$z.nativeEnum(SortBy));
 function iZ() {
   let e = useSelector(e => e.selectedView.overviewBackButtonTargetNodeId);
   let t = useSelector(e => e.mirror.appModel.pagesList[0]);
@@ -1736,7 +1736,7 @@ function iQ() {
     });
     y(e);
   }, [y, s]);
-  let E = e ? x : _$$_2.PAGE;
+  let E = e ? x : SortBy.PAGE;
   let [T, w] = useAtomValueAndSetter(iJ);
   let S = n9(t);
   let {
@@ -1774,9 +1774,9 @@ function iQ() {
   let O = useMemo(() => p.filter(e => e.status === BuildStatus.COMPLETED && searchFilter(e)), [p, searchFilter]);
   let L = useMemo(() => {
     switch (T) {
-      case oz.ALL:
+      case OverviewTab.ALL:
         return p.filter(searchFilter);
-      case oz.RECENTLY_VIEWED:
+      case OverviewTab.RECENTLY_VIEWED:
         if (!S) return [];
         return Object.entries(S).reduce((e, [t, i]) => {
           let r = p.find(e => e.nodeId === t && searchFilter(e));
@@ -1786,37 +1786,37 @@ function iQ() {
           });
           return e;
         }, []);
-      case oz.BUILD:
+      case OverviewTab.BUILD:
         return A;
-      case oz.COMPLETED:
+      case OverviewTab.COMPLETED:
         return O;
     }
   }, [p, T, S, searchFilter, A, O]);
   let R = useMemo(() => [{
-    key: oz.ALL,
+    key: OverviewTab.ALL,
     label: getI18nString('dev_handoff.workflows.overview.tab_all')
   }, ...(getFeatureFlags().dt_workflows_recently_viewed ? [{
-    key: oz.RECENTLY_VIEWED,
+    key: OverviewTab.RECENTLY_VIEWED,
     label: getI18nString('dev_handoff.workflows.overview.tab_recent')
   }] : []), {
-    key: oz.BUILD,
+    key: OverviewTab.BUILD,
     count: A.length,
     label: getI18nString('dev_handoff.workflows.overview.tab_ready')
   }, {
-    key: oz.COMPLETED,
+    key: OverviewTab.COMPLETED,
     count: O.length,
     label: getI18nString('dev_handoff.workflows.overview.tab_completed')
   }], [A.length, O.length]);
   let D = useMemo(() => {
     if (L.length === 0) return [];
-    if (T === oz.RECENTLY_VIEWED) {
+    if (T === OverviewTab.RECENTLY_VIEWED) {
       return [{
         key: 'recent',
         sortedNodesWithStatusForFile: L.slice().sort(YA)
       }];
     }
     switch (E) {
-      case _$$_2.PAGE:
+      case SortBy.PAGE:
         let e = {};
         L.slice().sort((e, t) => e.visualOrder - t.visualOrder).forEach(t => {
           e[t.pageId] || (e[t.pageId] = {
@@ -1828,12 +1828,12 @@ function iQ() {
           e[t.pageId].sortedNodesWithStatusForFile.push(t);
         });
         return Object.values(e);
-      case _$$_2.RECENT:
+      case SortBy.RECENT:
         return [{
           key: 'recent',
           sortedNodesWithStatusForFile: L.slice().sort((e, t) => t.updatedAt - e.updatedAt)
         }];
-      case _$$_2.ALPHABETICAL:
+      case SortBy.ALPHABETICAL:
         return [{
           key: 'alphabetical',
           sortedNodesWithStatusForFile: L.slice().sort((e, t) => e.nodeName.localeCompare(t.nodeName))
@@ -1872,14 +1872,14 @@ function iQ() {
     numFrames: p.filter(e => !e.isSection).length,
     numPages: new Set(p.map(e => e.pageId)).size
   }), [p]);
-  let H = US();
+  let H = useNodesWithStatusLoaded();
   !function ({
     nodesWithStatusForFile: e,
     enabled: t
   }) {
     let [i, r] = useAtomValueAndSetter(iW);
     let a = useRef();
-    let s = _$$eY();
+    let s = useSceneGraphSelector();
     useEffect(() => {
       if (!t) return;
       let n = 0;
@@ -1915,7 +1915,7 @@ function iQ() {
     V(!0);
     _(f.current?.scrollTop);
   }, [_]);
-  let [Y] = useAtomValueAndSetter(_o);
+  let [Y] = useAtomValueAndSetter(atomH1);
   _$$h3(() => {
     let t = Y || 'init';
     s('Dev Mode Overview Shown', {
@@ -1929,8 +1929,8 @@ function iQ() {
   });
   let J = [...new Set(L.map(e => e.userId).filter(e => e))];
   let q = zy(J);
-  c7(L, T, E);
-  zz(J, q, L);
+  trackOverviewStats(L, T, E);
+  trackOverviewAvatars(J, q, L);
   let X = useCallback(e => {
     s('Dev Mode Overview Tab Clicked', {
       tab: e
@@ -2012,9 +2012,9 @@ function iQ() {
             children: renderI18nText('dev_handoff.workflows.overview.no_designs', {
               status: function (e) {
                 switch (e) {
-                  case oz.BUILD:
+                  case OverviewTab.BUILD:
                     return renderI18nText('dev_handoff.workflows.overview.no_designs_ready');
-                  case oz.COMPLETED:
+                  case OverviewTab.COMPLETED:
                     return renderI18nText('dev_handoff.workflows.overview.no_designs_completed');
                   default:
                     return renderI18nText('dev_handoff.workflows.overview.no_designs_ready');
@@ -2043,7 +2043,7 @@ function iQ() {
                 tabs: R,
                 selected: T,
                 onTabSelected: X
-              }), T !== oz.RECENTLY_VIEWED && jsx(i7, {
+              }), T !== OverviewTab.RECENTLY_VIEWED && jsx(i7, {
                 sortedBy: E,
                 setSortedBy: v
               })]
@@ -2175,7 +2175,7 @@ function i2({
   let y = Cj(_);
   let b = TQ();
   let C = function (e, t) {
-    let i = Fk(t => t.get(e)?.getStatusInfo(), e);
+    let i = useDeepEqualSceneValue(t => t.get(e)?.getStatusInfo(), e);
     let r = i?.lastUpdateUnixTimestamp ? 1e3 * i.lastUpdateUnixTimestamp : null;
     let n = _$$ei(e);
     let a = t ? n?.lastEditedAt : r;
@@ -2300,8 +2300,8 @@ function i5({
   let p = VW(nodeId);
   let h = useSelector(e => selectedViewToPath(e, p));
   let [m] = useAtomValueAndSetter(iX);
-  let f = m === _$$_2.RECENT && updatedAt > 1;
-  let [, g] = useAtomValueAndSetter(wz);
+  let f = m === SortBy.RECENT && updatedAt > 1;
+  let [, g] = useAtomValueAndSetter(atomM4);
   let _ = n.usersById?.[e.userId];
   let y = f && (n.loading || _);
   function b(e) {
@@ -2345,8 +2345,8 @@ function i4({
   onClick: s,
   nodeCount: o
 }) {
-  let d = Fk((e, t, i) => S7(e, t, i) || 'var(--color-bg)', e, t);
-  let c = Fk(t => t.get(e)?.size);
+  let d = useDeepEqualSceneValue((e, t, i) => S7(e, t, i) || 'var(--color-bg)', e, t);
+  let c = useDeepEqualSceneValue(t => t.get(e)?.size);
   let u = 1 + (5 - 5 * Math.min(1, Math.max(0, Math.max(c ? 1 - (iH - c.x) / iH : 1, c ? 1 - (iz - c.y) / iz : 1))) ** 0.5);
   let p = c ? {
     width: c.x * u,
@@ -2423,11 +2423,11 @@ function i4({
 let i6 = new class {
   format(e) {
     switch (e) {
-      case _$$_2.PAGE:
+      case SortBy.PAGE:
         return getI18nString('dev_handoff.workflows.overview.sort_pages');
-      case _$$_2.RECENT:
+      case SortBy.RECENT:
         return getI18nString('dev_handoff.workflows.overview.sort_recent');
-      case _$$_2.ALPHABETICAL:
+      case SortBy.ALPHABETICAL:
         return getI18nString('dev_handoff.workflows.overview.sort_alphabetical');
     }
   }
@@ -2446,7 +2446,7 @@ function i7({
     }), jsxs(_$$mc, {
       children: [jsx(WL, {
         children: getI18nString('dev_handoff.workflows.overview.sort_by')
-      }), Object.values(_$$_2).map(e => jsx(c$, {
+      }), Object.values(SortBy).map(e => jsx(c$, {
         value: e,
         children: i6.format(e)
       }, e))]
@@ -2692,7 +2692,7 @@ let r0 = memo(({
     scalingInfo: g
   }, _] = useAtomValueAndSetter(t.stateAtom);
   let x = useDispatch();
-  let y = _$$eY();
+  let y = useSceneGraphSelector();
   let C = useMemo(() => h === bi.OPEN, [h]);
   let v = m?.initialViewerSize ?? rX;
   let E = useLatestRef(v);
@@ -3295,7 +3295,7 @@ function r5() {
   let m = jY();
   let f = BI();
   let g = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
-  useEffect(() => (document.body.setAttribute('data-editor-theme', ju(e, g)), () => {
+  useEffect(() => (document.body.setAttribute('data-editor-theme', getEditorViewType(e, g)), () => {
     document.body.removeAttribute('data-editor-theme');
   }), [e, g]);
   Ou();
@@ -3304,13 +3304,13 @@ function r5() {
   _$$c2();
   useEffect(() => {
     o && t && m && fullscreenValue.onReady().then(() => {
-      getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer?.sendClientRendered(xK.getClientRenderedMetadata()) : Multiplayer?.sendSignal('client-rendered', '');
+      getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer?.sendClientRendered(fullscreenPerfManager.getClientRenderedMetadata()) : Multiplayer?.sendSignal('client-rendered', '');
       window.requestAnimationFrame(() => {
         desktopAPIInstance?.addTabAnalyticsMetadata({
           reactFullscreenViewRenderTime: window.performance.now()
         });
-        xK.reactFullscreenViewIsRendered();
-        xK.report(t, r);
+        fullscreenPerfManager.reactFullscreenViewIsRendered();
+        fullscreenPerfManager.report(t, r);
         getFeatureFlags()?.fullscreen_use_threaded_rendering || function () {
           let e = dX('fullscreen');
           if (!e || webGPUBindings?.usingWebGPU()) return;
@@ -3431,9 +3431,9 @@ export function $$r40({
 }) {
   let t = useSelector(xY);
   let i = useSelector(e => e.mirror.appModel.currentPage);
-  let n = l7();
+  let n = useIsFullscreenOverview();
   let s = _$$e3();
-  let l = ZO();
+  let l = useIsFullscreenDevModeComponentBrowser();
   let d = isDesignFileType();
   let c = isDevHandoffEditorType();
   let u = useSelector(e => e.isFullscreenDocumentLoaded);

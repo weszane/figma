@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 var a = r;
 export function $$d0({
   children: e
@@ -28,7 +28,7 @@ export function $$d0({
     light: e,
     dark: t
   }) {
-    return "dark" === DP() ? jsx("div", {
+    return "dark" === getVisibleTheme() ? jsx("div", {
       children: t
     }) : jsx("div", {
       children: e

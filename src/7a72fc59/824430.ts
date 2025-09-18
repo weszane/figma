@@ -64,7 +64,7 @@ import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue, valueOrFall
 import { Cn } from '../905/225265';
 import { n6 as _$$n } from '../905/234821';
 import { z as _$$z } from '../905/239603';
-import { p as _$$p3 } from '../905/241044';
+import { sanitizeHtml } from '../905/241044';
 import { A as _$$A3 } from '../905/251970';
 import { PluginUIManager } from '../905/261467';
 import { V as _$$V4 } from '../905/261687';
@@ -158,7 +158,7 @@ import { ButtonPrimitive } from '../905/632989';
 import { useSyncedRef } from '../905/633914';
 import { F as _$$F5 } from '../905/634016';
 import { eo as _$$eo, fp as _$$fp2 } from '../905/634218';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { X as _$$X3 } from '../905/647103';
 import { R as _$$R7 } from '../905/649743';
 import { FeatureFlag } from '../905/652992';
@@ -225,7 +225,7 @@ import { d as _$$d3 } from '../905/976845';
 import { gg, Rk } from '../905/981217';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
-import { F as _$$F7 } from '../905/989956';
+import { colorCSSManipulatorInstance } from '../905/989956';
 import { X as _$$X2 } from '../1250/115566';
 import { nR as _$$nR, RG, XF } from '../1250/182479';
 import { Q as _$$Q } from '../1250/220026';
@@ -341,7 +341,7 @@ import { Tv } from '../figma_app/151869';
 import { je } from '../figma_app/155728';
 import { GV, P5 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
-import { wA as _$$wA, Fk } from '../figma_app/167249';
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, isLocalCluster, isProdCluster } from '../figma_app/169182';
 import { Kl, OU } from '../figma_app/175258';
 import { N as _$$N } from '../figma_app/176280';
@@ -425,12 +425,12 @@ import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { $z, e6 as _$$e3, Me } from '../figma_app/617427';
 import { i as _$$i4 } from '../figma_app/622160';
 import { li as _$$li, Gi, O$, RD, wv } from '../figma_app/622574';
-import { VG } from '../figma_app/622881';
+import { getColorSpaceString } from '../figma_app/622881';
 import { UD } from '../figma_app/624361';
 import { fI } from '../figma_app/626177';
 import { UG, Wc } from '../figma_app/628987';
 import { JT } from '../figma_app/632248';
-import { CZ } from '../figma_app/632319';
+import { isEventType } from '../figma_app/632319';
 import { LibraryTabEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
 import { hg as _$$hg } from '../figma_app/635062';
 import { x as _$$x, Lk } from '../figma_app/639711';
@@ -443,7 +443,7 @@ import { Zr } from '../figma_app/678782';
 import { VF } from '../figma_app/679183';
 import { rp as _$$rp } from '../figma_app/703988';
 import { wY } from '../figma_app/708845';
-import { aV as _$$aV, eY as _$$eY, p8 as _$$p, f4, KH } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useAppModelProperty, useOnSelectionChange, useSceneGraphSelection } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { Ay as _$$Ay2, Tu } from '../figma_app/724968';
 import { E as _$$E4 } from '../figma_app/726115';
@@ -466,7 +466,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead,
 import { Ag as _$$Ag, B3 } from '../figma_app/862289';
 import { s as _$$s0 } from '../figma_app/874592';
 import { generateRecordingKey, SKIP_RECORDING } from '../figma_app/878298';
-import { Sh } from '../figma_app/889655';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { trackFileEventWithStore } from '../figma_app/901889';
 import { j as _$$j, k as _$$k2 } from '../figma_app/904944';
@@ -484,7 +484,7 @@ import { tZ as _$$tZ } from '../figma_app/960196';
 import { T as _$$T4 } from '../figma_app/962636';
 import { fG, NH } from '../figma_app/973927';
 import { KD } from '../figma_app/975811';
-import { UN as _$$UN } from '../figma_app/976345';
+import { trackFileClicked } from '../figma_app/976345';
 import { jv as _$$jv, Wh as _$$Wh } from '../figma_app/985200';
 import { A as _$$A19 } from '../vendor/21595';
 import { useDebouncedCallback } from 'use-debounce';
@@ -542,7 +542,7 @@ function W() {
     let e = Pc();
     let t = kG();
     let n = Ci();
-    return Fk((e, t, n, l) => {
+    return useDeepEqualSceneValue((e, t, n, l) => {
       let r = [];
       if (n) {
         let t = e.get(l);
@@ -631,7 +631,7 @@ function Y({
   viewportInfo: t,
   viewportNodeBounds: n
 }) {
-  let l = _$$eY();
+  let l = useSceneGraphSelector();
   let r = bd() === e;
   let i = useMemo(() => K(e, l), [e, l]);
   let [s, c, u] = function (e, t, n, l) {
@@ -640,7 +640,7 @@ function Y({
     let [u, x, p] = useSyncedRef([]);
     let [m, h, g] = useSyncedRef([]);
     let [f] = useAtomValueAndSetter(_$$oe);
-    let b = _$$wA((e, t) => {
+    let b = useStrictDeepEqualSceneValue((e, t) => {
       let n = [];
       t.forEach(t => {
         let l = e.get(t);
@@ -860,7 +860,7 @@ function J() {
     leftOffset,
     rightOffset
   } = _$$h();
-  let s = _$$eY();
+  let s = useSceneGraphSelector();
   let [d] = useAtomValueAndSetter(_$$oe);
   let c = useMemo(() => {
     let t = {
@@ -1015,7 +1015,7 @@ let el = (e, t) => {
   useEffect(() => {
     if (!n || e.mp4Configs.length === 0) return;
     let r = e => {
-      CZ(e, 'EXPORT_COMPLETED') && e.data.data.error && function (e) {
+      isEventType(e, 'EXPORT_COMPLETED') && e.data.data.error && function (e) {
         let t = new h();
         return e.name === t.name;
       }(e.data.data.error) && (t(), l(!1), window.removeEventListener('message', r));
@@ -1061,7 +1061,7 @@ let eo = (e, t, n, l) => {
       }
     });
     let o = e => {
-      CZ(e, 'EXPORT_PROGRESS') ? void 0 !== e.data.data.progressPercent && n(1) : CZ(e, 'EXPORT_COMPLETED') && (l('video_export_finished', {
+      isEventType(e, 'EXPORT_PROGRESS') ? void 0 !== e.data.data.progressPercent && n(1) : isEventType(e, 'EXPORT_COMPLETED') && (l('video_export_finished', {
         zipTime: (Date.now() - i) / 1e3,
         numFiles: r.length,
         exportType: 'mp4',
@@ -1159,7 +1159,7 @@ function eZ() {
   let e = U1();
   let t = HW();
   let n = useAtomWithSubscription(_$$o2);
-  let l = _$$aV();
+  let l = useIsProgressBarHiddenOrLocked();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = z7();
   let s = r === SelfDesignType.DESIGN && !i;
@@ -1626,7 +1626,7 @@ function tV({
       file: e,
       overrideOnClick: !0,
       onClick: () => {
-        n(_$$UN({
+        n(trackFileClicked({
           fileKey: e.key,
           entrypoint: 'cooper import from design view',
           viewMode: 'grid'
@@ -2181,7 +2181,7 @@ function nc({
   } = Nd(n.type);
   let s = CooperTemplateTypesTsBindings?.getAllExceptCustomTemplateGroups() || [];
   let c = nu();
-  let u = DP() === 'dark';
+  let u = getVisibleTheme() === 'dark';
   return jsxs(Fragment, {
     children: [t === Gu.NEW_FILE_MODAL && jsx(nx, {
       onBackCallback: e
@@ -2688,7 +2688,7 @@ function nX({
       description: f && jsx('div', {
         ..._$$xk(nZ.templateDescription, l ? _$$g2.textBodyMedium : _$$g2.textBodyLarge),
         dangerouslySetInnerHTML: {
-          __html: _$$p3(f)
+          __html: sanitizeHtml(f)
         }
       }),
       onBack: v
@@ -4416,7 +4416,7 @@ function l5({
   });
 }
 function l2() {
-  let e = _$$p('isReadOnly');
+  let e = useAppModelProperty('isReadOnly');
   let t = useAtomWithSubscription(Tw);
   let n = _$$pK();
   let l = _$$EI();
@@ -7677,7 +7677,7 @@ function sl({
     'children': [jsx('div', {
       className: 'x10lmdbm x4ayska x192jxwq xehbxol x18ya6xy x9f619',
       style: {
-        background: _$$F7.format(e)
+        background: colorCSSManipulatorInstance.format(e)
       }
     }), jsx('div', {
       className: 'xxw1wii xxxmosu',
@@ -8174,7 +8174,7 @@ function sR({
   onClick: t
 }) {
   let n = Ep();
-  let l = VG(n);
+  let l = getColorSpaceString(n);
   let r = useRef(null);
   let i = useCallback(t => {
     let n = Eh(t, l);
@@ -8183,7 +8183,7 @@ function sR({
     r && (n.fillStyle = r);
     n.fillRect(0, 0, 218, 32);
     let i = n.createLinearGradient(0, 0, 218, 0);
-    for (let t of e.stops) i.addColorStop(_$$H2(t.position), _$$F7.format(t.color, l));
+    for (let t of e.stops) i.addColorStop(_$$H2(t.position), colorCSSManipulatorInstance.format(t.color, l));
     n.fillStyle = i;
     n.fillRect(0, 0, 218, 32);
   }, [l, e]);
@@ -8798,7 +8798,7 @@ function s6({
   closeMenu: u
 }) {
   let x;
-  f4(() => {
+  useOnSelectionChange(() => {
     n.setActiveTab(i());
   });
   let m = useRef(!0);
@@ -9358,8 +9358,8 @@ function dv() {
     let t = GV();
     let n = dg(_$$x.FIELDS);
     let l = function () {
-      let e = useSelector(Sh);
-      let t = _$$eY();
+      let e = useSelector(selectSceneGraphSelectionKeys);
+      let t = useSceneGraphSelector();
       return e.every(e => {
         let n = t.get(e);
         return !!n && n.type !== 'TEXT' && _$$nL(n);
@@ -9779,11 +9779,11 @@ let dU = memo(() => {
   let i = _$$dS();
   let c = iS();
   let u = _$$uM();
-  let x = useSelector(Sh);
+  let x = useSelector(selectSceneGraphSelectionKeys);
   let p = kG();
   let m = W5();
   let h = useSelector(e => e.mirror.appModel.showUi);
-  let g = KH();
+  let g = useSceneGraphSelection();
   let f = useSelector(e => {
     let t = e.mirror.appModel.onCanvasNameEditorInfo.mode;
     return t === DiagramElementType.FRAME_NAME || t === DiagramElementType.CANVAS_GRID_ROW_NAME;
@@ -9866,7 +9866,7 @@ function dK() {
   useEffect(() => {
     i && l && closePanel();
   }, [i, l, closePanel]);
-  f4(() => {
+  useOnSelectionChange(() => {
     l && closePanel();
   });
   useEffect(() => {
@@ -10754,7 +10754,7 @@ function c1({
   }, []);
   let d = e ? (l - 8) / 2 : 100;
   let c = t.find(e => e.name === 'Body text');
-  let u = DP() === 'dark';
+  let u = getVisibleTheme() === 'dark';
   return jsxs(Fragment, {
     children: [c && jsx(c5, {
       item: c
@@ -11250,7 +11250,7 @@ function uR({
   leadingIcon: r,
   trailingIcon: i
 }) {
-  let a = _$$eY().get(e);
+  let a = useSceneGraphSelector().get(e);
   let s = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -11345,7 +11345,7 @@ function uF() {
   let n = Xr(Lk);
   let [l, r] = useAtomValueAndSetter(_$$v);
   let [i, s] = useState({});
-  let c = _$$eY();
+  let c = useSceneGraphSelector();
   let u = trackFileEventWithStore();
   _$$h5(() => {
     t(uO.SELECT_FILE);
@@ -11433,7 +11433,7 @@ function uF() {
   });
 }
 function uB() {
-  let e = _$$eY();
+  let e = useSceneGraphSelector();
   let t = useAtomWithSubscription(Lk);
   let n = useRef(t);
   let l = useCallback(() => {
@@ -11616,7 +11616,7 @@ function u4({
   let [r, i] = useState(!1);
   let [s, u] = useState(!1);
   let x = useRef(null);
-  let m = _$$eY();
+  let m = useSceneGraphSelector();
   let h = Th();
   let g = trackFileEventWithStore();
   let f = PE();
@@ -11890,7 +11890,7 @@ function xl() {
   let m = cg();
   let h = t.length > 1;
   let g = !h && !!l;
-  let f = Fk((e, t) => {
+  let f = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? n.getBuzzTextFields?.() ?? [] : [];
   }, l);
@@ -11901,8 +11901,8 @@ function xl() {
   let T = f.length > 0 && g;
   let I = Object.keys(u).length > 0 && g;
   let S = T || I;
-  let k = _$$p('activeCanvasEditModeType');
-  let A = Object.keys(KH());
+  let k = useAppModelProperty('activeCanvasEditModeType');
+  let A = Object.keys(useSceneGraphSelection());
   let z = k !== LayoutTabType.TEXT || A.length === 0 ? void 0 : A;
   let {
     mediaFieldsToShow,
@@ -13866,7 +13866,7 @@ function pR({
   let l = e ? isInvalidValue(e) ? s2 : e : s2;
   let r = Ou(l);
   let i = _$$x$(l);
-  let a = _$$p('currentSelectedGradientStop');
+  let a = useAppModelProperty('currentSelectedGradientStop');
   let d = _$$iC(r ?? i ?? s2, a);
   let c = _$$Ku();
   let {
@@ -14111,7 +14111,7 @@ function pH({
   let c = useRef(null);
   let u = useDispatch();
   let x = _$$C3();
-  let p = _$$p('currentSelectedGradientStop');
+  let p = useAppModelProperty('currentSelectedGradientStop');
   let m = !t || isInvalidValue(t);
   let h = m ? null : _$$x$(t);
   let g = h !== null;
@@ -14263,7 +14263,7 @@ function pQ({
 }
 function p5() {
   let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
-  let t = useSelector(Sh);
+  let t = useSelector(selectSceneGraphSelectionKeys);
   let n = mJ();
   let l = _H();
   let {
@@ -14518,7 +14518,7 @@ let mI = memo(({
     sizeInfo: r,
     buzzInlinePreviewPosition: i
   }, s] = useAtomValueAndSetter(t.stateAtom);
-  let d = _$$eY();
+  let d = useSceneGraphSelector();
   let c = _$$$8();
   let x = B2();
   let [, p] = useTransition();
@@ -14617,7 +14617,7 @@ let mw = memo(({
   let f = useRef(null);
   let b = useSelector(e => e.openFile);
   let _ = b ? b.key : '';
-  let j = _$$p('showUi');
+  let j = useAppModelProperty('showUi');
   let y = useSelector(e => e.universalInsertModal);
   let E = useDispatch();
   Gb(_);

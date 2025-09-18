@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
 import { defaultSessionLocalIDString } from "../905/871411";
-import { KH } from "../figma_app/722362";
-import { wA } from "../figma_app/167249";
+import { useSceneGraphSelection } from "../figma_app/722362";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { useState } from "react";
 import { Button } from "../905/521428";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -146,8 +146,8 @@ function S({
   }) : null;
 }
 export function $$k1() {
-  let e = KH();
-  return wA((e, t) => {
+  let e = useSceneGraphSelection();
+  return useStrictDeepEqualSceneValue((e, t) => {
     let s = Object.keys(t);
     if (1 === s.length) {
       let t = s[0];

@@ -1,6 +1,6 @@
 import { atom, t_ } from "../figma_app/27355";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { userFlagsAtom } from "../figma_app/545877";
 let $$o8 = atom([]);
 let $$l21 = atom(void 0);
@@ -38,10 +38,10 @@ let $$O10 = atom(e => {
 });
 let $$D14 = atom(void 0);
 let $$L18 = atom(!1);
-let $$F3 = atom(N_.dict(e => !1));
+let $$F3 = atom(collaboratorSet.dict(e => !1));
 let $$M4 = atom(e => {
   let t = e($$j23);
-  return !!t && !!N_.has(t) && (e($$F3)[t] || !1);
+  return !!t && !!collaboratorSet.has(t) && (e($$F3)[t] || !1);
 });
 let $$j23 = atom(null);
 let $$U2 = atom(e => e($$j23) === ProductAccessTypeEnum.DEVELOPER);

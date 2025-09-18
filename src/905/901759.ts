@@ -19,7 +19,7 @@ import { P as _$$P } from "../905/813637";
 import { eg as _$$eg, a4 } from "../figma_app/576669";
 import { sha1Hex, sha1BytesFromHex } from "../905/125019";
 import { logError, logInfo } from "../905/714362";
-import { EC } from "../figma_app/291892";
+import { imageProcessor } from "../figma_app/291892";
 let n;
 let $$r1;
 var c = d;
@@ -38,8 +38,8 @@ async function R(e, t, i) {
     logError("pdf", "PDF image type was: '" + e.type + "', expected " + C);
     return null;
   }
-  let r = (await EC.decodeAsync(n, e.type, t, i, !1)).rgba;
-  return r ? EC.encodeInPlace(t, i, r, !1, 1, !1) : (logError("pdf", "Decoded PDF image returned no rgba data."), null);
+  let r = (await imageProcessor.decodeAsync(n, e.type, t, i, !1)).rgba;
+  return r ? imageProcessor.encodeInPlace(t, i, r, !1, 1, !1) : (logError("pdf", "Decoded PDF image returned no rgba data."), null);
 }
 async function N(e) {
   let t = e.href.baseVal;

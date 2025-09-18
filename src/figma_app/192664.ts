@@ -15,7 +15,7 @@ import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { Av } from "../figma_app/622881";
+import { getColorSpaceSupportStatus } from "../figma_app/622881";
 import { jK, it } from "../figma_app/829197";
 import { M } from "../905/366117";
 import { registerModal } from "../905/102752";
@@ -82,7 +82,7 @@ let R = registerModal(function (e) {
         return M.DISPLAY_P3;
     }
   }(t.colorProfilePreference);
-  let E = x(r, Av());
+  let E = x(r, getColorSpaceSupportStatus());
   let S = function (e) {
     switch (e) {
       case M.SRGB:

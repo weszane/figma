@@ -212,7 +212,7 @@ import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { x as _$$x, Lk } from '../figma_app/639711';
 import { fx, PF } from '../figma_app/657972';
 import { i as _$$i2 } from '../figma_app/714009';
-import { eY as _$$eY } from '../figma_app/722362';
+import { useSceneGraphSelector } from '../figma_app/722362';
 import { UK } from '../figma_app/740163';
 import { AppStateTsApi, SwitchState, Fullscreen, EasingType, SelfDesignType, LogToConsoleMode, ComponentPanelTab, MenuType, MeasurementUnit, Thumbnail } from '../figma_app/763686';
 import { X as _$$X4 } from '../figma_app/765161';
@@ -3212,7 +3212,7 @@ let iK = registerModal(e => {
 }, 'auto-suggest-eval-modal');
 function iY(e) {
   let t = useModalManager(e);
-  let i = _$$eY();
+  let i = useSceneGraphSelector();
   let r = useCurrentFileKey();
   let a = He();
   let [s, o] = useState(0);

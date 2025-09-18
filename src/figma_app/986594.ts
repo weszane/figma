@@ -8,9 +8,9 @@ import { getCollectionSummaryStatus } from "../figma_app/618433";
 import { w1 } from "../figma_app/649254";
 import { e as _$$e2 } from "../905/810361";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$h1() {
-  return Fk(e => function (e) {
+  return useDeepEqualSceneValue(e => function (e) {
     if (0 === e.length) return !0;
     let t = e[0]?.getNearestDakotaCollectionId();
     return !!t && e.every(e => e.getNearestDakotaCollectionId() === t);

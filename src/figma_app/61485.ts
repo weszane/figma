@@ -2,7 +2,7 @@ import { FontSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { M1, co } from "../905/777093";
 let $$d1 = {
   fetchFontFile: function (e, t, r) {
@@ -45,13 +45,13 @@ let $$c0 = {
     source: e,
     id: t,
     postscriptName: r,
-    fileKey: hk()?.openFileKey() || null,
+    fileKey: getViewerInstance()?.openFileKey() || null,
     teamId: null,
     orgId: null
   }),
   fetchFontFileWithoutPickerInfo(e, t, r) {
     var n;
-    let i = hk()?.openFileKey();
+    let i = getViewerInstance()?.openFileKey();
     return i ? co(e, t, r, i, !(n = debugState.getState()) || !n.openFile || !!n.openFile.parentOrgId) : Promise.reject();
   }
 };

@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { P as _$$P } from "../905/36308";
 import { kg } from "../figma_app/120210";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
 import { Iv } from "../figma_app/987";
 import { uo, IF } from "../figma_app/781981";
@@ -354,7 +354,7 @@ let H = {
   onboardingKey: "multi-edit-text"
 };
 export function $$z3() {
-  return wA(e => W(e.getDirectlySelectedNodes()));
+  return useStrictDeepEqualSceneValue(e => W(e.getDirectlySelectedNodes()));
 }
 function W(e) {
   let t = [B, U, H, G(e)];
@@ -554,7 +554,7 @@ let ey = {
   getDisplayAction: () => getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan ? "create-code-layer-from-design" : "create-code-layer-from-design-disabled"
 };
 export function $$eb16() {
-  return wA(e => {
+  return useStrictDeepEqualSceneValue(e => {
     var t;
     t = e.getDirectlySelectedNodes();
     return {

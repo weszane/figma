@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useLatestRef } from "../figma_app/922077";
 import { Jr } from "../figma_app/624361";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileAtom } from "../figma_app/516028";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { A } from "../905/202425";
@@ -74,7 +74,7 @@ export async function $$y0(e, t, n, r, a) {
   }
 }
 export function $$_1(e, t) {
-  let n = eY();
+  let n = useSceneGraphSelector();
   let s = AppStateTsApi.figmakeState();
   let a = getObservableOrFallback(s.pastedNodeGuid);
   let l = useLatestRef(a);

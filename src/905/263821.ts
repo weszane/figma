@@ -1,4 +1,4 @@
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { getMinimumBundle } from "../905/389382";
 export function $$a0({
   seatType: e,
@@ -6,7 +6,7 @@ export function $$a0({
   entryPoint: i,
   planDataForSocialProof: a
 }) {
-  return i === tc.USER_SETTINGS ? {
+  return i === DeepLinkType.USER_SETTINGS ? {
     entryPoint: i,
     licenseType: void 0,
     planData: a,

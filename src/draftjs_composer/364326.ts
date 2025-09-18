@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { I as _$$I, _Z } from "../figma_app/819288";
+import { isMessageMetaEmpty, flattenMessageMeta } from "../figma_app/819288";
 import { getI18nString } from "../905/303541";
 import { ComposerType, NEW_COMMENT_ID } from "../905/380385";
 import { Uu } from "../figma_app/585209";
@@ -28,14 +28,14 @@ export function $$g0(e) {
       g.onClear();
       return;
     }
-    _$$I(e.messageContent) ? h.current && h.current.hasFocus() && f.current?.focus() : (updateMessage([]), g.onClear());
+    isMessageMetaEmpty(e.messageContent) ? h.current && h.current.hasFocus() && f.current?.focus() : (updateMessage([]), g.onClear());
     C.current?.visible && C.current.clearDecorators();
   }, [C, e.messageContent, onCancel, updateMessage, g]);
-  let I = useMemo(() => _Z(e.messageContent, {
+  let I = useMemo(() => flattenMessageMeta(e.messageContent, {
     includeTrailingWhitespace: !0
   }).length, [e.messageContent]);
   let v = useCallback(() => {
-    _$$I(e.messageContent) || e.maxCommentLength && I > e.maxCommentLength || (onSubmit && onSubmit(), h.current && h.current.hasFocus() && f.current?.focus(), g.onClear());
+    isMessageMetaEmpty(e.messageContent) || e.maxCommentLength && I > e.maxCommentLength || (onSubmit && onSubmit(), h.current && h.current.hasFocus() && f.current?.focus(), g.onClear());
   }, [onSubmit, e.messageContent, g, I, e.maxCommentLength]);
   let E = useSelector(e => e.comments.typeahead);
   let M = useCallback(e => e, []);
@@ -82,7 +82,7 @@ export function $$g0(e) {
         user: e.user,
         viewportPositionFromClientPosition: M
       })
-    }), !_$$I(e.messageContent) && t && jsx(Uu, {
+    }), !isMessageMetaEmpty(e.messageContent) && t && jsx(Uu, {
       decoratorsRef: C,
       onClear: g.onClear,
       onInsert: g.onInsert,

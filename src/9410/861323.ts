@@ -12,7 +12,7 @@ import { IntegrationUtils } from "../figma_app/469876";
 import { XM } from "../905/486443";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { cd } from "../905/381612";
@@ -226,11 +226,11 @@ function H({
     }));
     o(!0);
   }, [l, b?.id]);
-  let R = oh(fC);
-  let P = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let R = useIsLoading(fC);
+  let P = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
-  let F = oh(cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let F = useIsLoading(cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   let G = $$K1(!i || R || P || F, d.map(e => _$$h(e, I, t ?? void 0))) ? d.map(e => e.id || "").sort((e, t) => e.localeCompare(t)).join("") : "loading";

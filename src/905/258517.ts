@@ -1,6 +1,6 @@
 import { reportError } from '../905/11';
 import { I as _$$I } from '../905/117966';
-import { Qw, xK } from '../905/125218';
+import { gpuFullscreenEventNames, fullscreenPerfManager } from '../905/125218';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { r as _$$r } from '../905/210851';
 import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184';
@@ -162,7 +162,7 @@ export let $$w0 = new class {
     switch (e) {
       case DocumentSaveEvent.AFTER_FIRST_RENDER:
         s$('AFTER_FIRST_RENDER');
-        xK.start('AFTER_FIRST_RENDER');
+        fullscreenPerfManager.start('AFTER_FIRST_RENDER');
         break;
       case DocumentSaveEvent.DOCUMENT_STARTED_SAVING:
         s$('DOCUMENT_STARTED_SAVING');
@@ -218,11 +218,11 @@ export let $$w0 = new class {
   }
   startPerfTimer(e) {
     timerEventNames.has(e) && reactTimerGroup.start(e);
-    Qw.has(e) && xK.startFs(e);
+    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.startFs(e);
   }
   stopPerfTimer(e) {
     timerEventNames.has(e) && reactTimerGroup.stop(e);
-    Qw.has(e) && xK.stopFs(e);
+    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.stopFs(e);
   }
   startOpsTimer(e, t) {
     globalPerfTimer.start(e, {
@@ -273,11 +273,11 @@ export let $$w0 = new class {
       }
     }
     N.isNumberEvent(e) && N.loadTimer.logEvent(e, t);
-    e === 'receiveNodeChanges' && xK.logNodeChangeMsg(t);
+    e === 'receiveNodeChanges' && fullscreenPerfManager.logNodeChangeMsg(t);
   }
   logStringMetric(e, t) {
     N.isStringEvent(e) && N.loadTimer.logEvent(e, t);
-    Qw.has(e) && xK.startFs(e);
+    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.startFs(e);
   }
   handleAllocationFailureWithNative(e) {
     let t = Rf();

@@ -4,8 +4,8 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { j } from "../905/261906";
 import { FProductAccessType } from "../figma_app/191312";
-import { HD, YT } from "../figma_app/217457";
-import { o as _$$o } from "../905/584964";
+import { useLicenseTypesForSeatTypeMemoized, SeatDescriptionVisibility } from "../figma_app/217457";
+import { getDisplayProductName } from "../905/584964";
 function u({
   licenseType: e,
   colorStyle: t,
@@ -25,13 +25,13 @@ function u({
       children: u
     }) : u, jsx("div", {
       className: _$$s.textBodyMedium.$,
-      children: _$$o(e)
+      children: getDisplayProductName(e)
     })]
   });
 }
 export function $$p0(e) {
-  let t = HD(e.seatType, {
-    visibility: YT.SEAT_DESCRIPTION
+  let t = useLicenseTypesForSeatTypeMemoized(e.seatType, {
+    visibility: SeatDescriptionVisibility.SEAT_DESCRIPTION
   });
   return jsx(Fragment, {
     children: t.map(t => jsx(u, {

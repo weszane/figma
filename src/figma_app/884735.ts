@@ -21,7 +21,7 @@ import { n0 } from "../figma_app/389091";
 import { showDropdownThunk } from "../905/929976";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { o3, nt } from "../905/226610";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { FX } from "../figma_app/831569";
 import { pG, DE } from "../figma_app/811257";
@@ -57,7 +57,7 @@ export function $$H0(e) {
     selectionHasInstanceSublayer,
     dropdownShown
   } = selectWithShallowEqual(e => {
-    let t = Sh(e);
+    let t = selectSceneGraphSelectionKeys(e);
     return {
       containingProductComponentGUID: Lg(e),
       containingInstanceGUID: UR(e),

@@ -24,7 +24,7 @@ import { CB } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
 import { getViewportZoom } from "../figma_app/62612";
 import { XM } from "../905/486443";
-import { p8, dH } from "../figma_app/722362";
+import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { F as _$$F } from "../905/258517";
 import { KindEnum } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
@@ -169,7 +169,7 @@ function e_({
   tabManager: t,
   tabPropsMap: r
 }) {
-  if (p8("isReadOnly")) return jsx("div", {
+  if (useAppModelProperty("isReadOnly")) return jsx("div", {
     className: J,
     children: jsx("div", {
       className: "emoji_wheel--singleCenterReaction--xWX-5 emoji_wheel--singleCenter--X3W61",
@@ -227,7 +227,7 @@ function eh({
   tabManager: t,
   tabPropsMap: r
 }) {
-  return p8("isReadOnly") ? jsx("div", {
+  return useAppModelProperty("isReadOnly") ? jsx("div", {
     className: "emoji_wheel--readonlyReactionsCenterUI3--EWTk3 emoji_wheel--borderedCenterUI3--ShEHr emoji_wheel--centerUI3--40t9X emoji_wheel--center--5zTgA",
     children: jsx("div", {
       className: "emoji_wheel--singleCenterReactionUI3--DXBcL emoji_wheel--singleCenterUI3--eqZib emoji_wheel--singleCenter--X3W61 emoji_wheel--singleCenterReaction--xWX-5 emoji_wheel--singleCenter--X3W61",
@@ -301,7 +301,7 @@ function eg({
     ignore: [d.current, b9(), Tc(Qn)]
   });
   let I = fU();
-  let S = dH();
+  let S = useCurrentTool();
   let w = _$$L();
   useEffect(() => {
     l || S === DesignGraphElements.SELECT || S === DesignGraphElements.HAND_SELECT || y();
@@ -838,7 +838,7 @@ export function $$eI1() {
 export function $$eS0(e) {
   let t = XM();
   let r = useDispatch();
-  let a = p8("isReadOnly");
+  let a = useAppModelProperty("isReadOnly");
   let o = function ({
     multiplayerWheelType: e,
     isJoinedToActiveVotingSession: t

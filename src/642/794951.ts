@@ -9,7 +9,7 @@ import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { wV, S5 } from "../figma_app/647246";
@@ -36,7 +36,7 @@ export function $$j0() {
     priority: _$$N.SECONDARY_MODAL
   }, [e]);
   let T = alwaysFalseCallback2();
-  let N = !!_$$f(fc);
+  let N = !!selectUserFlag(fc);
   let I = t?.canEdit;
   let {
     currentView,

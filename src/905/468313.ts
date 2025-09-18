@@ -15,7 +15,7 @@ import { logCmsError } from "../905/937198";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../figma_app/884735";
@@ -255,7 +255,7 @@ function $({
   label: t
 }) {
   let i = useSelector(e => UT(e) ?? "");
-  let r = useSelector(e => Sh(e));
+  let r = useSelector(e => selectSceneGraphSelectionKeys(e));
   let s = useSelector(e => {
     let t = Lg(e);
     return t ? e.mirror.sceneGraph.get(t) : null;

@@ -3,7 +3,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { setupLoadingStateHandler } from "../905/696711";
 import { StatusType } from "../figma_app/175992";
 export let $$u0 = createOptimistThunk(async (e, t, {
@@ -30,7 +30,7 @@ export let $$u0 = createOptimistThunk(async (e, t, {
       return;
     }
     let d = a.data.meta;
-    desktopAPIInstance ? e.dispatch(RK({
+    desktopAPIInstance ? e.dispatch(setupHyperlinkHandler({
       rawInput: d
     })) : customHistory.unsafeRedirect(d);
     setTimeout(() => {

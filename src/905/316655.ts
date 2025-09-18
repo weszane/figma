@@ -10,7 +10,7 @@ import { X2, e6 } from "../figma_app/530167";
 import { showModalHandler } from "../905/156213";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { isOrgOrTeamExport } from "../figma_app/740025";
-import { VP, GH, aF } from "../905/18797";
+import { isLoading, isSuccess, isFailure } from "../905/18797";
 import { KindEnum } from "../905/129884";
 import { l as _$$l } from "../905/690005";
 import { G$, FF } from "../figma_app/588092";
@@ -33,7 +33,7 @@ export function $$v0({
   let [O, D] = useState(e.current_user_is_following);
   let L = O ? X2.loadingKeyForPayload(e.id) : e6.loadingKeyForPayload(e.id);
   useEffect(() => {
-    k && !VP(w, L) && (GH(w, L) ? (R(!1), D(!O)) : aF(w, L) && (R(!1), v?.()));
+    k && !isLoading(w, L) && (isSuccess(w, L) ? (R(!1), D(!O)) : isFailure(w, L) && (R(!1), v?.()));
   }, [w, L, k, O, v]);
   let F = (e, i) => {
     if (isMobileUA) {

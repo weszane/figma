@@ -6,14 +6,14 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { s9 } from "../figma_app/913823";
 import { Xh, M7 } from "../figma_app/933328";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { bj } from "../905/420347";
 import { PreloadCodeConnectLk } from "../figma_app/43951";
 import { liveStoreInstance, IT } from "../905/713695";
 import { MH } from "../figma_app/803787";
 import { Th, WH } from "../figma_app/645694";
-import { BA } from "../figma_app/889655";
+import { selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { aD } from "../figma_app/141508";
 import { Q } from "../905/577205";
 import { zV, Af, mO } from "../figma_app/410317";
@@ -65,9 +65,9 @@ function A(e, t, r) {
 }
 function x(e, t) {
   let r = useAtomWithSubscription(openFileLibraryKeyAtom);
-  let a = eY();
+  let a = useSceneGraphSelector();
   let l = useSelector(aD);
-  let d = useSelector(BA);
+  let d = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);
   let c = function (e) {
     let t = useSelector(MH);
     let r = useSelector(e => e.mirror.appModel.currentPage);
@@ -105,12 +105,12 @@ function x(e, t) {
 }
 export function $$N3() {
   let e = useAtomWithSubscription(openFileLibraryKeyAtom);
-  let t = eY();
+  let t = useSceneGraphSelector();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let l = useSelector(aD);
   let d = useSelector(Th);
   let c = useSelector(WH);
-  let h = useSelector(BA);
+  let h = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);
   let m = useMemo(() => {
     let r = new Set();
     let n = new Map();

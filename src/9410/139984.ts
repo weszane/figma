@@ -8,7 +8,7 @@ import { postUserFlag } from "../905/985254";
 import { e } from "../905/621515";
 import { getNewFileConfig } from "../905/766303";
 import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { WO, Ai, jm, Y3 } from "../figma_app/242339";
 import { ai, f6 } from "../figma_app/915202";
@@ -26,7 +26,7 @@ import { E as _$$E } from "../905/453826";
 import { selectCurrentUser } from "../905/372672";
 import { Of, XC } from "../figma_app/631279";
 import { b as _$$b2 } from "../9410/881782";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W2 } from "../9410/216737";
@@ -340,7 +340,7 @@ function V(e, t, i) {
     }
   };
 }
-let J = Mz([e => e.userFlags, (e, t) => t], (e, t) => t.reduce((t, i) => ({
+let J = createSelector([e => e.userFlags, (e, t) => t], (e, t) => t.reduce((t, i) => ({
   ...t,
   [i.name]: !!e[i.stepCompletedUserFlag]
 }), {}));
@@ -522,11 +522,11 @@ export function $$eo1() {
   let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let M = _$$b2();
   let P = useAtomWithSubscription(a8);
-  let B = _$$f("has_cursor_bot_onboarding_v2");
+  let B = selectUserFlag("has_cursor_bot_onboarding_v2");
   !function (e, t, i) {
     let r = selectCurrentUser();
     let n = useDispatch();
-    let s = _$$f("has_cursor_bot_onboarding_v2");
+    let s = selectUserFlag("has_cursor_bot_onboarding_v2");
     let o = useOpenFileObjectWithSinatraType({
       useSinatraType: !0
     });
@@ -564,16 +564,16 @@ export function $$eo1() {
   }(uniqueId, isShowing, show);
   let [U, G] = useState(_$$en.FORWARD);
   let K = function () {
-    let e = _$$f("has_cursor_bot_onboarding_v2");
-    let t = _$$f("cursor_bot_v2__basics_file__started_flow");
+    let e = selectUserFlag("has_cursor_bot_onboarding_v2");
+    let t = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
     let i = Ai(["exp_cursor_bot_onboarding"]);
     let r = jm(i);
     let s = function (e) {
-      let t = !!_$$f("cursor_bot_v2_has_greeted_with_wave");
-      let i = !!_$$f(Of(wn.CREATE_FRAME, e).tutorialPlayedUserFlag);
-      let r = !!_$$f(Of(wn.FORMAT_FRAME, e).tutorialPlayedUserFlag);
-      let a = !!_$$f(Of(wn.CREATE_TEXT, e).tutorialPlayedUserFlag);
-      let s = !!_$$f(Of(wn.FORMAT_TEXT, e).tutorialPlayedUserFlag);
+      let t = !!selectUserFlag("cursor_bot_v2_has_greeted_with_wave");
+      let i = !!selectUserFlag(Of(wn.CREATE_FRAME, e).tutorialPlayedUserFlag);
+      let r = !!selectUserFlag(Of(wn.FORMAT_FRAME, e).tutorialPlayedUserFlag);
+      let a = !!selectUserFlag(Of(wn.CREATE_TEXT, e).tutorialPlayedUserFlag);
+      let s = !!selectUserFlag(Of(wn.FORMAT_TEXT, e).tutorialPlayedUserFlag);
       return useMemo(() => e ? [F(i, e), V(a, e, t), _$$Z(s, e), _$$p(r, e)] : [F(i, e), _$$p(r, e), V(a, e, t), _$$Z(s, e)], [e, t, i, a, s, r]);
     }(i);
     let o = useSelector(e => J(e, s));
@@ -599,7 +599,7 @@ export function $$eo1() {
   useEffect(() => {
     isShowing && (X || !K) && complete();
   }, [isShowing, complete, X, K]);
-  let $ = _$$f("cursor_bot_v2__basics_file__started_flow");
+  let $ = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
   if (useEffect(() => {
     isShowing && H && !$ && O(postUserFlag({
       cursor_bot_v2__basics_file__started_flow: !0

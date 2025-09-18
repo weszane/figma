@@ -34,7 +34,7 @@ import { sx as _$$sx } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { SK, Fq, vu } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { Oq } from "../905/332483";
+import { designSet } from "../905/332483";
 import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
 import { A as _$$A } from "../6828/871993";
@@ -256,7 +256,7 @@ function es({
 }) {
   let a = [FPlanNameType.STUDENT, FPlanNameType.PRO, FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(i);
   let s = [FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(i);
-  let o = s ? Oq : Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
+  let o = s ? designSet : designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let l = function (e) {
     switch (e) {
       case FPlanNameType.ENTERPRISE:

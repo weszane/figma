@@ -23,15 +23,15 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/620668";
 import { Lm, mF } from "../figma_app/755939";
-import { Ym } from "../figma_app/806075";
+import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { kP, OB, Y6, FP, JM } from "../figma_app/91703";
 import { am } from "../figma_app/430563";
 import { showModalHandler } from "../905/156213";
 import { hZ } from "../figma_app/990058";
-import { yJ as _$$yJ } from "../figma_app/240735";
-import { yJ as _$$yJ2 } from "../905/584989";
+import { setTeamOptimistThunk } from "../figma_app/240735";
+import { putTeamUser } from "../905/584989";
 import { $W } from "../figma_app/681244";
 import { $K, bW, s5 } from "../figma_app/223206";
 import { ky } from "../figma_app/214121";
@@ -43,7 +43,7 @@ import { setupFileObject } from "../905/628874";
 import { getRandomString } from "../905/87821";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { liveStoreInstance } from "../905/713695";
-import { w2, i_ } from "../905/187165";
+import { getBackgroundColorForTheme, getVisibleTheme } from "../905/187165";
 import { FEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/84999";
 import { j as _$$j } from "../905/694231";
@@ -62,9 +62,9 @@ import { aZ, E7, UT } from "../905/775298";
 import { n as _$$n } from "../905/646812";
 import { z4 } from "../905/37051";
 import { e8 } from "../figma_app/557318";
-import { dd, PH, VD } from "../905/550523";
+import { getConnectionInfo, getNavigatorHardwareInfo, getWindowDeviceInfo } from "../905/550523";
 import { N as _$$N } from "../905/945673";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 var n;
 let A = function e() {
   return new Promise(t => {
@@ -125,7 +125,7 @@ export function $$eI10(e, t, i) {
     source: r,
     authenticatedUserIds: t.authedUsers.orderedIds.filter(e => e !== t.user?.id)
   });
-  "fullscreen" === t.selectedView.view && (t.selectedView.editorType === FEditorType.Design || t.selectedView.editorType === FEditorType.DevHandoff || t.selectedView.editorType === FEditorType.Illustration) && Ym(t, t.selectedView.editorType, i ? "stored" : "init");
+  "fullscreen" === t.selectedView.view && (t.selectedView.editorType === FEditorType.Design || t.selectedView.editorType === FEditorType.DevHandoff || t.selectedView.editorType === FEditorType.Illustration) && handleEnterMode(t, t.selectedView.editorType, i ? "stored" : "init");
 }
 export async function $$eE1(e, t, i) {
   let n = await XHR.post("/api/files/create", t, {
@@ -144,7 +144,7 @@ function ex(e, t, i, n) {
     orgUsers: [s],
     orgId: s.org_id
   }));
-  a && e(_$$yJ2({
+  a && e(putTeamUser({
     teamUsers: [a],
     teamId: a.team_id
   }));
@@ -176,7 +176,7 @@ export function $$eS6({
   let {
     fileOpenIndex,
     isColdBoot
-  } = xK.logOpenFileAction(e, o, t, i, n);
+  } = fullscreenPerfManager.logOpenFileAction(e, o, t, i, n);
   _$$N.loadTimer.logOpenFileAction(e);
   trackFileEvent("Fullscreen File Opened", e, a, {
     randomID: getRandomString(),
@@ -186,9 +186,9 @@ export function $$eS6({
     isActive: !document.hidden,
     isVisibleLoad: o,
     isNewFile: r,
-    ...dd(),
-    ...PH(),
-    ...VD()
+    ...getConnectionInfo(),
+    ...getNavigatorHardwareInfo(),
+    ...getWindowDeviceInfo()
   }, {
     forwardToDatadog: !0
   });
@@ -211,7 +211,7 @@ export async function $$ew5(e, t, i, n) {
       state: r
     });
   }
-  let l = w2(i_(r.theme.themePreference));
+  let l = getBackgroundColorForTheme(getVisibleTheme(r.theme.themePreference));
   mpGlobal.preconnect(mpGlobal.url({
     fileKey: t,
     role: "editor",
@@ -270,7 +270,7 @@ export async function $$ew5(e, t, i, n) {
     preserveUrlNodeId: !1
   });
   let h = c.team;
-  h && e.dispatch(_$$yJ({
+  h && e.dispatch(setTeamOptimistThunk({
     team: h,
     userInitiated: !1
   }));
@@ -321,7 +321,7 @@ export async function $$ew5(e, t, i, n) {
     fullscreenEditorType: i
   }));
   let P = c.current_team_user;
-  P && f.team_id && e.dispatch(_$$yJ2({
+  P && f.team_id && e.dispatch(putTeamUser({
     teamUsers: [P],
     teamId: f.team_id
   }));

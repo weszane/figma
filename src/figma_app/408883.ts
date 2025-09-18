@@ -7,7 +7,7 @@ import { useTeamPlanPublicInfo } from "../figma_app/465071";
 import { useEffect, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { wH } from "../figma_app/680166";
 import { q } from "../905/202542";
 import { JT } from "../figma_app/632248";
@@ -47,7 +47,7 @@ export function $$S1() {
       getUpgradeEligibility: _getUpgradeEligibility,
       getIsUpgradeHandlerLoading: _getIsUpgradeHandlerLoading
     } = wH({
-      entryPoint: tc.CODE_CHAT_LIMIT,
+      entryPoint: DeepLinkType.CODE_CHAT_LIMIT,
       folderId: null
     });
     let n = function (e) {

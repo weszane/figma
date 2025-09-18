@@ -11,7 +11,7 @@ import { E } from "../905/277716";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { E as _$$E } from "../642/160266";
 import { Jo, Df } from "../figma_app/98483";
 export function $$_0({
@@ -21,7 +21,7 @@ export function $$_0({
   let {
     selectedGUIDs
   } = selectWithShallowEqual(e => ({
-    selectedGUIDs: Sh(e)
+    selectedGUIDs: selectSceneGraphSelectionKeys(e)
   }));
   let i = Jo();
   let l = Df();

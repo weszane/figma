@@ -29,7 +29,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/103637";
 import { s as _$$s } from "../cssbuilder/589278";
 import { postUserFlag } from "../905/985254";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { pz, vC, D5, wP, X6, Mo, rb, xQ, w0, $I, ON, hW, jE } from "../figma_app/589564";
 import { tJ, G3, iq, AF, Pr, Cm } from "../figma_app/80782";
 import { O9 } from "../figma_app/522930";
@@ -66,8 +66,8 @@ function B({
   let c = useDispatch();
   let u = useCurrentFileKey();
   let p = Gi();
-  let _ = _$$f("figjam_editor_onboarded");
-  let h = _$$f(U);
+  let _ = selectUserFlag("figjam_editor_onboarded");
+  let h = selectUserFlag(U);
   let g = n.filter(e => d.every(t => !t.categoryIds.includes(e)));
   useEffect(() => {
     "makeSomething" !== o && _ && !h && (t(l), c(postUserFlag({

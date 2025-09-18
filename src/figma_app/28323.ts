@@ -4,7 +4,7 @@ import { VisualBellActions } from "../905/302958";
 import { Q } from "../905/618914";
 import { EO } from "../figma_app/684446";
 import { FMemberRoleType } from "../figma_app/191312";
-import { Sc, VP } from "../905/18797";
+import { isNullOrFailure, isLoading } from "../905/18797";
 import { getPlanUserAtomFamily } from "../905/276025";
 import { checkOrgUserPermission } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
@@ -33,7 +33,7 @@ let y = async (e, t, r) => {
   if (!r) return;
   let E = orgById[r];
   let y = EO(E.id);
-  if (E && E.bigma_enabled && g && (t.forceRefetch || Sc(loadingState, y)) && !VP(loadingState, y)) {
+  if (E && E.bigma_enabled && g && (t.forceRefetch || isNullOrFailure(loadingState, y)) && !isLoading(loadingState, y)) {
     e.dispatch(loadingStatePutLoading({
       key: EO(r)
     }));

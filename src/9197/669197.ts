@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { Lz, bM, sg, CH } from "../figma_app/770359";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { _Z } from "../905/319777";
 let d = Lz.theme({
   "&": {
@@ -43,7 +43,7 @@ export function $$t0({
   recordingKey: m,
   ...b
 }) {
-  let g = DP();
+  let g = getVisibleTheme();
   let h = useMemo(() => function (r) {
     let e = [d];
     "dark" === r ? e.push(bM) : e.push(sg);

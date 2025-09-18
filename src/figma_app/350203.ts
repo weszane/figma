@@ -208,7 +208,7 @@ export const MAX_CAROUSEL_MEDIA = 5
 /** @see $$N13 */
 export const MAX_TAGS = 8
 /** @see $$C23 */
-export const MAX_DESCRIPTION_LENGTH = 24
+export const MAX_DESCRIPTION_LENGTH2 = 24
 /** @see $$w15 */
 export const MAX_BANNER_CLICKS = 5
 /** @see $$O3 */
@@ -238,7 +238,7 @@ export const _$$in = COMMUNITY_PUBLISH_MODAL
 export const l_ = MAX_CAROUSEL_MEDIA
 export const mv = STREAMLINED_PUBLISH_INITIATED
 export const s0 = HubAction
-export const u8 = MAX_DESCRIPTION_LENGTH
+export const u8 = MAX_DESCRIPTION_LENGTH2
 export const w3 = COMMUNITY_WIDTH
 export const xP = FileInputDropType
 export const zn = COMMUNITY_TIMEOUT

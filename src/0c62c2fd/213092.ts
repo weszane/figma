@@ -5,7 +5,7 @@ import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { I } from "../c5e2cae0/718426";
 import { sx } from "../figma_app/307841";
-import { Dw } from "../figma_app/976345";
+import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
@@ -18,7 +18,7 @@ function h({
   let t = useDispatch();
   let r = useCallback(() => {
     e();
-    t(Dw({
+    t(openCreateTeamFlow({
       isEduTeam: !0
     }));
   }, [t, e]);
@@ -44,7 +44,7 @@ export function $$x0() {
   }, [t, x]);
   let v = useMemo(() => getEditableUnpaidTeams(e), [e]);
   useLayoutEffect(() => {
-    0 !== v.length || r || (x(), t(Dw({
+    0 !== v.length || r || (x(), t(openCreateTeamFlow({
       isEduTeam: !0
     })));
   }, [t, v.length, x, r]);

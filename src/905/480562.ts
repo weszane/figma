@@ -10,7 +10,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { e0 as _$$e } from "../905/696396";
 import { n as _$$n, l as _$$l } from "../905/402643";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
@@ -1372,7 +1372,7 @@ export function $$eJ0({
 }
 let e0 = "dsa_dismissed_feb_2025_missing_data_banner";
 function e1() {
-  let e = _$$f(e0);
+  let e = selectUserFlag(e0);
   let t = useDispatch();
   let i = useCallback(() => {
     t(postUserFlag({

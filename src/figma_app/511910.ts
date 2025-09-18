@@ -9,12 +9,12 @@ import { Spacing } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { browserCapabilities } from "../905/409121";
 import { getViewportWidth } from "../figma_app/62612";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { U as _$$U } from "../figma_app/825971";
 import { g as _$$g } from "../figma_app/481637";
@@ -30,15 +30,15 @@ let R = "no_figma_basics_panning_and_zooming_step--keyboardKeyHighlight--jN1Bq";
 export function $$L0({
   markComplete: e
 }) {
-  let t = _$$f("has_panned_in_design_file");
-  let r = _$$f("has_zoomed_in_design_file");
-  let s = _$$f("dismissed_no_figma_basics_panning_and_zooming_tooltip");
+  let t = selectUserFlag("has_panned_in_design_file");
+  let r = selectUserFlag("has_zoomed_in_design_file");
+  let s = selectUserFlag("dismissed_no_figma_basics_panning_and_zooming_tooltip");
   let [o, l] = useState(() => t || r);
   let d = !o && !s;
   let [c, u] = useState(!1);
   _$$g("no_figma_basics_panning_and_zooming_overlay");
   _$$U("no_figma_basics_panning_and_zooming_overlay");
-  let p = !!_$$f("no_figma_basics_panning_and_zooming_overlay");
+  let p = !!selectUserFlag("no_figma_basics_panning_and_zooming_overlay");
   useEffect(() => {
     p && c && setTimeout(() => {
       u(!1);
@@ -156,7 +156,7 @@ let B = e => "dark" === e ? buildUploadUrl("7a24deb2e05c4542dbd8b6bd1f009e26ba76
 function G({
   peripheral: e
 }) {
-  let t = DP();
+  let t = getVisibleTheme();
   let r = "mouse" === e ? U(t) : M(t);
   let i = `${e} icon`;
   let a = getObservableOrFallback(UK().scrollWheelZoom);
@@ -182,7 +182,7 @@ function G({
 function V({
   peripheral: e
 }) {
-  let t = DP();
+  let t = getVisibleTheme();
   let r = getObservableOrFallback(UK().rightClickPan);
   let i = `${e} icon`;
   return jsxs("div", {

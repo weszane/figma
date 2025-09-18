@@ -3,17 +3,17 @@ import i, { memo, useCallback, useMemo, useEffect, useRef, useState, forwardRef 
 import { VariableResolvedDataType, NodePropertyType, HandoffBindingsCpp, SessionOrigin, AppStateTsApi, ColorPalette, IssueCategory, IAssertResource, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, atom, useAtomWithSubscription, createRemovableAtomFamily, mg, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { eY as _$$eY, dH } from "../figma_app/722362";
+import { useSceneGraphSelector, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
 import { useSelector, useDispatch } from "react-redux";
 import { hD, kh, qT } from "../figma_app/387100";
 import { t as _$$t } from "../905/241707";
-import { hA } from "../figma_app/88239";
-import { DP } from "../905/640017";
-import { v9 } from "../figma_app/623300";
-import { wA as _$$wA, Fk } from "../figma_app/167249";
+import { useDevModeFocusId } from "../figma_app/88239";
+import { getVisibleTheme } from "../905/640017";
+import { getViewState } from "../figma_app/623300";
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { LZ, s9, iW } from "../figma_app/34798";
 import { createPortal } from "react-dom";
 import { isNotNullish } from "../figma_app/95419";
@@ -146,8 +146,8 @@ import { N as _$$N2 } from "../figma_app/240854";
 import { Nz as _$$Nz4 } from "../figma_app/755571";
 function v(e) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
-  let n = hA();
-  return _$$wA((e, t, n, a) => t.flatMap(t => {
+  let n = useDevModeFocusId();
+  return useStrictDeepEqualSceneValue((e, t, n, a) => t.flatMap(t => {
     let i = e.get(t);
     if (!i) return null;
     if (i.containingCanvas === n) {
@@ -370,7 +370,7 @@ function eH({
 function eW({
   nodeId: e
 }) {
-  let t = _$$wA(t => {
+  let t = useStrictDeepEqualSceneValue(t => {
     let n = t.get(e);
     return n ? {
       stackWrap: n.stackWrap,
@@ -1120,7 +1120,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = _$$wA(t => {
+    let t = useStrictDeepEqualSceneValue(t => {
       let n = t.get(e);
       return !n || n.isGrid ? null : {
         stackMode: n.stackMode,
@@ -1156,7 +1156,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = Fk(t => t.get(e)?.stackMode, e);
+    let t = useDeepEqualSceneValue(t => t.get(e)?.stackMode, e);
     return t && "GRID" !== t ? jsx(eO, {
       svg: "HORIZONTAL" === t ? _$$A6 : _$$A7
     }) : null;
@@ -1228,7 +1228,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = Fk(t => t.get(e)?.stackMode, e);
+    let t = useDeepEqualSceneValue(t => t.get(e)?.stackMode, e);
     return t && "GRID" === t ? jsx(eO, {
       svg: _$$A7
     }) : null;
@@ -1256,7 +1256,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = Fk(t => t.get(e)?.stackMode, e);
+    let t = useDeepEqualSceneValue(t => t.get(e)?.stackMode, e);
     return t && "GRID" === t ? jsx(eO, {
       svg: _$$A6
     }) : null;
@@ -1570,7 +1570,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = Fk(t => t.get(e)?.fills, e);
+    let t = useDeepEqualSceneValue(t => t.get(e)?.fills, e);
     return t ? jsx(e2, {
       paints: t
     }) : null;
@@ -1601,7 +1601,7 @@ let tk = new Map([[NodePropertyType.HEIGHT, {
   Icon: ({
     nodeId: e
   }) => {
-    let t = Fk(t => t.get(e)?.strokePaints.data, e);
+    let t = useDeepEqualSceneValue(t => t.get(e)?.strokePaints.data, e);
     return t ? jsx(e2, {
       paints: t
     }) : null;
@@ -1876,7 +1876,7 @@ function tD({
 function tO() {
   let e = trackFileEventWithPage();
   let t = Xr(_$$m);
-  let n = !!hA();
+  let n = !!useDevModeFocusId();
   return useCallback((a, i) => {
     permissionScopeHandler.user("clear-annotations", () => {
       let o = getSingletonSceneGraph().get(a);
@@ -2523,7 +2523,7 @@ let nF = {
   type: nE.CODEBASE_SUGGESTIONS,
   useSharedHooksContext: () => function () {
     let e = useAtomWithSubscription(nR);
-    let t = _$$eY();
+    let t = useSceneGraphSelector();
     if (!getFeatureFlags().dt_ccv2_on_canvas) return nD;
     let n = new Map();
     let a = new Map();
@@ -2569,7 +2569,7 @@ let nF = {
   }) {
     var n;
     n = e.nodeId;
-    let i = _$$wA((e, t) => {
+    let i = useStrictDeepEqualSceneValue((e, t) => {
       let n = e.get(t);
       return n ? {
         firstChildGuid: n.childrenNodes[0]?.guid,
@@ -2597,7 +2597,7 @@ let nK = {
   useSharedHooksContext() {
     let e = useSelector(e => e.mirror.appModel.currentPage);
     let t = isDevHandoffEditorType();
-    return _$$wA((e, t, n) => getFeatureFlags().cheddar && getFeatureFlags().cheddar_annotations && n ? (e.get(t) ? qT(e, t) : []).reduce((e, t) => {
+    return useStrictDeepEqualSceneValue((e, t, n) => getFeatureFlags().cheddar && getFeatureFlags().cheddar_annotations && n ? (e.get(t) ? qT(e, t) : []).reduce((e, t) => {
       let n = function e(t) {
         return t.childrenNodes.flatMap(t => {
           if (t.visible) {
@@ -2803,7 +2803,7 @@ function n$({
   let T = useRef(null);
   let [P, L] = useState(!1);
   let R = LZ();
-  let D = dH();
+  let D = useCurrentTool();
   let O = uQ();
   let M = O === e;
   let {
@@ -2813,7 +2813,7 @@ function n$({
   let [z] = useDebounce(P, 60);
   let V = M || F || (w ? P && (z || j) : P);
   let H = useAtomWithSubscription(_$$m);
-  let W = _$$wA((e, t) => {
+  let W = useStrictDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? {
       annotationsLength: n.annotations.length,
@@ -2907,7 +2907,7 @@ function n2({
     let {
       Sprig
     } = useSprigWithSampling();
-    let n = !!hA();
+    let n = !!useDevModeFocusId();
     let a = isDevHandoffEditorType();
     let o = isDesignFileType();
     let l = XR();
@@ -2939,7 +2939,7 @@ function n2({
   }();
   let y = tO();
   let b = Xr(_$$m);
-  let j = _$$wA((e, t) => e.get(t)?.annotations, e);
+  let j = useStrictDeepEqualSceneValue((e, t) => e.get(t)?.annotations, e);
   let w = XR({
     initializeIfNull: !0
   });
@@ -3020,7 +3020,7 @@ function n5({
   } = useSprigWithSampling();
   let y = trackFileEventWithPage();
   let b = isDesignFileType();
-  let j = !!hA();
+  let j = !!useDevModeFocusId();
   let w = isDevHandoffEditorType();
   let {
     Dropdown,
@@ -3037,8 +3037,8 @@ function n5({
   let D = tO();
   let O = useRef(null);
   let M = XR();
-  let F = Fk((e, t) => e.get(t)?.type || null, e);
-  let z = _$$wA((e, t, n) => {
+  let F = useDeepEqualSceneValue((e, t) => e.get(t)?.type || null, e);
+  let z = useStrictDeepEqualSceneValue((e, t, n) => {
     let a = {};
     let i = e.get(t);
     if (i) for (let e of n) _$$J3(i, e.type, !0) && (a[e.type] = !0);
@@ -3056,7 +3056,7 @@ function n5({
       selectedProperties: t
     };
   }, [d, z]);
-  let J = _$$wA((e, t, n) => {
+  let J = useStrictDeepEqualSceneValue((e, t, n) => {
     let a = e.get(t);
     return n.map(t => t.config.extractNodeFields(a, e));
   }, e, availableProperties);
@@ -3468,7 +3468,7 @@ function n4({
   let {
     canHaveValue,
     nodeFields
-  } = _$$wA((e, t) => {
+  } = useStrictDeepEqualSceneValue((e, t) => {
     let a = e.get(t);
     if (!a) return {
       canHaveValue: !1,
@@ -3616,7 +3616,7 @@ let aa = memo(function ({
   } = t;
   let f = trackFileEventWithPage();
   let x = uQ();
-  let m = dH();
+  let m = useCurrentTool();
   let v = x === nodeId;
   let [b, j] = useAtomValueAndSetter(_$$m);
   let w = useRef(null);
@@ -3626,7 +3626,7 @@ let aa = memo(function ({
   let C = isDevModeFocusViewActive();
   let T = s9();
   let L = E_();
-  let R = !!hA();
+  let R = !!useDevModeFocusId();
   let D = useDispatch();
   let M = (e, t) => {
     e && (clearSelection(), _$$S3("annotations"), t ? (HandoffBindingsCpp.setEnableZoomToSelection(!1), addToSelection([e]), HandoffBindingsCpp.setEnableZoomToSelection(!0)) : addToSelection([e]));
@@ -3671,7 +3671,7 @@ let aa = memo(function ({
     }));
   }, [D, nodeId, annotationIndex, e]);
   let W = XR();
-  let G = _$$wA((e, t) => {
+  let G = useStrictDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? {
       annotations: n.annotations,
@@ -3758,7 +3758,7 @@ function ai({
   properties: t
 }) {
   let n = useMemoStable(() => [...t].sort((e, t) => tk.get(e.type).index - tk.get(t.type).index), [t]);
-  let i = _$$wA((e, t, n) => {
+  let i = useStrictDeepEqualSceneValue((e, t, n) => {
     let a = e.get(t);
     return n.map(t => {
       if (!a) return {
@@ -3888,10 +3888,10 @@ function ab(e) {
   let r = function () {
     let e = useSelector(e => e.selectedView);
     let t = useSelector(e => e.versionHistory)?.isLoadingPage;
-    let n = DP();
+    let n = getVisibleTheme();
     let {
       isLoading
-    } = v9({
+    } = getViewState({
       selectedView: e,
       isLoadingVersionHistory: t,
       theme: n
@@ -3941,7 +3941,7 @@ function aj() {
   let e = useDispatch();
   let t = uQ();
   let n = useSelector(e => e.isFullscreenDocumentLoaded);
-  let c = dH();
+  let c = useCurrentTool();
   let f = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -3970,20 +3970,20 @@ function aj() {
     let c = useAtomWithSubscription(_$$m);
     let p = NW();
     let f = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
-    let g = Fk((e, t) => kh(e, t || "")?.guid || t || void 0, n);
+    let g = useDeepEqualSceneValue((e, t) => kh(e, t || "")?.guid || t || void 0, n);
     let {
       allAnnotations,
       newAnnotationNode
     } = function ({
       topLevelOrSelfNodeId: e
     }) {
-      let t = dH();
+      let t = useCurrentTool();
       let n = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
       let a = v([...n.keys()]);
       let i = useAtomWithSubscription(_$$m);
       let l = uQ();
       let c = XR();
-      let p = _$$eY();
+      let p = useSceneGraphSelector();
       let h = null !== i ? l : null;
       let f = null !== i ? e : void 0;
       let {
@@ -4074,7 +4074,7 @@ function aj() {
     }({
       topLevelOrSelfNodeId: g
     });
-    let y = _$$wA((e, t) => Object.entries(t).map(([t, n]) => {
+    let y = useStrictDeepEqualSceneValue((e, t) => Object.entries(t).map(([t, n]) => {
       let a = [];
       n.forEach(t => {
         let n = e.get(t.nodeId);
@@ -4324,7 +4324,7 @@ function aj() {
         return t;
       }, [_nodesWithAnnotationInfo, e, annotationBeingEditedIndex, a]),
       annotationsBeingViewed: _annotationsBeingViewed,
-      newAnnotationNodeInfo: _$$wA((e, t, n, a) => {
+      newAnnotationNodeInfo: useStrictDeepEqualSceneValue((e, t, n, a) => {
         if (!n) return null;
         let i = e.get(n.nodeId);
         if (!i) return null;
@@ -4454,7 +4454,7 @@ function aj() {
 }
 function aw() {
   return !function () {
-    let e = dH();
+    let e = useCurrentTool();
     let t = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
     return v(useMemo(() => Array.from(t.keys()), [t])).length > 0 || !!getFeatureFlags().dt_component_annotations || !!getFeatureFlags().dt_ccv2_on_canvas || !!getFeatureFlags().cheddar_annotations || e === DesignGraphElements.ANNOTATE;
   }() ? null : jsx(_$$p, {

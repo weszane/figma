@@ -12,7 +12,7 @@ import { V as _$$V } from '../905/223084';
 import { B as _$$B } from '../905/261906';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { N_ } from '../905/332483';
+import { collaboratorSet } from '../905/332483';
 import { UpgradeAction } from '../905/370443';
 import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
@@ -45,14 +45,14 @@ import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { CM, kj, NU, SI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { $z } from '../figma_app/617427';
-import { k as _$$k } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { Ro } from '../figma_app/805373';
 import { zRx } from '../figma_app/822011';
 import { TrackingProvider } from '../figma_app/831799';
 import { useDispatch } from 'react-redux';
 FPlanNameType.STUDENT;
 FPlanNameType.STARTER;
-let M = N_.dict(() => '-');
+let M = collaboratorSet.dict(() => '-');
 function ee({
   billableProductKey: e,
   upgradeApprovalSetting: t,
@@ -202,7 +202,7 @@ function er(e) {
   let g = _$$d({
     reportErrorsToTeam: _$$e.SCALE
   });
-  let x = _$$k();
+  let x = isProrationBillingEnabledForCurrentPlan();
   let b = useTeamPlanFeatures();
   let [y] = handleSuspenseRetainRelease(b);
   let A = !!y.data?.campfireProvisionalAccessEnabled;
@@ -225,12 +225,12 @@ function er(e) {
     billableProductKeyContractPrices,
     status
   } = function (e, t, a) {
-    let s = Ln(e.key, N_, {
+    let s = Ln(e.key, collaboratorSet, {
       renewalTerm: a,
       unit: IX.MONTH
     });
     let [n] = handleSuspenseRetainRelease(s);
-    let r = _$$k();
+    let r = isProrationBillingEnabledForCurrentPlan();
     let i = n.status === 'disabled' ? new Error('Missing contract rate args.') : n.status === 'errors' ? new Error('Error while fetching pricing.') : void 0;
     if (i && reportError(_$$e.MONETIZATION_EXPANSION, i), i || !t) {
       return {
@@ -249,7 +249,7 @@ function er(e) {
     }
     let c = new CurrencyFormatter(t);
     return {
-      billableProductKeyContractPrices: N_.dict(e => {
+      billableProductKeyContractPrices: collaboratorSet.dict(e => {
         if (!isNullish(data[e])) {
           return c.formatMoney(data[e].amount, {
             showCents: !1
@@ -259,7 +259,7 @@ function er(e) {
       status: n.status
     };
   }(z, currency, renewalTerm);
-  let [Y, K] = useState(N_.dict(e => {
+  let [Y, K] = useState(collaboratorSet.dict(e => {
     switch (e) {
       case ProductAccessTypeEnum.EXPERT:
         return z.upgradeApprovalSettingsExpert ?? en;

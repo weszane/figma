@@ -1,173 +1,390 @@
-import { deepEqual } from "../905/382883";
-import { isNullish } from "../figma_app/95419";
-import a from "classnames";
-import { xM, Bx, x6 } from "../905/403166";
-import { NEW_COMMENT_ID, DEFAULT_COMMENT_STATE } from "../905/380385";
-import { F } from "../905/241044";
-import { escapeHtml } from "../figma_app/930338";
-import { Point } from "../905/736624";
-import { mh, hp, XH, u5, Vc } from "../905/540111";
-var s = a;
-let $$_0 = 5;
-let h = (e, t) => {
-  if (isNullish(e.styles) && isNullish(t.styles)) return !0;
-  if (isNullish(e.styles) !== isNullish(e.styles)) return !1;
-  let r = e.styles?.filter(e => !t.styles?.includes(e));
-  return r?.length === 0;
-};
-let m = (e, t) => !!(isNullish(e.user_annotated) && isNullish(t.user_annotated)) || isNullish(e.user_annotated) === isNullish(e.user_annotated) && deepEqual(e.user_annotated, t.user_annotated);
-export var $$g15 = (e => (e.EDITOR_MENTION = "editor_mention", e.COMMUNITY_MENTION = "community_mention", e.PLAIN_TEXT = "plain_text", e.EMOJI = "emoji", e.NONE = "none", e))($$g15 || {});
-export function $$f11(e) {
-  return 2 === Object.keys(e).length && Object.keys(e).includes("user_id") && Object.keys(e).includes("user_annotated") ? "editor_mention" : 2 === Object.keys(e).length && Object.keys(e).includes("profile_id") && Object.keys(e).includes("t") ? "community_mention" : Object.keys(e).includes("t") && !Object.keys(e).includes("link") && e.t && xM(e.t) ? "emoji" : Object.keys(e).includes("t") && !Object.keys(e).includes("link") ? "plain_text" : "none";
+/* eslint-disable no-self-compare */
+import classNames from 'classnames'
+import { sanitizeInput } from '../905/241044'
+import { DEFAULT_COMMENT_STATE, NEW_COMMENT_ID } from '../905/380385'
+import { deepEqual } from '../905/382883'
+import { convertShortcodesToNative, isValidEmojiShortcode, renderEmojiShortcodes } from '../905/403166'
+import { hp, mh, u5, Vc, XH } from '../905/540111'
+import { Point } from '../905/736624'
+import { isNullish } from '../figma_app/95419'
+import { escapeHtml } from '../figma_app/930338'
+
+/**
+ * @file 819288.ts
+ * @description Utility functions and types for comment/message processing in Figma app.
+ * Original function/variable names are preserved in comments for traceability.
+ */
+
+/** Types for message/comment objects */
+export interface MessageMeta {
+  t?: string
+  styles?: string[]
+  children?: MessageMeta[]
+  user_annotated?: {
+    handle: string
+    name?: string
+    img_url?: string
+  }
+  user_id?: string
+  profile_id?: string | null
+  link?: string
+  isHashtag?: boolean
+  reply?: {
+    messageMeta?: MessageMeta[]
+    attachments?: Record<string, unknown>
+  }
+  discardAttempts?: number
+  user?: any
+  userId?: string
 }
-export function $$E9(e = [], t) {
-  if (!e) return "";
-  let r = e.reduce((e, t) => {
-    let r = t.t || "";
-    t.user_annotated ? r = t.user_annotated.handle : t.profile_id || null === t.profile_id ? r = "@" + t.t : t.children?.length && t.styles?.length ? t.children.forEach((n, i) => {
-      (e || r) && (r += "\n");
-      r += t.styles.includes("ol") ? `${i + 1}. ` : "* ";
-      r += $$E9(n.children);
-    }) : t.styles?.length && t.styles.includes("s") && (r = "");
-    return e + r;
-  }, "");
-  t?.includeTrailingWhitespace || (r = r.replace(/\s+$/g, ""));
-  return F(r) || "";
+
+/** Utility to compare styles arrays (original: h) */
+function compareStyles(a: MessageMeta, b: MessageMeta): boolean {
+  if (isNullish(a.styles) && isNullish(b.styles))
+    return true
+  if (isNullish(a.styles) !== isNullish(a.styles))
+    return false
+  const diff = a.styles?.filter(style => !b.styles?.includes(style))
+  return diff?.length === 0
 }
-export function $$y3(e, t) {
-  let r = $$E9(e, t);
-  let n = Bx(r);
-  return (globalThis.Intl?.Segmenter ? Array.from(new Intl.Segmenter().segment(n)) : Array.from(n)).length;
+
+/** Utility to compare user_annotated (original: m) */
+function compareUserAnnotated(a: MessageMeta, b: MessageMeta): boolean {
+  return (!!(isNullish(a.user_annotated) && isNullish(b.user_annotated)))
+    || (isNullish(a.user_annotated) === isNullish(a.user_annotated) && deepEqual(a.user_annotated, b.user_annotated))
 }
-export function $$b2(e) {
-  return 0 === e.length || /^\s*$/.test($$E9(e));
+
+/** Message types enum (original: $$g15) */
+export enum MessageType {
+  EDITOR_MENTION = 'editor_mention',
+  COMMUNITY_MENTION = 'community_mention',
+  PLAIN_TEXT = 'plain_text',
+  EMOJI = 'emoji',
+  NONE = 'none',
 }
-export function $$T4(e) {
-  return $$b2(e) || $$E9(e).length <= 5;
+
+/**
+ * Determines the message type from object shape (original: $$f11)
+ * @param obj MessageMeta
+ */
+export function getMessageType(obj: MessageMeta): MessageType {
+  const keys = Object.keys(obj)
+  if (keys.length === 2 && keys.includes('user_id') && keys.includes('user_annotated')) {
+    return MessageType.EDITOR_MENTION
+  }
+  if (keys.length === 2 && keys.includes('profile_id') && keys.includes('t')) {
+    return MessageType.COMMUNITY_MENTION
+  }
+  if (keys.includes('t') && !keys.includes('link') && obj.t && isValidEmojiShortcode(obj.t)) {
+    return MessageType.EMOJI
+  }
+  if (keys.includes('t') && !keys.includes('link')) {
+    return MessageType.PLAIN_TEXT
+  }
+  return MessageType.NONE
 }
-export function $$I1(e) {
-  let t = !(e.activeThread?.id === NEW_COMMENT_ID && e.newComment.discardAttempt < DEFAULT_COMMENT_STATE);
-  let r = e.activeThread?.id ? e.threads[e.activeThread.id] : null;
-  let n = !(r && !(r && $$T4(r.reply.messageMeta) && 0 === Object.keys(r.reply.attachments || {}).length) && (!r.discardAttempts || r.discardAttempts < DEFAULT_COMMENT_STATE));
-  return t && n;
+
+/**
+ * Flattens message meta to plain text (original: $$E9)
+ * @param meta MessageMeta[]
+ * @param options Optional trailing whitespace config
+ */
+export function flattenMessageMeta(meta: MessageMeta[] = [], options?: { includeTrailingWhitespace?: boolean }): string {
+  if (!meta)
+    return ''
+  let result = meta.reduce((acc, item) => {
+    let text = item.t || ''
+    if (item.user_annotated) {
+      text = item.user_annotated.handle
+    }
+    else if (item.profile_id || item.profile_id === null) {
+      text = `@${item.t}`
+    }
+    else if (item.children?.length && item.styles?.length) {
+      item.children.forEach((child, idx) => {
+        (acc || text) && (text += '\n')
+        text += item.styles.includes('ol') ? `${idx + 1}. ` : '* '
+        text += flattenMessageMeta(child.children)
+      })
+    }
+    else if (item.styles?.length && item.styles.includes('s')) {
+      text = ''
+    }
+    return acc + text
+  }, '')
+  if (!options?.includeTrailingWhitespace) {
+    result = result.replace(/\s+$/g, '')
+  }
+  return sanitizeInput(result) || ''
 }
-export function $$S13(e) {
-  return $$E9(e).length >= 17500;
+
+/**
+ * Counts grapheme clusters in message meta (original: $$y3)
+ * @param meta MessageMeta[]
+ * @param options Optional config
+ */
+export function countGraphemes(meta: MessageMeta[], options?: object): number {
+  const text = flattenMessageMeta(meta, options)
+  const nativeText = convertShortcodesToNative(text)
+  return (globalThis.Intl?.Segmenter
+    ? Array.from(new Intl.Segmenter().segment(nativeText))
+    : Array.from(nativeText)
+  ).length
 }
-export function $$v10(e) {
-  if (!Array.isArray(e)) return [];
-  let t = function e(t) {
-    let r = [];
-    t.forEach(t => {
-      t.user_id?.includes("invite-") ? t.t && r.push(t.t) : t.children && r.push(...e(t.children));
-    });
-    return r;
-  }(e);
-  !function e(t) {
-    t.forEach(t => {
-      t.user_id?.includes("invite-") ? delete t.user_id : t.children && e(t.children);
-    });
-    return t;
-  }(e);
-  return t;
+
+/**
+ * Checks if message meta is empty or whitespace (original: $$b2)
+ * @param meta MessageMeta[]
+ */
+export function isMessageMetaEmpty(meta: MessageMeta[]): boolean {
+  return meta.length === 0 || /^\s*$/.test(flattenMessageMeta(meta))
 }
-export function $$A6(e) {
-  e.length > 0 && (e[e.length - 1].t = e[e.length - 1].t?.trimEnd());
-  return e;
+
+/**
+ * Checks if message meta is empty or too short (original: $$T4)
+ * @param meta MessageMeta[]
+ */
+export function isMessageMetaTooShort(meta: MessageMeta[]): boolean {
+  return isMessageMetaEmpty(meta) || flattenMessageMeta(meta).length <= 5
 }
-export function $$x12(e, t) {
-  let r = Math.min(Math.max(e.x, t.x), t.x + t.width);
-  let n = Math.min(Math.max(e.y, t.y), t.y + t.height);
-  return new Point(r, n);
+
+/**
+ * Determines if comment thread is active (original: $$I1)
+ * @param state Thread state object
+ */
+export function isActiveThread(state: {
+  activeThread?: { id?: string }
+  newComment: { discardAttempt: number }
+  threads: Record<string, { reply: { messageMeta: MessageMeta[], attachments?: object }, discardAttempts?: number }>
+}): boolean {
+  const isNewComment = !(state.activeThread?.id === NEW_COMMENT_ID && state.newComment.discardAttempt < DEFAULT_COMMENT_STATE)
+  const thread = state.activeThread?.id ? state.threads[state.activeThread.id] : null
+  const isThreadValid = !(thread && !(thread && isMessageMetaTooShort(thread.reply.messageMeta) && Object.keys(thread.reply.attachments || {}).length === 0) && (!thread.discardAttempts || thread.discardAttempts < DEFAULT_COMMENT_STATE))
+  return isNewComment && isThreadValid
 }
-export function $$N5(e) {
-  return e.includes("-");
+
+/**
+ * Checks if message meta is too long (original: $$S13)
+ * @param meta MessageMeta[]
+ */
+export function isMessageMetaTooLong(meta: MessageMeta[]): boolean {
+  return flattenMessageMeta(meta).length >= 17500
 }
-export const B2 = $$_0;
-export const H3 = $$I1;
-export const I = $$b2;
-export const Kq = $$y3;
-export const Kx = $$T4;
-export const L4 = $$N5;
-export const Pq = $$A6;
-export const Rc = function e(t = [], r = !0) {
-  let n = (Array.isArray(t) ? t : [{
-    t: t
-  }]).map(t => {
-    let r = {
+
+/**
+ * Extracts invite tokens from message meta (original: $$v10)
+ * @param meta MessageMeta[]
+ */
+export function extractInviteTokens(meta: MessageMeta[]): string[] {
+  if (!Array.isArray(meta))
+    return []
+  const tokens = (function recurse(arr: MessageMeta[]): string[] {
+    let result: string[] = []
+    arr.forEach((item) => {
+      if (item.user_id?.includes('invite-')) {
+        item.t && result.push(item.t)
+      }
+      else if (item.children) {
+        result.push(...recurse(item.children))
+      }
+    })
+    return result
+  })(meta);
+
+  (function removeInviteIds(arr: MessageMeta[]): MessageMeta[] {
+    arr.forEach((item) => {
+      if (item.user_id?.includes('invite-')) {
+        delete item.user_id
+      }
+      else if (item.children) {
+        removeInviteIds(item.children)
+      }
+    })
+    return arr
+  })(meta)
+
+  return tokens
+}
+
+/**
+ * Trims trailing whitespace from last message meta (original: $$A6)
+ * @param meta MessageMeta[]
+ */
+export function trimLastMessageMeta(meta: MessageMeta[]): MessageMeta[] {
+  if (meta.length > 0) {
+    meta[meta.length - 1].t = meta[meta.length - 1].t?.trimEnd()
+  }
+  return meta
+}
+
+/**
+ * Converts a point to be within a bounding box (original: $$x12)
+ * @param point Point
+ * @param bounds { x: number, y: number, width: number, height: number }
+ */
+export function clampPointToBounds(point: Point, bounds: { x: number, y: number, width: number, height: number }): Point {
+  const x = Math.min(Math.max(point.x, bounds.x), bounds.x + bounds.width)
+  const y = Math.min(Math.max(point.y, bounds.y), bounds.y + bounds.height)
+  return new Point(x, y)
+}
+
+/**
+ * Checks if string contains a dash (original: $$N5)
+ * @param str string
+ */
+export function containsDash(str: string): boolean {
+  return str.includes('-')
+}
+
+/** Exported constants (original: B2, H3, I, Kq, Kx, L4, Pq, _Z, cs, l5, pV, q, vj) */
+export const B2 = 5
+export const H3 = isActiveThread
+export const I = isMessageMetaEmpty
+export const Kq = countGraphemes
+export const Kx = isMessageMetaTooShort
+export const L4 = containsDash
+export const Pq = trimLastMessageMeta
+export const _Z = flattenMessageMeta
+export const cs = extractInviteTokens
+export const l5 = getMessageType
+export const pV = clampPointToBounds
+export const q = isMessageMetaTooLong
+export const vj = MessageType
+
+/**
+ * Normalizes message meta for rendering (original: Rc)
+ * @param meta MessageMeta[] | string
+ * @param trimTrailingWhitespace boolean
+ */
+export function normalizeMessageMeta(meta: MessageMeta[] | string = [], trimTrailingWhitespace = true): MessageMeta[] {
+  const arr = (Array.isArray(meta)
+    ? meta
+    : [{ t: meta }]
+  ).map((item) => {
+    const base: MessageMeta = {
       t: null,
       styles: null,
       children: null,
       user: null,
       userId: null,
       link: null,
-      isHashtag: null
-    };
-    if (t.user_annotated && t.user_id) return {
-      ...r,
-      userId: t.user_id,
-      user: {
-        ...t.user_annotated,
-        name: t.user_annotated.name ?? null,
-        imgUrl: t.user_annotated.img_url
+      isHashtag: null,
+    }
+    if (item.user_annotated && item.user_id) {
+      return {
+        ...base,
+        userId: item.user_id,
+        user: {
+          ...item.user_annotated,
+          name: item.user_annotated.name ?? null,
+          imgUrl: item.user_annotated.img_url,
+        },
       }
-    };
-    if (t.profile_id || null === t.profile_id) return {
-      ...r,
-      t: "@" + t.t,
-      styles: ["lightbold"]
-    };
-    let n = {
-      ...r,
-      t: t.t || r.t,
-      styles: t.styles || r.styles,
-      link: t.link || r.link
-    };
-    t.children?.length && (n.children = t.children.map(t => ({
-      ...r,
-      children: e(t.children, !1)
-    })));
-    return n;
-  });
-  if (r && n.length) {
-    let e = n[n.length - 1];
-    e.t = e.t?.replace(/\s+$/g, "") ?? null;
+    }
+    if (item.profile_id || item.profile_id === null) {
+      return {
+        ...base,
+        t: `@${item.t}`,
+        styles: ['lightbold'],
+      }
+    }
+    const result: MessageMeta = {
+      ...base,
+      t: item.t || base.t,
+      styles: item.styles || base.styles,
+      link: item.link || base.link,
+    }
+    if (item.children?.length) {
+      result.children = item.children.map(child => ({
+        ...base,
+        children: normalizeMessageMeta(child.children, false),
+      }))
+    }
+    return result
+  })
+  if (trimTrailingWhitespace && arr.length) {
+    const last = arr[arr.length - 1]
+    last.t = last.t?.replace(/\s+$/g, '') ?? null
   }
-  return n;
-};
-export const Wf = function e(t, r) {
-  if (t.length !== r.length) return !1;
-  for (let n = 0; n < t.length; n++) {
-    let i = t[n];
-    let a = r[n];
-    if (i.t !== a.t || i.user_id !== a.user_id) return !1;
-    if (!m(i, a)) return !1;
-    if (i.profile_id !== a.profile_id) return !1;else if (i.link !== a.link) return !1;else if (!h(i, a)) return !1;else if (!e(i.children ?? [], a.children ?? [])) return !1;
+  return arr
+}
+
+/**
+ * Compares two message meta arrays for equality (original: Wf)
+ * @param a MessageMeta[]
+ * @param b MessageMeta[]
+ */
+export function areMessageMetasEqual(a: MessageMeta[], b: MessageMeta[]): boolean {
+  if (a.length !== b.length)
+    return false
+  for (let i = 0; i < a.length; i++) {
+    const metaA = a[i]
+    const metaB = b[i]
+    if (metaA.t !== metaB.t || metaA.user_id !== metaB.user_id)
+      return false
+    if (!compareUserAnnotated(metaA, metaB))
+      return false
+    if (metaA.profile_id !== metaB.profile_id)
+      return false
+    if (metaA.link !== metaB.link)
+      return false
+    if (!compareStyles(metaA, metaB))
+      return false
+    if (!areMessageMetasEqual(metaA.children ?? [], metaB.children ?? []))
+      return false
   }
-  return !0;
-};
-export const _Z = $$E9;
-export const cs = $$v10;
-export const l5 = $$f11;
-export const pV = $$x12;
-export const q = $$S13;
-export const sP = function e(t = []) {
-  if (!t) return "";
-  let r = t.reduce((t, r) => {
-    let n = r.t || "";
-    let i = r.styles || [];
-    r.user_annotated ? (n = r.user_annotated.handle, i = ["lightbold"]) : r.profile_id || null === r.profile_id ? (n = "@" + r.t, i = ["lightbold"]) : r.children?.length ? r.children.forEach((r, a) => {
-      (t || n) && (n += "\n");
-      n += i.includes("ol") ? `${a + 1}. ` : "* ";
-      n += e(r.children);
-    }) : (n = x6(n).map(e => "string" == typeof e ? escapeHtml(e) : `<span class="${mh}">${e.props["data-text"]}</span>`).join("\n"), r.link && (i = ["lightbold"]));
-    let a = [];
-    i.forEach(e => {
-      "b" === e ? a.push(hp) : "lightbold" === e ? a.push(XH) : "i" === e ? a.push(u5) : "s" === e && a.push(Vc);
-    });
-    a.length && (n = `<span class='${s()(...a)}'>` + n + "</span>");
-    return t + n;
-  }, "");
-  return F(r) || "";
-};
-export const vj = $$g15;
+  return true
+}
+
+/**
+ * Renders message meta to HTML (original: sP)
+ * @param meta MessageMeta[]
+ */
+export function renderMessageMeta(meta: MessageMeta[] = []): string {
+  if (!meta)
+    return ''
+  const html = meta.reduce((acc, item) => {
+    let text = item.t || ''
+    let styles = item.styles || []
+    if (item.user_annotated) {
+      text = item.user_annotated.handle
+      styles = ['lightbold']
+    }
+    else if (item.profile_id || item.profile_id === null) {
+      text = `@${item.t}`
+      styles = ['lightbold']
+    }
+    else if (item.children?.length) {
+      item.children.forEach((child, idx) => {
+        (acc || text) && (text += '\n')
+        text += styles.includes('ol') ? `${idx + 1}. ` : '* '
+        text += renderMessageMeta(child.children)
+      })
+    }
+    else {
+      text = renderEmojiShortcodes(text)
+        .map(e => typeof e === 'string'
+          ? escapeHtml(e)
+          : `<span class="${mh}">${e.props['data-text']}</span>`)
+        .join('\n')
+      if (item.link)
+        styles = ['lightbold']
+    }
+    const classList: string[] = []
+    styles.forEach((style) => {
+      if (style === 'b')
+        classList.push(hp)
+      else if (style === 'lightbold')
+        classList.push(XH)
+      else if (style === 'i')
+        classList.push(u5)
+      else if (style === 's')
+        classList.push(Vc)
+    })
+    if (classList.length) {
+      text = `<span class='${classNames(...classList)}'>${text}</span>`
+    }
+    return acc + text
+  }, '')
+  return sanitizeInput(html) || ''
+}

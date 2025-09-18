@@ -82,7 +82,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { Vi, _o, GI } from "../905/125333";
 import { z5 } from "../905/713722";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { hv } from "../figma_app/544744";
 import { H as _$$H2 } from "../figma_app/539950";
 let l = memo(function (e) {
@@ -242,7 +242,7 @@ let eG = {
 function eV({
   tool: e
 }) {
-  let t = eG["dark" === DP() ? "dark" : "light"][e];
+  let t = eG["dark" === getVisibleTheme() ? "dark" : "light"][e];
   let r = useAtomWithSubscription(t.atom);
   let a = useMemo(() => {
     let e = r.paints?.[0];

@@ -20,13 +20,13 @@ import { whiteColor, borderTranslucent, borderDark, borderLight, blendGradientCo
 import { selectWithShallowEqual } from "../905/103090";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/989956";
-import { pw } from "../905/187165";
-import { yM, DP } from "../905/640017";
+import { colorCSSManipulatorInstance } from "../905/989956";
+import { getThemeBorderStyle } from "../905/187165";
+import { useThemeContext, getVisibleTheme } from "../905/640017";
 import { getFillColor, isValidThumbnail } from "../figma_app/80990";
-import { dy, rl } from "../905/248569";
+import { getRGBAFromColor, createColorDataUri } from "../905/248569";
 import { Ep } from "../figma_app/504823";
-import { p3 } from "../figma_app/622881";
+import { shouldUsePolyfill } from "../figma_app/622881";
 import { getBasename } from "../905/309735";
 import { isStyleType, getStyleThumbnail } from "../905/405710";
 import { KindEnum } from "../905/129884";
@@ -403,11 +403,11 @@ export function $$ea1({
 }
 function es(e, t) {
   let i = function (e, t = "colorBg") {
-    let i = yM();
-    let n = DP();
-    return pw(i, e, n, t);
+    let i = useThemeContext();
+    let n = getVisibleTheme();
+    return getThemeBorderStyle(i, e, n, t);
   }(e ?? whiteColor, "colorBg");
-  let n = DP();
+  let n = getVisibleTheme();
   if (!e) return null;
   if (!t && i) {
     if (i === borderTranslucent) return "dark" === n ? "white" : "black";
@@ -424,7 +424,7 @@ function eo({
   return jsxs(Fragment, {
     children: [jsx($$em0, {
       filled: !0,
-      color: _$$F.format(e)
+      color: colorCSSManipulatorInstance.format(e)
     }), e.a < 1 && jsx(ep, {
       opacity: 1 - e.a
     }), i && jsx($$em0, {
@@ -592,18 +592,18 @@ export function $$em0(e) {
     ...e
   });
 }
-let eh = (e, t) => t === ColorSpaceEnum.SRGB ? e : _$$F.format(dy(e), t === ColorSpaceEnum.DISPLAY_P3 ? "display-p3" : void 0);
+let eh = (e, t) => t === ColorSpaceEnum.SRGB ? e : colorCSSManipulatorInstance.format(getRGBAFromColor(e), t === ColorSpaceEnum.DISPLAY_P3 ? "display-p3" : void 0);
 let eg = e => `calc(calc(100% / 16) * ${e})`;
 function ef(e) {
   let t = Ep();
-  let i = useMemo(() => p3(), []);
+  let i = useMemo(() => shouldUsePolyfill(), []);
   return jsx("div", {
     className: ee,
     style: {
       borderRadius: eg(8),
       opacity: e.opacity,
       backgroundColor: i ? void 0 : eh(e.color, t),
-      backgroundImage: i ? `url(${rl(dy(e.color), t)})` : void 0
+      backgroundImage: i ? `url(${createColorDataUri(getRGBAFromColor(e.color), t)})` : void 0
     }
   });
 }

@@ -8,7 +8,7 @@ import { Q } from "../9864/768691";
 import { e as _$$e } from "../905/621515";
 import { eS } from "../figma_app/33126";
 import { NT, g5 } from "../figma_app/579169";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N } from "../figma_app/268271";
 import { b as _$$b2 } from "../9864/543300";
 import { d as _$$d } from "../905/14910";
@@ -17,7 +17,7 @@ import { j0N } from "../figma_app/6204";
 export function $$y0(e) {
   let t = useAtomWithSubscription(eS);
   let i = useDispatch();
-  let y = !!_$$f("not_gen_0");
+  let y = !!selectUserFlag("not_gen_0");
   let b = useAtomWithSubscription(NT);
   let C = useAtomWithSubscription(g5);
   let v = useAtomWithSubscription(pC);

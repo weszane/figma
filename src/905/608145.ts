@@ -19,7 +19,7 @@ import { r as _$$r } from "../figma_app/896657";
 import { EG } from "../figma_app/972736";
 import { s as _$$s } from "../905/58247";
 import { showModalHandler } from "../905/156213";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { HubAction } from "../figma_app/350203";
 import { formatI18nMessage } from "../905/482208";
 import { nV } from "../905/625959";
@@ -95,7 +95,7 @@ export function $$J0(e, t, i) {
   switch (i.type) {
     case "insert-local-widget":
       {
-        if (O) return _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
+        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
           reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
@@ -123,7 +123,7 @@ export function $$J0(e, t, i) {
       }
     case "insert-installed-widget":
       {
-        if (O) return _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
+        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
           reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
@@ -148,7 +148,7 @@ export function $$J0(e, t, i) {
       }
     case "run-local-plugin":
       {
-        if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
           reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
@@ -198,7 +198,7 @@ export function $$J0(e, t, i) {
       }
     case "run-installed-plugin":
       {
-        if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+        if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
           reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
@@ -263,12 +263,12 @@ export function $$J0(e, t, i) {
         return;
       }
     case "set-text-review-plugin":
-      if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       updateActiveTextReviewPlugin(i.textReviewPluginInfo);
       $4.reset();
       return;
     case "run-last":
-      if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       fullscreenValue.triggerAction("plugins-run-last", {
         source: "menu"
       });
@@ -398,7 +398,7 @@ export function $$J0(e, t, i) {
         return;
       }
     case "publish-widget":
-      if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       if (!openFile) {
         q();
         return;
@@ -416,7 +416,7 @@ export function $$J0(e, t, i) {
         return;
       }
     case "create-new-plugin":
-      if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
@@ -425,7 +425,7 @@ export function $$J0(e, t, i) {
       }));
       return;
     case "create-new-widget":
-      if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
@@ -434,13 +434,13 @@ export function $$J0(e, t, i) {
       }));
       return;
     case "import-widget-from-manifest":
-      if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(JZ({
         resourceType: "widget"
       }));
       return;
     case "import-plugin-from-manifest":
-      if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+      if (O) return _$$R.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
       fullscreenValue.dispatch(JZ({
         resourceType: "plugin"
       }));

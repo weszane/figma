@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { reportError } from "../905/11";
 import { gB } from "../905/294543";
 import { getCodegenLanguagePreference } from "../905/515076";
-import { Ym } from "../figma_app/806075";
+import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/882587";
 import { Im } from "../905/608145";
@@ -157,7 +157,7 @@ function P(e) {
     ...selectedView,
     view: "fullscreen",
     editorType: FEditorType.DevHandoff
-  })), Ym(e.getState(), FEditorType.DevHandoff, "plugin_run"));
+  })), handleEnterMode(e.getState(), FEditorType.DevHandoff, "plugin_run"));
 }
 export const Bi = $$w0;
 export const Gt = $$N1;

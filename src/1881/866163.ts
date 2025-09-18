@@ -3,7 +3,7 @@ import { resourceUtils } from "../905/989992";
 import { getInitialOptions } from "../figma_app/169182";
 import { BadgeColor } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
-import { TA, Zx } from "../figma_app/217457";
+import { convertLgSeatTypeProduct, getProductAccessTypeByKey } from "../figma_app/217457";
 import { Pe, Bk } from "../4452/207203";
 import { createMapperFactory, processAdditionalConfig } from "../905/508958";
 import { W } from "../4452/143028";
@@ -101,7 +101,7 @@ let w = createRemovableAtomFamily(e => atom(i => {
           id: e.id,
           user_id: e.user.id,
           team_id: i.id,
-          active_seat_type: TA(activeSeatTypeUpgrade?.billableProduct) || null,
+          active_seat_type: convertLgSeatTypeProduct(activeSeatTypeUpgrade?.billableProduct) || null,
           design_paid_status: FPlanRestrictionType.STARTER,
           whiteboard_paid_status: FPlanRestrictionType.STARTER,
           show_figjam_user_onboarding: !1,
@@ -146,7 +146,7 @@ let w = createRemovableAtomFamily(e => atom(i => {
           }),
           invite: e.invite?.billableProductKey ? {
             ...e.invite,
-            billableProductKey: Zx(e.invite.billableProductKey),
+            billableProductKey: getProductAccessTypeByKey(e.invite.billableProductKey),
             inviteeUserId: e.invite.inviteeUserId || null
           } : null
         },

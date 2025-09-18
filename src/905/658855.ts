@@ -17,7 +17,7 @@ import { I as _$$I } from "../905/343721";
 import { DM, en } from "../905/759470";
 import { PublishModalState } from "../figma_app/350203";
 import { N8, Gp, CW, nK } from "../figma_app/599979";
-import { VY } from "../905/966582";
+import { VIDEO_TYPE_VALUES } from "../905/966582";
 import { EL } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { A as _$$A } from "../5724/882384";
@@ -187,7 +187,7 @@ function D({
             display: "none"
           },
           type: "file",
-          accept: [...CW, ...(e ? VY : [])].join(","),
+          accept: [...CW, ...(e ? VIDEO_TYPE_VALUES : [])].join(","),
           ref: z,
           onChange: l ? lQ : () => O(z, c, w, V, e, R, D, U, B, L),
           multiple: !0
@@ -442,7 +442,7 @@ function B({
           }
         }), jsx("input", {
           type: "file",
-          accept: [...CW, ...(f ? VY : [])].join(","),
+          accept: [...CW, ...(f ? VIDEO_TYPE_VALUES : [])].join(","),
           ref: R,
           style: {
             display: "none"

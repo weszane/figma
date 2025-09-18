@@ -1,7 +1,7 @@
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { O } from "../905/655700";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { FileIsEligibleForDevModeTrial } from "../figma_app/43951";
@@ -13,7 +13,7 @@ export function $$p0() {
   let i = getCurrentTeamId();
   let p = useCurrentUserOrg()?.id;
   let m = O();
-  let h = hA() ? "focus_view" : "dev_mode";
+  let h = useDevModeFocusId() ? "focus_view" : "dev_mode";
   let g = selectCurrentFile();
   let f = useSubscription(FileIsEligibleForDevModeTrial, {
     key: g?.key || ""

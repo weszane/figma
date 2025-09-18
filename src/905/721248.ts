@@ -65,7 +65,7 @@ import eb from "classnames";
 import { or, Ss, BL, qW, xY, u as _$$u } from "../905/720292";
 import { ec as _$$ec, Yz, _5 } from "../figma_app/449837";
 import { x as _$$x } from "../905/211326";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { B8 } from "../905/993733";
 import { ProjectDevelopmentPhases } from "../905/869235";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
@@ -389,7 +389,7 @@ function eD({
   isMainChunkCanvas: l,
   shouldSkip: d
 }) {
-  let c = "dark" === DP();
+  let c = "dark" === getVisibleTheme();
   let u = !d && !(s && $2(s)) && void 0 === i;
   let p = KZ(o);
   let m = "TEXT" === o;
@@ -444,7 +444,7 @@ let eL = memo(function (e) {
   let [l, d] = useState(!0);
   let c = "CANVAS" === e.displayChunk.mainChunk.displayNode.type;
   let u = e.displayChunk.mainChunk.displayNode.styleType;
-  let p = "dark" === DP();
+  let p = "dark" === getVisibleTheme();
   let h = rB(p, e.beforeBackgroundColorStyle.backgroundColor, u) ? "chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp" : "chunk_diff--beforeChunkLightCanvas--jrMYC chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp";
   useEffect(() => {
     e.showOptions || a(Ss.SIDE_BY_SIDE);
@@ -853,7 +853,7 @@ let tc = memo(function (e) {
   let c = displayNode.name ? _$$w2(displayNode.name) : void 0;
   let u = displayNode.styleType;
   let p = "TEXT" === u;
-  let h = "dark" === DP();
+  let h = "dark" === getVisibleTheme();
   let g = useRef(null);
   let f = useRef(null);
   let [_, A] = useState(null);
@@ -4405,7 +4405,7 @@ function rn(e) {
   let l = chunk?.displayNode;
   let d = chunk?.displayNode.styleType === "TEXT";
   let c = chunk?.displayNode.styleType === "FILL";
-  let u = "dark" === DP();
+  let u = "dark" === getVisibleTheme();
   let p = chunk ? uA(chunk, imageBackgroundColor) : {
     backgroundColor: imageBackgroundColor
   };

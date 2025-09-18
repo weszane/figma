@@ -7,14 +7,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { generateUUIDv4 } from "../905/871474";
 import { WJ } from "../figma_app/379850";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { UU, At, _B as _$$_B } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { U6 } from "../figma_app/591738";
 import { JG } from "../figma_app/12220";
 import { Z } from "../905/104740";
 import { viewportToScreen } from "../figma_app/62612";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { NEW_COMMENT_ID } from "../905/380385";
 import { XC } from "../905/512783";
@@ -60,10 +60,10 @@ export function $$k3(e, t, i) {
 export function $$R1(e, t, i, l, d) {
   let c = _$$s();
   let h = useDispatch();
-  let g = eY();
+  let g = useSceneGraphSelector();
   let f = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
   let _ = f && f !== defaultSessionLocalIDString;
-  let A = hA();
+  let A = useDevModeFocusId();
   let I = useMemo(() => {
     let t;
     switch (c.filterBy) {

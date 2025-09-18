@@ -18,7 +18,7 @@ import { k as _$$k } from '../905/888808';
 import { A as _$$A } from '../905/891805';
 import { bL } from '../905/911410';
 import { cn } from '../905/959568';
-import { F as _$$F } from '../905/989956';
+import { colorCSSManipulatorInstance } from '../905/989956';
 import { s as _$$s } from '../cssbuilder/589278';
 import { kX } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
@@ -233,7 +233,7 @@ function K({
         let s = y ? !!f && r === f.varId : areSessionLocalIDsEqual(a, e?.colorVar?.value?.alias?.guid);
         let l = jsx(_$$A, {});
         return t.color && a ? jsx($$q2, {
-          backgroundString: _$$F.format({
+          backgroundString: colorCSSManipulatorInstance.format({
             ...t.color,
             a: 1
           }),
@@ -335,14 +335,14 @@ function $({
     }), jsxs(_$$E2, {
       name: 'slides_document_colors',
       children: [f.map((t, i) => jsx($$q2, {
-        backgroundString: _$$F.format(t.color),
+        backgroundString: colorCSSManipulatorInstance.format(t.color),
         tooltipText: z5.format(t.color),
         tooltipSubtext: t.opacity && t.opacity !== 1 ? `${(100 * t.opacity).toFixed(0)}%` : void 0,
         opacity: t.opacity,
         onClick: () => r(t),
         onContextMenu: e => y(t, e),
         isSelected: !s && colorsEqual(t.color, e?.color) && t.opacity === e?.opacity,
-        recordingKey: generateRecordingKey(o, 'documentColor', _$$F.format(t.color))
+        recordingKey: generateRecordingKey(o, 'documentColor', colorCSSManipulatorInstance.format(t.color))
       }, i)), E && jsx(ButtonPrimitive, {
         className: _$$s.wFull.h32.flex.itemsCenter.justifyCenter.$,
         onClick: () => u(!0),

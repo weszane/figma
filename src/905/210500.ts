@@ -2,13 +2,13 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
 import s from "../vendor/946678";
-import { P8 } from "../905/270781";
+import { createDeepEqualSelector } from "../905/270781";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { lg } from "../figma_app/646357";
 import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
 let p = atom(new Map());
-let m = P8([e => e.mirror.appModel.pagesList], e => {
+let m = createDeepEqualSelector([e => e.mirror.appModel.pagesList], e => {
   let t = new Map();
   e.forEach(e => {
     e.thumbnailInfo && e.thumbnailInfo.nodeID !== defaultSessionLocalIDString && t.set(e.nodeId, {

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { MIXED_MARKER } from "../905/216495";
-import { B9 } from "../figma_app/722362";
+import { useSceneGraphFromContext } from "../figma_app/722362";
 import { $ } from "../905/330495";
 export function $$o0(e) {
-  let t = B9();
+  let t = useSceneGraphFromContext();
   let {
     backingSymbolGUID,
     backingStateGroupGUID

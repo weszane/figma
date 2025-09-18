@@ -4,13 +4,13 @@ import a from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
 import { gB } from "../905/723791";
 import { $E, y1 } from "../905/445814";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { le } from "../figma_app/11182";
 import { fetchFileByKeyOptimistic } from "../figma_app/78808";
 import { y as _$$y } from "../figma_app/705249";
 import { o8, CR } from "../figma_app/12220";
 import { N } from "../figma_app/261650";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { buildFileUrl } from "../905/612685";
 import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
@@ -72,10 +72,10 @@ export function $$R6(e, t, i) {
             },
             commentId: iw(e)
           });
-          a(V3({
+          a(openUrlInContext({
             url: t
           }));
-        } else s.type === cM.PROTOTYPE && a(V3({
+        } else s.type === cM.PROTOTYPE && a(openUrlInContext({
           url: $$k2(s)
         }));
       }
@@ -85,7 +85,7 @@ export function $$R6(e, t, i) {
             key: l
           }
         });
-        a(V3({
+        a(openUrlInContext({
           url: e
         }));
       }
@@ -109,7 +109,7 @@ export function $$P0(e, t) {
 export function $$O5(e, t, i, r) {
   let [a, d] = useState({});
   let [c, u] = useState({});
-  let p = eY();
+  let p = useSceneGraphSelector();
   let _ = useCurrentPlanUser("useFeedPostInfo").unwrapOr(null);
   let y = _?.key.type === FUserTypeClassification.ORG_USER ? _.planKey.parentId ?? void 0 : void 0;
   let v = _?.key.type === FUserTypeClassification.ORG_USER ? _.permission : void 0;

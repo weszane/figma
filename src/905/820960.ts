@@ -5,7 +5,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { nl } from "../905/590952";
 import { In } from "../905/672640";
-import { kg } from "../figma_app/976345";
+import { trackNavTreeClicked } from "../figma_app/976345";
 import { W as _$$W } from "../905/307631";
 import { a as _$$a } from "../905/332662";
 import { Y as _$$Y } from "../905/347011";
@@ -18,7 +18,7 @@ import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { selectPermissionsState } from "../figma_app/212807";
 import { FEntityType, FAccessLevelType } from "../figma_app/191312";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { x as _$$x } from "../905/695363";
 import { p9 } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg, canManageNonSecretOrgTeam } from "../figma_app/642025";
@@ -114,7 +114,7 @@ export function $$O2(e) {
   let ei = jsx(_$$W, {
     team: e.team,
     isCurrentUserInTeam: G,
-    isLoading: VP(j, p9(e.team.id)),
+    isLoading: isLoading(j, p9(e.team.id)),
     onOpenTeam: () => {
       if (!K) {
         $(e.team);
@@ -124,7 +124,7 @@ export function $$O2(e) {
         selectedView: "recentsAndSharing" === M.view ? M.tab || ViewTypeEnum.RECENTLY_VIEWED : M.view,
         viewMode: "grid"
       });
-      i(kg({
+      i(trackNavTreeClicked({
         clickedResourceType: "team",
         resourceIdOrKey: e.team.id
       }));

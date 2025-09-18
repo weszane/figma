@@ -1,2 +1,16 @@
-export var $$n0 = (e => (e.INIT = "INIT", e.LOADING = "LOADING", e.SUCCESS = "SUCCESS", e.FAILURE = "FAILURE", e))($$n0 || {});
-export const r = $$n0;
+/**
+ * Enum representing the possible states.
+ * Original variable: $$n0
+ */
+export enum APILoadingStatus {
+  INIT = 'INIT',
+  LOADING = 'LOADING',
+  SUCCESS = 'SUCCESS',
+  FAILURE = 'FAILURE',
+}
+
+/**
+ * Exported alias for Status enum.
+ * Original export: r
+ */
+export const r = APILoadingStatus

@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 export function $$s2() {
-  let e = p8("pagesList");
+  let e = useAppModelProperty("pagesList");
   return e.some(t => t.pageType !== e[0].pageType);
 }
 export function $$l0() {

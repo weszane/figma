@@ -3,11 +3,11 @@ import { useMemo, useContext } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { oW } from "../905/675859";
-import { F } from "../905/989956";
-import { DP } from "../905/640017";
+import { colorCSSManipulatorInstance } from "../905/989956";
+import { getVisibleTheme } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
-import { uW, pw } from "../905/187165";
+import { ThemeContext, getThemeBorderStyle } from "../905/187165";
 import { KindEnum } from "../905/129884";
 import { M } from "../905/771870";
 import { L } from "../905/332753";
@@ -26,10 +26,10 @@ export function $$y0({
   let I = useMemo(() => "string" == typeof s ? void 0 : s.name.split("/").pop(), [s]);
   let E = "no-padding" === b ? 0 : "compact" === b ? 4 : A;
   let x = useMemo(() => "string" == typeof s ? null : getAssetBackgroundColor(s, null), [s]);
-  let S = useMemo(() => x ? F.format(x) : void 0, [x]);
-  let w = useContext(uW);
-  let C = DP();
-  let T = useMemo(() => !!x && !!pw(w, x, C), [w, x, C]);
+  let S = useMemo(() => x ? colorCSSManipulatorInstance.format(x) : void 0, [x]);
+  let w = useContext(ThemeContext);
+  let C = getVisibleTheme();
+  let T = useMemo(() => !!x && !!getThemeBorderStyle(w, x, C), [w, x, C]);
   let k = "string" == typeof s ? jsx(oW, {
     src: s,
     className: "asset_panel_preview--img--bo9vu",

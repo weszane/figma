@@ -14,7 +14,7 @@ import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { selectWithShallowEqual } from "../905/103090";
 import { getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode, clearSelection, replaceSelection, getEnabledDevModePropertiesPanelTabs, getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
-import { Fk, $y, wA as _$$wA, Gj } from "../figma_app/167249";
+import { useDeepEqualSceneValue, $y, useStrictDeepEqualSceneValue, useImmediateSceneValue } from "../figma_app/167249";
 import { ec as _$$ec, Te } from "../figma_app/29089";
 import { uQ as _$$uQ, NM, Zl, Tv } from "../figma_app/311375";
 import { OM, uL as _$$uL } from "../figma_app/422471";
@@ -56,7 +56,7 @@ import { customHistory } from "../905/612521";
 import { VisualBellActions } from "../905/302958";
 import { w as _$$w } from "../905/281010";
 import { n as _$$n } from "../3674/214307";
-import { i$ as _$$i$ } from "../905/15667";
+import { DevModeUI } from "../905/15667";
 import { getThemeContextOrDefault } from "../905/158740";
 import eN from "classnames";
 import { Wi, JR, Qp } from "../figma_app/162641";
@@ -88,7 +88,7 @@ import { x$, W3, iV as _$$iV, Rh, Me, PE } from "../figma_app/887579";
 import { lC as _$$lC, u3 as _$$u3, kN, m5, Jo } from "../figma_app/152690";
 import { wG, B3 } from "../905/331989";
 import { n2 as _$$n4, pm as _$$pm } from "../figma_app/137317";
-import { DP as _$$DP, am as _$$am } from "../905/640017";
+import { getVisibleTheme, getThemePreference } from "../905/640017";
 import { y as _$$y } from "../9410/598921";
 import { _p, Cm, lN as _$$lN, sD as _$$sD } from "../figma_app/826998";
 import { v2 } from "../1528/88743";
@@ -132,11 +132,11 @@ import { D as _$$D2 } from "../905/12032";
 import { qZ, px as _$$px } from "../905/201014";
 import { T as _$$T, q as _$$q } from "../figma_app/590592";
 import { L3 } from "../figma_app/701001";
-import { aV as _$$aV, eY as _$$eY, q0, KH, p8 as _$$p3 } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, SceneGraphContext, useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { I as _$$I2 } from "../figma_app/51637";
 import { S as _$$S, z as _$$z } from "../figma_app/106763";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f2 } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { s2 as _$$s3 } from "../905/851937";
 import { getCurrentGRAtom, handlePluginError } from "../905/753206";
 import { X_ } from "../figma_app/78725";
@@ -193,7 +193,7 @@ import { A as _$$A9 } from "../svg/117783";
 import { A as _$$A0 } from "../svg/8369";
 import { useDebouncedCallback } from "use-debounce";
 import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Um } from "../905/848862";
 import { j as _$$j } from "../905/834956";
 import { A as _$$A10 } from "../svg/957897";
@@ -207,7 +207,7 @@ import { Uy, ei as _$$ei, E1, L as _$$L } from "../figma_app/9054";
 import { parsePxNumber } from "../figma_app/783094";
 import { A as _$$A12 } from "../905/920142";
 import { V as _$$V } from "../905/506207";
-import { F as _$$F2 } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
 import { yh } from "../9410/974031";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
@@ -270,13 +270,13 @@ import { Me as _$$Me } from "../figma_app/617427";
 import { Qd } from "../figma_app/570310";
 import { IO, CU, c6 as _$$c5 } from "../figma_app/659187";
 import { vq } from "../905/8732";
-import { AF, Sh } from "../figma_app/889655";
+import { selectSingleSelectedNode, selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { registerModal } from "../905/102752";
 import { Yi, k4, O2, xb as _$$xb } from "../figma_app/164212";
 import { BK } from "../figma_app/545190";
 import { oD as _$$oD, d8 as _$$d6 } from "../1528/85853";
 import { E as _$$E6 } from "../905/235326";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { hideModalHandler, showModalHandler, hideModal } from "../905/156213";
 import { b as _$$b5 } from "../905/217163";
 import { bj } from "../905/420347";
@@ -325,7 +325,7 @@ import { U as _$$U3 } from "../1528/28142";
 import { vY, O5, q1, rI as _$$rI } from "../figma_app/955484";
 import { KAq, tUy, LDP, Rv9, WPY, YI7, Qhc } from "../figma_app/27776";
 import { d as _$$d7 } from "../9410/441456";
-import { hA as _$$hA, l7 as _$$l2, ZO, X0 } from "../figma_app/88239";
+import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser, useHasReadyNodesWithParentOrg } from "../figma_app/88239";
 import { RE, Pz } from "../0c62c2fd/214758";
 import { A as _$$A17 } from "../6828/85206";
 import { t as _$$t5 } from "../905/150656";
@@ -433,7 +433,7 @@ import { $k, As } from "../figma_app/802241";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
 import { getInitialDynamicConfig } from "../figma_app/594947";
 import { userCreatedAtAtom } from "../figma_app/864723";
-import { pT as _$$pT } from "../figma_app/297957";
+import { useDtMcpCalloutExperiment } from "../figma_app/297957";
 import { V as _$$V2 } from "../469e6e40/782251";
 import { VERSION_HISTORY_SET_ACTIVE } from "../905/784363";
 import { m as _$$m3 } from "../905/99004";
@@ -491,7 +491,7 @@ import { KG } from "../figma_app/98483";
 import { N as _$$N4 } from "../figma_app/673778";
 import { hF as _$$hF, QK } from "../figma_app/100987";
 import { TP, TQ } from "../1250/224366";
-import { _o, wz } from "../figma_app/879363";
+import { atomH1, atomM4 } from "../figma_app/879363";
 function b({
   doReport: e
 }) {
@@ -504,7 +504,7 @@ function b({
     isNodeSelected: Object.keys(e.mirror.sceneGraphSelection).length > 0
   }));
   let o = _$$uQ();
-  let l = Fk((e, t) => e?.get(t ?? "")?.isTopLevelFrame(), o);
+  let l = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.isTopLevelFrame(), o);
   _$$h(() => {
     let t = globalPerfTimer.tryStop("switch_to_inspect_mode.right_panel_tti");
     e && t && trackEventAnalytics("switch_to_inspect_mode.right_panel_tti", {
@@ -676,7 +676,7 @@ function em() {
     primaryButtonProps,
     secondaryButtonProps
   } = BC({
-    entryPoint: _$$i$.BlockingModal
+    entryPoint: DevModeUI.BlockingModal
   });
   let n = !_$$n();
   let i = jsxs("div", {
@@ -1609,7 +1609,7 @@ let t8 = {
   }
 };
 function t6() {
-  let e = "dark" === _$$DP() ? "dark" : "light";
+  let e = "dark" === getVisibleTheme() ? "dark" : "light";
   let t = "ui3" === getThemeContextOrDefault().version;
   return jsxs("div", {
     className: ek()("right_panel--drillDownContainer--FTkvu", Lp, Ph),
@@ -2798,7 +2798,7 @@ function n$(e) {
 function a_() {
   let e = useAtomWithSubscription(mp);
   let t = isDevHandoffEditorType();
-  let n = _$$aV();
+  let n = useIsProgressBarHiddenOrLocked();
   let {
     uniqueId,
     show,
@@ -3382,7 +3382,7 @@ function iO() {
           variant: "primary",
           onClick: () => {
             t("vscode.install_extension_clicked");
-            e(RK({
+            e(setupHyperlinkHandler({
               rawInput: "https://marketplace.visualstudio.com/items?itemName=figma.figma-vscode-extension"
             }));
           },
@@ -3413,14 +3413,14 @@ function iM({}) {
   let r = [{
     displayText: getI18nString("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_slack"),
     callback: () => {
-      e(RK({
+      e(setupHyperlinkHandler({
         rawInput: "https://figma.slack.com/apps/A01N2QYSA81-figma-and-figjam?tab=more_info"
       }));
     }
   }, {
     displayText: getI18nString("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_teams"),
     callback: () => {
-      e(RK({
+      e(setupHyperlinkHandler({
         rawInput: "https://appsource.microsoft.com/en-us/product/office/WA200004521?exp=ubp8"
       }));
     }
@@ -3457,7 +3457,7 @@ function iM({}) {
 }
 function iF() {
   let e = useDispatch();
-  let t = _$$am();
+  let t = getThemePreference();
   let n = [{
     theme: "system",
     title: getI18nString("fullscreen_actions.theme.system_theme"),
@@ -4940,7 +4940,7 @@ function o8({
 }) {
   let c = useDispatch();
   let u = !_$$G(t.linkUrl);
-  let p = _$$eY();
+  let p = useSceneGraphSelector();
   let h = Nf() ?? "";
   let f = p.get(h);
   let g = t.isInherited || t.isVariant;
@@ -5113,7 +5113,7 @@ function o8({
     z4.getIsExtension() && openRelatedLink(t.linkUrl);
   }, [h, f?.type, x, t, F, k, c]);
   let G = () => {
-    handleUrlAction(t.linkUrl) || c(RK({
+    handleUrlAction(t.linkUrl) || c(setupHyperlinkHandler({
       rawInput: t.linkUrl
     }));
     x("Dev Handoff Related Links Open Hyperlink", {
@@ -5248,7 +5248,7 @@ function lk({
   let c = !!d && d !== n;
   let u = useMemo(() => !!e && SceneGraphHelpers.nodeIsSoftDeleted(e.guid), [e]);
   let p = useCallback(() => {
-    e && (c ? !!s.data?.link && s.data?.type !== "community" && t(V3({
+    e && (c ? !!s.data?.link && s.data?.type !== "community" && t(openUrlInContext({
       url: s.data.link
     })) : (t(hideModalHandler()), Fullscreen.goToSymbolOrStateGroupById(e.guid, !1)));
   }, [e, t, c, s.data]);
@@ -5284,7 +5284,7 @@ let lD = memo(({
     e && atomStoreManager.set(figmaItemsAtom, [e]);
   }, [e]);
   let s = useDispatch();
-  let d = useSelector(AF);
+  let d = useSelector(selectSingleSelectedNode);
   let u = wS();
   let f = "loaded" === u.status && "temp-scene" === u.result.dataLocation ? u.result : void 0;
   let g = _$$oD();
@@ -5300,7 +5300,7 @@ let lD = memo(({
     }
   });
   let _ = useMemo(() => new ReduxSceneGraph(f ? FileSourceType.DETACHED_COMPONENTS : FileSourceType.PLAYGROUND), [f]);
-  let v = _$$eY();
+  let v = useSceneGraphSelector();
   let y = useMemo(() => {
     if (!g) return "";
     if ("loaded" === u.status) return u.result.isVariant ? u.result.dataStateGroupId ?? u.result.dataComponentId : u.result.dataComponentId;
@@ -5471,7 +5471,7 @@ let lD = memo(({
                   children: renderI18nText("design_systems.playground.banner_content")
                 })
               }), jsxs(_$$P2, {
-                children: [jsxs(q0.Provider, {
+                children: [jsxs(SceneGraphContext.Provider, {
                   value: _,
                   children: [jsx("div", {
                     className: "playground_modal--propsSectionContainer--3xF-J",
@@ -5712,7 +5712,7 @@ function lJ(e) {
   });
 }
 function lQ() {
-  let e = useSelector(Sh);
+  let e = useSelector(selectSceneGraphSelectionKeys);
   let t = useMemo(_$$z3, []);
   let {
     consumedVariable
@@ -5821,7 +5821,7 @@ function l8({
   let [d, c] = useState("");
   let [u, p] = useState(!1);
   let h = useCallback(e => c(e.target.value), []);
-  let f = _$$eY();
+  let f = useSceneGraphSelector();
   let g = Nf() ?? "";
   let x = f.get(g);
   let m = useCurrentFileKey();
@@ -5991,7 +5991,7 @@ let sd = registerModal(function (e) {
   let t = e.linkId;
   let n = Nf() ?? "";
   let i = useCurrentFileKey();
-  let l = _$$eY().get(n);
+  let l = useSceneGraphSelector().get(n);
   let s = useDispatch();
   let r = async () => {
     if (!i || !n) return;
@@ -6042,7 +6042,7 @@ let sf = registerModal(function ({
   let [f, g] = useState(!1);
   let x = Nf() ?? "";
   let m = useCurrentFileKey();
-  let _ = _$$eY().get(x);
+  let _ = useSceneGraphSelector().get(x);
   let v = useDispatch();
   let y = useCallback(e => h(e.target.value), []);
   let b = useCallback(e => c(e.target.value), []);
@@ -6221,7 +6221,7 @@ function sx({
 let sm = atom(!1);
 function s_() {
   let e = Nf() ?? "";
-  let t = _$$eY();
+  let t = useSceneGraphSelector();
   let n = _$$lU();
   let a = useSelector(e => e.mirror.appModel.currentPage);
   let l = t.get(n ?? a);
@@ -6301,7 +6301,7 @@ function sy({
   let n = useDispatch();
   let s = Nf() ?? "";
   let d = useSourceFileKey() ?? "";
-  let u = _$$eY();
+  let u = useSceneGraphSelector();
   let p = _$$lU();
   let h = useSelector(e => e.mirror.appModel.currentPage);
   let f = u.get(p ?? h);
@@ -6537,7 +6537,7 @@ function sO() {
   let r = _$$uQ();
   let d = function () {
     let e = RI();
-    let t = Fk((e, t, n) => {
+    let t = useDeepEqualSceneValue((e, t, n) => {
       if (!t || n) return null;
       let a = e?.get(t);
       return a?.sourceLibraryKey;
@@ -6669,7 +6669,7 @@ function s1({
   let p = _$$dU(e, "cc_versions");
   let h = xY("cc_dropdown_detached_component");
   let f = _$$uQ();
-  let g = Fk((e, t) => e?.get(t ?? "")?.type === "INSTANCE", f);
+  let g = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "INSTANCE", f);
   let x = kl("overrides");
   let m = x && !isInvalidValue(x) ? x.instanceGuid : null;
   let v = Xn(m);
@@ -6793,7 +6793,7 @@ function s2() {
 function s5() {
   let e = wS();
   let t = _$$uQ();
-  let n = Fk((e, t) => {
+  let n = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.type === "SYMBOL" || n?.type === "INSTANCE";
   }, t);
@@ -6802,7 +6802,7 @@ function s5() {
 function s3() {
   let e = selectCurrentFile();
   let t = _$$uQ();
-  let n = Fk((e, t) => {
+  let n = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.type === "SYMBOL" || n?.isStateGroup;
   }, t);
@@ -6858,7 +6858,7 @@ function s3() {
 function s4({
   id: e
 }) {
-  let t = _$$eY().get(e);
+  let t = useSceneGraphSelector().get(e);
   return jsxs("div", {
     className: ek()(tM, "header--list--gkgwc"),
     children: [jsx(Bf, {
@@ -7027,7 +7027,7 @@ function s9({
       isVariant,
       booleanOperation,
       resizeToFit
-    } = Fk((e, t) => {
+    } = useDeepEqualSceneValue((e, t) => {
       let n = e?.get(t ?? "");
       return n ? {
         type: GI(n) ? "STAMP" : n.type,
@@ -7108,7 +7108,7 @@ function s9({
     isReadyForDev,
     isCompleted,
     isSymbol
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return {
       isReadyForDev: n?.hasReadyStatus,
@@ -7157,7 +7157,7 @@ function re() {
   let {
     name,
     showNameAsQuotedText
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     let a = n?.isState ? n?.parentNode : null;
     return {
@@ -7192,7 +7192,7 @@ function re() {
 function rt() {
   let e = _$$uQ();
   let t = _$$dh();
-  let n = Fk((e, t) => e.get(t)?.name?.trim(), t);
+  let n = useDeepEqualSceneValue((e, t) => e.get(t)?.name?.trim(), t);
   let i = Cj(n);
   if (e) return null;
   let o = n || getI18nString("inspect_panel.node_type.page");
@@ -7229,7 +7229,7 @@ function rn() {
 }
 function ra() {
   let e = _$$uQ();
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.hyperlink && "mixed" !== n.hyperlink && n?.hyperlink?.type === "URL" ? n.hyperlink.value : void 0;
   }, e);
@@ -7337,7 +7337,7 @@ function rf({
   hideHeader: s = !1
 }) {
   let d = useDispatch();
-  let c = _$$eY();
+  let c = useSceneGraphSelector();
   let u = _$$uQ();
   let p = NM();
   let h = e || t;
@@ -7355,7 +7355,7 @@ function rf({
   let b = useCallback((e, t) => m(n => n.includes(t) ? n.filter(e => e !== t) : e.altKey ? [...n, t, ...ru(c, t, rp)] : [...n, t]), [c, m]);
   let j = useCallback(e => x.includes(e), [x]);
   let w = function (e, t) {
-    let n = _$$eY();
+    let n = useSceneGraphSelector();
     return useMemo(() => {
       let a = [];
       if (t) {
@@ -7389,7 +7389,7 @@ function rf({
       }
     }));
   }, [d, v]);
-  let k = KH();
+  let k = useSceneGraphSelection();
   let A = useMemo(() => {
     let t = s ? [] : ["header"];
     return f || e || p ? [...t, ...function e(t, n, a, i, o, s, r, d) {
@@ -7524,7 +7524,7 @@ function rN(e) {
     hideSectionIcon
   } = e;
   let p = getObservableOrFallback(UK().showGuids);
-  let h = Fk((e, t) => {
+  let h = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? {
       guid: n.guid,
@@ -7759,8 +7759,8 @@ function rI({
     } = selectWithShallowEqual(e => ({
       currentPage: e.mirror.appModel.currentPage
     }));
-    let t = Fk((e, t) => e.get(t)?.backgroundColor, currentPage);
-    return t ? _$$F2.format(t) : "var(--color-bg)";
+    let t = useDeepEqualSceneValue((e, t) => e.get(t)?.backgroundColor, currentPage);
+    return t ? colorCSSManipulatorInstance.format(t) : "var(--color-bg)";
   }();
   let [p, h] = useState(!0);
   let f = useMemo(() => Math.min(e.length * ry, 400) + 7, [e.length]);
@@ -7920,7 +7920,7 @@ function rE() {
   }) : null;
 }
 function rC() {
-  let e = _$$p3("isSceneReadOnly");
+  let e = useAppModelProperty("isSceneReadOnly");
   let t = _$$s4();
   return e ? jsxs("div", {
     className: sQ,
@@ -7963,7 +7963,7 @@ function rS(e, t) {
     let e = t ? HandoffBindingsCpp.getInReadySectionTopLevelNodeId(t) : null;
     return e && e !== defaultSessionLocalIDString ? e : null;
   }, [t]);
-  let a = Fk((e, t, n) => {
+  let a = useDeepEqualSceneValue((e, t, n) => {
     let a = null;
     if (n ? a = n : t === defaultSessionLocalIDString || HandoffBindingsCpp.isNodePanelSection(t) || (a = t), a) {
       let t = e.get(a);
@@ -7971,7 +7971,7 @@ function rS(e, t) {
     }
     return a;
   }, e, n);
-  let o = _$$hA();
+  let o = useDevModeFocusId();
   return o ? {
     inspectableRootNodeId: o,
     inReadySectionTopLevelNodeId: null
@@ -8013,8 +8013,8 @@ function rP({
 }
 let rL = memo(() => {
   let e = getObservableOrFallback(AppStateTsApi.devHandoffState().currentNodeId);
-  let t = _$$l2();
-  let n = !!_$$hA() && !t;
+  let t = useIsFullscreenOverview();
+  let n = !!useDevModeFocusId() && !t;
   let {
     inspectableRootNodeId,
     didSelectRow
@@ -8179,8 +8179,8 @@ function rY({
 }) {
   let t = getObservableOrFallback(UK().renderRulers);
   let n = useCanAccessFullDevMode();
-  let i = _$$l2();
-  let o = !!_$$hA() && n;
+  let i = useIsFullscreenOverview();
+  let o = !!useDevModeFocusId() && n;
   return t || i || o ? null : jsx("div", {
     className: ek()("panel_background_gradient--gradient--xXM2u", {
       "panel_background_gradient--left--MwVhL": "left" === e,
@@ -8354,7 +8354,7 @@ function de(e) {
   let n = _$$lz();
   let [l, d] = useAtomValueAndSetter(XI);
   let c = getObservableOrFallback(UK().renderRulers);
-  let u = !!_$$hA();
+  let u = !!useDevModeFocusId();
   let p = _$$T();
   let h = _$$q() && !u;
   let {
@@ -8717,9 +8717,9 @@ function dL(e) {
   }, [e, t]);
 }
 function dR() {
-  let e = _$$hA();
+  let e = useDevModeFocusId();
   let t = m5(!1, Jo.FOCUS_NODE);
-  let n = _$$wA((e, t) => {
+  let n = useStrictDeepEqualSceneValue((e, t) => {
     let n = e?.get(t);
     if (!n || n.isSection || n.isStateGroup) return !1;
     let a = n.stackHorizontalLayoutSize !== LayoutSizingMode.HUG_CONTENT;
@@ -8946,7 +8946,7 @@ function d9({
   let u = useDispatch();
   let p = trackFileEventWithStore();
   let h = Ak((t ?? 0) * 1e3);
-  let f = _$$hA();
+  let f = useDevModeFocusId();
   return jsx(jP, {
     dispatch: u,
     displayText: jsxs("div", {
@@ -8992,7 +8992,7 @@ function d9({
   });
 }
 function ct() {
-  let e = _$$hA();
+  let e = useDevModeFocusId();
   let t = Os(e ?? "");
   let n = jh(e ?? void 0);
   let i = d7();
@@ -9073,7 +9073,7 @@ function ca({
   let m = trackFileEventWithStore();
   let _ = g && s || f === h.activeId;
   let v = function (e, t, n) {
-    let a = _$$hA();
+    let a = useDevModeFocusId();
     let s = useDispatch();
     let r = getSelectedView();
     let d = d4();
@@ -9695,7 +9695,7 @@ function ue({
 function ut({
   assetInfo: e
 }) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let n = e.get(t);
     return n ? N9(n?.fills)?.filter(e => e.opacity > 0 && e.visible) : null;
@@ -9969,7 +9969,7 @@ function uc({
   let h = Um();
   let f = Xo();
   let g = selectCurrentFile();
-  let x = _$$p3("currentSelectedProperty");
+  let x = useAppModelProperty("currentSelectedProperty");
   let m = s?.[e];
   let _ = useCallback(t => {
     d({
@@ -10458,7 +10458,7 @@ function uP() {
   let g = useRef(null);
   let x = function () {
     let e = _$$uQ();
-    return Fk((e, t) => {
+    return useDeepEqualSceneValue((e, t) => {
       let n = e?.get(t ?? "");
       return n?.type === "TEXT";
     }, e);
@@ -10575,7 +10575,7 @@ function uH({
   localCodeLanguage: o
 }) {
   let s = function (e) {
-    let t = _$$DP();
+    let t = getVisibleTheme();
     let n = _$$rL() - 32;
     let [a, o] = useState({
       ...uJ,
@@ -10584,7 +10584,7 @@ function uH({
     let {
       family,
       style
-    } = Fk(t => {
+    } = useDeepEqualSceneValue(t => {
       let n = t.get(e);
       let {
         family: _family,
@@ -10663,7 +10663,7 @@ function uH({
   let {
     fontName,
     inheritedTextStyle
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return {
       fontName: n?.fontName,
@@ -10698,7 +10698,7 @@ function uW({
   let {
     styleName,
     styleDescription
-  } = _$$wA((e, t) => {
+  } = useStrictDeepEqualSceneValue((e, t) => {
     if (!t || 0 === t.length) return {};
     let n = t[0];
     if (!n) return {};
@@ -10880,7 +10880,7 @@ function uQ({
 }) {
   return !function () {
     let e = _$$uQ();
-    return Fk((e, t) => e?.get(t ?? "")?.type === "TEXT", e);
+    return useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "TEXT", e);
   }() ? jsx(tr, {
     fillContainer: e
   }) : jsx(uV, {
@@ -10889,7 +10889,7 @@ function uQ({
 }
 let u8 = userFlagExistsAtomFamily("dev_mode_mcp_has_seen_mcp_enable_button_callout");
 function u6() {
-  let e = _$$pT();
+  let e = useDtMcpCalloutExperiment();
   let t = useAtomWithSubscription(u8);
   let {
     show,
@@ -11114,8 +11114,8 @@ function pc() {
   }) : null;
 }
 function pu() {
-  let e = _$$f2("dev_mode_mcp_has_dismissed_client_setup_banner");
-  let t = _$$f2("dev_mode_mcp_has_used_a_tool");
+  let e = selectUserFlag("dev_mode_mcp_has_dismissed_client_setup_banner");
+  let t = selectUserFlag("dev_mode_mcp_has_used_a_tool");
   let n = useDispatch();
   return e || t ? null : jsx("div", {
     className: pt,
@@ -11331,12 +11331,12 @@ function pj(e) {
   let n = isSingleSceneGraphSelectionInDevHandoff();
   let o = _$$ro();
   let l = _$$uQ();
-  let d = Fk((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
+  let d = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
   let c = NM();
   let u = _$$sQ();
   let p = Um();
   let h = useRef(null);
-  let f = _$$eY();
+  let f = useSceneGraphSelector();
   let g = z4.getIsExtension();
   let x = useAtomWithSubscription(be);
   let m = mr(l ?? "", f);
@@ -11420,7 +11420,7 @@ function pk({
   version: e
 }) {
   let t = useDispatch();
-  let n = _$$hA();
+  let n = useDevModeFocusId();
   let i = function (e, t) {
     if (!t.dev_mode_activity || 0 === t.dev_mode_activity.length) return;
     let n = e ? t.dev_mode_activity.find(t => t.node_id === e) : t.dev_mode_activity[0];
@@ -11474,7 +11474,7 @@ function pA({
   let i = selectCurrentFile();
   let s = i?.canEdit;
   let r = useDispatch();
-  let d = _$$hA();
+  let d = useDevModeFocusId();
   let c = d6();
   let u = d4();
   let p = t ? e[0] : e.find(e => e.id === activeId);
@@ -11541,7 +11541,7 @@ let pL = memo(function () {
   let [i, s] = _$$t5.useTabs({
     comment: !0
   });
-  let r = _$$hA();
+  let r = useDevModeFocusId();
   let d = useDispatch();
   let c = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
   let p = new Set(getEnabledDevModePropertiesPanelTabs().map(e => r5[e]).filter(e => null != e));
@@ -11678,7 +11678,7 @@ function pV({
   let t = useDispatch();
   let [n, i, l] = pF();
   let s = Um();
-  let r = _$$eY().get(e);
+  let r = useSceneGraphSelector().get(e);
   if (!r) return null;
   let d = s?.type === pO;
   let c = "INSTANCE" === r.type || "SYMBOL" === r.type;
@@ -11709,7 +11709,7 @@ function pV({
 function pH({
   nodeID: e
 }) {
-  let t = _$$eY().get(e);
+  let t = useSceneGraphSelector().get(e);
   return t ? jsx("button", {
     title: t.name,
     className: "dev_handoff_breadcrumbs--pathElement--AKgt0",
@@ -11726,7 +11726,7 @@ function pW({
   let [n, i, l] = pF();
   let s = Um();
   let r = s?.type === pM;
-  let d = _$$eY();
+  let d = useSceneGraphSelector();
   let c = e.map(d.get).filter(isNotNullish);
   let u = c.map(e => ({
     displayText: e.name,
@@ -11774,7 +11774,7 @@ let pG = memo(() => {
     selectedNodeID: Object.keys(e.mirror.sceneGraphSelection)[0]
   }));
   let t = getObservableOrFallback(AppStateTsApi.devHandoffState().currentNodeId);
-  let n = Gj((e, t, n) => {
+  let n = useImmediateSceneValue((e, t, n) => {
     let a = e.get(t);
     return a ? function (e) {
       return e.length <= 4 ? e : [e[0], e.slice(1, -2), e[e.length - 2], e[e.length - 1]];
@@ -11819,7 +11819,7 @@ function p0() {
     toggleDropdown,
     dropdownTargetRef
   } = _$$B3("DEV_HANDOFF_INDEX_VIEW_ZOOM_DROPDOWN");
-  let i = _$$hA();
+  let i = useDevModeFocusId();
   let o = _$$Zr("zoom-out");
   let r = _$$Zr("zoom-in");
   let d = Math.round(100 * getObservableOrFallback(_$$d0().activeCanvasCurrentZoom)).toString();
@@ -12043,7 +12043,7 @@ function hu({
     name,
     description,
     isDeleted
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     if (!t) return {};
     let n = e.get(t);
     return n ? {
@@ -12193,7 +12193,7 @@ function hf({
   }) : null;
 }
 function hg(e) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     if (n && n.isAlive) return n.fills;
   }, e);
@@ -12227,7 +12227,7 @@ function hx({
 function hm({
   guid: e
 }) {
-  let t = Fk((e, t) => {
+  let t = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     if (n && n.isAlive) return n.effects.reverse();
   }, e);
@@ -12253,7 +12253,7 @@ function h_({
   let {
     isNodeInvalid,
     variableConsumptionMap
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n && n.isAlive ? {
       isNodeInvalid: !1,
@@ -12518,7 +12518,7 @@ function hV({
   let [d, c] = useAtomValueAndSetter(sg);
   let u = trackFileEventWithStore();
   let p = Nf() ?? "";
-  let h = _$$eY().get(p);
+  let h = useSceneGraphSelector().get(p);
   let f = document.getElementById("dev-handoff-inspect-panel");
   let g = n?.type === hC;
   return jsxs(Fragment, {
@@ -12756,7 +12756,7 @@ let h6 = "floating_layers_panel--layerName--LBYru";
 function h9() {
   let e = getObservableOrFallback(UK().showGuids);
   let t = Tv();
-  let n = Gj((e, t) => t && e.get(t), t[0] || null);
+  let n = useImmediateSceneValue((e, t) => t && e.get(t), t[0] || null);
   let d = !!n && ["SYMBOL", "INSTANCE"].includes(n.type);
   let {
     inspectableRootNodeId,
@@ -12827,13 +12827,13 @@ let fs = memo(function (e) {
     let {
       Sprig
     } = useSprigWithSampling();
-    let a = _$$eY();
+    let a = useSceneGraphSelector();
     let {
       pxValue,
       hasHug: _hasHug,
       isSection: _isSection,
       isComponentSet: _isComponentSet
-    } = _$$wA((e, t, n) => {
+    } = useStrictDeepEqualSceneValue((e, t, n) => {
       let a = e.get(t);
       return a ? {
         pxValue: "width" === n ? a.size.x : a?.size.y,
@@ -12875,7 +12875,7 @@ let fs = memo(function (e) {
       isSection: _isSection,
       isComponentSet: _isComponentSet
     };
-  }(_$$hA(), e.dimension);
+  }(useDevModeFocusId(), e.dimension);
   let c = KG({
     key: e.dimension,
     setValue
@@ -12918,8 +12918,8 @@ function fp() {
     }, [t, Sprig]);
   }();
   let e = trackDefinedFileEventWithStore();
-  let t = _$$hA();
-  let n = Fk((e, t) => {
+  let t = useDevModeFocusId();
+  let n = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n?.isSection;
   }, t);
@@ -13005,7 +13005,7 @@ function fh() {
   } = _$$B3("FOCUS_MODE_NAME_DROPDOWN");
   let r = selectCurrentFile();
   let d = _$$uQ();
-  let c = _$$hA();
+  let c = useDevModeFocusId();
   let u = getSelectedView();
   let p = isFullscreenDevHandoffView(u) ? u.focusViewBackNavigation : void 0;
   let h = TP(p?.toEditorType);
@@ -13059,26 +13059,26 @@ function fh() {
 function ff() {
   let e = useDispatch();
   let t = UX();
-  let n = _$$hA();
+  let n = useDevModeFocusId();
   let {
     isSection,
     focusNodeName
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return {
       isSection: n?.isSection,
       focusNodeName: n?.name
     };
   }, n);
-  let c = Fk(e => e.getCurrentPage()?.name);
+  let c = useDeepEqualSceneValue(e => e.getCurrentPage()?.name);
   let u = useCurrentFileKey();
   let p = useSelector(e => e.versionHistory);
   let h = QV();
   let f = trackFileEventWithStore();
   let x = _$$U("focus_view_back");
   let v = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
-  let [, y] = useAtomValueAndSetter(_o);
-  let [b] = useAtomValueAndSetter(wz);
+  let [, y] = useAtomValueAndSetter(atomH1);
+  let [b] = useAtomValueAndSetter(atomM4);
   let j = useCanUseDevModeDemoFile();
   let N = useSelector(e => isFullscreenDevHandoffView(e.selectedView) ? {
     ...e.selectedView,
@@ -13180,7 +13180,7 @@ function ff() {
 }
 export function $$fg0() {
   let e = useCanAccessFullDevMode();
-  let t = _$$aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let n = useSelector(e => e.mirror.appModel.showUi);
   let s = selectCurrentUser();
   let d = useDispatch();
@@ -13225,13 +13225,13 @@ function fx() {
   return null;
 }
 export function $$fm1() {
-  let e = _$$l2();
-  let t = ZO();
+  let e = useIsFullscreenOverview();
+  let t = useIsFullscreenDevModeComponentBrowser();
   let n = _$$e2();
-  let i = _$$hA();
+  let i = useDevModeFocusId();
   let o = useCanAccessFullDevMode();
   let l = _$$T();
-  let s = X0();
+  let s = useHasReadyNodesWithParentOrg();
   let r = Ye();
   let [d, c] = _$$b2();
   return i || !o && !e || t ? null : jsxs("div", {
@@ -13251,9 +13251,9 @@ export function $$fm1() {
 let f_ = memo(function () {
   useEffect(() => _$$K5, []);
   let e = useMemo(() => z4.getIsExtension(), []);
-  let t = _$$l2();
+  let t = useIsFullscreenOverview();
   let n = _$$e2();
-  let l = !!_$$hA() && !t && !n;
+  let l = !!useDevModeFocusId() && !t && !n;
   let r = useCanUseDevModeDemoFile();
   _$$uj();
   vy();
@@ -13263,7 +13263,7 @@ let f_ = memo(function () {
   _$$W4(1700);
   !function () {
     let e = useHasParentOrgId();
-    let t = _$$f2("dev_mode_notified_of_approved_org_request");
+    let t = selectUserFlag("dev_mode_notified_of_approved_org_request");
     let n = useDispatch();
     useEffect(() => {
       e && !t && n(postUserFlag({

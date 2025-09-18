@@ -7,13 +7,13 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { Ye, N_ } from "../905/332483";
-import { Zx } from "../figma_app/217457";
+import { viewCollaboratorSet, collaboratorSet } from "../905/332483";
+import { getProductAccessTypeByKey } from "../figma_app/217457";
 import { FBillingPeriodType, FOrganizationLevelType } from "../figma_app/191312";
 import { SeatCountDataForPlan, SeatCountDataForPlanByBillingInterval, LicenseGroupSeatCountsView } from "../figma_app/43951";
-let E = Ye.dict(() => ({
+let E = viewCollaboratorSet.dict(() => ({
   assigned: 0,
   available: 0,
   total: 0
@@ -52,13 +52,13 @@ function b(e) {
   if (!t) throw Error("received no plan while loading seat counts");
   let r = t.availableSeatCountsV2;
   let n = t.assignedSeatCountsV2;
-  return Ye.dict(e => {
+  return viewCollaboratorSet.dict(e => {
     let t = n.find(({
       billableProductKey: t
-    }) => Zx(t) === e);
+    }) => getProductAccessTypeByKey(t) === e);
     let i = r.find(({
       billableProductKey: t
-    }) => Zx(t) === e);
+    }) => getProductAccessTypeByKey(t) === e);
     let a = x(t?.count);
     let s = x(i?.count);
     return {
@@ -99,7 +99,7 @@ export function $$I5(e, t, r) {
 }
 export function $$S0(e, t) {
   let r = {};
-  Ye.forEach(e => {
+  viewCollaboratorSet.forEach(e => {
     r[e] = {
       [FBillingPeriodType.MONTH]: {
         assigned: 0,
@@ -121,13 +121,13 @@ export function $$S0(e, t) {
       r[t][e] = n;
     });
   });
-  Ye.forEach(e => {
+  viewCollaboratorSet.forEach(e => {
     r[e][FBillingPeriodType.MONTH]?.total === 0 ? delete r[e][FBillingPeriodType.MONTH] : r[e][FBillingPeriodType.YEAR]?.total === 0 && delete r[e][FBillingPeriodType.YEAR];
   });
   return r;
 }
 export function $$v4(e) {
-  let t = k();
+  let t = isProrationBillingEnabledForCurrentPlan();
   let r = e && t;
   let a = r ? {
     planParentId: e.teamId,
@@ -136,12 +136,12 @@ export function $$v4(e) {
   let o = useSubscription(SeatCountDataForPlanByBillingInterval(a));
   return useMemo(() => t ? r ? o.transform(e => {
     let t = {
-      [FBillingPeriodType.MONTH]: N_.dict(() => ({
+      [FBillingPeriodType.MONTH]: collaboratorSet.dict(() => ({
         available: 0,
         assigned: 0,
         total: 0
       })),
-      [FBillingPeriodType.YEAR]: N_.dict(() => ({
+      [FBillingPeriodType.YEAR]: collaboratorSet.dict(() => ({
         available: 0,
         assigned: 0,
         total: 0
@@ -153,8 +153,8 @@ export function $$v4(e) {
         billingInterval: n,
         count: a
       }) => {
-        let s = Zx(e);
-        if (N_.has(s) && n && isNotNullish(t[n][s])) {
+        let s = getProductAccessTypeByKey(e);
+        if (collaboratorSet.has(s) && n && isNotNullish(t[n][s])) {
           let e = x(a);
           let i = t[n][s];
           i[r] += e;
@@ -177,11 +177,11 @@ export function $$A2(e) {
       billableProductKey: e,
       count: r
     }) => {
-      let n = Zx(e);
+      let n = getProductAccessTypeByKey(e);
       t[n] ??= 0;
       t[n] += x(r);
     });
-    return Ye.dict(e => {
+    return viewCollaboratorSet.dict(e => {
       let r = t[e] ?? 0;
       return {
         assigned: r,

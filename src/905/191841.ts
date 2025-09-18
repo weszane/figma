@@ -6,7 +6,7 @@ import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { kg } from "../figma_app/976345";
+import { trackNavTreeClicked } from "../figma_app/976345";
 import { RQ } from "../figma_app/544879";
 import { h as _$$h } from "../905/857431";
 import { A as _$$A } from "../905/351112";
@@ -102,7 +102,7 @@ export function $$P0(e) {
       r.stopPropagation();
       return;
     }
-    D(kg({
+    D(trackNavTreeClicked({
       clickedResourceType: "team",
       resourceIdOrKey: n.id
     }));

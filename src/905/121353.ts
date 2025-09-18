@@ -53,7 +53,7 @@ import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
@@ -469,7 +469,7 @@ export function $$em0(e) {
   let p = useSelector(e => e.authedProfilesById);
   let m = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
-  let g = eY();
+  let g = useSceneGraphSelector();
   let f = AC({
     ...e,
     user: o,

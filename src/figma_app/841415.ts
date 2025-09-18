@@ -3,12 +3,12 @@ import { memo, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { x6 } from "../905/403166";
-import { F } from "../905/241044";
+import { renderEmojiShortcodes } from "../905/403166";
+import { sanitizeInput } from "../905/241044";
 import { SecureLink } from "../figma_app/637027";
 import { M } from "../905/649795";
 import { renderI18nText } from "../905/303541";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { getSelectedViewType } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
@@ -27,7 +27,7 @@ let $$S2 = memo(e => {
     text,
     hyperlink
   } = e;
-  let s = useMemo(() => x6(text), [text]);
+  let s = useMemo(() => renderEmojiShortcodes(text), [text]);
   let o = getSelectedViewType();
   let l = useDispatch();
   return jsx(SecureLink, {
@@ -40,7 +40,7 @@ let $$S2 = memo(e => {
     "data-tooltip-unconstrain-width": !0,
     "data-tooltip-url-string": hyperlink,
     onClick: () => {
-      l(RK({
+      l(setupHyperlinkHandler({
         rawInput: $$I3(hyperlink)
       }));
     },
@@ -78,8 +78,8 @@ let A = memo(function (e) {
     profileName,
     profileImgUrl
   } = e;
-  let d = F(handle);
-  let p = F(profileName);
+  let d = sanitizeInput(handle);
+  let p = sanitizeInput(profileName);
   return jsx(SecureLink, {
     "data-tooltip": _$$N,
     "data-tooltip-show-above": !0,
@@ -105,7 +105,7 @@ let x = memo(e => {
     text,
     tokenStyles
   } = e;
-  let a = useMemo(() => x6(text), [text]);
+  let a = useMemo(() => renderEmojiShortcodes(text), [text]);
   let s = tokenStyles?.map(e => "b" === e ? hp : "i" === e ? u5 : "s" === e ? Vc : "lightbold" === e ? XH : void 0) || [];
   return jsx(M, {
     children: jsx("span", {
@@ -126,11 +126,11 @@ let N = memo(e => {
     tokenStyles,
     hyperlink
   } = e;
-  let p = F(text);
+  let p = sanitizeInput(text);
   if (userId) return jsx($$v0, {
     href: `/files${orgPath}/user/${userId}`,
     userId,
-    handle: F(user?.handle) || void 0,
+    handle: sanitizeInput(user?.handle) || void 0,
     imgUrl: user?.img_url
   });
   if (profileId && p) {
@@ -184,7 +184,7 @@ let $$C1 = memo(e => {
       orgPath: r,
       profileId: e.profile_id,
       profiles: a || null,
-      text: F(e.t) || void 0,
+      text: sanitizeInput(e.t) || void 0,
       tokenStyles: e.styles || null,
       user: e.user_annotated,
       userId: e.user_id

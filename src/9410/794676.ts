@@ -5,7 +5,7 @@ import { y as _$$y } from "../905/725962";
 import { getThemeContextOrDefault } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage, localStorageRef } from "../905/657224";
-import { fp } from "../figma_app/347146";
+import { usePreventBrowserKeydown } from "../figma_app/347146";
 import { Tf } from "../905/280919";
 import { ji } from "../figma_app/814196";
 import { ModifierKeyCodes, isExactModifier } from "../905/63728";
@@ -30,7 +30,7 @@ import { Cn, e_ as _$$e_ } from "../figma_app/936061";
 import { y as _$$y2 } from "../905/320282";
 import { wG } from "../figma_app/504823";
 import { detachMultiplayer } from "../905/346794";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { debounce } from "../905/915765";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { $0 } from "../905/944871";
@@ -55,7 +55,7 @@ import { $$, ZN } from "../figma_app/781852";
 import { pB } from "../905/395919";
 import { getSelectedFile } from "../905/766303";
 import { ud } from "../905/862913";
-import { D2 } from "../905/18797";
+import { isLoaded } from "../905/18797";
 import { m0, No } from "../figma_app/141508";
 import { l6, He } from "../figma_app/155728";
 import { M as _$$M } from "../905/540025";
@@ -112,7 +112,7 @@ import { u as _$$u2 } from "../905/14084";
 import { base64ToUint8Array } from "../figma_app/930338";
 import { Yk } from "../figma_app/644079";
 import { ZG } from "../figma_app/840917";
-import { p8, dH } from "../figma_app/722362";
+import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { BI, m0 as _$$m, pt, Ef } from "../figma_app/546509";
 import { Yh } from "../figma_app/357047";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -535,7 +535,7 @@ let t5 = memo(({
   let d = useDispatch();
   let c = useAtomWithSubscription(_$$h2);
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
-  let p = p8("isReadOnly");
+  let p = useAppModelProperty("isReadOnly");
   let h = useCurrentUserOrgId();
   let f = getSelectedEditorType();
   let g = useLatestRef(f);
@@ -650,7 +650,7 @@ export function $$t80({
 }) {
   useEffect(() => {
     getFeatureFlags().datadog_rum_fullscreen ? Tf.enableEventSending({
-      allowResourceTracking: !xK.isColdBoot
+      allowResourceTracking: !fullscreenPerfManager.isColdBoot
     }) : Tf.disableEventSendingUnlessDebugEnabled();
   }, []);
   let i = useDispatch();
@@ -766,7 +766,7 @@ export function $$t80({
     let f = He();
     let g = useSelector(e => e.library.assetsPanelSearch.query);
     let _ = useSelector(e => e.library.assetsPanelSearch.searchOptions);
-    let x = D2(d, yD(o?.key || ""));
+    let x = isLoaded(d, yD(o?.key || ""));
     let y = _$$M();
     useEffect(() => {
       t && YG.sourcesDidChange();
@@ -983,7 +983,7 @@ export function $$t80({
     useEffect(() => {
       i?.updateDLTHeight && i.updateDLTHeight(g);
     }, [g, i]);
-    let _ = dH();
+    let _ = useCurrentTool();
     let x = pK(_);
     let y = Ef();
     let b = useSelector(e => e.mirror?.appModel.isReadOnly);
@@ -1090,7 +1090,7 @@ export function $$t80({
     });
   })();
   a4();
-  fp();
+  usePreventBrowserKeydown();
   (function () {
     let e = useDispatch();
     let [t, i] = Wz("nux_seat_selection_show_confirmation", null);

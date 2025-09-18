@@ -9,7 +9,7 @@ import { A as _$$A } from "../905/920142";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { af } from "../figma_app/559491";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { Yo } from "../figma_app/543529";
 import { V2 } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -216,7 +216,7 @@ export function $$F0() {
     var n;
     if (!p) return;
     if (!T) {
-      _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
+      _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
       return;
     }
     t = getI18nString("whiteboard.inline_menu.relaunching_plugin", {

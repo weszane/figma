@@ -23,15 +23,15 @@ import { sT } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, isValidValue, normalizeValue } from "../905/216495";
 import { kl, lJ, pw, zj } from "../905/275640";
 import { Um } from "../905/848862";
-import { f4 } from "../figma_app/722362";
+import { useOnSelectionChange } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Q as _$$Q } from "../figma_app/104130";
-import { Sh, dK } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys, selectSceneGraph } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { $$, gq, $j, Ht, w2, Zp } from "../figma_app/178475";
 import { Xw } from "../figma_app/201694";
 import { Tv, I9 } from "../figma_app/151869";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { fn, DE, sY } from "../figma_app/811257";
 import { selectWithShallowEqual } from "../905/103090";
@@ -305,8 +305,8 @@ function Q(e) {
   let d = kl("rightRelativeToParent");
   let c = kl("centerRelativeToParent");
   let u = W();
-  let h = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
-  let m = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
+  let h = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().map(e => e.guid));
+  let m = useDeepEqualSceneValue(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
   let g = t => {
     u.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
       fileKey: e.openFileKey,
@@ -1097,8 +1097,8 @@ function eA(e) {
   let d = kl("bottomRelativeToParent");
   let c = kl("leftRelativeToParent");
   let u = W();
-  let h = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
-  let m = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
+  let h = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().map(e => e.guid));
+  let m = useDeepEqualSceneValue(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
   let [g, f] = useState(!1);
   let [y, b] = useState(!1);
   let [S, v] = useState(!1);
@@ -2175,8 +2175,8 @@ function t6(e, t, r) {
 let t7 = [];
 function t9() {
   let e = trackFileEventWithUser();
-  let t = useSelector(Sh);
-  let r = useSelector(dK);
+  let t = useSelector(selectSceneGraphSelectionKeys);
+  let r = useSelector(selectSceneGraph);
   let n = kl("stackMode");
   let s = t.map(e => {
     let t = r.get(e);
@@ -2420,8 +2420,8 @@ function rd(e) {
   let d = t6(Tv(), e.axis, LayoutSizingMode.FILL_CONTAINER);
   let c = useSelector(e => !!e.mirror.selectionProperties.isNonEditableInstanceSublayerSelected);
   let u = trackFileEventWithUser();
-  let h = useSelector(Sh);
-  let m = useSelector(dK);
+  let h = useSelector(selectSceneGraphSelectionKeys);
+  let m = useSelector(selectSceneGraph);
   let g = kl("stackMode");
   let E = h.map(e => {
     let t = m.get(e);
@@ -2893,8 +2893,8 @@ function rF(e) {
   let [i, s] = lJ("stackPositioning");
   let o = trackFileEventWithUser();
   let l = kl("isNonEditableInstanceSublayerSelected");
-  let d = useSelector(Sh);
-  let c = useSelector(dK);
+  let d = useSelector(selectSceneGraphSelectionKeys);
+  let c = useSelector(selectSceneGraph);
   let u = d.map(e => {
     let t = c.get(e);
     return t?.parentGuid;
@@ -3084,7 +3084,7 @@ export let $$r24 = memo(function (e) {
   let _ = t.framePresetsItem && r.transform;
   let h = c[ItemType.SITES_POSITION_ITEM];
   let m = useRef(null);
-  let g = useSelector(Sh);
+  let g = useSelector(selectSceneGraphSelectionKeys);
   let [f, E] = Xw();
   let y = jsx($$r48, {
     transformDisabled: !r.transform,
@@ -3206,8 +3206,8 @@ export function $$r48(e) {
   let _ = W();
   let h = function (e) {
     let t = W();
-    let r = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
-    let n = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
+    let r = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().map(e => e.guid));
+    let n = useDeepEqualSceneValue(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
     return (i, a = !1) => {
       t.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
         fileKey: e,
@@ -3331,7 +3331,7 @@ export function $$r87(e) {
     widthIsAuto,
     heightIsAuto
   } = M9();
-  f4(() => {
+  useOnSelectionChange(() => {
     r(p3);
     s(null);
     l("minmax", null, qi.YES);

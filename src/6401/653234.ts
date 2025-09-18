@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, useCallback, useMemo, useRef, useState, useEffect, createRef } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Fk, x3 } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useViewerSceneValue } from "../figma_app/167249";
 import { ButtonPrimitive } from "../905/632989";
 import { l as _$$l } from "../905/103989";
 import { f as _$$f } from "../905/640587";
@@ -23,7 +23,7 @@ import { A as _$$A } from "../b2835def/807151";
 import { gD, wL, lu, DR, E$ } from "../441/430710";
 import { customHistory } from "../905/612521";
 import { isMobilePlatformNotFigmaMobile } from "../figma_app/778880";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { InputPrimitive } from "../905/246212";
 import { oW } from "../905/675859";
 import { A as _$$A2 } from "../b2835def/363895";
@@ -75,11 +75,11 @@ function u(e) {
       let e = getSingletonSceneGraph().get(t);
       e && e.resetInteractiveSlideParticipantData();
     }, [t]);
-    let f = Fk((e, t) => {
+    let f = useDeepEqualSceneValue((e, t) => {
       let l = e.get(t);
       return l ? l.interactiveSlideConfigData : null;
     }, t);
-    let h = Fk((e, t) => {
+    let h = useDeepEqualSceneValue((e, t) => {
       let l = e.get(t);
       return l ? l.interactiveSlideParticipantData : null;
     }, t);
@@ -123,11 +123,11 @@ function m(e) {
     viewer: t,
     nodeId: l
   }) {
-    let n = x3((e, t) => {
+    let n = useViewerSceneValue((e, t) => {
       let l = e.getPrototypeNode(t);
       return l ? e.nodeInteractiveSlideConfigData(l) : null;
     }, l);
-    let i = x3((e, t) => {
+    let i = useViewerSceneValue((e, t) => {
       let l = e.getPrototypeNode(t);
       return l ? e.nodeInteractiveSlideParticipantData(l) : null;
     }, l);
@@ -465,7 +465,7 @@ function H({
   configData: e,
   nodeId: t
 }) {
-  let l = hk();
+  let l = getViewerInstance();
   let s = gD(e);
   return jsx(wL, {
     deviceFrame: s,

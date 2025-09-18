@@ -6,7 +6,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
-import { s6, KH, p8 } from "../figma_app/722362";
+import { useAppModelPropsShallow, useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { W as _$$W } from "../441/503702";
 import { getObservableValue } from "../figma_app/84367";
@@ -548,9 +548,9 @@ function tM(e) {
     currentTool,
     activeCanvasEditModeType,
     currentSelectedProperty
-  } = s6("currentSelectedGradientStop", "currentTool", "activeCanvasEditModeType", "currentSelectedProperty");
+  } = useAppModelPropsShallow("currentSelectedGradientStop", "currentTool", "activeCanvasEditModeType", "currentSelectedProperty");
   let x = selectCurrentFile();
-  let v = KH();
+  let v = useSceneGraphSelection();
   let y = useSelector(e => e.library);
   let b = useSelector(e => e.pickerInStyleCreationShown);
   let w = useSelector(e => e.modalShown);
@@ -672,8 +672,8 @@ function tP({
     numSelected: _numSelected,
     pluginRelaunchData
   } = DQ("pluginRelaunchData", "numSelected");
-  let P = p8("currentPage");
-  let F = p8("currentSelectedProperty");
+  let P = useAppModelProperty("currentPage");
+  let F = useAppModelProperty("currentSelectedProperty");
   let V = SJ();
   let D = U4(p);
   if ((isEmptyObject(p) || Object.keys(p).every(e => !p[parseInt(e)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && logError("PropertiesPanel", "Rendering illustration tab with no shownPropertiesPanels", {
@@ -867,8 +867,8 @@ function tF() {
     defaultTab: DesignWorkspace.ILLUSTRATION,
     getActiveTab: e
   });
-  let i = p8("topLevelMode");
-  let s = p8("isReadOnly");
+  let i = useAppModelProperty("topLevelMode");
+  let s = useAppModelProperty("isReadOnly");
   let a = i === ViewType.LAYOUT && !s && t === DesignWorkspace.ILLUSTRATION;
   let o = t === DesignWorkspace.COMMENT;
   let d = t === DesignWorkspace.INSPECT;
@@ -899,7 +899,7 @@ let tz = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
   let t = useSelector(e => e.progressBarState);
-  let i = p8("loadingEmbeds");
+  let i = useAppModelProperty("loadingEmbeds");
   let k = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let A = Lk();
   let U = useRef(null);

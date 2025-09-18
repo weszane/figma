@@ -13,7 +13,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -45,7 +45,7 @@ let N = e => {
 };
 function O(e) {
   let t = useDispatch();
-  let n = DP();
+  let n = getVisibleTheme();
   let r = e.isSpainVariant ? renderI18nText("es_es_announcement.spain.description") : renderI18nText("es_es_announcement.nonspain.description");
   return jsx(_l, {
     isShowing: e.isShowing,

@@ -11,7 +11,7 @@ import { blackColor } from "../figma_app/191804";
 import { generateRecordingKey } from "../figma_app/878298";
 import { GI, IZ, SK } from "../905/125333";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
@@ -158,7 +158,7 @@ let $$K0 = memo(function ({
         IconNoRef: jsx(oE, {
           type: "Pencil",
           size: "Small",
-          color: _$$F.format(ey)
+          color: colorCSSManipulatorInstance.format(ey)
         }),
         optimizeForCompactSize: s
       }), jsx($$Y1, {
@@ -176,7 +176,7 @@ let $$K0 = memo(function ({
         IconNoRef: jsx(oE, {
           type: "Highlighter",
           size: "Small",
-          color: _$$F.format(eb)
+          color: colorCSSManipulatorInstance.format(eb)
         }),
         optimizeForCompactSize: s
       }), !s && jsx($$Y1, {
@@ -361,17 +361,17 @@ let $$K0 = memo(function ({
           children: [jsx(_$$V, {
             loadingPaletteCircleCount: ew
           }), !eO && eC.map((t, i) => {
-            let a = _$$F.format(t);
+            let a = colorCSSManipulatorInstance.format(t);
             let s = eA ? AF(i, ex) : V_(t, ex);
             return jsx(cd, {
               size: "medium",
               value: t,
-              selectionState: e_ || em ? "unselected" : (eh ? a === _$$F.format(eb) : a === _$$F.format(ey)) ? "selected" : "unselected",
+              selectionState: e_ || em ? "unselected" : (eh ? a === colorCSSManipulatorInstance.format(eb) : a === colorCSSManipulatorInstance.format(ey)) ? "selected" : "unselected",
               onClick: () => {
                 eS(t);
                 _$$F2.trackFromFullscreen("Drawing Tool Change Color", {
                   source: "default",
-                  color: _$$F.format(t),
+                  color: colorCSSManipulatorInstance.format(t),
                   tool: DesignGraphElements[e]
                 });
               },

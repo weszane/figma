@@ -17,7 +17,7 @@ import { getI18nString } from "../905/303541";
 import { zE } from "../905/8732";
 import { replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { B9 } from "../figma_app/722362";
+import { useSceneGraphFromContext } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
 import { XV } from "../figma_app/383828";
 import { KindEnum } from "../905/129884";
@@ -47,7 +47,7 @@ function $(e) {
   e.stopPropagation();
 }
 export function $$X1(e) {
-  let t = B9();
+  let t = useSceneGraphFromContext();
   return useMemo(() => {
     if (0 === e.length) return null;
     let r = t.get(e[0]);
@@ -125,7 +125,7 @@ export function $$J2({
     highlightNodesOnHover
   } = V;
   let Q = `${O}-${instanceAndSublayerGUIDs.join("-")}`;
-  let ee = B9();
+  let ee = useSceneGraphFromContext();
   let et = useMemo(en, []);
   let {
     propDef,

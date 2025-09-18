@@ -1,9 +1,9 @@
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
-import { eY } from "../figma_app/722362";
-import { Fk } from "../figma_app/167249";
+import { useSceneGraphSelector } from "../figma_app/722362";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$o4(e, t = !1, r) {
-  return Fk((e, t, n) => t && $$u0(r ?? e, t, n) || null, e, t);
+  return useDeepEqualSceneValue((e, t, n) => t && $$u0(r ?? e, t, n) || null, e, t);
 }
 export function $$l1() {
   let {
@@ -24,7 +24,7 @@ export function $$l1() {
 }
 export var $$d3 = (e => (e.NOT_RECENT = "NOT_RECENT", e.RECENTLY_EDITED = "RECENTLY_EDITED", e.RECENTLY_CREATED = "RECENTLY_CREATED", e))($$d3 || {});
 export function $$c2(e, t, r) {
-  let n = eY();
+  let n = useSceneGraphSelector();
   if (!e) return "NOT_RECENT";
   let i = $$u0(n, e, !0);
   if (!i) return "NOT_RECENT";

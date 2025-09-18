@@ -7,7 +7,7 @@ import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { E9 } from "../figma_app/297957";
+import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { getSelectedView } from "../figma_app/386952";
@@ -27,7 +27,7 @@ export let $$w0 = registerModal(function (e) {
   let T = useSubscription(TeamFileCountsByTeamId, {
     teamId
   });
-  let j = E9();
+  let j = useStarterGlobalFileLimitsExperiment();
   let k = getResourceDataOrFallback(T.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let E = T.data?.team?.teamFileCounts?.designFileCount ?? 0;
   let C = T.data?.team?.teamFileCounts?.whiteboardFileCount ?? 0;

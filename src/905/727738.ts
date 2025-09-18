@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { createActionCreator } from '../905/73481';
-import { bE, yH, yJ } from '../905/98702';
+import { rolePostAction, roleDeleteAction, rolePutAction } from '../905/98702';
 import { registerLegacyModal, registerModal } from '../905/102752';
 import { h as _$$h } from '../905/142086';
 import { hideModalHandler, showModalHandler } from '../905/156213';
@@ -166,7 +166,7 @@ let G = createOptimistThunk((e, {
     promise: i,
     fallbackError: 'An error occurred while removing this user.'
   }));
-  handleOptimistTransaction(i, e.dispatch, yH({
+  handleOptimistTransaction(i, e.dispatch, roleDeleteAction({
     role: t
   }));
   let o = mapResourceCategoryToRole(t.resource_type);
@@ -225,7 +225,7 @@ let z = createOptimistThunk((e, {
       }));
     });
   });
-  handleOptimistTransaction(d, e.dispatch, yJ({
+  handleOptimistTransaction(d, e.dispatch, rolePutAction({
     role: t,
     cascade: i
   }));
@@ -294,7 +294,7 @@ let H = createOptimistThunk((e, {
     updated_at: `${new Date()}`,
     team_id: p.team_id
   };
-  handleOptimistTransaction(_, e.dispatch, bE({
+  handleOptimistTransaction(_, e.dispatch, rolePostAction({
     role: A
   }));
   mapResourceCategoryToRole(FResourceCategoryType.FILE) && (WB().optimisticallyCreate({

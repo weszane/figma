@@ -27,7 +27,7 @@ import { h as _$$h } from "../905/207101";
 import { handleAtomEvent } from "../905/502364";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N as _$$N3 } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { yc_, PXv } from "../figma_app/6204";
@@ -72,7 +72,7 @@ function V(e) {
     priority: _$$N3.DEFAULT_MODAL
   });
   let s = (getFeatureFlags().ce_il_var_width_onboarding ?? !1) && !e.isVarWidthPointDisabled;
-  let o = _$$f("seen_draw_secondary_toolbelt_onboarding");
+  let o = selectUserFlag("seen_draw_secondary_toolbelt_onboarding");
   _$$h(() => {
     show({
       canShow: () => s && !!o?.createdAt
@@ -128,7 +128,7 @@ function H() {
       canShow: () => getFeatureFlags().ce_il_onboarding ?? !1
     });
   });
-  let i = _$$f("seen_draw_variable_width_stroke_onboarding");
+  let i = selectUserFlag("seen_draw_variable_width_stroke_onboarding");
   let a = () => {
     i?.createdAt || handleAtomEvent({
       id: G

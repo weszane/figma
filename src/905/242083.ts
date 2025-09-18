@@ -5,7 +5,7 @@ import { H as _$$H2 } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError, setTagGlobal, reportNullOrUndefined } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
-import { Q7 } from '../905/15667';
+import { PluginAction } from '../905/15667';
 import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
 import { FU, v6 } from '../905/26824';
 import { P as _$$P } from '../905/35881';
@@ -26,7 +26,7 @@ import { Z as _$$Z2 } from '../905/104740';
 import { q as _$$q2, w as _$$w3 } from '../905/112768';
 import { En, jy, KE } from '../905/116101';
 import { u as _$$u } from '../905/117966';
-import { xK as _$$xK } from '../905/125218';
+import { fullscreenPerfManager } from '../905/125218';
 import { ez as _$$ez, lC as _$$lC, _o, GI, HV, IZ, qL, SK, U9, Vi, W6, wp, yE } from '../905/125333';
 import { J as _$$J5 } from '../905/125483';
 import { setupAutofocusHandler } from '../905/128376';
@@ -53,7 +53,7 @@ import { Xo } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
 import { delay } from '../905/236856';
 import { T as _$$T4 } from '../905/239551';
-import { ih as _$$ih, UA } from '../905/250387';
+import { parseLinkForContext, copyHyperlinkToClipboard } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
 import { HiddenLabel, Label } from '../905/270045';
 import { getPlanUserTeamAtomFamily } from '../905/276025';
@@ -131,7 +131,7 @@ import { FlashActions } from '../905/573154';
 import { m as _$$m } from '../905/575846';
 import { VisualBellIcon } from '../905/576487';
 import { l as _$$l2, q as _$$q } from '../905/578831';
-import { f as _$$f } from '../905/580661';
+import { ImageOrientationUtils } from '../905/580661';
 import { Io } from '../905/581543';
 import { k as _$$k2 } from '../905/582200';
 import { pS } from '../905/588985';
@@ -259,7 +259,7 @@ import { $m } from '../figma_app/78808';
 import { createObjectUrlFromBuffer, teamLibraryCache, fetchAndProcessComponentPublishingBuffers, fetchAndProcessVariablePublishingBuffers } from '../figma_app/80990';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { Rm } from '../figma_app/86989';
-import { s4 as _$$s2, Wl } from '../figma_app/88239';
+import { getDevModeFocusId, isFullscreenOverview } from '../figma_app/88239';
 import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as _$$re, Bs, fk, FP, fy, Jt, pj, R5, u1, XE, XQ } from '../figma_app/91703';
 import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
@@ -272,7 +272,7 @@ import { IJ } from '../figma_app/149304';
 import { Dc as _$$Dc, hV } from '../figma_app/151766';
 import { P$ } from '../figma_app/152368';
 import { ManifestEditorType, PluginInstallStatus, hasLocalFileId } from '../figma_app/155287';
-import { Fk as _$$Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl, getInitialOptions, getSupportEmail, isDevEnvironment } from '../figma_app/169182';
 import { jx } from '../figma_app/171569';
 import { j as _$$j2 } from '../figma_app/172303';
@@ -299,7 +299,7 @@ import { n as _$$n3 } from '../figma_app/264395';
 import { z4 } from '../figma_app/266084';
 import { $W } from '../figma_app/268172';
 import { DialogBody, DialogFooter, DialogTitle, DialogActionStrip, DialogContents, DialogHeader } from '../figma_app/272243';
-import { Dl as _$$Dl, DK, Nd } from '../figma_app/291892';
+import { Dl as _$$Dl, MAX_CANVAS_SIZE, fetchImageData } from '../figma_app/291892';
 import { pN } from '../figma_app/292212';
 import { e3 as _$$e4 } from '../figma_app/298277';
 import { PR } from '../figma_app/299859';
@@ -375,9 +375,9 @@ import { nd as _$$nd } from '../figma_app/612001';
 import { R as _$$R4 } from '../figma_app/612938';
 import { OX } from '../figma_app/617606';
 import { _b as _$$_b, uP } from '../figma_app/618665';
-import { Av } from '../figma_app/622881';
+import { getColorSpaceSupportStatus } from '../figma_app/622881';
 import { copyTextToClipboard, copyTextWithPlainFallback } from '../figma_app/623293';
-import { lH as _$$lH2 } from '../figma_app/623300';
+import { hasNotLoaded } from '../figma_app/623300';
 import { Mj } from '../figma_app/624361';
 import { Id, JU } from '../figma_app/626177';
 import { JT, zw } from '../figma_app/632248';
@@ -412,9 +412,9 @@ import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { fileApiHandler } from '../figma_app/787550';
 import { T as _$$T } from '../figma_app/792332';
 import { Ts as _$$Ts3 } from '../figma_app/793953';
-import { Ym } from '../figma_app/806075';
+import { handleEnterMode } from '../figma_app/806075';
 import { isRecordingEnabled } from '../figma_app/878298';
-import { RK } from '../figma_app/815170';
+import { setupHyperlinkHandler } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
 import { isProtoViewerUrl } from '../figma_app/831696';
 import { TrackingProvider } from '../figma_app/831799';
@@ -430,7 +430,7 @@ import { B3 as _$$B3, Ag } from '../figma_app/862289';
 import { userIdAtom } from '../figma_app/864723';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { bJ } from '../figma_app/881578';
-import { rT as _$$rT, dK, vD } from '../figma_app/889655';
+import { getInstanceKeys, selectSceneGraph, getSingleSelectedKey } from '../figma_app/889655';
 import { a as _$$a } from '../figma_app/894185';
 import { f7 } from '../figma_app/896988';
 import { i as _$$i3 } from '../figma_app/904127';
@@ -1007,7 +1007,7 @@ let iT = {
 };
 function ik(e) {
   !function (e, t) {
-    let i = _$$Fk(e => {
+    let i = useDeepEqualSceneValue(e => {
       let t = e.getDirectlySelectedNodes()[0];
       return t ? t.guid : null;
     });
@@ -1027,7 +1027,7 @@ function ik(e) {
     x: e.position.x + 6,
     y: e.position.y - 180
   }), [e.position]);
-  let s = _$$Fk(t => {
+  let s = useDeepEqualSceneValue(t => {
     let i = t.get(e.slotNodeId);
     return i ? {
       x: i.size.x / 2,
@@ -1110,7 +1110,7 @@ function iR({
 }
 let iN = registerModal(e => {
   let t;
-  return (t = e.slotNodeId, _$$Fk((e, t) => {
+  return (t = e.slotNodeId, useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return !!i?.isSlotReactive;
   }, t) && getFeatureFlags().dse_slots) ? jsx(ik, {
@@ -2205,7 +2205,7 @@ let r7 = registerModal(({
   let n = useDispatch();
   let r = selectCurrentFile();
   let [o, l] = useLocalStorageSync('preferred-document-color-profile-change-option', 'convert');
-  let d = Av();
+  let d = getColorSpaceSupportStatus();
   let c = e === ColorProfileEnum.DISPLAY_P3 ? r4(o, d) : null;
   let u = e === ColorProfileEnum.SRGB ? ColorProfileEnum.DISPLAY_P3 : ColorProfileEnum.SRGB;
   return jsx(TrackingProvider, {
@@ -3336,7 +3336,7 @@ function sN(e) {
   return class extends e {
     constructor() {
       super(...arguments);
-      this.EXIF = _$$f;
+      this.EXIF = ImageOrientationUtils;
       this.HTMLWindowBindings = IM;
       this.jsValueHelp = sT.instance();
     }
@@ -3635,7 +3635,7 @@ function or({
   }
   let n = debugState;
   let r = n.getState();
-  let a = dK(r);
+  let a = selectSceneGraph(r);
   if (O5(a, r.mirror.appModel.currentPage).length) {
     !function ({
       startingBreakpointFrameId: e,
@@ -3683,7 +3683,7 @@ class oo {
         break;
       case 'debug-inspect-layer-figma-scope':
         if (UK().showFigmaScope.set(!0), this._figmascopeFollowSelectionOnceCallback) {
-          let e = vD(this._store.getState());
+          let e = getSingleSelectedKey(this._store.getState());
           e && this._figmascopeFollowSelectionOnceCallback(e);
         }
         break;
@@ -3834,7 +3834,7 @@ class oo {
         });
         break;
       case 'inline-preview-reset-size':
-        let i = dK(this._store.getState());
+        let i = selectSceneGraph(this._store.getState());
         atomStoreManager.set(hg, {
           type: 'CHANGE_DEVICE_FRAME',
           payload: {
@@ -3876,7 +3876,7 @@ class oo {
   getInstanceAndSublayerGUIDs() {
     let e = Object.keys(this._store.getState().mirror.sceneGraphSelection);
     let t = this._store.getState().mirror.sceneGraph;
-    return _$$rT(e, t);
+    return getInstanceKeys(e, t);
   }
   _applyTextStylingAction(e, t) {
     let i = this._store.getState().mirror.sceneGraph.get(this._state.mirror.appModel.currentPage);
@@ -4936,7 +4936,7 @@ class lV {
     });
   }
   clickWidget(e, t, i) {
-    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
+    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     _$$z3.startInteraction(e, 'click');
     lM.runUserInitiatedWidget({
       pluginID: e,
@@ -4955,7 +4955,7 @@ class lV {
     });
   }
   runPropertyMenuCallback(e, t, i, n) {
-    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
+    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     this.didCallTextEditEnd = !1;
     Fullscreen.setDefaultEditMode();
     let r = {
@@ -5002,7 +5002,7 @@ class lV {
     } = debugState.getState();
     let r = !!t;
     let a = t ? publishedCanvasWidgetVersions[e]?.[t] ?? (await $Z(e, t, currentUserOrgId)) : void 0;
-    let s = r ? DK : ZI;
+    let s = r ? MAX_CANVAS_SIZE : ZI;
     let o = s / 4;
     let l = _$$Dl(s, s);
     let d = l.getContext('2d');
@@ -5010,12 +5010,12 @@ class lV {
       d.fillStyle = 'black';
       d.globalAlpha = 0.8;
       d.fill(_$$c7, 'evenodd');
-      return Nd(l.toDataURL('image/png'));
+      return fetchImageData(l.toDataURL('image/png'));
     }
     if (!a) {
       d.fillStyle = '#e5e5e5';
       d.fillRect(0, 0, s, s);
-      return Nd(l.toDataURL('image/png'));
+      return fetchImageData(l.toDataURL('image/png'));
     }
     try {
       let e = `${a.redirect_icon_url}&cors=1`;
@@ -5304,7 +5304,7 @@ let lX = class e extends sP(sN(sR)) {
     this.fileArrayToString = null;
     this.loadAndStartFullscreenIfNecessary = Kt(async () => {
       let t = isInteractionPathCheck();
-      if (this._readyStartTime = window.performance.now(), _$$xK.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
+      if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
         this._isDesktopAppRunning = e;
         e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(_$$kF.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
@@ -5589,7 +5589,7 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   static startFetchingFontList() {
-    this.fontListPromise == null && (this.fontListPromise = _$$xK.timeAsync('fetchFontList', yF));
+    this.fontListPromise == null && (this.fontListPromise = fullscreenPerfManager.timeAsync('fetchFontList', yF));
   }
   static prepareSpellCheck() {
     BrowserInfo.isIpad || (hO(), (async () => {
@@ -6265,7 +6265,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellWithUrlButtonLocalized(e, t, i, n, r) {
     this.showVisualBellWithButtonLocalized(e, t, null, i, () => {
-      this._store.dispatch(RK({
+      this._store.dispatch(setupHyperlinkHandler({
         rawInput: n
       }));
     }, r);
@@ -6743,8 +6743,8 @@ let lX = class e extends sP(sN(sR)) {
           break;
         case FigmaSite.FIGMA:
           let p = isFullscreenDevHandoffView(this._state.selectedView);
-          let m = Wl(this._state.selectedView);
-          let h = _$$s2(this._state.selectedView);
+          let m = isFullscreenOverview(this._state.selectedView);
+          let h = getDevModeFocusId(this._state.selectedView);
           l = buildFileUrl({
             file: n,
             nodeId: e,
@@ -6806,13 +6806,13 @@ let lX = class e extends sP(sN(sR)) {
   getLocalGUIDFromUrl(e) {
     let {
       nodeIdInThisFile
-    } = _$$ih(e, this._store.getState());
+    } = parseLinkForContext(e, this._store.getState());
     return nodeIdInThisFile;
   }
   getLocalVersionIdFromUrl(e) {
     let {
       versionId
-    } = _$$ih(e, this._store.getState());
+    } = parseLinkForContext(e, this._store.getState());
     return versionId;
   }
   isUserPresent() {
@@ -6823,7 +6823,7 @@ let lX = class e extends sP(sN(sR)) {
     this._documentIsLoaded();
   }
   async _documentIsLoaded() {
-    if (_$$xK.documentIsLoaded(), desktopAPIInstance?.addTabAnalyticsMetadata({
+    if (fullscreenPerfManager.documentIsLoaded(), desktopAPIInstance?.addTabAnalyticsMetadata({
       fileLoadTime: this._fileLoadTime
     }), window.figmaPerfTesting && window.postMessage({
       name: 'DOCUMENT_IS_LOADED',
@@ -6833,7 +6833,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = Multiplayer?.currentSessionID() ?? -1;
       e && !isLocalFileKey(e.fileKey) ? (t < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {
         reportErrorToSentry: !0
-      }), await e.onConnect(t), await _$$xK.timeAsync('restoreAutosave', async () => {
+      }), await e.onConnect(t), await fullscreenPerfManager.timeAsync('restoreAutosave', async () => {
         try {
           await e.session()?.restoreAutosaveIfNeeded();
         } catch (e) {
@@ -6898,7 +6898,7 @@ let lX = class e extends sP(sN(sR)) {
         value: performance.now() / 1e3
       }, '*');
       sendHistogram('performance.fullscreen.load_time', t / 1e3);
-      _$$xK.start('fullscreenIsReady');
+      fullscreenPerfManager.start('fullscreenIsReady');
       (function () {
         if (!getFeatureFlags().internal_only_debug_tools) {
           window.DebuggingHelpers = {};
@@ -7013,7 +7013,7 @@ let lX = class e extends sP(sN(sR)) {
       return i;
     };
     e.fontListPromise.then(e => {
-      _$$xK.time('updateFontListHost', () => {
+      fullscreenPerfManager.time('updateFontListHost', () => {
         let t = i(this._store.dispatch, e);
         trackEventAnalytics('fetched font list', {
           index_font_count: e.indexFontsList?.length,
@@ -7099,7 +7099,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   logEnterMode(e, t) {
     let i = this._jsEditorType(e);
-    (i === FEditorType.Design || i === FEditorType.Illustration || i === FEditorType.DevHandoff) && Ym(this._store.getState(), i, t);
+    (i === FEditorType.Design || i === FEditorType.Illustration || i === FEditorType.DevHandoff) && handleEnterMode(this._store.getState(), i, t);
   }
   getDeviceInfoForSize(e, t) {
     return BG(e, t);
@@ -7599,7 +7599,7 @@ let lX = class e extends sP(sN(sR)) {
         url,
         nodeIdInThisFile,
         versionId
-      } = _$$ih(e, this._store.getState());
+      } = parseLinkForContext(e, this._store.getState());
       if (nodeIdInThisFile && !versionId) {
         let e = this._store.getState().mirror;
         let t = e.sceneGraph.get(nodeIdInThisFile);
@@ -7616,7 +7616,7 @@ let lX = class e extends sP(sN(sR)) {
             text: this.trimName(t.name, t.type === 'CANVAS' ? getI18nString('hyperlink.page') : getI18nString('hyperlink.frame'))
           };
         } else {
-          _$$lH2(e.appModel.pagesList) ? (o = {
+          hasNotLoaded(e.appModel.pagesList) ? (o = {
             type: _$$F3.NOT_LOADED,
             text: getI18nString('bindings.hyperlink_popup_link_to_unloaded_from_in_this_file')
           }, subscribeToContainingPage(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD)) : o = {
@@ -7672,7 +7672,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   handleUserClickOnHyperlink(e, t) {
-    t === EmailAction.COPY_TO_CLIPBOARD && e.startsWith('mailto:') || e.startsWith('tel:') ? UA(this.dispatch, e, 'HyperlinkCanvas') : this._store?.dispatch(RK({
+    t === EmailAction.COPY_TO_CLIPBOARD && e.startsWith('mailto:') || e.startsWith('tel:') ? copyHyperlinkToClipboard(this.dispatch, e, 'HyperlinkCanvas') : this._store?.dispatch(setupHyperlinkHandler({
       rawInput: e
     }));
   }

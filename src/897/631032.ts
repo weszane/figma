@@ -16,7 +16,7 @@ import { $2, BG } from "../897/961984";
 import { TN } from "../figma_app/334459";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
-import { yM } from "../905/640017";
+import { useThemeContext } from "../905/640017";
 import { Rk } from "../figma_app/483189";
 import { PN, Vm, c7 } from "../figma_app/728075";
 import { clamp } from "../figma_app/492908";
@@ -31,7 +31,7 @@ let y = memo(function (e) {
   let n = (t - 100) / 2;
   let a = new Point(n, n + 100);
   let s = new Point(n + 100, n);
-  let l = yM();
+  let l = useThemeContext();
   let c = l?.colorIcon || PN;
   let p = l?.colorBg || Vm;
   let u = l?.colorIconTertiary || c7;

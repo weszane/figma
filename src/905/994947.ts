@@ -22,7 +22,7 @@ import { SelectedViewPathManager } from "../905/870666";
 import { g_ } from "../905/646788";
 import { trackEventAnalytics } from "../905/449184";
 import { getViewState } from "../905/612521";
-import { V3, UN } from "../figma_app/976345";
+import { openUrlInContext, trackFileClicked } from "../figma_app/976345";
 import { trackFileBrowserFileClicked } from "../figma_app/314264";
 import { getSelectedViewUrl } from "../figma_app/193867";
 import { W as _$$W } from "../905/25249";
@@ -162,7 +162,7 @@ function x(e) {
     return {
       id: "open_in_new_tab",
       text: getI18nString("file_browser.open_in_new_tab"),
-      onClick: () => t(V3(n)),
+      onClick: () => t(openUrlInContext(n)),
       ...overrides
     };
   };
@@ -182,11 +182,11 @@ function x(e) {
         "fullscreen" === r.view && r.fileKey && e && (trackEventAnalytics("Open File in New Tab Click", {
           fileKey: r.fileKey,
           uiSelectedView: JSON.stringify(e.view)
-        }), t(UN({
+        }), t(trackFileClicked({
           fileKey: r.fileKey
         })));
         let n = getSelectedViewUrl(i.getState(), r);
-        t(V3({
+        t(openUrlInContext({
           url: n
         }));
       },

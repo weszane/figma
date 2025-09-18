@@ -20,7 +20,7 @@ import { VisualBellActions } from "../905/302958";
 import { v as _$$v, L as _$$L } from "../1250/232926";
 import { OG } from "../1250/340571";
 import { XU } from "../1250/282084";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { B as _$$B } from "../905/506188";
 import { lQ } from "../905/934246";
 import { L as _$$L2 } from "../1250/681431";
@@ -143,7 +143,7 @@ function W({
 }) {
   let [o, c] = useState(i);
   let _ = OG(n);
-  let u = "dark" === DP();
+  let u = "dark" === getVisibleTheme();
   let p = _$$B(n).unwrapOr(null);
   let f = u ? buildUploadUrl("b43ae367a8626405bff148b565f27a2c216474d8") : buildUploadUrl("6cf2ccf30dc4e0aa87883c3f3b15eaf223418950");
   let b = _ && _.availableRepositories.length > 1;

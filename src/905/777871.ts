@@ -9,11 +9,11 @@ import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "
 import { RecordableDiv } from "../905/511649";
 import { showDropdownThunk } from "../905/929976";
 import { Vl } from "../figma_app/8833";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { dM, Eh } from "../figma_app/837840";
-import { VG } from "../figma_app/622881";
+import { getColorSpaceString } from "../figma_app/622881";
 import { f7 } from "../figma_app/896988";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { qo, cn } from "../905/959568";
@@ -71,14 +71,14 @@ class k extends RecordingPureComponent {
     };
     this.panelRef = createRef();
     this.renderCanvas = e => {
-      let t = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
+      let t = this.props.colorProfile ? getColorSpaceString(this.props.colorProfile) : "srgb";
       let i = Eh(e, t);
       if (!i) return;
       let n = i.createPattern(L, "repeat");
       n && (i.fillStyle = n);
       i.fillRect(0, 0, this.WIDTH, this.trackHeight);
       let r = i.createLinearGradient(0, 0, this.WIDTH, 0);
-      for (let e of this.props.paint.stops) r.addColorStop($$N1(e.position), F.format(e.color, t));
+      for (let e of this.props.paint.stops) r.addColorStop($$N1(e.position), colorCSSManipulatorInstance.format(e.color, t));
       i.fillStyle = r;
       i.fillRect(0, 0, this.WIDTH, this.trackHeight);
     };

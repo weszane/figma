@@ -11,9 +11,9 @@ import { t as _$$t } from "../905/331623";
 import { n as _$$n } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { isOrgOrTeamExport, useIsCommunityHubView, findProfile, trackProfileAdminMenuOpen } from "../figma_app/740025";
-import { nm } from "../905/352022";
+import { setupAuthedUserPlanLoader } from "../905/352022";
 import { O_ } from "../905/967587";
 import { selectPermissionsState } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
@@ -84,7 +84,7 @@ function z() {
   let Z = useSelector(e => Object.keys(e.authedProfilesById).some(t => !!e.authedProfilesById[t].org_id || !!e.authedProfilesById[t].team_id));
   let X = useSelector(e => e.userNotifications.communityProfileBellStates);
   useEffect(() => {
-    nm()(t).catch(e => {
+    setupAuthedUserPlanLoader()(t).catch(e => {
       let i = e?.data?.message || getI18nString("file_browser.error_try_again");
       t(VisualBellActions.enqueue({
         message: i,
@@ -137,7 +137,7 @@ function z() {
             isActive: s,
             isChecked: s,
             className: "workspace_switcher--optionWithBottomMargin--8atEJ workspace_switcher--option--ykJBs",
-            callback: () => t(_l({
+            callback: () => t(switchAccountAndNavigate({
               workspace: i,
               view: d
             })),

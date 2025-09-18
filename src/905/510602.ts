@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
 import { EO, l0 } from "../figma_app/536669";
@@ -34,7 +34,7 @@ export function $$f0({
     t.sort(g);
     return t;
   }(t), [t]);
-  let E = wA((e, t) => {
+  let E = useStrictDeepEqualSceneValue((e, t) => {
     let i = JSON.parse(t);
     let n = new Map();
     for (let t of i) {

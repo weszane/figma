@@ -1,12 +1,12 @@
 import { hasRootPathOptional } from "../figma_app/528509";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { useIsCanvasEditDisabled } from "../905/595131";
 export function $$c0() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = selectCurrentFile();
   let i = hasRootPathOptional(t?.project);
   let c = useIsCanvasEditDisabled();

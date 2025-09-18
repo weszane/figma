@@ -6,7 +6,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { J as _$$J } from "../905/931050";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -25,7 +25,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { n as _$$n2 } from "../905/79930";
 import { ITemplateType, FDocumentType } from "../905/862883";
@@ -197,7 +197,7 @@ export function $$H4() {
       ...s
     }) => {
       let o = V(t, F(s.template));
-      VP(n, o) || (e(loadingStatePutLoading({
+      isLoading(n, o) || (e(loadingStatePutLoading({
         key: o
       })), await G({
         dispatch: e,
@@ -220,7 +220,7 @@ export function $$H4() {
     },
     isInsertingTemplate: e => {
       let r = V(t, e);
-      return VP(n, r);
+      return isLoading(n, r);
     }
   };
 }
@@ -297,7 +297,7 @@ export let $$Y0 = createOptimistThunk((e, t) => {
   let {
     loadingState
   } = e.getState();
-  VP(loadingState, r) || (dispatch(loadingStatePutLoading({
+  isLoading(loadingState, r) || (dispatch(loadingStatePutLoading({
     key: r
   })), W({
     ...t,
@@ -324,7 +324,7 @@ export function $$X5() {
   let e = useSelector(e => e.loadingState);
   return t => {
     let r = K(t);
-    return VP(e, r);
+    return isLoading(e, r);
   };
 }
 export function $$q7(e, t, r, i = 10) {
@@ -389,8 +389,8 @@ export function $$Z8(e) {
   let r = _$$J(() => t ? sf(e, t) : Promise.reject(Error("User not logged in")), [e, t]);
   let [i, a] = useState(J);
   useEffect(() => {
-    r.status === _$$r.SUCCESS && a(r.value);
-    r.status === _$$r.FAILURE && a(J);
+    r.status === APILoadingStatus.SUCCESS && a(r.value);
+    r.status === APILoadingStatus.FAILURE && a(J);
   }, [r]);
   return i;
 }

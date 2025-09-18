@@ -15,7 +15,7 @@ import { sx } from "../905/941192";
 import { w9, rT } from "../figma_app/124493";
 import { n3 } from "../905/797478";
 import { wW } from "../figma_app/656450";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { k6 } from "../figma_app/565197";
 import { WJ, tR } from "../figma_app/407856";
 import { v as _$$v, m as _$$m } from "../3276/99493";
@@ -550,7 +550,7 @@ function z({
   stampId: e
 }) {
   let t = fU();
-  let i = Fk((e, t) => {
+  let i = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i ? i.name : null;
   }, e);

@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { _Z } from "../figma_app/819288";
+import { flattenMessageMeta } from "../figma_app/819288";
 import { formatList } from "../figma_app/930338";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -68,7 +68,7 @@ export let $$_0 = registerModal(function (e) {
         })
       }), jsx(h, {
         header: getI18nString("comments.you"),
-        text: _Z(e.messageMeta)
+        text: flattenMessageMeta(e.messageMeta)
       })]
     });
   }
@@ -112,7 +112,7 @@ export let $$_0 = registerModal(function (e) {
         })]
       }), jsx(h, {
         header: getI18nString("comments.you"),
-        text: _Z(e.messageMeta)
+        text: flattenMessageMeta(e.messageMeta)
       })]
     })
   });

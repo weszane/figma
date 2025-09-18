@@ -11,7 +11,7 @@ import { P as _$$P } from "../vendor/348225";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { hideTooltip } from "../905/765855";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { oW } from "../figma_app/247611";
 import { getViewportZoom } from "../figma_app/62612";
 import { hx } from "../figma_app/630194";
@@ -100,8 +100,8 @@ export let $$x0 = memo(function ({
   let [ei, ea] = useState();
   let es = V ? H ? "whileDragShouldCancel" : "whileDrag" : "pencil" === e && r && !j ? "hiddenPencil" : z ? "whileTap" : L && r ? "selectedSubmenuTool" : k ? "whileHovering" : "initial";
   if ("connector" === e && !V) {
-    let e = rgbToHsl(_$$F.parse(t));
-    e.l > .9 && (t = _$$F.formatHSLA({
+    let e = rgbToHsl(colorCSSManipulatorInstance.parse(t));
+    e.l > .9 && (t = colorCSSManipulatorInstance.formatHSLA({
       h: e.h,
       s: e.s,
       l: .9,

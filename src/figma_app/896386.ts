@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { r as _$$r } from "../905/571562";
 import s from "classnames";
-import { dT } from "../figma_app/889655";
+import { selectInstanceKeys } from "../figma_app/889655";
 import { Q } from "../figma_app/645682";
 import { bj } from "../figma_app/760428";
 var o = s;
@@ -10,7 +10,7 @@ export function $$u0({
   panelTitleRef: e,
   isInSelectionActionsPanel: t
 }) {
-  let r = useSelector(dT);
+  let r = useSelector(selectInstanceKeys);
   let s = Q(r);
   return jsx("div", {
     ref: e,

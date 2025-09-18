@@ -20,7 +20,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
 import { BK } from "../905/848862";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
 import { KindEnum } from "../905/129884";
 import { Jz } from "../905/504727";
@@ -68,7 +68,7 @@ function D({
   let d = useDispatch();
   let c = BK("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
-  let y = p8("isReadOnly");
+  let y = useAppModelProperty("isReadOnly");
   let N = useAtomWithSubscription(yo);
   let A = useSelector(e => e.canvasSearch.filters);
   let L = useSelector(e => e.canvasSearch.mode);
@@ -210,7 +210,7 @@ function F({
   recordingKey: a
 }) {
   let h = useDispatch();
-  let f = p8("isReadOnly");
+  let f = useAppModelProperty("isReadOnly");
   let x = useAtomWithSubscription(yo);
   let y = useSelector(e => e.canvasSearch.filters);
   let C = useSelector(e => e.canvasSearch.mode);

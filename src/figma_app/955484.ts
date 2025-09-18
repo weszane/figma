@@ -19,10 +19,10 @@ import { $R } from "../figma_app/883490";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
 import { removeFromSelection, addToSelection, selectNodesInRange, updateHoveredNode, currentSessionLocalIDString } from "../figma_app/741237";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { S as _$$S } from "../figma_app/106763";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { assetTypeEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { m as _$$m } from "../905/70820";
@@ -174,7 +174,7 @@ function K({
   guid: t,
   name: r
 }) {
-  let i = Fk((e, t) => e.get(t)?.isLockedInDevMode, t);
+  let i = useDeepEqualSceneValue((e, t) => e.get(t)?.isLockedInDevMode, t);
   return i || e ? jsx(ButtonPrimitive, {
     actionOnPointerDown: !0,
     onClick: () => {
@@ -230,7 +230,7 @@ function $(e) {
   var t;
   var r;
   let i;
-  let a = eY();
+  let a = useSceneGraphSelector();
   let s = e.inheritedTextStyle;
   if (s) {
     let e = StylesBindings.getStyleNodeId(s.key, s.version);
@@ -390,7 +390,7 @@ export let $$et1 = memo(e => {
   let t = getObservableOrFallback(UK().showGuids);
   let r = getObservableOrFallback(AppStateTsApi.devHandoffState().automaticIconDetection);
   let i = e.isAncestorAsset ? void 0 : e.assetInfo;
-  let a = eY().get(e.guid);
+  let a = useSceneGraphSelector().get(e.guid);
   if (!a) return null;
   let s = a.devToolsOrderedVisibleChildren;
   let o = function (e, t, r) {

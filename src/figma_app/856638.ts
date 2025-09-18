@@ -5,7 +5,7 @@ import { V } from "../905/291719";
 import { generateRecordingKey } from "../figma_app/878298";
 import { VU } from "../905/625959";
 import { bs } from "../figma_app/553940";
-import { nj } from "../figma_app/889655";
+import { selectAppModel } from "../figma_app/889655";
 import { Yh, c1 } from "../figma_app/357047";
 import { Jg } from "../figma_app/108168";
 import { fT, ZU } from "../figma_app/986347";
@@ -91,7 +91,7 @@ function y({
   action: e,
   recordingKey: t
 }) {
-  let r = useSelector(nj);
+  let r = useSelector(selectAppModel);
   let _ = Yh(r, e.action);
   return jsxs(MenuItemComp, {
     disabled: !_,

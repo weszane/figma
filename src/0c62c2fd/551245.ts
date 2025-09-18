@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _Z } from "../figma_app/819288";
+import { flattenMessageMeta } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { ConfirmationModal } from "../905/441305";
@@ -55,7 +55,7 @@ export function $$b0({
         resourceId: pinnedFile.resourceId,
         resourceType: pinnedFile.resourceType,
         isPinCreator: pinnedFile.creator?.id === b,
-        pinDescription: _Z(pinnedFile.description)
+        pinDescription: flattenMessageMeta(pinnedFile.description)
       });
       y(pinnedFile.resourceId);
       r();

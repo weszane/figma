@@ -13,7 +13,7 @@ import { hasDesktopAPI } from "../figma_app/876459";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { ZQ } from "../figma_app/727192";
 import { Cm } from "../figma_app/826998";
 import { f as _$$f2 } from "../figma_app/24747";
@@ -101,7 +101,7 @@ function C() {
 export function $$w0(e) {
   let t = useAtomWithSubscription($$N1);
   let r = useDispatch();
-  if (_$$f("dev_mode_mcp_sse_deprecation_banner_dismissed") || !hasDesktopAPI() || !t) return null;
+  if (selectUserFlag("dev_mode_mcp_sse_deprecation_banner_dismissed") || !hasDesktopAPI() || !t) return null;
   let i = {
     bannerType: x1.WARN_SOFT,
     icon: jsx(Z, {}),

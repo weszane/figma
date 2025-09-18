@@ -11,7 +11,7 @@ import { $K } from "../figma_app/247611";
 import { g as _$$g } from "../figma_app/115586";
 import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { selectCurrentFile } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { isTryPluginModalShown } from "../figma_app/193867";
 import { J } from "../905/61366";
 import { x } from "../figma_app/59886";
@@ -54,10 +54,10 @@ export function $$I5() {
     return n ? !n.childCount || n.childrenAreAllGhosts ? 0 : 1 : 2;
   });
   let m = function (e) {
-    let t = H(_$$f("figjam_editor_onboarded"));
+    let t = H(selectUserFlag("figjam_editor_onboarded"));
     let r = useMemo(() => !!t.current, [e, t]);
-    let i = !!_$$f("figjam_browse_templates_modal_onboarded");
-    let a = _$$f("figjam_browse_templates_modal_onboarding_item_selected");
+    let i = !!selectUserFlag("figjam_browse_templates_modal_onboarded");
+    let a = selectUserFlag("figjam_browse_templates_modal_onboarding_item_selected");
     return r || i && !a;
   }(key);
   let T = N();

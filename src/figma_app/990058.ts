@@ -10,8 +10,8 @@ import { setUserInOrgs } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
-import { tc, PE } from "../905/15667";
-import { Sc } from "../905/18797";
+import { DeepLinkType, UISection } from "../905/15667";
+import { isNullOrFailure } from "../905/18797";
 import { setupLoadingStateHandler } from "../905/696711";
 import { G } from "../figma_app/124713";
 import { Eh } from "../figma_app/617654";
@@ -77,15 +77,15 @@ let $$S0 = createOptimistThunk(async (e, t) => {
     }).then(e => {
       200 === e.status && t.onSuccess?.(e.data.meta?.id);
     }), t.entryPoint) {
-      case tc.IN_EDITOR_RESTRICTED_DRAFT:
-      case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
+      case DeepLinkType.IN_EDITOR_RESTRICTED_DRAFT:
+      case DeepLinkType.RESTRICTED_DRAFT_SHARED_EMAIL:
         r = getI18nString("org_user_actions.request_sent_well_let_you_know");
         break;
-      case tc.ASK_TO_EDIT_ONE_CLICK:
+      case DeepLinkType.ASK_TO_EDIT_ONE_CLICK:
         r = getI18nString("1_click_expansion.request_sent_well_let_you");
         break;
-      case PE.CreateFileProjectView:
-      case tc.USER_SETTINGS:
+      case UISection.CreateFileProjectView:
+      case DeepLinkType.USER_SETTINGS:
         r = getI18nString("upgrades.request_sent_toast");
         break;
       default:
@@ -189,7 +189,7 @@ let $$C4 = createOptimistThunk(async (e, {
   loadingKey: r
 }) => {
   let n = e.getState();
-  if (!Sc(n.loadingState, r)) return;
+  if (!isNullOrFailure(n.loadingState, r)) return;
   let i = Eh.getAdmins({
     includeLicenseAdmins: !0,
     orgId: t

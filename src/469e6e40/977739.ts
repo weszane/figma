@@ -27,7 +27,7 @@ import { lQ } from "../905/934246";
 import { Wi } from "../figma_app/162641";
 import { H8, Pf } from "../905/590952";
 import { Pg } from "../figma_app/990058";
-import { Xw } from "../905/584989";
+import { fetchTeamUsers } from "../905/584989";
 import { Ef } from "../905/81982";
 import { d as _$$d } from "../905/44199";
 import { Eh } from "../figma_app/617654";
@@ -72,7 +72,7 @@ function $$q(e) {
   } = e;
   let [u, m] = useState([]);
   useEffect(() => {
-    planType === fm.TEAM ? t(Xw({
+    planType === fm.TEAM ? t(fetchTeamUsers({
       teamId: planId
     })) : t(Pg({
       orgId: planId

@@ -10,10 +10,10 @@ import { uQ } from "../figma_app/311375";
 import { d as _$$d } from "../9410/441456";
 import { showModalHandler } from "../905/156213";
 import { isInvalidValue } from "../905/216495";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { ku, jo, EH } from "../figma_app/241341";
 import { $ } from "../905/330495";
 export function $$C0(e) {
@@ -65,11 +65,11 @@ export function $$v2(e) {
 export function $$E1(e, t) {
   let i = selectCurrentUser()?.id;
   let d = uQ();
-  let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
+  let c = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = useCurrentFileKey();
   let b = useDispatch();
   let C = useAtomWithSubscription(_$$d);
-  let v = eY();
+  let v = useSceneGraphSelector();
   return useCallback(() => {
     if (globalPerfTimer.reset("dev_handoff.view_history", e || void 0), globalPerfTimer.start("dev_handoff.view_history", {
       key: e || void 0

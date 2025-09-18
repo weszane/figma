@@ -6,7 +6,7 @@ import { StylesBindings } from "../figma_app/763686";
 import { isValidSessionLocalID, sessionLocalIDToString, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { normalizeValue } from "../905/216495";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { bO, z5 } from "../figma_app/936646";
 import { b } from "../figma_app/882253";
@@ -47,7 +47,7 @@ export function $$T4({
 }
 export function $$I2(e, t, r) {
   let s = useSelector(e => e.library);
-  let o = eY();
+  let o = useSceneGraphSelector();
   let g = bO();
   let f = useCurrentFileKey();
   return useMemo(() => {

@@ -23,7 +23,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../fig
 import { z6, CU } from "../905/963340";
 import { S as _$$S } from "../905/711470";
 import { KindEnum } from "../905/129884";
-import { Bt, xV, kZ } from "../figma_app/88239";
+import { useUpdateGithubRepositorySelectorMode, useIsGithubRepositorySelectorActive, useGithubRepositorySelectorMode } from "../figma_app/88239";
 import { bh } from "../1250/224366";
 import { LibraryKeyToFileLink } from "../figma_app/43951";
 import { SelectorType } from "../figma_app/707808";
@@ -77,7 +77,7 @@ import { P as _$$P } from "../1250/665611";
 import { e as _$$e3 } from "../1250/871209";
 import { l as _$$l2 } from "../1250/511088";
 import { showModalHandler } from "../905/156213";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { trackEventAnalytics } from "../905/449184";
 import { VisualBellActions } from "../905/302958";
 import { useCurrentPlanUser } from "../figma_app/465071";
@@ -1406,11 +1406,11 @@ function nN({
   onOpenChange: o,
   libraryKey: c
 }) {
-  let i = "dark" === DP();
+  let i = "dark" === getVisibleTheme();
   let r = trackDefinedFileEventWithStore();
   let a = _$$A4();
   let l = i ? buildUploadUrl("87362980e1543a5db4a0044590b04d5f491a1e75") : buildUploadUrl("a938cc4b8421dc36477282e09f83e9e6770065ed");
-  let d = Bt();
+  let d = useUpdateGithubRepositorySelectorMode();
   let _ = OG(c);
   let p = _?.selectedRepositories?.[0];
   let h = {
@@ -1685,9 +1685,9 @@ export function $$nE0(e) {
   let c = bh();
   let i = $$nD1(o);
   let r = useAtomWithSubscription(_$$a);
-  let a = xV();
-  let l = kZ();
-  let h = Bt();
+  let a = useIsGithubRepositorySelectorActive();
+  let l = useGithubRepositorySelectorMode();
+  let h = useUpdateGithubRepositorySelectorMode();
   let b = getFeatureFlags().dt_component_browser_icons_flow && "icons" === r;
   let [v, w] = useState(new Set());
   let C = OG(o);

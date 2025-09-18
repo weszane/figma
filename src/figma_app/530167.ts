@@ -9,15 +9,15 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { setCommunityAuthedActiveProfile } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { HD, Co } from "../figma_app/471982";
 import { getDefaultBrowseOptions } from "../figma_app/640564";
 import { createOptimistThunk } from "../905/350402";
 import { UU } from "../figma_app/770088";
 import { selectViewAction } from "../905/929976";
 import { kE } from "../figma_app/703138";
-import { F6 } from "../905/395917";
-import { yJ } from "../figma_app/240735";
+import { patchOrgs } from "../905/395917";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { c as _$$c } from "../905/289751";
 import { getHubTypeString, mapCommentsAndAuthors, isHandleView } from "../figma_app/740025";
 import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
@@ -77,7 +77,7 @@ let $$M3 = createOptimistThunk((e, t) => {
       userId: r,
       orgId: E
     };
-    e.dispatch(_l({
+    e.dispatch(switchAccountAndNavigate({
       workspace: t,
       view: f
     }));
@@ -266,13 +266,13 @@ let $$ee28 = createOptimistThunk((e, t, {
       orgById
     } = e.getState();
     let a = currentUserOrgId && orgById[currentUserOrgId];
-    if (currentUserOrgId && a && currentUserOrgId === orgId && e.dispatch(F6({
+    if (currentUserOrgId && a && currentUserOrgId === orgId && e.dispatch(patchOrgs({
       id: currentUserOrgId,
       community_profile_handle: t.meta.profile_handle,
       community_profile_id: t.meta.id
     })), getFeatureFlags().ext_plugin_publish_rearch && teamId) {
       let r = e.getState().teams[teamId];
-      r && e.dispatch(yJ({
+      r && e.dispatch(setTeamOptimistThunk({
         team: {
           ...r,
           community_profile_id: t.meta.id,
@@ -359,7 +359,7 @@ let $$er12 = createOptimistThunk((e, t, {
     } = e.getState();
     communityHub.currentProfile?.id === r.meta.id && e.dispatch(Oo(r.meta));
     let s = orgById[currentUserOrgId];
-    if (s && "string" == typeof s.id && s.id === r.meta.org_id && e.dispatch(F6({
+    if (s && "string" == typeof s.id && s.id === r.meta.org_id && e.dispatch(patchOrgs({
       id: r.meta.org_id,
       community_profile_handle: r.meta.profile_handle
     })), profileHandle) {
@@ -423,7 +423,7 @@ let $$en23 = createOptimistThunk((e, t, {
       orgById
     } = e.getState();
     let a = currentUserOrgId && orgById[currentUserOrgId];
-    currentUserOrgId && a && a.community_profile_id === profileId && e.dispatch(F6({
+    currentUserOrgId && a && a.community_profile_id === profileId && e.dispatch(patchOrgs({
       id: currentUserOrgId,
       community_profile_handle: void 0,
       community_profile_id: void 0

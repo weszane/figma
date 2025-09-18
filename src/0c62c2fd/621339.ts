@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { captureMessage } from "../905/11";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { yH } from "../figma_app/240735";
+import { deleteTeamAction } from "../figma_app/240735";
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
 import { FocusCheckbox, BigTextInputForwardRef, ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -340,7 +340,7 @@ export function $$F0({
   let d = "admin" === e ? getI18nString("downgrade_survey.go_back") : getI18nString("downgrade_survey.do_not_leave_team");
   let c = "leave-team" === e ? () => {
     captureMessage("User entered leave team survey");
-    t(yH({
+    t(deleteTeamAction({
       team: l,
       userInitiated: !0
     }));

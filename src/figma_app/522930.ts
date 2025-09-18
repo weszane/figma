@@ -9,7 +9,7 @@ import { V } from "../905/965990";
 import { postUserFlag } from "../905/985254";
 import { A } from "../905/563377";
 import { tS } from "../figma_app/622574";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { $z, IX } from "../figma_app/957169";
 let g = "team_template_card_view_count";
 let f = () => {
@@ -47,7 +47,7 @@ export function $$y1({
   applyInsertStyling: e,
   applyNarrowStyling: t
 }) {
-  let r = _$$f("dismissed_team_template_announcement_card");
+  let r = selectUserFlag("dismissed_team_template_announcement_card");
   let o = useDispatch();
   let l = tS();
   let d = useCallback(() => {

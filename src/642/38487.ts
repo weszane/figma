@@ -45,7 +45,7 @@ import { computeFullscreenViewportForNode } from '../figma_app/62612';
 import { eC as _$$eC, Fj } from '../figma_app/76123';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { g$, qW } from '../figma_app/116234';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { r8 } from '../figma_app/178273';
 import { Bf } from '../figma_app/249941';
 import { MT } from '../figma_app/387100';
@@ -239,7 +239,7 @@ function eb({
 }) {
   let s = useIsFullscreenSitesView();
   let n = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
-  let i = Fk((e, s) => {
+  let i = useDeepEqualSceneValue((e, s) => {
     let r = e.get(s);
     if (!r) {
       return {
@@ -497,8 +497,8 @@ let eA = memo(e => {
   let W = useAtomWithSubscription(Fj).has(t);
   let [$, Y] = useState(!1);
   let [X, q] = useState(!1);
-  let J = Fk((e, t) => e.get(t)?.name ?? '', e.guid);
-  let Z = Fk((e, t) => {
+  let J = useDeepEqualSceneValue((e, t) => e.get(t)?.name ?? '', e.guid);
+  let Z = useDeepEqualSceneValue((e, t) => {
     let s = e.get(t);
     return s && s.isState ? s.stateAbbreviatedName : null;
   }, e.guid);

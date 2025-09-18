@@ -6,7 +6,7 @@ import { uQ } from "../figma_app/311375";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { N9, qg } from "../figma_app/385874";
 import { selectOpenFileKey } from "../figma_app/516028";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { ut } from "../figma_app/328423";
 var s = a;
 var $$h11 = (e => (e.TOP = "top", e.RIGHT = "right", e.BOTTOM = "bottom", e.LEFT = "left", e))($$h11 || {});
@@ -42,7 +42,7 @@ export function $$b14(e) {
 }
 export function $$T0(e) {
   let t = uQ();
-  return Fk((t, r) => {
+  return useDeepEqualSceneValue((t, r) => {
     let n = t?.get(r);
     if (!n) return {};
     let i = n.parentNode;

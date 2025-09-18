@@ -14,7 +14,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yv } from "../figma_app/616107";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Z9, iN } from "../figma_app/634656";
@@ -51,7 +51,7 @@ export function $$H4() {
   let e = !$$U1("VECTOR");
   let t = !$$U1("HIGHLIGHT");
   let r = !function () {
-    for (let e of useSelector(Sh)) {
+    for (let e of useSelector(selectSceneGraphSelectionKeys)) {
       let t = Fullscreen?.isPlatformShape(e);
       let r = Fullscreen?.platformShapeHasStrokeControl(e);
       if (t && !r) return !0;

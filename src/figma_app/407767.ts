@@ -7,7 +7,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { T1 } from "../figma_app/545293";
 import { isSitesFileType } from "../figma_app/976749";
 import { getVisibleArea } from "../figma_app/62612";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Ls, m3, ZA } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -290,7 +290,7 @@ export function $$P14() {
   let e = getFeatureFlags().anticipation;
   let t = C7();
   let r = selectCurrentFile()?.canEdit;
-  let i = p8("topLevelMode") === ViewType.LAYOUT;
+  let i = useAppModelProperty("topLevelMode") === ViewType.LAYOUT;
   let s = isSitesFileType();
   return e && t && r && i && !!Fullscreen && !s;
 }

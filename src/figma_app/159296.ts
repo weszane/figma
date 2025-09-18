@@ -4,15 +4,15 @@ import { normalizeValue } from '../905/216495';
 import { kl } from '../905/275640';
 import { selectCurrentUser } from '../905/372672';
 import { getObservableValue } from '../figma_app/84367';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { b } from '../figma_app/203891';
 import { GR } from '../figma_app/229710';
-import { p8 } from '../figma_app/722362';
+import { useAppModelProperty } from '../figma_app/722362';
 import { getPropertiesPanelTab } from '../figma_app/741237';
 import { AppStateTsApi } from '../figma_app/763686';
 export function $$m0() {
-  let e = p8('showUi');
-  let t = p8('isReadOnly');
+  let e = useAppModelProperty('showUi');
+  let t = useAppModelProperty('isReadOnly');
   return !!selectCurrentUser() && e && t;
 }
 export function $$g1() {
@@ -23,7 +23,7 @@ export function $$f3() {
   let t = useRef(null);
   let r = kl('productComponentGUIDBackingInstances');
   let i = normalizeValue(r);
-  let s = Fk((e, t) => {
+  let s = useDeepEqualSceneValue((e, t) => {
     if (t) {
       let r = e.get(t);
       return r?.simplifyInstancePanels ?? !1;

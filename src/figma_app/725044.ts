@@ -4,7 +4,7 @@ import { reactTimerGroup } from "../905/542194";
 import { FPSDistribution } from "../905/609396";
 import { y } from "../905/913008";
 import { R9 } from "../905/977824";
-import { l as _$$l, q } from "../905/190247";
+import { getGpuDeviceInfo, addDeviceInfoToTarget } from "../905/190247";
 import { N } from "../905/200059";
 export function $$u1(e) {
   switch (e) {
@@ -25,7 +25,7 @@ export function $$u1(e) {
   }
 }
 export class $$p0 {
-  constructor(e, t, r = 1, l = !1, u = null, p = () => { }, _ = !1, h = () => { }, m = () => { }) {
+  constructor(e, t, r = 1, l = !1, u = null, p = () => {}, _ = !1, h = () => {}, m = () => {}) {
     this._analyticsEventName = e;
     this._processTimersForLogging = t;
     this._timerDepth = r;
@@ -34,7 +34,7 @@ export class $$p0 {
     this._customLogMetricsCallbackHistogram = p;
     this._isRecording = !1;
     this._isCanceled = !1;
-    this._onFrameStartCallback = () => { };
+    this._onFrameStartCallback = () => {};
     this._isFirstLogForTab = !0;
     this._imagesLoadingState = null;
     this._ongoingSpotlight = !1;
@@ -51,7 +51,7 @@ export class $$p0 {
     this._lastRecordedDurationSinceLastFrame = {};
     this._fileKey = null;
     this._productType = "unknown";
-    this._gpuDeviceInfo = _$$l();
+    this._gpuDeviceInfo = getGpuDeviceInfo();
     this._activeNamedEvents = new Set();
     this._singleFrameNamedEvents = new Set();
     this._eventTrackers = new Map();
@@ -152,7 +152,7 @@ export class $$p0 {
       r.contextRestoredCount = this._contextRestoredCount;
       r.maxRenderLayerCount = this._maxRenderLayerCount;
       r.maxRenderedTileBytesUsed = this._maxRenderedTileBytesUsed;
-      q(this._gpuDeviceInfo, r);
+      addDeviceInfoToTarget(this._gpuDeviceInfo, r);
       r.numAnimationsFromCpp = this._numAnimationsFromCpp;
       r.numAnimationsFromTs = this._numAnimationsFromTs;
       this._isFirstLogForTab = !1;

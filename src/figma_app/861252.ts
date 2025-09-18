@@ -19,7 +19,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/57000";
 import { P4 } from "../905/18800";
@@ -32,7 +32,7 @@ import { m as _$$m } from "../figma_app/694193";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { isSitesFileType, isDesignFileType } from "../figma_app/976749";
 import { Yk } from "../figma_app/644079";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { getSelectedFile } from "../905/766303";
 import { D as _$$D } from "../figma_app/740163";
 import { z4 } from "../905/37051";
@@ -63,7 +63,7 @@ let O = memo(function ({
   let t = Zr("zoom-out");
   let r = Zr("zoom-in");
   let i = useSelector(e => !1 === e.mirror.appModel.showUi);
-  let s = aV();
+  let s = useIsProgressBarHiddenOrLocked();
   return !fullscreenValue.isReady() || i ? null : jsx(EventShield, {
     eventListeners: ["onClick"],
     children: jsxs("div", {
@@ -142,7 +142,7 @@ function L(e) {
   });
 }
 function B() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useSelector(e => e.mirror.appModel.showUi);
   return !e && t ? jsxs(ButtonPrimitive, {
     className: "x78zum5 x153ncpu x1q0g3np xl56j7k x6s0dn4 x1jnr06f xgqmno8 xsqpjig",
@@ -204,7 +204,7 @@ let $$eh0 = memo(function () {
   let N = sO();
   let C = useIsSelectedViewFullscreenCooper();
   let w = !useSelector(e => e.mirror.appModel.showUi) || v;
-  let R = "dark" === DP();
+  let R = "dark" === getVisibleTheme();
   let L = getSelectedView();
   let F = useIsFigmakeFullscreenPreview(L);
   let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;

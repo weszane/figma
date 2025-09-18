@@ -14,7 +14,7 @@ import { getI18nState } from "../figma_app/363242";
 import { isInvalidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { Um } from "../905/848862";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../905/158054";
 import { k as _$$k2 } from "../905/336528";
@@ -440,7 +440,7 @@ function J({
   let o = Um();
   let [c, k] = lJ("stackReverseZIndex");
   let y = trackFileEventWithUser();
-  let S = useSelector(Sh);
+  let S = useSelector(selectSceneGraphSelectionKeys);
   let j = getI18nState()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
   let b = isInvalidValue(c);
   let N = !0 === c;
@@ -570,7 +570,7 @@ function et({
   let a = Um();
   let [o, c] = lJ("bordersTakeSpace");
   let m = trackFileEventWithUser();
-  let k = useSelector(Sh);
+  let k = useSelector(selectSceneGraphSelectionKeys);
   let y = isInvalidValue(o);
   let S = !0 === o;
   let j = useId();

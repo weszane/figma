@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { FirstDraftHelpers, Thumbnail } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { ET } from "../905/623179";
+import { uploadToPresignedPost } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { LQ, vg, pX, tV, au } from "../figma_app/445976";
@@ -167,7 +167,7 @@ async function f(e) {
       fields
     } = a[i];
     try {
-      let i = await ET(_$$e.AI_GENERATION, "uploadThumbnails", url, fields, r, "application/octet-stream");
+      let i = await uploadToPresignedPost(_$$e.AI_GENERATION, "uploadThumbnails", url, fields, r, "application/octet-stream");
       t[e] = i;
     } catch (e) {
       reportError(_$$e.AI_GENERATION, Error("Unable to upload example thumbnail to S3"));

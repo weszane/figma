@@ -10,7 +10,7 @@ import { wp, SK } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { AW } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
 import { getViewportZoom } from "../figma_app/62612";
@@ -117,7 +117,7 @@ let N = forwardRef(function ({
   });
   if (!e?.dragPosition || !i) return null;
   let o = s * P;
-  let l = F.format(t);
+  let l = colorCSSManipulatorInstance.format(t);
   return createPortal(jsx("div", {
     style: {
       left: e.dragPosition.x,

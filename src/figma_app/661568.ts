@@ -3,7 +3,7 @@ import { CorePerfInfo } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { le } from "../figma_app/527873";
 var $$n1;
 var $$i0;
@@ -37,7 +37,7 @@ class p {
       firstReport: !this.reported,
       totalUsedHeapMemory: CorePerfInfo?.getTotalUsedHeapMemory(),
       maxUsedHeapMemory: CorePerfInfo?.getMaxUsedHeapMemory(),
-      fileKey: hk()?.openFileKey(),
+      fileKey: getViewerInstance()?.openFileKey(),
       ...this.events
     };
     setTimeout(() => {

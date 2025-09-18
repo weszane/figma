@@ -49,7 +49,7 @@ import { FFileType } from '../figma_app/191312';
 import { selectPermissionsState } from '../figma_app/212807';
 import { vt } from '../figma_app/231614';
 import { MG } from '../figma_app/277330';
-import { ce } from '../figma_app/347146';
+import { isChromebookTabbed } from '../figma_app/347146';
 import { _H, ae, CS, gX, nL, zj } from '../figma_app/448654';
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from '../figma_app/465071';
 import { throwError, throwTypeError } from '../figma_app/465776';
@@ -1005,7 +1005,7 @@ export function $$ek0(e) {
       [eC.DUPLICATE]: () => !!(e.tileActions.duplicate && g),
       [eC.DUPLICATE_TO_DRAFTS]: () => !!(e.tileActions.duplicateToDrafts && g),
       [eC.OPEN]: () => !!(e.tileActions.open && u),
-      [eC.OPEN_NEW_TAB]: () => !!(e.tileActions.openNewTab && u && !desktopAPIInstance && !ce()),
+      [eC.OPEN_NEW_TAB]: () => !!(e.tileActions.openNewTab && u && !desktopAPIInstance && !isChromebookTabbed()),
       [eC.PIN_FILE_TO_FOLDER]: () => {
         let t = tH?.canPin;
         return !!(e.tileActions.pinToFolder && !d && t1 === 1 && v && t);

@@ -6,7 +6,7 @@ import { TOGGLE_LINK_COMMAND, $isLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister, $findMatchingParent } from "../vendor/425002";
 import { createCommand, $getSelection, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW, $setSelection, KEY_MODIFIER_COMMAND, $isRangeSelection, COMMAND_PRIORITY_HIGH, COMMAND_PRIORITY_CRITICAL, CLICK_COMMAND } from "lexical";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { lQ } from "../905/934246";
 import { Point } from "../905/736624";
 import { c as _$$c } from "../905/196462";
@@ -227,7 +227,7 @@ export function $$S0({
         let n = $findMatchingParent(i, $isLinkNode);
         if (n && (e.metaKey || e.ctrlKey)) {
           let e = n.getURL();
-          m(RK({
+          m(setupHyperlinkHandler({
             rawInput: e
           }));
           return !0;

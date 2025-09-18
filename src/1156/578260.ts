@@ -10,7 +10,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { v as _$$v } from "../905/479136";
-import { em } from "../figma_app/297957";
+import { useMakeEmptyStateRefreshExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Nm } from "../figma_app/202307";
 import { E as _$$E } from "../figma_app/626557";
@@ -69,7 +69,7 @@ export async function $$E1(e, t, n, r) {
 }
 export function $$S0(e, t) {
   let [n, i] = useState(!1);
-  let s = em({
+  let s = useMakeEmptyStateRefreshExperiment({
     logExposure: !0
   });
   let a = selectCurrentFile();

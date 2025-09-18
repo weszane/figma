@@ -10,14 +10,14 @@ import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../9
 import { WR, X0 } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
-import { Sc } from '../905/18797';
+import { isNullOrFailure } from '../905/18797';
 import { R as _$$R4 } from '../905/22352';
 import { aj as _$$aj, uf as _$$uf, uu as _$$uu, fJ, Ut, w7 } from '../905/25169';
 import { W as _$$W } from '../905/25249';
 import { yu as _$$yu, FU } from '../905/26824';
 import { T as _$$T2 } from '../905/27228';
 import { iZ as _$$iZ } from '../905/29425';
-import { setDeletedFiles, setDeletedRepos, beginCreateNewFolder, hideMobileNav, stopCreateNewFolder, setFileBrowserLoading, searchResultClicked, setBrowserTileSortView, showMobileNav } from '../905/34809';
+import { beginCreateNewFolder, hideMobileNav, searchResultClicked, setBrowserTileSortView, setDeletedFiles, setDeletedRepos, setFileBrowserLoading, showMobileNav, stopCreateNewFolder } from '../905/34809';
 import { P as _$$P3 } from '../905/35881';
 import { p as _$$p } from '../905/36308';
 import { z4 } from '../905/37051';
@@ -44,7 +44,7 @@ import { C as _$$C2 } from '../905/109977';
 import { LivestoreBinding, LivestoreStore } from '../905/113138';
 import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
 import { eo as _$$eo, En, IN, jx, KE, Kl, SI } from '../905/116101';
-import { xK } from '../905/125218';
+import { fullscreenPerfManager } from '../905/125218';
 import { E as _$$E4 } from '../905/128063';
 import { KindEnum, PopupType, PositionEnum } from '../905/129884';
 import { filterNavigationConfig, navigationConfig } from '../905/139708';
@@ -66,9 +66,9 @@ import { g as _$$g } from '../905/181093';
 import { t as _$$t4 } from '../905/181774';
 import { i as _$$i4 } from '../905/182187';
 import { Z as _$$Z4 } from '../905/184216';
-import { i_ as _$$i_, FB, Q5 } from '../905/187165';
+import { getVisibleTheme, getThemePreferenceFromLocalStorage, isEnhancedContrastEnabled } from '../905/187165';
 import { permissionScopeHandler as _$$l3 } from '../905/189185';
-import { l as _$$l10 } from '../905/190247';
+import { getGpuDeviceInfo } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
 import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
 import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redirectAfterRedeem, startSamlEmailVerification } from '../905/194276';
@@ -123,7 +123,7 @@ import { BusyReadyState, NEW_COMMENT_ID } from '../905/380385';
 import { Cs as _$$Cs } from '../905/381612';
 import { generateUniqueKey } from '../905/383708';
 import { getWAFChallengeType, wafManager } from '../905/394005';
-import { dH as _$$dH, tJ as _$$tJ, uo as _$$uo6, yJ as _$$yJ6, _P, K5 } from '../905/395917';
+import { orgsBatchPut, orgsLockAccount, orgsLockOrgs, orgsSetOrgId, orgsUnlockOrgs } from '../905/395917';
 import { _ as _$$_ } from '../905/401345';
 import { U as _$$U3 } from '../905/402186';
 import { withParsedMeta } from '../905/405710';
@@ -161,13 +161,13 @@ import { G as _$$G2, j as _$$j2 } from '../905/496937';
 import { f as _$$f, r as _$$r2 } from '../905/501976';
 import { handleAtomEvent } from '../905/502364';
 import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
-import { trackFileLoad, appendSearchParams, appendUserIdToUrl, waitForVisibility, appendSearchParam, attachUserIdToLinks } from '../905/508367';
+import { appendSearchParam, appendSearchParams, appendUserIdToUrl, attachUserIdToLinks, trackFileLoad, waitForVisibility } from '../905/508367';
 import { TranslationErrors } from '../905/508408';
 import { vv } from '../905/508457';
 import { RecordingProvider } from '../905/511649';
 import { resolveTeamId } from '../905/515860';
 import { OJ } from '../905/519092';
-import { r as _$$r9 } from '../905/520829';
+import { APILoadingStatus } from '../905/520829';
 import { J as _$$J2 } from '../905/521144';
 import { Button } from '../905/521428';
 import { ex as _$$ex } from '../905/524523';
@@ -189,7 +189,7 @@ import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
 import { l as _$$l7 } from '../905/579959';
 import { applyOptimisticUpdates } from '../905/581820';
-import { pE as _$$pE, yJ as _$$yJ8 } from '../905/584989';
+import { setTeamUsersInitial, putTeamUser } from '../905/584989';
 import { t3 as _$$t8, xH as _$$xH4, YG as _$$YG, CU, Dp, EN, hq, JG, Mi, Mn, OT, Pb, qM, TL, w3, Ww, zv } from '../905/586954';
 import { WZ } from '../905/587414';
 import { h as _$$h3 } from '../905/594794';
@@ -216,11 +216,11 @@ import { ResourceStatus } from '../905/663269';
 import { j2 } from '../905/667970';
 import { S as _$$S4 } from '../905/669334';
 import { measureAsyncDuration, measureSyncDuration } from '../905/670985';
-import { sh as _$$sh, uA as _$$uA, xN, YO } from '../905/672897';
+import { fetchRepoRoles, fetchFolderRoles, fetchTeamRoles, fetchFileRoles } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
-import { setEnvironmentFlag, RETRY_COUNT, hasStatsigClientApiKey, isPlanKeyTargetingEnabled } from '../905/683495';
+import { hasStatsigClientApiKey, isPlanKeyTargetingEnabled, RETRY_COUNT, setEnvironmentFlag } from '../905/683495';
 import { replaceColonWithDash } from '../905/691205';
 import { Hc } from '../905/694658';
 import { e0 as _$$e3 } from '../905/696396';
@@ -304,7 +304,7 @@ import { P6, VK, YF, YK } from '../905/880488';
 import { useHasParentOrgId } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, deleteTeam, hydrateFileBrowser, patchOrgs, putCommunityProfile, putOrgs, putTeam, putUser, setCommunityAuthedActiveProfile, setSessionStateAction, setUserInOrgs } from '../905/890368';
-import { contextSwitchAtom, prefetchAtom, initializeAtom } from '../905/895600';
+import { contextSwitchAtom, initializeAtom, prefetchAtom } from '../905/895600';
 import { p as _$$p4 } from '../905/895920';
 import { t as _$$t } from '../905/897919';
 import { Au, h8, UK } from '../905/898493';
@@ -318,7 +318,7 @@ import { hideDropdownAction, initAction, selectViewAction, showDropdownAction, u
 import { A7, EL, H_ } from '../905/932769';
 import { b as _$$b3 } from '../905/937225';
 import { o as _$$o3 } from '../905/938553';
-import { f as _$$f4 } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
 import { F1 } from '../905/941249';
 import { Gk as _$$Gk, jH } from '../905/950959';
@@ -361,7 +361,7 @@ import { batchPutFileAction, batchSubscribeToRealtimeAction, clearActiveFileUser
 import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
-import { Wl } from '../figma_app/88239';
+import { isFullscreenOverview } from '../figma_app/88239';
 import { aK as _$$aK, ho as _$$ho2, il as _$$il, lz as _$$lz, p5 as _$$p3, pj as _$$pj, PQ as _$$PQ, re as _$$re, Uv as _$$Uv, bO, Bs, CN, D9, fG, fk, FP, fy, Gm, JM, Jt, kP, Kx, OB, Qm, R5, Rw, U8, UC, UM, vg, Wk, XE, XQ, Y6, yv, Z1, Z_ } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { Ob } from '../figma_app/111825';
@@ -389,11 +389,11 @@ import { selectPermissionsState } from '../figma_app/212807';
 import { bO as _$$bO, Cg as _$$Cg, xA as _$$xA, jt, LC, qy } from '../figma_app/216057';
 import { wJ as _$$wJ } from '../figma_app/216696';
 import { N as _$$N9 } from '../figma_app/240060';
-import { $I, $V, $w, aB as _$$aB, bE as _$$bE2, ii as _$$ii, Jt as _$$Jt, mw as _$$mw, n9 as _$$n, r1 as _$$r5, uo as _$$uo2, yH as _$$yH, yJ as _$$yJ3, _E, bQ, TI, WC } from '../figma_app/240735';
+import { batchDeleteTeamMembers, batchJoinTeamAction, batchPutTeamAction, beginRenameTeamAction, changeDefaultPermissionAction, changeOrgAccessAction, changeSharingSettingsAction, deleteTeamAction, getTeamAction, joinTeamAction, postTeamAction, putTeamAction, renameTeamAction, setTeamCreationLoadingAction, setTeamMembersAction, setTeamOptimistThunk, stopRenameTeamAction } from '../figma_app/240735';
 import { m as _$$m2 } from '../figma_app/247343';
 import { tB as _$$tB, wc, Zp } from '../figma_app/253220';
 import { N as _$$N0 } from '../figma_app/268271';
-import { DialogTitle, DialogBody, DialogContents, DialogActionStrip, DialogFooter, DialogHeader } from '../figma_app/272243';
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h2 } from '../figma_app/275739';
 import { Gk } from '../figma_app/277330';
@@ -409,7 +409,7 @@ import { mg as _$$mg, on as _$$on, j3, Ri } from '../figma_app/327577';
 import { E as _$$E6, hZ as _$$hZ4, Lx, MT } from '../figma_app/330108';
 import { M2 as _$$M3, Sp as _$$Sp, k3 } from '../figma_app/332085';
 import { E as _$$E7, hZ as _$$hZ5 } from '../figma_app/342125';
-import { ce as _$$ce, cm as _$$cm, GH } from '../figma_app/347146';
+import { isChromebookTabbed, isAllowedPath, setupChromeOSListeners } from '../figma_app/347146';
 import { mapFileProperties } from '../figma_app/349248';
 import { fj } from '../figma_app/357047';
 import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
@@ -421,7 +421,7 @@ import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as 
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217';
-import { isWorkDomainType, isSyntheticTesterEmail, isValidEmail } from '../figma_app/416935';
+import { isSyntheticTesterEmail, isValidEmail, isWorkDomainType } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
 import { viewKeys } from '../figma_app/422062';
 import { hg as _$$hg } from '../figma_app/425489';
@@ -453,13 +453,13 @@ import { Tf } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { l7 as _$$l8, uV as _$$uV, uw as _$$uw, fs, GV, KJ, L4, Qi, Vx } from '../figma_app/559491';
-import { getCurrentTeamId, sortItemsByOrder, hasTeamPermissions } from '../figma_app/598018';
+import { getCurrentTeamId, hasTeamPermissions, sortItemsByOrder } from '../figma_app/598018';
 import { $l, $o, bE as _$$bE, yJ as _$$yJ2, HA, IU, Kc, MR, Q2, y2, yH } from '../figma_app/598926';
 import { Dl as _$$Dl, i_ as _$$i_2 } from '../figma_app/610446';
 import { aZ as _$$aZ2 } from '../figma_app/613182';
 import { a as _$$a } from '../figma_app/620913';
 import { copyTextToClipboard } from '../figma_app/623293';
-import { Fy } from '../figma_app/623300';
+import { getNodeStatus } from '../figma_app/623300';
 import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
@@ -473,12 +473,12 @@ import { y as _$$y5 } from '../figma_app/705249';
 import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
 import { loadingStateDelete, loadingStatePutFailure, loadingStatePutFailureReason, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946';
-import { aV as _$$aV2 } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { LP } from '../figma_app/728005';
 import { ZG } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
-import { mergeVersions, isCommunityHubView, getStatusOrDefault, isUserAssociatedWithProfile, findProfile, getSelectedViewPluginVersions, mapCommentsAndAuthors } from '../figma_app/740025';
+import { findProfile, getSelectedViewPluginVersions, getStatusOrDefault, isCommunityHubView, isUserAssociatedWithProfile, mapCommentsAndAuthors, mergeVersions } from '../figma_app/740025';
 import { LQ } from '../figma_app/741211';
 import { consumeFullscreenEventState, setPropertiesPanelTab } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
@@ -495,7 +495,7 @@ import { parsePxInt } from '../figma_app/783094';
 import { fileApiHandler } from '../figma_app/787550';
 import { parseMessage, realtimeClient } from '../figma_app/804490';
 import { eu as _$$eu } from '../figma_app/807786';
-import { L4 as _$$L3 } from '../figma_app/819288';
+import { containsDash } from '../figma_app/819288';
 import { pz as _$$pz, jz } from '../figma_app/825489';
 import { wH } from '../figma_app/828908';
 import { SubscriptionType } from '../figma_app/831101';
@@ -524,7 +524,7 @@ import { $K, ax as _$$ax2, ck as _$$ck3, cQ as _$$cQ, db as _$$db, F0 as _$$F8, 
 import { A as _$$A7 } from '../figma_app/965813';
 import { o2 as _$$o7, s7 as _$$s3 } from '../figma_app/968813';
 import { lr as _$$lr, EG, Ji, qC } from '../figma_app/972736';
-import { cz as _$$cz, l7 as _$$l2, rg as _$$rg, _l, Dl, q0, qj, RH, Z8 } from '../figma_app/976345';
+import { isViewReloadSensitive, clearPendingReload, hasPendingReload, switchAccountAndNavigate, scheduleReload, sendIpcRefreshSession, setFileBrowserLoadingHandler, ReloadReasonEnum, reloadIfPending } from '../figma_app/976345';
 import { hZ as _$$hZ, uo as _$$uo4, yJ as _$$yJ4, bu, IJ, Pg } from '../figma_app/990058';
 import { IK } from '../figma_app/991245';
 import { hZ as _$$hZ3, wc as _$$wc, yH as _$$yH5 } from '../figma_app/996356';
@@ -1653,7 +1653,7 @@ let t8 = {
     customHistory.redirect(i);
   },
   selectView(e, t) {
-    xK.start('editorPreloaded');
+    fullscreenPerfManager.start('editorPreloaded');
     e.dispatch(selectViewAction(t));
   },
   setRealtimeToken(e, t) {
@@ -1795,7 +1795,7 @@ if (desktopAPIInstance && getInitialOptions().user_data && (desktopAPIInstance.s
   vapidKey: getInitialOptions().firebase_cloud_messaging_browser_notifications.vapid_id,
   userId: getInitialOptions().user_data.id
 })), desktopAPIInstance) {
-  let e = FB();
+  let e = getThemePreferenceFromLocalStorage();
   e !== null && desktopAPIInstance.setThemePreference(e);
 }
 if (desktopAPIInstance) {
@@ -2098,7 +2098,7 @@ let iK = e => t => function (i) {
 let i$ = createActionCreator('REALTIME_UNSUBSCRIBE');
 let iZ = createActionCreator('REALTIME_BATCH_SUBSCRIBE');
 let i2 = e => t => function (i) {
-  if (_$$yH.matches(i)) {
+  if (deleteTeamAction.matches(i)) {
     let n = e.getState();
     let r = e.getState()?.user;
     let a = e.getState().plans;
@@ -2114,7 +2114,7 @@ let i2 = e => t => function (i) {
       if (!r || !s || o !== s) return;
       let n = c[0];
       n && n.plan_type === OrganizationType.ORG ? (t = n.plan_id, i = null) : n && n.plan_type === OrganizationType.TEAM ? (i = n.plan_id, t = null) : (t = null, i = null);
-      e.dispatch(_l({
+      e.dispatch(switchAccountAndNavigate({
         workspace: {
           userId: r.id,
           orgId: t,
@@ -2176,22 +2176,22 @@ let i2 = e => t => function (i) {
       });
     }
     u();
-  } else if (_$$Jt.matches(i)) {
+  } else if (getTeamAction.matches(i)) {
     let t = i.payload.teamId;
     let n = teamAPIClient.getTeam({
       teamId: t
     }).then(({
       data: i
     }) => {
-      e.dispatch(_$$yJ3({
+      e.dispatch(setTeamOptimistThunk({
         team: i.meta,
         userInitiated: !1
       }));
-      xN(t, e);
+      fetchTeamRoles(t, e);
     });
     setupLoadingStateHandler(n, e, `TEAM_GET_ACTION_${t}`);
   } else {
-    selectViewAction.matches(i) && i.payload.view === 'team' && e.getState().teams[i.payload.teamId] == null && e.dispatch(_$$Jt({
+    selectViewAction.matches(i) && i.payload.view === 'team' && e.getState().teams[i.payload.teamId] == null && e.dispatch(getTeamAction({
       teamId: i.payload.teamId,
       shouldLoadFolders: !0
     }));
@@ -2376,12 +2376,12 @@ let nx = new class {
   }
 }();
 let nS = e => t => function (i) {
-  if (_$$ce() && selectViewAction.matches(i)) {
+  if (isChromebookTabbed() && selectViewAction.matches(i)) {
     let n = e.getState();
     if (n.selectedView === _$$o4 || i.payload === _$$o4) return t(i);
     let r = selectedViewToPath(n, n.selectedView);
     let a = selectedViewToPath(n, i.payload);
-    if (_$$cm(r) !== _$$cm(a)) {
+    if (isAllowedPath(r) !== isAllowedPath(a)) {
       customHistory.unsafeRedirectWithLocationHref(a);
       return;
     }
@@ -4957,7 +4957,7 @@ function sA(e, t) {
           if (t.role_data && n && n.id === i.user_id) {
             let i = e.getState();
             let n = t.role_data.team;
-            !n || n.deleted_at || i.teams[n.id] || (e.dispatch(_$$bE2({
+            !n || n.deleted_at || i.teams[n.id] || (e.dispatch(postTeamAction({
               team: n
             })), e.dispatch(Yx({})));
             let r = t.role_data.folder;
@@ -5447,21 +5447,21 @@ sj.registerShim(sm, (e, t) => {
   if (t.team) {
     switch (t.method) {
       case 'post':
-        e.dispatch(_$$bE2({
+        e.dispatch(postTeamAction({
           team: t.team
         }));
         break;
       case 'put':
-        t.team.deleted_at ? e.dispatch(_$$yH({
+        t.team.deleted_at ? e.dispatch(deleteTeamAction({
           team: t.team,
           userInitiated: !1
-        })) : e.dispatch(_$$yJ3({
+        })) : e.dispatch(setTeamOptimistThunk({
           team: t.team,
           userInitiated: !1
         }));
         break;
       case 'delete':
-        e.dispatch(_$$yH({
+        e.dispatch(deleteTeamAction({
           team: t.team,
           userInitiated: !1
         }));
@@ -5484,7 +5484,7 @@ sj.registerShim(a1, (e, t) => {
       currentUserOrgId,
       orgById
     } = e.getState();
-    currentUserOrgId && orgById[currentUserOrgId] && e.dispatch(_$$yJ6({
+    currentUserOrgId && orgById[currentUserOrgId] && e.dispatch(putOrgs({
       org: {
         ...orgById[currentUserOrgId],
         plugins_whitelist_enforced: t.org.plugins_whitelist_enforced,
@@ -5511,7 +5511,7 @@ sj.registerShim(a2, (e, t) => {
         }
       }
     }
-    e.dispatch(_l({
+    e.dispatch(switchAccountAndNavigate({
       workspace: {
         orgId: t,
         userId: i.user.id
@@ -5528,7 +5528,7 @@ sj.registerShim(a2, (e, t) => {
     })) : t.method === 'put' || t.method === 'post' ? e.dispatch(_$$yJ4({
       orgUser: r,
       userInitiated: !1
-    })) : e.dispatch(_l({
+    })) : e.dispatch(switchAccountAndNavigate({
       workspace: {
         orgId: n,
         userId: r.user_id
@@ -5894,7 +5894,7 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
   return n;
 };
 let sK = e => t => function (i) {
-  selectViewAction.matches(i) && e.dispatch(Z8({
+  selectViewAction.matches(i) && e.dispatch(reloadIfPending({
     selectedView: i.payload
   }));
   return t(i);
@@ -5908,16 +5908,16 @@ let sq = e => t => function (i) {
     let s = getSelectedFile(a);
     if (s && (n = a.user, r = i.payload, n && r.view === 'fullscreen')) {
       let t = !!s.team_id && canViewTeam(s.team_id, a);
-      YO(s, e, {
+      fetchFileRoles(s, e, {
         shouldFetchTeamUsers: t
       });
       let i = getRepoById(s, a.repos);
-      i && _$$sh(i, a.currentUserOrgId, e);
+      i && fetchRepoRoles(i, a.currentUserOrgId, e);
     } else if (a.selectedView.view === 'team') {
       let t = a.selectedView.teamId;
       if (canViewTeam(t, a)) {
         let i = a.teams[t];
-        i && xN(i.id, e);
+        i && fetchTeamRoles(i.id, e);
       }
     }
     return;
@@ -5926,9 +5926,9 @@ let sq = e => t => function (i) {
     let t = e.getState();
     if (i.payload.type === _$$W.type) {
       let n = t.folders[i.payload.data.folderId];
-      if (n && _$$uA(n.id, e), n && n.team_id && n.team_id in t.roles.byTeamId) {
+      if (n && fetchFolderRoles(n.id, e), n && n.team_id && n.team_id in t.roles.byTeamId) {
         let i = t.teams[n.team_id];
-        i && xN(i.id, e);
+        i && fetchTeamRoles(i.id, e);
       }
     }
   } else if (_$$yH3.matches(i)) {
@@ -5948,7 +5948,7 @@ let sq = e => t => function (i) {
       case FResourceCategoryType.TEAM:
         if (!canViewTeam(r.resource_id_or_key, n)) {
           let t = n.teams[r.resource_id_or_key];
-          t && e.dispatch(_$$yH({
+          t && e.dispatch(deleteTeamAction({
             userInitiated: !1,
             team: t
           }));
@@ -6527,7 +6527,7 @@ let oA = e => t => function (i) {
     let t = e.getState().loadingState;
     if (!isIntegrationContext() && i.payload.orgs.length > 0) {
       let i = _$$au2.loadingKeyForPayload();
-      Sc(t, i) && e.dispatch(_$$au2());
+      isNullOrFailure(t, i) && e.dispatch(_$$au2());
     }
   }
   return t(i);
@@ -6664,7 +6664,7 @@ let oj = {};
 let oV = new Set();
 let oG = HY({
   activeThread(e = null, t) {
-    return _$$cL3.matches(t) || _$$js.matches(t) ? null : _$$Fm.matches(t) ? _$$L3(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !_$$y5() ? e : {
+    return _$$cL3.matches(t) || _$$js.matches(t) ? null : _$$Fm.matches(t) ? containsDash(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !_$$y5() ? e : {
       id: t.payload.threadId,
       source: t.payload.source
     } : $0.matches(t) ? {
@@ -7413,10 +7413,10 @@ let o0 = HY({
     return _$$yJ.matches(t) && e && t.payload.user.id === e.primary_user_id && t.payload.user.img_url ? {
       ...e,
       img_url: t.payload.user.img_url
-    } : $I.matches(t) && e && t.payload.team.community_profile_id === e.id && t.payload.team.img_url ? {
+    } : putTeamAction.matches(t) && e && t.payload.team.community_profile_id === e.id && t.payload.team.img_url ? {
       ...e,
       img_url: t.payload.team.img_url
-    } : _$$yJ6.matches(t) && e && t.payload.org.community_profile_id === e.id && t.payload.org.img_url ? {
+    } : putOrgs.matches(t) && e && t.payload.org.community_profile_id === e.id && t.payload.org.img_url ? {
       ...e,
       img_url: t.payload.org.img_url
     } : e;
@@ -8018,7 +8018,7 @@ function lD(e) {
       }
       return e || t;
     }
-    if (!_$$yH.matches(i) || !(i.payload.team.id in t)) return t;
+    if (!deleteTeamAction.matches(i) || !(i.payload.team.id in t)) return t;
     {
       let e = {
         ...t
@@ -8251,7 +8251,7 @@ let lV = HY({
       });
       return Object.values(i);
     }
-    if (_$$mw.matches(t)) {
+    if (joinTeamAction.matches(t)) {
       let i = t.payload.teamId;
       return e.map(e => e.id === i ? {
         ...e,
@@ -8259,7 +8259,7 @@ let lV = HY({
         orphaned: !1
       } : e);
     }
-    if (_$$ii.matches(t)) {
+    if (batchJoinTeamAction.matches(t)) {
       let i = t.payload.teamIds;
       return e.map(e => i.includes(e.id) ? {
         ...e,
@@ -8267,7 +8267,7 @@ let lV = HY({
         orphaned: !1
       } : e);
     }
-    if (_$$yH.matches(t)) {
+    if (deleteTeamAction.matches(t)) {
       let i = t.payload.team;
       return t.payload.teamDelete ? e.filter(e => e.id !== i.id) : e.reduce((e, t) => {
         if (i.id === t.id) {
@@ -8285,7 +8285,7 @@ let lV = HY({
         return e;
       }, []);
     }
-    if (_$$bE2.matches(t)) {
+    if (postTeamAction.matches(t)) {
       let i = t.payload.team;
       return i.org_id ? e.findIndex(e => e.id === i.id) >= 0 ? e.map(e => e.id === i.id ? {
         ...e,
@@ -8295,14 +8295,14 @@ let lV = HY({
         member_count: 1
       }] : e;
     }
-    if ($I.matches(t)) {
+    if (putTeamAction.matches(t)) {
       let i = t.payload.team.id;
       return e.map(e => e.id === i ? {
         ...e,
         ...t.payload.team
       } : e);
     }
-    if ($w.matches(t)) {
+    if (renameTeamAction.matches(t)) {
       let i = t.payload.team.id;
       let n = t.payload.name;
       return e.map(e => e.id === i ? {
@@ -8310,7 +8310,7 @@ let lV = HY({
         ...t.payload.team,
         name: n
       } : e);
-    } else if (_$$aB.matches(t)) {
+    } else if (changeSharingSettingsAction.matches(t)) {
       let i = t.payload.team.id;
       let n = t.payload.sharingAudienceControl;
       let r = t.payload.orgBrowsable;
@@ -8327,7 +8327,7 @@ let lV = HY({
         org_browsable: r,
         hidden: a
       } : e);
-    } else if (bQ.matches(t)) {
+    } else if (changeOrgAccessAction.matches(t)) {
       let i = t.payload.team.id;
       let n = t.payload.orgAccess;
       return e.map(e => e.id === i ? {
@@ -8857,7 +8857,7 @@ function l2(e = l1, t) {
   } : e;
 }
 function l5(e = {}, t) {
-  return _$$r5.matches(t) ? {
+  return setTeamCreationLoadingAction.matches(t) ? {
     ...e,
     loading: t.payload.loading
   } : selectViewAction.matches(t) && t.payload.view === 'teamCreation' ? {
@@ -8869,7 +8869,7 @@ function l5(e = {}, t) {
 let l3 = _$$P;
 let l6 = _$$Z;
 function dt(e = {}, t) {
-  if ($V.matches(t)) {
+  if (setTeamMembersAction.matches(t)) {
     let i = {
       ...e
     };
@@ -8892,7 +8892,7 @@ function dt(e = {}, t) {
       return t;
     }
   }
-  if (_E.matches(t)) {
+  if (batchDeleteTeamMembers.matches(t)) {
     let i = t.payload.teamId;
     let n = t.payload.emails;
     let r = e[i];
@@ -9023,7 +9023,7 @@ function dt(e = {}, t) {
     }
   }
   if (l3.matches(t)) return l6(e, t);
-  if (_$$yJ8.matches(t)) {
+  if (putTeamUser.matches(t)) {
     let {
       teamId,
       teamUsers
@@ -9058,10 +9058,10 @@ function di(e, t, i) {
 function dn(e = {
   renamingTeam: !1
 }, t) {
-  return WC.matches(t) ? {
+  return beginRenameTeamAction.matches(t) ? {
     ...e,
     renamingTeam: !0
-  } : TI.matches(t) ? {
+  } : stopRenameTeamAction.matches(t) ? {
     ...e,
     renamingTeam: !1
   } : e;
@@ -10917,7 +10917,7 @@ function uX(e, t, i) {
   });
 }
 let uQ = Oi((e = {}, t) => {
-  if (_$$pE.matches(t) || _$$yJ8.matches(t)) {
+  if (setTeamUsersInitial.matches(t) || putTeamUser.matches(t)) {
     let {
       teamId,
       teamUsers
@@ -10964,20 +10964,20 @@ let u0 = Oi((e = {}, t) => {
     n?.team == null || i[n.team.id] || (i[n.team.id] = n.team);
     return i;
   }
-  if (_$$bE2.matches(t)) {
+  if (postTeamAction.matches(t)) {
     return {
       ...e,
       [t.payload.team.id]: t.payload.team
     };
   }
-  if (_$$yH.matches(t)) {
+  if (deleteTeamAction.matches(t)) {
     let i = {
       ...e
     };
     delete i[t.payload.team.id];
     return i;
   }
-  if ($w.matches(t)) {
+  if (renameTeamAction.matches(t)) {
     let i = {
       ...e[t.payload.team.id],
       name: t.payload.name
@@ -10988,7 +10988,7 @@ let u0 = Oi((e = {}, t) => {
         [t.payload.team.id]: i
       };
     }
-  } else if (_$$aB.matches(t)) {
+  } else if (changeSharingSettingsAction.matches(t)) {
     let i = null;
     let n = null;
     t.payload.sharingAudienceControl === FPermissionLevelType.ORG_EDIT ? (i = FAccessLevelType.PUBLIC, n = FBasicPermissionType.EDIT) : t.payload.sharingAudienceControl === FPermissionLevelType.ORG_VIEW ? (i = FAccessLevelType.PUBLIC, n = FBasicPermissionType.VIEW) : t.payload.sharingAudienceControl === FPermissionLevelType.INVITE_ONLY && (t.payload.orgBrowsable ? i = FAccessLevelType.PRIVATE : t.payload.hidden && (i = FAccessLevelType.SECRET));
@@ -11006,7 +11006,7 @@ let u0 = Oi((e = {}, t) => {
         [t.payload.team.id]: r
       };
     }
-  } else if (bQ.matches(t)) {
+  } else if (changeOrgAccessAction.matches(t)) {
     let i = {
       ...e[t.payload.team.id],
       org_access: t.payload.orgAccess
@@ -11017,7 +11017,7 @@ let u0 = Oi((e = {}, t) => {
         [t.payload.team.id]: i
       };
     }
-  } else if (_$$n.matches(t)) {
+  } else if (changeDefaultPermissionAction.matches(t)) {
     let i = {
       ...e[t.payload.team.id],
       default_permission: t.payload.defaultPermission
@@ -11026,7 +11026,7 @@ let u0 = Oi((e = {}, t) => {
       ...e,
       [i.id]: i
     };
-  } else if (_$$uo2.matches(t)) {
+  } else if (batchPutTeamAction.matches(t)) {
     let i = {
       ...e
     };
@@ -11037,7 +11037,7 @@ let u0 = Oi((e = {}, t) => {
       };
     }
     return i;
-  } else if ($I.matches(t)) {
+  } else if (putTeamAction.matches(t)) {
     let i = e[t.payload.team.id];
     return {
       ...e,
@@ -11648,7 +11648,7 @@ let pg = {
         }
       };
     }
-    if (_$$uo6.matches(t)) {
+    if (orgsBatchPut.matches(t)) {
       let i = {
         ...e
       };
@@ -11663,10 +11663,10 @@ let pg = {
     return e;
   },
   currentUserOrgId(e = null, t) {
-    return initAction.matches(t) || hydrateFileBrowser.matches(t) ? getOrgId() : _P.matches(t) ? t.payload.orgId : e;
+    return initAction.matches(t) || hydrateFileBrowser.matches(t) ? getOrgId() : orgsSetOrgId.matches(t) ? t.payload.orgId : e;
   },
   lockedOrgIds(e = new Set(), t) {
-    if (_$$tJ.matches(t)) {
+    if (orgsLockOrgs.matches(t)) {
       let i = new Set(e);
       t.payload.orgIds.forEach(e => {
         i.add(e);
@@ -11674,7 +11674,7 @@ let pg = {
       return i;
     }
     if (hydrateFileBrowser.matches(t)) return new Set(t.payload.locked_orgs);
-    if (K5.matches(t)) {
+    if (orgsUnlockOrgs.matches(t)) {
       let i = new Set(e);
       t.payload.orgIds.forEach(e => {
         i.has(e) && i.$$delete(e);
@@ -11684,7 +11684,7 @@ let pg = {
     return e;
   },
   isAccountLockedDuringOrgOperation(e = !1, t) {
-    return _$$dH.matches(t) ? t.payload.is_account_locked_during_org_operation : hydrateFileBrowser.matches(t) ? !!t.payload.is_account_locked_during_org_operation : e;
+    return orgsLockAccount.matches(t) ? t.payload.is_account_locked_during_org_operation : hydrateFileBrowser.matches(t) ? !!t.payload.is_account_locked_during_org_operation : e;
   },
   hasPersonalSpace(e = !0, t) {
     return hydrateFileBrowser.matches(t) ? !t.payload.disable_personal : e;
@@ -11977,19 +11977,19 @@ let pg = {
     if (loadingStatePutLoading.matches(t)) {
       return {
         ...e,
-        [t.payload.key]: _$$r9.LOADING
+        [t.payload.key]: APILoadingStatus.LOADING
       };
     }
     if (loadingStatePutSuccess.matches(t)) {
       return {
         ...e,
-        [t.payload.key]: _$$r9.SUCCESS
+        [t.payload.key]: APILoadingStatus.SUCCESS
       };
     }
     if (loadingStatePutFailure.matches(t)) {
       return {
         ...e,
-        [t.payload.key]: _$$r9.FAILURE
+        [t.payload.key]: APILoadingStatus.FAILURE
       };
     }
     {
@@ -12446,10 +12446,10 @@ let pg = {
     enhancedContrast: !1
   }, t) {
     if (hydrateFileBrowser.matches(t)) {
-      let e = FB();
-      let t = Q5();
+      let e = getThemePreferenceFromLocalStorage();
+      let t = isEnhancedContrastEnabled();
       return {
-        visibleTheme: _$$i_(e),
+        visibleTheme: getVisibleTheme(e),
         themePreference: e,
         enhancedContrast: t
       };
@@ -12457,7 +12457,7 @@ let pg = {
     return _$$lk.matches(t) || _$$nq.matches(t) ? {
       ...e,
       themePreference: t.payload.theme,
-      visibleTheme: _$$i_(t.payload.theme)
+      visibleTheme: getVisibleTheme(t.payload.theme)
     } : wG.matches(t) ? {
       ...e,
       visibleTheme: t.payload.theme
@@ -12851,7 +12851,7 @@ let pg = {
   lastVisitedPlan(e = null, t) {
     let i = e?.planId || null;
     let n = e?.planType || null;
-    setLastVisitedPlan.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : _P.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG);
+    setLastVisitedPlan.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : orgsSetOrgId.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG);
     return i && n ? {
       planId: i,
       planType: n
@@ -13048,7 +13048,7 @@ let pU = _$$z3.object({
   canaryCommit: _$$z3.string()
 });
 function pB(e, t) {
-  return _$$cz(e.getState().selectedView, t);
+  return isViewReloadSensitive(e.getState().selectedView, t);
 }
 let pV = isProdCluster() || isGovCluster() ? 'https://s3-figma-force-client-reloads-production.figma.com/periodic_refresh.json' : 'https://s3-figma-force-client-reloads-staging.staging.figma.com/periodic_refresh.json';
 let pG = isProdCluster() || isGovCluster() ? 'https://s3-figma-force-client-reloads-production.figma.com/currently_deployed.json' : 'https://s3-figma-force-client-reloads-staging.staging.figma.com/currently_deployed.json';
@@ -13240,9 +13240,9 @@ async function p2(e, t, i) {
   let n = await pZ(e);
   return n.status === 'error' ? (pX('fetch_error_currently_deployed'), 'canceled') : n.data ? (pX('on_currently_deployed'), 'canceled') : (p1('triggered', t, i), logInfo('force client reload', 'Reload when convenient', {
     selectedView: i.getState().selectedView.view
-  }), t.disableFullscreenBanner || atomStoreManager.set(_$$T4, !0), t.disableAutomaticReload || i.dispatch(Dl({
+  }), t.disableFullscreenBanner || atomStoreManager.set(_$$T4, !0), t.disableAutomaticReload || i.dispatch(scheduleReload({
     reason: 'force client reload',
-    delay: RH.NONE,
+    delay: ReloadReasonEnum.NONE,
     metadata: {
       isForceClientReload: !0
     },
@@ -13270,7 +13270,7 @@ class p4 {
           this._state = e === 'reloading' ? 'reloading' : 'safe';
         }
       } else {
-        this._state === 'reloading' ? t.status === 'safe' && (_$$l2(), atomStoreManager.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? logInfo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
+        this._state === 'reloading' ? t.status === 'safe' && (clearPendingReload(), atomStoreManager.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? logInfo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
       }
     } catch (e) {
       pQ || (reportError(_$$e.SCENEGRAPH_AND_SYNC, e, {
@@ -13729,7 +13729,7 @@ function mJ() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$aV2();
+  let t = useIsProgressBarHiddenOrLocked();
   let i = selectCurrentFile();
   let n = selectCurrentUser();
   useEffect(() => {
@@ -13746,8 +13746,8 @@ function m5() {
   let t = selectCurrentUser();
   let i = t && !isStudentValidated(t);
   let n = getSelectedViewType() === 'teamUpgrade';
-  let r = _$$f4('entered_pro_cart_flow');
-  let a = _$$f4('completed_pro_cart_flow');
+  let r = selectUserFlag('entered_pro_cart_flow');
+  let a = selectUserFlag('completed_pro_cart_flow');
   useEffect(() => {
     if (!r) return;
     let t = Date.now() - r.createdAt.getTime();
@@ -13761,10 +13761,10 @@ function m3() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$aV2();
+  let t = useIsProgressBarHiddenOrLocked();
   let i = selectCurrentFile();
   let n = selectCurrentUser();
-  let r = _$$f4(_$$at);
+  let r = selectUserFlag(_$$at);
   useEffect(() => {
     if (t || i?.editorType !== FFileType.SITES || !r || !n || n.id !== i.creatorId) return;
     let a = Date.now() - i.createdAt.getTime();
@@ -14111,7 +14111,7 @@ function hV() {
   let e = useFullscreenReady();
   useEffect(() => {
     if (e) {
-      let e = _$$l10();
+      let e = getGpuDeviceInfo();
       e?.webgpuArchitecture.startsWith('metal') && document.body.classList.add('svg_compositing_layer_fix--svgCompositingLayerFix--myVwu');
     }
   }, [e]);
@@ -14129,7 +14129,7 @@ export async function $$hz0(e, t, d = {
     TH(customHistory.location.search);
     registerDeferredCallback(ib);
     performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
-    xK.start('createStoreStart');
+    fullscreenPerfManager.start('createStoreStart');
     let c = !!new URLSearchParams(customHistory.location.search).get('reduxDebug');
     let u = _$$A2.withExtraArgument({
       liveStore: liveStoreInstance
@@ -14346,7 +14346,7 @@ export async function $$hz0(e, t, d = {
     }
     if (T) {
       let e = T;
-      xK.time('initAndHydrateActionNoUserState', () => j(e));
+      fullscreenPerfManager.time('initAndHydrateActionNoUserState', () => j(e));
     }
     if (R && (R.readyState === XMLHttpRequest.DONE ? D() : (R.addEventListener(XHR.Events.ABORT, D, !1), R.addEventListener(XHR.Events.TIMEOUT, D, !1), R.addEventListener(XHR.Events.ERROR, D, !1), R.addEventListener(XHR.Events.LOAD, D, !1))), P) {
       if (P.readyState === XMLHttpRequest.DONE) {
@@ -14378,7 +14378,7 @@ export async function $$hz0(e, t, d = {
       }
       if (e && !isIntegrationContext() && !_$$l()) {
         b.dispatch(setSessionStateAction(e));
-        b.dispatch(q0(e));
+        b.dispatch(sendIpcRefreshSession(e));
         let t = new IpcStorageHandler();
         isInteractionPathCheck() || t.register(_$$y, e => {
           let t = getInitialOptions().user_data?.id;
@@ -14412,7 +14412,7 @@ export async function $$hz0(e, t, d = {
       performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', _$$e.APPLICATION_PLATFORM, () => {
         e = JSON.parse(t);
       }));
-      T ? xK.time('hydrateActionWithUserState', () => {
+      T ? fullscreenPerfManager.time('hydrateActionWithUserState', () => {
         b.dispatch(hydrateFileBrowser(e.meta));
         b.dispatch(_$$Xc());
       }) : j(e.meta);
@@ -14497,7 +14497,7 @@ export async function $$hz0(e, t, d = {
             let l = getTeamIdFromPath(t.path);
             let d = n && l && l !== e.currentTeamId;
             if (a || o || d) {
-              b.dispatch(qj());
+              b.dispatch(setFileBrowserLoadingHandler());
               customHistory.redirect(`${t.path}${t.params}`);
               return;
             }
@@ -14557,7 +14557,7 @@ export async function $$hz0(e, t, d = {
             XHR.post('/api/session/app_auth/redeem', {
               g_secret: t.gSecret
             }).then(e => {
-              b.dispatch(_l({
+              b.dispatch(switchAccountAndNavigate({
                 workspace: e.data.meta.workspace,
                 path: t.path
               }));
@@ -14596,7 +14596,7 @@ export async function $$hz0(e, t, d = {
               let a = Object.keys(i.mirror.sceneGraphSelection);
               let s = a.length === 1 ? i.mirror.sceneGraph.get(a[0])?.type : null;
               let o = a.length && atomStoreManager.get(v2) ? i.mirror.sceneGraph.get(a[0]) : null;
-              if (Wl(i.selectedView)) {
+              if (isFullscreenOverview(i.selectedView)) {
                 t = getI18nString('desktop_bindings.visual_bell.summary_link_copied');
               } else if (s === 'FRAME') {
                 t = getI18nString('desktop_bindings.interstitial.frame_link_copied');
@@ -14735,7 +14735,7 @@ export async function $$hz0(e, t, d = {
           e != null && B(debugState);
         }));
       })();
-      GH();
+      setupChromeOSListeners();
       _$$aZ2(b);
       attachUserIdToLinks();
       (function (e) {
@@ -15007,7 +15007,7 @@ export async function $$hz0(e, t, d = {
             let I = u.openFile;
             if (I && !rv()(I.name, n) && (sendFileName(I.name), n = I.name, t = I.key), !d) {
               let e = p.appModel.pagesList;
-              Fy(e, v) === DataLoadStatus.LOADED && (pageLoaded(), d = !0);
+              getNodeStatus(e, v) === DataLoadStatus.LOADED && (pageLoaded(), d = !0);
             }
           };
           e.subscribe(c);
@@ -15205,7 +15205,7 @@ export async function $$hz0(e, t, d = {
         setInterval(() => {
           sendMetric('active_session', {
             is_safe_to_reload: pB(e),
-            has_pending_reload: _$$rg(),
+            has_pending_reload: hasPendingReload(),
             is_showing_banner: atomStoreManager.get(_$$T4),
             is_backgrounded: document.hidden,
             selected_view: p3(e),
@@ -15239,7 +15239,7 @@ export async function $$hz0(e, t, d = {
         });
         window.addEventListener('online', async () => await p6?.check());
       })(b);
-      let u = xK.time('initialReactRender', () => measureSyncDuration('initialRender', _$$e.CLIENT_PLATFORM, () => {
+      let u = fullscreenPerfManager.time('initialReactRender', () => measureSyncDuration('initialRender', _$$e.CLIENT_PLATFORM, () => {
         let t = function (e) {
           if (!mx()) return e;
           let t = getInitialOptions().launchdarkly_client_side_id || '';

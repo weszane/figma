@@ -9,7 +9,7 @@ import { V as _$$V } from '../642/624414';
 import { m as _$$m, w as _$$w } from '../642/720139';
 import { A as _$$A } from '../642/758804';
 import { T as _$$T } from '../642/794951';
-import { D2, oh } from '../905/18797';
+import { isLoaded, useIsLoading } from '../905/18797';
 import { k as _$$k3 } from '../905/44647';
 import { f as _$$f2 } from '../905/54715';
 import { KeyCodes } from '../905/63728';
@@ -75,7 +75,7 @@ import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
 import { e as _$$e } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { N as _$$N3 } from '../905/645480';
 import { oW } from '../905/675859';
 import { getSingletonSceneGraph } from '../905/700578';
@@ -112,7 +112,7 @@ import { q as _$$q2 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { logCmsError } from '../905/937198';
 import { lY as _$$lY } from '../905/939482';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
 import { Sn } from '../905/946805';
 import { $3 } from '../905/946937';
@@ -150,7 +150,7 @@ import { $H, MA, ye } from '../figma_app/134428';
 import { Vr } from '../figma_app/151869';
 import { He, je } from '../figma_app/155728';
 import { t as _$$t5 } from '../figma_app/162756';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions, isDevEnvironment } from '../figma_app/169182';
 import { ce as _$$ce, r6 as _$$r4, t0 as _$$t3, AS, Bv, dj, fi, Nn, VF } from '../figma_app/177636';
 import { g5 } from '../figma_app/178752';
@@ -219,7 +219,7 @@ import { Ay as _$$Ay, jx, W7 } from '../figma_app/675746';
 import { rp as _$$rp, PI } from '../figma_app/703988';
 import { wY } from '../figma_app/708845';
 import { _C, NG } from '../figma_app/709893';
-import { aV } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { E1 } from '../figma_app/757606';
 import { AppStateTsApi, ComponentPanelTab, Fullscreen, LayoutTabType, PanelType } from '../figma_app/763686';
 import { N as _$$N2 } from '../figma_app/765684';
@@ -236,7 +236,7 @@ import { TrackedLink } from '../figma_app/831799';
 import { z6 } from '../figma_app/846841';
 import { u as _$$u2, V as _$$V4 } from '../figma_app/862515';
 import { generateRecordingKey, useHandleInputEvent, useHandleMouseEvent } from '../figma_app/878298';
-import { dK, vD } from '../figma_app/889655';
+import { selectSceneGraph, getSingleSelectedKey } from '../figma_app/889655';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { fi as _$$fi } from '../figma_app/913823';
 import { _o, GT, YS } from '../figma_app/914674';
@@ -257,7 +257,7 @@ import { Te } from '../vendor/813803';
 import { createPortal } from 'react-dom';
 let l = i;
 function M() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = selectCurrentFile()?.canEdit;
   let s = useFullscreenViewFile();
   let {
@@ -272,7 +272,7 @@ function M() {
   let {
     currentView
   } = wV();
-  let c = !!_$$f(bo);
+  let c = !!selectUserFlag(bo);
   let u = zl(_$$j).currentState === 'no_figma_basics_onboarding_was_shown_in_current_session';
   useEffect(() => {
     !e && t && o() && !c && !u && currentView === S5.Libraries && show();
@@ -546,7 +546,7 @@ function e3({
   });
   let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
   let es = function (e, t) {
-    let s = useSelector(dK);
+    let s = useSelector(selectSceneGraph);
     let r = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, s).join('-') : e.node_id;
     return useHandleMouseEvent(`componentThumb.${r}`, 'contextmenu', e => {
       t(e);
@@ -606,7 +606,7 @@ function e2({
 }) {
   let f = useDispatch();
   let x = _$$I(Cn.AssetsPanel);
-  let y = useSelector(dK);
+  let y = useSelector(selectSceneGraph);
   let _ = useSelector(F9);
   let b = useAtomWithSubscription(_$$T2);
   let C = x.searchOption?.type === _$$I2.ALL;
@@ -4437,7 +4437,7 @@ function nV({
   }(e, d);
   let D = !!dj(e.libraryKey);
   let F = function (e, t) {
-    let s = DP() === 'dark' ? 'dark' : 'light';
+    let s = getVisibleTheme() === 'dark' ? 'dark' : 'light';
     return useMemo(() => {
       if (!t) return;
       let r = nK.find(t => t.name === e.toLowerCase() || e === getI18nString('design_systems.assets_panel.site_embeds') && t.name === 'embeds');
@@ -6895,7 +6895,7 @@ let i4 = ({
   let y = useSelector(e => e.loadingState);
   let _ = selectCurrentFile();
   let b = _?.key;
-  let C = oh(_$$fi);
+  let C = useIsLoading(_$$fi);
   let j = useCallback(r => {
     if (!o) return;
     let n = Date.now() - o;
@@ -6904,11 +6904,11 @@ let i4 = ({
       let t = Mb(e.libraryKey);
       return {
         libraryKey: e.libraryKey,
-        isLoading: !D2(y, t)
+        isLoading: !isLoaded(y, t)
       };
     });
     let l = _ && x != null && yD(_.key) || null;
-    let d = !(l != null && D2(y, l));
+    let d = !(l != null && isLoaded(y, l));
     analyticsEventManager.trackDefinedEvent('assets_panel.search_long_loading', {
       ...t,
       ...s,
@@ -7747,8 +7747,8 @@ function lQ({
     width
   } = e8();
   let l = Math.min(0.7 * width, 240);
-  let a = useSelector(vD);
-  let o = Fk((e, t) => {
+  let a = useSelector(getSingleSelectedKey);
+  let o = useDeepEqualSceneValue((e, t) => {
     let s = e.get(t);
     return s?.name;
   }, a);
@@ -8170,7 +8170,7 @@ function an({
     let t = selectCurrentUser();
     let s = selectCurrentFile();
     let r = jO();
-    let i = _$$f('has_dismissed_component_sidebar_library_upsell_banner');
+    let i = selectUserFlag('has_dismissed_component_sidebar_library_upsell_banner');
     let l = useSelector(e => e.isFreeUser);
     let a = useSelector(selectTeams);
     let o = s?.teamId ? a[s.teamId] : null;

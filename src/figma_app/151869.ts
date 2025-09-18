@@ -17,7 +17,7 @@ import { Ku } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { u as _$$u, hg } from "../figma_app/852050";
-import { Fk, g0, dB, hr } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useSingleSceneValue, useMultipleSceneValues, useSimpleSceneValue } from "../figma_app/167249";
 import { OE } from "../figma_app/155647";
 import { q } from "../905/296913";
 import { NX } from "../figma_app/394327";
@@ -42,7 +42,7 @@ export function $$w13() {
 }
 export function $$O10() {
   let e = $$N11();
-  return Fk((e, t) => t ? e.get(t)?.type : void 0, e);
+  return useDeepEqualSceneValue((e, t) => t ? e.get(t)?.type : void 0, e);
 }
 export function $$R6(e = 0) {
   return Number(e).toLocaleString("en", {
@@ -52,17 +52,17 @@ export function $$R6(e = 0) {
 }
 export function $$L5() {
   let e = $$N11();
-  let t = g0(e);
+  let t = useSingleSceneValue(e);
   if (null != e && null != t) return t;
 }
 export function $$P2() {
   let e = $$C4();
-  let t = dB(e ?? []);
+  let t = useMultipleSceneValues(e ?? []);
   if (e) return t;
 }
 export function $$D7() {
   let e = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
-  return hr((e, t) => e, e);
+  return useSimpleSceneValue((e, t) => e, e);
 }
 export function $$k9(e) {
   return useSelector(t => {

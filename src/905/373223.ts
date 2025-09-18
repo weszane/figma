@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Dw } from "../figma_app/976345";
+import { openCreateTeamFlow } from "../figma_app/976345";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
-import { e5 } from "../figma_app/297957";
+import { hasStarterTeamLoopholeAccess } from "../figma_app/297957";
 import { getUserId } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { hasMultipleOwners } from "../figma_app/598018";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
@@ -232,16 +232,16 @@ let D = registerModal(function (e) {
 export function $$L0() {
   let e = getUserId();
   let t = useDispatch();
-  let i = _$$f("team_creation_speed_bump_dismissed");
+  let i = selectUserFlag("team_creation_speed_bump_dismissed");
   let c = useSelector(e => e.teams);
   let u = useSelector(e => e.roles.byTeamId);
   let p = useSelector(e => e.user);
   let m = () => {
-    e && t(Dw({
+    e && t(openCreateTeamFlow({
       ignoreCurrentPlan: !0
     }));
   };
-  return e && !i && hasMultipleOwners(e, Object.values(c), u) && !e5({
+  return e && !i && hasMultipleOwners(e, Object.values(c), u) && !hasStarterTeamLoopholeAccess({
     userId: e,
     teams: Object.values(c),
     rolesByTeamId: u

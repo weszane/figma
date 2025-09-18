@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
-import { wA, Fk } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from "../figma_app/167249";
 import { c as _$$c } from "../048e062c/525184";
 export function $$s1(e) {
-  let t = wA((e, t) => e.get(t)?.jsxProps || {}, e);
+  let t = useStrictDeepEqualSceneValue((e, t) => e.get(t)?.jsxProps || {}, e);
   return useMemo(() => c(e, t), [e, t]);
 }
 function c(e, t) {
@@ -25,7 +25,7 @@ export function $$d3(e) {
   t && t.clearJSXOverrides();
 }
 export function $$p2(e) {
-  return Fk((e, t) => Object.keys(e.get(t)?.jsxOverrides || {}).length > 0, e);
+  return useDeepEqualSceneValue((e, t) => Object.keys(e.get(t)?.jsxOverrides || {}).length > 0, e);
 }
 export const $H = $$u0;
 export const Cd = $$s1;

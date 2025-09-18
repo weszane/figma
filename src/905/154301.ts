@@ -9,7 +9,7 @@ import { LargeLoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
-import { yH } from "../figma_app/240735";
+import { deleteTeamAction } from "../figma_app/240735";
 import { TrackingProvider } from "../figma_app/831799";
 import { FlashActions } from "../905/573154";
 import { teamAPIClient } from "../905/834575";
@@ -209,7 +209,7 @@ export let $$E0 = registerModal(function (e) {
           onSubmit: t => {
             t.preventDefault();
             e.onDeleteTeam && e.onDeleteTeam();
-            y(yH({
+            y(deleteTeamAction({
               team: e.team,
               userInitiated: !0,
               teamDelete: !0

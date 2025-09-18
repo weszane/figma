@@ -5,7 +5,7 @@ import { h as _$$h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
 import { QL, EM } from "../905/609392";
 import { nk } from "../figma_app/2023";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { AccessLevelEnum } from "../905/557142";
@@ -22,7 +22,7 @@ export function $$x0(e) {
   let y = e.editorType === FFileType.SLIDES && getResourceDataOrFallback(e.org?.isSlidesDisabled);
   let C = e.editorType === FFileType.SITES && e.org?.isSitesDisabled;
   let w = e.editorType === FFileType.COOPER && e.org?.isCooperDisabled;
-  let j = aV();
+  let j = useIsProgressBarHiddenOrLocked();
   let k = selectCurrentUser();
   useEffect(() => {
     let o = QL(g);

@@ -18,7 +18,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { M as _$$M } from "../905/152487";
 import { bk, Q7, ZE } from "../905/98947";
@@ -48,7 +48,7 @@ export function $$F0({
   let n = Xr(bk);
   let i = Xr(Q7);
   let o = selectUser().name;
-  let s = !!_$$f("submitted_job_title_prompt_overlay");
+  let s = !!selectUserFlag("submitted_job_title_prompt_overlay");
   let {
     show,
     complete,

@@ -16,7 +16,7 @@ import { AuthFlowStep } from "../905/862321";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
-import { tc, i$, PE } from "../905/15667";
+import { DeepLinkType, DevModeUI, UISection } from "../905/15667";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { getMinimumBundle } from "../905/389382";
@@ -81,10 +81,10 @@ export function $$B5(e) {
   }(h, !!a);
   let A = function (e, t, r, n, i) {
     let a = {};
-    for (let t of Object.values(FProductAccessType)) n === tc.NUX && e?.file ? a[t] = {
+    for (let t of Object.values(FProductAccessType)) n === DeepLinkType.NUX && e?.file ? a[t] = {
       plan: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanPermissions) || null,
       planUser: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanUser) || null
-    } : (n === tc.USER_SETTINGS || n === tc.DOWNGRADE_EMAIL || n === tc.LIFECYCLE_REUPGRADE_EMAIL) && e?.planUser && e.planPermissions ? a[t] = {
+    } : (n === DeepLinkType.USER_SETTINGS || n === DeepLinkType.DOWNGRADE_EMAIL || n === DeepLinkType.LIFECYCLE_REUPGRADE_EMAIL) && e?.planUser && e.planPermissions ? a[t] = {
       plan: getResourceDataOrFallback(e.planPermissions) || null,
       planUser: getResourceDataOrFallback(e.planUser) || null
     } : a[t] = {
@@ -233,7 +233,7 @@ export function $$B5(e) {
     let l = (t, r) => {
       e && (r ? e(t, r) : e(t));
     };
-    let d = i === i$.BlockingModal || i === PE.FileMoveUpsell && plan?.tier === FPlanNameType.PRO;
+    let d = i === DevModeUI.BlockingModal || i === UISection.FileMoveUpsell && plan?.tier === FPlanNameType.PRO;
     return function ({
       onUpgrade: e,
       licenseType: t,
@@ -640,7 +640,7 @@ export function $$z2({
       error: !0
     }));
   };
-  if (c === tc.NUX) return async i => {
+  if (c === DeepLinkType.NUX) return async i => {
     try {
       await _$$R.upgrade(y, S, r, n, m, u, p, e);
       s(i, {
@@ -657,7 +657,7 @@ export function $$z2({
       A(e);
     }
   };
-  if (c === tc.ASK_TO_EDIT_ONE_CLICK) return async a => {
+  if (c === DeepLinkType.ASK_TO_EDIT_ONE_CLICK) return async a => {
     try {
       t(showModalHandler({
         type: _$$$,
@@ -693,7 +693,7 @@ export function $$z2({
   return () => {
     t(showModalHandler({
       type: w,
-      showModalsBeneath: c === tc.USER_SETTINGS,
+      showModalsBeneath: c === DeepLinkType.USER_SETTINGS,
       data: {
         licenseType: e,
         trackingProperties: x,
@@ -729,7 +729,7 @@ function K({
   licenseType: e,
   entryPoint: t
 }) {
-  return t === tc.PUBLISH_SITES && (e === FProductAccessType.SITES || e === FProductAccessType.FIGMAKE) ? FProductAccessType.SITES : e;
+  return t === DeepLinkType.PUBLISH_SITES && (e === FProductAccessType.SITES || e === FProductAccessType.FIGMAKE) ? FProductAccessType.SITES : e;
 }
 export function $$Y3({
   licenseType: e,
@@ -761,7 +761,7 @@ export function $$Y3({
   }
   let u = n?.key.type;
   let p = n?.key.parentId;
-  return null !== n && u && p ? r === tc.NUX ? async e => {
+  return null !== n && u && p ? r === DeepLinkType.NUX ? async e => {
     try {
       let r = await _$$b({
         dispatch: t,
@@ -790,7 +790,7 @@ export function $$Y3({
   } : u === FOrganizationLevelType.ORG ? o => {
     t(showModalHandler({
       type: YG,
-      showModalsBeneath: r === tc.USER_SETTINGS,
+      showModalsBeneath: r === DeepLinkType.USER_SETTINGS,
       data: {
         planName: n?.name,
         planParentId: p,
@@ -808,7 +808,7 @@ export function $$Y3({
   } : u === FOrganizationLevelType.TEAM ? o => {
     t(showModalHandler({
       type: PK,
-      showModalsBeneath: r === tc.USER_SETTINGS,
+      showModalsBeneath: r === DeepLinkType.USER_SETTINGS,
       data: {
         planName: n?.name,
         planParentId: p,
@@ -891,7 +891,7 @@ export function $$J4(e) {
           licenseType: e,
           fileKey: r.key,
           folderId: r.folderId || void 0,
-          entryPoint: PE.CurfProvisionalAccessBanner,
+          entryPoint: UISection.CurfProvisionalAccessBanner,
           getIsEligibleForProvisionalAccess
         },
         showModalsBeneath: !0

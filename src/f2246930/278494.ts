@@ -1,8 +1,8 @@
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { KU, dm } from "../figma_app/463500";
 let $$r2 = e => e.library.localStyleSelection;
-let $$a1 = Mz([$$r2, (e, t) => t], (e, t) => e?.type === t ? e : null);
-let $$i0 = Mz([$$a1, (e, t, l) => l], (e, t) => {
+let $$a1 = createSelector([$$r2, (e, t) => t], (e, t) => e?.type === t ? e : null);
+let $$i0 = createSelector([$$a1, (e, t, l) => l], (e, t) => {
   if (!e) return null;
   let l = new Set();
   let s = new Set();

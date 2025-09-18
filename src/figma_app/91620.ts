@@ -3,7 +3,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { userStateLoadedAtom } from "../figma_app/864723";
 import { useFullscreenReady } from "../905/924253";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentUser } from "../905/372672";
 import { L } from "../905/453756";
 import { g as _$$g } from "../figma_app/391708";
@@ -12,7 +12,7 @@ export function $$$$_0() {
   let e = useSelector(e => e.mirror?.appModel.showUi);
   let t = isWhiteboardFileType() && e;
   let r = L();
-  let _ = aV();
+  let _ = useIsProgressBarHiddenOrLocked();
   let h = selectCurrentUser();
   let m = useAtomWithSubscription(userStateLoadedAtom);
   let g = useFullscreenReady();

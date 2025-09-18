@@ -17,7 +17,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
 import { UpgradeAction } from "../905/370443";
 import { useTracking } from "../figma_app/831799";
@@ -177,7 +177,7 @@ export function $$R0({
                   afterUpgradeCallback: a,
                   licenseType: o,
                   upgradeReason: _$$i.CREATE_FILE,
-                  entryPoint: tc.CREATE_FILE_PROJECT_VIEW
+                  entryPoint: DeepLinkType.CREATE_FILE_PROJECT_VIEW
                 })(e);
               }({
                 event: n,

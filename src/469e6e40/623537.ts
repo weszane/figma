@@ -42,7 +42,7 @@ import { U as _$$U } from '../905/275247';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
-import { N_, Oq } from '../905/332483';
+import { collaboratorSet, designSet } from '../905/332483';
 import { $ as _$$$, V as _$$V } from '../905/355181';
 import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
@@ -61,11 +61,11 @@ import { b as _$$b } from '../905/484176';
 import { H as _$$H2 } from '../905/507464';
 import { ProductAccessTypeEnum, ViewAccessTypeEnum } from '../905/513035';
 import { Dd, OJ } from '../905/519092';
-import { r as _$$r } from '../905/520829';
+import { APILoadingStatus } from '../905/520829';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { Pf } from '../905/590952';
-import { X as _$$X } from '../905/596651';
+import { AdvancedSet } from '../905/596651';
 import { p as _$$p } from '../905/597320';
 import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
@@ -117,13 +117,13 @@ import { JR, Wi } from '../figma_app/162641';
 import { getGroupTypeLabel } from '../figma_app/173467';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { FMemberRoleType, FOrganizationLevelType, FPlanAccessType, FPlanFeatureType, FPlanNameType, FProductAccessType, FUserRoleType, FUserTypeClassification } from '../figma_app/191312';
-import { Zx } from '../figma_app/217457';
+import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { c$, gw } from '../figma_app/236327';
 import { Bg } from '../figma_app/246699';
 import { N as _$$N } from '../figma_app/268271';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
-import { Z5 } from '../figma_app/297957';
+import { usePlanInviteWithSeatExperiment } from '../figma_app/297957';
 import { V as _$$V2 } from '../figma_app/312987';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { L7 } from '../figma_app/329496';
@@ -145,7 +145,7 @@ import { d as _$$d } from '../figma_app/603561';
 import { aM as _$$aM, CC, dL, k_, Mj, o8, PR, RC, rH, w6, XO, zT } from '../figma_app/609194';
 import { C5, hX } from '../figma_app/614170';
 import { $z, Me } from '../figma_app/617427';
-import { k as _$$k2 } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { jL } from '../figma_app/658324';
 import { EQ, mm, MX, NV, RG } from '../figma_app/684446';
@@ -834,7 +834,7 @@ function tv({
               selectedItems: a,
               orgUsersCurrentlyLoading: status !== 'loaded',
               moreOrgUsersToFetch: !!fetchMore,
-              loadingSelectableUsers: _status === _$$r.LOADING,
+              loadingSelectableUsers: _status === APILoadingStatus.LOADING,
               selectedAll: m,
               totalSelectableOrgUsers: totalSelectable,
               rowItems: V,
@@ -1010,8 +1010,8 @@ function tk(e) {
     count: t
   }) => {
     if (!isCoreProductAccessType(e)) return;
-    let a = Zx(e);
-    Oq.has(a) && (l[a] = t);
+    let a = getProductAccessTypeByKey(e);
+    designSet.has(a) && (l[a] = t);
   });
   let o = i.data?.invoices ?? [];
   let d = C5(o, 'upcoming') || C5(o, 'locked');
@@ -1897,8 +1897,8 @@ function a_(e) {
     suggestedFilters: ao
   });
 }
-let ay = new _$$X([FProductAccessType.DESIGN, FProductAccessType.WHITEBOARD, FProductAccessType.DEV_MODE]);
-new _$$X([FProductAccessType.DESIGN, FProductAccessType.WHITEBOARD, FProductAccessType.DEV_MODE, FProductAccessType.SLIDES, FProductAccessType.FIGMAKE]);
+let ay = new AdvancedSet([FProductAccessType.DESIGN, FProductAccessType.WHITEBOARD, FProductAccessType.DEV_MODE]);
+new AdvancedSet([FProductAccessType.DESIGN, FProductAccessType.WHITEBOARD, FProductAccessType.DEV_MODE, FProductAccessType.SLIDES, FProductAccessType.FIGMAKE]);
 let aF = 'BULK_SEAT_CHANGE_DROPDOWN';
 function aq({
   dropdownShown: e,
@@ -1969,7 +1969,7 @@ let a$ = registerModal(e => {
       seatTypeProducts: {},
       params: {
         org_user_ids: orgUserIds,
-        paid_statuses: seatType === ViewAccessTypeEnum.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
+        paid_statuses: seatType === ViewAccessTypeEnum.VIEW ? collaboratorSet.dict(() => FPlanAccessType.STARTER) : {
           [seatType]: FPlanAccessType.FULL
         },
         entry_point: _$$h2.MEMBERS_TAB
@@ -2471,7 +2471,7 @@ function nn(e) {
   let t = _$$B2();
   let a = useRef(null);
   let i = useRef(null);
-  let r = _$$k2();
+  let r = isProrationBillingEnabledForCurrentPlan();
   let {
     highlightedItem,
     setHighlightedItemId,
@@ -2544,7 +2544,7 @@ function nn(e) {
   });
   let ec = (t, a, n) => _$$ep(t, a, e.org, e.dispatch, e.queueFilterCountsRefetch, n);
   let e_ = (t, a, n) => qj(t, a, e.licenseGroupsById, g, e.org, e.dispatch, e.queueFilterCountsRefetch, n);
-  let eu = Z5();
+  let eu = usePlanInviteWithSeatExperiment();
   function em(e, t) {
     let a = new Set();
     e.forEach(e => {
@@ -2943,7 +2943,7 @@ function nn(e) {
             });
           }
           let o = !1;
-          if (j && totalSelectable !== null && (o = e.isLoading), o && status === _$$r.LOADING) {
+          if (j && totalSelectable !== null && (o = e.isLoading), o && status === APILoadingStatus.LOADING) {
             return jsx('div', {
               style: _$$sx.w150.$,
               children: jsx(Wi, {

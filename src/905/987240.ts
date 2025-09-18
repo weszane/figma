@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { reportNullOrUndefined } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { s4 } from "../figma_app/88239";
+import { getDevModeFocusId } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { _P, Zh } from "../figma_app/2590";
 import { s6 } from "../905/91038";
@@ -54,7 +54,7 @@ export let $$y0 = createOptimistThunk((e, {
   if (xY(x) && !y) {
     let t = p ? i : PrototypingTsApi.getInlinePreviewNodeIdOnPreviewOpen();
     if (!t) {
-      let e = s4(x.selectedView);
+      let e = getDevModeFocusId(x.selectedView);
       e && (t = e);
     }
     isValidSessionLocalID(parseSessionLocalID(t)) || (t = _$$s());
@@ -82,7 +82,7 @@ export let $$y0 = createOptimistThunk((e, {
   } else {
     let n = p ? i : PrototypingTsApi.getNodeIdForPresent();
     if (!n || n === x.mirror.appModel.currentPage) {
-      let e = s4(x.selectedView);
+      let e = getDevModeFocusId(x.selectedView);
       e && (n = e);
     }
     e.dispatch(_$$F({

@@ -9,7 +9,7 @@ import { A9 } from '../905/414242';
 import { IconButton } from '../905/443068';
 import { Button } from '../905/521428';
 import { W as _$$W } from '../905/592530';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { L as _$$L } from '../905/704296';
 import { j as jaa } from '../905/834956';
 import { BK } from '../905/848862';
@@ -509,7 +509,7 @@ export function $$M0({
     }
   }, [b]);
   let J = useMemo(() => wr(), []);
-  let ee = DP();
+  let ee = getVisibleTheme();
   let et = useMemo(() => ox(ee, S), [ee, S]);
   let ei = useMemo(() => _ ? null : b6(), [_]);
   let en = useMemo(() => b ? LI(e) : [], [b, e]);

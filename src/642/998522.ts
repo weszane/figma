@@ -9,8 +9,8 @@ import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zC } from "../figma_app/186343";
-import { aV } from "../figma_app/722362";
-import { Fk } from "../figma_app/167249";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { N } from "../figma_app/268271";
 import { w } from "../905/129046";
 import { rq } from "../905/425180";
@@ -20,10 +20,10 @@ let $$C1 = "ui3-layers-horizontal-scroll-onboarding-key";
 let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
 let v = userFlagExistsAtomFamily("seen_ui3_layers_horizontal_scroll_overlay");
 export function $$S0() {
-  let e = aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useAtomWithSubscription(Fy);
   let s = useSelector(e => e.mirror.appModel.currentPage);
-  let p = Fk((e, t) => !zC(e, t), s);
+  let p = useDeepEqualSceneValue((e, t) => !zC(e, t), s);
   let j = useAtomWithSubscription(v);
   let {
     show,

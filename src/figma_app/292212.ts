@@ -1,7 +1,7 @@
 import { RR } from "../figma_app/338442";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$a1() {
-  return Fk(e => function (e) {
+  return useDeepEqualSceneValue(e => function (e) {
     let t = {
       numSlots: 0,
       includesInstanceSublayer: !1,
@@ -34,7 +34,7 @@ export function $$a1() {
   }(e.getDirectlySelectedNodes()));
 }
 export function $$s0(e) {
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     let r = e.get(t);
     return r ? o(r) : null;
   }, e);

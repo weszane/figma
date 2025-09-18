@@ -5,8 +5,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, Fonts, AppStateTsApi } from "../figma_app/763686";
 import { useMemoStable } from "../905/19536";
 import { reportError } from "../905/11";
-import { eY } from "../figma_app/722362";
-import { Fk } from "../figma_app/167249";
+import { useSceneGraphSelector } from "../figma_app/722362";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Xo } from "../figma_app/687767";
 import { B } from "../905/118396";
 var $$n0;
@@ -17,7 +17,7 @@ export function $$m1({
   onPreviewGenerated: n
 }) {
   let i = function (e) {
-    let t = Fk((e, t) => {
+    let t = useDeepEqualSceneValue((e, t) => {
       let r;
       let n = e.get(t);
       if (!n) return;
@@ -66,7 +66,7 @@ export function $$g2({
   }) {
     let a = function (e) {
       let t = Xo(e);
-      let r = eY();
+      let r = useSceneGraphSelector();
       return useMemo(() => {
         let e = t.map(e => r.get(e.node_id)?.fontSize).filter(isNotNullish);
         if (e.length) return {

@@ -10,7 +10,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { aW, le } from "../figma_app/527873";
 import { getJoinStatusString } from "../figma_app/582924";
 import { h as _$$h } from "../figma_app/276445";
-import { dd, PH } from "../905/550523";
+import { getConnectionInfo, getNavigatorHardwareInfo } from "../905/550523";
 let g = {
   periodMs: 36e5,
   frequentPeriodMs: 6e4
@@ -89,8 +89,8 @@ async function I(e, t, r, i, o) {
     if (p) {
       let a = $$y1();
       r && (a.cpu_usage = await T());
-      let s = dd();
-      let c = PH();
+      let s = getConnectionInfo();
+      let c = getNavigatorHardwareInfo();
       trackFileEvent(e, i, debugState.getState(), {
         reporting_interval: t,
         file_key: i,
@@ -107,8 +107,8 @@ async function I(e, t, r, i, o) {
     } else {
       let n = b();
       r && (n.cpu_usage = await T());
-      let a = dd();
-      let o = PH();
+      let a = getConnectionInfo();
+      let o = getNavigatorHardwareInfo();
       trackEventAnalytics(e, {
         reporting_interval: t,
         file_key: i,

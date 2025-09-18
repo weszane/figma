@@ -53,7 +53,7 @@ import { t as _$$t9 } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
 import { r as _$$r9 } from '../905/11924';
 import { D as _$$D6 } from '../905/12032';
-import { tc as _$$tc } from '../905/15667';
+import { DeepLinkType } from '../905/15667';
 import { getRumLoggingConfig } from '../905/16237';
 import { useMemoStable } from '../905/19536';
 import { findContainingResponsiveSet } from '../905/26360';
@@ -320,7 +320,7 @@ import { I as _$$I4 } from '../905/932503';
 import { lQ as _$$lQ } from '../905/934246';
 import { O as _$$O } from '../905/936515';
 import { logCmsError } from '../905/937198';
-import { f as _$$f0 } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { sx as _$$sx2 } from '../905/941192';
 import { R as _$$R3 } from '../905/943003';
 import { b as _$$b7 } from '../905/946806';
@@ -330,7 +330,7 @@ import { r as _$$r } from '../905/957643';
 import { cn as _$$cn } from '../905/959568';
 import { a as _$$a4 } from '../905/964520';
 import { b as _$$b8 } from '../905/966382';
-import { xp as _$$xp } from '../905/966582';
+import { IMAGE_TYPE_VALUES } from '../905/966582';
 import { O as _$$O4 } from '../905/969533';
 import { d as _$$d2 } from '../905/976845';
 import { J as _$$J12 } from '../905/980942';
@@ -539,7 +539,7 @@ import { S2 as _$$S0, GV, P5 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { dl as _$$dl, wd as _$$wd, O2 } from '../figma_app/164212';
 import { z2 } from '../figma_app/165422';
-import { wA as _$$wA2, Fk } from '../figma_app/167249';
+import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions } from '../figma_app/169182';
 import { _t as _$$_t, dH as _$$dH, hr as _$$hr, RT as _$$RT, S5 as _$$S4, uw as _$$uw, V7 } from '../figma_app/171413';
 import { JT as _$$JT } from '../figma_app/173838';
@@ -583,7 +583,7 @@ import { s4 as _$$s10, Zk as _$$Zk2 } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
 import { C_ as _$$C_ } from '../figma_app/290668';
-import { em as _$$em } from '../figma_app/297957';
+import { useMakeEmptyStateRefreshExperiment } from '../figma_app/297957';
 import { C9 as _$$C2, f6 as _$$f5, gz as _$$gz, pO as _$$pO2, tq as _$$tq, vD as _$$vD, wE as _$$wE, yj as _$$yj, I4, qe, XW } from '../figma_app/302802';
 import { p as _$$p0 } from '../figma_app/304289';
 import { I as _$$I2 } from '../figma_app/304633';
@@ -699,7 +699,7 @@ import { $z, c as _$$c9, Ih } from '../figma_app/617427';
 import { lV as _$$lV, AD, H5, MK } from '../figma_app/617606';
 import { renameCollectionOptimistically, getCollectionSummaryStatus, getCollectionViewStatus, deleteCollectionOptimistically, createCollectionOptimistically } from '../figma_app/618433';
 import { _b as _$$_b, uP as _$$uP, Dw, HA, IX, Og, q9 } from '../figma_app/618665';
-import { Fy } from '../figma_app/623300';
+import { getNodeStatus } from '../figma_app/623300';
 import { Jr, Mj, UD } from '../figma_app/624361';
 import { gs as _$$gs } from '../figma_app/624706';
 import { fI as _$$fI, jT as _$$jT, JU as _$$JU, ks as _$$ks2, Zk as _$$Zk } from '../figma_app/626177';
@@ -732,7 +732,7 @@ import { AppView } from '../figma_app/707808';
 import { wY as _$$wY } from '../figma_app/708845';
 import { iE as _$$iE, r as _$$r8, Wv as _$$Wv } from '../figma_app/711157';
 import { y0 as _$$y0 } from '../figma_app/718307';
-import { aV as _$$aV, eY as _$$eY, f4 as _$$f2, p8 as _$$p2, s6 as _$$s2, KH, Mw } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useOnSelectionChange, useAppModelProperty, useAppModelPropsShallow, useSceneGraphSelection, useStableSelectedNode } from '../figma_app/722362';
 import { useCurrentOrgAdminInfo } from '../figma_app/740025';
 import { sT as _$$sT, UK as _$$UK, EU, Ku, RU } from '../figma_app/740163';
 import { addToSelection, getPropertiesPanelTab, normalizeTrackingEnum, removeFromSelection, renameNode, replaceSelection, setPropertiesPanelTab, transferSelection, updateHoveredNode } from '../figma_app/741237';
@@ -803,7 +803,7 @@ import { hD as _$$hD, LI } from '../figma_app/970285';
 import { zY } from '../figma_app/973219';
 import { Lk, LN, X9, z7 } from '../figma_app/975811';
 import { a2 as _$$a16, Ay as _$$Ay9, Cy as _$$Cy, n9 as _$$n12, HS } from '../figma_app/976110';
-import { V3 } from '../figma_app/976345';
+import { openUrlInContext } from '../figma_app/976345';
 import { getCurrentFileType } from '../figma_app/976749';
 import { kk as _$$kk, Hb } from '../figma_app/986594';
 import { Mq } from '../figma_app/991591';
@@ -1026,7 +1026,7 @@ let U = () => {
 let K = memo(({
   children: e
 }) => {
-  let t = Mw();
+  let t = useStableSelectedNode();
   let i = t?.guid ?? null;
   let n = t ? findContainingResponsiveSet(t)?.guid ?? null : null;
   let r = useSelector(e => e.mirror.appModel.hoveredNode);
@@ -1107,7 +1107,7 @@ function Y() {
     subscribeToUpdates_expensive: !1
   });
   let n = e.data?.dakotaItemId || '';
-  let a = Mw();
+  let a = useStableSelectedNode();
   let s = Vp(e.data?.dakotaCollectionId);
   let r = VC(e.data?.dakotaCollectionId);
   if (!(e.showing && t && s.data.length > 0)) return null;
@@ -1449,7 +1449,7 @@ function tz() {
     setActiveSecondaryToolbeltId
   } = LH();
   let c = _$$n3();
-  let p = _$$aV();
+  let p = useIsProgressBarHiddenOrLocked();
   let x = topLevelMode === ViewType.LAYOUT;
   let m = topLevelMode === ViewType.HISTORY;
   let h = _$$z(editModeType);
@@ -1718,7 +1718,7 @@ function tB(e) {
     getProvisionalAccessBanner
   } = _$$wH();
   let n = getProvisionalAccessBanner(G_.SITES);
-  let s = _$$aV();
+  let s = useIsProgressBarHiddenOrLocked();
   let r = selectCurrentFile();
   let d = hasRootPathOptional(r?.project);
   let c = useAtomWithSubscription(_$$wg);
@@ -1886,7 +1886,7 @@ let iA = {
 };
 function iL() {
   let e = useAtomWithSubscription(_$$wh);
-  let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
+  let t = useDeepEqualSceneValue((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
   let i = useMemo(() => {
     if (!getFeatureFlags().sts_code_authoring && !getFeatureFlags().sts_code_authoring_by_plan) return new Map();
     let e = getSingletonSceneGraph();
@@ -2102,7 +2102,7 @@ let iM = ({
   } = getLoadingAndReadOnlyState();
   let d = _$$cu();
   let c = d.length > 0 && d[0];
-  let p = Fk(e => !!c && !!e.get(c)?.canBeRestoredToDesignNode(), c);
+  let p = useDeepEqualSceneValue(e => !!c && !!e.get(c)?.canBeRestoredToDesignNode(), c);
   let x = useCallback(() => {
     Pu(e, i, n, l);
   }, [n, i, e, l]);
@@ -2987,7 +2987,7 @@ function lV({
       siteTitle,
       pageTitle,
       defaultPageTitleSuffix
-    } = Fk(t => {
+    } = useDeepEqualSceneValue(t => {
       let i;
       let n = t.getCurrentPage();
       let l = n?.responsiveSetSettings;
@@ -3149,8 +3149,8 @@ function as({
   isSitePublished: s,
   isPagePublished: r
 }) {
-  let d = Fk(t => t.get(e)?.name, e);
-  let c = Fk(t => t.get(e)?.responsiveSetSettings?.title ?? '', e);
+  let d = useDeepEqualSceneValue(t => t.get(e)?.name, e);
+  let c = useDeepEqualSceneValue(t => t.get(e)?.responsiveSetSettings?.title ?? '', e);
   let p = useAtomWithSubscription(_$$up).inProgress;
   let x = `checkbox-${useId()}`;
   let m = `label-${useId()}`;
@@ -4611,14 +4611,14 @@ function sv(e) {
       getIsUpgradeHandlerLoading
     } = _$$wH({
       folderId: null,
-      entryPoint: _$$tc.PUBLISH_SITES
+      entryPoint: DeepLinkType.PUBLISH_SITES
     });
     let o = useCallback(() => getUpgradeEligibility(t), [getUpgradeEligibility, t]);
     let d = useCallback(() => hasPendingRequest(t), [hasPendingRequest, t]);
     let c = useCallback(() => handleUpgrade({
       licenseType: t,
       upgradeReason: _$$i4.PUBLISH_SITES,
-      entryPoint: _$$tc.PUBLISH_SITES
+      entryPoint: DeepLinkType.PUBLISH_SITES
     }), [handleUpgrade, t]);
     let u = getIsUpgradeHandlerLoading();
     return {
@@ -5258,7 +5258,7 @@ function re() {
   } = Ve();
   let t = _$$h4();
   let i = !getFeatureFlags().bake_publish_flow;
-  let n = Fk(e => e.getCurrentPage()?.guid);
+  let n = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let a = selectCurrentFile();
   let s = selectCurrentUser();
   let r = getWorkshopModeStatus(a?.key || '').enabled;
@@ -9460,7 +9460,7 @@ let d7 = e => {
   }
 };
 function d9(e) {
-  return Fk(t => {
+  return useDeepEqualSceneValue(t => {
     let i = t.getCurrentPage();
     let n = i?.responsiveSetSettings;
     let l = _$$wk(i).find(t => t.guid === e);
@@ -9892,7 +9892,7 @@ function cm({
 }) {
   let s = d9(e);
   let o = OG(i ? 'favicon' : 'page_favicon');
-  let d = Fk(e => {
+  let d = useDeepEqualSceneValue(e => {
     let t = e.getCurrentPage();
     if (t) {
       return ZQ(e, t.id).filter(e => e.type === 'FRAME' || e.type === 'ROUNDED_RECTANGLE').map(e => ({
@@ -9967,7 +9967,7 @@ function ch({
 }) {
   let s = d9(e);
   let o = OG(i ? 'social_image' : 'page_social_image');
-  let d = Fk(e => {
+  let d = useDeepEqualSceneValue(e => {
     let t = e.getCurrentPage();
     if (t) {
       return ZQ(e, t.id).filter(e => e.type === 'FRAME' || e.type === 'ROUNDED_RECTANGLE').map(e => ({
@@ -10852,7 +10852,7 @@ function c8({
     }
     try {
       let t = Array.from(e.files).map(async e => {
-        e && _$$xp.some(t => e.type.startsWith(t.replace('*', ''))) && (await _$$z9(e, createLoadedAttachment));
+        e && IMAGE_TYPE_VALUES.some(t => e.type.startsWith(t.replace('*', ''))) && (await _$$z9(e, createLoadedAttachment));
       });
       await Promise.all(t);
     } catch (e) {
@@ -11337,10 +11337,10 @@ function uy() {
   let {
     componentPreviewState
   } = _$$k5();
-  let n = !!_$$f0('seen_figmake_new_file_onboarding');
-  let s = !!_$$f0('seen_figmake_new_file_pre_generation_onboarding');
+  let n = !!selectUserFlag('seen_figmake_new_file_onboarding');
+  let s = !!selectUserFlag('seen_figmake_new_file_pre_generation_onboarding');
   let r = n || s;
-  let o = !!_$$f0('seen_figmake_existing_files_editor_onboarding');
+  let o = !!selectUserFlag('seen_figmake_existing_files_editor_onboarding');
   let d = sY();
   let {
     isShowing,
@@ -11447,9 +11447,9 @@ function uN({
   let {
     componentPreviewState
   } = _$$k5();
-  let d = !!_$$f0('seen_figmake_new_file_onboarding');
-  let c = !!_$$f0('seen_figmake_new_file_pre_generation_onboarding');
-  let p = !!_$$f0('seen_figmake_existing_files_fullscreen_onboarding');
+  let d = !!selectUserFlag('seen_figmake_new_file_onboarding');
+  let c = !!selectUserFlag('seen_figmake_new_file_pre_generation_onboarding');
+  let p = !!selectUserFlag('seen_figmake_existing_files_fullscreen_onboarding');
   let x = d || c;
   let m = sY();
   let {
@@ -11573,7 +11573,7 @@ function uO() {
     overlay: Bd,
     priority: _$$N5.OVERRIDING_MODAL
   });
-  let s = _$$f0('seen_figmake_new_file_post_generation_onboarding');
+  let s = selectUserFlag('seen_figmake_new_file_post_generation_onboarding');
   return (_$$E8(uniqueId, 'ai_for_production.chat_message_sent', () => {
     complete();
   }), useEffect(() => {
@@ -11687,7 +11687,7 @@ function uD({
     figmakeInFullscreen
   } = Ve();
   let n = _$$ry();
-  let a = _$$f0('seen_figmake_new_file_onboarding');
+  let a = selectUserFlag('seen_figmake_new_file_onboarding');
   let s = useAtomWithSubscription(FX);
   return figmakeInFullscreen || n || !t || a ? null : jsxs(Fragment, {
     children: [!s && jsx(uO, {}), jsx(uF, {
@@ -11707,7 +11707,7 @@ let u$ = {
 };
 function uU() {
   let e = _$$ry();
-  let t = _$$f0('seen_figmake_send_to_make_onboarding');
+  let t = selectUserFlag('seen_figmake_send_to_make_onboarding');
   let i = useAtomWithSubscription(_$$aQ);
   let {
     isShowing,
@@ -11762,10 +11762,10 @@ let uH = {
 function uq() {
   let e = selectCurrentFile();
   let t = !!(e && e.key && e.name);
-  let i = _$$aV();
+  let i = useIsProgressBarHiddenOrLocked();
   let n = _$$h4();
   _$$Si(e);
-  let a = _$$em({
+  let a = useMakeEmptyStateRefreshExperiment({
     logExposure: !1
   });
   return !t && (!e || e.canEdit) && a() ? jsx(ud, {}) : !t || i ? jsx(uG, {}) : n ? jsxs(uV, {
@@ -12331,7 +12331,7 @@ function po({
   });
 }
 function pp() {
-  let e = _$$aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useSelector(e => e.mirror.appModel.showUi);
   let i = useAtomWithSubscription(FX);
   return !e && t ? jsx(_$$_7, {
@@ -17123,7 +17123,7 @@ function h0(e) {
   } = function () {
     let e = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local);
     let t = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
-    let i = _$$wA2((e, t) => Object.values(t).filter(t => {
+    let i = useStrictDeepEqualSceneValue((e, t) => Object.values(t).filter(t => {
       let i = e.get(t.localGuid);
       return !!i && !i.isSoftDeleted;
     }).map(e => e.localGuid), t);
@@ -17163,7 +17163,7 @@ function h0(e) {
         visibleCodeNodeGuids: []
       };
     }, [e, i]);
-    let p = _$$wA2((e, t) => {
+    let p = useStrictDeepEqualSceneValue((e, t) => {
       let i = [];
       for (let n of t) {
         let t = e.get(n);
@@ -17614,7 +17614,7 @@ function h9() {
   let i = !!Object.values(useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local)).filter(h4).length;
   let n = function () {
     let e = useAtomWithSubscription(Y3);
-    let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
+    let t = useDeepEqualSceneValue((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
     return useMemo(() => {
       let e = getSingletonSceneGraph();
       return new Map(t.flatMap(t => {
@@ -18120,9 +18120,9 @@ function gR({
   stopRenaming: b,
   updateSelection: y
 }) {
-  let v = Fk((e, t) => e.get(t)?.name ?? '', t);
-  let j = !!Fk((e, t) => e.get(t)?.isResponsiveSetOrWebpage ?? '', t);
-  let k = Fk((e, t) => e.get(t)?.editInfo?.lastEditedAt ?? '-', t);
+  let v = useDeepEqualSceneValue((e, t) => e.get(t)?.name ?? '', t);
+  let j = !!useDeepEqualSceneValue((e, t) => e.get(t)?.isResponsiveSetOrWebpage ?? '', t);
+  let k = useDeepEqualSceneValue((e, t) => e.get(t)?.editInfo?.lastEditedAt ?? '-', t);
   let S = useSelector(e => e.mirror.sceneGraphSelection);
   let C = getObservableOrFallback(_$$UK().showGuids);
   let T = _$$OG({
@@ -18139,7 +18139,7 @@ function gR({
     guid,
     width,
     height
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t)?.childrenNodes.map(e => ({
       width: e.size.x,
       height: e.size.y,
@@ -18420,7 +18420,7 @@ function gL(e) {
       let c = o.getCurrentPage();
       _$$J0(() => {
         _$$l.user('create-new-webpage', () => {
-          c && c.guid === i ? Fullscreen.createResponsiveSet(null) : $P(i, n, l, t, Fy(d, i) === DataLoadStatus.LOADED, a, e).then(() => {
+          c && c.guid === i ? Fullscreen.createResponsiveSet(null) : $P(i, n, l, t, getNodeStatus(d, i) === DataLoadStatus.LOADED, a, e).then(() => {
             Fullscreen.createResponsiveSet(null);
           });
         });
@@ -18438,7 +18438,7 @@ function gL(e) {
   useEffect(() => {
     z || i(null);
   }, [z]);
-  let $ = Fk((e, t) => e.get(t)?.uiOrderedChildren, e.currentPageGuid) || [];
+  let $ = useDeepEqualSceneValue((e, t) => e.get(t)?.uiOrderedChildren, e.currentPageGuid) || [];
   let U = $.filter(e => F !== e);
   F && U.unshift(F);
   let K = Math.min(56 * _$$wk(C).length + 8, Math.round(0.25 * (windowInnerHeight - parsePxInt(MGP) - _$$uF2)));
@@ -18449,7 +18449,7 @@ function gL(e) {
     (W.current > i || W.current + n < i) && v.current?.scrollTo((t - 1) * 56);
     G.current = e;
   }, 100);
-  let q = Fk((e, t) => {
+  let q = useDeepEqualSceneValue((e, t) => {
     let i = {};
     t.forEach(t => {
       let n = e.get(t);
@@ -18660,7 +18660,7 @@ function gO() {
     let t = AppStateTsApi.sitesState();
     let i = getObservableOrFallback(t.focusedLayoutSetNodes);
     let n = _$$O6();
-    let l = Fk((e, t) => e.get(t)?.uiOrderedChildren, n);
+    let l = useDeepEqualSceneValue((e, t) => e.get(t)?.uiOrderedChildren, n);
     let s = l?.every(e => i.has(e)) || l?.every(e => !i.has(e));
     let o = Array.from(i);
     let {
@@ -18896,7 +18896,7 @@ function gV() {
   });
 }
 function gG() {
-  let e = _$$aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useSelector(e => e.mirror.appModel.showUi);
   return !e && t ? jsxs(_$$_7, {
     isCollapsed: !0,
@@ -19050,7 +19050,7 @@ function g7() {
     let S = _$$Py();
     let C = function () {
       let e = useDispatch();
-      let t = _$$p2('isReadOnly');
+      let t = useAppModelProperty('isReadOnly');
       let i = useAtomWithSubscription(_$$oD);
       let n = _$$D2();
       let l = trackFileEventWithUser();
@@ -19135,7 +19135,7 @@ let g9 = memo(() => {
     isLeftPanelCollapsed
   } = useContext(_$$t8);
   let c = _$$q8();
-  let x = _$$aV();
+  let x = useIsProgressBarHiddenOrLocked();
   let m = t && e === PanelType.FILE;
   let h = (() => {
     if (c || m) return null;
@@ -19152,7 +19152,7 @@ let g9 = memo(() => {
   })();
   _$$bi();
   let g = GQ();
-  if (!_$$p2('showUi')) return null;
+  if (!useAppModelProperty('showUi')) return null;
   let f = null;
   if (t === ViewActionType.FIND ? f = jsx(EA.Provider, {
     value: !0,
@@ -19387,7 +19387,7 @@ function fy() {
   let t = useAtomWithSubscription(e);
   let i = useCurrentPublicPlan('OnboardSitesTOSInner');
   let n = useDispatch();
-  let a = _$$eY();
+  let a = useSceneGraphSelector();
   let r = useAtomWithSubscription(LZ);
   let d = Xr(P4);
   let c = fR();
@@ -19661,7 +19661,7 @@ function fC({
   totalSteps: s,
   nextStepType: r
 }) {
-  let o = _$$eY();
+  let o = useSceneGraphSelector();
   let d = _$$e6();
   let c = useRef(null);
   if (d) {
@@ -20144,8 +20144,8 @@ let f0 = e => e === '/' ? getI18nString('sites.panel.home') : e;
 function f1({
   modalHistory: e
 }) {
-  let t = Fk(e => JZ(e.getCurrentPage()).map(e => e.name));
-  let i = Fk(e => e.getCurrentPage()?.guid);
+  let t = useDeepEqualSceneValue(e => JZ(e.getCurrentPage()).map(e => e.name));
+  let i = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let [n, s] = useState({});
   useEffect(() => {
     (async () => {
@@ -22115,7 +22115,7 @@ let bE = ({
   let {
     insertTemplate
   } = Fz();
-  let a = _$$eY();
+  let a = useSceneGraphSelector();
   return {
     onUseThisTemplate: () => {
       let s = {
@@ -22237,7 +22237,7 @@ function bA({
   });
 }
 function bL() {
-  let e = _$$p2('isReadOnly');
+  let e = useAppModelProperty('isReadOnly');
   let t = EI();
   let i = useAtomWithSubscription(_$$D6);
   let n = userFlagExistsAtomFamily(_$$at);
@@ -22246,7 +22246,7 @@ function bL() {
   let r = useAtomWithSubscription(_$$me);
   let d = selectCurrentFile();
   let c = d?.key;
-  let u = _$$eY();
+  let u = useSceneGraphSelector();
   let p = useAtomWithSubscription(u3);
   let [x, m] = useAtomValueAndSetter(P4);
   if (!t || !x || i || !s || r || p) return null;
@@ -22294,7 +22294,7 @@ function bF() {
   });
 }
 function bH() {
-  let e = KH();
+  let e = useSceneGraphSelection();
   return jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
@@ -22700,7 +22700,7 @@ function yj({
   recordingKey: t
 }) {
   let i = QM(e ?? null);
-  let n = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaItemData().itemId ?? null);
+  let n = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes()[0]?.getDakotaItemData().itemId ?? null);
   let a = Vp(e ?? '').data;
   if (!e || !a || !n || !i) return null;
   let s = new Map();
@@ -22780,7 +22780,7 @@ function yw({
     data,
     status
   } = Vp(e ?? '');
-  let a = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector()?.limit);
+  let a = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector()?.limit);
   let s = [jsx(_$$c$5, {
     value: '0',
     children: getI18nString('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
@@ -22827,15 +22827,15 @@ function yS() {
   let e;
   let t = 'dakotaCollectionPanel';
   let i = Hb();
-  let n = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'REPEATER'));
-  let a = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'RESPONSIVE_SET' && e.name !== '/' || e.type === 'REPEATER'));
-  let s = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector() ?? null);
+  let n = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().every(e => e.type === 'REPEATER'));
+  let a = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'RESPONSIVE_SET' && e.name !== '/' || e.type === 'REPEATER'));
+  let s = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector() ?? null);
   let r = s?.collectionId;
   let o = useCurrentFileKey();
   let d = getCollectionSummaryStatus(o).data ?? [];
   let c = d.find(e => e.id === r) || null;
   let u = !r || i;
-  let p = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'RESPONSIVE_SET' && e.name !== '/' && !e.getDakotaSelectorCollectionId()));
+  let p = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().every(e => e.type === 'RESPONSIVE_SET' && e.name !== '/' && !e.getDakotaSelectorCollectionId()));
   let x = getFeatureFlags().cms_bindings_ux_improvements && p;
   if (!_$$U() || !u || !a || d.length === 0 || x) return null;
   let h = getFeatureFlags().cms_bindings_ux_improvements ? jsx(yv, {
@@ -23601,7 +23601,7 @@ function vU(e) {
 function vq() {
   let e = _$$kl('accessibilityLabelType');
   let t = _$$kl('accessibilityCategory');
-  let i = Fk(e => {
+  let i = useDeepEqualSceneValue(e => {
     let t;
     for (let i of e.getDirectlySelectedNodes()) {
       if (i?.type === 'TEXT' && i.characters) {
@@ -23873,7 +23873,7 @@ function jr(e) {
   let [o, d] = vW();
   let [c] = vX();
   let p = function () {
-    let e = Mw();
+    let e = useStableSelectedNode();
     if (!_$$U() || !e || e.fills.length === 0) return null;
     for (let t of e.fills) {
       if (t.type === 'IMAGE' && t.altText && t.imageVar && t.imageVar.dataType === 'CMS_ALIAS' && t.imageVar.value?.cmsAliasValue) return t.altText;
@@ -23891,7 +23891,7 @@ function jr(e) {
   } = o(ja);
   let [f, _] = useState(!1);
   let b = function () {
-    let e = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'INSTANCE')) && Fullscreen?.isSelectionContainedInStateOrStateInstance();
+    let e = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'INSTANCE')) && Fullscreen?.isSelectionContainedInStateOrStateInstance();
     let t = useSelector(_$$Cy);
     let i = t.length === 1 && !!_$$p1(t);
     let n = _$$e11();
@@ -23943,7 +23943,7 @@ function jr(e) {
     onMouseEnter: _onMouseEnter2,
     onMouseLeave: _onMouseLeave2
   } = A(z, 5);
-  if (_$$f2(() => {
+  if (useOnSelectionChange(() => {
     _(!1);
   }), !getFeatureFlags().sites || t.category === MixedBlockType.NONE) {
     return null;
@@ -24409,7 +24409,7 @@ function jv({
   });
   let x = c && p.data?.link;
   let m = useCallback(() => {
-    x && p.data?.link && d(V3({
+    x && p.data?.link && d(openUrlInContext({
       url: p.data?.link
     }));
   }, [x, p.data?.link, d]);
@@ -24447,7 +24447,7 @@ let jj = memo(e => {
   let n = i?.backingCodeComponent;
   let a = i?.backingCodeComponent?.exportedFromCodeFile?.guid;
   let s = a ? getSingletonSceneGraph().get(a) : null;
-  let r = Fk((e, t, i) => i?.isSoftDeleted || t?.isSoftDeleted, n, s);
+  let r = useDeepEqualSceneValue((e, t, i) => i?.isSoftDeleted || t?.isSoftDeleted, n, s);
   let d = Wn(a);
   let c = (s === null || r) && !d;
   return t.length === 0 ? null : jsx(_$$Zk, {
@@ -25435,7 +25435,7 @@ function ku({
   let j = selectCurrentFile();
   let k = _$$hD();
   let w = useCurrentOrgAdminInfo();
-  let S = _$$s2('currentPage', 'currentSelectedProperty');
+  let S = useAppModelPropsShallow('currentPage', 'currentSelectedProperty');
   let C = useSelector(e => e.saveAsState);
   let T = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());
   let I = _$$U() && (T?.type === 'REPEATER' || T?.isResponsiveSet);
@@ -25904,7 +25904,7 @@ function k8({
   });
 }
 function k6(e, t) {
-  let i = KH();
+  let i = useSceneGraphSelection();
   useEffect(() => {
     let n = Object.keys(i);
     for (let i of n) {
@@ -26149,15 +26149,15 @@ function wm({
   ariaLabelledBy: i
 }) {
   let n = function () {
-    let e = _$$eY();
+    let e = useSceneGraphSelector();
     return useMemo(() => new _$$cP(e), [e]);
   }();
   let o = useDispatch();
   let d = Um();
   let c = function () {
-    let e = KH();
+    let e = useSceneGraphSelection();
     let t = GW();
-    return Fk((e, i) => {
+    return useDeepEqualSceneValue((e, i) => {
       let n = _$$e15 && t === SelectionPanelType.RESPONSIVE_SET;
       if (!i) return [];
       let l = new Set();
@@ -27213,7 +27213,7 @@ function Sv(e) {
       o(e);
     });
   }, [o]);
-  let k = Fk(e => {
+  let k = useDeepEqualSceneValue(e => {
     let t = e.getCurrentPage();
     if (t) {
       return ZQ(e, t.id).filter(Sy).map(e => ({
@@ -27635,7 +27635,7 @@ function SH({
   let [t, i] = useState(e.behaviorType === Xc.Cursor);
   let n = useRef(null);
   let s = useRef(null);
-  let r = _$$eY();
+  let r = useSceneGraphSelector();
   let o = _$$kl('opacity');
   let d = useMemo(() => ({
     opacity: isInvalidValue(o) ? void 0 : o
@@ -27948,7 +27948,7 @@ function SV({
     y: 0
   });
   let p = useRef(null);
-  let x = _$$eY();
+  let x = useSceneGraphSelector();
   e.behaviorType === Xc.Cursor && (i = e);
   useEffect(() => {
     if (i && i.cursorGuid) {
@@ -29197,7 +29197,7 @@ function Tx({
   selected: f,
   onClick: _
 }) {
-  let b = KH();
+  let b = useSceneGraphSelection();
   let y = useSelector(Th);
   let [v, j] = useState(!1);
   let [k, w] = useState(!1);
@@ -29608,7 +29608,7 @@ function TA(e) {
     selectedNoodleIds
   } = _$$Ay9(W, !0);
   let [Z, Q] = useAtomValueAndSetter(_$$u9);
-  let ee = KH();
+  let ee = useSceneGraphSelection();
   let et = selectCurrentFile();
   let ei = _$$h16(TN);
   let {
@@ -29826,7 +29826,7 @@ function TA(e) {
     appliedCodeBehaviors: n
   }) {
     let s = _$$kl('nodesAreAllStacksOrText');
-    let d = KH();
+    let d = useSceneGraphSelection();
     let c = function () {
       let e = _$$mU();
       useEffect(() => {
@@ -30727,8 +30727,8 @@ function TJ({
     getActiveTab: p
   });
   let h = null;
-  let g = _$$p2('topLevelMode');
-  let f = _$$p2('isReadOnly');
+  let g = useAppModelProperty('topLevelMode');
+  let f = useAppModelProperty('isReadOnly');
   let _ = g === ViewType.LAYOUT && !f && x === DesignWorkspace.SITE;
   let b = g !== ViewType.PREVIEW && g !== ViewType.BRANCHING && x === DesignWorkspace.PROTOTYPE;
   let y = _$$U() && g === ViewType.LAYOUT && !f && x === DesignWorkspace.DAKOTA;
@@ -30805,13 +30805,13 @@ let T2 = memo(({
 }) => {
   let t = _$$e();
   let i = useSelector(e => e.progressBarState);
-  let n = _$$p2('loadingEmbeds');
+  let n = useAppModelProperty('loadingEmbeds');
   let c = useIsSelectedFigmakeFullscreen();
-  let h = _$$p2('isReadOnly');
+  let h = useAppModelProperty('isReadOnly');
   let g = useRef(null);
   let f = selectCurrentFile();
   let _ = f ? f.key : '';
-  let y = _$$p2('showUi');
+  let y = useAppModelProperty('showUi');
   let v = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let j = v === PanelType.DAKOTA;
   let k = _$$U();
@@ -30834,7 +30834,7 @@ let T2 = memo(({
     let i = selectCurrentFile();
     let n = useAtomWithSubscription(_$$me);
     let l = Xr($K);
-    let a = _$$eY();
+    let a = useSceneGraphSelector();
     let d = useDispatch();
     let [c, x] = useAtomValueAndSetter(u3);
     !c && n && x(!0);

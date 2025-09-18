@@ -9,7 +9,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift } from "../905/63728";
 import { tu, oJ } from "../figma_app/385215";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { renderI18nText } from "../905/303541";
 import { showDropdownThunk } from "../905/929976";
 import { hideTooltip } from "../905/765855";
@@ -170,7 +170,7 @@ let L = {
         e.stopPropagation();
         e.preventDefault();
         t(_$$N.START);
-        "prototype" === i ? hk()?.startPresenting() : Multiplayer.startPresenting();
+        "prototype" === i ? getViewerInstance()?.startPresenting() : Multiplayer.startPresenting();
       },
       userHandle: e.userHandle
     });

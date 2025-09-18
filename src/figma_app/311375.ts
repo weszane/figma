@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
-import { vD, Sh, a$ } from "../figma_app/889655";
+import { getSingleSelectedKey, selectSceneGraphSelectionKeys, getMultipleSelectedKeys } from "../figma_app/889655";
 import { jY } from "../figma_app/151869";
 export function $$s5() {
-  return useSelector(vD);
+  return useSelector(getSingleSelectedKey);
 }
 export function $$o2() {
-  return useSelector(Sh);
+  return useSelector(selectSceneGraphSelectionKeys);
 }
 export function $$l0() {
-  return useSelector(a$);
+  return useSelector(getMultipleSelectedKeys);
 }
 export function $$d1() {
   let e = $$o2();

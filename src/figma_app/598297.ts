@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { zK } from "../figma_app/913823";
 import { selectCurrentFile } from "../figma_app/516028";
-import { Sc, mC } from "../905/18797";
+import { isNullOrFailure, useIsLoaded } from "../905/18797";
 import { yD } from "../905/92359";
 export function $$d1({
   disabled: e = !1
@@ -14,10 +14,10 @@ export function $$d1({
   let p = useRef(0);
   let _ = null != r && null != c ? yD(r.key) : void 0;
   useEffect(() => {
-    !e && null != _ && Sc(u, _) && p.current < 3 && (p.current += 1, t(zK()));
+    !e && null != _ && isNullOrFailure(u, _) && p.current < 3 && (p.current += 1, t(zK()));
   }, [t, _, u, e]);
   return {
-    isLoaded: mC(_ ?? "") && !!_
+    isLoaded: useIsLoaded(_ ?? "") && !!_
   };
 }
 export let $$c0 = $$d1;

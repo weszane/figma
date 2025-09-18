@@ -8,7 +8,7 @@ import d from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { lC, U9 } from "../905/125333";
 import { s as _$$s } from "../cssbuilder/589278";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { k as _$$k2 } from "../905/545760";
 import { Sk, gz, eB, ID, xI, t3, iD, ZJ, B4, i0, BE, rh, uh, WX, SN, Wq, cq, BN, cP, dP, $d } from "../figma_app/731560";
 var c = d;
@@ -347,11 +347,11 @@ function O() {
   let t = useAtomWithSubscription(U9);
   return useMemo(() => R(e, t), [t, e]);
 }
-let R = (e, t) => t === BorderStyle.NONE ? "#000000" : F.format(e);
+let R = (e, t) => t === BorderStyle.NONE ? "#000000" : colorCSSManipulatorInstance.format(e);
 function L(e) {
-  let t = F.parse(e);
+  let t = colorCSSManipulatorInstance.parse(e);
   let r = WhiteboardTsApi?.getShapeWithTextStrokeColorForFill(rgbToNormalized(t));
-  return r ? F.format(normalizedToRgb(r)) : "#757575";
+  return r ? colorCSSManipulatorInstance.format(normalizedToRgb(r)) : "#757575";
 }
 function P(e) {
   return useMemo(() => L(e), [e]);

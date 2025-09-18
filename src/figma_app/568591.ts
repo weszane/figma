@@ -5,7 +5,7 @@ import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
-import { cs, Rc } from "../figma_app/819288";
+import { extractInviteTokens, Rc } from "../figma_app/819288";
 import { useLatestRef } from "../figma_app/922077";
 import { S6 } from "../905/761735";
 import { getLivegraphClient, useSubscription } from "../figma_app/288654";
@@ -30,7 +30,7 @@ import { $J, kR } from "../905/234821";
 import { r } from "../905/808413";
 import { e as _$$e, I as _$$I } from "../905/601590";
 import { xI } from "../905/723870";
-import { O as _$$O } from "../905/963222";
+import { recordsWithRemove as _$$O } from "../905/963222";
 class M {
   constructor(e) {
     this.client = e;
@@ -159,7 +159,7 @@ class j {
     trackEventAnalytics("New comment API create", {
       uuid
     });
-    let _ = getFeatureFlags().show_at_mention_invited_users ? [...new Set(cs(messageMeta))] : [];
+    let _ = getFeatureFlags().show_at_mention_invited_users ? [...new Set(extractInviteTokens(messageMeta))] : [];
     let h = async e => {
       let r = e.data?.reason;
       if (!r || "comment_validation_failure" !== r.reason || !t?.onValidationError) throw e;
@@ -279,7 +279,7 @@ class j {
     let {
       fileKey
     } = this.client;
-    let u = cs(messageMeta);
+    let u = extractInviteTokens(messageMeta);
     let _ = XHR.post(`/api/file/${fileKey}/comments/${e.threadId}`, {
       file_key: fileKey,
       uuid,

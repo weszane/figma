@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { hD } from "../figma_app/387100";
 import { Tv } from "../figma_app/311375";
 import { Z } from "../905/116724";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cq } from "../905/794154";
 function d(e, t, i) {
   if (!e.get(i)) return !1;
@@ -30,7 +30,7 @@ export function $$c0({
   }, [autoClose, i]);
   let p = Z(u);
   let m = Tv();
-  let h = Fk((e, t, i) => t.some(t => d(e, i, t)) || i.some(i => d(e, t, i)), t, m);
+  let h = useDeepEqualSceneValue((e, t, i) => t.some(t => d(e, i, t)) || i.some(i => d(e, t, i)), t, m);
   let [g, f] = useState(!1);
   useEffect(() => {
     let t = e.current;

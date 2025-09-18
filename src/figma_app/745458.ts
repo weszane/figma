@@ -4,9 +4,9 @@ import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, mg, p6 } from "../figma_app/27355";
 import l from "../vendor/983401";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { conditionalFeatureFlag } from "../figma_app/169182";
-import { P8 } from "../905/270781";
+import { createDeepEqualSelector } from "../905/270781";
 import { logWarning } from "../905/714362";
 import { getFileKey } from "../905/412913";
 import { getSelectedFile } from "../905/766303";
@@ -20,7 +20,7 @@ import { i as _$$i } from "../905/315328";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { aR, BE, uB, tp, J8 } from "../905/128313";
 import { Ls, m3, ZA, a3, gJ } from "../figma_app/645694";
-import { O1, T_, tX, dK, BA } from "../figma_app/889655";
+import { selectLocalStylesWithUsagesOnLoadedPages, selectLocalSymbolsWithUsagesOnLoadedPages, selectLocalStylesWithUsagesOnCurrentPage, selectSceneGraph, selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { _Q, m0, v3, jU, Du, tY, S_, aD as _$$aD } from "../figma_app/141508";
 import { PX, wi } from "../905/55146";
 var d = l;
@@ -56,7 +56,7 @@ function O(e, t, r, n, a) {
   }
   return s;
 }
-let R = Mz([PX, e => e.library.used__LIVEGRAPH.destinationStyleKeyToLegacySourceStyle], (e, t) => Object.values(e).reduce((e, r) => {
+let R = createSelector([PX, e => e.library.used__LIVEGRAPH.destinationStyleKeyToLegacySourceStyle], (e, t) => Object.values(e).reduce((e, r) => {
   if ("loaded" !== r.status || !t[r.data.key]) return e;
   let {
     key,
@@ -69,22 +69,22 @@ let R = Mz([PX, e => e.library.used__LIVEGRAPH.destinationStyleKeyToLegacySource
   };
   return e;
 }, Object.create(null)));
-let L = Mz([_Q, O1, aR, BE, R], O);
-let P = Mz([m0, T_, aR, BE], O);
-let D = Mz([v3], e => Object.values(e).reduce((e, t) => {
+let L = createSelector([_Q, selectLocalStylesWithUsagesOnLoadedPages, aR, BE, R], O);
+let P = createSelector([m0, selectLocalSymbolsWithUsagesOnLoadedPages, aR, BE], O);
+let D = createSelector([v3], e => Object.values(e).reduce((e, t) => {
   let r = e.get(t.key);
   r || (r = new Set(), e.set(t.key, r));
   t.pageIds.forEach(e => r.add(e));
   return e;
 }, new Map()));
-let k = Mz([v3], e => e.reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
-let M = Mz([jU], e => e.reduce((e, t) => {
+let k = createSelector([v3], e => e.reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
+let M = createSelector([jU], e => e.reduce((e, t) => {
   let r = e.get(t.key);
   r || (r = new Set(), e.set(t.key, r));
   t.pageIds.forEach(e => r.add(e));
   return e;
 }, new Map()));
-let F = Mz([Du], e => Object.values(e).reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
+let F = createSelector([Du], e => Object.values(e).reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
 function j(e, t, r) {
   if (0 === e.size) return !1;
   if (1 === e.size) {
@@ -133,7 +133,7 @@ function B({
   }
   return s;
 }
-let G = Mz([wi, L, getSelectedFile, uB, tp, J8, tY, tX], (e, t, r, n, i, a, s, o) => {
+let G = createSelector([wi, L, getSelectedFile, uB, tp, J8, tY, selectLocalStylesWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = [];
   let c = !1;
@@ -168,12 +168,12 @@ let G = Mz([wi, L, getSelectedFile, uB, tp, J8, tY, tX], (e, t, r, n, i, a, s, o
     includesMoveUpdatesOnCurrentPage: c
   };
 });
-let V = P8([Ls, P], (e, t) => {
+let V = createDeepEqualSelector([Ls, P], (e, t) => {
   let r = Object.keys(t);
   let n = Object.keys(e);
   return d()(r, n);
 });
-let $$H14 = Mz([V, m3, S_, dK], (e, t, r, n) => {
+let $$H14 = createSelector([V, m3, S_, selectSceneGraph], (e, t, r, n) => {
   let i = new Map();
   for (let a of e) {
     let e = r[a];
@@ -187,7 +187,7 @@ let $$H14 = Mz([V, m3, S_, dK], (e, t, r, n) => {
   }
   return i;
 });
-let $$z10 = Mz([Ls, ZA, P, getSelectedFile, uB, tp, _$$aD, BA], (e, t, r, n, i, a, s, o) => {
+let $$z10 = createSelector([Ls, ZA, P, getSelectedFile, uB, tp, _$$aD, selectLocalSymbolsWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = !1;
   let c = new Set(s.map(e => e.key));
@@ -258,7 +258,7 @@ let $$z10 = Mz([Ls, ZA, P, getSelectedFile, uB, tp, _$$aD, BA], (e, t, r, n, i, 
   };
 });
 let W = getFileKey();
-let K = P8([a3, gJ, getSelectedFile, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
+let K = createDeepEqualSelector([a3, gJ, getSelectedFile, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
   let u = {};
   let p = new Set();
   let _ = Fullscreen?.getInternalCanvasNodeId();
@@ -507,7 +507,7 @@ let $$eh18 = p6([$$ea4], ({
 }));
 let $$em5 = createReduxSubscriptionAtomWithState(e => e.library.libraryUpdatesBannerDismissed);
 export function $$eg16(e, t) {
-  let r = dK(e);
+  let r = selectSceneGraph(e);
   let i = normalizeValue(t);
   let a = i ? StyleIdHandler.fromKiwi(i) : null;
   let s = a ? r.getStyleNode(a) : null;

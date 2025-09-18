@@ -16,7 +16,7 @@ import { kl } from "../905/275640";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { V4 } from "../figma_app/383828";
 import { lm } from "../figma_app/745458";
-import { Sh, dT } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys, selectInstanceKeys } from "../figma_app/889655";
 import { cn } from "../905/959568";
 import { O2, OE } from "../figma_app/164212";
 import { e6, ME } from "../figma_app/545190";
@@ -90,8 +90,8 @@ export let $$K0 = memo(function (e) {
   let t = normalizeValue(kl("resettableInstanceOverrides"));
   let r = useSelector(e => e.pickerShown);
   let s = useSelector(cv);
-  let o = useSelector(Sh);
-  let d = useSelector(dT);
+  let o = useSelector(selectSceneGraphSelectionKeys);
+  let d = useSelector(selectInstanceKeys);
   let u = useSelector(Z3);
   let _ = useDispatch();
   let {
@@ -188,7 +188,7 @@ function Y({
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     library: e.library
   }));
-  let i = useSelector(dT);
+  let i = useSelector(selectInstanceKeys);
   let {
     affiliatedStateGroup,
     singleBackingSymbol,

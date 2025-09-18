@@ -7,7 +7,7 @@ import { oc } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { Gt, kl } from "../905/275640";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { aj } from "../figma_app/803932";
 import { We, xe } from "../figma_app/481857";
 import { n4, uQ } from "../figma_app/151869";
@@ -188,7 +188,7 @@ function O() {
   let {
     isAutoLayoutChild,
     isLayoutChild
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let r = e?.get(t ?? "");
     return {
       isLayoutChild: !!r?.parentNode && "CANVAS" !== r.parentNode.type && "SECTION" !== r.parentNode.type,
@@ -238,7 +238,7 @@ let L = e => void 0 !== e ? e + 1 : 0;
 function P() {
   let e = Gt("stackMode");
   let t = uQ();
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     let r = e?.get(t ?? "");
     return r?.parentNode?.stackMode === "GRID";
   }, t) ? jsxs(Fragment, {

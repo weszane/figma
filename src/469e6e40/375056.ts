@@ -20,11 +20,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
 import { tI } from "../figma_app/599327";
-import { P8, a8, vt } from "../figma_app/297957";
+import { useProAnnualImprovementsExperiment, useTeamAccountCreditBanner, useSeatManagementWidgetExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { FOrganizationLevelType, FBillingPeriodType, FTeamStatusType, FPlanNameType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useTeamPlanFeatures } from "../figma_app/465071";
 import { e0 as _$$e2 } from "../905/696396";
@@ -37,7 +37,7 @@ import { CurrencyFormatter } from "../figma_app/514043";
 import { filterNotNullish } from "../figma_app/656233";
 import { pW } from "../905/160095";
 import { V as _$$V } from "../905/223767";
-import { k as _$$k2 } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { m as _$$m } from "../469e6e40/61410";
 import { UpsellModalType } from "../905/165519";
 import { setupToggleButton } from "../905/167712";
@@ -120,7 +120,7 @@ function F(e) {
 function q(e) {
   return jsx("ul", {
     className: _$$s.flex.flexColumn.py8.textBodyLarge.$,
-    children: N_.sort(AG).map(t => {
+    children: collaboratorSet.sort(compareProductAccessTypes).map(t => {
       if (isNullish(e.seatCountsData[t])) return null;
       let {
         total,
@@ -162,8 +162,8 @@ function q(e) {
 }
 function $(e) {
   let t = D();
-  let a = useMemo(() => N_.reduce((t, a) => t + (e.seatCountsData?.[a]?.total ?? 0), 0), [e.seatCountsData]);
-  let i = useMemo(() => N_.reduce((t, a) => t + (e.seatCountsData?.[a]?.available ?? 0), 0), [e.seatCountsData]);
+  let a = useMemo(() => collaboratorSet.reduce((t, a) => t + (e.seatCountsData?.[a]?.total ?? 0), 0), [e.seatCountsData]);
+  let i = useMemo(() => collaboratorSet.reduce((t, a) => t + (e.seatCountsData?.[a]?.available ?? 0), 0), [e.seatCountsData]);
   let r = e.isELA ? (a - i).toLocaleString() : a.toLocaleString();
   return jsxs(U, {
     children: [jsx(F, {
@@ -211,7 +211,7 @@ function G(e) {
   let a = [FBillingPeriodType.YEAR, FBillingPeriodType.MONTH];
   let [r, l] = useState(a[0]);
   let o = D();
-  let d = P8();
+  let d = useProAnnualImprovementsExperiment();
   let c = useDispatch();
   let [_, u, m] = _$$t.useManagedTabs(useMemo(() => ({
     [FBillingPeriodType.YEAR]: !0,
@@ -272,7 +272,7 @@ function z(e) {
 }
 function X() {
   let e = function () {
-    let e = a8();
+    let e = useTeamAccountCreditBanner();
     let t = useTeamPlanFeatures().unwrapOr(null);
     let a = t?.key?.type === FOrganizationLevelType.ORG;
     let n = Xf(t?.key.parentId, a);
@@ -390,7 +390,7 @@ function em(e) {
     isELA
   } = e;
   let o = useTeamPlanFeatures().unwrapOr(null);
-  let d = _$$k2();
+  let d = isProrationBillingEnabledForCurrentPlan();
   let c = o?.tier;
   let _ = useMemo(() => {
     switch (c) {
@@ -583,7 +583,7 @@ function ew(e) {
   });
 }
 function ek(e) {
-  let t = _$$k2();
+  let t = isProrationBillingEnabledForCurrentPlan();
   let a = Pd(t);
   let i = useCallback((t, a) => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.plan_subscription_card.amount_due_with_date", {
     amount: a,
@@ -749,7 +749,7 @@ function ek(e) {
   });
 }
 function eI(e) {
-  let t = _$$k2();
+  let t = isProrationBillingEnabledForCurrentPlan();
   let a = useMemo(() => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.upcoming_invoice_card.heading.next_monthly_invoice") : getI18nString("admin_settings.upcoming_invoice_card.heading.next_quarterly_invoice"), [e.planType]);
   let i = useMemo(() => new CurrencyFormatter(e.upcomingInvoice?.currency || e.planCurrency || _$$S2.USD), [e.upcomingInvoice, e.planCurrency]);
   let r = i.formatMoney(e.upcomingInvoice?.total || 0, {
@@ -1193,7 +1193,7 @@ function e3(e) {
   });
 }
 export function $$e80(e) {
-  let t = vt();
+  let t = useSeatManagementWidgetExperiment();
   let a = useCallback(() => getFeatureFlags().admin_ai_addon, []);
   let d = useDispatch();
   let c = useMemo(() => gl(e.invoices, {

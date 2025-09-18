@@ -23,7 +23,7 @@ import { FFileType } from "../figma_app/191312";
 import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { IT } from "../905/713695";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
@@ -44,12 +44,12 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 let j = "user_draft_template_key";
 export function $$q6() {
-  return Fk(e => e.getRoot().sourceLibraryKey);
+  return useDeepEqualSceneValue(e => e.getRoot().sourceLibraryKey);
 }
 export function $$G1(e) {
   let t = $$q6();
   let r = function (e) {
-    let t = Fk((e, t) => e.get(t)?.sourceLibraryKey, e);
+    let t = useDeepEqualSceneValue((e, t) => e.get(t)?.sourceLibraryKey, e);
     let r = $$q6();
     return t || r;
   }(e);

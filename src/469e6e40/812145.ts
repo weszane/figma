@@ -16,10 +16,10 @@ import { E as _$$E2 } from "../905/162070";
 import { n as _$$n } from "../469e6e40/721568";
 import { e6 } from "../figma_app/425283";
 import { fB, lJ } from "../469e6e40/336481";
-import { Z5 } from "../figma_app/297957";
+import { usePlanInviteWithSeatExperiment } from "../figma_app/297957";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { Ye } from "../905/332483";
-import { KS } from "../figma_app/217457";
+import { viewCollaboratorSet } from "../905/332483";
+import { getProductAccessOrderValue } from "../figma_app/217457";
 import { hasScimSeatType } from "../figma_app/951233";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { ColumnName } from "../figma_app/967319";
@@ -45,7 +45,7 @@ function A({
     className: e,
     sortNumerically: !0,
     sortReversed: !0,
-    getSortValue: e => e ? KS(e) : 0,
+    getSortValue: e => e ? getProductAccessOrderValue(e) : 0,
     cellComponent: (e, o) => jsx(M, {
       ...e,
       outerClassName: t,
@@ -171,7 +171,7 @@ export function $$D2({
     dispatch: e,
     dropdownShown: t,
     dropdownType: "FILTER_BILLING_PRODUCT_SEAT",
-    values: Ye.toArray(),
+    values: viewCollaboratorSet.toArray(),
     selectedValue: a.seatTypeFilter ?? null,
     getCount: e => s.seatTypeKey ? s.seatTypeKey[e] ?? 0 : 0,
     getDisplayText: e => JT(e),
@@ -208,7 +208,7 @@ function M({
   let q = useDispatch();
   let $ = a ?? ViewAccessTypeEnum.VIEW;
   let B = JT($);
-  let G = Z5({
+  let G = usePlanInviteWithSeatExperiment({
     disableExposureLogging: !0
   });
   if (i) {

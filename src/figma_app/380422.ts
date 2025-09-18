@@ -17,7 +17,7 @@ import { g5 } from "../figma_app/178752";
 import { selectOpenFile } from "../figma_app/516028";
 import { U as _$$U } from "../905/506188";
 import { getBasename } from "../905/309735";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { FDocumentType } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
 import { F as _$$F } from "../905/84606";
@@ -59,7 +59,7 @@ export function $$W0({
   let V = g5(FDocumentType.Design).productComponents;
   let H = useMemoStable(() => V.map(e => e.library_key), [V]);
   let z = _$$U(H);
-  let W = oh(fi) || "loading" === z.status;
+  let W = useIsLoading(fi) || "loading" === z.status;
   let $ = useMemoStable(() => currentSearch?.result.data?.map(e => e.library_key), [currentSearch]);
   let X = _$$U($ || []);
   let q = z3("faux");

@@ -35,7 +35,7 @@ import { Cy } from "../905/571439";
 import { normalizeValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { getObservableValue } from "../figma_app/84367";
 import { Lh, D8 as _$$D } from "../figma_app/242339";
 import { KindEnum } from "../905/129884";
@@ -125,7 +125,7 @@ export function $$em2({
   let eI = useSelector(e => e.selectedView);
   let eS = getEditorTypeFromView(eI);
   let ev = useSelector(e => e.userFlags);
-  let eA = _$$f("completed_font_installer_modal");
+  let eA = selectUserFlag("completed_font_installer_modal");
   let ex = useSelector(e => e.localFontAgentVersion);
   let [eN, eC] = useState(!1);
   let [ew, eO] = useState([]);

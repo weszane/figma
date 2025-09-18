@@ -4,7 +4,7 @@ import { HandoffBindingsCpp } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { isColorTransparent, isColorDark } from "../figma_app/191804";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { NY } from "../figma_app/646357";
 import { FZ } from "../figma_app/803787";
 import { c5 } from "../figma_app/645694";
@@ -17,7 +17,7 @@ export function $$m1(e, t) {
     let n = useSelector(c5);
     return NY(e, t, r, n);
   }(e);
-  let m = DP();
+  let m = getVisibleTheme();
   let g = r?.containing_frame?.backgroundColor ?? "";
   r?.type === PrimaryWorkflowEnum.STATE_GROUP && r.fill_color && (g = r.fill_color);
   return useCallback(() => {

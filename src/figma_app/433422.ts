@@ -6,8 +6,8 @@ import { bv } from "../figma_app/421401";
 import { getI18nString } from "../905/303541";
 import { JT, nf, V5 } from "../figma_app/847597";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
-import { Ye, N_ } from "../905/332483";
-import { f2 } from "../figma_app/217457";
+import { viewCollaboratorSet, collaboratorSet } from "../905/332483";
+import { getCollaboratorSet } from "../figma_app/217457";
 import { FPlanAccessType, FUpgradeReasonType } from "../figma_app/191312";
 export function $$h4(e) {
   let {
@@ -16,7 +16,7 @@ export function $$h4(e) {
   } = e;
   let n = team_user?.active_seat_type?.key ?? null;
   let i = team_role?.pending ? team_role?.invite : null;
-  let a = i?.billableProductKey ? f2(i.billableProductKey) : null;
+  let a = i?.billableProductKey ? getCollaboratorSet(i.billableProductKey) : null;
   return team_user ? n ? {
     seatTypeKey: n,
     isPendingSeat: !1
@@ -51,11 +51,11 @@ export function $$f1(e, t) {
 }
 export function $$E8() {
   return {
-    seatTypeKey: Ye.dict(() => 0)
+    seatTypeKey: viewCollaboratorSet.dict(() => 0)
   };
 }
 export function $$y7(e, t) {
-  let r = N_.dict(t => e[t]);
+  let r = collaboratorSet.dict(t => e[t]);
   Object.values(r).some(e => e === FPlanAccessType.RESTRICTED) && reportError(_$$e.BILLING_EXPERIENCE, Error("tried to set restricted paid status for seat type"), {
     extra: {
       paidStatuses: e

@@ -1,17 +1,13 @@
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
 
-interface TrashedFilesParams {
+export interface TrashedFilesParams {
   orgId?: string
   teamId?: string
   creatorFilter?: string
 }
 
-interface SchemaValidator {
-  validate: (fn: (params: { xr: { get: (url: string, params: any) => Promise<any> } }) => Promise<any>) => any
-}
-
 class TrashedFilesValidatorAPI {
-  TrashedFilesV2SchemaValidator: SchemaValidator
+  TrashedFilesV2SchemaValidator: ReturnType<typeof createNoOpValidator>
 
   constructor() {
     this.TrashedFilesV2SchemaValidator = createNoOpValidator()

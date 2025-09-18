@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { getObservableValue } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cn, VZ } from "../905/959568";
 import { UG } from "../figma_app/628987";
 import { Ao } from "../905/748636";
@@ -42,7 +42,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { u1, XE } from "../figma_app/91703";
 import { sw, rk } from "../figma_app/914957";
 import { Yr } from "../figma_app/8833";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { bL as _$$bL2 } from "../figma_app/852050";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { KindEnum } from "../905/129884";
@@ -250,7 +250,7 @@ function eA({
 }) {
   let c = function (e) {
     let t = useMemoStable(() => e.map(e => e.node_id), [e]);
-    return Fk((e, t) => {
+    return useDeepEqualSceneValue((e, t) => {
       let i = {};
       for (let n of t) {
         let t = e.get(n);
@@ -321,7 +321,7 @@ function ey({
   } = d;
   let [C, T] = useState(!1);
   let k = useLatestRef(C);
-  Fk((e, t) => {
+  useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     if (!i) return !1;
     let n = i.hasMissingFont;
@@ -421,7 +421,7 @@ function ev({
   styleId: t,
   previewColor: i
 }) {
-  let a = Fk((e, t) => e.get(t)?.name ?? "", e);
+  let a = useDeepEqualSceneValue((e, t) => e.get(t)?.name ?? "", e);
   let [s, o] = useAtomValueAndSetter(ec);
   let l = s[t];
   let d = useCallback(e => {
@@ -577,7 +577,7 @@ function ex({
           } = e;
           let s = R(e) && F;
           return paint.color && paint.colorVar?.value?.alias?.guid && jsx(qm, {
-            backgroundString: _$$F.format({
+            backgroundString: colorCSSManipulatorInstance.format({
               ...paint.color,
               a: 1
             }),
@@ -942,26 +942,26 @@ let eW = memo(function ({
     let r = [];
     let a = new Set();
     for (let t = 0; t < e.length; t++) {
-      let i = _$$F.format(e[t]);
-      (0 === t || i !== _$$F.format(e[t - 1])) && (r.push(e[t]), a.add(i));
+      let i = colorCSSManipulatorInstance.format(e[t]);
+      (0 === t || i !== colorCSSManipulatorInstance.format(e[t - 1])) && (r.push(e[t]), a.add(i));
     }
-    if ((e = r).length >= 3) return e.slice(0, 3).map(e => _$$F.format(e));
+    if ((e = r).length >= 3) return e.slice(0, 3).map(e => colorCSSManipulatorInstance.format(e));
     n > 4 ? t = t.filter(e => !(0 === e.r && 0 === e.g && 0 === e.b) && !eL(e)) : n > 3 && (t = t.filter(e => !eL(e)));
     t = t.sort((e, t) => getColorBrightness(t) - getColorBrightness(e));
     for (let e = 0; e < t.length; e++) {
-      let n = _$$F.format(t[e]);
-      0 !== e && n === _$$F.format(t[e - 1]) || a.has(n) || i.push(t[e]);
+      let n = colorCSSManipulatorInstance.format(t[e]);
+      0 !== e && n === colorCSSManipulatorInstance.format(t[e - 1]) || a.has(n) || i.push(t[e]);
     }
-    if ((n = i.length + e.length) <= 3) return [...e, ...i].map(e => _$$F.format(e));
+    if ((n = i.length + e.length) <= 3) return [...e, ...i].map(e => colorCSSManipulatorInstance.format(e));
     let s = [];
     let l = 3 - e.length;
     if (1 === l) s.push(i[i.length - 1]);else for (let e = 0; e < l; e++) {
       let t = Math.floor(e / (l - 1) * (i.length - 1));
       s.push(i[t]);
     }
-    return [...e, ...s].map(e => _$$F.format(e));
+    return [...e, ...s].map(e => colorCSSManipulatorInstance.format(e));
   }, [b, o]);
-  let T = Fk((e, t) => {
+  let T = useDeepEqualSceneValue((e, t) => {
     let n = {};
     for (let r of t) {
       let t = e.get(r);
@@ -1155,7 +1155,7 @@ export function $$eX0({
     let h = useAtomWithSubscription(Dq);
     let g = function () {
       let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
-      let t = Fk((e, t) => {
+      let t = useDeepEqualSceneValue((e, t) => {
         let i = {};
         for (let n of t) for (let t of n) {
           let n = e.get(t);

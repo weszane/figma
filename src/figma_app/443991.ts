@@ -7,8 +7,8 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { yJ } from "../905/395917";
-import { yJ as _$$yJ } from "../figma_app/240735";
+import { putOrgs } from "../905/395917";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { yJ as _$$yJ2 } from "../figma_app/24841";
 import { jS, Pv } from "../905/619652";
 import { Pf, ck } from "../905/952832";
@@ -109,7 +109,7 @@ let S = createOptimistThunk((e, t) => {
       data: t
     }) {
       let r = t.meta;
-      e.dispatch(_$$yJ({
+      e.dispatch(setTeamOptimistThunk({
         team: r,
         userInitiated: !1
       }));
@@ -131,7 +131,7 @@ let S = createOptimistThunk((e, t) => {
       data: t
     }) {
       let r = t.meta;
-      e.dispatch(yJ({
+      e.dispatch(putOrgs({
         org: r
       }));
       e.dispatch($$I1());

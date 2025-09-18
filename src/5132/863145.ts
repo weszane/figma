@@ -6,7 +6,7 @@ import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
 import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
 import { dl } from "../figma_app/307841";
-import { CT } from "../figma_app/297957";
+import { useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
 import { OrgProductTermsEligibleInfo } from "../figma_app/43951";
@@ -27,7 +27,7 @@ let m = createRemovableAtomFamily(({
 }) : resourceUtils.disabled()));
 export function $$f0(e) {
   let l = e?.id ?? null;
-  let i = !CT();
+  let i = !useSeatBillingTermsExperiment();
   let {
     warningStatus,
     renewalDate,

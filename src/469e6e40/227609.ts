@@ -36,7 +36,7 @@ import { S as _$$S4 } from '../469e6e40/885592';
 import { k as _$$k2 } from '../469e6e40/952112';
 import { q as _$$q } from '../469e6e40/977739';
 import { Q as _$$Q } from '../905/11928';
-import { D2, VP } from '../905/18797';
+import { isLoaded, isLoading } from '../905/18797';
 import { createModalConfig, registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
@@ -50,7 +50,7 @@ import { Cj } from '../905/270084';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
-import { N_ } from '../905/332483';
+import { collaboratorSet } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
 import { $S } from '../905/351260';
 import { UpgradeAction } from '../905/370443';
@@ -127,10 +127,10 @@ import { isCutover, LegacyConfigGroups } from '../figma_app/121751';
 import { UserFieldEnum } from '../figma_app/135698';
 import { b_, Ji, sH } from '../figma_app/149367';
 import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
-import { tk as _$$tk, _E, m$, yJ } from '../figma_app/240735';
+import { toggleFigmaLibrariesThunk, batchDeleteTeamMembers, fetchTeamMembersThunk, setTeamOptimistThunk } from '../figma_app/240735';
 import { N as _$$N2 } from '../figma_app/268271';
 import { useSubscription } from '../figma_app/288654';
-import { C3, vt } from '../figma_app/297957';
+import { useSeatManagementWidgetProExperiment, useSeatManagementWidgetExperiment } from '../figma_app/297957';
 import { y3 } from '../figma_app/307841';
 import { getFutureDateOrNull, hasValidSubscription, isTeamInGracePeriod } from '../figma_app/345997';
 import { p as _$$p3 } from '../figma_app/353099';
@@ -148,7 +148,7 @@ import { cE, oi } from '../figma_app/527041';
 import { k as _$$k6, Q as _$$Q3 } from '../figma_app/527200';
 import { y2 } from '../figma_app/563413';
 import { getCurrentTeam, getDashboardSectionLabel, getUserFieldLabel } from '../figma_app/598018';
-import { k as _$$k4 } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { isTeamEligibleForUpgrade } from '../figma_app/630077';
 import { SecureLink } from '../figma_app/637027';
 import { g as _$$g } from '../figma_app/638694';
@@ -400,7 +400,7 @@ let e5 = withTracking(e => {
     e.forEach(e => {
       !(!e.id || e.team_role?.pending) && e.email && (t.push(e.email), a.push(e.id));
     });
-    dispatch(_E({
+    dispatch(batchDeleteTeamMembers({
       teamId: team.id,
       userIds: a,
       emails: t
@@ -486,7 +486,7 @@ let e5 = withTracking(e => {
     }));
   }, [dispatch]);
   let f = e => e.member.email;
-  let j = C3()(_$$v2(billing?.summary));
+  let j = useSeatManagementWidgetProExperiment()(_$$v2(billing?.summary));
   let y = () => {
     let t = e.team;
     return [{
@@ -1151,7 +1151,7 @@ function tG(e) {
   let m = !!e.billing.summary.has_billing_address;
   let p = !!settingsData?.studentTeamAt && !settingsData?.isAiDataSharingEnabled;
   t = useTeamPlanFeatures();
-  let g = N_.reduce((e, a) => {
+  let g = collaboratorSet.reduce((e, a) => {
     switch (a) {
       case ProductAccessTypeEnum.EXPERT:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === zRx.INSTANT_APPROVAL;
@@ -1188,7 +1188,7 @@ function tG(e) {
         teamId: team.id,
         aiFeaturesDisabled: e
       });
-      r(yJ({
+      r(setTeamOptimistThunk({
         team: {
           id: team.id,
           ai_features_disabled: e
@@ -1316,7 +1316,7 @@ function tG(e) {
             isActive: !e.team.figma_provided_libraries_disabled,
             testId: 'figma-provided-libraries-setting-toggle',
             onToggle: t => {
-              r(_$$tk({
+              r(toggleFigmaLibrariesThunk({
                 figma_provided_libraries_disabled: !t,
                 teamId: e.team.id
               }));
@@ -1859,9 +1859,9 @@ function aA(e) {
     planType: FOrganizationLevelType.TEAM,
     planId: e.team.id
   });
-  let n = _$$k4();
-  let s = C3();
-  let o = vt();
+  let n = isProrationBillingEnabledForCurrentPlan();
+  let s = useSeatManagementWidgetProExperiment();
+  let o = useSeatManagementWidgetExperiment();
   let d = e.billingSummary.annual_subscription;
   let c = e.billingSummary.annual_subscription?.trial_end ? getFutureDateOrNull(e.billingSummary.annual_subscription.trial_end) : null;
   let _ = _$$v2(e.billingSummary);
@@ -1883,7 +1883,7 @@ function aA(e) {
       total: 0,
       assigned: 0
     };
-    N_.forEach(a => {
+    collaboratorSet.forEach(a => {
       t.available += e.year[a]?.available ?? 0;
       t.assigned += e.year[a]?.assigned ?? 0;
       t.total += e.year[a]?.total ?? 0;
@@ -2274,7 +2274,7 @@ export function $$aG0(e) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
-        VP(D, e) || D2(D, e) || a(Be({
+        isLoading(D, e) || isLoaded(D, e) || a(Be({
           teamId: s.id
         }));
       }
@@ -2282,27 +2282,27 @@ export function $$aG0(e) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
-        VP(D, e) || D2(D, e) || a(Be({
+        isLoading(D, e) || isLoaded(D, e) || a(Be({
           teamId: s.id
         }));
       } else if (e.selectedTab === DashboardSections.MEMBERS) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
-        let t = m$.loadingKeyForPayload({
+        let t = fetchTeamMembersThunk.loadingKeyForPayload({
           teamId: s.id
         });
-        VP(D, t) || D2(D, t) || a(m$({
+        isLoading(D, t) || isLoaded(D, t) || a(fetchTeamMembersThunk({
           teamId: s.id
         }));
-        VP(D, e) || D2(D, e) || a(Be({
+        isLoading(D, e) || isLoaded(D, e) || a(Be({
           teamId: s.id
         }));
       } else if (e.selectedTab === DashboardSections.SETTINGS) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
-        VP(D, e) || D2(D, e) || a(Be({
+        isLoading(D, e) || isLoaded(D, e) || a(Be({
           teamId: s.id
         }));
       }
@@ -2336,14 +2336,14 @@ export function $$aG0(e) {
         team: s
       });
       X = !1;
-      K = VP(D, Be.loadingKeyForPayload({
+      K = isLoading(D, Be.loadingKeyForPayload({
         teamId: s.id
       }));
       break;
     case DashboardSections.MEMBERS:
-      K = F.status === 'loading' || R.status === 'loading' || VP(D, m$.loadingKeyForPayload({
+      K = F.status === 'loading' || R.status === 'loading' || isLoading(D, fetchTeamMembersThunk.loadingKeyForPayload({
         teamId: s.id
-      })) || VP(D, Be.loadingKeyForPayload({
+      })) || isLoading(D, Be.loadingKeyForPayload({
         teamId: s.id
       }));
       let ee = {
@@ -2370,12 +2370,12 @@ export function $$aG0(e) {
         team: s,
         activeTab: getBillingSection(e.selectedSecondaryTab),
         billingSummary: P.summary,
-        isBillingSummaryLoading: VP(D, et) || !D2(D, et),
+        isBillingSummaryLoading: isLoading(D, et) || !isLoaded(D, et),
         nextPostBillingRemodelGaRenewal: P.summary.analyze_data_contract_v2_start
       });
       break;
     case DashboardSections.SETTINGS:
-      K = VP(D, Be.loadingKeyForPayload({
+      K = isLoading(D, Be.loadingKeyForPayload({
         teamId: s.id
       })) || !Y;
       t = jsx(tG, {

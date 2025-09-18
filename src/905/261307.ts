@@ -15,7 +15,7 @@ import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
 import { RR } from "../figma_app/307841";
-import { k as _$$k2 } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -45,7 +45,7 @@ export let $$O0 = registerModal(function ({
   let V = RR({
     preferOpenFilePlan: !0
   });
-  let G = _$$k2();
+  let G = isProrationBillingEnabledForCurrentPlan();
   let z = _$$R({
     licenseType: e,
     planDataForSocialProof: j,

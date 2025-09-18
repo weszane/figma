@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { webGPUBindings, GpuErrorType, ColorSpaceEnum } from "../figma_app/763686";
-import { iL } from "../figma_app/762706";
-import { zD } from "../905/686312";
+import { getWasmModule } from "../figma_app/762706";
+import { getPreferredWebGLContext } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { getIsWindows } from "../figma_app/778880";
@@ -40,7 +40,7 @@ class f {
   initializeIfNeeded() {
     !wO() || this.isInitialized() || (this._gpuCanvas = new OffscreenCanvas(1, 1), this._gpuCtx = this._gpuCanvas.getContext("webgpu"), this._canvas2DCanvasNoAlpha = new OffscreenCanvas(1, 1), this._canvas2DContextNoAlpha = this._canvas2DCanvasNoAlpha.getContext("2d", {
       alpha: !1
-    }), this._canvas2DCanvasAlpha = new OffscreenCanvas(1, 1), this._canvas2DContextAlpha = this._canvas2DCanvasAlpha.getContext("2d"), this._glCanvas = new OffscreenCanvas(1, 1), this._gl = zD(ap(), this._glCanvas), this._glCanvas.addEventListener("webglcontextlost", () => {
+    }), this._canvas2DCanvasAlpha = new OffscreenCanvas(1, 1), this._canvas2DContextAlpha = this._canvas2DCanvasAlpha.getContext("2d"), this._glCanvas = new OffscreenCanvas(1, 1), this._gl = getPreferredWebGLContext(ap(), this._glCanvas), this._glCanvas.addEventListener("webglcontextlost", () => {
       this._webglContextLost = !0;
     }), this._glCanvas.addEventListener("webglcontextrestored", () => {
       this._webglContextLost = !1;
@@ -273,7 +273,7 @@ class _ {
     this._syncReadback = new f();
   }
   emscriptenModule() {
-    this._emscriptenModule || (this._emscriptenModule = iL());
+    this._emscriptenModule || (this._emscriptenModule = getWasmModule());
     return this._emscriptenModule;
   }
   initializationStatus() {
@@ -333,7 +333,7 @@ class _ {
     let i = t.info;
     i || "function" != typeof t.requestAdapterInfo || (i = await t.requestAdapterInfo());
     let n = this._syncReadback.getGLContext();
-    if (n || (n = zD(ap())), this._gpuDeviceInfo.figmaRenderingBackend = "WebGPU", n) {
+    if (n || (n = getPreferredWebGLContext(ap())), this._gpuDeviceInfo.figmaRenderingBackend = "WebGPU", n) {
       this._gpuDeviceInfo.webGLVersion = n.getParameter(n.VERSION);
       let e = n.getExtension("WEBGL_debug_renderer_info");
       e ? (this._gpuDeviceInfo.graphicsCardName = n.getParameter(e.UNMASKED_RENDERER_WEBGL) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(e.UNMASKED_VENDOR_WEBGL) ?? "") : (this._gpuDeviceInfo.graphicsCardName = n.getParameter(n.RENDERER) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(n.VENDOR) ?? "");

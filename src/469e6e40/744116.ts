@@ -12,7 +12,7 @@ import { UpgradeAction } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { d as _$$d } from "../figma_app/603561";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
@@ -28,7 +28,7 @@ function k({
 }) {
   let s = useDispatch();
   let r = y3(t?.created_at || a?.created_at, a?.last_upgraded_at);
-  let h = _$$f(y);
+  let h = selectUserFlag(y);
   let {
     show,
     isShowing,

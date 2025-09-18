@@ -12,7 +12,7 @@ import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { UN } from "../figma_app/976345";
+import { trackFileClicked } from "../figma_app/976345";
 import { l as _$$l } from "../905/767868";
 import { A as _$$A } from "../905/100919";
 import { K } from "../905/226178";
@@ -138,7 +138,7 @@ export function $$P0(e) {
           planId: i || r,
           planType: i ? OrganizationType.ORG : OrganizationType.TEAM
         })), isCommandOrShift(t)) {
-          p(UN({
+          p(trackFileClicked({
             fileKey: e.file.key,
             entrypoint: "standalone file tile",
             viewMode: 0 === e.viewMode ? "list" : "grid"
@@ -147,7 +147,7 @@ export function $$P0(e) {
           t = appendUserIdToUrl(t, s);
           t = appendNavigationContext(t, i, r, o);
           customHistory.redirect(t, "_blank");
-        } else compareValues(i, e.file.parent_org_id, r, e.file.team_id) ? (p(UN({
+        } else compareValues(i, e.file.parent_org_id, r, e.file.team_id) ? (p(trackFileClicked({
           fileKey: e.file.key,
           entrypoint: "standalone file tile",
           viewMode: 0 === e.viewMode ? "list" : "grid"

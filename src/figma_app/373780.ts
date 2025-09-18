@@ -31,9 +31,9 @@ import { deepEqual } from "../905/382883";
 import { EventEmitter } from "../905/690073";
 import { isNotNullish } from "../figma_app/95419";
 import { debugState } from "../905/407919";
-import { Fk, wA as _$$wA } from "../figma_app/167249";
-import { dK, Xt } from "../figma_app/889655";
-import { p8, KH } from "../figma_app/722362";
+import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
+import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
+import { useAppModelProperty, useSceneGraphSelection } from "../figma_app/722362";
 import { _ as _$$_, W as _$$W } from "../905/898204";
 import { vF } from "../figma_app/290870";
 import { a0, RG, rs } from "../figma_app/440994";
@@ -52,7 +52,7 @@ import { replaceSelection } from "../figma_app/741237";
 import { B5, tp, cU, cH, Z3 } from "../figma_app/80462";
 import { s as _$$s2, w as _$$w } from "../figma_app/154255";
 import { rp, d2, Dm } from "../905/845277";
-import { l7, hA } from "../figma_app/88239";
+import { useIsFullscreenOverview, useDevModeFocusId } from "../figma_app/88239";
 import { of, Gl } from "../figma_app/297733";
 import { logger } from "../905/651849";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -97,9 +97,9 @@ function z({
 }) {
   let s = useMemo(() => new EventEmitter("AccessibleNodeChangeContext.initialized"), []);
   let o = useStore();
-  let l = useSelector(dK);
-  let d = useSelector(Xt);
-  let c = Fk(e => e.getCurrentPage()?.guid);
+  let l = useSelector(selectSceneGraph);
+  let d = useSelector(selectSceneGraphSelection);
+  let c = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let u = c ? documentStateTsApi.getActiveDocument() : void 0;
   let p = useRef({});
   let _ = useDebouncedCallback(() => {
@@ -161,13 +161,13 @@ function W(e, t) {
     let r = e.map(e => isNotNullish(e) ? t.get(e) : null);
     return a.current.call(null, ...r);
   }, [e]);
-  let [o, l] = useState(() => s(dK(debugState.getState())));
+  let [o, l] = useState(() => s(selectSceneGraph(debugState.getState())));
   useEffect(() => {
     let t = ([e]) => {
       let t = s(e);
       l(e => deepEqual(e, t) ? e : t);
     };
-    for (let n of (t([dK(debugState.getState())]), e)) r.on(`node-changed-${n}`, t);
+    for (let n of (t([selectSceneGraph(debugState.getState())]), e)) r.on(`node-changed-${n}`, t);
     return () => {};
   }, [s, r, e]);
   return o;
@@ -175,7 +175,7 @@ function W(e, t) {
 function K(e) {
   let t = useContext(H).emitter;
   let [r, n] = useState(() => {
-    let t = Xt(debugState.getState());
+    let t = selectSceneGraphSelection(debugState.getState());
     if (!t[e]) return;
     let r = 0;
     for (let e in t) if (Object.prototype.hasOwnProperty.call(t, e) && ++r > 1) break;
@@ -238,7 +238,7 @@ let Z = memo(function ({
       selfId,
       siblingCount: _siblingCount,
       positionAmongSiblings: _positionAmongSiblings
-    } = _$$wA((e, t, r) => {
+    } = useStrictDeepEqualSceneValue((e, t, r) => {
       let n;
       let i;
       let a;
@@ -280,7 +280,7 @@ let Z = memo(function ({
     return t || r || "-1:-1";
   }(), r);
   if (function () {
-    let e = p8("currentTool");
+    let e = useAppModelProperty("currentTool");
     let t = getObservableValue(AppStateTsApi?.editorState().keyboardSelectMode, SelectionMode.BOX);
     return e === DesignGraphElements.KEYBOARD_SELECT && t === SelectionMode.BOX;
   }()) return null;
@@ -370,7 +370,7 @@ function ec({
   let o = _$$g2(s);
   let l = _$$x2(s);
   let d = useMemo(() => [...new Set(r.map(e => e.comments[0]?.client_meta?.stable_path).filter(isNotNullish))], [r]);
-  let c = _$$wA((e, t) => {
+  let c = useStrictDeepEqualSceneValue((e, t) => {
     let r = JSON.parse(t);
     let n = new Map();
     for (let t of r) {
@@ -749,8 +749,8 @@ let ex = memo(function () {
   });
 });
 let eC = memo(function () {
-  let e = l7();
-  return hA() && !e ? jsx(z, {
+  let e = useIsFullscreenOverview();
+  return useDevModeFocusId() && !e ? jsx(z, {
     nodeMapping: AppMode.DESIGN,
     navigationTelemetryTag: "devmode_navigate",
     children: jsx(Z, {
@@ -846,7 +846,7 @@ function eL({
   extractorCtor: t,
   navigationTelemetryTag: r
 }) {
-  let i = Fk(e => e.getCurrentPage()?.guid);
+  let i = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let a = _$$Z(r);
   let s = getObservableOrFallback(UK().accessibilityDomDebug);
   let o = J({
@@ -1330,8 +1330,8 @@ function e6({
   });
   !function () {
     let e = getSelectedEditorType();
-    let t = p8("activeCanvasEditModeType");
-    let r = KH();
+    let t = useAppModelProperty("activeCanvasEditModeType");
+    let r = useSceneGraphSelection();
     let n = Object.keys(r);
     let a = t !== LayoutTabType.TEXT || 0 === n.length ? void 0 : n[n.length - 1];
     let {
@@ -1339,7 +1339,7 @@ function e6({
       selectionStart,
       selectionEnd,
       label
-    } = _$$wA((t, n) => {
+    } = useStrictDeepEqualSceneValue((t, n) => {
       let i = n ? t.get(n) : void 0;
       if (null == i) return {
         textValue: null,

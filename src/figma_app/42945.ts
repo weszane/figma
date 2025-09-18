@@ -5,10 +5,10 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import d from "../vendor/128080";
-import { Py, H3 } from "../905/403166";
+import { emojiPresentationRegex, nativeToShortcode } from "../905/403166";
 import { getI18nString } from "../905/303541";
 import { WJ } from "../figma_app/379850";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { nL, U3, RO } from "../figma_app/770088";
 import { Zj } from "../figma_app/530167";
 import { mH } from "../figma_app/703138";
@@ -82,7 +82,7 @@ export let $$U6 = {
 };
 async function B(e, t) {
   if (t) {
-    let r = t.replace(Py, H3);
+    let r = t.replace(emojiPresentationRegex, nativeToShortcode);
     return await e.search(r).then(e => new Set(e.map(e => e.item.parentId || e.item.id)));
   }
   return C;
@@ -100,7 +100,7 @@ export function $$V5(e) {
   let O = useSelector(e => e.selectedView.commentThreadId);
   let R = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, defaultSessionLocalIDString);
   let P = getObservableValue(AppStateTsApi?.cooperFocusView().focusedNodeId, defaultSessionLocalIDString);
-  let j = hA();
+  let j = useDevModeFocusId();
   let V = Ld();
   let [z, W] = useState("creationDate");
   let [K, Y] = useState({

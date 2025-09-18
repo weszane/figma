@@ -3,7 +3,7 @@ import { IssueCategory, ColorPalette, HandoffBindingsCpp, SessionOrigin } from "
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { r as _$$r } from "../905/955316";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 var d = (e => (e[e.DARK = 0] = "DARK", e[e.LIGHT = 1] = "LIGHT", e))(d || {});
 export function $$c5(e) {
   switch (e) {
@@ -75,7 +75,7 @@ export function $$_3(e = {
   } = e;
   let r = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let s = useMemo(() => [], []);
-  let d = wA(e => e.getRoot().annotationCategories);
+  let d = useStrictDeepEqualSceneValue(e => e.getRoot().annotationCategories);
   useEffect(() => {
     !r && null === d && initializeIfNull && _$$r(() => {
       permissionScopeHandler.system("initialize-annotation-categories", () => {

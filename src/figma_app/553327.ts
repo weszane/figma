@@ -1,9 +1,9 @@
 import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { Ku } from "../figma_app/678782";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$d1(e = !0) {
   let t = Ku(["add-selection-ready-status", "remove-selection-status"]);
   return t["add-selection-ready-status"] || t["remove-selection-status"] && !e;
@@ -14,7 +14,7 @@ export function $$c0(e) {
   let {
     nodeType,
     isSymbol
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let r = e?.get(t ?? "");
     return {
       nodeType: r?.type,
@@ -22,7 +22,7 @@ export function $$c0(e) {
     };
   }, r);
   let c = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
-  let u = l7();
+  let u = useIsFullscreenOverview();
   return !!r && (c === LayoutTabType.DEV_HANDOFF || c === LayoutTabType.DEV_HANDOFF_HISTORY || u) && ("FRAME" === nodeType || isSymbol || "SECTION" === nodeType);
 }
 export const i = $$c0;

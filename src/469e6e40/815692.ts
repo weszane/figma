@@ -49,7 +49,7 @@ import { R as _$$R } from '../905/304671';
 import { z as _$$z, Z as _$$Z } from '../905/306088';
 import { b as _$$b, c as _$$c2 } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
-import { N_ as _$$N_2, Oq } from '../905/332483';
+import { collaboratorSet, designSet } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
 import { $ as _$$$ } from '../905/355181';
 import { BannerMessage } from '../905/363675';
@@ -128,13 +128,13 @@ import { I2, Xf } from '../figma_app/153916';
 import { isGovCluster } from '../figma_app/169182';
 import { J as _$$J3 } from '../figma_app/179602';
 import { FPlanNameType, FOrganizationLevelType, FCostCenterType } from '../figma_app/191312';
-import { Zx } from '../figma_app/217457';
+import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { Bg } from '../figma_app/246699';
 import { T as _$$T } from '../figma_app/257703';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { isResourceHubEnabled } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
-import { t4 as _$$t2 } from '../figma_app/297957';
+import { useScimGroupExperiment } from '../figma_app/297957';
 import { isSingleDevWithCodegen, isDevModePlugin, isDevModeWithCodegen } from '../figma_app/300692';
 import { V as _$$V3 } from '../figma_app/312987';
 import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
@@ -181,7 +181,7 @@ import { ModalView, ConfirmationModal2 } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { V3 as _$$V4 } from '../figma_app/926061';
 import { s as _$$s5 } from '../figma_app/961559';
-import { V3 } from '../figma_app/976345';
+import { openUrlInContext } from '../figma_app/976345';
 import { A as _$$A8 } from '../svg/619883';
 import { A as _$$A3 } from '../svg/678521';
 import { A as _$$A2 } from '../svg/783138';
@@ -191,7 +191,7 @@ import nJ from '../vendor/523035';
 import { _ as _$$_ } from '../vendor/853977';
 function B(e) {
   let t = e.dispatch;
-  let a = _$$t2();
+  let a = useScimGroupExperiment();
   let i = useCallback(() => {
     t(_$$V({
       orgSamlConfigId: e.orgSamlConfig.id
@@ -1893,7 +1893,7 @@ function aj({
         c(hideModal());
       } else {
         let e = `/files/${o}/plugins`;
-        c(V3({
+        c(openUrlInContext({
           url: e
         }));
       }
@@ -1903,7 +1903,7 @@ function aj({
   });
   let u = jsx(SecureLink, {
     onClick: () => {
-      c(V3({
+      c(openUrlInContext({
         url: '/community/plugins/devmode'
       }));
     },
@@ -4058,7 +4058,7 @@ function n3(e) {
     orgId: a,
     tier: n
   }) {
-    let s = Oq.dict(e => ({
+    let s = designSet.dict(e => ({
       currency: t,
       billableProductKey: e,
       billableProductVariantKey: null,
@@ -4077,7 +4077,7 @@ function n3(e) {
     let d = Math.max(WQ - o, 0);
     let c = Object.entries(e).reduce((e, t) => {
       let [a, n] = t;
-      return e + n * l[Zx(a)].amount;
+      return e + n * l[getProductAccessTypeByKey(a)].amount;
     }, 0);
     d && (c += d * l[ProductAccessTypeEnum.DESIGN].amount);
     return 12 * c;
@@ -4532,7 +4532,7 @@ export function $$sr0(e) {
   let $ = useDispatch();
   let B = selectUser();
   t = useTeamPlanFeatures();
-  let z = _$$N_2.reduce((e, a) => {
+  let z = collaboratorSet.reduce((e, a) => {
     switch (a) {
       case ProductAccessTypeEnum.EXPERT:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === r.zRx.INSTANT_APPROVAL;
@@ -4546,7 +4546,7 @@ export function $$sr0(e) {
         throwTypeError(a);
     }
   }, !1);
-  let V = _$$t2();
+  let V = useScimGroupExperiment();
   let W = _$$q(Jt, !0);
   let [H, Y] = useState(!1);
   let [J, K] = useState(!1);

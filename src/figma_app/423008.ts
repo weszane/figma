@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Z } from "../905/224161";
 import { getSelectedView } from "../figma_app/386952";
-import { ju } from "../905/187165";
+import { getEditorViewType } from "../905/187165";
 import { x6, zB, as, Hg, _d, Kk, IO } from "../905/410210";
 import { A } from "../5724/721563";
 var l = o;
@@ -22,7 +22,7 @@ export function $$E0({
   let E = getSelectedView();
   let y = useRef(null);
   Z("light", y);
-  let b = ju(E);
+  let b = getEditorViewType(E);
   return isGovCluster() ? null : jsx(setupThemeContext, {
     mode: "light",
     brand: b,
@@ -54,7 +54,7 @@ export function $$y1(e) {
   let t = getSelectedView();
   let r = useRef(null);
   Z("light", r);
-  let o = ju(t);
+  let o = getEditorViewType(t);
   return jsx(setupThemeContext, {
     mode: "light",
     brand: o,

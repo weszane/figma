@@ -3,7 +3,7 @@ import { bUL } from "../figma_app/822011";
 import { getFeatureFlags } from "../905/601108";
 import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { K } from "../figma_app/748328";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -62,12 +62,12 @@ export function $$I0({
     isUnassignedTeamsModal: u,
     orgId: d
   });
-  let f = status === _$$r.SUCCESS && !subscription.data?.orgTeams?.isLoadingNextPage;
+  let f = status === APILoadingStatus.SUCCESS && !subscription.data?.orgTeams?.isLoadingNextPage;
   let E = f && subscription.data?.orgTeams && subscription.data.orgTeams.hasNextPage() ? () => {
     subscription.data.orgTeams.loadNext(s || 25);
   } : void 0;
   useEffect(() => {
-    status === _$$r.SUCCESS && setServerData((subscription.data?.orgTeams || []).filter(e => !!e.teamId).map(e => ({
+    status === APILoadingStatus.SUCCESS && setServerData((subscription.data?.orgTeams || []).filter(e => !!e.teamId).map(e => ({
       id: e.teamId
     })));
   }, [status, subscription.data, setServerData]);
@@ -84,7 +84,7 @@ export function $$I0({
     trackPerformanceEvent("fetch_end");
   }, [trackPerformanceEvent, b.length]);
   useEffect(() => {
-    status === _$$r.FAILURE && trackPerformanceEvent("fetch_error");
+    status === APILoadingStatus.FAILURE && trackPerformanceEvent("fetch_error");
   }, [trackPerformanceEvent, status]);
   useEffect(() => {
     trackPerformanceEvent("fetch_start");
@@ -130,7 +130,7 @@ export function $$S1({
     isUnassignedTeamsModal: d
   });
   if (useEffect(() => {
-    if (status !== _$$r.SUCCESS) return;
+    if (status !== APILoadingStatus.SUCCESS) return;
     let e = subscription.data ? N(subscription.data, {}, t) : [];
     u(t => {
       let r = g ? {} : {
@@ -141,15 +141,15 @@ export function $$S1({
     });
     subscription.data?.orgTeams?.hasNextPage() && subscription.data.orgTeams.loadNext(a || 400);
   }, [status, subscription.data, g, a, t]), f) return {
-    status: _$$r.INIT,
+    status: APILoadingStatus.INIT,
     teams: [],
     totalSelectable: null
   };
-  let b = status === _$$r.SUCCESS && subscription.data?.orgTeams && !subscription.data.orgTeams.hasNextPage();
+  let b = status === APILoadingStatus.SUCCESS && subscription.data?.orgTeams && !subscription.data.orgTeams.hasNextPage();
   let T = null;
   b && (T = Object.keys(c).length + (i || []).filter(e => !c[e]).length);
   return {
-    status: b ? _$$r.SUCCESS : status === _$$r.SUCCESS ? _$$r.LOADING : status,
+    status: b ? APILoadingStatus.SUCCESS : status === APILoadingStatus.SUCCESS ? APILoadingStatus.LOADING : status,
     teams: Object.values(c),
     totalSelectable: T
   };
@@ -175,8 +175,8 @@ function v({
   }, {
     enabled: n
   });
-  let f = _$$r.LOADING;
-  "loaded" === g.status ? f = _$$r.SUCCESS : "errors" === g.status && (f = _$$r.FAILURE);
+  let f = APILoadingStatus.LOADING;
+  "loaded" === g.status ? f = APILoadingStatus.SUCCESS : "errors" === g.status && (f = APILoadingStatus.FAILURE);
   return {
     subscription: g,
     status: f

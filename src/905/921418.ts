@@ -18,7 +18,7 @@ import { memoizedProcessLocalComponents, processLocalComponents } from "../figma
 import { V as _$$V } from "../figma_app/473391";
 import { qp } from "../905/977779";
 import { X0, A0, WV, Gg, ET } from "../figma_app/646357";
-import { D2 } from "../905/18797";
+import { isLoaded } from "../905/18797";
 import { KH } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -364,7 +364,7 @@ let $$z3 = createOptimistThunk((e, {
 });
 let $$H5 = _$$n((e, {
   ignoreLoadingState: t = !1
-} = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && D2(e.loadingState, yD(e.openFile.key))));
+} = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && isLoaded(e.loadingState, yD(e.openFile.key))));
 let W = e => e.type === PrimaryWorkflowEnum.COMPONENT;
 let K = e => e.type === PrimaryWorkflowEnum.STATE_GROUP;
 export function $$Y1(e) {

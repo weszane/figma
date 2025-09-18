@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
 import { Ln } from "../905/84777";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { c as _$$c } from "../figma_app/681090";
 import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
 import { IX } from "../905/712921";
@@ -33,13 +33,13 @@ export function $$h2({
     let i = (!n || r === IX.YEAR) && t.includes(IX.YEAR);
     return [n, i];
   }, [e.type, r]);
-  let u = Ln(e, N_, {
+  let u = Ln(e, collaboratorSet, {
     renewalTerm: IX.MONTH,
     unit: IX.MONTH
   }, {
     enabled: i && s
   });
-  let h = Ln(e, N_, {
+  let h = Ln(e, collaboratorSet, {
     renewalTerm: IX.YEAR,
     unit: IX.MONTH
   }, {
@@ -52,7 +52,7 @@ export function $$h2({
     if (e) return e;
     let r = u.data;
     let n = h.data;
-    return r ? n ? resourceUtils.loadedSuspendable(N_.dict(e => t === e || $$_1({
+    return r ? n ? resourceUtils.loadedSuspendable(collaboratorSet.dict(e => t === e || $$_1({
       prices: r,
       currentSeatType: t,
       nextSeatType: e

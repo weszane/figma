@@ -49,7 +49,7 @@ import { I as _$$I } from "../figma_app/51637";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A3 } from "../905/920142";
 import { userCreatedAtAtom } from "../figma_app/864723";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellType, VisualBellIcon } from "../905/576487";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -59,7 +59,7 @@ import { useAtomValue } from "../vendor/525001";
 import { buildUploadUrl, isDevEnvironment, buildStaticUrl, getInitialOptions } from "../figma_app/169182";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler, hideModal, showModal } from "../905/156213";
-import { hn } from "../figma_app/297957";
+import { useAdvancedPrototypingUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { mp as _$$mp, t as _$$t2, tH as _$$tH, Ot, M$, Fy } from "../figma_app/579169";
@@ -72,7 +72,7 @@ import { X as _$$X } from "../905/482718";
 import { Q as _$$Q, R as _$$R } from "../905/11928";
 import { OS } from "../9410/635666";
 import { rq as _$$rq } from "../905/425180";
-import { aV as _$$aV, p8 } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { A as _$$A4 } from "../905/956262";
 import { jK, C$ } from "../figma_app/829197";
 import { M as _$$M2 } from "../905/366117";
@@ -86,10 +86,10 @@ import { q3 } from "../figma_app/450829";
 import { jJ } from "../figma_app/828908";
 import { s as _$$s2 } from "../905/445054";
 import { wH } from "../figma_app/844435";
-import { Av, tK as _$$tK } from "../figma_app/622881";
+import { getColorSpaceSupportStatus, isColorSpaceStatusSupported } from "../figma_app/622881";
 import { JU, J3, Gi } from "../figma_app/622574";
 import { zC } from "../figma_app/186343";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { i as _$$i } from "../905/559280";
 import { ZH } from "../figma_app/957169";
 import { trackEventAnalytics } from "../905/449184";
@@ -110,7 +110,7 @@ import { j as _$$j } from "../figma_app/59886";
 import { zP, Uj, SS, ZQ } from "../figma_app/330088";
 import { s as _$$s3 } from "../figma_app/354567";
 import { QL, EM } from "../905/609392";
-import { r as _$$r3 } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
 import { x as _$$x } from "../905/211326";
 import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
@@ -206,7 +206,7 @@ import { IT } from "../905/713695";
 import { getCurrentTeam } from "../figma_app/598018";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { k as _$$k3 } from "../905/443820";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { dO } from "../figma_app/318123";
 import { c as _$$c3 } from "../905/850166";
 import { lu } from "../figma_app/389091";
@@ -232,7 +232,7 @@ import { w as _$$w6 } from "../figma_app/106955";
 import { m5, rj as _$$rj } from "../9410/983733";
 import { _1, kP } from "../figma_app/809086";
 import { e as _$$e3 } from "../905/383776";
-import { l7, hA, ZO } from "../figma_app/88239";
+import { useIsFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { wX } from "../figma_app/710136";
 import { PE } from "../figma_app/251115";
 import { Bu } from "../figma_app/604494";
@@ -654,7 +654,7 @@ function ex() {
   !function () {
     let e = useDispatch();
     let t = _$$d();
-    let i = _$$f(e_);
+    let i = selectUserFlag(e_);
     let r = _$$$();
     let a = _$$N3();
     let [s, o] = useState(!1);
@@ -706,7 +706,7 @@ function eD() {
     overlay: B14,
     priority: _$$N.SECONDARY_MODAL
   }, [e, t, i]);
-  let c = hn();
+  let c = useAdvancedPrototypingUpsellExperiment();
   _$$E2(uniqueId, "properties-panel-select-tab", e => {
     e.properties?.tab === "prototype" && show({
       canShow: (e, t, i) => function (e) {
@@ -797,8 +797,8 @@ function e5() {
   return Object.keys(t).length > 0 ? t : null;
 }
 function e4() {
-  let e = Av();
-  return _$$tK(e);
+  let e = getColorSpaceSupportStatus();
+  return isColorSpaceStatusSupported(e);
 }
 let e6 = atom(null);
 let e7 = "color_management_default_to_p3_modal--onboardingFooter--VSeAU";
@@ -820,7 +820,7 @@ function tr() {
     numSteps: 2,
     onComplete: e.complete
   });
-  let o = _$$f(e9);
+  let o = selectUserFlag(e9);
   let [l] = jJ();
   let d = e4();
   let c = e5();
@@ -963,7 +963,7 @@ function to() {
     return e && null === i ? 0 : t === _$$M2.SRGB ? 1 : t === _$$M2.DISPLAY_P3 ? 2 : 0;
   }();
   if (!function (e) {
-    let t = _$$aV();
+    let t = useIsProgressBarHiddenOrLocked();
     let [i, r] = function (e) {
       let [t, i] = useState(!1);
       let [r, a] = useState(!1);
@@ -998,12 +998,12 @@ function th() {
   });
   let t = useDispatch();
   let i = useStore();
-  let a = Fk((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
+  let a = useDeepEqualSceneValue((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
   let s = JU(J3());
   let o = !!selectCurrentFile()?.template;
-  let l = _$$aV();
-  let d = !!_$$f("seen_custom_template_publish_nudge");
-  let c = _$$f("figjam_editor_onboarded")?.updatedAt?.getTime();
+  let l = useIsProgressBarHiddenOrLocked();
+  let d = !!selectUserFlag("seen_custom_template_publish_nudge");
+  let c = selectUserFlag("figjam_editor_onboarded")?.updatedAt?.getTime();
   let u = !!c && c < Date.now() - 12096e5;
   let m = !l && !d && s && !a && !o && u;
   return (useEffect(() => {
@@ -1117,7 +1117,7 @@ function tD() {
   let e = getUserId();
   let t = selectCurrentFile();
   let i = useSelector(e => e.mirror.appModel.currentPage);
-  let a = Fk((e, t) => zC(e, t), i);
+  let a = useDeepEqualSceneValue((e, t) => zC(e, t), i);
   let o = useSelector(e => !zP(e.mirror.appModel.currentTool));
   let l = Uj(t, e || "");
   let d = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
@@ -1166,8 +1166,8 @@ function tV({
     fileKey: i
   })] : null);
   let l = _$$s3();
-  let d = s === _$$r3.LOADING || "loading" === l.status || o === _$$r3.LOADING;
-  let c = s === _$$r3.SUCCESS || o === _$$r3.SUCCESS;
+  let d = s === APILoadingStatus.LOADING || "loading" === l.status || o === APILoadingStatus.LOADING;
+  let c = s === APILoadingStatus.SUCCESS || o === APILoadingStatus.SUCCESS;
   if (useEffect(() => {
     c && e();
   }, [c, e]), !i || !a) return null;
@@ -1933,7 +1933,7 @@ let i6 = [i3, i5, function (e) {
 function ra({
   skipAccountCreationDateCheck: e = !1
 }) {
-  let t = _$$aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let i = getCurrentFileType();
   let r = selectCurrentFile();
   let a = useAtomWithSubscription(_$$mp);
@@ -4290,7 +4290,7 @@ let nn = _$$n2(({
 } = {}) => {
   let t = Xr(_$$w5);
   let i = useDispatch();
-  let r = _$$aV();
+  let r = useIsProgressBarHiddenOrLocked();
   let a = _$$g();
   let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let {
@@ -4873,7 +4873,7 @@ function ny() {
 }
 let nO = buildUploadUrl("964c3ddf18b0f2712b664efde991dfc4f2c58eb8");
 let nL = _$$D3((e, t) => {
-  t(V3({
+  t(openUrlInContext({
     url: e
   }));
 });
@@ -5104,7 +5104,7 @@ let nV = (e, t) => {
   let r = Xr(Am);
   let a = Xr(_$$w5);
   let o = useAtomWithSubscription(zo);
-  let l = _$$aV();
+  let l = useIsProgressBarHiddenOrLocked();
   let d = useAtomWithSubscription(dO).status === _$$c3.LOADING;
   rx({
     overlayUniqueId: e,
@@ -5122,7 +5122,7 @@ function nW({
   openFile: e
 }) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
-  let i = Fk((e, t) => zC(e, t), t);
+  let i = useDeepEqualSceneValue((e, t) => zC(e, t), t);
   let a = useAtomWithSubscription(zo);
   let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
@@ -5207,7 +5207,7 @@ function nY({
   openFile: e
 }) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
-  let i = Fk((e, t) => zC(e, t), t);
+  let i = useDeepEqualSceneValue((e, t) => zC(e, t), t);
   let a = useAtomWithSubscription(zo);
   let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
@@ -7436,9 +7436,9 @@ function sF({
 }
 function sB() {
   let e = function () {
-    let e = _$$f($9);
-    let t = _$$f(_$$af);
-    let i = p8("showUi");
+    let e = selectUserFlag($9);
+    let t = selectUserFlag(_$$af);
+    let i = useAppModelProperty("showUi");
     let r = useMemo(() => e, [i]);
     let a = useMemo(() => t, [i]);
     let s = isDevHandoffEditorType();
@@ -7462,12 +7462,12 @@ function sB() {
   let u = userFlagExistsAtomFamily(_$$af);
   let p = useAtomWithSubscription(u);
   let h = isDesignFileType();
-  let m = l7();
-  let g = hA();
+  let m = useIsFullscreenOverview();
+  let g = useDevModeFocusId();
   let _ = _$$e3();
-  let x = ZO();
+  let x = useIsFullscreenDevModeComponentBrowser();
   let b = !!getFeatureFlags().ui3_and_ai_welcome_modal;
-  let C = _$$aV();
+  let C = useIsProgressBarHiddenOrLocked();
   let v = useAtomWithSubscription(Bu);
   let E = useAtomWithSubscription(Fy);
   let {
@@ -7538,7 +7538,7 @@ function sB() {
 }
 let sG = "UI3 Reactivation Overlay";
 function sK() {
-  let e = _$$aV();
+  let e = useIsProgressBarHiddenOrLocked();
   let t = useAtomWithSubscription(jH);
   let {
     isShowing,
@@ -7823,7 +7823,7 @@ let oa = buildUploadUrl("0c9201d8164c2390cdcf3fb8d316b6bacdddb438");
 let os = buildUploadUrl("b8b42ba263794abd20364c3da0f3f4993fd4ed86");
 function oo() {
   !function () {
-    let e = p8("pagesList");
+    let e = useAppModelProperty("pagesList");
     useMemo(() => {
       let t = QL("preservePageIndex");
       if (t && e.length > 0) {
@@ -7979,7 +7979,7 @@ function op(e) {
 }
 function o_(e, t, i, r) {
   let a = useDispatch();
-  let s = _$$f(i);
+  let s = selectUserFlag(i);
   let o = useRef(!!s);
   _$$E2(e, t, useCallback(() => {
     !(r?.current || o?.current) && (s || (o.current = !0, a(postUserFlag({
@@ -7998,16 +7998,16 @@ function ow() {
     priority: _$$N.OVERRIDING_MODAL
   });
   let o = useDispatch();
-  let l = _$$f("cursor_bot_v2__no_basics_file__played_frame_formatting");
-  let d = _$$f("design_panel_step_shown");
-  let c = _$$f("cursor_bot_v2__basics_file__started_flow");
+  let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_frame_formatting");
+  let d = selectUserFlag("design_panel_step_shown");
+  let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
   let u = Ai(["exp_cursor_bot_onboarding"]);
   let m = _$$b5();
   _$$E2(uniqueId, "create_frame", useCallback(() => {
     !l || d || c || u || isShowing || show();
   }, [d, c, isShowing, l, show, u]));
   let _ = useAtomWithSubscription(_$$a3);
-  let x = !!_$$f(Of(wn.FORMAT_FRAME, !1).tutorialPlayedUserFlag);
+  let x = !!selectUserFlag(Of(wn.FORMAT_FRAME, !1).tutorialPlayedUserFlag);
   let b = useMemo(() => _$$p2(x, !1), [x]);
   if (!isShowing) return null;
   if (_ === h0.PLAYING) return jsx(_$$a4, {
@@ -8041,9 +8041,9 @@ function oS() {
     priority: _$$N.OVERRIDING_MODAL
   });
   let o = useDispatch();
-  let l = _$$f("cursor_bot_v2__no_basics_file__played_text_formatting");
-  let d = _$$f("format_text_step_shown");
-  let c = _$$f("cursor_bot_v2__basics_file__started_flow");
+  let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_text_formatting");
+  let d = selectUserFlag("format_text_step_shown");
+  let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
   let u = _$$b5();
   let m = Ai(["exp_cursor_bot_onboarding"]);
   let [_, x] = useState(!1);
@@ -8055,7 +8055,7 @@ function oS() {
   useEffect(() => {
     !l || d || c || m || isShowing || !_ || b?.type !== "TEXT" || C !== LayoutTabType.DESIGN_LAYOUT || isShowing || show();
   }, [b, _, isShowing, show, C, l, d, c, m]);
-  let v = !!_$$f(Of(wn.FORMAT_TEXT, !1).tutorialPlayedUserFlag);
+  let v = !!selectUserFlag(Of(wn.FORMAT_TEXT, !1).tutorialPlayedUserFlag);
   let E = useMemo(() => _$$Z(v, !1), [v]);
   let T = useAtomWithSubscription(_$$a3);
   if (!isShowing) return null;
@@ -8084,9 +8084,9 @@ function ok() {
     overlay: CVA,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let t = _$$f("no_figma_basics_tooltips_design_panel_step");
-  let i = _$$f("design_panel_step_shown");
-  let a = _$$f("started_figma_basics_onboarding");
+  let t = selectUserFlag("no_figma_basics_tooltips_design_panel_step");
+  let i = selectUserFlag("design_panel_step_shown");
+  let a = selectUserFlag("started_figma_basics_onboarding");
   let s = useDispatch();
   let o = t && !i && !a;
   if (_$$E2(e.uniqueId, "create_frame", useCallback(() => {
@@ -8116,9 +8116,9 @@ function oN() {
     overlay: IQ,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let t = _$$f("no_figma_basics_tooltips_format_text_step");
-  let i = _$$f("format_text_step_shown");
-  let a = _$$f("started_figma_basics_onboarding");
+  let t = selectUserFlag("no_figma_basics_tooltips_format_text_step");
+  let i = selectUserFlag("format_text_step_shown");
+  let a = selectUserFlag("started_figma_basics_onboarding");
   let s = useDispatch();
   let o = !i && t && !a;
   if (_$$E2(e.uniqueId, "create_text", useCallback(() => {
@@ -8214,7 +8214,7 @@ function oX() {
   let a = userFlagExistsAtomFamily(wl);
   let o = useAtomWithSubscription(a);
   let l = _$$sO();
-  let d = _$$aV();
+  let d = useIsProgressBarHiddenOrLocked();
   let {
     show,
     isShowing,
@@ -8262,7 +8262,7 @@ function o2({
   let d = hX(`[data-onboarding-key="${O0}"]`);
   let c = selectCurrentFile();
   let u = useAtomWithSubscription(Fy);
-  let h = _$$aV();
+  let h = useIsProgressBarHiddenOrLocked();
   let m = useAtomWithSubscription(_$$U3({
     teamId: e,
     editorType: FFileType.SLIDES
@@ -8427,7 +8427,7 @@ export let $$le0 = memo(function ({
     let t = useDispatch();
     let i = useAtomWithSubscription(userCreatedAtAtom);
     let r = null != i && _$$A3("2023-10-31").isBefore(i);
-    let a = !!_$$f("has_opened_design_editor");
+    let a = !!selectUserFlag("has_opened_design_editor");
     let [o, l] = useAtomValueAndSetter(eu);
     useEffect(() => {
       r && !a && e && (l(!0), t(postUserFlag({

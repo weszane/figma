@@ -9,7 +9,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
-import { hk, O5 } from "../figma_app/632319";
+import { getViewerInstance, useEventListener } from "../figma_app/632319";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -120,10 +120,10 @@ export function $$L0(e) {
 }
 export function $$A1(e) {
   let t = getPrototypeSelectedView();
-  let i = hk();
+  let i = getViewerInstance();
   let a = e.nodeId;
   let [o, s] = useState(i?.isActiveSlidesEmbeddedPrototype(a) || !1);
-  O5(i, "embeddedPrototypeDataChange", useCallback(e => {
+  useEventListener(i, "embeddedPrototypeDataChange", useCallback(e => {
     let t = !1;
     for (let i of e) if (sessionLocalIDToString(i.nodeId) === a) {
       t = !0;
@@ -153,7 +153,7 @@ function C({
   disablePointerEvents: l,
   invalidateThumbnail: d
 }) {
-  let c = hk();
+  let c = getViewerInstance();
   let m = $$B3(e);
   let p = useCallback(e => {
     for (let i of e) if (sessionLocalIDToString(i.nodeId) === t) {
@@ -169,7 +169,7 @@ function C({
       }
     }
   }, [t, c]);
-  O5(c, "embeddedPrototypeDataChange", p);
+  useEventListener(c, "embeddedPrototypeDataChange", p);
   let f = useCallback(e => {
     let i = z(t);
     i?.contentWindow?.postMessage({

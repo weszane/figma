@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { Tf } from "../figma_app/543100";
 import { selectUser } from "../905/372672";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { W } from "../905/244810";
 let l = e => e.activeFileUsers;
-let d = e => Mz(l, t => t[e] || {});
+let d = e => createSelector(l, t => t[e] || {});
 export function $$u0(e) {
   let t = Tf.getFileOrSelectedBranchKey(e.tile) || "";
   let i = selectUser();

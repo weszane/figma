@@ -9,7 +9,7 @@ import { t } from "../905/241707";
 import { NM, Zl } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { Gp, uH } from "../figma_app/646357";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cM } from "../figma_app/803787";
 import { wi } from "../905/55146";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
@@ -38,7 +38,7 @@ export function $$I1() {
   let a = NM();
   let o = Ig();
   let l = uQ();
-  let m = Fk((e, t) => {
+  let m = useDeepEqualSceneValue((e, t) => {
     let r = e?.get(t ?? "");
     return !!r && r.childCount > 0 && r.visibleChildren.length > 0;
   }, l);

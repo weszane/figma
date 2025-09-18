@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
-import { k as _$$k2 } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { q as _$$q } from "../905/749058";
 import { Wq } from "../figma_app/481749";
 import { hideModal, popModalStack } from "../905/156213";
@@ -22,7 +22,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { jL } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { cg } from "../figma_app/336853";
 import { setupLoadingStateHandler } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
@@ -50,7 +50,7 @@ let F = "confirm_org_user_actions--spacing--ZBS-Z";
 let q = "confirm_org_user_actions--learnMoreLink--M---Z confirm_org_user_actions--link--kN9aV blue_link--blueLink--9rlnd";
 export let $$z2 = registerModal(function (e) {
   let t = useDispatch();
-  let a = _$$k2();
+  let a = isProrationBillingEnabledForCurrentPlan();
   let s = e.orgUserIds.length;
   let r = getI18nString("org_settings.remove_user_modal.title.users_only_text", {
     userCount: s
@@ -680,7 +680,7 @@ let $$Y0 = registerModal(function (e) {
         hideCancel: y,
         disableClickOutsideToHide: !0,
         hideOnConfirm: !1,
-        isLoading: VP(debugState.getState().loadingState, b),
+        isLoading: isLoading(debugState.getState().loadingState, b),
         loadingText: getI18nString("org_join_request.loading_confirmation_button_text"),
         children: [y && jsxs("div", {
           className: "confirm_org_user_actions--alertBanner--7G9Lr confirm_org_user_actions--banner--T7B90",

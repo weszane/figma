@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ColorOptions, AppStateTsApi } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { xf, JI, Vq, B9, Pi } from "../figma_app/942553";
 import { EC, Pn } from "../figma_app/285009";
 import { BV, sE, Dy, aN, Ku, Cz } from "../figma_app/153399";
@@ -165,7 +165,7 @@ export function $$y7(e, t, r) {
     type: xf.presetColor,
     color: function (e, t) {
       let r = Cz(e, t, "light");
-      return F.parse(r);
+      return colorCSSManipulatorInstance.parse(r);
     }(e[0], r),
     presetIdentifier: e[1]
   }));

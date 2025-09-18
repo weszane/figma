@@ -2,7 +2,7 @@ import { lQ } from "../905/934246";
 import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/781591";
-import { Mz } from "../vendor/925040";
+import { createSelector } from "../vendor/925040";
 import { debugState } from "../905/407919";
 import { BT } from "../905/686934";
 import { ZS } from "../figma_app/519839";
@@ -11,7 +11,7 @@ import { Ol } from "../905/576221";
 import { vQ, p6 } from "../figma_app/803787";
 import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
-export let $$f3 = Mz([vQ, p6], (e, t) => ({
+export let $$f3 = createSelector([vQ, p6], (e, t) => ({
   publishableComponentNodeIds: e,
   localComponents: Object.values(t)
 }));

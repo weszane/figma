@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { pV } from "../figma_app/819288";
+import { clampPointToBounds } from "../figma_app/819288";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
 import { hY, bB, UU } from "../figma_app/770088";
@@ -51,7 +51,7 @@ export function $$P0(e, t, n, s, m, u) {
     if (n.comments[0]?.client_meta?.selection_box_anchor) {
       let o = w(e, v(e, t)?.nodeId);
       if (o) {
-        let e = pV(n.comments[0].client_meta.selection_box_anchor, o);
+        let e = clampPointToBounds(n.comments[0].client_meta.selection_box_anchor, o);
         if (e.x !== n.comments[0].client_meta.selection_box_anchor.x || e.y !== n.comments[0].client_meta.selection_box_anchor.y) {
           let t = {
             ...n.comments[0].client_meta
@@ -155,7 +155,7 @@ function I(e, t) {
         } else g = Point.add(a, i);
       } else g = o.comments[0].client_meta?.selection_box_anchor;
       let e = c(n, x?.nodeId);
-      e && (g = pV(g, e));
+      e && (g = clampPointToBounds(g, e));
     }
     b.selection_box_anchor = g;
     t({

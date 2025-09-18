@@ -11,7 +11,7 @@ import { sx } from "../905/941192";
 import { getSelectedFile } from "../905/766303";
 import { b as _$$b } from "../905/217163";
 import { ud } from "../905/862913";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { JA } from "../figma_app/608944";
 import { n as _$$n } from "../905/186638";
 var $$y0 = (e => (e.ASSETS_PANEL = "library-item-tile-context-menu-for-assets-panel", e.LIBRARY_MODAL = "library-item-tile-context-menu-for-library-modal", e.ACTIONS_ASSETS = "library-item-tile-context-menu-for-actions-assets", e))($$y0 || {});
@@ -77,7 +77,7 @@ let $$E1 = memo(({
 function x({
   localNodeId: e
 }) {
-  let t = Fk(t => {
+  let t = useDeepEqualSceneValue(t => {
     let i = t.get(e);
     return i ? i.isStateGroup ? i.isPublishable : i.isSymbolPublishable : null;
   }, e);

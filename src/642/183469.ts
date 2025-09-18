@@ -38,12 +38,12 @@ import { UK } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
 import { updateTemporarilyExpandedInstanceLayers, expandNodeToRoot, selectNodesInRange, duplicateSelection, transferSelection, clearSelection, updateHoveredNode, setNodeExpandedRecursive, setSelectionExpanded, setNodeExpanded, setNodeLocked, setNodeVisible, replaceSelection, setNodeTemporarilyExpanded, removeFromSelection, addToSelection } from "../figma_app/741237";
 import { NF, Ht, no } from "../figma_app/701001";
-import { _Z } from "../figma_app/623300";
+import { useCurrentViewState } from "../figma_app/623300";
 import { S as _$$S } from "../figma_app/106763";
 import { getUserId } from "../905/372672";
 import { y0 } from "../figma_app/718307";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
-import { wA as _$$wA, $y, Fk } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue, $y, useDeepEqualSceneValue } from "../figma_app/167249";
 import { sp, K3 } from "../figma_app/678300";
 import { vo } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
@@ -270,7 +270,7 @@ function eT(e) {
   let {
     topLevelIconSize
   } = useContext(y0);
-  let s = _$$wA((e, t) => t.filter(t => {
+  let s = useStrictDeepEqualSceneValue((e, t) => t.filter(t => {
     let s = e.get(t)?.type;
     return !!s && !_$$w.includes(s);
   }), e.ids);
@@ -1272,7 +1272,7 @@ function eW(e) {
   let v = useCanAccessFullDevMode();
   let S = _$$E();
   let k = getSingletonSceneGraph();
-  let w = _$$wA((e, t) => {
+  let w = useStrictDeepEqualSceneValue((e, t) => {
     let s = e.get(t);
     return s ? {
       guid: s.guid,
@@ -1291,13 +1291,13 @@ function eW(e) {
   SV();
   let [P, R] = useAtomValueAndSetter(_$$C);
   let O = useDebouncedCallback(R, 200);
-  let D = Fk(e => e.getCurrentPage()?.responsiveSetSettings?.faviconID);
-  let B = Fk(e => {
+  let D = useDeepEqualSceneValue(e => e.getCurrentPage()?.responsiveSetSettings?.faviconID);
+  let B = useDeepEqualSceneValue(e => {
     let t = e.getCurrentPage();
     return getFeatureFlags().derived_prop_slow_selectors ? (t ? t.socialImageGuidsOnPage : []).join(",") : [t?.responsiveSetSettings?.socialImageID, ...(t?.childrenNodes.map(e => "RESPONSIVE_SET" === e.type && e.responsiveSetSettings?.socialImageID) || [])].filter(e => "string" == typeof e).join(",");
   });
   let H = getObservableOrFallback(UK().showGuids);
-  let z = _Z().isLoading;
+  let z = useCurrentViewState().isLoading;
   let q = useMemo(() => new nV(k, x), [k, y, x]);
   let J = useRef(null);
   let Z = useRef(new Map());

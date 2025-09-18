@@ -26,7 +26,7 @@ import { h1 } from "../905/986103";
 import { C as _$$C } from "../905/196436";
 import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
-import { UN, dm } from "../figma_app/976345";
+import { trackFileClicked, selectTeamView } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -49,7 +49,7 @@ import { trackTeamEvent } from "../figma_app/314264";
 import { selectPermissionsState } from "../figma_app/212807";
 import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser, getUserId } from "../905/372672";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { p9 } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg } from "../figma_app/642025";
 import { ViewTypeEnum } from "../figma_app/471068";
@@ -132,7 +132,7 @@ function z(e, t) {
   let i = useDispatch();
   return useMemo(() => ({
     onClick: () => {
-      i(UN({
+      i(trackFileClicked({
         fileKey: e.key,
         entrypoint: "search",
         viewMode: 0 === t ? "list" : "grid"
@@ -371,7 +371,7 @@ function em(e, t) {
   let i = useDispatch();
   return useMemo(() => ({
     onClick: t ? () => {
-      i(dm(e));
+      i(selectTeamView(e));
     } : () => {},
     onJoin: GR(i, e),
     onLeave: () => {
@@ -394,7 +394,7 @@ let eh = _$$h({
     } = function (e) {
       let t = e.id;
       let i = useSelector(e => e.loadingState);
-      let n = useMemo(() => VP(i, p9(t)), [i, t]);
+      let n = useMemo(() => isLoading(i, p9(t)), [i, t]);
       let s = selectPermissionsState();
       let o = hasViewerRoleAccessOnTeam(e.id, s);
       return {

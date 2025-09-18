@@ -25,8 +25,8 @@ import { o as _$$o5 } from '../642/854123';
 import { Ay as _$$Ay3 } from '../642/964720';
 import { r as _$$r7 } from '../905/11924';
 import { Q as _$$Q2 } from '../905/11928';
-import { i$ as _$$i$ } from '../905/15667';
-import { VP } from '../905/18797';
+import { DevModeUI } from '../905/15667';
+import { isLoading } from '../905/18797';
 import { z4 } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { $ as _$$$2 } from '../905/43354';
@@ -108,7 +108,7 @@ import { setupThemeContext } from '../905/614223';
 import { Pv } from '../905/619652';
 import { e as _$$e2 } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { XF } from '../905/661614';
 import { oW as _$$oW } from '../905/675859';
 import { g as _$$g } from '../905/687265';
@@ -146,7 +146,7 @@ import { Jn } from '../905/927294';
 import { q as _$$q5 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { U as _$$U3 } from '../905/940056';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { b as _$$b5 } from '../905/946806';
 import { w as _$$w3 } from '../905/955293';
 import { d$ } from '../905/958097';
@@ -228,7 +228,7 @@ import { io as _$$io, bo } from '../figma_app/73698';
 import { iT as _$$iT, ys } from '../figma_app/74165';
 import { _J, DL, KL, Tg } from '../figma_app/74668';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
-import { l7 as _$$l, X0, ZO } from '../figma_app/88239';
+import { useIsFullscreenOverview, useHasReadyNodesWithParentOrg, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
 import { lM as _$$lM } from '../figma_app/90441';
 import { FP } from '../figma_app/91703';
 import { $C, $H, E as _$$E4, r4 as _$$r3, _M, Bd, Bp, Dg, DJ, E7, E$, IZ, mE, NM, pR, Sg, vu } from '../figma_app/99772';
@@ -244,7 +244,7 @@ import { S2 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { t as _$$t2 } from '../figma_app/162756';
 import { e as _$$e6 } from '../figma_app/163681';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions } from '../figma_app/169182';
 import { j as _$$j5 } from '../figma_app/171378';
 import { Dz } from '../figma_app/176973';
@@ -268,7 +268,7 @@ import { A5 } from '../figma_app/274104';
 import { alwaysFalseCallback2 } from '../figma_app/275462';
 import { s4 as _$$s2 } from '../figma_app/276332';
 import { useSubscription } from '../figma_app/288654';
-import { lS as _$$lS, cR, RI } from '../figma_app/297957';
+import { useDeveloperContextualUpsellsExperiment, useRfdSignalsUpsellExperiment, useFigmaMakeDesignEditorPopoutUpsellExperiment } from '../figma_app/297957';
 import { f6 as _$$f3 } from '../figma_app/302802';
 import { RM } from '../figma_app/304955';
 import { $W, mC } from '../figma_app/325537';
@@ -327,7 +327,7 @@ import { s_ as _$$s_, yO } from '../figma_app/701001';
 import { $ as _$$$3 } from '../figma_app/709177';
 import { E as _$$E1 } from '../figma_app/714009';
 import { X as _$$X3, y0 } from '../figma_app/718307';
-import { aV as _$$aV, ax as _$$ax, eY as _$$eY, dH, p8 } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked, useHasSceneGraphSelection, useSceneGraphSelector, useCurrentTool, useAppModelProperty } from '../figma_app/722362';
 import { lB as _$$lB, EE } from '../figma_app/731583';
 import { Ku, qw, UK } from '../figma_app/740163';
 import { getPropertiesPanelTab, setPropertiesPanelTab } from '../figma_app/741237';
@@ -350,7 +350,7 @@ import { C as _$$C } from '../figma_app/872960';
 import { s as _$$s4 } from '../figma_app/874592';
 import { bj, Re, Yq } from '../figma_app/880974';
 import { d1, hj, Sp } from '../figma_app/888478';
-import { Sh } from '../figma_app/889655';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { nr as _$$nr, rn as _$$rn, Op } from '../figma_app/903573';
 import { Cu, F7, yU } from '../figma_app/908460';
 import { f6 } from '../figma_app/915202';
@@ -394,7 +394,7 @@ function w() {
 function R(e) {
   atomStoreManager.set(k, e);
 }
-let L = createReduxSubscriptionAtomWithState(Sh);
+let L = createReduxSubscriptionAtomWithState(selectSceneGraphSelectionKeys);
 let T = atom(e => {
   let t = e(L);
   let l = e(E);
@@ -412,7 +412,7 @@ function M(e) {
     y: t.y + 17 + 8
   };
 }
-let O = e => Fk((e, t) => {
+let O = e => useDeepEqualSceneValue((e, t) => {
   let l = t.map(t => e.get(t)?.absoluteBoundingBox).filter(e => void 0 !== e);
   if (l.length === 0) {
     return {
@@ -443,7 +443,7 @@ let O = e => Fk((e, t) => {
   };
 }, e);
 function z(e, t) {
-  let l = _$$eY();
+  let l = useSceneGraphSelector();
   let n = getViewportInfo({
     subscribeToUpdates_expensive: t && e.length > 0
   });
@@ -1110,7 +1110,7 @@ function eW() {
       _$$lB(t);
     };
   }, [e, f]);
-  let y = cR();
+  let y = useRfdSignalsUpsellExperiment();
   let {
     show,
     complete,
@@ -1189,7 +1189,7 @@ function e7() {
     showing
   } = function () {
     let e = useAtomWithSubscription(NT);
-    let t = _$$lS();
+    let t = useDeveloperContextualUpsellsExperiment();
     let {
       show: _show,
       complete: _complete,
@@ -1288,7 +1288,7 @@ function e7() {
 }
 function th() {
   let e = w_();
-  let t = _$$aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let [l, r] = useState(null);
   useEffect(() => {
     if (!t) {
@@ -1338,7 +1338,7 @@ function th() {
     primaryButtonProps,
     secondaryButtonProps
   } = BC({
-    entryPoint: _$$i$.Upsell,
+    entryPoint: DevModeUI.Upsell,
     dismissModal: complete,
     onRequestAccess: () => {
       a('handoff');
@@ -1416,7 +1416,7 @@ function th() {
   });
 }
 function tk() {
-  let e = X0();
+  let e = useHasReadyNodesWithParentOrg();
   let t = useCurrentFileKey();
   let l = _$$U2('upsell');
   let i = useSubscription(FileCanAccessFullDevMode, {
@@ -1641,9 +1641,9 @@ function t4() {
   let r = useTeamPlanUser();
   let s = r.unwrapOr(null)?.draftsFolderId ?? void 0;
   let o = useProjectFileCreationPermissions(s);
-  let d = DP() === 'dark';
+  let d = getVisibleTheme() === 'dark';
   let u = d ? buildUploadUrl('1a369818117cc7e77826ee246da5938968f29e43') : buildUploadUrl('c427705996f20b17615206adc93b3171f6646529');
-  let c = RI();
+  let c = useFigmaMakeDesignEditorPopoutUpsellExperiment();
   let {
     isShowing,
     show,
@@ -2034,16 +2034,16 @@ function lL() {
   let e = wA();
   let t = !!getFeatureFlags().starting_points_modal;
   let l = QL(E_.key) === E_.value;
-  let s = _$$aV();
+  let s = useIsProgressBarHiddenOrLocked();
   let o = d4(e => e.mirror.appModel.currentPage);
-  let d = Fk((e, t) => zC(e, t), o);
+  let d = useDeepEqualSceneValue((e, t) => zC(e, t), o);
   let u = QL(pt.KEY) === pt.VALUE;
   let c = selectCurrentFile();
   let x = getUserId();
   let p = c?.creatorId === x;
   let h = useAtomWithSubscription(Fy);
   let m = useAtomWithSubscription(isStarterUserAtom);
-  let f = !_$$f('not_gen_0');
+  let f = !selectUserFlag('not_gen_0');
   let y = useAtomWithSubscription(lR);
   let _ = getInitialOptions().starting_points;
   let {
@@ -2093,11 +2093,11 @@ function lV() {
     priority: _$$N.SECONDARY_MODAL
   });
   let a = wA();
-  let d = _$$aV();
+  let d = useIsProgressBarHiddenOrLocked();
   let u = selectCurrentFile();
   let c = selectCurrentUser();
   let p = alwaysFalseCallback2();
-  let h = !!_$$f(bo);
+  let h = !!selectUserFlag(bo);
   let m = _$$zl(l$).currentState === 'ui3_onboarding_was_shown_in_current_session';
   let f = _$$zl(_$$j3).currentState === 'no_figma_basics_onboarding_was_shown_in_current_session';
   let y = useAtomWithSubscription(_$$dL);
@@ -2862,7 +2862,7 @@ function l9() {
   let r = bk();
   let s = useAtomWithSubscription(_M);
   let o = useAtomWithSubscription(Ut);
-  let d = _$$f('seen_linter_home_view');
+  let d = selectUserFlag('seen_linter_home_view');
   let [u, c] = useState(!1);
   let [p, h] = useState(() => s === FR.LANDING_PAGE_NO_SELECTION ? 'noNodesSelected' : s === FR.LANDING_PAGE_LIMIT_EXCEEDED ? 'layerLimitExceeded' : 'welcome');
   let m = p === 'welcome';
@@ -3007,7 +3007,7 @@ function nn() {
     didExceedCountMax
   } = function () {
     let e = 1.5 * nl();
-    return Fk(t => {
+    return useDeepEqualSceneValue(t => {
       let l = t.getDirectlySelectedNodes();
       let n = 0;
       let i = !1;
@@ -9733,7 +9733,7 @@ let oM = memo(() => {
   let l = useAtomWithSubscription(_M);
   return (!function (e) {
     let t = wA();
-    let l = _$$f('seen_linter_home_view');
+    let l = selectUserFlag('seen_linter_home_view');
     useEffect(() => {
       l || e || t(postUserFlag({
         seen_linter_home_view: !0
@@ -9907,7 +9907,7 @@ function o$({
 function oP() {
   let [e, t] = useAtomValueAndSetter(_M);
   let [l, s] = useAtomValueAndSetter(Dg);
-  let o = !_$$f('seen_linter_libraries_callout') && l;
+  let o = !selectUserFlag('seen_linter_libraries_callout') && l;
   !function (e) {
     let t = wA();
     useEffect(() => {
@@ -10039,9 +10039,9 @@ function ai({
 }) {
   let s = wA();
   let o = selectCurrentFile();
-  let a = p8('currentPage');
-  let d = p8('isReadOnly');
-  let u = p8('currentSelectedProperty');
+  let a = useAppModelProperty('currentPage');
+  let d = useAppModelProperty('isReadOnly');
+  let u = useAppModelProperty('currentSelectedProperty');
   let c = isDevHandoffEditorType();
   let p = d && !c;
   let h = Gt('numSelected');
@@ -10118,7 +10118,7 @@ function ah({
   S2();
   let i = isUserNotLoggedInAndEditorSupported();
   let r = l.propertiesPanelTab;
-  let s = p8('topLevelMode');
+  let s = useAppModelProperty('topLevelMode');
   let a = Dj(l.user);
   let d = s !== ViewType.PREVIEW && (s !== ViewType.BRANCHING || !a) && s !== ViewType.DEV_HANDOFF && r === DesignWorkspace.DESIGN;
   let u = s !== ViewType.PREVIEW && s !== ViewType.BRANCHING && r === DesignWorkspace.PROTOTYPE;
@@ -10153,8 +10153,8 @@ function ag(e) {
     } = _$$iT();
     let l = Ye();
     let n = isWhiteboardFileType();
-    let s = _$$ax();
-    let a = dH();
+    let s = useHasSceneGraphSelection();
+    let a = useCurrentTool();
     let d = a === DesignGraphElements.FRAME || a === DesignGraphElements.COMMENTS || a === DesignGraphElements.VECTOR_PENCIL;
     let u = d4(e => e.mirror.appModel.activeUserAction === UserActionState.DEFAULT);
     let c = ys();
@@ -10165,7 +10165,7 @@ function ag(e) {
       c && setPropertiesPanelCollapsed(!0);
     }, [c, setPropertiesPanelCollapsed, isPropertiesPanelCollapsed]);
   }();
-  let t = p8('showUi');
+  let t = useAppModelProperty('showUi');
   if (getFeatureFlags().dont_render_ui && !t) return jsx(Fragment, {});
   let l = null;
   let s = e => {
@@ -10185,7 +10185,7 @@ function ag(e) {
 }
 let a_ = memo(() => {
   let e = selectWithShallowEqual(e => getPermissionsState(e));
-  let t = _$$aV();
+  let t = useIsProgressBarHiddenOrLocked();
   let l = d4(e => e.loadingState);
   let s = UN();
   let a = d4(e => e.mirror.sceneGraphSelection);
@@ -10221,7 +10221,7 @@ let a_ = memo(() => {
   let P = d4(e => e.licenseGroups);
   let V = getEditorTypeOrNull() === FEditorType.Design;
   let D = isUserNotLoggedInAndEditorSupported();
-  let H = VP(l, 'edit_button_upgrading_to_edit');
+  let H = isLoading(l, 'edit_button_upgrading_to_edit');
   let G = t || H;
   let U = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let q = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
@@ -10395,7 +10395,7 @@ function dc({
   let m = _$$P4();
   let f = RM(t.codeFileFullPath);
   (function (e, t) {
-    let l = _$$eY();
+    let l = useSceneGraphSelector();
     let {
       attachments,
       setAttachments,
@@ -10469,7 +10469,7 @@ let dx = {
 };
 function dp() {
   let e = useAtomWithSubscription(wh);
-  let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
+  let t = useDeepEqualSceneValue((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
   let l = Array.from(useMemo(() => {
     let e = UN();
     return new Map(t.map(t => [t, e.get(t)]).filter(e => e[1] != null));
@@ -10785,9 +10785,9 @@ let dj = {
 let dN = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = p8('isReadOnly');
+  let t = useAppModelProperty('isReadOnly');
   let l = d4(e => e.progressBarState);
-  let p = p8('loadingEmbeds');
+  let p = useAppModelProperty('loadingEmbeds');
   let h = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let g = Lk();
   let m = useRef(null);
@@ -10800,8 +10800,8 @@ let dN = memo(({
   qh();
   let j = BI();
   let v = _$$e3();
-  let C = ZO();
-  let k = _$$l();
+  let C = useIsFullscreenDevModeComponentBrowser();
+  let k = useIsFullscreenOverview();
   let E = getObservableValue(UK().enableCodegenMcpServer, !1);
   let S = $();
   let w = BE();
@@ -10850,9 +10850,9 @@ let dN = memo(({
   });
 });
 let dA = memo(() => {
-  let e = p8('topLevelMode');
-  let t = _$$ax();
-  let l = dH();
+  let e = useAppModelProperty('topLevelMode');
+  let t = useHasSceneGraphSelection();
+  let l = useCurrentTool();
   _$$z({
     topLevelMode: ViewType.PREVIEW,
     eventName: 'Preview Mode Selection Changed',

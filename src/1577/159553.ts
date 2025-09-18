@@ -16,9 +16,9 @@ import { XHR } from "../905/910117";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { UN } from "../figma_app/976345";
+import { trackFileClicked } from "../figma_app/976345";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
-import { Ow } from "../figma_app/297957";
+import { useHighPriorityNotificationsExperiment } from "../figma_app/297957";
 import { trackContextViewed, trackFileBrowserPlanFilterSelected, logAndTrackCTA, trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { H as _$$H } from "../905/422284";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -36,7 +36,7 @@ import { IconButton } from "../905/443068";
 import { ScreenReaderOnly } from "../905/172252";
 import { a as _$$a2 } from "../905/964520";
 import H from "../vendor/197638";
-import { UF } from "../905/403166";
+import { getEmojiData } from "../905/403166";
 import { buildUploadUrl } from "../figma_app/169182";
 import { h1, Ak } from "../905/986103";
 import { FlashActions } from "../905/573154";
@@ -74,7 +74,7 @@ function er(e) {
   });
 }
 function el(e) {
-  let t = UF(e.block.emoji_shortcode)[0];
+  let t = getEmojiData(e.block.emoji_shortcode)[0];
   return t.meta ? jsx("span", {
     className: "block_kit_row--emojiUnicode--qBoed",
     children: t.unicode
@@ -939,7 +939,7 @@ export function $$eX0(e) {
   let f = t === td ? _$$a : t;
   let p = $$eJ2([...notificationFeedMap.values()], u);
   let h = $$eK3(p);
-  let b = Ow(h);
+  let b = useHighPriorityNotificationsExperiment(h);
   let [k, w, v] = _$$t.useTabs({
     all: !0,
     priority: !!b && h,
@@ -1024,7 +1024,7 @@ function eW(e, t) {
     });
   }
   function i(e) {
-    return Ow(!0) ? jsx("h3", {
+    return useHighPriorityNotificationsExperiment(!0) ? jsx("h3", {
       className: eQ,
       children: eI[e.notificationPriorityGroup]
     }) : null;
@@ -1068,7 +1068,7 @@ function eW(e, t) {
         });
       } else if (_$$ek(o)) {
         let t = zv(o);
-        t && d(UN({
+        t && d(trackFileClicked({
           fileKey: t,
           entrypoint: "notifications",
           currentPlanFilter: {

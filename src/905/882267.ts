@@ -39,7 +39,7 @@ import { G8, Qr, kF, Km, e2, HP, sp } from "../905/690539";
 import { jB, Uh } from "../905/465941";
 import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
@@ -290,7 +290,7 @@ function eL({
     estimateSize: useCallback(() => parsePxNumber(Ep1), []),
     overscan: 10
   });
-  let eZ = p8("currentPage");
+  let eZ = useAppModelProperty("currentPage");
   let eX = u?.modal === !1;
   useEffect(() => {
     eX || ed("");

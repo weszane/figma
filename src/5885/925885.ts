@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { H as _$$H } from "../5885/54359";
 import { VB } from "../figma_app/361035";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -24,7 +24,7 @@ import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { C as _$$C } from "../5885/53111";
 import { I2, Je, Lo, Ay as _$$Ay2, Qg, WG } from "../figma_app/482142";
-import { yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
 let $$R2 = createOptimistThunk((e, {
   teamId: t,
@@ -67,7 +67,7 @@ let $$k1 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.id;
   XHR.post(`/api/teams/${teamId}/pro_trial`).then(() => {
-    n ? e.dispatch(_l({
+    n ? e.dispatch(switchAccountAndNavigate({
       workspace: {
         userId: n,
         orgId: null,
@@ -83,7 +83,7 @@ let $$k1 = createOptimistThunk((e, t) => {
     e.dispatch(FlashActions.flash(getI18nString("payments.pro_trial.start_pro_trial_success")));
     R_.trackInitiationSubmit(surveyResult, !0);
   }).catch(t => {
-    n ? e.dispatch(_l({
+    n ? e.dispatch(switchAccountAndNavigate({
       workspace: {
         userId: n,
         orgId: null,
@@ -210,7 +210,7 @@ let $$D3 = createOptimistThunk((e, {
           teamId: a.id,
           orgId: null
         };
-        e.dispatch(_l({
+        e.dispatch(switchAccountAndNavigate({
           workspace: t,
           view: {
             view: "allProjects",
@@ -258,7 +258,7 @@ let $$D3 = createOptimistThunk((e, {
         }
       }
     }));
-    a && e.dispatch(yJ({
+    a && e.dispatch(setTeamOptimistThunk({
       team: a,
       userInitiated: !1
     }));

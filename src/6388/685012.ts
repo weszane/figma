@@ -17,7 +17,7 @@ import { Uk } from "../6388/447908";
 import { PU } from "../figma_app/334505";
 import { UD } from "../figma_app/624361";
 import { replaceSelection } from "../figma_app/741237";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 let I = "Buzz bulk create update";
@@ -57,7 +57,7 @@ export function $$C0({
     let i = kG();
     let c = function () {
       let e = function () {
-        let e = eY();
+        let e = useSceneGraphSelector();
         return useCallback((t, l, n, s) => {
           let r = new Set(l.keys());
           let i = BuzzCloneHelpers?.cloneBuzzFrameWithEdits(t, r, n, s) || new Map();

@@ -9,7 +9,7 @@ import c from "classnames";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { reportError } from "../905/11";
 import { LoadingSpinner } from "../figma_app/858013";
 import { lv } from "../figma_app/204891";
@@ -72,7 +72,7 @@ export function $$w0({
           onClick: () => {
             c && !d && (h("figjam_pages_summary.preview_refreshed", {
               previewPageId: i
-            }), m(_$$r.LOADING), fileApiHandler.updatePageCheckpointThumbnails({
+            }), m(APILoadingStatus.LOADING), fileApiHandler.updatePageCheckpointThumbnails({
               fileKey: c.key
             }).catch(() => {
               h("figjam_summary_preview.page_thumbnails_request_failed_increment_metric", {});

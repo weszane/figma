@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { FUserRoleType } from "../figma_app/191312";
-import { G } from "../figma_app/66216";
+import { roleServiceAPI } from "../figma_app/66216";
 import { selectOpenFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { mp } from "../905/772425";
 let c = null;
 let u = async e => {
   if (c?.fileKey === e && performance.now() - c.timeCached < 3e5) return await c.usersPromise;
-  let t = G.getFileUsers({
+  let t = roleServiceAPI.getFileUsers({
     fileKey: e
   }).then(e => ({
     users: e.data.meta.users,

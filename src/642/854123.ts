@@ -8,7 +8,7 @@ import { qw } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { R as _$$R } from "../figma_app/941983";
 import { TY } from "../figma_app/701001";
-import { aV, p8 } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { debounce } from "../905/915765";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -840,9 +840,9 @@ export function $$eO0({
   boundaryKey: e,
   children: t
 }) {
-  let s = aV();
+  let s = useIsProgressBarHiddenOrLocked();
   let g = useFullscreenReady();
-  let f = p8("topLevelMode");
+  let f = useAppModelProperty("topLevelMode");
   let x = selectCurrentUser();
   let y = s ? _$$R.topLevelMode : f;
   let _ = TY();

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { PQ } from "../figma_app/91703";
 import { NG, UK } from "../figma_app/506549";
 import { c4 } from "../figma_app/805925";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { EG } from "../figma_app/995580";
 import { s as _$$s } from "../905/73603";
 export function $$u1() {
@@ -34,7 +34,7 @@ export function $$p0(e) {
 export function $$_2() {
   let e = $$u1();
   let t = c4();
-  let r = p8("isReadOnly");
+  let r = useAppModelProperty("isReadOnly");
   return useCallback((n, i) => {
     let a = UK({
       item: n,

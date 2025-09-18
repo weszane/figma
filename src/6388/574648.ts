@@ -62,7 +62,7 @@ import { xn } from "../figma_app/644079";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { hasRootPathOptional } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
@@ -123,7 +123,7 @@ function e0({
   editModeType: r,
   areAnyShapesActive: i
 }) {
-  let a = aV();
+  let a = useIsProgressBarHiddenOrLocked();
   let d = selectCurrentFile();
   let c = hasRootPathOptional(d?.project);
   let u = s === ViewType.HISTORY;

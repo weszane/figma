@@ -5,7 +5,7 @@ import { analyticsEventManager } from "../905/449184";
 import { R } from "../905/165069";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { QL, EM } from "../905/609392";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -31,7 +31,7 @@ export function $$y0() {
   let E = v && null !== T && "in_editor" === k;
   let C = E || isCollaboratorType(k);
   C && (e = E ? getProductAccessTypeOrDefault(T.editorType) : ProductAccessTypeMap[k]);
-  let I = findMatchingValue(tc, j) ?? tc.UNKNOWN_DEEP_LINK;
+  let I = findMatchingValue(DeepLinkType, j) ?? DeepLinkType.UNKNOWN_DEEP_LINK;
   let A = findMatchingValue(_$$i, j) ?? _$$i.UNKNOWN_DEEP_LINK;
   let {
     handleUpgrade,

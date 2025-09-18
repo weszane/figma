@@ -5,7 +5,7 @@ import { useLocalStorageSync } from "../905/657224";
 import { blendColors } from "../figma_app/191804";
 import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../905/24905";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { j$, cZ, xm } from "../905/936278";
 import { MX, L$, NT, mi } from "../905/989106";
 import { X7 } from "../905/713167";
@@ -51,7 +51,7 @@ function I(e) {
   }, [_r, g, b, a]);
 }
 export function $$E6(e, t, i, o) {
-  let l = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
+  let l = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().map(e => e.guid));
   let d = o ?? l;
   let [g, A] = useState(void 0);
   let [y, b] = useState(void 0);
@@ -67,7 +67,7 @@ export function $$E6(e, t, i, o) {
       let {
         nodeTypes,
         styledTextSegments
-      } = Fk((e, t) => t ? {
+      } = useDeepEqualSceneValue((e, t) => t ? {
         nodeTypes: t.map(t => e.get(t)?.type),
         styledTextSegments: t.map(t => {
           let i = e.get(t);
@@ -99,7 +99,7 @@ export function $$E6(e, t, i, o) {
     }), [t, m, i, r, h, a, o, u, p]);
   }(d);
   let P = function (e, t) {
-    let i = Fk((e, t) => {
+    let i = useDeepEqualSceneValue((e, t) => {
       if (t) return t.map(t => e.get(t)?.blendMode).filter(e => void 0 !== e);
     }, t);
     return i?.some(e => "NORMAL" !== e && "PASS_THROUGH" !== e) || e?.blendMode !== "NORMAL";

@@ -74,7 +74,7 @@ import { A as _$$A0 } from "../905/251970";
 import { oW } from "../905/675859";
 import { getValueOrFallback } from "../905/872825";
 import { CW, M0, Rd, Gf, f7, Dd, MO, Z7, Q4, Kg, jr, l8, UU, of } from "../figma_app/599979";
-import { yj } from "../905/966582";
+import { IMAGE_TYPES } from "../905/966582";
 import { L as _$$L } from "../905/597048";
 import { b as _$$b3 } from "../905/22449";
 import { c as _$$c3 } from "../905/34525";
@@ -140,7 +140,7 @@ import { t as _$$t4 } from "../905/431558";
 import { w as _$$w3 } from "../905/893785";
 import { deepClone } from "../905/284190";
 import { J as _$$J6 } from "../905/931050";
-import { r as _$$r4 } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
 import { VisualBellActions } from "../905/302958";
@@ -148,7 +148,7 @@ import { $$in, PublishModalState } from "../figma_app/350203";
 import { c as _$$c4 } from "../905/289751";
 import { J as _$$J7 } from "../905/296347";
 import { _e, gI } from "../905/277373";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { A as _$$A11 } from "../905/72153";
 import { useCurrentUserOrg } from "../905/845253";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
@@ -793,7 +793,7 @@ let eX = forwardRef(function ({
   let y = jsxs("div", {
     className: "icon_uploader--container---wkQt",
     onDragOver: e => {
-      let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj);
+      let t = getValueOrFallback(e.dataTransfer.items[0]?.type, IMAGE_TYPES);
       1 === e.dataTransfer.items.length && t && CW.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
       e.preventDefault();
     },
@@ -1325,8 +1325,8 @@ let tP = forwardRef(function ({
         className: "snapshot_uploader--container--lZqVB",
         onClick: m,
         onDragOver: e => {
-          let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj);
-          1 === e.dataTransfer.items.length && t === yj.PNG ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
+          let t = getValueOrFallback(e.dataTransfer.items[0]?.type, IMAGE_TYPES);
+          1 === e.dataTransfer.items.length && t === IMAGE_TYPES.PNG ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
           e.preventDefault();
         },
         onDragLeave: e => {
@@ -1347,7 +1347,7 @@ let tP = forwardRef(function ({
           className: _$$s.hidden.$,
           type: "file",
           ref: p,
-          accept: yj.PNG,
+          accept: IMAGE_TYPES.PNG,
           onChange: async e => {
             !h && setSnapshotFromInput && (i?.(), g(!0), await setSnapshotFromInput(e.target), g(!1));
           },
@@ -2642,7 +2642,7 @@ function iM({
       } = e;
       if (currentValue === _$$A2) return;
       let r = n?.current?.url;
-      let a = i.status !== _$$r4.SUCCESS || r !== i.value?.url;
+      let a = i.status !== APILoadingStatus.SUCCESS || r !== i.value?.url;
       let s = r && r !== currentValue?.url;
       a && s && URL.revokeObjectURL(r);
       return () => {
@@ -2656,7 +2656,7 @@ function iM({
     }, [e]);
     let s = useMemo(() => {
       if (!a) return;
-      let e = i.status === _$$r4.SUCCESS ? i.value : void 0;
+      let e = i.status === APILoadingStatus.SUCCESS ? i.value : void 0;
       if (e) return function () {
         a(e);
       };
@@ -2694,7 +2694,7 @@ function iM({
       setSnapshotFromFile: l,
       setSnapshotFromInput: d,
       restoreDefaultSnapshot: s,
-      hasDefaultSnapshot: i.status === _$$r4.SUCCESS && !!i.value
+      hasDefaultSnapshot: i.status === APILoadingStatus.SUCCESS && !!i.value
     };
   }(e.fieldStates.snapshot, e.deps.widgetSnapshotPromise);
   let F = function (e, t, i) {
@@ -2704,8 +2704,8 @@ function iM({
     } = useTracking();
     let o = _$$H(_trackEvent2);
     let l = _$$J6(async () => await e.deps.dataSecurityPromise, [e.deps.dataSecurityPromise]);
-    let d = l.status === _$$r4.SUCCESS ? l.value.existingStatus : null;
-    let c = l.status === _$$r4.SUCCESS ? l.value.securityForm : void 0;
+    let d = l.status === APILoadingStatus.SUCCESS ? l.value.existingStatus : null;
+    let c = l.status === APILoadingStatus.SUCCESS ? l.value.securityForm : void 0;
     let u = useCallback(() => {
       e.setValue?.(null);
     }, [e]);
@@ -3358,7 +3358,7 @@ function ij(e) {
     existingSecurityFormResponse
   } = e;
   let u = function (e, t, i) {
-    let n = Fk((e, t) => {
+    let n = useDeepEqualSceneValue((e, t) => {
       let i = e.get(t ?? null);
       return i?.size;
     }, t);

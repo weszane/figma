@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { trackEventAnalytics } from "../905/449184";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 export function $$l0(e, t) {
@@ -8,7 +8,7 @@ export function $$l0(e, t) {
   let d = getUserId();
   let [c] = useState(() => performance.now());
   let u = useCurrentFileKey();
-  let p = xK.loadID();
+  let p = fullscreenPerfManager.loadID();
   useEffect(() => {
     l(!1);
   }, [p]);

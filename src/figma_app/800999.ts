@@ -1,4 +1,4 @@
-import { c } from "../905/550169";
+import { GAMEPAD_BUTTON_AXIS_OFFSET } from "../905/550169";
 import { browserCapabilities } from "../905/409121";
 export function $$a2(e) {
   let t = [];
@@ -49,8 +49,8 @@ export function $$l0(e, t = !1) {
   let r = u.get(e?.triggerDevice);
   let i = e?.keyCodes?.[0] ?? 0;
   let a = r?.get(i) ?? function (e) {
-    if (e >= c) {
-      let t = Math.floor((e - c) / 2);
+    if (e >= GAMEPAD_BUTTON_AXIS_OFFSET) {
+      let t = Math.floor((e - GAMEPAD_BUTTON_AXIS_OFFSET) / 2);
       return `Axis ${t} ${e % 2 == 0 ? "-" : "+"}`;
     }
     return `Button ${e}`;

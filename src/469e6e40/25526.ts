@@ -61,10 +61,10 @@ import { w4, yo, Jt as _$$Jt } from "../figma_app/28323";
 import { UK } from "../905/898493";
 import { Jt as _$$Jt2 } from "../figma_app/342125";
 import { Jt as _$$Jt3 } from "../figma_app/330108";
-import { Z5, CT } from "../figma_app/297957";
+import { usePlanInviteWithSeatExperiment, useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { g7 } from "../905/939482";
 import { vu, YM } from "../figma_app/741211";
-import { N_, Ye, Oq } from "../905/332483";
+import { collaboratorSet, viewCollaboratorSet, designSet } from "../905/332483";
 import { Um } from "../905/848862";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -72,7 +72,7 @@ import { selectCurrentUser } from "../905/372672";
 import { NJ } from "../figma_app/518077";
 import { getGroupOrDefault } from "../905/817247";
 import { MX, NV, EQ, cZ, EO } from "../figma_app/684446";
-import { D2, VP } from "../905/18797";
+import { isLoaded, isLoading } from "../905/18797";
 import { hX, de } from "../figma_app/614170";
 import { _W } from "../figma_app/329496";
 import { FRequestsStr } from "../905/384551";
@@ -129,8 +129,8 @@ import { S as _$$S } from "../905/339549";
 import { tI as _$$tI } from "../figma_app/847597";
 import { p as _$$p2 } from "../905/597320";
 import { z as _$$z } from "../figma_app/369596";
-import { yM } from "../905/640017";
-import { AG } from "../figma_app/217457";
+import { useThemeContext } from "../905/640017";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { Ef } from "../905/81982";
 import { e as _$$e4 } from "../figma_app/119601";
 import { s as _$$s2 } from "../905/82276";
@@ -2215,7 +2215,7 @@ function aU(e) {
   let [n, l] = useState("");
   let [o, d] = useState(!1);
   let c = MX();
-  let _ = yM();
+  let _ = useThemeContext();
   let u = [{
     name: getI18nString("billing_groups_table.column_header.name"),
     className: "license_groups_table--nameColumn--LEWms license_groups_table--column--KDz0m table--column--974RA",
@@ -2263,7 +2263,7 @@ function aU(e) {
     }),
     getSortValue: t => e.licenseGroupMemberCounts[t.id ?? _$$s2]?.total_count ?? 0,
     sortNumerically: !0
-  }, ...N_.sort(AG).map(t => ({
+  }, ...collaboratorSet.sort(compareProductAccessTypes).map(t => ({
     name: getI18nString("billing_groups_table.column_header.seats", {
       seatType: _$$tI(t)
     }),
@@ -2553,7 +2553,7 @@ function a3(e) {
     data: e
   })) : resourceUtils.loadedSuspendable({
     split: "none",
-    data: Ye.dict(() => ({
+    data: viewCollaboratorSet.dict(() => ({
       assigned: 0,
       available: 0,
       total: 0
@@ -2567,7 +2567,7 @@ function a3(e) {
       total: 0,
       assigned: 0
     };
-    N_.forEach(a => {
+    collaboratorSet.forEach(a => {
       t.available += e[a]?.available ?? 0;
       t.assigned += e[a]?.assigned ?? 0;
       t.total += e[a]?.total ?? 0;
@@ -3825,7 +3825,7 @@ function nX() {
 }
 function n4(e) {
   let t = useDispatch();
-  let a = Z5();
+  let a = usePlanInviteWithSeatExperiment();
   let n = e.activeTab === MemberView.ALL_MEMBERS ? jsx(Button, {
     variant: "primary",
     onClick: () => {
@@ -5060,7 +5060,7 @@ function sB(e) {
       subView: UserGroupRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
       selectedTab: getGroupOrDefault(e.selectedTab)
-    })) : D2(y, EO(n.id)) && a(selectViewAction(o0));
+    })) : isLoaded(y, EO(n.id)) && a(selectViewAction(o0));
   }, [a, groupsUserIsAdminOf, O, e.workspacesCanAdminViewResult, L, n.id, y, e.selectedTab, I.membersTabOrgJoinRequest, I.view, V]);
   let [H, Y] = useState(0);
   let [J, Q] = useState("");
@@ -5113,7 +5113,7 @@ function sB(e) {
   let el = Xf(es);
   let eu = "loading" === el.status;
   let eA = el.data?.invoices;
-  let ez = Oq.dict(e => el.data?.billable_seats[e] ?? 0);
+  let ez = designSet.dict(e => el.data?.billable_seats[e] ?? 0);
   let eV = el.data?.shipping_address || createEmptyAddress();
   let eW = el.data?.has_billing_address || !1;
   let eH = null;
@@ -5151,7 +5151,7 @@ function sB(e) {
       });
       break;
     case DashboardSection.BILLING:
-      let e0 = !!R && (VP(y, EO(n.id)) || !_isFetched);
+      let e0 = !!R && (isLoading(y, EO(n.id)) || !_isFetched);
       eH = jsx(nu, {
         activeTab: Gv(e.selectedSecondaryTab),
         org: n,
@@ -5236,7 +5236,7 @@ function sB(e) {
       }
       break;
     case DashboardSection.MEMBERS:
-      let e2 = VP(y, EO(n.id)) || !!L && ("loading" === el.status || f.isFetching);
+      let e2 = isLoading(y, EO(n.id)) || !!L && ("loading" === el.status || f.isFetching);
       let e4 = I.orgAdminMembersTabSort || DefaultSortConfig;
       eH = null;
       let e5 = null;
@@ -5345,7 +5345,7 @@ function sB(e) {
         figmaTeam: _$$e.SCALE,
         boundaryKeySuffix: "OrgAdminSettingsPageView"
       }
-    }), jsx(W, {}), CT() && jsx(_$$k2, {
+    }), jsx(W, {}), useSeatBillingTermsExperiment() && jsx(_$$k2, {
       org: n
     }), y3(n.created_at) && jsx(_$$d, {
       org: n

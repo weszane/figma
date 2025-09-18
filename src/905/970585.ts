@@ -18,7 +18,7 @@ import { E as _$$E } from "../905/344656";
 import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
 import { b2 } from "../figma_app/622574";
 import { setupFlushTimer, setupConnectionStateHandler } from "../figma_app/582924";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { av } from "../figma_app/915202";
 import { l as _$$l } from "../905/26554";
 import { $5 } from "../figma_app/869006";
@@ -45,7 +45,7 @@ import { Yq } from "../figma_app/305244";
 import { z4 } from "../905/37051";
 import { handleSyncEvent } from "../905/412815";
 import { DH } from "../905/327855";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { Js, QY, pi } from "../figma_app/139113";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { c3, Lt } from "../figma_app/440875";
@@ -254,9 +254,9 @@ export class $$eu0 {
     this.dispatch(nA());
   }
   reconnectingSucceeded() {
-    getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer.sendClientRendered(xK.getClientRenderedMetadata()) : Multiplayer.sendSignal("client-rendered", "");
+    getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer.sendClientRendered(fullscreenPerfManager.getClientRenderedMetadata()) : Multiplayer.sendSignal("client-rendered", "");
     this.dispatch(lp());
-    VP(this.store.getState().loadingState, $5) && this.dispatch(loadingStatePutSuccess({
+    isLoading(this.store.getState().loadingState, $5) && this.dispatch(loadingStatePutSuccess({
       key: $5
     }));
   }

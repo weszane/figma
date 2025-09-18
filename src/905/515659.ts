@@ -1,162 +1,295 @@
-import { inflate } from "../vendor/323834";
-export function $$r2(e) {
-  let t = {};
-  for (let i of function (e) {
-    let t = [];
-    let i = 0;
-    for (; i < e.length && i + 1 < e.length;) if (255 === e[i] && 226 === e[i + 1]) {
-      let n = e.subarray(i);
-      let r = n[2] << 8 | n[3];
-      let a = n.subarray(4, r + 2);
-      t.push(a);
-      i += r + 2;
-    } else i++;
-    return t;
-  }(e)) {
-    let e = function (e) {
-      let t = null;
-      let i = {
-        begin: 12,
-        end: 13
-      };
-      let n = {
-        begin: i.end,
-        end: i.end + 1
-      };
-      let r = {
-        begin: n.end,
-        end: e.length
-      };
-      "ICC_PROFILE\0" === String.fromCharCode.apply(null, [...e.subarray(0, 12)]) && r.end <= e.length && (t = {
-        markerSeqNumber: e[i.begin],
-        totalNumberOfMarkers: e[n.begin],
-        iccProfileData: e.subarray(r.begin, r.end)
-      });
-      return t;
-    }(i);
-    e && (t[e.markerSeqNumber] = e);
+import { inflate } from 'pako'
+
+/**
+ * Extracts ICC profile data from a JPEG image buffer.
+ * Original function: $$r2
+ * @param buffer - The JPEG image buffer as Uint8Array.
+ * @returns The concatenated ICC profile data or null if incomplete.
+ */
+export function extractIccProfileFromJpeg(buffer: Uint8Array): Uint8Array | null {
+  const profiles: { [key: number]: { markerSeqNumber: number, totalNumberOfMarkers: number, iccProfileData: Uint8Array } } = {}
+
+  // Extract ICC profile segments
+  const segments = extractIccSegments(buffer)
+  for (const segment of segments) {
+    const profile = parseIccProfileSegment(segment)
+    if (profile) {
+      profiles[profile.markerSeqNumber] = profile
+    }
   }
-  return function (e) {
-    let t = [];
-    for (let [i, n] of Object.entries(e)) {
-      0 === t.length && (t = Array(n.totalNumberOfMarkers).fill(null));
-      t[Number(i) - 1] = n.iccProfileData;
-    }
-    if (!t.every(Boolean)) return null;
-    let i = new Uint8Array(t.reduce((e, t) => e + t.length, 0));
-    let n = 0;
-    for (let e of t) {
-      i.set(e, n);
-      n += e.length;
-    }
-    return i.length ? i : null;
-  }(t);
+
+  return assembleIccProfile(profiles)
 }
-export function $$a0(e) {
-  let t = 8;
-  let i = 0;
-  let r = null;
-  let a = null;
-  let s = new DataView(e.buffer);
-  let o = !1;
-  for (; t + 12 < e.length;) {
-    let l = s.getInt32(t);
-    if (l < 0) {
-      r && (r = null);
-      break;
+
+/**
+ * Extracts ICC profile segments from JPEG buffer.
+ * Helper for extractIccProfileFromJpeg.
+ * @param buffer - The JPEG buffer.
+ * @returns Array of ICC profile segments.
+ */
+function extractIccSegments(buffer: Uint8Array): Uint8Array[] {
+  const segments: Uint8Array[] = []
+  let i = 0
+  while (i < buffer.length - 1) {
+    if (buffer[i] === 255 && buffer[i + 1] === 226) {
+      const segment = buffer.subarray(i)
+      const length = (segment[2] << 8) | segment[3]
+      const data = segment.subarray(4, length + 2)
+      segments.push(data)
+      i += length + 2
     }
-    let d = s.getInt32(t + 4);
-    switch (d) {
-      case 0x49444154:
-        o = !0;
-        r && (r.copyWithin(i, t, e.length), i += e.length - t, r = r.subarray(0, i));
-        break;
-      case 0x73524742:
-      case 0x67414d41:
-      case 0x6348524d:
-      case 0x69434350:
-        if (r || (r = new Uint8Array(e), i = t), 0x69434350 === d && !a) try {
-          a = function (e, t) {
-            let i = new DataView(e.buffer, t).getUint32(0);
-            let r = {
-              min: 1,
-              max: 79
-            };
-            let a = t + 4 + 4;
-            let s = function () {
-              let t = null;
-              for (let i = a; i < a + r.max && i < e.length; ++i) if (0 === e[i]) {
-                t = i;
-                break;
-              }
-              if (null === t) throw Error("Couldn't find null separator");
-              if (0 !== e[t]) throw Error("Null separator is not the null character");
-              return t;
-            }();
-            let o = s + 1;
-            if (0 !== e[o]) throw Error("Compression method is not 0 (deflate)");
-            let l = s - a;
-            if (l < r.min || l > r.max) throw Error(`Profile name length of ${l} isn't between ${r.min} bytes and ${r.max} bytes`);
-            let d = o + 1;
-            if (8 + i + 4 > e.length - t) throw Error("data is not large enough to contain the entire iCCP chunk");
-            let c = e.subarray(d, d + (i - l - 1 - 1));
-            return inflate(c);
-          }(e, t);
-        } catch (e) { }
-        break;
+    else {
+      i++
+    }
+  }
+  return segments
+}
+
+/**
+ * Parses a single ICC profile segment.
+ * Helper for extractIccProfileFromJpeg.
+ * @param segment - The segment data.
+ * @returns Parsed profile or null if invalid.
+ */
+function parseIccProfileSegment(segment: Uint8Array): { markerSeqNumber: number, totalNumberOfMarkers: number, iccProfileData: Uint8Array } | null {
+  const header = { begin: 12, end: 13 }
+  const seqNum = { begin: header.end, end: header.end + 1 }
+  const data = { begin: seqNum.end, end: segment.length }
+
+  if (String.fromCharCode(...segment.subarray(0, 12)) === 'ICC_PROFILE\0' && data.end <= segment.length) {
+    return {
+      markerSeqNumber: segment[header.begin],
+      totalNumberOfMarkers: segment[seqNum.begin],
+      iccProfileData: segment.subarray(data.begin, data.end),
+    }
+  }
+  return null
+}
+
+/**
+ * Assembles ICC profile from collected segments.
+ * Helper for extractIccProfileFromJpeg.
+ * @param profiles - Map of profile segments.
+ * @returns Concatenated profile data or null if incomplete.
+ */
+function assembleIccProfile(profiles: { [key: number]: { markerSeqNumber: number, totalNumberOfMarkers: number, iccProfileData: Uint8Array } }): Uint8Array | null {
+  const entries = Object.entries(profiles)
+  if (entries.length === 0)
+    return null
+
+  const firstProfile = entries[0][1]
+  const totalMarkers = firstProfile.totalNumberOfMarkers
+  const dataArray = Array.from({ length: totalMarkers }).fill(null) as Uint8Array[]
+
+  for (const [seq, profile] of entries) {
+    dataArray[Number(seq) - 1] = profile.iccProfileData
+  }
+
+  if (!dataArray.every(Boolean))
+    return null
+
+  const totalLength = dataArray.reduce((sum, data) => sum + data.length, 0)
+  const result = new Uint8Array(totalLength)
+  let offset = 0
+  for (const data of dataArray) {
+    result.set(data, offset)
+    offset += data.length
+  }
+  return result.length ? result : null
+}
+
+/**
+ * Extracts ICC profile from a PNG image buffer.
+ * Original function: $$a0
+ * @param buffer - The PNG image buffer as Uint8Array.
+ * @returns Object with modified buffer and ICC profile data.
+ */
+export function extractIccProfileFromPng(buffer: Uint8Array): { withoutColorSpace: Uint8Array, iccProfileRawData: Uint8Array | null } {
+  let position = 8
+  let outputBuffer: Uint8Array | null = null
+  let outputOffset = 0
+  let iccProfile: Uint8Array | null = null
+  const view = new DataView(buffer.buffer)
+  let foundIdat = false
+
+  while (position + 12 < buffer.length) {
+    const length = view.getInt32(position)
+    if (length < 0) {
+      outputBuffer = null
+      break
+    }
+    const type = view.getInt32(position + 4)
+    switch (type) {
+      case 0x49444154: // IDAT
+        foundIdat = true
+        if (outputBuffer) {
+          outputBuffer.copyWithin(outputOffset, position, buffer.length)
+          outputOffset += buffer.length - position
+          outputBuffer = outputBuffer.subarray(0, outputOffset)
+        }
+        break
+      case 0x73524742: // sRGB
+      case 0x67414D41: // gAMA
+      case 0x6348524D: // cHRM
+      case 0x69434350: // iCCP
+        if (!outputBuffer) {
+          outputBuffer = new Uint8Array(buffer)
+          outputOffset = position
+        }
+        if (type === 0x69434350 && !iccProfile) {
+          try {
+            iccProfile = parseIccChunk(buffer, position)
+          }
+          catch {
+            // Ignore errors
+          }
+        }
+        break
       default:
-        r && (r.copyWithin(i, t, t + l + 12), i += l + 12);
+        if (outputBuffer) {
+          outputBuffer.copyWithin(outputOffset, position, position + length + 12)
+          outputOffset += length + 12
+        }
     }
-    if (o) break;
-    t += l + 12;
+    if (foundIdat)
+      break
+    position += length + 12
   }
   return {
-    withoutColorSpace: r || e,
-    iccProfileRawData: a
-  };
+    withoutColorSpace: outputBuffer || buffer,
+    iccProfileRawData: iccProfile,
+  }
 }
-export function $$s1(e) {
-  if (71 !== e[0] || 73 !== e[1] || 70 !== e[2] || 56 !== e[3]) return !1;
-  let t = !0;
-  function i(i) {
-    for (; i < e.length;) {
-      let n = e[i++];
-      if (n > 0) i += n; else if (0 === n) break; else {
-        t = !1;
-        break;
+
+/**
+ * Parses ICC chunk from PNG buffer.
+ * Helper for extractIccProfileFromPng.
+ * @param buffer - The PNG buffer.
+ * @param position - Start position of the chunk.
+ * @returns Inflated ICC profile data.
+ */
+function parseIccChunk(buffer: Uint8Array, position: number): Uint8Array {
+  const view = new DataView(buffer.buffer, position)
+  const length = view.getUint32(0)
+  const nameLimits = { min: 1, max: 79 }
+  const nameStart = position + 4 + 4
+  let nameEnd = null
+  for (let i = nameStart; i < nameStart + nameLimits.max && i < buffer.length; ++i) {
+    if (buffer[i] === 0) {
+      nameEnd = i
+      break
+    }
+  }
+  if (nameEnd === null || buffer[nameEnd] !== 0) {
+    throw new Error('Couldn\'t find null separator')
+  }
+  const compressionMethod = buffer[nameEnd + 1]
+  if (compressionMethod !== 0) {
+    throw new Error('Compression method is not 0 (deflate)')
+  }
+  const nameLength = nameEnd - nameStart
+  if (nameLength < nameLimits.min || nameLength > nameLimits.max) {
+    throw new Error(`Profile name length of ${nameLength} isn't between ${nameLimits.min} bytes and ${nameLimits.max} bytes`)
+  }
+  const dataStart = nameEnd + 1 + 1
+  if (8 + length + 4 > buffer.length - position) {
+    throw new Error('Data is not large enough to contain the entire iCCP chunk')
+  }
+  const compressedData = buffer.subarray(dataStart, dataStart + (length - nameLength - 1 - 1))
+  return inflate(compressedData)
+}
+
+/**
+ * Checks if a GIF buffer represents an animated GIF.
+ * Original function: $$s1
+ * @param buffer - The GIF buffer as Uint8Array.
+ * @returns True if animated, false otherwise.
+ */
+export function isAnimatedGif(buffer: Uint8Array): boolean {
+  if (buffer[0] !== 71 || buffer[1] !== 73 || buffer[2] !== 70 || buffer[3] !== 56) {
+    return false
+  }
+  let valid = true
+  // let position = 0
+
+  /**
+   * Skips sub-blocks.
+   * Helper for isAnimatedGif.
+   * @param start - Starting position.
+   * @returns New position after skipping.
+   */
+  const skipSubBlocks = (start: number): number => {
+    let i = start
+    while (i < buffer.length) {
+      const size = buffer[i++]
+      if (size > 0) {
+        i += size
+      }
+      else if (size === 0) {
+        break
+      }
+      else {
+        valid = false
+        break
       }
     }
-    return i;
+    return i
   }
-  let n = 0;
-  let r = 10;
-  let a = e[r++];
-  for (r += 2, a >> 7 && (r += (1 << (7 & a) + 1) * 3); t && r < e.length;) switch (e[r++]) {
-    case 33:
-      switch (e[r++]) {
-        case 255:
-          11 !== e[r] || 78 == e[r + 1] && 69 == e[r + 2] && 84 == e[r + 3] && 83 == e[r + 4] && 67 == e[r + 5] && 65 == e[r + 6] && 80 == e[r + 7] && 69 == e[r + 8] && 50 == e[r + 9] && 46 == e[r + 10] && 48 == e[r + 11] && 3 == e[r + 12] && 1 == e[r + 13] && 0 == e[r + 16] ? r += 17 : r = i(r + 12);
-          break;
-        case 249:
-          r += 6;
-          break;
-        case 254:
-        case 1:
-          r = i(r);
-      }
-      break;
-    case 44:
-      if (++n > 1) return !0;
-      r += 8;
-      let t = e[r++];
-      t >> 7 && (r += (1 << (7 & t) + 1) * 3);
-      r = i(r + 1);
-      break;
-    case 59:
-      return !1;
+
+  let frameCount = 0
+  let pos = 10
+  const packedField = buffer[pos++]
+  pos += 2
+  if (packedField >> 7) {
+    pos += (1 << ((packedField & 7) + 1)) * 3
   }
-  return !1;
+
+  while (valid && pos < buffer.length) {
+    const blockType = buffer[pos++]
+    switch (blockType) {
+      case 33: // Extension
+        const extType = buffer[pos++]
+        switch (extType) {
+          case 255: // Application Extension
+            if (buffer[pos] === 11
+              && buffer[pos + 1] === 78 && buffer[pos + 2] === 69 && buffer[pos + 3] === 84
+              && buffer[pos + 4] === 83 && buffer[pos + 5] === 67 && buffer[pos + 6] === 65
+              && buffer[pos + 7] === 80 && buffer[pos + 8] === 69 && buffer[pos + 9] === 50
+              && buffer[pos + 10] === 46 && buffer[pos + 11] === 48 && buffer[pos + 12] === 3
+              && buffer[pos + 13] === 1 && buffer[pos + 16] === 0) {
+              pos += 17
+            }
+            else {
+              pos = skipSubBlocks(pos + 12)
+            }
+            break
+          case 249: // Graphic Control Extension
+            pos += 6
+            break
+          case 254: // Comment Extension
+          case 1: // Plain Text Extension
+            pos = skipSubBlocks(pos)
+            break
+        }
+        break
+      case 44: // Image Descriptor
+        if (++frameCount > 1)
+          return true
+        pos += 8
+        const lzwCodeSize = buffer[pos++]
+        if (lzwCodeSize >> 7) {
+          pos += (1 << ((lzwCodeSize & 7) + 1)) * 3
+        }
+        pos = skipSubBlocks(pos + 1)
+        break
+      case 59: // Trailer
+        return false
+    }
+  }
+  return false
 }
-export const Ll = $$a0;
-export const fB = $$s1;
-export const yy = $$r2;
+
+// Updated exports to match refactored function names
+export const Ll = extractIccProfileFromPng
+export const fB = isAnimatedGif
+export const yy = extractIccProfileFromJpeg

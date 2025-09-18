@@ -1,4 +1,4 @@
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 function n(e) {
   return {
     isTextNode: "TEXT" === e.type,
@@ -23,7 +23,7 @@ export function $$i0(e, t) {
   return i;
 }
 export function $$l1(e) {
-  return Fk($$i0, e);
+  return useDeepEqualSceneValue($$i0, e);
 }
 export const D = $$i0;
 export const a = $$l1;

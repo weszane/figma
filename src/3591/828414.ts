@@ -19,7 +19,7 @@ import { isResourcePendingPublishing, getResourceTaglineOrDescription } from "..
 import { JZ, qR } from "../figma_app/696043";
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { KE } from "../905/116101";
 import { withTrackedClick } from "../figma_app/831799";
 import { V2, WK } from "../figma_app/844435";
@@ -90,7 +90,7 @@ export function $$ed0(e) {
     propagateCloseClick: !0,
     children: [jsx(c$, {
       onClick: t => {
-        if (t.stopPropagation(), i(KE()), !n) return _$$R2.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+        if (t.stopPropagation(), i(KE()), !n) return _$$R2.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         i(showModalHandler({
           type: _$$h,
           data: {
@@ -103,7 +103,7 @@ export function $$ed0(e) {
       onClick: e => {
         if (e.stopPropagation(), !n) {
           i(KE());
-          return _$$R2.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+          return _$$R2.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         }
         i(JZ({
           resourceType: s ? "widget" : "plugin"

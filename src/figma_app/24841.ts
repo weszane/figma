@@ -12,7 +12,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { putUser } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
-import { q0 } from "../figma_app/976345";
+import { sendIpcRefreshSession } from "../figma_app/976345";
 import { U2 } from "../figma_app/545293";
 import { setSessionState } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -101,7 +101,7 @@ let w = () => {
 let O = createOptimistThunk((e, t) => {
   sessionApiInstance.logoutOneUser(t.user.id).then(r => {
     e.dispatch(setSessionState(r.data.meta));
-    e.dispatch(q0(r.data.meta));
+    e.dispatch(sendIpcRefreshSession(r.data.meta));
     r.data?.meta?.users?.length === 0 && (clearAnalytics(), U2.clear());
     let n = r.data?.meta?.redirect_url;
     n ? customHistory.redirect(n) : e.dispatch(VisualBellActions.enqueue({

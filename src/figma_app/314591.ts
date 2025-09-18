@@ -11,7 +11,7 @@ import { y as _$$y } from '../905/829723';
 import { H } from '../figma_app/23564';
 import { isNotNullish } from '../figma_app/95419';
 import { throwTypeError } from '../figma_app/465776';
-import { Fy } from '../figma_app/623300';
+import { getNodeStatus } from '../figma_app/623300';
 import { SceneGraphHelpers, figmaScopeBindings, ComponentPropType, SymbolInstanceType, FromToDirection, VariantType, DataLoadStatus } from '../figma_app/763686';
 import { kebabToCamel } from '../figma_app/930338';
 import { KV } from '../figma_app/952446';
@@ -55,7 +55,7 @@ export class $$b0 extends $ {
       t.push({
         label: 'Dynamic page loading info',
         children: QB([r && n && r !== n && this.scene.generateNodeLinkItem('Containing page', n.guid), n && B_('Page status', (() => {
-          switch (Fy(this.pagesList, n.guid)) {
+          switch (getNodeStatus(this.pagesList, n.guid)) {
             case DataLoadStatus.REQUESTED:
               return {
                 type: 'error',
@@ -115,7 +115,7 @@ export class $$b0 extends $ {
     r && t.push(...r);
     let n = this.scene.getNodeById(e);
     if (n?.isPage && this.pagesList) {
-      switch (Fy(this.pagesList, n.guid)) {
+      switch (getNodeStatus(this.pagesList, n.guid)) {
         case DataLoadStatus.LOADED:
           break;
         case DataLoadStatus.REQUESTED:

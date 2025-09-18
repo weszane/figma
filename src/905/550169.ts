@@ -1,105 +1,234 @@
-import { debounce } from "../905/915765";
-import { EventEmitter } from "../905/690073";
-import { trackEventAnalytics } from "../905/449184";
-let s = debounce(trackEventAnalytics, 1e3, !0);
-let o = "gamepadconnected";
-let l = "gamepaddisconnected";
-let $$d1 = 1e3;
-export class $$c0 {
+import { trackEventAnalytics } from '../905/449184'
+import { EventEmitter } from '../905/690073'
+import { debounce } from '../905/915765'
+
+/**
+ * Gamepad button threshold offset constant (original: $$d1)
+ */
+export const GAMEPAD_BUTTON_AXIS_OFFSET = 1e3
+
+/**
+ * Supported controller vendor/product mappings (original: h)
+ */
+const CONTROLLER_VENDOR_PRODUCT_MAP = new Map<string, string>([
+  ['054c_09cc', 'PS4'],
+  ['054c_05c4', 'PS4'],
+  ['054c_0268', 'PS4'],
+  ['057e_2009', 'SWITCH_PRO'],
+  ['045e_02ea', 'XBOX_ONE'],
+  ['045e_02dd', 'XBOX_ONE'],
+])
+
+/**
+ * Supported controller vendor mappings (original: g)
+ */
+const CONTROLLER_VENDOR_MAP = new Map<string, string>([
+  ['054c', 'PS4'],
+  ['057e', 'SWITCH_PRO'],
+  ['045e', 'XBOX_ONE'],
+])
+
+const GAMEPAD_CONNECTED_EVENT = 'gamepadconnected'
+const GAMEPAD_DISCONNECTED_EVENT = 'gamepaddisconnected'
+const VENDOR_PRODUCT_REGEX = /Vendor: ([0-9a-f]+) Product: ([0-9a-f]+)/i
+const XBOX_REGEX = /xbox/i
+
+/**
+ * Debounced analytics tracker for gamepad events (original: s)
+ */
+const debouncedTrackEventAnalytics = debounce(trackEventAnalytics, 1e3, true)
+
+/**
+ * Returns the controller type string for a given Gamepad (original: inline function in tick)
+ * @param gamepad Gamepad object
+ */
+function getControllerType(gamepad: Gamepad): string {
+  const match = VENDOR_PRODUCT_REGEX.exec(gamepad.id)
+  if (!match) {
+    return XBOX_REGEX.exec(gamepad.id) ? 'XBOX_ONE' : 'UNKNOWN_CONTROLLER'
+  }
+  const [vendor, product] = match.slice(1)
+  const vendorProductKey = `${vendor}_${product}`
+  const exactMatch = CONTROLLER_VENDOR_PRODUCT_MAP.get(vendorProductKey)
+  const closestMatch = exactMatch ?? CONTROLLER_VENDOR_MAP.get(vendor) ?? 'UNKNOWN_CONTROLLER'
+  debouncedTrackEventAnalytics('Game Controller Triggered', {
+    id: gamepad.id,
+    closestMatch,
+    wasExactMatch: !!exactMatch,
+  })
+  return closestMatch
+}
+
+/**
+ * Represents the state of pressed buttons for a gamepad (original: getStateForGamepad return type)
+ */
+export interface GamepadState {
+  pressedButtons: Set<number>
+}
+
+/**
+ * GameControllerListener class (original: $$c0)
+ * Listens for gamepad connection/disconnection and button presses.
+ */
+export class GameControllerListener {
+  private emitter: EventEmitter
+  private state: Map<number, GamepadState>
+  private rafHandle: number
+
   constructor() {
-    this.emitter = new EventEmitter("GameControllerListener");
-    this.state = new Map();
-    this.rafHandle = 0;
-    this.onGamePadConnected = e => {
-      this.rafHandle || (this.rafHandle = window.requestAnimationFrame(this.tick));
-    };
-    this.onGamePadDisconnected = e => {
-      Array.from(window.navigator.getGamepads()).some(Boolean) || (window.cancelAnimationFrame(this.rafHandle), this.rafHandle = 0);
-    };
-    this.tick = () => {
-      for (let e of window.navigator.getGamepads()) {
-        if (!e) continue;
-        let t = this.getStateForGamepad(e);
-        let i = this.state.get(e.index) || t;
-        let n = [];
-        for (let e of t.pressedButtons) i.pressedButtons.has(e) || n.push(e);
-        this.state.set(e.index, t);
-        n.length && this.emitter.trigger("onPress", {
-          type: "onPress",
-          buttons: n,
-          gamePadIndex: e.index,
-          controllerType: function (e) {
-            let t = f.exec(e.id);
-            if (!t) return _.exec(e.id) ? "XBOX_ONE" : "UNKNOWN_CONTROLLER";
-            let [i, n] = t.slice(1);
-            let r = `${i}_${n}`;
-            let a = h.get(r);
-            let o = a ?? g.get(i) ?? "UNKNOWN_CONTROLLER";
-            s("Game Controller Triggered", {
-              id: e.id,
-              closestMatch: o,
-              wasExactMatch: !!a
-            });
-            return o;
-          }(e)
-        });
-      }
-      this.rafHandle = window.requestAnimationFrame(this.tick);
-    };
+    this.emitter = new EventEmitter('GameControllerListener')
+    this.state = new Map()
+    this.rafHandle = 0
+
+    this.onGamePadConnected = this.handleGamePadConnected.bind(this)
+    this.onGamePadDisconnected = this.handleGamePadDisconnected.bind(this)
+    this.tick = this.handleTick.bind(this)
   }
-  start() {
-    if (!function () {
-      if ("function" != typeof window.navigator.getGamepads) return !1;
-      try {
-        window.navigator.getGamepads();
-        return !0;
-      } catch {
-        return !1;
-      }
-    }()) {
-      console.warn("Gamepad API not supported");
-      return;
+
+  /**
+   * Starts listening for gamepad events (original: start)
+   */
+  start(): void {
+    if (!isGamepadApiSupported()) {
+      console.warn('Gamepad API not supported')
+      return
     }
-    for (let e of window.navigator.getGamepads()) null != e && this.state.set(e.index, this.getStateForGamepad(e));
-    window.addEventListener(o, this.onGamePadConnected);
-    window.addEventListener(l, this.onGamePadDisconnected);
-    Array.from(window.navigator.getGamepads()).some(Boolean) && (this.rafHandle = window.requestAnimationFrame(this.tick));
+    for (const gamepad of window.navigator.getGamepads()) {
+      if (gamepad != null) {
+        this.state.set(gamepad.index, this.getStateForGamepad(gamepad))
+      }
+    }
+    window.addEventListener(GAMEPAD_CONNECTED_EVENT, this.onGamePadConnected)
+    window.addEventListener(GAMEPAD_DISCONNECTED_EVENT, this.onGamePadDisconnected)
+    if (Array.from(window.navigator.getGamepads()).some(Boolean)) {
+      this.rafHandle = window.requestAnimationFrame(this.tick)
+    }
   }
-  end() {
-    this.cancelRAF();
-    window.removeEventListener(o, this.onGamePadConnected);
-    window.removeEventListener(l, this.onGamePadDisconnected);
+
+  /**
+   * Stops listening for gamepad events (original: end)
+   */
+  end(): void {
+    this.cancelRAF()
+    window.removeEventListener(GAMEPAD_CONNECTED_EVENT, this.onGamePadConnected)
+    window.removeEventListener(GAMEPAD_DISCONNECTED_EVENT, this.onGamePadDisconnected)
   }
-  onPress(e) {
-    this.emitter.on("onPress", e);
+
+  /**
+   * Registers a callback for button press events (original: onPress)
+   * @param callback Callback function
+   */
+  onPress(callback: (event: {
+    type: string
+    buttons: number[]
+    gamePadIndex: number
+    controllerType: string
+  }) => void): { release: () => void } {
+    this.emitter.on('onPress', callback)
     return {
       release: () => {
-        this.emitter.removeListener("onPress", e);
-      }
-    };
-  }
-  cancelRAF() {
-    this.rafHandle && (window.cancelAnimationFrame(this.rafHandle), this.rafHandle = 0);
-  }
-  getStateForGamepad(e) {
-    let t = [];
-    for (let i = 0; i < e.buttons.length; i++) e.buttons[i].pressed && t.push(i);
-    for (let i = 0; i < e.axes.length; i++) {
-      let n = e.axes[i];
-      n < -.5 && t.push(2 * i + $$d1);
-      n > .5 && t.push(2 * i + 1 + $$d1);
+        this.emitter.removeListener('onPress', callback)
+      },
     }
-    return {
-      pressedButtons: new Set(t)
-    };
+  }
+
+  /**
+   * Cancels the animation frame loop (original: cancelRAF)
+   */
+  cancelRAF(): void {
+    if (this.rafHandle) {
+      window.cancelAnimationFrame(this.rafHandle)
+      this.rafHandle = 0
+    }
+  }
+
+  /**
+   * Returns the pressed button state for a gamepad (original: getStateForGamepad)
+   * @param gamepad Gamepad object
+   */
+  getStateForGamepad(gamepad: Gamepad): GamepadState {
+    const pressed: number[] = []
+    for (let i = 0; i < gamepad.buttons.length; i++) {
+      if (gamepad.buttons[i].pressed)
+        pressed.push(i)
+    }
+    for (let i = 0; i < gamepad.axes.length; i++) {
+      const axis = gamepad.axes[i]
+      if (axis < -0.5)
+        pressed.push(2 * i + GAMEPAD_BUTTON_AXIS_OFFSET)
+      if (axis > 0.5)
+        pressed.push(2 * i + 1 + GAMEPAD_BUTTON_AXIS_OFFSET)
+    }
+    return { pressedButtons: new Set(pressed) }
+  }
+
+  /**
+   * Handles gamepad connection event (original: onGamePadConnected)
+   */
+  private handleGamePadConnected(): void {
+    if (!this.rafHandle) {
+      this.rafHandle = window.requestAnimationFrame(this.tick)
+    }
+  }
+
+  /**
+   * Handles gamepad disconnection event (original: onGamePadDisconnected)
+   */
+  private handleGamePadDisconnected(): void {
+    if (!Array.from(window.navigator.getGamepads()).some(Boolean)) {
+      window.cancelAnimationFrame(this.rafHandle)
+      this.rafHandle = 0
+    }
+  }
+
+  /**
+   * Animation frame loop to poll gamepad state and trigger button press events (original: tick)
+   */
+  private handleTick(): void {
+    for (const gamepad of window.navigator.getGamepads()) {
+      if (!gamepad)
+        continue
+      const currentState = this.getStateForGamepad(gamepad)
+      const previousState = this.state.get(gamepad.index) || currentState
+      const newlyPressed: number[] = []
+      for (const btn of currentState.pressedButtons) {
+        if (!previousState.pressedButtons.has(btn)) {
+          newlyPressed.push(btn)
+        }
+      }
+      this.state.set(gamepad.index, currentState)
+      if (newlyPressed.length) {
+        this.emitter.trigger('onPress', {
+          type: 'onPress',
+          buttons: newlyPressed,
+          gamePadIndex: gamepad.index,
+          controllerType: getControllerType(gamepad),
+        })
+      }
+    }
+    this.rafHandle = window.requestAnimationFrame(this.tick)
+  }
+
+  private onGamePadConnected: (e: Event) => void
+  private onGamePadDisconnected: (e: Event) => void
+  private tick: () => void
+}
+
+/**
+ * Checks if the Gamepad API is supported (original: inline function in start)
+ */
+function isGamepadApiSupported(): boolean {
+  if (typeof window.navigator.getGamepads !== 'function')
+    return false
+  try {
+    window.navigator.getGamepads()
+    return true
+  }
+  catch {
+    return false
   }
 }
-let u = "054c";
-let p = "057e";
-let m = "045e";
-let h = new Map([[`${u}_09cc`, "PS4"], [`${u}_05c4`, "PS4"], [`${u}_0268`, "PS4"], [`${p}_2009`, "SWITCH_PRO"], [`${m}_02ea`, "XBOX_ONE"], [`${m}_02dd`, "XBOX_ONE"]]);
-let g = new Map([[u, "PS4"], [p, "SWITCH_PRO"], [m, "XBOX_ONE"]]);
-let f = /Vendor: ([0-9a-f]+) Product: ([0-9a-f]+)/i;
-let _ = /xbox/i;
-export const L = $$c0;
-export const c = $$d1;
+
+// Export refactored names
+export const L = GameControllerListener
+export const c = GAMEPAD_BUTTON_AXIS_OFFSET

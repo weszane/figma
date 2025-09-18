@@ -14,7 +14,7 @@ import { getObservableValue } from '../figma_app/84367';
 import { L3 } from '../figma_app/385215';
 import { fullscreenValue } from '../figma_app/455680';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
-import { p8 } from '../figma_app/722362';
+import { useAppModelProperty } from '../figma_app/722362';
 import { dP, UK } from '../figma_app/740163';
 import { renameNode, renameSelectedNodes, expandNodeToRoot } from '../figma_app/741237';
 import { AppStateTsApi, ViewType, UserInterfaceElements, SelectionPanelType } from '../figma_app/763686';
@@ -56,7 +56,7 @@ export function $$B11({
   !function (e) {
     let t = $$j3();
     let r = useLatestRef(t);
-    let i = p8('showUi');
+    let i = useAppModelProperty('showUi');
     let a = useLatestRef(i);
     let s = Z(() => {
       e(t);
@@ -86,7 +86,7 @@ export function $$V8() {
   return useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY);
 }
 export function $$H12() {
-  return p8('pagesList');
+  return useAppModelProperty('pagesList');
 }
 export function $$z2() {
   let [e, t] = useState(null);

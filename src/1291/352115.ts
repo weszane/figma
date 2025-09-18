@@ -4,7 +4,7 @@ import { sz } from "../figma_app/216696";
 import { TrackingProvider } from "../figma_app/831799";
 import { eE, Fz } from "../figma_app/106207";
 import { RD } from "../figma_app/198840";
-import { mC, oh } from "../905/18797";
+import { useIsLoaded, useIsLoading } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt } from "../figma_app/979658";
 import { CommunityPageType, HubTypeEnum } from "../figma_app/45218";
@@ -82,7 +82,7 @@ function C() {
 }
 function $() {
   let e = eE(FDocumentType.FigJam).slice(0, 4);
-  let t = mk(e, [mC(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let t = mk(e, [useIsLoaded(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }))]);
   return jsx(Fragment, {
@@ -106,10 +106,10 @@ export function $$I0(e) {
     isInsertingTemplate
   } = Fz();
   let s = useRef(null);
-  let f = oh(sz.loadingKeyForPayload({
+  let f = useIsLoading(sz.loadingKeyForPayload({
     shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
   }));
-  let b = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let b = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   return f || b ? jsx(i8, {}) : jsx("div", {

@@ -13,10 +13,10 @@ import h from "classnames";
 import { dN } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
 import { createRect } from "../905/508367";
-import { q as _$$q, I as _$$I } from "../figma_app/819288";
+import { isMessageMetaTooLong, isMessageMetaEmpty } from "../figma_app/819288";
 import { h as _$$h } from "../905/207101";
 import { BrowserInfo } from "../figma_app/778880";
-import { qW } from "../905/623179";
+import { UploadError } from "../905/623179";
 import { generateRecordingKey, useSetupPlayback } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { Y as _$$Y } from "../905/506207";
@@ -25,7 +25,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { RI, We, uz, i4 } from "../figma_app/770088";
 import { postUserFlag } from "../905/985254";
-import { y as _$$y } from "../figma_app/297957";
+import { useAtMentionInviteExperiment } from "../figma_app/297957";
 import { getCurrentFileType, isPrototypeView } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { trackUserEvent } from "../figma_app/314264";
@@ -35,14 +35,14 @@ import { $W, KD } from "../figma_app/317394";
 import { H as _$$H } from "../905/674803";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { K as _$$K2 } from "../905/659729";
 import { fG } from "../905/772425";
-import { Wn, xp } from "../905/966582";
+import { UPLOAD_ERRORS, IMAGE_TYPE_VALUES } from "../905/966582";
 import { KindEnum } from "../905/129884";
 import { showModalHandler } from "../905/156213";
-import { l as _$$l } from "../905/348437";
+import { fileCommentAttachmentAPI } from "../905/348437";
 import { q as _$$q2 } from "../905/70772";
 import { v as _$$v } from "../905/981847";
 import { kG } from "../905/958668";
@@ -86,7 +86,7 @@ function J(e) {
   };
   let s = (t, o) => {
     let i = attachments[o];
-    return e.fileKey ? _$$l.put(e.fileKey, i.id, t).then(n => (200 === n.status && e.onUpdate({
+    return e.fileKey ? fileCommentAttachmentAPI.put(e.fileKey, i.id, t).then(n => (200 === n.status && e.onUpdate({
       ...i,
       altText: t
     }), n)) : Promise.resolve(void 0);
@@ -122,16 +122,16 @@ export function $$er0(e) {
 }
 let el = e => {
   switch (e.type) {
-    case Wn.MAX_UPLOADS_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_UPLOADS_EXCEEDED:
       return getI18nString("comments.upload_error.media_file_maximum", e.params);
-    case Wn.MAX_IMAGE_SIZE_EXCEEDED:
-    case Wn.MAX_VIDEO_SIZE_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_IMAGE_SIZE_EXCEEDED:
+    case UPLOAD_ERRORS.MAX_VIDEO_SIZE_EXCEEDED:
       return getI18nString("comments.upload_error.media_file_size_limit_MB", e.params);
-    case Wn.INVALID_FILE_TYPE:
+    case UPLOAD_ERRORS.INVALID_FILE_TYPE:
       return getI18nString("comments.upload_error.media_file_types");
-    case Wn.DUPLICATE_FILE_UPLOAD:
+    case UPLOAD_ERRORS.DUPLICATE_FILE_UPLOAD:
       return getI18nString("comments.upload_error.already_uploaded_items", e.params);
-    case Wn.FAILED_TO_UPLOAD:
+    case UPLOAD_ERRORS.FAILED_TO_UPLOAD:
       return getI18nString("comments.upload_error.failed_to_upload", e.params);
     default:
       throwTypeError(e);
@@ -143,7 +143,7 @@ export function $$em1(e) {
   let h = useRef(null);
   let V = useRef(null);
   let Z = selectCurrentUser();
-  let $ = _$$f("has_opened_comments_modal");
+  let $ = selectUserFlag("has_opened_comments_modal");
   let {
     threadPosition,
     dispatch,
@@ -160,14 +160,14 @@ export function $$em1(e) {
   let e_ = useSelector(e => e.orgUsersByOrgId);
   let eb = _$$i();
   let ey = useSelector(e => e.comments.editingComment);
-  let ex = !!_$$f("has_mentioned_pending_user_invite");
-  let eI = !!_$$f("has_mentioned_pending_user_invite_twice");
+  let ex = !!selectUserFlag("has_mentioned_pending_user_invite");
+  let eI = !!selectUserFlag("has_mentioned_pending_user_invite_twice");
   let ev = Xr(_$$H);
   let [eE, eM] = useState(!1);
   let eT = getCurrentFileType();
   let ej = isPrototypeView();
   let ew = useSelector(e => e.comments.activeDragTarget);
-  let eR = _$$y();
+  let eR = useAtMentionInviteExperiment();
   let ek = useAtomWithSubscription(_$$H);
   let eO = _$$eR(e.threadId) && eR({
     isDraftFile: !eC,
@@ -275,7 +275,7 @@ export function $$em1(e) {
     e$.hasOwnProperty(e.id) ? deleteAttachment && deleteAttachment(e.id, e$[e.id]) : deleteAttachment && deleteAttachment(e.id);
   }, [deleteAttachment, e$]);
   let e2 = useCallback((e, t) => {
-    if (e instanceof qW) {
+    if (e instanceof UploadError) {
       MZ(dispatch, getI18nString("check_network_compatibility.error_bell.comment_attachments.message"));
       return;
     }
@@ -286,10 +286,10 @@ export function $$em1(e) {
   }, [dispatch, e0]);
   let e1 = useCallback(t => {
     if (!eW || !updateAttachment || 0 === t.length) return;
-    let n = _$$K2(t, eV, xS, xp, e2);
+    let n = _$$K2(t, eV, xS, IMAGE_TYPE_VALUES, e2);
     eZ(e => e + n.length);
     n.forEach((t, n) => {
-      if (xp.includes(t.type)) {
+      if (IMAGE_TYPE_VALUES.includes(t.type)) {
         let o = URL.createObjectURL(t);
         let i = new Date();
         i.setMilliseconds(i.getMilliseconds() + n);
@@ -309,8 +309,8 @@ export function $$em1(e) {
     e.current && (e.current.value = "");
   }, [e1]);
   let e4 = isUserNotLoggedInAndEditorSupported();
-  let e3 = () => e.isDisabled || eQ || e8(e.messageMeta) || _$$q(e.messageMeta) || e4;
-  let e8 = e => _$$I(e);
+  let e3 = () => e.isDisabled || eQ || e8(e.messageMeta) || isMessageMetaTooLong(e.messageMeta) || e4;
+  let e8 = e => isMessageMetaEmpty(e);
   let e7 = e3();
   let e6 = e8(e.messageMeta) && (!eW || 0 === eG.length);
   let e9 = eW && ew === e.recordingKey && !_$$eR(e.threadId);
@@ -468,7 +468,7 @@ export function $$em1(e) {
         }), eW && jsx(_$$n, {
           svgAltText: getI18nString("comments.upload_images"),
           isDisabled: eG.length >= xS,
-          acceptedFileTypes: xp.join(","),
+          acceptedFileTypes: IMAGE_TYPE_VALUES.join(","),
           inputRef: eJ,
           inputId: `fileUploadIconInput-${e.recordingKey}`,
           onFileInputChange: e5,

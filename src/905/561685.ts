@@ -21,7 +21,7 @@ const BASE64_LOOKUP: Int32Array = (() => {
  * @returns The decoded bytes as a Uint8Array.
  * (original: $$a0)
  */
-export function decodeBase64(base64Str: string): Uint8Array {
+export function decodeBase64(base64Str: string): Uint8Array<any> {
   const length = base64Str.length >>> 2
   const output = new Uint8Array(3 * length)
   let outputIndex = 0

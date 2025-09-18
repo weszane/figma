@@ -14,7 +14,7 @@ import { y as _$$y } from "../figma_app/705249";
 import { j, N as _$$N } from "../figma_app/261650";
 import { fullscreenValue } from "../figma_app/455680";
 import { B_, mo, PN, $r } from "../figma_app/141088";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { s as _$$s } from "../905/518538";
 import { Qf } from "../figma_app/202626";
 import { ro, k0 } from "../figma_app/12220";
@@ -254,7 +254,7 @@ export function $$k6(e, t, r) {
 export function $$M2(e) {
   let t;
   let r = _$$s();
-  let n = eY();
+  let n = useSceneGraphSelector();
   if (!Qf(n)) return !1;
   switch (r.orphanedBy) {
     case "deleted_pages":

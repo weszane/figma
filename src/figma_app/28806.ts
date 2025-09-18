@@ -4,16 +4,16 @@ import { assert } from "../figma_app/465776";
 import { P } from "../figma_app/529847";
 import { uo } from "../figma_app/990058";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { Hl, YT } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { useGetLicenseTypesForSeatType, SeatDescriptionVisibility } from "../figma_app/217457";
 import { jL } from "../figma_app/658324";
 import { FPlanAccessType } from "../figma_app/191312";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { getOrgLevelData } from "../figma_app/428858";
 export function $$m0(e) {
   let t = useDispatch();
-  let r = Hl({
-    visibility: YT.ALL
+  let r = useGetLicenseTypesForSeatType({
+    visibility: SeatDescriptionVisibility.ALL
   });
   let m = useCallback(({
     users: n,
@@ -70,7 +70,7 @@ export function $$m0(e) {
       seatTypeProducts: {},
       params: {
         org_user_ids: r.map(e => e.planUserId),
-        paid_statuses: n === ViewAccessTypeEnum.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
+        paid_statuses: n === ViewAccessTypeEnum.VIEW ? collaboratorSet.dict(() => FPlanAccessType.STARTER) : {
           [n]: FPlanAccessType.FULL
         },
         entry_point: e.entryPoint,

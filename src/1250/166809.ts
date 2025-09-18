@@ -11,7 +11,7 @@ import { O as _$$O } from "../905/539306";
 import { reportError } from "../905/11";
 import { n as _$$n } from "../figma_app/3731";
 import { getI18nString } from "../905/303541";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { A } from "../1250/724587";
 import { postUserFlag } from "../905/985254";
 import { z } from "../905/373223";
@@ -135,7 +135,7 @@ export function $$A1({
         isCurrentPlanLimitedTeamPlan: f,
         isNextPlanLimitedTeamPlan: y
       });
-      t(_l({
+      t(switchAccountAndNavigate({
         workspace: d,
         view: o
       }));

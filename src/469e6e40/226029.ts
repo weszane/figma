@@ -33,7 +33,7 @@ import { kA } from "../figma_app/336853";
 import { selectPermissionsState } from "../figma_app/212807";
 import { useCurrentUserOrg } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
-import { oh } from "../905/18797";
+import { useIsLoading } from "../905/18797";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { DUserRole, SectionType } from "../figma_app/858344";
 import { z6 } from "../figma_app/805373";
@@ -58,7 +58,7 @@ import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
 import { ps } from "../figma_app/845611";
 import { trackSidebarClick } from "../905/34809";
 import { Mn, e9 } from "../4452/961065";
-import { m$ } from "../figma_app/240735";
+import { fetchTeamMembersThunk } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
 import { FRequestsStr } from "../905/384551";
 import { DashboardSection } from "../figma_app/650409";
@@ -532,7 +532,7 @@ function eL() {
       workspaces: "loading" === d.status || "disabled" === d.status ? Xm() : gB(c)
     };
   }();
-  let d = oh(EO(e?.id ?? "")) && !s.current;
+  let d = useIsLoading(EO(e?.id ?? "")) && !s.current;
   let c = workspaces.data ?? [];
   if (useEffect(() => {
     d || s.current || (s.current = !0);
@@ -614,7 +614,7 @@ function eD(e) {
         teamAdminConsoleViewTab: DashboardSections.MEMBERS
       },
       preNavAction: () => {
-        a(m$({
+        a(fetchTeamMembersThunk({
           teamId: e
         }));
       }

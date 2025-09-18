@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { Kh } from "../905/403166";
+import { splitEmojiAndSkinTone } from "../905/403166";
 import { Xm } from "../905/723791";
 import { reportError } from "../905/11";
 import { FileWithCommentsAndReactions } from "../figma_app/43951";
@@ -70,7 +70,7 @@ export function $$b6(e, t) {
         };
         let i = {};
         return t.sort((e, t) => e.createdAt.getTime() - t.createdAt.getTime()).reduce((t, n) => {
-          let [r, a] = Kh(n.emoji);
+          let [r, a] = splitEmojiAndSkinTone(n.emoji);
           t.total++;
           let o = i[r];
           if (!o) {

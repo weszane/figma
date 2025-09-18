@@ -2,7 +2,7 @@ import n from "../vendor/923386";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { tl, ss } from "../figma_app/614170";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { N_, Oq } from "../905/332483";
+import { collaboratorSet, designSet } from "../905/332483";
 import { zU, fx, tB, dp } from "../figma_app/934005";
 var s = n;
 export function $$c1(e) {
@@ -12,12 +12,12 @@ export function $$_4(e, t) {
   return ss(tB(e), t);
 }
 export function $$u7(e) {
-  return dp(e) ? N_ : e.plan_parent_type === FOrganizationLevelType.TEAM ? Oq.exclude([ProductAccessTypeEnum.DEV_MODE]) : Oq;
+  return dp(e) ? collaboratorSet : e.plan_parent_type === FOrganizationLevelType.TEAM ? designSet.exclude([ProductAccessTypeEnum.DEV_MODE]) : designSet;
 }
 export function $$m8(e) {
   let t = [];
   Object.keys(e.seats_breakdown).forEach(e => {
-    (Oq.has(e) || N_.has(e)) && t.push(e);
+    (designSet.has(e) || collaboratorSet.has(e)) && t.push(e);
   });
   return t;
 }

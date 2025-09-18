@@ -1,5 +1,5 @@
 import { getI18nString } from "../905/303541";
-import { f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { Rt } from "../figma_app/979658";
 import { SS } from "../figma_app/330088";
 export function $$o0(e) {
@@ -47,7 +47,7 @@ export function $$o0(e) {
   }
 }
 export function $$l1() {
-  let e = f("interacted_figjam_whats_new_v2_cta");
+  let e = selectUserFlag("interacted_figjam_whats_new_v2_cta");
   return SS(e);
 }
 export const j = $$o0;

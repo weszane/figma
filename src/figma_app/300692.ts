@@ -28,7 +28,7 @@ import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg,
 import { M as _$$M } from '../figma_app/170366';
 import { DropdownEnableState } from '../figma_app/188152';
 import { FFileType } from '../figma_app/191312';
-import { DK } from '../figma_app/291892';
+import { MAX_CANVAS_SIZE } from '../figma_app/291892';
 import { isValidEmail } from '../figma_app/416935';
 import { getPluginDomain, getPluginPermissions, isTrustedPluginId } from '../figma_app/455620';
 import { Y5 } from '../figma_app/455680';
@@ -1209,8 +1209,8 @@ export function validateExtensionIconImage(file: any): any {
 export async function validateAndResizeIconImage(file: any, param2: any, param3: any): Promise<any> {
   validateExtensionIconImage(file);
   return await resizeImage(file, {
-    width: DK,
-    height: DK
+    width: MAX_CANVAS_SIZE,
+    height: MAX_CANVAS_SIZE
   }, param2, getI18nString('community.publishing.error_icon_image_dimensions'), param3);
 }
 

@@ -15,8 +15,8 @@ import { BC } from "../figma_app/149367";
 import { hideModalHandler } from "../905/156213";
 import { Z } from "../469e6e40/184197";
 import { TrackingProvider } from "../figma_app/831799";
-import { Oq } from "../905/332483";
-import { AG, Gj } from "../figma_app/217457";
+import { designSet } from "../905/332483";
+import { compareProductAccessTypes, getFProductAccessTypeByKey } from "../figma_app/217457";
 import { _k } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { FProductAccessType } from "../figma_app/191312";
@@ -109,7 +109,7 @@ export let $$A0 = registerModal(function (e) {
     invoiceType: _ ? "true_up" : "annual",
     invoiceDetails: jsxs("div", {
       className: _$$s.flex.flexColumn.p16.gap16.mx8.mb16.b1.colorBorder.bSolid.radiusMedium.$,
-      children: [a.sort(AG).map(t => {
+      children: [a.sort(compareProductAccessTypes).map(t => {
         let a = u[t] ?? 0;
         let i = tI(t);
         return jsxs("div", {
@@ -119,7 +119,7 @@ export let $$A0 = registerModal(function (e) {
             className: _$$s.flex.gap8.$,
             children: [jsx("span", {
               className: _$$s.inlineFlex.$,
-              children: Oq.has(t) ? function (e) {
+              children: designSet.has(t) ? function (e) {
                 switch (e) {
                   case FProductAccessType.DESIGN:
                     return jsx(_$$H, {});
@@ -128,7 +128,7 @@ export let $$A0 = registerModal(function (e) {
                   case FProductAccessType.DEV_MODE:
                     return jsx(P, {});
                 }
-              }(Gj(t)) : jsx(BC, {
+              }(getFProductAccessTypeByKey(t)) : jsx(BC, {
                 type: t,
                 size: "24"
               })

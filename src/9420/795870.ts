@@ -14,7 +14,7 @@ import { eV, pV, lB } from "../905/148137";
 import { V as _$$V } from "../905/57562";
 import { teamAPIClient } from "../905/834575";
 import { D as _$$D } from "../905/347702";
-import { yM, DP } from "../905/640017";
+import { useThemeContext, getVisibleTheme } from "../905/640017";
 import { sq } from "../905/613896";
 function m({
   defaultCountry: e,
@@ -134,8 +134,8 @@ let $$P3 = _$$D(e => {
   let V = useRef(null);
   let Y = getInitialOptions().user_data;
   let H = function () {
-    let e = yM();
-    let r = DP();
+    let e = useThemeContext();
+    let r = getVisibleTheme();
     return {
       loader: "never",
       fonts: [{

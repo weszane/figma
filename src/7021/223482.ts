@@ -10,8 +10,8 @@ import { SeatBillingTermsModal } from "../7021/149615";
 import { postUserFlag } from "../905/985254";
 import { vK, jv } from "../905/84777";
 import { e as _$$e } from "../905/621515";
-import { N_ } from "../905/332483";
-import { f as _$$f } from "../905/940356";
+import { collaboratorSet } from "../905/332483";
+import { selectUserFlag } from "../905/940356";
 import { FBillingModelType, FOrganizationLevelType } from "../figma_app/191312";
 import { liveStoreInstance, gY } from "../905/713695";
 import { kA } from "../figma_app/336853";
@@ -46,7 +46,7 @@ export function $$$$k0({
   });
   let N = !!k.data;
   let q = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: {
       tier: kA(e) ? Ju.ENTERPRISE : Ju.ORG,
       currency: k.data,
@@ -57,7 +57,7 @@ export function $$$$k0({
       enabled: N
     }
   });
-  let O = _$$f(S);
+  let O = selectUserFlag(S);
   let E = e => t(postUserFlag({
     [S]: e
   }));

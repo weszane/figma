@@ -13,7 +13,7 @@ import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
 import { Jt } from "../figma_app/28323";
 import { MX, EO } from "../figma_app/684446";
-import { VP, mn, D2 } from "../905/18797";
+import { isLoading, isDefined, isLoaded } from "../905/18797";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
@@ -68,8 +68,8 @@ export function $$C0(e) {
   let q = Date.now();
   let [$, B] = useState("");
   let G = T.find(e => e.id === licenseGroupId);
-  let z = VP(S, EO(N?.id ?? ""));
-  let V = !G && mn(S, L) && D2(S, L);
+  let z = isLoading(S, EO(N?.id ?? ""));
+  let V = !G && isDefined(S, L) && isLoaded(S, L);
   if (useEffect(() => {
     V && A(selectViewAction(o0));
   }, [A, V]), "loaded" !== M.status) return null;

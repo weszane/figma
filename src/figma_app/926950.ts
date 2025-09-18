@@ -6,7 +6,7 @@ import { registerModal } from '../905/102752';
 import { $1, _Z, AX, cR, Dq, dX, GC, HI, kB, lM, Lw, oE, Pf, Tg, U3, UM, uu, VL, vw, y8, yK, yl, Yz } from '../905/105972';
 import { Av } from '../905/149328';
 import { hideModal } from '../905/156213';
-import { l as _$$l2 } from '../905/190247';
+import { getGpuDeviceInfo } from '../905/190247';
 import { h as _$$h } from '../905/207101';
 import { o as _$$o } from '../905/240151';
 import { Label } from '../905/270045';
@@ -29,7 +29,7 @@ import { Ao, uF } from '../905/748636';
 import { c$, l6, sK } from '../905/794875';
 import { Um } from '../905/848862';
 import { XHR, XHRError } from '../905/910117';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { A as _$$A4 } from '../1617/230645';
 import { A as _$$A5 } from '../1617/794786';
@@ -179,7 +179,7 @@ function eu({
   let ex = () => {
     D(hideModal());
   };
-  let eN = _$$f('seen_bug_reporter_modal');
+  let eN = selectUserFlag('seen_bug_reporter_modal');
   _$$h(() => {
     eN || D(postUserFlag({
       seen_bug_reporter_modal: !0
@@ -295,7 +295,7 @@ function eu({
       org_id: getInitialOptions().org_id,
       tracking_session_id: getInitialOptions().tracking_session_id,
       release_commit: getInitialOptions().release_manifest_git_commit,
-      device_info: _$$l2(),
+      device_info: getGpuDeviceInfo(),
       num_people_in_file: x,
       datadog_rum_session_id: Tf.sessionId ? `http://go/dd/rum/session/${Tf.sessionId}` : void 0
     };

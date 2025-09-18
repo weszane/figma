@@ -5,7 +5,7 @@ import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Tv } from "../figma_app/311375";
 import { Jr } from "../figma_app/624361";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Kx, iy } from "../figma_app/342355";
 import { $w } from "../figma_app/935144";
 import { t2 } from "../figma_app/911720";
@@ -18,7 +18,7 @@ export function $$f3() {
     let {
       tlfGuid,
       pageGuid
-    } = wA((e, t) => {
+    } = useStrictDeepEqualSceneValue((e, t) => {
       if (t) {
         let r = e.get(t);
         if (r) return {

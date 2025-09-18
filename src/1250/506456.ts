@@ -7,9 +7,9 @@ import l from "classnames";
 import { trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { C as _$$C } from "../figma_app/974443";
 import { useLatestRef } from "../figma_app/922077";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { wK } from "../905/407352";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { i as _$$i } from "../figma_app/85949";
 import { J } from "../905/445197";
 import { UK } from "../figma_app/740163";
@@ -17,7 +17,7 @@ import { E as _$$E } from "../905/95280";
 import { Z } from "../905/104740";
 import { dh, $P } from "../figma_app/186343";
 import { Ht } from "../figma_app/701001";
-import { Fy } from "../figma_app/623300";
+import { getNodeStatus } from "../figma_app/623300";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
@@ -47,7 +47,7 @@ export function $$P2({
   let k = dh();
   let E = !wK();
   let I = trackFileEventWithStore();
-  let A = l7();
+  let A = useIsFullscreenOverview();
   let M = useRef(null);
   let P = Ht();
   let F = useSelector(e => e.versionHistory);
@@ -218,9 +218,9 @@ function D({
   let N = useMemo(() => x && h && S, [x, h, S]);
   let O = Jc(S);
   let R = useMemo(() => O?.data?.[e], [e, O?.data]);
-  let P = useMemo(() => k === _$$r.LOADING || "loading" === O.status, [k, O.status]);
+  let P = useMemo(() => k === APILoadingStatus.LOADING || "loading" === O.status, [k, O.status]);
   useEffect(() => {
-    R?.created_at && C(_$$r.SUCCESS);
+    R?.created_at && C(APILoadingStatus.SUCCESS);
   }, [C, R?.created_at]);
   let D = trackDefinedFileEventWithStore();
   let L = useLatestRef(S);
@@ -261,7 +261,7 @@ export function $$L1({
   let d = getSelectedView();
   let _ = dh();
   let u = useSelector(e => e.versionHistory);
-  return useCallback(r => $P(r, _, u, l, Fy(e, r) === DataLoadStatus.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
+  return useCallback(r => $P(r, _, u, l, getNodeStatus(e, r) === DataLoadStatus.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
 }
 export function $$F0({
   pagesList: e,
@@ -276,7 +276,7 @@ export function $$F0({
   let u = dh(n);
   let m = useSelector(e => e.versionHistory);
   return useCallback(async r => {
-    n && (await $P(r, u, m, d, Fy(e, r) === DataLoadStatus.LOADED, l, a, s, t, _));
+    n && (await $P(r, u, m, d, getNodeStatus(e, r) === DataLoadStatus.LOADED, l, a, s, t, _));
   }, [e, a, s, l, d, _, u, m, t, n]);
 }
 export const VS = $$F0;

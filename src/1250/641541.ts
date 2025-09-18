@@ -18,7 +18,7 @@ import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
 import { postUserFlag } from "../905/985254";
-import { hr } from "../905/352022";
+import { setupOptimistPlanLoader } from "../905/352022";
 import { vp, HE } from "../905/967587";
 import { V as _$$V } from "../1250/329133";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -44,7 +44,7 @@ export function $$G1() {
   let s = useSelector(e => e.plans);
   let l = useTeamPlanFeatures();
   if (useEffect(() => {
-    e(hr({
+    e(setupOptimistPlanLoader({
       loadedPlans: s
     }));
   }, []), !n || !o) return null;

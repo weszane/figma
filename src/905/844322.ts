@@ -8,7 +8,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { filePutAction, moveFileAction } from "../figma_app/78808";
-import { yJ as _$$yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { trackFileCopyEvent, trackMultipleFileEvent } from "../figma_app/314264";
 import { isBranch } from "../905/760074";
 import { f as _$$f } from "../905/509236";
@@ -187,7 +187,7 @@ let $$w0 = createOptimistThunk(async (e, t) => {
       file: n[t]
     }));
     let r = i?.meta?.team;
-    r && e.dispatch(_$$yJ({
+    r && e.dispatch(setTeamOptimistThunk({
       team: r,
       userInitiated: !1
     }));

@@ -1,6 +1,6 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../figma_app/59312";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { oh } from "../905/526509";
 import { sT } from "../figma_app/955650";
@@ -9,7 +9,7 @@ export function $$c2(e = {}) {
   let {
     isEnabledForViewers
   } = e;
-  let r = aV();
+  let r = useIsProgressBarHiddenOrLocked();
   let n = useIsCanvasEditDisabled();
   let o = N();
   return r || n && !isEnabledForViewers || o && !isEnabledForViewers;

@@ -14,10 +14,10 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { NY } from "../figma_app/646357";
-import { VP } from "../905/18797";
+import { isLoading } from "../905/18797";
 import { FZ } from "../figma_app/803787";
 import { c5 } from "../figma_app/645694";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 import { rp } from "../figma_app/703988";
 import { dD } from "../905/519113";
 import { RR } from "../905/514666";
@@ -321,10 +321,10 @@ export function $$ei0({
   }, [h]);
   let D = useSelector(FZ);
   let L = useSelector(c5);
-  let M = useSelector(dK);
+  let M = useSelector(selectSceneGraph);
   let j = wS(s);
   let U = 0 === s.length && E === ComponentPropType.INSTANCE_SWAP && x ? NY(x, M, D, L) : void 0;
-  let B = useSelector(e => VP(e.loadingState, _A(e.openFile?.key)));
+  let B = useSelector(e => isLoading(e.loadingState, _A(e.openFile?.key)));
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: e ? outerContainerBorderBottom : outerContainer,

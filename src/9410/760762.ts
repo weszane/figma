@@ -35,7 +35,7 @@ import { getResourceDataOrFallback } from "../905/723791";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
-import { E9 } from "../figma_app/297957";
+import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { h as _$$h } from "../905/864281";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
@@ -164,7 +164,7 @@ function ee(e) {
   });
   let l = selectCurrentFile();
   let c = _$$y(teamId, UpsellModalType.FILE_TRACKER_MODAL);
-  let u = E9();
+  let u = useStarterGlobalFileLimitsExperiment();
   let p = _$$h.useTrackingContext({
     trigger: UpsellModalType.FILE_TRACKER_MODAL
   });

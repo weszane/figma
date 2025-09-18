@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { D9 } from "../1250/182479";
 import { DG } from "../9410/60600";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { l7 } from "../figma_app/88239";
+import { useIsFullscreenOverview } from "../figma_app/88239";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { TrackedButton } from "../figma_app/831799";
@@ -22,7 +22,7 @@ import { xf } from "../3276/13008";
 import { getEditorTypeOrNull } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { nk } from "../figma_app/2023";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { m0 } from "../figma_app/546509";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
@@ -56,7 +56,7 @@ export function $$et0({
   isFileInWorkshop: i,
   appendedClassname: s
 }) {
-  let o = l7();
+  let o = useIsFullscreenOverview();
   let l = getEditorTypeOrNull();
   let f = getProductAccessTypeOrDefault(e.editorType);
   let {
@@ -73,7 +73,7 @@ export function $$et0({
   let en = _$$e();
   let es = !!e.org || hasTeamStatePaidAccess(e.team);
   let eo = e.isTryFile;
-  let el = aV();
+  let el = useIsProgressBarHiddenOrLocked();
   let ed = useDispatch();
   let ec = useOpenFileObjectWithSinatraType({
     useSinatraType: !0

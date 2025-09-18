@@ -79,7 +79,7 @@ import { z as _$$z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
 import { b as _$$b2 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
-import { T3, q0 } from "../figma_app/722362";
+import { usePlaygroundSceneGraph, SceneGraphContext } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
 import { KindEnum } from "../905/129884";
 import { O2 } from "../figma_app/164212";
@@ -99,7 +99,7 @@ import { figmaComponentFlyoutTextMaxCollapsedHeight } from "../figma_app/786175"
 import { A as _$$A } from "../2854/372209";
 import { A as _$$A2 } from "../1617/230645";
 import { A as _$$A3 } from "../1617/689324";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { q as _$$q3 } from "../905/524117";
 import { j as _$$j } from "../905/523935";
 import { M as _$$M2 } from "../905/771870";
@@ -368,7 +368,7 @@ function e4({
   shouldHideError: l,
   onSetShouldHideError: a
 }) {
-  let o = T3();
+  let o = usePlaygroundSceneGraph();
   let [d, u] = useState(!1);
   useEffect(() => {
     u(!1);
@@ -458,7 +458,7 @@ function e4({
         className: "component_flyout_body--skeletonBody--pINXr",
         opacity: 50
       })]
-    }), s && (e?.nodeData || _) && jsxs(q0.Provider, {
+    }), s && (e?.nodeData || _) && jsxs(SceneGraphContext.Provider, {
       value: o,
       children: [jsx("div", {
         className: "component_flyout_body--propsContainer--w8pmU",
@@ -555,7 +555,7 @@ function ts({
   });
   let p = useMemo(() => {
     let e = getAssetBackgroundColor(t.asset, null);
-    if (null != e) return _$$F.format(e);
+    if (null != e) return colorCSSManipulatorInstance.format(e);
   }, [t.asset]);
   let h = tr(t.hasChangesToReset, t.nodeData?.modeData ?? null);
   return jsxs("div", {

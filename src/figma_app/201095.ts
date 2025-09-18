@@ -6,7 +6,7 @@ import { isNullish } from "../figma_app/95419";
 import { Fullscreen } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { getI18nString } from "../905/303541";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { ZU, Wg } from "../figma_app/986347";
 import { Xo } from "../figma_app/687767";
 import { s1 } from "../figma_app/226737";
@@ -78,7 +78,7 @@ export function $$f0() {
   }, [u, g]);
 }
 function E(e) {
-  return wA((e, t) => t.reduce((t, r) => {
+  return useStrictDeepEqualSceneValue((e, t) => t.reduce((t, r) => {
     let n = e.get(r);
     n && (t[r] = n.fontSize);
     return t;

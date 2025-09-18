@@ -10,7 +10,7 @@ import { logWarning } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
 import { canCreateFileType, canCreateFileTypeAsync } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
-import { gN } from "../figma_app/976345";
+import { selectFolderView } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal } from "../905/156213";
 import { fileImporter } from "../905/642505";
@@ -115,7 +115,7 @@ let $$C6 = createOptimistThunk(async e => {
       cta: n ? {
         text: getI18nString("fullscreen.file_import.go_to_drafts"),
         action: () => {
-          e.dispatch(gN(C));
+          e.dispatch(selectFolderView(C));
         }
       } : void 0
     }));

@@ -9,7 +9,7 @@ import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
 import { v4 } from "../figma_app/655139";
 import { wJ } from "../figma_app/630951";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
 import { HX, ad, xQ } from "../figma_app/97042";
@@ -23,7 +23,7 @@ export function $$y1(e, t, r = new Set()) {
 export function $$b0() {
   let e = debugState.getState();
   let t = "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : null;
-  let r = eY();
+  let r = useSceneGraphSelector();
   let y = useAtomWithSubscription(openFileLibraryKeyAtom);
   let b = v4();
   let T = mapPlatformToFramework(b.id);

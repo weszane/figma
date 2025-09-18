@@ -1,87 +1,188 @@
-import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { useEffect } from "react";
-import { shallowEqual } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { trackEventAnalytics } from "../905/449184";
-import { trackFileEventWithStore } from "../figma_app/901889";
-import { h } from "../905/207101";
-import { reportError } from "../905/11";
-import { useCanAccessFullDevMode } from "../figma_app/473493";
-let n;
-let _ = setupRemovableAtomFamily(() => atom(!1), {
-  preserveValue: !1
-});
-let $$h1 = atom("");
-let $$m4 = atom("");
-var $$g3 = (e => (e.ALL = "ALL", e.RECENTLY_VIEWED = "RECENTLY_VIEWED", e.BUILD = "BUILD", e.COMPLETED = "COMPLETED", e))($$g3 || {});
-var $$f0 = (e => (e.RECENT = "RECENT", e.PAGE = "PAGE", e.ALPHABETICAL = "ALPHABETICAL", e))($$f0 || {});
-export function $$E2(e, t, r) {
-  let o = trackFileEventWithStore();
-  let l = useCanAccessFullDevMode();
-  h(() => {
-    n = null;
-  });
-  useEffect(() => {
-    if (0 !== e.length) try {
-      let i = new Set(e.map(e => e.pageId)).size;
-      let s = new Set(e.filter(e => e.userId).map(e => e.userId)).size;
-      let d = {
-        numNodes: e.length,
-        numNodesWithFallbackUser: e.filter(e => e.isFallbackForLegacyStatus).length,
-        numSectionsWithMissingUserInfo: e.filter(e => !e.userId && e.isSection).length,
-        numFramesWithMissingUserInfo: e.filter(e => !e.userId && !e.isSection).length,
-        numPages: i,
-        numUsers: s,
-        tab: t,
-        sortedBy: r,
-        type: l ? "full" : "lite"
-      };
-      shallowEqual(d, n) || (o("dev_mode.overview.stats", d, {
-        forwardToDatadog: !0
-      }), n = d);
-    } catch (e) {
-      reportError(_$$e.DEVELOPER_TOOLS, e);
-    }
-  }, [e, r, t, l, o]);
+import { useEffect } from 'react'
+import { shallowEqual } from 'react-redux'
+import { reportError } from '../905/11'
+import { ServiceCategories as _$$e } from '../905/165054'
+import { trackEventAnalytics } from '../905/449184'
+import { useSingleEffect } from '../905/791079'
+import { atom, useAtomValueAndSetter } from '../figma_app/27355'
+import { useCanAccessFullDevMode } from '../figma_app/473493'
+import { setupRemovableAtomFamily } from '../figma_app/615482'
+import { trackFileEventWithStore } from '../figma_app/901889'
+
+/**
+ * Atom for removable state management.
+ * Original: _
+ */
+export const removableAtomFamily = setupRemovableAtomFamily(() => atom(false), {
+  preserveValue: false,
+})
+
+/**
+ * Atom for string state.
+ * Original: $$h1
+ */
+export const atomH1 = atom('')
+
+/**
+ * Atom for string state.
+ * Original: $$m4
+ */
+export const atomM4 = atom('')
+
+/**
+ * Enum for overview tabs.
+ * Original: $$g3
+ */
+export enum OverviewTab {
+  ALL = 'ALL',
+  RECENTLY_VIEWED = 'RECENTLY_VIEWED',
+  BUILD = 'BUILD',
+  COMPLETED = 'COMPLETED',
 }
-export function $$y5(e, t, r) {
-  let [n, a] = useAtomValueAndSetter(_);
-  let c = trackFileEventWithStore();
+
+/**
+ * Enum for sorting options.
+ * Original: $$f0
+ */
+export enum SortBy {
+  RECENT = 'RECENT',
+  PAGE = 'PAGE',
+  ALPHABETICAL = 'ALPHABETICAL',
+}
+
+/**
+ * Tracks overview statistics for dev mode.
+ * Original: $$E2
+ * @param nodes - Array of node objects
+ * @param tab - Current tab
+ * @param sortedBy - Sorting method
+ */
+export function trackOverviewStats(
+  nodes: Array<any>,
+  tab: OverviewTab,
+  sortedBy: SortBy,
+): void {
+  let lastStats: any = null
+  const trackFileEvent = trackFileEventWithStore()
+  const canAccessFullDevMode = useCanAccessFullDevMode()
+
+  useSingleEffect(() => {
+    lastStats = null
+  })
+
   useEffect(() => {
-    if (!n) try {
-      if (e.length > 0 && t && !t.loading) {
-        if (t.hasError || !t.usersById) {
-          a(!0);
-          trackEventAnalytics("dev_mode.overview.avatars.error", {}, {
-            forwardToDatadog: !0
-          });
-        } else if (Object.keys(t.usersById).length === e.length) {
-          a(!0);
-          let n = r.filter(e => !e.userId);
-          let i = r.filter(e => !e.userId && e.isFallbackForLegacyStatus);
-          let s = r.filter(e => !e.userId && !e.isFallbackForLegacyStatus && e.hasBeenEditedSinceLastStatusChange);
-          let o = Object.entries(t.usersById).filter(([e, t]) => e && !t);
-          c("dev_mode.overview.avatars.loaded", {
-            numUsersRequested: e.length,
-            numUsersNotFound: o.length,
-            numNodesWithMissingUserInfo: n.length,
-            numNodesWithMissingFallbackUserInfo: i.length,
-            numNodesEditedWithMissingUserInfo: s.length
-          }, {
-            forwardToDatadog: !0
-          });
+    if (nodes.length === 0)
+      return
+
+    try {
+      const numPages = new Set(nodes.map(node => node.pageId)).size
+      const numUsers = new Set(nodes.filter(node => node.userId).map(node => node.userId)).size
+      const stats = {
+        numNodes: nodes.length,
+        numNodesWithFallbackUser: nodes.filter(node => node.isFallbackForLegacyStatus).length,
+        numSectionsWithMissingUserInfo: nodes.filter(node => !node.userId && node.isSection).length,
+        numFramesWithMissingUserInfo: nodes.filter(node => !node.userId && !node.isSection).length,
+        numPages,
+        numUsers,
+        tab,
+        sortedBy,
+        type: canAccessFullDevMode ? 'full' : 'lite',
+      }
+      if (!shallowEqual(stats, lastStats)) {
+        trackFileEvent('dev_mode.overview.stats', stats, {
+          forwardToDatadog: true,
+        })
+        lastStats = stats
+      }
+    }
+    catch (error) {
+      reportError(_$$e.DEVELOPER_TOOLS, error)
+    }
+  }, [nodes, sortedBy, tab, canAccessFullDevMode, trackFileEvent])
+}
+
+/**
+ * Tracks avatar loading and error events for dev mode overview.
+ * Original: $$y5
+ * @param usersRequested - Array of requested users
+ * @param usersInfo - Users info object
+ * @param nodes - Array of node objects
+ */
+export function trackOverviewAvatars(
+  usersRequested: Array<any>,
+  usersInfo: any,
+  nodes: Array<any>,
+): void {
+  const [hasError, setHasError] = useAtomValueAndSetter(removableAtomFamily)
+  const trackFileEvent = trackFileEventWithStore()
+
+  useEffect(() => {
+    if (hasError)
+      return
+
+    try {
+      if (
+        usersRequested.length > 0
+        && usersInfo
+        && !usersInfo.loading
+      ) {
+        if (usersInfo.hasError || !usersInfo.usersById) {
+          setHasError(true)
+          trackEventAnalytics('dev_mode.overview.avatars.error', {}, {
+            forwardToDatadog: true,
+          })
+        }
+        else if (
+          Object.keys(usersInfo.usersById).length === usersRequested.length
+        ) {
+          setHasError(true)
+          const nodesMissingUser = nodes.filter(node => !node.userId)
+          const nodesMissingFallback = nodes.filter(
+            node => !node.userId && node.isFallbackForLegacyStatus,
+          )
+          const nodesEditedMissingUser = nodes.filter(
+            node =>
+              !node.userId
+              && !node.isFallbackForLegacyStatus
+              && node.hasBeenEditedSinceLastStatusChange,
+          )
+          const usersNotFound = Object.entries(usersInfo.usersById).filter(
+            ([id, user]) => id && !user,
+          )
+          trackFileEvent(
+            'dev_mode.overview.avatars.loaded',
+            {
+              numUsersRequested: usersRequested.length,
+              numUsersNotFound: usersNotFound.length,
+              numNodesWithMissingUserInfo: nodesMissingUser.length,
+              numNodesWithMissingFallbackUserInfo: nodesMissingFallback.length,
+              numNodesEditedWithMissingUserInfo: nodesEditedMissingUser.length,
+            },
+            {
+              forwardToDatadog: true,
+            },
+          )
         }
       }
-    } catch (e) {
-      a(!0);
-      reportError(_$$e.DEVELOPER_TOOLS, e);
     }
-  }, [n, r, a, c, e.length, t]);
+    catch (error) {
+      setHasError(true)
+      reportError(_$$e.DEVELOPER_TOOLS, error)
+    }
+  }, [
+    hasError,
+    nodes,
+    setHasError,
+    trackFileEvent,
+    usersRequested.length,
+    usersInfo,
+  ])
 }
-export const _6 = $$f0;
-export const _o = $$h1;
-export const c7 = $$E2;
-export const oz = $$g3;
-export const wz = $$m4;
-export const zz = $$y5;
+
+// Export refactored variables with original names for compatibility
+export const _6 = SortBy
+export const _o = atomH1
+export const c7 = trackOverviewStats
+export const oz = OverviewTab
+export const wz = atomM4
+export const zz = trackOverviewAvatars

@@ -21,7 +21,7 @@ import { UpgradeAction } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { N_, Oq } from "../905/332483";
+import { collaboratorSet, designSet } from "../905/332483";
 import { K as _$$K } from "../905/3140";
 import { CurrencyFormatter, createUserCurrencyFormatter } from "../figma_app/514043";
 import { getFilteredTeamMemberIds } from "../figma_app/598018";
@@ -38,7 +38,7 @@ import { lk } from "../figma_app/109538";
 import { B as _$$B2 } from "../905/380801";
 import { B as _$$B3 } from "../905/261906";
 import { b as _$$b } from "../905/723768";
-import { AG } from "../figma_app/217457";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { FPlanNameType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
 import { G8, y3, Q$, gt } from "../c5e2cae0/859355";
@@ -117,7 +117,7 @@ function W({
     unit: IX.MONTH
   };
   let a = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: t
   });
   let [r] = handleSuspenseRetainRelease(a);
@@ -125,7 +125,7 @@ function W({
   let i = new CurrencyFormatter(e);
   return jsx("div", {
     className: _$$s2.flex.flexColumn.$,
-    children: N_.sort(AG).map(e => isNullish(r.data[e]) ? null : jsxs("div", {
+    children: collaboratorSet.sort(compareProductAccessTypes).map(e => isNullish(r.data[e]) ? null : jsxs("div", {
       className: _$$s2.flex.justifyBetween.$,
       children: [jsxs("div", {
         className: _$$s2.flex.gap4.itemsCenter.$,
@@ -243,7 +243,7 @@ function ea(e) {
   }, [e.teams]);
   let A = G8;
   let P = createUserCurrencyFormatter();
-  let R = Oq.dict(e => ({
+  let R = designSet.dict(e => ({
     currency: P.currency,
     billableProductKey: e,
     billableProductVariantKey: null,

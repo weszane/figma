@@ -16,7 +16,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { XM } from "../905/486443";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { m as _$$m } from "../905/99004";
 import { x as _$$x } from "../905/106997";
 import { C as _$$C } from "../figma_app/859828";
@@ -37,7 +37,7 @@ import { permissionScopeHandler } from "../905/189185";
 import F from "classnames";
 import { ez as _$$ez, U9, SK, wp, GI, IZ, qL } from "../905/125333";
 import { LH } from "../figma_app/384673";
-import { F as _$$F2 } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { KindEnum } from "../905/129884";
 import { Yt, Uo } from "../figma_app/955650";
 import { zG, C2, P as _$$P } from "../figma_app/47958";
@@ -416,8 +416,8 @@ let ef = memo(function ({
   let [K, W] = useState();
   let Z = A ? k ? "whileDragShouldCancel" : "whileDrag" : "pencil" === e && i ? "hiddenPencil" : C ? "whileTap" : h && i ? "selectedSubmenuTool" : !j && _ ? "whileHovering" : "initial";
   if ("connector" === e && !A) {
-    let e = rgbToHsl(_$$F2.parse(t));
-    e.l > .9 && (t = _$$F2.formatHSLA({
+    let e = rgbToHsl(colorCSSManipulatorInstance.parse(t));
+    e.l > .9 && (t = colorCSSManipulatorInstance.formatHSLA({
       h: e.h,
       s: e.s,
       l: .9,
@@ -645,7 +645,7 @@ let ew = memo(function ({
   let c = Jc.get(e);
   let u = c === Yt();
   let p = useAtomWithSubscription(_$$ez);
-  let h = _$$F2.format(p);
+  let h = colorCSSManipulatorInstance.format(p);
   let m = useAtomWithSubscription(U9);
   let f = Qd().get(c);
   let _ = useCallback(() => {
@@ -782,7 +782,7 @@ function eO({
   let l = Uo();
   let d = useAtomWithSubscription(SK).connectorToolLineStyle;
   let c = useAtomWithSubscription(wp);
-  let u = _$$F2.format(c);
+  let u = colorCSSManipulatorInstance.format(c);
   let p = useCallback(() => {
     t(eE[d].tool);
   }, [d, t]);
@@ -1222,7 +1222,7 @@ function ts({
   }, [a]);
   let f = useAtomWithSubscription(Qv);
   let _ = !!f;
-  let x = i ? _$$F2.format(i) : null;
+  let x = i ? colorCSSManipulatorInstance.format(i) : null;
   return jsxs(Fragment, {
     children: [jsx(tc, {
       numSwatchesLoading: f
@@ -1233,7 +1233,7 @@ function ts({
       recordingKey: generateRecordingKey(d, "colorSelect"),
       "data-testid": c["data-testid"],
       options: colors.map((e, t) => {
-        let i = _$$F2.format(e);
+        let i = colorCSSManipulatorInstance.format(e);
         let r = isCustomPalette ? AF(t, paletteType) : V_(e, paletteType);
         return {
           key: `${i}-${t}`,
@@ -1516,7 +1516,7 @@ function tA() {
       }
       _$$F3.trackFromFullscreen("Drawing Tool Change Color", {
         source: "default",
-        color: _$$F2.format(r),
+        color: colorCSSManipulatorInstance.format(r),
         tool: e ? DesignGraphElements[e] : ""
       });
     }, [t, i, n, a, e]);
@@ -2275,7 +2275,7 @@ function tP() {
 }
 function tU() {
   let e = tT();
-  return _$$F2.format(e);
+  return colorCSSManipulatorInstance.format(e);
 }
 function tF() {
   let e = tU();
@@ -2870,7 +2870,7 @@ function tH() {
 }
 function tB() {
   let e = tC();
-  return _$$F2.format(e);
+  return colorCSSManipulatorInstance.format(e);
 }
 function tV() {
   let e = tB();
@@ -4118,7 +4118,7 @@ function iD({
   let m = function () {
     let e = useAtomWithSubscription(qL);
     let t = zS(e, "sticky");
-    let i = _$$F2.format(e);
+    let i = colorCSSManipulatorInstance.format(e);
     return t ? MV(t, i) : "rgba(230, 230, 230, 1)";
   }();
   let f = useAtomWithSubscription(Q);
@@ -4293,7 +4293,7 @@ function iF({
 function iH({
   children: e
 }) {
-  return aV() ? null : jsx(TrackingProvider, {
+  return useIsProgressBarHiddenOrLocked() ? null : jsx(TrackingProvider, {
     name: RZ,
     children: jsx(_$$x, {
       children: jsx(_$$m, {

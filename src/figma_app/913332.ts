@@ -6,7 +6,7 @@ import { c as _$$c } from "../905/425573";
 import { SeverityLevel } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { renderI18nText } from "../905/303541";
-import { YJ } from "../figma_app/297957";
+import { useOneClickAskToEditExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
 import { kU, Kw, RJ } from "../figma_app/869006";
 import { G } from "../figma_app/35473";
@@ -24,7 +24,7 @@ function $$f(e) {
     file: e.file,
     viewOnly: !0
   });
-  let g = YJ(!!(e.isDesignEditor && p?.type === Kw.PLAN_REQUEST_UPGRADE));
+  let g = useOneClickAskToEditExperiment(!!(e.isDesignEditor && p?.type === Kw.PLAN_REQUEST_UPGRADE));
   if (!t) return null;
   let f = renderI18nText("fullscreen.toolbar_banner.you_can_only_view_and_comment_on_this_file");
   let E = _$$_;

@@ -1,12 +1,12 @@
-import { sha1Hex } from "../905/125019";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { ET, qW } from "../905/623179";
-import { reportError } from "../905/11";
-import { isFeedPostComposer } from "../905/380385";
-import { CN } from "../905/966582";
-import { J } from "../905/375499";
-import { l as _$$l } from "../905/348437";
-import { EC } from "../figma_app/291892";
+import { reportError } from '../905/11';
+import { sha1Hex } from '../905/125019';
+import { ServiceCategories } from '../905/165054';
+import { fileCommentAttachmentAPI } from '../905/348437';
+import { feedCommentAttachmentAPI } from '../905/375499';
+import { isFeedPostComposer } from '../905/380385';
+import { UploadError, uploadToPresignedPost } from '../905/623179';
+import { DEFAULT_UPLOAD_CONFIG } from '../905/966582';
+import { imageProcessor } from '../figma_app/291892';
 export let $$p5 = 5;
 export async function $$m1(e, t, i, p, m, h, g, f, A) {
   let y = await fetch(m).then(e => e.arrayBuffer()).then(e => new Uint8Array(e));
@@ -16,40 +16,44 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
     dimensionData
   } = await new Promise((e, t) => {
     let i = new Image();
-    i.crossOrigin = "anonymous";
+    i.crossOrigin = 'anonymous';
     i.onerror = e => t(e.message);
     i.onload = () => e(i);
     i.src = m;
     setTimeout(() => {
-      t("Image load timeout during thumbnail generation");
+      t('Image load timeout during thumbnail generation');
     }, 5e3);
   }).then(e => {
-    if ("image/gif" === h || e.height <= 900 && e.width <= 900) return Promise.resolve({
-      dimensionData: {
-        dimensions: {
-          height: e.height,
-          width: e.width
-        },
-        thumbnail_dimensions: {
-          height: e.height,
-          width: e.width
+    if (h === 'image/gif' || e.height <= 900 && e.width <= 900) {
+      return Promise.resolve({
+        dimensionData: {
+          dimensions: {
+            height: e.height,
+            width: e.width
+          },
+          thumbnail_dimensions: {
+            height: e.height,
+            width: e.width
+          }
         }
-      }
-    });
-    let t = document.createElement("canvas");
-    let i = t.getContext("2d");
-    if (!i) return Promise.resolve({
-      dimensionData: {
-        dimensions: {
-          height: e.height,
-          width: e.width
-        },
-        thumbnail_dimensions: {
-          height: e.height,
-          width: e.width
+      });
+    }
+    let t = document.createElement('canvas');
+    let i = t.getContext('2d');
+    if (!i) {
+      return Promise.resolve({
+        dimensionData: {
+          dimensions: {
+            height: e.height,
+            width: e.width
+          },
+          thumbnail_dimensions: {
+            height: e.height,
+            width: e.width
+          }
         }
-      }
-    });
+      });
+    }
     let {
       width,
       height
@@ -70,7 +74,7 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
     let s = new Uint8Array(i.getImageData(0, 0, t.width, t.height).data);
     return {
       dimensionData: a,
-      thumbnailByteArray: EC.encodeInPlace(t.width, t.height, s, "image/jpeg" === h, 60, !1)
+      thumbnailByteArray: imageProcessor.encodeInPlace(t.width, t.height, s, h === 'image/jpeg', 60, !1)
     };
   });
   let E = {
@@ -78,11 +82,11 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
     file_name: A
   };
   let x = sha1Hex(thumbnailByteArray ?? y);
-  let S = isFeedPostComposer(e) ? J.post(h, b, x, f, E) : _$$l.post(g, h, b, x, f, E);
-  let w = isFeedPostComposer(e) ? _$$e.WAYFINDING : _$$e.FEEDBACK;
+  let S = isFeedPostComposer(e) ? feedCommentAttachmentAPI.post(h, b, x, f, E) : fileCommentAttachmentAPI.post(g, h, b, x, f, E);
+  let w = isFeedPostComposer(e) ? ServiceCategories.WAYFINDING : ServiceCategories.FEEDBACK;
   return S.then(n => {
-    if (200 !== n.status) {
-      p(CN);
+    if (n.status !== 200) {
+      p(DEFAULT_UPLOAD_CONFIG);
       return;
     }
     let r = n.data.meta.uuid;
@@ -97,8 +101,8 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
       isUploading: !0
     };
     t(d);
-    let c = isFeedPostComposer(e) ? "uploadImageFeedCommentAttachment" : "uploadImageFileCommentAttachment";
-    let u = Promise.all([ET(w, `${c}.image`, n.data.meta.image_presigned_post.upload_url, n.data.meta.image_presigned_post.fields, y, h), ET(w, `${c}.thumbnail`, n.data.meta.thumbnail_presigned_post.upload_url, n.data.meta.thumbnail_presigned_post.fields, thumbnailByteArray ?? y, h)]);
+    let c = isFeedPostComposer(e) ? 'uploadImageFeedCommentAttachment' : 'uploadImageFileCommentAttachment';
+    let u = Promise.all([uploadToPresignedPost(w, `${c}.image`, n.data.meta.image_presigned_post.upload_url, n.data.meta.image_presigned_post.fields, y, h), uploadToPresignedPost(w, `${c}.thumbnail`, n.data.meta.thumbnail_presigned_post.upload_url, n.data.meta.thumbnail_presigned_post.fields, thumbnailByteArray ?? y, h)]);
     i(e => ({
       ...e,
       [r]: u
@@ -108,11 +112,11 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
       isUploading: !1
     })).catch(e => {
       reportError(w, e);
-      p(CN, d);
+      p(DEFAULT_UPLOAD_CONFIG, d);
     });
   }).catch(e => {
     reportError(w, e);
-    p(e instanceof qW ? e : CN);
+    p(e instanceof UploadError ? e : DEFAULT_UPLOAD_CONFIG);
   });
 }
 export function $$h4(e, t, i) {
@@ -122,10 +126,10 @@ export function $$h4(e, t, i) {
     fileKey: t,
     createdAt: e.uploadedAt,
     deletedAt: null,
-    type: e.mediaType.split("/")[0],
-    imageSha1: "",
-    thumbnailSha1: "",
-    locality: ""
+    type: e.mediaType.split('/')[0],
+    imageSha1: '',
+    thumbnailSha1: '',
+    locality: ''
   };
 }
 export function $$g3(e, t, i) {

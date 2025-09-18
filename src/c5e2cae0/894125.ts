@@ -5,7 +5,7 @@ import { analyticsEventManager } from "../905/449184";
 import { clearPaymentFlowData } from "../figma_app/169182";
 import { On } from "../9420/975542";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
@@ -118,7 +118,7 @@ export function $$b1(e) {
     "data-testid": "cart-breadcrumb-menu-pro",
     children: [jsx(j, {
       onClick: () => {
-        (clearPaymentFlowData(), e.isCampfireCart ? OI(_) : Mt(_), isCreateOrUpgrade(teamFlowType) && null === teamId && Al(S), S) ? teamId && (!selectedView.previousView || "fullscreen" !== selectedView.previousView.view) ? _(_l({
+        (clearPaymentFlowData(), e.isCampfireCart ? OI(_) : Mt(_), isCreateOrUpgrade(teamFlowType) && null === teamId && Al(S), S) ? teamId && (!selectedView.previousView || "fullscreen" !== selectedView.previousView.view) ? _(switchAccountAndNavigate({
           workspace: {
             userId: S,
             teamId,

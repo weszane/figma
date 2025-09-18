@@ -31,7 +31,7 @@ import { W as _$$W2 } from "../905/442612";
 import { i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 import { i as _$$i } from "../905/46262";
-import { PE } from "../905/15667";
+import { UISection } from "../905/15667";
 var N = (e => (e[e.TEMPLATE_TO_DRAFTS = 0] = "TEMPLATE_TO_DRAFTS", e[e.MOVING_FROM_MULTIPLE_FOLDERS_FROM_TEAM = 1] = "MOVING_FROM_MULTIPLE_FOLDERS_FROM_TEAM", e[e.MOVING_ACROSS_TEAMS = 2] = "MOVING_ACROSS_TEAMS", e[e.MOVING_FROM_MULTIPLE_ORPHANED_ORG_FOLDERS = 3] = "MOVING_FROM_MULTIPLE_ORPHANED_ORG_FOLDERS", e[e.MOVING_FROM_ORPHANED_ORG_FOLDER = 4] = "MOVING_FROM_ORPHANED_ORG_FOLDER", e[e.MOVING_FROM_MULTIPLE_FOLDERS = 5] = "MOVING_FROM_MULTIPLE_FOLDERS", e[e.MOVING_FROM_FOLDER = 6] = "MOVING_FROM_FOLDER", e))(N || {});
 let P = registerModal(function (e) {
   let {
@@ -121,7 +121,7 @@ let V = (e, t, i, n, r) => {
     Y9({
       licenseType: e.draftsMoveData.licenseType,
       dispatch: t.dispatch,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       upgradeReason: _$$i.RESOURCE_MOVED_FROM_DRAFTS,
       upgradePathway: o,
       plan: e.draftsMoveData.destinationPlan ?? null,
@@ -169,7 +169,7 @@ let $$z = async (e, t, i, n, r, a) => {
     Y9({
       licenseType: e.draftsMoveData.licenseType,
       dispatch: t.dispatch,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       upgradeReason: _$$i.RESOURCE_MOVED_FROM_DRAFTS,
       upgradePathway: o,
       plan: e.draftsMoveData.destinationPlan ?? null,
@@ -385,7 +385,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     Y9({
       licenseType: t.draftsMoveData?.licenseType,
       dispatch: e.dispatch,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       upgradeReason: _$$i.RESOURCE_MOVED_FROM_DRAFTS,
       upgradePathway: J.ADMIN_AUTO_PATHWAY,
       plan: t.draftsMoveData?.destinationPlan ?? null,
@@ -423,7 +423,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     fm({
       licenseType: t.draftsMoveData?.licenseType,
       dispatch: e.dispatch,
-      entryPoint: PE.FileMoveUpsell,
+      entryPoint: UISection.FileMoveUpsell,
       plan: t.draftsMoveData?.destinationPlan ?? null,
       planUser: t.draftsMoveData?.destinationPlanUser ?? null,
       fileKey: n,

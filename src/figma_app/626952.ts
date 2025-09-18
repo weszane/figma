@@ -5,14 +5,14 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 import { Yg, OE, Yi, k4, wd, ZH, aO, m5 } from "../figma_app/164212";
 import { s as _$$s } from "../figma_app/335489";
 import { C1 } from "../figma_app/505098";
 import { vf, Jm } from "../figma_app/583247";
 export function $$m1(e, t, r) {
   let a = useMemo(vf, []);
-  let o = useSelector(dK);
+  let o = useSelector(selectSceneGraph);
   let d = useSelector(C1);
   let p = Yg(e, o);
   let m = useSelector(t => a(t, e));
@@ -64,7 +64,7 @@ export function $$g2(e, t, r, i) {
   }), [s, o, d, c, a, u]);
 }
 export function $$f0(e, t) {
-  let r = useSelector(dK);
+  let r = useSelector(selectSceneGraph);
   if (t !== OE.DEFINITION) return Yi(e, r) || k4(e, r) || "";
   {
     let t = wd(e, r);

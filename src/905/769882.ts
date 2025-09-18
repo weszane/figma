@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { ColorSpaceEnum, ColorProfileEnum } from "../figma_app/763686";
 import { FEditorType } from "../figma_app/53721";
-import { tK, Av } from "../figma_app/622881";
+import { isColorSpaceStatusSupported, getColorSpaceSupportStatus } from "../figma_app/622881";
 import { jK } from "../figma_app/829197";
 import { M } from "../905/366117";
 let d = ({
@@ -9,11 +9,11 @@ let d = ({
   userColorProfile: t,
   editorType: i
 }) => {
-  if (i === FEditorType.Whiteboard); else if (t === M.DISPLAY_P3 && tK(e)) return ColorSpaceEnum.DISPLAY_P3;
+  if (i === FEditorType.Whiteboard) ;else if (t === M.DISPLAY_P3 && isColorSpaceStatusSupported(e)) return ColorSpaceEnum.DISPLAY_P3;
   return ColorSpaceEnum.SRGB;
 };
 export function $$c0(e) {
-  let t = Av();
+  let t = getColorSpaceSupportStatus();
   let i = jK();
   let l = useSelector(e => e.selectedView?.editorType);
   switch (e) {

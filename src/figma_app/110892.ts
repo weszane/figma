@@ -7,9 +7,9 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { f4 } from "../figma_app/722362";
+import { useOnSelectionChange } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { d as _$$d } from "../figma_app/444297";
 import { A } from "../905/556276";
 import { fx, PF } from "../figma_app/657972";
@@ -20,9 +20,9 @@ export function $$y0() {
   let y = selectCurrentFile();
   let b = useSelector(e => e.fileVersion);
   let T = _$$d();
-  let I = Fk(e => e.getDirectlySelectedNodes().some(e => "SYMBOL" === e.type));
+  let I = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().some(e => "SYMBOL" === e.type));
   let S = A();
-  f4(() => {
+  useOnSelectionChange(() => {
     t(!1);
   });
   let v = useSelector(e => e.mirror.appModel.activeUserAction);

@@ -31,7 +31,7 @@ import { ZGX } from "../figma_app/27776";
 import { selectViewAction } from "../905/929976";
 import { isVsCodeEnvironment } from "../905/858738";
 import { getSelectedView } from "../figma_app/386952";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { P as _$$P } from "../905/647955";
@@ -404,7 +404,7 @@ function et({
     key,
     version: content_hash
   }), [key, content_hash]);
-  let S = Fk((e, t) => e.getStyleNodeByRef(t)?.guid, E);
+  let S = useDeepEqualSceneValue((e, t) => e.getStyleNodeByRef(t)?.guid, E);
   let w = useCallback(e => {
     if (e.stopPropagation(), m?.current && t && S && ref?.current) {
       if (y) {

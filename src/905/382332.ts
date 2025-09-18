@@ -11,9 +11,9 @@ import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Yl, j4, W3 } from "../905/232641";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
-import { KH } from "../figma_app/722362";
+import { useSceneGraphSelection } from "../figma_app/722362";
 import { vE, W as _$$W, UH, Lk } from "../figma_app/156285";
 import { h as _$$h } from "../905/207101";
 import { UpgradeAction } from "../905/370443";
@@ -166,7 +166,7 @@ function X(e) {
     onBrushClick,
     selected
   } = e;
-  let s = KH();
+  let s = useSceneGraphSelection();
   let o = useAtomWithSubscription(vE);
   let l = _$$W(brush.guid);
   return jsxs("div", {
@@ -263,7 +263,7 @@ function ee(e) {
     });
   }, [g, x, I, selectedBrush, S]);
   let [C, T] = useState(null);
-  let k = "dark" === DP();
+  let k = "dark" === getVisibleTheme();
   let R = useCallback(e => jsx(X, {
     brush: e,
     isRenaming: e.guid === C,
@@ -353,7 +353,7 @@ export function $$et0(e) {
   let u = useMemo(() => brushList.filter(e => !e.isSoftDeleted || e.guid === sessionLocalIDToString(c)), [brushList, c]);
   let g = useRef(null);
   let f = !function () {
-    let e = KH();
+    let e = useSceneGraphSelection();
     return useMemo(() => 0 === Object.keys(e).length, [e]);
   }();
   let A = useMemo(() => u.find(e => e.guid === sessionLocalIDToString(c)) ?? Lk, [u, c]);
@@ -404,7 +404,7 @@ let ei = forwardRef((e, t) => {
   let {
     brush
   } = e;
-  let r = "dark" === DP();
+  let r = "dark" === getVisibleTheme();
   let o = _$$W(brush.guid);
   return jsxs(Fragment, {
     children: [getFeatureFlags().ce_il_scatter_onboarding && e.onboardingKey && jsx(R, {}), jsx("div", {

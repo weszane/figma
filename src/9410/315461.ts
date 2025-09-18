@@ -4,12 +4,12 @@ import { AnimationTriggerType } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
 import { isInvalidValue } from "../905/216495";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { AF } from "../figma_app/889655";
+import { selectSingleSelectedNode } from "../figma_app/889655";
 import { Jb } from "../figma_app/224338";
 function u() {
   let e = useCurrentFileKey() ?? "";
   let t = Jb() ?? "";
-  let i = useSelector(AF);
+  let i = useSelector(selectSingleSelectedNode);
   return {
     fileKey: e,
     slideId: t,

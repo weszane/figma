@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton, withTrackedClick } from "../figma_app/831799";
 import { Yk } from "../figma_app/644079";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { Jn } from "../905/927294";
@@ -248,7 +248,7 @@ export function $$D5(e) {
   let r = P7(_$$gm.arrow);
   let a = e.width || r.defaultModalWidth;
   let s = e.backgroundColor;
-  let o = "dark" === DP();
+  let o = "dark" === getVisibleTheme();
   let l = "light" === e.background;
   let [d, c] = useState(0);
   let p = useCallback(e => {

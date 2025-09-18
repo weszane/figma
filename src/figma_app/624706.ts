@@ -47,7 +47,7 @@ import { isTryWhiteboardFile } from "../figma_app/976749";
 import { hx } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { selectCurrentFile } from "../figma_app/516028";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { UserWithTeams } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -2710,13 +2710,13 @@ export function $$t60(e) {
     let s = !useSelector(e => !!(t && e.figFileDuplicatedFromHubFile[t.key]));
     let o = useSubscription(UserWithTeams, {});
     let l = function () {
-      let e = _$$f("dismissed_move_drafts_nudge");
-      let t = _$$f("ran_move_drafts_nudge_v2_num_3");
+      let e = selectUserFlag("dismissed_move_drafts_nudge");
+      let t = selectUserFlag("ran_move_drafts_nudge_v2_num_3");
       return !!e && !!t && Date.now() - t.updatedAt.getTime() > 864e5;
     }();
     let d = function (e) {
       let t = "collective_upsell_first_file_created";
-      let r = useRef(_$$f(t));
+      let r = useRef(selectUserFlag(t));
       let n = useDispatch();
       _$$h(() => {
         !r.current && e && n(postUserFlag({
@@ -2738,7 +2738,7 @@ export function $$t60(e) {
     let g = !p.some(e => e.team?.subscription && e.team.canEdit);
     return _ && d && l && (u || h && m) && s && g && m && !!e.user && _getConfig().get("isVariant", !1);
   }();
-  let _ = !!_$$f("collective_upsell_first_file_created");
+  let _ = !!selectUserFlag("collective_upsell_first_file_created");
   let h = u && _;
   let m = Xr(aG);
   let g = isTryWhiteboardFile();

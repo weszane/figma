@@ -10,7 +10,7 @@ import { selectViewAction } from "../905/929976";
 import { popModalStack, hideModal } from "../905/156213";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
-import { GH, aF } from "../905/18797";
+import { isSuccess, isFailure } from "../905/18797";
 import { e0 } from "../905/696396";
 import { registerLegacyModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
@@ -1500,10 +1500,10 @@ let w = class e extends Component {
     };
   }
   componentDidUpdate() {
-    this.state.loadingKey && (GH(this.props.loadingState, this.state.loadingKey) ? this.setState({
+    this.state.loadingKey && (isSuccess(this.props.loadingState, this.state.loadingKey) ? this.setState({
       step: 1,
       loadingKey: void 0
-    }) : aF(this.props.loadingState, this.state.loadingKey) && this.setState({
+    }) : isFailure(this.props.loadingState, this.state.loadingKey) && this.setState({
       loadingKey: void 0
     }));
   }

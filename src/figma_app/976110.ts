@@ -7,8 +7,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { d as _$$d, s as _$$s } from "../figma_app/429226";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, isInvalidValue, valueOrFallback, isValidValue } from "../905/216495";
-import { eY } from "../figma_app/722362";
-import { Xt } from "../figma_app/889655";
+import { useSceneGraphSelector } from "../figma_app/722362";
+import { selectSceneGraphSelection } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J, j } from "../905/980942";
 function g(e) {
@@ -59,11 +59,11 @@ function f(e, t) {
 }
 export function $$E5() {
   let e = useSelector($$C1);
-  return f(useSelector(Xt), e);
+  return f(useSelector(selectSceneGraphSelection), e);
 }
 export function $$y4() {
   let e = useSelector($$w6);
-  return f(useSelector(Xt), e);
+  return f(useSelector(selectSceneGraphSelection), e);
 }
 export function $$b3() {
   let e = useSelector($$C1);
@@ -102,7 +102,7 @@ export function $$T0(e, t) {
   let b = (0 === f.length ? [] : f[0].actions || []).map(e => ({
     ...e
   }));
-  let T = eY();
+  let T = useSceneGraphSelector();
   if (!E) for (var v = 0; v < f.length; v++) {
     let e = f[v].actions || [];
     for (var R = 0; R < e.length; R++) {

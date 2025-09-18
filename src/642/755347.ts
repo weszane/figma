@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yc, yQ } from "../figma_app/930914";
 import { L as _$$L } from "../figma_app/884735";
 import { Tn, On } from "../figma_app/323320";
@@ -61,7 +61,7 @@ function K(e) {
     visibilityIsBoundToComponentProp
   } = selectWithShallowEqual(e => ({
     isDefReferencedBySelection: !!t(e, RR.VISIBLE),
-    visibilityIsBoundToComponentProp: B(e, Sh(e), RR.VISIBLE)
+    visibilityIsBoundToComponentProp: B(e, selectSceneGraphSelectionKeys(e), RR.VISIBLE)
   }));
   let {
     consumedVariable
@@ -255,7 +255,7 @@ export function $$ey4() {
     selectedGUIDs
   } = selectWithShallowEqual(e => ({
     isDefReferencedBySelection: !!i(e, RR.VISIBLE),
-    selectedGUIDs: Sh(e)
+    selectedGUIDs: selectSceneGraphSelectionKeys(e)
   }));
   let c = !Yc(RR.VISIBLE, selectedGUIDs) || isDefReferencedBySelection;
   let [u] = lJ("opacity");

@@ -9,7 +9,7 @@ import { eN } from "../figma_app/401061";
 import { getUnitForEntry } from "../905/762943";
 import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649";
 import { L } from "../figma_app/53571";
-import { wz } from "../figma_app/879363";
+import { atomM4 } from "../figma_app/879363";
 import { showDropdownThunk, selectViewAction } from "../905/929976";
 import { WJ, AM, XX } from "../figma_app/8833";
 import { sendAsset } from "../figma_app/415217";
@@ -155,7 +155,7 @@ export function $$I1() {
     enterDevModeFocusView(e, t) {
       if (!e || e === defaultSessionLocalIDString) return;
       let i = debugState.getState().selectedView;
-      atomStoreManager.set(wz, "dev_mode_canvas_ii");
+      atomStoreManager.set(atomM4, "dev_mode_canvas_ii");
       let n = {
         ...i,
         editorType: FEditorType.DevHandoff,

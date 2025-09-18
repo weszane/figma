@@ -9,7 +9,7 @@ import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
-import { f4 } from "../figma_app/722362";
+import { useOnSelectionChange } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { r as _$$r } from "../figma_app/711157";
 import { tR } from "../6388/410011";
@@ -209,7 +209,7 @@ export function $$T1() {
   let [s, r] = useState(() => C(e, l));
   let u = isInvalidValue(e) ? MIXED_MARKER : e?.[0]?.opacity ?? 0;
   isValidValue(u) && s && l[s] && (u /= l[s]?.value?.[0]?.opacityMultiplier || 1);
-  f4(() => r(C(e, l)));
+  useOnSelectionChange(() => r(C(e, l)));
   return {
     shadowStylePresetOptions: l,
     selectedShadowStyle: s,

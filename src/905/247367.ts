@@ -5,10 +5,10 @@ import { colorToRgb } from "../figma_app/273493";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { Eh } from "../figma_app/837840";
 import { Ep } from "../figma_app/504823";
-import { VG } from "../figma_app/622881";
+import { getColorSpaceString } from "../figma_app/622881";
 import { L } from "../905/173490";
 import { MX, Kf } from "../905/306220";
 import { W } from "../905/979098";
@@ -27,7 +27,7 @@ let _ = class e extends RecordingPureComponent {
       }, !0);
     };
     this.renderCanvas = (t, i) => {
-      let n = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
+      let n = this.props.colorProfile ? getColorSpaceString(this.props.colorProfile) : "srgb";
       let r = Eh(t, n);
       if (!r) return;
       let a = r.createPattern(L, "repeat");
@@ -107,19 +107,19 @@ export function $$A0(e) {
       let r;
       let a;
       let o = colorToRgb(e);
-      let l = VG(t);
+      let l = getColorSpaceString(t);
       return {
-        "--fpl-slider-thumb-bg": F.format({
+        "--fpl-slider-thumb-bg": colorCSSManipulatorInstance.format({
           r: (n = o.r, 1 - o.a + n * o.a),
           g: (r = o.g, 1 - o.a + r * o.a),
           b: (a = o.b, 1 - o.a + a * o.a),
           a: 1
         }, l),
         "--fpl-slider-track-bg": function (e, t, i, n) {
-          let r = `linear-gradient(90deg, ${F.format({
+          let r = `linear-gradient(90deg, ${colorCSSManipulatorInstance.format({
             ...e,
             a: 0
-          }, i)} 0 ${t}, ${F.format({
+          }, i)} 0 ${t}, ${colorCSSManipulatorInstance.format({
             ...e,
             a: 1
           }, i)} calc(100% - ${t}) 100%)`;
@@ -134,5 +134,5 @@ export function $$A0(e) {
   });
 }
 _.displayName = "OpacityControl";
-_.formatter = F;
+_.formatter = colorCSSManipulatorInstance;
 export const xp = $$A0;

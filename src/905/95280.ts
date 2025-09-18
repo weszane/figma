@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
-import { F } from "../905/241044";
+import { sanitizeInput } from "../905/241044";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon, VisualBellShape } from "../905/576487";
@@ -105,7 +105,7 @@ export function $$v1() {
 }
 export function $$I0(e, t, i, n) {
   if (n) return;
-  let r = F(i?.user.handle);
+  let r = sanitizeInput(i?.user.handle);
   if (r && i?.touched_at && Fullscreen.getChunkChangeMap().has(e)) {
     if (!Fullscreen.getChangesToCompareFromHistoryChangesState().has(e)) {
       t(VisualBellActions.dequeue({

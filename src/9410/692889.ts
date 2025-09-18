@@ -9,7 +9,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useHasParentOrgId } from "../905/882262";
 import { z4 } from "../905/37051";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 export function $$g0({
   nodeId: e,
@@ -24,7 +24,7 @@ export function $$g0({
   let {
     hasReadyStatus,
     hasCompletedStatus
-  } = Fk((e, t) => {
+  } = useDeepEqualSceneValue((e, t) => {
     let i = e?.get(t ?? "");
     return {
       hasReadyStatus: i?.hasReadyStatus,

@@ -61,7 +61,7 @@ import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
 import { Rv, mN } from "../figma_app/599979";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
@@ -544,7 +544,7 @@ function eR(e) {
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
-  let _ = eY();
+  let _ = useSceneGraphSelector();
   let h = _$$t3();
   return {
     user: n,

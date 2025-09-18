@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { xk } from "@stylexjs/stylex";
 import { AutoLayout } from "../905/470281";
 import { Pf, H8 } from "../905/590952";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { FProductAccessType } from "../figma_app/191312";
 let d = {
   avatar: {
@@ -265,7 +265,7 @@ export function $$u0({
   maxShow: p = 3,
   isTooltip: m = !1
 }) {
-  let h = DP();
+  let h = getVisibleTheme();
   let g = e.slice(0, p);
   return jsx(AutoLayout, {
     verticalAlignItems: "center",

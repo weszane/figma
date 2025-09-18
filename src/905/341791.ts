@@ -3,7 +3,7 @@ import r from "../vendor/116389";
 import s from "../vendor/336892";
 import { debugState } from "../905/407919";
 import { J } from "../905/931050";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { p as _$$p } from "../905/896627";
@@ -91,7 +91,7 @@ export function $$b0(e, t) {
       currentValue
     } = e;
     if (currentValue !== _$$A) {
-      o()(r.current, ...currentValue.allMedia).filter(e => dE(e) && (i.status !== _$$r.SUCCESS || e.url !== i.value?.url)).forEach(e => {
+      o()(r.current, ...currentValue.allMedia).filter(e => dE(e) && (i.status !== APILoadingStatus.SUCCESS || e.url !== i.value?.url)).forEach(e => {
         nK(e);
       });
       return () => {
@@ -126,11 +126,11 @@ export function $$b0(e, t) {
   }, [e]);
   let u = useRef(!1);
   useEffect(() => {
-    !u.current && e.currentValue !== _$$A && i.status === _$$r.SUCCESS && s && (!e.currentValue.thumbnailMedium && i.value && s(i.value), u.current = !0);
+    !u.current && e.currentValue !== _$$A && i.status === APILoadingStatus.SUCCESS && s && (!e.currentValue.thumbnailMedium && i.value && s(i.value), u.current = !0);
   }, [i, e.currentValue, s]);
   let b = useMemo(() => {
     if (!s) return;
-    let t = i.status === _$$r.SUCCESS ? i.value : void 0;
+    let t = i.status === APILoadingStatus.SUCCESS ? i.value : void 0;
     if (t) {
       if (Lz(e, void 0)?.thumbnailMedium?.sha1 === t.sha1) return;
       return function () {
@@ -216,7 +216,7 @@ export function $$b0(e, t) {
   return {
     ...e,
     setThumbnailMedium: s,
-    hasDefaultThumbnailMedium: i.status === _$$r.SUCCESS && void 0 !== i.value ? null !== i.value : void 0,
+    hasDefaultThumbnailMedium: i.status === APILoadingStatus.SUCCESS && void 0 !== i.value ? null !== i.value : void 0,
     defaultThumbnailMediumSource: t?.source,
     restoreDefaultThumbnailMedium: b,
     deleteMedia: v,

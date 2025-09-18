@@ -6,7 +6,7 @@ import { OU } from "../figma_app/175258";
 import { isZoomIntegration } from "../figma_app/469876";
 import { isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { Gt, kl, ER, pw, zj } from "../905/275640";
-import { ax, p8 } from "../figma_app/722362";
+import { useHasSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { isExportRestricted } from "../figma_app/12796";
 import { sO } from "../figma_app/21029";
@@ -25,7 +25,7 @@ export function $$y12(e, t, r) {
 }
 export function $$b13() {
   let e = Gt("numSelectedByType");
-  let t = ax();
+  let t = useHasSceneGraphSelection();
   let r = sO();
   let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   if (!e || !t || r && n !== SelfDesignType.DESIGN) return !1;
@@ -68,8 +68,8 @@ export function $$A5(e, t) {
   return !!e[ItemType.EXPORT_ITEM] && null !== t && !isExportRestricted(t) && !isZoomIntegration();
 }
 export function $$x1(e) {
-  let t = p8("showUi");
-  let r = p8("isReadOnly");
+  let t = useAppModelProperty("showUi");
+  let r = useAppModelProperty("isReadOnly");
   return t && !!e && r;
 }
 export function $$N18(e, t) {
@@ -92,7 +92,7 @@ export function $$L14(e) {
   return !!e[ItemType.SITES_HTML_WIDGET_ITEM];
 }
 export function $$P10(e, t) {
-  let r = p8("isReadOnly");
+  let r = useAppModelProperty("isReadOnly");
   return !$$I4(e) && !r && 0 === Object.keys(t).length && !e[ItemType.FRAME_PRESETS];
 }
 export function $$D19(e, t) {

@@ -30,7 +30,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { eY } from "../figma_app/722362";
+import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
@@ -561,7 +561,7 @@ function eA({
   instanceSwapDefaultValue: r,
   openFileKey: s
 }) {
-  let o = eY();
+  let o = useSceneGraphSelector();
   let l = useDispatch();
   let {
     preferredValues,

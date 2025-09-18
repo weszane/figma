@@ -1,169 +1,291 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { FruitTypes } from "../figma_app/763686";
-import { dN } from "../vendor/291472";
-import { buildStaticUrl } from "../figma_app/169182";
-import { KindEnum } from "../905/129884";
-let $$l7 = RegExp("\\p{Emoji_Presentation}+(\\u200D\\p{Emoji_Presentation}+)?", "gu");
-let d = /(?:\:([a-zA-Z0-9_\-\+]+)\:)(?:\:skin-tone-(\d)\:)?/;
-let c = RegExp(d.source, "g");
-let u = RegExp(`^${d.source}$`);
-let p = RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.source, "g");
-let m = RegExp(/_/, "g");
-let h = buildStaticUrl("emoji/5/");
-let g = {
-  2: "1f3fb",
-  3: "1f3fc",
-  4: "1f3fd",
-  5: "1f3fe",
-  6: "1f3ff"
-};
-export function $$f4(e) {
-  let t = null;
-  for (; null !== (t = c.exec(e));) {
-    let e = t[0].match(d);
-    if (e && dN.get(e[1])) {
-      c.lastIndex = 0;
-      return !0;
+import type { JSX } from 'react/jsx-runtime'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { KindEnum } from '../905/129884'
+import { buildStaticUrl } from '../figma_app/169182'
+import { FruitTypes } from '../figma_app/763686'
+import { dN } from '../vendor/291472'
+
+/**
+ * Emoji regex patterns and skin tone mapping.
+ * Original variable names: $$l7, d, c, u, p, m, h, g
+ */
+export const emojiPresentationRegex = /\p{Emoji_Presentation}+(\u200D\p{Emoji_Presentation}+)?/gu
+export const emojiShortcodeRegex = /:([\w\-+]+):(?::skin-tone-(\d):)?/
+export const emojiShortcodeGlobalRegex = new RegExp(emojiShortcodeRegex.source, 'g')
+export const emojiShortcodeExactRegex = new RegExp(`^${emojiShortcodeRegex.source}$`)
+export const urlRegex = new RegExp(/[-\w@:%.+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-\w()@:%+.~#?&/=]*)/.source, 'gi')
+export const underscoreRegex = /_/g
+export const emojiStaticBaseUrl = buildStaticUrl('emoji/5/')
+export const skinToneMap: Record<number, string> = {
+  2: '1f3fb',
+  3: '1f3fc',
+  4: '1f3fd',
+  5: '1f3fe',
+  6: '1f3ff',
+}
+
+/**
+ * Checks if a string contains a valid emoji shortcode.
+ * Original function name: $$f4
+ */
+export function hasEmojiShortcode(str: string): boolean {
+  let match: RegExpExecArray | null = emojiShortcodeGlobalRegex.exec(str)
+  while (match !== null) {
+    const innerMatch = match[0].match(emojiShortcodeRegex)
+    if (innerMatch && dN.get(innerMatch[1])) {
+      emojiShortcodeGlobalRegex.lastIndex = 0
+      return true
     }
+    match = emojiShortcodeGlobalRegex.exec(str)
   }
-  return !1;
+  return false
 }
-export function $$_10(e) {
-  return !!RegExp("\\p{Emoji_Modifier_Base}", "u").test($$S8(e)[0]?.unicode);
+
+/**
+ * Checks if the emoji supports skin tone modifiers.
+ * Original function name: $$_10
+ */
+export function isEmojiModifierBase(str: string): boolean {
+  return !!/\p{Emoji_Modifier_Base}/u.test(getEmojiData(str)[0]?.unicode)
 }
-let A = e => e && e in g ? `:skin-tone-${e}:` : null;
-export function $$y0() {
-  return A(localStorage.getItem("emoji-mart.skin"));
+
+/**
+ * Returns skin tone shortcode if valid.
+ * Original variable name: A
+ */
+function getSkinToneShortcode(tone?: string | null): string | null {
+  return tone && tone in skinToneMap ? `:skin-tone-${tone}:` : null
 }
-export function $$b3(e) {
-  if ($$_10(e)) {
-    let t = d.exec(e);
-    if (t) return [`:${t[1]}:`, A(t[2]) ?? ""];
+
+/**
+ * Gets the user's preferred skin tone shortcode from localStorage.
+ * Original function name: $$y0
+ */
+export function getUserSkinToneShortcode(): string | null {
+  return getSkinToneShortcode(localStorage.getItem('emoji-mart.skin'))
+}
+
+/**
+ * Splits emoji shortcode and skin tone.
+ * Original function name: $$b3
+ */
+export function splitEmojiAndSkinTone(str: string): [string, string | null] {
+  if (isEmojiModifierBase(str)) {
+    const match = emojiShortcodeRegex.exec(str)
+    if (match)
+      return [`:${match[1]}:`, getSkinToneShortcode(match[2]) ?? '']
   }
-  return [e, null];
+  return [str, null]
 }
-export function $$v5(e, t) {
-  let i = e.id.toLowerCase().replace(m, "-");
-  let r = t.toLowerCase().replace(m, "-");
-  let a = i.indexOf(r);
-  if (-1 === a) return i;
-  let s = i.slice(0, a);
-  let o = i.slice(a, a + r.length);
-  let l = i.slice(a + r.length);
+
+/**
+ * Highlights search term in emoji id.
+ * Original function name: $$v5
+ */
+export function highlightEmojiIdMatch(
+  emoji: { id: string },
+  search: string,
+): JSX.Element | string {
+  const id = emoji.id.toLowerCase().replace(underscoreRegex, '-')
+  const term = search.toLowerCase().replace(underscoreRegex, '-')
+  const idx = id.indexOf(term)
+  if (idx === -1)
+    return id
+  const before = id.slice(0, idx)
+  const match = id.slice(idx, idx + term.length)
+  const after = id.slice(idx + term.length)
   return jsxs(Fragment, {
-    children: [s, jsx("b", {
-      children: o
-    }), l]
-  });
+    children: [before, jsx('b', { children: match }), after],
+  })
 }
-export function $$I13(e) {
-  let t = e.match(u);
-  return !!t && !!dN.get(t[1]);
+
+/**
+ * Checks if string is a valid emoji shortcode.
+ * Original function name: $$I13
+ */
+export function isValidEmojiShortcode(str: string): boolean {
+  const match = str.match(emojiShortcodeExactRegex)
+  return !!match && !!dN.get(match[1])
 }
-export function $$E2(e) {
-  return dN.getShortcodeFromNative(e) || e;
+
+/**
+ * Converts native emoji to shortcode.
+ * Original function name: $$E2
+ */
+export function nativeToShortcode(str: string): string {
+  return dN.getShortcodeFromNative(str) || str
 }
-export function $$x9(e) {
-  return String.fromCodePoint(...e.split("-").map(e => parseInt(e, 16)));
+
+/**
+ * Converts unified code to emoji character.
+ * Original function name: $$x9
+ */
+export function unifiedToEmoji(unified: string): string {
+  return String.fromCodePoint(...unified.split('-').map(e => parseInt(e, 16)))
 }
-export function $$S8(e) {
-  return function (e) {
-    let t = e.match(d);
-    if (t) {
-      let e = t[1];
-      let i = dN.get(e);
-      if (i) {
-        let e = t[2] ? parseInt(t[2]) : null;
-        if (e) {
-          if (i.skins[e - 1]) {
-            let t = i.skins[e - 1].unified;
-            return [{
-              text: t,
-              meta: i.skins[e - 1].shortcodes,
-              unicode: $$x9(t)
-            }];
-          }
-          if (g[e]) {
-            let t = i.skins[0].unified;
-            return [{
-              text: t,
-              meta: `:${i.id}:`,
-              unicode: $$x9(t)
-            }, {
-              text: g[e],
-              meta: `:skin-tone-${e}:`,
-              unicode: $$x9(g[e])
-            }];
-          }
+
+/**
+ * Gets emoji data from shortcode.
+ * Original function name: $$S8
+ */
+export function getEmojiData(str: string): Array<{
+  text: string
+  meta: string | string[]
+  unicode: string
+}> {
+  const match = str.match(emojiShortcodeRegex)
+  if (match) {
+    const id = match[1]
+    const emojiData = dN.get(id)
+    if (emojiData) {
+      const skinTone = match[2] ? parseInt(match[2]) : null
+      if (skinTone) {
+        if (emojiData.skins[skinTone - 1]) {
+          const unified = emojiData.skins[skinTone - 1].unified
+          return [{
+            text: unified,
+            meta: emojiData.skins[skinTone - 1].shortcodes,
+            unicode: unifiedToEmoji(unified),
+          }]
         }
-        let n = i.skins[0].unified;
-        return [{
-          text: n,
-          meta: `:${i.id}:`,
-          unicode: $$x9(n)
-        }];
+        if (skinToneMap[skinTone]) {
+          const unified = emojiData.skins[0].unified
+          return [
+            {
+              text: unified,
+              meta: `:${emojiData.id}:`,
+              unicode: unifiedToEmoji(unified),
+            },
+            {
+              text: skinToneMap[skinTone],
+              meta: `:skin-tone-${skinTone}:`,
+              unicode: unifiedToEmoji(skinToneMap[skinTone]),
+            },
+          ]
+        }
       }
+      const unified = emojiData.skins[0].unified
+      return [{
+        text: unified,
+        meta: `:${emojiData.id}:`,
+        unicode: unifiedToEmoji(unified),
+      }]
     }
-    return [{
-      text: e,
-      meta: e,
-      unicode: e
-    }];
-  }(e);
+  }
+  return [{
+    text: str,
+    meta: str,
+    unicode: str,
+  }]
 }
-export function $$w6(e, t = FruitTypes.APPLE) {
-  return h + FruitTypes[t].toLowerCase() + "/small/" + e + ".png";
+
+/**
+ * Builds emoji image URL.
+ * Original function name: $$w6
+ */
+export function buildEmojiImageUrl(
+  unified: string,
+  fruitType: FruitTypes = FruitTypes.APPLE,
+): string {
+  return `${emojiStaticBaseUrl + FruitTypes[fruitType].toLowerCase()}/small/${unified}.png`
 }
-export function $$C11(e) {
-  let t = new Set();
-  let i = null;
-  for (; null !== (i = p.exec(e));) for (let e = i.index; e < i.index + i[0].length; e++) t.add(e);
-  p.lastIndex = 0;
-  let n = 0;
-  let r = [];
-  let a = null;
-  for (; null !== (a = c.exec(e));) t.has(a.index) || (a.index > n && r.push(e.slice(n, a.index)), r.push(a[0]), n = a.index + a[0].length);
-  n !== e.length && r.push(e.slice(n, n + e.length));
-  c.lastIndex = 0;
-  return r;
+
+/**
+ * Splits string into emoji and non-emoji parts.
+ * Original function name: $$C11
+ */
+export function splitEmojiAndText(str: string): string[] {
+  const urlIndices = new Set<number>()
+  let urlMatch: RegExpExecArray | null = urlRegex.exec(str)
+  while (urlMatch !== null) {
+    for (let i = urlMatch.index; i < urlMatch.index + urlMatch[0].length; i++) {
+      urlIndices.add(i)
+    }
+    urlMatch = urlRegex.exec(str)
+  }
+  urlRegex.lastIndex = 0
+  let lastIdx = 0
+  const result: string[] = []
+  let emojiMatch: RegExpExecArray | null = emojiShortcodeGlobalRegex.exec(str)
+  while (emojiMatch !== null) {
+    if (!urlIndices.has(emojiMatch.index)) {
+      if (emojiMatch.index > lastIdx) {
+        result.push(str.slice(lastIdx, emojiMatch.index))
+      }
+      result.push(emojiMatch[0])
+      lastIdx = emojiMatch.index + emojiMatch[0].length
+    }
+    emojiMatch = emojiShortcodeGlobalRegex.exec(str)
+  }
+  if (lastIdx !== str.length) {
+    result.push(str.slice(lastIdx, str.length))
+  }
+  emojiShortcodeGlobalRegex.lastIndex = 0
+  return result
 }
-export function $$T1(e) {
-  let t = [];
-  $$C11(e).forEach(e => {
-    $$I13(e) ? $$S8(e).forEach(e => {
-      t.push(e.unicode);
-    }) : t.push(e);
-  });
-  return t.join("");
+
+/**
+ * Converts string with emoji shortcodes to native emoji string.
+ * Original function name: $$T1
+ */
+export function convertShortcodesToNative(str: string): string {
+  const parts = splitEmojiAndText(str)
+  const result: string[] = []
+  parts.forEach((part) => {
+    if (isValidEmojiShortcode(part)) {
+      getEmojiData(part).forEach((data) => {
+        result.push(data.unicode)
+      })
+    }
+    else {
+      result.push(part)
+    }
+  })
+  return result.join('')
 }
-export function $$k12(e) {
-  if (!e) return [""];
-  let t = [];
-  $$C11(e).forEach(e => {
-    $$I13(e) ? $$S8(e).forEach(e => {
-      let i = Math.random().toString(36).substring(2);
-      t.push(jsx("span", {
-        className: "inline-emoji",
-        "data-tooltip-type": KindEnum.TEXT,
-        "data-tooltip": e.meta,
-        "data-text": e.unicode,
-        children: e.unicode
-      }, i));
-    }) : t.push(e);
-  });
-  return t;
+
+/**
+ * Converts string with emoji shortcodes to React elements.
+ * Original function name: $$k12
+ */
+export function renderEmojiShortcodes(str: string): Array<JSX.Element | string> {
+  if (!str)
+    return ['']
+  const result: Array<JSX.Element | string> = []
+  splitEmojiAndText(str).forEach((part) => {
+    if (isValidEmojiShortcode(part)) {
+      getEmojiData(part).forEach((data) => {
+        const key = Math.random().toString(36).substring(2)
+        result.push(
+          jsx('span', {
+            'className': 'inline-emoji',
+            'data-tooltip-type': KindEnum.TEXT,
+            'data-tooltip': data.meta,
+            'data-text': data.unicode,
+            'children': data.unicode,
+          }, key),
+        )
+      })
+    }
+    else {
+      result.push(part)
+    }
+  })
+  return result
 }
-export const $f = $$y0;
-export const Bx = $$T1;
-export const H3 = $$E2;
-export const Kh = $$b3;
-export const Lg = $$f4;
-export const OV = $$v5;
-export const PC = $$w6;
-export const Py = $$l7;
-export const UF = $$S8;
-export const iA = $$x9;
-export const uD = $$_10;
-export const wd = $$C11;
-export const x6 = $$k12;
-export const xM = $$I13;
+
+// Exported aliases for refactored functions and variables
+export const YJ = hasEmojiShortcode
+export const uD = isEmojiModifierBase
+export const PC = buildEmojiImageUrl
+export const Py = emojiPresentationRegex
+export const UF = getEmojiData
+export const iA = unifiedToEmoji
+export const wd = splitEmojiAndText
+export const x6 = renderEmojiShortcodes
+export const xM = isValidEmojiShortcode
+export const Kh = splitEmojiAndSkinTone
+export const OV = highlightEmojiIdMatch
+export const H3 = nativeToShortcode
+export const Bx = convertShortcodesToNative
+export const $f = getUserSkinToneShortcode

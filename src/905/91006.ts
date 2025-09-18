@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { iL } from "../figma_app/762706";
+import { getWasmModule } from "../figma_app/762706";
 import { reportError } from "../905/11";
 import { browserCapabilities } from "../905/409121";
 function a(e, t, i) {
@@ -16,7 +16,7 @@ class s {
     return new o(this._reportError, this._platformInfoBindings);
   }
   emscriptenWebGLContextWasInitialized() {
-    return null != iL().ctx;
+    return null != getWasmModule().ctx;
   }
   constructor(e, t) {
     a(this, "_reportError", void 0);
@@ -27,11 +27,11 @@ class s {
 }
 class o {
   init() {
-    if (this.glContext = iL().ctx, null == this.glContext) {
+    if (this.glContext = getWasmModule().ctx, null == this.glContext) {
       this._reportError("Could not get WebGL context");
       return;
     }
-    this.gl = iL().WebGLEmscriptenObj;
+    this.gl = getWasmModule().WebGLEmscriptenObj;
     this.debugRendererInfo = this.glContext.getExtension("WEBGL_debug_renderer_info");
     this.debugRendererInfo ? (this.vendorName = this.glContext.getParameter(this.debugRendererInfo.UNMASKED_VENDOR_WEBGL), this.rendererName = this.glContext.getParameter(this.debugRendererInfo.UNMASKED_RENDERER_WEBGL)) : this._platformInfoBindings.isWindows() && console.warn('the "WEBGL_debug_renderer_info" extension is missing so rendering may be incorrect' + (this._platformInfoBindings.isFirefox() ? ', please enable "webgl.enable-debug-renderer-info" in about:config' : ""));
     this.instancedArraysANGLE = this.glContext.getExtension("ANGLE_instanced_arrays");
@@ -113,11 +113,11 @@ class o {
     return null === this.glContext || void 0 === this.gl || void 0 === this.gl.programs[e] ? 0 : this.glContext instanceof WebGLRenderingContext ? (this._reportError("getActiveUniformBlockParameter called on WebGL 1 context"), 0) : this.glContext.getActiveUniformBlockParameter(this.gl.programs[e], t, i);
   }
   uniMat3Fix(e, t, i, n, a, s, o) {
-    let l = iL().getWebGlUniformLocation?.(e);
+    let l = getWasmModule().getWebGlUniformLocation?.(e);
     void 0 !== l && this.glContext?.uniformMatrix3fv(l, !1, new Float32Array([t, i, 0, n, a, 0, s, o, 1]));
   }
   uni4fFix(e, t, i, n, a) {
-    let s = iL().getWebGlUniformLocation?.(e);
+    let s = getWasmModule().getWebGlUniformLocation?.(e);
     void 0 !== s && this.glContext?.uniform4f(s, t, i, n, a);
   }
   vertexAttribDivisorANGLE(e, t) {

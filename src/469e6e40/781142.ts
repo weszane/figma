@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/355181";
 import { aO, vn } from "../figma_app/109538";
-import { k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { R } from "../905/304671";
 import { showModalHandler } from "../905/156213";
 import { hs, G6, j2 } from "../figma_app/84966";
@@ -83,7 +83,7 @@ function S(e) {
 }
 function N(e) {
   let t = useDispatch();
-  let a = k();
+  let a = isProrationBillingEnabledForCurrentPlan();
   let r = useCallback(() => {
     switch (e.planType) {
       case FOrganizationLevelType.ORG:

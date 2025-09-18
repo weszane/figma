@@ -11,7 +11,7 @@ import { PK } from "../figma_app/124493";
 import { Dm } from "../figma_app/8833";
 import { consumptionPaywallUtils } from "../905/224";
 import { HZ } from "../figma_app/186343";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { hasReachedPageLimit } from "../figma_app/345997";
@@ -37,7 +37,7 @@ export function $$O0({
   let R = useDispatch();
   let D = useSelector(e => e.mirror.appModel);
   let M = selectCurrentFile();
-  let P = p8("pagesList");
+  let P = useAppModelProperty("pagesList");
   let F = HZ();
   let B = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   let U = cT();

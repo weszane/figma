@@ -6,12 +6,12 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction, hydrateFileBrowser } from "../905/929976";
 import { loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { bE } from "../905/98702";
-import { r1, bE as _$$bE, $w, aB, mw, ii } from "../figma_app/240735";
+import { setTeamCreationLoadingAction, postTeamAction, renameTeamAction, changeSharingSettingsAction, joinTeamAction, batchJoinTeamAction } from "../figma_app/240735";
 import { b as _$$b } from "../905/493664";
 import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
@@ -20,7 +20,7 @@ import { rq } from "../905/351260";
 import { getUserState } from "../figma_app/502247";
 import { AccessLevelEnum } from "../905/557142";
 import { CreateUpgradeAction } from "../figma_app/707808";
-import { G } from "../figma_app/66216";
+import { roleServiceAPI } from "../figma_app/66216";
 import { c as _$$c } from "../905/467776";
 export let $$N1 = createOptimistThunk((e, t) => {
   let {
@@ -45,7 +45,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
   sharingAudienceControl && (f.sharing_audience_control = sharingAudienceControl);
   orgBrowsable && (f.org_browsable = orgBrowsable);
   hidden && (f.hidden = hidden);
-  e.dispatch(r1({
+  e.dispatch(setTeamCreationLoadingAction({
     loading: !0
   }));
   XHR.post("/api/teams/create", f).then(({
@@ -62,7 +62,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
   }).catch(t => {
     let r = resolveMessage(t, t?.response?.message || getI18nString("team_creation.an_error_occurred_while_creating_this_team"));
     e.dispatch(FlashActions.error(r));
-    e.dispatch(r1({
+    e.dispatch(setTeamCreationLoadingAction({
       loading: !1
     }));
   });
@@ -70,7 +70,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
 export function $$C2(e, t, r) {
   let n = t.getState().user;
   let i = t.getState().currentUserOrgId;
-  t.dispatch(_$$bE({
+  t.dispatch(postTeamAction({
     team: e
   }));
   let {
@@ -93,7 +93,7 @@ export function $$C2(e, t, r) {
     source: "team_creation_flow",
     teamId: e.id
   }));
-  return G.getTeam({
+  return roleServiceAPI.getTeam({
     teamId: e.id
   }).then(({
     data: i
@@ -107,13 +107,13 @@ export function $$C2(e, t, r) {
         type: "new_team_created",
         message: getI18nString("team_creation.you_have_created_a_new_team")
       }));
-      t.dispatch(r1({
+      t.dispatch(setTeamCreationLoadingAction({
         loading: !1
       }));
-    } else if (r.onSuccess && (t.dispatch(r1({
+    } else if (r.onSuccess && (t.dispatch(setTeamCreationLoadingAction({
       loading: !1
     })), r.onSuccess()), s || r.teamFlowType === CreateUpgradeAction.CREATE) {
-      t.dispatch(r1({
+      t.dispatch(setTeamCreationLoadingAction({
         loading: !1
       }));
       t.dispatch(selectViewAction({
@@ -134,12 +134,12 @@ export function $$C2(e, t, r) {
         teamId: e.id,
         orgId: null
       };
-      t.dispatch(_l({
+      t.dispatch(switchAccountAndNavigate({
         workspace: i,
         view: r
       }));
     } else {
-      t.dispatch(r1({
+      t.dispatch(setTeamCreationLoadingAction({
         loading: !1
       }));
       t.dispatch(selectViewAction({
@@ -189,7 +189,7 @@ let $$w0 = createOptimistThunk((e, t) => {
     fallbackError: "An error occurred while renaming this team.",
     store: e,
     next: e.dispatch,
-    action: $w(t)
+    action: renameTeamAction(t)
   });
 });
 let $$O6 = createOptimistThunk((e, t) => {
@@ -212,7 +212,7 @@ let $$O6 = createOptimistThunk((e, t) => {
     fallbackError: "An error occurred while changing the sharing settings of this team.",
     store: e,
     next: e.dispatch,
-    action: aB(t)
+    action: changeSharingSettingsAction(t)
   });
 });
 let $$R5 = createOptimistThunk((e, t) => {
@@ -248,7 +248,7 @@ let $$R5 = createOptimistThunk((e, t) => {
       key: r
     }));
   });
-  e.dispatch(mw(t));
+  e.dispatch(joinTeamAction(t));
 });
 let $$L4 = createOptimistThunk((e, t) => {
   trackEventAnalytics("file-browser-hydrate", {
@@ -282,7 +282,7 @@ let $$L4 = createOptimistThunk((e, t) => {
       key: r
     }));
   });
-  e.dispatch(ii(t));
+  e.dispatch(batchJoinTeamAction(t));
 });
 let $$P3 = createOptimistThunk(e => {
   let t = e.getState().currentUserOrgId;

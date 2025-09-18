@@ -10,7 +10,7 @@ import { o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Bq } from "../figma_app/482142";
-import { vt } from "../figma_app/297957";
+import { useSeatManagementWidgetExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { FBillingPeriodType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures, useTeamPlanUser } from "../figma_app/465071";
@@ -21,7 +21,7 @@ export function $$j0(e) {
   let a = useDispatch();
   let l = useTeamPlanFeatures().unwrapOr(null);
   let j = useTeamPlanUser().unwrapOr(null);
-  let y = vt();
+  let y = useSeatManagementWidgetExperiment();
   let w = useSelector(e => e.teamBilling.summary.annual_subscription ? FBillingPeriodType.YEAR : e.teamBilling.summary.monthly_subscription ? FBillingPeriodType.MONTH : null);
   let k = useCallback(() => {
     a(Bq({

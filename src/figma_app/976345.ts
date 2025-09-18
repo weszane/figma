@@ -1,3 +1,4 @@
+import { ThunkDispatch } from 'redux-thunk' // optional helper type (not required by runtime)
 import { setDeletedFiles, setDeletedRepos, setFileBrowserLoading } from '../905/34809'
 import { hideModal } from '../905/156213'
 import { trashedFoldersAPI } from '../905/190576'
@@ -21,7 +22,7 @@ import { isVsCodeEnvironment } from '../905/858738'
 import { XHR } from '../905/910117'
 import { hideDropdownAction, selectViewAction, setSessionStateAction, showDropdownThunk } from '../905/929976'
 import { getSelectedViewUrl, selectedViewToPath } from '../figma_app/193867'
-import { e5, Mk } from '../figma_app/297957'
+import { hasStarterTeamLoopholeAccess, isEligibleForStarterLoopholeTeamOne } from '../figma_app/297957'
 import { trackFileBrowserFileClicked, trackUserEvent } from '../figma_app/314264'
 import { openInBrowser } from '../figma_app/415217'
 import { isIntegrationContext } from '../figma_app/469876'
@@ -32,350 +33,496 @@ import { UpgradeSteps } from '../figma_app/831101'
 import { desktopAPIInstance } from '../figma_app/876459'
 import { fileBrowserPageManager } from '../figma_app/997907'
 
-let $$F24 = createOptimistThunk((e, t) => {
-  e.getState().modalShown?.type != null && e.dispatch(hideModal())
-  e.getState().dropdownShown?.type != null && e.dispatch(hideDropdownAction())
-  e.dispatch(setFileBrowserLoading({
-    show: !0,
-  }))
-  t?.until.then(() => {
-    e.dispatch(setFileBrowserLoading({
-      show: !1,
-    }))
+/**
+ * Refactored actions and thunks from 976345.ts selection.
+ *
+ * Notes:
+ * - Original internal names are preserved as comments for traceability (e.g. // $$F24).
+ * - Functions are converted to named arrow functions and given descriptive names.
+ * - Exports at the bottom re-map original short export identifiers to the new descriptive symbols,
+ *   per refactoring instructions.
+ */
+
+type ThunkAPI = any // keep broad to match original dynamic usage
+
+// Helper types for commonly used payloads (partial where shapes are unknown)
+export interface WorkspacePayload {
+  orgId?: string
+  teamId?: string | null
+  userId?: string
+}
+export interface OpenCreateTeamOptions {
+  previousView?: any
+  openInNewTab?: boolean
+  onSubmitReturnToPrevView?: any
+  isEduTeam?: boolean
+  ignoreCurrentPlan?: boolean
+}
+export interface TrashedFilesArgs { orgId?: string, teamId?: string }
+export interface LoadingOptions { loadingKey?: string }
+type DropdownPayload = any
+
+// Pending reload storage (original: ea)
+let pendingReload: {
+  reason: string
+  metadata?: any
+  additionalViewsToReload?: string[]
+} | null = null
+
+/**
+ * Ensure the file browser shows a loading state while an operation runs.
+ * Original: $$F24
+ */
+const setFileBrowserLoadingHandler = createOptimistThunk((dispatchApi, { until }: { until?: Promise<any> } = {}) => {
+  // hide modals and dropdowns if shown
+  if (dispatchApi.getState().modalShown?.type != null) {
+    dispatchApi.dispatch(hideModal())
+  }
+  if (dispatchApi.getState().dropdownShown?.type != null) {
+    dispatchApi.dispatch(hideDropdownAction())
+  }
+
+  dispatchApi.dispatch(setFileBrowserLoading({ show: true }))
+
+  // turn off loading when the operation completes (if an until promise exists)
+  until?.then(() => {
+    dispatchApi.dispatch(setFileBrowserLoading({ show: false }))
   })
-  fileBrowserPageManager.addDependency('FILE_BROWSER_SET_LOADING', t?.until || 'pending')
+
+  // Add to page manager dependencies (same semantics as original)
+  fileBrowserPageManager.addDependency('FILE_BROWSER_SET_LOADING', until || 'pending')
 })
-let $$j18 = createOptimistThunk((e) => {
-  sessionApiInstance.getState().then((t) => {
-    e.dispatch(setSessionStateAction(t.data.meta))
-    e.dispatch($$U23(t.data.meta))
-  }).catch((t) => {
-    let r = t.data?.message || getI18nString('file_browser.file_browser_actions.error_on_data_update')
-    e.dispatch(VisualBellActions.enqueue({
-      error: !0,
-      message: r,
-    }))
-  })
-})
-let $$U23 = createOptimistThunk((e, t) => {
-  new IpcStorageHandler().sendToOtherTabs('refresh-session-state', t)
-})
-let $$B11 = createOptimistThunk((e, t) => {
-  let r = e.getState()
-  let n = t.view || {
-    view: 'recentsAndSharing',
-  }
-  let i = selectedViewToPath({
-    ...r,
-    currentUserOrgId: t.workspace.orgId,
-    currentTeamId: t.workspace.teamId || null,
-  }, n)
-  let a = !isCommunityHubView(r.selectedView) && isCommunityHubView(n)
-  if (desktopAPIInstance && a) {
-    desktopAPIInstance.openCommunity(i, t.workspace.userId)
-    return
-  }
-  function d() {
-    let e = isCommunityHubView(r.selectedView) && !isCommunityHubView(n)
-    desktopAPIInstance && e && customHistory.redirect(appendSearchParams(selectedViewToPath({
-      ...r,
-      currentUserOrgId: t.workspace.orgId,
-      currentTeamId: t.workspace.teamId || null,
-    }, r.selectedView), {
-      fuid: t.workspace.userId,
-    }))
-  }
-  if (e.dispatch($$F24()), t.path) {
-    trackUserEvent('account_switched', r, {
-      newUserId: t.workspace.userId,
-      orgId: r.currentUserOrgId,
-      newOrgId: t.workspace.orgId,
-      teamId: r.currentTeamId,
-      newTeamId: t.workspace.teamId,
-      view: r.selectedView.view,
-      newPath: t.path,
+
+/**
+ * Refresh session state from sessionApiInstance and update store.
+ * Original: $$j18
+ */
+const refreshSessionState = createOptimistThunk((dispatchApi) => {
+  sessionApiInstance.getState()
+    .then((res: any) => {
+      dispatchApi.dispatch(setSessionStateAction(res.data.meta))
+      dispatchApi.dispatch(sendIpcRefreshSession(res.data.meta))
     })
-    customHistory.redirect(appendSearchParams(t.path, {
-      fuid: t.workspace.userId,
-    }))
-    d()
-    return
-  }
-  trackUserEvent('account_switched', r, {
-    newUserId: t.workspace.userId,
-    orgId: r.currentUserOrgId,
-    newOrgId: t.workspace.orgId,
-    view: r.selectedView.view,
-    newView: n.view,
-    newTeamId: t.workspace.teamId,
-    teamId: r.currentTeamId,
-  });
-  (t.workspace.orgId && !i.includes(t.workspace.orgId) || t.workspace.teamId && !i.includes(t.workspace.teamId) || isCommunityHubView(n) && !t.workspace.orgId && r.currentUserOrgId) && setRecentUserData(t.workspace.userId, isCommunityHubView(n), t.workspace.orgId, void 0, t.workspace.teamId)
-  isIntegrationContext()
-    ? sendMessageToParent({
-        action: 'reloadPage',
-        payload: {
-          fuid: t.workspace.userId,
-        },
-      })
-    : (customHistory.redirect(appendSearchParams(i, {
-        fuid: t.workspace.userId,
-      })), d())
-})
-let $$G26 = createOptimistThunk((e) => {
-  XHR.post('/api/session/app_auth', {
-    app_type: 'desktop',
-  }).then(({
-    data: t,
-  }) => {
-    let r = t.meta.id
-    let n = `/app_auth/${r}/grant`
-    let i = e.getState().authedUsers.orderedIds
-    i.length > 0 && (n += `?authed_ids=${i.join(',')}`)
-    desktopAPIInstance?.startAppAuth(n)
-    e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('file_browser.file_browser_actions.desktop_go_to_your_browser'),
-    }))
-  }).catch((t) => {
-    console.error(t)
-    e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('file_browser.error_try_again'),
-      error: !0,
-    }))
-  })
-})
-let $$V21 = createOptimistThunk((e, t) => {
-  e.getState().dropdownShown || e.dispatch(showDropdownThunk(t))
-})
-let $$H16 = createOptimistThunk((e, t) => {
-  let r = e.getState().dropdownShown
-  r?.type === t.type ? e.dispatch(hideDropdownAction()) : e.dispatch(showDropdownThunk(t))
-})
-let $$z9 = createOptimistThunk((e, t) => {
-  isVsCodeEnvironment() ? openInBrowser(t.url) : customHistory.redirect(t.url, '_blank')
-})
-export function $$W15(e, t = {}) {
-  return selectViewAction({
-    view: 'folder',
-    folderId: e,
-    ...t,
-  })
-}
-export function $$K13(e, t = {}, r) {
-  return selectViewAction({
-    view: 'team',
-    teamId: e,
-    ...t,
-    teamViewTab: r,
-  })
-}
-export function $$Y14() {
-  return selectViewAction({
-    view: 'limitedTeamSharedProjects',
-  })
-}
-let $$$7 = createOptimistThunk((e, {
-  index: t,
-}) => {
-  trackEventAnalytics('Recent File Clicked', {
-    index: t,
-  }, {
-    forwardToDatadog: !0,
-  })
-})
-let $$X8 = createOptimistThunk((e, {
-  fileKey: t,
-  entrypoint: r,
-  currentPlanFilter: n,
-  currentSharedByFilter: i,
-  viewMode: a,
-}) => {
-  trackFileBrowserFileClicked(t, {
-    state: e.getState(),
-    entrypoint: r,
-    planFilterId: n?.planId,
-    planFilterType: n?.planType,
-    sharedByFilter: i,
-    viewMode: a,
-  })
-})
-let $$q4 = createOptimistThunk((e) => {
-  trackUserEvent('Font Installer Downloaded', e.getState())
-})
-let $$J5 = createOptimistThunk((e) => {
-  trackUserEvent('Font Uninstaller Downloaded', e.getState())
-})
-let $$Z19 = createOptimistThunk((e, {
-  clickedResourceType: t,
-  resourceIdOrKey: r,
-}) => {
-  trackUserEvent('File Browser Nav Tree Clicked', e.getState(), {
-    clickedResourceType: t,
-    resourceIdOrKey: r,
-  })
-})
-let $$Q22 = liveStoreInstance.Query({
-  fetch: async e => (await trashedFoldersAPI.getTrashedFolders(e)).data.meta,
-  schema: e => e.object({
-    folders: e.array(FolderSchema.extend({
-      touched_at: e.string(),
-    })),
-  }),
-  output: ({
-    data: e,
-  }) => ({
-    folders: e.folders.map(e => ({
-      ...e,
-      touched_at: '',
-    })).filter(e => !!e && !!e.trashed_at && !e.deleted_at).sort((e, t) => new Date(e.trashed_at) < new Date(t.trashed_at) ? 1 : -1),
-  }),
-})
-let $$ee17 = createOptimistThunk((e, {
-  orgId: t,
-  teamId: r,
-}, {
-  loadingKey: n,
-}) => {
-  let i = trashedFilesValidatorAPI.getTrashedFilesV2({
-    orgId: t || '',
-    teamId: r || '',
-  })
-  setupLoadingStateHandler(i, e, n)
-  i.then((t) => {
-    let r = JSON.parse(t.response)
-    e.dispatch(setDeletedFiles({
-      deletedFiles: r.meta.files,
-    }))
-    e.dispatch(setDeletedRepos({
-      deletedRepos: r.meta.repos,
-    }))
-  })
-})
-let $$et3 = createOptimistThunk((e, {
-  previousView: t,
-  openInNewTab: r,
-  onSubmitReturnToPrevView: i,
-  isEduTeam: a,
-  ignoreCurrentPlan: s,
-}) => {
-  let o = e.getState()
-  if (r) {
-    let t = getSelectedViewUrl(o, {
-      view: 'teamCreation',
-      ignoreCurrentPlan: s,
+    .catch((err: any) => {
+      const message = err.data?.message || getI18nString('file_browser.file_browser_actions.error_on_data_update')
+      dispatchApi.dispatch(VisualBellActions.enqueue({ error: true, message }))
     })
-    e.dispatch($$z9({
-      url: t,
-    }))
+})
+
+/**
+ * Send 'refresh-session-state' to other tabs via IpcStorageHandler.
+ * Original: $$U23
+ */
+const sendIpcRefreshSession = createOptimistThunk((_: ThunkAPI, payload: any) => {
+  // new IpcStorageHandler().sendToOtherTabs('refresh-session-state', payload)
+  new IpcStorageHandler().sendToOtherTabs('refresh-session-state', payload)
+})
+
+/**
+ * Handle account switching and view redirection.
+ * Original: $$B11
+ */
+const switchAccountAndNavigate = createOptimistThunk((dispatchApi, payload: { view?: any, path?: string, workspace: WorkspacePayload }) => {
+  const state = dispatchApi.getState()
+  const viewPayload = payload.view || { view: 'recentsAndSharing' }
+
+  const computedPath = selectedViewToPath({
+    ...state,
+    currentUserOrgId: payload.workspace.orgId,
+    currentTeamId: payload.workspace.teamId || null,
+  }, viewPayload)
+
+  const switchingToCommunityHub = !isCommunityHubView(state.selectedView) && isCommunityHubView(viewPayload)
+
+  if (desktopAPIInstance && switchingToCommunityHub) {
+    desktopAPIInstance.openCommunity(computedPath, payload.workspace.userId)
     return
   }
-  if (o.user && getFeatureFlags().close_starter_team_loophole_v2 && e5({
-    userId: o.user.id,
-    teams: Object.values(o.teams),
-    rolesByTeamId: o.roles.byTeamId,
+
+  // helper to redirect back to previous community view if needed (original: d)
+  function maybeRedirectFromCommunity() {
+    const leavingCommunity = isCommunityHubView(state.selectedView) && !isCommunityHubView(viewPayload)
+    if (desktopAPIInstance && leavingCommunity) {
+      customHistory.redirect(appendSearchParams(selectedViewToPath({
+        ...state,
+        currentUserOrgId: payload.workspace.orgId,
+        currentTeamId: payload.workspace.teamId || null,
+      }, state.selectedView), { fuid: payload.workspace.userId }))
+    }
+  }
+
+  // show loading / hide UIs
+  dispatchApi.dispatch(setFileBrowserLoadingHandler())
+
+  // if a direct path is provided, track and redirect there
+  if (payload.path) {
+    trackUserEvent('account_switched', state, {
+      newUserId: payload.workspace.userId,
+      orgId: state.currentUserOrgId,
+      newOrgId: payload.workspace.orgId,
+      teamId: state.currentTeamId,
+      newTeamId: payload.workspace.teamId,
+      view: state.selectedView.view,
+      newPath: payload.path,
+    })
+
+    customHistory.redirect(appendSearchParams(payload.path, { fuid: payload.workspace.userId }))
+    maybeRedirectFromCommunity()
+    return
+  }
+
+  // otherwise, track switching between views
+  trackUserEvent('account_switched', state, {
+    newUserId: payload.workspace.userId,
+    orgId: state.currentUserOrgId,
+    newOrgId: payload.workspace.orgId,
+    view: state.selectedView.view,
+    newView: viewPayload.view,
+    newTeamId: payload.workspace.teamId,
+    teamId: state.currentTeamId,
+  })
+
+  // persist recent user data in some cross-org/team scenarios
+  if ((payload.workspace.orgId && !computedPath.includes(payload.workspace.orgId))
+    || (payload.workspace.teamId && !computedPath.includes(payload.workspace.teamId))
+    || (isCommunityHubView(viewPayload) && !payload.workspace.orgId && state.currentUserOrgId)) {
+    setRecentUserData(payload.workspace.userId, isCommunityHubView(viewPayload), payload.workspace.orgId, undefined, payload.workspace.teamId)
+  }
+
+  if (isIntegrationContext()) {
+    sendMessageToParent({ action: 'reloadPage', payload: { fuid: payload.workspace.userId } })
+  }
+  else {
+    customHistory.redirect(appendSearchParams(computedPath, { fuid: payload.workspace.userId }))
+    maybeRedirectFromCommunity()
+  }
+})
+
+/**
+ * Start desktop app authentication flow.
+ * Original: $$G26
+ */
+const startDesktopAppAuth = createOptimistThunk((dispatchApi) => {
+  XHR.post('/api/session/app_auth', { app_type: 'desktop' })
+    .then(({ data }: any) => {
+      const authId = data.meta.id
+      let path = `/app_auth/${authId}/grant`
+      const authedIds = dispatchApi.getState().authedUsers.orderedIds
+      if (authedIds.length > 0) {
+        path += `?authed_ids=${authedIds.join(',')}`
+      }
+      desktopAPIInstance?.startAppAuth(path)
+      dispatchApi.dispatch(VisualBellActions.enqueue({
+        message: getI18nString('file_browser.file_browser_actions.desktop_go_to_your_browser'),
+      }))
+    })
+    .catch((err: any) => {
+      console.error(err)
+      dispatchApi.dispatch(VisualBellActions.enqueue({
+        message: getI18nString('file_browser.error_try_again'),
+        error: true,
+      }))
+    })
+})
+
+/**
+ * Show dropdown if none is currently open.
+ * Original: $$V21
+ */
+const showDropdownIfNone = createOptimistThunk((dispatchApi, payload: DropdownPayload) => {
+  if (!dispatchApi.getState().dropdownShown) {
+    dispatchApi.dispatch(showDropdownThunk(payload))
+  }
+})
+
+/**
+ * Toggle a dropdown by type.
+ * Original: $$H16
+ */
+export const toggleDropdown = createOptimistThunk((dispatchApi, payload: DropdownPayload) => {
+  const current = dispatchApi.getState().dropdownShown
+  if (current?.type === payload.type) {
+    dispatchApi.dispatch(hideDropdownAction())
+  }
+  else {
+    dispatchApi.dispatch(showDropdownThunk(payload))
+  }
+})
+
+/**
+ * Open a URL either in the browser or via history redirect (for new tab).
+ * Original: $$z9
+ */
+export const openUrlInContext = createOptimistThunk((_: ThunkAPI, payload: { url: string }) => {
+  if (isVsCodeEnvironment()) {
+    openInBrowser(payload.url)
+  }
+  else {
+    customHistory.redirect(payload.url, '_blank')
+  }
+})
+
+/**
+ * Short helpers to create select view actions (kept as functions).
+ * Originals: $$W15, $$K13, $$Y14
+ */
+export function selectFolderView(folderId: string, opts: any = {}) { // $$W15
+  return selectViewAction({ view: 'folder', folderId, ...opts })
+}
+export function selectTeamView(teamId: string, opts: any = {}, teamViewTab?: any) { // $$K13
+  return selectViewAction({ view: 'team', teamId, ...opts, teamViewTab })
+}
+export function selectLimitedTeamSharedProjectsView() { // $$Y14
+  return selectViewAction({ view: 'limitedTeamSharedProjects' })
+}
+
+/**
+ * Tracking thunks
+ * Originals: $$$7 (T5), $$X8 (UN), $$q4, $$J5, $$Z19
+ */
+const trackRecentFileClicked = createOptimistThunk((_: ThunkAPI, { index }: { index: number }) => {
+  trackEventAnalytics('Recent File Clicked', { index }, { forwardToDatadog: true })
+})
+
+const trackFileClicked = createOptimistThunk((dispatchApi, { fileKey, entrypoint, currentPlanFilter, currentSharedByFilter, viewMode }: any) => {
+  trackFileBrowserFileClicked(fileKey, {
+    state: dispatchApi.getState(),
+    entrypoint,
+    planFilterId: currentPlanFilter?.planId,
+    planFilterType: currentPlanFilter?.planType,
+    sharedByFilter: currentSharedByFilter,
+    viewMode,
+  })
+})
+
+const trackFontInstallerDownloaded = createOptimistThunk((dispatchApi) => {
+  trackUserEvent('Font Installer Downloaded', dispatchApi.getState())
+})
+
+const trackFontUninstallerDownloaded = createOptimistThunk((dispatchApi) => {
+  trackUserEvent('Font Uninstaller Downloaded', dispatchApi.getState())
+})
+
+const trackNavTreeClicked = createOptimistThunk((dispatchApi, { clickedResourceType, resourceIdOrKey }: { clickedResourceType: string, resourceIdOrKey: string }) => {
+  trackUserEvent('File Browser Nav Tree Clicked', dispatchApi.getState(), {
+    clickedResourceType,
+    resourceIdOrKey,
+  })
+})
+
+/**
+ * Query for trashed folders using liveStoreInstance.
+ * Original: $$Q22
+ */
+const trashedFoldersQuery = liveStoreInstance.Query({
+  fetch: async (args: any) => ((await trashedFoldersAPI.getTrashedFolders(args)).data as any).meta,
+  schema: (e: any) => e.object({
+    folders: e.array(FolderSchema.extend({ touched_at: e.string() })),
+  }),
+  output: ({ data }: any) => ({
+    folders: data.folders
+      .map((f: any) => ({ ...f, touched_at: '' }))
+      .filter((f: any) => !!f && !!f.trashed_at && !f.deleted_at)
+      .sort((a: any, b: any) => (new Date(a.trashed_at) < new Date(b.trashed_at) ? 1 : -1)),
+  }),
+})
+
+/**
+ * Load trashed files and repos and update store.
+ * Original: $$ee17
+ */
+const loadTrashedFiles = createOptimistThunk((dispatchApi, { orgId, teamId }: TrashedFilesArgs, { loadingKey }: LoadingOptions = {}) => {
+  const request = trashedFilesValidatorAPI.getTrashedFilesV2({ orgId: orgId || '', teamId: teamId || '' })
+  setupLoadingStateHandler(request, dispatchApi, loadingKey)
+  request.then((res: any) => {
+    const parsed = JSON.parse(res.response)
+    dispatchApi.dispatch(setDeletedFiles({ deletedFiles: parsed.meta.files }))
+    dispatchApi.dispatch(setDeletedRepos({ deletedRepos: parsed.meta.repos }))
+  })
+})
+
+/**
+ * Open create-team or upgrade flow with various conditions.
+ * Original: $$et3
+ */
+const openCreateTeamFlow = createOptimistThunk((dispatchApi, opts: OpenCreateTeamOptions) => {
+  const state = dispatchApi.getState()
+
+  if (opts.openInNewTab) {
+    const url = getSelectedViewUrl(state, { view: 'teamCreation', ignoreCurrentPlan: opts.ignoreCurrentPlan })
+    dispatchApi.dispatch(openUrlInContext({ url }))
+    return
+  }
+
+  if (state.user && getFeatureFlags().close_starter_team_loophole_v2 && hasStarterTeamLoopholeAccess({
+    userId: state.user.id,
+    teams: Object.values(state.teams),
+    rolesByTeamId: state.roles.byTeamId,
   })) {
-    e.dispatch(selectViewAction({
+    dispatchApi.dispatch(selectViewAction({
       view: 'teamUpgrade',
       teamFlowType: CreateUpgradeAction.CREATE_AND_UPGRADE,
       teamId: null,
       paymentStep: UpgradeSteps.PLAN_COMPARISON,
-      previousView: t,
-      isEduTeam: a,
-      ignoreCurrentPlan: s,
+      previousView: opts.previousView,
+      isEduTeam: opts.isEduTeam,
+      ignoreCurrentPlan: opts.ignoreCurrentPlan,
     }))
     return
   }
-  o.user && Mk(o.user.id, Object.values(o.teams), o.roles.byTeamId)
-    ? e.dispatch(selectViewAction({
-        view: 'teamUpgrade',
-        teamFlowType: CreateUpgradeAction.CREATE,
-        teamId: null,
-        paymentStep: UpgradeSteps.CREATE_TEAM,
-        previousView: t,
-        isEduTeam: a,
-        ignoreCurrentPlan: s,
-      }))
-    : e.dispatch(selectViewAction({
-        view: 'teamCreation',
-        previousView: t,
-        onSubmitReturnToPrevView: i,
-        isEduTeam: a,
-        ignoreCurrentPlan: s,
-      }))
+
+  if (state.user && isEligibleForStarterLoopholeTeamOne(state.user.id, Object.values(state.teams), state.roles.byTeamId)) {
+    dispatchApi.dispatch(selectViewAction({
+      view: 'teamUpgrade',
+      teamFlowType: CreateUpgradeAction.CREATE,
+      teamId: null,
+      paymentStep: UpgradeSteps.CREATE_TEAM,
+      previousView: opts.previousView,
+      isEduTeam: opts.isEduTeam,
+      ignoreCurrentPlan: opts.ignoreCurrentPlan,
+    }))
+  }
+  else {
+    dispatchApi.dispatch(selectViewAction({
+      view: 'teamCreation',
+      previousView: opts.previousView,
+      onSubmitReturnToPrevView: opts.onSubmitReturnToPrevView,
+      isEduTeam: opts.isEduTeam,
+      ignoreCurrentPlan: opts.ignoreCurrentPlan,
+    }))
+  }
 })
-let er = ['fullscreen', 'prototype']
-let en = [...allViews, 'desktopNewTab']
-export function $$ei12(e, t) {
-  if (er.includes(e.view))
-  ;else if (en.includes(e.view))
-    return !0; else if (t && t.includes(e.view))
-    return !0
-  return !1
+
+/**
+ * Views considered sensitive for reload (original: er, en, $$ei12)
+ */
+const reloadSensitiveViews = ['fullscreen', 'prototype']
+const allKnownViews = [...allViews, 'desktopNewTab']
+
+export function isViewReloadSensitive(selectedView: any, additionalViewsToReload?: string[]) { // $$ei12
+  if (reloadSensitiveViews.includes(selectedView.view)) {
+    return false
+  }
+  else if (allKnownViews.includes(selectedView.view)) {
+    return true
+  }
+  else if (additionalViewsToReload && additionalViewsToReload.includes(selectedView.view)) {
+    return true
+  }
+  return false
 }
-let ea = null
-let $$es10 = createOptimistThunk((e, t) => {
-  ea && $$ei12(t.selectedView, ea.additionalViewsToReload) && customHistory.reload(ea.reason, ea.metadata)
+
+/**
+ * Reload if pending reload exists and the current selected view matches the pending criteria.
+ * Original: $$es10
+ */
+const reloadIfPending = createOptimistThunk((_: ThunkAPI, context: { selectedView: any }) => {
+  if (pendingReload && isViewReloadSensitive(context.selectedView, pendingReload.additionalViewsToReload)) {
+    customHistory.reload(pendingReload.reason, pendingReload.metadata)
+  }
 })
-export function $$eo25() {
-  return ea != null
+
+/** Originals: $$eo25, $$el20 */
+export function hasPendingReload() { // $$eo25
+  return pendingReload != null
 }
-export function $$el20() {
-  ea = null
+export function clearPendingReload() { // $$el20
+  pendingReload = null
 }
-export var $$ed6 = (e => (e[e.DEFAULT = 2e3] = 'DEFAULT', e[e.NONE = 0] = 'NONE', e))($$ed6 || {})
-let $$ec2 = createOptimistThunk(async (e, t) => {
-  await delay(t.delay)
-  $$ei12(e.getState().selectedView, t.additionalViewsToReload)
-    ? customHistory.reload(t.reason, t.metadata)
-    : ea = {
-      reason: t.reason,
-      metadata: t.metadata,
-      additionalViewsToReload: t.additionalViewsToReload,
+
+/**
+ * Reload reason enum (original: $$ed6)
+ */
+
+export enum ReloadReasonEnum {
+  NONE = 0,
+  DEFAULT = 2000,
+}
+/**
+ * Schedule a reload after a delay; if view matches now, reload immediately, otherwise store pending reload.
+ * Original: $$ec2
+ */
+const scheduleReload = createOptimistThunk(async (_: ThunkAPI, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
+  await delay(args.delay)
+  if (isViewReloadSensitive((_.getState()).selectedView, args.additionalViewsToReload)) {
+    customHistory.reload(args.reason, args.metadata)
+  }
+  else {
+    pendingReload = {
+      reason: args.reason,
+      metadata: args.metadata,
+      additionalViewsToReload: args.additionalViewsToReload,
     }
+  }
 })
-let $$eu1 = createOptimistThunk((e, t) => {
-  let r = e.getState().selectedView
-  r.view === 'orgSelfServe'
-    ? e.dispatch(selectViewAction({
-        view: r.view,
-        step: r.step,
-        orgMigrated: !0,
-        upsellSource: r.upsellSource,
-      }))
-    : e.dispatch($$ec2(t))
+
+/**
+ * Handle org migration: if current view is orgSelfServe then mark orgMigrated, else schedule reload.
+ * Original: $$eu1
+ */
+const handleOrgMigration = createOptimistThunk((dispatchApi, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
+  const selectedView = dispatchApi.getState().selectedView
+  if (selectedView.view === 'orgSelfServe') {
+    dispatchApi.dispatch(selectViewAction({
+      view: selectedView.view,
+      step: selectedView.step,
+      orgMigrated: true,
+      upsellSource: selectedView.upsellSource,
+    }))
+  }
+  else {
+    dispatchApi.dispatch(scheduleReload(args))
+  }
 })
-let ep = createOptimistThunk(async (e, t) => {
-  await delay(t.delay)
+
+/**
+ * Redirect home after delay.
+ * Original: ep
+ */
+const redirectHomeAfterDelay = createOptimistThunk(async (_: ThunkAPI, args: { delay: number }) => {
+  await delay(args.delay)
   customHistory.redirect('/')
 })
-let $$e_0 = createOptimistThunk((e, t) => {
-  e.dispatch(FlashActions.flash(getI18nString('org_settings.mfa_for_members.member_flash')))
-  e.dispatch(ep(t))
+
+/**
+ * Flash MFA message then redirect home.
+ * Original: $$e_0
+ */
+const flashMfaAndRedirect = createOptimistThunk((dispatchApi, args: { delay: number }) => {
+  dispatchApi.dispatch(FlashActions.flash(getI18nString('org_settings.mfa_for_members.member_flash')))
+  dispatchApi.dispatch(redirectHomeAfterDelay(args))
 })
-export const C7 = $$e_0
-export const Dj = $$eu1
-export const Dl = $$ec2
-export const Dw = $$et3
-export const Ef = $$q4
-export const Fs = $$J5
-export const RH = $$ed6
-export const T5 = $$$7
-export const UN = $$X8
-export const V3 = $$z9
-export const Z8 = $$es10
-export const _l = $$B11
-export const cz = $$ei12
-export const dm = $$K13
-export const eP = $$Y14
-export const gN = $$W15
-export const gR = $$H16
-export const h3 = $$ee17
-export const hm = $$j18
-export const kg = $$Z19
-export const l7 = $$el20
-export const mT = $$V21
-export const p5 = $$Q22
-export const q0 = $$U23
-export const qj = $$F24
-export const rg = $$eo25
-export const rq = $$G26
+
+/**
+ * Exports: map original short exported identifiers to the new refactored symbols.
+ * (Keep the original export names to preserve external references)
+ */
+
+// Original short export mapping preserved:
+export const C7 = flashMfaAndRedirect // $$e_0
+export const Dj = handleOrgMigration // $$eu1
+export const Dl = scheduleReload // $$ec2
+export const Dw = openCreateTeamFlow // $$et3
+export const Ef = trackFontInstallerDownloaded // $$q4
+export const Fs = trackFontUninstallerDownloaded // $$J5
+export const RH = ReloadReasonEnum // $$ed6
+export const T5 = trackRecentFileClicked // $$$7
+export const UN = trackFileClicked // $$X8
+export const V3 = openUrlInContext // $$z9
+export const Z8 = reloadIfPending // $$es10
+export const _l = switchAccountAndNavigate // $$B11
+export const cz = isViewReloadSensitive // $$ei12
+export const dm = selectTeamView // $$K13
+export const eP = selectLimitedTeamSharedProjectsView // $$Y14
+export const gN = selectFolderView // $$W15
+export const gR = toggleDropdown // $$H16
+export const h3 = loadTrashedFiles // $$ee17
+export const hm = refreshSessionState // $$j18
+export const kg = trackNavTreeClicked // $$Z19
+export const l7 = clearPendingReload // $$el20
+export const mT = showDropdownIfNone // $$V21
+export const p5 = trashedFoldersQuery // $$Q22
+export const q0 = sendIpcRefreshSession // $$U23
+export const qj = setFileBrowserLoadingHandler // $$F24
+export const rg = hasPendingReload // $$eo25
+export const rq = startDesktopAppAuth // $$G26

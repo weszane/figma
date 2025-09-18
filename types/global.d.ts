@@ -19,6 +19,8 @@ export interface MultiplayerPreconnectOptions {
 }
 
 export interface Fig {
+  createViewer: (value: any) => Promise<any>
+  getPrototypeAppBindingsForTest: any
   importShimURL: string
   importWorkerURL: string
   figMigratorURL: string

@@ -3,7 +3,7 @@ import { NodePropertyCategory, Thumbnail, SceneNodeCpp, BackgroundPattern } from
 import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { whiteColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
-import { VG } from "../figma_app/622881";
+import { getColorSpaceString } from "../figma_app/622881";
 import { XE } from "../figma_app/385874";
 function c(e) {
   return e ? {
@@ -99,7 +99,7 @@ export function $$_1(e) {
 export function $$A3(e, t, i) {
   let n = document.createElement("canvas");
   let r = i ? n.getContext("2d", {
-    colorSpace: VG(i)
+    colorSpace: getColorSpaceString(i)
   }) : n.getContext("2d");
   n.width = t.x;
   n.height = t.y;

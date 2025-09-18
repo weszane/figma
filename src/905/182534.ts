@@ -1,6 +1,6 @@
 import { appendNavigationContext, appendUserIdToUrl, compareValues, navigateToFile } from "../905/508367";
 import { debugState } from "../905/407919";
-import { gN, dm } from "../figma_app/976345";
+import { selectFolderView, selectTeamView } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { Pj, Ns, PI } from "../905/977218";
@@ -88,10 +88,10 @@ export function $$S2(e, t, i, r, a) {
   }, i || void 0, r || void 0);
 }
 export function $$w5(e, t) {
-  e(gN(t.id));
+  e(selectFolderView(t.id));
 }
 export function $$C9(e, t) {
-  e(dm(t.id));
+  e(selectTeamView(t.id));
 }
 export function $$T3(e, t) {
   e(selectViewAction({

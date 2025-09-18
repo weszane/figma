@@ -1,7 +1,7 @@
 import { Kt } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { UserAppType, interactionTestHelpers } from "../figma_app/763686";
-import { jS, eS, N4 } from "../figma_app/762706";
+import { initializeTsApiBindings, getAndRemoveFullscreenEmscriptenExecutor, setupWasmModule } from "../figma_app/762706";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance, bellFeedAPIInstance } from "../figma_app/876459";
@@ -13,7 +13,7 @@ import { logWarning } from "../905/714362";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { Sh } from "../905/470286";
 import { QL } from "../905/609392";
-import { xK } from "../905/125218";
+import { fullscreenPerfManager } from "../905/125218";
 import { bM } from "../figma_app/527873";
 import { vw } from "../905/189279";
 function T(e) {
@@ -31,8 +31,8 @@ async function S(e, t) {
     }
   };
   window.Module = r;
-  jS({
-    callMain: eS(),
+  initializeTsApiBindings({
+    callMain: getAndRemoveFullscreenEmscriptenExecutor(),
     tsApisForCpp: e,
     registerRefreshCallback: e => {
       vw(t, e);
@@ -42,17 +42,17 @@ async function S(e, t) {
 }
 async function v(e) {
   try {
-    await xK.timeAsync("loadingCode", () => (injectTextDecoderFix(), window.FULLSCREEN_PRELOADS?.js || loadScript(I(e))));
+    await fullscreenPerfManager.timeAsync("loadingCode", () => (injectTextDecoderFix(), window.FULLSCREEN_PRELOADS?.js || loadScript(I(e))));
   } catch (e) {
     throw Error("Failed to load fullscreen JS code");
   }
-  return N4({
+  return setupWasmModule({
     isProduction: !0,
-    executeEmscriptenJS: eS()
+    executeEmscriptenJS: getAndRemoveFullscreenEmscriptenExecutor()
   });
 }
 async function A(e, t) {
-  let r = xK.time("instantiateStreaming", async () => {
+  let r = fullscreenPerfManager.time("instantiateStreaming", async () => {
     try {
       return await WebAssembly.instantiateStreaming(e, t);
     } catch (e) {
@@ -60,12 +60,12 @@ async function A(e, t) {
       throw e;
     }
   });
-  return await xK.timeAsync("awaitInstantiateStreaming", () => r);
+  return await fullscreenPerfManager.timeAsync("awaitInstantiateStreaming", () => r);
 }
 async function x(e, t) {
   if (!e.ok) throw Error(`Downloading wasm failed with ${e.status}`);
   let r = await e.arrayBuffer();
-  let n = xK.time("instantiate", async () => {
+  let n = fullscreenPerfManager.time("instantiate", async () => {
     try {
       return await WebAssembly.instantiate(r, t);
     } catch (e) {
@@ -73,7 +73,7 @@ async function x(e, t) {
       throw e;
     }
   });
-  return await xK.timeAsync("awaitInstantiate", () => n);
+  return await fullscreenPerfManager.timeAsync("awaitInstantiate", () => n);
 }
 let N = !1;
 let C = null;
@@ -82,7 +82,7 @@ async function w(e) {
   !C || C === e || isInteractionPathCheck() || $$D6() || ("fullscreen-app" === C ? reportError(_$$e.CLIENT_PLATFORM, Error("Previously downloaded fullscreen wasm, but is now downloading prototype-lib")) : "prototype-lib" === C && reportError(_$$e.CLIENT_PLATFORM, Error("Previously downloaded prototype-lib wasm, but is now downloading fullscreen")));
   isInteractionPathCheck() && console.log("About to get binaryURL for", e);
   let t = T(e);
-  xK.start("loadingBinaryStart");
+  fullscreenPerfManager.start("loadingBinaryStart");
   isInteractionPathCheck() && console.log("About to call loadJS and fetch wasm for url", t, I(e));
   let [r, n] = await Promise.all([window.FULLSCREEN_PRELOADS?.wasm || fetch(t), v(e)]);
   isInteractionPathCheck() && console.log("Finished calling loadJS and fetch wasm");
@@ -203,9 +203,9 @@ export async function $$H4(e, t = "fullscreen-app") {
     } = await L(t);
     isInteractionPathCheck() && console.log("Finished calling loadAllForWasmBinaryType");
     isInteractionPathCheck() && console.log("About to call initializeWasm");
-    jS({
+    initializeTsApiBindings({
       callMain: () => {
-        xK.time("callMain", () => receiveInstance(wasmResult.instance, wasmResult.module));
+        fullscreenPerfManager.time("callMain", () => receiveInstance(wasmResult.instance, wasmResult.module));
       },
       tsApisForCpp: G,
       registerRefreshCallback: e => {

@@ -29,7 +29,7 @@ import { Ay } from "@stylexjs/stylex";
 import v from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { A5, fC, kl, pw, DQ } from "../905/275640";
-import { Fk, wA } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Y as _$$Y } from "../a88a4c5a/211633";
 import { pq } from "../8826/642528";
 import { q as _$$q } from "../8826/33573";
@@ -44,7 +44,7 @@ import { Zk } from "../figma_app/626177";
 import { Vy } from "../8826/611318";
 import { Wv } from "../figma_app/711157";
 import { rC, Em } from "../figma_app/385874";
-import { ax, p8, s6 } from "../figma_app/722362";
+import { useHasSceneGraphSelection, useAppModelProperty, useAppModelPropsShallow } from "../figma_app/722362";
 import { o3, nt } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { BS } from "../642/202922";
@@ -121,7 +121,7 @@ var F = v;
 function D() {
   let [e, t] = useState(new Set());
   let n = pq("PARENT");
-  let r = Fk(e => {
+  let r = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     return 1 === t.length && t[0]?.isGrid && GridLayoutApi?.getGridTrackSelection() || [];
   });
@@ -176,7 +176,7 @@ function K({
   selectedRows: n,
   updateSelectedRows: r
 }) {
-  let l = Fk(t => {
+  let l = useDeepEqualSceneValue(t => {
     let n = t.getDirectlySelectedNodes();
     return 1 === n.length && n[0]?.isGrid ? "ROWS" === e ? n[0].gridRowSizesInOrder : n[0].gridColumnSizesInOrder : null;
   });
@@ -422,7 +422,7 @@ function e4() {
   let t = X9();
   let n = function () {
     let e = _$$tx2();
-    let t = wA(e => li(e.getDirectlySelectedNodes(), !1));
+    let t = useStrictDeepEqualSceneValue(e => li(e.getDirectlySelectedNodes(), !1));
     let n = NV();
     let i = bX();
     let r = _$$L();
@@ -431,23 +431,23 @@ function e4() {
   }();
   let r = a3();
   let l = function () {
-    let e = wA(e => {
+    let e = useStrictDeepEqualSceneValue(e => {
       let t = e.getDirectlySelectedNodes();
       return LS(t);
     });
-    let t = wA(e => {
+    let t = useStrictDeepEqualSceneValue(e => {
       let t = e.getDirectlySelectedNodes();
       return D5(t);
     });
     return useMemo(() => [[t], e], [e, t]);
   }();
-  let s = Fk(e => {
+  let s = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     return FC(t);
   });
-  let o = wA(e => OD(e.getDirectlySelectedNodes()));
+  let o = useStrictDeepEqualSceneValue(e => OD(e.getDirectlySelectedNodes()));
   let a = db();
-  let c = Fk(e => YW(e.getDirectlySelectedNodes()));
+  let c = useDeepEqualSceneValue(e => YW(e.getDirectlySelectedNodes()));
   let p = Ef();
   let u = Sd();
   let _ = useMemo(() => {
@@ -487,7 +487,7 @@ function tt(e) {
   }, "create-template-set-button");
 }
 function tn(e) {
-  return 1 === Fk(e => e.getDirectlySelectedNodes().length) ? jsx(ti, {
+  return 1 === useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().length) ? jsx(ti, {
     ...e
   }) : jsx(tr, {
     ...e
@@ -623,7 +623,7 @@ function tS() {
     getTypeCountAndNodeOverrides: e
   });
   let s = tg(nodeType, count);
-  return ax() ? jsxs(Fragment, {
+  return useHasSceneGraphSelection() ? jsxs(Fragment, {
     children: [jsx(_$$W, {
       selectionName: (() => {
         switch (s) {
@@ -712,8 +712,8 @@ function tb({
     numSelected: _numSelected,
     pluginRelaunchData
   } = DQ("pluginRelaunchData", "numSelected");
-  let K = p8("currentPage");
-  let L = p8("currentSelectedProperty");
+  let K = useAppModelProperty("currentPage");
+  let L = useAppModelProperty("currentSelectedProperty");
   let U = Ws(b, j);
   let B = SJ();
   let {
@@ -965,7 +965,7 @@ function tw({
 }) {
   let f = useDispatch();
   let [I, E] = useAtomValueAndSetter(_$$b);
-  let P = s6("currentPage", "currentSelectedProperty");
+  let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   let w = qh();
   let C = hD();
   let k = kl("exportSettings");

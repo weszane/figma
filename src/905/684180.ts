@@ -17,7 +17,7 @@ import { sx as _$$sx } from "../905/941192";
 import { hideModal } from "../905/156213";
 import { no } from "../figma_app/701001";
 import { Tm, Zz, xk } from "../figma_app/952446";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { GQ } from "../figma_app/32128";
@@ -27,7 +27,7 @@ function C(e) {
   let i = GQ();
   let s = useAtomWithSubscription(Tm);
   let [o, l] = useState(() => Zz());
-  let d = Fk(() => FullscreenPerfMetrics?.getFileNodeCount() ?? 0);
+  let d = useDeepEqualSceneValue(() => FullscreenPerfMetrics?.getFileNodeCount() ?? 0);
   let c = no();
   let A = Math.max(s - o, 0);
   useEffect(() => {

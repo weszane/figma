@@ -8,7 +8,7 @@ import { createDeferredPromise } from '../905/874553';
 import { XHR, XHRError } from '../905/910117';
 import { debounce } from '../905/915765';
 import { buildStaticUrl } from '../figma_app/169182';
-import { d$, EC } from '../figma_app/291892';
+import { MAX_CANVAS_SIZE, imageProcessor } from '../figma_app/291892';
 import { fullscreenValue } from '../figma_app/455680';
 import { Jj } from '../figma_app/553184';
 import { documentStateTsApi, ImageCppBindings, UploadStatus, ImageExportType } from '../figma_app/763686';
@@ -62,7 +62,7 @@ let A = class e {
     this.retries = 0;
     this.state = 0;
     this._downloadPromise = null;
-    this._imageIsReady = () => { };
+    this._imageIsReady = () => {};
     this._readyPromise = new Promise(e => {
       this._imageIsReady = e;
     });
@@ -112,7 +112,7 @@ let A = class e {
       let e = this.downloadFromS3();
       e.$$finally(() => {
         this._downloadPromise = null;
-      }).catch(e => { });
+      }).catch(e => {});
       this._downloadPromise = e;
     }
     return this._downloadPromise;
@@ -252,7 +252,7 @@ let w = class e {
         }
         let l = 1;
         let d = o.type === 'fileKey' ? r[o.fileKey] : i[o.libraryKey];
-        for (; ;) {
+        for (;;) {
           try {
             let r = await XHR.put(`/api/files/${u}`, {
               image_sha1s: [...new Set(d)],
@@ -351,7 +351,7 @@ let w = class e {
           failed: Array.from(r)
         };
       }
-    } catch { }
+    } catch {}
     return {
       success: e,
       failed: []
@@ -1076,7 +1076,7 @@ export function $$L0() {
 }
 export async function $$P2(e, t, r) {
   if (!ImageCppBindings.imageTypeDecodeSupported(t)) throw new Error(`Image type ${t} is not supported and cannot be decoded`);
-  let n = await EC.decodeAsync(e, t, d$, d$, !0);
+  let n = await imageProcessor.decodeAsync(e, t, MAX_CANVAS_SIZE, MAX_CANVAS_SIZE, !0);
   let i = await crypto.subtle.digest('SHA-1', e);
   let a = {
     width: n.width,
@@ -1088,8 +1088,8 @@ export async function $$P2(e, t, r) {
     rgba: n.rgba ? n.rgba : new Uint8Array(),
     name: r
   };
-  let o = EC.thumbnailSize(n.width, n.height);
-  let l = await EC.generateThumbnail(a, o.w, o.h);
+  let o = imageProcessor.thumbnailSize(n.width, n.height);
+  let l = await imageProcessor.generateThumbnail(a, o.w, o.h);
   let d = await crypto.subtle.digest('SHA-1', l.compressedData);
   return {
     fullResolution: a,

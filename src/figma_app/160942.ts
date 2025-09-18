@@ -3,14 +3,14 @@ import { SK, Fq, vu } from "../905/84777";
 import { Ju, IX } from "../905/712921";
 import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { ProductAccessTypeEnum } from "../905/513035";
-import { Oq } from "../905/332483";
+import { designSet } from "../905/332483";
 export function $$d1(e, t) {
   return "promoReview" === e.view || "teamUpgrade" === e.view && e.paymentStep === UpgradeSteps.CONFIRM_PAY && t.promo;
 }
 export function $$c0({
   currency: e
 }) {
-  let t = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
+  let t = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let r = t.dict(t => ({
     currency: e,
     billableProductKey: t,

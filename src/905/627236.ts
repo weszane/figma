@@ -32,8 +32,8 @@ import { wn } from "../figma_app/920435";
 import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { xQ, $$in } from "../figma_app/84966";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { T as _$$T2 } from "../905/696189";
@@ -113,7 +113,7 @@ function X(e) {
   let Z = _$$g(f.summary.annual_seats, {
     throwOnError: !1
   });
-  let [X, J] = _$$a(N_.dict(e => 0));
+  let [X, J] = _$$a(collaboratorSet.dict(e => 0));
   let [ee, et] = useState(!1);
   let ei = getI18nString("billing_modals.add_seats.header");
   let en = v()(Object.values(X));
@@ -143,20 +143,20 @@ function X(e) {
     teamId: b
   } : null);
   let es = W && ["loaded", "loading"].includes(ea.status);
-  let eo = es && "loaded" === ea.status ? (t = ea.data, N_.dict(e => {
+  let eo = es && "loaded" === ea.status ? (t = ea.data, collaboratorSet.dict(e => {
     let i = X[e];
     let n = t[e];
     if (isNullish(n) || isNullish(i) || i <= 0) return 0;
     let r = n.charge_per_seat;
     return r * i - n.credit_per_seat * Math.min(i, n.max_seats_to_credit);
-  })) : N_.dict(() => 0);
-  let el = es && "loaded" === ea.status ? (i = ea.data, N_.map(e => {
+  })) : collaboratorSet.dict(() => 0);
+  let el = es && "loaded" === ea.status ? (i = ea.data, collaboratorSet.map(e => {
     let t = X[e];
     let n = i[e];
     return isNullish(n) || isNullish(t) || t <= 0 ? 0 : n.savings_per_seat * t;
   }).reduce((e, t) => e + t, 0)) : 0;
   let ed = v()(Object.values(eo));
-  let ec = N_.dict(e => (X[e] || 0) + (Z[e] || 0));
+  let ec = collaboratorSet.dict(e => (X[e] || 0) + (Z[e] || 0));
   let eu = () => {
     et(!1);
     e.onClose();
@@ -252,7 +252,7 @@ function X(e) {
             minColumnWidth: 48,
             columnGaps: 32
           },
-          items: N_.toArray().sort(AG),
+          items: collaboratorSet.toArray().sort(compareProductAccessTypes),
           columns: [{
             id: "billableProductKey",
             name: jsx(TextWithTruncation, {

@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import s from "../vendor/267721";
-import { useDebouncuse-debouncedor/850789";
+import {useDebounce} from 'use-debounce';
 import { I6 } from "../figma_app/688398";
 import { useCurrentFileKey } from "../figma_app/516028";
 var r = s;

@@ -8,7 +8,7 @@ import { V } from "../905/749397";
 import { W8, _B } from "../figma_app/320164";
 import { J } from "../905/931050";
 import { getInitialOptions, isGovCluster } from "../figma_app/169182";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { getIsMobile } from "../figma_app/778880";
 import { AUTH_SET_REDIRECT_URL, AUTH_COMPLETE, AUTH_SHOW_ERROR } from "../905/194276";
 import { trackAuthEvent } from "../905/248178";
@@ -80,7 +80,7 @@ function T({
     }
   }, [e, t, h, n]);
   useEffect(() => {
-    if (o.status === _$$r.SUCCESS && !I.current) {
+    if (o.status === APILoadingStatus.SUCCESS && !I.current) {
       I.current = !0;
       let t = o.value;
       let {

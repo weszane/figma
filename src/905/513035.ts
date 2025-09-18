@@ -135,7 +135,7 @@ export function isInCollaboratorHierarchy(type: string, parentType: string): boo
 }
 
 // Exported aliases for backward compatibility
-export const YJ = isInCollaboratorHierarchy // $$E0
+export const B6 = isInCollaboratorHierarchy // $$E0
 export const DM = CollaboratorTypes // $$h1
 export const Gu = ViewAccessTypeEnum // $$m2
 export const OQ = AICreditsTypeEnumSchema // $$u3

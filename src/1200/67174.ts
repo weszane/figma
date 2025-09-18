@@ -6,9 +6,9 @@ import { k } from "../6658/341273";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lR } from "../figma_app/204145";
 import { Tv } from "../figma_app/311375";
-import { hA } from "../figma_app/88239";
+import { useDevModeFocusId } from "../figma_app/88239";
 import { dh } from "../figma_app/186343";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { oA } from "../figma_app/856806";
 export function $$f0() {
   let e = lR();
@@ -16,14 +16,14 @@ export function $$f0() {
     nodeIds,
     noSelection
   } = function () {
-    let e = hA();
+    let e = useDevModeFocusId();
     let n = Tv();
     let t = dh();
     let s = !e && !n?.length;
     let o = e ? [e] : n?.length ? n : [t];
     return {
       noSelection: s,
-      nodeIds: Fk((e, n) => {
+      nodeIds: useDeepEqualSceneValue((e, n) => {
         if (!n?.length) return [];
         let t = [];
         n.forEach(n => {

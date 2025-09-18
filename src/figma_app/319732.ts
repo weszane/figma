@@ -9,14 +9,14 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
-import { RK } from "../figma_app/815170";
+import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { fullscreenValue } from "../figma_app/455680";
 import { isFigmaDomain } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
-import { UA } from "../905/250387";
+import { copyHyperlinkToClipboard } from "../905/250387";
 import { F as _$$F } from "../905/162860";
 import { Qq, bl, Ae, Yg, FI, ln, vk, ho, Kk, hc, Ef, i1, lY, yF, u6, kL, kz, YL } from "../figma_app/12182";
 import { A as _$$A } from "../1617/353951";
@@ -37,14 +37,14 @@ function M(e) {
   let i;
   let o = useDispatch();
   let l = t => {
-    o(RK({
+    o(setupHyperlinkHandler({
       rawInput: e.urlString,
       event: t
     }));
     e.immediatelyDismissHyperlinkPopup && e.immediatelyDismissHyperlinkPopup();
   };
   let g = t => {
-    e.data.type === _$$F.MAILTO || e.data.type === _$$F.TEL ? UA(o, e.data.url.pathname, "HyperlinkPopup") : console.error("We don't yet enable copy for other hyperlinks");
+    e.data.type === _$$F.MAILTO || e.data.type === _$$F.TEL ? copyHyperlinkToClipboard(o, e.data.url.pathname, "HyperlinkPopup") : console.error("We don't yet enable copy for other hyperlinks");
     e.immediatelyDismissHyperlinkPopup && e.immediatelyDismissHyperlinkPopup();
     t.stopPropagation();
   };

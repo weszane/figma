@@ -6,7 +6,7 @@ import { getFalseValue } from "../figma_app/897289";
 import { loadingStatePutLoading, loadingStateDelete, loadingStatePutFailure } from "../figma_app/714946";
 import { yJ, uW, Z } from "../905/618921";
 import { selectCurrentUser } from "../905/372672";
-import { VP, aF } from "../905/18797";
+import { isLoading, isFailure } from "../905/18797";
 import { UserAPIHandlers } from "../905/93362";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 let h = new class {
@@ -56,8 +56,8 @@ export function $$b2(e) {
       return !!e && !$$v0(e) && t;
     }(e);
     let p = !!s;
-    let _ = !p && VP(a, r);
-    let h = !p && aF(a, r);
+    let _ = !p && isLoading(a, r);
+    let h = !p && isFailure(a, r);
     let g = !p && o && !_ && !h;
     useEffect(() => {
       g && (t(loadingStatePutLoading({
@@ -109,7 +109,7 @@ export function $$T3(e) {
     for (let e = 0; e < loadingKeys.length; e++) {
       let r = loadingKeys[e];
       let n = _[e];
-      if (0 === n.length || VP(o, r) || aF(o, r)) return;
+      if (0 === n.length || isLoading(o, r) || isFailure(o, r)) return;
       t(loadingStatePutLoading({
         key: r
       }));
@@ -132,8 +132,8 @@ export function $$T3(e) {
   }, [t, _, loadingKeys, o]);
   return {
     usersById: r,
-    loading: loadingKeys.some(e => VP(o, e)),
-    hasError: loadingKeys.some(e => aF(o, e))
+    loading: loadingKeys.some(e => isLoading(o, e)),
+    hasError: loadingKeys.some(e => isFailure(o, e))
   };
 }
 let I = e => UserAPIHandlers.getUser({

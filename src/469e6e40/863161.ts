@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { ub } from "../figma_app/240735";
+import { updateTeamDescriptionThunk } from "../figma_app/240735";
 import { c } from "../4452/815584";
 export function $$o0({
   team: e
@@ -12,7 +12,7 @@ export function $$o0({
     initialName: e.description ?? "",
     placeholder: getI18nString("resource_rename_modal.team_description.placeholder"),
     submitText: getI18nString("resource_rename_modal.team_description.submit"),
-    onRename: a => t(ub({
+    onRename: a => t(updateTeamDescriptionThunk({
       teamId: e.id,
       description: a
     }))

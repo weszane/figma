@@ -11,7 +11,7 @@ import { e as _$$e } from "../905/621515";
 import { y as _$$y } from "../905/958284";
 import { a as _$$a } from "../905/12032";
 import { NT, g5 } from "../figma_app/579169";
-import { f as _$$f } from "../905/940356";
+import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { M } from "../905/152487";
 import { d as _$$d } from "../905/14910";
@@ -120,7 +120,7 @@ export function $$F0({
     priority: _$$N.URGENT_ALERT
   }, [i, I]);
   let w = useDispatch();
-  let C = _$$f("tos_accepted");
+  let C = selectUserFlag("tos_accepted");
   let T = !!getInitialOptions().tos_agreement_required && !C;
   let k = getFeatureFlags().tos_blocking_fallback_modal;
   let R = H(t);

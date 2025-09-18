@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
-import { KH } from "../figma_app/722362";
+import { useSceneGraphSelection } from "../figma_app/722362";
 import { fk, jM, zs, PE, gg, ME } from "../905/23253";
 import { r6, sj } from "../905/507950";
 import { J } from "../905/494216";
@@ -76,7 +76,7 @@ function k({
   getErrorViewCustomMessage: u,
   getErrorViewButtons: h
 }) {
-  let g = KH();
+  let g = useSceneGraphSelection();
   let x = useMemo(() => !!g && (ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0) > 1, [g]);
   let {
     close

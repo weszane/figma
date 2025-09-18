@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
-import { L3 } from "../figma_app/806075";
+import { DEFAULT_DESIGN_MODE_LABEL } from "../figma_app/806075";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -93,7 +93,7 @@ export function $$O0() {
   let r = getSelectedEditorType();
   return (_$$E2(e.uniqueId, $$A1, () => {
     t?.canEdit && e.show();
-  }), _$$E2(e.uniqueId, [Vc, "open-playground-file-click-event", "action_open_universal_insert_collage_modal", L3], () => {
+  }), _$$E2(e.uniqueId, [Vc, "open-playground-file-click-event", "action_open_universal_insert_collage_modal", DEFAULT_DESIGN_MODE_LABEL], () => {
     e.complete();
   }), !t || RM()) ? null : jsx(w, {
     onClose: e.complete,

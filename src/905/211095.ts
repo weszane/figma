@@ -12,7 +12,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { CG } from "../figma_app/646357";
-import { AF } from "../figma_app/889655";
+import { selectSingleSelectedNode } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { B_, wh, Rq, T1 } from "../figma_app/164212";
 import { vS } from "../figma_app/323320";
@@ -25,7 +25,7 @@ export function $$x3({
 }) {
   return selectWithShallowEqual(i => ({
     allStates: ow(i),
-    singleSelectedNode: AF(i),
+    singleSelectedNode: selectSingleSelectedNode(i),
     stateGroup: NA(i),
     stateGroupPropertySortOrder: OC(i),
     dropdownShown: i.dropdownShown,

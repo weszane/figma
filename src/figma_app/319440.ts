@@ -43,7 +43,7 @@ import { Q as _$$Q } from '../figma_app/104130';
 import { W as _$$W3 } from '../figma_app/110892';
 import { F as _$$F2 } from '../figma_app/127204';
 import { I9 } from '../figma_app/151869';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { aC, bX, NV, RK } from '../figma_app/193101';
 import { h as _$$h } from '../figma_app/203891';
 import { P as _$$P } from '../figma_app/223272';
@@ -70,7 +70,7 @@ import { e as _$$e } from '../figma_app/630744';
 import { R as _$$R2 } from '../figma_app/636548';
 import { db } from '../figma_app/636678';
 import { W as _$$W2 } from '../figma_app/691750';
-import { aV } from '../figma_app/722362';
+import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { bh, VE, X9 } from '../figma_app/730706';
 import { qw } from '../figma_app/740163';
 import { dG } from '../figma_app/753501';
@@ -247,7 +247,7 @@ function ek() {
   let e = function () {
     let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     let t = kk(e);
-    let r = Fk(e => e.getDirectlySelectedNodes().every(e => U(e)));
+    let r = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes().every(e => U(e)));
     let a = useCurrentFileKey();
     let s = getCollectionSummaryStatus(a).data;
     let o = t?.getDakotaSelector()?.collectionId;
@@ -697,7 +697,7 @@ function tr({
     return t?.type === _$$e;
   });
   let Q = selectCurrentFile();
-  let ea = aV();
+  let ea = useIsProgressBarHiddenOrLocked();
   let es = isIntegrationContext();
   let eo = isDesignFileType();
   let el = sO();
@@ -829,7 +829,7 @@ export function $$ti7(e, t) {
   let p = X9();
   let _ = VE();
   let h = function () {
-    let e = Fk(e => {
+    let e = useDeepEqualSceneValue(e => {
       let t = e.getDirectlySelectedNodes();
       return t.length > 0 && t.every(e => findContainingResponsiveSet(e) && (e.type === 'FRAME' || e.isCodeInstance && e.isLayerLikeCodeNode) && !e.isBreakpointFrame);
     });

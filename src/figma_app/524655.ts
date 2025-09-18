@@ -8,12 +8,12 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { NX } from "../figma_app/456871";
 import { getObservableValue } from "../figma_app/84367";
-import { Fk, wA as _$$wA } from "../figma_app/167249";
+import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { y6 } from "../figma_app/803787";
 import { Xm } from "../905/935570";
 import { Sz } from "../figma_app/784857";
 export function $$f9() {
-  return Fk(e => e.getCurrentPage()?.focusedNodeId || defaultSessionLocalIDString);
+  return useDeepEqualSceneValue(e => e.getCurrentPage()?.focusedNodeId || defaultSessionLocalIDString);
 }
 export function $$E2(e) {
   AppStateTsApi && (AppStateTsApi.singleSlideView().zoomToNode(e, 0), AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled() || AppStateTsApi.singleSlideView().zoomToGrid(0));
@@ -22,8 +22,8 @@ export function $$y11(e) {
   return e.reduce((e, t) => e.concat(t), []);
 }
 export let $$b5 = {
-  reorder: e => { },
-  onMouseDown: e => { }
+  reorder: e => {},
+  onMouseDown: e => {}
 };
 export function $$T8(e) {
   let t = [e, ...e.children].reduce(function (e, t) {
@@ -83,7 +83,7 @@ export function $$v4(e, t) {
 }
 export function $$A3() {
   let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
-  return _$$wA((e, t) => t.flat().reduce(({
+  return useStrictDeepEqualSceneValue((e, t) => t.flat().reduce(({
     numSkippedSlides: t,
     numTotalSlides: r
   }, n) => {
@@ -109,18 +109,18 @@ export function $$x0() {
   return useCallback(n => {
     0 === numTotalSlides ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_no_slides"),
-      onDismiss: () => { }
+      onDismiss: () => {}
     })) : numSkippedSlides > 0 ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_skipped_slides"),
-      onDismiss: () => { }
+      onDismiss: () => {}
     })) : s.length > 0 ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_variant_error_slides"),
-      onDismiss: () => { }
+      onDismiss: () => {}
     })) : n();
   }, [e, s.length, numSkippedSlides, numTotalSlides]);
 }
 export function $$N1() {
-  return Fk(() => NX().length > 0);
+  return useDeepEqualSceneValue(() => NX().length > 0);
 }
 export function $$C6() {
   return {

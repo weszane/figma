@@ -1,26 +1,64 @@
-export function $$n2() {
-  let e = window.navigator?.connection || {};
+/**
+ * Retrieves network connection information from the browser's navigator.
+ * Original function name: $$n2
+ */
+export function getConnectionInfo(): ConnectionInfo {
+  const connection = window.navigator?.connection || {}
   return {
-    connectionDownlinkMax: e?.downlinkMax,
-    connectionDownlink: e?.downlink,
-    connectionEffectiveType: e?.effectiveType,
-    connectionType: e?.type,
-    connectionRtt: e?.rtt
-  };
+    connectionDownlinkMax: connection?.downlinkMax,
+    connectionDownlink: connection?.downlink,
+    connectionEffectiveType: connection?.effectiveType,
+    connectionType: connection?.type,
+    connectionRtt: connection?.rtt,
+  }
 }
-export function $$r0() {
+
+/**
+ * Retrieves hardware concurrency and device memory information from the browser's navigator.
+ * Original function name: $$r0
+ */
+export function getNavigatorHardwareInfo(): NavigatorHardwareInfo {
   return {
     navigatorHardwareConcurrency: window.navigator?.hardwareConcurrency,
-    navigatorDeviceMemory: window.navigator?.deviceMemory
-  };
+    navigatorDeviceMemory: window.navigator?.deviceMemory,
+  }
 }
-export function $$a1() {
+
+/**
+ * Retrieves device pixel ratio and window dimensions.
+ * Original function name: $$a1
+ */
+export function getWindowDeviceInfo(): WindowDeviceInfo {
   return {
     devicePixelRatio: window.devicePixelRatio,
     windowHeight: window.innerHeight,
-    windowWidth: window.innerWidth
-  };
+    windowWidth: window.innerWidth,
+  }
 }
-export const PH = $$r0;
-export const VD = $$a1;
-export const dd = $$n2;
+
+/**
+ * Types for returned objects.
+ */
+export interface ConnectionInfo {
+  connectionDownlinkMax: number | undefined
+  connectionDownlink: number | undefined
+  connectionEffectiveType: string | undefined
+  connectionType: string | undefined
+  connectionRtt: number | undefined
+}
+
+export interface NavigatorHardwareInfo {
+  navigatorHardwareConcurrency: number | undefined
+  navigatorDeviceMemory: number | undefined
+}
+
+export interface WindowDeviceInfo {
+  devicePixelRatio: number
+  windowHeight: number
+  windowWidth: number
+}
+
+// Refactored export names for easier imports
+export const PH = getNavigatorHardwareInfo
+export const VD = getWindowDeviceInfo
+export const dd = getConnectionInfo

@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -32,7 +32,7 @@ let C = (e, t) => {
 };
 function I(e) {
   let t = useDispatch();
-  let n = DP();
+  let n = getVisibleTheme();
   return jsx(_l, {
     isShowing: e.isShowing,
     trackingContextName: "ko_kr_launch_announcement",

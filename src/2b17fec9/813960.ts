@@ -11,7 +11,7 @@ import { W6 } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { S as _$$S } from "../figma_app/552746";
 import { n as _$$n } from "../905/734251";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
 import { getViewportZoom } from "../figma_app/62612";
 import { KindEnum } from "../905/129884";
@@ -160,7 +160,7 @@ let O = forwardRef(function ({
         transform: `scale(${d})`
       },
       children: jsx(l.Icon, {
-        color: F.format(i),
+        color: colorCSSManipulatorInstance.format(i),
         ref: s,
         shapeStrokeProps: {
           isDragging: !0,

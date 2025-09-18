@@ -30,7 +30,7 @@ import { iK, HK, CU, xH, OT, t3, Pb, Mi, w3, EN, Dp, hq, Ww, zv, TL, qb, YG, qM,
 import { z as _$$z } from "../905/404751";
 import { hideModal, popModalStack, showModalHandler, hideSpecificModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { TA } from "../figma_app/217457";
+import { convertLgSeatTypeProduct } from "../figma_app/217457";
 import { FFileType, FAccessLevelType, FPlanFeatureType, FPaymentHealthStatusType, FPlanRestrictionType } from "../figma_app/191312";
 import { mapUserProperties, mapResourceAccess } from "../figma_app/349248";
 import { AccountTypeEnum } from "../figma_app/35887";
@@ -62,8 +62,8 @@ import { NU } from "../905/163189";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { FlashActions } from "../905/573154";
-import { Dw } from "../figma_app/976345";
-import { e5 } from "../figma_app/297957";
+import { openCreateTeamFlow } from "../figma_app/976345";
+import { hasStarterTeamLoopholeAccess } from "../figma_app/297957";
 import { KQ } from "../figma_app/475472";
 import { pw } from "../figma_app/805373";
 import { A as _$$A2 } from "../svg/367542";
@@ -443,11 +443,11 @@ function eH(e) {
         type: "button",
         className: "file_move--rowButton--CSDNV",
         onClick: () => {
-          null != t && !e.orgId && e5({
+          null != t && !e.orgId && hasStarterTeamLoopholeAccess({
             userId: t.id,
             teams: Object.values(e.teams),
             rolesByTeamId: e.rolesByTeamId
-          }) ? (o(hideModal()), o(Dw({
+          }) ? (o(hideModal()), o(openCreateTeamFlow({
             openInNewTab: !desktopAPIInstance
           }))) : (d(!1), o(xH()));
         },
@@ -580,7 +580,7 @@ export function $$e83(e) {
             ecc_upgrading_locked: null,
             dev_mode_paid_status: e.devModePaidStatus || FPlanFeatureType.RESTRICTED,
             ...(a ? {
-              active_seat_type: TA(e.activeSeatTypeUpgrade?.billableProduct)
+              active_seat_type: convertLgSeatTypeProduct(e.activeSeatTypeUpgrade?.billableProduct)
             } : void 0)
           }
         };

@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { isInvalidValue } from "../905/216495";
 import { LibraryInfo } from "../figma_app/43951";
-import { dT } from "../figma_app/889655";
+import { selectInstanceKeys } from "../figma_app/889655";
 import { $ } from "../905/330495";
 export function $$d0() {
-  let e = useSelector(dT);
+  let e = useSelector(selectInstanceKeys);
   let {
     backingSymbolGUID,
     singleBackingSymbol,
@@ -21,7 +21,7 @@ export function $$d0() {
   return null != backingSymbolGUID && !isInvalidValue(backingSymbolGUID) && isBackingSymbolShared || null != backingStateGroupGUID && !isInvalidValue(singleBackingStateGroup) && isBackingStateGroupShared ? h : null;
 }
 export function $$c2() {
-  let e = useSelector(dT);
+  let e = useSelector(selectInstanceKeys);
   let {
     isBackingSymbolShared,
     singleBackingSymbol,

@@ -8,7 +8,7 @@ import { showModalHandler } from "../905/156213";
 import { FPlanRestrictionType } from "../figma_app/191312";
 import { TeamType } from "../905/814802";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { yJ } from "../905/584989";
+import { putTeamUser } from "../905/584989";
 createOptimistThunk((e, {
   members: t,
   team: r,
@@ -88,7 +88,7 @@ export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", as
       data: r
     }) {
       e.dispatch(createOptimistCommitAction(h));
-      e.dispatch(yJ({
+      e.dispatch(putTeamUser({
         teamUsers: r.meta,
         teamId: t
       }));

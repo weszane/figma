@@ -5,7 +5,7 @@ import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback, MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { zj, Gt } from "../905/275640";
-import { KH } from "../figma_app/722362";
+import { useSceneGraphSelection } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { a2 } from "../figma_app/762558";
@@ -107,7 +107,7 @@ export function $$S3() {
   let {
     numSelectedByType
   } = $$g13();
-  let t = KH();
+  let t = useSceneGraphSelection();
   return !!numSelectedByType && (!!(vx(numSelectedByType, "RECTANGLE") || vx(numSelectedByType, "ROUNDED_RECTANGLE") || vx(numSelectedByType, "SYMBOL") || vx(numSelectedByType, "INSTANCE")) || !!vx(numSelectedByType, "FRAME") && function e(t, r) {
     let n = new Set(["RECTANGLE", "ROUNDED_RECTANGLE", "SYMBOL", "INSTANCE"]);
     for (let i of t) if (n.has(i.type) || "FRAME" === i.type && !i.resizeToFit || "FRAME" === i.type && r < 2 && e(i.childrenNodes, r + 1)) return !0;

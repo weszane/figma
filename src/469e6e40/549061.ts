@@ -18,7 +18,7 @@ import { U as _$$U } from '../905/275247';
 import { w as _$$w2 } from '../905/281010';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { N_ } from '../905/332483';
+import { collaboratorSet } from '../905/332483';
 import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
 import { getUserId } from '../905/372672';
@@ -75,10 +75,10 @@ import { BC } from '../figma_app/149367';
 import { Xf } from '../figma_app/153916';
 import { Wi } from '../figma_app/162641';
 import { FOrganizationLevelType, FUserRoleType } from '../figma_app/191312';
-import { Zx } from '../figma_app/217457';
-import { m$ } from '../figma_app/240735';
+import { getProductAccessTypeByKey } from '../figma_app/217457';
+import { fetchTeamMembersThunk } from '../figma_app/240735';
 import { useSubscription } from '../figma_app/288654';
-import { ce } from '../figma_app/347146';
+import { isChromebookTabbed } from '../figma_app/347146';
 import { fq, uE, ur } from '../figma_app/451028';
 import { useIsAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_app/465071';
 import { UpgradeRequestSetting } from '../figma_app/482728';
@@ -88,7 +88,7 @@ import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { tI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { $z, Me } from '../figma_app/617427';
-import { k as _$$k4 } from '../figma_app/618031';
+import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { SecureLink } from '../figma_app/637027';
 import { BillingSectionEnum, DashboardSection, WorkspaceTab } from '../figma_app/650409';
 import { EQ, MX } from '../figma_app/684446';
@@ -730,7 +730,7 @@ function tu({
     request: void 0,
     costShownInEmail: void 0
   });
-  let _ = _$$k4();
+  let _ = isProrationBillingEnabledForCurrentPlan();
   let {
     seatAvailability,
     status
@@ -857,7 +857,7 @@ function tu({
         return t;
       }
       if (!l.billableProductKey) return t;
-      let d = Zx(l.billableProductKey);
+      let d = getProductAccessTypeByKey(l.billableProductKey);
       if (e.has(n)) return t;
       if (l.status !== 'pending') {
         e.has(n) || e.add(n);
@@ -1303,7 +1303,7 @@ function tu({
                   throw new Error('Not a valid approval setting');
               }
             };
-            return N_.reduce((e, t) => e || a(t), !1);
+            return collaboratorSet.reduce((e, t) => e || a(t), !1);
           })() && jsx('div', {
             children: jsx(_$$_2, {
               dataTestId: 'approval-settings-banner',
@@ -1394,7 +1394,7 @@ export function $$tg0({
   let l = getRumLoggingConfig();
   let d = useRef(null);
   let [A, O] = useState(0);
-  let L = !!desktopAPIInstance || ce();
+  let L = !!desktopAPIInstance || isChromebookTabbed();
   wY(d, () => {
     O(d.current?.clientWidth ?? 0);
   });
@@ -1485,7 +1485,7 @@ export function $$tg0({
                 isELA: D,
                 onAddSeats: z,
                 onManage: () => {
-                  q.key.type === FOrganizationLevelType.TEAM ? (q.key.parentId && a(m$({
+                  q.key.type === FOrganizationLevelType.TEAM ? (q.key.parentId && a(fetchTeamMembersThunk({
                     teamId: q.key.parentId
                   })), a(selectViewAction({
                     view: 'teamAdminConsole',

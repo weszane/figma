@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { n as _$$n } from "../905/64411";
 import { lY } from "../905/939482";
 import { Mb } from "../figma_app/646357";
-import { D2, VP } from "../905/18797";
+import { isLoaded, isLoading } from "../905/18797";
 import { x } from "../905/453561";
 import { g } from "../905/505662";
 export function $$p0({
@@ -35,7 +35,7 @@ export function $$p0({
     for (let t of y) {
       if (e >= 5) break;
       let n = Mb(t);
-      !D2(m, n) && (e += 1, VP(m, n) || i(_$$n({
+      !isLoaded(m, n) && (e += 1, isLoading(m, n) || i(_$$n({
         libraryKey: t,
         includeThumbnail: !0,
         includeRealtime: !0

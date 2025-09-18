@@ -16,18 +16,18 @@ import { d as _$$d } from "../905/758967";
 import { UK } from "../figma_app/740163";
 import { currentSessionLocalIDString, clearSelection, addToSelection, setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Bf } from "../figma_app/249941";
 import { MO } from "../3682/618608";
 import { pc } from "../figma_app/152690";
 import { O as _$$O, w as _$$w } from "../3674/344857";
 import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
-import { l7, ZO } from "../figma_app/88239";
+import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { isVsCodeEnvironment } from "../905/858738";
-import { aV, p8 } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { W as _$$W } from "../441/503702";
 import { Lk } from "../figma_app/122682";
 import { FEditorType } from "../figma_app/53721";
@@ -81,7 +81,7 @@ function N(e) {
   return e === LayoutSizingMode.HUG_CONTENT ? getI18nString("inspect_panel.properties.hug") : e === LayoutSizingMode.FILL_CONTAINER ? "100%" : e === LayoutSizingMode.FIXED ? getI18nString("inspect_panel.properties.fixed") : "";
 }
 function I(e) {
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     if (!n) return null;
     let o = "INSTANCE" === n.type || "SYMBOL" === n.type || n.isStateGroup || n.isInstanceSublayer || n.isSymbolSublayer;
@@ -680,7 +680,7 @@ function eN({
   let [r, a] = useAtomValueAndSetter(Bl);
   let [l, d] = useAtomValueAndSetter(kO);
   let s = Xr(HO);
-  let u = aV();
+  let u = useIsProgressBarHiddenOrLocked();
   let [c, m] = useState(!1);
   let x = useRef(0);
   let p = void 0 !== e ? e : 3e3;
@@ -792,11 +792,11 @@ let eX = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
   let t = useSelector(e => e.progressBarState);
-  let n = p8("loadingEmbeds");
+  let n = useAppModelProperty("loadingEmbeds");
   let c = !!useCanAccessFullDevMode();
-  let m = l7();
+  let m = useIsFullscreenOverview();
   let x = _$$e();
-  let p = ZO();
+  let p = useIsFullscreenDevModeComponentBrowser();
   let h = Lk();
   let g = useCanUseDevModeDemoFile();
   let f = useRef(null);

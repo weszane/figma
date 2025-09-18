@@ -6,7 +6,7 @@ import { withParsedMeta } from "../905/405710";
 import { liveStoreInstance } from "../905/713695";
 import { vx } from "../905/91038";
 import { e_ } from "../figma_app/803787";
-import { dK } from "../figma_app/889655";
+import { selectSceneGraph } from "../figma_app/889655";
 import { C9, jf } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Z } from "../905/939602";
@@ -26,7 +26,7 @@ export function $$A2({
     libraryKey: e
   }) {
     let t = useDispatch();
-    let i = useSelector(dK);
+    let i = useSelector(selectSceneGraph);
     let a = useSelector(e_);
     let s = useSelector(vx);
     let o = useSelector(C9);
@@ -49,7 +49,7 @@ export function $$A2({
   return o ? l : h;
 }
 export function $$y0(e) {
-  let t = useSelector(dK);
+  let t = useSelector(selectSceneGraph);
   let i = useSelector(C9);
   let a = useSelector(jf);
   return useMemo(() => i.filter(i => {

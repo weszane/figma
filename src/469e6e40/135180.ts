@@ -23,7 +23,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { p as _$$p } from "../905/597320";
-import { V3 } from "../figma_app/976345";
+import { openUrlInContext } from "../figma_app/976345";
 import { K as _$$K } from "../905/628118";
 import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftFilesView, ProjectNameById } from "../figma_app/43951";
@@ -102,7 +102,7 @@ function V(e) {
   let o = l ? z(l) : null;
   let d = !!t.trashedAt;
   let c = useCallback(() => {
-    a(V3({
+    a(openUrlInContext({
       url: t.url
     }));
   }, [t.url, a]);
@@ -165,7 +165,7 @@ function H({
   return jsxs(Fragment, {
     children: [jsx(IU, {
       onClick: () => {
-        t(V3({
+        t(openUrlInContext({
           url: e[0].url
         }));
       },
@@ -258,7 +258,7 @@ function ee(e) {
   let B = "loaded" === p.status && p.data.abandonedDraftFiles.hasNextPage() ? () => p.data?.abandonedDraftFiles.loadNext(20) : void 0;
   let G = useCallback(e => !e.trashedAt, []);
   let z = useCallback(e => {
-    t(V3({
+    t(openUrlInContext({
       url: e.url
     }));
   }, [t]);

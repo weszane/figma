@@ -8,11 +8,11 @@ import { useLatestRef } from "../figma_app/922077";
 import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
 import { Dv, Fj, jI } from "../905/763714";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { hk } from "../figma_app/632319";
+import { getViewerInstance } from "../figma_app/632319";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/383776";
-import { hA, l7, ZO } from "../figma_app/88239";
+import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { J4 } from "../figma_app/91703";
 import { z4 } from "../905/37051";
@@ -175,16 +175,16 @@ export function $$F7({
     let e = useIsSelectedFigmakeFullscreen();
     let t = $$U3();
     let r = XM();
-    let n = hA();
-    let i = l7();
+    let n = useDevModeFocusId();
+    let i = useIsFullscreenOverview();
     let a = _$$e();
-    let s = ZO();
+    let s = useIsFullscreenDevModeComponentBrowser();
     return !!t && !r && !n && !i && !a && !s && !e;
   }();
   let r = e.presenterSessionID === e.sessionID;
   let i = getSelectedViewType();
   let a = useCallback(() => {
-    "prototype" === i ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
+    "prototype" === i ? getViewerInstance()?.stopPresenting() : Multiplayer.stopPresenting();
   }, [i]);
   useEffect(() => {
     !t && r && a();
@@ -208,8 +208,8 @@ export function $$B1() {
   let e = useIsSelectedFigmakeFullscreen();
   let t = XM();
   let r = e2();
-  let n = hA();
-  let i = l7();
+  let n = useDevModeFocusId();
+  let i = useIsFullscreenOverview();
   return !!t || !!r || !!n || !!i || !!e;
 }
 export function $$G13() {

@@ -10,7 +10,7 @@ import { x as _$$x } from "../905/211326";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ as _$$$ } from "../905/355181";
-import { cU } from "../905/966582";
+import { QUICKTIME_TYPES } from "../905/966582";
 import { cM, aT } from "../905/530837";
 import { KindEnum } from "../905/129884";
 import { OQ, Zp } from "../905/462076";
@@ -124,7 +124,7 @@ function H(e) {
   let {
     feedPostUuid
   } = e;
-  let Q = cU.includes(e.videoContent.mediaType) && !!feedPostUuid;
+  let Q = QUICKTIME_TYPES.includes(e.videoContent.mediaType) && !!feedPostUuid;
   let X = useMemo(() => Q ? `/api/feed_posts/${feedPostUuid}/videos/${e.videoContent.videoFileUuid}/manifest` : e.videoContent.path, [Q, feedPostUuid, e.videoContent]);
   let K = useLatestRef(f);
   let $ = useLatestRef(e.videoContent.path);
@@ -482,7 +482,7 @@ function et(e) {
   });
 }
 function en(e) {
-  if (cU.includes(e.videoContent.mediaType) && "" === e.videoContent.videoFileUuid) return jsx(et, {
+  if (QUICKTIME_TYPES.includes(e.videoContent.mediaType) && "" === e.videoContent.videoFileUuid) return jsx(et, {
     isThumbnail: e.isThumbnail
   });
   if (e.isThumbnail && e.videoContent.coverImage) return jsx(K, {

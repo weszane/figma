@@ -7,7 +7,7 @@ import { parseAndNormalizeQuery } from "../905/634134";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { _l } from "../figma_app/976345";
+import { switchAccountAndNavigate } from "../figma_app/976345";
 import { canAccessDevModeWithOrg } from "../905/898378";
 import { InspectState } from "../905/560959";
 import { $ as _$$$ } from "../905/532878";
@@ -19,14 +19,14 @@ import { Ad } from "../905/300250";
 import { Nf } from "../figma_app/864378";
 import { showModalHandler } from "../905/156213";
 import { PI } from "../905/977218";
-import { yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { Xg } from "../figma_app/199513";
 import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
 import { subscribeToContainingPage } from "../figma_app/582924";
 import { waitForJoinStatus } from "../905/346794";
 import { Lp } from "../905/309846";
 import { QO, VO } from "../figma_app/646357";
-import { xN } from "../905/672897";
+import { fetchTeamRoles } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
 import { teamAPIClient } from "../905/834575";
@@ -47,7 +47,7 @@ let $$H = createOptimistThunk((e, t, {
     let E = parseAndNormalizeQuery(t.params || "");
     let F = t.hash;
     let B = E.fuid;
-    B && B !== f.user?.id && e.dispatch(_l({
+    B && B !== f.user?.id && e.dispatch(switchAccountAndNavigate({
       workspace: {
         userId: B,
         orgId: f.openFile.parentOrgId
@@ -194,11 +194,11 @@ let $$H = createOptimistThunk((e, t, {
               teamId: a
             });
             s = data.meta;
-            e.dispatch(yJ({
+            e.dispatch(setTeamOptimistThunk({
               team: data.meta,
               userInitiated: !1
             }));
-            await xN(a, e);
+            await fetchTeamRoles(a, e);
           } else s = a ? teams[a] : null;
           if (!s) return;
           let o = (await i.fetch(Xg({

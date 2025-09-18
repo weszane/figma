@@ -26,7 +26,7 @@ import { j as _$$j } from "../905/834956";
 import { deepEqual } from "../905/382883";
 import E from "../vendor/116389";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { am } from "../905/640017";
+import { getThemePreference } from "../905/640017";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { CU, z6 } from "../905/963340";
 import { A as _$$A } from "../905/891805";
@@ -41,7 +41,7 @@ import { x as _$$x2 } from "../905/149501";
 import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
-import { _l, rq } from "../figma_app/976345";
+import { switchAccountAndNavigate, startDesktopAppAuth } from "../figma_app/976345";
 import { e as _$$e2 } from "../905/579755";
 import { selectViewAction, showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { popModalStack, showModalHandler } from "../905/156213";
@@ -545,7 +545,7 @@ function eX() {
     let e = useDispatch();
     let t = useSelector(e => e.authedUsers);
     let n = selectUser();
-    let o = am();
+    let o = getThemePreference();
     let a = useSelector(e => e.authedProfilesById);
     let d = useSelector(e => getTeamAdminAccess(e), deepEqual);
     let u = useSelector(e => getOrgAdminAccess(e));
@@ -731,7 +731,7 @@ function eX() {
           let s = n[0];
           let a = n[1];
           s === OrganizationType.ORG && a ? i = a : s === OrganizationType.TEAM && a && (o = a);
-          l(_l({
+          l(switchAccountAndNavigate({
             workspace: {
               userId: t,
               orgId: i,
@@ -772,7 +772,7 @@ function eX() {
         let a = () => {
           e >= 10 ? n(showModalHandler({
             type: ed
-          })) : t ? n(rq()) : customHistory.redirect("/login?cont=", "_blank");
+          })) : t ? n(startDesktopAppAuth()) : customHistory.redirect("/login?cont=", "_blank");
         };
         return {
           element: jsxs(MenuItemComp, {

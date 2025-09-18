@@ -1,4 +1,4 @@
-import { VV } from "../905/623179";
+import { uploadVideoToPresignedPost } from "../905/623179";
 import { XHR } from "../905/910117";
 import { fileApiHandler } from "../figma_app/787550";
 export async function $$s0(e, t, i) {
@@ -8,7 +8,7 @@ export async function $$s0(e, t, i) {
       sha1: r.sha1
     });
     if (i?.hasCanceled()) throw Error("Import canceled.");
-    let s = await VV(e.data.meta.url, e.data.meta.fields, r, "video/mp4");
+    let s = await uploadVideoToPresignedPost(e.data.meta.url, e.data.meta.fields, r, "video/mp4");
     await o(r.sha1, t, s, e.data.meta.blob_upload_commit_key || "");
   } catch (e) {
     if (409 === e.status) await o(r.sha1, t, "", "");else if (e.data?.message) throw Error(e.data.message);else throw e;

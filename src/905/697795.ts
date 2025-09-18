@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { ce } from "../figma_app/347146";
+import { isChromebookTabbed } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory, hasViewProperty } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
-import { UN, V3 } from "../figma_app/976345";
+import { trackFileClicked, openUrlInContext } from "../figma_app/976345";
 import { wr } from "../figma_app/387599";
 import { OE } from "../figma_app/930386";
 import { createOptimistThunk } from "../905/350402";
@@ -33,7 +33,7 @@ export function $$D3() {
   return getInitialOptions().release_manifest_git_commit;
 }
 function L(e, t, i = "") {
-  if (ce()) {
+  if (isChromebookTabbed()) {
     document.title = t ? `${i}${t}` : e;
     return;
   }
@@ -156,7 +156,7 @@ export let $$j1 = createOptimistThunk(e => customHistory.listen(t => {
   }();
 }));
 export function $$U4(e, t, i, n) {
-  e(UN({
+  e(trackFileClicked({
     fileKey: t.key
   }));
   let r = i || n;
@@ -178,7 +178,7 @@ export function $$B8(e, t, i, n) {
     fileKey: t,
     uiSelectedView: JSON.stringify(i)
   });
-  n(UN({
+  n(trackFileClicked({
     fileKey: t
   }));
   customHistory.redirect(e, "_blank");
@@ -192,7 +192,7 @@ export function $$V0(e, t, i, n) {
   customHistory.redirect(e, "_blank");
 }
 export function $$G5(e, t) {
-  t(V3({
+  t(openUrlInContext({
     url: e
   }));
 }

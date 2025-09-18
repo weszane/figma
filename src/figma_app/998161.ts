@@ -25,7 +25,7 @@ import { bn, x$, Ou, iC, Tm } from "../figma_app/385874";
 import { kl } from "../905/275640";
 import { tZ } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { dH, p8 } from "../figma_app/722362";
+import { useCurrentTool, useAppModelProperty } from "../figma_app/722362";
 import { normalizePath } from "../905/309735";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -205,7 +205,7 @@ function Z({
 }) {
   let l = useDispatch();
   let d = Um();
-  let c = dH();
+  let c = useCurrentTool();
   let u = Ep();
   let p = _$$C();
   let _ = Ku();
@@ -214,7 +214,7 @@ function Z({
   let [E, y] = useState(bn(e.type) ? 1 : 0);
   let b = Ou(e);
   let T = x$(e);
-  let I = p8("currentSelectedGradientStop");
+  let I = useAppModelProperty("currentSelectedGradientStop");
   let N = iC(b || T || $$W2, I);
   let C = r => {
     e.type !== r && t(Tm.initPaint(r, $$W2.color, e, "slides-custom-color-picker"), !bn(e.type) && bn(r) ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES);

@@ -20,7 +20,7 @@ import { TabLoop } from '../905/718764';
 import { lQ } from '../905/934246';
 import { o as _$$o } from '../8826/796619';
 import { getObservableOrFallback } from '../figma_app/84367';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { $j, Ht } from '../figma_app/178475';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { wx, Wx, Y9 } from '../figma_app/409807';
@@ -34,7 +34,7 @@ import { Axis, GridDirection, GridLayoutApi, LayoutSizingType, SceneGraphHelpers
 import { fn } from '../figma_app/811257';
 import { sA } from '../figma_app/841644';
 import { generateRecordingKey } from '../figma_app/878298';
-import { Sh } from '../figma_app/889655';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { hF, qE, QK } from '../figma_app/960598';
 import { A as _$$A5 } from '../svg/55819';
 import { A as _$$A4 } from '../svg/217820';
@@ -59,7 +59,7 @@ function W({
   let g = a && isValidValue(a) ? a : null;
   let m = s && isValidValue(s) ? s : null;
   let _ = useRef(null);
-  let v = Fk(e => {
+  let v = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     return t.length !== 0 && t.every(e => {
       if (!e) return !1;
@@ -549,9 +549,9 @@ let et = memo(({
   });
 });
 export function $$es1(e) {
-  let t = useSelector(Sh);
+  let t = useSelector(selectSceneGraphSelectionKeys);
   let n = t.length === 1 && t[0] ? t[0] : '';
-  return Fk((t, n) => {
+  return useDeepEqualSceneValue((t, n) => {
     let l = t.get(n);
     return l ? e === 'PARENT' && l.isGrid ? n : e === 'CHILD' && l.isGridChild ? n : null : null;
   }, n);
@@ -560,7 +560,7 @@ function ec({
   recordingKey: e
 }) {
   let t = $$es1('CHILD');
-  let n = Fk((e, t) => {
+  let n = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let n = e.get(t);
     return n && n.isGridChild ? {
@@ -650,7 +650,7 @@ function ec({
 function ed({
   recordingKey: e
 }) {
-  let t = Fk(e => {
+  let t = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (t.length !== 1) return null;
     let n = t[0];

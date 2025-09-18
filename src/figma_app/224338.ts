@@ -5,9 +5,9 @@ import { Y } from "../905/912236";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useMemoStable } from "../905/19536";
-import { KH } from "../figma_app/722362";
+import { useSceneGraphSelection } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$_0() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
   return useMemo(() => {
@@ -22,14 +22,14 @@ export function $$_0() {
   }, [e]);
 }
 export function $$h1() {
-  let e = KH();
+  let e = useSceneGraphSelection();
   return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     return e && t ? Object.keys(e).filter(e => t.get(e)?.isSlideOrTemplate() ?? !1) : [];
   }, [e]);
 }
 export function $$m5() {
-  let e = KH();
+  let e = useSceneGraphSelection();
   return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
@@ -41,7 +41,7 @@ export function $$m5() {
   }, [e]);
 }
 export function $$g4() {
-  let e = KH();
+  let e = useSceneGraphSelection();
   return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
@@ -60,7 +60,7 @@ export function $$g4() {
 }
 export function $$f2() {
   let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat();
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     for (let r of t) {
       let t = e.get(r);
       if (Y(t) && !t.isSkippedSlide) return r;
@@ -77,7 +77,7 @@ export function $$E3() {
     for (let n of e) if (t.has(n) && (r.push(n), t.$$delete(n)), 0 === t.size) break;
     return r;
   }();
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     for (let r of t) {
       let t = e.get(r);
       if (Y(t) && !t.isSkippedSlide) return r;

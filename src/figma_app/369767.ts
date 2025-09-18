@@ -10,7 +10,7 @@ import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
-import { tc } from "../905/15667";
+import { DeepLinkType } from "../905/15667";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../figma_app/590592";
@@ -105,7 +105,7 @@ export function $$M0({
     getIsUpgradeHandlerLoading
   } = wH({
     folderId: null,
-    entryPoint: tc.SITE_SETTINGS
+    entryPoint: DeepLinkType.SITE_SETTINGS
   });
   let d = getUpgradeEligibility(FProductAccessType.FIGMAKE);
   let c = getI18nString("figmake.metadata.modal_button_site");
@@ -124,7 +124,7 @@ export function $$M0({
       onClick: handleUpgrade({
         licenseType: FProductAccessType.FIGMAKE,
         upgradeReason: _$$i.SITE_SETTINGS,
-        entryPoint: tc.SITE_SETTINGS
+        entryPoint: DeepLinkType.SITE_SETTINGS
       }),
       children: jsx(l, {})
     })

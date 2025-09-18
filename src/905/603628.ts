@@ -6,7 +6,7 @@ import o from "classnames";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
-import { y } from "../figma_app/297957";
+import { useAtMentionInviteExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f6, Hn, xD, ri } from "../905/337179";
 var l = o;
@@ -37,7 +37,7 @@ export let $$f0 = 122;
 export function $$_1(e) {
   let [t, i] = useState(!1);
   let a = selectCurrentFile()?.teamId;
-  let o = y()({
+  let o = useAtMentionInviteExperiment()({
     isDraftFile: !a,
     isMobile: BrowserInfo.isMobileBrowser,
     showExpAtMentionInvite: !!getFeatureFlags().show_at_mention_invited_users,

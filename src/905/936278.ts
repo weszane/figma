@@ -6,7 +6,7 @@ import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
 import { sb, bn } from "../figma_app/385874";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { X7 } from "../905/713167";
 var $$m2 = (e => (e.LOADING = "LOADING", e.LOADED = "LOADED", e.TIMED_OUT = "TIMED_OUT", e))($$m2 || {});
 var $$h3 = (e => (e.TextInBackground = "TextInBackground", e.VideoInBackground = "VideoInBackground", e.ImageInBackground = "ImageInBackground", e.GradientInBackground = "GradientInBackground", e.BlendModeInBackground = "BlendModeInBackground", e.BlendModeInForeground = "BlendModeInForeground", e.MixedBackgrounds = "MixedBackgrounds", e.MixedStandards = "MixedStandards", e.Unavailable = "Unavailable", e))($$h3 || {});
@@ -114,8 +114,8 @@ export function $$A0(e, t, i, r) {
       };
     }, [r, t, e, a, i]);
   }(function (e, t, i, r) {
-    let a = Fk((e, t) => t.map(t => e.get(t)?.absoluteBoundingBox), e);
-    let s = Fk(e => e.getCurrentPage()?.guid);
+    let a = useDeepEqualSceneValue((e, t) => t.map(t => e.get(t)?.absoluteBoundingBox), e);
+    let s = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
     let l = trackDefinedFileEventWithStore();
     let c = !getFalseValue() && e.length > 1;
     let p = useMemo(() => {

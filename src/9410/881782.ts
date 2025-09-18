@@ -7,7 +7,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { FlashActions } from '../905/573154';
 import { endPerformanceSpan, startPerformanceSpan } from '../905/670985';
 import { logError, logInfo } from '../905/714362';
-import { f as _$$f } from '../905/940356';
+import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { ts } from '../figma_app/49598';
@@ -735,7 +735,7 @@ export function $$R0() {
   let C = Xr(oO);
   let v = Xr($i);
   let E = Xr(jE);
-  let T = !!_$$f('cursor_bot_v2_has_greeted_with_wave');
+  let T = !!selectUserFlag('cursor_bot_v2_has_greeted_with_wave');
   let w = useContext(viewportNavigatorContext);
   let S = Z();
   let j = useSelector(e => e.mirror.sceneGraph);

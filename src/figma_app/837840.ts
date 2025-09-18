@@ -1,12 +1,12 @@
 import { getFeatureFlags } from "../905/601108";
 import { logInfo } from "../905/714362";
-import { p3 } from "../figma_app/622881";
+import { shouldUsePolyfill } from "../figma_app/622881";
 var s = (e => (e[e.Unknown = 0] = "Unknown", e[e.No = 1] = "No", e[e.Yes = 2] = "Yes", e))(s || {});
 let o = 0;
 export function $$l0(e, t) {
   if ("srgb" === t) return e.getContext("2d");
   {
-    let r = p3();
+    let r = shouldUsePolyfill();
     return e.getContext("2d", {
       colorSpace: r ? "srgb" : t
     });
@@ -27,7 +27,7 @@ export function $$c1({
 }) {
   if (p && e.getContext("2d", {
     colorSpace: u
-  }), (getFeatureFlags().ee_color_management_force_canvas || p3()) && 1 !== o) {
+  }), (getFeatureFlags().ee_color_management_force_canvas || shouldUsePolyfill()) && 1 !== o) {
     if (d) {
       d.width = t;
       d.height = r;
@@ -51,7 +51,7 @@ export function $$c1({
       } catch {
         logInfo("color management", "polyfill failed", {
           ee_color_management_force_canvas: getFeatureFlags().ee_color_management_force_canvas,
-          shouldUseCssColorLevel4Polyfill: p3(),
+          shouldUseCssColorLevel4Polyfill: shouldUsePolyfill(),
           is2dCanvasPolyfillSupportedByBrowser: s[o]
         });
         l(e, c);

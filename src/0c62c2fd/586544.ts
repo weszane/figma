@@ -9,7 +9,7 @@ import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { TA } from "../figma_app/217457";
+import { convertLgSeatTypeProduct } from "../figma_app/217457";
 import { Pe } from "../4452/207203";
 import { W } from "../4452/143028";
 import { EditAccessModalView } from "../figma_app/43951";
@@ -91,7 +91,7 @@ export function $$N0(e) {
           id: a.id,
           user_id: a.user.id,
           team_id: r.teamId,
-          active_seat_type: TA(a.activeSeatTypeUpgrade?.billableProduct)
+          active_seat_type: convertLgSeatTypeProduct(a.activeSeatTypeUpgrade?.billableProduct)
         },
         team_role: s ? Pe(s, a.user) : void 0,
         file_edit_roles_count: r.fileEditRolesCount,

@@ -18,7 +18,7 @@ import { HJx, EJM, hVg, k$X } from "../figma_app/27776";
 import { l3, _Y, A9, fQ } from "../905/721983";
 import { throwTypeError } from "../figma_app/465776";
 import { PZ } from "../figma_app/766708";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { y as _$$y } from "../905/829723";
 import { bU } from "../figma_app/841197";
 import { Cc } from "../905/545842";
@@ -253,7 +253,7 @@ function Y({
 function q({
   value: e
 }) {
-  let t = _$$F.format(e);
+  let t = colorCSSManipulatorInstance.format(e);
   return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx("span", {

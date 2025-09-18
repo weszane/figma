@@ -6,7 +6,7 @@ import { PN } from "../figma_app/897289";
 import { Fe, uz } from "../905/284552";
 import { fullscreenValue } from "../figma_app/455680";
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
-import { wA } from "../figma_app/167249";
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { fileApiHandler } from "../figma_app/787550";
 var r;
 let m = _$$m(g, (r = _$$y(6e4), (e, t) => !t.deferred.result && r(e, t)));
@@ -64,7 +64,7 @@ export function $$C0(e, {
   return i;
 }
 function v(e) {
-  return wA((e, t) => {
+  return useStrictDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i ? i.size : null;
   }, e);

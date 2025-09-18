@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
 import { selectCurrentFile } from "../figma_app/516028";
-import { D2 } from "../905/18797";
+import { isLoaded } from "../905/18797";
 import { yW } from "../figma_app/644808";
 import { yD } from "../905/92359";
 import { k } from "../905/540025";
@@ -64,7 +64,7 @@ function m(e) {
   let l = selectCurrentFile();
   let d = k();
   let p = l && null != s && yD(l.key) || null;
-  let h = !(null != p && D2(t, p));
+  let h = !(null != p && isLoaded(t, p));
   useEffect(() => {
     h || function (e, t, s) {
       if (g) return;

@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { Q7 } from "../905/15667";
+import { PluginAction } from "../905/15667";
 import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
@@ -39,7 +39,7 @@ export function $$I0({
     };
   }
   if (getFeatureFlags().ext_require_appropriate_seat && !checkCanRunExtensions()) {
-    _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
+    _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
     return {
       widgetNodeID: void 0,
       widgetRunPromise: void 0

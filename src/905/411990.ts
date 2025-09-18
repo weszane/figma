@@ -4,13 +4,13 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { T } from "../905/880327";
 import { showModalHandler } from "../905/156213";
-import { Z5 } from "../figma_app/297957";
+import { usePlanInviteWithSeatExperiment } from "../figma_app/297957";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { e as _$$e2 } from "../905/86132";
 export function $$m0() {
   let e = useDispatch();
-  let t = Z5();
+  let t = usePlanInviteWithSeatExperiment();
   let i = useTeamPlanFeatures();
   let m = i.data?.type;
   return useCallback(n => {

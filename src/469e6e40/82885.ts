@@ -10,7 +10,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { pW } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { k as _$$k } from "../figma_app/618031";
+import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { TrackingProvider } from "../figma_app/831799";
 import { G6, Yh, wd, j2, hs } from "../figma_app/84966";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -71,7 +71,7 @@ export function $$f0({
   let a = G6(e.id).unwrapOr({
     show: !1
   });
-  let i = _$$k();
+  let i = isProrationBillingEnabledForCurrentPlan();
   let r = useMemo(() => !!Yh(t), [t]);
   let l = useMemo(() => wd(t), [t]);
   return a.show || i ? null : jsx(v, {
@@ -94,7 +94,7 @@ export function $$j1({
 }) {
   let t = Xf(e.id);
   let a = hs(e);
-  let s = _$$k();
+  let s = isProrationBillingEnabledForCurrentPlan();
   return a.data?.show || s || t?.data?.scheduled_cancellation?.cancel_at_period_end ? null : jsx(v, {
     teamName: e.name,
     nextContractStart: t.data?.analyze_data_contract_v2_start,

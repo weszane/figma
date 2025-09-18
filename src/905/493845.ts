@@ -18,7 +18,7 @@ import { Vb, wj } from "../905/759470";
 import { PublishModalState } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
-import { VY, yj, Mr } from "../905/966582";
+import { VIDEO_TYPE_VALUES, IMAGE_TYPES, VIDEO_TYPES } from "../905/966582";
 import { L } from "../905/597048";
 import { A as _$$A2 } from "../905/567946";
 var c = d;
@@ -69,7 +69,7 @@ export let $$T0 = forwardRef(function ({
       q.current ? q.current.focus(e) : $.current?.focus(e);
     }
   }), []);
-  let ee = useMemo(() => [...CW, ...(allowVideos ? VY : [])], [allowVideos]);
+  let ee = useMemo(() => [...CW, ...(allowVideos ? VIDEO_TYPE_VALUES : [])], [allowVideos]);
   return jsx(_$$A2, {
     label: j ? getI18nString("community.publishing.set_a_thumbnail") : getI18nString("community.publishing.thumbnail_preview"),
     labelHtmlFor: X,
@@ -113,7 +113,7 @@ export let $$T0 = forwardRef(function ({
       className: "thumbnail_uploader--container--KPh0i",
       onClick: K,
       onDragOver: e => {
-        let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj) || (allowVideos ? getValueOrFallback(e.dataTransfer.items[0]?.type, Mr) : void 0);
+        let t = getValueOrFallback(e.dataTransfer.items[0]?.type, IMAGE_TYPES) || (allowVideos ? getValueOrFallback(e.dataTransfer.items[0]?.type, VIDEO_TYPES) : void 0);
         setThumbnailMediumFromFile && 1 === e.dataTransfer.items.length && t && ee.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
         e.preventDefault();
       },

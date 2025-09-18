@@ -14,14 +14,14 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { pI, nx, _E } from "../figma_app/443991";
 import { UpgradeAction } from "../905/370443";
 import { A as _$$A2 } from "../905/639174";
-import { uW } from "../905/187165";
+import { ThemeContext } from "../905/187165";
 import { hv, Pf, ck } from "../905/952832";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Rv } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
 let $$x0 = registerModal(function (e) {
   let t = useDispatch();
-  let i = useContext(uW);
+  let i = useContext(ThemeContext);
   let o = useSelector(e => e.avatarEditorState);
   let l = useModalManager(e);
   return jsx(x, {

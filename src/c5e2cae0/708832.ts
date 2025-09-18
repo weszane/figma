@@ -46,12 +46,12 @@ import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
-import { Mh } from "../figma_app/297957";
+import { useSeparateBillingShippingExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { jv } from "../905/84777";
 import { wn } from "../9420/795870";
 import { trackUserEvent } from "../figma_app/314264";
-import { N_ } from "../905/332483";
+import { collaboratorSet } from "../905/332483";
 import { K as _$$K } from "../905/3140";
 import { Al } from "../9420/394825";
 import { y4 } from "../figma_app/298277";
@@ -747,15 +747,15 @@ export class $$eM2 extends Component {
     getEmailDomain(e.user.email) !== getEmailDomain(this.props.user.email) && customHistory.redirect("/purchase-organization");
   }
   getSubtotal() {
-    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || N_.dict(e => 0);
+    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || collaboratorSet.dict(e => 0);
     return Vh(e, s$(this.props.productPriceBySeatType));
   }
   getTaxTotal() {
-    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || N_.dict(e => 0);
+    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || collaboratorSet.dict(e => 0);
     return kV(e, s$(this.props.productPriceBySeatType), this.state.taxRate);
   }
   getTotal() {
-    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || N_.dict(e => 0);
+    let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || collaboratorSet.dict(e => 0);
     return N9(e, s$(this.props.productPriceBySeatType), this.state.taxRate);
   }
   getDisplayedCostBreakdown() {
@@ -1102,7 +1102,7 @@ export function $$eR1(e) {
   let t = useDispatch();
   let a = useSelector(e => e.user);
   let r = useSelector(e => extractOrgUsersByUserId(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
-  let l = Mh();
+  let l = useSeparateBillingShippingExperiment();
   let d = useSelector(e => e.payment).currency || getUserCurrency();
   _$$h(() => {
     let e = document.createElement("div");
@@ -1116,7 +1116,7 @@ export function $$eR1(e) {
     };
   });
   let o = jv({
-    billableProductKeys: N_,
+    billableProductKeys: collaboratorSet,
     baseQuery: {
       currency: d,
       tier: Ju.ORG,

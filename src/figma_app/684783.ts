@@ -37,7 +37,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { mT } from "../figma_app/976345";
+import { showDropdownIfNone } from "../figma_app/976345";
 import { A as _$$A } from "../5132/237216";
 import { UU } from "../figma_app/770088";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -53,7 +53,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { hY } from "../figma_app/349969";
-import { ur } from "../figma_app/632319";
+import { useViewer } from "../figma_app/632319";
 import { ex as _$$ex } from "../905/524523";
 import { Pz, Ac, GP, IK, Ti, Yu, Xl, Qd } from "../figma_app/292324";
 import { A as _$$A2 } from "../6828/154709";
@@ -66,8 +66,8 @@ import { parseQuery } from "../905/634134";
 import { Fe } from "../905/284552";
 import { XHR } from "../905/910117";
 import { xy, hJ } from "../figma_app/102712";
-import { Se } from "../figma_app/781115";
-import { F as _$$F2 } from "../905/989956";
+import { LoadTimeTracker } from "../figma_app/781115";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r, Q as _$$Q } from "../figma_app/661568";
 import { M as _$$M } from "../905/197794";
@@ -225,7 +225,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let o = e.pages && e.pages.length > 1;
     if (useEffect(() => {
       o && setTimeout(() => {
-        t(mT({
+        t(showDropdownIfNone({
           type: r
         }));
       }, 1e3);
@@ -899,12 +899,12 @@ function eN(e) {
   });
 }
 let ez = e => e ? {
-  backgroundColor: _$$F2.format(e)
+  backgroundColor: colorCSSManipulatorInstance.format(e)
 } : {};
 function eW(e) {
-  let t = useRef(new Se()).current;
+  let t = useRef(new LoadTimeTracker()).current;
   let [r, n] = useState(null);
-  let s = ur("PROTOTYPE", r, {
+  let s = useViewer("PROTOTYPE", r, {
     workerURL: Fig.tsViewerWorkerURL,
     scrollToPan: e.isFullscreen,
     featureFlags: getFeatureFlags(),

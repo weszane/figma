@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useDebouncuse-debouncedor/850789";
+import {useDebounce} from 'use-debounce';
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 let $$o0 = "1.2";
 let l = {

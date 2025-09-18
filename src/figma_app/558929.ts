@@ -16,7 +16,7 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { RH, gU } from "../figma_app/147952";
 import { mapEditorTypeTo } from "../905/808775";
 import { hb, VT } from "../905/551193";
-import { nm } from "../905/352022";
+import { setupAuthedUserPlanLoader } from "../905/352022";
 import { HE } from "../905/967587";
 import { F as _$$F2 } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
@@ -290,7 +290,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   let m = [];
   let g = null;
   try {
-    g = await e.dispatch(nm(!0));
+    g = await e.dispatch(setupAuthedUserPlanLoader(!0));
     m = _$$F2(r, t.resource, g);
   } catch (r) {
     let t = r?.data?.message || getI18nString("file_browser.error_try_again");

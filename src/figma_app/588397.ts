@@ -18,9 +18,9 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/716094";
-import { F as _$$F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { getCurrentFileType } from "../figma_app/976749";
-import { DP } from "../905/640017";
+import { getVisibleTheme } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { q as _$$q } from "../905/524117";
@@ -29,7 +29,7 @@ import { zR as _$$zR } from "../figma_app/817077";
 import { j as _$$j } from "../905/523935";
 import { getBasename } from "../905/309735";
 import { a3 } from "../figma_app/645694";
-import { uW, pw } from "../905/187165";
+import { ThemeContext, getThemeBorderStyle } from "../905/187165";
 import { cleanAssetName } from "../905/722604";
 import { PrimaryWorkflowEnum, StagingStatusEnum, hasAssetId } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
@@ -79,7 +79,7 @@ function Q(e, t, r) {
       background: null
     };
     let i = getAssetBackgroundColor(e, null);
-    i && !J(t) && (n.background = _$$F.format(i), n.color = getSecondaryTextColorForBackground(i));
+    i && !J(t) && (n.background = colorCSSManipulatorInstance.format(i), n.color = getSecondaryTextColorForBackground(i));
     return {
       nameStyle: n,
       background: i
@@ -396,8 +396,8 @@ function ea({
   noCenter: y
 }) {
   let b;
-  let T = useContext(uW);
-  let I = DP();
+  let T = useContext(ThemeContext);
+  let I = getVisibleTheme();
   let S = c - c % 2;
   let v = u - u % 2;
   let x = J(e);
@@ -409,7 +409,7 @@ function ea({
     ...h
   };
   y && (C.transform = "scale(0.5)", C.transformOrigin = "top left", C.display = "flex", C.alignItems = "flex-start", C.justifyContent = "center");
-  _ || !l || a || (m || s || o || (C.boxShadow = pw(T, l, I)), C.background = _$$F.format(l));
+  _ || !l || a || (m || s || o || (C.boxShadow = getThemeBorderStyle(T, l, I)), C.background = colorCSSManipulatorInstance.format(l));
   r && (x ? (C.width = void 0, C.height = void 0) : C.background = void 0);
   let w = useMemo(() => t.type === PrimaryWorkflowEnum.RESPONSIVE_SET && "LIBRARY" === t.subscriptionStatus && t.fullPage ? NK : d ? _$$Ib : a || s || o ? FF : N4, [a, s, o, t, d]);
   return jsx("div", {

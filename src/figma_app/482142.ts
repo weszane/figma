@@ -5,7 +5,7 @@ import { _H } from "../figma_app/598111";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { _l, V3 } from "../figma_app/976345";
+import { switchAccountAndNavigate, openUrlInContext } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -15,7 +15,7 @@ import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../f
 import { CreateUpgradeAction, TeamType } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal } from "../905/156213";
-import { yJ } from "../figma_app/240735";
+import { setTeamOptimistThunk } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
 let $$I15 = createOptimistThunk((e, {
   teamId: t,
@@ -50,7 +50,7 @@ let $$L11 = createOptimistThunk((e, t) => {
   XHR.put(`/api/teams/${t.teamId}/student_team`, {
     student_team: !0
   }).then(() => {
-    n ? e.dispatch(_l({
+    n ? e.dispatch(switchAccountAndNavigate({
       workspace: {
         userId: n,
         teamId: t.teamId,
@@ -91,7 +91,7 @@ let $$P18 = createOptimistThunk((e, {
     data: n
   }) => {
     let a = n.meta && n.meta.team;
-    a && e.dispatch(yJ({
+    a && e.dispatch(setTeamOptimistThunk({
       team: a,
       userInitiated: !1
     }));
@@ -146,7 +146,7 @@ let $$W3 = createOptimistThunk((e, t) => {
       upsellSource,
       entryPoint: o
     }), document.baseURI).href;
-    e.dispatch(V3({
+    e.dispatch(openUrlInContext({
       url: r
     }));
   } else {
@@ -193,7 +193,7 @@ let $$Y17 = createOptimistThunk((e, t) => {
   if (t.openInNewTab && !hasDesktopAPI()) {
     let t = e.getState();
     let r = new URL(selectedViewToPath(t, d), document.baseURI).href;
-    e.dispatch(V3({
+    e.dispatch(openUrlInContext({
       url: r
     }));
   } else {

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { TrackingProvider } from "../figma_app/831799";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { C } from "../figma_app/198698";
 import { om } from "../figma_app/465413";
 export function $$c0({
@@ -14,7 +14,7 @@ export function $$c0({
   dataTestId: p,
   location: _
 }) {
-  let h = p8("showUi");
+  let h = useAppModelProperty("showUi");
   let [m, g] = useState(!1);
   let f = getSelectedEditorType();
   if (useEffect(() => t(r), [t, r]), useEffect(() => {

@@ -1,10 +1,10 @@
 import { atom } from 'jotai';
-import { r } from '../905/520829';
+import { APILoadingStatus } from '../905/520829';
 import { getSingletonSceneGraph } from '../905/700578';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 let $$o0 = setupRemovableAtomFamily(() => atom([]));
 let $$l2 = setupRemovableAtomFamily(() => atom(null));
-let $$d3 = setupRemovableAtomFamily(() => atom(r.INIT));
+let $$d3 = setupRemovableAtomFamily(() => atom(APILoadingStatus.INIT));
 let c = setupRemovableAtomFamily(() => atom(null));
 let $$u1 = atom(e => e(c), (e, t, r) => {
   let i = e(c);

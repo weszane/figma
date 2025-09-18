@@ -8,7 +8,7 @@ import { V } from "../469e6e40/782251";
 import { SelectionStylesHelpers } from "../figma_app/763686";
 import { q6 } from "../figma_app/793429";
 import { TrackingProvider } from "../figma_app/831799";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { VZ } from "../figma_app/727192";
 import { _p } from "../figma_app/826998";
 import { s0, yg } from "../figma_app/261761";
@@ -25,7 +25,7 @@ function m({
   let t = q6("EFFECT");
   let n = q6("TEXT");
   let i = uQ();
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     if (!t) return !1;
     let n = e?.get(t);
     return !!n && ("SECTION" === n.type || "FRAME" === n.type);
@@ -148,7 +148,7 @@ export function $$E0() {
     enabled: !0
   });
   let e = uQ();
-  return Fk((e, t) => {
+  return useDeepEqualSceneValue((e, t) => {
     if (!t) return !1;
     let n = e?.get(t);
     return !!n && !!n.isAlive && "SECTION" === n.type;

@@ -19,8 +19,8 @@ import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { $V } from "../figma_app/990058";
-import { tc, PE, Q7, i$ } from "../905/15667";
-import { Nu } from "../905/584989";
+import { DeepLinkType, UISection, PluginAction, DevModeUI } from "../905/15667";
+import { requestUpgrade } from "../905/584989";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
@@ -52,8 +52,8 @@ import { $ as _$$$ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { e as _$$e2 } from "../905/579755";
 import { isFullscreenView } from "../figma_app/976749";
-import { DP } from "../905/640017";
-import { i_ } from "../905/187165";
+import { getVisibleTheme } from "../905/640017";
+import { getVisibleTheme } from "../905/187165";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { OJ } from "../905/519092";
 import { iS, Jo, sp, GW } from "../905/223565";
@@ -65,34 +65,34 @@ import { v0 } from "../figma_app/639088";
 var u = c;
 function L(e, t, i, n) {
   switch (i) {
-    case tc.CODE_CHAT_LIMIT:
+    case DeepLinkType.CODE_CHAT_LIMIT:
       if (getFeatureFlags().ai_ga && t === ProductAccessTypeEnum.EXPERT) return getI18nString("request_upgrade.header.figmake.more_prompts");
       break;
-    case tc.SHARE_DRAFTS:
-    case tc.IN_EDITOR_RESTRICTED_DRAFT:
-    case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
+    case DeepLinkType.SHARE_DRAFTS:
+    case DeepLinkType.IN_EDITOR_RESTRICTED_DRAFT:
+    case DeepLinkType.RESTRICTED_DRAFT_SHARED_EMAIL:
       return getI18nString("request_upgrade.header.license_type.share_drafts", {
         licenseType: getProductName(e)
       });
-    case PE.FileMoveUpsell:
+    case UISection.FileMoveUpsell:
       return getI18nString("request_upgrade.header.license_type.move_drafts", {
         licenseType: getProductName(e)
       });
-    case Q7.RUN_PLUGIN:
+    case PluginAction.RUN_PLUGIN:
       return getI18nString("request_upgrade.header.license_type.run_plugins", {
         licenseType: getProductName(e)
       });
-    case Q7.RUN_WIDGET:
+    case PluginAction.RUN_WIDGET:
       return getI18nString("request_upgrade.header.license_type.run_widgets", {
         licenseType: getProductName(e)
       });
-    case Q7.MANAGE_EXTENSIONS:
+    case PluginAction.MANAGE_EXTENSIONS:
       return getI18nString("request_upgrade.header.license_type.manage_extensions", {
         licenseType: getProductName(e)
       });
-    case tc.USER_SETTINGS:
-    case tc.DOWNGRADE_EMAIL:
-    case tc.LIFECYCLE_REUPGRADE_EMAIL:
+    case DeepLinkType.USER_SETTINGS:
+    case DeepLinkType.DOWNGRADE_EMAIL:
+    case DeepLinkType.LIFECYCLE_REUPGRADE_EMAIL:
       if (void 0 === t) {
         reportError(_$$e.MONETIZATION_EXPANSION, Error("Undefined seatTypeKey passed in for User Settings entrypoint"));
         break;
@@ -109,11 +109,11 @@ function L(e, t, i, n) {
         default:
           throwTypeError(t);
       }
-    case tc.PUBLISH_SITES:
+    case DeepLinkType.PUBLISH_SITES:
       if (e === FProductAccessType.FIGMAKE) return getI18nString("request_upgrade.header.figmake.publish");
       if (e === FProductAccessType.SITES) return getI18nString("request_upgrade.header.sites.publish");
       break;
-    case tc.SITE_SETTINGS:
+    case DeepLinkType.SITE_SETTINGS:
       if (e === FProductAccessType.FIGMAKE) return getI18nString("request_upgrade.header.figmake.publish");
   }
   return n && (e === FProductAccessType.DESIGN || e === FProductAccessType.DEV_MODE) ? getI18nString("1_click_expansion.request_sent_add_details_to") : getDefaultRequestModalTitle(e);
@@ -160,8 +160,8 @@ function eh(e) {
   let y = useCurrentFileKey();
   let v = getMinimumBundle(licenseType);
   let I = isFullscreenView();
-  let x = DP();
-  let w = licenseType === FProductAccessType.WHITEBOARD && I ? "light" : i_(x);
+  let x = getVisibleTheme();
+  let w = licenseType === FProductAccessType.WHITEBOARD && I ? "light" : getVisibleTheme(x);
   let C = _$$R({
     licenseType,
     entryPoint,
@@ -190,7 +190,7 @@ function eh(e) {
     })]
   });
   return jsxs(OJ, {
-    title: entryPoint === tc.USER_SETTINGS ? L(licenseType, v ?? void 0, entryPoint) : t[licenseType],
+    title: entryPoint === DeepLinkType.USER_SETTINGS ? L(licenseType, v ?? void 0, entryPoint) : t[licenseType],
     maxWidth: 360,
     minWidth: 360,
     onClose: T,
@@ -286,14 +286,14 @@ function ey({
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: u()("request_upgrade_modal--stepTitle--HEFYi", "request_upgrade_modal--optionalSecondaryText--pv0lf"),
-      children: r !== tc.ASK_TO_EDIT_ONE_CLICK && renderI18nText("request_upgrade.instruction_text_header_optional", {
+      children: r !== DeepLinkType.ASK_TO_EDIT_ONE_CLICK && renderI18nText("request_upgrade.instruction_text_header_optional", {
         boldedInstructions: jsx("span", {
           className: "request_upgrade_modal--importantInstructions--6ke2E",
           children: renderI18nText("request_upgrade.instructions")
         })
       })
     }), jsx(BigTextInputForwardRef, {
-      placeholder: r === tc.USER_SETTINGS ? getI18nString("request_upgrade.placeholder.seat") : Jo(i, r),
+      placeholder: r === DeepLinkType.USER_SETTINGS ? getI18nString("request_upgrade.placeholder.seat") : Jo(i, r),
       type: "textarea",
       value: e,
       onChange: t,
@@ -321,14 +321,14 @@ export function $$eb0(e) {
   let en = function (e) {
     let t = useAtomWithSubscription(isStarterUserAtom);
     let i = selectCurrentFile();
-    return !t && !!i && i.editorType === FFileType.DESIGN && (e === i$.BlockingModal || e === i$.Upsell);
+    return !t && !!i && i.editorType === FFileType.DESIGN && (e === DevModeUI.BlockingModal || e === DevModeUI.Upsell);
   }(e.entryPoint);
-  let er = e.entryPoint === tc.ASK_TO_EDIT_ONE_CLICK || en;
+  let er = e.entryPoint === DeepLinkType.ASK_TO_EDIT_ONE_CLICK || en;
   let ea = useRef();
   let es = L(Z, e.seatTypeKey, e.entryPoint, er);
   let eo = function (e, t, i, r, a, s) {
     let o = sp(t, e, a, i, s);
-    if (i === tc.USER_SETTINGS) return jsx(Fragment, {
+    if (i === DeepLinkType.USER_SETTINGS) return jsx(Fragment, {
       children: o
     });
     let l = GW(t, e, a, i, s);
@@ -378,7 +378,7 @@ export function $$eb0(e) {
       },
       suppressVisualBell: ei ?? void 0,
       folderId: e.folderId
-    }) : Nu({
+    }) : requestUpgrade({
       message: i,
       teamId: planParentId,
       licenseType: Z,

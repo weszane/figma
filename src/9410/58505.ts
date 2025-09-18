@@ -8,7 +8,7 @@ import d from "../vendor/656470";
 import { _i } from "../figma_app/476572";
 import { logWarning } from "../905/714362";
 import { nX } from "../figma_app/445976";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Tv } from "../figma_app/151869";
 var c = d;
 let g = z.object({
@@ -122,7 +122,7 @@ function C(e) {
 export function $$v1() {
   let e = useRef(new Map());
   let t = Tv();
-  Fk((t, i) => {
+  useDeepEqualSceneValue((t, i) => {
     if (!i) {
       e.current = new Map();
       return null;

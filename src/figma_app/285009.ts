@@ -1,5 +1,5 @@
 import { ColorOptions, AppStateTsApi, BorderStyle } from "../figma_app/763686";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { BV, Mr } from "../figma_app/153399";
 import { uM, wv, Iz, g5 } from "../905/888175";
 let $$o9 = 4;
@@ -35,8 +35,8 @@ let $$m3 = [{
 export function $$g1() {
   return BV(AppStateTsApi?.uiState().showUI3Colors.getCopy() ? ColorOptions.STICKY_GRAY_UI3 : ColorOptions.STICKY_GRAY_LIGHT, "sticky");
 }
-let $$f10 = F.parse(Mr(ColorOptions.WHITE));
-let $$E11 = F.parse(Mr(ColorOptions.GRAY_DARK, "rgba(0,0,0,0)"));
+let $$f10 = colorCSSManipulatorInstance.parse(Mr(ColorOptions.WHITE));
+let $$E11 = colorCSSManipulatorInstance.parse(Mr(ColorOptions.GRAY_DARK, "rgba(0,0,0,0)"));
 let $$y6 = BorderStyle.SOLID;
 let $$b4 = BV(ColorOptions.GRAY, "baseLight");
 export const Dq = $$h0;

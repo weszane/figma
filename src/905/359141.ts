@@ -2,7 +2,7 @@ import ek from 'classnames';
 import { Fragment as _$$Fragment, createContext, createElement, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { VP } from '../905/18797';
+import { isLoading } from '../905/18797';
 import { Y as _$$Y2 } from '../905/26051';
 import { S as _$$S3 } from '../905/39877';
 import { d as _$$d2 } from '../905/49800';
@@ -152,7 +152,7 @@ import { SR } from '../figma_app/852050';
 import { LargeLoadingSpinner } from '../figma_app/858013';
 import { C as _$$C } from '../figma_app/872960';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
-import { tn as _$$tn } from '../figma_app/889655';
+import { localStylesWithUsagesOnLoadedPagesAtom } from '../figma_app/889655';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { R8 } from '../figma_app/933221';
 import iC from '../vendor/3757';
@@ -2708,7 +2708,7 @@ let iW = iH;
 let iJ = createRemovableAtomFamily(e => atom(t => {
   let i = t(mO(e));
   let n = t(n1);
-  let r = t(_$$tn);
+  let r = t(localStylesWithUsagesOnLoadedPagesAtom);
   let a = t(sm);
   let s = t(Q$);
   return i.map(e => ({
@@ -3087,7 +3087,7 @@ function ny({
     updateAll
   } = se(w, E, o);
   let [F, M] = useState(!1);
-  let j = useSelector(e => !!e.openFile && VP(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
+  let j = useSelector(e => !!e.openFile && isLoading(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
   let U = useCurrentFileKey() || void 0;
   let V = E === aD.ALL;
   let [G, z] = useState(!1);

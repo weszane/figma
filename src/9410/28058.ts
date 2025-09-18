@@ -14,7 +14,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Tc } from "../905/797478";
 import { dP } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
-import { p8 } from "../figma_app/722362";
+import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
@@ -104,7 +104,7 @@ export function $$V1() {
   });
 }
 export function $$W0() {
-  let e = p8("isReadOnly");
+  let e = useAppModelProperty("isReadOnly");
   let t = jY();
   let i = !!S7();
   let n = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat().length > 0;

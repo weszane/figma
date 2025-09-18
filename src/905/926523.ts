@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { putCommunityProfile, clearCommunityProfile, addAuthedCommunityProfileToHub } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
-import { hm } from "../figma_app/976345";
+import { refreshSessionState } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { setupLoadingStateHandler } from "../905/696711";
 let $$u3 = putCommunityProfile;
@@ -64,7 +64,7 @@ let $$g0 = createOptimistThunk((e, {
         email: t
       })
     }));
-    e.dispatch(hm());
+    e.dispatch(refreshSessionState());
   }).catch(t => {
     let i = resolveMessage(t);
     i && e.dispatch(VisualBellActions.enqueue({
@@ -95,7 +95,7 @@ let $$f5 = createOptimistThunk((e, {
       type: "profile-merge-update",
       message: getI18nString("community.actions.new_profile_connection_added")
     }));
-    e.dispatch(hm());
+    e.dispatch(refreshSessionState());
   }).catch(t => {
     let i = resolveMessage(t);
     i && e.dispatch(VisualBellActions.enqueue({

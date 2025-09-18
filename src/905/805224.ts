@@ -14,7 +14,7 @@ import { Io, MH } from "../figma_app/394327";
 import { RR } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
-import { Sh } from "../figma_app/889655";
+import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Yc } from "../figma_app/930914";
 import { On } from "../figma_app/323320";
 export function $$I3({
@@ -50,7 +50,7 @@ export function $$I3({
         }
       }));
     }, [updateVariableConsumption, clearVariableConsumption, e]);
-    let l = selectWithShallowEqual(e => Sh(e));
+    let l = selectWithShallowEqual(e => selectSceneGraphSelectionKeys(e));
     let c = useMemo(On, []);
     let {
       textPropReferencedBySelection

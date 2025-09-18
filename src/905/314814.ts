@@ -29,8 +29,8 @@ import { H3 } from "../figma_app/920435";
 import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { xQ, Zz, LY, $$in } from "../figma_app/84966";
-import { N_ } from "../905/332483";
-import { AG } from "../figma_app/217457";
+import { collaboratorSet } from "../905/332483";
+import { compareProductAccessTypes } from "../figma_app/217457";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N2 } from "../905/809096";
@@ -98,7 +98,7 @@ function H(e) {
   let E = _$$g(f.summary.total_upgraded_user_counts, {
     throwOnError: !0
   });
-  let [P, U] = _$$a(N_.dict(e => 0));
+  let [P, U] = _$$a(collaboratorSet.dict(e => 0));
   let [V, H] = useState(!1);
   let [W, {
     errorMessage: K
@@ -110,8 +110,8 @@ function H(e) {
     if (!prices || !localizeCurrency) return [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
-    let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
-    return N_.toArray().some(e => isNullish(a[e])) ? [null, {
+    let a = collaboratorSet.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
+    return collaboratorSet.toArray().some(e => isNullish(a[e])) ? [null, {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
@@ -155,14 +155,14 @@ function H(e) {
     let {
       prices: _prices
     } = LY(Y$.AT_NEXT_RENEWAL, e);
-    return getFeatureFlags().coterm_modal_ui_improvements && prices && _prices ? N_.dict(e => {
+    return getFeatureFlags().coterm_modal_ui_improvements && prices && _prices ? collaboratorSet.dict(e => {
       let r = t[e];
       let a = _prices[e];
       let o = prices[e];
       if (0 === r || isNullish(a) || isNullish(o)) return 0;
       let l = r || 0;
       return l * a.amount - l * o.amount;
-    }) : N_.dict(() => 0);
+    }) : collaboratorSet.dict(() => 0);
   }(d.key, P);
   let q = y()(Object.values(Y));
   let $ = !!getFeatureFlags().coterm_modal_ui_improvements;
@@ -230,7 +230,7 @@ function H(e) {
             minColumnWidth: 48,
             columnGaps: ["default", 40]
           },
-          items: N_.toArray().sort(AG),
+          items: collaboratorSet.toArray().sort(compareProductAccessTypes),
           columns: [{
             id: "billableProductKey",
             name: jsx(TextWithTruncation, {

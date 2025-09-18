@@ -12,7 +12,7 @@ import { sx } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { E9 } from "../figma_app/297957";
+import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { TeamFileLimitsInfo } from "../figma_app/43951";
@@ -30,7 +30,7 @@ function x(e) {
   }), {
     enabled: !!e.teamId
   });
-  let I = E9();
+  let I = useStarterGlobalFileLimitsExperiment();
   if ("loaded" !== y.status || y.data.team?.stripeCustomerId.status !== "loaded") return null;
   let S = !!getResourceDataOrFallback(y.data.team?.stripeCustomerId);
   let x = [];

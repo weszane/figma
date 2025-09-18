@@ -1,10 +1,10 @@
 import { useState, useLayoutEffect } from "react";
 import { camelToKebab } from "../figma_app/930338";
-import { rf, sT } from "../905/187165";
+import { defaultContextValue, isWhiteboardFullscreen } from "../905/187165";
 import { mN } from "../figma_app/985200";
 export function $$o0(e, t, i, l, d = !0) {
-  let [c, u] = useState(rf);
-  let p = sT(i);
+  let [c, u] = useState(defaultContextValue);
+  let p = isWhiteboardFullscreen(i);
   useLayoutEffect(() => {
     let i = t.current;
     if (i) {

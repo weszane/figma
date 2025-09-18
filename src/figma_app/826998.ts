@@ -10,7 +10,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { u as _$$u, t8 } from "../figma_app/852050";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { g7 } from "../figma_app/481857";
 import { uV, Cj, As, uQ, n4 } from "../figma_app/151869";
@@ -374,7 +374,7 @@ export function $$H14({
 }
 export function $$z23(e, t) {
   let r = uQ();
-  return Fk((e, t, r) => r(e?.get(t)), e ?? r ?? "", t);
+  return useDeepEqualSceneValue((e, t, r) => r(e?.get(t)), e ?? r ?? "", t);
 }
 export function $$W1({
   name: e,
@@ -432,7 +432,7 @@ export function $$Y7({
   disableDetailModalEntry: u
 }) {
   let p = $$z23(r, i);
-  let _ = Fk((e, t) => e?.get(t ?? "")?.getVariableConsumptionMap(), r);
+  let _ = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.getVariableConsumptionMap(), r);
   let h = e4(a, p, s ?? _, c);
   let m = o ? "function" == typeof o ? o(p) : o.format(p) : p;
   return jsx($$V9, {

@@ -7,7 +7,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { W as _$$W3 } from '../0c62c2fd/624465';
 import { t as _$$t5 } from '../469e6e40/489933';
 import { reportError } from '../905/11';
-import { VP } from '../905/18797';
+import { isLoading } from '../905/18797';
 import { FU } from '../905/26824';
 import { P as _$$P3 } from '../905/35881';
 import { P as _$$P2 } from '../905/36308';
@@ -47,7 +47,7 @@ import { J as _$$J3 } from '../905/225412';
 import { nt as _$$nt, o3 as _$$o2 } from '../905/226610';
 import { I_, wq } from '../905/234821';
 import { t as _$$t4 } from '../905/241707';
-import { ih as _$$ih, UA } from '../905/250387';
+import { parseLinkForContext, copyHyperlinkToClipboard } from '../905/250387';
 import { v as _$$v } from '../905/266815';
 import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
@@ -101,7 +101,7 @@ import { VU } from '../905/625959';
 import { D as _$$D } from '../905/629114';
 import { ButtonPrimitive } from '../905/632989';
 import { M as _$$M2 } from '../905/637515';
-import { DP } from '../905/640017';
+import { getVisibleTheme } from '../905/640017';
 import { i as _$$i2 } from '../905/649519';
 import { logger } from '../905/651849';
 import { O as _$$O } from '../905/655700';
@@ -201,7 +201,7 @@ import { U as _$$U3 } from '../figma_app/65327';
 import { iT as _$$iT } from '../figma_app/74165';
 import { $m, copyShareLinkOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
-import { s4 as _$$s, hA, l7, Wl, ZO } from '../figma_app/88239';
+import { getDevModeFocusId, useDevModeFocusId, useIsFullscreenOverview, isFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
 import { PQ as _$$PQ, kU, Ty, XE } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { kp, Sk } from '../figma_app/98578';
@@ -219,7 +219,7 @@ import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { Ig } from '../figma_app/155647';
 import { je } from '../figma_app/155728';
 import { z2 } from '../figma_app/165422';
-import { Fk } from '../figma_app/167249';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { O as _$$O2 } from '../figma_app/185954';
 import { dh } from '../figma_app/186343';
 import { FFileType, FPermissionLevelType } from '../figma_app/191312';
@@ -245,10 +245,10 @@ import { F as _$$F2 } from '../figma_app/284426';
 import { useSubscription } from '../figma_app/288654';
 import { dz, Jt } from '../figma_app/290668';
 import { FX } from '../figma_app/291792';
-import { EC } from '../figma_app/291892';
+import { imageProcessor } from '../figma_app/291892';
 import { R as _$$R2, y as _$$y3 } from '../figma_app/294349';
 import { Ev, zF } from '../figma_app/297822';
-import { _p } from '../figma_app/297957';
+import { useSendToMakeExperiment } from '../figma_app/297957';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { getPluginByFileId, getRelaunchablePlugins } from '../figma_app/300692';
 import { F6 } from '../figma_app/308685';
@@ -300,7 +300,7 @@ import { Ih } from '../figma_app/617427';
 import { hasCmsCollection } from '../figma_app/618433';
 import { J3, JU, kD, kN } from '../figma_app/622574';
 import { copyTextToClipboard } from '../figma_app/623293';
-import { v9 } from '../figma_app/623300';
+import { getViewState } from '../figma_app/623300';
 import { xY } from '../figma_app/624361';
 import { XC } from '../figma_app/631279';
 import { JT } from '../figma_app/632248';
@@ -342,7 +342,7 @@ import { Ag, B3, cT, pP, qy } from '../figma_app/862289';
 import { S as _$$S6 } from '../figma_app/864577';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, handleChangeEvent, handleKeyboardEvent, handleMouseEvent, RecordingPureComponent, SKIP_RECORDING, useHandleChangeEvent, useHandleFocusEvent, useHandleInputEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
-import { wz } from '../figma_app/879363';
+import { atomM4 } from '../figma_app/879363';
 import { oh as _$$oh, bj, pF, pg, pn, Yq } from '../figma_app/880974';
 import { w6 } from '../figma_app/887579';
 import { jr, W0 } from '../figma_app/896988';
@@ -396,7 +396,7 @@ class O {
     async function e(e) {
       for (let t of ['image/png', 'image/jpeg', 'image/heic']) {
         try {
-          return await EC.decodeAsync(e, t, 0, 0, !0);
+          return await imageProcessor.decodeAsync(e, t, 0, 0, !0);
         } catch (e) {}
       }
       return null;
@@ -800,7 +800,7 @@ function eM({
   children: e
 }) {
   let t = _$$a2();
-  let i = hA();
+  let i = useDevModeFocusId();
   let s = useSelector(e => e.mirror.appModel.currentPage);
   let o = useContext(viewportNavigatorContext);
   let {
@@ -3258,8 +3258,8 @@ let ns = class e extends PureComponent {
         let e;
         if (!this.props.openFile) return;
         let t = !isFullscreenDevHandoffView(this.props.selectedView) && this.props.attributionContextKey;
-        let i = Wl(this.props.selectedView);
-        let r = _$$s(this.props.selectedView);
+        let i = isFullscreenOverview(this.props.selectedView);
+        let r = getDevModeFocusId(this.props.selectedView);
         let n = _$$P3(this.props.selectedView);
         let a = debugState?.getState()?.openFile?.canEdit;
         let s = qZ() && getFeatureFlags().aip_flower_garden_on_copy && a;
@@ -3408,7 +3408,7 @@ let ns = class e extends PureComponent {
     return e ? {
       name: 'copy-hyperlink',
       displayText: e.displayText,
-      callback: () => UA(this.props.dispatch, e.linkToCopy, 'ContextMenu', e.visualBellText)
+      callback: () => copyHyperlinkToClipboard(this.props.dispatch, e.linkToCopy, 'ContextMenu', e.visualBellText)
     } : null;
   }
   getImageToProfilePicture() {
@@ -4299,7 +4299,7 @@ function nl(e) {
   let y = Ne();
   let b = LC();
   let C = r8();
-  let v = _p();
+  let v = useSendToMakeExperiment();
   let E = useIsSelectedViewFullscreenCooper();
   return jsx(ns, {
     ...e,
@@ -4427,10 +4427,10 @@ function nu({
   let n = useSelector(e => e.mirror.sceneGraphSelection);
   let s = useSelector(e => e.mirror.appModel);
   let o = useSelector(e => e.mirror.sceneGraph);
-  let l = hA() ?? void 0;
+  let l = useDevModeFocusId() ?? void 0;
   let d = selectCurrentFile();
   let c = useSelector(e => e.mirror.selectionProperties.canCopyLinkToSelection);
-  let u = Fk((e, t) => {
+  let u = useDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     return i ? i.canHaveAnnotation : null;
   }, t);
@@ -4728,7 +4728,7 @@ function nb({
 }) {
   let s = useDispatch();
   let o = useSelector(e => e.mirror.appModel);
-  let l = Fk((e, t) => e.get(t)?.isPageDivider, e);
+  let l = useDeepEqualSceneValue((e, t) => e.get(t)?.isPageDivider, e);
   let d = [{
     action: 'page-copy-link',
     args: {
@@ -5010,7 +5010,7 @@ function nY({
   let N = qZ();
   let A = trackFileEventWithStore();
   let O = getSelectedEditorType();
-  let [, L] = useAtomValueAndSetter(wz);
+  let [, L] = useAtomValueAndSetter(atomM4);
   let R = dh();
   let D = A0(ActionType.READY_FOR_DEV);
   let M = useCanUseDevModeDemoFile();
@@ -8322,10 +8322,10 @@ function s7() {
   let e = trackFileEventWithStore();
   let t = useSelector(e => e.selectedView);
   let i = useSelector(e => e.versionHistory)?.isLoadingPage;
-  let s = DP();
+  let s = getVisibleTheme();
   let {
     isLoading
-  } = v9({
+  } = getViewState({
     selectedView: t,
     isLoadingVersionHistory: i,
     theme: s
@@ -8384,7 +8384,7 @@ function s8({
     isLoading,
     isLoadingMissingFonts,
     background
-  } = v9({
+  } = getViewState({
     selectedView: t,
     isLoadingVersionHistory: i,
     theme: a
@@ -9058,7 +9058,7 @@ function o$(e) {
       url,
       nodeIdInThisFile,
       versionId
-    } = _$$ih(n, e.store);
+    } = parseLinkForContext(n, e.store);
     a = nodeIdInThisFile && !versionId ? {
       type: 'internal',
       id: nodeIdInThisFile
@@ -9230,7 +9230,7 @@ function le({
   let r = useSelector(e => e.isFullscreenDocumentLoaded);
   let s = _$$jz();
   let l = _$$e_() === $_.ELIGIBLE;
-  let d = Fk(e => e.getCurrentPage()?.guid);
+  let d = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   useLayoutEffect(() => {
     if (!r || !l) return;
     let n = i.getState();
@@ -9240,7 +9240,7 @@ function le({
     if (a) {
       if (a.id !== c.sessionId) {
         t(_$$au({}));
-        let i = VP(n.loadingState, $c(e)) || n.voting.lastInitiatedVotingSessionId === a.id;
+        let i = isLoading(n.loadingState, $c(e)) || n.voting.lastInitiatedVotingSessionId === a.id;
         t(H1({
           votingStage: i ? SessionStatus.JOINED : SessionStatus.NOT_JOINED
         }));
@@ -9410,9 +9410,9 @@ export function $$lr0({
   }
   hasCmsCollection(T);
   let A = t.openFile?.editorType === 'design';
-  let O = l7();
+  let O = useIsFullscreenOverview();
   let B = _$$e();
-  let G = ZO();
+  let G = useIsFullscreenDevModeComponentBrowser();
   let K = useIsSelectedFigmakeFullscreen();
   let [H] = useAtomValueAndSetter(vE);
   let z = Xr(t5);

@@ -56,9 +56,9 @@ import { V as _$$V } from "../905/342732";
 import { Cn } from "../905/225265";
 import { YG } from "../905/921418";
 import { ko } from "../figma_app/807786";
-import { VP, D2 } from "../905/18797";
+import { isLoading, isLoaded } from "../905/18797";
 import { Oe } from "../figma_app/336853";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { He } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -313,7 +313,7 @@ function eW(e) {
       }
     }));
   }, [e8]);
-  let tT = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e.containingSymbolId || e.containingStateGroupId).filter(e => null !== e)));
+  let tT = useDeepEqualSceneValue(e => new Set(e.getDirectlySelectedNodes().map(e => e.containingSymbolId || e.containingStateGroupId).filter(e => null !== e)));
   let {
     validDropdownSelection,
     validRootDrilldownItems
@@ -480,7 +480,7 @@ function eW(e) {
     } = e;
     if (tp && !multiselect) {
       let e = Ml(tp, Object.keys(sceneGraphSelection));
-      if (VP(loadingState, e)) return item.node_id === tp.node_id && compareLibraryItemsAlias(item, tp);
+      if (isLoading(loadingState, e)) return item.node_id === tp.node_id && compareLibraryItemsAlias(item, tp);
     }
     return selectedItems.some(e => item.type === PrimaryWorkflowEnum.COMPONENT && e.type === PrimaryWorkflowEnum.COMPONENT ? !!item.component_key && item.component_key === e.component_key || !item.component_key && !e.component_key && item.node_id === e.node_id : item.type === PrimaryWorkflowEnum.STATE_GROUP && e.type === PrimaryWorkflowEnum.STATE_GROUP && (!!item.key && item.key === e.key || !item.key && !e.key && item.node_id === e.node_id));
   }, [tp, sceneGraphSelection, loadingState, multiselect, selectedItems]);
@@ -794,7 +794,7 @@ function eW(e) {
   _$$K2({
     otherLibraryKeys: t6
   });
-  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === iN.FILE ? validDropdownSelection.libraryKey !== e4 && !El("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === iN.RECENT ? VP(loadingState, fi) : validDropdownSelection.type === iN.PREFERRED ? VP(loadingState, _A(e3)) : isLoadingSubscribedLibraries || VP(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
+  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === iN.FILE ? validDropdownSelection.libraryKey !== e4 && !El("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === iN.RECENT ? isLoading(loadingState, fi) : validDropdownSelection.type === iN.PREFERRED ? isLoading(loadingState, _A(e3)) : isLoadingSubscribedLibraries || isLoading(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
   _$$x(t7);
   let t9 = Object.keys(rootDrilldownItemsByLibraryKey).length > 0;
   return jsx(uO, {
@@ -892,9 +892,9 @@ export function $$eK1(e) {
     if (null == x || null == w) return !0;
     if (L && x && D(L) && !El("INVALID-FILE-KEY-SHOULD-BE-REMOVED", L)) {
       let e = Mb(L);
-      return !D2(loadingState, e);
+      return !isLoaded(loadingState, e);
     }
-    return C && L && L !== N ? VP(loadingState, _A(w)) : P;
+    return C && L && L !== N ? isLoading(loadingState, _A(w)) : P;
   }, [x, w, L, D, C, N, loadingState, P]);
   let M = useCallback(() => setNumSearchesForTracking?.(e => e + 1), [setNumSearchesForTracking]);
   return (instanceSwapPickerShown.isShown || e.pickerType !== Zl.INSTANCE_SWAP_PICKER) && w && x ? jsx(eW, {

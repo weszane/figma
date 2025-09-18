@@ -13,7 +13,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { logWarning, logError } from "../905/714362";
 import { XHR, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { Wl } from "../figma_app/88239";
+import { isFullscreenOverview } from "../figma_app/88239";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { D as _$$D } from "../905/347702";
@@ -558,7 +558,7 @@ export function $$Y1(e, t, i) {
         }));
         r || t(e);
         let d = debugState?.getState()?.selectedView;
-        isFullscreenDevHandoffView(d) || Wl(d) || !getFeatureFlags().desktop_font_reload_on_focus_ux || i({
+        isFullscreenDevHandoffView(d) || isFullscreenOverview(d) || !getFeatureFlags().desktop_font_reload_on_focus_ux || i({
           type: "new_local_font",
           message: l
         });

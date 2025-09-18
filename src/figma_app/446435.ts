@@ -13,7 +13,7 @@ import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
-import { oh, mC } from "../905/18797";
+import { useIsLoading, useIsLoaded } from "../905/18797";
 import { Ef } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
@@ -33,8 +33,8 @@ export function $$A3(e) {
   let h = sz.loadingKeyForPayload({
     shelfType: p
   });
-  let f = oh(h);
-  let b = mC(h);
+  let f = useIsLoading(h);
+  let b = useIsLoaded(h);
   let I = useSelector(e => e.hubFiles);
   let S = useSelector(e => e.communityHub.shelves[p]);
   let v = useCurrentFileKey();

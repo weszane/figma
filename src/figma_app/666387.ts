@@ -16,7 +16,7 @@ import { e0 } from '../905/696396';
 import { z5 } from '../905/713722';
 import { showTooltip } from '../905/765855';
 import { G as _$$G } from '../905/865520';
-import { F as _$$F } from '../905/989956';
+import { colorCSSManipulatorInstance } from '../905/989956';
 import { j as _$$j } from '../1577/266226';
 import { dV } from '../1577/337708';
 import { useAtomValueAndSetter } from '../figma_app/27355';
@@ -137,7 +137,7 @@ function z({
       value: t,
       paletteType: 'base',
       background: 'light'
-    }, `${e.uuid + _$$F.format(t)}-${r}`))
+    }, `${e.uuid + colorCSSManipulatorInstance.format(t)}-${r}`))
   });
 }
 function W(e) {

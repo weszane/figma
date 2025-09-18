@@ -3,7 +3,7 @@ import { WeightLevel, WhiteboardTsApi, ColorOptions, AppStateTsApi } from "../fi
 import { getFeatureFlags } from "../905/601108";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { A$, X0 } from "../figma_app/837500";
 import { W, r } from "../905/134572";
 import { jR, vh, N0, qm, Sb, RO, k0, zt, t1, Ws, _M, jc, mO, az, Af, n7, p5, R2, Z6, xr, Po, is, Qw, bu, oW, Py, A4, X8, eN, _P, LL, fU, c6, U8, oK, SW, B9, Pp, k7, JI, _x, a6, Uw, FQ, fh, yG, DN, pZ, i4, Q2, iU, h3, PQ, T2, o$, Zz, $b, Q1, aT, K4, nL, Dd, B8, Tn, OF, Zv, L5, QE, g$, vD, Ah, wO, Td, qH, fV, nG, qt, DE, ev, vY, gn, xu, AN, wl } from "../figma_app/728075";
@@ -124,7 +124,7 @@ export function $$M5() {
 let $$F12 = [ColorOptions.HIGHLIGHT_GRAY, ColorOptions.HIGHLIGHT_RED, ColorOptions.HIGHLIGHT_ORANGE, ColorOptions.HIGHLIGHT_YELLOW, ColorOptions.HIGHLIGHT_GREEN, ColorOptions.HIGHLIGHT_BLUE, ColorOptions.HIGHLIGHT_VIOLET, ColorOptions.HIGHLIGHT_WHITE];
 let j = [ColorOptions.CODE_BLOCK_DRACULA, ColorOptions.CODE_BLOCK_DUOTONE_LIGHT, ColorOptions.CODE_BLOCK_DUOTONE_SEA, ColorOptions.CODE_BLOCK_DUOTONE_EARTH, ColorOptions.CODE_BLOCK_DUOTONE_SPACE, ColorOptions.CODE_BLOCK_DUOTONE_FOREST];
 export function $$U11() {
-  let e = [jR, xr, N0, Sb, RO].map(e => F.parse(e));
+  let e = [jR, xr, N0, Sb, RO].map(e => colorCSSManipulatorInstance.parse(e));
   let t = [ColorOptions.BLACK, ColorOptions.RED, ColorOptions.YELLOW, ColorOptions.GREEN, ColorOptions.BLUE].map(e => $$H1(e, "pencilUI3"));
   return AppStateTsApi?.uiState().showUI3Colors.getCopy() ? t : e;
 }
@@ -150,7 +150,7 @@ export function $$G2(e) {
 }
 export function $$V14(e, t, r = ColorOptions.CUSTOM) {
   let n;
-  let a = F.format(e);
+  let a = colorCSSManipulatorInstance.format(e);
   switch (t) {
     case "widget":
     case "base":
@@ -195,7 +195,7 @@ export function $$H1(e, t) {
     case "codeBlockTheme":
       r = S().COLOR_TO_CSS.get(e);
   }
-  return r ? F.parse(r) : void 0;
+  return r ? colorCSSManipulatorInstance.parse(r) : void 0;
 }
 export function $$z10(e, t = "base", r = getI18nString("whiteboard.colors.custom")) {
   let n = Array.isArray(e) ? e[0] : e;
@@ -342,7 +342,7 @@ export function $$$3(e, t, r) {
     a: 1
   };
   let s = $$V14(a, t);
-  if (s === ColorOptions.NONE || s === ColorOptions.CUSTOM) return F.format(a);
+  if (s === ColorOptions.NONE || s === ColorOptions.CUSTOM) return colorCSSManipulatorInstance.format(a);
   switch (t) {
     case "baseLight":
       n = b();
@@ -362,7 +362,7 @@ export function $$$3(e, t, r) {
     default:
       n = E();
   }
-  return ("light" === r ? n.LIGHT_DISPLAY.get(s) : n.DARK_DISPLAY.get(s)) ?? F.format(a);
+  return ("light" === r ? n.LIGHT_DISPLAY.get(s) : n.DARK_DISPLAY.get(s)) ?? colorCSSManipulatorInstance.format(a);
 }
 export const AF = $$W0;
 export const BV = $$H1;

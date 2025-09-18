@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { Yx } from "../3276/926297";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { ps } from "../figma_app/845611";
-import { dI } from "../figma_app/297957";
+import { useApproveInFileExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { AccountTypeRequestsInPlan } from "../figma_app/43951";
@@ -18,7 +18,7 @@ let x = "read-file-requests";
 let b = "read-upgrade-requests";
 export function $$y0(e) {
   let [t, n] = useState(!1);
-  let a = aV();
+  let a = useIsProgressBarHiddenOrLocked();
   useEffect(() => {
     if (a) return;
     let t = setTimeout(() => n(!0), e);
@@ -28,7 +28,7 @@ export function $$y0(e) {
 }
 export function $$C2(e) {
   let [t, n] = useState();
-  let a = aV();
+  let a = useIsProgressBarHiddenOrLocked();
   useLayoutEffect(() => {
     if (a) return;
     let t = () => {
@@ -63,7 +63,7 @@ export function $$k3() {
       parentId,
       type
     } = t?.key ?? {};
-    let a = dI();
+    let a = useApproveInFileExperiment();
     let i = useSubscription(AccountTypeRequestsInPlan({
       planType: type === FOrganizationLevelType.TEAM ? ps.TEAM : ps.ORG,
       planId: parentId ?? "",

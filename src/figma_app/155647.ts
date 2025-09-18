@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { rgbToHsv, rgbToHsl } from "../figma_app/273493";
 import { ColorFormatEnum } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { TI } from "../905/713722";
 import { o1, t6 } from "../figma_app/975811";
 import { ZB } from "../figma_app/451499";
@@ -54,7 +54,7 @@ export let $$h0 = (() => {
           return c.rgba(t, n, r?.eyedropperFormat);
         case ColorFormatEnum.CSS:
           if (r?.eyedropperFormat) return c.rgba(t, n, r?.eyedropperFormat);
-          return F.format(t);
+          return colorCSSManipulatorInstance.format(t);
         case ColorFormatEnum.HSB:
           let d = rgbToHsv(t);
           return c.hsba(d, n, r?.eyedropperFormat);

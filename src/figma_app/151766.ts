@@ -18,8 +18,8 @@ import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { VQ, Dc as _$$Dc, hf, Mt } from "../905/445022";
 import { Jr } from "../figma_app/624361";
-import { xK } from "../905/125218";
-import { VI } from "../figma_app/623300";
+import { fullscreenPerfManager } from "../905/125218";
+import { areAllLoaded } from "../figma_app/623300";
 import { h as _$$h } from "../905/44234";
 import { fileApiHandler } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
@@ -114,7 +114,7 @@ function L(e, t, r) {
   let i = debugState.getState();
   let a = i.mirror.appModel;
   let s = i.saveAsState.waitTime;
-  let o = VI(a.pagesList);
+  let o = areAllLoaded(a.pagesList);
   let l = 2e4 - s;
   let d = !navigator.onLine || l <= 0;
   n(M({
@@ -164,7 +164,7 @@ async function P(e, t, r) {
       exportV2: !0,
       imageCount: R,
       videoCount: P,
-      loadId: xK.loadID()
+      loadId: fullscreenPerfManager.loadID()
     };
   }
   let k = () => {
@@ -327,7 +327,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     attemptId: f,
     reason: l,
     exportV2: !0,
-    loadId: xK.loadID()
+    loadId: fullscreenPerfManager.loadID()
   }), g.openFile)) {
     P(g.openFile, f, e);
     return;

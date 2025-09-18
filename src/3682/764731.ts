@@ -10,7 +10,7 @@ import { $E, w as _$$w, bU, GA } from "../figma_app/120529";
 import u from "classnames";
 import { isIpadDevice, BrowserInfo } from "../figma_app/778880";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { aV } from "../figma_app/722362";
+import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { w$ } from "../9410/635666";
 import { N as _$$N } from "../3682/343085";
 import { KindEnum } from "../905/129884";
@@ -36,7 +36,7 @@ import { Ro } from "../figma_app/805373";
 import { L as _$$L } from "../905/671373";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
-import { gR } from "../figma_app/976345";
+import { toggleDropdown } from "../figma_app/976345";
 import { Um } from "../905/848862";
 import { j as _$$j } from "../905/834956";
 import { K0 } from "../figma_app/778125";
@@ -83,7 +83,7 @@ function j(e) {
     userIdsInCall
   } = W5(fileKey);
   let i = userIdsInCall.size;
-  let n = aV();
+  let n = useIsProgressBarHiddenOrLocked();
   let l = selectCurrentUser();
   useEffect(() => {
     !isIpadDevice && l?.id && !userIdsInCall.has(l.id) && w$(i);
@@ -251,7 +251,7 @@ function es({
         className: "captions_dialog--typeSizeIcon--Xhxj-",
         onClick: e => {
           e.stopPropagation();
-          f(gR({
+          f(toggleDropdown({
             type: ee
           }));
         },

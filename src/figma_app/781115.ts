@@ -1,323 +1,544 @@
-import { D } from "../905/347702";
-import { CorePerfInfo } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { getInitialOptions } from "../figma_app/169182";
-import { logDebug, logError } from "../905/714362";
-import { xK } from "../905/125218";
-function d() {
-  return window.performance ? window.performance.now() : Date.now();
+import { fullscreenPerfManager } from '../905/125218'
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { logDebug, logError } from '../905/714362'
+import { getInitialOptions } from '../figma_app/169182'
+import { CorePerfInfo } from '../figma_app/763686'
+/**
+ * Utility function to get high-resolution time.
+ * @returns {number} Current time in milliseconds.
+ * (Original: d)
+ */
+function getNow(): number {
+  return window.performance ? window.performance.now() : Date.now()
 }
-let c = D(() => ("" + Math.random()).substr(2));
-export class $$u0 {
-  constructor() {
-    this._lastConnectToMs = -1;
-    this._scheduledTimeouts = [];
-    this._domContentLoaded = -1;
-    this._livegraphStartTime = -1;
-    this._multiplayerStartTime = -1;
-    this._multiplayerSatisfiedTime = -1;
-    this._liveGraphSubscriptionLoaded = -1;
-    this._multiplayerFirstResponse = -1;
-    this._multiplayerFirstFinish = -1;
-    this._iflCompleted = -1;
-    this._sentViewerConnectToMetric = !1;
-    this._connectArgs = null;
-    this._isInEmbed = self !== top;
-    this.reportedAbandon = !1;
-    this.enableProfiling = !1;
-    this.fullscreenEvents = {
-      loadAndStartFullscreenIfNecessary: -1,
-      fullscreenIsReady: -1
-    };
-    this.reportViewerAbandon = () => {
-      let e = this._connectArgs;
-      if (this.reportedAbandon || this.renderingEventsReported || "Preview" === e.entry && !this.wasInlinePreviewModalOpenedSinceViewerLoaded) return;
-      let t = Math.round(performance.now()) - e.afterConnectTo;
-      trackEventAnalytics("Viewer Abandon", {
-        entry: e.entry,
-        connectionType: e.connectionType,
-        abandonTime: t
-      }, {
-        forwardToDatadog: !0,
-        sendAsBeacon: !0
-      });
-      this.reportedAbandon = !0;
-    };
-    this.renderingEventsMaxSize = 10;
-    this.renderingEvents = [];
-    this.renderingEventsReported = !1;
-    this.handleDOMContentLoaded = () => {
-      this._domContentLoaded = this.now();
-      this.mark("dom_content_loaded");
-      analyticsEventManager.trackDefinedEvent("prototype.dom_content_loaded", {
-        time: this._domContentLoaded
-      });
-    };
-    this.handleDocumentIsLoaded = () => {
-      let e = {};
-      this._connectArgs?.fullscreen !== "None" && (e = {
+
+/**
+ * Utility function to generate a random ID string.
+ * @returns {string} Random ID.
+ * (Original: c)
+ */
+const generateRandomId = (): string => `${Math.random()}`.substr(2)
+
+/**
+ * Arguments for viewer connection events.
+ */
+export interface ViewerConnectArgs {
+  entry?: string
+  connectionType?: string
+  fullscreen?: string
+  afterConnectTo?: number
+  logViewerWaiting?: boolean
+  [key: string]: any
+}
+
+/**
+ * LoadTimeTracker class tracks various performance and load events for the viewer.
+ * (Original: $$u0)
+ */
+export class LoadTimeTracker {
+  private _lastConnectToMs: number = -1
+  private _lastConnectToID?: any
+  private _scheduledTimeouts: number[] = []
+  private _domContentLoaded: number = -1
+  private _livegraphStartTime: number = -1
+  private _multiplayerStartTime: number = -1
+  private _multiplayerSatisfiedTime: number = -1
+  private _liveGraphSubscriptionLoaded: number = -1
+  private _multiplayerFirstResponse: number = -1
+  private _multiplayerFirstFinish: number = -1
+  private _iflCompleted: number = -1
+  private _sentViewerConnectToMetric: boolean = false
+  private _connectArgs: ViewerConnectArgs | null = null
+  private _isInEmbed: boolean = self !== top
+  private reportedAbandon: boolean = false
+  public enableProfiling: boolean = false
+  public fullscreenEvents: Record<string, number> = {
+    loadAndStartFullscreenIfNecessary: -1,
+    fullscreenIsReady: -1,
+  }
+
+  public renderingEventsMaxSize: number = 10
+  public renderingEvents: [number, number][] = []
+  public renderingEventsReported: boolean = false
+  public wasViewerLoadReported: boolean = false
+  public wasInlinePreviewModalOpenedSinceViewerLoaded: boolean = false
+  private _wasBackgroundedOnceWhileLoading: boolean = false
+  private _totalVisibleLoadTime: number = 0
+  private _wasVisiblyLoading: boolean = false
+  private _lastTabSwitchOrLoadChange: number = -1
+
+  /**
+   * Reports viewer abandon event.
+   * (Original: reportViewerAbandon)
+   */
+  public reportViewerAbandon = (): void => {
+    const args = this._connectArgs
+    if (
+      this.reportedAbandon
+      || this.renderingEventsReported
+      || (args?.entry === 'Preview' && !this.wasInlinePreviewModalOpenedSinceViewerLoaded)
+    ) {
+      return
+    }
+    const abandonTime = Math.round(performance.now()) - (args?.afterConnectTo ?? 0)
+    trackEventAnalytics('Viewer Abandon', {
+      entry: args?.entry,
+      connectionType: args?.connectionType,
+      abandonTime,
+    }, {
+      forwardToDatadog: true,
+      sendAsBeacon: true,
+    })
+    this.reportedAbandon = true
+  }
+
+  /**
+   * Handles DOMContentLoaded event.
+   * (Original: handleDOMContentLoaded)
+   */
+  public handleDOMContentLoaded = (): void => {
+    this._domContentLoaded = this.now()
+    this.mark('dom_content_loaded')
+    analyticsEventManager.trackDefinedEvent('prototype.dom_content_loaded', {
+      time: this._domContentLoaded,
+    })
+  }
+
+  /**
+   * Handles document loaded event.
+   * (Original: handleDocumentIsLoaded)
+   */
+  public handleDocumentIsLoaded = (): void => {
+    let fullscreenData: Record<string, number> = {}
+    if (this._connectArgs?.fullscreen !== 'None') {
+      fullscreenData = {
         ...this.fullscreenEvents,
-        ...xK.getEventsToReport(!1)
-      });
-      let t = {
+        ...fullscreenPerfManager.getEventsToReport(false),
+      }
+    }
+    const eventData = {
+      domContentLoaded: this._domContentLoaded,
+      preloadedTabStart: (window as any).preloadedTabStart,
+      androidProtoPreloadedTabStart: (window as any).androidProtoPreloadedTabStart,
+      androidProtoFsPreloaded: (window as any).androidProtoFsPreloaded,
+      mobileFileViewerPreloadedTabStart: (window as any).mobileFileViewerPreloadedTabStart,
+      mobileFileViewerPreloaded: (window as any).mobileFileViewerPreloaded,
+      documentIsLoaded: this.now(),
+      connectAttemptID: this._lastConnectToID,
+      wasBackgroundedOnceWhileLoading: this._wasBackgroundedOnceWhileLoading,
+      ...this._connectArgs,
+      ...fullscreenData,
+    }
+    trackEventAnalytics('Viewer Document Is Loaded', eventData)
+  }
+
+  /**
+   * Handles viewer loaded event.
+   * (Original: handleViewerLoaded)
+   */
+  public handleViewerLoaded = (lastLoaded: number): void => {
+    this.clearScheduledTimeouts()
+    logDebug('Load Time Tracker', 'handleViewerLoaded', {
+      lastConnectToMs: this._lastConnectToMs,
+      lastConnectToID: this._lastConnectToID,
+    })
+    if (this._lastConnectToMs >= 0 && this._lastConnectToID != null) {
+      this.handleTabSwitchOrLoadChange(document.visibilityState === 'visible', false)
+      const baseEvent = {
+        delaySecondsSinceConnect: (getNow() - this._lastConnectToMs) / 1e3,
         domContentLoaded: this._domContentLoaded,
-        preloadedTabStart: window.preloadedTabStart,
-        androidProtoPreloadedTabStart: window.androidProtoPreloadedTabStart,
-        androidProtoFsPreloaded: window.androidProtoFsPreloaded,
-        mobileFileViewerPreloadedTabStart: window.mobileFileViewerPreloadedTabStart,
-        mobileFileViewerPreloaded: window.mobileFileViewerPreloaded,
-        documentIsLoaded: this.now(),
+        preloadedTabStart: (window as any).preloadedTabStart,
+        androidProtoFsPreloaded: (window as any).androidProtoFsPreloaded,
+        androidProtoPreloadedTabStart: (window as any).androidProtoPreloadedTabStart,
+        mobileFileViewerPreloadedTabStart: (window as any).mobileFileViewerPreloadedTabStart,
+        mobileFileViewerPreloaded: (window as any).mobileFileViewerPreloaded,
         connectAttemptID: this._lastConnectToID,
+        timeNow: this.now(),
+        visibleLoadTime: this._totalVisibleLoadTime,
         wasBackgroundedOnceWhileLoading: this._wasBackgroundedOnceWhileLoading,
-        ...this._connectArgs,
-        ...e
-      };
-      trackEventAnalytics("Viewer Document Is Loaded", t);
-    };
-    this.wasViewerLoadReported = !1;
-    this.handleViewerLoaded = e => {
-      if (this.clearScheduledTimeouts(), logDebug("Load Time Tracker", "handleViewerLoaded", {
-        lastConnectToMs: this._lastConnectToMs,
-        lastConnectToID: this._lastConnectToID
-      }), this._lastConnectToMs >= 0 && null != this._lastConnectToID) {
-        this.handleTabSwitchOrLoadChange("visible" === document.visibilityState, !1);
-        let t = {
-          delaySecondsSinceConnect: (d() - this._lastConnectToMs) / 1e3,
-          domContentLoaded: this._domContentLoaded,
-          preloadedTabStart: window.preloadedTabStart,
-          androidProtoFsPreloaded: window.androidProtoFsPreloaded,
-          androidProtoPreloadedTabStart: window.androidProtoPreloadedTabStart,
-          mobileFileViewerPreloadedTabStart: window.mobileFileViewerPreloadedTabStart,
-          mobileFileViewerPreloaded: window.mobileFileViewerPreloaded,
-          connectAttemptID: this._lastConnectToID,
-          timeNow: this.now(),
-          visibleLoadTime: this._totalVisibleLoadTime,
-          wasBackgroundedOnceWhileLoading: this._wasBackgroundedOnceWhileLoading,
-          isStatsigBootstrapFlagOn: !0,
-          hasStatsigBootstrapValues: !!getInitialOptions().statsig_bootstrap_values,
-          isUsingStatsigClientSDK: !0,
-          isUsingStatsigPrefetch: !0
-        };
-        if (this._connectArgs) {
-          let r = t.timeNow - t.domContentLoaded;
-          let n = {
-            ...t,
-            entry: this._connectArgs.entry,
-            connectionType: this._connectArgs.connectionType,
-            isInEmbed: this._isInEmbed,
-            loadTimeMs: r,
-            lastLoaded: e
-          };
-          this.mark("viewer_loaded");
-          this.measure("viewer_loaded_measure", "dom_content_loaded", "viewer_loaded");
-          analyticsEventManager.trackDefinedEvent("prototype.viewer_loaded", n);
+        isStatsigBootstrapFlagOn: true,
+        hasStatsigBootstrapValues: !!getInitialOptions().statsig_bootstrap_values,
+        isUsingStatsigClientSDK: true,
+        isUsingStatsigPrefetch: true,
+      }
+      if (this._connectArgs) {
+        const loadTimeMs = baseEvent.timeNow - baseEvent.domContentLoaded
+        const eventData = {
+          ...baseEvent,
+          entry: this._connectArgs.entry,
+          connectionType: this._connectArgs.connectionType,
+          isInEmbed: this._isInEmbed,
+          loadTimeMs,
+          lastLoaded,
         }
-        this._lastConnectToMs = -1;
-        this.wasViewerLoadReported = !0;
-      } else logError("load", "Unexpected Viewer Loaded event without Viewer Connect To report");
-    };
-    this.handleFontListLoaded = e => {
-      let t = {
-        ...this._connectArgs,
-        domContentLoaded: this._domContentLoaded,
-        connectAttemptID: this._lastConnectToID,
-        timeNow: this.now()
-      };
-      trackEventAnalytics("Viewer Font List Loaded", t);
-    };
-    this.computeLoadTimeSinceDomContentLoaded = (e = this.now()) => window.androidProtoFsPreloaded && window.androidProtoPreloadedTabStart && e >= window.androidProtoPreloadedTabStart ? e - window.androidProtoPreloadedTabStart + window.androidProtoFsPreloaded - this._domContentLoaded : e - this._domContentLoaded;
-    this.handleAfterConnectTo = e => {
-      this._lastConnectToMs = d();
-      this._lastConnectToID = c();
-      logDebug("Load Time Tracker", "handleAfterConnectTo", {
-        lastConnectToMs: this._lastConnectToMs,
-        lastConnectToID: this._lastConnectToID
-      });
-      this._connectArgs = {
-        ...e,
-        afterConnectTo: this.now()
-      };
-      let t = {
-        domContentLoaded: this._domContentLoaded,
-        preloadedTabStart: window.preloadedTabStart,
-        androidProtoFsPreloaded: window.androidProtoFsPreloaded,
-        androidProtoPreloadedTabStart: window.androidProtoPreloadedTabStart,
-        mobileFileViewerPreloadedTabStart: window.mobileFileViewerPreloadedTabStart,
-        mobileFileViewerPreloaded: window.mobileFileViewerPreloaded,
-        connectAttemptID: this._lastConnectToID,
-        ...this._connectArgs
-      };
-      if ((!this._sentViewerConnectToMetric || getFeatureFlags().prototype_connectto_debug) && (analyticsEventManager.trackDefinedEvent("prototype.viewer_connect_to", {
-        ...t,
-        isInEmbed: this._isInEmbed
-      }), this._sentViewerConnectToMetric = !0), this.renderingEventsReported = !1, this.renderingEvents = [], this.clearScheduledTimeouts(), e.logViewerWaiting) for (let e of [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]) {
-        let t = setTimeout(() => {
-          let t = (d() - this._lastConnectToMs) / 1e3;
-          trackEventAnalytics("Viewer Waiting", {
-            waitedAtLeastSeconds: e,
-            delaySecondsSinceConnect: t,
-            connectAttemptID: this._lastConnectToID
-          });
-        }, 1e3 * e);
-        this._scheduledTimeouts.push(t);
+        this.mark('viewer_loaded')
+        this.measure('viewer_loaded_measure', 'dom_content_loaded', 'viewer_loaded')
+        analyticsEventManager.trackDefinedEvent('prototype.viewer_loaded', eventData)
       }
-      let r = setTimeout(() => {
-        let e = (d() - this._lastConnectToMs) / 1e3;
-        trackEventAnalytics("Viewer Waiting", {
-          waitedAtLeastSeconds: 60,
-          delaySecondsSinceConnect: e,
-          connectAttemptID: this._lastConnectToID,
-          entry: this._connectArgs?.entry,
-          connectionType: this._connectArgs?.connectionType,
-          isInEmbed: this._isInEmbed
-        }, {
-          forwardToDatadog: !0
-        });
-      }, 6e4);
-      this._scheduledTimeouts.push(r);
-      window.addEventListener("pagehide", this.reportViewerAbandon);
-      this.reportedAbandon = !1;
-      document.addEventListener("visibilitychange", () => {
-        let e = "visible" === document.visibilityState;
-        let t = !1;
-        this._lastConnectToMs >= 0 && null != this._lastConnectToID && (t = !this.wasViewerLoadReported);
-        this.handleTabSwitchOrLoadChange(e, t);
-      });
-      this.handleTabSwitchOrLoadChange("visible" === document.visibilityState, !0);
-    };
-    this.wasInlinePreviewModalOpenedSinceViewerLoaded = !1;
-    this._wasBackgroundedOnceWhileLoading = !1;
-    this._totalVisibleLoadTime = 0;
-    this._wasVisiblyLoading = !1;
-    this._lastTabSwitchOrLoadChange = -1;
-    this.handleTabSwitchOrLoadChange = (e, t) => {
-      t && (this._wasBackgroundedOnceWhileLoading = this._wasBackgroundedOnceWhileLoading || !e);
-      let r = e && t;
-      if (!this._wasVisiblyLoading && r) this._lastTabSwitchOrLoadChange = this.now();else {
-        if (!this._wasVisiblyLoading || r) return;
-        this._totalVisibleLoadTime += this.now() - this._lastTabSwitchOrLoadChange;
-      }
-      this._lastTabSwitchOrLoadChange = this.now();
-      this._wasVisiblyLoading = r;
-    };
-    this.clearScheduledTimeouts = () => {
-      for (let e of this._scheduledTimeouts) clearTimeout(e);
-      this._scheduledTimeouts = [];
-    };
-  }
-  now() {
-    return Math.round(performance.now());
-  }
-  mark(e) {
-    this.enableProfiling && performance.mark(e);
-  }
-  measure(e, t, r) {
-    this.enableProfiling && performance.measure(e, t, r);
-  }
-  handleDocumentRenderStart() {
-    !this.renderingEventsReported && this.renderingEvents.length < this.renderingEventsMaxSize && this.renderingEvents.push([this.now(), -1]);
-  }
-  handleDocumentRenderStop() {
-    if (this.renderingEventsReported) return;
-    let e = this.renderingEvents.length - 1;
-    if (e >= 0 && -1 === this.renderingEvents[e][1] && (this.renderingEvents[e][1] = this.now()), logDebug("Load Time Tracker", "handleDocumentRenderStop", {
-      lastIndex: e
-    }), window.removeEventListener("pagehide", this.reportViewerAbandon), this.renderingEvents.length >= this.renderingEventsMaxSize) {
-      let e = {};
-      let t = !0;
-      let r = 0;
-      let i = 0;
-      this.renderingEvents.forEach((n, a) => {
-        t = t && n[0] >= r && n[1] >= n[0];
-        let s = `frame.${a}.start`;
-        let o = `frame.${a}.stop`;
-        e[s] = n[0];
-        e[o] = n[1];
-        i += n[1] - n[0];
-        r = n[1];
-      });
-      e.total = t ? i : -1;
-      e.connectAttemptID = this._lastConnectToID;
-      e.totalUsedHeapMemory = CorePerfInfo?.getTotalUsedHeapMemory() ?? 0;
-      e.maxUsedHeapMemory = CorePerfInfo?.getMaxUsedHeapMemory() ?? 0;
-      this.wasViewerLoadReported || this._connectArgs?.entry !== "Prototype" || logError("load", "Unexpected Viewer Rendering First Frames event without Viewer Loaded report");
-      let s = this.computeLoadTimeSinceDomContentLoaded();
-      let l = {
-        ...e,
-        timeToFirstFrame: s,
-        avgFirstTenFramesRenderingTimeMs: i / this.renderingEvents.length,
-        entry: this._connectArgs?.entry,
-        connectionType: this._connectArgs?.connectionType,
-        isInEmbed: this._isInEmbed
-      };
-      trackEventAnalytics("Viewer Rendering First Frames", l, {
-        forwardToDatadog: !0
-      });
-      this.renderingEventsReported = !0;
-      this.renderingEvents = [];
+      this._lastConnectToMs = -1
+      this.wasViewerLoadReported = true
+    }
+    else {
+      logError('load', 'Unexpected Viewer Loaded event without Viewer Connect To report')
     }
   }
-  _formNativeLoadTimeMetadataFigmentEvent(e, t) {
+
+  /**
+   * Handles font list loaded event.
+   * (Original: handleFontListLoaded)
+   */
+  public handleFontListLoaded = (): void => {
+    const eventData = {
+      ...this._connectArgs,
+      domContentLoaded: this._domContentLoaded,
+      connectAttemptID: this._lastConnectToID,
+      timeNow: this.now(),
+    }
+    trackEventAnalytics('Viewer Font List Loaded', eventData)
+  }
+
+  /**
+   * Computes load time since DOMContentLoaded.
+   * (Original: computeLoadTimeSinceDomContentLoaded)
+   */
+  public computeLoadTimeSinceDomContentLoaded = (now: number = this.now()): number => {
+    const win = window as any
+    if (win.androidProtoFsPreloaded && win.androidProtoPreloadedTabStart && now >= win.androidProtoPreloadedTabStart) {
+      return now - win.androidProtoPreloadedTabStart + win.androidProtoFsPreloaded - this._domContentLoaded
+    }
+    return now - this._domContentLoaded
+  }
+
+  /**
+   * Handles after connect to event.
+   * (Original: handleAfterConnectTo)
+   */
+  public handleAfterConnectTo = (args: ViewerConnectArgs): void => {
+    this._lastConnectToMs = getNow()
+    this._lastConnectToID = generateRandomId()
+    logDebug('Load Time Tracker', 'handleAfterConnectTo', {
+      lastConnectToMs: this._lastConnectToMs,
+      lastConnectToID: this._lastConnectToID,
+    })
+    this._connectArgs = {
+      ...args,
+      afterConnectTo: this.now(),
+    }
+    const eventData = {
+      domContentLoaded: this._domContentLoaded,
+      preloadedTabStart: (window as any).preloadedTabStart,
+      androidProtoFsPreloaded: (window as any).androidProtoFsPreloaded,
+      androidProtoPreloadedTabStart: (window as any).androidProtoPreloadedTabStart,
+      mobileFileViewerPreloadedTabStart: (window as any).mobileFileViewerPreloadedTabStart,
+      mobileFileViewerPreloaded: (window as any).mobileFileViewerPreloaded,
+      connectAttemptID: this._lastConnectToID,
+      ...this._connectArgs,
+    }
+    if (
+      !this._sentViewerConnectToMetric
+      || getFeatureFlags().prototype_connectto_debug
+    ) {
+      analyticsEventManager.trackDefinedEvent('prototype.viewer_connect_to', {
+        ...eventData,
+        isInEmbed: this._isInEmbed,
+      })
+      this._sentViewerConnectToMetric = true
+    }
+    this.renderingEventsReported = false
+    this.renderingEvents = []
+    this.clearScheduledTimeouts()
+    if (args.logViewerWaiting) {
+      [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90].forEach((sec) => {
+        const timeoutId = setTimeout(() => {
+          const delay = (getNow() - this._lastConnectToMs) / 1e3
+          trackEventAnalytics('Viewer Waiting', {
+            waitedAtLeastSeconds: sec,
+            delaySecondsSinceConnect: delay,
+            connectAttemptID: this._lastConnectToID,
+          })
+        }, 1000 * sec)
+        this._scheduledTimeouts.push(timeoutId as unknown as number)
+      })
+    }
+    const sixtySecTimeout = setTimeout(() => {
+      const delay = (getNow() - this._lastConnectToMs) / 1e3
+      trackEventAnalytics('Viewer Waiting', {
+        waitedAtLeastSeconds: 60,
+        delaySecondsSinceConnect: delay,
+        connectAttemptID: this._lastConnectToID,
+        entry: this._connectArgs?.entry,
+        connectionType: this._connectArgs?.connectionType,
+        isInEmbed: this._isInEmbed,
+      }, {
+        forwardToDatadog: true,
+      })
+    }, 60000)
+    this._scheduledTimeouts.push(sixtySecTimeout as unknown as number)
+    window.addEventListener('pagehide', this.reportViewerAbandon)
+    this.reportedAbandon = false
+    document.addEventListener('visibilitychange', () => {
+      const isVisible = document.visibilityState === 'visible'
+      let shouldReport = false
+      if (this._lastConnectToMs >= 0 && this._lastConnectToID != null) {
+        shouldReport = !this.wasViewerLoadReported
+      }
+      this.handleTabSwitchOrLoadChange(isVisible, shouldReport)
+    })
+    this.handleTabSwitchOrLoadChange(document.visibilityState === 'visible', true)
+  }
+
+  /**
+   * Handles tab switch or load change event.
+   * (Original: handleTabSwitchOrLoadChange)
+   */
+  public handleTabSwitchOrLoadChange = (isVisible: boolean, isLoading: boolean): void => {
+    if (isLoading) {
+      this._wasBackgroundedOnceWhileLoading = this._wasBackgroundedOnceWhileLoading || !isVisible
+    }
+    const isVisiblyLoading = isVisible && isLoading
+    if (!this._wasVisiblyLoading && isVisiblyLoading) {
+      this._lastTabSwitchOrLoadChange = this.now()
+    }
+    else {
+      if (!this._wasVisiblyLoading || isVisiblyLoading)
+        return
+      this._totalVisibleLoadTime += this.now() - this._lastTabSwitchOrLoadChange
+    }
+    this._lastTabSwitchOrLoadChange = this.now()
+    this._wasVisiblyLoading = isVisiblyLoading
+  }
+
+  /**
+   * Clears all scheduled timeouts.
+   * (Original: clearScheduledTimeouts)
+   */
+  public clearScheduledTimeouts = (): void => {
+    this._scheduledTimeouts.forEach(timeoutId => clearTimeout(timeoutId))
+    this._scheduledTimeouts = []
+  }
+
+  /**
+   * Returns current time in milliseconds.
+   * (Original: now)
+   */
+  public now(): number {
+    return Math.round(performance.now())
+  }
+
+  /**
+   * Marks a performance event.
+   * (Original: mark)
+   */
+  public mark(name: string): void {
+    if (this.enableProfiling)
+      performance.mark(name)
+  }
+
+  /**
+   * Measures a performance event.
+   * (Original: measure)
+   */
+  public measure(name: string, startMark: string, endMark: string): void {
+    if (this.enableProfiling)
+      performance.measure(name, startMark, endMark)
+  }
+
+  /**
+   * Handles document render start.
+   * (Original: handleDocumentRenderStart)
+   */
+  public handleDocumentRenderStart(): void {
+    if (!this.renderingEventsReported && this.renderingEvents.length < this.renderingEventsMaxSize) {
+      this.renderingEvents.push([this.now(), -1])
+    }
+  }
+
+  /**
+   * Handles document render stop.
+   * (Original: handleDocumentRenderStop)
+   */
+  public handleDocumentRenderStop(): void {
+    if (this.renderingEventsReported)
+      return
+    const lastIndex = this.renderingEvents.length - 1
+    if (lastIndex >= 0 && this.renderingEvents[lastIndex][1] === -1) {
+      this.renderingEvents[lastIndex][1] = this.now()
+    }
+    logDebug('Load Time Tracker', 'handleDocumentRenderStop', { lastIndex })
+    window.removeEventListener('pagehide', this.reportViewerAbandon)
+    if (this.renderingEvents.length >= this.renderingEventsMaxSize) {
+      const frameData: Record<string, number> = {}
+      let isValid = true
+      let prevStop = 0
+      let totalTime = 0
+      this.renderingEvents.forEach((frame, idx) => {
+        isValid = isValid && frame[0] >= prevStop && frame[1] >= frame[0]
+        frameData[`frame.${idx}.start`] = frame[0]
+        frameData[`frame.${idx}.stop`] = frame[1]
+        totalTime += frame[1] - frame[0]
+        prevStop = frame[1]
+      })
+      frameData.total = isValid ? totalTime : -1
+      frameData.connectAttemptID = this._lastConnectToID
+      frameData.totalUsedHeapMemory = CorePerfInfo?.getTotalUsedHeapMemory() ?? 0
+      frameData.maxUsedHeapMemory = CorePerfInfo?.getMaxUsedHeapMemory() ?? 0
+      if (!this.wasViewerLoadReported && this._connectArgs?.entry !== 'Prototype') {
+        logError('load', 'Unexpected Viewer Rendering First Frames event without Viewer Loaded report')
+      }
+      const timeToFirstFrame = this.computeLoadTimeSinceDomContentLoaded()
+      const eventData = {
+        ...frameData,
+        timeToFirstFrame,
+        avgFirstTenFramesRenderingTimeMs: totalTime / this.renderingEvents.length,
+        entry: this._connectArgs?.entry,
+        connectionType: this._connectArgs?.connectionType,
+        isInEmbed: this._isInEmbed,
+      }
+      trackEventAnalytics('Viewer Rendering First Frames', eventData, {
+        forwardToDatadog: true,
+      })
+      this.renderingEventsReported = true
+      this.renderingEvents = []
+    }
+  }
+
+  /**
+   * Forms native load time metadata event.
+   * (Original: _formNativeLoadTimeMetadataFigmentEvent)
+   */
+  private _formNativeLoadTimeMetadataFigmentEvent(e: any, timeOrigin: number): Record<string, any> {
     return {
       user_load_start_time: e.userLoadStartTime,
-      user_load_start_relative: e.userLoadStartTime - t,
-      time_origin: t,
+      user_load_start_relative: e.userLoadStartTime - timeOrigin,
+      time_origin: timeOrigin,
       native_viewer_session_id: e.nativeViewerSessionId,
       native_semantic_viewer_session_id: e.nativeSemanticViewerSessionId,
-      source: e.source
-    };
+      source: e.source,
+    }
   }
-  handleNativeLoadTimeMetadata(e) {
-    let t = this._formNativeLoadTimeMetadataFigmentEvent(e, performance.timeOrigin);
-    analyticsEventManager.trackDefinedEvent("native.load_time_metadata", t);
+
+  /**
+   * Handles native load time metadata event.
+   * (Original: handleNativeLoadTimeMetadata)
+   */
+  public handleNativeLoadTimeMetadata(e: any): void {
+    const eventData = this._formNativeLoadTimeMetadataFigmentEvent(e, performance.timeOrigin)
+    analyticsEventManager.trackDefinedEvent('native.load_time_metadata', eventData)
   }
-  handleLivegraphConnectionOpened() {
-    -1 === this._livegraphStartTime && (this._livegraphStartTime = this.now(), this.mark("livegraph_subscription_started"), this.measure("livegraph_subscription_started_measure", "dom_content_loaded", "livegraph_subscription_started"));
-    analyticsEventManager.trackDefinedEvent("prototype.livegraph_subscription_started", {
-      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._livegraphStartTime)
-    });
+
+  /**
+   * Handles livegraph connection opened.
+   * (Original: handleLivegraphConnectionOpened)
+   */
+  public handleLivegraphConnectionOpened(): void {
+    if (this._livegraphStartTime === -1) {
+      this._livegraphStartTime = this.now()
+      this.mark('livegraph_subscription_started')
+      this.measure('livegraph_subscription_started_measure', 'dom_content_loaded', 'livegraph_subscription_started')
+    }
+    analyticsEventManager.trackDefinedEvent('prototype.livegraph_subscription_started', {
+      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._livegraphStartTime),
+    })
   }
-  handleLivegraphConnectionResponded() {
-    let e = this.now();
-    -1 === this._liveGraphSubscriptionLoaded && (this._liveGraphSubscriptionLoaded = e, this.mark("livegraph_subscription_loaded"), this.measure("livegraph_subscription_loaded_measure", "dom_content_loaded", "livegraph_subscription_loaded"));
-    analyticsEventManager.trackDefinedMetric("prototype.livegraph_subscription_loaded", {
-      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(e),
-      responseTime: e - this._livegraphStartTime
-    });
+
+  /**
+   * Handles livegraph connection responded.
+   * (Original: handleLivegraphConnectionResponded)
+   */
+  public handleLivegraphConnectionResponded(): void {
+    const now = this.now()
+    if (this._liveGraphSubscriptionLoaded === -1) {
+      this._liveGraphSubscriptionLoaded = now
+      this.mark('livegraph_subscription_loaded')
+      this.measure('livegraph_subscription_loaded_measure', 'dom_content_loaded', 'livegraph_subscription_loaded')
+    }
+    analyticsEventManager.trackDefinedMetric('prototype.livegraph_subscription_loaded', {
+      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(now),
+      responseTime: now - this._livegraphStartTime,
+    })
   }
-  handleMultiplayerOpenConnection() {
-    -1 === this._multiplayerStartTime && (this._multiplayerStartTime = this.now(), this.mark("multiplayer_connection_start"), this.measure("multiplayer_connection_start_measure", "dom_content_loaded", "multiplayer_connection_start"));
-    analyticsEventManager.trackDefinedEvent("prototype.multiplayer_connection_start", {
-      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._multiplayerStartTime)
-    });
+
+  /**
+   * Handles multiplayer open connection.
+   * (Original: handleMultiplayerOpenConnection)
+   */
+  public handleMultiplayerOpenConnection(): void {
+    if (this._multiplayerStartTime === -1) {
+      this._multiplayerStartTime = this.now()
+      this.mark('multiplayer_connection_start')
+      this.measure('multiplayer_connection_start_measure', 'dom_content_loaded', 'multiplayer_connection_start')
+    }
+    analyticsEventManager.trackDefinedEvent('prototype.multiplayer_connection_start', {
+      timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._multiplayerStartTime),
+    })
   }
-  handleMultiplayerFirstResponse() {
-    -1 === this._multiplayerFirstResponse && (this._multiplayerFirstResponse = this.now(), this.mark("multiplayer_first_response"), this.measure("multiplayer_first_response_measure", "dom_content_loaded", "multiplayer_first_response"));
-    analyticsEventManager.trackDefinedMetric("prototype.multiplayer_first_response", {
+
+  /**
+   * Handles multiplayer first response.
+   * (Original: handleMultiplayerFirstResponse)
+   */
+  public handleMultiplayerFirstResponse(): void {
+    if (this._multiplayerFirstResponse === -1) {
+      this._multiplayerFirstResponse = this.now()
+      this.mark('multiplayer_first_response')
+      this.measure('multiplayer_first_response_measure', 'dom_content_loaded', 'multiplayer_first_response')
+    }
+    analyticsEventManager.trackDefinedMetric('prototype.multiplayer_first_response', {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
-      responseTime: this.now() - this._multiplayerStartTime
-    });
+      responseTime: this.now() - this._multiplayerStartTime,
+    })
   }
-  handleMultiplayerIFLSatisfied() {
-    -1 === this._multiplayerFirstFinish && (this._multiplayerFirstFinish = this.now(), this.mark("multiplayer_first_finish"), this.measure("multiplayer_first_finish_measure", "dom_content_loaded", "multiplayer_first_finish"));
-    -1 === this._multiplayerSatisfiedTime && (this._multiplayerSatisfiedTime = this.now());
-    analyticsEventManager.trackDefinedMetric("prototype.multiplayer_first_finish", {
+
+  /**
+   * Handles multiplayer IFL satisfied.
+   * (Original: handleMultiplayerIFLSatisfied)
+   */
+  public handleMultiplayerIFLSatisfied(): void {
+    if (this._multiplayerFirstFinish === -1) {
+      this._multiplayerFirstFinish = this.now()
+      this.mark('multiplayer_first_finish')
+      this.measure('multiplayer_first_finish_measure', 'dom_content_loaded', 'multiplayer_first_finish')
+    }
+    if (this._multiplayerSatisfiedTime === -1) {
+      this._multiplayerSatisfiedTime = this.now()
+    }
+    analyticsEventManager.trackDefinedMetric('prototype.multiplayer_first_finish', {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
-      responseTime: this.now() - this._multiplayerStartTime
-    });
+      responseTime: this.now() - this._multiplayerStartTime,
+    })
   }
-  handleIFLCompleted() {
-    -1 === this._iflCompleted && (this._iflCompleted = this.now(), this.mark("ifl_completed"), this.measure("ifl_completed_measure", "dom_content_loaded", "ifl_completed"));
-    analyticsEventManager.trackDefinedMetric("prototype.ifl_completed", {
+
+  /**
+   * Handles IFL completed.
+   * (Original: handleIFLCompleted)
+   */
+  public handleIFLCompleted(): void {
+    if (this._iflCompleted === -1) {
+      this._iflCompleted = this.now()
+      this.mark('ifl_completed')
+      this.measure('ifl_completed_measure', 'dom_content_loaded', 'ifl_completed')
+    }
+    analyticsEventManager.trackDefinedMetric('prototype.ifl_completed', {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
-      responseTime: this.now() - this._multiplayerSatisfiedTime
-    });
+      responseTime: this.now() - this._multiplayerSatisfiedTime,
+    })
   }
-  setWasInlinePreviewModalOpenedSinceViewerLoaded(e) {
-    this.wasInlinePreviewModalOpenedSinceViewerLoaded = e;
+
+  /**
+   * Sets whether inline preview modal was opened since viewer loaded.
+   * (Original: setWasInlinePreviewModalOpenedSinceViewerLoaded)
+   */
+  public setWasInlinePreviewModalOpenedSinceViewerLoaded(opened: boolean): void {
+    this.wasInlinePreviewModalOpenedSinceViewerLoaded = opened
   }
 }
-export let $$p1 = new $$u0();
-export const Se = $$u0;
-export const Su = $$p1;
+
+/** Singleton instance of LoadTimeTracker (Original: $$p1) */
+export const loadTimeTrackerInstance = new LoadTimeTracker()
+
+/** Exported class reference (Original: Se) */
+export const Se = LoadTimeTracker
+
+/** Exported singleton reference (Original: Su) */
+export const Su = loadTimeTrackerInstance

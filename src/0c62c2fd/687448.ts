@@ -8,7 +8,7 @@ import { Button } from "../905/521428";
 import { R as _$$R } from "../905/256203";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { Kq } from "../figma_app/819288";
+import { countGraphemes } from "../figma_app/819288";
 import { w4 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
 import { e as _$$e } from "../905/457828";
@@ -83,7 +83,7 @@ function B({
     e.stopPropagation();
     p.current && p.current.focus();
   }, []);
-  let g = Kq(t, {
+  let g = countGraphemes(t, {
     includeTrailingWhitespace: !0
   });
   return jsxs("div", {
@@ -151,7 +151,7 @@ export function $$U0({
   let [N, C] = useState(!1);
   let S = fA(i);
   let k = _$$l(i.folder_id);
-  let R = Kq(E, {
+  let R = countGraphemes(E, {
     includeTrailingWhitespace: !0
   });
   let A = R <= 100 && R > 0;

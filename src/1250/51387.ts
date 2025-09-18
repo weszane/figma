@@ -1,7 +1,7 @@
 import { hV } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { liveStoreInstance } from "../905/713695";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Q } from "../905/577205";
 import { $W } from "../905/144933";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
@@ -104,7 +104,7 @@ let $$T10 = liveStoreInstance.Mutation(async ({
 });
 let j = e => !!e && (e.isStateGroup ? e.childrenNodes.every(e => e.isIconLikeContainer) : e.isIconLikeContainer);
 export function $$k12() {
-  return Fk(e => {
+  return useDeepEqualSceneValue(e => {
     var t;
     var n;
     if (!getFeatureFlags().dt_component_browser_icons_flow) return new Set();

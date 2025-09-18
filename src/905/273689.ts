@@ -4,10 +4,10 @@ import { colorToRgb, desaturateColor } from "../figma_app/273493";
 import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { F } from "../905/989956";
+import { colorCSSManipulatorInstance } from "../905/989956";
 import { Eh } from "../figma_app/837840";
 import { Ep } from "../figma_app/504823";
-import { VG } from "../figma_app/622881";
+import { getColorSpaceString } from "../figma_app/622881";
 import { MX, Kf } from "../905/306220";
 import { W } from "../905/979098";
 let g = class e extends RecordingPureComponent {
@@ -18,7 +18,7 @@ let g = class e extends RecordingPureComponent {
       this.props.changeCallback(this.valueToColor(e), t);
     };
     this.renderHslCanvas = t => {
-      let i = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
+      let i = this.props.colorProfile ? getColorSpaceString(this.props.colorProfile) : "srgb";
       let n = Eh(t, i);
       if (!n) return;
       n.fillStyle = e.formatter.format(colorToRgb(desaturateColor(this.props.color)), i);
@@ -67,7 +67,7 @@ let g = class e extends RecordingPureComponent {
       n.fillRect(0, 0, this.props.size, this.props.size);
     };
     this.renderHsvCanvas = t => {
-      let i = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
+      let i = this.props.colorProfile ? getColorSpaceString(this.props.colorProfile) : "srgb";
       let n = Eh(t, i);
       if (!n) return;
       n.fillStyle = e.formatter.format(colorToRgb(desaturateColor(this.props.color)), i);
@@ -192,5 +192,5 @@ export function $$f0(e) {
   });
 }
 g.displayName = "SlvControl";
-g.formatter = F;
+g.formatter = colorCSSManipulatorInstance;
 export const T = $$f0;

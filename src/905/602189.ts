@@ -18,13 +18,13 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
-import { U2 } from "../figma_app/297957";
+import { useProUserContextInDowngradeExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
-import { Ye } from "../905/332483";
-import { AG, SS } from "../figma_app/217457";
+import { viewCollaboratorSet } from "../905/332483";
+import { compareProductAccessTypes, useFormattedProductNamesMemoized } from "../figma_app/217457";
 import { O as _$$O } from "../figma_app/710329";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 var $$m = p;
@@ -45,7 +45,7 @@ export function $$M1({
   return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 16,
-    children: [Ye.sort(AG).map(s => jsx(j, {
+    children: [viewCollaboratorSet.sort(compareProductAccessTypes).map(s => jsx(j, {
       seatType: s,
       setNextSeatType: i,
       availableSeats: r?.[s],
@@ -104,10 +104,10 @@ function U({
   isCurrentSeat: a,
   tier: s
 }) {
-  let o = SS(e, {
+  let o = useFormattedProductNamesMemoized(e, {
     overridePlanTier: s
   });
-  let l = U2();
+  let l = useProUserContextInDowngradeExperiment();
   if (e !== ViewAccessTypeEnum.VIEW && !r[e]) return null;
   let d = e !== ViewAccessTypeEnum.VIEW ? r[e] : void 0;
   let c = e === ViewAccessTypeEnum.VIEW ? renderI18nText("checkout.free") : renderI18nText("general.price_per_month", {
@@ -322,7 +322,7 @@ function z({
   fromSeatType: i,
   toSeatType: a
 }) {
-  let s = U2();
+  let s = useProUserContextInDowngradeExperiment();
   let {
     numAccessedFiles,
     numEditedFiles

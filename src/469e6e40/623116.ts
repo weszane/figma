@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { h as _$$h } from "../905/207101";
-import { r as _$$r } from "../905/520829";
+import { APILoadingStatus } from "../905/520829";
 import { xj, ok } from "../figma_app/851625";
 import { J as _$$J } from "../905/931050";
 import { getResourceDataOrFallback, Xm, gB, e1 as _$$e } from "../905/723791";
@@ -92,11 +92,11 @@ import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { AccessLevelEnum } from "../905/557142";
 import { p as _$$p3 } from "../905/195198";
 import { Lg, Lq } from "../figma_app/392626";
-import { dm } from "../figma_app/976345";
+import { selectTeamView } from "../figma_app/976345";
 import { h as _$$h2 } from "../905/857431";
 import { selectViewAction } from "../905/929976";
 import { lT } from "../figma_app/494261";
-import { WC } from "../figma_app/240735";
+import { beginRenameTeamAction } from "../figma_app/240735";
 import { NavigationRoutes } from "../905/548208";
 import { $ as _$$$2 } from "../905/442144";
 import { H as _$$H } from "../905/154301";
@@ -419,7 +419,7 @@ let eV = registerModal(function ({
       children: renderI18nText("add_unassigned_teams_modal.assign_teams")
     });
     let i = N && !allTeamsFetched;
-    if (i && status === _$$r.LOADING) return jsx(_$$$, {
+    if (i && status === APILoadingStatus.LOADING) return jsx(_$$$, {
       variant: "primary",
       disabled: !0,
       children: jsx("div", {
@@ -579,9 +579,9 @@ function e7(e, t, a, n) {
         }
       }));
     },
-    onOpenTeam: e => s(dm(e)),
+    onOpenTeam: e => s(selectTeamView(e)),
     onRenameTeam: e => {
-      s(WC());
+      s(beginRenameTeamAction());
       s(showModalHandler({
         type: _$$h2(),
         data: {
@@ -1674,7 +1674,7 @@ function tL(e) {
           })
         });
         let a = !1;
-        if (et && null !== totalSelectable && (a = isLoading), a && status === _$$r.LOADING) return jsx("div", {
+        if (et && null !== totalSelectable && (a = isLoading), a && status === APILoadingStatus.LOADING) return jsx("div", {
           style: sx.w150.$,
           children: jsx(Wi, {
             className: _$$s.h12.w150.$,
@@ -1735,7 +1735,7 @@ function tL(e) {
       isLoading,
       itemTypeContext: {
         itemType: "team",
-        getSelectedCountString: e => et && (!totalSelectable || status !== _$$r.SUCCESS) ? "" : getI18nString("multi_select_list.selected_count_team", {
+        getSelectedCountString: e => et && (!totalSelectable || status !== APILoadingStatus.SUCCESS) ? "" : getI18nString("multi_select_list.selected_count_team", {
           numSelected: e
         })
       },
@@ -1975,7 +1975,7 @@ export function $$tP0(e) {
       orgTeamCountsViewResult: m
     };
   }(e.org.id, w, _$$R2(v.orgAccessFilter, v.discoverabilityFilter), v.orphanedTeamFilter, null !== v.teamMembershipFilter ? v.teamMembershipFilter === ig.JOINED : void 0, v.workspaceFilter);
-  let U = status !== _$$r.SUCCESS || !!fetchMore;
+  let U = status !== APILoadingStatus.SUCCESS || !!fetchMore;
   return jsx(tL, {
     addOptimisticIds,
     dropdownShown,

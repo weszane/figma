@@ -15,7 +15,7 @@ import { Lg, Aq } from "../905/843553";
 import { F1, LJ } from "../figma_app/757114";
 import { c as _$$c2 } from "../905/932790";
 import { i2 } from "../905/913055";
-import { KH } from "../figma_app/722362";
+import { useSceneGraphSelection } from "../figma_app/722362";
 import { JT, KL } from "../figma_app/632248";
 import { s as _$$s, w as _$$w } from "../905/286488";
 import { RL, qy, B3, pP, z8 } from "../figma_app/862289";
@@ -33,7 +33,7 @@ export function $$D0() {
   let [e, t] = useState(!1);
   let r = _$$s(JT.CONTENT_FILL);
   let a = RL(JT.CONTENT_FILL, _$$c2);
-  let s = KH();
+  let s = useSceneGraphSelection();
   let {
     aiTrackingContext,
     state

@@ -40,8 +40,8 @@ import { r as _$$r } from "../figma_app/860474";
 import { gk } from "../figma_app/540726";
 import { Z as _$$Z } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
-import { p8, eY } from "../figma_app/722362";
-import { lH, Fy } from "../figma_app/623300";
+import { useAppModelProperty, useSceneGraphSelector } from "../figma_app/722362";
+import { hasNotLoaded, getNodeStatus } from "../figma_app/623300";
 import { FileKindEnum } from "../figma_app/162807";
 import { KindEnum } from "../905/129884";
 import { setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
@@ -112,7 +112,7 @@ let er = memo(function (e) {
           option: PageViewMode.ALL_PAGES,
           activeOption: l,
           onClickCallback: e => {
-            lH(i) || !allInstancesExpanded ? (t(!0), requestAnimationFrame(() => {
+            hasNotLoaded(i) || !allInstancesExpanded ? (t(!0), requestAnimationFrame(() => {
               n(V2(e));
               t(!1);
             })) : n(V2(e));
@@ -547,7 +547,7 @@ function eM({
   let D = useDispatch();
   let j = WB();
   let k = II();
-  let P = p8("currentPage");
+  let P = useAppModelProperty("currentPage");
   let M = useRef(null);
   let B = useSelector(e => e.canvasSearch.scope);
   let U = CanvasSearchHelpers.hasDirtyPrimaryInstances();
@@ -972,10 +972,10 @@ function eB({
   let s = useIsSelectedViewFullscreenCooper();
   let o = useSelector(e => e.mirror.appModel.pagesList);
   let d = "";
-  d = 0 === e ? lH(o) || !n ? l ? getI18nString("canvas_search.no_results_in_this_deck") : i ? getI18nString("canvas_search.no_results_on_site") : s ? getI18nString("canvas_search.no_results_in_buzz_file") : getI18nString("canvas_search.no_results_on_page") : t ? getI18nString("canvas_search.no_results") : getI18nString("canvas_search.no_results_in_file") : getI18nString("canvas_search.results_count", {
+  d = 0 === e ? hasNotLoaded(o) || !n ? l ? getI18nString("canvas_search.no_results_in_this_deck") : i ? getI18nString("canvas_search.no_results_on_site") : s ? getI18nString("canvas_search.no_results_in_buzz_file") : getI18nString("canvas_search.no_results_on_page") : t ? getI18nString("canvas_search.no_results") : getI18nString("canvas_search.no_results_in_file") : getI18nString("canvas_search.results_count", {
     total: e
   });
-  let c = (!l && !i && !s || getFeatureFlags().interop_pages) && (e > 0 || t || lH(o) || !n);
+  let c = (!l && !i && !s || getFeatureFlags().interop_pages) && (e > 0 || t || hasNotLoaded(o) || !n);
   return jsxs("div", {
     className: _M,
     children: [jsx(_$$T, {
@@ -999,7 +999,7 @@ function ez({
   setOpen: n,
   numResults: l
 }) {
-  let r = eY().get(e);
+  let r = useSceneGraphSelector().get(e);
   let i = e === zeroSessionLocalIDString ? getI18nString("fullscreen.canvas_search.pages") : r.name;
   return jsxs(RecordableButton, {
     className: kQ,
@@ -1031,13 +1031,13 @@ function eG({
   hasMultipleSelections: m,
   setHoveredResult: _
 }) {
-  let E = eY();
-  let f = p8("currentPage");
+  let E = useSceneGraphSelector();
+  let f = useAppModelProperty("currentPage");
   let v = e.textMatch.matchType === MatchCriteria.TEXT_MATCH;
   let I = null != t && v && (E.get(e.guid)?.hasMissingFont || !1);
   let y = !yZ();
   let b = useSelector(e => e.mirror.appModel.pagesList);
-  let R = y && e.textMatch.matchType === MatchCriteria.PAGE_MATCH && Multiplayer.isIncrementalSession() && Fy(b, e.resultGuid) !== DataLoadStatus.LOADED;
+  let R = y && e.textMatch.matchType === MatchCriteria.PAGE_MATCH && Multiplayer.isIncrementalSession() && getNodeStatus(b, e.resultGuid) !== DataLoadStatus.LOADED;
   let D = useDispatch();
   let O = N()(V3, {
     [HR]: e.isPurple,

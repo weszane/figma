@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { VU } from "../905/625959";
 import { Xo } from "../figma_app/482495";
-import { Fk } from "../figma_app/167249";
+import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cn } from "../905/959568";
 import { Xn } from "../905/429125";
 import { eM, xb, Fv, wh } from "../figma_app/164212";
@@ -29,7 +29,7 @@ export function $$w0(e) {
   let r = function (e, t) {
     let r = function () {
       let e = useRef(null);
-      let t = Fk(e => e.getDirectlySelectedNodes()[0]?.name);
+      let t = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes()[0]?.name);
       let r = useMemo(() => ({
         propName: t
       }), [t]);
@@ -41,7 +41,7 @@ export function $$w0(e) {
       }, []);
       let o = oX(RR.SLOT_CONTENT_ID, e, r);
       let l = MB(RR.SLOT_CONTENT_ID);
-      let d = Fk(e => {
+      let d = useDeepEqualSceneValue(e => {
         if (!getFeatureFlags().dse_slots) return !1;
         let t = e.getDirectlySelectedNodes();
         if (0 === t.length || !t.every(e => e.canBeSlot && !e.isSlotReactive) || void 0 === fx(e, t.map(e => e.id))) return !1;
@@ -117,7 +117,7 @@ export function $$w0(e) {
       slotPropertyDefinition: e,
       includesAssignedSlot: t
     }) {
-      let r = Fk(e => {
+      let r = useDeepEqualSceneValue(e => {
         let t = e.getDirectlySelectedNodes();
         if (1 !== t.length) return;
         let r = t[0];
@@ -152,7 +152,7 @@ function O({
   slotPropertyDefinition: e,
   includesInstanceSublayer: t
 }) {
-  let r = Fk(e => {
+  let r = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
     if (1 !== t.length) return;
     let r = t[0];
