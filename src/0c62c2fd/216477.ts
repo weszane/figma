@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { useSubscription } from "../figma_app/288654";
@@ -33,7 +33,7 @@ export function $$p0(e) {
           children: jsx("div", {
             className: _$$s.mt4.mb4.$,
             children: renderI18nText("resource_connection.block_file_move.learn_more_about_what_you_can_do_in_connected_projects", {
-              learnMore: jsx(N, {
+              learnMore: jsx(Link, {
                 href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
                 children: renderI18nText("resource_connection.request_modal.learn_more")
               }),

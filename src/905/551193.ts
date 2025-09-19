@@ -1,5 +1,5 @@
 import { debugState } from "../905/407919";
-import { mV } from "../905/837497";
+import { initializeWidgetAllowlist } from "../905/837497";
 import { a8 } from "../figma_app/559491";
 import { gI } from "../figma_app/399472";
 import { findProfile } from "../figma_app/740025";
@@ -20,7 +20,7 @@ async function p(e) {
   });
   let u = openFile?.key ?? null;
   let p = getWidgetAllowListKey(e, u);
-  isLoaded(loadingState, p) || (await debugState.dispatch(mV({
+  isLoaded(loadingState, p) || (await debugState.dispatch(initializeWidgetAllowlist({
     orgId: e,
     profileId: d?.id
   })));

@@ -1,7 +1,7 @@
 import { Thumbnail } from "../figma_app/763686";
 import { getTrackingSessionId } from "../905/471229";
 import { D } from "../905/347702";
-import { c as _$$c } from "../905/289751";
+import { readImageBytes } from "../905/289751";
 import { PJ, Oq } from "../905/588985";
 export function $$l2(e, t) {
   let r = new XMLHttpRequest();
@@ -30,7 +30,7 @@ export function $$l2(e, t) {
         i < t.height && (i = t.height, r = n.width * (t.height / n.height), a = t.width / 2 - r / 2, l = 0);
         t.getContext("2d").drawImage(n, a, l, r, i);
         let d = await new Promise(e => t.toBlob(e));
-        let [c] = await Promise.all([_$$c(d)]);
+        let [c] = await Promise.all([readImageBytes(d)]);
         e({
           url: URL.createObjectURL(new Blob([c || ""])),
           buffer: new Uint8Array(c)

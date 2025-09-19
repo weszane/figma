@@ -7,7 +7,7 @@ import { V } from "../905/513628";
 import { Z } from "../905/909123";
 import { aP } from "../figma_app/530167";
 import { Ri } from "../figma_app/49598";
-import { HZ, Oo } from "../905/926523";
+import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
 import { trimOrEmpty } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { liveStoreInstance } from "../905/713695";
@@ -161,7 +161,7 @@ export async function $$S3({
     hubFileId: e.id,
     fileKey: t.key
   }));
-  i && (n && (debugState.dispatch(HZ({
+  i && (n && (debugState.dispatch(addAuthedCommunityProfileToHub({
     ...i,
     profile_created: n
   })), await new Promise(e => {
@@ -170,7 +170,7 @@ export async function $$S3({
       profileId: i.id,
       onSuccess: e
     }));
-  })), debugState.dispatch(Oo(i)));
+  })), debugState.dispatch(putCommunityProfile(i)));
 }
 export async function $$w4(e) {
   let t = 0;

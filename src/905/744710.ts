@@ -61,7 +61,7 @@ import { LazyInputForwardRef } from '../905/408237';
 import { iX as _$$iX, Ke } from '../905/415545';
 import { getCommunityHubNavigation } from '../905/428660';
 import { useModalManager } from '../905/437088';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { ConfirmationModal } from '../905/441305';
 import { D as _$$D } from '../905/443020';
 import { IconButton } from '../905/443068';
@@ -114,7 +114,7 @@ import { BQ } from '../905/865071';
 import { iv as _$$iv, mc as _$$mc, UC, Uj } from '../905/872285';
 import { XHR, XHRError } from '../905/910117';
 import { A as _$$A6 } from '../905/920142';
-import { G0, Gu } from '../905/926523';
+import { removeCommunityProfileUser, changeCommunityProfilePrimaryUser } from '../905/926523';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
 import { selectUserFlag } from '../905/940356';
@@ -460,7 +460,7 @@ function eA(e) {
   let n = e.profile.associated_users || [];
   let a = Um();
   let s = (t, n) => {
-    i(Gu({
+    i(changeCommunityProfilePrimaryUser({
       email: t,
       profileId: e.user.community_profile_id,
       userId: n
@@ -503,7 +503,7 @@ function ey(e) {
   let t = e.profile?.associated_users || [];
   let i = useDispatch();
   let n = (t, n) => {
-    e.user.community_profile_id && i(G0({
+    e.user.community_profile_id && i(removeCommunityProfileUser({
       email: t,
       profileId: e.user.community_profile_id,
       userId: n
@@ -969,11 +969,11 @@ function eW(e) {
         }), jsx('div', {
           className: 'purchase_home_and_history--termsContainer--UGXj-',
           children: renderI18nText('community.purchase_home.by_purchasing_resources_you_agree', {
-            paidResourceLicense: jsx(_$$N, {
+            paidResourceLicense: jsx(Link, {
               href: 'https://figma.com/community-paid-resource-license',
               children: renderI18nText('community.detail_view.paid_resource_license')
             }),
-            termsOfService: jsx(_$$N, {
+            termsOfService: jsx(Link, {
               href: 'https://www.figma.com/tos/',
               children: renderI18nText('community.purchase_home.community_terms_of_service')
             })
@@ -2125,7 +2125,7 @@ function iw(e) {
   }) : nonExpPatRevocationStage === 'revoked' ? jsxs(Fragment, {
     children: [renderI18nText('tokens.settings.token_was_revoked', {
       revocationDate: ix
-    }), ' ', jsx(_$$N, {
+    }), ' ', jsx(Link, {
       newTab: !0,
       href: iS,
       children: renderI18nText('tokens.settings.learn_more')
@@ -2133,7 +2133,7 @@ function iw(e) {
   }) : nonExpPatRevocationStage === 'grace_period' ? jsxs(Fragment, {
     children: [renderI18nText('tokens.settings.token_will_be_revoked', {
       revocationDate: ix
-    }), ' ', jsx(_$$N, {
+    }), ' ', jsx(Link, {
       newTab: !0,
       href: iS,
       children: renderI18nText('tokens.settings.learn_more')
@@ -3766,7 +3766,7 @@ function ro() {
             })
           }), jsx('div', {
             children: renderI18nText('settings.account_settings.to_disable_local_fonts_follow_the_uninstall_steps_in_the', {
-              helpCenterLink: jsx(_$$N, {
+              helpCenterLink: jsx(Link, {
                 href: 'https://help.figma.com/hc/articles/360039956894-Access-local-fonts-on-your-computer#Uninstall_the_font_service',
                 onClick: o,
                 newTab: !0,
@@ -3795,7 +3795,7 @@ function ro() {
                 children: renderI18nText('general.learn_more')
               })
             })
-          }), jsx(_$$N.Button, {
+          }), jsx(Link.Button, {
             href: e,
             onClick: s,
             newTab: !0,
@@ -3980,7 +3980,7 @@ function rO(e) {
         fontWeight: 'medium',
         fontSize: 11,
         children: renderI18nText('user_settings.plan_sections.what_products_are_used', {
-          learn: jsx(_$$N, {
+          learn: jsx(Link, {
             newTab: !0,
             trusted: !0,
             href: 'https://www.figma.com/pricing/',
@@ -4554,12 +4554,12 @@ function rF({
             className: _$$s.fontSemiBold.$,
             children: renderI18nText('settings.account_settings.file_view_history.off')
           }),
-          learnMore: jsx(_$$N, {
+          learnMore: jsx(Link, {
             href: 'https://help.figma.com/hc/articles/29638316371479',
             children: renderI18nText('general.learn_more')
           })
         }) : renderI18nText('settings.account_settings.file_view_history_enabled_description', {
-          learnMore: jsx(_$$N, {
+          learnMore: jsx(Link, {
             href: 'https://help.figma.com/hc/articles/29638316371479',
             children: renderI18nText('general.learn_more')
           })

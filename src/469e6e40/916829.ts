@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { formatList } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -57,7 +57,7 @@ function k(e) {
                   style: sx.add({
                     listStyleType: "disc"
                   }).$,
-                  children: [a ? jsx(N, {
+                  children: [a ? jsx(Link, {
                     href: a,
                     newTab: !0,
                     trusted: !0,

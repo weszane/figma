@@ -24,7 +24,7 @@ import { Button } from "../905/521428";
 import { fG } from "../figma_app/973927";
 import { FFileType } from "../figma_app/191312";
 import { hT } from "../figma_app/878651";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/103637";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -117,7 +117,7 @@ function B({
       className: D5,
       children: [jsx(_$$U, {
         className: wP
-      }), jsx(_$$N, {
+      }), jsx(Link, {
         href: "/community/figjam",
         newTab: !0,
         onClick: () => {
@@ -372,7 +372,7 @@ function en(e) {
             value: o.description
           }), jsx("div", {
             className: _$$s.mt16.$,
-            children: jsx(_$$N, {
+            children: jsx(Link, {
               href: `/community/file/${e.templateId}`,
               newTab: !0,
               children: renderI18nText("browse_templates_modal.see_more_details_in_community")
@@ -460,7 +460,7 @@ function eo({
     illustration: _$$A,
     resourceTypeDisplayString: "templates",
     query: e,
-    cta: jsx(_$$N.Button, {
+    cta: jsx(Link.Button, {
       href: g,
       newTab: !0,
       variant: "secondary",

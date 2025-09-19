@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { DialogBackButton, DialogContents, DialogHeader, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
@@ -747,7 +747,7 @@ export let $$eK0 = registerModal(function (e) {
                             className: _$$s.fontSemiBold.$,
                             children: resourceConnection.connectedPlanName
                           }),
-                          connectedProjectLink: jsx(_$$N, {
+                          connectedProjectLink: jsx(Link, {
                             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
                             newTab: !0,
                             children: getI18nString("resource_connection.connected_project_link")

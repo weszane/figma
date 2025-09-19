@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { n7 } from "../905/926523";
+import { mergeCommunityProfiles } from "../905/926523";
 import { isSuccess, isLoading } from "../905/18797";
 import { UploadStatusEnum } from "../figma_app/10554";
 import { selectCurrentUser } from "../905/372672";
@@ -41,8 +41,8 @@ var $$n0;
     }, [resource, publisher, m, u, g, n, v, resourcePublishingStatusCode]);
     return {
       addCommunityProfileUser: function (e) {
-        t(n7(e));
-        f(n7.loadingKeyForPayload(e));
+        t(mergeCommunityProfiles(e));
+        f(mergeCommunityProfiles.loadingKeyForPayload(e));
       },
       setNextStep: h,
       takeStep: v,

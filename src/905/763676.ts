@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { Button } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { PluginModalType, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
@@ -566,7 +566,7 @@ function e_() {
     children: [jsx("div", {
       className: "subscription_file_replace_libraries_view--footerText--YA1qF",
       children: renderI18nText("design_systems.libraries_modal.swap_default_styles_in_instances")
-    }), jsx(_$$N, {
+    }), jsx(Link, {
       href: "https://help.figma.com/hc/articles/4404856784663#overrides",
       newTab: !0,
       trusted: !0,

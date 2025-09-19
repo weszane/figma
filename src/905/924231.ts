@@ -5,7 +5,7 @@ import { h as _$$h } from "../905/207101";
 import { SvgComponent } from "../905/714743";
 import { Rw } from "../figma_app/91703";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { cW, $1 } from "../figma_app/844435";
+import { usePublishedPlugins, getLocalPlugins } from "../figma_app/844435";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
@@ -29,9 +29,9 @@ export function $$E0({
   initialParameterValues: S,
   recentlyUsedCommandName: w
 }) {
-  let C = cW();
+  let C = usePublishedPlugins();
   let T = useSelector(e => e.installedPluginVersions.plugins);
-  let k = $1();
+  let k = getLocalPlugins();
   let R = getSelectedEditorType();
   let N = selectCurrentFile();
   let P = useDispatch();

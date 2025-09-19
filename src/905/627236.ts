@@ -3,7 +3,7 @@ import { Suspense, useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
@@ -63,7 +63,7 @@ function q() {
   });
 }
 function $() {
-  return jsx(_$$N, {
+  return jsx(Link, {
     href: "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan",
     trusted: !0,
     newTab: !0,

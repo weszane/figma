@@ -155,7 +155,7 @@ const batchedUserValuesQuery = liveStoreInstance.Query({
   key: 'statsig_batched_user_values',
   stalenessPolicy: 'never',
 })
-const initializeAtom = atom(null, async (get, set, user, isProvider: any, options) => {
+export const initializeAtom = atom(null, async (get, set, user, isProvider: any, options) => {
   if (!hasStatsigClientApiKey())
     return
   const sdkKey = getInitialOptions().statsig_figma_app_client_api_key
@@ -185,7 +185,7 @@ const initializeAtom = atom(null, async (get, set, user, isProvider: any, option
   deferred.resolve()
   await initPromise
 })
-const contextSwitchAtom = atom<any, IUser[], any>(null, async (get, set, user) => {
+export const contextSwitchAtom = atom<any, IUser[], any>(null, async (get, set, user) => {
   if (!hasStatsigClientApiKey() || !shouldSkipPerfCheck())
     return
   const processState = get(processAtom)

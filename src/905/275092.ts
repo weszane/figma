@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { sortByDateProperty } from "../figma_app/656233";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Ak } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
 export function $$d0({
@@ -21,7 +21,7 @@ export function $$d0({
         fileCount: t.length
       }), " ", jsx("div", {
         className: "library_item_footer--footerInlineLink--uHgID",
-        children: jsx(N, {
+        children: jsx(Link, {
           newTab: !0,
           href: "https://help.figma.com/hc/articles/360039238353",
           trusted: !0,

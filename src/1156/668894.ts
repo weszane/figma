@@ -23,7 +23,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { IconButton } from "../905/443068";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { Label } from "../905/270045";
 import { C as _$$C } from "../905/520159";
@@ -198,7 +198,7 @@ let G = registerModal(function (e) {
           className: "x78zum5 xdt5ytf xou54vl",
           children: [jsx("div", {
             children: renderI18nText("figmake.pause_project_modal.body_with_link", {
-              upgradeLink: jsx(_$$N, {
+              upgradeLink: jsx(Link, {
                 href: $X(organization?.id || ""),
                 newTab: !0,
                 children: getI18nString("figmake.pause_project_modal.upgrade_link")
@@ -268,7 +268,7 @@ let V = registerModal(function (e) {
         children: jsx("div", {
           children: jsxs("p", {
             ...Ay.props(W.textBodyMedium),
-            children: [getI18nString("figmake.supabase_cost_warning_modal.body"), " ", jsx(_$$N, {
+            children: [getI18nString("figmake.supabase_cost_warning_modal.body"), " ", jsx(Link, {
               href: Sy,
               newTab: !0,
               children: getI18nString("general.learn_more")

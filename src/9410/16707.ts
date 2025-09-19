@@ -26,7 +26,7 @@ import { y as _$$y } from "../905/129046";
 import { _l } from "../figma_app/995208";
 import { rq } from "../905/425180";
 import { F_, EL } from "../905/858282";
-import { Bk } from "../figma_app/357367";
+import { canEnterDesignMode } from "../figma_app/357367";
 import { Yqi } from "../figma_app/6204";
 import { jY } from "../figma_app/21029";
 import { g as _$$g } from "../9410/28058";
@@ -46,7 +46,7 @@ function U() {
 export function $$K0() {
   let e = Xr(VZ);
   let t = jY();
-  let i = Bk();
+  let i = canEnterDesignMode();
   let {
     show,
     isShowing,
@@ -290,7 +290,7 @@ function W({
   isShowing: i,
   totalSteps: n
 }) {
-  let a = Bk();
+  let a = canEnterDesignMode();
   let o = _$$E();
   return jsx(rq, {
     description: renderI18nText("slides.onboarding.nondesigner.tools.description"),

@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { FirstDraftHelpers, LogToConsoleMode, Fullscreen } from "../figma_app/763686";
-import { s4 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { waitForAnimationFrame } from "../905/236856";
 import c from "../vendor/223926";
@@ -438,7 +438,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   !function (e) {
     let t = new PerfTimer("publish.client.prep_nodes_for_thumbnailing", {});
     t.start();
-    let r = e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH].filter(e => e.style_type === s4.TEXT);
+    let r = e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH].filter(e => e.style_type === StyleType.TEXT);
     r.forEach(e => {
       Fullscreen.prepNodeForAssetThumbnailRendering(e.node_id);
     });

@@ -3,7 +3,7 @@ import { createContext, useContext, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
 import { EventShield } from "../905/821217";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { M3 } from "../figma_app/119475";
@@ -71,7 +71,7 @@ export function $$E0({
   }, [x]);
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
-    children: jsx(_$$N, {
+    children: jsx(Link, {
       href: e ?? "",
       htmlAttributes: {
         onContextMenu: H,

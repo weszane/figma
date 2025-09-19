@@ -39,7 +39,7 @@ import { I6 } from "../vendor/336448";
 import { detectEditorStateFormat } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
 import { bU } from "../figma_app/967154";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { trackEventAnalytics } from "../905/449184";
 import { _P } from "../figma_app/164212";
 import { pT } from "../figma_app/435995";
@@ -342,7 +342,7 @@ function ed(e) {
   }) : renderI18nText("design_systems.component_panel.view_documentation"), [displayName, displayText]);
   return jsx("div", {
     className: pT,
-    children: jsx(_$$N.Button, {
+    children: jsx(Link.Button, {
       variant: "secondary",
       width: "fill",
       href: uri,

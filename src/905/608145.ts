@@ -13,7 +13,7 @@ import { reportError } from "../905/11";
 import { VisualBellActions } from "../905/302958";
 import { zM } from "../figma_app/580736";
 import { Lk, x as _$$x } from "../figma_app/639711";
-import { HT } from "../figma_app/69680";
+import { defaultViewAtom } from "../figma_app/69680";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
 import { EG } from "../figma_app/972736";
@@ -294,7 +294,7 @@ export function $$J0(e, t, i) {
       {
         if ("dev" === w || "inspect" === w) {
           setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
-          atomStoreManager.set(HT, "development");
+          atomStoreManager.set(defaultViewAtom, "development");
           mN.getInstance()?.getIframeId() === Wh.INSPECT && handlePluginError();
           return;
         }
@@ -335,7 +335,7 @@ export function $$J0(e, t, i) {
         triggeredFrom: t
       }), "dev" === w || "inspect" === w) {
         setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
-        atomStoreManager.set(HT, "recents_and_saved");
+        atomStoreManager.set(defaultViewAtom, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.INSPECT && handlePluginError();
         return;
       }

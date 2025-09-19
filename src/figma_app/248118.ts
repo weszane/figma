@@ -18,7 +18,7 @@ import { getCurrentPluginVersion, isSingleDevEditorType, isValidForCooperDevCode
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
 import { b as _$$b } from "../905/635568";
-import { $1, Be, cW } from "../figma_app/844435";
+import { getLocalPlugins, useInstalledPluginsAndWidgets, usePublishedPlugins } from "../figma_app/844435";
 function v() {
   let e = getSelectedEditorType();
   let {
@@ -42,7 +42,7 @@ function v() {
     publishedPlugins: e.publishedPlugins,
     publishedWidgets: e.publishedWidgets
   }));
-  let p = $1();
+  let p = getLocalPlugins();
   return useMemo(() => ({
     openFile,
     localExtensions: p,
@@ -59,9 +59,9 @@ function v() {
   }), [openFile, p, orgEntity, org, isReadOnly, userCanViewPlugins, userCanRunExtensions, e, activeTextReviewPlugin, publishedPlugins, publishedWidgets]);
 }
 export function $$A3(e) {
-  let t = Be();
+  let t = useInstalledPluginsAndWidgets();
   let r = t.plugins[e] || t.orgPlugins[e];
-  let n = cW()[e];
+  let n = usePublishedPlugins()[e];
   return r || (n ? getCurrentPluginVersion(n) : null);
 }
 export function $$x4(e) {
@@ -129,7 +129,7 @@ export function $$R7(e) {
 }
 export function $$L5(e, t) {
   let r = v();
-  let a = Object.values($1()).find(t => t.plugin_id === e);
+  let a = Object.values(getLocalPlugins()).find(t => t.plugin_id === e);
   let o = _$$b();
   let l = gB();
   let u = useStore();

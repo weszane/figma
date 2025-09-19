@@ -81,7 +81,7 @@ import { aJ, Oc } from '../905/449579';
 import { n as _$$n2 } from '../905/451212';
 import { K as _$$K2 } from '../905/459096';
 import { fK } from '../905/469533';
-import { x9 } from '../905/470594';
+import { showNetworkSettingsModal } from '../905/470594';
 import { $$ab4, $$av5 } from '../905/472793';
 import { V as _$$V } from '../905/477816';
 import { e as _$$e2 } from '../905/478588';
@@ -7300,7 +7300,7 @@ export function $$nN0(e) {
     featureFlags: []
   }, {
     name: 'check-network-compatibility',
-    callback: (e, t, i) => x9(i),
+    callback: (e, t, i) => showNetworkSettingsModal(i),
     searchOnly: !0,
     featureFlags: []
   }, {

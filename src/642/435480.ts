@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
 import o from "classnames";
 import { getI18nString } from "../905/303541";
-import { CA } from "../figma_app/327588";
+import { isFullscreenDesignModeNotFocused } from "../figma_app/327588";
 import { e as _$$e } from "../1528/93111";
 import { q } from "../figma_app/590592";
 import { Gt } from "../905/275640";
@@ -29,7 +29,7 @@ export function $$b1({
   let s = _$$e();
   let i = U1();
   let a = q();
-  let o = CA();
+  let o = isFullscreenDesignModeNotFocused();
   let m = o3(nt.newResizablePanel);
   return jsx(_$$m, {
     role: "region",

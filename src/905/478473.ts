@@ -9,7 +9,7 @@ import { TextWithTruncation } from "../905/984674";
 import { getCurrentVersion } from "../figma_app/471982";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
-import { XL } from "../figma_app/684168";
+import { isExtensionRequestAllowed } from "../figma_app/684168";
 import { KindEnum } from "../905/129884";
 import { S } from "../905/404161";
 import { pF, Vj, xo, tW, bv, sw } from "../905/427932";
@@ -78,7 +78,7 @@ function I(e) {
         children: renderI18nText("community.try.pick_workspace.approval_pending")
       })
     });
-    if (!XL({
+    if (!isExtensionRequestAllowed({
       workspace,
       hasPendingRequest,
       extension
@@ -205,7 +205,7 @@ export function $$S1(e) {
       data: i
     }));
   };
-  let u = XL({
+  let u = isExtensionRequestAllowed({
     workspace,
     hasPendingRequest: d,
     extension

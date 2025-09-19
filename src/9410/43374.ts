@@ -5,12 +5,12 @@ import { throwTypeError } from "../figma_app/465776";
 import { DiagramElementType, InteractionCpp, HideMode, Positioning } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { isIpadDevice } from "../figma_app/778880";
-import { jw } from "../figma_app/327588";
+import { isNotInFocusedNodeView } from "../figma_app/327588";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Ty8 } from "../figma_app/27776";
 let h = parsePxInt(Ty8);
 export function $$m4() {
-  let e = jw();
+  let e = isNotInFocusedNodeView();
   let t = useSelector(({
     mirror: {
       selectionProperties: e,

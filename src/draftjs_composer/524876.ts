@@ -48,7 +48,7 @@ import { v as _$$v } from "../905/981847";
 import { kG } from "../905/958668";
 import { Y as _$$Y2 } from "../figma_app/433187";
 import { tI } from "../905/603628";
-import { MZ } from "../905/470594";
+import { enqueueNetworkErrorBell } from "../905/470594";
 import { iX } from "../6443/426443";
 import { i as _$$i } from "../905/50151";
 import { fP, U0, mr, Sg, OX, o1, xu, q9 } from "../905/149906";
@@ -276,7 +276,7 @@ export function $$em1(e) {
   }, [deleteAttachment, e$]);
   let e2 = useCallback((e, t) => {
     if (e instanceof UploadError) {
-      MZ(dispatch, getI18nString("check_network_compatibility.error_bell.comment_attachments.message"));
+      enqueueNetworkErrorBell(dispatch, getI18nString("check_network_compatibility.error_bell.comment_attachments.message"));
       return;
     }
     dispatch(VisualBellActions.enqueue({

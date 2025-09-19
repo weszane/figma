@@ -4,7 +4,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { Mu } from "../905/435079";
 import { Ds, iZ } from "../figma_app/3776";
 import { j } from "../905/881708";
@@ -68,7 +68,7 @@ export class $$f0 extends j {
     let t;
     if (this._uiHidden = this.shouldHideUI(), !this._uiHidden) {
       if ("ADD_FIRST_CHILD_HOVERED" === this._state.mouse && (t = this.addBlankChildAtCoord(0, 0, "insert_slide_button", !1)), ("ADD_CHILD_DOT_HOVERED" === this._state.mouse || "ADD_CHILD_AFTER_ROW_HOVERED" === this._state.mouse) && (t = this.addBlankChildAtCoord(this._state.coord.row, this._state.coord.col, "insert_slide_button", !1)), "ADD_CHILD_AFTER_FINAL_ROW_HOVERED" === this._state.mouse) {
-        let e = atomStoreManager.get(BT);
+        let e = atomStoreManager.get(canvasGridAtom);
         t = this.addBlankChildAtCoord(e.length, 0, "insert_row_button", !1, oq(e, e.length));
       }
       "ADD_ROW_DOT_HOVERED" === this._state.mouse && (AppStateTsApi?.canvasGrid().createRow(this._state.row), t = this.addBlankChildAtCoord(this._state.row, 0, "insert_row_button", !1));
@@ -77,7 +77,7 @@ export class $$f0 extends j {
   }
   render(e, t) {
     if (!AppStateTsApi || AppStateTsApi.canvasGrid().isDraggingChildren.getCopy()) return;
-    let i = atomStoreManager.get(BT);
+    let i = atomStoreManager.get(canvasGridAtom);
     if (pP(JT.BOARD_TO_DECK).state !== qy.RUNNING && !this._uiHidden) {
       if (0 === i.length && this.shouldRenderEmptyCanvasPlaceholder() && this.renderEmptyCanvasPlaceholder(e, t), "ADD_CHILD_DOT_NEARBY" === this._state.mouse && qu(this._state.canvasPos, e, t, 0, this.shouldRenderAsStateGroupRow(this._state.coord.row)), "ADD_CHILD_DOT_HOVERED" === this._state.mouse && $r(this._state.canvasPos, e, t, 0, this.shouldRenderAsStateGroupRow(this._state.coord.row)), "ADD_ROW_DOT_NEARBY" === this._state.mouse && qu(this._state.canvasPos, e, t, -KV), "ADD_ROW_DOT_HOVERED" === this._state.mouse) {
         let i = e.canvasSpaceToViewportSpace(this._state.canvasPos);

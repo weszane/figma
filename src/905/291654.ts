@@ -13,7 +13,7 @@ import { useModalManager } from '../905/437088';
 import { analyticsEventManager } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
 import { If } from '../905/714538';
-import { D7, rj, T_, V1 } from '../905/946258';
+import { FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO_DISPLAY, FONT_SF_COMPACT, FONT_SF_PRO_ROUNDED } from '../905/946258';
 import { postUserFlag } from '../905/985254';
 import { FEditorType } from '../figma_app/53721';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
@@ -267,7 +267,7 @@ let k = registerModal(e => {
   });
 }, 'APPLE_FONT_EULA_MODAL_TYPE', ModalSupportsBackground.YES);
 let R = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper]);
-let N = new Set([rj, V1, T_, D7]);
+let N = new Set([FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED]);
 let $$P0 = {
   [d.SF_PRO]: {
     eula: d.SF_PRO,

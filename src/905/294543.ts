@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { createOptimistThunk } from "../905/350402";
 import { addPluginToRecentsThunk } from "../figma_app/147952";
-import { cW } from "../figma_app/844435";
+import { usePublishedPlugins } from "../figma_app/844435";
 import { trackFileEvent } from "../figma_app/314264";
 import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
 import { getUserId } from "../905/372672";
@@ -38,7 +38,7 @@ export let $$A0 = createOptimistThunk((e, t) => {
 });
 export function $$y1() {
   let e = trackFileEventWithStore();
-  let t = cW();
+  let t = usePublishedPlugins();
   let i = useDispatch();
   let s = getUserId() ?? void 0;
   return useCallback(n => {

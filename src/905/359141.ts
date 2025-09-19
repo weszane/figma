@@ -37,7 +37,7 @@ import { _ as _$$_ } from '../905/381235';
 import { f as _$$f } from '../905/405189';
 import { bj as _$$bj } from '../905/420347';
 import { I as _$$I } from '../905/423735';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { J as _$$J2 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { $ as _$$$2 } from '../905/455748';
@@ -1674,7 +1674,7 @@ function tc() {
   });
 }
 function tu() {
-  let e = jsx(_$$N.Button, {
+  let e = jsx(Link.Button, {
     variant: 'secondary',
     href: 'https://help.figma.com/hc/articles/360039484194',
     newTab: !0,
@@ -1875,7 +1875,7 @@ function tC() {
     hasEntAccess
   } = mG();
   let t = hasEntAccess ? getI18nString('design_systems.libraries_modal.no_recommended_libraries_ent_text') : getI18nString('design_systems.libraries_modal.no_recommended_libraries_pro_org_text');
-  let i = jsx(_$$N.Button, {
+  let i = jsx(Link.Button, {
     variant: 'secondary',
     href: hasEntAccess ? 'https://help.figma.com/hc/articles/21310245473815' : 'https://help.figma.com/hc/articles/360039234953',
     newTab: !0,
@@ -2322,7 +2322,7 @@ function t9() {
     }), jsx('div', {
       className: 'library_modal_branch_banner--description--RuYOD',
       children: renderI18nText('design_systems.libraries_modal.merge_into_main_file_to_publish')
-    }), jsx(_$$N.Button, {
+    }), jsx(Link.Button, {
       variant: 'secondary',
       newTab: !0,
       href: 'https://help.figma.com/hc/articles/5691189138839',

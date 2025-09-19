@@ -7,10 +7,10 @@ import l from "../vendor/128080";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../905/477505";
-import { HT, RB } from "../figma_app/69680";
+import { defaultViewAtom, isModalOpenAtom } from "../figma_app/69680";
 import { SupportedPlatforms, WEB, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
 import { findUnitSchema, getCodegenLanguagePreference } from "../905/515076";
-import { $1, j8, _P } from "../figma_app/844435";
+import { getLocalPlugins, getAllPluginVersions, usePluginManifestById } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { useCurrentUserOrg } from "../905/845253";
 import { isDevModeWithCodegen } from "../figma_app/300692";
@@ -71,12 +71,12 @@ export function $$x0({
   currentSavedCodeLanguage: g,
   skipBrowsePlugins: v = !1
 }) {
-  let I = $1();
-  let x = j8();
+  let I = getLocalPlugins();
+  let x = getAllPluginVersions();
   let {
     codegenPlugins
   } = _$$n();
-  let w = _P(g?.id || "", !!g);
+  let w = usePluginManifestById(g?.id || "", !!g);
   let C = useSelector(e => e.whitelistedPlugins);
   let T = useCurrentUserOrg() || null;
   return useMemo(() => {
@@ -130,8 +130,8 @@ export function $$x0({
       displayText: getI18nString("dev_handoff.code_language.browse"),
       callback: () => {
         setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
-        atomStoreManager.set(HT, "recents_and_saved");
-        atomStoreManager.set(RB, !0);
+        atomStoreManager.set(defaultViewAtom, "recents_and_saved");
+        atomStoreManager.set(isModalOpenAtom, !0);
       }
     }), d && O.push({
       name: getI18nString("dev_handoff.code_language.add"),

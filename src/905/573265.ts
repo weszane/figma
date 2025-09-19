@@ -5,7 +5,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { PublishStatusEnum } from "../figma_app/633080";
 import { EH } from "../905/514666";
-import { MZ } from "../905/470594";
+import { enqueueNetworkErrorBell } from "../905/470594";
 var $$u2 = (e => (e.Offline = "Offline", e.NonS3PresignedPost = "NonS3PresignedPost", e.GenericError = "GenericError", e.PartialPublish = "PartialPublish", e.Timeout = "Timeout", e.ErrorCode = "ErrorCode", e.ErrorReason = "ErrorReason", e.NoItemsToPublish = "NoItemsToPublish", e.NoFile = "NoFile", e))($$u2 || {});
 function p(e) {
   e(VisualBellActions.dequeue({
@@ -60,7 +60,7 @@ export function $$g3(e) {
       }));
       break;
     case "NonS3PresignedPost":
-      MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
+      enqueueNetworkErrorBell(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
     case "GenericError":
       VisualBellActions.enqueue({

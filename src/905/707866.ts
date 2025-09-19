@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -81,7 +81,7 @@ function D(e) {
       className: `${e.isQuickReplyThreadView ? xH : k8}`,
       children: [jsxs("div", {
         className: zl,
-        children: [h ? O : e.communityAuthorLink ? jsx(_$$N, {
+        children: [h ? O : e.communityAuthorLink ? jsx(Link, {
           href: e.communityAuthorLink.href,
           onClick: e.communityAuthorLink.onClick,
           children: g

@@ -20,7 +20,7 @@ import { Lk, PublicModelType, ProjectSortField } from "../figma_app/162807";
 import { jn } from "../figma_app/522082";
 import { vt } from "../figma_app/231614";
 import { kq, ro } from "../905/994947";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ignoreCommandOrShift, isCommandOrShift } from "../905/63728";
 import { h1 } from "../905/986103";
 import { C as _$$C } from "../905/196436";
@@ -211,7 +211,7 @@ class W extends Component {
       searchResult,
       linkToOwnerProfile
     } = this.props;
-    return jsx(_$$N, {
+    return jsx(Link, {
       onClick: this.onClick,
       href: this.props.href,
       htmlAttributes: {
@@ -242,7 +242,7 @@ class W extends Component {
           children: jsx(h1, {
             date: searchResult.model.created_at
           })
-        }), searchResult.model.owner && jsx(_$$N, {
+        }), searchResult.model.owner && jsx(Link, {
           href: linkToOwnerProfile,
           children: jsx("div", {
             className: "files--owner--VD1o-",

@@ -4,7 +4,7 @@ import { CH, g4 } from "../figma_app/770359";
 import { Button } from "../905/521428";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { k as _$$k } from "../905/443820";
 import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/150656";
@@ -94,7 +94,7 @@ function U() {
     variant: "warn",
     children: jsxs(BannerMessage, {
       title: getI18nString("dev_handoff.component_browser.cli_only_title"),
-      children: [getI18nString("dev_handoff.component_browser.cli_only_message"), jsx(_$$N, {
+      children: [getI18nString("dev_handoff.component_browser.cli_only_message"), jsx(Link, {
         href: "https://www.figma.com/code-connect-docs/",
         children: getI18nString("dev_handoff.component_browser.learn_more")
       })]

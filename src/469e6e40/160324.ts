@@ -2,14 +2,14 @@ import { permissionScopeHandler } from "../905/189185";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getCurrentFileType } from "../figma_app/976749";
-import { ZT } from "../figma_app/844435";
-import { EO } from "../figma_app/86989";
+import { usePluginedWidgets } from "../figma_app/844435";
+import { checkResourceEligibility } from "../figma_app/86989";
 import { j as _$$j } from "../905/813868";
 import { useCurrentUserOrgId } from "../905/845253";
 import { t as _$$t } from "../905/851577";
 import { N } from "../905/645480";
 import { x as _$$x } from "../469e6e40/671704";
-import { F } from "../905/827944";
+import { setupPluginCodeCache } from "../905/827944";
 import { hasLocalFileId } from "../figma_app/155287";
 import { p as _$$p } from "../905/42189";
 import { J } from "../469e6e40/985095";
@@ -18,8 +18,8 @@ export function $$v0(e) {
   let t = useCurrentUserOrgId() || void 0;
   let a = "whiteboard" === getCurrentFileType();
   let i = F5();
-  let v = ZT();
-  let j = EO(v[e.resource.plugin_id]);
+  let v = usePluginedWidgets();
+  let j = checkResourceEligibility(v[e.resource.plugin_id]);
   let y = _$$x({
     isWidget: !0,
     id: e.resource.plugin_id
@@ -52,7 +52,7 @@ export function $$v0(e) {
     dragPreviewPointerPosition: N.RELATIVE,
     getDragPreviewSrc: () => hasLocalFileId(e.resource) ? J : e.resource.redirect_snapshot_url || "",
     onPointerDownCallback: () => {
-      hasLocalFileId(e.resource) || j || F.getAndCache(e.resource, t);
+      hasLocalFileId(e.resource) || j || setupPluginCodeCache.getAndCache(e.resource, t);
     },
     recordingKey: generateRecordingKey("widget", e.resource.plugin_id)
   });

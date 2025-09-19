@@ -69,7 +69,7 @@ import { ao } from "../figma_app/598952";
 import { ButtonPrimitive } from "../905/632989";
 import { I4, Y9 } from "../figma_app/42724";
 import { yp, c6, J$, jw, GD, Yg, _C, G_, FS as _$$FS, _o, vk, cI } from "../figma_app/624600";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { yl } from "../figma_app/639088";
 import { A as _$$A3 } from "../5724/721563";
 import { A as _$$A4 } from "../svg/359514";
@@ -582,7 +582,7 @@ function eD({
         className: G_,
         children: [jsx("div", {
           className: y.style,
-          children: jsx(_$$N2, {
+          children: jsx(Link, {
             href: "/",
             newTab: !0,
             trusted: !0,

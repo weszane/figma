@@ -76,7 +76,7 @@ import { _ as _$$_ } from "../figma_app/467504";
 import { Bu } from "../figma_app/604494";
 import { N as _$$N3, Q as _$$Q3 } from "../figma_app/287368";
 import { u as _$$u } from "../6388/39003";
-import { HW } from "../figma_app/357367";
+import { isSelfDesignMode } from "../figma_app/357367";
 import { tA, oH, nh } from "../642/588337";
 import { hx } from "../figma_app/835688";
 import { E as _$$E2 } from "../9410/583075";
@@ -182,7 +182,7 @@ function e0({
   });
 }
 function e1(e) {
-  return !HW() && e === ViewType.LAYOUT;
+  return !isSelfDesignMode() && e === ViewType.LAYOUT;
 }
 export function $$e51(e) {
   return e1(useAtomWithSubscription(_$$Q2)) ? `${e}-${eU}` : e;

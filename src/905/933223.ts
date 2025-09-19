@@ -6,7 +6,7 @@ import o, { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { x7, Mu, b, js, vJ } from "../905/435079";
 import { $j, xC, iZ, Ds } from "../figma_app/3776";
 import { j } from "../905/881708";
@@ -74,7 +74,7 @@ let g = class e extends j {
     AppStateTsApi.canvasGrid().isDraggingChildren.set(!0);
     let t = M.fromVectorD(e.viewportSpaceMouse());
     let i = (t.y - this._state.mouseDownY) / e.viewport().canvasScale();
-    let n = atomStoreManager.get(BT);
+    let n = atomStoreManager.get(canvasGridAtom);
     for (let e = 0; e < n.length; e++) $j({
       row: e,
       y: 0,
@@ -116,7 +116,7 @@ let g = class e extends j {
   handleMouseUp(e) {
     AppStateTsApi?.canvasGrid().isDraggingChildren.set(!1);
     ("HANDLE_DRAGGED" === this._state.mouse || "HEADER_DRAGGED" === this._state.mouse) && (e.accept(this), this._state.currentRowIndex !== this._state.targetRowIndex && AppStateTsApi?.canvasGrid().moveRow(this._state.currentRowIndex, this._state.targetRowIndex));
-    let t = atomStoreManager.get(BT);
+    let t = atomStoreManager.get(canvasGridAtom);
     for (let e = 0; e < t.length; e++) $j({
       row: e,
       isStateGroupRowAllowed: this.isStateGroupRowAllowed()
@@ -130,7 +130,7 @@ let g = class e extends j {
     let i = [];
     let n = AppStateTsApi?.onCanvasNameEditorMode() === DiagramElementType.CANVAS_GRID_ROW_NAME;
     if (this.isRowHeaderSelectable()) {
-      let a = atomStoreManager.get(BT);
+      let a = atomStoreManager.get(canvasGridAtom);
       for (let s = 0; s < a.length; s++) if (AppStateTsApi?.canvasGrid().isRowSelected(s) && !n) {
         i.push(s);
         let n = AppStateTsApi?.canvasGrid().getRowGUID(s) ?? defaultSessionLocalIDString;

@@ -6,7 +6,7 @@ import l from "../vendor/239910";
 import c from "../vendor/946678";
 import u from "../vendor/260986";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
-import { op, qr } from "../figma_app/844435";
+import { useFilteredDedupedRecentlyUsedPlugins, useDedupedRecentlyUsedWidgets } from "../figma_app/844435";
 import { eE } from "../figma_app/106207";
 import { gp } from "../figma_app/973927";
 import { g5 } from "../figma_app/178752";
@@ -37,9 +37,9 @@ export function $$D1() {
     let {
       productComponents
     } = g5(FDocumentType.FigJam);
-    let t = op();
+    let t = useFilteredDedupedRecentlyUsedPlugins();
     let n = eE(FDocumentType.FigJam);
-    let i = qr();
+    let i = useDedupedRecentlyUsedWidgets();
     let s = qK();
     let l = function () {
       let e = useSelector(e => e.recentlyUsed.whiteboardTools);

@@ -21,7 +21,7 @@ import { H8, Pf } from "../905/590952";
 import { X as _$$X } from "../figma_app/514836";
 import { S as _$$S } from "../figma_app/11182";
 import { setupHyperlinkHandler } from "../figma_app/815170";
-import { _P } from "../figma_app/844435";
+import { usePluginManifestById } from "../figma_app/844435";
 import { manifestContainsWidget } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { ox, ab } from "../figma_app/870683";
@@ -363,7 +363,7 @@ export function $$eo0({
   extensionId: e,
   extensionType: t
 }) {
-  let r = _P(e, !0);
+  let r = usePluginManifestById(e, !0);
   let i = Oy();
   if (!r.loaded) return jsx(_$$R2, {});
   let a = r.plugin;

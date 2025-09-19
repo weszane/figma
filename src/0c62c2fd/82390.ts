@@ -158,7 +158,7 @@ import { rq as _$$rq } from '../905/425180';
 import { t as _$$t8 } from '../905/433510';
 import { colorToHex } from '../905/436288';
 import { useModalManager } from '../905/437088';
-import { N as _$$N3 } from '../905/438674';
+import { Link } from '../905/438674';
 import { DefaultGroups, GroupType, UserGroupRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { W as _$$W6 } from '../905/442612';
@@ -8348,7 +8348,7 @@ function l1({
           }), jsx('div', {
             ..._$$xk(l4.description),
             children: renderI18nText('community.resource_hub.looking_for_inspiration_you_can', {
-              link: jsx(_$$N3, {
+              link: jsx(Link, {
                 href: '/community',
                 newTab: !0,
                 children: getI18nString('community.resource_hub.community_link')
@@ -15812,7 +15812,7 @@ let pP = 'CONNECTED_PROJECTS_PROJECT_PAGE_ONBOARDING_KEY';
 function pL({
   resourceConnection: e
 }) {
-  let t = jsx(_$$N3, {
+  let t = jsx(Link, {
     href: 'https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects',
     newTab: !0,
     children: renderI18nText('resource_connection.onboarding.connected_projects_capitalized')

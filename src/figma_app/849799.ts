@@ -4,7 +4,7 @@ import { Label } from "../905/270045";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { InputComponent } from "../905/185998";
 import { Textarea } from "../905/909590";
 import { Checkbox } from "../905/274480";
@@ -190,7 +190,7 @@ export let $$L0 = function (e) {
           }), L ? jsx("div", {
             "data-testid": "abuse-hub-link-text",
             children: renderI18nText("report_abuse.abuse_hub_link_label", {
-              form_link: jsx(_$$N, {
+              form_link: jsx(Link, {
                 newTab: !0,
                 href: "https://help.figma.com/hc/requests/new?ticket_form_id=29069632540055",
                 children: renderI18nText("report_abuse.abuse_hub_link_text")

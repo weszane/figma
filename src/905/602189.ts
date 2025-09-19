@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { O6, bL } from "../905/598775";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { D as _$$D } from "../905/198083";
@@ -280,7 +280,7 @@ export function $$V0({
           color: "default",
           children: i === ViewAccessTypeEnum.VIEW ? null : S ? renderI18nText("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {
             seatType: tI(i),
-            learnMore: jsx(_$$N, {
+            learnMore: jsx(Link, {
               newTab: !0,
               href: F,
               children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")
@@ -289,7 +289,7 @@ export function $$V0({
             cost: renderI18nText("general.price_per_month", {
               priceString: G(N)
             }),
-            learnMore: jsx(_$$N, {
+            learnMore: jsx(Link, {
               newTab: !0,
               href: F,
               children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")
@@ -297,7 +297,7 @@ export function $$V0({
           }) : p ? renderI18nText("modify_plan_user_seat_modal.to_seat_helper_text.no_proration_special_case_with_learn_more", {
             fromSeatType: getI18nString("general.bundle.expert"),
             toSeatType: getI18nString("general.bundle.developer"),
-            learnMore: jsx(_$$N, {
+            learnMore: jsx(Link, {
               newTab: !0,
               href: F,
               children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")

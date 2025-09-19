@@ -15,7 +15,7 @@ import { FAuthProviderType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
 import { Rs as _$$Rs } from "../905/991973";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
 import { setupThemeContext } from "../905/614223";
@@ -48,7 +48,7 @@ let o = memo(function (e) {
 });
 var p = u;
 let S = ex("apple_ui_kit", function () {
-  let e = jsx(_$$N2, {
+  let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
     href: "https://developer.apple.com/support/downloads/terms/apple-design-resources/Apple-Design-Resources-License-20230621-English.pdf",
@@ -67,7 +67,7 @@ let S = ex("apple_ui_kit", function () {
 let C = ex("community_fragment_license_tooltip", function () {
   let e = jsx("div", {
     className: "x1rg5ohu x14atkfc",
-    children: jsx(_$$N2, {
+    children: jsx(Link, {
       trusted: !1,
       newTab: !0,
       href: "https://creativecommons.org/licenses/by/4.0/",
@@ -90,7 +90,7 @@ let C = ex("community_fragment_license_tooltip", function () {
   });
 });
 let T = ex("figma_ui_kit", function () {
-  let e = jsx(_$$N2, {
+  let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
     href: "https://creativecommons.org/licenses/by/4.0/",
@@ -107,7 +107,7 @@ let T = ex("figma_ui_kit", function () {
   });
 });
 let k = ex("google_ui_kit", function () {
-  let e = jsx(_$$N2, {
+  let e = jsx(Link, {
     trusted: !1,
     newTab: !0,
     href: "https://creativecommons.org/licenses/by/4.0/",

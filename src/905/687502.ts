@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
@@ -13,7 +13,7 @@ export function $$c0() {
         ...xk(u.textBodyMedium),
         children: getI18nString("general.root_error_boundary_title")
       }), renderI18nText("general.root_error_boundary_description", {
-        status_page: jsx(N, {
+        status_page: jsx(Link, {
           href: "https://status.figma.com",
           children: renderI18nText("general.root_error_boundary_status_page")
         })

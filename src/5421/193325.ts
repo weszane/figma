@@ -84,7 +84,7 @@ import { k as _$$k2 } from "../905/582200";
 import { In } from "../905/672640";
 import { KindEnum } from "../905/129884";
 import { zZ } from "../figma_app/299859";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { sT, RU } from "../figma_app/740163";
 import { oM, QK, Ti, PB, x as _$$x, iR } from "../897/934363";
@@ -1020,7 +1020,7 @@ function eX({
   });
 }
 function e9() {
-  let e = jsx(_$$N, {
+  let e = jsx(Link, {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/14397859494295",
     htmlAttributes: {

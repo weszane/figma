@@ -28,7 +28,7 @@ import { ZO, kz, d_, tq } from "../905/691188";
 import { C as _$$C, Y as _$$Y } from "../905/180528";
 import { g as _$$g } from "../905/317997";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { l as _$$l } from "../905/716947";
@@ -899,7 +899,7 @@ function tS(e) {
   })), T?.type !== "currentFile" || (eh = null));
   let eg = renderI18nText("design_systems.libraries_modal.when_you_add_a_library_to_a_connected_project_external_teams_can_view_its_source_file_v2", {
     externalTeamsAccessRestrictedText: planType === FOrganizationLevelType.ORG ? getI18nString("design_systems.libraries_modal.by_default_external_teams_cant_access") : "",
-    learnMore: jsx(_$$N, {
+    learnMore: jsx(Link, {
       newTab: !0,
       href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
       children: getI18nString("resource_connection.request_modal.learn_more")

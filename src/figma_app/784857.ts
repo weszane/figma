@@ -2,7 +2,7 @@ import { documentStateTsApi, Fullscreen, SlideHelpersCppBindings, AppStateTsApi,
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { fullscreenValue } from "../figma_app/455680";
 export function $$d2(e, t, r, a = !0) {
   let c = documentStateTsApi?.getMutableActiveDocument();
@@ -10,7 +10,7 @@ export function $$d2(e, t, r, a = !0) {
     console.error("slide deck utils", "No active document");
     return null;
   }
-  let u = atomStoreManager.get(BT);
+  let u = atomStoreManager.get(canvasGridAtom);
   let p = u[e]?.[t - 1] || u[e - 1]?.[(u[e - 1]?.length || 0) - 1] || u[e + 1]?.[0] || u[e]?.[0] || u[0]?.[0];
   if (!Fullscreen || !SlideHelpersCppBindings) return null;
   let _ = p && isValidSessionLocalID(parseSessionLocalID(p)) ? Fullscreen.duplicateAsBlankSlide(c, p, e, t, r) : SlideHelpersCppBindings.createSlideAtCoord(c, e, t, r);

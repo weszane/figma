@@ -1,117 +1,117 @@
 import { Fullscreen, DesignGraphElements, ShapeSidebarMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { hR, hW, x6 } from "../905/508457";
+import { createFileBehaviorAtom, FileChangeBehaviorEnum, createWritableFileBehaviorAtom } from "../905/508457";
 import { rA } from "../figma_app/463678";
 import { GJ, XQ, qB, zQ, Dq, E$, n6, ns, T7, LX } from "../figma_app/285009";
 import { g5 } from "../905/888175";
-let $$d3 = hR(null, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$d3 = createFileBehaviorAtom(null, {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$c1 = hR({
+let $$c1 = createFileBehaviorAtom({
   total: 0
 }, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE,
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE,
   equalityFn: Object.is
 });
-let $$u0 = hR(null, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$u0 = createFileBehaviorAtom(null, {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$p9 = hR(new Map(), {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$p9 = createFileBehaviorAtom(new Map(), {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$m15 = hR(new Set(), {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$m15 = createFileBehaviorAtom(new Set(), {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$h13 = hR(new Set(), {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$h13 = createFileBehaviorAtom(new Set(), {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$g19 = hR({
+let $$g19 = createFileBehaviorAtom({
   ...rA
 }, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$f12 = hR({
+let $$f12 = createFileBehaviorAtom({
   styles: []
 }, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
 function _() {
   return "dark" === (document.body.getAttribute("data-preferred-theme") || "light") ? GJ : XQ;
 }
-let $$A2 = x6({
+let $$A2 = createWritableFileBehaviorAtom({
   paints: _(),
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
   Fullscreen?.updateDrawingStyle(e, DesignGraphElements.VECTOR_PENCIL);
 }, {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$y7 = x6({
+let $$y7 = createWritableFileBehaviorAtom({
   paints: _(),
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
   Fullscreen?.updateDrawingStyle(e, DesignGraphElements.BRUSH);
 }, {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$b10 = x6({
+let $$b10 = createWritableFileBehaviorAtom({
   paints: _(),
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
   Fullscreen?.updateDrawingStyle(e, DesignGraphElements.VECTOR_PEN);
 }, {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$v4 = x6({
+let $$v4 = createWritableFileBehaviorAtom({
   paints: Dq,
   strokeWeight: g5
 }, e => Fullscreen?.updateHighlighterStyle(e), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$I16 = x6(E$(), e => Fullscreen?.updateToolStyles({
+let $$I16 = createWritableFileBehaviorAtom(E$(), e => Fullscreen?.updateToolStyles({
   stickyColor: e
 }), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$E11 = x6(n6, e => Fullscreen?.updateToolStyles({
+let $$E11 = createWritableFileBehaviorAtom(n6, e => Fullscreen?.updateToolStyles({
   shapeColor: e
 }), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$x14 = x6(ns, e => {
+let $$x14 = createWritableFileBehaviorAtom(ns, e => {
   getFeatureFlags().figjam_track_stroke_color && Fullscreen?.updateToolStyles({
     strokeColor: e
   });
 }, {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$S6 = x6(T7, e => Fullscreen?.updateToolStyles({
+let $$S6 = createWritableFileBehaviorAtom(T7, e => Fullscreen?.updateToolStyles({
   shapeStrokeStyleType: e
 }), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$w17 = x6(LX, e => Fullscreen?.updateToolStyles({
+let $$w17 = createWritableFileBehaviorAtom(LX, e => Fullscreen?.updateToolStyles({
   connectorToolColor: e
 }), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$C5 = x6({
+let $$C5 = createWritableFileBehaviorAtom({
   shapeWithTextType: "ELLIPSE",
   connectorToolLineStyle: "ELBOWED",
   connectorToolEndCap: "ARROW_LINES"
 }, e => Fullscreen?.updateToolStyles(e), {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$T18 = hR(null, {
-  changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
+let $$T18 = createFileBehaviorAtom(null, {
+  changeFileBehavior: FileChangeBehaviorEnum.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$k8 = x6(ShapeSidebarMode.NONE, e => {
+let $$k8 = createWritableFileBehaviorAtom(ShapeSidebarMode.NONE, e => {
   Fullscreen?.setCurrentToolSetSource(e);
 }, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
 export const Ch = $$u0;
 export const Fk = $$c1;

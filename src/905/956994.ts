@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { MJ, Nc } from "../905/946258";
+import { FONT_INSTALLER_HELP_URL, ADD_FONT_HELP_URL } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Ph } from "../905/160095";
@@ -26,7 +26,7 @@ export function $$p1({
 export function $$m0() {
   return renderI18nText("fullscreen.font_settings.troubleshoot_agent_fonts.text", {
     link: jsx(Ph, {
-      href: MJ,
+      href: FONT_INSTALLER_HELP_URL,
       newTab: !0,
       trusted: !1,
       trackingProperties: {
@@ -39,7 +39,7 @@ export function $$m0() {
 export function $$h2() {
   return renderI18nText("fullscreen.properties_panel.font_picker.install_agent.text", {
     link: jsx(Ph, {
-      href: Nc,
+      href: ADD_FONT_HELP_URL,
       newTab: !0,
       trusted: !1,
       trackingProperties: {

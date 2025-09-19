@@ -10,7 +10,7 @@ import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
-import { MZ } from "../905/470594";
+import { enqueueNetworkErrorBell } from "../905/470594";
 import { UM, F4, _g, Jw, cZ } from "../figma_app/60023";
 let _ = "Slides Template Publish Error";
 let $$A0 = "slides-template-publish";
@@ -131,7 +131,7 @@ function I(e) {
       }));
       break;
     case jO.NonS3PresignedPost:
-      MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
+      enqueueNetworkErrorBell(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
     case jO.NoItemsToPublish:
       dispatch(VisualBellActions.enqueue({

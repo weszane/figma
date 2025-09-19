@@ -266,7 +266,7 @@ import { N as _$$N } from '../figma_app/268271';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogCustomContents, DialogHeader } from '../figma_app/272243';
 import { A5 } from '../figma_app/274104';
 import { alwaysFalseCallback2 } from '../figma_app/275462';
-import { s4 as _$$s2 } from '../figma_app/276332';
+import { StyleType } from '../figma_app/276332';
 import { useSubscription } from '../figma_app/288654';
 import { useDeveloperContextualUpsellsExperiment, useRfdSignalsUpsellExperiment, useFigmaMakeDesignEditorPopoutUpsellExperiment } from '../figma_app/297957';
 import { f6 as _$$f3 } from '../figma_app/302802';
@@ -3765,7 +3765,7 @@ let n1 = {
 };
 let n8 = memo(() => {
   let e = function () {
-    let e = dG(_$$s2.TEXT, null);
+    let e = dG(StyleType.TEXT, null);
     let t = useAtomWithSubscription(Ut);
     return useMemo(() => {
       let l = e.libraries.filter(e => e.numStylesText > 0 && t?.has(e.libraryKey));
@@ -3790,7 +3790,7 @@ let n8 = memo(() => {
       status,
       stylesByFileKey
     } = Zk({
-      styleType: _$$s2.TEXT,
+      styleType: StyleType.TEXT,
       initialSelectedSubscribedStyle: null,
       selectedLibraries: t.filter(e => e.numStylesText > 0)
     });
@@ -3835,11 +3835,11 @@ let n8 = memo(() => {
   }(e), e.libraries.length) ? jsx(MM, {
     inheritStyleKey: null,
     inheritStyleID: null,
-    styleType: _$$s2.TEXT,
+    styleType: StyleType.TEXT,
     selectedLibraries: e.libraries
   }) : null;
 });
-let n6 = createReduxSubscriptionAtomWithState(e => _$$ti(e.library.local.styles, _$$s2.TEXT));
+let n6 = createReduxSubscriptionAtomWithState(e => _$$ti(e.library.local.styles, StyleType.TEXT));
 let ia = io;
 let ij = '16px';
 function iv() {

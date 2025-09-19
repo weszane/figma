@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
-import { vv } from '../905/508457';
+import { createConditionalObservableAtom } from '../905/508457';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { AppStateTsApi } from '../figma_app/763686';
-let $$o1 = vv(() => AppStateTsApi?.singleSlideView().focusedNodeId, defaultSessionLocalIDString);
-let $$l4 = vv(() => AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
+let $$o1 = createConditionalObservableAtom(() => AppStateTsApi?.singleSlideView().focusedNodeId, defaultSessionLocalIDString);
+let $$l4 = createConditionalObservableAtom(() => AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
 let $$d3 = atom([]);
 let $$c2 = atom(null);
 let $$u0 = atom(null);

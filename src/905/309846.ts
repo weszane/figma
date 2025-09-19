@@ -59,7 +59,7 @@ import { Bz } from "../figma_app/298277";
 import { OpenEditorFileData } from "../figma_app/43951";
 import { hasProjectRestrictions } from "../figma_app/345997";
 import { fetchTeamRoles } from "../905/672897";
-import { getBackgroundColorForTheme, getVisibleTheme } from "../905/187165";
+import { getBackgroundColorForTheme, getMPVisibleTheme } from "../905/187165";
 import { Ob } from "../figma_app/111825";
 import { m as _$$m } from "../905/84999";
 import { fileApiHandler } from "../figma_app/787550";
@@ -546,7 +546,7 @@ let eH = createOptimistThunk(async (e, {
     });
     i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : "";
-    let v = getBackgroundColorForTheme(getVisibleTheme(A.theme.themePreference));
+    let v = getBackgroundColorForTheme(getMPVisibleTheme(A.theme.themePreference));
     BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
       logInfo("image", "Failed to generate compressed textures", {
         fileKey: t.key,

@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zc, Lz } from "../905/497882";
 import { A } from "../905/567946";
@@ -23,7 +23,7 @@ export let $$u0 = forwardRef(function ({
       ref: i,
       label: jsx(Label, {
         children: renderI18nText("community.publishing.i_agree_to_the_terms_of_service", {
-          termsOfService: jsx(N, {
+          termsOfService: jsx(Link, {
             href: "https://www.figma.com/tos/",
             newTab: !0,
             trusted: !0,

@@ -81,13 +81,13 @@ import { applyOffsetToViewport } from '../figma_app/62612';
 import { batchSubscribeToRealtimeAction, updateFileThumbnail } from '../figma_app/78808';
 import { getObservableOrFallback } from '../figma_app/84367';
 // Import Data Structures and Collections Management - Phase 16
-import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989';
-import { P$ } from '../figma_app/152368';
+import { getLocalResourcePaymentStatus, handleCommunityResourcePayment, isResourceSubscriptionActive, isUserPublisherForResource, LocalResourcePaymentStatus, setLocalResourcePaymentStatus } from '../figma_app/86989';
+import { getTimeRemaining } from '../figma_app/152368';
 import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { getInitialOptions } from '../figma_app/169182';
 import { isWorkshopModeActive } from '../figma_app/193867';
 import { VariableIdHandler, VariableSetIdCompatHandler } from '../figma_app/243058';
-import { nM as _$$nM, M7 } from '../figma_app/276332';
+import { serializeStyle, isStyleString } from '../figma_app/276332';
 import { PluginPermissions } from '../figma_app/300692';
 import { eG as _$$eG, oJ } from '../figma_app/334505';
 import { hasReachedPageLimit } from '../figma_app/345997';
@@ -663,7 +663,7 @@ class PluginRuntime {
     const id = vm.toString(idHandle);
 
     // Style node
-    if (M7(id)) {
+    if (isStyleString(id)) {
       const style = this.styleManager.get(id);
       if (!style) {
         throw new ApplicationError(`The style with id ${JSON.stringify(id)} does not exist`);
@@ -2453,7 +2453,7 @@ class PluginRuntime {
     try {
       await this.initiateCheckoutAsyncImpl({});
       let e = this.getPublishedExtension(this.options.pluginID);
-      return this.userPaymentStatusType(e) === zH.PAID;
+      return this.userPaymentStatusType(e) === LocalResourcePaymentStatus.PAID;
     } catch (e) {
       logger.error(e);
     }
@@ -3612,7 +3612,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'timer.remaining',
       get: () => {
         const timerState = this.getTimerState();
-        const remainingMs = Math.max(0, P$(timerState.time));
+        const remainingMs = Math.max(0, getTimeRemaining(timerState.time));
         return vm.newNumber(remainingMs / 1000);
       }
     });
@@ -3681,7 +3681,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * getTimerStateString - Convert timer state to string representation
    */
   getTimerStateString(timerTime) {
-    if (P$(timerTime) <= 0) {
+    if (getTimeRemaining(timerTime) <= 0) {
       return 'STOPPED';
     }
     return timerTime?.isPaused ? 'PAUSED' : 'RUNNING';
@@ -3692,7 +3692,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   pauseTimer() {
     const timerState = this.getTimerState();
-    if (P$(timerState.time) > 0) {
+    if (getTimeRemaining(timerState.time) > 0) {
       debugState.dispatch(_1(timerState.time));
     }
   }
@@ -3702,7 +3702,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   resumeTimer() {
     const timerState = this.getTimerState();
-    if (P$(timerState.time) > 0 && timerState.time.isPaused) {
+    if (getTimeRemaining(timerState.time) > 0 && timerState.time.isPaused) {
       debugState.dispatch(_$$ne(timerState.time));
     }
   }
@@ -3712,7 +3712,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   startTimer(durationSeconds) {
     const timerState = this.getTimerState();
-    const currentRemainingMs = Math.max(0, P$(timerState.time));
+    const currentRemainingMs = Math.max(0, getTimeRemaining(timerState.time));
     const targetDurationMs = durationSeconds * 1000;
     if (this.getTimerStateString(timerState?.time) === 'STOPPED') {
       // Start new timer
@@ -3753,7 +3753,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   stopTimer() {
     const timerState = this.getTimerState();
-    if (P$(timerState.time) > 0) {
+    if (getTimeRemaining(timerState.time) > 0) {
       debugState.dispatch(Vk(timerState.time));
     }
   }
@@ -5082,17 +5082,17 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   }
   userPaymentStatusType(e) {
     if (this.options.isLocal || this.inReviewByCommunityAdmin(e)) {
-      let e = y1();
-      return e?.type || zH.UNPAID;
+      let e = getLocalResourcePaymentStatus();
+      return e?.type || LocalResourcePaymentStatus.UNPAID;
     }
     if (e && hasMonetizedResourceMetadata(e)) {
       let {
         communityPayments,
         user
       } = debugState.getState();
-      return user ? vl(e, user) ? zH.PAID : vT(e, communityPayments) ? zH.PAID : zH.UNPAID : zH.NOT_SUPPORTED;
+      return user ? isUserPublisherForResource(e, user) ? LocalResourcePaymentStatus.PAID : isResourceSubscriptionActive(e, communityPayments) ? LocalResourcePaymentStatus.PAID : LocalResourcePaymentStatus.UNPAID : LocalResourcePaymentStatus.NOT_SUPPORTED;
     }
-    return zH.NOT_SUPPORTED;
+    return LocalResourcePaymentStatus.NOT_SUPPORTED;
   }
 
   /**
@@ -5201,11 +5201,11 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: statusHandle,
           zSchema: _$$z.strictObject({
-            type: _$$z.nativeEnum(zH)
+            type: _$$z.nativeEnum(LocalResourcePaymentStatus)
           }),
           property: 'setPaymentStatusInDevelopment'
         });
-        Qj(paymentStatus);
+        setLocalResourcePaymentStatus(paymentStatus);
         return vm.undefined;
       },
       isAllowedInReadOnly: true,
@@ -5351,7 +5351,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       }
 
       // Check payment status - only allow checkout for unpaid users
-      if (this.userPaymentStatusType(publishedExtension) !== zH.UNPAID) {
+      if (this.userPaymentStatusType(publishedExtension) !== LocalResourcePaymentStatus.UNPAID) {
         if (isLocal) {
           throw new Error('Cannot initiate checkout, user\'s payment status type is not UNPAID');
         }
@@ -5376,7 +5376,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       });
 
       // Execute the checkout process
-      await kA(debugState.dispatch, user, publishedExtension, localPlugin, canvasWidget, options?.interstitial);
+      await handleCommunityResourcePayment(debugState.dispatch, user, publishedExtension, localPlugin, canvasWidget, options?.interstitial);
 
       // Mark as complete and resolve
       isActive = false;
@@ -7515,7 +7515,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           parseArg: () => {},
           prepareDocument: async () => {},
           resolveValue: () => {
-            const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(_$$nM);
+            const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(serializeStyle);
             const arr = styleApiConfig.vm.newArray();
             let idx = 0;
             for (const style of styles) {
@@ -8943,7 +8943,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let i = e.newObject();
         let n = (selectionPaints.paints.length ? selectionPaints.paints : selectionPaints.paintsDirectlyOnSingleNode).map(e => convertPaintArrayData([e.paint])[0]);
         let r = (selectionPaints.styles.length ? selectionPaints.styles : selectionPaints.stylesDirectlyOnSingleNode).map(t => {
-          let i = this.styleFactory.createStyle(_$$nM({
+          let i = this.styleFactory.createStyle(serializeStyle({
             key: t.styleKey,
             version: createInvalidString(t.version)
           }));
@@ -8952,7 +8952,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           if (!n) return null;
           let r = n?.styleVersionHash;
           let a = n?.styleKeyForPublish;
-          return r && a ? this.styleFactory.createStyle(_$$nM({
+          return r && a ? this.styleFactory.createStyle(serializeStyle({
             key: a,
             version: r
           })) : null;
@@ -9005,7 +9005,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: t,
           version: i
         }) => {
-          let r = this.styleFactory.createStyle(_$$nM({
+          let r = this.styleFactory.createStyle(serializeStyle({
             key: t,
             version: i
           }));

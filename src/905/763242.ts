@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -26,7 +26,7 @@ export function $$d0(e) {
       return jsx("div", {
         style: sx.lhNormal.$,
         children: renderI18nText("shared_fonts.error_message_for_upload_failure_default_with_help_center", {
-          helpCenterLink: jsx(N, {
+          helpCenterLink: jsx(Link, {
             href: "https://help.figma.com/hc/articles/360039956774",
             newTab: !0,
             trusted: !0,

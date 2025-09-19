@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { PropertyScope, NodePropertyCategory, Fullscreen, DistributionType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString, parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
-import { s4 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -55,7 +55,7 @@ function R({
   let L = useDispatch();
   let P = Tm.getId(0, NodePropertyCategory.STROKE_PRESET, "paint");
   let D = function (e) {
-    let t = WH(e ?? null, null, s4.STROKE);
+    let t = WH(e ?? null, null, StyleType.STROKE);
     return useMemo(() => {
       let e = t?.meta?.style_thumbnail;
       return e && "FILL" === e.type && e.fillPaints[0] || null;

@@ -8,7 +8,7 @@ import { XE, Uv } from "../figma_app/91703";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Bk } from "../figma_app/357367";
+import { canEnterDesignMode } from "../figma_app/357367";
 import { FT } from "../9410/607036";
 import { bs } from "../9410/680511";
 export function $$g0({
@@ -26,7 +26,7 @@ export function $$g0({
       i(-1);
     };
   }();
-  let i = Bk();
+  let i = canEnterDesignMode();
   let _ = useCurrentFileKey();
   let {
     Sprig

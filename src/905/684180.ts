@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Label } from "../905/270045";
 import { IconButton } from "../905/443068";
 import { v as _$$v } from "../905/442517";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { B } from "../905/950875";
 import { FullscreenPerfMetrics, AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -193,7 +193,7 @@ function N() {
   });
 }
 function P() {
-  return jsx(_$$N, {
+  return jsx(Link, {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/360040528173",
     children: renderI18nText("memory_warning_modal.help_center")

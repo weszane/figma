@@ -66,7 +66,7 @@ import { g as _$$g } from '../905/181093';
 import { t as _$$t4 } from '../905/181774';
 import { i as _$$i4 } from '../905/182187';
 import { Z as _$$Z4 } from '../905/184216';
-import { getVisibleTheme, getThemePreferenceFromLocalStorage, isEnhancedContrastEnabled } from '../905/187165';
+import { getMPVisibleTheme, getThemePreferenceFromLocalStorage, isEnhancedContrastEnabled } from '../905/187165';
 import { permissionScopeHandler as _$$l3 } from '../905/189185';
 import { getGpuDeviceInfo } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
@@ -138,7 +138,7 @@ import { getResourceDataOrFallback } from '../905/419236';
 import { H as _$$H5 } from '../905/422284';
 import { LivegraphProvider } from '../905/436043';
 import { useModalManager } from '../905/437088';
-import { N as _$$N2 } from '../905/438674';
+import { Link } from '../905/438674';
 import { _O, vf, Y7, z$ } from '../905/438864';
 import { k as _$$k2 } from '../905/443820';
 import { CL as _$$CL, Dc as _$$Dc, hf as _$$hf, Mt } from '../905/445022';
@@ -163,7 +163,7 @@ import { handleAtomEvent } from '../905/502364';
 import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
 import { appendSearchParam, appendSearchParams, appendUserIdToUrl, attachUserIdToLinks, trackFileLoad, waitForVisibility } from '../905/508367';
 import { TranslationErrors } from '../905/508408';
-import { vv } from '../905/508457';
+import { createConditionalObservableAtom } from '../905/508457';
 import { RecordingProvider } from '../905/511649';
 import { resolveTeamId } from '../905/515860';
 import { OJ } from '../905/519092';
@@ -189,7 +189,7 @@ import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
 import { l as _$$l7 } from '../905/579959';
 import { applyOptimisticUpdates } from '../905/581820';
-import { setTeamUsersInitial, putTeamUser } from '../905/584989';
+import { putTeamUser, setTeamUsersInitial } from '../905/584989';
 import { t3 as _$$t8, xH as _$$xH4, YG as _$$YG, CU, Dp, EN, hq, JG, Mi, Mn, OT, Pb, qM, TL, w3, Ww, zv } from '../905/586954';
 import { WZ } from '../905/587414';
 import { h as _$$h3 } from '../905/594794';
@@ -216,7 +216,7 @@ import { ResourceStatus } from '../905/663269';
 import { j2 } from '../905/667970';
 import { S as _$$S4 } from '../905/669334';
 import { measureAsyncDuration, measureSyncDuration } from '../905/670985';
-import { fetchRepoRoles, fetchFolderRoles, fetchTeamRoles, fetchFileRoles } from '../905/672897';
+import { fetchFileRoles, fetchFolderRoles, fetchRepoRoles, fetchTeamRoles } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
@@ -276,11 +276,11 @@ import { TeamType } from '../905/814802';
 import { languageCodes } from '../905/816253';
 import { F0 } from '../905/820492';
 import { F2 } from '../905/826900';
-import { F as _$$F3 } from '../905/827944';
+import { setupPluginCodeCache } from '../905/827944';
 import { u as _$$u3 } from '../905/831362';
 import { OrganizationType } from '../905/833838';
 import { teamAPIClient } from '../905/834575';
-import { oO as _$$oO, EE, Pq, Rg, XV, Yw } from '../905/837497';
+import { deleteAllowlistedPlugin, deleteAllowlistedWidget, putAllowlistedPlugin, putAllowlistedWidget, setPluginAllowlistedAction, setWidgetsAllowlistedAction } from '../905/837497';
 import { generateOptimistId } from '../905/842794';
 import { o0 as _$$o4, NG } from '../905/844131';
 import { teamLivestoreBinding } from '../905/844455';
@@ -312,7 +312,6 @@ import { XHR } from '../905/910117';
 import { F as _$$F6 } from '../905/915030';
 import { A as _$$A5 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
-import { cr as _$$cr2, Oo as _$$Oo } from '../905/926523';
 import { E as _$$E5, v as _$$v2 } from '../905/928543';
 import { hideDropdownAction, initAction, selectViewAction, showDropdownAction, updateDropdownSelectionAction, userStateLoadedAction } from '../905/929976';
 import { A7, EL, H_ } from '../905/932769';
@@ -409,7 +408,7 @@ import { mg as _$$mg, on as _$$on, j3, Ri } from '../figma_app/327577';
 import { E as _$$E6, hZ as _$$hZ4, Lx, MT } from '../figma_app/330108';
 import { M2 as _$$M3, Sp as _$$Sp, k3 } from '../figma_app/332085';
 import { E as _$$E7, hZ as _$$hZ5 } from '../figma_app/342125';
-import { isChromebookTabbed, isAllowedPath, setupChromeOSListeners } from '../figma_app/347146';
+import { isAllowedPath, isChromebookTabbed, setupChromeOSListeners } from '../figma_app/347146';
 import { mapFileProperties } from '../figma_app/349248';
 import { fj } from '../figma_app/357047';
 import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
@@ -524,7 +523,7 @@ import { $K, ax as _$$ax2, ck as _$$ck3, cQ as _$$cQ, db as _$$db, F0 as _$$F8, 
 import { A as _$$A7 } from '../figma_app/965813';
 import { o2 as _$$o7, s7 as _$$s3 } from '../figma_app/968813';
 import { lr as _$$lr, EG, Ji, qC } from '../figma_app/972736';
-import { isViewReloadSensitive, clearPendingReload, hasPendingReload, switchAccountAndNavigate, scheduleReload, sendIpcRefreshSession, setFileBrowserLoadingHandler, ReloadReasonEnum, reloadIfPending } from '../figma_app/976345';
+import { clearPendingReload, hasPendingReload, isViewReloadSensitive, reloadIfPending, ReloadReasonEnum, scheduleReload, sendIpcRefreshSession, setFileBrowserLoadingHandler, switchAccountAndNavigate } from '../figma_app/976345';
 import { hZ as _$$hZ, uo as _$$uo4, yJ as _$$yJ4, bu, IJ, Pg } from '../figma_app/990058';
 import { IK } from '../figma_app/991245';
 import { hZ as _$$hZ3, wc as _$$wc, yH as _$$yH5 } from '../figma_app/996356';
@@ -719,7 +718,7 @@ function z(e) {
   return e.length === 0 ? '' : e[0].toUpperCase() + e.slice(1);
 }
 let H = new Set(['a', 'as', 'in', 'of', 'on', 'to', 'and', 'for', 'the', 'into', 'with']);
-let $ = vv(() => colorManagementStateJs?.documentColorProfile(), null);
+let $ = createConditionalObservableAtom(() => colorManagementStateJs?.documentColorProfile(), null);
 let Z = atom(e => {
   let t = e($);
   return t == null ? null : t === ColorProfileEnum.DISPLAY_P3 ? 'display-p3' : 'srgb';
@@ -2293,7 +2292,7 @@ let na = async e => {
 let ns = e => t => function (i) {
   if (hydrateFileBrowser.matches(i)) {
     let n = t(i);
-    _$$F3.clearCache();
+    setupPluginCodeCache.clearCache();
     na(e);
     return n;
   }
@@ -2572,7 +2571,7 @@ let nK = registerModal(e => {
           children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')]
         }) : t === xt.NO_WEBGL ? jsx('p', {
           children: renderI18nText('webgl_error.message.webgl_disabled', {
-            helpArticleLink: jsx(_$$N2, {
+            helpArticleLink: jsx(Link, {
               newTab: !0,
               href: 'https://help.figma.com/hc/articles/360039828614',
               trusted: !0,
@@ -5550,16 +5549,16 @@ sj.registerShim(sF, (e, t) => {
   switch (t.method) {
     case 'post':
     case 'put':
-      e.dispatch(i ? EE({
+      e.dispatch(i ? putAllowlistedWidget({
         pluginId: t.whitelisted_plugin.plugin_id
-      }) : Rg({
+      }) : putAllowlistedPlugin({
         pluginId: t.whitelisted_plugin.plugin_id
       }));
       break;
     case 'delete':
-      e.dispatch(i ? Yw({
+      e.dispatch(i ? deleteAllowlistedWidget({
         pluginId: t.whitelisted_plugin.plugin_id
-      }) : XV({
+      }) : deleteAllowlistedPlugin({
         pluginId: t.whitelisted_plugin.plugin_id
       }));
   }
@@ -7366,8 +7365,8 @@ let oQ = HY({
 });
 let o0 = HY({
   currentProfile(e = null, t) {
-    if (_$$Oo.matches(t)) return t.payload;
-    if (_$$cr2.matches(t)) return null;
+    if (putCommunityProfile.matches(t)) return t.payload;
+    if (clearCommunityProfile.matches(t)) return null;
     if (LO.matches(t) && t.payload.blockedProfileId === e?.id) {
       return {
         ...e,
@@ -7425,7 +7424,7 @@ let o0 = HY({
     return Ad.matches(t) ? {
       ...e,
       ...t.payload
-    } : _$$cr2.matches(t) && e?.view === 'communityHub' && e.subView === 'handle' && e.handle === t.payload ? null : e;
+    } : clearCommunityProfile.matches(t) && e?.view === 'communityHub' && e.subView === 'handle' && e.handle === t.payload ? null : e;
   },
   comments: oQ,
   shelves(e = {}, t) {
@@ -12118,15 +12117,15 @@ let pg = {
     return L4.matches(t) ? t.payload : e;
   },
   whitelistedPlugins(e = {}, t) {
-    if (Pq.matches(t)) return t.payload;
-    if (Rg.matches(t)) {
+    if (setPluginAllowlistedAction.matches(t)) return t.payload;
+    if (putAllowlistedPlugin.matches(t)) {
       let i = {
         ...e
       };
       i[t.payload.pluginId] = !0;
       return i;
     }
-    if (XV.matches(t)) {
+    if (deleteAllowlistedPlugin.matches(t)) {
       let i = {
         ...e
       };
@@ -12313,15 +12312,15 @@ let pg = {
     return e;
   },
   whitelistedWidgets(e = {}, t) {
-    if (_$$oO.matches(t)) return t.payload;
-    if (EE.matches(t)) {
+    if (setWidgetsAllowlistedAction.matches(t)) return t.payload;
+    if (putAllowlistedWidget.matches(t)) {
       let i = {
         ...e
       };
       i[t.payload.pluginId] = !0;
       return i;
     }
-    if (Yw.matches(t)) {
+    if (deleteAllowlistedWidget.matches(t)) {
       let i = {
         ...e
       };
@@ -12449,7 +12448,7 @@ let pg = {
       let e = getThemePreferenceFromLocalStorage();
       let t = isEnhancedContrastEnabled();
       return {
-        visibleTheme: getVisibleTheme(e),
+        visibleTheme: getMPVisibleTheme(e),
         themePreference: e,
         enhancedContrast: t
       };
@@ -12457,7 +12456,7 @@ let pg = {
     return _$$lk.matches(t) || _$$nq.matches(t) ? {
       ...e,
       themePreference: t.payload.theme,
-      visibleTheme: getVisibleTheme(t.payload.theme)
+      visibleTheme: getMPVisibleTheme(t.payload.theme)
     } : wG.matches(t) ? {
       ...e,
       visibleTheme: t.payload.theme
@@ -14045,7 +14044,7 @@ let hL = {
   [languageCodes.PT_BR]: renderI18nText('desktop_version_support.using_figma_in_portuguese'),
   [languageCodes.ES_LA]: renderI18nText('desktop_version_support.using_figma_in_latin_american_spanish')
 };
-let hF = withTrackedClick(_$$N2.Button);
+let hF = withTrackedClick(Link.Button);
 function hM(e) {
   let {
     i18n_desktop_version_support

@@ -1,8 +1,8 @@
 import { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
-import { Be } from "../figma_app/844435";
-import { xp, aQ } from "../figma_app/86989";
+import { useInstalledPluginsAndWidgets } from "../figma_app/844435";
+import { getPluginWithPayment, getPublishedWidgetWithPayment } from "../figma_app/86989";
 import { _i } from "../figma_app/120210";
 import { InstalledPlugins } from "../figma_app/43951";
 import { ResourceTypeNoComment } from "../figma_app/45218";
@@ -16,10 +16,10 @@ export function $$u2({
   return useMemo(() => r.data?.currentUser?.installedPlugins.find(t => t.pluginId === e)?.id, [r.data?.currentUser?.installedPlugins, e]);
 }
 export function $$p1(e, t) {
-  let r = Be();
+  let r = useInstalledPluginsAndWidgets();
   let n = t === ResourceTypeNoComment.PLUGIN ? r.plugins[e] : r.widgets[e];
-  let a = xp(e);
-  let d = aQ(e);
+  let a = getPluginWithPayment(e);
+  let d = getPublishedWidgetWithPayment(e);
   let p = useSelector(t => t.publishedPlugins[e] ? a : d);
   let _ = $$u2({
     extensionId: e

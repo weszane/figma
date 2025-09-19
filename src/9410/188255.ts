@@ -16,7 +16,7 @@ import { e0 as _$$e2 } from "../905/696396";
 import { M as _$$M } from "../905/152487";
 import { RSb, B14, y4J, t_E, qnr, kmj, hsL, JGK, XAb, Ttn, Nwg, BrS, v75, Smd, H2x, DKg, wRI, Kze, MJs, zoI, lLk, kp0, Njd, jRE, Byv, Y2_, KTt, HU3, g4U, uPw, Fq3, a9B, ENg, CVA, IQ, K_h, Fff, uTW, sJD, _5$ } from "../figma_app/6204";
 import { IconButton } from "../905/443068";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { ButtonLargeWide, Button } from "../905/521428";
 import { A as _$$A } from "../905/251970";
 import { Positioning, UserInterfaceElements, WhiteboardStarterKitCppBindings, CollaborationType, SchemaJoinStatus, Fullscreen, CustomPosition, LayoutTabType } from "../figma_app/763686";
@@ -85,7 +85,7 @@ import { tO as _$$tO, v4, ao as _$$ao, Qr, P7, J_ } from "../figma_app/598952";
 import { q3 } from "../figma_app/450829";
 import { jJ } from "../figma_app/828908";
 import { s as _$$s2 } from "../905/445054";
-import { wH } from "../figma_app/844435";
+import { useInstalledPluginVersions } from "../figma_app/844435";
 import { getColorSpaceSupportStatus, isColorSpaceStatusSupported } from "../figma_app/622881";
 import { JU, J3, Gi } from "../figma_app/622574";
 import { zC } from "../figma_app/186343";
@@ -210,7 +210,7 @@ import { openUrlInContext } from "../figma_app/976345";
 import { dO } from "../figma_app/318123";
 import { c as _$$c3 } from "../905/850166";
 import { lu } from "../figma_app/389091";
-import { Hm } from "../figma_app/152368";
+import { TIMER_ONBOARDING_EVENT } from "../figma_app/152368";
 import { MR, qU, OO } from "../figma_app/913518";
 import { s2 as _$$s5, E$, WB as _$$WB, BC, Nr, yl } from "../figma_app/300024";
 import { L as _$$L } from "../905/453756";
@@ -498,7 +498,7 @@ function q({
         children: [jsx("span", {
           className: _$$s.textBodyMedium.colorTextSecondary.mr2.$,
           children: renderI18nText("whiteboard.ai_summary.nudge.disclaimer")
-        }), jsx(_$$N2, {
+        }), jsx(Link, {
           href: _$$nG,
           newTab: !0,
           trusted: !0,
@@ -792,7 +792,7 @@ let e3 = {
 function e5() {
   let {
     plugins
-  } = wH();
+  } = useInstalledPluginVersions();
   let t = Object.fromEntries(Object.entries(e3).filter(([t, i]) => Object.values(plugins).some(e => e.manifest.id === i)));
   return Object.keys(t).length > 0 ? t : null;
 }
@@ -913,7 +913,7 @@ function tn() {
       colorProfileSetting: jsx("strong", {
         children: renderI18nText("fullscreen.color_management.curator.color_profile_setting")
       })
-    }), " ", jsx(_$$N2, {
+    }), " ", jsx(Link, {
       newTab: !0,
       href: _$$s2,
       children: renderI18nText("rcs.rcs_shared.learn_more")
@@ -927,7 +927,7 @@ function ta() {
       fileColorProfile: jsx("strong", {
         children: renderI18nText("fullscreen.color_management.curator.file_color_profile")
       })
-    }), " ", jsx(_$$N2, {
+    }), " ", jsx(Link, {
       newTab: !0,
       href: _$$s2,
       children: renderI18nText("rcs.rcs_shared.learn_more")
@@ -5516,7 +5516,7 @@ function ai(e) {
   }), t(lu({
     state: "open",
     userInitiated: !1
-  })), o(Hm), () => {
+  })), o(TIMER_ONBOARDING_EVENT), () => {
     a({
       source: OO.MAKE_SOMETHING_V2_ONBOARDING
     });

@@ -43,7 +43,7 @@ import { setupFileObject } from "../905/628874";
 import { getRandomString } from "../905/87821";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { liveStoreInstance } from "../905/713695";
-import { getBackgroundColorForTheme, getVisibleTheme } from "../905/187165";
+import { getBackgroundColorForTheme, getMPVisibleTheme } from "../905/187165";
 import { FEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/84999";
 import { j as _$$j } from "../905/694231";
@@ -81,7 +81,7 @@ function y(e) {
 }
 class b {
   constructor(e) {
-    this._resolveCancelPromise = () => {};
+    this._resolveCancelPromise = () => { };
     this._cancelPromise = new Promise(e => {
       this._resolveCancelPromise = e;
     });
@@ -95,7 +95,7 @@ class b {
   }
   async startRequest(e) {
     let t = 0;
-    for (;;) {
+    for (; ;) {
       let i = A;
       try {
         return await Promise.race([e(), this._cancelPromise]);
@@ -211,7 +211,7 @@ export async function $$ew5(e, t, i, n) {
       state: r
     });
   }
-  let l = getBackgroundColorForTheme(getVisibleTheme(r.theme.themePreference));
+  let l = getBackgroundColorForTheme(getMPVisibleTheme(r.theme.themePreference));
   mpGlobal.preconnect(mpGlobal.url({
     fileKey: t,
     role: "editor",
@@ -532,7 +532,7 @@ async function ek(e, t, i, r, p) {
       }, {
         forwardToDatadog: !0
       });
-    })().catch(() => {});
+    })().catch(() => { });
   };
   e.fileCreationFailed = function (e, t, i, n, r) {
     let a = t instanceof XHRError ? t.status : void 0;
@@ -573,7 +573,7 @@ export function $$eN8(e, t, i) {
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await yn();else if ("error" === i.status) {
+    if ("canceled" === i.status) await yn(); else if ("error" === i.status) {
       let {
         error
       } = i;

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -65,7 +65,7 @@ export function $$x4({
         fontWeight: "medium",
         children: t.handle
       }),
-      resourceName: jsx(N, {
+      resourceName: jsx(Link, {
         newTab: !0,
         href: l,
         onClick: e => {

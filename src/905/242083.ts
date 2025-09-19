@@ -83,7 +83,7 @@ import { JI, Yj } from '../905/416496';
 import { G as _$$G3 } from '../905/431526';
 import { useModalManager } from '../905/437088';
 import { Y as _$$Y } from '../905/438063';
-import { N as _$$N2 } from '../905/438674';
+import { Link } from '../905/438674';
 import { ConfirmationModal } from '../905/441305';
 import { ch } from '../905/443517';
 import { s as _$$s8 } from '../905/445054';
@@ -92,7 +92,7 @@ import { CM, xL, Yv } from '../905/459248';
 import { QC } from '../905/461516';
 import { notificationActions } from '../905/463586';
 import { Sh } from '../905/470286';
-import { MZ } from '../905/470594';
+import { enqueueNetworkErrorBell } from '../905/470594';
 import { createPluginInstance } from '../905/472793';
 import { formatI18nMessage } from '../905/482208';
 import { Vy, zT } from '../905/484695';
@@ -103,7 +103,7 @@ import { J as _$$J4 } from '../905/494216';
 import { k as _$$k3 } from '../905/498777';
 import { handleAtomEvent } from '../905/502364';
 import { r6 as _$$r2 } from '../905/507950';
-import { hR, hW } from '../905/508457';
+import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { $7 } from '../905/509613';
 import { M as _$$M } from '../905/512402';
 import { RR } from '../905/514666';
@@ -192,7 +192,7 @@ import { x as _$$x3 } from '../905/797453';
 import { mapEditorTypeTo } from '../905/808775';
 import { defaultLanguage } from '../905/816253';
 import { EventShield } from '../905/821217';
-import { F as _$$F5 } from '../905/827944';
+import { setupPluginCodeCache } from '../905/827944';
 import { getSceneGraphInstance } from '../905/830071';
 import { parseInteger } from '../905/833686';
 import { getOrgByCurrentUserId } from '../905/845253';
@@ -258,7 +258,7 @@ import { gh } from '../figma_app/76123';
 import { $m } from '../figma_app/78808';
 import { createObjectUrlFromBuffer, teamLibraryCache, fetchAndProcessComponentPublishingBuffers, fetchAndProcessVariablePublishingBuffers } from '../figma_app/80990';
 import { getObservableOrFallback } from '../figma_app/84367';
-import { Rm } from '../figma_app/86989';
+import { checkResourceEligibilityDebug } from '../figma_app/86989';
 import { getDevModeFocusId, isFullscreenOverview } from '../figma_app/88239';
 import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as _$$re, Bs, fk, FP, fy, Jt, pj, R5, u1, XE, XQ } from '../figma_app/91703';
 import { tO as _$$tO } from '../figma_app/98072';
@@ -270,7 +270,7 @@ import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../fi
 import { H as _$$H } from '../figma_app/147959';
 import { IJ } from '../figma_app/149304';
 import { Dc as _$$Dc, hV } from '../figma_app/151766';
-import { P$ } from '../figma_app/152368';
+import { getTimeRemaining } from '../figma_app/152368';
 import { ManifestEditorType, PluginInstallStatus, hasLocalFileId } from '../figma_app/155287';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl, getInitialOptions, getSupportEmail, isDevEnvironment } from '../figma_app/169182';
@@ -1168,7 +1168,7 @@ let i0 = registerModal(e => {
             },
             variant: 'secondary',
             children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.do_it_later')
-          }), jsx(_$$N2.Button, {
+          }), jsx(Link.Button, {
             newTab: !0,
             href: '/files',
             children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.go_to_file_space')
@@ -3071,7 +3071,7 @@ class aZ extends PureComponent {
     });
     this.renderLink = () => this.props.nodeType !== 'layer' ? null : jsx('div', {
       className: 'rename_modal--linkContainer--uRSae',
-      children: jsx(_$$N2, {
+      children: jsx(Link, {
         href: 'https://help.figma.com/hc/articles/360039958934-Rename-Layers',
         newTab: !0,
         children: renderI18nText('fullscreen.rename_modal.learn_more')
@@ -3254,11 +3254,11 @@ let aX = registerModal(e => {
 let a4 = {
   templates: ['(?:www\\.)?youtube\\.com/(?:tv#/)?watch\\?(?:[^&]+&)*v=([a-zA-Z0-9_-]+)', 'youtu\\.be/([a-zA-Z0-9_-]+)', 'm\\.youtube\\.com/#/watch\\?(?:[^&]+&)*v=([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/shorts/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/embed/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/v/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/user/[a-zA-Z0-9_-]+\\?v=([a-zA-Z0-9_-]+)', 'www\\.youtube-nocookie\\.com/v/([a-zA-Z0-9_-]+)']
 };
-let sn = hR(() => WhiteboardAgendaCppBindings?.getAgenda() ?? [], {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let sn = createFileBehaviorAtom(() => WhiteboardAgendaCppBindings?.getAgenda() ?? [], {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let sr = hR(null, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let sr = createFileBehaviorAtom(null, {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
 let s_ = {
   restoreSoftDeletedNode(e) {
@@ -4521,7 +4521,7 @@ async function lL(e, t, i) {
       }), loadLocalPluginSource(i.localFileId)]);
     } else {
       n = i.manifest;
-      let e = await _$$F5.getAndCache(i, debugState.getState().currentUserOrgId || void 0);
+      let e = await setupPluginCodeCache.getAndCache(i, debugState.getState().currentUserOrgId || void 0);
       if (!e) throw new Error(`No code found for ${i} version`);
       r = e;
     }
@@ -4717,7 +4717,7 @@ function lU(e, t) {
   }
   if (d.org_id && d.org_id !== currentUserOrgId && c) return lT.OTHER;
   if (d.org_id && !canMemberOrg(currentUserOrgId, debugState.getState())) return lT.ORG_MEMBER_ONLY;
-  if (Rm(publishedWidgets[e])) return lT.REQUIRES_PAYMENT;
+  if (checkResourceEligibilityDebug(publishedWidgets[e])) return lT.REQUIRES_PAYMENT;
   let h = getFullscreenViewEditorType();
   if (h && d.manifest.editorType && !d.manifest.editorType.includes(h)) return h === 'figjam' ? lT.FIGMA_ONLY : lT.FIGJAM_ONLY;
 }
@@ -6484,7 +6484,7 @@ let lX = class e extends sP(sN(sR)) {
         timer.time && (t === 0 ? (_$$d.timerChange('timerstop'), this.dispatch(_$$lu({
           state: 'closed',
           userInitiated: !1
-        }))) : t !== timer.time.totalTimeMs && P$(timer.time) > 0 ? (c = Math.round((t - timer.time.totalTimeMs) / 6e4), o && o.userName === a.name && performance.now() - o.timeOrigin < 1e4 && (c += o.minutesAdded), e = c > 0 ? 'INCREMENTED' : 'DECREMENTED', _$$d.timerChange('timeradjust')) : n ? (e = 'PAUSED', _$$d.timerChange('timerpause')) : t !== i ? (e = 'RESUMED', _$$d.timerChange('timerresume')) : s !== timer.selectedSongID ? _$$d.timerChange('timerupdatesongid') : (this.dispatch(k1(!1)), _$$d.timerChange('timerstart')));
+        }))) : t !== timer.time.totalTimeMs && getTimeRemaining(timer.time) > 0 ? (c = Math.round((t - timer.time.totalTimeMs) / 6e4), o && o.userName === a.name && performance.now() - o.timeOrigin < 1e4 && (c += o.minutesAdded), e = c > 0 ? 'INCREMENTED' : 'DECREMENTED', _$$d.timerChange('timeradjust')) : n ? (e = 'PAUSED', _$$d.timerChange('timerpause')) : t !== i ? (e = 'RESUMED', _$$d.timerChange('timerresume')) : s !== timer.selectedSongID ? _$$d.timerChange('timerupdatesongid') : (this.dispatch(k1(!1)), _$$d.timerChange('timerstart')));
         e != null && this.dispatch(_$$lV({
           action: e,
           timerID: r,
@@ -7036,7 +7036,7 @@ let lX = class e extends sP(sN(sR)) {
         }, e => this.dispatch(VisualBellActions.enqueue(e)));
       }));
     }).catch(e => {
-      e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && MZ(this._store.dispatch, getI18nString('check_network_compatibility.error_bell.fetch_font_list.message'));
+      e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && enqueueNetworkErrorBell(this._store.dispatch, getI18nString('check_network_compatibility.error_bell.fetch_font_list.message'));
     });
     e.interfaceFontPromise != null && e.interfaceFontPromise.then(() => {
       Fullscreen?.interfaceFontLoaded();

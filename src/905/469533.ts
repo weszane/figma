@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { IpcStorageHandler } from "../905/724705";
 import { fullscreenValue } from "../figma_app/455680";
-import { DARK_THEME_MEDIA_QUERY, getVisibleTheme, DEBUG_THEME_PREFERENCE_KEY, GLOBAL_DEBUG_ENHANCED_CONTRAST_PREFERENCE } from "../905/187165";
+import { DARK_THEME_MEDIA_QUERY, getMPVisibleTheme, DEBUG_THEME_PREFERENCE_KEY, GLOBAL_DEBUG_ENHANCED_CONTRAST_PREFERENCE } from "../905/187165";
 import { D6, Nx } from "../905/345933";
 import { createOptimistThunk } from "../905/350402";
 let h = null;
@@ -29,7 +29,7 @@ let $$y2 = createOptimistThunk((e, t) => {
   if (t.theme !== i.themePreference) {
     let n = e.getState().selectedView;
     g(t.theme, t => e.dispatch(I({
-      theme: getVisibleTheme(t)
+      theme: getMPVisibleTheme(t)
     })));
     t.userInitiated && trackEventAnalytics("theme_preference_updated", {
       from: i.themePreference,
@@ -38,13 +38,13 @@ let $$y2 = createOptimistThunk((e, t) => {
     localStorageRef.setItem(DEBUG_THEME_PREFERENCE_KEY, t.theme || "");
     new IpcStorageHandler().sendToOtherTabs(D6, t.theme);
     desktopAPIInstance?.setThemePreference(t.theme);
-    "fullscreen" === n.view && fullscreenValue.isReady() && Fullscreen.setEditorTheme(getVisibleTheme(t.theme) || "");
+    "fullscreen" === n.view && fullscreenValue.isReady() && Fullscreen.setEditorTheme(getMPVisibleTheme(t.theme) || "");
   }
   e.dispatch($$A7(t));
 });
 let $$b3 = createOptimistThunk(e => {
   g(e.getState().theme.themePreference, t => e.dispatch(I({
-    theme: getVisibleTheme(t)
+    theme: getMPVisibleTheme(t)
   })));
 });
 let $$v8 = createActionCreator("THEME_SET_USER_THEME_DIRECTLY");
@@ -53,9 +53,9 @@ let I = createOptimistThunk((e, t) => {
   e.dispatch($$v8(t));
 });
 function E(e) {
-  fullscreenValue.isReady() ? Fullscreen.setEditorTheme(getVisibleTheme(e) || "") : fullscreenValue.onReady().then(() => {
+  fullscreenValue.isReady() ? Fullscreen.setEditorTheme(getMPVisibleTheme(e) || "") : fullscreenValue.onReady().then(() => {
     setTimeout(() => {
-      Fullscreen.setEditorTheme(getVisibleTheme(e) || "");
+      Fullscreen.setEditorTheme(getMPVisibleTheme(e) || "");
     }, 1e3);
   });
 }

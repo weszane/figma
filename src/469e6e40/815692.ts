@@ -56,7 +56,7 @@ import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { useModalManager } from '../905/437088';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { v as _$$v } from '../905/442517';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -172,7 +172,7 @@ import { O as _$$O } from '../figma_app/809387';
 import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
 import { createEmptyAddress } from '../figma_app/831101';
 import { TrackingProvider } from '../figma_app/831799';
-import { mf } from '../figma_app/844435';
+import { createPluginManifestData } from '../figma_app/844435';
 import { LoadingSpinner, LoadingOverlay } from '../figma_app/858013';
 import { Nz, Yp } from '../figma_app/870683';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -219,7 +219,7 @@ function B(e) {
     children: [jsx('p', {
       className: wz,
       children: renderI18nText(a() ? 'org_settings.scim.scim_group_description' : 'org_settings.scim.scim_description', {
-        helpArticle: jsx(_$$N, {
+        helpArticle: jsx(Link, {
           href: 'https://help.figma.com/hc/articles/360040532333-Getting-Started-with-SAML-SSO#h_d0220c93-18fa-4c1f-b965-69a5c8113f05',
           newTab: !0,
           children: renderI18nText('org_settings.sso.help_article')
@@ -244,12 +244,12 @@ function B(e) {
               })
             })
           }), jsxs('td', {
-            children: [!l && !e.org.k12_google_org && getI18nString('org_settings.scim.saml_sso_must_be_configured'), (l || e.org.k12_google_org) && c && jsx(_$$N, {
+            children: [!l && !e.org.k12_google_org && getI18nString('org_settings.scim.saml_sso_must_be_configured'), (l || e.org.k12_google_org) && c && jsx(Link, {
               onClick: r,
               href: '#',
               trusted: !0,
               children: renderI18nText('org_settings.scim.revoke_token_access')
-            }), (l || e.org.k12_google_org) && !c && jsx(_$$N, {
+            }), (l || e.org.k12_google_org) && !c && jsx(Link, {
               onClick: () => {
                 t(_$$S2({
                   orgSamlConfigId: e.orgSamlConfig.id
@@ -333,7 +333,7 @@ function ed(e) {
   });
 }
 function ec() {
-  return jsx(_$$N, {
+  return jsx(Link, {
     newTab: !0,
     href: 'https://help.figma.com/hc/articles/360052497994-Set-login-and-authentication-method',
     trusted: !0,
@@ -1251,7 +1251,7 @@ let tI = registerModal(({
   });
 }, 'ResetAIControlSettingsConfirmationModal');
 function tT() {
-  return jsx(_$$N, {
+  return jsx(Link, {
     'aria-label': getI18nString('settings_tab.learn_more_about_ai_features'),
     'href': _$$d2.aiFeatures,
     'trusted': !0,
@@ -1967,7 +1967,7 @@ async function aL(e, t, a) {
     return i;
   }
   if (!n.plugin) return i;
-  let r = mf(n.plugin, t.id, null, null);
+  let r = createPluginManifestData(n.plugin, t.id, null, null);
   return r ? t.plugins_whitelist_enforced && !a[r.plugin_id] && r.org_id !== t.id ? {
     errorMessage: getI18nString('settings_tab.invalid_url_allowlist')
   } : r && !isDevModePlugin(r) ? i : {
@@ -4950,7 +4950,7 @@ export function $$sr0(e) {
     e5.push(jsx(T_, {
       label: getI18nString('settings_tab.workspace_selector_label'),
       description: jsxs(Fragment, {
-        children: [renderI18nText('settings_tab.workspace_selector_description_with_link'), jsxs(_$$N, {
+        children: [renderI18nText('settings_tab.workspace_selector_description_with_link'), jsxs(Link, {
           'trusted': !0,
           'newTab': !0,
           'href': 'https://help.figma.com/hc/articles/7249713835799',

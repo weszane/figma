@@ -1,56 +1,60 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-export let $$r0 = new class {
-  constructor() {
-    this.OrgWhitelistSchemaValidator = createNoOpValidator();
-    this.VersionsSchemaValidator = createNoOpValidator();
-    this.WidgetsSchemaValidator = createNoOpValidator();
-    this.ProfileSchemaValidator = createNoOpValidator();
-    this.OrgSchemaValidator = createNoOpValidator();
-    this.InstallStatusSchemaValidator = createNoOpValidator();
-    this.UnpublishedWidgetsSchemaValidator = createNoOpValidator();
-    this.getUnpublishedWidgets = () => this.UnpublishedWidgetsSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/widgets/unpublished"));
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+
+class WidgetAPIClient {
+  private validators = {
+    orgWhitelist: createNoOpValidator(),
+    versions: createNoOpValidator(),
+    widgets: createNoOpValidator(),
+    profile: createNoOpValidator(),
+    org: createNoOpValidator(),
+    installStatus: createNoOpValidator(),
+    unpublishedWidgets: createNoOpValidator()
   }
-  getOrgWhitelist(e) {
-    let {
-      orgId,
-      ...i
-    } = e;
-    return this.OrgWhitelistSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/widgets/org/${e.orgId}/whitelist`, APIParameterUtils.toAPIParameters(i)));
+
+  getUnpublishedWidgets<T = any>() {
+    return this.validators.unpublishedWidgets.validate<T>(async ({
+      xr: client,
+    }) => await client.get('/api/widgets/unpublished'))
   }
-  getVersions(e) {
-    return this.VersionsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/widgets/${e.widgetId}/versions`, {}, {
-      retryCount: 1
-    }));
+
+  getOrgWhitelist<T = any>({ orgId, ...params }) {
+    return this.validators.orgWhitelist.validate<T>(async ({
+      xr: client,
+    }) => await client.get(`/api/widgets/org/${orgId}/whitelist`, APIParameterUtils.toAPIParameters(params)))
   }
-  getWidgets(e) {
-    return this.WidgetsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/widgets", APIParameterUtils.toAPIParameters(e)));
+
+  getVersions<T = any>({ widgetId }) {
+    return this.validators.versions.validate<T>(async ({
+      xr: client,
+    }) => await client.get(`/api/widgets/${widgetId}/versions`, {}, {
+      retryCount: 1,
+    }))
   }
-  getProfile(e) {
-    let {
-      profileId,
-      ...i
-    } = e;
-    return this.ProfileSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/widgets/profile/${e.profileId}`, APIParameterUtils.toAPIParameters(i)));
+
+  getWidgets<T = any>(params) {
+    return this.validators.widgets.validate<T>(async ({
+      xr: client,
+    }) => await client.get('/api/widgets', APIParameterUtils.toAPIParameters(params)))
   }
-  getOrg(e) {
-    return this.OrgSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/widgets/org/${e.orgId}`));
+
+  getProfile<T = any>({ profileId, ...params }) { 
+    return this.validators.profile.validate<T>(async ({
+      xr: client,
+    }) => await client.get(`/api/widgets/profile/${profileId}`, APIParameterUtils.toAPIParameters(params)))
   }
-  getInstallStatus(e) {
-    return this.InstallStatusSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/widgets/install_status", APIParameterUtils.toAPIParameters(e)));
+
+  getOrg<T = any>({ orgId }) {
+    return this.validators.org.validate<T>(async ({
+      xr: client,
+    }) => await client.get(`/api/widgets/org/${orgId}`))
   }
-}();
-export const U = $$r0;
+
+  getInstallStatus<T = any>(params) {
+    return this.validators.installStatus.validate<T>(async ({
+      xr: client,
+    }) => await client.get('/api/widgets/install_status', APIParameterUtils.toAPIParameters(params)))
+  }
+}
+
+export const widgetAPIClient = new WidgetAPIClient()
+export const U = widgetAPIClient

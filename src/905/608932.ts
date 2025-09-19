@@ -4,7 +4,7 @@ import { getCurrentVersionCreatedAt } from "../figma_app/471982";
 import { liveStoreInstance } from "../905/713695";
 import { H } from "../905/473998";
 import { pluginAPIService } from "../905/3209";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 export let $$c0 = new class {
   constructor() {
     this.ProfileSchemaValidator = createNoOpValidator();
@@ -22,7 +22,7 @@ export let $$c0 = new class {
         }), pluginAPIService.getProfile({
           profileId,
           currentOrgId: void 0
-        }), U.getProfile({
+        }), widgetAPIClient.getProfile({
           profileId,
           currentOrgId: void 0
         })]);

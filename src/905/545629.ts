@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { C } from "../905/407781";
 import { zw } from "../905/877407";
 import { I } from "../905/120648";
@@ -21,7 +21,7 @@ export class $$_0 extends C {
       console.error("buzz grid add behavior", "No active document");
       return null;
     }
-    let c = atomStoreManager.get(BT);
+    let c = atomStoreManager.get(canvasGridAtom);
     let p = null;
     if ((l = l || c[e]?.[t - 1] || c[e - 1]?.[(c[e - 1]?.length || 0) - 1]) && isValidSessionLocalID(parseSessionLocalID(l))) p = CooperHelpers?.duplicateAsBlankCooperAsset(l, e, t, i) ?? null;else {
       let r = M.toVectorD(this.getDefaultChildSize());

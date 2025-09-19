@@ -1,13 +1,20 @@
-import { atom, t_ } from "../figma_app/27355";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-let $$a2 = atom(void 0);
-let s = createReduxSubscriptionAtomWithState(e => e.universalInsertModal.initialFdView);
-let $$o0 = t_(e => {
-  let t = e(s);
-  let r = e($$a2);
-  return t || r || "recents_and_saved";
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { atom, atomWithDefault } from '../figma_app/27355'
+
+export const initialViewAtom = atom<string | undefined>(undefined);
+
+export const reduxViewSubscriptionAtom = createReduxSubscriptionAtomWithState(
+  state => state.universalInsertModal.initialFdView
+);
+
+export const defaultViewAtom = atomWithDefault<string>((get) => {
+  const reduxView = get(reduxViewSubscriptionAtom);
+  const initialView = get(initialViewAtom);
+  return reduxView || initialView || 'recents_and_saved';
 });
-let $$l1 = atom(!1);
-export const HT = $$o0;
-export const RB = $$l1;
-export const hO = $$a2;
+
+export const isModalOpenAtom = atom(false);
+
+export const HT = defaultViewAtom;
+export const RB = isModalOpenAtom;
+export const hO = initialViewAtom;

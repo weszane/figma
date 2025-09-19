@@ -24,7 +24,7 @@ import { p as _$$p } from "../469e6e40/489933";
 import { dG } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Gt } from "../figma_app/248118";
-import { x as _$$x } from "../figma_app/844435";
+import { useCanPerformAction } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { HubTypeEnum } from "../figma_app/45218";
@@ -38,7 +38,7 @@ import { s as _$$s2 } from "../figma_app/504088";
 import { yG, dr } from "../7492/487492";
 export function $$$1() {
   let e = setupUserPluginPreferences();
-  let t = _$$x();
+  let t = useCanPerformAction();
   return jsx($$B0, {
     ...e,
     runPlugin: t

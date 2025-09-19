@@ -12,7 +12,7 @@ import { RecordingPureComponent, handleMouseEvent, generateRecordingKey, useHand
 import { reportError } from "../905/11";
 import { _C } from "../figma_app/709893";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { F_ } from "../905/748636";
 import { b as _$$b } from "../figma_app/47801";
 import { W as _$$W } from "../905/95038";
@@ -41,7 +41,7 @@ function S({
   resourceConnection: e,
   projectUrl: t
 }) {
-  let r = jsx(_$$N, {
+  let r = jsx(Link, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
     newTab: !0,
     children: renderI18nText("resource_connection.connected_project_link")

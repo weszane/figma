@@ -19,7 +19,7 @@ import { g3, zI } from "../figma_app/304207";
 import { UC } from "../figma_app/91703";
 import { setWorkshopModeUntil } from "../figma_app/107215";
 import { workshopModeExpirationAtom } from "../figma_app/789";
-import { Be } from "../figma_app/844435";
+import { useInstalledPluginsAndWidgets } from "../figma_app/844435";
 import { rB } from "../figma_app/236178";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
@@ -132,7 +132,7 @@ function L(e) {
       isLiveGraphSync: !0
     })), B.current = e);
   }, [G, o, m]);
-  let K = Be();
+  let K = useInstalledPluginsAndWidgets();
   useLayoutEffect(() => {
     let e = debugState.getState().selectedView;
     if (!K.loaded || "fullscreen" !== e.view) return;

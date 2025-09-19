@@ -69,7 +69,7 @@ import { WidgetTypes } from '../905/403797';
 import { yZ } from '../905/407352';
 import { debugState } from '../905/407919';
 import { browserCapabilities } from '../905/409121';
-import { N as _$$N2 } from '../905/438674';
+import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -240,7 +240,7 @@ import { Z1 } from '../figma_app/253220';
 import { DialogBody, DialogHiddenTitle, DialogTitle, DialogContents, DialogHeader } from '../figma_app/272243';
 import { rgbToNormalized } from '../figma_app/273493';
 import { handlePreviewTracking } from '../figma_app/274217';
-import { sg as _$$sg } from '../figma_app/276332';
+import { mapStyleKeyToType } from '../figma_app/276332';
 import { F as _$$F2 } from '../figma_app/284426';
 import { useSubscription } from '../figma_app/288654';
 import { dz, Jt } from '../figma_app/290668';
@@ -332,7 +332,7 @@ import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { TrackingProvider } from '../figma_app/831799';
 import { dX } from '../figma_app/837840';
 import { xT } from '../figma_app/841415';
-import { $1, op as _$$op, x as _$$x, Be, BE, cW, NU, qr, QZ, Tg, V2, ZT } from '../figma_app/844435';
+import { getLocalPlugins, useFilteredDedupedRecentlyUsedPlugins, useCanPerformAction, useInstalledPluginsAndWidgets, isEditorTypeSupportedFor, usePublishedPlugins, useFilteredWidgets, useDedupedRecentlyUsedWidgets, isEditorTypeSupported, useDedupedRecentlyUsedPlugins, useCanRunExtensions, usePluginedWidgets } from '../figma_app/844435';
 import { ty as _$$ty } from '../figma_app/844818';
 import { _o as _$$_o, WJ as _$$WJ, Dz, TV, Zj } from '../figma_app/847915';
 import { y as _$$y } from '../figma_app/849666';
@@ -2988,17 +2988,17 @@ let nr = connect((e, t) => ({
   isDevHandoff: isFullscreenDevHandoffView(e.selectedView)
 }))(ni);
 function nn(e) {
-  let t = _$$op();
-  let i = $1();
-  let s = cW();
-  let o = Be();
+  let t = useFilteredDedupedRecentlyUsedPlugins();
+  let i = getLocalPlugins();
+  let s = usePublishedPlugins();
+  let o = useInstalledPluginsAndWidgets();
   let l = o.orgPlugins;
   let d = o.orgWidgets;
   let c = _$$h2('plugin');
   let u = _$$h2('widget');
-  let p = NU();
-  let h = qr();
-  let m = ZT();
+  let p = useFilteredWidgets();
+  let h = useDedupedRecentlyUsedWidgets();
+  let m = usePluginedWidgets();
   let f = _$$S4();
   let g = trackFileEventWithUser();
   useEffect(() => {
@@ -4237,7 +4237,7 @@ function no(e) {
 }
 function nl(e) {
   let t = useSelector(selectOpenFile);
-  let i = Tg();
+  let i = useDedupedRecentlyUsedPlugins();
   let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -4247,7 +4247,7 @@ function nl(e) {
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
   let p = useDispatch();
-  let h = Be();
+  let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
   let g = getObservableOrFallback(UK().spellCheckPreference);
@@ -4264,7 +4264,7 @@ function nl(e) {
       publishedWidgets: e.publishedWidgets,
       localExtensions: e.localPlugins,
       userCanViewPlugins: canPerformAction(e),
-      userCanViewWidgets: BE(e),
+      userCanViewWidgets: isEditorTypeSupportedFor(e),
       userCanRunExtensions: canRunExtensions(e),
       sceneGraph: e.mirror.sceneGraph,
       sceneGraphSelection: e.mirror.sceneGraphSelection,
@@ -4331,7 +4331,7 @@ ns.refreshCache = new _$$O2(_$$A6.duration(1, 'day'));
 var nd = (e => (e.SINGLE_SLIDE_VIEW = 'single_slide_view', e.COOPER_CAROUSEL = 'cooper_carousel', e))(nd || {});
 function nc(e) {
   let t = useSelector(selectOpenFile);
-  let i = Tg();
+  let i = useDedupedRecentlyUsedPlugins();
   let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -4341,7 +4341,7 @@ function nc(e) {
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
   let p = useDispatch();
-  let h = Be();
+  let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
   let g = getObservableOrFallback(UK().spellCheckPreference);
@@ -4357,7 +4357,7 @@ function nc(e) {
       publishedWidgets: e.publishedWidgets,
       localExtensions: e.localPlugins,
       userCanViewPlugins: canPerformAction(e),
-      userCanViewWidgets: BE(e),
+      userCanViewWidgets: isEditorTypeSupportedFor(e),
       userCanRunExtensions: canRunExtensions(e),
       sceneGraph: e.mirror.sceneGraph,
       sceneGraphSelection: e.mirror.sceneGraphSelection,
@@ -5837,9 +5837,9 @@ function aC(e) {
   let t = useSelector(e => !e.mirror.appModel.isReadOnly);
   let i = selectCurrentFile();
   useSelector(e => i?.team || null);
-  let n = _$$x();
-  let s = QZ();
-  let o = V2();
+  let n = useCanPerformAction();
+  let s = isEditorTypeSupported();
+  let o = useCanRunExtensions();
   let l = e.dropdownShown.type;
   let d = _$$v();
   if (l === K9) {
@@ -7902,7 +7902,7 @@ function sD({
         '--color-text-brand-secondary': 'var(--color-text-menu-selected-secondary)',
         '--color-bg-brand-tertiary': 'var(--color-bg-menu-selected-tertiary)'
       },
-      children: jsx(_$$N2, {
+      children: jsx(Link, {
         newTab: !0,
         trusted: !0,
         href: 'https://help.figma.com/hc/articles/5665442977431',
@@ -8967,7 +8967,7 @@ function oU({
   let l = useSelector(e => e.mirror.selectedStyleProperties);
   let d = useSelector(e => e.mirror.sceneGraphSelection);
   let c = useRef(Object.keys(d).length > 0);
-  let u = _$$sg(e);
+  let u = mapStyleKeyToType(e);
   let {
     styleRef,
     createStyle

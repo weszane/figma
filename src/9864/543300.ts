@@ -106,7 +106,7 @@ import { compareProductAccessTypes } from "../figma_app/217457";
 import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { rI as _$$rI, Jg, OA, QM, Gz, wd, sV, Sd, On, ik, qD, Mg, B_, MY as _$$MY, dv, yG, Oj, PB, O0, X3, TB, m$, Vz, yo, f6 as _$$f2, kr, _7, w9, XI, Q2, PG as _$$PG, PJ, xx, y8, ih as _$$ih, rv as _$$rv, dD, XK, HN, $r, HS, h0, DM, jG, Bi, nc, ZA, Bu, Pm, _t, pR, Gr, mx } from "../7021/762792";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { A as _$$A3 } from "../svg/831652";
 import { d as _$$d } from "../9864/653721";
 import { e as _$$e4 } from "../905/240303";
@@ -1922,7 +1922,7 @@ function rH() {
       }), jsx("div", {
         className: _$$PG,
         children: renderI18nText("edu.free_for_verified_students_and_educators_verify_status", {
-          verify_status: jsx(_$$N, {
+          verify_status: jsx(Link, {
             newTab: !0,
             href: "/education/apply",
             children: getI18nString("edu.verify_your_status")
@@ -3237,7 +3237,7 @@ function tA() {
         className: a ? void 0 : _$$s.font12.bRadius5.colorBgSecondary.p12.mt20.$$if(x, _$$s.alignCenter).$,
         ..._$$Ay2.props(a && tP.disclaimerContainer),
         children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
-          tos: jsx(_$$N, {
+          tos: jsx(Link, {
             href: getLocalizedPath("/legal/tos/"),
             newTab: !0,
             children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2.tos")

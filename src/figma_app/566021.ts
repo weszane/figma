@@ -22,7 +22,7 @@ import { KeyCodes } from "../905/63728";
 import { X as _$$X } from "../905/606795";
 import { LazyInputForwardRef } from "../905/408237";
 import { fullscreenValue } from "../figma_app/455680";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { v as _$$v } from "../figma_app/258006";
 import { G as _$$G } from "../figma_app/404079";
 import { uA, Wv, Im, kL } from "../figma_app/454622";
@@ -196,7 +196,7 @@ function k({
     children: [jsx("div", {
       className: "component_link_display--header--fts8b",
       children: renderI18nText("design_systems.component_panel.link")
-    }), t.uri && _$$G(t.uri) ? jsx(_$$N, {
+    }), t.uri && _$$G(t.uri) ? jsx(Link, {
       trusted: !1,
       href: t.uri,
       newTab: !0,
@@ -222,7 +222,7 @@ function B() {
         "data-testid": "simplify-instance-panels-checkbox"
       },
       children: [renderI18nText("design_systems.component_panel.simplify_instances_help_text"), jsxs(Fragment, {
-        children: ["\xa0", jsx(_$$N, {
+        children: ["\xa0", jsx(Link, {
           href: "https://help.figma.com/hc/articles/5579474826519-Explore-component-properties#simplified",
           newTab: !0,
           trusted: !0,

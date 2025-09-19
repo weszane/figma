@@ -1,35 +1,61 @@
-import { useEffect } from 'react';
-import { getResourceDataOrFallback } from '../905/723791';
-import { resourceUtils } from '../905/989992';
-import { FileCanUseSlidesDesignToggle } from '../figma_app/43951';
-import { getObservableValue } from '../figma_app/84367';
-import { useSubscription } from '../figma_app/288654';
-import { selectOpenFileObject } from '../figma_app/516028';
-import { AppStateTsApi, SelfDesignType } from '../figma_app/763686';
-import { isInteractionOrEvalMode } from '../figma_app/897289';
-import { useSelector } from 'react-redux';
-export function $$_1() {
-  return getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.SELF;
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { getResourceDataOrFallback } from '../905/723791'
+import { resourceUtils } from '../905/989992'
+import { FileCanUseSlidesDesignToggle } from '../figma_app/43951'
+import { getObservableValue } from '../figma_app/84367'
+import { useSubscription } from '../figma_app/288654'
+import { selectOpenFileObject } from '../figma_app/516028'
+import { AppStateTsApi, SelfDesignType } from '../figma_app/763686'
+import { isInteractionOrEvalMode } from '../figma_app/897289'
+/**
+ * Checks if the current interop tool mode is SELF.
+ * Original: $$_1
+ */
+export function isSelfDesignMode(): boolean {
+  return getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.SELF
 }
-export function $$h0() {
-  return getObservableValue(AppStateTsApi?.canEnterDesignMode(), !1);
+
+/**
+ * Checks if design mode can be entered.
+ * Original: $$h0
+ */
+export function canEnterDesignMode(): boolean {
+  return getObservableValue(AppStateTsApi?.canEnterDesignMode(), false)
 }
-export function $$m2() {
-  let e = function () {
-    let e = useSelector(selectOpenFileObject);
-    let t = e?.key ?? null;
-    let r = useSubscription(FileCanUseSlidesDesignToggle, {
-      key: t ?? ''
-    }, {
-      enabled: !!t
-    });
-    let n = resourceUtils.useTransform(r, e => !!getResourceDataOrFallback(e.file)?.hasPermission);
-    return !!isInteractionOrEvalMode() || n.unwrapOr(!1);
-  }();
+
+/**
+ * Syncs the ability to enter design mode with app state.
+ * Original: $$m2
+ */
+export function syncDesignModePermission(): void {
+  // Get the currently open file object from Redux store
+  const openFile = useSelector(selectOpenFileObject)
+  const fileKey = openFile?.key ?? null
+
+  // Subscribe to the slides design toggle resource
+  const slidesDesignToggle = useSubscription(
+    FileCanUseSlidesDesignToggle,
+    { key: fileKey ?? '' },
+    { enabled: !!fileKey },
+  )
+
+  // Transform the resource data to check for permission
+  const hasPermission = resourceUtils.useTransform(
+    slidesDesignToggle,
+    resource => !!getResourceDataOrFallback(resource.file)?.hasPermission,
+  )
+
+  // Determine if design mode should be enabled
+  const canDesign = !!isInteractionOrEvalMode() || hasPermission.unwrapOr(false)
+
+  // Sync with app state
   useEffect(() => {
-    AppStateTsApi?.canEnterDesignMode().set(e);
-  }, [e]);
+    AppStateTsApi?.canEnterDesignMode().set(canDesign)
+  }, [canDesign])
 }
-export const Bk = $$h0;
-export const HW = $$_1;
-export const VD = $$m2;
+
+// Refactored exports for clarity and traceability
+export const Bk = canEnterDesignMode
+export const HW = isSelfDesignMode
+export const VD = syncDesignModePermission

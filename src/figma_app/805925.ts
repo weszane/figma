@@ -5,7 +5,7 @@ import { $k } from "../figma_app/802241";
 import { selectWithShallowEqual } from "../905/103090";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { BE, Be, qr, QZ } from "../figma_app/844435";
+import { isEditorTypeSupportedFor, useInstalledPluginsAndWidgets, useDedupedRecentlyUsedWidgets, isEditorTypeSupported } from "../figma_app/844435";
 import { getPluginVersions } from "../figma_app/740025";
 import { UK } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
@@ -30,17 +30,17 @@ export function $$y1(e) {
     widgetSelectionInfo: e.mirror.selectionProperties?.selectedWidgetInfo,
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin,
     publishedWidgets: e.publishedWidgets,
-    userCanViewWidgets: BE(e)
+    userCanViewWidgets: isEditorTypeSupportedFor(e)
   };
 }
 export function $$b2() {
-  let e = Be();
-  let t = qr();
+  let e = useInstalledPluginsAndWidgets();
+  let t = useDedupedRecentlyUsedWidgets();
   let r = selectWithShallowEqual(e => $$y1(e));
   let a = r.editorType === FEditorType.Sites;
   let s = r.editorType === FEditorType.Figmake;
   let l = r.editorType === FEditorType.Cooper;
-  let d = QZ();
+  let d = isEditorTypeSupported();
   return useMemo(() => {
     if (a && !getFeatureFlags().sites_plugin_api || s || l && !getFeatureFlags().buzz_plugins) return {
       ...r,

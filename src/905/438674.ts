@@ -1,54 +1,83 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { LinkPrimitive } from "../figma_app/496441";
-import { regularSize, wideSize, largeSize, largeWideSize, button, r as _$$r, hasIcon, buttonText, buttonContent, icon } from "../905/608793";
-import { n as _$$n } from "../905/198890";
-let l = forwardRef(({
-  children: e,
-  htmlAttributes: t,
-  iconPrefix: i,
-  variant: r = "primary",
-  size: l = "md",
-  width: c = "hug",
-  ...u
-}, p) => {
-  let m = "md" === l ? "hug" === c ? regularSize : wideSize : "hug" === c ? largeSize : largeWideSize;
-  return jsx(LinkPrimitive, {
-    htmlAttributes: t,
-    ...u,
-    ref: p,
-    "data-show-focus": !0,
-    className: A("link-button__link__zeZSY", button, _$$r, m, {
-      [hasIcon]: !!i
-    }),
-    children: jsxs("span", {
-      className: buttonText,
-      children: [i && jsx(d, {
-        children: i
-      }), jsx("span", {
-        className: buttonContent,
-        children: e
-      })]
-    })
-  });
-});
-function d({
-  children: e
-}) {
-  return jsx("span", {
-    "aria-hidden": !0,
-    className: icon,
-    children: e
-  });
+import classNames from 'classnames'
+import { forwardRef } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { n as _$$n } from '../905/198890'
+import { button, buttonContent, buttonText, hasIcon, icon, largeSize, largeWideSize, primary, regularSize, wideSize } from '../905/608793'
+
+import { LinkPrimitive } from '../figma_app/496441'
+
+/**
+ * Props for LinkButton component (original: LinkButton)
+ */
+interface LinkButtonProps {
+  children: React.ReactNode
+  htmlAttributes?: React.HTMLAttributes<HTMLAnchorElement>
+  iconPrefix?: React.ReactNode
+  variant?: 'primary' | string
+  size?: 'md' | 'lg' | string
+  width?: 'hug' | 'wide' | string
+  [key: string]: any // Allow additional props
 }
-l.displayName = "LinkButton";
-export let $$u0 = Object.assign(forwardRef((e, t) => jsx(LinkPrimitive, {
-  ...e,
-  ref: t,
-  className: _$$n
+
+/**
+ * LinkButton component (original: LinkButton)
+ */
+const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(({
+  children,
+  htmlAttributes,
+  iconPrefix,
+  variant = 'primary',
+  size = 'md',
+  width = 'hug',
+  ...rest
+}, ref) => {
+  const buttonSize = size === 'md'
+    ? width === 'hug' ? regularSize : wideSize
+    : width === 'hug' ? largeSize : largeWideSize
+
+  return jsx(LinkPrimitive, {
+    ...htmlAttributes,
+    ...rest,
+    ref,
+    'data-show-focus': true,
+    'className': classNames('link-button__link__zeZSY', button, primary, buttonSize, {
+      [hasIcon]: !!iconPrefix,
+    }),
+    'children': jsxs('span', {
+      className: buttonText,
+      children: [
+        iconPrefix && jsx(IconWrapper, {
+          children: iconPrefix,
+        }),
+        jsx('span', {
+          className: buttonContent,
+          children,
+        }),
+      ],
+    }),
+  })
+})
+
+function IconWrapper({
+  children,
+}) {
+  return jsx('span', {
+    'aria-hidden': true,
+    'className': icon,
+    children,
+  })
+}
+
+LinkButton.displayName = 'LinkButton'
+
+export const Link = Object.assign(forwardRef((props, ref) => jsx(LinkPrimitive, {
+  ...props,
+  ref,
+  className: _$$n,
 })), {
-  Button: l
-});
-$$u0.displayName = "Link";
-export const N = $$u0;
+  Button: LinkButton,
+})
+
+Link.displayName = 'Link'
+
+export const N = Link

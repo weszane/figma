@@ -3,7 +3,7 @@ import { useCallback, useMemo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { t as _$$t } from "../905/150656";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -350,7 +350,7 @@ function eO({
           })
         }), t && jsx(_$$A7, {
           label: getI18nString("community.publishing.preview_url"),
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             href: t.fullURL,
             newTab: !0,
             children: t.fullURL
@@ -741,7 +741,7 @@ function ek({
 function eM({
   publishedResourceContent: e
 }) {
-  return jsx(_$$N.Button, {
+  return jsx(Link.Button, {
     variant: "secondary",
     href: jT(e),
     newTab: !0,
@@ -753,7 +753,7 @@ function eM({
 function eF({
   publishedDomainInfo: e
 }) {
-  return e ? jsx(_$$N.Button, {
+  return e ? jsx(Link.Button, {
     href: e.fullURL,
     newTab: !0,
     trusted: !0,

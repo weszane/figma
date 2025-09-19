@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import m from "classnames";
 import g from "../vendor/523035";
@@ -201,7 +201,7 @@ function J(e) {
           }), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.team_renewal.description", {
-              monthlySeats: jsx(_$$N, {
+              monthlySeats: jsx(Link, {
                 href: "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan",
                 trusted: !0,
                 newTab: !0,

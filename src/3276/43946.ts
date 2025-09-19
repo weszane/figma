@@ -17,7 +17,7 @@ import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_a
 import { $z, Me, lR } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { hh } from "../figma_app/42945";
 import { u as _$$u } from "../figma_app/365543";
 import { A as _$$A2 } from "../svg/910223";
@@ -406,13 +406,13 @@ let eg = [{
       title: getI18nString("dev_handoff.comments_panel.slack_teams_hint.title"),
       icon_DEPRECATED: _$$A2,
       hintText: renderI18nText("dev_handoff.comments_panel.slack_teams_hint", {
-        figmaForSlackLink: jsx(_$$N, {
+        figmaForSlackLink: jsx(Link, {
           href: "https://figma.slack.com/apps/A01N2QYSA81-figma-and-figjam?tab=more_info",
           newTab: !0,
           trusted: !0,
           children: renderI18nText("dev_handoff.comments_panel.slack_teams_hint.slack_link")
         }),
-        figmaForTeamsLink: jsx(_$$N, {
+        figmaForTeamsLink: jsx(Link, {
           href: "https://appsource.microsoft.com/en-us/product/office/WA200004521?exp=ubp8",
           newTab: !0,
           trusted: !0,

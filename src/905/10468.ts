@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { xk } from "@stylexjs/stylex";
 import { AUTH_SET_ORIGIN, changeAuthFormState } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
@@ -91,7 +91,7 @@ export function $$g0(e) {
       children: e.footer ? e.footer : renderI18nText("auth.add-another-account-with-link", {
         addAnotherLink: jsx("span", {
           className: "x1quhyk7 x1ypdohk",
-          children: jsx(N, {
+          children: jsx(Link, {
             href: "#",
             onClick: () => {
               if (e.trackOnChangeAccount && e.trackOnChangeAccount(), e.onChangeAccount) {

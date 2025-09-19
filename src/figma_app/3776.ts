@@ -4,7 +4,7 @@ import { FontWeight, AppStateTsApi, SceneGraphHelpers } from "../figma_app/13528
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { atomStoreManager } from "../figma_app/27355";
-import { Un } from "../905/618447";
+import { nodeGridAtom } from "../905/618447";
 import { qq } from "../figma_app/396464";
 export let $$u5 = 5;
 function p(e, t, r) {
@@ -27,7 +27,7 @@ export function $$h0({
   y: r = 0,
   isStateGroupRowAllowed: n = !1
 }) {
-  let i = atomStoreManager.get(Un)[e];
+  let i = atomStoreManager.get(nodeGridAtom)[e];
   if (i && i.length > 0) {
     let e = i[0]?.node?.parentNode;
     e && qq(e, n) && p(e, t, r);

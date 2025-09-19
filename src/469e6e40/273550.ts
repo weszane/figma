@@ -3,8 +3,8 @@ import { ButtonPrimitive } from "../905/632989";
 import { permissionScopeHandler } from "../905/189185";
 import r from "classnames";
 import { t as _$$t } from "../905/331623";
-import { ZT } from "../figma_app/844435";
-import { EO } from "../figma_app/86989";
+import { usePluginedWidgets } from "../figma_app/844435";
+import { checkResourceEligibility } from "../figma_app/86989";
 import { j } from "../905/813868";
 import { E as _$$E } from "../469e6e40/167556";
 import { P } from "../469e6e40/160324";
@@ -17,8 +17,8 @@ import { A } from "../svg/241789";
 var l = r;
 export function $$f0(e) {
   let t = _$$b();
-  let a = ZT();
-  let r = EO(a[e.widget.plugin_id]);
+  let a = usePluginedWidgets();
+  let r = checkResourceEligibility(a[e.widget.plugin_id]);
   let f = "boolean" == typeof e.clickToInsert ? e.clickToInsert && !r : !r;
   let {
     dragState,

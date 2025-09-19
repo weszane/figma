@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp, MenuItemComp, MenuItemLead, MenuLinkComp } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
 import { EventShield } from "../905/821217";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { O as _$$O } from "../figma_app/114128";
 import { $ as _$$$ } from "../figma_app/183557";
 import { r } from "../figma_app/6042";
@@ -375,7 +375,7 @@ function el() {
         }), "\xa0", jsx(setupThemeContext, {
           brand: "whiteboard",
           mode: "dark",
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             href: $$J1,
             newTab: !0,
             trusted: !0,

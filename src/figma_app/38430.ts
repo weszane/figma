@@ -9,7 +9,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { NV, OX, x2, qu, qi } from "../figma_app/33586";
-import { ZT, WK, Ud, ll, $1, B7 } from "../figma_app/844435";
+import { usePluginedWidgets, findLocalPluginById, findPublishedWidgetById, useAllowlistedPlugins, getLocalPlugins, findPublishedPluginById } from "../figma_app/844435";
 import { j } from "../905/813868";
 import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
@@ -26,10 +26,10 @@ import { Cf, it } from "../905/504727";
 import { ak } from "../figma_app/212260";
 export function $$w2(e) {
   let t = useDispatch();
-  let r = ZT()[e.widgetId];
+  let r = usePluginedWidgets()[e.widgetId];
   let i = getPluginVersion(r);
-  let d = WK(e.widgetId);
-  let c = Ud(e.widgetId);
+  let d = findLocalPluginById(e.widgetId);
+  let c = findPublishedWidgetById(e.widgetId);
   let p = desktopAPIInstance && !!c && !d;
   return jsxs(Cf, {
     targetRect: e.targetRect,
@@ -120,7 +120,7 @@ export function $$L1(e) {
   let s = isDevHandoffEditorType();
   let o = setupUserPluginPreferences();
   let d = useCurrentUserOrg();
-  let u = ll();
+  let u = useAllowlistedPlugins();
   let _ = R({
     plugin: e.plugin
   });
@@ -155,7 +155,7 @@ export function $$D0(e) {
   let r = setupUserPluginPreferences();
   let i = isDevHandoffEditorType();
   let a = useCurrentUserOrg();
-  let s = ll();
+  let s = useAllowlistedPlugins();
   let o = R({
     plugin: e.plugin
   });
@@ -185,14 +185,14 @@ export function $$M3(e) {
   let t = isDevHandoffEditorType();
   let r = useDispatch();
   let i = Um();
-  let s = Object.values($1()).find(t => t.plugin_id === e.publishedResource?.id);
+  let s = Object.values(getLocalPlugins()).find(t => t.plugin_id === e.publishedResource?.id);
   let o = setupUserPluginPreferences();
   let c = R({
     plugin: e.publishedResource ? getPluginVersion(e.publishedResource) : null
   });
   let u = e.localResource || s;
-  let m = B7(u ? u.plugin_id : e.publishedResource.id);
-  let E = Ud(u ? u.plugin_id : e.publishedResource.id);
+  let m = findPublishedPluginById(u ? u.plugin_id : e.publishedResource.id);
+  let E = findPublishedWidgetById(u ? u.plugin_id : e.publishedResource.id);
   let b = e.publishedResource || m || E;
   let I = !!b?.versions[b.current_plugin_version_id];
   let v = b ? b.is_widget : u?.manifest.containsWidget;

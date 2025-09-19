@@ -91,7 +91,7 @@ export function getEditorViewType(
  * @param {string} theme
  * @returns {string}
  */
-export function getVisibleTheme(theme: string): string {
+export function getMPVisibleTheme(theme: string): string {
   return typeof mpGlobal !== 'undefined'
     ? mpGlobal.getVisibleTheme(theme)
     : 'light'
@@ -147,7 +147,7 @@ export function getThemeBorderStyle(
 export const FB = getThemePreferenceFromLocalStorage
 export const ON = DEBUG_THEME_PREFERENCE_KEY
 export const Q5 = isEnhancedContrastEnabled
-export const i_ = getVisibleTheme
+export const i_ = getMPVisibleTheme
 export const ju = getEditorViewType
 export const n4 = DARK_THEME_MEDIA_QUERY
 export const pw = getThemeBorderStyle

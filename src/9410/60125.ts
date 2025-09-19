@@ -3,7 +3,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { l as _$$l } from "../905/745972";
 import { _ as _$$_ } from "../figma_app/658134";
 import { S } from "../figma_app/109947";
-import { jw } from "../figma_app/327588";
+import { isNotInFocusedNodeView } from "../figma_app/327588";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { dP, qw } from "../figma_app/740163";
 import { getObservableValue } from "../figma_app/84367";
@@ -16,7 +16,7 @@ export function $$$$h0() {
   let i = useAtomWithSubscription(S);
   let h = dP();
   let m = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
-  let f = jw();
+  let f = isNotInFocusedNodeView();
   let [g] = useAtomValueAndSetter(Lk);
   let _ = g === _$$x.ASSETS && f && m === SelfDesignType.SELF;
   let x = m === SelfDesignType.DESIGN;

@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from "react";
 import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { Button, ButtonWide } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Q } from "../1250/220026";
 import { q } from "../905/838985";
 import { _ as _$$_ } from "../905/563242";
@@ -532,7 +532,7 @@ export function $$er3({
     variant: "secondary",
     onClick: () => openWindow($$G0, "_blank"),
     children: renderI18nText("cooper.templates.show_me_how")
-  }) : jsx(_$$N.Button, {
+  }) : jsx(Link.Button, {
     href: $$G0,
     variant: "secondary",
     trusted: !0,

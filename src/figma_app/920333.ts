@@ -11,7 +11,7 @@ import { isStatus } from "../figma_app/808294";
 import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
 import { _ as _$$_ } from "../905/793009";
-import { ZT, cW } from "../figma_app/844435";
+import { usePluginedWidgets, usePublishedPlugins } from "../figma_app/844435";
 import { qp } from "../905/977779";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -170,10 +170,10 @@ export function $$B0(e) {
   return e.filter(e => e.editor_type === EditorType.UNIVERSAL || e.editor_type === EditorType.FIGJAM);
 }
 export function $$G2() {
-  return H(ZT(), useSelector(e => e.communityPayments));
+  return H(usePluginedWidgets(), useSelector(e => e.communityPayments));
 }
 export function $$V1() {
-  return H(cW(), useSelector(e => e.communityPayments));
+  return H(usePublishedPlugins(), useSelector(e => e.communityPayments));
 }
 function H(e, t) {
   return function (r) {

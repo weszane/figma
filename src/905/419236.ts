@@ -272,7 +272,7 @@ export class ExponentialBackoff {
  * Returns the data from a resource, or a fallback if the resource is null or errored.
  * @originalName $$y9
  */
-export function getResourceDataOrFallback<T>(
+export function getResourceDataOrFallback<T = any>(
   resource: any,
   fallback?: T,
 ): T {

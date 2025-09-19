@@ -19,7 +19,7 @@ import { InputComponent } from '../905/185998';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { BannerMessage } from '../905/363675';
-import { N as _$$N2 } from '../905/438674';
+import { Link } from '../905/438674';
 import { a as _$$a3 } from '../905/462280';
 import { AutoLayout } from '../905/470281';
 import { l as _$$l } from '../905/479687';
@@ -375,7 +375,7 @@ function el(e) {
         ...xk(l ? e_.dividerNickname : e_.divider)
       }), jsxs('section', {
         ...xk(l ? e_.section : e_.sectionOld),
-        children: [(m || k12GoogleOrg) && u && jsx(_$$N2, {
+        children: [(m || k12GoogleOrg) && u && jsx(Link, {
           onClick: c,
           href: '#',
           trusted: !0,
@@ -389,7 +389,7 @@ function el(e) {
               })
             })
           })
-        }), (m || k12GoogleOrg) && !u && jsx(_$$N2, {
+        }), (m || k12GoogleOrg) && !u && jsx(Link, {
           onClick: o,
           href: '#',
           trusted: !0,

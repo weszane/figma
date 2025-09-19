@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogCustomContents } from "../figma_app/272243";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { U as _$$U } from "../0c62c2fd/547944";
 import { getFeatureFlags } from "../905/601108";
 import { isValidEmail } from "../figma_app/416935";
@@ -344,7 +344,7 @@ export function $$er0(e) {
                 children: getI18nString("project_creation.figma_has_connected_projects")
               }), jsx("p", {
                 children: renderI18nText("project_creation.learn_more_about_the_benefit", {
-                  learnMore: jsx(_$$N, {
+                  learnMore: jsx(Link, {
                     newTab: !0,
                     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
                     children: getI18nString("file_browser.team_settings.learn_more")

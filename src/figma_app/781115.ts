@@ -137,7 +137,7 @@ export class LoadTimeTracker {
    * Handles viewer loaded event.
    * (Original: handleViewerLoaded)
    */
-  public handleViewerLoaded = (lastLoaded: number): void => {
+  public handleViewerLoaded = (lastLoaded: string): void => {
     this.clearScheduledTimeouts()
     logDebug('Load Time Tracker', 'handleViewerLoaded', {
       lastConnectToMs: this._lastConnectToMs,

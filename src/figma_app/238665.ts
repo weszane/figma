@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { Button } from "../905/521428";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { x } from "../905/587214";
 import { w } from "../905/955293";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -109,7 +109,7 @@ export function $$y1({
   }) : jsx($$f0, {
     title: T ? getI18nString("variables.authoring_modal.no_variables_in_collection") : getI18nString("variables.authoring_modal.no_variables_in_file"),
     text: jsxs(Fragment, {
-      children: [getI18nString("variables.authoring_modal.empty_state_text"), " ", jsxs(N, {
+      children: [getI18nString("variables.authoring_modal.empty_state_text"), " ", jsxs(Link, {
         href: "https://help.figma.com/hc/articles/15339657135383-Guide-to-variables-in-Figma",
         trusted: !0,
         newTab: !0,

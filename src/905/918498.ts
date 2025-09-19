@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -29,7 +29,7 @@ export let $$v0 = registerModal(function (e) {
     ...e,
     onClose: v
   });
-  let E = jsx(N, {
+  let E = jsx(Link, {
     href: "#",
     onClick: () => {
       v();
@@ -60,12 +60,12 @@ export let $$v0 = registerModal(function (e) {
     }));
   };
   let S = plan.tier === FPlanNameType.ORG ? jsxs(Fragment, {
-    children: [jsx(N, {
+    children: [jsx(Link, {
       onClick: x,
       href: "#",
       children: getI18nString("resource_connection.maximum_connections_modal.upgrade_link_text_ent_upgrade")
     }), " ", getI18nString("resource_connection.maximum_connections_modal.upgrade_text_ent_upgrade")]
-  }) : jsx(N, {
+  }) : jsx(Link, {
     onClick: x,
     href: "#",
     children: getI18nString("resource_connection.maximum_connections_modal.upgrade_link_text_org_upgrade")

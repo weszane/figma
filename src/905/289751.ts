@@ -1,21 +1,42 @@
-export function $$n0(e) {
-  return new Promise((t, i) => {
-    if (!e) {
-      i(Error("Failed to load image bytes without file object"));
-      return;
+/**
+ * Reads the bytes of an image file as an ArrayBuffer.
+ * @param file - The image file to read.
+ * @returns A promise that resolves with the image bytes as ArrayBuffer.
+ * @throws If the file is not provided or reading fails.
+ * Original function name: $$n0
+ */
+export function readImageBytes(file: File): Promise<ArrayBuffer> {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject(new Error('Failed to load image bytes without file object'))
+      return
     }
-    let n = new FileReader();
-    function r(e) {
-      if ("load" !== e.type || "string" == typeof n.result || !n.result) {
-        i(Error(`Failed to load image bytes: event=${e.type}`));
-        return;
+
+    const fileReader = new FileReader()
+
+    /**
+     * Handles FileReader events for load, abort, and error.
+     * @param event - The FileReader event.
+     * Original inner function name: r
+     */
+    const handleEvent = (event: ProgressEvent<FileReader>) => {
+      if (
+        event.type !== 'load'
+        || typeof fileReader.result === 'string'
+        || !fileReader.result
+      ) {
+        reject(new Error(`Failed to load image bytes: event=${event.type}`))
+        return
       }
-      t(n.result);
+      resolve(fileReader.result as ArrayBuffer)
     }
-    n.addEventListener("load", r);
-    n.addEventListener("abort", r);
-    n.addEventListener("error", r);
-    n.readAsArrayBuffer(e);
-  });
+
+    fileReader.addEventListener('load', handleEvent)
+    fileReader.addEventListener('abort', handleEvent)
+    fileReader.addEventListener('error', handleEvent)
+    fileReader.readAsArrayBuffer(file)
+  })
 }
-export const c = $$n0;
+
+// Refactored export name for import consistency
+export const c = readImageBytes

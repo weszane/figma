@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { j } from "../905/813868";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 import { pasteEmbedThunk } from "../905/994901";
 import { parseEmbedInput, parseAsanaEmbed } from "../figma_app/916560";
 import { isInteractionPathCheck } from "../figma_app/897289";
@@ -46,7 +46,7 @@ async function m(e, t) {
 async function h(e, t) {
   let i;
   try {
-    i = await U.getVersions({
+    i = await widgetAPIClient.getVersions({
       widgetId: e.pluginID
     });
   } catch (e) {

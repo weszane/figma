@@ -35,7 +35,7 @@ import { debounce } from "../905/915765";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { $0 } from "../905/944871";
 import { wX } from "../905/964786";
-import { x as _$$x, V2, QZ, op, Be, NU, qr, ZT } from "../figma_app/844435";
+import { useCanPerformAction, useCanRunExtensions, isEditorTypeSupported, useFilteredDedupedRecentlyUsedPlugins, useInstalledPluginsAndWidgets, useFilteredWidgets, useDedupedRecentlyUsedWidgets, usePluginedWidgets } from "../figma_app/844435";
 import { h as _$$h } from "../9410/146161";
 import { gN, SH } from "../figma_app/790714";
 import { y4 } from "../figma_app/298277";
@@ -790,27 +790,27 @@ export function $$t80({
   ji();
   gN();
   desktopAPIInstance && function () {
-    let e = _$$x();
-    let t = V2();
-    let i = QZ();
+    let e = useCanPerformAction();
+    let t = useCanRunExtensions();
+    let i = isEditorTypeSupported();
     let r = useSelector(e => e.mirror.appModel.isReadOnly);
     let s = useSelector(e => e.openFile);
     let o = useSelector(e => e.localPlugins);
     let l = getSelectedEditorType();
-    let d = op();
+    let d = useFilteredDedupedRecentlyUsedPlugins();
     let c = useSelector(e => e.installedPluginVersions.plugins);
     let u = useSelector(e => e.mirror.selectedStyleProperties?.selectedWidgetInfo);
     let p = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
     let h = useSelector(e => e.publishedPlugins);
     let m = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null);
-    let f = Be();
+    let f = useInstalledPluginsAndWidgets();
     let g = f.orgPlugins;
     let _ = f.orgWidgets;
     let x = _$$h("plugin");
     let y = _$$h("widget");
-    let b = NU();
-    let C = qr();
-    let v = ZT();
+    let b = useFilteredWidgets();
+    let C = useDedupedRecentlyUsedWidgets();
+    let v = usePluginedWidgets();
     let E = null != SH();
     useEffect(() => {
       let n = {

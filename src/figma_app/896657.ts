@@ -17,7 +17,7 @@ import { R as _$$R } from "../figma_app/612938";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
-import { U as _$$U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 import { o as _$$o } from "../905/938553";
 import { KM, x5 } from "../figma_app/224019";
 import { O as _$$O } from "../905/166544";
@@ -35,7 +35,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   if (null != r) {
     let [t, n] = await Promise.all([pluginAPIService.getPlugins({
       id: r
-    }), _$$U.getWidgets({
+    }), widgetAPIClient.getWidgets({
       id: r
     })]);
     let i = t.data.meta;

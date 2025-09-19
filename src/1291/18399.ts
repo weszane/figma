@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { U } from "../905/103637";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
@@ -14,7 +14,7 @@ export function $$c0({
     className: "browse_more_cta--communityLink--kpkNC text--fontPos13--xW8hS text--_fontBase--QdLsd",
     children: [jsx(U, {
       className: "browse_more_cta--icon--4IWf5"
-    }), jsx(N, {
+    }), jsx(Link, {
       href: t,
       newTab: !0,
       children: renderI18nText("whiteboard.inserts.browse_more_in_community")

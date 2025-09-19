@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { tB, ll, U6, cW, ZT, $1 } from "../figma_app/844435";
+import { useLastAddedTimestamps, useAllowlistedPlugins, useAllowlistedWidgets, usePublishedPlugins, usePluginedWidgets, getLocalPlugins } from "../figma_app/844435";
 import { isAcceptedPublisher } from "../figma_app/564095";
 import { Dd } from "../figma_app/599979";
-import { FP, Y8 } from "../figma_app/86989";
+import { selectCommunityPayments, getExtensionWithPayment } from "../figma_app/86989";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { isPluginVersionPublished } from "../figma_app/300692";
@@ -11,13 +11,13 @@ import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figm
 import { BY } from "../905/946805";
 import { Ag } from "../905/235578";
 export function $$m4() {
-  let e = tB();
-  let t = ll();
-  let r = U6();
-  let i = cW();
-  let s = ZT();
-  let o = FP();
-  let c = $1();
+  let e = useLastAddedTimestamps();
+  let t = useAllowlistedPlugins();
+  let r = useAllowlistedWidgets();
+  let i = usePublishedPlugins();
+  let s = usePluginedWidgets();
+  let o = selectCommunityPayments();
+  let c = getLocalPlugins();
   let _ = useCurrentUserOrg();
   return useCallback((n, a) => function ({
     extension: e,
@@ -32,7 +32,7 @@ export function $$m4() {
     type: c
   }) {
     let _;
-    let h = Y8({
+    let h = getExtensionWithPayment({
       extension: e,
       publishedPlugins: i,
       publishedWidgets: a,

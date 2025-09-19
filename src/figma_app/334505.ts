@@ -1,24 +1,23 @@
-import { useMemo, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { LayoutTabType } from "../figma_app/763686";
-import { l as _$$l } from "../905/716947";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter } from "../figma_app/27355";
-import { useMemoStable } from "../905/19536";
-import { createSelector } from "../vendor/925040";
-import { useLatestRef } from "../figma_app/922077";
-import { LU, jw } from "../figma_app/327588";
-import { Lk, x } from "../figma_app/639711";
-import { gI, Pc } from "../figma_app/396464";
-import { isValidValue, MIXED_MARKER } from "../905/216495";
-import { y7 } from "../figma_app/385874";
-import { useSceneGraphSelection, useSceneGraphSelector } from "../figma_app/722362";
-import { uN } from "../figma_app/646357";
-import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
-import { C1 } from "../figma_app/505098";
-import { HW } from "../figma_app/357367";
+import { useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { useMemoStable } from '../905/19536';
+import { isValidValue, MIXED_MARKER } from '../905/216495';
+import { getFeatureFlags } from '../905/601108';
+import { getSingletonSceneGraph } from '../905/700578';
+import { useAtomValueAndSetter } from '../figma_app/27355';
+import { useDeepEqualSceneValue } from '../figma_app/167249';
+import { isNotInFocusedNodeView, getFocusedNodeId } from '../figma_app/327588';
+import { isSelfDesignMode } from '../figma_app/357367';
+import { y7 } from '../figma_app/385874';
+import { gI, Pc } from '../figma_app/396464';
+import { C1 } from '../figma_app/505098';
+import { Lk, x } from '../figma_app/639711';
+import { uN } from '../figma_app/646357';
+import { useSceneGraphSelection, useSceneGraphSelector } from '../figma_app/722362';
+import { LayoutTabType } from '../figma_app/763686';
+import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
+import { useLatestRef } from '../figma_app/922077';
+import { createSelector } from '../vendor/925040';
 function v(e, t, r = !0) {
   let n = getSingletonSceneGraph();
   if (r && (!e.visible || e.locked)) return [];
@@ -31,13 +30,13 @@ function v(e, t, r = !0) {
   return i;
 }
 export function $$A10(e) {
-  return e.fills.some(e => "IMAGE" === e.type);
+  return e.fills.some(e => e.type === 'IMAGE');
 }
 export function $$x11(e) {
-  return v(e, e => getFeatureFlags().buzz_video_export ? $$A10(e) || e.fills.some(e => "VIDEO" === e.type) : $$A10(e));
+  return v(e, e => getFeatureFlags().buzz_video_export ? $$A10(e) || e.fills.some(e => e.type === 'VIDEO') : $$A10(e));
 }
-var $$N3 = (e => (e.TEXT = "TEXT", e.IMAGE = "IMAGE", e.INSTANCE = "INSTANCE", e))($$N3 || {});
-var C = (e => (e.INSTANCE = "INSTANCE", e.DETACHED = "DETACHED", e.MIXED = "MIXED", e))(C || {});
+var $$N3 = (e => (e.TEXT = 'TEXT', e.IMAGE = 'IMAGE', e.INSTANCE = 'INSTANCE', e))($$N3 || {});
+var C = (e => (e.INSTANCE = 'INSTANCE', e.DETACHED = 'DETACHED', e.MIXED = 'MIXED', e))(C || {});
 export function $$w1() {
   let e = getSingletonSceneGraph();
   let t = gI();
@@ -46,10 +45,10 @@ export function $$w1() {
   let s = !1;
   for (let r of t) {
     let t = e.get(r);
-    if (t && ("INSTANCE" === t.type ? (s = !0, null === a ? a = "INSTANCE" : "INSTANCE" !== a && (a = "MIXED")) : "FRAME" === t.type && (null === a ? a = "DETACHED" : "DETACHED" !== a && (a = "MIXED")), "MIXED" === a)) break;
+    if (t && (t.type === 'INSTANCE' ? (s = !0, a === null ? a = 'INSTANCE' : a !== 'INSTANCE' && (a = 'MIXED')) : t.type === 'FRAME' && (a === null ? a = 'DETACHED' : a !== 'DETACHED' && (a = 'MIXED')), a === 'MIXED')) break;
   }
-  let l = "INSTANCE" === a;
-  let d = "DETACHED" === a;
+  let l = a === 'INSTANCE';
+  let d = a === 'DETACHED';
   let c = r.filter(e => t.includes(e));
   let u = c.length > 0;
   let p = u && c.length === t.length;
@@ -83,12 +82,12 @@ function P(e) {
   let t = getFeatureFlags().buzz_video_export;
   let r = null;
   let n = null;
-  if (isValidValue(r) || null === r) {
+  if (isValidValue(r) || r === null) {
     let i = [null, null];
     e.forEach((e, r) => {
-      ("IMAGE" === e.type || t && "VIDEO" === e.type) && (i = [e, r]);
+      (e.type === 'IMAGE' || t && e.type === 'VIDEO') && (i = [e, r]);
     });
-    i && null === r ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = MIXED_MARKER, n = null);
+    i && r === null ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = MIXED_MARKER, n = null);
   }
   return {
     mediaPaint: r && isValidValue(r) ? y7(r) : r,
@@ -115,35 +114,35 @@ export let $$M12 = createSelector([C1], e => {
   Object.keys(e).forEach(e => {
     let r = getSingletonSceneGraph().get(e);
     let n = r?.containingCooperFrameId();
-    n && "-1:-1" !== n && t.add(n);
+    n && n !== '-1:-1' && t.add(n);
   });
   return Array.from(t);
 });
 export function $$F4() {
   let e = gI();
   let t = useSceneGraphSelector();
-  if (1 === e.length) {
-    let r = t.get(e[0] ?? "");
-    let n = t.get(r?.symbolId ?? "");
+  if (e.length === 1) {
+    let r = t.get(e[0] ?? '');
+    let n = t.get(r?.symbolId ?? '');
     let i = n?.componentKey;
     if (i) {
       let e = uN(i);
-      if (e) return _$$l(e);
+      if (e) return e;
     }
   }
   return null;
 }
 export function $$j16() {
   let e = gI();
-  let t = LU();
+  let t = getFocusedNodeId();
   let r = [...e];
   t && r.push(t);
   return r;
 }
 export function $$U7() {
-  var e;
-  let t = jw();
-  let r = HW();
+  let e;
+  let t = isNotInFocusedNodeView();
+  let r = isSelfDesignMode();
   e = $$j16();
   let a = useDeepEqualSceneValue((e, t) => t.every(t => {
     let r = e.get(t);
@@ -179,7 +178,7 @@ export function $$V15() {
   let t = useSceneGraphSelector();
   return useMemo(() => e.length > 0 && e.every(e => {
     let r = t.get(e);
-    return r?.fills?.some(e => "VIDEO" === e.type);
+    return r?.fills?.some(e => e.type === 'VIDEO');
   }), [e, t]);
 }
 export function $$H0() {

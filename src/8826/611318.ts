@@ -50,7 +50,7 @@ import { SA, fB } from "../figma_app/473317";
 import { Wv } from "../figma_app/711157";
 import { W7, iZ } from "../figma_app/473914";
 import { W as _$$W2 } from "../figma_app/605682";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift, KeyCodes, isCommandEvent } from "../905/63728";
 import { ex as _$$ex } from "../905/524523";
@@ -617,7 +617,7 @@ let ev = _$$ex("autolayout_v3_migration_info", function (e) {
   });
   return jsxs("div", {
     className: "autolayout_v3_migration_info_tooltip--autolayoutMigration--OQ8zC",
-    children: [tooltipText, jsx(_$$N, {
+    children: [tooltipText, jsx(Link, {
       newTab: !0,
       trusted: !0,
       href: "https://help.figma.com/hc/articles/360040451373#Updates_to_Auto_Layout",

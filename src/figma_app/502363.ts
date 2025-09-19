@@ -32,7 +32,7 @@ import { A as _$$A2 } from "../6828/44395";
 import { A as _$$A3 } from "../6828/625002";
 import { A as _$$A4 } from "../6828/727585";
 import { A as _$$A5 } from "../6828/559361";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import Y from "classnames";
 import { h as _$$h } from "../905/207101";
 import { h1 } from "../905/986103";
@@ -649,7 +649,7 @@ function eg(e) {
   let b = f ? jsxs(Fragment, {
     children: [f, " \xb7 ", E]
   }) : E;
-  return jsx(_$$N, {
+  return jsx(Link, {
     htmlAttributes: {
       "data-testid": Cg,
       "data-faux-focused": isFauxFocused
@@ -702,7 +702,7 @@ function ef(e) {
     onFauxFocus: onFocus,
     onFauxBlur: onBlur
   });
-  return jsx(_$$N, {
+  return jsx(Link, {
     htmlAttributes: {
       "data-testid": nS,
       "data-faux-focused": isFauxFocused

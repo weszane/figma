@@ -1,3 +1,4 @@
+import { debounce } from 'lodash-es'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { reportError } from '../905/11'
@@ -5,6 +6,7 @@ import { isDefined, useIsLoading } from '../905/18797'
 import { selectWithShallowEqual } from '../905/103090'
 import { searchAPIHandler } from '../905/144933'
 import { ServiceCategories } from '../905/165054'
+import { mergePublishedPluginThunk } from '../905/172918'
 import { ResourceTypes } from '../905/178090'
 import { VisualBellActions } from '../905/302958'
 import { getI18nString } from '../905/303541'
@@ -17,33 +19,369 @@ import { logError } from '../905/714362'
 import { setPluginAllowlisted, setWidgetsAllowlisted } from '../905/717906'
 import { isFullscreenDevHandoffView } from '../905/782918'
 import { useMappedEditorTypeA } from '../905/808775'
-import { mV, Vl } from '../905/837497'
+import { initializePluginAllowlist, initializeWidgetAllowlist } from '../905/837497'
 import { useCurrentUserOrg } from '../905/845253'
 import { canPerformAction, canRunExtensions } from '../figma_app/12796'
 import { InstalledPlugins, Plugin } from '../figma_app/43951'
 import { FEditorType } from '../figma_app/53721'
 import { getPluginAllowListKey, getWidgetAllowListKey, hasLocalFileId, isPublicPlugin, manifestContainsWidget, ManifestEditorType, ManifestSchema } from '../figma_app/155287'
 import { FPinStatusType, FPublicationStatusType, FPublisherType, FUserRoleType } from '../figma_app/191312'
-import { Ol, xy } from '../figma_app/279454'
+import { filterArrayByEditorTypeAndMemo, filterEntriesByEditorTypeAndMemo } from '../figma_app/279454'
 import { useMultiSubscription, useSubscription } from '../figma_app/288654'
 import { canRunPlugin, convertEditorTypeToFileType, filterEntriesByEditorType, filterEntriesByPluginVersionEditorType, filterPublishedResources, filterResourcesByMatch, getCurrentPluginVersion, getPluginByFileId, getPluginVersion, isDevModePlugin, isEditorTypeMatch, sortResourcesByCreatedAt } from '../figma_app/300692'
 import { useCurrentFileKey } from '../figma_app/516028'
 import { BI as getFigmaMobile } from '../figma_app/546509'
-import { f1, O8, Qi } from '../figma_app/559491'
+import { f1, O8 } from '../figma_app/559491'
 import { isPendingPublisher } from '../figma_app/564095'
-import { CR, kA } from '../figma_app/684168'
+import { getAllowlistedExtensionIds, getAllowlistedPluginOrWidgetIds } from '../figma_app/684168'
 import { useAppModelProperty } from '../figma_app/722362'
 import { isResourcePendingPublishing } from '../figma_app/777551'
 import { getEditorTypeOrNull, getSelectedEditorType, isDevHandoffEditorType, selectEditorType } from '../figma_app/976749'
 
-export function $$V0(e) {
-  let t = useSelector(e => e.localPlugins)
-  return xy(t, e)
+export interface BasePlugin {
+  id: string
+  plugin_id: string
+  name: string
+  version: string
+  description: string
+  manifest: any
+  created_at: string
+  is_private?: boolean
+  current_plugin_version_id?: string
+  org_id?: string
+  tagline?: string
+  creator_policy?: string
+  release_notes?: string
+  installed_by?: string
+  redirect_icon_url?: string
+  redirect_cover_image_url?: string
+  redirect_code_url?: string
+  redirect_snapshot_url?: string
+  community_publishers?: CommunityPublisher[]
 }
-export function $$H41(e) {
-  let t = $$V0(e)
+
+export interface LocalPlugin extends BasePlugin {
+  // Local plugin specific properties
+}
+
+export interface PublishedPlugin extends BasePlugin {
+  installedPluginVersions: unknown
+  plugin_publishers: any
+  publishingStatus: FPublicationStatusType
+  isWidget: boolean
+  orgId: string | null
+  thumbnailUrl: string
+  userId: string
+  updatedAt: Date
+  createdAt: Date
+  unpublishedAt: Date | null
+  supportContact: string | null
+  approvedAt: Date
+  installCount: number
+  likeCount: number
+  viewCount: number
+  blockedAt: Date | null
+  profileId: string
+  commentCount: number
+  hideRelatedContentByOthers: boolean | null
+  isPublic: boolean
+  isInspect: boolean
+  isSlides: boolean
+  widgetsWhitelistEnforced: boolean | null
+  pluginsWhitelistEnforced: boolean | null
+  monetizedResourceMetadataId: string | null
+  thirdPartyM10nStatus: string | null
+  monetizationStatus: string | null
+  canRead: boolean
+  categoryId: string
+  uniqueRunCount: number
+  pluginEditorType: number
+  commentsSetting: string
+  currentUserFirstRanAt: string
+  profileInstallStatus: number
+  redirectThumbnailUrl: string
+  communityPublishers: CommunityPublisher[]
+  currentPluginVersion: PluginVersion
+  viewableInEditor: boolean
+  publishingStatusUpdatedAt: Date | null
+  isSeoIndexingAllowed: boolean | null
+  currentPlanUser: any | null
+}
+
+export interface PluginVersion {
+  plugins: Record<string, LocalPlugin>
+  loaded: any
+  id: string
+  pluginId: string
+  resourceStagingSignature: string | null
+  updatedAt: Date
+  iconUrl: string | null
+  coverImageUrl: string | null
+  name: string
+  version: string
+  releaseNotes: string | null
+  description: string
+  tagline: string | null
+  creatorPolicy: string | null
+  manifest: string
+  createdAt: Date
+  iconPath: string | null
+  coverImagePath: string | null
+  codePath: string | null
+  plugin: {
+    currentPluginVersionId: string
+  }
+  playgroundFigFileKey: string | null
+  hasPlaygroundFile: boolean
+  playgroundFileVersionId: string | null
+  userId: string
+  snapshotPath: string
+}
+
+export interface CommunityPublisher {
+  id: string
+  isPending: boolean
+  role: FPublisherType
+  userId: string
+  profileId: string
+  pluginId: string
+  hubFileId: string | null
+  profile: PublisherProfile
+}
+
+export interface PublisherProfile {
+  id: string
+  profileHandle: string
+  team: PublisherTeam | null
+  org: PublisherOrg | null
+  user: PublisherUser | null
+  teamId: string | null
+  orgId: string | null
+  primaryUserId: string | null
+  publicAt: Date
+  website: string | null
+  description: string | null
+  location: string | null
+  twitter: string | null
+  instagram: string | null
+  createdAt: Date
+  updatedAt: Date
+  followerCount: number
+  followingCount: number
+  coverImagePath: string | null
+  pronouns: string | null
+  badges: any[]
+  communityUserIsFollowing: boolean
+  communityUserIsFollowed: boolean
+  entityType: string
+  currentUserIsFollowing: boolean
+  currentUserIsFollowed: boolean
+  name: string
+  imgUrl: string | null
+  imgUrls: Record<string, any>
+}
+
+export interface PublisherTeam {
+  id: string
+  name: string
+}
+
+export interface PublisherOrg {
+  id: string
+  name: string
+}
+
+export interface PublisherUser {
+  id: string
+  name: string
+}
+
+export interface InstalledPlugin {
+  pluginId: string
+  createdAt: Date
+  userId: string
+  orgId: string
+  pluginVersionId: string
+  plugin: PublishedPlugin
+  pinnedStatus: FPinStatusType
+}
+
+// Grouped plugin structures
+export interface GroupedUserPlugins {
+  invitedPlugins: PublishedPlugin[]
+  approvedPlugins: PublishedPlugin[]
+  pendingReviewPlugins: PublishedPlugin[]
+  developmentPlugins: LocalPlugin[]
+}
+
+export interface GroupedUserWidgets {
+  invitedWidgets: PublishedPlugin[]
+  approvedWidgets: PublishedPlugin[]
+  pendingReviewWidgets: PublishedPlugin[]
+  developmentWidgets: LocalPlugin[]
+}
+
+// Plugin collections
+export interface PluginCollections {
+  loaded: boolean
+  plugins: Record<string, LocalPlugin>
+  widgets: Record<string, LocalPlugin>
+  orgPlugins: Record<string, LocalPlugin>
+  orgWidgets: Record<string, LocalPlugin>
+  userPlugins: Record<string, LocalPlugin>
+  userWidgets: Record<string, LocalPlugin>
+}
+
+export interface FilteredPluginCollections {
+  loaded: boolean
+  plugins: Record<string, LocalPlugin>
+  widgets: Record<string, LocalPlugin>
+  orgPlugins: Record<string, LocalPlugin>
+  orgWidgets: Record<string, LocalPlugin>
+  userPlugins: Record<string, LocalPlugin>
+  userWidgets: Record<string, LocalPlugin>
+}
+
+// Search related types
+export interface PluginSearchResult {
+  pluginSearchIsLoading: boolean
+  pluginSearchHasResolved: boolean
+  lastPluginSearchQuery: string | null
+  pluginServerSideSearch: (
+    query: string,
+    setPublicResults: (results: string[]) => void,
+    setOrgResults: (results: string[]) => void,
+    setInstalledResults: (results: string[]) => void
+  ) => void
+  setLastPluginSearchQuery: (query: string | null) => void
+}
+
+export interface WidgetSearchResult {
+  widgetSearchIsLoading: boolean
+  widgetSearchHasResolved: boolean
+  lastWidgetSearchQuery: string | null
+  widgetServerSideSearch: (
+    query: string,
+    setPublicResults: (results: string[]) => void,
+    setOrgResults: (results: string[]) => void,
+    setInstalledResults: (results: string[]) => void
+  ) => void
+  setLastWidgetSearchQuery: (query: string | null) => void
+}
+
+export interface SearchContext {
+  query: string
+  orgId: string | null
+  resourceType: string
+  editorType: string
+  didOrgSearch: boolean
+}
+
+// Allowlist related types
+export interface PluginAllowlistState {
+  hasAllowList: boolean
+  allowList: Record<string, boolean>
+  allowListIsLoading: boolean
+  publicExtensionsDisallowed: boolean
+  hasPluginAllowList: boolean
+  hasWidgetAllowList: boolean
+  filterByAllowlist: (plugins: LocalPlugin[]) => LocalPlugin[]
+  filterByPublicResourcesAllowed: (plugins: LocalPlugin[]) => LocalPlugin[]
+}
+
+export interface PluginValidationResult {
+  isPluginBlockedByAllowlist: boolean
+  validatePublishedPluginInOrgAllowlist: () => boolean
+}
+
+export interface WidgetValidationResult {
+  isWidgetBlockedByAllowlist: boolean
+}
+
+// Recently used types
+export interface RecentlyUsedResource {
+  id: string
+  last_added_at_by_user_id?: Record<string, string>
+  run_by_user_ids?: string[]
+}
+
+export interface RecentlyUsedState {
+  plugins: Record<string, RecentlyUsedResource[]>
+  widgets: Record<string, RecentlyUsedResource[]>
+  fetchedResources: Record<string, { version?: LocalPlugin }>
+}
+
+// Plugin running and permissions
+export interface PluginRunContext {
+  plugin: LocalPlugin
+  editorType: FEditorType | null
+  canRunPluginState?: {
+    currentUserOrgId: string | null
+    orgById: Record<string, any>
+    selectedView: any
+    openFile: any
+    mirror: {
+      appModel: {
+        isReadOnly: boolean
+      }
+    }
+    whitelistedPlugins: Record<string, boolean>
+    whitelistedWidgets: Record<string, boolean>
+  }
+}
+
+export interface PluginRunResult {
+  canRun: boolean
+  reason?: string
+}
+
+// Utility types
+export type PluginMap = Record<string, LocalPlugin>
+export type WidgetMap = Record<string, LocalPlugin>
+
+export interface ParsedExtensionData {
+  plugins: PluginMap
+  widgets: WidgetMap
+  orgPlugins: PluginMap
+  orgWidgets: WidgetMap
+  userPlugins: PluginMap
+  userWidgets: WidgetMap
+}
+
+export interface ManifestParseResult {
+  success: boolean
+  data?: any
+  error?: string
+}
+
+// Editor type constraints
+export type SupportedEditorType = Exclude<FEditorType, FEditorType.Slides | FEditorType.Sites | FEditorType.Figmake | FEditorType.Cooper>
+
+// Extension source types
+export type ExtensionSource = 'org' | 'user'
+
+export interface ExtensionInstallation {
+  source: ExtensionSource
+  savedExtensions?: InstalledPlugin[]
+}
+
+// Performance tracking
+export interface PerformanceMetrics {
+  elapsedMs?: number
+  editorType: string
+  query: string
+  numPublicResults: number
+  numOrgResults: number
+}
+
+export function getLocalPlugins(e?: any) {
+  let t = useSelector<ObjectOf>(e => e.localPlugins)
+  return filterEntriesByEditorTypeAndMemo(t, e)
+}
+export function useLocalPluginsExcludingWidgets(e?: any) {
+  let t = getLocalPlugins(e)
   return useMemo(() => {
-    let e = {}
+    let e: PluginMap = {}
     for (let r in t) {
       let n = t[r]
       manifestContainsWidget(n) || (e[r] = n)
@@ -51,24 +389,24 @@ export function $$H41(e) {
     return e
   }, [t])
 }
-export function $$z53() {
-  let e = $$V0()
-  return useMemo(() => {
-    let t = {}
-    for (let r in e) {
-      let n = e[r]
-      manifestContainsWidget(n) && (t[r] = n)
-    }
-    return t
-  }, [e])
+// export function useLocalPluginsExcludingWidgets() {
+//   let e = getLocalPlugins()
+//   return useMemo(() => {
+//     let t: PluginMap = {}
+//     for (let r in e) {
+//       let n = e[r]
+//       manifestContainsWidget(n) && (t[r] = n)
+//     }
+//     return t
+//   }, [e])
+// }
+export function findLocalPluginById(e) {
+  return Object.values(getLocalPlugins()).find(t => t.plugin_id === e)
 }
-export function $$W22(e) {
-  return Object.values($$V0()).find(t => t.plugin_id === e)
-}
-export function $$K10() {
-  let e = $$V0()
+export function useLocalPluginsByPluginId() {
+  let e = getLocalPlugins()
   return useMemo(() => {
-    let t = {}
+    let t: PluginMap = {}
     for (let r in e) {
       let n = e[r]
       t[n.plugin_id] = n
@@ -76,30 +414,30 @@ export function $$K10() {
     return t
   }, [e])
 }
-export function $$Y37() {
-  return useSelector(e => e.publishingPlugins)
+export function usePublishingPlugins() {
+  return useSelector<ObjectOf, any>(e => e.publishingPlugins)
 }
-export function $$$32() {
-  let e = useSelector(e => e.publishedPlugins)
+export function usePublishedPlugins() {
+  let e = useSelector<ObjectOf, any>(e => e.publishedPlugins)
   let t = getEditorTypeOrNull()
   return useMemo(() => filterEntriesByPluginVersionEditorType(t, e), [e, t])
 }
-export function $$X27() {
-  let e = useSelector(e => e.publishedWidgets)
-  let t = $$eq15()
+export function usePluginedWidgets() {
+  let e = useSelector<ObjectOf, any>(e => e.publishedWidgets)
+  let t = isEditorTypeSupported()
   let r = useMemo(() => ({}), [])
   return t ? e : r
 }
-export function $$q12(e) {
-  let t = $$$32()[e.id]
-  let r = $$X27()[e.id]
+export function getPluginOrWidget(e) {
+  let t = usePublishedPlugins()[e.id]
+  let r = usePluginedWidgets()[e.id]
   return e.isWidget ? r : t
 }
-export function $$J38({
+export function useUserPublishedPlugins({
   includePendingPublishers: e = !0,
 } = {}) {
   let t = getUserId()
-  let r = $$$32()
+  let r = usePublishedPlugins()
   return useMemo(() => {
     if (!t)
       return []
@@ -108,13 +446,13 @@ export function $$J38({
   }, [r, t, e])
 }
 function Z() {
-  let e = $$J38()
-  let t = $$H41()
+  let e = useUserPublishedPlugins()
+  let t = useLocalPluginsExcludingWidgets()
   return useMemo(() => Object.values(t).filter(t => e.every(e => e.id !== t.plugin_id)), [e, t])
 }
-export function $$Q11() {
+export function useGroupedUserPlugins() {
   let e = getUserId()
-  let t = $$J38()
+  let t = useUserPublishedPlugins()
   let r = Z()
   return useMemo(() => t.reduce((t, r) => {
     if ((r.plugin_publishers?.pending ?? []).find(t => t.id === e)) {
@@ -143,92 +481,146 @@ export function $$Q11() {
     developmentPlugins: r,
   }), [e, r, t])
 }
-export function $$ee5() {
-  let e = $$J38()
-  let t = Z()
-  return e.length + t.length
+/**
+ * Returns the total count of user published widgets and development widgets.
+ * Original: getTotalUserWidgetsCount
+ */
+export function getTotalUserWidgetsCount(): number {
+  const publishedWidgets = useUserPublishedWidgets()
+  const developmentWidgets = getDevelopmentWidgets()
+  return publishedWidgets.length + developmentWidgets.length
 }
-export function $$et33() {
-  let e = getUserId()
-  let t = $$J38()
-  return e != null ? t.filter(t => isPendingPublisher(t, e)) : []
+
+/**
+ * Returns pending publisher widgets for the current user.
+ * Original: getPendingPublisherWidgets
+ */
+export function getPendingPublisherWidgets(): PublishedPlugin[] {
+  const userId = getUserId()
+  const publishedWidgets = useUserPublishedWidgets()
+  return userId != null ? publishedWidgets.filter(widget => isPendingPublisher(widget, userId)) : []
 }
-export function $$er30(e) {
-  let t = getUserId()
-  let r = $$$32()[e]
-  let n = $$X27()
-  if (r)
-    return isPendingPublisher(r, t ?? '')
-  let i = n[e]
-  return isPendingPublisher(i, t ?? '')
+
+/**
+ * Checks if a widget or plugin is pending publisher for the current user.
+ * Original: isPendingPublisherForCurrentUser
+ * @param id string
+ * @returns boolean
+ */
+export function isPendingPublisherForCurrentUser(id: string): boolean {
+  const userId = getUserId()
+  const publishedPlugin = usePublishedPlugins()[id]
+  const publishedWidget = usePluginedWidgets()[id]
+  if (publishedPlugin)
+    return isPendingPublisher(publishedPlugin, userId ?? '')
+  return isPendingPublisher(publishedWidget, userId ?? '')
 }
-export function $$en31({
-  includePendingPublishers: e = !0,
-} = {}) {
-  let t = getUserId()
-  let r = $$X27()
-  if (!t)
+
+/**
+ * Returns user published widgets, optionally including pending publishers.
+ * Original: useUserPublishedWidgets
+ */
+export function useUserPublishedWidgets({
+  includePendingPublishers = true,
+}: { includePendingPublishers?: boolean } = {}): PublishedPlugin[] {
+  const userId = getUserId()
+  const publishedWidgets = usePluginedWidgets()
+  if (!userId)
     return []
-  let n = filterPublishedResources(Object.values(r))
-  return sortResourcesByCreatedAt(filterResourcesByMatch(n, t, e))
+  const filtered = filterPublishedResources(Object.values(publishedWidgets))
+  return sortResourcesByCreatedAt(filterResourcesByMatch(filtered, userId, includePendingPublishers))
 }
-export function $$ei7() {
-  let e = getUserId()
-  let t = $$en31()
-  let r = ea()
-  return useMemo(() => t.reduce((t, r) => {
-    if ((r.plugin_publishers?.pending ?? []).find(t => t.id === e)) {
-      let e = [...t.invitedWidgets, r]
+
+/**
+ * Returns grouped user widgets by status.
+ * Original: useGroupedUserWidgets
+ */
+export function useGroupedUserWidgets(): GroupedUserWidgets {
+  const userId = getUserId()
+  const publishedWidgets = useUserPublishedWidgets()
+  const developmentWidgets = getDevelopmentWidgets()
+  return useMemo(() => publishedWidgets.reduce((acc, widget) => {
+    if ((widget.plugin_publishers?.pending ?? []).find(p => p.id === userId)) {
       return {
-        ...t,
-        invitedWidgets: e,
+        ...acc,
+        invitedWidgets: [...acc.invitedWidgets, widget],
       }
     }
-    if (isResourcePendingPublishing(r)) {
-      let e = [...t.pendingReviewWidgets, r]
+    if (isResourcePendingPublishing(widget)) {
       return {
-        ...t,
-        pendingReviewWidgets: e,
+        ...acc,
+        pendingReviewWidgets: [...acc.pendingReviewWidgets, widget],
       }
     }
-    let n = [...t.approvedWidgets, r]
     return {
-      ...t,
-      approvedWidgets: n,
+      ...acc,
+      approvedWidgets: [...acc.approvedWidgets, widget],
     }
   }, {
     invitedWidgets: [],
     approvedWidgets: [],
     pendingReviewWidgets: [],
-    developmentWidgets: r,
-  }), [e, r, t])
+    developmentWidgets,
+  }), [userId, developmentWidgets, publishedWidgets])
 }
-function ea() {
-  let e = $$en31()
-  let t = $$z53()
-  return useMemo(() => Object.values(t).filter(t => e.every(e => e.id !== t.plugin_id)), [e, t])
+
+/**
+ * Returns development widgets not present in published widgets.
+ * Original: ea
+ */
+function getDevelopmentWidgets(): LocalPlugin[] {
+  const publishedWidgets = useUserPublishedWidgets()
+  const localPlugins = useLocalPluginsExcludingWidgets()
+  return useMemo(() =>
+    Object.values(localPlugins).filter(local =>
+      publishedWidgets.every(published => published.id !== local.plugin_id),
+    ), [publishedWidgets, localPlugins])
 }
-export function $$es6() {
-  let e = $$en31()
-  let t = ea()
-  return e.length + t.length
+
+/**
+ * Returns the total count of user published widgets and development widgets.
+ * Original: getTotalUserWidgetsWithDevelopmentCount
+ */
+export function getTotalUserWidgetsWithDevelopmentCount(): number {
+  const publishedWidgets = useUserPublishedWidgets()
+  const developmentWidgets = getDevelopmentWidgets()
+  return publishedWidgets.length + developmentWidgets.length
 }
-export function $$eo51() {
-  let e = getUserId()
-  let t = $$en31()
-  return e != null ? t.filter(t => isPendingPublisher(t, e)) : []
+
+/**
+ * Returns pending publisher widgets for the current user.
+ * Original: getPendingPublisherWidgetsForCurrentUser
+ */
+export function getPendingPublisherWidgetsForCurrentUser(): PublishedPlugin[] {
+  const userId = getUserId()
+  const publishedWidgets = useUserPublishedWidgets()
+  return userId != null ? publishedWidgets.filter(widget => isPendingPublisher(widget, userId)) : []
 }
-export function $$el2(e) {
-  return Object.values($$J38({
-    includePendingPublishers: !1,
-  })).find(t => t.id === e)
+
+/**
+ * Finds a published plugin by id, excluding pending publishers.
+ * Original: findPublishedPluginById
+ * @param id string
+ * @returns PublishedPlugin | undefined
+ */
+export function findPublishedPluginById(id: string): PublishedPlugin | undefined {
+  return Object.values(useUserPublishedPlugins({
+    includePendingPublishers: false,
+  })).find(plugin => plugin.id === id)
 }
-export function $$ed20(e) {
-  return Object.values($$en31({
-    includePendingPublishers: !1,
-  })).find(t => t.id === e)
+
+/**
+ * Finds a published widget by id, excluding pending publishers.
+ * Original: findPublishedWidgetById
+ * @param id string
+ * @returns PublishedPlugin | undefined
+ */
+export function findPublishedWidgetById(id: string): PublishedPlugin | undefined {
+  return Object.values(useUserPublishedWidgets({
+    includePendingPublishers: false,
+  })).find(widget => widget.id === id)
 }
-export function $$ec45(e) {
+export function parseAndValidateManifest(e) {
   try {
     let t = typeof e == 'string' ? JSON.parse(e) : e
     t.documentAccess !== 'dynamic-page' && delete t.documentAccess
@@ -245,7 +637,7 @@ export function $$ec45(e) {
     }
     return r.data
   }
-  catch (t) {
+  catch {
     reportError(ServiceCategories.EXTENSIBILITY, new Error('manifest JSON parse error'), {
       extra: {
         rawManifest: e,
@@ -253,7 +645,7 @@ export function $$ec45(e) {
     })
   }
 }
-export function $$eu13(e, t) {
+export function transformPublishedPluginToInstalled(e, t: any) {
   if (e.current_plugin_version_id === null)
     return null
   let r = e.versions[e.current_plugin_version_id]
@@ -393,57 +785,94 @@ export function $$eu13(e, t) {
     pinnedStatus: FPinStatusType.UNPINNED,
   }
 }
-export function $$ep40(e, t, r, n) {
-  if (!e || e.publishingStatus && [FPublicationStatusType.ORG_PRIVATE, FPublicationStatusType.ORG_PRIVATE_PENDING_PUBLIC].includes(e.publishingStatus) && (!e.orgId || e.orgId !== t) && !getFeatureFlags().community_hub_admin)
+/**
+ * Creates plugin manifest data for a given plugin.
+ * Original: createPluginManifestData
+ * @param plugin PublishedPlugin
+ * @param orgId string
+ * @param userId string
+ * @param installedBy string | null
+ * @returns LocalPlugin | undefined
+ */
+export function createPluginManifestData(
+  plugin: PublishedPlugin,
+  orgId: string,
+  userId: string,
+  installedBy: string | null,
+): LocalPlugin | undefined {
+  // Guard clause for plugin visibility and org constraints
+  if (
+    !plugin
+    || (plugin.publishingStatus
+      && [FPublicationStatusType.ORG_PRIVATE, FPublicationStatusType.ORG_PRIVATE_PENDING_PUBLIC].includes(plugin.publishingStatus)
+      && (!plugin.orgId || plugin.orgId !== orgId)
+      && !getFeatureFlags().community_hub_admin)
+  ) {
     return
-  let i = e.currentPluginVersion
-  if (!i)
+  }
+
+  const version = plugin.currentPluginVersion
+  if (!version)
     return
-  if (!i.manifest) {
+
+  if (!version.manifest) {
     reportError(ServiceCategories.EXTENSIBILITY, new Error('manifest missing'), {
-      extra: {
-        plugin: e,
-      },
+      extra: { plugin },
     })
     return
   }
-  let a = e.isWidget ? 'widget' : 'plugin'
-  let l = $$ec45(i.manifest)
-  if (!l)
+
+  const resourceType = plugin.isWidget ? 'widget' : 'plugin'
+  const manifest = parseAndValidateManifest(version.manifest)
+  if (!manifest)
     return
-  let d = `?resource_type=${a}&resource_id=${e.id}`
-  r && (d += `&fuid=${r}`)
-  let c = {
-    id: i.id,
-    plugin_id: e.id,
-    name: i.name || '',
-    current_plugin_version_id: i.plugin?.currentPluginVersionId || void 0,
-    version: i.version || '',
-    release_notes: i.releaseNotes || '',
-    is_private: !!e.orgId,
-    description: i.description || '',
-    creator_policy: i.creatorPolicy ?? '',
-    manifest: l,
-    installed_by: n,
-    tagline: i.tagline || '',
-    created_at: i.createdAt.toString(),
-    redirect_icon_url: `/community/icon${d}`,
-    redirect_cover_image_url: `/community/thumbnail${d}`,
-    redirect_code_url: `/community/${a}/${e.id}/code`,
+
+  let resourceParams = `?resource_type=${resourceType}&resource_id=${plugin.id}`
+  if (userId)
+    resourceParams += `&fuid=${userId}`
+
+  const manifestData: LocalPlugin = {
+    id: version.id,
+    plugin_id: plugin.id,
+    name: version.name || '',
+    current_plugin_version_id: version.plugin?.currentPluginVersionId || undefined,
+    version: version.version || '',
+    release_notes: version.releaseNotes || '',
+    is_private: !!plugin.orgId,
+    description: version.description || '',
+    creator_policy: version.creatorPolicy ?? '',
+    manifest,
+    installed_by: installedBy,
+    tagline: version.tagline || '',
+    created_at: version.createdAt.toString(),
+    redirect_icon_url: `/community/icon${resourceParams}`,
+    redirect_cover_image_url: `/community/thumbnail${resourceParams}`,
+    redirect_code_url: `/community/${resourceType}/${plugin.id}/code`,
+    ...(plugin.communityPublishers && { community_publishers: plugin.communityPublishers }),
+    ...(plugin.isWidget && { redirect_snapshot_url: `/community/snapshot${resourceParams}` }),
+    ...(plugin.orgId && { org_id: plugin.orgId }),
   }
-  e.communityPublishers && (c.community_publishers = e.communityPublishers)
-  e.isWidget && (c.redirect_snapshot_url = `/community/snapshot${d}`)
-  e.orgId && (c.org_id = e.orgId)
-  return c
+
+  return manifestData
 }
-let e_ = (e, t, r) => {
-  let n = {}
-  let i = {}
-  let a = {}
-  let s = {}
-  let o = {}
-  let l = {}
-  if (e.status !== 'loaded') {
+
+/**
+ * Parses installed plugins and groups them by source and type.
+ * Original: e_
+ */
+export function parseInstalledPlugins(
+  subscription: { status: string, data: any },
+  orgId: string,
+  userId: string,
+): ParsedExtensionData {
+  const plugins: PluginMap = {}
+  const widgets: WidgetMap = {}
+  const orgPlugins: PluginMap = {}
+  const orgWidgets: WidgetMap = {}
+  const userPlugins: PluginMap = {}
+  const userWidgets: WidgetMap = {}
+
+  if (subscription.status !== 'loaded') {
     return {
       plugins: {},
       widgets: {},
@@ -453,394 +882,532 @@ let e_ = (e, t, r) => {
       userWidgets: {},
     }
   }
-  let d = e.data
-  for (let e of [{
-    source: 'org',
-    savedExtensions: d.org?.installedPlugins,
-  }, {
-    source: 'user',
-    savedExtensions: d.currentUser?.installedPlugins,
-  }]) {
-    let {
-      source,
-      savedExtensions,
-    } = e
+
+  const data = subscription.data
+  const sources = [
+    { source: 'org', savedExtensions: data.org?.installedPlugins },
+    { source: 'user', savedExtensions: data.currentUser?.installedPlugins },
+  ]
+
+  for (const { source, savedExtensions } of sources) {
     if (savedExtensions) {
-      for (let e of savedExtensions) {
-        let {
-          plugin,
-        } = e
+      for (const ext of savedExtensions) {
+        const { plugin } = ext
         if (!plugin || !plugin.viewableInEditor)
           continue
-        let u = $$ep40(plugin, t, r, source)
-        u && (plugin.isWidget ? (i[e.pluginId] = u, source === 'org' ? s[e.pluginId] = u : source === 'user' && (l[e.pluginId] = u)) : (n[e.pluginId] = u, source === 'org' ? a[e.pluginId] = u : source === 'user' && (o[e.pluginId] = u)))
+        const manifestData = createPluginManifestData(plugin, orgId, userId, source)
+        if (!manifestData)
+          continue
+        if (plugin.isWidget) {
+          widgets[ext.pluginId] = manifestData
+          if (source === 'org')
+            orgWidgets[ext.pluginId] = manifestData
+          if (source === 'user')
+            userWidgets[ext.pluginId] = manifestData
+        }
+        else {
+          plugins[ext.pluginId] = manifestData
+          if (source === 'org')
+            orgPlugins[ext.pluginId] = manifestData
+          if (source === 'user')
+            userPlugins[ext.pluginId] = manifestData
+        }
       }
     }
   }
-  return {
-    plugins: n,
-    widgets: i,
-    orgPlugins: a,
-    orgWidgets: s,
-    userPlugins: o,
-    userWidgets: l,
-  }
+
+  return { plugins, widgets, orgPlugins, orgWidgets, userPlugins, userWidgets }
 }
-let eh = new Set()
-let em = new Set()
-let eg = debounce((e) => {
-  eh.size > 0 && (e(f1({
-    pluginIds: Array.from(eh),
-  })), eh.clear())
-  em.size > 0 && (e(O8({
-    widgetIds: Array.from(em),
-  })), em.clear())
+
+// Debounced plugin/widget fetch triggers
+const pluginFetchQueue = new Set<string>()
+const widgetFetchQueue = new Set<string>()
+const triggerPluginWidgetFetch = debounce((dispatch) => {
+  if (pluginFetchQueue.size > 0) {
+    dispatch(f1({ pluginIds: Array.from(pluginFetchQueue) }))
+    pluginFetchQueue.clear()
+  }
+  if (widgetFetchQueue.size > 0) {
+    dispatch(O8({ widgetIds: Array.from(widgetFetchQueue) }))
+    widgetFetchQueue.clear()
+  }
 }, 300)
-export function $$ef4() {
-  let e = useDispatch()
-  let t = useSelector(e => e.currentUserOrgId)
-  let r = useSubscription(InstalledPlugins, {
-    orgId: t,
-  })
-  let a = getUserId()
-  let s = $$eq15()
+
+/**
+ * Loads installed plugins/widgets and triggers fetches for missing icons/thumbnails.
+ * Original: useInstalledPluginsAndWidgets
+ */
+export function useInstalledPluginsAndWidgets(): PluginCollections {
+  const dispatch = useDispatch()
+  const orgId = useSelector<ObjectOf, string>(state => state.currentUserOrgId)
+  const subscription = useSubscription(InstalledPlugins, { orgId })
+  const userId = getUserId()
+  const supported = isEditorTypeSupported()
+
   return useMemo(() => {
-    if (r.status !== 'loaded') {
+    if (subscription.status !== 'loaded') {
       return {
-        loaded: !1,
+        loaded: false,
         plugins: {},
         widgets: {},
-        orgWidgets: {},
         orgPlugins: {},
-        userWidgets: {},
+        orgWidgets: {},
         userPlugins: {},
+        userWidgets: {},
       }
     }
-    let {
+    const {
       plugins,
       widgets,
       orgPlugins,
       orgWidgets,
       userPlugins,
       userWidgets,
-    } = e_(r, t, a)
-    !(function (e, t, r) {
-      let n = Object.keys(t)
-      let i = Object.keys(r)
-      n.forEach(e => eh.add(e))
-      i.forEach(e => em.add(e))
-      eg(e)
-    }(e, plugins, s ? widgets : {}))
-    return {
-      loaded: !0,
-      plugins,
-      widgets: s ? widgets : {},
-      orgPlugins,
-      orgWidgets: s ? orgWidgets : {},
-      userPlugins,
-      userWidgets: s ? userWidgets : {},
+    } = parseInstalledPlugins(subscription, orgId, userId)
+
+    // Trigger fetch for plugin/widget icons/thumbnails if missing
+    const triggerFetch = (dispatch, plugins, widgets) => {
+      Object.keys(plugins).forEach(id => pluginFetchQueue.add(id))
+      Object.keys(widgets).forEach(id => widgetFetchQueue.add(id))
+      triggerPluginWidgetFetch(dispatch)
     }
-  }, [e, r, t, a, s])
-}
-export function $$eE44() {
-  let e = getSelectedEditorType()
-  return (function (e) {
-    let t = $$ef4()
-    let {
-      plugins,
-      widgets,
-      orgPlugins,
-      orgWidgets,
-      userPlugins,
-      userWidgets,
-    } = t
-    let d = useMemo(() => e(plugins), [e, plugins])
-    let c = useMemo(() => e(widgets), [e, widgets])
-    let u = useMemo(() => e(orgPlugins), [e, orgPlugins])
-    let p = useMemo(() => e(orgWidgets), [e, orgWidgets])
-    let _ = useMemo(() => e(userPlugins), [e, userPlugins])
-    let h = useMemo(() => e(userWidgets), [e, userWidgets])
+    triggerFetch(dispatch, plugins, supported ? widgets : {})
+
     return {
-      loaded: t.loaded,
-      plugins: d,
-      widgets: c,
-      orgPlugins: u,
-      orgWidgets: p,
-      userPlugins: _,
-      userWidgets: h,
-    }
-  }(t => filterEntriesByEditorType(e, t)))
-}
-export function $$ey43(e) {
-  let t = getSelectedEditorType()
-  return useMemo(() => (function (e, {
-    editorType: t,
-  }) {
-    let {
+      loaded: true,
       plugins,
-      widgets,
+      widgets: supported ? widgets : {},
       orgPlugins,
-      orgWidgets,
+      orgWidgets: supported ? orgWidgets : {},
       userPlugins,
-      userWidgets,
-    } = e
-    let l = [plugins, widgets, orgPlugins, orgWidgets, userPlugins, userWidgets].map(e => Object.fromEntries(Object.entries(e).filter(([e, r]) => {
-      let {
-        canRun,
-      } = canRunPlugin({
-        plugin: r,
-        editorType: t,
-      })
-      return canRun
-    })))
-    return {
-      loaded: !0,
-      plugins: l[0],
-      widgets: l[1],
-      orgPlugins: l[2],
-      orgWidgets: l[3],
-      userPlugins: l[4],
-      userWidgets: l[5],
+      userWidgets: supported ? userWidgets : {},
     }
-  }(e, {
-    editorType: t,
-  })), [e, t])
+  }, [dispatch, subscription, orgId, userId, supported])
 }
-export function $$eb28(e, t) {
-  let r = useCurrentUserOrg()?.id ?? null
-  let i = getUserId()
-  let a = useSubscription(Plugin, {
-    orgId: r,
-    pluginId: e,
-  }, {
-    enabled: t,
-  })
-  let s = a.data?.plugin
-  let o = a.status
-  return useMemo(() => o !== 'loaded'
-    ? {
-        loaded: !1,
-        plugin: null,
-      }
-    : {
-        loaded: !0,
-        plugin: s ? $$ep40(s, r, i, null) ?? null : null,
-      }, [o, s, r, i])
+
+/**
+ * Returns filtered installed plugins/widgets by selected editor type.
+ * Original: useFilteredInstalledPluginsAndWidgets
+ */
+export function useFilteredInstalledPluginsAndWidgets(): FilteredPluginCollections {
+  const editorType = getSelectedEditorType()
+  const collections = useInstalledPluginsAndWidgets()
+  return useMemo(() => ({
+    loaded: collections.loaded,
+    plugins: filterEntriesByEditorType(editorType, collections.plugins),
+    widgets: filterEntriesByEditorType(editorType, collections.widgets),
+    orgPlugins: filterEntriesByEditorType(editorType, collections.orgPlugins),
+    orgWidgets: filterEntriesByEditorType(editorType, collections.orgWidgets),
+    userPlugins: filterEntriesByEditorType(editorType, collections.userPlugins),
+    userWidgets: filterEntriesByEditorType(editorType, collections.userWidgets),
+  }), [editorType, collections])
 }
-export function $$eT49(e, {
-  enabled: t,
-}) {
-  let r = useCurrentUserOrg()?.id ?? null
-  let i = getUserId()
-  let a = useMemo(() => e.map(e => ({
-    orgId: r,
-    pluginId: e,
-  })), [e, r])
-  let s = useMultiSubscription(Plugin, a, {
-    enabled: t,
-  })
-  let o = []
-  s.forEach((e) => {
-    let t = e.result
-    if (t.status !== 'loaded')
+
+/**
+ * Returns installed plugins/widgets that can be run in the current editor type.
+ * Original: useRunnableInstalledPluginsAndWidgets
+ */
+export function useRunnableInstalledPluginsAndWidgets(collections: PluginCollections): FilteredPluginCollections {
+  const editorType = getSelectedEditorType()
+  return useMemo(() => {
+    const filterCanRun = (map: PluginMap) =>
+      Object.fromEntries(
+        Object.entries(map).filter(([_, plugin]) => canRunPlugin({ plugin, editorType }).canRun),
+      )
+    return {
+      loaded: true,
+      plugins: filterCanRun(collections.plugins),
+      widgets: filterCanRun(collections.widgets),
+      orgPlugins: filterCanRun(collections.orgPlugins),
+      orgWidgets: filterCanRun(collections.orgWidgets),
+      userPlugins: filterCanRun(collections.userPlugins),
+      userWidgets: filterCanRun(collections.userWidgets),
+    }
+  }, [collections, editorType])
+}
+
+/**
+ * Loads a single plugin manifest by pluginId.
+ * Original: usePluginManifestById
+ */
+export function usePluginManifestById(pluginId: string, enabled: boolean): { loaded: boolean, plugin: LocalPlugin | null } {
+  const orgId = useCurrentUserOrg()?.id ?? null
+  const userId = getUserId()
+  const subscription = useSubscription(Plugin, { orgId, pluginId }, { enabled })
+  const plugin = subscription.data?.plugin
+  const status = subscription.status
+
+  return useMemo(
+    () =>
+      status !== 'loaded'
+        ? { loaded: false, plugin: null }
+        : {
+            loaded: true,
+            plugin: plugin ? createPluginManifestData(plugin, orgId ?? '', userId, null) ?? null : null,
+          },
+    [status, plugin, orgId, userId],
+  )
+}
+
+/**
+ * Loads multiple plugin manifests by pluginIds.
+ * Original: usePluginManifestsByIds
+ */
+export function usePluginManifestsByIds(
+  pluginIds: string[],
+  options: { enabled: boolean },
+): LocalPlugin[] {
+  const orgId = useCurrentUserOrg()?.id ?? null
+  const userId = getUserId()
+  const queries = useMemo(
+    () => pluginIds.map(id => ({ orgId, pluginId: id })),
+    [pluginIds, orgId],
+  )
+  const subscriptions = useMultiSubscription(Plugin, queries, options)
+  const results: LocalPlugin[] = []
+
+  subscriptions.forEach((sub) => {
+    const status = sub.result.status
+    const plugin = sub.result.data?.plugin
+    if (status !== 'loaded' || !plugin)
       return
-    let n = t.data?.plugin
-    if (!n)
-      return
-    let a = $$ep40(n, r, i, null)
-    a && o.push(a)
+    const manifest = createPluginManifestData(plugin, orgId ?? '', userId, null)
+    if (manifest)
+      results.push(manifest)
   })
-  return o
+
+  return results
 }
-export function $$eI25(e, t) {
-  return e.name.localeCompare(t.name)
+/**
+ * Compares two plugins by name for sorting.
+ * Original: comparePluginsByName
+ * @param a LocalPlugin
+ * @param b LocalPlugin
+ * @returns number
+ */
+export function comparePluginsByName(a: LocalPlugin, b: LocalPlugin): number {
+  return a.name.localeCompare(b.name)
 }
-let eS = {
-  loaded: !0,
+
+/**
+ * Default plugin collection state.
+ * Original: eS
+ */
+const defaultPluginCollection: PluginCollections = {
+  loaded: true,
   plugins: {},
+  widgets: {},
+  orgPlugins: {},
+  orgWidgets: {},
+  userPlugins: {},
+  userWidgets: {},
 }
-export function $$ev50() {
-  let e = useSelector(e => e.selectedView)
-  let t = useSelector(e => e.installedPluginVersions)
-  if (e.view !== 'fullscreen')
-    return eS
-  let r = convertEditorTypeToFileType(e.editorType)
-  if (!t.loaded)
-    return t
-  let n = {}
-  for (let i of Object.values(t.plugins)) isEditorTypeMatch(r, i.manifest.editorType) ? n[i.plugin_id] = i : (isFullscreenDevHandoffView(e) && isDevModePlugin(i) || r === 'figma' && isDevModePlugin(i)) && (n[i.plugin_id] = i)
-  let a = e.view === 'fullscreen' ? e.editorType : null
+
+/**
+ * Returns installed plugin versions filtered by editor type.
+ * Original: useInstalledPluginVersions
+ */
+export function useInstalledPluginVersions() {
+  const selectedView = useSelector((state: any) => state.selectedView)
+  const installedPluginVersions = useSelector<PublishedPlugin>(state => state.installedPluginVersions) as PluginVersion
+  if (selectedView.view !== 'fullscreen')
+    return defaultPluginCollection
+  const fileType = convertEditorTypeToFileType(selectedView.editorType)
+  if (!installedPluginVersions.loaded)
+    return installedPluginVersions
+  const filteredPlugins: PluginMap = {}
+  for (const plugin of Object.values(installedPluginVersions.plugins)) {
+    if (isEditorTypeMatch(fileType, plugin.manifest.editorType)) {
+      filteredPlugins[plugin.plugin_id] = plugin
+    }
+    else if (
+      (isFullscreenDevHandoffView(selectedView) && isDevModePlugin(plugin))
+      || (fileType === 'figma' && isDevModePlugin(plugin))
+    ) {
+      filteredPlugins[plugin.plugin_id] = plugin
+    }
+  }
+  const editorType = selectedView.view === 'fullscreen' ? selectedView.editorType : null
   return {
-    loaded: !0,
-    plugins: filterEntriesByEditorType(a, n),
+    loaded: true,
+    plugins: filterEntriesByEditorType(editorType, filteredPlugins),
+    widgets: {},
+    orgPlugins: {},
+    orgWidgets: {},
+    userPlugins: {},
+    userWidgets: {},
   }
 }
-export function $$eA14() {
-  let {
-    widgets,
-  } = $$ef4()
-  let t = useSelector(e => e.selectedView.view === 'fullscreen')
-  let r = xy(widgets)
-  return useMemo(() => t ? r : {}, [t, r])
+
+/**
+ * Returns widgets filtered by editor type and fullscreen view.
+ * Original: useFilteredWidgets
+ */
+export function useFilteredWidgets(): WidgetMap {
+  const { widgets } = useInstalledPluginsAndWidgets()
+  const isFullscreen = useSelector((state: any) => state.selectedView.view === 'fullscreen')
+  const filteredWidgets = filterEntriesByEditorTypeAndMemo(widgets)
+  return useMemo(() => (isFullscreen ? filteredWidgets : {}), [isFullscreen, filteredWidgets])
 }
-export function $$ex1() {
-  let e = useSelector(e => e.recentlyUsed.widgets)
-  let t = $$z53()
-  let r = useMappedEditorTypeA()
-  let a = getUserId()
-  let s = $$eq15()
+
+/**
+ * Returns recently used widgets for the current user/editor type.
+ * Original: useRecentlyUsedWidgets
+ */
+export function useRecentlyUsedWidgets(): LocalPlugin[] {
+  const recentlyUsed = useSelector((state: any) => state.recentlyUsed.widgets)
+  const localPlugins = useLocalPluginsExcludingWidgets()
+  const mappedEditorType = useMappedEditorTypeA()
+  const userId = getUserId()
+  const supported = isEditorTypeSupported()
   return useMemo(() => {
-    let n = []
-    s && r && a && e[r].forEach((r) => {
-      if (a && !r.run_by_user_ids?.includes(a))
-        return
-      let i = e.fetchedResources[r.id]
-      if (i && i.version) {
-        n.push(i.version)
-        return
-      }
-      if (t[r.id]) {
-        n.push(t[r.id])
-      }
-    })
-    return n
-  }, [r, t, e, a, s])
-}
-export function $$eN46() {
-  return eO($$ex1())
-}
-export function $$eC8() {
-  let e = useSelector(e => e.recentlyUsed.plugins)
-  let t = $$H41()
-  let r = useMappedEditorTypeA()
-  let a = getUserId()
-  let s = useMemo(() => {
-    let n = []
-    r && a && e[r].forEach((r) => {
-      if (a && !r.run_by_user_ids?.includes(a))
-        return
-      let i = e.fetchedResources[r.id]
-      if (i && i.version) {
-        n.push(i.version)
-        return
-      }
-      if (t[r.id]) {
-        n.push(t[r.id])
-      }
-    })
-    return n
-  }, [r, e, t, a])
-  return Ol(s)
-}
-export function $$ew18() {
-  return eO($$eC8())
-}
-function eO(e) {
-  let t = {}
-  return e.filter(e => !t[e.plugin_id] && (t[e.plugin_id] = !0, !0))
-}
-export function $$eR29() {
-  let e = $$ew18()
-  return useMemo(() => {
-    let t = {}
-    e.forEach(e => t[e.plugin_id] = e)
-    return t
-  }, [e])
-}
-export function $$eL24() {
-  let e = $$eN46()
-  return useMemo(() => {
-    let t = {}
-    e.forEach(e => t[e.plugin_id] = e)
-    return t
-  }, [e])
-}
-export function $$eP48() {
-  let e = useSelector(e => e.recentlyUsed.plugins)
-  let t = useSelector(e => e.recentlyUsed.widgets)
-  let r = getUserId()
-  let a = useMappedEditorTypeA()
-  return useMemo(() => {
-    let n = {}
-    a && r && (e[a].forEach((e) => {
-      let t = e.last_added_at_by_user_id?.[r]
-      t && (n[e.id] = t)
-    }), t[a].forEach((e) => {
-      let t = e.last_added_at_by_user_id?.[r]
-      t && (n[e.id] = t)
-    }))
-    return n
-  }, [a, r, e, t])
-}
-function eD(e, t, r) {
-  let n = Object.keys(e).reduce((e, r) => {
-    if (t[r]) {
-      let n = t[r]
-      let i = getCurrentPluginVersion(n)
-      if (!i)
-        return e
-      e[r] = i
+    const result: LocalPlugin[] = []
+    if (supported && mappedEditorType && userId && recentlyUsed[mappedEditorType]) {
+      recentlyUsed[mappedEditorType].forEach((resource: RecentlyUsedResource) => {
+        if (userId && !resource.run_by_user_ids?.includes(userId))
+          return
+        const fetched = recentlyUsed.fetchedResources[resource.id]
+        if (fetched && fetched.version) {
+          result.push(fetched.version)
+          return
+        }
+        if (localPlugins[resource.id]) {
+          result.push(localPlugins[resource.id])
+        }
+      })
     }
-    return e
-  }, {})
-  return filterEntriesByEditorType(r, n)
+    return result
+  }, [mappedEditorType, localPlugins, recentlyUsed, userId, supported])
 }
-function ek(e) {
-  let t = useCurrentUserOrg()?.id ?? ''
-  let r = useDispatch()
-  let n = useSelector(t => e === 'plugin' ? t.whitelistedPlugins : t.whitelistedWidgets)
-  let s = !!t
-  let o = (function (e, t = !0) {
-    let r = useCurrentUserOrg()?.id ?? ''
-    let n = useCurrentFileKey()
-    let i = CR(e, t && !!n)
-    let a = kA(r ?? '', e, t && !!r && !n)
-    return n ? i : a
-  }(e, s))
-  let l = o.loaded ? o.data : []
-  if (!s)
-    return n
-  if (!o.loaded)
-    return {}
-  let d = {}
-  l.forEach((e) => {
-    e && (d[e] = !0)
+
+/**
+ * Returns deduplicated recently used widgets.
+ * Original: useDedupedRecentlyUsedWidgets
+ */
+export function useDedupedRecentlyUsedWidgets(): LocalPlugin[] {
+  return dedupePlugins(useRecentlyUsedWidgets())
+}
+
+/**
+ * Returns recently used plugins for the current user/editor type.
+ * Original: useRecentlyUsedPlugins
+ */
+export function useRecentlyUsedPlugins(): LocalPlugin[] {
+  const recentlyUsed = useSelector((state: any) => state.recentlyUsed.plugins)
+  const localPlugins = useLocalPluginsExcludingWidgets()
+  const mappedEditorType = useMappedEditorTypeA()
+  const userId = getUserId()
+  const plugins = useMemo(() => {
+    const result: LocalPlugin[] = []
+    if (mappedEditorType && userId && recentlyUsed[mappedEditorType]) {
+      recentlyUsed[mappedEditorType].forEach((resource: RecentlyUsedResource) => {
+        if (userId && !resource.run_by_user_ids?.includes(userId))
+          return
+        const fetched = recentlyUsed.fetchedResources[resource.id]
+        if (fetched && fetched.version) {
+          result.push(fetched.version)
+          return
+        }
+        if (localPlugins[resource.id]) {
+          result.push(localPlugins[resource.id])
+        }
+      })
+    }
+    return result
+  }, [mappedEditorType, recentlyUsed, localPlugins, userId])
+  return filterArrayByEditorTypeAndMemo(plugins)
+}
+
+/**
+ * Returns deduplicated recently used plugins.
+ * Original: useDedupedRecentlyUsedPlugins
+ */
+export function useDedupedRecentlyUsedPlugins(): LocalPlugin[] {
+  return dedupePlugins(useRecentlyUsedPlugins())
+}
+
+/**
+ * Deduplicates plugins by plugin_id.
+ * Original: eO
+ */
+function dedupePlugins(plugins: LocalPlugin[]): LocalPlugin[] {
+  const seen: Record<string, boolean> = {}
+  return plugins.filter((plugin) => {
+    if (!seen[plugin.plugin_id]) {
+      seen[plugin.plugin_id] = true
+      return true
+    }
+    return false
   })
-  deepEqual(d, n) || r((e === 'plugin' ? setPluginAllowlisted : setWidgetsAllowlisted)(d))
-  return d
 }
-export function $$eM39() {
-  let e = getEditorTypeOrNull()
-  let t = useCurrentUserOrg()
-  let r = $$$32()
-  let a = !!(t && t.plugins_whitelist_enforced)
-  let s = ek('plugin')
-  let o = useDispatch()
-  let l = useCurrentFileKey()
-  let d = getPluginAllowListKey(t?.id ?? '', l)
-  let c = useSelector(e => !!t && isDefined(e.loadingState, d))
-  useEffect(() => {
-    a && !c && o(Vl({}))
-  }, [a, o, c])
-  return useMemo(() => eD(s, r, e), [e, s, r])
+
+/**
+ * Returns a map of deduplicated recently used plugins.
+ * Original: useRecentlyUsedPluginsMap
+ */
+export function useRecentlyUsedPluginsMap(): PluginMap {
+  const plugins = useDedupedRecentlyUsedPlugins()
+  return useMemo(() => {
+    const map: PluginMap = {}
+    plugins.forEach((plugin) => {
+      map[plugin.plugin_id] = plugin
+    })
+    return map
+  }, [plugins])
 }
-export function $$eF19() {
-  let e = getEditorTypeOrNull()
-  let t = useCurrentUserOrg()
-  let r = $$X27()
-  let a = !!(t && t.widgets_whitelist_enforced)
-  let s = ek('widget')
-  let o = useDispatch()
-  let l = useCurrentFileKey()
-  let d = getWidgetAllowListKey(t?.id ?? '', l)
-  let c = useSelector(e => !!t && isDefined(e.loadingState, d))
+
+/**
+ * Returns a map of deduplicated recently used widgets.
+ * Original: useRecentlyUsedWidgetsMap
+ */
+export function useRecentlyUsedWidgetsMap(): WidgetMap {
+  const widgets = useDedupedRecentlyUsedWidgets()
+  return useMemo(() => {
+    const map: WidgetMap = {}
+    widgets.forEach((widget) => {
+      map[widget.plugin_id] = widget
+    })
+    return map
+  }, [widgets])
+}
+
+/**
+ * Returns last added timestamps for plugins and widgets for the current user/editor type.
+ * Original: useLastAddedTimestamps
+ */
+export function useLastAddedTimestamps(): Record<string, string> {
+  const plugins = useSelector((state: any) => state.recentlyUsed.plugins)
+  const widgets = useSelector((state: any) => state.recentlyUsed.widgets)
+  const userId = getUserId()
+  const mappedEditorType = useMappedEditorTypeA()
+  return useMemo(() => {
+    const timestamps: Record<string, string> = {}
+    if (mappedEditorType && userId) {
+      plugins[mappedEditorType]?.forEach((resource: RecentlyUsedResource) => {
+        const ts = resource.last_added_at_by_user_id?.[userId]
+        if (ts)
+          timestamps[resource.id] = ts
+      })
+      widgets[mappedEditorType]?.forEach((resource: RecentlyUsedResource) => {
+        const ts = resource.last_added_at_by_user_id?.[userId]
+        if (ts)
+          timestamps[resource.id] = ts
+      })
+    }
+    return timestamps
+  }, [mappedEditorType, userId, plugins, widgets])
+}
+
+/**
+ * Returns plugins filtered by allowlist and editor type.
+ * Original: eD
+ */
+function filterPluginsByAllowlistAndEditorType(
+  allowlist: PluginMap,
+  publishedPlugins: PluginMap,
+  editorType: FEditorType | null,
+): PluginMap {
+  const filtered: PluginMap = Object.keys(allowlist).reduce((acc, pluginId) => {
+    if (publishedPlugins[pluginId]) {
+      const plugin = publishedPlugins[pluginId]
+      const version = getCurrentPluginVersion(plugin)
+      if (!version)
+        return acc
+      acc[pluginId] = version
+    }
+    return acc
+  }, {} as PluginMap)
+  return filterEntriesByEditorType(editorType, filtered)
+}
+
+/**
+ * Returns allowlisted plugin ids for current org/file.
+ * Original: ek
+ */
+function useAllowlistedPluginIds(resourceType: 'plugin' | 'widget') {
+  const orgId = useCurrentUserOrg()?.id ?? ''
+  const dispatch = useDispatch()
+  const allowlisted = useSelector((state: any) =>
+    resourceType === 'plugin' ? state.whitelistedPlugins : state.whitelistedWidgets,
+  )
+  const hasOrg = !!orgId
+  const allowlistData = useMemo(() => {
+    const fileKey = useCurrentFileKey()
+    const idsFromApi = getAllowlistedExtensionIds(resourceType, !!fileKey)
+    const idsFromStore = getAllowlistedPluginOrWidgetIds(orgId ?? '', resourceType, !!orgId && !fileKey)
+    return fileKey ? idsFromApi : idsFromStore
+  }, [orgId, resourceType])
+  const loadedIds = allowlistData.loaded ? allowlistData.data : []
+  if (!hasOrg)
+    return allowlisted
+  if (!allowlistData.loaded)
+    return {}
+  const allowlist = {}
+  loadedIds.forEach((id: string) => {
+    if (id)
+      allowlist[id] = true
+  })
+  if (!deepEqual(allowlist, allowlisted)) {
+    dispatch(
+      resourceType === 'plugin'
+        ? setPluginAllowlisted(allowlist)
+        : setWidgetsAllowlisted(allowlist),
+    )
+  }
+  return allowlist
+}
+
+/**
+ * Returns allowlisted plugins filtered by editor type.
+ * Original: useAllowlistedPlugins
+ */
+export function useAllowlistedPlugins(): PluginMap {
+  const editorType = getEditorTypeOrNull()
+  const org = useCurrentUserOrg()
+  const publishedPlugins = usePublishedPlugins()
+  const isWhitelistEnforced = !!(org && org.plugins_whitelist_enforced)
+  const allowlist = useAllowlistedPluginIds('plugin')
+  const dispatch = useDispatch<AppDispatch>()
+  const fileKey = useCurrentFileKey()
+  const allowListKey = getPluginAllowListKey(org?.id ?? '', fileKey)
+  const isLoading = useSelector((state: any) => !!org && isDefined(state.loadingState, allowListKey))
   useEffect(() => {
-    a && !c && o(mV({}))
-  }, [a, o, c])
-  let u = useMemo(() => eD(s, r, e), [s, r, e])
-  let p = $$eq15()
-  let _ = useMemo(() => ({}), [])
-  return p ? u : _
+    if (isWhitelistEnforced && !isLoading) {
+      dispatch(initializePluginAllowlist({}))
+    }
+  }, [isWhitelistEnforced, dispatch, isLoading])
+  return useMemo(
+    () => filterPluginsByAllowlistAndEditorType(allowlist, publishedPlugins, editorType),
+    [editorType, allowlist, publishedPlugins],
+  )
+}
+
+/**
+ * Returns allowlisted widgets filtered by editor type.
+ * Original: useAllowlistedWidgets
+ */
+export function useAllowlistedWidgets(): WidgetMap {
+  const editorType = getEditorTypeOrNull()
+  const org = useCurrentUserOrg()
+  const publishedWidgets = usePluginedWidgets()
+  const isWhitelistEnforced = !!(org && org.widgets_whitelist_enforced)
+  const allowlist = useAllowlistedPluginIds('widget')
+  const dispatch = useDispatch<AppDispatch>()
+  const fileKey = useCurrentFileKey()
+  const allowListKey = getWidgetAllowListKey(org?.id ?? '', fileKey)
+  const isLoading = useSelector((state: any) => !!org && isDefined(state.loadingState, allowListKey))
+  useEffect(() => {
+    if (isWhitelistEnforced && !isLoading) {
+      dispatch(initializeWidgetAllowlist({}))
+    }
+  }, [isWhitelistEnforced, dispatch, isLoading])
+  const filtered = useMemo(
+    () => filterPluginsByAllowlistAndEditorType(allowlist, publishedWidgets, editorType),
+    [allowlist, publishedWidgets, editorType],
+  )
+  const supported = isEditorTypeSupported()
+  const empty: WidgetMap = useMemo(() => ({}), [])
+  return supported ? filtered : empty
 }
 let ej = 'plugin_search_duration'
 let eU = 'widget_search_duration'
@@ -849,348 +1416,508 @@ function eB(e, t) {
     forwardToDatadog: !0,
   })
 }
-export function $$eG9(e) {
-  let [t, r] = useState(!1)
-  let [a, s] = useState(!1)
-  let [l, d] = useState(null)
-  let c = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId])
-  let u = c && c.id
-  let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST))
-  let h = useDispatch()
-  let f = $$ev50().plugins
-  let y = getFigmaMobile()
-  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all'
-  let v = isDevHandoffEditorType()
+/**
+ * Provides plugin search functionality for server-side search.
+ * Original: usePluginServerSideSearch
+ */
+export function usePluginServerSideSearch(editorType: FEditorType) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasResolved, setHasResolved] = useState(false)
+  const [lastQuery, setLastQuery] = useState<string | null>(null)
+  const currentOrg = useSelector((state: any) => state.currentUserOrgId && state.orgById[state.currentUserOrgId])
+  const orgId = currentOrg && currentOrg.id
+  const isOrgUser = useSelector((state: any) =>
+    !!(orgId && state.user && state.orgUsersByOrgId[orgId][state.user.id]?.permission !== FUserRoleType.GUEST),
+  )
+  const dispatch = useDispatch<AppDispatch>()
+  const installedPlugins = useInstalledPluginVersions().plugins
+  const figmaMobile = getFigmaMobile()
+  const pricingTier = figmaMobile?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all'
+  const isDevHandoff = isDevHandoffEditorType()
+
+  /**
+   * Triggers a server-side search for plugins.
+   * @param query string
+   * @param setPublicResults (results: string[]) => void
+   * @param setOrgResults (results: string[]) => void
+   * @param setInstalledResults (results: string[]) => void
+   */
+  const pluginServerSideSearch = useCallback(
+    (query: string, setPublicResults: (results: string[]) => void, setOrgResults: (results: string[]) => void, setInstalledResults: (results: string[]) => void) => {
+      const timer = new PerfTimer(ej, {})
+      timer.start()
+      const [publicPromise, orgPromise] = searchAPIHandler.getCommunityPlugins(query, orgId, pricingTier, editorType, isDevHandoff, isOrgUser)
+      setIsLoading(true)
+      setHasResolved(false)
+      Promise.all([publicPromise, orgPromise])
+        .then(([publicRes, orgRes]) => {
+          setHasResolved(true)
+          const allResults: PublishedPlugin[] = []
+          const publicIds = publicRes.data.meta.results.map((item: any) => {
+            allResults.push(item.model)
+            return item.model.id
+          })
+          const orgIds = orgRes
+            ? orgRes.map((item: any) => {
+                allResults.push(item.model)
+                return item.model.id
+              })
+            : []
+          dispatch(mergePublishedPluginThunk({
+            publishedPlugins: allResults,
+            src: 'universalInsert',
+          }))
+          // Split results by installed/uninstalled
+          const installedPublic = publicIds.filter(id => installedPlugins[id])
+          const uninstalledPublic = publicIds.filter(id => !installedPlugins[id])
+          const installedOrg = orgIds.filter(id => installedPlugins[id])
+          const uninstalledOrg = orgIds.filter(id => !installedPlugins[id])
+          setPublicResults(uninstalledPublic)
+          setOrgResults(uninstalledOrg)
+          setInstalledResults([...installedOrg, ...installedPublic])
+          setLastQuery(query)
+          setIsLoading(false)
+          eB(ej, {
+            elapsedMs: timer.stop(),
+            editorType,
+            query,
+            numPublicResults: publicIds.length,
+            numOrgResults: orgIds.length,
+          })
+        })
+        .catch((error) => {
+          const errorData = {
+            query,
+            current_org_id: orgId || '',
+            resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
+            editor_type: editorType,
+            did_org_search: isOrgUser,
+            error: error?.message,
+            status: error?.status,
+          }
+          logError('search', 'Search error for Community resources in inserts modal', errorData, {
+            reportAsSentryError: true,
+          })
+          const message = getI18nString('community.actions.an_error_occurred_while_searching_for_plugins')
+          dispatch(VisualBellActions.enqueue({
+            error: true,
+            message,
+          }))
+        })
+    },
+    [dispatch, editorType, installedPlugins, isDevHandoff, orgId, pricingTier, isOrgUser],
+  )
+
   return {
-    pluginServerSideSearch: useCallback((t, n, i, a) => {
-      let o = new PerfTimer(ej, {})
-      o.start()
-      let [l, c] = searchAPIHandler.getCommunityPlugins(t, u, T, e, v, p)
-      r(!0)
-      s(!1)
-      Promise.all([l, c]).then(([l, c]) => {
-        s(!0)
-        let u = []
-        let p = l.data.meta.results.map(e => (u.push(e.model), e.model.id))
-        let _ = c ? c.map(e => (u.push(e.model), e.model.id)) : []
-        h(Qi({
-          publishedPlugins: u,
-          src: 'universalInsert',
-        }))
-        let m = p.filter(e => f[e])
-        let g = p.filter(e => !f[e])
-        let E = _.filter(e => f[e])
-        let y = _.filter(e => !f[e])
-        n(g)
-        i(y)
-        a([...E, ...m])
-        d(t)
-        r(!1)
-        eB(ej, {
-          elapsedMs: o.stop(),
-          editorType: e,
-          query: t,
-          numPublicResults: p.length,
-          numOrgResults: _.length,
-        })
-      }).catch((r) => {
-        let n = {
-          query: t,
-          current_org_id: u || '',
-          resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
-          editor_type: e,
-          did_org_search: p,
-          error: r?.message,
-          status: r?.status,
-        }
-        logError('search', 'Search error for Community resources in inserts modal', n, {
-          reportAsSentryError: !0,
-        })
-        let i = getI18nString('community.actions.an_error_occurred_while_searching_for_plugins')
-        h(VisualBellActions.enqueue({
-          error: !0,
-          message: i,
-        }))
-      })
-    }, [h, e, f, v, u, T, p]),
-    pluginSearchIsLoading: t,
-    pluginSearchHasResolved: a,
-    setLastPluginSearchQuery: d,
-    lastPluginSearchQuery: l,
+    pluginServerSideSearch,
+    pluginSearchIsLoading: isLoading,
+    pluginSearchHasResolved: hasResolved,
+    setLastPluginSearchQuery: setLastQuery,
+    lastPluginSearchQuery: lastQuery,
   }
 }
-export function $$eV17(e) {
-  let [t, r] = useState(!1)
-  let [a, s] = useState(!1)
-  let [l, d] = useState(null)
-  let c = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId])
-  let u = c && c.id
-  let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST))
-  let h = $$eA14()
-  let f = useDispatch()
-  let y = getFigmaMobile()
-  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all'
+
+/**
+ * Provides widget search functionality for server-side search.
+ * Original: useWidgetServerSideSearch
+ */
+export function useWidgetServerSideSearch(editorType: FEditorType) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasResolved, setHasResolved] = useState(false)
+  const [lastQuery, setLastQuery] = useState<string | null>(null)
+  const currentOrg = useSelector((state: any) => state.currentUserOrgId && state.orgById[state.currentUserOrgId])
+  const orgId = currentOrg && currentOrg.id
+  const isOrgUser = useSelector((state: any) =>
+    !!(orgId && state.user && state.orgUsersByOrgId[orgId][state.user.id]?.permission !== FUserRoleType.GUEST),
+  )
+  const filteredWidgets = useFilteredWidgets()
+  const dispatch = useDispatch<AppDispatch>()
+  const figmaMobile = getFigmaMobile()
+  const pricingTier = figmaMobile?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all'
+
+  /**
+   * Triggers a server-side search for widgets.
+   * @param query string
+   * @param setPublicResults (results: string[]) => void
+   * @param setOrgResults (results: string[]) => void
+   * @param setInstalledResults (results: string[]) => void
+   */
+  const widgetServerSideSearch = useCallback(
+    (query: string, setPublicResults: (results: string[]) => void, setOrgResults: (results: string[]) => void, setInstalledResults: (results: string[]) => void) => {
+      const timer = new PerfTimer(eU, {})
+      timer.start()
+      const [publicPromise, orgPromise] = searchAPIHandler.getCommunityWidgets(query, orgId, pricingTier, editorType, isOrgUser)
+      setIsLoading(true)
+      setHasResolved(false)
+      Promise.all([publicPromise, orgPromise])
+        .then(([publicRes, orgRes]) => {
+          setHasResolved(true)
+          const allResults: PublishedPlugin[] = []
+          const publicIds = publicRes.data.meta.results.map((item: any) => {
+            allResults.push(item.model)
+            return item.model.id
+          })
+          const orgIds = orgRes.map((item: any) => {
+            allResults.push(item.model)
+            return item.model.id
+          })
+          dispatch(mergePublishedPluginThunk({
+            publishedPlugins: allResults,
+            src: 'universalInsert',
+          }))
+          // Split results by installed/uninstalled
+          const installedPublic = publicIds.filter(id => filteredWidgets[id])
+          const uninstalledPublic = publicIds.filter(id => !filteredWidgets[id])
+          const installedOrg = orgIds.filter(id => filteredWidgets[id])
+          const uninstalledOrg = orgIds.filter(id => !filteredWidgets[id])
+          setPublicResults(uninstalledPublic)
+          setOrgResults(uninstalledOrg)
+          setInstalledResults([...installedOrg, ...installedPublic])
+          setIsLoading(false)
+          setLastQuery(query)
+          eB(eU, {
+            elapsedMs: timer.stop(),
+            editorType,
+            query,
+            numPublicResults: publicIds.length,
+            numOrgResults: orgIds.length,
+          })
+        })
+        .catch((error) => {
+          const errorData = {
+            query,
+            current_org_id: orgId || '',
+            resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
+            editor_type: editorType,
+            did_org_search: isOrgUser,
+            error: error?.message,
+            status: error?.status,
+          }
+          logError('search', 'Search error for Community resources in inserts modal', errorData, {
+            reportAsSentryError: true,
+          })
+          const message = getI18nString('community.actions.an_error_occurred_while_searching_for_widgets')
+          dispatch(VisualBellActions.enqueue({
+            error: true,
+            message,
+          }))
+        })
+    },
+    [dispatch, editorType, orgId, pricingTier, filteredWidgets, isOrgUser],
+  )
+
   return {
-    widgetServerSideSearch: useCallback((t, n, i, a) => {
-      let o = new PerfTimer(eU, {})
-      o.start()
-      let [l, c] = searchAPIHandler.getCommunityWidgets(t, u, T, e, p)
-      r(!0)
-      s(!1)
-      Promise.all([l, c]).then(([l, c]) => {
-        s(!0)
-        let u = []
-        let p = l.data.meta.results.map(e => (u.push(e.model), e.model.id))
-        let _ = c.map(e => (u.push(e.model), e.model.id))
-        f(Qi({
-          publishedPlugins: u,
-          src: 'universalInsert',
-        }))
-        let m = p.filter(e => h[e])
-        let g = p.filter(e => !h[e])
-        let E = _.filter(e => h[e])
-        let y = _.filter(e => !h[e])
-        n(g)
-        i(y)
-        a([...E, ...m])
-        r(!1)
-        d(t)
-        eB(eU, {
-          elapsedMs: o.stop(),
-          editorType: e,
-          query: t,
-          numPublicResults: p.length,
-          numOrgResults: _.length,
-        })
-      }).catch((r) => {
-        let n = {
-          query: t,
-          current_org_id: u || '',
-          resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
-          editor_type: e,
-          did_org_search: p,
-          error: r?.message,
-          status: r?.status,
-        }
-        logError('search', 'Search error for Community resources in inserts modal', n, {
-          reportAsSentryError: !0,
-        })
-        let i = getI18nString('community.actions.an_error_occurred_while_searching_for_widgets')
-        f(VisualBellActions.enqueue({
-          error: !0,
-          message: i,
-        }))
-      })
-    }, [f, e, u, T, h, p]),
-    widgetSearchIsLoading: t,
-    widgetSearchHasResolved: a,
-    setLastWidgetSearchQuery: d,
-    lastWidgetSearchQuery: l,
+    widgetServerSideSearch,
+    widgetSearchIsLoading: isLoading,
+    widgetSearchHasResolved: hasResolved,
+    setLastWidgetSearchQuery: setLastQuery,
+    lastWidgetSearchQuery: lastQuery,
   }
 }
-export function $$eH47(e) {
-  let t = $$J38({
-    includePendingPublishers: !1,
-  })
-  let r = $$en31({
-    includePendingPublishers: !1,
-  })
-  let n = $$K10()
-  return (e ? r : t).filter(e => !n[e.id])
+
+/**
+ * Returns unpublished plugins/widgets not present in local plugins.
+ * Original: getUnpublishedResources
+ */
+export function getUnpublishedResources(isWidget: boolean): PublishedPlugin[] {
+  const publishedPlugins = useUserPublishedPlugins({ includePendingPublishers: false })
+  const publishedWidgets = useUserPublishedWidgets({ includePendingPublishers: false })
+  const localPluginsById = useLocalPluginsByPluginId()
+  const resources = isWidget ? publishedWidgets : publishedPlugins
+  return resources.filter(resource => !localPluginsById[resource.id])
 }
-export function $$ez16(e, {
-  searchLocalPlugins: t,
-  searchPublishedPlugins: r,
-}) {
-  let i = $$V0()
-  let a = $$$32()
-  return useMemo(() => getPluginByFileId({
-    idToSearch: e,
-    localExtensionsByFileId: t ? i : void 0,
-    publishedExtensions: r ? a : void 0,
-  }), [e, t, r, i, a])
+
+/**
+ * Finds plugin or widget by file id from local or published collections.
+ * Original: findPluginOrWidgetByFileId
+ */
+export function findPluginOrWidgetByFileId(
+  fileId: string,
+  options: { searchLocalPlugins?: boolean, searchPublishedPlugins?: boolean },
+): LocalPlugin | undefined {
+  const localPlugins = getLocalPlugins()
+  const publishedPlugins = usePublishedPlugins()
+  return useMemo(
+    () =>
+      getPluginByFileId({
+        idToSearch: fileId,
+        localExtensionsByFileId: options.searchLocalPlugins ? localPlugins : undefined,
+        publishedExtensions: options.searchPublishedPlugins ? publishedPlugins : undefined,
+      }),
+    [fileId, options.searchLocalPlugins, options.searchPublishedPlugins, localPlugins, publishedPlugins],
+  )
 }
-export function $$eW35() {
-  let e = $$ev50()
-  let t = $$J38()
-  let r = $$eC8()
-  let n = {}
-  Object.values(e.plugins).forEach((e) => {
-    n[e.plugin_id] || (n[e.plugin_id] = e)
+
+/**
+ * Returns a map of all installed, published, and recently used plugins.
+ * Original: getAllPluginVersions
+ */
+export function getAllPluginVersions(): PluginMap {
+  const installed = useInstalledPluginVersions()
+  const published = useUserPublishedPlugins()
+  const recent = useRecentlyUsedPlugins()
+  const pluginMap: PluginMap = {}
+
+  Object.values(installed.plugins).forEach((plugin) => {
+    if (!pluginMap[plugin.plugin_id])
+      pluginMap[plugin.plugin_id] = plugin
   })
-  Object.values(t).map(getPluginVersion).forEach((e) => {
-    n[e.plugin_id] || hasLocalFileId(e) || (n[e.plugin_id] = e)
+  Object.values(published).map(getPluginVersion).forEach((plugin) => {
+    if (!pluginMap[plugin.plugin_id] && !hasLocalFileId(plugin))
+      pluginMap[plugin.plugin_id] = plugin
   })
-  r.forEach((e) => {
-    n[e.plugin_id] || hasLocalFileId(e) || (n[e.plugin_id] = e)
+  recent.forEach((plugin) => {
+    if (!pluginMap[plugin.plugin_id] && !hasLocalFileId(plugin))
+      pluginMap[plugin.plugin_id] = plugin
   })
-  return n
+  return pluginMap
 }
-function eK(e) {
-  let t = {}
-  Object.keys(e).forEach((e) => {
-    t[e] = !0
+
+/**
+ * Converts a plugin/widget map to a boolean allowlist.
+ * Original: eK
+ */
+function toAllowlist(map: PluginMap | WidgetMap): Record<string, boolean> {
+  const allowlist: Record<string, boolean> = {}
+  Object.keys(map).forEach((id) => {
+    allowlist[id] = true
   })
-  return t
+  return allowlist
 }
-export function $$eY23() {
-  let e = getSelectedEditorType()
-  let t = eK($$eM39())
-  let r = eK($$eF19())
-  let i = selectWithShallowEqual(e => ({
+
+/**
+ * Returns a callback to check if a plugin/widget can run in the current editor type.
+ * Original: useCanRunExtension
+ */
+export function useCanRunExtension() {
+  const editorType = getSelectedEditorType()
+  const pluginAllowlist = toAllowlist(useAllowlistedPlugins())
+  const widgetAllowlist = toAllowlist(useAllowlistedWidgets())
+  const state = selectWithShallowEqual((e: any) => ({
     currentUserOrgId: e.currentUserOrgId,
     orgById: e.orgById,
     selectedView: e.selectedView,
     openFile: e.openFile,
   }))
-  let a = useAppModelProperty('isReadOnly')
-  return useCallback((n) => {
-    let {
-      canRun,
-    } = canRunPlugin({
-      plugin: n,
-      editorType: e,
-      canRunPluginState: {
-        ...i,
-        mirror: {
-          appModel: {
-            isReadOnly: a,
+  const isReadOnly = useAppModelProperty('isReadOnly')
+  return useCallback(
+    (plugin: LocalPlugin) => {
+      const { canRun } = canRunPlugin({
+        plugin,
+        editorType,
+        canRunPluginState: {
+          ...state,
+          mirror: {
+            appModel: {
+              isReadOnly,
+            },
           },
+          whitelistedPlugins: pluginAllowlist,
+          whitelistedWidgets: widgetAllowlist,
         },
-        whitelistedPlugins: t,
-        whitelistedWidgets: r,
-      },
-    })
-    return canRun
-  }, [e, i, t, r, a])
+      })
+      return canRun
+    },
+    [editorType, state, pluginAllowlist, widgetAllowlist, isReadOnly],
+  )
 }
-export function $$e$52() {
+
+/**
+ * Returns whether the current user can perform an action.
+ * Original: useCanPerformAction
+ */
+export function useCanPerformAction() {
   return useSelector(canPerformAction)
 }
-export function $$eX21() {
+
+/**
+ * Returns whether the current user can run extensions.
+ * Original: useCanRunExtensions
+ */
+export function useCanRunExtensions() {
   return useSelector(canRunExtensions)
 }
-export function $$eq15() {
-  let e = getSelectedEditorType()
-  return e !== FEditorType.Slides && e !== FEditorType.Sites && e !== FEditorType.Figmake && e !== FEditorType.Cooper
+
+/**
+ * Returns true if the selected editor type supports plugins/widgets.
+ * Original: isEditorTypeSupported
+ */
+export function isEditorTypeSupported(): boolean {
+  const editorType = getSelectedEditorType()
+  return (
+    editorType !== FEditorType.Slides
+    && editorType !== FEditorType.Sites
+    && editorType !== FEditorType.Figmake
+    && editorType !== FEditorType.Cooper
+  )
 }
-export function $$eJ3(e) {
-  let t = selectEditorType(e)
-  return t !== FEditorType.Slides && t !== FEditorType.Sites && t !== FEditorType.Figmake && t !== FEditorType.Cooper
+
+/**
+ * Returns true if the given editor type supports plugins/widgets.
+ * Original: isEditorTypeSupportedFor
+ */
+export function isEditorTypeSupportedFor(editorType: FEditorType): boolean {
+  return (
+    editorType !== FEditorType.Slides
+    && editorType !== FEditorType.Sites
+    && editorType !== FEditorType.Figmake
+    && editorType !== FEditorType.Cooper
+  )
 }
-export function $$eZ26(e) {
-  let t = useCurrentUserOrg()
-  let r = !!(t && t.widgets_whitelist_enforced)
-  let a = useSelector(e => e.whitelistedWidgets)[e]
-  let s = $$z53()
-  let o = useMemo(() => Object.values(s).find(t => t.plugin_id === e), [s, e])
-  let l = useSelector(t => t.publishedWidgets[e])
-  let d = !r || o || l?.org_id
+
+/**
+ * Returns allowlist validation result for a widget.
+ * Original: useWidgetAllowlistValidation
+ */
+export function useWidgetAllowlistValidation(widgetId: string): WidgetValidationResult {
+  const org = useCurrentUserOrg()
+  const isWhitelistEnforced = !!(org && org.widgets_whitelist_enforced)
+  const isAllowlisted = useSelector((state: any) => state.whitelistedWidgets)[widgetId]
+  const localPlugins = useLocalPluginsExcludingWidgets()
+  const localWidget = useMemo(() => Object.values(localPlugins).find(p => p.plugin_id === widgetId), [localPlugins, widgetId])
+  const publishedWidget = useSelector((state: any) => state.publishedWidgets[widgetId])
+  const isAllowed = !isWhitelistEnforced || localWidget || publishedWidget?.org_id
   return {
-    isWidgetBlockedByAllowlist: !a && !d,
+    isWidgetBlockedByAllowlist: !isAllowlisted && !isAllowed,
   }
 }
-export function $$eQ34(e) {
-  let t = useDispatch()
-  let r = useCurrentUserOrg()
-  let a = !!(r && r.plugins_whitelist_enforced)
-  let s = useSelector(e => e.whitelistedPlugins)[e]
-  let o = $$V0()
-  let l = useMemo(() => Object.values(o).find(t => t.plugin_id === e), [o, e])
-  let d = useSelector(t => t.publishedPlugins[e])
-  let c = !a || l || d?.org_id
-  let u = !s && !c
+
+/**
+ * Returns allowlist validation result for a plugin.
+ * Original: usePluginAllowlistValidation
+ */
+export function usePluginAllowlistValidation(pluginId: string): PluginValidationResult {
+  const dispatch = useDispatch()
+  const org = useCurrentUserOrg()
+  const isWhitelistEnforced = !!(org && org.plugins_whitelist_enforced)
+  const isAllowlisted = useSelector((state: any) => state.whitelistedPlugins)[pluginId]
+  const localPlugins = getLocalPlugins()
+  const localPlugin = useMemo(() => Object.values(localPlugins).find(p => p.plugin_id === pluginId), [localPlugins, pluginId])
+  const publishedPlugin = useSelector((state: any) => state.publishedPlugins[pluginId])
+  const isAllowed = !isWhitelistEnforced || localPlugin || publishedPlugin?.org_id
+  const isBlocked = !isAllowlisted && !isAllowed
   return {
-    validatePublishedPluginInOrgAllowlist: useCallback(() => !u || (t(VisualBellActions.enqueue({
-      message: getI18nString('universal_insert.plugin_not_in_allowlist'),
-      error: !0,
-    })), !1), [u, t]),
-    isPluginBlockedByAllowlist: u,
+    validatePublishedPluginInOrgAllowlist: useCallback(() => {
+      if (!isBlocked)
+        return true
+      dispatch(
+        VisualBellActions.enqueue({
+          message: getI18nString('universal_insert.plugin_not_in_allowlist'),
+          error: true,
+        }),
+      )
+      return false
+    }, [isBlocked, dispatch]),
+    isPluginBlockedByAllowlist: isBlocked,
   }
 }
-export function $$e036(e) {
-  let t = useCurrentUserOrg()
-  let r = !!(t && t.plugins_whitelist_enforced)
-  let i = !!(t && t.widgets_whitelist_enforced)
-  let a = !!t && !t.public_plugins_allowed
-  let s = $$eM39()
-  let o = $$eF19()
-  let l = e ? o : s
-  let d = e ? i : r
-  let c = t?.id ?? ''
-  let u = useCurrentFileKey()
-  let p = useIsLoading(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u))
-  let _ = useCallback(e => d ? e.filter(e => !isPublicPlugin(e) || !!l[e.plugin_id]) : e, [l, d])
-  let h = useCallback(e => a ? e.filter(e => !isPublicPlugin(e)) : e, [a])
+
+/**
+ * Returns allowlist state and filtering functions for plugins/widgets.
+ * Original: useExtensionAllowlist
+ */
+export function useExtensionAllowlist(isWidget: boolean) {
+  const org = useCurrentUserOrg()
+  const hasPluginAllowList = !!(org && org.plugins_whitelist_enforced)
+  const hasWidgetAllowList = !!(org && org.widgets_whitelist_enforced)
+  const publicExtensionsDisallowed = !!org && !org.public_plugins_allowed
+  const pluginAllowlist = useAllowlistedPlugins()
+  const widgetAllowlist = useAllowlistedWidgets()
+  const allowList = isWidget ? widgetAllowlist : pluginAllowlist
+  const hasAllowList = isWidget ? hasWidgetAllowList : hasPluginAllowList
+  const orgId = org?.id ?? ''
+  const fileKey = useCurrentFileKey()
+  const allowListIsLoading = useIsLoading(
+    isWidget ? getWidgetAllowListKey(orgId, fileKey) : getPluginAllowListKey(orgId, fileKey),
+  )
+  /**
+   * Filters resources by public status and allowlist.
+   */
+  const filterByAllowlist = useCallback(
+    (resources: LocalPlugin[]) =>
+      hasAllowList
+        ? resources.filter(resource => !isPublicPlugin(resource) || !!allowList[resource.plugin_id])
+        : resources,
+    [allowList, hasAllowList],
+  )
+  const filterByPublicResourcesAllowed = useCallback(
+    (resources: LocalPlugin[]) =>
+      publicExtensionsDisallowed
+        ? resources.filter(resource => !isPublicPlugin(resource))
+        : resources,
+    [publicExtensionsDisallowed],
+  )
   return {
-    publicExtensionsDisallowed: a,
-    allowList: l,
-    hasAllowList: d,
-    allowListIsLoading: p,
-    hasPluginAllowList: r,
-    hasWidgetAllowList: i,
-    filterByPublicResourcesAllowed: h,
-    filterByAllowlist: _,
-  }
-}
-export function $$e142() {
-  let {
-    filterByAllowlist,
+    publicExtensionsDisallowed,
+    allowList,
+    hasAllowList,
+    allowListIsLoading,
+    hasPluginAllowList,
+    hasWidgetAllowList,
     filterByPublicResourcesAllowed,
-  } = $$e036(!1)
-  return filterByAllowlist(filterByPublicResourcesAllowed($$ew18()))
+    filterByAllowlist,
+  }
 }
-export const $1 = $$V0
-export const AR = $$ex1
-export const B7 = $$el2
-export const BE = $$eJ3
-export const Be = $$ef4
-export const CI = $$ee5
-export const Dy = $$es6
-export const E$ = $$ei7
-export const FG = $$eC8
-export const I5 = $$eG9
-export const Im = $$K10
-export const LR = $$Q11
-export const Lq = $$q12
-export const N3 = $$eu13
-export const NU = $$eA14
-export const QZ = $$eq15
-export const S0 = $$ez16
-export const SG = $$eV17
-export const Tg = $$ew18
-export const U6 = $$eF19
-export const Ud = $$ed20
-export const V2 = $$eX21
-export const WK = $$W22
-export const YN = $$eY23
-export const YO = $$eL24
-export const YW = $$eI25
-export const Ys = $$eZ26
-export const ZT = $$X27
-export const _P = $$eb28
-export const b4 = $$eR29
-export const bI = $$er30
-export const bh = $$en31
-export const cW = $$$32
-export const f6 = $$et33
-export const j1 = $$eQ34
-export const j8 = $$eW35
-export const jA = $$e036
-export const jg = $$Y37
-export const kd = $$J38
-export const ll = $$eM39
-export const mf = $$ep40
-export const nl = $$H41
-export const op = $$e142
-export const pR = $$ey43
-export const q3 = $$eE44
-export const qT = $$ec45
-export const qr = $$eN46
-export const sp = $$eH47
-export const tB = $$eP48
-export const uf = $$eT49
-export const wH = $$ev50
-export const wW = $$eo51
-export const x = $$e$52
-export const yQ = $$z53
+
+/**
+ * Returns deduped recently used plugins filtered by allowlist and public status.
+ * Original: useFilteredDedupedRecentlyUsedPlugins
+ */
+export function useFilteredDedupedRecentlyUsedPlugins(): LocalPlugin[] {
+  const { filterByAllowlist, filterByPublicResourcesAllowed } = useExtensionAllowlist(false)
+  return filterByAllowlist(filterByPublicResourcesAllowed(useDedupedRecentlyUsedPlugins()))
+}
+export const $1 = getLocalPlugins
+export const AR = useRecentlyUsedWidgets
+export const B7 = findPublishedPluginById
+export const BE = isEditorTypeSupportedFor
+export const Be = useInstalledPluginsAndWidgets
+export const CI = getTotalUserWidgetsCount
+export const Dy = getTotalUserWidgetsWithDevelopmentCount
+export const E$ = useGroupedUserWidgets
+export const FG = useRecentlyUsedPlugins
+export const I5 = usePluginServerSideSearch
+export const Im = useLocalPluginsByPluginId
+export const LR = useGroupedUserPlugins
+export const Lq = getPluginOrWidget
+export const N3 = transformPublishedPluginToInstalled
+export const NU = useFilteredWidgets
+export const QZ = isEditorTypeSupported
+export const S0 = findPluginOrWidgetByFileId
+export const SG = useWidgetServerSideSearch
+export const Tg = useDedupedRecentlyUsedPlugins
+export const U6 = useAllowlistedWidgets
+export const Ud = findPublishedWidgetById
+export const V2 = useCanRunExtensions
+export const WK = findLocalPluginById
+export const YN = useCanRunExtension
+export const YO = useRecentlyUsedWidgetsMap
+export const YW = comparePluginsByName
+export const Ys = useWidgetAllowlistValidation
+export const ZT = usePluginedWidgets
+export const _P = usePluginManifestById
+export const b4 = useRecentlyUsedPluginsMap
+export const bI = isPendingPublisherForCurrentUser
+export const bh = useUserPublishedWidgets
+export const cW = usePublishedPlugins
+export const f6 = getPendingPublisherWidgets
+export const j1 = usePluginAllowlistValidation
+export const j8 = getAllPluginVersions
+export const jA = useExtensionAllowlist
+export const jg = usePublishingPlugins
+export const kd = useUserPublishedPlugins
+export const ll = useAllowlistedPlugins
+export const mf = createPluginManifestData
+export const nl = useLocalPluginsExcludingWidgets
+export const op = useFilteredDedupedRecentlyUsedPlugins
+export const pR = useRunnableInstalledPluginsAndWidgets
+export const q3 = useFilteredInstalledPluginsAndWidgets
+export const qT = parseAndValidateManifest
+export const qr = useDedupedRecentlyUsedWidgets
+export const sp = getUnpublishedResources
+export const tB = useLastAddedTimestamps
+export const uf = usePluginManifestsByIds
+export const wH = useInstalledPluginVersions
+export const wW = getPendingPublisherWidgetsForCurrentUser
+export const x = useCanPerformAction
+export const yQ = useLocalPluginsExcludingWidgets

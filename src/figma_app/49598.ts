@@ -61,7 +61,7 @@ import { AuthModal } from "../905/749159";
 import { Y as _$$Y } from "../905/582047";
 import { UM, F4 } from "../figma_app/60023";
 import { Dl } from "../905/58274";
-import { HZ, Oo } from "../905/926523";
+import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
 let ep = ZS;
 let $$e_7 = createActionCreator("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE");
 let $$eh0 = createActionCreator("UPDATE_HUB_FILE_PAGE_TITILE");
@@ -340,7 +340,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
   })), e.dispatch($$e_7({
     hubFileId: r.id,
     fileKey: t.fileKey
-  })), i && (n.profile_created = i, e.dispatch(HZ(n))), e.dispatch(Oo(n)), e.dispatch(updateStatus({
+  })), i && (n.profile_created = i, e.dispatch(addAuthedCommunityProfileToHub(n))), e.dispatch(putCommunityProfile(n)), e.dispatch(updateStatus({
     id: t.fileKey,
     status: {
       code: UploadStatusEnum.SUCCESS

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { renderI18nText } from "../905/303541";
 import { b } from "../905/217163";
 import { E4, m3, bj } from "../905/66449";
@@ -20,7 +20,7 @@ export function $$l0({
   return d ? jsx(bj, {
     elementRef: ref,
     kbArgs,
-    children: jsx(N.Button, {
+    children: jsx(Link.Button, {
       href: d,
       newTab: !0,
       trusted: !0,

@@ -21,7 +21,7 @@ import { u as _$$u } from '../figma_app/187359';
 import { FFileType } from '../figma_app/191312';
 import { ResourceTypeEnum } from '../figma_app/306946';
 import { SortOptions } from '../figma_app/324237';
-import { LU } from '../figma_app/327588';
+import { getFocusedNodeId } from '../figma_app/327588';
 import { mapComponentProperties } from '../figma_app/349248';
 import { gI, Wn } from '../figma_app/396464';
 import { fullscreenValue } from '../figma_app/455680';
@@ -455,7 +455,7 @@ export function $$em21(e) {
   };
 }
 export function $$ep15() {
-  let e = LU();
+  let e = getFocusedNodeId();
   return useCallback(() => {
     permissionScopeHandler.user('Duplicate as blank cooper asset', () => {
       let t = null;

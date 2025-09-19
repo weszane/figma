@@ -141,7 +141,7 @@ import { gNA } from "../figma_app/27776";
 import { M as _$$M } from "../905/540025";
 import { g as _$$g } from "../642/216228";
 import { C as _$$C } from "../905/108595";
-import { vv } from "../905/508457";
+import { createConditionalObservableAtom } from "../905/508457";
 import { y0 } from "../figma_app/718307";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Tv } from "../figma_app/151869";
@@ -1609,7 +1609,7 @@ function se({
     })]
   });
 }
-let sl = vv(() => AppStateTsApi?.boxSelectionState().isBoxSelecting, !1);
+let sl = createConditionalObservableAtom(() => AppStateTsApi?.boxSelectionState().isBoxSelecting, !1);
 function sd() {
   let e = useContext(y0).focusSelectedNodes;
   return !!(getFeatureFlags().ce_il_layer_focus && e);

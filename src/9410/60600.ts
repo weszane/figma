@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { E as _$$E } from "../905/53857";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
@@ -55,7 +55,7 @@ export function $$N2() {
       },
       children: jsx("span", {
         children: renderI18nText("cooper.onboarding.from_concept_to_creation_design", {
-          learnMoreLink: jsx(_$$N, {
+          learnMoreLink: jsx(Link, {
             newTab: !0,
             href: "https://help.figma.com/hc/articles/31271566667543",
             children: renderI18nText("cooper.onboarding.learn_more")
@@ -65,7 +65,7 @@ export function $$N2() {
     }),
     disclaimerFooter: jsx("span", {
       children: renderI18nText("cooper.onboarding.this_beta_is_a_free", {
-        betaTermsLink: jsx(_$$N, {
+        betaTermsLink: jsx(Link, {
           newTab: !0,
           href: "https://www.figma.com/product-specific-terms/",
           children: renderI18nText("cooper.onboarding.figma_beta_terms")

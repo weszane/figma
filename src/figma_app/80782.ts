@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { range } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import c from "classnames";
 import { Y1 } from "../905/143116";
 import { customHistory } from "../905/612521";
@@ -167,7 +167,7 @@ export function $$j7({
   url: e,
   fileKey: t
 }) {
-  return jsx(_$$N.Button, {
+  return jsx(Link.Button, {
     href: e,
     newTab: !0,
     onClick: () => {

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useMemo, createContext, useContext } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -130,7 +130,7 @@ export function $$I2(e) {
         }), jsx("div", {
           className: "error_boundary--errorBoundaryDescription--iC-21 text--fontPos15--IR8IB text--_fontBase--QdLsd",
           children: n ? i ? renderI18nText("general.root_error_boundary_google_translate_description") : v.googleTranslateDescription : i ? renderI18nText("general.root_error_boundary_description", {
-            status_page: jsx(N, {
+            status_page: jsx(Link, {
               trusted: !0,
               href: "https://status.figma.com",
               children: renderI18nText("general.root_error_boundary_status_page")
@@ -138,7 +138,7 @@ export function $$I2(e) {
           }) : jsxs(Fragment, {
             children: [jsx("span", {
               children: v.descriptionP1
-            }), jsx(N, {
+            }), jsx(Link, {
               trusted: !0,
               href: "https://status.figma.com",
               children: v.statusPage

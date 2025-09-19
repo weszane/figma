@@ -20,14 +20,14 @@ export function renderEmbedIconFrame({
   iconSvgSrc,
   backgroundColor = '#EBEBFF',
 }: {
-  figma: any
+  figma: PluginAPI
   iconSvgSrc: string
   backgroundColor?: string
 }) {
   const { widget } = figma
   const { SVG, Frame } = widget
   const nodeId = widget.useWidgetNodeId()
-  const node = figma.getNodeById(nodeId)
+  const node = figma.getNodeById(nodeId) as FrameNode | null
   const width = node?.width
   const height = node?.height
   const svgIcon = widget.h(SVG, {
@@ -243,7 +243,7 @@ let S = `
 export function setupEmbedWidget({
   figma,
 }: {
-  figma: any
+  figma: PluginAPI
 }) {
   const { widget } = figma
   const { useSyncedState } = widget
@@ -252,7 +252,7 @@ export function setupEmbedWidget({
    * Renders the Mailchimp embed widget.
    * Original inline function in MAILCHIMP case.
    */
-  function renderMailchimpWidget({ figma }: { figma: any }) {
+  function renderMailchimpWidget({ figma }: { figma: PluginAPI }) {
     const { widget } = figma
     const { AutoLayout, useSyncedState } = widget
     const [inputPlaceholder] = useSyncedState('inputPlaceholder', null)
@@ -262,7 +262,7 @@ export function setupEmbedWidget({
      * Renders the input placeholder.
      * Original inline function in Mailchimp case.
      */
-    function renderInputPlaceholder(figma: any, placeholder: string | null) {
+    function renderInputPlaceholder(figma: PluginAPI, placeholder: string | null) {
       const { widget } = figma
       const { AutoLayout, Text } = widget
       return widget.h(AutoLayout, {
@@ -288,7 +288,7 @@ export function setupEmbedWidget({
      * Renders the submit button.
      * Original inline function in Mailchimp case.
      */
-    function renderSubmitButton(figma: any, label: string | null) {
+    function renderSubmitButton(figma: PluginAPI, label: string | null) {
       const { widget } = figma
       const { AutoLayout, Text } = widget
       return widget.h(AutoLayout, {
@@ -321,7 +321,7 @@ export function setupEmbedWidget({
    * Renders the Google Map embed widget.
    * Original inline function in GOOGLE_MAP case.
    */
-  function renderGoogleMapWidget({ figma }: { figma: any }) {
+  function renderGoogleMapWidget({ figma }: { figma: PluginAPI }) {
     const { widget } = figma
     const { AutoLayout } = widget
     return widget.h(AutoLayout, {
@@ -342,7 +342,7 @@ export function setupEmbedWidget({
    * Renders the YouTube embed widget.
    * Original inline function in YOUTUBE case.
    */
-  function renderYouTubeWidget({ figma }: { figma: any }) {
+  function renderYouTubeWidget({ figma }: { figma: PluginAPI }) {
     const { widget } = figma
     const { useSyncedState } = widget
     const [videoURL] = useSyncedState('videoURL', null)
@@ -356,7 +356,7 @@ export function setupEmbedWidget({
    * Renders the generic embed widget.
    * Original inline function in GENERIC case.
    */
-  function renderGenericWidget({ figma }: { figma: any }) {
+  function renderGenericWidget({ figma }: { figma: PluginAPI }) {
     const { widget } = figma
     const { useSyncedState } = widget
     const [embedCodeType] = useSyncedState('embedCodeType', 'url')
@@ -424,7 +424,7 @@ export function setupEmbedWidget({
    * Renders the default embed widget.
    * Original inline function in default case.
    */
-  function renderDefaultWidget({ figma }: { figma: any }) {
+  function renderDefaultWidget({ figma }: { figma: PluginAPI }) {
     return renderEmbedIconFrame({
       figma,
       iconSvgSrc: C,

@@ -20,7 +20,7 @@ import { KeyCodes } from "../905/63728";
 import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { oW } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
 import { fullscreenValue } from "../figma_app/455680";
@@ -328,7 +328,7 @@ function eg({
     addPromptToHistory
   } = _$$a2(er, e => e);
   let [Y] = useState(_$$V(4));
-  let J = atomStoreManager.get(BT);
+  let J = atomStoreManager.get(canvasGridAtom);
   let [en, ea] = useState(eQ());
   let es = useMemo(() => ({
     modelType: m

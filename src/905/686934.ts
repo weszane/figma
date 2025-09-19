@@ -9,7 +9,7 @@ import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
-import { MZ } from "../905/470594";
+import { enqueueNetworkErrorBell } from "../905/470594";
 import { _9, VW, UV, Jw, WU } from "../figma_app/755939";
 let f = "Cooper Template Publish Error";
 let $$_0 = "cooper-template-publish";
@@ -138,7 +138,7 @@ let b = {
         }));
         break;
       case jO.NonS3PresignedPost:
-        MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
+        enqueueNetworkErrorBell(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
         break;
       case jO.NoItemsToPublish:
         dispatch(VisualBellActions.enqueue({

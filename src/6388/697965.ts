@@ -17,7 +17,7 @@ import { lW } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { LU, kG, Hf } from "../figma_app/327588";
+import { getFocusedNodeId, isFullscreenAndInFocusedNodeView, getFocusNodeFunction } from "../figma_app/327588";
 import { tc } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
@@ -442,10 +442,10 @@ function V({
   collapsedStatesDisabled: r = !1
 }) {
   let i = cm();
-  let a = LU();
-  let d = kG();
+  let a = getFocusedNodeId();
+  let d = isFullscreenAndInFocusedNodeView();
   let c = tc();
-  let u = Hf();
+  let u = getFocusNodeFunction();
   let x = function () {
     let e = useAtomWithSubscription(_$$v);
     return useMemo(() => gr(e), [e]);

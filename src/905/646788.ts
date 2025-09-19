@@ -114,7 +114,7 @@ import { R as _$$R2 } from "../905/298004";
 import { WZ } from "../905/893645";
 import { R as _$$R3 } from "../905/11928";
 import { GCV, KdZ, tzJ, ePo } from "../figma_app/6204";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { x as _$$x } from "../905/764527";
@@ -1188,7 +1188,7 @@ let tW = registerModal(function (e) {
           children: getI18nString("confirm_prototype_share_modal.sharing_this_link_will_give_others_direct_access_to_your_prototype")
         }), jsxs("div", {
           className: "confirm_prototype_share_modal--modalBottomSection--N9yAg",
-          children: [getI18nString("confirm_prototype_share_modal.to_be_able_to_share_your_prototypes_separately_from_your_design_files"), " ", jsx(_$$N2, {
+          children: [getI18nString("confirm_prototype_share_modal.to_be_able_to_share_your_prototypes_separately_from_your_design_files"), " ", jsx(Link, {
             href: "#",
             onClick: () => {
               e.team && e.editorType && i(showModalHandler({
@@ -3134,7 +3134,7 @@ let nR = registerModal(function () {
         })
       }), jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
-          children: jsx(_$$N2.Button, {
+          children: jsx(Link.Button, {
             variant: "secondary",
             href: _$$M2,
             newTab: !0,
@@ -3682,7 +3682,7 @@ class rt extends Component {
           children: a ? jsx(Fragment, {
             children: renderI18nText("community.permissions_modal_publish_tab.footer.your_file_has_not_been_published")
           }) : renderI18nText("community.permissions_modal_publish_tab.footer.publish_user_sharing_restricted", {
-            supportSharingRestrictedEmail: jsx(_$$N2, {
+            supportSharingRestrictedEmail: jsx(Link, {
               href: `mailto:${e}`,
               newTab: !0,
               trusted: !0,
@@ -3786,7 +3786,7 @@ class rt extends Component {
             })
           }), jsxs("p", {
             className: mq,
-            children: [e, " ", this.props.editingHubFile && isResourceDelisted(this.props.editingHubFile) ? "" : o, jsx("br", {}), jsx(_$$N2, {
+            children: [e, " ", this.props.editingHubFile && isResourceDelisted(this.props.editingHubFile) ? "" : o, jsx("br", {}), jsx(Link, {
               href: this.props.hubFileHref,
               onClick: this.onHubFileClick,
               trusted: !0,
@@ -3809,7 +3809,7 @@ class rt extends Component {
       }) : jsxs(Fragment, {
         children: [jsxs("p", {
           className: mq,
-          children: [this.props.canPublishError ? this.props.canPublishError : u ? getI18nString("community.permissions_modal_publish_tab.footer.publish_slides_file") : this.props.remixedFrom ? getI18nString("community.permissions_modal_publish_tab.footer.publish_remix") : getI18nString("community.permissions_modal_publish_tab.footer.publish_file_version_no_remix"), jsxs(_$$N2, {
+          children: [this.props.canPublishError ? this.props.canPublishError : u ? getI18nString("community.permissions_modal_publish_tab.footer.publish_slides_file") : this.props.remixedFrom ? getI18nString("community.permissions_modal_publish_tab.footer.publish_remix") : getI18nString("community.permissions_modal_publish_tab.footer.publish_file_version_no_remix"), jsxs(Link, {
             href: this.props.canPublishError ? _$$M2 : u ? "https://help.figma.com/hc/articles/25923960876567" : this.props.remixedFrom ? "https://help.figma.com/hc/articles/360038510693-Guide-to-Figma-Community#Remixes" : "https://help.figma.com/hc/articles/360040035974--Publish-a-File-to-the-Community",
             newTab: !0,
             trusted: !0,
@@ -4493,7 +4493,7 @@ function rD({
             className: Cr,
             children: e.connectedPlanName
           }),
-          connectedProjectLink: jsx(_$$N2, {
+          connectedProjectLink: jsx(Link, {
             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
             newTab: !0,
             children: getI18nString("resource_connection.connected_project_link")

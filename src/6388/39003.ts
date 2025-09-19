@@ -7,7 +7,7 @@ import { a as _$$a } from "../figma_app/234156";
 import { getI18nString } from "../905/303541";
 import { getObservableValue } from "../figma_app/84367";
 import { uy } from "../figma_app/835688";
-import { Bk } from "../figma_app/357367";
+import { canEnterDesignMode } from "../figma_app/357367";
 export function $$h0({
   onToggleMode: e,
   getTooltipShortcut: t,
@@ -16,7 +16,7 @@ export function $$h0({
   modeLabel: p
 }) {
   let g = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
-  let f = Bk();
+  let f = canEnterDesignMode();
   let m = useCallback(t => {
     f && e("design" === t ? SelfDesignType.DESIGN : SelfDesignType.SELF);
   }, [f, e]);

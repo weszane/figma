@@ -8,14 +8,14 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { f3 } from "../figma_app/504640";
 import { fullscreenValue } from "../figma_app/455680";
 import { getSelectedView } from "../figma_app/386952";
-import { getVisibleTheme } from "../905/187165";
+import { getMPVisibleTheme } from "../905/187165";
 import { J } from "../figma_app/391827";
 import { Z } from "../905/224161";
 import { getVisibleTheme } from "../905/640017";
 export function $$_0() {
   let e = "ui3" === getThemeContextOrDefault().version;
   let t = J();
-  let i = getVisibleTheme();
+  let i = getMPVisibleTheme();
   let _ = useSelector(e => e.theme?.enhancedContrast);
   useEffect(() => {
     Qf(_);
@@ -27,7 +27,7 @@ export function $$_0() {
   }, [t, e]);
   let b = y ?? i;
   useEffect(() => {
-    "fullscreen" === A.view && fullscreenValue.isReady() && Fullscreen.setEditorTheme(getVisibleTheme(b) || "");
+    "fullscreen" === A.view && fullscreenValue.isReady() && Fullscreen.setEditorTheme(getMPVisibleTheme(b) || "");
   }, [A.view, b]);
   let v = isChromebookTabbed();
   useEffect(() => {

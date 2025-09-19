@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { languageCodes } from "../905/816253";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
@@ -53,7 +53,7 @@ function O(e) {
     onClose: e.onClose,
     title: renderI18nText("es_es_announcement.title"),
     description: jsxs(Fragment, {
-      children: [r, jsx("br", {}), jsx(_$$N, {
+      children: [r, jsx("br", {}), jsx(Link, {
         href: "https://www.figma.com/figma-ahora-en-espanol/",
         trusted: !0,
         newTab: !0,

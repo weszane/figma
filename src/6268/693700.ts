@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, useState, useRef } from "react";
 import { ManuallyLabeledCheckbox } from "../905/909715";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { o as _$$o } from "../905/89370";
 import { a as _$$a } from "../905/964520";
 import { getFeatureFlags } from "../905/601108";
@@ -501,7 +501,7 @@ function B({
         children: [jsx("div", {
           className: TQ,
           children: H.name
-        }), et && es && jsx(_$$N, {
+        }), et && es && jsx(Link, {
           newTab: !0,
           href: es,
           children: jsx("div", {

@@ -36,7 +36,7 @@ import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A4 } from '../905/408320';
 import { i as _$$i2 } from '../905/415810';
 import { D as _$$D, d as _$$d } from '../905/433403';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -2022,7 +2022,7 @@ function iQ() {
               }(T),
               link: jsx('span', {
                 className: 'overview--learnMoreLink--Yrujk',
-                children: jsx(_$$N, {
+                children: jsx(Link, {
                   href: 'https://help.figma.com/hc/articles/23918228264855',
                   trusted: !0,
                   newTab: !0,

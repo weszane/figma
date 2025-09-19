@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -88,7 +88,7 @@ function T({
     fileName,
     fileKey
   } = e;
-  let o = jsx(N, {
+  let o = jsx(Link, {
     newTab: !0,
     href: `/file/${fileKey}`,
     children: fileName

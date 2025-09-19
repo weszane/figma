@@ -3,7 +3,7 @@ import { useCallback, useRef, useEffect } from "react";
 import { SourceType } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { JT } from "../figma_app/632248";
 import { pP, qy, cT } from "../figma_app/862289";
@@ -52,7 +52,7 @@ export function $$T3(e) {
   let i = useRef(!1);
   return useCallback(() => {
     if (!atomStoreManager.get(openFileKeyAtom)) return;
-    let r = atomStoreManager.get(BT);
+    let r = atomStoreManager.get(canvasGridAtom);
     if (!i.current && 0 === r.flat().length && e.length > 0) {
       i.current = !0;
       let r = e[0];

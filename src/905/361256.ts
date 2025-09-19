@@ -101,7 +101,7 @@ import { Pi } from "../figma_app/580959";
 import { G as _$$G } from "../905/431526";
 import tL from "../vendor/197638";
 import { C as _$$C } from "../905/520159";
-import { rj } from "../905/946258";
+import { FONT_SF_PRO_DISPLAY } from "../905/946258";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { _r } from "../figma_app/451499";
 import { Checkbox } from "../905/274480";
@@ -1141,7 +1141,7 @@ function tQ({
   }, `${e.tag}`);
 }
 let t1 = {
-  [rj]: {
+  [FONT_SF_PRO_DISPLAY]: {
     wdth: !1,
     yaxs: !0
   }

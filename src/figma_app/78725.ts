@@ -5,7 +5,7 @@ import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { mf, YN } from "../figma_app/844435";
+import { createPluginManifestData, useCanRunExtension } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FInheritanceType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
@@ -295,7 +295,7 @@ function L() {
     default:
       a = t.autoRunPrefs?.autoRunPlugin ?? null;
   }
-  let s = a ? mf(a, n ?? "", i ?? "", null) ?? null : null;
+  let s = a ? createPluginManifestData(a, n ?? "", i ?? "", null) ?? null : null;
   return {
     loaded: !0,
     plugin: $$R0(s) ? s : null
@@ -365,7 +365,7 @@ async function M(e, t, r) {
 export function $$F1() {
   let e = isDevHandoffEditorType();
   let t = useCurrentFileKey();
-  let r = YN();
+  let r = useCanRunExtension();
   let n = L();
   let [i, a] = useAtomValueAndSetter(Lx);
   if (!e || i || !n.loaded) return;
@@ -385,7 +385,7 @@ export function $$j2() {
     plugin: null
   };
   let n = e.autoRunPrefs?.autoRunPlugin ?? null;
-  let i = n ? mf(n, r ?? "", null, null) ?? null : null;
+  let i = n ? createPluginManifestData(n, r ?? "", null, null) ?? null : null;
   return {
     loaded: !0,
     plugin: $$R0(i) ? i : null

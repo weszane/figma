@@ -3,7 +3,7 @@ import { Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { useModalManager } from "../905/437088";
@@ -65,7 +65,7 @@ export function $$V0(e) {
   });
 }
 function G() {
-  return jsx(_$$N, {
+  return jsx(Link, {
     href: "https://help.figma.com/hc/articles/360046216313-Upgrade-or-downgrade-your-plan#h_01JN1WZEQ0XHFCM49DXHGJPS7S",
     trusted: !0,
     newTab: !0,
@@ -291,7 +291,7 @@ function H(e) {
           }), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
-              termsOfService: jsx(_$$N, {
+              termsOfService: jsx(Link, {
                 href: "https://www.figma.com/legal/tos/",
                 trusted: !0,
                 newTab: !0,
@@ -308,7 +308,7 @@ function H(e) {
           }), jsx("br", {}), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
-              termsOfService: jsx(_$$N, {
+              termsOfService: jsx(Link, {
                 href: "https://www.figma.com/legal/tos/",
                 trusted: !0,
                 newTab: !0,

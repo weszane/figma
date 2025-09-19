@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import l from "classnames";
@@ -87,7 +87,7 @@ function L({
         className: _$$s.flex.itemsCenter.gap2.maxWFull.$,
         children: jsx("div", {
           className: "ui_kit_select--uiKitName--ZMf0J ellipsis--ellipsis--Tjyfa",
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             newTab: !0,
             href: h,
             onClick: u,
@@ -219,7 +219,7 @@ function j({
       children: [jsx("div", {
         className: "empty_states--ui3EmptyStateSubtitle---Yamk",
         children: renderI18nText("design_systems.assets_panel.empty_state_subtitle_ui3")
-      }), jsx(_$$N, {
+      }), jsx(Link, {
         newTab: !0,
         trusted: !0,
         href: "https://help.figma.com/hc/articles/360038662654",

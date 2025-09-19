@@ -1,57 +1,131 @@
-import { getFeatureFlags } from "../905/601108";
-import { debugState } from "../905/407919";
-import { getRequest } from "../905/910117";
-import { z } from "../905/751771";
-export let $$o0 = new class {
+import { debugState } from '../905/407919'
+import { getFeatureFlags } from '../905/601108'
+import { parseAndRemoveSourceMapComments } from '../905/751771'
+import { getRequest } from '../905/910117'
+
+/**
+ * Handles plugin code caching and refreshing logic.
+ * Original class: $$o0
+ */
+export class PluginCodeCache {
+  private cache: Record<string, any>
+  private requestsInFlight: Record<string, Promise<any>>
+
   constructor() {
-    this.forceRefresh = (e, t, i) => {
-      if (!t.redirect_code_url) return Promise.reject(Error("Invalid code download url"));
-      let o = "";
-      let l = debugState.getState();
-      let d = {
-        version_id: t.id,
-        file_key: l.openFile?.key || ""
-      };
-      if (i && (d.org_id = i), getFeatureFlags().plugins_remove_syntax_checking) {
-        let i = getRequest(t.redirect_code_url, d, {
-          raw: !0
-        }).then(({
-          data: t
-        }) => (delete this.requestsInFlight[e], this.cache[e] = t, t)).catch(t => {
-          delete this.requestsInFlight[e];
-          return t;
-        });
-        this.requestsInFlight[e] = i;
-        return i;
-      }
-      let c = getRequest(t.redirect_code_url, d, {
-        raw: !0
-      }).then(({
-        data: e
-      }) => (o = e, z(o))).then(t => {
-        if (!t.success) throw Error("code is not valid javascript");
-        delete this.requestsInFlight[e];
-        this.cache[e] = o;
-        return o;
-      }).catch(t => {
-        delete this.requestsInFlight[e];
-        return t;
-      });
-      this.requestsInFlight[e] = c;
-      return c;
-    };
-    this.getAndCache = (e, t) => {
-      let i = this.getPluginVersionOrEmptyVersionHash(e);
-      return i ? i in this.cache ? Promise.resolve(this.cache[i]) : i in this.requestsInFlight ? this.requestsInFlight[i] : this.forceRefresh(i, e, t) : Promise.resolve(null);
-    };
-    this.clearCache = () => {
-      this.cache = Object.create(null);
-      this.requestsInFlight = Object.create(null);
-    };
-    this.clearCache();
+    this.clearCache()
   }
-  getPluginVersionOrEmptyVersionHash(e) {
-    return e && e.id && e.plugin_id ? `${e.plugin_id}:${e.id}` : null;
+
+  /**
+   * Generates a unique version hash for a plugin version.
+   * Original method: getPluginVersionOrEmptyVersionHash
+   * @param pluginVersion Plugin version object
+   * @returns Version hash string or null
+   */
+  getPluginVersionOrEmptyVersionHash(pluginVersion: { id?: string, plugin_id?: string }): string | null {
+    return pluginVersion && pluginVersion.id && pluginVersion.plugin_id
+      ? `${pluginVersion.plugin_id}:${pluginVersion.id}`
+      : null
   }
-}();
-export const F = $$o0; 
+
+  /**
+   * Forces refresh of plugin code and caches the result.
+   * Original method: forceRefresh
+   * @param versionHash Unique version hash
+   * @param pluginVersion Plugin version object
+   * @param orgId Optional organization ID
+   * @returns Promise resolving to plugin code or error
+   */
+  async forceRefresh(
+    versionHash: string,
+    pluginVersion: { id?: string, redirect_code_url?: string },
+    orgId?: string,
+  ): Promise<any> {
+    if (!pluginVersion.redirect_code_url) {
+      return Promise.reject(new Error('Invalid code download url'))
+    }
+
+    let code = ''
+    const state = debugState.getState()
+    const requestData: Record<string, any> = {
+      version_id: pluginVersion.id,
+      file_key: state.openFile?.key || '',
+    }
+    if (orgId) {
+      requestData.org_id = orgId
+    }
+
+    // Feature flag: plugins_remove_syntax_checking
+    if (getFeatureFlags().plugins_remove_syntax_checking) {
+      const requestPromise = getRequest(pluginVersion.redirect_code_url, requestData, { raw: true })
+        .then(({ data }) => {
+          delete this.requestsInFlight[versionHash]
+          this.cache[versionHash] = data
+          return data
+        })
+        .catch((error) => {
+          delete this.requestsInFlight[versionHash]
+          return error
+        })
+      this.requestsInFlight[versionHash] = requestPromise
+      return requestPromise
+    }
+
+    // Default code fetch with syntax checking
+    const requestPromise = getRequest(pluginVersion.redirect_code_url, requestData, { raw: true })
+      .then(({ data }: { data: any }) => {
+        code = data
+        return parseAndRemoveSourceMapComments(code)
+      })
+      .then((result) => {
+        if (!result.success)
+          throw new Error('code is not valid javascript')
+        delete this.requestsInFlight[versionHash]
+        this.cache[versionHash] = code
+        return code
+      })
+      .catch((error) => {
+        delete this.requestsInFlight[versionHash]
+        return error
+      })
+
+    this.requestsInFlight[versionHash] = requestPromise
+    return requestPromise
+  }
+
+  /**
+   * Gets plugin code from cache or fetches and caches it.
+   * Original method: getAndCache
+   * @param pluginVersion Plugin version object
+   * @param orgId Optional organization ID
+   * @returns Promise resolving to plugin code or null
+   */
+  getAndCache(
+    pluginVersion: { id?: string, plugin_id?: string, redirect_code_url?: string },
+    orgId?: string,
+  ): Promise<any> {
+    const versionHash = this.getPluginVersionOrEmptyVersionHash(pluginVersion)
+    if (!versionHash)
+      return Promise.resolve(null)
+
+    if (versionHash in this.cache) {
+      return Promise.resolve(this.cache[versionHash])
+    }
+    if (versionHash in this.requestsInFlight) {
+      return this.requestsInFlight[versionHash]
+    }
+    return this.forceRefresh(versionHash, pluginVersion, orgId)
+  }
+
+  /**
+   * Clears the plugin code cache and requests in flight.
+   * Original method: clearCache
+   */
+  clearCache(): void {
+    this.cache = Object.create(null)
+    this.requestsInFlight = Object.create(null)
+  }
+}
+
+// Export refactored instance and alias
+export const setupPluginCodeCache = new PluginCodeCache()
+export const F = setupPluginCodeCache

@@ -5,7 +5,7 @@ import { assertNotNullish } from "../figma_app/95419";
 import { ScreenReaderOnly } from "../905/172252";
 import l from "../vendor/524488";
 import { getI18nString } from "../905/303541";
-import { QZ } from "../figma_app/844435";
+import { isEditorTypeSupported } from "../figma_app/844435";
 import { o3, nt } from "../905/226610";
 import { Jc } from "../905/946805";
 var d = l;
@@ -60,7 +60,7 @@ export function $$f1({
   resultsCount: a
 }) {
   let o = o3(nt.quickActionsA11y);
-  let l = QZ();
+  let l = isEditorTypeSupported();
   let {
     setState
   } = assertNotNullish(useContext(h), "Must call `useSubscribedLibraries` from within <UpdateQuickActionsScreenReaderStatusContext>");

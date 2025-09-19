@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { cW, Be, $1 } from "../figma_app/844435";
+import { usePublishedPlugins, useInstalledPluginsAndWidgets, getLocalPlugins } from "../figma_app/844435";
 import { getPluginVersion, isDevWithOnlyCodegen, getFullscreenViewEditorType } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
 import { r as _$$r } from "../905/319631";
@@ -18,11 +18,11 @@ export function $$$$p1(e, t, a) {
     selectedView: e.selectedView
   }));
   let h = useDispatch();
-  let x = cW()[e];
+  let x = usePublishedPlugins()[e];
   let b = getPluginVersion(x);
-  let v = Be();
+  let v = useInstalledPluginsAndWidgets();
   let f = v.plugins[e] || v.orgPlugins[e] || b;
-  let j = Object.values($1()).find(t => t.plugin_id === e);
+  let j = Object.values(getLocalPlugins()).find(t => t.plugin_id === e);
   let y = j?.manifest.menu && j.manifest.menu.length > 0 && !isDevWithOnlyCodegen(j) ? z(j.manifest.menu, j) : [];
   let w = f.manifest.menu && f.manifest.menu.length > 0 && !isDevWithOnlyCodegen(f) ? z(f.manifest.menu, f) : [];
   let k = jv(w.map(e => q(e, e => () => t(e))), {
@@ -84,7 +84,7 @@ export function $$$$p1(e, t, a) {
 export function $$g0(e, t) {
   let a = useSelector(e => e.mirror.appModel);
   let s = useSelector(e => e.selectedView);
-  let i = cW()[e];
+  let i = usePublishedPlugins()[e];
   let r = getPluginVersion(i);
   let d = r.manifest.menu && r.manifest.menu.length > 0 ? z(r.manifest.menu, r) : [];
   return jv(d.map(e => q(e, e => () => t(e))), {

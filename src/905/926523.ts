@@ -1,117 +1,182 @@
-import { XHR } from "../905/910117";
-import { getI18nString } from "../905/303541";
-import { resolveMessage } from "../905/231762";
-import { putCommunityProfile, clearCommunityProfile, addAuthedCommunityProfileToHub } from "../905/890368";
-import { VisualBellActions } from "../905/302958";
-import { refreshSessionState } from "../figma_app/976345";
-import { createOptimistThunk } from "../905/350402";
-import { setupLoadingStateHandler } from "../905/696711";
-let $$u3 = putCommunityProfile;
-let $$p4 = clearCommunityProfile;
-let $$m2 = addAuthedCommunityProfileToHub;
-let $$h1 = createOptimistThunk((e, {
-  email: t,
-  profileId: i,
-  userId: s
-}, {
-  loadingKey: l
-}) => {
-  let d = XHR.post(`/api/profile/${i}/primary_user`, {
-    new_primary_user_id: s
-  });
-  setupLoadingStateHandler(d, e, l);
-  d.then(({
-    data: i
-  }) => {
-    e.dispatch($$u3(i.meta));
-    e.dispatch(VisualBellActions.enqueue({
-      error: !1,
-      type: "profile-merge-update",
-      message: getI18nString("community.actions.your_profile_s_primary_email_was_set_to_email", {
-        email: t
+import { resolveMessage } from '../905/231762'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { createOptimistThunk } from '../905/350402'
+import { setupLoadingStateHandler } from '../905/696711'
+import { addAuthedCommunityProfileToHub, clearCommunityProfile, putCommunityProfile } from '../905/890368'
+import { XHR } from '../905/910117'
+import { refreshSessionState } from '../figma_app/976345'
+
+/**
+ * Types for profile actions
+ */
+interface ChangePrimaryUserParams {
+  email: string
+  profileId: string
+  userId: string
+}
+
+interface RemoveUserParams {
+  email: string
+  profileId: string
+  userId: string
+}
+
+interface MergeProfileParams {
+  primaryUserId: string
+  secondaryUserId: string
+}
+
+interface OptimistThunkMeta {
+  loadingKey: string
+}
+
+/**
+ * Change the primary user of a community profile.
+ * Original: $$h1
+ */
+export const changeCommunityProfilePrimaryUser = createOptimistThunk(
+  (
+    dispatchContext,
+    { email, profileId, userId }: ChangePrimaryUserParams,
+    { loadingKey }: OptimistThunkMeta,
+  ) => {
+    const request = XHR.post(`/api/profile/${profileId}/primary_user`, {
+      new_primary_user_id: userId,
+    })
+    setupLoadingStateHandler(request, dispatchContext, loadingKey)
+
+    request
+      .then(({ data }) => {
+        dispatchContext.dispatch(putCommunityProfile(data.meta))
+        dispatchContext.dispatch(
+          VisualBellActions.enqueue({
+            error: false,
+            type: 'profile-merge-update',
+            message: getI18nString(
+              'community.actions.your_profile_s_primary_email_was_set_to_email',
+              { email },
+            ),
+          }),
+        )
       })
-    }));
-  }).catch(t => {
-    let i = resolveMessage(t);
-    i && e.dispatch(VisualBellActions.enqueue({
-      error: !0,
-      type: "profile-merge-update",
-      message: i
-    }));
-  });
-}, ({
-  profileId: e
-}) => `COMMUNITY_HUB_CHANGE_COMMUNITY_PROFILE_PRIMARY_USER_${e}`);
-let $$g0 = createOptimistThunk((e, {
-  email: t,
-  profileId: i,
-  userId: s
-}, {
-  loadingKey: d
-}) => {
-  let p = XHR.del(`/api/profile/${i}/user`, {
-    secondary_user_id: s
-  });
-  setupLoadingStateHandler(p, e, d);
-  p.then(({
-    data: i
-  }) => {
-    e.dispatch($$u3(i.meta));
-    e.dispatch(VisualBellActions.enqueue({
-      error: !1,
-      type: "profile-merge-update",
-      message: getI18nString("community.actions.email_was_removed_from_your_profile", {
-        email: t
+      .catch((error) => {
+        const message = resolveMessage(error)
+        if (message) {
+          dispatchContext.dispatch(
+            VisualBellActions.enqueue({
+              error: true,
+              type: 'profile-merge-update',
+              message,
+            }),
+          )
+        }
       })
-    }));
-    e.dispatch(refreshSessionState());
-  }).catch(t => {
-    let i = resolveMessage(t);
-    i && e.dispatch(VisualBellActions.enqueue({
-      error: !0,
-      type: "profile-merge-update",
-      message: i
-    }));
-  });
-}, ({
-  profileId: e
-}) => `COMMUNITY_HUB_REMOVE_COMMUNITY_PROFILE_USER_${e}`);
-let $$f5 = createOptimistThunk((e, {
-  primaryUserId: t,
-  secondaryUserId: i
-}, {
-  loadingKey: s
-}) => {
-  let d = XHR.post("/api/profile/merge", {
-    primary_user_id: t,
-    secondary_user_id: i
-  });
-  setupLoadingStateHandler(d, e, s);
-  d.then(({
-    data: t
-  }) => {
-    e.dispatch($$u3(t.meta));
-    e.dispatch(VisualBellActions.enqueue({
-      type: "profile-merge-update",
-      message: getI18nString("community.actions.new_profile_connection_added")
-    }));
-    e.dispatch(refreshSessionState());
-  }).catch(t => {
-    let i = resolveMessage(t);
-    i && e.dispatch(VisualBellActions.enqueue({
-      error: !0,
-      type: "profile-merge-update",
-      message: getI18nString("community.actions.failed_to_merge_msg", {
-        msg: i
+  },
+  ({ profileId }: ChangePrimaryUserParams) =>
+    `COMMUNITY_HUB_CHANGE_COMMUNITY_PROFILE_PRIMARY_USER_${profileId}`,
+)
+
+/**
+ * Remove a user from a community profile.
+ * Original: $$g0
+ */
+export const removeCommunityProfileUser = createOptimistThunk(
+  (
+    dispatchContext,
+    { email, profileId, userId }: RemoveUserParams,
+    { loadingKey }: OptimistThunkMeta,
+  ) => {
+    const request = XHR.del(`/api/profile/${profileId}/user`, {
+      secondary_user_id: userId,
+    })
+    setupLoadingStateHandler(request, dispatchContext, loadingKey)
+
+    request
+      .then(({ data }) => {
+        dispatchContext.dispatch(putCommunityProfile(data.meta))
+        dispatchContext.dispatch(
+          VisualBellActions.enqueue({
+            error: false,
+            type: 'profile-merge-update',
+            message: getI18nString(
+              'community.actions.email_was_removed_from_your_profile',
+              { email },
+            ),
+          }),
+        )
+        dispatchContext.dispatch(refreshSessionState())
       })
-    }));
-  });
-}, ({
-  secondaryUserId: e
-}) => `COMMUNITY_HUB_ADD_COMMUNITY_PROFILE_USER_${e}`);
-export const G0 = $$g0;
-export const Gu = $$h1;
-export const HZ = $$m2;
-export const Oo = $$u3;
-export const cr = $$p4;
-export const n7 = $$f5;
+      .catch((error) => {
+        const message = resolveMessage(error)
+        if (message) {
+          dispatchContext.dispatch(
+            VisualBellActions.enqueue({
+              error: true,
+              type: 'profile-merge-update',
+              message,
+            }),
+          )
+        }
+      })
+  },
+  ({ profileId }: RemoveUserParams) =>
+    `COMMUNITY_HUB_REMOVE_COMMUNITY_PROFILE_USER_${profileId}`,
+)
+
+/**
+ * Merge two community profiles.
+ * Original: $$f5
+ */
+export const mergeCommunityProfiles = createOptimistThunk(
+  (
+    dispatchContext,
+    { primaryUserId, secondaryUserId }: MergeProfileParams,
+    { loadingKey }: OptimistThunkMeta,
+  ) => {
+    const request = XHR.post('/api/profile/merge', {
+      primary_user_id: primaryUserId,
+      secondary_user_id: secondaryUserId,
+    })
+    setupLoadingStateHandler(request, dispatchContext, loadingKey)
+
+    request
+      .then(({ data }) => {
+        dispatchContext.dispatch(putCommunityProfile(data.meta))
+        dispatchContext.dispatch(
+          VisualBellActions.enqueue({
+            type: 'profile-merge-update',
+            message: getI18nString(
+              'community.actions.new_profile_connection_added',
+            ),
+          }),
+        )
+        dispatchContext.dispatch(refreshSessionState())
+      })
+      .catch((error) => {
+        const message = resolveMessage(error)
+        if (message) {
+          dispatchContext.dispatch(
+            VisualBellActions.enqueue({
+              error: true,
+              type: 'profile-merge-update',
+              message: getI18nString(
+                'community.actions.failed_to_merge_msg',
+                { msg: message },
+              ),
+            }),
+          )
+        }
+      })
+  },
+  ({ secondaryUserId }: MergeProfileParams) =>
+    `COMMUNITY_HUB_ADD_COMMUNITY_PROFILE_USER_${secondaryUserId}`,
+)
+
+// Export aliases for backward compatibility
+export const G0 = removeCommunityProfileUser // $$g0
+export const Gu = changeCommunityProfilePrimaryUser // $$h1
+export const n7 = mergeCommunityProfiles // $$f5
+export const HZ = addAuthedCommunityProfileToHub
+export const Oo = putCommunityProfile
+export const cr = clearCommunityProfile

@@ -21,7 +21,7 @@ import { setupHyperlinkHandler } from '../figma_app/815170'
  */
 export function setupDefaultEmbedWidget({
   figma: figmaApi,
-}: { figma: any }): JSX.Element {
+}: { figma: PluginAPI }): JSX.Element {
   const { widget } = figmaApi
   const { Frame, AutoLayout, SVG, Text } = t
 
@@ -270,17 +270,11 @@ export enum embedWidgetMenuActions {
  * @param {object} params - The parameters object.
  * @param {any} params.figma - The figma API object.
  */
-export function registerEmbedWidget({ figma }: { figma: any }) {
+export function registerEmbedWidget({ figma }: { figma: PluginAPI }) {
   const { widget } = figma
   const { Frame, AutoLayout } = t
 
-  /**
-   * Renders the appropriate embed widget version.
-   * Original function name: _
-   * @param {string} embedVersionId
-   * @returns {JSX.Element}
-   */
-  function renderEmbedWidgetVersion(embedVersionId: string): JSX.Element {
+  function renderEmbedWidgetVersion(embedVersionId: string) {
     switch (embedVersionId) {
       case jU.EMBED_VERSION_ID_V0:
         return setupDefaultEmbedWidget({ figma })
@@ -291,14 +285,7 @@ export function registerEmbedWidget({ figma }: { figma: any }) {
     }
   }
 
-  /**
-   * Renders the V1 embed widget UI.
-   * Original inline function for V1.
-   * @param {object} params
-   * @param {any} params.figma
-   * @returns {JSX.Element}
-   */
-  function renderEmbedWidgetV1({ figma }: { figma: any }): JSX.Element {
+  function renderEmbedWidgetV1({ figma }: { figma: PluginAPI }) {
     const { widget: _widget } = figma
     const { Frame: _Frame, AutoLayout: _AutoLayout, SVG, Text } = t
 

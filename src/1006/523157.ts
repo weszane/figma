@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { PluginAction } from "../905/15667";
 import { Yo } from "../figma_app/543529";
-import { V2 } from "../figma_app/844435";
+import { useCanRunExtensions } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
@@ -203,7 +203,7 @@ export function $$F0() {
   let a = Yo();
   let p = useCurrentFileKey();
   let C = useRef(new _$$O(_$$A.duration(1, "day")));
-  let T = V2();
+  let T = useCanRunExtensions();
   let I = useDispatch();
   let D = e => I(af({
     id: e,

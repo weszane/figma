@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { getFeatureFlags } from "../905/601108";
 import { isDesktopVersionDisabled, isUnsupportedMacVersion } from "../figma_app/876459";
@@ -30,7 +30,7 @@ export function $$h0() {
         children: jsxs("div", {
           className: p,
           children: [renderI18nText("unsupported_browser_modal.os_not_supported.description", {
-            figmaWebLink: jsx(N, {
+            figmaWebLink: jsx(Link, {
               newTab: !0,
               href: "https://www.figma.com",
               trusted: !0,
@@ -39,7 +39,7 @@ export function $$h0() {
           }), jsx("div", {
             className: jE,
             children: renderI18nText("unsupported_browser_modal.os_not_supported.browser_recommendation", {
-              firefoxLink: jsx(N, {
+              firefoxLink: jsx(Link, {
                 newTab: !0,
                 href: "https://www.mozilla.org/en-US/firefox/new/",
                 trusted: !0,
@@ -62,7 +62,7 @@ export function $$h0() {
         children: jsx("div", {
           className: p,
           children: renderI18nText("desktop_update_modal.desktop_update.description", {
-            downloadsPageLink: jsx(N, {
+            downloadsPageLink: jsx(Link, {
               newTab: !0,
               href: "/downloads",
               trusted: !0,

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
@@ -49,7 +49,7 @@ export function $$C2(e) {
   };
   let w = CorePerfInfo?.getHeapMemoryMode() === DocumentMode.RECOVERY;
   let O = r || w ? "showReload" : BrowserInfo.isWasm4gbSupported ? "showRecoveryMode" : "showBrowserUpgradeAndDesktop";
-  let R = jsx(_$$N, {
+  let R = jsx(Link, {
     href: BrowserInfo.mac ? "/download/desktop/mac" : "/download/desktop/win",
     newTab: !0,
     children: renderI18nText("memory_warning_modal.desktop_app_download_link")
@@ -102,7 +102,7 @@ export function $$C2(e) {
           }) : L.contentCTA, jsx("br", {})]
         }), jsxs("div", {
           className: v0,
-          children: [L.secondaryButtonCTA && L.secondaryButtonExternalLink && jsx(_$$N.Button, {
+          children: [L.secondaryButtonCTA && L.secondaryButtonExternalLink && jsx(Link.Button, {
             onClick: () => {
               L.secondaryButtonCTA === getI18nString("memory_warning_modal.learn_more") && $$A0({
                 warningEvent: "LEARN_MORE",
@@ -118,7 +118,7 @@ export function $$C2(e) {
             children: L.secondaryButtonCTA
           }), jsx("div", {
             className: pL,
-            children: L.buttonExternalLink ? jsx(_$$N.Button, {
+            children: L.buttonExternalLink ? jsx(Link.Button, {
               variant: "primary",
               href: L.buttonExternalLink,
               newTab: !0,

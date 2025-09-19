@@ -1,12 +1,12 @@
 import { um, atom, setupAtomWithMount, atomStoreManager } from "../figma_app/27355";
 import { getStorage } from "../905/657224";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { YI, P$ } from "../figma_app/152368";
+import { padTime, getTimeRemaining } from "../figma_app/152368";
 function o() {
   let e = getStorage().get("last-timer-set-time") || 180;
   return {
-    seconds: YI(e % 60),
-    minutes: YI(Math.floor(e / 60)),
+    seconds: padTime(e % 60),
+    minutes: padTime(Math.floor(e / 60)),
     lastUsedTime: e,
     isStopping: !1,
     lastAction: {
@@ -58,7 +58,7 @@ let $$l0 = um(o(), (e, t) => {
 });
 let $$d2 = createReduxSubscriptionAtomWithState(e => e.timer);
 let c = atom({});
-let $$u1 = setupAtomWithMount(atom(e => (e(c), Math.max(0, Math.ceil(P$(e($$d2).time) / 1e3))), (e, t, r) => {
+let $$u1 = setupAtomWithMount(atom(e => (e(c), Math.max(0, Math.ceil(getTimeRemaining(e($$d2).time) / 1e3))), (e, t, r) => {
   t(c, {});
 }), ({
   setSelf: e

@@ -5,7 +5,7 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { getProductPriceString } from "../figma_app/808294";
 import { hN } from "../figma_app/248118";
-import { Rm } from "../figma_app/86989";
+import { checkResourceEligibilityDebug } from "../figma_app/86989";
 import { M } from "../figma_app/170366";
 import { canPerformAction } from "../figma_app/12796";
 import { isDevModePlugin, isSingleDevWithCodegen, canRunPlugin, isSamePlugin, isValidForFullscreenView, getMissingEditorTypeError, formatPluginName, getPluginsMenuOpenDirectory } from "../figma_app/300692";
@@ -44,7 +44,7 @@ function C(e, t, i) {
   if (!u) return h;
   for (let a of e) if (!(hasLocalFileId(a) || isDevModePlugin(a) && isSingleDevWithCodegen(a))) try {
     let e = publishedPlugins[a.plugin_id];
-    if (hasMonetizedResourceMetadata(e) && Rm(e)) {
+    if (hasMonetizedResourceMetadata(e) && checkResourceEligibilityDebug(e)) {
       if (!i.showUnpurchased) continue;
       h.push({
         type: "run-menu-action",

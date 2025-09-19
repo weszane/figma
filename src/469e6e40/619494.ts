@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { copyTextToClipboard } from "../figma_app/623293";
@@ -49,7 +49,7 @@ function j(e) {
             children: e
           }, e))
         }),
-        contactSupport: jsx(N, {
+        contactSupport: jsx(Link, {
           href: `mailto:${getSupportEmail()}`,
           children: renderI18nText("org_settings.sso.contact_support")
         })
@@ -142,7 +142,7 @@ function j(e) {
     children: [jsx("p", {
       className: wz,
       children: renderI18nText("org_settings.sso.saml_sso_description", {
-        helpArticle: jsx(N, {
+        helpArticle: jsx(Link, {
           href: "https://help.figma.com/hc/articles/360040532333",
           newTab: !0,
           children: renderI18nText("org_settings.sso.help_article")

@@ -28,7 +28,7 @@ import { R as _$$R } from "../905/792510";
 import { W as _$$W } from "../905/841666";
 import { Lj } from "../figma_app/835219";
 import { buildFullCommunityUrl, getCurrentVersion } from "../figma_app/471982";
-import { BT } from "../905/618447";
+import { canvasGridAtom } from "../905/618447";
 import { rY } from "../figma_app/524655";
 import { decimalToPercent } from "../figma_app/808294";
 import { gH } from "../905/104173";
@@ -105,7 +105,7 @@ import { A as _$$A19 } from "../svg/619883";
 var n;
 var g = h;
 async function M() {
-  return await Promise.all(rY(atomStoreManager.get(BT)).map(e => scheduler.postTask(() => function (e) {
+  return await Promise.all(rY(atomStoreManager.get(canvasGridAtom)).map(e => scheduler.postTask(() => function (e) {
     let [t, i] = Thumbnail.generateThumbnailForNode(e, SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight(), 1, {
       useAbsoluteBounds: !0
     });

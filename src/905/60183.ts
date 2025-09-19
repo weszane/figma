@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { x } from "../905/811596";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
@@ -62,7 +62,7 @@ export let $$f0 = forwardRef(function ({
       profileHandleField: e
     }),
     subLabel: jsxs("span", {
-      children: [getI18nString("community.change_profile_handle_modal.review_our_community_guidelines_link"), " ", jsx(N, {
+      children: [getI18nString("community.change_profile_handle_modal.review_our_community_guidelines_link"), " ", jsx(Link, {
         href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         trusted: !0,
         newTab: !0,

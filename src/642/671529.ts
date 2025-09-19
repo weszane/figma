@@ -15,7 +15,7 @@ import { KeyCodes } from "../905/63728";
 import { k as _$$k2 } from "../905/582200";
 import { V as _$$V } from "../905/506207";
 import { getI18nState } from "../figma_app/363242";
-import { CA } from "../figma_app/327588";
+import { isFullscreenDesignModeNotFocused } from "../figma_app/327588";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
 import { hasCmsCollection } from "../figma_app/618433";
@@ -41,7 +41,7 @@ import { zK, zM, lk } from "../905/182453";
 import { P as _$$P } from "../905/347284";
 import { B7 } from "../figma_app/144692";
 import { iP } from "../figma_app/803054";
-import { s4 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { useHandleFocusEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -66,7 +66,7 @@ import { Ao } from "../905/748636";
 import { FY, lf, Lp, Ph, ux, KE, eu as _$$eu, eh as _$$eh, By, w1, gq, jG, Mf, yR, iV, A7, tq, wR, qq, R as _$$R, dn, Fo, Ar, K8, ew as _$$ew, Jq, IV } from "../figma_app/386160";
 import { At as _$$At } from "../905/973142";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { b as _$$b2 } from "../905/217163";
 import { Zk, fI } from "../figma_app/626177";
 import { logError } from "../905/714362";
@@ -294,7 +294,7 @@ function ev({
       children: jsx(fI, {
         children: jsx("div", {
           className: lf,
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             newTab: !0,
             href: l,
             trusted: !0,
@@ -333,7 +333,7 @@ function eS({
     });
   }
   let m = normalizeValue(u);
-  let g = valueOrFallback(p, s4.NONE);
+  let g = valueOrFallback(p, StyleType.NONE);
   if (null === m) return null;
   let f = !compareLibraryItemWithKey(d.style, s);
   let x = sessionLocalIDToString(m);
@@ -805,7 +805,7 @@ function e4({
   let K = R;
   let V = _$$q();
   let U = useIsSelectedViewFullscreenCooper();
-  let z = CA();
+  let z = isFullscreenDesignModeNotFocused();
   U && x && (K = !1);
   let W = useAppModelProperty("showUi");
   let $ = useCurrentFileKey();
@@ -920,7 +920,7 @@ function e6({
   width: s
 }) {
   let n = _$$e();
-  let i = CA();
+  let i = isFullscreenDesignModeNotFocused();
   let l = getObservableValue(UK().renderRulers, !1);
   let a = _$$T();
   return jsx(lY, {

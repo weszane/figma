@@ -5,7 +5,7 @@ import i, { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/53857";
 import { ButtonPrimitive } from "../905/632989";
@@ -735,7 +735,7 @@ function eR({
         children: e.component
       }), jsxs("div", {
         className: "component_browser_mapping_panel--source--O7O4N",
-        children: [getI18nString("dev_handoff.component_browser_mapping_panel.sourceLink"), jsx(_$$N, {
+        children: [getI18nString("dev_handoff.component_browser_mapping_panel.sourceLink"), jsx(Link, {
           newTab: !0,
           href: e.source,
           children: e.source
@@ -761,7 +761,7 @@ export function $$eD1({
 function ek({
   notConnected: e
 }) {
-  let t = jsx(_$$N, {
+  let t = jsx(Link, {
     href: "https://www.figma.com/code-connect-docs/",
     "aria-label": getI18nString("dev_handoff.figmadocs.learn_more"),
     trusted: !0,
@@ -948,7 +948,7 @@ function eW({
     className: "figmadocs--fileLinkWrapper--UCOD2",
     "data-tooltip": o,
     "data-tooltip-type": KindEnum.TEXT,
-    children: jsx(_$$N, {
+    children: jsx(Link, {
       href: e,
       newTab: !0,
       children: jsxs("div", {

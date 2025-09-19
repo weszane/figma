@@ -15,7 +15,7 @@ import { N as _$$N } from "../905/949295";
 import { SelectedViewPathManager } from "../905/870666";
 import { ym, qV as _$$qV } from "../figma_app/818609";
 import { _s, I8, om, c4, $_ } from "../figma_app/198387";
-import { YI, P$, FR } from "../figma_app/152368";
+import { padTime, getTimeRemaining, shouldShowTimerOnLeft } from "../figma_app/152368";
 import { D } from "../905/80656";
 import { createOptimistThunk } from "../905/350402";
 function S(e) {
@@ -28,8 +28,8 @@ export function $$v43(e, t, r) {
   let a = r ? (n = function (e) {
     let t = Math.max(0, e);
     let r = t % 60;
-    let n = YI((t - r) / 60);
-    return `${n}:${YI(r)}`;
+    let n = padTime((t - r) / 60);
+    return `${n}:${padTime(r)}`;
   }(r), `${n} \u2013 `) : "";
   hL(i, mapFileTypeToEditorType(e.editor_type), a);
 }
@@ -209,7 +209,7 @@ let $$ee7 = createOptimistThunk((e, t) => {
     time
   } = e.getState().timer;
   if (time && time.totalTimeMs > 0) {
-    let n = P$(time);
+    let n = getTimeRemaining(time);
     e.dispatch(eu({
       eventName: "update-timer-song-id",
       totalTimeMs: time.totalTimeMs,
@@ -243,8 +243,8 @@ let $$es32 = createActionCreator("SET_TIMER_NOTIFICATION");
 let $$eo13 = createActionCreator("SET_TIMER_AUDIO_ENABLED");
 let $$el10 = createActionCreator("SET_TIMER_MODAL");
 let $$ed34 = createOptimistThunk((e, t) => {
-  if ("open" === t.state && FR() && D(() => {
-    let t = FR();
+  if ("open" === t.state && shouldShowTimerOnLeft() && D(() => {
+    let t = shouldShowTimerOnLeft();
     e.getState().timer?.modalState === "open" && t && e.dispatch($$ed34({
       state: "closed",
       userInitiated: !1
@@ -321,7 +321,7 @@ let $$eg18 = createOptimistThunk((e, t) => {
   e.dispatch(eu({
     eventName: "adjust-timer",
     totalTimeMs: t.timer.totalTimeMs + t.deltaMs,
-    timeRemainingMs: P$(t.timer) + t.deltaMs,
+    timeRemainingMs: getTimeRemaining(t.timer) + t.deltaMs,
     isPaused: t.timer.isPaused,
     songID: r,
     lastReceivedSongTimestampMs: t.timer.lastReceivedSongTimestampMs
@@ -329,7 +329,7 @@ let $$eg18 = createOptimistThunk((e, t) => {
   _$$d.timerChange("timeradjust");
 });
 let $$ef21 = createOptimistThunk((e, t) => {
-  let r = P$(t);
+  let r = getTimeRemaining(t);
   let n = $$A15(t);
   let i = e.getState().timer.selectedSongID;
   let a = function (e) {

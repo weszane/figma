@@ -19,7 +19,7 @@ import { y as _$$y } from "../905/76789";
 import { Lg, Lq } from "../figma_app/392626";
 import { B as _$$B3 } from "../905/900597";
 import { IconButton } from "../905/443068";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { Hg, Bs } from "../905/672745";
@@ -182,7 +182,7 @@ let Y = registerModal(function (e) {
                     children: [getI18nString("resource_connection.num_members", {
                       count: v
                     }), " \xb7\xa0"]
-                  }), jsx(_$$N, {
+                  }), jsx(Link, {
                     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD8C3M4MDEVKBHAFEQ",
                     children: getI18nString("resource_connection.host")
                   })]

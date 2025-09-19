@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
@@ -58,12 +58,12 @@ export function $$$$_1(e) {
   return jsx("span", {
     className: c,
     children: s ? renderI18nText("whiteboard.inserts.if_you_re_still_looking_there_s_much_more_to_see_in_the", {
-      link: jsx(N, {
+      link: jsx(Link, {
         href: e.url,
         newTab: !0,
         children: renderI18nText("whiteboard.inserts.if_you_re_still_looking_there_s_much_more_to_see_in_the_community")
       })
-    }) : jsx(N, {
+    }) : jsx(Link, {
       href: e.url,
       newTab: !0,
       children: renderI18nText("whiteboard.inserts.see_more_from_community")

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { SchemaJoinStatus } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
@@ -191,7 +191,7 @@ function M(e) {
           children: i.description
         }), jsxs("div", {
           className: "merge_error_modal--buttonRow--Im07r",
-          children: [secondaryLinkButton && jsx(_$$N.Button, {
+          children: [secondaryLinkButton && jsx(Link.Button, {
             newTab: !0,
             variant: "secondary",
             href: secondaryLinkButton.href,

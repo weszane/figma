@@ -15,7 +15,7 @@ import { yF, M1 } from "../905/777093";
 import { GK } from "../905/37051";
 import { C as _$$C } from "../905/991119";
 import { Ec, bT } from "../905/163189";
-import { MZ } from "../905/470594";
+import { enqueueNetworkErrorBell } from "../905/470594";
 import { OL, lZ, pl, Yw } from "../905/615657";
 import { Lg, Ij } from "../905/902099";
 import { permissionScopeHandler } from "../905/189185";
@@ -1785,7 +1785,7 @@ async function eW(e, t, i, n, a, s, o, l) {
   try {
     await m;
   } catch (t) {
-    t instanceof UploadError && MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message"));
+    t instanceof UploadError && enqueueNetworkErrorBell(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message"));
     return t;
   }
   try {

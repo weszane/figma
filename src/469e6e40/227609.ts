@@ -59,7 +59,7 @@ import { b as _$$b5 } from '../905/388233';
 import { r as _$$r2 } from '../905/398386';
 import { s as _$$s2 } from '../905/411990';
 import { rq } from '../905/425180';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { k as _$$k3 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
@@ -2252,7 +2252,7 @@ export function $$aG0(e) {
           horizontalAlignItems: 'start',
           children: [jsx(_$$b, {}), jsx('span', {
             children: renderI18nText('team_admin.members_tab.fixed_issue_members_list')
-          }), jsx(_$$N, {
+          }), jsx(Link, {
             href: 'https://help.figma.com/hc/articles/26628690415255',
             children: renderI18nText('team_admin.members_tab.fixed_issue_members_list_read_more')
           })]

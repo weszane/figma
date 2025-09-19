@@ -102,7 +102,7 @@ import { A as _$$A8 } from '../905/408320';
 import { browserCapabilities } from '../905/409121';
 import { rq as _$$rq } from '../905/425180';
 import { useModalManager } from '../905/437088';
-import { N as _$$N6 } from '../905/438674';
+import { Link } from '../905/438674';
 import { W as _$$W2 } from '../905/442612';
 import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
@@ -117,7 +117,7 @@ import { sendHistogram } from '../905/485103';
 import { handleAtomEvent } from '../905/502364';
 import { Y as _$$Y } from '../905/506207';
 import { getCurrentPath } from '../905/508367';
-import { hR, hW } from '../905/508457';
+import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { s as _$$s } from '../905/513506';
 import { RR } from '../905/514666';
@@ -1345,15 +1345,15 @@ let rd = new class {
 }();
 let rx = new class {
   constructor() {
-    this.counterAtom = hR({
+    this.counterAtom = createFileBehaviorAtom({
       value: 0
     }, {
-      changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+      changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
     });
-    this.arrayAtom = hR([{
+    this.arrayAtom = createFileBehaviorAtom([{
       value: 0
     }], {
-      changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+      changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
     });
     this.jsValueTestsCallback = null;
   }
@@ -5532,7 +5532,7 @@ function l8() {
   });
   return jsx('div', {
     className: 'recent_files--browseMoreLink--Ohk3y',
-    children: jsx(_$$N6, {
+    children: jsx(Link, {
       ref: setKeyboardNavigationElement,
       href: t,
       onClick(t) {

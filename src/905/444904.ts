@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { ButtonLargeWide } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
@@ -94,7 +94,7 @@ export function $$I0({
         children: renderI18nText("mfa_required_modal.cta")
       }), jsx("div", {
         className: _$$s.pt20.font13.justifyCenter.fontNormal.$,
-        children: jsx(_$$N, {
+        children: jsx(Link, {
           newTab: !0,
           href: "https://help.figma.com/hc/articles/360039817634-Enable-two-factor-authentication-2FA",
           trusted: !0,

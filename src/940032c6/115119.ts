@@ -175,7 +175,7 @@ import { rq as _$$rq } from '../905/425180';
 import { e as _$$e10 } from '../905/428849';
 import { N as _$$N8 } from '../905/430294';
 import { useModalManager } from '../905/437088';
-import { N as _$$N6 } from '../905/438674';
+import { Link } from '../905/438674';
 import { v as _$$v10 } from '../905/439487';
 import { ConfirmationModal } from '../905/441305';
 import { v as _$$v7 } from '../905/442517';
@@ -579,7 +579,7 @@ import { e as _$$e0 } from '../figma_app/259678';
 import { gs as _$$gs2, lt as _$$lt, Z0 } from '../figma_app/263905';
 import { N as _$$N5 } from '../figma_app/268271';
 import { DialogTitle, DialogArrow, DialogActionStrip, DialogBody, DialogCustomFooter, DialogContents, DialogFooter, DialogCustomContents, DialogHeader } from '../figma_app/272243';
-import { s4 as _$$s10, Zk as _$$Zk2 } from '../figma_app/276332';
+import { StyleType, mapTypeToStyleKey } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
 import { C_ as _$$C_ } from '../figma_app/290668';
@@ -3651,7 +3651,7 @@ function aD({
   let t = useDispatch();
   let i = useIsSelectedFigmakeFullscreen();
   let n = _$$_t(e);
-  let a = n ? jsx(_$$N6, {
+  let a = n ? jsx(Link, {
     href: _$$uw(n),
     newTab: !0,
     children: jsx('span', {
@@ -6828,7 +6828,7 @@ function ob() {
         type: od.NOT_UPLOADED,
         title: renderI18nText('sites.metadata.fonts.upload_web_fonts'),
         subtitle: renderI18nText('sites.metadata.fonts.to_ensure_these_fonts_display_correctly_on_your_published_site_upload_their_woff_w_o_f_f_2_files', {
-          learnMoreLink: jsx(_$$N6, {
+          learnMoreLink: jsx(Link, {
             href: '#',
             children: renderI18nText('sites.metadata.domain.learn_more')
           })
@@ -7756,7 +7756,7 @@ function o2({
     variant: 'warn',
     title: getI18nString('sites.metadata.domain.dns_records_not_verified'),
     message: renderI18nText('sites.metadata.domain.check_your_dns_host_to_ensure_the_following_records_have_been_added_with_learn_more_link', {
-      learnMoreLink: jsx(_$$N6, {
+      learnMoreLink: jsx(Link, {
         href: 'https://help.figma.com/hc/articles/31414274019863',
         newTab: !0,
         children: renderI18nText('sites.metadata.domain.learn_more')
@@ -8590,7 +8590,7 @@ function dI({
     }), jsx('div', {
       ..._$$xk(dT.text),
       children: renderI18nText(e === null ? 'sites.metadata.domain.publish_site_to_connect_a_domain_with_learn_more_link' : 'sites.metadata.domain.connect_a_domain_with_learn_more_link', {
-        learnMoreLink: jsx(_$$N6, {
+        learnMoreLink: jsx(Link, {
           href: 'https://help.figma.com/hc/articles/31414274019863',
           newTab: !0,
           children: renderI18nText('sites.metadata.domain.learn_more')
@@ -8670,7 +8670,7 @@ function dN({
       variant: 'default',
       children: jsx(BannerMessage, {
         children: renderI18nText('sites.metadata.domain.it_can_take_up_to_24_hours_for_dns_settings_to_propagate_with_learn_more_link', {
-          learnMoreLink: jsx(_$$N6, {
+          learnMoreLink: jsx(Link, {
             href: 'https://help.figma.com/hc/articles/31414274019863',
             newTab: !0,
             children: renderI18nText('sites.metadata.domain.learn_more')
@@ -18837,7 +18837,7 @@ function gU({
   let a = i ? t.customDomain : t.domain;
   let s = jsx('div', {
     className: 'xb3r6kr',
-    children: jsx(_$$N6, {
+    children: jsx(Link, {
       'newTab': !0,
       'href': n,
       'data-testid': 'sitesSidebarDomainLink',
@@ -19419,19 +19419,19 @@ function fy() {
     closeButtonColor: 'light',
     description: renderI18nText('sites.onboarding.welcome.description'),
     disclaimerFooter: renderI18nText('sites.onboarding.welcome.terms_of_service', {
-      beta_terms: jsx(_$$N6, {
+      beta_terms: jsx(Link, {
         newTab: !0,
         href: '/product-specific-terms/',
         trusted: !0,
         children: renderI18nText('sites.onboarding.welcome.beta_terms')
       }),
-      acceptable_publication_policy: jsx(_$$N6, {
+      acceptable_publication_policy: jsx(Link, {
         newTab: !0,
         href: '/legal/acceptable-publication-policy/',
         trusted: !0,
         children: renderI18nText('sites.onboarding.welcome.acceptable_publication_policy')
       }),
-      ai_subprocessors: jsx(_$$N6, {
+      ai_subprocessors: jsx(Link, {
         newTab: !0,
         href: '/sub-processors/',
         trusted: !0,
@@ -22086,7 +22086,7 @@ function bI({
   });
   return d == null ? null : jsxs('div', {
     className: 'sites_template_view--footer--oAwNz',
-    children: [jsx(_$$N6.Button, {
+    children: [jsx(Link.Button, {
       newTab: !0,
       href: c ?? e.rdp_url,
       onClick: () => s(e.id, t),
@@ -22398,7 +22398,7 @@ function yi({
   isSelected: n
 }) {
   let a = useOpenFileLibraryKey();
-  let s = WH(e, t, _$$s10.TEXT);
+  let s = WH(e, t, StyleType.TEXT);
   return jsx(Fragment, {
     children: jsx('div', {
       'className': 'cms_rich_text_style_panel--styleTitle--qGZx9',
@@ -22481,7 +22481,7 @@ function ya({
     children: [jsx(_$$MM, {
       inheritStyleKey: p,
       inheritStyleID: c,
-      styleType: _$$s10.TEXT
+      styleType: StyleType.TEXT
     }), _ && jsx(_$$UP, {
       hideBrowseLibraries: !1,
       hideCreateStyleButton: !1,
@@ -22505,7 +22505,7 @@ function ya({
         }));
       },
       onCreateStyle: (e, t) => {
-        let i = _$$Zk2(_$$s10.TEXT);
+        let i = mapTypeToStyleKey(StyleType.TEXT);
         i && f({
           styleType: 'TEXT',
           inheritStyleKeyField: i,
@@ -22517,7 +22517,7 @@ function ya({
       picker: _,
       recordingKey: 'cmsRichTextStylePicker',
       stylePickerListLayout: !0,
-      styleType: _$$s10.TEXT
+      styleType: StyleType.TEXT
     }), t.map(e => {
       if (e.styleClass === TextBlockType.BLOCKQUOTE) return null;
       let t = yt[e.styleClass];

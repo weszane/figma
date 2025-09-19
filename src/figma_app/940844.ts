@@ -3,7 +3,7 @@ import { getMainContent } from "../figma_app/427318";
 import { BadgeType } from "../905/875063";
 import { TeamOrgType } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 let d = {
   id: "4317920",
   team_id: null,
@@ -236,7 +236,7 @@ export async function $$N2(e) {
   try {
     let t = E[e];
     if (t) {
-      let e = (await U.getVersions({
+      let e = (await widgetAPIClient.getVersions({
         widgetId: t
       })).data.meta.plugin;
       return [$$v1(e)];

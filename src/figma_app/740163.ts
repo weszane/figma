@@ -5,7 +5,7 @@ import { _q, bA } from '../905/668764';
 import { d as _$$d } from '../905/758967';
 import { Gk, jH } from '../905/950959';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
-import { kG } from '../figma_app/327588';
+import { isFullscreenAndInFocusedNodeView } from '../figma_app/327588';
 import { AppStateTsApi, ColorFormatEnum } from '../figma_app/763686';
 import { R } from '../figma_app/941983';
 import { isDevHandoffEditorType } from '../figma_app/976749';
@@ -24,7 +24,7 @@ export function $$f8() {
   return getObservableValue(AppStateTsApi?.editorPreferences()?.sidebarSplitPosition, R.sidebarSplitPosition);
 }
 export function $$E0() {
-  return kG() ? 48 : 0;
+  return isFullscreenAndInFocusedNodeView() ? 48 : 0;
 }
 export function $$y6() {
   return getObservableValue(AppStateTsApi?.editorPreferences()?.devHandoffInspectSplitPosition, 320);

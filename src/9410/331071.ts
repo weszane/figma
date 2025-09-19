@@ -74,7 +74,7 @@ import { B as _$$B6 } from '../905/388732';
 import { debugState } from '../905/407919';
 import { $ as _$$$2 } from '../905/411599';
 import { loadPluginFont } from '../905/426868';
-import { N as _$$N2 } from '../905/438674';
+import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -344,7 +344,7 @@ import { cd, ZI } from '../figma_app/650460';
 import { filterNotNullish, shuffle } from '../figma_app/656233';
 import { S6, zY } from '../figma_app/664693';
 import { Zr } from '../figma_app/678782';
-import { RW } from '../figma_app/684168';
+import { getCurrentWorkspaceInfo } from '../figma_app/684168';
 import { bt } from '../figma_app/688194';
 import { G1 } from '../figma_app/691470';
 import { JZ } from '../figma_app/696043';
@@ -369,7 +369,7 @@ import { oG as _$$oG, _g, xm } from '../figma_app/826288';
 import { I as _$$I } from '../figma_app/827540';
 import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { ks, Vm } from '../figma_app/838407';
-import { $1, ll as _$$ll, AR, cW, f6, FG, q3, QZ, U6, V2, wW, ZT } from '../figma_app/844435';
+import { getLocalPlugins, useAllowlistedPlugins, useRecentlyUsedWidgets, usePublishedPlugins, getPendingPublisherWidgets, useRecentlyUsedPlugins, useFilteredInstalledPluginsAndWidgets, isEditorTypeSupported, useAllowlistedWidgets, useCanRunExtensions, getPendingPublisherWidgetsForCurrentUser, usePluginedWidgets } from '../figma_app/844435';
 import { lu as _$$lu } from '../figma_app/846140';
 import { hc, jk, mX, z6 } from '../figma_app/846841';
 import { Dz, WJ, Zj } from '../figma_app/847915';
@@ -4811,7 +4811,7 @@ function sh() {
       children: renderI18nText('first_draft.direct_gen.getting_started.heading')
     }), jsxs('div', {
       className: _$$s3.inline.colorTextSecondary.flexWrap.$,
-      children: [renderI18nText('first_draft.direct_gen.getting_started.notice'), ' ', jsx(_$$N2, {
+      children: [renderI18nText('first_draft.direct_gen.getting_started.notice'), ' ', jsx(Link, {
         newTab: !0,
         trusted: !0,
         href: 'https://www.figma.com/blog/figma-ai-first-draft-byods/',
@@ -7794,7 +7794,7 @@ function oN(e) {
     canRun
   } = e;
   let a = useCurrentUserOrg();
-  let s = RW();
+  let s = getCurrentWorkspaceInfo();
   let o = _$$a5(a?.id, extension.plugin_id, s.loaded ? s.data?.workspaceId : void 0);
   if (isPrivatePlugin(extension) && a && a.name) {
     return {
@@ -7877,7 +7877,7 @@ function oF({
     close
   } = cq();
   let h = getObservableOrFallback(UK().showQuickCommandRankDebug);
-  let m = V2();
+  let m = useCanRunExtensions();
   let f = useAppModelProperty('keyboardShortcuts');
   let _ = useCallback(() => {
     close();
@@ -8021,8 +8021,8 @@ function oF({
   let w = e.shortcutText || c1(f, d);
   let j = e.name === 'plugins-menu-item' && !!e.itemParameterArgs && e.itemParameterArgs.parameters.length > 0;
   let I = YT(e);
-  let k = cW();
-  let N = ZT();
+  let k = usePublishedPlugins();
+  let N = usePluginedWidgets();
   let A = (() => {
     if (e.itemParameterArgs && e.runPluginArgs && !t) {
       return jsx(_$$_, {
@@ -8185,8 +8185,8 @@ function oB({
       let t = c4();
       let i = function () {
         let e = wo();
-        let t = cW();
-        let i = ZT();
+        let t = usePublishedPlugins();
+        let i = usePluginedWidgets();
         let r = getSelectedEditorType();
         let n = [];
         let a = [];
@@ -9408,7 +9408,7 @@ function lI({
 }
 function lk(e) {
   let t = useDispatch();
-  let i = QZ();
+  let i = isEditorTypeSupported();
   return hasDesktopAPI() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
     itemKey: 'newPlugin',
     text: getI18nString('whiteboard.inserts.plugin_development_options_new_plugin'),
@@ -9828,7 +9828,7 @@ function dn({
   });
 }
 function da() {
-  let e = QZ();
+  let e = isEditorTypeSupported();
   return jsx('div', {
     'className': _$$s3.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
     'data-testid': 'no-extensions-found',
@@ -9845,8 +9845,8 @@ function ds({
   let l = useAtomWithSubscription(Rt);
   let d = useAtomWithSubscription(Q8);
   let u = useSelector(_$$l);
-  let p = f6();
-  let h = wW();
+  let p = getPendingPublisherWidgets();
+  let h = getPendingPublisherWidgetsForCurrentUser();
   let {
     loaded,
     extensions
@@ -10159,7 +10159,7 @@ function dv({
       };
     }(e);
     let n = function (e) {
-      let t = $1();
+      let t = getLocalPlugins();
       let i = useMemo(() => Object.values(t), [t]);
       let r = useMemo(() => new Ef(i, FUSE_CONFIG_PROFILE), [i]);
       return useMemo(() => r.search(e), [r, e]);
@@ -10466,7 +10466,7 @@ function dI() {
   let ec = useRef(null);
   let eu = _$$U3(b);
   let ep = useSelector(canPerformAction);
-  let eh = QZ();
+  let eh = isEditorTypeSupported();
   useEffect(() => {
     eh || l !== BY.ALL && l !== BY.WIDGETS || d(BY.PLUGINS);
   }, [eh, l, d]);
@@ -10597,20 +10597,20 @@ let dN = (e, t) => {
 function dA() {
   !function () {
     let e = Xr(P_);
-    let t = FG();
-    let i = AR();
+    let t = useRecentlyUsedPlugins();
+    let i = useRecentlyUsedWidgets();
     let {
       loaded,
       userPlugins,
       userWidgets,
       orgPlugins,
       orgWidgets
-    } = q3();
-    let d = _$$ll();
-    let u = U6();
+    } = useFilteredInstalledPluginsAndWidgets();
+    let d = useAllowlistedPlugins();
+    let u = useAllowlistedWidgets();
     let p = _$$h2('plugin');
     let h = _$$h2('widget');
-    let m = $1();
+    let m = getLocalPlugins();
     let f = Oy();
     let g = useMemo(() => [{
       extensions: t,

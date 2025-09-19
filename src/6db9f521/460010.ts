@@ -164,7 +164,7 @@ import { dh as _$$dh } from "../figma_app/186343";
 import { p as _$$p2 } from "../figma_app/353099";
 import { NuxOnboardingOverlay } from "../4452/529989";
 import { C5 } from "../7021/95197";
-import { HW, VD } from "../figma_app/357367";
+import { isSelfDesignMode, syncDesignModePermission } from "../figma_app/357367";
 import { v as _$$v3 } from "../6388/254246";
 import { uY } from "../figma_app/164260";
 import { ie as _$$ie, Z as _$$Z3, Lk as _$$Lk, Cd, Rn } from "../figma_app/524655";
@@ -369,7 +369,7 @@ import { d as _$$d6 } from "../905/976845";
 import { e as _$$e5 } from "../905/149844";
 import { z as _$$z2 } from "../9410/836234";
 import { A as _$$A9 } from "../905/891805";
-import { s4 as _$$s8 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { In } from "../905/672640";
 import { AH } from "../905/571648";
 import { bf } from "../figma_app/635062";
@@ -4009,7 +4009,7 @@ function rp({
 function rh({
   nodeId: e
 }) {
-  return HW() ? jsx("div", {
+  return isSelfDesignMode() ? jsx("div", {
     className: "xy3p2pi",
     children: jsx(Button, {
       onClick: _$$nc.user("slides-ungroup", () => {
@@ -4200,7 +4200,7 @@ function rF({
   });
 }
 function rB() {
-  VD();
+  syncDesignModePermission();
   let e = _$$dh();
   let t = Xr(bY);
   let i = !!S7();
@@ -6432,7 +6432,7 @@ function oU({
     children: [jsx(MM, {
       inheritStyleKey: t,
       inheritStyleID: i,
-      styleType: _$$s8.TEXT
+      styleType: StyleType.TEXT
     }), d && jsx(UP, {
       customPickerTitle: getI18nString("slides.properties_panel.library_text_styles"),
       hideBrowseLibraries: !getFeatureFlags().piper_style_libraries,
@@ -6453,7 +6453,7 @@ function oU({
       picker: d,
       recordingKey: "subscribedStylePicker",
       stylePickerListLayout: !0,
-      styleType: _$$s8.TEXT
+      styleType: StyleType.TEXT
     }), jsx(_$$E5, {
       name: "slides_toggle_library_text_style_picker",
       children: jsx(_$$d6, {
@@ -6534,7 +6534,7 @@ function o$({
               d(Uv());
               let e = f.current.getBoundingClientRect();
               v({
-                styleType: _$$s8.TEXT,
+                styleType: StyleType.TEXT,
                 inheritStyleKeyField: "inheritTextStyleKey",
                 rowLeft: e.left,
                 rowTop: e.top

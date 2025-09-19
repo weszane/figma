@@ -1,6 +1,6 @@
 import { kiwiParserCodec } from "../905/294864";
 import { FontSourceType, Fonts } from "../figma_app/763686";
-import { K, rj, V1, T_, D7, qI, cp } from "../905/946258";
+import { getFontIndexUrl, FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED, FONT_SF_PRO, getFontFileUrl } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
@@ -65,7 +65,7 @@ export function $$R10() {
 }
 let N = _$$D(() => {
   let e = performance.now();
-  let t = K({
+  let t = getFontIndexUrl({
     format: "kiwi",
     shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local,
     shouldUse250317Index: !!getFeatureFlags().font_index_250317
@@ -84,7 +84,7 @@ let N = _$$D(() => {
     let d = performance.now();
     return T(l) ? (l.files = function (e) {
       if (!e || getFeatureFlags().dse_sf_pro_font || !getFeatureFlags().font_index_250317) return e;
-      let t = new Set([rj, V1, T_, D7]);
+      let t = new Set([FONT_SF_PRO_DISPLAY, FONT_SF_PRO_ROUNDED, FONT_SF_COMPACT, FONT_SF_COMPACT_ROUNDED]);
       return e.filter(e => !e.family || !t.has(e.family));
     }(l.files), {
       list: (l.files || []).map(e => {
@@ -302,9 +302,9 @@ export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
               let t = "Semi Bold" === e.style ? "Semibold" : e.style;
               return {
                 source: FontSourceType.GOOGLE,
-                id: qI,
+                id: FONT_SF_PRO,
                 postscript: e.postscript,
-                family: rj,
+                family: FONT_SF_PRO_DISPLAY,
                 italic: e.italic,
                 stretch: e.stretch,
                 style: t,
@@ -399,7 +399,7 @@ export async function $$j3(e) {
       break;
     case FontSourceType.GOOGLE:
       i = !0;
-      t = cp(e.id, {
+      t = getFontFileUrl(e.id, {
         shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local
       });
       break;

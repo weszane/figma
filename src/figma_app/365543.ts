@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { connect } from "react-redux";
 import { Button } from "../905/521428";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { A } from "../905/251970";
 import l from "classnames";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
@@ -35,7 +35,7 @@ class T extends RecordingPureComponent {
         onClick: this.props.hintLinkOnClick,
         recordingKey: generateRecordingKey(this.props.recordingKey, "link"),
         children: this.props.hintLinkText
-      }) : this.props.hintLinkUrl && (t = jsx(N, {
+      }) : this.props.hintLinkUrl && (t = jsx(Link, {
         href: this.props.hintLinkUrl,
         newTab: !0,
         children: this.props.hintLinkText

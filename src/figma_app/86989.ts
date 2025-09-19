@@ -26,282 +26,525 @@ import { getPluginMetadata, getPluginVersion } from '../figma_app/300692'
 import { mapResourceType } from '../figma_app/471982'
 import { isResourcePendingPublishing } from '../figma_app/777551'
 import { isPaymentFailed, isStatus, isSubscriptionActive, partitionUsersByPurchaseEligibility } from '../figma_app/808294'
-import { cW, ZT } from '../figma_app/844435'
+import { usePluginedWidgets, usePublishedPlugins } from '../figma_app/844435'
 
-function P(e, t, r, n) {
-  return (i) => {
-    i(showModal({
-      type: CommunityCheckoutModal.type,
-      data: {
-        userId: e.id,
-        resource: t,
-        onSuccess: () => {
-          i((r) => {
-            (isPlugin(t) || isWidget(t)) && r(addResourceToRecentsByEditorType(t, e.id))
-          })
-          r && r()
+/**
+ * Types for resource and user objects used in payment and checkout logic.
+ */
+export interface CommunityUser {
+  byId: Record<string, { id: string, created_at: string }>
+  id: string
+  associated_users?: { user_id: string }[]
+  primary_user_id?: string
+  // Add other relevant user properties as needed
+}
+
+export interface MonetizedResourceMetadata {
+  id: string
+  // Add other relevant resource metadata properties as needed
+}
+
+export interface CommunityResource {
+  id: string
+  monetized_resource_metadata?: MonetizedResourceMetadata
+  community_resource_payment?: any
+  // Add other relevant resource properties as needed
+}
+
+/**
+ * Initiates the community checkout modal for a given user and resource.
+ * @param user - The user initiating the checkout.
+ * @param resource - The resource to be purchased.
+ * @param onSuccess - Callback for successful checkout.
+ * @param onCancel - Callback for checkout cancellation.
+ */
+export function setupCommunityCheckoutHandler(user: CommunityUser, resource: CommunityResource, onSuccess?: () => void, onCancel?: () => void) {
+  return (dispatch: any) => {
+    dispatch(
+      showModal({
+        type: CommunityCheckoutModal.type,
+        data: {
+          userId: user.id,
+          resource,
+          onSuccess: () => {
+            dispatch((innerDispatch: any) => {
+              if (isPlugin(resource) || isWidget(resource)) {
+                innerDispatch(addResourceToRecentsByEditorType(resource, user.id))
+              }
+              onSuccess && onSuccess()
+            })
+          },
+          onCancel,
         },
-        onCancel: n,
-      },
-    }))
+      }),
+    )
   }
 }
-export let $$D12 = _$$n((e, t, r, n, i, s) => {
-  let o = getFeatureFlags().community_hub_admin && r && isResourcePendingPublishing(r)
-  return new Promise((a) => {
-    let d = () => {
-      if (t) {
-        if (n || o) {
-          let i
-          e((i = () => {
-            $$$4({
-              type: 'PAID',
-            })
-            a()
-          }, (e) => {
-            e(showModal({
-              type: CommunityCheckoutModal.type,
-              data: {
-                userId: t.id,
-                resource: r,
-                localResource: n,
-                onSuccess: i,
-                onCancel: a,
-                noInteractionMode: !0,
-              },
-            }))
-          }))
+
+/**
+ * Handles the payment flow for a community resource.
+ * @param dispatch - Redux dispatch function.
+ * @param user - The user initiating the payment.
+ * @param resource - The resource to be purchased.
+ * @param localResource - Local resource data if any.
+ * @param plugin - Plugin data if any.
+ * @param modalType - Type of modal to show.
+ */
+export function handleCommunityResourcePayment(dispatch: any, user: CommunityUser, resource: CommunityResource, localResource: any, plugin: any, modalType: ModalType) {
+  const isAdminPublishing = getFeatureFlags().community_hub_admin && resource && isResourcePendingPublishing(resource)
+
+  return new Promise<void>((resolve) => {
+    const proceedCheckout = () => {
+      if (user) {
+        if (localResource || isAdminPublishing) {
+          const onSuccess = () => {
+            setLocalResourcePaymentStatus({ type: 'PAID' })
+            resolve()
+          }
+          dispatch((innerDispatch: any) => {
+            innerDispatch(
+              showModal({
+                type: CommunityCheckoutModal.type,
+                data: {
+                  userId: user.id,
+                  resource,
+                  localResource,
+                  onSuccess,
+                  onCancel: resolve,
+                  noInteractionMode: true,
+                },
+              }),
+            )
+          })
           return
         }
-        hasMonetizedResourceMetadata(r) ? e(P(t, r, () => a(), () => a())) : logger.error('Can only initiate checkout for a monetized or local resource.')
+        if (hasMonetizedResourceMetadata(resource)) {
+          dispatch(setupCommunityCheckoutHandler(user, resource, resolve, resolve))
+        }
+        else {
+          logger.error('Can only initiate checkout for a monetized or local resource.')
+        }
       }
       else {
-        e((e) => {
-          e(AUTH_INIT({
-            origin: 'freemium_checkout_modal_in_open_session',
-            redirectUrl: customHistory.location.pathname,
-            signedUpFromOpenSession: !0,
-          }))
-          e(showModalHandler({
-            type: AuthModal,
-            data: {
-              headerText: getI18nString('fullscreen.toolbar.log_in_to_do_more_with_figjam'),
-            },
-          }))
+        dispatch((innerDispatch: any) => {
+          innerDispatch(
+            AUTH_INIT({
+              origin: 'freemium_checkout_modal_in_open_session',
+              redirectUrl: customHistory.location.pathname,
+              signedUpFromOpenSession: true,
+            }),
+          )
+          innerDispatch(
+            showModalHandler({
+              type: AuthModal,
+              data: {
+                headerText: getI18nString('fullscreen.toolbar.log_in_to_do_more_with_figjam'),
+              },
+            }),
+          )
         })
       }
     }
-    s === ModalType.SKIP
-      ? d()
-      : e(showModal({
+
+    if (modalType === ModalType.SKIP) {
+      proceedCheckout()
+    }
+    else {
+      dispatch(
+        showModal({
           type: FreemiumApiPreCheckoutModal.type,
           data: {
-            type: t ? s || ModalType.PAID_FEATURE : ModalType.LOGGED_OUT,
-            onContinue: d,
-            onClose: a,
-            plugin: r && getPluginVersion(r) || n || i,
-            monetizedResourceMetadata: r?.monetized_resource_metadata,
+            type: user ? modalType || ModalType.PAID_FEATURE : ModalType.LOGGED_OUT,
+            onContinue: proceedCheckout,
+            onClose: resolve,
+            plugin: (resource && getPluginVersion(resource)) || localResource || plugin,
+            monetizedResourceMetadata: resource?.monetized_resource_metadata,
           },
-        }))
+        }),
+      )
+    }
   })
-})
-export function $$k10(e) {
-  let t = useDispatch()
-  let r = useSelector(e => e.authedActiveCommunityProfile)
-  let a = useSelector(e => e.authedUsers)
-  let s = getCommunityResourcePayment(e)
+}
+
+/**
+ * Initiates the purchase flow for a resource, showing appropriate modals.
+ * @param resource - The resource to purchase.
+ */
+export function initiateResourcePurchaseFlow(resource: CommunityResource) {
+  const dispatch = useDispatch<AppDispatch>()
+  const activeProfile = useSelector((state: any) => state.authedActiveCommunityProfile)
+  const authedUsers = useSelector((state: any) => state.authedUsers)
+  const payment = getCommunityResourcePayment(resource)
+
   return useCallback(() => {
-    if (!e)
+    if (!resource)
       return
-    let n = isSubscriptionActive(s)
-    let i = hasMonetizedResourceMetadata(e)
-    if (trackEventAnalytics('cmty_resource_usage_action', {
-      resourceType: mapResourceType(e),
-      resourceId: e.id,
-      profileId: r?.id,
-      hasActiveCommunityResourcePayment: n,
-      isMonetizedResource: i,
-    }), !i || n || !1 === $$M8(r, a, e)) {
+
+    const hasActivePayment = isSubscriptionActive(payment)
+    const isMonetized = hasMonetizedResourceMetadata(resource)
+
+    trackEventAnalytics('cmty_resource_usage_action', {
+      resourceType: mapResourceType(resource),
+      resourceId: resource.id,
+      profileId: activeProfile?.id,
+      hasActiveCommunityResourcePayment: hasActivePayment,
+      isMonetizedResource: isMonetized,
+    })
+
+    if (!isMonetized || hasActivePayment || !isUserEligibleForPurchase(activeProfile, authedUsers, resource)) {
       return
     }
-    let l = getAssociatedUserProfiles({
-      authedActiveCommunityProfile: r,
-      authedUsers: a,
+
+    const associatedProfiles = getAssociatedUserProfiles({
+      authedActiveCommunityProfile: activeProfile,
+      authedUsers,
     })
-    let {
-      usersCanPurchase,
-      publishers,
-    } = partitionUsersByPurchaseEligibility(l, e)
-    if (trackEventAnalytics('Checkout Flow Entered', {
-      resourceType: mapResourceType(e),
-      resourceId: e.id,
+
+    const { usersCanPurchase, publishers } = partitionUsersByPurchaseEligibility(associatedProfiles, resource)
+
+    trackEventAnalytics('Checkout Flow Entered', {
+      resourceType: mapResourceType(resource),
+      resourceId: resource.id,
       numLoggedInAssociatedUsersThatCanPurchase: usersCanPurchase.length,
       numLoggedInAssociatedPublishers: publishers.length,
-    }), usersCanPurchase.length === 1 && publishers.length === 0) {
-      t(P(usersCanPurchase[0], e))
+    })
+
+    if (usersCanPurchase.length === 1 && publishers.length === 0) {
+      dispatch(setupCommunityCheckoutHandler(usersCanPurchase[0], resource))
       return
     }
-    t(showModalHandler({
-      type: PrePurchaseUserSelectorModal,
-      data: {
-        onUserSelect: (r) => {
-          trackEventAnalytics('Pre Purchase User Selector Modal - User Selected', {
-            resourceType: mapResourceType(e),
-            resourceId: e.id,
-            userIdForPurchase: r.id,
-          })
-          t(P(r, e))
+
+    dispatch(
+      showModalHandler({
+        type: PrePurchaseUserSelectorModal,
+        data: {
+          onUserSelect: (selectedUser: CommunityUser) => {
+            trackEventAnalytics('Pre Purchase User Selector Modal - User Selected', {
+              resourceType: mapResourceType(resource),
+              resourceId: resource.id,
+              userIdForPurchase: selectedUser.id,
+            })
+            dispatch(setupCommunityCheckoutHandler(selectedUser, resource))
+          },
+          resource,
         },
-        resource: e,
-      },
-    }))
-  }, [e, s, r, a, t])
+      }),
+    )
+  }, [resource, payment, activeProfile, authedUsers, dispatch])
 }
-export function $$M8(e, t, r) {
-  if (!hasMonetizedResourceMetadata(r))
-    return !1
-  let n = getAssociatedUserProfiles({
-    authedActiveCommunityProfile: e,
-    authedUsers: t,
+
+/**
+ * Checks if a user is eligible to purchase a resource.
+ * @param activeProfile - The active community profile.
+ * @param authedUsers - List of authenticated users.
+ * @param resource - The resource to check.
+ */
+export function isUserEligibleForPurchase(activeProfile: CommunityUser, authedUsers: CommunityUser, resource: CommunityResource): boolean {
+  if (!hasMonetizedResourceMetadata(resource))
+    return false
+
+  const associatedProfiles = getAssociatedUserProfiles({
+    authedActiveCommunityProfile: activeProfile,
+    authedUsers,
   })
-  let {
-    usersCanPurchase,
-    publishers,
-  } = partitionUsersByPurchaseEligibility(n, r)
-  return (usersCanPurchase.length !== 0 || publishers.length !== 0) && (usersCanPurchase.length !== 0 || publishers.length === 0)
+
+  const { usersCanPurchase, publishers } = partitionUsersByPurchaseEligibility(associatedProfiles, resource)
+
+  return (
+    (usersCanPurchase.length !== 0 || publishers.length !== 0)
+    && (usersCanPurchase.length !== 0 || publishers.length === 0)
+  )
 }
-export function $$F5(e) {
-  let t = useDispatch()
-  let r = getCommunityResourcePayment(e)
+
+/**
+ * Handles redirecting to Stripe for managing subscriptions.
+ * @param resource - The resource for which to manage subscription.
+ */
+export function handleStripeSubscriptionRedirect(resource: CommunityResource) {
+  const dispatch = useDispatch<AppDispatch>()
+  const payment = getCommunityResourcePayment(resource)
+
   return useCallback(() => {
-    e && isSubscriptionActive(r) && (t(FlashActions.flash(getI18nString('community.buyer.redirecting_to_stripe'))), t(handleStripeManageSubscription({})))
-  }, [e, r, t])
+    if (resource && isSubscriptionActive(payment)) {
+      dispatch(FlashActions.flash(getI18nString('community.buyer.redirecting_to_stripe')))
+      dispatch(handleStripeManageSubscription({}))
+    }
+  }, [resource, payment, dispatch])
 }
-export function $$j16(e, t) {
-  let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment
-  return isSubscriptionActive(r)
+
+/**
+ * Checks if a resource has an active subscription.
+ * @param resource - The resource to check.
+ * @param payments - Payment state object.
+ */
+export function isResourceSubscriptionActive(resource: CommunityResource, payments: Record<string, any>): boolean {
+  const payment = payments?.[resource.monetized_resource_metadata?.id] || resource.community_resource_payment
+  return isSubscriptionActive(payment)
 }
-export function $$U17(e, t) {
-  let {
-    publishers,
-  } = partitionUsersByPurchaseEligibility([t], e)
+
+/**
+ * Checks if a user is a publisher for a resource.
+ * @param resource - The resource to check.
+ * @param user - The user to check.
+ */
+export function isUserPublisherForResource(resource: CommunityResource, user: CommunityUser): boolean {
+  const { publishers } = partitionUsersByPurchaseEligibility([user], resource)
   return publishers.length > 0
 }
-function B(e, t, r) {
-  return !(!e || !hasMonetizedResourceMetadata(e) || hasFreemiumCode(e) || !hasClientMeta(e) && (isMigratingPlugin(e) || isThirdPartyMonetized(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !(function (e, t) {
-    let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment
-    return r && isPaymentFailed(r)
-  }(e, t)))
+
+/**
+ * Determines if a resource is eligible for purchase.
+ * @param resource - The resource to check.
+ * @param payments - Payment state object.
+ * @param user - The user to check.
+ */
+function isResourceEligibleForPurchase(
+  resource: CommunityResource,
+  payments: Record<string, any>,
+  user?: CommunityUser,
+): boolean {
+  if (
+    !resource
+    || !hasMonetizedResourceMetadata(resource)
+    || hasFreemiumCode(resource)
+    || (!hasClientMeta(resource) && (isMigratingPlugin(resource) || isThirdPartyMonetized(resource)))
+    || (user && isUserPublisherForResource(resource, user))
+  ) {
+    return false
+  }
+
+  const hasActiveSubscription = isResourceSubscriptionActive(resource, payments)
+
+  // Check for payment failure
+  const paymentFailed = (() => {
+    const payment = payments?.[resource.monetized_resource_metadata?.id] || resource.community_resource_payment
+    return payment && isPaymentFailed(payment)
+  })()
+
+  return !(hasActiveSubscription && !paymentFailed)
 }
-export function $$G1() {
-  return useSelector(e => e.communityPayments)
+
+/**
+ * Selects the community payments state from Redux.
+ */
+export const selectCommunityPayments = () => useSelector((state: any) => state.communityPayments)
+
+/**
+ * Checks if a resource is eligible for purchase using Redux state.
+ * @param resource - The resource to check.
+ */
+export function checkResourceEligibility(resource: CommunityResource) {
+  return isResourceEligibleForPurchase(resource, selectCommunityPayments(), selectCurrentUser())
 }
-export function $$V0(e) {
-  return B(e, $$G1(), selectCurrentUser() || void 0)
+
+/**
+ * Checks if a resource has an active subscription using Redux state.
+ * @param resource - The resource to check.
+ */
+export function checkResourceSubscriptionActive(resource: CommunityResource) {
+  const payments = selectCommunityPayments()
+  return hasMonetizedResourceMetadata(resource) && isResourceSubscriptionActive(resource, payments)
 }
-export function $$H3(e) {
-  let t = $$G1()
-  return hasMonetizedResourceMetadata(e) && $$j16(e, t)
+
+/**
+ * Checks resource eligibility using debug state.
+ * @param resource - The resource to check.
+ */
+export function checkResourceEligibilityDebug(resource: CommunityResource) {
+  return isResourceEligibleForPurchase(
+    resource,
+    debugState && debugState.getState().communityPayments,
+    debugState && debugState.getState().user || undefined,
+  )
 }
-export function $$z6(e) {
-  return B(e, debugState && debugState.getState().communityPayments, debugState && debugState.getState().user || void 0)
+
+const LOCAL_RESOURCE_PAYMENT_KEY = 'local-resource-payment'
+
+/**
+ * Enum for local resource payment status.
+ */
+export enum LocalResourcePaymentStatus {
+  PAID = 'PAID',
+  UNPAID = 'UNPAID',
+  NOT_SUPPORTED = 'NOT_SUPPORTED',
 }
-let W = 'local-resource-payment'
-export var $$K20 = (e => (e.PAID = 'PAID', e.UNPAID = 'UNPAID', e.NOT_SUPPORTED = 'NOT_SUPPORTED', e))($$K20 || {})
-export function $$Y19() {
-  return getStorage().get(W)
+
+/**
+ * Gets the local resource payment status from storage.
+ */
+export const getLocalResourcePaymentStatus = () => getStorage().get(LOCAL_RESOURCE_PAYMENT_KEY)
+
+/**
+ * Sets the local resource payment status in storage.
+ * @param status - The payment status to set.
+ */
+export function setLocalResourcePaymentStatus(status: { type: string }) {
+  getStorage().set(LOCAL_RESOURCE_PAYMENT_KEY, status)
 }
-export function $$$4(e) {
-  getStorage().set(W, e)
-}
-function X(e, t) {
-  if (t && hasMonetizedResourceMetadata(t))
-    return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment
-}
-export function $$q13(e) {
-  return X($$G1(), e)
-}
-export function $$J18(e) {
-  let t = useSelector(t => getPluginMetadata(e, t.publishedPlugins))
-  let r = $$q13(t)
-  return useMemo(() => t
-    ? {
-        ...t,
-        community_resource_payment: r,
-      }
-    : t, [r, t])
-}
-export function $$Z7({
-  extension: e,
-  publishedPlugins: t,
-  publishedWidgets: r,
-  communityPaymentsState: n,
-}) {
-  let i = (manifestContainsWidget(e) ? r : t)[e.plugin_id]
-  if (!i)
-    return
-  let a = X(n, i)
-  return {
-    ...i,
-    community_resource_payment: a,
+
+/**
+ * Gets the payment object for a resource from payments state.
+ * @param payments - Payment state object.
+ * @param resource - The resource to check.
+ */
+function getResourcePayment(payments: Record<string, any>, resource: CommunityResource) {
+  if (resource && hasMonetizedResourceMetadata(resource)) {
+    return payments?.[resource.monetized_resource_metadata?.id] || resource.community_resource_payment
   }
 }
-export function $$Q15(e) {
-  let t = cW()[e]
-  let r = $$q13(t)
-  return useMemo(() => t
-    ? {
-        ...t,
-        community_resource_payment: r,
-      }
-    : t, [r, t])
+
+/**
+ * Gets the payment object for a resource using Redux state.
+ * @param resource - The resource to check.
+ */
+export function getResourcePaymentFromState(resource: CommunityResource) {
+  return getResourcePayment(selectCommunityPayments(), resource)
 }
-export function $$ee9(e) {
-  let t = useSelector(t => t.publishedWidgets[e])
-  let r = $$q13(t)
-  return useMemo(() => t
-    ? {
-        ...t,
-        community_resource_payment: r,
-      }
-    : t, [r, t])
+
+/**
+ * Gets plugin metadata and attaches payment info using Redux state.
+ * @param pluginId - The plugin ID.
+ */
+export function getPluginWithPayment(pluginId: string) {
+  const plugin = useSelector((state: any) => getPluginMetadata(pluginId, state.publishedPlugins))
+  const payment = getResourcePaymentFromState(plugin)
+
+  return useMemo(
+    () =>
+      plugin
+        ? {
+            ...plugin,
+            community_resource_payment: payment,
+          }
+        : plugin,
+    [payment, plugin],
+  )
 }
-export function $$et2(e) {
-  let t = ZT()[e]
-  let r = $$q13(t)
-  return useMemo(() => t
-    ? {
-        ...t,
-        community_resource_payment: r,
-      }
-    : t, [r, t])
+
+/**
+ * Gets resource with payment info for extension, plugins, widgets, and payments state.
+ * @param params - Object containing extension, publishedPlugins, publishedWidgets, and communityPaymentsState.
+ */
+export function getExtensionWithPayment({
+  extension,
+  publishedPlugins,
+  publishedWidgets,
+  communityPaymentsState,
+}: {
+  extension: any
+  publishedPlugins: Record<string, any>
+  publishedWidgets: Record<string, any>
+  communityPaymentsState: Record<string, any>
+}) {
+  const resource
+    = (manifestContainsWidget(extension) ? publishedWidgets : publishedPlugins)[extension.plugin_id]
+  if (!resource)
+    return
+  const payment = getResourcePayment(communityPaymentsState, resource)
+  return {
+    ...resource,
+    community_resource_payment: payment,
+  }
 }
-export function $$er11(e) {
-  let t = $$q13(e)
-  return !!t && isPaymentFailed(t)
+
+/**
+ * Gets published plugin with payment info using Redux state.
+ * @param pluginId - The plugin ID.
+ */
+export function getPublishedPluginWithPayment(pluginId: string) {
+  const plugin = usePublishedPlugins()[pluginId]
+  const payment = getResourcePaymentFromState(plugin)
+
+  return useMemo(
+    () =>
+      plugin
+        ? {
+            ...plugin,
+            community_resource_payment: payment,
+          }
+        : plugin,
+    [payment, plugin],
+  )
 }
-export function $$en14(e) {
-  let t = $$q13(e)
-  return !!t && isStatus(t, SubscriptionStatus.PENDING)
+
+/**
+ * Gets published widget with payment info using Redux state.
+ * @param widgetId - The widget ID.
+ */
+export function getPublishedWidgetWithPayment(widgetId: string) {
+  const widget = useSelector((state: any) => state.publishedWidgets[widgetId])
+  const payment = getResourcePaymentFromState(widget)
+
+  return useMemo(
+    () =>
+      widget
+        ? {
+            ...widget,
+            community_resource_payment: payment,
+          }
+        : widget,
+    [payment, widget],
+  )
 }
-export const EO = $$V0
-export const FP = $$G1
-export const J$ = $$et2
-export const OY = $$H3
-export const Qj = $$$4
-export const R$ = $$F5
-export const Rm = $$z6
-export const Y8 = $$Z7
-export const Zk = $$M8
-export const aQ = $$ee9
-export const ej = $$k10
-export const gn = $$er11
-export const kA = $$D12
-export const lt = $$q13
-export const tw = $$en14
-export const ul = $$Q15
-export const vT = $$j16
-export const vl = $$U17
-export const xp = $$J18
-export const y1 = $$Y19
-export const zH = $$K20
+
+/**
+ * Gets plugined widget with payment info using Redux state.
+ * @param widgetId - The widget ID.
+ */
+export function getPluginedWidgetWithPayment(widgetId: string) {
+  const widget = usePluginedWidgets()[widgetId]
+  const payment = getResourcePaymentFromState(widget)
+
+  return useMemo(
+    () =>
+      widget
+        ? {
+            ...widget,
+            community_resource_payment: payment,
+          }
+        : widget,
+    [payment, widget],
+  )
+}
+
+/**
+ * Checks if a resource payment has failed.
+ * @param resource - The resource to check.
+ */
+export function isResourcePaymentFailed(resource: CommunityResource) {
+  const payment = getResourcePaymentFromState(resource)
+  return !!payment && isPaymentFailed(payment)
+}
+
+/**
+ * Checks if a resource payment is pending.
+ * @param resource - The resource to check.
+ */
+export function isResourcePaymentPending(resource: CommunityResource) {
+  const payment = getResourcePaymentFromState(resource)
+  return !!payment && isStatus(payment, SubscriptionStatus.PENDING)
+}
+
+// Exported variable mappings for refactored names
+export const YJ = setupCommunityCheckoutHandler
+export const kA = handleCommunityResourcePayment
+export const ej = initiateResourcePurchaseFlow
+export const Zk = isUserEligibleForPurchase
+export const R$ = handleStripeSubscriptionRedirect
+export const vT = isResourceSubscriptionActive
+export const vl = isUserPublisherForResource
+export const EO = checkResourceEligibility
+export const FP = selectCommunityPayments
+export const OY = checkResourceSubscriptionActive
+export const Qj = setLocalResourcePaymentStatus
+export const Rm = checkResourceEligibilityDebug
+export const Y8 = getExtensionWithPayment
+export const aQ = getPublishedWidgetWithPayment
+export const xp = getPluginWithPayment
+export const ul = getPublishedPluginWithPayment
+export const lt = getResourcePaymentFromState
+export const gn = isResourcePaymentFailed
+export const tw = isResourcePaymentPending
+export const y1 = getLocalResourcePaymentStatus
+export const zH = LocalResourcePaymentStatus
+export const J$ = getPluginedWidgetWithPayment

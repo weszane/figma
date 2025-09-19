@@ -18,7 +18,7 @@ import { A as _$$A } from "../5132/237216";
 import { partitionUsersByPurchaseEligibility } from "../figma_app/808294";
 import { isResourceDelisted, isResourceBlocked } from "../figma_app/777551";
 import { isOrgOrTeamExport } from "../figma_app/740025";
-import { ej } from "../figma_app/86989";
+import { initiateResourcePurchaseFlow } from "../figma_app/86989";
 import { getAssociatedUserProfiles } from "../905/11536";
 import { getUserId } from "../905/372672";
 import { hasMonetizedResourceMetadata, isThirdPartyMonetized, hasClientMeta } from "../figma_app/45218";
@@ -96,7 +96,7 @@ export function $$P0({
   let _ = useSelector(e => e.authedActiveCommunityProfile);
   let d = getUserId();
   let m = useSelector(e => e.authedUsers);
-  let y = ej(e);
+  let y = initiateResourcePurchaseFlow(e);
   let b = _$$A(e, !0);
   let x = useDispatch();
   if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;

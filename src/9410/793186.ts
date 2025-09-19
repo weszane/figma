@@ -7,7 +7,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
-import { mV } from "../905/837497";
+import { initializeWidgetAllowlist } from "../905/837497";
 import { gI } from "../figma_app/399472";
 import { showModalHandler, hideModal } from "../905/156213";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
@@ -801,7 +801,7 @@ function eO() {
 }
 export let $$eL4 = memoizeByArgs((e, t, i) => {
   e(gI());
-  e(mV({}));
+  e(initializeWidgetAllowlist({}));
 });
 export function $$eR2() {
   switch (useAppModelProperty("onCanvasNameEditorInfo").mode) {

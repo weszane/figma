@@ -3,7 +3,7 @@ import { useMemo, useState, useRef, useCallback, useContext, useLayoutEffect } f
 import { throwTypeError } from "../figma_app/465776";
 import { k as _$$k } from "../905/443820";
 import { VariableResolvedDataType, VariablesBindings, VariableDataType, DesignGraphElements } from "../figma_app/763686";
-import { s4 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../figma_app/272902";
 import u from "classnames";
@@ -230,7 +230,7 @@ function et({
     status,
     stylesByFileKey
   } = Zk({
-    styleType: s4.FILL,
+    styleType: StyleType.FILL,
     initialSelectedSubscribedStyle: i
   });
   let o = stylesByFileKey[e]?.styles ?? [];
@@ -263,7 +263,7 @@ export function $$er2({
   let b = Rb();
   let T = yp();
   return i === VariableResolvedDataType.COLOR && "color-picker" === a && c ? jsx(ei, {
-    styleType: s4.FILL,
+    styleType: StyleType.FILL,
     render: o => jsx($$el3, {
       currentView: r,
       disabledVariableIds: t,
@@ -361,7 +361,7 @@ function en({
   let w = useMemo(() => [...I, ...(N ?? [])], [I, N]);
   let O = useMemo(() => [...S, ...(C ?? [])], [S, C]);
   return a === VariableResolvedDataType.COLOR && "color-picker" === s && u ? jsx(es, {
-    styleType: s4.FILL,
+    styleType: StyleType.FILL,
     selectedStyle: e?.type === PrimaryWorkflowEnum.STYLE ? e : null,
     render: ({
       dsStyles: i,
@@ -479,7 +479,7 @@ function es({
     status,
     stylesByFileKey
   } = Zk({
-    styleType: s4.FILL,
+    styleType: StyleType.FILL,
     initialSelectedSubscribedStyle: s
   });
   let c = useMemo(() => Object.values(stylesByFileKey).reduce((e, {

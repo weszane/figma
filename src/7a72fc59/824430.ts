@@ -101,7 +101,7 @@ import { e as _$$e5 } from '../905/435763';
 import { useModalManager } from '../905/437088';
 import { k as _$$k6, P as _$$P4 } from '../905/437398';
 import { UV } from '../905/438367';
-import { N as _$$N4 } from '../905/438674';
+import { Link } from '../905/438674';
 import { I as _$$I } from '../905/439783';
 import { w as _$$w2 } from '../905/442596';
 import { IconButton } from '../905/443068';
@@ -149,7 +149,7 @@ import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
 import { customHistory } from '../905/612521';
 import { setupThemeContext } from '../905/614223';
-import { BT } from '../905/618447';
+import { canvasGridAtom } from '../905/618447';
 import { jS, Q1 } from '../905/619652';
 import { R as _$$R3 } from '../905/621802';
 import { convertTeamToRaw } from '../905/628874';
@@ -363,7 +363,7 @@ import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFoote
 import { cZ as _$$cZ } from '../figma_app/272902';
 import { rgbToNormalized, packNormalizedRgb, colorsEqual } from '../figma_app/273493';
 import { isBuzzTemplatePickerCmtyShelvesEnabled, isBuzzImportFromDesignEnabled } from '../figma_app/275462';
-import { s4 as _$$s3 } from '../figma_app/276332';
+import { StyleType } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
 import { L as _$$L6 } from '../figma_app/297778';
@@ -371,14 +371,14 @@ import { ResourceTypeEnum } from '../figma_app/306946';
 import { $I, MK } from '../figma_app/322845';
 import { SortOptions } from '../figma_app/324237';
 import { AO as _$$AO, KT } from '../figma_app/325158';
-import { Ci, jw, kG, LU, W5 } from '../figma_app/327588';
+import { useFocusedNodeId, isNotInFocusedNodeView, isFullscreenAndInFocusedNodeView, getFocusedNodeId, canShowBuzzTemplateSets } from '../figma_app/327588';
 import { nL as _$$nL, uM as _$$uM, B2, bE, Cl, DW, hn, Pn, qr, z7 } from '../figma_app/334505';
 import { jH, Tj, Vq } from '../figma_app/342207';
 import { U1 } from '../figma_app/343967';
 import { hasValidSubscription } from '../figma_app/345997';
 import { p as _$$p4 } from '../figma_app/353099';
 import { c1 as _$$c5, Yh } from '../figma_app/357047';
-import { HW, VD } from '../figma_app/357367';
+import { isSelfDesignMode, syncDesignModePermission } from '../figma_app/357367';
 import { lW as _$$lW, tM as _$$tM, uh as _$$uh, AE } from '../figma_app/370763';
 import { G as _$$G3, T as _$$T6 } from '../figma_app/373780';
 import { oe as _$$oe } from '../figma_app/376315';
@@ -540,8 +540,8 @@ function K(e, t) {
 function W() {
   let e = function () {
     let e = Pc();
-    let t = kG();
-    let n = Ci();
+    let t = isFullscreenAndInFocusedNodeView();
+    let n = useFocusedNodeId();
     return useDeepEqualSceneValue((e, t, n, l) => {
       let r = [];
       if (n) {
@@ -1157,7 +1157,7 @@ let eJ = parsePxNumber(j4N);
 var eQ = (e => (e.SelectTools = 'SelectTools', e.ShapeTools = 'ShapeTools', e))(eQ || {});
 function eZ() {
   let e = U1();
-  let t = HW();
+  let t = isSelfDesignMode();
   let n = useAtomWithSubscription(_$$o2);
   let l = useIsProgressBarHiddenOrLocked();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
@@ -2773,7 +2773,7 @@ function nQ({
   let x = 'insert-cooper-template';
   let m = trackFileEventWithStore();
   let h = Xr(Tw);
-  let g = jw();
+  let g = isNotInFocusedNodeView();
   let f = v3();
   let b = useCurrentFileKey();
   let j = useSelector(e => e.search.sessionId);
@@ -4441,7 +4441,7 @@ function l4() {
   }) : null;
 }
 function l7() {
-  VD();
+  syncDesignModePermission();
   return jsxs(Fragment, {
     children: [jsx(_$$p4, {
       children: jsx(O7, {})
@@ -5811,7 +5811,7 @@ function o7({
   inheritStyleID: n,
   onApplyStyle: l
 }) {
-  let r = _$$s3.TEXT;
+  let r = StyleType.TEXT;
   let i = useRef(null);
   let s = useCallback(() => {
     i.current?.scrollTo(0);
@@ -6105,7 +6105,7 @@ function al({
       }), jsx(MM, {
         inheritStyleKey: inheritTextStyleKey,
         inheritStyleID: styleIdForText,
-        styleType: _$$s3.TEXT
+        styleType: StyleType.TEXT
       }), x && x.id === o2 && jsx(o6, {
         initialPosition: new Point(x.initialX, x.initialY),
         inheritStyleKey: inheritTextStyleKey,
@@ -9283,7 +9283,7 @@ var db = (e => (e.EDIT_CONTENT = 'EDIT_CONTENT', e.EDIT_TEXT = 'EDIT_TEXT', e.MU
 function d_() {
   let e = dg(_$$x.FIELDS);
   let t = df(_$$x.FIELDS);
-  let n = jw();
+  let n = isNotInFocusedNodeView();
   let l = useCallback(() => {
     n || e ? fullscreenValue.triggerActionInUserEditScope('request-edit-mode-via-toolbar') : t();
   }, [e, n, t]);
@@ -9367,7 +9367,7 @@ function dv() {
     }();
     let r = _$$uM();
     let i = aI();
-    let o = jw();
+    let o = isNotInFocusedNodeView();
     let a = function () {
       let e = kl('numSelectedByType');
       return !(!e || isInvalidValue(e)) && OU(e, ['TEXT', 'TEXT_PATH']);
@@ -9769,7 +9769,7 @@ function dV({
   });
 }
 let dU = memo(() => {
-  let e = HW();
+  let e = isSelfDesignMode();
   let t = GV();
   let n = Vi();
   let {
@@ -9780,8 +9780,8 @@ let dU = memo(() => {
   let c = iS();
   let u = _$$uM();
   let x = useSelector(selectSceneGraphSelectionKeys);
-  let p = kG();
-  let m = W5();
+  let p = isFullscreenAndInFocusedNodeView();
+  let m = canShowBuzzTemplateSets();
   let h = useSelector(e => e.mirror.appModel.showUi);
   let g = useSceneGraphSelection();
   let f = useSelector(e => {
@@ -9855,7 +9855,7 @@ let dU = memo(() => {
   });
 });
 function dK() {
-  let e = HW();
+  let e = isSelfDesignMode();
   let {
     activePanel,
     closePanel
@@ -10160,8 +10160,8 @@ let cm = new class {
 }();
 let ch = createContext(null);
 function cg() {
-  let e = kG();
-  let t = LU();
+  let e = isFullscreenAndInFocusedNodeView();
+  let t = getFocusedNodeId();
   let {
     onlyInstances
   } = Cl();
@@ -11753,7 +11753,7 @@ function xe({
   let [c, u] = useState(null);
   let x = function (e, t) {
     let n = Th();
-    let l = jw();
+    let l = isNotInFocusedNodeView();
     let r = trackFileEventWithStore();
     return _$$A19(() => {
       r('edit_template_field', {
@@ -11881,8 +11881,8 @@ function xn({
 function xl() {
   let e = useDispatch();
   let t = gI();
-  let n = kG();
-  let l = LU();
+  let n = isFullscreenAndInFocusedNodeView();
+  let l = getFocusedNodeId();
   let r = useMemo(() => n ? [l] : t, [n, l, t]);
   let i = getFeatureFlags().buzz_video_export;
   let u = hn(r);
@@ -12117,7 +12117,7 @@ let xj = {
 };
 function xy() {
   return useCallback(async (e, t, n) => {
-    let l = atomStoreManager.get(BT);
+    let l = atomStoreManager.get(canvasGridAtom);
     await xE(e, t, n, l);
   }, []);
 }
@@ -12305,14 +12305,14 @@ function xk({
     ...Ay.props(xC.attribution),
     children: [jsx('p', {
       children: renderI18nText('buzz.stock_photos.photo_by', {
-        photographer: jsx(_$$N4, {
+        photographer: jsx(Link, {
           'aria-label': e,
           'href': t,
           'trusted': !1,
           'newTab': !0,
           'children': e
         }),
-        provider: jsx(_$$N4, {
+        provider: jsx(Link, {
           'aria-label': n,
           'href': 'https://unsplash.com/?utm_source=figma&utm_medium=referral',
           'trusted': !1,
@@ -12322,7 +12322,7 @@ function xk({
       })
     }), jsx('p', {
       children: renderI18nText('buzz.stock_photos.license', {
-        license_name: jsx(_$$N4, {
+        license_name: jsx(Link, {
           'aria-label': getI18nString('buzz.stock_photos.license.unsplash'),
           'href': 'https://unsplash.com/license?utm_source=figma&utm_medium=referral',
           'trusted': !1,
@@ -13169,7 +13169,7 @@ function x4() {
     }, [e, i]);
     return [t, e === _$$x.ASSETS ? l ? 'hiding' : 'fullyHidden' : 'visible'];
   }(e);
-  let i = jw();
+  let i = isNotInFocusedNodeView();
   let c = e === _$$x.ASSETS && i;
   useEffect(() => {
     I$(c);
@@ -13537,7 +13537,7 @@ function px() {
   let r = Xr(U_);
   let i = trackFileEventWithStore();
   let c = Xr(_$$az);
-  let u = jw();
+  let u = isNotInFocusedNodeView();
   let x = useSelector(e => !e.mirror.appModel.isReadOnly);
   let m = cg();
   let h = !u;

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/479687";
@@ -45,7 +45,7 @@ export function $$b3({
 export function $$v2({
   publishedResourceContent: e
 }) {
-  return jsx(N.Button, {
+  return jsx(Link.Button, {
     href: $$S4(e),
     newTab: !0,
     trusted: !0,
@@ -126,7 +126,7 @@ export function $$x1({
   libraryKey: t
 }) {
   let i = new URL(H(e, t), document.baseURI).href;
-  return jsx(N.Button, {
+  return jsx(Link.Button, {
     variant: "secondary",
     href: i,
     newTab: !0,

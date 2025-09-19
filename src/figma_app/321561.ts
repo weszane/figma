@@ -9,9 +9,9 @@ import { showModalHandler } from "../905/156213";
 import { PluginAction } from "../905/15667";
 import { a as _$$a } from "../figma_app/453187";
 import { Gt } from "../figma_app/248118";
-import { V2 } from "../figma_app/844435";
-import { EO, OY, gn, ej } from "../figma_app/86989";
-import { RW } from "../figma_app/684168";
+import { useCanRunExtensions } from "../figma_app/844435";
+import { checkResourceEligibility, checkResourceSubscriptionActive, isResourcePaymentFailed, initiateResourcePurchaseFlow } from "../figma_app/86989";
+import { getCurrentWorkspaceInfo } from "../figma_app/684168";
 import { j } from "../905/813868";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -40,14 +40,14 @@ export function $$O0({
   let {
     close
   } = cq();
-  let M = EO(publishedExtension);
-  let F = OY(publishedExtension);
-  let j = F && gn(publishedExtension);
+  let M = checkResourceEligibility(publishedExtension);
+  let F = checkResourceSubscriptionActive(publishedExtension);
+  let j = F && isResourcePaymentFailed(publishedExtension);
   let U = Kp(e);
   let B = function (e) {
     let t = getUserId();
     let r = useSelector(e => e.authedActiveCommunityProfile);
-    let a = ej(e);
+    let a = initiateResourcePurchaseFlow(e);
     return useCallback(() => {
       if (!e) return;
       let n = ShelfViewType.QUICK_ACTIONS;
@@ -67,7 +67,7 @@ export function $$O0({
     displayAboveTarget: r
   });
   let K = _$$t2(extension, H);
-  let Y = V2();
+  let Y = useCanRunExtensions();
   let $ = useCallback(() => {
     close();
     _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
@@ -78,7 +78,7 @@ export function $$O0({
     K() && close();
   }, [extension, H, t, U, K, W, V, close]);
   let q = selectCurrentFile();
-  let J = RW();
+  let J = getCurrentWorkspaceInfo();
   let Z = useCallback(() => {
     if (!q || !q.parentOrgId) return;
     let e = {

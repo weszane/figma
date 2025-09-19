@@ -20,7 +20,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
-import { F as _$$F2 } from "../905/827944";
+import { setupPluginCodeCache } from "../905/827944";
 import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
 import { C3, SH } from "../figma_app/790714";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
@@ -39,7 +39,7 @@ import { JX } from "../905/104019";
 import { n as _$$n } from "../905/347702";
 import { yA } from "../905/642684";
 import { hM, p1, Tj, Yd, Nq } from "../905/266529";
-import { z as _$$z } from "../905/751771";
+import { parseAndRemoveSourceMapComments } from "../905/751771";
 import { ls, a7 } from "../905/917898";
 import { R as _$$R } from "../figma_app/612938";
 import { waitForAllPagesForPlugin } from "../905/916933";
@@ -127,7 +127,7 @@ async function Z(e) {
   if (!getFeatureFlags().plugins_remove_syntax_checking && !1 !== checkSyntax) {
     let e;
     try {
-      e = await _$$z(code);
+      e = await parseAndRemoveSourceMapComments(code);
     } catch (e) {}
     if (e && !1 === e.success) {
       let {
@@ -650,7 +650,7 @@ async function ed(e, t, i) {
       timeoutOverride: 1 / 0
     }));
     let r = n ? getPluginDevMode() : "cppvm";
-    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await _$$F2.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
+    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await setupPluginCodeCache.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
       await t.markDuration("loadSandboxAndRunSecurityChecksMs", async () => {
         try {
           await en(r, e.triggeredFrom);

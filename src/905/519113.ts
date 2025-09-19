@@ -9,7 +9,7 @@ import { k as _$$k } from "../905/443820";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { Button } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { e as _$$e } from "../905/693478";
 import { VariablesBindings, Fullscreen, StateGroupErrorType, VariableSetErrorType, VariableErrorType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
@@ -2011,12 +2011,12 @@ function t5({
   isStarterLibrary: t,
   team: i
 }) {
-  let r = i ? jsx(_$$N, {
+  let r = i ? jsx(Link, {
     newTab: !0,
     trusted: !0,
     href: `/files/upgrade-team/${i.id}`,
     children: renderI18nText("design_systems.publishing_modal.upgrade_team")
-  }) : jsx(_$$N, {
+  }) : jsx(Link, {
     newTab: !0,
     trusted: !0,
     href: "/files/create-team",

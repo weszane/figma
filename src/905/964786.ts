@@ -9,9 +9,9 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { getProductPriceString } from "../figma_app/808294";
 import { Bi, ee } from "../figma_app/248118";
-import { BE, YW } from "../figma_app/844435";
+import { isEditorTypeSupportedFor, comparePluginsByName } from "../figma_app/844435";
 import { s7 } from "../905/551193";
-import { Rm } from "../figma_app/86989";
+import { checkResourceEligibilityDebug } from "../figma_app/86989";
 import { x as _$$x } from "../905/239551";
 import { isValidWidgetType } from "../figma_app/364284";
 import { VisualBellActions } from "../905/302958";
@@ -41,7 +41,7 @@ function L(e, t, i) {
   let s = debugState.getState();
   for (let t of e) if (!hasLocalFileId(t) && canRunPluginWithinOrg(s, t)) try {
     let e = publishedWidgets ? publishedWidgets[t.plugin_id] : void 0;
-    if (hasMonetizedResourceMetadata(e) && Rm(e)) {
+    if (hasMonetizedResourceMetadata(e) && checkResourceEligibilityDebug(e)) {
       if (!i.showUnpurchased) continue;
       a.push({
         type: "run-menu-action",
@@ -80,7 +80,7 @@ export function $$F0(e, t) {
   let r = debugState.getState();
   let a = canPerformAction(r);
   if (!e.userCanViewWidgets) return i;
-  if (!a || n || !BE(r)) {
+  if (!a || n || !isEditorTypeSupportedFor(r)) {
     i.push(ft({
       nameStringKey: "widgets-menu-view-only",
       menuAction: {
@@ -91,7 +91,7 @@ export function $$F0(e, t) {
     return i;
   }
   let s = function (e) {
-    let t = e.recentlyUsedWidgets?.sort(YW);
+    let t = e.recentlyUsedWidgets?.sort(comparePluginsByName);
     if (!t || 0 === t.length) return [];
     let i = L(t, e, {
       showUnpurchased: !1
@@ -109,7 +109,7 @@ export function $$F0(e, t) {
     let {
       savedWidgetVersions
     } = e;
-    let n = savedWidgetVersions ? Object.values(savedWidgetVersions).sort(YW).filter(e => "user" === e.installed_by) : [];
+    let n = savedWidgetVersions ? Object.values(savedWidgetVersions).sort(comparePluginsByName).filter(e => "user" === e.installed_by) : [];
     if (!n || 0 === n.length) return [];
     let r = L(n, e, t);
     return [{

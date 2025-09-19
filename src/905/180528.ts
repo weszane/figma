@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { h as _$$h } from "../905/207101";
@@ -108,7 +108,7 @@ export function $$O1({
   let W = V?.data?.link;
   let K = S && W ? jsx("div", {
     className: "subscription_file_view_header--openFileSpacing--fs5yN",
-    children: jsx(_$$N, {
+    children: jsx(Link, {
       href: W,
       newTab: !0,
       children: renderI18nText("design_systems.libraries_modal.open_file")

@@ -18,7 +18,7 @@ import { trackAuthEvent } from '../905/248178';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, getI18nStringAlias, getLocalizedPath, renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { k as _$$k3 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { appendSearchParam } from '../905/508367';
@@ -430,7 +430,7 @@ function H(e) {
     }), jsxs('div', {
       className: 'two_factor--center--c14hu',
       children: [e.auth.smsOkay && !i && jsxs(Fragment, {
-        children: [jsx(_$$N, {
+        children: [jsx(Link, {
           href: '#',
           onClick: () => {
             t(q_({
@@ -442,7 +442,7 @@ function H(e) {
         }), jsx(_$$k, {
           multiple: 2
         })]
-      }), jsx(_$$N, {
+      }), jsx(Link, {
         href: '#',
         onClick: () => {
           atomStoreManager.set(_G, null);
@@ -550,7 +550,7 @@ function Q(e) {
         multiple: 1
       }), jsx('div', {
         className: 'join_org--link--cdSS1',
-        children: jsx(_$$N, {
+        children: jsx(Link, {
           href: `/switch_user?cont=${encodeURIComponent(i)}`,
           children: renderI18nText('permissions.join_org.switch_accounts')
         })
@@ -587,7 +587,7 @@ function et(e) {
       multiple: 2
     }), jsx('div', {
       className: ee,
-      children: jsx(_$$N, {
+      children: jsx(Link, {
         onClick: () => t(changeAuthFormState({
           formState: AuthFlowStep.SIGN_IN
         })),
@@ -616,7 +616,7 @@ function ei(e) {
       })
     }), jsx('div', {
       className: ee,
-      children: jsx(_$$N, {
+      children: jsx(Link, {
         onClick: () => t(changeAuthFormState({
           formState: AuthFlowStep.SIGN_IN
         })),
@@ -669,7 +669,7 @@ function en(e) {
       multiple: 4
     }), jsx('div', {
       className: 'password_reset--center--Z4tPu',
-      children: jsx(_$$N, {
+      children: jsx(Link, {
         onClick: () => t(changeAuthFormState({
           formState: AuthFlowStep.SIGN_IN
         })),
@@ -1168,7 +1168,7 @@ function ej(e) {
       className: ew,
       children: jsx('div', {
         className: y()(ek, 'sign_in_and_up--signInWithPassword--WpKvE'),
-        children: !i && jsx(_$$N, {
+        children: !i && jsx(Link, {
           onClick: () => {
             t(changeAuthFormState({
               formState: AuthFlowStep.SIGN_IN
@@ -1193,7 +1193,7 @@ function eB(e) {
     className: ew,
     children: [e.onSwitchToSaml && jsx('div', {
       className: ek,
-      children: jsx(_$$N, {
+      children: jsx(Link, {
         onClick: e.onSwitchToSaml,
         href: '#',
         children: r
@@ -1203,7 +1203,7 @@ function eB(e) {
         multiple: 2
       }), jsx('div', {
         className: ek,
-        children: jsx(_$$N, {
+        children: jsx(Link, {
           onClick: e.onForgotPassword,
           href: '#',
           children: getI18nString('auth.footer-forgot-password')
@@ -1217,7 +1217,7 @@ function eB(e) {
         children: jsx('div', {
           className: 'sign_in_and_up--switchFormText--mE2oB auth_brand--text--yNin9',
           children: jsxs('p', {
-            children: [t, ' ', jsx(_$$N, {
+            children: [t, ' ', jsx(Link, {
               onClick: e.onChangeFormClick,
               href: '#',
               children: i
@@ -1611,7 +1611,7 @@ function eJ(e) {
       className: ew,
       children: jsx('div', {
         className: ek,
-        children: jsx(_$$N, {
+        children: jsx(Link, {
           onClick: () => {
             e.auth.existingSession ? customHistory.redirect('/') : t(changeAuthFormState({
               formState: AuthFlowStep.EMAIL_ONLY
@@ -2030,7 +2030,7 @@ function tr() {
 function ta({
   checkInIframe: e
 }) {
-  return jsx(_$$N, {
+  return jsx(Link, {
     href: e() ? '/logout?cont=/login_iframe' : '/logout',
     trusted: !0,
     children: getI18nString('auth.validate-email.log-out-link')
@@ -2140,7 +2140,7 @@ function ts() {
       children: [jsx('p', {
         className: y()(o, e3, _$$s.mt16.$, e7),
         children: renderI18nText('auth.validate-email.resend-email', {
-          resendEmailLink: jsx(_$$N, {
+          resendEmailLink: jsx(Link, {
             onClick: p,
             trusted: !0,
             href: '#',

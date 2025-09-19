@@ -15,7 +15,7 @@ import { Tf } from '../905/280919';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { Y as _$$Y } from '../905/506207';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
@@ -124,7 +124,7 @@ function ec(e) {
     showTitle: !0,
     submitButtonText: getI18nString('bug_reporter.modal.submit'),
     successMessage: renderI18nText('bug_reporter.urgent_bug_info', {
-      notifyTheRelevantOncall: jsx(_$$N, {
+      notifyTheRelevantOncall: jsx(Link, {
         newTab: !0,
         href: 'https://go/find-oncall',
         trusted: !0,
@@ -822,7 +822,7 @@ function eh(e) {
         className: AX,
         children: [jsx(SvgComponent, {
           svg: _$$A5
-        }), jsx(_$$N, {
+        }), jsx(Link, {
           newTab: !0,
           onClick: r,
           href: e.taskUrl,
@@ -846,7 +846,7 @@ function eh(e) {
     }), e.isNewReport && jsx('div', {
       children: e.successMessage
     }), e.slackUrl && jsx('div', {
-      children: jsx(_$$N.Button, {
+      children: jsx(Link.Button, {
         href: e.slackUrl,
         newTab: !0,
         children: renderI18nText('bug_reporter.open_slack_discussion')
@@ -874,7 +874,7 @@ let $$eg1 = registerModal(e => jsx(eu, {
   showTitle: !1,
   submitButtonText: getI18nString('bug_reporter.modal.submit_performance'),
   successMessage: renderI18nText('bug_reporter.success_perf_follow_along', {
-    slackChannel: jsx(_$$N, {
+    slackChannel: jsx(Link, {
       newTab: !0,
       href: 'https://go/slack-performance-reports',
       trusted: !0,

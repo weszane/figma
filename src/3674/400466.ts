@@ -81,7 +81,7 @@ import { A as _$$A10 } from "../svg/275646";
 import { useMenu, MenuRoot, MenuContainer, MenuItemPrimitive } from "../905/465888";
 import { MenuRootComp, MenuContainerComp, MenuGroupComp, MenuItemComp } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { J as _$$J2 } from "../905/125993";
@@ -3307,7 +3307,7 @@ function n5({
         className: "annotation--visibilityDisclaimer--oQFzZ text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
         children: [jsx("p", {
           children: getI18nString("dev_handoff.annotations.visibility_disclaimer")
-        }), jsx(_$$N, {
+        }), jsx(Link, {
           href: "https://help.figma.com/hc/articles/20774752502935-Add-measurements-and-annotate-designs-in-Dev-Mode",
           newTab: !0,
           onClick: eR,

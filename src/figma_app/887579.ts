@@ -6,7 +6,7 @@ import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { LinkPrimitive } from "../figma_app/496441";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
@@ -189,7 +189,7 @@ function C({
     },
     className: "inspectors--downloadLinkButton--cqFWb",
     children: t
-  }) : jsx(_$$N, {
+  }) : jsx(Link, {
     trusted: !0,
     href: s,
     download: d,

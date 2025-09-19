@@ -53,7 +53,7 @@ import { N as _$$N } from "../905/865305";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useDispatch } from "react-redux";
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { e as _$$e2 } from "../905/295932";
 import { f as _$$f2 } from "../6268/481313";
 import { I as _$$I } from "../905/932503";
@@ -1547,7 +1547,7 @@ function nN({
       }), jsx("div", {
         className: "component_browser_settings_panel--footer--2OuKN",
         children: renderI18nText("dev_handoff.component_browser.settings.footer_message", {
-          learnMore: jsx(_$$N2, {
+          learnMore: jsx(Link, {
             href: "https://docs.google.com/document/d/1IsJTLpqR1rRQfphfbotvWoYbtoaZExKpggeANRFmRI8/edit?tab=t.0",
             newTab: !0,
             "aria-label": getI18nString("dev_handoff.component_browser.settings.footer_message_link"),

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogTitle } from "../figma_app/272243";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { ModalCloseButton } from "../905/17223";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
@@ -58,7 +58,7 @@ export let $$b0 = registerModal(function ({
           children: renderI18nText("upsell.shared.cancel")
         }), jsx("div", {
           className: "upsell_modals--confirmButton--Yk-OB modal--confirmButton--SNUDv",
-          children: jsx(N.Button, {
+          children: jsx(Link.Button, {
             href: "#",
             onClick: () => {
               if (!E) return;

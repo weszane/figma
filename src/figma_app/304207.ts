@@ -10,11 +10,11 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { b6, Qi } from "../figma_app/559491";
 import { HubEventType, FigmaResourceType } from "../figma_app/350203";
-import { N3 } from "../figma_app/844435";
+import { transformPublishedPluginToInstalled } from "../figma_app/844435";
 import { getHubTypeString } from "../figma_app/740025";
 import { ResourceTypeNoComment, isWidget, HubTypeEnum } from "../figma_app/45218";
 import { pluginAPIService } from "../905/3209";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 import { n as _$$n2 } from "../905/347702";
 let $$T1 = createActionCreator("SET_SAVED_PLUGIN_VERSIONS");
 let $$I5 = createOptimistThunk((e, t) => {
@@ -54,7 +54,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   let N = XHR.post(x, A);
   if (v.user && I?.resource) {
     let e = `optimistic-plugin-install-${generateUUIDv4()}`;
-    let t = N3(I.resource, {
+    let t = transformPublishedPluginToInstalled(I.resource, {
       userId: p ? null : v.user.id,
       orgId: p ?? null
     });
@@ -206,7 +206,7 @@ let x = {
     });
   },
   [HubTypeEnum.WIDGET]: function (e) {
-    return U.getInstallStatus({
+    return widgetAPIClient.getInstallStatus({
       orgId: e
     });
   }

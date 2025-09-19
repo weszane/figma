@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, memo, useState, useEffect, useRef, PureComponent, Fragment as _$$Fragment } from "react";
 import { sortByDateProperty, sortByPropertyWithOptions, sortByProperty } from "../figma_app/656233";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage } from "../905/657224";
 import d from "classnames";
@@ -238,7 +238,7 @@ class X extends PureComponent {
           fileCount: this.props.fileStats.length
         }), " ", jsx("div", {
           className: "library_item_view--componentViewFooterInlineLink--ngFvo",
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             href: "https://help.figma.com/hc/articles/360039238353",
             newTab: !0,
             trusted: !0,
@@ -481,7 +481,7 @@ function et({
     nodeId: e.node_id,
     mainComponent: !0
   });
-  return t.data?.link == null || t.data?.type === "community" ? null : jsx(_$$N, {
+  return t.data?.link == null || t.data?.type === "community" ? null : jsx(Link, {
     href: t.data.link,
     newTab: !0,
     trusted: !0,

@@ -2,7 +2,7 @@ import _require2 from "../905/10835";
 import _require from "../905/10835";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
@@ -80,7 +80,7 @@ export function $$I2(e, t) {
             children: jsx(setupThemeContext, {
               brand: "seascape",
               mode: "dark",
-              children: jsx(N, {
+              children: jsx(Link, {
                 href: `https://${params.text}`,
                 newTab: !0,
                 children: params.text
@@ -97,7 +97,7 @@ export function $$I2(e, t) {
             children: jsx(setupThemeContext, {
               brand: "seascape",
               mode: "dark",
-              children: jsx(N, {
+              children: jsx(Link, {
                 href: `https://${params.text}`,
                 newTab: !0,
                 children: params.text

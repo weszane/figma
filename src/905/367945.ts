@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w } from "../905/113805";
@@ -86,7 +86,7 @@ export function $$A0({
   });
 }
 function y() {
-  return jsx(N, {
+  return jsx(Link, {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",
     trusted: !0,

@@ -9,7 +9,7 @@ import { StatsigAPI } from "../905/325034";
 import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
 import { setupToggleButton } from "../905/167712";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { $ } from "../905/953280";
 import { Te } from "../vendor/813803";
@@ -45,7 +45,7 @@ let D = memo(function (e) {
             children: e.flagName
           }), jsxs("div", {
             className: _$$s.flex.itemsCenter.gap2.$,
-            children: [jsx(_$$N, {
+            children: [jsx(Link, {
               newTab: !0,
               href: `https://console.statsig.com/5ETXMP5xDW3P7AMyQ14tey/gates/${encodeURIComponent(e.flagName)}`,
               children: jsx("img", {
@@ -191,7 +191,7 @@ function F(e) {
       })
     }), jsx(DialogFooter, {
       children: jsxs(DialogActionStrip, {
-        children: [jsx(_$$N.Button, {
+        children: [jsx(Link.Button, {
           newTab: !0,
           variant: "secondary",
           iconPrefix: jsx($, {}),

@@ -22,7 +22,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { PluginAction } from "../905/15667";
 import { KE } from "../905/116101";
 import { withTrackedClick } from "../figma_app/831799";
-import { V2, WK } from "../figma_app/844435";
+import { useCanRunExtensions, findLocalPluginById } from "../figma_app/844435";
 import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
@@ -81,7 +81,7 @@ export let $$ep3 = "CREATE_PLUGIN_DROPDOWN";
 export function $$ed0(e) {
   let i = useDispatch();
   let t = useSelector(e => e.dropdownShown);
-  let n = V2();
+  let n = useCanRunExtensions();
   let s = e.resourceType === HubTypeEnum.WIDGET;
   return t?.data?.targetRect ? jsxs(Cf, {
     minWidth: 163,
@@ -410,7 +410,7 @@ function eg(e) {
     let s = useDispatch();
     let l = useRef(null);
     let p = getPluginVersion(e.plugin);
-    let d = WK(e.plugin.id);
+    let d = findLocalPluginById(e.plugin.id);
     let u = useCallback(() => i(e.plugin), [e.plugin])();
     return jsxs(Fragment, {
       children: [jsx(eg, {

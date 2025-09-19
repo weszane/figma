@@ -15,7 +15,7 @@ import { fileCommentAttachmentAPI } from '../905/348437';
 import { selectCurrentUser } from '../905/372672';
 import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
-import { MZ } from '../905/470594';
+import { enqueueNetworkErrorBell } from '../905/470594';
 import { Y as _$$Y } from '../905/506207';
 import { createRect } from '../905/508367';
 import { Button } from '../905/521428';
@@ -278,7 +278,7 @@ export function $$ed1(e) {
   }, [deleteAttachment, eZ]);
   let e1 = useCallback((e, t) => {
     if (e instanceof UploadError) {
-      MZ(dispatch, getI18nString('check_network_compatibility.error_bell.comment_attachments.message'));
+      enqueueNetworkErrorBell(dispatch, getI18nString('check_network_compatibility.error_bell.comment_attachments.message'));
       return;
     }
     dispatch(VisualBellActions.enqueue({

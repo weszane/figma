@@ -43,7 +43,7 @@ import { oA } from "../figma_app/812915";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { H as _$$H2 } from "../1156/461363";
 import { throwTypeError } from "../figma_app/465776";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { BannerButton } from "../905/692618";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -914,7 +914,7 @@ function tM({
   });
 }
 function tR() {
-  return jsx(_$$N2, {
+  return jsx(Link, {
     href: "https://creativecommons.org/licenses/by/4.0/",
     newTab: !0,
     children: renderI18nText("design_systems.preset_libraries.tooltip.figma_license_link")

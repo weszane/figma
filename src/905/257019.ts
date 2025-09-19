@@ -3,7 +3,7 @@ import { debugState } from "../905/407919";
 import { findProfile } from "../figma_app/740025";
 import { PluginType } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 export function $$d0(e, t) {
   let i = e.roles.org?.id ?? "";
   return !!i && t === i;
@@ -27,7 +27,7 @@ class c {
     return (this.extensionType === PluginType.Plugin ? await pluginAPIService.getOrgWhitelist({
       orgId: e.id,
       profileId: n?.id
-    }) : await U.getOrgWhitelist({
+    }) : await widgetAPIClient.getOrgWhitelist({
       orgId: e.id,
       profileId: n?.id
     })).data.meta;

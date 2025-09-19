@@ -96,7 +96,7 @@ import { TextWithTruncation } from "../905/984674";
 import { NJ } from "../figma_app/419216";
 import { e as _$$e2 } from "../905/916195";
 import { SvgComponent } from "../905/714743";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { k as _$$k3 } from "../905/888808";
 import { A as _$$A3 } from "../svg/745787";
 import { A as _$$A4 } from "../svg/808438";
@@ -887,7 +887,7 @@ function tb() {
           className: ty
         })]
       }), jsxs("p", {
-        children: ["Leverage the power of AI to help speed up and enhance your workflow with FigJam\u2019s", " ", jsx(_$$N2, {
+        children: ["Leverage the power of AI to help speed up and enhance your workflow with FigJam\u2019s", " ", jsx(Link, {
           href: "https://www.figma.com/ai/",
           children: "AI tools"
         }), "\u2014available on any team plan.", " "]
@@ -905,7 +905,7 @@ function tb() {
         }), jsxs("li", {
           children: [jsx("strong", {
             children: "Ideate with Jambot."
-          }), " Jambot is a", " ", jsx(_$$N2, {
+          }), " Jambot is a", " ", jsx(Link, {
             href: "https://www.figma.com/community/widget/1274481464484630971",
             children: "FigJam widget"
           }), " ", "you can use to quickly brainstorm ideas, summarize meeting notes, create diagrams, reformat text, generate code, and more based on the prompt you provide."]
@@ -1034,30 +1034,30 @@ function tb() {
         children: [jsxs("li", {
           children: [jsx("strong", {
             children: "Plugins and widgets."
-          }), " Find the", " ", jsx(_$$N2, {
+          }), " Find the", " ", jsx(Link, {
             href: "https://www.figma.com/community/design-tools?resource_type=plugins",
             children: "plugin"
-          }), " ", "or", " ", jsx(_$$N2, {
+          }), " ", "or", " ", jsx(Link, {
             href: "https://www.figma.com/community/whiteboarding?resource_type=widgets",
             children: "widget"
-          }), " ", "you need to make your FigJam experience more enjoyable and efficient. For example, the", " ", jsx(_$$N2, {
+          }), " ", "you need to make your FigJam experience more enjoyable and efficient. For example, the", " ", jsx(Link, {
             href: "https://www.figma.com/community/widget/1274481464484630971",
             children: "Jambot widget"
           }), " ", "leverages AI technology to help you brainstorm creative ideas, gather more information on a topic, write code, summarize content, and more.", " "]
         }), jsxs("li", {
           children: [jsx("strong", {
             children: "Integrations."
-          }), " FigJam integrates with various project management, design, and development tools like", " ", jsx(_$$N2, {
+          }), " FigJam integrates with various project management, design, and development tools like", " ", jsx(Link, {
             href: "https://www.figma.com/asana-for-figma/",
             children: "Asana"
-          }), " and", " ", jsx(_$$N2, {
+          }), " and", " ", jsx(Link, {
             href: "https://www.figma.com/github-for-figjam/",
             children: "GitHub"
           }), " to keep projects moving smoothly.", " "]
         }), jsxs("li", {
           children: [jsx("strong", {
             children: "Community resources."
-          }), " Browse the Figma Community to explore additional templates, plugins, and tools to use with FigJam\u2019s online whiteboard, like personalizing team boards with", " ", jsx(_$$N2, {
+          }), " Browse the Figma Community to explore additional templates, plugins, and tools to use with FigJam\u2019s online whiteboard, like personalizing team boards with", " ", jsx(Link, {
             href: "https://www.figma.com/community/widget/1151936790942917527/Bitmoji",
             children: "Bitmojis."
           })]
@@ -1282,7 +1282,7 @@ function tI() {
           className: ty
         })]
       }), jsxs("p", {
-        children: ["FigJam offers tons of pre-made", " ", jsx(_$$N2, {
+        children: ["FigJam offers tons of pre-made", " ", jsx(Link, {
           href: "https://www.figma.com/templates/diagramming/",
           children: "diagramming templates"
         }), " ", "that are easy to edit and customize to fit your needs. Browse Figma\u2019s template library to find the one you need or open a diagram template on your whiteboard by clicking the Template button in the top right menu bar.", " "]
@@ -1300,7 +1300,7 @@ function tI() {
       }), jsxs("p", {
         children: ["To access a template from your whiteboard, click the Plus button at the bottom right of your toolbar. Then, navigate to the templates section to find the template you\u2019re looking for. You can also select the template icon located on the top right menu bar. If you\u2019d like to add a template to a section, click the template icon next to the section title, then browse different templates for team meetings, brainstorms, and more.", " "]
       }), jsxs("p", {
-        children: ["You can also visit the", " ", jsx(_$$N2, {
+        children: ["You can also visit the", " ", jsx(Link, {
           href: "https://www.figma.com/templates/",
           children: "template library"
         }), " to explore over 300 free templates. Once you\u2019ve found the one you need, click the Start Diagramming or Get Started button to open the template directly in FigJam.", " "]
@@ -1318,7 +1318,7 @@ function tI() {
       }), jsxs("p", {
         children: ["To use a pre-made template, click the Plus icon on the bottom toolbar and navigate to the Templates tab to search for or find templates organized by category. You can also click the template icon in the top right corner to quickly browse through ready-made template options.", " "]
       }), jsxs("p", {
-        children: ["Explore Figma\u2019s online", " ", jsx(_$$N2, {
+        children: ["Explore Figma\u2019s online", " ", jsx(Link, {
           href: "https://www.figma.com/templates/",
           children: "template library"
         }), " to view all of the free templates, from brainstorming and strategic planning to diagramming and meeting planning.", " "]
@@ -1337,42 +1337,42 @@ function tI() {
         children: "You can kickstart your ideas with hundreds of free online whiteboard templates. Some of the most popular ones include:"
       }), jsxs("ul", {
         children: [jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/project-kickoff-template/",
             children: "Project kickoff template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/flow-chart-template/",
             children: "Flowchart template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/team-meeting-agenda-template/",
             children: "Team meeting template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/customer-journey-map/",
             children: "Customer journey map template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/daily-stand-up-meeting-template/",
             children: "Standup template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/project-retrospective-template/",
             children: "Retrospective template"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://www.figma.com/templates/agile-roadmap-template/",
             children: "Roadmap review template"
           }), " "]
         }), jsx("li", {
-          children: jsx(_$$N2, {
+          children: jsx(Link, {
             href: "https://www.figma.com/templates/timeline-template/",
             children: "Project timeline template"
           })
@@ -1393,12 +1393,12 @@ function tI() {
       }), jsxs("p", {
         children: ["If you want to copy individual objects or symbols on your flowchart, click the item you want to copy and hit Command + C on your keyboard, or right-click and hit Copy.", " "]
       }), jsxs("p", {
-        children: ["You can also make a copy of your flowchart for others to use by adding it to the", " ", jsx(_$$N2, {
+        children: ["You can also make a copy of your flowchart for others to use by adding it to the", " ", jsx(Link, {
           href: "https://www.figma.com/community/",
           children: "Figma Community"
         }), ". To do this, click the Share button in the top right corner of your board, then click Publish to Community. You must have \u201CCan edit\u201D access to publish the file to the Community.", " "]
       }), jsxs("p", {
-        children: [jsx(_$$N2, {
+        children: [jsx(Link, {
           href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Community",
           children: "Learn more about how to publish files to the Figma Community"
         }), ".", " "]
@@ -1416,7 +1416,7 @@ function tI() {
       }), jsxs("p", {
         children: ["Absolutely! Flowchart symbols are shapes, lines, and arrows that represent actions or processes on your flowchart diagram. For example, a diamond shape symbolizes points where decisions are made, rectangles signify a specific action or step needed to carry out a process, and parallelograms show where users input or output data.", " "]
       }), jsxs("p", {
-        children: ["FigJam\u2019s online whiteboard has over 20 shapes and symbols you can use to build a flowchart that maps user flows, systems, and processes. Read FigJam\u2019s", " ", jsx(_$$N2, {
+        children: ["FigJam\u2019s online whiteboard has over 20 shapes and symbols you can use to build a flowchart that maps user flows, systems, and processes. Read FigJam\u2019s", " ", jsx(Link, {
           href: "https://www.figma.com/resource-library/flowchart-symbols/",
           children: "flowchart symbol guide"
         }), " ", "to learn more about what each symbol means and how to effectively use them.", " "]
@@ -1460,7 +1460,7 @@ function tI() {
           className: ty
         })]
       }), jsxs("p", {
-        children: ["Shapes already come with the option to add text, making it easy to add text and labels when", " ", jsx(_$$N2, {
+        children: ["Shapes already come with the option to add text, making it easy to add text and labels when", " ", jsx(Link, {
           href: "https://www.figma.com/resource-library/how-to-create-a-flow-chart/",
           children: "building your flowchart"
         }), ". When resizing a shape, use the text option in the toolbar to adjust the text or make any other formatting changes to enhance readability.", " "]
@@ -1493,7 +1493,7 @@ function tI() {
       }), jsxs("p", {
         children: ["Use lines and connectors located on the bottom toolbar to connect shapes and symbols on your flowchart. Lines automatically snap onto the shapes and stickies you select, allowing you to move the object around the board without disrupting the connector.", " "]
       }), jsxs("p", {
-        children: ["To speed up the flowchart process, use", " ", jsx(_$$N2, {
+        children: ["To speed up the flowchart process, use", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/1500004291601-Build-faster-with-quick-create-in-FigJam#Quick_create_shapes",
           children: "quick create"
         }), " ", "to automatically connect shapes as you\u2019re creating them.", " "]
@@ -1586,7 +1586,7 @@ function tI() {
       }), jsxs("p", {
         children: ["To explore the flowchart symbols FigJam offers, click the shapes on the bottom toolbar, then click Flowchart on the dropdown menu.", " "]
       }), jsxs("p", {
-        children: [jsx(_$$N2, {
+        children: [jsx(Link, {
           href: "https://help.figma.com/hc/articles/1500004414382-Visualize-information-using-shapes-with-text",
           children: "Learn more about visualizing information and building flowcharts with shapes"
         }), ".", " "]
@@ -1672,12 +1672,12 @@ function tS() {
           className: ty
         }), " "]
       }), jsxs("p", {
-        children: ["FigJam is an online whiteboard that can be used for free forever with unlimited collaborators in three editable files. Paid plans start at just $5 per user per month, less than a third of the cost of Miro and Mural.", " ", jsx(_$$N2, {
+        children: ["FigJam is an online whiteboard that can be used for free forever with unlimited collaborators in three editable files. Paid plans start at just $5 per user per month, less than a third of the cost of Miro and Mural.", " ", jsx(Link, {
           href: "https://www.figma.com/figjam-vs-miro/",
           children: "Compare FigJam to Miro"
         }), "."]
       }), jsxs("p", {
-        children: ["To learn more about FigJam plans, visit the", " ", jsx(_$$N2, {
+        children: ["To learn more about FigJam plans, visit the", " ", jsx(Link, {
           href: "https://www.figma.com/pricing/#figjam",
           children: "pricing page"
         }), ".", " "]
@@ -1693,16 +1693,16 @@ function tS() {
           className: ty
         }), " "]
       }), jsxs("p", {
-        children: ["Collaborative online whiteboards like FigJam make all types of activities more inclusive, productive, and fun, including", " ", jsx(_$$N2, {
+        children: ["Collaborative online whiteboards like FigJam make all types of activities more inclusive, productive, and fun, including", " ", jsx(Link, {
           href: "https://www.figma.com/figjam/diagramming-tool/",
           children: "diagramming"
-        }), ", journey mapping,", " ", jsx(_$$N2, {
+        }), ", journey mapping,", " ", jsx(Link, {
           href: "https://www.figma.com/figjam/strategic-planning/",
           children: "strategic planning"
-        }), ",", " ", jsx(_$$N2, {
+        }), ",", " ", jsx(Link, {
           href: "https://www.figma.com/figjam/agile-workflows/",
           children: "agile workflows"
-        }), ", and facilitating ", jsx(_$$N2, {
+        }), ", and facilitating ", jsx(Link, {
           href: "https://www.figma.com/figjam/team-meetings/",
           children: "team meetings"
         }), " ", "and workshops."]
@@ -1720,7 +1720,7 @@ function tS() {
       }), jsxs("p", {
         children: ["While FigJam isn't a traditional presentation tool, its interactive features make it a great tool for presenting ideas and engaging in conversations with teams. Whether you're holding a design retrospective or brainstorming session, you can invite team members to view and follow your board using the Spotlight and audio call feature.", " "]
       }), jsxs("p", {
-        children: [jsx(_$$N2, {
+        children: [jsx(Link, {
           href: "https://www.figma.com/slides/",
           children: "Learn more about creating presentations with Figma Slides"
         }), ".", " "]
@@ -1738,7 +1738,7 @@ function tS() {
       }), jsxs("p", {
         children: ["Yes. Use sticky notes, shapes, or text boxes to add your thoughts. Format your text using a bulleted or numbered list, then use the marker or highlighter to draw attention to important information.", " "]
       }), jsxs("p", {
-        children: ["FigJam's", " ", jsx(_$$N2, {
+        children: ["FigJam's", " ", jsx(Link, {
           href: "https://www.figma.com/templates/meeting-notes-template/",
           children: "meeting notes template"
         }), " ", "is a great starting point for jotting down important takeaways and organizing your notes.", " "]
@@ -1770,22 +1770,22 @@ function tS() {
         children: ["FigJam integrates with many popular conferencing platforms to make it easy to present your whiteboard without leaving your conferencing tool. Learn more about how to integrate FigJam with the following platforms:", " "]
       }), jsxs("ul", {
         children: [jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://help.figma.com/hc/articles/17720082601751-Figma-and-Zoom",
             children: "FigJam and Zoom"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://help.figma.com/hc/articles/16921722048151-Figma-and-Google-Meet",
             children: "FigJam and Google Meet"
           }), " "]
         }), jsxs("li", {
-          children: [jsx(_$$N2, {
+          children: [jsx(Link, {
             href: "https://help.figma.com/hc/articles/7405452518423-Figma-and-Microsoft-Teams",
             children: "FigJam and Microsoft Teams"
           }), " "]
         }), jsx("li", {
-          children: jsx(_$$N2, {
+          children: jsx(Link, {
             href: "https://help.figma.com/hc/articles/1500002613622-P2-and-Figma",
             children: "FigJam and P2"
           })
@@ -1818,7 +1818,7 @@ function tS() {
           }), " FigJam is the only online collaboration tool that connects to Figma and other tools product and design teams count on to streamline workflows."]
         })]
       }), jsx("p", {
-        children: jsx(_$$N2, {
+        children: jsx(Link, {
           href: "https://www.figma.com/figjam-vs-miro/",
           children: "Learn more about the difference between FigJam and Miro."
         })
@@ -1834,12 +1834,12 @@ function tS() {
           className: ty
         })]
       }), jsxs("p", {
-        children: [jsx(_$$N2, {
+        children: [jsx(Link, {
           href: "https://help.figma.com/hc/en-us",
           children: "Figma's Learn Center"
         }), " is a great place to learn more about FigJam's features, use cases, and best practices. Or, open a blank whiteboard to play around with the different features FigJam has to offer."]
       }), jsxs("p", {
-        children: ["Explore", " ", jsx(_$$N2, {
+        children: ["Explore", " ", jsx(Link, {
           href: "https://www.figma.com/resource-library/",
           children: "Figma's Resource Library"
         }), " for tips and tricks on how FigJam can help with brainstorming, strategic planning, diagramming, and more."]
@@ -1870,12 +1870,12 @@ function tS() {
           className: ty
         })]
       }), jsxs("p", {
-        children: ["Teachers from K\u201312 to higher education love using FigJam to facilitate collaborative classroom discussions, brainstorms, and group work.", " ", jsx(_$$N2, {
+        children: ["Teachers from K\u201312 to higher education love using FigJam to facilitate collaborative classroom discussions, brainstorms, and group work.", " ", jsx(Link, {
           href: "https://www.figma.com/education/",
           children: "FigJam's open sessions are available on education plans, allowing you to temporarily invite people to interact with your board even if they don't have a Figma account. This is great for educators looking to host small workshops or feedback sessions with their students."
         }), " "]
       }), jsxs("p", {
-        children: [jsx(_$$N2, {
+        children: [jsx(Link, {
           href: "https://www.figma.com/education/",
           children: "Learn more about using FigJam for education"
         }), "."]
@@ -1956,7 +1956,7 @@ function tS() {
         }), jsxs("li", {
           children: [jsx("strong", {
             children: "Markdown."
-          }), " Easily format any text using Markdown syntax. Learn more about the Markdown syntax FigJam supports", " ", jsx(_$$N2, {
+          }), " Easily format any text using Markdown syntax. Learn more about the Markdown syntax FigJam supports", " ", jsx(Link, {
             href: "https://help.figma.com/hc/articles/1500004291281-Create-text-and-links-in-FigJam#h_01HAQ9NYM8AYGY1W88Q4W58ST2",
             children: "here"
           }), "."]
@@ -2002,7 +2002,7 @@ function tS() {
       }), jsxs("p", {
         children: ["Rotating and resizing uploaded image files on your whiteboard is simple. To resize an image, click and drag the bounding box around the image to get it to your desired proportions. To rotate the image, click the file, then hit the Crop image button that's located on the popup toolbar. From there, you can rotate the image or change its aspect ratio.", " "]
       }), jsxs("p", {
-        children: ["You can also bring Figma designs into FigJam with the ability to move, flip, rotate, or rearrange the objects on your board.", " ", jsx(_$$N2, {
+        children: ["You can also bring Figma designs into FigJam with the ability to move, flip, rotate, or rearrange the objects on your board.", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/1500005916661-Work-between-Figma-and-FigJam",
           children: "Learn more about working between Figma and FigJam"
         }), ".", " "]
@@ -2107,16 +2107,16 @@ function tS() {
           }), " can be imported using CSV data"]
         })]
       }), jsxs("p", {
-        children: ["You can also import content and documents from", " ", jsx(_$$N2, {
+        children: ["You can also import content and documents from", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/24196705785111-Import-Mural-content-to-FigJam",
           children: "Mural"
-        }), ",", " ", jsx(_$$N2, {
+        }), ",", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/24170628689047-Import-Lucid-documents-to-FigJam",
           children: "Lucid"
-        }), ",", " ", jsx(_$$N2, {
+        }), ",", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/6227676527255-Import-Miro-boards-to-FigJam",
           children: "Miro"
-        }), ", and", " ", jsx(_$$N2, {
+        }), ", and", " ", jsx(Link, {
           href: "https://help.figma.com/hc/articles/17028583915159-Migrate-Google-Jamboards-to-FigJam",
           children: "Google Jamboards"
         }), ".", " "]

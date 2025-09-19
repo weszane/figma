@@ -172,7 +172,7 @@ import { DEV_HAND } from "../figma_app/910914";
 import { setupUserPluginPreferences } from "../figma_app/545541";
 import { b as _$$b3 } from "../905/22449";
 import { c as _$$c3 } from "../905/34525";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { S as _$$S2 } from "../5132/724052";
 import { dP as _$$dP } from "../figma_app/119475";
 import { n as _$$n5 } from "../905/477505";
@@ -246,7 +246,7 @@ import { lW as _$$lW } from "../figma_app/11182";
 import { getOpenExternalPluginIds, isAllowedUploadPluginId, isAllowedUpload } from "../figma_app/455620";
 import { B as _$$B3 } from "../figma_app/539422";
 import { waitForAnimationFrame } from "../905/236856";
-import { $1, cW as _$$cW, uf as _$$uf, YN, nl as _$$nl, Be as _$$Be } from "../figma_app/844435";
+import { getLocalPlugins, usePublishedPlugins, usePluginManifestsByIds, useCanRunExtension, useLocalPluginsExcludingWidgets, useInstalledPluginsAndWidgets } from "../figma_app/844435";
 import { se as _$$se, Ut, Jc, xG, r2 as _$$r5 } from "../figma_app/603466";
 import { validateURLPattern, getPluginVersion, hasInspectOrPanelCapability } from "../figma_app/300692";
 import { createDeferredPromise } from "../905/263346";
@@ -339,13 +339,13 @@ import { IN } from "../905/116101";
 import { z as _$$z5 } from "../3271/42512";
 import { B0 } from "../figma_app/201703";
 import { s as _$$s5 } from "../figma_app/504088";
-import { hO as _$$hO, HT } from "../figma_app/69680";
+import { initialViewAtom, defaultViewAtom } from "../figma_app/69680";
 import { iT as _$$iT } from "../figma_app/74165";
 import { qs } from "../469e6e40/556776";
 import { d as _$$d9 } from "../905/480825";
 import { iA as _$$iA } from "../3674/705006";
 import { TabLoop } from "../905/718764";
-import { s4 as _$$s6 } from "../figma_app/276332";
+import { StyleType } from "../figma_app/276332";
 import { BannerInline } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N3 } from "../905/572042";
@@ -3201,7 +3201,7 @@ function iN() {
       })]
     }), jsx("div", {
       className: "configuration_wizard--customCodegenPromoLink--0l-Sa",
-      children: jsxs(_$$N2, {
+      children: jsxs(Link, {
         newTab: !0,
         href: "https://www.figma.com/plugin-docs/api/figma-codegen/",
         children: [renderI18nText("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_link"), jsx(_$$S2, {
@@ -4894,19 +4894,19 @@ function o1(e) {
 var o2 = (e => (e.OPEN = "open", e.PREVIEW = "preview", e))(o2 || {});
 function o5(e) {
   let t = function (e) {
-    let t = $1();
-    let n = _$$cW();
+    let t = getLocalPlugins();
+    let n = usePublishedPlugins();
     let a = useSelector(e => e.mirror.appModel.useLocalRelatedLinkPlugin);
     let l = useMemo(() => 0 === o$.size ? null : Object.values(t).find(t => !!o0(e, t)), [e, t]);
     let s = useMemo(() => 0 === o$.size ? null : Object.values(n).map(e => getPluginVersion(e)).find(t => !!o0(e, t)), [e, n]);
     let r = useMemo(() => Array.from(o$), []);
-    let d = _$$uf(r, {
+    let d = usePluginManifestsByIds(r, {
       enabled: !s
     });
     let c = useMemo(() => d.find(t => !!o0(e, t)) ?? null, [e, d]);
     return a && l ? l : s || c || null;
   }(e);
-  let n = YN();
+  let n = useCanRunExtension();
   return t && n(t) ? t : null;
 }
 function o3(e) {
@@ -5155,7 +5155,7 @@ function o8({
       children: X
     }) : jsx("div", {
       className: "developer_related_link_row--linkWrapper--uGIaN",
-      children: jsx(_$$N2.Button, {
+      children: jsx(Link.Button, {
         href: t.linkUrl,
         variant: "ghost",
         width: "fill",
@@ -8051,9 +8051,9 @@ function rX() {
     setCurrentView,
     currentPluginView
   } = function () {
-    let e = Xr(_$$hO);
-    let [t, n] = useAtomValueAndSetter(HT);
-    let a = AY(HT);
+    let e = Xr(initialViewAtom);
+    let [t, n] = useAtomValueAndSetter(defaultViewAtom);
+    let a = AY(defaultViewAtom);
     let o = useCallback(() => {
       e(t);
     }, [t, e]);
@@ -9192,9 +9192,9 @@ function cr() {
   } = selectWithShallowEqual(e => ({
     selectionProperties: e.mirror.selectionProperties
   }));
-  let t = _$$nl();
-  let n = _$$cW();
-  let i = _$$Be();
+  let t = useLocalPluginsExcludingWidgets();
+  let n = usePublishedPlugins();
+  let i = useInstalledPluginsAndWidgets();
   let l = Yo();
   let s = useDispatch();
   let r = useCurrentFileKey();
@@ -10496,7 +10496,7 @@ function uP() {
         children: [jsx("div", {
           className: "component_browser_in_context_mapping_section--description--Mbn4i",
           children: renderI18nText("dev_handoff.component_browser.in_context_section_description", {
-            value: jsx(_$$N2, {
+            value: jsx(Link, {
               newTab: !0,
               href: "https://docs.google.com/document/d/1IsJTLpqR1rRQfphfbotvWoYbtoaZExKpggeANRFmRI8/edit?tab=t.0#heading=h.t2s4u45z7gm6",
               children: renderI18nText("dev_handoff.component_browser.in_context_section_learn_more")
@@ -11043,7 +11043,7 @@ function pr() {
       className: pe,
       children: jsx("p", {
         children: renderI18nText("dev_handoff.mcp.requires_desktop_app_2", {
-          learnMoreLink: jsx(_$$N2, {
+          learnMoreLink: jsx(Link, {
             trusted: !0,
             newTab: !0,
             href: pi,
@@ -11165,7 +11165,7 @@ function pp() {
   });
 }
 function ph() {
-  return jsx(_$$N2, {
+  return jsx(Link, {
     trusted: !0,
     newTab: !0,
     href: "https://form.asana.com/?k=jMdFq_1SBUOyh8_k3q76QA&d=10497086658021",
@@ -11291,10 +11291,10 @@ function px() {
   });
 }
 function p_() {
-  VX(_$$s6.FILL);
-  VX(_$$s6.STROKE);
-  VX(_$$s6.TEXT);
-  VX(_$$s6.EFFECT);
+  VX(StyleType.FILL);
+  VX(StyleType.STROKE);
+  VX(StyleType.TEXT);
+  VX(StyleType.EFFECT);
   return null;
 }
 function pv({

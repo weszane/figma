@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { getVisibleTheme } from '../905/187165'
+import { getMPVisibleTheme } from '../905/187165'
 import { normalizeValue } from '../905/216495'
 import { DP as getTheme } from '../905/640017'
 import { getSingletonSceneGraph } from '../905/700578'
@@ -91,7 +91,7 @@ export function getViewState({
     }
     else {
       background
-        = theme && getVisibleTheme(theme) === 'dark'
+        = theme && getMPVisibleTheme(theme) === 'dark'
           ? 'rgba(30, 30, 30, 1)'
           : 'rgba(229, 229, 229, 1)'
       background = 'rgba(229, 229, 229, 0.1)'

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -19,7 +19,7 @@ export function $$h0(e) {
   let t = useDispatch();
   let a = useTeamPlanUser();
   let h = useIsAdminUser(a).unwrapOr(!1);
-  let x = jsxs(N, {
+  let x = jsxs(Link, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ",
     children: [" ", renderI18nText("resource_connection.request_modal.learn_more"), " "]
   });

@@ -1983,7 +1983,7 @@ export function filterEntriesByEditorType(editorType: any, obj: Record<string, a
  * @param arr - Array to filter.
  * @returns Filtered array.
  */
-export function filterArrayByEditorType(editorType: string, arr: any[]): any[] {
+export function filterArrayByEditorType(editorType: any, arr: any[]): any[] {
   return arr.filter(item => editorTypeFilter(editorType, item));
 }
 

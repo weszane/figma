@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { c as _$$c } from "../905/486270";
 import { getI18nString } from "../905/303541";
 import { getCommunityFileUrl } from "../905/612685";
@@ -35,7 +35,7 @@ export function $$m0({
     children: jsx(Ad, {
       appendedClassName: "ui3_fragment_community_attribution--ui3DescriptionRow--sAQFO",
       label: null,
-      input: jsx(N, {
+      input: jsx(Link, {
         href: getCommunityFileUrl(hubFileId),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.instance_panel.open_community_page"),

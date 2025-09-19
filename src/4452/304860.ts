@@ -15,7 +15,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { collaboratorSet } from '../905/332483';
 import { UpgradeAction } from '../905/370443';
 import { useModalManager } from '../905/437088';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { ProductAccessTypeEnum } from '../905/513035';
@@ -324,7 +324,7 @@ function er(e) {
               children: [jsx('span', {
                 className: _$$s.textBodyMedium.colorTextSecondary.preWrap.$,
                 children: g ? e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings_subtitle_ela_and_curf_enabled_for_members') : renderI18nText('plan_settings.auto_approval_settings_subtitle_ela') : e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings.subtitle_curf_members') : renderI18nText('plan_settings.auto_approval_settings.subtitle')
-              }), jsx(_$$N, {
+              }), jsx(Link, {
                 href: 'https://help.figma.com/hc/articles/4414038570007',
                 newTab: !0,
                 children: renderI18nText('plan_settings.auto_approval_settings.learn_about_seat_management_options')

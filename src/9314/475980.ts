@@ -45,7 +45,7 @@ import { formatFontMetrics } from '../figma_app/80990';
 import { XE } from '../figma_app/91703';
 import { Bs } from '../figma_app/229710';
 import { c$, ms, wv } from '../figma_app/236327';
-import { Zk as _$$Zk } from '../figma_app/276332';
+import { mapTypeToStyleKey } from '../figma_app/276332';
 import { fullscreenValue } from '../figma_app/455680';
 import { a2, dm, g5, h$, j3, KU, l0, lM, Md, mx, Nr, Pc, QA, rM, t_, Ug, VB } from '../figma_app/463500';
 import { debug, noop } from '../figma_app/465776';
@@ -292,7 +292,7 @@ function en({
     }
   }, [I, d, i, _, t]);
   let q = useCallback(() => {
-    let e = _$$Zk(t.styleTypeSection);
+    let e = mapTypeToStyleKey(t.styleTypeSection);
     let l = D.current?.getBoundingClientRect();
     e && l && R(Zs({
       rowLeft: l.left,
@@ -515,7 +515,7 @@ function em({
   let d = useRef(null);
   let c = useCallback(() => {
     t && fullscreenValue.triggerAction('set-tool-default');
-    let l = _$$Zk(e);
+    let l = mapTypeToStyleKey(e);
     let n = d.current?.getBoundingClientRect();
     l && n && i(Zs({
       rowLeft: n.left,
@@ -736,7 +736,7 @@ function eP({
   let E = t => {
     e && fullscreenValue.triggerAction('set-tool-default');
     w();
-    let n = _$$Zk(t);
+    let n = mapTypeToStyleKey(t);
     let s = i.current?.getBoundingClientRect();
     n && s && l({
       styleType: t,
@@ -845,7 +845,7 @@ function eF({
   }, [manager.isOpen, onClick]);
   let g = useCallback(n => {
     e && fullscreenValue.triggerAction('set-tool-default');
-    let s = _$$Zk(n);
+    let s = mapTypeToStyleKey(n);
     let o = t.current?.getBoundingClientRect();
     s && o && l({
       styleType: n,

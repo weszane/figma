@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { setupAutofocusHandler } from "../905/128376";
 import { hp } from "../vendor/565136";
 import { ConfirmationModal } from "../905/441305";
@@ -119,19 +119,19 @@ function R() {
       children: [renderI18nText("auth.two-factor-setup.authenticator-app-needed"), jsxs("ul", {
         className: p_,
         children: [jsx("li", {
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             newTab: !0,
             href: "https://support.google.com/accounts/answer/1066447",
             children: renderI18nText("auth.two-factor-setup.google_authenticator")
           })
         }), jsx("li", {
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             newTab: !0,
             href: "https://duo.com/product/trusted-users/two-factor-authentication/duo-mobile",
             children: renderI18nText("auth.two-factor-setup.duo_mobile")
           })
         }), jsx("li", {
-          children: jsx(_$$N, {
+          children: jsx(Link, {
             newTab: !0,
             href: "https://support.microsoft.com/en-us/account-billing/download-microsoft-authenticator-351498fc-850a-45da-b7b6-27e523b8702a",
             children: renderI18nText("auth.two-factor-setup.msft")

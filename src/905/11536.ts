@@ -13,6 +13,7 @@ export function getAssociatedUserProfiles(params: {
   } | null
   authedUsers: {
     byId: Record<string, { id: string, created_at: string }>
+    id: string
   }
 }): { id: string, created_at: string }[] {
   const { authedActiveCommunityProfile, authedUsers } = params

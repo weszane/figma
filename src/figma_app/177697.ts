@@ -1,17 +1,17 @@
 import { createRemovableAtomFamily, atomStoreManager, createAtomWithEquality, atom } from "../figma_app/27355";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { hR, hW } from "../905/508457";
-let $$s3 = hR([], {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+import { createFileBehaviorAtom, FileChangeBehaviorEnum } from "../905/508457";
+let $$s3 = createFileBehaviorAtom([], {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$o1 = hR({}, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+let $$o1 = createFileBehaviorAtom({}, {
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$l4 = createRemovableAtomFamily(e => hR({
+let $$l4 = createRemovableAtomFamily(e => createFileBehaviorAtom({
   id: e,
   data: null
 }, {
-  changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
+  changeFileBehavior: FileChangeBehaviorEnum.RESET_VALUE_ON_FILE_CHANGE
 }));
 export function $$d0(e) {
   let t = $$l4(e);

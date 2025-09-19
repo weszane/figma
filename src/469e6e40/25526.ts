@@ -54,7 +54,7 @@ import { isSelectedOrgAdminSettingsMissingResources } from "../figma_app/422062"
 import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
 import { r as _$$r } from "../905/398386";
 import { Jt } from "../figma_app/401069";
-import { Vl, mV } from "../905/837497";
+import { initializePluginAllowlist, initializeWidgetAllowlist } from "../905/837497";
 import { selectViewAction } from "../905/929976";
 import { Tn } from "../figma_app/933328";
 import { w4, yo, Jt as _$$Jt } from "../figma_app/28323";
@@ -5097,7 +5097,7 @@ function sB(e) {
     L && _$$y2.loadSharedFonts(a);
   }, [L, a, n.id]);
   useEffect(() => {
-    L && (a(Vl({})), a(mV({})));
+    L && (a(initializePluginAllowlist({})), a(initializeWidgetAllowlist({})));
   }, [L, a, n.id]);
   useEffect(() => {
     a(_$$Jt({

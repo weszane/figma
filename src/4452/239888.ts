@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { Button } from "../905/521428";
@@ -38,7 +38,7 @@ export function $$w0() {
       }
     }));
   });
-  let C = jsx(_$$N, {
+  let C = jsx(Link, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
     children: renderI18nText("resource_connection.request_modal.learn_more")
   });

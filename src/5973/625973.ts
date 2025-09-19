@@ -23,7 +23,7 @@ import { f as _$$f } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
 import { defaultSessionLocalIDString, sessionLocalIDToString, parseSessionLocalID } from '../905/871411';
 import { nodeProperties, getResolvedTypeName, textStyleProperties } from '../905/929949';
-import { PT, SJ } from '../905/946258';
+import { parseFontStyle, getFontStyleName } from '../905/946258';
 import { n as _$$n } from '../905/992140';
 import { tV as _$$tV, ao, D1, KQ, sU, UD, Y_ } from '../905/998509';
 import { O as _$$O, S as _$$S2 } from '../3383/83383';
@@ -5799,7 +5799,7 @@ function nd({
   let l = {};
   if (typeof e.fontSize == 'number' ? o.fontSize = i.maybeDenormalizePxValue(e.fontSize, 'y') : Bj(e.fontSize) && (l.fontSize = i.jsxExpressionContainerToVariableAlias(e.fontSize, r)), e.fontFamily) {
     Bj(e.fontFamily) && (l.fontFamily = i.jsxExpressionContainerToVariableAlias(e.fontFamily, r));
-    let n = Bj(e.fontWeight) ? e.italic ? 'Italic' : void 0 : SJ(e.fontWeight, e.italic);
+    let n = Bj(e.fontWeight) ? e.italic ? 'Italic' : void 0 : getFontStyleName(e.fontWeight, e.italic);
     o.fontName = {
       family: typeof e.fontFamily == 'string' ? e.fontFamily : t.jsxType === 'Text' ? 'Inter' : void 0,
       style: n,
@@ -5926,7 +5926,7 @@ function nu(e, t, i) {
       let {
         fontWeight,
         italic
-      } = PT(e.fontName.style);
+      } = parseFontStyle(e.fontName.style);
       n.fontWeight || (n.fontWeight = fontWeight);
       italic && (n.italic = !0);
     }

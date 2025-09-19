@@ -66,7 +66,7 @@ import { l6, c$, sK } from "../905/794875";
 import { Ay, HS } from "../figma_app/976110";
 import { dU, sQ, BX, Lp, Gl, Ym, vE, eU as _$$eU } from "../897/934363";
 import { ButtonWide, Button } from "../905/521428";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/582200";
 import { VisualBellActions } from "../905/302958";
@@ -629,7 +629,7 @@ function e$({
     children: renderI18nText("proto.state_management.update_controls")
   });
   let p = 1 === o ? renderI18nText("proto.state_management.new_controls") : renderI18nText("proto.state_management.old_controls");
-  let u = jsx(_$$N, {
+  let u = jsx(Link, {
     trusted: !0,
     newTab: !0,
     href: "https://help.figma.com/hc/articles/14397859494295",

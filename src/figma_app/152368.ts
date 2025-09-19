@@ -1,60 +1,158 @@
-import { F4 } from "../figma_app/546509";
-let $$i5 = "timer-start-onboarding";
-let $$a13 = 5999e3;
-let $$s11 = 1250;
-let $$o1 = 1;
-export function $$l7(e) {
-  return e ? e.isPaused ? e.timeRemainingMs : e.timeRemainingMs - performance.now() + e.timeOrigin : -1 / 0;
+import { F4 as getFigmaAppConfig } from '../figma_app/546509'
+
+/** Timer onboarding event name (original: $$i5) */
+export const TIMER_ONBOARDING_EVENT = 'timer-start-onboarding'
+
+/** Maximum allowed timer duration in ms (original: $$a13) */
+export const MAX_TIMER_DURATION_MS = 5999000
+
+/** Timer threshold in ms (original: $$s11) */
+export const TIMER_THRESHOLD_MS = 1250
+
+/** Timer increment step (original: $$o1) */
+export const TIMER_INCREMENT_STEP = 1
+
+/**
+ * Calculates the remaining time for a timer.
+ * @param timer - Timer object
+ * @returns Remaining time in ms, or -Infinity if timer is undefined
+ * (original: $$l7)
+ */
+export function getTimeRemaining(timer: Timer | undefined): number {
+  if (!timer)
+    return -Infinity
+  if (timer.isPaused)
+    return timer.timeRemainingMs
+  return timer.timeRemainingMs - performance.now() + timer.timeOrigin
 }
-export function $$d4(e) {
-  let t = $$l7(e);
-  return !e || 0 === e.totalTimeMs || t <= -$$s11;
+
+/**
+ * Checks if the timer is done.
+ * @param timer - Timer object
+ * @returns True if timer is done or invalid
+ * (original: $$d4)
+ */
+export function isTimerDone(timer: Timer | undefined): boolean {
+  const remaining = getTimeRemaining(timer)
+  return !timer || timer.totalTimeMs === 0 || remaining <= -TIMER_THRESHOLD_MS
 }
-export function $$c6(e) {
-  return 0 >= $$l7(e) && e?.totalTimeMs > 0;
+
+/**
+ * Checks if the timer has finished.
+ * @param timer - Timer object
+ * @returns True if timer finished
+ * (original: $$c6)
+ */
+export function isTimerFinished(timer: Timer | undefined): boolean {
+  return getTimeRemaining(timer) <= 0 && !!timer?.totalTimeMs
 }
-export function $$u2(e) {
-  return !!e?.isPaused && e.totalTimeMs > 0 && e.timeRemainingMs > 0 && e.totalTimeMs !== e.timeRemainingMs;
+
+/**
+ * Checks if the timer is paused and has started.
+ * @param timer - Timer object
+ * @returns True if timer is paused and started
+ * (original: $$u2)
+ */
+export function isTimerPausedAndStarted(timer: Timer | undefined): boolean {
+  return !!timer?.isPaused && timer.totalTimeMs > 0 && timer.timeRemainingMs > 0 && timer.totalTimeMs !== timer.timeRemainingMs
 }
-export function $$p9(e) {
-  return Math.floor(60 * Number(e.minutes) + Number(e.seconds));
+
+/**
+ * Converts minutes and seconds to total seconds.
+ * @param time - Object with minutes and seconds
+ * @returns Total seconds
+ * (original: $$p9)
+ */
+export function getTotalSeconds(time: { minutes: number | string, seconds: number | string }): number {
+  return Math.floor(60 * Number(time.minutes) + Number(time.seconds))
 }
-export function $$_0(e, t) {
-  let r = $$d4(e);
-  let n = $$l7(e);
-  let i = parseInt(t.minutes);
-  return r ? (i || 0) + $$o1 <= 99 : n + 6e4 * $$o1 <= $$a13;
+
+/**
+ * Checks if timer can be incremented.
+ * @param timer - Timer object
+ * @param time - Object with minutes
+ * @returns True if timer can be incremented
+ * (original: $$_0)
+ */
+export function canIncrementTimer(timer: Timer | undefined, time: { minutes: string }): boolean {
+  const done = isTimerDone(timer)
+  const remaining = getTimeRemaining(timer)
+  const minutes = parseInt(time.minutes)
+  if (done)
+    return (minutes || 0) + TIMER_INCREMENT_STEP <= 99
+  return remaining + 60000 * TIMER_INCREMENT_STEP <= MAX_TIMER_DURATION_MS
 }
-export function $$h12(e, t) {
-  let r = $$l7(e);
-  let n = e.totalTimeMs - r;
-  return t >= 2 && n >= 5e3;
+
+/**
+ * Checks if timer has run for at least 5 seconds and t >= 2.
+ * @param timer - Timer object
+ * @param t - Number
+ * @returns True if timer has run for at least 5 seconds and t >= 2
+ * (original: $$h12)
+ */
+export function hasTimerRunEnough(timer: Timer, t: number): boolean {
+  const remaining = getTimeRemaining(timer)
+  const elapsed = timer.totalTimeMs - remaining
+  return t >= 2 && elapsed >= 5000
 }
-export function $$m10(e) {
-  return e < 10 ? `0${e}` : `${e}`;
+
+/**
+ * Pads a number with leading zero if less than 10.
+ * @param value - Number
+ * @returns Padded string
+ * (original: $$m10)
+ */
+export function padTime(value: number): string {
+  return value < 10 ? `0${value}` : `${value}`
 }
-export function $$g8(e, t) {
-  e.volume = t / 100;
-  e.currentTime = 0;
-  e.play().catch(e => {
-    if ("NotAllowedError" !== e.name) throw Error(`Failed to play FigJam timer chimes: ${e}`);
-  });
+
+/**
+ * Plays timer chime sound.
+ * @param audio - HTMLAudioElement
+ * @param volume - Volume (0-100)
+ * (original: $$g8)
+ */
+export function playTimerChime(audio: HTMLAudioElement, volume: number): void {
+  audio.volume = volume / 100
+  audio.currentTime = 0
+  audio.play().catch((err) => {
+    if (err.name !== 'NotAllowedError')
+      throw new Error(`Failed to play FigJam timer chimes: ${err}`)
+  })
 }
-export function $$f3() {
-  let e = F4();
-  return !!e?.shouldShowTimerOnTheLeft;
+
+/**
+ * Checks if timer should show on the left.
+ * @returns True if timer should show on the left
+ * (original: $$f3)
+ */
+export function shouldShowTimerOnLeft(): boolean {
+  const config = getFigmaAppConfig()
+  return !!config?.shouldShowTimerOnTheLeft
 }
-export const $V = $$_0;
-export const AC = $$o1;
-export const CM = $$u2;
-export const FR = $$f3;
-export const G8 = $$d4;
-export const Hm = $$i5;
-export const IQ = $$c6;
-export const P$ = $$l7;
-export const PF = $$g8;
-export const RE = $$p9;
-export const YI = $$m10;
-export const cu = $$s11;
-export const fQ = $$h12;
-export const y0 = $$a13; 
+
+// Exported aliases for backward compatibility
+export const $V = canIncrementTimer
+export const AC = TIMER_INCREMENT_STEP
+export const CM = isTimerPausedAndStarted
+export const FR = shouldShowTimerOnLeft
+export const G8 = isTimerDone
+export const Hm = TIMER_ONBOARDING_EVENT
+export const IQ = isTimerFinished
+export const P$ = getTimeRemaining
+export const PF = playTimerChime
+export const RE = getTotalSeconds
+export const YI = padTime
+export const cu = TIMER_THRESHOLD_MS
+export const fQ = hasTimerRunEnough
+export const y0 = MAX_TIMER_DURATION_MS
+
+/**
+ * Timer type definition
+ */
+export interface Timer {
+  isPaused: boolean
+  timeRemainingMs: number
+  timeOrigin: number
+  totalTimeMs: number
+}

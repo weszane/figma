@@ -19,7 +19,7 @@ import { hasLibraryKeyInSet, handleResourceQuery, variableByKeyQuery, variableCo
 import { fullscreenValue } from "../figma_app/455680";
 import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { SG } from "../905/508457";
+import { setupObservableAtomFamily } from "../905/508457";
 import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
 import { LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, CommunityLibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { getSubscribedVariableSetInfo, getLocalVariableSetInfo, getLocalVariableInfo, getSubscribedVariableInfo, isExtension, getLocalVariableOverride, getSubscribedVariableOverride } from "../figma_app/633080";
@@ -28,12 +28,12 @@ var p = u;
 var h = _;
 var g = m;
 var E = f;
-let P = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsSubscribed);
+let P = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsSubscribed);
 let D = atom(e => e(P).map(getSubscribedVariableSetInfo));
-let k = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsLocal);
+let k = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsLocal);
 let M = atom(e => e(k).map(getLocalVariableSetInfo));
-let F = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesSubscribed);
-let j = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesLocal);
+let F = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariablesSubscribed);
+let j = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariablesLocal);
 let U = atom(e => e(j).map(getLocalVariableInfo));
 let B = atom(e => e(F).map(getSubscribedVariableInfo));
 atom(e => ({

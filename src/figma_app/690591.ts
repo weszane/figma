@@ -19,7 +19,7 @@ import { filePutAction } from "../figma_app/78808";
 import { hideModal } from "../905/156213";
 import { _z, ky } from "../905/977218";
 import { PublishModalState } from "../figma_app/350203";
-import { E$, LR, Im, CI, Dy } from "../figma_app/844435";
+import { useGroupedUserWidgets, useGroupedUserPlugins, useLocalPluginsByPluginId, getTotalUserWidgetsCount, getTotalUserWidgetsWithDevelopmentCount } from "../figma_app/844435";
 import { Sz } from "../figma_app/12535";
 import { ud } from "../905/862913";
 import { selectUser } from "../905/372672";
@@ -85,7 +85,7 @@ function W(e) {
     pendingReviewWidgets,
     approvedWidgets,
     developmentWidgets
-  } = E$();
+  } = useGroupedUserWidgets();
   let s = t => !!e.activeResource && ("localFileId" in e.activeResource && "localFileId" in t ? e.activeResource.localFileId === t.localFileId : "id" in e.activeResource && "id" in t ? e.activeResource.id === t.id : void 0);
   return desktopAPIInstance ? invitedWidgets.length + pendingReviewWidgets.length + approvedWidgets.length + developmentWidgets.length === 0 ? jsx(n6, {
     tab: gr.WIDGETS
@@ -121,7 +121,7 @@ function K(e) {
     pendingReviewPlugins,
     approvedPlugins,
     developmentPlugins
-  } = LR();
+  } = useGroupedUserPlugins();
   let s = t => !!e.activeResource && ("localFileId" in e.activeResource && "localFileId" in t ? e.activeResource.localFileId === t.localFileId : "id" in e.activeResource && "id" in t ? e.activeResource.id === t.id : void 0);
   return desktopAPIInstance ? developmentPlugins.length + pendingReviewPlugins.length + approvedPlugins.length + invitedPlugins.length === 0 ? jsx(n6, {
     tab: gr.PLUGINS
@@ -268,10 +268,10 @@ let $$Q0 = registerModal(function (e) {
   }();
   let [C, R] = useState(2);
   let [k, F] = useState({});
-  let U = Im();
+  let U = useLocalPluginsByPluginId();
   let V = ud();
-  let H = CI();
-  let W = Dy();
+  let H = getTotalUserWidgetsCount();
+  let W = getTotalUserWidgetsWithDevelopmentCount();
   let K = Object.keys(V).length;
   IT(se());
   IT(fd());

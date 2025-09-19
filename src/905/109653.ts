@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
 import { LinkPrimitive } from "../figma_app/496441";
-import { N } from "../905/438674";
+import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { P as _$$P } from "../vendor/348225";
@@ -300,7 +300,7 @@ function O({
   });
 }
 function D() {
-  return jsx(N, {
+  return jsx(Link, {
     href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Community#01H8CZTYDFMDWEK19N8TSNXVVC",
     newTab: !0,
     trusted: !0,

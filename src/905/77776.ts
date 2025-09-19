@@ -1,4 +1,4 @@
-import { eX } from "../figma_app/276332";
+import { parseStyleString } from "../figma_app/276332";
 import { OX } from "../905/232489";
 let a = /(var\s*\(\s*)(--[\w\-_]*)(\s*,\s*.*\)|\))/i;
 let $$s2 = /\/\*BOUND_VAR_START_(.*?)\*\//g;
@@ -33,7 +33,7 @@ export class $$c0 {
     if (this.preferences.generateForCodePanel && this.figmaStyle) {
       let e = function (e, t, i) {
         if (e) return `var(/*BOUND_STYLE_START_${e}*/--${t}/*BOUND_STYLE_END*/, ${i})`;
-      }(eX(this.figmaStyle)?.key ?? "", OX(this.name), this.wrappedValue.value);
+      }(parseStyleString(this.figmaStyle)?.key ?? "", OX(this.name), this.wrappedValue.value);
       if (e) return e;
     }
     return this.figmaVariable && this.figmaVariable.codeSyntax && this.figmaVariable.codeSyntax.WEB ? this.figmaVariable.codeSyntax.WEB : `var(--${OX(this.name)}, ${this.wrappedValue.value})`;

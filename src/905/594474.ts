@@ -47,7 +47,7 @@ import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/572042";
 import { BannerButton } from "../905/692618";
-import { N as _$$N2 } from "../905/438674";
+import { Link } from "../905/438674";
 import { _ as _$$_ } from "../905/574895";
 import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
 import { Qi, uT, n1, se, fd } from "../figma_app/559491";
@@ -130,7 +130,7 @@ import { aS } from "../905/772769";
 import { f as _$$f } from "../905/265642";
 import { m as _$$m } from "../905/924751";
 import { Y as _$$Y2 } from "../905/192715";
-import { w as _$$w2 } from "../905/771986";
+import { PluginUploadApi } from "../905/771986";
 import { trackEventAnalytics } from "../905/449184";
 import { i as _$$i } from "../905/970229";
 import { vQ } from "../figma_app/530167";
@@ -145,7 +145,7 @@ import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
 import { VisualBellActions } from "../905/302958";
 import { $$in, PublishModalState } from "../figma_app/350203";
-import { c as _$$c4 } from "../905/289751";
+import { readImageBytes } from "../905/289751";
 import { J as _$$J7 } from "../905/296347";
 import { _e, gI } from "../905/277373";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -453,7 +453,7 @@ function eb({
         children: renderI18nText(e ? "community.publishing.widget_missing_network_access" : "community.publishing.plugin_missing_network_access", {
           filename: "manifest.json"
         })
-      }), jsx(_$$N2, {
+      }), jsx(Link, {
         href: "/plugin-docs/manifest/",
         trusted: !0,
         children: getI18nString("general.learn_more")
@@ -517,7 +517,7 @@ function eL({
     subLabel: t ? getI18nString("community.publishing.security_form.widget_description") : getI18nString("community.publishing.security_form.plugin_description"),
     children: [jsx(Checkbox, {
       label: jsxs(Label, {
-        children: [getI18nString("community.publishing.security_form.i_agree_to_share_this_information"), " ", jsx(_$$N2, {
+        children: [getI18nString("community.publishing.security_form.i_agree_to_share_this_information"), " ", jsx(Link, {
           href: t ? "https://help.figma.com/hc/articles/4410337103639" : "https://help.figma.com/hc/articles/360042293394",
           trusted: !0,
           newTab: !0,
@@ -1061,7 +1061,7 @@ let tu = forwardRef(function ({
     label: getI18nString("community.publishing.include_a_playground_file"),
     subLabel: jsx("div", {
       children: renderI18nText("community.publishing.plugin_playground_file_help_text_new", {
-        useTemplateLink: jsx(_$$N2, {
+        useTemplateLink: jsx(Link, {
           href: "https://www.figma.com/community/file/1174497187775558195",
           onClick: () => {
             trackGenericEvent("playground_template_link_click", {
@@ -1499,7 +1499,7 @@ async function it(e) {
     category_id: c_(category).currentValue?.id ?? null,
     images_sha1: uploadImages
   };
-  return await _$$w2.postPluginUpload(c, validExtensionId, isWidget);
+  return await PluginUploadApi.postPluginUpload(c, validExtensionId, isWidget);
 }
 async function ii(e) {
   let t;
@@ -1615,7 +1615,7 @@ async function is(e) {
     annual_discount_percentage: E ? c_(annualDiscount).currentValue?.discountPercentage : void 0,
     is_annual_discount_active: E ? c_(annualDiscount).currentValue?.isActive : void 0
   };
-  return await _$$w2.updateExtension(x, validExtensionId, isWidget);
+  return await PluginUploadApi.updateExtension(x, validExtensionId, isWidget);
 }
 async function io(e) {
   let {
@@ -1638,7 +1638,7 @@ async function io(e) {
   };
   let {
     data
-  } = await _$$w2.updateExtensionRoles(u, validExtensionId, isWidget);
+  } = await PluginUploadApi.updateExtensionRoles(u, validExtensionId, isWidget);
   let m = data.meta;
   trackEventAnalytics("Hub Plugin Publish Role", {
     pluginId: validExtensionId,
@@ -1701,7 +1701,7 @@ async function il(e) {
     tagline: c_(tagline).currentValue,
     release_notes: isCreatingNewVersion ? T.newVersion : T.oldVersion
   };
-  return await _$$w2.updateExtensionVersion(R, validExtensionId, versionId, isWidget);
+  return await PluginUploadApi.updateExtensionVersion(R, validExtensionId, versionId, isWidget);
 }
 let id = {
   name: om,
@@ -2355,7 +2355,7 @@ let ic = _$$T2({
         });
       }
     } else try {
-      p = await _$$w2.postPluginImagesUpload(h, n, uploadImages);
+      p = await PluginUploadApi.postPluginImagesUpload(h, n, uploadImages);
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
@@ -2601,7 +2601,7 @@ function iM({
       if (a) try {
         let n = t === FileInputType.PASTE;
         let r = await validateAndResizeIconImage(e, n, !0);
-        let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), _$$c4(r)]);
+        let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), readImageBytes(r)]);
         let l = new Uint8Array(o);
         i.current($$in, {
           step: PublishModalState.UPLOAD_ICON,
@@ -2668,7 +2668,7 @@ function iM({
     }, [e]);
     let l = useMemo(() => async function (e) {
       if (a) try {
-        let [t, i] = await Promise.all([l8(URL.createObjectURL(e)), _$$c4(e)]);
+        let [t, i] = await Promise.all([l8(URL.createObjectURL(e)), readImageBytes(e)]);
         let n = new Uint8Array(i);
         a({
           url: t.src,
@@ -3366,7 +3366,7 @@ function ij(e) {
       if (!e || !t && !i) return;
       let r = null;
       if (t && n && (r = _e(t, n?.x, n?.y)), !r && i && (r = await gI(i)), !r) return;
-      let [a, s] = await Promise.all([l8(URL.createObjectURL(r)), _$$c4(r)]);
+      let [a, s] = await Promise.all([l8(URL.createObjectURL(r)), readImageBytes(r)]);
       return {
         url: a.src,
         buffer: new Uint8Array(s)

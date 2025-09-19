@@ -17,7 +17,7 @@ import { ResourceTypeEnum } from "../figma_app/306946";
 import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
 import { Yo } from "../figma_app/543529";
-import { ll, U6 } from "../figma_app/844435";
+import { useAllowlistedPlugins, useAllowlistedWidgets } from "../figma_app/844435";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { k as _$$k2 } from "../905/882646";
 import { getUserId } from "../905/372672";
@@ -135,8 +135,8 @@ export function $$M0({
 function O(e) {
   let t;
   let r;
-  let i = ll();
-  let n = U6();
+  let i = useAllowlistedPlugins();
+  let n = useAllowlistedWidgets();
   let o = isWidget(e.resource);
   let a = o ? !!n[e.resource.id] : !!i[e.resource.id];
   a ? (t = renderI18nText("community.plugins.remove"), r = getI18nString("community.plugins.remove_for_org_tooltip", {

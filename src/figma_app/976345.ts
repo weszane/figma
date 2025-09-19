@@ -73,7 +73,7 @@ let pendingReload: {
  * Ensure the file browser shows a loading state while an operation runs.
  * Original: $$F24
  */
-const setFileBrowserLoadingHandler = createOptimistThunk((dispatchApi, { until }: { until?: Promise<any> } = {}) => {
+export const setFileBrowserLoadingHandler = createOptimistThunk((dispatchApi, { until }: { until?: Promise<any> } = {}) => {
   // hide modals and dropdowns if shown
   if (dispatchApi.getState().modalShown?.type != null) {
     dispatchApi.dispatch(hideModal())
@@ -97,7 +97,7 @@ const setFileBrowserLoadingHandler = createOptimistThunk((dispatchApi, { until }
  * Refresh session state from sessionApiInstance and update store.
  * Original: $$j18
  */
-const refreshSessionState = createOptimistThunk((dispatchApi) => {
+export const refreshSessionState = createOptimistThunk((dispatchApi) => {
   sessionApiInstance.getState()
     .then((res: any) => {
       dispatchApi.dispatch(setSessionStateAction(res.data.meta))
@@ -113,7 +113,7 @@ const refreshSessionState = createOptimistThunk((dispatchApi) => {
  * Send 'refresh-session-state' to other tabs via IpcStorageHandler.
  * Original: $$U23
  */
-const sendIpcRefreshSession = createOptimistThunk((_: ThunkAPI, payload: any) => {
+export const sendIpcRefreshSession = createOptimistThunk((_: ThunkAPI, payload: any) => {
   // new IpcStorageHandler().sendToOtherTabs('refresh-session-state', payload)
   new IpcStorageHandler().sendToOtherTabs('refresh-session-state', payload)
 })
@@ -122,7 +122,7 @@ const sendIpcRefreshSession = createOptimistThunk((_: ThunkAPI, payload: any) =>
  * Handle account switching and view redirection.
  * Original: $$B11
  */
-const switchAccountAndNavigate = createOptimistThunk((dispatchApi, payload: { view?: any, path?: string, workspace: WorkspacePayload }) => {
+export const switchAccountAndNavigate = createOptimistThunk((dispatchApi, payload: { view?: any, path?: string, workspace: WorkspacePayload }) => {
   const state = dispatchApi.getState()
   const viewPayload = payload.view || { view: 'recentsAndSharing' }
 
@@ -202,7 +202,7 @@ const switchAccountAndNavigate = createOptimistThunk((dispatchApi, payload: { vi
  * Start desktop app authentication flow.
  * Original: $$G26
  */
-const startDesktopAppAuth = createOptimistThunk((dispatchApi) => {
+export const startDesktopAppAuth = createOptimistThunk((dispatchApi) => {
   XHR.post('/api/session/app_auth', { app_type: 'desktop' })
     .then(({ data }: any) => {
       const authId = data.meta.id
@@ -229,7 +229,7 @@ const startDesktopAppAuth = createOptimistThunk((dispatchApi) => {
  * Show dropdown if none is currently open.
  * Original: $$V21
  */
-const showDropdownIfNone = createOptimistThunk((dispatchApi, payload: DropdownPayload) => {
+export const showDropdownIfNone = createOptimistThunk((dispatchApi, payload: DropdownPayload) => {
   if (!dispatchApi.getState().dropdownShown) {
     dispatchApi.dispatch(showDropdownThunk(payload))
   }

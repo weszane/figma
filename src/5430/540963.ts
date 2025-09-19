@@ -29,7 +29,7 @@ import { A6 } from '../905/350234';
 import { createOptimistThunk } from '../905/350402';
 import { z as _$$z2 } from '../905/353894';
 import { selectCurrentUser } from '../905/372672';
-import { N as _$$N } from '../905/438674';
+import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -335,7 +335,7 @@ function ec(e) {
 function eu({
   href: e
 }) {
-  return jsx(_$$N.Button, {
+  return jsx(Link.Button, {
     'aria-label': getI18nString('community.profiles.visit_website'),
     'href': e,
     'newTab': !0,
@@ -346,7 +346,7 @@ function eu({
 function em({
   href: e
 }) {
-  return jsx(_$$N.Button, {
+  return jsx(Link.Button, {
     'aria-label': getI18nString('community.profiles.visit_x_twitter_profile'),
     'href': e,
     'newTab': !0,
@@ -384,7 +384,7 @@ function ep({
   let t = new ProfileRouteState({
     profileHandle: e.profile_handle
   });
-  return jsx(_$$N.Button, {
+  return jsx(Link.Button, {
     'aria-label': getI18nString('community.profiles.view_complete_profile'),
     'href': t.href,
     'iconPrefix': jsx(_$$V, {}),
@@ -493,7 +493,7 @@ function eI({
     }), jsx('div', {
       ...xk(_$$Z.description, e && eN.secondaryTextColor),
       children: e ? renderI18nText('community.profiles.getting_started_easy', {
-        learnLink: jsx(_$$N, {
+        learnLink: jsx(Link, {
           href: 'https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Figma-Community',
           newTab: !0,
           children: getI18nString('community.profiles.learn_how_to_publish_link')

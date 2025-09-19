@@ -9,7 +9,7 @@ import c from "../vendor/128080";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { initializeStub } from "../figma_app/757801";
 import { Ns, isInteractionPathCheck } from "../figma_app/897289";
-import { kG } from "../figma_app/327588";
+import { isFullscreenAndInFocusedNodeView } from "../figma_app/327588";
 import { fullscreenValue } from "../figma_app/455680";
 import { useSceneGraphSelection, useAppModelProperty } from "../figma_app/722362";
 import { useSyncedRef } from "../905/633914";
@@ -282,7 +282,7 @@ export function $$j5() {
 export function $$I4() {
   let [e, t] = useAtomValueAndSetter(S);
   let i = getObservableOrFallback(AppStateTsApi.cooperFocusView().focusedNodeId);
-  let n = kG();
+  let n = isFullscreenAndInFocusedNodeView();
   return useCallback(e => {
     if (t(""), n) {
       if (i === e) {

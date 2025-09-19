@@ -1,6 +1,6 @@
 import { createEmptyMixin as CreateEmptyMixin } from '../905/112832';
 import { StyleIdHandler } from '../figma_app/243058';
-import { nM as NMUtil } from '../figma_app/276332';
+import { serializeStyle } from '../figma_app/276332';
 
 /**
  * Enhances a base class with style-related properties and methods.
@@ -15,7 +15,7 @@ export function withStyleMixin<TBase extends new (...args: any[]) => any>(Base: 
      * (Original: idForPluginApi)
      */
     get idForPluginApi(): string {
-      return this.styleKeyForPublish ? NMUtil({
+      return this.styleKeyForPublish ? serializeStyle({
         key: this.styleKeyForPublish,
         version: this.isLocalStyle ? '' : this.getStyleVersion()
       }) : '';

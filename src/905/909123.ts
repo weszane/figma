@@ -6,7 +6,7 @@ import { liveStoreInstance } from "../905/713695";
 import { H } from "../905/473998";
 import { pluginAPIService } from "../905/3209";
 import { a as _$$a } from "../figma_app/601188";
-import { U } from "../905/424668";
+import { widgetAPIClient } from "../905/424668";
 import { I$, $f } from "../figma_app/940844";
 let $$$$m1 = liveStoreInstance.Query({
   fetch: async ({
@@ -23,7 +23,7 @@ let $$$$m1 = liveStoreInstance.Query({
           pluginId: t
         })).data.meta.plugin;
       case "widget":
-        return (await U.getVersions({
+        return (await widgetAPIClient.getVersions({
           widgetId: t
         })).data.meta.plugin;
       default:

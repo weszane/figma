@@ -6,7 +6,7 @@ import { getVisibleTheme } from "../905/640017";
 import { getProductIcon, getProductBackgroundImgUrl } from "../905/389382";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
-import { getVisibleTheme } from "../905/187165";
+import { getMPVisibleTheme } from "../905/187165";
 let p = "avatar_with_product_background--brandIconContainerDesign--5S-TM avatar_with_product_background--brandIconContainer--CMT3e";
 export function $$m0({
   licenseType: e

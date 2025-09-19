@@ -6,7 +6,7 @@ import { ButtonSecondary, ButtonBasePrimary, BaseLinkComponent, clickableBaseLin
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jt } from "../figma_app/395505";
 import { showModalHandler } from "../905/156213";
-import { R$ } from "../figma_app/86989";
+import { handleStripeSubscriptionRedirect } from "../figma_app/86989";
 import { selectCurrentUser } from "../905/372672";
 import { hasOrgUsersForUser } from "../figma_app/951233";
 import { hasClientMeta, isWidget } from "../figma_app/45218";
@@ -108,7 +108,7 @@ export function $$w0(e) {
   });
 }
 export function $$C1(e) {
-  let t = R$(e.resource);
+  let t = handleStripeSubscriptionRedirect(e.resource);
   let r = "Detail View - View Order Details";
   let i = getI18nString("community.buyer.view_order_details");
   isSubscription(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = getI18nString("community.buyer.manage_subscription"));

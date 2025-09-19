@@ -6,7 +6,7 @@ import { ButtonSecondary, ButtonBasePrimary, SecureLink } from "../figma_app/637
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { isStripePending } from "../figma_app/471982";
-import { n7 } from "../905/926523";
+import { mergeCommunityProfiles } from "../905/926523";
 import { popModalStack } from "../905/156213";
 import { useAuthedActiveCommunityProfile, findPublishedProfileForUser } from "../figma_app/740025";
 import { registerModal } from "../905/102752";
@@ -174,7 +174,7 @@ class L extends Component {
         selectedUser: e,
         primaryUser: this.props.currentUser
       });
-      e.community_profile_id || (this.props.dispatch(n7({
+      e.community_profile_id || (this.props.dispatch(mergeCommunityProfiles({
         primaryUserId: this.props.currentUser.id,
         secondaryUserId: e.id
       })), this.props.dispatch(popModalStack()));
@@ -328,7 +328,7 @@ class L extends Component {
             children: renderI18nText("general.cancel")
           }), jsx(ButtonBasePrimary, {
             onClick: () => {
-              this.props.dispatch(n7({
+              this.props.dispatch(mergeCommunityProfiles({
                 primaryUserId: this.state.primaryUser.id,
                 secondaryUserId: this.state.primaryUser.id === this.props.currentUser.id ? this.state.selectedUser.id : this.props.currentUser.id
               }));

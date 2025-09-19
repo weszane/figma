@@ -11,7 +11,7 @@ import { base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../6388/913037";
-import { jw, kG } from "../figma_app/327588";
+import { isNotInFocusedNodeView, isFullscreenAndInFocusedNodeView } from "../figma_app/327588";
 import { c3, YB, DG } from "../6388/934960";
 import { Uk } from "../6388/447908";
 import { PU } from "../figma_app/334505";
@@ -50,11 +50,11 @@ export function $$C0({
   let N = useMemo(() => $$T1(e), [e]);
   let w = C * N.size;
   let [R, A] = useState(!1);
-  let L = jw();
+  let L = isNotInFocusedNodeView();
   let k = Xr(_$$v);
   let B = function (e, t, l) {
     let r = useAtomWithSubscription(_$$v);
-    let i = kG();
+    let i = isFullscreenAndInFocusedNodeView();
     let c = function () {
       let e = function () {
         let e = useSceneGraphSelector();

@@ -50,7 +50,7 @@ import { stripHtmlTags } from "../905/491152";
 import { formatNumber } from "../figma_app/930338";
 import { x as _$$x } from "../5430/373843";
 import { L as _$$L } from "../1577/16430";
-import { qT, Lq } from "../figma_app/844435";
+import { parseAndValidateManifest, getPluginOrWidget } from "../figma_app/844435";
 import { u as _$$u2 } from "../905/952696";
 import { X as _$$X2, b as _$$b } from "../5430/435821";
 import { I as _$$I } from "../905/343721";
@@ -1078,7 +1078,7 @@ function eE({
   } = e;
   let r = useMemo(() => {
     let e = currentPluginVersion?.manifest;
-    if (e) return qT(e);
+    if (e) return parseAndValidateManifest(e);
   }, [currentPluginVersion?.manifest]);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap8.$,
@@ -1122,7 +1122,7 @@ export function $$eF1(e) {
   } = e;
   let o = useMemo(() => {
     let e = extension.currentPluginVersion?.manifest;
-    if (e) return qT(e);
+    if (e) return parseAndValidateManifest(e);
   }, [extension.currentPluginVersion?.manifest]);
   if (!o) return null;
   let d = o.editorType ?? [];
@@ -1161,7 +1161,7 @@ function eq(e) {
     let o = useDispatch();
     let d = Um();
     let c = d?.type === eU;
-    let _ = Lq(e) || s;
+    let _ = getPluginOrWidget(e) || s;
     return {
       dropdownIsShown: c,
       toggleSwitchEditorDropdown: (e, t) => {
@@ -1254,7 +1254,7 @@ function e$(e) {
     source
   } = e;
   let c = useDispatch();
-  let _ = Lq(extension) || resource;
+  let _ = getPluginOrWidget(extension) || resource;
   let m = mapToEditorType(manifestEditorType);
   let p = () => {
     "community" === source ? c(aI({

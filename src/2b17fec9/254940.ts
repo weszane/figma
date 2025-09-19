@@ -5,7 +5,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
-import { RW } from "../figma_app/684168";
+import { getCurrentWorkspaceInfo } from "../figma_app/684168";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -20,7 +20,7 @@ export function $$_0(e) {
   } = e;
   let x = selectCurrentFile();
   let g = useCurrentUserOrg();
-  let j = RW();
+  let j = getCurrentWorkspaceInfo();
   let b = _$$a(g?.id, version.plugin_id, j.loaded ? j.data?.workspaceId : void 0);
   if (!x || !x.parentOrgId) return null;
   if (b) {

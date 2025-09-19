@@ -30,7 +30,7 @@ export function selectUser(): User | null {
  * Selects the user object from the Redux store.
  * (Original: $$o3)
  */
-export function selectCurrentUser(): User | null {
+export function selectCurrentUser() {
   return useSelector((state: RootState) => state.user)
 }
 
@@ -65,5 +65,5 @@ export interface User {
  * RootState type definition for Redux state.
  */
 export interface RootState {
-  user: User | null
+  user: any
 }

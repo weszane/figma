@@ -42,7 +42,7 @@ import { Bs, Hg } from "../905/672745";
 import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
 import { selectViewAction } from "../905/929976";
-import { N as _$$N } from "../905/438674";
+import { Link } from "../905/438674";
 import { _ as _$$_ } from "../7021/243271";
 import { A as _$$A2 } from "../905/920142";
 import { h1 } from "../905/986103";
@@ -428,7 +428,7 @@ function ey(e) {
             children: [getI18nString("resource_connection.num_members", {
               count: f
             }), " \xb7\xa0"]
-          }), jsx(_$$N, {
+          }), jsx(Link, {
             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD8C3M4MDEVKBHAFEQ",
             children: getI18nString("resource_connection.host")
           })]

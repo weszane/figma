@@ -1,4 +1,4 @@
-import { Dg } from "../905/946258";
+import { getFontIndexHash } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { WB } from "../905/761735";
 import { maybeCreateSavepoint } from "../905/294113";
@@ -44,7 +44,7 @@ async function d(e, t) {
 async function c(e, t, i) {
   let a;
   let s = await d(e, t);
-  let l = Dg({
+  let l = getFontIndexHash({
     shouldUse250317Index: !!getFeatureFlags().font_index_250317
   });
   try {
