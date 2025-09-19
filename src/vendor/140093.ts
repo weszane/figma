@@ -172,7 +172,7 @@ function N(e) {
 var O = {
   current: null
 };
-var A = {
+var ImageDownloadQueue = {
   transition: null
 };
 function M() {
@@ -210,7 +210,7 @@ exports.StrictMode = r;
 exports.Suspense = d;
 exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = {
   ReactCurrentDispatcher: O,
-  ReactCurrentBatchConfig: A,
+  ReactCurrentBatchConfig: ImageDownloadQueue,
   ReactCurrentOwner: S
 };
 exports.act = M;
@@ -291,12 +291,12 @@ exports.memo = function (e, n) {
   };
 };
 exports.startTransition = function (e) {
-  var n = A.transition;
-  A.transition = {};
+  var n = ImageDownloadQueue.transition;
+  ImageDownloadQueue.transition = {};
   try {
     e();
   } finally {
-    A.transition = n;
+    ImageDownloadQueue.transition = n;
   }
 };
 exports.unstable_act = M;

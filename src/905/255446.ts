@@ -22,7 +22,7 @@ import { Av, Dg, eS, aD } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { isNodeNotVisible, getStylePublishInfoSelector, $4, selectLocalStylesWithUsagesOnLoadedPages } from "../figma_app/889655";
 import { bd } from "../905/557338";
-import { _Q, kc } from "../figma_app/141508";
+import { directlySubscribedStylesFromLoadedPagesSelector, directlySubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { se, TM } from "../figma_app/435826";
 import { jO, LB, T7, V9, cB } from "../figma_app/524618";
@@ -191,7 +191,7 @@ export function $$j2(e) {
     updateStyle,
     selectedOutdatedStyleGUID
   } = e;
-  let o = useSelector(_Q);
+  let o = useSelector(directlySubscribedStylesFromLoadedPagesSelector);
   let l = T7(updateStyle, o);
   let d = useRef(V9(l, updateStyle, selectedOutdatedStyleGUID)).current;
   let {
@@ -207,7 +207,7 @@ export function $$j2(e) {
   let T = useMemo($4, []);
   let k = useSelector(e => d ? T(e, d.styleGUIDs) : new Map());
   let N = !!d && !!Object.keys(d).length && !!E;
-  let P = useSelector(kc);
+  let P = useSelector(directlySubscribedStylesNodeIdsFromLoadedPagesSelector);
   let O = useSelector(selectLocalStylesWithUsagesOnLoadedPages);
   let D = useMemo(() => !!E && G(updateStyle, P, O, E, w?.version ?? null, w?.key ?? null), [P, O, updateStyle, E, w]);
   let F = useMemo(() => !!d && d.styleGUIDs.every(e => G(d.updateAsset, P, O, e, k?.get(e)?.version ?? null, k?.get(e)?.key ?? null)), [k, d, P, O]);

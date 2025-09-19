@@ -11,7 +11,7 @@ import { S6 } from "../905/761735";
 import { getLivegraphClient, useSubscription } from "../figma_app/288654";
 import { gB, Xm } from "../905/723791";
 import { setTagGlobal } from "../905/11";
-import { Zv } from "../905/760682";
+import { diffSets } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
@@ -508,7 +508,7 @@ function G(e, t, r) {
   let a = useLatestRef(n);
   let {
     removed
-  } = useMemo(() => Zv(n, a), [n, a]);
+  } = useMemo(() => diffSets(n, a), [n, a]);
   let o = useCallback(e, t);
   useEffect(() => {
     removed.forEach(e => {

@@ -5,7 +5,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { b, $ } from "../905/776478";
 import { fetchImageAsByteArray } from "../905/866640";
 import { k4 } from "../figma_app/878113";
@@ -94,7 +94,7 @@ async function E({
   abortController: o
 }) {
   let l = await fetchImageAsByteArray(r, ["*"]);
-  let d = await UD(l, "image/png", t);
+  let d = await processImageWithThumbnail(l, "image/png", t);
   !o.signal.aborted && e.isAlive && permissionScopeHandler.ai("editor-ai-fill-image", () => {
     let r = R(e);
     if (!r) throw Error("Failed to get topmost visible image fill");

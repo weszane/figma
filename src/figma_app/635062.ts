@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { GT } from "../905/711212";
+import { updateAllStyleThumbnailsOptimist } from "../905/711212";
 import { compareLibraryItemsAlias } from "../905/709171";
 import { Um } from "../905/848862";
 import { vG } from "../905/213527";
@@ -9,7 +9,7 @@ export function $$c3(e, t) {
   let r = useDispatch();
   let o = useMemo(() => debounce(r, 200), [r]);
   useEffect(() => {
-    t?.skip || o(GT({
+    t?.skip || o(updateAllStyleThumbnailsOptimist({
       styleType: e
     }));
   });
@@ -18,7 +18,7 @@ export function $$u1(e) {
   let t = useDispatch();
   let r = useMemo(() => debounce(t, 200), [t]);
   useEffect(() => {
-    r(GT({
+    r(updateAllStyleThumbnailsOptimist({
       styleType: e
     }));
   }, [r, e]);

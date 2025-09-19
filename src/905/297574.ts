@@ -7,9 +7,9 @@ import { liveStoreInstance } from "../905/713695";
 import { vx } from "../905/91038";
 import { e_ } from "../figma_app/803787";
 import { selectSceneGraph } from "../figma_app/889655";
-import { C9, jf } from "../figma_app/141508";
+import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { r as _$$r } from "../905/336143";
 import { TE } from "../905/131786";
 export function $$_1(e, t) {
@@ -29,8 +29,8 @@ export function $$A2({
     let i = useSelector(selectSceneGraph);
     let a = useSelector(e_);
     let s = useSelector(vx);
-    let o = useSelector(C9);
-    let l = useSelector(jf);
+    let o = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
+    let l = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
     return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? {
       ...e,
       num_existing_instances: 0,
@@ -50,8 +50,8 @@ export function $$A2({
 }
 export function $$y0(e) {
   let t = useSelector(selectSceneGraph);
-  let i = useSelector(C9);
-  let a = useSelector(jf);
+  let i = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
+  let a = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
   return useMemo(() => i.filter(i => {
     let n = t.get(i);
     return n?.isLooseComponent && n.sourceLibraryKey === e;
@@ -65,12 +65,12 @@ export function $$b3(e) {
   return t?.allUsedStylesByLibraryKey[e]?.length ?? 0;
 }
 let $$v4 = liveStoreInstance.Query({
-  fetch: async e => null == e ? [] : ((await Z.getLibraryStyles({
+  fetch: async e => null == e ? [] : ((await librariesAPI.getLibraryStyles({
     libraryFileKey: e
   })).data.meta.styles ?? []).map(withParsedMeta)
 });
 let $$I5 = liveStoreInstance.Query({
-  fetch: async e => null == e ? [] : ((await Z.getLibraryStylesByLibraryKey({
+  fetch: async e => null == e ? [] : ((await librariesAPI.getLibraryStylesByLibraryKey({
     libraryKey: e
   })).data.meta.styles ?? []).map(withParsedMeta)
 });

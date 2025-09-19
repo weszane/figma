@@ -4,7 +4,7 @@ import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreMana
 import { trackEventAnalytics } from "../905/449184";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { fullscreenValue } from "../figma_app/455680";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { wK } from "../figma_app/546509";
 let c = setupRemovableAtomFamily(() => atom({}));
 let u = createRemovableAtomFamily(e => atom(t => t(c)[e] ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALUAAABmCAYAAACN+dAoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABeSURBVHgB7cAxAQAAAMKg9U9tDQ8oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4NyDtAAG2m4HvAAAAAElFTkSuQmCC", (t, r, n) => {
@@ -49,7 +49,7 @@ function h(e, t, r, i, a, d, c = 20, u = {}) {
       });
     });
   };
-  (t ? Jr().loadAllImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail") : Jr().waitForImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail")).then(({
+  (t ? getImageManager().loadAllImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail") : getImageManager().waitForImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail")).then(({
     totalImages: e
   }) => {
     e > 0 && _(!0);

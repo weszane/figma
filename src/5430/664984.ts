@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { APILoadingStatus } from "../905/520829";
 import { logError } from "../905/714362";
 import { ResourceTypeEnum } from "../figma_app/306946";
-import { ek, MJ } from "../figma_app/657017";
+import { isFigmaLibrariesActive, isFigmaLibrariesEnabled } from "../figma_app/657017";
 import { initialStateAtom } from "../905/347448";
 import { setupAuthedUserPlanLoader } from "../905/352022";
 import { selectCurrentUser } from "../905/372672";
@@ -52,8 +52,8 @@ export function $$f1(e) {
     orgs
   } = x(e);
   let n = useCurrentPrivilegedPlan("useCanUseDsePresetsInCommunity").unwrapOr(null);
-  let o = ek(n, null);
-  return useMemo(() => !!t && (teams.length || orgs.length ? Object.values(teams).some(e => MJ(null, e, null)) || Object.values(orgs).some(e => MJ(e, null, null)) : o), [t, teams, orgs, o]);
+  let o = isFigmaLibrariesActive(n, null);
+  return useMemo(() => !!t && (teams.length || orgs.length ? Object.values(teams).some(e => isFigmaLibrariesEnabled(null, e, null)) || Object.values(orgs).some(e => isFigmaLibrariesEnabled(e, null, null)) : o), [t, teams, orgs, o]);
 }
 export function $$y2(e) {
   let t = selectCurrentUser();

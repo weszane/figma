@@ -10,10 +10,10 @@ import { tH } from "../905/751457";
 import { renderI18nText } from "../905/303541";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
-import { OF } from "../figma_app/562352";
+import { retryAsync } from "../figma_app/562352";
 import { m as _$$m } from "../9410/643761";
 import { fullscreenValue } from "../figma_app/455680";
-import { Mj } from "../figma_app/624361";
+import { batchDownloadImages } from "../figma_app/624361";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
 import { sQ, _L } from "../9410/635978";
@@ -30,7 +30,7 @@ function g(e) {
 }
 let C = _$$m(v);
 async function v(e) {
-  let t = await OF(() => E(e), 10, 1e3);
+  let t = await retryAsync(() => E(e), 10, 1e3);
   await new Promise((i, r) => {
     let n = new Image();
     n.crossOrigin = "anonymous";
@@ -43,7 +43,7 @@ async function v(e) {
   return t;
 }
 async function E(e) {
-  let t = (await Mj([e], await fullscreenValue.openFilePromise())).s3_urls[e];
+  let t = (await batchDownloadImages([e], await fullscreenValue.openFilePromise())).s3_urls[e];
   if (!t) throw Error("Couldn't resolve image URL from server");
   return t;
 }

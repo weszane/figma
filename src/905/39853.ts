@@ -27,7 +27,7 @@ import { TF } from "../905/18922";
 import { Vy, zT } from "../905/484695";
 import { XMLParser } from "../vendor/870203";
 import { F as _$$F } from "../905/422355";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { U_ } from "../905/327855";
 import { FEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/877554";
@@ -1478,7 +1478,7 @@ async function eP(e, t, i) {
   Vy.toConsole(zT.IMPORT);
   let l = Fullscreen?.getScene();
   o.images.forEach(e => {
-    Jr().forgetImage(e.sha1Hash);
+    getImageManager().forgetImage(e.sha1Hash);
   });
   let d = {
     bytes: new Uint8Array(),

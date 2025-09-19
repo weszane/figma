@@ -8,7 +8,7 @@ import { getExperimentConfigAsync } from "../figma_app/594947";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Dy, pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
-import { xI, Y1 } from "../905/879323";
+import { setAssetsSearchNoResults, setAssetsSearchResults } from "../905/879323";
 import { eK, w2 } from "../905/977218";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
@@ -215,7 +215,7 @@ let $$G0 = new class extends M {
       let u = i.openFile?.teamId;
       let m = i.openFile?.parentOrgId;
       if (!s || !d) {
-        e.dispatch(xI());
+        e.dispatch(setAssetsSearchNoResults());
         e.dispatch(eK({
           queryId: null
         }));
@@ -226,7 +226,7 @@ let $$G0 = new class extends M {
       }));
       let _ = i.library.assetsPanelSearch.searchOptions;
       if (_ && !eu(_)) {
-        e.dispatch(xI());
+        e.dispatch(setAssetsSearchNoResults());
         e.dispatch(eK({
           queryId: null
         }));
@@ -262,7 +262,7 @@ let $$G0 = new class extends M {
         tier: Al()
       };
       if (_?.type === _$$I.LOCAL) {
-        e.dispatch(Y1(E));
+        e.dispatch(setAssetsSearchResults(E));
         e.dispatch(w2({
           sessionId: i.search.sessionId,
           query: s,
@@ -300,7 +300,7 @@ let $$G0 = new class extends M {
         return;
       }
       if (s !== e.getState().library.assetsPanelSearch.query) return;
-      e.dispatch(Y1(E));
+      e.dispatch(setAssetsSearchResults(E));
       e.dispatch(w2({
         sessionId: i.search.sessionId,
         query: s,

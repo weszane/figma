@@ -8,8 +8,8 @@ import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
 import { generateUUIDv4 } from "../905/871474";
-import { n1 } from "../figma_app/657017";
-import { LH } from "../905/872904";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
+import { getParentOrgId } from "../905/872904";
 import { WorkspaceSelectorView } from "../figma_app/43951";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { F as _$$F, r as _$$r } from "../905/336143";
@@ -50,7 +50,7 @@ export function $$N0({
     hasProAccess,
     hasOrgAccess
   } = mG();
-  let F = n1();
+  let F = useFigmaLibrariesEnabled();
   let [M] = useState(() => f ?? generateUUIDv4());
   let [j, U, B] = _$$t.useTabs({
     thisFile: !0,
@@ -136,7 +136,7 @@ export function $$N0({
       }(e);
       let s = function (e) {
         let t = ry();
-        let i = n1();
+        let i = useFigmaLibrariesEnabled();
         let [n] = setupResourceAtomHandler(XD({
           query: e
         }), {
@@ -162,7 +162,7 @@ export function $$N0({
         let [o, l] = useState(!0);
         let d = useCurrentFileKey() ?? void 0;
         let c = getCurrentTeam()?.id;
-        let u = LH() ?? void 0;
+        let u = getParentOrgId() ?? void 0;
         useEffect(function () {
           t ? (s(generateUUIDv4()), l(!1)) : (s(void 0), l(!0));
         }, [t]);
@@ -193,7 +193,7 @@ export function $$N0({
     return [n, k, g, f, _, results, c, queryId];
   }(V, B, M);
   let X = function () {
-    let e = LH();
+    let e = getParentOrgId();
     let {
       hasEntAccess
     } = mG();

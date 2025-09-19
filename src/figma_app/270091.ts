@@ -37,7 +37,7 @@ import { showModalHandler } from "../905/156213";
 import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString, compareLibraryItemsAlias } from "../905/709171";
 import { getCommonLibraryKey, memoizedProcessComponentsAndStateGroups, getFullComponentBreadcrumbs, getAssetBackgroundColor } from "../figma_app/80990";
@@ -418,7 +418,7 @@ function eW(e) {
   let tP = _$$b2({
     hideTooltips: !0
   });
-  let tD = n1();
+  let tD = useFigmaLibrariesEnabled();
   let tk = useCallback(() => {
     pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(hideTooltip()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
       seen_component_onboarding_modal: !0

@@ -14,7 +14,7 @@ import { libraryVariableCollectionAtom, libraryVariableCollectionWithVarsAtom, v
 import { createAtomFamily } from "../905/157003";
 import { Ez } from "../figma_app/766708";
 import { logError } from "../905/714362";
-import { JB as _$$JB } from "../figma_app/657017";
+import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { hasLibraryKeyInSet, handleResourceQuery, variableByKeyQuery, variableCollectionByKeyQuery } from "../figma_app/255679";
 import { fullscreenValue } from "../figma_app/455680";
 import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
@@ -228,7 +228,7 @@ let et = atom(e => {
 let er = atom(e => {
   let t = e($$ef21);
   let r = e(resourceDataAndPresetKeysV2SetAtom);
-  let n = (e(_$$JB) ? Object.values(t).filter(e => hasLibraryKeyInSet(e, r)) : []).map(e => e.key).sort().map(e => ({
+  let n = (e(figmaLibrariesEnabledAtom) ? Object.values(t).filter(e => hasLibraryKeyInSet(e, r)) : []).map(e => e.key).sort().map(e => ({
     key: e
   }));
   let i = handleResourceQuery(variableByKeyQuery, n, e);

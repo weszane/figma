@@ -5,7 +5,7 @@ import s from "../vendor/128080";
 import { reactTimerGroup } from "../905/542194";
 import { z8 } from "../905/709095";
 import { getInitialOptions } from "../figma_app/169182";
-import { Zv } from "../905/760682";
+import { diffSets } from "../905/760682";
 import { ye } from "../figma_app/682945";
 import { getVisibleArea, roundedDivision } from "../figma_app/62612";
 import { nt } from "../905/226610";
@@ -275,7 +275,7 @@ let D = class e extends HTMLElement {
     let {
       added,
       removed
-    } = Zv(this.ds.clusters.leafNodes, this._lastRenderedDataset?.clusters.leafNodes);
+    } = diffSets(this.ds.clusters.leafNodes, this._lastRenderedDataset?.clusters.leafNodes);
     let n = this.ds.clusters.all().reduce((e, t) => (e.set(t.id, t), e), new Map());
     let r = (this._lastRenderedDataset?.clusters?.all() || []).reduce((e, t) => (e.set(t.id, t), e), new Map());
     let a = [...n.values()].filter(e => !r.has(e.id));

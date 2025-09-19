@@ -19,7 +19,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { vq } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
-import { T1 } from "../905/711212";
+import { replaceThumbnailsOptimist } from "../905/711212";
 import { mapFileToProductType } from "../figma_app/314264";
 import { getAssetBackgroundColor, generateNodeThumbnail } from "../figma_app/80990";
 import { fV } from "../figma_app/236178";
@@ -709,7 +709,7 @@ export function $$tu1({
     let s = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
     t?.content_hash !== s && requestAnimationFrame(() => {
       let t = generateNodeThumbnail(e.node_id);
-      null != t && ep(T1({
+      null != t && ep(replaceThumbnailsOptimist({
         thumbnails: [{
           nodeId: e.node_id,
           url: t,

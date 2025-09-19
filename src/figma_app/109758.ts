@@ -3,7 +3,7 @@ import { G1 } from "../figma_app/691470";
 import { bytesToHex } from "../905/125019";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
 import { D } from "../905/629114";
 import { fetchImageAsByteArray } from "../905/866640";
@@ -37,7 +37,7 @@ async function g({
 }) {
   if (!e.isAlive) return;
   let d = await fetchImageAsByteArray(t, ["*"]);
-  let c = await UD(d, "image/png", r);
+  let c = await processImageWithThumbnail(d, "image/png", r);
   if (!e.isAlive || !o()) return;
   let p = [...e.fills];
   permissionScopeHandler.ai("first-draft-set-image-fill", () => {

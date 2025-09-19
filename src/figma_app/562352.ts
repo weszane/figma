@@ -1,89 +1,138 @@
-export function $$n3(e) {
-  return new Promise(t => {
-    let r = Array(e.length);
-    let n = e.length;
-    let i = () => {
-      0 === n && t(r);
-    };
-    for (let t = 0; t < e.length; t++) e[t].then(e => {
-      r[t] = {
-        type: "resolve",
-        resolve: e,
-        reject: void 0
-      };
-      n--;
-      i();
-    }, e => {
-      r[t] = {
-        type: "reject",
-        resolve: void 0,
-        reject: e
-      };
-      n--;
-      i();
-    });
-    i();
-  });
+/**
+ * Resolves an array of promises and returns their results with status.
+ * Original name: $$n3
+ */
+export async function resolveAllWithStatus<T>(promises: Promise<T>[]): Promise<Array<{ type: 'resolve' | 'reject', resolve?: T, reject?: any }>> {
+  return new Promise((resolve) => {
+    const results: Array<{ type: 'resolve' | 'reject', resolve?: T, reject?: any }> = Array.from({ length: promises.length })
+    let remaining = promises.length
+
+    const checkDone = () => {
+      if (remaining === 0)
+        resolve(results)
+    }
+
+    promises.forEach((promise, idx) => {
+      promise.then(
+        (value) => {
+          results[idx] = { type: 'resolve', resolve: value, reject: undefined }
+          remaining--
+          checkDone()
+        },
+        (error) => {
+          results[idx] = { type: 'reject', resolve: undefined, reject: error }
+          remaining--
+          checkDone()
+        },
+      )
+    })
+
+    checkDone()
+  })
 }
-export function $$i0(e, t) {
-  return new Promise(r => {
-    let n = 0;
-    let i = e.length;
-    let a = () => {
-      0 === i && r(s);
-    };
-    let s = Array(e.length);
-    let o = t => {
-      let r = e[t];
-      return void 0 !== r && (r().then(e => {
-        s[t] = {
-          type: "resolve",
-          resolve: e,
-          reject: void 0
-        };
-        i--;
-        l();
-        a();
-      }, e => {
-        s[t] = {
-          type: "reject",
-          resolve: void 0,
-          reject: e
-        };
-        i--;
-        l();
-        a();
-      }), !0);
-    };
-    let l = () => {
-      let e = o(n);
-      n++;
-      return e;
-    };
-    for (let e = 0; e < t && l(); e++);
-    a();
-  });
+
+/**
+ * Runs up to `concurrency` async functions from the array, collecting their results with status.
+ * Original name: $$i0
+ */
+export function runWithConcurrency<T>(
+  tasks: Array<() => Promise<T>>,
+  concurrency: number,
+): Promise<Array<{ type: 'resolve' | 'reject', resolve?: T, reject?: any }>> {
+  return new Promise((resolve) => {
+    let current = 0
+    let remaining = tasks.length
+    const results: Array<{ type: 'resolve' | 'reject', resolve?: T, reject?: any }> = Array.from({ length: tasks.length })
+
+    const checkDone = () => {
+      if (remaining === 0)
+        resolve(results)
+    }
+
+    const runTask = (idx: number) => {
+      const task = tasks[idx]
+      if (task) {
+        task().then(
+          (value) => {
+            results[idx] = { type: 'resolve', resolve: value, reject: undefined }
+            remaining--
+            scheduleNext()
+            checkDone()
+          },
+          (error) => {
+            results[idx] = { type: 'reject', resolve: undefined, reject: error }
+            remaining--
+            scheduleNext()
+            checkDone()
+          },
+        )
+      }
+    }
+
+    const scheduleNext = () => {
+      if (current < tasks.length) {
+        runTask(current)
+        current++
+      }
+    }
+
+    for (let i = 0; i < concurrency && current < tasks.length; i++) {
+      scheduleNext()
+    }
+
+    checkDone()
+  })
 }
-export function $$a1(e) {
-  let t = null;
-  return () => (null === t && (t = e()).catch(() => t = null), t);
+
+/**
+ * Creates a singleton async function that caches its result until rejected.
+ * Original name: $$a1
+ */
+export function singletonAsync<T>(fn: () => Promise<T>): () => Promise<T> {
+  let cached: Promise<T> | null = null
+  return () => {
+    if (cached === null) {
+      cached = fn().catch(() => {
+        cached = null
+        throw new Error('Singleton async function failed')
+      })
+    }
+    return cached
+  }
 }
-export async function $$s2(e, t, r) {
-  return await new Promise((n, i) => {
-    let a;
-    let s = function() {
-      0 === t ? i(a) : e().then(n).catch(e => {
-        t--;
-        a = e;
-        setTimeout(function() {
-          s();
-        }, r);
-      });
-    };
-    s();
-  });
+
+/**
+ * Retries an async function up to `retries` times with delay `delayMs` between attempts.
+ * Original name: $$s2
+ */
+export async function retryAsync<T>(
+  fn: () => Promise<T>,
+  retries: number,
+  delayMs: number,
+): Promise<T> {
+  return new Promise((resolve, reject) => {
+    let lastError: any
+
+    const attempt = () => {
+      if (retries === 0) {
+        reject(lastError)
+        return
+      }
+      fn()
+        .then(resolve)
+        .catch((error) => {
+          retries--
+          lastError = error
+          setTimeout(attempt, delayMs)
+        })
+    }
+
+    attempt()
+  })
 }
-export const Ed = $$i0;
-export const Kt = $$a1;
-export const OF = $$s2;
-export const _7 = $$n3; 
+
+// Export aliases for backward compatibility
+export const Ed = runWithConcurrency
+export const Kt = singletonAsync
+export const OF = retryAsync
+export const _7 = resolveAllWithStatus

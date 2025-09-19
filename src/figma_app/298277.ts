@@ -1,4 +1,4 @@
-import { Kt } from "../figma_app/562352";
+import { singletonAsync } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { UserAppType, interactionTestHelpers } from "../figma_app/763686";
 import { initializeTsApiBindings, getAndRemoveFullscreenEmscriptenExecutor, setupWasmModule } from "../figma_app/762706";
@@ -121,8 +121,8 @@ async function w(e) {
     wasmResult: l
   };
 }
-let O = Kt(async () => await w("fullscreen-app"));
-let R = Kt(async () => await w("prototype-lib"));
+let O = singletonAsync(async () => await w("fullscreen-app"));
+let R = singletonAsync(async () => await w("prototype-lib"));
 let L = async e => {
   switch (isInteractionPathCheck() && console.log("Called loadAllForWasmBinaryType for", e), e) {
     case "fullscreen-app":

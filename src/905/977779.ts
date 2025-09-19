@@ -8,13 +8,13 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ov, Av } from "../figma_app/646357";
 import { k1, vx } from "../905/91038";
 import { O } from "../905/221694";
-import { m0, No } from "../figma_app/141508";
+import { subscribedSymbolsFromLoadedPagesSelector, subscribedStateGroupsFromLoadedPagesSelector } from "../figma_app/141508";
 import { getCurrentHubFileVersionName } from "../905/71785";
 var o = s;
 let f = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.components);
 let _ = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.stateGroups);
-let A = createReduxSubscriptionAtomWithState(m0);
-let y = createReduxSubscriptionAtomWithState(No);
+let A = createReduxSubscriptionAtomWithState(subscribedSymbolsFromLoadedPagesSelector);
+let y = createReduxSubscriptionAtomWithState(subscribedStateGroupsFromLoadedPagesSelector);
 let $$b3 = atom(e => {
   let t = {};
   let i = e(f);

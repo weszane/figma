@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { WebLoggerTimer } from "../905/485103";
 import { fetchDynamicConfig } from "../figma_app/594947";
-import { JB } from "../figma_app/657017";
+import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { compareWithGeneratedKey } from "../905/709171";
 import { isBranchAlt } from "../905/760074";
 import { Av, ah, uN, f0 } from "../figma_app/646357";
@@ -181,7 +181,7 @@ export async function $$P11(e, t, r, n, i = !1, a) {
 export async function $$D8(e, t, r = !1) {
   if (!t) return [];
   try {
-    if (!atomStoreManager.get(JB)) return [];
+    if (!atomStoreManager.get(figmaLibrariesEnabledAtom)) return [];
     let {
       results
     } = (await searchAPIHandler.getAssetsFromCommunityLibraries({

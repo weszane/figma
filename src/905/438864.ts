@@ -2,7 +2,7 @@ import { randomBetween } from "../figma_app/492908";
 import { getFalseValue } from "../figma_app/897289";
 import { clearActiveFileUsersAction } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
-import { ru } from "../905/879323";
+import { componentDeleteForFile } from "../905/879323";
 import { ProjectsForTeam, ProjectByIdForRealtimeShim } from "../figma_app/43951";
 import { H } from "../905/715533";
 import { fJ, aj } from "../905/25169";
@@ -15,7 +15,7 @@ export function $$u2(e, t, i = !1) {
       if (l && (e.dispatch(yJ({
         folder: n
       })), l.team_id !== n.team_id)) for (let t of r.fileKeysByFolderId[l.id] || []) {
-        e.dispatch(ru({
+        e.dispatch(componentDeleteForFile({
           fileKey: t
         }));
         e.dispatch(clearActiveFileUsersAction({

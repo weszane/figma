@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { convertKiwiToString, convertStringToKiwi } from "../905/537777";
-import { sA, t9, Fw } from "../905/711212";
+import { generateVariableSetThumbnailUrl, getVariableThumbnail, loadVariableSetThumbnails } from "../905/711212";
 import { teamLibraryCache } from "../figma_app/80990";
 import { BQ } from "../figma_app/852050";
 import { isLocalOrSubscribed } from "../figma_app/633080";
@@ -16,10 +16,10 @@ export function $$u1({
   var l;
   var d;
   var c;
-  l = teamLibraryCache.getCacheValueOrNull(sA(t, i));
+  l = teamLibraryCache.getCacheValueOrNull(generateVariableSetThumbnailUrl(t, i));
   d = e.node_id;
   c = e.resolvedType;
-  return l && n ? t9(convertKiwiToString(n), l, d, c, r) : null;
+  return l && n ? getVariableThumbnail(convertKiwiToString(n), l, d, c, r) : null;
 }
 export function $$p0({
   variable: e,
@@ -40,7 +40,7 @@ export function $$p0({
   }) : p);
   let [_, A] = useState("LIBRARY" === t.subscriptionStatus && !g);
   useEffect(() => {
-    o ? f(p) : g || (A(!0), i(Fw({
+    o ? f(p) : g || (A(!0), i(loadVariableSetThumbnails({
       variableSet: t,
       variableId: e.node_id,
       variableType: e.resolvedType,

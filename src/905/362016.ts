@@ -9,7 +9,7 @@ import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Gj, Lk } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/511370";
@@ -266,7 +266,7 @@ export function $$H0(e) {
     width,
     onItemClick
   } = e;
-  let f = LH();
+  let f = getParentOrgId();
   let [y] = setupResourceAtomHandler(lH(file.key));
   let b = "loading" === y.status;
   let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(Lk), [y]);

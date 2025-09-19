@@ -19,7 +19,7 @@ import { B } from "../905/107177";
 import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { MH, dM, cM } from "../figma_app/803787";
-import { MH as _$$MH } from "../figma_app/141508";
+import { allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ag } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
@@ -290,7 +290,7 @@ async function z(e) {
           r.push(`${e.name} : rgba(${s}, ${o}, ${l}, ${d})`);
         });
         let s = Object.values(cM(t)).filter(e => !e.deletedFromSceneGraph && "FILL" === e.style_type).map(e => e.node_id);
-        [...new Set([...s, ..._$$MH(t)])].map(t => e.get(t)).filter(e => !!e && "FILL" === e.styleType).forEach(e => {
+        [...new Set([...s, ...allSubscribedStylesNodeIdsFromLoadedPagesSelector(t)])].map(t => e.get(t)).filter(e => !!e && "FILL" === e.styleType).forEach(e => {
           let t = e.fills[0]?.color;
           if (!t) return;
           let i = Math.round(255 * Number(t.r));
@@ -312,7 +312,7 @@ async function z(e) {
         let i = cM(t);
         let n = [];
         let r = Object.values(i).filter(e => !e.deletedFromSceneGraph && "TEXT" === e.style_type).map(e => e.node_id);
-        [...new Set([...r, ..._$$MH(t)])].map(t => e.get(t)).filter(e => !!e && "TEXT" === e.type).forEach(e => {
+        [...new Set([...r, ...allSubscribedStylesNodeIdsFromLoadedPagesSelector(t)])].map(t => e.get(t)).filter(e => !!e && "TEXT" === e.type).forEach(e => {
           n.push({
             name: e.name,
             fontFamily: e.fontName.family,

@@ -37,7 +37,7 @@ import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { nm, j_ } from "../figma_app/745458";
-import { _Q } from "../figma_app/141508";
+import { directlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { f as _$$f } from "../905/135117";
@@ -514,7 +514,7 @@ export let $$ey0 = memo(e => {
       selectedStyleProperties: t.mirror.selectedStyleProperties,
       stylePickerShown: t.stylePickerShown,
       teams: t.teams,
-      directlySubscribedStyles: _Q(t),
+      directlySubscribedStyles: directlySubscribedStylesFromLoadedPagesSelector(t),
       versionedStyleInfo: nm(t, e.inheritStyleID)
     })),
     styleUpdates: useAtomWithSubscription(j_)

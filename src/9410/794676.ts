@@ -56,7 +56,7 @@ import { pB } from "../905/395919";
 import { getSelectedFile } from "../905/766303";
 import { ud } from "../905/862913";
 import { isLoaded } from "../905/18797";
-import { m0, No } from "../figma_app/141508";
+import { subscribedSymbolsFromLoadedPagesSelector, subscribedStateGroupsFromLoadedPagesSelector } from "../figma_app/141508";
 import { l6, He } from "../figma_app/155728";
 import { M as _$$M } from "../905/540025";
 import { yD } from "../905/92359";
@@ -752,8 +752,8 @@ export function $$t80({
   (function () {
     let e = useStore();
     let t = useSelector(getSelectedFile);
-    let i = useSelector(m0);
-    let r = useSelector(No);
+    let i = useSelector(subscribedSymbolsFromLoadedPagesSelector);
+    let r = useSelector(subscribedStateGroupsFromLoadedPagesSelector);
     let s = useSelector(e => e.library.publishedByLibraryKey);
     let o = selectCurrentFile();
     let l = useSelector(e => e.fileVersion);

@@ -39,7 +39,7 @@ import { parseEmbedInput } from "../figma_app/916560";
 import { logError } from "../905/714362";
 import { LoadingSpinner } from "../figma_app/858013";
 import { r as _$$r } from "../905/955316";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { linkMetadataHandlerInstance } from "../905/695476";
 let o = createContext(null);
 function p() {
@@ -1236,7 +1236,7 @@ let eY = {
           });
         }), e.thumbnailImage)) try {
           let t = new Uint8Array(e.thumbnailImage.data);
-          let l = await UD(t, "image/png", e.title);
+          let l = await processImageWithThumbnail(t, "image/png", e.title);
           permissionScopeHandler.system("initializing-youtube-thumbnail", () => {
             _$$r(() => {
               a.insertImageInFillPaint(l);

@@ -52,11 +52,11 @@ import { Av } from "../905/149328";
 import { O as _$$O } from "../905/257139";
 import { dP, q_, M3 } from "../figma_app/119475";
 import { LoadingSpinner } from "../figma_app/858013";
-import { cr, gP } from "../905/879323";
+import { setShouldSearchDefaultLibraries, setAssetsSearchOptions } from "../905/879323";
 import { showModalHandler } from "../905/156213";
 import { Hz } from "../figma_app/591738";
 import { S as _$$S } from "../642/159607";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { Gq } from "../figma_app/361662";
 import { clearSelection } from "../figma_app/741237";
 import { LR } from "../figma_app/120210";
@@ -326,7 +326,7 @@ function eW(e) {
     }
     return Object.keys(libraryNameByLibraryKey ?? {}).sort((e, t) => _$$f2.LEXICOGRAPHICALLY(libraryNameByLibraryKey[e], libraryNameByLibraryKey[t]));
   }, [g, fileKeyToLibraryKey, libraryNameByLibraryKey]);
-  let f = n1();
+  let f = useFigmaLibrariesEnabled();
   let [b, x] = eF()(m, e => !wJ(e));
   let v = x.length > 0 && f;
   let _ = useMemo(() => ({
@@ -1126,7 +1126,7 @@ function t9({
   _$$S();
   let I = q_();
   useEffect(() => {
-    c(cr({
+    c(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !1
     }));
   }, [c]);
@@ -1149,7 +1149,7 @@ function t9({
       let n = useSelector(MH);
       let a = useSelector(dM);
       let i = useSelector(selectTeams);
-      let l = n1();
+      let l = useFigmaLibrariesEnabled();
       let d = useAtomWithSubscription(qp);
       let c = Fl();
       let u = t?.teamId ? i[t.teamId] : null;
@@ -1237,7 +1237,7 @@ function t9({
             case _$$I2.SITE_KIT:
               return "";
           }
-        }(e)), l && o(gP({
+        }(e)), l && o(setAssetsSearchOptions({
           searchOptions: e
         })), analyticsEventManager.trackDefinedEvent("assets_panel.asset_type_changed", {
           assetType: e.type,
@@ -1473,7 +1473,7 @@ function t9({
     W || clearSelection();
   }, [W]);
   let [Q, eh] = useLocalStorageSync("has-auto-expanded-component-libraries-for-nux", !1);
-  let eT = n1();
+  let eT = useFigmaLibrariesEnabled();
   let eS = useRef(null);
   useEffect(() => {
     let e = eS.current;

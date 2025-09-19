@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { getCurrentHubFileVersionName } from "../905/71785";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
@@ -86,7 +86,7 @@ export function $$E5(e) {
   };
 }
 export function $$y2() {
-  let e = n1();
+  let e = useFigmaLibrariesEnabled();
   let t = je();
   let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   return e ? "loading" === t.status ? {

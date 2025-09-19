@@ -54,7 +54,7 @@ const figmaUrl: string = getInitialOptions().figma_url ?? ''
  * @param {Record<string, string>} tags
  * (Original: $$m2)
  */
-export async function sendMetric(metric: string, tags: Record<string, string> = {}): Promise<void> {
+export async function sendMetric(metric: string, tags: Record<string, any> = {}): Promise<void> {
   await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/metrics/${metric}`, {
     tags: [...getClientTags(), ...objectToTags(tags)].join(','),
   }, {

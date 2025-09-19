@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useLatestRef } from "../figma_app/922077";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileAtom } from "../figma_app/516028";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -18,7 +18,7 @@ async function f(e, t) {
     let t = e.createCodeLayerFromDesign("paste", !0, n0);
     if (1 !== t.length) throw Error("Expected exactly one code layer to be created");
     n = t[0];
-  }), n) await Jr().loadAllImagesUnder(n, ImageExportType.ALL, "rev-image-paste");else {
+  }), n) await getImageManager().loadAllImagesUnder(n, ImageExportType.ALL, "rev-image-paste");else {
     let n = atomStoreManager.get(Ah).find(t => ak(t, e.guid));
     t(t => t.filter(t => !ak(t, e.guid)));
     AIScopeHandler.system("figmake", () => {

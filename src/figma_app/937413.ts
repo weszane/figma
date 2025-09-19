@@ -1,4 +1,4 @@
-import { Ed } from "../figma_app/562352";
+import { runWithConcurrency } from "../figma_app/562352";
 import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/239910";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
@@ -194,7 +194,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
     });
     return n;
   });
-  Ed(F, 8).then(t => {
+  runWithConcurrency(F, 8).then(t => {
     if (!t.some(e => "reject" === e.type)) {
       let n = copyFiles.filter(e => !!e.folderId && c.includes(e.folderId)).length;
       let i = t => t && t.editor_type ? {

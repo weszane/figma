@@ -7,13 +7,13 @@ import { usePreviousValue } from '../figma_app/922077';
 import { LibraryPresetSubscriptionsV2 } from '../figma_app/43951';
 import { getProviderConfigType } from '../figma_app/155411';
 import { je } from '../figma_app/155728';
-import { n1 } from '../figma_app/657017';
+import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$m0() {
   let e = useDispatch();
   let t = useRef(!1);
   let s = useSelector(e => e.loadingState);
-  let m = n1();
+  let m = useFigmaLibrariesEnabled();
   let g = usePreviousValue(m);
   let f = useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: getProviderConfigType()

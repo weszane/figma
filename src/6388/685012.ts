@@ -15,7 +15,7 @@ import { isNotInFocusedNodeView, isFullscreenAndInFocusedNodeView } from "../fig
 import { c3, YB, DG } from "../6388/934960";
 import { Uk } from "../6388/447908";
 import { PU } from "../figma_app/334505";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { replaceSelection } from "../figma_app/741237";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { A as _$$A } from "../905/929620";
@@ -74,7 +74,7 @@ export function $$C0({
               if (!e || !t) continue;
               Vm(s.guid, jsx(_$$A, {}));
               let l = base64ToUint8Array(e);
-              UD(l, t, "File").then(e => {
+              processImageWithThumbnail(l, t, "File").then(e => {
                 let t = -1;
                 let l = "FILL";
                 if (s.fills) for (let e = s.fills.length - 1; e >= 0; e--) {

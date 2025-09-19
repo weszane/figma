@@ -549,7 +549,7 @@ import { fA as _$$fA, gB as _$$gB, nb as _$$nb, nw as _$$nw, Tf as _$$Tf, uy as 
 import { uZ as _$$uZ, Jo, jU } from '../figma_app/544879';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { S as _$$S0 } from '../figma_app/552746';
-import { Mw } from '../figma_app/553184';
+import { sendAutosaveNotification } from '../figma_app/553184';
 import { pZ as _$$pZ } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from '../figma_app/566371';
@@ -21592,7 +21592,7 @@ function xP(e) {
   let r = getSelectedView();
   let [n, o] = useState(!1);
   useEffect(() => {
-    xF || (xF = !0, Mw());
+    xF || (xF = !0, sendAutosaveNotification());
     n || (o(!0), trackEventAnalytics('Autosave Notification', {
       hasUnsyncedFiles: e.unsyncedFiles.length > 0,
       hasLocalUnsyncedFiles: e.localUnsyncedFiles.length > 0,

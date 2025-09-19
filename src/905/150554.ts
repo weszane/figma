@@ -1,4 +1,4 @@
-import { Ed } from "../figma_app/562352";
+import { runWithConcurrency } from "../figma_app/562352";
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
@@ -185,7 +185,7 @@ async function y({
     return Promise.resolve([]);
   }
   u?.logDebugInfo(m + ".fragments", I);
-  let E = o()(o()(await Ed(I.map(e => async () => {
+  let E = o()(o()(await runWithConcurrency(I.map(e => async () => {
     try {
       if (e.component_usages) return e.component_usages.map(t => AP({
         usage: t,

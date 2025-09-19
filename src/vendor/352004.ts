@@ -657,7 +657,7 @@ function X(e, r, n) {
     }
     e.pathname = P(e.pathname, e.protocol, n);
   }
-  "string" == typeof r.search && (e.search = A(r.search, n));
+  "string" == typeof r.search && (e.search = ImageDownloadQueue(r.search, n));
   "string" == typeof r.hash && (e.hash = E(r.hash, n));
   return e;
 }

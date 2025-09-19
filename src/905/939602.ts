@@ -1,269 +1,426 @@
-import { z, Ip } from "../905/239603";
-import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-import { FileKeySourceEnum } from "../905/412913";
-import { fileEntityModel } from "../905/806985";
-import { HubFileSchema } from "../905/71785";
-import { ComponentSchema, StateGroupDetailSchema, createFileKeySchema, StyleSchema, cI } from "../figma_app/633080";
-import { stringSchema } from "../figma_app/198712";
-let u = XHR.requiredHeaders;
-let $$p0 = new class {
-  constructor() {
-    this.LibraryComponentV2DestinationSchemaValidator = createMetaValidator("LibraryComponentV2Destination", z.object({
-      node_id: stringSchema,
-      file_key: z.string(),
-      component: ComponentSchema,
-      component_set: StateGroupDetailSchema.optional()
-    }), "ds_zod_components", !1, !0);
-    this.LibraryPublishedComponentsSchemaValidator = createNoOpValidator();
-    this.CommunityLibraryPublishedComponentsSchemaValidator = createNoOpValidator();
-    this.LibraryPublishedComponentsV2SchemaValidator = createMetaValidator("LibraryPublishedComponentsV2", z.object({
-      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
-      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
-      file: fileEntityModel.nullable(),
-      hub_file: Ip.coerce.$$null(HubFileSchema.nullable())
-    }), "ds_zod_components", !1, !0);
-    this.LibraryStylesSchemaValidator = createMetaValidator("LibraryStylesSchemaValidator", z.object({
-      styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape))
-    }), "ds_zod_styles", !1, !0);
-    this.LibraryStyleByKeyValidator = createMetaValidator("LibraryStyleByKeyValidator", z.object({
-      style: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape),
-      file: fileEntityModel
-    }), "ds_zod_styles", !1, !0);
-    this.LibraryStyleLogByKeyVersionValidator = createNoOpValidator();
-    this.LibrarySubscribedComponentsEditorTypeSchemaValidator = createMetaValidator("LibrarySubscribedComponentsEditorType", z.object({
-      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
-      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
-      files: fileEntityModel.array(),
-      hub_files: HubFileSchema.array().optional()
-    }), "ds_zod_components", !1, !0);
-    this.DefaultLibrariesSchemaValidator = createNoOpValidator();
-    this.DefaultLibraryAttributionSchemaValidator = createNoOpValidator();
-    this.LibraryPublishedComponentsStatsSchemaValidator = createNoOpValidator();
-    this.LibraryComponentV2SchemaValidator = createMetaValidator("LibraryComponentV2", z.object({
-      component: createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape),
-      component_set: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape).nullable(),
-      state_components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
-      file: fileEntityModel.nullable()
-    }), "ds_zod_components", !1, !0);
-    this.LibraryStateGroupSchemaValidator = createMetaValidator("LibraryStateGroup", createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape), "ds_zod_components", !1, !0);
-    this.LibraryPublishedAndMovedComponentsSchemaValidator = createMetaValidator("LibraryPublishedAndMovedComponents", z.object({
-      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
-      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
-      files: z.array(fileEntityModel),
-      move_remappings: z.record(cI)
-    }), "ds_zod_components", !1, !0);
-    this.LibrariesSchemaValidator = createNoOpValidator();
-    this.LibrariesV2SchemaValidator = createNoOpValidator();
-    this.LibraryPublishSchemaValidator = createNoOpValidator();
-    this.UploadPublishParamsSchemaValidator = createNoOpValidator();
-    this.UnpublishedStylesSchemaValidator = createMetaValidator("UnpublishedStylesSchemaValidator", z.object({
-      styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape))
-    }), "ds_zod_styles", !1, !0);
-    this.MissingStylesByLibraryKeySchemaValidator = createNoOpValidator();
-    this.EverPublishedLibrariesSchemaValidator = createNoOpValidator();
-    this.LibrariesByLibraryKeys = createNoOpValidator();
-    this.ValidateCopyValidator = createNoOpValidator();
-    this.EnableSlotsForFileValidator = createNoOpValidator();
+import z from 'zod'
+import { HubFileSchema } from '../905/71785'
+import { Ip } from '../905/239603'
+import { FileKeySourceEnum } from '../905/412913'
+import { fileEntityModel } from '../905/806985'
+import { XHR } from '../905/910117'
+import { APIParameterUtils, createMetaValidator, createNoOpValidator } from '../figma_app/181241'
+import { stringSchema } from '../figma_app/198712'
+import { cI, ComponentSchema, createFileKeySchema, StateGroupDetailSchema, StyleSchema } from '../figma_app/633080'
+
+/**
+ * Required headers for XHR requests.
+ * @original u
+ */
+const requiredHeaders = XHR.requiredHeaders
+
+/**
+ * Types for API parameter objects.
+ */
+interface PublishedComponentsParams {
+  key: string
+  includeThumbnail?: boolean
+  includeRealtime?: boolean
+}
+
+interface PublishedComponentsV2Params {
+  libraryKey: string
+  includeThumbnail?: boolean
+  includeRealtime?: boolean
+}
+
+interface StyleKeysParams {
+  styleKeys: string[]
+  orgId?: string
+}
+
+interface LibraryKeysParams {
+  libraryKeys: string[]
+  subscriptionFileKey?: string
+  orgId?: string
+}
+
+interface ValidateCopyParams {
+  nodeIds: string[]
+  fileKey: string
+  copyType: string
+}
+
+/**
+ * LibraryAPI provides methods for interacting with design system library endpoints.
+ * @original $$p0
+ */
+class LibraryAPI {
+  LibraryComponentV2DestinationSchemaValidator = createMetaValidator('LibraryComponentV2Destination', z.object({
+    node_id: stringSchema,
+    file_key: z.string(),
+    component: ComponentSchema,
+    component_set: StateGroupDetailSchema.optional(),
+  }), 'ds_zod_components', false, true)
+
+  LibraryPublishedComponentsSchemaValidator = createNoOpValidator()
+  CommunityLibraryPublishedComponentsSchemaValidator = createNoOpValidator()
+  LibraryPublishedComponentsV2SchemaValidator = createMetaValidator('LibraryPublishedComponentsV2', z.object({
+    components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+    state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
+    file: fileEntityModel.nullable(),
+    hub_file: Ip.coerce.null(HubFileSchema.nullable()),
+  }), 'ds_zod_components', false, true)
+
+  LibraryStylesSchemaValidator = createMetaValidator('LibraryStylesSchemaValidator', z.object({
+    styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape)),
+  }), 'ds_zod_styles', false, true)
+
+  LibraryStyleByKeyValidator = createMetaValidator('LibraryStyleByKeyValidator', z.object({
+    style: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape),
+    file: fileEntityModel,
+  }), 'ds_zod_styles', false, true)
+
+  LibraryStyleLogByKeyVersionValidator = createNoOpValidator()
+  LibrarySubscribedComponentsEditorTypeSchemaValidator = createMetaValidator('LibrarySubscribedComponentsEditorType', z.object({
+    components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+    state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
+    files: fileEntityModel.array(),
+    hub_files: HubFileSchema.array().optional(),
+  }), 'ds_zod_components', false, true)
+
+  DefaultLibrariesSchemaValidator = createNoOpValidator()
+  DefaultLibraryAttributionSchemaValidator = createNoOpValidator()
+  LibraryPublishedComponentsStatsSchemaValidator = createNoOpValidator()
+  LibraryComponentV2SchemaValidator = createMetaValidator('LibraryComponentV2', z.object({
+    component: createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape),
+    component_set: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape).nullable(),
+    state_components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+    file: fileEntityModel.nullable(),
+  }), 'ds_zod_components', false, true)
+
+  LibraryStateGroupSchemaValidator = createMetaValidator('LibraryStateGroup', createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape), 'ds_zod_components', false, true)
+
+  LibraryPublishedAndMovedComponentsSchemaValidator = createMetaValidator('LibraryPublishedAndMovedComponents', z.object({
+    components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+    state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
+    files: z.array(fileEntityModel),
+    move_remappings: z.record(cI),
+  }), 'ds_zod_components', false, true)
+
+  LibrariesSchemaValidator = createNoOpValidator()
+  LibrariesV2SchemaValidator = createNoOpValidator()
+  LibraryPublishSchemaValidator = createNoOpValidator()
+  UploadPublishParamsSchemaValidator = createNoOpValidator()
+  UnpublishedStylesSchemaValidator = createMetaValidator('UnpublishedStylesSchemaValidator', z.object({
+    styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape)),
+  }), 'ds_zod_styles', false, true)
+
+  MissingStylesByLibraryKeySchemaValidator = createNoOpValidator()
+  EverPublishedLibrariesSchemaValidator = createNoOpValidator()
+  LibrariesByLibraryKeys = createNoOpValidator()
+  ValidateCopyValidator = createNoOpValidator()
+  EnableSlotsForFileValidator = createNoOpValidator()
+
+  /**
+   * Fetches the destination for a library component V2.
+   * @original getLibraryComponentV2Destination
+   */
+  getLibraryComponentV2Destination(params: { componentKey: string }) {
+    return this.LibraryComponentV2DestinationSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/component_v2/${params.componentKey}/destination`),
+    )
   }
-  getLibraryComponentV2Destination(e) {
-    return this.LibraryComponentV2DestinationSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/component_v2/${e.componentKey}/destination`));
+
+  /**
+   * Fetches published components for a library.
+   * @original getLibraryPublishedComponents
+   */
+  getLibraryPublishedComponents(params: PublishedComponentsParams) {
+    const { key, includeThumbnail, includeRealtime } = params
+    return this.LibraryPublishedComponentsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(
+        `/api/design_systems/library/${key}/published_components`,
+        APIParameterUtils.toAPIParameters({ includeThumbnail, includeRealtime }),
+        { ...requiredHeaders, retryCount: 5 },
+      ),
+    )
   }
-  getLibraryPublishedComponents(e) {
-    let {
-      key,
-      includeThumbnail,
-      includeRealtime
-    } = e;
-    return this.LibraryPublishedComponentsSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get(`/api/design_systems/library/${key}/published_components`, APIParameterUtils.toAPIParameters({
-      includeThumbnail,
-      includeRealtime
-    }), {
-      ...u,
-      retryCount: 5
-    }));
+
+  /**
+   * Fetches published components for a community library.
+   * @original getCommunityLibraryPublishedComponents
+   */
+  getCommunityLibraryPublishedComponents(params: { hubFileId: string }) {
+    return this.CommunityLibraryPublishedComponentsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(
+        `/api/community_libraries/${params.hubFileId}/published_components`,
+        null,
+        { ...requiredHeaders, retryCount: 5 },
+      ),
+    )
   }
-  getCommunityLibraryPublishedComponents(e) {
-    return this.CommunityLibraryPublishedComponentsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/community_libraries/${e.hubFileId}/published_components`, null, {
-      ...u,
-      retryCount: 5
-    }));
+
+  /**
+   * Fetches published components V2 for a library.
+   * @original getLibraryPublishedComponentsV2
+   */
+  getLibraryPublishedComponentsV2(params: PublishedComponentsV2Params) {
+    const { libraryKey, includeThumbnail, includeRealtime } = params
+    return this.LibraryPublishedComponentsV2SchemaValidator.validate(async ({ xr }) =>
+      await xr.get(
+        `/api/design_systems/v2/library/${libraryKey}/published_components`,
+        APIParameterUtils.toAPIParameters({ includeThumbnail, includeRealtime }),
+        { ...requiredHeaders, retryCount: 5 },
+      ),
+    )
   }
-  getLibraryPublishedComponentsV2(e) {
-    let {
-      libraryKey,
-      includeThumbnail,
-      includeRealtime
-    } = e;
-    return this.LibraryPublishedComponentsV2SchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get(`/api/design_systems/v2/library/${libraryKey}/published_components`, APIParameterUtils.toAPIParameters({
-      includeThumbnail,
-      includeRealtime
-    }), {
-      ...u,
-      retryCount: 5
-    }));
+
+  /**
+   * Fetches styles for a library file.
+   * @original getLibraryStyles
+   */
+  getLibraryStyles(params: { libraryFileKey: string }) {
+    return this.LibraryStylesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/${params.libraryFileKey}/styles`),
+    )
   }
-  getLibraryStyles(e) {
-    return this.LibraryStylesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/${e.libraryFileKey}/styles`));
+
+  /**
+   * Fetches styles for a library by key.
+   * @original getLibraryStylesByLibraryKey
+   */
+  getLibraryStylesByLibraryKey(params: { libraryKey: string }) {
+    return this.LibraryStylesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/v2/library/${params.libraryKey}/styles`),
+    )
   }
-  getLibraryStylesByLibraryKey(e) {
-    return this.LibraryStylesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/v2/library/${e.libraryKey}/styles`));
+
+  /**
+   * Fetches a style by key.
+   * @original getLibraryStyleByKey
+   */
+  getLibraryStyleByKey(params: { styleKey: string }) {
+    return this.LibraryStyleByKeyValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/styles/${params.styleKey}`),
+    )
   }
-  getLibraryStyleByKey(e) {
-    return this.LibraryStyleByKeyValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/styles/${e.styleKey}`));
+
+  /**
+   * Fetches a style by key and version.
+   * @original getLibraryStyleByKeyAndVersion
+   */
+  getLibraryStyleByKeyAndVersion(params: { styleKey: string, version: string }) {
+    return this.LibraryStyleLogByKeyVersionValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/styles/${params.styleKey}/version/${params.version}`),
+    )
   }
-  getLibraryStyleByKeyAndVersion(e) {
-    return this.LibraryStyleLogByKeyVersionValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/styles/${e.styleKey}/version/${e.version}`));
+
+  /**
+   * Fetches subscribed components for a library editor type.
+   * @original getLibrarySubscribedComponentsEditorType
+   */
+  getLibrarySubscribedComponentsEditorType(params: { key: string, editorType: string }) {
+    return this.LibrarySubscribedComponentsEditorTypeSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/${params.key}/subscribed_components?editor_type=${params.editorType}`),
+    )
   }
-  getLibrarySubscribedComponentsEditorType(e) {
-    return this.LibrarySubscribedComponentsEditorTypeSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/${e.key}/subscribed_components?editor_type=${e.editorType}`));
+
+  /**
+   * Fetches default libraries.
+   * @original getDefaultLibraries
+   */
+  getDefaultLibraries(params: Record<string, any>) {
+    return this.DefaultLibrariesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/design_systems/default_libraries', APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getDefaultLibraries(e) {
-    return this.DefaultLibrariesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/design_systems/default_libraries", APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Fetches default library attribution.
+   * @original getDefaultLibraryAttribution
+   */
+  getDefaultLibraryAttribution(params: Record<string, any>) {
+    return this.DefaultLibraryAttributionSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/design_systems/default_library_attribution', APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getDefaultLibraryAttribution(e) {
-    return this.DefaultLibraryAttributionSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/design_systems/default_library_attribution", APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Fetches published components stats for a library file.
+   * @original getLibraryPublishedComponentsStats
+   */
+  getLibraryPublishedComponentsStats(params: { libraryFileKey: string }) {
+    return this.LibraryPublishedComponentsStatsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/${params.libraryFileKey}/published_components`),
+    )
   }
-  getLibraryPublishedComponentsStats(e) {
-    return this.LibraryPublishedComponentsStatsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/${e.libraryFileKey}/published_components`));
+
+  /**
+   * Fetches a library component V2.
+   * @original getLibraryComponentV2
+   */
+  getLibraryComponentV2(params: Record<string, any>) {
+    return this.LibraryComponentV2SchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/component_v2/${params.componentKey}`, APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getLibraryComponentV2(e) {
-    return this.LibraryComponentV2SchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/component_v2/${e.componentKey}`, APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Fetches a library state group.
+   * @original getLibraryStateGroup
+   */
+  getLibraryStateGroup(params: { stateGroupKey: string }) {
+    return this.LibraryStateGroupSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/design_systems/library/state_group/${params.stateGroupKey}`),
+    )
   }
-  getLibraryStateGroup(e) {
-    return this.LibraryStateGroupSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/state_group/${e.stateGroupKey}`));
+
+  /**
+   * Fetches published and moved components for a library.
+   * @original getLibraryPublishedAndMovedComponents
+   */
+  getLibraryPublishedAndMovedComponents(params: { openFileKey: string }) {
+    return this.LibraryPublishedAndMovedComponentsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(
+        `/api/design_systems/library/${params.openFileKey}/published_and_moved_components`,
+        null,
+        { ...requiredHeaders, retryCount: 5 },
+      ),
+    )
   }
-  getLibraryPublishedAndMovedComponents(e) {
-    return this.LibraryPublishedAndMovedComponentsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/design_systems/library/${e.openFileKey}/published_and_moved_components`, null, {
-      ...u,
-      retryCount: 5
-    }));
+
+  /**
+   * Fetches all libraries.
+   * @original getLibraries
+   */
+  getLibraries(params: Record<string, any>) {
+    return this.LibrariesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/design_systems/libraries', APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getLibraries(e) {
-    return this.LibrariesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/design_systems/libraries", APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Fetches all libraries V2.
+   * @original getLibrariesV2
+   */
+  getLibrariesV2(params: Record<string, any>) {
+    return this.LibrariesV2SchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/design_systems/v2/libraries', APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getLibrariesV2(e) {
-    return this.LibrariesV2SchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/design_systems/v2/libraries", APIParameterUtils.toAPIParameters(e)));
-  }
-  postLibraryPublish({
-    fileKey: e,
-    checkpointKey: t,
-    paramsPath: i,
-    publishToCommunity: n,
-    publishScope: r
+
+  /**
+   * Publishes a library.
+   * @original postLibraryPublish
+   */
+  postLibraryPublish(params: {
+    fileKey: string
+    checkpointKey: string
+    paramsPath: string
+    publishToCommunity: boolean
+    publishScope: string
   }) {
-    return this.LibraryPublishSchemaValidator.validate(async ({
-      xr: a
-    }) => await a.post(`/api/publish/${e}`, {
-      file_key: e,
-      checkpoint_key: t,
-      params_path: i,
-      publish_to_community: n,
-      publish_scope: r
-    }));
+    const { fileKey, checkpointKey, paramsPath, publishToCommunity, publishScope } = params
+    return this.LibraryPublishSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(`/api/publish/${fileKey}`, {
+        file_key: fileKey,
+        checkpoint_key: checkpointKey,
+        params_path: paramsPath,
+        publish_to_community: publishToCommunity,
+        publish_scope: publishScope,
+      }),
+    )
   }
+
+  /**
+   * Uploads publish params.
+   * @original postUploadPublishParams
+   */
   postUploadPublishParams() {
-    return this.UploadPublishParamsSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.post("/api/publish_params/upload"));
+    return this.UploadPublishParamsSchemaValidator.validate(async ({ xr }) =>
+      await xr.post('/api/publish_params/upload'),
+    )
   }
-  postUnpublishedStyles({
-    styleKeys: e,
-    orgId: t
-  }) {
-    return this.UnpublishedStylesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.post("/api/unpublished_styles", {
-      style_keys: e,
-      org_id: t
-    }));
+
+  /**
+   * Posts unpublished styles.
+   * @original postUnpublishedStyles
+   */
+  postUnpublishedStyles(params: StyleKeysParams) {
+    const { styleKeys, orgId } = params
+    return this.UnpublishedStylesSchemaValidator.validate(async ({ xr }) =>
+      await xr.post('/api/unpublished_styles', {
+        style_keys: styleKeys,
+        org_id: orgId,
+      }),
+    )
   }
-  postMissingStylesByLibraryKey({
-    styleKeys: e
-  }) {
-    return this.MissingStylesByLibraryKeySchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/missing_styles_by_library_key", {
-      style_keys: e
-    }));
+
+  /**
+   * Posts missing styles by library key.
+   * @original postMissingStylesByLibraryKey
+   */
+  postMissingStylesByLibraryKey<T = any>(params: { styleKeys: string[] }) {
+    return this.MissingStylesByLibraryKeySchemaValidator.validate<T>(async ({ xr }) =>
+      await xr.post('/api/missing_styles_by_library_key', {
+        style_keys: params.styleKeys,
+      }),
+    )
   }
-  postEverPublishedLibraries({
-    libraryKeys: e
-  }) {
-    return this.EverPublishedLibrariesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/design_systems/missing_libraries", {
-      library_keys: e
-    }));
+
+  /**
+   * Posts ever published libraries.
+   * @original postEverPublishedLibraries
+   */
+  postEverPublishedLibraries(params: { libraryKeys: string[] }) {
+    return this.EverPublishedLibrariesSchemaValidator.validate(async ({ xr }) =>
+      await xr.post('/api/design_systems/missing_libraries', {
+        library_keys: params.libraryKeys,
+      }),
+    )
   }
-  getLibrariesByLibraryKeys({
-    libraryKeys: e,
-    subscriptionFileKey: t,
-    orgId: i
-  }) {
-    return this.LibrariesByLibraryKeys.validate(async ({
-      xr: n
-    }) => await n.post("/api/design_systems/libraries_by_library_keys", {
-      library_keys: e,
-      subscription_file_key: t,
-      org_id: i
-    }));
+
+  /**
+   * Fetches libraries by library keys.
+   * @original getLibrariesByLibraryKeys
+   */
+  getLibrariesByLibraryKeys(params: LibraryKeysParams) {
+    const { libraryKeys, subscriptionFileKey, orgId } = params
+    return this.LibrariesByLibraryKeys.validate(async ({ xr }) =>
+      await xr.post('/api/design_systems/libraries_by_library_keys', {
+        library_keys: libraryKeys,
+        subscription_file_key: subscriptionFileKey,
+        org_id: orgId,
+      }),
+    )
   }
-  postValidateCopy({
-    nodeIds: e,
-    fileKey: t,
-    copyType: i
-  }) {
-    return this.ValidateCopyValidator.validate(async ({
-      xr: n
-    }) => await n.post("/api/design_systems/validate_copy", APIParameterUtils.toAPIParameters({
-      nodeIds: e,
-      fileKey: t,
-      copyType: i
-    })));
+
+  /**
+   * Validates copy.
+   * @original postValidateCopy
+   */
+  postValidateCopy(params: ValidateCopyParams) {
+    const { nodeIds, fileKey, copyType } = params
+    return this.ValidateCopyValidator.validate(async ({ xr }) =>
+      await xr.post(
+        '/api/design_systems/validate_copy',
+        APIParameterUtils.toAPIParameters({ nodeIds, fileKey, copyType }),
+      ),
+    )
   }
-  postEnableSlotsForFile({
-    fileKey: e
-  }) {
-    return this.EnableSlotsForFileValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/enable_slots/${e}`, {
-      slots_enabled: !0
-    }));
+
+  /**
+   * Enables slots for a file.
+   * @original postEnableSlotsForFile
+   */
+  postEnableSlotsForFile(params: { fileKey: string }) {
+    return this.EnableSlotsForFileValidator.validate(async ({ xr }) =>
+      await xr.put(`/api/enable_slots/${params.fileKey}`, {
+        slots_enabled: true,
+      }),
+    )
   }
-}();
-export const Z = $$p0;
+}
+
+export const librariesAPI = new LibraryAPI()
+/**
+ * Exported instance of LibraryAPI.
+ * @original Z
+ */
+export const Z = librariesAPI

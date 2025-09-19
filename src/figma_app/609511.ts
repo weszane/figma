@@ -5,7 +5,7 @@ import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { M1 } from "../905/777093";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Ct } from "../figma_app/205280";
 import { LE } from "../figma_app/427737";
@@ -183,7 +183,7 @@ class v {
         isDirectManipulationOnCanvasEnabled: m
       });
       return {
-        imageSet: await UD(new Uint8Array(await v.png.arrayBuffer()), "image/png", "Code Component Preview " + Date.now()),
+        imageSet: await processImageWithThumbnail(new Uint8Array(await v.png.arrayBuffer()), "image/png", "Code Component Preview " + Date.now()),
         totalWidth: v.totalWidth,
         totalHeight: v.totalHeight,
         layoutWidth: v.layoutWidth,

@@ -12,7 +12,7 @@ import { mapPlatformToFramework } from "../905/359509";
 import { postUserFlag } from "../905/985254";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { selectOpenFileLibraryKey, selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { A as _$$A } from "../figma_app/932979";
@@ -494,7 +494,7 @@ async function W({
               includeComponents: !0,
               codeConnectMapping: e,
               codebaseSuggestions: t,
-              loadImageByHash: e => Jr().loadImageByHash(e),
+              loadImageByHash: e => getImageManager().loadImageByHash(e),
               configSettings: iy()
             }), {
               codeConnectMapping: e

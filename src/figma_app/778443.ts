@@ -1,6 +1,6 @@
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 export let $$s0 = "embedded-prototype-";
 export function $$o1(e, t, r, s, o) {
   if (t <= 0 || r <= 0) {
@@ -42,7 +42,7 @@ export function $$o1(e, t, r, s, o) {
       }
       e.arrayBuffer().then(e => {
         let t = new Uint8Array(e);
-        return UD(t, "image/png", "embed-thumbnail");
+        return processImageWithThumbnail(t, "image/png", "embed-thumbnail");
       }).then(e => {
         permissionScopeHandler.system("apply-embed-thumbnail", () => {
           0 === l.fills.length ? l.insertImageInFillPaint(e) : l.setImageInFillPaint(e);

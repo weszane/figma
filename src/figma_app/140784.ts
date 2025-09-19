@@ -3,7 +3,7 @@ import { ImageExportType, Thumbnail } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { c6 } from "../figma_app/659187";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 var c = (e => (e.VALID = "valid", e.GENERATING = "generating", e.ERROR = "error", e))(c || {});
 let u = atom({});
@@ -87,7 +87,7 @@ export function $$_1({
         state: "generating",
         version: t
       });
-      await Jr().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "handoff.assetPreview");
+      await getImageManager().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "handoff.assetPreview");
       let [n, a] = Thumbnail.generateThumbnailForNode(e, width, height, r, {
         forceContentsOnly: !0
       });

@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { Tf } from "../905/297574";
 import { Wb, rV, uU } from "../905/627262";
@@ -22,7 +22,7 @@ export function $$h4({
   libraryFileKey: r,
   entrypoint: o
 }) {
-  let p = LH();
+  let p = getParentOrgId();
   let [_] = setupResourceAtomHandler(Xk({
     duration: t,
     orgId: p,

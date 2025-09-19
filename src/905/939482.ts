@@ -6,13 +6,13 @@ import { setupStarterUserCallback } from "../figma_app/275462";
 import { fI, In } from "../figma_app/229259";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 let p = Error("useCommunityLibraries: no presets exist but presets are enabled");
 let m = Error("useCommunityLibrariesVisualAssets: no visual assets exist but visual assets are enabled");
 let h = [];
 let g = [];
 export function $$f1(e) {
-  let t = n1();
+  let t = useFigmaLibrariesEnabled();
   let [i] = setupResourceAtomHandler(fI(void 0), {
     enabled: !e?.disabled && t
   });

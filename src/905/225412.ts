@@ -8,7 +8,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getFillColor } from "../figma_app/80990";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { normalizeValue } from "../905/216495";
 import { HT, jS, Pv } from "../905/619652";
 import { getStyleThumbnail } from "../905/405710";
@@ -235,7 +235,7 @@ L.displayName = "Chit";
 class F extends RecordingPureComponent {
   constructor(e) {
     super(e);
-    this.imageManager = Jr();
+    this.imageManager = getImageManager();
     this.state = {
       src: M(e.paint)
     };

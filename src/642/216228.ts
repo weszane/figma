@@ -212,7 +212,7 @@ import { lM as _$$lM, nE as _$$nE, tM as _$$tM, AZ, c_, gP, JS, Mk, my, o8, ON, 
 import { Mb } from '../figma_app/646357';
 import { sH as _$$sH, t6 as _$$t2, _m, aK, Cg, G3, RR, S5, W9, wV, xc } from '../figma_app/647246';
 import { sortBy, sortByWithOptions } from '../figma_app/656233';
-import { n1 as _$$n4 } from '../figma_app/657017';
+import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { _ as _$$_ } from '../figma_app/658134';
 import { Mw, pJ, pW } from '../figma_app/663669';
 import { Ay as _$$Ay, jx, W7 } from '../figma_app/675746';
@@ -3167,7 +3167,7 @@ function r4() {
   let i = useSelector(MH);
   let l = useSelector(dM);
   let a = useSelector(selectTeams);
-  let o = _$$n4();
+  let o = useFigmaLibrariesEnabled();
   let d = Fl();
   let c = useAtomWithSubscription(_$$lj);
   let u = useMemo(() => s?.teamId ? a[s.teamId] : null, [s?.teamId, a]);

@@ -11,7 +11,7 @@ import { NY, ux } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
 import { createDeepEqualSelector } from "../905/270781";
-import { Bn } from "../905/879323";
+import { setLocalStyleSelection } from "../905/879323";
 import { Dm } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Z } from "../905/224161";
@@ -76,7 +76,7 @@ function F({
   let l = useSelector(J);
   let a = useCallback(e => {
     let l = e.guids[0];
-    l && ("canvas" === e.selectionType && SceneGraphHelpers && SceneGraphHelpers.setSelectedNodeAndCanvas(l, !1) && (expandNodeToRoot(l), PluginHelpers && PluginHelpers.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (clearSelection(), t(Bn({
+    l && ("canvas" === e.selectionType && SceneGraphHelpers && SceneGraphHelpers.setSelectedNodeAndCanvas(l, !1) && (expandNodeToRoot(l), PluginHelpers && PluginHelpers.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (clearSelection(), t(setLocalStyleSelection({
       type: e.styleType,
       styleIds: new Set(e.guids),
       folderNames: new Set()

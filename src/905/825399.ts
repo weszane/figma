@@ -11,11 +11,11 @@ import { fI } from "../figma_app/229259";
 import { batchPutFileAction } from "../figma_app/78808";
 import { Yb, wV } from "../figma_app/933328";
 import { yy } from "../figma_app/543529";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { selectCurrentFile } from "../figma_app/516028";
 import { E as _$$E } from "../905/128063";
 import { qU, bj } from "../905/420347";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { hasTeamPaidAccess } from "../figma_app/345997";
@@ -44,7 +44,7 @@ let $$N5 = _$$n(({
   includeLocalLibrary: e,
   enabled: t = !0
 } = {}) => {
-  let i = LH();
+  let i = getParentOrgId();
   let a = selectCurrentFile();
   let s = useDispatch();
   let [d] = setupResourceAtomHandler(R({
@@ -81,7 +81,7 @@ let $$N5 = _$$n(({
   }), [A, p]);
 });
 let $$P11 = _$$n(() => {
-  let e = n1();
+  let e = useFigmaLibrariesEnabled();
   let [t] = setupResourceAtomHandler(fI(void 0), {
     enabled: e
   });
@@ -129,7 +129,7 @@ export function $$j2(e, t) {
   return Array.from(e).map(e => t.find(t => t.library_key === e)).filter(isNotNullish);
 }
 export function $$U6(e, t) {
-  let i = n1();
+  let i = useFigmaLibrariesEnabled();
   let r = useMemo(() => e.filter(e => !1 !== e.isSubscribed).map(e => {
     let t = e.communityLibrary;
     if (!i && t) return;

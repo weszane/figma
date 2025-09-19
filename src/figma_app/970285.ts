@@ -38,7 +38,7 @@ import { ZH } from "../figma_app/504823";
 import { vk } from "../figma_app/397881";
 import { Tr, Ay } from "../905/281495";
 import { A0, Mc } from "../figma_app/454974";
-import { xY } from "../figma_app/624361";
+import { ImageManager } from "../figma_app/624361";
 import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { WQ, Pv } from "../905/619652";
 import { o3, nt } from "../905/226610";
@@ -172,7 +172,7 @@ let ex = class e extends PureComponent {
           nearestNeighborCount: r.length
         });
         let n = [this.props.currentPage];
-        xY.includeOutsideContents(e) || (n = Object.keys(this.props.sceneGraphSelection));
+        ImageManager.includeOutsideContents(e) || (n = Object.keys(this.props.sceneGraphSelection));
         Dc(hV.Export, this.props.saveAsState, this.props.dispatch, "export-selected-exportables-direct", n, "export-selected-exportables-direct");
         this.props.dispatch(rg());
       }

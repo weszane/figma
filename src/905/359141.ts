@@ -77,7 +77,7 @@ import { tH as _$$tH } from '../905/751457';
 import { er as _$$er, sz, Tp, zm } from '../905/753512';
 import { $$ei1, $$et0 } from '../905/759609';
 import { isBranchAlt } from '../905/760074';
-import { Bq } from '../905/760682';
+import { areSetsSubset } from '../905/760682';
 import { U as _$$U } from '../905/763676';
 import { w as _$$w } from '../905/770105';
 import { _w, Ir, mq } from '../905/789781';
@@ -88,7 +88,7 @@ import { AutoLayout } from '../905/470281';
 import { V as _$$V } from '../905/843013';
 import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
-import { LH } from '../905/872904';
+import { getParentOrgId } from '../905/872904';
 import { $z } from '../905/909811';
 import { XHR } from '../905/910117';
 import { n as _$$n } from '../905/913636';
@@ -110,7 +110,7 @@ import { FEditorType } from '../figma_app/53721';
 import { h as _$$h2 } from '../figma_app/58251';
 import { assertNotNullish, isNotNullish } from '../figma_app/95419';
 import { M3 } from '../figma_app/119475';
-import { sm } from '../figma_app/141508';
+import { directlySubscribedStylesUniqueKeysAtom } from '../figma_app/141508';
 import { fi, je, Qh } from '../figma_app/155728';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { t as _$$t3 } from '../figma_app/162756';
@@ -282,7 +282,7 @@ function es({
 }) {
   let a = i.library_key;
   let s = isTeamLibrary(i) ? i.team_id : null;
-  let o = LH();
+  let o = getParentOrgId();
   let l = mq.useTabContentsWidth();
   let [d] = IT(Yt(a));
   let c = useSubscription(LibraryModalAssetsDataByLibraryKey, {
@@ -1433,7 +1433,7 @@ function tl({
       teams,
       status
     } = function (e) {
-      let t = LH();
+      let t = getParentOrgId();
       let [i, n] = useState({});
       let [a] = setupResourceAtomHandler(OrgTeamView({
         orgId: t ?? '',
@@ -1477,7 +1477,7 @@ function tl({
         status: s
       }), [s, l]);
     }(e);
-    let n = LH();
+    let n = getParentOrgId();
     let a = _$$z();
     let {
       result,
@@ -2709,7 +2709,7 @@ let iJ = createRemovableAtomFamily(e => atom(t => {
   let i = t(mO(e));
   let n = t(n1);
   let r = t(localStylesWithUsagesOnLoadedPagesAtom);
-  let a = t(sm);
+  let a = t(directlySubscribedStylesUniqueKeysAtom);
   let s = t(Q$);
   return i.map(e => ({
     ...e,
@@ -3017,7 +3017,7 @@ function ny({
     }).filter(isNotNullish), [libraryAssetUpdatesForAllPages]);
     let _ = useRef(0);
     useEffect(() => {
-      if (e?.refs && Bq(g, e?.refs)) return;
+      if (e?.refs && areSetsSubset(g, e?.refs)) return;
       t(null);
       let r = ++_.current;
       (function ({
@@ -3608,7 +3608,7 @@ function nV() {
   let {
     tabPropsMap
   } = zm();
-  let t = LH();
+  let t = getParentOrgId();
   return jsx(Y7, {
     children: jsxs('nav', {
       className: 'library_modal_tab_strip--tabStrip----mnU',

@@ -6,7 +6,7 @@ import { Zn } from "../figma_app/933328";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { Vg } from "../905/300621";
 import { r6 } from "../905/542608";
@@ -20,7 +20,7 @@ export function $$_0({
   let _ = useDispatch();
   let A = useSelector(e => e.modalShown);
   let y = selectCurrentFile();
-  let b = LH();
+  let b = getParentOrgId();
   let v = "editor" === t;
   let I = useMemo(() => "editor" === t && A?.type === LIBRARY_PREFERENCES_MODAL || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
   let E = useCallback(() => {

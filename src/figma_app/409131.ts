@@ -10,7 +10,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { mapTemplateProperties } from "../figma_app/349248";
 import { arraysEqual } from "../figma_app/656233";
 import { libraryModuleDataAtomFamily } from "../905/888985";
-import { _f } from "../905/760682";
+import { areSetsEqual } from "../905/760682";
 import { LibraryModuleData, LibraryModuleDataByLibraryKey } from "../figma_app/43951";
 let f = createRemovableAtomFamily(e => libraryModuleDataAtomFamily({
   fileKey: e
@@ -28,7 +28,7 @@ let E = createRemovableAtomFamily(e => atom(t => {
     libraryKey: n
   }));
   return r;
-}), _f);
+}), areSetsEqual);
 let y = "all_sources";
 export function $$b1(e, t) {
   let r = E(e);

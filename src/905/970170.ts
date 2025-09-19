@@ -2,7 +2,7 @@ import { randomBetween } from "../figma_app/492908";
 import { getFeatureFlags } from "../905/601108";
 import { isIOSUA, isFigmaMobileWithoutTripleTaps } from "../figma_app/778880";
 import { filePutAction, clearActiveFileUsersAction, removeFileFromProjectAction, postFileAction } from "../figma_app/78808";
-import { ru } from "../905/879323";
+import { componentDeleteForFile } from "../905/879323";
 import { ER } from "../905/466026";
 import { VK, YK } from "../905/880488";
 import { FilesForTeam, FilesForProject, FileByKeyForRealtimeShim, FilesForRepo } from "../figma_app/43951";
@@ -29,7 +29,7 @@ export function $$h0(e, t) {
       e.dispatch(filePutAction({
         file: i
       }));
-      n && (n.team_id !== i.team_id ? (e.dispatch(ru({
+      n && (n.team_id !== i.team_id ? (e.dispatch(componentDeleteForFile({
         fileKey: i.key
       })), e.dispatch(clearActiveFileUsersAction({
         fileKey: i.key

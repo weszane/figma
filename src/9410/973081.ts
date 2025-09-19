@@ -286,7 +286,7 @@ import { rY as _$$rY } from '../figma_app/524655';
 import { hO } from '../figma_app/545293';
 import { KV } from '../figma_app/548615';
 import { useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
-import { B3 as _$$B2 } from '../figma_app/553184';
+import { sendReconnectingBanner } from '../figma_app/553184';
 import { bs, SD } from '../figma_app/553940';
 import { af as _$$af } from '../figma_app/559491';
 import { O as _$$O4, S as _$$S5 } from '../figma_app/568977';
@@ -301,7 +301,7 @@ import { hasCmsCollection } from '../figma_app/618433';
 import { J3, JU, kD, kN } from '../figma_app/622574';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { getViewState } from '../figma_app/623300';
-import { xY } from '../figma_app/624361';
+import { ImageManager } from '../figma_app/624361';
 import { XC } from '../figma_app/631279';
 import { JT } from '../figma_app/632248';
 import { getSubscribedVariableInfo, PrimaryWorkflowEnum } from '../figma_app/633080';
@@ -1302,7 +1302,7 @@ class tk extends PureComponent {
     this.onExport = e => {
       if (this.props.isCopyExportRestricted || (trackEventAnalytics('Export Picker Exported'), this.state.downloadStarted || this.state.exportingStarted || this.isExporting() || e.length === 0)) return;
       let t = [this.props.currentPage];
-      xY.includeOutsideContents(e.map(e => e.exportSetting)) || (t = e.map(e => e.nodeID));
+      ImageManager.includeOutsideContents(e.map(e => e.exportSetting)) || (t = e.map(e => e.nodeID));
       this.setState({
         downloadStarted: !0
       });
@@ -9018,7 +9018,7 @@ function oV({
         msElapsed: r,
         clientType: e
       });
-      r > 1e3 && _$$B2(e);
+      r > 1e3 && sendReconnectingBanner(e);
     };
   }, [e, t]);
   return jsx('div', {

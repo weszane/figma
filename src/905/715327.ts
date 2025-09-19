@@ -13,7 +13,7 @@ import { nz, Yx, Tn } from "../figma_app/933328";
 import { TrackingProvider } from "../figma_app/831799";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { selectPermissionsState } from "../figma_app/212807";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { NO_TEAM, getDraftsSidebarString, isCommunityLibraryFile, initialLibraryStats } from "../figma_app/633080";
@@ -96,7 +96,7 @@ import { E as _$$E2 } from "../905/511388";
 import { createFileLibraryKeys } from "../905/651613";
 import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w } from "../905/768636";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { p as _$$p2 } from "../905/895920";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { B as _$$B2 } from "../905/146468";
@@ -675,7 +675,7 @@ function tm({
     hideLibrariesNotAddedToConnectedProject: l,
     mapFromLibraryKeyToSharingGroupData: _
   });
-  let v = n1();
+  let v = useFigmaLibrariesEnabled();
   let I = gE(c);
   let E = useMemo(() => !!v && (a?.type === "presetLibraries" || d), [a?.type, v, d]);
   let x = m || !!p;
@@ -1297,7 +1297,7 @@ export function $$tM0({
     openFileKey: e.openFile?.key || null,
     openFile: e.openFile
   }));
-  let L = LH();
+  let L = getParentOrgId();
   let F = selectPermissionsState();
   let [M, j] = useState(null);
   let [U, B] = useState(!1);

@@ -24,7 +24,7 @@ import { canvasGridAtom } from "../905/618447";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
 import { fullscreenValue } from "../figma_app/455680";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { Mo } from "../905/913055";
 import { useCurrentUserOrg } from "../905/845253";
 import { XJ, VG, gg, qY } from "../905/23253";
@@ -365,7 +365,7 @@ function eg({
     ea(t);
     addPromptToHistory(G);
     let r = async e => {
-      let r = await UD(base64ToUint8Array(e), "image/png", G);
+      let r = await processImageWithThumbnail(base64ToUint8Array(e), "image/png", G);
       t === ey.current && s(r);
     };
     let n = qY(e);
@@ -598,7 +598,7 @@ function ef({
     (async t => {
       let r = await _$$I(t);
       if (!r) return;
-      let n = await UD(r, "image/png", H);
+      let n = await processImageWithThumbnail(r, "image/png", H);
       e === eA.current && eu({
         fill: t,
         image: n
@@ -607,7 +607,7 @@ function ef({
     addPromptToHistory(H);
     J("");
     let i = async t => {
-      let r = await UD(base64ToUint8Array(t), "image/png", H);
+      let r = await processImageWithThumbnail(base64ToUint8Array(t), "image/png", H);
       e === eA.current && s(r);
     };
     let a = qY(node);

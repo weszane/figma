@@ -16,7 +16,7 @@ import { v4 } from "../figma_app/655139";
 import { G as _$$G, X as _$$X } from "../figma_app/521331";
 import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
-import { rb } from "../905/711212";
+import { updateStyleThumbnailOptimist } from "../905/711212";
 import { ro } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku, UK } from "../figma_app/740163";
@@ -592,7 +592,7 @@ export function $$eg7(e) {
   let l = e.color.dsStyle.kind;
   let d = e.color.dsStyle.value.node_id;
   let c = useMemo(() => debounce(() => {
-    d && t(rb({
+    d && t(updateStyleThumbnailOptimist({
       styleNodeId: d,
       styleKind: l
     }));

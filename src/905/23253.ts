@@ -15,7 +15,7 @@ import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { JB } from "../905/843553";
 import { fullscreenValue } from "../figma_app/455680";
-import { Jr, UD } from "../figma_app/624361";
+import { getImageManager, processImageWithThumbnail } from "../figma_app/624361";
 import { Mo } from "../905/913055";
 import { paintManager } from "../figma_app/385874";
 import { AiMeterUsageView } from "../figma_app/43951";
@@ -88,10 +88,10 @@ export async function $$D3(e) {
     reportToSentry: !0
   });
   let t = bytesToHex(e.image.hash);
-  await Jr().imageUploadPromise();
-  let i = Jr().getSignedUrls([t]);
+  await getImageManager().imageUploadPromise();
+  let i = getImageManager().getSignedUrls([t]);
   let n = i.get(t);
-  if (!n && (await new Promise(e => setTimeout(e, 1e3)), !(n = (i = Jr().getSignedUrls([t])).get(t)))) throw new $$T5("No image URL available", {
+  if (!n && (await new Promise(e => setTimeout(e, 1e3)), !(n = (i = getImageManager().getSignedUrls([t])).get(t)))) throw new $$T5("No image URL available", {
     reportToSentry: !0
   });
   return n;
@@ -171,7 +171,7 @@ export async function $$M0({
           isBatch: t.length > 1
         });
         let u = base64ToUint8Array(d);
-        let m = await UD(u, "image/png", `${i} ${n}`);
+        let m = await processImageWithThumbnail(u, "image/png", `${i} ${n}`);
         l.forEach(t => {
           (function ({
             node: e,

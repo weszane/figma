@@ -1,13 +1,13 @@
 import { liveStoreInstance } from "../905/713695";
-import { Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 liveStoreInstance.Query({
-  fetch: async e => (await Z.getLibraryPublishedComponents({
+  fetch: async e => (await librariesAPI.getLibraryPublishedComponents({
     key: e
   })).data.meta,
   key: "libraryPublishedComponents"
 });
 export let $$a0 = liveStoreInstance.Query({
-  fetch: async e => (await Z.getLibraryPublishedComponentsV2({
+  fetch: async e => (await librariesAPI.getLibraryPublishedComponentsV2({
     libraryKey: e
   })).data.meta,
   key: "libraryPublishedComponentsV2"

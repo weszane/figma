@@ -12,7 +12,7 @@ import { getFileKey } from "../905/412913";
 import { z5 } from "../905/713722";
 import { A as _$$A } from "../905/639174";
 import { rY } from "../905/985490";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { pq, f2 } from "../figma_app/646357";
 import { bW } from "../905/491806";
 import { SourceDirection, ViewType } from "../905/535806";
@@ -73,7 +73,7 @@ let N = async (e, t) => {
       e();
     }, t);
   });
-  let a = Jr().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "merge.waitForImagesToLoad");
+  let a = getImageManager().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "merge.waitForImagesToLoad");
   await Promise.race([n, a]);
   clearTimeout(i);
 };

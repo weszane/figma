@@ -1,175 +1,282 @@
-import { useMemo } from "react";
-import { l as _$$l } from "../905/716947";
-import { getFeatureFlags } from "../905/601108";
-import { atom, createRemovableAtomFamily, useAtomWithSubscription } from "../figma_app/27355";
-import { getResourceDataOrFallback } from "../905/663269";
-import { gB } from "../905/723791";
-import { JB } from "../figma_app/657017";
-import { getProviderConfigType } from "../figma_app/155411";
-import { currentUserOrgIdAtom } from "../905/845253";
-import { DQ } from "../905/872904";
-import { FPlanNameType } from "../figma_app/191312";
-import { LibraryPresetSubscriptionsV2, LibraryOrgSubscriptions, WorkspaceSubscribedLibrariesForTeam, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions } from "../figma_app/43951";
-import { getPlanFeaturesAtomFamily } from "../905/276025";
-import { currentTeamAtom, isNumericString } from "../figma_app/598018";
-let _ = atom(e => {
-  let t = e(DQ);
-  let i = getProviderConfigType();
-  let n = e(getPlanFeaturesAtomFamily(!0)).data?.tier !== FPlanNameType.STARTER;
-  let {
-    data
-  } = null != i ? e(LibraryPresetSubscriptionsV2.Query({
-    group: i
-  })) : gB({
-    libraryPresetSubscriptionsV2: []
-  });
-  return data && data.libraryPresetSubscriptionsV2 ? t || n ? [] : data?.libraryPresetSubscriptionsV2?.filter(e => "loaded" !== e.default_subscribed.status || e.default_subscribed.data) : void 0;
-});
-let $$A0 = atom(e => {
-  let t = e(DQ);
-  let i = t ? e(LibraryOrgSubscriptions.Query({
-    orgId: t
-  })) : gB({
-    orgLibrarySubscriptions: []
-  });
-  let n = e(JB);
-  if ("loaded" !== i.status) return i;
-  let r = i.data.orgLibrarySubscriptions;
-  if (!r) return gB({});
-  let a = S(r, {
-    ignoreCommunitySubs: !n
-  });
-  return gB(a);
-});
-let $$y4 = createRemovableAtomFamily(e => atom(t => {
-  let i = t(currentUserOrgIdAtom);
-  let n = !!e && !!i;
-  let r = t(JB);
-  let a = n ? t(WorkspaceSubscribedLibrariesForTeam.Query({
-    teamId: e
-  })) : gB({
-    team: null
-  });
-  if ("loaded" !== a.status) return a;
-  let s = a.data.team?.workspace?.librarySubscriptions;
-  if (!s) return gB({});
-  let o = S(s, {
-    ignoreCommunitySubs: !r
-  });
-  return gB(o);
-}));
-let $$b1 = createRemovableAtomFamily(e => atom(t => {
-  let i;
-  if (getFeatureFlags().dse_library_subscriptions_for_team) {
-    if (!e) return gB({});
-    let n = t(LibrarySubscriptionsForTeam.Query({
-      teamId: e
-    }));
-    if ("loaded" !== n.status) return n;
-    i = n.data.team?.libraryTeamSubscriptionOverrides;
-  } else {
-    let n = t(LibraryTeamSubscriptions.Query({}));
-    if ("loaded" !== n.status) return n;
-    i = n.data.allTeamRoles?.find(t => t?.team?.id === e)?.team?.libraryTeamSubscriptionOverrides;
+import { Atom, WritableAtom } from 'jotai' // Assuming jotai types for atoms
+import { useMemo } from 'react'
+import { getPlanFeaturesAtomFamily } from '../905/276025'
+import { getFeatureFlags } from '../905/601108'
+import { getResourceDataOrFallback } from '../905/723791'
+import { currentUserOrgIdAtom } from '../905/845253'
+import { parentOrgIdAtom } from '../905/872904'
+import { atom, createRemovableAtomFamily, useAtomWithSubscription } from '../figma_app/27355'
+import { LibraryOrgSubscriptions, LibraryPresetSubscriptionsV2, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions, WorkspaceSubscribedLibrariesForTeam } from '../figma_app/43951'
+import { getProviderConfigType } from '../figma_app/155411'
+import { FPlanNameType } from '../figma_app/191312'
+import { currentTeamAtom, isNumericString } from '../figma_app/598018'
+import { figmaLibrariesEnabledAtom } from '../figma_app/657017'
+import { createLoadedState } from './957591'
+
+/**
+ * Refactored atoms and utility functions for library subscriptions.
+ * Original variable/function names are preserved in comments for traceability.
+ * Types are added for clarity.
+ */
+
+// Types for subscription data
+type SubscriptionStatus = 'loaded' | string
+interface LibrarySubscription {
+  id: string
+  libraryKey: string
+  isSubscribed?: boolean
+  figJamSubscribed?: boolean
+  slidesSubscribed?: boolean
+  buzzSubscribed?: {
+    status: SubscriptionStatus
+    data?: any
   }
-  if (!i) return gB({});
-  let n = S(i, {
-    ignoreCommunitySubs: !t(JB)
-  });
-  return gB(n);
-}));
-let v = atom(e => {
-  let t = e(LibraryTeamSubscriptions.Query({}));
-  let i = e(JB);
-  let n = e(DQ);
-  let r = e(currentTeamAtom);
-  let a = isNumericString(r?.id) ? r?.id : "";
-  if ("loaded" !== t.status) return t;
-  let s = t.data.allTeamRoles?.filter(e => e.team && !e.team.deletedAt && (e.team.orgId === n || e.team.id === a)).map(e => e.team);
-  let o = {};
-  s.forEach(e => {
-    o[e.id] = S(e.libraryTeamSubscriptionOverrides, {
-      ignoreCommunitySubs: !i
-    });
-  });
-  return gB(o);
-});
-let $$I3 = atom(e => {
-  let t = e(v);
-  if ("loaded" !== t.status) return t;
-  let i = t.data;
-  let n = {};
-  for (let e of Object.values(i)) for (let [t, i] of Object.entries(e)) n[t] ? n[t] = {
-    design: n[t].design || i.design,
-    figjam: n[t].figjam || i.figjam,
-    slides: n[t].slides || i.slides,
-    buzz: n[t].buzz || i.buzz
-  } : n[t] = {
-    design: i.design,
-    figjam: i.figjam,
-    slides: i.slides,
-    buzz: i.buzz
-  };
-  return gB(n);
-});
-let $$E6 = atom(e => {
-  let t = e(LibraryUserSubscriptions.Query({}));
-  let i = e(JB);
-  if ("loaded" !== t.status) return t;
-  let n = t.data.currentUser.libraryUserSubscriptions;
-  if (!n) return gB({});
-  let r = S(n, {
-    ignoreCommunitySubs: !i
-  });
-  return gB(r);
-});
-export function $$x2() {
-  let e = useAtomWithSubscription(_);
-  return useMemo(() => {
-    if (!e) return;
-    let t = {};
-    for (let i of e) {
-      let e = getResourceDataOrFallback(i.libraryKey);
-      e && (t[_$$l(e)] = {
-        design: !0,
-        figjam: !1,
-        slides: !1,
-        buzz: !1,
-        subscriptionId: i.id
-      });
+  communityLibrary?: any
+  library?: any
+}
+type SubscriptionOverrides = Record<string, {
+  design: boolean
+  figjam: boolean
+  slides: boolean
+  buzz: boolean
+  subscriptionId: string
+}>
+
+// Utility function to process subscriptions
+/**
+ * Processes a list of subscriptions and returns a mapping of libraryKey to subscription details.
+ * @param subscriptions Array of LibrarySubscription objects.
+ * @param options Options to ignore community subscriptions.
+ * @returns SubscriptionOverrides mapping.
+ * @see S
+ */
+export function processSubscriptions(
+  subscriptions: LibrarySubscription[],
+  options?: { ignoreCommunitySubs?: boolean },
+): SubscriptionOverrides {
+  const ignoreCommunitySubs = options?.ignoreCommunitySubs ?? false
+  const filtered = subscriptions.filter(sub => sub.library || sub.communityLibrary)
+  const result: SubscriptionOverrides = {}
+  for (const sub of filtered) {
+    if ((sub.communityLibrary && ignoreCommunitySubs) || !sub.libraryKey)
+      continue
+    result[sub.libraryKey] = {
+      design: !!sub.isSubscribed,
+      figjam: !!sub.figJamSubscribed,
+      slides: !!sub.slidesSubscribed,
+      buzz: sub.buzzSubscribed?.status === 'loaded' && !!sub.buzzSubscribed?.data,
+      subscriptionId: sub.id,
     }
-    return t;
-  }, [e]);
+  }
+  return result
 }
-function S(e, t) {
-  let i = t?.ignoreCommunitySubs ?? !1;
-  e = e.filter(e => e.library || e.communityLibrary);
-  let n = {};
-  for (let t of e) t.communityLibrary && i || !t.libraryKey || (n[_$$l(t.libraryKey)] = {
-    design: !!t.isSubscribed,
-    figjam: !!t.figJamSubscribed,
-    slides: !!t.slidesSubscribed,
-    buzz: t.buzzSubscribed?.status === "loaded" && !!t.buzzSubscribed?.data,
-    subscriptionId: t.id
-  });
-  return n;
+
+// Refactored atom for preset subscriptions
+/**
+ * Atom for library preset subscriptions.
+ * @see _
+ */
+export const libraryPresetSubscriptionsAtom = atom((get) => {
+  const parentOrgId = get(parentOrgIdAtom)
+  const providerConfigType = getProviderConfigType()
+  const isNotStarter = get<ObjectOf>(getPlanFeaturesAtomFamily(true)).data?.tier !== FPlanNameType.STARTER
+  const { data } = providerConfigType
+    ? get<ObjectOf>(LibraryPresetSubscriptionsV2.Query({ group: providerConfigType }))
+    : createLoadedState({ libraryPresetSubscriptionsV2: [] })
+  if (data && data.libraryPresetSubscriptionsV2) {
+    if (parentOrgId || isNotStarter)
+      return []
+    return data.libraryPresetSubscriptionsV2.filter(
+      sub => sub.default_subscribed.status !== 'loaded' || sub.default_subscribed.data,
+    )
+  }
+  return undefined
+})
+
+// Refactored atom for org subscriptions
+/**
+ * Atom for organization library subscriptions.
+ * @see $$A0
+ */
+export const orgLibrarySubscriptionsAtom = atom((get) => {
+  const parentOrgId = get(parentOrgIdAtom)
+  const orgSubscriptions = parentOrgId
+    ? get<ObjectOf>(LibraryOrgSubscriptions.Query({ orgId: parentOrgId }))
+    : createLoadedState({ orgLibrarySubscriptions: [] })
+  const figmaEnabled = get(figmaLibrariesEnabledAtom)
+  if (orgSubscriptions.status !== 'loaded')
+    return orgSubscriptions
+  const subs = orgSubscriptions.data.orgLibrarySubscriptions
+  if (!subs)
+    return createLoadedState({})
+  const processed = processSubscriptions(subs, { ignoreCommunitySubs: !figmaEnabled })
+  return createLoadedState(processed)
+})
+
+// Refactored atom family for workspace subscriptions
+/**
+ * Atom family for workspace library subscriptions for a team.
+ * @see $$y4
+ */
+export const workspaceLibrarySubscriptionsAtomFamily = createRemovableAtomFamily(teamId =>
+  atom((get) => {
+    const currentOrgId = get(currentUserOrgIdAtom)
+    const isValid = !!teamId && !!currentOrgId
+    const figmaEnabled = get(figmaLibrariesEnabledAtom)
+    const teamSubscriptions = isValid
+      ? get<ObjectOf>(WorkspaceSubscribedLibrariesForTeam.Query({ teamId }))
+      : createLoadedState({ team: null })
+    if (teamSubscriptions.status !== 'loaded')
+      return teamSubscriptions
+    const subs = teamSubscriptions.data.team?.workspace?.librarySubscriptions
+    if (!subs)
+      return createLoadedState({})
+    const processed = processSubscriptions(subs, { ignoreCommunitySubs: !figmaEnabled })
+    return createLoadedState(processed)
+  }),
+)
+
+// Refactored atom family for team subscriptions
+/**
+ * Atom family for team library subscription overrides.
+ * @see $$b1
+ */
+export const teamLibrarySubscriptionOverridesAtomFamily = createRemovableAtomFamily(teamId =>
+  atom((get) => {
+    let overrides
+    if (getFeatureFlags().dse_library_subscriptions_for_team) {
+      if (!teamId)
+        return createLoadedState({})
+      const teamSubs = get<ObjectOf>(LibrarySubscriptionsForTeam.Query({ teamId }))
+      if (teamSubs.status !== 'loaded')
+        return teamSubs
+      overrides = teamSubs.data.team?.libraryTeamSubscriptionOverrides
+    }
+    else {
+      const teamSubs = get<ObjectOf>(LibraryTeamSubscriptions.Query({}))
+      if (teamSubs.status !== 'loaded')
+        return teamSubs
+      overrides = teamSubs.data.allTeamRoles?.find(role => role?.team?.id === teamId)?.team?.libraryTeamSubscriptionOverrides
+    }
+    if (!overrides)
+      return createLoadedState({})
+    const processed = processSubscriptions(overrides, { ignoreCommunitySubs: !get(figmaLibrariesEnabledAtom) })
+    return createLoadedState(processed)
+  }),
+)
+
+// Refactored atom for all team subscription overrides
+/**
+ * Atom for all team library subscription overrides.
+ * @see v
+ */
+export const allTeamLibrarySubscriptionOverridesAtom = atom((get) => {
+  const teamSubs = get<ObjectOf>(LibraryTeamSubscriptions.Query({}))
+  const figmaEnabled = get(figmaLibrariesEnabledAtom)
+  const parentOrgId = get(parentOrgIdAtom)
+  const currentTeam = get(currentTeamAtom)
+  const currentTeamId = isNumericString(currentTeam?.id) ? currentTeam?.id : ''
+  if (teamSubs.status !== 'loaded')
+    return teamSubs
+  const teams = teamSubs.data.allTeamRoles?.filter(
+    role => role.team && !role.team.deletedAt && (role.team.orgId === parentOrgId || role.team.id === currentTeamId),
+  ).map(role => role.team) ?? []
+  const result: Record<string, SubscriptionOverrides> = {}
+  teams.forEach((team) => {
+    result[team.id] = processSubscriptions(team.libraryTeamSubscriptionOverrides, { ignoreCommunitySubs: !figmaEnabled })
+  })
+  return createLoadedState(result)
+})
+
+// Refactored atom for merged team subscription overrides
+/**
+ * Atom for merged team library subscription overrides.
+ * @see $$I3
+ */
+export const mergedTeamLibrarySubscriptionOverridesAtom = atom((get) => {
+  const allOverrides = get(allTeamLibrarySubscriptionOverridesAtom)
+  if (allOverrides.status !== 'loaded')
+    return allOverrides
+  const data = allOverrides.data
+  const merged: SubscriptionOverrides = {}
+  for (const overrides of Object.values(data)) {
+    for (const [key, value] of Object.entries(overrides)) {
+      merged[key] = merged[key]
+        ? {
+            design: merged[key].design || value.design,
+            figjam: merged[key].figjam || value.figjam,
+            slides: merged[key].slides || value.slides,
+            buzz: merged[key].buzz || value.buzz,
+            subscriptionId: value.subscriptionId,
+          }
+        : { ...value }
+    }
+  }
+  return createLoadedState(merged)
+})
+
+// Refactored atom for user subscriptions
+/**
+ * Atom for user library subscriptions.
+ * @see $$E6
+ */
+export const userLibrarySubscriptionsAtom = atom((get) => {
+  const userSubs = get<ObjectOf>(LibraryUserSubscriptions.Query({}))
+  const figmaEnabled = get(figmaLibrariesEnabledAtom)
+  if (userSubs.status !== 'loaded')
+    return userSubs
+  const subs = userSubs.data.currentUser.libraryUserSubscriptions
+  if (!subs)
+    return createLoadedState({})
+  const processed = processSubscriptions(subs, { ignoreCommunitySubs: !figmaEnabled })
+  return createLoadedState(processed)
+})
+
+/**
+ * Hook to get memoized preset subscriptions mapping.
+ * @see $$x2
+ */
+export function usePresetSubscriptionsMapping() {
+  const subscriptions = useAtomWithSubscription(libraryPresetSubscriptionsAtom)
+  return useMemo(() => {
+    if (!subscriptions)
+      return
+    const mapping: SubscriptionOverrides = {}
+    for (const sub of subscriptions) {
+      const resourceKey = getResourceDataOrFallback(sub.libraryKey)
+      if (resourceKey) {
+        mapping[resourceKey] = {
+          design: true,
+          figjam: false,
+          slides: false,
+          buzz: false,
+          subscriptionId: sub.id,
+        }
+      }
+    }
+    return mapping
+  }, [subscriptions])
 }
-export function $$w5(e) {
-  return Object.keys(e).map(t => {
-    let i = _$$l(t);
-    return {
-      id: e[i]?.subscriptionId,
-      communityLibrary: {},
-      libraryKey: i,
-      library: null,
-      isSubscribed: !0
-    };
-  });
+
+/**
+ * Converts a subscription mapping to an array of subscription objects.
+ * @see $$w5
+ */
+export function subscriptionMappingToArray(mapping: SubscriptionOverrides) {
+  return Object.keys(mapping).map(key => ({
+    id: mapping[key]?.subscriptionId,
+    communityLibrary: {},
+    libraryKey: key,
+    library: null,
+    isSubscribed: true,
+  }))
 }
-export const GO = $$A0;
-export const Lr = $$b1;
-export const Nn = $$x2;
-export const XM = $$I3;
-export const pD = $$y4;
-export const sj = $$w5;
-export const zK = $$E6;
+
+// Export refactored atoms and functions with original export names for traceability
+export const GO = orgLibrarySubscriptionsAtom
+export const Lr = teamLibrarySubscriptionOverridesAtomFamily
+export const Nn = usePresetSubscriptionsMapping
+export const XM = mergedTeamLibrarySubscriptionOverridesAtom
+export const pD = workspaceLibrarySubscriptionsAtomFamily
+export const sj = subscriptionMappingToArray
+export const zK = userLibrarySubscriptionsAtom

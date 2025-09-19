@@ -239,7 +239,7 @@ import { Cn as _$$Cn } from '../905/862913';
 import { W as _$$W7 } from '../905/865092';
 import { generateUUIDv4 } from '../905/871474';
 import { b as _$$b8 } from '../905/874849';
-import { cr as _$$cr } from '../905/879323';
+import { setShouldSearchDefaultLibraries } from '../905/879323';
 import { uM as _$$uM, wv as _$$wv5 } from '../905/888175';
 import { k as _$$k2 } from '../905/888808';
 import { is as _$$is } from '../905/904596';
@@ -534,7 +534,7 @@ import { En as _$$En } from '../figma_app/613182';
 import { Yv } from '../figma_app/616107';
 import { $z, Me } from '../figma_app/617427';
 import { li as _$$li, tS as _$$tS2, wv as _$$wv, Gi, GR, L_ } from '../figma_app/622574';
-import { UD } from '../figma_app/624361';
+import { processImageWithThumbnail } from '../figma_app/624361';
 import { $ as _$$$5, jo as _$$jo, Ld } from '../figma_app/629335';
 import { Ru } from '../figma_app/630194';
 import { JT } from '../figma_app/632248';
@@ -7074,7 +7074,7 @@ function lF({
   setupResourceAtomHandler(_$$se());
   setupResourceAtomHandler(_$$fd());
   useEffect(() => {
-    $(_$$cr({
+    $(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !0
     }));
   }, [$]);
@@ -9076,7 +9076,7 @@ let ul = async ({
   if (c.signal.aborted) return;
   o && p.enhancedPrompt && l(p.enhancedPrompt);
   t(p.base64Image);
-  let h = await UD(base64ToUint8Array(p.base64Image), 'image/png', d.prompt);
+  let h = await processImageWithThumbnail(base64ToUint8Array(p.base64Image), 'image/png', d.prompt);
   _$$l.ai('figjam-ai-canvas-make-image-from-canvas-content', () => {
     e.insertImageInFillPaint(h);
     c6(e, {
@@ -9638,7 +9638,7 @@ function uB() {
       return {
         receiveImage: useCallback(async e => {
           let r = (await i()).nodeTextContents.join('\n');
-          let a = await UD(base64ToUint8Array(e), 'image/png', r);
+          let a = await processImageWithThumbnail(base64ToUint8Array(e), 'image/png', r);
           t({
             type: 'SET_GENERATION_RESULT',
             generationResult: n.current?.generationType === uu.IMAGE ? {

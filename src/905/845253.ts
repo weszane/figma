@@ -31,7 +31,7 @@ export function useCurrentUserOrg() {
  * (Original function: $$s0)
  */
 export function useCurrentUserOrgId() {
-  return useSelector<{ currentUserOrgId: string | undefined }>(state => state.currentUserOrgId)
+  return useSelector<{ currentUserOrgId: string | undefined }, any>(state => state.currentUserOrgId)
 }
 
 /**

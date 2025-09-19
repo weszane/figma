@@ -11,9 +11,9 @@ import _ from "../vendor/239910";
 import m from "../vendor/626715";
 import { useSubscriptionAnalytics, useSubscription } from "../figma_app/288654";
 import { Xm, e1, gB } from "../905/723791";
-import { B2 } from "../905/879323";
+import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
 import { Nf } from "../figma_app/864378";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { eM } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
@@ -122,7 +122,7 @@ export function $$M4({
     let g = useMemo(() => getFeatureFlags().dse_module_publish ? h()(m, e => e.node_id) : {}, [m]);
     let f = useDispatch();
     useLayoutEffect(() => {
-      f(B2({
+      f(componentReplaceOpenFilePublishedLivegraph({
         components: s,
         styles: r,
         stateGroups: d,
@@ -222,7 +222,7 @@ let j = memo(function ({
 }) {
   let r = e !== useCurrentFileKey();
   let n = wJ(e);
-  let a = n1();
+  let a = useFigmaLibrariesEnabled();
   let {
     view,
     args,

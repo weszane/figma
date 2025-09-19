@@ -15,7 +15,7 @@ function i(e, i, o) {
   } else if ("ignore" !== a && "ignore" === l) {
     if (!1 === n.test(e)) return s;
   } else if (!1 === r.test(e)) return s;
-  return A(s, {
+  return ImageDownloadQueue(s, {
     protoAction: a,
     constructorAction: l,
     safe: o && o.safe
@@ -73,4 +73,4 @@ module.exports.safeParse = function (e, t) {
     Error.stackTraceLimit = n;
   }
 };
-module.exports.scan = A;
+module.exports.scan = ImageDownloadQueue;

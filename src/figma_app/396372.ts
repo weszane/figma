@@ -4,7 +4,7 @@ import { ImageExportType, SitesBindingsCpp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
 import { captureException, reportError } from "../905/11";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { z } from "../905/931953";
 import { F } from "../905/672930";
 let p = "sts_asset_cache_";
@@ -128,7 +128,7 @@ async function E(e) {
 }
 async function y(e) {
   let t;
-  "GENERATED_ASSET" === e.type ? await Jr().loadAllImagesUnder([e.nodeId], ImageExportType.ALL, "sites.assetGeneration") : "PAINT_FILL_ASSET" === e.type && "IMAGE" === e.fill.type && (await Jr().loadImageByHash(e.fill.imageRef));
+  "GENERATED_ASSET" === e.type ? await getImageManager().loadAllImagesUnder([e.nodeId], ImageExportType.ALL, "sites.assetGeneration") : "PAINT_FILL_ASSET" === e.type && "IMAGE" === e.fill.type && (await getImageManager().loadImageByHash(e.fill.imageRef));
   let r = (SitesBindingsCpp?.generateSitesAssets({
     assets: [e]
   }) || {

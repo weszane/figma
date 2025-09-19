@@ -1,18 +1,18 @@
-import { VariableSetIdCompatHandler } from "../figma_app/243058";
+import { VariableSetIdCompatHandler } from '../figma_app/243058'
 
 /**
  * Represents a Kiwi object with a guid property.
  */
 interface KiwiObject {
-  guid: string;
+  guid: string
 }
 
 /**
  * Represents a reference object with key and version.
  */
-interface RefObject {
-  key: string;
-  version: number;
+export interface RefObject {
+  key: string
+  version: number
 }
 
 /**
@@ -21,9 +21,9 @@ interface RefObject {
  * @param input - The string to convert.
  * @returns The Kiwi representation or null if invalid.
  */
-export function convertStringToKiwi(input: string): string | null {
-  const parsed = VariableSetIdCompatHandler.fromString(input);
-  return parsed ? VariableSetIdCompatHandler.toKiwi(parsed) : null;
+export function convertStringToKiwi(input: string) {
+  const parsed = VariableSetIdCompatHandler.fromString(input)
+  return parsed ? VariableSetIdCompatHandler.toKiwi(parsed) : null
 }
 
 /**
@@ -33,8 +33,8 @@ export function convertStringToKiwi(input: string): string | null {
  * @returns The string representation or "<invalid>" if invalid.
  */
 export function convertKiwiToString(kiwiObj: KiwiObject): string {
-  const parsed = VariableSetIdCompatHandler.fromKiwi(kiwiObj);
-  return parsed ? VariableSetIdCompatHandler.toString(parsed) : "<invalid>";
+  const parsed = VariableSetIdCompatHandler.fromKiwi(kiwiObj)
+  return parsed ? VariableSetIdCompatHandler.toString(parsed) : '<invalid>'
 }
 
 /**
@@ -44,7 +44,7 @@ export function convertKiwiToString(kiwiObj: KiwiObject): string {
  * @returns The string representation.
  */
 export function convertGuidToString(guid: any) {
-  return convertKiwiToString({ guid });
+  return convertKiwiToString({ guid })
 }
 
 /**
@@ -56,8 +56,8 @@ export function convertGuidToString(guid: any) {
  */
 export function convertRefToString(key: string, version: number): string {
   return VariableSetIdCompatHandler.toString(
-    VariableSetIdCompatHandler.fromRef({ key, version })
-  );
+    VariableSetIdCompatHandler.fromRef({ key, version }),
+  )
 }
 
 /**
@@ -67,13 +67,13 @@ export function convertRefToString(key: string, version: number): string {
  * @returns True if valid, false otherwise.
  */
 export function isValidVariableSetIdString(input: string): boolean {
-  const parsed = VariableSetIdCompatHandler.fromString(input);
-  return !!parsed && VariableSetIdCompatHandler.isValid(parsed);
+  const parsed = VariableSetIdCompatHandler.fromString(input)
+  return !!parsed && VariableSetIdCompatHandler.isValid(parsed)
 }
 
 // Exported aliases for backward compatibility
-export const Hc = convertRefToString;
-export const dI = convertKiwiToString;
-export const fn = isValidVariableSetIdString;
-export const sH = convertStringToKiwi;
-export const wL = convertGuidToString;
+export const Hc = convertRefToString
+export const dI = convertKiwiToString
+export const fn = isValidVariableSetIdString
+export const sH = convertStringToKiwi
+export const wL = convertGuidToString

@@ -582,7 +582,7 @@ function $updateSelectedTextFromDOM(e, t, n) {
       if (t === eo && n) {
         let e = n.length;
         t = n;
-        A = e;
+        ImageDownloadQueue = e;
         o = e;
       }
       null !== t &&

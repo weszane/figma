@@ -337,7 +337,7 @@ import { a as _$$a6, z as _$$z4 } from '../figma_app/601188';
 import { dd as _$$dd, rE as _$$rE, Bu, IH, JB, jh, Lk, P_, Q8, Rt } from '../figma_app/604494';
 import { DP as _$$DP, xk as _$$xk } from '../figma_app/612859';
 import { R as _$$R2 } from '../figma_app/612938';
-import { UD } from '../figma_app/624361';
+import { processImageWithThumbnail } from '../figma_app/624361';
 import { i0 as _$$i3, JT as _$$JT, OZ, UW, wC } from '../figma_app/632248';
 import { eD as _$$eD, ET } from '../figma_app/646357';
 import { cd, ZI } from '../figma_app/650460';
@@ -5744,7 +5744,7 @@ function sG(e) {
 async function sK(e, t, i, r, n, a, s, o = 'Image') {
   let l;
   let d = sB(a);
-  let c = await UD(d, s, 'image');
+  let c = await processImageWithThumbnail(d, s, 'image');
   if (_$$l2.user('create image node', () => {
     (l = e.createNode('RECTANGLE')).size = {
       x: r,
@@ -5860,7 +5860,7 @@ async function sz(e, t, i, r, n, a, s, o) {
       })(ctx, t, i, e);
       return canvas.toDataURL('image/png');
     }(t.data, t.width, t.height).split(',')[1]);
-    let o = await UD(i, 'image/png', 'image');
+    let o = await processImageWithThumbnail(i, 'image/png', 'image');
     return {
       type: e.cls,
       x: e.x,

@@ -8,7 +8,7 @@ import { QA, Xp, n0, Lh, uQ, Mc, oI } from "../905/854717";
 import { Yr, o$ } from "../figma_app/8833";
 import { Gp, uH } from "../figma_app/646357";
 import { S, K } from "../905/733706";
-import { Z as _$$Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { E_ } from "../figma_app/177697";
 export let $$m0 = atom({});
 export class $$g1 {
@@ -140,7 +140,7 @@ export class $$g1 {
   }
   validateCopyBuffer(e, t) {
     let r = this.store.getState().openFile?.key;
-    r && _$$Z.postValidateCopy({
+    r && librariesAPI.postValidateCopy({
       nodeIds: e,
       fileKey: r,
       copyType: t

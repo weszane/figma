@@ -4,10 +4,10 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoShallow, useStableMemo } from "../905/19536";
 import l from "../vendor/656470";
 import { analyticsEventManager } from "../905/449184";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { Fl } from "../figma_app/236178";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { je, fi } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { isPublishedTeamLibrary, isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
@@ -81,7 +81,7 @@ var d = l;
   }
   function x() {
     let e = getCurrentTeam() ?? void 0;
-    let t = LH() ?? void 0;
+    let t = getParentOrgId() ?? void 0;
     return {
       fileKey: useCurrentFileKey() ?? void 0,
       teamId: e?.id,
@@ -96,7 +96,7 @@ var d = l;
     } = Fl();
     let n = je();
     let r = fi();
-    let s = n1();
+    let s = useFigmaLibrariesEnabled();
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
       let o = PW(a, e.filter(isPublishedTeamLibrary));
@@ -123,8 +123,8 @@ var d = l;
       searchSessionId,
       queryId
     } = sz() ?? {};
-    let o = n1();
-    let l = LH();
+    let o = useFigmaLibrariesEnabled();
+    let l = getParentOrgId();
     let d = Px(e);
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);

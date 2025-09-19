@@ -19,7 +19,7 @@ import { BrowserInfo } from '../figma_app/778880'
 // Renamed variables and functions for clarity, updated exports accordingly.
 
 // Global constants and variables
-const MAX_CANVAS_SIZE = 4096 // Original: $$g6
+export const MAX_CANVAS_SIZE = 4096 // Original: $$g6
 let glContext: any // Original: n
 const canvas = document.createElement('canvas') // Original: m
 const canvasContext = canvas.getContext('2d') // Original: f
@@ -339,7 +339,7 @@ async function determineCapabilities(gl: WebGLRenderingContext): Promise<{ works
 let workerManager: ImageIOWorkerManager | null = null // Original: R
 let initPromise: Promise<void> | null = null // Original: L
 
-const imageProcessor = { // Original: $$P3
+export const imageProcessor = { // Original: $$P3
   /**
    * Initializes the image processor.
    */

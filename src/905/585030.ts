@@ -12,7 +12,7 @@ import { XHR } from "../905/910117";
 import { rY, XA } from "../905/985490";
 import { handleModalError, handleError, getDiffVersion } from "../905/760074";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { subscribeToContainingPages } from "../figma_app/582924";
 import { enterPreviewDetachedState, abandonBranchingChanges } from "../905/346794";
 import { Z_, yQ } from "../figma_app/793953";
@@ -38,7 +38,7 @@ async function T(e, t) {
     imageShas,
     videoShas
   } = rY.getExternalMediaFromDiff(e);
-  let a = Jr();
+  let a = getImageManager();
   switch (e) {
     case GitReferenceType.SOURCE:
       i = t.sourceKey;
@@ -450,8 +450,8 @@ export async function $$W2(e, t, i, n = null, r = null) {
   n?.commitStart();
   let d = T(l, e);
   DiffImpl.uploadImages();
-  let c = Jr().imageUploadPromise();
-  let u = Jr().imageLookupPromise();
+  let c = getImageManager().imageUploadPromise();
+  let u = getImageManager().imageLookupPromise();
   await Promise.all([c, u]);
   await d;
   return await H(e.sourceKey, branchKey, l, t, i, direction, r);

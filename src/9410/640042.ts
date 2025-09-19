@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { OF } from "../figma_app/562352";
+import { retryAsync } from "../figma_app/562352";
 import { logger } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
 import { PN } from "../figma_app/897289";
@@ -14,7 +14,7 @@ export function $$f1(e) {
   return m.useValue(e);
 }
 async function g(e) {
-  return await OF(() => _(e), 20, 1e3);
+  return await retryAsync(() => _(e), 20, 1e3);
 }
 async function _(e) {
   let t = await x(e);

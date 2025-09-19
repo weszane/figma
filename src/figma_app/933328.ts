@@ -33,7 +33,7 @@ import { handleAtomEvent } from '../905/502364';
 import { getUserOrAnonymousId } from '../905/506024';
 import { L as _$$L } from '../905/522457';
 import { e as _$$e3 } from '../905/545750';
-import { Nn, sj } from '../905/561897';
+import { usePresetSubscriptionsMapping, subscriptionMappingToArray } from '../905/561897';
 import { FlashActions } from '../905/573154';
 import { VisualBellIcon } from '../905/576487';
 import { a as _$$a } from '../905/586871';
@@ -53,10 +53,10 @@ import { X as _$$X } from '../905/853613';
 import { An, fe, sh, Sp } from '../905/854258';
 import { q as _$$q, F7, VariableStyleId, ii, mW, Pg } from '../905/859698';
 import { defaultSessionLocalIDString } from '../905/871411';
-import { LH } from '../905/872904';
-import { dC } from '../905/879323';
+import { getParentOrgId } from '../905/872904';
+import { putMoveLibraryItemKeyMappings } from '../905/879323';
 import { XHR } from '../905/910117';
-import { Z as _$$Z } from '../905/939602';
+import { librariesAPI } from '../905/939602';
 import { c6 } from '../905/950959';
 import { r as _$$r } from '../905/955316';
 import { qp } from '../905/977779';
@@ -66,7 +66,7 @@ import { LibraryOrgSubscriptions, LibraryTeamSubscriptions, LibraryUserSubscript
 import { batchPutFileAction, filePutAction } from '../figma_app/78808';
 import { teamLibraryCache } from '../figma_app/80990';
 import { Ob } from '../figma_app/111825';
-import { LL, OQ } from '../figma_app/141508';
+import { subscribedStateGroupsUniqueKeysFromLoadedPagesSelector, subscribedSymbolsUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
 import o, { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { e as _$$e2 } from '../figma_app/267183';
 import { useSubscription } from '../figma_app/288654';
@@ -82,7 +82,7 @@ import { getCurrentTeamId } from '../figma_app/598018';
 import { qr } from '../figma_app/608944';
 import { PrimaryWorkflowEnum, initialLibraryStats } from '../figma_app/633080';
 import { $j, td as _$$td, _B, GA, iw, kw, lG, Mb, Ve, vu, Ys } from '../figma_app/646357';
-import { n1 } from '../figma_app/657017';
+import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { loadingStatePutLoading, loadingStatePutFailure, loadingStatePutSuccess, loadingStateDelete } from '../figma_app/714946';
 import { AppStateTsApi, Confirmation, CopyPasteType, FileSourceType, Fullscreen, LibraryPubSub, SceneIdentifier, StyleVariableOperation, TemplateType, VariablesBindings } from '../figma_app/763686';
 import { vP } from '../figma_app/864378';
@@ -1156,7 +1156,7 @@ export function $$tu33() {
 }
 let $$tp46 = createOptimistThunk(async e => {
   let t = e.getState();
-  t.user && (await gi, $$t_45(OQ(t), LL(t), e));
+  t.user && (await gi, $$t_45(subscribedSymbolsUniqueKeysFromLoadedPagesSelector(t), subscribedStateGroupsUniqueKeysFromLoadedPagesSelector(t), e));
 });
 let $$t_45 = async (e, t, r, n) => {
   if (e.length === 0 && t.length === 0) {
@@ -1206,7 +1206,7 @@ let $$t_45 = async (e, t, r, n) => {
         files: a,
         subscribeToRealtime: !0
       }));
-      r.dispatch(dC({
+      r.dispatch(putMoveLibraryItemKeyMappings({
         subscribedOldKeyToNewKey: e.data.meta.move_remappings,
         localOldGuidToNewKey: {}
       }));
@@ -1231,7 +1231,7 @@ let $$tg22 = atom('loading');
 let $$tf14 = atom('loading');
 export async function $$tE47(e, t, r) {
   try {
-    let n = await _$$Z.getLibraryComponentV2({
+    let n = await librariesAPI.getLibraryComponentV2({
       componentKey: t,
       source: r
     });
@@ -1290,7 +1290,7 @@ let tb = null;
 let tT = null;
 export async function $$tI55(e, t) {
   try {
-    let r = (await _$$Z.getLibraryStateGroup({
+    let r = (await librariesAPI.getLibraryStateGroup({
       stateGroupKey: t
     })).data.meta;
     let n = {
@@ -1322,7 +1322,7 @@ export async function $$tS13(e, t) {
     let {
       style,
       file
-    } = (await _$$Z.getLibraryStyleByKey({
+    } = (await librariesAPI.getLibraryStyleByKey({
       styleKey: t
     })).data.meta;
     file && e.dispatch(filePutAction({
@@ -1358,7 +1358,7 @@ export async function $$tA52(e) {
     return;
   }
   atomStoreManager.set($$tf14, 'loading');
-  let i = _$$Z.getLibraryPublishedAndMovedComponents({
+  let i = librariesAPI.getLibraryPublishedAndMovedComponents({
     openFileKey: r.key
   });
   setupLoadingStateHandler(i, {
@@ -1376,7 +1376,7 @@ export async function $$tA52(e) {
     let n = atomStoreManager.get(qp);
     $$tZ20(t.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, n, e.dispatch);
     $$tZ20(t.data.meta.components, PrimaryWorkflowEnum.COMPONENT, n, e.dispatch);
-    e.dispatch(dC({
+    e.dispatch(putMoveLibraryItemKeyMappings({
       subscribedOldKeyToNewKey: {},
       localOldGuidToNewKey: t.data.meta.move_remappings
     }));
@@ -1448,7 +1448,7 @@ let $$tw23 = liveStoreInstance.Query({
   key: 'libraryInfo'
 });
 let $$tO50 = liveStoreInstance.Query({
-  fetch: async e => (await _$$Z.getLibrariesV2(e)).data.meta ?? [],
+  fetch: async e => (await librariesAPI.getLibrariesV2(e)).data.meta ?? [],
   key: 'libraryInfoV2'
 });
 export function $$tR19(e, t = {}) {
@@ -1473,7 +1473,7 @@ let $$tL = _$$D2(async ({
   includeThumbnails: n,
   includeSharingGroupInfo: i
 }) => {
-  let a = _$$Z.getLibraries({
+  let a = librariesAPI.getLibraries({
     orgId: e,
     subscriptionFileKey: r || void 0,
     includeThumbnails: n,
@@ -1564,8 +1564,8 @@ let tF = e => ({
 });
 let $$tj42 = function () {
   let e = useStore();
-  let t = n1();
-  let r = LH();
+  let t = useFigmaLibrariesEnabled();
+  let r = getParentOrgId();
   let {
     data
   } = useSubscription(LibraryUserSubscriptions, {});
@@ -1575,12 +1575,12 @@ let $$tj42 = function () {
     let t = data?.currentUser?.libraryUserSubscriptions;
     $$tk34(e, s?.currentUser?.libraryUserSubscriptions, t);
   }, [e, data, s]);
-  let o = Nn();
+  let o = usePresetSubscriptionsMapping();
   let l = useLatestRef(o);
   useEffect(() => {
     if (!o || !l) return;
-    let t = sj(o);
-    tD(e, sj(l), t);
+    let t = subscriptionMappingToArray(o);
+    tD(e, subscriptionMappingToArray(l), t);
   }, [e, o, l]);
   let {
     data: _data

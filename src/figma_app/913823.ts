@@ -9,7 +9,7 @@ import { getFileKey } from "../905/412913";
 import { D3 } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { batchPutFileAction, filePutAction } from "../figma_app/78808";
-import { uo as _$$uo, lx, Ho, dC } from "../905/879323";
+import { componentBatchUpdate, defaultLibraryInitializeLibraryKeys, defaultLibraryInitialize, putMoveLibraryItemKeyMappings } from "../905/879323";
 import { tg, xZ, VF } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { qp } from "../905/977779";
@@ -23,7 +23,7 @@ import { kb } from "../figma_app/502247";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
-import { Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { yD } from "../905/92359";
 let O = new Map();
 async function R(e, t) {
@@ -57,7 +57,7 @@ async function R(e, t) {
           return "design";
       }
     }(r);
-    let p = Z.getLibrarySubscribedComponentsEditorType({
+    let p = librariesAPI.getLibrarySubscribedComponentsEditorType({
       key: t,
       editorType: o
     });
@@ -83,10 +83,10 @@ async function R(e, t) {
       ...e,
       team_id: y[e.library_key]?.team_id
     }));
-    if (e.dispatch(_$$uo({
+    if (e.dispatch(componentBatchUpdate({
       items: I,
       type: PrimaryWorkflowEnum.STATE_GROUP
-    })), e.dispatch(_$$uo({
+    })), e.dispatch(componentBatchUpdate({
       items: S,
       type: PrimaryWorkflowEnum.COMPONENT
     })), getFeatureFlags().dse_lk_realtime_audit) {
@@ -124,7 +124,7 @@ async function L(e) {
     try {
       let t = e.getState().selectedView;
       if ("fullscreen" !== t.view) return;
-      let i = await Z.getDefaultLibraries({
+      let i = await librariesAPI.getDefaultLibraries({
         editorType: mapEditorTypeToStringWithObfuscated(t.editorType)
       });
       D(e, i.data.meta.components, PrimaryWorkflowEnum.COMPONENT);
@@ -136,7 +136,7 @@ async function L(e) {
         }));
       });
       let a = i.data.meta.files.map(_$$l).filter(isNotNullish);
-      e.dispatch(lx({
+      e.dispatch(defaultLibraryInitializeLibraryKeys({
         libraryKeys: a
       }));
       kG();
@@ -164,7 +164,7 @@ let D = (e, t, r) => {
     n[NO_TEAM][t][e.node_id] = e;
     (i[e.library_key] ??= {})[e.node_id] = e;
   });
-  e.dispatch(Ho({
+  e.dispatch(defaultLibraryInitialize({
     publishedItemsByTeamId: n,
     publishedItemsByLibraryKey: i,
     type: r
@@ -229,7 +229,7 @@ async function j(e, t) {
     files: r.data.meta.files,
     subscribeToRealtime: !1
   }));
-  e.dispatch(dC({
+  e.dispatch(putMoveLibraryItemKeyMappings({
     subscribedOldKeyToNewKey: r.data.meta.move_remappings,
     localOldGuidToNewKey: {}
   }));

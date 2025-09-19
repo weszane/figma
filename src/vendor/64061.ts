@@ -19,11 +19,11 @@ var k = "(?:" + a + "(?:D|LL|M|RE|S|T|VE))?";
 var _ = "(?:[\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff]|\ud83c[\udffb-\udfff])?";
 var S = "[\\ufe0e\\ufe0f]?";
 var E = "(?:\\u200d(?:" + ["[^" + r + "]", v, y].join("|") + ")" + S + _ + ")*";
-var A = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])";
+var ImageDownloadQueue = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])";
 var C = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])";
 var T = S + _ + E;
 var I = "(?:" + [p, v, y].join("|") + ")" + T;
-var P = RegExp([b + "?" + g + "+" + w + "(?=" + [h, b, "$"].join("|") + ")", x + "+" + k + "(?=" + [h, b + O, "$"].join("|") + ")", b + "?" + O + "+" + w, b + "+" + k, C, A, d, I].join("|"), "g");
+var P = RegExp([b + "?" + g + "+" + w + "(?=" + [h, b, "$"].join("|") + ")", x + "+" + k + "(?=" + [h, b + O, "$"].join("|") + ")", b + "?" + O + "+" + w, b + "+" + k, C, ImageDownloadQueue, d, I].join("|"), "g");
 function R(e) {
   return e.match(P) || [];
 }

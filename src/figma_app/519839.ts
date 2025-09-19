@@ -20,7 +20,7 @@ import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
-import { I0 } from "../905/879323";
+import { componentReplaceLocal } from "../905/879323";
 import { hideModal } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { getSelectedFile } from "../905/766303";
@@ -34,7 +34,7 @@ import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
 import { getTeamById } from "../figma_app/598018";
 import { O as _$$O } from "../905/566074";
 import { StagingStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, PublishStatusEnum, DEFAULT_LIBRARY_LIMIT, NO_CONTAINING_STATE_GROUP_ID } from "../figma_app/633080";
-import { Z as _$$Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { Gh } from "../figma_app/707567";
 import { b as _$$b2 } from "../905/76245";
 import { I6, fn, p$ } from "../905/831303";
@@ -72,15 +72,15 @@ export let $$Q8 = createOptimistThunk((e, {
     let r = t(n.library.local.components);
     let i = t(n.library.local.stateGroups);
     let a = t(n.library.local.styles);
-    e.dispatch(I0({
+    e.dispatch(componentReplaceLocal({
       local: r,
       type: PrimaryWorkflowEnum.COMPONENT
     }));
-    e.dispatch(I0({
+    e.dispatch(componentReplaceLocal({
       local: i,
       type: PrimaryWorkflowEnum.STATE_GROUP
     }));
-    e.dispatch(I0({
+    e.dispatch(componentReplaceLocal({
       local: a,
       type: PrimaryWorkflowEnum.STYLE
     }));
@@ -726,7 +726,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     } : {})
   };
   try {
-    let e = (await _$$Z.postUploadPublishParams()).data.meta;
+    let e = (await librariesAPI.postUploadPublishParams()).data.meta;
     p = e.url;
     y = e.fields;
   } catch (e) {
@@ -747,7 +747,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     return;
   }
   try {
-    I = (await _$$Z.postLibraryPublish({
+    I = (await librariesAPI.postLibraryPublish({
       fileKey: X.key,
       checkpointKey: r.checkpoint_key,
       paramsPath: T,

@@ -1,6 +1,6 @@
 import { UIVisibilitySetting, SchemaJoinStatus } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
-import { Y7 } from "../figma_app/553184";
+import { handleOutOfMemoryError } from "../figma_app/553184";
 import { BrowserInfo } from "../figma_app/778880";
 import { setTagGlobal } from "../905/11";
 import { getProductType } from "../figma_app/314264";
@@ -75,7 +75,7 @@ export class $$m1 extends $$p0 {
       migrationFrom: f,
       migrationTo: _
     });
-    Y7({
+    handleOutOfMemoryError({
       ...I,
       progressBarMode: UIVisibilitySetting[this._state.progressBarState.mode],
       multiplayerSessionState: SchemaJoinStatus[this._state.mirror.appModel.multiplayerSessionState],

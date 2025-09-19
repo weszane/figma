@@ -1,5 +1,5 @@
 import { deepEqual } from "../905/382883";
-import { _7 } from "../figma_app/562352";
+import { resolveAllWithStatus } from "../figma_app/562352";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -242,7 +242,7 @@ export class $$f1 {
         });
       });
     }
-    return await _7(r).then(e => e.flatMap(e => "resolve" === e.type && e.resolve ? e.resolve : []));
+    return await resolveAllWithStatus(r).then(e => e.flatMap(e => "resolve" === e.type && e.resolve ? e.resolve : []));
   }
   async getSnippetPromise(e, t, r) {
     let n = [];

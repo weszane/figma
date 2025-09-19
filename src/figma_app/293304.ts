@@ -13,7 +13,7 @@ import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { ay } from "../905/879323";
+import { setIsRenamingSelectedStyle } from "../905/879323";
 import { splitAndJoinPath } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { getDirname, getBasename } from "../905/309735";
@@ -88,7 +88,7 @@ function w({
     });
   });
   let F = () => {
-    R(ay({
+    R(setIsRenamingSelectedStyle({
       isRenaming: !1
     }));
   };
@@ -128,7 +128,7 @@ function w({
       onChange: e => {
         w(e.target.value);
       },
-      onFocus: () => (R(ay({
+      onFocus: () => (R(setIsRenamingSelectedStyle({
         isRenaming: !0
       })), w(C), SKIP_RECORDING),
       onKeyDown: j,

@@ -80,7 +80,7 @@ import { canAccessFullDevMode } from "../figma_app/473493";
 import { selectViewAction } from "../905/929976";
 import { mapToEditorType } from "../figma_app/300692";
 import { z4 } from "../905/37051";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { Yu } from "../figma_app/139113";
 let er = "Handling fullscreen metadata response not in a valid fullscreen state";
 async function ea(e, t, i) {
@@ -547,7 +547,7 @@ let eH = createOptimistThunk(async (e, {
     i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : "";
     let v = getBackgroundColorForTheme(getMPVisibleTheme(A.theme.themePreference));
-    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
+    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (getImageManager().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
       logInfo("image", "Failed to generate compressed textures", {
         fileKey: t.key,
         error: e

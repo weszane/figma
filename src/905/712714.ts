@@ -1,7 +1,7 @@
 import { G5, S6 } from "../figma_app/795674";
 import { u } from "../figma_app/187359";
 import { liveStoreInstance } from "../905/713695";
-import { Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { PT } from "../905/669853";
 import { o as _$$o } from "../905/918279";
 let d = {
@@ -133,7 +133,7 @@ let $$b2 = liveStoreInstance.Query({
   })).data.meta
 });
 liveStoreInstance.Query({
-  fetch: e => Z.getLibraryPublishedComponentsStats({
+  fetch: e => librariesAPI.getLibraryPublishedComponentsStats({
     libraryFileKey: e
   }),
   output: ({

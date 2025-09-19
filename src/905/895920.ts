@@ -1,12 +1,12 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 export function $$o0({
   filtersActive: e,
   onViewPresetsClicked: t
 }) {
-  let i = n1() && !!t;
+  let i = useFigmaLibrariesEnabled() && !!t;
   return jsxs("div", {
     className: _$$s.flex.flexColumn.alignCenter.justifyCenter.mt36.wFull.$,
     children: [jsx("h2", {

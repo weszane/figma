@@ -6,7 +6,7 @@ import { logger } from "../905/651849";
 import { isProdCluster } from "../figma_app/169182";
 import { subscribeAndAwaitData } from "../905/553831";
 import { useSubscription } from "../figma_app/288654";
-import { Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { SlotsFileEnablement } from "../figma_app/43951";
 export async function $$h1() {
@@ -15,7 +15,7 @@ export async function $$h1() {
   let t = await subscribeAndAwaitData(SlotsFileEnablement, {
     fileKey: e.sourceFileKey ?? e.key
   });
-  getResourceDataOrFallback(t.file?.slotsFileEnablement)?.slotsEnabled || (await Z.postEnableSlotsForFile({
+  getResourceDataOrFallback(t.file?.slotsFileEnablement)?.slotsEnabled || (await librariesAPI.postEnableSlotsForFile({
     fileKey: e.sourceFileKey ?? e.key
   }));
 }

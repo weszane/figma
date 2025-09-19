@@ -3,7 +3,7 @@ import { useSelector, useStore } from "react-redux";
 import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
 import { eB } from "../figma_app/933328";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { WorkspaceSubscribedLibrariesForFile } from "../figma_app/43951";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -31,7 +31,7 @@ export function $$_1(e) {
 }
 export function $$h0() {
   let e = useCurrentFileKey();
-  let t = LH();
+  let t = getParentOrgId();
   let r = useStore();
   let c = useSubscription(WorkspaceSubscribedLibrariesForFile, {
     fileKey: e

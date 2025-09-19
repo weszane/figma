@@ -700,7 +700,7 @@ import { lV as _$$lV, AD, H5, MK } from '../figma_app/617606';
 import { renameCollectionOptimistically, getCollectionSummaryStatus, getCollectionViewStatus, deleteCollectionOptimistically, createCollectionOptimistically } from '../figma_app/618433';
 import { _b as _$$_b, uP as _$$uP, Dw, HA, IX, Og, q9 } from '../figma_app/618665';
 import { getNodeStatus } from '../figma_app/623300';
-import { Jr, Mj, UD } from '../figma_app/624361';
+import { getImageManager, batchDownloadImages, processImageWithThumbnail } from '../figma_app/624361';
 import { gs as _$$gs } from '../figma_app/624706';
 import { fI as _$$fI, jT as _$$jT, JU as _$$JU, ks as _$$ks2, Zk as _$$Zk } from '../figma_app/626177';
 import { E as _$$E4, H as _$$H2 } from '../figma_app/626557';
@@ -10575,7 +10575,7 @@ async function cO(e, t, i) {
   }
   let s = getSingletonSceneGraph();
   let o = _$$is(s.getInternalCanvas(), e => e && e.isCodeFile);
-  await Jr().loadAllImagesUnder(o.map(e => e.id), ImageExportType.ALL, 'sites.assetGeneration');
+  await getImageManager().loadAllImagesUnder(o.map(e => e.id), ImageExportType.ALL, 'sites.assetGeneration');
   let d = {};
   o.forEach(e => {
     e.imageImports.forEach(e => {
@@ -12512,7 +12512,7 @@ async function xe(e, t, i) {
     cmsImage
   } = await xi(t, e);
   let l = cmsImage.image;
-  let a = (await Mj([l], {
+  let a = (await batchDownloadImages([l], {
     type: 'figFile',
     fileKey: i ?? ''
   })).s3_urls[l];
@@ -12939,7 +12939,7 @@ function xh({
         let t = _$$Cg.parse(JSON.parse(e));
         if (t.imageThumbnail && n) {
           let e = t.imageThumbnail;
-          let l = (await Mj([e], {
+          let l = (await batchDownloadImages([e], {
             type: 'figFile',
             fileKey: n
           })).s3_urls[e];
@@ -14436,7 +14436,7 @@ function mx({
       if (o?.imageThumbnail && m && d?.hash !== o.imageThumbnail) {
         x(0);
         let e = o.imageThumbnail;
-        let t = (await Mj([e], {
+        let t = (await batchDownloadImages([e], {
           type: 'figFile',
           fileKey: m
         })).s3_urls[e];
@@ -21123,7 +21123,7 @@ class _A {
         useAbsoluteBounds: !1
       }]);
       console.warn('Image data loaded, decoding...');
-      u = await UD(t, 'image/png', 'flattened-image');
+      u = await processImageWithThumbnail(t, 'image/png', 'flattened-image');
       console.warn('Image decoded, caching image for future use');
       this.imageCache.set(c, u);
       this.stats.totalImagesGenerated += 1;

@@ -4,7 +4,7 @@ import { createActionCreator } from "../905/73481";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { Hh } from "../figma_app/553184";
+import { sendUnsavedChangesBell } from "../figma_app/553184";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { wZ } from "../figma_app/701982";
@@ -22,7 +22,7 @@ let $$A0 = createOptimistThunk((e, t) => {
   e.dispatch($$_1(t));
 });
 let y = e => {
-  if (Hh(), Multiplayer) {
+  if (sendUnsavedChangesBell(), Multiplayer) {
     let t = {
       fileKey: e,
       multiplayer_session_state: Multiplayer.getSessionState(),

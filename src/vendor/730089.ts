@@ -149,10 +149,10 @@ if ("function" == typeof v) a = function () {
   v(N);
 }; else if ("undefined" != typeof MessageChannel) {
   var O = new MessageChannel();
-  var A = O.port2;
+  var ImageDownloadQueue = O.port2;
   O.port1.onmessage = N;
   a = function () {
-    A.postMessage(null);
+    ImageDownloadQueue.postMessage(null);
   };
 } else a = function () {
   b(N, 0);

@@ -224,7 +224,7 @@ import { q9 } from '../905/865071';
 import { bL as _$$bL2, c$ as _$$c$ } from '../905/867927';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { createDeferredPromise } from '../905/874553';
-import { Cp as _$$Cp, ow as _$$ow2, KQ, Ty, U$, UA, WE } from '../905/879323';
+import { replaceUsedLivegraphUnnaturalKeyToNaturalKey, replaceUsedLivegraphStyles, replaceUsedLivegraphSourceAssetKeyToDestinationKey, replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey } from '../905/879323';
 import { generateUUIDv4 } from '../905/871474';
 import { Db } from '../905/881862';
 import { NP } from '../905/889931';
@@ -326,7 +326,7 @@ import { yB } from '../figma_app/120294';
 import { $ as _$$$2, E as _$$E5 } from '../figma_app/126651';
 import { F as _$$F8 } from '../figma_app/127204';
 import { Iu } from '../figma_app/141088';
-import { OQ, qC } from '../figma_app/141508';
+import { subscribedSymbolsUniqueKeysFromLoadedPagesSelector, allSubscribedStylesUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
 import { cQ as _$$cQ } from '../figma_app/144692';
 import { ub as _$$ub, jM, RO, wI } from '../figma_app/146905';
 import { rb as _$$rb } from '../figma_app/151869';
@@ -461,7 +461,7 @@ import { hG } from '../figma_app/613182';
 import { $z, Ih } from '../figma_app/617427';
 import { sv as _$$sv } from '../figma_app/617606';
 import { Eh } from '../figma_app/617654';
-import { j5 } from '../figma_app/624361';
+import { imageServiceInstance } from '../figma_app/624361';
 import { normalizeTeamData, fileActionEnum } from '../figma_app/630077';
 import { getPrototypeAppBindingsForTest } from '../figma_app/632319';
 import { PublishStatusEnum, LibraryPublishStatusEnum } from '../figma_app/633080';
@@ -477,7 +477,7 @@ import { f2 } from '../figma_app/646357';
 import { P as _$$P4 } from '../figma_app/650304';
 import { R as _$$R6 } from '../figma_app/652260';
 import { sortByDateProperty, sortByMultiple, filterNotNullish } from '../figma_app/656233';
-import { n1 as _$$n4, JB } from '../figma_app/657017';
+import { useFigmaLibrariesEnabled, figmaLibrariesEnabledAtom } from '../figma_app/657017';
 import { aJ as _$$aJ, Sz, ZQ } from '../figma_app/673202';
 import { Gm as _$$Gm } from '../figma_app/675605';
 import { KI, wH } from '../figma_app/680166';
@@ -1728,7 +1728,7 @@ let ns = {
   FontManagerJs: () => _$$h,
   WebAsync: () => _$$F,
   JsBindingsTestHelpers: () => rx,
-  ImageTsBindings: () => j5,
+  ImageTsBindings: () => imageServiceInstance,
   PdfImportBindings: () => IY,
   InteractionBindings: () => Dt,
   SitesBindings: () => rq,
@@ -5817,7 +5817,7 @@ function dR() {
     let e = useDispatch();
     !function () {
       let e = !!getFeatureFlags().ds_componentbykey_shadow_read;
-      let t = useSelector(OQ);
+      let t = useSelector(subscribedSymbolsUniqueKeysFromLoadedPagesSelector);
       let r = useMemo(() => t.map(e => ({
         key: e
       })), [t]);
@@ -5827,11 +5827,11 @@ function dR() {
     }();
     let t = function () {
       let e = useCurrentFileKey();
-      let t = _$$n4();
+      let t = useFigmaLibrariesEnabled();
       let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
       let [n, i] = useAtomValueAndSetter(dP);
       let a = useAtomWithSubscription(dD);
-      let s = useSelector(qC);
+      let s = useSelector(allSubscribedStylesUniqueKeysFromLoadedPagesSelector);
       let o = useMemo(() => s.filter(e => !n.has(e)), [s, n]);
       let l = useMemo(() => o.map(t => ({
         key: t,
@@ -5910,7 +5910,7 @@ function dR() {
         }
         return e;
       }, Object.create(null));
-      e(_$$ow2(s));
+      e(replaceUsedLivegraphStyles(s));
     }, [e, usedLocalStyles, localUnpublishedStyles, t, unpublishedLocalStyleKeyToNodeIds]);
     useEffect(() => {
       let {
@@ -5935,9 +5935,9 @@ function dR() {
           destinationStyleKeyToLegacySourceStyle: n
         };
       }(t);
-      e(KQ(sourceAssetKeyToDestinationKey));
-      e(UA(sourceAssetKeyToFileName));
-      e(Ty(destinationStyleKeyToLegacySourceStyle));
+      e(replaceUsedLivegraphSourceAssetKeyToDestinationKey(sourceAssetKeyToDestinationKey));
+      e(replaceUsedLivegraphSourceAssetKeyToFileName(sourceAssetKeyToFileName));
+      e(replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset(destinationStyleKeyToLegacySourceStyle));
     }, [e, t]);
     useEffect(() => {
       let t = Object.create(null);
@@ -5949,8 +5949,8 @@ function dR() {
         let r = unpublishedLocalStyleKeyToNodeIds[movedAssetData.sourceKey];
         r && (t[r] = movedAssetData.destinationKey, movedAssetData.destinationFileName && (i[r] = movedAssetData.destinationFileName));
       }
-      e(WE(t));
-      e(U$(i));
+      e(replaceUsedLivegraphLocalNodeIdToDestinationKey(t));
+      e(replaceUsedLivegraphLocalNodeIdToDestinationFileName(i));
     }, [e, usedLocalStyles, localUnpublishedStyles, unpublishedLocalStyleKeyToNodeIds]);
   })();
   return null;
@@ -5967,7 +5967,7 @@ let dL = memoizeWithDeepEquality(({
 }, Object.create(null)));
 let dP = atom(new Set());
 let dD = atom(e => {
-  if (!e(JB)) return {};
+  if (!e(figmaLibrariesEnabledAtom)) return {};
   let t = e(openFileKeyAtom);
   let r = Array.from(e(dP)).map(e => ({
     key: e,
@@ -6003,7 +6003,7 @@ function dB({
       if (!t) return;
       let n = Object.create(null);
       for (let e of t) e.legacySourceAsset && (n[_$$n3(e.legacySourceAsset.key)] = _$$n3(e.key));
-      e(_$$Cp(n));
+      e(replaceUsedLivegraphUnnaturalKeyToNaturalKey(n));
     }, [e, r]);
   }();
   return jsxs(dG, {
@@ -9186,7 +9186,7 @@ t(async () => {
           PluginCallbacks: () => _$$d4,
           HTMLWindowBindings: () => IM,
           ImageIo: () => imageAPI,
-          ImageTsBindings: () => j5,
+          ImageTsBindings: () => imageServiceInstance,
           VideoTsBindings: () => fm,
           JsKiwiSerialization: () => _$$K,
           TsFontManualLoader: () => _$$S2,

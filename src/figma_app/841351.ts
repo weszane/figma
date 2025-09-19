@@ -41,16 +41,16 @@ import { fileApiHandler } from '../figma_app/787550'
 // This module handles version history loading, caching, comparison, and UI interactions.
 
 // Constants
-const CURRENT_VERSION_ID = 'current_version' // Original: $$B5
+export const CURRENT_VERSION_ID = 'current_version' // Original: $$B5
 
 // Cache for canvas data
-const canvasCache = new LRUCache(40) // Original: $$G2
+export const canvasCache = new LRUCache(40) // Original: $$G2
 
 // Atom for version history key
-const versionHistoryKeyAtom = atom('') // Original: $$V14
+export const versionHistoryKeyAtom = atom('') // Original: $$V14
 
 // Query for paginated file versions
-const fileVersionsQuery = liveStoreInstance.Query({
+export const fileVersionsQuery = liveStoreInstance.Query({
   fetch: async (params: any) => {
     const fileKey = params.fileKey
     if (!fileKey)

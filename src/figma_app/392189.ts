@@ -9,7 +9,7 @@ import { M3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { yy } from "../figma_app/543529";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { u as _$$u } from "../905/389684";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
@@ -27,7 +27,7 @@ import { ON, zr } from "../figma_app/644808";
 import { dH } from "../figma_app/647246";
 var d = l;
 function R() {
-  let e = n1();
+  let e = useFigmaLibrariesEnabled();
   let t = g7();
   let r = selectCurrentFile();
   let i = e && t.length > 0;
@@ -159,7 +159,7 @@ export function $$k0() {
   });
 }
 export function $$M2() {
-  let e = n1();
+  let e = useFigmaLibrariesEnabled();
   let t = yy();
   return jsxs("div", {
     className: _$$s.flex.flexColumn.$,

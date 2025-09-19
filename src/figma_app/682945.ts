@@ -15,7 +15,7 @@ import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { getRandomString } from "../905/87821";
 import { f as _$$f } from "../905/70820";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 let T = {
   "frame.react-render": .1,
   "frame.scene-render": .2,
@@ -58,7 +58,7 @@ export function $$W16() {
   $$R31?.setFileInfo(null, "unknown");
 }
 export function $$K4(e, t) {
-  $$R31 && ($$R31.setFileInfo(e, mapEditorTypeToProductType(t)), $$R31.startRecording(!0), Jr().setPendingImagesCallback($$R31.pendingImagesChanged));
+  $$R31 && ($$R31.setFileInfo(e, mapEditorTypeToProductType(t)), $$R31.startRecording(!0), getImageManager().setPendingImagesCallback($$R31.pendingImagesChanged));
   A = e;
   N = performance.now();
   x++;

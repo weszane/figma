@@ -1,4 +1,4 @@
-import { MJ } from "../figma_app/657017";
+import { isFigmaLibrariesEnabled } from "../figma_app/657017";
 import { HE } from "../905/967587";
 import { isExternalRestricted } from "../figma_app/12796";
 export function $$s0(e, t, i, s, o) {
@@ -18,7 +18,7 @@ export function $$s0(e, t, i, s, o) {
   }), {}) : i.teams;
   let h = HE(i, e, p, m);
   let g = isExternalRestricted(u, orgId);
-  let f = !!o && !MJ(orgId ? p[orgId] : null, teamId ? m[teamId] : null, null);
+  let f = !!o && !isFigmaLibrariesEnabled(orgId ? p[orgId] : null, teamId ? m[teamId] : null, null);
   if (!orgId) {
     let t = s?.plansByUserId[userId]?.find(e => e.plan_id === teamId);
     let i = t?.is_plan_locked;

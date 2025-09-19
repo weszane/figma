@@ -380,7 +380,7 @@ XHR.crossOriginGetDefaults = {
 /**
  * Custom error for XHR failures.
  */
-class XHRError extends Error {
+export class XHRError extends Error {
   status: number
   response: any
   data: any

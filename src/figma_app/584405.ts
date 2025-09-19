@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { RI } from '../905/711212';
+import { fetchVariableSetThumbnails } from '../905/711212';
 import { atomStoreManager, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { _M, IZ } from '../figma_app/99772';
 import { y4 } from '../figma_app/210234';
@@ -50,7 +50,7 @@ export function $$E6() {
       });
       for (let e = 0; e < n.length; e += 2) {
         if (i.aborted) return;
-        let t = n.slice(e, e + 2).map(e => RI(e));
+        let t = n.slice(e, e + 2).map(e => fetchVariableSetThumbnails(e));
         await Promise.allSettled(t);
       }
       e({

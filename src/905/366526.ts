@@ -235,7 +235,7 @@ import { S3 } from '../905/708054';
 import { vV } from '../905/709095';
 import { compareLibraryItemWithKey } from '../905/709171';
 import { uiVariantName } from '../905/709735';
-import { us as _$$us2, xp } from '../905/711212';
+import { addThumbnailForDanglingStyle, replaceLocalThumbnails } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
 import { IT, liveStoreInstance } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
@@ -299,7 +299,7 @@ import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
 import { createDeferredPromise } from '../905/874553';
-import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as _$$lx, ow as _$$ow, ru as _$$ru, uo as _$$uo3, yH as _$$yH2, B2, Bn, Cp, gP, Ho, HV, I0, JV, KQ, ku, Ty, U$, UA, WE, xI, Y1 } from '../905/879323';
+import { componentUpdate, setIsRenamingSelectedStyle, setShouldSearchDefaultLibraries, putMoveLibraryItemKeyMappings, componentClearPublishedItems, defaultLibraryInitializeLibraryKeys, replaceUsedLivegraphStyles, componentDeleteForFile, componentBatchUpdate, componentDelete, componentReplaceOpenFilePublishedLivegraph, setLocalStyleSelection, replaceUsedLivegraphUnnaturalKeyToNaturalKey, setAssetsSearchOptions, defaultLibraryInitialize, componentClearLocal, componentReplaceLocal, setLibraryUpdatesBannerDismissed, replaceUsedLivegraphSourceAssetKeyToDestinationKey, setAssetsSearchQuery, replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset, replaceUsedLivegraphLocalNodeIdToDestinationFileName, replaceUsedLivegraphSourceAssetKeyToFileName, replaceUsedLivegraphLocalNodeIdToDestinationKey, setAssetsSearchNoResults, setAssetsSearchResults } from '../905/879323';
 import { P6, VK, YF, YK } from '../905/880488';
 import { useHasParentOrgId } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
@@ -2350,13 +2350,13 @@ let ng = e => t => function (i) {
       url: e
     }) => {
       e && revokeThumbnailUrl(e);
-    }), e.dispatch(HV()), bd(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
+    }), e.dispatch(componentClearLocal()), bd(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
-    }), teamLibraryCache.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(_$$iE2({
+    }), teamLibraryCache.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.COMPONENT
-    })), e.dispatch(_$$iE2({
+    })), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.STATE_GROUP
     })), n.openFile && e.dispatch(Kd({
       openFileKey: n.openFile.key
@@ -3630,7 +3630,7 @@ let aT = new _$$H6({
 let aL = getFileKey();
 function aF(e, t) {
   if (t.type === 'file' && t.method === 'delete') {
-    t.idForDeletion && e.dispatch(_$$ru({
+    t.idForDeletion && e.dispatch(componentDeleteForFile({
       fileKey: t.idForDeletion
     }));
     return;
@@ -3664,12 +3664,12 @@ function aF(e, t) {
             let s = e.destination_key;
             i && s && (r.openFile && compareLibraryItemWithKey(e, r.openFile) ? a[e.node_id] = s : t[i] = s);
           }
-          e.dispatch(_$$dC({
+          e.dispatch(putMoveLibraryItemKeyMappings({
             subscribedOldKeyToNewKey: t,
             localOldGuidToNewKey: a
           }));
         }
-        e.dispatch(_$$yH2({
+        e.dispatch(componentDelete({
           nodeIds: i.map(e => e.node_id),
           file: u,
           type: n
@@ -3687,7 +3687,7 @@ function aF(e, t) {
             teamId: u.team_id,
             type: n
           }));
-          e.dispatch(JV({
+          e.dispatch(setLibraryUpdatesBannerDismissed({
             libraryUpdatesBannerDismissed: !1
           }));
           t.component && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
@@ -5938,7 +5938,7 @@ let sq = e => t => function (i) {
       case FResourceCategoryType.FOLDER:
         if (!canViewFolder_DEPRECATED(r.resource_id_or_key, n)) {
           for (let t of n.fileKeysByFolderId[r.resource_id_or_key] || []) {
-            e.dispatch(_$$ru({
+            e.dispatch(componentDeleteForFile({
               fileKey: t
             }));
           }
@@ -7935,11 +7935,11 @@ let lx = HY({
   }
 });
 function lO(e) {
-  return (t = Object.create(null), i) => Ho.matches(i) && i.payload.type === e ? i.payload.publishedItemsByLibraryKey : t;
+  return (t = Object.create(null), i) => defaultLibraryInitialize.matches(i) && i.payload.type === e ? i.payload.publishedItemsByLibraryKey : t;
 }
 function lD(e) {
   return (t = Object.create(null), i) => {
-    if (_$$$I.matches(i) && i.payload.type === e) {
+    if (componentUpdate.matches(i) && i.payload.type === e) {
       let e = i.payload.libraryKey;
       let n = i.payload.teamId || NO_TEAM;
       let r = {
@@ -7955,7 +7955,7 @@ function lD(e) {
       }
       return r;
     }
-    if (_$$uo3.matches(i) && i.payload.type === e) {
+    if (componentBatchUpdate.matches(i) && i.payload.type === e) {
       let e = {
         ...t
       };
@@ -7968,8 +7968,8 @@ function lD(e) {
       });
       return e;
     }
-    if (_$$iE2.matches(i) && i.payload.type === e) return {};
-    if (_$$yH2.matches(i) && i.payload.type === e) {
+    if (componentClearPublishedItems.matches(i) && i.payload.type === e) return {};
+    if (componentDelete.matches(i) && i.payload.type === e) {
       let e = i.payload.file;
       let n = _$$l6(e.library_key);
       let r = e.team_id || NO_TEAM;
@@ -7988,7 +7988,7 @@ function lD(e) {
       isEmptyObject(a[r][n]) && delete a[r][n];
       return a;
     }
-    if (_$$ru.matches(i)) {
+    if (componentDeleteForFile.matches(i)) {
       let e = generateUniqueKey(i.payload.fileKey);
       for (let i in t) {
         if (e in t[i]) {
@@ -8028,7 +8028,7 @@ function lD(e) {
   };
 }
 function lL(e) {
-  return (t = Object.create(null), i) => HV.matches(i) ? Object.create(null) : I0.matches(i) && i.payload.type === e ? i.payload.local : t;
+  return (t = Object.create(null), i) => componentClearLocal.matches(i) ? Object.create(null) : componentReplaceLocal.matches(i) && i.payload.type === e ? i.payload.local : t;
 }
 let lF = HY({
   components: lD(PrimaryWorkflowEnum.COMPONENT),
@@ -8038,7 +8038,7 @@ let lM = HY({
   componentsByLibraryKey: lO(PrimaryWorkflowEnum.COMPONENT),
   stateGroupsByLibraryKey: lO(PrimaryWorkflowEnum.STATE_GROUP),
   libraryKeys(e = [], t) {
-    return _$$lx.matches(t) ? t.payload.libraryKeys : e;
+    return defaultLibraryInitializeLibraryKeys.matches(t) ? t.payload.libraryKeys : e;
   }
 });
 let lj = HY({
@@ -8047,8 +8047,8 @@ let lj = HY({
   stateGroups: lL(PrimaryWorkflowEnum.STATE_GROUP),
   modules: lL(PrimaryWorkflowEnum.MODULE),
   thumbnails: (e = {}, t) => {
-    if (HV.matches(t)) return {};
-    if (xp.matches(t)) {
+    if (componentClearLocal.matches(t)) return {};
+    if (replaceLocalThumbnails.matches(t)) {
       let i = t.payload.thumbnails;
       for (let t in e) {
         let n = e[t];
@@ -8056,7 +8056,7 @@ let lj = HY({
       }
       return i;
     }
-    return _$$us2.matches(t) ? {
+    return addThumbnailForDanglingStyle.matches(t) ? {
       ...e,
       [t.payload.styleID]: {
         kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
@@ -8076,43 +8076,43 @@ let lU = HY({
     unnaturalKeyToNaturalKey: {},
     destinationStyleKeyToLegacySourceStyle: {}
   }, t) {
-    if (_$$ow.matches(t)) {
+    if (replaceUsedLivegraphStyles.matches(t)) {
       return {
         ...e,
         styles: t.payload
       };
     }
-    if (KQ.matches(t)) {
+    if (replaceUsedLivegraphSourceAssetKeyToDestinationKey.matches(t)) {
       return {
         ...e,
         sourceAssetKeyToDestinationKey: t.payload
       };
     }
-    if (WE.matches(t)) {
+    if (replaceUsedLivegraphLocalNodeIdToDestinationKey.matches(t)) {
       return {
         ...e,
         localNodeIdToDestinationKey: t.payload
       };
     }
-    if (U$.matches(t)) {
+    if (replaceUsedLivegraphLocalNodeIdToDestinationFileName.matches(t)) {
       return {
         ...e,
         localNodeIdToDestinationFileName: t.payload
       };
     }
-    if (UA.matches(t)) {
+    if (replaceUsedLivegraphSourceAssetKeyToFileName.matches(t)) {
       return {
         ...e,
         sourceAssetKeyToFileName: t.payload
       };
     }
-    if (Cp.matches(t)) {
+    if (replaceUsedLivegraphUnnaturalKeyToNaturalKey.matches(t)) {
       return {
         ...e,
         unnaturalKeyToNaturalKey: t.payload
       };
     }
-    if (Ty.matches(t)) {
+    if (replaceUsedLivegraphDestinationAssetKeyToLegacySourceAsset.matches(t)) {
       return {
         ...e,
         destinationStyleKeyToLegacySourceStyle: t.payload
@@ -8129,7 +8129,7 @@ let lU = HY({
     variables: {},
     modules: {}
   }, t) {
-    return B2.matches(t) ? t.payload : e;
+    return componentReplaceOpenFilePublishedLivegraph.matches(t) ? t.payload : e;
   },
   openHubFilePublished__LIVEGRAPH: jz.reducer,
   local: lj,
@@ -8142,7 +8142,7 @@ let lU = HY({
     versionForTracking: 2,
     entryPoint: void 0
   }, t) {
-    if (ku.matches(t)) {
+    if (setAssetsSearchQuery.matches(t)) {
       let i = t.payload.query.substring(0, 280);
       let n = t.payload.searchOptions;
       return {
@@ -8156,7 +8156,7 @@ let lU = HY({
         entryPoint: t.payload.entryPoint || void 0
       };
     }
-    if (gP.matches(t)) {
+    if (setAssetsSearchOptions.matches(t)) {
       let i = t.payload.searchOptions;
       return e.searchOptions !== i && _$$eu(i) ? {
         ...e,
@@ -8164,17 +8164,17 @@ let lU = HY({
         searchOptions: i
       } : e;
     }
-    return xI.matches(t) ? {
+    return setAssetsSearchNoResults.matches(t) ? {
       ...e,
       isLoading: !1,
       normalizedSearchResults: [],
       unsubscribedSearchResults: []
-    } : Y1.matches(t) ? {
+    } : setAssetsSearchResults.matches(t) ? {
       ...e,
       isLoading: !1,
       normalizedSearchResults: t.payload.normalizedSearchResults,
       unsubscribedSearchResults: t.payload.unsubscribedSearchResults
-    } : _$$cr.matches(t) ? {
+    } : setShouldSearchDefaultLibraries.matches(t) ? {
       ...e,
       shouldSearchDefaultLibraries: t.payload.shouldSearchDefaultLibraries
     } : e;
@@ -8192,17 +8192,17 @@ let lU = HY({
     } : _$$df.matches(t) ? t.payload : e;
   },
   isRenamingSelectedStyle(e = !1, t) {
-    return _$$ay.matches(t) ? t.payload.isRenaming : e;
+    return setIsRenamingSelectedStyle.matches(t) ? t.payload.isRenaming : e;
   },
   localStyleSelection(e = null, t) {
-    return Bn.matches(t) ? t.payload : e;
+    return setLocalStyleSelection.matches(t) ? t.payload : e;
   },
   defaultPublished: lM,
-  libraryUpdatesBannerDismissed: (e = !1, t) => JV.matches(t) ? t.payload.libraryUpdatesBannerDismissed : e,
+  libraryUpdatesBannerDismissed: (e = !1, t) => setLibraryUpdatesBannerDismissed.matches(t) ? t.payload.libraryUpdatesBannerDismissed : e,
   movedLibraryItems: (e = {
     subscribed: {},
     local: {}
-  }, t) => _$$dC.matches(t) ? {
+  }, t) => putMoveLibraryItemKeyMappings.matches(t) ? {
     subscribed: {
       ...e.subscribed,
       ...t.payload.subscribedOldKeyToNewKey

@@ -14,7 +14,7 @@ import { liveStoreInstance, IT } from "../905/713695";
 import { MH } from "../figma_app/803787";
 import { Th, WH } from "../figma_app/645694";
 import { selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
-import { aD } from "../figma_app/141508";
+import { subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
 import { Q } from "../905/577205";
 import { zV, Af, mO } from "../figma_app/410317";
 import { HX, zi } from "../figma_app/97042";
@@ -66,7 +66,7 @@ function A(e, t, r) {
 function x(e, t) {
   let r = useAtomWithSubscription(openFileLibraryKeyAtom);
   let a = useSceneGraphSelector();
-  let l = useSelector(aD);
+  let l = useSelector(subscribedSymbolsOnCurrentPageSelector);
   let d = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);
   let c = function (e) {
     let t = useSelector(MH);
@@ -107,7 +107,7 @@ export function $$N3() {
   let e = useAtomWithSubscription(openFileLibraryKeyAtom);
   let t = useSceneGraphSelector();
   let r = useSelector(e => e.mirror.appModel.currentPage);
-  let l = useSelector(aD);
+  let l = useSelector(subscribedSymbolsOnCurrentPageSelector);
   let d = useSelector(Th);
   let c = useSelector(WH);
   let h = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);

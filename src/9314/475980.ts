@@ -25,13 +25,13 @@ import { ButtonPrimitive } from '../905/632989';
 import { localStorageRef } from '../905/657224';
 import { e as _$$e3 } from '../905/678389';
 import { compareLibraryItemsAlias } from '../905/709171';
-import { GT } from '../905/711212';
-import { _f } from '../905/760682';
+import { updateAllStyleThumbnailsOptimist } from '../905/711212';
+import { areSetsEqual } from '../905/760682';
 import { zi } from '../905/824449';
 import { vL } from '../905/826900';
 import { Um } from '../905/848862';
 import { n3, VariableStyleId } from '../905/859698';
-import { ay, Bn } from '../905/879323';
+import { setIsRenamingSelectedStyle, setLocalStyleSelection } from '../905/879323';
 import { A as _$$A } from '../905/891805';
 import { debounce } from '../905/915765';
 import { showDropdownThunk, hideDropdownAction } from '../905/929976';
@@ -941,7 +941,7 @@ function eY({
   let B = y === LayoutTabType.GRADIENT || y === LayoutTabType.RASTER || m === DesignGraphElements.DROPPER_COLOR;
   useEffect(() => {
     let e = () => {
-      !B && (a(Bn(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
+      !B && (a(setLocalStyleSelection(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
     };
     let t = ft();
     t ? window.addEventListener('pointerdown', e) : window.addEventListener('mousedown', e);
@@ -972,7 +972,7 @@ function eY({
   let K = useCallback(e => {
     debug(e.content_hash != null, 'style does not have a hash');
     Fullscreen.selectStyleByGuid(e.node_id);
-    a(ay({
+    a(setIsRenamingSelectedStyle({
       isRenaming: !1
     }));
     trackEventAnalytics('Style Inspected', {
@@ -989,7 +989,7 @@ function eY({
   }, []);
   let O = useCallback(e => {
     if (!e) {
-      a(Bn(null));
+      a(setLocalStyleSelection(null));
       return;
     }
     let t = new Set();
@@ -1004,7 +1004,7 @@ function eY({
       folderNames: e.folderNames,
       styleIds: t
     };
-    a(Bn(l));
+    a(setLocalStyleSelection(l));
   }, [a, g]);
   let $ = useCallback((e, t, l) => {
     if (!h) return;
@@ -1139,7 +1139,7 @@ function ez({
   let [Q, J] = useState(null);
   let [ee, et] = useState(null);
   let el = useMemo(() => debounce(() => {
-    z(GT({
+    z(updateAllStyleThumbnailsOptimist({
       styleType: e
     }));
   }, 200), [z, e]);
@@ -1148,7 +1148,7 @@ function ez({
   }, [el, l]);
   let es = useLatestRef(X);
   useEffect(() => {
-    if (!es || !localStorageRef || !U || _f(es, X)) return;
+    if (!es || !localStorageRef || !U || areSetsEqual(es, X)) return;
     let t = JSON.parse(localStorageRef.getItem(e$) || '{}');
     let l = t[U.key];
     l && (l[e] = [...X], localStorageRef.setItem(e$, JSON.stringify(t)));

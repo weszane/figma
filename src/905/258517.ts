@@ -15,7 +15,7 @@ import { N } from '../905/945673';
 import { atomStoreManager } from '../figma_app/27355';
 import { isDevEnvironment } from '../figma_app/169182';
 import { Rf } from '../figma_app/546509';
-import { $G, S as _$$S, Ad, ai, f1, kJ, s$ } from '../figma_app/553184';
+import { $G, sendConsecutiveImageChangeSkips, memoryPerformanceKeys, contextLostHandler, sendDirtyAfterLoad, contextRestoredHandler, postPerfMetric } from '../figma_app/553184';
 import { Cd, Cr, E7, JA, kq, P2, sl, w4, wl, Zp } from '../figma_app/682945';
 import { DocumentSaveEvent, Multiplayer } from '../figma_app/763686';
 let A = [];
@@ -60,10 +60,10 @@ export let $$w0 = new class {
     return logCustom(e, t, i, n, r, a, s);
   }
   reportContextLost() {
-    ai();
+    contextLostHandler();
   }
   reportContextRestored() {
-    kJ();
+    contextRestoredHandler();
     JA();
   }
   reportRenderLayerCount(e) {
@@ -150,25 +150,25 @@ export let $$w0 = new class {
       registersDump: Multiplayer?.pendingRegistersDump(t).substring(0, 1e4),
       sessionID: e
     });
-    f1();
+    sendDirtyAfterLoad();
   }
   reportConsecutiveFlushes() {
     $G();
   }
   reportConsecutiveImageChangeSkips() {
-    _$$S();
+    sendConsecutiveImageChangeSkips();
   }
   reportPerfEvent(e) {
     switch (e) {
       case DocumentSaveEvent.AFTER_FIRST_RENDER:
-        s$('AFTER_FIRST_RENDER');
+        postPerfMetric('AFTER_FIRST_RENDER');
         fullscreenPerfManager.start('AFTER_FIRST_RENDER');
         break;
       case DocumentSaveEvent.DOCUMENT_STARTED_SAVING:
-        s$('DOCUMENT_STARTED_SAVING');
+        postPerfMetric('DOCUMENT_STARTED_SAVING');
         break;
       case DocumentSaveEvent.DOCUMENT_FINISHED_SAVING:
-        s$('DOCUMENT_FINISHED_SAVING');
+        postPerfMetric('DOCUMENT_FINISHED_SAVING');
     }
   }
   reportContextRestore() {
@@ -266,7 +266,7 @@ export let $$w0 = new class {
     return globalPerfTimer.report().get(e)?.get(t) || null;
   }
   logNumericMetric(e, t) {
-    for (let i of Ad) {
+    for (let i of memoryPerformanceKeys) {
       if (e.startsWith(i)) {
         sendHistogram(e, t);
         break;

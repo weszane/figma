@@ -6,7 +6,7 @@ import { A as _$$A } from "../905/251970";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { JV } from "../905/879323";
+import { setLibraryUpdatesBannerDismissed } from "../905/879323";
 import { eS, aD } from "../figma_app/646357";
 import { cb, WE } from "../figma_app/745458";
 import { KindEnum } from "../905/129884";
@@ -39,7 +39,7 @@ export function $$A0(e) {
         className: "library_updates_banner--libraryUpdatesBannerActionsXIcon--TbBLj",
         children: jsx(IconButton, {
           onClick: () => {
-            t(JV({
+            t(setLibraryUpdatesBannerDismissed({
               libraryUpdatesBannerDismissed: !0
             }));
           },

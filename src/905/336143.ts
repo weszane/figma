@@ -7,12 +7,12 @@ import { qp } from "../905/977779";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useFileLibraryKeys } from "../figma_app/516028";
 import { cU } from "../figma_app/646357";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { liveStoreInstance } from "../905/713695";
-import { e6 } from "../905/404538";
+import { EverPublishedLibraryQuery } from "../905/404538";
 import { createSelector } from "../vendor/925040";
 import { selectSceneGraph } from "../figma_app/889655";
-import { C9, jf, MH } from "../figma_app/141508";
+import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector, allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { D } from "../905/347702";
 let f = createSelector([e => e.library.used__LIVEGRAPH], e => Object.values(e.styles));
 let _ = createSelector([f], e => {
@@ -25,16 +25,16 @@ let $$I1 = D(() => {
   let e = useDispatch();
   let [t, i] = useState(null);
   let g = useSelector(selectSceneGraph);
-  let f = useSelector(C9);
-  let b = useSelector(jf);
+  let f = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
+  let b = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
   let v = selectCurrentFile();
-  let I = LH();
+  let I = getParentOrgId();
   let E = useMemo(() => {
     let e = new Set();
     for (let t of [...f, ...b].map(g.get)) t && !t.isState && t.sourceLibraryKey && t.sourceLibraryKey !== v?.libraryKey && e.add(t.sourceLibraryKey);
     return Array.from(e);
   }, [g, f, b, v]);
-  let x = useSelector(MH);
+  let x = useSelector(allSubscribedStylesNodeIdsFromLoadedPagesSelector);
   let S = useSelector(e => e.fileVersion);
   let w = useAtomWithSubscription(qp);
   let C = useFileLibraryKeys();
@@ -42,7 +42,7 @@ let $$I1 = D(() => {
   let k = useSelector(_);
   let R = useHasResourcePresetKey();
   useEffect(() => {
-    x !== T && Promise.all([cU(g, x, k, w, I, C, e), liveStoreInstance.fetch(e6.EverPublishedLibraryQuery({
+    x !== T && Promise.all([cU(g, x, k, w, I, C, e), liveStoreInstance.fetch(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
       libraryKeys: E
     }))]).then(([{
       usedStylesByLibraryKey: e

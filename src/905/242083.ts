@@ -160,7 +160,7 @@ import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
 import { X as _$$X } from '../905/701807';
 import { y as _$$y } from '../905/705736';
-import { T1 } from '../905/711212';
+import { replaceThumbnailsOptimist } from '../905/711212';
 import { FR } from '../905/714160';
 import { logDebug, logInfo, logError, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
@@ -205,7 +205,7 @@ import { n3 as _$$n, F7, Rf } from '../905/859698';
 import { FDocumentType, isSupportedBlockType, ITemplateType } from '../905/862883';
 import { parseSessionLocalID, defaultSessionLocalIDString } from '../905/871411';
 import { B as _$$B5 } from '../905/872019';
-import { Bn } from '../905/879323';
+import { setLocalStyleSelection } from '../905/879323';
 import { generateUUIDv4 } from '../905/871474';
 import { Db } from '../905/881862';
 import { g5, Iz, uM, wv } from '../905/888175';
@@ -364,7 +364,7 @@ import { c3 as _$$c7, ZI } from '../figma_app/553940';
 import { Ds, vS } from '../figma_app/557318';
 import { $Z, Cf } from '../figma_app/559491';
 import { B as _$$B4 } from '../figma_app/560453';
-import { Kt } from '../figma_app/562352';
+import { singletonAsync } from '../figma_app/562352';
 import { be, k6 } from '../figma_app/565197';
 import { O as _$$O } from '../figma_app/568977';
 import { wy } from '../figma_app/578011';
@@ -378,7 +378,7 @@ import { _b as _$$_b, uP } from '../figma_app/618665';
 import { getColorSpaceSupportStatus } from '../figma_app/622881';
 import { copyTextToClipboard, copyTextWithPlainFallback } from '../figma_app/623293';
 import { hasNotLoaded } from '../figma_app/623300';
-import { Mj } from '../figma_app/624361';
+import { batchDownloadImages } from '../figma_app/624361';
 import { Id, JU } from '../figma_app/626177';
 import { JT, zw } from '../figma_app/632248';
 import { SubscriptionStatusEnum, LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum } from '../figma_app/633080';
@@ -2705,7 +2705,7 @@ async function aE(e, t, i) {
   }
   let o = new e();
   let l = new Set(ImageCppBindings?.findImagesUnder(a, ['0:0'], ImageExportType.NON_ANIMATED_ONLY));
-  let [d, c] = await Promise.all([l.size ? Mj([...l], {
+  let [d, c] = await Promise.all([l.size ? batchDownloadImages([...l], {
     type: 'figFile',
     fileKey: t.key
   }) : Promise.resolve({
@@ -5302,7 +5302,7 @@ let lX = class e extends sP(sN(sR)) {
     };
     this._memorySpikeOnFileLoadBytes = 0;
     this.fileArrayToString = null;
-    this.loadAndStartFullscreenIfNecessary = Kt(async () => {
+    this.loadAndStartFullscreenIfNecessary = singletonAsync(async () => {
       let t = isInteractionPathCheck();
       if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
         this._isDesktopAppRunning = e;
@@ -7533,7 +7533,7 @@ let lX = class e extends sP(sN(sR)) {
     if (i && !isEffectOrGrid(i.style_type)) {
       let n = createObjectUrlFromBuffer(t);
       let r = i.meta && i.meta.style_thumbnail;
-      this.dispatch(T1({
+      this.dispatch(replaceThumbnailsOptimist({
         styleKind: SubscriptionStatusEnum.LOCAL,
         thumbnails: [{
           nodeId: e,
@@ -8041,7 +8041,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   selectLocalStyles(e) {
     let t = new Set(e.map(e => this._store.getState().mirror.sceneGraph.get(e)?.styleType).filter(e => !!e));
-    t.size === 1 && this.dispatch(Bn({
+    t.size === 1 && this.dispatch(setLocalStyleSelection({
       type: Array.from(t.values())[0],
       styleIds: new Set(e),
       folderNames: new Set()

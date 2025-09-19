@@ -5,8 +5,8 @@ import { handleResourceQuery, communityLibraryComponentsQuery, pageLoadAtom, non
 import { useDispatch, useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { useLatestRef } from "../figma_app/922077";
-import { uo, yH } from "../905/879323";
-import { n1 } from "../figma_app/657017";
+import { componentBatchUpdate, componentDelete } from "../905/879323";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { mapStateGroupProperties, mapComponentProperties } from "../figma_app/349248";
 import { NO_TEAM, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { hubFileAndPresetKeysSetAtom } from "../905/72677";
@@ -27,7 +27,7 @@ export function $$f0() {
     } = useSelector(e => e.library.publishedByLibraryKey);
     let a = useAtomWithSubscription(g);
     let s = useLatestRef(a);
-    let h = n1();
+    let h = useFigmaLibrariesEnabled();
     useEffect(() => {
       if (h && s !== a && a.data) for (let n of a.data) {
         if ("loaded" !== n.result.status) continue;
@@ -55,15 +55,15 @@ export function $$f0() {
         let f = u.map(e => e.key);
         let _ = o ? Object.values(o).filter(e => !g.includes(e.component_key)) : [];
         let A = d ? Object.values(d).filter(e => !f.includes(e.key)) : [];
-        e(uo({
+        e(componentBatchUpdate({
           items: u,
           type: PrimaryWorkflowEnum.STATE_GROUP
         }));
-        e(uo({
+        e(componentBatchUpdate({
           items: h,
           type: PrimaryWorkflowEnum.COMPONENT
         }));
-        e(yH({
+        e(componentDelete({
           nodeIds: _.map(e => e.node_id),
           file: {
             key: a,
@@ -71,7 +71,7 @@ export function $$f0() {
           },
           type: PrimaryWorkflowEnum.COMPONENT
         }));
-        e(yH({
+        e(componentDelete({
           nodeIds: A.map(e => e.node_id),
           file: {
             key: a,

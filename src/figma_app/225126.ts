@@ -4,7 +4,7 @@ import { convertStringToKiwi } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { calculateColorDifference } from "../figma_app/191804";
 import { fetchDynamicConfig } from "../figma_app/594947";
-import { RI } from "../905/711212";
+import { fetchVariableSetThumbnails } from "../905/711212";
 import { n as _$$n } from "../905/347702";
 import { y as _$$y } from "../905/456837";
 import { Cg, wp, dg, qg, A7 } from "../905/491994";
@@ -177,7 +177,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
 });
 let $$N5 = _$$n(e => setTimeout(() => {
   e.filter(e => "LIBRARY" === e.subscriptionStatus).forEach(e => {
-    RI(e);
+    fetchVariableSetThumbnails(e);
   });
 }, 500));
 export const JC = $$A0;

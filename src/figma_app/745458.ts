@@ -21,7 +21,7 @@ import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { aR, BE, uB, tp, J8 } from "../905/128313";
 import { Ls, m3, ZA, a3, gJ } from "../figma_app/645694";
 import { selectLocalStylesWithUsagesOnLoadedPages, selectLocalSymbolsWithUsagesOnLoadedPages, selectLocalStylesWithUsagesOnCurrentPage, selectSceneGraph, selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
-import { _Q, m0, v3, jU, Du, tY, S_, aD as _$$aD } from "../figma_app/141508";
+import { directlySubscribedStylesFromLoadedPagesSelector, subscribedSymbolsFromLoadedPagesSelector, subscribedVariablesFromLoadedPagesSelector, subscribedVariableSetsFromLoadedPagesSelector, subscribedVariableSetsByIdFromLoadedPagesSelector, directlySubscribedStylesUniqueKeysOnCurrentPageSelector, subscribedSymbolsByKeyFromLoadedPagesSelector, subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
 import { PX, wi } from "../905/55146";
 var d = l;
 function w(e) {
@@ -69,22 +69,22 @@ let R = createSelector([PX, e => e.library.used__LIVEGRAPH.destinationStyleKeyTo
   };
   return e;
 }, Object.create(null)));
-let L = createSelector([_Q, selectLocalStylesWithUsagesOnLoadedPages, aR, BE, R], O);
-let P = createSelector([m0, selectLocalSymbolsWithUsagesOnLoadedPages, aR, BE], O);
-let D = createSelector([v3], e => Object.values(e).reduce((e, t) => {
+let L = createSelector([directlySubscribedStylesFromLoadedPagesSelector, selectLocalStylesWithUsagesOnLoadedPages, aR, BE, R], O);
+let P = createSelector([subscribedSymbolsFromLoadedPagesSelector, selectLocalSymbolsWithUsagesOnLoadedPages, aR, BE], O);
+let D = createSelector([subscribedVariablesFromLoadedPagesSelector], e => Object.values(e).reduce((e, t) => {
   let r = e.get(t.key);
   r || (r = new Set(), e.set(t.key, r));
   t.pageIds.forEach(e => r.add(e));
   return e;
 }, new Map()));
-let k = createSelector([v3], e => e.reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
-let M = createSelector([jU], e => e.reduce((e, t) => {
+let k = createSelector([subscribedVariablesFromLoadedPagesSelector], e => e.reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
+let M = createSelector([subscribedVariableSetsFromLoadedPagesSelector], e => e.reduce((e, t) => {
   let r = e.get(t.key);
   r || (r = new Set(), e.set(t.key, r));
   t.pageIds.forEach(e => r.add(e));
   return e;
 }, new Map()));
-let F = createSelector([Du], e => Object.values(e).reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
+let F = createSelector([subscribedVariableSetsByIdFromLoadedPagesSelector], e => Object.values(e).reduce((e, t) => (e.has(t.key) || e.set(t.key, new Set()), e.get(t.key)?.add(t), e), new Map()));
 function j(e, t, r) {
   if (0 === e.size) return !1;
   if (1 === e.size) {
@@ -133,7 +133,7 @@ function B({
   }
   return s;
 }
-let G = createSelector([wi, L, getSelectedFile, uB, tp, J8, tY, selectLocalStylesWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
+let G = createSelector([wi, L, getSelectedFile, uB, tp, J8, directlySubscribedStylesUniqueKeysOnCurrentPageSelector, selectLocalStylesWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = [];
   let c = !1;
@@ -173,7 +173,7 @@ let V = createDeepEqualSelector([Ls, P], (e, t) => {
   let n = Object.keys(e);
   return d()(r, n);
 });
-let $$H14 = createSelector([V, m3, S_, selectSceneGraph], (e, t, r, n) => {
+let $$H14 = createSelector([V, m3, subscribedSymbolsByKeyFromLoadedPagesSelector, selectSceneGraph], (e, t, r, n) => {
   let i = new Map();
   for (let a of e) {
     let e = r[a];
@@ -187,7 +187,7 @@ let $$H14 = createSelector([V, m3, S_, selectSceneGraph], (e, t, r, n) => {
   }
   return i;
 });
-let $$z10 = createSelector([Ls, ZA, P, getSelectedFile, uB, tp, _$$aD, selectLocalSymbolsWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
+let $$z10 = createSelector([Ls, ZA, P, getSelectedFile, uB, tp, subscribedSymbolsOnCurrentPageSelector, selectLocalSymbolsWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = !1;
   let c = new Set(s.map(e => e.key));

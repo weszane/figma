@@ -11,7 +11,7 @@ import { useSubscription, useSubscriptionAnalytics } from "../figma_app/288654";
 import { gB, getResourceDataOrFallback } from "../905/723791";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { yy } from "../figma_app/543529";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { matchesLibraryKey } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
 import { LibraryPresetSubscriptionsV2, SubscribedLibrariesForFile, SubscribedLibrariesForFigJamFile, SubscribedLibrariesForSlidesFile, SubscribedLibrariesForBuzzFile } from "../figma_app/43951";
@@ -247,7 +247,7 @@ export function $$D0({
     }
   }, [w, R, L, P, D]);
   let j = function (e, t, r) {
-    let n = n1();
+    let n = useFigmaLibrariesEnabled();
     let a = yy()?.id;
     let s = useCurrentPublicPlan("useTransformSubscription");
     let o = useIsProOrStudentPlan(s).unwrapOr(!1);

@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { Ze } from "../figma_app/540726";
-import { UD, Jr } from "../figma_app/624361";
+import { processImageWithThumbnail, getImageManager } from "../figma_app/624361";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { createNoOpValidator } from "../figma_app/181241";
@@ -184,10 +184,10 @@ export function $$S1() {
           if (!e?.root) throw Error("No DOM data received from preview iframe");
           let t = E[mode];
           let n = await t(e, getSingletonSceneGraph(), {
-            decodeImage: UD
+            decodeImage: processImageWithThumbnail
           });
           await new Promise(e => requestAnimationFrame(() => requestAnimationFrame(e)));
-          await Jr().imageUploadPromise();
+          await getImageManager().imageUploadPromise();
           permissionScopeHandler(zk.SYSTEM, "copy-frame-to-clipboard", () => {
             clearSelection();
             addToSelection([n.guid]);

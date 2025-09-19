@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useDebounce } from 'use-debounce';
 import { selectWithShallowEqual } from "../905/103090";
 import { zK } from "../figma_app/913823";
-import { cr } from "../905/879323";
+import { setShouldSearchDefaultLibraries } from "../905/879323";
 import { ts, zo, gR } from "../figma_app/120210";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isNullOrFailure } from "../905/18797";
@@ -225,7 +225,7 @@ export function $$F0() {
   let $ = useRef(null);
   let G = useRef(null);
   useEffect(() => {
-    R(cr({
+    R(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !0
     }));
   }, [R]);

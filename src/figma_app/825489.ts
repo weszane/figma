@@ -5,7 +5,7 @@ import s from "../vendor/239910";
 import { Xm } from "../905/723791";
 import { yZ } from "../figma_app/476572";
 import { canAdminPublish } from "../figma_app/275462";
-import { JB } from "../figma_app/657017";
+import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
 import { hasRootPath } from "../figma_app/528509";
 import { J } from "../905/9585";
@@ -34,7 +34,7 @@ let $$x0 = atom(e => {
     orgId: r,
     group: getProviderConfigType() ?? null
   }));
-  let s = e(JB);
+  let s = e(figmaLibrariesEnabledAtom);
   let o = e(currentTeamAtom);
   let d = hasTeamPaidAccess(o);
   return gM(a, n, i, s, r, d);

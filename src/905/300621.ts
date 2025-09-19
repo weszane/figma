@@ -35,7 +35,7 @@ import { A as _$$A } from "../svg/562176";
 import { Tn } from "../figma_app/933328";
 import { useCurrentUserOrgId } from "../905/845253";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { Z as _$$Z } from "../905/939602";
+import { librariesAPI } from "../905/939602";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -133,7 +133,7 @@ function H() {
   return useMemo(() => i.data?.library_thumbnail_by_library_key ?? {}, [i]);
 }
 let W = liveStoreInstance.Query({
-  fetch: async e => (await _$$Z.getDefaultLibraries({
+  fetch: async e => (await librariesAPI.getDefaultLibraries({
     editorType: e
   })).data.meta,
   key: "figjamDefaultLibraries"

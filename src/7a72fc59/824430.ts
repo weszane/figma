@@ -426,7 +426,7 @@ import { $z, e6 as _$$e3, Me } from '../figma_app/617427';
 import { i as _$$i4 } from '../figma_app/622160';
 import { li as _$$li, Gi, O$, RD, wv } from '../figma_app/622574';
 import { getColorSpaceString } from '../figma_app/622881';
-import { UD } from '../figma_app/624361';
+import { processImageWithThumbnail } from '../figma_app/624361';
 import { fI } from '../figma_app/626177';
 import { UG, Wc } from '../figma_app/628987';
 import { JT } from '../figma_app/632248';
@@ -12135,7 +12135,7 @@ async function xE(e, t, n, l) {
     let i = await fetch(e);
     let c = await i.arrayBuffer();
     let x = new Uint8Array(c);
-    let p = await UD(x, 'image/png', t);
+    let p = await processImageWithThumbnail(x, 'image/png', t);
     _$$l2.user('insert-unsplash-photo', () => {
       if (s) {
         o.forEach(e => function (e, t) {

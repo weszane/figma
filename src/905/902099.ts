@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { U_ } from "../905/327855";
 import { FEditorType } from "../figma_app/53721";
 import { bT } from "../905/163189";
@@ -84,7 +84,7 @@ export async function $$y1(e, t, i, o) {
   }
   let E = Fullscreen.getScene();
   images.forEach(e => {
-    Jr().forgetImage(e.sha1Hash);
+    getImageManager().forgetImage(e.sha1Hash);
   });
   return {
     file: {

@@ -10,7 +10,7 @@ import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { wS } from "../figma_app/221240";
 import { teamLibraryCache } from "../figma_app/80990";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { k } from "../figma_app/449815";
 import { Pv } from "../905/619652";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -172,7 +172,7 @@ export function $$T1({
         assetKey: u2(t)
       });
       onResetTracker();
-      Jr().loadAllImagesUnder(["0:0"], ImageExportType.NON_ANIMATED_ONLY, "playground.initialLoad", (e, t) => {
+      getImageManager().loadAllImagesUnder(["0:0"], ImageExportType.NON_ANIMATED_ONLY, "playground.initialLoad", (e, t) => {
         onSetPercentImagesLoaded((t - e) / t);
       }, Fullscreen.getPlaygroundScene());
       return;

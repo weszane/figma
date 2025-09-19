@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { C } from "../905/991119";
 import { fileApiHandler } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
-import { xY } from "../figma_app/624361";
+import { ImageManager } from "../figma_app/624361";
 import { thumbnailGenerator } from "../905/435722";
 var p = (e => (e.FILE_KEY = "fileKey", e.LIBRARY_KEY = "libraryKey", e))(p || {});
 class _ {
@@ -54,7 +54,7 @@ class _ {
             let {
               success,
               failed
-            } = xY.parseFileUpdateResponseForImages(d, e);
+            } = ImageManager.parseFileUpdateResponseForImages(d, e);
             for (let e of (VideoCppBindings.markVideoPermissionsCopied(success), failed)) VideoCppBindings.videoIsMissing(e);
             for (let e of d) delete this.pendingPasteRequests[e];
             "fileKey" === a.type ? r[a.fileKey].resolve() : n[a.libraryKey].resolve();

@@ -147,7 +147,7 @@ function E(e, r) {
   }
 }
 exports.EXPRESSIONS_PRECEDENCE = b;
-var A = {
+var ImageDownloadQueue = {
   Program: function (e, r) {
     var n = r.indent.repeat(r.indentLevel);
     var i = r.lineEnd;
@@ -612,9 +612,9 @@ var A = {
     r.write("/".concat(n.pattern, "/").concat(n.flags), e);
   }
 };
-exports.GENERATOR = A;
+exports.GENERATOR = ImageDownloadQueue;
 var C = {};
-var T = A;
+var T = ImageDownloadQueue;
 exports.baseGenerator = T;
 var I = function () {
   function e(r) {
@@ -622,7 +622,7 @@ var I = function () {
     var i = r;
     this.output = "";
     null != i.output ? (this.output = i.output, this.write = this.writeToStream) : this.output = "";
-    this.generator = null != i.generator ? i.generator : A;
+    this.generator = null != i.generator ? i.generator : ImageDownloadQueue;
     this.expressionsPrecedence = null != i.expressionsPrecedence ? i.expressionsPrecedence : b;
     this.indent = null != i.indent ? i.indent : "  ";
     this.lineEnd = null != i.lineEnd ? i.lineEnd : "\n";

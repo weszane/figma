@@ -17,7 +17,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { VQ, Dc as _$$Dc, hf, Mt } from "../905/445022";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { fullscreenPerfManager } from "../905/125218";
 import { areAllLoaded } from "../figma_app/623300";
 import { h as _$$h } from "../905/44234";
@@ -339,7 +339,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     attemptId: f,
     reason: l
   });
-  await Jr().loadAllImagesUnder(o, E, l, R);
+  await getImageManager().loadAllImagesUnder(o, E, l, R);
   getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "finished",
     attemptId: f,

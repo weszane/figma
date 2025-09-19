@@ -10,7 +10,7 @@ import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { getSelectedFile } from "../905/766303";
 import { Fl } from "../figma_app/236178";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
@@ -41,7 +41,7 @@ export function $$F0({
   onRemapLibraryClick: j,
   bodyOnly: U
 }) {
-  let B = n1();
+  let B = useFigmaLibrariesEnabled();
   let V = _$$er();
   let G = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: e
@@ -73,7 +73,7 @@ export function $$F0({
   let ea = useMemo(() => er(e), [e, er]);
   let es = !!(ea?.design || ea?.figjam);
   let eo = function (e) {
-    let t = n1();
+    let t = useFigmaLibrariesEnabled();
     let i = fi();
     let {
       workspaceApprovedLibraryKeys,

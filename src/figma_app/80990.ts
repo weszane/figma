@@ -28,8 +28,8 @@ export function generateNodeThumbnail(node: any) {
   return createObjectUrlFromBuffer(generateThumbnail(node))
 }
 
-let FAILED_THUMBNAIL = 'FAILED_THUMBNAIL'
-let LOADING_THUMBNAIL = 'LOADING_THUMBNAIL'
+export let FAILED_THUMBNAIL = 'FAILED_THUMBNAIL'
+export let LOADING_THUMBNAIL = 'LOADING_THUMBNAIL'
 
 /**
  * Check if thumbnail is valid
@@ -86,7 +86,7 @@ export function generateThumbnailFromStyleConsumer(node: any, style: any) {
  * @param styleId - The style ID
  * @returns Style thumbnail or invalid object
  */
-export function generateSerializableStyleThumbnail(node: any, styleType: any, styleId: string) {
+export function generateSerializableStyleThumbnail(node: any, styleType: any, styleId?: string) {
   if (!isStyleType(styleType)) {
     return {
       type: 'INVALID',
@@ -130,9 +130,9 @@ export function getFillColor(fill: any) {
   return paint.type !== 'SOLID' || paint.color == null || paint.opacity == null
     ? null
     : {
-      ...paint.color,
-      a: paint.opacity,
-    }
+        ...paint.color,
+        a: paint.opacity,
+      }
 }
 
 /**
@@ -410,7 +410,6 @@ async function processAssetUpsert(asset: any, fileVersion: number, scene: any) {
   try {
     let buffer
     try {
-      // eslint-disable-next-line ts/no-use-before-define
       buffer = await teamLibraryCache.getCanvas({
         canvas_url: (function (assetItem: any, version: number) {
           switch (assetItem.type) {

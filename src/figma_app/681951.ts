@@ -4,7 +4,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Tv } from "../figma_app/311375";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Kx, iy } from "../figma_app/342355";
 import { $w } from "../figma_app/935144";
@@ -55,7 +55,7 @@ function E(e, t, r) {
         includeComponents: !0,
         codeConnectMapping: null,
         codebaseSuggestions: null,
-        loadImageByHash: e => Jr().loadImageByHash(e),
+        loadImageByHash: e => getImageManager().loadImageByHash(e),
         configSettings: iy()
       }).content.map(e => e.text).join("\n\n"));
       desktopAPIInstance?.sendMCPUpdate("resource", {

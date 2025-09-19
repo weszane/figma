@@ -2,10 +2,10 @@ import { useMemo, useRef } from "react";
 import { shallowEqual } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { Bq } from "../905/760682";
-import { Z } from "../905/939602";
+import { areSetsSubset } from "../905/760682";
+import { librariesAPI } from "../905/939602";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { IT, liveStoreInstance } from "../905/713695";
 var $$n0;
 let m = createRemovableAtomFamily(() => atom(null));
@@ -23,10 +23,10 @@ export function $$f1(e, t) {
     let t = useMemo(() => new Set(e), [e]);
     let i = useRef(t);
     let n = i.current;
-    useMemo(() => Bq(t, n), [t, n]) || (i.current = t);
+    useMemo(() => areSetsSubset(t, n), [t, n]) || (i.current = t);
     return useMemo(() => Array.from(n), [n]);
   }(d);
-  let g = LH();
+  let g = getParentOrgId();
   let f = useCurrentFileKey();
   let [_] = IT($$n0.LibrariesByLibraryKeysQuery({
     libraryKeys: t?.revalidateOnMount ? e : m,
@@ -58,7 +58,7 @@ export function $$_2(e, t) {
     orgId: i
   }) => {
     if (0 === e.length) return [];
-    let n = await Z.getLibrariesByLibraryKeys({
+    let n = await librariesAPI.getLibrariesByLibraryKeys({
       libraryKeys: e,
       subscriptionFileKey: t,
       orgId: i

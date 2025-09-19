@@ -3,7 +3,7 @@ import { BackgroundPattern, ImageExportType } from "../figma_app/763686";
 import a from "../vendor/879378";
 import { Point } from "../905/736624";
 import { fullscreenValue } from "../figma_app/455680";
-import { Jr } from "../figma_app/624361";
+import { getImageManager } from "../figma_app/624361";
 import { _G, Pv } from "../905/619652";
 var s = a;
 export function $$u0({
@@ -88,7 +88,7 @@ export function $$h1({
   useEffect(() => {
     if (l) return;
     let t = !0;
-    u && !g && E && Jr().waitForImagesUnder([e], ImageExportType.LOW_RES_ONLY, s).then(() => {
+    u && !g && E && getImageManager().waitForImagesUnder([e], ImageExportType.LOW_RES_ONLY, s).then(() => {
       t && _(!0);
     });
     return () => {
@@ -101,7 +101,7 @@ export function $$h1({
     !p[v] || p[v].version !== a || !p[v].imagesLoaded && g && p[v].hasUnresolvedImages ? (r && (r.abort(), r = null), r = new TaskController({
       priority: "user-visible"
     }), scheduler.postTask(() => {
-      let r = !!u && Jr().unresolvedImagesUnder([e], ImageExportType.LOW_RES_ONLY).length > 0;
+      let r = !!u && getImageManager().unresolvedImagesUnder([e], ImageExportType.LOW_RES_ONLY).length > 0;
       let s = _G(new Point(t, i), e, !0, BackgroundPattern.TRANSPARENT, h);
       if (s && s.pixels && s.pixelSize && s.displaySize) {
         let e = {

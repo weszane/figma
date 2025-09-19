@@ -1,8 +1,8 @@
-import type { TSSceneGraph } from '../figma_app/518682';
 import type { Bindings } from '../905/21872';
+import type { TSSceneGraph } from '../figma_app/518682';
 import { ResponsiveSetMixin } from '../905/26360';
 import { createAnnotationsMixin, createArcDataMixin, createBorderCornerMixin, createCanvasGridMixin, createCooperFrameMixin, createCountMixin, createDecorativeImageMixin, createDraftMixin, createEmptyMixin, createEmptyMixin2, createEmptyMixin3, createEmptyMixin4, createEmptyMixin7, createEmptyMixin9, createEmptyMixin10, createEmptyMixin14, createEmptyMixin16, createEmptyMixin17, createEmptyMixin20, createEmptyMixin22, createEmptyMixin23, createEmptyMixin24, createEmptyMixin26, createEmptyMixin27, createEmptyMixin30, createLayoutMixin, createModuleMixin, createOverlayMixin, createPageMixin, createResponsiveMixin, createStateGroupMixin, createTextMixin, createVisualStylingMixin, createWidgetMixin } from '../905/112832';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { v as _$$v2 } from '../905/219968';
 import { Axis } from '../905/229717';
 import { isSpecialNodeType } from '../905/266460';
@@ -26,7 +26,7 @@ import { AnimationBindings, AppStateTsApi, Confirmation, HandoffBindingsCpp, His
 import { assertNotNullish } from '../figma_app/95419';
 import { BuildStatus, CompiledVectorData_Internal, ComponentPropType, FacetType, ImageFillMode, InteractiveSlideElementFacetTsApiGenerated, MutableCollaborativePlainText, MutableSceneGraph, NodeTsApiGenerated, PrototypeInteractions_Internal, TextData_Internal, TextFacetTsApiGenerated } from '../figma_app/175377';
 import { VariableSetIdCompatHandler } from '../figma_app/243058';
-import { $P } from '../figma_app/276332';
+import { hasStyleKey } from '../figma_app/276332';
 import { SceneGraphNode } from '../figma_app/404307';
 // import { NodeTsApiGenerated } from '../figma_app/763686'
 
@@ -54,7 +54,7 @@ function createMixinNodes() {
   // Decorative image base (e)
   let DecorativeImageBase = SceneGraphNode;
   // Decorative image (t)
-  class DecorativeImage extends createDecorativeImageMixin(DecorativeImageBase) { }
+  class DecorativeImage extends createDecorativeImageMixin(DecorativeImageBase) {}
   ;
   // Annotation support (i)
   class AnnotatedNode extends createAnnotationsMixin(DecorativeImage) {
@@ -289,7 +289,7 @@ function createMixinNodes() {
   }
   ;
   // Canvas grid node (f)
-  class CanvasGridNode extends createCanvasGridMixin(PageNode) { }
+  class CanvasGridNode extends createCanvasGridMixin(PageNode) {}
   ;
   // State group node (F)
   class StateGroupNode extends createStateGroupMixin(CanvasGridNode) {
@@ -806,7 +806,7 @@ function createMixinNodes() {
   }
   ;
   // Count node (er)
-  class CountNode extends createCountMixin(PluginDataNode) { }
+  class CountNode extends createCountMixin(PluginDataNode) {}
   ;
   // Overlay node (ea)
   class OverlayNode extends createOverlayMixin(CountNode) {
@@ -3623,7 +3623,7 @@ export class SceneNode extends createMixinNodes() {
   setDakotaItemDatas(e, t, i) {
     this.setGlobalNodeID();
     let n = this.bindings.NodeTsApi.setDakotaItemDatas(e, this.sceneGraph.nodeContext);
-    n && logMessage(_$$e.CMS, new Error('Error: failed setDakotaItemDatas'), {
+    n && logMessage(ServiceCategories.CMS, new Error('Error: failed setDakotaItemDatas'), {
       extra: {
         error: n,
         nodeId: t,
@@ -3704,15 +3704,15 @@ export class SceneNode extends createMixinNodes() {
   getInheritedStyleKey(e) {
     this.setGlobalNodeID();
     let t = this.bindings.NodeTsApi.getInheritedStyle(e);
-    return t && $P(t) ? t : null;
+    return t && hasStyleKey(t) ? t : null;
   }
   getInheritedStyleKeyOrMixed(e) {
     this.setGlobalNodeID();
     let t = this.bindings.NodeTsApi.getRangeInheritedStyle(0, -1, e, this.sceneGraph.nodeContext) ?? null;
-    return t === 'mixed' ? 'mixed' : $P(t) ? t : null;
+    return t === 'mixed' ? 'mixed' : hasStyleKey(t) ? t : null;
   }
   setInheritedStyleKey(e, t) {
-    if (t && !$P(t)) throw new Error(`Invalid style key ${t.key} and version ${t.version}`);
+    if (t && !hasStyleKey(t)) throw new Error(`Invalid style key ${t.key} and version ${t.version}`);
     let i = t ?? {
       key: 'INVALID',
       version: 'INVALID'
@@ -3724,10 +3724,10 @@ export class SceneNode extends createMixinNodes() {
   getRangeInheritedStyleKey(e, t, i) {
     this.setGlobalNodeID();
     let n = this.bindings.NodeTsApi.getRangeInheritedStyle(e, t, i, this.sceneGraph.nodeContext);
-    return n === 'mixed' ? n : $P(n) ? n : null;
+    return n === 'mixed' ? n : hasStyleKey(n) ? n : null;
   }
   setRangeInheritedStyleKey(e, t, i, n) {
-    if (n && !$P(n)) throw new Error(`Invalid style key ${n.key} and version ${n.version}`);
+    if (n && !hasStyleKey(n)) throw new Error(`Invalid style key ${n.key} and version ${n.version}`);
     let r = n ?? {
       key: 'INVALID',
       version: 'INVALID'

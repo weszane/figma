@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { selectExperimentConfigHook } from "../figma_app/594947";
-import { ku, gP } from "../905/879323";
+import { setAssetsSearchQuery, setAssetsSearchOptions } from "../905/879323";
 import { qp } from "../905/977779";
 import { openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
@@ -18,13 +18,13 @@ export function $$_0(e) {
   let t = useSelector(UQ);
   let i = useDispatch();
   let s = g_[e];
-  let d = useCallback((e, t) => i(ku({
+  let d = useCallback((e, t) => i(setAssetsSearchQuery({
     query: e,
     searchOptions: t,
     versionForTracking: 3,
     entryPoint: s
   })), [i, s]);
-  let c = useCallback(e => i(gP({
+  let c = useCallback(e => i(setAssetsSearchOptions({
     searchOptions: e
   })), [i]);
   let u = qi(e);

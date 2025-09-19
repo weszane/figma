@@ -9,7 +9,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { isStatus } from "../figma_app/808294";
 import { zK } from "../figma_app/913823";
-import { cr } from "../905/879323";
+import { setShouldSearchDefaultLibraries } from "../905/879323";
 import { _ as _$$_ } from "../905/793009";
 import { usePluginedWidgets, usePublishedPlugins } from "../figma_app/844435";
 import { qp } from "../905/977779";
@@ -59,7 +59,7 @@ export function $$k4() {
   }));
   let d = getUserId() || "";
   useEffect(() => {
-    e(cr({
+    e(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !0
     }));
   }, [e]);

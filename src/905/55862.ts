@@ -9,7 +9,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { hydrateFileBrowser } from "../905/929976";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { compareWithKey } from "../905/760074";
 import { NX, k9 } from "../figma_app/777207";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -240,7 +240,7 @@ export function $$L3(e, t = !1) {
       location: "useLIbrariesViewFilterStates"
     }), e());
   });
-  let f = n1() && !t;
+  let f = useFigmaLibrariesEnabled() && !t;
   let _ = useSubscription(LibrariesViewFilterStatesView, {
     orgId: o?.id ?? null
   });

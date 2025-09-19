@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { Fullscreen, StylesBindings } from "../figma_app/763686";
 import { appendSearchParam } from "../905/508367";
-import { T1 } from "../905/711212";
+import { replaceThumbnailsOptimist } from "../905/711212";
 import { generateThumbnailFromStyleMaster, generateNodeThumbnail, isValidThumbnail } from "../figma_app/80990";
 import { hasAssetId, PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
 import { J } from "../905/273120";
@@ -114,13 +114,13 @@ var n;
     publishedProductComponent: t.item?.type === PrimaryWorkflowEnum.COMPONENT ? e.library.openFilePublished__LIVEGRAPH.components[t.item.node_id] : t.item?.type === PrimaryWorkflowEnum.STATE_GROUP ? e.library.openFilePublished__LIVEGRAPH.stateGroups[t.item.node_id] : null
   }), e => ({
     updateLocalSourceThumbnails: t => {
-      e(T1({
+      e(replaceThumbnailsOptimist({
         thumbnails: t,
         styleKind: SubscriptionStatusEnum.LOCAL
       }));
     },
     updatePublishedSourceThumbnails: (t, i) => {
-      e(T1({
+      e(replaceThumbnailsOptimist({
         thumbnails: t,
         styleKind: SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY,
         item: i

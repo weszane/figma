@@ -3,7 +3,7 @@ import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { i as _$$i } from "../905/970229";
 import { uint8ArrayToHex } from "../figma_app/930338";
-import { UD } from "../figma_app/624361";
+import { processImageWithThumbnail } from "../figma_app/624361";
 import { t as _$$t } from "../905/658240";
 export async function $$c0(e, t) {
   let [i, c] = await Promise.all([e.arrayBuffer(), _$$t(e, {
@@ -11,7 +11,7 @@ export async function $$c0(e, t) {
   })]);
   let u = new Uint8Array(i);
   let p = _$$i(u) ?? "image/png";
-  let m = await UD(u, p, e.name);
+  let m = await processImageWithThumbnail(u, p, e.name);
   AIScopeHandler.system("process-image-file", () => {
     let e = getSingletonSceneGraph();
     let i = e.getInternalCanvas();

@@ -132,7 +132,7 @@ export function parseStyleString(styleStr?: string): { key: string, version: str
 }
 
 // Exported names refactored to match new function/variable names
-export const YJ = hasStyleKey // $$d0
+export const $P = hasStyleKey // $$d0
 export const M7 = isStyleString // $$c1
 export const Ms = styleKeyToNameMap // $$o2
 export const UC = styleKeyToSoftDeletedIdMap // $$l3

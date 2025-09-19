@@ -1,12 +1,35 @@
-import { atom } from "../figma_app/27355";
-import { D } from "../905/347702";
-import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
-import { useCurrentUserOrgId, currentUserOrgIdAtom } from "../905/845253";
-export function $$o1() {
-  return $$l2(selectCurrentFile(), useCurrentUserOrgId());
+import { currentUserOrgIdAtom, useCurrentUserOrgId } from '../905/845253'
+import { atom } from '../figma_app/27355'
+import { openFileAtom, selectCurrentFile } from '../figma_app/516028'
+
+/**
+ * Returns the parent organization ID of the selected file, or the current user's organization ID if no file is selected.
+ * (Original: $$o1)
+ */
+export function getParentOrgId(): string | undefined {
+  return resolveParentOrgId(selectCurrentFile(), useCurrentUserOrgId())
 }
-let $$l2 = D((e, t) => e ? e.parentOrgId : t);
-let $$d0 = atom(e => $$l2(e(openFileAtom), e(currentUserOrgIdAtom)));
-export const DQ = $$d0;
-export const LH = $$o1;
-export const ag = $$l2;
+
+/**
+ * Resolves the parent organization ID from file or falls back to user org ID.
+ * (Original: $$l2)
+ * @param file - The selected file object
+ * @param userOrgId - The current user's organization ID
+ * @returns The parent organization ID
+ */
+export function resolveParentOrgId(file: { parentOrgId?: string } | null, userOrgId: string): string | undefined {
+  return file ? file.parentOrgId : userOrgId
+}
+
+/**
+ * Atom that computes the parent organization ID from the open file or current user org ID.
+ * (Original: $$d0)
+ */
+export const parentOrgIdAtom = atom(getter =>
+  resolveParentOrgId(getter(openFileAtom), getter(currentUserOrgIdAtom)),
+)
+
+// Exported aliases for refactored names
+export const DQ = parentOrgIdAtom
+export const LH = getParentOrgId
+export const ag = resolveParentOrgId

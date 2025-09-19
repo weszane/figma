@@ -20,7 +20,7 @@ import { getSelectedFile } from "../905/766303";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { gy, fc } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
-import { kc, Co } from "../figma_app/141508";
+import { directlySubscribedStylesNodeIdsFromLoadedPagesSelector, hasIndirectlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
 import { er as _$$er } from "../905/753512";
 import { IconButton } from "../905/443068";
 import { ManuallyLabeledCheckbox } from "../905/909715";
@@ -36,7 +36,7 @@ import { NG } from "../figma_app/709893";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { n1 } from "../figma_app/657017";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { hasRootPath } from "../figma_app/528509";
@@ -115,7 +115,7 @@ function ec({
     });
     return e;
   }, [y]);
-  let v = n1();
+  let v = useFigmaLibrariesEnabled();
   let I = hasResourcePresetKey(e);
   let x = useMemo(() => L()(u.result, e => e.library_key), [u.result]);
   let S = useMemo(() => L()(h, e => e.libraryKey), [h]);
@@ -360,7 +360,7 @@ function em({
     directlyUsedItemIDs
   } = selectWithShallowEqual(e => ({
     sceneGraph: e.mirror.sceneGraph,
-    directlyUsedItemIDs: kc(e)
+    directlyUsedItemIDs: directlySubscribedStylesNodeIdsFromLoadedPagesSelector(e)
   }));
   let l = new Set();
   if (i === PrimaryWorkflowEnum.STYLE && !a) {
@@ -477,7 +477,7 @@ export function $$ef0({
     });
   });
   let T = useSelector(e => getSelectedFile(e));
-  let k = useSelector(Co);
+  let k = useSelector(hasIndirectlySubscribedStylesFromLoadedPagesSelector);
   let R = Kw(e);
   let N = lh();
   let P = LM({

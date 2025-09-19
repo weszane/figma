@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { createOptimistThunk } from '../905/350402';
 import { D3 } from '../905/359847';
 import { setupLoadingStateHandler } from '../905/696711';
-import { Z } from '../905/939602';
+import { librariesAPI } from '../905/939602';
 import { batchPutFileAction } from '../figma_app/78808';
 import { Mb, Ve, Ys } from '../figma_app/646357';
 import { aW } from '../figma_app/864378';
@@ -17,7 +17,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
   let h = e.getState().loadingState;
   let g = Mb(libraryKey);
   if (!isNullOrFailure(h, g)) return;
-  let f = Z.getLibraryPublishedComponentsV2({
+  let f = librariesAPI.getLibraryPublishedComponentsV2({
     libraryKey,
     includeThumbnail,
     includeRealtime

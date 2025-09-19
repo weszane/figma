@@ -7,20 +7,20 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { partitionByPredicate } from "../905/918929";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { bj } from "../905/420347";
-import { e6, _x, qE } from "../905/404538";
+import { EverPublishedLibraryQuery, UnpublishedStylesQuery, MissingStyleKeyToLibraryKeyQuery } from "../905/404538";
 import { selectSceneGraph } from "../figma_app/889655";
-import { C9, jf, MH } from "../figma_app/141508";
+import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector, allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { Fullscreen } from "../figma_app/763686";
 import { useMultiSubscription } from "../figma_app/288654";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { L } from "../905/348758";
-import { LH } from "../905/872904";
+import { getParentOrgId } from "../905/872904";
 import { StyleByKey } from "../figma_app/43951";
 let g = e => useMemo(() => "loaded" === e.status ? new Set(e.data) : new Set(), [e]);
 let f = D(() => {
   let e = useSelector(selectSceneGraph);
-  let t = useSelector(C9);
-  let i = useSelector(jf);
+  let t = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
+  let i = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
   return useMemo(() => {
     let n = new Set();
     for (let r of [...t, ...i].map(e.get).filter(isNotNullish)) r.isState || n.add(r.sourceLibraryKey);
@@ -29,7 +29,7 @@ let f = D(() => {
 });
 let E = D(() => {
   let e = useSelector(selectSceneGraph);
-  let t = useSelector(MH);
+  let t = useSelector(allSubscribedStylesNodeIdsFromLoadedPagesSelector);
   return useMemo(() => {
     let i = new Set();
     t.forEach(t => {
@@ -44,7 +44,7 @@ let $$x0 = _$$n(() => {
     let e = f();
     let t = bj(e);
     let i = t.data;
-    let [a] = setupResourceAtomHandler(e6.EverPublishedLibraryQuery({
+    let [a] = setupResourceAtomHandler(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
       libraryKeys: e
     }));
     let s = g(a);
@@ -72,7 +72,7 @@ let $$x0 = _$$n(() => {
     return "loading" === a.status || "loading" === t.status ? Xm() : y;
   }();
   let t = function () {
-    let e = LH();
+    let e = getParentOrgId();
     let t = useCurrentFileKey();
     let i = E();
     let a = useMemo(() => Array.from(i), [i]);
@@ -85,7 +85,7 @@ let $$x0 = _$$n(() => {
       let t = L(e.result).result;
       return "loaded" === t.status ? t.data : null;
     }).filter(isNotNullish), [m]);
-    let [g] = setupResourceAtomHandler(_x.UnpublishedStylesQuery({
+    let [g] = setupResourceAtomHandler(UnpublishedStylesQuery.UnpublishedStylesQuery({
       styleKeys: a,
       orgId: e
     }));
@@ -101,7 +101,7 @@ let $$x0 = _$$n(() => {
       return e;
     }, [h, f]);
     let x = useMemo(() => a.filter(e => !_.has(e)), [a, _]);
-    let [S] = setupResourceAtomHandler(qE.MissingStyleKeyToLibraryKeyQuery({
+    let [S] = setupResourceAtomHandler(MissingStyleKeyToLibraryKeyQuery.MissingStyleKeyToLibraryKeyQuery({
       styleKeys: x
     }));
     let w = useMemo(() => {

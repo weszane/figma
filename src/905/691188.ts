@@ -16,7 +16,7 @@ import { nE, fR, am } from "../figma_app/430563";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { Ho, Ck } from "../figma_app/236178";
-import { zK, Lr, XM, pD, GO, Nn } from "../905/561897";
+import { userLibrarySubscriptionsAtom, teamLibrarySubscriptionOverridesAtomFamily, mergedTeamLibrarySubscriptionOverridesAtom, workspaceLibrarySubscriptionsAtomFamily, orgLibrarySubscriptionsAtom, usePresetSubscriptionsMapping } from "../905/561897";
 import { hasResourcePresetKeyStatic } from "../figma_app/255679";
 import { $N, fc, Mj, w3, wn, T4, Bt } from "../figma_app/646357";
 import { B as _$$B } from "../905/506188";
@@ -37,12 +37,12 @@ function F() {
   };
 }
 export function $$M3(e, t) {
-  let i = useAtomWithSubscription(zK).data;
-  let n = useAtomWithSubscription(Lr(e)).data;
-  let a = useAtomWithSubscription(XM).data;
-  let s = useAtomWithSubscription(pD(e)).data;
-  let o = useAtomWithSubscription(GO).data;
-  let l = Nn();
+  let i = useAtomWithSubscription(userLibrarySubscriptionsAtom).data;
+  let n = useAtomWithSubscription(teamLibrarySubscriptionOverridesAtomFamily(e)).data;
+  let a = useAtomWithSubscription(mergedTeamLibrarySubscriptionOverridesAtom).data;
+  let s = useAtomWithSubscription(workspaceLibrarySubscriptionsAtomFamily(e)).data;
+  let o = useAtomWithSubscription(orgLibrarySubscriptionsAtom).data;
+  let l = usePresetSubscriptionsMapping();
   return useCallback(r => {
     if (e) return n?.[r] ? {
       ...n[r],
