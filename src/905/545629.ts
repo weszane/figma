@@ -1,6 +1,6 @@
 import { CooperHelpers, SocialMediaFormats, AppStateTsApi, HorizontalAlignment, VerticalAlignment } from "../figma_app/763686";
 import { unpackToNormalizedRgb } from "../figma_app/273493";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -14,7 +14,7 @@ import { Lk, x } from "../figma_app/639711";
 import { fullscreenValue } from "../figma_app/455680";
 export class $$_0 extends C {
   getDefaultChildSize() {
-    return new M(1080, 1080);
+    return new Vector2D(1080, 1080);
   }
   addBlankChildAtCoord(e, t, i, r, l) {
     if (!getSingletonSceneGraph()) {
@@ -24,7 +24,7 @@ export class $$_0 extends C {
     let c = atomStoreManager.get(canvasGridAtom);
     let p = null;
     if ((l = l || c[e]?.[t - 1] || c[e - 1]?.[(c[e - 1]?.length || 0) - 1]) && isValidSessionLocalID(parseSessionLocalID(l))) p = CooperHelpers?.duplicateAsBlankCooperAsset(l, e, t, i) ?? null;else {
-      let r = M.toVectorD(this.getDefaultChildSize());
+      let r = Vector2D.toVectorD(this.getDefaultChildSize());
       p = CooperHelpers?.createBlankChildAtCoord(e, t, r, i, !0, SocialMediaFormats.CUSTOM) ?? null;
     }
     r && fullscreenValue.commit();

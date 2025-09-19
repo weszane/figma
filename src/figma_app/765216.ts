@@ -16,7 +16,7 @@ import { u1, XE } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
-import { Tm, Em } from "../figma_app/385874";
+import { paintManager, blackColor } from "../figma_app/385874";
 import { SK } from "../905/619652";
 import { J } from "../905/225412";
 import { ku } from "../905/149223";
@@ -53,7 +53,7 @@ function R({
   let [a, _] = w1(t, "paints");
   let R = NodePropertyCategory.STROKE_PRESET;
   let L = useDispatch();
-  let P = Tm.getId(0, NodePropertyCategory.STROKE_PRESET, "paint");
+  let P = paintManager.getId(0, NodePropertyCategory.STROKE_PRESET, "paint");
   let D = function (e) {
     let t = WH(e ?? null, null, StyleType.STROKE);
     return useMemo(() => {
@@ -142,7 +142,7 @@ function R({
     }), F && jsx(ku, {
       canPickerShowColorContrast: !0,
       closeOnClickOutside: !0,
-      defaultColor: Em,
+      defaultColor: blackColor,
       dropImageOnPaintThumbnail: Y,
       dropdownShown,
       hasVisiblePaintBelow: !1,

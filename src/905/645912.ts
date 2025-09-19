@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { SlideConstantsCppBindings, Fullscreen, InteractionCpp } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -36,11 +36,11 @@ let D = _$$n((e, t, i, n) => {
     a.appendChild(r);
     let e = SlideConstantsCppBindings.slideWidth() - r.size.x / 2;
     let t = SlideConstantsCppBindings.slideHeight() - r.size.y / 2;
-    let i = _$$s.fromNumbers(1, 0, e, 0, 1, t);
+    let i = AffineTransform.fromNumbers(1, 0, e, 0, 1, t);
     r.relativeTransform = i.toFigMatrix();
   } else {
     e.parentNode?.appendChild(r);
-    r.relativeTransform = _$$s.fromFigMatrix(e.relativeTransform).toFigMatrix();
+    r.relativeTransform = AffineTransform.fromFigMatrix(e.relativeTransform).toFigMatrix();
   }
   e.removeSelfAndChildren();
   Fullscreen.selectInstances(r.guid, !1);

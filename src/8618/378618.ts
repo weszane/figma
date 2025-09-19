@@ -43,7 +43,7 @@ import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../
 import { Zk } from "../figma_app/626177";
 import { Vy } from "../8826/611318";
 import { Wv } from "../figma_app/711157";
-import { rC, Em } from "../figma_app/385874";
+import { defaultGrayColor, blackColor } from "../figma_app/385874";
 import { useHasSceneGraphSelection, useAppModelProperty, useAppModelPropsShallow } from "../figma_app/722362";
 import { o3, nt } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -64,7 +64,7 @@ import { qh } from "../642/435480";
 import { Xo } from "../figma_app/482495";
 import { aR, pf } from "../figma_app/530362";
 import { yt } from "../figma_app/292212";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { Ad } from "../figma_app/811257";
 import { U_, vG, zq, VR } from "../figma_app/938628";
@@ -342,7 +342,7 @@ function ef({
   slotPropertyDefinition: e
 }) {
   let t = e.description;
-  let n = useMemo(() => t ? "lexical" === detectEditorStateFormat(t) ? parseEditorStateToPlainText(t) : At(t) : null, [t]);
+  let n = useMemo(() => t ? "lexical" === detectEditorStateFormat(t) ? parseEditorStateToPlainText(t) : sanitizeAndExtractText(t) : null, [t]);
   return n && "" !== n ? jsx(Ad, {
     appendedClassName: "slot_description_preview--descriptionRow--mxTUO",
     label: null,
@@ -820,7 +820,7 @@ function tb({
       isVisible: b[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v, {
         colorFormat: t,
-        defaultColor: rC,
+        defaultColor: defaultGrayColor,
         dispatch: I,
         dropdownShown: n,
         hasExports: !!v && valueOrFallback(v, []).length > 0,
@@ -843,7 +843,7 @@ function tb({
       isVisible: b[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: t,
-        defaultColor: Em,
+        defaultColor: blackColor,
         dispatch: I,
         dropdownShown: n,
         isPanelBodyCollapsedAtom: null,
@@ -864,7 +864,7 @@ function tb({
       isVisible: B,
       children: () => jsx(UA, {
         colorFormat: t,
-        defaultColor: rC,
+        defaultColor: defaultGrayColor,
         dispatch: I,
         dropdownShown: n,
         library: l,
@@ -1061,7 +1061,7 @@ function tw({
         isVisible: S[ItemType.CANVAS_ITEM],
         children: () => jsx(_$$v, {
           colorFormat: t,
-          defaultColor: rC,
+          defaultColor: defaultGrayColor,
           dispatch: f,
           dropdownShown: n,
           hasExports: !!k && valueOrFallback(k, []).length > 0,
@@ -1084,7 +1084,7 @@ function tw({
         isVisible: S[ItemType.STROKE_ITEM],
         children: () => jsx($p, {
           colorFormat: t,
-          defaultColor: Em,
+          defaultColor: blackColor,
           dispatch: f,
           dropdownShown: n,
           isPanelBodyCollapsedAtom: null,
@@ -1105,7 +1105,7 @@ function tw({
         isVisible: D,
         children: () => jsx(UA, {
           colorFormat: t,
-          defaultColor: rC,
+          defaultColor: defaultGrayColor,
           dispatch: f,
           dropdownShown: n,
           library: l,

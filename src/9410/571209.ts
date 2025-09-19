@@ -1,13 +1,13 @@
 import { useMemo, useState, useCallback, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { PU } from "../figma_app/343967";
-import { r as _$$r } from "../905/249071";
+import { Rectangle } from "../905/249071";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoShallow } from "../905/19536";
 import { parsePxNumber } from "../figma_app/783094";
 import { uc } from "../905/763714";
 import { clamp } from "../figma_app/492908";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { lK } from "../figma_app/740163";
 import { ui3RulerMargin } from "../figma_app/786175";
 var r;
@@ -61,7 +61,7 @@ export function $$E0(e, t = 20) {
           width,
           height
         } = t.getBoundingClientRect();
-        return 0 === width || 0 === height ? _$$r.fromOriginAndSize(x, y, width, height) : T(x, y, width, height, e);
+        return 0 === width || 0 === height ? Rectangle.fromOriginAndSize(x, y, width, height) : T(x, y, width, height, e);
       }));
     }, [r, e]);
     useLayoutEffect(() => {
@@ -84,7 +84,7 @@ export function $$E0(e, t = 20) {
             width,
             height
           } = t.target.getBoundingClientRect();
-          return [i, 0 === width || 0 === height ? _$$r.fromOriginAndSize(x, y, width, height) : T(x, y, width, height, e)];
+          return [i, 0 === width || 0 === height ? Rectangle.fromOriginAndSize(x, y, width, height) : T(x, y, width, height, e)];
         }
       }).filter(e => !!e);
       r(e => {
@@ -123,11 +123,11 @@ export function $$E0(e, t = 20) {
       if (t.containsIncludingBoundary(e)) return e;
       let i = e.width() <= t.width() ? clamp(e.left(), t.left(), t.right() - e.width()) : e.left();
       let r = e.height() <= t.height() ? clamp(e.top(), t.top(), t.bottom() - e.height()) : e.top();
-      return new _$$r(new M(i, r), e.size);
+      return new Rectangle(new Vector2D(i, r), e.size);
     }(e, t);
     let a = (() => {
       if (r) return r;
-      let i = _$$r.fromCenterSize(t.center(), e.size);
+      let i = Rectangle.fromCenterSize(t.center(), e.size);
       return [i.left(), i.top()];
     })();
     return [...i, ...i].reduce((e, t) => e.hasIntersectionWith(t) ? function ({
@@ -136,7 +136,7 @@ export function $$E0(e, t = 20) {
       targetPreviousXY: i
     }) {
       let [r, n] = i;
-      let a = new _$$r(new M(r, n), e.size);
+      let a = new Rectangle(new Vector2D(r, n), e.size);
       switch (function (e, t, i) {
         switch (function (e, t) {
           let i = e.right() <= t.left();
@@ -172,13 +172,13 @@ export function $$E0(e, t = 20) {
         }
       }(e, a, t)) {
         case "TOP":
-          return new _$$r(new M(e.left(), t.top() - e.height()), e.size);
+          return new Rectangle(new Vector2D(e.left(), t.top() - e.height()), e.size);
         case "BOTTOM":
-          return new _$$r(new M(e.left(), t.bottom()), e.size);
+          return new Rectangle(new Vector2D(e.left(), t.bottom()), e.size);
         case "LEFT":
-          return new _$$r(new M(t.left() - e.width(), e.top()), e.size);
+          return new Rectangle(new Vector2D(t.left() - e.width(), e.top()), e.size);
         case "RIGHT":
-          return new _$$r(new M(t.right(), e.top()), e.size);
+          return new Rectangle(new Vector2D(t.right(), e.top()), e.size);
         default:
           return e;
       }
@@ -190,7 +190,7 @@ export function $$E0(e, t = 20) {
   }(e, r.expand(-t), i, n), [i, t]);
 }
 function T(e, t, i, r, n) {
-  return _$$r.fromOriginAndSize(e - n, t - n, i + 2 * n, r + 2 * n);
+  return Rectangle.fromOriginAndSize(e - n, t - n, i + 2 * n, r + 2 * n);
 }
 export const FQ = $$E0;
 export const LO = $$v1;

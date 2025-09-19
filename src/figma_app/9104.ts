@@ -1,6 +1,6 @@
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
-import { wQ } from "../figma_app/385874";
+import { isArrowEndCap } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$l1({
@@ -95,7 +95,7 @@ export function $$l1({
           case "TEXT_PATH":
             return getI18nString("fullscreen.properties_panel.layer_header.node_type_text_on_a_path");
           case "VECTOR":
-            if (wQ(t) || wQ(r)) return getI18nString("fullscreen.properties_panel.layer_header.node_type_arrow");
+            if (isArrowEndCap(t) || isArrowEndCap(r)) return getI18nString("fullscreen.properties_panel.layer_header.node_type_arrow");
             return getI18nString("fullscreen.properties_panel.layer_header.node_type_vector_path");
           default:
             return e.name;

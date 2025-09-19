@@ -1,5 +1,5 @@
 import { SlideConstantsCppBindings, AppStateTsApi } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -11,7 +11,7 @@ import { Sz } from "../figma_app/784857";
 import { Ei } from "../figma_app/60023";
 export class $$h0 extends C {
   getDefaultChildSize() {
-    return SlideConstantsCppBindings ? new M(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new M(1920, 1080);
+    return SlideConstantsCppBindings ? new Vector2D(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new Vector2D(1920, 1080);
   }
   addBlankChildAtCoord(e, t, i, n, r) {
     return Sz(e, t, i, n);

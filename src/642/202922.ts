@@ -48,7 +48,7 @@ import { Dd, wh, C4, Pp, Fv, xb, zn, O2, OE } from "../figma_app/164212";
 import { Ao } from "../905/748636";
 import { n as _$$n2 } from "../905/841238";
 import { Jp } from "../figma_app/95266";
-import { od } from "../figma_app/505098";
+import { selectNodeFromCombinedId } from "../figma_app/505098";
 import { yf } from "../905/42379";
 var m = h;
 let X = "bubbled_instances_list--instanceName--09LuV";
@@ -291,7 +291,7 @@ export function $$eg0({
 }) {
   let s = useDispatch();
   let l = useSelector(i$);
-  let d = useSelector(od);
+  let d = useSelector(selectNodeFromCombinedId);
   let h = !useSelector(Jp);
   let m = useSelector(e => !!e.dropdownShown && e.dropdownShown.type === C4);
   let w = useSelector(e => !!e.modalShown && e.modalShown.type === _$$n2.type);

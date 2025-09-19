@@ -8,7 +8,7 @@ import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { H } from "../905/404982";
 import { z } from "../905/653569";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { wY, cU } from "../figma_app/708845";
@@ -402,7 +402,7 @@ export function $$F1(e) {
     if (i.drawImage(C, b, S), Overlay) {
       let e = x / width;
       let t = N / height;
-      let r = _$$s.identity();
+      let r = AffineTransform.identity();
       r.translate((b + p) / scale, (S + p) / scale);
       r.scale(e, t);
       L(r);
@@ -562,7 +562,7 @@ export function $$U2(e) {
   }, [a, isLoading, s, T, x, d, Overlay, N, C, zoomPercentage, l]);
   let O = useMemo(() => {
     if (!Overlay || !N?.x || !N?.y || !x?.zoomFactor) return;
-    let e = _$$s.identity();
+    let e = AffineTransform.identity();
     e.translate(N.x, N.y);
     e.scale(x.zoomFactor, x.zoomFactor);
     return e;

@@ -60,7 +60,7 @@ import { s as _$$s2 } from "../905/172385";
 import { I as _$$I2 } from "../905/706464";
 import { Fullscreen, LayoutTabType } from "../figma_app/763686";
 import { SceneNode } from "../905/499575";
-import { GI, oY } from "../figma_app/387100";
+import { isStamp, isShapeType } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { LRUCache } from "../905/196201";
@@ -196,7 +196,7 @@ export function $$tI2(e) {
     };
     if (!e) return s;
     let en = e.type;
-    switch (GI(e) && (en = "STAMP"), en) {
+    switch (isStamp(e) && (en = "STAMP"), en) {
       case "BOOLEAN_OPERATION":
         switch (e.booleanOperation) {
           case "UNION":
@@ -728,7 +728,7 @@ export function $$tI2(e) {
       isMenuIcon && (f = isMenuIconPurple ? aN : TK);
       let E = !1;
       let y = "";
-      this.props.isDefaultResponsiveSet ? (e = panelType === g$.Webpage ? jsx(_$$Q, {}) : jsx(_$$t, {}), y = getI18nString("layer_icon.tooltip.home")) : node.mask ? (e = this.props.useUI3Icon ? jsx(_$$d2, {}) : _$$A21, y = getI18nString("layer_icon.tooltip.mask")) : (animated || staticImage) && oY(node.type) && !GI(node) ? animated ? (e = this.props.useUI3Icon ? jsx(_$$_, {}) : _$$A17, y = getI18nString("layer_icon.tooltip.video")) : (e = this.props.useUI3Icon ? jsx(_$$_2, {}) : _$$A18, y = getI18nString("layer_icon.tooltip.image")) : thumbnailSrc ? (e = _$$V2(thumbnailSrc), y = r(node, parentNode).tooltip) : editModeType === LayoutTabType.DEV_HANDOFF && detachedInfo?.status === "loaded" && "SYMBOL" !== node.type && "INSTANCE" !== node.type ? (e = this.props.useUI3Icon ? jsx(_$$o, {}) : _$$A3, E = !0) : this.props.isCodeConnected ? (e = jsx(_$$s2, {}), y = getI18nString("layer_icon.tooltip.code_connect")) : ({
+      this.props.isDefaultResponsiveSet ? (e = panelType === g$.Webpage ? jsx(_$$Q, {}) : jsx(_$$t, {}), y = getI18nString("layer_icon.tooltip.home")) : node.mask ? (e = this.props.useUI3Icon ? jsx(_$$d2, {}) : _$$A21, y = getI18nString("layer_icon.tooltip.mask")) : (animated || staticImage) && isShapeType(node.type) && !isStamp(node) ? animated ? (e = this.props.useUI3Icon ? jsx(_$$_, {}) : _$$A17, y = getI18nString("layer_icon.tooltip.video")) : (e = this.props.useUI3Icon ? jsx(_$$_2, {}) : _$$A18, y = getI18nString("layer_icon.tooltip.image")) : thumbnailSrc ? (e = _$$V2(thumbnailSrc), y = r(node, parentNode).tooltip) : editModeType === LayoutTabType.DEV_HANDOFF && detachedInfo?.status === "loaded" && "SYMBOL" !== node.type && "INSTANCE" !== node.type ? (e = this.props.useUI3Icon ? jsx(_$$o, {}) : _$$A3, E = !0) : this.props.isCodeConnected ? (e = jsx(_$$s2, {}), y = getI18nString("layer_icon.tooltip.code_connect")) : ({
         src: e,
         tooltip: y
       } = r(node, parentNode, this.props.useUI3Icon, panelType), t = function (e) {

@@ -5,7 +5,7 @@ import s from "classnames";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { LN } from "../figma_app/975811";
-import { XE, Z3 } from "../figma_app/385874";
+import { getPatternPaint, getNoisePaint } from "../figma_app/385874";
 import { u as _$$u } from "../figma_app/852050";
 import { J } from "../905/225412";
 import { C } from "../905/549861";
@@ -61,7 +61,7 @@ let _ = e => {
       t.push(getI18nString("fullscreen.properties_panel.fill.fill"));
       break;
     case "PATTERN":
-      let i = XE(e);
+      let i = getPatternPaint(e);
       if (!i) break;
       switch (i.patternTileType) {
         case "RECTANGULAR":
@@ -75,7 +75,7 @@ let _ = e => {
       }
       break;
     case "NOISE":
-      let n = Z3(e);
+      let n = getNoisePaint(e);
       if (!n) break;
       switch (n.noiseType) {
         case "MULTITONE":

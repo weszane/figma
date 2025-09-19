@@ -151,7 +151,7 @@ const valueProperty = ['value'] as const
  * @param value any
  * @returns object with resolvedType, type, and value
  */
-function resolveVariableValue(resolvedType: VariableResolvedDataType, value: any) {
+export function resolveVariableValue(resolvedType: VariableResolvedDataType, value: any) {
   /**
    * Helper to validate and normalize value by type.
    */

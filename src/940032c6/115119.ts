@@ -223,7 +223,7 @@ import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579755';
 import { k as _$$k10 } from '../905/582200';
 import { y as _$$y9 } from '../905/582657';
-import { s as _$$s13 } from '../905/583953';
+import { AffineTransform } from '../905/583953';
 import { x as _$$x5 } from '../905/587214';
 import { O as _$$O5 } from '../905/587457';
 import { H8, Pf } from '../905/590952';
@@ -624,9 +624,9 @@ import { G as _$$G3 } from '../figma_app/373780';
 import { O as _$$O8 } from '../figma_app/373984';
 import { LH } from '../figma_app/384673';
 import { j$ as _$$j$, B4, NB } from '../figma_app/385215';
-import { rC as _$$rC, Em } from '../figma_app/385874';
+import { defaultGrayColor, blackColor } from '../figma_app/385874';
 import { rq as _$$rq2 } from '../figma_app/386160';
-import { HL, O5, PA, ZQ } from '../figma_app/387100';
+import { getResponsiveSetForNodes, getResponsiveChildren, getParent, ZQ } from '../figma_app/387100';
 import { j as _$$j4 } from '../figma_app/397127';
 import { createIdentityFunction } from '../figma_app/404307';
 import { _H as _$$_H2, ry as _$$ry } from '../figma_app/408883';
@@ -18528,7 +18528,7 @@ function gL(e) {
   let Q = () => {
     if (!n) return;
     let e = $.indexOf(n);
-    let t = PA(S, n);
+    let t = getParent(S, n);
     t && _$$l.user('reparent-selection', () => transferSelection(t.guid, Lc(t, e) - 1));
   };
   let ee = (e, t) => {
@@ -22158,7 +22158,7 @@ let bE = ({
         o();
         return;
       }
-      let c = O5(a, d.guid);
+      let c = getResponsiveChildren(a, d.guid);
       if (!(c.length === 1 ? c[0] : void 0)) {
         o();
         return;
@@ -22180,7 +22180,7 @@ let bE = ({
             persist: !1
           }));
           _$$l.user('sites-insert-template', () => {
-            let e = O5(a, d.guid);
+            let e = getResponsiveChildren(a, d.guid);
             e.length > 1 && u2(e[0].guid);
           });
           handleAtomEvent({
@@ -25579,7 +25579,7 @@ function ku({
       isVisible: i[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v1, {
         colorFormat: d,
-        defaultColor: _$$rC,
+        defaultColor: defaultGrayColor,
         dispatch: y,
         dropdownShown: a,
         hasExports: !!exportSettings && valueOrFallback(exportSettings, []).length > 0,
@@ -25602,7 +25602,7 @@ function ku({
       isVisible: i[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: d,
-        defaultColor: Em,
+        defaultColor: blackColor,
         dispatch: y,
         dropdownShown: a,
         isPanelBodyCollapsedAtom: null,
@@ -25623,7 +25623,7 @@ function ku({
       isVisible: z,
       children: () => jsx(UA, {
         colorFormat: d,
-        defaultColor: _$$rC,
+        defaultColor: defaultGrayColor,
         dispatch: y,
         dropdownShown: a,
         library: x,
@@ -25911,15 +25911,15 @@ function k6(e, t) {
       let n = getSingletonSceneGraph().get(i);
       if (!(!n || isInvalidValue(t) || isInvalidValue(e)) && (n.behaviorStatePreviewEnabled = !0, e != null && (n.localOpacity = e), t != null)) {
         let e = function (e) {
-          let t = _$$s13.fromFigMatrix(e.relativeTransform);
+          let t = AffineTransform.fromFigMatrix(e.relativeTransform);
           let i = t.offset();
           let n = t.toScale();
           return new Point(i.x + n.x * e.size.x / 2, i.y + n.y * e.size.y / 2);
         }(n);
         n.overlayTransform = function (e, t, i) {
-          let n = _$$s13.fromNumbers(1, 0, t, 0, 1, i);
-          n.multiply(_$$s13.fromFigMatrix(e));
-          let l = _$$s13.fromNumbers(1, 0, -t, 0, 1, -i);
+          let n = AffineTransform.fromNumbers(1, 0, t, 0, 1, i);
+          n.multiply(AffineTransform.fromFigMatrix(e));
+          let l = AffineTransform.fromNumbers(1, 0, -t, 0, 1, -i);
           n.multiply(l);
           return n.toFigMatrix();
         }(t, e.x, e.y);
@@ -25927,7 +25927,7 @@ function k6(e, t) {
     }
     let l = i => {
       let n = getSingletonSceneGraph().get(i);
-      n && (n.behaviorStatePreviewEnabled = !1, e != null && n.removeLocalOpacity(), t != null && (n.overlayTransform = _$$s13.identity().toFigMatrix()));
+      n && (n.behaviorStatePreviewEnabled = !1, e != null && n.removeLocalOpacity(), t != null && (n.overlayTransform = AffineTransform.identity().toFigMatrix()));
     };
     return () => {
       n.map(l);
@@ -26672,7 +26672,7 @@ let wM = kN({
   get: (e, t) => wX(e, t).toScale().x,
   update: (e, t, i) => {
     wG(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, n.y);
       i.scale(t, t);
@@ -26687,7 +26687,7 @@ let wD = kN({
   get: (e, t) => wX(e, t).offset().x,
   update: (e, t, i) => {
     wG(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(t, n.y);
       let l = e.toScale();
@@ -26703,7 +26703,7 @@ let wz = kN({
   get: (e, t) => wX(e, t).offset().y,
   update: (e, t, i) => {
     wG(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, t);
       let l = e.toScale();
@@ -26719,7 +26719,7 @@ let wB = kN({
   get: (e, t) => wX(e, t).toDegrees(),
   update: (e, t, i) => {
     wG(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, n.y);
       let l = e.toScale();
@@ -26773,7 +26773,7 @@ function wq(e, t) {
 }
 function wX(e, t) {
   let i = wq(e, t).transform;
-  return i ? _$$s13.fromFigMatrix(i) : _$$s13.identity();
+  return i ? AffineTransform.fromFigMatrix(i) : AffineTransform.identity();
 }
 function wV(e, t) {
   return e?.[wY(t)] ?? {};
@@ -26782,7 +26782,7 @@ function wG(e, t, i) {
   let n = wW(t);
   let l = e[n] ?? {};
   e[n] = l;
-  let a = i(l.transform ? _$$s13.fromFigMatrix(l.transform) : _$$s13.identity());
+  let a = i(l.transform ? AffineTransform.fromFigMatrix(l.transform) : AffineTransform.identity());
   l.transform = a.toFigMatrix();
 }
 function wW(e) {
@@ -28400,16 +28400,16 @@ function Cw(e, t) {
   Cv(e).opacity = t;
 }
 function CS(e) {
-  return Cv(e).transform || _$$s13.identity().toFigMatrix();
+  return Cv(e).transform || AffineTransform.identity().toFigMatrix();
 }
 function CC(e) {
   let t = Cv(e).transform;
-  return t ? _$$s13.fromFigMatrix(t) : _$$s13.identity();
+  return t ? AffineTransform.fromFigMatrix(t) : AffineTransform.identity();
 }
 function CT(e, t) {
   let i = e.state ?? {};
   e.state = i;
-  let n = t(i.transform ? _$$s13.fromFigMatrix(i.transform) : _$$s13.identity());
+  let n = t(i.transform ? AffineTransform.fromFigMatrix(i.transform) : AffineTransform.identity());
   i.transform = n.toFigMatrix();
 }
 function CI(e) {
@@ -28417,7 +28417,7 @@ function CI(e) {
 }
 function CE(e, t) {
   CT(e, e => {
-    let i = _$$s13.identity();
+    let i = AffineTransform.identity();
     let n = e.offset();
     i.translate(n.x, n.y);
     i.scale(t, t);
@@ -28430,7 +28430,7 @@ function CN(e) {
 }
 function CR(e, t) {
   CT(e, e => {
-    let i = _$$s13.identity();
+    let i = AffineTransform.identity();
     let n = e.offset();
     i.translate(t, n.y);
     let l = e.toScale();
@@ -28444,7 +28444,7 @@ function CA(e) {
 }
 function CL(e, t) {
   CT(e, e => {
-    let i = _$$s13.identity();
+    let i = AffineTransform.identity();
     let n = e.offset();
     i.translate(n.x, t);
     let l = e.toScale();
@@ -28458,7 +28458,7 @@ function CP(e) {
 }
 function CO(e, t) {
   CT(e, e => {
-    let i = _$$s13.identity();
+    let i = AffineTransform.identity();
     let n = e.offset();
     i.translate(n.x, n.y);
     let l = e.toScale();
@@ -28752,7 +28752,7 @@ let C6 = kN({
   get: (e, t) => Number(Ta(e, t).toScale().x.toFixed(2)),
   update: (e, t, i) => {
     Tr(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, n.y);
       i.scale(t, t);
@@ -28767,7 +28767,7 @@ let C7 = kN({
   get: (e, t) => Number(Ta(e, t).offset().x.toFixed(2)),
   update: (e, t, i) => {
     Tr(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(t, n.y);
       let l = e.toScale();
@@ -28783,7 +28783,7 @@ let C9 = kN({
   get: (e, t) => Number(Ta(e, t).offset().y.toFixed(2)),
   update: (e, t, i) => {
     Tr(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, t);
       let l = e.toScale();
@@ -28799,7 +28799,7 @@ let Te = kN({
   get: (e, t) => Number(Ta(e, t).toDegrees().toFixed(2)),
   update: (e, t, i) => {
     Tr(e, i, e => {
-      let i = _$$s13.identity();
+      let i = AffineTransform.identity();
       let n = e.offset();
       i.translate(n.x, n.y);
       let l = e.toScale();
@@ -28845,7 +28845,7 @@ function Tl(e, t) {
 }
 function Ta(e, t) {
   let i = Tl(e, t).transform;
-  return i ? _$$s13.fromFigMatrix(i) : _$$s13.identity();
+  return i ? AffineTransform.fromFigMatrix(i) : AffineTransform.identity();
 }
 function Ts(e) {
   return e?.transition ?? {};
@@ -28854,7 +28854,7 @@ function Tr(e, t, i) {
   let n = `${t}State`;
   let l = e[n] ?? {};
   e[n] = l;
-  let a = i(l.transform ? _$$s13.fromFigMatrix(l.transform) : _$$s13.identity());
+  let a = i(l.transform ? AffineTransform.fromFigMatrix(l.transform) : AffineTransform.identity());
   l.transform = a.toFigMatrix();
 }
 function To({
@@ -29340,7 +29340,7 @@ function Tx({
               (function (e, t, i) {
                 let n = getSingletonSceneGraph();
                 let l = Object.keys(t);
-                let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
+                let a = Array.from(new Set(Object.values(getResponsiveSetForNodes(n, l)).filter(e => e !== null)));
                 trackEventAnalytics('sites_remove_interaction', {
                   behaviorType: e,
                   nodeIds: l,
@@ -29695,7 +29695,7 @@ function TA(e) {
   let eh = (e, t) => function (e, t, i) {
     let n = getSingletonSceneGraph();
     let l = Object.keys(t);
-    let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
+    let a = Array.from(new Set(Object.values(getResponsiveSetForNodes(n, l)).filter(e => e !== null)));
     trackEventAnalytics('sites_add_interaction', {
       behaviorType: e,
       nodeIds: l,

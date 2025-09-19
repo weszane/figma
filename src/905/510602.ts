@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { XC } from "../905/512783";
@@ -58,7 +58,7 @@ export function $$f0({
             x: 24,
             y: 24
           };
-          let r = _$$s.identity();
+          let r = AffineTransform.identity();
           r.translate(t.x, t.y);
           r.translate(i.x, i.y);
           a = EO(n, r.toFigMatrix(), y, A);

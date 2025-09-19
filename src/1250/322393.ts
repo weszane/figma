@@ -4,7 +4,7 @@ import { isInvalidValue, MIXED_MARKER } from '../905/216495';
 import { getI18nString } from '../905/303541';
 import { bj } from '../905/420347';
 import { handleAtomEvent } from '../905/502364';
-import { M as _$$M } from '../905/512402';
+import { Vector2D } from '../905/512402';
 import { j as _$$j } from '../905/521149';
 import { getResourceDataOrFallback } from '../905/663269';
 import { getSingletonSceneGraph } from '../905/700578';
@@ -23,7 +23,7 @@ import { ResourceTypeEnum } from '../figma_app/306946';
 import { SortOptions } from '../figma_app/324237';
 import { getFocusedNodeId } from '../figma_app/327588';
 import { mapComponentProperties } from '../figma_app/349248';
-import { gI, Wn } from '../figma_app/396464';
+import { useSelectedCooperFrameIds, getCooperFrames } from '../figma_app/396464';
 import { fullscreenValue } from '../figma_app/455680';
 import { useIsProOrStudentPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { useCurrentFileKey } from '../figma_app/516028';
@@ -79,11 +79,11 @@ function V(e, t) {
   });
 }
 export function $$H19() {
-  return Wn().length === 0;
+  return getCooperFrames().length === 0;
 }
 export function $$K5() {
   let e = useSceneGraphSelector();
-  let t = gI();
+  let t = useSelectedCooperFrameIds();
   if (t.length === 0) return null;
   let n = t[0];
   if (n) {
@@ -266,8 +266,8 @@ export function $$en6({
       });
       i(FU({
         item: t,
-        canvasPosition: new _$$M(),
-        percentageOffset: new _$$M(),
+        canvasPosition: new Vector2D(),
+        percentageOffset: new Vector2D(),
         insertAsChildOfCanvas: !0,
         insertionCallback: a,
         isClick: !1,
@@ -467,7 +467,7 @@ export function $$ep15() {
         console.error('No insert grid coordinate found for duplicating cooper asset', n);
         return;
       }
-      t = isValidSessionLocalID(parseSessionLocalID(e)) ? CooperHelpers?.duplicateAsBlankCooperAsset(e, n.row, n.col, 'duplicate_as_blank_cooper_asset') : CooperHelpers?.createBlankChildAtCoord(n.row, n.col, new _$$M(1080, 1080), 'duplicate_as_blank_cooper_asset', !0, SocialMediaFormats.INSTA_POST_SQUARE) ?? null;
+      t = isValidSessionLocalID(parseSessionLocalID(e)) ? CooperHelpers?.duplicateAsBlankCooperAsset(e, n.row, n.col, 'duplicate_as_blank_cooper_asset') : CooperHelpers?.createBlankChildAtCoord(n.row, n.col, new Vector2D(1080, 1080), 'duplicate_as_blank_cooper_asset', !0, SocialMediaFormats.INSTA_POST_SQUARE) ?? null;
       AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() && t && AppStateTsApi?.cooperFocusView().focusNodeInFocusedNodeView(t, !0);
     });
   }, [e]);

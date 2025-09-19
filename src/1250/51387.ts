@@ -1,4 +1,4 @@
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { liveStoreInstance } from "../905/713695";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -113,7 +113,7 @@ export function $$k12() {
     n = e => {
       ("SYMBOL" === e.type || e.isStateGroup) && j(e) && i.add(e.guid);
     };
-    t && hV(t, n);
+    t && traverseChildren(t, n);
     return i;
   });
 }

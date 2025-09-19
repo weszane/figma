@@ -1,6 +1,6 @@
 import { packRgb } from "../figma_app/273493";
 import { AppStateTsApi, DuplicateType, InteractionCpp, DesignGraphElements, Fullscreen, SideType } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { GJ, kP, Bm, ZR } from "../905/430950";
 import { j } from "../905/881708";
@@ -34,11 +34,11 @@ function m(e, {
   height: r
 }) {
   return {
-    left: M.fromVectorD({
+    left: Vector2D.fromVectorD({
       x: e.x - t / 2,
       y: n + r / 2
     }),
-    right: M.fromVectorD({
+    right: Vector2D.fromVectorD({
       x: e.x + e.w + i / 2,
       y: n + r / 2
     })
@@ -77,7 +77,7 @@ export class $$$$_0 extends j {
     super(e);
     this._state = "inactive";
     this._insertionType = DuplicateType.DUPLICATE;
-    this._canvasSpaceMousePosition = new M();
+    this._canvasSpaceMousePosition = new Vector2D();
     this._hoveredFrameGuid = null;
     this._seriesMeasurementsFromActiveFrame = null;
     this._previousCurrentTool = null;
@@ -92,7 +92,7 @@ export class $$$$_0 extends j {
   }
   handleMouseLeave(e) {}
   handleMouseMove(e) {
-    if (this._state = "inactive", this._insertionType = DuplicateType.DUPLICATE, this._canvasSpaceMousePosition = M.fromVectorD(e.canvasSpaceMouse()), !InteractionCpp || !InteractionCpp.isFrameQuickAddEnabled()) return;
+    if (this._state = "inactive", this._insertionType = DuplicateType.DUPLICATE, this._canvasSpaceMousePosition = Vector2D.fromVectorD(e.canvasSpaceMouse()), !InteractionCpp || !InteractionCpp.isFrameQuickAddEnabled()) return;
     let t = this._getActiveFrameGuidOrNull();
     let i = InteractionCpp.setHoveredNodeForFrameQuickAdd(e, this._hoveredFrameGuid ?? d);
     this._hoveredFrameGuid = i === d ? null : i;
@@ -137,11 +137,11 @@ export class $$$$_0 extends j {
           left,
           right
         } = m(t, i);
-        let l = M.fromVectorD({
+        let l = Vector2D.fromVectorD({
           x: t.x,
           y: t.y
         });
-        let d = M.fromVectorD({
+        let d = Vector2D.fromVectorD({
           x: t.x + t.w,
           y: t.y
         });

@@ -16,7 +16,7 @@ import { bL, u as _$$u } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { Nw, y7 } from "../figma_app/505098";
+import { selectContainingStateGroupId, selectContainingSymbolId } from "../figma_app/505098";
 import { k } from "../905/689791";
 import { l as _$$l } from "../905/331642";
 import { i as _$$i } from "../905/649519";
@@ -46,7 +46,7 @@ function P({
   let {
     VariableAndComponentPropCreateModalRoot
   } = useContext(_$$l) ?? {};
-  let v = selectWithShallowEqual(e => Nw(e) ?? y7(e));
+  let v = selectWithShallowEqual(e => selectContainingStateGroupId(e) ?? selectContainingSymbolId(e));
   let A = useMemo(() => Kq(!!VariableAndComponentPropCreateModalRoot, !!v, d), [VariableAndComponentPropCreateModalRoot, v, d]);
   function N() {
     b?.();

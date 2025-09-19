@@ -1,13 +1,13 @@
 import { filterNumberValues } from "../905/807535";
 import { packRgb } from "../figma_app/273493";
 import { Axis, InteractionCpp, LayoutDirection, HideMode } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 var $$l4 = (e => (e[e.NONE = 0] = "NONE", e[e.REORDER = 1] = "REORDER", e[e.ADD = 2] = "ADD", e[e.APPEND = 3] = "APPEND", e[e.RESIZE = 4] = "RESIZE", e))($$l4 || {});
 var $$d0 = (e => (e[e.INACTIVE = 0] = "INACTIVE", e[e.HOVERED = 1] = "HOVERED", e[e.SELECTED = 2] = "SELECTED", e[e.DRAGGED = 3] = "DRAGGED", e))($$d0 || {});
 export function $$c2(e, t, i, n, o) {
   for (let l of (e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleHoveredCornerRadius + 2, packRgb(1, 1, 1)), e.fillRoundedRect(t, $$m1.reorderHandleHoveredCornerRadius, i), $$m1.equalIconOffsets)) {
-    let i = new _$$r(l, $$m1.equalIconSize);
+    let i = new Rectangle(l, $$m1.equalIconSize);
     i = o === Axis.X ? i : i.transpose();
     e.fillRoundedRect(i.offsetBy(t.topLeft()), $$m1.equalIconCornerRadius, n);
   }
@@ -84,20 +84,20 @@ let p = class e {
   }
   _getAppendColumnBounds() {
     let t = e.appendButtonLength;
-    let i = new M(this._bounds.right() + e.appendButtonPadding, this._bounds.top());
-    return new _$$r(i, new M(t, this._bounds.height()));
+    let i = new Vector2D(this._bounds.right() + e.appendButtonPadding, this._bounds.top());
+    return new Rectangle(i, new Vector2D(t, this._bounds.height()));
   }
   _getAppendRowBounds() {
     let t = e.appendButtonLength;
-    let i = new M(this._bounds.left(), this._bounds.bottom() + e.appendButtonPadding);
-    return new _$$r(i, new M(this._bounds.width(), t));
+    let i = new Vector2D(this._bounds.left(), this._bounds.bottom() + e.appendButtonPadding);
+    return new Rectangle(i, new Vector2D(this._bounds.width(), t));
   }
   _getAddColumnButtonPositions() {
     let e = [];
     for (let t = 0; t <= this.numColumns; t++) {
       let i = this._bounds.origin.x + this._columnPositions[t];
       let n = this._tableUiHorizontalAxis;
-      e.push(new M(i, n));
+      e.push(new Vector2D(i, n));
     }
     return e;
   }
@@ -106,16 +106,16 @@ let p = class e {
     for (let t = 0; t <= this.numRows; t++) {
       let i = this._tableUiVerticalAxis;
       let n = this._bounds.origin.y + this._rowPositions[t];
-      e.push(new M(i, n));
+      e.push(new Vector2D(i, n));
     }
     return e;
   }
   _getAddColumnButtonHitTestBounds() {
     let t = [];
     for (let i = 0; i < this.numColumns; i++) {
-      let n = new M(this._columnPositions[i], -e.hitTestPaddingThreshold.y);
+      let n = new Vector2D(this._columnPositions[i], -e.hitTestPaddingThreshold.y);
       let r = this._bounds.origin.plus(n);
-      let a = _$$r.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2));
+      let a = Rectangle.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2));
       t.push(a);
     }
     return t;
@@ -123,9 +123,9 @@ let p = class e {
   _getAddRowButtonHitTestBounds() {
     let t = [];
     for (let i = 0; i < this.numRows; i++) {
-      let n = new M(-e.hitTestPaddingThreshold.y, this._rowPositions[i]);
+      let n = new Vector2D(-e.hitTestPaddingThreshold.y, this._rowPositions[i]);
       let r = this._bounds.origin.plus(n);
-      let a = _$$r.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2).transpose());
+      let a = Rectangle.fromCenterSize(r, e.hitTestPaddingThreshold.multiplyBy(2).transpose());
       t.push(a);
     }
     return t;
@@ -139,20 +139,20 @@ let p = class e {
   _computeReorderColumnHandleHitTestBounds() {
     let t = [];
     for (let i = 0; i < this.numColumns; i++) {
-      let n = new M((this._columnPositions[i] + this._columnPositions[i + 1]) / 2, -e.hitTestPaddingThreshold.y);
+      let n = new Vector2D((this._columnPositions[i] + this._columnPositions[i + 1]) / 2, -e.hitTestPaddingThreshold.y);
       let r = this._bounds.origin.plus(n);
-      let a = new M(this._columnPositions[i + 1] - this._columnPositions[i], 2 * e.hitTestPaddingThreshold.y);
-      t.push(_$$r.fromCenterSize(r, a));
+      let a = new Vector2D(this._columnPositions[i + 1] - this._columnPositions[i], 2 * e.hitTestPaddingThreshold.y);
+      t.push(Rectangle.fromCenterSize(r, a));
     }
     return t;
   }
   _computeReorderRowHandleHitTestBounds() {
     let t = [];
     for (let i = 0; i < this.numRows; i++) {
-      let n = new M(-e.hitTestPaddingThreshold.y, (this._rowPositions[i] + this._rowPositions[i + 1]) / 2);
+      let n = new Vector2D(-e.hitTestPaddingThreshold.y, (this._rowPositions[i] + this._rowPositions[i + 1]) / 2);
       let r = this._bounds.origin.plus(n);
-      let a = new M(2 * e.hitTestPaddingThreshold.y, this._rowPositions[i + 1] - this._rowPositions[i]);
-      t.push(_$$r.fromCenterSize(r, a));
+      let a = new Vector2D(2 * e.hitTestPaddingThreshold.y, this._rowPositions[i + 1] - this._rowPositions[i]);
+      t.push(Rectangle.fromCenterSize(r, a));
     }
     return t;
   }
@@ -164,8 +164,8 @@ let p = class e {
     for (let e = 0; e < this.numColumns; e++) {
       let t = this._bounds.origin.x + (a[e] + a[e + 1]) / 2;
       let l = this._tableUiHorizontalAxis;
-      let d = new M(t, l).minus(r);
-      let c = new _$$r(d, n);
+      let d = new Vector2D(t, l).minus(r);
+      let c = new Rectangle(d, n);
       i.push(c);
     }
     return i;
@@ -178,8 +178,8 @@ let p = class e {
     for (let e = 0; e < this.numRows; e++) {
       let t = this._tableUiVerticalAxis;
       let l = this._bounds.origin.y + (a[e] + a[e + 1]) / 2;
-      let d = new M(t, l).minus(r);
-      let c = new _$$r(d, n);
+      let d = new Vector2D(t, l).minus(r);
+      let c = new Rectangle(d, n);
       i.push(c);
     }
     return i;
@@ -190,9 +190,9 @@ let p = class e {
     for (let e = 0; e < this._addColumnButtonPositions.length; e++) {
       let t = this._addColumnButtonPositions[e].x - n / 2;
       let r = this._bounds.top();
-      let a = new M(t, r);
-      let l = new M(n, this._bounds.height());
-      i.push(new _$$r(a, l));
+      let a = new Vector2D(t, r);
+      let l = new Vector2D(n, this._bounds.height());
+      i.push(new Rectangle(a, l));
     }
     return i;
   }
@@ -202,9 +202,9 @@ let p = class e {
     for (let e = 0; e < this._addRowButtonPositions.length; e++) {
       let t = this._bounds.left();
       let r = this._addRowButtonPositions[e].y - n / 2;
-      let a = new M(t, r);
-      let l = new M(this._bounds.width(), n);
-      i.push(new _$$r(a, l));
+      let a = new Vector2D(t, r);
+      let l = new Vector2D(this._bounds.width(), n);
+      i.push(new Rectangle(a, l));
     }
     return i;
   }
@@ -212,7 +212,7 @@ let p = class e {
     return !this._bounds.expand(2 * e.hitTestPaddingThreshold.y).containsPointIncludingBoundary(t);
   }
   getHoveredSpan(e) {
-    if (this._isOutsideTableUIBounds(e)) return new M(-1, -1);
+    if (this._isOutsideTableUIBounds(e)) return new Vector2D(-1, -1);
     let t = this.numColumns;
     for (let i = 1; i < this._addColumnButtonPositions.length; i++) if (e.x <= this._addColumnButtonPositions[i].x) {
       t = i;
@@ -223,7 +223,7 @@ let p = class e {
       i = t;
       break;
     }
-    return new M(t - 1, i - 1);
+    return new Vector2D(t - 1, i - 1);
   }
   getHoveredRegion(e) {
     if (this._bounds.isEmpty() || !this.shouldRender() || this._isOutsideTableUIBounds(e)) return {
@@ -296,7 +296,7 @@ let p = class e {
   displaceRectForSpan(e, t, i) {
     let n = InteractionCpp.getTableSpanIdAtIndex(e, t);
     let r = InteractionCpp.getViewportTableSpanDisplacement(n);
-    i.origin = i.origin.plus(M.fromFigVector(r));
+    i.origin = i.origin.plus(Vector2D.fromFigVector(r));
   }
   getSpanThickness(e, t) {
     return t === LayoutDirection.COLUMN ? this._widths[e] / this._canvasScale : this._heights[e] / this._canvasScale;
@@ -346,8 +346,8 @@ let p = class e {
   _renderPlusButton(t, i, n) {
     let r = e.plusIconStrokeWidth;
     let a = e.plusIconLength;
-    let l = new _$$r(new M(i.x - a / 2, i.y - r / 2), new M(a, r));
-    let d = new _$$r(new M(i.x - r / 2, i.y - a / 2), new M(r, a));
+    let l = new Rectangle(new Vector2D(i.x - a / 2, i.y - r / 2), new Vector2D(a, r));
+    let d = new Rectangle(new Vector2D(i.x - r / 2, i.y - a / 2), new Vector2D(r, a));
     t.fillRect(l, n);
     t.fillRect(d, n);
   }
@@ -409,14 +409,14 @@ let p = class e {
     return this._bounds.scaledBy(1 / this._canvasScale);
   }
 };
-p.hitTestPaddingThreshold = new M(11, 22);
+p.hitTestPaddingThreshold = new Vector2D(11, 22);
 p.padding = 18;
 p.spacing = 18;
 p.borderStrokeWidth = 2;
-p.reorderHandleInactiveSize = new M(18, 6);
+p.reorderHandleInactiveSize = new Vector2D(18, 6);
 p.reorderHandleInactiveCornerRadius = 4;
 p.reorderHandleHoveredLength = 22;
-p.reorderHandleHoveredSize = new M(p.reorderHandleHoveredLength, p.reorderHandleHoveredLength);
+p.reorderHandleHoveredSize = new Vector2D(p.reorderHandleHoveredLength, p.reorderHandleHoveredLength);
 p.reorderHandleHoveredCornerRadius = 6;
 p.addButtonInactiveRadius = 4;
 p.addButtonHoveredRadius = 11;
@@ -428,9 +428,9 @@ p.dividerHeight = 4;
 p.dividerHitTestPadding = 4;
 p.plusIconStrokeWidth = 2;
 p.plusIconLength = 12;
-p.equalIconSize = new M(12, 2);
+p.equalIconSize = new Vector2D(12, 2);
 p.equalIconCornerRadius = 2;
-p.equalIconOffsets = [new M(5, 8), new M(5, 12)];
+p.equalIconOffsets = [new Vector2D(5, 8), new Vector2D(5, 12)];
 p.cellStrokeWeight = 1;
 export let $$m1 = p;
 export const Dv = $$d0;

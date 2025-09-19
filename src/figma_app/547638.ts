@@ -19,7 +19,7 @@ import { T as _$$T } from "../905/256551";
 import { VariableIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { ey, nK } from "../905/859698";
 import { CanvasOperation, Fullscreen } from "../figma_app/763686";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { defaultSessionLocalIDString, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
@@ -1249,7 +1249,7 @@ let P = [{
   }],
   isViolation: e => {
     if (!(e.isGroup && e.childrenNodes.some(e => e.mask))) return !1;
-    let t = _$$s.identity().toFigMatrix();
+    let t = AffineTransform.identity().toFigMatrix();
     let {
       m00,
       m01,
@@ -1286,7 +1286,7 @@ let P = [{
     if ("IMAGE" !== e.type) return !1;
     if (0 !== e.rotation) return !0;
     if ("STRETCH" === e.imageScaleMode && e.transform) {
-      let t = _$$s.fromFigMatrix(e.transform);
+      let t = AffineTransform.fromFigMatrix(e.transform);
       if (!nearlyEqual(t.toRadians(), 0)) return !0;
     }
     return !1;
@@ -1308,7 +1308,7 @@ let P = [{
     if ("VIDEO" !== e.type) return !1;
     if (0 !== e.rotation) return !0;
     if ("STRETCH" === e.imageScaleMode && e.transform) {
-      let t = _$$s.fromFigMatrix(e.transform);
+      let t = AffineTransform.fromFigMatrix(e.transform);
       if (!nearlyEqual(t.toRadians(), 0)) return !0;
     }
     return !1;

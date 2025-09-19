@@ -2,7 +2,7 @@ import { noop } from "../figma_app/465776";
 import { nearlyEqual } from "../figma_app/492908";
 import { SymbolIdHandler, StateGroupIdHandler, StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, ResponsiveSetIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
 import { sg, Xf, iU } from "../905/859698";
-import { qg } from "../figma_app/385874";
+import { hashToHexString } from "../figma_app/385874";
 import { og } from "../figma_app/646357";
 import { c1, dB } from "../905/589717";
 import { GP, EI } from "../905/71";
@@ -217,7 +217,7 @@ export class $$g0 extends _$$s {
   get imageHashes() {
     let e = [];
     let t = t => {
-      t?.hash && e.push(qg(t));
+      t?.hash && e.push(hashToHexString(t));
     };
     let i = e => {
       t(e.image);

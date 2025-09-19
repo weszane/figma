@@ -8,7 +8,7 @@ import { blackColor, blendGradientColors } from "../figma_app/191804";
 import { Oe, nh, AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
-import { Tm, bn } from "../figma_app/385874";
+import { paintManager, isGradientType } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { bL } from "../figma_app/852050";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -54,7 +54,7 @@ export function $$A7(e) {
 export function $$x0() {
   let [e] = lJ("imageOverlayPaint");
   return useCallback((t, r) => {
-    Tm.clearCache();
+    paintManager.clearCache();
     let n = [t];
     e && isValidValue(e) && n.push(e);
     fullscreenValue.updateSelectionProperties({
@@ -125,7 +125,7 @@ export function $$L2() {
   return valueOrFallback(e, 0) > (r ? 2 : 1);
 }
 export function $$P8(e) {
-  let t = isValidValue(e) && bn(e?.type);
+  let t = isValidValue(e) && isGradientType(e?.type);
   let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   return useCallback(() => {
     t && r !== LayoutTabType.GRADIENT && fullscreenValue.triggerAction("toggle-gradient-edit-mode");

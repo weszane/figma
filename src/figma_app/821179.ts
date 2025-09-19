@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useLocalStorageSync } from "../905/657224";
 import { debugState } from "../905/407919";
@@ -15,7 +15,7 @@ import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app
 import { HX, ad, xQ } from "../figma_app/97042";
 import { mapPlatformToFramework } from "../905/359509";
 export function $$y1(e, t, r = new Set()) {
-  hV(e, e => {
+  traverseChildren(e, e => {
     r.has(e.guid) || "INSTANCE" !== e.type && "SYMBOL" !== e.type || t.push(e);
   });
   return t;
@@ -39,7 +39,7 @@ export function $$b0() {
     };
     let a = [];
     let s = new Map();
-    for (let o of (n = [], hV(e, e => {
+    for (let o of (n = [], traverseChildren(e, e => {
       "INSTANCE" === e.type && n.push(e);
     }), n)) {
       let {

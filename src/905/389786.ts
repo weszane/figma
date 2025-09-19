@@ -1,5 +1,5 @@
 import { LayoutSizingMode } from "../figma_app/763686";
-import { Ji } from "../figma_app/387100";
+import { findStackContainer } from "../figma_app/387100";
 import { h, v6, KY, jd, iz, qK, Pm } from "../figma_app/17669";
 import { sJ } from "../905/532366";
 import { si } from "../figma_app/941074";
@@ -26,7 +26,7 @@ export function $$d1(e, t, i = !0) {
   let f = (e, t) => !i || t !== e;
   let _ = [];
   position && function (e, t) {
-    let i = Ji(e);
+    let i = findStackContainer(e);
     if (i && "CANVAS" !== i.type && ("NONE" === i.stackMode || "AUTO" !== e.stackPositioning)) {
       t.push("absolute");
       let {

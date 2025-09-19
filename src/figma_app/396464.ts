@@ -1,88 +1,142 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { bV } from "../figma_app/387100";
-import { getSingletonSceneGraph } from "../905/700578";
-import { useMemoStable } from "../905/19536";
-export function $$c7(e, t) {
-  return "SLIDE_ROW" === e.type || t && e.isStateGroup;
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { useMemoStable } from '../905/19536'
+import { getSingletonSceneGraph } from '../905/700578'
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411'
+import { getVisibleSpecialChildren } from '../figma_app/387100'
+/**
+ * Checks if the node is a slide row or a state group (original $$c7).
+ * @param node - The node to check.
+ * @param isStateGroupCheck - Whether to check for state group.
+ * @returns True if it's a slide row or state group.
+ */
+export function isSlideRowOrStateGroup(node: any, isStateGroupCheck: boolean): boolean {
+  return node.type === 'SLIDE_ROW' || (isStateGroupCheck && node.isStateGroup)
 }
-export function $$u2() {
-  let e = function () {
-    let e = function () {
-      let e = function () {
-        let e = getSingletonSceneGraph();
-        return e && e.isValidScene ? bV(e, "0:1") : [];
-      }().filter(e => "SLIDE_GRID" === e.type);
-      if (e.length) {
-        if (e.length > 1) {
-          console.warn("Multiple canvas grid node found");
-          return;
-        }
-        return e[0];
-      }
-    }();
-    return e ? e.childrenNodes.filter(e => $$c7(e, !0)) : (console.warn("No valid canvas grid node found"), []);
-  }();
-  let t = [];
-  for (let r of e) {
-    let e = r.childrenNodes.filter(e => e.isCooperFrame);
-    t = t.concat(e);
+
+/**
+ * Retrieves cooper frames from the scene graph (original $$u2).
+ * @returns Array of cooper frame nodes.
+ */
+export function getCooperFrames(): any[] {
+  const getCanvasGridNode = (): any => {
+    const sceneGraph = getSingletonSceneGraph()
+    if (!sceneGraph || !sceneGraph.isValidScene)
+      return []
+    const visibleChildren = getVisibleSpecialChildren(sceneGraph, '0:1')
+    return visibleChildren.filter((node: any) => node.type === 'SLIDE_GRID')
   }
-  return t;
+
+  const gridNodes = getCanvasGridNode()
+  if (gridNodes.length === 0) {
+    console.warn('No valid canvas grid node found')
+    return []
+  }
+  if (gridNodes.length > 1) {
+    console.warn('Multiple canvas grid node found')
+    return []
+  }
+
+  const gridNode = gridNodes[0]
+  const slideRows = gridNode.childrenNodes.filter((node: any) => isSlideRowOrStateGroup(node, true))
+  const cooperFrames: any[] = []
+  for (const slideRow of slideRows) {
+    const frames = slideRow.childrenNodes.filter((node: any) => node.isCooperFrame)
+    cooperFrames.push(...frames)
+  }
+  return cooperFrames
 }
-export function $$p3() {
-  return $$u2().map(e => e.guid);
+
+/**
+ * Gets GUIDs of cooper frames (original $$p3).
+ * @returns Array of GUIDs.
+ */
+export function getCooperFrameGuids(): string[] {
+  return getCooperFrames().map((frame: any) => frame.guid)
 }
-export function $$_0() {
-  let e = $$p3();
-  return useMemoStable(() => e, [e]);
+
+/**
+ * Memoized cooper frame GUIDs (original $$_0).
+ * @returns Memoized array of GUIDs.
+ */
+export function useCooperFrameGuids(): string[] {
+  const guids = getCooperFrameGuids()
+  return useMemoStable(() => guids, [guids])
 }
-export function $$h4() {
-  let e = useSelector(e => e.mirror.sceneGraphSelection);
+
+/**
+ * Gets the single selected cooper frame ID (original $$h4).
+ * @returns The cooper frame ID or null.
+ */
+export function useSelectedCooperFrameId(): string | null {
+  const selection = useSelector((state: any) => state.mirror.sceneGraphSelection)
   return useMemo(() => {
-    let t = new Set();
-    Object.keys(e).forEach(e => {
-      let r = getSingletonSceneGraph().get(e);
-      let n = r?.containingCooperFrameId();
-      n && isValidSessionLocalID(parseSessionLocalID(n)) && t.add(n);
-    });
-    let r = Array.from(t);
-    return 1 === r.length ? r[0] : null;
-  }, [e]);
+    const frameIds = new Set<string>()
+    Object.keys(selection).forEach((key: string) => {
+      const node = getSingletonSceneGraph().get(key)
+      const frameId = node?.containingCooperFrameId()
+      if (frameId && isValidSessionLocalID(parseSessionLocalID(frameId))) {
+        frameIds.add(frameId)
+      }
+    })
+    const ids = Array.from(frameIds)
+    return ids.length === 1 ? ids[0] : null
+  }, [selection])
 }
-export function $$m6() {
-  let e = useSelector(e => e.mirror.sceneGraphSelection);
+
+/**
+ * Gets multiple selected cooper frame IDs (original $$m6).
+ * @returns Array of cooper frame IDs.
+ */
+export function useSelectedCooperFrameIds(): string[] {
+  const selection = useSelector((state: any) => state.mirror.sceneGraphSelection)
   return useMemoStable(() => {
-    let t = new Set();
-    Object.keys(e).forEach(e => {
-      let r = getSingletonSceneGraph().get(e);
-      let n = r?.containingCooperFrameId();
-      n && isValidSessionLocalID(parseSessionLocalID(n)) && t.add(n);
-    });
-    return [...t];
-  }, [e]);
+    const frameIds = new Set<string>()
+    Object.keys(selection).forEach((key: string) => {
+      const node = getSingletonSceneGraph().get(key)
+      const frameId = node?.containingCooperFrameId()
+      if (frameId && isValidSessionLocalID(parseSessionLocalID(frameId))) {
+        frameIds.add(frameId)
+      }
+    })
+    return [...frameIds]
+  }, [selection])
 }
-export function $$g5() {
-  let e = useSelector(e => e.mirror.sceneGraphSelection);
+
+/**
+ * Gets selected slide row GUIDs (original $$g5).
+ * @returns Array of slide row GUIDs.
+ */
+export function useSelectedSlideRowGuids(): string[] {
+  const selection = useSelector((state: any) => state.mirror.sceneGraphSelection)
   return useMemoStable(() => {
-    let t = new Set();
-    Object.keys(e).forEach(e => {
-      let r = getSingletonSceneGraph().get(e);
-      r && $$c7(r, !0) && t.add(r.guid);
-    });
-    return [...t];
-  }, [e]);
+    const guids = new Set<string>()
+    Object.keys(selection).forEach((key: string) => {
+      const node = getSingletonSceneGraph().get(key)
+      if (node && isSlideRowOrStateGroup(node, true)) {
+        guids.add(node.guid)
+      }
+    })
+    return [...guids]
+  }, [selection])
 }
-export function $$f1(e) {
-  let t = e.containingCooperFrame();
-  return !!t && t.isInstance;
+
+/**
+ * Checks if the node's containing cooper frame is an instance (original $$f1).
+ * @param node - The node to check.
+ * @returns True if the containing frame is an instance.
+ */
+export function isContainingFrameInstance(node: any): boolean {
+  const frame = node.containingCooperFrame()
+  return !!(frame && frame.isInstance)
 }
-export const Pc = $$_0;
-export const Pk = $$f1;
-export const Wn = $$u2;
-export const XR = $$p3;
-export const bd = $$h4;
-export const dS = $$g5;
-export const gI = $$m6;
-export const qq = $$c7;
+
+// Updated exports to match refactored function names
+export const Pc = useCooperFrameGuids
+export const Pk = isContainingFrameInstance
+export const Wn = getCooperFrames
+export const XR = getCooperFrameGuids
+export const bd = useSelectedCooperFrameId
+export const dS = useSelectedSlideRowGuids
+export const gI = useSelectedCooperFrameIds
+export const qq = isSlideRowOrStateGroup

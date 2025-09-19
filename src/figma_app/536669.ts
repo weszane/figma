@@ -1,4 +1,4 @@
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { getCenteredRotation } from "../905/346946";
 import { getI18nString } from "../905/303541";
 import { scaleRect, addRectOffset } from "../figma_app/62612";
@@ -76,16 +76,16 @@ export function $$f6(e, t) {
 export function $$E0(e, t, r = {
   x: 1e3,
   y: 1e3
-}, i = _$$s.identity().toFigMatrix()) {
+}, i = AffineTransform.identity().toFigMatrix()) {
   let a = e.x / r.x;
   let s = e.y / r.y;
-  let o = _$$s.fromFigMatrix(i);
+  let o = AffineTransform.fromFigMatrix(i);
   if (!o.invert()) return {
     position: "absolute",
     height: "1px",
     width: "1px"
   };
-  o.multiply(_$$s.fromFigMatrix(t));
+  o.multiply(AffineTransform.fromFigMatrix(t));
   let l = o.offset();
   let d = o.toDegrees();
   return {

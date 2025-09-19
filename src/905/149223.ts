@@ -19,7 +19,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
-import { Tm, bn, x$ } from "../figma_app/385874";
+import { paintManager, isGradientType, validateGradientPaint } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { selectCurrentFile } from "../figma_app/516028";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -59,7 +59,7 @@ class M extends RecordingPureComponent {
       fullscreenValue.deselectProperty();
     });
     this.onPaintChange = (e, t) => {
-      Tm.clearCache(this.props.paintId);
+      paintManager.clearCache(this.props.paintId);
       this.props.onChange(e, t);
       this.paintRef.current = e;
     };
@@ -78,7 +78,7 @@ class M extends RecordingPureComponent {
         paintId
       } = this.props;
       if (paint.type === e) return;
-      let n = Tm.initPaint(e, this.props.defaultColor, paint, paintId, this.props.nodeDimensions, this.props.hasVisiblePaintBelow);
+      let n = paintManager.initPaint(e, this.props.defaultColor, paint, paintId, this.props.nodeDimensions, this.props.hasVisiblePaintBelow);
       let r = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
       let a = "PATTERN" !== paint.type && "PATTERN" === e;
       let l = "PATTERN" === paint.type && "PATTERN" !== e;
@@ -92,11 +92,11 @@ class M extends RecordingPureComponent {
         changedToNoise: d,
         productType: r
       });
-      let m = !bn(paint.type) && bn(e);
+      let m = !isGradientType(paint.type) && isGradientType(e);
       let h = "IMAGE" !== paint.type && "IMAGE" === e || "VIDEO" !== paint.type && "VIDEO" === e;
       let g = m || h ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES;
       this.props.onChange(n, g);
-      bn(paint.type) && "GRADIENT_LINEAR" === e && permissionScopeHandler.user("set-gradient-type-to-linear", () => {
+      isGradientType(paint.type) && "GRADIENT_LINEAR" === e && permissionScopeHandler.user("set-gradient-type-to-linear", () => {
         GradientToolApi.resetThirdHandleLocation();
       });
       l && this.props.currentTool === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default");
@@ -114,7 +114,7 @@ class M extends RecordingPureComponent {
         callback: e => {
           let t = convertVariableIdToKiwi(e);
           if (!t) return;
-          let i = Tm.initPaint("SOLID", this.props.defaultColor, this.props.paint, this.props.paintId);
+          let i = paintManager.initPaint("SOLID", this.props.defaultColor, this.props.paint, this.props.paintId);
           Object.entries(i).forEach(([e, t]) => {
             void 0 === t && delete i[e];
           });
@@ -146,21 +146,21 @@ class M extends RecordingPureComponent {
       }));
     };
     this.onKeyDown = e => {
-      let t = x$(this.props.paint);
+      let t = validateGradientPaint(this.props.paint);
       t && T_(e, t, this.props.editModeType, this.props.currentSelectedGradientStop, this.props.onChange);
     };
   }
   componentDidMount() {
     super.componentDidMount();
-    bn(this.props.paint.type) && this.props.editModeType !== LayoutTabType.GRADIENT ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : "IMAGE" === this.props.paint.type && this.props.editModeType !== LayoutTabType.RASTER && fullscreenValue.triggerAction("toggle-raster-edit-mode");
+    isGradientType(this.props.paint.type) && this.props.editModeType !== LayoutTabType.GRADIENT ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : "IMAGE" === this.props.paint.type && this.props.editModeType !== LayoutTabType.RASTER && fullscreenValue.triggerAction("toggle-raster-edit-mode");
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);
-    let i = !bn(e.paint.type) && bn(this.props.paint.type);
+    let i = !isGradientType(e.paint.type) && isGradientType(this.props.paint.type);
     let n = "IMAGE" !== e.paint.type && "IMAGE" === this.props.paint.type;
     let r = "SOLID" !== e.paint.type && "SOLID" === this.props.paint.type;
     i && this.props.editModeType !== LayoutTabType.GRADIENT ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : n && this.props.editModeType !== LayoutTabType.RASTER ? fullscreenValue.triggerAction("toggle-raster-edit-mode") : r && (this.props.editModeType === LayoutTabType.GRADIENT || this.props.editModeType === LayoutTabType.RASTER) && fullscreenValue.triggerAction("leave-edit-mode");
-    bn(this.props.paint.type) && e.editModeType === LayoutTabType.GRADIENT && (this.props.editModeType === LayoutTabType.DESIGN_LAYOUT || this.props.editModeType === LayoutTabType.SITES_LAYOUT) && this.onClose();
+    isGradientType(this.props.paint.type) && e.editModeType === LayoutTabType.GRADIENT && (this.props.editModeType === LayoutTabType.DESIGN_LAYOUT || this.props.editModeType === LayoutTabType.SITES_LAYOUT) && this.onClose();
   }
   componentWillUnmount() {
     super.componentWillUnmount();

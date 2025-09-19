@@ -2,7 +2,7 @@ import { useMemo, useRef, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
-import { dA } from "../figma_app/387100";
+import { getCanvasForNodes } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
@@ -275,7 +275,7 @@ export function $$F5() {
   let e = useStore();
   return useCallback(t => {
     let r = e.getState().mirror.sceneGraph;
-    return dA(r, t);
+    return getCanvasForNodes(r, t);
   }, [e]);
 }
 export const Cn = $$L0;

@@ -8,7 +8,7 @@ import { IconButton } from "../905/443068";
 import { W } from "../905/63398";
 import { setupThemeContext } from "../905/614223";
 import { AppStateTsApi, Thumbnail, Fullscreen, Command, DistributionType } from "../figma_app/763686";
-import { oY } from "../figma_app/387100";
+import { isShapeType } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
@@ -155,7 +155,7 @@ export function $$G1(e) {
   let [M, G] = useState();
   let z = useDeepEqualSceneValue(e => {
     let t = e.getDirectlySelectedNodes();
-    return t && t.every(e => oY(e.type));
+    return t && t.every(e => isShapeType(e.type));
   });
   useEffect(() => {
     if (getFeatureFlags().ce_il_vws_custom_preview && "CUSTOM" === j(f)) {

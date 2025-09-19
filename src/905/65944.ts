@@ -28,7 +28,7 @@ import { Yl } from "../905/232641";
 import { isSitesFileType } from "../figma_app/976749";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
-import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figma_app/385874";
+import { isSolidType, isGradientType, getContrastingColor, validateGradientPaint, checkIfAnyEffectVisible, anchorPositionFromAlignment, alignmentFromAnchorPosition, getSolidPaint, getColorAtStop, getImageOrVideoPaint, getPatternPaint, getNoisePaint } from "../figma_app/385874";
 import { Um } from "../905/848862";
 import { useCurrentTool, useSceneGraphSelector, useAppModelPropsShallow } from "../figma_app/722362";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -106,7 +106,7 @@ import { MH } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { n as _$$n } from "../905/264891";
 import { i as _$$i2 } from "../905/777871";
-import { oV, Ug, Zb, _R } from "../905/706046";
+import { sortByPosition, transformColorStop, sortByPositionWithDefault, interpolateGradientColor } from "../905/706046";
 import { O as _$$O } from "../905/487602";
 import { w2, gq } from "../figma_app/178475";
 import { rM } from "../905/95091";
@@ -318,14 +318,14 @@ function eT({
         selectVideoFill: () => t("VIDEO")
       })
     }), jsx(ek, {
-      isSelected: sb(e),
+      isSelected: isSolidType(e),
       onChange: t,
       paintType: "SOLID",
       recordingKey: generateRecordingKey(s, "solid"),
       icon: jsx(_$$H, {}),
       tooltip: getI18nString("fullscreen.properties_panel.solid")
     }), jsx(ek, {
-      isSelected: bn(e),
+      isSelected: isGradientType(e),
       onChange: t,
       paintType: "GRADIENT_LINEAR",
       recordingKey: generateRecordingKey(s, "gradientLinear"),
@@ -836,16 +836,16 @@ let tk = memo(function ({
       position: n
     };
     o.splice(e, 1, c);
-    oV(o);
+    sortByPosition(o);
     let u = o.indexOf(c);
-    let p = 0 === d.length ? l.map(Ug) : [...d];
+    let p = 0 === d.length ? l.map(transformColorStop) : [...d];
     let m = r ? {
       color: t,
       position: n,
       colorVar: r
-    } : Ug(c);
+    } : transformColorStop(c);
     p.splice(e, 1, m);
-    Zb(p);
+    sortByPositionWithDefault(p);
     a({
       stops: o,
       stopsVar: p
@@ -1048,7 +1048,7 @@ function tN({
   let P = e => {
     let t = [...k.stops];
     t.splice(e, 1);
-    let i = 0 === k.stopsVar.length ? k.stops.map(Ug) : [...k.stopsVar];
+    let i = 0 === k.stopsVar.length ? k.stops.map(transformColorStop) : [...k.stopsVar];
     i.splice(e, 1);
     R({
       stops: t,
@@ -1065,24 +1065,24 @@ function tN({
     if (1 === k.stops.length) {
       let t = k.stops[0];
       i = t.position < .5 ? 1 : 0;
-      e = c4(t.color);
+      e = getContrastingColor(t.color);
     } else if (S < k.stops.length - 1) {
       i = (k.stops[S + 1].position + t.position) / 2;
-      e = _R(k.stops, i);
+      e = interpolateGradientColor(k.stops, i);
     } else {
       let n = k.stops.slice(-2, -1)[0];
       i = (t.position + n.position) / 2;
-      e = _R(k.stops, i);
+      e = interpolateGradientColor(k.stops, i);
     }
     if (e && i >= 0 && (n = {
       color: e,
       position: i
     }), n) {
-      let e = oV([...k.stops, n]);
-      let t = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar;
+      let e = sortByPosition([...k.stops, n]);
+      let t = 0 === k.stopsVar.length ? k.stops.map(transformColorStop) : k.stopsVar;
       R({
         stops: e,
-        stopsVar: Zb([...t, Ug(n)])
+        stopsVar: sortByPositionWithDefault([...t, transformColorStop(n)])
       });
       let i = e.indexOf(n);
       C(i);
@@ -1096,8 +1096,8 @@ function tN({
       color: e
     };
     i.splice(S, 1, n);
-    let r = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar.slice();
-    let a = Ug(n);
+    let r = 0 === k.stopsVar.length ? k.stops.map(transformColorStop) : k.stopsVar.slice();
+    let a = transformColorStop(n);
     r.splice(S, 1, a);
     R({
       stops: i,
@@ -1115,7 +1115,7 @@ function tN({
       dataType: "ALIAS",
       resolvedDataType: "COLOR"
     };
-    let r = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar.slice();
+    let r = 0 === k.stopsVar.length ? k.stops.map(transformColorStop) : k.stopsVar.slice();
     let a = {
       ...r[S],
       colorVar: n
@@ -1136,7 +1136,7 @@ function tN({
     v(null);
     I.current = -1;
   }, []);
-  let H = x$(l);
+  let H = validateGradientPaint(l);
   let W = X7();
   if (!H) return null;
   let K = jsx(ty, {
@@ -1486,7 +1486,7 @@ function t9(e) {
   let c = isValidSessionLocalID(e.paint.sourceNodeId);
   let u = useMemo(() => l && c ? o.get(l) : null, [l, c, o]);
   let [m, g] = useState(null);
-  let [f, A] = useState(u && aT(u));
+  let [f, A] = useState(u && checkIfAnyEffectVisible(u));
   useEffect(() => {
     if (l && c && Thumbnail) {
       let [e, t] = Thumbnail.generateThumbnailForNode(l, 208, 208, 32, {
@@ -1504,7 +1504,7 @@ function t9(e) {
     g(null);
   }, [c, l]);
   useEffect(() => {
-    u && aT(u) ? A(!0) : A(!1);
+    u && checkIfAnyEffectVisible(u) ? A(!0) : A(!1);
   }, [u]);
   let y = useCallback(async () => {
     u && (clearSelection(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), addToSelection([u.guid]), fullscreenValue.triggerActionInUserEditScope("zoom-to-selection", void 0), s === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null));
@@ -1700,11 +1700,11 @@ function t9(e) {
     }), jsx(Zo, {
       label: renderI18nText("properties_panel.pattern.alignment"),
       input: jsx(_$$V, {
-        anchorPoint: JX(e.paint),
+        anchorPoint: anchorPositionFromAlignment(e.paint),
         onAnchorPointChange: function (t) {
           e.onChange({
             ...e.paint,
-            ...OO(t)
+            ...alignmentFromAnchorPosition(t)
           });
         },
         fullWidth: !0
@@ -1840,8 +1840,8 @@ export let $$ii1 = forwardRef(function ({
   let ex = useRef();
   ie(A, I, e_.setActiveTab, eI);
   let eS = useMemo(() => {
-    let t = Ou(e);
-    let i = x$(e);
+    let t = getSolidPaint(e);
+    let i = validateGradientPaint(e);
     if (t && t.colorVar?.value?.alias) return {
       type: VariableDataType.ALIAS,
       resolvedType: VariableResolvedDataType.COLOR,
@@ -1858,7 +1858,7 @@ export let $$ii1 = forwardRef(function ({
       }
     };
     {
-      let e = iC(t || i, h);
+      let e = getColorAtStop(t || i, h);
       return {
         type: VariableDataType.COLOR,
         resolvedType: VariableResolvedDataType.COLOR,
@@ -1985,7 +1985,7 @@ export let $$ii1 = forwardRef(function ({
       initialPosition: ex.current,
       initialStyleCreationPaint: P,
       initialVariableValue: eS,
-      initialView: x$(e) ? "createStyle" : k,
+      initialView: validateGradientPaint(e) ? "createStyle" : k,
       onClose: eC,
       onCreateStyle: W,
       onCreateVariable: H,
@@ -2017,7 +2017,7 @@ function ir({
   children: s,
   paintNodeIds: o
 }) {
-  let l = s2(Ou(e), Rh, t, o);
+  let l = s2(getSolidPaint(e), Rh, t, o);
   let {
     showColorSwatchInfoFlyout,
     setShowColorSwatchInfoFlyout
@@ -2067,11 +2067,11 @@ function ia({
   let q = trackDefinedFileEventWithStore();
   let $ = useCurrentUserOrgId();
   let Z = getCurrentTeam()?.id;
-  let X = Ou(e);
-  let Q = x$(e);
-  let J = y7(e);
-  let ee = _$$XE(e);
-  let et = Z3(e);
+  let X = getSolidPaint(e);
+  let Q = validateGradientPaint(e);
+  let J = getImageOrVideoPaint(e);
+  let ee = getPatternPaint(e);
+  let et = getNoisePaint(e);
   let ei = J && !!w && !!S;
   let en = !X && !Q && !ei && !ee;
   let er = useContext(nZ);
@@ -2116,7 +2116,7 @@ function ia({
       recordingKey: d,
       onColorChange: f
     }), X && function (e) {
-      let t = iC(e, s);
+      let t = getColorAtStop(e, s);
       return jsxs(Fragment, {
         children: [jsx(vL, {
           name: "Color picker",

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { F7 } from "../905/859698";
 import { SceneGraphHelpers } from "../figma_app/763686";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 function d() {
   let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
@@ -15,7 +15,7 @@ export function $$c1() {
     let i = t => {
       let i = e.get(t);
       if (!i?.publishID) return null;
-      let n = At(i.description);
+      let n = sanitizeAndExtractText(i.description);
       let r = i.description;
       let d = {
         type: PrimaryWorkflowEnum.COMPONENT,

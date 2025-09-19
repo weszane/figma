@@ -9,7 +9,7 @@ import { R as _$$R } from "../905/649743";
 import { g as _$$g } from "../905/125190";
 import { setupThemeContext } from "../905/614223";
 import { NodePropertyCategory, Fullscreen, LayoutTabType } from "../figma_app/763686";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
@@ -222,7 +222,7 @@ export function $$W10() {
 export function $$K7(e, t, r) {
   if (0 === r || 0 === t || !e.transform) return;
   let n = t / r;
-  let i = _$$s.fromFigMatrix(e.transform);
+  let i = AffineTransform.fromFigMatrix(e.transform);
   i.translate((1 - n) / 2, (1 - n) / 2);
   i.scale(n, n);
   return i.toFigMatrix();

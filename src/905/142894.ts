@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { StateGroupIdHandler, VariableIdHandler } from "../figma_app/243058";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { c1 } from "../905/589717";
 import { R } from "../905/741991";
 import { Sv, $7 } from "../905/258397";
@@ -52,10 +52,10 @@ export class $$d0 extends R {
   get absoluteTransform() {
     let e = this.transform;
     let t = this.parent?.absoluteTransform;
-    if (!e || !t) return _$$s.identity().toFigMatrix();
+    if (!e || !t) return AffineTransform.identity().toFigMatrix();
     {
-      let i = _$$s.fromFigMatrix(t);
-      i.multiply(_$$s.fromFigMatrix(e));
+      let i = AffineTransform.fromFigMatrix(t);
+      i.multiply(AffineTransform.fromFigMatrix(e));
       return i.toFigMatrix();
     }
   }

@@ -38,7 +38,7 @@ import { _ as _$$_, W as _$$W } from "../905/898204";
 import { vF } from "../figma_app/290870";
 import { a0, RG, rs } from "../figma_app/440994";
 import { throwTypeError } from "../figma_app/465776";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { selectWithShallowEqual } from "../905/103090";
 import { Z as _$$Z } from "../905/104740";
 import { g as _$$g } from "../905/88169";
@@ -390,7 +390,7 @@ function ec({
       };
       let _ = c.get(JSON.stringify(d?.stable_path));
       if (u && _) {
-        let r = _$$s.identity();
+        let r = AffineTransform.identity();
         r.translate(_.x, _.y);
         r.translate(u.x, u.y);
         s = EO(p, r.toFigMatrix(), e, t);

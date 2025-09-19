@@ -75,11 +75,11 @@ import { selectWithShallowEqual } from "../905/103090";
 import { kl } from "../905/275640";
 import { aA } from "../figma_app/632975";
 import { f as _$$f } from "../figma_app/884735";
-import { UR } from "../figma_app/505098";
+import { selectContainingInstance } from "../figma_app/505098";
 import { K as _$$K4 } from "../905/636142";
 import { c6, zJ, qU, AN, BY, Mj, FG, ID, c1, u8, bq, CS, PQ, ty, aF, n4, K8, Ro, mD, x1, hF, Zj, nt, R4, ru, Of, l1, ZS, R3, mQ, km, dW } from "../figma_app/631970";
 import { Xp, O2, FF, Rq, T1, lg, ui } from "../figma_app/164212";
-import { s as _$$s2 } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { deepEqual } from "../905/382883";
 import { fullscreenValue } from "../figma_app/455680";
 import { xP } from "../figma_app/65182";
@@ -97,7 +97,7 @@ function eO({
   recordingKey: p
 }) {
   let h = kl("isInstanceSublayerSelected");
-  let m = selectWithShallowEqual(UR);
+  let m = selectWithShallowEqual(selectContainingInstance);
   let g = e.type === VariableDataType.ALIAS ? e.value : void 0;
   let f = e.type === VariableDataType.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
   let E = _$$u(g);
@@ -157,7 +157,7 @@ function eD(e) {
       name: ""
     },
     animationFrame: isValidValue(e) ? e.animationFrame : void 0,
-    transform: _$$s2.identity().toFigMatrix(),
+    transform: AffineTransform.identity().toFigMatrix(),
     scale: 1,
     rotation: 0,
     paintFilter: {}

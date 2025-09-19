@@ -29,7 +29,7 @@ import { A as _$$A2 } from "../905/639174";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { Jr } from "../figma_app/624361";
-import { y7, Lt } from "../figma_app/385874";
+import { getImageOrVideoPaint, rotatePaint } from "../figma_app/385874";
 import { Sl } from "../905/619652";
 import { Zr } from "../figma_app/678782";
 import { J as _$$J } from "../905/95677";
@@ -69,7 +69,7 @@ let $$eg4 = atom(!1);
 let ef = qo;
 let eE = (e, t) => e.every((e, r) => e === t[r]);
 export function $$ey2(e) {
-  return !!y7(e) && e.image && "Checker" === e.image.name;
+  return !!getImageOrVideoPaint(e) && e.image && "Checker" === e.image.name;
 }
 export async function $$eb0(e) {
   let t = Array.from(e.animatedImage.hash).map(e => e.toString(16).padStart(2, "0")).join("");
@@ -101,7 +101,7 @@ class eI extends Component {
   constructor(e) {
     super(e);
     this.onRotateClockwiseClick = () => {
-      this.props.onChange(Lt(this.props.paint, 90), yesNoTrackingEnum.YES);
+      this.props.onChange(rotatePaint(this.props.paint, 90), yesNoTrackingEnum.YES);
       permissionScopeHandler.user("image-rotate-clockwise", () => {
         Fullscreen.repairThumbnails();
       });

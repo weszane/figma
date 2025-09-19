@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { filterNotNullish } from "../figma_app/656233";
 import { debug } from "../figma_app/465776";
-import { GI, Si } from "../figma_app/387100";
+import { isStamp, traverseAncestors } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { getIsMac, getIsLinux, getIsWindows, isIpadDevice } from "../figma_app/778880";
@@ -112,9 +112,9 @@ export const jv = function e(t, i) {
       let r = i.sceneGraph.get(t);
       if (!r) return null;
       let o = K3(i.sceneGraphSelection, t);
-      let l = e => "INSTANCE" === e.type || "SYMBOL" === e.type || GI(e);
+      let l = e => "INSTANCE" === e.type || "SYMBOL" === e.type || isStamp(e);
       let d = l(r);
-      Si(i.sceneGraph, t, e => {
+      traverseAncestors(i.sceneGraph, t, e => {
         if (d = d || l(e)) return "stop";
       });
       let c = {

@@ -1,7 +1,7 @@
 import { filterNumberValues } from "../905/807535";
 import { HideMode, InteractionCpp, LayoutDirection, UserActionState } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { BrowserInfo } from "../figma_app/778880";
 import { j } from "../905/881708";
@@ -12,15 +12,15 @@ let m = class e extends j {
   constructor(e) {
     super(e);
     this._snapper = null;
-    this.ui = new Ro(_$$r.invalidRect(), [], [], 1, HideMode.HIDE);
+    this.ui = new Ro(Rectangle.invalidRect(), [], [], 1, HideMode.HIDE);
     this.state = {
       element: xT.NONE,
       mouse: Dv.INACTIVE
     };
-    this.hoveredSpans = new M(-1, -1);
+    this.hoveredSpans = new Vector2D(-1, -1);
     this.didDrag = !1;
     this.shouldRenderTableUi = HideMode.HIDE;
-    this.previousMouseDragPos = M.invalid();
+    this.previousMouseDragPos = Vector2D.invalid();
   }
   _getSnapper({
     interactionCpp: e
@@ -35,11 +35,11 @@ let m = class e extends j {
       widths,
       heights
     } = InteractionCpp ? {
-      bounds: _$$r.fromRectD(InteractionCpp.viewportSpaceTableBounds()),
+      bounds: Rectangle.fromRectD(InteractionCpp.viewportSpaceTableBounds()),
       widths: InteractionCpp.getTableSpanLengths(LayoutDirection.COLUMN).map(e => e * t),
       heights: InteractionCpp.getTableSpanLengths(LayoutDirection.ROW).map(e => e * t)
     } : {
-      bounds: _$$r.invalidRect(),
+      bounds: Rectangle.invalidRect(),
       widths: [],
       heights: []
     };
@@ -47,7 +47,7 @@ let m = class e extends j {
     return this.ui;
   }
   _getRegion(e, t) {
-    return e.getHoveredRegion(M.fromVectorD(t.viewportSpaceMouse()));
+    return e.getHoveredRegion(Vector2D.fromVectorD(t.viewportSpaceMouse()));
   }
   _selectSpan({
     axis: e,
@@ -107,7 +107,7 @@ let m = class e extends j {
     t === LayoutDirection.ROW ? (a = i.x, o = n.y, l = d.height(), c = .5) : (a = i.y, o = n.x, l = d.width());
     let u = t === LayoutDirection.ROW ? this.ui.numRows : this.ui.numColumns;
     var p = this._extendedSpringDistanceFunction(o, 0, l - this.ui.getSpanThickness(u - 1, t), e.boundarySpringStiffnessDistance * c) - o;
-    return (a = this._springDistanceFunction(a, e.springStiffnessDistance), t === LayoutDirection.ROW) ? new M(a, i.y + p) : new M(i.x + p, a);
+    return (a = this._springDistanceFunction(a, e.springStiffnessDistance), t === LayoutDirection.ROW) ? new Vector2D(a, i.y + p) : new Vector2D(i.x + p, a);
   }
   _updateSnapTargets({
     event: e,
@@ -127,7 +127,7 @@ let m = class e extends j {
     interactionCpp: i
   }) {
     if (this.state.element !== xT.RESIZE) return 0;
-    let n = this.state.tableAxis === LayoutDirection.COLUMN ? new M(1, 0) : new M(0, 1);
+    let n = this.state.tableAxis === LayoutDirection.COLUMN ? new Vector2D(1, 0) : new Vector2D(0, 1);
     let a = e.canvasSpaceSnappingThreshold();
     let o = e.viewport().canvasSpaceViewportRect();
     return i.snapPointAlongAxis(this._getSnapper({
@@ -153,7 +153,7 @@ let m = class e extends j {
       interactionCpp: InteractionCpp
     })) return;
     let t = this._getOrUpdateTableUI(e.viewport());
-    this.hoveredSpans = t.getHoveredSpan(M.fromVectorD(e.viewportSpaceMouse()));
+    this.hoveredSpans = t.getHoveredSpan(Vector2D.fromVectorD(e.viewportSpaceMouse()));
     let i = this._getRegion(t, e);
     i.element === xT.RESIZE && this._updateCursor({
       event: e,
@@ -186,7 +186,7 @@ let m = class e extends j {
             tableAxis: i.tableAxis,
             mouse: Dv.SELECTED,
             elementId: t,
-            spanMouseDown: M.fromFigVector(n),
+            spanMouseDown: Vector2D.fromFigVector(n),
             numReorderingSpans: null
           };
           this._updateCursor({
@@ -322,7 +322,7 @@ let m = class e extends j {
               return;
             }
             let l = e.viewportSpaceMouse();
-            let d = M.fromVectorD(l);
+            let d = Vector2D.fromVectorD(l);
             let p = this._calculateDirectionOfMouseDrag(tableAxis, d);
             let m = this._calculateRepresentativeSpanIndex({
               tableAxis,
@@ -334,7 +334,7 @@ let m = class e extends j {
             let h = InteractionCpp.getTableSpanIdAtIndex(tableAxis, m);
             let g = tableAxis === LayoutDirection.ROW ? this.ui._getRowPositions() : this.ui._getColumnPositions();
             let f = g[elementIndex] - g[m];
-            let _ = tableAxis === LayoutDirection.ROW ? new M(0, f) : new M(f, 0);
+            let _ = tableAxis === LayoutDirection.ROW ? new Vector2D(0, f) : new Vector2D(f, 0);
             let A = d.minus(_);
             let y = this.ui.getNearestSpan(tableAxis, tableAxis === LayoutDirection.ROW ? A.y : A.x);
             let b = y > m ? y - 1 : y;
@@ -356,15 +356,15 @@ let m = class e extends j {
             }
             this.state.dividerHoverIndex = y;
             this.state.mouse = Dv.DRAGGED;
-            let v = M.fromFigVector(InteractionCpp.viewportSpaceToTableSpanRelativePosition(this.state.elementId, l));
+            let v = Vector2D.fromFigVector(InteractionCpp.viewportSpaceToTableSpanRelativePosition(this.state.elementId, l));
             let I = InteractionCpp.getTableSpanIdAtIndex(this.state.tableAxis, 0);
-            let E = M.fromFigVector(InteractionCpp.viewportSpaceToTableSpanRelativePosition(I, l));
+            let E = Vector2D.fromFigVector(InteractionCpp.viewportSpaceToTableSpanRelativePosition(I, l));
             let x = this._displacementSpringEffect(tableAxis, v.minus(this.state.spanMouseDown), E.minus(this.state.spanMouseDown));
             for (let e of InteractionCpp.tableCellSelectionSelectedSpanIndexes(tableAxis)) {
               let t = InteractionCpp.getTableSpanIdAtIndex(tableAxis, e);
               InteractionCpp.setTableSpanDisplacement(t, x);
             }
-            this.previousMouseDragPos = M.fromVectorD(l);
+            this.previousMouseDragPos = Vector2D.fromVectorD(l);
             e.accept(this);
             break;
           }
@@ -389,7 +389,7 @@ let m = class e extends j {
             });
             let a = e.viewport().viewportSpaceToCanvasSpace(e.viewportSpaceMouse());
             let o = InteractionCpp.gridSnapBehavior();
-            let l = M.fromVectorD(a).divideBy(o).rounded().multiplyBy(o);
+            let l = Vector2D.fromVectorD(a).divideBy(o).rounded().multiplyBy(o);
             let d = (0 === elementIndex ? -1 : 1) * (this._mouseComponent(l, tableAxis) - opposite);
             let c = (0 === elementIndex ? -1 : 1) * this._getSnapOffset({
               event: e,
@@ -415,7 +415,7 @@ let m = class e extends j {
       this.didDrag = !1;
       return;
     }
-    let t = this._getOrUpdateTableUI(e.viewport()).getHoveredRegion(M.fromVectorD(e.viewportSpaceMouse()));
+    let t = this._getOrUpdateTableUI(e.viewport()).getHoveredRegion(Vector2D.fromVectorD(e.viewportSpaceMouse()));
     if (this.state.mouse === Dv.SELECTED || this.state.mouse === Dv.DRAGGED) {
       switch (this.state.element) {
         case xT.ADD:

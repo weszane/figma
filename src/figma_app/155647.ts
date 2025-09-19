@@ -7,7 +7,7 @@ import { TI } from "../905/713722";
 import { o1, t6 } from "../figma_app/975811";
 import { ZB } from "../figma_app/451499";
 import { Ku } from "../figma_app/740163";
-import { sb, bn } from "../figma_app/385874";
+import { isSolidType, isGradientType } from "../figma_app/385874";
 import { q } from "../905/296913";
 export let $$h0 = (() => {
   let e = new o1({
@@ -68,7 +68,7 @@ export let $$h0 = (() => {
   };
 })();
 export function $$m3(e) {
-  return sb(e.type) || bn(e.type);
+  return isSolidType(e.type) || isGradientType(e.type);
 }
 export function $$g2(e, t, r) {
   let n = new ZB(() => e);

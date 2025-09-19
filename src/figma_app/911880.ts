@@ -1,14 +1,14 @@
 import { atom } from 'jotai';
 import { getInitialOptions } from '../figma_app/169182';
 import { Qf } from '../figma_app/202626';
-import { O5 } from '../figma_app/387100';
+import { getResponsiveChildren } from '../figma_app/387100';
 import { k } from '../figma_app/904944';
 import { produce } from 'immer';
 export function $$d2(e) {
   let t = Qf(e);
   if (!t) return !1;
   if (t.childCount > 1) return !0;
-  let r = O5(e, t.guid);
+  let r = getResponsiveChildren(e, t.guid);
   let i = r.length === 1 ? r[0] : void 0;
   if (i && i.childCount > 2) return !0;
   for (let e of i?.childrenNodes ?? []) {

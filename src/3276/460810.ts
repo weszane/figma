@@ -1,4 +1,4 @@
-import { r as _$$r } from "../905/249071";
+import { Rectangle } from "../905/249071";
 import { parsePxNumber } from "../figma_app/783094";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { B5 } from "../figma_app/80462";
@@ -21,11 +21,11 @@ export function $$m0(e, t, n) {
     viewportRect: h(r, c)
   });
 }
-let u = e => _$$r.fromOriginAndSize(e.x, e.y, e.w, e.h);
+let u = e => Rectangle.fromOriginAndSize(e.x, e.y, e.w, e.h);
 let p = (e, t) => {
   let n = d / t.zoomScale;
   let a = HG / t.zoomScale;
-  return _$$r.fromOriginAndSize(e.x, e.y - n, e.w + a, e.h + n);
+  return Rectangle.fromOriginAndSize(e.x, e.y - n, e.w + a, e.h + n);
 };
 let h = (e, t) => ({
   origin: {

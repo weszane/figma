@@ -49,7 +49,7 @@ import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isAutoMarker, isInvalidValue } from "../905/216495";
-import { sb, Tm, rC as _$$rC } from "../figma_app/385874";
+import { isSolidType, paintManager, defaultGrayColor } from "../figma_app/385874";
 import { SK } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
 import { kl, ER } from "../905/275640";
@@ -76,7 +76,7 @@ import { D as _$$D2, J as _$$J2 } from "../905/225412";
 import { JH, y5, Tu } from "../figma_app/479313";
 import { zK } from "../905/182453";
 import { xm, Rz, ku } from "../905/149223";
-import { U2 } from "../905/706046";
+import { hasAliasedColorsInGradient } from "../905/706046";
 import { Kx } from "../905/401389";
 import { AN } from "../905/203369";
 import { b as _$$b3, O as _$$O2 } from "../905/916974";
@@ -474,7 +474,7 @@ let $$tc5 = memo(function ({
     let n = Object.keys(t).length > 0;
     return r || n;
   }();
-  let W = t && isValidValue(t) && (t.length > 1 || t.some(e => !sb(e.type))) ? "createStyle" : z ? "createVariable" : "createStyle";
+  let W = t && isValidValue(t) && (t.length > 1 || t.some(e => !isSolidType(e.type))) ? "createStyle" : z ? "createVariable" : "createStyle";
   let K = useCallback(() => M && M.id === U ? M : null, [M, U]);
   let Y = useCallback(({
     initialX: e,
@@ -628,10 +628,10 @@ export function $$tu7(e) {
   }, [o, onChange, r, c]);
   let A = useCallback((e, t, r, n) => {
     onChange(e, t, void 0, n);
-    valueOrFallback(c, []).length !== e.length && Tm.clearCache();
+    valueOrFallback(c, []).length !== e.length && paintManager.clearCache();
   }, [onChange, c]);
   let N = useCallback(() => {
-    Tm.clearCache();
+    paintManager.clearCache();
   }, []);
   let C = useCallback(() => {
     r(_$$Y2({
@@ -646,7 +646,7 @@ export function $$tu7(e) {
   let R = valueOrFallback(c, []).filter(e => "PATTERN" === e.type).length >= 1;
   let L = useCallback((t, r, n, a, s, l, d, u, p) => {
     let _ = o() ? "preview-paint" : "paint";
-    let b = Tm.getId(r, selectedPropertyType, _);
+    let b = paintManager.getId(r, selectedPropertyType, _);
     let A = valueOrFallback(c, []).slice(0, r).some(e => e.visible);
     return jsx($$tp1, {
       disablePatternPaints: R,
@@ -1092,7 +1092,7 @@ export let $$t_2 = forwardRef((e, t) => {
       }) : jsx($$th8, {
         allowAutoAndMixed: e.allowAutoAndMixed,
         chitOverride: e.chitOverride,
-        clearPaintFromCache: () => Tm.clearCache(e.id),
+        clearPaintFromCache: () => paintManager.clearCache(e.id),
         disableOpacity: e.disableOpacity,
         onChange: e.onChange,
         onInputBlur: e.onInputBlur,
@@ -1466,7 +1466,7 @@ function tf({
       inheritStyleID: null,
       styleType: "FILL"
     }), x ? jsx(ku, {
-      defaultColor: _$$rC,
+      defaultColor: defaultGrayColor,
       dropdownShown: h,
       hasVisiblePaintBelow: !1,
       inheritStyleKeyField: "inheritFillStyleKey",
@@ -1608,7 +1608,7 @@ $$t_2.displayName = "Paint";
       });
       this.onChangeForPaint = (e, t) => {
         let r = t == yesNoTrackingEnum.YES;
-        let n = U2(e) || e.colorVar ? SelectionPaintHelpers.resolvePaintWithVariable(GP(this.props.paint), GP(e)) : "";
+        let n = hasAliasedColorsInGradient(e) || e.colorVar ? SelectionPaintHelpers.resolvePaintWithVariable(GP(this.props.paint), GP(e)) : "";
         let i = e;
         if (n) {
           let t = _$$K2(n);

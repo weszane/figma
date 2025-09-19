@@ -21,7 +21,7 @@ import { J } from "../905/225412";
 import { L } from "../905/173490";
 import { X7 } from "../905/713167";
 import { zi } from "../figma_app/626177";
-import { oV, Ug, Zb } from "../905/706046";
+import { sortByPosition, transformColorStop, sortByPositionWithDefault } from "../905/706046";
 var d = l;
 export function $$T0({
   colorProfile: e = ColorSpaceEnum.SRGB,
@@ -97,9 +97,9 @@ class k extends RecordingPureComponent {
         let i = n[r + 1];
         i && .02 > Math.abs(i.position - e) && (s.position = i.position - 1e-4);
       }
-      oV(n);
+      sortByPosition(n);
       let o = n.indexOf(s);
-      let l = 0 === this.props.paint.stopsVar.length ? this.props.paint.stops.map(Ug) : this.props.paint.stopsVar.slice();
+      let l = 0 === this.props.paint.stopsVar.length ? this.props.paint.stops.map(transformColorStop) : this.props.paint.stopsVar.slice();
       let d = l[r];
       if (d) {
         let e = {
@@ -107,7 +107,7 @@ class k extends RecordingPureComponent {
           position: s.position
         };
         l[r] = e;
-        Zb(l);
+        sortByPositionWithDefault(l);
       }
       this.updateStops(n, l, t);
       this.updateCurrentSelectedStop(o);
@@ -153,7 +153,7 @@ class k extends RecordingPureComponent {
       let e = this.props.paint.stops.slice();
       let t = e.length > 1 ? 1 / (e.length - 1) : 0;
       for (let [i, n] of e.entries()) n.position = t * i;
-      let i = 0 === this.props.paint.stopsVar.length ? this.props.paint.stops.map(Ug) : this.props.paint.stopsVar.slice();
+      let i = 0 === this.props.paint.stopsVar.length ? this.props.paint.stops.map(transformColorStop) : this.props.paint.stopsVar.slice();
       if (e.length === i.length) for (let [e, n] of i.entries()) n.position = t * e;
       this.updateStops(e, i, yesNoTrackingEnum.YES);
     };
@@ -213,9 +213,9 @@ class k extends RecordingPureComponent {
         position: o
       };
       n[r] = l;
-      oV(n);
+      sortByPosition(n);
       let d = n.indexOf(l);
-      let u = this.props.paint.stopsVar ? this.props.paint.stopsVar.slice() : this.props.paint.stops.map(Ug);
+      let u = this.props.paint.stopsVar ? this.props.paint.stopsVar.slice() : this.props.paint.stops.map(transformColorStop);
       let p = u[r];
       if (p) {
         let e = {
@@ -223,7 +223,7 @@ class k extends RecordingPureComponent {
           position: o
         };
         u[r] = e;
-        Zb(u);
+        sortByPositionWithDefault(u);
       }
       i && (n = [...n.slice(0, r), ...n.slice(r + 1)], u = [...u.slice(0, r), ...u.slice(r + 1)], d = clamp(d, 0, n.length - 1));
       this.updateStops(n, u, yesNoTrackingEnum.YES);
@@ -329,15 +329,15 @@ class k extends RecordingPureComponent {
       position: e
     };
     n.push(r);
-    oV(n);
-    let a = this.props.paint.stopsVar ? this.props.paint.stopsVar.slice() : this.props.paint.stops.map(Ug);
+    sortByPosition(n);
+    let a = this.props.paint.stopsVar ? this.props.paint.stopsVar.slice() : this.props.paint.stops.map(transformColorStop);
     let s = i ? {
       color: t,
       position: e,
       colorVar: i
-    } : Ug(r);
+    } : transformColorStop(r);
     a.push(s);
-    Zb(a);
+    sortByPositionWithDefault(a);
     this.updateStops(n, a);
     this.updateCurrentSelectedStop(n.indexOf(r));
   }

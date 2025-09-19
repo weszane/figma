@@ -21,7 +21,7 @@ import { getFeatureFlags } from "../905/601108";
 import { formatList } from "../figma_app/930338";
 import { rY } from "../905/985490";
 import { zn, xb } from "../figma_app/164212";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { TI } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
@@ -455,8 +455,8 @@ function ek(e) {
   };
 }
 let eR = (e, t) => createSinglePropertyRenderTreatment(() => e, (e, t, i) => "lego-table", (e, i, r) => {
-  let a = _$$s.fromFigMatrix(i);
-  let s = _$$s.fromFigMatrix(r);
+  let a = AffineTransform.fromFigMatrix(i);
+  let s = AffineTransform.fromFigMatrix(r);
   let o = [];
   let l = [];
   let d = ek(a.offset());

@@ -54,7 +54,7 @@ import { h as _$$h } from '../905/207101';
 import { x as _$$x } from '../905/211326';
 import { B as _$$B } from '../905/224000';
 import { J as _$$J5 } from '../905/225412';
-import { r as _$$r6 } from '../905/249071';
+import { Rectangle } from '../905/249071';
 import { A as _$$A4 } from '../905/251970';
 import { Label } from '../905/270045';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
@@ -89,7 +89,7 @@ import { O as _$$O2 } from '../905/501876';
 import { handleAtomEvent } from '../905/502364';
 import { l as _$$l4 } from '../905/509505';
 import { E as _$$E6 } from '../905/511388';
-import { M as _$$M3 } from '../905/512402';
+import { Vector2D } from '../905/512402';
 import { C as _$$C2 } from '../905/520159';
 import { Button } from '../905/521428';
 import { c as _$$c } from '../905/534105';
@@ -98,7 +98,7 @@ import { useIsFullscreenSitesView } from '../905/561485';
 import { W as _$$W3 } from '../905/569454';
 import { dG, Zk } from '../905/571648';
 import { VisualBellIcon } from '../905/576487';
-import { s as _$$s3 } from '../905/583953';
+import { AffineTransform } from '../905/583953';
 import { O as _$$O3 } from '../905/599243';
 import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
@@ -280,7 +280,7 @@ import { K as _$$K3 } from '../figma_app/358450';
 import { nl as _$$nl } from '../figma_app/359943';
 import { p as _$$p } from '../figma_app/372802';
 import { G as _$$G5 } from '../figma_app/373780';
-import { rV as _$$rV, hV } from '../figma_app/387100';
+import { isDescendant, traverseChildren } from '../figma_app/387100';
 import { av as _$$av, dd as _$$dd, dg as _$$dg, i7 as _$$i, il as _$$il, JT as _$$JT, lX as _$$lX, m7 as _$$m2, DC, fx, Gj, h5, PV, Rz, U_, Yu, ZE, Zz } from '../figma_app/407414';
 import { NJ } from '../figma_app/419216';
 import { OM, YU } from '../figma_app/422471';
@@ -4359,7 +4359,7 @@ function iV() {
       let l = UN();
       e.forEach(e => {
         let n = l.get(e);
-        n && hV(n, e => {
+        n && traverseChildren(n, e => {
           let l = String(LinterCppBindings?.getVisualGroupFieldsHash(e.guid) ?? 0);
           let n = t.get(l) ?? [];
           t.set(l, [...n, e.guid]);
@@ -4392,7 +4392,7 @@ function iD() {
         let l = UN();
         e.guids.forEach(e => {
           let n = l.get(e);
-          n && hV(n, () => {
+          n && traverseChildren(n, () => {
             t++;
           });
         });
@@ -5294,7 +5294,7 @@ function r_(e, t, l) {
       return useMemo(() => {
         if (!e) return [];
         let l = UN();
-        return t.filter(t => t.guid === e || _$$rV(l, e, t.guid));
+        return t.filter(t => t.guid === e || isDescendant(l, e, t.guid));
       }, [e, t]);
     }(e);
     let l = useAtomWithSubscription($C);
@@ -5550,7 +5550,7 @@ function rT(e) {
   return 'assetType' in e ? e.assetType : '';
 }
 function rI(e, t) {
-  let l = e.transformRect(new _$$r6(new _$$M3(t.x, t.y), new _$$M3(t.width, t.height)));
+  let l = e.transformRect(new Rectangle(new Vector2D(t.x, t.y), new Vector2D(t.width, t.height)));
   return {
     x: l.left(),
     y: l.top(),
@@ -5559,7 +5559,7 @@ function rI(e, t) {
   };
 }
 function rN(e, t) {
-  let l = new _$$M3(t.x, t.y);
+  let l = new Vector2D(t.x, t.y);
   let n = e.transformPoint(l);
   return {
     x: n.x,
@@ -5589,7 +5589,7 @@ function rM(e, t) {
   };
 }
 function rO(e) {
-  let t = _$$s3.fromFigMatrix(e);
+  let t = AffineTransform.fromFigMatrix(e);
   return {
     normalizedRotation: (t.toDegrees() % 360 + 360) % 360,
     isFlipped: t.determinant() < 0
@@ -6150,7 +6150,7 @@ function r0({
     let t = useAtomWithSubscription(hx);
     if (!e) return [[], []];
     let l = UN();
-    let n = t.filter(t => t.guid === e || _$$rV(l, e, t.guid));
+    let n = t.filter(t => t.guid === e || isDescendant(l, e, t.guid));
     let {
       currentActiveToLinterGuidsMap,
       suggestedActiveToLinterGuidsMap
@@ -6299,7 +6299,7 @@ function r1(e, t, l, n) {
       for (let r of t) {
         if (r.guid === e) continue;
         let t = l?.get(r.guid);
-        if (t && _$$rV(n, t, i)) return !0;
+        if (t && isDescendant(n, t, i)) return !0;
       }
       return !1;
     }(guid, e, l);

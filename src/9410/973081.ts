@@ -263,7 +263,7 @@ import { c1, jv, TY, Yh } from '../figma_app/357047';
 import { T as _$$T2 } from '../figma_app/373780';
 import { CreateVariableForm, useVariableCreateModalActions } from '../figma_app/380814';
 import { SY } from '../figma_app/383828';
-import { rV as _$$rV } from '../figma_app/387100';
+import { isDescendant } from '../figma_app/387100';
 import { O8 } from '../figma_app/393980';
 import { HR } from '../figma_app/397881';
 import { rg as _$$rg } from '../figma_app/401069';
@@ -833,7 +833,7 @@ function eM({
   let g = useCallback(e => {
     if (!i) return !1;
     let t = e && s ? o.getCommentDestinationForCanvasPosition(e, s)?.nodeId : void 0;
-    return !t || !_$$rV(getSingletonSceneGraph(), i, t);
+    return !t || !isDescendant(getSingletonSceneGraph(), i, t);
   }, [s, o, i]);
   let x = useMemo(() => {
     let e = {

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { oY } from "../figma_app/387100";
+import { isShapeType } from "../figma_app/387100";
 import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { V, SvgComponent } from "../905/714743";
@@ -110,7 +110,7 @@ export function $$b1({
       case "SYMBOL":
         t = e.isState ? _$$A7 : _$$A6;
     }
-    oY(e.type) && e.hasEnabledStaticImagePaint && (t = _$$A3);
+    isShapeType(e.type) && e.hasEnabledStaticImagePaint && (t = _$$A3);
     return t;
   }(e);
   return s ? jsx(SvgComponent, {

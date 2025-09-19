@@ -52,7 +52,7 @@ import { M as _$$M } from '../figma_app/339170';
 import { u as _$$u } from '../figma_app/353758';
 import { D4 } from '../figma_app/355754';
 import { el as _$$el } from '../figma_app/369767';
-import { wQ } from '../figma_app/385874';
+import { isArrowEndCap } from '../figma_app/385874';
 import { $L, ek as _$$ek, XS as _$$XS, aj, aT, gF, gv, mp, rq, sE, T0, TQ, yc, Zp, zU } from '../figma_app/386160';
 import { U as _$$U3 } from '../figma_app/427950';
 import { J as _$$J } from '../figma_app/451499';
@@ -543,7 +543,7 @@ function eK({
       case 'TEXT_PATH':
         return getI18nString('fullscreen.properties_panel.layer_header.node_type_text_on_a_path');
       case 'VECTOR':
-        if (wQ(t) || wQ(r)) return getI18nString('fullscreen.properties_panel.layer_header.node_type_arrow');
+        if (isArrowEndCap(t) || isArrowEndCap(r)) return getI18nString('fullscreen.properties_panel.layer_header.node_type_arrow');
         return getI18nString('fullscreen.properties_panel.layer_header.node_type_vector_path');
       case 'SLIDE':
         return _$$Y(e) && e.isSkippedSlide ? getI18nString('fullscreen.properties_panel.layer_header.node_type_slide_skipped') : getI18nString('fullscreen.properties_panel.layer_header.node_type_slide', {

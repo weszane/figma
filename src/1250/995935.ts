@@ -14,7 +14,7 @@ import { useModalManager } from "../905/437088";
 import { Z as _$$Z } from "../905/279476";
 import { s as _$$s } from "../905/403855";
 import { CooperHelpers, SchemaJoinStatus, Multiplayer } from "../figma_app/763686";
-import { bV } from "../figma_app/387100";
+import { getVisibleSpecialChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
@@ -383,7 +383,7 @@ let tB = {
       if (!t || !isCooperFeatureEnabled()) return !1;
       let e = getSingletonSceneGraph();
       if (!e || !e.isValidScene) return [];
-      let n = bV(e, "0:1");
+      let n = getVisibleSpecialChildren(e, "0:1");
       if (n.find(e => "cooper_root" === e.name)) return !0;
       let a = n.find(e => "SLIDE_GRID" === e.type);
       return !!(a && a.childrenNodes.find(e => e.maxWidth !== CooperHelpers.gridMaxWidth()));

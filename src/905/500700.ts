@@ -1,5 +1,5 @@
 import { AppStateTsApi } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -8,7 +8,7 @@ import { k as _$$k } from "../905/933223";
 import { I } from "../905/120648";
 export class $$u0 extends _$$k {
   getDefaultChildSize() {
-    return new M(1e3, 1e3);
+    return new Vector2D(1e3, 1e3);
   }
   shouldHideUI() {
     if (atomStoreManager.get(I)) return !0;

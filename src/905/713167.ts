@@ -2,12 +2,12 @@ import { LayoutTabType, NoneColor } from "../figma_app/763686";
 import { KeyCodes } from "../905/63728";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
-import { x$ } from "../figma_app/385874";
+import { validateGradientPaint } from "../figma_app/385874";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { $ } from "../figma_app/297778";
-import { Ug } from "../905/706046";
+import { transformColorStop } from "../905/706046";
 export function $$u2(e, t, i, n, r) {
-  let a = x$(t);
+  let a = validateGradientPaint(t);
   if (!a || !(i.index > a.stops.length - 1) && -1 !== i.index) {
     if (a && a.stops.length) {
       let t = a.stops.slice();
@@ -16,7 +16,7 @@ export function $$u2(e, t, i, n, r) {
         color: e,
         position: s.position
       };
-      let o = 0 === a.stopsVar.length ? a.stops.map(Ug) : a.stopsVar.slice();
+      let o = 0 === a.stopsVar.length ? a.stops.map(transformColorStop) : a.stopsVar.slice();
       let l = o[i.index];
       l && (o[i.index] = {
         colorVar: {

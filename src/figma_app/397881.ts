@@ -1,5 +1,5 @@
 import { isEmptyObject } from "../figma_app/493477";
-import { hV, DS } from "../figma_app/387100";
+import { traverseChildren, getAncestors } from "../figma_app/387100";
 import { createOptimistThunk } from "../905/350402";
 import { j } from "../905/496937";
 import { Nf } from "../figma_app/357047";
@@ -49,7 +49,7 @@ export let $$p0 = createOptimistThunk(e => {
   };
   if (isEmptyObject(p.sceneGraphSelection)) {
     let e = h.get(Nf(p.appModel));
-    e && (hV(e, m), hV(e, e => {
+    e && (traverseChildren(e, m), traverseChildren(e, e => {
       let t = e.parentNode;
       _(e) && null != t && "CANVAS" === t.type && a.push({
         nodeID: e.guid,
@@ -71,12 +71,12 @@ export let $$p0 = createOptimistThunk(e => {
   let E = new d();
   let y = new d();
   for (let e of r) {
-    let t = DS(p.sceneGraph, e.guid).filter(e => !e.visible);
+    let t = getAncestors(p.sceneGraph, e.guid).filter(e => !e.visible);
     if (!e.visible || t.length > 0) continue;
     let r = e.exportSettings;
     if (null != r) for (let t of r) {
       if (null == t.imageType) continue;
-      let r = DS(p.sceneGraph, e.guid).map(e => e.name);
+      let r = getAncestors(p.sceneGraph, e.guid).map(e => e.name);
       let {
         name,
         title

@@ -1,6 +1,6 @@
 import { sj, uf } from "../figma_app/728005";
 import { permissionScopeHandler } from "../905/189185";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { VisualBellActions } from "../905/302958";
@@ -193,7 +193,7 @@ export async function $$y0(e) {
         g(e, `No design node found for test case ${f}.`);
         return null;
       }
-      if (hV(d, e => {
+      if (traverseChildren(d, e => {
         if (e.name.startsWith(h)) {
           u = e;
           return "stop";

@@ -1,258 +1,544 @@
-import { isSpecialNodeType } from "../905/266460";
-import { getFeatureFlags } from "../905/601108";
-import { getSingletonSceneGraph } from "../905/700578";
-export function $$s20(e, t) {
-  let r = t(e);
-  if ("stop" === r || "skip" === r) return r;
-  for (let r of e.childrenNodes) if ("stop" === $$s20(r, t)) return "stop";
-}
-export function $$o9(e, t) {
-  return e.get(t)?.parentNode || null;
-}
-export function $$l11(e, t, r) {
-  let n = $$o9(e, t);
-  for (; n;) {
-    if ("CANVAS" === n.type || "DOCUMENT" === n.type) return;
-    if ("stop" === r(n)) break;
-    n = n.parentNode;
+// /Users/allen/sigma-main/src/figma_app/387100.ts
+
+import { isSpecialNodeType } from '../905/266460'
+import { getFeatureFlags } from '../905/601108'
+import { getSingletonSceneGraph } from '../905/700578'
+
+// Define types for better clarity
+
+type Node = any // Placeholder; define based on actual Node interface
+type TraversalCallback = (node: Node) => 'stop' | 'skip' | void
+type Guid = string
+
+/**
+ * Traverses the children of a node recursively, applying a callback.
+ * Original: $$s20
+ * @param node - The starting node
+ * @param callback - Function to call on each node
+ * @returns 'stop' or 'skip' if traversal should halt
+ */
+export function traverseChildren(node: Node, callback: TraversalCallback): 'stop' | 'skip' | void {
+  const result = callback(node)
+  if (result === 'stop' || result === 'skip') {
+    return result
   }
-}
-export function $$d19(e, t, r) {
-  let n = e.get(t);
-  n && "stop" !== r(n) && $$l11(e, t, r);
-}
-export function $$c0(e, t) {
-  let r = [];
-  $$l11(e, t, e => {
-    r.push(e);
-  });
-  return r;
-}
-export function $$u25(e, t, r) {
-  if (t === r) return !0;
-  let n = $$o9(e, r);
-  for (; n;) {
-    if (n.guid === t) return !0;
-    n = n.parentNode;
-  }
-  return !1;
-}
-export function $$p2(e, t) {
-  let r = 0;
-  let n = e.get(t) || null;
-  for (; n && "CANVAS" !== n.type && "DOCUMENT" !== n.type;) {
-    r++;
-    n = $$o9(e, n.guid);
-  }
-  return r;
-}
-export function $$_18(e, t) {
-  return [...new Set(t)].reduce((t, r) => {
-    let n = m(e, r, "CANVAS");
-    n && getSingletonSceneGraph().get(n)?.isInternalOnlyNode && (n = null);
-    t[r] = n;
-    return t;
-  }, {});
-}
-export function $$h4(e, t) {
-  return [...new Set(t)].reduce((t, r) => (t[r] = m(e, r, "RESPONSIVE_SET"), t), {});
-}
-function m(e, t, r) {
-  if (!t) return null;
-  let n = e.get(t);
-  if (!n) return null;
-  let i = n;
-  for (; i.type !== r;) {
-    let e = i.parentNode;
-    if (!e) break;
-    i = e;
-  }
-  return i.guid;
-}
-export function $$g22(e) {
-  return ("CODE_INSTANCE" === e ? !!getFeatureFlags().bake_direct_manipulation_on_canvas : "DOCUMENT" === e || "CANVAS" === e || "GROUP" === e || "FRAME" === e || "SYMBOL" === e || "INSTANCE" === e || "BOOLEAN_OPERATION" === e || "STICKY" === e || "SHAPE_WITH_TEXT" === e || "CONNECTOR" === e || "CODE_BLOCK" === e || "TABLE" === e || "TABLE_CELL" === e || "VARIABLE_SET" === e || "MODULE" === e || "SLIDE" === e || "SLIDE_ROW" === e || "SLIDE_GRID" === e || "RESPONSIVE_SET" === e || "WEBPAGE" === e || "TRANSFORM" === e) && !$$E7(e);
-}
-export function $$f23(e) {
-  return "VECTOR" === e || "STAR" === e || "LINE" === e || "ELLIPSE" === e || "RECTANGLE" === e || "REGULAR_POLYGON" === e || "ROUNDED_RECTANGLE" === e;
-}
-export function $$E7(e) {
-  return "STICKY" === e || "SHAPE_WITH_TEXT" === e || "CONNECTOR" === e || "CODE_BLOCK" === e || "MEDIA" === e || "SECTION_OVERLAY" === e || "TABLE" === e;
-}
-export function $$y3(e) {
-  return "STAMP" === e.type || "ROUNDED_RECTANGLE" === e.type && e.name?.includes("FigJam Stamp Icon");
-}
-function b(e, t) {
-  return t && "CANVAS" === t.type && t.visible && isSpecialNodeType(e.type) && e.visible;
-}
-export function $$T16(e, t) {
-  let r = [];
-  let n = e.get(t);
-  if (!n) return r;
-  for (let t of n.uiOrderedChildren) {
-    let i = e.get(t);
-    b(i, n) && r.push(i);
-  }
-  return r;
-}
-export function $$I8(e, t) {
-  let r = [];
-  let n = e.get(t);
-  if (!n) return [];
-  for (let t of n.uiOrderedChildren) {
-    let i = e.get(t);
-    i && i.isResponsiveSetOrWebpage && b(i, n) && r.push(i);
-  }
-  return r;
-}
-export function $$S5(e, t) {
-  let r = null;
-  let n = null;
-  for (let i = 0; i < t.length; i++) {
-    let a = e.get(t[i]);
-    let s = $$o9(e, t[i]);
-    if (a && s && b(a, s)) {
-      r = t[i];
-      n = i;
-      break;
+  for (const child of node.childrenNodes) {
+    if (traverseChildren(child, callback) === 'stop') {
+      return 'stop'
     }
   }
-  return {
-    tlfId: r,
-    index: n
-  };
 }
-export function $$v14(e, t) {
-  e.sort((e, r) => {
-    let n = t(e);
-    let i = t(r);
-    return n < i ? -1 : n > i ? 1 : 0;
-  });
+
+/**
+ * Gets the parent node of a given guid.
+ * Original: $$o9
+ * @param sceneGraph - The scene graph
+ * @param guid - The node's guid
+ * @returns The parent node or null
+ */
+export function getParent(sceneGraph: any, guid: Guid): Node | null {
+  return sceneGraph.get(guid)?.parentNode || null
 }
-export function $$A10(e, t) {
-  let r = null;
-  $$l11(e, t, e => {
-    if (!r) {
-      if ("NONE" !== e.scrollDirection) {
-        r = e;
-        return "stop";
+
+/**
+ * Traverses ancestors of a node, applying a callback until stop.
+ * Original: $$l11
+ * @param sceneGraph - The scene graph
+ * @param guid - The starting guid
+ * @param callback - Function to call on each ancestor
+ */
+export function traverseAncestors(sceneGraph: any, guid: Guid, callback: TraversalCallback): void {
+  let current = getParent(sceneGraph, guid)
+  while (current) {
+    if (current.type === 'CANVAS' || current.type === 'DOCUMENT') {
+      return
+    }
+    if (callback(current) === 'stop') {
+      break
+    }
+    current = current.parentNode
+  }
+}
+
+/**
+ * Traverses up and down from a node, applying a callback.
+ * Original: $$d19
+ * @param sceneGraph - The scene graph
+ * @param guid - The starting guid
+ * @param callback - Function to call on nodes
+ */
+export function traverseUpAndDown(sceneGraph: any, guid: Guid, callback: TraversalCallback): void {
+  const node = sceneGraph.get(guid)
+  if (node && callback(node) !== 'stop') {
+    traverseAncestors(sceneGraph, guid, callback)
+  }
+}
+
+/**
+ * Gets all ancestors of a node.
+ * Original: $$c0
+ * @param sceneGraph - The scene graph
+ * @param guid - The starting guid
+ * @returns Array of ancestor nodes
+ */
+export function getAncestors(sceneGraph: any, guid: Guid): Node[] {
+  const ancestors: Node[] = []
+  traverseAncestors(sceneGraph, guid, (node) => {
+    ancestors.push(node)
+  })
+  return ancestors
+}
+
+/**
+ * Checks if one guid is a descendant of another.
+ * Original: $$u25
+ * @param sceneGraph - The scene graph
+ * @param ancestorGuid - Potential ancestor guid
+ * @param descendantGuid - Potential descendant guid
+ * @returns True if descendant
+ */
+export function isDescendant(sceneGraph: any, ancestorGuid: Guid, descendantGuid: Guid): boolean {
+  if (ancestorGuid === descendantGuid) {
+    return true
+  }
+  let current = getParent(sceneGraph, descendantGuid)
+  while (current) {
+    if (current.guid === ancestorGuid) {
+      return true
+    }
+    current = current.parentNode
+  }
+  return false
+}
+
+/**
+ * Gets the depth of a node from canvas or document.
+ * Original: $$p2
+ * @param sceneGraph - The scene graph
+ * @param guid - The node's guid
+ * @returns Depth level
+ */
+export function getDepth(sceneGraph: any, guid: Guid): number {
+  let depth = 0
+  let current = sceneGraph.get(guid)
+  while (current && current.type !== 'CANVAS' && current.type !== 'DOCUMENT') {
+    depth++
+    current = getParent(sceneGraph, current.guid)
+  }
+  return depth
+}
+
+/**
+ * Maps guids to their canvas guids, filtering internal nodes.
+ * Original: $$_18
+ * @param sceneGraph - The scene graph
+ * @param guids - Array of guids
+ * @returns Map of guid to canvas guid
+ */
+export function getCanvasForNodes(sceneGraph: any, guids: Guid[]): Record<Guid, Guid | null> {
+  return [...new Set(guids)].reduce((acc, guid) => {
+    let canvasGuid = findAncestorOfType(sceneGraph, guid, 'CANVAS')
+    if (canvasGuid && getSingletonSceneGraph().get(canvasGuid)?.isInternalOnlyNode) {
+      canvasGuid = null
+    }
+    acc[guid] = canvasGuid
+    return acc
+  }, {} as Record<Guid, Guid | null>)
+}
+
+/**
+ * Maps guids to their responsive set guids.
+ * Original: $$h4
+ * @param sceneGraph - The scene graph
+ * @param guids - Array of guids
+ * @returns Map of guid to responsive set guid
+ */
+export function getResponsiveSetForNodes(sceneGraph: any, guids: Guid[]): Record<Guid, Guid | null> {
+  return [...new Set(guids)].reduce((acc, guid) => {
+    acc[guid] = findAncestorOfType(sceneGraph, guid, 'RESPONSIVE_SET')
+    return acc
+  }, {} as Record<Guid, Guid | null>)
+}
+
+/**
+ * Finds the ancestor of a specific type.
+ * Helper for getCanvasForNodes and getResponsiveSetForNodes
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @param type - Target type
+ * @returns Guid of ancestor or null
+ */
+function findAncestorOfType(sceneGraph: any, guid: Guid, type: string): Guid | null {
+  if (!guid)
+    return null
+  let node = sceneGraph.get(guid)
+  if (!node)
+    return null
+  let current = node
+  while (current.type !== type) {
+    const parent = current.parentNode
+    if (!parent)
+      break
+    current = parent
+  }
+  return current.guid
+}
+
+/**
+ * Checks if a node type is a container.
+ * Original: $$g22
+ * @param type - Node type
+ * @returns True if container
+ */
+export function isContainerType(type: string): boolean {
+  if (type === 'CODE_INSTANCE') {
+    return !!getFeatureFlags().bake_direct_manipulation_on_canvas
+  }
+  const containerTypes = ['DOCUMENT', 'CANVAS', 'GROUP', 'FRAME', 'SYMBOL', 'INSTANCE', 'BOOLEAN_OPERATION', 'STICKY', 'SHAPE_WITH_TEXT', 'CONNECTOR', 'CODE_BLOCK', 'TABLE', 'TABLE_CELL', 'VARIABLE_SET', 'MODULE', 'SLIDE', 'SLIDE_ROW', 'SLIDE_GRID', 'RESPONSIVE_SET', 'WEBPAGE', 'TRANSFORM']
+  return containerTypes.includes(type) && !isSpecialType(type)
+}
+
+/**
+ * Checks if a node type is a shape.
+ * Original: $$f23
+ * @param type - Node type
+ * @returns True if shape
+ */
+export function isShapeType(type: string): boolean {
+  const shapeTypes = ['VECTOR', 'STAR', 'LINE', 'ELLIPSE', 'RECTANGLE', 'REGULAR_POLYGON', 'ROUNDED_RECTANGLE']
+  return shapeTypes.includes(type)
+}
+
+/**
+ * Checks if a node type is special.
+ * Original: $$E7
+ * @param type - Node type
+ * @returns True if special
+ */
+export function isSpecialType(type: string): boolean {
+  const specialTypes = ['STICKY', 'SHAPE_WITH_TEXT', 'CONNECTOR', 'CODE_BLOCK', 'MEDIA', 'SECTION_OVERLAY', 'TABLE']
+  return specialTypes.includes(type)
+}
+
+/**
+ * Checks if a node is a stamp.
+ * Original: $$y3
+ * @param node - The node
+ * @returns True if stamp
+ */
+export function isStamp(node: Node): boolean {
+  return node.type === 'STAMP' || (node.type === 'ROUNDED_RECTANGLE' && node.name?.includes('FigJam Stamp Icon'))
+}
+
+/**
+ * Checks if a node is visible and special under a parent.
+ * Helper function
+ * @param node - The node
+ * @param parent - The parent node
+ * @returns True if valid
+ */
+function isVisibleSpecialNode(node: Node, parent: Node): boolean {
+  return parent && parent.type === 'CANVAS' && parent.visible && isSpecialNodeType(node.type) && node.visible
+}
+
+/**
+ * Gets visible special children of a node.
+ * Original: $$T16
+ * @param sceneGraph - The scene graph
+ * @param guid - Parent guid
+ * @returns Array of visible special children
+ */
+export function getVisibleSpecialChildren(sceneGraph: any, guid: Guid): Node[] {
+  const children: Node[] = []
+  const parent = sceneGraph.get(guid)
+  if (!parent)
+    return children
+  for (const childGuid of parent.uiOrderedChildren) {
+    const child = sceneGraph.get(childGuid)
+    if (isVisibleSpecialNode(child, parent)) {
+      children.push(child)
+    }
+  }
+  return children
+}
+
+/**
+ * Gets responsive children of a node.
+ * Original: $$I8
+ * @param sceneGraph - The scene graph
+ * @param guid - Parent guid
+ * @returns Array of responsive children
+ */
+export function getResponsiveChildren(sceneGraph: any, guid: Guid): Node[] {
+  const children: Node[] = []
+  const parent = sceneGraph.get(guid)
+  if (!parent)
+    return []
+  for (const childGuid of parent.uiOrderedChildren) {
+    const child = sceneGraph.get(childGuid)
+    if (child && child.isResponsiveSetOrWebpage && isVisibleSpecialNode(child, parent)) {
+      children.push(child)
+    }
+  }
+  return children
+}
+
+/**
+ * Finds the first visible special node from a list.
+ * Original: $$S5
+ * @param sceneGraph - The scene graph
+ * @param guids - Array of guids
+ * @returns Object with tlfId and index
+ */
+export function findFirstVisibleSpecialNode(sceneGraph: any, guids: Guid[]): { tlfId: Guid | null, index: number | null } {
+  let tlfId: Guid | null = null
+  let index: number | null = null
+  for (let i = 0; i < guids.length; i++) {
+    const node = sceneGraph.get(guids[i])
+    const parent = getParent(sceneGraph, guids[i])
+    if (node && parent && isVisibleSpecialNode(node, parent)) {
+      tlfId = guids[i]
+      index = i
+      break
+    }
+  }
+  return { tlfId, index }
+}
+
+/**
+ * Sorts an array by a key function.
+ * Original: $$v14
+ * @param array - Array to sort
+ * @param keyFn - Function to get sort key
+ */
+export function sortBy<T>(array: T[], keyFn: (item: T) => any): void {
+  array.sort((a, b) => {
+    const keyA = keyFn(a)
+    const keyB = keyFn(b)
+    return keyA < keyB ? -1 : keyA > keyB ? 1 : 0
+  })
+}
+
+/**
+ * Finds a scrollable or visible parent.
+ * Original: $$A10
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @returns The found node or null
+ */
+export function findScrollableOrVisibleParent(sceneGraph: any, guid: Guid): Node | null {
+  let result: Node | null = null
+  traverseAncestors(sceneGraph, guid, (node) => {
+    if (!result) {
+      if (node.scrollDirection !== 'NONE') {
+        result = node
+        return 'stop'
       }
-      {
-        let t = e.parentNode;
-        if (t && b(e, t)) {
-          r = e;
-          return "stop";
+      const parent = node.parentNode
+      if (parent && isVisibleSpecialNode(node, parent)) {
+        result = node
+        return 'stop'
+      }
+    }
+  })
+  return result
+}
+
+/**
+ * Finds a visible child.
+ * Original: $$x1
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @returns The found node or null
+ */
+export function findVisibleChild(sceneGraph: any, guid: Guid): Node | null {
+  let result: Node | null = null
+  traverseUpAndDown(sceneGraph, guid, (node) => {
+    const parent = node.parentNode
+    if (parent && isVisibleSpecialNode(node, parent)) {
+      result = node
+    }
+  })
+  return result
+}
+
+/**
+ * Finds the stack container ancestor.
+ * Original: $$N6
+ * @param node - Starting node
+ * @returns The stack container or null
+ */
+export function findStackContainer(node: Node): Node | null {
+  let result: Node | null = null
+  let current = node.parentNode
+  while (current) {
+    if (current.isStackOrFixedSizeContainer) {
+      result = current
+      break
+    }
+    current = current.parentNode
+  }
+  return result
+}
+
+/**
+ * Finds a visible section child.
+ * Original: $$C21
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @returns The found node or null
+ */
+export function findVisibleSectionChild(sceneGraph: any, guid: Guid): Node | null {
+  let result: Node | null = null
+  traverseUpAndDown(sceneGraph, guid, (node) => {
+    const parent = node.parentNode
+    if (parent && (parent.type === 'CANVAS' || parent.type === 'SECTION') && parent.visible && isSpecialNodeType(node.type) && node.visible && node.type !== 'SECTION') {
+      result = node
+    }
+  })
+  return result
+}
+
+/**
+ * Finds a node matching a predicate.
+ * Original: $$w17
+ * @param predicate - Function to test nodes
+ * @param page - The page or current page
+ * @param startNode - Optional starting node
+ * @returns The found node or null
+ */
+export function findNodeMatching(predicate: (node: Node, page: any) => boolean, page: any, startNode?: Node): Node | null {
+  let result: Node | null = null
+  if (!startNode) {
+    const currentPage = page.getCurrentPage()
+    if (!currentPage)
+      return null
+    startNode = currentPage
+  }
+  traverseChildren(startNode, (node) => {
+    if (predicate(node, page)) {
+      result = node
+      return 'stop'
+    }
+  })
+  return result
+}
+
+/**
+ * Finds the latest node matching a predicate.
+ * Original: $$O13
+ * @param predicate - Function to test nodes
+ * @param page - The page
+ * @returns The latest node or null
+ */
+export function findLatestNodeMatching(predicate: (node: Node, page: any) => boolean, page: any): Node | null {
+  let result: Node | null = null
+  const currentPage = page.getCurrentPage()
+  if (currentPage) {
+    traverseChildren(currentPage, (node) => {
+      if (predicate(node, page)) {
+        if (!result) {
+          result = node
+        }
+        else {
+          const [nodeMajor, nodeMinor] = node.guid.split(':').map(Number)
+          const [resMajor, resMinor] = result.guid.split(':').map(Number)
+          result = nodeMajor === resMajor ? (nodeMinor > resMinor ? node : result) : (nodeMajor > resMajor ? node : result)
         }
       }
-    }
-  });
-  return r;
-}
-export function $$x1(e, t) {
-  let r = null;
-  $$d19(e, t, e => {
-    let t = e.parentNode;
-    t && b(e, t) && (r = e);
-  });
-  return r;
-}
-export function $$N6(e) {
-  let t = null;
-  let r = e.parentNode;
-  for (; r;) {
-    if (r.isStackOrFixedSizeContainer) {
-      t = r;
-      break;
-    }
-    r = r.parentNode;
+    })
   }
-  return t;
+  return result
 }
-export function $$C21(e, t) {
-  let r = null;
-  $$d19(e, t, e => {
-    let t = e.parentNode;
-    t && t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && isSpecialNodeType(e.type) && e.visible && "SECTION" !== e.type && (r = e);
-  });
-  return r;
+
+/**
+ * Gets all node guids in the scene graph.
+ * Original: $$R12
+ * @returns Array of all guids
+ */
+export function getAllNodeGuids(): Guid[] {
+  const sceneGraph = getSingletonSceneGraph()
+  const guids: Guid[] = []
+  traverseChildren(sceneGraph.getRoot(), (node) => {
+    guids.push(node.guid)
+  })
+  return guids
 }
-export function $$w17(e, t, r) {
-  let n;
-  if (!r) {
-    let e = t.getCurrentPage();
-    if (!e) return;
-    r = e;
-  }
-  $$s20(r, r => {
-    if (e(r, t)) {
-      n = r;
-      return "stop";
-    }
-  });
-  return n;
-}
-export function $$O13(e, t) {
-  let r;
-  let n = t.getCurrentPage();
-  if (n) {
-    $$s20(n, n => {
-      if (e(n, t)) {
-        if (void 0 === r) r = n;else {
-          let [e, t] = n.guid.split(":").map(Number);
-          let [i, a] = r.guid.split(":").map(Number);
-          r = e === i ? t > a ? n : r : e > i ? n : r;
-        }
+
+/**
+ * Gets visible children recursively.
+ * Original: ZQ
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @param result - Accumulator array
+ * @returns Array of visible children
+ */
+export function getVisibleChildrenRecursive(sceneGraph: any, guid: Guid, result: Node[] = []): Node[] {
+  const node = sceneGraph.get(guid)
+  if (!node || !node.childrenNodes)
+    return result
+  for (const child of node.childrenNodes) {
+    const parent = child.parentNode
+    if (parent && (parent.type === 'CANVAS' || parent.type === 'SECTION') && parent.visible && child.visible) {
+      if (child.type === 'SECTION') {
+        getVisibleChildrenRecursive(sceneGraph, child.guid, result)
       }
-    });
-    return r;
+      else {
+        result.push(child)
+      }
+    }
   }
+  return result
 }
-export function $$R12() {
-  let e = getSingletonSceneGraph();
-  let t = [];
-  $$s20(e.getRoot(), e => {
-    t.push(e.guid);
-  });
-  return t;
+
+/**
+ * Gets visible special children recursively.
+ * Original: qT
+ * @param sceneGraph - The scene graph
+ * @param guid - Starting guid
+ * @param result - Accumulator array
+ * @returns Array of visible special children
+ */
+export function getVisibleSpecialChildrenRecursive(sceneGraph: any, guid: Guid, result: Node[] = []): Node[] {
+  const node = sceneGraph.get(guid)
+  if (!node || !node.childrenNodes)
+    return result
+  for (const child of node.childrenNodes) {
+    const parent = child.parentNode
+    if (parent && (parent.type === 'CANVAS' || parent.type === 'SECTION') && parent.visible && isSpecialNodeType(child.type) && child.visible) {
+      if (child.type === 'SECTION') {
+        getVisibleSpecialChildrenRecursive(sceneGraph, child.guid, result)
+      }
+      else {
+        result.push(child)
+      }
+    }
+  }
+  return result
 }
-export const DS = $$c0;
-export const E6 = $$x1;
-export const F0 = $$p2;
-export const GI = $$y3;
-export const HL = $$h4;
-export const H_ = $$S5;
-export const Ji = $$N6;
-export const MT = $$E7;
-export const O5 = $$I8;
-export const PA = $$o9;
-export const Ql = $$A10;
-export const Si = $$l11;
-export const UP = $$R12;
-export const WY = $$O13;
-export const X4 = $$v14;
-export const ZQ = function e(t, r, n = []) {
-  let i = t.get(r);
-  if (!i || !i.childrenNodes) return n;
-  for (let r of i.childrenNodes) (function (e) {
-    let t = e.parentNode;
-    return !!t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && e.visible;
-  })(r) && ("SECTION" === r.type ? e(t, r.guid, n) : n.push(r));
-  return n;
-};
-export const bV = $$T16;
-export const cy = $$w17;
-export const dA = $$_18;
-export const hD = $$d19;
-export const hV = $$s20;
-export const kh = $$C21;
-export const nO = $$g22;
-export const oY = $$f23;
-export const qT = function e(t, r, i = []) {
-  let a = t.get(r);
-  if (!a || !a.childrenNodes) return i;
-  for (let r of a.childrenNodes) (function (e) {
-    let t = e.parentNode;
-    return !!t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && isSpecialNodeType(e.type) && e.visible;
-  })(r) && ("SECTION" === r.type ? e(t, r.guid, i) : i.push(r));
-  return i;
-};
-export const rV = $$u25;
+
+// Updated exports with meaningful names
+export const DS = getAncestors
+export const E6 = findVisibleChild
+export const F0 = getDepth
+export const GI = isStamp
+export const HL = getResponsiveSetForNodes
+export const H_ = findFirstVisibleSpecialNode
+export const Ji = findStackContainer
+export const MT = isSpecialType
+export const O5 = getResponsiveChildren
+export const PA = getParent
+export const Ql = findScrollableOrVisibleParent
+export const Si = traverseAncestors
+export const UP = getAllNodeGuids
+export const WY = findLatestNodeMatching
+export const X4 = sortBy
+export const bV = getVisibleSpecialChildren
+export const cy = findNodeMatching
+export const dA = getCanvasForNodes
+export const hD = traverseUpAndDown
+export const hV = traverseChildren
+export const kh = findVisibleSectionChild
+export const nO = isContainerType
+export const oY = isShapeType
+export const rV = isDescendant

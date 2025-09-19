@@ -10,7 +10,7 @@ import { y as _$$y } from "../905/672706";
 import { z as _$$z2 } from "../905/335547";
 import { StackBindingsCpp, LayoutSizingMode, Axis, SpacingMode, SceneGraphHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { M as _$$M2 } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -302,7 +302,7 @@ export function $$ed12(e) {
 }
 export function $$ec25(e, t, r, n) {
   let i;
-  i = "width" === n ? new _$$M2(t, e.size.y) : new _$$M2(e.size.x, t);
+  i = "width" === n ? new Vector2D(t, e.size.y) : new Vector2D(e.size.x, t);
   let a = StackBindingsCpp.sizeClampedToMinAndMaxIfFixed(i, e.guid);
   return _$$o(a.x, i.x, .1) && _$$o(a.y, i.y, .1) ? t : r;
 }

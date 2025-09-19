@@ -20,7 +20,7 @@ import { Link } from "../905/438674";
 import { ButtonLargeWide, Button } from "../905/521428";
 import { A as _$$A } from "../905/251970";
 import { Positioning, UserInterfaceElements, WhiteboardStarterKitCppBindings, CollaborationType, SchemaJoinStatus, Fullscreen, CustomPosition, LayoutTabType } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
+import { Rectangle } from "../905/249071";
 import { a as _$$a } from "../905/29104";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -427,9 +427,9 @@ function q({
     let e = f.current;
     if (!e) return;
     let t = g.y - 8;
-    let i = _$$r.fromOriginAndSize(g.x, t, g.width, g.height);
+    let i = Rectangle.fromOriginAndSize(g.x, t, g.width, g.height);
     let r = e.getBoundingClientRect();
-    let n = _(_$$r.fromOriginAndSize(i.right() - r.width - 12, i.top() + 20, r.width, r.height), i);
+    let n = _(Rectangle.fromOriginAndSize(i.right() - r.width - 12, i.top() + 20, r.width, r.height), i);
     if (r.x < 0 || r.y < 0) {
       let t = new Animation(new KeyframeEffect(e, [{
         transform: `translateX(${n.left()}px) translateY(-250px)`

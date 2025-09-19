@@ -3,7 +3,7 @@ import { e_ } from "../905/866195";
 import { Ac, bc } from "../905/499389";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { PrototypingTsApi } from "../figma_app/763686";
-import { kh } from "../figma_app/387100";
+import { findVisibleSectionChild } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
@@ -89,7 +89,7 @@ export let $$C1 = async ({
     let e = i.get(P[0]);
     e && "SECTION" === e.type && (P = e.childrenNodes.filter(e => e.isTopLevelFrame()).map(e => e.guid));
   }
-  P = (P = P.filter(e => e && PrototypingTsApi.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e)?.guid ?? []);
+  P = (P = P.filter(e => e && PrototypingTsApi.isValidNodeForMagicLink(e))).flatMap(e => findVisibleSectionChild(i, e)?.guid ?? []);
   let {
     TEXT,
     ICON,
@@ -173,7 +173,7 @@ export function $$T0(e, t) {
         buttonID,
         destinationScreenID
       } = e;
-      return [kh(t, buttonID) || t.get(buttonID), destinationScreenID ? t.get(destinationScreenID) : null].filter(e => !!e);
+      return [findVisibleSectionChild(t, buttonID) || t.get(buttonID), destinationScreenID ? t.get(destinationScreenID) : null].filter(e => !!e);
     }).map(e => e.absoluteBoundingBox).reduce((e, t) => e ? {
       x: Math.min(e.x, t.x),
       y: Math.min(e.y, t.y),

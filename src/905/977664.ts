@@ -1,7 +1,7 @@
 import { InteractionCpp, Axis } from "../figma_app/763686";
 import { packRgb } from "../figma_app/273493";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { j } from "../905/881708";
 import { Dv, Ro, fl, dw } from "../905/962457";
@@ -26,7 +26,7 @@ export class $$c0 extends j {
     let {
       activeBounds
     } = this._getHandleBounds(this.state.node, e.viewport());
-    activeBounds.containsPointIncludingBoundary(M.fromVectorD(e.viewportSpaceMouse())) ? this.state = {
+    activeBounds.containsPointIncludingBoundary(Vector2D.fromVectorD(e.viewportSpaceMouse())) ? this.state = {
       ...this.state,
       mouseState: Dv.HOVERED
     } : this.state = {
@@ -41,9 +41,9 @@ export class $$c0 extends j {
         this.reset();
         return;
       }
-      let i = M.fromVectorD(e.canvasSpaceMouse());
-      let n = new M(t.absoluteTransform.m02, t.absoluteTransform.m12).minus(i);
-      let r = new M(t.parentNode.absoluteTransform.m02, t.parentNode.absoluteTransform.m12);
+      let i = Vector2D.fromVectorD(e.canvasSpaceMouse());
+      let n = new Vector2D(t.absoluteTransform.m02, t.absoluteTransform.m12).minus(i);
+      let r = new Vector2D(t.parentNode.absoluteTransform.m02, t.parentNode.absoluteTransform.m12);
       this.state = {
         mouseState: Dv.DRAGGED,
         node: t,
@@ -54,7 +54,7 @@ export class $$c0 extends j {
   }
   handleMouseDrag(e) {
     if (this.state.mouseState !== Dv.DRAGGED) return;
-    let t = this.state.canvasSpaceMouseToEmbedRelativeTransformOffset(M.fromVectorD(e.canvasSpaceMouse()));
+    let t = this.state.canvasSpaceMouseToEmbedRelativeTransformOffset(Vector2D.fromVectorD(e.canvasSpaceMouse()));
     let i = this.state.node.relativeTransform;
     i.m02 = t.x;
     i.m12 = t.y;
@@ -87,12 +87,12 @@ export class $$c0 extends j {
       y
     });
     let c = t.canvasScale() * h;
-    let u = new M(_x - Ro.padding - Ro.reorderHandleInactiveSize.y / 2, _y + c / 2);
+    let u = new Vector2D(_x - Ro.padding - Ro.reorderHandleInactiveSize.y / 2, _y + c / 2);
     let p = Ro.reorderHandleInactiveSize.transpose();
     let m = Ro.reorderHandleHoveredSize.transpose();
     return {
-      inactiveBounds: _$$r.fromCenterSize(u, p),
-      activeBounds: _$$r.fromCenterSize(u, m)
+      inactiveBounds: Rectangle.fromCenterSize(u, p),
+      activeBounds: Rectangle.fromCenterSize(u, m)
     };
   }
   _getBackgroundColor() {

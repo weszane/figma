@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { debug } from "../figma_app/465776";
 import { k } from "../905/749197";
 import { ScrollBehavior } from "../figma_app/763686";
-import { F0, rV, PA, nO } from "../figma_app/387100";
+import { getDepth, isDescendant, getParent, isContainerType } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { memoizeByArgs } from "../figma_app/815945";
@@ -84,12 +84,12 @@ let $$S14 = 16;
 let v = memoizeByArgs((e, t) => {
   let r = 1 / 0;
   YI(e, t, t => {
-    t && (r = Math.min(r, F0(e, t.guid)));
+    t && (r = Math.min(r, getDepth(e, t.guid)));
   });
   r === 1 / 0 && (r = 0);
   return r;
 });
-let A = memoizeByArgs((e, t, r) => null !== t && null === t.guid && t.children.length > 0 && !t.children.some(t => rV(e, t, r)));
+let A = memoizeByArgs((e, t, r) => null !== t && null === t.guid && t.children.length > 0 && !t.children.some(t => isDescendant(e, t, r)));
 let x = memoizeByArgs((e, t) => {
   let r = new Set();
   YI(e, t, e => {
@@ -101,7 +101,7 @@ let N = memoizeByArgs((e, t) => {
   if (!t) return {};
   let r = {};
   t.children.forEach(t => {
-    r[t] = F0(e, t);
+    r[t] = getDepth(e, t);
   });
   return r;
 });
@@ -154,7 +154,7 @@ export function $$L1(e, t, r, n, i, a, l) {
     section: void 0 !== l ? R(l, e) : ScrollBehavior.SCROLLS,
     parentTop: u,
     lineTop: void 0 !== l ? O(n, l, e, t, r, "before", a) : void 0,
-    lineIndent: (F0(n, c) + 1) * $$S14,
+    lineIndent: (getDepth(n, c) + 1) * $$S14,
     isCanvasStackReparenting: !0,
     bottomForCanvasStackReparenting: d
   };
@@ -165,7 +165,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
   let m = O(e, d, l, r, n, c, p);
   let g = d < l.fixedChildrenCount ? ScrollBehavior.FIXED : ScrollBehavior.SCROLLS;
   let f = l;
-  let E = null !== u && null !== u.guid && !rV(e, u.guid, l.guid);
+  let E = null !== u && null !== u.guid && !isDescendant(e, u.guid, l.guid);
   if (E) {
     let t = e.get(u.guid);
     t && (f = t, d = t.childCount);
@@ -176,11 +176,11 @@ function P(e, t, r, n, a, l, d, c, u, p) {
     index: d + ("before" === c ? 0 : 1),
     section: g
   };
-  let b = F0(e, f.guid) + 1;
+  let b = getDepth(e, f.guid) + 1;
   for (; !E && b > h;) {
     let r = function (e, t) {
       if ("CANVAS" === t.parent.type || "DOCUMENT" === t.parent.type || t.index !== t.parent.uiOrderedChildren.length || t.section === ScrollBehavior.FIXED) return t;
-      let r = PA(e, t.parent.guid);
+      let r = getParent(e, t.parent.guid);
       debug(null != r, "parent node not in scenegraph");
       let n = r.uiOrderedChildren.indexOf(t.parent.guid);
       return {
@@ -199,7 +199,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
     let r = function (e, t) {
       if (0 === t.index) return t;
       let r = e.get(t.parent.uiOrderedChildren[t.index - 1]);
-      return (debug(null != r, "node not in scenegraph"), nO(r.type) && t.index !== t.parent.fixedChildrenCount && (r.isExpanded || r.isTemporarilyExpanded || !(r.uiOrderedChildren.length > 0))) ? {
+      return (debug(null != r, "node not in scenegraph"), isContainerType(r.type) && t.index !== t.parent.fixedChildrenCount && (r.isExpanded || r.isTemporarilyExpanded || !(r.uiOrderedChildren.length > 0))) ? {
         parent: r,
         index: r.uiOrderedChildren.length,
         section: ScrollBehavior.SCROLLS
@@ -213,7 +213,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
   }
   let T = y.parent.guid;
   let I = N(e, u);
-  let A = Math.max(0, b - (C(e, I, f.guid) ?? F0(e, f.guid)));
+  let A = Math.max(0, b - (C(e, I, f.guid) ?? getDepth(e, f.guid)));
   return {
     parentGuid: T,
     index: y.index,
@@ -228,10 +228,10 @@ function D(e, t, r, n, a, l, d, c, u, _) {
   if (!h) return null;
   let m = r[a];
   let g = n[a];
-  let f = PA(e, a);
+  let f = getParent(e, a);
   debug(null != f, "parent not found");
   let E = f.uiOrderedChildren.indexOf(a);
-  let b = nO(h.type) && !$$F15(c);
+  let b = isContainerType(h.type) && !$$F15(c);
   let T = (i, a, s) => P(e, t, r, n, l, i, a, s, u, _);
   if (b && K3(t, a)) return T(f, E, d > m + y(e, a, n) / 2 ? "after" : "before");
   if (b) {

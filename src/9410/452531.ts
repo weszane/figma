@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { DesignWorkspace } from "../figma_app/763686";
-import { WY } from "../figma_app/387100";
+import { findLatestNodeMatching } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -183,7 +183,7 @@ export function $$y0(e, t) {
       return jsx(P, {
         bodyText: getI18nString("cursor_bot.use_the_design_panel_to_turn_basic_text_into_titles"),
         fromCursorBot: !0,
-        getNodeToSelect: t ? () => WY(e => "TEXT" === e.type && (e.name === $j || "Grown in Tracy, CA" === e.name), getSingletonSceneGraph()) : () => n?.type === "TEXT" ? n : WY(e => "TEXT" === e.type, getSingletonSceneGraph()),
+        getNodeToSelect: t ? () => findLatestNodeMatching(e => "TEXT" === e.type && (e.name === $j || "Grown in Tracy, CA" === e.name), getSingletonSceneGraph()) : () => n?.type === "TEXT" ? n : findLatestNodeMatching(e => "TEXT" === e.type, getSingletonSceneGraph()),
         isFollowUp: i.isFollowUp,
         lowerLeftText: i.onClickBack ? jsx(TrackedButton, {
           onClick: i.onClickBack,

@@ -1,8 +1,8 @@
 import { throwTypeError } from "../figma_app/465776";
 import { FirstDraftHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { C } from "../figma_app/193952";
 import { fullscreenValue } from "../figma_app/455680";
@@ -116,10 +116,10 @@ export function $$y2(e, t) {
 export function $$b3(e) {
   let t = null;
   for (let r of e.childrenNodes) {
-    let e = new _$$r(new M(r.x, r.y), new M(r.size.x, r.size.y));
+    let e = new Rectangle(new Vector2D(r.x, r.y), new Vector2D(r.size.x, r.size.y));
     t = t ? t.unionWith(e) : e;
   }
-  return t ?? new _$$r();
+  return t ?? new Rectangle();
 }
 export function $$T5(e) {
   let t = $$b3(e.copiedDesigns);

@@ -1,5 +1,5 @@
 import { Fullscreen } from "../figma_app/763686";
-import { DS } from "../figma_app/387100";
+import { getAncestors } from "../figma_app/387100";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { I2 } from "../905/70369";
@@ -57,7 +57,7 @@ function f(e, t) {
   if (!u) return !1;
   let i = new Set();
   let n = Object.keys(u.selectedSwappedNodeIds);
-  for (let a of t) for (let t of DS(e, a).map(e => e.guid).concat(a)) -1 !== n.indexOf(t) && i.add(t);
+  for (let a of t) for (let t of getAncestors(e, a).map(e => e.guid).concat(a)) -1 !== n.indexOf(t) && i.add(t);
   return i.size === n.length;
 }
 function _() {

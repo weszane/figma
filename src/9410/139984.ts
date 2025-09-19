@@ -32,7 +32,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W2 } from "../9410/216737";
 import { C7, e7, HX, b7, mg, Ur, xK, g1, $5, ok, qw, A8, $j, N1 } from "../9410/837048";
 import { e as _$$e } from "../figma_app/278289";
-import { cy } from "../figma_app/387100";
+import { findNodeMatching } from "../figma_app/387100";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
@@ -222,7 +222,7 @@ function V(e, t, i) {
         message: (e ? "" : "Yup: ") + "Just click into your frame and type.",
         additionalDelay: 500,
         hasBackupMessage: !0,
-        shouldShowBackupMessage: e => void 0 === cy(ok, e),
+        shouldShowBackupMessage: e => void 0 === findNodeMatching(ok, e),
         backupMessage: (e ? "" : "Yup: ") + "Just click to add a text node and type."
       });
       i.push({

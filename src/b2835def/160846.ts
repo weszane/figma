@@ -54,7 +54,7 @@ import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { Ku } from "../figma_app/740163";
 import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
-import { Em, rC } from "../figma_app/385874";
+import { blackColor, defaultGrayColor } from "../figma_app/385874";
 import { Gt, A5, kl, fC, pw, DQ } from "../905/275640";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
@@ -612,7 +612,7 @@ function tM(e) {
           selectedPropertyType: NodePropertyCategory.STROKE,
           variableScopes: z1,
           ...I,
-          defaultColor: Em,
+          defaultColor: blackColor,
           dispatch: d,
           dropdownShown: h,
           editModeType: activeCanvasEditModeType,
@@ -771,7 +771,7 @@ function tP({
       isVisible: p[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v2, {
         colorFormat: u,
-        defaultColor: rC,
+        defaultColor: defaultGrayColor,
         dispatch: t,
         dropdownShown: h,
         hasExports: !!C && valueOrFallback(C, []).length > 0,
@@ -803,7 +803,7 @@ function tP({
       isVisible: V,
       children: () => jsx(UA, {
         colorFormat: u,
-        defaultColor: rC,
+        defaultColor: defaultGrayColor,
         dispatch: t,
         dropdownShown: h,
         library: _,

@@ -268,7 +268,7 @@ import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { b as _$$b4 } from "../figma_app/203891";
 import { GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
 import { u as _$$u3, j as _$$j2 } from "../figma_app/9104";
-import { rC as _$$rC, Em, y7, Tm } from "../figma_app/385874";
+import { defaultGrayColor, blackColor, getImageOrVideoPaint, paintManager } from "../figma_app/385874";
 import { BS } from "../642/202922";
 import { Mw, ON } from "../3276/43946";
 import { v as _$$v5 } from "../642/281455";
@@ -5914,7 +5914,7 @@ function a_({
       isVisible: y[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v5, {
         colorFormat: t,
-        defaultColor: _$$rC,
+        defaultColor: defaultGrayColor,
         dispatch: E,
         dropdownShown: i,
         hasExports: !!O && valueOrFallback(O, []).length > 0,
@@ -5937,7 +5937,7 @@ function a_({
       isVisible: y[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: t,
-        defaultColor: Em,
+        defaultColor: blackColor,
         dispatch: E,
         dropdownShown: i,
         isPanelBodyCollapsedAtom: null,
@@ -5958,7 +5958,7 @@ function a_({
       isVisible: L,
       children: () => jsx(UA, {
         colorFormat: t,
-        defaultColor: _$$rC,
+        defaultColor: defaultGrayColor,
         dispatch: E,
         dropdownShown: i,
         library: n,
@@ -6136,7 +6136,7 @@ function ay({
         isVisible: y[ItemType.CANVAS_ITEM],
         children: () => jsx(_$$v5, {
           colorFormat: t,
-          defaultColor: _$$rC,
+          defaultColor: defaultGrayColor,
           dispatch: E,
           dropdownShown: i,
           hasExports: !!L && valueOrFallback(L, []).length > 0,
@@ -6159,7 +6159,7 @@ function ay({
         isVisible: y[ItemType.STROKE_ITEM],
         children: () => jsx($p, {
           colorFormat: t,
-          defaultColor: Em,
+          defaultColor: blackColor,
           dispatch: E,
           dropdownShown: i,
           isPanelBodyCollapsedAtom: null,
@@ -6180,7 +6180,7 @@ function ay({
         isVisible: D,
         children: () => jsx(UA, {
           colorFormat: t,
-          defaultColor: _$$rC,
+          defaultColor: defaultGrayColor,
           dispatch: E,
           dropdownShown: i,
           library: n,
@@ -8163,7 +8163,7 @@ function co({
   let [N, k] = useState(null);
   let [C, w] = useState(null);
   let O = X7();
-  let A = y7(e);
+  let A = getImageOrVideoPaint(e);
   let L = useRef(A);
   L.current = A;
   let P = useCurrentFileKey();
@@ -8174,7 +8174,7 @@ function co({
       k(_$$J6(e));
     })) : R && Fe().then(e => j(e));
   }, [R, D, A?.animatedImage?.hash]);
-  let M = useMemo(() => Tm.initPaint("IMAGE", {
+  let M = useMemo(() => paintManager.initPaint("IMAGE", {
     r: 0,
     g: 0,
     b: 0,
@@ -8454,7 +8454,7 @@ function ch({
   let b = useCallback(e => {
     f !== e && ("NONE" === e ? fullscreenValue.updateSelectionProperties({
       fillPaints: []
-    }) : cx[e] && g(Tm.initPaint(cx[e], _$$li.color, valueOrFallback(d, {}), "slides-fill-panel"), yesNoTrackingEnum.YES), j(e));
+    }) : cx[e] && g(paintManager.initPaint(cx[e], _$$li.color, valueOrFallback(d, {}), "slides-fill-panel"), yesNoTrackingEnum.YES), j(e));
   }, [d, g, f]);
   useOnSelectionChange(() => {
     j(y(o));
@@ -8935,7 +8935,7 @@ function cM({
       children: () => jsx(UA, {
         colorFormat: e,
         customColorPicker: GY,
-        defaultColor: _$$rC,
+        defaultColor: defaultGrayColor,
         dispatch: u,
         dropdownShown: t,
         hideCustomColorPickerFillTypeToggle: !1,

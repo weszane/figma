@@ -50,7 +50,7 @@ import { t as _$$t2 } from "../5421/711842";
 import { A as _$$A2 } from "../svg/609746";
 import { A as _$$A3 } from "../6041/969560";
 import { $$default } from "../svg/764361";
-import { Ql, X4, H_ } from "../figma_app/387100";
+import { findScrollableOrVisibleParent, sortBy, findFirstVisibleSpecialNode } from "../figma_app/387100";
 import eg from "../vendor/223926";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -67,7 +67,7 @@ import { h as _$$h2 } from "../905/207101";
 import { RecordableDiv } from "../905/511649";
 import { C as _$$C, B as _$$B2 } from "../905/330741";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
-import { ZM } from "../figma_app/505098";
+import { selectAreAllSymbolsOrInstances } from "../figma_app/505098";
 import { f as _$$f } from "../37/573389";
 import { m9, tz, aA, Xx } from "../figma_app/632975";
 import { eF as _$$eF } from "../figma_app/394327";
@@ -703,13 +703,13 @@ function ew(e) {
     recordingKey: generateRecordingKey(e, `viable-option-${n}`),
     disabled: !1
   }, `enabled-${t}`)) : ((n, i) => {
-    let r = ey()(n.filter(e => t.hasNameForNode(e)), t => t === i && isValidValue(i) ? Ql(e.scene, t)?.guid : e.scene.get(t)?.parentGuid);
+    let r = ey()(n.filter(e => t.hasNameForNode(e)), t => t === i && isValidValue(i) ? findScrollableOrVisibleParent(e.scene, t)?.guid : e.scene.get(t)?.parentGuid);
     let a = Object.keys(r);
-    X4(a, t.format.bind(t));
+    sortBy(a, t.format.bind(t));
     let {
       tlfId,
       index
-    } = H_(e.scene, a);
+    } = findFirstVisibleSpecialNode(e.scene, a);
     tlfId && index && (a.splice(index, 1), a = [tlfId, ...a]);
     return a.reduce((t, n, i) => (0 !== i && t.push(jsx(sK, {}, i)), t.push(jsx(eS, {
       value: n + " ",
@@ -933,7 +933,7 @@ function eX({
     "prototype_set_variable_controls--targetVariableDropdownUI3--Pz71q": !0,
     [eq]: !(y || O)
   });
-  let B = useSelector(ZM) ? getI18nString("proto.select_variable_unified") : getI18nString("proto.select_variable.short");
+  let B = useSelector(selectAreAllSymbolsOrInstances) ? getI18nString("proto.select_variable_unified") : getI18nString("proto.select_variable.short");
   let H = jsx(RecordableDiv, {
     recordingKey: generateRecordingKey(c.recordingKey, "selectTargetVariable"),
     onClick: E,

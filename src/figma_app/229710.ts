@@ -12,7 +12,7 @@ import { createRecordingCallback, useSetupPlayback, generateRecordingKey } from 
 import { Ku, sT } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
 import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
-import { rC } from "../figma_app/385874";
+import { defaultGrayColor } from "../figma_app/385874";
 import { kl, pw, zj, ER, wR, DQ, fC } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -625,7 +625,7 @@ export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DE
     currentSelectedGradientStop: e.currentSelectedGradientStop,
     currentSelectedProperty: e.currentSelectedProperty,
     currentTool: e.currentTool,
-    defaultColor: rC,
+    defaultColor: defaultGrayColor,
     dispatch: e.dispatch,
     dropdownShown: e.dropdownShown,
     editModeType: e.activeCanvasEditModeType,

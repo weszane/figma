@@ -7,7 +7,7 @@ import { getSingleKey, isEmptyObject } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, ScrollBehavior, LayoutTabType, SnapshotLevel, SceneGraphHelpers, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { GI } from "../figma_app/387100";
+import { isStamp } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
@@ -1104,7 +1104,7 @@ class ez extends RecordingPureComponent {
       isRowInView: s,
       isSelected: o,
       isSocialImage: this.props.socialImageGuids?.split(",").includes(e.guid),
-      isStamp: GI(i),
+      isStamp: isStamp(i),
       isState: i.isState,
       isStateGroup: i.isStateGroup,
       isStaticImage: i.hasEnabledStaticImagePaint,

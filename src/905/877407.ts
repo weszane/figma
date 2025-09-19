@@ -1,7 +1,7 @@
 import { AppStateTsApi, Side, StrokeAlignment, SceneGraphHelpers } from "../figma_app/763686";
 import { unpackToNormalizedRgb } from "../figma_app/273493";
-import { r as _$$r } from "../905/249071";
-import { M as _$$M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -10,7 +10,7 @@ import { Bm, Z5, GJ, ZR } from "../905/430950";
 export let $$p1 = 8;
 export function $$m9(e, t, i, r, a) {
   let o = atomStoreManager.get(canvasGridAtom);
-  if (g($$h4(o, r) || new _$$M(0, 0), e, t) && 0 !== o.length) return {
+  if (g($$h4(o, r) || new Vector2D(0, 0), e, t) && 0 !== o.length) return {
     mouse: "ADD_CHILD_AFTER_FINAL_ROW_HOVERED",
     canvasPos: e
   };
@@ -95,16 +95,16 @@ export function $$m9(e, t, i, r, a) {
   };
 }
 export function $$h4(e, t) {
-  if (!AppStateTsApi) return new _$$M(-1, -1);
+  if (!AppStateTsApi) return new Vector2D(-1, -1);
   let i = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(e.length - 1, !1);
   let r = $$x8(e, e.length, t);
   let a = AppStateTsApi.canvasGrid().getRowGUID(e.length - 1) ?? defaultSessionLocalIDString;
   let d = !!getSingletonSceneGraph().get(a)?.isCanvasGridStateGroupRow;
-  return new _$$M(i.origin.x + r.x / 2 + (d ? AppStateTsApi.canvasGrid().gridPadding() : 0), i.origin.y + i.size.y + AppStateTsApi.canvasGrid().gridRowSpacing() / 2 - (d ? AppStateTsApi.canvasGrid().gridPadding() / 2 : 0));
+  return new Vector2D(i.origin.x + r.x / 2 + (d ? AppStateTsApi.canvasGrid().gridPadding() : 0), i.origin.y + i.size.y + AppStateTsApi.canvasGrid().gridRowSpacing() / 2 - (d ? AppStateTsApi.canvasGrid().gridPadding() / 2 : 0));
 }
 function g(e, t, i) {
-  let n = _$$M.fromVectorD(i.canvasSpaceToViewportSpace(e));
-  let r = _$$M.fromVectorD(i.canvasSpaceToViewportSpace(t));
+  let n = Vector2D.fromVectorD(i.canvasSpaceToViewportSpace(e));
+  let r = Vector2D.fromVectorD(i.canvasSpaceToViewportSpace(t));
   return 20 > n.distanceTo(r);
 }
 let f = e => [e.origin, {
@@ -136,7 +136,7 @@ export function $$_10(e, t, i, o, l, d = 0, c = !1, u = !1, p = !1) {
   let g = 16 * t.canvasScale();
   let A = (AppStateTsApi.canvasGrid().gridPadding() || 0) * t.canvasScale();
   let y = {
-    origin: c ? new _$$M(m.x + 10, m.y) : m,
+    origin: c ? new Vector2D(m.x + 10, m.y) : m,
     size: h
   };
   if (p || (i.fillRoundedRect(y, g, o), i.renderDashedLines(f(y), 8, 8, unpackToNormalizedRgb(l), 2)), c) {
@@ -147,7 +147,7 @@ export function $$_10(e, t, i, o, l, d = 0, c = !1, u = !1, p = !1) {
       y: e.size.y * t.canvasScale()
     };
     let l = p ? o.x + 12 + A / 2 : o.x + y.size.x + A + 15;
-    let c = new _$$r(new _$$M(r.x, r.y - .5), new _$$M(l, o.y));
+    let c = new Rectangle(new Vector2D(r.x, r.y - .5), new Vector2D(l, o.y));
     u ? i.strokeRoundedRect(c, 3, AppStateTsApi.getBgAssistiveHover(), 2, StrokeAlignment.CENTER) : i.strokeRoundedRectWithDash(c, 3, AppStateTsApi.getBgAssistiveHover(), 1, 10, 5, StrokeAlignment.INSIDE);
   }
 }

@@ -21,7 +21,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
-import { bn, x$, Ou, iC, Tm } from "../figma_app/385874";
+import { isGradientType, validateGradientPaint, getSolidPaint, getColorAtStop, paintManager } from "../figma_app/385874";
 import { kl } from "../905/275640";
 import { tZ } from "../figma_app/852050";
 import { Um } from "../905/848862";
@@ -80,8 +80,8 @@ function X({
   paint: e,
   onChange: t
 }) {
-  let r = bn(e.type);
-  let i = x$(e);
+  let r = isGradientType(e.type);
+  let i = validateGradientPaint(e);
   return r && i ? jsxs("div", {
     className: _$$s.flex.pl8.$,
     children: [jsx(Y, {}), jsx(_$$n, {
@@ -134,7 +134,7 @@ export function $$J0({
     r();
   }, [C, r]);
   let D = "slidesCustomColorPicker";
-  let k = bn(e.type);
+  let k = isGradientType(e.type);
   let M = R ? getI18nString("slides.properties_panel.text_style.edit_template_color") : k ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : getI18nString("slides.properties_panel.fill.fill_type_color");
   return jsx(_$$k, {
     name: "slides_custom_color_picker",
@@ -211,13 +211,13 @@ function Z({
   let _ = Ku();
   let m = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let g = useRef(null);
-  let [E, y] = useState(bn(e.type) ? 1 : 0);
-  let b = Ou(e);
-  let T = x$(e);
+  let [E, y] = useState(isGradientType(e.type) ? 1 : 0);
+  let b = getSolidPaint(e);
+  let T = validateGradientPaint(e);
   let I = useAppModelProperty("currentSelectedGradientStop");
-  let N = iC(b || T || $$W2, I);
+  let N = getColorAtStop(b || T || $$W2, I);
   let C = r => {
-    e.type !== r && t(Tm.initPaint(r, $$W2.color, e, "slides-custom-color-picker"), !bn(e.type) && bn(r) ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES);
+    e.type !== r && t(paintManager.initPaint(r, $$W2.color, e, "slides-custom-color-picker"), !isGradientType(e.type) && isGradientType(r) ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES);
   };
   return jsxs(Fragment, {
     children: [!o && r && jsx(Q, {

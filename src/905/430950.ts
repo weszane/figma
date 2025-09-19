@@ -1,6 +1,6 @@
 import { StrokeAlignment } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 export let $$s0 = 12;
 export function $$o3(e, t, i, n, r = 0) {
   let a = t.canvasSpaceToViewportSpace(e);
@@ -11,7 +11,7 @@ export function $$l2(e, t, i, o, d, c = 0) {
   let p = t.canvasSpaceToViewportSpace(e);
   let m = Math.sqrt(392);
   p.x += c;
-  i.renderFillAndStrokeRoundedRect(new _$$r(new M(p.x, p.y - m / 2 - 4), new M(m, m)), 3, .7853981635, d, o, 0, StrokeAlignment.INSIDE);
+  i.renderFillAndStrokeRoundedRect(new Rectangle(new Vector2D(p.x, p.y - m / 2 - 4), new Vector2D(m, m)), 3, .7853981635, d, o, 0, StrokeAlignment.INSIDE);
   $$u4(p, i, $$s0, 2, o);
 }
 export function $$d1(e, t, i, n, r, a = 0) {

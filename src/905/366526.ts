@@ -414,7 +414,7 @@ import { fj } from '../figma_app/357047';
 import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
 import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
-import { Tm } from '../figma_app/385874';
+import { paintManager } from '../figma_app/385874';
 import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
@@ -13338,7 +13338,7 @@ let mm = createOptimistThunk((e, t) => {
     t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(XE()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(_$$Uv());
     r.instanceSwapPickerShown.isShown && e.dispatch(_$$vq());
     r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, VariableStyleId.INVALID));
-    Tm.clearCache();
+    paintManager.clearCache();
   } else {
     r.stylePickerShown.isShown && (o && o[ItemType.FILL_ITEM] || e.dispatch(_$$Uv()));
   }

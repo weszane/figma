@@ -16,7 +16,7 @@ import { Eu, $x, tc } from "../figma_app/275370";
 import { z8 } from "../figma_app/862289";
 import { nM, NJ } from "../figma_app/570630";
 import { B } from "../905/107177";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { MH, dM, cM } from "../figma_app/803787";
 import { MH as _$$MH } from "../figma_app/141508";
@@ -143,7 +143,7 @@ async function D(e) {
     let e = getSingletonSceneGraph();
     let t = e.getRoot();
     let i = [];
-    hV(t, t => {
+    traverseChildren(t, t => {
       if (t.isInternalOnlyNode || t.isState || B(t) || t.isStateGroup) return "skip";
       if ("FRAME" !== t.type) return;
       if (!function e(t, i) {

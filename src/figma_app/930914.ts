@@ -13,28 +13,28 @@ import { cn } from '../905/959568';
 import { eM, Fv, Pp, wh, xb } from '../figma_app/164212';
 import { On, p1 } from '../figma_app/323320';
 import { RR } from '../figma_app/338442';
-import { Lg, Ln, Ms } from '../figma_app/505098';
+import { selectContainingStateOrSymbolId, selectAreAllSymbolsOrInstances, createIsInstanceSublayerSelector } from '../figma_app/505098';
 import { YW } from '../figma_app/778125';
 import { generateRecordingKey } from '../figma_app/878298';
 import { useDispatch } from 'react-redux';
 let I = e => e.stopPropagation();
 export function $$S1(e, t) {
   let r = useMemo(On, []);
-  let n = useMemo(Ms, []);
+  let n = useMemo(createIsInstanceSublayerSelector, []);
   let {
     containingProductComponent,
     defReferencedBySelection,
     nodesHaveInstanceSublayer,
     selectionHasProductComponent
   } = selectWithShallowEqual(i => {
-    let a = Lg(i);
+    let a = selectContainingStateOrSymbolId(i);
     let s = a ? i.mirror.sceneGraph.get(a) : null;
     let o = n(i, t);
     return {
       containingProductComponent: s,
       defReferencedBySelection: r(i, e),
       nodesHaveInstanceSublayer: o,
-      selectionHasProductComponent: Ln(i)
+      selectionHasProductComponent: selectAreAllSymbolsOrInstances(i)
     };
   });
   return !useMemo(() => !!containingProductComponent?.guid && !nodesHaveInstanceSublayer && (!selectionHasProductComponent || e !== RR.VISIBLE), [containingProductComponent, nodesHaveInstanceSublayer, selectionHasProductComponent, e]) || !!defReferencedBySelection;
@@ -47,7 +47,7 @@ export function $$v3(e, t, r, n) {
     containingProductComponent,
     hasExistingDefs
   } = selectWithShallowEqual(t => {
-    let r = Lg(t);
+    let r = selectContainingStateOrSymbolId(t);
     return {
       containingProductComponent: r ? t.mirror.sceneGraph.get(r) : null,
       hasExistingDefs: !!d(t, r, e).length
@@ -86,7 +86,7 @@ export function $$A2(e) {
   let {
     hasExistingDefs
   } = selectWithShallowEqual(r => {
-    let n = Lg(r);
+    let n = selectContainingStateOrSymbolId(r);
     return {
       hasExistingDefs: !!t(r, n, e).length
     };

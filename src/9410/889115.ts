@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { DesignWorkspace } from "../figma_app/763686";
-import { WY, cy } from "../figma_app/387100";
+import { findLatestNodeMatching, findNodeMatching } from "../figma_app/387100";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -171,7 +171,7 @@ export function $$x0(e, t) {
       });
       return jsx(Z, {
         bodyText: t ? getI18nString("cursor_bot.design_panel_can_change_objects") : getI18nString("cursor_bot.design_panel_is_key"),
-        frameNodeMatcher: t ? e => WY(e => TT(e, Dl), e) || cy((e, t) => Q$(e, t), e) : void 0,
+        frameNodeMatcher: t ? e => findLatestNodeMatching(e => TT(e, Dl), e) || findNodeMatching((e, t) => Q$(e, t), e) : void 0,
         fromCursorBot: !0,
         isFollowUp: i.isFollowUp,
         lowerLeftText: i.onClickBack ? jsx(TrackedButton, {

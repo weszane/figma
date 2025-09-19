@@ -15,7 +15,7 @@ import { AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ku } from "../figma_app/740163";
 import { normalizeValue, getCommonFromArray } from "../905/216495";
-import { Tm, rC, Em } from "../figma_app/385874";
+import { paintManager, defaultGrayColor, blackColor } from "../figma_app/385874";
 import { selectCurrentFile } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
@@ -47,7 +47,7 @@ function B(e) {
       paints: e,
       encodedPaints: t
     });
-    Tm.clearCache();
+    paintManager.clearCache();
   };
   let K = e => {
     let {
@@ -157,7 +157,7 @@ function B(e) {
           fullscreenValue.triggerAction("add-stroke-to-selection");
         },
         currentSelectedProperty: e.currentSelectedProperty,
-        defaultColor: rC,
+        defaultColor: defaultGrayColor,
         inheritStyleID: null,
         inheritStyleKey: n.styleId || null,
         inheritStyleKeyField: "inheritFillStyleKeyForStroke",
@@ -167,7 +167,7 @@ function B(e) {
         onChange: G,
         onDeleteProperty: e => V(e),
         onReorder: () => {
-          Tm.clearCache();
+          paintManager.clearCache();
         },
         onToggleListLayout: () => {
           w(_$$Y({
@@ -180,13 +180,13 @@ function B(e) {
         removeAllProperties: null,
         renderProperty: (t, n, i, r, a, o, c, d, u) => {
           let h = F() ? "preview-paint" : "paint";
-          let g = Tm.getId(n, NodePropertyCategory.STROKE_PRESET, h);
+          let g = paintManager.getId(n, NodePropertyCategory.STROKE_PRESET, h);
           let m = v.slice(0, n).some(e => e.visible);
           return jsx(Gg, {
             colorFormat: e.colorFormat,
             currentSelectedGradientStop: e.currentSelectedGradientStop,
             currentTool: DesignGraphElements.VECTOR_PENCIL,
-            defaultColor: Em,
+            defaultColor: blackColor,
             dispatch: w,
             dropdownShown: e.dropdownShown,
             editModeType: e.editModeType,

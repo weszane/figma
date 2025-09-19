@@ -17,7 +17,7 @@ import { JB } from "../905/843553";
 import { fullscreenValue } from "../figma_app/455680";
 import { Jr, UD } from "../figma_app/624361";
 import { Mo } from "../905/913055";
-import { Tm } from "../figma_app/385874";
+import { paintManager } from "../figma_app/385874";
 import { AiMeterUsageView } from "../figma_app/43951";
 import { qy } from "../figma_app/862289";
 import { A as _$$A } from "../905/929620";
@@ -214,7 +214,7 @@ export async function $$M0({
                         isInStyleModal: !1
                       }
                     }));
-                  })(Tm.getId(r + 1, NodePropertyCategory.FILL, "paint"));
+                  })(paintManager.getId(r + 1, NodePropertyCategory.FILL, "paint"));
                 } else e.insertImageInFillPaint(t);
               });
             }), Fullscreen && (Fullscreen.requestNextCommitMergeWithPrevious(TextModificationAction.AI_IMAGE_MODIFICATION), Fullscreen.triggerAction("commit", {})));

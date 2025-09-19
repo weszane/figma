@@ -74,7 +74,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy, mp } from "../figma_app/579169";
-import { y7 } from "../figma_app/385874";
+import { getImageOrVideoPaint } from "../figma_app/385874";
 import { N as _$$N } from "../figma_app/268271";
 import { y as _$$y } from "../905/129046";
 import { rq as _$$rq } from "../905/425180";
@@ -1542,7 +1542,7 @@ function td({
         o();
         return;
       }
-      let e = Array.isArray(r) && r.some(e => y7(e) && !II(e));
+      let e = Array.isArray(r) && r.some(e => getImageOrVideoPaint(e) && !II(e));
       if (t || e) {
         l();
         return;

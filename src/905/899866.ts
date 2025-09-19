@@ -4,7 +4,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { GP } from "../figma_app/15927";
 import { debugState } from "../905/407919";
 import { trackFileEvent, trackDefinedFileEvent } from "../figma_app/314264";
-import { E3 } from "../figma_app/385874";
+import { isImageOrVideoType } from "../figma_app/385874";
 export function $$c2(e, t) {
   let i = useRef(e);
   i.current = e;
@@ -63,7 +63,7 @@ export function $$p0(e, t) {
 function m(e, t) {
   let i = Object.keys(t.mirror.sceneGraphSelection);
   let n = t.mirror.selectedStyleProperties.guid;
-  n ? i = [sessionLocalIDToString(n)] : i.length > 1 && !E3(e.type) && (i = SelectionPaintHelpers.getConsumingPaints(GP(e)));
+  n ? i = [sessionLocalIDToString(n)] : i.length > 1 && !isImageOrVideoType(e.type) && (i = SelectionPaintHelpers.getConsumingPaints(GP(e)));
   return i;
 }
 export const T7 = $$p0;

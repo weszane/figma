@@ -3,7 +3,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { k } from "../905/749197";
 import { SceneGraphHelpers, ScrollBehavior } from "../figma_app/763686";
 import { isSpecialNodeType } from "../905/266460";
-import { MT } from "../figma_app/387100";
+import { isSpecialType } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { isRecordingEnabled } from "../figma_app/878298";
@@ -143,7 +143,7 @@ function T(e, t, r, n, i, a) {
   return o;
 }
 export function $$I0(e, t) {
-  return !!MT(t.type) || "CMS_RICH_TEXT" === t.type || !!getFeatureFlags().bake_canvas && !!t.isMakeResponsiveSet;
+  return !!isSpecialType(t.type) || "CMS_RICH_TEXT" === t.type || !!getFeatureFlags().bake_canvas && !!t.isMakeResponsiveSet;
 }
 export function $$S2(e) {
   let {

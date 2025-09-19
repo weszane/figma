@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { UP } from "../figma_app/387100";
+import { getAllNodeGuids } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { _ } from "../905/793009";
 class o {
@@ -56,9 +56,9 @@ export async function $$d0(e, t, r, n, {
 } = {}) {
   let s = o.instance;
   if (!a || !s) return await n();
-  let l = UP();
+  let l = getAllNodeGuids();
   let c = await n();
-  let u = new Set(UP());
+  let u = new Set(getAllNodeGuids());
   l.forEach(e => u.$$delete(e));
   t ||= "null";
   s.trackNodesAsTemplate(e(), u, t, r);

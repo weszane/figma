@@ -68,7 +68,7 @@ import { eF as _$$eF } from '../figma_app/394327';
 import { ty as _$$ty } from '../figma_app/406976';
 import { fullscreenValue } from '../figma_app/455680';
 import { Dm, Vg } from '../figma_app/460003';
-import { Nw } from '../figma_app/505098';
+import { selectContainingStateGroupId } from '../figma_app/505098';
 import { c as _$$c } from '../figma_app/528598';
 import { aR, pf } from '../figma_app/530362';
 import { S as _$$S } from '../figma_app/552746';
@@ -249,7 +249,7 @@ function ew(e) {
       propertySortOrder: OC(e) ?? []
     };
   });
-  let w = useSelector(Nw);
+  let w = useSelector(selectContainingStateGroupId);
   let O = useDispatch();
   let R = useCallback(e => {
     V(e.currentTarget.value);
@@ -1375,7 +1375,7 @@ function tp({
   recordingKey: l
 }) {
   let d = useSelector(e => ow(e) ?? []);
-  let c = useSelector(Nw);
+  let c = useSelector(selectContainingStateGroupId);
   let u = useSelector(e => OC(e) ?? []);
   let _ = useSelector(e => e.dropdownShown);
   let m = _?.type === ex;

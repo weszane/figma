@@ -225,7 +225,7 @@ import { B as _$$B2 } from "../905/950875";
 import { O as _$$O4 } from "../905/501876";
 import { l as _$$l } from "../905/479687";
 import { r as _$$r4 } from "../905/857502";
-import { GI } from "../figma_app/387100";
+import { isStamp } from "../figma_app/387100";
 import { dU as _$$dU, xY, Xn } from "../9410/461336";
 import { x as _$$x } from "../905/587214";
 import { y as _$$y3 } from "../figma_app/404310";
@@ -402,7 +402,7 @@ import { nl as _$$nl2 } from "../figma_app/897289";
 import { VisualBellIcon } from "../905/576487";
 import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
 import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
-import { N9 } from "../figma_app/385874";
+import { filterValidImagePaints } from "../figma_app/385874";
 import { Xo } from "../figma_app/482495";
 import { e as _$$e6 } from "../905/726668";
 import { Dc, hV as _$$hV } from "../figma_app/151766";
@@ -7030,7 +7030,7 @@ function s9({
     } = useDeepEqualSceneValue((e, t) => {
       let n = e?.get(t ?? "");
       return n ? {
-        type: GI(n) ? "STAMP" : n.type,
+        type: isStamp(n) ? "STAMP" : n.type,
         booleanOperation: n.booleanOperation,
         isAutoLayout: "HORIZONTAL" === n.stackMode || "VERTICAL" === n.stackMode,
         isVariant: n.isState || n.parentNode?.isStateGroup,
@@ -9698,7 +9698,7 @@ function ut({
   let t = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let n = e.get(t);
-    return n ? N9(n?.fills)?.filter(e => e.opacity > 0 && e.visible) : null;
+    return n ? filterValidImagePaints(n?.fills)?.filter(e => e.opacity > 0 && e.visible) : null;
   }, e?.assetId);
   return (_$$p2(e) || _$$cZ(e)) && t && t.length && t[0] ? jsx(_$$iV, {
     image: t[0],

@@ -8,7 +8,7 @@ import { getObservableOrFallback } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
 import { useSelector, useDispatch } from "react-redux";
-import { hD, kh, qT } from "../figma_app/387100";
+import { traverseUpAndDown, findVisibleSectionChild, qT } from "../figma_app/387100";
 import { t as _$$t } from "../905/241707";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { getVisibleTheme } from "../905/640017";
@@ -87,7 +87,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { J as _$$J2 } from "../905/125993";
 import { A as _$$A11 } from "../905/251970";
 import { w as _$$w2 } from "../905/442596";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { A as _$$A12, C as _$$C2 } from "../figma_app/686450";
 import { $isListItemNode, $isListNode } from "@lexical/list";
@@ -154,7 +154,7 @@ function v(e) {
       if (!a) return t;
       {
         let n = [];
-        hD(e, t, e => {
+        traverseUpAndDown(e, t, e => {
           e.guid === a && n.push(t);
         });
         return n;
@@ -1882,7 +1882,7 @@ function tO() {
       let o = getSingletonSceneGraph().get(a);
       if (!o) return;
       o.removeAnnotation(i);
-      let l = kh(getSingletonSceneGraph(), a);
+      let l = findVisibleSectionChild(getSingletonSceneGraph(), a);
       e("delete_annotation", {
         nodeId: a,
         nodeType: o.type,
@@ -2914,7 +2914,7 @@ function n2({
     return useCallback((i, s, r, d) => {
       permissionScopeHandler.user(r ? "edit-annotation" : "create-annotation", () => {
         r ? i.updateAnnotation(d, s) : i.addAnnotation(s);
-        let c = kh(getSingletonSceneGraph(), i.guid);
+        let c = findVisibleSectionChild(getSingletonSceneGraph(), i.guid);
         let u = s.categoryId ? l.find(e => e.id === s.categoryId) : null;
         let p = {
           nodeType: i.type,
@@ -2957,7 +2957,7 @@ function n2({
   }, [w, T]);
   let L = useCallback(() => {
     let n = !!N && ("" !== N.label || N.properties.length > 0 || null !== T);
-    let a = 0 === ("lexical" === detectEditorStateFormat(k) ? parseEditorStateToPlainText(k) : At(k)).length;
+    let a = 0 === ("lexical" === detectEditorStateFormat(k) ? parseEditorStateToPlainText(k) : sanitizeAndExtractText(k)).length;
     if (a && 0 === I.length && null === T) N && y(e, r);else {
       let i = getSingletonSceneGraph().get(e);
       i && (v(i, {
@@ -3085,7 +3085,7 @@ function n5({
     let s = t ? M.find(e => e.id === t) : null;
     let r = s ? uA(s) : null;
     if (a) {
-      let e = kh(getSingletonSceneGraph(), a.guid);
+      let e = findVisibleSectionChild(getSingletonSceneGraph(), a.guid);
       y("select_annotation_category", {
         nodeId: a.guid,
         nodeType: a.type,
@@ -3136,7 +3136,7 @@ function n5({
     if (t.stopPropagation(), t.preventDefault(), !isDropdownShown) {
       let t = getSingletonSceneGraph().get(e);
       if (t) {
-        let e = kh(getSingletonSceneGraph(), t.guid);
+        let e = findVisibleSectionChild(getSingletonSceneGraph(), t.guid);
         y("click_annotation_category_picker", {
           nodeId: t.guid,
           nodeType: t.type,
@@ -3970,7 +3970,7 @@ function aj() {
     let c = useAtomWithSubscription(_$$m);
     let p = NW();
     let f = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
-    let g = useDeepEqualSceneValue((e, t) => kh(e, t || "")?.guid || t || void 0, n);
+    let g = useDeepEqualSceneValue((e, t) => findVisibleSectionChild(e, t || "")?.guid || t || void 0, n);
     let {
       allAnnotations,
       newAnnotationNode

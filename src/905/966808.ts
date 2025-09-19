@@ -1,5 +1,5 @@
 import { CooperHelpers, Fullscreen, AppStateTsApi, Position, SceneGraphHelpers } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -25,7 +25,7 @@ export class $$p0 extends j {
     let {
       errorIconRect
     } = vo(t, i, a, this._stateGroupError, o);
-    let c = M.fromVectorD(e.canvasSpaceToViewportSpace(this._mousePosition));
+    let c = Vector2D.fromVectorD(e.canvasSpaceToViewportSpace(this._mousePosition));
     let u = errorIconRect?.expand(1);
     let p = Fullscreen?.getStateGroupErrorString(this._stateGroupError);
     let m = u?.containsPointIncludingBoundary(c);
@@ -37,7 +37,7 @@ export class $$p0 extends j {
     let i = AppStateTsApi?.canvasGrid().getRowGUID(t) ?? defaultSessionLocalIDString;
     let d = !!getSingletonSceneGraph().get(i)?.isCanvasGridStateGroupRow;
     let c = Fullscreen?.getStateGroupError(i) || null;
-    d && c ? (this._hoveredRowIndex = t, this._hoveredRowGuid = i, this._stateGroupError = c, this._mousePosition = M.fromVectorD(e.canvasSpaceMouse())) : (this._hoveredRowIndex = -1, this._hoveredRowGuid = "", this._stateGroupError = null, this._mousePosition = null, this._isTooltipRendered = !1, AppStateTsApi?.hideCanvasTooltip());
+    d && c ? (this._hoveredRowIndex = t, this._hoveredRowGuid = i, this._stateGroupError = c, this._mousePosition = Vector2D.fromVectorD(e.canvasSpaceMouse())) : (this._hoveredRowIndex = -1, this._hoveredRowGuid = "", this._stateGroupError = null, this._mousePosition = null, this._isTooltipRendered = !1, AppStateTsApi?.hideCanvasTooltip());
   }
   handleMouseDown(e) {
     if (getFeatureFlags().buzz_template_sets && AppStateTsApi?.canEnterDesignMode() && this._isTooltipRendered && null !== this._stateGroupError) {

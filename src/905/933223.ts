@@ -1,7 +1,7 @@
 import { unpackToNormalizedRgb } from "../figma_app/273493";
 import { AppStateTsApi, DiagramElementType, Fullscreen, InteractionCpp, CooperHelpers, StrokeAlignment, HorizontalAlignment, VerticalAlignment, TextBoxType, FontWeight, SceneGraphHelpers } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import o, { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -47,7 +47,7 @@ let g = class e extends j {
   }
   handleMouseDown(e) {
     if ("INACTIVE" === this._state.mouse || "ROW_HOVERED" === this._state.mouse) return;
-    let t = M.fromVectorD(e.viewportSpaceMouse());
+    let t = Vector2D.fromVectorD(e.viewportSpaceMouse());
     let i = this._state.currentRowIndex;
     if ("HEADER_HOVERED" === this._state.mouse && 2 === e.clickCount()) return;
     e.isShiftPressed() ? this.addOrRemoveRowFromSelection(i) : this.selectRow(i);
@@ -72,7 +72,7 @@ let g = class e extends j {
   handleMouseDrag(e) {
     if ("INACTIVE" === this._state.mouse || "HANDLE_HOVERED" === this._state.mouse || "HEADER_HOVERED" === this._state.mouse || "ROW_HOVERED" === this._state.mouse || !AppStateTsApi) return;
     AppStateTsApi.canvasGrid().isDraggingChildren.set(!0);
-    let t = M.fromVectorD(e.viewportSpaceMouse());
+    let t = Vector2D.fromVectorD(e.viewportSpaceMouse());
     let i = (t.y - this._state.mouseDownY) / e.viewport().canvasScale();
     let n = atomStoreManager.get(canvasGridAtom);
     for (let e = 0; e < n.length; e++) $j({
@@ -165,9 +165,9 @@ let g = class e extends j {
     };
     let a = t.viewport();
     let o = this._getViewportSpaceReorderHandle(a, n);
-    let l = M.fromVectorD(t.canvasSpaceMouse());
-    let d = M.fromVectorD(a.canvasSpaceToViewportSpace(l));
-    let c = o.activeRect.expand(new M(e.reorderMargin, 0)).containsPointIncludingBoundary(d) ? "HANDLE_HOVERED" : "ROW_HOVERED";
+    let l = Vector2D.fromVectorD(t.canvasSpaceMouse());
+    let d = Vector2D.fromVectorD(a.canvasSpaceToViewportSpace(l));
+    let c = o.activeRect.expand(new Vector2D(e.reorderMargin, 0)).containsPointIncludingBoundary(d) ? "HANDLE_HOVERED" : "ROW_HOVERED";
     if ("HANDLE_HOVERED" === c) {
       let e = AppStateTsApi?.canvasGrid().canvasGridArray.getCopy()[n] ?? [];
       return {
@@ -186,7 +186,7 @@ let g = class e extends j {
   }
   _renderActiveHandle(t, i, n) {
     if (AppStateTsApi) for (let s of (t.fillRoundedRect(i, .5 * e.handleHeight, n ? AppStateTsApi.getBgAssistiveHover() : AppStateTsApi.getCanvasButton()), e.handleIconOffsets)) {
-      let n = new _$$r(s, e.handleIconDimensions);
+      let n = new Rectangle(s, e.handleIconDimensions);
       t.fillRoundedRect(n.offsetBy(i.topLeft()), e.handleIconDashRadius, AppStateTsApi.getFSCanvasDefaultFill());
     }
   }
@@ -206,27 +206,27 @@ let g = class e extends j {
   _renderActiveStateGroupRowHeader(e, t, i, n, s, o, l) {
     if (!AppStateTsApi) return;
     let d = CooperHelpers?.getBuzzVariantText(o) || "";
-    s && InteractionCpp?.shouldRenderHoveredCanvasGridRowNodeDuringQuickAddSelectedDecorations(o) && e.strokeRoundedRect(new _$$r(t.origin, i), xC, AppStateTsApi.getBgAssistiveHover(), 2, StrokeAlignment.CENTER);
+    s && InteractionCpp?.shouldRenderHoveredCanvasGridRowNodeDuringQuickAddSelectedDecorations(o) && e.strokeRoundedRect(new Rectangle(t.origin, i), xC, AppStateTsApi.getBgAssistiveHover(), 2, StrokeAlignment.CENTER);
     iZ(e, t, d, n, l);
   }
   _renderActiveRowNodeTypeHeader(e, t, i, o, l = !0) {
     let d;
     if (!AppStateTsApi) return;
-    let c = new M(4, 4);
-    let u = new _$$r(new M(t.origin.x, t.origin.y - 1), new M(t.size.x, 2));
+    let c = new Vector2D(4, 4);
+    let u = new Rectangle(new Vector2D(t.origin.x, t.origin.y - 1), new Vector2D(t.size.x, 2));
     o && e.fillRect(u, AppStateTsApi.getCanvasButton());
     d = o ? unpackToNormalizedRgb(AppStateTsApi.getFSCanvasDefaultFill()) : l ? unpackToNormalizedRgb(AppStateTsApi.getTextPrimary()) : unpackToNormalizedRgb(AppStateTsApi.getTextSecondary());
-    e.fillTextWithBox(new M(t.origin.x - c.x, t.origin.y), i, d, o ? unpackToNormalizedRgb(AppStateTsApi.getCanvasButton()) : unpackToNormalizedRgb(AppStateTsApi.getBgFSTertiary()), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0, TextBoxType.BOX, c, FontWeight.MEDIUM, xC);
+    e.fillTextWithBox(new Vector2D(t.origin.x - c.x, t.origin.y), i, d, o ? unpackToNormalizedRgb(AppStateTsApi.getCanvasButton()) : unpackToNormalizedRgb(AppStateTsApi.getBgFSTertiary()), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0, TextBoxType.BOX, c, FontWeight.MEDIUM, xC);
   }
   _getViewportSpaceReorderHandle(t, i) {
     if (!AppStateTsApi) return {
-      activeRect: new _$$r(),
-      inactiveRect: new _$$r()
+      activeRect: new Rectangle(),
+      inactiveRect: new Rectangle()
     };
     let n = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(i, !0);
     let o = n.origin.x;
     let l = n.origin.y + n.size.y / 2;
-    let d = M.fromVectorD(t.canvasSpaceToViewportSpace({
+    let d = Vector2D.fromVectorD(t.canvasSpaceToViewportSpace({
       x: o,
       y: l
     }));
@@ -235,8 +235,8 @@ let g = class e extends j {
       d.y += e;
     }
     return {
-      activeRect: new _$$r(d, new M(0, 0)).expand(new M(e.activeHandleWidth / 2, e.handleHeight / 2)).offsetBy(new M(-1 * e.reorderXOffsetViewport, 0)),
-      inactiveRect: new _$$r(d, new M(0, 0)).expand(new M(e.inactiveHandleWidth / 2, e.handleHeight / 3)).offsetBy(new M(-1 * e.reorderXOffsetViewport, 0))
+      activeRect: new Rectangle(d, new Vector2D(0, 0)).expand(new Vector2D(e.activeHandleWidth / 2, e.handleHeight / 2)).offsetBy(new Vector2D(-1 * e.reorderXOffsetViewport, 0)),
+      inactiveRect: new Rectangle(d, new Vector2D(0, 0)).expand(new Vector2D(e.inactiveHandleWidth / 2, e.handleHeight / 3)).offsetBy(new Vector2D(-1 * e.reorderXOffsetViewport, 0))
     };
   }
   _getViewportSpaceRowDimensions(e, t) {
@@ -246,7 +246,7 @@ let g = class e extends j {
     if (!n) return null;
     let a = e.canvasScale() * n.width;
     let o = e.canvasScale() * n.height;
-    return new M(a, o);
+    return new Vector2D(a, o);
   }
   _getViewportSpaceRowHeaderBounds(e, t, i) {
     let n = 0;
@@ -257,7 +257,7 @@ let g = class e extends j {
   }
   reset() {}
   getDefaultChildSize() {
-    return new M(0, 0);
+    return new Vector2D(0, 0);
   }
   shouldHideUI() {
     return !1;
@@ -274,14 +274,14 @@ let g = class e extends j {
 g.handleViewportLength = 20;
 g.reorderMargin = b;
 g.reorderXOffsetViewport = 8;
-g.handleViewportSize = new M(g.handleViewportLength, g.handleViewportLength);
+g.handleViewportSize = new Vector2D(g.handleViewportLength, g.handleViewportLength);
 g.handleHeight = js;
 g.activeHandleWidth = vJ;
 g.inactiveHandleWidth = g.activeHandleWidth / 4;
 g.handleIconDashThickness = g.handleHeight / 16;
 g.handleIconDashVerticalOffset = g.handleHeight / 2 / 3;
-g.handleIconDimensions = new M(g.activeHandleWidth / 2, g.handleIconDashThickness);
-g.handleIconOffsets = [new M(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2 - g.handleIconDashVerticalOffset), new M(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2), new M(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2 + g.handleIconDashVerticalOffset)];
+g.handleIconDimensions = new Vector2D(g.activeHandleWidth / 2, g.handleIconDashThickness);
+g.handleIconOffsets = [new Vector2D(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2 - g.handleIconDashVerticalOffset), new Vector2D(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2), new Vector2D(g.activeHandleWidth / 4, g.handleHeight / 2 - g.handleIconDashThickness / 2 + g.handleIconDashVerticalOffset)];
 g.handleRadius = .5 * g.handleHeight;
 g.handleIconDashRadius = .5 * g.handleIconDashThickness;
 export let $$f0 = g;

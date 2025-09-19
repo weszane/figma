@@ -4,7 +4,7 @@ import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { whiteColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { getColorSpaceString } from "../figma_app/622881";
-import { XE } from "../figma_app/385874";
+import { getPatternPaint } from "../figma_app/385874";
 function c(e) {
   return e ? {
     pixels: e.pixels,
@@ -50,7 +50,7 @@ export function $$p8(e, t, i = whiteColor) {
 }
 export function $$m0(e, t) {
   if (!Thumbnail) return null;
-  let i = XE(e);
+  let i = getPatternPaint(e);
   if (!i) return null;
   let n = sessionLocalIDToString(i.sourceNodeId);
   if (!n || !isValidSessionLocalID(i.sourceNodeId)) return null;

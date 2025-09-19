@@ -1,4 +1,4 @@
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { Ay } from "../figma_app/432652";
 async function i(e) {
   let t = `
@@ -144,7 +144,7 @@ When generating the Code Connect mapping:
     } = e;
     let r = function (e, t) {
       let n = [];
-      hV(t, e => {
+      traverseChildren(t, e => {
         "TEXT" === e.type && n.push(e);
       });
       let a = n.map(e => ({

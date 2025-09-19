@@ -1,5 +1,5 @@
 import { colorsEqual } from "../figma_app/273493";
-import { cy } from "../figma_app/387100";
+import { findNodeMatching } from "../figma_app/387100";
 let a = "Watermelon";
 let $$s21 = 1440;
 let $$o6 = 900;
@@ -77,7 +77,7 @@ let $$k12 = {
   units: "PERCENT"
 };
 export function $$N4(e, t) {
-  return !(!R(e) || !cy(e => e.name === a, t, e) || cy(e => e.name === $$d14, t, e));
+  return !(!R(e) || !findNodeMatching(e => e.name === a, t, e) || findNodeMatching(e => e.name === $$d14, t, e));
 }
 export function $$A11(e, t) {
   return !!function (e) {

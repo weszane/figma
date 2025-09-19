@@ -5,7 +5,7 @@ import { blendGradientColors, blendColors } from "../figma_app/191804";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
-import { sb, bn } from "../figma_app/385874";
+import { isSolidType, isGradientType } from "../figma_app/385874";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { X7 } from "../905/713167";
 var $$m2 = (e => (e.LOADING = "LOADING", e.LOADED = "LOADED", e.TIMED_OUT = "TIMED_OUT", e))($$m2 || {});
@@ -202,7 +202,7 @@ export function $$y1(e) {
       let s = "PASS_THROUGH" !== e.blendMode && "NORMAL" !== e.blendMode;
       for (let s = e.fills.length - 1; s >= 0; s--) {
         let d = e.fills[s];
-        let u = sb(d?.type);
+        let u = isSolidType(d?.type);
         let p = d?.opacity === 1 && d?.color?.a === 1;
         if (d?.visible && d?.opacity !== 0) {
           if (u && "NORMAL" === d.blendMode) {
@@ -216,7 +216,7 @@ export function $$y1(e) {
             r = !1;
             o = d.type;
             l = d.blendMode;
-            t = "VIDEO" === o ? "VideoInBackground" : "IMAGE" === o ? "ImageInBackground" : bn(o) ? "GradientInBackground" : l && "NORMAL" !== l && "PASS_THROUGH" !== l ? "BlendModeInBackground" : "Unavailable";
+            t = "VIDEO" === o ? "VideoInBackground" : "IMAGE" === o ? "ImageInBackground" : isGradientType(o) ? "GradientInBackground" : l && "NORMAL" !== l && "PASS_THROUGH" !== l ? "BlendModeInBackground" : "Unavailable";
             break;
           }
         }
@@ -254,7 +254,7 @@ export function $$y1(e) {
   return {
     blendedBackground: function (e) {
       let t = e.map(e => {
-        let t = e.filter(e => sb(e.type)).filter(e => e.visible).map(e => e.opacity && e.color ? {
+        let t = e.filter(e => isSolidType(e.type)).filter(e => e.visible).map(e => e.opacity && e.color ? {
           ...e,
           color: {
             ...e.color,

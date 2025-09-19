@@ -8,12 +8,12 @@ import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { selectSceneGraph } from "../figma_app/889655";
 import { Yg, OE, Yi, k4, wd, ZH, aO, m5 } from "../figma_app/164212";
 import { s as _$$s } from "../figma_app/335489";
-import { C1 } from "../figma_app/505098";
+import { getComponentProps } from "../figma_app/505098";
 import { vf, Jm } from "../figma_app/583247";
 export function $$m1(e, t, r) {
   let a = useMemo(vf, []);
   let o = useSelector(selectSceneGraph);
-  let d = useSelector(C1);
+  let d = useSelector(getComponentProps);
   let p = Yg(e, o);
   let m = useSelector(t => a(t, e));
   let g = r ? p : d;

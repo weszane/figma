@@ -1,5 +1,5 @@
 import { Fullscreen } from "../figma_app/763686";
-import { DS } from "../figma_app/387100";
+import { getAncestors } from "../figma_app/387100";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -24,7 +24,7 @@ let $$g0 = createOptimistThunk((e, t) => {
 let $$f1 = createOptimistThunk(e => {
   let t = e.getState();
   let i = Object.keys(t.mirror.sceneGraphSelection);
-  let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || DS(t.mirror.sceneGraph, i[0]).some(e => e.guid === p?.mainComponentGUID));
+  let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || getAncestors(t.mirror.sceneGraph, i[0]).some(e => e.guid === p?.mainComponentGUID));
   n && !$$m ? (document.addEventListener("keydown", _), e.dispatch(VisualBellActions.enqueue({
     type: u,
     message: "",

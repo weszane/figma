@@ -1,7 +1,7 @@
 import { _1, JF, RP } from "../figma_app/257655";
 import { FirstDraftHelpers, AnimationBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { parseHex } from "../figma_app/191804";
@@ -363,7 +363,7 @@ export async function $$K0({
   let v = await G([C], e, p);
   p.shouldAnimateLoading && p.doneTextLayerIds && function (e, t, i) {
     let r = [];
-    for (let e of (hV(t, e => {
+    for (let e of (traverseChildren(t, e => {
       "TEXT" === e.type && r.push(e);
     }), r)) i.has(e.guid) || (us(e) ? (AnimationBindings.cancelAllAnimationsForNode(e.guid), i.add(e.guid)) : AnimationBindings.isAnimating(e.guid) || e.setOpacityWithAnimation(1, _E.forOpacityOscillation(45, .25, .8, 60), "first-draft-text-layer-opacity"));
   }(0, C, p.doneTextLayerIds);

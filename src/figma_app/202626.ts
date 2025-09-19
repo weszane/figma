@@ -1,4 +1,4 @@
-import { hV, PA } from "../figma_app/387100";
+import { traverseChildren, getParent } from "../figma_app/387100";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { e as _$$e } from "../905/986107";
@@ -13,7 +13,7 @@ export function $$p3(e, t, r) {
   let i;
   if (r?.type === t) return r;
   let a = $$h0(e);
-  a && hV(a, e => {
+  a && traverseChildren(a, e => {
     if (e.type === t) {
       i = e;
       return "stop";
@@ -32,7 +32,7 @@ export function $$_5({
   let o = $$h0(t);
   if (!o) return s;
   let l = [];
-  return (hV(o, t => {
+  return (traverseChildren(o, t => {
     if (t.type === e && u(t.name, [r]) && (!a || a && function (e, t) {
       let r = e.parentNode;
       for (; r && !r.name.toLowerCase().startsWith(t.toLowerCase());) r = r.parentNode;
@@ -71,7 +71,7 @@ export function $$g1(e) {
     ancestorName: c
   });
   if (t && "TEXT" === t.type) {
-    let r = PA(e, t.guid);
+    let r = getParent(e, t.guid);
     if (r?.type === "FRAME") return r;
   }
   return $$p3(e, "FRAME");

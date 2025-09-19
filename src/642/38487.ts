@@ -48,7 +48,7 @@ import { g$, qW } from '../figma_app/116234';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { r8 } from '../figma_app/178273';
 import { Bf } from '../figma_app/249941';
-import { MT } from '../figma_app/387100';
+import { isSpecialType } from '../figma_app/387100';
 import { A0, Br, sq } from '../figma_app/454974';
 import { gz } from '../figma_app/605071';
 import { $E, r as _$$r, _k, a6, bY, cb, cm, co, Cr, ct, dK, DT, Fq, GE, Gt, hF, HL, HR, HY, hz, Hz, i9, iE, Io, J0, j3, KJ, lh, M4, n4, nM, OI, Os, ow, pS, pZ, qg, qm, QW, r9, rS, sc, sz, t$, TY, u4, uC, uW, V0, V3, vp, wH, Wm, WO, xE, xG, xt, Xv, XW, yk, yo, Zt, Zu } from '../figma_app/622978';
@@ -610,7 +610,7 @@ let eA = memo(e => {
     [Os]: eq && !Rt(e) && e.resizeToFit,
     [t$]: eq && Rt(e),
     [DT]: e.isStateGroup,
-    [a6]: MT(e.nodeType),
+    [a6]: isSpecialType(e.nodeType),
     [uW]: e.nodeType === 'SECTION',
     [HR]: e.nodeType === 'SYMBOL',
     [rS]: e.nodeType === 'CODE_COMPONENT',

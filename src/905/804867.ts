@@ -1,5 +1,5 @@
-import { s as _$$s } from "../905/583953";
-import { M } from "../905/512402";
+import { AffineTransform } from "../905/583953";
+import { Vector2D } from "../905/512402";
 import { getRadialGradientPoints } from "../905/409381";
 import { toMatrix2x3 } from "../905/117560";
 import { Point } from "../905/736624";
@@ -70,7 +70,7 @@ export class $$m2 {
         y: 1
       }
     };
-    let s = _$$s.fromNumbers(e[0][0], e[0][1], e[0][2], e[1][0], e[1][1], e[1][2]);
+    let s = AffineTransform.fromNumbers(e[0][0], e[0][1], e[0][2], e[1][0], e[1][1], e[1][2]);
     s.invert();
     let l = e => {
       let t = Point.interpolate({
@@ -80,7 +80,7 @@ export class $$m2 {
         x: 1,
         y: .5
       }, e);
-      let i = s.transformPoint(new M(t.x, t.y));
+      let i = s.transformPoint(new Vector2D(t.x, t.y));
       return {
         x: i.x,
         y: i.y

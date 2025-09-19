@@ -1,458 +1,480 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { memo, useMemo, useContext, useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useAtomValueAndSetter } from "../figma_app/27355";
-import s from "classnames";
-import { h4, Nz } from "../905/417232";
-import { d as _$$d } from "../figma_app/429226";
-import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { S as _$$S } from "../figma_app/552746";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { js, Z6, cP, _X } from "../figma_app/451499";
-import { Um } from "../905/848862";
-import { _P } from "../figma_app/2590";
-import { c$, bL, l9, mc, wv } from "../905/493196";
-import { HiddenLabel } from "../905/270045";
-import { setupThemeContext } from "../905/614223";
-import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { selectExperimentConfigHook } from "../figma_app/594947";
-import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
-import { av } from "../figma_app/316316";
-import { ZM } from "../figma_app/505098";
-import { useIsFullscreenSitesView } from "../905/561485";
-import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
-import { ButtonPrimitive } from "../905/632989";
-import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
-import { Y1 } from "../905/143116";
-import { s as _$$s } from "../cssbuilder/589278";
-import { u as _$$u } from "../figma_app/852050";
-import { y3 } from "../figma_app/741785";
-import { aA } from "../figma_app/632975";
-import { c as _$$c, P as _$$P } from "../905/200950";
-import { YT, Oz, zt, hP, hV } from "../figma_app/84580";
-import { eF } from "../figma_app/394327";
-import { wG } from "../905/331989";
-import { Li, O8, kE, It, ft, wu, zX, _2, LW, $l, KY, Iw, DM, vs, M9, I_, PE, Ze, rn, Gu, Yo, Oe, h2, Ob } from "../897/934363";
-import { b as _$$b } from "../5421/909298";
-import { x as _$$x } from "../5421/193325";
-import { t as _$$t2 } from "../5421/711842";
-import { qQ, Op } from "../figma_app/405038";
-import { A as _$$A } from "../897/590880";
-let a = memo(function (e) {
-  return jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+import s from 'classnames'
+import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { A as _$$A } from '../897/590880'
+import { _2, $l, DM, ft, Gu, h2, I_, It, Iw, kE, KY, Li, LW, M9, O8, Ob, Oe, PE, rn, vs, wu, Yo, Ze, zX } from '../897/934363'
+import { Y1 } from '../905/143116'
+import { c as _$$c, P as _$$P } from '../905/200950'
+import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495'
+import { HiddenLabel } from '../905/270045'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { wG } from '../905/331989'
+import { h4, Nz } from '../905/417232'
+import { bL, c$, l9, mc, wv } from '../905/493196'
+import { useIsFullscreenSitesView } from '../905/561485'
+import { getFeatureFlags } from '../905/601108'
+import { setupThemeContext } from '../905/614223'
+import { ButtonPrimitive } from '../905/632989'
+import { Um } from '../905/848862'
+import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from '../905/871411'
+import { lQ } from '../905/934246'
+import { x as _$$x } from '../5421/193325'
+import { t as _$$t2 } from '../5421/711842'
+import { b as _$$b } from '../5421/909298'
+import { s as _$$s } from '../cssbuilder/589278'
+import { _P } from '../figma_app/2590'
+import { useAtomValueAndSetter } from '../figma_app/27355'
+import { hP, hV, Oz, YT, zt } from '../figma_app/84580'
+import { av } from '../figma_app/316316'
+import { eF } from '../figma_app/394327'
+import { Op, qQ } from '../figma_app/405038'
+import { d as _$$d } from '../figma_app/429226'
+import { _X, cP, js, Z6 } from '../figma_app/451499'
+import { throwTypeError } from '../figma_app/465776'
+import { selectAreAllSymbolsOrInstances } from '../figma_app/505098'
+import { S as _$$S } from '../figma_app/552746'
+import { selectExperimentConfigHook } from '../figma_app/594947'
+import { aA } from '../figma_app/632975'
+import { y3 } from '../figma_app/741785'
+import { Fullscreen, VariableResolvedDataType } from '../figma_app/763686'
+import { u as _$$u } from '../figma_app/852050'
+import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298'
+
+let a = memo((e) => {
+  return jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "M11.5 6a.5.5 0 0 1 .5.5V11a1 1 0 0 0 1 1h4.5a.5.5 0 0 1 0 1H13a2 2 0 0 1-2-2V6.5a.5.5 0 0 1 .5-.5",
-      clipRule: "evenodd"
-    })
-  });
-});
-var d = s;
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'M11.5 6a.5.5 0 0 1 .5.5V11a1 1 0 0 0 1 1h4.5a.5.5 0 0 1 0 1H13a2 2 0 0 1-2-2V6.5a.5.5 0 0 1 .5-.5',
+      clipRule: 'evenodd',
+    }),
+  })
+})
+let d = s
 function S({
   formatter: e,
   value: t,
-  disabled: n
+  disabled: n,
 }) {
   return jsx(c$, {
     value: t,
     disabled: n,
-    children: jsxs("div", {
-      className: "x78zum5 x6s0dn4 x167g77z",
-      children: [jsx("div", {
-        className: "x78zum5 x6s0dn4 x1kky2od xlup9mm",
+    children: jsxs('div', {
+      className: 'x78zum5 x6s0dn4 x167g77z',
+      children: [jsx('div', {
+        className: 'x78zum5 x6s0dn4 x1kky2od xlup9mm',
         children: jsx(setupThemeContext, {
-          mode: "dark",
-          children: "MIXED" === t ? jsx("div", {
-            className: "x1kky2od xlup9mm"
-          }) : jsx(A, {
-            action: t
-          })
-        })
-      }), jsx("div", {
-        children: "MIXED" === t ? renderI18nText("fullscreen.mixed") : e.format(t)
-      })]
-    })
-  });
+          mode: 'dark',
+          children: t === 'MIXED'
+            ? jsx('div', {
+                className: 'x1kky2od xlup9mm',
+              })
+            : jsx(A, {
+                action: t,
+              }),
+        }),
+      }), jsx('div', {
+        children: t === 'MIXED' ? renderI18nText('fullscreen.mixed') : e.format(t),
+      })],
+    }),
+  })
 }
 function A({
-  action: e
+  action: e,
 }) {
-  return jsx("div", {
-    className: "prototype_action_dropdown--prototypeActionIcon--qChhY",
-    children: av(e)
-  });
+  return jsx('div', {
+    className: 'prototype_action_dropdown--prototypeActionIcon--qChhY',
+    children: av(e),
+  })
 }
 function w(e) {
-  let t = `prototype-action-select-${e.recordingKey}`;
-  let n = e.dropdownShown && e.dropdownShown.type === t;
-  let i = normalizeValue(e.action);
-  let a = av(i);
-  let l = useSelector(ZM);
-  let s = new js(!0, l);
-  let d = new Z6(!0, l);
-  let c = !useSelector(e => e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0);
-  return jsx("div", {
+  let t = `prototype-action-select-${e.recordingKey}`
+  let n = e.dropdownShown && e.dropdownShown.type === t
+  let i = normalizeValue(e.action)
+  let a = av(i)
+  let l = useSelector(selectAreAllSymbolsOrInstances)
+  let s = new js(!0, l)
+  let d = new Z6(!0, l)
+  let c = !useSelector(e => e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0)
+  return jsx('div', {
     id: t,
     children: jsxs(bL, {
       onChange: e.onChange,
       value: e.action,
-      recordingKey: generateRecordingKey(e, "select"),
+      recordingKey: generateRecordingKey(e, 'select'),
       children: [jsx(l9, {
-        "data-testid": "action-select",
-        disabled: c,
-        iconLead: jsx("div", {
-          className: "x180r7m8",
-          children: a
+        'data-testid': 'action-select',
+        'disabled': c,
+        'iconLead': jsx('div', {
+          className: 'x180r7m8',
+          children: a,
         }),
-        label: jsx(HiddenLabel, {
-          children: renderI18nText("proto.action")
+        'label': jsx(HiddenLabel, {
+          children: renderI18nText('proto.action'),
         }),
-        width: "fill",
-        children: isInvalidValue(e.action) ? getI18nString("fullscreen.mixed") : null
+        'width': 'fill',
+        'children': isInvalidValue(e.action) ? getI18nString('fullscreen.mixed') : null,
       }), jsx(mc, {
-        children: function (e, t) {
-          let n = useIsFullscreenSitesView();
+        children: (function (e, t) {
+          let n = useIsFullscreenSitesView()
           let i = jsx(S, {
             formatter: t,
-            value: "NONE",
-            disabled: !1
-          }, "NONE");
+            value: 'NONE',
+            disabled: !1,
+          }, 'NONE')
           let r = jsx(S, {
             formatter: t,
-            value: "NAVIGATE_TO",
-            disabled: !1
-          }, "NAVIGATE_TO");
+            value: 'NAVIGATE_TO',
+            disabled: !1,
+          }, 'NAVIGATE_TO')
           let a = jsx(S, {
             formatter: t,
-            value: "SWAP_STATE_TO",
-            disabled: !Fullscreen.isSelectionContainedInStateOrStateInstance()
-          }, "SWAP_STATE_TO");
+            value: 'SWAP_STATE_TO',
+            disabled: !Fullscreen.isSelectionContainedInStateOrStateInstance(),
+          }, 'SWAP_STATE_TO')
           let l = jsx(S, {
             formatter: t,
-            value: "GO_BACK",
-            disabled: !1
-          }, "GO_BACK");
+            value: 'GO_BACK',
+            disabled: !1,
+          }, 'GO_BACK')
           let s = jsx(S, {
             formatter: t,
-            value: "SCROLL_TO",
-            disabled: !1
-          }, "SCROLL_TO");
+            value: 'SCROLL_TO',
+            disabled: !1,
+          }, 'SCROLL_TO')
           let d = jsx(S, {
             formatter: t,
-            value: "OPEN_URL",
-            disabled: !1
-          }, "OPEN_URL");
+            value: 'OPEN_URL',
+            disabled: !1,
+          }, 'OPEN_URL')
           let c = jsx(S, {
             formatter: t,
-            value: "OPEN_OVERLAY",
-            disabled: !1
-          }, "OPEN_OVERLAY");
+            value: 'OPEN_OVERLAY',
+            disabled: !1,
+          }, 'OPEN_OVERLAY')
           let p = jsx(S, {
             formatter: t,
-            value: "SWAP_WITH",
-            disabled: !1
-          }, "SWAP_WITH");
+            value: 'SWAP_WITH',
+            disabled: !1,
+          }, 'SWAP_WITH')
           let u = jsx(S, {
             formatter: t,
-            value: "CLOSE_OVERLAY",
-            disabled: !1
-          }, "CLOSE_OVERLAY");
+            value: 'CLOSE_OVERLAY',
+            disabled: !1,
+          }, 'CLOSE_OVERLAY')
           let h = jsx(S, {
             formatter: t,
-            value: "SET_VARIABLE",
-            disabled: !1
-          }, "SET_VARIABLE");
+            value: 'SET_VARIABLE',
+            disabled: !1,
+          }, 'SET_VARIABLE')
           let m = getFeatureFlags().prototype_set_mode_action && jsx(S, {
             formatter: t,
-            value: "SET_VARIABLE_MODE",
-            disabled: !1
-          }, "SET_VARIABLE_MODE");
+            value: 'SET_VARIABLE_MODE',
+            disabled: !1,
+          }, 'SET_VARIABLE_MODE')
           let x = !e.isNestedInConditional && jsx(S, {
             formatter: t,
-            value: "CONDITIONAL",
-            disabled: !1
-          }, "CONDITIONAL");
-          let g = jsx(wv, {}, "first-divider");
-          let y = jsx(wv, {}, "second-divider");
-          let _ = jsx(wv, {}, "third-divider");
+            value: 'CONDITIONAL',
+            disabled: !1,
+          }, 'CONDITIONAL')
+          let g = jsx(wv, {}, 'first-divider')
+          let y = jsx(wv, {}, 'second-divider')
+          let _ = jsx(wv, {}, 'third-divider')
           let {
-            getConfig
-          } = selectExperimentConfigHook("exp_prototyping_reorder_actions");
-          let j = !!getConfig().getValue("new_ordering", !1);
-          let N = n ? [a, l, s, g, h, x] : j ? [i, g, r, a, l, s, d, y, h, m, x, _, c, p, u] : [i, g, r, a, l, s, d, y, c, p, u, _, h, m, x];
+            getConfig,
+          } = selectExperimentConfigHook('exp_prototyping_reorder_actions')
+          let j = !!getConfig().getValue('new_ordering', !1)
+          let N = n ? [a, l, s, g, h, x] : j ? [i, g, r, a, l, s, d, y, h, m, x, _, c, p, u] : [i, g, r, a, l, s, d, y, c, p, u, _, h, m, x]
           if (e.showVideoActions && !n) {
-            let e = [jsx(wv, {}, "fourth-divider"), jsx(S, {
+            let e = [jsx(wv, {}, 'fourth-divider'), jsx(S, {
               formatter: t,
-              value: "UPDATE_MEDIA_PLAY_PAUSE_OPTIONS",
-              disabled: !1
-            }, "UPDATE_MEDIA_PLAY_PAUSE_OPTIONS"), jsx(S, {
+              value: 'UPDATE_MEDIA_PLAY_PAUSE_OPTIONS',
+              disabled: !1,
+            }, 'UPDATE_MEDIA_PLAY_PAUSE_OPTIONS'), jsx(S, {
               formatter: t,
-              value: "UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS",
-              disabled: !1
-            }, "UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS"), jsx(S, {
+              value: 'UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS',
+              disabled: !1,
+            }, 'UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS'), jsx(S, {
               formatter: t,
-              value: "UPDATE_MEDIA_SKIP_TO",
-              disabled: !1
-            }, "UPDATE_MEDIA_SKIP_TO"), jsx(S, {
+              value: 'UPDATE_MEDIA_SKIP_TO',
+              disabled: !1,
+            }, 'UPDATE_MEDIA_SKIP_TO'), jsx(S, {
               formatter: t,
-              value: "UPDATE_MEDIA_SKIP_BY_OPTIONS",
-              disabled: !1
-            }, "UPDATE_MEDIA_SKIP_BY_OPTIONS")];
-            N = N.concat(e);
+              value: 'UPDATE_MEDIA_SKIP_BY_OPTIONS',
+              disabled: !1,
+            }, 'UPDATE_MEDIA_SKIP_BY_OPTIONS')]
+            N = N.concat(e)
           }
           isInvalidValue(e.action) && (N = [jsx(S, {
             formatter: t,
-            value: "MIXED",
-            disabled: !0
-          }, "MIXED"), jsx(wv, {}, "mixed-divider")].concat(N));
-          return N.filter(Boolean);
-        }(e, n ? s : d)
-      })]
-    })
-  });
+            value: 'MIXED',
+            disabled: !0,
+          }, 'MIXED'), jsx(wv, {}, 'mixed-divider')].concat(N))
+          return N.filter(Boolean)
+        }(e, n ? s : d)),
+      })],
+    }),
+  })
 }
-let z = "prototype_action_verbose_title--actionNameInsertion--aF4kI";
-let W = "prototype_action_verbose_title--actionName--qWJL3";
-let Z = "prototype_action_verbose_title--actionNameUI3--JAYsG";
+let z = 'prototype_action_verbose_title--actionNameInsertion--aF4kI'
+let W = 'prototype_action_verbose_title--actionName--qWJL3'
+let Z = 'prototype_action_verbose_title--actionNameUI3--JAYsG'
 let G = () => {
-  let e = useSelector(e => e.mirror.sceneGraph);
-  return useMemo(() => new cP(e), [e]);
-};
+  let e = useSelector(e => e.mirror.sceneGraph)
+  return useMemo(() => new cP(e), [e])
+}
 function Y({
   action: e,
   isNestedInConditional: t,
   isNarrowPanel: n,
-  onClick: r
+  onClick: r,
 }) {
-  let a = YT() === Oz.TWO_COL;
-  let l = useContext(_$$c);
-  let s = a && l === _$$P.LEFT;
-  let c = t || n;
-  let p = _$$u(isValidValue(e.targetVariable) && e.targetVariable && "id" in e.targetVariable ? e.targetVariable?.id : void 0);
-  let u = isValidValue(e.targetVariable) && e.targetVariable && "nodeFieldAlias" in e.targetVariable ? aA(e.targetVariable.nodeFieldAlias.stablePathToNode, e.targetVariable.nodeFieldAlias.indexOrKey) : void 0;
-  let h = p?.name ?? u?.name;
-  let g = G();
-  let y = new Z6(!0);
-  let f = _X(e);
-  let _ = normalizeValue(f);
-  let b = av(_);
-  let I = e => {
-    if (!e.connectionType || isInvalidValue(e.connectionType)) return null;
+  let a = YT() === Oz.TWO_COL
+  let l = useContext(_$$c)
+  let s = a && l === _$$P.LEFT
+  let c = t || n
+  let p = _$$u(isValidValue(e.targetVariable) && e.targetVariable && 'id' in e.targetVariable ? e.targetVariable?.id : void 0)
+  let u = isValidValue(e.targetVariable) && e.targetVariable && 'nodeFieldAlias' in e.targetVariable ? aA(e.targetVariable.nodeFieldAlias.stablePathToNode, e.targetVariable.nodeFieldAlias.indexOrKey) : void 0
+  let h = p?.name ?? u?.name
+  let g = G()
+  let y = new Z6(!0)
+  let f = _X(e)
+  let _ = normalizeValue(f)
+  let b = av(_)
+  let I = (e) => {
+    if (!e.connectionType || isInvalidValue(e.connectionType))
+      return null
     let t = d()({
       [W]: !0,
-      [Z]: a
-    });
+      [Z]: a,
+    })
     let n = d()({
-      "prototype_action_verbose_title--actionDestination--JZ-gU": !0,
-      "prototype_action_verbose_title--actionDestinationUI3--ZGxbq": a
-    });
+      'prototype_action_verbose_title--actionDestination--JZ-gU': !0,
+      'prototype_action_verbose_title--actionDestinationUI3--ZGxbq': a,
+    })
     switch (e.connectionType) {
-      case "NONE":
-      case "SET_VARIABLE_MODE":
-      case "OBJECT_ANIMATION":
-        return null;
-      case "INTERNAL_NODE":
-      case "BACK":
-      case "CLOSE":
-      case "UPDATE_MEDIA_RUNTIME":
-        {
-          let i = e.transitionNodeID;
-          if (isInvalidValue(i)) return jsx("div", {
+      case 'NONE':
+      case 'SET_VARIABLE_MODE':
+      case 'OBJECT_ANIMATION':
+        return null
+      case 'INTERNAL_NODE':
+      case 'BACK':
+      case 'CLOSE':
+      case 'UPDATE_MEDIA_RUNTIME':
+      {
+        let i = e.transitionNodeID
+        if (isInvalidValue(i)) {
+          return jsx('div', {
             className: t,
-            children: getI18nString("proto.variant_actions.mixed")
-          });
-          if (void 0 === i || areSessionLocalIDsEqual(i, defaultSessionLocalID)) return null;
-          let r = sessionLocalIDToString(i);
-          let a = g.format(r);
-          return jsx("div", {
-            className: n,
-            children: a
-          });
+            children: getI18nString('proto.variant_actions.mixed'),
+          })
         }
-      case "URL":
-        {
-          let i = e.connectionURL;
-          if (!i) return null;
-          if (isInvalidValue(i)) return jsx("div", {
+        if (void 0 === i || areSessionLocalIDsEqual(i, defaultSessionLocalID))
+          return null
+        let r = sessionLocalIDToString(i)
+        let a = g.format(r)
+        return jsx('div', {
+          className: n,
+          children: a,
+        })
+      }
+      case 'URL':
+      {
+        let i = e.connectionURL
+        if (!i)
+          return null
+        if (isInvalidValue(i)) {
+          return jsx('div', {
             className: t,
-            children: getI18nString("proto.variant_actions.mixed")
-          });
-          return jsx("div", {
-            className: n,
-            children: i
-          });
+            children: getI18nString('proto.variant_actions.mixed'),
+          })
         }
-      case "SET_VARIABLE":
-        if (!e.targetVariableData || isInvalidValue(e.targetVariableData)) return null;
-        return jsx("div", {
-          className: "prototype_action_verbose_title--setVariablePreviewContainer--6omxy",
+        return jsx('div', {
+          className: n,
+          children: i,
+        })
+      }
+      case 'SET_VARIABLE':
+        if (!e.targetVariableData || isInvalidValue(e.targetVariableData))
+          return null
+        return jsx('div', {
+          className: 'prototype_action_verbose_title--setVariablePreviewContainer--6omxy',
           children: jsx(y3, {
             targetVariableData: e.targetVariableData,
             onClick: lQ,
             showVariableThumbnails: !1,
             isNarrowPanel: c,
-            isInConditional: !0
-          })
-        });
-      case "CONDITIONAL":
-        {
-          if (isInvalidValue(e) || isInvalidValue(e.conditionalActions) || !e.conditionalActions) return null;
-          let t = e.conditionalActions.length > 0 ? e.conditionalActions[0].condition : void 0;
-          return jsx(y3, {
-            targetVariableData: t,
-            onClick: lQ,
             isInConditional: !0,
-            showVariableThumbnails: !1
-          });
-        }
+          }),
+        })
+      case 'CONDITIONAL':
+      {
+        if (isInvalidValue(e) || isInvalidValue(e.conditionalActions) || !e.conditionalActions)
+          return null
+        let t = e.conditionalActions.length > 0 ? e.conditionalActions[0].condition : void 0
+        return jsx(y3, {
+          targetVariableData: t,
+          onClick: lQ,
+          isInConditional: !0,
+          showVariableThumbnails: !1,
+        })
+      }
       default:
-        throwTypeError(e.connectionType);
+        throwTypeError(e.connectionType)
     }
-  };
+  }
   let C = d()({
     [_$$s.block.bgTransparent.$]: !0,
-    "prototype_action_verbose_title--buttonResetTextAlign--gy69p": !0,
+    'prototype_action_verbose_title--buttonResetTextAlign--gy69p': !0,
     [Li]: c && !a,
     [O8]: !c && !a,
-    [kE]: a
-  });
+    [kE]: a,
+  })
   let N = d()({
-    "prototype_action_verbose_title--iconContainer--jqarD": !0,
-    "prototype_action_verbose_title--iconContainerUI3--yBP0-": a
-  });
+    'prototype_action_verbose_title--iconContainer--jqarD': !0,
+    'prototype_action_verbose_title--iconContainerUI3--yBP0-': a,
+  })
   return jsx(ButtonPrimitive, {
     className: C,
     onClick: r,
     children: jsxs(Y1, {
-      horizontalAlignItems: "space-between",
-      width: "fill-parent",
-      children: [jsx("div", {
+      horizontalAlignItems: 'space-between',
+      width: 'fill-parent',
+      children: [jsx('div', {
         className: N,
-        children: b
-      }), (e => {
-        let t = _ ? y.format(_) : "Undefined";
+        children: b,
+      }), ((e) => {
+        let t = _ ? y.format(_) : 'Undefined'
         let n = d()({
           [W]: !0,
-          [Z]: a
-        });
-        if ((isInvalidValue(e.connectionType) || isInvalidValue(f)) && (t = getI18nString("fullscreen.mixed")), !e.connectionType || isInvalidValue(e.connectionType) || "NONE" === e.connectionType || "BACK" === e.connectionType || "CLOSE" === e.connectionType) return jsx(Fragment, {
-          children: jsx("div", {
-            className: n,
-            children: t
+          [Z]: a,
+        })
+        if ((isInvalidValue(e.connectionType) || isInvalidValue(f)) && (t = getI18nString('fullscreen.mixed')), !e.connectionType || isInvalidValue(e.connectionType) || e.connectionType === 'NONE' || e.connectionType === 'BACK' || e.connectionType === 'CLOSE') {
+          return jsx(Fragment, {
+            children: jsx('div', {
+              className: n,
+              children: t,
+            }),
           })
-        });
-        var i = I(e);
+        }
+        let i = I(e)
         switch (e.connectionType) {
-          case "INTERNAL_NODE":
-            if ("SWAP_STATE" === e.navigationType) return jsxs(Fragment, {
-              children: [jsx("div", {
-                className: n,
-                children: getI18nString("proto.action_change_to")
-              }), i]
-            });
-            if (i) {
-              if ("OVERLAY" === e.navigationType) return jsx(Fragment, {
-                children: jsx("div", {
-                  className: z,
-                  children: renderI18nText("proto.action_overlay_title", {
-                    overlayFrameName: jsx("span", {
-                      children: i
-                    })
-                  })
-                })
-              });
-              if ("SWAP" === e.navigationType) return jsxs(Fragment, {
-                children: [jsx("div", {
+          case 'INTERNAL_NODE':
+            if (e.navigationType === 'SWAP_STATE') {
+              return jsxs(Fragment, {
+                children: [jsx('div', {
                   className: n,
-                  children: getI18nString("proto.action_swap_overlay_title")
-                }), i]
-              });
+                  children: getI18nString('proto.action_change_to'),
+                }), i],
+              })
+            }
+            if (i) {
+              if (e.navigationType === 'OVERLAY') {
+                return jsx(Fragment, {
+                  children: jsx('div', {
+                    className: z,
+                    children: renderI18nText('proto.action_overlay_title', {
+                      overlayFrameName: jsx('span', {
+                        children: i,
+                      }),
+                    }),
+                  }),
+                })
+              }
+              if (e.navigationType === 'SWAP') {
+                return jsxs(Fragment, {
+                  children: [jsx('div', {
+                    className: n,
+                    children: getI18nString('proto.action_swap_overlay_title'),
+                  }), i],
+                })
+              }
             }
             return jsxs(Fragment, {
-              children: [jsx("div", {
+              children: [jsx('div', {
                 className: n,
-                children: t
-              }), i]
-            });
-          case "UPDATE_MEDIA_RUNTIME":
+                children: t,
+              }), i],
+            })
+          case 'UPDATE_MEDIA_RUNTIME':
             return jsxs(Fragment, {
-              children: [jsx("div", {
+              children: [jsx('div', {
                 className: n,
-                children: t
-              }), i]
-            });
-          case "URL":
+                children: t,
+              }), i],
+            })
+          case 'URL':
             return jsxs(Fragment, {
-              children: [jsx("div", {
+              children: [jsx('div', {
                 className: n,
-                children: i ? getI18nString("proto.action_url_title") : getI18nString("proto.action_open_link")
-              }), i]
-            });
-          case "SET_VARIABLE":
-            {
-              let r = e.targetVariableData && isValidValue(e.targetVariableData) && e.targetVariableData.resolvedType === VariableResolvedDataType.COLOR;
-              let l = d()({
-                "prototype_action_verbose_title--actionNameInsertionColor--isir- prototype_action_verbose_title--actionNameInsertion--aF4kI": !0,
-                "prototype_action_verbose_title--actionNameInsertionColorUI3--Apj0i": a
-              });
-              if (h && i) return jsx(Fragment, {
-                children: jsx("div", {
+                children: i ? getI18nString('proto.action_url_title') : getI18nString('proto.action_open_link'),
+              }), i],
+            })
+          case 'SET_VARIABLE':
+          {
+            let r = e.targetVariableData && isValidValue(e.targetVariableData) && e.targetVariableData.resolvedType === VariableResolvedDataType.COLOR
+            let l = d()({
+              'prototype_action_verbose_title--actionNameInsertionColor--isir- prototype_action_verbose_title--actionNameInsertion--aF4kI': !0,
+              'prototype_action_verbose_title--actionNameInsertionColorUI3--Apj0i': a,
+            })
+            if (h && i) {
+              return jsx(Fragment, {
+                children: jsx('div', {
                   className: r ? l : z,
-                  children: renderI18nText("proto.action_set_variable_title", {
-                    variableName: jsx("span", {
-                      className: "prototype_action_verbose_title--variableNameContainer--XeJX2",
+                  children: renderI18nText('proto.action_set_variable_title', {
+                    variableName: jsx('span', {
+                      className: 'prototype_action_verbose_title--variableNameContainer--XeJX2',
                       children: jsx(wG, {
                         text: h,
                         isDeleted: !!p && eF(p),
-                        disableHover: s
-                      })
+                        disableHover: s,
+                      }),
                     }),
-                    variableValue: jsx("span", {
-                      className: "prototype_action_verbose_title--variableDestinationContainer--RXbKo prototype_action_verbose_title--variableNameContainer--XeJX2",
-                      children: i
-                    })
-                  })
-                })
-              });
-              return jsx(Fragment, {
-                children: jsx("div", {
-                  className: n,
-                  children: t
-                })
-              });
-            }
-          case "SET_VARIABLE_MODE":
-            return jsx(Fragment, {
-              children: jsx("div", {
-                className: n,
-                children: getI18nString("proto.action_set_variable_mode")
+                    variableValue: jsx('span', {
+                      className: 'prototype_action_verbose_title--variableDestinationContainer--RXbKo prototype_action_verbose_title--variableNameContainer--XeJX2',
+                      children: i,
+                    }),
+                  }),
+                }),
               })
-            });
-          case "CONDITIONAL":
-            return jsxs(Fragment, {
-              children: [jsx("div", {
+            }
+            return jsx(Fragment, {
+              children: jsx('div', {
                 className: n,
-                children: a ? getI18nString("proto.if") : getI18nString("proto.action_conditional_title")
-              }), i]
-            });
-          case "OBJECT_ANIMATION":
-            return jsx(Fragment, {});
+                children: t,
+              }),
+            })
+          }
+          case 'SET_VARIABLE_MODE':
+            return jsx(Fragment, {
+              children: jsx('div', {
+                className: n,
+                children: getI18nString('proto.action_set_variable_mode'),
+              }),
+            })
+          case 'CONDITIONAL':
+            return jsxs(Fragment, {
+              children: [jsx('div', {
+                className: n,
+                children: a ? getI18nString('proto.if') : getI18nString('proto.action_conditional_title'),
+              }), i],
+            })
+          case 'OBJECT_ANIMATION':
+            return jsx(Fragment, {})
           default:
-            throwTypeError(e.connectionType);
+            throwTypeError(e.connectionType)
         }
-      })(e)]
-    })
-  });
+      })(e)],
+    }),
+  })
 }
-let et = Symbol("ACTION_ROW");
+let et = Symbol('ACTION_ROW')
 export function $$en0({
   updateMultipleDestinationNodes: e,
   updateSelectionProperties: t,
@@ -464,257 +486,266 @@ export function $$en0({
   setAutoOpenExpressionBuilder: v,
   ...I
 }) {
-  let C = useDispatch();
+  let C = useDispatch()
   let {
     shouldShowAdvancedPrototypingPaywall,
     showAdvancedPrototypingVariablesModal,
-    showAdvancedPrototypingConditionalActionsModal
-  } = zt();
-  let T = Um();
-  let S = hP();
+    showAdvancedPrototypingConditionalActionsModal,
+  } = zt()
+  let T = Um()
+  let S = hP()
   let {
     firstVariableSetMode,
-    firstVariableSetID
-  } = _$$b();
-  let P = I.action;
-  let O = I.isNestedInConditional && qQ(I.action);
-  let L = !!P.connectionType && "CONDITIONAL" === P.connectionType;
-  let D = YT();
-  let R = D === Oz.SINGLE_COL;
-  let M = D === Oz.TWO_COL;
-  let V = useContext(_$$c);
-  let B = M && V === _$$P.RIGHT;
-  let F = M && V === _$$P.LEFT;
-  var K = I.selectedActionIndex.equals(I.actionIndexPath);
-  let z = 1 === I.selectedActionIndex.path.length && I.isNestedInConditional && I.actionIndexPath[0] === I.selectedActionIndex.path[0];
-  var W = void 0 === I.expandedRows || void 0 !== I.expandedRows.find(e => e.equals(I.actionIndexPath));
-  W = !!R || !F || L;
-  let [Z, G] = useState(!1);
+    firstVariableSetID,
+  } = _$$b()
+  let P = I.action
+  let O = I.isNestedInConditional && qQ(I.action)
+  let L = !!P.connectionType && P.connectionType === 'CONDITIONAL'
+  let D = YT()
+  let R = D === Oz.SINGLE_COL
+  let M = D === Oz.TWO_COL
+  let V = useContext(_$$c)
+  let B = M && V === _$$P.RIGHT
+  let F = M && V === _$$P.LEFT
+  let K = I.selectedActionIndex.equals(I.actionIndexPath)
+  let z = I.selectedActionIndex.path.length === 1 && I.isNestedInConditional && I.actionIndexPath[0] === I.selectedActionIndex.path[0]
+  let W = void 0 === I.expandedRows || void 0 !== I.expandedRows.find(e => e.equals(I.actionIndexPath))
+  W = !!R || !F || L
+  let [Z, G] = useState(!1)
   useEffect(() => {
     if (L) {
       let e = setTimeout(() => {
-        G(!0);
-      }, 0);
-      return () => clearTimeout(e);
+        G(!0)
+      }, 0)
+      return () => clearTimeout(e)
     }
-    G(!0);
-  }, [L]);
-  let en = L && !W;
-  let eo = L && W;
-  let ei = useRef(null);
-  let [er, ea] = useAtomValueAndSetter(hV);
+    G(!0)
+  }, [L])
+  let en = L && !W
+  let eo = L && W
+  let ei = useRef(null)
+  let [er, ea] = useAtomValueAndSetter(hV)
   let {
     position,
-    dragItem
+    dragItem,
   } = h4(() => ({
     type: et,
     element: ei,
     item: {
       action: I.action,
-      actionIndexPath: new Op(I.actionIndexPath)
+      actionIndexPath: new Op(I.actionIndexPath),
     },
-    dropPositionThreshold: eo ? .2 : en ? 1 / 3 : .5,
+    dropPositionThreshold: eo ? 0.2 : en ? 1 / 3 : 0.5,
     getDeepestTargetOnly: !0,
     canDrag: !!F || !W,
     onDrop(e) {
-      I.onDrop(e);
-      ea(!0);
-    }
-  }));
+      I.onDrop(e)
+      ea(!0)
+    },
+  }))
   let ed = useMemo(() => {
-    let e = ei.current;
-    if (!e || !position || B) return;
-    if (dragItem && "CONDITIONAL" === dragItem.connectionType && I.isNestedInConditional || qQ(dragItem)) {
-      ea(!1);
-      return;
+    let e = ei.current
+    if (!e || !position || B)
+      return
+    if (dragItem && dragItem.connectionType === 'CONDITIONAL' && I.isNestedInConditional || qQ(dragItem)) {
+      ea(!1)
+      return
     }
-    let t = O ? Nz.BEFORE : position;
-    var n = void 0;
-    let o = e.offsetParent?.firstElementChild?.scrollTop ?? 0;
-    t === Nz.BEFORE ? n = e.offsetTop - o : t === Nz.AFTER && (n = e.offsetTop + e.offsetHeight - o);
-    ea(!0);
-    return n;
-  }, [position, B, dragItem, I.isNestedInConditional, O, ea]);
-  let ec = position && L && !W && position === Nz.INSIDE && "CONDITIONAL" !== dragItem.connectionType;
-  let ep = useHandleMouseEvent(I.recordingKey, "click", e => {
-    I.onSelect(I.actionIndexPath, !0);
-  });
-  let eu = useHandleMouseEvent(I.recordingKey, "mousedown", e => {
-    qQ(I.action) || I.onSelect(I.actionIndexPath, !0);
-  });
-  let eh = e => {
-    var n = !0;
-    var o = !1;
+    let t = O ? Nz.BEFORE : position
+    let n = void 0
+    let o = e.offsetParent?.firstElementChild?.scrollTop ?? 0
+    t === Nz.BEFORE ? n = e.offsetTop - o : t === Nz.AFTER && (n = e.offsetTop + e.offsetHeight - o)
+    ea(!0)
+    return n
+  }, [position, B, dragItem, I.isNestedInConditional, O, ea])
+  let ec = position && L && !W && position === Nz.INSIDE && dragItem.connectionType !== 'CONDITIONAL'
+  let ep = useHandleMouseEvent(I.recordingKey, 'click', (e) => {
+    I.onSelect(I.actionIndexPath, !0)
+  })
+  let eu = useHandleMouseEvent(I.recordingKey, 'mousedown', (e) => {
+    qQ(I.action) || I.onSelect(I.actionIndexPath, !0)
+  })
+  let eh = (e) => {
+    let n = !0
+    let o = !1
     switch (e) {
-      case "NONE":
+      case 'NONE':
         t({
-          connectionType: "NONE"
-        });
-        break;
-      case "NAVIGATE_TO":
+          connectionType: 'NONE',
+        })
+        break
+      case 'NAVIGATE_TO':
         t({
-          connectionType: "INTERNAL_NODE",
-          navigationType: "NAVIGATE"
-        });
-        break;
-      case "OPEN_OVERLAY":
+          connectionType: 'INTERNAL_NODE',
+          navigationType: 'NAVIGATE',
+        })
+        break
+      case 'OPEN_OVERLAY':
         t({
-          connectionType: "INTERNAL_NODE",
-          navigationType: "OVERLAY"
-        });
-        break;
-      case "SCROLL_TO":
+          connectionType: 'INTERNAL_NODE',
+          navigationType: 'OVERLAY',
+        })
+        break
+      case 'SCROLL_TO':
         t({
-          connectionType: "INTERNAL_NODE",
-          navigationType: "SCROLL_TO"
-        });
-        break;
-      case "SWAP_WITH":
+          connectionType: 'INTERNAL_NODE',
+          navigationType: 'SCROLL_TO',
+        })
+        break
+      case 'SWAP_WITH':
         t({
-          connectionType: "INTERNAL_NODE",
-          navigationType: "SWAP"
-        });
-        break;
-      case "SWAP_STATE_TO":
+          connectionType: 'INTERNAL_NODE',
+          navigationType: 'SWAP',
+        })
+        break
+      case 'SWAP_STATE_TO':
         t({
-          connectionType: "INTERNAL_NODE",
-          navigationType: "SWAP_STATE"
-        });
-        break;
-      case "GO_BACK":
+          connectionType: 'INTERNAL_NODE',
+          navigationType: 'SWAP_STATE',
+        })
+        break
+      case 'GO_BACK':
         t({
-          connectionType: "BACK"
-        });
-        break;
-      case "CLOSE_OVERLAY":
+          connectionType: 'BACK',
+        })
+        break
+      case 'CLOSE_OVERLAY':
         t({
-          connectionType: "CLOSE"
-        });
-        break;
-      case "OPEN_URL":
+          connectionType: 'CLOSE',
+        })
+        break
+      case 'OPEN_URL':
         t({
-          connectionType: "URL"
-        });
-        break;
-      case "SET_VARIABLE":
-        shouldShowAdvancedPrototypingPaywall ? (n = !1, showAdvancedPrototypingVariablesModal()) : (t({
-          connectionType: "SET_VARIABLE"
-        }), _.current = !0);
-        break;
-      case "SET_VARIABLE_MODE":
-        shouldShowAdvancedPrototypingPaywall ? (n = !1, showAdvancedPrototypingVariablesModal()) : t({
-          connectionType: "SET_VARIABLE_MODE",
-          targetVariableSetID: firstVariableSetID,
-          targetVariableModeID: firstVariableSetMode
-        });
-        break;
-      case "UPDATE_MEDIA_PLAY":
+          connectionType: 'URL',
+        })
+        break
+      case 'SET_VARIABLE':
+        shouldShowAdvancedPrototypingPaywall
+          ? (n = !1, showAdvancedPrototypingVariablesModal())
+          : (t({
+              connectionType: 'SET_VARIABLE',
+            }), _.current = !0)
+        break
+      case 'SET_VARIABLE_MODE':
+        shouldShowAdvancedPrototypingPaywall
+          ? (n = !1, showAdvancedPrototypingVariablesModal())
+          : t({
+              connectionType: 'SET_VARIABLE_MODE',
+              targetVariableSetID: firstVariableSetID,
+              targetVariableModeID: firstVariableSetMode,
+            })
+        break
+      case 'UPDATE_MEDIA_PLAY':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "PLAY"
-        });
-        break;
-      case "UPDATE_MEDIA_PAUSE":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'PLAY',
+        })
+        break
+      case 'UPDATE_MEDIA_PAUSE':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "PAUSE"
-        });
-        break;
-      case "UPDATE_MEDIA_PLAY_PAUSE_OPTIONS":
-      case "UPDATE_MEDIA_TOGGLE_PLAY_PAUSE":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'PAUSE',
+        })
+        break
+      case 'UPDATE_MEDIA_PLAY_PAUSE_OPTIONS':
+      case 'UPDATE_MEDIA_TOGGLE_PLAY_PAUSE':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "TOGGLE_PLAY_PAUSE"
-        });
-        break;
-      case "UPDATE_MEDIA_MUTE":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'TOGGLE_PLAY_PAUSE',
+        })
+        break
+      case 'UPDATE_MEDIA_MUTE':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "MUTE"
-        });
-        break;
-      case "UPDATE_MEDIA_UNMUTE":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'MUTE',
+        })
+        break
+      case 'UPDATE_MEDIA_UNMUTE':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "UNMUTE"
-        });
-        break;
-      case "UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS":
-      case "UPDATE_MEDIA_TOGGLE_MUTE_UNMUTE":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'UNMUTE',
+        })
+        break
+      case 'UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS':
+      case 'UPDATE_MEDIA_TOGGLE_MUTE_UNMUTE':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "TOGGLE_MUTE_UNMUTE"
-        });
-        break;
-      case "UPDATE_MEDIA_SKIP_BY_OPTIONS":
-      case "UPDATE_MEDIA_SKIP_FORWARD":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'TOGGLE_MUTE_UNMUTE',
+        })
+        break
+      case 'UPDATE_MEDIA_SKIP_BY_OPTIONS':
+      case 'UPDATE_MEDIA_SKIP_FORWARD':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "SKIP_FORWARD"
-        });
-        break;
-      case "UPDATE_MEDIA_SKIP_BACKWARD":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'SKIP_FORWARD',
+        })
+        break
+      case 'UPDATE_MEDIA_SKIP_BACKWARD':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "SKIP_BACKWARD"
-        });
-        break;
-      case "UPDATE_MEDIA_SKIP_TO":
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'SKIP_BACKWARD',
+        })
+        break
+      case 'UPDATE_MEDIA_SKIP_TO':
         t({
-          connectionType: "UPDATE_MEDIA_RUNTIME",
-          mediaAction: "SKIP_TO"
-        });
-        break;
-      case "CONDITIONAL":
-        o = !0;
-        shouldShowAdvancedPrototypingPaywall ? (n = !1, showAdvancedPrototypingConditionalActionsModal()) : (t({
-          connectionType: "CONDITIONAL"
-        }), v && v(!0));
+          connectionType: 'UPDATE_MEDIA_RUNTIME',
+          mediaAction: 'SKIP_TO',
+        })
+        break
+      case 'CONDITIONAL':
+        o = !0
+        shouldShowAdvancedPrototypingPaywall
+          ? (n = !1, showAdvancedPrototypingConditionalActionsModal())
+          : (t({
+              connectionType: 'CONDITIONAL',
+            }), v && v(!0))
     }
     if (M && I.onExpand(I.actionIndexPath, o), n) {
       let t = f.filter(e => !!e.sourceNodeID && !!e.id).map(e => _$$d({
         nodeID: e.sourceNodeID,
-        interactionID: e.id
-      }));
+        interactionID: e.id,
+      }))
       C(_P({
-        name: "Prototype action changed",
+        name: 'Prototype action changed',
         params: {
           action: e,
-          source: "panel",
-          connectorIds: JSON.stringify(t)
-        }
-      }));
+          source: 'panel',
+          connectorIds: JSON.stringify(t),
+        },
+      }))
     }
-  };
-  let em = I.isNestedInConditional ? It : ft;
+  }
+  let em = I.isNestedInConditional ? It : ft
   let ex = d()({
     [wu]: !F,
-    [zX]: F && er
-  });
+    [zX]: F && er,
+  })
   let eg = jsx(a, {
-    className: _2
-  });
-  if (O && I.onAddAction) return jsxs("div", {
-    className: F ? LW : void 0,
-    children: [ed && jsx("hr", {
-      className: em,
-      style: {
-        transform: `translateY(${ed}px)`
-      }
-    }), F && I.isNestedInConditional && eg, jsx("div", {
-      className: ex,
-      ref: ei,
-      children: jsx(_$$t2, {
-        addButtonPressed: I.onAddAction,
-        recordingKey: generateRecordingKey(I.recordingKey, "addAction"),
-        isNestedInConditional: !0
-      })
-    })]
-  });
-  let ey = _X(P);
-  let ef = "NONE" !== ey;
-  let e_ = (W || !ef) && !F;
-  let eb = I.numActions > 1;
+    className: _2,
+  })
+  if (O && I.onAddAction) {
+    return jsxs('div', {
+      className: F ? LW : void 0,
+      children: [ed && jsx('hr', {
+        className: em,
+        style: {
+          transform: `translateY(${ed}px)`,
+        },
+      }), F && I.isNestedInConditional && eg, jsx('div', {
+        className: ex,
+        ref: ei,
+        children: jsx(_$$t2, {
+          addButtonPressed: I.onAddAction,
+          recordingKey: generateRecordingKey(I.recordingKey, 'addAction'),
+          isNestedInConditional: !0,
+        }),
+      })],
+    })
+  }
+  let ey = _X(P)
+  let ef = ey !== 'NONE'
+  let e_ = (W || !ef) && !F
+  let eb = I.numActions > 1
   let ev = d()({
     [$l]: !0,
     [KY]: F && !I.isNestedInConditional,
@@ -724,58 +755,62 @@ export function $$en0({
     [M9]: F && I.isNestedInConditional && z && er,
     [I_]: F && L && !K && er,
     [PE]: K && F && !I.isNestedInConditional,
-    [Ze]: ec
-  });
+    [Ze]: ec,
+  })
   let eI = d()({
     [rn]: !0,
     [Gu]: F,
-    [Yo]: I.isNestedInConditional && !B
-  });
+    [Yo]: I.isNestedInConditional && !B,
+  })
   let eC = jsx(Y, {
     action: P,
     isNestedInConditional: I.isNestedInConditional,
     isNarrowPanel: I.isNarrowPanel && eb,
-    onClick: ep
-  });
+    onClick: ep,
+  })
   let eE = jsx(w, {
     dispatch: C,
     dropdownShown: T,
     onChange: eh,
     action: ey,
-    recordingKey: generateRecordingKey(I.recordingKey, "actionDropdown"),
+    recordingKey: generateRecordingKey(I.recordingKey, 'actionDropdown'),
     showVideoActions: S,
-    isNestedInConditional: I.isNestedInConditional
-  });
-  let ej = e_ ? eE : eC;
+    isNestedInConditional: I.isNestedInConditional,
+  })
+  let ej = e_ ? eE : eC
   let eN = jsx(_$$S.div, {
     className: eI,
-    children: R || B ? jsx(_$$A, {
-      label: getI18nString("proto.action"),
-      input: ej
-    }) : ej
-  });
+    children: R || B
+      ? jsx(_$$A, {
+          label: getI18nString('proto.action'),
+          input: ej,
+        })
+      : ej,
+  })
   let eT = d()({
     [Oe]: !0,
     [h2]: K,
-    [Ob]: L
-  });
+    [Ob]: L,
+  })
   return jsxs(_$$S.div, {
     className: ev,
     ref: ei,
-    role: "button",
+    role: 'button',
     tabIndex: 0,
-    children: [void 0 !== ed && jsx("hr", {
+    children: [void 0 !== ed && jsx('hr', {
       className: em,
       style: {
-        transform: `translateY(${ed}px)`
-      }
-    }), F ? jsxs(_$$S.div, {
-      className: eT,
-      role: "button",
-      tabIndex: 0,
-      onMouseDown: eu,
-      children: [I.isNestedInConditional && eg, eN]
-    }) : eN, W && Z && jsx(_$$x, {
+        transform: `translateY(${ed}px)`,
+      },
+    }), F
+      ? jsxs(_$$S.div, {
+          className: eT,
+          role: 'button',
+          tabIndex: 0,
+          onMouseDown: eu,
+          children: [I.isNestedInConditional && eg, eN],
+        })
+      : eN, W && Z && jsx(_$$x, {
       action: P,
       actionIndexPath: I.actionIndexPath,
       autoOpenExpressionBuilder: b,
@@ -796,8 +831,8 @@ export function $$en0({
       setAutoOpenExpressionBuilder: v,
       stateManagementVersion: s,
       updateMultipleDestinationNodes: e,
-      updateSelectionProperties: t
-    })]
-  });
+      updateSelectionProperties: t,
+    })],
+  })
 }
-export const P = $$en0;
+export const P = $$en0

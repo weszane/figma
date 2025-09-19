@@ -6,11 +6,11 @@ import { getFeatureFlags } from '../905/601108';
 import { getSingletonSceneGraph } from '../905/700578';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { isNotInFocusedNodeView, getFocusedNodeId } from '../figma_app/327588';
+import { getFocusedNodeId, isNotInFocusedNodeView } from '../figma_app/327588';
 import { isSelfDesignMode } from '../figma_app/357367';
-import { y7 } from '../figma_app/385874';
-import { gI, Pc } from '../figma_app/396464';
-import { C1 } from '../figma_app/505098';
+import { getImageOrVideoPaint } from '../figma_app/385874';
+import { useCooperFrameGuids, useSelectedCooperFrameIds } from '../figma_app/396464';
+import { getComponentProps } from '../figma_app/505098';
 import { Lk, x } from '../figma_app/639711';
 import { uN } from '../figma_app/646357';
 import { useSceneGraphSelection, useSceneGraphSelector } from '../figma_app/722362';
@@ -39,7 +39,7 @@ var $$N3 = (e => (e.TEXT = 'TEXT', e.IMAGE = 'IMAGE', e.INSTANCE = 'INSTANCE', e
 var C = (e => (e.INSTANCE = 'INSTANCE', e.DETACHED = 'DETACHED', e.MIXED = 'MIXED', e))(C || {});
 export function $$w1() {
   let e = getSingletonSceneGraph();
-  let t = gI();
+  let t = useSelectedCooperFrameIds();
   let r = useSelector(selectSceneGraphSelectionKeys);
   let a = null;
   let s = !1;
@@ -90,7 +90,7 @@ function P(e) {
     i && r === null ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = MIXED_MARKER, n = null);
   }
   return {
-    mediaPaint: r && isValidValue(r) ? y7(r) : r,
+    mediaPaint: r && isValidValue(r) ? getImageOrVideoPaint(r) : r,
     mediaPaintIndex: n
   };
 }
@@ -108,7 +108,7 @@ export function $$k9(e) {
   }).flat(), e);
   return useMemoStable(() => t, [t]);
 }
-export let $$M12 = createSelector([C1], e => {
+export let $$M12 = createSelector([getComponentProps], e => {
   if (!e) return [];
   let t = new Set();
   Object.keys(e).forEach(e => {
@@ -119,7 +119,7 @@ export let $$M12 = createSelector([C1], e => {
   return Array.from(t);
 });
 export function $$F4() {
-  let e = gI();
+  let e = useSelectedCooperFrameIds();
   let t = useSceneGraphSelector();
   if (e.length === 1) {
     let r = t.get(e[0] ?? '');
@@ -133,7 +133,7 @@ export function $$F4() {
   return null;
 }
 export function $$j16() {
-  let e = gI();
+  let e = useSelectedCooperFrameIds();
   let t = getFocusedNodeId();
   let r = [...e];
   t && r.push(t);
@@ -182,7 +182,7 @@ export function $$V15() {
   }), [e, t]);
 }
 export function $$H0() {
-  let e = Pc();
+  let e = useCooperFrameGuids();
   let t = useSceneGraphSelector();
   return e.some(e => {
     let r = t.get(e);

@@ -14,7 +14,7 @@ import { u1, XE } from "../figma_app/91703";
 import { TI } from "../905/713722";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
-import { bn, sb } from "../figma_app/385874";
+import { isGradientType, isSolidType } from "../figma_app/385874";
 import { u as _$$u } from "../figma_app/852050";
 import { cn } from "../905/959568";
 import { zi } from "../905/824449";
@@ -127,7 +127,7 @@ export function $$F0({
 }) {
   let m = useSelector(e => e.pickerShown && e.pickerShown.id === d ? e.pickerShown : null);
   let g = useRef(null);
-  let x = !!e && isValidValue(e) && bn(e.type);
+  let x = !!e && isValidValue(e) && isGradientType(e.type);
   let {
     openColorPicker,
     closeColorPicker
@@ -202,8 +202,8 @@ function B({
   recordingKey: C
 }) {
   let j = Gc();
-  let w = !!e && isValidValue(e) && bn(e.type);
-  let T = !!e && isValidValue(e) && sb(e.type);
+  let w = !!e && isValidValue(e) && isGradientType(e.type);
+  let T = !!e && isValidValue(e) && isSolidType(e.type);
   let N = Mg("FILL", s, o);
   let I = _$$e(e);
   let E = (() => {

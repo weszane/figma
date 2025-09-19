@@ -20,7 +20,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../figma_app/884735";
 import { UT } from "../figma_app/95266";
-import { Lg } from "../figma_app/505098";
+import { selectContainingStateOrSymbolId } from "../figma_app/505098";
 import { K as _$$K } from "../905/636142";
 import { v as _$$v } from "../905/318279";
 import { YW } from "../figma_app/778125";
@@ -257,7 +257,7 @@ function $({
   let i = useSelector(e => UT(e) ?? "");
   let r = useSelector(e => selectSceneGraphSelectionKeys(e));
   let s = useSelector(e => {
-    let t = Lg(e);
+    let t = selectContainingStateOrSymbolId(e);
     return t ? e.mirror.sceneGraph.get(t) : null;
   });
   let o = useSelector(e => r.every(t => {

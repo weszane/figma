@@ -3,7 +3,7 @@ import { CanvasSearchHelpers, GraphicElement, EditAction, Fullscreen, TextCase }
 import { A } from "../vendor/292399";
 import { debugState } from "../905/407919";
 import { createEventEmitter } from "../figma_app/516794";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { Fk, Ch, Wy, ml, hw, yo } from "../905/125333";
 import { getI18nString } from "../905/303541";
@@ -147,7 +147,7 @@ export function $$E0(e) {
           let r = n.annotationCategories?.find(t => t.id === e.categoryId);
           r && (t = uA(r) + " ");
         }
-        return t + ("lexical" === detectEditorStateFormat(e.label) ? parseEditorStateToPlainText(e.label) : At(e.label));
+        return t + ("lexical" === detectEditorStateFormat(e.label) ? parseEditorStateToPlainText(e.label) : sanitizeAndExtractText(e.label));
       }).join(" ") : "";
     }
   };

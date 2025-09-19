@@ -1,5 +1,5 @@
 import { AppStateTsApi, InteractionCpp, SceneGraphHelpers, CooperHelpers, Fullscreen } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -44,7 +44,7 @@ export class $$f0 extends j {
         t.invalidate();
       }, 200);
     }
-    let s = M.fromVectorD(e.canvasSpaceMouse());
+    let s = Vector2D.fromVectorD(e.canvasSpaceMouse());
     let o = yh(s, t, this._uiHidden, this.getDefaultChildSize(), this.addRowDotVerticalOffset());
     if (this.clearHoveredRowNodeDuringQuickAdd(), "ADD_CHILD_AFTER_ROW_HOVERED" === o.mouse) {
       let e = AppStateTsApi?.canvasGrid().getRowGUID(i) ?? defaultSessionLocalIDString;
@@ -118,7 +118,7 @@ export class $$f0 extends j {
         };
         let s = "ADD_CHILD_AFTER_FINAL_ROW_HOVERED" === this._state.mouse;
         let o = v2(i, i.length, this.getDefaultChildSize());
-        let l = QQ(i, this.getDefaultChildSize()) || new M(0, 0);
+        let l = QQ(i, this.getDefaultChildSize()) || new Vector2D(0, 0);
         s ? (zw(AppStateTsApi.canvasGrid().rectForCoord(a, o, !0), e, t, this._getDashedPlaceholderBgColor(), this._getDashedPlaceholderOutlineColor(), a.row), $r(l, e, t, 0)) : qu(l, e, t, 0);
       }
     }
@@ -140,7 +140,7 @@ export class $$f0 extends j {
     return "ADD_FIRST_CHILD_HOVERED" === this._state.mouse ? this.getActiveOutlineColor() : AppStateTsApi?.getBorderFSPlaceholder() ?? 0xcccccc;
   }
   getDefaultChildSize() {
-    return new M(0, 0);
+    return new Vector2D(0, 0);
   }
   addBlankChildAtCoord(e, t, i, n, r) {
     return null;

@@ -19,7 +19,7 @@ import { isColorDark, whiteColor, blackColor } from '../figma_app/191804';
 import { xT } from '../figma_app/195407';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { viewportNavigatorContext } from '../figma_app/298911';
-import { cy, E6, WY } from '../figma_app/387100';
+import { findNodeMatching, findVisibleChild, findLatestNodeMatching } from '../figma_app/387100';
 import { fullscreenValue } from '../figma_app/455680';
 import { $i, a8, Dh, Ds, H7, iB, jE, jr, Lw, nG, oO, Sf, WW } from '../figma_app/467440';
 import { $1, dK, L7, mF, tF, Y4, YX } from '../figma_app/631279';
@@ -262,7 +262,7 @@ class L {
         centerNodeMatcher,
         resetStartingState
       } = e.startingState;
-      !cy(centerNodeMatcher, this.sceneGraph) && resetStartingState && (t += 3e3);
+      !findNodeMatching(centerNodeMatcher, this.sceneGraph) && resetStartingState && (t += 3e3);
     }
     this.hasWaved || (t += Y4 + YX);
     this.setCursorBotTutorialDuration(t);
@@ -293,13 +293,13 @@ class L {
         prioritizeSelectedNode,
         resetStartingState
       } = e.startingState;
-      if (prioritizeSelectedNode && (t = this.getSelectedNodeIfMatches(centerNodeMatcher)), t || (t = WY(centerNodeMatcher, this.sceneGraph)), !t && resetStartingState) {
+      if (prioritizeSelectedNode && (t = this.getSelectedNodeIfMatches(centerNodeMatcher)), t || (t = findLatestNodeMatching(centerNodeMatcher, this.sceneGraph)), !t && resetStartingState) {
         try {
           await this.insertStartingStateFromHubFile({
             ...resetStartingState,
             tutorialName: e.name
           });
-          t = cy(centerNodeMatcher, this.sceneGraph);
+          t = findNodeMatching(centerNodeMatcher, this.sceneGraph);
         } catch (t) {
           this.logErrorAndStopTutorial('Could not insert starting state from hub file for tutorial', {
             err: t,
@@ -309,7 +309,7 @@ class L {
         }
       }
       if (t) {
-        this.tutorialParentNode = E6(this.sceneGraph, t.guid) ?? void 0;
+        this.tutorialParentNode = findVisibleChild(this.sceneGraph, t.guid) ?? void 0;
         let e = {
           centerX: t.absoluteBoundingBox.x + t.absoluteBoundingBox.w / 2,
           centerY: t.absoluteBoundingBox.y + t.absoluteBoundingBox.h / 2,
@@ -405,7 +405,7 @@ class L {
     if (permissionScopeHandler.onboarding('size', () => {
       s && SceneGraphHelpers.setSelectedNodeAndCanvas(s.guid, !1);
     }), n) {
-      let e = cy(n, this.sceneGraph, this.tutorialParentNode);
+      let e = findNodeMatching(n, this.sceneGraph, this.tutorialParentNode);
       permissionScopeHandler.onboarding('append-child', () => s && e?.appendChild(s));
     }
     if (this.repositionNode(s, i, r), permissionScopeHandler.onboarding('rename-node', () => {
@@ -460,7 +460,7 @@ class L {
         parentMatcher,
         useDefaultLocationIfParentNotFound
       } = e.location;
-      let n = cy(parentMatcher, this.sceneGraph, this.tutorialParentNode);
+      let n = findNodeMatching(parentMatcher, this.sceneGraph, this.tutorialParentNode);
       if (!n) {
         return useDefaultLocationIfParentNotFound ? this.getCursorBotNodeInsertionLocation({
           ...e,
@@ -559,7 +559,7 @@ class L {
           }
         case HQ.TARGET_SCENE_NODE:
           {
-            let i = cy(e.meetsConditions, this.sceneGraph, this.tutorialParentNode);
+            let i = findNodeMatching(e.meetsConditions, this.sceneGraph, this.tutorialParentNode);
             if (e.prioritizeSelectedNode && (i = this.getSelectedNodeIfMatches(e.meetsConditions) ?? i), !i) {
               e.continueIfNotFound || this.logErrorAndStopTutorial('Failed to find scene node to target', {
                 name: e.nodeNameForLogging,
@@ -593,7 +593,7 @@ class L {
         case HQ.SELECT_SCENE_NODE:
           {
             let i;
-            if (e.prioritizeSelectedNode && (i = this.getSelectedNodeIfMatches(e.meetsConditions)), i || (i = cy(e.meetsConditions, this.sceneGraph, this.tutorialParentNode)), !i) {
+            if (e.prioritizeSelectedNode && (i = this.getSelectedNodeIfMatches(e.meetsConditions)), i || (i = findNodeMatching(e.meetsConditions, this.sceneGraph, this.tutorialParentNode)), !i) {
               this.logErrorAndStopTutorial('Failed to find scene node to select', {
                 name: e.nodeNameForLogging,
                 tutorialName: t

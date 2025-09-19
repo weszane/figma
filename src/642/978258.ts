@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { UserActionState, AppStateTsApi, Positioning, Fullscreen } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
+import { Rectangle } from "../905/249071";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebounce } from 'use-debounce';
 import { FQ } from "../9410/571209";
@@ -152,11 +152,11 @@ function b({
   }, [P, i]);
   let K = useCallback((e, t, s) => {
     let [r, n] = B(e, t, s);
-    return _$$r.fromOriginAndSize(r, n, t.width, t.height);
+    return Rectangle.fromOriginAndSize(r, n, t.width, t.height);
   }, [B]);
   let G = useCallback((e, t, s, r, n) => !i && s === Positioning.ABOVE && r.top() > n.top() ? K(e, t, Positioning.BELOW) : !i && s === Positioning.BELOW && r.top() < n.top() ? K(e, t, Positioning.ABOVE) : s === Positioning.LEFT && r.left() > n.left() ? K(e, t, Positioning.RIGHT) : s === Positioning.RIGHT && r.left() < n.left() ? K(e, t, Positioning.LEFT) : r, [K, i]);
   let H = useCallback((e, s, r, n) => {
-    let i = _$$r.fromOriginAndSize(t.x, t.y, t.width, t.height);
+    let i = Rectangle.fromOriginAndSize(t.x, t.y, t.width, t.height);
     let l = K(e, s, g);
     let a = R(l, i, n);
     let d = G(e, s, g, a, l);

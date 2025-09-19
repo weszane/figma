@@ -64,7 +64,7 @@ import { Rc } from "../figma_app/634146";
 import { tA, rp } from "../figma_app/229710";
 import { Ao } from "../905/748636";
 import { FY, lf, Lp, Ph, ux, KE, eu as _$$eu, eh as _$$eh, By, w1, gq, jG, Mf, yR, iV, A7, tq, wR, qq, R as _$$R, dn, Fo, Ar, K8, ew as _$$ew, Jq, IV } from "../figma_app/386160";
-import { At as _$$At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { Link } from "../905/438674";
 import { b as _$$b2 } from "../905/217163";
@@ -262,7 +262,7 @@ function e_({
     let s = e.get(t);
     return [s?.name || "", s?.description || ""];
   }, u);
-  d ? (m = d.name || "", g = d.description_rt ? _$$At(d.description_rt) : d.description || "") : sessionLocalIDToString(o.guid) && (m = f, g = _$$At(x));
+  d ? (m = d.name || "", g = d.description_rt ? sanitizeAndExtractText(d.description_rt) : d.description || "") : sessionLocalIDToString(o.guid) && (m = f, g = sanitizeAndExtractText(x));
   return jsx(zK.Provider, {
     value: zM.EDIT_STYLE,
     children: jsx(O8, {

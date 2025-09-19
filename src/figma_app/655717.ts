@@ -4,7 +4,7 @@ import a from "../vendor/77708";
 import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { N9, qg } from "../figma_app/385874";
+import { filterValidImagePaints, hashToHexString } from "../figma_app/385874";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { ut } from "../figma_app/328423";
@@ -237,9 +237,9 @@ export function $$P1(e = 0) {
 export function $$D13() {
   let e = useSelector(selectOpenFileKey);
   let t = useSelector(e => e.mirror.selectionProperties.fillPaints) || null;
-  let r = useMemo(() => N9(t)?.filter(e => e.opacity > 0 && e.visible && e.image), [t]);
+  let r = useMemo(() => filterValidImagePaints(t)?.filter(e => e.opacity > 0 && e.visible && e.image), [t]);
   if (r?.length !== 1 || !r[0]?.image) return null;
-  let a = qg(r[0].image);
+  let a = hashToHexString(r[0].image);
   return e && a ? r[0] : null;
 }
 export const $L = $$T0;

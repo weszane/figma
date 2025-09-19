@@ -33,7 +33,7 @@ import { L as _$$L2 } from "../figma_app/467950";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { D as _$$D } from "../figma_app/451499";
-import { N9, qg } from "../figma_app/385874";
+import { filterValidImagePaints, hashToHexString } from "../figma_app/385874";
 import { K as _$$K } from "../figma_app/622160";
 import { I6 } from "../vendor/336448";
 import { detectEditorStateFormat } from "../figma_app/9619";
@@ -257,7 +257,7 @@ function z(e) {
 let J = "images_panel--imagePropertyRow--QtoWZ inspection_property--propertyRow--TSFLG inspection_property--basePropertyRow--nwW7c inspection_property--_basePropertyRow--nfWzH";
 let Z = () => {
   let e = useSelector(e => e.mirror.selectionProperties.fillPaints) || null;
-  let t = useMemo(() => N9(e), [e]);
+  let t = useMemo(() => filterValidImagePaints(e), [e]);
   return t && t.filter(e => e.opacity > 0 && e.visible && e.image) || [];
 };
 function Q(e) {
@@ -310,7 +310,7 @@ function ee() {
   let e = Z();
   let t = useCallback(e => jsx(Q, {
     ...e
-  }, qg(e.image)), []);
+  }, hashToHexString(e.image)), []);
   let r = useMemo(() => {
     let t = e.every(e => "VIDEO" === e.type);
     return e.length > 1 ? t ? getI18nString("inspect_panel.videos.title_plural") : getI18nString("inspect_panel.images.title_plural") : 1 === e.length ? t ? getI18nString("inspect_panel.videos.title_singular") : getI18nString("inspect_panel.images.title_singular") : void 0;

@@ -5,7 +5,7 @@ import { O } from "../905/969533";
 import { Ay } from "@stylexjs/stylex";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { gI, dS, Pc } from "../figma_app/396464";
+import { useSelectedCooperFrameIds, useSelectedSlideRowGuids, useCooperFrameGuids } from "../figma_app/396464";
 import { ZH } from "../figma_app/504823";
 import { clearSelection, addToSelection, removeFromSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
@@ -33,9 +33,9 @@ export function $$v0({
   let i = Um();
   let l = useSceneGraphSelector();
   let u = null;
-  let f = gI();
-  let v = dS();
-  let x = Pc();
+  let f = useSelectedCooperFrameIds();
+  let v = useSelectedSlideRowGuids();
+  let x = useCooperFrameGuids();
   let [S, w] = useState(f);
   let C = S.length === x.length;
   return (useEffect(() => {

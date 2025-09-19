@@ -21,7 +21,7 @@ import { cn } from "../905/959568";
 import { O2, OE } from "../figma_app/164212";
 import { e6, ME } from "../figma_app/545190";
 import { Z3 } from "../figma_app/461594";
-import { Lg, cv } from "../figma_app/505098";
+import { selectContainingStateOrSymbolId, generateDescription } from "../figma_app/505098";
 import { K } from "../figma_app/566021";
 import { Im, uA } from "../figma_app/454622";
 import { z as _$$z } from "../905/454433";
@@ -30,7 +30,7 @@ import { aV } from "../figma_app/305626";
 import { $ } from "../905/330495";
 import { p as _$$p } from "../figma_app/295764";
 import { n as _$$n } from "../figma_app/763473";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { dG } from "../figma_app/753501";
 import { Tg } from "../figma_app/967154";
@@ -47,7 +47,7 @@ let G = forwardRef(function ({
   onOpenDescriptionPane: s
 }, o) {
   let l = Tg();
-  let d = useMemo(() => e ? "lexical" === detectEditorStateFormat(e) ? parseEditorStateToPlainText(e) : At(e) : l?.[0]?.uri ? l?.[0]?.uri : r ? At(r) : t?.[0]?.uri ?? void 0, [e, l, t, r]);
+  let d = useMemo(() => e ? "lexical" === detectEditorStateFormat(e) ? parseEditorStateToPlainText(e) : sanitizeAndExtractText(e) : l?.[0]?.uri ? l?.[0]?.uri : r ? sanitizeAndExtractText(r) : t?.[0]?.uri ?? void 0, [e, l, t, r]);
   let c = useRef(null);
   let u = _$$n({
     ref: c,
@@ -80,7 +80,7 @@ let G = forwardRef(function ({
   });
 });
 export function $$W1(e) {
-  let t = useSelector(Lg);
+  let t = useSelector(selectContainingStateOrSymbolId);
   let {
     nestedInstances
   } = _$$p(e);
@@ -89,7 +89,7 @@ export function $$W1(e) {
 export let $$K0 = memo(function (e) {
   let t = normalizeValue(kl("resettableInstanceOverrides"));
   let r = useSelector(e => e.pickerShown);
-  let s = useSelector(cv);
+  let s = useSelector(generateDescription);
   let o = useSelector(selectSceneGraphSelectionKeys);
   let d = useSelector(selectInstanceKeys);
   let u = useSelector(Z3);

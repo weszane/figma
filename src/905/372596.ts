@@ -1,4 +1,4 @@
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/931912";
@@ -44,7 +44,7 @@ export function $$h1({
     nodesWithAnnotations: 0
   };
   let d = new Map();
-  hV(t, e => {
+  traverseChildren(t, e => {
     let t;
     if (!e.visible) {
       l.numHiddenNodes += 1;

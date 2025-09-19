@@ -31,7 +31,7 @@ import { h as _$$h, iz as _$$iz, rt as _$$rt, c1, jd, KY, qK, s$, v6 } from '../
 import { MaterializeInvisibleChildrenBindings } from '../figma_app/175377';
 import { Hc, kX, mu } from '../figma_app/197743';
 import { StyleIdHandler, VariableIdHandler } from '../figma_app/243058';
-import { Ji, MT } from '../figma_app/387100';
+import { findStackContainer, isSpecialType } from '../figma_app/387100';
 import { throwTypeError } from '../figma_app/465776';
 import { CUSTOM_IMAGE_TYPE_STR, getComponentInfoById, getInstanceIdsForDef, getInstanceNodeProps, getTypeInfoCached, toCamelCase, toTitleCase, usagePropsToRawProps } from '../figma_app/664063';
 import { TrackType, Confirmation, LayoutSizingMode, AssistantTools, VariableResolvedDataType, LayoutSizingType, TextOverflowType, SourceType } from '../figma_app/763686';
@@ -1022,7 +1022,7 @@ export class $$K15 {
   getParentSizeForConstraints() {
     let e = this.getTSSceneNodeOrThrow();
     e.update();
-    let t = Ji(e);
+    let t = findStackContainer(e);
     if (!t) throw new Error('Containing parent not found');
     let i = t.size;
     return {
@@ -1196,7 +1196,7 @@ export class $$Y13 {
         default:
           throw new Error(`Creating ${e} node not yet supported`);
       }
-      MT(e) && i.update();
+      isSpecialType(e) && i.update();
       return new $$K15({
         guid: i.guid,
         runtime: this
@@ -1402,7 +1402,7 @@ async function Z({
     })) && T++;
     z++;
   }
-  if (o.type !== 'INSTANCE' && !MT(o.type) && !e?.deserializeMetadata.isUnknownNode && g.length > z) {
+  if (o.type !== 'INSTANCE' && !isSpecialType(o.type) && !e?.deserializeMetadata.isUnknownNode && g.length > z) {
     let e = g.length - z;
     for (; e > 0;) {
       m(g.pop() ?? null);
@@ -2435,7 +2435,7 @@ let e_ = ei({
       if (o && e.stackPositioning === 'AUTO') return {};
       let a = {};
       if ((o || t.flavor === 'flow' && !e.parentNode?.isGroup && e.parentNode?.type !== 'BOOLEAN_OPERATION') && (a.position = 'absolute'), e.isGroup || e.type === 'BOOLEAN_OPERATION') return a;
-      let l = Ji(e);
+      let l = findStackContainer(e);
       if (!l || !eB(e, l)) {
         let n = e.x;
         let o = e.y;
@@ -2559,7 +2559,7 @@ let e_ = ei({
     }(e, t, 0));
     let r = e.isGroup || e.type === 'BOOLEAN_OPERATION';
     if (e.isInstance) return t.tailwind ? eF(n, !!t.tailwindOnly) : n;
-    let o = Ji(e);
+    let o = findStackContainer(e);
     if (e.type === 'LINE') return (o && e.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? n.length = 'fill-parent' : r || (n.length = i.maybeNormalizePxValue(e.size.x, 'x')), t.tailwind) ? eF(n, !!t.tailwindOnly) : n;
     let a = eB(e, o);
     let l = e.childrenNodes.filter(e => e.stackPositioning === 'AUTO').length;
@@ -3357,7 +3357,7 @@ let ta = zA.merge(to);
 function tl(e, t, i) {
   let {
     fills
-  } = e = MT(e.type) ? e.immutableFrameShape ?? e : e;
+  } = e = isSpecialType(e.type) ? e.immutableFrameShape ?? e : e;
   if (!fills) return;
   if (t.includeStyles && e.inheritedFillStyle) {
     let t = e.sceneGraph.getStyleNodeByRef(e.inheritedFillStyle);
@@ -5662,7 +5662,7 @@ let ns = ei({
     let {
       type,
       fontName
-    } = e = MT(e.type) ? e.textSublayer ?? e : e;
+    } = e = isSpecialType(e.type) ? e.textSublayer ?? e : e;
     if (type !== 'TEXT' || !fontName || fontName.family === '') return;
     let {
       defaultFlavorProps,

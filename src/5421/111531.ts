@@ -69,7 +69,7 @@ import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { A as _$$A } from "../7a72fc59/43307";
 import { Ku } from "../figma_app/740163";
-import { Ou, qg } from "../figma_app/385874";
+import { getSolidPaint, hashToHexString } from "../figma_app/385874";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { S7 } from "../figma_app/259578";
 import { n1 } from "../905/698732";
@@ -698,7 +698,7 @@ function eF({
   onChange: t
 }) {
   let n = e ? isInvalidValue(e) ? eU : e : eU;
-  let r = Ou(n);
+  let r = getSolidPaint(n);
   let a = Ku();
   let {
     currentTool,
@@ -2183,7 +2183,7 @@ class nC {
         success: !1,
         modifiedCodeFileNodeIds: []
       };
-      let g = qg({
+      let g = hashToHexString({
         hash: x.hash
       });
       let y = {

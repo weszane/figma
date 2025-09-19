@@ -1,5 +1,5 @@
 import { SlideConstantsCppBindings, AppStateTsApi } from "../figma_app/763686";
-import { M as _$$M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { canvasGridAtom } from "../905/618447";
@@ -7,7 +7,7 @@ import { k as _$$k } from "../905/933223";
 import { v2 } from "../figma_app/164260";
 export class $$c0 extends _$$k {
   getDefaultChildSize() {
-    return SlideConstantsCppBindings ? new _$$M(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new _$$M(1920, 1080);
+    return SlideConstantsCppBindings ? new Vector2D(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new Vector2D(1920, 1080);
   }
   isRowHeaderSelectable() {
     return !!getFeatureFlags().slide_chapters;

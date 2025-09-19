@@ -7,7 +7,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { _L } from "../9410/635978";
 import { replaceSelection } from "../figma_app/741237";
 import { tB } from "../figma_app/731583";
-import { y7 } from "../figma_app/385874";
+import { getImageOrVideoPaint } from "../figma_app/385874";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { useStableSelectedNode, useSceneGraphSelection } from "../figma_app/722362";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
@@ -78,7 +78,7 @@ function k({
   let w = useStrictDeepEqualSceneValue((e, t) => {
     let i = e.get(t);
     if (!i || !i.hasEnabledVideoPaint) return null;
-    let n = i.fills.findIndex(e => y7(e)?.video?.hash);
+    let n = i.fills.findIndex(e => getImageOrVideoPaint(e)?.video?.hash);
     if (-1 === n) return null;
     let r = i.fills[n];
     return r && r.video?.hash ? {

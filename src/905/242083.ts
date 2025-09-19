@@ -105,7 +105,7 @@ import { handleAtomEvent } from '../905/502364';
 import { r6 as _$$r2 } from '../905/507950';
 import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { $7 } from '../905/509613';
-import { M as _$$M } from '../905/512402';
+import { Vector2D } from '../905/512402';
 import { RR } from '../905/514666';
 import { v as _$$v3 } from '../905/516963';
 import { dD } from '../905/519113';
@@ -327,8 +327,8 @@ import { getI18nState } from '../figma_app/363242';
 import { widgetHandlerMap, isValidWidgetType } from '../figma_app/364284';
 import { Yg } from '../figma_app/365713';
 import { vE } from '../figma_app/376315';
-import { n_ as _$$n_2 } from '../figma_app/385874';
-import { kh, MT, O5 } from '../figma_app/387100';
+import { initializeDefaultImagePaint } from '../figma_app/385874';
+import { findVisibleSectionChild, isSpecialType, getResponsiveChildren } from '../figma_app/387100';
 import { lu as _$$lu, lV as _$$lV, k1, mI, OJ } from '../figma_app/389091';
 import { initializeShadowReadReporter } from '../figma_app/391338';
 import { g as _$$g6 } from '../figma_app/398051';
@@ -1042,7 +1042,7 @@ function ik(e) {
       insertAsChildOfGuid: e.slotNodeId,
       insertAsChildOfCanvas: !1,
       canvasPosition: s,
-      percentageOffset: new _$$M(0.5, 0.5),
+      percentageOffset: new Vector2D(0.5, 0.5),
       useSmartPositioning: !1,
       selectAfterInsert: !0
     };
@@ -1389,7 +1389,7 @@ function nx(e, t, i) {
     m11: 1,
     m12: i
   };
-  MT(e.type) && nE(e);
+  isSpecialType(e.type) && nE(e);
 }
 _$$nc.testSetup('table-typing-scenario', (e, t, i = {}) => {
   let n = i.sessionID ?? Math.floor(2e3 * e()) + 200;
@@ -3636,7 +3636,7 @@ function or({
   let n = debugState;
   let r = n.getState();
   let a = selectSceneGraph(r);
-  if (O5(a, r.mirror.appModel.currentPage).length) {
+  if (getResponsiveChildren(a, r.mirror.appModel.currentPage).length) {
     !function ({
       startingBreakpointFrameId: e,
       mode: t = 'modal',
@@ -6359,7 +6359,7 @@ let lX = class e extends sP(sN(sR)) {
       let e = n[0];
       e && e.type === 'SECTION' && (r = e.childrenNodes.filter(e => e.isTopLevelFrame()).map(e => e.guid));
     }
-    let a = (r = r.filter(e => e && PrototypingTsApi?.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e) ?? []);
+    let a = (r = r.filter(e => e && PrototypingTsApi?.isValidNodeForMagicLink(e))).flatMap(e => findVisibleSectionChild(i, e) ?? []);
     if (a.map(e => e.guid).length === 0) return;
     let o = PrototypingTsApi?.getContextFramesForMagicLink(r) ?? [];
     let l = 0;
@@ -6997,7 +6997,7 @@ let lX = class e extends sP(sN(sR)) {
       bX();
     }
     registerFullscreenEventHandlers();
-    _$$n_2();
+    initializeDefaultImagePaint();
     getFeatureFlags()?.fullscreen_use_metrics_event_loop && requestAnimationFrame(tV);
     getFeatureFlags()?.fullscreen_use_threaded_rendering && oN.getInstance().spawnAndStart();
     this.reparentRootElement(this.containerElement);

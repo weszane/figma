@@ -173,7 +173,7 @@ import { Uw } from '../905/698759';
 import { UN } from '../905/700578';
 import { s as _$$s2 } from '../905/702260';
 import { L as _$$L } from '../905/704296';
-import { oV as _$$oV2, Zb } from '../905/706046';
+import { sortByPosition, sortByPositionWithDefault } from '../905/706046';
 import { U as _$$U2 } from '../905/708285';
 import { n8 as _$$n8, T_ } from '../905/713167';
 import { IT, liveStoreInstance } from '../905/713695';
@@ -384,8 +384,8 @@ import { G as _$$G3, T as _$$T6 } from '../figma_app/373780';
 import { oe as _$$oe } from '../figma_app/376315';
 import { Aw } from '../figma_app/383828';
 import { LH } from '../figma_app/384673';
-import { iC as _$$iC, x$ as _$$x$, bn, Lt, Ou, Tm, y7 } from '../figma_app/385874';
-import { dS as _$$dS, bd, gI, Pc } from '../figma_app/396464';
+import { getColorAtStop, validateGradientPaint, isGradientType, rotatePaint, getSolidPaint, paintManager, getImageOrVideoPaint } from '../figma_app/385874';
+import { useSelectedSlideRowGuids, useSelectedCooperFrameId, useSelectedCooperFrameIds, useCooperFrameGuids } from '../figma_app/396464';
 import { aq as _$$aq } from '../figma_app/399472';
 import { rg as _$$rg } from '../figma_app/401069';
 import { R as _$$R } from '../figma_app/421558';
@@ -539,7 +539,7 @@ function K(e, t) {
 }
 function W() {
   let e = function () {
-    let e = Pc();
+    let e = useCooperFrameGuids();
     let t = isFullscreenAndInFocusedNodeView();
     let n = useFocusedNodeId();
     return useDeepEqualSceneValue((e, t, n, l) => {
@@ -632,7 +632,7 @@ function Y({
   viewportNodeBounds: n
 }) {
   let l = useSceneGraphSelector();
-  let r = bd() === e;
+  let r = useSelectedCooperFrameId() === e;
   let i = useMemo(() => K(e, l), [e, l]);
   let [s, c, u] = function (e, t, n, l) {
     let [r, i] = useState('dormant');
@@ -645,7 +645,7 @@ function Y({
       t.forEach(t => {
         let l = e.get(t);
         if (!l || !l.hasEnabledVideoPaint) return;
-        let r = l.fills.findIndex(e => y7(e)?.video?.hash);
+        let r = l.fills.findIndex(e => getImageOrVideoPaint(e)?.video?.hash);
         if (r === -1) return;
         let i = l.fills[r];
         i && i.video?.hash && n.push({
@@ -3579,7 +3579,7 @@ function lz({
     scrollRef,
     onScroll
   } = Nd(p.type);
-  let f = bd();
+  let f = useSelectedCooperFrameId();
   let b = useAtomWithSubscription(Hb);
   let j = s && !!n && n.length > 0 && !l;
   let y = {
@@ -4906,7 +4906,7 @@ function ij() {
   let [e] = _$$lJ2('imageOverlayPaint');
   let t = kl('fillPaints');
   return useCallback((n, l) => {
-    Tm.clearCache();
+    paintManager.clearCache();
     let r = [{
       ...n,
       opacity: n.color?.a
@@ -8123,7 +8123,7 @@ function sz({
   } = ew();
   let l = ij();
   if (!e || isInvalidValue(e)) return null;
-  let r = _$$x$(e);
+  let r = validateGradientPaint(e);
   return r ? jsx(sb, {
     children: jsxs('div', {
       className: 'gradient_control_submenu--gradientSubmenuContainer--0scDr',
@@ -8546,7 +8546,7 @@ function sQ({
   let r = useMemo(() => e && isValidValue(e) ? e : {
     type: 'IMAGE'
   }, [e]);
-  let i = y7(r);
+  let i = getImageOrVideoPaint(r);
   let s = r?.type === 'IMAGE';
   let d = n && r?.type === 'VIDEO';
   let u = s || d;
@@ -8811,7 +8811,7 @@ function s6({
     let r = function () {
       let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return useCallback(t => {
-        isValidValue(t) && bn(t?.type) && e !== LayoutTabType.GRADIENT && fullscreenValue.triggerAction('toggle-gradient-edit-mode');
+        isValidValue(t) && isGradientType(t?.type) && e !== LayoutTabType.GRADIENT && fullscreenValue.triggerAction('toggle-gradient-edit-mode');
       }, [e]);
     }();
     let i = useRef(e);
@@ -8845,7 +8845,7 @@ function s6({
       switch (t.activeTab) {
         case sd.SOLID:
           let a = o.current;
-          a ? l(a, yesNoTrackingEnum.NO) : l(Tm.initPaint('SOLID', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
+          a ? l(a, yesNoTrackingEnum.NO) : l(paintManager.initPaint('SOLID', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
           break;
         case sd.GRADIENT:
           let s = c.current;
@@ -8853,14 +8853,14 @@ function s6({
             l(s, yesNoTrackingEnum.NO);
             r(s);
           } else {
-            let e = Tm.initPaint('GRADIENT_LINEAR', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel');
+            let e = paintManager.initPaint('GRADIENT_LINEAR', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel');
             l(e, yesNoTrackingEnum.YES);
             r(e);
           }
           break;
         case sd.MEDIA:
           let d = u.current;
-          d ? l(d, yesNoTrackingEnum.NO) : l(Tm.initPaint('IMAGE', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
+          d ? l(d, yesNoTrackingEnum.NO) : l(paintManager.initPaint('IMAGE', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
           break;
         case sd.NONE:
           fullscreenValue.updateSelectionProperties({
@@ -9154,7 +9154,7 @@ function ds({
   disabled: l
 }) {
   let r = useCallback(() => {
-    e === LayoutTabType.RASTER ? (n(Lt(t, 90), yesNoTrackingEnum.YES), _$$l2.user('image-rotate-clockwise', () => {
+    e === LayoutTabType.RASTER ? (n(rotatePaint(t, 90), yesNoTrackingEnum.YES), _$$l2.user('image-rotate-clockwise', () => {
       Fullscreen?.repairThumbnails();
     })) : fullscreenValue.triggerActionInUserEditScope('rotate-90-clockwise');
   }, [e, n, t]);
@@ -9775,8 +9775,8 @@ let dU = memo(() => {
   let {
     hasInstanceSelected
   } = Cl();
-  let r = gI();
-  let i = _$$dS();
+  let r = useSelectedCooperFrameIds();
+  let i = useSelectedSlideRowGuids();
   let c = iS();
   let u = _$$uM();
   let x = useSelector(selectSceneGraphSelectionKeys);
@@ -9789,7 +9789,7 @@ let dU = memo(() => {
     return t === DiagramElementType.FRAME_NAME || t === DiagramElementType.CANVAS_GRID_ROW_NAME;
   });
   let b = function () {
-    let e = gI();
+    let e = useSelectedCooperFrameIds();
     let [t, n] = useState({});
     let l = useMemoStable(() => t, [t]);
     useLayoutEffect(() => {
@@ -10831,7 +10831,7 @@ function uu({
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = useSelector(e => e.mirror.sceneGraphSelection);
   let c = r === SelfDesignType.DESIGN && Object.keys(i).length > 0;
-  let u = bd();
+  let u = useSelectedCooperFrameId();
   let [x, m] = useState(340);
   let [h, g] = useState(!0);
   let f = h && c;
@@ -11880,7 +11880,7 @@ function xn({
 }
 function xl() {
   let e = useDispatch();
-  let t = gI();
+  let t = useSelectedCooperFrameIds();
   let n = isFullscreenAndInFocusedNodeView();
   let l = getFocusedNodeId();
   let r = useMemo(() => n ? [l] : t, [n, l, t]);
@@ -13176,7 +13176,7 @@ function x4() {
   }, [c]);
   let u = useSelector(e => !e.mirror.appModel.isReadOnly);
   let x = Xr(U_);
-  let m = bd();
+  let m = useSelectedCooperFrameId();
   let h = useRef(null);
   let g = function ({
     tab: e
@@ -13763,7 +13763,7 @@ function pm({
 function pf() {
   let e = getObservableValue(AppStateTsApi?.cooperThumbnailEdits(), new Map());
   let t = _$$ie();
-  let n = Pc();
+  let n = useCooperFrameGuids();
   let {
     width,
     height
@@ -13864,10 +13864,10 @@ function pR({
   additionalControls: n
 }) {
   let l = e ? isInvalidValue(e) ? s2 : e : s2;
-  let r = Ou(l);
-  let i = _$$x$(l);
+  let r = getSolidPaint(l);
+  let i = validateGradientPaint(l);
   let a = useAppModelProperty('currentSelectedGradientStop');
-  let d = _$$iC(r ?? i ?? s2, a);
+  let d = getColorAtStop(r ?? i ?? s2, a);
   let c = _$$Ku();
   let {
     currentTool,
@@ -14096,8 +14096,8 @@ function pW({
   paint: e
 }) {
   if (!e || isInvalidValue(e)) return renderI18nText('cooper.inline_menu.fill_panel.title');
-  let t = bn(e.type);
-  let n = _$$x$(e);
+  let t = isGradientType(e.type);
+  let n = validateGradientPaint(e);
   return t && n ? renderI18nText('cooper.inline_menu.fill_submenu.gradient') : renderI18nText('cooper.inline_menu.fill_panel.title');
 }
 function pH({
@@ -14113,7 +14113,7 @@ function pH({
   let x = _$$C3();
   let p = useAppModelProperty('currentSelectedGradientStop');
   let m = !t || isInvalidValue(t);
-  let h = m ? null : _$$x$(t);
+  let h = m ? null : validateGradientPaint(t);
   let g = h !== null;
   return (useEffect(() => {
     g && r !== LayoutTabType.GRADIENT && fullscreenValue.triggerAction('toggle-gradient-edit-mode');
@@ -14188,8 +14188,8 @@ function pX({
             for (let e of n.values()) e.position = _$$H2(1 - e.position);
             let l = e.stopsVar.slice();
             for (let e of l.values()) e.position = _$$H2(1 - e.position);
-            _$$oV2(n);
-            Zb(l);
+            sortByPosition(n);
+            sortByPositionWithDefault(l);
             t({
               ...e,
               stops: n,
@@ -14603,7 +14603,7 @@ let mw = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
   let t = useSelector(e => e.progressBarState);
-  let n = Pc();
+  let n = useCooperFrameGuids();
   let [l, r] = useState(!1);
   let i = _$$dh();
   $k();

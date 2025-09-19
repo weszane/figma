@@ -12,7 +12,7 @@ import { O as _$$O } from "../905/487602";
 import { SymbolOverrideType, Fullscreen, NodePropertyCategory, CanvasComponentType } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { parseSessionLocalID, defaultSessionLocalID, sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
-import { kh } from "../figma_app/387100";
+import { findVisibleSectionChild } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import _ from "classnames";
@@ -40,7 +40,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { ZM } from "../figma_app/505098";
+import { selectAreAllSymbolsOrInstances } from "../figma_app/505098";
 import { e as _$$e } from "../figma_app/905311";
 import { h6 } from "../905/401389";
 import { Zj } from "../figma_app/365713";
@@ -217,7 +217,7 @@ let $$eT0 = memo(function ({
           connectionType: "NONE"
         }];
         t.push(r);
-        let a = kh(d, e);
+        let a = findVisibleSectionChild(d, e);
         o.push(a ? a.guid : "");
       }
       let i = t.map(e => _$$d2({
@@ -491,7 +491,7 @@ function eA({
       } else e || eh();
     } else eg();
   };
-  let eN = useSelector(ZM);
+  let eN = useSelector(selectAreAllSymbolsOrInstances);
   let eT = !1;
   let eS = null;
   let eA = null;

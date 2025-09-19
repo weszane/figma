@@ -1,7 +1,7 @@
 import { xw, TU } from "../905/585727";
 import { ImageToolsBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { trackFileEvent } from "../figma_app/314264";
@@ -128,8 +128,8 @@ export function $$f0({
       t && (r && (t.imageScaleMode = r.imageScaleMode, t.rotation = r.rotation, t.scale = r.scale, t.opacity = r.opacity, t.blendMode = r.blendMode, t.transform = function (e, t) {
         let i;
         let n;
-        if (!e.transform || !e.originalImageWidth || !e.originalImageHeight || !t.originalImageWidth || !t.originalImageHeight) return _$$s.identity().toFigMatrix();
-        let r = _$$s.fromFigMatrix(e.transform);
+        if (!e.transform || !e.originalImageWidth || !e.originalImageHeight || !t.originalImageWidth || !t.originalImageHeight) return AffineTransform.identity().toFigMatrix();
+        let r = AffineTransform.fromFigMatrix(e.transform);
         let {
           x: _x,
           y: _y

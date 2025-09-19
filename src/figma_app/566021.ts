@@ -8,13 +8,13 @@ import { i$ } from "../figma_app/150804";
 import { useMemo, useState, useRef, useCallback, useId } from "react";
 import { Button } from "../905/521428";
 import { e as _$$e } from "../figma_app/763473";
-import { At } from "../905/973142";
+import { sanitizeAndExtractText } from "../905/973142";
 import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { selectSelectedNodes } from "../figma_app/889655";
-import { Lg, od } from "../figma_app/505098";
+import { selectContainingStateOrSymbolId, selectNodeFromCombinedId } from "../figma_app/505098";
 import { isInvalidValue } from "../905/216495";
 import { fI } from "../figma_app/626177";
 import { u as _$$u } from "../905/419626";
@@ -45,7 +45,7 @@ function h(e) {
     onExpandCallback,
     text
   } = e;
-  let s = useMemo(() => isHTMLString ? At(text) : text, [isHTMLString, text]);
+  let s = useMemo(() => isHTMLString ? sanitizeAndExtractText(text) : text, [isHTMLString, text]);
   let [o, l] = useState(!1);
   let d = useRef(null);
   let h = useCallback(() => l(!1), []);
@@ -206,7 +206,7 @@ function k({
 }
 function B() {
   let e = useSelector(e => {
-    let t = Lg(e) ?? "";
+    let t = selectContainingStateOrSymbolId(e) ?? "";
     return e.mirror.sceneGraph.get(t)?.simplifyInstancePanels ?? !1;
   });
   return jsx("div", {
@@ -242,7 +242,7 @@ function G(e) {
   } = e;
   let p = useSelector(i$);
   let _ = pickerShown.id === uA;
-  let h = useSelector(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : selectSelectedNodes(e));
+  let h = useSelector(e => "state-group" === menuType ? [selectNodeFromCombinedId(e)].filter(e => null != e) : selectSelectedNodes(e));
   let g = useCallback((e, t) => {
     permissionScopeHandler.user("set-description", () => {
       for (let r of h) r.setDescriptionRich(e, t);

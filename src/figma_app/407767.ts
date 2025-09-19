@@ -1,5 +1,5 @@
 import { ViewType, Fullscreen } from "../figma_app/763686";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/675871";
 import { debugState } from "../905/407919";
@@ -28,7 +28,7 @@ export function $$S2() {
 }
 export function $$v11(e) {
   let t = 0;
-  hV(e, e => !e || e.isInternalOnlyNode || e.opacity <= 0 || !e.visible ? "skip" : (t += 1, "INSTANCE" === e.type) ? "skip" : void 0);
+  traverseChildren(e, e => !e || e.isInternalOnlyNode || e.opacity <= 0 || !e.visible ? "skip" : (t += 1, "INSTANCE" === e.type) ? "skip" : void 0);
   return t;
 }
 export function $$A8(e, t) {
@@ -131,7 +131,7 @@ export function $$C1({
   let d = [];
   let c = o ? void 0 : "skip";
   let u = !!n;
-  hV(t, t => {
+  traverseChildren(t, t => {
     if (!t || t.isInternalOnlyNode || t.opacity <= 0 || !t.visible) return "skip";
     if ("INSTANCE" === t.type) {
       let i = {

@@ -9,11 +9,11 @@ import { selectSceneGraph, selectSceneGraphSelectionKeys } from "../figma_app/88
 import { Yi, aO, f3 } from "../figma_app/164212";
 import { s as _$$s } from "../figma_app/335489";
 import { uL, NE, xJ } from "../figma_app/264776";
-import { C1, nM, tK, d as _$$d } from "../figma_app/505098";
+import { getComponentProps, getContainingStateGroupId, createCombinedWithUniqueSelector, createSymbolStateGroupSelector } from "../figma_app/505098";
 export function $$m0() {
-  return createDeepEqualSelector([uL, C1, selectSceneGraph, (e, t) => t], (e, t, r, n) => {
+  return createDeepEqualSelector([uL, getComponentProps, selectSceneGraph, (e, t) => t], (e, t, r, n) => {
     if (!t || 0 === n.length) return [];
-    let a = Yi(n, r) ?? nM(r, n);
+    let a = Yi(n, r) ?? getContainingStateGroupId(r, n);
     if (!a || n.includes(a)) return [];
     let s = t[a]?.stateGroupVariantProps;
     if (!s) return [];
@@ -43,7 +43,7 @@ export function $$m0() {
     });
   });
 }
-let $$g3 = () => createDeepEqualSelector([C1, tK(), _$$d()], (e, t, r) => {
+let $$g3 = () => createDeepEqualSelector([getComponentProps, createCombinedWithUniqueSelector(), createSymbolStateGroupSelector()], (e, t, r) => {
   if (!e) return [];
   let n = r ?? t;
   return n ? $$y1(n, e) : [];

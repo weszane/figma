@@ -1,6 +1,6 @@
 import { InteractionCpp } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { atomStoreManager } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
 import { H } from "../figma_app/376315";
@@ -35,8 +35,8 @@ export class $$c0 extends j {
     });
   }
   isPointWithinVideoNode(e) {
-    let t = _$$r.fromRectD(InteractionCpp.viewportSpaceVideoBounds());
-    return !t.isInvalid() && t.containsPointIncludingBoundary(M.fromVectorD(e));
+    let t = Rectangle.fromRectD(InteractionCpp.viewportSpaceVideoBounds());
+    return !t.isInvalid() && t.containsPointIncludingBoundary(Vector2D.fromVectorD(e));
   }
   handleMouseUp(e) {}
   handleMouseDrag(e) {}

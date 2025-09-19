@@ -7,7 +7,7 @@ import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { qo, cn } from "../905/959568";
 import { C4 } from "../figma_app/164212";
-import { od, cv } from "../figma_app/505098";
+import { selectNodeFromCombinedId, generateDescription } from "../figma_app/505098";
 import { Vr } from "../figma_app/151869";
 import { i$ } from "../figma_app/150804";
 import { Wv, Im } from "../figma_app/454622";
@@ -51,7 +51,7 @@ export function $$y4() {
 export function $$b6() {
   return selectWithShallowEqual(e => {
     let t = i$(e);
-    let r = od(e);
+    let r = selectNodeFromCombinedId(e);
     return {
       dropdownShown: e.dropdownShown,
       pickerShown: e.pickerShown,
@@ -59,7 +59,7 @@ export function $$b6() {
       containingProductComponent: r,
       containingStateGroupDescription: t === StateHierarchy.STATE ? r?.description : void 0,
       containingStateGroupLinks: t === StateHierarchy.STATE ? r?.symbolLinks : void 0,
-      componentDescription: cv(e)
+      componentDescription: generateDescription(e)
     };
   });
 }

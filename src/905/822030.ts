@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useCallback, useMemo, useRef, useContext } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { setupThemeContext } from "../905/614223";
-import { r as _$$r } from "../905/249071";
-import { M as _$$M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
@@ -146,7 +146,7 @@ let M = (e, t, i) => {
   return !t || n.isSelected || n.ancestorOfSelectedNode || i || D(e) || F(e);
 };
 let j = (e, t) => {
-  let i = e.transformRect(new _$$r(new _$$M(t.x, t.y), new _$$M(t.width, t.height)));
+  let i = e.transformRect(new Rectangle(new Vector2D(t.x, t.y), new Vector2D(t.width, t.height)));
   return {
     x: i.left(),
     y: i.top(),

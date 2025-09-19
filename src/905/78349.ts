@@ -1,7 +1,7 @@
 import { packRgb } from "../figma_app/273493";
 import { AutoLayoutAlignment, YesNo, AbsolutePositionType, ConnectorType, AxisType, UnselectedNodesMode, InteractionCpp, StrokeAlignment, SnapshotLevel } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { H } from "../figma_app/147959";
@@ -10,7 +10,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { j } from "../905/881708";
 import { H0 } from "../figma_app/682945";
 import { isConnector } from "../905/739338";
-import { s as _$$s } from "../905/583953";
+import { AffineTransform } from "../905/583953";
 class f {
   static getHoveredEndpoint(e, t, i, n, r, a, s, o) {
     let l = new Set();
@@ -75,8 +75,8 @@ class f {
     interactionCpp: d
   }) {
     let u;
-    u = l ? this.getSnappedMousePositionForEndpoint(e, t, n, a, d) : M.fromVectorD(d.getConnectorMousePosition(e, YesNo.NO));
-    let p = _$$s.fromFigMatrix(i.absoluteTransform).inverseTransformPoint(M.fromFigVector(u));
+    u = l ? this.getSnappedMousePositionForEndpoint(e, t, n, a, d) : Vector2D.fromVectorD(d.getConnectorMousePosition(e, YesNo.NO));
+    let p = AffineTransform.fromFigMatrix(i.absoluteTransform).inverseTransformPoint(Vector2D.fromFigVector(u));
     return p.isInvalid() ? (logError("ConnectorToolBehavior", "could not inverse transform mouse position in ConnectorToolBehavior", {
       position: u
     }), {
@@ -110,7 +110,7 @@ class f {
   }) {
     let h = m.getDefaultStickySize();
     let f = this.getIsHoveringLargeNode(i, h);
-    let _ = M.fromVectorD(m.getConnectorMousePosition(e, YesNo.NO));
+    let _ = Vector2D.fromVectorD(m.getConnectorMousePosition(e, YesNo.NO));
     let A = this.getIsHoveringNearMagnet({
       isHoveringLargeNode: f,
       mouse: _,
@@ -132,7 +132,7 @@ class f {
       isHoveringNearMagnet: A,
       hoveredNodeInfo: o
     })) {
-      if (_ = M.fromVectorD(m.getConnectorMousePositionWithOtherEndpoint(e, YesNo.NO, n)), this.snapEndpointToEdgeOfHoveredNode({
+      if (_ = Vector2D.fromVectorD(m.getConnectorMousePositionWithOtherEndpoint(e, YesNo.NO, n)), this.snapEndpointToEdgeOfHoveredNode({
         snapper: a,
         previousHover: d,
         hover: i,
@@ -147,8 +147,8 @@ class f {
           return this.getHoveredEndpointRecursive(e, t, d, u, n, a, l, p, m);
         }
       }
-      let h = _$$s.fromFigMatrix(i.absoluteTransform).inverseTransformPoint(M.fromVectorD(_));
-      if (h !== M.invalid()) {
+      let h = AffineTransform.fromFigMatrix(i.absoluteTransform).inverseTransformPoint(Vector2D.fromVectorD(_));
+      if (h !== Vector2D.invalid()) {
         let t = this.getIsAbsoluteNotPinned({
           hoveredNodeInfo: o,
           shouldIgnoreMagnets: l,
@@ -183,7 +183,7 @@ class f {
     return {
       endpoint: {
         endpointNodeID: i.guid,
-        position: new M(),
+        position: new Vector2D(),
         magnet: I
       },
       hoverzone: o.hoverzone
@@ -205,7 +205,7 @@ class f {
       }
       let c = n.canvasSpaceSnappingThreshold();
       let u = n.viewport().canvasSpaceViewportRect();
-      l.incrementBy(M.fromVectorD(d.snapToPointDeltaPoint(e, l, c, u)));
+      l.incrementBy(Vector2D.fromVectorD(d.snapToPointDeltaPoint(e, l, c, u)));
       e.clearSnappingVisualizations();
     }
   }
@@ -269,12 +269,12 @@ class f {
     }
   }
   static getSnappedMousePositionForEndpoint(e, t, i, n, a) {
-    if (!t || !t.isConnectorUnattached()) return M.fromVectorD(a.getConnectorMousePositionWithOtherEndpoint(e, YesNo.YES, i));
-    let o = M.fromVectorD(a.getConnectorMousePositionWithOtherEndpoint(e, YesNo.YES, i));
+    if (!t || !t.isConnectorUnattached()) return Vector2D.fromVectorD(a.getConnectorMousePositionWithOtherEndpoint(e, YesNo.YES, i));
+    let o = Vector2D.fromVectorD(a.getConnectorMousePositionWithOtherEndpoint(e, YesNo.YES, i));
     a.cacheSnapTargetsForSelection(n, [t.guid], AxisType.AXIS, UnselectedNodesMode.UNSELECTED_NODES);
     let l = e.canvasSpaceSnappingThreshold();
     let d = e.viewport().canvasSpaceViewportRect();
-    o.incrementBy(M.fromVectorD(a.snapToPointDeltaPoint(n, o, l, d)));
+    o.incrementBy(Vector2D.fromVectorD(a.snapToPointDeltaPoint(n, o, l, d)));
     return o;
   }
   static connectorEndpointsAreEqual(e, t) {
@@ -292,7 +292,7 @@ class f {
         let n = i?.containingSlideId;
         if (n !== defaultSessionLocalIDString && a !== n) return {
           endpointNodeID: t.canvasGUID(),
-          position: M.fromVectorD(t.canvasSpaceMouse()),
+          position: Vector2D.fromVectorD(t.canvasSpaceMouse()),
           magnet: AutoLayoutAlignment.NONE
         };
       }
@@ -309,7 +309,7 @@ export class $$_0 extends j {
     this._snapper = void 0;
     this._ignoreMagnetsTimer = 0;
     this._shouldIgnoreMagnets = !1;
-    this._insertionPoint = M.invalid();
+    this._insertionPoint = Vector2D.invalid();
     this._didDragPastThreshold = !1;
     this._didSetConnectorStartWithClick = !1;
     this._keyboardShortcutTracked = !1;
@@ -318,13 +318,13 @@ export class $$_0 extends j {
     this._hoveredEndpoint = null;
     this._startEndpointWithAuto = {
       endpointNodeID: defaultSessionLocalIDString,
-      position: M.invalid(),
+      position: Vector2D.invalid(),
       magnet: AutoLayoutAlignment.NONE
     };
     this._endpointHoverzone = AbsolutePositionType.NONE;
     this._hoveredEndpointIgnoringMagnets = {
       endpointNodeID: defaultSessionLocalIDString,
-      position: M.invalid(),
+      position: Vector2D.invalid(),
       magnet: AutoLayoutAlignment.NONE
     };
   }
@@ -353,7 +353,7 @@ export class $$_0 extends j {
     this.updateHoverState(e);
     this.updateConnector(e);
     InteractionCpp?.setEventCursor(e, "crosshairCursor");
-    !this._didDragPastThreshold && M.fromVectorD(e.canvasSpaceMouse()).distanceTo(this._insertionPoint) > e.canvasSpaceMouseThreshold() && (this._didDragPastThreshold = !0);
+    !this._didDragPastThreshold && Vector2D.fromVectorD(e.canvasSpaceMouse()).distanceTo(this._insertionPoint) > e.canvasSpaceMouseThreshold() && (this._didDragPastThreshold = !0);
   }
   handleMouseMove(e) {
     this.updateHoverState(e);
@@ -397,7 +397,7 @@ export class $$_0 extends j {
     let t = getSingletonSceneGraph().get(this._connectorGUID);
     let i = this._hoveredEndpoint;
     let n = this._endpointHoverzone;
-    let a = t ? M.fromVectorD(t.connectorStartCanvasPosition) : M.invalid();
+    let a = t ? Vector2D.fromVectorD(t.connectorStartCanvasPosition) : Vector2D.invalid();
     let o = f.getHoveredEndpoint(e, t, i, n, a, this._getSnapper({
       interactionCpp: InteractionCpp
     }), this._shouldIgnoreMagnets, InteractionCpp);
@@ -428,9 +428,9 @@ export class $$_0 extends j {
         interactionCpp: InteractionCpp
       });
       this._createdFromCenter && (o === ConnectorType.ELBOWED || o === ConnectorType.CURVED) && n && (this._hoveredEndpoint.magnet = AutoLayoutAlignment.AUTO, this._startEndpointWithAuto = this._hoveredEndpoint);
-      this._insertionPoint = M.fromVectorD(InteractionCpp.getConnectorMousePosition(e, YesNo.YES));
+      this._insertionPoint = Vector2D.fromVectorD(InteractionCpp.getConnectorMousePosition(e, YesNo.YES));
       let d = t.guid;
-      InteractionCpp.insertNodeAtPoint(e.canvasGUID(), d, this._insertionPoint, new M(0, 0));
+      InteractionCpp.insertNodeAtPoint(e.canvasGUID(), d, this._insertionPoint, new Vector2D(0, 0));
       let c = e.canvasScene().immutableFrameObserverReference();
       c.invalidateConnectorForReparenting(d);
       c.updateImmutableFrameInternal();
@@ -479,13 +479,13 @@ export class $$_0 extends j {
       this.possiblyDeleteConnectorIfNotVisible(e);
     });
     this._connectorGUID = defaultSessionLocalIDString;
-    this._insertionPoint = M.invalid();
+    this._insertionPoint = Vector2D.invalid();
     clearTimeout(this._ignoreMagnetsTimer);
     this._shouldIgnoreMagnets = !1;
     this._createdFromCenter = !1;
     this._startEndpointWithAuto = {
       endpointNodeID: defaultSessionLocalIDString,
-      position: M.invalid(),
+      position: Vector2D.invalid(),
       magnet: AutoLayoutAlignment.NONE
     };
     this._snapper?.clearCache();

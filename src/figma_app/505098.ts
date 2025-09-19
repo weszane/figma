@@ -1,139 +1,400 @@
-import { createSelector } from "../vendor/925040";
-import { Ul } from "../905/973142";
-import { p } from "../905/778115";
-import { isInvalidValue } from "../905/216495";
-import { LI, FS } from "../figma_app/646357";
-import { selectSceneGraph, selectSceneGraphSelectionKeys, selectSelectedNodes } from "../figma_app/889655";
-import { xP } from "../figma_app/164212";
-let $$c0 = e => e.mirror.selectionProperties.componentProps;
-let $$u12 = e => e.mirror.selectionProperties.resettableComponentPropAssignments;
-let $$p21 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], F);
-export function $$_14(e) {
-  let {
-    description,
-    symbolDescription
-  } = e.mirror.selectionProperties;
-  return isInvalidValue(description) || isInvalidValue(symbolDescription) ? description ?? "" : description && description && (description.startsWith("<") && description.endsWith(">") || description.startsWith("{") && description.endsWith("}") || Ul(symbolDescription) === description) ? description : isInvalidValue(symbolDescription) ? symbolDescription : Ul(symbolDescription ?? "");
+import { createSelector } from 'reselect'
+import { isInvalidValue } from '../905/216495'
+import { findUnique } from '../905/778115'
+import { escapeHtmlEntities } from '../905/973142'
+import { xP } from '../figma_app/164212'
+import { FS as isModuleType, LI } from '../figma_app/646357'
+import { selectSceneGraph, selectSceneGraphSelectionKeys, selectSelectedNodes } from '../figma_app/889655'
+
+/**
+ * Returns the componentProps from the selectionProperties of the mirror object.
+ * @param e - The input object containing mirror.selectionProperties
+ * @returns The componentProps object
+ * @originalName $$c0
+ */
+export const getComponentProps = (e: any) => e.mirror.selectionProperties.componentProps
+
+/**
+ * Returns the resettableComponentPropAssignments from the selectionProperties of the mirror object.
+ * @param e - The input object containing mirror.selectionProperties
+ * @returns The resettableComponentPropAssignments object
+ * @originalName $$u12
+ */
+export const getResettableComponentPropAssignments = (e: any) => e.mirror.selectionProperties.resettableComponentPropAssignments
+
+/**
+ * Selector for containingSymbolId from scene graph and selection keys.
+ * @param e - Scene graph
+ * @param t - Selection keys
+ * @returns The containingSymbolId or undefined
+ * @originalName F
+ */
+function getContainingSymbolId(e: any, t: any[]) {
+  return xP(t => e.get(t)?.containingSymbolId, t) ?? void 0
 }
-let $$h4 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], $$j17);
-let $$m6 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], (e, t) => {
-  let r = new Set();
-  for (let n of t) {
-    let t = e.get(n)?.containingSymbolId;
-    t && r.add(t);
+
+/**
+ * Selector for containingStateGroupId from scene graph and selection keys.
+ * @param e - Scene graph
+ * @param t - Selection keys
+ * @returns The containingStateGroupId or undefined
+ * @originalName $$j17
+ */
+export function getContainingStateGroupId(e: any, t: any[]) {
+  return xP(t => e.get(t)?.containingStateGroupId, t) ?? void 0
+}
+
+/**
+ * Returns a formatted description or symbolDescription based on validity and HTML escaping.
+ * @param e - The input object containing mirror.selectionProperties
+ * @returns The formatted description string
+ * @originalName $$_14
+ */
+export function getFormattedDescription(e: any): string {
+  const { description, symbolDescription } = e.mirror.selectionProperties
+  if (isInvalidValue(description) || isInvalidValue(symbolDescription)) {
+    return description ?? ''
   }
-  return Array.from(r);
-});
-let $$g10 = () => createSelector([selectSceneGraph, (e, t) => t], $$f16);
-export function $$f16(e, t) {
-  return $$j17(e, t) ?? F(e, t);
-}
-let $$E1 = (() => {
-  let e = $$g10();
-  return t => e(t, selectSceneGraphSelectionKeys(t));
-})();
-let $$y7 = createSelector([$$p21, $$h4], (e, t) => e ?? t);
-let b = () => createSelector([(e, t) => t, selectSceneGraph], (e, t) => {
-  let r = p(e, e => {
-    let r = t.get(e);
-    return !!r && LI(r);
-  });
-  for (let n of e) {
-    let e = t.get(n);
-    let i = e?.containingStateGroupId ?? e?.containingSymbolId;
-    if (i && i !== r) return;
+  if (
+    description
+    && (
+      (description.startsWith('<') && description.endsWith('>'))
+      || (description.startsWith('{') && description.endsWith('}'))
+      || escapeHtmlEntities(symbolDescription) === description
+    )
+  ) {
+    return description
   }
-  return r ?? void 0;
-});
-let T = () => createSelector([(e, t) => t, selectSceneGraph], (e, t) => p(e, e => {
-  let r = t.get(e);
-  return !!r && FS(r);
-}) ?? void 0);
-(() => {
-  let e = b();
-  return t => e(t, selectSceneGraphSelectionKeys(t));
-})();
-let $$I19 = () => createSelector([$$g10(), b()], (e, t) => e ?? t);
-let S = () => createSelector([T()], e => e);
-let v = (() => {
-  let e = $$I19();
-  return t => e(t, selectSceneGraphSelectionKeys(t));
-})();
-let $$A18 = createSelector([v, selectSceneGraph], (e, t) => e ? t.get(e) : null);
-let x = (() => {
-  let e = S();
-  return t => e(t, selectSceneGraphSelectionKeys(t));
-})();
-createSelector([x, selectSceneGraph], (e, t) => e ? t.get(e) : null);
-let $$N9 = createSelector([$$c0, selectSceneGraphSelectionKeys], (e, t) => {
-  if (e) return xP(t => e[t]?.containingInstance, t) ?? void 0;
-});
-let $$C20 = () => createSelector([$$c0, (e, t) => t], (e, t) => {
-  if (e) return xP(t => e[t]?.containingInstanceBackingSymbol, t) ?? void 0;
-});
-let $$w11 = () => createSelector([$$c0, selectSceneGraph, (e, t) => t], (e, t, r) => {
-  if (!e) return;
-  let n = r.map(t => e[t]?.containingInstance || t);
-  return U(e, n, t);
-});
-let O = createSelector([$$c0, selectSceneGraphSelectionKeys], (e, t) => {
-  if (e) return B(e, t);
-});
-let R = createSelector([$$c0, selectSceneGraphSelectionKeys, selectSceneGraph], (e, t, r) => {
-  if (e) return U(e, t, r);
-});
-let $$L15 = () => createSelector([$$c0, (e, t) => t, selectSceneGraph], (e, t, r) => {
-  if (!e) return;
-  let n = [];
-  for (let e of t) {
-    let t = r.get(e);
-    if (!t || t.isLooseComponent || t.isState || t.isStateGroup) return;
-    t.symbolId && n.push(e);
+  if (isInvalidValue(symbolDescription)) {
+    return symbolDescription
   }
-  return U(e, n, r) ?? B(e, n);
-});
-let $$P8 = createSelector([R, O], (e, t) => t ?? e);
-let $$D3 = () => createSelector([selectSceneGraph, (e, t) => t], (e, t) => t.some(t => e.get(t)?.isInstanceSublayer ?? !1));
-let $$k5 = (() => {
-  let e = $$D3();
-  return t => e(t, selectSceneGraphSelectionKeys(t));
-})();
-let $$M2 = createSelector([selectSelectedNodes], e => e.some(e => "SYMBOL" === e.type || !!e.isStateGroup));
-function F(e, t) {
-  return xP(t => e.get(t)?.containingSymbolId, t) ?? void 0;
+  return escapeHtmlEntities(symbolDescription ?? '')
 }
-export function $$j17(e, t) {
-  return xP(t => e.get(t)?.containingStateGroupId, t) ?? void 0;
+
+/**
+ * Selector for containingStateGroupId from scene graph and selection keys.
+ * @originalName $$h4
+ */
+export const selectContainingStateGroupId = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], getContainingStateGroupId)
+
+/**
+ * Selector for unique containingSymbolIds from scene graph and selection keys.
+ * @originalName $$m6
+ */
+export const selectUniqueContainingSymbolIds = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], (sceneGraph, selectionKeys) => {
+  const symbolIds = new Set<string>()
+  for (const key of selectionKeys) {
+    const symbolId = sceneGraph.get(key)?.containingSymbolId
+    if (symbolId)
+      symbolIds.add(symbolId)
+  }
+  return Array.from(symbolIds)
+})
+
+/**
+ * Selector factory for containingStateGroupId or containingSymbolId.
+ * @originalName $$g10
+ */
+export function createContainingStateOrSymbolSelector() {
+  return createSelector([selectSceneGraph, (e, t) => t], getContainingStateOrSymbolId)
 }
-function U(e, t, r) {
-  return xP(t => {
-    let n = e[t]?.backingSymbol;
-    if (n) return r.get(n)?.containingStateGroupId;
-  }, t) ?? void 0;
+
+/**
+ * Returns containingStateGroupId if available, otherwise containingSymbolId.
+ * @param e - Scene graph
+ * @param t - Selection keys
+ * @returns The containingStateGroupId or containingSymbolId
+ * @originalName $$f16
+ */
+export function getContainingStateOrSymbolId(e: any, t: any[]) {
+  return getContainingStateGroupId(e, t) ?? getContainingSymbolId(e, t)
 }
-function B(e, t) {
-  return xP(t => e[t]?.backingSymbol ?? e[t]?.containingInstanceBackingSymbol, t) ?? void 0;
+
+/**
+ * Selector for containingStateGroupId or containingSymbolId using selection keys.
+ * @originalName $$E1
+ */
+export const selectContainingStateOrSymbolId = (() => {
+  const selector = createContainingStateOrSymbolSelector()
+  return (state: any) => selector(state, selectSceneGraphSelectionKeys(state))
+})()
+
+/**
+ * Selector for fallback between two selectors.
+ * @originalName $$y7
+ */
+export const selectFallbackStateOrSymbolId = createSelector(
+  [createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], getContainingSymbolId), selectContainingStateGroupId],
+  (symbolId, stateGroupId) => symbolId ?? stateGroupId,
+)
+
+/**
+ * Selector for unique instance node from selection keys and scene graph.
+ * @originalName b
+ */
+export function selectUniqueInstanceNode() {
+  return createSelector([(e, t) => t, selectSceneGraph], (selectionKeys, sceneGraph) => {
+    const unique = findUnique(selectionKeys, (key) => {
+      const node = sceneGraph.get(key)
+      return !!node && LI(node)
+    })
+    for (const key of selectionKeys) {
+      const node = sceneGraph.get(key)
+      const groupId = node?.containingStateGroupId ?? node?.containingSymbolId
+      if (groupId && groupId !== unique)
+        return
+    }
+    return unique ?? undefined
+  })
 }
-export let $$G13 = createSelector([selectSelectedNodes], e => e.every(e => "SYMBOL" === e.type || "INSTANCE" === e.type || !!e.isSymbolSublayer || !!e.isInstanceSublayer));
-export const C1 = $$c0;
-export const Lg = $$E1;
-export const Ln = $$M2;
-export const Ms = $$D3;
-export const Nw = $$h4;
-export const PY = $$k5;
-export const QW = $$m6;
-export const S8 = $$y7;
-export const TJ = $$P8;
-export const UR = $$N9;
-export const VC = $$g10;
-export const X9 = $$w11;
-export const Yw = $$u12;
-export const ZM = $$G13;
-export const cv = $$_14;
-export const d = $$L15;
-export const fx = $$f16;
-export const nM = $$j17;
-export const od = $$A18;
-export const tK = $$I19;
-export const tc = $$C20;
-export const y7 = $$p21;
+
+/**
+ * Selector for unique module node from selection keys and scene graph.
+ * @originalName T
+ */
+export function selectUniqueModuleNode() {
+  return createSelector([(e, t) => t, selectSceneGraph], (selectionKeys, sceneGraph) =>
+    findUnique(selectionKeys, (key) => {
+      const node = sceneGraph.get(key)
+      return !!node && isModuleType(node)
+    }) ?? undefined)
+}
+
+/**
+ * Selector for containingStateOrSymbolId or unique instance node.
+ * @originalName $$I19
+ */
+export function selectStateOrInstanceNode() {
+  return createSelector([createContainingStateOrSymbolSelector(), selectUniqueInstanceNode()], (stateOrSymbolId, instanceNode) => stateOrSymbolId ?? instanceNode)
+}
+
+/**
+ * Selector for unique module node.
+ * @originalName S
+ */
+export function selectModuleNode() {
+  return createSelector([selectUniqueModuleNode()], node => node)
+}
+
+/**
+ * Selector for state or instance node using selection keys.
+ * @originalName v
+ */
+export const selectStateOrInstanceNodeByKeys = (() => {
+  const selector = selectStateOrInstanceNode()
+  return (state: any) => selector(state, selectSceneGraphSelectionKeys(state))
+})()
+
+/**
+ * Selector for node from state or instance node.
+ * @originalName $$A18
+ */
+export const selectNodeFromStateOrInstance = createSelector(
+  [selectStateOrInstanceNodeByKeys, selectSceneGraph],
+  (nodeId, sceneGraph) => nodeId ? sceneGraph.get(nodeId) : null,
+)
+
+/**
+ * Selector for module node using selection keys.
+ * @originalName x
+ */
+export const selectModuleNodeByKeys = (() => {
+  const selector = selectModuleNode()
+  return (state: any) => selector(state, selectSceneGraphSelectionKeys(state))
+})()
+
+/**
+ * Selector for node from module node.
+ * @originalName (anonymous createSelector)
+ */
+export const selectNodeFromModule = createSelector(
+  [selectModuleNodeByKeys, selectSceneGraph],
+  (nodeId, sceneGraph) => nodeId ? sceneGraph.get(nodeId) : null,
+)
+
+/**
+ * Selector for containingInstance from componentProps and selection keys.
+ * @originalName $$N9
+ */
+export const selectContainingInstance = createSelector(
+  [getComponentProps, selectSceneGraphSelectionKeys],
+  (componentProps, selectionKeys) => {
+    if (componentProps) {
+      return xP(key => componentProps[key]?.containingInstance, selectionKeys) ?? undefined
+    }
+  },
+)
+
+/**
+ * Selector factory for containingInstanceBackingSymbol from componentProps and selection keys.
+ * @originalName $$C20
+ */
+export function createContainingInstanceBackingSymbolSelector() {
+  return createSelector([getComponentProps, (e, t) => t], (componentProps, selectionKeys) => {
+    if (componentProps) {
+      return xP(key => componentProps[key]?.containingInstanceBackingSymbol, selectionKeys) ?? undefined
+    }
+  })
+}
+
+/**
+ * Selector factory for backingSymbol or containingInstanceBackingSymbol from componentProps, scene graph, and selection keys.
+ * @originalName $$w11
+ */
+export function createBackingSymbolSelector() {
+  return createSelector([getComponentProps, selectSceneGraph, (e, t) => t], (componentProps, sceneGraph, selectionKeys) => {
+    if (!componentProps)
+      return
+    const nodeIds = selectionKeys.map(key => componentProps[key]?.containingInstance || key)
+    return getStateGroupIdFromBackingSymbol(componentProps, nodeIds, sceneGraph)
+  })
+}
+
+/**
+ * Selector for backingSymbol or containingInstanceBackingSymbol from componentProps and selection keys.
+ * @originalName O
+ */
+export const selectBackingSymbol = createSelector(
+  [getComponentProps, selectSceneGraphSelectionKeys],
+  (componentProps, selectionKeys) => {
+    if (componentProps) {
+      return getBackingSymbol(componentProps, selectionKeys)
+    }
+  },
+)
+
+/**
+ * Selector for state group id from backingSymbol.
+ * @originalName R
+ */
+export const selectStateGroupIdFromBackingSymbol = createSelector(
+  [getComponentProps, selectSceneGraphSelectionKeys, selectSceneGraph],
+  (componentProps, selectionKeys, sceneGraph) => {
+    if (componentProps) {
+      return getStateGroupIdFromBackingSymbol(componentProps, selectionKeys, sceneGraph)
+    }
+  },
+)
+
+/**
+ * Selector factory for symbol nodes with backingSymbol.
+ * @originalName $$L15
+ */
+export function createSymbolNodesWithBackingSymbolSelector() {
+  return createSelector([getComponentProps, (e, t) => t, selectSceneGraph], (componentProps, selectionKeys, sceneGraph) => {
+    if (!componentProps)
+      return
+    const symbolNodeIds: string[] = []
+    for (const key of selectionKeys) {
+      const node = sceneGraph.get(key)
+      if (!node || node.isLooseComponent || node.isState || node.isStateGroup)
+        return
+      if (node.symbolId)
+        symbolNodeIds.push(key)
+    }
+    return getStateGroupIdFromBackingSymbol(componentProps, symbolNodeIds, sceneGraph) ?? getBackingSymbol(componentProps, symbolNodeIds)
+  })
+}
+
+/**
+ * Selector for fallback between state group id and backing symbol.
+ * @originalName $$P8
+ */
+export const selectFallbackStateGroupOrBackingSymbol = createSelector(
+  [selectStateGroupIdFromBackingSymbol, selectBackingSymbol],
+  (stateGroupId, backingSymbol) => backingSymbol ?? stateGroupId,
+)
+
+/**
+ * Selector factory for instance sublayer check.
+ * @originalName $$D3
+ */
+export function createInstanceSublayerCheckSelector() {
+  return createSelector([selectSceneGraph, (e, t) => t], (sceneGraph, selectionKeys) =>
+    selectionKeys.some(key => sceneGraph.get(key)?.isInstanceSublayer ?? false))
+}
+
+/**
+ * Selector for instance sublayer check using selection keys.
+ * @originalName $$k5
+ */
+export const selectInstanceSublayerCheck = (() => {
+  const selector = createInstanceSublayerCheckSelector()
+  return (state: any) => selector(state, selectSceneGraphSelectionKeys(state))
+})()
+
+/**
+ * Selector for selected nodes being symbol or state group.
+ * @originalName $$M2
+ */
+export const selectIsSymbolOrStateGroup = createSelector(
+  [selectSelectedNodes],
+  nodes => nodes.some(node => node.type === 'SYMBOL' || !!node.isStateGroup),
+)
+
+/**
+ * Returns the containingStateGroupId from backingSymbol.
+ * @param componentProps - Component properties
+ * @param nodeIds - Node ids
+ * @param sceneGraph - Scene graph
+ * @returns The containingStateGroupId or undefined
+ * @originalName U
+ */
+function getStateGroupIdFromBackingSymbol(componentProps: any, nodeIds: any[], sceneGraph: any) {
+  return xP((key) => {
+    const backingSymbol = componentProps[key]?.backingSymbol
+    if (backingSymbol) {
+      return sceneGraph.get(backingSymbol)?.containingStateGroupId
+    }
+  }, nodeIds) ?? undefined
+}
+
+/**
+ * Returns the backingSymbol or containingInstanceBackingSymbol from componentProps.
+ * @param componentProps - Component properties
+ * @param nodeIds - Node ids
+ * @returns The backingSymbol or containingInstanceBackingSymbol or undefined
+ * @originalName B
+ */
+function getBackingSymbol(componentProps: any, nodeIds: any[]) {
+  return xP(key => componentProps[key]?.backingSymbol ?? componentProps[key]?.containingInstanceBackingSymbol, nodeIds) ?? undefined
+}
+
+/**
+ * Selector for selected nodes being symbol, instance, symbol sublayer, or instance sublayer.
+ * @originalName $$G13
+ */
+export const selectAreAllSymbolsOrInstances = createSelector(
+  [selectSelectedNodes],
+  nodes => nodes.every(node =>
+    node.type === 'SYMBOL'
+    || node.type === 'INSTANCE'
+    || !!node.isSymbolSublayer
+    || !!node.isInstanceSublayer,
+  ),
+)
+
+// Exported names for refactored selectors and functions
+export const C1 = getComponentProps
+export const Lg = selectContainingStateOrSymbolId
+export const Ln = selectIsSymbolOrStateGroup
+export const Ms = createInstanceSublayerCheckSelector
+export const Nw = selectContainingStateGroupId
+export const PY = selectInstanceSublayerCheck
+export const QW = selectUniqueContainingSymbolIds
+export const S8 = selectFallbackStateOrSymbolId
+export const TJ = selectFallbackStateGroupOrBackingSymbol
+export const UR = selectContainingInstance
+export const VC = createContainingStateOrSymbolSelector
+export const X9 = createBackingSymbolSelector
+export const Yw = getResettableComponentPropAssignments
+export const ZM = selectAreAllSymbolsOrInstances
+export const cv = getFormattedDescription
+export const d = createSymbolNodesWithBackingSymbolSelector
+export const fx = getContainingStateOrSymbolId
+export const nM = getContainingStateGroupId
+export const od = selectNodeFromStateOrInstance
+export const tK = selectStateOrInstanceNode
+export const tc = createContainingInstanceBackingSymbolSelector
+export const y7 = createSelector([selectSceneGraph, selectSceneGraphSelectionKeys], getContainingSymbolId)
+export const selectContainingSymbolId = y7

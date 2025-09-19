@@ -1,6 +1,6 @@
 import { clamp } from "../figma_app/492908";
 import { AppStateTsApi } from "../figma_app/763686";
-import { M } from "../905/512402";
+import { Vector2D } from "../905/512402";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -11,7 +11,7 @@ let $$p3 = 18;
 export function $$m4(e) {
   let t = atomStoreManager.get(canvasGridAtom);
   if (!t.length || !AppStateTsApi) return -1;
-  let i = M.fromVectorD(e.canvasSpaceMouse());
+  let i = Vector2D.fromVectorD(e.canvasSpaceMouse());
   let s = clamp(AppStateTsApi.canvasGrid().getClosestGridCoord(i, null).row, 0, t.length - 1);
   let c = AppStateTsApi.canvasGrid().getRowGUID(s);
   let u = getSingletonSceneGraph().get(c)?.isCanvasGridRowNodeType;
@@ -26,7 +26,7 @@ export function $$m4(e) {
 export function $$h0(e, t) {
   let i = atomStoreManager.get(canvasGridAtom);
   if (!i.length || 1 === i.length || !AppStateTsApi) return 0;
-  let n = M.fromVectorD(e.canvasSpaceMouse());
+  let n = Vector2D.fromVectorD(e.canvasSpaceMouse());
   let u = Math.min(AppStateTsApi.canvasGrid().getClosestGridCoord(n, null).row, i.length - 1);
   let m = e.findHoveredNodeId();
   let h = getSingletonSceneGraph().get(m);

@@ -1,6 +1,6 @@
 import { CmsRepeaterHelpers, ChildRelationshipStatus, AppStateTsApi } from "../figma_app/763686";
-import { r as _$$r } from "../905/249071";
-import { M } from "../905/512402";
+import { Rectangle } from "../905/249071";
+import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { C } from "../905/217042";
@@ -17,10 +17,10 @@ export class $$c0 extends j {
       let i = getSingletonSceneGraph().get(l);
       if (i) {
         let s = i.absoluteBoundingBox;
-        let l = new M(s.x, s.y);
+        let l = new Vector2D(s.x, s.y);
         let d = e.canvasSpaceToViewportSpace(l);
-        let c = new M(s.w, s.h).multiplyBy(e.canvasScale());
-        let u = new _$$r(M.fromVectorD(d), M.fromVectorD(c));
+        let c = new Vector2D(s.w, s.h).multiplyBy(e.canvasScale());
+        let u = new Rectangle(Vector2D.fromVectorD(d), Vector2D.fromVectorD(c));
         if (AppStateTsApi) {
           let e = 0 === o ? AppStateTsApi.getBorderFSDesignStrong() : AppStateTsApi.getBorderFSDesign();
           t.strokeRect(u, e, 1);

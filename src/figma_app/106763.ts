@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useStore } from "react-redux";
 import { SceneGraphHelpers, ViewType } from "../figma_app/763686";
-import { Ql } from "../figma_app/387100";
+import { findScrollableOrVisibleParent } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { useDevModeFocusId } from "../figma_app/88239";
@@ -24,7 +24,7 @@ export function $$h1(e) {
     fileKey
   } = selectWithShallowEqual(e => {
     let r = Object.keys(e.mirror.sceneGraphSelection);
-    let n = isFullscreenDevHandoffView(e.selectedView) ? Ql(e.mirror.sceneGraph, r?.[0] ?? "") : null;
+    let n = isFullscreenDevHandoffView(e.selectedView) ? findScrollableOrVisibleParent(e.mirror.sceneGraph, r?.[0] ?? "") : null;
     return {
       isTeamFile: !!t?.teamId,
       topLevelMode: e.mirror.appModel.topLevelMode,

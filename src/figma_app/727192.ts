@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo, createContext, useContext, useRef } fro
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { X as _$$X } from "../905/736922";
-import { Ql } from "../figma_app/387100";
+import { findScrollableOrVisibleParent } from "../figma_app/387100";
 import { useAtomValueAndSetter, atom } from "../figma_app/27355";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import u from "classnames";
@@ -103,7 +103,7 @@ function P({
       let i;
       if (e) {
         if (m?.(r), selectedNodeId && sceneGraph) try {
-          let e = Ql(sceneGraph, selectedNodeId);
+          let e = findScrollableOrVisibleParent(sceneGraph, selectedNodeId);
           n = e?.guid;
           i = e?.type;
         } catch {}

@@ -1,7 +1,7 @@
 import _require from "../5973/625973";
 import { ComponentPropsAiCPPBindings, Fullscreen, TextModificationAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/531474";
 var $$n4;
@@ -48,7 +48,7 @@ export function $$c2(e) {
   let t = 0;
   let r = 0;
   let n = new Set(e.map(e => e.guid));
-  for (let i of e) hV(i, e => {
+  for (let i of e) traverseChildren(i, e => {
     if (e.guid !== i.guid && n.has(e.guid)) return "stop";
     "TEXT" === e.type && (t++, r += e.textContent.length);
   });

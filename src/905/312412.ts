@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { hD } from "../figma_app/387100";
+import { traverseUpAndDown } from "../figma_app/387100";
 import { Tv } from "../figma_app/311375";
 import { Z } from "../905/116724";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -7,7 +7,7 @@ import { cq } from "../905/794154";
 function d(e, t, i) {
   if (!e.get(i)) return !1;
   let n = !1;
-  hD(e, i, e => {
+  traverseUpAndDown(e, i, e => {
     if (t.includes(e.guid)) {
       n = !0;
       return "stop";

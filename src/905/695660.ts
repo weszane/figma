@@ -1,6 +1,6 @@
-import { hV } from "../figma_app/387100";
+import { traverseChildren } from "../figma_app/387100";
 export function $$r0(e, t) {
-  e && hV(e, t);
+  e && traverseChildren(e, t);
 }
 export function $$a4(e) {
   var t;

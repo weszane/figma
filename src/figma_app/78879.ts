@@ -1,4 +1,4 @@
-import { O5 } from "../figma_app/387100";
+import { getResponsiveChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -16,7 +16,7 @@ export async function $$p0(e) {
       let e = getSingletonSceneGraph();
       let t = e.getCurrentPage();
       if (!t) return [];
-      return O5(e, t.guid).map(e => e.guid);
+      return getResponsiveChildren(e, t.guid).map(e => e.guid);
     } catch (e) {
       console.warn("Could not get responsive sets for site publishing:", e);
       return [];

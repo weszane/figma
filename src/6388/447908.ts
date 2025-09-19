@@ -12,7 +12,7 @@ import { g as _$$g } from "../905/687265";
 import { Fullscreen, PageSelectionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
-import { gI } from "../figma_app/396464";
+import { useSelectedCooperFrameIds } from "../figma_app/396464";
 import { PU, aK } from "../figma_app/334505";
 import { clearSelection } from "../figma_app/741237";
 import { KindEnum } from "../905/129884";
@@ -159,7 +159,7 @@ export function $$R0({
   let E = I9();
   let S = function (e, t) {
     let l = $$L2(e);
-    let o = gI();
+    let o = useSelectedCooperFrameIds();
     let s = aK(o);
     return useCallback(e => {
       if (!e) return !1;

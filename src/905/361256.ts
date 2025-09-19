@@ -95,7 +95,7 @@ import { O as _$$O } from "../905/587457";
 import { N as _$$N2 } from "../905/430294";
 import { ButtonPrimitive } from "../905/632989";
 import { O4 } from "../905/777187";
-import { rC } from "../figma_app/385874";
+import { defaultGrayColor } from "../figma_app/385874";
 import { Rz, ku } from "../905/149223";
 import { Pi } from "../figma_app/580959";
 import { G as _$$G } from "../905/431526";
@@ -838,7 +838,7 @@ let tN = memo(function (e) {
     currentSelectedGradientStop: e.currentSelectedGradientStop,
     currentSelectedProperty: e.currentSelectedProperty,
     currentTool: e.currentTool,
-    defaultColor: rC,
+    defaultColor: defaultGrayColor,
     dispatch: e.dispatch,
     dropdownShown: e.dropdownShown,
     editModeType: e.activeCanvasEditModeType,

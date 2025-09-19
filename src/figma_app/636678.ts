@@ -21,7 +21,7 @@ import { eM, xb, Fv, wh } from "../figma_app/164212";
 import { aR } from "../figma_app/530362";
 import { yt } from "../figma_app/292212";
 import { oX, MB } from "../figma_app/930914";
-import { fx } from "../figma_app/505098";
+import { createContainingStateOrSymbolSelector } from "../figma_app/505098";
 import { A as _$$A2 } from "../figma_app/78608";
 import { ZU, Wg } from "../figma_app/986347";
 export function $$w0(e) {
@@ -44,7 +44,7 @@ export function $$w0(e) {
       let d = useDeepEqualSceneValue(e => {
         if (!getFeatureFlags().dse_slots) return !1;
         let t = e.getDirectlySelectedNodes();
-        if (0 === t.length || !t.every(e => e.canBeSlot && !e.isSlotReactive) || void 0 === fx(e, t.map(e => e.id))) return !1;
+        if (0 === t.length || !t.every(e => e.canBeSlot && !e.isSlotReactive) || void 0 === createContainingStateOrSymbolSelector(e, t.map(e => e.id))) return !1;
         let r = new Set();
         for (let e of t) {
           if (!e.containingSymbolId || r.has(e.containingSymbolId)) return !1;
