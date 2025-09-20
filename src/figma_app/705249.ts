@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
-import { U5 } from "../figma_app/543529";
+import { useHasUserPermissionInOrg } from "../figma_app/543529";
 export function $$a0() {
-  let e = U5();
+  let e = useHasUserPermissionInOrg();
   return getFeatureFlags().xr_debounce_threshold && e;
 }
 export function $$s1() {

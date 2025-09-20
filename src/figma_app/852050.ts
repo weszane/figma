@@ -15,8 +15,8 @@ import { logError } from "../905/714362";
 import { wJ, $Q } from "../figma_app/630951";
 import { iw, cM, kX, C$, q0 } from "../905/261982";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { U } from "../905/506188";
-import { je } from "../figma_app/155728";
+import { getLibraryNames } from "../905/506188";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { isExtension, getSubscribedVariableSetInfo, getSubscribedVariableInfo, getPublishKey } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { eF, Io, CS, cn } from "../figma_app/394327";
@@ -191,7 +191,7 @@ export function $$es21(e) {
   let i = Ri(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
-  let o = je();
+  let o = useSubscribedLibraries();
   let l = !!o.data?.find(t => t.fileKey === e);
   return useMemoShallow(() => {
     if (!l || !a && !s) return resourceUtils.loaded([]);
@@ -225,7 +225,7 @@ export function $$el36(e) {
   let i = Ri(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
-  let o = je();
+  let o = useSubscribedLibraries();
   let l = o.data?.find(t => t.fileKey === e);
   return useMemoShallow(() => {
     if (!l || !a && !s) return resourceUtils.loaded([]);
@@ -254,7 +254,7 @@ export function $$ed20(e = {}) {
 }
 let ec = _$$n((e = {}) => {
   let t = !1 === e.enabled;
-  let r = je();
+  let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.fileKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : H2(i), [t, i]);
   let s = useAtomWithSubscription(a);
@@ -270,7 +270,7 @@ let ec = _$$n((e = {}) => {
 });
 let eu = _$$n((e = {}) => {
   let t = !1 === e.enabled;
-  let r = je();
+  let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : wh(i), [t, i]);
   let s = useAtomWithSubscription(a);
@@ -306,7 +306,7 @@ export function $$eh29(e) {
   return r ? i : n;
 }
 let em = _$$n(e => {
-  let t = je();
+  let t = useSubscribedLibraries();
   let r = useMemoShallow(() => t.data?.filter(e => !wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
   let i = useMemoShallow(() => t.data?.filter(e => wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
   let a = e?.enabled === !1;
@@ -360,7 +360,7 @@ let em = _$$n(e => {
 });
 let eg = _$$n(e => {
   let t = e?.enabled === !1;
-  let r = je();
+  let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : Ho(i), [t, i]);
   let s = useAtomWithSubscription(a);
@@ -405,7 +405,7 @@ export function $$eb10(e, t) {
 }
 export function $$eT2(e) {
   let t = e?.subscriptionStatus === "SUBSCRIBED" ? e.library_key : void 0;
-  let r = U(t ? [t] : [], {
+  let r = getLibraryNames(t ? [t] : [], {
     enabled: !0
   }).data;
   return t ? r?.[t] : void 0;

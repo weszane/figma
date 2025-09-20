@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isLoaded } from "../905/18797";
-import { yW } from "../figma_app/644808";
+import { ModeType } from "../figma_app/644808";
 import { yD } from "../905/92359";
 import { k } from "../905/540025";
 export function $$p1({
@@ -42,7 +42,7 @@ export function $$h0(e) {
     let {
       allLibrariesUnsorted
     } = e;
-    for (let [i, l] of allLibrariesUnsorted) if (l.type === yW.DESIGN) {
+    for (let [i, l] of allLibrariesUnsorted) if (l.type === ModeType.DESIGN) {
       if (e.localAssets.libraryKey === i) {
         l.numComponents >= 0 && (t += 1);
         continue;

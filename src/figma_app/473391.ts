@@ -1,7 +1,7 @@
-import { Gj, Av } from "../figma_app/646357";
+import { getAssetUniqueId, getAssetKey } from "../figma_app/646357";
 import { hasAssetId, PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$a0(e) {
-  return hasAssetId(e) ? "LOCAL" === e.subscriptionStatus ? e.keyForPublish : e.key : e.isLocal ? Gj(e) : Av(e) ?? Gj(e);
+  return hasAssetId(e) ? "LOCAL" === e.subscriptionStatus ? e.keyForPublish : e.key : e.isLocal ? getAssetUniqueId(e) : getAssetKey(e) ?? getAssetUniqueId(e);
 }
 export function $$s1(e) {
   switch (e) {

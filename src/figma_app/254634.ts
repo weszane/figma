@@ -11,7 +11,7 @@ import { Q } from "../905/217916";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
-import { Gp } from "../figma_app/646357";
+import { getStyleSubscriptionInfo } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { e_ } from "../figma_app/803787";
 import { Ig, dc, rP } from "../figma_app/155647";
@@ -34,7 +34,7 @@ export function $$$$N1() {
   let x = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
   let N = useSelector(e_);
   let w = kl("inheritFillStyleKeyForStroke");
-  let L = w && isValidValue(w) ? Gp(w, x ? [x] : [], N) : void 0;
+  let L = w && isValidValue(w) ? getStyleSubscriptionInfo(w, x ? [x] : [], N) : void 0;
   let P = useSelector(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;
   let D = selectWithShallowEqual(e => ({
     borderTopWeight: e.mirror.selectionProperties.borderTopWeight,

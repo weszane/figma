@@ -139,7 +139,7 @@ export class OptimisticMutationHandler extends FigmaAppClient {
 }
 
 // Re-exported modules and variables with updated names
-export { getResourceDataOrFallback as oA } from '../905/419236'
+export { getResourceDataOrFallback } from '../905/419236'
 export { CodedError, createSessionRef, deepEqual, ResourceStatus, SchemaHandler }
 export const tT = CodedError
 export const lw = deepEqual

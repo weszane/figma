@@ -44,7 +44,7 @@ import { d$ } from "../figma_app/664693";
 import { MIXED_MARKER } from "../905/216495";
 import { nN, SR } from "../figma_app/852050";
 import { useOpenFileLibraryKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
-import { nn, zE, vu, lg, RQ, HF, Hb, ad, Cj, Fl } from "../figma_app/646357";
+import { isOrgOrWorkspaceContainer, hasAssetError, getAllAssets, isNewOrChangedOrDeleted, hasVariableSetError, isStagedStatus, isActiveStagingStatus, hasContainingStateGroup, remapNodeIdsForMove, isTemplateAsset } from "../figma_app/646357";
 import { FFileType, FContainerType, FAccessLevelType } from "../figma_app/191312";
 import { PublishingModalView } from "../figma_app/43951";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
@@ -124,7 +124,7 @@ import { A as _$$A4 } from "../svg/660901";
 import { t as _$$t2 } from "../905/340158";
 import { O as _$$O4 } from "../905/969533";
 import { k as _$$k4 } from "../905/44647";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { C as _$$C2 } from "../905/520159";
 import { F as _$$F } from "../905/604606";
 function K(e) {
@@ -454,7 +454,7 @@ function eq({
   let s = useSelector(e => {
     if (r) return e.teams[r];
   });
-  let o = nn(i);
+  let o = isOrgOrWorkspaceContainer(i);
   let l = o && !_$$Y(t);
   let d = o && s?.org_access === FAccessLevelType.SECRET;
   if (!l && !d) return null;
@@ -862,7 +862,7 @@ function tF({
     default:
       throwTypeError(e);
   }
-  let W = (e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.COMPONENT) && zE(e);
+  let W = (e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.COMPONENT) && hasAssetError(e);
   let K = useMemo(() => M && e.isPublishable ? "library_item_row--libraryItemRow--epEU4 library_item_row--libraryItemRowBase--2ciyc" : "library_item_row--libraryItemRowDisabled--1ZYNB library_item_row--libraryItemRow--epEU4 library_item_row--libraryItemRowBase--2ciyc", [e, M]);
   let Y = {
     hasBeenMoved: !1
@@ -877,7 +877,7 @@ function tF({
   } else {
     let t = null;
     let i = b.movedLibraryItems.local[e.node_id];
-    i && (e.type === PrimaryWorkflowEnum.COMPONENT ? t = vu(b.publishedByLibraryKey.components).find(e => e.component_key === i)?.library_key || null : e.type === PrimaryWorkflowEnum.STATE_GROUP && (t = vu(b.publishedByLibraryKey.stateGroups).find(e => e.key === i)?.library_key || null));
+    i && (e.type === PrimaryWorkflowEnum.COMPONENT ? t = getAllAssets(b.publishedByLibraryKey.components).find(e => e.component_key === i)?.library_key || null : e.type === PrimaryWorkflowEnum.STATE_GROUP && (t = getAllAssets(b.publishedByLibraryKey.stateGroups).find(e => e.key === i)?.library_key || null));
     Y = {
       hasBeenMoved: !!i,
       fileName: t && I[t]?.name
@@ -900,7 +900,7 @@ function tF({
     "data-tooltip": tE,
     "data-tooltip-max-width": 240,
     "data-tooltip-tip-align-right": !0
-  }) : l?.publishType === "FORCED_COPY" && lg(e.status) ? q = jsx(SvgComponent, {
+  }) : l?.publishType === "FORCED_COPY" && isNewOrChangedOrDeleted(e.status) ? q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
     "data-tooltip-type": KindEnum.TEXT,
@@ -1000,7 +1000,7 @@ function tF({
         "data-tooltip-type": "text",
         children: jsx(_$$Z, {})
       }), (() => {
-        if (e.type === PrimaryWorkflowEnum.STATE_GROUP && zE(e)) switch (e.stateGroupError) {
+        if (e.type === PrimaryWorkflowEnum.STATE_GROUP && hasAssetError(e)) switch (e.stateGroupError) {
           case StateGroupErrorType.MISSING_PROPERTIES_ERROR:
             return renderI18nText("design_systems.publishing_modal.missing_properties");
           case StateGroupErrorType.DUPLICATE_STATE_ERROR:
@@ -1008,14 +1008,14 @@ function tF({
           case StateGroupErrorType.PARSE_ERROR:
             return renderI18nText("design_systems.publishing_modal.corrupt_layer_names");
         }
-        if ((e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.COMPONENT) && zE(e)) switch (e.componentPropDefError) {
+        if ((e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.COMPONENT) && hasAssetError(e)) switch (e.componentPropDefError) {
           case VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR:
           case VariableSetErrorType.CONFLICTING_NAMES_ERROR:
             return renderI18nText("design_systems.publishing_modal.conflicting_property_names");
           case VariableSetErrorType.UNUSED_DEF_ERROR:
             return renderI18nText("design_systems.publishing_modal.unused_def_error");
         }
-        if (e.type === PrimaryWorkflowEnum.VARIABLE_SET && RQ(e)) switch (e.variableSetError) {
+        if (e.type === PrimaryWorkflowEnum.VARIABLE_SET && hasVariableSetError(e)) switch (e.variableSetError) {
           case VariableErrorType.TOO_MANY_VARIABLES_ERROR:
             return renderI18nText("design_systems.publishing_modal.too_many_variables_error");
           case VariableErrorType.TOO_MANY_MODES_ERROR:
@@ -1032,7 +1032,7 @@ function tF({
             showingDropdown: !!A && A.type === N,
             svgContainerClassName: "library_item_row--chevron--fbLtW"
           }), F()]
-        }) : d ? e.status === StagingStatusEnum.NEW ? renderI18nText("design_systems.publishing_modal.added") : renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.status !== StagingStatusEnum.DELETED && (E[e.node_id] ?? []).every(e => HF(e.status)) ? renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STYLE && e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status);
+        }) : d ? e.status === StagingStatusEnum.NEW ? renderI18nText("design_systems.publishing_modal.added") : renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.status !== StagingStatusEnum.DELETED && (E[e.node_id] ?? []).every(e => isStagedStatus(e.status)) ? renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STYLE && e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status);
       })(), !W && q]
     }), B && "THUMBNAIL" !== e.type && !e.deletedFromSceneGraph && jsx(tO, {
       className: "library_item_row--contextMenu--cO1wt",
@@ -1215,7 +1215,7 @@ function tX({
   let c = useSelector(e => l(e, t.node_id));
   let u = useSelector(e => d(e, t.node_id));
   function p(e) {
-    return [...e].sort((e, t) => "sortPosition" in e && null !== e.sortPosition ? "sortPosition" in t && null !== t.sortPosition ? -Ez(e.sortPosition, t.sortPosition) : -1 : 1);
+    return [...e].sort((e, t) => "sortPosition" in e && null !== e.sortPosition ? "sortPosition" in t && null !== t.sortPosition ? -compareNumbers(e.sortPosition, t.sortPosition) : -1 : 1);
   }
   let [m, h] = "hidden" === e ? [u, c] : [c, u];
   let [g, f] = useMemo(() => [p(m), p(h)], [m, h]);
@@ -1329,10 +1329,10 @@ function tJ(e) {
   let eF = useMemo(() => {
     let e = 0;
     Object.values(eE).forEach(t => {
-      eL ? lg(t.status) && e++ : Hb(t.status) && e++;
+      eL ? isNewOrChangedOrDeleted(t.status) && e++ : isActiveStagingStatus(t.status) && e++;
     });
     Object.values(ey).forEach(t => {
-      eL ? lg(t.status) && e++ : Hb(t.status) && e++;
+      eL ? isNewOrChangedOrDeleted(t.status) && e++ : isActiveStagingStatus(t.status) && e++;
     });
     return e;
   }, [eL, ey, eE]);
@@ -1449,7 +1449,7 @@ function tJ(e) {
     for (let n of [...t, ...e5.filter(e => {
       let t = e.containing_frame?.containingStateGroup?.nodeId;
       let n = t && ey[t] || null;
-      return !(!eh.movedLibraryItems.local[e.node_id] || e.status === StagingStatusEnum.DELETED || n && (zE(n) || i.has(n.node_id))) && te.has(t || e.node_id);
+      return !(!eh.movedLibraryItems.local[e.node_id] || e.status === StagingStatusEnum.DELETED || n && (hasAssetError(n) || i.has(n.node_id))) && te.has(t || e.node_id);
     }).map(e => e.node_id), ...e6.filter(t => !!e[t.node_id] && t.status !== StagingStatusEnum.DELETED && te.has(t.node_id)).map(e => e.node_id)]) {
       let e = Fullscreen.generatePublishableCopy(n);
       e && te.has(n) && (te.$$delete(n), te.add(e));
@@ -1487,8 +1487,8 @@ function tJ(e) {
       if (eY.status === APILoadingStatus.SUCCESS) {
         let e = Object.keys(eY.nodeIdToValidatedMoveInfo).filter(e => te.has(e) && "MOVE" === eY.nodeIdToValidatedMoveInfo[e].publishType);
         let i = [...Object.values(eA), ...Object.values(ey), ...Object.values(e_)].reduce((e, t) => (eY.nodeIdToValidatedMoveInfo[t.node_id] && t.old_key && (e[t.node_id] = t.old_key), e), Object.create(null));
-        let n = e5.filter(ad);
-        t = Cj(e, i, n);
+        let n = e5.filter(hasContainingStateGroup);
+        t = remapNodeIdsForMove(e, i, n);
       }
       tc();
       h(ZS({
@@ -1850,7 +1850,7 @@ function t1(e) {
         isUnmovableStateGroupWithMovableState: o,
         isVariableSetWithPrivateVariables: a,
         libraryItem: s,
-        moveInfo: Hb(s.status) && t || null,
+        moveInfo: isActiveStagingStatus(s.status) && t || null,
         onChangeMoveOptionForItem: e.onChangeMoveOptionForItem,
         onCheckBoxToggle: e.onLibraryItemRowCheckboxToggle,
         showVariableCollectionOverview: e.showVariableCollectionOverview
@@ -1937,7 +1937,7 @@ function t1(e) {
         className: tV,
         children: "Code components"
       }), "codeComponent:header", 32, i), K(I, i, tL.CHECKBOX)), getFeatureFlags().dse_templates_proto) {
-        let e = M.filter(Fl);
+        let e = M.filter(isTemplateAsset);
         e.length > 0 && ($(jsx("div", {
           className: tV,
           children: renderI18nText("design_systems.publishing_modal.templates")
@@ -1952,7 +1952,7 @@ function t1(e) {
         className: tV,
         children: renderI18nText("design_systems.publishing_modal.components")
       }), "components:header", 32, i);
-      getFeatureFlags().dse_templates_proto ? K(M.filter(e => !Fl(e)), i, tL.CHECKBOX) : K(M, i, tL.CHECKBOX);
+      getFeatureFlags().dse_templates_proto ? K(M.filter(e => !isTemplateAsset(e)), i, tL.CHECKBOX) : K(M, i, tL.CHECKBOX);
       getFeatureFlags().dse_library_pg_thumbnails && V.length > 0 && ($(jsx("div", {
         className: tV,
         children: renderI18nText("design_systems.publishing_modal.page_thumbnails")

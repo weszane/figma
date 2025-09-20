@@ -63,7 +63,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { normalizePath } from "../905/309735";
 import { g as _$$g, s as _$$s } from "../905/578436";
 import { RL, Ot } from "../905/850476";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$x, yh, Pw, hF, Wx, Od, F$, US, qQ } from "../905/782020";
 import { wp, jv } from "../905/886545";
 import { createPortal } from "react-dom";
@@ -1042,7 +1042,7 @@ function eA(e) {
   });
 }
 function eM(e) {
-  return [...e].sort((e, t) => -Ez(e.sortPosition, t.sortPosition));
+  return [...e].sort((e, t) => -compareNumbers(e.sortPosition, t.sortPosition));
 }
 var eU = (e => (e.READ_ONLY = "READ_ONLY", e.WRITEABLE = "WRITEABLE", e))(eU || {});
 let eB = {

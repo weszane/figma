@@ -338,7 +338,7 @@ import { n8 as _$$n7, Kd } from '../figma_app/121043';
 import { Lk as _$$Lk } from '../figma_app/122682';
 import { Rp } from '../figma_app/149989';
 import { Tv } from '../figma_app/151869';
-import { je } from '../figma_app/155728';
+import { useSubscribedLibraries } from '../figma_app/155728';
 import { GV, P5 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from '../figma_app/167249';
@@ -372,7 +372,7 @@ import { $I, MK } from '../figma_app/322845';
 import { SortOptions } from '../figma_app/324237';
 import { AO as _$$AO, KT } from '../figma_app/325158';
 import { useFocusedNodeId, isNotInFocusedNodeView, isFullscreenAndInFocusedNodeView, getFocusedNodeId, canShowBuzzTemplateSets } from '../figma_app/327588';
-import { nL as _$$nL, uM as _$$uM, B2, bE, Cl, DW, hn, Pn, qr, z7 } from '../figma_app/334505';
+import { hasImageFill, useAllSelectedNodesHaveVideoFill, useAnyCooperFrameHasVideoPaint, useCooperFrameAssetCategorySwitch, useCooperFrameSelectionInfo, useNodeMediaPaintById, useSelectedImageOrVideoNodeGuids, useSelectedComponentLibraryKey, selectComponentCooperFrameIds, useIsCooperBulkCreateMode } from '../figma_app/334505';
 import { jH, Tj, Vq } from '../figma_app/342207';
 import { U1 } from '../figma_app/343967';
 import { hasValidSubscription } from '../figma_app/345997';
@@ -433,7 +433,7 @@ import { JT } from '../figma_app/632248';
 import { isEventType } from '../figma_app/632319';
 import { LibraryTabEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
 import { hg as _$$hg } from '../figma_app/635062';
-import { x as _$$x, Lk } from '../figma_app/639711';
+import { AssetCategoryEnum, assetCategoryAtom } from '../figma_app/639711';
 import { xn as _$$xn, Yk } from '../figma_app/644079';
 import { $ as _$$$7 } from '../figma_app/644304';
 import { R as _$$R2 } from '../figma_app/652260';
@@ -1161,7 +1161,7 @@ function eZ() {
   let n = useAtomWithSubscription(_$$o2);
   let l = useIsProgressBarHiddenOrLocked();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
-  let i = z7();
+  let i = useIsCooperBulkCreateMode();
   let s = r === SelfDesignType.DESIGN && !i;
   let {
     topLevelMode,
@@ -2205,12 +2205,12 @@ let nu = () => {
   let [t] = useAtomValueAndSetter(Lm);
   let n = Xr(Tw);
   let [l, r] = useAtomValueAndSetter(Ku);
-  let [i, o] = useAtomValueAndSetter(Lk);
+  let [i, o] = useAtomValueAndSetter(assetCategoryAtom);
   return useCallback(() => _$$r({
     templateType: SocialMediaFormats.CUSTOM,
     closeTemplatePicker: () => {
       n(!1);
-      e === Gu.LEFT_RAIL && o(_$$x.ASSETS);
+      e === Gu.LEFT_RAIL && o(AssetCategoryEnum.ASSETS);
     },
     shouldInsertFrame: t.type === mF.NEW_TEMPLATE,
     shouldEnterGridView: e === Gu.NEW_FILE_MODAL,
@@ -2255,7 +2255,7 @@ function nm({
   let [l, r] = useAtomValueAndSetter(Lm);
   let i = Xr(Tw);
   let [s, d] = useAtomValueAndSetter(Ku);
-  let c = Xr(Lk);
+  let c = Xr(assetCategoryAtom);
   let u = Xr(_$$az);
   let x = Xr(hc);
   let {
@@ -2314,7 +2314,7 @@ function nh({
   let [l, r] = useAtomValueAndSetter(Lm);
   let [i, a] = useAtomValueAndSetter(Ku);
   let s = Xr(Tw);
-  let d = Xr(Lk);
+  let d = Xr(assetCategoryAtom);
   let c = Xr(_$$az);
   return jsxs('div', {
     children: [jsx(t8, {
@@ -2345,7 +2345,7 @@ function ng({
   let t = useAtomWithSubscription(Lm);
   let n = Xr(Tw);
   let [l, r] = useAtomValueAndSetter(Ku);
-  let i = Xr(Lk);
+  let i = Xr(assetCategoryAtom);
   let a = Xr(Lm);
   let s = Xr(_$$az);
   let c = Xr(hc);
@@ -5818,7 +5818,7 @@ function o7({
   }, [i]);
   let [d, c] = useState('');
   let u = !!d;
-  let x = je();
+  let x = useSubscribedLibraries();
   _$$hg(r);
   let p = WH(t, n, r)?.key ?? null;
   let m = AH(p, normalizeValue(n));
@@ -6685,7 +6685,7 @@ function aN({
     let l = function () {
       let {
         anyCooperFrames
-      } = Cl();
+      } = useCooperFrameSelectionInfo();
       let t = aR({
         actions: [{
           type: 0,
@@ -6779,7 +6779,7 @@ function aN({
       let {
         anyCooperFrames,
         onlyDetached
-      } = Cl();
+      } = useCooperFrameSelectionInfo();
       let l = GV();
       let {
         inheritTextStyleKey
@@ -7456,7 +7456,7 @@ function a8({
   let t = function () {
     let {
       anyCooperFrames
-    } = Cl();
+    } = useCooperFrameSelectionInfo();
     let t = GV();
     let n = iS();
     return useMemoStable(() => {
@@ -8460,7 +8460,7 @@ function sY({
   let i = PE();
   let d = _$$u4();
   let u = MK(JT.GENERATE_IMAGE);
-  let x = Xr(Lk);
+  let x = Xr(assetCategoryAtom);
   let m = function () {
     let e = useDispatch();
     let {
@@ -8492,7 +8492,7 @@ function sY({
     n();
   }, [h, e, t, n]);
   let f = useCallback(() => {
-    x(_$$x.MEDIA);
+    x(AssetCategoryEnum.MEDIA);
     n();
   }, [x, n]);
   let b = useCallback(() => {
@@ -8733,7 +8733,7 @@ function s4() {
   let [h, g, f] = function () {
     let {
       anyCooperFrames
-    } = Cl();
+    } = useCooperFrameSelectionInfo();
     let t = su();
     let n = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
     let l = !!n && Kl(n, ['TEXT']);
@@ -9026,7 +9026,7 @@ function dn({
   let p = function (e) {
     let {
       onlyDetached
-    } = Cl();
+    } = useCooperFrameSelectionInfo();
     return e === LayoutTabType.RASTER && onlyDetached;
   }(e);
   let m = Zr('rotate-90-clockwise') || p;
@@ -9237,7 +9237,7 @@ let dh = registerModal(e => {
   let {
     onClose
   } = e;
-  let l = useSelector(qr);
+  let l = useSelector(selectComponentCooperFrameIds);
   let r = useCallback(() => {
     _$$l2.user('detach-instances', () => Fullscreen?.detachInstances(l, !0));
     onClose();
@@ -9270,19 +9270,19 @@ let dh = registerModal(e => {
   });
 });
 function dg(e) {
-  let [t] = useAtomValueAndSetter(Lk);
+  let [t] = useAtomValueAndSetter(assetCategoryAtom);
   return t === e;
 }
 function df(e) {
-  let [, t] = useAtomValueAndSetter(Lk);
+  let [, t] = useAtomValueAndSetter(assetCategoryAtom);
   return useCallback(() => {
     t(e);
   }, [t, e]);
 }
 var db = (e => (e.EDIT_CONTENT = 'EDIT_CONTENT', e.EDIT_TEXT = 'EDIT_TEXT', e.MULTI_EDIT_TEXT = 'MULTI_EDIT_TEXT', e.UPLOAD_MEDIA = 'UPLOAD_MEDIA', e.REMOVE_EDITING_RESTRICTIONS = 'REMOVE_EDITING_RESTRICTIONS', e))(db || {});
 function d_() {
-  let e = dg(_$$x.FIELDS);
-  let t = df(_$$x.FIELDS);
+  let e = dg(AssetCategoryEnum.FIELDS);
+  let t = df(AssetCategoryEnum.FIELDS);
   let n = isNotInFocusedNodeView();
   let l = useCallback(() => {
     n || e ? fullscreenValue.triggerActionInUserEditScope('request-edit-mode-via-toolbar') : t();
@@ -9297,7 +9297,7 @@ function d_() {
   });
 }
 function dj() {
-  let e = df(_$$x.FIELDS);
+  let e = df(AssetCategoryEnum.FIELDS);
   return jsx(_$$R4, {
     children: jsx(_$$E2, {
       name: _$$_2.EditContent,
@@ -9354,18 +9354,18 @@ function dv() {
   let e = function () {
     let {
       onlyCooperFrames
-    } = Cl();
+    } = useCooperFrameSelectionInfo();
     let t = GV();
-    let n = dg(_$$x.FIELDS);
+    let n = dg(AssetCategoryEnum.FIELDS);
     let l = function () {
       let e = useSelector(selectSceneGraphSelectionKeys);
       let t = useSceneGraphSelector();
       return e.every(e => {
         let n = t.get(e);
-        return !!n && n.type !== 'TEXT' && _$$nL(n);
+        return !!n && n.type !== 'TEXT' && hasImageFill(n);
       });
     }();
-    let r = _$$uM();
+    let r = useAllSelectedNodesHaveVideoFill();
     let i = aI();
     let o = isNotInFocusedNodeView();
     let a = function () {
@@ -9403,7 +9403,7 @@ function dI() {
   let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
   let {
     onlyCooperFrames
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   return !onlyCooperFrames && e?.allStates && e?.selectedStates ? jsx(_$$R4, {
     children: jsx(_$$E2, {
       name: _$$_2.VariantSwapEntryPoint,
@@ -9774,11 +9774,11 @@ let dU = memo(() => {
   let n = Vi();
   let {
     hasInstanceSelected
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let r = useSelectedCooperFrameIds();
   let i = useSelectedSlideRowGuids();
   let c = iS();
-  let u = _$$uM();
+  let u = useAllSelectedNodesHaveVideoFill();
   let x = useSelector(selectSceneGraphSelectionKeys);
   let p = isFullscreenAndInFocusedNodeView();
   let m = canShowBuzzTemplateSets();
@@ -9939,12 +9939,12 @@ function dY({
   let {
     onlyCooperFrames,
     anyCooperFrames
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let a = function () {
     let e = Jo();
     let {
       anyCooperFrames: _anyCooperFrames
-    } = Cl();
+    } = useCooperFrameSelectionInfo();
     return e.cornerRadius && !_anyCooperFrames;
   }();
   let s = e[ItemType.FILL_ITEM] && !!t;
@@ -10164,7 +10164,7 @@ function cg() {
   let t = getFocusedNodeId();
   let {
     onlyInstances
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   if (e) {
     let e = UN().get(t);
     return e?.type === 'INSTANCE';
@@ -10827,7 +10827,7 @@ function uu({
   positionerRef: e
 }) {
   let t = _$$GQ();
-  let [n, l] = useAtomValueAndSetter(Lk);
+  let [n, l] = useAtomValueAndSetter(assetCategoryAtom);
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = useSelector(e => e.mirror.sceneGraphSelection);
   let c = r === SelfDesignType.DESIGN && Object.keys(i).length > 0;
@@ -10839,7 +10839,7 @@ function uu({
   let j = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = Xr(U_);
   let E = Xr(Lm);
-  let v = Pn();
+  let v = useSelectedComponentLibraryKey();
   let T = useCallback(() => {
     v ? (y('INTERNAL'), E({
       type: mF.TEMPLATES,
@@ -10847,7 +10847,7 @@ function uu({
       parentView: {
         type: mF.ALL
       }
-    }), l(_$$x.TEMPLATES)) : (l(_$$x.TEMPLATES), y('COMMUNITY'));
+    }), l(AssetCategoryEnum.TEMPLATES)) : (l(AssetCategoryEnum.TEMPLATES), y('COMMUNITY'));
   }, [l, y, v, E]);
   return jsxs(Fragment, {
     children: [j && jsx(() => {
@@ -11317,7 +11317,7 @@ function uL({
   mappings: e,
   removeMapping: t
 }) {
-  let n = z7();
+  let n = useIsCooperBulkCreateMode();
   let l = useMemo(() => {
     let t = {};
     Object.entries(e).forEach(([e, n]) => {
@@ -11342,7 +11342,7 @@ var uO = (e => (e[e.SELECT_FILE = 0] = 'SELECT_FILE', e[e.MAP_DATA = 1] = 'MAP_D
 let uM = setupRemovableAtomFamily(() => atom(0));
 function uF() {
   let [e, t] = useAtomValueAndSetter(uM);
-  let n = Xr(Lk);
+  let n = Xr(assetCategoryAtom);
   let [l, r] = useAtomValueAndSetter(_$$v);
   let [i, s] = useState({});
   let c = useSceneGraphSelector();
@@ -11392,7 +11392,7 @@ function uF() {
     t(uO.SELECT_FILE);
     s({});
     r({});
-    n(_$$x.ASSETS);
+    n(AssetCategoryEnum.ASSETS);
   }, [n, r, t, u]);
   return jsxs('div', {
     className: 'x5yr21d xh8yej3 x78zum5 xdt5ytf',
@@ -11434,7 +11434,7 @@ function uF() {
 }
 function uB() {
   let e = useSceneGraphSelector();
-  let t = useAtomWithSubscription(Lk);
+  let t = useAtomWithSubscription(assetCategoryAtom);
   let n = useRef(t);
   let l = useCallback(() => {
     CooperHelpers?.setBulkCreateEditMode();
@@ -11450,8 +11450,8 @@ function uB() {
     r();
   }));
   useEffect(() => {
-    n.current !== _$$x.BULK_CREATE && t === _$$x.BULK_CREATE && l();
-    n.current === _$$x.BULK_CREATE && t !== _$$x.BULK_CREATE && r();
+    n.current !== AssetCategoryEnum.BULK_CREATE && t === AssetCategoryEnum.BULK_CREATE && l();
+    n.current === AssetCategoryEnum.BULK_CREATE && t !== AssetCategoryEnum.BULK_CREATE && r();
     n.current = t;
   }, [t, l, r]);
   return null;
@@ -11635,7 +11635,7 @@ function u4({
     let {
       mediaPaint,
       mediaPaintIndex
-    } = DW(t);
+    } = useNodeMediaPaintById(t);
     let r = mediaPaint != null && isValidValue(mediaPaint);
     let i = r ? mediaPaint : void 0;
     let o = i?.type === 'IMAGE';
@@ -11885,7 +11885,7 @@ function xl() {
   let l = getFocusedNodeId();
   let r = useMemo(() => n ? [l] : t, [n, l, t]);
   let i = getFeatureFlags().buzz_video_export;
-  let u = hn(r);
+  let u = useSelectedImageOrVideoNodeGuids(r);
   let x = r.length > 0;
   let m = cg();
   let h = t.length > 1;
@@ -12059,26 +12059,26 @@ function xx({
     let l = useAtomWithSubscription(d3);
     let r = uW();
     switch (e) {
-      case _$$x.ASSETS:
+      case AssetCategoryEnum.ASSETS:
         return getI18nString('cooper.left_rail.assets');
-      case _$$x.TEMPLATES:
+      case AssetCategoryEnum.TEMPLATES:
         return getI18nString('cooper.left_rail.templates');
-      case _$$x.TEXT:
+      case AssetCategoryEnum.TEXT:
         return getI18nString('cooper.left_rail.text');
-      case _$$x.MEDIA:
+      case AssetCategoryEnum.MEDIA:
         if (getFeatureFlags().buzz_unsplash) return l ? getI18nString('buzz.left_rail.image') : getI18nString('buzz.left_rail.media');
         if (getFeatureFlags().buzz_video_export) return getI18nString('cooper.left_rail.images_videos');
         return getI18nString('cooper.left_rail.images');
-      case _$$x.SHAPES:
+      case AssetCategoryEnum.SHAPES:
         return getI18nString('cooper.left_rail.shapes');
-      case _$$x.INSERTS:
+      case AssetCategoryEnum.INSERTS:
         return getI18nString('cooper.left_rail.inserts');
-      case _$$x.FIELDS:
+      case AssetCategoryEnum.FIELDS:
         return getI18nString('cooper.left_rail.fields');
-      case _$$x.BULK_CREATE:
+      case AssetCategoryEnum.BULK_CREATE:
         if (t === uO.MAP_DATA) return getI18nString('buzz.bulk_create.connect_data');
         return getI18nString('cooper.left_rail.bulk_create');
-      case _$$x.PLUGINS:
+      case AssetCategoryEnum.PLUGINS:
         if (r && n.title) return n.title;
         return getI18nString('cooper.left_rail.plugins');
       default:
@@ -12087,7 +12087,7 @@ function xx({
   }(e);
   let n = useAtomWithSubscription(_$$d6);
   let l = uW();
-  return e === _$$x.PLUGINS && l ? jsxs('div', {
+  return e === AssetCategoryEnum.PLUGINS && l ? jsxs('div', {
     className: 'x78zum5 x6s0dn4 x1nfngrj xeuugli',
     children: [n.titleIconURL && jsx('div', {
       className: _$$eo,
@@ -12127,7 +12127,7 @@ async function xE(e, t, n, l) {
   let i = r.getDirectlySelectedNodes();
   let o = [];
   let a = [];
-  for (let e of i) _$$nL(e) ? o.push(e) : e.type !== 'FRAME' && a.push(e);
+  for (let e of i) hasImageFill(e) ? o.push(e) : e.type !== 'FRAME' && a.push(e);
   let s = o.length > 0 || a.length > 0;
   let c = AppStateTsApi?.cooperFocusView()?.focusedNodeId.getCopy();
   let u = c ? r.get(c) : null;
@@ -13130,9 +13130,9 @@ function x2() {
   });
 }
 function x4() {
-  let [e, t] = useAtomValueAndSetter(Lk);
+  let [e, t] = useAtomValueAndSetter(assetCategoryAtom);
   let n = function () {
-    let [e, t] = useAtomValueAndSetter(Lk);
+    let [e, t] = useAtomValueAndSetter(assetCategoryAtom);
     let n = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
     let {
       exit
@@ -13144,12 +13144,12 @@ function x4() {
     i.current = n;
     o.current = exit;
     useEffect(() => {
-      n && r.current !== _$$x.FIND ? t(_$$x.FIND) : n || r.current !== _$$x.FIND || t(_$$x.ASSETS);
+      n && r.current !== AssetCategoryEnum.FIND ? t(AssetCategoryEnum.FIND) : n || r.current !== AssetCategoryEnum.FIND || t(AssetCategoryEnum.ASSETS);
     }, [n, t]);
     useEffect(() => {
-      i.current && e !== _$$x.FIND && o.current();
+      i.current && e !== AssetCategoryEnum.FIND && o.current();
     }, [e]);
-    return e === _$$x.FIND;
+    return e === AssetCategoryEnum.FIND;
   }();
   let [l, r] = function (e) {
     let [t, n] = useState(e);
@@ -13158,19 +13158,19 @@ function x4() {
     let o = useRef(null);
     useEffect(() => {
       o.current && (clearTimeout(o.current), o.current = null);
-      let t = e === _$$x.ASSETS;
+      let t = e === AssetCategoryEnum.ASSETS;
       i && i !== e ? t ? (n(i), r(!0), o.current = window.setTimeout(() => {
-        n(_$$x.ASSETS);
+        n(AssetCategoryEnum.ASSETS);
         r(!1);
       }, 350)) : (n(e), r(!1)) : i || (n(e), r(!1));
       return () => {
         o.current && clearTimeout(o.current);
       };
     }, [e, i]);
-    return [t, e === _$$x.ASSETS ? l ? 'hiding' : 'fullyHidden' : 'visible'];
+    return [t, e === AssetCategoryEnum.ASSETS ? l ? 'hiding' : 'fullyHidden' : 'visible'];
   }(e);
   let i = isNotInFocusedNodeView();
-  let c = e === _$$x.ASSETS && i;
+  let c = e === AssetCategoryEnum.ASSETS && i;
   useEffect(() => {
     I$(c);
   }, [c]);
@@ -13190,17 +13190,17 @@ function x4() {
     } = useSelector(e => e.universalInsertModal);
     let c = useDispatch();
     switch (e) {
-      case _$$x.BULK_CREATE:
+      case AssetCategoryEnum.BULK_CREATE:
         if (t === 0) {
           l({});
           AppStateTsApi?.cooperState().bulkCreateConnectedNodes.set([]);
           return null;
         }
         return () => n(t - 1);
-      case _$$x.MEDIA:
+      case AssetCategoryEnum.MEDIA:
         if (r) return () => i(null);
         return null;
-      case _$$x.PLUGINS:
+      case AssetCategoryEnum.PLUGINS:
         if (o) {
           return () => {
             let e = PluginUIManager.getInstance();
@@ -13229,14 +13229,14 @@ function x4() {
     return useCallback(({
       tab: l
     }) => {
-      l === _$$x.TEMPLATES && (e(), t(!1), n(!1));
+      l === AssetCategoryEnum.TEMPLATES && (e(), t(!1), n(!1));
     }, [e, t, n]);
   }();
   let j = bQ;
   return c ? jsxs(Fragment, {
     children: [jsx(x8, {
       onClickNew: () => {
-        t(_$$x.TEMPLATES);
+        t(AssetCategoryEnum.TEMPLATES);
         x('COMMUNITY');
       },
       canEdit: u
@@ -13251,7 +13251,7 @@ function x4() {
     useMarginInsteadOfTranslateX: !0,
     defaultWidth: 280,
     maxWidth: 320,
-    allowOverflow: l === _$$x.PLUGINS,
+    allowOverflow: l === AssetCategoryEnum.PLUGINS,
     children: jsxs('div', {
       'ref': h,
       'className': 'x78zum5 xdt5ytf x1iyjqo2 x5yr21d x1md70p1',
@@ -13298,7 +13298,7 @@ function x4() {
           children: [!n && jsx('div', {
             className: 'xs83m0k xg2d0mh',
             children: jsxs('div', {
-              ..._$$xk(x9.closeableHeaderContainer, (l === _$$x.FIELDS || l === _$$x.BULK_CREATE) && x9.closeableHeaderContainerWithBorder),
+              ..._$$xk(x9.closeableHeaderContainer, (l === AssetCategoryEnum.FIELDS || l === AssetCategoryEnum.BULK_CREATE) && x9.closeableHeaderContainerWithBorder),
               'data-testid': 'buzz-closeable-header',
               'children': [jsxs('h2', {
                 className: 'x78zum5 x6s0dn4 xg2d0mh xeuugli',
@@ -13322,7 +13322,7 @@ function x4() {
                     f({
                       tab: l
                     });
-                    t(_$$x.ASSETS);
+                    t(AssetCategoryEnum.ASSETS);
                   },
                   'data-testid': 'close-left-panel-button',
                   'children': jsx(_$$A3, {})
@@ -13347,39 +13347,39 @@ function x6({
 }) {
   return jsxs(Fragment, {
     children: [jsx(VF, {
-      isVisible: e === _$$x.FIELDS,
+      isVisible: e === AssetCategoryEnum.FIELDS,
       children: () => jsx(xo, {})
     }), jsx(VF, {
-      isVisible: e === _$$x.FIND,
+      isVisible: e === AssetCategoryEnum.FIND,
       children: () => jsx(xs, {})
     }), jsx(VF, {
-      isVisible: e === _$$x.BULK_CREATE,
+      isVisible: e === AssetCategoryEnum.BULK_CREATE,
       children: () => jsx(uF, {})
     }), jsx(VF, {
-      isVisible: e === _$$x.SHAPES,
+      isVisible: e === AssetCategoryEnum.SHAPES,
       children: () => jsx(cJ, {
         positionerRef: t
       })
     }), jsx(VF, {
-      isVisible: e === _$$x.INSERTS,
+      isVisible: e === AssetCategoryEnum.INSERTS,
       children: () => getFeatureFlags().buzz_plugins ? jsx(cH, {
         positionerRef: t
       }) : jsx(cL, {
         positionerRef: t
       })
     }), jsx(VF, {
-      isVisible: e === _$$x.TEXT,
+      isVisible: e === AssetCategoryEnum.TEXT,
       children: () => jsx(c1, {
         positionerRef: t
       })
     }), jsx(VF, {
-      isVisible: e === _$$x.MEDIA,
+      isVisible: e === AssetCategoryEnum.MEDIA,
       children: () => jsx(xW, {})
     }), jsx(VF, {
-      isVisible: e === _$$x.TEMPLATES,
+      isVisible: e === AssetCategoryEnum.TEMPLATES,
       children: () => jsx(x2, {})
     }), getFeatureFlags().buzz_plugins && jsx(VF, {
-      isVisible: e === _$$x.PLUGINS,
+      isVisible: e === AssetCategoryEnum.PLUGINS,
       children: () => jsx(uH, {
         panelWidth: bQ
       })
@@ -13422,7 +13422,7 @@ function x3({
   activeTab: e
 }) {
   let t = uW();
-  return e === _$$x.PLUGINS && t ? jsx(IconButton, {
+  return e === AssetCategoryEnum.PLUGINS && t ? jsx(IconButton, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
       e?.switchContainer(_$$Wh.MODAL);
@@ -13522,7 +13522,7 @@ function pd() {
     badge
   }, getI18nString('cooper.inserts.review_library_updates')) : null;
 }
-let pc = getFeatureFlags().buzz_plugins ? [_$$x.TEXT, _$$x.MEDIA, _$$x.INSERTS] : [_$$x.TEXT, _$$x.MEDIA, _$$x.SHAPES, _$$x.INSERTS];
+let pc = getFeatureFlags().buzz_plugins ? [AssetCategoryEnum.TEXT, AssetCategoryEnum.MEDIA, AssetCategoryEnum.INSERTS] : [AssetCategoryEnum.TEXT, AssetCategoryEnum.MEDIA, AssetCategoryEnum.SHAPES, AssetCategoryEnum.INSERTS];
 function pu() {
   return jsx('div', {
     style: {
@@ -13531,8 +13531,8 @@ function pu() {
   });
 }
 function px() {
-  let [e, t] = useAtomValueAndSetter(Lk);
-  let n = Pn();
+  let [e, t] = useAtomValueAndSetter(assetCategoryAtom);
+  let n = useSelectedComponentLibraryKey();
   let l = Xr(Lm);
   let r = Xr(U_);
   let i = trackFileEventWithStore();
@@ -13542,9 +13542,9 @@ function px() {
   let m = cg();
   let h = !u;
   useEffect(() => {
-    m && h && pc.includes(e) && t(_$$x.FIELDS);
+    m && h && pc.includes(e) && t(AssetCategoryEnum.FIELDS);
   }, [m, u, e, t, h]);
-  bE();
+  useCooperFrameAssetCategorySwitch();
   let g = useRef(null);
   let f = useCurrentFileKey();
   let b = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
@@ -13569,14 +13569,14 @@ function px() {
   }, [i, f, u, b, e]);
   let T = useCallback(i => {
     y(i);
-    i === _$$x.TEMPLATES && e !== _$$x.TEMPLATES && n && (r('INTERNAL'), l({
+    i === AssetCategoryEnum.TEMPLATES && e !== AssetCategoryEnum.TEMPLATES && n && (r('INTERNAL'), l({
       type: mF.TEMPLATES,
       libraryKey: n,
       parentView: {
         type: mF.ALL
       }
     }));
-    t(e === i ? _$$x.ASSETS : i);
+    t(e === i ? AssetCategoryEnum.ASSETS : i);
   }, [e, t, n, l, r, y]);
   return jsx(TE.Provider, {
     value: Gu.LEFT_RAIL,
@@ -13591,7 +13591,7 @@ function px() {
               icon: createElement(dQ),
               onClick: () => {
                 v();
-                u ? AppStateTsApi?.cooperFocusView().enterFocusedNodeView() : t(_$$x.ASSETS);
+                u ? AppStateTsApi?.cooperFocusView().enterFocusedNodeView() : t(AssetCategoryEnum.ASSETS);
               },
               recordingKey: 'cooperFocusViewToggle',
               dataTestId: 'cooper-focus-view-toggle'
@@ -13601,7 +13601,7 @@ function px() {
               icon: createElement(_$$t6),
               onClick: () => {
                 v();
-                u ? t(_$$x.ASSETS) : (e === _$$x.FIELDS && t(_$$x.ASSETS), AppStateTsApi?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen(), e !== _$$x.ASSETS && AppStateTsApi?.cooperFocusView().flushQueuedAnimation());
+                u ? t(AssetCategoryEnum.ASSETS) : (e === AssetCategoryEnum.FIELDS && t(AssetCategoryEnum.ASSETS), AppStateTsApi?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen(), e !== AssetCategoryEnum.ASSETS && AppStateTsApi?.cooperFocusView().flushQueuedAnimation());
               },
               recordingKey: 'cooperGridViewToggle',
               dataTestId: 'cooper-grid-view-toggle'
@@ -13624,22 +13624,22 @@ function px() {
         }), jsx(_$$A16.Divider, {}), jsxs(_$$A16.Section, {
           children: [jsx(pu, {}), jsx(pu, {}), jsxs(Fragment, {
             children: [h && jsx(_$$A16.IconButton, {
-              active: e === _$$x.FIELDS,
+              active: e === AssetCategoryEnum.FIELDS,
               label: getI18nString('cooper.left_rail.fields'),
               icon: createElement(dx),
-              onClick: () => T(_$$x.FIELDS),
+              onClick: () => T(AssetCategoryEnum.FIELDS),
               disabled: !x,
               recordingKey: 'buzzFieldsButton',
               dataTestId: 'buzz-left-rail-fields-button'
-            }, _$$x.FIELDS), jsx(_$$A16.IconButton, {
-              active: e === _$$x.BULK_CREATE,
+            }, AssetCategoryEnum.FIELDS), jsx(_$$A16.IconButton, {
+              active: e === AssetCategoryEnum.BULK_CREATE,
               label: getI18nString('cooper.left_rail.bulk_create'),
               icon: createElement(_$$T4),
-              onClick: () => T(_$$x.BULK_CREATE),
+              onClick: () => T(AssetCategoryEnum.BULK_CREATE),
               disabled: !x,
               recordingKey: 'buzzBulkCreateButton',
               dataTestId: 'buzz-left-rail-bulk-create-button'
-            }, _$$x.BULK_CREATE)]
+            }, AssetCategoryEnum.BULK_CREATE)]
           })]
         }), jsx(_$$A16.Footer, {
           children: jsx(pa, {})
@@ -13668,33 +13668,33 @@ function pp({
 }) {
   return jsxs(_$$A16.Section, {
     children: [jsx(_$$A16.IconButton, {
-      active: e === _$$x.TEMPLATES,
+      active: e === AssetCategoryEnum.TEMPLATES,
       label: getI18nString('cooper.left_rail.templates'),
       icon: createElement(_$$n6),
       onClick: () => {
-        t(_$$x.TEMPLATES);
+        t(AssetCategoryEnum.TEMPLATES);
         l(!1);
       },
       disabled: !n,
       recordingKey: 'buzzTemplatesButton',
       dataTestId: 'buzz-left-rail-templates-button'
-    }, _$$x.TEMPLATES), jsx(_$$A16.IconButton, {
-      active: e === _$$x.INSERTS,
+    }, AssetCategoryEnum.TEMPLATES), jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.INSERTS,
       label: i ? getI18nString('cooper.left_rail.can_t_add_new_layers') : getI18nString('cooper.left_rail.inserts'),
       icon: createElement(_$$s5),
-      onClick: () => t(_$$x.INSERTS),
+      onClick: () => t(AssetCategoryEnum.INSERTS),
       disabled: r || !n,
       recordingKey: 'buzzInsertsButton',
       dataTestId: 'buzz-left-rail-inserts-button'
-    }, _$$x.INSERTS), getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
-      active: e === _$$x.PLUGINS,
+    }, AssetCategoryEnum.INSERTS), getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.PLUGINS,
       label: getI18nString('cooper.left_rail.plugins'),
       icon: createElement(_$$u8),
-      onClick: () => t(_$$x.PLUGINS),
+      onClick: () => t(AssetCategoryEnum.PLUGINS),
       disabled: !n,
       recordingKey: 'buzzPluginsButton',
       dataTestId: 'buzz-left-rail-plugins-button'
-    }, _$$x.PLUGINS)]
+    }, AssetCategoryEnum.PLUGINS)]
   });
 }
 function pm({
@@ -13707,57 +13707,57 @@ function pm({
 }) {
   return jsxs(_$$A16.Section, {
     children: [jsx(_$$A16.IconButton, {
-      active: e === _$$x.TEMPLATES,
+      active: e === AssetCategoryEnum.TEMPLATES,
       label: getI18nString('cooper.left_rail.templates'),
       icon: createElement(_$$n6),
       onClick: () => {
-        t(_$$x.TEMPLATES);
+        t(AssetCategoryEnum.TEMPLATES);
         l(!1);
       },
       disabled: !n,
       recordingKey: 'buzzTemplatesButton',
       dataTestId: 'buzz-left-rail-templates-button'
-    }, _$$x.TEMPLATES), jsx(_$$A16.IconButton, {
-      active: e === _$$x.TEXT,
+    }, AssetCategoryEnum.TEMPLATES), jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.TEXT,
       label: i ? getI18nString('cooper.left_rail.can_t_add_new_layers') : getI18nString('cooper.left_rail.text'),
       icon: createElement(_$$e8),
-      onClick: () => t(_$$x.TEXT),
+      onClick: () => t(AssetCategoryEnum.TEXT),
       disabled: r || !n,
       recordingKey: 'buzzTextButton',
       dataTestId: 'buzz-left-rail-text-button'
-    }, _$$x.TEXT), jsx(_$$A16.IconButton, {
-      active: e === _$$x.MEDIA,
+    }, AssetCategoryEnum.TEXT), jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.MEDIA,
       label: i ? getI18nString('cooper.left_rail.can_t_add_new_layers') : getFeatureFlags().buzz_unsplash ? getI18nString('buzz.left_rail.media') : getFeatureFlags().buzz_video_export ? getI18nString('cooper.left_rail.images_videos_tooltip') : getI18nString('cooper.left_rail.images'),
       icon: createElement(_$$s4),
-      onClick: () => t(_$$x.MEDIA),
+      onClick: () => t(AssetCategoryEnum.MEDIA),
       disabled: r || !n,
       recordingKey: 'buzzMediaButton',
       dataTestId: 'buzz-left-rail-images-button'
-    }, _$$x.MEDIA), !getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
-      active: e === _$$x.SHAPES,
+    }, AssetCategoryEnum.MEDIA), !getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.SHAPES,
       label: i ? getI18nString('cooper.left_rail.can_t_add_new_layers') : getI18nString('cooper.left_rail.shapes'),
       icon: createElement(_$$F8),
-      onClick: () => t(_$$x.SHAPES),
+      onClick: () => t(AssetCategoryEnum.SHAPES),
       disabled: r || !n,
       recordingKey: 'buzzShapesButton',
       dataTestId: 'buzz-left-rail-shapes-button'
-    }, _$$x.SHAPES), jsx(_$$A16.IconButton, {
-      active: e === _$$x.INSERTS,
+    }, AssetCategoryEnum.SHAPES), jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.INSERTS,
       label: i ? getI18nString('cooper.left_rail.can_t_add_new_layers') : getI18nString('cooper.left_rail.inserts'),
       icon: createElement(_$$s5),
-      onClick: () => t(_$$x.INSERTS),
+      onClick: () => t(AssetCategoryEnum.INSERTS),
       disabled: r || !n,
       recordingKey: 'buzzInsertsButton',
       dataTestId: 'buzz-left-rail-inserts-button'
-    }, _$$x.INSERTS), getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
-      active: e === _$$x.PLUGINS,
+    }, AssetCategoryEnum.INSERTS), getFeatureFlags().buzz_plugins && jsx(_$$A16.IconButton, {
+      active: e === AssetCategoryEnum.PLUGINS,
       label: getI18nString('cooper.left_rail.plugins'),
       icon: createElement(_$$u8),
-      onClick: () => t(_$$x.PLUGINS),
+      onClick: () => t(AssetCategoryEnum.PLUGINS),
       disabled: !n,
       recordingKey: 'buzzPluginsButton',
       dataTestId: 'buzz-left-rail-plugins-button'
-    }, _$$x.PLUGINS)]
+    }, AssetCategoryEnum.PLUGINS)]
   });
 }
 function pf() {
@@ -13780,7 +13780,7 @@ function pI() {
   let e = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let {
     onlyDetached
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let n = useCallback(n => onlyDetached && e === SelfDesignType.DESIGN ? DesignWorkspace.DESIGN : n, [e, onlyDetached]);
   let l = P5({
     defaultTab: DesignWorkspace.DESIGN,
@@ -14520,7 +14520,7 @@ let mI = memo(({
   }, s] = useAtomValueAndSetter(t.stateAtom);
   let d = useSceneGraphSelector();
   let c = _$$$8();
-  let x = B2();
+  let x = useAnyCooperFrameHasVideoPaint();
   let [, p] = useTransition();
   let m = isInteractionOrEvalMode();
   return (useEffect(() => {

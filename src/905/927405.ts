@@ -1,88 +1,126 @@
-
-export enum $$n3 {
-  Appear = "appear",
-  Hover = "hover",
-  Press = "press",
-  Focus = "focus",
-  ScrollParallax = "scrollParallax",
-  ScrollTransform = "scrollTransform",
-  Cursor = "cursor",
-  Marquee = "marquee",
-  Code = "code",
-}
-export enum EasingTypeStr {
-  IN_CUBIC = "IN_CUBIC",
-  OUT_CUBIC = "OUT_CUBIC",
-  INOUT_CUBIC = "INOUT_CUBIC",
-  LINEAR = "LINEAR",
-  IN_BACK_CUBIC = "IN_BACK_CUBIC",
-  OUT_BACK_CUBIC = "OUT_BACK_CUBIC",
-  INOUT_BACK_CUBIC = "INOUT_BACK_CUBIC",
-  CUSTOM_CUBIC = "CUSTOM_CUBIC",
-  GENTLE_SPRING = "GENTLE_SPRING",
-  SPRING_PRESET_ONE = "SPRING_PRESET_ONE",
-  SPRING_PRESET_TWO = "SPRING_PRESET_TWO",
-  SPRING_PRESET_THREE = "SPRING_PRESET_THREE",
-  CUSTOM_SPRING = "CUSTOM_SPRING",
-  SPRING = "SPRING",
-}
-export enum BlendModeStr {
-  PASS_THROUGH = "PASS_THROUGH",
-  NORMAL = "NORMAL",
-  DARKEN = "DARKEN",
-  MULTIPLY = "MULTIPLY",
-  LINEAR_BURN = "LINEAR_BURN",
-  COLOR_BURN = "COLOR_BURN",
-  LIGHTEN = "LIGHTEN",
-  SCREEN = "SCREEN",
-  LINEAR_DODGE = "LINEAR_DODGE",
-  COLOR_DODGE = "COLOR_DODGE",
-  OVERLAY = "OVERLAY",
-  SOFT_LIGHT = "SOFT_LIGHT",
-  HARD_LIGHT = "HARD_LIGHT",
-  DIFFERENCE = "DIFFERENCE",
-  EXCLUSION = "EXCLUSION",
-  HUE = "HUE",
-  SATURATION = "SATURATION",
-  COLOR = "COLOR",
-  LUMINOSITY = "LUMINOSITY",
-}
-export enum $$s1 {
-  LEFT = "LEFT",
-  RIGHT = "RIGHT",
-  CENTER = "CENTER",
-  LEFT_RIGHT = "LEFT_RIGHT",
-  SCALE = "SCALE",
-}
-export enum $$o0 {
-  TOP = "TOP",
-  BOTTOM = "BOTTOM",
-  CENTER = "CENTER",
-  TOP_BOTTOM = "TOP_BOTTOM",
-  SCALE = "SCALE",
-}
-export enum $$l4 {
-  SUPER = "SUPER",
-  SUB = "SUB",
-  NORMAL = "NORMAL",
-}
-export enum TextDecorationStr {
-  NONE = "NONE",
-  STRIKETHROUGH = "STRIKETHROUGH",
-  UNDERLINE = "UNDERLINE",
-}
-export enum $$c7 {
-  ORDERED = "ORDERED",
-  UNORDERED = "UNORDERED",
-  NONE = "NONE",
+/**
+ * Animation trigger types.
+ * Original enum: $$n3
+ */
+export enum AnimationTriggerType {
+  Appear = 'appear',
+  Hover = 'hover',
+  Press = 'press',
+  Focus = 'focus',
+  ScrollParallax = 'scrollParallax',
+  ScrollTransform = 'scrollTransform',
+  Cursor = 'cursor',
+  Marquee = 'marquee',
+  Code = 'code',
 }
 
+/**
+ * Easing types for animations.
+ * Original enum: EasingTypeStr
+ */
+export enum EasingType {
+  InCubic = 'IN_CUBIC',
+  OutCubic = 'OUT_CUBIC',
+  InOutCubic = 'INOUT_CUBIC',
+  Linear = 'LINEAR',
+  InBackCubic = 'IN_BACK_CUBIC',
+  OutBackCubic = 'OUT_BACK_CUBIC',
+  InOutBackCubic = 'INOUT_BACK_CUBIC',
+  CustomCubic = 'CUSTOM_CUBIC',
+  GentleSpring = 'GENTLE_SPRING',
+  SpringPresetOne = 'SPRING_PRESET_ONE',
+  SpringPresetTwo = 'SPRING_PRESET_TWO',
+  SpringPresetThree = 'SPRING_PRESET_THREE',
+  CustomSpring = 'CUSTOM_SPRING',
+  Spring = 'SPRING',
+}
 
-export const Gx = $$o0;
-export const M9 = $$s1;
-export const Nx = BlendModeStr;
-export const Xc = $$n3;
-export const eT = $$l4;
-export const i8 = TextDecorationStr;
-export const mg = EasingTypeStr;
-export const wj = $$c7;
+/**
+ * Blend modes for compositing.
+ * Original enum: BlendModeStr
+ */
+export enum BlendMode {
+  PassThrough = 'PASS_THROUGH',
+  Normal = 'NORMAL',
+  Darken = 'DARKEN',
+  Multiply = 'MULTIPLY',
+  LinearBurn = 'LINEAR_BURN',
+  ColorBurn = 'COLOR_BURN',
+  Lighten = 'LIGHTEN',
+  Screen = 'SCREEN',
+  LinearDodge = 'LINEAR_DODGE',
+  ColorDodge = 'COLOR_DODGE',
+  Overlay = 'OVERLAY',
+  SoftLight = 'SOFT_LIGHT',
+  HardLight = 'HARD_LIGHT',
+  Difference = 'DIFFERENCE',
+  Exclusion = 'EXCLUSION',
+  Hue = 'HUE',
+  Saturation = 'SATURATION',
+  Color = 'COLOR',
+  Luminosity = 'LUMINOSITY',
+}
+
+/**
+ * Horizontal alignment options.
+ * Original enum: $$s1
+ */
+export enum HorizontalAlign {
+  Left = 'LEFT',
+  Right = 'RIGHT',
+  Center = 'CENTER',
+  LeftRight = 'LEFT_RIGHT',
+  Scale = 'SCALE',
+}
+
+/**
+ * Vertical alignment options.
+ * Original enum: $$o0
+ */
+export enum VerticalAlign {
+  Top = 'TOP',
+  Bottom = 'BOTTOM',
+  Center = 'CENTER',
+  TopBottom = 'TOP_BOTTOM',
+  Scale = 'SCALE',
+}
+
+/**
+ * Text script types.
+ * Original enum: $$l4
+ */
+export enum TextScriptType {
+  Super = 'SUPER',
+  Sub = 'SUB',
+  Normal = 'NORMAL',
+}
+
+/**
+ * Text decoration options.
+ * Original enum: TextDecorationStr
+ */
+export enum TextDecoration {
+  None = 'NONE',
+  Strikethrough = 'STRIKETHROUGH',
+  Underline = 'UNDERLINE',
+}
+
+/**
+ * List style types.
+ * Original enum: $$c7
+ */
+export enum ListStyleType {
+  Ordered = 'ORDERED',
+  Unordered = 'UNORDERED',
+  None = 'NONE',
+}
+
+// Refactored export names for clarity and maintainability
+export const Gx = VerticalAlign // Original: Gx
+export const M9 = HorizontalAlign // Original: M9
+export const Nx = BlendMode // Original: Nx
+export const Xc = AnimationTriggerType // Original: Xc
+export const eT = TextScriptType // Original: eT
+export const i8 = TextDecoration // Original: i8
+export const mg = EasingType // Original: mg
+export const wj = ListStyleType // Original: wj

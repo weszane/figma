@@ -10,7 +10,7 @@ import { am } from "../figma_app/430563";
 import { processLocalComponents, filterAndSortPublishedItems, isCurrentStagingStatus } from "../figma_app/80990";
 import { qp } from "../905/977779";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dx, ZX, nJ, Hb, fc, t$ } from "../figma_app/646357";
+import { isPrimaryWorkflowType, arePagesEqual, areNodesEqual, isActiveStagingStatus, useIsAssetPublishedForCurrentFile, useSubscribedLibraryId } from "../figma_app/646357";
 import { QB } from "../905/921418";
 import { T } from "../905/486858";
 import { StagingStatusEnum, PrimaryWorkflowEnum, NO_TEAM, hasAssetId } from "../figma_app/633080";
@@ -20,10 +20,10 @@ let $$T9 = "assets-panel";
 let I = [];
 export function $$S6(e) {
   if (!e.length) return !0;
-  let t = e.find(e => dx(e) && e.containing_frame)?.containing_frame;
-  for (let r of e) if (dx(r)) {
-    let e = ZX(t, r.containing_frame);
-    let n = nJ(t, r.containing_frame);
+  let t = e.find(e => isPrimaryWorkflowType(e) && e.containing_frame)?.containing_frame;
+  for (let r of e) if (isPrimaryWorkflowType(r)) {
+    let e = arePagesEqual(t, r.containing_frame);
+    let n = areNodesEqual(t, r.containing_frame);
     if (!e || !n) return !1;
   }
   return !0;
@@ -58,7 +58,7 @@ export function $$x3(e, t, r) {
     let n = r.containing_frame?.containingStateGroup?.nodeId;
     n && r.old_key && c.add(n);
   }
-  for (let e of n) if (e.deletedFromSceneGraph || (i.push(e), e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.DELETED ? s.push(e) : a.push(e)), isCurrentStagingStatus(e.status) && d++, e.status !== StagingStatusEnum.CURRENT && e.status !== StagingStatusEnum.NOT_STAGED || (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && Hb(e.status) && e.old_key || e.type === PrimaryWorkflowEnum.STATE_GROUP && Hb(e.status) && c.has(e.node_id)) {
+  for (let e of n) if (e.deletedFromSceneGraph || (i.push(e), e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.DELETED ? s.push(e) : a.push(e)), isCurrentStagingStatus(e.status) && d++, e.status !== StagingStatusEnum.CURRENT && e.status !== StagingStatusEnum.NOT_STAGED || (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && isActiveStagingStatus(e.status) && e.old_key || e.type === PrimaryWorkflowEnum.STATE_GROUP && isActiveStagingStatus(e.status) && c.has(e.node_id)) {
     l++;
     continue;
   }
@@ -143,7 +143,7 @@ function O({
   fileDataByLibraryKey: t,
   predicate: r = af
 }) {
-  let i = fc();
+  let i = useIsAssetPublishedForCurrentFile();
   return useMemo(() => {
     let n = Object.create(null);
     for (let a in e) {
@@ -213,7 +213,7 @@ function L({
   hubFilesByLibraryKey: t,
   visualAssetLibraryKeys: r = I
 }) {
-  let i = fc();
+  let i = useIsAssetPublishedForCurrentFile();
   return useMemo(() => {
     let n = {};
     for (let a in e) {
@@ -246,7 +246,7 @@ export function $$k7(e, t) {
   let r = useDispatch();
   let a = selectCurrentFile();
   let s = M();
-  let o = t$(e);
+  let o = useSubscribedLibraryId(e);
   let l = T();
   return useCallback(n => {
     a && (r(am({

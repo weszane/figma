@@ -15,7 +15,7 @@ import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
 import { Nf } from "../figma_app/864378";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { eM } from "../figma_app/646357";
+import { resolveUsedLibrariesAsync } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
 import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
@@ -133,7 +133,7 @@ export function $$M4({
       f(Nf());
     }, [f, s, d, r, u, _, g]);
     useEffect(() => {
-      (e?.status === "loaded" || e?.status === "errors") && eM();
+      (e?.status === "loaded" || e?.status === "errors") && resolveUsedLibrariesAsync();
     }, [e]);
   }(r ? u[r] : null);
   let v = useCallback(e => {

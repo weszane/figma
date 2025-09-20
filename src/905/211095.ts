@@ -11,7 +11,7 @@ import { hideModal } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { selectOpenFileKey } from "../figma_app/516028";
-import { CG } from "../figma_app/646357";
+import { getAssetKeyForPublish } from "../figma_app/646357";
 import { selectSingleSelectedNode } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { B_, wh, Rq, T1 } from "../figma_app/164212";
@@ -95,12 +95,12 @@ export function $$C0({
         case PrimaryWorkflowEnum.COMPONENT:
           return {
             type: ComponentType.COMPONENT,
-            key: CG(e)
+            key: getAssetKeyForPublish(e)
           };
         case PrimaryWorkflowEnum.STATE_GROUP:
           return {
             type: ComponentType.STATE_GROUP,
-            key: CG(e)
+            key: getAssetKeyForPublish(e)
           };
         default:
           return;

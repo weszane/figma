@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { NX, k9 } from "../figma_app/777207";
 import { gO, dS, Nz } from "../figma_app/915774";
-import { Fl, dx } from "../figma_app/646357";
+import { isTemplateAsset, isPrimaryWorkflowType } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { splitPath } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -113,7 +113,7 @@ function E(e, t, r) {
   let a = [];
   let s = [];
   let o = {};
-  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && Fl(e)) a.push(e); else if (dx(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
+  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && isTemplateAsset(e)) a.push(e);else if (isPrimaryWorkflowType(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
     let t = e.containing_frame.nodeId;
     n[t] = n[t] || [];
     n[t].push(e);
@@ -152,7 +152,7 @@ function E(e, t, r) {
     f(e, s, {
       isPreset: r?.isPreset ?? !1
     });
-  } else f(e, getFeatureFlags().dse_templates_proto ? t.filter(e => !Fl(e)) : t, {
+  } else f(e, getFeatureFlags().dse_templates_proto ? t.filter(e => !isTemplateAsset(e)) : t, {
     isPreset: r?.isPreset ?? !1
   });
 }

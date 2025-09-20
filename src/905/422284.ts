@@ -25,7 +25,7 @@ import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
 import { subscribeToContainingPage } from "../figma_app/582924";
 import { waitForJoinStatus } from "../905/346794";
 import { Lp } from "../905/309846";
-import { QO, VO } from "../figma_app/646357";
+import { usedComponentsPromise, findLibraryNameForAsset } from "../figma_app/646357";
 import { fetchTeamRoles } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
@@ -112,9 +112,9 @@ let $$H = createOptimistThunk((e, t, {
       let n = "NONE" !== t.styleType;
       let a = "SYMBOL" === t.type;
       let s = t.parentNode;
-      if (n) Fullscreen.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) QO.then(async () => {
+      if (n) Fullscreen.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) usedComponentsPromise.then(async () => {
         let t = atomStoreManager.get(qp);
-        let n = VO(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
+        let n = findLibraryNameForAsset(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
         let r = await getFullscreenViewFile(e);
         r?.canEdit ? e.dispatch(showModalHandler({
           type: _$$l,

@@ -3,10 +3,10 @@ import { getFeatureFlags } from "../905/601108";
 import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
 import { componentUpdate } from "../905/879323";
-import { KQ } from "../figma_app/646357";
+import { updateLocalLibraryItems } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 let $$c0 = createOptimistThunk(e => {
-  KQ(e);
+  updateLocalLibraryItems(e);
 });
 let $$u2 = createOptimistThunk((e, t) => {
   e.dispatch(componentUpdate(t));

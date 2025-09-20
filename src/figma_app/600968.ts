@@ -15,7 +15,7 @@ import { editorTypeAtom } from "../figma_app/976749";
 import { teamLibraryCache } from "../figma_app/80990";
 import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
-import { Zi } from "../905/395857";
+import { mapCodeComponentProperties } from "../905/395857";
 import { FEditorType } from "../figma_app/53721";
 let I = z.object({
   assetKey: z.string(),
@@ -83,7 +83,7 @@ function O(e, t) {
     if (t) for (let e of t.libraryAssets) {
       let s = n.get(e.key);
       if (!s) continue;
-      let o = Zi(_$$l(t.libraryKey), e);
+      let o = mapCodeComponentProperties(_$$l(t.libraryKey), e);
       o && i.push({
         asset: o,
         name: r && o.codePresetMetadata ? o.codePresetMetadata.presetName : s.name,

@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { StagingStatusEnum } from "../figma_app/633080";
@@ -7,7 +7,7 @@ export function $$l0(e) {
   return [...e].sort((e, t) => {
     if (!("sortPosition" in e) || null === e.sortPosition) return 1;
     if (!("sortPosition" in t) || null === t.sortPosition) return -1;
-    let i = -Ez(e.sortPosition, t.sortPosition);
+    let i = -compareNumbers(e.sortPosition, t.sortPosition);
     return 0 !== i ? i : e.node_id > t.node_id ? 1 : -1;
   });
 }

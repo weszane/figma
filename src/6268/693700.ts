@@ -17,7 +17,7 @@ import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../6658/358099";
 import { s as _$$s } from "../6658/286262";
 import { b as _$$b } from "../905/217163";
-import { B as _$$B } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { LoadingSpinner } from "../figma_app/858013";
 import { sD, P8 } from "../1250/807901";
 import { i7, yO, oE, yS, LU, jU, RA, T$, sp, of, f_, v6, Kk, I$, V3, TQ, b0, IO, fI, $M, WD, fo, AT, YS, MO, K4, WX, Gh, t5, OC, dg, L3, hP, YQ, Gd, xw, SR, dl } from "../6268/430335";
@@ -448,7 +448,7 @@ function B({
   })(H);
   let Z = !H.code_connect_info.v1.type || "component_browser" === H.code_connect_info.v1.type;
   let ee = 0 === n;
-  let en = _$$B(H.library_key).unwrapOr(null);
+  let en = getLibraryName(H.library_key).unwrapOr(null);
   let eo = _$$b({
     libraryKey: H.library_key,
     nodeId: H.node_id,

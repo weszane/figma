@@ -43,8 +43,8 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, normalizeValue } from "../905/216495";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { bO, SS } from "../figma_app/936646";
-import { QT } from "../figma_app/646357";
-import { je } from "../figma_app/155728";
+import { getStyleTypeLabel } from "../figma_app/646357";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
@@ -389,7 +389,7 @@ export function $$eF1({
   let [w, O] = useState("");
   let R = !!w;
   let L = !!R || m;
-  let D = je();
+  let D = useSubscribedLibraries();
   let k = Kq();
   let U = AH(N, normalizeValue(h));
   let B = useRef(U);
@@ -494,7 +494,7 @@ export function $$eF1({
       recordingKey: t,
       isEmpty: Z || er,
       displayText: er ? getI18nString("design_systems.styles.no_styles_match") : getI18nString("design_systems.styles.no_specified_style", {
-        kind: QT(u).toLowerCase()
+        kind: getStyleTypeLabel(u).toLowerCase()
       }),
       onBrowseLibrariesButtonClick: R || k ? void 0 : el,
       hideBrowseLibraries: E
@@ -741,7 +741,7 @@ function eG({
               className: "style_picker--pickerTitleRow--Eoe-0",
               children: [jsx("div", {
                 className: "style_picker--pickerTitle--xydlB header_modal--headerModalTitle--32hFx",
-                children: H || QT(r)
+                children: H || getStyleTypeLabel(r)
               }), _ && jsx(_$$d, {
                 onClick: h,
                 "aria-expanded": em,

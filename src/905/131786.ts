@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { removeSpaces } from "../figma_app/930338";
 import { nh, jD } from "../figma_app/933328";
-import { ov } from "../figma_app/646357";
+import { getAssetsForNodeIds } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$u1(e, t, i, n, r, a, o) {
   let l = $$p3(e, t, i, n, r, o);
@@ -19,7 +19,7 @@ export function $$u1(e, t, i, n, r, a, o) {
   return d;
 }
 export function $$p3(e, t, i, n, r, a) {
-  let s = ov(e, t, i, n, r, a);
+  let s = getAssetsForNodeIds(e, t, i, n, r, a);
   let o = {};
   for (let e of s) {
     if (!e.library_key) continue;

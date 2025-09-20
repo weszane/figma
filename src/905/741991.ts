@@ -3,7 +3,7 @@ import { nearlyEqual } from "../figma_app/492908";
 import { SymbolIdHandler, StateGroupIdHandler, StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, ResponsiveSetIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
 import { sg, Xf, iU } from "../905/859698";
 import { hashToHexString } from "../figma_app/385874";
-import { og } from "../figma_app/646357";
+import { STYLE_TYPES } from "../figma_app/646357";
 import { c1, dB } from "../905/589717";
 import { GP, EI } from "../905/71";
 import { s as _$$s } from "../905/6512";
@@ -138,7 +138,7 @@ export class $$g0 extends _$$s {
     return this.isSymbol || this.isStateGroup;
   }
   get isStyle() {
-    return this.nodeChange.styleType && og.indexOf(this.nodeChange.styleType) > -1;
+    return this.nodeChange.styleType && STYLE_TYPES.indexOf(this.nodeChange.styleType) > -1;
   }
   get isVariable() {
     return "VARIABLE" === this.nodeType;

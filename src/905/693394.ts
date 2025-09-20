@@ -1,7 +1,7 @@
 import { isNotNullish } from "../figma_app/95419";
 import r from "../vendor/267721";
 import { getI18nString } from "../905/303541";
-import { LX } from "../figma_app/646357";
+import { sortStyles } from "../figma_app/646357";
 import { Dh } from "../figma_app/177697";
 import { I } from "../905/883812";
 import { b } from "../905/857767";
@@ -66,7 +66,7 @@ export class $$u0 {
       if (u) {
         let r = d === i ? getI18nString("slides.properties_panel.variable_list.current_slide") : void 0;
         let a = u.styleGUIDs.map(e => t[e]).filter(isNotNullish);
-        LX(a);
+        sortStyles(a);
         a.length > 0 && this._addSlideThemeItemsToResult(e, d, c, a, r);
       }
       d === i && a.length > 1 && this.addSeparator();

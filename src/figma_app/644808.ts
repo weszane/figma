@@ -1,33 +1,134 @@
-let $$n6 = "components";
-let $$i10 = "examples";
-let $$a1 = "templates";
-let $$s2 = "assets";
-let $$o11 = "privateToThisFile";
-var $$l3 = (e => (e[e.HEADER = 0] = "HEADER", e[e.SUGGESTIONS = 1] = "SUGGESTIONS", e[e.BREADCRUMB = 2] = "BREADCRUMB", e[e.CONTENTS = 3] = "CONTENTS", e))($$l3 || {});
-var $$d8 = (e => (e[e.LIBRARIES = 0] = "LIBRARIES", e[e.PAGES = 1] = "PAGES", e[e.ASSETS = 2] = "ASSETS", e))($$d8 || {});
-var $$c9 = (e => (e[e.SEARCH_AND_FILTER = 0] = "SEARCH_AND_FILTER", e[e.LIBRARY_SEARCH_CHIP = 1] = "LIBRARY_SEARCH_CHIP", e))($$c9 || {});
-var $$u4 = (e => (e[e.SEARCH = 0] = "SEARCH", e[e.VISUAL_SEARCH_BUTTON = 1] = "VISUAL_SEARCH_BUTTON", e[e.SETTINGS = 2] = "SETTINGS", e))($$u4 || {});
-var $$p5 = (e => (e[e.BACK = 0] = "BACK", e[e.LIBRARY = 1] = "LIBRARY", e[e.ELLIPSIS = 2] = "ELLIPSIS", e[e.STUBS = 3] = "STUBS", e))($$p5 || {});
-var $$_12 = (e => (e[e.SITE_KIT = 0] = "SITE_KIT", e[e.TEMPLATES = 1] = "TEMPLATES", e[e.EXAMPLES = 2] = "EXAMPLES", e[e.COMPONENTS = 3] = "COMPONENTS", e[e.FOLDERS = 4] = "FOLDERS", e))($$_12 || {});
-var $$h7 = (e => (e[e.SITE_KIT = 0] = "SITE_KIT", e[e.LOCAL_AND_SUBSCRIBED = 1] = "LOCAL_AND_SUBSCRIBED", e[e.PRESETS = 2] = "PRESETS", e[e.VISUAL_ASSETS = 3] = "VISUAL_ASSETS", e))($$h7 || {});
-var m = (e => (e[e.LIBRARIES = 0] = "LIBRARIES", e))(m || {});
-var $$g14 = (e => (e[e.CTA = 0] = "CTA", e[e.UI_KITS = 1] = "UI_KITS", e))($$g14 || {});
-var $$f13 = (e => (e.DESIGN = "design", e.SITE = "site", e))($$f13 || {});
-export function $$E0(e) {
-  return void 0 !== e.embeds;
+// Original file: /Users/allen/github/fig/src/figma_app/644808.ts
+// Refactored to improve readability, group related constants, and add documentation.
+// Original variable names are preserved in comments for traceability.
+// Functionality remains identical.
+
+/**
+ * Enum for section types in the UI.
+ * Original: $$l3
+ */
+export enum SectionType {
+  HEADER = 0,
+  SUGGESTIONS = 1,
+  BREADCRUMB = 2,
+  CONTENTS = 3,
 }
-export const AZ = $$E0;
-export const JS = $$a1;
-export const Mk = $$s2;
-export const ON = $$l3;
-export const Wy = $$u4;
-export const Yv = $$p5;
-export const c_ = $$n6;
-export const gP = $$h7;
-export const lM = $$d8;
-export const my = $$c9;
-export const nE = $$i10;
-export const o8 = $$o11;
-export const tM = $$_12;
-export const yW = $$f13;
-export const zr = $$g14;
+
+/**
+ * Enum for content types.
+ * Original: $$d8
+ */
+export enum ContentType {
+  LIBRARIES = 0,
+  PAGES = 1,
+  ASSETS = 2,
+}
+
+/**
+ * Enum for search types.
+ * Original: $$c9
+ */
+export enum SearchType {
+  SEARCH_AND_FILTER = 0,
+  LIBRARY_SEARCH_CHIP = 1,
+}
+
+/**
+ * Enum for action types.
+ * Original: $$u4
+ */
+export enum ActionType {
+  SEARCH = 0,
+  VISUAL_SEARCH_BUTTON = 1,
+  SETTINGS = 2,
+}
+
+/**
+ * Enum for button types.
+ * Original: $$p5
+ */
+export enum ButtonType {
+  BACK = 0,
+  LIBRARY = 1,
+  ELLIPSIS = 2,
+  STUBS = 3,
+}
+
+/**
+ * Enum for category types.
+ * Original: $$_12
+ */
+export enum CategoryType {
+  SITE_KIT = 0,
+  TEMPLATES = 1,
+  EXAMPLES = 2,
+  COMPONENTS = 3,
+  FOLDERS = 4,
+}
+
+/**
+ * Enum for library types.
+ * Original: $$h7
+ */
+export enum LibraryType {
+  SITE_KIT = 0,
+  LOCAL_AND_SUBSCRIBED = 1,
+  PRESETS = 2,
+  VISUAL_ASSETS = 3,
+}
+
+/**
+ * Enum for kit types.
+ * Original: $$g14
+ */
+export enum KitType {
+  CTA = 0,
+  UI_KITS = 1,
+}
+
+/**
+ * Enum for mode types.
+ * Original: $$f13
+ */
+export enum ModeType {
+  DESIGN = 'design',
+  SITE = 'site',
+}
+
+/**
+ * String constants for various types.
+ */
+export const COMPONENT_TYPE = 'components' // Original: $$n6
+export const EXAMPLE_TYPE = 'examples' // Original: $$i10
+export const TEMPLATE_TYPE = 'templates' // Original: $$a1
+export const ASSET_TYPE = 'assets' // Original: $$s2
+export const PRIVATE_TYPE = 'privateToThisFile' // Original: $$o11
+
+/**
+ * Checks if the given object has embeds.
+ * @param e - The object to check.
+ * @returns True if embeds are defined, false otherwise.
+ * Original: $$E0
+ */
+export function hasEmbeds(e: any): boolean {
+  return e.embeds !== undefined
+}
+
+// Unused enum (original: m) - not exported, so omitted in refactor.
+
+// Exports with refactored names for clarity, matching original export structure.
+export const AZ = hasEmbeds
+export const JS = TEMPLATE_TYPE
+export const Mk = ASSET_TYPE
+export const ON = SectionType
+export const Wy = ActionType
+export const Yv = ButtonType
+export const c_ = COMPONENT_TYPE
+export const gP = LibraryType
+export const lM = ContentType
+export const my = SearchType
+export const nE = EXAMPLE_TYPE
+export const o8 = PRIVATE_TYPE
+export const tM = CategoryType
+export const yW = ModeType
+export const zr = KitType

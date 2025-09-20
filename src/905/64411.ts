@@ -6,7 +6,7 @@ import { D3 } from '../905/359847';
 import { setupLoadingStateHandler } from '../905/696711';
 import { librariesAPI } from '../905/939602';
 import { batchPutFileAction } from '../figma_app/78808';
-import { Mb, Ve, Ys } from '../figma_app/646357';
+import { generatePublishedComponentsCacheKey, addTrackedState, deletedLoadingStates } from '../figma_app/646357';
 import { aW } from '../figma_app/864378';
 export let $$m0 = createOptimistThunk(async (e, t) => {
   let {
@@ -15,7 +15,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
     includeRealtime
   } = t;
   let h = e.getState().loadingState;
-  let g = Mb(libraryKey);
+  let g = generatePublishedComponentsCacheKey(libraryKey);
   if (!isNullOrFailure(h, g)) return;
   let f = librariesAPI.getLibraryPublishedComponentsV2({
     libraryKey,
@@ -25,7 +25,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
   setupLoadingStateHandler(f, {
     dispatch: e.dispatch
   }, g);
-  Ys.add(g);
+  deletedLoadingStates.add(g);
   try {
     let t = await f;
     let {
@@ -74,7 +74,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
       libraryKey,
       teamId: c?.team_id
     }));
-    Ve(libraryKey);
+    addTrackedState(libraryKey);
   } catch (e) {
     console.warn(`Failed to get published components from library with libraryKey ${libraryKey}`);
   }

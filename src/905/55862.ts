@@ -16,7 +16,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectPermissionsState } from "../figma_app/212807";
 import { eO } from "../figma_app/518077";
-import { gi, r9, fc } from "../figma_app/646357";
+import { sortLibraries, compareAssetsByTeam, useIsAssetPublishedForCurrentFile } from "../figma_app/646357";
 import { PG, Q_ } from "../905/570707";
 import { LibrariesViewFilterStatesView } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
@@ -127,7 +127,7 @@ export function $$R5({
       shouldSortByTeam: !0
     }) : function (e, t) {
       let i = e ? e.teamId : NO_TEAM;
-      return e => gi(e, i, {
+      return e => sortLibraries(e, i, {
         isDescending: t
       });
     }(s, i.isDescending) : "search" === i.sortBy ? function (e, t) {
@@ -140,7 +140,7 @@ export function $$R5({
           if (e && !i) return -1;
           if (!e && i) return 1;
         }
-        return t.team_id !== r.team_id ? r9(t, r, i) : t.max_search_score > r.max_search_score ? -1 : 1;
+        return t.team_id !== r.team_id ? compareAssetsByTeam(t, r, i) : t.max_search_score > r.max_search_score ? -1 : 1;
       });
     }(s, d) : (e = (() => {
       switch (i.sortBy) {
@@ -207,7 +207,7 @@ export function $$N2(e) {
 export function $$P6({
   libraryFiles: e
 }) {
-  let t = fc();
+  let t = useIsAssetPublishedForCurrentFile();
   return useMemo(() => e.map(e => e.library_key).filter(e => t(e)), [e, t]);
 }
 let O = Error("useLibrariesViewFilterStates: no filters with presets enabled");

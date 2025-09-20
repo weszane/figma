@@ -21,7 +21,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
-import { td } from "../figma_app/646357";
+import { isSubscribedLibrary } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { hasAssetId, PrimaryWorkflowEnum, hasComponentKey } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -31,7 +31,7 @@ import { tM, k1 } from "../figma_app/984498";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Nv } from "../figma_app/318590";
 import { p as _$$p } from "../905/42189";
-import { Kl } from "../figma_app/275938";
+import { useSubscribedLibraryKeys } from "../figma_app/275938";
 import { F5, oM } from "../905/192343";
 export function $$$$j0(e) {
   let {
@@ -44,7 +44,7 @@ export function $$$$j0(e) {
   let V = e.resource;
   let G = hasAssetId(V);
   let z = G ? "LIBRARY" !== V.subscriptionStatus : V.isLocal;
-  let H = Kl();
+  let H = useSubscribedLibraryKeys();
   let W = !G && H.has(V.library_key);
   let K = "whiteboard" === getCurrentFileType();
   let Y = function (e) {
@@ -214,7 +214,7 @@ export function $$$$j0(e) {
       _$$r();
       G ? "LIBRARY" === V.subscriptionStatus && teamLibraryCache.getCanvas({
         canvas_url: V.canvasUrl
-      }) : z || (teamLibraryCache.getCanvas(V), !td(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(a9({
+      }) : z || (teamLibraryCache.getCanvas(V), !isSubscribedLibrary(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(a9({
         componentKey: V.component_key,
         callsite: "useInsertableLibraryItem"
       })), V.type === PrimaryWorkflowEnum.STATE_GROUP && V.key && i(D6({

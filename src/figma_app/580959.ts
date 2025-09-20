@@ -59,7 +59,7 @@ import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
-import { R2, sy, w$ } from "../figma_app/646357";
+import { useStyleSubscriptionInfo, useStyleSubscriptionName, useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { b as _$$b2 } from "../figma_app/882253";
@@ -1344,8 +1344,8 @@ function tf({
   let x = m?.id === A ? m : null;
   let N = stateStylePickerShown.isShown && stateStylePickerShown.id === A ? stateStylePickerShown : null;
   let C = _$$M(c);
-  let k = R2(e, n);
-  let M = sy(e, n);
+  let k = useStyleSubscriptionInfo(e, n);
+  let M = useStyleSubscriptionName(e, n);
   let F = useSelector(t => _$$b2(t, e, null));
   let j = useCallback(() => {
     v(XE());
@@ -1403,7 +1403,7 @@ function tf({
       count: t
     });
   }, [t, n]);
-  w$(k);
+  useOptimisticStyleThumbnailUpdate(k);
   let [J, Z] = useState(!1);
   if (!k) return null;
   let Q = k.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? jsx(zi, {
@@ -1497,8 +1497,8 @@ function tE({
   styleGUIDs: t,
   onClick: r
 }) {
-  let n = R2(e, t);
-  return (w$(n), n) ? jsx("span", {
+  let n = useStyleSubscriptionInfo(e, t);
+  return (useOptimisticStyleThumbnailUpdate(n), n) ? jsx("span", {
     onClick: r,
     children: jsx(zi, {
       dsStyle: {

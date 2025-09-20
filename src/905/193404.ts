@@ -13,7 +13,7 @@ import { o as _$$o } from "../905/605383";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { buildFileUrl } from "../905/612685";
-import { LT } from "../figma_app/646357";
+import { getLibraryAgeLabel } from "../figma_app/646357";
 import { FFileType } from "../figma_app/191312";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { l as _$$l } from "../905/402643";
@@ -381,7 +381,7 @@ export function $$B0({
     });
     e.push({
       header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
-        duration: LT(t)
+        duration: getLibraryAgeLabel(t)
       }),
       sortBy: "num_insertions",
       headerClassName: R,
@@ -392,7 +392,7 @@ export function $$B0({
     });
     e.push({
       header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
-        duration: LT(t)
+        duration: getLibraryAgeLabel(t)
       }),
       sortBy: "num_detachments",
       headerClassName: R,
@@ -440,7 +440,7 @@ export function $$V3({
     }) => e.num_existing_instances.toLocaleString()
   }, {
     header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
-      duration: LT(t)
+      duration: getLibraryAgeLabel(t)
     }),
     sortBy: "num_insertions",
     headerClassName: R,
@@ -450,7 +450,7 @@ export function $$V3({
     }) => e.num_insertions.toLocaleString()
   }, {
     header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
-      duration: LT(t)
+      duration: getLibraryAgeLabel(t)
     }),
     sortBy: "num_detachments",
     headerClassName: R,
@@ -503,7 +503,7 @@ export function $$G5({
     }) => e.num_existing_instances.toLocaleString()
   }, {
     header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
-      duration: LT(t)
+      duration: getLibraryAgeLabel(t)
     }),
     sortBy: "num_insertions",
     headerClassName: R,
@@ -513,7 +513,7 @@ export function $$G5({
     }) => e.num_insertions.toLocaleString()
   }, {
     header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
-      duration: LT(t)
+      duration: getLibraryAgeLabel(t)
     }),
     sortBy: "num_detachments",
     headerClassName: R,

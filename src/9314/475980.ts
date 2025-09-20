@@ -47,13 +47,13 @@ import { Bs } from '../figma_app/229710';
 import { c$, ms, wv } from '../figma_app/236327';
 import { mapTypeToStyleKey } from '../figma_app/276332';
 import { fullscreenValue } from '../figma_app/455680';
-import { a2, dm, g5, h$, j3, KU, l0, lM, Md, mx, Nr, Pc, QA, rM, t_, Ug, VB } from '../figma_app/463500';
+import { a2, getAllStylesFromFolder, getDragDropDividerStyles, getSelectionIndices, getPrevNextItems, getAllFoldersFromFolder, flattenStyleFolderTree, setupStyleFolderTree, canDropStyleOrFolder, getFolderContentsIndices, deleteStyleIfKeyMatches, normalizeStylePath, getSelectedItems, getStyleOrFolderLevel, getStyleOrFolderId, flattenToStyles, handleStyleFolderReorder } from '../figma_app/463500';
 import { debug, noop } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
-import { Kw, LX, og, QT, XV } from '../figma_app/646357';
+import { groupStylesByType, sortStyles, STYLE_TYPES, getStyleTypeLabel, getStyleTypeLabelPlural } from '../figma_app/646357';
 import { useAppModelProperty } from '../figma_app/722362';
 import { dG, ft } from '../figma_app/753501';
 import { DesignGraphElements, Fullscreen, LayoutTabType } from '../figma_app/763686';
@@ -501,7 +501,7 @@ function ey({
       setDefaultToolOnCreateStyle: t
     }) : jsx('div', {
       className: 'styles--styleTypeSectionHeader--224lA component_tiles--sectionHeader--eEC6d raw_components--panelTitle--VAQQA',
-      children: QT(e)
+      children: getStyleTypeLabel(e)
     }), l]
   });
 }
@@ -533,7 +533,7 @@ function em({
     ref: d,
     children: [jsx('h3', {
       className: 'styles--styleTypeSectionRowLabel--PrKm-',
-      children: QT(e)
+      children: getStyleTypeLabel(e)
     }), jsx('div', {
       style: {
         opacity: r ? 1 : 0
@@ -541,13 +541,13 @@ function em({
       children: jsx(IconButton, {
         'recordingKey': generateRecordingKey(l, 'addButton'),
         'aria-label': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
-          kind: XV(e).toLowerCase()
+          kind: getStyleTypeLabelPlural(e).toLowerCase()
         }),
         'onClick': c,
         'htmlAttributes': {
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
-            kind: XV(e).toLowerCase()
+            kind: getStyleTypeLabelPlural(e).toLowerCase()
           })
         },
         'children': jsx(_$$x, {})
@@ -575,8 +575,8 @@ function ek({
 }) {
   let m = Um();
   let p = useSelector(e => e.library.localStyleSelection);
-  let x = useMemo(() => p && p.type === y && m?.type === eS ? QA(p, m.data.uiList) : [], [p, m, y]);
-  let f = useMemo(() => Ug(x).map(e => e.node_id), [x]);
+  let x = useMemo(() => p && p.type === y && m?.type === eS ? getSelectedItems(p, m.data.uiList) : [], [p, m, y]);
+  let f = useMemo(() => flattenToStyles(x).map(e => e.node_id), [x]);
   let g = f.length;
   return m && f.length ? jsx(eC, {
     dropdownShown: m,
@@ -769,7 +769,7 @@ function eP({
         minWidth: 128,
         disableDropdownScrollContainer: !0,
         propagateCloseClick: !0,
-        children: og.map(e => {
+        children: STYLE_TYPES.map(e => {
           let {
             icon,
             label
@@ -887,7 +887,7 @@ function eO({
       ...t,
       'children': jsx(_$$e2, {})
     }), jsx(MenuContainerComp, {
-      children: og.map(e => {
+      children: STYLE_TYPES.map(e => {
         let {
           icon,
           label
@@ -953,14 +953,14 @@ function eY({
     stylesByType,
     foldersAndStylesByType
   } = useMemo(() => {
-    let e = Kw(g);
+    let e = groupStylesByType(g);
     let t = new Map();
-    og.map(l => {
+    STYLE_TYPES.map(l => {
       let n = e.get(l);
       if (n) {
-        LX(n);
-        let e = lM(n, l);
-        let s = l0(e);
+        sortStyles(n);
+        let e = setupStyleFolderTree(n, l);
+        let s = flattenStyleFolderTree(e);
         t.set(l, s);
       }
     });
@@ -1013,14 +1013,14 @@ function eY({
       let n = splitPath(e.name);
       let s = t != null ? t : n.length - 1;
       n[s] = l;
-      let o = Pc(n.join('/'));
+      let o = normalizeStylePath(n.join('/'));
       permissionScopeHandler.user('rename-style', () => Fullscreen.renameNode(e.node_id, o));
     };
     if (n.name !== l) {
       if (n.type === PrimaryWorkflowEnum.STYLE) {
         s(n);
       } else {
-        mx(t, e).forEach(t => {
+        getFolderContentsIndices(t, e).forEach(t => {
           let l = e[t];
           l.type === PrimaryWorkflowEnum.STYLE && s(l, n.level - 1);
         });
@@ -1067,7 +1067,7 @@ function eY({
     ref: x,
     children: [jsx(eM, {
       setDefaultToolOnCreateStyle: t
-    }), og.map(s => {
+    }), STYLE_TYPES.map(s => {
       let o = stylesByType.get(s);
       if (!o) return;
       let r = foldersAndStylesByType.get(s);
@@ -1159,7 +1159,7 @@ function ez({
     let s = [];
     l.forEach((e, t) => {
       if (n.has(e) && (s.push(t), e.type === 'STYLE_FOLDER')) {
-        let e = mx(t, l);
+        let e = getFolderContentsIndices(t, l);
         s.push(...e);
       }
     });
@@ -1190,7 +1190,7 @@ function ez({
     let e = null;
     let t = null;
     Q.index === 0 ? t = l[Q.index] : Q.index === l.length ? e = l[Q.index - 1] : (e = l[Q.index - 1], t = l[Q.index]);
-    return g5({
+    return getDragDropDividerStyles({
       prevItem: e,
       nextItem: t,
       localStyleSelection: q,
@@ -1207,15 +1207,15 @@ function ez({
     let i = [];
     let d = [];
     n.forEach(e => {
-      Md(s, e, o, a) && (e.type === 'STYLE_FOLDER' ? d.push(e) : i.push(e));
+      canDropStyleOrFolder(s, e, o, a) && (e.type === 'STYLE_FOLDER' ? d.push(e) : i.push(e));
     });
     let c = i.concat(d);
     if (!c.length) return;
-    let y = permissionScopeHandler.user('reorder-styles', () => VB(c, s, o, a, l, t, r || !1));
+    let y = permissionScopeHandler.user('reorder-styles', () => handleStyleFolderReorder(c, s, o, a, l, t, r || !1));
     let m = new Set();
     let p = new Set();
     c.forEach(e => {
-      let t = t_(e);
+      let t = getStyleOrFolderId(e);
       let l = y?.get(t);
       l && (e.type === 'STYLE_FOLDER' ? m.add(l) : p.add(t));
     });
@@ -1238,7 +1238,7 @@ function ez({
   let ec = useCallback((e, t) => {
     if (t.type !== 'STYLE_FOLDER') return;
     let n = l.indexOf(t);
-    let s = dm(t).filter(e => getDirname(e.name) === t.name);
+    let s = getAllStylesFromFolder(t).filter(e => getDirname(e.name) === t.name);
     if (!s.length) return ed(e, t, l[n + 1]);
     {
       let t = s[s.length - 1];
@@ -1251,7 +1251,7 @@ function ez({
     let s = t.map(e => e.type === PrimaryWorkflowEnum.STYLE ? e.node_id : e.name);
     e.forEach(e => {
       let o = s.indexOf(e);
-      o !== -1 && mx(o, l).forEach(e => {
+      o !== -1 && getFolderContentsIndices(o, l).forEach(e => {
         let l = t[e];
         let s = l.type === 'STYLE_FOLDER' ? l.name : l.node_id;
         let o = n.get(s);
@@ -1263,12 +1263,12 @@ function ez({
   });
   let ep = useCallback(() => {
     if (!q) return;
-    let t = QA(q, l);
+    let t = getSelectedItems(q, l);
     if (t.length === 0) return;
     let {
       prevItem,
       nextItem
-    } = j3(t, l);
+    } = getPrevNextItems(t, l);
     ed(t, prevItem, nextItem, !0);
     let o = getDirname(t[0]?.name || '');
     let r = getI18nString('design_systems.create_style.new_folder');
@@ -1315,7 +1315,7 @@ function ez({
         let e = getDirname(o.name);
         let l = e === '' ? t : `${e}/${t}`;
         X.has(o.name) && (X.$$delete(o.name), X.add(l));
-        KU(o).forEach(e => {
+        getAllFoldersFromFolder(o).forEach(e => {
           if (X.has(e.name)) {
             let t = e.name.replace(o.name, '');
             X.add(l + t);
@@ -1341,8 +1341,8 @@ function ez({
   let eS = useCallback(() => {
     V(e => permissionScopeHandler.user('delete-styles', () => {
       let t = new Set(e);
-      (q ? QA(q, l) : []).forEach(e => {
-        e.type === 'STYLE_FOLDER' ? (a2(e, U?.key || null), X.$$delete(e.name), KU(e).forEach(e => X.$$delete(e.name))) : Nr(e, U?.key || null);
+      (q ? getSelectedItems(q, l) : []).forEach(e => {
+        e.type === 'STYLE_FOLDER' ? (a2(e, U?.key || null), X.$$delete(e.name), getAllFoldersFromFolder(e).forEach(e => X.$$delete(e.name))) : deleteStyleIfKeyMatches(e, U?.key || null);
       });
       return t;
     }));
@@ -1351,8 +1351,8 @@ function ez({
     P(null);
   }, [W.isShown, P, q, l, U?.key, X, z]);
   let eb = useMemo(() => {
-    let e = q ? QA(q, l) : [];
-    return Ug(e).map(e => e.node_id);
+    let e = q ? getSelectedItems(q, l) : [];
+    return flattenToStyles(e).map(e => e.node_id);
   }, [q, l]);
   let eC = useCallback(() => {
     permissionScopeHandler.user('cut-styles', () => Fullscreen && Fullscreen.cutStyles(eb));
@@ -1433,8 +1433,8 @@ function ez({
   let eN = useCallback(e => {
     eL.current = e;
   }, [eL]);
-  let eD = useMemo(() => q ? h$(q, l) : [], [q, l]);
-  let eB = useMemo(() => H ? h$(H, l) : [], [H, l]);
+  let eD = useMemo(() => q ? getSelectionIndices(q, l) : [], [q, l]);
+  let eB = useMemo(() => H ? getSelectionIndices(H, l) : [], [H, l]);
   let eA = useMemo(() => [...eD, ...eB].sort((e, t) => e - t), [eD, eB]);
   let eM = useCallback((e, t, s, o, a, i) => {
     let d = e.type === 'STYLE_FOLDER' ? e.name : e.node_id;
@@ -1456,7 +1456,7 @@ function ez({
     let y = eA && eA[eA.length - 1] === t;
     let m = eA && eA[0] === t;
     if (e.type === PrimaryWorkflowEnum.STYLE) {
-      let l = rM(e);
+      let l = getStyleOrFolderLevel(e);
       let d = r != null && r === e.node_id;
       return jsx(eu, {
         deleteSelectedItems: eS,

@@ -330,7 +330,7 @@ import { subscribedSymbolsUniqueKeysFromLoadedPagesSelector, allSubscribedStyles
 import { cQ as _$$cQ } from '../figma_app/144692';
 import { ub as _$$ub, jM, RO, wI } from '../figma_app/146905';
 import { rb as _$$rb } from '../figma_app/151869';
-import { zN as _$$zN2, je } from '../figma_app/155728';
+import { SubscribedLibrariesProvider, useSubscribedLibraries } from '../figma_app/155728';
 import { NU } from '../figma_app/156285';
 import { xZ } from '../figma_app/165422';
 import { buildUploadUrl, getInitialOptions, setEditingFile } from '../figma_app/169182';
@@ -468,12 +468,12 @@ import { PublishStatusEnum, LibraryPublishStatusEnum } from '../figma_app/633080
 import { X_ } from '../figma_app/634146';
 import { BigButtonPrimaryTracked, ButtonBase, SecureLink, Spacing, EnhancedInput, interactiveAnchorTracked } from '../figma_app/637027';
 import { UK, WN } from '../figma_app/638601';
-import { x as _$$x3, Lk } from '../figma_app/639711';
+import { AssetCategoryEnum, assetCategoryAtom } from '../figma_app/639711';
 import { jW } from '../figma_app/640683';
 import { zl as _$$zl, ST } from '../figma_app/641749';
 import { xn, Yk } from '../figma_app/644079';
 import { rS as _$$rS } from '../figma_app/644255';
-import { f2 } from '../figma_app/646357';
+import { batchFetchFiles } from '../figma_app/646357';
 import { P as _$$P4 } from '../figma_app/650304';
 import { R as _$$R6 } from '../figma_app/652260';
 import { sortByDateProperty, sortByMultiple, filterNotNullish } from '../figma_app/656233';
@@ -2139,7 +2139,7 @@ function iD() {
   return iP.includes(t) ? jsx(IconButton, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
-      t === FEditorType.Cooper && (e?.switchContainer(PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(FP, PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(Lk, _$$x3.PLUGINS));
+      t === FEditorType.Cooper && (e?.switchContainer(PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(FP, PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS));
     },
     'aria-label': getI18nString('cooper.plugins.dock'),
     'children': jsx(im, {})
@@ -6031,10 +6031,10 @@ function dG({
     }, [n]);
     let a = Array.from(r).filter(t => !i[t] && !e.current.has(t));
     if (a.length > 0) {
-      for (let r of (f2(a, t), a)) e.current.add(r);
+      for (let r of (batchFetchFiles(a, t), a)) e.current.add(r);
     }
   }();
-  return jsxs(_$$zN2, {
+  return jsxs(SubscribedLibrariesProvider, {
     children: [r && jsx(dV, {}), jsx(fN, {
       maxSubscriptionsBeforeCleanup: t,
       children: jsx(dE, {
@@ -6044,7 +6044,7 @@ function dG({
   });
 }
 function dV() {
-  je();
+  useSubscribedLibraries();
   return null;
 }
 function dH() {

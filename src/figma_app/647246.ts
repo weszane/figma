@@ -3,8 +3,8 @@ import { atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager 
 import { usePreviousValue } from "../figma_app/922077";
 import { selectedViewAtom } from "../figma_app/386952";
 import { createTrackedAtom } from "../figma_app/615482";
-import { Mk, yW } from "../figma_app/644808";
-import { G as _$$G } from "../figma_app/923271";
+import { ASSET_TYPE, ModeType } from "../figma_app/644808";
+import { useAssetPanelContext } from "../figma_app/923271";
 import { ZX, r6 } from "../figma_app/950074";
 import { ye } from "../figma_app/134428";
 import { lj } from "../905/991973";
@@ -127,7 +127,7 @@ export function $$A10() {
     getLibrary,
     getPage,
     getFolder
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     setLastNavAction,
     lastActionWasBackSwipe
@@ -369,7 +369,7 @@ export function $$x0(e) {
   return 1 === e.pages.size ? Array.from(e.pages.values())[0] : void 0;
 }
 export function $$N11(e) {
-  if (e.key === Mk && 1 === e.subtrees.size && 0 === e.items.length) {
+  if (e.key === ASSET_TYPE && 1 === e.subtrees.size && 0 === e.items.length) {
     let t = Array.from(e.subtrees.values())[0];
     return t.name.toLowerCase() === e.name.toLowerCase() ? t : void 0;
   }
@@ -382,7 +382,7 @@ export function $$O8() {
   let [e, t] = useAtomValueAndSetter(C);
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let a = useMemo(() => getLibrary(e), [getLibrary, e]);
   let s = _$$q();
   let {
@@ -419,8 +419,8 @@ export function $$L5() {
   } = $$A10();
   let {
     getLibrary
-  } = _$$G();
-  return useMemo(() => getLibrary(libraryKey)?.type === yW.SITE, [getLibrary, libraryKey]);
+  } = useAssetPanelContext();
+  return useMemo(() => getLibrary(libraryKey)?.type === ModeType.SITE, [getLibrary, libraryKey]);
 }
 export const Cg = $$x0;
 export const G3 = $$m1;

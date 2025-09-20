@@ -12,9 +12,9 @@ import { I } from "../figma_app/130633";
 import { k } from "../905/540025";
 import { lj } from "../905/991973";
 import { Nv } from "../figma_app/318590";
-import { o8, yW } from "../figma_app/644808";
+import { PRIVATE_TYPE, ModeType } from "../figma_app/644808";
 import { wV, S5 } from "../figma_app/647246";
-import { AS } from "../figma_app/177636";
+import { siteKitState } from "../figma_app/177636";
 export function $$b9() {
   let e = selectCurrentFile();
   return useCallback((t, r) => {
@@ -35,7 +35,7 @@ export function $$b9() {
         entrypoint: e,
         componentSuggestionSessionId: r6()
       });
-      let l = atomStoreManager.get(AS).libraryKeys;
+      let l = atomStoreManager.get(siteKitState).libraryKeys;
       libraryKey && l.length > 0 && l.includes(libraryKey) && "Library" === view && ["libraryCard", "settingsMenu"].includes(e) && analyticsEventManager.trackDefinedEvent("assets_panel.view_site_kit", {
         fileKey: r?.key,
         fileTeamId: r?.teamId ?? void 0,
@@ -90,7 +90,7 @@ export function $$I12({
         };
       default:
         if (libraryKey === l) {
-          if (pageId === o8) return {
+          if (pageId === PRIVATE_TYPE) return {
             componentSectionNameForTracking: "Local private components",
             templateSectionNameForTracking: "Local private templates"
           };
@@ -144,7 +144,7 @@ export function $$x1(e, {
     numTemplates: 0,
     thumbnailUrl: e.thumbnailUrlOverride ?? e.thumbnailUrl,
     thumbnailShouldCover: !!e.thumbnailGuid || "community" === e.libraryType,
-    type: yW.DESIGN,
+    type: ModeType.DESIGN,
     libraryType: e.libraryType
   } : null;
 }

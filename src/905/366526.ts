@@ -461,7 +461,7 @@ import { copyTextToClipboard } from '../figma_app/623293';
 import { getNodeStatus } from '../figma_app/623300';
 import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
-import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
+import { dispatchDeleteLoadingStates, resetAllAsyncPromises, batchFetchFiles, clearTrackedState } from '../figma_app/646357';
 import { DashboardSection, FigResourceType } from '../figma_app/650409';
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
@@ -2350,11 +2350,11 @@ let ng = e => t => function (i) {
       url: e
     }) => {
       e && revokeThumbnailUrl(e);
-    }), e.dispatch(componentClearLocal()), bd(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
+    }), e.dispatch(componentClearLocal()), resetAllAsyncPromises(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
-    }), teamLibraryCache.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(componentClearPublishedItems({
+    }), teamLibraryCache.clearCache(), _$$e$(), dispatchDeleteLoadingStates(e.dispatch), clearTrackedState(), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.COMPONENT
     })), e.dispatch(componentClearPublishedItems({
       type: PrimaryWorkflowEnum.STATE_GROUP
@@ -5719,7 +5719,7 @@ function sV(e) {
         let i = a[t];
         i && e.dispatch(i$(`/file-${i.key}`));
       }
-      f2(Array.from(r), e.dispatch);
+      batchFetchFiles(Array.from(r), e.dispatch);
     }
   }(e, r, a);
 }

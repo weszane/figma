@@ -14,7 +14,7 @@ import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { getSelectedFile } from "../905/766303";
 import { Fl } from "../figma_app/236178";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
-import { fi } from "../figma_app/155728";
+import { useUntransformedSubscribedLibraries } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { ev } from "../905/909811";
 import { Yt } from "../905/712714";
@@ -74,7 +74,7 @@ export function $$F0({
   let es = !!(ea?.design || ea?.figjam);
   let eo = function (e) {
     let t = useFigmaLibrariesEnabled();
-    let i = fi();
+    let i = useUntransformedSubscribedLibraries();
     let {
       workspaceApprovedLibraryKeys,
       orgApprovedLibraryKeys

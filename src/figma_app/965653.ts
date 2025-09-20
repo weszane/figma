@@ -5,8 +5,8 @@ import { v4, qp, mn, jq } from "../figma_app/761118";
 import { generateUUIDv4 } from "../905/871474";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { uJ } from "../figma_app/646357";
-import { $p } from "../figma_app/155728";
+import { groupStylesByPrefix } from "../figma_app/646357";
+import { SubscribedLibrariesAtom } from "../figma_app/155728";
 import { V } from "../905/693394";
 import { b } from "../905/857767";
 import { dC, Yc } from "../905/820169";
@@ -30,7 +30,7 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
     localVariableSets,
     libraryVariableSets
   } = t(mn);
-  let c = t($p) ?? [];
+  let c = t(SubscribedLibrariesAtom) ?? [];
   let u = {};
   i.forEach(t => {
     "LOCAL" === t.subscriptionStatus && t.resolvedType === e.type && (u[t.node_id] = t);
@@ -115,14 +115,14 @@ let $$A0 = atom(e => {
     let {
       sortedPrefixes,
       stylesByPrefix
-    } = uJ(localStyles.styles);
+    } = groupStylesByPrefix(localStyles.styles);
     n.addLibraryStyleItemsToResult(sortedPrefixes, stylesByPrefix, localStyles.fileKey, localStyles.libraryKey);
   }
   for (let [e, r] of Object.entries(subscribedStylesByFileKey)) {
     let {
       sortedPrefixes,
       stylesByPrefix
-    } = uJ(r.styles);
+    } = groupStylesByPrefix(r.styles);
     n.addLibraryStyleItemsToResult(sortedPrefixes, stylesByPrefix, e, r.libraryKey, r.fileName);
   }
   return function (e) {

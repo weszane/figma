@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { X, U as _$$U } from "../905/77000";
 import { getSelectedFile } from "../905/766303";
-import { Lk } from "../figma_app/646357";
+import { compareStyles } from "../figma_app/646357";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { ev } from "../905/909811";
 import { C } from "../905/109977";
@@ -125,7 +125,7 @@ export function $$C0({
 }) {
   let [t] = setupResourceAtomHandler(sU(e));
   let i = useContext(_$$r);
-  return useMemo(() => [...(("loaded" === t.status ? t.data : []) ?? i?.allUsedStylesByLibraryKey[e] ?? [])].sort(Lk), [t, i?.allUsedStylesByLibraryKey, e]);
+  return useMemo(() => [...(("loaded" === t.status ? t.data : []) ?? i?.allUsedStylesByLibraryKey[e] ?? [])].sort(compareStyles), [t, i?.allUsedStylesByLibraryKey, e]);
 }
 export const c = $$C0;
 export const g = $$w1;

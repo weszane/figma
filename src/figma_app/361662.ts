@@ -5,7 +5,7 @@ import { mapFileToProductType } from "../figma_app/314264";
 import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn, oA, Rn } from "../905/225265";
-import { Ly, He } from "../figma_app/155728";
+import { getGroupedSubscribedLibraryKeys, useSubscribedLibraryKeys } from "../figma_app/155728";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { U } from "../905/966438";
 import { M as _$$M, k as _$$k } from "../905/540025";
@@ -97,12 +97,12 @@ export function $$m0({
   }), [e, t, O, L, M, query, searchSessionId, b, c, r, m, P, T, F, x?.key, x?.teamId, x?.parentOrgId, x?.editorType, I, S, v, A, C]);
 }
 export function $$g1(e, t) {
-  let r = Ly();
+  let r = getGroupedSubscribedLibraryKeys();
   return useMemo(() => r.file?.has(e) ? "file" : r.user?.has(e) ? "user" : r.team?.has(e) ? "team" : r.org?.has(e) ? "org" : "SUBSCRIBED" === t ? "other" : "", [e, r, t]);
 }
 export function $$f3(e) {
   let t = useOpenFileLibraryKey();
-  let r = He();
+  let r = useSubscribedLibraryKeys();
   return t === e ? "LOCAL" : r.has(e) ? "SUBSCRIBED" : "UNSUBSCRIBED";
 }
 export function $$E2() {

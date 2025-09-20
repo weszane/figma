@@ -9,7 +9,7 @@ import { compareLibraryKeyWithString } from "../905/709171";
 import { nR } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { SS } from "../figma_app/936646";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { LibraryItemTypeEnum, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { AH } from "../905/571648";
 let _ = getFileKey();
@@ -19,7 +19,7 @@ export function $$$$A0(e, t, i) {
   let m = d?.status === "loaded" ? d.data : null;
   let A = nR();
   let y = t?.type === PrimaryWorkflowEnum.VARIABLE && "SUBSCRIBED" === t.subscriptionStatus ? t : null;
-  let b = je();
+  let b = useSubscribedLibraries();
   let v = useCurrentFileKey();
   return useMemo(() => {
     let t = new Set();

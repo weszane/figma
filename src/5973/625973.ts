@@ -5,7 +5,7 @@ import { sha1BytesFromHex, bytesToHex, sha1Hex, sha1HexFromString } from '../905
 import { c as _$$c } from '../905/154079';
 import { permissionScopeHandler, zk } from '../905/189185';
 import { _6, dL, fg, M1, uw, y4, zA } from '../905/321541';
-import { bG, rw } from '../905/333600';
+import { AffineTransformSchema, SessionInfoSchema } from '../905/333600';
 import { Aw, LV, Mn, Ug } from '../905/340677';
 import { deepEqual } from '../905/382883';
 import { DI, JQ } from '../905/389786';
@@ -17,9 +17,9 @@ import { yX } from '../905/642476';
 import { id as _$$id, Bj, fW } from '../905/648693';
 import { iN as _$$iN, Hn, Kx, VS } from '../905/696699';
 import { getSingletonSceneGraph } from '../905/700578';
-import { nl as _$$nl, hA, U3 } from '../905/722575';
+import { normalizeBlendMode, denormalizeBlendMode, BlendModeSchema } from '../905/722575';
 import { k as _$$k } from '../905/749197';
-import { f as _$$f } from '../905/797463';
+import { transformZodSchema } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
 import { defaultSessionLocalIDString, sessionLocalIDToString, parseSessionLocalID } from '../905/871411';
 import { nodeProperties, getResolvedTypeName, textStyleProperties } from '../905/929949';
@@ -2979,11 +2979,11 @@ let eW = ei({
   }
 });
 let eq = _$$z.object({
-  blendMode: U3.optional()
+  blendMode: BlendModeSchema.optional()
 });
 function eY(e) {
   return {
-    blendMode: _$$nl(e.blendMode)
+    blendMode: normalizeBlendMode(e.blendMode)
   };
 }
 function eZ({
@@ -2992,7 +2992,7 @@ function eZ({
   if (void 0 !== e.blendMode) {
     return {
       props: {
-        blendMode: hA(e.blendMode)
+        blendMode: denormalizeBlendMode(e.blendMode)
       }
     };
   }
@@ -3065,7 +3065,7 @@ function tt(e, t) {
     type: 'SOLID',
     color: QW(i),
     opacity: 1,
-    blendMode: hA(e.blendMode)
+    blendMode: denormalizeBlendMode(e.blendMode)
   });
 }
 let ti = (e, t, i, n) => {
@@ -3090,7 +3090,7 @@ let ti = (e, t, i, n) => {
           return e9({
             type: 'solid',
             color: r ?? n,
-            blendMode: _$$nl(e.blendMode),
+            blendMode: normalizeBlendMode(e.blendMode),
             opacity: r ? void 0 : e.opacity
           });
         }
@@ -3107,7 +3107,7 @@ let ti = (e, t, i, n) => {
               } : null;
             }).filter(e => e !== null) ?? [],
             gradientHandlePositions: e.type === 'GRADIENT_LINEAR' ? getLinearGradientPoints(e.transform) : getRadialGradientPoints(e.transform),
-            blendMode: _$$nl(e.blendMode),
+            blendMode: normalizeBlendMode(e.blendMode),
             opacity: e.opacity
           });
         }
@@ -3137,7 +3137,7 @@ let ti = (e, t, i, n) => {
               imageRef: t.excludeImageData ? 'unknown' : bytesToHex(e.image.hash)
             };
           }
-          i.blendMode = _$$nl(e.blendMode);
+          i.blendMode = normalizeBlendMode(e.blendMode);
           i.opacity = e.opacity;
           i.rotation = e.rotation;
           e.paintFilter && (i.filters = {
@@ -3209,7 +3209,7 @@ let tn = ({
               paint: te({
                 type: 'SOLID',
                 colorVar: o,
-                blendMode: hA(e.blendMode)
+                blendMode: denormalizeBlendMode(e.blendMode)
               })
             } : {};
           }
@@ -3221,7 +3221,7 @@ let tn = ({
                 type: 'SOLID',
                 color: r,
                 opacity: t,
-                blendMode: hA(e.blendMode)
+                blendMode: denormalizeBlendMode(e.blendMode)
               })
             };
           }
@@ -3273,7 +3273,7 @@ let tn = ({
               stopsVar: r,
               stops: o,
               opacity: e.opacity,
-              blendMode: hA(e.blendMode)
+              blendMode: denormalizeBlendMode(e.blendMode)
             })
           };
         }
@@ -3296,7 +3296,7 @@ let tn = ({
               opacity: e.opacity,
               rotation: e.scaleMode != 'crop' ? e.rotation : void 0,
               scale: e.scaleMode == 'tile' ? e.scalingFactor : void 0,
-              blendMode: hA(e.blendMode),
+              blendMode: denormalizeBlendMode(e.blendMode),
               imageScaleMode: function (e) {
                 switch (e) {
                   case 'fill':
@@ -4026,7 +4026,7 @@ let tI = _$$z.object({
     y: _$$z.number().or(M1)
   }),
   blur: _$$z.number().or(M1),
-  blendMode: U3.optional(),
+  blendMode: BlendModeSchema.optional(),
   spread: _$$z.number().or(M1).optional(),
   visible: _$$z.boolean().optional(),
   showShadowBehindNode: _$$z.boolean().optional()
@@ -4039,7 +4039,7 @@ let tE = _$$z.object({
     y: _$$z.number().or(M1)
   }),
   blur: _$$z.number().or(M1),
-  blendMode: U3.optional(),
+  blendMode: BlendModeSchema.optional(),
   spread: _$$z.number().or(M1).optional(),
   visible: _$$z.boolean().optional()
 }).describe('@name(InnerShadowEffect)');
@@ -4050,7 +4050,7 @@ let tN = _$$z.object({
 }).describe('@name(BlurEffect)');
 let tv = _$$z.union([tI, tE, tN]);
 function tO(e, t, i) {
-  let n = _$$nl(e.blendMode);
+  let n = normalizeBlendMode(e.blendMode);
   n === 'normal' && (n = void 0);
   let r = t.includeVariables ? i.variableDataToJSXExpressionContainer(e.colorVar) : void 0;
   let o = t.includeVariables ? i.variableDataToJSXExpressionContainer(e.radiusVar) : void 0;
@@ -4123,7 +4123,7 @@ function tA(e, t, i) {
           x: Bj(e.offset.x) ? 0 : e.offset.x,
           y: Bj(e.offset.y) ? 0 : e.offset.y
         },
-        blendMode: hA(e.blendMode),
+        blendMode: denormalizeBlendMode(e.blendMode),
         visible: e.visible ?? !0,
         showShadowBehindNode: e.showShadowBehindNode ?? !1
       };
@@ -4150,7 +4150,7 @@ function tA(e, t, i) {
           x: Bj(e.offset.x) ? 0 : e.offset.x,
           y: Bj(e.offset.y) ? 0 : e.offset.y
         },
-        blendMode: hA(e.blendMode),
+        blendMode: denormalizeBlendMode(e.blendMode),
         visible: e.visible ?? !0
       };
       r ? n.colorVar = r : n.color = typeof e.color == 'string' ? QW(e.color) ?? {
@@ -4850,7 +4850,7 @@ let iR = ei({
 let ij = dL.describe('@name(TransformMatrix)');
 let iL = new Set();
 let iD = new Set();
-let iV = _$$f(fg, (e, t) => e === rw ? (iL.add(t.join('/')), _$$z.string()) : e === bG ? (iD.add(t.join('/')), ij) : e);
+let iV = transformZodSchema(fg, (e, t) => e === SessionInfoSchema ? (iL.add(t.join('/')), _$$z.string()) : e === AffineTransformSchema ? (iD.add(t.join('/')), ij) : e);
 function iM(e, t, i) {
   let [n, ...r] = t;
   return e && void 0 !== n && void 0 !== e[n] ? n === '*' ? Array.isArray(e) ? e.map(e => iM(e, r, i)) : e : r.length === 0 ? {

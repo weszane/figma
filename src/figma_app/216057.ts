@@ -12,7 +12,7 @@ import m from "lodash-es/mapValues";
 import f from "../vendor/149674";
 import { libraryVariableCollectionAtom, libraryVariableCollectionWithVarsAtom, variableByKeyResourceAtomFamily, variableCollectionByKeyResourceAtomFamily } from "../905/888985";
 import { createAtomFamily } from "../905/157003";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { logError } from "../905/714362";
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { hasLibraryKeyInSet, handleResourceQuery, variableByKeyQuery, variableCollectionByKeyQuery } from "../figma_app/255679";
@@ -363,7 +363,7 @@ let $$eu2 = (() => {
   return attachReducerWrapper(t, e.reducer);
 })();
 let $$ep23 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? null));
-let $$e_27 = atom(e => Object.keys(e($$eu2)).map(t => e($$ep23(t))).sort((e, t) => -Ez(e.sortPosition, t?.sortPosition)));
+let $$e_27 = atom(e => Object.keys(e($$eu2)).map(t => e($$ep23(t))).sort((e, t) => -compareNumbers(e.sortPosition, t?.sortPosition)));
 let $$eh6 = atom(e => p()(e($$e_27), e => e.variableSetId));
 let $$em11 = atom(e => p()(e($$ef21), e => e.variableSetId));
 let eg = atom(e => {

@@ -13,7 +13,7 @@ import { Fullscreen, PageSelectionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { useSelectedCooperFrameIds } from "../figma_app/396464";
-import { PU, aK } from "../figma_app/334505";
+import { TextImageEnum, useSelectedImageNodeGuids } from "../figma_app/334505";
 import { clearSelection } from "../figma_app/741237";
 import { KindEnum } from "../905/129884";
 import { I9 } from "../figma_app/151869";
@@ -100,11 +100,11 @@ function C({
   numMappedGuids: n
 }) {
   let s = t.filter(e => e.trim().length > 0);
-  return e === PU.TEXT ? jsx(E, {
+  return e === TextImageEnum.TEXT ? jsx(E, {
     data: s,
     blockEnabled: l,
     numMappedGuids: n
-  }) : e === PU.IMAGE ? jsx(I, {
+  }) : e === TextImageEnum.IMAGE ? jsx(I, {
     data: s,
     blockEnabled: l,
     numMappedGuids: n
@@ -160,10 +160,10 @@ export function $$R0({
   let S = function (e, t) {
     let l = $$L2(e);
     let o = useSelectedCooperFrameIds();
-    let s = aK(o);
+    let s = useSelectedImageNodeGuids(o);
     return useCallback(e => {
       if (!e) return !1;
-      for (let o of e) if (t(o.guid) || l === PU.TEXT && !("TEXT" === o.type || "TEXT_PATH" === o.type) || l === PU.IMAGE && !s.includes(o.guid)) return !1;
+      for (let o of e) if (t(o.guid) || l === TextImageEnum.TEXT && !("TEXT" === o.type || "TEXT_PATH" === o.type) || l === TextImageEnum.IMAGE && !s.includes(o.guid)) return !1;
       return !0;
     }, [l, s, t]);
   }(t, l);
@@ -199,7 +199,7 @@ export function $$R0({
         blockHovered: u,
         blockEnabled: h
       }), jsxs("div", {
-        ...Ay.props(A.content, u && d.size > 0 && T !== PU.IMAGE && A.contentWithUnbind),
+        ...Ay.props(A.content, u && d.size > 0 && T !== TextImageEnum.IMAGE && A.contentWithUnbind),
         children: [jsx("span", {
           ...Ay.props(A.titleBase, (h || N) && A.titleEnabled),
           children: e
@@ -358,7 +358,7 @@ let A = {
 };
 export function $$L2(e) {
   let t = e.find(e => e && e.trim());
-  return t && t.startsWith("data:image") ? PU.IMAGE : PU.TEXT;
+  return t && t.startsWith("data:image") ? TextImageEnum.IMAGE : TextImageEnum.TEXT;
 }
 function k({
   numMappedGuids: e,
@@ -382,7 +382,7 @@ function B({
 }) {
   let s = jsx(_$$a, {});
   let r = t > 0;
-  l && n ? s = jsx(J, {}) : 0 === t ? e === PU.TEXT ? s = jsx(_$$I, {}) : e === PU.IMAGE && (s = jsx(_$$_, {})) : s = 1 === t ? jsx(_$$l, {}) : jsx("div", {
+  l && n ? s = jsx(J, {}) : 0 === t ? e === TextImageEnum.TEXT ? s = jsx(_$$I, {}) : e === TextImageEnum.IMAGE && (s = jsx(_$$_, {})) : s = 1 === t ? jsx(_$$l, {}) : jsx("div", {
     className: "x78zum5 xlup9mm xilkfi8 x1cmmqis x19y5rnk xmkeg23 x1y0btm7 x1fa9rx7 x1akne3o",
     children: t > 10 ? "9+" : t
   });

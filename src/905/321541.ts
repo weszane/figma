@@ -1,194 +1,192 @@
-import { z as _$$z } from "../vendor/835909";
-import { U3 } from "../905/722575";
-import { Yj, bG, rw, TL, QV, $l, Ux } from "../905/333600";
-import { Xc, mg, Nx, Gx, M9, eT as _$$eT, i8, wj } from "../905/927405";
-import { f as _$$f } from "../905/797463";
-let o = _$$z.object({
-  size: _$$z.object({
-    x: Yj,
-    y: Yj
+import { z } from 'zod'
+import { AffineTransformSchema, ColorRGBASchema, PointSchema, RectangleSchema, SessionInfoSchema, VariableAliasSchema, VectorPairSchema } from '../905/333600'
+import { BlendModeSchema } from '../905/722575'
+import { transformZodSchema } from '../905/797463'
+import { AnimationTriggerType, BlendMode, EasingType, HorizontalAlign, ListStyleType, TextDecoration, TextScriptType, VerticalAlign } from '../905/927405'
+
+let o = z.object({
+  size: z.object({
+    x: VariableAliasSchema,
+    y: VariableAliasSchema,
   }).partial(),
-  individualStrokeWeights: _$$z.object({
-    BORDER_TOP_WEIGHT: Yj,
-    BORDER_RIGHT_WEIGHT: Yj,
-    BORDER_LEFT_WEIGHT: Yj,
-    BORDER_BOTTOM_WEIGHT: Yj
+  individualStrokeWeights: z.object({
+    BORDER_TOP_WEIGHT: VariableAliasSchema,
+    BORDER_RIGHT_WEIGHT: VariableAliasSchema,
+    BORDER_LEFT_WEIGHT: VariableAliasSchema,
+    BORDER_BOTTOM_WEIGHT: VariableAliasSchema,
   }).partial(),
-  characters: Yj,
-  itemSpacing: Yj,
-  paddingLeft: Yj,
-  paddingRight: Yj,
-  paddingTop: Yj,
-  paddingBottom: Yj,
-  visible: Yj,
-  rectangleCornerRadii: _$$z.object({
-    RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: Yj,
-    RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: Yj,
-    RECTANGLE_TOP_LEFT_CORNER_RADIUS: Yj,
-    RECTANGLE_TOP_RIGHT_CORNER_RADIUS: Yj
+  characters: VariableAliasSchema,
+  itemSpacing: VariableAliasSchema,
+  paddingLeft: VariableAliasSchema,
+  paddingRight: VariableAliasSchema,
+  paddingTop: VariableAliasSchema,
+  paddingBottom: VariableAliasSchema,
+  visible: VariableAliasSchema,
+  rectangleCornerRadii: z.object({
+    RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: VariableAliasSchema,
+    RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: VariableAliasSchema,
+    RECTANGLE_TOP_LEFT_CORNER_RADIUS: VariableAliasSchema,
+    RECTANGLE_TOP_RIGHT_CORNER_RADIUS: VariableAliasSchema,
   }).partial(),
-  topLeftRadius: Yj,
-  topRightRadius: Yj,
-  bottomLeftRadius: Yj,
-  bottomRightRadius: Yj,
-  minWidth: Yj,
-  maxWidth: Yj,
-  minHeight: Yj,
-  maxHeight: Yj,
-  counterAxisSpacing: Yj,
-  opacity: Yj,
-  fontFamily: _$$z.array(Yj),
-  fontSize: _$$z.array(Yj),
-  fontStyle: _$$z.array(Yj),
-  fontWeight: _$$z.array(Yj),
-  letterSpacing: _$$z.array(Yj),
-  lineHeight: _$$z.array(Yj),
-  paragraphSpacing: _$$z.array(Yj),
-  paragraphIndent: _$$z.array(Yj),
-  fills: _$$z.array(Yj),
-  strokes: _$$z.array(Yj),
-  componentProperties: _$$z.record(Yj),
-  textRangeFills: _$$z.array(Yj),
-  effects: _$$z.array(Yj),
-  layoutGrids: _$$z.array(Yj)
-}).partial().optional();
-let l = _$$z.object({
-  accessibleHTMLTag: _$$z.string().optional(),
-  accessibleLabel: _$$z.string().optional(),
-  ariaAttributes: _$$z.object({
-    ariaHidden: _$$z.boolean().optional(),
-    ariaRole: _$$z.string().optional(),
-    ariaCurrent: _$$z.string().optional()
+  topLeftRadius: VariableAliasSchema,
+  topRightRadius: VariableAliasSchema,
+  bottomLeftRadius: VariableAliasSchema,
+  bottomRightRadius: VariableAliasSchema,
+  minWidth: VariableAliasSchema,
+  maxWidth: VariableAliasSchema,
+  minHeight: VariableAliasSchema,
+  maxHeight: VariableAliasSchema,
+  counterAxisSpacing: VariableAliasSchema,
+  opacity: VariableAliasSchema,
+  fontFamily: z.array(VariableAliasSchema),
+  fontSize: z.array(VariableAliasSchema),
+  fontStyle: z.array(VariableAliasSchema),
+  fontWeight: z.array(VariableAliasSchema),
+  letterSpacing: z.array(VariableAliasSchema),
+  lineHeight: z.array(VariableAliasSchema),
+  paragraphSpacing: z.array(VariableAliasSchema),
+  paragraphIndent: z.array(VariableAliasSchema),
+  fills: z.array(VariableAliasSchema),
+  strokes: z.array(VariableAliasSchema),
+  componentProperties: z.record(VariableAliasSchema),
+  textRangeFills: z.array(VariableAliasSchema),
+  effects: z.array(VariableAliasSchema),
+  layoutGrids: z.array(VariableAliasSchema),
+}).partial().optional()
+let l = z.object({
+  accessibleHTMLTag: z.string().optional(),
+  accessibleLabel: z.string().optional(),
+  ariaAttributes: z.object({
+    ariaHidden: z.boolean().optional(),
+    ariaRole: z.string().optional(),
+    ariaCurrent: z.string().optional(),
   }).optional(),
-  isDecorativeImage: _$$z.boolean().optional()
-});
-let d = _$$z.nativeEnum(Xc);
-let c = _$$z.object({
-  easingType: _$$z.nativeEnum(mg),
-  easingFunction: _$$z.array(_$$z.number()).length(4),
-  transitionDuration: _$$z.number(),
-  delay: _$$z.number()
-});
-let u = _$$z.object({
-  opacity: _$$z.number(),
-  transform: bG
-});
-let p = _$$z.enum(["PAGE_LOAD", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW", "SCROLL_DIRECTION"]);
-let m = _$$z.enum(["PAGE_HEIGHT", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW"]);
-let h = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Appear),
+  isDecorativeImage: z.boolean().optional(),
+})
+let d = z.nativeEnum(AnimationTriggerType)
+let c = z.object({
+  easingType: z.nativeEnum(EasingType),
+  easingFunction: z.array(z.number()).length(4),
+  transitionDuration: z.number(),
+  delay: z.number(),
+})
+let u = z.object({
+  opacity: z.number(),
+  transform: AffineTransformSchema,
+})
+let p = z.enum(['PAGE_LOAD', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW', 'SCROLL_DIRECTION'])
+let m = z.enum(['PAGE_HEIGHT', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW'])
+let h = z.object({
+  behaviorType: z.literal(d.enum.Appear),
   trigger: p,
   enterTransition: c,
-  enterState: u
-});
-let g = _$$z.object({
+  enterState: u,
+})
+let g = z.object({
   ...h.shape,
   exitTransition: c,
-  exitState: u
-});
-let f = _$$z.object({
+  exitState: u,
+})
+let f = z.object({
   ...h.shape,
-  trigger: _$$z.literal(p.enum.PAGE_LOAD)
-});
-let _ = _$$z.object({
+  trigger: z.literal(p.enum.PAGE_LOAD),
+})
+let _ = z.object({
   ...g.shape,
-  trigger: _$$z.literal(p.enum.THIS_LAYER_IN_VIEW),
-  playsOnce: _$$z.boolean()
-});
-let A = _$$z.object({
+  trigger: z.literal(p.enum.THIS_LAYER_IN_VIEW),
+  playsOnce: z.boolean(),
+})
+let A = z.object({
   ...g.shape,
-  trigger: _$$z.literal(p.enum.OTHER_LAYER_IN_VIEW),
-  otherLayer: rw,
-  playsOnce: _$$z.boolean()
-});
-let y = _$$z.object({
+  trigger: z.literal(p.enum.OTHER_LAYER_IN_VIEW),
+  otherLayer: SessionInfoSchema,
+  playsOnce: z.boolean(),
+})
+let y = z.object({
   ...h.shape,
-  trigger: _$$z.literal(p.enum.SCROLL_DIRECTION),
-  playsOnce: _$$z.boolean()
-});
-let b = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Hover),
+  trigger: z.literal(p.enum.SCROLL_DIRECTION),
+  playsOnce: z.boolean(),
+})
+let b = z.object({
+  behaviorType: z.literal(d.enum.Hover),
   transition: c,
-  state: u
-});
-let v = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Press),
+  state: u,
+})
+let v = z.object({
+  behaviorType: z.literal(d.enum.Press),
   transition: c,
-  state: u
-});
-let I = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Focus),
+  state: u,
+})
+let I = z.object({
+  behaviorType: z.literal(d.enum.Focus),
   transition: c,
-  state: u
-});
-let E = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.ScrollParallax),
-  speed: _$$z.number()
-});
-let x = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.ScrollTransform),
+  state: u,
+})
+let E = z.object({
+  behaviorType: z.literal(d.enum.ScrollParallax),
+  speed: z.number(),
+})
+let x = z.object({
+  behaviorType: z.literal(d.enum.ScrollTransform),
   fromState: u,
   toState: u,
-  transition: c
-});
-let S = _$$z.object({
+  transition: c,
+})
+let S = z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.enum.PAGE_HEIGHT)
-});
-let w = _$$z.object({
+  trigger: z.literal(m.enum.PAGE_HEIGHT),
+})
+let w = z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.enum.THIS_LAYER_IN_VIEW),
-  playsOnce: _$$z.boolean()
-});
-let C = _$$z.object({
+  trigger: z.literal(m.enum.THIS_LAYER_IN_VIEW),
+  playsOnce: z.boolean(),
+})
+let C = z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.enum.OTHER_LAYER_IN_VIEW),
-  otherLayer: rw,
-  playsOnce: _$$z.boolean()
-});
-let T = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Cursor),
-  hotspotX: _$$z.number(),
-  hotspotY: _$$z.number(),
-  cursorGuid: rw,
-  cursorFileName: _$$z.string().optional()
-});
-let k = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Marquee),
-  direction: _$$z.enum(["LEFT", "RIGHT", "UP", "DOWN"]),
-  speed: _$$z.number(),
-  shouldLoopInfinitely: _$$z.boolean()
-});
-let R = _$$z.object({
-  image: _$$z.string().nullable(),
-  imageThumbnail: _$$z.string().nullable(),
-  animatedImage: _$$z.string().nullable(),
-  altText: _$$z.string(),
-  originalImageHeight: _$$z.number(),
-  originalImageWidth: _$$z.number(),
-  animationFrame: _$$z.number()
-});
-_$$z.object({
-  src: _$$z.string(),
-  alt: _$$z.string().optional(),
-  height: _$$z.number().optional(),
-  width: _$$z.number().optional()
-});
-let N = _$$z.object({
-  behaviorType: _$$z.literal(d.enum.Code),
-  codeComponentId: _$$z.string(),
-  assignments: _$$z.record(_$$z.string(), _$$z.union([_$$z.string(), _$$z.boolean(), _$$z.number(), R])),
-  codeBehaviorData: _$$z.object({
-    category: _$$z.string().optional(),
-    nodeTypes: _$$z.array(_$$z.string()).optional()
-  })
-});
-let P = f.merge(_).merge(A).merge(y);
-let O = S.merge(w).merge(C);
-let D = _$$z.discriminatedUnion("trigger", [f, _, A, y]);
-let L = _$$z.discriminatedUnion("trigger", [S, w, C]);
-_$$z.discriminatedUnion("behaviorType", [P, b, v, I, E, O, T, k, N]);
-let F = _$$z.object({
+  trigger: z.literal(m.enum.OTHER_LAYER_IN_VIEW),
+  otherLayer: SessionInfoSchema,
+  playsOnce: z.boolean(),
+})
+let T = z.object({
+  behaviorType: z.literal(d.enum.Cursor),
+  hotspotX: z.number(),
+  hotspotY: z.number(),
+  cursorGuid: SessionInfoSchema,
+  cursorFileName: z.string().optional(),
+})
+let k = z.object({
+  behaviorType: z.literal(d.enum.Marquee),
+  direction: z.enum(['LEFT', 'RIGHT', 'UP', 'DOWN']),
+  speed: z.number(),
+  shouldLoopInfinitely: z.boolean(),
+})
+let R = z.object({
+  image: z.string().nullable(),
+  imageThumbnail: z.string().nullable(),
+  animatedImage: z.string().nullable(),
+  altText: z.string(),
+  originalImageHeight: z.number(),
+  originalImageWidth: z.number(),
+  animationFrame: z.number(),
+})
+z.object({
+  src: z.string(),
+  alt: z.string().optional(),
+  height: z.number().optional(),
+  width: z.number().optional(),
+})
+let N = z.object({
+  behaviorType: z.literal(d.enum.Code),
+  codeComponentId: z.string(),
+  assignments: z.record(z.string(), z.union([z.string(), z.boolean(), z.number(), R])),
+  codeBehaviorData: z.object({
+    category: z.string().optional(),
+    nodeTypes: z.array(z.string()).optional(),
+  }),
+})
+let D = z.discriminatedUnion('trigger', [f, _, A, y])
+let L = z.discriminatedUnion('trigger', [S, w, C])
+let F = z.object({
   appear: D,
   hover: b,
   press: v,
@@ -197,382 +195,364 @@ let F = _$$z.object({
   scrollTransform: L,
   cursor: T,
   marquee: k,
-  code: _$$z.array(N)
-}).partial().nullable();
-let M = _$$z.object({
-  behaviors: F
-}).partial();
-let j = _$$z.object({
-  id: _$$z.string(),
-  name: _$$z.string(),
-  type: _$$z.string(),
-  overrideKey: _$$z.string().optional(),
-  visible: _$$z.boolean().optional(),
-  locked: _$$z.boolean().optional(),
-  isFixed: _$$z.boolean().optional(),
-  scrollBehavior: _$$z.enum(["SCROLLS", "FIXED", "STICKY_SCROLLS"]).optional(),
-  componentPropertyReferences: _$$z.record(_$$z.string()).optional(),
+  code: z.array(N),
+}).partial().nullable()
+let M = z.object({
+  behaviors: F,
+}).partial()
+let j = z.object({
+  id: z.string(),
+  name: z.string(),
+  type: z.string(),
+  overrideKey: z.string().optional(),
+  visible: z.boolean().optional(),
+  locked: z.boolean().optional(),
+  isFixed: z.boolean().optional(),
+  scrollBehavior: z.enum(['SCROLLS', 'FIXED', 'STICKY_SCROLLS']).optional(),
+  componentPropertyReferences: z.record(z.string()).optional(),
   boundVariables: o,
-  explicitVariableModes: _$$z.record(_$$z.string()).optional(),
-  ...l.shape
-});
-let U = _$$z.nativeEnum(Nx);
-let B = _$$z.object({
+  explicitVariableModes: z.record(z.string()).optional(),
+  ...l.shape,
+})
+let U = z.nativeEnum(BlendMode)
+let B = z.object({
   blendMode: U.optional(),
-  opacity: _$$z.number().gte(0).lte(1).optional()
-});
-let V = _$$z.object({
-  children: _$$z.array(_$$z.string())
-});
-let G = _$$z.object({
-  vertical: _$$z.nativeEnum(Gx),
-  horizontal: _$$z.nativeEnum(M9)
-});
-let z = _$$z.object({
-  pixelOffset: _$$z.number(),
-  sizeFraction: _$$z.number()
-}).optional();
-let H = _$$z.object({
-  absoluteBoundingBox: TL,
-  isolatedAbsoluteRenderBounds: _$$z.union([TL, _$$z.$$null()]).optional(),
+  opacity: z.number().gte(0).lte(1).optional(),
+})
+let V = z.object({
+  children: z.array(z.string()),
+})
+let G = z.object({
+  vertical: z.nativeEnum(VerticalAlign),
+  horizontal: z.nativeEnum(HorizontalAlign),
+})
+let zkkk = z.object({
+  pixelOffset: z.number(),
+  sizeFraction: z.number(),
+}).optional()
+let H = z.object({
+  absoluteBoundingBox: RectangleSchema,
+  isolatedAbsoluteRenderBounds: z.union([RectangleSchema, z.null()]).optional(),
   constraints: G.optional(),
-  relativeTransform: QV,
-  size: $l,
-  layoutAlign: _$$z.enum(["INHERIT", "STRETCH", "MIN", "CENTER", "MAX"]).optional(),
-  layoutGrow: _$$z.number().optional(),
-  layoutPositioning: _$$z.enum(["AUTO", "ABSOLUTE"]).optional(),
-  gridColumnAnchorIndex: _$$z.number().optional(),
-  gridRowAnchorIndex: _$$z.number().optional(),
-  gridColumnSpan: _$$z.number().optional(),
-  gridRowSpan: _$$z.number().optional(),
-  gridChildHorizontalAlign: _$$z.enum(["MIN", "CENTER", "MAX"]).optional(),
-  gridChildVerticalAlign: _$$z.enum(["MIN", "CENTER", "MAX"]).optional(),
-  minWidth: _$$z.number().optional().nullable(),
-  maxWidth: _$$z.number().optional().nullable(),
-  minHeight: _$$z.number().optional().nullable(),
-  maxHeight: _$$z.number().optional().nullable(),
-  layoutSizingHorizontal: _$$z.enum(["FIXED", "HUG", "FILL"]).optional(),
-  layoutSizingVertical: _$$z.enum(["FIXED", "HUG", "FILL"]).optional(),
-  targetAspectRatio: $l.optional(),
-  constraintValues: _$$z.object({
-    top: z,
-    right: z,
-    left: z,
-    bottom: z
-  }).optional()
-});
-let W = _$$z.object({
-  visible: _$$z.boolean(),
-  opacity: _$$z.number().gte(0).lte(1),
-  blendMode: U
-});
-let K = _$$z.object({
-  ...W.shape,
-  type: _$$z.literal("SOLID"),
-  color: Ux,
-  boundVariables: _$$z.object({
-    color: Yj,
-    variableName: _$$z.string(),
-    codeSyntax: _$$z.record(_$$z.string(), _$$z.string())
-  }).partial().optional()
-});
-let Y = _$$z.object({
-  position: _$$z.number(),
-  color: Ux,
-  boundVariables: _$$z.object({
-    color: Yj
-  }).partial().optional()
-});
-let q = _$$z.object({
-  ...W.shape,
-  type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
-  transform: QV,
-  gradientStops: _$$z.array(Y)
-});
-let $ = _$$z.object({
-  exposure: _$$z.number().optional(),
-  contrast: _$$z.number().optional(),
-  saturation: _$$z.number().optional(),
-  temperature: _$$z.number().optional(),
-  tint: _$$z.number().optional(),
-  highlights: _$$z.number().optional(),
-  shadows: _$$z.number().optional()
-}).partial();
-let Z = _$$z.object({
-  ...W.shape,
-  type: _$$z.literal("IMAGE"),
-  scaleMode: _$$z.enum(["FILL", "FIT", "TILE", "STRETCH"]),
-  imageRef: _$$z.string(),
-  imageTransform: QV.optional(),
-  scalingFactor: _$$z.number().optional(),
-  filters: $.optional(),
-  rotation: _$$z.number(),
-  gifRef: _$$z.string().optional()
-});
-let X = _$$z.object({
-  ...W.shape,
-  type: _$$z.literal("VIDEO"),
-  autoplay: _$$z.boolean().optional(),
-  mediaLoop: _$$z.boolean().optional(),
-  muted: _$$z.boolean().optional(),
-  showControls: _$$z.boolean().optional(),
-  videoRef: _$$z.string(),
-  imageTransform: QV.optional(),
-  scalingFactor: _$$z.number().optional(),
-  scaleMode: _$$z.enum(["FILL", "FIT", "TILE", "STRETCH"])
-});
-let Q = _$$z.object({
-  ...W.shape,
-  type: _$$z.literal("PATTERN")
-});
-let J = _$$z.discriminatedUnion("type", [K, q, Z, X, Q]);
-let ee = _$$z.object({
-  fills: _$$z.array(J)
-}).partial();
-let et = _$$z.object({
-  strokes: _$$z.array(J),
-  strokeWeight: _$$z.number(),
-  strokeAlign: _$$z.enum(["INSIDE", "OUTSIDE", "CENTER"]),
-  strokeDashes: _$$z.array(_$$z.number())
-}).partial();
-let ei = _$$z.object({
-  ...ee.shape,
-  ...et.shape
-});
-let en = _$$z.object({
-  color: Ux,
+  relativeTransform: VectorPairSchema,
+  size: PointSchema,
+  layoutAlign: z.enum(['INHERIT', 'STRETCH', 'MIN', 'CENTER', 'MAX']).optional(),
+  layoutGrow: z.number().optional(),
+  layoutPositioning: z.enum(['AUTO', 'ABSOLUTE']).optional(),
+  gridColumnAnchorIndex: z.number().optional(),
+  gridRowAnchorIndex: z.number().optional(),
+  gridColumnSpan: z.number().optional(),
+  gridRowSpan: z.number().optional(),
+  gridChildHorizontalAlign: z.enum(['MIN', 'CENTER', 'MAX']).optional(),
+  gridChildVerticalAlign: z.enum(['MIN', 'CENTER', 'MAX']).optional(),
+  minWidth: z.number().optional().nullable(),
+  maxWidth: z.number().optional().nullable(),
+  minHeight: z.number().optional().nullable(),
+  maxHeight: z.number().optional().nullable(),
+  layoutSizingHorizontal: z.enum(['FIXED', 'HUG', 'FILL']).optional(),
+  layoutSizingVertical: z.enum(['FIXED', 'HUG', 'FILL']).optional(),
+  targetAspectRatio: PointSchema.optional(),
+  constraintValues: z.object({
+    top: zkkk,
+    right: zkkk,
+    left: zkkk,
+    bottom: zkkk,
+  }).optional(),
+})
+let W = z.object({
+  visible: z.boolean(),
+  opacity: z.number().gte(0).lte(1),
   blendMode: U,
-  offset: $l,
-  radius: _$$z.number().gte(0),
-  spread: _$$z.number(),
-  visible: _$$z.boolean(),
-  boundVariables: _$$z.object({
-    radius: Yj,
-    spread: Yj,
-    color: Yj,
-    offsetX: Yj,
-    offsetY: Yj
-  }).partial().optional()
-});
-let er = _$$z.object({
-  ...en.shape,
-  type: _$$z.literal("DROP_SHADOW")
-});
-let ea = _$$z.object({
-  ...en.shape,
-  type: _$$z.literal("INNER_SHADOW")
-});
-_$$z.union([er, ea]);
-let es = _$$z.object({
-  type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
-  radius: _$$z.number().gte(0),
-  boundVariables: _$$z.object({
-    radius: Yj
+})
+let K = z.object({
+  ...W.shape,
+  type: z.literal('SOLID'),
+  color: ColorRGBASchema,
+  boundVariables: z.object({
+    color: VariableAliasSchema,
+    variableName: z.string(),
+    codeSyntax: z.record(z.string(), z.string()),
   }).partial().optional(),
-  visible: _$$z.boolean()
-});
-let eo = _$$z.object({
-  type: _$$z.literal("NOISE")
-});
-let el = _$$z.object({
-  type: _$$z.literal("TEXTURE")
-});
-let ed = _$$z.object({
-  type: _$$z.enum(["REPEAT", "SYMMETRY", "GLASS"])
-});
-let ec = _$$z.discriminatedUnion("type", [er, ea, es, eo, el, ed]);
-let eu = _$$z.object({
-  effects: _$$z.array(ec).optional()
-});
-let ep = _$$z.object({
-  isMask: _$$z.boolean(),
-  maskType: _$$z.enum(["ALPHA", "VECTOR", "LUMINANCE"])
-}).partial();
-let em = _$$z.object({
-  isBreakpointFrame: _$$z.boolean()
-}).partial();
-_$$z.object({
-  guid: rw.optional(),
-  url: _$$z.string().optional(),
-  openInNewTab: _$$z.boolean().optional()
-});
-_$$z.object({
-  altText: _$$z.string(),
-  image: _$$z.string()
-});
-let eh = _$$z.object({
-  fieldSchemaId: _$$z.string()
-});
-let eg = _$$z.object({
+})
+let Y = z.object({
+  position: z.number(),
+  color: ColorRGBASchema,
+  boundVariables: z.object({
+    color: VariableAliasSchema,
+  }).partial().optional(),
+})
+let q = z.object({
+  ...W.shape,
+  type: z.enum(['GRADIENT_LINEAR', 'GRADIENT_RADIAL', 'GRADIENT_ANGULAR', 'GRADIENT_DIAMOND']),
+  transform: VectorPairSchema,
+  gradientStops: z.array(Y),
+})
+let $ = z.object({
+  exposure: z.number().optional(),
+  contrast: z.number().optional(),
+  saturation: z.number().optional(),
+  temperature: z.number().optional(),
+  tint: z.number().optional(),
+  highlights: z.number().optional(),
+  shadows: z.number().optional(),
+}).partial()
+let Z = z.object({
+  ...W.shape,
+  type: z.literal('IMAGE'),
+  scaleMode: z.enum(['FILL', 'FIT', 'TILE', 'STRETCH']),
+  imageRef: z.string(),
+  imageTransform: VectorPairSchema.optional(),
+  scalingFactor: z.number().optional(),
+  filters: $.optional(),
+  rotation: z.number(),
+  gifRef: z.string().optional(),
+})
+let X = z.object({
+  ...W.shape,
+  type: z.literal('VIDEO'),
+  autoplay: z.boolean().optional(),
+  mediaLoop: z.boolean().optional(),
+  muted: z.boolean().optional(),
+  showControls: z.boolean().optional(),
+  videoRef: z.string(),
+  imageTransform: VectorPairSchema.optional(),
+  scalingFactor: z.number().optional(),
+  scaleMode: z.enum(['FILL', 'FIT', 'TILE', 'STRETCH']),
+})
+let Q = z.object({
+  ...W.shape,
+  type: z.literal('PATTERN'),
+})
+let J = z.discriminatedUnion('type', [K, q, Z, X, Q])
+let ee = z.object({
+  fills: z.array(J),
+}).partial()
+let et = z.object({
+  strokes: z.array(J),
+  strokeWeight: z.number(),
+  strokeAlign: z.enum(['INSIDE', 'OUTSIDE', 'CENTER']),
+  strokeDashes: z.array(z.number()),
+}).partial()
+let ei = z.object({
+  ...ee.shape,
+  ...et.shape,
+})
+let en = z.object({
+  color: ColorRGBASchema,
+  blendMode: U,
+  offset: PointSchema,
+  radius: z.number().gte(0),
+  spread: z.number(),
+  visible: z.boolean(),
+  boundVariables: z.object({
+    radius: VariableAliasSchema,
+    spread: VariableAliasSchema,
+    color: VariableAliasSchema,
+    offsetX: VariableAliasSchema,
+    offsetY: VariableAliasSchema,
+  }).partial().optional(),
+})
+let er = z.object({
+  ...en.shape,
+  type: z.literal('DROP_SHADOW'),
+})
+let ea = z.object({
+  ...en.shape,
+  type: z.literal('INNER_SHADOW'),
+})
+
+let es = z.object({
+  type: z.enum(['LAYER_BLUR', 'BACKGROUND_BLUR']),
+  radius: z.number().gte(0),
+  boundVariables: z.object({
+    radius: VariableAliasSchema,
+  }).partial().optional(),
+  visible: z.boolean(),
+})
+let eo = z.object({
+  type: z.literal('NOISE'),
+})
+let el = z.object({
+  type: z.literal('TEXTURE'),
+})
+let ed = z.object({
+  type: z.enum(['REPEAT', 'SYMMETRY', 'GLASS']),
+})
+let ec = z.discriminatedUnion('type', [er, ea, es, eo, el, ed])
+let eu = z.object({
+  effects: z.array(ec).optional(),
+})
+let ep = z.object({
+  isMask: z.boolean(),
+  maskType: z.enum(['ALPHA', 'VECTOR', 'LUMINANCE']),
+}).partial()
+let em = z.object({
+  isBreakpointFrame: z.boolean(),
+}).partial()
+z.object({
+  guid: SessionInfoSchema.optional(),
+  url: z.string().optional(),
+  openInNewTab: z.boolean().optional(),
+})
+z.object({
+  altText: z.string(),
+  image: z.string(),
+})
+let eh = z.object({
+  fieldSchemaId: z.string(),
+})
+let eg = z.object({
   characters: eh,
   hyperlink: eh,
   image: eh,
   richText: eh,
-  date: eh
-}).partial();
-let ef = _$$z.object({
-  fillIndex: _$$z.number(),
-  boundVariables: eg
-});
-let e_ = _$$z.object({
-  collectionId: _$$z.string(),
-  itemId: _$$z.string(),
+  date: eh,
+}).partial()
+let ef = z.object({
+  fillIndex: z.number(),
+  boundVariables: eg,
+})
+let e_ = z.object({
+  collectionId: z.string(),
+  itemId: z.string(),
   boundCmsVariables: eg.optional(),
-  styleOverrideTableBoundCmsVariables: _$$z.record(_$$z.string(), eg).optional(),
-  interactionsBoundCmsVariables: _$$z.array(eg).optional(),
-  fillPaintsBoundCmsVariables: _$$z.array(ef).optional()
-});
-let eA = _$$z.object({
-  cmsItemFieldBindingProperties: e_.optional()
-});
-let ey = _$$z.object({
-  collectionId: _$$z.string().optional(),
-  itemId: _$$z.string().optional(),
-  fieldSchemaId: _$$z.string().optional()
-});
-let eb = _$$z.enum(["ON_CLICK", "AFTER_TIMEOUT", "MOUSE_IN", "MOUSE_OUT", "ON_HOVER", "MOUSE_DOWN", "MOUSE_UP", "ON_PRESS", "NONE", "DRAG", "ON_KEY_DOWN", "ON_VOICE", "ON_MEDIA_HIT", "ON_MEDIA_END", "MOUSE_ENTER", "MOUSE_LEAVE"]);
-let ev = _$$z.enum(["INSTANT_TRANSITION", "DISSOLVE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM", "PUSH_FROM_LEFT", "PUSH_FROM_RIGHT", "PUSH_FROM_TOP", "PUSH_FROM_BOTTOM", "MOVE_FROM_LEFT", "MOVE_FROM_RIGHT", "MOVE_FROM_TOP", "MOVE_FROM_BOTTOM", "SLIDE_OUT_TO_LEFT", "SLIDE_OUT_TO_RIGHT", "SLIDE_OUT_TO_TOP", "SLIDE_OUT_TO_BOTTOM", "MOVE_OUT_TO_LEFT", "MOVE_OUT_TO_RIGHT", "MOVE_OUT_TO_TOP", "MOVE_OUT_TO_BOTTOM", "SMART_ANIMATE", "SCROLL_ANIMATE"]);
-let eI = _$$z.enum(["NONE", "INTERNAL_NODE", "URL", "BACK", "CLOSE", "SET_VARIABLE", "UPDATE_MEDIA_RUNTIME", "CONDITIONAL", "SET_VARIABLE_MODE", "OBJECT_ANIMATION"]);
-let eE = _$$z.enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO", "OPEN_OVERLAY", "CLOSE_OVERLAY", "SWAP_STATE"]);
-let ex = _$$z.enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE", "SKIP_FORWARD", "SKIP_BACKWARD", "SKIP_TO"]);
-let eS = _$$z.enum(["NONE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM"]);
-let ew = _$$z.enum(["IN", "OUT"]);
-let eC = _$$z.enum(["KEYBOARD", "UNKNOWN_CONTROLLER", "XBOX_ONE", "PS4", "SWITCH_PRO"]);
-let eT = _$$z.object({
+  styleOverrideTableBoundCmsVariables: z.record(z.string(), eg).optional(),
+  interactionsBoundCmsVariables: z.array(eg).optional(),
+  fillPaintsBoundCmsVariables: z.array(ef).optional(),
+})
+let eA = z.object({
+  cmsItemFieldBindingProperties: e_.optional(),
+})
+let ey = z.object({
+  collectionId: z.string().optional(),
+  itemId: z.string().optional(),
+  fieldSchemaId: z.string().optional(),
+})
+let eb = z.enum(['ON_CLICK', 'AFTER_TIMEOUT', 'MOUSE_IN', 'MOUSE_OUT', 'ON_HOVER', 'MOUSE_DOWN', 'MOUSE_UP', 'ON_PRESS', 'NONE', 'DRAG', 'ON_KEY_DOWN', 'ON_VOICE', 'ON_MEDIA_HIT', 'ON_MEDIA_END', 'MOUSE_ENTER', 'MOUSE_LEAVE'])
+let ev = z.enum(['INSTANT_TRANSITION', 'DISSOLVE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM', 'PUSH_FROM_LEFT', 'PUSH_FROM_RIGHT', 'PUSH_FROM_TOP', 'PUSH_FROM_BOTTOM', 'MOVE_FROM_LEFT', 'MOVE_FROM_RIGHT', 'MOVE_FROM_TOP', 'MOVE_FROM_BOTTOM', 'SLIDE_OUT_TO_LEFT', 'SLIDE_OUT_TO_RIGHT', 'SLIDE_OUT_TO_TOP', 'SLIDE_OUT_TO_BOTTOM', 'MOVE_OUT_TO_LEFT', 'MOVE_OUT_TO_RIGHT', 'MOVE_OUT_TO_TOP', 'MOVE_OUT_TO_BOTTOM', 'SMART_ANIMATE', 'SCROLL_ANIMATE'])
+let eI = z.enum(['NONE', 'INTERNAL_NODE', 'URL', 'BACK', 'CLOSE', 'SET_VARIABLE', 'UPDATE_MEDIA_RUNTIME', 'CONDITIONAL', 'SET_VARIABLE_MODE', 'OBJECT_ANIMATION'])
+let eE = z.enum(['NAVIGATE', 'SWAP', 'OVERLAY', 'SCROLL_TO', 'CHANGE_TO', 'OPEN_OVERLAY', 'CLOSE_OVERLAY', 'SWAP_STATE'])
+let ex = z.enum(['PLAY', 'PAUSE', 'TOGGLE_PLAY_PAUSE', 'MUTE', 'UNMUTE', 'TOGGLE_MUTE_UNMUTE', 'SKIP_FORWARD', 'SKIP_BACKWARD', 'SKIP_TO'])
+let eS = z.enum(['NONE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM'])
+let ew = z.enum(['IN', 'OUT'])
+let eC = z.enum(['KEYBOARD', 'UNKNOWN_CONTROLLER', 'XBOX_ONE', 'PS4', 'SWITCH_PRO'])
+let eT = z.object({
   triggerDevice: eC,
-  keyCodes: _$$z.array(_$$z.number())
-});
-let ek = _$$z.object({
+  keyCodes: z.array(z.number()),
+})
+let ek = z.object({
   interactionType: eb,
-  interactionMaintained: _$$z.boolean().optional(),
-  interactionDuration: _$$z.number().optional(),
+  interactionMaintained: z.boolean().optional(),
+  interactionDuration: z.number().optional(),
   keyTrigger: eT.optional(),
-  voiceEventPhrase: _$$z.string().optional(),
-  transitionTimeout: _$$z.number().optional(),
-  mediaHitTime: _$$z.number().optional()
-});
-let eR = _$$z.object({
-  opacity: _$$z.number().optional(),
-  transform: bG.optional()
-});
-let eN = _$$z.object({
-  id: _$$z.string().optional(),
-  nodeFieldAlias: _$$z.any().optional()
-});
-let eP = _$$z.object({
-  actions: _$$z.unknown().array().optional(),
-  condition: _$$z.any().optional()
-});
-let eO = _$$z.object({
-  transitionNodeID: rw.optional(),
+  voiceEventPhrase: z.string().optional(),
+  transitionTimeout: z.number().optional(),
+  mediaHitTime: z.number().optional(),
+})
+let eR = z.object({
+  opacity: z.number().optional(),
+  transform: AffineTransformSchema.optional(),
+})
+let eN = z.object({
+  id: z.string().optional(),
+  nodeFieldAlias: z.any().optional(),
+})
+let eP = z.object({
+  actions: z.unknown().array().optional(),
+  condition: z.any().optional(),
+})
+let eO = z.object({
+  transitionNodeID: SessionInfoSchema.optional(),
   transitionType: ev.optional(),
-  transitionDuration: _$$z.number().optional(),
-  easingType: _$$z.nativeEnum(mg).optional(),
-  transitionShouldSmartAnimate: _$$z.boolean().optional(),
+  transitionDuration: z.number().optional(),
+  easingType: z.nativeEnum(EasingType).optional(),
+  transitionShouldSmartAnimate: z.boolean().optional(),
   connectionType: eI.optional(),
-  overlayRelativePosition: $l.optional(),
+  overlayRelativePosition: PointSchema.optional(),
   navigationType: eE.optional(),
-  transitionPreserveScroll: _$$z.boolean().optional(),
-  easingFunction: _$$z.array(_$$z.number()).length(4).optional(),
-  extraScrollOffset: $l.optional(),
-  transitionResetScrollPosition: _$$z.boolean().optional(),
-  transitionResetInteractiveComponents: _$$z.boolean().optional(),
-  connectionURL: _$$z.string().optional(),
-  openUrlInNewTab: _$$z.boolean().optional(),
-  linkParam: _$$z.any().optional(),
+  transitionPreserveScroll: z.boolean().optional(),
+  easingFunction: z.array(z.number()).length(4).optional(),
+  extraScrollOffset: PointSchema.optional(),
+  transitionResetScrollPosition: z.boolean().optional(),
+  transitionResetInteractiveComponents: z.boolean().optional(),
+  connectionURL: z.string().optional(),
+  openUrlInNewTab: z.boolean().optional(),
+  linkParam: z.any().optional(),
   cmsTarget: ey.optional(),
   targetVariable: eN.optional(),
-  targetVariableData: _$$z.any().optional(),
+  targetVariableData: z.any().optional(),
   mediaAction: ex.optional(),
-  transitionResetVideoPosition: _$$z.boolean().optional(),
-  mediaSkipToTime: _$$z.number().optional(),
-  mediaSkipByAmount: _$$z.number().optional(),
-  mediaPlaybackRate: _$$z.number().optional(),
+  transitionResetVideoPosition: z.boolean().optional(),
+  mediaSkipToTime: z.number().optional(),
+  mediaSkipByAmount: z.number().optional(),
+  mediaPlaybackRate: z.number().optional(),
   conditionalActions: eP.array().optional(),
-  targetVariableSetID: _$$z.string().optional(),
-  targetVariableModeID: _$$z.string().optional(),
-  targetVariableSetKey: _$$z.string().optional(),
+  targetVariableSetID: z.string().optional(),
+  targetVariableModeID: z.string().optional(),
+  targetVariableSetKey: z.string().optional(),
   animationType: eS.optional(),
   animationPhase: ew.optional(),
   animationState: eR.optional(),
-  stateGroupContext: _$$z.string().optional(),
-  noop: _$$z.boolean().optional()
-});
-let eD = _$$z.array(eO);
-let eL = _$$z.object({
-  id: rw.optional(),
+  stateGroupContext: z.string().optional(),
+  noop: z.boolean().optional(),
+})
+let eD = z.array(eO)
+let eL = z.object({
+  id: SessionInfoSchema.optional(),
   event: ek.optional(),
   actions: eD.optional(),
-  isDeleted: _$$z.boolean().optional(),
-  stateManagementVersion: _$$z.number().optional()
-});
-let eF = _$$z.object({
-  interactions: _$$z.array(eL).optional(),
-  ...eA.shape
-});
-let eM = _$$z.object({
-  clipsContent: _$$z.boolean(),
-  overflowDirection: _$$z.enum(["HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING", "NONE"]),
-  layoutMode: _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]),
-  primaryAxisSizingMode: _$$z.enum(["FIXED", "AUTO"]),
-  counterAxisSizingMode: _$$z.enum(["FIXED", "AUTO"]),
-  primaryAxisAlignItems: _$$z.enum(["MIN", "CENTER", "MAX", "SPACE_BETWEEN"]),
-  counterAxisAlignItems: _$$z.enum(["MIN", "CENTER", "MAX", "BASELINE"]),
-  paddingLeft: _$$z.number(),
-  paddingRight: _$$z.number(),
-  paddingTop: _$$z.number(),
-  paddingBottom: _$$z.number(),
-  itemSpacing: _$$z.number(),
-  itemReverseZIndex: _$$z.boolean(),
-  strokesIncludedInLayout: _$$z.boolean(),
-  layoutWrap: _$$z.enum(["NO_WRAP", "WRAP"]),
-  counterAxisSpacing: _$$z.number(),
-  counterAxisAlignContent: _$$z.enum(["AUTO", "SPACE_BETWEEN"]),
-  gridColumnCount: _$$z.number().optional(),
-  gridRowCount: _$$z.number().optional(),
-  gridRowGap: _$$z.number().optional(),
-  gridColumnGap: _$$z.number().optional(),
-  gridColumnsSizing: _$$z.string().optional(),
-  gridRowsSizing: _$$z.string().optional()
-}).partial();
-let ej = _$$z.object({
-  cornerRadius: _$$z.number(),
-  rectangleCornerRadii: _$$z.array(_$$z.number()).min(4).max(4),
-  rectangleCornerRadiiIndependent: _$$z.boolean()
-}).partial();
-let eU = _$$z.object({
-  top: _$$z.number(),
-  right: _$$z.number(),
-  bottom: _$$z.number(),
-  left: _$$z.number()
-});
-let eB = _$$z.object({
-  individualStrokeWeights: eU
-}).partial();
-let eV = _$$z.object({
-  isInAnimateTree: _$$z.boolean()
-}).partial();
-let eG = _$$z.object({
-  maybeAnimateRotation: _$$z.boolean().optional()
-}).partial();
-_$$z.object({
-  ...V.shape,
-  ...j.shape,
-  ...B.shape,
-  ...H.shape,
-  ...eM.shape,
-  ...ej.shape,
-  ...ei.shape,
-  ...eu.shape,
-  ...ep.shape,
-  ...eB.shape,
-  ...em.shape,
-  ...eF.shape,
-  ...M.shape,
-  ...eV.shape,
-  ...eG.shape
-});
-let ez = _$$z.object({
+  isDeleted: z.boolean().optional(),
+  stateManagementVersion: z.number().optional(),
+})
+let eF = z.object({
+  interactions: z.array(eL).optional(),
+  ...eA.shape,
+})
+let eM = z.object({
+  clipsContent: z.boolean(),
+  overflowDirection: z.enum(['HORIZONTAL_SCROLLING', 'VERTICAL_SCROLLING', 'HORIZONTAL_AND_VERTICAL_SCROLLING', 'NONE']),
+  layoutMode: z.enum(['NONE', 'HORIZONTAL', 'VERTICAL', 'GRID']),
+  primaryAxisSizingMode: z.enum(['FIXED', 'AUTO']),
+  counterAxisSizingMode: z.enum(['FIXED', 'AUTO']),
+  primaryAxisAlignItems: z.enum(['MIN', 'CENTER', 'MAX', 'SPACE_BETWEEN']),
+  counterAxisAlignItems: z.enum(['MIN', 'CENTER', 'MAX', 'BASELINE']),
+  paddingLeft: z.number(),
+  paddingRight: z.number(),
+  paddingTop: z.number(),
+  paddingBottom: z.number(),
+  itemSpacing: z.number(),
+  itemReverseZIndex: z.boolean(),
+  strokesIncludedInLayout: z.boolean(),
+  layoutWrap: z.enum(['NO_WRAP', 'WRAP']),
+  counterAxisSpacing: z.number(),
+  counterAxisAlignContent: z.enum(['AUTO', 'SPACE_BETWEEN']),
+  gridColumnCount: z.number().optional(),
+  gridRowCount: z.number().optional(),
+  gridRowGap: z.number().optional(),
+  gridColumnGap: z.number().optional(),
+  gridColumnsSizing: z.string().optional(),
+  gridRowsSizing: z.string().optional(),
+}).partial()
+let ej = z.object({
+  cornerRadius: z.number(),
+  rectangleCornerRadii: z.array(z.number()).min(4).max(4),
+  rectangleCornerRadiiIndependent: z.boolean(),
+}).partial()
+let eU = z.object({
+  top: z.number(),
+  right: z.number(),
+  bottom: z.number(),
+  left: z.number(),
+})
+let eB = z.object({
+  individualStrokeWeights: eU,
+}).partial()
+
+let eG = z.object({
+  maybeAnimateRotation: z.boolean().optional(),
+}).partial()
+
+let ez = z.object({
   ...j.shape,
   ...B.shape,
   ...H.shape,
@@ -580,267 +560,267 @@ let ez = _$$z.object({
   ...eu.shape,
   ...ep.shape,
   ...M.shape,
-  ...eG.shape
-});
-let eH = _$$z.object({
+  ...eG.shape,
+})
+let eH = z.object({
   ...ez.shape,
-  ...ej.shape
-});
-_$$z.object({
+  ...ej.shape,
+})
+z.object({
   ...ez.shape,
   ...ej.shape,
   ...eB.shape,
-  ...eG.shape
-});
-let eW = _$$z.object({
-  type: _$$z.enum(["URL", "NODE"]),
-  url: _$$z.string().optional(),
-  nodeID: _$$z.string().optional(),
-  openInNewTab: _$$z.boolean()
-}).partial();
-let eK = _$$z.number();
-let eY = _$$z.number();
-let eq = _$$z.number();
-let e$ = _$$z.enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
-let eZ = _$$z.enum(["LEFT", "RIGHT", "CENTER", "JUSTIFIED"]);
-let eX = _$$z.enum(["TOP", "CENTER", "BOTTOM"]);
-let eQ = _$$z.object({
-  fontFamily: Yj,
-  fontSize: Yj,
-  fontStyle: Yj,
-  fontWeight: Yj,
-  letterSpacing: Yj,
-  lineHeight: Yj,
-  paragraphSpacing: Yj,
-  paragraphIndent: Yj
-});
-let eJ = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
-let e0 = _$$z.object({
-  lineHeightPx: _$$z.number(),
-  lineHeightPercent: _$$z.number(),
-  lineHeightPercentFontSize: _$$z.number().optional(),
-  lineHeightUnit: _$$z.enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"])
-});
-let e1 = _$$z.object({
-  fontFamily: _$$z.string(),
-  fontStyle: _$$z.string(),
-  fontVariations: _$$z.record(_$$z.string(), _$$z.number()).optional(),
-  fontVariantPosition: _$$z.nativeEnum(_$$eT),
-  fontPostScriptName: _$$z.union([_$$z.string(), _$$z.$$null()]),
+  ...eG.shape,
+})
+let eW = z.object({
+  type: z.enum(['URL', 'NODE']),
+  url: z.string().optional(),
+  nodeID: z.string().optional(),
+  openInNewTab: z.boolean(),
+}).partial()
+let eK = z.number()
+let eY = z.number()
+let eq = z.number()
+let e$ = z.enum(['NONE', 'WIDTH_AND_HEIGHT', 'HEIGHT', 'TRUNCATE'])
+let eZ = z.enum(['LEFT', 'RIGHT', 'CENTER', 'JUSTIFIED'])
+let eX = z.enum(['TOP', 'CENTER', 'BOTTOM'])
+let eQ = z.object({
+  fontFamily: VariableAliasSchema,
+  fontSize: VariableAliasSchema,
+  fontStyle: VariableAliasSchema,
+  fontWeight: VariableAliasSchema,
+  letterSpacing: VariableAliasSchema,
+  lineHeight: VariableAliasSchema,
+  paragraphSpacing: VariableAliasSchema,
+  paragraphIndent: VariableAliasSchema,
+})
+let eJ = z.enum(['ORIGINAL', 'UPPER', 'LOWER', 'TITLE', 'SMALL_CAPS', 'SMALL_CAPS_FORCED'])
+let e0 = z.object({
+  lineHeightPx: z.number(),
+  lineHeightPercent: z.number(),
+  lineHeightPercentFontSize: z.number().optional(),
+  lineHeightUnit: z.enum(['PIXELS', 'FONT_SIZE_%', 'INTRINSIC_%']),
+})
+let e1 = z.object({
+  fontFamily: z.string(),
+  fontStyle: z.string(),
+  fontVariations: z.record(z.string(), z.number()).optional(),
+  fontVariantPosition: z.nativeEnum(TextScriptType),
+  fontPostScriptName: z.union([z.string(), z.null()]),
   paragraphSpacing: eq,
   paragraphIndent: eY,
   listSpacing: eK,
-  italic: _$$z.boolean(),
-  fontSize: _$$z.number(),
+  italic: z.boolean(),
+  fontSize: z.number(),
   textCase: eJ,
-  textDecoration: _$$z.nativeEnum(i8),
-  textDecorationSkipInk: _$$z.boolean(),
-  textUnderlineOffsetUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
-  textUnderlineOffsetValue: _$$z.number().optional(),
-  textDecorationThicknessUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
-  textDecorationThicknessValue: _$$z.number().optional(),
-  textDecorationStyle: _$$z.enum(["solid", "dotted", "wavy"]),
-  textDecorationFills: _$$z.array(J).optional(),
+  textDecoration: z.nativeEnum(TextDecoration),
+  textDecorationSkipInk: z.boolean(),
+  textUnderlineOffsetUnit: z.enum(['PIXELS', 'PERCENT']).optional(),
+  textUnderlineOffsetValue: z.number().optional(),
+  textDecorationThicknessUnit: z.enum(['PIXELS', 'PERCENT']).optional(),
+  textDecorationThicknessValue: z.number().optional(),
+  textDecorationStyle: z.enum(['solid', 'dotted', 'wavy']),
+  textDecorationFills: z.array(J).optional(),
   textAutoResize: e$,
-  textTruncation: _$$z.enum(["DISABLED", "ENDING"]),
-  maxLines: _$$z.number().optional(),
+  textTruncation: z.enum(['DISABLED', 'ENDING']),
+  maxLines: z.number().optional(),
   textAlignHorizontal: eZ,
   textAlignVertical: eX,
-  letterSpacing: _$$z.number(),
-  letterSpacingValue: _$$z.number(),
-  letterSpacingUnit: _$$z.enum(["PIXELS", "PERCENT"]),
-  fills: _$$z.array(J).optional(),
+  letterSpacing: z.number(),
+  letterSpacingValue: z.number(),
+  letterSpacingUnit: z.enum(['PIXELS', 'PERCENT']),
+  fills: z.array(J).optional(),
   hyperlink: eW.optional(),
-  opentypeFlags: _$$z.record(_$$z.number()).optional(),
+  opentypeFlags: z.record(z.number()).optional(),
   ...e0.shape,
-  hangingList: _$$z.boolean().optional(),
-  leadingTrim: _$$z.enum(["NONE", "CAP_HEIGHT"]).optional(),
-  hangingPunctuation: _$$z.boolean().optional(),
+  hangingList: z.boolean().optional(),
+  leadingTrim: z.enum(['NONE', 'CAP_HEIGHT']).optional(),
+  hangingPunctuation: z.boolean().optional(),
   boundVariables: eQ.partial().optional(),
-  styleIdForText: _$$z.string().optional(),
-  fallbackFonts: _$$z.optional(_$$z.array(_$$z.object({
-    fontFamily: _$$z.string(),
-    fontStyle: _$$z.string()
-  })))
-});
-let e2 = _$$z.object({
-  fontSize: _$$z.number().optional(),
-  letterSpacing: _$$z.number().optional(),
-  letterSpacingValue: _$$z.number().optional(),
-  letterSpacingUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
-  lineHeightPx: _$$z.number().optional(),
-  lineHeightPercent: _$$z.number().optional(),
-  lineHeightPercentFontSize: _$$z.number().optional(),
-  lineHeightUnit: _$$z.enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"]).optional(),
-  paragraphSpacing: eq.optional()
-});
-let e5 = _$$z.object({
-  minWidth: _$$z.number(),
-  name: _$$z.string(),
+  styleIdForText: z.string().optional(),
+  fallbackFonts: z.optional(z.array(z.object({
+    fontFamily: z.string(),
+    fontStyle: z.string(),
+  }))),
+})
+let e2 = z.object({
+  fontSize: z.number().optional(),
+  letterSpacing: z.number().optional(),
+  letterSpacingValue: z.number().optional(),
+  letterSpacingUnit: z.enum(['PIXELS', 'PERCENT']).optional(),
+  lineHeightPx: z.number().optional(),
+  lineHeightPercent: z.number().optional(),
+  lineHeightPercentFontSize: z.number().optional(),
+  lineHeightUnit: z.enum(['PIXELS', 'FONT_SIZE_%', 'INTRINSIC_%']).optional(),
+  paragraphSpacing: eq.optional(),
+})
+let e5 = z.object({
+  minWidth: z.number(),
+  name: z.string(),
   boundVariables: eQ.pick({
     fontSize: !0,
     letterSpacing: !0,
     lineHeight: !0,
-    paragraphSpacing: !0
+    paragraphSpacing: !0,
   }).partial().optional(),
-  style: e2
-});
+  style: e2,
+})
 let e4 = e1.extend({
-  responsiveTextStyleVariants: _$$z.array(e5).optional()
-});
-let e3 = _$$z.object({
-  characters: _$$z.string(),
+  responsiveTextStyleVariants: z.array(e5).optional(),
+})
+let e3 = z.object({
+  characters: z.string(),
   style: e4,
-  characterStyleOverrides: _$$z.array(_$$z.number()),
-  styleOverrideTable: _$$z.record(_$$z.string(), e4.partial()),
-  lineTypes: _$$z.array(_$$z.nativeEnum(wj)),
-  lineIndentations: _$$z.array(_$$z.number()),
-  listStartOffsets: _$$z.array(_$$z.number().nullable()),
-  lineStyleOverrides: _$$z.array(_$$z.number()),
-  lineTextDirections: _$$z.array(_$$z.enum(["ltr", "rtl", "auto"])).nullable().optional(),
-  lineStartsWithPunctuation: _$$z.record(_$$z.string(), _$$z.boolean()).optional(),
+  characterStyleOverrides: z.array(z.number()),
+  styleOverrideTable: z.record(z.string(), e4.partial()),
+  lineTypes: z.array(z.nativeEnum(ListStyleType)),
+  lineIndentations: z.array(z.number()),
+  listStartOffsets: z.array(z.number().nullable()),
+  lineStyleOverrides: z.array(z.number()),
+  lineTextDirections: z.array(z.enum(['ltr', 'rtl', 'auto'])).nullable().optional(),
+  lineStartsWithPunctuation: z.record(z.string(), z.boolean()).optional(),
   listSpacing: eK.optional(),
   paragraphIndent: eY.optional(),
   paragraphSpacing: eq.optional(),
   textAutoResize: e$.optional(),
   textAlignHorizontal: eZ.optional(),
   textAlignVertical: eX.optional(),
-  responsiveTextStyleVariants: _$$z.array(e5).optional(),
-  ...eA.shape
-});
-_$$z.enum(["BOOLEAN", "INSTANCE_SWAP", "TEXT", "VARIANT", "NUMBER", "IMAGE"]);
-let e6 = _$$z.object({
-  type: _$$z.enum(["COMPONENT", "COMPONENT_SET"]),
-  key: _$$z.string()
-});
+  responsiveTextStyleVariants: z.array(e5).optional(),
+  ...eA.shape,
+})
+z.enum(['BOOLEAN', 'INSTANCE_SWAP', 'TEXT', 'VARIANT', 'NUMBER', 'IMAGE'])
+let e6 = z.object({
+  type: z.enum(['COMPONENT', 'COMPONENT_SET']),
+  key: z.string(),
+})
 let e7 = e3.omit({
-  style: !0
-});
-_$$z.union([_$$z.boolean(), _$$z.string(), e7, _$$z.number(), R]);
-let e8 = _$$z.discriminatedUnion("type", [_$$z.object({
-  type: _$$z.literal("BOOLEAN"),
-  defaultValue: _$$z.boolean(),
-  preferredValues: _$$z.array(e6).optional()
-}), _$$z.object({
-  type: _$$z.literal("NUMBER"),
-  defaultValue: _$$z.number(),
-  preferredValues: _$$z.array(e6).optional()
-}), _$$z.object({
-  type: _$$z.literal("INSTANCE_SWAP"),
-  defaultValue: _$$z.string(),
-  preferredValues: _$$z.array(e6).optional()
-}), _$$z.object({
-  type: _$$z.literal("TEXT"),
+  style: !0,
+})
+z.union([z.boolean(), z.string(), e7, z.number(), R])
+let e8 = z.discriminatedUnion('type', [z.object({
+  type: z.literal('BOOLEAN'),
+  defaultValue: z.boolean(),
+  preferredValues: z.array(e6).optional(),
+}), z.object({
+  type: z.literal('NUMBER'),
+  defaultValue: z.number(),
+  preferredValues: z.array(e6).optional(),
+}), z.object({
+  type: z.literal('INSTANCE_SWAP'),
+  defaultValue: z.string(),
+  preferredValues: z.array(e6).optional(),
+}), z.object({
+  type: z.literal('TEXT'),
   defaultValue: e7,
-  preferredValues: _$$z.array(e6).optional()
-}), _$$z.object({
-  type: _$$z.literal("VARIANT"),
-  defaultValue: _$$z.string(),
-  variantOptions: _$$z.array(_$$z.string()).optional(),
-  preferredValues: _$$z.array(e6).optional()
-}), _$$z.object({
-  type: _$$z.literal("IMAGE"),
+  preferredValues: z.array(e6).optional(),
+}), z.object({
+  type: z.literal('VARIANT'),
+  defaultValue: z.string(),
+  variantOptions: z.array(z.string()).optional(),
+  preferredValues: z.array(e6).optional(),
+}), z.object({
+  type: z.literal('IMAGE'),
   defaultValue: R,
-  preferredValues: _$$z.array(e6).optional()
-})]);
-let e9 = _$$z.object({
-  componentPropertyDefinitions: _$$z.record(e8)
-}).partial();
-let te = _$$z.discriminatedUnion("type", [_$$z.object({
-  type: _$$z.literal("BOOLEAN"),
-  value: _$$z.boolean(),
-  variantOptions: _$$z.array(_$$z.string()).optional()
-}), _$$z.object({
-  type: _$$z.literal("NUMBER"),
-  value: _$$z.number(),
-  variantOptions: _$$z.array(_$$z.string()).optional()
-}), _$$z.object({
-  type: _$$z.literal("INSTANCE_SWAP"),
-  value: _$$z.string(),
-  variantOptions: _$$z.array(_$$z.string()).optional()
-}), _$$z.object({
-  type: _$$z.literal("TEXT"),
+  preferredValues: z.array(e6).optional(),
+})])
+let e9 = z.object({
+  componentPropertyDefinitions: z.record(e8),
+}).partial()
+let te = z.discriminatedUnion('type', [z.object({
+  type: z.literal('BOOLEAN'),
+  value: z.boolean(),
+  variantOptions: z.array(z.string()).optional(),
+}), z.object({
+  type: z.literal('NUMBER'),
+  value: z.number(),
+  variantOptions: z.array(z.string()).optional(),
+}), z.object({
+  type: z.literal('INSTANCE_SWAP'),
+  value: z.string(),
+  variantOptions: z.array(z.string()).optional(),
+}), z.object({
+  type: z.literal('TEXT'),
   value: e7,
-  variantOptions: _$$z.array(_$$z.string()).optional()
-}), _$$z.object({
-  type: _$$z.literal("VARIANT"),
-  value: _$$z.string(),
-  variantOptions: _$$z.array(_$$z.string()).optional()
-}), _$$z.object({
-  type: _$$z.literal("IMAGE"),
+  variantOptions: z.array(z.string()).optional(),
+}), z.object({
+  type: z.literal('VARIANT'),
+  value: z.string(),
+  variantOptions: z.array(z.string()).optional(),
+}), z.object({
+  type: z.literal('IMAGE'),
   value: R,
-  variantOptions: _$$z.array(_$$z.string()).optional()
-})]);
-_$$z.object({
-  componentPropertyAssignments: _$$z.record(te)
-});
-let tt = _$$z.discriminatedUnion("type", [_$$z.object({
-  type: _$$z.literal("BOOLEAN"),
-  value: _$$z.boolean(),
-  preferredValues: _$$z.array(e6).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-}), _$$z.object({
-  type: _$$z.literal("NUMBER"),
-  value: _$$z.number(),
-  preferredValues: _$$z.array(e6).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-}), _$$z.object({
-  type: _$$z.literal("INSTANCE_SWAP"),
-  value: _$$z.string(),
-  preferredValues: _$$z.array(e6).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-}), _$$z.object({
-  type: _$$z.literal("TEXT"),
+  variantOptions: z.array(z.string()).optional(),
+})])
+z.object({
+  componentPropertyAssignments: z.record(te),
+})
+let tt = z.discriminatedUnion('type', [z.object({
+  type: z.literal('BOOLEAN'),
+  value: z.boolean(),
+  preferredValues: z.array(e6).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+}), z.object({
+  type: z.literal('NUMBER'),
+  value: z.number(),
+  preferredValues: z.array(e6).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+}), z.object({
+  type: z.literal('INSTANCE_SWAP'),
+  value: z.string(),
+  preferredValues: z.array(e6).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+}), z.object({
+  type: z.literal('TEXT'),
   value: e7,
-  preferredValues: _$$z.array(e6).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-}), _$$z.object({
-  type: _$$z.literal("VARIANT"),
-  value: _$$z.string(),
-  preferredValues: _$$z.array(e6).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-}), _$$z.object({
-  type: _$$z.literal("IMAGE"),
+  preferredValues: z.array(e6).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+}), z.object({
+  type: z.literal('VARIANT'),
+  value: z.string(),
+  preferredValues: z.array(e6).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+}), z.object({
+  type: z.literal('IMAGE'),
   value: R,
-  variantOptions: _$$z.array(_$$z.string()).optional(),
-  boundVariables: _$$z.object({
-    value: Yj
-  }).partial().optional()
-})]);
-let ti = _$$z.object({
-  mainComponentId: _$$z.string(),
-  componentSetId: _$$z.string().optional(),
-  componentProperties: _$$z.record(tt),
-  overrides: _$$z.array(_$$z.object({
-    key: _$$z.array(_$$z.string()),
-    value: _$$z.any()
+  variantOptions: z.array(z.string()).optional(),
+  boundVariables: z.object({
+    value: VariableAliasSchema,
+  }).partial().optional(),
+})])
+let ti = z.object({
+  mainComponentId: z.string(),
+  componentSetId: z.string().optional(),
+  componentProperties: z.record(tt),
+  overrides: z.array(z.object({
+    key: z.array(z.string()),
+    value: z.any(),
   })),
-  uniformScaleFactor: _$$z.number().optional()
-});
-_$$z.object({
-  code: _$$z.string().optional(),
-  sourceCodeHash: _$$z.string().optional(),
-  codeExportName: _$$z.string().optional()
-});
-let tn = _$$z.object({
-  textStyleId: _$$z.string()
-});
-let tr = _$$z.object({
-  richText: _$$z.string().optional(),
-  cmsRichTextStyleMap: _$$z.record(_$$z.string(), tn),
-  ...eA.shape
-});
-_$$z.object({
+  uniformScaleFactor: z.number().optional(),
+})
+z.object({
+  code: z.string().optional(),
+  sourceCodeHash: z.string().optional(),
+  codeExportName: z.string().optional(),
+})
+let tn = z.object({
+  textStyleId: z.string(),
+})
+let tr = z.object({
+  richText: z.string().optional(),
+  cmsRichTextStyleMap: z.record(z.string(), tn),
+  ...eA.shape,
+})
+z.object({
   ...l.shape,
   ...V.shape,
   ...j.shape,
@@ -859,12 +839,12 @@ _$$z.object({
   ...e3.shape,
   ...e9.shape,
   ...ti.shape,
-  ...tr.shape
-}).partial();
-let ta = (e => {
-  let t = Object.entries(e.shape).reduce((e, [t, i]) => (e[t] = i.nullable(), e), {});
-  return _$$z.object(t);
-})(_$$z.object({
+  ...tr.shape,
+}).partial()
+let ta = ((e) => {
+  let t = Object.entries(e.shape).reduce((e, [t, i]) => (e[t] = i.nullable(), e), {})
+  return z.object(t)
+})(z.object({
   ...l.shape,
   ...j.shape,
   ...B.shape,
@@ -882,96 +862,98 @@ let ta = (e => {
   ...e3.shape,
   ...ti.shape,
   ...tr.shape,
-  ...eA.shape
-}).partial());
-let ts = _$$z.object({
-  key: _$$z.array(_$$z.string()),
-  value: _$$z.lazy(() => ta)
-}).describe("Override");
-_$$z.array(ts).describe("Overrides");
-let tl = _$$z.object({
-  line: _$$z.number(),
-  column: _$$z.number()
-});
-let $$td5 = _$$z.object({
+  ...eA.shape,
+}).partial())
+let ts = z.object({
+  key: z.array(z.string()),
+  value: z.lazy(() => ta),
+}).describe('Override')
+z.array(ts).describe('Overrides')
+let tl = z.object({
+  line: z.number(),
+  column: z.number(),
+})
+let $$td5 = z.object({
   start: tl,
-  end: tl
-});
-let $$tc3 = _$$z.object({
-  type: _$$z.literal("JSXExpressionContainer"),
-  expression: _$$z.string(),
-  location: $$td5.optional()
-});
-let tu = _$$z.object({
-  r: _$$z.number(),
-  g: _$$z.number(),
-  b: _$$z.number(),
-  a: _$$z.number()
-});
-let $$tp0 = _$$z.union([_$$z.string(), tu, $$tc3]);
-let tm = _$$z.object({
-  x: _$$z.number(),
-  y: _$$z.number()
-});
-let $$th7 = _$$z.array(_$$z.array(_$$z.number()).length(3)).length(2);
-let tg = _$$z.object({
+  end: tl,
+})
+let $$tc3 = z.object({
+  type: z.literal('JSXExpressionContainer'),
+  expression: z.string(),
+  location: $$td5.optional(),
+})
+let tu = z.object({
+  r: z.number(),
+  g: z.number(),
+  b: z.number(),
+  a: z.number(),
+})
+let $$tp0 = z.union([z.string(), tu, $$tc3])
+let tm = z.object({
+  x: z.number(),
+  y: z.number(),
+})
+let $$th7 = z.array(z.array(z.number()).length(3)).length(2)
+let tg = z.object({
   color: $$tp0,
-  position: _$$z.number()
-});
-let tf = _$$z.object({
-  blendMode: U3.optional(),
-  opacity: _$$z.number().optional()
-});
+  position: z.number(),
+})
+let tf = z.object({
+  blendMode: BlendModeSchema.optional(),
+  opacity: z.number().optional(),
+})
 let t_ = tf.extend({
-  type: _$$z.literal("solid"),
-  color: $$tp0
-});
+  type: z.literal('solid'),
+  color: $$tp0,
+})
 let tA = tf.extend({
-  type: _$$z.enum(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
-  gradientHandlePositions: _$$z.array(tm).length(3),
-  gradientStops: _$$z.array(tg)
-});
-let ty = _$$z.object({
-  exposure: _$$z.number().optional(),
-  contrast: _$$z.number().optional(),
-  vibrance: _$$z.number().optional(),
-  temperature: _$$z.number().optional(),
-  tint: _$$z.number().optional(),
-  highlights: _$$z.number().optional(),
-  shadows: _$$z.number().optional()
-});
+  type: z.enum(['gradient-linear', 'gradient-radial', 'gradient-angular', 'gradient-diamond']),
+  gradientHandlePositions: z.array(tm).length(3),
+  gradientStops: z.array(tg),
+})
+let ty = z.object({
+  exposure: z.number().optional(),
+  contrast: z.number().optional(),
+  vibrance: z.number().optional(),
+  temperature: z.number().optional(),
+  tint: z.number().optional(),
+  highlights: z.number().optional(),
+  shadows: z.number().optional(),
+})
 let tb = tf.extend({
-  type: _$$z.literal("image"),
-  imageRef: _$$z.string().describe("The hash of the image to be used for this fill"),
-  scaleMode: _$$z.enum(["fill", "fit", "tile", "crop"]).optional(),
+  type: z.literal('image'),
+  imageRef: z.string().describe('The hash of the image to be used for this fill'),
+  scaleMode: z.enum(['fill', 'fit', 'tile', 'crop']).optional(),
   imageTransform: $$th7.optional().describe('Applicable only for scaleMode == "crop". Determines how the image is positioned (thus, cropped) within the layer.'),
-  scalingFactor: _$$z.number().optional().describe('Applicable only for scaleMode == "tile" (automatic for other modes). Determines the scaling (thus, repetition) of the image within the layer.'),
-  rotation: _$$z.number().optional().describe('Applicable only for scaleMode == "tile" | "fill" | "fit" (automatic for scaleMode == "CROP"). Determines the rotation of the image within the layer. Must be in increments of +90.'),
-  filters: ty.optional().describe("Filters applied to the image, such as blur or brightness.")
-});
-let tv = _$$z.object({
-  type: _$$z.literal("image-generation"),
-  caption: _$$z.string().describe("A description of the image.  Will be used to generate a new image if no imageRef is provided.")
+  scalingFactor: z.number().optional().describe('Applicable only for scaleMode == "tile" (automatic for other modes). Determines the scaling (thus, repetition) of the image within the layer.'),
+  rotation: z.number().optional().describe('Applicable only for scaleMode == "tile" | "fill" | "fit" (automatic for scaleMode == "CROP"). Determines the rotation of the image within the layer. Must be in increments of +90.'),
+  filters: ty.optional().describe('Filters applied to the image, such as blur or brightness.'),
+})
+let tv = z.object({
+  type: z.literal('image-generation'),
+  caption: z.string().describe('A description of the image.  Will be used to generate a new image if no imageRef is provided.'),
 }).merge(tb.omit({
   type: !0,
-  imageRef: !0
-}));
-let tI = _$$z.union([t_, tA, tb]);
-let tE = _$$z.union([t_, tA, tb, tv]);
-let tx = "@name(ColorOrPaintArray) Colors can be represented as 3 or 6 character hex values (#F000) or objects with rgba values from 0-1";
-let $$tS2 = _$$z.union([_$$z.string(), _$$z.array(tI), $$tc3]).describe(tx);
-let $$tw1 = _$$z.union([_$$z.string(), _$$z.array(tE), $$tc3]).describe(tx);
-let $$tC6 = _$$z.object({
-  className: _$$z.string().optional().describe("A string of tailwind classes")
-});
-let $$tT4 = _$$f(F, e => e instanceof _$$z.ZodObject && e._def.shape().behaviorType ? e.omit({
-  behaviorType: !0
-}) : e);
-export const _6 = $$tp0;
-export const y4 = $$tw1;
-export const uw = $$tS2;
-export const M1 = $$tc3;
-export const fg = $$tT4;
-export const gx = $$td5;
-export const zA = $$tC6;
-export const dL = $$th7; 
+  imageRef: !0,
+}))
+let tI = z.union([t_, tA, tb])
+let tE = z.union([t_, tA, tb, tv])
+let tx = '@name(ColorOrPaintArray) Colors can be represented as 3 or 6 character hex values (#F000) or objects with rgba values from 0-1'
+let $$tS2 = z.union([z.string(), z.array(tI), $$tc3]).describe(tx)
+let $$tw1 = z.union([z.string(), z.array(tE), $$tc3]).describe(tx)
+let $$tC6 = z.object({
+  className: z.string().optional().describe('A string of tailwind classes'),
+})
+let $$tT4 = transformZodSchema(F, e => e instanceof z.ZodObject && e._def.shape().behaviorType
+  ? e.omit({
+    behaviorType: !0,
+  })
+  : e)
+export const _6 = $$tp0
+export const y4 = $$tw1
+export const uw = $$tS2
+export const M1 = $$tc3
+export const fg = $$tT4
+export const gx = $$td5
+export const zA = $$tC6
+export const dL = $$th7

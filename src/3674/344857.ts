@@ -372,7 +372,7 @@ import { DevModeSavepointModalContainer, SavepointModalContainer } from "../figm
 import { g as _$$g2 } from "../905/125190";
 import { pc as _$$pc } from "../figma_app/715641";
 import { Fe, r_ as _$$r_ } from "../469e6e40/936617";
-import { Yo } from "../figma_app/543529";
+import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { FEditorType } from "../figma_app/53721";
 import { Q as _$$Q3 } from "../1528/190444";
 import { L as _$$L3 } from "../469e6e40/302359";
@@ -404,7 +404,7 @@ import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
 import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
 import { filterValidImagePaints } from "../figma_app/385874";
 import { Xo } from "../figma_app/482495";
-import { e as _$$e6 } from "../905/726668";
+import { useLibraryMetadata } from "../905/726668";
 import { Dc, hV as _$$hV } from "../figma_app/151766";
 import { O as _$$O6 } from "../figma_app/301719";
 import { assetTypeEnum } from "../figma_app/198712";
@@ -460,14 +460,14 @@ import { X as _$$X5 } from "../905/99316";
 import { Fj } from "../figma_app/793429";
 import { J as _$$J9 } from "../905/45438";
 import { Q as _$$Q4 } from "../905/217916";
-import { B as _$$B5 } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { DP as _$$DP2 } from "../figma_app/803932";
 import { d7 as _$$d1, rK as _$$rK } from "../figma_app/261761";
 import { R as _$$R4 } from "../figma_app/914726";
 import { e0 as _$$e9, Ig, dc as _$$dc } from "../figma_app/155647";
 import { we } from "../figma_app/393980";
 import { a as _$$a, u as _$$u5 } from "../figma_app/289605";
-import { zN } from "../figma_app/155728";
+import { SubscribedLibrariesProvider } from "../figma_app/155728";
 import { J as _$$J0 } from "../figma_app/785050";
 import { A as _$$A23 } from "../svg/757731";
 import { A as _$$A24 } from "../svg/454921";
@@ -9195,7 +9195,7 @@ function cr() {
   let t = useLocalPluginsExcludingWidgets();
   let n = usePublishedPlugins();
   let i = useInstalledPluginsAndWidgets();
-  let l = Yo();
+  let l = useCurrentOrgAdminInfo();
   let s = useDispatch();
   let r = useCurrentFileKey();
   return jsx(_$$Q3, {
@@ -9388,7 +9388,7 @@ let c9 = memo(({
     height: c3,
     scale: 4
   });
-  let k = _$$e6(e.sourceLibraryKey ?? _$$l6(""), {
+  let k = useLibraryMetadata(e.sourceLibraryKey ?? _$$l6(""), {
     enabled: !!e.sourceLibraryKey
   });
   let I = function (e, t) {
@@ -12138,7 +12138,7 @@ function hh({
     isDevModeVarsTable: !1,
     devModeFocusId: void 0
   });
-  let o = _$$B5(e || "", {
+  let o = getLibraryName(e || "", {
     enabled: !!e
   });
   return t || e ? t || "loaded" === i.status && "loaded" === o.status ? n ? jsx(_$$J9, {
@@ -12627,7 +12627,7 @@ function hH() {
   useEffect(() => {
     c.find(t => t.id === e) || setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   }, [e, t]);
-  return jsxs(zN, {
+  return jsxs(SubscribedLibrariesProvider, {
     children: [jsxs("div", {
       className: "inspect_tabs--tabsBar--nbu1a",
       children: [jsx(_$$P2, {

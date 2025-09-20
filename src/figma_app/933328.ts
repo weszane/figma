@@ -81,7 +81,7 @@ import { handleStatusChangeEffect } from '../figma_app/566371';
 import { getCurrentTeamId } from '../figma_app/598018';
 import { qr } from '../figma_app/608944';
 import { PrimaryWorkflowEnum, initialLibraryStats } from '../figma_app/633080';
-import { $j, td as _$$td, _B, GA, iw, kw, lG, Mb, Ve, vu, Ys } from '../figma_app/646357';
+import { flattenAssetsArray, isSubscribedLibrary, resolveUsedComponents, hasPublishedAsset, generateDefaultLibrariesCacheKey, usedLibrariesPromise, getUsedComponentsStateGroupsAsync, generatePublishedComponentsCacheKey, addTrackedState, getAllAssets, deletedLoadingStates } from '../figma_app/646357';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { loadingStatePutLoading, loadingStatePutFailure, loadingStatePutSuccess, loadingStateDelete } from '../figma_app/714946';
 import { AppStateTsApi, Confirmation, CopyPasteType, FileSourceType, Fullscreen, LibraryPubSub, SceneIdentifier, StyleVariableOperation, TemplateType, VariablesBindings } from '../figma_app/763686';
@@ -370,7 +370,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
           componentName: item.name,
           ComponentCanvasPositionX: canvasPosition.x,
           ComponentCanvasPositionY: canvasPosition.y,
-          isFromDefaultLibrary: _$$td(I.library.defaultPublished, item.library_key),
+          isFromDefaultLibrary: isSubscribedLibrary(I.library.defaultPublished, item.library_key),
           isFromDoubleClick: !!isFromDoubleClick,
           useSmartPositioning: !!useSmartPositioning
         });
@@ -504,7 +504,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
           stateGroupName: item.name,
           StateGroupCanvasPositionX: canvasPosition.x,
           StateGroupCanvasPositionY: canvasPosition.y,
-          isFromDefaultLibrary: _$$td(I.library.defaultPublished, item.library_key),
+          isFromDefaultLibrary: isSubscribedLibrary(I.library.defaultPublished, item.library_key),
           isFromDoubleClick: !!isFromDoubleClick
         });
         _$$V(m.key, item, !0, !!e.getState().userFlags.apple_eula_accepted, {
@@ -724,7 +724,7 @@ let $$e22 = createOptimistThunk(async (e, t) => {
               localIdsToUpdate,
               oldSubscribedKeysToUpdate
             } = t;
-            if (GA(p.library, _, localIdsToUpdate, oldSubscribedKeysToUpdate, usedItemsByKey, subscribedLibraryKeys)) {
+            if (hasPublishedAsset(p.library, _, localIdsToUpdate, oldSubscribedKeysToUpdate, usedItemsByKey, subscribedLibraryKeys)) {
               s.has(e.library_key) || s.add(e.library_key);
               break;
             }
@@ -764,7 +764,7 @@ let $$e543 = createOptimistThunk(async (e, t) => {
         permissionScopeHandler.user('update-shared-symbol', () => {
           LibraryPubSub.updateSharedSymbol(e.component_key ?? ii.INVALID, e.library_key, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, instanceIdsToUpdate.map(_$$v.toString), p, updateStartTime);
         });
-        (e.localIdsToUpdate.length || e.oldSubscribedKeysToUpdate.length) && GA(_.library, h, e.localIdsToUpdate, e.oldSubscribedKeysToUpdate, usedItemsByKey, subscribedLibraryKeys) && !s.has(e.library_key) && s.add(e.library_key);
+        (e.localIdsToUpdate.length || e.oldSubscribedKeysToUpdate.length) && hasPublishedAsset(_.library, h, e.localIdsToUpdate, e.oldSubscribedKeysToUpdate, usedItemsByKey, subscribedLibraryKeys) && !s.has(e.library_key) && s.add(e.library_key);
       });
       fullscreenValue.triggerAction('commit');
       let m = components.map(e => e.id);
@@ -923,7 +923,7 @@ let $$e644 = createOptimistThunk(async (e, t) => {
         permissionScopeHandler.user('update-shared-style', () => {
           LibraryPubSub.updateSharedStyle(e.key, e.library_key, e.content_hash ?? VariableStyleId.INVALID, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, a, updateStartTime);
         });
-        GA(c.library, o, e.localIdsToUpdate, e.oldSubscribedKeysToUpdate, c.library.used__LIVEGRAPH.styles, subscribedLibraryKeys) && !s.has(e.library_key) && s.add(e.library_key);
+        hasPublishedAsset(c.library, o, e.localIdsToUpdate, e.oldSubscribedKeysToUpdate, c.library.used__LIVEGRAPH.styles, subscribedLibraryKeys) && !s.has(e.library_key) && s.add(e.library_key);
       });
       fullscreenValue.triggerAction('commit');
       let p = styles.map(e => e.id);
@@ -1145,7 +1145,7 @@ let $$tl11 = createOptimistThunk((e, t) => {
     key: yD(t.openFileKey)
   }));
   e.dispatch(loadingStateDelete({
-    key: iw(t.openFileKey)
+    key: generateDefaultLibrariesCacheKey(t.openFileKey)
   }));
 });
 let td = new Set();
@@ -1169,21 +1169,21 @@ let $$t_45 = async (e, t, r, n) => {
     return;
   }
   atomStoreManager.set($$tg22, 'loading');
-  let a = (n = n ?? lG(r)).loadingKey;
+  let a = (n = n ?? getUsedComponentsStateGroupsAsync(r)).loadingKey;
   isLoading(r.getState().loadingState, a) && (await n.promise);
   r.dispatch(loadingStatePutLoading({
     key: a
   }));
-  i.editorType === 'whiteboard' && (await kw);
+  i.editorType === 'whiteboard' && (await usedLibrariesPromise);
   let s = r.getState();
   let o = [];
   if (e.length > 0) {
-    let t = new Set([...vu(s.library.publishedByLibraryKey.components).map(e => e.component_key), ...$j(s.library.defaultPublished.componentsByLibraryKey).map(e => e.component_key)]);
+    let t = new Set([...getAllAssets(s.library.publishedByLibraryKey.components).map(e => e.component_key), ...flattenAssetsArray(s.library.defaultPublished.componentsByLibraryKey).map(e => e.component_key)]);
     o = e.filter(e => !t.has(e) && !td.has(e));
   }
   let l = [];
   if (t.length > 0) {
-    let e = new Set([...vu(s.library.publishedByLibraryKey.stateGroups).map(e => e.key), ...$j(s.library.defaultPublished.stateGroupsByLibraryKey).map(e => e.key)]);
+    let e = new Set([...getAllAssets(s.library.publishedByLibraryKey.stateGroups).map(e => e.key), ...flattenAssetsArray(s.library.defaultPublished.stateGroupsByLibraryKey).map(e => e.key)]);
     l = t.filter(t => !e.has(t) && !tc.has(t));
   }
   try {
@@ -1352,7 +1352,7 @@ export async function $$tA52(e) {
     atomStoreManager.set($$tf14, 'loaded');
     return;
   }
-  let n = Mb(_$$l(r.libraryKey));
+  let n = generatePublishedComponentsCacheKey(_$$l(r.libraryKey));
   if (!isNullOrFailure(loadingState, n)) {
     atomStoreManager.set($$tf14, 'loaded');
     return;
@@ -1364,15 +1364,15 @@ export async function $$tA52(e) {
   setupLoadingStateHandler(i, {
     dispatch: e.dispatch
   }, n);
-  Ys.add(n);
+  deletedLoadingStates.add(n);
   try {
     let t = await i;
     e.dispatch(batchPutFileAction({
       files: t.data.meta.files,
       subscribeToRealtime: !0
     }));
-    Ve(r.key);
-    Ve(r.libraryKey);
+    addTrackedState(r.key);
+    addTrackedState(r.libraryKey);
     let n = atomStoreManager.get(qp);
     $$tZ20(t.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, n, e.dispatch);
     $$tZ20(t.data.meta.components, PrimaryWorkflowEnum.COMPONENT, n, e.dispatch);
@@ -1384,7 +1384,7 @@ export async function $$tA52(e) {
     console.warn('Failed to get published and moved components for editing file');
   }
   atomStoreManager.set($$tf14, 'loaded');
-  _B();
+  resolveUsedComponents();
 }
 let $$tx37 = liveStoreInstance.Query({
   fetch: async e => (await PT.getOrgMigrationStatus({

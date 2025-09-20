@@ -217,7 +217,7 @@ import { Dc, hV } from '../figma_app/151766';
 import { Vr } from '../figma_app/151869';
 import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { Ig } from '../figma_app/155647';
-import { je } from '../figma_app/155728';
+import { useSubscribedLibraries } from '../figma_app/155728';
 import { z2 } from '../figma_app/165422';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { O as _$$O2 } from '../figma_app/185954';
@@ -306,7 +306,7 @@ import { XC } from '../figma_app/631279';
 import { JT } from '../figma_app/632248';
 import { getSubscribedVariableInfo, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { BigTextInputForwardRef } from '../figma_app/637027';
-import { td as _$$td, yh } from '../figma_app/646357';
+import { isSubscribedLibrary, findStyleDataByKey } from '../figma_app/646357';
 import { v4, xv } from '../figma_app/655139';
 import { filterNotNullish } from '../figma_app/656233';
 import { LinkMetadataEvent } from '../figma_app/671547';
@@ -1895,7 +1895,7 @@ function ib({
         }
       } else if (u = StyleIdHandler.toRefIfSubscribed(n)) {
         c = StyleIdHandler.fromRef(u);
-        let e = yh(u.key, r, {});
+        let e = findStyleDataByKey(u.key, r, {});
         let t = null;
         e && (t = {
           style: e
@@ -3491,7 +3491,7 @@ let ns = class e extends PureComponent {
     let t = this.props.sceneGraph.get(e[0])?.symbolId;
     if (!t) return !1;
     let i = this.props.sceneGraph.get(t)?.sourceLibraryKey;
-    return !!i && _$$td(this.props.library.defaultPublished, i);
+    return !!i && isSubscribedLibrary(this.props.library.defaultPublished, i);
   }
   getMoveToMenu() {
     return this.state.pageItems.length >= 1 ? {
@@ -8204,7 +8204,7 @@ function sW({
   wrapperClassName: e,
   ...t
 }) {
-  let i = je();
+  let i = useSubscribedLibraries();
   let a = i.status === 'loaded' && i.data.length > 0;
   let s = sJ();
   let o = sd(a);
@@ -8251,7 +8251,7 @@ function sJ() {
   return e === FEditorType.Slides && t === SelfDesignType.DESIGN || e === FEditorType.Cooper && t === SelfDesignType.DESIGN ? FEditorType.Design : e;
 }
 function sq(e) {
-  let t = je();
+  let t = useSubscribedLibraries();
   let i = t.status === 'loaded' && t.data.length > 0;
   let n = useSelector(e => e.usedKeyboardShortcuts);
   let s = useSelector(e => e.keyboardShortcutPanel.tab);

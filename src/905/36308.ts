@@ -176,7 +176,7 @@ import { eH as _$$eH } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { getUnitLabel } from '../figma_app/120227';
 import { Dc, hV, mU } from '../figma_app/151766';
-import { He } from '../figma_app/155728';
+import { useSubscribedLibraryKeys } from '../figma_app/155728';
 import { conditionalFeatureFlag, getInitialOptions } from '../figma_app/169182';
 import { FPlanNameType } from '../figma_app/191312';
 import { WB } from '../figma_app/192664';
@@ -209,7 +209,7 @@ import { jT } from '../figma_app/626177';
 import { fileActionEnum } from '../figma_app/630077';
 import { JT } from '../figma_app/632248';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
-import { x as _$$x, Lk } from '../figma_app/639711';
+import { AssetCategoryEnum, assetCategoryAtom } from '../figma_app/639711';
 import { fx, PF } from '../figma_app/657972';
 import { i as _$$i2 } from '../figma_app/714009';
 import { useSceneGraphSelector } from '../figma_app/722362';
@@ -3214,7 +3214,7 @@ function iY(e) {
   let t = useModalManager(e);
   let i = useSceneGraphSelector();
   let r = useCurrentFileKey();
-  let a = He();
+  let a = useSubscribedLibraryKeys();
   let [s, o] = useState(0);
   let l = {
     ...k1(),
@@ -5599,7 +5599,7 @@ export function $$nN0(e) {
       name: 'see-all-plugins',
       displayText: getI18nString('fullscreen_actions.see-all-plugins'),
       callback: () => {
-        atomStoreManager.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
       },
       iconType: createElement(_$$u),
       flags: ['cooper'],
@@ -5613,7 +5613,7 @@ export function $$nN0(e) {
         orgName: t.name
       }),
       callback: () => {
-        atomStoreManager.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
         atomStoreManager.set(zM, 'org');
       },
       flags: ['cooper'],

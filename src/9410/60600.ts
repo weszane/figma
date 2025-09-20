@@ -9,7 +9,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tw } from "../figma_app/755939";
-import { yB } from "../figma_app/334505";
+import { useSelectedAndFocusedNodeIds } from "../figma_app/334505";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
@@ -123,7 +123,7 @@ export function $$A0({
     overlay: jk,
     priority: _$$N2.DEFAULT_MODAL
   });
-  let s = yB();
+  let s = useSelectedAndFocusedNodeIds();
   let o = s.length ? s[0] : null;
   _$$h(() => {
     show();
@@ -174,7 +174,7 @@ export function $$O3() {
     overlay: ODB,
     priority: _$$N2.DEFAULT_MODAL
   });
-  let a = yB();
+  let a = useSelectedAndFocusedNodeIds();
   let s = a.length ? a[0] : null;
   isShowing && !s && complete();
   _$$E2(uniqueId, qA, () => {

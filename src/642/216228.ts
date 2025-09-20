@@ -60,7 +60,7 @@ import { $ as _$$$ } from '../905/455748';
 import { Z as _$$Z2 } from '../905/498136';
 import { x as _$$x } from '../905/505155';
 import { g as _$$g3 } from '../905/505662';
-import { U as _$$U2 } from '../905/506188';
+import { getLibraryNames } from '../905/506188';
 import { E as _$$E3 } from '../905/511388';
 import { RecordableButton } from '../905/511649';
 import { RR as _$$RR } from '../905/514666';
@@ -131,7 +131,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { we } from '../figma_app/987';
 import { QI3 } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
-import { Pv, Yl } from '../figma_app/10098';
+import { getSiteKitAssets, SITE_KIT_EMBEDS_LIBRARY_KEY } from '../figma_app/10098';
 import { FX as _$$FX } from '../figma_app/12491';
 import { atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { usePreviousValue, useLatestRef } from '../figma_app/922077';
@@ -148,11 +148,11 @@ import { LR } from '../figma_app/120210';
 import { I as _$$I2 } from '../figma_app/130633';
 import { $H, MA, ye } from '../figma_app/134428';
 import { Vr } from '../figma_app/151869';
-import { He, je } from '../figma_app/155728';
+import { useSubscribedLibraryKeys, useSubscribedLibraries } from '../figma_app/155728';
 import { t as _$$t5 } from '../figma_app/162756';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions, isDevEnvironment } from '../figma_app/169182';
-import { ce as _$$ce, r6 as _$$r4, t0 as _$$t3, AS, Bv, dj, fi, Nn, VF } from '../figma_app/177636';
+import { useSiteKitAssets, useLibraryDisplayName, useSiteKitCmsConfig, siteKitState, useAssetPrefixComparator, hasSiteKitLibraryKey, usePublishedSiteKitComponents, useSiteKitAssetsSubscription, useIsCmsLibraryKey } from '../figma_app/177636';
 import { g5 } from '../figma_app/178752';
 import { h as _$$h2, sN as _$$sN, hB, ht, LH, R2, uo, zf } from '../figma_app/188908';
 import { FFileType } from '../figma_app/191312';
@@ -208,8 +208,8 @@ import { RJ } from '../figma_app/630951';
 import { PrimaryWorkflowEnum, LibraryTabEnum } from '../figma_app/633080';
 import { J as _$$J2 } from '../figma_app/636279';
 import { zl } from '../figma_app/641749';
-import { lM as _$$lM, nE as _$$nE, tM as _$$tM, AZ, c_, gP, JS, Mk, my, o8, ON, Wy, Yv, yW } from '../figma_app/644808';
-import { Mb } from '../figma_app/646357';
+import { ContentType, EXAMPLE_TYPE, CategoryType, hasEmbeds, COMPONENT_TYPE, LibraryType, TEMPLATE_TYPE, ASSET_TYPE, SearchType, PRIVATE_TYPE, SectionType, ActionType, ButtonType, ModeType } from '../figma_app/644808';
+import { generatePublishedComponentsCacheKey } from '../figma_app/646357';
 import { sH as _$$sH, t6 as _$$t2, _m, aK, Cg, G3, RR, S5, W9, wV, xc } from '../figma_app/647246';
 import { sortBy, sortByWithOptions } from '../figma_app/656233';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
@@ -223,7 +223,7 @@ import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { E1 } from '../figma_app/757606';
 import { AppStateTsApi, ComponentPanelTab, Fullscreen, LayoutTabType, PanelType } from '../figma_app/763686';
 import { N as _$$N2 } from '../figma_app/765684';
-import { Ez } from '../figma_app/766708';
+import { compareNumbers } from '../figma_app/766708';
 import { sF as _$$sF } from '../figma_app/777207';
 import { BrowserInfo } from '../figma_app/778880';
 import { l$ as _$$l$ } from '../figma_app/782261';
@@ -234,14 +234,14 @@ import { _2, hw, u2 } from '../figma_app/807786';
 import { dL } from '../figma_app/825489';
 import { TrackedLink } from '../figma_app/831799';
 import { z6 } from '../figma_app/846841';
-import { u as _$$u2, V as _$$V4 } from '../figma_app/862515';
+import { filterEnabledFeatures, getSiteEmbedConfig } from '../figma_app/862515';
 import { generateRecordingKey, useHandleInputEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { selectSceneGraph, getSingleSelectedKey } from '../figma_app/889655';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { fi as _$$fi } from '../figma_app/913823';
 import { _o, GT, YS } from '../figma_app/914674';
 import { dS, gO, Nz } from '../figma_app/915774';
-import { G as _$$G, K as _$$K } from '../figma_app/923271';
+import { useAssetPanelContext, AssetPanelProvider } from '../figma_app/923271';
 import { LJ } from '../figma_app/930386';
 import { jR } from '../figma_app/933328';
 import { h as _$$h5 } from '../figma_app/935454';
@@ -418,7 +418,7 @@ function ec({
   let p = useCallback(() => {
     l('folderRow', navigateToFolder(e.name));
   }, [l, navigateToFolder, e.name]);
-  let h = useMemo(() => [ON.CONTENTS, _$$lM.ASSETS + i, _$$tM.FOLDERS, t], [i, t]);
+  let h = useMemo(() => [SectionType.CONTENTS, ContentType.ASSETS + i, CategoryType.FOLDERS, t], [i, t]);
   let {
     keyboardNavigationItem,
     setKeyboardNavigationElement
@@ -513,7 +513,7 @@ function e3({
   let K = useHandleMouseEvent(B, 'click', F);
   let H = useMemo(() => ({
     ...x,
-    path: [ON.CONTENTS, _$$lM.ASSETS + b, ...x.path]
+    path: [SectionType.CONTENTS, ContentType.ASSETS + b, ...x.path]
   }), [x, b]);
   let {
     folderPath
@@ -1096,7 +1096,7 @@ function tv(e, t, {
         name: getI18nString('design_systems.assets_panel.examples'),
         items: sortedItems,
         subtrees: sortedSubtrees,
-        key: _$$nE,
+        key: EXAMPLE_TYPE,
         type: _$$l$.COMPONENTS,
         previewAsset: void 0
       });
@@ -1112,7 +1112,7 @@ function tv(e, t, {
         name: getI18nString('design_systems.assets_panel.components'),
         items: sortedItems,
         subtrees: sortedSubtrees,
-        key: c_,
+        key: COMPONENT_TYPE,
         type: _$$l$.COMPONENTS,
         previewAsset: void 0
       };
@@ -1130,7 +1130,7 @@ function tv(e, t, {
         name: getI18nString('design_systems.assets_panel.templates'),
         items: sortedItems,
         subtrees: sortedSubtrees,
-        key: JS,
+        key: TEMPLATE_TYPE,
         type: _$$l$.TEMPLATES,
         previewAsset: void 0
       };
@@ -1145,7 +1145,7 @@ function tv(e, t, {
       name: t,
       items: sortedItems,
       subtrees: sortedSubtrees,
-      key: Mk,
+      key: ASSET_TYPE,
       type: _$$l$.COMPONENTS,
       previewAsset: void 0
     };
@@ -1170,7 +1170,7 @@ function tv(e, t, {
       examples: u,
       templates: p,
       assets: x,
-      type: yW.DESIGN
+      type: ModeType.DESIGN
     };
     r.set(e, y);
   }
@@ -1201,7 +1201,7 @@ function tS(e, t, s, r) {
       name: r,
       items: sortedItems,
       subtrees: sortedSubtrees,
-      key: Mk,
+      key: ASSET_TYPE,
       type: _$$l$.RESPONSIVE_SETS,
       previewAsset: void 0
     };
@@ -1210,7 +1210,7 @@ function tS(e, t, s, r) {
       id: e,
       previewAsset: t[e] ?? tT(c),
       assets: c,
-      type: yW.SITE,
+      type: ModeType.SITE,
       numAssets: function e(t) {
         return t.items.length + Array.from(t.subtrees.values()).reduce((t, s) => t + e(s), 0);
       }(c)
@@ -1218,7 +1218,7 @@ function tS(e, t, s, r) {
     n.set(e, u);
   }
   if (r) {
-    let e = _$$u2();
+    let e = filterEnabledFeatures();
     if (e.length > 0) {
       let t = {
         name: getI18nString('design_systems.assets_panel.site_blocks.embeds'),
@@ -1233,7 +1233,7 @@ function tS(e, t, s, r) {
           type: _$$l$.COMPONENTS,
           previewAsset: void 0
         },
-        type: yW.SITE,
+        type: ModeType.SITE,
         numAssets: e.length
       };
       n.set('embeds', t);
@@ -1524,7 +1524,7 @@ function t1({
   let S = t != null;
   let k = useMemo(() => ({
     ...o,
-    path: [ON.CONTENTS, _$$lM.ASSETS + c, ...o.path]
+    path: [SectionType.CONTENTS, ContentType.ASSETS + c, ...o.path]
   }), [o, c]);
   let w = currentView === S5.Assets && folderPath && b && (folderPath?.length ?? 0) > c;
   let {
@@ -1679,7 +1679,7 @@ function t3({
     isExample: !1,
     partnerType: void 0
   });
-  let u = _$$r4([e]);
+  let u = useLibraryDisplayName([e]);
   let p = CK();
   let h = !!c.searchSessionId;
   let m = useCallback(t => {
@@ -1770,7 +1770,7 @@ function sd({
       embed: e,
       sectionPosition: n,
       keyboardPosition: {
-        path: [ON.CONTENTS, _$$lM.ASSETS, n],
+        path: [SectionType.CONTENTS, ContentType.ASSETS, n],
         column: null
       },
       thumbHeight,
@@ -1800,7 +1800,7 @@ function sc({
     let [r] = MA();
     let i = Ew({
       assetKey: e.name,
-      assetLibraryKey: _$$l(Yl),
+      assetLibraryKey: _$$l(SITE_KIT_EMBEDS_LIBRARY_KEY),
       assetType: 'embed',
       isList: r === 'list',
       sectionNameforTracking: s,
@@ -1872,7 +1872,7 @@ function sc({
   let C = _$$nc.user('insert-embed', onInsertableResourcePointerDown);
   let j = useMemo(() => ({
     ...s,
-    path: [ON.CONTENTS, _$$lM.ASSETS, ...s.path]
+    path: [SectionType.CONTENTS, ContentType.ASSETS, ...s.path]
   }), [s]);
   let {
     setKeyboardNavigationElement,
@@ -2025,7 +2025,7 @@ function sb({
   } = tH(width, d);
   let h = useMemo(() => {
     let e = [];
-    e.push(...sS(d, numColumns, tileWidth, tileHeight, a, 'assets', 'Site kit', [_$$tM.COMPONENTS], {
+    e.push(...sS(d, numColumns, tileWidth, tileHeight, a, 'assets', 'Site kit', [CategoryType.COMPONENTS], {
       includesFirstTile: !0,
       hideName: !0
     }));
@@ -2085,7 +2085,7 @@ let sj = ({
   }) => {
     let s = e.items.length > 0;
     if (s) {
-      let s = [_$$tM.COMPONENTS];
+      let s = [CategoryType.COMPONENTS];
       t.push(...sS(e.items, numColumns, tileWidth, tileHeight, i, e.key, 'Site kit', s, {
         includesFirstTile: u === p,
         keyboardPanelDepth: u,
@@ -2234,7 +2234,7 @@ function sM({
   } = wV();
   let {
     getPage
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     previousPageId
   } = RR();
@@ -2256,7 +2256,7 @@ function sA({
   hideScrollbar: n
 }) {
   let [i] = ye();
-  if (AZ(t)) {
+  if (hasEmbeds(t)) {
     return jsx(sF, {
       page: t
     });
@@ -2270,12 +2270,12 @@ function sA({
     });
   }
   switch (t.type) {
-    case yW.DESIGN:
+    case ModeType.DESIGN:
       return jsx(sP, {
         page: t,
         libraryKey: e
       });
-    case yW.SITE:
+    case ModeType.SITE:
       return jsx(sb, {
         page: t,
         libraryKey: e,
@@ -2315,7 +2315,7 @@ function sP({
         key: 'templates:header',
         height: sI
       });
-      t.push(...tu(s, numColumns, 'templates', props, templateSectionNameForTracking, [_$$tM.TEMPLATES], {
+      t.push(...tu(s, numColumns, 'templates', props, templateSectionNameForTracking, [CategoryType.TEMPLATES], {
         includesFirstTile: !0
       }));
     }
@@ -2325,7 +2325,7 @@ function sP({
         props,
         numColumns
       } = tU(a, l, _$$rp.NORMAL, !0);
-      t.push(...tu(s, numColumns, 'examples', props, componentSectionNameForTracking, [_$$tM.EXAMPLES], {
+      t.push(...tu(s, numColumns, 'examples', props, componentSectionNameForTracking, [CategoryType.EXAMPLES], {
         includesFirstTile: !0,
         isExample: !0
       }));
@@ -2343,7 +2343,7 @@ function sP({
         props,
         numColumns
       } = tU(a, l, PI(s, !0));
-      t.push(...tu(s, numColumns, 'components', props, componentSectionNameForTracking, [_$$tM.COMPONENTS], {
+      t.push(...tu(s, numColumns, 'components', props, componentSectionNameForTracking, [CategoryType.COMPONENTS], {
         includesFirstTile: !e.templates && !e.examples
       }));
     }
@@ -2368,7 +2368,7 @@ function sL({
   } = wV();
   let {
     getFolder
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     previousFolderPath,
     previousPageId
@@ -2416,8 +2416,8 @@ function sO({
   hideScrollbar: i
 }) {
   let [l] = MA();
-  let a = useMemo(() => e.type === yW.DESIGN ? sR(e.assets, s) : null, [s, e.assets, e.type]);
-  let o = useMemo(() => e.type === yW.SITE ? sR(e.assets, s) : null, [s, e.assets, e.type]);
+  let a = useMemo(() => e.type === ModeType.DESIGN ? sR(e.assets, s) : null, [s, e.assets, e.type]);
+  let o = useMemo(() => e.type === ModeType.SITE ? sR(e.assets, s) : null, [s, e.assets, e.type]);
   let {
     folderPath
   } = wV();
@@ -2434,7 +2434,7 @@ function sO({
     folderPath: s
   });
   switch (e.type) {
-    case yW.DESIGN:
+    case ModeType.DESIGN:
       return jsx(sD, {
         subtree: a,
         currentFolderPath: s,
@@ -2444,7 +2444,7 @@ function sO({
         role: l,
         isPreset: c
       });
-    case yW.SITE:
+    case ModeType.SITE:
       return jsx(sC, {
         subtree: o,
         currentFolderPath: s,
@@ -2522,7 +2522,7 @@ let sB = ({
     let s = e.items.length > 0;
     let n = h(e);
     if (s) {
-      let s = [_$$tM.COMPONENTS];
+      let s = [CategoryType.COMPONENTS];
       let {
         props,
         numColumns
@@ -2824,7 +2824,7 @@ function rF({
       asset: e,
       fileName: c ? c[e.library_key] : '',
       sectionPosition: n,
-      keyboardPosition: pg([ON.SUGGESTIONS], n, numColumns),
+      keyboardPosition: pg([SectionType.SUGGESTIONS], n, numColumns),
       onSuccessfulAssetInsert: o,
       ...props,
       sourceForTracking: _$$tM3
@@ -2856,9 +2856,9 @@ function rB() {
   let {
     width
   } = e8();
-  let s = He().size > 0;
+  let s = useSubscribedLibraryKeys().size > 0;
   let i = !s;
-  let l = je();
+  let l = useSubscribedLibraries();
   let a = useRef(null);
   let {
     suggestions,
@@ -2917,7 +2917,7 @@ function rB() {
           let [d, c] = useState(!1);
           let [u, p] = useState(void 0);
           let h = useCurrentFileKey();
-          let m = He();
+          let m = useSubscribedLibraryKeys();
           let x = _$$r5();
           useEffect(() => {
             if (t || !x) return;
@@ -3187,14 +3187,14 @@ function r4() {
     url,
     shouldCover
   } = _$$t5();
-  let C = Nn();
+  let C = useSiteKitAssetsSubscription();
   let j = useMemo(() => {
     let e = [];
     for (let t of C) t.data && e.push(t.data);
     return e;
   }, [C]);
-  let v = fi();
-  let S = Bv();
+  let v = usePublishedSiteKitComponents();
+  let S = useAssetPrefixComparator();
   let k = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   return useMemo(() => function ({
     localComponentsInfo: e,
@@ -3237,7 +3237,7 @@ function r4() {
           numTemplates: 0,
           thumbnailUrl: n.thumbnail_url_override ?? n.thumbnail_url,
           thumbnailShouldCover: !!n.thumbnail_guid,
-          type: yW.DESIGN,
+          type: ModeType.DESIGN,
           libraryType: 'team'
         };
         r.set(e, l);
@@ -3274,7 +3274,7 @@ function r4() {
             numTemplates: 0,
             thumbnailUrl: e.thumbnail_url,
             thumbnailShouldCover: !0,
-            type: yW.DESIGN,
+            type: ModeType.DESIGN,
             libraryType: 'community'
           };
           n.set(r, t);
@@ -3309,7 +3309,7 @@ function r4() {
         numTemplates: g.length,
         thumbnailUrl: s,
         thumbnailShouldCover: r,
-        type: yW.DESIGN,
+        type: ModeType.DESIGN,
         libraryType: 'team'
       };
       if (p) {
@@ -3325,7 +3325,7 @@ function r4() {
             name: getI18nString('design_systems.assets_panel.components'),
             items: sortedItems,
             subtrees: sortedSubtrees,
-            key: c_,
+            key: COMPONENT_TYPE,
             type: _$$l$.COMPONENTS,
             previewAsset: void 0
           };
@@ -3342,7 +3342,7 @@ function r4() {
             name: getI18nString('design_systems.assets_panel.templates'),
             items: sortedItems,
             subtrees: sortedSubtrees,
-            key: JS,
+            key: TEMPLATE_TYPE,
             type: _$$l$.TEMPLATES,
             previewAsset: void 0
           };
@@ -3357,21 +3357,21 @@ function r4() {
           name: getI18nString('design_systems.assets_panel.assets'),
           items: sortedItems,
           subtrees: sortedSubtrees,
-          key: Mk,
+          key: ASSET_TYPE,
           type: _$$l$.COMPONENTS,
           previewAsset: void 0
         };
         let i = {
           name: getI18nString('design_systems.assets_panel.hidden'),
-          id: o8,
+          id: PRIVATE_TYPE,
           previewAsset: privateItems[0] ?? _privateItems[0],
           components: e,
           examples: null,
           templates: t,
           assets: n,
-          type: yW.DESIGN
+          type: ModeType.DESIGN
         };
-        y.pages.set(o8, i);
+        y.pages.set(PRIVATE_TYPE, i);
       }
       return y;
     }(e, t, s, r, l, 0, o, m);
@@ -3380,10 +3380,10 @@ function r4() {
     let C = null;
     if (c) {
       for (let e of (C = new Map(), c)) {
-        let t = Pv(e);
+        let t = getSiteKitAssets(e);
         if (!t) continue;
         let s = t.library.libraryKey;
-        let r = tS(t.assets, u[s] ?? {}, p, s === Yl);
+        let r = tS(t.assets, u[s] ?? {}, p, s === SITE_KIT_EMBEDS_LIBRARY_KEY);
         let n = {
           ...t.library,
           pages: r
@@ -3391,15 +3391,15 @@ function r4() {
         C.set(s, n);
         b.set(s, n);
       }
-      let e = _$$V4();
+      let e = getSiteEmbedConfig();
       if (e) {
         let t = tS([], {}, p, !0);
         let s = {
           ...e,
           pages: t
         };
-        C.set(_$$l(Yl), s);
-        b.set(_$$l(Yl), s);
+        C.set(_$$l(SITE_KIT_EMBEDS_LIBRARY_KEY), s);
+        b.set(_$$l(SITE_KIT_EMBEDS_LIBRARY_KEY), s);
       }
     }
     return {
@@ -3554,8 +3554,8 @@ let ns = forwardRef(({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.BREADCRUMB],
-    column: Yv.ELLIPSIS
+    path: [SectionType.BREADCRUMB],
+    column: ButtonType.ELLIPSIS
   });
   let k = l()(r6, {
     'asset_panel_collapsible_breadcrumb--dropdownOpen--YMRPh': d
@@ -3647,8 +3647,8 @@ function nr({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.BREADCRUMB],
-    column: Yv.LIBRARY
+    path: [SectionType.BREADCRUMB],
+    column: ButtonType.LIBRARY
   });
   let M = l()(v ? r8 : 'asset_panel_collapsible_breadcrumb--libraryStub--PU1iu asset_panel_collapsible_breadcrumb--buttonStub--4S8VP asset_panel_collapsible_breadcrumb--_buttonStubBase--aj18P asset_panel_collapsible_breadcrumb--_libraryStubBase--y4862', {
     'asset_panel_collapsible_breadcrumb--ellipsized--vFJ6x ellipsis--ellipsis--Tjyfa': e
@@ -3706,8 +3706,8 @@ let nn = forwardRef(({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.BREADCRUMB],
-    column: Yv.STUBS + t
+    path: [SectionType.BREADCRUMB],
+    column: ButtonType.STUBS + t
   });
   let {
     focusBackButton,
@@ -3781,7 +3781,7 @@ function nd() {
   let e = useOpenFileLibraryKey();
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     libraries,
     presets,
@@ -3789,7 +3789,7 @@ function nd() {
     librariesForConnectedProject
   } = _$$g3();
   let a = useMemo(() => getLibrary(e ?? void 0), [getLibrary, e]);
-  let o = useMemo(() => !a || (a.type === yW.DESIGN ? a.numComponents === 0 && a.numTemplates === 0 : a.numResponsiveSets === 0), [a]);
+  let o = useMemo(() => !a || (a.type === ModeType.DESIGN ? a.numComponents === 0 && a.numTemplates === 0 : a.numResponsiveSets === 0), [a]);
   let d = libraries.length === 0;
   let c = presets.length === 0;
   let u = librariesForConnectedProject.length === 0;
@@ -3907,7 +3907,7 @@ function nv({
       data
     } = getCollectionViewStatus(e);
     return useMemo(() => data ? function (e) {
-      let t = e.sort((e, t) => Ez(t.position, e.position));
+      let t = e.sort((e, t) => compareNumbers(t.position, e.position));
       let s = t.filter(e => e.fieldType === 'plain_text');
       let r = s.find(e => e.name.toLowerCase() === 'title') || s[0];
       let n = s.find(e => e.id !== r?.id);
@@ -3924,12 +3924,12 @@ function nv({
     }, [data]);
   }(e);
   let l = function (e) {
-    let t = _$$t3();
+    let t = useSiteKitCmsConfig();
     return useMemo(() => t ? Object.fromEntries([[t.primaryTextFieldId, e.primaryTextFieldId], [t.secondaryTextFieldId, e.secondaryTextFieldId], [t.imageFieldId, e.imageFieldId]].filter(e => e[1] != null)) : {}, [t, e]);
   }(i);
   return r({
     asset: function (e, t) {
-      let s = _$$t3();
+      let s = useSiteKitCmsConfig();
       let r = s?.assetNames;
       return useMemo(() => {
         if (!r) return null;
@@ -4009,7 +4009,7 @@ let nE = forwardRef(({
 }, a) => {
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     isLeftPanelCollapsed
   } = useContext(_$$t6);
@@ -4018,7 +4018,7 @@ let nE = forwardRef(({
   let p = getLibrary(t);
   if (!p) return null;
   let h = Cg(p);
-  return h && h.type === yW.SITE ? createPortal(jsx('div', {
+  return h && h.type === ModeType.SITE ? createPortal(jsx('div', {
     'ref': a,
     ...Ay.props(nO.flyout, nO.flyoutPosition(c), e && nO.hidden),
     'onMouseEnter': s,
@@ -4044,7 +4044,7 @@ function nA() {
     thumbWidth,
     onDragStart
   } = nN();
-  return VF()(libraryKey) ? jsx(nP, {}) : AZ(page) ? jsx(nL, {
+  return useIsCmsLibraryKey()(libraryKey) ? jsx(nP, {}) : hasEmbeds(page) ? jsx(nL, {
     children: jsx(nR, {
       styleXStyle: nO.gap16,
       children: page.embeds.map((e, t) => jsx(_$$Ay.Provider, {
@@ -4053,7 +4053,7 @@ function nA() {
           embed: e,
           sectionPosition: t,
           keyboardPosition: {
-            path: [ON.CONTENTS, _$$lM.ASSETS, t],
+            path: [SectionType.CONTENTS, ContentType.ASSETS, t],
             column: null
           },
           thumbHeight: Math.floor(embedThumbWidth / 2),
@@ -4074,7 +4074,7 @@ function nA() {
           thumbWidth,
           isFirstTile: t === 0,
           sectionNameForTracking: nM,
-          keyboardPosition: pg([_$$tM.COMPONENTS], t, 1),
+          keyboardPosition: pg([CategoryType.COMPONENTS], t, 1),
           hideName: !0,
           onDragStart
         }, e.name)
@@ -4103,7 +4103,7 @@ function nP() {
     asset: e,
     cmsCollectionMappings: t,
     hideName: !0,
-    keyboardPosition: pg([_$$tM.COMPONENTS], s, 1),
+    keyboardPosition: pg([CategoryType.COMPONENTS], s, 1),
     onDragStart,
     sectionNameForTracking: nM,
     sectionPosition: s,
@@ -4330,7 +4330,7 @@ function nV({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.CONTENTS, _$$lM.LIBRARIES, i, l],
+    path: [SectionType.CONTENTS, ContentType.LIBRARIES, i, l],
     column: o,
     id: e.libraryKey,
     disabled: N
@@ -4416,7 +4416,7 @@ function nV({
       });
     }, [e.libraryKey, s]);
     return useCallback(s => {
-      e.type !== yW.SITE && (s.preventDefault(), s.stopPropagation(), r(showDropdownThunk({
+      e.type !== ModeType.SITE && (s.preventDefault(), s.stopPropagation(), r(showDropdownThunk({
         type: sZ,
         data: {
           libraryHref: p,
@@ -4435,7 +4435,7 @@ function nV({
       })), f());
     }, [e.type, r, p, i, c, t, h, d, o, m, f]);
   }(e, d);
-  let D = !!dj(e.libraryKey);
+  let D = !!hasSiteKitLibraryKey(e.libraryKey);
   let F = function (e, t) {
     let s = getVisibleTheme() === 'dark' ? 'dark' : 'light';
     return useMemo(() => {
@@ -4449,7 +4449,7 @@ function nV({
         };
       }
     }, [t, e, s]);
-  }(e.name, D || e.libraryKey === Yl);
+  }(e.name, D || e.libraryKey === SITE_KIT_EMBEDS_LIBRARY_KEY);
   return jsx(RecordableButton, {
     'aria-label': e.name,
     'className': u ? '' : 'asset_panel_library--library--5bw5-',
@@ -4532,8 +4532,8 @@ function nz({
   showAuthor: s
 }) {
   let i = useAtomWithSubscription(Rs);
-  let l = e.type !== yW.SITE;
-  let a = useMemo(() => e.type === yW.SITE ? '' : e.numComponents > 0 ? getI18nString('design_systems.assets_panel.num_components', {
+  let l = e.type !== ModeType.SITE;
+  let a = useMemo(() => e.type === ModeType.SITE ? '' : e.numComponents > 0 ? getI18nString('design_systems.assets_panel.num_components', {
     numComponents: e.numComponents
   }) : '', [e]);
   let o = i?.[e.libraryKey]?.author_name || e.authorName;
@@ -5686,7 +5686,7 @@ function ie({
           className: n0,
           children: t.map((t, s) => jsx(nV, {
             library: t,
-            keyboardSection: gP.LOCAL_AND_SUBSCRIBED,
+            keyboardSection: LibraryType.LOCAL_AND_SUBSCRIBED,
             rowIndex: e,
             columnIndex: s,
             cardWidth,
@@ -5716,7 +5716,7 @@ function ie({
           className: n0,
           children: t.map((t, s) => jsx(nV, {
             library: t,
-            keyboardSection: gP.LOCAL_AND_SUBSCRIBED,
+            keyboardSection: LibraryType.LOCAL_AND_SUBSCRIBED,
             rowIndex: e,
             columnIndex: s,
             cardWidth,
@@ -5746,7 +5746,7 @@ function ie({
           className: n0,
           children: t.map((t, s) => jsx(nV, {
             library: t,
-            keyboardSection: gP.PRESETS,
+            keyboardSection: LibraryType.PRESETS,
             rowIndex: e,
             columnIndex: s,
             cardWidth,
@@ -5856,7 +5856,7 @@ function ir({
   });
   let {
     libraryKeys
-  } = useAtomWithSubscription(AS);
+  } = useAtomWithSubscription(siteKitState);
   let u = libraryKeys.length + 1;
   let {
     flyout,
@@ -5958,7 +5958,7 @@ function ir({
     O1(b, KD.OVERLAY);
     let [C, j] = useState(null);
     useEffect(() => {
-      let e = [...t, Yl];
+      let e = [...t, SITE_KIT_EMBEDS_LIBRARY_KEY];
       j(jsx(Fragment, {
         children: e.map(e => jsx(nE, {
           hide: d !== e,
@@ -6041,7 +6041,7 @@ function ir({
           flyoutHandlers: h,
           folderVariant: 'preview-no-padding',
           isFolderView: !0,
-          keyboardSection: gP.SITE_KIT,
+          keyboardSection: LibraryType.SITE_KIT,
           library: e,
           previewHeight,
           rowIndex: t
@@ -6084,7 +6084,7 @@ function ii({
     keyboardNavigationItem,
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.CONTENTS, _$$lM.PAGES, t],
+    path: [SectionType.CONTENTS, ContentType.PAGES, t],
     id: e.id,
     disabled: p
   });
@@ -6212,7 +6212,7 @@ function ib({
     keyboardNavigationItem,
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.CONTENTS, _$$lM.PAGES, i],
+    path: [SectionType.CONTENTS, ContentType.PAGES, i],
     column: l,
     id: e.id,
     disabled: u
@@ -6241,7 +6241,7 @@ function ib({
       widthForCentering: useMemo(() => t && i ? Math.max(Math.min(e - (t + i) - 1, i), 0) : -1, [i, t, e])
     };
   }(t);
-  let C = AZ(e) ? e.embeds[0]?.thumbnail_url : e.previewAsset;
+  let C = hasEmbeds(e) ? e.embeds[0]?.thumbnail_url : e.previewAsset;
   return jsxs(ButtonPrimitive, {
     'className': 'site_kit_pages--tile--GWdsc',
     'onClick': x,
@@ -6345,7 +6345,7 @@ function iS({
     };
   }();
   let m = useMemo(() => {
-    if (e?.type === yW.SITE && l === 'grid') {
+    if (e?.type === ModeType.SITE && l === 'grid') {
       return function (e, t, s, n) {
         let i = Array.from(e.pages);
         let l = [];
@@ -6434,9 +6434,9 @@ function iS({
 }
 let iT = iw;
 function iE() {
-  let e = _$$ce().data?.assetsByLibraryKey;
+  let e = useSiteKitAssets().data?.assetsByLibraryKey;
   let t = useMemo(() => e ? [...e.values()].flat() : [], [e]);
-  let s = useMemo(() => _$$u2(), []);
+  let s = useMemo(() => filterEnabledFeatures(), []);
   let r = _$$o(PrimaryWorkflowEnum.RESPONSIVE_SET);
   let i = useAtomWithSubscription(su);
   let l = getUserId();
@@ -6459,7 +6459,7 @@ function iM() {
   let t = iE();
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let [i] = MA();
   let l = i === 'list';
   let a = useCallback(e => {
@@ -6486,7 +6486,7 @@ function iM() {
           embed: e,
           sectionNameForTracking: 'Recently used site kit assets',
           sectionPosition: t,
-          keyboardPosition: pg([_$$tM.SITE_KIT], t, numColumns),
+          keyboardPosition: pg([CategoryType.SITE_KIT], t, numColumns),
           thumbHeight: props.thumbHeight,
           thumbWidth: props.thumbWidth,
           libraryName: getI18nString('design_systems.assets_panel.site_blocks.embeds')
@@ -6494,7 +6494,7 @@ function iM() {
           asset: e,
           sectionNameForTracking: 'Recently used site kit assets',
           sectionPosition: t,
-          keyboardPosition: pg([_$$tM.SITE_KIT], t, numColumns),
+          keyboardPosition: pg([CategoryType.SITE_KIT], t, numColumns),
           thumbHeight: props.thumbHeight,
           thumbWidth: props.thumbWidth,
           libraryName: a(e.sourceLibraryKey)
@@ -6512,7 +6512,7 @@ function iM() {
           fileName: a(e.library_key),
           sectionNameForTracking: componentSectionNameForTracking,
           sectionPosition: t,
-          keyboardPosition: pg([_$$tM.COMPONENTS], t, numColumns),
+          keyboardPosition: pg([CategoryType.COMPONENTS], t, numColumns),
           ...props
         }, `assetPanelRecents:component:${_$$V3(e)}`))
       })]
@@ -6553,9 +6553,9 @@ let iz = new KH({
 function iW() {
   let e;
   let t = getCurrentFileType() === FFileType.SITES;
-  let s = _$$ce();
+  let s = useSiteKitAssets();
   let r = s.data?.assetsByLibraryKey;
-  let i = useMemo(() => _$$u2(), []);
+  let i = useMemo(() => filterEnabledFeatures(), []);
   let l = useMemo(() => {
     let e = r ? [...r?.values()].flat() : [];
     return e ? [...e, ...i] : void 0;
@@ -6623,7 +6623,7 @@ let iZ = ({
   let p = useMemo(() => e.map(e => e.library_key), [e]);
   let {
     data
-  } = _$$U2(p);
+  } = getLibraryNames(p);
   let g = useCallback(e => data?.[e.library_key] ?? '', [data]);
   let [f] = MA();
   let x = tV();
@@ -6636,7 +6636,7 @@ let iZ = ({
   } = zf({
     moreSearchResults: !0
   });
-  let j = useMemo(() => tu(e, numColumns, 'components:moreResults', props, componentSectionNameForTracking, [_$$tM.COMPONENTS, 1], {
+  let j = useMemo(() => tu(e, numColumns, 'components:moreResults', props, componentSectionNameForTracking, [CategoryType.COMPONENTS, 1], {
     getFileName: g
   }), [e, numColumns, props, componentSectionNameForTracking, g]);
   return useMemo(() => {
@@ -6681,7 +6681,7 @@ function iQ({
   let {
     componentSectionNameForTracking
   } = zf();
-  let y = useMemo(() => tu(a, numColumns, 'components', props, componentSectionNameForTracking, [_$$tM.COMPONENTS, 0], {
+  let y = useMemo(() => tu(a, numColumns, 'components', props, componentSectionNameForTracking, [CategoryType.COMPONENTS, 0], {
     getFileName: u
   }), [a, numColumns, props, componentSectionNameForTracking, u]);
   let _ = iZ({
@@ -6691,8 +6691,8 @@ function iQ({
   });
   let [b, C] = useState(!1);
   let [j, v] = useState(!1);
-  let S = _$$r4(s);
-  let k = useMemo(() => sS(s, numColumns, props.thumbWidth, props.thumbHeight, p, 'assets', 'Site kit search results', [_$$tM.SITE_KIT], {
+  let S = useLibraryDisplayName(s);
+  let k = useMemo(() => sS(s, numColumns, props.thumbWidth, props.thumbHeight, p, 'assets', 'Site kit search results', [CategoryType.SITE_KIT], {
     libraryNameForAsset: S
   }), [p, numColumns, props.thumbHeight, props.thumbWidth, S, s]);
   let w = useMemo(() => {
@@ -6746,12 +6746,12 @@ function i1() {
   } = wV();
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let u = useMemo(() => normalizedSearchResults.map(e => e.library_key), [normalizedSearchResults]);
   let {
     data,
     status
-  } = _$$U2(u);
+  } = getLibraryNames(u);
   let g = i2(query);
   let f = status === 'loading';
   let x = f && g;
@@ -6809,7 +6809,7 @@ function i3() {
   let [l] = MA();
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let o = useMemo(() => libraryKey ? getLibrary(libraryKey)?.name : void 0, [getLibrary, libraryKey]);
   let {
     width
@@ -6846,7 +6846,7 @@ function i3() {
       numColumns: r
     };
   }(width);
-  let m = useMemo(() => sS(results, numColumns, tileWidth, tileHeight, l, 'assets', 'Site kit search results', [_$$tM.COMPONENTS], {
+  let m = useMemo(() => sS(results, numColumns, tileWidth, tileHeight, l, 'assets', 'Site kit search results', [CategoryType.COMPONENTS], {
     includesFirstTile: !0
   }), [l, numColumns, results, tileHeight, tileWidth]);
   return query ? jsx(iH, {
@@ -6890,7 +6890,7 @@ let i4 = ({
   let u = getThemeContextOrDefault().version;
   let p = _$$tM4('assets-panel');
   let h = useLatestRef(p);
-  let m = je();
+  let m = useSubscribedLibraries();
   let x = useSelector(e => e.fileVersion);
   let y = useSelector(e => e.loadingState);
   let _ = selectCurrentFile();
@@ -6901,7 +6901,7 @@ let i4 = ({
     let n = Date.now() - o;
     if (n < 5e3) return;
     let i = m.data?.map(e => {
-      let t = Mb(e.libraryKey);
+      let t = generatePublishedComponentsCacheKey(e.libraryKey);
       return {
         libraryKey: e.libraryKey,
         isLoading: !isLoaded(y, t)
@@ -7006,11 +7006,11 @@ function i7({
   let i = useAtomWithSubscription(Rs);
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let a = getLibrary(e);
-  let o = a?.type === yW.DESIGN ? a.numComponents : 0;
+  let o = a?.type === ModeType.DESIGN ? a.numComponents : 0;
   let d = useMemo(() => {
-    if (a?.type === yW.DESIGN) return Array.from(a.pages.values());
+    if (a?.type === ModeType.DESIGN) return Array.from(a.pages.values());
   }, [a]);
   let c = [];
   if (d?.[0]?.components && a?.libraryKey) {
@@ -7175,7 +7175,7 @@ function ls({
           let s = _$$x2(e);
           return a ? jsx(nV, {
             library: s,
-            keyboardSection: gP.VISUAL_ASSETS,
+            keyboardSection: LibraryType.VISUAL_ASSETS,
             rowIndex: t,
             columnIndex: 0,
             cardWidth,
@@ -7211,7 +7211,7 @@ function li({
   let {
     getPage,
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let m = _$$q()(libraryKey);
   _$$A(e);
   la();
@@ -7277,7 +7277,7 @@ function li({
 let ll = () => {
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     libraryKey
   } = wV();
@@ -7376,7 +7376,7 @@ function lb({
       children: jsx(_$$h6, {})
     }), jsx(E1, {
       autofocus: _,
-      column: Wy.SEARCH,
+      column: ActionType.SEARCH,
       entryPointForTracking: 'editor:assets_panel',
       forwardedRef: inputRef,
       isNewAssetsPanel: !0,
@@ -7385,7 +7385,7 @@ function lb({
       onChange: w,
       onClearSearch: M,
       onFocus: _$$lQ,
-      path: [ON.HEADER, my.SEARCH_AND_FILTER],
+      path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
       placeholder: P,
       query,
       recordingKey: 'componentsLibrarySearch',
@@ -7410,7 +7410,7 @@ function lC({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.HEADER, my.LIBRARY_SEARCH_CHIP]
+    path: [SectionType.HEADER, SearchType.LIBRARY_SEARCH_CHIP]
   });
   return e ? jsx(_$$v, {
     'aria-label': getI18nString('design_systems.assets_panel.search_chip_label'),
@@ -7441,7 +7441,7 @@ function lj({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.HEADER, my.LIBRARY_SEARCH_CHIP]
+    path: [SectionType.HEADER, SearchType.LIBRARY_SEARCH_CHIP]
   });
   return e ? jsxs('div', {
     'className': 'asset_panel_search--libraryChip--1nfYR asset_panel_search--horizontalFlex---CG1k',
@@ -7466,8 +7466,8 @@ function lL({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.HEADER, my.SEARCH_AND_FILTER],
-    column: Wy.SETTINGS
+    path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
+    column: ActionType.SETTINGS
   });
   let i = useCurrentFileKey();
   let l = Um();
@@ -7532,7 +7532,7 @@ function lR({
   } = wV();
   let {
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let b = useCurrentFileKey();
   let C = useOpenFileLibraryKey();
   let [j] = MA();
@@ -7541,7 +7541,7 @@ function lR({
   let k = isSitesFileType() || v;
   let w = useMemo(() => currentView !== S5.Search && (productComponents.length > 0 || u.length > 0), [currentView, productComponents.length, u.length]);
   let N = useMemo(() => b && C ? getLibrary(C) : void 0, [getLibrary, b, C]);
-  let I = N?.type === yW.DESIGN && (N.numComponents > 0 || N.numTemplates > 0);
+  let I = N?.type === ModeType.DESIGN && (N.numComponents > 0 || N.numTemplates > 0);
   let {
     libraries,
     presets,
@@ -7928,8 +7928,8 @@ function l0() {
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.HEADER, my.SEARCH_AND_FILTER],
-    column: Wy.VISUAL_SEARCH_BUTTON
+    path: [SectionType.HEADER, SearchType.SEARCH_AND_FILTER],
+    column: ActionType.VISUAL_SEARCH_BUTTON
   });
   return jsxs(EventShield, {
     eventListeners: e ? ['onMouseDown'] : [],
@@ -7964,7 +7964,7 @@ function l3() {
   let {
     getPage,
     getLibrary
-  } = _$$G();
+  } = useAssetPanelContext();
   let {
     currentView,
     libraryKey,
@@ -8184,7 +8184,7 @@ function an({
     let p = e.numComponents > 0 || e.numTemplates > 0;
     return useMemo(() => !i && l && (!o || !hasTeamPaidAccess(o) && u) && c && r && p && Hz(t?.id), [i, l, o, u, c, r, p, t]);
   }(t.localAssets);
-  let i = je().status === 'loading';
+  let i = useSubscribedLibraries().status === 'loading';
   let l = useRef(null);
   let c = wY(l)?.width || e;
   let [u] = MA();
@@ -8251,7 +8251,7 @@ function ai({
 }) {
   let n = _$$b();
   return jsx(P3, {
-    children: jsx(_$$K, {
+    children: jsx(AssetPanelProvider, {
       assetPanelItemsByLibraryKey: s,
       children: jsx(_$$tM2, {
         className: l()(kL, n && Nb),
@@ -8285,7 +8285,7 @@ function al({
     let {
       getLibrary,
       getFolder
-    } = _$$G();
+    } = useAssetPanelContext();
     let {
       setLastNavAction
     } = ZX();

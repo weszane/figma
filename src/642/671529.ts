@@ -47,7 +47,7 @@ import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { compareLibraryItemWithKey } from "../905/709171";
 import { getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
-import { IW, Gj } from "../figma_app/646357";
+import { getShownNonLocalStyle, getAssetUniqueId } from "../figma_app/646357";
 import { VF } from "../figma_app/679183";
 import { Button } from "../905/521428";
 import { bL } from "../905/911410";
@@ -251,7 +251,7 @@ function e_({
 }) {
   let a = useDispatch();
   let o = useSelector(e => e.mirror.selectedStyleProperties);
-  let d = IW(l);
+  let d = getShownNonLocalStyle(l);
   let u = sessionLocalIDToString(o.guid);
   let p = useAppModelProperty("isReadOnly");
   let h = !!d || !e || p;
@@ -281,7 +281,7 @@ function e_({
 function ev({
   stylePreviewShown: e
 }) {
-  let t = IW(e);
+  let t = getShownNonLocalStyle(e);
   let s = _$$b2({
     libraryKey: t?.library_key,
     nodeId: t?.node_id
@@ -393,7 +393,7 @@ function eS({
           })
         })]
       })
-    }, Gj(d.style))
+    }, getAssetUniqueId(d.style))
   });
 }
 function ek({

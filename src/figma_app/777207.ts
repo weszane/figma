@@ -3,7 +3,7 @@ import { l as _$$l } from "../905/716947";
 import { atomStoreManager } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { f } from "../figma_app/436731";
-import { r9 } from "../figma_app/646357";
+import { compareAssetsByTeam } from "../figma_app/646357";
 import { KindEnum } from "../905/129884";
 import { A } from "../905/913345";
 import { bJ, S0 } from "../905/863795";
@@ -34,7 +34,7 @@ export function $$m2({
     workspaceApprovedLibraryKeys,
     orgApprovedLibraryKeys
   } = r;
-  if (a && "file" in e && "file" in t && e.team_id !== t.team_id) return r9(e, t, n);
+  if (a && "file" in e && "file" in t && e.team_id !== t.team_id) return compareAssetsByTeam(e, t, n);
   let c = _$$l(e.library_key ?? "");
   let u = _$$l(t.library_key ?? "");
   let p = orgApprovedLibraryKeys.has(c) ? 1 : 0;

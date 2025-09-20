@@ -225,8 +225,8 @@ class LibraryAPI {
    * Fetches default libraries.
    * @original getDefaultLibraries
    */
-  getDefaultLibraries(params: Record<string, any>) {
-    return this.DefaultLibrariesSchemaValidator.validate(async ({ xr }) =>
+  getDefaultLibraries<T = any>(params: Record<string, any>) {
+    return this.DefaultLibrariesSchemaValidator.validate<T>(async ({ xr }) =>
       await xr.get('/api/design_systems/default_libraries', APIParameterUtils.toAPIParameters(params)),
     )
   }

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { n5, zE, HF } from "../figma_app/646357";
+import { findAssetByNodeId, hasAssetError, isStagedStatus } from "../figma_app/646357";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { dD } from "../905/519113";
@@ -16,8 +16,8 @@ function g() {
   let s = useMemo(() => {
     let s = new Set();
     for (let r of t) {
-      let t = n5(r, e);
-      t && (t.type === PrimaryWorkflowEnum.COMPONENT || t.type === PrimaryWorkflowEnum.STATE_GROUP) && !zE(t) ? s.add(t.node_id) : t && t.type === PrimaryWorkflowEnum.MODULE && s.add(t.node_id);
+      let t = findAssetByNodeId(r, e);
+      t && (t.type === PrimaryWorkflowEnum.COMPONENT || t.type === PrimaryWorkflowEnum.STATE_GROUP) && !hasAssetError(t) ? s.add(t.node_id) : t && t.type === PrimaryWorkflowEnum.MODULE && s.add(t.node_id);
     }
     return s;
   }, [e, t]);
@@ -43,8 +43,8 @@ export function $$f0() {
   } = g();
   let s = useSelector(e => e.library.local);
   let n = useSelector(selectSceneGraphSelectionKeys).some(e => {
-    let t = n5(e, s);
-    return t && !HF(t.status);
+    let t = findAssetByNodeId(e, s);
+    return t && !isStagedStatus(t.status);
   });
   return validNodeIds.size ? jsx(Button, {
     variant: "secondary",

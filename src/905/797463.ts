@@ -1,61 +1,124 @@
-import { z } from "../vendor/835909";
-export const f = function e(t, i, r = []) {
-  let a = i(t, r);
-  if (!a) return;
-  if (a !== t) return a;
-  let s = a.description;
-  let o = function (t, i, r = []) {
-    if (t instanceof z.ZodString || t instanceof z.ZodNumber || t instanceof z.ZodBoolean || t instanceof z.ZodNull || t instanceof z.ZodUndefined || t instanceof z.ZodLiteral || t instanceof z.ZodEnum || t instanceof z.ZodNaN || t instanceof z.ZodBigInt) return t;
-    if (t instanceof z.ZodObject) {
-      let a = t._def.shape();
-      let s = {};
-      for (let [t, n] of Object.entries(a)) {
-        let a = e(n, i, [...r, t]);
-        a && (s[t] = a);
+import { z } from 'zod'
+
+/**
+ * Recursively transforms a Zod schema using a provided transformer function.
+ * Original function name: f
+ * @param schema - The Zod schema to transform.
+ * @param transformer - The function to apply to each schema node.
+ * @param path - The path to the current node (used for recursion).
+ * @returns The transformed Zod schema or undefined.
+ */
+export function transformZodSchema(schema: z.ZodTypeAny, transformer: (schema: z.ZodTypeAny, path: (string | number)[]) => z.ZodTypeAny | undefined, path: (string | number)[] = []): z.ZodTypeAny | undefined {
+  const transformed = transformer(schema, path)
+  if (!transformed)
+    return
+  if (transformed !== schema)
+    return transformed
+
+  const description = transformed.description
+
+  /**
+   * Recursively applies the transformer to all child schemas.
+   * Original function name: e
+   */
+  const recursiveTransform = (
+    node: z.ZodTypeAny,
+    transformer: (schema: z.ZodTypeAny, path: (string | number)[]) => z.ZodTypeAny | undefined,
+    path: (string | number)[] = [],
+  ): z.ZodTypeAny | undefined => {
+    if (
+      node instanceof z.ZodString
+      || node instanceof z.ZodNumber
+      || node instanceof z.ZodBoolean
+      || node instanceof z.ZodNull
+      || node instanceof z.ZodUndefined
+      || node instanceof z.ZodLiteral
+      || node instanceof z.ZodEnum
+      || node instanceof z.ZodNaN
+      || node instanceof z.ZodBigInt
+    ) {
+      return node
+    }
+
+    if (node instanceof z.ZodObject) {
+      const shape = node._def.shape()
+      const newShape: Record<string, z.ZodTypeAny> = {}
+      for (const [key, child] of Object.entries(shape)) {
+        const transformedChild = recursiveTransform(child as any, transformer, [...path, key])
+        if (transformedChild)
+          newShape[key] = transformedChild
       }
-      return z.object(s);
+      return z.object(newShape)
     }
-    if (t instanceof z.ZodArray) {
-      let a = e(t.element, i, [...r, "*"]);
-      return a ? z.array(a) : void 0;
+
+    if (node instanceof z.ZodArray) {
+      const elementTransformed = recursiveTransform(node.element, transformer, [...path, '*'])
+      return elementTransformed ? z.array(elementTransformed) : undefined
     }
-    if (t instanceof z.ZodDiscriminatedUnion) {
-      let a = t._def.options.map(t => e(t, i, r)).filter(e => !!e);
-      return z.discriminatedUnion(t._def.discriminator, a);
+
+    if (node instanceof z.ZodDiscriminatedUnion) {
+      const options = node._def.options
+        .map(option => recursiveTransform(option, transformer, path))
+        .filter(Boolean)
+      return z.discriminatedUnion(node._def.discriminator, options)
     }
-    if (t instanceof z.ZodUnion) {
-      let a = t._def.options.map(t => e(t, i, r)).filter(e => !!e);
-      return z.union(a);
+
+    if (node instanceof z.ZodUnion) {
+      const options = node._def.options
+        .map(option => recursiveTransform(option, transformer, path))
+        .filter(Boolean)
+      return z.union(options)
     }
-    if (t instanceof z.ZodIntersection) {
-      let a = e(t._def.left, i, [...r, "left"]);
-      let s = e(t._def.right, i, [...r, "right"]);
-      return void 0 === a ? s : void 0 === s ? a : z.intersection(a, s);
+
+    if (node instanceof z.ZodIntersection) {
+      const left = recursiveTransform(node._def.left, transformer, [...path, 'left'])
+      const right = recursiveTransform(node._def.right, transformer, [...path, 'right'])
+      if (left === undefined)
+        return right
+      if (right === undefined)
+        return left
+      return z.intersection(left, right)
     }
-    if (t instanceof z.ZodRecord) {
-      let a = e(t._def.valueType, i, [...r, "*"]);
-      return z.record(t._def.keyType, a);
+
+    if (node instanceof z.ZodRecord) {
+      const valueTypeTransformed = recursiveTransform(node._def.valueType, transformer, [...path, '*'])
+      return z.record(node._def.keyType, valueTypeTransformed)
     }
-    if (t instanceof z.ZodTuple) {
-      let a = t._def.items.map((t, n) => e(t, i, [...r, n.toString()]));
-      return z.tuple(a);
+
+    if (node instanceof z.ZodTuple) {
+      const items = node._def.items.map((item, idx) =>
+        recursiveTransform(item, transformer, [...path, idx.toString()]),
+      )
+      return z.tuple(items)
     }
-    if (t instanceof z.ZodOptional) {
-      let a = e(t.unwrap(), i, r);
-      if (!a) return;
-      return z.optional(a);
+
+    if (node instanceof z.ZodOptional) {
+      const unwrapped = recursiveTransform(node.unwrap(), transformer, path)
+      if (!unwrapped)
+        return
+      return z.optional(unwrapped)
     }
-    if (t instanceof z.ZodNullable) {
-      let a = e(t.unwrap(), i, r);
-      if (!a) return;
-      return z.nullable(a);
+
+    if (node instanceof z.ZodNullable) {
+      const unwrapped = recursiveTransform(node.unwrap(), transformer, path)
+      if (!unwrapped)
+        return
+      return z.nullable(unwrapped)
     }
-    if (t instanceof z.ZodDefault) {
-      let n = e(t._def.innerType, i, r);
-      if (!n) return;
-      return n.default(t._def.defaultValue());
+
+    if (node instanceof z.ZodDefault) {
+      const innerTransformed = recursiveTransform(node._def.innerType, transformer, path)
+      if (!innerTransformed)
+        return
+      return innerTransformed.default(node._def.defaultValue())
     }
-    return t;
-  }(a, i, r);
-  if (o) return s ? o.describe(s) : o;
-};
+
+    return node
+  }
+
+  const result = recursiveTransform(transformed, transformer, path)
+  if (result)
+    return description ? result.describe(description) : result
+}
+
+export const f = transformZodSchema

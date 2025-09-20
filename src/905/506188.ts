@@ -1,23 +1,31 @@
-import { useMemo } from "react";
-import r from "lodash-es/mapValues";
-import { n as _$$n } from "../905/347702";
-import { V, e as _$$e } from "../905/726668";
-var a = r;
-export let $$l1 = _$$n(function (e, {
-  enabled: t = !0
-} = {}) {
-  let i = V(e, {
-    enabled: t
-  });
-  return useMemo(() => i.transform(e => a()(e, e => e.name)), [i]);
-});
-export function $$d0(e, {
-  enabled: t = !0
-} = {}) {
-  let i = _$$e(e, {
-    enabled: t
-  });
-  return useMemo(() => i.transform(e => e?.name ?? null), [i]);
+import mapValues from 'lodash-es/mapValues'
+import { useMemo } from 'react'
+import { useLibraryMetadata, useMultipleLibraryMetadata } from '../905/726668'
+
+// Original: $$l1 - renamed to getLibraryNames for multiple libraries
+/**
+ * Hook to retrieve names of multiple libraries.
+ * @param libraryIds - Array of library IDs.
+ * @param options - Options object with enabled flag.
+ * @returns Object mapping library IDs to their names.
+ */
+export function getLibraryNames(libraryIds: string[], { enabled = true } = {}) {
+  const metadata = useMultipleLibraryMetadata(libraryIds, { enabled })
+  return useMemo(() => metadata.transform(data => mapValues(data, item => item.name)), [metadata])
 }
-export const B = $$d0;
-export const U = $$l1;
+
+// Original: $$d0 - renamed to getLibraryName for single library
+/**
+ * Hook to retrieve the name of a single library.
+ * @param libraryId - The library ID.
+ * @param options - Options object with enabled flag.
+ * @returns The library name or null if not found.
+ */
+export function getLibraryName(libraryId: string, { enabled = true } = {}) {
+  const metadata = useLibraryMetadata(libraryId, { enabled })
+  return useMemo(() => metadata.transform(data => data?.name ?? null), [metadata])
+}
+
+// Aliases updated to match refactored names
+export const B = getLibraryName
+export const U = getLibraryNames

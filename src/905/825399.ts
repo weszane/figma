@@ -10,7 +10,7 @@ import { setupResourceAtomHandler, handleStatusChangeEffect } from "../figma_app
 import { fI } from "../figma_app/229259";
 import { batchPutFileAction } from "../figma_app/78808";
 import { Yb, wV } from "../figma_app/933328";
-import { yy } from "../figma_app/543529";
+import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { selectCurrentFile } from "../figma_app/516028";
 import { E as _$$E } from "../905/128063";
@@ -19,14 +19,14 @@ import { getParentOrgId } from "../905/872904";
 import { SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { isTeamLibrary, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { n as _$$n } from "../905/347702";
 import { getFirstActiveProjectResourceConnection } from "../905/606579";
 export function $$k10() {
   let e = getCurrentTeam();
-  let t = yy();
+  let t = useParentOrgOfOpenFile();
   return {
     hasProAccess: hasTeamPaidAccess(e) || !!t,
     hasOrgAccess: !!t,
@@ -95,11 +95,11 @@ let $$P11 = _$$n(() => {
   };
 });
 export function $$O4(e) {
-  let t = je();
+  let t = useSubscribedLibraries();
   return useMemo(() => t.data?.some(t => t.libraryKey === e.library_key), [e, t.data]);
 }
 export function $$D8() {
-  let e = je();
+  let e = useSubscribedLibraries();
   return useCallback(t => e.data?.some(e => e.libraryKey === t), [e.data]);
 }
 export function $$L3(e) {

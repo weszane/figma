@@ -1,7 +1,7 @@
 import { ii } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Av } from "../figma_app/646357";
+import { getAssetKey } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$l4(e, t) {
   let r = t.get(e)?.symbolId;
@@ -30,7 +30,7 @@ export function $$l4(e, t) {
   return null;
 }
 function d(e, t, r) {
-  let n = Av(t);
+  let n = getAssetKey(t);
   if (!n) return;
   let i = getSingletonSceneGraph().developerFriendlyIdFromGuid(e.instanceGUID);
   r[n] ? r[n].instanceIdsToUpdate.push(i) : r[n] = {

@@ -69,7 +69,7 @@ import { P as _$$P } from "../905/347284";
 import { compareWithGeneratedKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { rt } from "../figma_app/646357";
+import { loadStyleCanvases } from "../figma_app/646357";
 import { EU, KV, _U } from "../905/255097";
 import { s as _$$s } from "../cssbuilder/589278";
 import { QH, lx } from "../figma_app/333571";
@@ -699,7 +699,7 @@ function e8({
     return e;
   }, [a]);
   useEffect(() => {
-    rt(d);
+    loadStyleCanvases(d);
   }, [d]);
   return t({
     isLoading: o,

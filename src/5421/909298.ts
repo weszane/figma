@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { h6 } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { U as _$$U } from "../905/506188";
+import { getLibraryNames } from "../905/506188";
 import { Zh } from "../figma_app/2590";
 import { zt } from "../figma_app/84580";
 import { A as _$$A } from "../897/590880";
@@ -63,7 +63,7 @@ export function $$M1() {
   })), [n]);
   let a = useMemo(() => Object.values(o).filter(e => e.modeData?.modeOptions && e.modeData?.modeOptions.length > 1), [o]);
   let d = useMemo(() => g()(a.map(e => e.modeData.libraryKey ?? CC)), [a]);
-  let p = _$$U(d);
+  let p = getLibraryNames(d);
   let [h, x] = useMemo(() => {
     let {
       _local,

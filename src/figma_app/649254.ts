@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { WB } from "../905/761735";
-import { Ez, e6, TZ } from "../figma_app/766708";
+import { compareNumbers, nextAsciiString, separatorChar } from "../figma_app/766708";
 import { generateUUIDv4 } from "../905/871474";
 import { J } from "../905/539754";
 import { H } from "../905/748658";
 import { w } from "../figma_app/987465";
 import { hl } from "../figma_app/553024";
 export function $$u0(e) {
-  return e.sort((e, t) => Ez(t.position || "", e.position || ""));
+  return e.sort((e, t) => compareNumbers(t.position || "", e.position || ""));
 }
 export function $$p8({
   collectionId: e,
@@ -52,7 +52,7 @@ export function $$m5(e) {
 export function $$g9(e) {
   let t = $$u0($$m5(e).data);
   let r = t && t[t.length - 1];
-  return r?.position ? e6(r.position) : TZ;
+  return r?.position ? nextAsciiString(r.position) : separatorChar;
 }
 export async function $$f10(e) {
   return await J({

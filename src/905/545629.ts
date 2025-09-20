@@ -10,7 +10,7 @@ import { canvasGridAtom } from "../905/618447";
 import { C } from "../905/407781";
 import { zw } from "../905/877407";
 import { I } from "../905/120648";
-import { Lk, x } from "../figma_app/639711";
+import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
 import { fullscreenValue } from "../figma_app/455680";
 export class $$_0 extends C {
   getDefaultChildSize() {
@@ -29,7 +29,7 @@ export class $$_0 extends C {
     }
     r && fullscreenValue.commit();
     setTimeout(() => {
-      AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() || (AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), atomStoreManager.set(Lk, x.TEMPLATES));
+      AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() || (AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.TEMPLATES));
     }, 0);
     return p;
   }

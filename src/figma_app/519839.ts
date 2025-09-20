@@ -27,7 +27,7 @@ import { getSelectedFile } from "../905/766303";
 import { z as _$$z } from "../905/853613";
 import { Hj } from "../figma_app/412398";
 import { tf } from "../905/295427";
-import { HF, E2 } from "../figma_app/646357";
+import { isStagedStatus, getContainingStateGroupNodeId } from "../figma_app/646357";
 import { aB, jx } from "../905/576221";
 import { maybeCreateSavepoint } from "../905/294113";
 import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
@@ -66,7 +66,7 @@ export let $$Q8 = createOptimistThunk((e, {
     let t = e => {
       for (let t in e = {
         ...e
-      }) HF(e[t].status) ? e[t].status = StagingStatusEnum.DELETED : e[t].status === StagingStatusEnum.NEW && (e[t].status = StagingStatusEnum.NOT_STAGED);
+      }) isStagedStatus(e[t].status) ? e[t].status = StagingStatusEnum.DELETED : e[t].status === StagingStatusEnum.NEW && (e[t].status = StagingStatusEnum.NOT_STAGED);
       return e;
     };
     let r = t(n.library.local.components);
@@ -476,7 +476,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   trackEventAnalytics("Publish start: savepoint successfully created", {
     savepointId: r.id
   });
-  let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => E2(e) || NO_CONTAINING_STATE_GROUP_ID);
+  let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => getContainingStateGroupNodeId(e) || NO_CONTAINING_STATE_GROUP_ID);
   let eh = getTeamById(A);
   let {
     orderedUpdates
@@ -502,7 +502,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
       assets: e[PrimaryWorkflowEnum.VARIABLE][PublishStatusEnum.UNPUBLISH]
     });
     let i = e[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.PUBLISH];
-    let a = e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH].filter(e => null === E2(e));
+    let a = e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH].filter(e => null === getContainingStateGroupNodeId(e));
     r({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.STATE_GROUP,
@@ -516,7 +516,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     r({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.COMPONENT,
-      assets: e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH].filter(e => !E2(e))
+      assets: e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH].filter(e => !getContainingStateGroupNodeId(e))
     });
     r({
       publishType: PublishStatusEnum.UNPUBLISH,

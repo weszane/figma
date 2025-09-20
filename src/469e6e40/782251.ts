@@ -9,7 +9,7 @@ import { X } from "../figma_app/521331";
 import { M } from "../469e6e40/302359";
 import { Ku } from "../figma_app/740163";
 import { selectOpenFileKey } from "../figma_app/516028";
-import { w$ } from "../figma_app/646357";
+import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { Af, Gz, DP } from "../figma_app/803932";
 import { VZ } from "../figma_app/727192";
@@ -71,7 +71,7 @@ function j({
     dsStyle,
     styleGUIDs
   } = e;
-  w$(dsStyle);
+  useOptimisticStyleThumbnailUpdate(dsStyle);
   let s = dsStyle.value;
   dsStyle.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY && (s.style_type = "FILL", s.node_id = dsStyle.value.node_id);
   let i = Ku();

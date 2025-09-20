@@ -19,7 +19,7 @@ import { selectOpenFileKey, selectOpenFile, selectOpenFileLibraryKey, openFileAt
 import { isTeamFolderV2 } from '../figma_app/528509';
 import { LibrarySourceEnum, StagingStatusEnum, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { c5, qV, ZA } from '../figma_app/645694';
-import { ad, CG, E2, gA, Hb, HF, i_, LB, lg, Lk, MA, pD, Q_, rC, RQ, w8, zE } from '../figma_app/646357';
+import { hasContainingStateGroup, getAssetKeyForPublish, getContainingStateGroupNodeId, compareAssetsByFrameAndName, isActiveStagingStatus, isStagedStatus, createLocalComponent, createLocalStateGroup, isNewOrChangedOrDeleted, compareStyles, compareAssetsByName, areValuesEqual, areFramesEqual, generateNewLocalLibraryItems, hasVariableSetError, createLocalStyle, hasAssetError } from '../figma_app/646357';
 import { sortByMultiple } from '../figma_app/656233';
 import { VariableErrorType } from '../figma_app/763686';
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186';
@@ -55,7 +55,7 @@ let et = createSelector([e => e.library.local.styles, selectOpenFileKey, $$U8, e
     let r = _$$l(a.libraryKey);
     let {
       newLocal
-    } = rC(w8, n, i, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STYLE);
+    } = generateNewLocalLibraryItems(createLocalStyle, n, i, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STYLE);
     return newLocal;
   }
   return e;
@@ -78,7 +78,7 @@ let ei = createSelector([e => e.library.local.components, selectOpenFileKey, $$U
     let r = _$$l(i.libraryKey);
     let {
       newLocal
-    } = rC((e, t, r, n, i) => i_(e, t, r, n, i, l), a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.COMPONENT);
+    } = generateNewLocalLibraryItems((e, t, r, n, i) => createLocalComponent(e, t, r, n, i, l), a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.COMPONENT);
     return newLocal;
   }
   return e;
@@ -91,7 +91,7 @@ let es = createSelector([function (e) {
     let r = _$$l(i.libraryKey);
     let {
       newLocal
-    } = rC(LB, a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STATE_GROUP);
+    } = generateNewLocalLibraryItems(createLocalStateGroup, a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STATE_GROUP);
     return newLocal;
   }
   return e;
@@ -106,14 +106,14 @@ let $$el11 = createSelector([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e
     } else if (t?.content_hash !== e.content_hash) {
       return !0;
     }
-    if (!pD(t.name, e?.name) || !pD(t.description, e.description) || i && !pD(t.sort_position, e.sort_position) || Q_(t.containing_frame, e?.containing_frame, {
+    if (!areValuesEqual(t.name, e?.name) || !areValuesEqual(t.description, e.description) || i && !areValuesEqual(t.sort_position, e.sort_position) || areFramesEqual(t.containing_frame, e?.containing_frame, {
       compareSortPositions: i
     })) {
       return !0;
     }
-    let a = E2(e);
+    let a = getContainingStateGroupNodeId(e);
     let s = a && r[a] || null;
-    let o = E2(t);
+    let o = getContainingStateGroupNodeId(t);
     let d = o && n[o] || null;
     return s ? !d || eV(s, d) : d != null;
   };
@@ -248,12 +248,12 @@ let $$ep20 = createDeepEqualSelector([e => {
 let $$e_18 = createSelector([$$el11], e => {
   let t = {};
   for (let r of Object.values(e)) {
-    let e = E2(r);
+    let e = getContainingStateGroupNodeId(r);
     e != null && (t[e] = t[e] ?? [], t[e].push(r));
   }
   return t;
 });
-let eh = createSelector([$$el11], e => f()(e, e => !ad(e)));
+let eh = createSelector([$$el11], e => f()(e, e => !hasContainingStateGroup(e)));
 let em = e => e.library.local.modules;
 function eg(e, t) {
   if (!t) return !1;
@@ -262,7 +262,7 @@ function eg(e, t) {
   } else if (t.version !== e.version) {
     return !0;
   }
-  return !(pD(t.name, e?.name) && pD(t.description, e.description));
+  return !(areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description));
 }
 function ef(e, t, r, n, i) {
   if (!getFeatureFlags().dse_module_publish) return {};
@@ -292,9 +292,9 @@ let $$eb6 = createSelector([eh, $$ed22], (e, t) => ({
   ...e,
   ...t
 }));
-let eT = createSelector([$$eb6], e => _()(e, e => CG(e)));
-let eI = createSelector([$$eb6], e => Object.values(e).some(e => HF(e.status)));
-let eS = createSelector([$$eE37], e => Object.values(e).some(e => HF(e.status)));
+let eT = createSelector([$$eb6], e => _()(e, e => getAssetKeyForPublish(e)));
+let eI = createSelector([$$eb6], e => Object.values(e).some(e => isStagedStatus(e.status)));
+let eS = createSelector([$$eE37], e => Object.values(e).some(e => isStagedStatus(e.status)));
 let $$ev4 = createSelector([eI, eS], (e, t) => e || t);
 let eA = createSelector([$$eb6, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
 let ex = createSelector([$$eE37, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)));
@@ -313,8 +313,8 @@ let $$ew0 = atom(e => {
 });
 let eO = _$$n(createSelector([$$eb6, $$eE37], (e, t) => Object.keys(e).length > 0 || Object.keys(t).length > 0));
 let $$eR17 = createReduxSubscriptionAtomWithState(eO);
-let eL = (e, t) => e.status != null && (!!lg(e.status) || !!Hb(e.status) && (t ? t.has(e.node_id) : !!e.old_key));
-let eP = (e, t) => eL(e, t) && HF(e.status);
+let eL = (e, t) => e.status != null && (!!isNewOrChangedOrDeleted(e.status) || !!isActiveStagingStatus(e.status) && (t ? t.has(e.node_id) : !!e.old_key));
+let eP = (e, t) => eL(e, t) && isStagedStatus(e.status);
 let eD = createReduxSubscriptionAtomWithState(e => e.userStateLoaded);
 let $$ek30 = atom(e => e(eD) && e(openFileAtom)?.canEdit && (e($$tj32) || e($$ew0)));
 let $$eM23 = createSelector([$$el11, $$ed22, $$en21, (e, t) => t], ej);
@@ -326,7 +326,7 @@ function ej(e, t, r, n) {
     ...r
   };
   let a = new Set(n ? Object.keys(n).filter(e => n[e].publishType !== 'FORCED_COPY') : Object.values(i).filter(e => !!e.old_key).map(e => e.node_id));
-  Array.from(a).map(t => e[t] && E2(e[t])).filter(e => !!e).forEach(e => {
+  Array.from(a).map(t => e[t] && getContainingStateGroupNodeId(e[t])).filter(e => !!e).forEach(e => {
     a.add(e);
   });
   return a;
@@ -339,10 +339,10 @@ let eU = (e, t, r) => {
 };
 let eB = (e, t) => {
   let r = conditionalFeatureFlag('ds_user_facing_version_publishing', e.userFacingVersion === t.userFacingVersion, e.content_hash === t.content_hash);
-  return !(t && r && pD(t.name, e.name) && pD(t.description, e.description));
+  return !(t && r && areValuesEqual(t.name, e.name) && areValuesEqual(t.description, e.description));
 };
-let eG = (e, t) => eB(e, t) || !pD(t.sort_position, e.sort_position);
-let eV = (e, t) => getFeatureFlags().ds_user_facing_version_publishing ? !(t && t.userFacingVersion === e.userFacingVersion && !Q_(t.containing_frame, e?.containing_frame) && pD(t.name, e?.name) && pD(t.description, e.description)) : !(t && t.version === e.version && !Q_(t.containing_frame, e?.containing_frame) && pD(t.name, e?.name) && pD(t.description, e.description));
+let eG = (e, t) => eB(e, t) || !areValuesEqual(t.sort_position, e.sort_position);
+let eV = (e, t) => getFeatureFlags().ds_user_facing_version_publishing ? !(t && t.userFacingVersion === e.userFacingVersion && !areFramesEqual(t.containing_frame, e?.containing_frame) && areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description)) : !(t && t.version === e.version && !areFramesEqual(t.containing_frame, e?.containing_frame) && areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description));
 let eH = (e, t) => {
   if (!e || !t) return !0;
   if (getFeatureFlags().ds_user_facing_version_publishing) {
@@ -356,7 +356,7 @@ let ez = (e, t) => getFeatureFlags().ds_user_facing_version_publishing ? !(t && 
 function eW(e, t, r, i) {
   let [a, s] = m()(t, t => eL(t, e));
   let [o, l] = m()(a, r);
-  let [d, c] = m()(s, e => HF(e.status));
+  let [d, c] = m()(s, e => isStagedStatus(e.status));
   return {
     modified: {
       erroneous: sortByMultiple(o, ...i),
@@ -382,8 +382,8 @@ let $$eY38 = createRemovableAtomFamily(e => {
     return {
       ...n,
       libraryAssets: {
-        [PrimaryWorkflowEnum.RESPONSIVE_SET]: eW(i, _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) ? a.filter(e => e.type === PrimaryWorkflowEnum.RESPONSIVE_SET) : [], () => !1, [gA]),
-        [PrimaryWorkflowEnum.CODE_COMPONENT]: eW(i, _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) ? a.filter(e => e.type === PrimaryWorkflowEnum.CODE_COMPONENT) : [], () => !1, [gA])
+        [PrimaryWorkflowEnum.RESPONSIVE_SET]: eW(i, _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) ? a.filter(e => e.type === PrimaryWorkflowEnum.RESPONSIVE_SET) : [], () => !1, [compareAssetsByFrameAndName]),
+        [PrimaryWorkflowEnum.CODE_COMPONENT]: eW(i, _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) ? a.filter(e => e.type === PrimaryWorkflowEnum.CODE_COMPONENT) : [], () => !1, [compareAssetsByFrameAndName])
       },
       pageThumbnails: tj(s)
     };
@@ -400,17 +400,17 @@ function eq(e, t, r, n, i, a, s, o, l) {
   };
   let c = [...new Set(Object.values(a).filter(e => !e.isPublishable).map(e => e.variableSetId))].map(e => i[e]).filter(e => !!e);
   return {
-    styles: eW(o, Object.values(e), () => !1, [Lk, d]),
-    components: eW(o, Object.values(t), zE, [gA, d]),
-    stateGroups: eW(o, Object.values(r), zE, [gA, d]),
-    productComponents: eW(o, Object.values(n), zE, [gA, d]),
-    variableSets: eW(o, Object.values(i), RQ, [MA]),
-    variableSetsWithHiddenVariables: eW(o, c, () => !1, [MA]),
-    variables: eW(o, Object.values(a), () => !1, [MA]),
-    modules: eW(o, _$$O(PrimaryWorkflowEnum.MODULE) ? Object.values(s) : [], () => !1, [gA])
+    styles: eW(o, Object.values(e), () => !1, [compareStyles, d]),
+    components: eW(o, Object.values(t), hasAssetError, [compareAssetsByFrameAndName, d]),
+    stateGroups: eW(o, Object.values(r), hasAssetError, [compareAssetsByFrameAndName, d]),
+    productComponents: eW(o, Object.values(n), hasAssetError, [compareAssetsByFrameAndName, d]),
+    variableSets: eW(o, Object.values(i), hasVariableSetError, [compareAssetsByName]),
+    variableSetsWithHiddenVariables: eW(o, c, () => !1, [compareAssetsByName]),
+    variables: eW(o, Object.values(a), () => !1, [compareAssetsByName]),
+    modules: eW(o, _$$O(PrimaryWorkflowEnum.MODULE) ? Object.values(s) : [], () => !1, [compareAssetsByFrameAndName])
   };
 }
-let eJ = createDeepEqualSelector([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [MA])])));
+let eJ = createDeepEqualSelector([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [compareAssetsByName])])));
 let $$eZ12 = () => createDeepEqualSelector([eJ, (e, t) => t], (e, t) => {
   let r = e[t];
   return r ? r.modified.wellFormed : [];
@@ -424,11 +424,11 @@ let e1 = createSelector([$$en21], e => Object.values(e).filter(e => eP(e)));
 let e2 = createSelector([eK], e => e.components.modified.wellFormed);
 let e5 = createSelector([eK], e => e.stateGroups.modified.wellFormed);
 let e3 = createSelector([eK], e => e.productComponents.modified.wellFormed);
-let e4 = createSelector([e3], e => e.filter(e => HF(e.status)));
+let e4 = createSelector([e3], e => e.filter(e => isStagedStatus(e.status)));
 let e8 = createSelector([eK], e => e.variableSets.modified.wellFormed);
-let e6 = createSelector([e8], e => e.filter(e => HF(e.status)));
+let e6 = createSelector([e8], e => e.filter(e => isStagedStatus(e.status)));
 let e7 = createSelector([eK], e => _$$O(PrimaryWorkflowEnum.MODULE) ? e.modules.modified.wellFormed : []);
-let e9 = createSelector([e7], e => e.filter(e => HF(e.status)));
+let e9 = createSelector([e7], e => e.filter(e => isStagedStatus(e.status)));
 let $$te25 = createSelector([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !isTeamFolderV2(e?.project) && !!(e && hasTeamPaidAccess(e.teamId ? t[e.teamId] : null)));
 let $$tt3 = e0;
 let tr = createSelector([$$tt3], e => e.length > 0);
@@ -462,7 +462,7 @@ let tA = createRemovableAtomFamily(e => atom(t => {
 }));
 let tx = createRemovableAtomFamily(e => atom(t => {
   for (let r of Object.values(t($$eY38(e)).libraryAssets)) {
-    if (r.modified.wellFormed.length > 0 && _$$O(r.modified.wellFormed[0].type) && r.modified.wellFormed.some(e => HF(e.status))) return !0;
+    if (r.modified.wellFormed.length > 0 && _$$O(r.modified.wellFormed[0].type) && r.modified.wellFormed.some(e => isStagedStatus(e.status))) return !0;
   }
   return !1;
 }));
@@ -495,7 +495,7 @@ createSelector([$$to10], e => e.map(e => e.node_id));
 let $$tP35 = createSelector([$$ts28, () => getCooperFrameGuids()], (e, t) => e.filter(e => e.deletedFromSceneGraph || t.includes(e.node_id)).map(e => e.node_id));
 let $$tD34 = createSelector([$$tP35, () => getCooperFrames()], (e, t) => e.concat(t.filter(e => e.type !== 'SYMBOL').map(e => e.guid)));
 let $$tk29 = createSelector([$$el11, () => getCooperFrameGuids()], (e, t) => f()(e, e => t.includes(e.node_id)));
-let tM = atom(e => Object.values(e(_$$t).data ?? {}).some(e => HF(e.status)));
+let tM = atom(e => Object.values(e(_$$t).data ?? {}).some(e => isStagedStatus(e.status)));
 let tF = createReduxSubscriptionAtomWithState($$ee5);
 let $$tj32 = atom(e => e(tF) || e(tM));
 export function $$tU31(e, t) {

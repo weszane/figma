@@ -17,7 +17,7 @@ import { userAtom } from "../figma_app/864723";
 import { fullscreenValue } from "../figma_app/455680";
 import { c as _$$c } from "../905/210851";
 import { openFileAtom } from "../figma_app/516028";
-import { eS, aD } from "../figma_app/646357";
+import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { bd } from "../905/557338";
 import { KindEnum } from "../905/129884";
@@ -264,7 +264,7 @@ export function $$Y3(e) {
     componentInstanceUpdateInfo,
     stateInstanceUpdateInfo
   } = $$K4(e);
-  let o = eS(aD.ALL);
+  let o = useSubscribedAssets(AssetFilterMode.ALL);
   let {
     updateIndividualInstances
   } = TM(o, AX.DROPDOWN_UPDATE_SELECTED_INSTANCE);

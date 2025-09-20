@@ -18,13 +18,13 @@ import { RCSMessageType } from "../905/135526";
 import { Ho, Ck } from "../figma_app/236178";
 import { userLibrarySubscriptionsAtom, teamLibrarySubscriptionOverridesAtomFamily, mergedTeamLibrarySubscriptionOverridesAtom, workspaceLibrarySubscriptionsAtomFamily, orgLibrarySubscriptionsAtom, usePresetSubscriptionsMapping } from "../905/561897";
 import { hasResourcePresetKeyStatic } from "../figma_app/255679";
-import { $N, fc, Mj, w3, wn, T4, Bt } from "../figma_app/646357";
-import { B as _$$B } from "../905/506188";
+import { getAllAssetsArray, useIsAssetPublishedForCurrentFile, useOrgLibrarySubscriptionState, useWorkspaceLibrarySubscriptionState, useTeamLibrarySubscriptionState, hasActiveSubscriptionNotSubscribed, useUserLibrarySubscriptionState } from "../figma_app/646357";
+import { getLibraryName } from "../905/506188";
 import { QB } from "../905/921418";
 import { T as _$$T } from "../905/486858";
 import { FPlanNameType, FOrganizationRoleType } from "../figma_app/191312";
 import { useCurrentPlanUser, useCurrentPublicPlan, useIsOrgAdminUser } from "../figma_app/465071";
-import { Qh } from "../figma_app/155728";
+import { LibrarySubscriptionType } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { M } from "../905/540025";
 import { l6, sK, c$ } from "../905/794875";
@@ -46,16 +46,16 @@ export function $$M3(e, t) {
   return useCallback(r => {
     if (e) return n?.[r] ? {
       ...n[r],
-      subscriptionType: Qh.TEAM
+      subscriptionType: LibrarySubscriptionType.TEAM
     } : s?.[r] ? {
       ...s[r],
-      subscriptionType: Qh.WORKSPACE
+      subscriptionType: LibrarySubscriptionType.WORKSPACE
     } : o?.[r] ? {
       ...o[r],
-      subscriptionType: Qh.ORGANIZATION
+      subscriptionType: LibrarySubscriptionType.ORGANIZATION
     } : l?.[r] ? {
       ...l[r],
-      subscriptionType: Qh.COMMUNITY
+      subscriptionType: LibrarySubscriptionType.COMMUNITY
     } : {
       design: null,
       figjam: null,
@@ -65,16 +65,16 @@ export function $$M3(e, t) {
     };
     if (t) return i?.[r] ? {
       ...i[r],
-      subscriptionType: Qh.USER
+      subscriptionType: LibrarySubscriptionType.USER
     } : a?.[r] ? {
       ...a[r],
       subscriptionType: null
     } : o?.[r] ? {
       ...o[r],
-      subscriptionType: Qh.ORGANIZATION
+      subscriptionType: LibrarySubscriptionType.ORGANIZATION
     } : l?.[r] ? {
       ...l[r],
-      subscriptionType: Qh.COMMUNITY
+      subscriptionType: LibrarySubscriptionType.COMMUNITY
     } : {
       design: null,
       figjam: null,
@@ -168,7 +168,7 @@ function j({
           forwardToDatadog: !0
         });
         let t = e.libraryKey;
-        $N(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(FP({
+        getAllAssetsArray(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(FP({
           tab: UserInterfaceElements.ASSETS
         }));
       } else trackEventAnalytics("Library File Disabled", {
@@ -197,7 +197,7 @@ export function $$U2({
     openFile
   } = selectWithShallowEqual(H);
   let g = M();
-  let f = _$$B(t).data ?? "";
+  let f = getLibraryName(t).data ?? "";
   let _ = useMemo(() => ({
     libraryKey: t,
     showingDefaultSubscriptionsForTeamId: i,
@@ -241,7 +241,7 @@ export function $$U2({
     }
     R(t);
   }, [e, R, I]);
-  let L = fc();
+  let L = useIsAssetPublishedForCurrentFile();
   let U = $$M3(i, s);
   let B = useMemo(() => {
     let e = U(t);
@@ -464,9 +464,9 @@ let W = (e, t, i) => {
   let u = Ck(e);
   let p = n?.workspace_id?.toString();
   let m = !!(p && s.unwrapOr(null)?.fromOrgUser?.workspaceUsers?.find(e => e.workspaceId === p && e.permission === FOrganizationRoleType.ADMIN));
-  let h = Mj(e).data;
-  let g = w3(e, i).data;
-  let f = wn(e, a ?? null).data;
+  let h = useOrgLibrarySubscriptionState(e).data;
+  let g = useWorkspaceLibrarySubscriptionState(e, i).data;
+  let f = useTeamLibrarySubscriptionState(e, a ?? null).data;
   return useCallback(e => {
     if (!l || !t || !i || !c && !u || d || !c && m) return !1;
     let n = g || h;
@@ -478,12 +478,12 @@ let W = (e, t, i) => {
       slidesSubscribed: !!e.slidesSubscribed,
       buzzSubscribed: !!e.buzzSubscribed
     };
-    return T4(r || n, s);
+    return hasActiveSubscriptionNotSubscribed(r || n, s);
   }, [l, t, i, c, u, d, m, a, h, g, f]);
 };
 function K(e, t, i) {
-  let n = wn(e, t).data;
-  let a = Bt(e).data;
+  let n = useTeamLibrarySubscriptionState(e, t).data;
+  let a = useUserLibrarySubscriptionState(e).data;
   return useMemo(() => i && a ? a : t && n ? n : {
     design: null,
     figjam: null,

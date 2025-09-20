@@ -18,7 +18,7 @@ import { rM } from "../figma_app/241541";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFocusedNodeId, isFullscreenAndInFocusedNodeView, getFocusNodeFunction } from "../figma_app/327588";
-import { tc } from "../figma_app/334505";
+import { useSelectedCooperFrameGuids } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -444,7 +444,7 @@ function V({
   let i = cm();
   let a = getFocusedNodeId();
   let d = isFullscreenAndInFocusedNodeView();
-  let c = tc();
+  let c = useSelectedCooperFrameGuids();
   let u = getFocusNodeFunction();
   let x = function () {
     let e = useAtomWithSubscription(_$$v);

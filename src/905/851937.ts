@@ -13,7 +13,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Lk, x as _$$x } from "../figma_app/639711";
+import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
 import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/147952";
 import { mapEditorTypeTo } from "../905/808775";
 import { fullscreenValue } from "../figma_app/455680";
@@ -510,7 +510,7 @@ export let $$eo4 = _$$n(async e => {
     if (isValidForCooperSelectedView(e.triggeredFrom)) {
       if (!isBuzzPlugin(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
       atomStoreManager.set(d4, "LOADING");
-      atomStoreManager.set(Lk, _$$x.PLUGINS);
+      atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
     }
     e.isWidget || e.ignoreForRunLastPlugin || C3(e);
     setPluginData(e.plugin);

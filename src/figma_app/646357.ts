@@ -24,7 +24,6 @@ import { getSelectedFile } from '../905/766303'
 import { generateFileVersionUrl } from '../905/815475'
 import { getOrgByCurrentUserId } from '../905/845253'
 import { notificationActions } from '../905/851662'
-import { F7, n3, Pg, Rf, VariableStyleId } from '../905/859698'
 import { getParentOrgId, resolveParentOrgId } from '../905/872904'
 import { componentReplaceLocal } from '../905/879323'
 import { XHR } from '../905/910117'
@@ -34,96 +33,107 @@ import { atomStoreManager, useAtomWithSubscription } from '../figma_app/27355'
 import { batchPutFileAction } from '../figma_app/78808'
 import { generateNodeThumbnail, generateThumbnailFromStyleMaster, getDefaultPlaceholderThumbnail, isValidThumbnail, revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990'
 import { subscribedStateGroupsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsOnCurrentPageSelector, subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedSymbolsNodeIdsOnCurrentPageSelector } from '../figma_app/141508'
-import { He, je, Qh } from '../figma_app/155728'
+import { LibrarySubscriptionType, useSubscribedLibraries, useSubscribedLibraryKeys } from '../figma_app/155728'
 import { FContainerType } from '../figma_app/191312'
-import { e3 } from '../figma_app/275938'
-import { wM } from '../figma_app/463500'
+import { subscribedLibraryKeysAtom } from '../figma_app/275938'
+import { getStyleFoldersWithStyles } from '../figma_app/463500'
 import { debug, throwTypeError } from '../figma_app/465776'
 import { selectCurrentFile } from '../figma_app/516028'
 import { LibraryAgeEnum, NO_TEAM, PRIMARY_WORKFLOW_TYPES, PrimaryWorkflowEnum, StagingStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080'
 import { filterNotNullish } from '../figma_app/656233'
 import { loadingStateDelete } from '../figma_app/714946'
 import { Fullscreen, SceneGraphHelpers, StateGroupErrorType, VariableErrorType, VariableSetErrorType } from '../figma_app/763686'
-import { Ez } from '../figma_app/766708'
+import { compareNumbers } from '../figma_app/766708'
 import { memoizeByArgs } from '../figma_app/815945'
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186'
 import { CURRENT_VERSION_ID } from '../figma_app/841351'
 import { formatList } from '../figma_app/930338'
 
-var $$er57 = (e => (e.CURRENT = 'current', e.ALL = 'all', e))($$er57 || {})
-export let $$en23 = createContext(null)
-export function $$ei18(e) {
-  return e === StagingStatusEnum.CURRENT || e === StagingStatusEnum.CHANGED || e === StagingStatusEnum.DELETED
+/**
+ * Enum for asset filter modes (original: AssetFilterMode)
+ */
+export enum AssetFilterMode {
+  CURRENT = 'current',
+  ALL = 'all',
 }
-export function $$ea79(e) {
-  return e === StagingStatusEnum.NEW || e === StagingStatusEnum.CHANGED || e === StagingStatusEnum.DELETED
+
+/**
+ * Context for library subscriptions (original: LibrarySubscriptionContext)
+ */
+export const LibrarySubscriptionContext = createContext(null)
+
+/**
+ * Checks if staging status is CURRENT, CHANGED, or DELETED (original: isStagedStatus)
+ * @param status
+ */
+export function isStagedStatus(status: StagingStatusEnum): boolean {
+  return (
+    status === StagingStatusEnum.CURRENT
+    || status === StagingStatusEnum.CHANGED
+    || status === StagingStatusEnum.DELETED
+  )
 }
-export function $$es33(e) {
-  switch (e.type) {
+
+/**
+ * Checks if staging status is NEW, CHANGED, or DELETED (original: isNewOrChangedOrDeleted)
+ * @param status
+ */
+export function isNewOrChangedOrDeleted(status: StagingStatusEnum): boolean {
+  return (
+    status === StagingStatusEnum.NEW
+    || status === StagingStatusEnum.CHANGED
+    || status === StagingStatusEnum.DELETED
+  )
+}
+
+/**
+ * Extracts key and version from asset (original: getAssetKeyVersion)
+ * @param asset
+ */
+export function getAssetKeyVersion(asset: any): { type: string, key: string, version: string } {
+  switch (asset.type) {
     case PrimaryWorkflowEnum.COMPONENT:
-      return {
-        type: e.type,
-        key: e.component_key,
-        version: e.content_hash,
-      }
+      return { type: asset.type, key: asset.component_key, version: asset.content_hash }
     case PrimaryWorkflowEnum.STATE_GROUP:
-      return {
-        type: e.type,
-        key: e.key,
-        version: e.version,
-      }
+      return { type: asset.type, key: asset.key, version: asset.version }
     case PrimaryWorkflowEnum.STYLE:
-      return {
-        type: e.type,
-        key: e.key,
-        version: e.content_hash,
-      }
+      return { type: asset.type, key: asset.key, version: asset.content_hash }
     case PrimaryWorkflowEnum.VARIABLE_SET:
     case PrimaryWorkflowEnum.VARIABLE:
     case PrimaryWorkflowEnum.MODULE:
-      return {
-        type: e.type,
-        key: e.key,
-        version: e.version,
-      }
+      return { type: asset.type, key: asset.key, version: asset.version }
     case PrimaryWorkflowEnum.RESPONSIVE_SET:
     case PrimaryWorkflowEnum.CODE_COMPONENT:
-      if (e.subscriptionStatus === 'LOCAL') {
-        return {
-          type: e.type,
-          key: e.keyForPublish,
-          version: e.version,
-        }
+      if (asset.subscriptionStatus === 'LOCAL') {
+        return { type: asset.type, key: asset.keyForPublish, version: asset.version }
       }
-      return {
-        type: e.type,
-        key: e.key,
-        version: e.version,
-      }
+      return { type: asset.type, key: asset.key, version: asset.version }
     case PrimaryWorkflowEnum.MANAGED_STRING:
-      return {
-        type: e.type,
-        key: e.keyForPublish,
-        version: e.version,
-      }
+      return { type: asset.type, key: asset.keyForPublish, version: asset.version }
     default:
-      throwTypeError(e, `Unknown type ${e?.type}`)
+      throwTypeError(asset, `Unknown type ${asset?.type}`)
   }
 }
-export function $$eo3(e) {
-  let {
-    key,
-  } = $$es33(e)
-  debug(void 0 !== key, 'Asset had no key', {
-    asset: e,
-  })
+
+/**
+ * Gets asset key (original: getAssetKey)
+ * @param asset
+ */
+export function getAssetKey(asset: any): string {
+  const { key } = getAssetKeyVersion(asset)
+  debug(key !== undefined, 'Asset had no key', { asset })
   return key
 }
-export function $$el46(e) {
-  switch (e.type) {
+
+/**
+ * Gets library key for asset (original: getAssetLibraryKey)
+ * @param asset
+ */
+export function getAssetLibraryKey(asset: any): string | null {
+  switch (asset.type) {
     case PrimaryWorkflowEnum.CODE_COMPONENT:
     case PrimaryWorkflowEnum.RESPONSIVE_SET:
-      return e.subscriptionStatus === 'LIBRARY' ? e.sourceLibraryKey : null
+      return asset.subscriptionStatus === 'LIBRARY' ? asset.sourceLibraryKey : null
     case PrimaryWorkflowEnum.COMPONENT:
     case PrimaryWorkflowEnum.STATE_GROUP:
     case PrimaryWorkflowEnum.STYLE:
@@ -131,208 +141,399 @@ export function $$el46(e) {
     case PrimaryWorkflowEnum.VARIABLE_SET:
     case PrimaryWorkflowEnum.MODULE:
     case PrimaryWorkflowEnum.MANAGED_STRING:
-      return e.library_key
+      return asset.library_key
+    default:
+      return null
   }
 }
-export function $$ed51(e) {
-  return e.map($$eo3)
+
+/**
+ * Maps array of assets to their keys (original: mapAssetsToKeys)
+ * @param assets
+ */
+export function mapAssetsToKeys(assets: any[]): string[] {
+  return assets.map(getAssetKey)
 }
-export function $$ec7(e) {
-  return $$es33(e).version
+
+/**
+ * Gets asset version (original: getAssetVersion)
+ * @param asset
+ */
+export function getAssetVersion(asset: any): string {
+  return getAssetKeyVersion(asset).version
 }
-export function $$eu21(e) {
-  return !e.isShown || e.isCreating ? null : e.style.isLocal ? null : e.style
+
+/**
+ * Returns style if shown and not creating and not local (original: getShownNonLocalStyle)
+ * @param obj
+ */
+export function getShownNonLocalStyle(obj: any): any | null {
+  return !obj.isShown || obj.isCreating ? null : obj.style.isLocal ? null : obj.style
 }
-export function $$ep106(e, t, r) {
-  for (let r of Object.values(t)) {
-    if (r.status === 'loaded' && r.data.key === e)
-      return r.data
+
+/**
+ * Finds style data by key in loaded/used styles (original: findStyleDataByKey)
+ * @param key
+ * @param usedStyles
+ * @param loadedStyles
+ */
+export function findStyleDataByKey(key: string, usedStyles: Record<string, { status: string, data: { key: string } }>, loadedStyles: Record<string, { key: string }>): any | null {
+  for (const style of Object.values(usedStyles)) {
+    if (style.status === 'loaded' && style.data.key === key)
+      return style.data
   }
-  for (let t of Object.values(r)) {
-    if (t.key === e)
-      return t
+  for (const style of Object.values(loadedStyles)) {
+    if (style.key === key)
+      return style
   }
   return null
 }
-export function $$e_73(e, t) {
-  let r = Object.create(null)
-  if (!t || !t.library_key)
-    return r
-  let n = t.library_key
-  let i = t.team_id || NO_TEAM
-  let a = e[i]?.[n] ?? Object.create(null)
-  for (let e in a) a[e].unpublished_at == null && (r[e] = a[e])
-  return r
-}
-export function $$eh19(e, t) {
-  return t ? $$eg95(e)[t] ?? {} : {}
-}
-export function $$em0(e, t) {
-  return Object.values($$eh19(e, t))
-}
-export function $$eg95(e) {
-  let t = {}
-  for (let r of Object.values(e)) {
-    for (let [e, n] of Object.entries(r)) t[e] = n
+
+/**
+ * Flattens nested asset objects into a single array.
+ * (original: flattenAssetsArray)
+ * @param assetsByTeam Nested assets object
+ * @returns Array of asset objects
+ */
+export function flattenAssetsArray(assetsByTeam: Record<string, Record<string, any>>): any[] {
+  const result: any[] = []
+  for (const teamId of Object.keys(assetsByTeam)) {
+    const teamAssets = assetsByTeam[teamId] ?? {}
+    for (const asset of Object.values(teamAssets)) {
+      result.push(asset)
+    }
   }
-  return t
+  return result
 }
-export function $$ef101(e) {
-  let t = []
-  $$ey41(e, (e, r, n, i) => {
-    t.push(i)
+
+/**
+ * Gets published assets for a library (original: getPublishedAssetsForLibrary)
+ * @param assetsByTeam
+ * @param library
+ */
+export function getPublishedAssetsForLibrary(assetsByTeam: any, library: any): any {
+  const result = Object.create(null)
+  if (!library || !library.library_key)
+    return result
+  const teamId = library.team_id || NO_TEAM
+  const assets = assetsByTeam[teamId]?.[library.library_key] ?? Object.create(null)
+  for (const key in assets) {
+    if (assets[key].unpublished_at == null)
+      result[key] = assets[key]
+  }
+  return result
+}
+
+/**
+ * Gets all assets for a library key (original: getAssetsForLibraryKey)
+ * @param assetsByTeam
+ * @param libraryKey
+ */
+export function getAssetsForLibraryKey(assetsByTeam: any, libraryKey: string): any {
+  return libraryKey ? flattenAssetsByTeam(assetsByTeam)[libraryKey] ?? {} : {}
+}
+
+/**
+ * Flattens assets by team (original: flattenAssetsByTeam)
+ * @param assetsByTeam
+ */
+export function flattenAssetsByTeam(assetsByTeam: any): any {
+  const result: any = {}
+  for (const teamAssets of Object.values(assetsByTeam)) {
+    for (const [key, asset] of Object.entries(teamAssets)) {
+      result[key] = asset
+    }
+  }
+  return result
+}
+
+/**
+ * Gets all assets as array (original: getAllAssetsArray)
+ * @param assetsByTeam
+ * @param libraryKey
+ */
+export function getAllAssetsArray(assetsByTeam: any, libraryKey: string): any[] {
+  return Object.values(getAssetsForLibraryKey(assetsByTeam, libraryKey))
+}
+
+/**
+ * Gets all assets as array (original: getAllAssets)
+ * @param assetsByTeam
+ */
+export function getAllAssets(assetsByTeam: any): any[] {
+  const result: any[] = []
+  iterateAssetsByTeam(assetsByTeam, (_teamId, _libKey, _assetKey, asset) => {
+    result.push(asset)
   })
-  return t
+  return result
 }
-export function $$eE1(e) {
-  let t = []
-  for (let r of Object.keys(e)) {
-    for (let n of Object.values(e[r] ?? {})) t.push(n)
-  }
-  return t
-}
-export function $$ey41(e, t) {
-  for (let [r, n] of Object.entries(e)) {
-    for (let [e, i] of Object.entries(n)) {
-      let n = e
-      for (let [e, a] of Object.entries(i)) t(r, n, e, a)
-    }
-  }
-}
-export function $$eb50(e) {
-  return Object.keys(e).map(t => e[t]).filter(e => !e.deletedFromSceneGraph)
-}
-export function $$eT96(e, t) {
-  let r = []
-  for (let n in e) {
-    let i = e[n]
-    i.style_type !== t || i.deletedFromSceneGraph || r.push(i)
-  }
-  return r
-}
-export function $$eI2(e, t, r, n) {
-  let i = []
-  for (let a of Object.keys(t)) {
-    let s = a
-    if (eF(e.defaultPublished, r, s, n)) {
-      let e = t[s] ?? {}
-      i.push(...Object.values(e))
-    }
-  }
-  return i
-}
-let $$eS = new Set()
-export async function $$ev90(e) {
-  let t = new Map((e = e.filter(e => e.canvas_url && !teamLibraryCache.hasKeyInCache(generateFileVersionUrl(e.canvas_url).url) && !$$eS.has(e.key))).map(e => [e.key, e.canvas_url]))
-  let r = e.map(e => e.key)
-  if (r.forEach(e => $$eS.add(e)), getFeatureFlags().ds_file_proxy_for_style_assets) {
-    await Promise.all(r.map(e => teamLibraryCache.getCanvas({
-      canvas_url: t.get(e),
-    })))
-  }
-  else {
-    if (r.length === 0)
-      return
-    try {
-      let e = await XHR.post('/style/canvases', {
-        style_keys: r,
-      })
-      for (let [r, n] of Object.entries(e.data.meta.urls)) {
-        XHR.crossOriginGetAny(n, null, {
-          responseType: 'arraybuffer',
-        }).then(({
-          data: e,
-        }) => {
-          let n = t.get(n3(r))
-          if (n) {
-            let t = generateFileVersionUrl(n).url
-            teamLibraryCache.putCanvas(t, e)
-          }
-          $$eS.$$delete(n3(r))
-        }).catch(() => {
-          $$eS.$$delete(n3(r))
-        })
+
+/**
+ * Iterates over all assets by team (original: iterateAssetsByTeam)
+ * @param assetsByTeam
+ * @param callback
+ */
+export function iterateAssetsByTeam(
+  assetsByTeam: any,
+  callback: (teamId: string, libKey: string, assetKey: string, asset: any) => void,
+): void {
+  for (const [teamId, libs] of Object.entries(assetsByTeam)) {
+    for (const [libKey, assets] of Object.entries(libs)) {
+      for (const [assetKey, asset] of Object.entries(assets)) {
+        callback(teamId, libKey, assetKey, asset)
       }
     }
-    catch (e) {
-      r.forEach(e => $$eS.$$delete(e))
+  }
+}
+
+/**
+ * Gets non-deleted assets as array (original: getNonDeletedAssets)
+ * @param assets
+ */
+export function getNonDeletedAssets(assets: any): any[] {
+  return Object.keys(assets)
+    .map(key => assets[key])
+    .filter(asset => !asset.deletedFromSceneGraph)
+}
+
+/**
+ * Filters styles by type (original: filterStylesByType)
+ * @param styles
+ * @param styleType
+ */
+export function filterStylesByType(styles: any, styleType: string): any[] {
+  const result: any[] = []
+  for (const key in styles) {
+    const style = styles[key]
+    if (style.style_type !== styleType || style.deletedFromSceneGraph)
+      continue
+    result.push(style)
+  }
+  return result
+}
+
+/**
+ * Gets published assets for defaultPublished (original: getPublishedAssetsForDefaultPublished)
+ * @param defaultPublished
+ * @param assetsByTeam
+ * @param file
+ * @param subscribedKeys
+ */
+export function getPublishedAssetsForDefaultPublished(
+  defaultPublished: any,
+  assetsByTeam: any,
+  file: any,
+  subscribedKeys: Set<string>,
+): any[] {
+  const result: any[] = []
+  for (const teamId of Object.keys(assetsByTeam)) {
+    if (isAssetPublished(defaultPublished, file, teamId, subscribedKeys)) {
+      const assets = assetsByTeam[teamId] ?? {}
+      result.push(...Object.values(assets))
+    }
+  }
+  return result
+}
+
+/**
+ * Checks if asset is published (original: isAssetPublished)
+ * @param defaultPublished
+ * @param file
+ * @param assetKey
+ * @param subscribedKeys
+ */
+function isAssetPublished(
+  defaultPublished: any,
+  file: any,
+  assetKey: string,
+  subscribedKeys: Set<string>,
+): boolean {
+  return (
+    !!file
+    && !!assetKey
+    && !isSameAssetKey(file, assetKey)
+    && (!!isSubscribedLibrary(defaultPublished, assetKey) || subscribedKeys.has(assetKey))
+  )
+}
+
+/**
+ * Checks if asset key matches file key (original: firstComponentsParsed)
+ * @param file
+ * @param assetKey
+ */
+function isSameAssetKey(file: any, assetKey: string): boolean {
+  return (
+    generateUniqueKey(file.key) === assetKey
+    || (!!file.source_file_key && generateUniqueKey(file.source_file_key) === assetKey)
+  )
+}
+
+/**
+ * Checks if asset is in subscribed libraries (original: isSubscribedLibrary)
+ * @param defaultPublished
+ * @param assetKey
+ */
+function isSubscribedLibrary(defaultPublished: any, assetKey: string): boolean {
+  return !!defaultPublished?.libraryKeys?.includes(assetKey)
+    || atomStoreManager.get(subscribedLibraryKeysAtom).has(assetKey)
+}
+
+/**
+ * Loads canvases for styles (original: loadStyleCanvases)
+ * @param styles
+ */
+let loadedCanvasKeys = new Set<string>()
+export async function loadStyleCanvases(styles: any[]): Promise<void> {
+  const styleMap = new Map(
+    (styles = styles.filter(
+      style =>
+        style.canvas_url
+        && !teamLibraryCache.hasKeyInCache(generateFileVersionUrl(style.canvas_url).url)
+        && !loadedCanvasKeys.has(style.key),
+    )).map(style => [style.key, style.canvas_url]),
+  )
+  const keys = styles.map(style => style.key)
+  keys.forEach(key => loadedCanvasKeys.add(key))
+  if (getFeatureFlags().ds_file_proxy_for_style_assets) {
+    await Promise.all(
+      keys.map(key =>
+        teamLibraryCache.getCanvas({
+          canvas_url: styleMap.get(key),
+        }),
+      ),
+    )
+  }
+  else {
+    if (keys.length === 0)
+      return
+    try {
+      const response = await XHR.post('/style/canvases', { style_keys: keys }) as { data: { meta: { urls: Record<string, string> } } }
+      for (const [key, url] of Object.entries(response.data.meta.urls)) {
+        XHR.crossOriginGetAny(url, null, { responseType: 'arraybuffer' })
+          .then(({ data }) => {
+            const canvasUrl = styleMap.get(key)
+            if (canvasUrl) {
+              const cacheKey = generateFileVersionUrl(canvasUrl).url
+              teamLibraryCache.putCanvas(cacheKey, data)
+            }
+            loadedCanvasKeys.delete(key)
+          })
+          .catch(() => {
+            loadedCanvasKeys.delete(key)
+          })
+      }
+    }
+    catch {
+      keys.forEach(key => loadedCanvasKeys.delete(key))
     }
   }
 }
-let $$eA84 = ['TEXT', 'FILL', 'EFFECT', 'GRID']
-let ex = (e, t) => {
-  let r = t ? 1 : 2
-  switch (e) {
+
+/**
+ * Style types (original: STYLE_TYPES)
+ */
+export const STYLE_TYPES = ['TEXT', 'FILL', 'EFFECT', 'GRID']
+
+/**
+ * Gets i18n string for style type (original: ex)
+ * @param styleType
+ * @param isPlural
+ */
+function getStyleTypeI18n(styleType: string, isPlural: boolean): string {
+  const numStyles = isPlural ? 2 : 1
+  switch (styleType) {
     case 'TEXT':
-      return getI18nString('design_systems.styles.text_style', {
-        numStyles: r,
-      })
+      return getI18nString('design_systems.styles.text_style', { numStyles })
     case 'FILL':
-      return getI18nString('design_systems.styles.color_style', {
-        numStyles: r,
-      })
+      return getI18nString('design_systems.styles.color_style', { numStyles })
     case 'EFFECT':
-      return getI18nString('design_systems.styles.effect_style', {
-        numStyles: r,
-      })
+      return getI18nString('design_systems.styles.effect_style', { numStyles })
     case 'GRID':
-      return getI18nString('design_systems.styles.guide_style', {
-        numStyles: r,
-      })
+      return getI18nString('design_systems.styles.guide_style', { numStyles })
     case 'EXPORT':
       return getI18nString('design_systems.styles.export_style')
     case 'STROKE':
       return getI18nString('design_systems.styles.stroke_style')
     default:
-      trackEventAnalytics('Unknown style type', {
-        styleType: e,
-      })
-      return getI18nString('design_systems.styles.styles', {
-        numStyles: r,
-      })
+      trackEventAnalytics('Unknown style type', { styleType })
+      return getI18nString('design_systems.styles.styles', { numStyles })
   }
 }
-export function $$eN39(e) {
-  return ex(e, !1)
+
+/**
+ * Gets i18n string for style type singular (original: getStyleTypeLabel)
+ * @param styleType
+ */
+export function getStyleTypeLabel(styleType: string): string {
+  return getStyleTypeI18n(styleType, false)
 }
-export function $$eC52(e) {
-  return ex(e, !0)
+
+/**
+ * Gets i18n string for style type plural (original: getStyleTypeLabelPlural)
+ * @param styleType
+ */
+export function getStyleTypeLabelPlural(styleType: string): string {
+  return getStyleTypeI18n(styleType, true)
 }
-function ew(e, t, r) {
-  return t in e
-    ? {
-        design: !!e[t]?.design,
-        figjam: !!e[t]?.figjam,
-        slides: !!e[t]?.slides,
-        buzz: !!e[t]?.buzz,
-        subscriptionType: r,
-        subscriptionId: e[t]?.subscriptionId,
-      }
-    : {
-        design: null,
-        figjam: null,
-        slides: null,
-        buzz: null,
-        subscriptionType: null,
-      }
+
+/**
+ * Returns subscription info for a library (original: ew)
+ * @param subscriptions
+ * @param libraryKey
+ * @param subscriptionType
+ */
+function getLibrarySubscriptionInfo(subscriptions: any, libraryKey: string, subscriptionType: string) {
+  if (libraryKey in subscriptions) {
+    return {
+      design: !!subscriptions[libraryKey]?.design,
+      figjam: !!subscriptions[libraryKey]?.figjam,
+      slides: !!subscriptions[libraryKey]?.slides,
+      buzz: !!subscriptions[libraryKey]?.buzz,
+      subscriptionType,
+      subscriptionId: subscriptions[libraryKey]?.subscriptionId,
+    }
+  }
+  return {
+    design: null,
+    figjam: null,
+    slides: null,
+    buzz: null,
+    subscriptionType: null,
+  }
 }
-let eO = e => e.design !== null && e.figjam !== null && e.slides !== null
-export function $$eR35(e) {
-  let t = useAtomWithSubscription(orgLibrarySubscriptionsAtom)
-  let r = (function (e) {
-    let t = usePresetSubscriptionsMapping()
-    return useMemo(() => e
-      ? t ? createLoadedState(ew(t, e, Qh.COMMUNITY)) : createLoadingState()
-      : createLoadedState({
-          design: !1,
-          figjam: !1,
-          slides: !1,
-          buzz: !1,
-          subscriptionType: null,
-        }), [e, t])
-  }(e))
+
+/**
+ * Checks if all subscription types are present (original: eO)
+ * @param info
+ */
+function hasAllSubscriptionTypes(info: any): boolean {
+  return info.design !== null && info.figjam !== null && info.slides !== null
+}
+
+/**
+ * Gets organization library subscription state (original: useOrgLibrarySubscriptionState)
+ * @param libraryKey
+ */
+export function useOrgLibrarySubscriptionState(libraryKey: string) {
+  const orgSubscriptions = useAtomWithSubscription(orgLibrarySubscriptionsAtom)
+  const presetMapping = usePresetSubscriptionsMapping()
+  const presetState = useMemo(
+    () =>
+      libraryKey
+        ? presetMapping
+          ? createLoadedState(getLibrarySubscriptionInfo(presetMapping, libraryKey, LibrarySubscriptionType.COMMUNITY))
+          : createLoadingState()
+        : createLoadedState({
+            design: !1,
+            figjam: !1,
+            slides: !1,
+            buzz: !1,
+            subscriptionType: null,
+          }),
+    [libraryKey, presetMapping],
+  )
   return useMemo(() => {
-    if (!e) {
+    if (!libraryKey) {
       return createLoadedState({
         design: !1,
         figjam: !1,
@@ -341,19 +542,25 @@ export function $$eR35(e) {
         subscriptionType: null,
       })
     }
-    if (t.status !== 'loaded')
-      return t
-    if (r.status !== 'loaded')
-      return r
-    let n = ew(t.data, e, Qh.ORGANIZATION)
-    return eO(n) ? createLoadedState(n) : r
-  }, [e, t, r])
+    if (orgSubscriptions.status !== 'loaded')
+      return orgSubscriptions
+    if (presetState.status !== 'loaded')
+      return presetState
+    const orgInfo = getLibrarySubscriptionInfo(orgSubscriptions.data, libraryKey, LibrarySubscriptionType.ORGANIZATION)
+    return hasAllSubscriptionTypes(orgInfo) ? createLoadedState(orgInfo) : presetState
+  }, [libraryKey, orgSubscriptions, presetState])
 }
-export function $$eL103(e, t) {
-  let r = useAtomWithSubscription(workspaceLibrarySubscriptionsAtomFamily(t))
-  let i = $$eR35(e)
+
+/**
+ * Gets workspace library subscription state (original: useWorkspaceLibrarySubscriptionState)
+ * @param libraryKey
+ * @param workspaceId
+ */
+export function useWorkspaceLibrarySubscriptionState(libraryKey: string, workspaceId: string) {
+  const workspaceSubscriptions = useAtomWithSubscription(workspaceLibrarySubscriptionsAtomFamily(workspaceId))
+  const orgState = useOrgLibrarySubscriptionState(libraryKey)
   return useMemo(() => {
-    if (!e) {
+    if (!libraryKey) {
       return createLoadedState({
         design: !1,
         figjam: !1,
@@ -362,19 +569,25 @@ export function $$eL103(e, t) {
         subscriptionType: null,
       })
     }
-    if (r.status !== 'loaded')
-      return r
-    if (i.status !== 'loaded')
-      return i
-    let t = ew(r.data, e, Qh.WORKSPACE)
-    return eO(t) ? createLoadedState(t) : i
-  }, [e, r, i])
+    if (workspaceSubscriptions.status !== 'loaded')
+      return workspaceSubscriptions
+    if (orgState.status !== 'loaded')
+      return orgState
+    const workspaceInfo = getLibrarySubscriptionInfo(workspaceSubscriptions.data, libraryKey, LibrarySubscriptionType.WORKSPACE)
+    return hasAllSubscriptionTypes(workspaceInfo) ? createLoadedState(workspaceInfo) : orgState
+  }, [libraryKey, workspaceSubscriptions, orgState])
 }
-export function $$eP105(e, t) {
-  let r = useAtomWithSubscription(teamLibrarySubscriptionOverridesAtomFamily(t))
-  let i = $$eL103(e, t)
+
+/**
+ * Gets team library subscription state (original: useTeamLibrarySubscriptionState)
+ * @param libraryKey
+ * @param teamId
+ */
+export function useTeamLibrarySubscriptionState(libraryKey: string, teamId: string) {
+  const teamSubscriptions = useAtomWithSubscription(teamLibrarySubscriptionOverridesAtomFamily(teamId))
+  const workspaceState = useWorkspaceLibrarySubscriptionState(libraryKey, teamId)
   return useMemo(() => {
-    if (!e || !t) {
+    if (!libraryKey || !teamId) {
       return createLoadedState({
         design: !1,
         figjam: !1,
@@ -383,19 +596,24 @@ export function $$eP105(e, t) {
         subscriptionType: null,
       })
     }
-    if (r.status !== 'loaded')
-      return r
-    if (i.status !== 'loaded')
-      return i
-    let n = ew(r.data, e, Qh.TEAM)
-    return eO(n) ? createLoadedState(n) : i
-  }, [e, r, i, t])
+    if (teamSubscriptions.status !== 'loaded')
+      return teamSubscriptions
+    if (workspaceState.status !== 'loaded')
+      return workspaceState
+    const teamInfo = getLibrarySubscriptionInfo(teamSubscriptions.data, libraryKey, LibrarySubscriptionType.TEAM)
+    return hasAllSubscriptionTypes(teamInfo) ? createLoadedState(teamInfo) : workspaceState
+  }, [libraryKey, teamSubscriptions, workspaceState, teamId])
 }
-export function $$eD4(e) {
-  let t = useAtomWithSubscription(userLibrarySubscriptionsAtom)
-  let r = $$eR35(e)
+
+/**
+ * Gets user library subscription state (original: useUserLibrarySubscriptionState)
+ * @param libraryKey
+ */
+export function useUserLibrarySubscriptionState(libraryKey: string) {
+  const userSubscriptions = useAtomWithSubscription(userLibrarySubscriptionsAtom)
+  const orgState = useOrgLibrarySubscriptionState(libraryKey)
   return useMemo(() => {
-    if (!e) {
+    if (!libraryKey) {
       return createLoadedState({
         design: !1,
         figjam: !1,
@@ -404,609 +622,1246 @@ export function $$eD4(e) {
         subscriptionType: null,
       })
     }
-    if (t.status !== 'loaded')
-      return t
-    if (r.status !== 'loaded')
-      return r
-    let n = ew(t.data, e, Qh.USER)
-    return eO(n) ? createLoadedState(n) : r
-  }, [e, t, r])
+    if (userSubscriptions.status !== 'loaded')
+      return userSubscriptions
+    if (orgState.status !== 'loaded')
+      return orgState
+    const userInfo = getLibrarySubscriptionInfo(userSubscriptions.data, libraryKey, LibrarySubscriptionType.USER)
+    return hasAllSubscriptionTypes(userInfo) ? createLoadedState(userInfo) : orgState
+  }, [libraryKey, userSubscriptions, orgState])
 }
-let ek = (e, t) => generateUniqueKey(e.key) === t || !!e.source_file_key && generateUniqueKey(e.source_file_key) === t
-export function $$$$eM69() {
-  let e = selectCurrentFile()
-  let t = useSelector(e => e.library)
-  let r = He()
-  return useCallback(n => !!e && eF(t.defaultPublished, {
-    key: e.key,
-    team_id: e.teamId,
-    editor_type: e.editorType,
-    source_file_key: e.sourceFileKey,
-  }, n, r), [e, t.defaultPublished, r])
+
+/**
+ * React hook to check if an asset is published for the current file.
+ * (original: useIsAssetPublishedForCurrentFile)
+ * @returns Callback to check asset published status by library key
+ */
+export function useIsAssetPublishedForCurrentFile(): (libraryKey: string) => boolean {
+  const currentFile = selectCurrentFile()
+  const library = useSelector((state: any) => state.library)
+  const subscribedLibraryKeys = useSubscribedLibraryKeys()
+  return useCallback(
+    (libraryKey: string) =>
+      !!currentFile
+      && isAssetPublished(
+        library.defaultPublished,
+        {
+          key: currentFile.key,
+          team_id: currentFile.teamId,
+          editor_type: currentFile.editorType,
+          source_file_key: currentFile.sourceFileKey,
+        },
+        libraryKey,
+        subscribedLibraryKeys,
+      ),
+    [currentFile, library.defaultPublished, subscribedLibraryKeys],
+  )
 }
-function eF(e, t, r, n) {
-  return !(!t || !r || ek(t, r)) && (!!$$tu94(e, r) || n.has(r))
-}
-export function $$ej14(e, t, r, n, i, a) {
+/**
+ * Checks if any asset in n is published (original: hasPublishedAsset)
+ * @param defaultPublished
+ * @param file
+ * @param r
+ * @param n
+ * @param i
+ * @param a
+ */
+export function hasPublishedAsset(
+  defaultPublished: any,
+  file: any,
+  r: any[],
+  n: string[],
+  i: any,
+  a: Set<string>,
+): boolean {
   if (r.length)
-    return !0
-  for (let r of n) {
-    let n
-    let s = i[r]
-    if (s && (n = 'library_key' in s ? s.library_key : s.status === 'loaded' && s.data.library_key) && eF(e.defaultPublished, {
-      key: t.key,
-      team_id: t.teamId,
-      editor_type: t.editorType,
-      source_file_key: t.sourceFileKey,
-    }, n, a)) {
-      return !0
+    return true
+  for (const key of n) {
+    const asset = i[key]
+    let libraryKey: string | undefined
+    if (asset) {
+      libraryKey
+        = 'library_key' in asset
+          ? asset.library_key
+          : asset.status === 'loaded' && asset.data.library_key
+    }
+    if (
+      libraryKey
+      && isAssetPublished(defaultPublished, file, libraryKey, a)
+    ) {
+      return true
     }
   }
-  return !1
+  return false
 }
-let eU = (e, t) => e.style_type === t.style_type ? 0 : $$eA84.indexOf(e.style_type) < $$eA84.indexOf(t.style_type) ? -1 : 1
-let eB = (e, t) => -Ez(e.sort_position || '', t.sort_position || '')
-export function $$eG31(e, t) {
-  let r = eU(e, t)
-  return r === 0 ? eB(e, t) : r
+
+/**
+ * Sorts styles by type and position (original: compareStyles)
+ * @param a
+ * @param b
+ */
+export function compareStyles(a: any, b: any): number {
+  const typeOrder = STYLE_TYPES.indexOf(a.style_type) - STYLE_TYPES.indexOf(b.style_type)
+  if (typeOrder !== 0)
+    return typeOrder
+  return -compareNumbers(a.sort_position || '', b.sort_position || '')
 }
-export function $$eV30(e) {
-  e.sort(eB)
+
+/**
+ * Sorts styles array by position (original: sortStyles)
+ * @param styles
+ */
+export function sortStyles(styles: any[]): void {
+  styles.sort((a, b) => -compareNumbers(a.sort_position || '', b.sort_position || ''))
 }
-export function $$eH25(e) {
-  let t = new Map()
-  e.forEach((e) => {
-    let r = t.get(e.style_type)
-    r ? r.push(e) : t.set(e.style_type, [e])
+
+/**
+ * Groups styles by type (original: groupStylesByType)
+ * @param styles
+ */
+export function groupStylesByType(styles: any[]): Map<string, any[]> {
+  const map = new Map<string, any[]>()
+  styles.forEach((style) => {
+    const arr = map.get(style.style_type)
+    arr ? arr.push(style) : map.set(style.style_type, [style])
   })
-  return t
+  return map
 }
-export function $$ez70(e, t) {
-  let r = e => e && e.toLowerCase ? e.toLowerCase() : ''
-  let n = e.containing_frame || {}
-  let i = t.containing_frame || {}
-  return n.pageId !== i.pageId ? r(n.pageName) < r(i.pageName) ? -1 : 1 : n.nodeId !== i.nodeId ? r(n.name) < r(i.name) ? -1 : 1 : r(e.name) < r(t.name) ? -1 : 1
+
+/**
+ * Compares assets by containing frame and name (original: compareAssetsByFrameAndName)
+ * @param a
+ * @param b
+ */
+export function compareAssetsByFrameAndName(a: any, b: any): number {
+  const toLower = (str: string) => (str && str.toLowerCase ? str.toLowerCase() : '')
+  const frameA = a.containing_frame || {}
+  const frameB = b.containing_frame || {}
+  if (frameA.pageId !== frameB.pageId)
+    return toLower(frameA.pageName) < toLower(frameB.pageName) ? -1 : 1
+  if (frameA.nodeId !== frameB.nodeId)
+    return toLower(frameA.name) < toLower(frameB.name) ? -1 : 1
+  return toLower(a.name) < toLower(b.name) ? -1 : 1
 }
-export function $$eW98(e) {
-  let t = [...e]
-  $$eV30(t)
+
+/**
+ * Groups styles by prefix (original: groupStylesByPrefix)
+ * @param styles
+ */
+export function groupStylesByPrefix(styles: any[]): { stylesByPrefix: Record<string, any[]>, sortedPrefixes: any } {
+  const sorted = [...styles]
+  sortStyles(sorted)
+  const stylesByPrefix: Record<string, any[]> = sorted.reduce((acc, style) => {
+    const prefix = getDirname(style.name)
+    acc[prefix] = acc[prefix] || []
+    acc[prefix].push(style)
+    return acc
+  }, Object.create(null))
   return {
-    stylesByPrefix: t.reduce((e, t) => {
-      let r = getDirname(t.name)
-      e[r] = e[r] || []
-      e[r].push(t)
-      return e
-    }, Object.create(null)),
-    sortedPrefixes: wM(t),
+    stylesByPrefix,
+    sortedPrefixes: getStyleFoldersWithStyles(sorted),
   }
 }
-let eK = !0
-function eY(e, t) {
-  if (!e || !t)
-    return !0
-  for (let r in e) {
-    if (!(r in t))
-      return !0
-    let n = e[r]
-    let i = t[r]
-    for (let e in n) {
-      if (n[e] !== i[e])
-        return !0
+
+/**
+ * Flag to indicate if first components have been parsed (original: firstComponentsParsed)
+ */
+let firstComponentsParsed = true
+
+/**
+ * Deep comparison between two objects (original: eY)
+ * @param a
+ * @param b
+ * @returns {boolean}
+ */
+function areObjectsDifferent(a: Record<string, any>, b: Record<string, any>): boolean {
+  if (!a || !b)
+    return true
+  for (const key in a) {
+    if (!(key in b))
+      return true
+    const aVal = a[key]
+    const bVal = b[key]
+    for (const subKey in aVal) {
+      if (aVal[subKey] !== bVal[subKey])
+        return true
     }
-    for (let e in i) {
-      if (!(e in n))
-        return !0
+    for (const subKey in bVal) {
+      if (!(subKey in aVal))
+        return true
     }
   }
-  for (let r in t) {
-    if (!(r in e))
-      return !0
+  for (const key in b) {
+    if (!(key in a))
+      return true
   }
-  return !1
+  return false
 }
-export function $$e$89(e, t, r, n, i, a, s, o, l, d) {
-  let c = Object.create(null)
-  let u = 0
-  for (let p in t.forEach((t) => {
-    let l = t.nodeId
-    let p = n[l]
-    a[l] = e2(i[l])
-    c[l] = e(p, r[l], t, s, o, d)
-    let _ = c[l]
-    _.status === StagingStatusEnum.NEW && _.type === PrimaryWorkflowEnum.COMPONENT && (u += 1)
-  }), n) {
-    if (!(p in c)) {
-      let e = i[p]
-      e && e.url && revokeThumbnailUrl(e.url)
-      let t = n[p]
-      if (t.type === PrimaryWorkflowEnum.COMPONENT || t.type === PrimaryWorkflowEnum.STATE_GROUP) {
-        t.type
-        PrimaryWorkflowEnum.COMPONENT
-        let e = t
-        e.old_key && l.add(e.node_id)
+
+/**
+ * Generates new local library items and counts new components (original: generateNewLocalLibraryItems)
+ * @param createFn
+ * @param publishable
+ * @param published
+ * @param local
+ * @param thumbnails
+ * @param thumbnailsOut
+ * @param fileKey
+ * @param libraryKey
+ * @param movedItemIds
+ * @param type
+ */
+export function generateNewLocalLibraryItems(
+  createFn: Fn,
+  publishable: any[],
+  published: Record<string, any>,
+  local: Record<string, any>,
+  thumbnails: Record<string, any>,
+  thumbnailsOut: Record<string, any>,
+  fileKey: string,
+  libraryKey: string,
+  movedItemIds: Set<string>,
+  type: string,
+) {
+  const newLocal: Record<string, any> = Object.create(null)
+  let numNewComponents = 0
+
+  publishable.forEach((item: any) => {
+    const nodeId = item.nodeId
+    const publishedItem = published[nodeId]
+    thumbnailsOut[nodeId] = cloneThumbnail(thumbnails[nodeId])
+    newLocal[nodeId] = createFn(publishedItem, local[nodeId], item, fileKey, libraryKey, type)
+    const result = newLocal[nodeId]
+    if (
+      result.status === StagingStatusEnum.NEW
+      && result.type === PrimaryWorkflowEnum.COMPONENT
+    ) {
+      numNewComponents += 1
+    }
+  })
+
+  for (const nodeId in published) {
+    if (!(nodeId in newLocal)) {
+      const thumbnail = thumbnails[nodeId]
+      if (thumbnail && thumbnail.url)
+        revokeThumbnailUrl(thumbnail.url)
+      const publishedItem = published[nodeId]
+      if (
+        publishedItem.type === PrimaryWorkflowEnum.COMPONENT
+        || publishedItem.type === PrimaryWorkflowEnum.STATE_GROUP
+      ) {
+        const oldKey = publishedItem.old_key
+        if (oldKey)
+          movedItemIds.add(publishedItem.node_id)
       }
     }
   }
-  for (let t in r) t in c || (a[t] = e2(i[t]), c[t] = e(n[t], r[t], null, s, o, d))
-  return {
-    newLocal: c,
-    numNewComponents: u,
+
+  for (const nodeId in local) {
+    if (!(nodeId in newLocal)) {
+      thumbnailsOut[nodeId] = cloneThumbnail(thumbnails[nodeId])
+      newLocal[nodeId] = createFn(published[nodeId], local[nodeId], null, fileKey, libraryKey, type)
+    }
   }
-}
-export function $$eX24(e) {
-  let t = e.getState()
-  if (t.versionHistory.activeId && t.versionHistory.activeId !== CURRENT_VERSION_ID || !t.mirror?.sceneGraph)
-    return
-  let r = getSelectedFile(t)
-  let n = r ? r.key : ''
-  let i = r?.library_key ? r.library_key : ''
-  let a = new Set()
-  let s = isSelectedViewFullscreenCooper(t)
-  let o = {}
-  let {
+
+  return {
     newLocal,
     numNewComponents,
-  } = $$e$89((e, t, r, n, i) => $$eZ74(e, t, r, n, i, s), t.library.publishableSymbols, t.library.openFilePublished__LIVEGRAPH.components, t.library.local.components, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.COMPONENT)
-  let {
-    newLocal: _newLocal,
-  } = $$e$89($$eQ26, t.library.publishableStateGroups, t.library.openFilePublished__LIVEGRAPH.stateGroups, t.library.local.stateGroups, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.STATE_GROUP)
-  let {
-    newLocal: _newLocal2,
-  } = $$e$89($$e0104, t.library.publishableStyles, t.library.openFilePublished__LIVEGRAPH.styles, t.library.local.styles, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.STYLE)
-  let {
-    newLocal: _newLocal3,
-  } = $$e$89(e1, t.library.publishableModules, t.library.openFilePublished__LIVEGRAPH.modules, t.library.local.modules, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.MODULE)
-  if (eY(t.library.local.components, newLocal) && e.dispatch(componentReplaceLocal({
-    local: newLocal,
-    type: PrimaryWorkflowEnum.COMPONENT,
-  })), eY(t.library.local.stateGroups, _newLocal) && e.dispatch(componentReplaceLocal({
-    local: _newLocal,
-    type: PrimaryWorkflowEnum.STATE_GROUP,
-  })), eY(t.library.local.styles, _newLocal2) && e.dispatch(componentReplaceLocal({
-    local: _newLocal2,
-    type: PrimaryWorkflowEnum.STYLE,
-  })), eY(t.library.local.modules, _newLocal3) && getFeatureFlags().dse_module_publish && e.dispatch(componentReplaceLocal({
-    local: _newLocal3,
-    type: PrimaryWorkflowEnum.MODULE,
-  })), (function (e, t) {
-    if (!e && !t)
-      return !1
-    if (!e || !t || Object.keys(e).length !== Object.keys(t).length)
-      return !0
-    for (let r in e) {
-      if (!t[r] || e[r].url !== t[r].url || e[r].content_hash !== t[r].content_hash)
-        return !0
-    }
-    return !1
-  }(t.library.local.thumbnails, o)) && e.dispatch(replaceLocalThumbnails({
-    thumbnails: o,
-  })), numNewComponents > 0 && eK && (handleAtomEvent({
-    id: 'Parsed first components',
-  }), eK = !1), a.size > 0) {
-    let r = t.notifications.filter(e => e.type === NotificationType.MOVE_COMPONENTS_PROMPT)
-    if (r.length > 0) {
-      let t = r[0].type === NotificationType.MOVE_COMPONENTS_PROMPT && r[0].movableItemIds
-      t && areSetsSubset(t, a) && e.dispatch(notificationActions.dequeue({
-        type: NotificationType.MOVE_COMPONENTS_PROMPT,
-      }))
-    }
   }
 }
-let eq = 'Generating a local library item that is neither in the library nor in the scene graph. Why.'
-let eJ = (e, t, r, n, i, a) => {
-  let s
-  if (!r) {
-    if (t) {
-      return {
-        ...t,
-        status: StagingStatusEnum.DELETED,
-        deletedFromSceneGraph: !0,
+
+/**
+ * Clones thumbnail object (original: e2)
+ * @param thumbnail
+ */
+function cloneThumbnail(thumbnail: any) {
+  return {
+    kind: thumbnail?.kind ?? undefined,
+    url: thumbnail?.url ?? undefined,
+    content_hash: thumbnail?.content_hash ?? undefined,
+  }
+}
+
+/**
+ * Updates local library items and dispatches necessary actions (original: updateLocalLibraryItems)
+ * @param store
+ */
+export function updateLocalLibraryItems(store: any) {
+  const state = store.getState()
+  if (
+    (state.versionHistory.activeId
+      && state.versionHistory.activeId !== CURRENT_VERSION_ID)
+    || !state.mirror?.sceneGraph
+  ) {
+    return
+  }
+
+  const file = getSelectedFile(state)
+  const fileKey = file ? file.key : ''
+  const libraryKey = file?.library_key ? file.library_key : ''
+  const movedItemIds = new Set<string>()
+  const isFullscreen = isSelectedViewFullscreenCooper(state)
+  const thumbnailsOut: Record<string, any> = {}
+
+  const {
+    newLocal: newComponents,
+    numNewComponents,
+  } = generateNewLocalLibraryItems(
+    (a: any, b: any, c: any, d: any, e: any, _f: any) =>
+      createLocalComponent(a, b, c, d, e, isFullscreen),
+    state.library.publishableSymbols,
+    state.library.openFilePublished__LIVEGRAPH.components,
+    state.library.local.components,
+    state.library.local.thumbnails,
+    thumbnailsOut,
+    fileKey,
+    libraryKey,
+    movedItemIds,
+    PrimaryWorkflowEnum.COMPONENT,
+  )
+
+  const { newLocal: newStateGroups } = generateNewLocalLibraryItems(
+    createLocalStateGroup,
+    state.library.publishableStateGroups,
+    state.library.openFilePublished__LIVEGRAPH.stateGroups,
+    state.library.local.stateGroups,
+    state.library.local.thumbnails,
+    thumbnailsOut,
+    fileKey,
+    libraryKey,
+    movedItemIds,
+    PrimaryWorkflowEnum.STATE_GROUP,
+  )
+
+  const { newLocal: newStyles } = generateNewLocalLibraryItems(
+    createLocalStyle,
+    state.library.publishableStyles,
+    state.library.openFilePublished__LIVEGRAPH.styles,
+    state.library.local.styles,
+    state.library.local.thumbnails,
+    thumbnailsOut,
+    fileKey,
+    libraryKey,
+    movedItemIds,
+    PrimaryWorkflowEnum.STYLE,
+  )
+
+  const { newLocal: newModules } = generateNewLocalLibraryItems(
+    createModuleLocal,
+    state.library.publishableModules,
+    state.library.openFilePublished__LIVEGRAPH.modules,
+    state.library.local.modules,
+    state.library.local.thumbnails,
+    thumbnailsOut,
+    fileKey,
+    libraryKey,
+    movedItemIds,
+    PrimaryWorkflowEnum.MODULE,
+  )
+
+  if (
+    areObjectsDifferent(state.library.local.components, newComponents)
+  ) {
+    store.dispatch(
+      componentReplaceLocal({
+        local: newComponents,
+        type: PrimaryWorkflowEnum.COMPONENT,
+      }),
+    )
+  }
+  if (
+    areObjectsDifferent(state.library.local.stateGroups, newStateGroups)
+  ) {
+    store.dispatch(
+      componentReplaceLocal({
+        local: newStateGroups,
+        type: PrimaryWorkflowEnum.STATE_GROUP,
+      }),
+    )
+  }
+  if (areObjectsDifferent(state.library.local.styles, newStyles)) {
+    store.dispatch(
+      componentReplaceLocal({
+        local: newStyles,
+        type: PrimaryWorkflowEnum.STYLE,
+      }),
+    )
+  }
+  if (
+    areObjectsDifferent(state.library.local.modules, newModules)
+    && getFeatureFlags().dse_module_publish
+  ) {
+    store.dispatch(
+      componentReplaceLocal({
+        local: newModules,
+        type: PrimaryWorkflowEnum.MODULE,
+      }),
+    )
+  }
+
+  if (
+    areThumbnailsDifferent(state.library.local.thumbnails, thumbnailsOut)
+  ) {
+    store.dispatch(
+      replaceLocalThumbnails({
+        thumbnails: thumbnailsOut,
+      }),
+    )
+  }
+
+  if (numNewComponents > 0 && firstComponentsParsed) {
+    handleAtomEvent({
+      id: 'Parsed first components',
+    })
+    firstComponentsParsed = false
+  }
+
+  if (movedItemIds.size > 0) {
+    const movePrompts = state.notifications.filter(
+      (n: any) => n.type === NotificationType.MOVE_COMPONENTS_PROMPT,
+    )
+    if (movePrompts.length > 0) {
+      const itemIds
+        = movePrompts[0].type === NotificationType.MOVE_COMPONENTS_PROMPT
+          && movePrompts[0].movableItemIds
+      if (itemIds && areSetsSubset(itemIds, movedItemIds)) {
+        store.dispatch(
+          notificationActions.dequeue({
+            type: NotificationType.MOVE_COMPONENTS_PROMPT,
+          }),
+        )
       }
     }
-    throw new Error(eq)
   }
-  let o = t && t.unpublished_at == null
-  let l = !!r.isPublishable
-  let d = StagingStatusEnum.NOT_STAGED
-  o && !l ? d = StagingStatusEnum.DELETED : !o && l ? d = StagingStatusEnum.NEW : o || l || (d = StagingStatusEnum.NOT_STAGED)
-  s = r.description
-  let {
-    description,
-    description_rt,
-  } = {
-    description: r.descriptionPlain ?? '',
-    description_rt: s ?? '',
+}
+
+/**
+ * Checks if thumbnails are different (original: inline in updateLocalLibraryItems)
+ * @param a
+ * @param b
+ */
+function areThumbnailsDifferent(
+  a: Record<string, any>,
+  b: Record<string, any>,
+): boolean {
+  if (!a && !b)
+    return false
+  if (!a || !b || Object.keys(a).length !== Object.keys(b).length)
+    return true
+  for (const key in a) {
+    if (
+      !b[key]
+      || a[key].url !== b[key].url
+      || a[key].content_hash !== b[key].content_hash
+    ) {
+      return true
+    }
   }
+  return false
+}
+
+/**
+ * Error message for missing library item (original: eq)
+ */
+const MISSING_LIBRARY_ITEM_ERROR
+  = 'Generating a local library item that is neither in the library nor in the scene graph. Why.'
+
+/**
+ * Creates a local library item (original: eJ)
+ * @param meta
+ * @param published
+ * @param local
+ * @param fileKey
+ * @param libraryKey
+ * @param type
+ */
+function createLocalLibraryItem(
+  meta: any,
+  published: any,
+  local: any,
+  fileKey: string,
+  libraryKey: string,
+  type: string,
+) {
+  if (!local) {
+    if (published) {
+      return {
+        ...published,
+        status: StagingStatusEnum.DELETED,
+        deletedFromSceneGraph: true,
+      }
+    }
+    throw new Error(MISSING_LIBRARY_ITEM_ERROR)
+  }
+  const isPublished = published && published.unpublished_at == null
+  const isPublishable = !!local.isPublishable
+  let status = StagingStatusEnum.NOT_STAGED
+  if (isPublished && !isPublishable)
+    status = StagingStatusEnum.DELETED
+  else if (!isPublished && isPublishable)
+    status = StagingStatusEnum.NEW
+  else if (!isPublished && !isPublishable)
+    status = StagingStatusEnum.NOT_STAGED
+
+  const description = local.descriptionPlain ?? ''
+  const description_rt = local.description ?? ''
+
   return {
-    node_id: r.nodeId,
-    name: r.name,
+    node_id: local.nodeId,
+    name: local.name,
     description,
     description_rt,
-    file_key: n,
+    file_key: fileKey,
     file_key_source: FileKeySourceEnum.LOCAL_FILE,
-    library_key: i,
-    isPublishable: l,
-    deletedFromSceneGraph: !1,
-    meta: e ? e.meta : void 0,
-    isLocal: !0,
-    status: d,
-    type: a,
-    thumbnail_url: t && t.thumbnail_url || void 0,
+    library_key: libraryKey,
+    isPublishable,
+    deletedFromSceneGraph: false,
+    meta: meta ? meta.meta : undefined,
+    isLocal: true,
+    status,
+    type,
+    thumbnail_url: published?.thumbnail_url ?? undefined,
   }
 }
-export function $$eZ74(e, t, r, n, i, a) {
-  let s = {
-    ...eJ(e, t, r, n, i, PrimaryWorkflowEnum.COMPONENT),
+
+/**
+ * Creates a local component (original: createLocalComponent)
+ * @param meta Metadata for the component
+ * @param published Published component data
+ * @param local Local component data
+ * @param fileKey File key
+ * @param libraryKey Library key
+ * @param compareSortPositions Whether to compare sort positions
+ * @returns Local component object
+ */
+export function createLocalComponent(
+  meta: any,
+  published: any,
+  local: any,
+  fileKey: string,
+  libraryKey: string,
+  compareSortPositions: boolean,
+) {
+  const result = {
+    ...createLocalLibraryItem(meta, published, local, fileKey, libraryKey, PrimaryWorkflowEnum.COMPONENT),
     type: PrimaryWorkflowEnum.COMPONENT,
-    height: r?.height,
-    width: r?.width,
-    x: r?.x,
-    y: r?.y,
-    componentPropDefError: r?.componentPropDefError,
-    containing_frame: r?.containingFrame || t?.containing_frame || void 0,
-    component_key: t?.component_key || void 0,
-    content_hash: r?.versionHash || t?.content_hash || void 0,
-    userFacingVersion: r?.userFacingVersion ?? F7.INVALID,
-    old_key: r?.oldKey || void 0,
-    sort_position: r?.sortPosition ?? null,
-    has_video: r?.hasVideo ?? !1,
+    height: local?.height,
+    width: local?.width,
+    x: local?.x,
+    y: local?.y,
+    componentPropDefError: local?.componentPropDefError,
+    containing_frame: local?.containingFrame || published?.containing_frame || undefined,
+    component_key: published?.component_key || undefined,
+    content_hash: local?.versionHash || published?.content_hash || undefined,
+    userFacingVersion: local?.userFacingVersion ?? 'INVALID',
+    old_key: local?.oldKey || undefined,
+    sort_position: local?.sortPosition ?? null,
+    has_video: local?.hasVideo ?? false,
   }
-  if (!t)
-    return s
-  let o = t.unpublished_at == null
-  let l = !!r?.isPublishable
-  o && l && (t && t.content_hash === s.content_hash && !$$rt40(t.containing_frame, r?.containingFrame, {
-    compareSortPositions: a,
-  }) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) && (!a || $$re86(t.sort_position, s.sort_position))
-    ? s.status = StagingStatusEnum.CURRENT
-    : s.status = StagingStatusEnum.CHANGED)
-  return s
+  if (!published)
+    return result
+  const isPublished = published.unpublished_at == null
+  const isPublishable = !!local?.isPublishable
+  if (isPublished && isPublishable) {
+    if (
+      published.content_hash === result.content_hash
+      && !areFramesEqual(published.containing_frame, local?.containingFrame, {
+        compareSortPositions,
+      })
+      && areValuesEqual(published.name, local?.name)
+      && areValuesEqual(published.description, result.description)
+      && (!compareSortPositions
+        || areValuesEqual(published.sort_position, result.sort_position))
+    ) {
+      result.status = StagingStatusEnum.CURRENT
+    }
+    else {
+      result.status = StagingStatusEnum.CHANGED
+    }
+  }
+  return result
 }
-export function $$eQ26(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.STATE_GROUP)
-  if (!t) {
-    if (!r)
-      throw new Error(eq)
+
+/**
+ * Creates a local state group (original: createLocalStateGroup)
+ * @param meta Metadata for the state group
+ * @param published Published state group data
+ * @param local Local state group data
+ * @param fileKey File key
+ * @param libraryKey Library key
+ * @returns Local state group object
+ */
+export function createLocalStateGroup(
+  meta: any,
+  published: any,
+  local: any,
+  fileKey: string,
+  libraryKey: string,
+) {
+  const base = createLocalLibraryItem(
+    meta,
+    published,
+    local,
+    fileKey,
+    libraryKey,
+    PrimaryWorkflowEnum.STATE_GROUP,
+  )
+  if (!published) {
+    if (!local)
+      throw new Error(MISSING_LIBRARY_ITEM_ERROR)
     return {
-      ...a,
+      ...base,
       type: PrimaryWorkflowEnum.STATE_GROUP,
-      version: r.versionHash,
-      userFacingVersion: r.userFacingVersion,
-      containing_frame: r.containingFrame,
-      width: r.width,
-      height: r.height,
-      stateGroupError: r.stateGroupError,
-      componentPropDefError: r.componentPropDefError,
-      fill_color: r.fill_color,
-      default_state_key: r.default_state_key,
-      old_key: r.oldKey || void 0,
+      version: local.versionHash,
+      userFacingVersion: local.userFacingVersion,
+      containing_frame: local.containingFrame,
+      width: local.width,
+      height: local.height,
+      stateGroupError: local.stateGroupError,
+      componentPropDefError: local.componentPropDefError,
+      fill_color: local.fill_color,
+      default_state_key: local.default_state_key,
+      old_key: local.oldKey || undefined,
     }
   }
-  let s = {
-    ...a,
+  const result = {
+    ...base,
     type: PrimaryWorkflowEnum.STATE_GROUP,
-    version: r?.versionHash || t.version,
-    userFacingVersion: r?.userFacingVersion || Rf.INVALID,
-    containing_frame: r?.containingFrame || t.containing_frame,
-    width: r?.width || t.min_node_width,
-    height: r?.height || t.min_node_height,
-    key: t.key || void 0,
-    stateGroupError: r?.stateGroupError || StateGroupErrorType.NONE,
-    componentPropDefError: r?.componentPropDefError || VariableSetErrorType.NONE,
-    fill_color: r?.fill_color || t?.fill_color,
-    default_state_key: r?.default_state_key || t?.default_state_key,
-    old_key: r?.oldKey || void 0,
+    version: local?.versionHash || published.version,
+    userFacingVersion: local?.userFacingVersion || 'INVALID',
+    containing_frame: local?.containingFrame || published.containing_frame,
+    width: local?.width || published.min_node_width,
+    height: local?.height || published.min_node_height,
+    key: published.key || undefined,
+    stateGroupError: local?.stateGroupError || StateGroupErrorType.NONE,
+    componentPropDefError: local?.componentPropDefError || VariableSetErrorType.NONE,
+    fill_color: local?.fill_color || published?.fill_color,
+    default_state_key: local?.default_state_key || published?.default_state_key,
+    old_key: local?.oldKey || undefined,
   }
-  let o = t.unpublished_at == null
-  let l = !!r?.isPublishable
-  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = StagingStatusEnum.CURRENT : s.status = StagingStatusEnum.CHANGED)
-  return s
-}
-export function $$e0104(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.STYLE)
-  let s = t && t.unpublished_at == null
-  let o = !!r?.isPublishable
-  let l = !1
-  if (s && o && (t && t.content_hash === r?.versionHash && $$re86(t.name, r?.name) && $$re86(t.description, a.description) ? $$re86(t.sort_position, r?.sortPosition) ? a.status = StagingStatusEnum.CURRENT : (a.status = StagingStatusEnum.CHANGED, l = !0) : a.status = StagingStatusEnum.CHANGED), r) {
-    return {
-      ...a,
-      type: PrimaryWorkflowEnum.STYLE,
-      key: r.styleKey,
-      style_type: r.styleType,
-      is_soft_deleted: r.isSoftDeleted,
-      sort_position: r.sortPosition,
-      content_hash: r.versionHash,
-      userFacingVersion: r.userFacingVersion,
-      hasOnlyBeenReordered: l,
-      old_key: r.oldKey || void 0,
+  const isPublished = published.unpublished_at == null
+  const isPublishable = !!local?.isPublishable
+  if (isPublished && isPublishable) {
+    if (
+      published.version === result.version
+      && !areFramesEqual(published.containing_frame, local?.containingFrame)
+      && areValuesEqual(published.name, local?.name)
+      && areValuesEqual(published.description, result.description)
+    ) {
+      result.status = StagingStatusEnum.CURRENT
+    }
+    else {
+      result.status = StagingStatusEnum.CHANGED
     }
   }
-  if (t) {
-    return {
-      ...a,
-      type: PrimaryWorkflowEnum.STYLE,
-      key: t.key,
-      style_type: t.style_type,
-      is_soft_deleted: !0,
-      sort_position: t.sort_position,
-      content_hash: t.content_hash,
-      userFacingVersion: t.userFacingVersion,
-      hasOnlyBeenReordered: l,
+  return result
+}
+
+/**
+ * Creates a local style (original: createLocalStyle)
+ * @param meta Metadata for the style
+ * @param published Published style data
+ * @param local Local style data
+ * @param fileKey File key
+ * @param libraryKey Library key
+ * @returns Local style object
+ */
+export function createLocalStyle(
+  meta: any,
+  published: any,
+  local: any,
+  fileKey: string,
+  libraryKey: string,
+) {
+  const base = createLocalLibraryItem(
+    meta,
+    published,
+    local,
+    fileKey,
+    libraryKey,
+    PrimaryWorkflowEnum.STYLE,
+  )
+  const isPublished = published && published.unpublished_at == null
+  const isPublishable = !!local?.isPublishable
+  let hasOnlyBeenReordered = false
+  if (isPublished && isPublishable) {
+    if (
+      published.content_hash === local?.versionHash
+      && areValuesEqual(published.name, local?.name)
+      && areValuesEqual(published.description, base.description)
+    ) {
+      if (areValuesEqual(published.sort_position, local?.sortPosition)) {
+        base.status = StagingStatusEnum.CURRENT
+      }
+      else {
+        base.status = StagingStatusEnum.CHANGED
+        hasOnlyBeenReordered = true
+      }
+    }
+    else {
+      base.status = StagingStatusEnum.CHANGED
     }
   }
-  throw new Error(eq)
-}
-function e1(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.MODULE)
-  if (!t) {
-    if (!r)
-      throw new Error(eq)
+  if (local) {
     return {
-      ...a,
+      ...base,
+      type: PrimaryWorkflowEnum.STYLE,
+      key: local.styleKey,
+      style_type: local.styleType,
+      is_soft_deleted: local.isSoftDeleted,
+      sort_position: local.sortPosition,
+      content_hash: local.versionHash,
+      userFacingVersion: local.userFacingVersion,
+      hasOnlyBeenReordered,
+      old_key: local.oldKey || undefined,
+    }
+  }
+  if (published) {
+    return {
+      ...base,
+      type: PrimaryWorkflowEnum.STYLE,
+      key: published.key,
+      style_type: published.style_type,
+      is_soft_deleted: true,
+      sort_position: published.sort_position,
+      content_hash: published.content_hash,
+      userFacingVersion: published.userFacingVersion,
+      hasOnlyBeenReordered,
+    }
+  }
+  throw new Error(MISSING_LIBRARY_ITEM_ERROR)
+}
+
+/**
+ * Creates a local module (original: createModuleLocal)
+ * @param meta Metadata for the module
+ * @param published Published module data
+ * @param local Local module data
+ * @param fileKey File key
+ * @param libraryKey Library key
+ * @returns Local module object
+ */
+export function createModuleLocal(
+  meta: any,
+  published: any,
+  local: any,
+  fileKey: string,
+  libraryKey: string,
+) {
+  const base = createLocalLibraryItem(
+    meta,
+    published,
+    local,
+    fileKey,
+    libraryKey,
+    PrimaryWorkflowEnum.MODULE,
+  )
+  if (!published) {
+    if (!local)
+      throw new Error(MISSING_LIBRARY_ITEM_ERROR)
+    return {
+      ...base,
       type: PrimaryWorkflowEnum.MODULE,
-      moduleSource: r.moduleSource,
-      height: r.height,
-      width: r.width,
-      x: r.x,
-      y: r.y,
-      containing_frame: r.containingFrame,
-      version: r.versionHash,
-      userFacingVersion: r.userFacingVersion,
-      old_key: r.oldKey || void 0,
+      moduleSource: local.moduleSource,
+      height: local.height,
+      width: local.width,
+      x: local.x,
+      y: local.y,
+      containing_frame: local.containingFrame,
+      version: local.versionHash,
+      userFacingVersion: local.userFacingVersion,
+      old_key: local.oldKey || undefined,
     }
   }
-  let s = {
-    ...a,
+  const result = {
+    ...base,
     type: PrimaryWorkflowEnum.MODULE,
-    moduleSource: r?.moduleSource || t.moduleSource,
-    height: r?.height || t.height,
-    width: r?.width || t.width,
-    x: r?.x,
-    y: r?.y,
-    containing_frame: r?.containingFrame || t.containing_frame || void 0,
-    version: r?.versionHash || t.version,
-    userFacingVersion: r?.userFacingVersion || Pg.INVALID,
-    old_key: r?.oldKey || void 0,
-    key: t.key,
+    moduleSource: local?.moduleSource || published.moduleSource,
+    height: local?.height || published.height,
+    width: local?.width || published.width,
+    x: local?.x,
+    y: local?.y,
+    containing_frame: local?.containingFrame || published.containing_frame || undefined,
+    version: local?.versionHash || published.version,
+    userFacingVersion: local?.userFacingVersion || 'INVALID',
+    old_key: local?.oldKey || undefined,
+    key: published.key,
   }
-  let o = t && t.unpublished_at == null
-  let l = !!r?.isPublishable
-  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = StagingStatusEnum.CURRENT : s.status = StagingStatusEnum.CHANGED)
-  return s
+  const isPublished = published && published.unpublished_at == null
+  const isPublishable = !!local?.isPublishable
+  if (isPublished && isPublishable) {
+    if (
+      published.version === result.version
+      && !areFramesEqual(published.containing_frame, local?.containingFrame)
+      && areValuesEqual(published.name, local?.name)
+      && areValuesEqual(published.description, result.description)
+    ) {
+      result.status = StagingStatusEnum.CURRENT
+    }
+    else {
+      result.status = StagingStatusEnum.CHANGED
+    }
+  }
+  return result
 }
-function e2(e) {
-  return {
-    kind: e && e.kind || void 0,
-    url: e && e.url || void 0,
-    content_hash: e && e.content_hash || void 0,
+
+/**
+ * Generates a cache key for published components (original: generatePublishedComponentsCacheKey)
+ * @param key
+ */
+export function generatePublishedComponentsCacheKey(key: string): string {
+  return `GET_PUBLISHED_COMPONENTS_FOR_${key}`
+}
+
+/**
+ * Set for tracking deleted loading states (original: deletedLoadingStates)
+ */
+export let deletedLoadingStates = new Set<string>()
+
+/**
+ * Dispatches delete loading state actions for all tracked keys (original: dispatchDeleteLoadingStates)
+ * @param dispatch
+ */
+export function dispatchDeleteLoadingStates(dispatch: Fn) {
+  for (const key of deletedLoadingStates) {
+    dispatch(
+      loadingStateDelete({
+        key,
+      }),
+    )
   }
 }
-export function $$e534(e) {
-  return `GET_PUBLISHED_COMPONENTS_FOR_${e}`
+
+/**
+ * Set for tracking some state (original: trackedStateSet)
+ */
+let trackedStateSet = new Set<string>()
+
+/**
+ * Checks if either value is in tracked state set (original: isTrackedState)
+ * @param a
+ * @param b
+ */
+export function isTrackedState(a: string, b: string): boolean {
+  return trackedStateSet.has(a) || trackedStateSet.has(b)
 }
-export let $$e353 = new Set()
-export function $$e422(e) {
-  for (let t of $$e353) {
-    e(loadingStateDelete({
-      key: t,
-    }))
-  }
+
+/**
+ * Adds a value to tracked state set (original: addTrackedState)
+ * @param value
+ */
+export function addTrackedState(value: string) {
+  trackedStateSet.add(value)
 }
-let e8 = new Set()
-export function $$e610(e, t) {
-  return e8.has(e) || e8.has(t)
+
+/**
+ * Clears tracked state set (original: clearTrackedState)
+ */
+export function clearTrackedState() {
+  trackedStateSet.clear()
 }
-export function $$e748(e) {
-  e8.add(e)
-}
-export function $$e945() {
-  e8.clear()
-}
-export let $$te75 = e => `GET_DEFAULT_LIBRARIES_FOR_${e}`
-export function $$tt15(e, t) {
-  let r = {}
-  t.forEach((e) => {
-    if (e.containing_frame?.containingStateGroup?.nodeId) {
-      let t = e.containing_frame?.containingStateGroup?.nodeId
-      r[t] || (r[t] = [])
-      r[t].push(e.name)
+
+/**
+ * Generates a cache key for default libraries (original: generateDefaultLibrariesCacheKey)
+ * @param key
+ */
+export let generateDefaultLibrariesCacheKey = (key: string) => `GET_DEFAULT_LIBRARIES_FOR_${key}`
+
+/**
+ * Adds state names to assets based on containing state group (original: addStateNamesToAssets)
+ * @param assets
+ * @param allAssets
+ */
+export function addStateNamesToAssets(assets: any[], allAssets: any[]) {
+  const stateNamesByGroup: Record<string, string[]> = {}
+  allAssets.forEach((asset: any) => {
+    const groupId = asset.containing_frame?.containingStateGroup?.nodeId
+    if (groupId) {
+      stateNamesByGroup[groupId] = stateNamesByGroup[groupId] || []
+      stateNamesByGroup[groupId].push(asset.name)
     }
   })
-  return e.map(e => ({
-    ...e,
-    stateNames: r[e.node_id],
+  return assets.map((asset: any) => ({
+    ...asset,
+    stateNames: stateNamesByGroup[asset.node_id],
   }))
 }
-let tr = new Set()
-export async function $$tn62(e, t = [], r, n, i, a, s) {
-  if (!t.length) {
+
+let tr = new Set<string>()
+
+/**
+ * Fetches unpublished styles and missing style keys.
+ * (original: fetchUnpublishedStyles)
+ * @param sceneGraphMap Map of scene graph nodes
+ * @param styleNodeIds Array of style node IDs
+ * @param usedStyles Used styles map
+ * @param loadedStyles Loaded styles map
+ * @param orgId Organization ID
+ * @param excludeLibrary Optional library to exclude
+ * @param dispatch Redux dispatch function
+ * @returns Object with usedStylesByLibraryKey
+ */
+export async function fetchUnpublishedStyles(
+  sceneGraphMap: Map<string, any>,
+  styleNodeIds: string[] = [],
+  usedStyles: Record<string, any>,
+  loadedStyles: Record<string, any>,
+  orgId: string,
+  excludeLibrary?: { libraryKey: string },
+  dispatch?: Fn,
+): Promise<{ usedStylesByLibraryKey: Record<string, any[]> }> {
+  if (!styleNodeIds.length) {
     return {
       usedStylesByLibraryKey: {},
     }
   }
-  let o = {}
-  for (let r of t) {
-    let t = e.get(r)
-    t && t.styleKeyForPublish && Fullscreen.getNumUsagesOfStyle(t.styleKeyForPublish, !0) !== 0 && (o[t.styleKeyForPublish] = r)
-  }
-  let l = Object.keys(o).map(n3)
-  let p = await liveStoreInstance.fetch(UnpublishedStylesQuery.UnpublishedStylesQuery({
-    styleKeys: l,
-    orgId: i,
-  }))
-  let _ = uniqBy([...p, ...Object.values(r).filter(e => e.key in o)], e => e.key)
-  let h = new Set(_.map(e => e.key))
-  let m = l.filter(e => e && !h.has(n3(e)))
-  let f = await liveStoreInstance.fetch(MissingStyleKeyToLibraryKeyQuery.MissingStyleKeyToLibraryKeyQuery({
-    styleKeys: m,
-  }))
-  a && delete f[a.libraryKey]
-  let E = []
-  let y = {}
-  for (let e of _) {
-    let t = e.library_key;
-    (y[t] ??= []).push(e)
-    n[t] || tr.has(t) || (tr.add(t), E.push(t))
-  }
-  for (let [t, r] of Object.entries(f)) {
-    let n = t
-    let i = y[n] ??= []
-    for (let t of r) {
-      let r = o[t] && e.get(o[t])
-      r && i.push({
-        type: PrimaryWorkflowEnum.STYLE,
-        name: r.name,
-        key: t,
-        thumbnail_url: $$ti(t, r.styleVersionHash),
-        canvas_url: $$ti(t, r.styleVersionHash),
-        content_hash: r.styleVersionHash || void 0,
-        userFacingVersion: VariableStyleId(r.userFacingVersion),
-        node_id: r.guid,
-        isLocal: !1,
-        style_type: r.styleType,
-        library_key: r.sourceLibraryKey,
-      })
+
+  // Map styleKeyForPublish to nodeId for styles with usages
+  const styleKeyToNodeId: Record<string, string> = {}
+  for (const nodeId of styleNodeIds) {
+    const node = sceneGraphMap.get(nodeId)
+    if (
+      node
+      && node.styleKeyForPublish
+      && Fullscreen.getNumUsagesOfStyle(node.styleKeyForPublish, true) !== 0
+    ) {
+      styleKeyToNodeId[node.styleKeyForPublish] = nodeId
     }
   }
-  await $$ta68(E, s)
+
+  const styleKeys = Object.keys(styleKeyToNodeId)
+
+  // Fetch unpublished styles from live store
+  const unpublishedStyles = await liveStoreInstance.fetch(
+    UnpublishedStylesQuery.UnpublishedStylesQuery({
+      styleKeys,
+      orgId,
+    }),
+  )
+
+  // Merge unpublished styles with used styles that match styleKey
+  const mergedStyles = uniqBy(
+    [
+      ...unpublishedStyles,
+      ...Object.values(usedStyles).filter(style => style.key in styleKeyToNodeId),
+    ],
+    style => style.key,
+  )
+
+  const foundStyleKeys = new Set(mergedStyles.map(style => style.key))
+  const missingStyleKeys = styleKeys.filter(key => key && !foundStyleKeys.has(key))
+
+  // Fetch missing style keys to library keys
+  const missingStyleKeyToLibrary = await liveStoreInstance.fetch(
+    MissingStyleKeyToLibraryKeyQuery.MissingStyleKeyToLibraryKeyQuery({
+      styleKeys: missingStyleKeys,
+    }),
+  )
+
+  // Optionally exclude a library key
+  if (excludeLibrary && excludeLibrary.libraryKey) {
+    delete missingStyleKeyToLibrary[excludeLibrary.libraryKey]
+  }
+
+  // Collect library keys to batch fetch files for
+  const libraryKeysToFetch: string[] = []
+  const usedStylesByLibraryKey: Record<string, any[]> = {}
+
+  // Group merged styles by library key
+  for (const style of mergedStyles) {
+    const libKey = style.library_key
+    if (!usedStylesByLibraryKey[libKey])
+      usedStylesByLibraryKey[libKey] = []
+    usedStylesByLibraryKey[libKey].push(style)
+    if (!loadedStyles[libKey] && !tr.has(libKey)) {
+      tr.add(libKey)
+      libraryKeysToFetch.push(libKey)
+    }
+  }
+
+  // Add missing styles to usedStylesByLibraryKey
+  for (const [libKey, styleKeysArr] of Object.entries(missingStyleKeyToLibrary)) {
+    const stylesArr = usedStylesByLibraryKey[libKey] ?? (usedStylesByLibraryKey[libKey] = [])
+    for (const styleKey of styleKeysArr as string[]) {
+      const nodeId = styleKeyToNodeId[styleKey]
+      const node = nodeId && sceneGraphMap.get(nodeId)
+      if (node) {
+        stylesArr.push({
+          type: PrimaryWorkflowEnum.STYLE,
+          name: node.name,
+          key: styleKey,
+          thumbnail_url: generateStyleThumbnailUrl(styleKey, node.styleVersionHash),
+          canvas_url: generateStyleThumbnailUrl(styleKey, node.styleVersionHash),
+          content_hash: node.styleVersionHash ?? undefined,
+          userFacingVersion: node.userFacingVersion,
+          node_id: node.guid,
+          isLocal: false,
+          style_type: node.styleType,
+          library_key: node.sourceLibraryKey,
+        })
+      }
+    }
+  }
+
+  // Batch fetch files for missing libraries
+  if (libraryKeysToFetch.length && dispatch) {
+    await batchFetchFiles(libraryKeysToFetch, dispatch)
+  }
+
   return {
-    usedStylesByLibraryKey: y,
+    usedStylesByLibraryKey,
   }
 }
-function $$ti(e, t) {
-  return `/style/${e}/thumbnail?ver=${t}`
+
+/**
+ * Generates style thumbnail URL (original: generateStyleThumbnailUrl)
+ * @param key
+ * @param version
+ */
+function generateStyleThumbnailUrl(key: string, version: string) {
+  return `/style/${key}/thumbnail?ver=${version}`
 }
-export async function $$ta68(e, t) {
-  if (e.length > 0) {
-    let n = []
-    async function r(e) {
+
+/**
+ * Batch fetches files for given library keys (original: batchFetchFiles)
+ * @param libraryKeys
+ * @param dispatch
+ */
+export async function batchFetchFiles(libraryKeys: string[], dispatch: Fn) {
+  if (libraryKeys.length > 0) {
+    let promises: Promise<void>[] = []
+    async function fetchBatch(keys: string[]) {
       try {
-        let r = await XHR.post('/api/files/batch', {
-          library_keys: e,
+        let response = await XHR.post('/api/files/batch', {
+          library_keys: keys,
         })
-        r.data.meta || logError('designSystems', 'Unexpected empty API response', {
-          data: JSON.stringify(r.data ?? null),
-          numFiles: e.length,
-          status: r.status,
+        response.data.meta || logError('designSystems', 'Unexpected empty API response', {
+          data: JSON.stringify(response.data ?? null),
+          numFiles: keys.length,
+          status: response.status,
         })
-        t(batchPutFileAction({
-          files: r.data.meta.files,
+        dispatch(batchPutFileAction({
+          files: response.data.meta.files,
           subscribeToRealtime: !0,
         }))
       }
-      catch (e) {
-        reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, e)
+      catch (error) {
+        reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, error)
       }
     }
-    for (let t = 0; t < e.length; t += 200) {
-      let i = e.slice(t, t + 200)
-      n.push(r(i))
+    for (let i = 0; i < libraryKeys.length; i += 200) {
+      let batch = libraryKeys.slice(i, i + 200)
+      promises.push(fetchBatch(batch))
     }
-    await Promise.all(n)
+    await Promise.all(promises)
   }
 }
-export async function $$ts87(e, t, r) {
-  if (t.length === 0)
+
+/**
+ * Fetches styles by keys (original: fetchStylesByKeys)
+ * @param dispatch
+ * @param styleKeys
+ * @param orgId
+ */
+export async function fetchStylesByKeys(dispatch: Fn, styleKeys: string[], orgId: string) {
+  if (styleKeys.length === 0)
     return []
   let {
     styles,
     files,
   } = (await XHR.post('/api/styles', {
-    style_keys: t,
-    org_id: r,
+    style_keys: styleKeys,
+    org_id: orgId,
   })).data.meta
-  e(batchPutFileAction({
+  dispatch(batchPutFileAction({
     files,
     subscribeToRealtime: !0,
   }))
   return styles
 }
-export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
-  let o = {}
-  let l = t.concat(r)
-  let u = $$eg95(n.components)
-  let p = $$eg95(n.stateGroups)
-  let _ = []
-  for (let t of l) {
-    let r = e.get(t)
-    if (!r)
+
+/**
+ * Finds and returns assets for given node IDs, handling components and state groups.
+ * (original: getAssetsForNodeIds)
+ * @param sceneGraphMap Map of scene graph nodes
+ * @param symbolNodeIds Array of symbol node IDs
+ * @param stateGroupNodeIds Array of state group node IDs
+ * @param publishedByLibraryKey Published assets by library key
+ * @param fileVersion Current file version
+ * @param dispatch Redux dispatch function
+ * @param includeStateGroups Whether to include state groups (default: false)
+ * @returns Array of asset objects
+ */
+export function getAssetsForNodeIds(
+  sceneGraphMap: Map<string, any>,
+  symbolNodeIds: string[] = [],
+  stateGroupNodeIds: string[] = [],
+  publishedByLibraryKey: any,
+  fileVersion: string,
+  dispatch: any,
+  includeStateGroups: boolean = false,
+): any[] {
+  const assets: Record<string, any> = {}
+  const allNodeIds = symbolNodeIds.concat(stateGroupNodeIds)
+  const publishedComponents = flattenAssetsByTeam(publishedByLibraryKey.components)
+  const publishedStateGroups = flattenAssetsByTeam(publishedByLibraryKey.stateGroups)
+  const missingLibraryKeys: string[] = []
+
+  for (const nodeId of allNodeIds) {
+    const node = sceneGraphMap.get(nodeId)
+    if (!node)
       continue
-    let n = r.sourceLibraryKey
-    let a = r.publishID
-    if (!a || !n)
+    const libraryKey = node.sourceLibraryKey
+    const publishID = node.publishID
+    if (!publishID || !libraryKey)
       continue
-    p[n] || u[n] || tr.has(n) || (tr.add(n), _.push(n))
-    let l = r.isStateGroup
-    let h = l ? r.sharedStateGroupVersion : r.sharedSymbolVersion
-    let m = l ? r.stateGroupKey : r.componentKey
-    let g = (l ? p[n] ?? {} : u[n] ?? {})[a]
-    if (g?.type === PrimaryWorkflowEnum.COMPONENT) {
-      let e = g.containing_frame?.containingStateGroup?.nodeId
-      if (e) {
-        let t = p[n]
-        g = t?.[e]
-        l = !0
+
+    if (
+      !publishedStateGroups[libraryKey]
+      && !publishedComponents[libraryKey]
+      && !tr.has(libraryKey)
+    ) {
+      tr.add(libraryKey)
+      missingLibraryKeys.push(libraryKey)
+    }
+
+    let isStateGroup = node.isStateGroup
+    let sharedVersion = isStateGroup ? node.sharedStateGroupVersion : node.sharedSymbolVersion
+    let assetKey = isStateGroup ? node.stateGroupKey : node.componentKey
+    let publishedAsset = (isStateGroup ? publishedStateGroups[libraryKey] ?? {} : publishedComponents[libraryKey] ?? {})[publishID]
+
+    // If published asset is a component, check for containing state group
+    if (publishedAsset?.type === PrimaryWorkflowEnum.COMPONENT) {
+      const containingStateGroupId = publishedAsset.containing_frame?.containingStateGroup?.nodeId
+      if (containingStateGroupId) {
+        const stateGroupAssets = publishedStateGroups[libraryKey]
+        publishedAsset = stateGroupAssets?.[containingStateGroupId]
+        isStateGroup = true
       }
     }
-    if (g) {
-      o[$$eo3(g)] = g
+
+    if (publishedAsset) {
+      assets[getAssetKey(publishedAsset)] = publishedAsset
     }
-    else if (l) {
-      if (!m || o[m] || !r.reversedChildrenGuids.some((t) => {
-        let r = e.get(t)?.componentKey
-        return r && !o[r]
-      })) {
+    else if (isStateGroup) {
+      // Only add if assetKey is valid and not already present
+      if (
+        !assetKey
+        || assets[assetKey]
+        || !node.reversedChildrenGuids.some((childId: string) => {
+          const child = sceneGraphMap.get(childId)
+          return child?.componentKey && !assets[child.componentKey]
+        })
+      ) {
         continue
       }
-      let n = Fullscreen.getDefaultStateForLocalStateGroup(t)
-      let s = e.get(n)
-      let [l, u] = s ? [s.size.x, s.size.y] : [0, 0]
-      o[m] = {
+      const defaultStateId = Fullscreen.getDefaultStateForLocalStateGroup(nodeId)
+      const defaultState = sceneGraphMap.get(defaultStateId)
+      const [minWidth, minHeight] = defaultState
+        ? [defaultState.size.x, defaultState.size.y]
+        : [0, 0]
+      assets[assetKey] = {
         type: PrimaryWorkflowEnum.STATE_GROUP,
-        name: r.name,
-        library_key: r.sourceLibraryKey,
-        key: m,
-        thumbnail_url: `/state_group/${m}/thumbnail?ver=${h}&fv=${i}`,
-        canvas_url: `/state_group/${m}/canvas?ver=${h}&fv=${i}`,
-        node_id: a || '',
-        isLocal: !1,
-        version: h || Rf.INVALID,
-        userFacingVersion: Rf(r.userFacingVersion),
+        name: node.name,
+        library_key: node.sourceLibraryKey,
+        key: assetKey,
+        thumbnail_url: `/state_group/${assetKey}/thumbnail?ver=${sharedVersion}&fv=${fileVersion}`,
+        canvas_url: `/state_group/${assetKey}/canvas?ver=${sharedVersion}&fv=${fileVersion}`,
+        node_id: publishID || '',
+        isLocal: false,
+        version: sharedVersion || 'INVALID',
+        userFacingVersion: node.userFacingVersion,
         containing_frame: {},
-        min_node_width: u,
-        min_node_height: l,
+        min_node_width: minHeight,
+        min_node_height: minWidth,
         default_state_key: '',
       }
     }
     else {
-      if (!m || o[m] || r.isState && !s || i === null)
+      // Only add if assetKey is valid and not already present
+      if (
+        !assetKey
+        || assets[assetKey]
+        || (node.isState && !includeStateGroups)
+        || fileVersion === null
+      ) {
         continue
-      o[m] = {
+      }
+      assets[assetKey] = {
         type: PrimaryWorkflowEnum.COMPONENT,
-        name: r.name,
-        library_key: r.sourceLibraryKey,
-        component_key: m,
-        thumbnail_url: `/component/${m}/thumbnail?ver=${h}&fv=${i}`,
-        canvas_url: `/component/${m}/canvas?ver=${h}&fv=${i}`,
-        node_id: a || '',
-        content_hash: r.sharedSymbolVersion || void 0,
-        userFacingVersion: F7(r.userFacingVersion),
-        isLocal: !1,
-        min_node_height: r.size.x,
-        min_node_width: r.size.y,
+        name: node.name,
+        library_key: node.sourceLibraryKey,
+        component_key: assetKey,
+        thumbnail_url: `/component/${assetKey}/thumbnail?ver=${sharedVersion}&fv=${fileVersion}`,
+        canvas_url: `/component/${assetKey}/canvas?ver=${sharedVersion}&fv=${fileVersion}`,
+        node_id: publishID || '',
+        content_hash: node.sharedSymbolVersion || undefined,
+        userFacingVersion: node.userFacingVersion,
+        isLocal: false,
+        min_node_height: node.size.x,
+        min_node_width: node.size.y,
       }
     }
   }
-  $$ta68(_, a)
-  return Object.values(o)
+
+  batchFetchFiles(missingLibraryKeys, dispatch)
+  return Object.values(assets)
 }
-export function $$tl9(e, t) {
-  return new Set($$to85(e.mirror.sceneGraph, subscribedSymbolsNodeIdsFromLoadedPagesSelector(e), subscribedStateGroupsNodeIdsFromLoadedPagesSelector(e), e.library.publishedByLibraryKey, e.fileVersion, t).map(e => $$eo3(e)))
+
+/**
+ * Returns a set of asset keys for the current scene graph and subscribed node IDs.
+ * (original: getSubscribedAssetKeys)
+ * @param state Redux state
+ * @param dispatch Redux dispatch function
+ * @returns Set of asset keys
+ */
+export function getSubscribedAssetKeys(state: any, dispatch: any): Set<string> {
+  return new Set(
+    getAssetsForNodeIds(
+      state.mirror.sceneGraph,
+      subscribedSymbolsNodeIdsFromLoadedPagesSelector(state),
+      subscribedStateGroupsNodeIdsFromLoadedPagesSelector(state),
+      state.library.publishedByLibraryKey,
+      state.fileVersion,
+      dispatch,
+    ).map(asset => getAssetKey(asset)),
+  )
 }
-let $$td = (e, t, r, n, i, a) => $$to85(e, t, r, n, i, a, !0).reduce((e, t) => (t.type === PrimaryWorkflowEnum.COMPONENT ? t.component_key && (e[t.component_key] = t) : e[t.key] = t, e), Object.create(null))
-export function $$tc66(e) {
-  let t = useDispatch()
-  let {
+
+/**
+ * Helper to build asset map from node IDs and scene graph.
+ * (original: buildAssetMap)
+ */
+function buildAssetMap(sceneGraph: Map<string, any>, symbolNodeIds: string[], stateGroupNodeIds: string[], publishedByLibraryKey: any, fileVersion: string, dispatch: any): Record<string, any> {
+  return getAssetsForNodeIds(
+    sceneGraph,
+    symbolNodeIds,
+    stateGroupNodeIds,
+    publishedByLibraryKey,
+    fileVersion,
+    dispatch,
+    true,
+  ).reduce((acc, asset) => {
+    if (asset.type === PrimaryWorkflowEnum.COMPONENT) {
+      if (asset.component_key)
+        acc[asset.component_key] = asset
+    }
+    else {
+      acc[asset.key] = asset
+    }
+    return acc
+  }, Object.create(null))
+}
+
+/**
+ * Hook to get current or all subscribed assets for the current file.
+ * (original: useSubscribedAssets)
+ * @param mode 'current' or 'all'
+ * @returns Asset map
+ */
+export function useSubscribedAssets(mode: 'current' | 'all') {
+  const dispatch = useDispatch()
+  const {
     library,
     sceneGraph,
     fileVersion,
@@ -1014,190 +1869,388 @@ export function $$tc66(e) {
     subscribedStateGroups,
     subscribedComponentsOnCurrentPage,
     subscribedStateGroupsOnCurrentPage,
-  } = selectWithShallowEqual(e => ({
-    library: e.library,
-    sceneGraph: e.mirror.sceneGraph,
-    fileVersion: e.fileVersion,
-    subscribedComponents: subscribedSymbolsNodeIdsFromLoadedPagesSelector(e),
-    subscribedStateGroups: subscribedStateGroupsNodeIdsFromLoadedPagesSelector(e),
-    subscribedComponentsOnCurrentPage: subscribedSymbolsNodeIdsOnCurrentPageSelector(e),
-    subscribedStateGroupsOnCurrentPage: subscribedStateGroupsNodeIdsOnCurrentPageSelector(e),
+  } = selectWithShallowEqual(state => ({
+    library: state.library,
+    sceneGraph: state.mirror.sceneGraph,
+    fileVersion: state.fileVersion,
+    subscribedComponents: subscribedSymbolsNodeIdsFromLoadedPagesSelector(state),
+    subscribedStateGroups: subscribedStateGroupsNodeIdsFromLoadedPagesSelector(state),
+    subscribedComponentsOnCurrentPage: subscribedSymbolsNodeIdsOnCurrentPageSelector(state),
+    subscribedStateGroupsOnCurrentPage: subscribedStateGroupsNodeIdsOnCurrentPageSelector(state),
   }))
-  let [u, p] = e === 'current' ? [subscribedComponentsOnCurrentPage, subscribedStateGroupsOnCurrentPage] : [subscribedComponents, subscribedStateGroups]
-  return useMemo(() => $$td(sceneGraph, u, p, library.publishedByLibraryKey, fileVersion, t), [sceneGraph, u, p, library.publishedByLibraryKey, fileVersion, t])
+  const [symbolNodeIds, stateGroupNodeIds]
+    = mode === 'current'
+      ? [subscribedComponentsOnCurrentPage, subscribedStateGroupsOnCurrentPage]
+      : [subscribedComponents, subscribedStateGroups]
+  return useMemo(
+    () =>
+      buildAssetMap(
+        sceneGraph,
+        symbolNodeIds,
+        stateGroupNodeIds,
+        library.publishedByLibraryKey,
+        fileVersion,
+        dispatch,
+      ),
+    [sceneGraph, symbolNodeIds, stateGroupNodeIds, library.publishedByLibraryKey, fileVersion, dispatch],
+  )
 }
-export function $$tu94(e, t) {
-  let r = e.libraryKeys.includes(t)
-  let n = atomStoreManager.get(e3).has(t)
-  return !!r || !!n
+
+/**
+ * Checks if a library subscription exists for a given key.
+ * (original: checkLibrarySubscription)
+ * @param defaultPublished Default published object
+ * @param libraryKey Library key to check
+ * @returns True if subscribed
+ */
+export function checkLibrarySubscription(defaultPublished: any, libraryKey: string): boolean {
+  const isInDefault = defaultPublished.libraryKeys.includes(libraryKey)
+  const isInAtom = atomStoreManager.get(subscribedLibraryKeysAtom).has(libraryKey)
+  return !!isInDefault || !!isInAtom
 }
-let tp = memoizeByArgs((e) => {
-  let t = {}
-  let r = e.local.styles
-  for (let e in r) {
-    let n = r[e]
-    t[n.key] = n
+
+/**
+ * Memoized selector for local styles by key.
+ * (original: tp)
+ */
+const getLocalStylesByKey = memoizeByArgs((library: any) => {
+  const stylesByKey: Record<string, any> = {}
+  const localStyles = library.local.styles
+  for (const styleId in localStyles) {
+    const style = localStyles[styleId]
+    stylesByKey[style.key] = style
   }
-  return t
+  return stylesByKey
 })
-export function $$t_17(e, t, r) {
-  let n = tp(r)[e]
-  if (n) {
+
+/**
+ * Gets subscription info for a style key.
+ * (original: getStyleSubscriptionInfo)
+ * @param styleKey Style key
+ * @param nodeIds Array of node IDs
+ * @param library Library object
+ * @returns Subscription info object
+ */
+export function getStyleSubscriptionInfo(styleKey: string, nodeIds: string[], library: any) {
+  const localStyle = getLocalStylesByKey(library)[styleKey]
+  if (localStyle) {
     return {
       kind: SubscriptionStatusEnum.LOCAL,
-      value: n,
+      value: localStyle,
     }
   }
-  let i = r.used__LIVEGRAPH.styles[e]
-  return i?.status === 'loaded'
+  const usedStyle = library.used__LIVEGRAPH.styles[styleKey]
+  if (usedStyle?.status === 'loaded') {
+    return {
+      kind: SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY,
+      value: usedStyle.data,
+    }
+  }
+  return nodeIds && nodeIds.length
     ? {
-        kind: SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY,
-        value: i.data,
+        kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
+        value: {
+          key: styleKey,
+          node_id: nodeIds[0],
+        },
       }
-    : t && t.length
-      ? {
-          kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
-          value: {
-            key: e,
-            node_id: t[0],
-          },
-        }
-      : void 0
+    : undefined
 }
-export function $$th42(e, t) {
-  return $$t_17(e, t, useSelector(e => e.library))
+
+/**
+ * Gets subscription info for a style key using Redux state.
+ * (original: useStyleSubscriptionInfo)
+ * @param styleKey Style key
+ * @param nodeIds Array of node IDs
+ * @returns Subscription info object
+ */
+export function useStyleSubscriptionInfo(styleKey: string, nodeIds: string[]) {
+  const library = useSelector<ObjectOf>(state => state.library)
+  return getStyleSubscriptionInfo(styleKey, nodeIds, library)
 }
-export function $$tm97(e, t) {
-  if (!e)
+
+/**
+ * Returns the name for a style subscription info object.
+ * (original: getStyleSubscriptionName)
+ * @param info Subscription info object
+ * @param sceneGraph Scene graph map
+ * @returns Style name or empty string
+ */
+export function getStyleSubscriptionName(
+  info: { kind: SubscriptionStatusEnum, value: any },
+  sceneGraph: Map<string, any>,
+): string {
+  if (!info)
     return ''
-  if (e.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY)
-    return e.value.name
-  {
-    let r = t.get(e.value.node_id)
-    return r ? r.name : ''
-  }
+  if (info.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY)
+    return info.value.name
+  const node = sceneGraph.get(info.value.node_id)
+  return node ? node.name : ''
 }
-export function $$tg92(e, t) {
-  let r = useSelector(e => e.mirror.sceneGraph)
-  return $$tm97($$th42(e, t), r)
+
+/**
+ * Returns the name for a style subscription using Redux selector.
+ * (original: useStyleSubscriptionName)
+ * @param styleKey Style key
+ * @param nodeIds Array of node IDs
+ * @returns Style name or empty string
+ */
+export function useStyleSubscriptionName(styleKey: string, nodeIds: string[]): string {
+  const sceneGraph = useSelector((state: any) => state.mirror.sceneGraph)
+  return getStyleSubscriptionName(useStyleSubscriptionInfo(styleKey, nodeIds), sceneGraph)
 }
-export function $$tf49(e) {
-  let t = {}
-  for (let r in e) {
-    let n = e[r]
-    n.containing_frame?.containingStateGroup && (t[r] = {
-      ...n,
-    })
-  }
-  return t
-}
-export function $$tE61(e, t, r, n) {
-  let i = t ? n[t] : null
-  if (!i || !e)
-    return null
-  let a = i[e]
-  return a ? a[r] : null
-}
-export function $$ty80(e, t) {
-  return (function (e, t) {
-    if (t.components[e]) {
-      let r = t.components[e]
-      let n = r.containing_frame?.containingStateGroup?.nodeId
-      return n ? t.stateGroups[n] || null : r || null
+
+/**
+ * Returns a map of assets that have a containing state group.
+ * (original: filterAssetsWithContainingStateGroup)
+ * @param assets Asset map
+ * @returns Filtered asset map
+ */
+export function filterAssetsWithContainingStateGroup(assets: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const key in assets) {
+    const asset = assets[key]
+    if (asset.containing_frame?.containingStateGroup) {
+      result[key] = { ...asset }
     }
-    return t.stateGroups[e] && t.stateGroups[e] || null
-  }(e, t)) || getFeatureFlags().dse_module_publish && t.modules[e] && t.modules[e] || null
+  }
+  return result
 }
-export function $$tb107(e) {
-  let t = e.type === PrimaryWorkflowEnum.STATE_GROUP && !!(e.stateGroupError && e.stateGroupError !== StateGroupErrorType.TOO_MANY_STATES_ERROR)
-  return !!(e.componentPropDefError && (e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_ERROR || e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR || e.componentPropDefError === VariableSetErrorType.UNUSED_DEF_ERROR) || t)
+
+/**
+ * Returns a nested value from a lookup map.
+ * (original: getNestedValue)
+ * @param key
+ * @param outerKey
+ * @param innerKey
+ * @param map
+ */
+export function getNestedValue(
+  key: string,
+  outerKey: string,
+  innerKey: string,
+  map: Record<string, Record<string, Record<string, any>>>,
+): any | null {
+  const outer = outerKey ? map[outerKey] : null
+  if (!outer || !key)
+    return null
+  const inner = outer[key]
+  return inner ? inner[innerKey] : null
 }
-export function $$tT43(e) {
-  return e.variableSetError !== VariableErrorType.NONE
+
+/**
+ * Finds an asset by node ID in components, state groups, or modules.
+ * (original: findAssetByNodeId)
+ * @param nodeId
+ * @param library
+ */
+export function findAssetByNodeId(nodeId: string, library: any): any | null {
+  const { components, stateGroups, modules } = library
+  if (components[nodeId]) {
+    const comp = components[nodeId]
+    const groupId = comp.containing_frame?.containingStateGroup?.nodeId
+    return groupId ? stateGroups[groupId] || null : comp || null
+  }
+  if (stateGroups[nodeId])
+    return stateGroups[nodeId] || null
+  if (getFeatureFlags().dse_module_publish && modules[nodeId])
+    return modules[nodeId] || null
+  return null
 }
-let $$tI27 = () => {}
-let $$tS36 = new Promise((e) => {
-  $$tI27 = e
+
+/**
+ * Checks if an asset has errors.
+ * (original: hasAssetError)
+ * @param asset
+ */
+export function hasAssetError(asset: any): boolean {
+  const isStateGroupError
+    = asset.type === PrimaryWorkflowEnum.STATE_GROUP
+      && !!(asset.stateGroupError && asset.stateGroupError !== StateGroupErrorType.TOO_MANY_STATES_ERROR)
+  return !!(
+    asset.componentPropDefError
+    && [
+      VariableSetErrorType.CONFLICTING_NAMES_ERROR,
+      VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR,
+      VariableSetErrorType.UNUSED_DEF_ERROR,
+    ].includes(asset.componentPropDefError)
+  ) || isStateGroupError
+}
+
+/**
+ * Checks if variable set error is not NONE.
+ * (original: hasVariableSetError)
+ * @param asset
+ */
+export function hasVariableSetError(asset: any): boolean {
+  return asset.variableSetError !== VariableErrorType.NONE
+}
+
+// Promise and callback management for async operations (original: resolveUsedComponentsStateGroups, usedComponentsStateGroupsPromise, resolveUsedComponents, usedComponentsPromise,
+// tx, tN, getUsedComponentsStateGroupsAsync, resolveUsedLibraries, usedLibrariesPromise, resolveUsedLibrariesAsync, usedLibrariesAsyncPromise)
+let resolveUsedComponentsStateGroups: () => void = () => {}
+let usedComponentsStateGroupsPromise = new Promise<void>((resolve) => {
+  resolveUsedComponentsStateGroups = resolve
 })
-let $$tv55 = () => {}
-let $$tA38 = new Promise((e) => {
-  $$tv55 = e
+
+let resolveUsedComponents: () => void = () => {}
+let usedComponentsPromise = new Promise<void>((resolve) => {
+  resolveUsedComponents = resolve
 })
-let tx = () => {}
-let tN = new Promise((e) => {
-  tx = e
+
+let resolveAsync: () => void = () => {}
+let asyncPromise = new Promise<void>((resolve) => {
+  resolveAsync = resolve
 })
-let $$tC78 = e => ({
-  callback: tx,
-  promise: tN,
-  resetPromise: tD,
-  loadingKey: `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.getState().openFile?.key}`,
-})
-let $$tw76 = () => {}
-let $$tO77 = new Promise((e) => {
-  $$tw76 = e
-})
-let $$tR65 = () => {}
-let $$tL83 = new Promise((e) => {
-  $$tR65 = e
-})
-export function $$tP60() {
-  $$tI27()
-  $$tv55()
-  $$tw76()
-  $$tS36 = new Promise((e) => {
-    $$tI27 = e
-  })
-  $$tA38 = new Promise((e) => {
-    $$tv55 = e
-  })
-  $$tO77 = new Promise((e) => {
-    $$tw76 = e
-  })
-  tD()
+
+/**
+ * Returns an object for used components/state groups async operation.
+ * (original: getUsedComponentsStateGroupsAsync)
+ * @param store Redux store
+ */
+export function getUsedComponentsStateGroupsAsync(store: any) {
+  return {
+    callback: resolveAsync,
+    promise: asyncPromise,
+    resetPromise: resetAsyncPromise,
+    loadingKey: `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${store.getState().openFile?.key}`,
+  }
 }
-function tD() {
-  tx()
-  tN = new Promise((e) => {
-    tx = e
+
+let resolveUsedLibraries: () => void = () => {}
+let usedLibrariesPromise = new Promise<void>((resolve) => {
+  resolveUsedLibraries = resolve
+})
+
+let resolveUsedLibrariesAsync: () => void = () => {}
+let usedLibrariesAsyncPromise = new Promise<void>((resolve) => {
+  resolveUsedLibrariesAsync = resolve
+})
+
+/**
+ * Resets all async promises and callbacks.
+ * (original: resetAllAsyncPromises)
+ */
+export function resetAllAsyncPromises() {
+  resolveUsedComponentsStateGroups()
+  resolveUsedComponents()
+  resolveUsedLibraries()
+  usedComponentsStateGroupsPromise = new Promise<void>((resolve) => {
+    resolveUsedComponentsStateGroups = resolve
   })
-}
-export function $$tk88(e, t, r) {
-  return e.team_id === r ? -1 : t.team_id === r ? 1 : (e.team_name || '').localeCompare(t.team_name || '')
-}
-export function $$tM71(e, t, r) {
-  return e.sort((e, n) => {
-    let i
-    i = r?.groupByFolders
-    let a = e.team_id !== n.team_id ? $$tk88(e, n, t) : i && e.file.folder_id !== n.file.folder_id ? e.folder_name < n.folder_name ? -1 : 1 : (e.library_file_name || '').localeCompare(n.library_file_name || '')
-    return r?.isDescending ? a : -a
+  usedComponentsPromise = new Promise<void>((resolve) => {
+    resolveUsedComponents = resolve
   })
+  usedLibrariesPromise = new Promise<void>((resolve) => {
+    resolveUsedLibraries = resolve
+  })
+  resetAsyncPromise()
 }
-export function $$tF72(e, t, r, n) {
-  return e.sort((e, i) => {
-    let a
-    let s
-    let o
-    let l
-    let d
-    a = e
-    s = i
-    o = t
-    l = r
-    d = n?.groupByFolders
-    let c = a.team_id !== s.team_id ? a.team_id === o ? -1 : s.team_id === o ? 1 : (a.team_name || '').localeCompare(s.team_name || '') : d && a.folder_id !== s.folder_id ? (l[a.folder_id]?.path ?? '') < (l[s.folder_id]?.path ?? '') ? -1 : 1 : (a.library_name || '').localeCompare(s.library_name || '')
-    return n?.isDescending ? c : -c
+
+/**
+ * Resets the async promise and callback for used components/state groups.
+ * (original: tD)
+ */
+function resetAsyncPromise() {
+  resolveAsync()
+  asyncPromise = new Promise<void>((resolve) => {
+    resolveAsync = resolve
   })
 }
-export function $$tj56(e, t, r) {
-  let n
-  let i = e.node_id
-  let a = t[i] || {}
-  let o = a.url || null
-  switch (e.type) {
+
+/**
+ * Sorts assets by team, folder, and name.
+ * (original: compareAssetsByTeam)
+ * @param a
+ * @param b
+ * @param teamId
+ */
+export function compareAssetsByTeam(a: any, b: any, teamId: string): number {
+  if (a.team_id === teamId)
+    return -1
+  if (b.team_id === teamId)
+    return 1
+  return (a.team_name || '').localeCompare(b.team_name || '')
+}
+
+/**
+ * Sorts libraries by team, folder, and name.
+ * (original: sortLibraries)
+ * @param libraries
+ * @param teamId
+ * @param options
+ */
+export function sortLibraries(
+  libraries: any[],
+  teamId: string,
+  options?: { groupByFolders?: boolean, isDescending?: boolean },
+): any[] {
+  return libraries.sort((a, b) => {
+    const groupByFolders = options?.groupByFolders
+    let result: number
+    if (a.team_id !== b.team_id) {
+      result = compareAssetsByTeam(a, b, teamId)
+    }
+    else if (groupByFolders && a.file.folder_id !== b.file.folder_id) {
+      result = a.folder_name < b.folder_name ? -1 : 1
+    }
+    else {
+      result = (a.library_file_name || '').localeCompare(b.library_file_name || '')
+    }
+    return options?.isDescending ? result : -result
+  })
+}
+
+/**
+ * Sorts libraries by team, folder path, and name.
+ * (original: sortLibrariesByFolder)
+ * @param libraries
+ * @param teamId
+ * @param folderMap
+ * @param options
+ */
+export function sortLibrariesByFolder(
+  libraries: any[],
+  teamId: string,
+  folderMap: Record<string, any>,
+  options?: { groupByFolders?: boolean, isDescending?: boolean },
+): any[] {
+  return libraries.sort((a, b) => {
+    const groupByFolders = options?.groupByFolders
+    let result: number
+    if (a.team_id !== b.team_id) {
+      result = a.team_id === teamId ? -1 : b.team_id === teamId ? 1 : (a.team_name || '').localeCompare(b.team_name || '')
+    }
+    else if (groupByFolders && a.folder_id !== b.folder_id) {
+      result = (folderMap[a.folder_id]?.path ?? '') < (folderMap[b.folder_id]?.path ?? '') ? -1 : 1
+    }
+    else {
+      result = (a.library_name || '').localeCompare(b.library_name || '')
+    }
+    return options?.isDescending ? result : -result
+  })
+}
+
+/**
+ * Returns a thumbnail URL for an asset, generating if needed.
+ * (original: getAssetThumbnailUrl)
+ * @param asset
+ * @param thumbnails
+ * @param forceGenerate
+ */
+export function getAssetThumbnailUrl(
+  asset: any,
+  thumbnails: Record<string, any>,
+  forceGenerate?: boolean,
+): string | null {
+  const nodeId = asset.node_id
+  const thumbnail = thumbnails[nodeId] || {}
+  let url = thumbnail.url || null
+  let hash: string | undefined
+  switch (asset.type) {
     case PrimaryWorkflowEnum.COMPONENT:
     case PrimaryWorkflowEnum.STYLE:
-      n = e.content_hash
+      hash = asset.content_hash
       break
     case PrimaryWorkflowEnum.VARIABLE:
     case PrimaryWorkflowEnum.VARIABLE_SET:
@@ -1206,116 +2259,260 @@ export function $$tj56(e, t, r) {
     case PrimaryWorkflowEnum.RESPONSIVE_SET:
     case PrimaryWorkflowEnum.CODE_COMPONENT:
     case PrimaryWorkflowEnum.MANAGED_STRING:
-      n = e.version
+      hash = asset.version
       break
     default:
-      throwTypeError(e)
+      throwTypeError(asset)
   }
-  (r || a.content_hash !== n || !isValidThumbnail(o)) && (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.MODULE || e.type === PrimaryWorkflowEnum.RESPONSIVE_SET || e.type === PrimaryWorkflowEnum.CODE_COMPONENT ? o = generateNodeThumbnail(i) : e.type === PrimaryWorkflowEnum.STYLE ? o = isFullyTransparentFill(e) ? getDefaultPlaceholderThumbnail() : generateThumbnailFromStyleMaster(i, e.style_type) : e.type === PrimaryWorkflowEnum.VARIABLE || e.type === PrimaryWorkflowEnum.VARIABLE_SET || e.type === PrimaryWorkflowEnum.MANAGED_STRING ? o = getDefaultPlaceholderThumbnail() : throwTypeError(e))
-  return o
+  if (
+    forceGenerate
+    || thumbnail.content_hash !== hash
+    || !isValidThumbnail(url)
+  ) {
+    switch (asset.type) {
+      case PrimaryWorkflowEnum.COMPONENT:
+      case PrimaryWorkflowEnum.STATE_GROUP:
+      case PrimaryWorkflowEnum.MODULE:
+      case PrimaryWorkflowEnum.RESPONSIVE_SET:
+      case PrimaryWorkflowEnum.CODE_COMPONENT:
+        url = generateNodeThumbnail(nodeId)
+        break
+      case PrimaryWorkflowEnum.STYLE:
+        url = isFullyTransparentFill(asset)
+          ? getDefaultPlaceholderThumbnail()
+          : generateThumbnailFromStyleMaster(nodeId, asset.style_type)
+        break
+      case PrimaryWorkflowEnum.VARIABLE:
+      case PrimaryWorkflowEnum.VARIABLE_SET:
+      case PrimaryWorkflowEnum.MANAGED_STRING:
+        url = getDefaultPlaceholderThumbnail()
+        break
+      default:
+        throwTypeError(asset)
+    }
+  }
+  return url
 }
-export function $$tU13({
-  numProductComponents: e,
-  numStyles: t,
-  numVariables: r,
-  numVariableCollections: n,
-}) {
-  let i = t > 0
-    ? getI18nString('design_systems.libraries_modal.plural.num_style', {
-        numStyles: t,
-      })
-    : null
-  let s = e > 0
-    ? getI18nString('design_systems.libraries_modal.plural.num_component', {
-        numComponents: e,
-      })
-    : null
-  let o = r > 0
-    ? getI18nString('design_systems.libraries_modal.plural.num_variables', {
-        numVariables: r,
-      })
-    : null
-  let l = r === 0 && n > 0
-    ? getI18nString('design_systems.libraries_modal.plural.variable_collections', {
-        numVariableCollections: n,
-      })
-    : null
-  let d = filterNotNullish([s, i, o, l])
-  return d.length === 0 ? getI18nString('design_systems.libraries_modal.no_components_styles_variables') : formatList(d, 'unit')
+
+/**
+ * Returns a formatted string for library contents.
+ * (original: formatLibraryContents)
+ * @param params
+ */
+export function formatLibraryContents({
+  numProductComponents,
+  numStyles,
+  numVariables,
+  numVariableCollections,
+}: {
+  numProductComponents: number
+  numStyles: number
+  numVariables: number
+  numVariableCollections: number
+}): string {
+  const styleStr
+    = numStyles > 0
+      ? getI18nString('design_systems.libraries_modal.plural.num_style', { numStyles })
+      : null
+  const componentStr
+    = numProductComponents > 0
+      ? getI18nString('design_systems.libraries_modal.plural.num_component', { numComponents: numProductComponents })
+      : null
+  const variableStr
+    = numVariables > 0
+      ? getI18nString('design_systems.libraries_modal.plural.num_variables', { numVariables })
+      : null
+  const collectionStr
+    = numVariables === 0 && numVariableCollections > 0
+      ? getI18nString('design_systems.libraries_modal.plural.variable_collections', { numVariableCollections })
+      : null
+  const items = filterNotNullish([componentStr, styleStr, variableStr, collectionStr])
+  return items.length === 0
+    ? getI18nString('design_systems.libraries_modal.no_components_styles_variables')
+    : formatList(items, 'unit')
 }
-export let $$tB20 = e => e !== StagingStatusEnum.DELETED && e !== StagingStatusEnum.NOT_STAGED
-export function $$tG47(e, t, r, n) {
-  let i = t[e]
-  if (!i)
+
+/**
+ * Checks if a staging status is not DELETED or NOT_STAGED.
+ * (original: isActiveStagingStatus)
+ * @param status
+ */
+export function isActiveStagingStatus(status: StagingStatusEnum) {
+  return status !== StagingStatusEnum.DELETED && status !== StagingStatusEnum.NOT_STAGED
+}
+
+/**
+ * Finds the library name for an asset key.
+ * (original: findLibraryNameForAsset)
+ * @param assetKey
+ * @param assetMap
+ * @param assetsByTeam
+ * @param libraries
+ */
+export function findLibraryNameForAsset(
+  assetKey: string,
+  assetMap: Record<string, any>,
+  assetsByTeam: any,
+  libraries: Record<string, any>,
+): string | null {
+  const assetId = assetMap[assetKey]
+  if (!assetId)
     return null
-  let a = $$ef101(r).find(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key === i : e.key === i)
-  let s = 'another file'
-  if (!a)
-    return s
-  let o = n[a.library_key]
-  return o ? o.name : s
+  const asset = getAllAssets(assetsByTeam).find((a: any) =>
+    a.type === PrimaryWorkflowEnum.COMPONENT ? a.component_key === assetId : a.key === assetId,
+  )
+  if (!asset)
+    return 'another file'
+  const library = libraries[asset.library_key]
+  return library ? library.name : 'another file'
 }
-export function $$tV6(e, t, r) {
-  let n = e.reduce((r, n) => (t[n]
-    ? r[n] = t[n]
-    : debug(!1, 'Expected nodeIdsToMove to be a subset of movableNodeIdToOldKey', {
-        nodeIdsToMove: e,
-        movableNodeIdToOldKey: t,
-      }), r), Object.create(null))
-  for (let e of r) {
-    let r = e.containing_frame?.containingStateGroup?.nodeId
-    let i = t[e.node_id]
-    if (!r || !i)
-      continue
-    let a = !!t[r]
-    n[r] || !a ? n[e.node_id] = i : n[e.node_id] && delete n[e.node_id]
-  }
-  return {
-    moveRemappings: n,
-    movableItemsToPublishAsNew: new Set(Object.keys(t).filter(e => !n[e])),
-  }
-}
-export function $$tH28(e) {
-  return e.isStateGroup || e.type === 'SYMBOL' && !e.isState || e.isCodeComponent
-}
-export function $$tz63(e) {
-  return PRIMARY_WORKFLOW_TYPES.includes(e.type)
-}
-export function $$tW5(e) {
-  return e.isLocal ? SceneGraphHelpers.getAssetKeyForPublish(e.node_id) : $$eo3(e)
-}
-export function $$tK8(e) {
-  return e.containing_frame?.containingStateGroup?.nodeId ?? null
-}
-export function $$tY58(e) {
-  return !!$$tK8(e)
-}
-export function $$t$37(e, t, r, n) {
-  let i
-  if (!e)
-    return
-  let a = t.get(e)
-  if (a && a.containingStateGroupId && (a = t.get(a.containingStateGroupId)), a) {
-    if (a.isSubscribedAsset) {
-      let e = a.componentKey ?? a.stateGroupKey
-      e && (i = n?.[e])
+
+/**
+ * Remaps node IDs to old keys for move operations.
+ * (original: remapNodeIdsForMove)
+ * @param nodeIdsToMove
+ * @param movableNodeIdToOldKey
+ * @param assets
+ */
+export function remapNodeIdsForMove(
+  nodeIdsToMove: string[],
+  movableNodeIdToOldKey: Record<string, string>,
+  assets: any[],
+): { moveRemappings: Record<string, string>, movableItemsToPublishAsNew: Set<string> } {
+  const remappings: Record<string, string> = Object.create(null)
+  nodeIdsToMove.forEach((id) => {
+    if (movableNodeIdToOldKey[id]) {
+      remappings[id] = movableNodeIdToOldKey[id]
     }
     else {
-      i = r?.[a.guid]
+      debug(false, 'Expected nodeIdsToMove to be a subset of movableNodeIdToOldKey', {
+        nodeIdsToMove,
+        movableNodeIdToOldKey,
+      })
     }
-    return i
+  })
+  for (const asset of assets) {
+    const groupId = asset.containing_frame?.containingStateGroup?.nodeId
+    const oldKey = movableNodeIdToOldKey[asset.node_id]
+    if (!groupId || !oldKey)
+      continue
+    const hasGroupOldKey = !!movableNodeIdToOldKey[groupId]
+    if (!remappings[groupId] || !hasGroupOldKey) {
+      remappings[asset.node_id] = oldKey
+    }
+    else if (remappings[asset.node_id]) {
+      delete remappings[asset.node_id]
+    }
+  }
+  return {
+    moveRemappings: remappings,
+    movableItemsToPublishAsNew: new Set(
+      Object.keys(movableNodeIdToOldKey).filter(id => !remappings[id]),
+    ),
   }
 }
-export function $$tX32(e, t) {
-  function r(e) {
-    return e.toLowerCase()
-  }
-  let n = r(e.name)
-  let i = r(t.name)
-  return n < i ? -1 : n > i ? 1 : 0
+
+/**
+ * Checks if an asset is a state group, symbol, or code component.
+ * (original: isStateGroupOrSymbolOrCodeComponent)
+ * @param asset
+ */
+export function isStateGroupOrSymbolOrCodeComponent(asset: any): boolean {
+  return (
+    asset.isStateGroup
+    || (asset.type === 'SYMBOL' && !asset.isState)
+    || asset.isCodeComponent
+  )
 }
-export function $$tq29(e) {
-  switch (e) {
+
+/**
+ * Checks if an asset type is a primary workflow type.
+ * (original: isPrimaryWorkflowType)
+ * @param asset
+ */
+export function isPrimaryWorkflowType(asset: any): boolean {
+  return PRIMARY_WORKFLOW_TYPES.includes(asset.type)
+}
+
+/**
+ * Gets the asset key for publishing.
+ * (original: getAssetKeyForPublish)
+ * @param asset
+ */
+export function getAssetKeyForPublish(asset: any): string {
+  return asset.isLocal
+    ? SceneGraphHelpers.getAssetKeyForPublish(asset.node_id)
+    : getAssetKey(asset)
+}
+
+/**
+ * Gets the containing state group node ID for an asset.
+ * (original: getContainingStateGroupNodeId)
+ * @param asset
+ */
+export function getContainingStateGroupNodeId(asset: any): string | null {
+  return asset.containing_frame?.containingStateGroup?.nodeId ?? null
+}
+
+/**
+ * Checks if an asset has a containing state group.
+ * (original: hasContainingStateGroup)
+ * @param asset
+ */
+export function hasContainingStateGroup(asset: any): boolean {
+  return !!getContainingStateGroupNodeId(asset)
+}
+/**
+ * Finds an asset for a given node, using scene graph and asset maps.
+ * (original: findAssetForNode)
+ * @param nodeId
+ * @param sceneGraphMap
+ * @param assetMap
+ * @param assetsByKey
+ */
+export function findAssetForNode(
+  nodeId: string,
+  sceneGraphMap: Map<string, any>,
+  assetMap: Record<string, any>,
+  assetsByKey?: Record<string, any>,
+): any | undefined {
+  if (!nodeId)
+    return
+  let node = sceneGraphMap.get(nodeId)
+  if (node && node.containingStateGroupId) {
+    node = sceneGraphMap.get(node.containingStateGroupId)
+  }
+  if (node) {
+    if (node.isSubscribedAsset) {
+      const key = node.componentKey ?? node.stateGroupKey
+      if (key)
+        return assetsByKey?.[key]
+    }
+    else {
+      return assetMap?.[node.guid]
+    }
+  }
+}
+
+/**
+ * Compares two assets by name, case-insensitive.
+ * (original: compareAssetsByName)
+ * @param a
+ * @param b
+ */
+export function compareAssetsByName(a: any, b: any): number {
+  const nameA = a.name.toLowerCase()
+  const nameB = b.name.toLowerCase()
+  return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
+}
+
+/**
+ * Returns i18n string for library age enum.
+ * (original: getLibraryAgeLabel)
+ * @param age
+ */
+export function getLibraryAgeLabel(age: LibraryAgeEnum): string {
+  switch (age) {
     case LibraryAgeEnum.THIRTY_DAYS:
       return getI18nString('design_systems.libraries_modal.30_days')
     case LibraryAgeEnum.SIXTY_DAYS:
@@ -1325,218 +2522,378 @@ export function $$tq29(e) {
     case LibraryAgeEnum.YEAR:
       return getI18nString('design_systems.libraries_modal.year')
     default:
-      throwTypeError(e)
+      throwTypeError(age)
   }
 }
-export function $$tJ12(e) {
-  return !!(getFeatureFlags().dse_templates_proto && e.description?.startsWith('Figma.TemporaryIsTemplate'))
+
+/**
+ * Checks if asset is a template.
+ * (original: isTemplateAsset)
+ * @param asset
+ */
+export function isTemplateAsset(asset: any): boolean {
+  return !!(getFeatureFlags().dse_templates_proto && asset.description?.startsWith('Figma.TemporaryIsTemplate'))
 }
-export function $$tZ11(e) {
-  return !!(getFeatureFlags().dse_module_publish && e.type === 'MODULE')
+
+/**
+ * Checks if asset is a module and module publishing is enabled.
+ * (original: isModulePublishEnabled)
+ * @param asset
+ */
+export function isModulePublishEnabled(asset: any): boolean {
+  return !!(getFeatureFlags().dse_module_publish && asset.type === 'MODULE')
 }
-export function $$tQ44(e, t) {
-  return (e.design !== null || e.figjam !== null || e.slides !== null || e.buzz !== null) && (!!e.design || !!e.figjam || !!e.slides || !!e.buzz) && (!!e.design && !t.designSubscribed || !!e.figjam && !t.figjamSubscribed || !!e.slides && !t.slidesSubscribed || !!e.buzz && !t.buzzSubscribed)
+
+/**
+ * Checks if subscription info has any active subscription not already subscribed.
+ * (original: hasActiveSubscriptionNotSubscribed)
+ * @param info
+ * @param subscribed
+ */
+export function hasActiveSubscriptionNotSubscribed(info: any, subscribed: any): boolean {
+  return (
+    (info.design !== null || info.figjam !== null || info.slides !== null || info.buzz !== null)
+    && (!!info.design || !!info.figjam || !!info.slides || !!info.buzz)
+    && (
+      (!!info.design && !subscribed.designSubscribed)
+      || (!!info.figjam && !subscribed.figjamSubscribed)
+      || (!!info.slides && !subscribed.slidesSubscribed)
+      || (!!info.buzz && !subscribed.buzzSubscribed)
+    )
+  )
 }
-export function $$t099(e, t) {
-  return e ? (t || (t = $$t559(debugState.getState().library.publishedByLibraryKey.components)), t[e]?.library_key ?? null) : null
+
+/**
+ * Gets library key for a component node.
+ * (original: getComponentLibraryKey)
+ * @param nodeId
+ * @param componentsMap
+ */
+export function getComponentLibraryKey(nodeId: string, componentsMap?: Record<string, any>): string | null {
+  const map = componentsMap || getComponentAssetsMap(debugState.getState().library.publishedByLibraryKey.components)
+  return nodeId ? map[nodeId]?.library_key ?? null : null
 }
-export function $$t167(e, t) {
-  return e ? (t || (t = $$t559(debugState.getState().library.publishedByLibraryKey.stateGroups)), t[e]?.library_key ?? null) : null
+
+/**
+ * Gets library key for a state group node.
+ * (original: getStateGroupLibraryKey)
+ * @param nodeId
+ * @param stateGroupsMap
+ */
+export function getStateGroupLibraryKey(nodeId: string, stateGroupsMap?: Record<string, any>): string | null {
+  const map = stateGroupsMap || getComponentAssetsMap(debugState.getState().library.publishedByLibraryKey.stateGroups)
+  return nodeId ? map[nodeId]?.library_key ?? null : null
 }
-export function $$t2100(e) {
-  let t = {}
-  Object.keys(e).forEach((r) => {
-    Object.keys(e[r]).forEach((n) => {
-      Object.keys(e[r][n]).forEach((i) => {
-        t[n] = t[n] || {}
-        t[n][i] = e[r][n][i]
+
+/**
+ * Flattens nested asset objects into a map by node id.
+ * (original: flattenNestedAssets)
+ * @param assets
+ */
+export function flattenNestedAssets(assets: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {}
+  Object.keys(assets).forEach((teamId) => {
+    Object.keys(assets[teamId]).forEach((libKey) => {
+      Object.keys(assets[teamId][libKey]).forEach((nodeId) => {
+        result[libKey] = result[libKey] || {}
+        result[libKey][nodeId] = assets[teamId][libKey][nodeId]
       })
     })
   })
-  return t
+  return result
 }
-export function $$t559(e) {
-  let t = {}
-  $$ey41(e, (e, r, n, i) => {
-    t[$$eo3(i)] = i
+
+/**
+ * Builds a map of assets by key from assetsByTeam.
+ * (original: getComponentAssetsMap)
+ * @param assetsByTeam
+ */
+export function getComponentAssetsMap(assetsByTeam: any): Record<string, any> {
+  const map: Record<string, any> = {}
+  iterateAssetsByTeam(assetsByTeam, (_teamId, _libKey, _assetKey, asset) => {
+    map[getAssetKey(asset)] = asset
   })
-  return t
+  return map
 }
-export function $$t3102(e) {
-  let t = useDispatch()
-  let r = useMemo(() => debounce(() => {
-    e && e.value.node_id && t(updateStyleThumbnailOptimist({
-      styleNodeId: e.value.node_id,
-      styleKind: e.kind,
-    }))
-  }), [t, e])
-  useEffect(r)
+
+/**
+ * React hook to optimistically update style thumbnail.
+ * (original: useOptimisticStyleThumbnailUpdate)
+ * @param info
+ */
+export function useOptimisticStyleThumbnailUpdate(info: { value: any, kind: string }) {
+  const dispatch = useDispatch<AppDispatch>()
+  const update = useMemo(
+    () =>
+      debounce(() => {
+        if (info && info.value.node_id) {
+          dispatch(
+            updateStyleThumbnailOptimist({
+              styleNodeId: info.value.node_id,
+              styleKind: info.kind,
+            }),
+          )
+        }
+      }),
+    [dispatch, info],
+  )
+  useEffect(update)
 }
-export function $$t416(e) {
-  switch (e.type) {
+
+/**
+ * Returns a unique asset id string for a given asset.
+ * (original: getAssetUniqueId)
+ * @param asset
+ */
+export function getAssetUniqueId(asset: any): string {
+  switch (asset.type) {
     case PrimaryWorkflowEnum.CODE_COMPONENT:
     case PrimaryWorkflowEnum.RESPONSIVE_SET:
-      return e.subscriptionStatus === 'LIBRARY' ? `${e.sourceLibraryKey}:${e.assetId}` : `${e.library_key}:${e.node_id}`
+      return asset.subscriptionStatus === 'LIBRARY'
+        ? `${asset.sourceLibraryKey}:${asset.assetId}`
+        : `${asset.library_key}:${asset.node_id}`
     default:
-      return `${e.library_key}:${e.node_id}`
+      return `${asset.library_key}:${asset.node_id}`
   }
 }
-export function $$t864(e) {
-  return resolveParentOrgId(e.openFile, e.currentUserOrgId)
+
+/**
+ * Resolves parent org id for a file.
+ * (original: resolveFileParentOrgId)
+ * @param state
+ */
+export function resolveFileParentOrgId(state: any): string | null {
+  return resolveParentOrgId(state.openFile, state.currentUserOrgId)
 }
-export function $$t691() {
-  let e = getParentOrgId()
-  let t = useSelector(e => e.orgById)
-  return getOrgByCurrentUserId(e, t)
+
+/**
+ * React hook to get current user's org.
+ * (original: useCurrentUserOrg)
+ */
+export function useCurrentUserOrg() {
+  const orgId = getParentOrgId()
+  const orgById = useSelector((state: any) => state.orgById)
+  return getOrgByCurrentUserId(orgId, orgById)
 }
-export function $$t793(e) {
-  let t = je()
+
+/**
+ * React hook to get subscribed library id for a given key.
+ * (original: useSubscribedLibraryId)
+ * @param libraryKey
+ */
+export function useSubscribedLibraryId(libraryKey: string): string | undefined {
+  const libraries = useSubscribedLibraries()
   return useMemo(() => {
-    if (e && t.status === 'loaded')
-      return t.data?.find(t => t.libraryKey === e)?.id
-  }, [e, t.data, t.status])
+    if (libraryKey && libraries.status === 'loaded')
+      return libraries.data?.find(lib => lib.libraryKey === libraryKey)?.id
+  }, [libraryKey, libraries.data, libraries.status])
 }
-export function $$t982(e) {
-  return e === FContainerType.ORG || e === FContainerType.WORKSPACE
+
+/**
+ * Checks if container type is org or workspace.
+ * (original: isOrgOrWorkspaceContainer)
+ * @param type
+ */
+export function isOrgOrWorkspaceContainer(type: FContainerType): boolean {
+  return type === FContainerType.ORG || type === FContainerType.WORKSPACE
 }
-export function $$re86(e, t) {
-  return !e && !t || e === t
+
+/**
+ * Checks if two values are equal or both falsy.
+ * (original: areValuesEqual)
+ * @param a
+ * @param b
+ */
+export function areValuesEqual(a: any, b: any): boolean {
+  return (!a && !b) || a === b
 }
-export function $$rt40(e, t, r) {
-  let n = e ? e.nodeId : void 0
-  let i = e ? e.name : void 0
-  let a = e ? e.backgroundColor : void 0
-  let s = e ? e.pageId : void 0
-  let o = e ? e.sortPosition : void 0
-  let l = t ? t.nodeId : void 0
-  let d = t ? t.name : void 0
-  let c = t ? t.backgroundColor : void 0
-  let u = t ? t.pageId : void 0
-  let p = t ? t.sortPosition : void 0
-  let _ = !r?.compareSortPositions || o === p
-  return (n !== l || i !== d || a !== c || !_ || !!s || !u) && !(e == null && t == null || !(e == null || t == null || !$$re86(e.nodeId, t.nodeId) || !$$re86(e.name, t.name) || !$$re86(e.backgroundColor, t.backgroundColor) || !$$re86(e.pageName, t.pageName) || !$$re86(e.pageId, t.pageId) || r?.compareSortPositions && !$$re86(e.sortPosition, t.sortPosition)) && (function (e, t) {
-    if (e == null && t == null)
-      return !0
-    if (e == null || t == null)
-      return !1
-    for (let r of ['nodeId', 'name']) {
-      if (!$$re86(e[r], t[r]))
-        return !1
-    }
-    return !0
-  }(e.containingStateGroup, t.containingStateGroup)))
+
+/**
+ * Compares two frames for equality, optionally comparing sort positions.
+ * (original: areFramesEqual)
+ * @param a
+ * @param b
+ * @param options
+ */
+export function areFramesEqual(
+  a: any,
+  b: any,
+  options?: { compareSortPositions?: boolean },
+): boolean {
+  const n = a ? a.nodeId : undefined
+  const i = a ? a.name : undefined
+  const aColor = a ? a.backgroundColor : undefined
+  const aPageId = a ? a.pageId : undefined
+  const aSort = a ? a.sortPosition : undefined
+  const l = b ? b.nodeId : undefined
+  const d = b ? b.name : undefined
+  const bColor = b ? b.backgroundColor : undefined
+  const bPageId = b ? b.pageId : undefined
+  const bSort = b ? b.sortPosition : undefined
+  const sortEqual = !options?.compareSortPositions || aSort === bSort
+
+  if (
+    n !== l
+    || i !== d
+    || aColor !== bColor
+    || !sortEqual
+    || !!aPageId
+    || !bPageId
+  ) {
+    return false
+  }
+
+  if (
+    a == null && b == null
+    || !(a == null || b == null || !areValuesEqual(a.nodeId, b.nodeId) || !areValuesEqual(a.name, b.name) || !areValuesEqual(a.backgroundColor, b.backgroundColor) || !areValuesEqual(a.pageName, b.pageName) || !areValuesEqual(a.pageId, b.pageId) || options?.compareSortPositions && !areValuesEqual(a.sortPosition, b.sortPosition))
+    && areContainingStateGroupsEqual(a.containingStateGroup, b.containingStateGroup)
+  ) {
+    return true
+  }
+
+  return false
 }
-export function $$rr54(e, t) {
-  return !e && !t || !!e && !!t && e.pageId == t.pageId
+
+/**
+ * Helper to compare containing state groups.
+ * (original: inline in areFramesEqual)
+ */
+function areContainingStateGroupsEqual(a: any, b: any): boolean {
+  if (a == null && b == null)
+    return true
+  if (a == null || b == null)
+    return false
+  for (const key of ['nodeId', 'name']) {
+    if (!areValuesEqual(a[key], b[key]))
+      return false
+  }
+  return true
 }
-export function $$rn81(e, t) {
-  return !e && !t || !!e && !!t && e.nodeId == t.nodeId
+
+/**
+ * Checks if two pages are equal by pageId.
+ * (original: arePagesEqual)
+ * @param a
+ * @param b
+ */
+export function arePagesEqual(a: any, b: any): boolean {
+  return (!a && !b) || (!!a && !!b && a.pageId === b.pageId)
 }
-export const $N = $$em0
-export const $j = $$eE1
-export const A0 = $$eI2
-export const Av = $$eo3
-export const Bt = $$eD4
-export const CG = $$tW5
-export const Cj = $$tV6
-export const Dg = $$ec7
-export const E2 = $$tK8
-export const ET = $$tl9
-export const El = $$e610
-export const FS = $$tZ11
-export const Fl = $$tJ12
-export const G$ = $$tU13
-export const GA = $$ej14
-export const Gg = $$tt15
-export const Gj = $$t416
-export const Gp = $$t_17
-export const HF = $$ei18
-export const HK = $$eh19
-export const Hb = $$tB20
-export const IW = $$eu21
-export const J1 = $$e422
-export const Jc = $$en23
-export const KQ = $$eX24
-export const Kw = $$eH25
-export const LB = $$eQ26
-export const LC = $$tI27
-export const LI = $$tH28
-export const LT = $$tq29
-export const LX = $$eV30
-export const Lk = $$eG31
-export const MA = $$tX32
-export const MF = $$es33
-export const Mb = $$e534
-export const Mj = $$eR35
-export const NW = $$tS36
-export const NY = $$t$37
-export const QO = $$tA38
-export const QT = $$eN39
-export const Q_ = $$rt40
-export const Qb = $$ey41
-export const R2 = $$th42
-export const RQ = $$tT43
-export const T4 = $$tQ44
-export const UB = $$e945
-export const VJ = $$el46
-export const VO = $$tG47
-export const Ve = $$e748
-export const WV = $$tf49
-export const X0 = $$eb50
-export const X7 = $$ed51
-export const XV = $$eC52
-export const Ys = $$e353
-export const ZX = $$rr54
-export const _B = $$tv55
-export const _Q = $$tj56
-export const aD = $$er57
-export const ad = $$tY58
-export const ah = $$t559
-export const bd = $$tP60
-export const bp = $$tE61
-export const cU = $$tn62
-export const dx = $$tz63
-export const eD = $$t864
-export const eM = $$tR65
-export const eS = $$tc66
-export const f0 = $$t167
-export const f2 = $$ta68
-export const fc = $$$$eM69
-export const gA = $$ez70
-export const gi = $$tM71
-export const gy = $$tF72
-export const iP = $$e_73
-export const i_ = $$eZ74
-export const iw = $$te75
-export const kG = $$tw76
-export const kw = $$tO77
-export const lG = $$tC78
-export const lg = $$ea79
-export const n5 = $$ty80
-export const nJ = $$rn81
-export const nn = $$t982
-export const oH = $$tL83
-export const og = $$eA84
-export const ov = $$to85
-export const pD = $$re86
-export const pq = $$ts87
-export const r9 = $$tk88
-export const rC = $$e$89
-export const rt = $$ev90
-export const sv = $$t691
-export const sy = $$tg92
-export const t$ = $$t793
-export const td = $$tu94
-export const th = $$eg95
-export const ti = $$eT96
-export const uH = $$tm97
-export const uJ = $$eW98
-export const uN = $$t099
-export const v2 = $$t2100
-export const vu = $$ef101
-export const w$ = $$t3102
-export const w3 = $$eL103
-export const w8 = $$e0104
-export const wn = $$eP105
-export const yh = $$ep106
-export const zE = $$tb107
+
+/**
+ * Checks if two nodes are equal by nodeId.
+ * (original: areNodesEqual)
+ * @param a
+ * @param b
+ */
+export function areNodesEqual(a: any, b: any): boolean {
+  return (!a && !b) || (!!a && !!b && a.nodeId === b.nodeId)
+}
+export const $N = getAllAssetsArray
+export const $j = flattenAssetsArray
+export const A0 = getPublishedAssetsForDefaultPublished
+export const Av = getAssetKey
+export const Bt = useUserLibrarySubscriptionState
+export const CG = getAssetKeyForPublish
+export const Cj = remapNodeIdsForMove
+export const Dg = getAssetVersion
+export const E2 = getContainingStateGroupNodeId
+export const ET = getSubscribedAssetKeys
+export const El = isTrackedState
+export const FS = isModulePublishEnabled
+export const Fl = isTemplateAsset
+export const G$ = formatLibraryContents
+export const GA = hasPublishedAsset
+export const Gg = addStateNamesToAssets
+export const Gj = getAssetUniqueId
+export const Gp = getStyleSubscriptionInfo
+export const HF = isStagedStatus
+export const HK = getAssetsForLibraryKey
+export const Hb = isActiveStagingStatus
+export const IW = getShownNonLocalStyle
+export const J1 = dispatchDeleteLoadingStates
+export const Jc = LibrarySubscriptionContext
+export const KQ = updateLocalLibraryItems
+export const Kw = groupStylesByType
+export const LB = createLocalStateGroup
+export const LC = resolveUsedComponentsStateGroups
+export const LI = isStateGroupOrSymbolOrCodeComponent
+export const LT = getLibraryAgeLabel
+export const LX = sortStyles
+export const Lk = compareStyles
+export const MA = compareAssetsByName
+export const MF = getAssetKeyVersion
+export const Mb = generatePublishedComponentsCacheKey
+export const Mj = useOrgLibrarySubscriptionState
+export const NW = usedComponentsStateGroupsPromise
+export const NY = findAssetForNode
+export const QO = usedComponentsPromise
+export const QT = getStyleTypeLabel
+export const Q_ = areFramesEqual
+export const Qb = iterateAssetsByTeam
+export const R2 = useStyleSubscriptionInfo
+export const RQ = hasVariableSetError
+export const T4 = hasActiveSubscriptionNotSubscribed
+export const UB = clearTrackedState
+export const VJ = getAssetLibraryKey
+export const VO = findLibraryNameForAsset
+export const Ve = addTrackedState
+export const WV = filterAssetsWithContainingStateGroup
+export const X0 = getNonDeletedAssets
+export const X7 = mapAssetsToKeys
+export const XV = getStyleTypeLabelPlural
+export const Ys = deletedLoadingStates
+export const ZX = arePagesEqual
+export const _B = resolveUsedComponents
+export const _Q = getAssetThumbnailUrl
+export const aD = AssetFilterMode
+export const ad = hasContainingStateGroup
+export const ah = getComponentAssetsMap
+export const bd = resetAllAsyncPromises
+export const bp = getNestedValue
+export const cU = fetchUnpublishedStyles
+export const dx = isPrimaryWorkflowType
+export const eD = resolveFileParentOrgId
+export const eM = resolveUsedLibrariesAsync
+export const eS = useSubscribedAssets
+export const f0 = getStateGroupLibraryKey
+export const f2 = batchFetchFiles
+export const fc = useIsAssetPublishedForCurrentFile
+export const gA = compareAssetsByFrameAndName
+export const gi = sortLibraries
+export const gy = sortLibrariesByFolder
+export const iP = getPublishedAssetsForLibrary
+export const i_ = createLocalComponent
+export const iw = generateDefaultLibrariesCacheKey
+export const kG = resolveUsedLibraries
+export const kw = usedLibrariesPromise
+export const lG = getUsedComponentsStateGroupsAsync
+export const lg = isNewOrChangedOrDeleted
+export const n5 = findAssetByNodeId
+export const nJ = areNodesEqual
+export const nn = isOrgOrWorkspaceContainer
+export const oH = usedLibrariesAsyncPromise
+export const og = STYLE_TYPES
+export const ov = getAssetsForNodeIds
+export const pD = areValuesEqual
+export const pq = fetchStylesByKeys
+export const r9 = compareAssetsByTeam
+export const rC = generateNewLocalLibraryItems
+export const rt = loadStyleCanvases
+export const sv = useCurrentUserOrg
+export const sy = useStyleSubscriptionName
+export const t$ = useSubscribedLibraryId
+export const td = isSubscribedLibrary
+export const th = flattenAssetsByTeam
+export const ti = filterStylesByType
+export const uH = getStyleSubscriptionName
+export const uJ = groupStylesByPrefix
+export const uN = getComponentLibraryKey
+export const v2 = flattenNestedAssets
+export const vu = getAllAssets
+export const w$ = useOptimisticStyleThumbnailUpdate
+export const w3 = useWorkspaceLibrarySubscriptionState
+export const w8 = createLocalStyle
+export const wn = useTeamLibrarySubscriptionState
+export const yh = findStyleDataByKey
+export const zE = hasAssetError

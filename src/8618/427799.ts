@@ -22,7 +22,7 @@ import { j as _$$j2, p as _$$p } from "../8618/896045";
 import { R as _$$R } from "../7a72fc59/583347";
 import { Ku } from "../figma_app/755939";
 import { XH } from "../1250/322393";
-import { Cl } from "../figma_app/334505";
+import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { UK } from "../figma_app/740163";
 import { isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
@@ -200,7 +200,7 @@ function X({
   let _ = q(e, t, l);
   let {
     hasInstanceSelected
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let g = hasInstanceSelected || e !== SocialMediaFormats.CUSTOM;
   return jsxs(_$$P, {
     ref: o,

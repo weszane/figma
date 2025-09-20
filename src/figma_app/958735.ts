@@ -5,7 +5,7 @@ import { UserActionState, SchemaJoinStatus, AppStateTsApi } from "../figma_app/7
 import { getFeatureFlags } from "../905/601108";
 import { tg } from "../figma_app/933328";
 import { createActionAndReducerWrapper } from "../905/270322";
-import { KQ } from "../figma_app/646357";
+import { updateLocalLibraryItems } from "../figma_app/646357";
 import { subscribeObservable } from "../figma_app/84367";
 let {
   action,
@@ -71,7 +71,7 @@ export function $$V11() {
   let e = getFeatureFlags().dse_module_publish;
   let t = useStore();
   useEffect(() => function (e) {
-    let t = () => KQ(e);
+    let t = () => updateLocalLibraryItems(e);
     let r = microtaskThrottle(t);
     let n = "normal";
     let i = e.subscribe(() => {

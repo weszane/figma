@@ -6,7 +6,7 @@ import { gq } from "../905/125333";
 import { Gm } from "../figma_app/91703";
 import { QA, Xp, n0, Lh, uQ, Mc, oI } from "../905/854717";
 import { Yr, o$ } from "../figma_app/8833";
-import { Gp, uH } from "../figma_app/646357";
+import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { S, K } from "../905/733706";
 import { librariesAPI } from "../905/939602";
 import { E_ } from "../figma_app/177697";
@@ -65,14 +65,14 @@ export class $$g1 {
     let i = this.store.getState().library;
     let a = this.store.getState().mirror.sceneGraph;
     let s = t.map(e => {
-      let t = Gp(e.key, e.guids, i);
+      let t = getStyleSubscriptionInfo(e.key, e.guids, i);
       return t ? {
         styleKey: e.key,
         version: e.version,
         styleGUIDs: e.guids,
         count: e.count,
         uniqueNodesCount: e.uniqueNodesCount,
-        styleName: uH(t, a),
+        styleName: getStyleSubscriptionName(t, a),
         variableScopes: new Set(e.variableScopes),
         isOnlyDirectlySelected: e.isOnlyDirectlySelected
       } : {

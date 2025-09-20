@@ -10,7 +10,7 @@ import { PI } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { setRecentTemplatesAction, addWidgetsToRecentsAction, setRecentWidgetsAction, removeRecentlyUsedWidgetAction, syncRecentWidgetsAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, setRecentPluginsAction, removeRecentlyUsedPluginAction, syncRecentPluginsAction, addFetchedPluginVersionAction, addTemplateToRecentsWithUserIdThunk, addFaceStampToRecentsAction, setRecentFaceStampsAction, addWhiteboardToolToRecentsAction, setRecentWhiteboardToolsAction } from "../figma_app/147952";
-import { MF } from "../figma_app/646357";
+import { getAssetKeyVersion } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { HubTypeEnum } from "../figma_app/45218";
@@ -218,7 +218,7 @@ let $$H0 = HY({
   libraryItems: function (e = D, t) {
     if (PI.matches(t)) {
       if (!t.payload.storeInRecentsKey) return e;
-      let i = MF(t.payload.item);
+      let i = getAssetKeyVersion(t.payload.item);
       if (!i.key) return e;
       let {
         node_id,

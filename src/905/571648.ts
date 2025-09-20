@@ -12,11 +12,11 @@ import { NX, Qy } from "../figma_app/777207";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { bO, z5 } from "../figma_app/936646";
-import { ti, uJ } from "../figma_app/646357";
+import { filterStylesByType, groupStylesByPrefix } from "../figma_app/646357";
 import { Oe } from "../figma_app/336853";
 import { Bg } from "../905/81982";
 import { b as _$$b } from "../figma_app/882253";
-import { je, Sp } from "../figma_app/155728";
+import { useSubscribedLibraries, getNumStylesByType } from "../figma_app/155728";
 import { sO } from "../figma_app/21029";
 import { Dq } from "../figma_app/177697";
 import { s1 } from "../figma_app/226737";
@@ -27,7 +27,7 @@ import { HU0, Lbn } from "../figma_app/27776";
 import { stylePickerMaxHeight } from "../figma_app/786175";
 export function $$R1(e) {
   let t = useSelector(e => e.library.local.styles);
-  return useMemo(() => ti(t, e), [t, e]);
+  return useMemo(() => filterStylesByType(t, e), [t, e]);
 }
 export function $$N0(e, t) {
   let i = useSelector(i => _$$b(i, e, t));
@@ -36,7 +36,7 @@ export function $$N0(e, t) {
   return a && compareWithGeneratedKey(i?.data, a) ? null : i;
 }
 export function $$P2() {
-  let e = je();
+  let e = useSubscribedLibraries();
   return useMemo(() => "loaded" === e.status && e.data.some(e => e.numStyles > 0), [e]);
 }
 function O() {
@@ -74,11 +74,11 @@ export function $$D5(e, t, i) {
 let L = getFileKey();
 export function $$F6(e, t) {
   let i = selectCurrentFile();
-  let a = je();
+  let a = useSubscribedLibraries();
   let s = useCurrentUserOrg();
   let l = Fl();
   let d = Oe(s) && NX(l);
-  let f = useCallback(t => !(0 === Sp(t, e) || t.fileKey === i?.key || matchesSourceKey({
+  let f = useCallback(t => !(0 === getNumStylesByType(t, e) || t.fileKey === i?.key || matchesSourceKey({
     file_repo_id: i?.fileRepoId ?? null,
     source_file_key: i?.sourceFileKey ?? null
   }, t.fileKey)), [i?.fileRepoId, i?.key, i?.sourceFileKey, e]);
@@ -181,14 +181,14 @@ export function $$B3(e, t, i, d, c, u) {
       let {
         sortedPrefixes,
         stylesByPrefix
-      } = uJ(F[m]);
+      } = groupStylesByPrefix(F[m]);
       t.addLibraryStyleItemsToResult(sortedPrefixes, stylesByPrefix, m, g);
     }
     if (i?.status === "loaded") {
       let {
         sortedPrefixes,
         stylesByPrefix
-      } = uJ(F[U(i.data)]);
+      } = groupStylesByPrefix(F[U(i.data)]);
       t.addLibraryStyleItemsToResult(sortedPrefixes, stylesByPrefix, U(i.data), i.data.library_key, i.data.fileName);
     }
     Object.entries(stylesByFileKey).forEach(([e, {
@@ -201,7 +201,7 @@ export function $$B3(e, t, i, d, c, u) {
       let {
         sortedPrefixes,
         stylesByPrefix
-      } = uJ(a);
+      } = groupStylesByPrefix(a);
       t.addLibraryStyleItemsToResult(sortedPrefixes, stylesByPrefix, e, r, n);
     });
     LB();

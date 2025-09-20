@@ -1,5 +1,5 @@
 import { createSelector } from "../vendor/925040";
-import { KU, dm } from "../figma_app/463500";
+import { getAllFoldersFromFolder, getAllStylesFromFolder } from "../figma_app/463500";
 let $$o2 = e => e.library.localStyleSelection;
 let $$r1 = createSelector([$$o2, (e, t) => t], (e, t) => e?.type === t ? e : null);
 let $$a0 = createSelector([$$r1, (e, t, l) => l], (e, t) => {
@@ -8,9 +8,9 @@ let $$a0 = createSelector([$$r1, (e, t, l) => l], (e, t) => {
   let n = new Set();
   e.folderNames.forEach(e => {
     let o = t.find(t => "STYLE_FOLDER" === t.type && t.name === e);
-    o && (KU(o).forEach(e => {
+    o && (getAllFoldersFromFolder(o).forEach(e => {
       l.add(e.name);
-    }), dm(o).forEach(e => {
+    }), getAllStylesFromFolder(o).forEach(e => {
       n.add(e.node_id);
     }));
   });

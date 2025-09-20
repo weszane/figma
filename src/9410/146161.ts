@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Xt, gI } from "../figma_app/399472";
-import { Cb } from "../figma_app/543529";
+import { useIsUserGuestInOrg } from "../figma_app/543529";
 import { usePublishedPlugins, usePluginedWidgets } from "../figma_app/844435";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -15,7 +15,7 @@ export function $$p0(e) {
   let m = usePluginedWidgets();
   let f = "plugin" === e ? h : m;
   let g = useDispatch();
-  let _ = Cb();
+  let _ = useIsUserGuestInOrg();
   let x = selectorFullScreenViewEditorType();
   let y = "plugin" === e ? Xt : gI;
   useEffect(() => {

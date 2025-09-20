@@ -30,7 +30,7 @@ import { Ku } from "../figma_app/740163";
 import { u as _$$u, G6, Kd, BQ, t8, Xv, hg } from "../figma_app/852050";
 import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
-import { B as _$$B2 } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { np, rh } from "../figma_app/803932";
@@ -270,7 +270,7 @@ function es({
     devModeVarsTableSelection: e,
     devModeFocusId: void 0
   });
-  let d = _$$B2(t || "", {
+  let d = getLibraryName(t || "", {
     enabled: !!t
   });
   let c = _$$g({

@@ -1,9 +1,9 @@
-import { Xc } from "../905/927405";
+import { AnimationTriggerType } from "../905/927405";
 import { CodeComponentIdHandler } from "../figma_app/243058";
 import { defaultSessionLocalID, sessionLocalIDToString, parseSessionLocalID, isValidSessionLocalID } from "../905/871411";
 export function $$s0(e) {
   var t;
-  return e.interactionID === defaultSessionLocalID && e.behaviorId ? `${sessionLocalIDToString(e.nodeID)}~${(t = e.behaviorId).behaviorType !== Xc.Code ? t.behaviorType.toString() : t.codeComponentId ? t.codeComponentId.toString() : (console.error("BehaviorId inconsistent: behaviorType == Code but no codeComponentId found"), "")}` : `${sessionLocalIDToString(e.nodeID)}~${sessionLocalIDToString(e.interactionID)}`;
+  return e.interactionID === defaultSessionLocalID && e.behaviorId ? `${sessionLocalIDToString(e.nodeID)}~${(t = e.behaviorId).behaviorType !== AnimationTriggerType.Code ? t.behaviorType.toString() : t.codeComponentId ? t.codeComponentId.toString() : (console.error("BehaviorId inconsistent: behaviorType == Code but no codeComponentId found"), "")}` : `${sessionLocalIDToString(e.nodeID)}~${sessionLocalIDToString(e.interactionID)}`;
 }
 export function $$o1(e) {
   let [t, r] = e.split("~");
@@ -14,7 +14,7 @@ export function $$o1(e) {
     nodeID: s,
     interactionID: o
   };
-  let l = Object.values(Xc).find(e => e === r);
+  let l = Object.values(AnimationTriggerType).find(e => e === r);
   if (l) return {
     nodeID: s,
     interactionID: defaultSessionLocalID,
@@ -28,7 +28,7 @@ export function $$o1(e) {
       nodeID: s,
       interactionID: defaultSessionLocalID,
       behaviorId: {
-        behaviorType: Xc.Code,
+        behaviorType: AnimationTriggerType.Code,
         codeComponentId: e
       }
     };

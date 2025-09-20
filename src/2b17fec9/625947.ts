@@ -445,7 +445,7 @@ import { cK as _$$cK, dR as _$$dR, hN as _$$hN, Gt, RK } from '../figma_app/2481
 import { l as _$$l7 } from '../figma_app/265420';
 import { h_ as _$$h_, oQ as _$$oQ, tJ as _$$tJ2, JX, Mp, P0, VM } from '../figma_app/269100';
 import { DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
-import { oH as _$$oH, ot as _$$ot, uE as _$$uE, Ai } from '../figma_app/275938';
+import { queryDefaultLibrariesMeta, getLibraryNameByKey, useLibraryItemsAndMetadata, libraryKeyToNameAtom } from '../figma_app/275938';
 import { filterArrayByEditorTypeAndMemo } from '../figma_app/279454';
 import { W6 as _$$W5, Jm } from '../figma_app/287316';
 import { useSubscription } from '../figma_app/288654';
@@ -1986,7 +1986,7 @@ function t$() {
   let {
     libraryItems,
     metadata
-  } = _$$uE();
+  } = useLibraryItemsAndMetadata();
   let [s, d] = useAtomValueAndSetter(Hf);
   let [c, h] = useAtomValueAndSetter(_$$oW);
   let [m, f] = useAtomValueAndSetter(_$$Ai);
@@ -14355,11 +14355,11 @@ function xh({
     let i = e.get(t);
     return [i?.mainComponent?.sourceLibraryKey, i?.mainComponent?.name];
   }, e);
-  let d = useAtomWithSubscription(Ai);
+  let d = useAtomWithSubscription(libraryKeyToNameAtom);
   let {
     libraryItems,
     metadata
-  } = _$$uE();
+  } = useLibraryItemsAndMetadata();
   let h = useMemo(() => e$(libraryItems, a ? [a] : void 0), [libraryItems, a]);
   let m = useRef(null);
   let f = useRef(null);
@@ -14412,7 +14412,7 @@ function xh({
   let R = useMemo(() => y.shapeLibraryData.reduce((e, t) => {
     let i = t.librarySubCategory;
     let n = t.libraryKey;
-    let r = _$$ot(d, n);
+    let r = getLibraryNameByKey(d, n);
     let a = i ? `${r} - ${i}` : r;
     let o = {
       items: t.items,
@@ -14613,7 +14613,7 @@ function xf({
   let {
     libraryItems,
     metadata
-  } = _$$uE();
+  } = useLibraryItemsAndMetadata();
   let p = useMemo(() => e$(libraryItems, d ? [d] : void 0), [libraryItems, d]);
   let h = useRef(null);
   let m = useRef(null);
@@ -24427,7 +24427,7 @@ let vW = memo(({
 export function $$vz0() {
   let e = useCurrentTool();
   let [t, i] = useState(!1);
-  IT(_$$oH({}));
+  IT(queryDefaultLibrariesMeta({}));
   return jsx(_$$c, {
     children: jsx(_$$v, {
       setShouldShowDragAndDropBorder: i,

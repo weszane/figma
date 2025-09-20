@@ -14,7 +14,7 @@ import { v as _$$v } from "../6388/913037";
 import { isNotInFocusedNodeView, isFullscreenAndInFocusedNodeView } from "../figma_app/327588";
 import { c3, YB, DG } from "../6388/934960";
 import { Uk } from "../6388/447908";
-import { PU } from "../figma_app/334505";
+import { TextImageEnum } from "../figma_app/334505";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { replaceSelection } from "../figma_app/741237";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -68,7 +68,7 @@ export function $$C0({
             if (!s) continue;
             let r = n[0];
             let a = n[1];
-            if (r === PU.TEXT) s.characters = a;else if (r === PU.IMAGE) {
+            if (r === TextImageEnum.TEXT) s.characters = a;else if (r === TextImageEnum.IMAGE) {
               let e = a.split(",")[1];
               let t = a.split(";")[0]?.split(":")[1] || "";
               if (!e || !t) continue;

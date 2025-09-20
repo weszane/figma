@@ -19,7 +19,7 @@ import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrgId } from "../905/845253";
-import { B as _$$B } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { KindEnum } from "../905/129884";
 import { X } from "../905/257331";
 import { B as _$$B2 } from "../905/146468";
@@ -67,7 +67,7 @@ export function $$O1({
   showingDefaultSubscriptionsForOrg: S,
   sharingGroupData: T
 }) {
-  let N = _$$B(i);
+  let N = getLibraryName(i);
   let P = useSelector(e => getSelectedFile(e));
   let O = useSelector(e => e.user);
   let [L, F] = useState(!1);

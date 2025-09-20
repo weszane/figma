@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { handleAtomEvent } from "../905/502364";
 import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { eD } from "../figma_app/646357";
+import { resolveFileParentOrgId } from "../figma_app/646357";
 import { liveStoreInstance } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
 import { k1, vx } from "../905/91038";
@@ -145,7 +145,7 @@ export function $$v2() {
     })
   });
 })(n || (n = {}));
-let I = createReduxSubscriptionAtomWithState(eD);
+let I = createReduxSubscriptionAtomWithState(resolveFileParentOrgId);
 let E = createReduxSubscriptionAtomWithState(_$$h);
 let x = createReduxSubscriptionAtomWithState(e => e.modalShown);
 let S = atom(e => {

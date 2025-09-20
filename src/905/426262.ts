@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
-import { G$ } from "../figma_app/646357";
+import { formatLibraryContents } from "../figma_app/646357";
 export function $$s1({
   numComponents: e,
   numStateGroups: t,
@@ -9,7 +9,7 @@ export function $$s1({
   numStyles: s
 }) {
   return jsx("span", {
-    children: G$({
+    children: formatLibraryContents({
       numProductComponents: e + t,
       numStyles: s ?? 0,
       numVariables: r ?? 0,

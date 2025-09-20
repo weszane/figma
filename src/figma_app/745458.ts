@@ -15,7 +15,7 @@ import { z } from "../905/915227";
 import { normalizeValue } from "../905/216495";
 import { U as _$$U } from "../905/722080";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { aD, X7 } from "../figma_app/646357";
+import { AssetFilterMode, mapAssetsToKeys } from "../figma_app/646357";
 import { i as _$$i } from "../905/315328";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { aR, BE, uB, tp, J8 } from "../905/128313";
@@ -330,21 +330,21 @@ let $$Z7 = createRemovableAtomFamily(e => atom(t => {
     componentUpdatesForAllPages,
     componentUpdatesForCurrentPage
   } = t(Y);
-  return e === aD.ALL ? componentUpdatesForAllPages : componentUpdatesForCurrentPage;
+  return e === AssetFilterMode.ALL ? componentUpdatesForAllPages : componentUpdatesForCurrentPage;
 }));
 let $$Q0 = createRemovableAtomFamily(e => atom(t => {
   let {
     stateGroupUpdatesForAllPages,
     stateGroupUpdatesForCurrentPage
   } = t(Y);
-  return e === aD.ALL ? stateGroupUpdatesForAllPages : stateGroupUpdatesForCurrentPage;
+  return e === AssetFilterMode.ALL ? stateGroupUpdatesForAllPages : stateGroupUpdatesForCurrentPage;
 }));
 let $$ee15 = createRemovableAtomFamily(e => atom(t => {
   let {
     styleUpdatesForAllPages,
     styleUpdatesForCurrentPage
   } = t($);
-  return e === aD.ALL ? styleUpdatesForAllPages : styleUpdatesForCurrentPage;
+  return e === AssetFilterMode.ALL ? styleUpdatesForAllPages : styleUpdatesForCurrentPage;
 }));
 let $$et11 = mg($, e => e.styleUpdatesForAllPages);
 let $$er12 = createRemovableAtomFamily(e => atom(t => {
@@ -352,7 +352,7 @@ let $$er12 = createRemovableAtomFamily(e => atom(t => {
     variableSetUpdatesForAllPages,
     variableSetUpdatesForCurrentPage
   } = t(X);
-  return e === aD.ALL ? variableSetUpdatesForAllPages : variableSetUpdatesForCurrentPage;
+  return e === AssetFilterMode.ALL ? variableSetUpdatesForAllPages : variableSetUpdatesForCurrentPage;
 }));
 let en = atom(e => {
   let t = {};
@@ -364,9 +364,9 @@ let en = atom(e => {
 });
 let $$ei13 = createRemovableAtomFamily(e => atom(t => {
   switch (e) {
-    case aD.ALL:
+    case AssetFilterMode.ALL:
       return t(q);
-    case aD.CURRENT:
+    case AssetFilterMode.CURRENT:
       return t(J);
   }
 }));
@@ -431,7 +431,7 @@ let $$eo8 = createRemovableAtomFamily(e => atom(t => {
     variableSetUpdatesForCurrentPage,
     libraryAssetUpdatesForCurrentPage
   } = t($$es3);
-  return e === aD.ALL ? {
+  return e === AssetFilterMode.ALL ? {
     scopedComponentUpdates: componentUpdatesForAllPages,
     scopedStateGroupUpdates: stateGroupUpdatesForAllPages,
     scopedStyleUpdates: styleUpdatesForAllPages,
@@ -485,7 +485,7 @@ let $$ec1 = mg(el, ({
 let $$eu2 = mg($$ed6, ({
   hasUpdates: e
 }) => e);
-let $$ep17 = createRemovableAtomFamily(e => atom(t => t(e === aD.ALL ? el : $$ed6).hasUpdates));
+let $$ep17 = createRemovableAtomFamily(e => atom(t => t(e === AssetFilterMode.ALL ? el : $$ed6).hasUpdates));
 let $$e_9 = mg(el, ({
   updateCount: e
 }) => e);
@@ -499,11 +499,11 @@ let $$eh18 = p6([$$ea4], ({
   variableSetUpdatesForAllPages: n,
   libraryAssetUpdatesForAllPages: i
 }) => ({
-  componentUpdateKeys: X7(e),
-  stateGroupUpdateKeys: X7(t),
-  styleUpdateKeys: X7(r),
-  variableSetKeys: X7(n),
-  libraryAssetKeys: X7(i)
+  componentUpdateKeys: mapAssetsToKeys(e),
+  stateGroupUpdateKeys: mapAssetsToKeys(t),
+  styleUpdateKeys: mapAssetsToKeys(r),
+  variableSetKeys: mapAssetsToKeys(n),
+  libraryAssetKeys: mapAssetsToKeys(i)
 }));
 let $$em5 = createReduxSubscriptionAtomWithState(e => e.library.libraryUpdatesBannerDismissed);
 export function $$eg16(e, t) {

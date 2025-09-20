@@ -38,7 +38,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { k as _$$k2 } from "../905/582200";
 import { k as _$$k3 } from "../8618/427799";
-import { Cl } from "../figma_app/334505";
+import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../905/216495";
 import { Zk } from "../figma_app/626177";
 import { Vy } from "../8826/611318";
@@ -314,7 +314,7 @@ function q() {
   });
   let {
     hasInstanceSelected
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let n = hasInstanceSelected || e !== SocialMediaFormats.CUSTOM;
   return jsxs(Fragment, {
     children: [jsx(_$$k2, {
@@ -718,7 +718,7 @@ function tb({
   let B = SJ();
   let {
     onlyCooperFrames
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let $ = isCooperFeatureEnabled() && onlyCooperFrames;
   let Z = o3(nt.designSelectionActionsPanel);
   let eh = !tx() && Z;

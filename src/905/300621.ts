@@ -42,7 +42,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { qp } from "../905/977779";
 import { ud } from "../905/862913";
 import { E as _$$E } from "../905/128063";
-import { gi, fc } from "../figma_app/646357";
+import { sortLibraries, useIsAssetPublishedForCurrentFile } from "../figma_app/646357";
 import { l as _$$l2 } from "../905/997221";
 import { PG, HK, Q_ } from "../905/570707";
 import { aU } from "../figma_app/757606";
@@ -226,7 +226,7 @@ function es(e) {
   let A = H();
   let b = useMemo(() => {
     let e = _.data;
-    return e ? gi(e.files, null, {
+    return e ? sortLibraries(e.files, null, {
       isDescending: !0
     }) : [];
   }, [_.data]);
@@ -305,7 +305,7 @@ function es(e) {
     }
     return r;
   }(h.data, t, d, o) : b;
-  let x = fc();
+  let x = useIsAssetPublishedForCurrentFile();
   let S = E.filter(e => s && x(e.library_key) && !l.defaultPublished.libraryKeys.includes(e.library_key));
   let w = s && S.length > 0 && !searchQuery;
   let C = NO_TEAM;

@@ -20,7 +20,7 @@ import { rt } from "../1250/282084";
 import { trackEventAnalytics } from "../905/449184";
 import { O as _$$O } from "../1250/664647";
 import { A as _$$A } from "../1250/29260";
-import { B } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { I as _$$I } from "../1250/564115";
 var g = p;
 function v({
@@ -52,7 +52,7 @@ let A = forwardRef(({
   onClose: t
 }, n) => {
   let [i, o] = useState(!1);
-  let s = B(e).unwrapOr(null);
+  let s = getLibraryName(e).unwrapOr(null);
   let d = useCallback(() => {
     o(!0);
   }, []);

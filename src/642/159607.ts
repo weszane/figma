@@ -6,7 +6,7 @@ import { useAtomWithSubscription } from '../figma_app/27355';
 import { usePreviousValue } from '../figma_app/922077';
 import { LibraryPresetSubscriptionsV2 } from '../figma_app/43951';
 import { getProviderConfigType } from '../figma_app/155411';
-import { je } from '../figma_app/155728';
+import { useSubscribedLibraries } from '../figma_app/155728';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$m0() {
@@ -18,7 +18,7 @@ export function $$m0() {
   let f = useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: getProviderConfigType()
   }));
-  let x = je();
+  let x = useSubscribedLibraries();
   useEffect(() => {
     if (!t.current && !0 === m && !1 === g && f.status === 'loaded') {
       t.current = !0;

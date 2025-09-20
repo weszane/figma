@@ -13,7 +13,7 @@ import { n as _$$n } from "../905/734251";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { NY } from "../figma_app/646357";
+import { findAssetForNode } from "../figma_app/646357";
 import { isLoading } from "../905/18797";
 import { FZ } from "../figma_app/803787";
 import { c5 } from "../figma_app/645694";
@@ -323,7 +323,7 @@ export function $$ei0({
   let L = useSelector(c5);
   let M = useSelector(selectSceneGraph);
   let j = wS(s);
-  let U = 0 === s.length && E === ComponentPropType.INSTANCE_SWAP && x ? NY(x, M, D, L) : void 0;
+  let U = 0 === s.length && E === ComponentPropType.INSTANCE_SWAP && x ? findAssetForNode(x, M, D, L) : void 0;
   let B = useSelector(e => isLoading(e.loadingState, _A(e.openFile?.key)));
   return jsxs(Fragment, {
     children: [jsxs("div", {

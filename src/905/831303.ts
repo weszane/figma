@@ -3,7 +3,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { convertVariableIdToKiwi } from "../905/805904";
 import { convertStringToKiwi } from "../905/537777";
 import { isValidThumbnail, getBufferFromThumbnailUrl, generateSerializableStyleThumbnail } from "../figma_app/80990";
-import { _Q } from "../figma_app/646357";
+import { getAssetThumbnailUrl } from "../figma_app/646357";
 import { isEffectOrGrid, isStyleType, isValidStyleType } from "../905/405710";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$u2(e) {
@@ -30,7 +30,7 @@ export function $$u2(e) {
 }
 export function $$p0(e, t) {
   let i = e.type === PrimaryWorkflowEnum.STYLE && isEffectOrGrid(e.style_type);
-  let n = _Q(e, t, i);
+  let n = getAssetThumbnailUrl(e, t, i);
   if (!n || !isValidThumbnail(n)) {
     reportError("ThumbnailGenerationError");
     return;

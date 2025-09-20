@@ -1,388 +1,741 @@
-import { debug } from "../figma_app/465776";
-import { Fullscreen } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { compareWithGeneratedKey } from "../905/709171";
-import { splitPath, getDirname, getBasename } from "../905/309735";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-export function $$d13(e, t) {
-  let r = {
-    name: "",
-    type: "STYLE_FOLDER",
+import { getBasename, getDirname, splitPath } from '../905/309735'
+import { trackEventAnalytics } from '../905/449184'
+import { compareWithGeneratedKey } from '../905/709171'
+import { debug } from '../figma_app/465776'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { Fullscreen } from '../figma_app/763686'
+
+/**
+ * Represents a style folder structure.
+ */
+export interface StyleFolder {
+  name: string
+  type: 'STYLE_FOLDER'
+  level: number
+  styles: any[]
+  subfolders: StyleFolder[]
+  styleTypeSection: any
+}
+
+/**
+ * Builds a nested style folder structure from a flat list of styles.
+ * @param styles - Array of style objects.
+ * @param styleTypeSection - The style type section.
+ * @returns Root style folder.
+ * (Original: $$d13)
+ */
+export function setupStyleFolderTree(styles: any[], styleTypeSection: any): StyleFolder {
+  const root: StyleFolder = {
+    name: '',
+    type: 'STYLE_FOLDER',
     level: 0,
     styles: [],
     subfolders: [],
-    styleTypeSection: t
-  };
-  e.forEach(e => {
-    let n = r;
-    let i = splitPath(e.name);
-    i.pop();
-    i.forEach(e => {
-      let r = n.name ? n.name + "/" + e : e;
-      let i = n.subfolders.find(e => e.name === r);
-      if (!i) {
-        let e = {
-          name: r,
-          type: "STYLE_FOLDER",
-          level: n.level + 1,
+    styleTypeSection,
+  }
+  styles.forEach((style) => {
+    let current = root
+    const pathParts = splitPath(style.name)
+    pathParts.pop()
+    pathParts.forEach((part) => {
+      const folderName = current.name ? `${current.name}/${part}` : part
+      let folder = current.subfolders.find(f => f.name === folderName)
+      if (!folder) {
+        folder = {
+          name: folderName,
+          type: 'STYLE_FOLDER',
+          level: current.level + 1,
           styles: [],
           subfolders: [],
-          styleTypeSection: t
-        };
-        n.subfolders.push(e);
-        i = e;
-      }
-      n = i;
-    });
-    n.styles.push(e);
-  });
-  return r;
-}
-export function $$c17(e) {
-  if (!e.length) return [];
-  let t = $$d13(e, e[0].style_type);
-  let r = [];
-  let n = e => {
-    e.styles.length > 0 && r.push(e.name);
-    e.subfolders.forEach(n);
-  };
-  n(t);
-  return r;
-}
-export function $$u12(e) {
-  let t = [...e.subfolders].reverse();
-  let r = [...e.styles];
-  for (; t.length > 0;) {
-    let e = t.pop();
-    e && (r.push(e), r.push(...e.styles), t.push(...[...e.subfolders].reverse()));
-  }
-  return r;
-}
-export function $$p16(e) {
-  return "STYLE_FOLDER" === e.type ? e.name : e.node_id;
-}
-export function $$_3(e) {
-  return e.split("/").filter(e => e).map(e => e.trim()).join("/");
-}
-export function $$h14(e, t) {
-  let r = t[e];
-  if ("STYLE_FOLDER" !== r.type) return [];
-  let n = [];
-  for (let [i, a] of t.slice(e + 1).entries()) {
-    if ("STYLE_FOLDER" === a.type && a.level <= r.level) break;
-    n.push(e + 1 + i);
-  }
-  return n;
-}
-function m(e) {
-  return "STYLE_FOLDER" === e.type ? e.name : getDirname(e.name);
-}
-export function $$g8(e) {
-  return $$u12(e).filter(e => e.type === PrimaryWorkflowEnum.STYLE);
-}
-export function $$f0(e) {
-  return $$u12(e).filter(e => "STYLE_FOLDER" === e.type);
-}
-export function $$E5(e) {
-  let t = [];
-  e.forEach(e => {
-    "STYLE_FOLDER" === e.type ? t.push(...$$g8(e)) : t.push(e);
-  });
-  return t;
-}
-export function $$y4(e, t) {
-  let r = $$b10(e, t);
-  let n = [];
-  r.forEach(e => {
-    let r = t[e];
-    r && n.push(r);
-  });
-  return n;
-}
-export function $$b10(e, t) {
-  let r = [];
-  let n = t.map(e => e.type === PrimaryWorkflowEnum.STYLE ? e.node_id : null);
-  let i = t.map(e => "STYLE_FOLDER" === e.type ? e.name : null);
-  e.styleIds.forEach(e => {
-    let t = n.indexOf(e);
-    -1 !== t && r.push(t);
-  });
-  e.folderNames.forEach(e => {
-    let t = i.indexOf(e);
-    -1 !== t && r.push(t);
-  });
-  r.sort((e, t) => e - t);
-  return r;
-}
-export function $$T15(e) {
-  return e.type === PrimaryWorkflowEnum.STYLE ? splitPath(e.name).length : e.level;
-}
-export function $$I2(e, t) {
-  compareWithGeneratedKey(e, t) && (Fullscreen.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
-    styleType: e.style_type,
-    from: "styleListContextMenu"
-  }));
-}
-export function $$S1(e, t, r, n) {
-  if (!e && !r || !t) return !1;
-  let i = !n && "" !== n || "STYLE_FOLDER" === t.type && r === t && e?.type === PrimaryWorkflowEnum.STYLE && $$T15(e) > $$T15(r) && n !== getDirname(t.name);
-  return !(e === t || r === t && (t.type === PrimaryWorkflowEnum.STYLE || !i) || "STYLE_FOLDER" === t.type && (e?.type === PrimaryWorkflowEnum.STYLE && r?.type === PrimaryWorkflowEnum.STYLE || e?.type === "STYLE_FOLDER" && r?.type === PrimaryWorkflowEnum.STYLE || e && (m(e) + "/").startsWith(t.name + "/") || r && (m(r) + "/").startsWith(t.name + "/") && !i));
-}
-export function $$v6(e, t, r, a, s, c, p) {
-  if (e.forEach(e => {
-    (function (e, t) {
-      let r = e.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id);
-      let n = [];
-      t.forEach(e => {
-        r.indexOf(e.node_id) > -1 && n.push(e);
-      });
-      let i = e[0];
-      let a = $$u12($$d13(n, i.type === PrimaryWorkflowEnum.STYLE ? i.style_type : i.styleTypeSection)).filter(e => e.type === PrimaryWorkflowEnum.STYLE);
-      for (let e = 0; e < r.length; e++) if (r[e] !== a[e].node_id) return !0;
-      return !1;
-    })(s = function (e, t) {
-      let r = new Set();
-      let n = new Set();
-      for (let t of e) (t.type === PrimaryWorkflowEnum.STYLE ? [t] : function e(t) {
-        let r = [];
-        t.styles.forEach(e => {
-          r.push(e);
-        });
-        t.subfolders.forEach(t => {
-          r.push(t);
-          r.push(...e(t));
-        });
-        return r;
-      }(t).concat([t])).forEach(e => e.type === PrimaryWorkflowEnum.STYLE ? n.add(e.node_id) : r.add(e.name));
-      return t.filter(e => "STYLE_FOLDER" === e.type ? !r.has(e.name) : !n.has(e.node_id));
-    }([e], s), c) && (c = A(e, s, c));
-  }), !s) return;
-  let _ = new Set(e.map(e => "STYLE_FOLDER" === e.type || p ? function (e, t, r, i) {
-    if (!e) return i.some(e => e.type === PrimaryWorkflowEnum.STYLE && "" === getDirname(e.name)) ? null : -1;
-    if (!t) return r.length - 1;
-    let a = r.map(e => e.node_id);
-    if (e.type === PrimaryWorkflowEnum.STYLE && t.type === PrimaryWorkflowEnum.STYLE || "STYLE_FOLDER" === e.type && t.type === PrimaryWorkflowEnum.STYLE) return null;
-    if (e.type === PrimaryWorkflowEnum.STYLE && "STYLE_FOLDER" === t.type && $$T15(e) === $$T15(t)) {
-      let r = a.indexOf(e.node_id);
-      let n = function (e, t) {
-        let r = $$g8(e);
-        let n = new Set(t.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id));
-        let i = r[0];
-        r.forEach(e => {
-          e.sort_position && i.sort_position && e.sort_position < i.sort_position && n.has(e.node_id) && (i = e);
-        });
-        return i;
-      }(t, i);
-      let s = a.indexOf(n.node_id);
-      return r < s ? r : s - 1;
-    }
-    {
-      let s = i.indexOf(t);
-      if (-1 !== s) {
-        let e = i.slice(s, i.length).find(e => e.type === PrimaryWorkflowEnum.STYLE);
-        if (!e) return r.length - 1;
-        let t = a.indexOf(e.node_id);
-        debug(-1 !== t, "style to insert before does not exist in the stored list");
-        return t - 1;
-      }
-      {
-        let t = i.indexOf(e);
-        let s = i.slice(t + 1).reverse().find(e => e.type === PrimaryWorkflowEnum.STYLE);
-        if (!s) return r.length - 1;
-        let o = a.indexOf(s.node_id);
-        debug(-1 !== o, "style to insert after does not exist in the stored list");
-        return o;
-      }
-    }
-  }(t, r, c, s) : function (e, t, r, i) {
-    if (!e) return -1;
-    if (!t) return r.length - 1;
-    let a = r.map(e => e.node_id);
-    if (e.type === PrimaryWorkflowEnum.STYLE && "STYLE_FOLDER" === t.type) return a.indexOf(e.node_id);
-    {
-      let e = i.indexOf(t);
-      let s = i.slice(e, i.length).find(e => e.type === PrimaryWorkflowEnum.STYLE);
-      if (!s) return r.length - 1;
-      let o = a.indexOf(s.node_id);
-      debug(-1 !== o, "style to insert before does not exist in the stored list");
-      return o - 1;
-    }
-  }(t, r, c, s)));
-  if (_.size > 1 || _.has(null)) return;
-  let h = _.values().next().value;
-  let m = c[h];
-  let f = c[h + 1];
-  let E = new Map();
-  let y = m;
-  for (let t of e) {
-    let e = t => {
-      t.type === PrimaryWorkflowEnum.STYLE ? (Fullscreen.insertStyleBetween(t.node_id, y?.node_id || "", f?.node_id || ""), y = t) : (t.styles.forEach(t => {
-        e(t);
-      }), t.subfolders.forEach(t => {
-        e(t);
-      }));
-    };
-    e(t);
-    let r = "" === a ? [] : a.split("/");
-    let n = [...r, getBasename(t.name)];
-    if (n.join("/") !== t.name) {
-      let e = (t, r) => {
-        if (t.type === PrimaryWorkflowEnum.STYLE) {
-          let e = [...r, getBasename(t.name)].join("/");
-          E.set(t.node_id, e);
-          Fullscreen.renameNode(t.node_id, e);
-        } else {
-          E.set(t.name, r.join("/"));
-          t.styles.forEach(t => {
-            e(t, r);
-          });
-          t.subfolders.forEach(t => {
-            let n = [...r, getBasename(t.name)];
-            e(t, n);
-          });
+          styleTypeSection,
         }
-      };
-      e(t, "STYLE_FOLDER" === t.type ? n : r);
-    } else E.set("STYLE_FOLDER" === t.type ? t.name : t.node_id, t.name);
-  }
-  return E;
+        current.subfolders.push(folder)
+      }
+      current = folder
+    })
+    current.styles.push(style)
+  })
+  return root
 }
-let A = (e, t, r) => {
-  let n = splitPath(e.name);
-  e.type === PrimaryWorkflowEnum.STYLE && n.pop();
-  let a = t.filter(e => e.type === PrimaryWorkflowEnum.STYLE);
-  let s = [];
-  for (; n.length;) {
-    let e = n.join("/");
-    if (0 === (s = a.filter(t => getDirname(t.name).startsWith(e))).length) n.pop();else break;
+
+/**
+ * Returns all folder names containing styles.
+ * @param styles - Array of style objects.
+ * @returns Array of folder names.
+ * (Original: $$c17)
+ */
+export function getStyleFoldersWithStyles(styles: any[]): string[] {
+  if (!styles.length)
+    return []
+  const root = setupStyleFolderTree(styles, styles[0].style_type)
+  const result: string[] = []
+  const traverse = (folder: StyleFolder) => {
+    if (folder.styles.length > 0)
+      result.push(folder.name)
+    folder.subfolders.forEach(traverse)
   }
-  if (s.length) {
-    let t;
-    let n = s[0];
-    s.forEach(e => {
-      null != e.sort_position && null != n.sort_position && e.sort_position < n.sort_position && (n = e);
-    });
-    t = e.type === PrimaryWorkflowEnum.STYLE ? e : $$g8(e)[0];
-    let a = r.indexOf(t);
-    let o = r[a - 1];
-    let d = r[a + 1];
-    Fullscreen.insertStyleBetween(n.node_id, o?.node_id || "", d?.node_id || "");
-    let c = [...r];
-    c.splice(c.indexOf(n), 1);
-    c.splice(c.indexOf(o) + 1, 0, n);
-    return c;
-  }
-  return r;
-};
-export function $$x9({
-  prevItem: e,
-  nextItem: t,
-  localStyleSelection: r,
-  styleList: i,
-  collapsedFolders: a,
-  horizontalDragAmount: s,
-  temporarilyExpandedFolders: d
-}) {
-  if (!r) return null;
-  let c = $$y4(r, i);
-  let u = c[0];
-  if (e?.type === "STYLE_FOLDER" && a.has(e.name) && -1 === d.indexOf(e.name)) return {
-    folderNameToNestUnder: e.name,
-    dividerStyles: {
-      display: "none"
+  traverse(root)
+  return result
+}
+
+/**
+ * Flattens a style folder tree into a list.
+ * @param folder - Style folder.
+ * @returns Array of styles and folders.
+ * (Original: $$u12)
+ */
+export function flattenStyleFolderTree(folder: StyleFolder): any[] {
+  const folders = [...folder.subfolders].reverse()
+  const result = [...folder.styles]
+  while (folders.length > 0) {
+    const f = folders.pop()
+    if (f) {
+      result.push(f, ...f.styles)
+      folders.push(...[...f.subfolders].reverse())
     }
-  };
-  if (e?.type === PrimaryWorkflowEnum.STYLE) {
-    let t = getDirname(e.name).split("/");
-    for (let e = 0; e < t.length; e++) {
-      let r = t.slice(0, e + 1).join("/");
-      if (a.has(r) && -1 === d.indexOf(r)) {
-        if ("STYLE_FOLDER" !== u.type) return {
-          folderNameToNestUnder: r,
-          dividerStyles: {
-            display: "none"
+  }
+  return result
+}
+
+/**
+ * Gets the identifier for a style or folder.
+ * @param item - Style or folder.
+ * @returns Identifier string.
+ * (Original: $$p16)
+ */
+export function getStyleOrFolderId(item: any): string {
+  return item.type === 'STYLE_FOLDER' ? item.name : item.node_id
+}
+
+/**
+ * Normalizes a style path.
+ * @param path - Path string.
+ * @returns Normalized path.
+ * (Original: $$_3)
+ */
+export function normalizeStylePath(path: string): string {
+  return path.split('/').filter(Boolean).map(e => e.trim()).join('/')
+}
+
+/**
+ * Returns indices of all items under a folder in a flat list.
+ * @param folderIndex - Index of folder.
+ * @param flatList - Flat list of styles/folders.
+ * @returns Array of indices.
+ * (Original: $$h14)
+ */
+export function getFolderContentsIndices(folderIndex: number, flatList: any[]): number[] {
+  const folder = flatList[folderIndex]
+  if (folder.type !== 'STYLE_FOLDER')
+    return []
+  const indices: number[] = []
+  for (const [i, item] of flatList.slice(folderIndex + 1).entries()) {
+    if (item.type === 'STYLE_FOLDER' && item.level <= folder.level)
+      break
+    indices.push(folderIndex + 1 + i)
+  }
+  return indices
+}
+
+/**
+ * Gets the parent folder name for a style or folder.
+ * @param item - Style or folder.
+ * @returns Parent folder name.
+ * (Original: m)
+ */
+function getParentFolderName(item: any): string {
+  return item.type === 'STYLE_FOLDER' ? item.name : getDirname(item.name)
+}
+
+/**
+ * Returns all styles from a folder tree.
+ * @param folder - Style folder.
+ * @returns Array of styles.
+ * (Original: $$g8)
+ */
+export function getAllStylesFromFolder(folder: StyleFolder): any[] {
+  return flattenStyleFolderTree(folder).filter(e => e.type === PrimaryWorkflowEnum.STYLE)
+}
+
+/**
+ * Returns all folders from a folder tree.
+ * @param folder - Style folder.
+ * @returns Array of folders.
+ * (Original: $$f0)
+ */
+export function getAllFoldersFromFolder(folder: StyleFolder): StyleFolder[] {
+  return flattenStyleFolderTree(folder).filter(e => e.type === 'STYLE_FOLDER')
+}
+
+/**
+ * Flattens a list of folders/styles into a list of styles.
+ * @param items - Array of folders/styles.
+ * @returns Array of styles.
+ * (Original: $$E5)
+ */
+export function flattenToStyles(items: any[]): any[] {
+  const result: any[] = []
+  items.forEach((item) => {
+    if (item.type === 'STYLE_FOLDER') {
+      result.push(...getAllStylesFromFolder(item))
+    }
+    else {
+      result.push(item)
+    }
+  })
+  return result
+}
+
+/**
+ * Gets style/folder objects from indices.
+ * @param selection - Selection object.
+ * @param flatList - Flat list of styles/folders.
+ * @returns Array of selected items.
+ * (Original: $$y4)
+ */
+export function getSelectedItems(selection: any, flatList: any[]): any[] {
+  const indices = getSelectionIndices(selection, flatList)
+  const result: any[] = []
+  indices.forEach((idx) => {
+    const item = flatList[idx]
+    if (item)
+      result.push(item)
+  })
+  return result
+}
+
+/**
+ * Gets indices for selected styles/folders.
+ * @param selection - Selection object.
+ * @param flatList - Flat list of styles/folders.
+ * @returns Array of indices.
+ * (Original: $$b10)
+ */
+export function getSelectionIndices(selection: any, flatList: any[]): number[] {
+  const indices: number[] = []
+  const styleIds = flatList.map(e => e.type === PrimaryWorkflowEnum.STYLE ? e.node_id : null)
+  const folderNames = flatList.map(e => e.type === 'STYLE_FOLDER' ? e.name : null)
+  selection.styleIds.forEach((id: string) => {
+    const idx = styleIds.indexOf(id)
+    if (idx !== -1)
+      indices.push(idx)
+  })
+  selection.folderNames.forEach((name: string) => {
+    const idx = folderNames.indexOf(name)
+    if (idx !== -1)
+      indices.push(idx)
+  })
+  indices.sort((a, b) => a - b)
+  return indices
+}
+
+/**
+ * Gets the depth/level of a style or folder.
+ * @param item - Style or folder.
+ * @returns Depth/level.
+ * (Original: $$T15)
+ */
+export function getStyleOrFolderLevel(item: any): number {
+  return item.type === PrimaryWorkflowEnum.STYLE ? splitPath(item.name).length : item.level
+}
+
+/**
+ * Deletes a style node if it matches the generated key.
+ * @param style - Style object.
+ * @param key - Key to compare.
+ * (Original: $$I2)
+ */
+export function deleteStyleIfKeyMatches(style: any, key: any): void {
+  if (compareWithGeneratedKey(style, key)) {
+    Fullscreen.deleteNode(style.node_id)
+    trackEventAnalytics('Style Deleted', {
+      styleType: style.style_type,
+      from: 'styleListContextMenu',
+    })
+  }
+}
+
+/**
+ * Determines if a style/folder can be dropped at a target.
+ * @param dragged - Dragged item.
+ * @param target - Target item.
+ * @param prev - Previous item.
+ * @param folderName - Folder name.
+ * @returns Boolean.
+ * (Original: $$S1)
+ */
+export function canDropStyleOrFolder(
+  dragged: any,
+  target: any,
+  prev: any,
+  folderName?: string,
+): boolean {
+  if ((!dragged && !prev) || !target)
+    return false
+  const isFolderDrop
+    = (!folderName && folderName !== '')
+      || (target.type === 'STYLE_FOLDER'
+        && prev === target
+        && dragged?.type === PrimaryWorkflowEnum.STYLE
+        && getStyleOrFolderLevel(dragged) > getStyleOrFolderLevel(prev)
+        && folderName !== getDirname(target.name))
+  return !(
+    dragged === target
+    || (prev === target
+      && (target.type === PrimaryWorkflowEnum.STYLE || !isFolderDrop))
+    || (target.type === 'STYLE_FOLDER'
+      && ((dragged?.type === PrimaryWorkflowEnum.STYLE
+        && prev?.type === PrimaryWorkflowEnum.STYLE)
+      || (dragged?.type === 'STYLE_FOLDER'
+        && prev?.type === PrimaryWorkflowEnum.STYLE)
+      || (dragged
+        && (`${getParentFolderName(dragged)}/`).startsWith(`${target.name}/`))
+      || (prev
+        && (`${getParentFolderName(prev)}/`).startsWith(`${target.name}/`)
+        && !isFolderDrop)))
+  )
+}
+
+/**
+ * Handles drag-and-drop reordering and renaming of styles/folders.
+ * @param items - Items to move.
+ * @param target - Target item.
+ * @param prev - Previous item.
+ * @param folderName - Folder name.
+ * @param selection - Selection object.
+ * @param flatList - Flat list of styles/folders.
+ * @param isFolder - Is folder.
+ * @returns Map of updated names.
+ * (Original: $$v6)
+ */
+export function handleStyleFolderReorder(
+  items: any[],
+  target: any,
+  prev: any,
+  folderName: string,
+  selection: any,
+  flatList: any[],
+  isFolder: boolean,
+): Map<string, string> | undefined {
+  items.forEach((item) => {
+    // Helper for checking order
+    const isOrderChanged = (list: any[], compareList: any[]) => {
+      const styleIds = list.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id)
+      const filtered = []
+      compareList.forEach((e) => {
+        if (styleIds.includes(e.node_id))
+          filtered.push(e)
+      })
+      const first = list[0]
+      const ordered = flattenStyleFolderTree(
+        setupStyleFolderTree(filtered, first.type === PrimaryWorkflowEnum.STYLE ? first.style_type : first.styleTypeSection),
+      ).filter(e => e.type === PrimaryWorkflowEnum.STYLE)
+      for (let i = 0; i < styleIds.length; i++) {
+        if (styleIds[i] !== ordered[i].node_id)
+          return true
+      }
+      return false
+    }
+    // Helper for filtering out selected items
+    const filterOutSelected = (selected: any[], all: any[]) => {
+      const folderSet = new Set()
+      const styleSet = new Set()
+      for (const item of selected) {
+        (item.type === PrimaryWorkflowEnum.STYLE
+          ? [item]
+          : (function recurse(folder: any) {
+              const result: any[] = []
+              folder.styles.forEach((s: any) => result.push(s))
+              folder.subfolders.forEach((sf: any) => {
+                result.push(sf)
+                result.push(...recurse(sf))
+              })
+              return result
+            })(item).concat([item])
+        ).forEach(e =>
+          e.type === PrimaryWorkflowEnum.STYLE
+            ? styleSet.add(e.node_id)
+            : folderSet.add(e.name),
+        )
+      }
+      return all.filter(e =>
+        e.type === 'STYLE_FOLDER'
+          ? !folderSet.has(e.name)
+          : !styleSet.has(e.node_id),
+      )
+    }
+    selection = filterOutSelected([item], selection)
+    if (isOrderChanged(selection, flatList)) {
+      selection = adjustStyleOrder(item, flatList, selection)
+    }
+  })
+  if (!flatList)
+    return
+  const insertIndices = new Set(
+    items.map(item =>
+      item.type === 'STYLE_FOLDER' || isFolder
+        ? getInsertIndexForFolder(target, prev, flatList, selection)
+        : getInsertIndexForStyle(target, prev, flatList, selection),
+    ),
+  )
+  if (insertIndices.size > 1 || insertIndices.has(null))
+    return
+  const insertIdx = insertIndices.values().next().value
+  const before = flatList[insertIdx]
+  const after = flatList[insertIdx + 1]
+  const renameMap = new Map<string, string>()
+  let lastInserted = before
+  for (const item of items) {
+    // Insert styles between nodes
+    const insertBetween = (node: any) => {
+      if (node.type === PrimaryWorkflowEnum.STYLE) {
+        Fullscreen.insertStyleBetween(node.node_id, lastInserted?.node_id || '', after?.node_id || '')
+        lastInserted = node
+      }
+      else {
+        node.styles.forEach(insertBetween)
+        node.subfolders.forEach(insertBetween)
+      }
+    }
+    insertBetween(item)
+    const folderParts = folderName === '' ? [] : folderName.split('/')
+    const newPath = [...folderParts, getBasename(item.name)]
+    if (newPath.join('/') !== item.name) {
+      // Rename recursively
+      const renameRecursively = (node: any, pathParts: string[]) => {
+        if (node.type === PrimaryWorkflowEnum.STYLE) {
+          const newName = [...pathParts, getBasename(node.name)].join('/')
+          renameMap.set(node.node_id, newName)
+          Fullscreen.renameNode(node.node_id, newName)
+        }
+        else {
+          renameMap.set(node.name, pathParts.join('/'))
+          node.styles.forEach((s: any) => renameRecursively(s, pathParts))
+          node.subfolders.forEach((sf: any) => {
+            const nextParts = [...pathParts, getBasename(sf.name)]
+            renameRecursively(sf, nextParts)
+          })
+        }
+      }
+      renameRecursively(item, item.type === 'STYLE_FOLDER' ? newPath : folderParts)
+    }
+    else {
+      renameMap.set(item.type === 'STYLE_FOLDER' ? item.name : item.node_id, item.name)
+    }
+  }
+  return renameMap
+}
+
+/**
+ * Helper for adjusting style order after drag-and-drop.
+ * @param item - Item being moved.
+ * @param flatList - Flat list of styles/folders.
+ * @param selection - Selection list.
+ * @returns Updated selection list.
+ * (Original: A)
+ */
+function adjustStyleOrder(item: any, flatList: any[], selection: any[]): any[] {
+  let pathParts = splitPath(item.name)
+  if (item.type === PrimaryWorkflowEnum.STYLE)
+    pathParts.pop()
+  const styles = flatList.filter(e => e.type === PrimaryWorkflowEnum.STYLE)
+  let filtered: any[] = []
+  while (pathParts.length) {
+    const folderPath = pathParts.join('/')
+    filtered = styles.filter(s => getDirname(s.name).startsWith(folderPath))
+    if (filtered.length === 0)
+      pathParts.pop()
+    else break
+  }
+  if (filtered.length) {
+    let minStyle = filtered[0]
+    filtered.forEach((s) => {
+      if (
+        s.sort_position != null
+        && minStyle.sort_position != null
+        && s.sort_position < minStyle.sort_position
+      ) {
+        minStyle = s
+      }
+    })
+    const target = item.type === PrimaryWorkflowEnum.STYLE ? item : getAllStylesFromFolder(item)[0]
+    const idx = selection.indexOf(target)
+    const before = selection[idx - 1]
+    const after = selection[idx + 1]
+    Fullscreen.insertStyleBetween(minStyle.node_id, before?.node_id || '', after?.node_id || '')
+    const updated = [...selection]
+    updated.splice(updated.indexOf(minStyle), 1)
+    updated.splice(updated.indexOf(before) + 1, 0, minStyle)
+    return updated
+  }
+  return selection
+}
+
+/**
+ * Gets insert index for folder drop.
+ * @param target - Target item.
+ * @param prev - Previous item.
+ * @param flatList - Flat list.
+ * @param selection - Selection list.
+ * @returns Insert index.
+ * (Original: function inside $$v6)
+ */
+function getInsertIndexForFolder(target: any, prev: any, flatList: any[], selection: any[]): number | null {
+  if (!target) {
+    return selection.some(e => e.type === PrimaryWorkflowEnum.STYLE && getDirname(e.name) === '') ? null : -1
+  }
+  if (!prev)
+    return flatList.length - 1
+  const styleIds = flatList.map(e => e.node_id)
+  if (
+    target.type === PrimaryWorkflowEnum.STYLE
+    && prev.type === PrimaryWorkflowEnum.STYLE
+  ) {
+    return null
+  }
+  if (
+    target.type === PrimaryWorkflowEnum.STYLE
+    && prev.type === 'STYLE_FOLDER'
+    && getStyleOrFolderLevel(target) === getStyleOrFolderLevel(prev)
+  ) {
+    const idx = styleIds.indexOf(target.node_id)
+    const firstStyle = (() => {
+      const styles = getAllStylesFromFolder(prev)
+      const styleSet = new Set(selection.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id))
+      let minStyle = styles[0]
+      styles.forEach((s) => {
+        if (
+          s.sort_position
+          && minStyle.sort_position
+          && s.sort_position < minStyle.sort_position
+          && styleSet.has(s.node_id)
+        ) {
+          minStyle = s
+        }
+      })
+      return minStyle
+    })()
+    const firstIdx = styleIds.indexOf(firstStyle.node_id)
+    return idx < firstIdx ? idx : firstIdx - 1
+  }
+  {
+    const prevIdx = selection.indexOf(prev)
+    if (prevIdx !== -1) {
+      const nextStyle = selection.slice(prevIdx).find(e => e.type === PrimaryWorkflowEnum.STYLE)
+      if (!nextStyle)
+        return flatList.length - 1
+      const nextIdx = styleIds.indexOf(nextStyle.node_id)
+      debug(nextIdx !== -1, 'style to insert before does not exist in the stored list')
+      return nextIdx - 1
+    }
+    {
+      const targetIdx = selection.indexOf(target)
+      const prevStyle = selection.slice(targetIdx + 1).reverse().find(e => e.type === PrimaryWorkflowEnum.STYLE)
+      if (!prevStyle)
+        return flatList.length - 1
+      const prevIdx = styleIds.indexOf(prevStyle.node_id)
+      debug(prevIdx !== -1, 'style to insert after does not exist in the stored list')
+      return prevIdx
+    }
+  }
+}
+
+/**
+ * Gets insert index for style drop.
+ * @param target - Target item.
+ * @param prev - Previous item.
+ * @param flatList - Flat list.
+ * @param selection - Selection list.
+ * @returns Insert index.
+ * (Original: function inside $$v6)
+ */
+function getInsertIndexForStyle(target: any, prev: any, flatList: any[], selection: any[]): number {
+  if (!target)
+    return -1
+  if (!prev)
+    return flatList.length - 1
+  const styleIds = flatList.map(e => e.node_id)
+  if (target.type === PrimaryWorkflowEnum.STYLE && prev.type === 'STYLE_FOLDER') {
+    return styleIds.indexOf(target.node_id)
+  }
+  {
+    const prevIdx = selection.indexOf(prev)
+    const nextStyle = selection.slice(prevIdx).find(e => e.type === PrimaryWorkflowEnum.STYLE)
+    if (!nextStyle)
+      return flatList.length - 1
+    const nextIdx = styleIds.indexOf(nextStyle.node_id)
+    debug(nextIdx !== -1, 'style to insert before does not exist in the stored list')
+    return nextIdx - 1
+  }
+}
+
+/**
+ * Calculates drag-and-drop divider styles and nesting folder.
+ * @param params - Drag-and-drop parameters.
+ * @returns Divider styles and folder name.
+ * (Original: $$x9)
+ */
+export function getDragDropDividerStyles({
+  prevItem,
+  nextItem,
+  localStyleSelection,
+  styleList,
+  collapsedFolders,
+  horizontalDragAmount,
+  temporarilyExpandedFolders,
+}: {
+  prevItem: any
+  nextItem: any
+  localStyleSelection: any
+  styleList: any[]
+  collapsedFolders: Set<string>
+  horizontalDragAmount: number
+  temporarilyExpandedFolders: string[]
+}): { folderNameToNestUnder: string | null, dividerStyles: any } | null {
+  if (!localStyleSelection)
+    return null
+  const selectedItems = getSelectedItems(localStyleSelection, styleList)
+  const firstSelected = selectedItems[0]
+  if (
+    prevItem?.type === 'STYLE_FOLDER'
+    && collapsedFolders.has(prevItem.name)
+    && !temporarilyExpandedFolders.includes(prevItem.name)
+  ) {
+    return {
+      folderNameToNestUnder: prevItem.name,
+      dividerStyles: { display: 'none' },
+    }
+  }
+  if (prevItem?.type === PrimaryWorkflowEnum.STYLE) {
+    const pathParts = getDirname(prevItem.name).split('/')
+    for (let i = 0; i < pathParts.length; i++) {
+      const folderPath = pathParts.slice(0, i + 1).join('/')
+      if (collapsedFolders.has(folderPath) && !temporarilyExpandedFolders.includes(folderPath)) {
+        if (firstSelected.type !== 'STYLE_FOLDER') {
+          return {
+            folderNameToNestUnder: folderPath,
+            dividerStyles: { display: 'none' },
           }
-        };
+        }
         return {
-          folderNameToNestUnder: getDirname(r),
+          folderNameToNestUnder: getDirname(folderPath),
           dividerStyles: {
-            marginLeft: 24 * Math.min(splitPath(r).length, 8) - 8
-          }
-        };
+            marginLeft: 24 * Math.min(splitPath(folderPath).length, 8) - 8,
+          },
+        }
       }
     }
   }
-  let p = 0;
-  let _ = null;
-  let h = e ? $$T15(e) : 0;
-  let m = t ? $$T15(t) : 0;
-  if (h <= m) {
-    p = m;
-    _ = e ? e.type === PrimaryWorkflowEnum.STYLE ? getDirname(e.name) : e.name : "";
-  } else if (debug(null != e, "Dragging after an item that doesn't exist"), u.type === PrimaryWorkflowEnum.STYLE || s >= .5) {
-    p = h;
-    _ = getDirname(e.name);
-  } else {
-    let t = Math.floor(s / .5 * $$T15(e));
-    t = Math.max(m - 1, t);
-    _ = splitPath(getDirname(e.name)).slice(0, t).join("/");
-    p = t + 1;
+  let level = 0
+  let folderName: string | null = null
+  const prevLevel = prevItem ? getStyleOrFolderLevel(prevItem) : 0
+  const nextLevel = nextItem ? getStyleOrFolderLevel(nextItem) : 0
+  debug(prevItem != null, 'Dragging after an item that doesn\'t exist')
+  if (prevLevel <= nextLevel) {
+    level = nextLevel
+    folderName = prevItem
+      ? prevItem.type === PrimaryWorkflowEnum.STYLE
+        ? getDirname(prevItem.name)
+        : prevItem.name
+      : ''
   }
-  let g = {
-    marginLeft: 24 * Math.min(p, 8) - 8
-  };
-  return e && c.includes(e) || !$$S1(e, u, t) ? {
-    folderNameToNestUnder: null,
-    dividerStyles: g
-  } : {
-    folderNameToNestUnder: _,
-    dividerStyles: g
-  };
-}
-export function $$N11(e, t) {
-  let r = e[0];
-  let n = r ? t.indexOf(r) : -1;
-  let i = n;
-  let a = n + 1;
-  if (r?.type === PrimaryWorkflowEnum.STYLE && t[a] && t[a]?.type === PrimaryWorkflowEnum.STYLE) {
-    let e = $$T15(r);
-    for (let r = n + 1; r < t.length; r++) {
-      let n = t[r];
-      if ("STYLE_FOLDER" === n.type && n.level === e || $$T15(n) < e) {
-        i = r - 1;
-        a = r;
-        break;
+  else if (
+
+    firstSelected.type === PrimaryWorkflowEnum.STYLE || horizontalDragAmount >= 0.5
+  ) {
+    level = prevLevel
+    folderName = getDirname(prevItem.name)
+  }
+  else {
+    let t = Math.floor((horizontalDragAmount / 0.5) * getStyleOrFolderLevel(prevItem))
+    t = Math.max(nextLevel - 1, t)
+    folderName = splitPath(getDirname(prevItem.name)).slice(0, t).join('/')
+    level = t + 1
+  }
+  const dividerStyles = {
+    marginLeft: 24 * Math.min(level, 8) - 8,
+  }
+  return prevItem && selectedItems.includes(prevItem) || !canDropStyleOrFolder(prevItem, firstSelected, nextItem)
+    ? {
+        folderNameToNestUnder: null,
+        dividerStyles,
       }
-      r === t.length - 1 && (i = r, a = r + 1);
+    : {
+        folderNameToNestUnder: folderName,
+        dividerStyles,
+      }
+}
+
+/**
+ * Gets previous and next items for a selection.
+ * @param selection - Array of selected items.
+ * @param flatList - Flat list of styles/folders.
+ * @returns Previous and next items.
+ * (Original: $$N11)
+ */
+export function getPrevNextItems(selection: any[], flatList: any[]): { prevItem: any, nextItem: any } {
+  const first = selection[0]
+  const idx = first ? flatList.indexOf(first) : -1
+  let prevIdx = idx
+  let nextIdx = idx + 1
+  if (
+    first?.type === PrimaryWorkflowEnum.STYLE
+    && flatList[nextIdx]
+    && flatList[nextIdx]?.type === PrimaryWorkflowEnum.STYLE
+  ) {
+    const level = getStyleOrFolderLevel(first)
+    for (let i = idx + 1; i < flatList.length; i++) {
+      const item = flatList[i]
+      if (
+        item.type === 'STYLE_FOLDER' && item.level === level
+        || getStyleOrFolderLevel(item) < level
+      ) {
+        prevIdx = i - 1
+        nextIdx = i
+        break
+      }
+      if (i === flatList.length - 1) {
+        prevIdx = i
+        nextIdx = i + 1
+      }
     }
   }
   return {
-    prevItem: t[i],
-    nextItem: t[a]
-  };
+    prevItem: flatList[prevIdx],
+    nextItem: flatList[nextIdx],
+  }
 }
-export const KU = $$f0;
-export const Md = $$S1;
-export const Nr = $$I2;
-export const Pc = $$_3;
-export const QA = $$y4;
-export const Ug = $$E5;
-export const VB = $$v6;
-export const a2 = function e(t, r) {
-  t.styles.forEach(e => {
-    $$I2(e, r);
-  });
-  t.subfolders.forEach(t => {
-    e(t, r);
-  });
-};
-export const dm = $$g8;
-export const g5 = $$x9;
-export const h$ = $$b10;
-export const j3 = $$N11;
-export const l0 = $$u12;
-export const lM = $$d13;
-export const mx = $$h14;
-export const rM = $$T15;
-export const t_ = $$p16;
-export const wM = $$c17;
+
+/**
+ * Recursively deletes styles in a folder.
+ * @param folder - Style folder.
+ * @param key - Key to compare.
+ * (Original: a2)
+ */
+export function deleteStylesInFolder(folder: StyleFolder, key: any): void {
+  folder.styles.forEach((style) => {
+    deleteStyleIfKeyMatches(style, key)
+  })
+  folder.subfolders.forEach((subfolder) => {
+    deleteStylesInFolder(subfolder, key)
+  })
+}
+
+// Exported variable names as per instructions
+export const KU = getAllFoldersFromFolder
+export const Md = canDropStyleOrFolder
+export const Nr = deleteStyleIfKeyMatches
+export const Pc = normalizeStylePath
+export const QA = getSelectedItems
+export const Ug = flattenToStyles
+export const VB = handleStyleFolderReorder
+export const dm = getAllStylesFromFolder
+export const g5 = getDragDropDividerStyles
+export const h$ = getSelectionIndices
+export const j3 = getPrevNextItems
+export const l0 = flattenStyleFolderTree
+export const lM = setupStyleFolderTree
+export const mx = getFolderContentsIndices
+export const rM = getStyleOrFolderLevel
+export const t_ = getStyleOrFolderId
+export const wM = getStyleFoldersWithStyles

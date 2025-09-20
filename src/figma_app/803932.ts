@@ -22,7 +22,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku, UK } from "../figma_app/740163";
 import { isInvalidValue } from "../905/216495";
 import { useSceneGraphSelector } from "../figma_app/722362";
-import { Gp } from "../figma_app/646357";
+import { getStyleSubscriptionInfo } from "../figma_app/646357";
 import { getStyleThumbnail } from "../905/405710";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { e_ as _$$e_ } from "../figma_app/803787";
@@ -520,7 +520,7 @@ export function $$eu10() {
   let d = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, l?.assetRef);
   let c = t && _$$Ku(t);
   let u = Ig();
-  let _ = o ? Gp(o, d ? [d] : [], s) : void 0;
+  let _ = o ? getStyleSubscriptionInfo(o, d ? [d] : [], s) : void 0;
   let h = r.filter($$ec9).map(e => dc(e, u, c || PropertyScope.ALL_FILLS));
   return _ && n ? [rP(n, _, h)] : h;
 }
@@ -544,7 +544,7 @@ let e_ = () => {
   let u = useSelector(_$$e_);
   let p = useMemo(() => {
     let t = c.map(e => ({
-      ds: Gp(e.styleKey, e.styleGUIDs, u),
+      ds: getStyleSubscriptionInfo(e.styleKey, e.styleGUIDs, u),
       name: e.styleName
     }));
     let r = [];

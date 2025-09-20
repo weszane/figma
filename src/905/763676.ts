@@ -18,7 +18,7 @@ import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
 import { getSelectedFile } from "../905/766303";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-import { gy, fc } from "../figma_app/646357";
+import { sortLibrariesByFolder, useIsAssetPublishedForCurrentFile } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
 import { directlySubscribedStylesNodeIdsFromLoadedPagesSelector, hasIndirectlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
 import { er as _$$er } from "../905/753512";
@@ -41,9 +41,9 @@ import { t as _$$t2 } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { hasRootPath } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
-import { B as _$$B2 } from "../905/506188";
+import { getLibraryName } from "../905/506188";
 import { LibraryFileSelect } from "../figma_app/43951";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { lX } from "../figma_app/588397";
@@ -95,7 +95,7 @@ function ec({
     includeLocalLibrary: !0
   });
   let p = useMemo(() => u.result?.filter(t => t.library_key !== e), [u, e]);
-  let m = je();
+  let m = useSubscribedLibraries();
   let h = useMemo(() => m.data?.filter(t => "community" === t.libraryType && t.libraryKey !== e) ?? [], [m, e]);
   let _ = c?.teamId || NO_TEAM;
   let A = useMemo(() => {
@@ -123,7 +123,7 @@ function ec({
     let t = x[e];
     return function (e, t, i, r, a, s) {
       let o;
-      let l = gy(e, i, r, {
+      let l = sortLibrariesByFolder(e, i, r, {
         isDescending: !0,
         groupByFolders: !0
       });
@@ -253,7 +253,7 @@ function eu({
   onBackClick: i,
   createOverridesOnSwap: a
 }) {
-  let s = _$$B2(e).data;
+  let s = getLibraryName(e).data;
   let o = LM({
     fromLibraryKey: e,
     toLibraryKey: t
@@ -491,7 +491,7 @@ export function $$ef0({
   let D = nX(R) && O;
   let [L, F] = useState(!0);
   let M = GK(e);
-  let j = fc();
+  let j = useIsAssetPublishedForCurrentFile();
   let U = _$$T();
   let B = useCallback(() => {
     e && (trackEventAnalytics("Swap library clicked", {

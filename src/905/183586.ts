@@ -1,13 +1,13 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { getI18nString } from "../905/303541";
-import { Pc } from "../figma_app/463500";
+import { normalizeStylePath } from "../figma_app/463500";
 import { zi, iL } from "../905/824449";
 import { C } from "../905/549861";
 export let $$d0 = forwardRef((e, t) => jsx(C, {
   ...e,
   ref: t,
-  propertyName: e.dsStyle ? Pc(e.dsStyle.name) : getI18nString("design_systems.styles.custom"),
+  propertyName: e.dsStyle ? normalizeStylePath(e.dsStyle.name) : getI18nString("design_systems.styles.custom"),
   propertyValues: [],
   visible: !0,
   previewElement: e.dsStyle ? jsx(zi, {

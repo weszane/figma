@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
 import { M } from "../figma_app/749682";
-import { rt } from "../figma_app/646357";
+import { loadStyleCanvases } from "../figma_app/646357";
 let u = createContext({
   registerStyle: lQ,
   unregisterStyle: lQ
@@ -29,7 +29,7 @@ export function $$p1({
     });
   }, []);
   let l = useMemo(() => debounce(e => {
-    rt(e);
+    loadStyleCanvases(e);
   }, 300), []);
   useEffect(() => {
     t.size > 0 && l(Array.from(t));

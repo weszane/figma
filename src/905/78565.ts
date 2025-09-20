@@ -7,7 +7,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { setLibraryUpdatesBannerDismissed } from "../905/879323";
-import { eS, aD } from "../figma_app/646357";
+import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { cb, WE } from "../figma_app/745458";
 import { KindEnum } from "../905/129884";
 import { r6 } from "../905/542608";
@@ -17,7 +17,7 @@ export function $$A0(e) {
   let t = useDispatch();
   let i = useAtomWithSubscription(cb);
   let A = useAtomWithSubscription(WE);
-  let y = eS(aD.ALL);
+  let y = useSubscribedAssets(AssetFilterMode.ALL);
   let {
     updateAll
   } = se(y, void 0, r6.FIGJAM_BROWSE);

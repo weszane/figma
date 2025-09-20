@@ -2,18 +2,18 @@ import { isNotNullish } from "../figma_app/95419";
 import { getResourceDataOrFallback } from "../905/663269";
 import a from "../vendor/149674";
 import { createSelector } from "../vendor/925040";
-import { v2, ah, vu, ad } from "../figma_app/646357";
+import { flattenNestedAssets, getComponentAssetsMap, getAllAssets, hasContainingStateGroup } from "../figma_app/646357";
 import { mapHubOrTeamFile, mapVariableProperties, mapVariableSetProperties } from "../figma_app/349248";
 var s = a;
 let c = e => e.library.publishedByLibraryKey.components;
 let u = e => e.library.publishedByLibraryKey.stateGroups;
-let $$p8 = createSelector([c], v2);
-let $$_3 = createSelector([u], v2);
-let $$h0 = createSelector([c], ah);
-let $$m7 = createSelector([u], ah);
-let $$g1 = createSelector([c], vu);
-let $$f2 = createSelector([u], vu);
-let E = createSelector([$$h0], e => s()(e, e => !ad(e)));
+let $$p8 = createSelector([c], flattenNestedAssets);
+let $$_3 = createSelector([u], flattenNestedAssets);
+let $$h0 = createSelector([c], getComponentAssetsMap);
+let $$m7 = createSelector([u], getComponentAssetsMap);
+let $$g1 = createSelector([c], getAllAssets);
+let $$f2 = createSelector([u], getAllAssets);
+let E = createSelector([$$h0], e => s()(e, e => !hasContainingStateGroup(e)));
 let $$y5 = createSelector([$$m7, E], (e, t) => ({
   ...e,
   ...t

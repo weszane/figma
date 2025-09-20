@@ -49,7 +49,7 @@ import { fullscreenPerfManager } from "../905/125218";
 import { Js, QY, pi } from "../figma_app/139113";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { c3, Lt } from "../figma_app/440875";
-import { QO, VO } from "../figma_app/646357";
+import { usedComponentsPromise, findLibraryNameForAsset } from "../figma_app/646357";
 class M {
   static attemptToParseFrom(e) {
     let t = _$$z.object({
@@ -382,11 +382,11 @@ export class $$eu0 {
     return Yq();
   }
   async showRestoreComponentDialog(e) {
-    let [t] = await Promise.all([getFullscreenViewFile(this.store), QO]);
+    let [t] = await Promise.all([getFullscreenViewFile(this.store), usedComponentsPromise]);
     let i = this.store.getState();
     let n = atomStoreManager.get(qp);
     if (t) {
-      let r = VO(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
+      let r = findLibraryNameForAsset(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
       t.canEdit ? this.store.dispatch(showModalHandler({
         type: _$$l,
         data: {

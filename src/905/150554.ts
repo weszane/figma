@@ -3,7 +3,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
 import { logError, logInfo } from "../905/714362";
-import { Av } from "../figma_app/646357";
+import { getAssetKey } from "../figma_app/646357";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { r6 } from "../figma_app/517115";
@@ -127,7 +127,7 @@ async function $$A({
       let e = await m;
       u = [...u, ...e];
     }
-    u = u.filter((e, t, i) => i.findIndex(t => Av(t) === Av(e)) === t);
+    u = u.filter((e, t, i) => i.findIndex(t => getAssetKey(t) === getAssetKey(e)) === t);
   } catch (e) {
     e instanceof _$$u || logError("auto_suggest", "Error getting suggestions", {
       error: e

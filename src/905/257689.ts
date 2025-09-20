@@ -1,5 +1,5 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { X } from "../905/145028";
 import { J } from "../905/539754";
 import { logCmsError } from "../905/937198";
@@ -135,7 +135,7 @@ export async function $$m1(e, t, i, n, a) {
       let s = n.collectionId;
       let o = t.collectionById[s];
       if (!o) continue;
-      let l = Object.entries(o.itemById).sort((e, t) => Ez(t[1].index || "", e[1].index || "")).reduce((e, [t], i) => (e[i] = t, e), {});
+      let l = Object.entries(o.itemById).sort((e, t) => compareNumbers(t[1].index || "", e[1].index || "")).reduce((e, [t], i) => (e[i] = t, e), {});
       Object.entries(a.nodesToInstances).filter(([t]) => e.nodeById[t]).forEach(([t, i]) => {
         let n = e.nodeById[t];
         let r = l[i];

@@ -89,7 +89,7 @@ import { isWorkshopModeActive } from '../figma_app/193867'
 import { VariableIdHandler, VariableSetIdCompatHandler } from '../figma_app/243058'
 import { isStyleString, serializeStyle } from '../figma_app/276332'
 import { PluginPermissions } from '../figma_app/300692'
-import { eG as _$$eG, oJ } from '../figma_app/334505'
+import { hasImageOrVideoFill, useNodeMediaPaint } from '../figma_app/334505'
 import { hasReachedPageLimit } from '../figma_app/345997'
 import { J3 } from '../figma_app/360163'
 import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091'
@@ -101,7 +101,7 @@ import { assert, throwTypeError } from '../figma_app/465776'
 import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636'
 import { selectOpenFile } from '../figma_app/516028'
 import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, BT, cI, dG, dM, f2, fd, G1, H4, jG, jS, KB, LL, ME, Mw, OD, oZ, Q4, q$, Ql, Rp, sd, Sf, Sx, Ty, Vb, VM, W5, wk, Xx } from '../figma_app/603466'
-import { Qb, yh } from '../figma_app/646357'
+import { findStyleDataByKey, iterateAssetsByTeam } from '../figma_app/646357'
 import { arraysEqual } from '../figma_app/656233'
 import * as _require from '../figma_app/664063'
 import { PluginModalTypeEnum } from '../figma_app/671547'
@@ -7447,7 +7447,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
              */
             function createBuzzMediaContentArray(targetNode, vm, imageStore, videoStore, nodeFactory) {
               const arr = vm.newArray()
-              const fields = oJ(targetNode)
+              const fields = hasImageOrVideoFill(targetNode)
               fields.forEach((field, idx) => {
                 const obj = createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory)
                 if (obj)
@@ -7459,7 +7459,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               const {
                 mediaPaint,
                 mediaPaintIndex,
-              } = _$$eG(field)
+              } = useNodeMediaPaint(field)
               if (!mediaPaint || mediaPaintIndex == null || isInvalidValue(mediaPaint) || mediaPaint.image?.hash === undefined) {
                 return null
               }
@@ -7557,7 +7557,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 } = vm.newPromise()
                 const {
                   mediaPaintIndex,
-                } = _$$eG(field)
+                } = useNodeMediaPaint(field)
                 vm.registerPromise((async () => {
                   const fills = field.fills.slice()
                   if (mediaPaintIndex !== null && fills[mediaPaintIndex]) {
@@ -10518,7 +10518,7 @@ async function a_(_componentKey, styleKey, permissions) {
   const currentState = debugStateInstance.getState()
 
   // Find published style in used libraries or fetch it
-  const publishedStyle = yh(styleKey, currentState.library.used__LIVEGRAPH.styles, currentState.library.openFilePublished__LIVEGRAPH.styles) || (await Ky(debugStateInstance, styleKey))
+  const publishedStyle = findStyleDataByKey(styleKey, currentState.library.used__LIVEGRAPH.styles, currentState.library.openFilePublished__LIVEGRAPH.styles) || (await Ky(debugStateInstance, styleKey))
   if (!publishedStyle) {
     throw new Error(`Could not find a published style with the key "${styleKey}"`)
   }
@@ -10676,7 +10676,7 @@ export async function $$ab4(componentKey, sceneGraphInstance = getSceneGraphInst
 export function searchForPublishedComponent(currentState, componentKey) {
   let foundComponent = null
   let parentStateGroup = null
-  Qb(currentState.library.publishedByLibraryKey.components, (libraryKey, version, _componentId, componentData) => {
+  iterateAssetsByTeam(currentState.library.publishedByLibraryKey.components, (libraryKey, version, _componentId, componentData) => {
     if (componentData.component_key === componentKey) {
       foundComponent = componentData
 
@@ -10788,7 +10788,7 @@ export async function $$av5(componentSetKey) {
  */
 export function searchForPublishedStateGroup(currentState, stateGroupKey) {
   let foundStateGroup = null
-  Qb(currentState.library.publishedByLibraryKey.stateGroups, (_libraryKey, _version, _stateGroupId, stateGroupData) => {
+  iterateAssetsByTeam(currentState.library.publishedByLibraryKey.stateGroups, (_libraryKey, _version, _stateGroupId, stateGroupData) => {
     if (stateGroupData.key === stateGroupKey) {
       foundStateGroup = stateGroupData
     }

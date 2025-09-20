@@ -2,12 +2,12 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import s from "../vendor/239910";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 var o = s;
 export function $$d0() {
   let e = useSelector(e => e.hubFiles);
   let t = useMemo(() => o()(Object.values(e), e => _$$l(e.library_key ?? "")), [e]);
-  let i = je();
+  let i = useSubscribedLibraries();
   let s = useMemo(() => {
     let e = {};
     if (!i.data) return {};

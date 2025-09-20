@@ -4,7 +4,7 @@ import { atom } from "../figma_app/27355";
 import s from "../vendor/946678";
 import { createDeepEqualSelector } from "../905/270781";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { lg } from "../figma_app/646357";
+import { isNewOrChangedOrDeleted } from "../figma_app/646357";
 import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
 let p = atom(new Map());
@@ -53,7 +53,7 @@ let $$_0 = atom(e => {
   a.sort((e, t) => e.name.localeCompare(t.name));
   return a;
 });
-let A = e => e.status && lg(e.status);
+let A = e => e.status && isNewOrChangedOrDeleted(e.status);
 export function $$y1(e) {
   let [t, i] = o()(e, e => A(e));
   return {

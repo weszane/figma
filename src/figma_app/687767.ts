@@ -7,9 +7,9 @@ import { VariablesBindings, AppStateTsApi, VariableResolvedDataType, VariableDat
 import { parseSessionLocalID } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { areColorsEqual } from "../figma_app/191804";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { ti } from "../figma_app/646357";
+import { filterStylesByType } from "../figma_app/646357";
 import { UV } from "../905/438367";
 import { Cg } from "../figma_app/216057";
 import { ay } from "../905/886545";
@@ -40,7 +40,7 @@ export function $$I1(e) {
       return [];
     }
     let r = new Set(data?.styleGUIDs || []);
-    return r.size > 0 ? ti(t, "TEXT").filter(e => r.has(e.node_id)).sort((e, t) => Ez(t.sort_position || "", e.sort_position || "")) : [];
+    return r.size > 0 ? filterStylesByType(t, "TEXT").filter(e => r.has(e.node_id)).sort((e, t) => compareNumbers(t.sort_position || "", e.sort_position || "")) : [];
   }, [e, data, t]);
 }
 function S(e) {

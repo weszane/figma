@@ -318,7 +318,7 @@ import { isPublishedTeamLibrary, LibraryTabEnum } from '../figma_app/633080';
 import { zl as _$$zl } from '../figma_app/641749';
 import { getPermissionsState } from '../figma_app/642025';
 import { lz as _$$lz, sf as _$$sf, td as _$$td, bV, Dt, EN, OL } from '../figma_app/646031';
-import { aD as _$$aD, eS as _$$eS, ti as _$$ti } from '../figma_app/646357';
+import { AssetFilterMode, useSubscribedAssets, filterStylesByType } from '../figma_app/646357';
 import { wW } from '../figma_app/656450';
 import { VF } from '../figma_app/679183';
 import { y6 } from '../figma_app/681951';
@@ -3839,7 +3839,7 @@ let n8 = memo(() => {
     selectedLibraries: e.libraries
   }) : null;
 });
-let n6 = createReduxSubscriptionAtomWithState(e => _$$ti(e.library.local.styles, StyleType.TEXT));
+let n6 = createReduxSubscriptionAtomWithState(e => filterStylesByType(e.library.local.styles, StyleType.TEXT));
 let ia = io;
 let ij = '16px';
 function iv() {
@@ -7960,7 +7960,7 @@ function s3({
 function s4({
   context: e
 }) {
-  let t = _$$eS(_$$aD.CURRENT);
+  let t = useSubscribedAssets(AssetFilterMode.CURRENT);
   let {
     assetId
   } = e;

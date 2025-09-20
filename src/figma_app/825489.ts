@@ -17,7 +17,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState, attachReducerWrapper } from "../905/270322";
 import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, CommunityLibraryModules } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
-import { gM } from "../figma_app/155728";
+import { transformAndFilterSubscriptions } from "../figma_app/155728";
 import { currentTeamAtom } from "../figma_app/598018";
 import { LibrarySourceEnum } from "../figma_app/633080";
 var o = s;
@@ -37,7 +37,7 @@ let $$x0 = atom(e => {
   let s = e(figmaLibrariesEnabledAtom);
   let o = e(currentTeamAtom);
   let d = hasTeamPaidAccess(o);
-  return gM(a, n, i, s, r, d);
+  return transformAndFilterSubscriptions(a, n, i, s, r, d);
 });
 let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), yZ));
 export function $$C2(e) {

@@ -27,7 +27,7 @@ import { LR } from "../figma_app/120210";
 import { selectOpenFile } from "../figma_app/516028";
 import { B0 } from "../figma_app/807786";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { CK } from "../figma_app/517115";
 import { rp } from "../figma_app/703988";
 import { Bx, Wu } from "../905/221848";
@@ -681,7 +681,7 @@ function eI(e) {
     eL(searchFilter(eN));
   }, [eN, searchFilter]);
   let eG = useRef(null);
-  let ez = je().data?.length ?? 0;
+  let ez = useSubscribedLibraries().data?.length ?? 0;
   let {
     getConfig
   } = selectExperimentConfigHook("exp_asset_search_refactor", void 0, !0);

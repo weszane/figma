@@ -319,7 +319,7 @@ import { selectOpenFile, useCurrentFileKey, openFileTeamAtom, selectCurrentFile,
 import { s as _$$s } from '../figma_app/523506';
 import { oz as _$$oz, c0, fu } from '../figma_app/538006';
 import { BY as _$$BY, nF as _$$nF, rO as _$$rO, jR, k5, Mz, uP } from '../figma_app/541950';
-import { Cb, U5, yy } from '../figma_app/543529';
+import { useIsUserGuestInOrg, useHasUserPermissionInOrg, useParentOrgOfOpenFile } from '../figma_app/543529';
 import { c as _$$c, lc as _$$lc, G4, Hl, T1, UF } from '../figma_app/545293';
 import { S as _$$S3 } from '../figma_app/552746';
 import { Qi } from '../figma_app/559491';
@@ -339,7 +339,7 @@ import { DP as _$$DP, xk as _$$xk } from '../figma_app/612859';
 import { R as _$$R2 } from '../figma_app/612938';
 import { processImageWithThumbnail } from '../figma_app/624361';
 import { i0 as _$$i3, JT as _$$JT, OZ, UW, wC } from '../figma_app/632248';
-import { eD as _$$eD, ET } from '../figma_app/646357';
+import { resolveFileParentOrgId, getSubscribedAssetKeys } from '../figma_app/646357';
 import { cd, ZI } from '../figma_app/650460';
 import { filterNotNullish, shuffle } from '../figma_app/656233';
 import { S6, zY } from '../figma_app/664693';
@@ -842,11 +842,11 @@ async function tb(e) {
     selectedView: _$$h4(t),
     inDesignEditor: s,
     fileVersion: r,
-    currentOrgId: _$$eD(t),
+    currentOrgId: resolveFileParentOrgId(t),
     fileByKey: _$$t_(t),
     libraryByLibraryKey: o,
     includeVisualAssets: !1,
-    usedAssetKeys: ET(t, debugState.dispatch)
+    usedAssetKeys: getSubscribedAssetKeys(t, debugState.dispatch)
   };
   YG.refreshSourcesIfNeeded(debugState);
   let d = await YG.computeResultsReduxSearchTypeHelper(e, a, s, o, null);
@@ -7729,7 +7729,7 @@ function ov() {
     }, [e, t]);
   }();
   let r = useDispatch();
-  let o = yy();
+  let o = useParentOrgOfOpenFile();
   let l = useAtomWithSubscription(openFileTeamAtom);
   let d = getI18nString('qa.no_ai.title');
   switch (reason) {
@@ -8892,7 +8892,7 @@ function oH({
   canViewWidgets: i
 }) {
   let r = useCurrentUserOrg();
-  let s = Cb();
+  let s = useIsUserGuestInOrg();
   let o = useMemo(() => ({
     [BY.ALL]: getI18nString('qa.filter.all'),
     [BY.PLUGINS]: getI18nString('qa.filter.plugins'),
@@ -10128,7 +10128,7 @@ function dv({
             throwTypeError(e);
         }
       }(getEditorTypeOrNull());
-      let i = U5();
+      let i = useHasUserPermissionInOrg();
       let r = useCurrentUserOrgId() ?? void 0;
       let [{
         status: n,

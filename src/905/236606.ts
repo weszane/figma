@@ -15,7 +15,7 @@ import { kt } from "../figma_app/711907";
 import { G6, P1 } from "../905/246310";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { je } from "../figma_app/155728";
+import { useSubscribedLibraries } from "../figma_app/155728";
 import { eT } from "../figma_app/617506";
 import { ON, gs } from "../figma_app/31103";
 import { hideModalHandler, showModal } from "../905/156213";
@@ -72,7 +72,7 @@ function O({
   let a = e.variables[0];
   let s = i?.name;
   let o = function (e) {
-    let t = je();
+    let t = useSubscribedLibraries();
     return useMemo(() => "loaded" === t.status && e ? t.data.find(t => e === t.libraryKey) : null, [e, t.status, t.data]);
   }(a?.subscriptionStatus === "SUBSCRIBED" ? a?.library_key : void 0);
   let l = o ? o.name : getI18nString("dev_handoff.variables.suggested_variables.library_not_found");
@@ -170,7 +170,7 @@ let L = registerModal(function (e) {
 let U = parsePxNumber(ZGX);
 let B = registerModal(function (e) {
   eT();
-  let t = je();
+  let t = useSubscribedLibraries();
   let i = useDispatch();
   let o = useCallback(() => {
     i(hideModalHandler());

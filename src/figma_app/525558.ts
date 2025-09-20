@@ -4,7 +4,7 @@ import { KeyCodes } from "../905/63728";
 import { M3, dP } from "../figma_app/119475";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
-import { ON, Yv } from "../figma_app/644808";
+import { SectionType, ButtonType } from "../figma_app/644808";
 import { sN, Qk, t7 } from "../figma_app/188908";
 import { wV, S5 } from "../figma_app/647246";
 import { e as _$$e } from "../figma_app/522702";
@@ -75,8 +75,8 @@ let E = () => {
     keyboardNavigationItem,
     isFocused
   } = M3({
-    path: [ON.BREADCRUMB],
-    column: Yv.BACK
+    path: [SectionType.BREADCRUMB],
+    column: ButtonType.BACK
   });
   let n = useRef(!1);
   let a = useCallback(() => {

@@ -1,9 +1,9 @@
 import { permissionScopeHandler } from '../905/189185';
 import { isNotNullish } from '../figma_app/95419';
 import { hasContent } from '../figma_app/427318';
-import { x } from '../figma_app/639711';
+import { AssetCategoryEnum } from '../figma_app/639711';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
-import { Ez } from '../figma_app/766708';
+import { compareNumbers } from '../figma_app/766708';
 let $$d2 = 3;
 let c = [SocialMediaFormats.FACEBOOK_AD_PORTRAIT, SocialMediaFormats.INSTA_POST_PORTRAIT, SocialMediaFormats.LINKEDIN_POST_PORTRAIT, SocialMediaFormats.LINKEDIN_POST_LANDSCAPE, SocialMediaFormats.LINKEDIN_AD_SQUARE, SocialMediaFormats.LINKEDIN_AD_VERTICAL, SocialMediaFormats.GOOGLE_MOBILE_BANNER_AD, SocialMediaFormats.GOOGLE_SKYSCRAPER_AD, SocialMediaFormats.PRINT_US_LETTER, SocialMediaFormats.POSTER, SocialMediaFormats.BANNER_STANDARD, SocialMediaFormats.BANNER_WIDE, SocialMediaFormats.BANNER_ULTRAWIDE, SocialMediaFormats.NAME_TAG_PORTRAIT, SocialMediaFormats.NAME_TAG_LANDSCAPE, SocialMediaFormats.INSTA_REEL_COVER, SocialMediaFormats.ZOOM_BACKGROUND, SocialMediaFormats.TIKTOK_POST];
 export function $$_0({
@@ -94,12 +94,12 @@ export function $$m4({
       AppStateTsApi?.cooperFocusView().panToNodeIfOutsideViewport(u, 0.6);
     }, 0), SceneGraphHelpers?.replaceSelection([u], !1)));
     e === SocialMediaFormats.CUSTOM && o(!0);
-    e !== SocialMediaFormats.CUSTOM && s && d && (s(x.TEMPLATES), c.includes(e) || d(!0));
+    e !== SocialMediaFormats.CUSTOM && s && d && (s(AssetCategoryEnum.TEMPLATES), c.includes(e) || d(!0));
     t();
   });
 }
 export function $$p3(e, t) {
-  return isNotNullish(e.sort_position) && isNotNullish(t.sort_position) ? -Ez(e.sort_position, t.sort_position) : e.name.localeCompare(t.name);
+  return isNotNullish(e.sort_position) && isNotNullish(t.sort_position) ? -compareNumbers(e.sort_position, t.sort_position) : e.name.localeCompare(t.name);
 }
 export const AO = $$_0;
 export const Kq = $$u1;

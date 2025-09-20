@@ -18,7 +18,7 @@ import { Z } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey } from "../figma_app/516028";
-import { Av, Dg, eS, aD } from "../figma_app/646357";
+import { getAssetKey, getAssetVersion, useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { isNodeNotVisible, getStylePublishInfoSelector, $4, selectLocalStylesWithUsagesOnLoadedPages } from "../figma_app/889655";
 import { bd } from "../905/557338";
@@ -34,8 +34,8 @@ function D(e, t, i) {
   if (!n) return null;
   let r = n.instanceIdsToUpdate[t];
   return r ? {
-    assetKey: Av(n.updateAsset),
-    assetVersion: Dg(n.updateAsset) ?? o5.INVALID,
+    assetKey: getAssetKey(n.updateAsset),
+    assetVersion: getAssetVersion(n.updateAsset) ?? o5.INVALID,
     instanceId: r,
     name: n.updateAsset.name,
     type: n.updateAsset.type
@@ -99,14 +99,14 @@ export function $$F1(e) {
   let p = useRef((() => {
     if (!i) return [];
     let t = [];
-    let n = u[Av(i)];
+    let n = u[getAssetKey(i)];
     t.push(n);
     "INSTANCE_PANEL" === e.source && n.instanceIdsToUpdate.sort((t, i) => {
       let n = e.instanceAndSublayerGUIDs.indexOf(getSingletonSceneGraph().guidFromDeveloperFriendlyId(t));
       let r = e.instanceAndSublayerGUIDs.indexOf(getSingletonSceneGraph().guidFromDeveloperFriendlyId(i));
       return n === r ? 0 : -1 === n ? 1 : -1 === r ? -1 : n - r;
     });
-    return Object.entries(u).reduce((e, [t, n]) => (t === Av(i) || e.push(n), e), t);
+    return Object.entries(u).reduce((e, [t, n]) => (t === getAssetKey(i) || e.push(n), e), t);
   })()).current;
   let {
     innerArrayLength,
@@ -161,7 +161,7 @@ export function $$M8(e, t, i, a, o) {
     let t = useDispatch();
     let [i, a] = useState(Ok());
     let s = useRef(null);
-    let o = `${Av(e)}/${Dg(e)}`;
+    let o = `${getAssetKey(e)}/${getAssetVersion(e)}`;
     useEffect(() => {
       s.current !== o && (s.current = o, a(ux()), t(uP({
         item: e,
@@ -295,7 +295,7 @@ function U(e, t, i, a) {
       c([i, i]);
       return;
     }
-    let n = [t.instanceId, t.assetKey, t.assetVersion, Av(e), Dg(e)].join("/");
+    let n = [t.instanceId, t.assetKey, t.assetVersion, getAssetKey(e), getAssetVersion(e)].join("/");
     if (m.current === n) return;
     m.current = n;
     let r = a.get(n);
@@ -321,7 +321,7 @@ function U(e, t, i, a) {
   return d;
 }
 export function $$B0(e, t, i) {
-  let r = eS(aD.ALL);
+  let r = useSubscribedAssets(AssetFilterMode.ALL);
   let {
     updateStyle
   } = se(r, void 0, i);

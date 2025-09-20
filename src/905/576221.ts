@@ -2,7 +2,7 @@ import { throwError } from "../figma_app/465776";
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
-import { lg, Hb, zE, X7 } from "../figma_app/646357";
+import { isNewOrChangedOrDeleted, isActiveStagingStatus, hasAssetError, mapAssetsToKeys } from "../figma_app/646357";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { O } from "../905/566074";
 import { PublishStatusEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
@@ -79,7 +79,7 @@ class m {
         let t = e.status;
         if (t === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) return A;
-        } else if (lg(t) && this.publishItem(e, A)) return A;
+        } else if (isNewOrChangedOrDeleted(t) && this.publishItem(e, A)) return A;
       }
       let T = function (e) {
         let t = new Map();
@@ -99,7 +99,7 @@ class m {
         let t = e.status;
         let i = e.node_id;
         let n = T.get(i) ?? [];
-        if (!Hb(t)) {
+        if (!isActiveStagingStatus(t)) {
           if (t === StagingStatusEnum.DELETED && this.unpublishItem(e, A)) return A;
           for (let e of n) {
             let t = e.status !== StagingStatusEnum.NOT_STAGED && e.status !== StagingStatusEnum.NEW;
@@ -107,7 +107,7 @@ class m {
           }
           continue;
         }
-        if (zE(e)) continue;
+        if (hasAssetError(e)) continue;
         let r = new Set(n.map(e => e.node_id));
         for (let e of n) if (!g(e, C, _?.forcePublish) && r.has(e.node_id) && this.publishItem(e, A)) return A;
         if (this.publishItem(e, A)) return A;
@@ -119,8 +119,8 @@ class m {
         }
         if (this.publishItem(e, A)) return A;
       }
-      let R = new Set(X7(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH]).filter(e => !!e));
-      let N = new Set(X7(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH]).filter(e => !!e));
+      let R = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH]).filter(e => !!e));
+      let N = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH]).filter(e => !!e));
       for (let e of []) if (!R.has(e.component_key) && !N.has(e.component_key) && this.unpublishItem(t[e.node_id], A)) return A;
       for (let e of x) if (e.status !== StagingStatusEnum.NOT_STAGED) {
         if (e.key && e.status === StagingStatusEnum.DELETED) {
@@ -146,7 +146,7 @@ class m {
       for (let e of w) if (O(e.type)) {
         if (e.status === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) break;
-        } else if (lg(e.status) && this.publishItem(e, A)) break;
+        } else if (isNewOrChangedOrDeleted(e.status) && this.publishItem(e, A)) break;
       }
       return A;
     };
@@ -163,7 +163,7 @@ export function $$f0(e) {
   return !e.some(e => [StagingStatusEnum.CURRENT, StagingStatusEnum.CHANGED, StagingStatusEnum.NEW].includes(e.status));
 }
 export function $$_1(e, t) {
-  return Object.values(e).filter(e => p(e, t)).every(e => !Hb(e.status));
+  return Object.values(e).filter(e => p(e, t)).every(e => !isActiveStagingStatus(e.status));
 }
 export const Ol = $$f0;
 export const aB = $$_1;

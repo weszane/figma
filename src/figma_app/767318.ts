@@ -20,7 +20,7 @@ import { showModalHandler } from "../905/156213";
 import { UK } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { U as _$$U } from "../905/506188";
+import { getLibraryNames } from "../905/506188";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { LibraryTabEnum } from "../figma_app/633080";
@@ -190,7 +190,7 @@ export function $$G0(e) {
         return c()({}, D, e);
       }
     }, [M, e, D]);
-    let G = _$$U(p()(U, e => e.libraryKey ?? $$B1));
+    let G = getLibraryNames(p()(U, e => e.libraryKey ?? $$B1));
     let H = useMemo(() => Object.entries(U).reduce((e, [t, r]) => {
       if (O[t]) return e;
       let n = $$B1;

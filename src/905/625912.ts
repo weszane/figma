@@ -17,7 +17,7 @@ import { c1 } from "../905/589717";
 import { HJx, EJM, hVg, k$X } from "../figma_app/27776";
 import { l3, _Y, A9, fQ } from "../905/721983";
 import { throwTypeError } from "../figma_app/465776";
-import { PZ } from "../figma_app/766708";
+import { asciiStringToFloat } from "../figma_app/766708";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { y as _$$y } from "../905/829723";
 import { bU } from "../figma_app/841197";
@@ -243,7 +243,7 @@ function Y({
     width: "hug-contents",
     children: [jsx("span", {
       className: B.$,
-      children: PZ(e)
+      children: asciiStringToFloat(e)
     }), jsxs("span", {
       className: z.$,
       children: ["(compressed: `", e, "`)"]

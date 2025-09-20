@@ -7,7 +7,7 @@ import { logError, logInfo } from "../905/714362";
 import { editorTypeAtom } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { openFileKeyAtom } from "../figma_app/516028";
-import { $p } from "../figma_app/155728";
+import { SubscribedLibrariesAtom } from "../figma_app/155728";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -30,7 +30,7 @@ async function v({
     let r = atomStoreManager.get(openFileKeyAtom) ?? void 0;
     let l = atomStoreManager.get(editorTypeAtom);
     if (!r || l !== FEditorType.Design) return;
-    let E = atomStoreManager.get($p);
+    let E = atomStoreManager.get(SubscribedLibrariesAtom);
     if (!E) return;
     let x = new Set(E.map(e => e.libraryKey));
     let S = t.componentKey ?? t.stateGroupKey;

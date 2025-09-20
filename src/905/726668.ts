@@ -1,63 +1,80 @@
-import { useMemo, useRef } from "react";
-import { isNotNullish } from "../figma_app/95419";
-import { l as _$$l } from "../905/716947";
-import { getFeatureFlags } from "../905/601108";
-import { resourceUtils } from "../905/989992";
-import l from "../vendor/239910";
-import { useSubscription, useMultiSubscription } from "../figma_app/288654";
-import { logError } from "../905/714362";
-import { LibraryMetadataByLibraryKey } from "../figma_app/43951";
-var d = l;
-export function $$m1(e, {
-  enabled: t = !0
-} = {}) {
-  let i = useSubscription(LibraryMetadataByLibraryKey, {
-    libraryKey: e
-  }, {
-    enabled: t
-  });
-  return useMemo(() => i.transform(g), [i]);
+import { keyBy } from 'lodash-es'
+import { useMemo, useRef } from 'react'
+import { getFeatureFlags } from '../905/601108'
+
+import { logError } from '../905/714362'
+import { resourceUtils } from '../905/989992'
+import { LibraryMetadataByLibraryKey } from '../figma_app/43951'
+import { isNotNullish } from '../figma_app/95419'
+import { useMultiSubscription, useSubscription } from '../figma_app/288654'
+
+/**
+ * Transforms library metadata into a standardized object.
+ * Original function name: g
+ * @param metadata - The library metadata object.
+ * @param errorSet - Set to track libraries with errors.
+ * @returns The transformed library object or null.
+ */
+function transformLibraryMetadata(metadata: any, errorSet?: Set<string>): any {
+  if (!metadata.libraryKeyToFile) {
+    return null
+  }
+  const { file, hubFile, libraryKey } = metadata.libraryKeyToFile
+  if (hubFile?.currentHubFileVersion) {
+    return {
+      libraryKey,
+      isHubFile: true,
+      name: hubFile.currentHubFileVersion.name,
+      thumbnailUrl: hubFile.thumbnailUrl,
+    }
+  }
+  if (file) {
+    return {
+      libraryKey,
+      isHubFile: false,
+      name: file.name,
+      thumbnailUrl: file.thumbnailUrl,
+      thumbnailUrlOverride: file.thumbnailUrlOverride,
+      thumbnailGuid: file.thumbnailGuid,
+    }
+  }
+  // Log error if library not found and feature flag is enabled
+  if (!errorSet?.has(libraryKey) && getFeatureFlags().dse_lk_library_metadata_sentry) {
+    logError('designSystems', 'Unexpectedly failed to access library by key', { libraryKey }, { reportAsSentryError: true })
+    errorSet?.add(libraryKey)
+  }
+  return null
 }
-export function $$h0(e, {
-  enabled: t = !0
-} = {}) {
-  let i = useMemo(() => e.map(e => ({
-    libraryKey: e
-  })), [e]);
-  let a = useMultiSubscription(LibraryMetadataByLibraryKey, i, {
-    enabled: t
-  });
-  let s = useRef(new Set([]));
-  return useMemo(() => resourceUtils.all(a.map(e => e.result)).transform(e => {
-    let t = e.map(e => g(e, s.current)).filter(isNotNullish);
-    return d()(t, e => e.libraryKey);
-  }), [a]);
+
+/**
+ * Hook to get library metadata for a single library key.
+ * Original function name: $$m1
+ * @param libraryKey - The key of the library.
+ * @param options - Options including enabled flag.
+ * @returns The transformed library metadata.
+ */
+export function useLibraryMetadata(libraryKey: string, { enabled = true } = {}) {
+  const subscription = useSubscription(LibraryMetadataByLibraryKey, { libraryKey }, { enabled })
+  return useMemo(() => subscription.transform(data => transformLibraryMetadata(data)), [subscription])
 }
-function g(e, t) {
-  if (!e.libraryKeyToFile) return null;
-  let {
-    file,
-    hubFile,
-    libraryKey
-  } = e.libraryKeyToFile;
-  let o = _$$l(libraryKey);
-  return hubFile?.currentHubFileVersion ? {
-    libraryKey: o,
-    isHubFile: !0,
-    name: hubFile.currentHubFileVersion.name,
-    thumbnailUrl: hubFile.thumbnailUrl
-  } : file ? {
-    libraryKey: o,
-    isHubFile: !1,
-    name: file.name,
-    thumbnailUrl: file.thumbnailUrl,
-    thumbnailUrlOverride: file.thumbnailUrlOverride,
-    thumbnailGuid: file.thumbnailGuid
-  } : (t?.has(libraryKey) || (e.libraryKeyToFile && getFeatureFlags().dse_lk_library_metadata_sentry && logError("designSystems", "Unexpectedly failed to access library by key", {
-    libraryKey
-  }, {
-    reportAsSentryError: !0
-  }), t?.add(libraryKey)), null);
+
+/**
+ * Hook to get library metadata for multiple library keys.
+ * Original function name: $$h0
+ * @param libraryKeys - Array of library keys.
+ * @param options - Options including enabled flag.
+ * @returns Object keyed by library key with transformed metadata.
+ */
+export function useMultipleLibraryMetadata(libraryKeys: string[], { enabled = true } = {}) {
+  const keys = useMemo(() => libraryKeys.map(key => ({ libraryKey: key })), [libraryKeys])
+  const subscriptions = useMultiSubscription(LibraryMetadataByLibraryKey, keys, { enabled })
+  const errorSet = useRef(new Set<string>())
+  return useMemo(() => resourceUtils.all(subscriptions.map(sub => sub.result)).transform((results) => {
+    const transformed = results.map(result => transformLibraryMetadata(result, errorSet.current)).filter(isNotNullish)
+    return keyBy(transformed, item => item.libraryKey)
+  }), [subscriptions])
 }
-export const V = $$h0;
-export const e = $$m1;
+
+// Exported with original names for compatibility
+export const V = useMultipleLibraryMetadata
+export const e = useLibraryMetadata

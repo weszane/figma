@@ -6,7 +6,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { qp } from "../905/977779";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useFileLibraryKeys } from "../figma_app/516028";
-import { cU } from "../figma_app/646357";
+import { fetchUnpublishedStyles } from "../figma_app/646357";
 import { getParentOrgId } from "../905/872904";
 import { liveStoreInstance } from "../905/713695";
 import { EverPublishedLibraryQuery } from "../905/404538";
@@ -42,7 +42,7 @@ let $$I1 = D(() => {
   let k = useSelector(_);
   let R = useHasResourcePresetKey();
   useEffect(() => {
-    x !== T && Promise.all([cU(g, x, k, w, I, C, e), liveStoreInstance.fetch(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
+    x !== T && Promise.all([fetchUnpublishedStyles(g, x, k, w, I, C, e), liveStoreInstance.fetch(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
       libraryKeys: E
     }))]).then(([{
       usedStylesByLibraryKey: e

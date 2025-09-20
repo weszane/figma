@@ -11,17 +11,17 @@ import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
 import { PrimaryWorkflowEnum as _$$PW } from "../905/497152";
 import { RG, pz, yP } from "../figma_app/825489";
-import { sC } from "../905/395857";
+import { propertyMappers } from "../905/395857";
 import { isNotNullish } from "../figma_app/95419";
 import x from "../vendor/239910";
 import { conditionalFeatureFlag } from "../figma_app/169182";
-import { Q_ } from "../figma_app/646357";
+import { areFramesEqual } from "../figma_app/646357";
 import { StagingStatusEnum, PrimaryWorkflowEnum as _$$PW2, LibrarySourceEnum } from "../figma_app/633080";
 function _({
   libraryKey: e,
   assetType: t
 }) {
-  let i = sC[t];
+  let i = propertyMappers[t];
   return I({
     libraryKey: e,
     assetType: t,
@@ -166,7 +166,7 @@ function N(e, t, i = O, n = null) {
   });
 }
 function P(e, t) {
-  return conditionalFeatureFlag("ds_user_facing_version_publishing", e.userFacingVersion !== t.userFacingVersion, e.version !== t.version) || Q_(e.containingFrame, t.containingFrame);
+  return conditionalFeatureFlag("ds_user_facing_version_publishing", e.userFacingVersion !== t.userFacingVersion, e.version !== t.version) || areFramesEqual(e.containingFrame, t.containingFrame);
 }
 function O(e, t, i = P) {
   return e && e.isPublishable && !e.isSoftDeleted ? t ? i(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NEW : t ? StagingStatusEnum.DELETED : StagingStatusEnum.NOT_STAGED;

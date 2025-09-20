@@ -17,7 +17,7 @@ import { compareWithGeneratedKey } from "../905/709171";
 import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
 import { qp } from "../905/977779";
-import { X0, A0, WV, Gg, ET } from "../figma_app/646357";
+import { getNonDeletedAssets, getPublishedAssetsForDefaultPublished, filterAssetsWithContainingStateGroup, addStateNamesToAssets, getSubscribedAssetKeys } from "../figma_app/646357";
 import { isLoaded } from "../905/18797";
 import { KH } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
@@ -113,11 +113,11 @@ let $$G0 = new class extends M {
             }));
           }
         };
-        s(X0(n));
-        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (s(A0(t.library, memoizedProcessLocalComponents(t.library.defaultPublished.componentsByLibraryKey), i, this.subscribedLibraryKeys)), s(A0(t.library, t.library.defaultPublished.stateGroupsByLibraryKey, i, this.subscribedLibraryKeys)));
-        let o = Object.values(WV(t.library.local.components));
+        s(getNonDeletedAssets(n));
+        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (s(getPublishedAssetsForDefaultPublished(t.library, memoizedProcessLocalComponents(t.library.defaultPublished.componentsByLibraryKey), i, this.subscribedLibraryKeys)), s(getPublishedAssetsForDefaultPublished(t.library, t.library.defaultPublished.stateGroupsByLibraryKey, i, this.subscribedLibraryKeys)));
+        let o = Object.values(filterAssetsWithContainingStateGroup(t.library.local.components));
         let l = Object.values(t.library.local.stateGroups);
-        s(Gg(l, o));
+        s(addStateNamesToAssets(l, o));
         e.set(r);
       })(V, processLocalComponents(t.library.local.components));
     };
@@ -145,7 +145,7 @@ let $$G0 = new class extends M {
       let g;
       let f = B0();
       let A = debugState.getState();
-      let y = ET(A, debugState.dispatch);
+      let y = getSubscribedAssetKeys(A, debugState.dispatch);
       let {
         elapsedTime: _elapsedTime,
         backgrounded: _backgrounded

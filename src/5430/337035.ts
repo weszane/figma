@@ -16,7 +16,7 @@ import { hJ, XY } from "../905/506641";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
-import { Yo } from "../figma_app/543529";
+import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { useAllowlistedPlugins, useAllowlistedWidgets } from "../figma_app/844435";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { k as _$$k2 } from "../905/882646";
@@ -42,7 +42,7 @@ export function $$M0({
   let B = M?.widgetsWhitelistEnforced || null;
   let D = M?.pluginsWhitelistEnforced || null;
   let F = M?.key.type === FOrganizationLevelType.ORG;
-  let H = Yo();
+  let H = useCurrentOrgAdminInfo();
   let U = useCurrentPlanUser("PluginTryButton");
   let V = useIsOrgAdminUser(U).unwrapOr(!1);
   let W = useAuthedActiveCommunityProfile();

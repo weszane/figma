@@ -21,12 +21,12 @@ import { yesNoTrackingEnum } from '../figma_app/198712';
 import { p as _$$p } from '../figma_app/304289';
 import { fullscreenValue } from '../figma_app/455680';
 import { SceneGraphHelpers, VariableResolvedDataType, VariableDataType } from '../figma_app/763686';
-import { e6, Ez, hu, kI, TZ } from '../figma_app/766708';
+import { nextAsciiString, compareNumbers, previousAsciiString, midpointAsciiString, separatorChar } from '../figma_app/766708';
 import { _j, ap, rU } from '../figma_app/843119';
 import { collectionService } from '../figma_app/872077';
 import { oj } from '../figma_app/986594';
 function O(e) {
-  return e.sort((e, t) => Ez(t.position, e.position));
+  return e.sort((e, t) => compareNumbers(t.position, e.position));
 }
 export function $$R3(e) {
   return function (e, t) {
@@ -129,7 +129,7 @@ function M(e, t, r, n = {}) {
     name,
     fieldType: e,
     required: !!n.hasOwnProperty('required') && !!n.required,
-    position: t ? e6(t) : TZ,
+    position: t ? nextAsciiString(t) : separatorChar,
     properties: s,
     action: 'create',
     version: '1'
@@ -151,7 +151,7 @@ export function $$F0(e) {
           type: 'string',
           fieldType: _j.PLAIN_TEXT,
           required: !0,
-          position: TZ,
+          position: separatorChar,
           properties: {},
           version: '1',
           id: e,
@@ -162,7 +162,7 @@ export function $$F0(e) {
           type: 'string',
           required: !0,
           fieldType: _j.SLUG,
-          position: e6(TZ),
+          position: nextAsciiString(separatorChar),
           properties: {},
           version: '1',
           id: t,
@@ -233,19 +233,19 @@ export function $$F0(e) {
         let s = n[a];
         if (r === Nz.BEFORE) {
           if (a === 0) {
-            i = hu(s.position);
+            i = previousAsciiString(s.position);
           } else {
             let e = n[a - 1];
             if (!e) return n;
-            i = kI(e.position, s.position);
+            i = midpointAsciiString(e.position, s.position);
           }
         } else if (r === Nz.AFTER) {
           if (a === n.length - 1) {
-            i = e6(s.position);
+            i = nextAsciiString(s.position);
           } else {
             let e = n[a + 1];
             if (!e) return n;
-            i = kI(s.position, e.position);
+            i = midpointAsciiString(s.position, e.position);
           }
         }
         return O(n.map(t => t.id === e ? {

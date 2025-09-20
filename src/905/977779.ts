@@ -5,7 +5,7 @@ import s from "../vendor/239910";
 import { debugState } from "../905/407919";
 import { yZ } from "../figma_app/476572";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { ov, Av } from "../figma_app/646357";
+import { getAssetsForNodeIds, getAssetKey } from "../figma_app/646357";
 import { k1, vx } from "../905/91038";
 import { O } from "../905/221694";
 import { subscribedSymbolsFromLoadedPagesSelector, subscribedStateGroupsFromLoadedPagesSelector } from "../figma_app/141508";
@@ -56,9 +56,9 @@ let x = atom(e => {
     components: e(f),
     stateGroups: e(_)
   };
-  return ov(t, i, n, a, e(E), debugState.dispatch);
+  return getAssetsForNodeIds(t, i, n, a, e(E), debugState.dispatch);
 });
-let $$S0 = mg(x, e => new Set(e.map(e => Av(e))), yZ);
+let $$S0 = mg(x, e => new Set(e.map(e => getAssetKey(e))), yZ);
 export const hN = $$S0;
 export const oE = $$I1;
 export const qp = $$v2;

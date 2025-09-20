@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/351112";
 import { Xt } from "../figma_app/399472";
 import { showModalHandler } from "../905/156213";
 import { TrackingContext } from "../figma_app/831799";
-import { Yo } from "../figma_app/543529";
+import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPluginVersion } from "../figma_app/300692";
 import { ViewMode } from "../figma_app/756995";
@@ -21,7 +21,7 @@ import { i1 } from "../905/417669";
 import { p as _$$p } from "../figma_app/93911";
 export function $$v0() {
   let e = useSelector(e => e.publishedPlugins);
-  let t = Yo();
+  let t = useCurrentOrgAdminInfo();
   let r = _$$S(e, t?.id);
   let i = useDispatch();
   return (_$$h(() => {

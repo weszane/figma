@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { handleAtomEvent } from "../905/502364";
-import { Lk, x as _$$x } from "../figma_app/639711";
+import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
 import { dX } from "../905/294543";
 import { getCodegenLanguagePreference } from "../905/515076";
 import { createOptimistThunk } from "../905/350402";
@@ -172,7 +172,7 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
       });
       return;
     case FEditorType.Cooper:
-      getFeatureFlags().buzz_plugins && (atomStoreManager.set(Lk, _$$x.PLUGINS), _$$s({
+      getFeatureFlags().buzz_plugins && (atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS), _$$s({
         ...Y,
         initialFdResourceTab: _$$s2.PLUGIN,
         fdPreviewResource: {

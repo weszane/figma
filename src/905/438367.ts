@@ -4,13 +4,13 @@ import { sortByWithOptions } from "../figma_app/656233";
 import { VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { generateUniqueKey } from "../905/383708";
 import { kiwiParserCodec } from "../905/294864";
 import { Rb, yp, kf, u5 } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Bh, oz } from "../figma_app/936646";
-import { ti, LX } from "../figma_app/646357";
+import { filterStylesByType, sortStyles } from "../figma_app/646357";
 import { isValidSolidFill } from "../905/405710";
 import { EU, KV } from "../905/255097";
 var d = l;
@@ -20,7 +20,7 @@ export function $$y2({
   let t = useSelector(e => e.library);
   let i = useCurrentFileKey();
   let o = Rb().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
-  let l = ti(t.local.styles, "FILL").length > 0;
+  let l = filterStylesByType(t.local.styles, "FILL").length > 0;
   return useMemo(() => {
     let t = [EU];
     return ((o || l) && t.push(KV), i) ? t.concat((() => {
@@ -68,8 +68,8 @@ export function $$v3() {
     variableCollection: o[e.variableSetId]
   })), [i, o]);
   let c = useMemo(() => {
-    let t = [...ti(e.local.styles, "FILL")];
-    LX(t);
+    let t = [...filterStylesByType(e.local.styles, "FILL")];
+    sortStyles(t);
     return t.filter(isValidSolidFill).map(e => ({
       type: "style",
       style: e
@@ -92,7 +92,7 @@ export function $$I1(e) {
     if (!i || !t) return resourceUtils.loaded([]);
     let e = resourceUtils.all([r, a]).transform(([e, t]) => {
       let i = d()(t, e => e.node_id);
-      return [...e].filter(e => e.resolvedType === VariableResolvedDataType.COLOR).sort((e, t) => Ez(e.sortPosition, t.sortPosition)).map(e => ({
+      return [...e].filter(e => e.resolvedType === VariableResolvedDataType.COLOR).sort((e, t) => compareNumbers(e.sortPosition, t.sortPosition)).map(e => ({
         type: "variable",
         variable: e,
         variableCollection: i[e.variableSetId]
@@ -100,7 +100,7 @@ export function $$I1(e) {
     });
     let n = y.transform(e => {
       let t = [...e].filter(isValidSolidFill);
-      LX(t);
+      sortStyles(t);
       return t.map(e => ({
         type: "style",
         style: e

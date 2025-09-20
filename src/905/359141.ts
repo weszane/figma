@@ -44,7 +44,7 @@ import { $ as _$$$2 } from '../905/455748';
 import { a as _$$a } from '../905/462280';
 import { formatI18nMessage } from '../905/482208';
 import { z as _$$z2 } from '../905/491916';
-import { B as _$$B2 } from '../905/506188';
+import { getLibraryName } from '../905/506188';
 import { l as _$$l } from '../905/509505';
 import { RR } from '../905/514666';
 import { dD } from '../905/519113';
@@ -111,7 +111,7 @@ import { h as _$$h2 } from '../figma_app/58251';
 import { assertNotNullish, isNotNullish } from '../figma_app/95419';
 import { M3 } from '../figma_app/119475';
 import { directlySubscribedStylesUniqueKeysAtom } from '../figma_app/141508';
-import { fi, je, Qh } from '../figma_app/155728';
+import { useUntransformedSubscribedLibraries, useSubscribedLibraries, LibrarySubscriptionType } from '../figma_app/155728';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { t as _$$t3 } from '../figma_app/162756';
 import { Qk } from '../figma_app/188908';
@@ -138,7 +138,7 @@ import { getCurrentTeam } from '../figma_app/598018';
 import { createTrackedAtom } from '../figma_app/615482';
 import { $z as _$$$z } from '../figma_app/617427';
 import { PublishStatusEnum, isTeamLibrary, isPublishedTeamLibrary, PrimaryWorkflowEnum, LibraryPublishStatusEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
-import { eS as _$$eS, aD, Av, Dg, Jc, sv, VJ } from '../figma_app/646357';
+import { useSubscribedAssets, AssetFilterMode, getAssetKey, getAssetVersion, LibrarySubscriptionContext, useCurrentUserOrg, getAssetLibraryKey } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { i as _$$i2 } from '../figma_app/709177';
 import { ig as _$$ig } from '../figma_app/713624';
@@ -312,7 +312,7 @@ function eo({
   positionForLogging: t,
   teamPositionForLogging: i
 }) {
-  let a = je();
+  let a = useSubscribedLibraries();
   let o = useMemo(() => {
     let t = a.data?.find(t => t.libraryKey === e.library_key);
     return t?.subscriptionType;
@@ -320,23 +320,23 @@ function eo({
   let [l, d] = _$$e(!1);
   let c = function (e, t) {
     let i = getCurrentTeam();
-    let n = sv();
+    let n = useCurrentUserOrg();
     let {
       workspaces
     } = zm();
     let o = i?.workspace_id;
     return useMemo(() => {
       let r;
-      if (t || !e || e === Qh.COMMUNITY) return null;
-      if (e === Qh.USER) return getI18nString('design_systems.libraries_modal.added_via_draft_defaults');
-      if (e === Qh.FILE) return getI18nString('design_systems.libraries_modal.added_by_file_editor');
-      if (e === Qh.TEAM) {
+      if (t || !e || e === LibrarySubscriptionType.COMMUNITY) return null;
+      if (e === LibrarySubscriptionType.USER) return getI18nString('design_systems.libraries_modal.added_via_draft_defaults');
+      if (e === LibrarySubscriptionType.FILE) return getI18nString('design_systems.libraries_modal.added_by_file_editor');
+      if (e === LibrarySubscriptionType.TEAM) {
         if (!i) return null;
         r = i.name;
-      } else if (e === Qh.ORGANIZATION) {
+      } else if (e === LibrarySubscriptionType.ORGANIZATION) {
         if (!n) return null;
         r = n.name;
-      } else if (e === Qh.WORKSPACE) {
+      } else if (e === LibrarySubscriptionType.WORKSPACE) {
         let e = workspaces.data?.find(e => e.id === o);
         if (!e) return null;
         r = e.name;
@@ -1412,7 +1412,7 @@ function e9() {
   });
 }
 function te() {
-  return assertNotNullish(sv(), 'org object should always be defined in library modal org tab');
+  return assertNotNullish(useCurrentUserOrg(), 'org object should always be defined in library modal org tab');
 }
 let tt = {
   has_user_workspace: !1,
@@ -1694,7 +1694,7 @@ function tm() {
     hasEntAccess,
     hasOrgAccess
   } = mG();
-  let i = assertNotNullish(sv(), 'org object should always be defined in library modal org tab');
+  let i = assertNotNullish(useCurrentUserOrg(), 'org object should always be defined in library modal org tab');
   let r = hasEntAccess && i.workspaces_count && i.workspaces_count > 0;
   assert(hasOrgAccess, 'Org tab should not render if user does not have org access');
   return jsx(ec, {
@@ -1730,7 +1730,7 @@ function tI() {
 function tE({
   recommendedLibraries: e
 }) {
-  let t = sv();
+  let t = useCurrentUserOrg();
   let i = getCurrentTeam();
   let a = i?.workspace_id;
   let o = _$$P2(t?.id ?? null, a);
@@ -1795,8 +1795,8 @@ function tS() {
       workspaceApprovedLibraryKeys,
       orgApprovedLibraryKeys
     } = Fl();
-    let i = fi();
-    let n = je();
+    let i = useUntransformedSubscribedLibraries();
+    let n = useSubscribedLibraries();
     let a = Qj();
     let s = ry();
     let o = _$$z();
@@ -2648,7 +2648,7 @@ function ib() {
   });
 }
 function iv() {
-  let e = je();
+  let e = useSubscribedLibraries();
   let t = ry();
   let i = y('tab_loaded');
   let a = useLatestRef(t);
@@ -2784,7 +2784,7 @@ function np({
   let {
     movedFromFileName
   } = e;
-  let p = useContext(Jc);
+  let p = useContext(LibrarySubscriptionContext);
   let {
     ref,
     kbArgs
@@ -2815,7 +2815,7 @@ function np({
               movedFromFileName
             })
           })
-        }), p !== aD.CURRENT && !!numOutdatedInstances && jsx('span', {
+        }), p !== AssetFilterMode.CURRENT && !!numOutdatedInstances && jsx('span', {
           className: nu,
           children: jsx(_$$R, {
             text: getI18nString('design_systems.updates.num_outdated_instances', {
@@ -2901,7 +2901,7 @@ function nh({
   let p = Oe(u);
   let m = useMemo(() => e.components.length > 0 ? e.components[0] : e.stateGroups.length > 0 ? e.stateGroups[0] : e.styles.length > 0 ? e.styles[0] : e.variableSets.length > 0 ? e.variableSets[0] : e.codeComponents.length > 0 ? e.codeComponents[0] : null, [e]);
   let h = R8({
-    assetKey: m != null ? Av(m) : void 0,
+    assetKey: m != null ? getAssetKey(m) : void 0,
     type: m?.type ?? PrimaryWorkflowEnum.COMPONENT
   });
   let g = useMemo(() => {
@@ -2909,7 +2909,7 @@ function nh({
     let e = getResourceDataOrFallback(h.data?.assetAttribution);
     return e?.type === FTeamType.TEAM ? e.handle : e?.type === FTeamType.COMMUNITY ? e.name : void 0;
   }, [h]);
-  let f = _$$B2(e.libraryKey).data ?? e.fileName;
+  let f = getLibraryName(e.libraryKey).data ?? e.fileName;
   return jsxs('div', {
     className: 'updates_checkpoint--updatesCheckpoint--jQNFh',
     children: [jsxs('div', {
@@ -3007,11 +3007,11 @@ function ny({
       variableSetUpdatesForAllPages,
       libraryAssetUpdatesForAllPages
     } = useAtomWithSubscription(S9);
-    let g = useMemo(() => new Set([...componentUpdatesForAllPages.map(e => `${e.component_key}/${e.content_hash}`), ...styleUpdatesForAllPages.map(e => `${e.key}/${e.content_hash}`), ...variableSetUpdatesForAllPages.map(e => `${e.key}/${e.version}`), ...libraryAssetUpdatesForAllPages.map(e => `${Av(e)}/${Dg(e)}`)]), [componentUpdatesForAllPages, styleUpdatesForAllPages, variableSetUpdatesForAllPages, libraryAssetUpdatesForAllPages]);
+    let g = useMemo(() => new Set([...componentUpdatesForAllPages.map(e => `${e.component_key}/${e.content_hash}`), ...styleUpdatesForAllPages.map(e => `${e.key}/${e.content_hash}`), ...variableSetUpdatesForAllPages.map(e => `${e.key}/${e.version}`), ...libraryAssetUpdatesForAllPages.map(e => `${getAssetKey(e)}/${getAssetVersion(e)}`)]), [componentUpdatesForAllPages, styleUpdatesForAllPages, variableSetUpdatesForAllPages, libraryAssetUpdatesForAllPages]);
     let f = useMemo(() => libraryAssetUpdatesForAllPages.map(e => {
-      let t = VJ(e);
+      let t = getAssetLibraryKey(e);
       return t ? {
-        key: Av(e),
+        key: getAssetKey(e),
         library_key: t
       } : null;
     }).filter(isNotNullish), [libraryAssetUpdatesForAllPages]);
@@ -3074,10 +3074,10 @@ function ny({
   let A = useAtomWithSubscription(openFileAtom);
   let y = A?.parentOrgId?.toString();
   let b = _.file_team_id?.toString();
-  let E = useContext(Jc) ?? aD.ALL;
+  let E = useContext(LibrarySubscriptionContext) ?? AssetFilterMode.ALL;
   let x = pk(E);
   let S = !useAtomWithSubscription(x);
-  let w = _$$eS(E);
+  let w = useSubscribedAssets(E);
   let {
     updateComponent,
     updateStateGroup,
@@ -3089,7 +3089,7 @@ function ny({
   let [F, M] = useState(!1);
   let j = useSelector(e => !!e.openFile && isLoading(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
   let U = useCurrentFileKey() || void 0;
-  let V = E === aD.ALL;
+  let V = E === AssetFilterMode.ALL;
   let [G, z] = useState(!1);
   let [W, K] = useState(null);
   _$$h(() => (trackEventAnalytics('updates_modal_opened', {
@@ -3138,7 +3138,7 @@ function ny({
     }
   }, [U, G, Y, V, W, c]);
   let Z = useCallback(() => {
-    i(aD.ALL);
+    i(AssetFilterMode.ALL);
     F || handleLoadAllPagesWithVersionCheck(PluginModalType.LIBRARY_UPDATES).then(() => {
       _$$J2(() => {
         Fullscreen.expandInstancesWithStyleOverrides();
@@ -3149,7 +3149,7 @@ function ny({
       });
     });
   }, [F, i]);
-  let X = useMemo(() => Y && S ? E === aD.ALL ? jsxs('div', {
+  let X = useMemo(() => Y && S ? E === AssetFilterMode.ALL ? jsxs('div', {
     className: nf,
     children: [jsx('div', {
       className: n_,
@@ -3203,7 +3203,7 @@ function ny({
       fileParentOrgId: y,
       fileTeamId: b
     });
-    e ? Z() : i(aD.CURRENT);
+    e ? Z() : i(AssetFilterMode.CURRENT);
   }, [U, y, b, i, Z]);
   let {
     ref: _ref,
@@ -3244,7 +3244,7 @@ function ny({
         updateStyle: e => updateStyle(e),
         updateVariableSet: e => updateVariableSet(e),
         updateCodeComponentAsset: updateLibraryAsset,
-        allPages: E === aD.ALL
+        allPages: E === AssetFilterMode.ALL
       })]
     }), jsxs('div', {
       className: 'updates--updateFooter--GiIYe',
@@ -3255,7 +3255,7 @@ function ny({
           label: jsx(Label, {
             children: renderI18nText('design_systems.updates.show_updates_for_all_pages')
           }),
-          checked: E === aD.ALL,
+          checked: E === AssetFilterMode.ALL,
           onChange: Q,
           disabled: !Y,
           ref: _ref
@@ -3290,10 +3290,10 @@ function nb({
   updateCodeComponentAsset: d,
   allPages: c
 }) {
-  let p = useContext(Jc);
+  let p = useContext(LibrarySubscriptionContext);
   let m = useMemo(() => {
     let i;
-    i = p ?? aD.ALL;
+    i = p ?? AssetFilterMode.ALL;
     return atom(n => {
       let r = n(function (e, t) {
         let i = Yy(t);
@@ -3323,7 +3323,7 @@ function nb({
       let m = n(_$$O);
       let h = {};
       let g = (t, i) => {
-        let n = VJ(i);
+        let n = getAssetLibraryKey(i);
         let r = compareLibraryKeyWithString({
           library_key: n
         }, c);
@@ -3366,7 +3366,7 @@ function nb({
       return iW()(Object.values(h), e => e.publishDate, 'desc');
     });
   }, [t, e, p]);
-  let h = pk(p ?? aD.ALL);
+  let h = pk(p ?? AssetFilterMode.ALL);
   let g = useAtomWithSubscription(h);
   let f = useAtomWithSubscription(m);
   let _ = useCallback(() => {
@@ -3448,7 +3448,7 @@ function nE() {
     initialUpdatesModalScope
   } = zm();
   let [o, d] = useState(initialUpdatesModalScope);
-  return jsx(Jc.Provider, {
+  return jsx(LibrarySubscriptionContext.Provider, {
     value: o,
     children: jsx(ny, {
       entrypoint,
@@ -3695,7 +3695,7 @@ export function $$nG0({
     entrypoint: e,
     initialTab: t,
     sessionId: d,
-    initialUpdatesModalScope: i ?? aD.CURRENT,
+    initialUpdatesModalScope: i ?? AssetFilterMode.CURRENT,
     modalRef: u,
     children: jsx(_$$S2, {
       children: jsx(_$$s, {

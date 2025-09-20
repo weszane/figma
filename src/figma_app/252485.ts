@@ -1,5 +1,6 @@
-import { FFileType } from "../figma_app/191312";
+import { FFileType } from '../figma_app/191312'
+
 export function $$i0(e) {
-  return e === FFileType.SLIDES;
+  return e === FFileType.SLIDES
 }
-export const f = $$i0;
+export const f = $$i0

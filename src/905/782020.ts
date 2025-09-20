@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { VariablesBindings, VariableDataType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "../vendor/626715";
-import { Ez } from "../figma_app/766708";
+import { compareNumbers } from "../figma_app/766708";
 import { normalizePath } from "../905/309735";
 import { g } from "../905/578436";
 import { F } from "../905/604606";
@@ -40,7 +40,7 @@ export function $$y7(e) {
         variables: []
       }
     };
-    for (let i of e.sort((e, t) => -Ez(e.sortPosition, t.sortPosition))) {
+    for (let i of e.sort((e, t) => -compareNumbers(e.sortPosition, t.sortPosition))) {
       let e = $$w6(i.name);
       t.hasOwnProperty(e) || (t[e] = {
         name: e,
@@ -114,7 +114,7 @@ export function $$N12(e, t) {
 function P(e, t) {
   let i = $$v5(e).sortPosition;
   let n = $$v5(t).sortPosition;
-  return -Ez(i, n);
+  return -compareNumbers(i, n);
 }
 export function $$O19(e, t, i, n) {
   let a;

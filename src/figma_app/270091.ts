@@ -51,7 +51,7 @@ import { u as _$$u } from "../905/290607";
 import { g5 } from "../figma_app/178752";
 import { useOpenFileLibraryKey, selectOpenFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { Gj, X0, Av, fc, El, Mb } from "../figma_app/646357";
+import { getAssetUniqueId, getNonDeletedAssets, getAssetKey, useIsAssetPublishedForCurrentFile, isTrackedState, generatePublishedComponentsCacheKey } from "../figma_app/646357";
 import { V as _$$V } from "../905/342732";
 import { Cn } from "../905/225265";
 import { YG } from "../905/921418";
@@ -59,7 +59,7 @@ import { ko } from "../figma_app/807786";
 import { isLoading, isLoaded } from "../905/18797";
 import { Oe } from "../figma_app/336853";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { He } from "../figma_app/155728";
+import { useSubscribedLibraryKeys } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
@@ -120,7 +120,7 @@ let eB = e => {
 };
 let eG = (e, t) => {
   let r = eB(t);
-  let i = Gj(e);
+  let i = getAssetUniqueId(e);
   return jsx(lX, {
     className: null === t ? Tv : B_,
     displayType: null === t ? "list-compact" : "grid",
@@ -213,7 +213,7 @@ function eW(e) {
   let ts = useMemo(() => preferredItems ? preferredItems.map(Kk) : [], [preferredItems]);
   let [to, tl, td] = useMemo(() => {
     if (e9 && (rootDrilldownItemsByLibraryKey[e9]?.length ?? 0) > 0) return [e9, rootDrilldownItemsByLibraryKey[e9], publishedLibraryItemsByLibraryKey[e9]];
-    if (te.length > 0) return [_$$l2(openFile.libraryKey), te, X0(memoizedProcessComponentsAndStateGroups(library))];
+    if (te.length > 0) return [_$$l2(openFile.libraryKey), te, getNonDeletedAssets(memoizedProcessComponentsAndStateGroups(library))];
     if (eY) {
       let e = Object.entries(rootDrilldownItemsByLibraryKey).find(([e, t]) => t.length > 0);
       if (e) {
@@ -241,7 +241,7 @@ function eW(e) {
   let th = useStore();
   let tm = Nv(!0);
   let tg = _$$S.useOpenFileProperties();
-  let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && compareLibraryKeyWithString(e.item, tc.libraryKey) && Av(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
+  let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && compareLibraryKeyWithString(e.item, tc.libraryKey) && getAssetKey(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
   let tE = useMemo(() => tc.type === iN.FILE ? tc.libraryKey === e4 ? {
     type: _$$I.LOCAL
   } : {
@@ -507,7 +507,7 @@ function eW(e) {
     onSwap: onSwapCallback,
     sourceForTracking: "Instance Swap Picker"
   });
-  let tY = He();
+  let tY = useSubscribedLibraryKeys();
   let t$ = CK();
   let tX = useCallback((e, r, n, i, a) => {
     if (!e3) return;
@@ -534,7 +534,7 @@ function eW(e) {
     let d = ko(o, e4 ?? _$$l2(""), tY);
     let c = {
       aiResultsEnabled: tm,
-      assetKey: Av(r.item),
+      assetKey: getAssetKey(r.item),
       position: i?.index,
       reciprocalRank: Et(i?.index) ? 1 / (1 + i?.index) : void 0,
       query: a?.query,
@@ -606,7 +606,7 @@ function eW(e) {
   let tJ = useCallback(e => {
     e && setTimeout(() => tq.current?.focus(), 0);
   }, []);
-  let tZ = fc();
+  let tZ = useIsAssetPublishedForCurrentFile();
   let tQ = jsxs(Fragment, {
     children: [jsx(_$$p, {
       ariaLabel: getI18nString("design_systems.instance_panel.swap_instance"),
@@ -778,7 +778,7 @@ function eW(e) {
   let t4 = useMemo(() => e9 ? publishedLibraryItemsByLibraryKey[e9] ?? null : null, [e9, publishedLibraryItemsByLibraryKey]);
   let t8 = function (e, t, r, n) {
     let a = useAtomWithSubscription(qp);
-    let s = useMemoStable(() => t ? new Set(t.map(e => Av(e))) : [], [t]);
+    let s = useMemoStable(() => t ? new Set(t.map(e => getAssetKey(e))) : [], [t]);
     let o = useMemoStable(() => {
       Object.keys(a);
     }, [a]);
@@ -786,7 +786,7 @@ function eW(e) {
     let d = _$$h(o);
     let c = _$$h(s);
     let u = _$$h(r) && !r;
-    let p = useStableMemo(useMemo(() => n.map(Av), [n]));
+    let p = useStableMemo(useMemo(() => n.map(getAssetKey), [n]));
     let _ = _$$h(p);
     return l || d || c || u || _;
   }(e9, t4, isLoadingSubscribedLibraries, selectedItems);
@@ -794,7 +794,7 @@ function eW(e) {
   _$$K2({
     otherLibraryKeys: t6
   });
-  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === iN.FILE ? validDropdownSelection.libraryKey !== e4 && !El("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === iN.RECENT ? isLoading(loadingState, fi) : validDropdownSelection.type === iN.PREFERRED ? isLoading(loadingState, _A(e3)) : isLoadingSubscribedLibraries || isLoading(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
+  let t7 = useMemo(() => !!libraryMetadataLoading || (validDropdownSelection.type === iN.FILE ? validDropdownSelection.libraryKey !== e4 && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", validDropdownSelection.libraryKey) : validDropdownSelection.type === iN.RECENT ? isLoading(loadingState, fi) : validDropdownSelection.type === iN.PREFERRED ? isLoading(loadingState, _A(e3)) : isLoadingSubscribedLibraries || isLoading(loadingState, fi)), [libraryMetadataLoading, isLoadingSubscribedLibraries, loadingState, validDropdownSelection, e3, e4]);
   _$$x(t7);
   let t9 = Object.keys(rootDrilldownItemsByLibraryKey).length > 0;
   return jsx(uO, {
@@ -887,11 +887,11 @@ export function $$eK1(e) {
   let O = useMemo(() => I ? I.library_key : null, [I]);
   let L = useMemo(() => O ?? getCommonLibraryKey(selectedItems) ?? selectedLibraryKey, [O, selectedItems, selectedLibraryKey]);
   let P = _$$U();
-  let D = fc();
+  let D = useIsAssetPublishedForCurrentFile();
   let k = useMemo(() => {
     if (null == x || null == w) return !0;
-    if (L && x && D(L) && !El("INVALID-FILE-KEY-SHOULD-BE-REMOVED", L)) {
-      let e = Mb(L);
+    if (L && x && D(L) && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", L)) {
+      let e = generatePublishedComponentsCacheKey(L);
       return !isLoaded(loadingState, e);
     }
     return C && L && L !== N ? isLoading(loadingState, _A(w)) : P;

@@ -93,7 +93,7 @@ import { getI18nState } from "../figma_app/363242";
 import { isNullish } from "../figma_app/95419";
 import { Q as _$$Q3 } from "../figma_app/67145";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Cl } from "../figma_app/334505";
+import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { ak } from "../figma_app/8833";
 import { e as _$$e2 } from "../905/579635";
 import { sA } from "../figma_app/841644";
@@ -2081,7 +2081,7 @@ function t4(e) {
   });
   let {
     hasInstanceSelected
-  } = Cl();
+  } = useCooperFrameSelectionInfo();
   let b = hasInstanceSelected || E !== SocialMediaFormats.CUSTOM;
   let S = useMemo(() => [variableField], [variableField]);
   return m ? jsx(re, {

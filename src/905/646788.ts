@@ -220,7 +220,7 @@ import { A as _$$A0 } from "../svg/619883";
 import rr from "classnames";
 import { nR as _$$nR2, vd as _$$vd } from "../figma_app/60079";
 import { sha1Hex } from "../905/125019";
-import { yy } from "../figma_app/543529";
+import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { _R } from "../figma_app/106207";
 import { yz } from "../905/784221";
 import { A as _$$A1 } from "../6828/829032";
@@ -4098,7 +4098,7 @@ function rg({
   file: e,
   template: t
 }) {
-  let i = yy();
+  let i = useParentOrgOfOpenFile();
   let s = getCurrentFileType();
   let o = useDispatch();
   let l = {

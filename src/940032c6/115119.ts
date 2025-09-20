@@ -741,7 +741,7 @@ import { wo as _$$wo } from '../figma_app/753501';
 import { c as _$$c5 } from '../figma_app/763535';
 import { AccessibilityAttributes, AppStateTsApi, ChatMessageType, CmsHelpers, CodeComponentHelper, Command, ComponentPropType, CustomPosition, DataLoadStatus, DesignGraphElements, DesignWorkspace, EqualityType, FontHelpers, FontSourceType, Fullscreen, GraphicObjectTypes, ImageExportType, InsertSourceType, ItemType, MatchType, MixedBlockType, Multiplayer, NodePropertyCategory, NodeTsApi, PanelType, PrototypingTsApi, SceneGraphHelpers, ScrollBehavior, SelectionPanelType, SideType, SitesBindingsCpp, SquareShapes, TextBlockType, TrackType, UIVisibilitySetting, UserInterfaceElements, VariableDataType, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { C as _$$C } from '../figma_app/765025';
-import { e6 as _$$e1, hu as _$$hu, kI as _$$kI, TZ as _$$TZ, Ez } from '../figma_app/766708';
+import { nextAsciiString, previousAsciiString, midpointAsciiString, separatorChar, compareNumbers } from '../figma_app/766708';
 import { getResourceName } from '../figma_app/777551';
 import { YW as _$$YW } from '../figma_app/778125';
 import { getIsAndroidOrIphoneNotFigmaMobile } from '../figma_app/778880';
@@ -13559,14 +13559,14 @@ let xE = memo(({
       switch (e.overIndex) {
         case -1:
           if (!(t = e.api.getDisplayedRowAtIndex(e.api.getDisplayedRowCount() - 1)?.data?.item.position)) break;
-          i = _$$e1(t);
+          i = nextAsciiString(t);
           break;
         default:
           let n;
           let l;
           if (e.overIndex === 0 && e.y < (e.node.rowHeight ?? 0) / 2) {
             if (!(i = e.api.getDisplayedRowAtIndex(0)?.data?.item.position)) break;
-            t = _$$hu(i);
+            t = previousAsciiString(i);
             break;
           }
           let a = e.overNode;
@@ -13576,7 +13576,7 @@ let xE = memo(({
           }), !n?.data?.item.position && !l?.data?.item.position || !a?.data?.item.position) {
             break;
           }
-          i = !n && l?.data?.item.position ? _$$e1(l?.data?.item.position) : n?.data?.item.position;
+          i = !n && l?.data?.item.position ? nextAsciiString(l?.data?.item.position) : n?.data?.item.position;
           t = a?.data?.item.position;
       }
       return {
@@ -13587,16 +13587,16 @@ let xE = memo(({
     if (!startPosition || !endPosition) return;
     let l = t.api.getSelectedRows();
     for (let a of function (e, t, i) {
-      let n = [t, i].sort((e, t) => -Ez(e, t));
+      let n = [t, i].sort((e, t) => -compareNumbers(e, t));
       let l = [];
       for (let [t, i] of e.entries()) {
         let e;
         if (t === 0) {
-          e = _$$kI(n[0], n[1]);
+          e = midpointAsciiString(n[0], n[1]);
         } else {
           let t = l[l.length - 1];
           if (!t) continue;
-          e = _$$kI(t.newPosition, n[1]);
+          e = midpointAsciiString(t.newPosition, n[1]);
         }
         l.push({
           item: i.item,
@@ -16252,8 +16252,8 @@ let hd = registerModal(e => {
                       fieldType,
                       required,
                       position: function (e) {
-                        let t = _$$TZ;
-                        for (let i = 0; i < e; i++) t = _$$e1(t);
+                        let t = separatorChar;
+                        for (let i = 0; i < e; i++) t = nextAsciiString(t);
                         return t;
                       }(index),
                       properties: {}
@@ -16529,7 +16529,7 @@ class hm {
           properties: {}
         }
       });
-      return (this._currentFieldPos = _$$e1(this._currentFieldPos), n.data) ? (this._fieldNameToIdMap[e.name] = n.data.meta.id, this._fieldNameToTypeMap[e.name] = i, null) : 'Failed to create field';
+      return (this._currentFieldPos = nextAsciiString(this._currentFieldPos), n.data) ? (this._fieldNameToIdMap[e.name] = n.data.meta.id, this._fieldNameToTypeMap[e.name] = i, null) : 'Failed to create field';
     };
     this._setItemFieldData = (e, t, i, n) => {
       let l;
@@ -16618,7 +16618,7 @@ class hm {
       id: generateUUIDv4(),
       idOnly: !0
     };
-    this._currentFieldPos = _$$TZ;
+    this._currentFieldPos = separatorChar;
     this._fieldNameToIdMap = {};
     this._fieldNameToTypeMap = {};
     this._itemToIdMap = {};

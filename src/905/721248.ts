@@ -44,7 +44,7 @@ import { notificationActions } from '../905/463586';
 import { $T, _V, ED, z2 } from '../905/467351';
 import { FS } from '../905/491806';
 import { bL as _$$bL3, mc as _$$mc, c$, l9 } from '../905/493196';
-import { U as _$$U } from '../905/506188';
+import { getLibraryNames } from '../905/506188';
 import { Button, ButtonWide } from '../905/521428';
 import { BranchType, CPPEventType, SourceDirection } from '../905/535806';
 import { AccessLevelEnum } from '../905/557142';
@@ -136,10 +136,10 @@ import { selectOpenFile } from '../figma_app/516028';
 import { F4 } from '../figma_app/527873';
 import { jq } from '../figma_app/563413';
 import { $z } from '../figma_app/617427';
-import { QT } from '../figma_app/646357';
+import { getStyleTypeLabel } from '../figma_app/646357';
 import { flatten, mapFilter } from '../figma_app/656233';
 import { DocumentMode, FileAndBranchTipType, GitReferenceType, LibraryUpdateStatus, PreviewStage, PropertyScope, SceneGraphHelpers, SchemaJoinStatus, VariablesBindings, ViewType } from '../figma_app/763686';
-import { Ez } from '../figma_app/766708';
+import { compareNumbers } from '../figma_app/766708';
 import { Z_ } from '../figma_app/793953';
 import { Ro } from '../figma_app/805373';
 import { TrackingProvider } from '../figma_app/831799';
@@ -1267,9 +1267,9 @@ let tw = memo(e => {
     systemImprovements
   } = e;
   let u = useMemo(() => Object.keys(displayGroupsByLibrary).map(_$$l2), [displayGroupsByLibrary]);
-  let p = _$$U(u);
+  let p = getLibraryNames(u);
   let m = e => getI18nString('collaboration.branching_chunk.local_style_type', {
-    styleType: QT(e)
+    styleType: getStyleTypeLabel(e)
   });
   let h = e => p.data?.[e] || getI18nString('collaboration.branching_chunk.fallback_missing_library_name');
   let [g, f] = useState(1);
@@ -2172,14 +2172,14 @@ function iL({
     return Object.values(o).sort((e, t) => {
       let i = e.next?.sortPosition ?? e.prev?.sortPosition ?? '';
       let n = t.next?.sortPosition ?? t.prev?.sortPosition ?? '';
-      return -Ez(i, n);
+      return -compareNumbers(i, n);
     });
   }, [e.mainChunk]);
   let s = useMemo(() => {
     let t = e.variableChunks.filter(e => e.phase !== LibraryUpdateStatus.UNMODIFIED).sort((e, t) => {
       let i = e.displayNode.sortPosition ?? '';
       let n = t.displayNode.sortPosition ?? '';
-      return -Ez(i, n);
+      return -compareNumbers(i, n);
     });
     let i = {};
     for (let e of t) {
@@ -4130,8 +4130,8 @@ function nY({
   branchChunk: t,
   choice: i
 }) {
-  let r = e?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
-  let a = t?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
+  let r = e?.displayNode.variableSetModes?.sort((e, t) => -1 * compareNumbers(e.sortPosition, t.sortPosition)) ?? [];
+  let a = t?.displayNode.variableSetModes?.sort((e, t) => -1 * compareNumbers(e.sortPosition, t.sortPosition)) ?? [];
   function o({
     key: e,
     name: t
@@ -4227,10 +4227,10 @@ function n2({
   mainAliasCache: s,
   branchAliasCache: o
 }) {
-  let l = t?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
+  let l = t?.displayNode.variableSetModes?.sort((e, t) => -1 * compareNumbers(e.sortPosition, t.sortPosition)) ?? [];
   let d = nZ()(l, e => sessionLocalIDToString(e.id));
   let c = l.map(t => e?.displayNode.variableDataValues?.entries?.find(e => areSessionLocalIDsEqual(e.modeID, t.id))).filter(isNotNullish);
-  let u = r?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
+  let u = r?.displayNode.variableSetModes?.sort((e, t) => -1 * compareNumbers(e.sortPosition, t.sortPosition)) ?? [];
   let p = nZ()(u, e => sessionLocalIDToString(e.id));
   let m = u.map(e => i?.displayNode.variableDataValues?.entries?.find(t => areSessionLocalIDsEqual(t.modeID, e.id))).filter(isNotNullish);
   let h = lp(c, m, e => sessionLocalIDToString(e.modeID));

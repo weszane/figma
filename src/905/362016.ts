@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Gj, Lk } from "../figma_app/646357";
+import { getAssetUniqueId, compareStyles } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { getParentOrgId } from "../905/872904";
 import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
@@ -152,7 +152,7 @@ function P({
     shouldHideTooltip: !1,
     showName: !0,
     width: 62
-  }, Gj(e)));
+  }, getAssetUniqueId(e)));
   let r = e.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(",");
   return jsx("div", {
     children: jsx("div", {
@@ -269,7 +269,7 @@ export function $$H0(e) {
   let f = getParentOrgId();
   let [y] = setupResourceAtomHandler(lH(file.key));
   let b = "loading" === y.status;
-  let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(Lk), [y]);
+  let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(compareStyles), [y]);
   let [I] = setupResourceAtomHandler(Xk({
     duration,
     orgId: f,

@@ -21,7 +21,7 @@ import { resolveTeamId } from "../905/515860";
 import { openFileAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectedViewAtom } from "../figma_app/386952";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { X0, WV, Gg } from "../figma_app/646357";
+import { getNonDeletedAssets, filterAssetsWithContainingStateGroup, addStateNamesToAssets } from "../figma_app/646357";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { KH } from "../905/81982";
 import { vx } from "../905/91038";
@@ -165,13 +165,13 @@ let ef = atom(e => {
       }));
     }
   };
-  o(X0(components));
+  o(getNonDeletedAssets(components));
   e(eo) && [defaultPublishedComponents, defaultPublishedStateGroups].forEach(e => {
     for (let t of Object.values(e)) o(Object.values(t));
   });
-  let l = Object.values(WV(components));
+  let l = Object.values(filterAssetsWithContainingStateGroup(components));
   let d = Object.values(stateGroups);
-  o(Gg(d, l));
+  o(addStateNamesToAssets(d, l));
   return a;
 });
 let e_ = selectAtom(ef, e => e, (e, t) => {

@@ -102,7 +102,7 @@ import { IW } from '../figma_app/563413';
 import { a as _$$a2, z as _$$z } from '../figma_app/601188';
 import { Me } from '../figma_app/617427';
 import { clickableBaseLinkTracked } from '../figma_app/637027';
-import { El, NW } from '../figma_app/646357';
+import { isTrackedState, usedComponentsStateGroupsPromise } from '../figma_app/646357';
 import { shuffle } from '../figma_app/656233';
 import { canRequestExtension, isWhitelistEnforcedAndRequestsAllowed } from '../figma_app/684168';
 import { FUSE_CONFIG_DEFAULT, FUSE_KEYS_PROFILE } from '../figma_app/740025';
@@ -137,11 +137,11 @@ function $(e) {
   useEffect(() => {
     (async () => {
       if (t(zK()), l) {
-        await NW;
+        await usedComponentsStateGroupsPromise;
         let {
           fileVersion
         } = s.getState();
-        fileVersion && !El('INVALID-FILE-KEY-SHOULD-BE-REMOVED', l) && s.dispatch(_$$n2({
+        fileVersion && !isTrackedState('INVALID-FILE-KEY-SHOULD-BE-REMOVED', l) && s.dispatch(_$$n2({
           libraryKey: l
         }));
       }

@@ -6,7 +6,7 @@ import { Point } from "../905/736624";
 import { getCurrentFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
-import { dx } from "../figma_app/646357";
+import { isPrimaryWorkflowType } from "../figma_app/646357";
 import { hasAssetId, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { M } from "../905/771870";
 import { cx } from "../figma_app/76115";
@@ -85,6 +85,6 @@ export function $$_0(e) {
 let A = e => !!e.isLocal;
 let y = e => hasAssetId(e) ? [e.mainThumbnailInfo.width, e.mainThumbnailInfo.height] : e.type === PrimaryWorkflowEnum.MODULE ? [e.width, e.height] : A(e) ? [e.width, e.height] : [e.min_node_width, e.min_node_height];
 function b(e) {
-  return dx(e) || hasAssetId(e) && "SUBSCRIBED" !== e.subscriptionStatus;
+  return isPrimaryWorkflowType(e) || hasAssetId(e) && "SUBSCRIBED" !== e.subscriptionStatus;
 }
 export const q = $$_0;

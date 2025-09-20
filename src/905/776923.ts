@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { StyleIdHandler, VariableSetIdCompatHandler, VariableIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CanvasNodeIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
-import { qO } from "../figma_app/766708";
+import { isPrintableAscii } from "../figma_app/766708";
 import { M_, Lm, kf, Kg, SE, _o, WX, ar, r4, Ox, rP, wA, hd, FE, W_, aP, hV, OA, yp, qx, aY, Rt } from "../905/71";
 import { c1 } from "../905/589717";
 import { B_, $7, o8, QB } from "../905/258397";
@@ -53,7 +53,7 @@ export class $$d0 {
         type: "numeric",
         value: t
       };
-      if (Kg(t)) return ("position" === e || "sortPosition" === e) && qO(t) ? {
+      if (Kg(t)) return ("position" === e || "sortPosition" === e) && isPrintableAscii(t) ? {
         type: "position",
         value: t
       } : SE(t, e) ? {

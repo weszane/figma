@@ -8,7 +8,7 @@ import { v4 } from "../figma_app/655139";
 import { t } from "../905/241707";
 import { NM, Zl } from "../figma_app/311375";
 import { Q } from "../905/217916";
-import { Gp, uH } from "../figma_app/646357";
+import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cM } from "../figma_app/803787";
 import { wi } from "../905/55146";
@@ -49,12 +49,12 @@ export function $$I1() {
       styleKey,
       styleGUIDs
     } = e;
-    let s = Gp(styleKey, styleGUIDs, library);
+    let s = getStyleSubscriptionInfo(styleKey, styleGUIDs, library);
     if (!s || styleGUIDs.length < 1) return null;
     let o = Zl(sceneGraph, styleGUIDs[0]);
     if (!o) return null;
     let l = o.fills.map(e => dc(e, t));
-    return rP(uH(s, sceneGraph), s, l, styleGUIDs);
+    return rP(getStyleSubscriptionName(s, sceneGraph), s, l, styleGUIDs);
   }, [library, sceneGraph]);
   return useMemo(() => {
     let r = a || m ? selectionColors : [];
@@ -89,7 +89,7 @@ export function $$v2(e) {
   } = useAtomWithSubscription(gq);
   let r = useSelector(e => e.library);
   let n = styles.map(e => {
-    let t = Gp(e.key, e.guids, r);
+    let t = getStyleSubscriptionInfo(e.key, e.guids, r);
     return t && t.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? {
       ...e,
       ...t.value,

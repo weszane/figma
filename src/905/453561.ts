@@ -1,4 +1,4 @@
-import { yW } from "../figma_app/644808";
+import { ModeType } from "../figma_app/644808";
 export function $$r0(e) {
   return {
     name: e.library_file_name,
@@ -8,7 +8,7 @@ export function $$r0(e) {
     thumbnailUrl: e.thumbnail_url,
     thumbnailShouldCover: !0,
     authorName: e.author_name,
-    type: yW.DESIGN,
+    type: ModeType.DESIGN,
     libraryType: "community"
   };
 }

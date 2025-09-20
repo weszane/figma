@@ -42,7 +42,7 @@ import { X as _$$X } from "../905/853613";
 import { tM, Hu } from "../figma_app/361662";
 import { fullscreenValue } from "../figma_app/455680";
 import { useSyncedRef } from "../905/633914";
-import { Av, dx } from "../figma_app/646357";
+import { getAssetKey, isPrimaryWorkflowType } from "../figma_app/646357";
 import { H as _$$H } from "../905/216861";
 import { e_ as _$$e_ } from "../figma_app/803787";
 import { PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
@@ -433,7 +433,7 @@ function e4({
     }), x.updated_at && jsx("div", {
       className: "component_flyout_body--updatedWrapper--q4V48 component_flyout_body--_bodyPadding--KrB6p",
       children: jsx(ez, {
-        assetKey: Av(x),
+        assetKey: getAssetKey(x),
         type: x.type,
         updatedAt: x.updated_at
       })
@@ -704,7 +704,7 @@ export function $$tu1({
     B(!1);
   });
   useEffect(() => {
-    if (!dx(e) || !e.isLocal) return;
+    if (!isPrimaryWorkflowType(e) || !e.isLocal) return;
     let t = e.node_id ? eh[e.node_id] : null;
     let s = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
     t?.content_hash !== s && requestAnimationFrame(() => {
@@ -755,7 +755,7 @@ export function $$tu1({
     }));
     let i = {
       aiResultsEnabled: ev,
-      assetKey: Av(e),
+      assetKey: getAssetKey(e),
       assetType: _$$q(e.type),
       queryId: ey ?? void 0,
       scoreAi: e.ai_score ?? void 0,

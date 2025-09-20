@@ -2,13 +2,13 @@ import { useMemo, useCallback } from "react";
 import { l as _$$l } from "../905/716947";
 import { f } from "../figma_app/436731";
 import { Fl } from "../figma_app/236178";
-import { fi } from "../figma_app/155728";
+import { useUntransformedSubscribedLibraries } from "../figma_app/155728";
 export function $$l0() {
   let {
     workspaceApprovedLibraryKeys,
     orgApprovedLibraryKeys
   } = Fl();
-  let i = fi();
+  let i = useUntransformedSubscribedLibraries();
   let l = useMemo(() => {
     let e = i.data?.file;
     let t = [];

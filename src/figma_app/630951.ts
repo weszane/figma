@@ -7,7 +7,7 @@ import { getCurrentHubFileVersionName } from "../905/71785";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { D } from "../905/347702";
-import { je, Qh } from "../figma_app/155728";
+import { useSubscribedLibraries, LibrarySubscriptionType } from "../figma_app/155728";
 let $$_4 = "ui_kits_tooltip_onboarding_key";
 let $$h7 = D(e => 22 !== e.length && !e.match(/\D/));
 export function $$m0(e) {
@@ -87,7 +87,7 @@ export function $$E5(e) {
 }
 export function $$y2() {
   let e = useFigmaLibrariesEnabled();
-  let t = je();
+  let t = useSubscribedLibraries();
   let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   return e ? "loading" === t.status ? {
     hasAnyUiKit: !1,
@@ -104,13 +104,13 @@ export function $$y2() {
   };
 }
 export function $$b6() {
-  let e = je();
+  let e = useSubscribedLibraries();
   let t = useSelector(e => Object.keys(e.library.local.components).length);
   let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   if (e.data && "loaded" === e.status) {
     var n;
     n = e.data;
-    return !!n?.some(e => !r.has(e.libraryKey) && e.subscriptionType !== Qh.COMMUNITY) || t > 0;
+    return !!n?.some(e => !r.has(e.libraryKey) && e.subscriptionType !== LibrarySubscriptionType.COMMUNITY) || t > 0;
   }
   return !1;
 }

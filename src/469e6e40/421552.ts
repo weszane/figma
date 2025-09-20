@@ -76,8 +76,8 @@ import { z as _$$z, Z as _$$Z } from "../905/306088";
 import { X as _$$X2 } from "../905/376628";
 import { PP, Sn, oA as _$$oA } from "../figma_app/430563";
 import { Ho } from "../figma_app/236178";
-import { T4 } from "../figma_app/646357";
-import { Qh } from "../figma_app/155728";
+import { hasActiveSubscriptionNotSubscribed } from "../figma_app/646357";
+import { LibrarySubscriptionType } from "../figma_app/155728";
 import { j as _$$j } from "../905/694231";
 import { fM } from "../figma_app/214643";
 import { l as _$$l3 } from "../469e6e40/774192";
@@ -748,16 +748,16 @@ function e9({
         figjam: s.figJamSubscribed,
         slides: s.slidesSubscribed.status === tT.Loaded ? s.slidesSubscribed.data : null,
         buzz: s.buzzSubscribed.status === tT.Loaded ? s.buzzSubscribed.data : null,
-        subscriptionType: Qh.TEAM
+        subscriptionType: LibrarySubscriptionType.TEAM
       };
       let d = {
         designSubscribed: t.design,
         figjamSubscribed: t.figjam,
         slidesSubscribed: t.slides,
         buzzSubscribed: t.buzz,
-        subscriptionType: Qh.TEAM
+        subscriptionType: LibrarySubscriptionType.TEAM
       };
-      return T4(i, d);
+      return hasActiveSubscriptionNotSubscribed(i, d);
     }, [l, r, o, n, a, e]);
   }(o, g, t, e);
   if (useEffect(() => {

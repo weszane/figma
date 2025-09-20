@@ -17,7 +17,7 @@ import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { aD } from "../figma_app/646357";
+import { AssetFilterMode } from "../figma_app/646357";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r6 } from "../905/542608";
 import { Tp } from "../905/753512";
@@ -166,7 +166,7 @@ function G({
     }), jsx(Tp, {
       entrypoint: r6.FIGMAKE,
       initialTab: void 0,
-      initialUpdatesModalScope: aD.CURRENT,
+      initialUpdatesModalScope: AssetFilterMode.CURRENT,
       children: jsx(dP, {
         children: d.map((n, i) => jsx(V, {
           header: n.library_name,

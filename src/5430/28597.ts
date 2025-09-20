@@ -36,11 +36,11 @@ import { IW } from "../figma_app/563413";
 import { lH, r4 } from "../figma_app/229259";
 import { o as _$$o } from "../905/451156";
 import { LoadingSpinner } from "../figma_app/858013";
-import { Av, Kw, og, LX } from "../figma_app/646357";
+import { getAssetKey, groupStylesByType, STYLE_TYPES, sortStyles } from "../figma_app/646357";
 import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/273120";
 import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
-import { lM, dm } from "../figma_app/463500";
+import { setupStyleFolderTree, getAllStylesFromFolder } from "../figma_app/463500";
 import { SvgComponent } from "../905/714743";
 import { nh } from "../figma_app/707943";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -240,7 +240,7 @@ function X({
 }) {
   let t = e.map(e => jsx(J, {
     component: e
-  }, Av(e)));
+  }, getAssetKey(e)));
   return jsx("div", {
     className: "library_detail_page_viewer--libraryViewerComponentTileGroup--20ei3",
     children: t
@@ -289,15 +289,15 @@ function er(e) {
 }
 function es(e) {
   if (!e || 0 === e.length) return new Map();
-  let t = Kw(e);
+  let t = groupStylesByType(e);
   let r = new Map();
-  og.map(e => {
+  STYLE_TYPES.map(e => {
     let s = t.get(e);
     if (s) {
-      LX(s);
-      let t = lM(s, e);
+      sortStyles(s);
+      let t = setupStyleFolderTree(s, e);
       let i = new Map();
-      for (let e of (i.set(t, t.styles), t.subfolders)) i.set(e, dm(e));
+      for (let e of (i.set(t, t.styles), t.subfolders)) i.set(e, getAllStylesFromFolder(e));
       r.set(e, i);
     }
   });

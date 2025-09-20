@@ -11,13 +11,13 @@ import { getI18nString } from "../905/303541";
 import { compareLibraryKeyWithString } from "../905/709171";
 import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";
-import { w$ } from "../figma_app/646357";
+import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { getBasename } from "../905/309735";
 import { getStyleThumbnail } from "../905/405710";
 import { Q as _$$Q } from "../figma_app/104130";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
-import { Pc } from "../figma_app/463500";
+import { normalizeStylePath } from "../figma_app/463500";
 import { P as _$$P } from "../905/201667";
 import { xo, zi } from "../905/824449";
 import { AH } from "../905/571648";
@@ -71,7 +71,7 @@ export let $$O0 = memo(function ({
     kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
     value: L
   } : void 0, [L, t, $]);
-  w$(X);
+  useOptimisticStyleThumbnailUpdate(X);
   let q = useHandleMouseEvent(O, "click", useCallback(e => {
     d?.(e);
   }, [d]));
@@ -114,7 +114,7 @@ export let $$O0 = memo(function ({
       }),
       ref: M,
       dir: "auto",
-      children: L ? Pc(L.name) : getI18nString("design_systems.styles.custom")
+      children: L ? normalizeStylePath(L.name) : getI18nString("design_systems.styles.custom")
     }), Y && jsxs("div", {
       className: [gE, p3].join(" "),
       children: ["(", K, ")"]

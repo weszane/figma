@@ -8,7 +8,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { MIXED_MARKER } from "../905/216495";
 import { selectOpenFileKey, selectOpenFileLibraryKey } from "../figma_app/516028";
-import { i_ } from "../figma_app/646357";
+import { createLocalComponent } from "../figma_app/646357";
 export let $$h14 = "\u2014";
 export function $$m16(e, t) {
   return Object.keys(e).sort((e, r) => t.indexOf(e) - t.indexOf(r)).map(t => `${t}=${e[t]}`).join(", ");
@@ -129,7 +129,7 @@ export function $$$$A6(e, t, r, n) {
 export function $$x8(e, t, r, n) {
   return {
     stateInfo: e.stateInfo,
-    symbol: i_(null, null, e.symbol, t || "", r || _$$l(""), n),
+    symbol: createLocalComponent(null, null, e.symbol, t || "", r || _$$l(""), n),
     actionIndexPath: function (e) {
       if (!e) return [];
       let t = e.match(/\{(.*?)\}/);

@@ -23,10 +23,10 @@ import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { Z } from "../905/116724";
 import { getUserId } from "../905/372672";
 import { createTrackedAtom } from "../figma_app/615482";
-import { aD } from "../figma_app/646357";
+import { AssetFilterMode } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
 import { bA } from "../figma_app/745458";
-import { He } from "../figma_app/155728";
+import { useSubscribedLibraryKeys } from "../figma_app/155728";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { AX, r6 } from "../905/542608";
 import { sz } from "../905/753512";
@@ -118,7 +118,7 @@ export async function $$B0(e, t) {
     updateStartTime: r
   }));
 }
-export function $$G6(e, t = aD.ALL, r) {
+export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let a = useDispatch();
   let u = bA(t);
   let p = useAtomWithSubscription(openFileAtom);
@@ -145,7 +145,7 @@ export function $$G6(e, t = aD.ALL, r) {
     }
     return Object.values(r6).includes(e) ? `${e} > Updates Modal > ${t} > ${r ? "Update all" : "Update"}` : "";
   }, [t]);
-  let X = He();
+  let X = useSubscribedLibraryKeys();
   let q = _$$T();
   let J = useCallback(async (t, r) => {
     let n = LibraryPubSub.getTimestampForLibraryUpdateStart();

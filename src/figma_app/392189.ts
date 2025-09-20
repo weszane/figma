@@ -8,7 +8,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { yy } from "../figma_app/543529";
+import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { u as _$$u } from "../905/389684";
 import { I as _$$I } from "../905/342732";
@@ -23,7 +23,7 @@ import { g7 } from "../905/939482";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getCommunityFileUrl } from "../905/612685";
 import { _9 } from "../figma_app/76115";
-import { ON, zr } from "../figma_app/644808";
+import { SectionType, KitType } from "../figma_app/644808";
 import { dH } from "../figma_app/647246";
 var d = l;
 function R() {
@@ -113,7 +113,7 @@ function P({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.CONTENTS, zr.UI_KITS, t]
+    path: [SectionType.CONTENTS, KitType.UI_KITS, t]
   });
   let a = _9(e, "assets_panel_empty_state");
   let s = selectCurrentFile();
@@ -160,7 +160,7 @@ export function $$k0() {
 }
 export function $$M2() {
   let e = useFigmaLibrariesEnabled();
-  let t = yy();
+  let t = useParentOrgOfOpenFile();
   return jsxs("div", {
     className: _$$s.flex.flexColumn.$,
     children: [jsx($$F1, {}), e && !t && jsx(R, {})]
@@ -200,7 +200,7 @@ function j({
   let {
     setKeyboardNavigationElement
   } = M3({
-    path: [ON.CONTENTS, zr.CTA],
+    path: [SectionType.CONTENTS, KitType.CTA],
     disabled: i
   });
   return jsxs("div", {

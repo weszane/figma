@@ -24,7 +24,7 @@ import { x as _$$x } from "../905/211326";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { hideModal } from "../905/156213";
-import { eS, aD } from "../figma_app/646357";
+import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
@@ -90,7 +90,7 @@ function W(e) {
     isUpdatedInstance,
     isUpdatedAsset
   } = xq(prevInstanceInfo, currentInstanceInfo, nextInstanceInfo, currentAsset, updateAssetAndInstances);
-  let b = eS(aD.ALL);
+  let b = useSubscribedAssets(AssetFilterMode.ALL);
   let {
     updateStateGroup,
     updateComponent

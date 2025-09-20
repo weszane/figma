@@ -25,7 +25,7 @@ type LogLevel = 'error' | 'warn'
 /**
  * Base validator class for API response validation
  */
-class BaseValidator<T> {
+export class BaseValidator<T> {
   debugKey: string
   schema: z.ZodSchema<T>
   logLevel: LogLevel

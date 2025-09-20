@@ -8,9 +8,9 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { loadingStateDelete } from "../figma_app/714946";
 import { getSelectedFile } from "../905/766303";
-import { td } from "../figma_app/646357";
+import { isSubscribedLibrary } from "../figma_app/646357";
 import { J } from "../905/252202";
-import { Qh } from "../figma_app/155728";
+import { LibrarySubscriptionType } from "../figma_app/155728";
 import { isTeamLibrary } from "../figma_app/633080";
 import { A } from "../905/733171";
 import { yD } from "../905/92359";
@@ -21,7 +21,7 @@ let $$I0 = createOptimistThunk((e, {
   libraryKey: t,
   subscriptions: r
 }) => {
-  if (!r || td(e.getState().library.defaultPublished, t)) return;
+  if (!r || isSubscribedLibrary(e.getState().library.defaultPublished, t)) return;
   let n = getSelectedFile(e.getState());
   if (n) {
     let a = n.editor_type ?? "design";
@@ -154,7 +154,7 @@ let $$v4 = createOptimistThunk(async (e, t) => {
     libraryKey: library_key,
     subscriptions
   });
-  J(existingSubscription, Qh.USER, subscriptions.design, subscriptions.figjam, subscriptions.slides, subscriptions.buzz, p, _);
+  J(existingSubscription, LibrarySubscriptionType.USER, subscriptions.design, subscriptions.figjam, subscriptions.slides, subscriptions.buzz, p, _);
   try {
     if (!library_key) throw Error("Library key is required for user subscription");
     await _;
@@ -210,7 +210,7 @@ let $$A5 = createOptimistThunk(async (e, t) => {
     subscriptions,
     teamId: team_id
   });
-  J(existingSubscription, Qh.TEAM, subscriptions.design, subscriptions.figjam, subscriptions.slides, subscriptions.buzz, {
+  J(existingSubscription, LibrarySubscriptionType.TEAM, subscriptions.design, subscriptions.figjam, subscriptions.slides, subscriptions.buzz, {
     libraryKey: library_key,
     teamId: team_id,
     library: {

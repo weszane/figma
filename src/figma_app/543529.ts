@@ -1,40 +1,80 @@
-import { useSelector } from "react-redux";
-import { resourceUtils } from "../905/989992";
-import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
-import { useCurrentUserOrg, useCurrentUserOrgId } from "../905/845253";
-import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
-import { OrgHasSeatsManagedViaScimView } from "../figma_app/43951";
-import { useCurrentPublicPlan } from "../figma_app/465071";
-import { useCurrentOrgAdminInfo } from "../figma_app/740025";
-export function $$u0() {
-  let e = useCurrentUserOrg();
-  return useSelector(t => {
-    let r = e && t.orgUsersByOrgId[e.id];
-    return r && r[t.user.id]?.permission === FUserRoleType.GUEST;
-  });
+import { useSelector } from 'react-redux'
+import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253'
+import { resourceUtils } from '../905/989992'
+import { OrgHasSeatsManagedViaScimView } from '../figma_app/43951'
+import { FPlanNameType, FUserRoleType } from '../figma_app/191312'
+import { useCurrentPublicPlan } from '../figma_app/465071'
+import { handleSuspenseRetainRelease, setupResourceAtomHandler } from '../figma_app/566371'
+import { useCurrentOrgAdminInfo } from '../figma_app/740025'
+
+interface Org {
+  orgUsersByOrgId: Record<string, Record<string, { permission: string }>>
+  user: ObjectOf
+  userFlags: any
+  teams: any
+  currentTeamId: string
 }
-export function $$p1() {
-  let e = useCurrentUserOrg();
-  let t = useSelector(t => e && t.orgUsersByOrgId[e.id][t.user.id]?.permission);
-  return t && t !== FUserRoleType.GUEST;
+// Original: $$u0
+/**
+ * Hook to check if the current user is a guest in their organization.
+ * @returns {boolean} True if the user is a guest, false otherwise.
+ */
+export function useIsUserGuestInOrg() {
+  const currentOrg = useCurrentUserOrg()
+  return useSelector<Org>((state) => {
+    const orgUsers = currentOrg && state.orgUsersByOrgId[currentOrg.id]
+    return orgUsers && orgUsers[state.user.id]?.permission === FUserRoleType.GUEST
+  })
 }
-export function $$_4() {
-  return useSelector(e => e.openFile?.parentOrgId && e.orgById[e.openFile.parentOrgId] || void 0);
+
+// Original: $$p1
+/**
+ * Hook to check if the current user has permission in their organization and is not a guest.
+ * @returns {boolean} True if the user has permission and is not a guest, false otherwise.
+ */
+export function useHasUserPermissionInOrg() {
+  const currentOrg = useCurrentUserOrg()
+  const permission = useSelector<Org>(state =>
+    currentOrg && state.orgUsersByOrgId[currentOrg.id][state.user.id]?.permission,
+  )
+  return permission && permission !== FUserRoleType.GUEST
 }
-export function $$h3() {
-  let e = useCurrentUserOrgId();
-  let t = useCurrentPublicPlan("useSuspendOrgManagesSeatsViaScim");
-  let [r, n] = setupResourceAtomHandler(OrgHasSeatsManagedViaScimView({
-    orgId: e
-  }), {
-    enabled: !!e
-  });
-  let c = handleSuspenseRetainRelease(t, r);
-  let u = resourceUtils.all(c);
-  return resourceUtils.useTransform(u, ([e, t]) => e.tier === FPlanNameType.ENTERPRISE && !!t.org?.orgSamlConfigs?.some(e => "loaded" === e.hasSeatManagedViaScim.status && e.hasSeatManagedViaScim.data));
+
+// Original: $$_4
+/**
+ * Hook to get the parent organization of the currently open file.
+ * @returns {object | undefined} The parent organization object or undefined.
+ */
+export function useParentOrgOfOpenFile(): ObjectOf | undefined {
+  return useSelector<ObjectOf>(state =>
+    state.openFile?.parentOrgId && state.orgById[state.openFile.parentOrgId] || undefined,
+  )
 }
-export const Cb = $$u0;
-export const U5 = $$p1;
-export const Yo = useCurrentOrgAdminInfo;
-export const i6 = $$h3;
-export const yy = $$_4;
+
+// Original: $$h3
+/**
+ * Hook to determine if the organization manages seats via SCIM and is on an Enterprise plan.
+ * @returns {boolean} True if conditions are met, false otherwise.
+ */
+export function useOrgManagesSeatsViaScim() {
+  const orgId = useCurrentUserOrgId()
+  const publicPlan = useCurrentPublicPlan('useSuspendOrgManagesSeatsViaScim')
+  const [resource] = setupResourceAtomHandler(
+    OrgHasSeatsManagedViaScimView({ orgId }),
+    { enabled: !!orgId },
+  )
+  const retained = handleSuspenseRetainRelease(publicPlan, resource)
+  const allResources = resourceUtils.all(retained)
+  return resourceUtils.useTransform(allResources, ([plan, scimData]) =>
+    plan.tier === FPlanNameType.ENTERPRISE
+    && !!scimData.org?.orgSamlConfigs?.some(
+      config => config.hasSeatManagedViaScim.status === 'loaded' && config.hasSeatManagedViaScim.data,
+    ))
+}
+
+// Original exports updated to match new function names
+export const Cb = useIsUserGuestInOrg
+export const U5 = useHasUserPermissionInOrg
+export const Yo = useCurrentOrgAdminInfo
+export const i6 = useOrgManagesSeatsViaScim
+export const yy = useParentOrgOfOpenFile

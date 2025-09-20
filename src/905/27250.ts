@@ -7,7 +7,7 @@ import l from "classnames";
 import { w } from "../905/835474";
 import { o as _$$o } from "../905/605383";
 import { getI18nString } from "../905/303541";
-import { LT } from "../figma_app/646357";
+import { getLibraryAgeLabel } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Hj, tD } from "../905/682977";
 var d = l;
@@ -59,14 +59,14 @@ export class $$b0 extends PureComponent {
     });
     e.push({
       header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
-        duration: LT(this.props.duration)
+        duration: getLibraryAgeLabel(this.props.duration)
       }),
       sortBy: "num_insertions",
       className: $$A
     });
     e.push({
       header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
-        duration: LT(this.props.duration)
+        duration: getLibraryAgeLabel(this.props.duration)
       }),
       sortBy: "num_detachments",
       className: $$A

@@ -12,210 +12,385 @@ import { isSelfDesignMode } from '../figma_app/357367'
 import { getImageOrVideoPaint } from '../figma_app/385874'
 import { useCooperFrameGuids, useSelectedCooperFrameIds } from '../figma_app/396464'
 import { getComponentProps } from '../figma_app/505098'
-import { Lk, x } from '../figma_app/639711'
-import { uN } from '../figma_app/646357'
+import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711'
+import { getComponentLibraryKey } from '../figma_app/646357'
 import { useSceneGraphSelection, useSceneGraphSelector } from '../figma_app/722362'
 import { LayoutTabType } from '../figma_app/763686'
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655'
 import { useLatestRef } from '../figma_app/922077'
 
-function v(e, t, r = !0) {
-  let n = getSingletonSceneGraph()
-  if (r && (!e.visible || e.locked))
+/**
+ * Recursively collects nodes matching a predicate from the scene graph.
+ * Original: v
+ */
+export function collectMatchingNodes(
+  node: any,
+  predicate: (node: any) => boolean,
+  checkVisibilityAndLock: boolean = true,
+): any[] {
+  const sceneGraph = getSingletonSceneGraph()
+  if (checkVisibilityAndLock && (!node.visible || node.locked))
     return []
-  let i = []
-  i.push(...e.childrenGuids.flatMap((e) => {
-    let i = n.get(e)
-    return i ? v(i, t, r) : []
-  }))
-  t(e) && i.push(e)
-  return i
-}
-export function $$A10(e) {
-  return e.fills.some(e => e.type === 'IMAGE')
-}
-export function $$x11(e) {
-  return v(e, e => getFeatureFlags().buzz_video_export ? $$A10(e) || e.fills.some(e => e.type === 'VIDEO') : $$A10(e))
-}
-var $$N3 = (e => (e.TEXT = 'TEXT', e.IMAGE = 'IMAGE', e.INSTANCE = 'INSTANCE', e))($$N3 || {})
-var C = (e => (e.INSTANCE = 'INSTANCE', e.DETACHED = 'DETACHED', e.MIXED = 'MIXED', e))(C || {})
-export function $$w1() {
-  let e = getSingletonSceneGraph()
-  let t = useSelectedCooperFrameIds()
-  let r = useSelector(selectSceneGraphSelectionKeys)
-  let a = null
-  let s = !1
-  for (let r of t) {
-    let t = e.get(r)
-    if (t && (t.type === 'INSTANCE' ? (s = !0, a === null ? a = 'INSTANCE' : a !== 'INSTANCE' && (a = 'MIXED')) : t.type === 'FRAME' && (a === null ? a = 'DETACHED' : a !== 'DETACHED' && (a = 'MIXED')), a === 'MIXED'))
-      break
+  let result: any[] = []
+  for (const childGuid of node.childrenGuids) {
+    const childNode = sceneGraph.get(childGuid)
+    if (childNode) {
+      result.push(...collectMatchingNodes(childNode, predicate, checkVisibilityAndLock))
+    }
   }
-  let l = a === 'INSTANCE'
-  let d = a === 'DETACHED'
-  let c = r.filter(e => t.includes(e))
-  let u = c.length > 0
-  let p = u && c.length === t.length
-  return useMemo(() => ({
-    onlyInstances: l,
-    onlyDetached: d,
-    onlyCooperFrames: p,
-    anyCooperFrames: u,
-    hasInstanceSelected: s,
-  }), [l, d, p, u, s])
+  if (predicate(node))
+    result.push(node)
+  return result
 }
-export function $$O14() {
-  let e = useSceneGraphSelection()
+
+/**
+ * Checks if a node has an IMAGE fill.
+ * Original: $$A10
+ */
+export function hasImageFill(node: any): boolean {
+  return node.fills.some((fill: any) => fill.type === 'IMAGE')
+}
+
+/**
+ * Checks if a node has an IMAGE or VIDEO fill, depending on feature flag.
+ * Original: $$x11
+ */
+export function hasImageOrVideoFill(node: any) {
+  const buzzVideoExport = getFeatureFlags().buzz_video_export
+  return collectMatchingNodes(
+    node,
+    n =>
+      buzzVideoExport
+        ? hasImageFill(n) || n.fills.some((fill: any) => fill.type === 'VIDEO')
+        : hasImageFill(n),
+  )
+}
+
+/**
+ * Enum for node types.
+ * Original: $$N3
+ */
+export enum TextImageEnum {
+  TEXT = 'TEXT',
+  IMAGE = 'IMAGE',
+  INSTANCE = 'INSTANCE',
+}
+
+/**
+ * Enum for instance states.
+ * Original: C
+ */
+export enum InstanceStateEnum {
+  INSTANCE = 'INSTANCE',
+  DETACHED = 'DETACHED',
+  MIXED = 'MIXED',
+}
+
+/**
+ * Returns selection info for Cooper frames.
+ * Original: $$w1
+ */
+export function useCooperFrameSelectionInfo() {
+  const sceneGraph = getSingletonSceneGraph()
+  const selectedFrameIds = useSelectedCooperFrameIds()
+  const selectionKeys = useSelector(selectSceneGraphSelectionKeys)
+
+  let selectionType: InstanceStateEnum | null = null
+  let hasInstanceSelected = false
+
+  for (const frameId of selectedFrameIds) {
+    const node = sceneGraph.get(frameId)
+    if (node) {
+      if (node.type === 'INSTANCE') {
+        hasInstanceSelected = true
+        selectionType
+          = selectionType === null
+            ? InstanceStateEnum.INSTANCE
+            : selectionType !== InstanceStateEnum.INSTANCE
+              ? InstanceStateEnum.MIXED
+              : selectionType
+      }
+      else if (node.type === 'FRAME') {
+        selectionType
+          = selectionType === null
+            ? InstanceStateEnum.DETACHED
+            : selectionType !== InstanceStateEnum.DETACHED
+              ? InstanceStateEnum.MIXED
+              : selectionType
+      }
+      if (selectionType === InstanceStateEnum.MIXED)
+        break
+    }
+  }
+
+  const onlyInstances = selectionType === InstanceStateEnum.INSTANCE
+  const onlyDetached = selectionType === InstanceStateEnum.DETACHED
+  const selectedKeysInFrames = selectionKeys.filter(key => selectedFrameIds.includes(key))
+  const anyCooperFrames = selectedKeysInFrames.length > 0
+  const onlyCooperFrames = anyCooperFrames && selectedKeysInFrames.length === selectedFrameIds.length
+
+  return useMemo(
+    () => ({
+      onlyInstances,
+      onlyDetached,
+      onlyCooperFrames,
+      anyCooperFrames,
+      hasInstanceSelected,
+    }),
+    [onlyInstances, onlyDetached, onlyCooperFrames, anyCooperFrames, hasInstanceSelected],
+  )
+}
+
+/**
+ * Returns unique Cooper frame IDs from current selection.
+ * Original: $$O14
+ */
+export function useSelectedCooperFrameGuids(): string[] {
+  const selection = useSceneGraphSelection()
   return useMemoStable(() => {
-    let t = getSingletonSceneGraph()
-    let r = new Set()
-    Object.keys(e).forEach((e) => {
-      let n = t.get(e)?.containingCooperFrameId()
-      n && r.add(n)
+    const sceneGraph = getSingletonSceneGraph()
+    const frameIds = new Set<string>()
+    Object.keys(selection).forEach((key) => {
+      const frameId = sceneGraph.get(key)?.containingCooperFrameId()
+      if (frameId)
+        frameIds.add(frameId)
     })
-    return Array.from(r.values())
-  }, [e])
+    return Array.from(frameIds.values())
+  }, [selection])
 }
-export function $$R2(e) {
-  return P(useDeepEqualSceneValue(t => t.get(e)?.fills ?? []))
+
+/**
+ * Returns media paint info for a node by ID.
+ * Original: $$R2
+ */
+export function useNodeMediaPaintById(nodeId: string) {
+  return getMediaPaintInfo(useDeepEqualSceneValue(scene => scene.get(nodeId)?.fills ?? []))
 }
-export function $$L8(e) {
-  return P(e.fills)
+
+/**
+ * Returns media paint info for a node.
+ * Original: $$L8
+ */
+export function useNodeMediaPaint(node: any) {
+  return getMediaPaintInfo(node.fills)
 }
-function P(e) {
-  let t = getFeatureFlags().buzz_video_export
-  let r = null
-  let n = null
-  if (isValidValue(r) || r === null) {
-    let i = [null, null]
-    e.forEach((e, r) => {
-      (e.type === 'IMAGE' || t && e.type === 'VIDEO') && (i = [e, r])
+
+/**
+ * Returns media paint and index for fills.
+ * Original: P
+ */
+function getMediaPaintInfo(fills: any[]) {
+  const buzzVideoExport = getFeatureFlags().buzz_video_export
+  let mediaPaint: any = null
+  let mediaPaintIndex: number | null = null
+
+  if (isValidValue(mediaPaint) || mediaPaint === null) {
+    let found: [any, number] = [null, null]
+    fills.forEach((fill, idx) => {
+      if (fill.type === 'IMAGE' || (buzzVideoExport && fill.type === 'VIDEO')) {
+        found = [fill, idx]
+      }
     })
-    i && r === null ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = MIXED_MARKER, n = null)
+    if (found && mediaPaint === null) {
+      mediaPaint = found[0]
+      mediaPaintIndex = found[1]
+    }
+    else if (found && mediaPaint !== found[0]) {
+      mediaPaint = MIXED_MARKER
+      mediaPaintIndex = null
+    }
   }
   return {
-    mediaPaint: r && isValidValue(r) ? getImageOrVideoPaint(r) : r,
-    mediaPaintIndex: n,
+    mediaPaint: mediaPaint && isValidValue(mediaPaint) ? getImageOrVideoPaint(mediaPaint) : mediaPaint,
+    mediaPaintIndex,
   }
 }
-export function $$D6(e) {
-  let t = useDeepEqualSceneValue((e, t) => t.map((t) => {
-    let r = e.get(t)
-    return r ? v(r, $$A10).map(e => e.guid) : []
-  }).flat(), e)
-  return useMemoStable(() => t, [t])
+
+/**
+ * Returns guids of nodes with image fills in selection.
+ * Original: $$D6
+ */
+export function useSelectedImageNodeGuids(selectedIds: string[]) {
+  const guids = useDeepEqualSceneValue((scene, ids) =>
+    ids
+      .map((id) => {
+        const node = scene.get(id)
+        return node ? collectMatchingNodes(node, hasImageFill).map(n => n.guid) : []
+      })
+      .flat(), selectedIds)
+  return useMemoStable(() => guids, [guids])
 }
-export function $$k9(e) {
-  let t = useDeepEqualSceneValue((e, t) => t.map((t) => {
-    let r = e.get(t)
-    return r ? $$x11(r).map(e => e.guid) : []
-  }).flat(), e)
-  return useMemoStable(() => t, [t])
+
+/**
+ * Returns guids of nodes with image or video fills in selection.
+ * Original: $$k9
+ */
+export function useSelectedImageOrVideoNodeGuids(selectedIds: string[]) {
+  const guids = useDeepEqualSceneValue((scene, ids) =>
+    ids
+      .map((id) => {
+        const node = scene.get(id)
+        return node ? hasImageOrVideoFill(node).map(n => n.guid) : []
+      })
+      .flat(), selectedIds)
+  return useMemoStable(() => guids, [guids])
 }
-export let $$M12 = createSelector([getComponentProps], (e) => {
-  if (!e)
+
+/**
+ * Selector for unique Cooper frame IDs from component props.
+ * Original: $$M12
+ */
+export const selectComponentCooperFrameIds = createSelector([getComponentProps], (props) => {
+  if (!props)
     return []
-  let t = new Set()
-  Object.keys(e).forEach((e) => {
-    let r = getSingletonSceneGraph().get(e)
-    let n = r?.containingCooperFrameId()
-    n && n !== '-1:-1' && t.add(n)
+  const frameIds = new Set<string>()
+  Object.keys(props).forEach((key) => {
+    const node = getSingletonSceneGraph().get(key)
+    const frameId = node?.containingCooperFrameId()
+    if (frameId && frameId !== '-1:-1')
+      frameIds.add(frameId)
   })
-  return Array.from(t)
+  return Array.from(frameIds)
 })
-export function $$F4() {
-  let e = useSelectedCooperFrameIds()
-  let t = useSceneGraphSelector()
-  if (e.length === 1) {
-    let r = t.get(e[0] ?? '')
-    let n = t.get(r?.symbolId ?? '')
-    let i = n?.componentKey
-    if (i) {
-      let e = uN(i)
-      if (e)
-        return e
+
+/**
+ * Returns component library key for selected Cooper frame.
+ * Original: $$F4
+ */
+export function useSelectedComponentLibraryKey() {
+  const selectedFrameIds = useSelectedCooperFrameIds()
+  const sceneGraph = useSceneGraphSelector()
+  if (selectedFrameIds.length === 1) {
+    const frameNode = sceneGraph.get(selectedFrameIds[0] ?? '')
+    const symbolNode = sceneGraph.get(frameNode?.symbolId ?? '')
+    const componentKey = symbolNode?.componentKey
+    if (componentKey) {
+      const libraryKey = getComponentLibraryKey(componentKey)
+      if (libraryKey)
+        return libraryKey
     }
   }
   return null
 }
-export function $$j16() {
-  let e = useSelectedCooperFrameIds()
-  let t = getFocusedNodeId()
-  let r = [...e]
-  t && r.push(t)
-  return r
+
+/**
+ * Returns selected Cooper frame IDs plus focused node ID.
+ * Original: $$j16
+ */
+export function useSelectedAndFocusedNodeIds(): string[] {
+  const selectedFrameIds = useSelectedCooperFrameIds()
+  const focusedNodeId = getFocusedNodeId()
+  const result = [...selectedFrameIds]
+  if (focusedNodeId)
+    result.push(focusedNodeId)
+  return result
 }
-export function $$U7() {
-  let e
-  let t = isNotInFocusedNodeView()
-  let r = isSelfDesignMode()
-  e = $$j16()
-  let a = useDeepEqualSceneValue((e, t) => t.every((t) => {
-    let r = e.get(t)
-    return !!r && !!r.isInstance
-  }), e) && !!e.length
-  let [s, l] = useAtomValueAndSetter(Lk)
-  let c = useSelector(e => e.mirror.sceneGraphSelection)
-  let u = useLatestRef(c)
-  let m = e => e.some((e) => {
-    let t = getSingletonSceneGraph().get(e)
-    let r = t?.containingCooperFrameId()
-    let n = r && getSingletonSceneGraph().get(r)
-    return t && n && n.isInstance && t.isInstanceSublayer && t.isOrInCooperFrame
-  })
-  let g = useMemo(() => m(Object.keys(c)), [c])
-  let f = useMemo(() => m(u ? Object.keys(u) : []), [u])
-  let E = s === x.TEMPLATES
+
+/**
+ * Handles asset category switching logic for Cooper frames.
+ * Original: $$U7
+ */
+export function useCooperFrameAssetCategorySwitch() {
+  const notInFocusedNodeView = isNotInFocusedNodeView()
+  const selfDesignMode = isSelfDesignMode()
+  const selectedAndFocusedIds = useSelectedAndFocusedNodeIds()
+  const allInstancesSelected
+    = useDeepEqualSceneValue(
+      (scene, ids) => ids.every(id => !!scene.get(id)?.isInstance),
+      selectedAndFocusedIds,
+    ) && !!selectedAndFocusedIds.length
+  const [assetCategory, setAssetCategory] = useAtomValueAndSetter(assetCategoryAtom)
+  const sceneGraphSelection = useSelector<ObjectOf>(state => state.mirror.sceneGraphSelection)
+  const latestSelectionRef = useLatestRef(sceneGraphSelection)
+
+  const hasInstanceSublayerInCooperFrame = (ids: string[]) =>
+    ids.some((id) => {
+      const node = getSingletonSceneGraph().get(id)
+      const frameId = node?.containingCooperFrameId()
+      const frameNode = frameId && getSingletonSceneGraph().get(frameId)
+      return node && frameNode && frameNode.isInstance && node.isInstanceSublayer && node.isOrInCooperFrame
+    })
+
+  const hasInstanceSublayerCurrent = useMemo(() => hasInstanceSublayerInCooperFrame(Object.keys(sceneGraphSelection)), [sceneGraphSelection])
+  const hasInstanceSublayerLatest = useMemo(() => hasInstanceSublayerInCooperFrame(latestSelectionRef ? Object.keys(latestSelectionRef) : []), [latestSelectionRef])
+  const isTemplatesCategory = assetCategory === AssetCategoryEnum.TEMPLATES
+
   useEffect(() => {
-    r && E && !t && a && g && !f && l(x.FIELDS)
-  }, [t, a, g, f, l, E, r])
+    if (selfDesignMode && isTemplatesCategory && !notInFocusedNodeView && allInstancesSelected && hasInstanceSublayerCurrent && !hasInstanceSublayerLatest) {
+      setAssetCategory(AssetCategoryEnum.FIELDS)
+    }
+  }, [notInFocusedNodeView, allInstancesSelected, hasInstanceSublayerCurrent, hasInstanceSublayerLatest, setAssetCategory, isTemplatesCategory, selfDesignMode])
 }
-export function $$B17() {
-  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COOPER_BULK_CREATE)
+
+/**
+ * Returns true if active canvas edit mode is COOPER_BULK_CREATE.
+ * Original: $$B17
+ */
+export function useIsCooperBulkCreateMode() {
+  return useSelector<ObjectOf>(state => state.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COOPER_BULK_CREATE)
 }
-export function $$G5(e) {
-  return useDeepEqualSceneValue((e, t) => {
-    let r = e.get(t)
-    return r?.hasVideoPaintOrHasVideoPaintDescendant
-  }, e)
+
+/**
+ * Returns true if node has video paint or descendant with video paint.
+ * Original: $$G5
+ */
+export function useNodeHasVideoPaint(nodeId: string): boolean {
+  return useDeepEqualSceneValue((scene, id) => {
+    const node = scene.get(id)
+    return node?.hasVideoPaintOrHasVideoPaintDescendant
+  }, nodeId)
 }
-export function $$V15() {
-  let e = useSelector(selectSceneGraphSelectionKeys)
-  let t = useSceneGraphSelector()
-  return useMemo(() => e.length > 0 && e.every((e) => {
-    let r = t.get(e)
-    return r?.fills?.some(e => e.type === 'VIDEO')
-  }), [e, t])
+
+/**
+ * Returns true if all selected nodes have VIDEO fills.
+ * Original: $$V15
+ */
+export function useAllSelectedNodesHaveVideoFill(): boolean {
+  const selectionKeys = useSelector(selectSceneGraphSelectionKeys)
+  const sceneGraph = useSceneGraphSelector()
+  return useMemo(
+    () =>
+      selectionKeys.length > 0
+      && selectionKeys.every(key => sceneGraph.get(key)?.fills?.some(fill => fill.type === 'VIDEO')),
+    [selectionKeys, sceneGraph],
+  )
 }
-export function $$H0() {
-  let e = useCooperFrameGuids()
-  let t = useSceneGraphSelector()
-  return e.some((e) => {
-    let r = t.get(e)
-    return r?.hasVideoPaintOrHasVideoPaintDescendant
-  })
+
+/**
+ * Returns true if any Cooper frame has video paint or descendant with video paint.
+ * Original: $$H0
+ */
+export function useAnyCooperFrameHasVideoPaint(): boolean {
+  const cooperFrameGuids = useCooperFrameGuids()
+  const sceneGraph = useSceneGraphSelector()
+  return cooperFrameGuids.some(guid => sceneGraph.get(guid)?.hasVideoPaintOrHasVideoPaintDescendant)
 }
-export function $$z13(e) {
-  let t = useSceneGraphSelector()
-  return e.some((e) => {
-    let r = t.get(e)
-    return r?.hasVideoPaintOrHasVideoPaintDescendant
-  })
+
+/**
+ * Returns true if any node in the given list has video paint or descendant with video paint.
+ * Original: $$z13
+ */
+export function useAnyNodeHasVideoPaint(nodeIds: string[]): boolean {
+  const sceneGraph = useSceneGraphSelector()
+  return nodeIds.some(id => sceneGraph.get(id)?.hasVideoPaintOrHasVideoPaintDescendant)
 }
-export const B2 = $$H0
-export const Cl = $$w1
-export const DW = $$R2
-export const PU = $$N3
-export const Pn = $$F4
-export const Uo = $$G5
-export const aK = $$D6
-export const bE = $$U7
-export const eG = $$L8
-export const hn = $$k9
-export const nL = $$A10
-export const oJ = $$x11
-export const qr = $$M12
-export const t9 = $$z13
-export const tc = $$O14
-export const uM = $$V15
-export const yB = $$j16
-export const z7 = $$B17
+
+// Export refactored names for imports
+export const B2 = useAnyCooperFrameHasVideoPaint
+export const Cl = useCooperFrameSelectionInfo
+export const DW = useNodeMediaPaintById
+export const PU = TextImageEnum
+export const Pn = useSelectedComponentLibraryKey
+export const Uo = useNodeHasVideoPaint
+export const aK = useSelectedImageNodeGuids
+export const bE = useCooperFrameAssetCategorySwitch
+export const eG = useNodeMediaPaint
+export const hn = useSelectedImageOrVideoNodeGuids
+export const nL = hasImageFill
+export const oJ = hasImageOrVideoFill
+export const qr = selectComponentCooperFrameIds
+export const t9 = useAnyNodeHasVideoPaint
+export const tc = useSelectedCooperFrameGuids
+export const uM = useAllSelectedNodesHaveVideoFill
+export const yB = useSelectedAndFocusedNodeIds
+export const z7 = useIsCooperBulkCreateMode

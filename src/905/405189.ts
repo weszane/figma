@@ -5,8 +5,8 @@ import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/241899";
 import { P } from "../905/347284";
 import { TrackingProvider } from "../figma_app/831799";
-import { G$ } from "../figma_app/646357";
-import { U } from "../905/506188";
+import { formatLibraryContents } from "../figma_app/646357";
+import { getLibraryNames } from "../905/506188";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { w } from "../905/768636";
@@ -33,7 +33,7 @@ export function $$x0(e) {
   let [t, i] = useState(null);
   let o = lh();
   let A = er();
-  let y = U(e.libraryKeys);
+  let y = getLibraryNames(e.libraryKeys);
   let x = "loading" === y.status;
   let S = useCallback(() => {
     let t = 0;
@@ -83,7 +83,7 @@ export function $$x0(e) {
                 children: [jsxs(ButtonPrimitive, {
                   className: "missing_libraries_view--rowHeader--Ych4v",
                   onClick: () => i(e),
-                  children: [c ?? "Missing library with " + G$({
+                  children: [c ?? "Missing library with " + formatLibraryContents({
                     numVariables: a,
                     numProductComponents: t.length - r - a - l,
                     numVariableCollections: l,

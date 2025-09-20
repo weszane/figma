@@ -3,10 +3,10 @@ import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/65623
 import { selectWithShallowEqual } from "../905/103090";
 import { getComponentBreadcrumbs, memoizedProcessComponentsAndStateGroups, processLocalComponents, getFullComponentBreadcrumbs } from "../figma_app/80990";
 import { Nz } from "../figma_app/915774";
-import { X0, th } from "../figma_app/646357";
-import { V } from "../905/726668";
+import { getNonDeletedAssets, flattenAssetsByTeam } from "../figma_app/646357";
+import { useMultipleLibraryMetadata } from "../905/726668";
 import { getBasename } from "../905/309735";
-import { He } from "../figma_app/155728";
+import { useSubscribedLibraryKeys } from "../figma_app/155728";
 import { $1, oV } from "../figma_app/76115";
 import { VL } from "../figma_app/112055";
 import { N } from "../905/281143";
@@ -93,7 +93,7 @@ function A(e, t, i) {
   return o;
 }
 export function $$y1(e, t, i) {
-  return A(X0(memoizedProcessComponentsAndStateGroups(e)), t, i);
+  return A(getNonDeletedAssets(memoizedProcessComponentsAndStateGroups(e)), t, i);
 }
 export function $$b6({
   libraryKeyBackingSelectedItems: e,
@@ -131,8 +131,8 @@ export function $$b6({
         ..._libraryKeyToSubscribedItems
       };
       if (null != a && a !== r?.libraryKey && !(a in t)) {
-        let i = th(e.publishedByLibraryKey.components);
-        let n = th(e.publishedByLibraryKey.stateGroups);
+        let i = flattenAssetsByTeam(e.publishedByLibraryKey.components);
+        let n = flattenAssetsByTeam(e.publishedByLibraryKey.stateGroups);
         let r = i[a] ?? {};
         let o = n[a] ?? {};
         t[a] = [...Object.values(processLocalComponents(r)), ...Object.values(o)];
@@ -210,9 +210,9 @@ export function $$S0(e) {
   return null;
 }
 export function $$w7(e) {
-  let t = He();
+  let t = useSubscribedLibraryKeys();
   let i = useMemo(() => e ? [...t, e] : [...t], [e, t]);
-  let r = V(i);
+  let r = useMultipleLibraryMetadata(i);
   return useMemo(() => ({
     libraryMetadataLoading: "loading" === r.status,
     libraryMetadataMap: r?.data ?? {}

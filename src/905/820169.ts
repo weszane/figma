@@ -8,7 +8,7 @@ import c from "../vendor/223926";
 import { parsePxNumber } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { pP } from "../figma_app/328825";
-import { uJ } from "../figma_app/646357";
+import { groupStylesByPrefix } from "../figma_app/646357";
 import { Pw } from "../905/782020";
 import { vdd, uj0 } from "../figma_app/27776";
 var d = l;
@@ -58,7 +58,7 @@ function I({
   let {
     sortedPrefixes,
     stylesByPrefix
-  } = uJ(e);
+  } = groupStylesByPrefix(e);
   sortedPrefixes.forEach(e => {
     let n = stylesByPrefix[e];
     n && 0 !== n.length && (e.length > 0 && i.push({

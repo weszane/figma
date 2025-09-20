@@ -40,7 +40,7 @@ import { useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { _ as _$$_, S as _$$S } from '../figma_app/490799';
 import { CurrencyFormatter } from '../figma_app/514043';
-import { i6 } from '../figma_app/543529';
+import { useOrgManagesSeatsViaScim } from '../figma_app/543529';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { CM, kj, NU, SI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
@@ -206,7 +206,7 @@ function er(e) {
   let b = useTeamPlanFeatures();
   let [y] = handleSuspenseRetainRelease(b);
   let A = !!y.data?.campfireProvisionalAccessEnabled;
-  let V = i6();
+  let V = useOrgManagesSeatsViaScim();
   let W = V.data;
   if (useEffect(() => {
     V.status === 'errors' && console.error('orgManagesSeatsViaScimQueryResult error', V.errors);

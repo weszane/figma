@@ -19,7 +19,7 @@ import { UpsellModalType } from "../905/165519";
 import { FeatureFlag } from "../905/652992";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { fileActionEnum } from "../figma_app/630077";
-import { dF } from "../figma_app/275938";
+import { useLibraryName } from "../figma_app/275938";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { n as _$$n } from "../905/347702";
 import { oh, Yg as _$$Yg } from "../905/526509";
@@ -84,7 +84,7 @@ export function $$R1() {
   return useMemo(() => i.filter(e => a in (e.lastAddedAtByUserId ?? {})).map(e => e.id), [i, a]);
 }
 export function $$D4(e, t) {
-  let i = dF(e);
+  let i = useLibraryName(e);
   return t ? `${i} - ${t}` : i;
 }
 export function $$M2(e) {

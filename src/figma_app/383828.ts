@@ -5,7 +5,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { uO } from "../figma_app/933328";
 import { memoizedProcessComponentsAndStateGroups, processLocalComponents } from "../figma_app/80990";
-import { iP, nJ } from "../figma_app/646357";
+import { getPublishedAssetsForLibrary, areNodesEqual } from "../figma_app/646357";
 import { getBasename, splitPath, getDirname } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -124,11 +124,11 @@ export function $$T3(e, t, r) {
     libraryKey
   } = n;
   let o = atomStoreManager.get(qp)[libraryKey];
-  let l = iP(t.publishedByLibraryKey.components, {
+  let l = getPublishedAssetsForLibrary(t.publishedByLibraryKey.components, {
     library_key: libraryKey,
     team_id: o?.team_id ?? null
   });
-  let u = iP(t.publishedByLibraryKey.stateGroups, {
+  let u = getPublishedAssetsForLibrary(t.publishedByLibraryKey.stateGroups, {
     library_key: libraryKey,
     team_id: o?.team_id ?? null
   });
@@ -150,7 +150,7 @@ export function $$T3(e, t, r) {
 function I(e, t) {
   if (!e || !e.containing_frame?.nodeId && 1 === splitPath(e.name).length) return [];
   let r = getDirname(e.name);
-  return t.filter(t => nJ(t.containing_frame, e?.containing_frame) && getDirname(t.name) === r);
+  return t.filter(t => areNodesEqual(t.containing_frame, e?.containing_frame) && getDirname(t.name) === r);
 }
 export function $$S2(e, t, r, n, i, a, s) {
   $$v4(e, t, r, Object.keys(n), i, a, s);

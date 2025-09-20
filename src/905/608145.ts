@@ -12,7 +12,7 @@ import { handleUrlAction } from "../905/280005";
 import { reportError } from "../905/11";
 import { VisualBellActions } from "../905/302958";
 import { zM } from "../figma_app/580736";
-import { Lk, x as _$$x } from "../figma_app/639711";
+import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
 import { defaultViewAtom } from "../figma_app/69680";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
@@ -299,7 +299,7 @@ export function $$J0(e, t, i) {
           return;
         }
         if ("buzz" === w) {
-          atomStoreManager.set(Lk, _$$x.PLUGINS);
+          atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
           atomStoreManager.set(zM, "development");
           mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && handlePluginError();
           return;
@@ -340,7 +340,7 @@ export function $$J0(e, t, i) {
         return;
       }
       if ("buzz" === w) {
-        atomStoreManager.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
         atomStoreManager.set(zM, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && handlePluginError();
         return;

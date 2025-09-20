@@ -16,10 +16,10 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sw } from "../figma_app/914957";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { IW } from "../figma_app/646357";
+import { getShownNonLocalStyle } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
-import { Nr } from "../figma_app/463500";
+import { deleteStyleIfKeyMatches } from "../figma_app/463500";
 import { zK, zM } from "../905/182453";
 import { Gf, Zv, _f } from "../figma_app/293304";
 let N = Gf;
@@ -50,9 +50,9 @@ export function $$w1() {
     Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
     e(sw());
   };
-  let F = Zv(IW(stylePreviewShown), selectedStyleProperties, k);
+  let F = Zv(getShownNonLocalStyle(stylePreviewShown), selectedStyleProperties, k);
   let j = scopeAwareFunction.user("slides-delete-style", () => {
-    stylePreviewShown.style.isLocal && Nr(stylePreviewShown.style, r);
+    stylePreviewShown.style.isLocal && deleteStyleIfKeyMatches(stylePreviewShown.style, r);
     M();
   });
   return jsx(zK.Provider, {

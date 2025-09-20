@@ -9,7 +9,7 @@ import { o as _$$o } from "../905/605383";
 import { showDropdownThunk } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
-import { Gj } from "../figma_app/646357";
+import { getAssetUniqueId } from "../figma_app/646357";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { sp } from "../figma_app/678300";
@@ -189,7 +189,7 @@ export function $$D1(e) {
       shouldHideDescription: !0,
       isFigJam: !0,
       noBackground: !0
-    }, Gj(t))) : x.push(jsx(lX, {
+    }, getAssetUniqueId(t))) : x.push(jsx(lX, {
       buttonProps: {
         onContextMenu: e => {
           l(t, e);
@@ -208,7 +208,7 @@ export function $$D1(e) {
       shouldHideTooltip: i,
       showName: !0,
       width: w
-    }, Gj(t)));
+    }, getAssetUniqueId(t)));
   }
   let C = e.ui3Compact ? "component_tiles--componentTilesCompact--7vcle component_tiles--componentTiles_v2--9-itI" : t ? "component_tiles--componentTiles_v2--9-itI" : "component_tiles--componentTiles--axRNc";
   let T = e.ui3Compact ? {

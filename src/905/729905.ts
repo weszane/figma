@@ -8,7 +8,7 @@ import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { Fl } from "../figma_app/236178";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getParentOrgId } from "../905/872904";
-import { je, fi } from "../figma_app/155728";
+import { useSubscribedLibraries, useUntransformedSubscribedLibraries } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { isPublishedTeamLibrary, isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { L } from "../905/773253";
@@ -94,8 +94,8 @@ var d = l;
       workspaceApprovedLibraryKeys,
       orgApprovedLibraryKeys
     } = Fl();
-    let n = je();
-    let r = fi();
+    let n = useSubscribedLibraries();
+    let r = useUntransformedSubscribedLibraries();
     let s = useFigmaLibrariesEnabled();
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
@@ -114,7 +114,7 @@ var d = l;
     }, [s, e, orgApprovedLibraryKeys, n.data, r.data?.file?.libraryOrgSubscriptions, r.data?.file?.libraryTeamSubscriptions, r.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions, workspaceApprovedLibraryKeys]);
   }
   function w(e) {
-    let t = fi();
+    let t = useUntransformedSubscribedLibraries();
     let {
       workspaceApprovedLibraryKeys,
       orgApprovedLibraryKeys

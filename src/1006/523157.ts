@@ -10,7 +10,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { PluginAction } from "../905/15667";
-import { Yo } from "../figma_app/543529";
+import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { useCanRunExtensions } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
@@ -200,7 +200,7 @@ export function $$F0() {
   let t = useSelector(e => e.mirror.selectionProperties.numSelected);
   let n = selectWithShallowEqual(e => e.publishedPlugins);
   let r = selectWithShallowEqual(e => e.localPlugins);
-  let a = Yo();
+  let a = useCurrentOrgAdminInfo();
   let p = useCurrentFileKey();
   let C = useRef(new _$$O(_$$A.duration(1, "day")));
   let T = useCanRunExtensions();

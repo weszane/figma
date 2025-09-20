@@ -28,7 +28,7 @@ import { k as _$$k2 } from "../905/582200";
 import { $ as _$$$ } from "../1528/660656";
 import { flushSync } from "react-dom";
 import { h as _$$h2 } from "../905/207101";
-import { t9 } from "../figma_app/334505";
+import { useAnyNodeHasVideoPaint } from "../figma_app/334505";
 import { hg, u7 } from "../figma_app/425489";
 import { e as _$$e } from "../9410/707590";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -512,7 +512,7 @@ function eu({
       currentPresentedNode: r,
       buzzInlinePreviewStatus: i
     }, s] = useAtomValueAndSetter(_$$e.stateAtom);
-    let o = t9(e ? [e] : []);
+    let o = useAnyNodeHasVideoPaint(e ? [e] : []);
     useEffect(() => {
       i === u7.LOAD_FORBIDDEN && s({
         type: "UPDATE_BUZZ_INLINE_PREVIEW",
@@ -700,7 +700,7 @@ let ep = registerModal(function (e) {
   let [d, p] = useState({});
   let h = _$$$();
   let m = h.length;
-  let _ = t9(h);
+  let _ = useAnyNodeHasVideoPaint(h);
   let x = useCallback(e => {
     let t = i.get(e);
     let n = t?.hasVideoPaintOrHasVideoPaintDescendant ?? !1;

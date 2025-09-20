@@ -1,29 +1,77 @@
-import { isNotNullish } from "../figma_app/95419";
-import { l as _$$l } from "../905/716947";
-import { getResourceDataOrFallback } from "../905/663269";
-import { getI18nString } from "../905/303541";
-import { py } from "../905/395857";
-import { yW } from "../figma_app/644808";
-export function $$d1(e) {
-  var t;
-  let r = getResourceDataOrFallback(e.libraryKeyToFile?.file);
-  if (!r) return null;
-  let d = r.libraryAssets.map(e => py(_$$l(r.libraryKey), e)).filter(isNotNullish);
-  return 0 === d.length ? null : {
-    library: {
-      name: "Pages" === (t = r).name ? getI18nString("design_systems.assets_panel.site_blocks.pages") : "Navigation" === t.name ? getI18nString("design_systems.assets_panel.site_blocks.navigation") : "Heroes" === t.name ? getI18nString("design_systems.assets_panel.site_blocks.heroes") : "Features" === t.name ? getI18nString("design_systems.assets_panel.site_blocks.features") : "CMS" === t.name ? getI18nString("design_systems.assets_panel.site_blocks.cms") : t.name,
-      libraryKey: _$$l(r.libraryKey),
-      thumbnailUrl: r.thumbnailUrl,
-      thumbnailShouldCover: !1,
-      numResponsiveSets: d.length,
-      type: yW.SITE,
-      libraryType: "team"
-    },
-    assets: d
-  };
+import { getI18nString } from '../905/303541'
+import { mapResponsiveSetProperties } from '../905/395857'
+import { getResourceDataOrFallback } from '../905/419236'
+import { isNotNullish } from '../figma_app/95419'
+import { ModeType } from '../figma_app/644808'
+
+/**
+ * Represents the constant for site kit file.
+ * (Original: $$c0)
+ */
+export const SITE_KIT_FILE = 'SITE_KIT_FILE'
+
+/**
+ * Represents the constant for site kit embeds library key.
+ * (Original: $$u2)
+ */
+export const SITE_KIT_EMBEDS_LIBRARY_KEY = 'SITE_KIT_EMBEDS_LIBRARY_KEY'
+
+/**
+ * Maps the library name to its localized string if applicable.
+ * @param name - The original library name.
+ * @returns The localized library name if matched, otherwise the original name.
+ */
+export function getLocalizedLibraryName(name: string): string {
+  switch (name) {
+    case 'Pages':
+      return getI18nString('design_systems.assets_panel.site_blocks.pages')
+    case 'Navigation':
+      return getI18nString('design_systems.assets_panel.site_blocks.navigation')
+    case 'Heroes':
+      return getI18nString('design_systems.assets_panel.site_blocks.heroes')
+    case 'Features':
+      return getI18nString('design_systems.assets_panel.site_blocks.features')
+    case 'CMS':
+      return getI18nString('design_systems.assets_panel.site_blocks.cms')
+    default:
+      return name
+  }
 }
-let $$c0 = "SITE_KIT_FILE";
-let $$u2 = "SITE_KIT_EMBEDS_LIBRARY_KEY";
-export const GZ = $$c0;
-export const Pv = $$d1;
-export const Yl = $$u2;
+
+/**
+ * Retrieves and maps site kit assets and library information.
+ * (Original: $$d1)
+ * @param params - Object containing libraryKeyToFile property.
+ * @returns Site kit library and assets info, or null if not found.
+ */
+export function getSiteKitAssets(params: { libraryKeyToFile?: { file?: any } }) {
+  const resourceData = getResourceDataOrFallback(params.libraryKeyToFile?.file)
+  if (!resourceData)
+    return null
+
+  const assets = resourceData.libraryAssets
+    .map((asset: any) => mapResponsiveSetProperties(resourceData.libraryKey, asset))
+    .filter(isNotNullish)
+
+  if (assets.length === 0)
+    return null
+
+  return {
+    library: {
+      name: getLocalizedLibraryName(resourceData.name),
+      libraryKey: resourceData.libraryKey,
+      thumbnailUrl: resourceData.thumbnailUrl,
+      thumbnailShouldCover: false,
+      numResponsiveSets: assets.length,
+      type: ModeType.SITE,
+      libraryType: 'team',
+    },
+    assets,
+  }
+}
+
+/** Exported constants for external usage (Original: GZ, Yl) */
+export const GZ = SITE_KIT_FILE
+export const Yl = SITE_KIT_EMBEDS_LIBRARY_KEY
+/** Exported function for external usage (Original: Pv) */
+export const Pv = getSiteKitAssets

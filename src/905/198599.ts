@@ -16,7 +16,7 @@ import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { qp } from "../905/977779";
 import { selectOpenFile } from "../figma_app/516028";
-import { eD, ET } from "../figma_app/646357";
+import { resolveFileParentOrgId, getSubscribedAssetKeys } from "../figma_app/646357";
 import { V } from "../905/342732";
 import { Cn, g_ } from "../905/225265";
 import { Z } from "../905/387928";
@@ -103,11 +103,11 @@ export async function $$H1(e, t) {
       selectedView: _$$h(i),
       inDesignEditor: getEditorTypeFromView(_$$h(i)) === FEditorType.Design,
       fileVersion: d,
-      currentOrgId: eD(i),
+      currentOrgId: resolveFileParentOrgId(i),
       fileByKey: t_(i),
       libraryByLibraryKey: atomStoreManager.get(qp),
       includeVisualAssets: atomStoreManager.get(lj).length > 0,
-      usedAssetKeys: ET(i, debugState.dispatch)
+      usedAssetKeys: getSubscribedAssetKeys(i, debugState.dispatch)
     };
     let M = {
       sessionId: G ?? "",

@@ -1,42 +1,104 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useCallback, useContext } from "react";
-let a = createContext({
-  getLibrary: () => void 0,
-  getPage: () => void 0,
-  getFolder: () => void 0
-});
-export function $$s1({
-  children: e,
-  assetPanelItemsByLibraryKey: t
-}) {
-  let r = useCallback(e => {
-    if (e) return t.allLibrariesUnsorted.get(e);
-  }, [t]);
-  let s = useCallback((e, t) => {
-    if (!e || !t) return;
-    let n = r(e);
-    return n?.pages.get(t);
-  }, [r]);
-  let o = useCallback((e, t, r) => {
-    if (!e || !t) return;
-    let n = s(e, t);
-    if (!n) return;
-    if (!r) return n.assets;
-    let i = n.assets;
-    for (let e of r) if (!(i = i.subtrees.get(e))) return;
-    return i;
-  }, [s]);
-  return jsx(a.Provider, {
-    value: {
-      getLibrary: r,
-      getPage: s,
-      getFolder: o
+import { createContext, useCallback, useContext } from 'react'
+import { jsx } from 'react/jsx-runtime'
+
+/**
+ * Context for asset panel operations.
+ * Original context variable: a
+ */
+const AssetPanelContext = createContext<{
+  getLibrary: (key: string) => any
+  getPage: (libraryKey: string, pageKey: string) => any
+  getFolder: (libraryKey: string, pageKey: string, folderPath?: string[]) => any
+}>({
+  getLibrary: () => undefined,
+  getPage: () => undefined,
+  getFolder: () => undefined,
+})
+
+/**
+ * Props for AssetPanelProvider.
+ * Original function: $$s1
+ */
+interface AssetPanelProviderProps {
+  children: React.ReactNode
+  assetPanelItemsByLibraryKey: {
+    allLibrariesUnsorted: Map<string, {
+      pages: Map<string, {
+        assets: any
+        subtrees?: Map<string, any>
+      }>
+    }>
+  }
+}
+
+/**
+ * Provides asset panel context to children.
+ * @param props AssetPanelProviderProps
+ */
+export function AssetPanelProvider({
+  children,
+  assetPanelItemsByLibraryKey,
+}: AssetPanelProviderProps) {
+  /**
+   * Gets a library by key.
+   * Original function: r
+   */
+  const getLibrary = useCallback((libraryKey: string) => {
+    if (libraryKey)
+      return assetPanelItemsByLibraryKey.allLibrariesUnsorted.get(libraryKey)
+  }, [assetPanelItemsByLibraryKey])
+
+  /**
+   * Gets a page from a library.
+   * Original function: s
+   */
+  const getPage = useCallback((libraryKey: string, pageKey: string) => {
+    if (!libraryKey || !pageKey)
+      return
+    const library = getLibrary(libraryKey)
+    return library?.pages.get(pageKey)
+  }, [getLibrary])
+
+  /**
+   * Gets a folder or assets from a page.
+   * Original function: o
+   */
+  const getFolder = useCallback(
+    (libraryKey: string, pageKey: string, folderPath?: string[]) => {
+      if (!libraryKey || !pageKey)
+        return
+      const page = getPage(libraryKey, pageKey)
+      if (!page)
+        return
+      if (!folderPath)
+        return page.assets
+      let subtree = page.assets
+      for (const segment of folderPath) {
+        subtree = subtree.subtrees?.get(segment)
+        if (!(subtree))
+          return
+      }
+      return subtree
     },
-    children: e
-  });
+    [getPage],
+  )
+
+  return jsx(AssetPanelContext.Provider, {
+    value: {
+      getLibrary,
+      getPage,
+      getFolder,
+    },
+    children,
+  })
 }
-export function $$o0() {
-  return useContext(a);
-}
-export const G = $$o0;
-export const K = $$s1;
+
+/**
+ * Hook to access asset panel context.
+ * Original function: $$o0
+ */
+export const useAssetPanelContext = () => useContext(AssetPanelContext)
+
+// Export aliases for compatibility with original exports
+export const G = useAssetPanelContext
+export const K = AssetPanelProvider

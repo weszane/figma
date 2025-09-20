@@ -22,7 +22,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { z7, Uo } from "../figma_app/334505";
+import { useIsCooperBulkCreateMode, useNodeHasVideoPaint } from "../figma_app/334505";
 import { getVisibleTheme } from "../905/640017";
 import { ic } from "../figma_app/688398";
 import { x as _$$x } from "../9410/705473";
@@ -685,9 +685,9 @@ export function $$ed1({
   thumbnailType: l = 0
 }) {
   let r = ic(e);
-  let i = z7();
+  let i = useIsCooperBulkCreateMode();
   let s = useIsSelectedViewFullscreenCooper();
-  let o = Uo(e) && s && getFeatureFlags().buzz_video_export;
+  let o = useNodeHasVideoPaint(e) && s && getFeatureFlags().buzz_video_export;
   return jsxs(Fragment, {
     children: [1 === l && jsx("div", {
       className: "xh8yej3 x5yr21d x78zum5 x19y5rnk xl56j7k x6s0dn4 x10l6tqk x1vjfegm x1yjdb4r x1us6l5c",

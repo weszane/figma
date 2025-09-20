@@ -13,7 +13,7 @@ import { componentBatchUpdate, defaultLibraryInitializeLibraryKeys, defaultLibra
 import { tg, xZ, VF } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { qp } from "../905/977779";
-import { LC, Ve, iw, kG } from "../figma_app/646357";
+import { resolveUsedComponentsStateGroups, addTrackedState, generateDefaultLibrariesCacheKey, resolveUsedLibraries } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { YG } from "../905/921418";
 import { withParsedMeta } from "../905/405710";
@@ -31,12 +31,12 @@ async function R(e, t) {
   let n = !getInitialOptions().user_data;
   if (n && !r) return;
   if ((O.get(t) || 0) > 20) {
-    LC();
+    resolveUsedComponentsStateGroups();
     return;
   }
   let d = yD(t);
   if (!isNullOrFailure(e.getState().loadingState, d)) {
-    LC();
+    resolveUsedComponentsStateGroups();
     return;
   }
   e.dispatch(loadingStatePutLoading({
@@ -68,12 +68,12 @@ async function R(e, t) {
       subscribeToRealtime: !0
     }));
     m.data.meta.files.forEach(e => {
-      Ve(e.key);
+      addTrackedState(e.key);
     });
     let y = atomStoreManager.get(qp);
     let T = m.data.meta.hub_files;
     T && (T.forEach(e => {
-      Ve(e.id);
+      addTrackedState(e.id);
     }), e.dispatch(D3(T)));
     let I = m.data.meta.state_groups.map(e => ({
       ...e,
@@ -99,13 +99,13 @@ async function R(e, t) {
         }
       });
     }
-    LC();
+    resolveUsedComponentsStateGroups();
     e.dispatch(loadingStatePutSuccess({
       key: d
     }));
     YG.queryDidChange(e);
   } catch (r) {
-    LC();
+    resolveUsedComponentsStateGroups();
     O.set(t, (O.get(t) || 0) + 1);
     e.dispatch(loadingStatePutFailure({
       key: d
@@ -115,7 +115,7 @@ async function R(e, t) {
 async function L(e) {
   let t = e.getState().openFile;
   if (!t) return;
-  let r = iw(t.key);
+  let r = generateDefaultLibrariesCacheKey(t.key);
   let i = e.getState().loadingState;
   if (!(isLoaded(i, r) || isLoading(i, r))) {
     e.dispatch(loadingStatePutLoading({
@@ -139,12 +139,12 @@ async function L(e) {
       e.dispatch(defaultLibraryInitializeLibraryKeys({
         libraryKeys: a
       }));
-      kG();
+      resolveUsedLibraries();
       e.dispatch(loadingStatePutSuccess({
         key: r
       }));
     } catch (t) {
-      kG();
+      resolveUsedLibraries();
       e.dispatch(loadingStatePutFailure({
         key: r
       }));
@@ -176,7 +176,7 @@ let $$M3 = createOptimistThunk(e => {
   let r = !!t.user;
   if (!t.openFile?.key) return;
   let n = e.getState().selectedView;
-  n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : kG(), r && j(e, n.editorType === FEditorType.Whiteboard ? FDocumentType.FigJam : FDocumentType.Design));
+  n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : resolveUsedLibraries(), r && j(e, n.editorType === FEditorType.Whiteboard ? FDocumentType.FigJam : FDocumentType.Design));
   r && (e.dispatch(tg()), xZ(e));
 });
 let $$F1 = "FETCH_RECENTLY_USED_LIBRARY_ITEMS";

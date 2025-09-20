@@ -13,7 +13,7 @@ import { z5 } from "../905/713722";
 import { A as _$$A } from "../905/639174";
 import { rY } from "../905/985490";
 import { getImageManager } from "../figma_app/624361";
-import { pq, f2 } from "../figma_app/646357";
+import { fetchStylesByKeys, batchFetchFiles } from "../figma_app/646357";
 import { bW } from "../905/491806";
 import { SourceDirection, ViewType } from "../905/535806";
 import { vPu, kLz } from "../figma_app/27776";
@@ -185,7 +185,7 @@ let G = async (e, t, i) => {
   };
   let n = {};
   let r = {};
-  (await pq(i, e, t)).forEach(e => {
+  (await fetchStylesByKeys(i, e, t)).forEach(e => {
     n[e.key] = e.library_key;
     r[e.key] = V(e);
   });
@@ -200,7 +200,7 @@ export async function $$z15(e, t, i) {
   let [{
     styleKeyToLibraryKey: s,
     styleKeyToFileKey: o
-  }] = await Promise.all([G(r, t, i), f2(a, i)]);
+  }] = await Promise.all([G(r, t, i), batchFetchFiles(a, i)]);
   return {
     styleKeyToLibraryKey: s,
     styleKeyToFileKey: o

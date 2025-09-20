@@ -9,7 +9,7 @@ import { fetchDynamicConfig } from "../figma_app/594947";
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { compareWithGeneratedKey } from "../905/709171";
 import { isBranchAlt } from "../905/760074";
-import { Av, ah, uN, f0 } from "../figma_app/646357";
+import { getAssetKey, getComponentAssetsMap, getComponentLibraryKey, getStateGroupLibraryKey } from "../figma_app/646357";
 import { withParsedMeta } from "../905/405710";
 import { FFileType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
@@ -75,7 +75,7 @@ export function $$C3(e, t, r, n, i) {
     ...e,
     server_score: e.score
   }));
-  let [l, d] = s()(o, e => n.has(e.library_key) || t?.libraryKey === e.library_key || i.has(Av(e)));
+  let [l, d] = s()(o, e => n.has(e.library_key) || t?.libraryKey === e.library_key || i.has(getAssetKey(e)));
   return {
     subscribedSearchResults: l,
     unsubscribedSearchResults: d
@@ -124,13 +124,13 @@ export async function $$L7(e, t, r) {
     components: _components,
     stateGroups: _stateGroups
   } = function (e, t, r) {
-    let n = ah(r.library.publishedByLibraryKey.components);
-    let i = ah(r.library.publishedByLibraryKey.stateGroups);
+    let n = getComponentAssetsMap(r.library.publishedByLibraryKey.components);
+    let i = getComponentAssetsMap(r.library.publishedByLibraryKey.stateGroups);
     let a = r.mirror.sceneGraph;
     return {
       components: r.library.subscribedSymbolsFromLoadedPages.filter(r => {
         let i = a.get(r.nodeId);
-        let s = uN(r.key, n);
+        let s = getComponentLibraryKey(r.key, n);
         return !i?.containingStateGroupId && s && !e.has(s) && s !== t;
       }).map(e => ({
         key: e.key,
@@ -140,7 +140,7 @@ export async function $$L7(e, t, r) {
         key: e.key,
         type: PrimaryWorkflowEnum.STATE_GROUP
       })).filter(r => {
-        let n = f0(r.key, i);
+        let n = getStateGroupLibraryKey(r.key, i);
         return n && !e.has(n) && n !== t;
       })
     };
@@ -199,7 +199,7 @@ export async function $$D8(e, t, r = !1) {
 }
 export function $$k13(e, t, r) {
   let [n, i] = s()(e, function (e) {
-    return !!r.has(Av(e)) || t.has(e.library_key);
+    return !!r.has(getAssetKey(e)) || t.has(e.library_key);
   });
   return {
     communitySearchResults: n,
@@ -251,12 +251,12 @@ export function $$j6(e, ...t) {
   let r = {};
   t.forEach(e => {
     e.forEach(e => {
-      r[Av(e)] = e;
+      r[getAssetKey(e)] = e;
     });
   });
   let n = [];
   e.forEach(e => {
-    let t = Av(e);
+    let t = getAssetKey(e);
     t in r ? (e.ai_score && (r[t].ai_score = e.ai_score), e.lexical_score && (r[t].lexical_score = e.lexical_score), e.server_score && (r[t].server_score = e.server_score), e.fuse_score && (r[t].fuse_score = e.fuse_score)) : n.push(e);
   });
   return n;

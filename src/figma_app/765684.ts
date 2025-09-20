@@ -12,7 +12,7 @@ import { X } from "../905/853613";
 import { Ew } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
 import { selectOpenFileKey } from "../figma_app/516028";
-import { dx } from "../figma_app/646357";
+import { isPrimaryWorkflowType } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { U } from "../905/966438";
 import { T as _$$T } from "../905/714785";
@@ -182,7 +182,7 @@ export function $$P0({
   });
   let S = ZV(T);
   return useCallback(i => {
-    if ((i.keyCode === KeyCodes.ENTER || i.keyCode === KeyCodes.SPACE) && dx(n)) {
+    if ((i.keyCode === KeyCodes.ENTER || i.keyCode === KeyCodes.SPACE) && isPrimaryWorkflowType(n)) {
       if (i.metaKey) {
         t();
         return;

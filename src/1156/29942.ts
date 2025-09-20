@@ -65,7 +65,7 @@ import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { yy } from "../figma_app/543529";
+import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { y as _$$y } from "../1250/295724";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { B as _$$B } from "../905/969273";
@@ -1125,7 +1125,7 @@ function tW() {
   let t = useTeamPlanPublicInfo();
   let n = t.unwrapOr(null)?.tier || null;
   let i = Tk();
-  let s = yy();
+  let s = useParentOrgOfOpenFile();
   let a = useAtomWithSubscription(openFileTeamAtom);
   if (!i || i === _$$ee.DISABLE_WITHOUT_TOAST) return null;
   let l = function (e, t) {

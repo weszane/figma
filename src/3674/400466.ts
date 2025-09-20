@@ -59,7 +59,7 @@ import { t as _$$t3 } from "../905/947268";
 import { rO } from "../figma_app/409807";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/299062";
-import { Gp, w$ } from "../figma_app/646357";
+import { getStyleSubscriptionInfo, useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { J as _$$J } from "../905/225412";
 import { Ig } from "../figma_app/155647";
 import { zi } from "../905/824449";
@@ -514,7 +514,7 @@ function eZ(e, t) {
   let a = f$(e);
   let i = mJ(a);
   if (!e || !a || !i) return null;
-  let o = Gp(e.key, [a], n);
+  let o = getStyleSubscriptionInfo(e.key, [a], n);
   if (!o) return null;
   let l = o.value;
   "SUBSCRIBED_WITHOUT_LIBRARY" === o.kind && (l.style_type = t);
@@ -628,8 +628,8 @@ function e3({
   return (!function (e) {
     let t = useSelector(e => e.library);
     let n = f$(e);
-    let a = n ? Gp(e.key, [n], t) : void 0;
-    w$(a);
+    let a = n ? getStyleSubscriptionInfo(e.key, [n], t) : void 0;
+    useOptimisticStyleThumbnailUpdate(a);
   }(e), i) ? jsxs("div", {
     className: ej,
     children: [!n && jsx("div", {
