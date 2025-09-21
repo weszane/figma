@@ -11,7 +11,7 @@ import { c$, wv, ms } from "../figma_app/236327";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { R as _$$R } from "../3591/975641";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { L as _$$L } from "../3591/956338";
@@ -206,7 +206,7 @@ let eu = class e extends PureComponent {
         onMouseLeave: this.onMouseLeave,
         children: [error ? jsx("div", {
           className: yd,
-          children: jsx(_$$t, {
+          children: jsx(MediaQuerySvgComponent, {
             svg: _$$A11
           })
         }) : this.isWidget ? jsx("div", {
@@ -215,12 +215,12 @@ let eu = class e extends PureComponent {
             className: K0,
             src: `/community/icon?resource_type=widget&resource_id=${this.props.plugin.plugin_id}`,
             alt: ""
-          }) : jsx(_$$t, {
+          }) : jsx(MediaQuerySvgComponent, {
             svg: _$$A6
           })
         }) : jsx("div", {
           className: im,
-          children: jsx(_$$t, {
+          children: jsx(MediaQuerySvgComponent, {
             svg: _$$A0,
             fallbackSvg: _$$A1
           })
@@ -228,7 +228,7 @@ let eu = class e extends PureComponent {
           className: In,
           children: [jsxs("div", {
             className: error ? iH : YG,
-            children: [name, this.props.isPublished ? jsx(_$$t, {
+            children: [name, this.props.isPublished ? jsx(MediaQuerySvgComponent, {
               svg: _$$A5
             }) : null]
           }), error && this.state.isMouseOver ? jsx(_$$o, {
@@ -365,7 +365,7 @@ function eg(e) {
         children: e.plugin.error ? jsx(SvgComponent, {
           className: QW,
           svg: _$$A12
-        }) : jsx(_$$t, {
+        }) : jsx(MediaQuerySvgComponent, {
           className: ft,
           svg: _$$A2
         })

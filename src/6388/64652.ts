@@ -57,7 +57,7 @@ import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { O as _$$O2 } from "../905/666679";
 import { SvgComponent } from "../905/714743";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { b_ } from "../figma_app/835688";
 import { A as _$$A2 } from "../svg/910906";
 import { R as _$$R2 } from "../9410/430547";
@@ -135,7 +135,7 @@ function ep() {
     }));
   }, [t]);
   return jsx("div", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       width: "64px"
     }).$,
     children: jsxs(bL, {

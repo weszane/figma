@@ -16,7 +16,7 @@ import { ViewMode, SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../905/971482";
 import { GR, hZ } from "../figma_app/330108";
 import { getCurrentTeamId } from "../figma_app/598018";
-import { Lk, PublicModelType, ProjectSortField } from "../figma_app/162807";
+import { TeamSortField, PublicModelType, ProjectSortField } from "../figma_app/162807";
 import { jn } from "../figma_app/522082";
 import { vt } from "../figma_app/231614";
 import { kq, ro } from "../905/994947";
@@ -64,11 +64,11 @@ import { L as _$$L2 } from "../905/13390";
 import { i as _$$i } from "../905/610691";
 import { d as _$$d2 } from "../905/958822";
 import { b0 } from "../905/763690";
-import { qv } from "../905/977218";
+import { sortStateThunk } from "../905/977218";
 import { TrackingProvider } from "../figma_app/831799";
 import { nb, fA } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
-import { vj } from "../905/574958";
+import { SearchAnalytics } from "../905/574958";
 import { e0 as _$$e } from "../905/696396";
 import { p as _$$p3 } from "../figma_app/353099";
 import { y as _$$y2 } from "../figma_app/887997";
@@ -500,31 +500,31 @@ let eD = {
 let eL = e => {
   switch (e) {
     case SortField.NAME:
-      return Lk.NAME;
+      return TeamSortField.NAME;
     case SortField.CREATED_AT:
-      return Lk.CREATED_AT;
+      return TeamSortField.CREATED_AT;
     case SortField.TOUCHED_AT:
-      return Lk.TOUCHED_AT;
+      return TeamSortField.TOUCHED_AT;
     case SortField.OWNER:
-      return Lk.OWNER;
+      return TeamSortField.OWNER;
     case SortField.SEARCH_RELEVANCE:
-      return Lk.RELEVANCY;
+      return TeamSortField.RELEVANCY;
     default:
       debug(!0, "Should not try to sort by any other key in search list view");
-      return Lk.NAME;
+      return TeamSortField.NAME;
   }
 };
 let eF = e => {
   switch (e) {
-    case Lk.NAME:
+    case TeamSortField.NAME:
       return SortField.NAME;
-    case Lk.CREATED_AT:
+    case TeamSortField.CREATED_AT:
       return SortField.CREATED_AT;
-    case Lk.TOUCHED_AT:
+    case TeamSortField.TOUCHED_AT:
       return SortField.TOUCHED_AT;
-    case Lk.OWNER:
+    case TeamSortField.OWNER:
       return SortField.OWNER;
-    case Lk.RELEVANCY:
+    case TeamSortField.RELEVANCY:
       return SortField.SEARCH_RELEVANCE;
   }
 };
@@ -542,7 +542,7 @@ function eM(e) {
   let p = useCallback((i, n, r) => {
     i.type === nb.FILE && (t(filePutAction({
       file: fileEntityDataMapper.toSinatra(i.file)
-    })), s(r, "key" in n && "Enter" === n.key ? vj.Query.ClickAction.ENTER : vj.Query.ClickAction.CLICK, e.results.find(e => e.model.key === i.file.key)));
+    })), s(r, "key" in n && "Enter" === n.key ? SearchAnalytics.Query.ClickAction.ENTER : SearchAnalytics.Query.ClickAction.CLICK, e.results.find(e => e.model.key === i.file.key)));
   }, [t, e.results, s]);
   let m = useCallback(e => {
     let n = eL(e);
@@ -554,7 +554,7 @@ function eM(e) {
         sortDesc: i.files.sortKey !== n || !i.files.sortDesc
       }
     };
-    t(qv({
+    t(sortStateThunk({
       sortState: r
     }));
   }, [t, i]);
@@ -661,7 +661,7 @@ function eH(e) {
         sortDesc: i.projects.sortKey !== n || !i.projects.sortDesc
       }
     };
-    t(qv({
+    t(sortStateThunk({
       sortState: r
     }));
   };

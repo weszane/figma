@@ -44,7 +44,7 @@ import { useCurrentUserOrg } from '../905/845253';
 import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { O as _$$O2 } from '../905/936515';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { ck } from '../905/952832';
 import { a as _$$a } from '../905/964520';
 import { h1 } from '../905/986103';
@@ -107,10 +107,10 @@ function R({
   children: s
 }) {
   return jsx('div', {
-    style: sx.hFitContent.add({
+    style: styleBuilderInstance.hFitContent.add({
       gridColumnStart: e,
       gridColumnEnd: t
-    }).$$if(a, sx.h48.$, sx.add({
+    }).$$if(a, styleBuilderInstance.h48.$, styleBuilderInstance.add({
       borderRadius: '13px'
     }).borderBox.b1.colorBorder.$).$,
     children: a ? jsx(Wi, {
@@ -517,7 +517,7 @@ function tn({
       'className': c()(tt, 'seat_requests_table_mini_view--reminderIcon--N-ZQn'),
       'data-testid': 'seat-requests-mini-view-row-avatar-reminder',
       'children': jsx(_$$O2, {
-        style: sx.add({
+        style: styleBuilderInstance.add({
           rotate: '35deg',
           marginLeft: '-2px',
           marginTop: '-2px'
@@ -1093,7 +1093,7 @@ function tu({
       });
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       F(e => {
         let a = new Set(e);
         a.$$delete(t);
@@ -1174,7 +1174,7 @@ function tu({
       K(e => e + 1);
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       a && p(VisualBellActions.dequeue({
         matchType: tl
       }));
@@ -1183,7 +1183,7 @@ function tu({
       d(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts);
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       c();
     });
   };
@@ -1326,7 +1326,7 @@ function tu({
                 className: _$$s.fontMedium.$,
                 children: tj ? renderI18nText('admin_dashboard.requests.no_requests_for_you_right_now') : renderI18nText('admin_dashboard.requests.no_requests_to_approve')
               }), jsx('div', {
-                style: sx.add({
+                style: styleBuilderInstance.add({
                   maxWidth: '64%'
                 }).$,
                 children: tj ? eR === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.requests.empty_state.curf_all_users') : eR === UpgradeRequestSetting.MEMBERS ? ty ? getI18nString('admin_dashboard.requests.empty_state.curf_members.billing_group_admin') : getI18nString('admin_dashboard.requests.empty_state.curf_members.admin') : void 0 : eA && Z.length > 0 && eC && eC?.length > 0 ? eS.data.org && eS.data.org.name ? renderI18nText('admin_dashboard.requests.your_org_name_has_seat_request_that_need_review', {
@@ -1432,10 +1432,10 @@ export function $$tg0({
       trackingOptions: l,
       children: jsx('div', {
         children: jsxs('div', {
-          style: sx.mxAuto.add({
+          style: styleBuilderInstance.mxAuto.add({
             minWidth: '476px',
             maxWidth: '1536px'
-          }).px32.pb32.$$if(!L, sx.pt32).$,
+          }).px32.pb32.$$if(!L, styleBuilderInstance.pt32).$,
           children: [jsx(U, {
             plan: q,
             isLoading: F
@@ -1457,7 +1457,7 @@ export function $$tg0({
               }
             })]
           }), jsxs('div', {
-            style: sx.mt24.grid.gap24.add({
+            style: styleBuilderInstance.mt24.grid.gap24.add({
               gridTemplateColumns: 'repeat(12, 1fr)'
             }).$,
             ref: d,

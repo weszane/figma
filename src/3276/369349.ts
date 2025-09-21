@@ -10,7 +10,7 @@ import { e as _$$e } from "../905/621515";
 import { E6 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
 import { _ as _$$_ } from "../905/361125";
-import { M8 } from "../figma_app/915202";
+import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
 import { h as _$$h2 } from "../905/284399";
 import { q3 } from "../figma_app/450829";
@@ -37,7 +37,7 @@ export function $$y0() {
   let j = useCallback(() => {
     C.isShowing || w();
   }, [C.isShowing, w]);
-  E(C.uniqueId, M8, j);
+  E(C.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, j);
   return jsx(_$$h2, {
     element: _$$_,
     isShowing: C.isShowing,

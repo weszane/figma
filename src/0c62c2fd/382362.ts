@@ -19,11 +19,11 @@ import { dr, eb as _$$eb, oU } from "../4452/405965";
 import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { canPerformActionBasedOnLevel, getPermissionLevelName } from "../figma_app/12796";
 import { rq } from "../905/351260";
 import { bp, Wj } from "../905/913057";
-import { ls } from "../905/158283";
+import { initialDomainsState } from "../905/158283";
 import { AccessLevelEnum } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e } from "../905/393279";
@@ -165,7 +165,7 @@ export function $$ee0(e) {
   let ea = et && et.teamSharingSettings;
   let es = er ? er.id : null;
   let ei = et && et.workspace;
-  let en = er && er.org_domains ? er.org_domains : ls;
+  let en = er && er.org_domains ? er.org_domains : initialDomainsState;
   let eo = useMemo(() => ee.data?.sort((e, t) => e.pending === t.pending ? E4(e, z).toLocaleLowerCase() < E4(t, z).toLocaleLowerCase() ? -1 : 1 : e.pending ? 1 : -1) ?? [], [z, ee]);
   let el = et && et.pendingTeamRoleRequests ? et.pendingTeamRoleRequests : [];
   let {
@@ -293,7 +293,7 @@ export function $$ee0(e) {
             onInviteLevelChange: setInviteLevel,
             onSubmit: e => {
               if (er && er.domain_capture && en && en.domains.length > 0) {
-                let t = _$$Z(e).filter(e => isValidEmail(e) && !H_(en.domains, e));
+                let t = _$$Z(e).filter(e => isValidEmail(e) && !checkDomainExists(en.domains, e));
                 if (er?.invite_whitelist_guest_invite_setting == null && t.length > 0) {
                   $(showModalHandler({
                     type: _$$F,

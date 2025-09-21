@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { selectViewAction } from "../905/929976";
 import { popModalStack } from "../905/156213";
-import { _z, W0 } from "../905/977218";
+import { searchClearQueryAction, searchSelectedAction } from "../905/977218";
 import { getSelectedView } from "../figma_app/386952";
 import { InputType } from "../figma_app/162807";
 import { isSearchView } from "../figma_app/707808";
@@ -25,7 +25,7 @@ import { Vp, H9 } from "../905/714062";
 import { F as _$$F } from "../905/801537";
 import { y as _$$y } from "../905/713563";
 import { v as _$$v } from "../905/281500";
-import { Q8, BA, sC } from "../905/61477";
+import { searchInputAtom, isSearchViewAtom, searchScopeAtom } from "../905/61477";
 var u = c;
 export function $$P0({
   hideSearchPreview: e
@@ -35,9 +35,9 @@ export function $$P0({
   let [c, P] = useState(!1);
   let O = useRef(null);
   let D = useRef(null);
-  let [L, F] = useAtomValueAndSetter(Q8);
-  let M = useAtomWithSubscription(BA);
-  let j = useAtomWithSubscription(sC);
+  let [L, F] = useAtomValueAndSetter(searchInputAtom);
+  let M = useAtomWithSubscription(isSearchViewAtom);
+  let j = useAtomWithSubscription(searchScopeAtom);
   let U = useAtomWithSubscription(oT);
   let B = useAtomWithSubscription(L8);
   let [V, G] = useAtomValueAndSetter(rG);
@@ -99,7 +99,7 @@ export function $$P0({
   }, [isFauxFocused, c, V, M, U, Y, L, q, G, K, t]);
   let en = useCallback(() => {
     F("");
-    t(_z({}));
+    t(searchClearQueryAction({}));
     W();
     M && isSearchView(i) && t(selectViewAction(i.previousView ?? {
       view: "recentsAndSharing"
@@ -117,7 +117,7 @@ export function $$P0({
     e.preventDefault();
   }, []);
   useEffect(() => {
-    isFocused && (keyboardNavigationItem?.focus(), keyboardNavigationItem?.fauxFocus(), ee(), t(W0({
+    isFocused && (keyboardNavigationItem?.focus(), keyboardNavigationItem?.fauxFocus(), ee(), t(searchSelectedAction({
       entryPoint: K ? "fragment_search_modal" : "file_browser"
     })));
   }, [t, isFocused, keyboardNavigationItem, ee, K]);

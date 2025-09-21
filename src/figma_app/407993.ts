@@ -17,7 +17,7 @@ import { fU } from "../905/492004";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Ho, wE, sp } from "../figma_app/308685";
+import { stopChattingThunk, startReactingThunk, toggleEmojiWheelThunk } from "../figma_app/308685";
 import { Dm } from "../figma_app/8833";
 import { Tc } from "../905/797478";
 import { CB } from "../figma_app/442259";
@@ -29,7 +29,7 @@ import { F as _$$F } from "../905/258517";
 import { KindEnum } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
 import { _ as _$$_ } from "../figma_app/433187";
-import { S as _$$S } from "../figma_app/403368";
+import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { Qn } from "../figma_app/580087";
 import { Y as _$$Y } from "../905/1768";
 import { L as _$$L } from "../905/453756";
@@ -138,7 +138,7 @@ function ep(e) {
     onMouseLeave
   } = e;
   let o = useHandleMouseEvent(`emojiWheel.wedge.${name}`, "mousedown", e.onClick);
-  let l = _$$S();
+  let l = setupCursorChatDisabledCheck();
   let d = {
     transform: `scaleX(-1) rotate(${(position - 1) * 45 + 22.5}deg)`
   };
@@ -293,7 +293,7 @@ function eg({
   let [_, h] = useState(null);
   let [g, f] = useState(!1);
   let y = useCallback(() => {
-    p(Ho());
+    p(stopChattingThunk());
   }, [p]);
   let T = W();
   _$$Y(y, {
@@ -362,7 +362,7 @@ function eg({
         _$$F.trackFromFullscreen("Start reacting", {
           name: e.name
         });
-        p(wE({
+        p(startReactingThunk({
           imageUrl: n,
           name: e.name,
           position: i
@@ -594,7 +594,7 @@ function ey(e) {
   } = e;
   let c = W(emoji.name);
   let u = useContext(H).finishedAnimating;
-  let p = _$$S();
+  let p = setupCursorChatDisabledCheck();
   let h = useRef(null);
   let [m, f] = useState(null);
   if (useEffect(() => {
@@ -854,7 +854,7 @@ export function $$eS0(e) {
     isJoinedToActiveVotingSession: t
   }) ?? "STAMP";
   let l = useCallback(n => {
-    "WHEEL" === e.multiplayerEmoji.type && n !== o && r(sp({
+    "WHEEL" === e.multiplayerEmoji.type && n !== o && r(toggleEmojiWheelThunk({
       wheelType: {
         STAMP: "STAMP2",
         REACTION: "REACTION1",

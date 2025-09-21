@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/920142";
 import { generateRecordingKey, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { interactiveAnchorTracked } from "../figma_app/637027";
-import { t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -139,7 +139,7 @@ function B(e) {
   } = e.relaunchData;
   let l = hasLocalFileId(plugin) ? jsx("div", {
     className: "plugin_panel--pluginIconLocal--44TyG",
-    children: jsx(t, {
+    children: jsx(MediaQuerySvgComponent, {
       svg: _$$A2,
       fallbackSvg: _$$A3
     })

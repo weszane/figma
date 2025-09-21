@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { Spacing } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
@@ -132,7 +132,7 @@ function O(e) {
       className: _$$s.flex.flexColumn.justifyCenter.p32.$,
       children: [jsx("div", {
         className: _$$s.textHeadingLarge.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           letterSpacing: "-0.456px"
         }).$,
         children: e.title
@@ -141,7 +141,7 @@ function O(e) {
         multiple: 1
       }), jsx("div", {
         className: _$$s.textBodyLarge.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           letterSpacing: "-0.084px"
         }).$,
         children: e.description
@@ -175,13 +175,13 @@ function R(e) {
       className: _$$s.flex.pl32.pr32.pt32.pb24.gap32.$,
       children: [jsx("div", {
         className: _$$s.textHeadingLarge.w200.flexShrink0.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           letterSpacing: "-0.456px"
         }).$,
         children: e.title
       }), jsx("div", {
         className: _$$s.textBodyLarge.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           letterSpacing: "-0.084px"
         }).$,
         children: e.description
@@ -210,7 +210,7 @@ export function $$L1(e) {
   return jsx("img", {
     src: e.src,
     alt: e.alt,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: e.aspectRatio.toString()
     }).$,
     width: e.width
@@ -224,7 +224,7 @@ export function $$P2(e) {
     "object-fit": "initial",
     "aria-hidden": "true",
     width: e.width,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: e.aspectRatio.toString()
     }).$,
     children: jsx("source", {

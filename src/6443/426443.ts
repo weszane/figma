@@ -11,7 +11,7 @@ import { getFalseValue } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { We, UU, Qe } from "../figma_app/770088";
-import { Hx } from "../figma_app/530167";
+import { insertCommunityMention } from "../figma_app/530167";
 import { setTargetRef, hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { Ty, pP as _$$pP, yO, I2 } from "../905/331019";
@@ -889,7 +889,7 @@ export class $$tA0 extends Component {
         let s = "profile_handle" in e ? `@${e.profile_handle}` : e.handle;
         return ty(t, r, i, sanitizeInput(s) || "", !1);
       }(this.state.editorState, t);
-      "profile_handle" in t && this.props.dispatch(Hx(t));
+      "profile_handle" in t && this.props.dispatch(insertCommunityMention(t));
       this.onChange(i);
     };
     this.insertEmoji = t => {

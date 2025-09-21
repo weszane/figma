@@ -6,7 +6,7 @@ import { isMobileUA } from "../figma_app/778880";
 import { AUTH_INIT } from "../905/194276";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { X2, e6 } from "../figma_app/530167";
+import { unfollowEntityThunk, followEntityThunk } from "../figma_app/530167";
 import { showModalHandler } from "../905/156213";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { isOrgOrTeamExport } from "../figma_app/740025";
@@ -31,7 +31,7 @@ export function $$v0({
   let [k, R] = useState(!1);
   let [N, P] = useState(!0);
   let [O, D] = useState(e.current_user_is_following);
-  let L = O ? X2.loadingKeyForPayload(e.id) : e6.loadingKeyForPayload(e.id);
+  let L = O ? unfollowEntityThunk.loadingKeyForPayload(e.id) : followEntityThunk.loadingKeyForPayload(e.id);
   useEffect(() => {
     k && !isLoading(w, L) && (isSuccess(w, L) ? (R(!1), D(!O)) : isFailure(w, L) && (R(!1), v?.()));
   }, [w, L, k, O, v]);
@@ -73,7 +73,7 @@ export function $$v0({
     variant: M && !k ? "destructiveSecondary" : "secondary",
     onClick: t => {
       t.stopPropagation();
-      E && !k && (R(!0), i?.(), I(X2(e.id)));
+      E && !k && (R(!0), i?.(), I(unfollowEntityThunk(e.id)));
     },
     trackingProperties: {
       followerProfileId: S,
@@ -102,12 +102,12 @@ export function $$v0({
           data: {
             userId: E.id,
             variations: [FF.OPT_IN],
-            onFinish: () => I(e6(e.id))
+            onFinish: () => I(followEntityThunk(e.id))
           }
         }));
         return;
       }
-      k || (P(!1), R(!0), i?.(), I(e6(e.id)));
+      k || (P(!1), R(!0), i?.(), I(followEntityThunk(e.id)));
     },
     trackingProperties: {
       followerProfileId: S,

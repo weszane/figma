@@ -12,7 +12,7 @@ import { Badge, BadgeColor } from "../figma_app/919079";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Xy } from "../figma_app/578832";
@@ -92,7 +92,7 @@ export function $$eu2(e) {
     },
     children: [t, a, e.showPrototypeIcon && jsx("div", {
       className: cT,
-      children: jsx(_$$t, {
+      children: jsx(MediaQuerySvgComponent, {
         svg: _$$A5,
         className: wr,
         useOriginalSrcFills_DEPRECATED: !0,
@@ -255,7 +255,7 @@ function ef() {
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.profiles.made_in_fig_jam"),
     "data-tooltip-show-immediately": !0,
-    children: jsx(_$$t, {
+    children: jsx(MediaQuerySvgComponent, {
       svg: _$$A,
       useOriginalSrcFills_DEPRECATED: !0,
       fallbackSvg: _$$A

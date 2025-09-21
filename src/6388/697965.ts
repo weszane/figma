@@ -12,7 +12,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import { useDebounce } from 'use-debounce';
 import { uY } from "../figma_app/164260";
 import { ie } from "../figma_app/524655";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { lW } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -537,7 +537,7 @@ function q({
   boundaryKey: t,
   children: l
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: t,
     fallback: e < 3 ? jsx(q, {
       retryCount: e + 1,

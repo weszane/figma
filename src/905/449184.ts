@@ -767,7 +767,7 @@ class V {
       credentials: 'omit',
     }).then(this.getOnRequestResponse(r)).catch(() => {
       throw new Error('Request failed')
-    }).$$finally(() => {
+    }).finally(() => {
       this._requestRateLimiter.requestComplete()
     })
   }

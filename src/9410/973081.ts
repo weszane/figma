@@ -119,12 +119,12 @@ import { x as _$$x3 } from '../905/719609';
 import { Point } from '../905/736624';
 import { zE } from '../905/738636';
 import { Ao } from '../905/748636';
-import { H4 as _$$H, tH as _$$tH } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { getPermissionsAndView } from '../905/766303';
 import { isFullscreenDevHandoffView } from '../905/782918';
 import { EventShield } from '../905/821217';
 import { zi } from '../905/824449';
-import { vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { j as _$$j2 } from '../905/834956';
 import { TabsPrimitiveTabStrip } from '../905/840133';
 import { Um } from '../905/848862';
@@ -143,7 +143,7 @@ import { A as _$$A6 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { dL, qz } from '../905/944871';
 import { Jc, Sn } from '../905/946805';
 import { Vd } from '../905/964786';
@@ -210,7 +210,7 @@ import { Zg } from '../figma_app/106207';
 import { g as _$$g3 } from '../figma_app/106955';
 import { wo } from '../figma_app/109130';
 import { $c, au as _$$au, D6, H1 } from '../figma_app/124493';
-import { QY, vE } from '../figma_app/139113';
+import { FileProcessingStatus, autosaveAtom } from '../figma_app/139113';
 import { C7, Ii } from '../figma_app/144974';
 import { ap as _$$ap } from '../figma_app/149304';
 import { Dc, hV } from '../figma_app/151766';
@@ -251,7 +251,7 @@ import { Ev, zF } from '../figma_app/297822';
 import { useSendToMakeExperiment } from '../figma_app/297957';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { getPluginByFileId, getRelaunchablePlugins } from '../figma_app/300692';
-import { F6 } from '../figma_app/308685';
+import { startChattingThunk } from '../figma_app/308685';
 import { mJ } from '../figma_app/311375';
 import { logAndTrackCTA, mapFileToProductType, trackFileEvent } from '../figma_app/314264';
 import { LC, P5 } from '../figma_app/318590';
@@ -267,7 +267,7 @@ import { isDescendant } from '../figma_app/387100';
 import { O8 } from '../figma_app/393980';
 import { HR } from '../figma_app/397881';
 import { rg as _$$rg } from '../figma_app/401069';
-import { S as _$$S4 } from '../figma_app/403368';
+import { setupCursorChatDisabledCheck } from '../figma_app/403368';
 import { NF } from '../figma_app/406976';
 import { S as _$$S } from '../figma_app/420927';
 import { V8 } from '../figma_app/443991';
@@ -348,7 +348,7 @@ import { w6 } from '../figma_app/887579';
 import { jr, W0 } from '../figma_app/896988';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
-import { ai as _$$ai, f6 } from '../figma_app/915202';
+import { TabOpenBehavior, FileBrowserLocation } from '../figma_app/915202';
 import { ConfirmationModal2 } from '../figma_app/918700';
 import { BadgeColor, Badge } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
@@ -2170,7 +2170,7 @@ function ib({
     });
   })();
   return jsxs(Fragment, {
-    children: [en != null && jsx(vL, {
+    children: [en != null && jsx(KeyboardReceiver, {
       focusOnMount: !0,
       name: 'stylesAndVariablesEyedropper',
       handleKeyDown: Z
@@ -2842,10 +2842,10 @@ let ne = {
     r9(l, a);
     i(zE({
       state: u,
-      from: f6.DESIGN_COPY_TO_SITES_ENTRYPOINT,
+      from: FileBrowserLocation.DESIGN_COPY_TO_SITES_ENTRYPOINT,
       editorType: FFileType.SITES,
       team: void 0,
-      openNewFileIn: _$$ai.NEW_TAB,
+      openNewFileIn: TabOpenBehavior.NEW_TAB,
       newFileDataLocalStorageKey: c
     }));
   }
@@ -2886,7 +2886,7 @@ class ni extends PureComponent {
       disabled: this.props.isJoinedToActiveVotingSession || this.props.isCursorChatDisabled,
       callback: (e, t, i, r) => {
         Fullscreen?.triggerAction('set-tool-default', null);
-        this.props.dispatch(F6({
+        this.props.dispatch(startChattingThunk({
           position: {
             x: r.clientX || this.props.clientX,
             y: (r.clientY || this.props.clientY) - nt
@@ -2999,7 +2999,7 @@ function nn(e) {
   let p = useFilteredWidgets();
   let h = useDedupedRecentlyUsedWidgets();
   let m = usePluginedWidgets();
-  let f = _$$S4();
+  let f = setupCursorChatDisabledCheck();
   let g = trackFileEventWithUser();
   useEffect(() => {
     g('Canvas Right Click');
@@ -3719,7 +3719,7 @@ let ns = class e extends PureComponent {
             _$$rN(i, VY({
               openFile: this.props.openFile,
               fileVersion: this.props.fileVersion
-            }), f6.SEND_SELECTION_TO_BUZZ_FROM_DESIGN_CONTEXT_MENU);
+            }), FileBrowserLocation.SEND_SELECTION_TO_BUZZ_FROM_DESIGN_CONTEXT_MENU);
           }
         } : null, d ? ne : null, s || o ? {
           action: 'find-inspiration',
@@ -6264,7 +6264,7 @@ function aX(e) {
 function aZ(e) {
   let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   return jsx('div', {
-    style: _$$sx2.colorText.px14.$,
+    style: styleBuilderInstance.colorText.px14.$,
     className: e.isSelected ? 'action_autocomplete_input--rowSelected--62Uvp autocomplete_permissions--contactRowSelected--xYJKX autocomplete_permissions--contactRow--DRMiv' : 'action_autocomplete_input--row--HRsbZ autocomplete_permissions--contactRow--DRMiv',
     children: jsxs(AutoLayout, {
       children: [jsx(TextWithTruncation, {
@@ -6722,7 +6722,7 @@ function sn() {
       })
     }), jsxs('div', {
       className: a5,
-      style: _$$sx2.pt32.overflowYScroll.add({
+      style: styleBuilderInstance.pt32.overflowYScroll.add({
         maxHeight: '162px'
       }).$,
       children: [Object.values(_$$Uc()).map(({
@@ -6785,7 +6785,7 @@ function sn() {
           })
         })]
       }), jsx('div', {
-        style: _$$sx2.h150.$
+        style: styleBuilderInstance.h150.$
       })]
     })]
   });
@@ -8880,7 +8880,7 @@ class ok extends RecordingPureComponent {
           svg: _$$A17
         })]
       }), !n && e.isRepairCommand && getFeatureFlags().internal_only_debug_tools && jsx('div', {
-        style: _$$sx2.colorBgTertiary.p8.bRadius8.borderBox.flex.itemsCenter.justifyCenter.mr8.h16.add({
+        style: styleBuilderInstance.colorBgTertiary.p8.bRadius8.borderBox.flex.itemsCenter.justifyCenter.mr8.h16.add({
           fontSize: '8px'
         }).$,
         children: 'REPAIR'
@@ -9414,7 +9414,7 @@ export function $$lr0({
   let B = _$$e();
   let G = useIsFullscreenDevModeComponentBrowser();
   let K = useIsSelectedFigmakeFullscreen();
-  let [H] = useAtomValueAndSetter(vE);
+  let [H] = useAtomValueAndSetter(autosaveAtom);
   let z = Xr(t5);
   let V = !t.showUi && TY(t.dropdownShown);
   let W = t.dropdownShown?.type === jv;
@@ -9432,7 +9432,7 @@ export function $$lr0({
     fullscreenValue.reparentRootElement(e);
     e && e.addEventListener('drop', ee);
   }, [ee]);
-  let er = H && H.status === QY.WAITING;
+  let er = H && H.status === FileProcessingStatus.WAITING;
   let en = !er && t.showingReconnectingModal;
   return jsxs(Fragment, {
     children: [getFeatureFlags().ee_color_management_debug ? jsx(L, {}) : null, T && jsx(le, {
@@ -9451,7 +9451,7 @@ export function $$lr0({
             isOnReadyForDevPage: !1
           }), !t.fileIsLoading && jsx($, {}), V && jsx(_$$e2, {
             dropdown: t.dropdownShown
-          }, 'fullscreen-menu'), W && jsx(_$$tH, {
+          }, 'fullscreen-menu'), W && jsx(ErrorBoundaryCrash, {
             boundaryKey: 'QuickActionsOuter',
             onError: () => {
               i(VisualBellActions.enqueue({
@@ -9459,7 +9459,7 @@ export function $$lr0({
                 type: 'react-error'
               }));
             },
-            fallback: _$$H.NONE_I_KNOW_WHAT_IM_DOING,
+            fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
             children: jsx(oN, {
               parameterEntryArgs: Y,
               fireTrackingEvent: Z
@@ -9477,7 +9477,7 @@ export function $$lr0({
             clientType: 'fullscreen'
           }), jsx(Nd, {}), jsx(jx, {
             showStartModal: N
-          }), t.dropdownShown && !Q && !BrowserInfo.isMeetDevice && jsx(_$$tH, {
+          }), t.dropdownShown && !Q && !BrowserInfo.isMeetDevice && jsx(ErrorBoundaryCrash, {
             boundaryKey: 'FullscreenContextMenu',
             onError: () => {
               i(VisualBellActions.enqueue({
@@ -9485,7 +9485,7 @@ export function $$lr0({
                 type: 'react-error'
               }));
             },
-            fallback: _$$H.NONE_I_KNOW_WHAT_IM_DOING,
+            fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
             children: jsx(aC, {
               dropdownShown: t.dropdownShown,
               selectedView: t.selectedView,

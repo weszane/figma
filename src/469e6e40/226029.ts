@@ -29,7 +29,7 @@ import { Xm, gB } from "../905/723791";
 import { MX, RG, EQ, EO } from "../figma_app/684446";
 import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { AdminSettingsSelectorView } from "../figma_app/43951";
-import { kA } from "../figma_app/336853";
+import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { selectPermissionsState } from "../figma_app/212807";
 import { useCurrentUserOrg } from "../905/845253";
 import { getSelectedView } from "../figma_app/386952";
@@ -519,7 +519,7 @@ function eL() {
     let d = useSubscription(AdminSettingsSelectorView, {
       orgId: t.id
     }, {
-      enabled: kA(t)
+      enabled: isBigmaEnabledSimple(t)
     });
     let c = useMemo(() => {
       let e = (d.data?.currentUser?.baseOrgUser?.workspaceUsers ?? []).filter(e => e.permission === FOrganizationRoleType.ADMIN).map(e => e.workspace);

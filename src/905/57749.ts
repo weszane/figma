@@ -3,7 +3,7 @@ import { A } from "../905/17894";
 import { Lz, Zc } from "../905/497882";
 import { findProfile, trimOrEmpty } from "../figma_app/740025";
 import { jr, Z7, MO } from "../figma_app/599979";
-import { s as _$$s } from "../905/608932";
+import { profileServiceAPI } from "../905/608932";
 let $$d1 = 15;
 let c = RegExp(`^[a-zA-Z0-9_]{1,${$$d1}}$`);
 function u(e) {
@@ -61,7 +61,7 @@ export let $$p0 = {
           sanitizedProfileHandle: i
         }
       }];
-      if (!(await _$$s.getHandleAvailable({
+      if (!(await profileServiceAPI.getHandleAvailable({
         profileHandle: i
       })).data.meta.available) return [{
         key: "PROFILE_HANDLE_NOT_AVAILABLE",

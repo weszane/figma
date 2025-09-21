@@ -31,7 +31,7 @@ import { K as _$$K2 } from '../905/799615';
 import { Ig } from '../905/805224';
 import { Y as _$$Y } from '../905/912236';
 import { lQ } from '../905/934246';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { d as _$$d } from '../905/976845';
 import { s as _$$s } from '../cssbuilder/589278';
 import { ay, RW } from '../figma_app/17220';
@@ -740,7 +740,7 @@ function tr({
         [aT]: eN && ex,
         [TQ]: eC.mergeLayerHeaderWithTransformPanel
       }),
-      'style': I ? void 0 : sx.bb0.pb4.$,
+      'style': I ? void 0 : styleBuilderInstance.bb0.pb4.$,
       'children': [jsxs('div', {
         className: p()(mp, _$$s.flex.alignLeft.borderBox.itemsCenter.h24.$, _$$s.pl8.pr8.gap8.$),
         children: [jsx('div', {

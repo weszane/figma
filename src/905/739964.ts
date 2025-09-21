@@ -20,10 +20,10 @@ import { ProductAccessTypeEnum } from '../905/513035';
 import { q as _$$q } from '../905/636218';
 import { FeatureFlag } from '../905/652992';
 import { IX, Ju } from '../905/712921';
-import { H4, tH } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N } from '../905/809096';
 import { h as _$$h } from '../905/864281';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { s as _$$s } from '../cssbuilder/589278';
 import { TeamCanEdit } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
@@ -508,9 +508,9 @@ function el(e) {
 }
 export function $$ed1(e) {
   let t = useDispatch();
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'ConsumptionPaywallModal',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e.MONETIZATION_UPGRADES
     },
@@ -631,7 +631,7 @@ function ec(e) {
       }), jsxs('p', {
         'data-testid': 'consumption-paywall-modal-plans-pricing-inner-subtitle',
         'className': C ? _$$s.textBodyLarge.colorTextSecondary.$ : 'consumption_paywall_modals--largeModalSubtitle--vwxPe',
-        'style': sx.$$if(C, sx.add({
+        'style': styleBuilderInstance.$$if(C, styleBuilderInstance.add({
           marginTop: '-16px'
         })).$,
         'children': [F, M ? jsxs(Fragment, {
@@ -641,7 +641,7 @@ function ec(e) {
         height: 16
       }), jsxs('div', {
         className: C ? _$$s.flex.justifyBetween.b1.colorBorder.font13.$ : 'consumption_paywall_modals--planBoxContainer--MmvjD text--fontPos13--xW8hS text--_fontBase--QdLsd',
-        style: sx.$$if(C, sx.add({
+        style: styleBuilderInstance.$$if(C, styleBuilderInstance.add({
           borderRadius: '13px'
         })).$,
         children: [jsx(eo, {

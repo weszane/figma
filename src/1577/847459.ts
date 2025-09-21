@@ -16,7 +16,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AY, Fm, dB, lV, k7, _v } from "../figma_app/770088";
 import { kR, I_, GH } from "../905/234821";
 import { dr } from "../figma_app/568591";
@@ -313,7 +313,7 @@ function V(e) {
   let W = loadedComments.find(e => e.id === threadId);
   return W ? jsxs(Fragment, {
     children: [jsx("div", {
-      style: _$$sx.flex1.$
+      style: styleBuilderInstance.flex1.$
     }), jsx(_$$P, {
       className: "quick_reply_thread_view--bottomAnchoredScrollContainer--5-F87",
       useBottomPinning: !0,

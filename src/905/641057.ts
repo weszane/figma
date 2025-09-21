@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { parsePxNumber } from "../figma_app/783094";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 export function $$o0(e) {
   let {
     minColumnWidth,
@@ -26,7 +26,7 @@ export function $$o0(e) {
   let c = `repeat(${e.items.length + 2}, 55px)`;
   return jsxs("div", {
     className: _$$s.wFull.grid.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       gridTemplateColumns: d,
       gridTemplateRows: c
     }).$,
@@ -34,7 +34,7 @@ export function $$o0(e) {
       columns: e.columns,
       type: "header",
       getColumnGap: o
-    }), e.items.map((t) => jsx(l, {
+    }), e.items.map(t => jsx(l, {
       columns: e.columns,
       type: "content",
       item: t,
@@ -48,7 +48,7 @@ export function $$o0(e) {
   });
 }
 function l(e) {
-  let t = (t) => {
+  let t = t => {
     switch (e.type) {
       case "header":
         return t.name;
@@ -58,7 +58,7 @@ function l(e) {
         return t.getAggregate?.(e.items);
     }
   };
-  let i = (e) => {
+  let i = e => {
     switch (e.textAlign) {
       case "right":
         return _$$s.alignRight;

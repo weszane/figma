@@ -15,7 +15,7 @@ import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { currentTeamAtom } from "../figma_app/598018";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { R as _$$R } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
 import { o as _$$o } from "../905/556276";
@@ -27,10 +27,10 @@ export function $$A0(e, t) {
     let i = getPermissionsAndView(n);
     e(zE({
       state: i,
-      from: f6.DESIGN_TO_SLIDES_ENTRYPOINT,
+      from: FileBrowserLocation.DESIGN_TO_SLIDES_ENTRYPOINT,
       editorType: FFileType.SLIDES,
       team: r ?? void 0,
-      openNewFileIn: ai.NEW_TAB,
+      openNewFileIn: TabOpenBehavior.NEW_TAB,
       newFileDataLocalStorageKey: t
     }));
   }(e, t);

@@ -91,7 +91,7 @@ export class IpcStorageHandler {
    * Sends a message to all registered callbacks and other tabs.
    * Original method name: sendToAllTabs
    */
-  sendToAllTabs(message: string, payload: any): void {
+  sendToAllTabs(message: string, payload: any = {}): void {
     const callbacks = this.getCallbacksForMessage(message)
     let thrownError: any = null
     for (const callback of callbacks) {

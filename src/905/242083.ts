@@ -6,7 +6,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError, setTagGlobal, reportNullOrUndefined } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { PluginAction } from '../905/15667';
-import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
+import { createSessionGreaterEqualKeyRange, executeDatabaseTransaction, ACTIVITY_LOG_STORE, NODE_CHANGES_STORE, NEW_FILES_STORE, EDITOR_SESSIONS_STORE, SESSION_INDEX, getAutosaveDatabaseWithErrorHandling, createSessionNodeKeyRange } from '../905/25189';
 import { FU, v6 } from '../905/26824';
 import { P as _$$P } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
@@ -38,7 +38,7 @@ import { showModal, showModalHandler, hideModalHandler, hideModal, hideSpecificM
 import { Ph } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { NotificationType } from '../905/170564';
+import { NotificationCategory } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
 import { t as _$$t3 } from '../905/192333';
@@ -68,7 +68,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText, getI18nStringAlias } from '../905/303541';
 import { R as _$$R3 } from '../905/307199';
 import { b as _$$b3, c as _$$c4 } from '../905/308099';
-import { W6 as _$$W, Lf } from '../905/327522';
+import { logAutosaveError, logAutosaveErrorWithOriginalMessage } from '../905/327522';
 import { B as _$$B } from '../905/352524';
 import { LogLevelStr } from '../905/361972';
 import { jp, WS } from '../905/370597';
@@ -150,7 +150,7 @@ import { parseQuery } from '../905/634134';
 import { getSessionStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { a6 as _$$a2, il as _$$il, pM as _$$pM, sd as _$$sd, tS as _$$tS, dE, Fo, GZ, Oc, PC, pV, PZ, RU, Uj, un, W9, WE, XF, zN } from '../905/661614';
-import { h as _$$h } from '../905/662353';
+import { fileKeyAtom } from '../905/662353';
 import { getResourceDataOrFallback } from '../905/663269';
 import { gG } from '../905/684180';
 import { IM } from '../905/687477';
@@ -212,7 +212,7 @@ import { g5, Iz, uM, wv } from '../905/888175';
 import { bS, bX, fs, pi, vU } from '../905/889931';
 import { Kg } from '../905/898440';
 import { G_ } from '../905/901759';
-import { v as _$$v2 } from '../905/906499';
+import { autosaveErrorModal } from '../905/906499';
 import { XHR } from '../905/910117';
 import { bL } from '../905/911410';
 import { y as _$$y4 } from '../905/913008';
@@ -230,7 +230,7 @@ import { $3 } from '../905/946937';
 import { qo as _$$qo } from '../905/959568';
 import { L as _$$L } from '../905/970585';
 import { n as _$$n5 } from '../905/971006';
-import { pO } from '../905/977824';
+import { setupMultiplayerSession } from '../905/977824';
 import { postUserFlag } from '../905/985254';
 import { K as _$$K } from '../905/987240';
 import { Rz } from '../905/990497';
@@ -264,7 +264,7 @@ import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as 
 import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
 import { sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
-import { Ed } from '../figma_app/139113';
+import { startAutosaveWait } from '../figma_app/139113';
 import { h8 } from '../figma_app/144974';
 import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../figma_app/147952';
 import { H as _$$H } from '../figma_app/147959';
@@ -312,7 +312,7 @@ import { _d, P5 } from '../figma_app/318590';
 import { $I, iP as _$$iP, h$, jD, Jf, KY } from '../figma_app/322845';
 import { c3 } from '../figma_app/327577';
 import { cS, Zo } from '../figma_app/334459';
-import { wA as _$$wA } from '../figma_app/336853';
+import { getCurrentUserOrg } from '../figma_app/336853';
 import { n as _$$n2 } from '../figma_app/339971';
 import { Kx } from '../figma_app/342355';
 import { xQ } from '../figma_app/345195';
@@ -353,7 +353,7 @@ import { transformOpenFileObject, getFullscreenViewFile, selectCurrentFile } fro
 import { ZS } from '../figma_app/519839';
 import { oY as _$$oY } from '../figma_app/524655';
 import { mQ } from '../figma_app/527668';
-import { F4 as _$$F4, le as _$$le, dn } from '../figma_app/527873';
+import { setHeapMemoryMode, getMemoryUsage, documentMode } from '../figma_app/527873';
 import { getProcessedValueByKey } from '../figma_app/528509';
 import { A9 as _$$A7 } from '../figma_app/533986';
 import { Zb } from '../figma_app/539925';
@@ -436,7 +436,7 @@ import { f7 } from '../figma_app/896988';
 import { i as _$$i3 } from '../figma_app/904127';
 import { h as _$$h2 } from '../figma_app/907304';
 import { fG } from '../figma_app/912411';
-import { kF as _$$kF } from '../figma_app/915202';
+import { PluginRunForContext } from '../figma_app/915202';
 import { handleEmbedPaste } from '../figma_app/916560';
 import { toWellFormed, truncate, uint8ArrayToBase64, escapeHtml, base64ToUint8Array } from '../figma_app/930338';
 import { l7 as _$$l3 } from '../figma_app/932601';
@@ -754,8 +754,8 @@ function tt(e, t, i) {
   }
 }
 async function ti(e, t, i) {
-  let n = (await DB([h5], async e => {
-    let t = e.objectStore(h5);
+  let n = (await executeDatabaseTransaction([ACTIVITY_LOG_STORE], async e => {
+    let t = e.objectStore(ACTIVITY_LOG_STORE);
     return await t.getAll();
   })).filter(i => i.fileKey === t && i.userID === e);
   let r = mapFilter(n, e => e.autosaveChanges ? {
@@ -807,7 +807,7 @@ async function ti(e, t, i) {
 }
 async function ts(e, t) {
   if (!e) {
-    let t = atomStoreManager.get(_$$h);
+    let t = atomStoreManager.get(fileKeyAtom);
     if (!t) throw new Error('Must provide a local file key');
     e = t;
   }
@@ -816,17 +816,17 @@ async function ts(e, t) {
     if (!e) throw new Error('Must provide a user ID');
     t = e;
   }
-  let i = await Z4();
+  let i = await getAutosaveDatabaseWithErrorHandling();
   if (!i) throw new Error('Could not open autosave DB');
-  let n = i.transaction([Sp, jP, JR]);
-  let r = n.objectStore(Sp);
-  let a = await r.index(SW).get(Zt(t, e));
+  let n = i.transaction([EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, NEW_FILES_STORE]);
+  let r = n.objectStore(EDITOR_SESSIONS_STORE);
+  let a = await r.index(SESSION_INDEX).get(createSessionNodeKeyRange(t, e));
   if (!a || !a.id) throw new Error('No editor session row found');
-  let s = n.objectStore(JR);
-  let o = await s.get(Zt(a.userID, e));
+  let s = n.objectStore(NEW_FILES_STORE);
+  let o = await s.get(createSessionNodeKeyRange(a.userID, e));
   if (!o) throw new Error('No new file row found');
-  let l = n.objectStore(jP);
-  let d = (await l.getAll(_$$iM(a.id))).map(e => ({
+  let l = n.objectStore(NODE_CHANGES_STORE);
+  let d = (await l.getAll(createSessionGreaterEqualKeyRange(a.id))).map(e => ({
     ...e,
     changes: encodeBase64(e.changes)
   }));
@@ -838,18 +838,18 @@ async function ts(e, t) {
 }
 async function to(e) {
   let t = JSON.parse(e);
-  let i = await Z4();
+  let i = await getAutosaveDatabaseWithErrorHandling();
   if (!i) throw new Error('Could not open autosave DB');
-  let n = i.transaction([Sp, jP, JR], 'readwrite');
-  let r = n.objectStore(Sp);
+  let n = i.transaction([EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, NEW_FILES_STORE], 'readwrite');
+  let r = n.objectStore(EDITOR_SESSIONS_STORE);
   await r.add(t.editorSession);
-  let a = n.objectStore(JR);
+  let a = n.objectStore(NEW_FILES_STORE);
   await a.add(t.newFile);
   let s = t.nodeChanges.map(e => ({
     ...e,
     changes: decodeBase64(e.changes)
   }));
-  let o = n.objectStore(jP);
+  let o = n.objectStore(NODE_CHANGES_STORE);
   for (let e of s) o.add(e);
   await n.done;
 }
@@ -4700,7 +4700,7 @@ function lU(e, t) {
     teams
   } = debugState.getState();
   let d = t ? publishedCanvasWidgetVersions[e]?.[t] : void 0;
-  let c = _$$wA({
+  let c = getCurrentUserOrg({
     orgById,
     currentUserOrgId
   });
@@ -5070,7 +5070,7 @@ class lV {
             currentUserOrgId,
             orgById
           } = debugState.getState();
-          let n = _$$wA({
+          let n = getCurrentUserOrg({
             orgById,
             currentUserOrgId
           });
@@ -5091,7 +5091,7 @@ class lV {
             currentUserOrgId,
             orgById
           } = debugState.getState();
-          let r = _$$wA({
+          let r = getCurrentUserOrg({
             orgById,
             currentUserOrgId
           });
@@ -5174,7 +5174,7 @@ export function $$lq1(e, t, i, n) {
       ...e,
       appIsReadOnly: !0
     }));
-    dn === DocumentMode.RECOVERY && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
+    documentMode === DocumentMode.RECOVERY && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
       ...e,
       appIsRecovery: !0
     }));
@@ -5187,7 +5187,7 @@ export function $$lq1(e, t, i, n) {
     Zb(t);
     gh();
     FR();
-    pO();
+    setupMultiplayerSession();
     zs(t);
     Db();
     _$$eY2();
@@ -5306,7 +5306,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = isInteractionPathCheck();
       if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
         this._isDesktopAppRunning = e;
-        e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(_$$kF.FOR_OPEN));
+        e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(PluginRunForContext.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
         await this.onReady();
         Fullscreen?.debugMacAppIsStartingFullscreen();
@@ -5323,7 +5323,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       _$$X2();
       _$$W_();
-      _$$F4(dn);
+      setHeapMemoryMode(documentMode);
     });
     this._hasSelection = () => !!AppStateTsApi && !AppStateTsApi.editorState().selectionEmpty?.getCopy();
     this._currentFileThumbnail = () => {
@@ -5425,7 +5425,7 @@ let lX = class e extends sP(sN(sR)) {
         this.dispatch(...e);
         return;
       }
-      if (Ed(() => {
+      if (startAutosaveWait(() => {
         this.dispatch(_$$eH());
       })) {
         return;
@@ -5433,7 +5433,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = getI18nString('autosave.unable_to_leave_document.unsaved_changes_save_in_background');
       !1 === navigator.onLine && (t = getI18nString('autosave.unable_to_leave_document.pending_changes'));
       this.dispatch(showModalHandler({
-        type: _$$v2,
+        type: autosaveErrorModal,
         data: {
           message: t
         }
@@ -5695,7 +5695,7 @@ let lX = class e extends sP(sN(sR)) {
       Sr(location.href, B3.FULLSCREEN_MENU).then(t => {
         t && _$$s5.shouldShowOnce() && Promise.race([e, delay(3e3)]).then(() => {
           _$$N3.disableAutoOpenIfUnset();
-          this._store.dispatch(_$$aK(_$$kF.FOR_MENU));
+          this._store.dispatch(_$$aK(PluginRunForContext.FOR_MENU));
         });
       });
     } else {
@@ -6575,7 +6575,7 @@ let lX = class e extends sP(sN(sR)) {
     let a = e.movableStyles;
     let s = Object.keys(a).length;
     !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(notificationActions.dequeue({
-      type: NotificationType.MOVE_COMPONENTS_PROMPT
+      type: NotificationCategory.MOVE_COMPONENTS_PROMPT
     })), XHR.post('/api/design_systems/move_validity', {
       style_moves: a,
       component_moves: i,
@@ -6594,7 +6594,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       this.dispatch(notificationActions.enqueueFront({
         notification: {
-          type: NotificationType.MOVE_COMPONENTS_PROMPT,
+          type: NotificationCategory.MOVE_COMPONENTS_PROMPT,
           message: s ? getI18nString('design_systems.updates.to_move_pasted_styles_to_this_file_publish_a_library_update') : getI18nString('design_systems.updates.to_move_pasted_components_to_this_file_publish_a_library_update'),
           acceptCallback: () => {
             this.dispatch(showModalHandler({
@@ -6837,9 +6837,9 @@ let lX = class e extends sP(sN(sR)) {
         try {
           await e.session()?.restoreAutosaveIfNeeded();
         } catch (e) {
-          Lf('Failed to check for or restore autosave changes', e);
+          logAutosaveErrorWithOriginalMessage('Failed to check for or restore autosave changes', e);
         }
-      })) : e || t !== 0 ? !e && t > 0 && this._store.getState().user && _$$W('Autosave should have been initialized for logged in user.') : this._figFileLoadPromise.then(async e => {
+      })) : e || t !== 0 ? !e && t > 0 && this._store.getState().user && logAutosaveError('Autosave should have been initialized for logged in user.') : this._figFileLoadPromise.then(async e => {
         let t = this._store.getState().user;
         if (!t) return;
         mu(e, t.id);
@@ -6852,7 +6852,7 @@ let lX = class e extends sP(sN(sR)) {
           await i.onConnect(e);
         }
       }).catch(e => {
-        Lf('Unable to enable autosave for new file', e);
+        logAutosaveErrorWithOriginalMessage('Unable to enable autosave for new file', e);
       });
     }
     this.dispatch(_$$X());
@@ -6916,7 +6916,7 @@ let lX = class e extends sP(sN(sR)) {
         };
         window.DebuggingHelpers.getMemoryBreakdown = () => FullscreenPerfInfo && CorePerfInfo ? {
           imageMemory: FullscreenPerfInfo.getImageMemory(),
-          wasmHeapReserved: _$$le(),
+          wasmHeapReserved: getMemoryUsage(),
           jsBuffers: CorePerfInfo.getJsBufferMemory(),
           rendererGpuMemory: FullscreenPerfInfo.getRendererGpuMemory(),
           memStats: CorePerfInfo.getMemStatsSummary()
@@ -6943,7 +6943,7 @@ let lX = class e extends sP(sN(sR)) {
       window.DebuggingHelpers.importLocalAutosaveFile = e => to(e);
       window.DebuggingHelpers.exportLocalAutosaveFile = async (e, t) => await ts(e, t);
       window.DebuggingHelpers.exportOfflineLog = () => {
-        let e = this.openFileKey() ?? atomStoreManager.get(_$$h);
+        let e = this.openFileKey() ?? atomStoreManager.get(fileKeyAtom);
         let t = this.getUserId();
         if (!t) throw new Error('Please login and try again');
         if (!e) throw new Error('You must have the file open');

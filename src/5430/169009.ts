@@ -16,16 +16,16 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { a as _$$a } from "../905/925868";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { Zl, getResourceType } from "../figma_app/427318";
 import { hJ, XY } from "../905/506641";
-import { Zj, _8, dL, e6, X2, p4, vr, cO } from "../figma_app/530167";
+import { setCommentsActiveFeedType, restrictProfileThunk, unrestrictProfileThunk, followEntityThunk, unfollowEntityThunk, fetchCommentsThunk, setCommentStateThunk, resetCommentState } from "../figma_app/530167";
 import { COMMUNITY_TIMEOUT } from "../figma_app/350203";
 import { t0 } from "../figma_app/198840";
 import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { mH, BV, eG, Tu } from "../figma_app/703138";
+import { setShowResolved, removeCommentsByAuthor, reportComment, deleteComment } from "../figma_app/703138";
 import { Um } from "../905/848862";
 import { p as _$$p } from "../905/927118";
 import { j as _$$j } from "../905/834956";
@@ -166,7 +166,7 @@ let M = function ({
           thread_type: "community_preview",
           view: e.name
         });
-        e.name && (e.name === P ? n(mH(!l)) : n(Zj(e.name)));
+        e.name && (e.name === P ? n(setShowResolved(!l)) : n(setCommentsActiveFeedType(e.name)));
       },
       minWidth: 164,
       showPoint: !0
@@ -306,11 +306,11 @@ function ef(e) {
     }));
   };
   let _ = (s, i) => {
-    t(_8({
+    t(restrictProfileThunk({
       blockedProfileId: i,
       profileId: s,
       onSuccess: () => {
-        t(BV({
+        t(removeCommentsByAuthor({
           authorId: i,
           removeCommentsCallback: async e => {
             e.map(e => ee.fadeOut(e.id, {
@@ -333,7 +333,7 @@ function ef(e) {
     }));
   };
   let p = (r, s) => {
-    t(dL({
+    t(unrestrictProfileThunk({
       blockedProfileId: s,
       profileId: r,
       onSuccess: () => {
@@ -371,14 +371,14 @@ function ef(e) {
     }));
   };
   let x = e => {
-    t(e6(e));
+    t(followEntityThunk(e));
   };
   let f = e => {
-    t(X2(e));
+    t(unfollowEntityThunk(e));
   };
   let g = async r => {
     let s = await ee.fadeOut(r);
-    t(eG({
+    t(reportComment({
       commentId: r,
       userIsAdmin: !!e.userIsAdmin,
       onFinish: e => {
@@ -544,13 +544,13 @@ function eI(e) {
   useEffect(() => (window.addEventListener("scroll", w, !1), () => {
     window.removeEventListener("scroll", w, !1);
   }), [w]);
-  let C = Jm();
+  let C = getSearchSessionIdFromSelector();
   let L = _$$y(author?.profile_handle ?? "").href;
   let E = t && !r ? "_blank" : void 0;
   if (!comment || !author) return jsx(Fragment, {});
   let S = async () => {
     let t = await ee.fadeOut(comment.id);
-    x(Tu({
+    x(deleteComment({
       commentId: comment.id,
       commentType: e.commentType,
       onFinish: e => {
@@ -916,10 +916,10 @@ function eA(e) {
       numCommentsForResource: G,
       pageSizeOverride: COMMUNITY_TIMEOUT
     };
-    r(p4({
+    r(fetchCommentsThunk({
       ...e,
       onSuccess: e => {
-        r(vr(e));
+        r(setCommentStateThunk(e));
         ek = !1;
         _(!1);
       },
@@ -943,14 +943,14 @@ function eA(e) {
     }), S(!1));
   }, [E, Y]);
   useEffect(() => {
-    r(cO());
+    r(resetCommentState());
   }, [resource.id]);
   let X = () => q && hasMorePages({
     pagination
   }) && Q();
   let J = feed.filter(e => e !== pagination?.selected_comment?.id);
   pagination?.selected_comment && J.unshift(pagination?.selected_comment.id);
-  let K = Jm();
+  let K = getSearchSessionIdFromSelector();
   return isResourcePublicWithComments(resource) ? jsx(Fragment, {
     children: jsxs("div", {
       className: "comments_view--commentsViewWrapper--SURB9",

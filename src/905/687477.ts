@@ -6,7 +6,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { getFeatureFlags } from '../905/601108';
 import { logWarning } from '../905/714362';
-import { F2 } from '../905/826900';
+import { KeyboardFocusManager } from '../905/826900';
 import { isEventProcessed } from '../905/955878';
 import { atomStoreManager } from '../figma_app/27355';
 import { FEditorType } from '../figma_app/53721';
@@ -456,7 +456,7 @@ class W {
           return;
         }
       }
-      if (!F2.shouldInterceptKeyboardEvent(e) && ((ee(e) || et(e)) && e.preventDefault(), !this.shouldIgnoreKeyboardEvent(e))) {
+      if (!KeyboardFocusManager.shouldInterceptKeyboardEvent(e) && ((ee(e) || et(e)) && e.preventDefault(), !this.shouldIgnoreKeyboardEvent(e))) {
         try {
           let t = this.modifierKeys(e);
           e.which === 18 && (this.lastAltKeyWasRight = e.location === 2);
@@ -474,7 +474,7 @@ class W {
       }
     }), !0);
     document.addEventListener('keyup', G(e => {
-      if (e.which === 8 && browserCapabilities.isIpad() && (this.isHandlingBackspaceKeyForIPadKoreanInputFix = !1), F2.shouldInterceptKeyboardEvent(e) || ((ee(e) || et(e)) && e.preventDefault(), !this.isLastKeydownUnreleased && this.shouldIgnoreKeyboardEvent(e))) return;
+      if (e.which === 8 && browserCapabilities.isIpad() && (this.isHandlingBackspaceKeyForIPadKoreanInputFix = !1), KeyboardFocusManager.shouldInterceptKeyboardEvent(e) || ((ee(e) || et(e)) && e.preventDefault(), !this.isLastKeydownUnreleased && this.shouldIgnoreKeyboardEvent(e))) return;
       e.isComposing || (this.lastKeydown = null);
       let t = this.viewHandleFromElement(e.target);
       this.isLastKeydownUnreleased = !1;
@@ -994,7 +994,7 @@ class W {
   customFocusElementFor(e) {
     if ($$eu0.customFocusElementReadWrite === null) {
       let e;
-      for (let t of (getFeatureFlags().ce_tv_contenteditable_focus_element ? (e = document.createElement('div')).contentEditable = 'plaintext-only' : e = document.createElement('textarea'), $$eu0.customFocusElementReadWrite = e, browserCapabilities.isChrome() && (e instanceof HTMLTextAreaElement ? e.value = en() : e.textContent = en()), e.tabIndex = -1, e instanceof HTMLTextAreaElement && (e.wrap = 'off'), e.ariaHidden = 'true', e.setAttribute('spellcheck', 'false'), e.setAttribute('autocorrect', 'off'), $$eu0.customFocusElementReadOnly = document.createElement('input'), $$eu0.customFocusElementReadOnly.readOnly = !0, $$eu0.customFocusElementReadOnly.tabIndex = -1, $$eu0.customFocusElementReadOnly.ariaHidden = 'true', $$eu0.customFocusElementReadOnly.role = 'application', $$eu0.customFocusElementReadOnly.style.top = '-200px', F2.setCustomFocusElement({
+      for (let t of (getFeatureFlags().ce_tv_contenteditable_focus_element ? (e = document.createElement('div')).contentEditable = 'plaintext-only' : e = document.createElement('textarea'), $$eu0.customFocusElementReadWrite = e, browserCapabilities.isChrome() && (e instanceof HTMLTextAreaElement ? e.value = en() : e.textContent = en()), e.tabIndex = -1, e instanceof HTMLTextAreaElement && (e.wrap = 'off'), e.ariaHidden = 'true', e.setAttribute('spellcheck', 'false'), e.setAttribute('autocorrect', 'off'), $$eu0.customFocusElementReadOnly = document.createElement('input'), $$eu0.customFocusElementReadOnly.readOnly = !0, $$eu0.customFocusElementReadOnly.tabIndex = -1, $$eu0.customFocusElementReadOnly.ariaHidden = 'true', $$eu0.customFocusElementReadOnly.role = 'application', $$eu0.customFocusElementReadOnly.style.top = '-200px', KeyboardFocusManager.setCustomFocusElement({
         addFocusChangedCallback(e) {
           $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite.addEventListener('focus', () => {
             e(!0);
@@ -1224,7 +1224,7 @@ class W {
   }
   setupClipboardAndDropEvents() {
     let e = (e, t) => {
-      if (this.clipboardDataTransfer = e.clipboardData || window.clipboardData, !(F2.shouldInterceptClipboardEvent(e, t) || ei(e) && !isDebugSelectedFigmakeFullscreen()) && this.clipboardDataTransfer) {
+      if (this.clipboardDataTransfer = e.clipboardData || window.clipboardData, !(KeyboardFocusManager.shouldInterceptClipboardEvent(e, t) || ei(e) && !isDebugSelectedFigmakeFullscreen()) && this.clipboardDataTransfer) {
         e.preventDefault();
         let i = e.target;
         i instanceof HTMLElement && i.tagName === 'BODY' && (i = document.activeElement);

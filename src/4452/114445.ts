@@ -28,7 +28,7 @@ import { capitalize, toTitleCase } from "../figma_app/930338";
 import { Ak } from "../905/986103";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { G as _$$G } from "../905/750789";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { tI, JT } from "../figma_app/599327";
 import { II } from "../figma_app/11182";
 import { Button } from "../905/521428";
@@ -100,10 +100,10 @@ function G({
   let _ = useSelector(e => e.teamBilling);
   let p = l?.key.type === FOrganizationLevelType.TEAM ? _.summary.currency : m.data?.currency;
   return jsxs("div", {
-    style: _$$sx.flex.itemsCenter.justifyBetween.flexRow.p8.pr16.gap4.wAuto.bRadius5.textBodyMediumStrong.$$if(o, _$$sx.colorBgSelected, _$$sx.colorBgSecondary).$,
+    style: styleBuilderInstance.flex.itemsCenter.justifyBetween.flexRow.p8.pr16.gap4.wAuto.bRadius5.textBodyMediumStrong.$$if(o, styleBuilderInstance.colorBgSelected, styleBuilderInstance.colorBgSecondary).$,
     "data-testid": "seat-cost-info",
     children: [jsxs("div", {
-      style: _$$sx.flex.flexRow.itemsCenter.justifyBetween.gap4.$,
+      style: styleBuilderInstance.flex.flexRow.itemsCenter.justifyBetween.gap4.$,
       children: [d, jsx("div", {
         children: o ? c ? renderI18nText("admin_dashboard.request_flyout.seat_cost.no_cost_for_approval") : renderI18nText("admin_dashboard.request_flyout.seat_cost.this_will_use_available_seat", {
           seatType: tI(e)
@@ -130,7 +130,7 @@ function G({
       }),
       variant: "link",
       children: jsx("p", {
-        style: _$$sx.textBodyMedium.$,
+        style: styleBuilderInstance.textBodyMedium.$,
         children: renderI18nText("admin_dashboard.request_flyout.seat_cost.see_details")
       })
     })]
@@ -198,11 +198,11 @@ function $({
     value: a
   }), m, u]] : [[d, m, u], [c, p]];
   return jsx("div", {
-    style: _$$sx.flex.gap24.p16.colorBorder.b1.add({
+    style: styleBuilderInstance.flex.gap24.p16.colorBorder.b1.add({
       borderRadius: "13px"
     }).$,
     children: i.map((e, t) => jsx("div", {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         width: "calc((100% - 56px)/2)"
       }).flex.flexColumn.flex1.gap24.$,
       children: e
@@ -283,7 +283,7 @@ function Z({
         className: K()(J, "request_flyout--reminderIcon--YYAB2"),
         "data-testid": "seat-requests-flyout-avatar-reminder",
         children: jsx(_$$O, {
-          style: _$$sx.add({
+          style: styleBuilderInstance.add({
             rotate: "35deg",
             marginLeft: "-2px",
             marginTop: "-2px"
@@ -323,7 +323,7 @@ function Z({
         time: a
       })
     }), e.message && jsx("div", {
-      style: _$$sx.overflowBreakWord.colorBgSecondary.textBodyMedium.colorTextSecondary.pt8.pb8.pr16.pl16.add({
+      style: styleBuilderInstance.overflowBreakWord.colorBgSecondary.textBodyMedium.colorTextSecondary.pt8.pb8.pr16.pl16.add({
         borderRadius: "0 13px 13px 13px"
       }).$,
       children: e.message
@@ -335,13 +335,13 @@ function et() {
     className: _$$s.flex.flexColumn.gap16.$,
     "data-testid": "request-flyout-loading-skeleton-header",
     children: [jsx(Wi, {
-      style: _$$sx.w48.h48.bRadiusFull.$
+      style: styleBuilderInstance.w48.h48.bRadiusFull.$
     }), jsx(Wi, {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         width: "20%"
       }).h16.$
     }), jsx(Wi, {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         width: "40%"
       }).h24.$
     })]
@@ -363,9 +363,9 @@ function es() {
     className: _$$s.flex.flexColumn.gap8.$,
     "data-testid": "request-flyout-loading-skeleton-footer",
     children: [jsx(Wi, {
-      style: _$$sx.wFull.h32.$
+      style: styleBuilderInstance.wFull.h32.$
     }), jsx(Wi, {
-      style: _$$sx.wFull.h32.$
+      style: styleBuilderInstance.wFull.h32.$
     })]
   });
 }

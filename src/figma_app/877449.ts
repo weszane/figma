@@ -12,7 +12,7 @@ import { Button } from '../905/521428';
 import { buildFileUrl } from '../905/612685';
 import { s as _$$s } from '../905/932270';
 import { sR } from '../905/932881';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { postUserFlag } from '../905/985254';
 import { normalizeJobRole } from '../3973/538504';
 import { s as _$$s2 } from '../cssbuilder/589278';
@@ -77,12 +77,12 @@ export function $$P1({
   }) : null;
 }
 let D = withTrackedClick(Button);
-let k = sx.add({
+let k = styleBuilderInstance.add({
   color: 'var(--color-text-figjam)',
   cursor: 'pointer',
   userSelect: 'auto'
 }).$;
-let M = sx.add({
+let M = styleBuilderInstance.add({
   transform: 'translateY(-4px)'
 }).$;
 export function $$F2(e) {

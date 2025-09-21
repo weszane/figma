@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
 import { M } from "../905/152487";
 import { b as _$$b } from "../figma_app/199304";
@@ -52,7 +52,7 @@ function v(e) {
   let l = useCallback(() => onClose("clicked_outside"), [onClose]);
   _$$l(s, i, l);
   let p = _$$s.fixed.borderBox.bRadius2.pb16.pl16.pr16.zIndexSecondaryModal.fontInter.flex.flexColumn.$$if(e.emphasized, _$$s.colorBgBrand.colorTextOnbrand, _$$s.colorBg.colorText).$$if(!!e.media, _$$s.pt12, _$$s.pt16).$;
-  let A = sx.add({
+  let A = styleBuilderInstance.add({
     width: `${e.width ?? 300}px`,
     boxShadow: "var(--elevation-400-menu-panel)",
     ...a

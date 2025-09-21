@@ -8,7 +8,7 @@ import { P } from "../905/347284";
 import { getI18nString } from "../905/303541";
 import { filePutAction } from "../figma_app/78808";
 import { popModalStack } from "../905/156213";
-import { _z, ky } from "../905/977218";
+import { searchClearQueryAction, searchEndSessionAction } from "../905/977218";
 import { ud } from "../905/862913";
 import { fileEntityDataMapper } from "../905/943101";
 import { mapToFileType } from "../figma_app/300692";
@@ -42,7 +42,7 @@ export let $$E0 = registerModal(function (e) {
   let i = "loaded" === ql().status;
   let o = ud();
   _$$h(() => {
-    t(_z({}));
+    t(searchClearQueryAction({}));
     let e = document.body.style.overflowY;
     document.body.style.overflowY = "hidden";
     return () => {
@@ -50,7 +50,7 @@ export let $$E0 = registerModal(function (e) {
     };
   });
   let _ = () => {
-    C && t(ky());
+    C && t(searchEndSessionAction());
     t(popModalStack());
   };
   let E = e => {

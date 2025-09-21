@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Ts } from "../figma_app/336853";
+import { hasValidId } from "../figma_app/336853";
 import { d as _$$d } from "../905/762622";
 import { CH } from "../figma_app/805373";
 import { _ } from "../905/328370";
@@ -30,7 +30,7 @@ function f(e) {
   let {
     email,
     displayString
-  } = Ts(e.tokenContent) ? {
+  } = hasValidId(e.tokenContent) ? {
     email: e.tokenContent.email,
     displayString: e.tokenContent.handle
   } : {

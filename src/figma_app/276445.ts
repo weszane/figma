@@ -1,3 +1,4 @@
-import { atom } from 'jotai';
-export let $$n0 = atom('ok');
-export const h = $$n0;
+import { atom } from 'jotai'
+
+export let fullscreenCrashStateAtom = atom('ok')
+export const h = fullscreenCrashStateAtom

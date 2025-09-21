@@ -322,7 +322,7 @@ var g = function() {
               O.postToEndpoint(e, r, n - 1, 2 * a, d).then(i).catch(s);
             }, a);
           }) : Promise.reject(i);
-        }).$$finally(function() {
+        }).finally(function() {
           O.leakyBucket[g] = Math.max(O.leakyBucket[g] - 1, 0);
         })];
       });

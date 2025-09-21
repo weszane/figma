@@ -33,7 +33,7 @@ import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType, FPlanNameType } from "../figma_app/191312";
 import { FolderPermissions } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { ob, t9, yI } from "../905/915142";
 import { getReadOnlyOverrideMessageForFolder } from "../figma_app/642025";
@@ -489,7 +489,7 @@ export let $$eK0 = registerModal(function (e) {
   };
   let eB = e => {
     if (org && org.domain_capture && ek && ek.domains.length > 0) {
-      let t = _$$Z(e).filter(e => isValidEmail(e) && !H_(ek.domains, e));
+      let t = _$$Z(e).filter(e => isValidEmail(e) && !checkDomainExists(ek.domains, e));
       if (null == org.invite_whitelist_guest_invite_setting && t.length > 0) {
         ep(showModalHandler({
           type: _$$F,

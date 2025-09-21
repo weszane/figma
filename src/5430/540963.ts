@@ -23,7 +23,7 @@ import { PricingOptions } from '../905/237873';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { W as _$$W } from '../905/316655';
-import { t as _$$t3 } from '../905/331623';
+import { MediaQuerySvgComponent } from '../905/331623';
 import { P as _$$P } from '../905/347284';
 import { A6 } from '../905/350234';
 import { createOptimistThunk } from '../905/350402';
@@ -37,7 +37,7 @@ import { E as _$$E } from '../905/453826';
 import { handleAtomEvent } from '../905/502364';
 import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
-import { s as _$$s2 } from '../905/608932';
+import { profileServiceAPI } from '../905/608932';
 import { customHistory } from '../905/612521';
 import { e as _$$e2 } from '../905/621515';
 import { oW } from '../905/675859';
@@ -112,7 +112,7 @@ import { f as _$$f } from '../figma_app/436731';
 import { usePrefersMediaQuery } from '../figma_app/469468';
 import { canSellOnCommunity, Co, getCurrentVersion, HD, isStripeAccepted, isViewerModeResource, mapResourceTypePlural } from '../figma_app/471982';
 import { CurrencyFormatter } from '../figma_app/514043';
-import { _8, Ai, aP, dL } from '../figma_app/530167';
+import { restrictProfileThunk, uploadProfileCoverImageThunk, updateProfileThunk, unrestrictProfileThunk } from '../figma_app/530167';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Cw, kJ, l8 } from '../figma_app/599979';
@@ -210,7 +210,7 @@ let X = function ({
   let r = useRef(null);
   let s = useDispatch();
   let a = useSelector(e => e.loadingState);
-  let l = Ai.loadingKeyForPayload({
+  let l = uploadProfileCoverImageThunk.loadingKeyForPayload({
     profileId: e.id
   });
   let c = isLoading(a, l);
@@ -218,7 +218,7 @@ let X = function ({
     r.current?.click();
   }, []);
   let u = useCallback(r => {
-    r != null && s(Ai({
+    r != null && s(uploadProfileCoverImageThunk({
       profileId: e.id,
       file: r,
       onSuccessCallback: t
@@ -1400,7 +1400,7 @@ function rA() {
     }));
   };
   let l = r => {
-    e(_8({
+    e(restrictProfileThunk({
       blockedProfileId: r,
       profileId: t?.community_profile_id || '',
       onSuccess: () => {
@@ -1433,7 +1433,7 @@ function rA() {
     }));
   };
   let d = r => {
-    e(_8({
+    e(restrictProfileThunk({
       blockedProfileId: r,
       profileId: t?.community_profile_id || '',
       onSuccess: () => {
@@ -1456,7 +1456,7 @@ function rA() {
     }));
   };
   let u = r => {
-    e(dL({
+    e(unrestrictProfileThunk({
       blockedProfileId: r,
       profileId: t?.community_profile_id || '',
       onSuccess: () => {
@@ -1765,7 +1765,7 @@ class r0 extends Component {
       className: this.props.className || '',
       children: jsxs('div', {
         className: cI,
-        children: [jsx(_$$t3, {
+        children: [jsx(MediaQuerySvgComponent, {
           svg: _$$A7,
           fallbackSvg: _$$A8,
           useOriginalSrcFills_DEPRECATED: !0,
@@ -2048,7 +2048,7 @@ function se({
     constructor() {
       super(...arguments);
       this.updateProfile = e => {
-        this.props.dispatch(aP({
+        this.props.dispatch(updateProfileThunk({
           profileId: this.props.profileId,
           ...e
         }));
@@ -2228,7 +2228,7 @@ let st = connect(e => ({
 }))(se);
 let sr = l()(UserProfileTab, ['FOLLOWERS', 'FOLLOWING']);
 let ss = liveStoreInstance.Query({
-  fetch: async e => (await _$$s2.getHandle({
+  fetch: async e => (await profileServiceAPI.getHandle({
     handle: e
   })).data.meta
 });

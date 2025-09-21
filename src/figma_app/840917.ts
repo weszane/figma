@@ -1,423 +1,701 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { isLocalFileKey } from "../905/657242";
-import { filterNotNullish } from "../figma_app/656233";
-import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { AutosaveHelpers, LogToConsoleMode, EditChangeMode, ImageCppBindings, ConnectionState, Multiplayer } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager, atom, useAtomWithSubscription } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import { MR } from "../vendor/390973";
-import { trackEventAnalytics } from "../905/449184";
-import { l as _$$l } from "../905/728491";
-import { debugState } from "../905/407919";
-import { getInitialOptions } from "../figma_app/169182";
-import { useMultiSubscription } from "../figma_app/288654";
-import { Timer } from "../905/609396";
-import { BrowserInfo } from "../figma_app/778880";
-import { reportError } from "../905/11";
-import { logError, logInfo, logDebug, logWarning } from "../905/714362";
-import { getTrackingSessionId } from "../905/471229";
-import { handleAtomEvent } from "../905/502364";
-import { getI18nString } from "../905/303541";
-import { NotificationType } from "../905/170564";
-import { notificationActions } from "../905/463586";
-import { filePutAction } from "../figma_app/78808";
-import { trackFileEvent } from "../figma_app/314264";
-import { userIdAtom } from "../figma_app/864723";
-import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "../figma_app/582924";
-import { awaitSync } from "../905/412815";
-import { fullscreenPerfManager } from "../905/125218";
-import { FileCanEdit } from "../figma_app/43951";
-import { liveStoreInstance } from "../905/713695";
-import { maybeCreateSavepoint } from "../905/294113";
-import { B as _$$B } from "../905/18613";
-import { L_, hS } from "../905/200074";
-import { O as _$$O } from "../905/291063";
-import { h as _$$h } from "../905/662353";
-import { Sp, SW, jP, DV, w8, iM, dU, Zt, Z4, cu, JR, BE, IE, Ab, DB, Fy } from "../905/25189";
-import { Lf, rQ, W6, U4 } from "../905/327522";
-import { HZ, hp, m6, Cr, a as _$$a } from "../905/725909";
-import { mc, A2, LX } from "../905/58217";
-function K(e, t) {
-  let r = "unknown";
-  e ? "string" == typeof e ? r = e : "message" in e && (r = e.message) : r = "no error message";
-  logError("Autosave", r, {
-    message: t
-  });
-}
-export function $$Y11() {
-  return 7776e6;
-}
-async function $(e, t, r, n) {
-  let i = n.objectStore(Sp);
-  let a = await i.index(SW).get([e, t, r]);
-  return a && a.id ? {
-    id: a.id,
-    ...a
-  } : void 0;
-}
-async function X(e, t, r, n) {
-  let i = await $(e, t, r, n);
-  return i?.id;
-}
-async function q(e, t, r) {
-  let n = e.objectStore(Sp);
-  let i = e.objectStore(jP);
-  let a = e.objectStore(DV);
-  let s = e.objectStore(w8);
-  let o = [];
-  for (let e of r) {
-    let t = await n.index(SW).get([e.userID, e.fileKey, e.sessionID]);
-    t && t.id && o.push(t);
+import type { IDBPDatabase, IDBPTransaction } from 'idb'
+import type { PrimitiveAtom } from 'jotai'
+import { deleteDB } from 'idb'
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { reportError } from '../905/11'
+import { createFileConfig } from '../905/18613'
+import { commitTransactionIfSupported, createPrefixKeyRange, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, createZeroToInfinityKeyRange, createZeroToInfinityKeyRangeDuplicate1, createZeroToInfinityKeyRangeDuplicate2, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabase, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, REFERENCED_NODES_STORE, SAVED_IMAGES_STORE, SESSION_INDEX } from '../905/25189'
+import { acquireAutosaveLock, isLockAvailableForAutosave, isLockNameMatching } from '../905/58217'
+import { fullscreenPerfManager } from '../905/125218'
+import { ServiceCategories } from '../905/165054'
+import { NotificationCategory } from '../905/170564'
+import { permissionScopeHandler } from '../905/189185'
+import { AutosaveActivityLogManager, garbageCollectActivityLog } from '../905/200074'
+import { AsyncJobQueue } from '../905/291063'
+import { maybeCreateSavepoint } from '../905/294113'
+import { getI18nString } from '../905/303541'
+import { getStorageEstimate, isAutosaveEnabled, logAutosaveError, logAutosaveErrorWithOriginalMessage } from '../905/327522'
+import { debugState } from '../905/407919'
+import { awaitSync } from '../905/412815'
+import { trackEventAnalytics } from '../905/449184'
+import { notificationActions } from '../905/463586'
+import { getTrackingSessionId } from '../905/471229'
+import { handleAtomEvent } from '../905/502364'
+import { getFeatureFlags } from '../905/601108'
+import { Timer } from '../905/609396'
+import { isLocalFileKey } from '../905/657242'
+import { fileKeyAtom } from '../905/662353'
+import { liveStoreInstance } from '../905/713695'
+import { logDebug, logError, logInfo, logWarning } from '../905/714362'
+import { autosaveCommitMessage, autosaveNewFileSyncStart, ipcStorageHandler, restoredAutosaveKey, throttledNotifyNewFilesUpdate } from '../905/725909'
+import { useHasFilePermission } from '../905/728491'
+import { resourceUtils } from '../905/989992'
+import { atom, atomStoreManager, useAtomWithSubscription } from '../figma_app/27355'
+import { FileCanEdit } from '../figma_app/43951'
+import { filePutAction } from '../figma_app/78808'
+import { isNotNullish } from '../figma_app/95419'
+import { getInitialOptions } from '../figma_app/169182'
+import { useMultiSubscription } from '../figma_app/288654'
+import { trackFileEvent } from '../figma_app/314264'
+import { autosaveSubscribeWithRetry, isIncrementalSessionOrValidating } from '../figma_app/582924'
+import { filterNotNullish } from '../figma_app/656233'
+import { AutosaveHelpers, ConnectionState, EditChangeMode, ImageCppBindings, LogToConsoleMode, Multiplayer } from '../figma_app/763686'
+import { BrowserInfo } from '../figma_app/778880'
+import { userIdAtom } from '../figma_app/864723'
+
+
+/**
+ * Handles and logs errors for Autosave operations.
+ * Original name: K
+ * @param error - The error object or message.
+ * @param context - Contextual message for the error.
+ */
+function handleAutosaveError(error: unknown, context: string): void {
+  let message = 'unknown'
+  if (error) {
+    if (typeof error === 'string') {
+      message = error
+    }
+    else if ('message' in (error as any)) {
+      message = (error as any).message
+    }
   }
-  if (0 === o.length) {
-    await e.done;
+  else {
+    message = 'no error message'
+  }
+  logError('Autosave', message, { message: context })
+}
+
+/**
+ * Returns the autosave expiration time in milliseconds.
+ * Original name: $$Y11
+ */
+export function getAutosaveExpirationMs(): number {
+  return 7776e6
+}
+
+/**
+ * Fetches an editor session row by user, file, and session ID.
+ * Original name: $
+ */
+async function getEditorSessionRow(
+  userID: string,
+  fileKey: string,
+  sessionID: number,
+  transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>,
+): Promise<{ id: number } & any | undefined> {
+  const store = transaction.objectStore(EDITOR_SESSIONS_STORE)
+  const row = await store.index(SESSION_INDEX).get([userID, fileKey, sessionID])
+  return row && (row as any).id ? { id: (row as any).id, ...row } : undefined
+}
+
+/**
+ * Gets the editor session ID for a user, file, and session.
+ * Original name: X
+ */
+async function getEditorSessionId(
+  userID: string,
+  fileKey: string,
+  sessionID: number,
+  transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>,
+): Promise<number | undefined> {
+  const row = await getEditorSessionRow(userID, fileKey, sessionID, transaction)
+  return row?.id
+}
+
+/**
+ * Merges and claims autosave changes from multiple sessions.
+ * Original name: q
+ */
+async function mergeAndClaimAutosaveChanges(
+  transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>,
+  sessionID: number,
+  sessionRows: any[],
+): Promise<{
+  changesByNode: Map<string, { changes: any, editorSessionID: number }>
+  referencedNodeMap: Map<string, any>
+  fileVersion: number
+}> {
+  const editorStore = transaction.objectStore(EDITOR_SESSIONS_STORE)
+  const nodeStore = transaction.objectStore(NODE_CHANGES_STORE)
+  const imageStore = transaction.objectStore(SAVED_IMAGES_STORE)
+  const refNodeStore = transaction.objectStore(REFERENCED_NODES_STORE)
+
+  const validSessions: any[] = []
+  for (const row of sessionRows) {
+    const session = await editorStore.index(SESSION_INDEX).get([row.userID, row.fileKey, row.sessionID])
+    if (session && (session as any).id)
+      validSessions.push(session)
+  }
+  if (validSessions.length === 0) {
+    await transaction.done
     return {
       changesByNode: new Map(),
       referencedNodeMap: new Map(),
-      fileVersion: -1
-    };
+      fileVersion: -1,
+    }
   }
-  o.sort((e, t) => t.fileVersion - e.fileVersion);
-  let l = o[0];
-  let c = new Map();
-  let u = new Map();
-  for (let e of await i.getAll(iM(l.id))) c.set(e.nodeID, {
-    changes: e.changes,
-    editorSessionID: l.id
-  });
-  for (let e of await s.getAll(iM(l.id))) u.set(e.nodeID, e.buffer);
-  let p = l.lastUpdatedAt;
-  for (let e of o.slice(1)) {
-    let t = e.fileVersion === l.fileVersion;
-    if (t) {
-      for (let t of await i.getAll(iM(e.id))) {
-        let e = c.get(t.nodeID);
-        let r = t.changes;
-        if (e) {
-          let {
-            changes
-          } = e;
-          r = AutosaveHelpers.mergeMultiplayerMessages(changes, t.changes, l.fileVersion);
+  validSessions.sort((a, b) => b.fileVersion - a.fileVersion)
+  const latestSession = validSessions[0]
+  const changesByNode = new Map<string, { changes: any, editorSessionID: number }>()
+  const referencedNodeMap = new Map<string, any>()
+
+  const latestSessionNodes = await nodeStore.getAll(createSessionGreaterEqualKeyRange(latestSession.id))
+  for (const node of latestSessionNodes) {
+    changesByNode.set(node.nodeID, { changes: node.changes, editorSessionID: latestSession.id })
+  }
+
+  const latestSessionRefs = await refNodeStore.getAll(createSessionGreaterEqualKeyRange(latestSession.id))
+  for (const ref of latestSessionRefs) {
+    referencedNodeMap.set(ref.nodeID, ref.buffer)
+  }
+
+  let lastUpdatedAt = latestSession.lastUpdatedAt
+  for (const session of validSessions.slice(1)) {
+    const isSameVersion = session.fileVersion === latestSession.fileVersion
+    if (isSameVersion) {
+      const sessionNodes = await nodeStore.getAll(createSessionGreaterEqualKeyRange(session.id))
+      for (const node of sessionNodes) {
+        let mergedChanges = node.changes
+        const existing = changesByNode.get(node.nodeID)
+        if (existing) {
+          mergedChanges = AutosaveHelpers.mergeMultiplayerMessages(existing.changes, node.changes, latestSession.fileVersion)
         }
-        c.set(t.nodeID, {
-          changes: r,
-          editorSessionID: l.id
-        });
-        i.put({
-          editorSessionID: l.id,
-          nodeID: t.nodeID,
-          changes: r
-        }).catch(e => K(e, "mergeAndClaimChanges: updating session IDs"));
+        changesByNode.set(node.nodeID, { changes: mergedChanges, editorSessionID: latestSession.id })
+        await nodeStore.put({
+          editorSessionID: latestSession.id,
+          nodeID: node.nodeID,
+          changes: mergedChanges,
+        }).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: updating session IDs'))
       }
-      for (let t of await s.getAll(iM(e.id))) {
-        u.set(t.nodeID, t.buffer);
-        s.put({
-          editorSessionID: l.id,
-          nodeID: t.nodeID,
-          buffer: t.buffer
-        }).catch(e => K(e, "mergeAndClaimChanges: merge referenced nodes"));
+
+      const sessionRefs = await refNodeStore.getAll(createSessionGreaterEqualKeyRange(session.id))
+      for (const ref of sessionRefs) {
+        referencedNodeMap.set(ref.nodeID, ref.buffer)
+        await refNodeStore.put({
+          editorSessionID: latestSession.id,
+          nodeID: ref.nodeID,
+          buffer: ref.buffer,
+        }).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: merge referenced nodes'))
       }
-      p = Math.max(p, e.lastUpdatedAt);
+      lastUpdatedAt = Math.max(lastUpdatedAt, session.lastUpdatedAt)
     }
-    i.$$delete(iM(e.id)).catch(e => K(e, "mergeAndClaimChanges: node changes for session"));
-    s.$$delete(iM(e.id)).catch(e => K(e, "mergeAndClaimChanges: referenced nodes for session"));
-    let r = await a.openCursor(iM(e.id));
-    for (; r;) {
-      t && a.put({
-        ...r.value,
-        editorSessionID: l.id
-      }).catch(e => K(e, "mergeAndClaimChanges: merge images"));
-      r.$$delete().catch(e => K(e, "mergeAndClaimChanges: remove old image"));
-      r = await r.$$continue();
+
+    await nodeStore.delete(createSessionGreaterEqualKeyRange(session.id)).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: node changes for session'))
+    await refNodeStore.delete(createSessionGreaterEqualKeyRange(session.id)).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: referenced nodes for session'))
+
+    let cursor = await imageStore.openCursor(createSessionGreaterEqualKeyRange(session.id))
+    while (cursor) {
+      if (isSameVersion) {
+        await imageStore.put({ ...cursor.value, editorSessionID: latestSession.id }).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: merge images'))
+      }
+      await cursor.delete().catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: remove old image'))
+      cursor = await cursor.continue()
     }
-    n.$$delete(e.id).catch(e => K(e, "mergeAndClaimChanges: delete old session id"));
+    await editorStore.delete(session.id).catch(e => handleAutosaveError(e, 'mergeAndClaimChanges: delete old session id'))
   }
-  await n.put({
-    ...l,
-    sessionID: t,
-    lastUpdatedAt: p
-  });
-  dU(e);
-  await e.done;
-  logInfo("Autosave", `Found claimed autosave changes from ${o.length} sessions`, void 0, {
-    logToConsole: LogToConsoleMode.ALWAYS
-  });
+  await editorStore.put({ ...(latestSession as any), sessionID, lastUpdatedAt })
+  commitTransactionIfSupported(transaction)
+  await transaction.done
+  logInfo('Autosave', `Found claimed autosave changes from ${validSessions.length} sessions`, undefined, {
+    logToConsole: LogToConsoleMode.ALWAYS,
+  })
   return {
-    changesByNode: c,
-    referencedNodeMap: u,
-    fileVersion: l.fileVersion
-  };
+    changesByNode,
+    referencedNodeMap,
+    fileVersion: latestSession.fileVersion,
+  }
 }
-async function J(e, t) {
-  let r = Zt(e, t);
-  let n = [];
-  await fullscreenPerfManager.timeAsync("checkForAutosave", async () => {
-    let e = await Z4();
-    if (!e) return;
-    let t = e.transaction(Sp);
-    let i = t.objectStore(Sp);
-    let a = await i.index(SW).openCursor(r);
-    for (; a;) {
-      n.push(a.value);
-      a = await a.$$continue();
+
+/**
+ * Loads autosave sessions for a user and file.
+ * Original name: J
+ */
+async function loadAutosaveSessions(userID: string, fileKey: string): Promise<any[]> {
+  const keyRange = createSessionNodeKeyRange(userID, fileKey)
+  const sessions: any[] = []
+  await fullscreenPerfManager.timeAsync('checkForAutosave', async () => {
+    const db = await getAutosaveDatabaseWithErrorHandling()
+    if (!db)
+      return
+    const tx = db.transaction(EDITOR_SESSIONS_STORE)
+    const store = tx.objectStore(EDITOR_SESSIONS_STORE)
+    let cursor = await store.index(SESSION_INDEX).openCursor(keyRange)
+    while (cursor) {
+      sessions.push(cursor.value)
+      cursor = await cursor.continue()
     }
-    await t.done;
-  });
-  n.length > 0 && logDebug("Autosave", "Found auto-saved data for this file", void 0, {
-    logToConsole: LogToConsoleMode.ALWAYS
-  });
-  return n;
+    await tx.done
+  })
+  if (sessions.length > 0) {
+    logDebug('Autosave', 'Found auto-saved data for this file', undefined, {
+      logToConsole: LogToConsoleMode.ALWAYS,
+    })
+  }
+  return sessions
 }
-async function Z(e) {
-  return await fullscreenPerfManager.timeAsync("filterAutosaveSessions", async () => {
-    let t = await Promise.all(e.map(e => mc(e)));
-    let r = Date.now() - $$Y11();
-    let n = e.filter((e, n) => !t[n] && e.lastUpdatedAt > r);
-    0 === n.length && logInfo("Autosave", "Changes not available or already claimed by another tab", void 0, {
-      logToConsole: LogToConsoleMode.ALWAYS
-    });
-    return n;
-  });
+
+/**
+ * Filters autosave sessions to only those available and not expired.
+ * Original name: Z
+ */
+async function filterAvailableAutosaveSessions(sessions: any[]): Promise<any[]> {
+  return await fullscreenPerfManager.timeAsync('filterAutosaveSessions', async () => {
+    const available = await Promise.all(sessions.map(isLockAvailableForAutosave))
+    const cutoff = Date.now() - getAutosaveExpirationMs()
+    const filtered = sessions.filter((session, idx) => !available[idx] && session.lastUpdatedAt > cutoff)
+    if (filtered.length === 0) {
+      logInfo('Autosave', 'Changes not available or already claimed by another tab', undefined, {
+        logToConsole: LogToConsoleMode.ALWAYS,
+      })
+    }
+    return filtered
+  })
 }
-let Q = null;
-export async function $$ee5(e) {
-  async function t() {
-    for (let e of ["figma-autosave-v2", "figma-autosave-darklaunch-v2"]) MR(e).catch(() => {});
+
+let garbageCollectPromise: Promise<void> | null = null
+
+/**
+ * Garbage collects autosave data and activity logs.
+ * Original name: garbageCollectAutosave
+ */
+export async function garbageCollectAutosave(userID: string): Promise<void> {
+  async function collect() {
+    for (const dbName of ['figma-autosave-v2', 'figma-autosave-darklaunch-v2']) {
+      deleteDB(dbName).catch(() => { })
+    }
     try {
-      let t = await $$ed14(cu(e), e => Date.now() - e.lastUpdatedAt < $$Y11());
-      if (t.length > 0) {
-        let e = t.map(e => e.lastUpdatedAt);
-        trackEventAnalytics("autosave garbage collect", {
-          numSessions: t.length,
-          localSessionCount: t.reduce((e, t) => e + (t.isLocalFile ? 1 : 0), 0),
-          nodeCount: t.reduce((e, t) => e + t.nodeCount, 0),
-          imageCount: t.reduce((e, t) => e + t.imageCount, 0),
-          referencedNodeCount: t.reduce((e, t) => e + t.referencedNodeCount, 0),
-          oldestSession: Math.min(...e),
-          newestSession: Math.max(...e)
-        });
+      const sessions = await go(createPrefixKeyRange(userID), async e => Date.now() - e.lastUpdatedAt < getAutosaveExpirationMs())
+      if (sessions.length > 0) {
+        const times = sessions.map(s => s.lastUpdatedAt)
+        trackEventAnalytics('autosave garbage collect', {
+          numSessions: sessions.length,
+          localSessionCount: sessions.reduce((acc, s) => acc + (s.isLocalFile ? 1 : 0), 0),
+          nodeCount: sessions.reduce((acc, s) => acc + s.nodeCount, 0),
+          imageCount: sessions.reduce((acc, s) => acc + s.imageCount, 0),
+          referencedNodeCount: sessions.reduce((acc, s) => acc + s.referencedNodeCount, 0),
+          oldestSession: Math.min(...times),
+          newestSession: Math.max(...times),
+        })
       }
-    } catch (e) {
-      Lf("Failed to garbage collect autosave changes", e);
     }
-    L_();
+    catch (err) {
+      logAutosaveErrorWithOriginalMessage('Failed to garbage collect autosave changes', err)
+    }
+    garbageCollectActivityLog()
   }
-  Q || (Q = t());
-  await Q;
+  if (!garbageCollectPromise)
+    garbageCollectPromise = collect()
+  await garbageCollectPromise
 }
-export async function $$et10(e) {
-  let t = {};
-  for (let r of e) {
-    let e = await $$er16(r);
-    (e.unsyncedFiles.length > 0 || e.newFiles.length > 0) && (t[r] = e);
+
+/**
+ * Returns unsynced autosave files and new files for a list of user IDs.
+ * Original name: getUnsyncedAutosaveFilesForUsers
+ */
+export async function getUnsyncedAutosaveFilesForUsers(userIds: string[]): Promise<Record<string, any>> {
+  const result: Record<string, any> = {}
+  for (const userId of userIds) {
+    const data = await getUnsyncedAutosaveFilesForUser(userId)
+    if (data.unsyncedFiles.length > 0 || data.newFiles.length > 0) {
+      result[userId] = data
+    }
   }
-  return t;
+  return result
 }
-export async function $$er16(e) {
-  let t = await Z4();
-  if (!t) return {
-    unsyncedFiles: [],
-    newFiles: [],
-    nextGarbageCollectionTimestamp: -1
-  };
-  let {
-    editorSessionRowsWithChanges,
+
+/**
+ * Returns unsynced autosave files and new files for a user.
+ * Original name: getUnsyncedAutosaveFilesForUser
+ */
+export async function getUnsyncedAutosaveFilesForUser(userId: string): Promise<{
+  unsyncedFiles: any[]
+  newFiles: any[]
+  nextGarbageCollectionTimestamp: number
+}> {
+  const db = await getAutosaveDatabaseWithErrorHandling()
+  if (!db) {
+    return {
+      unsyncedFiles: [],
+      newFiles: [],
+      nextGarbageCollectionTimestamp: -1,
+    }
+  }
+  const { editorSessionRowsWithChanges, newFilesByKey, newFilesWithChanges } = await getAutosaveSessionData(db, userId)
+  const unsyncedSet = new Set<string>()
+  const lastUpdatedMap = new Map<string, number>()
+  let nextGC = -1
+  const lockChecks: Promise<void>[] = []
+  for (const session of editorSessionRowsWithChanges) {
+    if (!unsyncedSet.has(session.fileKey)) {
+      lockChecks.push(
+        isLockAvailableForAutosave({
+          userID: userId,
+          fileKey: session.fileKey,
+          sessionID: session.sessionID,
+        }).then((available) => {
+          if (!available) {
+            unsyncedSet.add(session.fileKey)
+            const updated = Math.max(lastUpdatedMap.get(session.fileKey) || 0, session.lastUpdatedAt)
+            lastUpdatedMap.set(session.fileKey, updated)
+            nextGC = nextGC === -1 ? session.lastUpdatedAt : Math.min(nextGC, session.lastUpdatedAt)
+          }
+        }),
+      )
+    }
+  }
+  await Promise.all(lockChecks)
+  return {
+    unsyncedFiles: Array.from(unsyncedSet)
+      .filter(fileKey => !isLocalFileKey(fileKey))
+      .map(fileKey => ({
+        type: 'autosave-file',
+        fileKey,
+        lastUpdatedAt: lastUpdatedMap.get(fileKey),
+      })),
+    newFiles: Array.from(unsyncedSet)
+      .filter(fileKey => isLocalFileKey(fileKey) && newFilesByKey.has(fileKey))
+      .map((fileKey) => {
+        const fileInfo = newFilesByKey.get(fileKey)
+        return buildNewAutosaveFileInfo(fileInfo, lastUpdatedMap, newFilesWithChanges.has(fileInfo.fileKey))
+      })
+      .filter(({ hasChanges }) => hasChanges),
+    nextGarbageCollectionTimestamp: nextGC,
+  }
+}
+
+/**
+ * Loads session data for autosave for a user.
+ * Original name: en
+ */
+async function getAutosaveSessionData(
+  db: IDBPDatabase<unknown>,
+  userId: string,
+): Promise<{
+  editorSessionRowsWithChanges: any[]
+  newFilesByKey: Map<string, any>
+  newFilesWithChanges: Set<string>
+}> {
+  const tx = db.transaction([EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, NEW_FILES_STORE])
+  const errorStack = new Error('original async stack')
+  tx.done.catch((err) => {
+    err.cause = errorStack
+    reportError(ServiceCategories.UNOWNED, err)
+  })
+  const editorStore = tx.objectStore(EDITOR_SESSIONS_STORE)
+  const sessions = await editorStore.index(SESSION_INDEX).getAll(createPrefixKeyRange(userId))
+  const sessionRowsWithChanges: any[] = []
+  const nodeStore = tx.objectStore(NODE_CHANGES_STORE)
+  for (const session of sessions) {
+    const count = await nodeStore.count(createSessionGreaterEqualKeyRange(session.id))
+    if (count > 0) {
+      const nodes = await nodeStore.getAll(createSessionGreaterEqualKeyRange(session.id))
+      for (const node of nodes) {
+        if (
+          !(
+            getFeatureFlags().suppress_unsaved_changes_ui
+            && getFeatureFlags().incremental_loading_validation
+          )
+          || (AutosaveHelpers && !AutosaveHelpers.changesAreOnlyNewFileSystemChanges(node.changes, session.fileVersion))
+        ) {
+          sessionRowsWithChanges.push(session)
+          break
+        }
+      }
+    }
+  }
+  const newFilesByKey = new Map<string, any>()
+  const newFilesStore = tx.objectStore(NEW_FILES_STORE)
+  const newFiles = await newFilesStore.getAll(createPrefixKeyRange(userId))
+  const newFilesWithChanges = new Set<string>()
+  for (const file of newFiles) {
+    newFilesByKey.set(file.fileKey, file)
+    const session = sessions.find(s => s.fileKey === file.fileKey)
+    if (session) {
+      const nodes = await nodeStore.getAll(createSessionGreaterEqualKeyRange(session.id))
+      if (hasPersistedChanges(file.fileKey, nodes) || file.hasChangedMetadata) {
+        newFilesWithChanges.add(file.fileKey)
+      }
+    }
+  }
+  return {
+    editorSessionRowsWithChanges: sessionRowsWithChanges,
     newFilesByKey,
-    newFilesWithChanges
-  } = await en(t, e);
-  let s = new Set();
-  let o = new Map();
-  let l = -1;
-  let d = [];
-  for (let t of editorSessionRowsWithChanges) s.has(t.fileKey) || d.push(mc({
-    userID: e,
-    fileKey: t.fileKey,
-    sessionID: t.sessionID
-  }).then(e => {
-    if (!e) {
-      s.add(t.fileKey);
-      let e = Math.max(o.get(t.fileKey) || 0, t.lastUpdatedAt);
-      o.set(t.fileKey, e);
-      l = -1 === l ? t.lastUpdatedAt : Math.min(l, t.lastUpdatedAt);
-    }
-  }));
-  await Promise.all(d);
+    newFilesWithChanges,
+  }
+}
+
+/**
+ * Checks if a user has unsynced autosave files.
+ * Original name: hasUnsyncedAutosaveFiles
+ */
+export async function hasUnsyncedAutosaveFiles(userId: string): Promise<boolean> {
+  const data = await getUnsyncedAutosaveFilesForUser(userId)
+  return data.unsyncedFiles.length > 0 || data.newFiles.length > 0
+}
+
+/**
+ * Loads autosave files for a user.
+ * Original name: loadAutosaveFilesForUser
+ */
+async function loadAutosaveFilesForUser(userId: string): Promise<any[]> {
+  if (isAutosaveEnabled())
+    return []
+  const db = await getAutosaveDatabaseWithErrorHandling()
+  if (!db)
+    return []
+  const { editorSessionRowsWithChanges, newFilesByKey, newFilesWithChanges } = await getAutosaveSessionData(db, userId)
+  const fileSet = new Set<string>()
+  const lastUpdatedMap = new Map<string, number>()
+  for (const session of editorSessionRowsWithChanges) {
+    fileSet.add(session.fileKey)
+    lastUpdatedMap.set(session.fileKey, Math.max(lastUpdatedMap.get(session.fileKey) || 0, session.lastUpdatedAt))
+  }
+  const files = Array.from(fileSet)
+    .map((fileKey) => {
+      const fileInfo = newFilesByKey.get(fileKey)
+      return fileInfo ? buildNewAutosaveFileInfo(fileInfo, lastUpdatedMap, newFilesWithChanges.has(fileInfo.fileKey)) : null
+    })
+    .filter(isNotNullish)
+  autosaveManagerInstance?.fileCreationManager?.updateNewFileInfoFromFiles(files)
+  return files
+}
+
+/**
+ * Builds new autosave file info object.
+ * Original name: es
+ */
+function buildNewAutosaveFileInfo(
+  fileInfo: any,
+  lastUpdatedMap: Map<string, number>,
+  hasChanges: boolean,
+): {
+  type: string
+  fileKey: string
+  editorType: string
+  name: string
+  creatorId: string
+  createdAt: number
+  lastUpdatedAt: number | undefined
+  orgId: string | null
+
+  hasChanges: boolean
+  hasChangedMetadata: boolean
+} {
   return {
-    unsyncedFiles: Array.from(s).filter(e => !isLocalFileKey(e)).map(e => ({
-      type: "autosave-file",
-      fileKey: e,
-      lastUpdatedAt: o.get(e)
-    })),
-    newFiles: Array.from(s).filter(e => isLocalFileKey(e) && newFilesByKey.has(e)).map(e => {
-      let t = newFilesByKey.get(e);
-      return es(t, o, newFilesWithChanges.has(t.fileKey));
-    }).filter(({
-      hasChanges: e
-    }) => e),
-    nextGarbageCollectionTimestamp: l
-  };
+    type: 'new-autosave-file',
+    fileKey: fileInfo.fileKey,
+    editorType: fileInfo.editorType,
+    name: fileInfo.name,
+    creatorId: fileInfo.userID,
+    createdAt: fileInfo.createdAt,
+    lastUpdatedAt: lastUpdatedMap.get(fileInfo.fileKey),
+    orgId: fileInfo.orgID ?? null,
+    hasChanges,
+    hasChangedMetadata: fileInfo.hasChangedMetadata ?? false,
+  }
 }
-async function en(e, t) {
-  let r = e.transaction([Sp, jP, JR]);
-  let n = Error("original async stack");
-  r.done.catch(e => {
-    e.cause = n;
-    reportError(_$$e.UNOWNED, e);
-  });
-  let i = r.objectStore(Sp);
-  let a = await i.index(SW).getAll(cu(t));
-  let s = [];
-  let o = r.objectStore(jP);
-  for (let e of a) if ((await o.count(iM(e.id))) > 0) {
-    for (let t of await o.getAll(iM(e.id))) if (!(getFeatureFlags().suppress_unsaved_changes_ui && getFeatureFlags().incremental_loading_validation) || AutosaveHelpers && !AutosaveHelpers.changesAreOnlyNewFileSystemChanges(t.changes, e.fileVersion)) {
-      s.push(e);
-      break;
+/**
+ * Checks if a file has unsynced changes in autosave.
+ * Original name: checkFileHasUnsyncedAutosave
+ * @param userId - The user ID.
+ * @param fileKey - The file key.
+ */
+export async function checkFileHasUnsyncedAutosave(userId: string, fileKey: string): Promise<void> {
+  if (isAutosaveEnabled())
+    return
+  const hasUnsyncedChanges = async (session: any, transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>) => {
+    const nodeStore = transaction.objectStore(NODE_CHANGES_STORE)
+    const nodes = await nodeStore.getAll(createSessionGreaterEqualKeyRange(session.id))
+    return hasPersistedChanges(fileKey, nodes)
+  }
+  await deleteAutosaveDataForSessions(createSessionNodeKeyRange(userId, fileKey), hasUnsyncedChanges)
+}
+
+/**
+ * Deletes autosave data for all sessions except those in the provided fileKey list.
+ * Original name: deleteAutosaveExceptFileKeys
+ * @param userId - The user ID.
+ * @param excludeFileKeys - Array of file keys to exclude from deletion.
+ */
+export async function deleteAutosaveExceptFileKeys(userId: string, excludeFileKeys: string[]): Promise<void> {
+  await deleteAutosaveDataForSessions(createPrefixKeyRange(userId), async session => !excludeFileKeys.includes(session.fileKey))
+}
+
+/**
+ * Deletes autosave data for sessions matching the key range and predicate.
+ * Original name: deleteAutosaveDataForSessions
+ * @param keyRange - IndexedDB key range.
+ * @param predicate - Optional predicate function to skip deletion for certain sessions.
+ * @returns Array of deleted session metadata.
+ */
+export async function deleteAutosaveDataForSessions(
+  keyRange: IDBKeyRange,
+  predicate?: (session: any, transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>) => Promise<boolean>,
+): Promise<any[]> {
+  const db = await getAutosaveDatabaseWithErrorHandling()
+  if (!db)
+    return []
+  const tx = db.transaction(
+    [EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, SAVED_IMAGES_STORE, REFERENCED_NODES_STORE, NEW_FILES_STORE],
+    'readwrite',
+  )
+  const errorStack = new Error('original async stack')
+  tx.done.catch((err) => {
+    err.cause = errorStack
+    reportError(ServiceCategories.UNOWNED, err)
+  })
+
+  const editorStore = tx.objectStore(EDITOR_SESSIONS_STORE)
+  const nodeStore = tx.objectStore(NODE_CHANGES_STORE)
+  const imageStore = tx.objectStore(SAVED_IMAGES_STORE)
+  const refNodeStore = tx.objectStore(REFERENCED_NODES_STORE)
+  const newFilesStore = tx.objectStore(NEW_FILES_STORE)
+
+  let updated = false
+  const sessions = await editorStore.index(SESSION_INDEX).getAll(keyRange)
+  const deletedSessions: any[] = []
+  const localFileSessions: { localFileKey: string, userID: string }[] = []
+
+  for (const session of sessions) {
+    if (!(predicate && (await predicate(session, tx)))) {
+      const nodeCount = await nodeStore.count(createSessionGreaterEqualKeyRange(session.id))
+      const imageCount = await imageStore.count(createSessionGreaterEqualKeyRange(session.id))
+      const referencedNodeCount = await refNodeStore.count(createSessionGreaterEqualKeyRange(session.id))
+      deletedSessions.push({
+        userID: session.userID,
+        fileKey: session.fileKey,
+        sessionID: session.sessionID,
+        isLocalFile: isLocalFileKey(session.fileKey),
+        nodeCount,
+        imageCount,
+        referencedNodeCount,
+        lastUpdatedAt: session.lastUpdatedAt,
+      })
+      await editorStore.delete(session.id).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete editor session'))
+      await nodeStore.delete(createSessionGreaterEqualKeyRange(session.id)).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete node changes'))
+      await imageStore.delete(createSessionGreaterEqualKeyRange(session.id)).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete images'))
+      await refNodeStore.delete(createSessionGreaterEqualKeyRange(session.id)).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete referenced nodes'))
+      updated = true
+      if (isLocalFileKey(session.fileKey)) {
+        localFileSessions.push({ localFileKey: session.fileKey, userID: session.userID })
+      }
     }
   }
-  let c = new Map();
-  let p = r.objectStore(JR);
-  let _ = new Set();
-  for (let e of await p.getAll(cu(t))) {
-    c.set(e.fileKey, e);
-    let t = a.find(t => t.fileKey === e.fileKey);
-    if (t) {
-      let r = await o.getAll(iM(t.id));
-      (eh(e.fileKey, r) || e.hasChangedMetadata) && _.add(e.fileKey);
+
+  for (const { localFileKey, userID } of localFileSessions) {
+    const remaining = await editorStore.index(SESSION_INDEX).count(createSessionNodeKeyRange(userID, localFileKey))
+    if (remaining === 0) {
+      await newFilesStore.delete(createSessionNodeKeyRange(userID, localFileKey))
+    }
+    else {
+      logAutosaveError('Local file has remaining sessions')
     }
   }
-  return {
-    editorSessionRowsWithChanges: s,
-    newFilesByKey: c,
-    newFilesWithChanges: _
-  };
-}
-export async function $$ei23(e) {
-  let t = await $$er16(e);
-  return t.unsyncedFiles.length > 0 || t.newFiles.length > 0;
-}
-async function ea(e) {
-  if (rQ()) return [];
-  let t = await Z4();
-  if (!t) return [];
-  let {
-    editorSessionRowsWithChanges,
-    newFilesByKey,
-    newFilesWithChanges
-  } = await en(t, e);
-  let a = new Set();
-  let s = new Map();
-  for (let e of editorSessionRowsWithChanges) {
-    a.add(e.fileKey);
-    s.set(e.fileKey, Math.max(s.get(e.fileKey) || 0, e.lastUpdatedAt));
+
+  // Clean up leftover data if all sessions are deleted
+  const editorCount = await editorStore.count()
+  const nodeCount = await nodeStore.count()
+  const imageCount = await imageStore.count()
+  const refNodeCount = await refNodeStore.count()
+
+  if (editorCount === 0) {
+    if (nodeCount > 0) {
+      logAutosaveError('Found leftover node changes in IDB')
+      await nodeStore.delete(createZeroToInfinityKeyRange()).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete leftover node changes'))
+    }
+    if (imageCount > 0) {
+      logAutosaveError('Found leftover images in IDB')
+      await imageStore.delete(createZeroToInfinityKeyRangeDuplicate1()).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete leftover images'))
+    }
+    if (refNodeCount > 0) {
+      logAutosaveError('Found leftover referenced node buffers in IDB')
+      await refNodeStore.delete(createZeroToInfinityKeyRangeDuplicate2()).catch(e => handleAutosaveError(e, 'deleteAutosaveDataForSessions: delete leftover referenced nodes'))
+    }
   }
-  let l = Array.from(a).map(e => {
-    let t = newFilesByKey.get(e);
-    return t ? es(t, s, newFilesWithChanges.has(t.fileKey)) : null;
-  }).filter(isNotNullish);
-  eb?.fileCreationManager?.updateNewFileInfoFromFiles(l);
-  return l;
+
+  commitTransactionIfSupported(tx)
+  await tx.done
+  if (updated)
+    throttledNotifyNewFilesUpdate()
+  return deletedSessions
 }
-function es(e, t, r) {
-  return {
-    type: "new-autosave-file",
-    fileKey: e.fileKey,
-    editorType: e.editorType,
-    name: e.name,
-    creatorId: e.userID,
-    createdAt: e.createdAt,
-    lastUpdatedAt: t.get(e.fileKey),
-    orgId: e.orgID ?? null,
-    hasChanges: r,
-    hasChangedMetadata: e.hasChangedMetadata ?? !1
-  };
-}
-export async function $$eo0(e, t) {
-  if (rQ()) return;
-  let r = async (e, r) => {
-    let n = r.objectStore(jP);
-    return eh(t, await n.getAll(iM(e.id)));
-  };
-  await $$ed14(Zt(e, t), r);
-}
-export async function $$el21(e, t) {
-  await $$ed14(cu(e), e => !t.includes(e.fileKey));
-}
-export async function $$ed14(e, t) {
-  let r = await Z4();
-  if (!r) return [];
-  let n = r.transaction([Sp, jP, DV, w8, JR], "readwrite");
-  let i = Error("original async stack");
-  n.done.catch(e => {
-    e.cause = i;
-    reportError(_$$e.UNOWNED, e);
-  });
-  let s = n.objectStore(Sp);
-  let o = n.objectStore(jP);
-  let d = n.objectStore(DV);
-  let c = n.objectStore(w8);
-  let u = n.objectStore(JR);
-  let p = !1;
-  let _ = await s.index(SW).getAll(e);
-  let h = [];
-  let m = [];
-  for (let e of _) if (!(t && (await t(e, n)))) {
-    let [t, r, n] = await Promise.all([o.count(iM(e.id)), d.count(iM(e.id)), c.count(iM(e.id))]);
-    m.push({
-      userID: e.userID,
-      fileKey: e.fileKey,
-      sessionID: e.sessionID,
-      isLocalFile: isLocalFileKey(e.fileKey),
-      nodeCount: t,
-      imageCount: r,
-      referencedNodeCount: n,
-      lastUpdatedAt: e.lastUpdatedAt
-    });
-    s.$$delete(e.id).catch(e => K(e, "deleteAutosaveDataForSessions: delete editor session"));
-    o.$$delete(iM(e.id)).catch(e => K(e, "deleteAutosaveDataForSessions: delete node changes"));
-    d.$$delete(iM(e.id)).catch(e => K(e, "deleteAutosaveDataForSessions: delete images"));
-    c.$$delete(iM(e.id)).catch(e => K(e, "deleteAutosaveDataForSessions: delete referenced nodes"));
-    p = !0;
-    isLocalFileKey(e.fileKey) && h.push({
-      localFileKey: e.fileKey,
-      userID: e.userID
-    });
+
+/**
+ * Deletes an editor session row if it has no node, image, or referenced node changes.
+ * Original name: deleteEditorSessionRowIfUnused
+ * @param sessionId - The session ID.
+ * @param transaction - The IDBTransaction.
+ */
+async function deleteEditorSessionRowIfUnused(sessionId: number, transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>): Promise<void> {
+  const nodeCount = await transaction.objectStore(NODE_CHANGES_STORE).count(createSessionGreaterEqualKeyRange(sessionId))
+  const imageCount = await transaction.objectStore(SAVED_IMAGES_STORE).count(createSessionGreaterEqualKeyRange(sessionId))
+  const refNodeCount = await transaction.objectStore(REFERENCED_NODES_STORE).count(createSessionGreaterEqualKeyRange(sessionId))
+  if (nodeCount === 0 && imageCount === 0 && refNodeCount === 0) {
+    await transaction.objectStore(EDITOR_SESSIONS_STORE).delete(sessionId).catch(e =>
+      handleAutosaveError(e, 'deleteEditorSessionRowIfUnused: delete editor session'),
+    )
   }
-  for (let {
-    localFileKey,
-    userID
-  } of h) 0 === (await s.index(SW).count(Zt(userID, localFileKey))) ? await u.$$delete(Zt(userID, localFileKey)) : W6("Local file has remaining sessions");
-  (await s.count()) === 0 && ((await o.count()) > 0 && (W6("Found leftover node changes in IDB"), o.$$delete(BE()).catch(e => K(e, "deleteAutosaveDataForSessions: delete leftover node changes"))), (await d.count()) > 0 && (W6("Found leftover images in IDB"), d.$$delete(IE()).catch(e => K(e, "deleteAutosaveDataForSessions: delete leftover images"))), (await c.count()) > 0 && (W6("Found leftover referenced node buffers in IDB"), c.$$delete(Ab()).catch(e => K(e, "deleteAutosaveDataForSessions: delete leftover referenced nodes"))));
-  dU(n);
-  await n.done;
-  p && HZ();
-  return m;
 }
-async function ec(e, t) {
-  (await t.objectStore(jP).count(iM(e))) === 0 && (await t.objectStore(DV).count(iM(e))) === 0 && (await t.objectStore(w8).count(iM(e))) === 0 && t.objectStore(Sp).$$delete(e).catch(e => K(e, "deleteEditorSessionRowIfUnused: delete editor session"));
-}
-export async function $$eu8(e, t) {
-  let r = await Z4();
-  if (!r) throw Error("Could not open autosave data");
-  let n = r.transaction([Sp, jP, DV, w8]);
-  let i = n.objectStore(Sp);
-  let a = n.objectStore(jP);
-  let s = {};
-  for (let e of await i.getAll()) {
-    s[e.id] = e;
-    s[e.id].changes = {};
+
+/**
+ * Dumps autosave data for debugging.
+ * Original name: dumpAutosaveData
+ * @param maxNodes - Maximum number of nodes to dump.
+ * @param encodeDerivedData - Whether to encode derived data.
+ * @returns Dumped autosave data.
+ */
+export async function dumpAutosaveData(maxNodes: number, encodeDerivedData: boolean): Promise<Record<string, any>> {
+  const db = await getAutosaveDatabaseWithErrorHandling()
+  if (!db)
+    throw new Error('Could not open autosave data')
+  const tx = db.transaction([EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, SAVED_IMAGES_STORE, REFERENCED_NODES_STORE])
+  const editorStore = tx.objectStore(EDITOR_SESSIONS_STORE)
+  const nodeStore = tx.objectStore(NODE_CHANGES_STORE)
+  const result: Record<string, any> = {}
+  for (const session of await editorStore.getAll()) {
+    result[session.id] = session
+    result[session.id].changes = {}
   }
-  for (let r of (s.unknown = {
-    changes: {}
-  }, (await a.getAll()).slice(0, e))) r.editorSessionID in s ? s[r.editorSessionID].changes[r.nodeID] = JSON.parse(AutosaveHelpers.encodeChangesAsJson(r.changes, s[r.editorSessionID].fileVersion, !!t)) : s.unknown.changes[r.nodeID] = JSON.parse(AutosaveHelpers.encodeChangesAsJson(r.changes, 1, !!t));
-  await n.done;
-  return s;
+  result.unknown = { changes: {} }
+  for (const node of (await nodeStore.getAll()).slice(0, maxNodes)) {
+    if (node.editorSessionID in result) {
+      result[node.editorSessionID].changes[node.nodeID] = JSON.parse(
+        AutosaveHelpers.encodeChangesAsJson(node.changes, result[node.editorSessionID].fileVersion, !!encodeDerivedData),
+      )
+    }
+    else {
+      result.unknown.changes[node.nodeID] = JSON.parse(
+        AutosaveHelpers.encodeChangesAsJson(node.changes, 1, !!encodeDerivedData),
+      )
+    }
+  }
+  await tx.done
+  return result
 }
-async function ep(e) {
-  let {
+
+/**
+ * Commits autosave changes to the database.
+ * Original name: commitAutosaveChanges
+ * @param params - Commit parameters.
+ * @returns Number of node changes stored.
+ */
+async function commitAutosaveChanges(params: {
+  transaction: IDBPTransaction<unknown, string[], IDBTransactionMode>
+  commitPolicy: EditChangeMode
+  userID: string
+  fileKey: string
+  fileVersion: number
+  sessionID: number
+  oldSessionID: number
+  pendingChanges: Array<{ nodeID: string, changes: any | null }>
+  pendingImages: Set<string>
+  pendingReferencedNodes: Array<{ nodeID: string, buffer: any }>
+  reason?: ConnectionState
+  isFirstCommitOfAutosaveSession: boolean
+}): Promise<number> {
+  const {
     transaction,
     commitPolicy,
     userID,
@@ -429,291 +707,481 @@ async function ep(e) {
     pendingImages,
     pendingReferencedNodes,
     reason,
-    isFirstCommitOfAutosaveSession
-  } = e;
-  let m = transaction.objectStore(Sp);
-  let g = transaction.objectStore(jP);
-  let f = transaction.objectStore(DV);
-  let y = transaction.objectStore(w8);
-  let b = await $(userID, fileKey, oldSessionID, transaction);
-  let T = 0;
-  b && (T = (b.offlineEditingTime || 0) + (isFirstCommitOfAutosaveSession ? 0 : Date.now() - b.lastUpdatedAt));
-  let I = b?.id;
-  let S = {
+    isFirstCommitOfAutosaveSession,
+  } = params
+
+  const editorStore = transaction.objectStore(EDITOR_SESSIONS_STORE)
+  const nodeStore = transaction.objectStore(NODE_CHANGES_STORE)
+  const imageStore = transaction.objectStore(SAVED_IMAGES_STORE)
+  const refNodeStore = transaction.objectStore(REFERENCED_NODES_STORE)
+
+  const prevSession = await getEditorSessionRow(userID, fileKey, oldSessionID, transaction)
+  let offlineEditingTime = 0
+  if (prevSession) {
+    offlineEditingTime = (prevSession.offlineEditingTime || 0)
+      + (isFirstCommitOfAutosaveSession ? 0 : Date.now() - prevSession.lastUpdatedAt)
+  }
+  let sessionRowId = prevSession?.id
+  const sessionRow = {
     userID,
     fileKey,
     sessionID,
     lastUpdatedAt: Date.now(),
-    releaseTag: getInitialOptions().release_git_tag || "",
+    releaseTag: getInitialOptions().release_git_tag || '',
     fileVersion,
     lastCommitReason: reason,
-    offlineEditingTime: T,
-    originalTrackingSessionId: getTrackingSessionId()
-  };
-  for (let e of (null == I ? I = await m.add(S) : (commitPolicy === EditChangeMode.REPLACE_CHANGES && (g.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace node changes")), y.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace referenced nodes"))), m.put({
-    id: I,
-    ...S
-  }).catch(e => K(e, "commitChanges: update session"))), pendingChanges)) e.changes ? g.put({
-    editorSessionID: I,
-    nodeID: e.nodeID,
-    changes: e.changes
-  }).catch(e => K(e, "commitChanges: put node changes")) : g.$$delete([I, e.nodeID]).catch(e => K(e, "commitChanges: clear node changes"));
-  for (let e of pendingImages) if ((await f.count([I, e])) === 0) {
-    let t = ImageCppBindings.getCompressedImage(e);
-    t && f.add({
-      editorSessionID: I,
-      hash: e,
-      blob: t
-    }).catch(e => K(e, "commitChanges: add images"));
+    offlineEditingTime,
+    originalTrackingSessionId: getTrackingSessionId(),
   }
-  for (let e of pendingReferencedNodes) y.add({
-    editorSessionID: I,
-    nodeID: e.nodeID,
-    buffer: e.buffer
-  }).catch(e => K(e, "commitChanges: add referenced nodes"));
-  let A = await g.count(iM(I));
-  0 === A && (await f.$$delete(iM(I)), await y.$$delete(iM(I)));
-  await ec(I, transaction);
-  dU(transaction);
-  await transaction.done;
-  isLocalFileKey(fileKey) && HZ();
-  return A;
+
+  if (sessionRowId == null) {
+    sessionRowId = await editorStore.add(sessionRow)
+  }
+  else {
+    if (commitPolicy === EditChangeMode.REPLACE_CHANGES) {
+      await nodeStore.delete(createSessionGreaterEqualKeyRange(sessionRowId)).catch(e => handleAutosaveError(e, 'commitChanges: replace node changes'))
+      await refNodeStore.delete(createSessionGreaterEqualKeyRange(sessionRowId)).catch(e => handleAutosaveError(e, 'commitChanges: replace referenced nodes'))
+    }
+    await editorStore.put({ id: sessionRowId, ...sessionRow }).catch(e => handleAutosaveError(e, 'commitChanges: update session'))
+  }
+
+  for (const change of pendingChanges) {
+    if (change.changes) {
+      await nodeStore.put({
+        editorSessionID: sessionRowId,
+        nodeID: change.nodeID,
+        changes: change.changes,
+      }).catch(e => handleAutosaveError(e, 'commitChanges: put node changes'))
+    }
+    else {
+      await nodeStore.delete([sessionRowId, change.nodeID]).catch(e => handleAutosaveError(e, 'commitChanges: clear node changes'))
+    }
+  }
+
+  for (const hash of pendingImages) {
+    const count = await imageStore.count([sessionRowId, hash])
+    if (count === 0) {
+      const blob = ImageCppBindings.getCompressedImage(hash)
+      if (blob) {
+        await imageStore.add({
+          editorSessionID: sessionRowId,
+          hash,
+          blob,
+        }).catch(e => handleAutosaveError(e, 'commitChanges: add images'))
+      }
+    }
+  }
+
+  for (const refNode of pendingReferencedNodes) {
+    await refNodeStore.add({
+      editorSessionID: sessionRowId,
+      nodeID: refNode.nodeID,
+      buffer: refNode.buffer,
+    }).catch(e => handleAutosaveError(e, 'commitChanges: add referenced nodes'))
+  }
+
+  const nodeChangeCount = await nodeStore.count(createSessionGreaterEqualKeyRange(sessionRowId))
+  if (nodeChangeCount === 0) {
+    await imageStore.delete(createSessionGreaterEqualKeyRange(sessionRowId))
+    await refNodeStore.delete(createSessionGreaterEqualKeyRange(sessionRowId))
+  }
+  await deleteEditorSessionRowIfUnused(sessionRowId, transaction)
+  commitTransactionIfSupported(transaction)
+  await transaction.done
+  if (isLocalFileKey(fileKey))
+    throttledNotifyNewFilesUpdate()
+  return nodeChangeCount
 }
-async function e_(e, t, r) {
-  logInfo("Autosave", "assigning file key for new file", {
-    localFileKey: t,
-    newFileKey: r
-  });
-  await DB([Sp, JR], async n => {
-    let i = n.objectStore(Sp);
-    (await i.index(SW).getAll(Zt(e, t))).map(e => {
-      e.fileKey = r;
-      i.put(e);
-    });
-    n.objectStore(JR).$$delete(Zt(e, t));
-  }, "readwrite");
-  HZ();
+
+/**
+ * Assigns a new file key to a local file and updates the database.
+ * Original name: assignFileKeyForNewFile
+ * @param userID - The user ID.
+ * @param localFileKey - The local file key.
+ * @param newFileKey - The new file key.
+ */
+async function assignFileKeyForNewFile(userID: string, localFileKey: string, newFileKey: string): Promise<void> {
+  logInfo('Autosave', 'assigning file key for new file', {
+    localFileKey,
+    newFileKey,
+  })
+  await executeDatabaseTransaction([EDITOR_SESSIONS_STORE, NEW_FILES_STORE], async (tx) => {
+    const editorStore = tx.objectStore(EDITOR_SESSIONS_STORE)
+    const sessions = await editorStore.index(SESSION_INDEX).getAll(createSessionNodeKeyRange(userID, localFileKey))
+    sessions.forEach((session) => {
+      session.fileKey = newFileKey
+      editorStore.put(session)
+    })
+    tx.objectStore(NEW_FILES_STORE).delete(createSessionNodeKeyRange(userID, localFileKey))
+  }, 'readwrite')
+  throttledNotifyNewFilesUpdate()
 }
-function eh(e, t) {
-  if (!isLocalFileKey(e)) return t.length > 0;
-  if (t.length > 2) return !0;
-  for (let {
-    nodeID
-  } of t) if (!["0:0", "0:1"].includes(nodeID)) return !0;
-  return !1;
+
+/**
+ * Determines if a file has persisted changes.
+ * Original name: hasPersistedChanges
+ * @param fileKey - The file key.
+ * @param nodes - Array of node changes.
+ * @returns True if there are persisted changes.
+ */
+function hasPersistedChanges(fileKey: string, nodes: Array<{ nodeID: string }>): boolean {
+  if (!isLocalFileKey(fileKey))
+    return nodes.length > 0
+  if (nodes.length > 2)
+    return true
+  for (const { nodeID } of nodes) {
+    if (!['0:0', '0:1'].includes(nodeID))
+      return true
+  }
+  return false
 }
-class em {
+/**
+ * CommitEventListener (original name: em)
+ * Listens for commit events and allows waiting for the next commit.
+ */
+class CommitEventListener {
+  private nextEventPromise: Promise<void>
+  private nextEventPromiseResolve!: () => void
+
   constructor() {
-    this.nextEventPromise = new Promise(e => {
-      this.nextEventPromiseResolve = e;
-    });
+    this.nextEventPromise = new Promise((resolve) => {
+      this.nextEventPromiseResolve = resolve
+    })
   }
-  onCommitEvent() {
-    this.nextEventPromiseResolve();
-    this.nextEventPromise = new Promise(e => {
-      this.nextEventPromiseResolve = e;
-    });
+
+  /**
+   * Signals that a commit event has occurred.
+   */
+  onCommitEvent(): void {
+    this.nextEventPromiseResolve()
+    this.nextEventPromise = new Promise((resolve) => {
+      this.nextEventPromiseResolve = resolve
+    })
   }
-  waitForNextCommit() {
-    return this.nextEventPromise;
+
+  /**
+   * Returns a promise that resolves on the next commit event.
+   */
+  waitForNextCommit(): Promise<void> {
+    return this.nextEventPromise
   }
 }
-class eg {
-  constructor(e, t) {
-    this.userID = e;
-    this._state = {
-      type: "connecting"
-    };
-    this._fileKey = "";
-    this._hasReportedError = !1;
-    this.fileCreationManager = null;
-    this.fileKey = t;
-    rQ() ? (this._sessionsToRestore = Promise.resolve([]), this._state = {
-      type: "terminated"
-    }) : isLocalFileKey(t) ? this._sessionsToRestore = J(e, t) : this._sessionsToRestore = J(e, t).then(e => Z(e));
+
+/**
+ * AutosaveManager (original name: eg)
+ * Manages autosave sessions and file creation for a user and file.
+ */
+class AutosaveManager {
+  public userID: string
+  public fileCreationManager: FileCreationManager | null
+  private _state: { type: string, session?: AutosaveSession }
+  private _fileKey: string
+  private _hasReportedError: boolean
+  private _sessionsToRestore: Promise<any[]>
+
+  constructor(userID: string, fileKey: string) {
+    this.userID = userID
+    this._state = { type: 'connecting' }
+    this._fileKey = ''
+    this._hasReportedError = false
+    this.fileCreationManager = null
+    this.fileKey = fileKey
+
+    if (isAutosaveEnabled()) {
+      this._sessionsToRestore = Promise.resolve([])
+      this._state = { type: 'terminated' }
+    }
+    else if (isLocalFileKey(fileKey)) {
+      this._sessionsToRestore = loadAutosaveSessions(userID, fileKey)
+    }
+    else {
+      this._sessionsToRestore = loadAutosaveSessions(userID, fileKey).then(filterAvailableAutosaveSessions)
+    }
   }
-  get fileKey() {
-    return this._fileKey;
+
+  get fileKey(): string {
+    return this._fileKey
   }
-  get managerState() {
-    return this._state.type;
+
+  get managerState(): string {
+    return this._state.type
   }
-  session() {
-    return "connected" === this._state.type ? this._state.session : null;
+
+  session(): AutosaveSession | null {
+    return this._state.type === 'connected' ? this._state.session! : null
   }
-  set fileKey(e) {
-    this._fileKey = e;
-    let t = isLocalFileKey(e) ? e : null;
-    atomStoreManager.set(_$$h, t);
+
+  set fileKey(key: string) {
+    this._fileKey = key
+    const atomKey = isLocalFileKey(key) ? key : null
+    atomStoreManager.set(fileKeyAtom, atomKey)
   }
-  async assignFileKeyForLocalFile(e) {
-    if ("connected" !== this._state.type) {
-      "connecting" === this._state.type && W6("Still connecting");
-      return;
+
+  /**
+   * Assigns a new file key for a local file.
+   */
+  async assignFileKeyForLocalFile(newFileKey: string): Promise<void> {
+    if (this._state.type !== 'connected') {
+      if (this._state.type === 'connecting')
+        logAutosaveError('Still connecting')
+      return
     }
     try {
-      await this._state.session.enqueueAssignFileKeyForLocalFile(e, () => {
-        this.fileKey = e;
-        this.fileCreationManager = null;
-      });
-    } catch (e) {
-      this.terminateDueToError("unable to update file key", !0);
+      await this._state.session!.enqueueAssignFileKeyForLocalFile(newFileKey, () => {
+        this.fileKey = newFileKey
+        this.fileCreationManager = null
+      })
+    }
+    catch {
+      this.terminateDueToError('unable to update file key', true)
     }
   }
-  async terminateAndWaitForCleanup() {
-    let e = "connected" === this._state.type ? this._state.session : null;
-    this._state = {
-      type: "terminated"
-    };
-    atomStoreManager.set(_$$h, null);
-    await e?.destroy().catch(() => W6("Failed to destroy autosave session"));
+
+  /**
+   * Terminates the manager and waits for cleanup.
+   */
+  async terminateAndWaitForCleanup(): Promise<void> {
+    const session = this._state.type === 'connected' ? this._state.session : null
+    this._state = { type: 'terminated' }
+    atomStoreManager.set(fileKeyAtom, null)
+    await session?.destroy().catch(() => logAutosaveError('Failed to destroy autosave session'))
   }
-  terminateDueToError(e, t) {
-    logWarning("Autosave", "autosave disabled", {
-      message: e
-    });
-    t && W6(e);
-    let r = "connected" === this._state.type;
-    this._hasReportedError || (trackEventAnalytics("autosave_disabled", {
-      message: e,
-      hasSessionInProgress: r
-    }, {
-      forwardToDatadog: !0
-    }), this._hasReportedError = !0);
-    this.terminateAndWaitForCleanup().catch(t => W6("Failed to terminate autosave", {
-      message: e,
-      error: t.message
-    }));
+
+  /**
+   * Terminates the manager due to an error.
+   */
+  terminateDueToError(message: string, logErrorFlag: boolean): void {
+    logWarning('Autosave', 'autosave disabled', { message })
+    if (logErrorFlag)
+      logAutosaveError(message)
+    const hasSession = this._state.type === 'connected'
+    if (!this._hasReportedError) {
+      trackEventAnalytics('autosave_disabled', {
+        message,
+        hasSessionInProgress: hasSession,
+      }, { forwardToDatadog: true })
+      this._hasReportedError = true
+    }
+    this.terminateAndWaitForCleanup().catch(err =>
+      logAutosaveError('Failed to terminate autosave', { message, error: err.message }),
+    )
   }
-  async onConnect(e) {
-    if ("connecting" !== this._state.type) return;
+
+  /**
+   * Connects the manager to an autosave session.
+   */
+  async onConnect(sessionID: number): Promise<void> {
+    if (this._state.type !== 'connecting')
+      return
     try {
-      await Fy();
-    } catch (e) {
-      logInfo("Autosave", "IDB is not available in the current browser session.", void 0, {
-        logToConsole: LogToConsoleMode.ALWAYS
-      });
-      trackEventAnalytics("autosave_db_failure", {
-        message: e.message
-      });
-      this.terminateDueToError("unable to open DB", !1);
-      return;
+      await getAutosaveDatabase()
     }
-    let t = new Timer();
-    t.start();
-    let r = await this._sessionsToRestore;
-    isLocalFileKey(this.fileKey) && (r.length > 1 ? (W6("Local file has multiple sessions", {
-      sessionCount: r.length,
-      sessionIds: r.map(e => e.sessionID).slice(0, 5).join(", ")
-    }), this.terminateDueToError("Local file has multiple sessions", !1)) : 1 === r.length && 0 !== r[0].sessionID && (W6("Local file with changes from non-zero session", {
-      existingSessionId: r[0].sessionID
-    }), this.terminateDueToError("Local file with changes from non-zero session", !1)));
-    let n = await A2({
+    catch (err: any) {
+      logInfo('Autosave', 'IDB is not available in the current browser session.', undefined, {
+        logToConsole: LogToConsoleMode.ALWAYS,
+      })
+      trackEventAnalytics('autosave_db_failure', { message: err.message })
+      this.terminateDueToError('unable to open DB', false)
+      return
+    }
+    const timer = new Timer()
+    timer.start()
+    const sessions = await this._sessionsToRestore
+    if (isLocalFileKey(this.fileKey)) {
+      if (sessions.length > 1) {
+        logAutosaveError('Local file has multiple sessions', {
+          sessionCount: sessions.length,
+          sessionIds: sessions.map(s => s.sessionID).slice(0, 5).join(', '),
+        })
+        this.terminateDueToError('Local file has multiple sessions', false)
+      }
+      else if (sessions.length === 1 && sessions[0].sessionID !== 0) {
+        logAutosaveError('Local file with changes from non-zero session', {
+          existingSessionId: sessions[0].sessionID,
+        })
+        this.terminateDueToError('Local file with changes from non-zero session', false)
+      }
+    }
+    const lock = await acquireAutosaveLock({
       userID: this.userID,
       fileKey: this.fileKey,
-      sessionID: e
-    });
-    if (!n) {
-      this.terminateDueToError("unable to acquire lock", !0);
-      return;
+      sessionID,
+    })
+    if (!lock) {
+      this.terminateDueToError('unable to acquire lock', true)
+      return
     }
     this._state = {
-      type: "connected",
-      session: new ey(e, this, t, r, n)
-    };
-  }
-  async onConnectNewFile(e) {
-    let t = this.fileKey;
-    if (isLocalFileKey(t)) try {
-      await DB([JR], async r => {
-        let n = r.objectStore(JR);
-        if (await n.get(Zt(this.userID, t))) return;
-        let i = {
-          fileKey: t,
-          userID: this.userID,
-          editorType: e.editorType,
-          name: e.fileName ?? getI18nString("fullscreen.fullscreen_view_selector.untitled"),
-          createdAt: Date.now(),
-          orgID: e.org_id
-        };
-        await n.put(i);
-      }, "readwrite");
-      this.fileCreationManager && W6("File creation manager already exists", {
-        fileKey: t
-      });
-      this.fileCreationManager = new eE(t, e);
-    } catch (e) {
-      this.terminateDueToError("unable to set new file info", !0);
-      return;
+      type: 'connected',
+      session: new AutosaveSession(sessionID, this, timer, sessions, lock),
     }
-    await this.onConnect(0);
+  }
+
+  /**
+   * Connects the manager for a new file.
+   */
+  async onConnectNewFile(newFileInfo: any): Promise<void> {
+    const fileKey = this.fileKey
+    if (isLocalFileKey(fileKey)) {
+      try {
+        await executeDatabaseTransaction([NEW_FILES_STORE], async (tx) => {
+          const store = tx.objectStore(NEW_FILES_STORE)
+          if (await store.get(createSessionNodeKeyRange(this.userID, fileKey)))
+            return
+          const info = {
+            fileKey,
+            userID: this.userID,
+            editorType: newFileInfo.editorType,
+            name: newFileInfo.fileName ?? getI18nString('fullscreen.fullscreen_view_selector.untitled'),
+            createdAt: Date.now(),
+            orgID: newFileInfo.org_id,
+          }
+          await store.put(info)
+        }, 'readwrite')
+        if (this.fileCreationManager)
+          logAutosaveError('File creation manager already exists', { fileKey })
+        this.fileCreationManager = new FileCreationManager(fileKey, newFileInfo)
+      }
+      catch {
+        this.terminateDueToError('unable to set new file info', true)
+        return
+      }
+    }
+    await this.onConnect(0)
   }
 }
-async function ef(e, t, r) {
-  if (isLocalFileKey(t) && e) try {
-    await DB([JR], async n => {
-      let i = n.objectStore(JR);
-      let a = await i.get(Zt(e, t));
-      a && (await i.put({
-        ...a,
-        name: r,
-        hasChangedMetadata: !0
-      }));
-    }, "readwrite");
-    HZ();
-  } catch (e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("unable to update new file info"));
+
+/**
+ * Updates new file info in the database (original name: ef).
+ */
+async function updateNewFileInfo(userID: string, fileKey: string, name: string): Promise<void> {
+  if (isLocalFileKey(fileKey) && userID) {
+    try {
+      await executeDatabaseTransaction([NEW_FILES_STORE], async (tx) => {
+        const store = tx.objectStore(NEW_FILES_STORE)
+        const file = await store.get(createSessionNodeKeyRange(userID, fileKey))
+        if (file) {
+          await store.put({
+            ...file,
+            name,
+            hasChangedMetadata: true,
+          })
+        }
+      }, 'readwrite')
+      throttledNotifyNewFilesUpdate()
+    }
+    catch {
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error('unable to update new file info'))
+    }
   }
 }
-class eE {
-  constructor(e, t) {
-    this._pendingRealFileKey = null;
-    this.fileKey = e;
-    this._newFileInfo = t;
+
+/**
+ * FileCreationManager (original name: eE)
+ * Manages creation and metadata for new files.
+ */
+class FileCreationManager {
+  private _pendingRealFileKey: string | null
+  public fileKey: string
+  private _newFileInfo: any
+
+  constructor(fileKey: string, newFileInfo: any) {
+    this._pendingRealFileKey = null
+    this.fileKey = fileKey
+    this._newFileInfo = newFileInfo
   }
-  get newFileInfo() {
-    return this._newFileInfo;
+
+  get newFileInfo(): any {
+    return this._newFileInfo
   }
-  updateNewFileInfo(e) {
+
+  /**
+   * Updates the new file info object.
+   */
+  updateNewFileInfo(info: any): void {
     this._newFileInfo = {
       ...this._newFileInfo,
-      ...e
-    };
-  }
-  updateNewFileInfoFromFiles(e) {
-    let t = e.find(e => e.fileKey === this.fileKey);
-    if (t) {
-      let e = _$$B(t, this.newFileInfo.openNewFileIn);
-      this.updateNewFileInfo(e);
+      ...info,
     }
   }
-  get pendingRealFileKey() {
-    return this._pendingRealFileKey;
+
+  /**
+   * Updates new file info from a list of files.
+   */
+  updateNewFileInfoFromFiles(files: any[]): void {
+    const file = files.find(f => f.fileKey === this.fileKey)
+    if (file) {
+      const config = createFileConfig(file, this.newFileInfo.openNewFileIn)
+      this.updateNewFileInfo(config)
+    }
   }
-  assignPendingRealFileKey(e) {
-    this._pendingRealFileKey = e;
-    hp.sendToAllTabs(m6, {
+
+  get pendingRealFileKey(): string | null {
+    return this._pendingRealFileKey
+  }
+
+  /**
+   * Assigns the pending real file key and notifies other tabs.
+   */
+  assignPendingRealFileKey(realFileKey: string): void {
+    this._pendingRealFileKey = realFileKey
+    ipcStorageHandler.sendToAllTabs(autosaveNewFileSyncStart, {
       localFileKey: this.fileKey,
-      realFileKey: e
-    });
+      realFileKey,
+    })
   }
 }
-class ey {
-  constructor(e, t, r, n, i) {
-    this.sessionID = e;
-    this.manager = t;
-    this.restoreTimer = r;
-    this.changesToRestore = n;
-    this.webLock = i;
-    this.transactionQueue = new _$$O();
-    this.commitEventListener = new em();
-    this.restoring = !1;
-    this.consecutiveCommitsAddingChanges = 0;
-    this.lastCommitTime = 0;
-    this.activityLogger = navigator.storage?.estimate ? new hS() : null;
+/**
+ * AutosaveSession
+ * Manages an autosave session, including restoring changes, committing changes, and handling locks.
+ * Original name: AutosaveSession
+ */
+class AutosaveSession {
+  public sessionID: number
+  public manager: AutosaveManager
+  public restoreTimer: Timer
+  public changesToRestore: any[]
+  public webLock: any
+  public transactionQueue: AsyncJobQueue
+  public commitEventListener: CommitEventListener
+  public restoring: boolean
+  public consecutiveCommitsAddingChanges: number
+  public lastCommitTime: number
+  public activityLogger: AutosaveActivityLogManager | null
+  public restoreAnalytics: Record<string, any>
+  public reportedFullQueue: boolean
+  public reportedStorageError: boolean
+  public hasCommitted: boolean
+
+  /**
+   * Creates an AutosaveSession.
+   * @param sessionID - The session ID.
+   * @param manager - The AutosaveManager instance.
+   * @param restoreTimer - Timer for restore analytics.
+   * @param changesToRestore - Array of session rows to restore.
+   * @param webLock - The acquired lock for this session.
+   */
+  constructor(
+    sessionID: number,
+    manager: AutosaveManager,
+    restoreTimer: Timer,
+    changesToRestore: any[],
+    webLock: any,
+  ) {
+    this.sessionID = sessionID
+    this.manager = manager
+    this.restoreTimer = restoreTimer
+    this.changesToRestore = changesToRestore
+    this.webLock = webLock
+    this.transactionQueue = new AsyncJobQueue()
+    this.commitEventListener = new CommitEventListener()
+    this.restoring = false
+    this.consecutiveCommitsAddingChanges = 0
+    this.lastCommitTime = 0
+    this.activityLogger = navigator.storage?.estimate ? new AutosaveActivityLogManager() : null
     this.restoreAnalytics = {
-      hadChangesToRestore: !1,
-      fileKey: "",
+      hadChangesToRestore: false,
+      fileKey: '',
       time: 0,
       timeToStartSession: 0,
       timeToApply: 0,
@@ -725,600 +1193,892 @@ class ey {
       numberOfRestoredReferencedNodes: 0,
       numberOfSessions: 0,
       numberOfImages: 0,
-      neededToMigrate: !1,
-      persistentStorage: !1,
-      changesAreAllDerivedData: !1,
+      neededToMigrate: false,
+      persistentStorage: false,
+      changesAreAllDerivedData: false,
       nodeFields: [],
-      stagingDump: void 0,
-      lastUpdatedAt: void 0,
-      releaseTag: void 0,
-      isLocalFile: !1,
-      offlineEditingTime: void 0,
-      lastCommitReason: void 0,
-      originalTrackingSessionId: void 0,
-      storageUsageBytes: void 0,
-      storageQuotaBytes: void 0,
-      isIncremental: !1
-    };
-    this.reportedFullQueue = !1;
-    this.reportedStorageError = !1;
-    this.hasCommitted = !1;
-    this.restoreAnalytics.timeToStartSession = this.restoreTimer.getElapsedTime();
+      stagingDump: undefined,
+      lastUpdatedAt: undefined,
+      releaseTag: undefined,
+      isLocalFile: false,
+      offlineEditingTime: undefined,
+      lastCommitReason: undefined,
+      originalTrackingSessionId: undefined,
+      storageUsageBytes: undefined,
+      storageQuotaBytes: undefined,
+      isIncremental: false,
+    }
+    this.reportedFullQueue = false
+    this.reportedStorageError = false
+    this.hasCommitted = false
+    this.restoreAnalytics.timeToStartSession = this.restoreTimer.getElapsedTime()
   }
-  getActivityLogger() {
-    return this.activityLogger;
+
+  /**
+   * Returns the activity logger instance.
+   */
+  getActivityLogger(): AutosaveActivityLogManager | null {
+    return this.activityLogger
   }
-  async destroy() {
-    await this.webLock.release().catch(e => K(e, "AutosaveSession.destroy: releasing session lock"));
+
+  /**
+   * Destroys the session and releases the lock.
+   */
+  async destroy(): Promise<void> {
+    await this.webLock.release().catch(e => handleAutosaveError(e, 'AutosaveSession.destroy: releasing session lock'))
   }
-  sessionTransaction(e, t, r, n) {
-    let i = DB(t, r, n);
-    i.catch(t => {
-      trackEventAnalytics("autosave_transaction_failure", {
-        transactionName: e,
-        message: t.message
-      });
-      this.manager.terminateDueToError(`${e} transaction failed`, !1);
-    });
-    return i;
+
+  /**
+   * Executes a database transaction for the session.
+   */
+  sessionTransaction(
+    transactionName: string,
+    stores: string[],
+    fn: (tx: IDBPTransaction<unknown, string[], IDBTransactionMode>) => Promise<any>,
+    mode: IDBTransactionMode,
+  ): Promise<any> {
+    const promise = executeDatabaseTransaction(stores, fn, mode)
+    promise.catch((err) => {
+      trackEventAnalytics('autosave_transaction_failure', {
+        transactionName,
+        message: err.message,
+      })
+      this.manager.terminateDueToError(`${transactionName} transaction failed`, false)
+    })
+    return promise
   }
-  readyToAcceptChanges() {
-    let e = this.transactionQueue.length >= 10;
-    e && !this.reportedFullQueue && (this.reportedFullQueue = !0, W6("Autosave transaction queue is backed up."));
-    return !this.restoring && !e;
+
+  /**
+   * Returns true if ready to accept changes.
+   */
+  readyToAcceptChanges(): boolean {
+    const isQueueFull = this.transactionQueue.length >= 10
+    if (isQueueFull && !this.reportedFullQueue) {
+      this.reportedFullQueue = true
+      logAutosaveError('Autosave transaction queue is backed up.')
+    }
+    return !this.restoring && !isQueueFull
   }
-  hasOngoingCommitTask() {
-    return !this.transactionQueue.isComplete();
+
+  /**
+   * Returns true if there is an ongoing commit task.
+   */
+  hasOngoingCommitTask(): boolean {
+    return !this.transactionQueue.isComplete()
   }
-  getLastCommitTime() {
-    return this.lastCommitTime;
+
+  /**
+   * Returns the last commit time.
+   */
+  getLastCommitTime(): number {
+    return this.lastCommitTime
   }
-  async tryToFlushAutosave() {
-    this.readyToAcceptChanges() && (AutosaveHelpers.flushAutosave(), await this.transactionQueue.waitForCompletion());
+
+  /**
+   * Flushes autosave if ready.
+   */
+  async tryToFlushAutosave(): Promise<void> {
+    if (this.readyToAcceptChanges()) {
+      AutosaveHelpers.flushAutosave()
+      await this.transactionQueue.waitForCompletion()
+    }
   }
-  async enqueueAutosaveCommit(e) {
-    await this.transactionQueue.enqueue(() => this.commitAutosave(e));
+
+  /**
+   * Enqueues an autosave commit.
+   */
+  async enqueueAutosaveCommit(params: any): Promise<void> {
+    await this.transactionQueue.enqueue(() => this.commitAutosave(params))
   }
-  async commitAutosave(e) {
-    let {
+
+  /**
+   * Commits autosave changes to the database.
+   */
+  async commitAutosave(params: {
+    changes: any
+    commitPolicy: EditChangeMode
+    fileVersion: number
+    fileKey: string
+    newSessionID: number
+    numberOfUncleanRegisters: number
+    reason?: ConnectionState
+  }): Promise<void> {
+    const {
       changes,
       commitPolicy,
       fileVersion,
       fileKey,
       newSessionID,
       numberOfUncleanRegisters,
-      reason
-    } = e;
+      reason,
+    } = params
+
     if (!this.readyToAcceptChanges()) {
-      this.manager.terminateDueToError("Committing, but not ready to accept changes", !0);
-      return;
+      this.manager.terminateDueToError('Committing, but not ready to accept changes', true)
+      return
     }
     if (newSessionID < 0) {
-      this.manager.terminateDueToError("Unexpected sessionID < 0", !0);
-      return;
+      this.manager.terminateDueToError('Unexpected sessionID < 0', true)
+      return
     }
     if (fileKey && fileKey !== this.manager.fileKey) {
-      W6("Web file key out of sync with fullscreen file key", {
-        "web file key": this.manager.fileKey,
-        "fullscreen file key": fileKey
-      });
-      this.manager.terminateDueToError("Web file key out of sync with fullscreen file key", !1);
-      return;
+      logAutosaveError('Web file key out of sync with fullscreen file key', {
+        'web file key': this.manager.fileKey,
+        'fullscreen file key': fileKey,
+      })
+      this.manager.terminateDueToError('Web file key out of sync with fullscreen file key', false)
+      return
     }
-    this.activityLogger?.recordAutosaveCommit(this.manager.fileKey, this.manager.userID, this.sessionID, e);
-    let l = this.sessionID;
-    let c = null;
+    this.activityLogger?.recordAutosaveCommit(this.manager.fileKey, this.manager.userID, this.sessionID.toString(), params)
+    let previousSessionID = this.sessionID
+    let previousLock: any = null
     if (newSessionID !== this.sessionID) {
-      c = this.webLock;
-      this.sessionID = newSessionID;
-      let e = await A2({
+      previousLock = this.webLock
+      this.sessionID = newSessionID
+      const newLock = await acquireAutosaveLock({
         userID: this.manager.userID,
         fileKey: this.manager.fileKey,
-        sessionID: this.sessionID
-      });
-      if (!e) {
-        this.manager.terminateDueToError("unable to acquire lock", !0);
-        return;
+        sessionID: this.sessionID,
+      })
+      if (!newLock) {
+        this.manager.terminateDueToError('unable to acquire lock', true)
+        return
       }
-      this.webLock = e;
+      this.webLock = newLock
     }
-    if (!LX(this.webLock, {
+    if (!isLockNameMatching(this.webLock, {
       userID: this.manager.userID,
       fileKey: this.manager.fileKey,
-      sessionID: this.sessionID
-    })) {
-      this.manager.terminateDueToError("lock is not for the current session", !1);
-      return;
-    }
-    let u = changes.changedNodes.length;
-    let p = changes.changedNodes.map(e => ({
-      nodeID: e.nodeID,
-      changes: e.changes
-    })).concat(changes.clearedNodes.map(e => ({
-      nodeID: e,
-      changes: null
-    })));
-    let _ = [];
-    for (let e of changes.referencedNodes) _.push({
-      nodeID: e.nodeID,
-      buffer: e.changes
-    });
-    let h = new Set();
-    for (let e of changes.imageHashes) h.add(e);
-    let m = await this.sessionTransaction("commit", [Sp, jP, DV, w8], async e => await ep({
-      transaction: e,
-      commitPolicy,
-      userID: this.manager.userID,
-      fileKey: this.manager.fileKey,
-      fileVersion,
-      oldSessionID: l,
       sessionID: this.sessionID,
-      pendingChanges: p,
-      pendingImages: h,
-      pendingReferencedNodes: _,
-      reason,
-      isFirstCommitOfAutosaveSession: !this.hasCommitted
-    }), "readwrite");
-    this.hasCommitted = !0;
-    this.lastCommitTime = Date.now();
-    let g = {
-      stored_node_changes: m,
+    })) {
+      this.manager.terminateDueToError('lock is not for the current session', false)
+      return
+    }
+    const changedNodesCount = changes.changedNodes.length
+    const pendingChanges = [
+      ...changes.changedNodes.map((n: any) => ({ nodeID: n.nodeID, changes: n.changes })),
+      ...changes.clearedNodes.map((nodeID: string) => ({ nodeID, changes: null })),
+    ]
+    const pendingReferencedNodes = changes.referencedNodes.map((n: any) => ({
+      nodeID: n.nodeID,
+      buffer: n.changes,
+    }))
+    const pendingImages = new Set<string>(changes.imageHashes)
+    const storedNodeChanges = await this.sessionTransaction(
+      'commit',
+      [EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, SAVED_IMAGES_STORE, REFERENCED_NODES_STORE],
+      async tx => await commitAutosaveChanges({
+        transaction: tx,
+        commitPolicy,
+        userID: this.manager.userID,
+        fileKey: this.manager.fileKey,
+        fileVersion,
+        oldSessionID: previousSessionID,
+        sessionID: this.sessionID,
+        pendingChanges,
+        pendingImages,
+        pendingReferencedNodes,
+        reason,
+        isFirstCommitOfAutosaveSession: !this.hasCommitted,
+      }),
+      'readwrite',
+    )
+    this.hasCommitted = true
+    this.lastCommitTime = Date.now()
+    const commitInfo = {
+      stored_node_changes: storedNodeChanges,
       unclean_registers: numberOfUncleanRegisters,
-      changed_nodes: u,
+      changed_nodes: changedNodesCount,
       cleared_nodes: changes.clearedNodes.length,
-      referenced_nodes: _.length,
-      pending_images: h.size,
+      referenced_nodes: pendingReferencedNodes.length,
+      pending_images: pendingImages.size,
       commit_policy: EditChangeMode[commitPolicy],
       session_id: this.sessionID,
       new_session_id: newSessionID,
-      commit_reason: void 0 !== reason ? ConnectionState[reason] : void 0,
+      commit_reason: reason !== undefined ? ConnectionState[reason] : undefined,
       file_key: fileKey,
-      manager_file_key: this.manager.fileKey
-    };
-    if (logInfo("Autosave", "commit completed", g), trackFileEvent("autosave_commit_completed", fileKey, debugState.getState(), g), !this.reportedStorageError && void 0 !== numberOfUncleanRegisters && numberOfUncleanRegisters !== m) {
-      if (m > 0 && 0 === numberOfUncleanRegisters) {
-        let e = e => {
-          if (!(e.length > 5)) return e;
-          {
-            let t = e.slice(0, 5);
-            t.push("...");
-            return t;
-          }
-        };
-        let r = await $$eu8(5, !0);
-        logError("Autosave", "Dumping autosave since we expect IDB to be empty", {
-          debug: r,
-          changedNodes: e(changes.changedNodes.map(e => e.nodeID)),
-          clearedNodes: e(changes.clearedNodes),
-          referencedNodes: e(changes.referencedNodes.map(e => e.nodeID)),
-          imageHashes: e(changes.imageHashes),
+      manager_file_key: this.manager.fileKey,
+    }
+    logInfo('Autosave', 'commit completed', commitInfo)
+    trackFileEvent('autosave_commit_completed', fileKey, debugState.getState(), commitInfo)
+    if (
+      !this.reportedStorageError
+      && numberOfUncleanRegisters !== undefined
+      && numberOfUncleanRegisters !== storedNodeChanges
+    ) {
+      if (storedNodeChanges > 0 && numberOfUncleanRegisters === 0) {
+        const shortList = (arr: any[]) => arr.length > 5 ? [...arr.slice(0, 5), '...'] : arr
+        const debugDump = await dumpAutosaveData(5, true)
+        logError('Autosave', 'Dumping autosave since we expect IDB to be empty', {
+          debug: debugDump,
+          changedNodes: shortList(changes.changedNodes.map((n: any) => n.nodeID)),
+          clearedNodes: shortList(changes.clearedNodes),
+          referencedNodes: shortList(changes.referencedNodes.map((n: any) => n.nodeID)),
+          imageHashes: shortList(changes.imageHashes),
           currentSessionID: Multiplayer.currentSessionID(),
-          commitQueueLength: this.transactionQueue.length
-        });
-        this.manager.terminateDueToError("Expected IDB to be empty after synchronizing with multiplayer", !0);
-      } else m > numberOfUncleanRegisters ? this.manager.terminateDueToError("Expected IDB to have at many node changes as registers (currently has more)", !0) : m < numberOfUncleanRegisters && this.manager.terminateDueToError("Expected IDB to have at many node changes as registers (currently has less)", !0);
-      this.reportedStorageError = !0;
+          commitQueueLength: this.transactionQueue.length,
+        })
+        this.manager.terminateDueToError('Expected IDB to be empty after synchronizing with multiplayer', true)
+      }
+      else {
+        if (storedNodeChanges > numberOfUncleanRegisters) {
+          this.manager.terminateDueToError('Expected IDB to have at many node changes as registers (currently has more)', true)
+        }
+        else if (storedNodeChanges < numberOfUncleanRegisters) {
+          this.manager.terminateDueToError('Expected IDB to have at many node changes as registers (currently has less)', true)
+        }
+      }
+      this.reportedStorageError = true
     }
-    null != c && c.release().catch(e => K(e, "commitAutosave: release lock"));
-    this.commitEventListener.onCommitEvent();
-    commitPolicy === EditChangeMode.ADD_CHANGES ? (this.consecutiveCommitsAddingChanges++, this.consecutiveCommitsAddingChanges >= 4 && handleAtomEvent({
-      id: Cr
-    })) : this.consecutiveCommitsAddingChanges = 0;
-  }
-  async restoreAutosaveIfNeeded() {
-    if (AutosaveHelpers.fileIsReadOnly()) return;
-    this.restoreAnalytics.fileKey = this.manager.fileKey;
-    this.restoreAnalytics.isLocalFile = isLocalFileKey(this.manager.fileKey);
-    this.restoring = !0;
-    let e = function () {
-      if (!BrowserInfo.chrome || !navigator.storage?.persist) return Promise.resolve(!1);
-      let e = new Promise(e => setTimeout(() => e(!1), 200));
-      return Promise.race([navigator.storage.persist(), e]);
-    }();
-    let t = U4();
-    let r = this.changesToRestore;
-    if (this.changesToRestore = [], this.restoreAnalytics.sessionsCheckTime = this.restoreTimer.getElapsedTime(), this.restoreAnalytics.numberOfSessions = r.length, r.length > 0) {
-      let e = r[0];
-      this.restoreAnalytics.lastUpdatedAt = e.lastUpdatedAt;
-      this.restoreAnalytics.offlineEditingTime = e.offlineEditingTime;
-      this.restoreAnalytics.originalTrackingSessionId = e.originalTrackingSessionId;
-      this.restoreAnalytics.lastCommitReason = e.lastCommitReason ? ConnectionState[e.lastCommitReason] : void 0;
-      this.restoreAnalytics.releaseTag = e.releaseTag;
-      await this.restoreChangesForSessionRows(r);
+    if (previousLock != null) {
+      previousLock.release().catch(e => handleAutosaveError(e, 'commitAutosave: release lock'))
     }
-    this.restoreAnalytics.persistentStorage = await e;
-    let {
-      usageBytes,
-      quotaBytes
-    } = await t;
-    this.restoreAnalytics.storageUsageBytes = usageBytes;
-    this.restoreAnalytics.storageQuotaBytes = quotaBytes;
-    this.restoreAnalytics.isIncremental = Multiplayer.isIncrementalSession();
-    this.restoreTimer.stop();
-    this.restoreAnalytics.time = this.restoreTimer.getElapsedTime();
-    trackFileEvent("autosave_restore_on_load", this.restoreAnalytics.fileKey, debugState.getState(), this.restoreAnalytics, {
-      forwardToDatadog: !0
-    });
-    this.restoring = !1;
+    this.commitEventListener.onCommitEvent()
+    if (commitPolicy === EditChangeMode.ADD_CHANGES) {
+      this.consecutiveCommitsAddingChanges++
+      if (this.consecutiveCommitsAddingChanges >= 4) {
+        handleAtomEvent({ id: autosaveCommitMessage })
+      }
+    }
+    else {
+      this.consecutiveCommitsAddingChanges = 0
+    }
   }
-  async restoreChangesForSessionRows(e) {
-    if (!LX(this.webLock, {
+
+  /**
+   * Restores autosave changes if needed.
+   */
+  async restoreAutosaveIfNeeded(): Promise<void> {
+    if (AutosaveHelpers.fileIsReadOnly())
+      return
+    this.restoreAnalytics.fileKey = this.manager.fileKey
+    this.restoreAnalytics.isLocalFile = isLocalFileKey(this.manager.fileKey)
+    this.restoring = true
+    const persistentStoragePromise = (() => {
+      if (!BrowserInfo.chrome || !navigator.storage?.persist)
+        return Promise.resolve(false)
+      const timeout = new Promise(resolve => setTimeout(() => resolve(false), 200))
+      return Promise.race([navigator.storage.persist(), timeout])
+    })()
+    const storageEstimatePromise = getStorageEstimate()
+    const sessions = this.changesToRestore
+    this.changesToRestore = []
+    this.restoreAnalytics.sessionsCheckTime = this.restoreTimer.getElapsedTime()
+    this.restoreAnalytics.numberOfSessions = sessions.length
+    if (sessions.length > 0) {
+      const firstSession = sessions[0]
+      this.restoreAnalytics.lastUpdatedAt = firstSession.lastUpdatedAt
+      this.restoreAnalytics.offlineEditingTime = firstSession.offlineEditingTime
+      this.restoreAnalytics.originalTrackingSessionId = firstSession.originalTrackingSessionId
+      this.restoreAnalytics.lastCommitReason = firstSession.lastCommitReason ? ConnectionState[firstSession.lastCommitReason] : undefined
+      this.restoreAnalytics.releaseTag = firstSession.releaseTag
+      await this.restoreChangesForSessionRows(sessions)
+    }
+    this.restoreAnalytics.persistentStorage = await persistentStoragePromise
+    const { usageBytes, quotaBytes } = await storageEstimatePromise
+    this.restoreAnalytics.storageUsageBytes = usageBytes
+    this.restoreAnalytics.storageQuotaBytes = quotaBytes
+    this.restoreAnalytics.isIncremental = Multiplayer.isIncrementalSession()
+    this.restoreTimer.stop()
+    this.restoreAnalytics.time = this.restoreTimer.getElapsedTime()
+    trackFileEvent('autosave_restore_on_load', this.restoreAnalytics.fileKey, debugState.getState(), this.restoreAnalytics, {
+      forwardToDatadog: true,
+    })
+    this.restoring = false
+  }
+
+  /**
+   * Restores changes for the given session rows.
+   */
+  async restoreChangesForSessionRows(sessionRows: any[]): Promise<void> {
+    if (!isLockNameMatching(this.webLock, {
       userID: this.manager.userID,
       fileKey: this.manager.fileKey,
-      sessionID: this.sessionID
+      sessionID: this.sessionID,
     })) {
-      this.manager.terminateDueToError("lock is not for the current session", !1);
-      return;
+      this.manager.terminateDueToError('lock is not for the current session', false)
+      return
     }
-    let {
-      changesByNode,
-      referencedNodeMap,
-      fileVersion
-    } = await this.sessionTransaction("restore", [Sp, jP, DV, w8], async t => await q(t, this.sessionID, e), "readwrite");
-    let i = changesByNode.size > 0;
-    for (let {
-      changes
-    } of (i ? (isLocalFileKey(this.manager.fileKey) || (await maybeCreateSavepoint(this.manager.fileKey, "Offline sync", "Before syncing changes", debugState.dispatch).catch(e => W6("Failed to create before savepoint", {
-      status: e.status,
-      message: e.data?.message
-    }))), logInfo("Autosave", "Restoring auto-saved data", void 0, {
-      logToConsole: LogToConsoleMode.ALWAYS
-    }), await this.restoreChanges(changesByNode, referencedNodeMap, fileVersion)) : logInfo("Autosave", "Changes are empty!", void 0, {
-      logToConsole: LogToConsoleMode.ALWAYS
-    }), this.commitEventListener.waitForNextCommit().then(() => {
-      hp.sendToOtherTabs(_$$a);
-    }).catch(e => K(e, "restoreChangesForSessionRows: waitForNextCommit")), this.restoreAnalytics.hadChangesToRestore = i, this.restoreAnalytics.numberOfBytes = 0, this.restoreAnalytics.numberOfNodes = changesByNode.size, this.restoreAnalytics.numberOfReferencedNodes = referencedNodeMap.size, changesByNode.values())) this.restoreAnalytics.numberOfBytes += changes.length;
+    const { changesByNode, referencedNodeMap, fileVersion } = await this.sessionTransaction(
+      'restore',
+      [EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE, SAVED_IMAGES_STORE, REFERENCED_NODES_STORE],
+      async tx => await mergeAndClaimAutosaveChanges(tx, this.sessionID, sessionRows),
+      'readwrite',
+    )
+    const hasChanges = changesByNode.size > 0
+    if (hasChanges) {
+      if (!isLocalFileKey(this.manager.fileKey)) {
+        await maybeCreateSavepoint(
+          this.manager.fileKey,
+          'Offline sync',
+          'Before syncing changes',
+          debugState.dispatch,
+        ).catch(e => logAutosaveError('Failed to create before savepoint', {
+          status: e.status,
+          message: e.data?.message,
+        }))
+      }
+      logInfo('Autosave', 'Restoring auto-saved data', undefined, {
+        logToConsole: LogToConsoleMode.ALWAYS,
+      })
+      await this.restoreChanges(changesByNode, referencedNodeMap, fileVersion)
+    }
+    else {
+      logInfo('Autosave', 'Changes are empty!', undefined, {
+        logToConsole: LogToConsoleMode.ALWAYS,
+      })
+    }
+    this.commitEventListener.waitForNextCommit().then(() => {
+      ipcStorageHandler.sendToOtherTabs(restoredAutosaveKey, null)
+    }).catch(e => handleAutosaveError(e, 'restoreChangesForSessionRows: waitForNextCommit'))
+    this.restoreAnalytics.hadChangesToRestore = hasChanges
+    this.restoreAnalytics.numberOfBytes = 0
+    this.restoreAnalytics.numberOfNodes = changesByNode.size
+    this.restoreAnalytics.numberOfReferencedNodes = referencedNodeMap.size
+    for (const { changes } of changesByNode.values()) {
+      this.restoreAnalytics.numberOfBytes += changes.length
+    }
   }
-  async restoreChanges(e, t, r) {
-    let n = Array.from(e.entries()).sort(([e, t], [r, n]) => e < r ? -1 : 1);
-    let i = getFeatureFlags().suppress_unsaved_changes_ui && getFeatureFlags().incremental_loading_validation && n.every(([e, {
-      changes: t
-    }]) => AutosaveHelpers.changesAreOnlyNewFileSystemChanges(t, r));
-    let s = [];
-    for (let [e, {
-      changes: t,
-      editorSessionID: i
-    }] of n) {
-      let {
-        decodedAsEmptyMultiplayerMessage
-      } = AutosaveHelpers.loadAutosavedNodeChanges(e, t, r);
-      decodedAsEmptyMultiplayerMessage && s.push([e, i]);
+
+  /**
+   * Restores node changes and referenced nodes.
+   */
+  async restoreChanges(
+    changesByNode: Map<string, { changes: any, editorSessionID: number }>,
+    referencedNodeMap: Map<string, any>,
+    fileVersion: number,
+  ): Promise<void> {
+    const sortedNodes = Array.from(changesByNode.entries()).sort(([a], [b]) => a < b ? -1 : 1)
+    const isAllNewFileSystemChanges
+      = getFeatureFlags().suppress_unsaved_changes_ui
+      && getFeatureFlags().incremental_loading_validation
+      && sortedNodes.every(([_, { changes }]) => AutosaveHelpers.changesAreOnlyNewFileSystemChanges(changes, fileVersion))
+    const emptyNodes: Array<[string, number]> = []
+    for (const [nodeID, { changes, editorSessionID }] of sortedNodes) {
+      const { decodedAsEmptyMultiplayerMessage } = AutosaveHelpers.loadAutosavedNodeChanges(nodeID, changes, fileVersion)
+      if (decodedAsEmptyMultiplayerMessage)
+        emptyNodes.push([nodeID, editorSessionID])
     }
-    let o = Promise.resolve();
-    if (s.length > 0 && (logWarning("Autosave", "Deleting nodes without phase or property changes", {
-      numNodes: s.length,
-      guids: JSON.stringify(s.map(([e]) => e).slice(0, 10))
-    }), trackEventAnalytics("autosave delete empty changes", {
-      numNodes: s.length,
-      willDelete: !0
-    }), o = this.sessionTransaction("delete_empty_changes", [jP, DV, w8, Sp], async e => {
-      let t = e.objectStore(jP);
-      let r = new Set(s.map(([e, t]) => t));
-      await Promise.all(s.map(([e, r]) => t.$$delete([r, e]).catch(e => K(e, "restoreChanges: delete empty node changes"))));
-      await Promise.all(Array.from(r.values()).map(t => ec(t, e)));
-    }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > r, isIncrementalSessionOrValidating()) {
-      trackFileEvent("autosave_load_containing_pages_start", this.manager.fileKey, debugState.getState(), {
-        node_count: e.size,
-        fileKey: this.manager.fileKey
-      });
-      let t = performance.now();
-      let r = new Set(e.keys());
-      for (let e of AutosaveHelpers.getParentIndexChanges()) r.add(e);
-      await autosaveSubscribeWithRetry(r);
-      trackFileEvent("autosave_load_containing_pages_end", this.manager.fileKey, debugState.getState(), {
-        node_count: e.size,
-        timeElapsed: performance.now() - t,
-        fileKey: this.manager.fileKey
-      });
+    let deletePromise = Promise.resolve()
+    if (emptyNodes.length > 0) {
+      logWarning('Autosave', 'Deleting nodes without phase or property changes', {
+        numNodes: emptyNodes.length,
+        guids: JSON.stringify(emptyNodes.map(([id]) => id).slice(0, 10)),
+      })
+      trackEventAnalytics('autosave delete empty changes', {
+        numNodes: emptyNodes.length,
+        willDelete: true,
+      })
+      deletePromise = this.sessionTransaction(
+        'delete_empty_changes',
+        [NODE_CHANGES_STORE, SAVED_IMAGES_STORE, REFERENCED_NODES_STORE, EDITOR_SESSIONS_STORE],
+        async (tx) => {
+          const nodeStore = tx.objectStore(NODE_CHANGES_STORE)
+          const sessionIDs = new Set(emptyNodes.map(([_, sessionID]) => sessionID))
+          await Promise.all(
+            emptyNodes.map(([nodeID, sessionID]) =>
+              nodeStore.delete([sessionID, nodeID]).catch(e => handleAutosaveError(e, 'restoreChanges: delete empty node changes')),
+            ),
+          )
+          await Promise.all(Array.from(sessionIDs.values()).map(sessionID => deleteEditorSessionRowIfUnused(sessionID, tx)))
+        },
+        'readwrite',
+      )
     }
-    let l = AutosaveHelpers.getImagesUsedInAutosavedChanges().split(" ");
-    this.restoreAnalytics.numberOfImages = await this.restoreImagesIfAvailable(l);
-    let p = this.restoreAvailableReferencedNodes(t);
-    AutosaveHelpers.migrateAndSetAutosaveChanges(p, r);
-    permissionScopeHandler.autosave("autosave", () => AutosaveHelpers.applyAutosavedChanges());
-    this.restoreAnalytics.timeToApply = this.restoreTimer.getElapsedTime();
-    logInfo("Autosave", "Successfully applied auto-saved changes", void 0, {
-      logToConsole: LogToConsoleMode.ALWAYS
-    });
-    let _ = () => {
+    this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData()
+    this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames()
+    this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > fileVersion
+    if (isIncrementalSessionOrValidating()) {
+      trackFileEvent('autosave_load_containing_pages_start', this.manager.fileKey, debugState.getState(), {
+        node_count: changesByNode.size,
+        fileKey: this.manager.fileKey,
+      })
+      const start = performance.now()
+      const nodeIDs = new Set(changesByNode.keys())
+      for (const parentID of AutosaveHelpers.getParentIndexChanges()) nodeIDs.add(parentID)
+      await autosaveSubscribeWithRetry(nodeIDs)
+      trackFileEvent('autosave_load_containing_pages_end', this.manager.fileKey, debugState.getState(), {
+        node_count: changesByNode.size,
+        timeElapsed: performance.now() - start,
+        fileKey: this.manager.fileKey,
+      })
+    }
+    const imageHashes = AutosaveHelpers.getImagesUsedInAutosavedChanges().split(' ')
+    this.restoreAnalytics.numberOfImages = await this.restoreImagesIfAvailable(imageHashes)
+    const restoredNodes = this.restoreAvailableReferencedNodes(referencedNodeMap)
+    AutosaveHelpers.migrateAndSetAutosaveChanges(restoredNodes, fileVersion)
+    permissionScopeHandler.autosave('autosave', () => AutosaveHelpers.applyAutosavedChanges())
+    this.restoreAnalytics.timeToApply = this.restoreTimer.getElapsedTime()
+    logInfo('Autosave', 'Successfully applied auto-saved changes', undefined, {
+      logToConsole: LogToConsoleMode.ALWAYS,
+    })
+    const notifyRestored = () => {
       debugState.dispatch(notificationActions.enqueueFront({
         notification: {
-          type: NotificationType.AUTOSAVE_CHANGES_RESTORED,
-          message: getI18nString("autosave.changes_synced")
+          type: NotificationCategory.AUTOSAVE_CHANGES_RESTORED,
+          message: getI18nString('autosave.changes_synced'),
+        },
+      }))
+      logInfo('Autosave', 'Successfully synced auto-saved changes', undefined, {
+        logToConsole: LogToConsoleMode.ALWAYS,
+      })
+    }
+    await deletePromise
+      ; (async () => {
+        await awaitSync()
+        this.restoreAnalytics.timeToSync = this.restoreTimer.getElapsedTime()
+        if (
+          !isLocalFileKey(this.manager.fileKey)
+        ) {
+          await maybeCreateSavepoint(
+            this.manager.fileKey,
+            'Offline sync',
+            'After syncing changes',
+            debugState.dispatch,
+          ).catch((e) => {
+            trackFileEvent('autosave_skip_after_checkpoint', this.manager.fileKey, debugState.getState(), {
+              error: e.data?.message,
+            })
+            logAutosaveError('Failed to create after savepoint', {
+              status: e.status,
+              message: e.data?.message,
+            })
+          })
         }
-      }));
-      logInfo("Autosave", "Successfully synced auto-saved changes", void 0, {
-        logToConsole: LogToConsoleMode.ALWAYS
-      });
-    };
-    await o;
-    (async () => {
-      await awaitSync();
-      this.restoreAnalytics.timeToSync = this.restoreTimer.getElapsedTime();
-      isLocalFileKey(this.manager.fileKey) || (await maybeCreateSavepoint(this.manager.fileKey, "Offline sync", "After syncing changes", debugState.dispatch).catch(e => {
-        trackFileEvent("autosave_skip_after_checkpoint", this.manager.fileKey, debugState.getState(), {
-          error: e.data?.message
-        });
-        W6("Failed to create after savepoint", {
-          status: e.status,
-          message: e.data?.message
-        });
-      }));
-      this.manager.fileKey !== debugState.getState().openFile?.key || i || _();
-    })();
+        if (
+          this.manager.fileKey === debugState.getState().openFile?.key
+          && !isAllNewFileSystemChanges
+        ) {
+          notifyRestored()
+        }
+      })()
   }
-  async restoreImagesIfAvailable(e) {
-    let t = 0;
-    await this.sessionTransaction("restore images", [Sp, DV], async r => {
-      let n = await this.currentEditorSessionID(r);
-      if (!n) return;
-      let i = r.objectStore(DV);
-      for (let r of e) {
-        let e = await i.get([n, r]);
-        e && (AutosaveHelpers.restoreImageBytes(r, e.blob), t++);
-      }
-      await r.done;
-    });
-    return t;
+
+  /**
+   * Restores images if available for the session.
+   */
+  async restoreImagesIfAvailable(imageHashes: string[]): Promise<number> {
+    let restoredCount = 0
+    await this.sessionTransaction(
+      'restore images',
+      [EDITOR_SESSIONS_STORE, SAVED_IMAGES_STORE],
+      async (tx) => {
+        const sessionID = await this.currentEditorSessionID(tx)
+        if (!sessionID)
+          return
+        const imageStore = tx.objectStore(SAVED_IMAGES_STORE)
+        for (const hash of imageHashes) {
+          const image = await imageStore.get([sessionID, hash])
+          if (image) {
+            AutosaveHelpers.restoreImageBytes(hash, image.blob)
+            restoredCount++
+          }
+        }
+        await tx.done
+      },
+      'readonly',
+    )
+    return restoredCount
   }
-  restoreAvailableReferencedNodes(e) {
-    let t = [];
-    for (let [r, n] of e) {
-      AutosaveHelpers.restoreReferencedNodeFile(r, n);
-      t.push(r);
+
+  /**
+   * Restores referenced nodes from the map.
+   */
+  restoreAvailableReferencedNodes(referencedNodeMap: Map<string, any>): string[] {
+    const restored: string[] = []
+    for (const [nodeID, buffer] of referencedNodeMap) {
+      AutosaveHelpers.restoreReferencedNodeFile(nodeID, buffer)
+      restored.push(nodeID)
     }
-    return t;
+    return restored
   }
-  currentEditorSessionID(e) {
-    return X(this.manager.userID, this.manager.fileKey, this.sessionID, e);
+
+  /**
+   * Gets the current editor session ID.
+   */
+  currentEditorSessionID(tx: IDBPTransaction<unknown, string[], IDBTransactionMode>): Promise<number | undefined> {
+    return getEditorSessionId(this.manager.userID, this.manager.fileKey, this.sessionID, tx)
   }
-  async getNodeChangesForSession() {
-    let e = await Z4();
-    if (!e) throw Error("Unable to get DB");
-    let t = e.transaction([Sp, jP], "readonly");
-    let r = t.objectStore(jP);
-    let n = await this.currentEditorSessionID(t);
-    return n ? await r.getAll(iM(n)) : [];
+
+  /**
+   * Gets node changes for the current session.
+   */
+  async getNodeChangesForSession(): Promise<any[]> {
+    const db = await getAutosaveDatabaseWithErrorHandling()
+    if (!db)
+      throw new Error('Unable to get DB')
+    const tx = db.transaction([EDITOR_SESSIONS_STORE, NODE_CHANGES_STORE], 'readonly')
+    const nodeStore = tx.objectStore(NODE_CHANGES_STORE)
+    const sessionID = await this.currentEditorSessionID(tx)
+    return sessionID ? await nodeStore.getAll(createSessionGreaterEqualKeyRange(sessionID)) : []
   }
-  async getNodeChangeCount() {
-    return (await this.getNodeChangesForSession()).length;
+
+  /**
+   * Gets the node change count for the session.
+   */
+  async getNodeChangeCount(): Promise<number> {
+    return (await this.getNodeChangesForSession()).length
   }
-  async hasPersistedUserChanges() {
-    let e = await this.getNodeChangesForSession();
-    return eh(this.manager.fileKey, e);
+
+  /**
+   * Returns true if there are persisted user changes.
+   */
+  async hasPersistedUserChanges(): Promise<boolean> {
+    const nodes = await this.getNodeChangesForSession()
+    return hasPersistedChanges(this.manager.fileKey, nodes)
   }
-  async enqueueAssignFileKeyForLocalFile(e, t) {
-    let r = this.manager.fileKey;
-    if (!isLocalFileKey(r)) {
-      W6("Only local file keys can be reassigned");
-      return;
+
+  /**
+   * Enqueues assignment of a new file key for a local file.
+   */
+  async enqueueAssignFileKeyForLocalFile(newFileKey: string, onAssigned: () => void): Promise<void> {
+    const currentFileKey = this.manager.fileKey
+    if (!isLocalFileKey(currentFileKey)) {
+      logAutosaveError('Only local file keys can be reassigned')
+      return
     }
-    if (isLocalFileKey(e)) {
-      W6("Cannot reassign file key to a local file key");
-      return;
+    if (isLocalFileKey(newFileKey)) {
+      logAutosaveError('Cannot reassign file key to a local file key')
+      return
     }
     await this.transactionQueue.enqueue(async () => {
-      let n = this.webLock;
-      let i = await A2({
+      const prevLock = this.webLock
+      const newLock = await acquireAutosaveLock({
         userID: this.manager.userID,
-        fileKey: e,
-        sessionID: this.sessionID
-      });
-      if (!i) {
-        this.manager.terminateDueToError("unable to acquire lock", !0);
-        return;
+        fileKey: newFileKey,
+        sessionID: this.sessionID,
+      })
+      if (!newLock) {
+        this.manager.terminateDueToError('unable to acquire lock', true)
+        return
       }
-      this.webLock = i;
-      await e_(this.manager.userID, r, e);
-      t();
-      await n?.release();
-    });
+      this.webLock = newLock
+      await assignFileKeyForNewFile(this.manager.userID, currentFileKey, newFileKey)
+      onAssigned()
+      await prevLock?.release()
+    })
   }
 }
-let eb = null;
-export function $$eT9() {
-  return eb;
+/**
+ * AutosaveManager singleton instance.
+ * Original name: eb
+ */
+let autosaveManagerInstance: AutosaveManager | null = null
+
+/**
+ * Returns the current AutosaveManager instance.
+ * Original name: getAutosaveManagerInstance
+ */
+export function getAutosaveManagerInstance(): AutosaveManager | null {
+  return autosaveManagerInstance
 }
-export function $$eI18(e, t) {
-  if (eb) {
-    if (eb.fileKey === e) {
-      logInfo("Autosave", "Autosave manager already exists");
-      return eb;
+
+/**
+ * Creates or updates the AutosaveManager instance for the given fileKey and userId.
+ * Original name: setupAutosaveManager
+ */
+export function setupAutosaveManager(fileKey: string, userId: string): AutosaveManager {
+  if (autosaveManagerInstance) {
+    if (autosaveManagerInstance.fileKey === fileKey) {
+      logInfo('Autosave', 'Autosave manager already exists')
+      return autosaveManagerInstance
     }
-    W6("Manager already exists. Updating file key", {
-      "current fileKey": eb.fileKey,
-      "new fileKey": e
-    });
-    eb.terminateAndWaitForCleanup();
-    eb = null;
+    logAutosaveError('Manager already exists. Updating file key', {
+      'current fileKey': autosaveManagerInstance.fileKey,
+      'new fileKey': fileKey,
+    })
+    autosaveManagerInstance.terminateAndWaitForCleanup()
+    autosaveManagerInstance = null
   }
-  logDebug("Autosave", "Create autosave manager", {
-    fileKey: e
-  });
-  return eb = new eg(t, e);
+  logDebug('Autosave', 'Create autosave manager', {
+    fileKey,
+  })
+  autosaveManagerInstance = new AutosaveManager(userId, fileKey)
+  return autosaveManagerInstance
 }
-export function $$eS20() {
-  $$ev22().catch(e => K(e, "failed to destroy autosave manager"));
+
+/**
+ * Destroys the AutosaveManager instance asynchronously.
+ * Original name: destroyAutosaveManagerAsync
+ */
+export function destroyAutosaveManagerAsync(): void {
+  destroyAutosaveManager().catch(e => handleAutosaveError(e, 'failed to destroy autosave manager'))
 }
-export async function $$ev22() {
-  if (logDebug("Autosave", "Destroy autosave manager"), !eb) {
-    logInfo("Autosave", "No manager to destroy");
-    return;
+
+/**
+ * Destroys the AutosaveManager instance and waits for cleanup.
+ * Original name: destroyAutosaveManager
+ */
+export async function destroyAutosaveManager(): Promise<void> {
+  logDebug('Autosave', 'Destroy autosave manager')
+  if (!autosaveManagerInstance) {
+    logInfo('Autosave', 'No manager to destroy')
+    return
   }
-  let e = eb;
-  eb = null;
-  await e.terminateAndWaitForCleanup();
+  const manager = autosaveManagerInstance
+  autosaveManagerInstance = null
+  await manager.terminateAndWaitForCleanup()
 }
-export function $$eA15(e, {
-  offlineFiles: t
-}) {
-  let r = {};
-  for (let n in e) {
-    let e = t[n];
-    e && (r[n] = e);
+
+/**
+ * Maps offline files to their corresponding entries in the provided object.
+ * Original name: mapOfflineFiles
+ */
+export function mapOfflineFiles(files: Record<string, any>, { offlineFiles }: { offlineFiles: Record<string, any> }): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const key in files) {
+    const offlineFile = offlineFiles[key]
+    if (offlineFile) {
+      result[key] = offlineFile
+    }
   }
-  return r;
+  return result
 }
-export let $$ex6 = liveStoreInstance.Query({
-  async fetch({
-    userId: e
-  }) {
-    if (!e) return {};
-    let t = await ea(e);
-    let r = {};
-    for (let e of t) r[e.fileKey] = e;
-    return r;
+
+/**
+ * Query for autosave files for a user.
+ * Original name: autosaveFilesQuery
+ */
+export const autosaveFilesQuery = liveStoreInstance.Query({
+  async fetch({ userId }: { userId: string }) {
+    if (!userId)
+      return {}
+    const files = await loadAutosaveFilesForUser(userId)
+    const result: Record<string, any> = {}
+    for (const file of files) result[file.fileKey] = file
+    return result
+  },
+})
+
+/**
+ * Offline file types enum.
+ * Original name: OfflineFileType
+ */
+export enum OfflineFileType {
+  OFFLINE_FILE_TILE = 'OFFLINE_FILE_TILE',
+  EDITOR = 'EDITOR',
+}
+
+/**
+ * Mutation for renaming autosave files.
+ * Original name: renameAutosaveFileMutation
+ */
+export const renameAutosaveFileMutation = liveStoreInstance.Mutation((
+  { fileKey, name, source }: { fileKey: string, name: string, source: string },
+  { atomStore, query, reduxStore }: { atomStore: typeof atomStoreManager, query: any, reduxStore: any },
+) => {
+  atomStore.set(currentRenamingFileAtom, null)
+  if (!name)
+    return
+  const userId = reduxStore.getState().user?.id ?? null
+  query.mutate(autosaveFilesQuery({ userId }), (files: Record<string, any>) => {
+    const file = files[fileKey]
+    if (file)
+      file.name = name
+  })
+  const fileCreationManager = autosaveManagerInstance?.fileCreationManager
+  if (fileCreationManager) {
+    if (fileCreationManager.fileKey === fileKey) {
+      fileCreationManager.updateNewFileInfo({ fileName: name })
+      if (fileCreationManager.pendingRealFileKey) {
+        debugState.dispatch(filePutAction({
+          file: {
+            key: fileCreationManager.pendingRealFileKey,
+            name,
+          },
+          userInitiated: true,
+        }))
+      }
+    }
+    else {
+      logAutosaveError('File key in rename mutation does not match current FileCreationManager file key', {
+        mutationFileKey: fileKey,
+        fileCreationManagerFileKey: fileCreationManager.fileKey,
+      })
+    }
   }
-});
-export var $$eN19 = (e => (e.OFFLINE_FILE_TILE = "OFFLINE_FILE_TILE", e.EDITOR = "EDITOR", e))($$eN19 || {});
-let $$eC12 = liveStoreInstance.Mutation(({
-  fileKey: e,
-  name: t,
-  source: r
-}, {
-  atomStore: n,
-  query: i,
-  reduxStore: a
-}) => {
-  if (n.set(eL, null), !t) return;
-  let s = a.getState().user?.id ?? null;
-  i.mutate($$ex6({
-    userId: s
-  }), r => {
-    let n = r[e];
-    n && (n.name = t);
-  });
-  let o = eb?.fileCreationManager;
-  o && (o.fileKey === e ? (o.updateNewFileInfo({
-    fileName: t
-  }), o.pendingRealFileKey && debugState.dispatch(filePutAction({
-    file: {
-      key: o.pendingRealFileKey,
-      name: t
-    },
-    userInitiated: !0
-  }))) : W6("File key in rename mutation does not match current FileCreationManager file key", {
-    mutationFileKey: e,
-    fileCreationManagerFileKey: o.fileKey
-  }));
-  trackEventAnalytics("Rename New Autosave File", {
-    source: r,
-    isOffline: !navigator.onLine
-  });
-  return ef(s, e, t);
-});
-let ew = atom(e => {
-  let t = e(userIdAtom);
-  let r = {};
-  if (t) {
-    let n = e($$ex6({
-      userId: t
-    }));
-    for (let [e, t] of Object.entries(n?.data ?? {})) t.hasChanges && (r[e] = t);
+  trackEventAnalytics('Rename New Autosave File', {
+    source,
+    isOffline: !navigator.onLine,
+  })
+  return updateNewFileInfo(userId, fileKey, name)
+})
+
+/**
+ * Atom for tracking the current renaming file.
+ * Original name: eL
+ */
+const currentRenamingFileAtom = atom<string | null>(null) as PrimitiveAtom<string | null>
+
+/**
+ * Sets the current renaming file key.
+ * Original name: setCurrentRenamingFileKey
+ */
+export function setCurrentRenamingFileKey(file: { fileKey: string }): void {
+  atomStoreManager.set(currentRenamingFileAtom, file.fileKey)
+}
+
+/**
+ * Atom for tracking renamed files.
+ * Original name: eD
+ */
+const renamedFilesAtom = atom({})
+
+/**
+ * Sets renamed file info.
+ * Original name: setRenamedFileInfo
+ */
+export function setRenamedFileInfo(fileKey: string, info: any): void {
+  const current = atomStoreManager.get(renamedFilesAtom)
+  atomStoreManager.set(renamedFilesAtom, {
+    ...current,
+    [fileKey]: info,
+  })
+}
+
+/**
+ * Atom for unsynced autosave files excluding renamed files.
+ * Original name: eM
+ */
+const unsyncedAutosaveFilesAtom = atom((get) => {
+  const unsyncedFiles = { ...get(unsyncedFilesAtom) }
+  const renamingFileKey = get(currentRenamingFileAtom)
+  const renamedFiles = get(renamedFilesAtom)
+  const result: Record<string, any> = {}
+  for (const key in unsyncedFiles) {
+    if (!(key in renamedFiles)) {
+      result[key] = unsyncedFiles[key]
+    }
   }
-  return r;
-});
-let $$eO17 = atom(e => {
-  let t = e(_$$h);
-  let r = e(userIdAtom);
-  if (t && r) {
-    let n = e($$ex6({
-      userId: r
-    }));
-    let i = n?.data ?? {};
-    if (t in i) return i[t];
+  if (renamingFileKey && renamingFileKey in result) {
+    const file = result[renamingFileKey]
+    result[renamingFileKey] = {
+      ...file,
+      isRenaming: true,
+    }
   }
-  return null;
-});
-export function $$eR1() {
-  return atomStoreManager.get($$eO17);
+  return result
+})
+
+/**
+ * Returns unsynced autosave files with subscription.
+ * Original name: useUnsyncedAutosaveFiles
+ */
+export function useUnsyncedAutosaveFiles(): any {
+  return useAtomWithSubscription(unsyncedAutosaveFilesAtom)
 }
-let eL = atom(null);
-export function $$eP13(e) {
-  atomStoreManager.set(eL, e.fileKey);
+
+/**
+ * Checks if a file has unclaimed autosave changes in IDB and permission to edit.
+ * Original name: $$ej4
+ */
+export function useHasUnclaimedAutosaveChanges(fileKey: string): any {
+  const hasUnclaimed = useSelector((state: AppState) =>
+    !!state.autosave.unclaimedFilesWithChangesInIDB.find((f: any) => f.fileKey === fileKey),
+  )
+  const hasPermission = useHasFilePermission(FileCanEdit, hasUnclaimed ? fileKey : '')
+  return hasUnclaimed ? hasPermission : resourceUtils.loaded(false)
 }
-let eD = atom({});
-export function $$ek2(e, t) {
-  let r = atomStoreManager.get(eD);
-  atomStoreManager.set(eD, {
-    ...r,
-    [e]: t
-  });
-}
-let eM = atom(e => {
-  let t = {
-    ...e(ew)
-  };
-  let r = e(eL);
-  let n = e(eD);
-  let i = {};
-  for (let e in t) e in n || (i[e] = t[e]);
-  if (r && r in i) {
-    let e = i[r];
-    i[r] = {
-      ...e,
-      isRenaming: !0
-    };
-  }
-  return i;
-});
-export function $$eF7() {
-  return useAtomWithSubscription(eM);
-}
-export function $$ej4(e) {
-  let t = useSelector(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));
-  let r = _$$l(FileCanEdit, t ? e : "");
-  return t ? r : resourceUtils.loaded(!1);
-}
-export function $$eU3() {
-  let e = useSelector(e => e.autosave.unclaimedFilesWithChangesInIDB);
-  let t = useSelector(e => e.autosave.unclaimedFilesCreatedOffline);
-  let r = useMultiSubscription(FileCanEdit, useMemo(() => e.map(({
-    fileKey: e
-  }) => ({
-    key: e
-  })), [e]));
-  let a = useMemo(() => r.map(({
-    result: e
-  }) => e.transform(e => !!e.file?.hasPermission)), [r]);
-  let o = useSelector(e => e.fileByKey);
+
+/**
+ * Returns unsynced and local unsynced autosave files with edit permissions.
+ * Original name: useAutosaveFilesWithPermissions
+ */
+export function useAutosaveFilesWithPermissions(): {
+  unsyncedFiles: any[]
+  localUnsyncedFiles: any[]
+} {
+  const unsyncedFiles = useSelector((state: AppState) => state.autosave.unclaimedFilesWithChangesInIDB)
+  const localUnsyncedFiles = useSelector((state: AppState) => state.autosave.unclaimedFilesCreatedOffline)
+  const fileEditSubscriptions = useMultiSubscription(
+    FileCanEdit,
+    useMemo(() => unsyncedFiles.map(({ fileKey }) => ({ key: fileKey })), [unsyncedFiles]),
+  )
+  const editPermissions = useMemo(
+    () => fileEditSubscriptions.map(({ result }) => result.transform((res: any) => !!res.file?.hasPermission)),
+    [fileEditSubscriptions],
+  )
+  const fileByKey = useSelector((state: AppState) => state.fileByKey)
   return useMemo(() => ({
-    unsyncedFiles: filterNotNullish(e.map(({
-      fileKey: e,
-      lastUpdatedAt: t
-    }, r) => {
-      let n = o[e];
-      return n && !n.trashed_at && a[r].unwrapOr(!1) ? {
-        type: "autosave-file",
-        fileKey: e,
-        lastUpdatedAt: t,
-        file: n
-      } : null;
-    })),
-    localUnsyncedFiles: t
-  }), [e, t, o, a]);
+    unsyncedFiles: filterNotNullish(
+      unsyncedFiles.map(({ fileKey, lastUpdatedAt }, idx) => {
+        const file = fileByKey[fileKey]
+        return file && !file.trashed_at && editPermissions[idx].unwrapOr(false)
+          ? {
+            type: 'autosave-file',
+            fileKey,
+            lastUpdatedAt,
+            file,
+          }
+          : null
+      }),
+    ),
+    localUnsyncedFiles,
+  }), [unsyncedFiles, localUnsyncedFiles, fileByKey, editPermissions])
 }
-export const $3 = $$eo0;
-export const GT = $$eR1;
-export const Gc = $$ek2;
-export const Gg = $$eU3;
-export const I4 = $$ej4;
-export const JI = $$ee5;
-export const OL = $$ex6;
-export const Rp = $$eF7;
-export const Ww = $$eu8;
-export const ZG = $$eT9;
-export const ZW = $$et10;
-export const bD = $$Y11;
-export const b_ = $$eC12;
-export const dm = $$eP13;
-export const go = $$ed14;
-export const gp = $$eA15;
-export const kl = $$er16;
-export const lu = $$eO17;
-export const mu = $$eI18;
-export const oE = $$eN19;
-export const t = $$eS20;
-export const wI = $$el21;
-export const yn = $$ev22;
-export const z$ = $$ei23;
+
+/**
+ * Atom for unsynced autosave files.
+ * Original name: ew
+ */
+const unsyncedFilesAtom = atom((get) => {
+  const userId = get(userIdAtom)
+  const result: Record<string, any> = {}
+  if (userId) {
+    const files = get(autosaveFilesQuery({ userId })) as Record<string, { hasChanges: boolean }> | undefined
+    for (const [key, file] of Object.entries(files ?? {})) {
+      if (file.hasChanges) {
+        result[key] = file
+      }
+    }
+  }
+  return result
+})
+
+/**
+ * Atom for autosave file info by fileKey.
+ * Original name: autosaveFileInfoAtom
+ */
+export const autosaveFileInfoAtom = atom((get) => {
+  const fileKey = get(fileKeyAtom)
+  const userId = get(userIdAtom)
+  if (fileKey && userId) {
+    const files = get(autosaveFilesQuery({ userId })) as Record<string, any> | undefined
+    const fileInfo = (files ?? {}) as Record<string, any>
+    if (fileKey in fileInfo)
+      return fileInfo[fileKey]
+  }
+  return null
+})
+
+/**
+ * Returns the value of autosaveFileInfoAtom from atomStoreManager.
+ * Original name: $$eR1
+ */
+export function getAutosaveFileInfo(): any {
+  return atomStoreManager.get(autosaveFileInfoAtom)
+}
+export const $3 = checkFileHasUnsyncedAutosave
+export const GT = getAutosaveFileInfo
+export const Gc = setRenamedFileInfo
+export const Gg = useAutosaveFilesWithPermissions
+export const I4 = useHasUnclaimedAutosaveChanges
+export const JI = garbageCollectAutosave
+export const OL = autosaveFilesQuery
+export const Rp = useUnsyncedAutosaveFiles
+export const Ww = dumpAutosaveData
+export const ZG = getAutosaveManagerInstance
+export const ZW = getUnsyncedAutosaveFilesForUsers
+export const bD = getAutosaveExpirationMs
+export const b_ = renameAutosaveFileMutation
+export const dm = setCurrentRenamingFileKey
+export const go = deleteAutosaveDataForSessions
+export const gp = mapOfflineFiles
+export const kl = getUnsyncedAutosaveFilesForUser
+export const lu = autosaveFileInfoAtom
+export const mu = setupAutosaveManager
+export const oE = OfflineFileType
+export const t = destroyAutosaveManagerAsync
+export const wI = deleteAutosaveExceptFileKeys
+export const yn = destroyAutosaveManager
+export const z$ = hasUnsyncedAutosaveFiles

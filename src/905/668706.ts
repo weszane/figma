@@ -12,10 +12,10 @@ import { KeyCodes } from "../905/63728";
 import { useSprigWithSampling } from "../905/99656";
 import { xD, Qv, Cp, IW, o_ } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
-import { W0, Z6, _z } from "../905/977218";
+import { searchSelectedAction, setFocusAction, searchClearQueryAction } from "../905/977218";
 import { y as _$$y } from "../905/713563";
 import { R } from "../905/186289";
-import { BA } from "../905/61477";
+import { isSearchViewAtom } from "../905/61477";
 import { G1 } from "../905/956371";
 let I = (e, t) => "search" === e.view ? t.parameters.query : "";
 let E = connect((e, t) => ({
@@ -43,18 +43,18 @@ let E = connect((e, t) => ({
     Sprig
   } = useSprigWithSampling();
   let E = _$$y(e.entryPoint, e.searchScope);
-  let x = useAtomWithSubscription(BA);
+  let x = useAtomWithSubscription(isSearchViewAtom);
   let S = useCallback(() => {
-    if (i(W0({
+    if (i(searchSelectedAction({
       entryPoint: e.entryPoint
     })), onFocusOverride) return onFocusOverride();
-    i(Z6({
+    i(setFocusAction({
       isFocused: !0
     }));
   }, [i, e.entryPoint, onFocusOverride]);
   let w = useCallback(() => {
     if (onBlurOverride) return onBlurOverride();
-    i(Z6({
+    i(setFocusAction({
       isFocused: !1,
       persistAnalyticsSession: x
     }));
@@ -71,7 +71,7 @@ let E = connect((e, t) => ({
   }, [e.entryPoint, E, t, x, Sprig]);
   let k = useCallback(() => {
     onQueryChanged("");
-    i(_z({}));
+    i(searchClearQueryAction({}));
     x && history.go(-1);
   }, [i, onQueryChanged, x]);
   useEffect(() => {

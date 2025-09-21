@@ -15,7 +15,7 @@ import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298"
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Dm } from "../figma_app/8833";
 import { trackFileEvent } from "../figma_app/314264";
 import { C as _$$C2 } from "../figma_app/523506";
@@ -201,11 +201,11 @@ export function $$H3({
   let ec = $$z2(el, K);
   return jsxs("div", {
     className: m()(_$$s.borderBox.p4.mb8.colorBgSecondary.wFull.flex.flexColumn.bRadius5.relative.$),
-    style: sx.$$if(ed, sx.add(sx.$$if(M, {
+    style: styleBuilderInstance.$$if(ed, styleBuilderInstance.add(styleBuilderInstance.$$if(M, {
       minHeight: "128px"
     }, {
       height: "128px"
-    }))).add(sx.$$if(M, {
+    }))).add(styleBuilderInstance.$$if(M, {
       width: `${H}px`
     })).$,
     onClick: () => {
@@ -240,7 +240,7 @@ export function $$H3({
         })]
       }), jsxs("div", {
         className: _$$s.flex1.relative.font13.ml8.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           lineHeight: `${$$j0}px`
         }).$$if(!M, {
           height: `${$$U1}px`

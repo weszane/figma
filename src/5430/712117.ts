@@ -8,18 +8,18 @@ import { wY } from "../figma_app/708845";
 import { getFalseValue } from "../figma_app/897289";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { In } from "../905/672640";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { a as _$$a } from "../5430/14230";
 import { getCurrentVersion, buildCarouselMedia, getEmbedType } from "../figma_app/471982";
 import { Q as _$$Q } from "../905/978641";
 import { hasContent, isSlideTemplate, getHubFile, isCooperTemplateFile, isSiteTemplate, getResourceType, getMainContent } from "../figma_app/427318";
 import { hasClientMeta } from "../figma_app/45218";
-import { Z4 } from "../figma_app/809727";
+import { MediaType } from "../figma_app/809727";
 import { A as _$$A } from "../5430/202447";
 import { O7 } from "../figma_app/578832";
 import { Q as _$$Q2 } from "../5430/117345";
 import w from "classnames";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { fq } from "../7222/396421";
 import { mH, lp, v$, xW, UY, Ec, sp, T9, jp, aT, Wf } from "../5430/770886";
 import { V as _$$V } from "../1577/311426";
@@ -37,7 +37,7 @@ function N({
   e.length > 12 && (a = e.length - 12, e = e.slice(0, 12));
   let l = useMemo(() => {
     let [t, r] = e.length > 8 ? [4, 3] : e.length > 4 ? [4, 2] : [2, 2];
-    return _$$sx.add({
+    return styleBuilderInstance.add({
       gridTemplateColumns: `repeat(${t}, 1fr)`,
       gridTemplateRows: `repeat(${r}, 1fr)`
     }).$;
@@ -54,7 +54,7 @@ function N({
         throwTypeError(r);
     }
   }, [r]);
-  let d = useMemo(() => _$$sx.$$if(!!o, {
+  let d = useMemo(() => styleBuilderInstance.$$if(!!o, {
     aspectRatio: o
   }).$, [o]);
   return jsx("div", {
@@ -202,7 +202,7 @@ function M({
     e.stopPropagation();
     y(!1);
   }, [y]);
-  let b = useMemo(() => _$$sx.$$if(!!c, {
+  let b = useMemo(() => styleBuilderInstance.$$if(!!c, {
     aspectRatio: c
   }).$, [c]);
   return f ? jsxs("div", {
@@ -431,7 +431,7 @@ export function $$U0({
       };
     }
   }, [Y, q, L, K, J]);
-  let ee = Jm();
+  let ee = getSearchSessionIdFromSelector();
   let et = getEmbedType(e);
   let er = isSlideTemplate(e);
   let es = isCooperTemplateFile(e);
@@ -441,7 +441,7 @@ export function $$U0({
     resourceContentId: t.id,
     publishedSiteUrl: getHubFile(t)?.published_site_url
   });
-  if (et === Z4.EMBED || 0 === $.length) return jsx(V, {
+  if (et === MediaType.EMBED || 0 === $.length) return jsx(V, {
     resource: e,
     heroType: et,
     is16to9AspectRatio: r
@@ -639,7 +639,7 @@ function V({
     resourceContentId: i?.id,
     publishedSiteUrl: getHubFile(i)?.published_site_url
   });
-  if (t !== Z4.EMBED) {
+  if (t !== MediaType.EMBED) {
     let t = e.thumbnail_url ?? void 0;
     let i = hasContent(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
     let a = isSlideTemplate(e);

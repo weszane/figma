@@ -17,7 +17,7 @@ import { useIsLoading, useIsLoaded } from "../905/18797";
 import { Ef } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
-import { H } from "../905/473998";
+import { hubFileAPI } from "../905/473998";
 let $$S = {};
 let v = {};
 export function $$A3(e) {
@@ -158,7 +158,7 @@ export function $$C1(e) {
       t(v[e]);
       return;
     }
-    $$S[e] || ($$S[e] = [], H.getVersions({
+    $$S[e] || ($$S[e] = [], hubFileAPI.getVersions({
       id: e
     }).then(t => {
       if (!t) return;

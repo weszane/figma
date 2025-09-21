@@ -15,7 +15,7 @@ import { VariableDataType, PropertyScope } from "../figma_app/763686";
 import f from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/241436";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -32,7 +32,7 @@ import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
 import { getLibraryName } from "../905/506188";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { np, rh } from "../figma_app/803932";
 import { Cj } from "../figma_app/151869";
 import { X as _$$X2 } from "../905/839893";
@@ -152,7 +152,7 @@ function ei({
   let L = eg(e, variableSetKey, R);
   if (!E) return null;
   let P = "LOCAL" === variable.subscriptionStatus && variable.isSoftDeleted;
-  return jsxs(vL, {
+  return jsxs(KeyboardReceiver, {
     handleKeyDown: T,
     name: "dev-mode-variable-details",
     focusOnMount: !0,
@@ -278,9 +278,9 @@ function es({
     entryPoint: InspectState.VariableDetailsModal,
     variableId: e
   });
-  return r || "loaded" === l.status && "loaded" === d.status ? a ? jsx(tH, {
+  return r || "loaded" === l.status && "loaded" === d.status ? a ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_detailsEntry",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
@@ -468,9 +468,9 @@ function ep({
       "data-tooltip": getI18nString("dev_handoff.variables.details_from_community")
     },
     children: jsx(_$$U, {})
-  }) : f ? jsx(tH, {
+  }) : f ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_detailsEntry",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS

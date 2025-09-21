@@ -1,234 +1,506 @@
-import { FullscreenPerfMetrics, CoverageStatus, Fullscreen, AppStateTsApi } from "../figma_app/763686";
-import { fullscreenValue } from "../figma_app/455680";
-import { R9 } from "../905/977824";
-import { debugState } from "../905/407919";
-export class $$o13 {
+import type { CoverageStatus } from '../figma_app/763686'
+import { debugState } from '../905/407919'
+import { multiplayerSessionManager } from '../905/977824'
+import { fullscreenValue } from '../figma_app/455680'
+import { AppStateTsApi, Fullscreen, FullscreenPerfMetrics } from '../figma_app/763686'
+
+/**
+ * Tracks zoom scale changes.
+ * Original: $$o13
+ */
+export class ZoomScaleTracker {
+  private _zoomScale: number
+
   constructor() {
-    this._zoomScale = 0;
-    this._zoomScale = this.getZoomScale();
+    this._zoomScale = this.getZoomScale()
   }
-  getZoomScale() {
-    return fullscreenValue.getViewportInfo().zoomScale;
+
+  /**
+   * Gets the current zoom scale from the viewport.
+   */
+  getZoomScale(): number {
+    return fullscreenValue.getViewportInfo().zoomScale
   }
-  didEventOccur() {
-    let e = this.getZoomScale();
-    return e !== this._zoomScale && (this._zoomScale = e, !0);
+
+  /**
+   * Returns true if the zoom scale has changed since last check.
+   */
+  didEventOccur(): boolean {
+    const currentZoomScale = this.getZoomScale()
+    if (currentZoomScale !== this._zoomScale) {
+      this._zoomScale = currentZoomScale
+      return true
+    }
+    return false
   }
 }
-export class $$l1 {
+
+/**
+ * Tracks pan (offset) changes and zoom events.
+ * Original: $$l1
+ */
+export class PanTracker {
+  private _offsetX: number
+  private _offsetY: number
+  private _zoomTracker: ZoomScaleTracker
+
   constructor() {
-    this._offsetX = 0;
-    this._offsetY = 0;
-    this._zoomTracker = new $$o13();
-    this._offsetX = this.getOffsetX();
-    this._offsetY = this.getOffsetY();
+    this._zoomTracker = new ZoomScaleTracker()
+    this._offsetX = this.getOffsetX()
+    this._offsetY = this.getOffsetY()
   }
-  getOffsetX() {
-    return fullscreenValue.getViewportInfo().offsetX;
+
+  /**
+   * Gets the current X offset from the viewport.
+   */
+  getOffsetX(): number {
+    return fullscreenValue.getViewportInfo().offsetX
   }
-  getOffsetY() {
-    return fullscreenValue.getViewportInfo().offsetY;
+
+  /**
+   * Gets the current Y offset from the viewport.
+   */
+  getOffsetY(): number {
+    return fullscreenValue.getViewportInfo().offsetY
   }
-  didEventOccur() {
-    let e = this.getOffsetX();
-    let t = this.getOffsetY();
-    return (e !== this._offsetX || t !== this._offsetY) && (this._offsetX = e, this._offsetY = t, !this._zoomTracker.didEventOccur());
+
+  /**
+   * Returns true if the pan or zoom event has occurred.
+   */
+  didEventOccur(): boolean {
+    const currentOffsetX = this.getOffsetX()
+    const currentOffsetY = this.getOffsetY()
+    if (currentOffsetX !== this._offsetX || currentOffsetY !== this._offsetY) {
+      this._offsetX = currentOffsetX
+      this._offsetY = currentOffsetY
+      return !this._zoomTracker.didEventOccur()
+    }
+    return false
   }
 }
-export class $$d14 {
+
+/**
+ * Tracks mouse move events and pan changes.
+ * Original: $$d14
+ */
+export class MouseMoveTracker {
+  private _didMouseMove: boolean
+  private _panTracker: PanTracker
+
   constructor() {
-    this._didMouseMove = !1;
-    this._panTracker = new $$l1();
-    document.addEventListener("mousemove", e => {
-      this._didMouseMove = !0;
-    });
+    this._didMouseMove = false
+    this._panTracker = new PanTracker()
+    document.addEventListener('mousemove', () => {
+      this._didMouseMove = true
+    })
   }
-  didEventOccur() {
-    let e = this._didMouseMove && !this._panTracker.didEventOccur();
-    this._didMouseMove = !1;
-    return e;
-  }
-}
-export class $$c12 {
-  constructor() { }
-  didEventOccur() {
-    return (FullscreenPerfMetrics?.getRenderTreeStaleTimeMs() ?? 0) > 0;
+
+  /**
+   * Returns true if a mouse move event occurred and pan did not change.
+   */
+  didEventOccur(): boolean {
+    const occurred = this._didMouseMove && !this._panTracker.didEventOccur()
+    this._didMouseMove = false
+    return occurred
   }
 }
-export class $$u4 {
+
+/**
+ * Checks if the render tree is stale.
+ * Original: $$c12
+ */
+export class RenderTreeStaleTracker {
+  constructor() {}
+
+  /**
+   * Returns true if the render tree is stale.
+   */
+  didEventOccur(): boolean {
+    return (FullscreenPerfMetrics?.getRenderTreeStaleTimeMs() ?? 0) > 0
+  }
+}
+
+/**
+ * Tracks chat state for current and other users.
+ * Original: $$u4
+ */
+export class ChatStateTracker {
+  private _isCurrentUserChatting: boolean
+  private _isOtherUserChatting: boolean
+  private _otherUserChattingSessionIds: Set<string>
+
   constructor() {
-    this._isCurrentUserChatting = !1;
-    this._isOtherUserChatting = !1;
-    this._otherUserChattingSessionIds = new Set();
+    this._isCurrentUserChatting = false
+    this._isOtherUserChatting = false
+    this._otherUserChattingSessionIds = new Set()
   }
-  setIsCurrentUserChatting(e) {
-    this._isCurrentUserChatting = e;
+
+  /**
+   * Sets whether the current user is chatting.
+   */
+  setIsCurrentUserChatting(isChatting: boolean): void {
+    this._isCurrentUserChatting = isChatting
   }
-  setOtherUserChattingState(e, t) {
-    t ? this._otherUserChattingSessionIds.add(e) : this._otherUserChattingSessionIds.$$delete(e);
-    this._isOtherUserChatting = this._otherUserChattingSessionIds.size > 0;
+
+  /**
+   * Sets the chat state for another user.
+   */
+  setOtherUserChattingState(sessionId: string, isChatting: boolean): void {
+    if (isChatting) {
+      this._otherUserChattingSessionIds.add(sessionId)
+    }
+    else {
+      this._otherUserChattingSessionIds.delete(sessionId)
+    }
+    this._isOtherUserChatting = this._otherUserChattingSessionIds.size > 0
   }
-  didEventOccur() {
-    return this._isCurrentUserChatting || this._isOtherUserChatting;
+
+  /**
+   * Returns true if any user is chatting.
+   */
+  didEventOccur(): boolean {
+    return this._isCurrentUserChatting || this._isOtherUserChatting
   }
 }
-export class $$p5 {
+
+/**
+ * Tracks cursor reaction activity.
+ * Original: $$p5
+ */
+export class CursorReactionTracker {
+  private _cursorReactionIsActive: boolean
+
   constructor() {
-    this._cursorReactionIsActive = !1;
-    this.updateIsCursorReactionActive();
-    R9?.setOnReactionsUpdatedCallback(this.updateIsCursorReactionActive.bind(this));
+    this._cursorReactionIsActive = false
+    this.updateIsCursorReactionActive()
+    multiplayerSessionManager?.setOnReactionsUpdatedCallback(this.updateIsCursorReactionActive.bind(this))
   }
-  updateIsCursorReactionActive() {
-    this._cursorReactionIsActive = this.getIsCursorReactionActive();
+
+  /**
+   * Updates the cursor reaction active state.
+   */
+  updateIsCursorReactionActive(): void {
+    this._cursorReactionIsActive = this.getIsCursorReactionActive()
   }
-  getIsCursorReactionActive() {
-    if (!R9) return !1;
-    let e = R9.reactionsBySessionId();
-    return Object.keys(e).some(t => Object.keys(e[t]).length > 0);
+
+  /**
+   * Returns true if any cursor reaction is active.
+   */
+  getIsCursorReactionActive(): boolean {
+    if (!multiplayerSessionManager)
+      return false
+    const reactions = multiplayerSessionManager.reactionsBySessionId()
+    return Object.keys(reactions).some(sessionId => Object.keys(reactions[sessionId]).length > 0)
   }
-  didEventOccur() {
-    return this._cursorReactionIsActive;
-  }
-}
-export class $$m6 {
-  constructor(e) {
-    this._mode = CoverageStatus.DEFINITELY_COVERED_ONLY;
-    this._mode = e;
-  }
-  getViewportCoverage() {
-    return Fullscreen.estimatedViewportRenderCoverage(this._mode);
-  }
-  didEventOccur() {
-    return .9 > this.getViewportCoverage();
-  }
-}
-export class $$h7 {
-  constructor(e) {
-    this._thresholdMs = 0;
-    this._thresholdMs = e;
-  }
-  getStalenessMs() {
-    return FullscreenPerfMetrics.getRenderTreeStaleTimeMs();
-  }
-  didEventOccur() {
-    return this.getStalenessMs() > this._thresholdMs;
+
+  /**
+   * Returns true if cursor reaction is active.
+   */
+  didEventOccur(): boolean {
+    return this._cursorReactionIsActive
   }
 }
-export class $$g10 {
-  constructor(e, t) {
-    this._threshold = 0;
-    this._getMultiplayerUserCount = () => 0;
-    this._threshold = e;
-    this._getMultiplayerUserCount = t;
+
+/**
+ * Tracks viewport coverage status.
+ * Original: $$m6
+ */
+export class ViewportCoverageTracker {
+  private _mode: CoverageStatus
+
+  constructor(mode: CoverageStatus) {
+    this._mode = mode
   }
-  didEventOccur() {
-    return this._getMultiplayerUserCount() > this._threshold;
+
+  /**
+   * Gets the estimated viewport render coverage.
+   */
+  getViewportCoverage(): number {
+    return Fullscreen.estimatedViewportRenderCoverage(this._mode)
   }
-}
-export class $$f3 {
-  constructor(e, t) {
-    this._threshold = 0;
-    this._panTracker = new $$l1();
-    this._zoomTracker = new $$o13();
-    this._getMultiplayerUserCount = () => 0;
-    this._threshold = e;
-    this._getMultiplayerUserCount = t;
-  }
-  didEventOccur() {
-    return this._getMultiplayerUserCount() > this._threshold && this._panTracker.didEventOccur() && this._zoomTracker.didEventOccur();
-  }
-}
-export class $$_8 {
-  constructor(e) {
-    this._sharpnessThreshold = 0;
-    this._zoomEventTracker = new $$o13();
-    this._panEventTracker = new $$l1();
-    this._sharpnessThreshold = e;
-  }
-  didEventOccur() {
-    let e = this._panEventTracker.didEventOccur();
-    let t = this._zoomEventTracker.didEventOccur();
-    return !(e || t) && Fullscreen.minViewportSharpness() < this._sharpnessThreshold;
+
+  /**
+   * Returns true if viewport coverage is below threshold.
+   */
+  didEventOccur(): boolean {
+    return this.getViewportCoverage() < 0.9
   }
 }
-export class $$A2 {
-  constructor(e) {
-    this._sharpnessThreshold = 0;
-    this._zoomEventTracker = new $$o13();
-    this._panEventTracker = new $$l1();
-    this._sharpnessThreshold = e;
+
+/**
+ * Tracks render tree staleness against a threshold.
+ * Original: $$h7
+ */
+export class RenderTreeStalenessThresholdTracker {
+  private _thresholdMs: number
+
+  constructor(thresholdMs: number) {
+    this._thresholdMs = thresholdMs
   }
-  didEventOccur() {
-    let e = this._panEventTracker.didEventOccur();
-    let t = this._zoomEventTracker.didEventOccur();
-    return !(e || t) && Fullscreen.avgViewportSharpness() < this._sharpnessThreshold;
+
+  /**
+   * Gets the render tree staleness in ms.
+   */
+  getStalenessMs(): number {
+    return FullscreenPerfMetrics.getRenderTreeStaleTimeMs()
+  }
+
+  /**
+   * Returns true if staleness exceeds threshold.
+   */
+  didEventOccur(): boolean {
+    return this.getStalenessMs() > this._thresholdMs
   }
 }
-export class $$y0 {
+
+/**
+ * Tracks multiplayer user count against a threshold.
+ * Original: $$g10
+ */
+export class MultiplayerUserCountTracker {
+  private _threshold: number
+  private _getMultiplayerUserCount: () => number
+
+  constructor(threshold: number, getUserCount: () => number) {
+    this._threshold = threshold
+    this._getMultiplayerUserCount = getUserCount
+  }
+
+  /**
+   * Returns true if user count exceeds threshold.
+   */
+  didEventOccur(): boolean {
+    return this._getMultiplayerUserCount() > this._threshold
+  }
+}
+
+/**
+ * Tracks multiplayer user count, pan, and zoom events.
+ * Original: $$f3
+ */
+export class MultiplayerPanZoomTracker {
+  private _threshold: number
+  private _panTracker: PanTracker
+  private _zoomTracker: ZoomScaleTracker
+  private _getMultiplayerUserCount: () => number
+
+  constructor(threshold: number, getUserCount: () => number) {
+    this._threshold = threshold
+    this._panTracker = new PanTracker()
+    this._zoomTracker = new ZoomScaleTracker()
+    this._getMultiplayerUserCount = getUserCount
+  }
+
+  /**
+   * Returns true if user count, pan, and zoom events all occurred.
+   */
+  didEventOccur(): boolean {
+    return (
+      this._getMultiplayerUserCount() > this._threshold
+      && this._panTracker.didEventOccur()
+      && this._zoomTracker.didEventOccur()
+    )
+  }
+}
+
+/**
+ * Tracks viewport sharpness against a threshold, ignoring pan/zoom events.
+ * Original: $$_8
+ */
+export class MinViewportSharpnessTracker {
+  private _sharpnessThreshold: number
+  private _zoomEventTracker: ZoomScaleTracker
+  private _panEventTracker: PanTracker
+
+  constructor(sharpnessThreshold: number) {
+    this._sharpnessThreshold = sharpnessThreshold
+    this._zoomEventTracker = new ZoomScaleTracker()
+    this._panEventTracker = new PanTracker()
+  }
+
+  /**
+   * Returns true if sharpness is below threshold and no pan/zoom event occurred.
+   */
+  didEventOccur(): boolean {
+    const panOccurred = this._panEventTracker.didEventOccur()
+    const zoomOccurred = this._zoomEventTracker.didEventOccur()
+    return !(panOccurred || zoomOccurred) && Fullscreen.minViewportSharpness() < this._sharpnessThreshold
+  }
+}
+
+/**
+ * Tracks average viewport sharpness against a threshold, ignoring pan/zoom events.
+ * Original: $$A2
+ */
+export class AvgViewportSharpnessTracker {
+  private _sharpnessThreshold: number
+  private _zoomEventTracker: ZoomScaleTracker
+  private _panEventTracker: PanTracker
+
+  constructor(sharpnessThreshold: number) {
+    this._sharpnessThreshold = sharpnessThreshold
+    this._zoomEventTracker = new ZoomScaleTracker()
+    this._panEventTracker = new PanTracker()
+  }
+
+  /**
+   * Returns true if average sharpness is below threshold and no pan/zoom event occurred.
+   */
+  didEventOccur(): boolean {
+    const panOccurred = this._panEventTracker.didEventOccur()
+    const zoomOccurred = this._zoomEventTracker.didEventOccur()
+    return !(panOccurred || zoomOccurred) && Fullscreen.avgViewportSharpness() < this._sharpnessThreshold
+  }
+}
+
+/**
+ * Tracks annotation visibility.
+ * Original: $$y0
+ */
+export class AnnotationVisibilityTracker {
+  private _isShowingAnnotations: boolean
+
   constructor() {
-    this._isShowingAnnotations = !1;
+    this._isShowingAnnotations = false
   }
-  setIsShowingAnnotations(e) {
-    this._isShowingAnnotations = e;
+
+  /**
+   * Sets annotation visibility.
+   */
+  setIsShowingAnnotations(isShowing: boolean): void {
+    this._isShowingAnnotations = isShowing
   }
-  didEventOccur() {
-    return this._isShowingAnnotations;
+
+  /**
+   * Returns true if annotations are showing.
+   */
+  didEventOccur(): boolean {
+    return this._isShowingAnnotations
   }
 }
-export class $$b16 {
+
+/**
+ * Tracks a generic active state, resets after event.
+ * Original: $$b16
+ */
+export class ActiveStateTracker {
+  private _isActive: boolean
+
   constructor() {
-    this._isActive = !1;
+    this._isActive = false
   }
-  setIsActive() {
-    this._isActive = !0;
+
+  /**
+   * Sets the tracker as active.
+   */
+  setIsActive(): void {
+    this._isActive = true
   }
-  didEventOccur() {
-    let e = this._isActive;
-    this._isActive = !1;
-    return e;
-  }
-}
-export class $$v15 {
-  didEventOccur() {
-    return AppStateTsApi.isUserTyping();
-  }
-}
-export class $$I11 {
-  didEventOccur() {
-    return AppStateTsApi?.isResizingGrid() ?? !1;
+
+  /**
+   * Returns true if active, then resets.
+   */
+  didEventOccur(): boolean {
+    const wasActive = this._isActive
+    this._isActive = false
+    return wasActive
   }
 }
-export class $$E9 {
+
+/**
+ * Tracks user typing state.
+ * Original: $$v15
+ */
+export class UserTypingTracker {
+  /**
+   * Returns true if user is typing.
+   */
+  didEventOccur(): boolean {
+    return AppStateTsApi.isUserTyping()
+  }
+}
+
+/**
+ * Tracks grid resizing state.
+ * Original: $$I11
+ */
+export class GridResizingTracker {
+  /**
+   * Returns true if grid is resizing.
+   */
+  didEventOccur(): boolean {
+    return AppStateTsApi?.isResizingGrid() ?? false
+  }
+}
+
+/**
+ * Tracks selection changes.
+ * Original: $$E9
+ */
+export interface SelectionProperties {
+  name?: string
+  numSelected?: number
+  selectionBounds?: {
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+  }
+  [key: string]: any
+}
+
+export class SelectionChangeTracker {
+  private _selection: SelectionProperties | undefined
+
   constructor() {
-    this._selection = {};
-    let e = debugState.getState();
-    this._selection = e.mirror?.selectionProperties;
+    const state = debugState.getState()
+    this._selection = state.mirror?.selectionProperties
   }
-  hasSelectionChanged(e) {
-    return this._selection && 0 !== Object.keys(this._selection).length ? this._selection.name !== e.name || this._selection.numSelected !== e.numSelected || this._selection.selectionBounds?.x !== e.selectionBounds?.x || this._selection.selectionBounds?.y !== e.selectionBounds?.y || this._selection.selectionBounds?.width !== e.selectionBounds?.width || this._selection.selectionBounds?.height !== e.selectionBounds?.height : !!e && 0 !== Object.keys(e).length;
+
+  /**
+   * Checks if selection has changed.
+   */
+  hasSelectionChanged(newSelection: SelectionProperties): boolean {
+    if (this._selection && Object.keys(this._selection).length !== 0) {
+      return (
+        this._selection.name !== newSelection.name
+        || this._selection.numSelected !== newSelection.numSelected
+        || this._selection.selectionBounds?.x !== newSelection.selectionBounds?.x
+        || this._selection.selectionBounds?.y !== newSelection.selectionBounds?.y
+        || this._selection.selectionBounds?.width !== newSelection.selectionBounds?.width
+        || this._selection.selectionBounds?.height !== newSelection.selectionBounds?.height
+      )
+    }
+    return !!newSelection && Object.keys(newSelection).length !== 0
   }
-  didEventOccur() {
-    let e = debugState.getState();
-    let t = e.mirror?.selectionProperties;
-    let i = !!t && 0 !== Object.keys(t).length && this.hasSelectionChanged(t);
-    this._selection = t;
-    return i;
+
+  /**
+   * Returns true if selection has changed.
+   */
+  didEventOccur(): boolean {
+    const state = debugState.getState()
+    const newSelection = state.mirror?.selectionProperties
+    const changed = !!newSelection && Object.keys(newSelection).length !== 0 && this.hasSelectionChanged(newSelection)
+    this._selection = newSelection
+    return changed
   }
 }
-export const Fy = $$y0;
-export const H0 = $$l1;
-export const I7 = $$A2;
-export const Pn = $$f3;
-export const Ti = $$u4;
-export const W = $$p5;
-export const as = $$m6;
-export const bF = $$h7;
-export const eO = $$_8;
-export const l$ = $$E9;
-export const nc = $$g10;
-export const q5 = $$I11;
-export const t8 = $$c12;
-export const vu = $$o13;
-export const vw = $$d14;
-export const xV = $$v15;
-export const zF = $$b16;
+
+// Export original variable names mapped to new class names
+export const Fy = AnnotationVisibilityTracker
+export const H0 = PanTracker
+export const I7 = AvgViewportSharpnessTracker
+export const Pn = MultiplayerPanZoomTracker
+export const Ti = ChatStateTracker
+export const W = CursorReactionTracker
+export const as = ViewportCoverageTracker
+export const bF = RenderTreeStalenessThresholdTracker
+export const eO = MinViewportSharpnessTracker
+export const l$ = SelectionChangeTracker
+export const nc = MultiplayerUserCountTracker
+export const q5 = GridResizingTracker
+export const t8 = RenderTreeStaleTracker
+export const vu = ZoomScaleTracker
+export const vw = MouseMoveTracker
+export const xV = UserTypingTracker
+export const zF = ActiveStateTracker

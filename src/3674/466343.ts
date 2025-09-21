@@ -10,7 +10,7 @@ import { getThemeContextOrDefault } from "../905/158740";
 import p from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { lR, e6 } from "../figma_app/617427";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { getVisibleTheme } from "../905/640017";
 import { J } from "../905/273120";
 import { UD, Jm, zr } from "../3674/371829";
@@ -48,7 +48,7 @@ function y({
     "data-testid": "paywall-modal",
     children: [jsx("div", {
       className: _$$s.bRadius4.overflowHidden.$$if(g && !i, _$$s.b1.colorBorder).$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         height: `${n}px`
       }).$,
       children: jsx(J, {
@@ -309,21 +309,21 @@ function P() {
     horizontalAlignItems: "start",
     width: "hug-contents",
     children: [jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         zIndex: 900
       }).$,
       children: jsx("div", {
         className: S
       })
     }), jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         zIndex: 899
       }).$,
       children: jsx("div", {
         className: S
       })
     }), jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         zIndex: 898
       }).$,
       children: jsx("div", {
@@ -418,7 +418,7 @@ function H(e) {
         }).catch(e => {
           d(e);
           a(!0);
-        }).$$finally(() => {
+        }).finally(() => {
           t(!1);
         });
       }, [u, p]);
@@ -471,7 +471,7 @@ function W({
       }).catch(e => {
         c(e);
         i(!0);
-      }).$$finally(() => {
+      }).finally(() => {
         n(!1);
       });
     }, [p, h, e]);

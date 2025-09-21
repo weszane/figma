@@ -17,7 +17,7 @@ import { setTagGlobal } from "../905/11";
 import { logError, logInfo, logWarning } from "../905/714362";
 import { getGracePeriodStatus } from "../figma_app/141320";
 import { generateUUIDv4 } from "../905/871474";
-import { yp } from "../905/138461";
+import { isLocksSupported } from "../905/138461";
 import { FileCreationPermissionsGenerator } from "../figma_app/687776";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -81,7 +81,7 @@ function y(e) {
 }
 class b {
   constructor(e) {
-    this._resolveCancelPromise = () => { };
+    this._resolveCancelPromise = () => {};
     this._cancelPromise = new Promise(e => {
       this._resolveCancelPromise = e;
     });
@@ -95,7 +95,7 @@ class b {
   }
   async startRequest(e) {
     let t = 0;
-    for (; ;) {
+    for (;;) {
       let i = A;
       try {
         return await Promise.race([e(), this._cancelPromise]);
@@ -398,7 +398,7 @@ async function ek(e, t, i, r, p) {
   (t.nodeId || t.viewport) && Fullscreen.restorePageAndViewportFromURL(t.nodeId ?? null, t.viewport ?? null);
   let g = t;
   let f = () => (p?.fileCreationManager?.newFileInfo && (g = p?.fileCreationManager?.newFileInfo), g);
-  let A = "slides" !== t.editorType && p?.managerState === "connected" && yp && !w5();
+  let A = "slides" !== t.editorType && p?.managerState === "connected" && isLocksSupported && !w5();
   if (t.folder_id && _$$j.getDefaultModes({
     folderId: t.folder_id
   }).then(e => {
@@ -510,7 +510,7 @@ async function ek(e, t, i, r, p) {
       triggerElement: e.trackingInfo?.triggerElement,
       selectedView: e.trackingInfo?.selectedView?.view,
       offline: !navigator.onLine,
-      webLocksAvailable: yp
+      webLocksAvailable: isLocksSupported
     });
     logInfo("new file", "Creating a new file", {
       editorType: e.editorType,
@@ -532,7 +532,7 @@ async function ek(e, t, i, r, p) {
       }, {
         forwardToDatadog: !0
       });
-    })().catch(() => { });
+    })().catch(() => {});
   };
   e.fileCreationFailed = function (e, t, i, n, r) {
     let a = t instanceof XHRError ? t.status : void 0;
@@ -573,7 +573,7 @@ export function $$eN8(e, t, i) {
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await yn(); else if ("error" === i.status) {
+    if ("canceled" === i.status) await yn();else if ("error" === i.status) {
       let {
         error
       } = i;
@@ -613,7 +613,7 @@ export function $$eN8(e, t, i) {
       }
       t.callback && t.callback(null);
     }
-  }).$$finally(() => {
+  }).finally(() => {
     UT();
     logInfo("new file", "finished creating new file");
   });

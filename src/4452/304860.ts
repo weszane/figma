@@ -25,10 +25,10 @@ import { getResourceDataOrFallback } from '../905/663269';
 import { g as _$$g } from '../905/687265';
 import { e0 } from '../905/696396';
 import { IX } from '../905/712921';
-import { H4, tH } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { s as _$$s } from '../cssbuilder/589278';
 import { isNullish, isNotNullish } from '../figma_app/95419';
 import { i as _$$i } from '../figma_app/127401';
@@ -91,9 +91,9 @@ function ee({
             right: 4
           },
           children: [jsx(_$$l, {
-            style: _$$sx.add({
+            style: styleBuilderInstance.add({
               '--color-icon': 'var(--color-icon-onbrand)'
-            }).$$if(a, _$$sx.visible, _$$sx.invisible).$
+            }).$$if(a, styleBuilderInstance.visible, styleBuilderInstance.invisible).$
           }), jsxs(AutoLayout, {
             direction: 'vertical',
             spacing: 0,
@@ -173,7 +173,7 @@ function es({
 }) {
   let n = jsx('div', {
     'data-testid': `${t}-price`,
-    'style': _$$sx.noWrap.colorTextSecondary.$,
+    'style': styleBuilderInstance.noWrap.colorTextSecondary.$,
     'children': e ? renderI18nText('general.whats_included') : renderI18nText('general.price_per_month', {
       priceString: a
     })
@@ -182,7 +182,7 @@ function es({
     type: 'listbox',
     text: n,
     popoverContent: jsx('div', {
-      style: _$$sx.flex.flexColumn.gap8.$,
+      style: styleBuilderInstance.flex.flexColumn.gap8.$,
       children: jsx(_$$i, {
         seatType: t,
         spacing: 8,
@@ -434,9 +434,9 @@ function eo() {
   });
 }
 let ed = registerModal(e => {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'AutoApprovalSettingsModal',
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     children: jsx(Suspense, {
       fallback: jsx(_$$N2, {

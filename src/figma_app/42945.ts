@@ -10,8 +10,8 @@ import { getI18nString } from "../905/303541";
 import { WJ } from "../figma_app/379850";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { nL, U3, RO } from "../figma_app/770088";
-import { Zj } from "../figma_app/530167";
-import { mH } from "../figma_app/703138";
+import { setCommentsActiveFeedType } from "../figma_app/530167";
+import { setShowResolved } from "../figma_app/703138";
 import { wq } from "../905/234821";
 import { F$ } from "../figma_app/12220";
 import { kC } from "../905/428519";
@@ -161,10 +161,10 @@ export function $$V5(e) {
   let ea = useCallback(e => {
     "resolved" === e && (r(U3({
       showResolved: K.resolved
-    })), d && r(mH(K.resolved)));
+    })), d && r(setShowResolved(K.resolved)));
     "yours" === e && (r(RO({
       showOnlyParticipating: !K.yours
-    })), d && r(Zj(K.yours ? CommentTabType.ALL : CommentTabType.ME)));
+    })), d && r(setCommentsActiveFeedType(K.yours ? CommentTabType.ALL : CommentTabType.ME)));
     Y(t => (t[e] = !t[e], {
       ...t
     }));

@@ -4,16 +4,16 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
-import { h } from "../905/662353";
+import { fileKeyAtom } from "../905/662353";
 import { wI, JI, kl, OL, Gc } from "../figma_app/840917";
-import { hp, c6, ec, m6 } from "../905/725909";
+import { ipcStorageHandler, autosaveNewFilesDelete, autosaveNewFilesUpdate, autosaveNewFileSyncStart } from "../905/725909";
 import { liveStoreInstance } from "../905/713695";
 let $$_4 = createOptimistThunk(async (e, t) => {
   let r = e.getState()?.user?.id;
   if (!r) return;
   let n = Object.keys(t);
   await wI(r, n);
-  hp.sendToAllTabs(c6, n);
+  ipcStorageHandler.sendToAllTabs(autosaveNewFilesDelete, n);
   trackEventAnalytics("Delete New Autosave Files", {
     deletedCount: n.length
   });
@@ -34,7 +34,7 @@ let $$m1 = createActionCreator("SET_AUTOSAVE_NEXT_GARBAGE_COLLECTION_TIMESTAMP")
 let $$g5 = createActionCreator("SET_AUTOSAVE_SNOOZE");
 let $$f2 = createActionCreator("SET_UNCLAIMED_FILES");
 export function $$E3(e) {
-  hp.register(ec, () => function (e) {
+  ipcStorageHandler.register(autosaveNewFilesUpdate, () => function (e) {
     let t = e.getState().user?.id ?? null;
     liveStoreInstance.fetch(OL({
       userId: t
@@ -42,8 +42,8 @@ export function $$E3(e) {
       policy: "networkOnly"
     });
   }(e));
-  hp.register(c6, t => function (e, t) {
-    let r = atomStoreManager.get(h);
+  ipcStorageHandler.register(autosaveNewFilesDelete, t => function (e, t) {
+    let r = atomStoreManager.get(fileKeyAtom);
     r && t.includes(r) && (desktopAPIInstance ? desktopAPIInstance.close({
       suppressReopening: !0,
       shouldForceClose: !0
@@ -52,7 +52,7 @@ export function $$E3(e) {
     })));
     e.dispatch($$h0());
   }(e, t));
-  hp.register(m6, ({
+  ipcStorageHandler.register(autosaveNewFileSyncStart, ({
     localFileKey: e,
     realFileKey: t
   }) => Gc(e, t));

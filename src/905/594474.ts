@@ -14,7 +14,7 @@ import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { tH as _$$tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { b as _$$b } from "../905/403202";
@@ -133,7 +133,7 @@ import { Y as _$$Y2 } from "../905/192715";
 import { PluginUploadApi } from "../905/771986";
 import { trackEventAnalytics } from "../905/449184";
 import { i as _$$i } from "../905/970229";
-import { vQ } from "../figma_app/530167";
+import { createProfileThunk } from "../figma_app/530167";
 import { is as _$$is } from "../905/744076";
 import { n as _$$n } from "../905/341791";
 import { t as _$$t4 } from "../905/431558";
@@ -2536,7 +2536,7 @@ let ic = _$$T2({
           teamId: i && Z7(i) ? i.team_id : void 0,
           orgId: i && MO(i) ? i.org_id : void 0
         };
-        debugState.dispatch(vQ(n));
+        debugState.dispatch(createProfileThunk(n));
       }
     }({
       ...d
@@ -3472,7 +3472,7 @@ let $$iU0 = registerModal(function (e) {
     isExistingExtensionUnpublished: v,
     existingSecurityFormResponse: d.data
   };
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "ExtensionFormView",
     fallback: jsx(_$$r5, {
       title: e.isWidget ? getI18nString("community.publishing.publish_widget") : getI18nString("community.publishing.publish_plugin")

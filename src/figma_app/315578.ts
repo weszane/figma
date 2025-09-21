@@ -8,7 +8,7 @@ import { D } from "../905/716990";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { getI18nString } from "../905/303541";
 import { Fj } from "../figma_app/793429";
 import { selectViewAction } from "../905/929976";
@@ -26,7 +26,7 @@ function x({
   onClick: t,
   recordingKey: r
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "varDetails_inspectEntry",
     fallback: jsx(O, {}),
     team: _$$e.DEVELOPER_TOOLS,
@@ -54,7 +54,7 @@ function N({
   recordingKey: i
 }) {
   let a = t.ids.length;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "suggestedVars_inspectEntry",
     fallback: jsx(O, {}),
     team: _$$e.DEVELOPER_TOOLS,
@@ -84,7 +84,7 @@ function C({
   onClick: t,
   recordingKey: r
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "styleDetails_inspectEntry",
     fallback: jsx(O, {}),
     team: _$$e.DEVELOPER_TOOLS,

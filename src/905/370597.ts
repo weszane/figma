@@ -40,7 +40,7 @@ import { t as _$$t2 } from "../905/605191";
 import { ButtonPrimitive } from "../905/632989";
 import { _ as _$$_ } from "../905/144222";
 import { f as _$$f } from "../905/54715";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { xH } from "../figma_app/249941";
 import { b as _$$b2 } from "../905/222272";
 import { n as _$$n } from "../905/895449";
@@ -64,7 +64,7 @@ function Y(e) {
   let i = useMemo(() => jsx("div", {
     className: _$$s2.flex.itemsCenter.justifyCenter.w16.h16.flexShrink0.$,
     children: "selection" === pill.type ? jsx("div", {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         stroke: "var(--color-icon-brand)"
       }).$,
       children: jsx(xH, {
@@ -80,7 +80,7 @@ function Y(e) {
   }), [pill.type, pill.node]);
   return jsxs("div", {
     className: _$$s2.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgBrandTertiary.colorTextBrand.colorBorderBrand.$,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       paddingTop: "3px",
       paddingBottom: "3px"
     }).$,

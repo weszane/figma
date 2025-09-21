@@ -17,7 +17,7 @@ import { aq } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
 import { getEditorViewType } from "../905/187165";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
-import { lF } from "../figma_app/915202";
+import { LoadingBarStatus } from "../figma_app/915202";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { uj0 } from "../figma_app/27776";
 import { DT, A7, BT, cE, AV, Wn, ZT, dV, Dn, k1, Mf, mb, Dg, cu, oQ, pm, BL, pn, Ts, n1, xo, Ag, iI, OU, Uo, v0, uq, wn, hj, nR, Rp, CU, U0, A6, QT, WH, y6, Pd, fb, $8, Zu, _M, BM, On, pT } from "../905/32836";
@@ -90,12 +90,12 @@ function P(e) {
 }
 function D(e) {
   switch (e.progressBarType) {
-    case lF.SPINNER:
+    case LoadingBarStatus.SPINNER:
       return jsx("div", {
         className: AV,
         children: jsx(LargeLoadingSpinner, {})
       });
-    case lF.BAR:
+    case LoadingBarStatus.BAR:
     default:
       return jsx($$G0, {
         className: Wn,

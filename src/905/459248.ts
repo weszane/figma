@@ -31,7 +31,7 @@ import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -519,7 +519,7 @@ export let $$eZ0 = registerModal(function (e) {
           children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.missing_font")
         }), jsx("span", {
           className: _$$s.textBodyMediumStrong.pl4.borderBox.$,
-          style: sx.add({
+          style: styleBuilderInstance.add({
             width: `calc(${ef} - 16px)`
           }).$,
           children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replacement")
@@ -529,7 +529,7 @@ export let $$eZ0 = registerModal(function (e) {
       onClose,
       onDragStart: ez,
       children: [jsxs("div", {
-        style: sx.add({
+        style: styleBuilderInstance.add({
           width: Kyn
         }).$,
         children: [jsxs("div", {
@@ -615,11 +615,11 @@ export let $$eZ0 = registerModal(function (e) {
             disabled: !e1 || isReplacing || isLoadingMissingFonts,
             onClick: onApply,
             children: [jsx("span", {
-              style: sx.$$if(isReplacing, sx.invisible).$,
+              style: styleBuilderInstance.$$if(isReplacing, styleBuilderInstance.invisible).$,
               children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_fonts")
             }), isReplacing && jsx("span", {
               className: _$$s.absolute.leftHalf.topHalf.$,
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 "--color-icon": "var(--btn-color)",
                 transform: "translate(-50%, -50%)"
               }).$,
@@ -712,7 +712,7 @@ function eX({
           }), jsxs("div", {
             className: I()("missing_fonts_modal--replacementRight--UxaN-", _$$s.gap8.$),
             children: [jsx("div", {
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 width: "224px"
               }).$,
               children: jsx(ay, {
@@ -774,7 +774,7 @@ function eX({
         className: I()(e_, _$$s.mr8.$)
       }), jsxs("div", {
         className: _$$s.flex.itemsCenter.gap8.minW0.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           width: ef
         }).$,
         children: [S.length > 1 ? jsx(ButtonWide, {

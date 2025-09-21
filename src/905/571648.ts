@@ -13,7 +13,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { bO, z5 } from "../figma_app/936646";
 import { filterStylesByType, groupStylesByPrefix } from "../figma_app/646357";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { Bg } from "../905/81982";
 import { b as _$$b } from "../figma_app/882253";
 import { useSubscribedLibraries, getNumStylesByType } from "../figma_app/155728";
@@ -77,7 +77,7 @@ export function $$F6(e, t) {
   let a = useSubscribedLibraries();
   let s = useCurrentUserOrg();
   let l = Fl();
-  let d = Oe(s) && NX(l);
+  let d = isBigmaEnabledAlias3(s) && NX(l);
   let f = useCallback(t => !(0 === getNumStylesByType(t, e) || t.fileKey === i?.key || matchesSourceKey({
     file_repo_id: i?.fileRepoId ?? null,
     source_file_key: i?.sourceFileKey ?? null

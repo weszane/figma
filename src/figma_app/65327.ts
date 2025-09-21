@@ -24,7 +24,7 @@ import { FileCanEdit } from "../figma_app/43951";
 import { getPluginMetadata, getPluginVersion, isDevModePlugin } from "../figma_app/300692";
 import { setActiveVersion, CURRENT_VERSION_ID, exitVersionHistoryMode } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
-import { lF } from "../figma_app/915202";
+import { LoadingBarStatus } from "../figma_app/915202";
 import { ManifestEditorType } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { s as _$$s } from "../figma_app/504088";
@@ -77,7 +77,7 @@ export function $$k0(e, t) {
       }));
       "fullscreen" === K.view && K.compareVersionId && (r(Y6({
         mode: UIVisibilitySetting.KEEP_UI,
-        type: lF.SPINNER
+        type: LoadingBarStatus.SPINNER
       })), r(setActiveVersion({
         id: K.compareVersionId
       })));

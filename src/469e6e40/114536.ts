@@ -26,7 +26,7 @@ import { AutoLayout } from '../905/470281';
 import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
-import { H4, tH } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { x as _$$x } from '../905/811596';
 import { o0 } from '../905/844131';
 import { Um } from '../905/848862';
@@ -56,7 +56,7 @@ import { Eh } from '../figma_app/617654';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { clickableBaseLinkTracked } from '../figma_app/637027';
 import { g as _$$g } from '../figma_app/638694';
-import { CT } from '../figma_app/736948';
+import { UserTypeEnum } from '../figma_app/736948';
 import { az } from '../figma_app/805373';
 import { ny } from '../figma_app/819458';
 import { TrackingProvider } from '../figma_app/831799';
@@ -888,12 +888,12 @@ function eC({
   });
 }
 let eS = {
-  Root: forwardRef((e, t) => jsx(tH, {
+  Root: forwardRef((e, t) => jsx(ErrorBoundaryCrash, {
     boundaryKey: e.errorBoundaryKey,
     sentryTags: {
       area: _$$e.SCALE
     },
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(TrackingProvider, {
       name: 'Domain Flyout User Insights',
       enabled: e.open,
@@ -982,7 +982,7 @@ let eO = registerModal(e => {
           horizontalAlignItems: 'start',
           direction: 'vertical',
           spacing: 0,
-          children: e.mfaRequired === CT.GUESTS || e.mfaRequired === CT.ALL_USERS ? jsx(TextWithTruncation, {
+          children: e.mfaRequired === UserTypeEnum.GUESTS || e.mfaRequired === UserTypeEnum.ALL_USERS ? jsx(TextWithTruncation, {
             children: _.length > 0 ? renderI18nText('domain_management.remove_domain_modal.body_text_with_mfa_with_warning', {
               domainCount: e.domainIds.length
             }) : renderI18nText('domain_management.remove_domain_modal.modal_body_text_with_mfa', {

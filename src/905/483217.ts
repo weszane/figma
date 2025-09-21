@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
 import { A } from "../1617/45452";
 import { A as _$$A } from "../1617/805095";
@@ -15,7 +15,7 @@ export function $$m0({
     className: a()("missing_image--missingCover--Gz0yP", {
       [l]: e
     }),
-    children: jsx(t, {
+    children: jsx(MediaQuerySvgComponent, {
       className: _$$s.colorIcon.$,
       svg: A,
       fallbackSvg: _$$A
@@ -30,7 +30,7 @@ export function $$h1({
       [l]: e,
       "missing_image--ui3--uvb5i": !0
     }),
-    children: jsx(t, {
+    children: jsx(MediaQuerySvgComponent, {
       className: _$$s.colorIcon.$,
       svg: _$$A2,
       fallbackSvg: _$$A3

@@ -28,7 +28,7 @@ import { compareLibraryItemsAlias } from '../905/709171';
 import { updateAllStyleThumbnailsOptimist } from '../905/711212';
 import { areSetsEqual } from '../905/760682';
 import { zi } from '../905/824449';
-import { vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { Um } from '../905/848862';
 import { n3, VariableStyleId } from '../905/859698';
 import { setIsRenamingSelectedStyle, setLocalStyleSelection } from '../905/879323';
@@ -1532,7 +1532,7 @@ function ez({
   useEffect(() => {
     eK.current && eD.length ? (eK.current(), eL.current && !eL.current.contains(document.activeElement) && eL.current.focus()) : eF.current && !eD.length && (eF.current(), eL.current = null);
   }, [eK, eD, eL]);
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     name: 'StyleDraggableList',
     focusFunctionRef: eK,
     blurFunctionRef: eF,

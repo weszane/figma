@@ -33,7 +33,7 @@ import { KP } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { e as _$$e2 } from "../figma_app/882253";
 import { KindEnum } from "../905/129884";
 import { resourceDataToSubscriptionMapAtom } from "../905/72677";
@@ -356,7 +356,7 @@ function ec({
     collapsed
   } = e;
   let d = useCurrentUserOrg();
-  let p = Oe(d);
+  let p = isBigmaEnabledAlias3(d);
   let _ = fV(libraryKey);
   let h = useAtomWithSubscription(resourceDataToSubscriptionMapAtom);
   let f = libraryKey ? h[libraryKey]?.hubFileId ?? null : null;

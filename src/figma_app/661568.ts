@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
 import { getViewerInstance } from "../figma_app/632319";
-import { le } from "../figma_app/527873";
+import { getMemoryUsage } from "../figma_app/527873";
 var $$n1;
 var $$i0;
 class p {
@@ -105,7 +105,7 @@ class _ {
     i = !1;
     let r = e.loadTimer.initializationStart ? Math.round(performance.now() - e.loadTimer.initializationStart) : 0;
     let n = {
-      totalMemoryInBytes: le(),
+      totalMemoryInBytes: getMemoryUsage(),
       failedSize: t,
       currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
       maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),

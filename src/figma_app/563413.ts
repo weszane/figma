@@ -18,7 +18,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
@@ -162,9 +162,9 @@ let $$D1 = forwardRef((e, t) => {
       onMouseUp,
       placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
-      style: sx.$$if(e.hasTransparentBackground, sx.add({
+      style: styleBuilderInstance.$$if(e.hasTransparentBackground, styleBuilderInstance.add({
         background: "transparent"
-      })).$$if(_ || e.smallFont, sx.textBodyMedium).$,
+      })).$$if(_ || e.smallFont, styleBuilderInstance.textBodyMedium).$,
       value: e.query
     }), jsx(z, {
       query: e.query,
@@ -214,9 +214,9 @@ let $$k4 = forwardRef((e, t) => {
       onMouseUp,
       placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
-      style: sx.$$if(e.hasTransparentBackground, sx.add({
+      style: styleBuilderInstance.$$if(e.hasTransparentBackground, styleBuilderInstance.add({
         background: "transparent"
-      })).$$if(p || e.smallFont, sx.textBodyMedium).$,
+      })).$$if(p || e.smallFont, styleBuilderInstance.textBodyMedium).$,
       value: e.query
     }), jsx(z, {
       query: e.query,

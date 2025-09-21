@@ -27,7 +27,7 @@ import { AuthFlowStep } from "../905/862321";
 import { WN } from "../figma_app/638601";
 import { b as _$$b } from "../figma_app/556971";
 import { SvgComponent } from "../905/714743";
-import { t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { i as _$$i, L as _$$L } from "../figma_app/942671";
 import { s as _$$s } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
@@ -56,7 +56,7 @@ import { KindEnum } from "../905/129884";
 import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
 import { AuthModal } from "../905/749159";
 import { e as _$$e } from "../figma_app/320600";
-import { F2 } from "../905/826900";
+import { KeyboardFocusManager } from "../905/826900";
 import { getSingletonSceneGraph } from "../905/700578";
 import { j as _$$j } from "../905/834956";
 import { PH } from "../figma_app/701580";
@@ -364,7 +364,7 @@ export function $$ej5(e) {
   let u = item.type === ZU.ACTION ? GG(item.action) : null;
   let p = z4.getIsExtension();
   let _ = useRef(null);
-  if (!isActive && _.current && _.current === document.activeElement && F2.focusCustomCanvasFocusElement(), !c) return null;
+  if (!isActive && _.current && _.current === document.activeElement && KeyboardFocusManager.focusCustomCanvasFocusElement(), !c) return null;
   function h(e) {
     return n => {
       isEnabled && (isActive && item.tool === DesignGraphElements.COMMENTS ? (fullscreenValue.triggerAction("set-tool-default"), e && _.current?.focus()) : VU.get(item.action, "toolbar")(n));
@@ -374,7 +374,7 @@ export function $$ej5(e) {
     "data-testid": item.action,
     className: yT,
     ref: d,
-    children: [jsx(t, {
+    children: [jsx(MediaQuerySvgComponent, {
       "aria-pressed": isActive,
       ariaLabel: ek(item),
       className: y()(gb, _$$M(isEnabled, isActive), isWide ? _$$U2 : null),

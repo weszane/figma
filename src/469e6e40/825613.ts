@@ -18,12 +18,12 @@ import { viewCollaboratorSet } from "../905/332483";
 import { getCollaboratorSet } from "../figma_app/217457";
 import { ProductAccessMap, getProductAccessTypeFromString } from "../figma_app/765689";
 import { FAccessLevelType, FVisibilityType, FFileType, FApprovalMethodType, FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
-import { W3 } from "../figma_app/336853";
+import { getGuestControlApprovalStatus } from "../figma_app/336853";
 import { getUserRoleLabel, getFeatureTypeLabelAlias, getPermissionLevelRoleName, getOrgAccessLevelLabels } from "../figma_app/12796";
 import { v as _$$v } from "../905/124421";
 import { getFeatureTypeLabel } from "../figma_app/326667";
 import { FUpgradeReasonType } from "../figma_app/565016";
-import { CT } from "../figma_app/736948";
+import { UserTypeEnum } from "../figma_app/736948";
 import { E as _$$E } from "../figma_app/126651";
 import { AccessLevelEnum } from "../905/557142";
 import { TeamCreationControls } from "../figma_app/482728";
@@ -1868,7 +1868,7 @@ export function $$ep2(e, t, a, s) {
       return jsx("span", {
         children: renderI18nText("activity_log.event.org_guest_invite_setting_change", {
           guestSetting: jsx("b", {
-            children: W3(e.metadata.guest_invite_setting)
+            children: getGuestControlApprovalStatus(e.metadata.guest_invite_setting)
           })
         })
       });
@@ -3533,20 +3533,20 @@ export function $$ep2(e, t, a, s) {
       {
         let t = e.metadata.new_mfa_required_setting;
         let a = e.metadata.old_mfa_required_setting;
-        if (null === a && t === CT.GUESTS || a === CT.MEMBERS && t === CT.ALL_USERS) return jsx("span", {
+        if (null === a && t === UserTypeEnum.GUESTS || a === UserTypeEnum.MEMBERS && t === UserTypeEnum.ALL_USERS) return jsx("span", {
           children: renderI18nText("activity_log.enabled_mfa_required_for_guests")
         });
-        if (null === a && t === CT.MEMBERS || a === CT.GUESTS && t === CT.ALL_USERS) return jsx("span", {
+        if (null === a && t === UserTypeEnum.MEMBERS || a === UserTypeEnum.GUESTS && t === UserTypeEnum.ALL_USERS) return jsx("span", {
           children: renderI18nText("activity_log.enabled_mfa_required_for_members")
         });
-        if (null === a && t === CT.ALL_USERS) return jsx("span", {
+        if (null === a && t === UserTypeEnum.ALL_USERS) return jsx("span", {
           children: renderI18nText("activity_log.enabled_mfa_required_for_all_users")
         });
-        if (a === CT.GUESTS && null === t || a === CT.ALL_USERS && t === CT.MEMBERS) return jsx("span", {
+        if (a === UserTypeEnum.GUESTS && null === t || a === UserTypeEnum.ALL_USERS && t === UserTypeEnum.MEMBERS) return jsx("span", {
           children: renderI18nText("activity_log.disabled_mfa_required_for_guests")
-        });else if (a === CT.MEMBERS && null === t || a === CT.ALL_USERS && t === CT.GUESTS) return jsx("span", {
+        });else if (a === UserTypeEnum.MEMBERS && null === t || a === UserTypeEnum.ALL_USERS && t === UserTypeEnum.GUESTS) return jsx("span", {
           children: renderI18nText("activity_log.disabled_mfa_required_for_members")
-        });else if (a === CT.ALL_USERS && null === t) return jsx("span", {
+        });else if (a === UserTypeEnum.ALL_USERS && null === t) return jsx("span", {
           children: renderI18nText("activity_log.disabled_mfa_required_for_all_users")
         });else return jsx("span", {
           children: renderI18nText("activity_log.mfa_required_setting_changed")

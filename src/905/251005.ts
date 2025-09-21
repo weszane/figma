@@ -4,7 +4,7 @@ import a from "classnames";
 import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleGenericEvent, handleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { normalizeValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 import { En } from "../figma_app/613182";
@@ -136,7 +136,7 @@ class f extends PureComponent {
       }),
       "data-tooltip-show-above": this.props.tooltipShowAbove,
       recordingKey: this.props.recordingKey,
-      children: [this.props.svg && jsx(_$$t, {
+      children: [this.props.svg && jsx(MediaQuerySvgComponent, {
         className: "segmented_control--icon--PkdoQ",
         svg: this.props.svg,
         fallbackSvg: this.props.fallbackSvg

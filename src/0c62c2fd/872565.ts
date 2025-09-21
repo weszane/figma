@@ -46,7 +46,7 @@ import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
 import { e0 as _$$e2 } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
-import { NB } from "../905/826900";
+import { isElementHidden } from "../905/826900";
 import { OJ } from "../905/519092";
 import { v as _$$v } from "../905/92662";
 import { logDebug, logError } from "../905/714362";
@@ -781,7 +781,7 @@ export class $$e32 extends PureComponent {
     this.onkeydown = e => {
       if (!this.props.userResources.loaded || this.props.creatingNewFolder || this.props.fileMove.folderRenaming || this.props.fileMove.isSearchFocused) return;
       let t = document.getElementById(e1);
-      if (NB(t)) return;
+      if (isElementHidden(t)) return;
       let {
         userResources
       } = this.props.userResources;

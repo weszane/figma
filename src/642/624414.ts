@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/509505";
 import { trackEventAnalytics } from "../905/449184";
 import { CloseButton } from "../905/17223";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { linkWithTracking } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
@@ -44,9 +44,9 @@ export function $$_0() {
     role: "button",
     children: renderI18nText("design_systems.assets_panel.library_upsell_upgrade")
   });
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "LibraryUpsellBanner",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e.MONETIZATION_UPGRADES
     },

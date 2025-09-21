@@ -43,7 +43,7 @@ import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { WQ, Pv } from "../905/619652";
 import { o3, nt } from "../905/226610";
 import { isExportRestricted } from "../figma_app/12796";
-import { H4 } from "../figma_app/679183";
+import { CachedSubtreeRenderer } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -190,7 +190,7 @@ let ex = class e extends PureComponent {
         isRenameLayersEnabled: !1
       }));
     };
-    this._checkboxAndButtonRow = new H4(() => {
+    this._checkboxAndButtonRow = new CachedSubtreeRenderer(() => {
       let e = "";
       if (0 === this.props.numSelected || null == this.props.numSelected) {
         let {
@@ -223,7 +223,7 @@ let ex = class e extends PureComponent {
       }, "export-button");
     });
     this._shouldRenderPreviewThumbnail = () => valueOrFallback(this.props.exportSettings, []).length > 0;
-    this._previewThumbnail = new H4(() => {
+    this._previewThumbnail = new CachedSubtreeRenderer(() => {
       let e = this.props.exportSettings;
       let t = e[0].useAbsoluteBounds || !1;
       let r = e[0].useBicubicSampler || !1;

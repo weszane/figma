@@ -30,7 +30,7 @@ export let $$g0 = async ({
     modelType,
     clientLifecycleId: r,
     abortController: t
-  }).$$finally(() => ks(e.guid)))).$$finally(() => nodes.map(e => ks(e.guid)));
+  }).finally(() => ks(e.guid)))).finally(() => nodes.map(e => ks(e.guid)));
 };
 export async function $$f2({
   node: e,

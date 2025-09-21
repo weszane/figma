@@ -74,6 +74,7 @@ import { combinedNodes1, combinedNodes2, combinedNodes3, combinedNodes4, combine
 import { incrementCounter } from '../905/949750'
 import { TextWithTruncation } from '../905/984674'
 import { finalizeLinkPreviewHandler } from '../905/994901'
+import { fieldGroupSerializationOptionsSchema } from '../905/998509'
 import { atomStoreManager } from '../figma_app/27355'
 import { hasMonetizedResourceMetadata } from '../figma_app/45218'
 import { DEV_MODE_STRING, FEditorType, SLACK_STRING } from '../figma_app/53721'
@@ -91,7 +92,6 @@ import { isStyleString, serializeStyle } from '../figma_app/276332'
 import { PluginPermissions } from '../figma_app/300692'
 import { hasImageOrVideoFill, useNodeMediaPaint } from '../figma_app/334505'
 import { hasReachedPageLimit } from '../figma_app/345997'
-import { J3 } from '../figma_app/360163'
 import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091'
 import { openInBrowser } from '../figma_app/415217'
 import { Ay as _$$Ay2 } from '../figma_app/432652'
@@ -7061,7 +7061,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let r = validateWithZSchema({
           vm: e,
           handle: i,
-          zSchema: J3.optional(),
+          zSchema: fieldGroupSerializationOptionsSchema.optional(),
           property: 'options',
         })
         return this.wrapPromise(generateJsxFromNode(n, r))
@@ -7081,7 +7081,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let r = validateWithZSchema({
           vm: e,
           handle: i,
-          zSchema: J3.optional(),
+          zSchema: fieldGroupSerializationOptionsSchema.optional(),
           property: 'options',
         })
         let {

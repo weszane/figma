@@ -10,7 +10,7 @@ import { Point } from "../905/736624";
 import { ms, gw, OR } from "../figma_app/236327";
 import { P } from "../905/347284";
 import { hideDropdownAction } from "../905/929976";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 var c = d;
 let _ = "pointing_dropdown--chevron--eYKwT";
 export var $$A2 = (e => (e[e.DEFAULT = 0] = "DEFAULT", e[e.LIGHT = 1] = "LIGHT", e[e.MATCH_BACKGROUND = 2] = "MATCH_BACKGROUND", e))($$A2 || {});
@@ -198,7 +198,7 @@ class b extends PureComponent {
       ...this.getStylesForType("arrow")
     };
     let p = this.props.dataTestId ?? "pointingDropdown";
-    return jsx(vL, {
+    return jsx(KeyboardReceiver, {
       name: "pointingDropdown",
       handleKeyDown: this.onKeyDownFromFullscreen,
       focusOnMount: !0,

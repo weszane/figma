@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { DEFAULT_DESIGN_MODE_LABEL } from "../figma_app/806075";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -28,7 +28,7 @@ function x() {
     children: renderI18nText("rcs.playground_file.ready_to_try")
   });
   return jsx("p", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       animation: "none"
     }).$,
     children: e.isWidget ? renderI18nText("rcs.playground_file.ready_to_try.widget", {
@@ -40,7 +40,7 @@ function x() {
 }
 function N() {
   return jsx("div", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       animation: "none"
     }).$,
     children: renderI18nText("rcs.playground_file.switch_devmode_to_design_description")

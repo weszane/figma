@@ -91,7 +91,7 @@ import { tb as _$$tb } from '../905/848667';
 import { EL, F_ } from '../905/858282';
 import { A as _$$A } from '../905/920142';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b } from '../905/946806';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
@@ -196,7 +196,7 @@ function B({
   });
   let o = !useMemo(() => s.status !== 'loaded' || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
   return jsxs('div', {
-    'style': sx.add({
+    'style': styleBuilderInstance.add({
       width: '780px',
       marginLeft: 'auto',
       marginRight: 'auto'

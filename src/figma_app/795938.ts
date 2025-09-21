@@ -3,7 +3,7 @@ import { useState } from "react";
 import a from "classnames";
 import { formatNumber } from "../figma_app/930338";
 import { a as _$$a } from "../905/925868";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n, v as _$$v } from "../905/458699";
@@ -11,7 +11,7 @@ import { QP } from "../figma_app/487970";
 import { l as _$$l } from "../905/152724";
 import { Xy } from "../figma_app/578832";
 import { A6 } from "../905/350234";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getCurrentVersion, buildCommunityPathById, mapTemplateCategoryToFileType, isUserOrIdMatch } from "../figma_app/471982";
 import { trackResourceClickEvent, getResourceTaglineOrDescription, buildResourceClickTrackingEvent } from "../figma_app/777551";
 import { ProfileRouteState } from "../905/934145";
@@ -55,7 +55,7 @@ export function $$R0({
   index: a,
   subView: o
 }) {
-  let c = Jm();
+  let c = getSearchSessionIdFromSelector();
   let u = getCurrentVersion(e);
   let p = e.client_meta && JSON.parse(e.client_meta)?.background_color;
   let _ = e.thumbnail_is_set;
@@ -91,7 +91,7 @@ export function $$R0({
         style: {
           backgroundColor: p && `rgb(${255 * p.r}, ${255 * p.g}, ${255 * p.b})`
         },
-        children: [h, e.viewer_mode === FTemplateCategoryType.PROTOTYPE && jsx(_$$t, {
+        children: [h, e.viewer_mode === FTemplateCategoryType.PROTOTYPE && jsx(MediaQuerySvgComponent, {
           svg: _$$A,
           className: wr,
           useOriginalSrcFills_DEPRECATED: !0,
@@ -120,7 +120,7 @@ export function $$L4({
   index: a,
   subView: o
 }) {
-  let d = Jm();
+  let d = getSearchSessionIdFromSelector();
   let c = getCurrentVersion(e);
   return jsxs("div", {
     className: IQ,
@@ -175,7 +175,7 @@ export function $$P3({
   index: a,
   subView: o
 }) {
-  let d = Jm();
+  let d = getSearchSessionIdFromSelector();
   let c = getCurrentVersion(e);
   return jsxs("div", {
     className: HL,
@@ -225,7 +225,7 @@ export function $$D2({
     model,
     resources
   } = t;
-  let l = Jm();
+  let l = getSearchSessionIdFromSelector();
   let [d, p] = useState(model.current_user_is_following);
   let _ = d && !model.current_user_is_following ? 1 : 0;
   let m = isUserOrIdMatch(model.id, r);

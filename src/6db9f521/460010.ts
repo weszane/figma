@@ -3,7 +3,7 @@ import { forwardRef, useRef, useState, useCallback, useEffect, useMemo, useImper
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi, Command, AnimationTriggerType, SlideAnimation, UserActionState, documentStateTsApi, SlidesObjectAnimationBindings, IgnoreSelectionUIHidingBindings, SlideConstantsCppBindings, EasingType, SlideTransitionType, AnimationEventType, ItemType, ThemeColorStatus, ThemeMode, Fullscreen, SourceType, SelfDesignType, StateHierarchy, ImageToolsBindings, GeometricValues, NodePropertyCategory, DesignWorkspace, ViewType, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { tH as _$$tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Hm, Bs, AV, Gb } from "../figma_app/933328";
@@ -141,7 +141,7 @@ import { B as _$$B } from "../1250/314515";
 import { Z as _$$Z2 } from "../905/279476";
 import { useDebounce } from 'use-debounce';
 import { OI, Dm, Yr } from "../figma_app/8833";
-import { VF } from "../figma_app/679183";
+import { useCachedSubtree } from "../figma_app/679183";
 import { Bf } from "../figma_app/249941";
 import { W0, YZ, xW } from "../figma_app/178475";
 import { ow as _$$ow, a3 as _$$a } from "../905/188421";
@@ -208,7 +208,7 @@ import { reportError } from "../905/11";
 import { u4 } from "../figma_app/991591";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P2 } from "../905/347284";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { d as _$$d2 } from "../9410/847929";
 import { zF } from "../figma_app/297822";
 import { x as _$$x3 } from "../905/719609";
@@ -3434,14 +3434,14 @@ function nz({
   isInvalid: s
 }) {
   return jsxs(Fragment, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: n,
       children: () => jsx(nH, {
         item: e,
         slideId: t,
         recordingKey: generateRecordingKey(l, "deleteButton")
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !n,
       children: () => jsxs("div", {
         className: _$$s5.flex.itemsCenter.mr8.$,
@@ -4518,7 +4518,7 @@ function lk({
           "speaker_notes_overlay--hiddenDragHandleHoverTarget--gUtvC": h
         }),
         style: {
-          ..._$$sx.add({
+          ...styleBuilderInstance.add({
             padding: `${u}px`,
             cursor: j || !h ? "row-resize" : "pointer"
           }).$
@@ -4558,7 +4558,7 @@ function lk({
     }), jsx("div", {
       className: iG()(_$$s5.relative.wFull.borderBox.$, Dm),
       style: {
-        ..._$$sx.add({
+        ...styleBuilderInstance.add({
           padding: `0px ${d}px`,
           height: `${s}px`
         }).$
@@ -5479,12 +5479,12 @@ function sK({
   let t = e[ItemType.SLIDES_ANIMATION] || e[ItemType.SLIDES_OBJECT_ANIMATION];
   useSelector(e => e.mirror.selectionProperties);
   return jsxs(TabLoop, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: t,
       children: () => jsx(sR, {
         recordingKey: "slidesTransitionPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: t,
       children: () => jsx(nW, {
         recordingKey: "slidesObjectAnimationsPanel"
@@ -5804,14 +5804,14 @@ function a_({
   let L = SJ();
   let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   return y[ItemType.FRAME_PRESETS] ? jsx(TabLoop, {
-    children: jsx(VF, {
+    children: jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(_$$nl, {
         recordingKey: "framePresetPanel"
       }, "frame-presets")
     })
   }) : y[ItemType.PENCIL_TOOL] ? jsx(TabLoop, {
-    children: jsx(VF, {
+    children: jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(_$$q4, {
         recordingKey: "pencilToolPanel",
@@ -5829,40 +5829,40 @@ function a_({
       shouldShowSlotPanel: Br(y),
       shouldShowSlidesTypePanel: y[ItemType.SLIDE_NUMBER],
       withBottomBorder: !y[ItemType.CODE_BLOCK_ITEM]
-    }), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: y[ItemType.JSX_ITEM],
       children: () => jsx(_$$_6, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$tV2(y, A),
       children: () => jsx(BS, {
         recordingKey: "propsPanel"
       }, "componentProperties")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c3, {
         recordingKey: "componentPanel"
       }, "component")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: M0(y),
       children: () => jsx(_$$_5, {
         recordingKey: "instancePanel"
       }, "instance")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.SLIDES_THEME],
       children: () => jsx(am, {
         recordingKey: "slidesThemePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.CODE_BLOCK_ITEM],
       children: () => jsx(ap, {
         recordingKey: "slidesCodeBlockPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.SLIDE_NUMBER],
       children: () => jsx(as, {
         recordingKey: "slideNumberPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$d4(y) || y[ItemType.TRANSFORM_ITEM],
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
@@ -5871,7 +5871,7 @@ function a_({
         canEditConstraints: GG(y),
         onlyShowXYInputsRow: v === GR.DEFAULT_SIMPLIFIED || (areOnlyResponsiveSetsSelected ?? !1)
       }, "transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
@@ -5879,7 +5879,7 @@ function a_({
         dispatch: E,
         dropdownShown: i
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: I,
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
@@ -5888,7 +5888,7 @@ function a_({
       }, "stack")
     }), jsx(F$, {
       isVisible: y[ItemType.SCALE_ITEM]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         isUI3: !0,
@@ -5896,21 +5896,21 @@ function a_({
         dispatch: E,
         dropdownShown: i
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.MASK_ITEM],
       children: () => jsx(_$$B4, {
         recordingKey: "maskPanel",
         maskType
       }, "mask")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.LAYER_ITEM],
       children: () => jsx(X2, {
         recordingKey: "appearancePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.TYPE_ITEM],
       children: () => jsx(gc, {}, "type")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v5, {
         colorFormat: t,
@@ -5925,15 +5925,15 @@ function a_({
         recordingKey: "canvasBackgroundPanel",
         sceneGraphSelection: g
       }, "canvas-background")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: T
       }, "fill")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: t,
@@ -5951,10 +5951,10 @@ function a_({
         stylePickerListLayout: f,
         stylePickerShown: b
       }, "stroke")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.EFFECTS_ITEM],
       children: () => jsx(w5, {}, "effects")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: L,
       children: () => jsx(UA, {
         colorFormat: t,
@@ -5968,10 +5968,10 @@ function a_({
         sceneGraphSelection: g,
         stylePickerListLayout: f
       }, "selection-paints")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, "grids")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: P1(y, c),
       children: () => jsx(LI, {
         currentPage: P.currentPage,
@@ -5988,7 +5988,7 @@ function a_({
         sceneGraphSelection: g,
         singleNodeName: S
       }, "export")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !NR(y),
       children: () => jsx(_$$Q5, {
         allSavedPlugins: e.plugins,
@@ -6053,30 +6053,30 @@ function ay({
       shouldShowInstancePanel: M0(y),
       shouldShowSlotPanel: Br(y),
       shouldShowSlidesTypePanel: y[ItemType.SLIDE_NUMBER]
-    }), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: y[ItemType.JSX_ITEM],
       children: () => jsx(_$$_6, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !NR(y),
       children: () => jsx(_$$_5, {
         recordingKey: "instancePanel"
       }, "instance")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.SLIDES_THEME],
       children: () => jsx(am, {
         recordingKey: "slidesThemePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.CODE_BLOCK_ITEM],
       children: () => jsx(ap, {
         recordingKey: "slidesCodeBlockPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.SLIDE_NUMBER],
       children: () => jsx(as, {
         recordingKey: "slideNumberPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
@@ -6085,7 +6085,7 @@ function ay({
         canEditConstraints: GG(y),
         onlyShowXYInputsRow: v === GR.DEFAULT_SIMPLIFIED || (areOnlyResponsiveSetsSelected ?? !1)
       }, "transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: y[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
@@ -6093,7 +6093,7 @@ function ay({
         dispatch: E,
         dropdownShown: i
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: N,
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
@@ -6105,17 +6105,17 @@ function ay({
     }), v === GR.DEFAULT_SIMPLIFIED && jsx(_$$Y4, {
       onExpand: () => T(GR.OVERRIDDEN_EXPANDED)
     }), v === GR.OVERRIDDEN_EXPANDED && jsxs(Fragment, {
-      children: [jsx(VF, {
+      children: [jsx(useCachedSubtree, {
         isVisible: y[ItemType.LAYER_ITEM],
         children: () => jsx(X2, {
           recordingKey: "appearancePanel"
         })
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.COMPONENT_ITEM],
         children: () => jsx(_$$c3, {
           recordingKey: "componentPanel"
         }, "component")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.VECTOR_ITEM],
         children: () => jsx(VR, {
           isUI3: !0,
@@ -6123,16 +6123,16 @@ function ay({
           dispatch: E,
           dropdownShown: i
         }, "vector-transform")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.MASK_ITEM],
         children: () => jsx(_$$B4, {
           recordingKey: "maskPanel",
           maskType
         }, "mask")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.TYPE_ITEM],
         children: () => jsx(gc, {}, "type")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.CANVAS_ITEM],
         children: () => jsx(_$$v5, {
           colorFormat: t,
@@ -6147,15 +6147,15 @@ function ay({
           recordingKey: "canvasBackgroundPanel",
           sceneGraphSelection: g
         }, "canvas-background")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
         children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.FILL_ITEM],
         children: () => jsx(B8, {
           variableScopes: I
         }, "fill")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.STROKE_ITEM],
         children: () => jsx($p, {
           colorFormat: t,
@@ -6173,10 +6173,10 @@ function ay({
           stylePickerListLayout: f,
           stylePickerShown: b
         }, "stroke")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.EFFECTS_ITEM],
         children: () => jsx(w5, {}, "effects")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: D,
         children: () => jsx(UA, {
           colorFormat: t,
@@ -6190,10 +6190,10 @@ function ay({
           sceneGraphSelection: g,
           stylePickerListLayout: f
         }, "selection-paints")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: y[ItemType.GRIDS_ITEM],
         children: () => jsx(_$$tC, {}, "grids")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: P1(y, c),
         children: () => jsx(LI, {
           currentPage: S.currentPage,
@@ -6211,7 +6211,7 @@ function ay({
           sceneGraphSelection: g,
           singleNodeName: k
         }, "export")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: !NR(y),
         children: () => jsx(_$$Q5, {
           allSavedPlugins: e.plugins,
@@ -6226,7 +6226,7 @@ function ay({
           recordingKey: "pluginPanel"
         }, "plugin")
       })]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !NR(y),
       children: () => jsx(_$$Q5, {
         allSavedPlugins: e.plugins,
@@ -7358,22 +7358,22 @@ function o3({
       }), d && jsx(_$$aG, {
         isComponentSet: o
       })]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: t[ItemType.CODE_BLOCK_ITEM],
       children: () => jsx(ap, {
         recordingKey: "slidesCodeBlockPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: t[ItemType.SLIDE_NUMBER],
       children: () => jsx(as, {
         recordingKey: "slideNumberPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: Y$(t),
       children: () => jsx(a0, {
         recordingKey: "slidesInstancePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: t[ItemType.TYPE_ITEM],
       children: () => jsx(o1, {
         recordingKey: "slidesTypePanel"
@@ -8879,7 +8879,7 @@ function cM({
   let {
     jsxNodeId
   } = _$$f2();
-  return d[ItemType.PENCIL_TOOL] ? jsx(VF, {
+  return d[ItemType.PENCIL_TOOL] ? jsx(useCachedSubtree, {
     isVisible: !0,
     children: () => jsx(_$$q4, {
       id: "pencilToolPanel",
@@ -8887,50 +8887,50 @@ function cM({
       openFile: p
     }, "pencilToolPanel")
   }) : jsxs(TabLoop, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: _$$d4(d) && !(numSelectedByType && vx(numSelectedByType, "SLIDE")) && !jsxNodeId,
       children: () => jsx(dr, {
         recordingKey: "slidesAlignPanel"
       })
-    }), jsx(dt, {}), jsx(_$$h5, {}), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), jsx(dt, {}), jsx(_$$h5, {}), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: d[ItemType.JSX_ITEM],
       children: () => jsx(_$$_6, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.SLIDES_THEME],
       children: () => jsx(am, {
         recordingKey: "slidesThemePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.FILL_ITEM],
       children: () => jsx(ch, {
         recordingKey: "slidesFillPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.SLIDES_OPACITY_ITEM],
       children: () => jsx(cL, {
         recordingKey: "slidesOpacityPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.STROKE_ITEM],
       children: () => jsx(dw, {
         recordingKey: "slidesCornerPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.STROKE_ITEM] && !cR(numSelectedByType),
       children: () => jsx(df, {
         recordingKey: "slidesBorderPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.EFFECTS_ITEM],
       children: () => jsx(_$$J7, {
         recordingKey: "slidesShadowPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.TYPE_ITEM] && !!numSelectedByType && cR(numSelectedByType) && OU(numSelectedByType, ["TEXT"]),
       children: () => jsx(cC, {
         recordingKey: "slidesLinkPanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: h,
       children: () => jsx(UA, {
         colorFormat: e,
@@ -8946,17 +8946,17 @@ function cM({
         sceneGraphSelection: l,
         stylePickerListLayout: c
       }, "selection-paints")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.SLIDES_EMBED],
       children: () => jsx(dF, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: d[ItemType.SLIDES_INTERACTIVE_WIDGET],
       children: () => jsx(cf, {
         selection: l
       })
     }), getFeatureFlags().jsx_debugging && jsx(_$$Ay3, {
       recordingKey: "jsxDebugPanel"
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(Fragment, {})
     })]
@@ -9152,7 +9152,7 @@ let cK = memo(({
         defaultViewTabsAvailable: !0,
         defaultViewAssetsTabVisible: !0,
         centeredInPanels: W
-      }), H.showing && jsx(_$$tH, {
+      }), H.showing && jsx(ErrorBoundaryCrash, {
         boundaryKey: "FigJamBrowseAllResourcesModal",
         onError: () => {
           Y(VisualBellActions.enqueue({
@@ -9160,7 +9160,7 @@ let cK = memo(({
             type: "react-error"
           }));
         },
-        fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+        fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(_$$K4, {})
       }), jsx(cB, {})]
     }), k && jsx(_$$K, {

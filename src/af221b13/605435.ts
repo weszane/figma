@@ -20,7 +20,7 @@ import { useRef, useEffect } from "react";
 import { U as _$$U2 } from "../905/103637";
 import { customHistory } from "../905/612521";
 import { g as _$$g } from "../1556/359896";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { shouldShowCreatorNudge } from "../figma_app/471982";
 import { gK } from "../5430/201744";
 import { getProfileRouteHref } from "../905/934145";
@@ -137,7 +137,7 @@ function V(e) {
   let c = useRef(null);
   let d = useSelector(_$$E(Y));
   let p = useSelector(e => e.currentUserOrgId);
-  let h = Jm();
+  let h = getSearchSessionIdFromSelector();
   let y = shouldShowCreatorNudge(resource);
   let f = hasClientMeta(e.resource) ? e0.COMMUNITY_HUB_FILE : isWidget(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let v = selectCurrentUser();

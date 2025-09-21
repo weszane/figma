@@ -29,7 +29,7 @@ import { useSeatChoiceInNuxExperiment } from "../figma_app/297957";
 import { eS as _$$eS } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
 import { getSelectedView } from "../figma_app/386952";
-import { Aj } from "../figma_app/336853";
+import { isGovOrDevWithMagicLinks } from "../figma_app/336853";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { usePreventScrollOnIOS } from "../905/772711";
 import { getUserId, selectCurrentUser } from "../905/372672";
@@ -79,7 +79,7 @@ import { useCurrentUserOrgId } from "../905/845253";
 import { selectPermissionsState } from "../figma_app/212807";
 import { liveStoreInstance } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
-import { ai, f6 } from "../figma_app/915202";
+import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { B as _$$B } from "../905/524020";
 import { i as _$$i2 } from "../905/46262";
 import { k as _$$k3 } from "../905/443820";
@@ -98,7 +98,7 @@ import { resourceUtils } from "../905/989992";
 import { Wi, Qp, JR } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
-import { sx as _$$sx2 } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { B as _$$B3 } from "../905/261906";
 import { jv } from "../905/84777";
 import { designSet, collaboratorSet } from "../905/332483";
@@ -662,13 +662,13 @@ function eJ(e) {
             };
         }
       })();
-      let d = o ? ai.NEW_TAB : ai.SAME_TAB;
+      let d = o ? TabOpenBehavior.NEW_TAB : TabOpenBehavior.SAME_TAB;
       t(zE({
         state: i,
         editorType: e,
         team,
         folderId: folderId ?? void 0,
-        from: f6.FILE_BROWSER_SIDEBAR_RECENTS,
+        from: FileBrowserLocation.FILE_BROWSER_SIDEBAR_RECENTS,
         openNewFileIn: d,
         fileName,
         callback: e => {
@@ -769,12 +769,12 @@ function eJ(e) {
             ...s,
             selectedView: n
           },
-          openNewFileIn: isCommandOrShift(o) ? ai.NEW_TAB : ai.SAME_TAB,
+          openNewFileIn: isCommandOrShift(o) ? TabOpenBehavior.NEW_TAB : TabOpenBehavior.SAME_TAB,
           folderOverride: e ? {
             folderId: e
           } : null,
           trackingInfo: {
-            from: f6.FILE_BROWSER_NUX,
+            from: FileBrowserLocation.FILE_BROWSER_NUX,
             selectedView: n
           }
         });
@@ -1185,7 +1185,7 @@ function rm({
         className: _$$s.flex.itemsCenter.gap4.$,
         children: [jsx("p", {
           className: _$$s.textBodyMedium.colorTextSecondary.$,
-          style: _$$sx2.add({
+          style: styleBuilderInstance.add({
             textDecoration: "line-through"
           }).$,
           children: i.formatMoney(o.amount)
@@ -1256,7 +1256,7 @@ function rb({
       className: _$$s.flex.$,
       children: [jsx(_$$l, {
         className: _$$s.minW16.$,
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           "--color-icon": "var(--color-icon-secondary)"
         }).$
       }), jsx("p", {
@@ -1464,20 +1464,20 @@ function rk({
 }) {
   return jsxs("button", {
     className: _$$s.flex1.p16.alignLeft.cursorPointer.flex.bt1.bb1.flexColumn.$$if(i, _$$s.colorBgSelected).$,
-    style: _$$sx2.$$if("left" === t, _$$sx2.add({
+    style: styleBuilderInstance.$$if("left" === t, styleBuilderInstance.add({
       borderTopLeftRadius: "13px",
       borderBottomLeftRadius: "13px",
       borderLeft: "1px"
-    })).$$if("right" === t, _$$sx2.add({
+    })).$$if("right" === t, styleBuilderInstance.add({
       borderTopRightRadius: "13px",
       borderBottomRightRadius: "13px",
       borderRight: "1px"
-    })).bSolid.$$if(i, _$$sx2.colorBorderSelected, _$$sx2.colorBorder).$,
+    })).bSolid.$$if(i, styleBuilderInstance.colorBorderSelected, styleBuilderInstance.colorBorder).$,
     onClick: o,
     "data-testid": c,
     children: [jsxs("div", {
       className: _$$s.flex.flexColumn.justifyBetween.$,
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         height: "136px"
       }).$,
       children: [jsxs("div", {
@@ -4486,7 +4486,7 @@ function iE({
     let f = useIsSelectedFigmakeFullscreen();
     let g = useMemo(() => {
       let i = [];
-      "loading" === l.status || "loading" === a.status || (l.data ? i = XL : f ? i = ug : a.data ? (i = Pp, p() && (i = [...i, pu.WHICH_SEAT_WOULD_YOU_LIKE])) : i = e ? Ig : Aj() ? zH : "community" === t || c ? _$$td : nH, r || (i = i.filter(e => e !== pu.INVITE_COLLABORATORS)), s && (i = i.filter(e => e !== pu.CHOOSE_PRODUCT)));
+      "loading" === l.status || "loading" === a.status || (l.data ? i = XL : f ? i = ug : a.data ? (i = Pp, p() && (i = [...i, pu.WHICH_SEAT_WOULD_YOU_LIKE])) : i = e ? Ig : isGovOrDevWithMagicLinks() ? zH : "community" === t || c ? _$$td : nH, r || (i = i.filter(e => e !== pu.INVITE_COLLABORATORS)), s && (i = i.filter(e => e !== pu.CHOOSE_PRODUCT)));
       return i;
     }, [l.status, l.data, a.status, a.data, f, e, t, c, r, s, p]);
     useEffect(() => {

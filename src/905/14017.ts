@@ -10,7 +10,7 @@ import { ProfileRouteState } from '../905/934145';
 import { A as _$$A } from '../6828/379561';
 import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from '../figma_app/45218';
 import { So } from '../figma_app/209680';
-import { Jm } from '../figma_app/387599';
+import { getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { getResourceType, hasResourceType } from '../figma_app/427318';
 import { buildCommunityPathById, buildCommunityUrl, getCurrentVersion, mapResourceTypePlural } from '../figma_app/471982';
 import { isOrgOrTeamExport } from '../figma_app/740025';
@@ -107,7 +107,7 @@ export function $$L0(e) {
   }));
   let l = W(resource.id, getResourceType(resource), !hasResourceType(resource)).data?.[0];
   let d = _$$B(resource.id, hasResourceType(resource)).data?.[0];
-  let c = Jm();
+  let c = getSearchSessionIdFromSelector();
   let u = resource.community_publishers.accepted;
   let p = u[0];
   let m = u.length > 1;

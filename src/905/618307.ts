@@ -1,5 +1,5 @@
 import { i as _$$i } from "../905/970229";
-import { yr } from "../905/827765";
+import { uploadRequest } from "../905/827765";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
@@ -66,7 +66,7 @@ export async function $$u0({
         p.set("content-type", _$$i(u.buffer) ?? "image/png");
         p.append("file", new Blob([u.buffer]));
         try {
-          await yr(cover_image_upload_url, p);
+          await uploadRequest(cover_image_upload_url, p);
         } catch (e) {
           g(resolveMessage(e, getI18nString("templates.actions.error_connecting_to_server_to_upload_file_thumbnail")));
           return;

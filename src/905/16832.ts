@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { OM, wf } from "../905/124270";
-import { Q8 } from "../905/61477";
+import { searchInputAtom } from "../905/61477";
 export function $$l0() {
   let e = useAtomWithSubscription(OM);
   let t = useAtomWithSubscription(wf);
-  let i = useAtomWithSubscription(Q8);
+  let i = useAtomWithSubscription(searchInputAtom);
   let l = useSelector(e => e.search.sessionId);
   let d = useSelector(e => e.search.queryId);
   return (n, r, s) => {

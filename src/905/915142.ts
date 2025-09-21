@@ -8,17 +8,17 @@ import { checkOrgUserPermission } from "../figma_app/465071";
 import { d as _$$d } from "../905/44199";
 import { AccessLevelEnum } from "../905/557142";
 import { mapOrgDomainProperties, mapUserProperties, mapResourceAccess } from "../figma_app/349248";
-import { eE } from "../figma_app/336853";
+import { isEmailAllowed } from "../figma_app/336853";
 export function $$h5(e, t, i) {
   return {
-    state: t && eE(i, e) ? _$$d.WARN : _$$d.OK,
+    state: t && isEmailAllowed(i, e) ? _$$d.WARN : _$$d.OK,
     content: e
   };
 }
 export function $$g6(e, t, i, n, r, s = null) {
   let l;
   let d = "";
-  isValidEmail(e) ? i && eE(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
+  isValidEmail(e) ? i && isEmailAllowed(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
   return {
     state: l,
     content: t,

@@ -19,7 +19,7 @@ import { Point } from '../905/736624';
 import { EE, EF, GQ, Hv, IA, IC, kb, LE, mG, Ox, pG, Qq, Qs, v5, W$, xU } from '../905/736956';
 import { setTimeoutID, showTooltip, hideTooltip, clearTimeoutID, showTooltipWithDelay } from '../905/765855';
 import { debounce } from '../905/915765';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { atomStoreManager } from '../figma_app/27355';
 import { CE4, LdP, Yoj, Yub } from '../figma_app/27776';
 import { FEditorType } from '../figma_app/53721';
@@ -225,7 +225,7 @@ function W(e) {
         if (t) {
           let n;
           let a = t.cloneNode(!0);
-          a.style.cssText = _$$sx.block.invisible.fixed.str();
+          a.style.cssText = styleBuilderInstance.block.invisible.fixed.str();
           t.parentElement.appendChild(a);
           let s = e.tooltip.maxWidth ? e.tooltip.maxWidth : 180;
           let o = a.offsetHeight + 1;

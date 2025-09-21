@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { getSelectedFile } from "../905/766303";
 import { b as _$$b } from "../905/217163";
 import { ud } from "../905/862913";
@@ -69,7 +69,7 @@ let $$E1 = memo(({
   let F = useMemo(() => P ? null : [O, D, L].filter(isNotNullish), [D, L, O, P]);
   if (!F || 0 === F.length) return null;
   let M = jsx(v, {
-    style: sx.add(e?.data?.position).add(sx.fixed).$,
+    style: styleBuilderInstance.add(e?.data?.position).add(styleBuilderInstance.fixed).$,
     children: F
   });
   return f ? createPortal(M, document.body) : M;

@@ -106,7 +106,7 @@ export function $$v0() {
         failure_reason: n.message,
         elapsed_ms: r
       });
-    }).$$finally(() => {
+    }).finally(() => {
       N(VisualBellActions.dequeue({
         matchType: "ai-expand-mindmap-loading"
       }));

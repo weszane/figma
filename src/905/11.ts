@@ -32,7 +32,7 @@ const externalUrlPatterns = [
 /**
  * Sentry event emitter (Zx)
  */
-const sentryEventEmitter = new EventEmitter('sentry')
+export const sentryEventEmitter = new EventEmitter('sentry')
 
 /**
  * Capture an exception with Sentry (Cp)

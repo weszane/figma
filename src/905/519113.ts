@@ -61,7 +61,7 @@ import { i as _$$i } from "../905/797975";
 import { U as _$$U } from "../905/275247";
 import { r as _$$r2 } from "../905/571838";
 import { $ as _$$$ } from "../figma_app/61705";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 import { JT as _$$JT } from "../figma_app/632248";
 import { RL, qy, B3, Ag } from "../figma_app/862289";
 import { cq } from "../905/794154";
@@ -169,7 +169,7 @@ function ey() {
   let o = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
-    newFileFrom: f6.LIBRARY_EXTRACT_TOAST,
+    newFileFrom: FileBrowserLocation.LIBRARY_EXTRACT_TOAST,
     contextClicked: "library_extract_toast",
     forceOpenNewTab: !0
   });

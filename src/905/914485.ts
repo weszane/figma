@@ -8,19 +8,19 @@ import { S as _$$S } from "../905/417453";
 import { Q0, kq } from "../905/994947";
 import { FacetedSearchPreviewRecentFilesView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
-import { PublicModelType, DEFAULT_PAGE_SIZE, MU } from "../figma_app/162807";
+import { PublicModelType, DEFAULT_PAGE_SIZE, MAX_RESULTS } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
 import { SvgComponent } from "../905/714743";
 import { In } from "../905/672640";
-import { Q8, sC, R9 } from "../905/61477";
+import { searchInputAtom, searchScopeAtom, selectedItemAtom } from "../905/61477";
 import { XW, Yb } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
-import { Dy, uL } from "../905/977218";
+import { startSearchSessionAction, updateRecentSearchesThunk } from "../905/977218";
 import { getSelectedView } from "../figma_app/386952";
-import { vj } from "../905/574958";
+import { SearchAnalytics } from "../905/574958";
 import { cr } from "../905/703676";
 import { A as _$$A } from "../1617/512130";
 function T({
@@ -31,9 +31,9 @@ function T({
 }) {
   let o = useDispatch();
   let l = getSelectedView();
-  let c = Xr(Q8);
-  let u = useAtomWithSubscription(sC);
-  let p = useAtomWithSubscription(R9);
+  let c = Xr(searchInputAtom);
+  let u = useAtomWithSubscription(searchScopeAtom);
+  let p = useAtomWithSubscription(selectedItemAtom);
   let h = useSelector(e => e.currentUserOrgId || null);
   let g = useSelector(e => e.search.sessionId);
   let T = _$$S(h)?.searches;
@@ -42,7 +42,7 @@ function T({
       let e = XW(s.query, h, p ?? PublicModelType.FILES);
       customHistory.redirect(e, "_blank");
     } else {
-      o(Dy({
+      o(startSearchSessionAction({
         entryPoint: "file_browser"
       }));
       c(s.query);
@@ -53,14 +53,14 @@ function T({
   let R = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-    o(uL({
+    o(updateRecentSearchesThunk({
       orgId: h,
       searchQuery: s.query,
       previousSearches: T
     }));
   }, [h, o, T, s.query]);
   let N = useCallback(() => {
-    vj.Recents.trackRecentsClick(g, i, null, vj.RecentType.SEARCH);
+    SearchAnalytics.Recents.trackRecentsClick(g, i, null, SearchAnalytics.RecentType.SEARCH);
   }, [i, g]);
   let P = jsx("button", {
     className: "faceted_search_preview_recent_row--clearButton--6Pwen raw_components--iconButtonEnabled--WmVk5 raw_components--_iconButton---ybo6",
@@ -91,7 +91,7 @@ export function $$k0({
   let i = useSelector(e => e.currentUserOrgId);
   let f = _$$S(i);
   let _ = f.searches.slice(0, DEFAULT_PAGE_SIZE);
-  let A = MU - _.length;
+  let A = MAX_RESULTS - _.length;
   let y = function () {
     let [e] = setupResourceAtomHandler(FacetedSearchPreviewRecentFilesView({}));
     let t = useMemo(() => e.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles)), [e]);
@@ -132,7 +132,7 @@ export function $$k0({
       })
     })]
   }) : jsx(_$$e, {
-    numRows: MU
+    numRows: MAX_RESULTS
   });
 }
 export const n = $$k0;

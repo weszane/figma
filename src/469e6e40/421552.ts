@@ -14,7 +14,7 @@ import { V as _$$V } from "../figma_app/385855";
 import { F as _$$F, y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout, Spacer } from "../905/470281";
 import { In } from "../905/672640";
@@ -31,7 +31,7 @@ import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { NJ } from "../figma_app/518077";
 import { E as _$$E3 } from "../905/128063";
 import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryManagementData, LibraryManagementCommunityData, FileByKeyThumbnailUrl, LibrarySubscriptionView, WorkspaceAdminLibrariesSectionView } from "../figma_app/43951";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { Ef } from "../905/81982";
 import { isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { O as _$$O } from "../figma_app/809387";
@@ -733,11 +733,11 @@ function e9({
   let [C, S] = useState(!1);
   let [N, I] = useState(null);
   let [T, A] = useState(null);
-  let O = Oe(g);
+  let O = isBigmaEnabledAlias3(g);
   let L = function (e, t, a, n) {
     let i = useTeamPlanUser();
     let r = useIsOrgAdminUser(i).unwrapOr(!1);
-    let l = Oe(t);
+    let l = isBigmaEnabledAlias3(t);
     let o = Ho(n.libraryKey);
     return useCallback(t => {
       if ("file" !== n.type || e?.type !== EntityType.Workspace || !l || !o || r || t.design && t.figjam && t.slides && t.buzz) return !1;
@@ -1361,7 +1361,7 @@ export function $$tx1(e) {
     orgId: org.id
   });
   let ea = useCurrentUserOrg();
-  let en = Oe(ea);
+  let en = isBigmaEnabledAlias3(ea);
   let es = useAtomWithSubscription(S0);
   let ei = useSubscription(WorkspaceAdminLibrariesSectionView, {
     workspaceId
@@ -1535,7 +1535,7 @@ export function $$tx1(e) {
     onRightActionsChange?.(ex);
   }, [ex, onRightActionsChange]);
   let eb = jsxs("div", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       minWidth: "800px"
     }).$,
     className: _$$s.pb24.$,
@@ -1557,7 +1557,7 @@ export function $$tx1(e) {
         children: jsxs(AutoLayout, {
           spacing: 0,
           children: [jsx(A3, {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "40%"
             }).$,
             children: jsx(tD, {
@@ -1573,7 +1573,7 @@ export function $$tx1(e) {
               })
             })
           }), jsx(A3, {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "30%"
             }).$,
             children: jsx(tD, {
@@ -1589,7 +1589,7 @@ export function $$tx1(e) {
               })
             })
           }), jsx(A3, {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "10%"
             }).justifyEnd.$,
             children: jsx(tD, {
@@ -1606,7 +1606,7 @@ export function $$tx1(e) {
               })
             })
           }), jsx(A3, {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "10%"
             }).justifyEnd.$,
             children: jsx(tD, {
@@ -1623,7 +1623,7 @@ export function $$tx1(e) {
               })
             })
           }), jsxs(A3, {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "10%"
             }).$,
             children: [jsx("span", {}), " "]

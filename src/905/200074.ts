@@ -1,283 +1,375 @@
-import { mapFilter } from "../figma_app/656233";
-import { EditChangeMode, ConnectionState } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics } from "../905/449184";
-import { sentryEventEmitter } from "../905/11";
-import { logInfo, logWarning } from "../905/714362";
-import { O } from "../905/291063";
-import { DB, h5 } from "../905/25189";
-import { U4, Lf, W6 } from "../905/327522";
-let p = getFeatureFlags().autosave_activity_log_debug ? 1e4 : 3e5;
-let m = getFeatureFlags().autosave_activity_log_debug ? 5e3 : 6e4;
-export async function $$h0() {
-  let {
-    usageBytes
-  } = await U4();
-  let t = usageBytes && usageBytes > 0xa00000;
+import { sentryEventEmitter } from '../905/11'
+import { ACTIVITY_LOG_STORE, executeDatabaseTransaction } from '../905/25189'
+import { AsyncJobQueue } from '../905/291063'
+import { getStorageEstimate, logAutosaveError, logAutosaveErrorWithOriginalMessage } from '../905/327522'
+import { trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { logInfo, logWarning } from '../905/714362'
+import { mapFilter } from '../figma_app/656233'
+import { ConnectionState, EditChangeMode } from '../figma_app/763686'
+
+// Constants for flush intervals based on debug flag
+const FLUSH_INTERVAL_MS = getFeatureFlags().autosave_activity_log_debug ? 10000 : 300000
+const MIN_OFFLINE_DURATION_MS = getFeatureFlags().autosave_activity_log_debug ? 5000 : 60000
+
+/**
+ * Garbage collects old activity log entries from the database.
+ * Original: $$h0
+ */
+export async function garbageCollectActivityLog(): Promise<void> {
+  const { usageBytes } = await getStorageEstimate()
+  const deleteAll = usageBytes && usageBytes > 0xA00000
+
   try {
-    await DB([h5], async i => {
-      let n = i.objectStore(h5);
-      let r = [];
-      let a = await n.openCursor();
-      for (; a;) {
-        if (t || a.value.endTime < Date.now() - 2592e6) {
-          let {
-            fileKey,
-            userID,
-            startTime,
-            endTime
-          } = a.value;
-          r.push({
-            fileKey,
-            userID,
-            startTime,
-            endTime
-          });
-          a?.delete();
+    await executeDatabaseTransaction([ACTIVITY_LOG_STORE], async (transaction) => {
+      const store = transaction.objectStore(ACTIVITY_LOG_STORE)
+      const deletedEntries: Array<{ fileKey: string, userID: string, startTime: number, endTime: number }> = []
+      let cursor = await store.openCursor()
+
+      while (cursor) {
+        const { fileKey, userID, startTime, endTime } = cursor.value
+        if (deleteAll || endTime < Date.now() - 2592000000) { // 30 days in ms
+          deletedEntries.push({ fileKey, userID, startTime, endTime })
+          cursor.delete()
         }
-        a = await a.$$continue();
+        cursor = await cursor.continue()
       }
-      if (r.length > 0) {
-        let i = new Set(r.map(e => e.fileKey)).size;
-        let n = new Set(r.map(e => e.userID)).size;
-        let a = r.reduce((e, t) => Math.min(e, t.startTime), 1 / 0);
-        let o = r.reduce((e, t) => Math.max(e, t.endTime), 0);
-        trackEventAnalytics("activity log garbage collect", {
-          numRows: r.length,
-          numFiles: i,
-          numUsers: n,
-          earliestStartTime: a,
-          lastEndTime: o,
+
+      if (deletedEntries.length > 0) {
+        const numFiles = new Set(deletedEntries.map(e => e.fileKey)).size
+        const numUsers = new Set(deletedEntries.map(e => e.userID)).size
+        const earliestStartTime = deletedEntries.reduce((min, entry) => Math.min(min, entry.startTime), Infinity)
+        const lastEndTime = deletedEntries.reduce((max, entry) => Math.max(max, entry.endTime), 0)
+
+        trackEventAnalytics('activity log garbage collect', {
+          numRows: deletedEntries.length,
+          numFiles,
+          numUsers,
+          earliestStartTime,
+          lastEndTime,
           usageBytes,
-          deleteAll: t
-        });
+          deleteAll,
+        })
       }
-    }, "readwrite");
-  } catch (e) {
-    Lf("Failed to garbage collect activity log", e);
+    }, 'readwrite')
+  }
+  catch (error) {
+    logAutosaveErrorWithOriginalMessage('Failed to garbage collect activity log', error)
   }
 }
-async function g(e) {
-  await DB([h5], async t => {
-    t.objectStore(h5).add(e);
-    await t.done;
-  }, "readwrite");
+
+/**
+ * Adds an activity log entry to the database.
+ * Original: g
+ */
+async function addActivityLogEntry(entry: any): Promise<void> {
+  await executeDatabaseTransaction([ACTIVITY_LOG_STORE], async (transaction) => {
+    transaction.objectStore(ACTIVITY_LOG_STORE).add(entry)
+    await transaction.done
+  }, 'readwrite')
 }
-class f {
-  constructor(e, t, i) {
-    this.queue = new O();
-    this.nextPromiseResolve = () => {};
-    this.nextFlushPromise = new Promise(e => this.nextPromiseResolve = e);
-    this.hasLoggedFlushError = !1;
+
+/**
+ * Represents an activity tracker for logging autosave changes.
+ * Original: f
+ */
+class ActivityTracker {
+  private queue: AsyncJobQueue
+  private nextPromiseResolve: () => void
+  private nextFlushPromise: Promise<void>
+  private hasLoggedFlushError: boolean
+  private currentLog: any
+
+  constructor(fileKey: string, userID: string, startingSessionID: string) {
+    this.queue = new AsyncJobQueue()
+    this.nextPromiseResolve = () => {}
+    this.nextFlushPromise = new Promise(resolve => this.nextPromiseResolve = resolve)
+    this.hasLoggedFlushError = false
     this.currentLog = {
-      fileKey: e,
-      userID: t,
-      startingSessionID: i,
+      fileKey,
+      userID,
+      startingSessionID,
       startTime: Date.now(),
       endTime: Date.now(),
-      logs: []
-    };
-  }
-  addCommit(e) {
-    this.currentLog.endTime = Date.now();
-    this.currentLog.autosaveChanges && e.commitPolicy === EditChangeMode.ADD_CHANGES && e.reason === this.currentLog.autosaveChanges.commitReason ? this.currentLog.autosaveChanges.commit = function (e, t) {
-      let i = {};
-      e.changedNodes.forEach(e => i[e.nodeID] = e);
-      e.clearedNodes.forEach(e => i[e] = null);
-      t.changedNodes.forEach(e => i[e.nodeID] = e);
-      t.clearedNodes.forEach(e => i[e] = null);
-      let r = Object.values(i).filter(e => null !== e);
-      let a = mapFilter(Object.entries(i), e => null === e[1] ? e[0] : null);
-      let s = {};
-      e.referencedNodes.forEach(({
-        nodeID: e,
-        changes: t
-      }) => s[e] = t);
-      t.referencedNodes.forEach(({
-        nodeID: e,
-        changes: t
-      }) => s[e] = t);
-      let o = Object.entries(s).map(e => ({
-        nodeID: e[0],
-        changes: e[1]
-      }));
-      let l = new Set();
-      e.imageHashes.forEach(e => l.add(e));
-      t.imageHashes.forEach(e => l.add(e));
-      return {
-        changedNodes: r,
-        clearedNodes: a,
-        referencedNodes: o,
-        imageHashes: Array.from(l)
-      };
-    }(this.currentLog.autosaveChanges.commit, e.changes) : (this.currentLog.autosaveChanges && this.flushToDisk(), this.currentLog.autosaveChanges = {
-      commit: e.changes,
-      commitPolicy: e.commitPolicy,
-      commitReason: e.reason,
-      fileVersion: e.fileVersion
-    });
-    e.newSessionID && (this.currentLog.newSessionID = e.newSessionID);
-  }
-  addLog(e) {
-    this.currentLog.endTime = Date.now();
-    this.currentLog.logs.push(e);
-  }
-  waitForNextFlushForTest() {
-    return this.nextFlushPromise;
-  }
-  logFlushError(e, t, i) {
-    this.hasLoggedFlushError || (this.hasLoggedFlushError = !0, t && W6(`Activity log flush error: ${e}`, i), trackEventAnalytics("activity log flush error", {
-      message: e,
-      ...i
-    }));
-  }
-  async flushToDisk() {
-    if (!this.currentLog.autosaveChanges && 0 === this.currentLog.logs.length) {
-      logInfo("Autosave activity log", "Nothing to write");
-      return;
+      logs: [],
     }
-    let e = this.currentLog;
-    this.currentLog = {
-      fileKey: e.fileKey,
-      userID: e.userID,
-      startingSessionID: e.newSessionID ?? e.startingSessionID,
-      startTime: Date.now(),
-      endTime: Date.now(),
-      logs: []
-    };
-    let {
-      usageBytes
-    } = await U4();
-    if (void 0 === usageBytes) {
-      this.logFlushError("Unable to get storage estimate", !0);
-      return;
-    }
-    if (usageBytes > 0xa00000) {
-      this.logFlushError("Exceeded storage quota", !1, {
-        usageBytes
-      });
-      return;
-    }
-    await this.queue.enqueue(() => g(e)).catch(e => this.logFlushError("Failed to write to disk", !0, {
-      wrappedErrorMessage: e.message
-    }));
-    this.nextPromiseResolve();
-    this.nextFlushPromise = new Promise(e => this.nextPromiseResolve = e);
   }
-}
-let _ = !1;
-async function A() {
-  if (_) return;
-  _ = !0;
-  let {
-    usageBytes,
-    quotaBytes
-  } = await U4();
-  let i = [];
-  try {
-    await DB([h5], async e => {
-      let t = e.objectStore(h5);
-      let n = await t.openCursor();
-      for (; n;) {
-        let {
-          fileKey,
-          userID,
-          startTime,
-          endTime
-        } = n.value;
-        i.push({
-          fileKey,
-          userID,
-          startTime,
-          endTime
-        });
-        n = await n.$$continue();
+
+  /**
+   * Adds a commit to the current log.
+   */
+  addCommit(commitData: any): void {
+    this.currentLog.endTime = Date.now()
+
+    if (this.currentLog.autosaveChanges
+      && commitData.commitPolicy === EditChangeMode.ADD_CHANGES
+      && commitData.reason === this.currentLog.autosaveChanges.commitReason) {
+      this.currentLog.autosaveChanges.commit = this.mergeCommits(this.currentLog.autosaveChanges.commit, commitData.changes)
+    }
+    else {
+      if (this.currentLog.autosaveChanges) {
+        this.flushToDisk()
       }
-    }, "readonly");
-  } catch (e) {
-    logWarning("Autosave", "Failed to get activity log data for telemetry", {
-      error: e?.message
-    });
+      this.currentLog.autosaveChanges = {
+        commit: commitData.changes,
+        commitPolicy: commitData.commitPolicy,
+        commitReason: commitData.reason,
+        fileVersion: commitData.fileVersion,
+      }
+    }
+
+    if (commitData.newSessionID) {
+      this.currentLog.newSessionID = commitData.newSessionID
+    }
   }
-  if (i.length > 0) {
-    let n = new Set(i.map(e => e.fileKey)).size;
-    let r = new Set(i.map(e => e.userID)).size;
-    let a = i.reduce((e, t) => Math.min(e, t.startTime), 1 / 0);
-    let o = Date.now() - a;
-    let l = i.reduce((e, t) => Math.max(e, t.endTime), 0);
-    let d = Date.now() - l;
-    trackEventAnalytics("activity log usage", {
-      numRows: i.length,
-      numFiles: n,
-      numUsers: r,
-      earliestStartTime: a,
-      earliestStartTimeDelta: o,
-      lastEndTime: l,
-      lastEndTimeDelta: d,
-      usageBytes,
-      quotaBytes
-    });
-  }
-}
-export class $$y1 {
-  constructor() {
-    this.state = {
-      type: "online"
-    };
-    A();
-    sentryEventEmitter.on("breadcrumb", e => this.recordSentryBreadcrumb(e));
-  }
-  startFlushInterval() {
-    return function (e, t) {
-      let i = setInterval(() => {
-        "done" === e() && clearInterval(i);
-      }, t);
-      return () => clearInterval(i);
-    }(() => "offline" !== this.state.type ? (W6("We should only call flush if there is something to flush"), "done") : (this.state.activityTracker.flushToDisk(), "continue"), p);
-  }
-  flushToDisk() {
-    return "offline" === this.state.type ? this.state.activityTracker.flushToDisk() : Promise.resolve();
-  }
-  waitForNextFlushForTest() {
-    return "offline" === this.state.type ? this.state.activityTracker.waitForNextFlushForTest() : Promise.resolve();
-  }
-  recordAutosaveCommit(e, t, i, n) {
-    let a;
-    let s;
-    if ("online" === this.state.type) a = n.reason === ConnectionState.OFFLINE || n.reason === ConnectionState.LIMBOED_CHANGES ? {
-      type: "offline",
-      activityTracker: new f(e, t, i),
-      cancelFlushTimer: this.startFlushInterval(),
-      startTime: Date.now()
-    } : {
-      type: "online"
-    };else if (n.reason === ConnectionState.SYNCED) {
-      let {
-        activityTracker,
-        cancelFlushTimer,
-        startTime
-      } = this.state;
-      Date.now() - startTime > m && (activityTracker.addCommit(n), s = activityTracker.flushToDisk());
-      cancelFlushTimer();
-      a = {
-        type: "online"
-      };
-    } else a = this.state;
-    this.state = a;
-    "offline" === this.state.type && this.state.activityTracker.addCommit(n);
+
+  /**
+   * Merges two commit objects.
+   */
+  private mergeCommits(existingCommit: any, newCommit: any): any {
+    const nodeMap: Record<string, any> = {}
+    existingCommit.changedNodes.forEach((node: any) => nodeMap[node.nodeID] = node)
+    existingCommit.clearedNodes.forEach((nodeID: string) => nodeMap[nodeID] = null)
+    newCommit.changedNodes.forEach((node: any) => nodeMap[node.nodeID] = node)
+    newCommit.clearedNodes.forEach((nodeID: string) => nodeMap[nodeID] = null)
+
+    const changedNodes = Object.values(nodeMap).filter(node => node !== null)
+    const clearedNodes = mapFilter(Object.entries(nodeMap), ([key, value]) => value === null ? key : null)
+
+    const referencedNodeMap: Record<string, any> = {}
+    existingCommit.referencedNodes.forEach(({ nodeID, changes }: any) => referencedNodeMap[nodeID] = changes)
+    newCommit.referencedNodes.forEach(({ nodeID, changes }: any) => referencedNodeMap[nodeID] = changes)
+
+    const referencedNodes = Object.entries(referencedNodeMap).map(([nodeID, changes]) => ({ nodeID, changes }))
+
+    const imageHashes = new Set([...existingCommit.imageHashes, ...newCommit.imageHashes])
+
     return {
-      newState: this.state.type,
-      flushPromise: s
-    };
+      changedNodes,
+      clearedNodes,
+      referencedNodes,
+      imageHashes: Array.from(imageHashes),
+    }
   }
-  recordSentryBreadcrumb(e) {
-    "online" !== this.state.type && this.state.activityTracker.addLog({
-      level: e.level ? e.level : "log",
-      type: "sentry",
-      time: e.timestamp ?? Date.now(),
-      log: JSON.stringify(e)
-    });
+
+  /**
+   * Adds a log entry to the current log.
+   */
+  addLog(logEntry: any): void {
+    this.currentLog.endTime = Date.now()
+    this.currentLog.logs.push(logEntry)
+  }
+
+  /**
+   * Waits for the next flush (for testing).
+   */
+  waitForNextFlushForTest(): Promise<void> {
+    return this.nextFlushPromise
+  }
+
+  /**
+   * Logs a flush error if not already logged.
+   */
+  private logFlushError(message: string, shouldLog: boolean, extraData?: any): void {
+    if (this.hasLoggedFlushError)
+      return
+    this.hasLoggedFlushError = true
+    if (shouldLog) {
+      logAutosaveError(`Activity log flush error: ${message}`, extraData)
+    }
+    trackEventAnalytics('activity log flush error', { message, ...extraData })
+  }
+
+  /**
+   * Flushes the current log to disk.
+   */
+  async flushToDisk(): Promise<void> {
+    if (!this.currentLog.autosaveChanges && this.currentLog.logs.length === 0) {
+      logInfo('Autosave activity log', 'Nothing to write')
+      return
+    }
+
+    const logToFlush = this.currentLog
+    this.currentLog = {
+      fileKey: logToFlush.fileKey,
+      userID: logToFlush.userID,
+      startingSessionID: logToFlush.newSessionID ?? logToFlush.startingSessionID,
+      startTime: Date.now(),
+      endTime: Date.now(),
+      logs: [],
+    }
+
+    const { usageBytes } = await getStorageEstimate()
+    if (usageBytes === undefined) {
+      this.logFlushError('Unable to get storage estimate', true)
+      return
+    }
+    if (usageBytes > 0xA00000) {
+      this.logFlushError('Exceeded storage quota', false, { usageBytes })
+      return
+    }
+
+    try {
+      await this.queue.enqueue(() => addActivityLogEntry(logToFlush))
+    }
+    catch (error: any) {
+      this.logFlushError('Failed to write to disk', true, { wrappedErrorMessage: error.message })
+    }
+
+    this.nextPromiseResolve()
+    this.nextFlushPromise = new Promise(resolve => this.nextPromiseResolve = resolve)
   }
 }
-export const L_ = $$h0;
-export const hS = $$y1;
+
+/**
+ * Sends telemetry data about activity log usage.
+ * Original: A
+ */
+let hasSentTelemetry = false
+async function sendActivityLogTelemetry(): Promise<void> {
+  if (hasSentTelemetry)
+    return
+  hasSentTelemetry = true
+
+  const { usageBytes, quotaBytes } = await getStorageEstimate()
+  const entries: Array<{ fileKey: string, userID: string, startTime: number, endTime: number }> = []
+
+  try {
+    await executeDatabaseTransaction([ACTIVITY_LOG_STORE], async (transaction) => {
+      const store = transaction.objectStore(ACTIVITY_LOG_STORE)
+      let cursor = await store.openCursor()
+      while (cursor) {
+        const { fileKey, userID, startTime, endTime } = cursor.value
+        entries.push({ fileKey, userID, startTime, endTime })
+        cursor = await cursor.continue()
+      }
+    }, 'readonly')
+  }
+  catch (error: any) {
+    logWarning('Autosave', 'Failed to get activity log data for telemetry', { error: error.message })
+  }
+
+  if (entries.length > 0) {
+    const numFiles = new Set(entries.map(e => e.fileKey)).size
+    const numUsers = new Set(entries.map(e => e.userID)).size
+    const earliestStartTime = entries.reduce((min, entry) => Math.min(min, entry.startTime), Infinity)
+    const earliestStartTimeDelta = Date.now() - earliestStartTime
+    const lastEndTime = entries.reduce((max, entry) => Math.max(max, entry.endTime), 0)
+    const lastEndTimeDelta = Date.now() - lastEndTime
+
+    trackEventAnalytics('activity log usage', {
+      numRows: entries.length,
+      numFiles,
+      numUsers,
+      earliestStartTime,
+      earliestStartTimeDelta,
+      lastEndTime,
+      lastEndTimeDelta,
+      usageBytes,
+      quotaBytes,
+    })
+  }
+}
+
+/**
+ * Manages autosave activity logging, handling online/offline states.
+ * Original: $$y1
+ */
+export class AutosaveActivityLogManager {
+  private state: any
+
+  constructor() {
+    this.state = { type: 'online' }
+    sendActivityLogTelemetry()
+    sentryEventEmitter.on('breadcrumb', breadcrumb => this.recordSentryBreadcrumb(breadcrumb))
+  }
+
+  /**
+   * Starts the flush interval timer.
+   */
+  private startFlushInterval(): () => void {
+    const intervalId = setInterval(() => {
+      if (this.state.type !== 'offline') {
+        logAutosaveError('We should only call flush if there is something to flush')
+        clearInterval(intervalId)
+      }
+      else {
+        this.state.activityTracker.flushToDisk()
+      }
+    }, FLUSH_INTERVAL_MS)
+    return () => clearInterval(intervalId)
+  }
+
+  /**
+   * Flushes to disk if offline.
+   */
+  flushToDisk(): Promise<void> {
+    return this.state.type === 'offline' ? this.state.activityTracker.flushToDisk() : Promise.resolve()
+  }
+
+  /**
+   * Waits for next flush for testing.
+   */
+  waitForNextFlushForTest(): Promise<void> {
+    return this.state.type === 'offline' ? this.state.activityTracker.waitForNextFlushForTest() : Promise.resolve()
+  }
+
+  /**
+   * Records an autosave commit, managing state transitions.
+   */
+  recordAutosaveCommit(fileKey: string, userID: string, sessionID: string, commitData: any): { newState: string, flushPromise?: Promise<void> } {
+    let newState: any
+    let flushPromise: Promise<void> | undefined
+
+    if (this.state.type === 'online') {
+      if (commitData.reason === ConnectionState.OFFLINE || commitData.reason === ConnectionState.LIMBOED_CHANGES) {
+        newState = {
+          type: 'offline',
+          activityTracker: new ActivityTracker(fileKey, userID, sessionID),
+          cancelFlushTimer: this.startFlushInterval(),
+          startTime: Date.now(),
+        }
+      }
+      else {
+        newState = { type: 'online' }
+      }
+    }
+    else if (commitData.reason === ConnectionState.SYNCED) {
+      const { activityTracker, cancelFlushTimer, startTime } = this.state
+      if (Date.now() - startTime > MIN_OFFLINE_DURATION_MS) {
+        activityTracker.addCommit(commitData)
+        flushPromise = activityTracker.flushToDisk()
+      }
+      cancelFlushTimer()
+      newState = { type: 'online' }
+    }
+    else {
+      newState = this.state
+    }
+
+    this.state = newState
+    if (this.state.type === 'offline') {
+      this.state.activityTracker.addCommit(commitData)
+    }
+
+    return { newState: this.state.type, flushPromise }
+  }
+
+  /**
+   * Records a Sentry breadcrumb if offline.
+   */
+  private recordSentryBreadcrumb(breadcrumb: any): void {
+    if (this.state.type === 'online')
+      return
+    this.state.activityTracker.addLog({
+      level: breadcrumb.level || 'log',
+      type: 'sentry',
+      time: breadcrumb.timestamp ?? Date.now(),
+      log: JSON.stringify(breadcrumb),
+    })
+  }
+}
+
+// Updated exports to match refactored names
+export const L_ = garbageCollectActivityLog
+export const hS = AutosaveActivityLogManager

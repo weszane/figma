@@ -3,7 +3,7 @@ import { useRef, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { defaultInputState } from "../905/768014";
 import { isFakeTouchEvent } from "../905/955878";
-import { hg } from "../905/705398";
+import { isNonTextInput } from "../905/705398";
 import { getFeatureFlags } from "../905/601108";
 import { cZ } from "../figma_app/272902";
 import { $z } from "../figma_app/297733";
@@ -37,7 +37,7 @@ function _({
       onPointerUp(t) {
         let r = t.target;
         let n = !1;
-        !e.current && (r instanceof HTMLLabelElement && (r = r.control, n = !0), r && (r instanceof HTMLButtonElement || hg(r)) && (n ? r.addEventListener("click", () => r.blur(), {
+        !e.current && (r instanceof HTMLLabelElement && (r = r.control, n = !0), r && (r instanceof HTMLButtonElement || isNonTextInput(r)) && (n ? r.addEventListener("click", () => r.blur(), {
           once: !0
         }) : r.blur()));
       },
@@ -80,7 +80,7 @@ function h({
           target
         } = e;
         let r = !1;
-        !d.current && (target instanceof HTMLLabelElement && (t = target.control, r = !0), target && (target instanceof HTMLButtonElement || hg(target)) && (r ? target.addEventListener("click", () => target.blur(), {
+        !d.current && (target instanceof HTMLLabelElement && (t = target.control, r = !0), target && (target instanceof HTMLButtonElement || isNonTextInput(target)) && (r ? target.addEventListener("click", () => target.blur(), {
           once: !0
         }) : target.blur()));
       });

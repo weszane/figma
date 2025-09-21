@@ -10,7 +10,7 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { rolePostAction, roleDeleteAction } from "../905/98702";
 import { trackFileEvent, trackRoleEvent } from "../figma_app/314264";
 import { mapResourceCategoryToRole, arrayToIdMap } from "../figma_app/349248";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { getRolesForResource, getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
@@ -247,8 +247,8 @@ let $$M3 = createOptimistThunk((e, {
   let P = e.getState();
   if (P.currentUserOrgId) {
     let e = P.autocomplete.inputValue;
-    let r = !!e && !H_(P.orgDomains.domains, e);
-    let a = t.filter(t => t !== e && !H_(P.orgDomains.domains, t));
+    let r = !!e && !checkDomainExists(P.orgDomains.domains, e);
+    let a = t.filter(t => t !== e && !checkDomainExists(P.orgDomains.domains, t));
     let s = {
       resourceType: i,
       resourceIdOrKey: o,

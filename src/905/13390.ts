@@ -2,7 +2,7 @@ import { useId, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { jsx } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { U as _$$U } from '../905/18613';
+import { NotificationType } from '../905/18613';
 import { searchResultClicked } from '../905/34809';
 import { tl as _$$tl } from '../905/70982';
 import { an, y$ } from '../905/81009';
@@ -72,7 +72,7 @@ import { rC, we } from '../figma_app/861982';
 import { D6 } from '../figma_app/863319';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { Fb, iN, qP, X7 } from '../figma_app/909778';
-import { ai } from '../figma_app/915202';
+import { TabOpenBehavior } from '../figma_app/915202';
 import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
 import { useDispatch } from 'react-redux';
 function v({
@@ -220,8 +220,8 @@ export function $$ek0(e) {
       case nb.OFFLINE_FILE:
         i(NA({
           file: t.file,
-          openNewFileIn: ai.NEW_TAB,
-          source: _$$U.OFFLINE_FILE_TILE
+          openNewFileIn: TabOpenBehavior.NEW_TAB,
+          source: NotificationType.OFFLINE_FILE_TILE
         }));
         return;
       default:

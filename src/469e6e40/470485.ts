@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Bq } from "../figma_app/482142";
 import { useSeatManagementWidgetExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
@@ -71,7 +71,7 @@ export function $$j0(e) {
   });
   return e.isLoading ? jsx(Wi, {
     dataTestId: "billing-plan-tier-loading",
-    style: sx.pl36.h16.my4.add({
+    style: styleBuilderInstance.pl36.h16.my4.add({
       width: "16rem"
     }).$
   }) : jsxs("div", {

@@ -4,7 +4,7 @@ import { SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../6828/844411";
@@ -75,7 +75,7 @@ export function $$g0({
       })]
     }), (A || g) && jsxs("div", {
       className: _$$s.p12.flex.flexColumn.gap8.bRadius4.colorBgSecondary.breakWord.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: "320px"
       }).$,
       children: [jsx(TextWithTruncation, {
@@ -83,7 +83,7 @@ export function $$g0({
         children: description
       }), domains.length > 0 && jsx("ul", {
         className: _$$s.ml16.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           listStyle: "disc",
           verticalAlign: "baseline"
         }).$,

@@ -81,7 +81,7 @@ import { selectViewAction } from "../905/929976";
 import { mapToEditorType } from "../figma_app/300692";
 import { z4 } from "../905/37051";
 import { getImageManager } from "../figma_app/624361";
-import { Yu } from "../figma_app/139113";
+import { setAutosaveStatus } from "../figma_app/139113";
 let er = "Handling fullscreen metadata response not in a valid fullscreen state";
 async function ea(e, t, i) {
   let n = t.getState();
@@ -508,7 +508,7 @@ let eU = createOptimistThunk((e, t) => {
     editorType: s,
     didRedirectEditorTypeToStored
   }));
-  Yu(!1);
+  setAutosaveStatus(!1);
   e.dispatch(ho(t));
   file && "apple" === (file.license || "").toLowerCase() && e.dispatch(showModalHandler({
     type: eT

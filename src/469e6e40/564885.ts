@@ -50,7 +50,7 @@ export let $$E0 = registerModal(function (e) {
       u(e.data.meta);
     }).catch(e => {
       a(FlashActions.error(e.data?.message || getI18nString("team_view.pro_member_modal.error_on_activity_retrieval_fallback_message")));
-    }).$$finally(() => h(!1));
+    }).finally(() => h(!1));
   }, [a, e.planType, e.planUserId, e.planId]);
   let v = useMemo(() => [{
     type: FFileType.DESIGN,

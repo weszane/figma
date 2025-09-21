@@ -4,14 +4,14 @@ import { deepEqual } from "../905/382883";
 import { useMemoArrayCustom } from "../905/19536";
 import { useLatestRef } from "../figma_app/922077";
 import { NS, Pp, a6 } from "../905/989765";
-import { R9 } from "../905/977824";
+import { multiplayerSessionManager } from "../905/977824";
 import { _i } from "../figma_app/578768";
 import { selectCurrentUser } from "../905/372672";
 import { h as _$$h } from "../figma_app/275739";
 import { Lk } from "../figma_app/122682";
 function h() {
   let e = useSelector(e => e.multiplayer).allUsers;
-  let t = R9.useVoiceMetadataBySessionId();
+  let t = multiplayerSessionManager.useVoiceMetadataBySessionId();
   function r(e, t) {
     return e.sessionID === t.sessionID && e.sawMouse === t.sawMouse && e.deviceName === t.deviceName && e.name === t.name && e.imageURL === t.imageURL;
   }

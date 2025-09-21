@@ -1,14 +1,50 @@
-export function $$n0(e, t) {
+// Original file: /Users/allen/github/fig/src/905/18613.ts
+
+interface FileInput {
+  orgId: any
+  editorType: any
+  name: string
+  fileKey: any
+}
+
+interface FileConfig {
+  folder_id: null
+  org_id: any
+  openNewFileIn: any
+  trackingInfo: null
+  editorType: any
+  fileName: string
+  localFileKey: any
+}
+
+/**
+ * Creates a file configuration object.
+ * @param input - The input object containing file details.
+ * @param openNewFileIn - The location to open the new file in.
+ * @returns The file configuration object.
+ */
+export function createFileConfig(input: FileInput, openNewFileIn: any): FileConfig {
+  // Original: $$n0
   return {
     folder_id: null,
-    org_id: e.orgId,
-    openNewFileIn: t,
+    org_id: input.orgId,
+    openNewFileIn,
     trackingInfo: null,
-    editorType: e.editorType,
-    fileName: e.name,
-    localFileKey: e.fileKey
-  };
+    editorType: input.editorType,
+    fileName: input.name,
+    localFileKey: input.fileKey,
+  }
 }
-export var $$r1 = (e => (e.OFFLINE_FILE_TILE = "OFFLINE_FILE_TILE", e.AUTOSAVE_NOTIFICATION = "AUTOSAVE_NOTIFICATION", e.AUTOSAVE_MODAL = "AUTOSAVE_MODAL", e))($$r1 || {});
-export const B = $$n0;
-export const U = $$r1;
+
+/**
+ * Enum for notification types.
+ */
+// Original: $$r1
+export enum NotificationType {
+  OFFLINE_FILE_TILE = 'OFFLINE_FILE_TILE',
+  AUTOSAVE_NOTIFICATION = 'AUTOSAVE_NOTIFICATION',
+  AUTOSAVE_MODAL = 'AUTOSAVE_MODAL',
+}
+
+export const B = createFileConfig
+export const U = NotificationType

@@ -15,9 +15,9 @@ import { ViewAccessTypeEnum } from "../905/513035";
 import { useCurrentUserOrg } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { OrgInviteModalView } from "../figma_app/43951";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { d as _$$d } from "../905/44199";
-import { Gv } from "../figma_app/736948";
+import { ApprovalStatusEnum } from "../figma_app/736948";
 import { um } from "../figma_app/761870";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
@@ -111,7 +111,7 @@ export function $$U3({
     isSubmitting: j,
     submit: e => {
       if (T.length >= 1) {
-        let i = um(e).filter(e => isValidEmail(e) && !H_(T, e));
+        let i = um(e).filter(e => isValidEmail(e) && !checkDomainExists(T, e));
         if ((i = [...new Set(i)]).length > 0) {
           p(showModalHandler({
             type: C,
@@ -128,7 +128,7 @@ export function $$U3({
       D(e);
     },
     onValidateToken: e => {
-      let i = isValidEmail(e) && H_(T, e) && G;
+      let i = isValidEmail(e) && checkDomainExists(T, e) && G;
       let t = isValidEmail(e) && P;
       return {
         state: i || t ? _$$d.OK : _$$d.ERROR,
@@ -189,7 +189,7 @@ export function $$M2({
   });
 }
 function S(e, i) {
-  return e.invite_whitelist_guest_invite_setting === Gv.REQUIRE_APPROVAL && "licenseGroup" !== i;
+  return e.invite_whitelist_guest_invite_setting === ApprovalStatusEnum.REQUIRE_APPROVAL && "licenseGroup" !== i;
 }
 let $$y1 = registerModal(function ({
   licenseGroupId: e,

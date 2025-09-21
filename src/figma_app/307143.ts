@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { selectCurrentFile } from "../figma_app/516028";
-import { wA } from "../figma_app/336853";
+import { getCurrentUserOrg } from "../figma_app/336853";
 function l() {
-  let e = useSelector(e => wA(e));
+  let e = useSelector(e => getCurrentUserOrg(e));
   let t = selectCurrentFile();
   return {
     currentOrg: e,

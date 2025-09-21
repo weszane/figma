@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { hO, Hl, G4 } from "../figma_app/545293";
 import { CZ, l4 } from "../905/124270";
-import { jN } from "../905/171315";
-import { Hv } from "../905/61477";
+import { createResourceFacet } from "../905/171315";
+import { searchModelTypeAtom } from "../905/61477";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
-import { nG, qr, Je, PP, PI } from "../905/977218";
-import { CreatorResourceType, $L, PublicModelType, SearchTypeMode } from "../figma_app/162807";
-import { vj } from "../905/574958";
+import { updateRecentSearchesWithSortThunk, searchClearResponsesAction, searchSessionEnteredSearchViewViaEnterAction, searchSetScrollTopAction, searchThunk } from "../905/977218";
+import { CreatorResourceType, SearchModelType, PublicModelType, SearchTypeMode } from "../figma_app/162807";
+import { SearchAnalytics } from "../905/574958";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { S } from "../905/417453";
 export function $$_1(e, t, i) {
-  let r = useAtomWithSubscription(Hv);
+  let r = useAtomWithSubscription(searchModelTypeAtom);
   let s = useAtomWithSubscription(CZ);
   let l = $$A0(e, t, i);
   return useCallback((e, t, i, n) => {
@@ -35,16 +35,16 @@ export function $$A0(e, t, i) {
       Hl(I.input, "input-text" === I.input.type ? G4.ACTIONS_ASSETS_TAB_DETAIL : G4.ACTIONS_VISUAL_SEARCH_VIEW, a, E);
       return;
     }
-    if (vj.Session.trackSearchQueryTyped(b, v, n), _ && n.length > 0 && d(nG({
+    if (SearchAnalytics.Session.trackSearchQueryTyped(b, v, n), _ && n.length > 0 && d(updateRecentSearchesWithSortThunk({
       searchQuery: n,
       previousSearches: A
     })), i && !x) {
-      f && (o || (a && a.searchModelType || (y(jN($L.ALL_FILES)), a = {
+      f && (o || (a && a.searchModelType || (y(createResourceFacet(SearchModelType.ALL_FILES)), a = {
         ...a,
         searchModelType: PublicModelType.FILES
-      }), d(qr({})), d(Je({
+      }), d(searchClearResponsesAction({})), d(searchSessionEnteredSearchViewViaEnterAction({
         entryPoint: e
-      }))), d(PP({
+      }))), d(searchSetScrollTopAction({
         top: 0
       })), d(selectViewAction({
         view: "search",
@@ -52,7 +52,7 @@ export function $$A0(e, t, i) {
         previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
       })), d(hideModalHandler()));
       let i = o ? SearchTypeMode.ALL_TYPES_STREAMING : SearchTypeMode.ALL_TYPES_BLOCKING;
-      d(PI({
+      d(searchThunk({
         query: n,
         searchModelType: r,
         searchScope: t,
@@ -63,14 +63,14 @@ export function $$A0(e, t, i) {
       }));
       return;
     }
-    o || x || (d(PP({
+    o || x || (d(searchSetScrollTopAction({
       top: 0
     })), d(selectViewAction({
       view: "search",
       entryPoint: e,
       previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
     })));
-    d(PI({
+    d(searchThunk({
       query: n,
       searchModelType: r,
       searchScope: t,

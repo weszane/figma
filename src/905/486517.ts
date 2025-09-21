@@ -4,7 +4,7 @@ import a from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { RecordingComponent, generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Hx } from "../figma_app/530167";
+import { insertCommunityMention } from "../figma_app/530167";
 import { AT_MENTIONS_TYPEAHEAD } from "../905/380385";
 import { Ro } from "../figma_app/805373";
 import { Hn, f6, xD, ri } from "../905/337179";
@@ -30,7 +30,7 @@ class $$E extends RecordingComponent {
     this.onMentionTypeaheadClick = e => {
       this.props.onInsert();
       this.props.setTypeahead(null);
-      "profile_handle" in this.props.typeahead.mentions[e] && this.props.dispatch(Hx(this.props.typeahead.mentions[e]));
+      "profile_handle" in this.props.typeahead.mentions[e] && this.props.dispatch(insertCommunityMention(this.props.typeahead.mentions[e]));
     };
     this.placeMention = e => {
       this.props.setTypeahead({

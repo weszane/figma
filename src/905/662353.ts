@@ -1,4 +1,5 @@
+import type { PrimitiveAtom } from 'jotai'
 import { atom } from '../figma_app/27355'
 
-export let $$n0 = atom(null)
-export const h = $$n0
+export let fileKeyAtom = atom(null) as PrimitiveAtom<string | null>
+export const h = fileKeyAtom

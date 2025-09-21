@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 export function $$s0({
   children: e,
   columns: t,
@@ -23,7 +23,7 @@ export function $$s0({
 }) {
   return jsx("div", {
     className: s.flex.flexColumn.$,
-    style: sx.$$if(t, {
+    style: styleBuilderInstance.$$if(t, {
       gridColumn: "1 / -1"
     }).$,
     children: e

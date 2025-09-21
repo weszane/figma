@@ -6,7 +6,7 @@ import { A } from "../905/251970";
 import l from "classnames";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Spacing } from "../figma_app/637027";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
@@ -53,7 +53,7 @@ class T extends RecordingPureComponent {
         className: Cj,
         children: [this.props.hintText, " ", t]
       });
-      let i = this.props.iconComponent ? this.props.iconComponent : this.props.icon_DEPRECATED ? jsx(_$$t, {
+      let i = this.props.iconComponent ? this.props.iconComponent : this.props.icon_DEPRECATED ? jsx(MediaQuerySvgComponent, {
         svg: this.props.icon_DEPRECATED,
         fallbackSvg: this.props.iconFallback,
         className: FQ

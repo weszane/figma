@@ -123,7 +123,7 @@ import { Point } from '../905/736624';
 import { l as _$$l5 } from '../905/745972';
 import { F_ as _$$F_ } from '../905/748636';
 import { G as _$$G } from '../905/750789';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { DialogLabel } from '../905/799737';
 import { G as _$$G2 } from '../905/800369';
 import { Ih } from '../905/820169';
@@ -273,7 +273,7 @@ import { f6 as _$$f3 } from '../figma_app/302802';
 import { RM } from '../figma_app/304955';
 import { $W, mC } from '../figma_app/325537';
 import { Hu, kl } from '../figma_app/327683';
-import { Oe } from '../figma_app/336853';
+import { isBigmaEnabledAlias3 } from '../figma_app/336853';
 import { Tj } from '../figma_app/342207';
 import { p as _$$p2 } from '../figma_app/353099';
 import { K as _$$K3 } from '../figma_app/358450';
@@ -320,7 +320,7 @@ import { getPermissionsState } from '../figma_app/642025';
 import { lz as _$$lz, sf as _$$sf, td as _$$td, bV, Dt, EN, OL } from '../figma_app/646031';
 import { AssetFilterMode, useSubscribedAssets, filterStylesByType } from '../figma_app/646357';
 import { wW } from '../figma_app/656450';
-import { VF } from '../figma_app/679183';
+import { useCachedSubtree } from '../figma_app/679183';
 import { y6 } from '../figma_app/681951';
 import { useProjectFileCreationPermissions, canCreateFileType } from '../figma_app/687776';
 import { s_ as _$$s_, yO } from '../figma_app/701001';
@@ -353,7 +353,7 @@ import { d1, hj, Sp } from '../figma_app/888478';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { nr as _$$nr, rn as _$$rn, Op } from '../figma_app/903573';
 import { Cu, F7, yU } from '../figma_app/908460';
-import { f6 } from '../figma_app/915202';
+import { FileBrowserLocation } from '../figma_app/915202';
 import { m3 } from '../figma_app/915281';
 import { Gb } from '../figma_app/933328';
 import { _q, PA } from '../figma_app/957070';
@@ -924,9 +924,9 @@ function eb() {
   }) : null;
 }
 function ej() {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'AiAssistantCanvasView',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: ServiceCategories.AI_ASSISTANT
     },
@@ -1670,7 +1670,7 @@ function t4() {
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
     forceOpenNewTab: !0,
-    newFileFrom: f6.FIGMAKE_POPOUT_UPSELL_IN_DESIGN_EDITOR,
+    newFileFrom: FileBrowserLocation.FIGMAKE_POPOUT_UPSELL_IN_DESIGN_EDITOR,
     contextClicked: 'figmake_popout_upsell_in_design_editor_created'
   });
   return jsx(_$$M, {
@@ -7819,7 +7819,7 @@ function s0({
   libraryKey: t
 }) {
   let l = useCurrentUserOrg();
-  let i = Oe(l);
+  let i = isBigmaEnabledAlias3(l);
   let r = fV(t);
   let s = useAtomWithSubscription(resourceDataToSubscriptionMapAtom);
   let o = t ? s[t]?.hubFileId ?? null : null;
@@ -10049,7 +10049,7 @@ function ai({
     exportSettings
   } = pw('exportSettings');
   let m = Wd();
-  return jsx(VF, {
+  return jsx(useCachedSubtree, {
     isVisible: !0,
     children: () => jsx(LI, {
       currentPage: a,
@@ -10083,19 +10083,19 @@ function ap({
   let u = _$$tN('containsResponsiveSets');
   let c = !i[ItemType.FRAME_PRESETS] && !i[ItemType.PENCIL_TOOL] && !u;
   return jsxs(Fragment, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: i[ItemType.FRAME_PRESETS],
       children: () => jsx(_$$nl, {
         recordingKey: 'framePresetPanel'
       }, 'frame-presets')
-    }), !d && jsx(VF, {
+    }), !d && jsx(useCachedSubtree, {
       isVisible: i[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q4, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
         openFile: s
       }, 'pencilToolPanel')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: c,
       children: () => jsx(Z0, {
         recordingKey: 'prototypePanel',
@@ -10808,9 +10808,9 @@ let dN = memo(({
   let R = jsx(_$$m, {
     'role': 'region',
     'aria-label': getI18nString('fullscreen_actions.left_sidebar_label'),
-    'children': k ? jsx(_$$tH, {
+    'children': k ? jsx(ErrorBoundaryCrash, {
       boundaryKey: 'DevModeLeftPanel',
-      fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+      fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       sentryTags: {
         area: eBU.DEVELOPER_TOOLS
       },

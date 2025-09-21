@@ -79,7 +79,7 @@ async function O(e, t, r, n, d) {
       y = !0;
     }).catch(e => {
       reportError(_$$e.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${e.stack}`));
-    }).$$finally(() => {
+    }).finally(() => {
       let t = performance.now() - g;
       trackFileEvent('dev_handoff_status_activity', h, _, {
         elapsedMs: t,

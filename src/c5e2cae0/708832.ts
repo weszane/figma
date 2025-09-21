@@ -10,7 +10,7 @@ import { h as _$$h } from "../905/207101";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -18,7 +18,7 @@ import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { Up, O$, s$, GL, vm, VB } from "../figma_app/361035";
 import { Vh, kV, N9 } from "../figma_app/692987";
@@ -30,7 +30,7 @@ import { _ as _$$_2 } from "../c5e2cae0/173602";
 import { On } from "../9420/975542";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { Ju, IX } from "../905/712921";
-import { X1 } from "../figma_app/736948";
+import { OnboardingStepEnum } from "../figma_app/736948";
 import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
 import { CreateUpgradeAction } from "../figma_app/707808";
 import { Nd, li, Uu, kH, K6, ER, i9, $y, uD, Bb } from "../c5e2cae0/763339";
@@ -106,26 +106,26 @@ let $ = withTrackedClick(function (e) {
   });
 });
 function U(e) {
-  if (e.currentStep === X1.Confirmation) return null;
+  if (e.currentStep === OnboardingStepEnum.Confirmation) return null;
   let t = [];
   let a = null;
   if (e.newTeamProps) {
     let s = {
-      step: X1.ChoosePlan,
+      step: OnboardingStepEnum.ChoosePlan,
       name: getI18nString("org_self_serve.headers.choose_plan")
     };
     let r = {
-      step: X1.CreateTeam,
+      step: OnboardingStepEnum.CreateTeam,
       name: getI18nString("org_self_serve.headers.create_team")
     };
     switch (e.newTeamProps?.teamFlowType) {
       case CreateUpgradeAction.CREATE:
         t.push({
-          step: X1.PseudoCreateTeam,
+          step: OnboardingStepEnum.PseudoCreateTeam,
           name: getI18nString("org_self_serve.headers.create_team")
         });
         t.push({
-          step: X1.AddCollaborators,
+          step: OnboardingStepEnum.AddCollaborators,
           name: getI18nString("org_self_serve.headers.add_team_members")
         });
         t.push(s);
@@ -133,32 +133,32 @@ function U(e) {
       case CreateUpgradeAction.CREATE_AND_UPGRADE:
         t.push(s);
         t.push(r);
-        a = X1.CreateTeam;
+        a = OnboardingStepEnum.CreateTeam;
         break;
       case CreateUpgradeAction.UPGRADE_EXISTING_TEAM:
         t.push(s);
     }
   }
   e.canSeeTeamAndSeatSelectionSteps && (t.push({
-    step: X1.TeamSelect,
+    step: OnboardingStepEnum.TeamSelect,
     name: getI18nString("org_self_serve.headers.teams_to_upgrade")
   }), e.isCampfireCart && t.push({
-    step: X1.SeatSelect,
+    step: OnboardingStepEnum.SeatSelect,
     name: getI18nString("checkout.choose_seats")
-  }), a = a ?? X1.TeamSelect);
-  e.isCampfireCart ? a = a ?? X1.Payment : (t.push({
-    step: X1.Details,
+  }), a = a ?? OnboardingStepEnum.TeamSelect);
+  e.isCampfireCart ? a = a ?? OnboardingStepEnum.Payment : (t.push({
+    step: OnboardingStepEnum.Details,
     name: getI18nString("org_self_serve.headers.organization_details")
-  }), a = a ?? X1.Details);
+  }), a = a ?? OnboardingStepEnum.Details);
   t.push({
-    step: X1.Payment,
+    step: OnboardingStepEnum.Payment,
     name: getI18nString("org_self_serve.headers.payment")
   });
   t.push({
-    step: X1.Review,
+    step: OnboardingStepEnum.Review,
     name: getI18nString("org_self_serve.headers.review")
   });
-  t[t.findIndex(e => e.step === a)].step = X1.Initial;
+  t[t.findIndex(e => e.step === a)].step = OnboardingStepEnum.Initial;
   let r = 0;
   for (let a = 0; a < t.length; a++) if (t[a].step === e.currentStep) {
     r = a;
@@ -184,11 +184,11 @@ function U(e) {
           });
           let a = function (e) {
             switch (e) {
-              case X1.ChoosePlan:
+              case OnboardingStepEnum.ChoosePlan:
                 return UpgradeSteps.PLAN_COMPARISON;
-              case X1.AddCollaborators:
+              case OnboardingStepEnum.AddCollaborators:
                 return UpgradeSteps.ADD_COLLABORATORS;
-              case X1.PseudoCreateTeam:
+              case OnboardingStepEnum.PseudoCreateTeam:
                 return UpgradeSteps.CREATE_TEAM;
               default:
                 return null;
@@ -245,7 +245,7 @@ function eb({
     }), jsxs("label", {
       htmlFor: `select-team-${e.id}`,
       className: K6,
-      style: _$$sx.$$if(t, _$$sx.colorBorderSelected.colorBgSelectedTertiary, _$$sx.colorBg.add({
+      style: styleBuilderInstance.$$if(t, styleBuilderInstance.colorBorderSelected.colorBgSelectedTertiary, styleBuilderInstance.colorBg.add({
         borderColor: "var(--color-bg)"
       })).$,
       children: [jsx(nl, {
@@ -379,7 +379,7 @@ export class $$eM2 extends Component {
   constructor(e) {
     super(e);
     this.canSeeTeamAndSeatSelectionSteps = () => Object.keys(this.state.eligibleTeamsByTeamId).length > 0 || this.state.loading || !!this.props.newTeamProps;
-    this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === CreateUpgradeAction.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
+    this.effectiveStep = () => this.props.step === OnboardingStepEnum.Initial || this.props.step === OnboardingStepEnum.ChoosePlan ? this.props.newTeamProps?.teamFlowType === CreateUpgradeAction.CREATE_AND_UPGRADE ? OnboardingStepEnum.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? OnboardingStepEnum.TeamSelect : OnboardingStepEnum.Payment : this.props.step;
     this.setStep = e => {
       this.props.dispatch(selectViewAction({
         view: "orgSelfServe",
@@ -406,16 +406,16 @@ export class $$eM2 extends Component {
     this.onSubmit = () => {
       let e = this.effectiveStep();
       switch (e) {
-        case X1.CreateTeam:
-          this.state.newTeamName?.trim() && this.setStep(X1.TeamSelect);
+        case OnboardingStepEnum.CreateTeam:
+          this.state.newTeamName?.trim() && this.setStep(OnboardingStepEnum.TeamSelect);
           break;
-        case X1.AddCollaborators:
-          this.setStep(X1.Payment);
+        case OnboardingStepEnum.AddCollaborators:
+          this.setStep(OnboardingStepEnum.Payment);
           break;
-        case X1.PseudoCreateTeam:
-          this.setStep(X1.TeamSelect);
+        case OnboardingStepEnum.PseudoCreateTeam:
+          this.setStep(OnboardingStepEnum.TeamSelect);
           break;
-        case X1.TeamSelect:
+        case OnboardingStepEnum.TeamSelect:
           let t = C({
             eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
             selectedTeamIds: this.state.selectedTeamIds,
@@ -425,18 +425,18 @@ export class $$eM2 extends Component {
           this.setState({
             selectedUserSeatTypes: t
           });
-          this.setStep(X1.SeatSelect);
+          this.setStep(OnboardingStepEnum.SeatSelect);
           break;
-        case X1.SeatSelect:
-          this.setStep(X1.Payment);
+        case OnboardingStepEnum.SeatSelect:
+          this.setStep(OnboardingStepEnum.Payment);
           break;
-        case X1.Payment:
+        case OnboardingStepEnum.Payment:
           this.onSubmitPaymentAndAddress();
           break;
-        case X1.Review:
+        case OnboardingStepEnum.Review:
           this.onSubmitPurchaseOrder();
           break;
-        case X1.Confirmation:
+        case OnboardingStepEnum.Confirmation:
           break;
         default:
           throwError(e);
@@ -445,18 +445,18 @@ export class $$eM2 extends Component {
     this.getNextButtonText = () => {
       let e = this.effectiveStep();
       switch (e) {
-        case X1.CreateTeam:
-        case X1.PseudoCreateTeam:
-        case X1.AddCollaborators:
+        case OnboardingStepEnum.CreateTeam:
+        case OnboardingStepEnum.PseudoCreateTeam:
+        case OnboardingStepEnum.AddCollaborators:
           return getI18nString("org_self_serve.create_team_step.next_select_team");
-        case X1.TeamSelect:
+        case OnboardingStepEnum.TeamSelect:
           return getI18nString("checkout.org_self_serve.next_select_seats");
-        case X1.SeatSelect:
+        case OnboardingStepEnum.SeatSelect:
           return getI18nString("org_self_serve.payment_step.next_payment");
-        case X1.Payment:
+        case OnboardingStepEnum.Payment:
           return getI18nString("org_self_serve.review_step.next_review");
-        case X1.Review:
-        case X1.Confirmation:
+        case OnboardingStepEnum.Review:
+        case OnboardingStepEnum.Confirmation:
           return "";
         default:
           throwError(e);
@@ -465,17 +465,17 @@ export class $$eM2 extends Component {
     this.getIsNextButtonDisabled = () => {
       let e = this.effectiveStep();
       switch (e) {
-        case X1.CreateTeam:
-        case X1.PseudoCreateTeam:
+        case OnboardingStepEnum.CreateTeam:
+        case OnboardingStepEnum.PseudoCreateTeam:
           return !this.state.newTeamName;
-        case X1.TeamSelect:
+        case OnboardingStepEnum.TeamSelect:
           return this.state.loading;
-        case X1.Payment:
+        case OnboardingStepEnum.Payment:
           return this.state.apiPending || !this.state.orgDetails.legalOrgName;
-        case X1.Review:
-        case X1.Confirmation:
-        case X1.AddCollaborators:
-        case X1.SeatSelect:
+        case OnboardingStepEnum.Review:
+        case OnboardingStepEnum.Confirmation:
+        case OnboardingStepEnum.AddCollaborators:
+        case OnboardingStepEnum.SeatSelect:
           return !1;
         default:
           throwError(e);
@@ -594,11 +594,11 @@ export class $$eM2 extends Component {
       });
     };
     this.renderPurchaseSummary = () => {
-      let e = this.effectiveStep() === X1.TeamSelect ? null : O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts);
+      let e = this.effectiveStep() === OnboardingStepEnum.TeamSelect ? null : O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts);
       return jsx(_$$z, {
         billingInterval: BillingCycle.YEAR,
         buttonText: this.getNextButtonText(),
-        canEnforcePaidSeatMinimum: this.effectiveStep() === X1.SeatSelect,
+        canEnforcePaidSeatMinimum: this.effectiveStep() === OnboardingStepEnum.SeatSelect,
         countByBillableProductKey: e,
         currency: this.state.currency,
         footer: jsxs("div", {
@@ -836,7 +836,7 @@ export class $$eM2 extends Component {
           stripeCustomerId: e.meta.stripe_customer_id,
           taxRate: e.meta.tax_percent,
           apiPending: !1
-        }), () => this.setStep(X1.Review));
+        }), () => this.setStep(OnboardingStepEnum.Review));
       });
       {
         let e = t.error?.message || getI18nString("org_self_serve.payment_step.there_was_an_error_processing_your_payment_please_try_again");
@@ -891,7 +891,7 @@ export class $$eM2 extends Component {
     }), Promise.reject())).then(e => {
       this.setState({
         apiPending: !1
-      }, () => this.setStep(X1.Confirmation));
+      }, () => this.setStep(OnboardingStepEnum.Confirmation));
       this.state.inviteEmails.length && e.data.meta.new_team && this.props.dispatch(rq({
         emails: this.state.inviteEmails,
         resourceType: FResourceCategoryType.TEAM,
@@ -918,7 +918,7 @@ export class $$eM2 extends Component {
       img_url: e.img_url,
       numMembers: e.eligibleUsers.size
     }));
-    if (t === X1.Review) {
+    if (t === OnboardingStepEnum.Review) {
       let t = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || {};
       e = jsx(_$$j, {
         billingAddress: this.state.payment.address,
@@ -928,7 +928,7 @@ export class $$eM2 extends Component {
         displayName: this.state.orgDetails.orgName || this.state.orgDetails.legalOrgName,
         isRequestPending: this.state.apiPending,
         legalName: this.state.orgDetails.legalOrgName,
-        navigateToEditDetails: () => this.setStep(X1.Payment),
+        navigateToEditDetails: () => this.setStep(OnboardingStepEnum.Payment),
         onSubmit: this.onSubmit,
         onSubmitTrackingProperties: {
           selectedTeamIds: gu(Array.from(this.state.selectedTeamIds)),
@@ -946,7 +946,7 @@ export class $$eM2 extends Component {
         title: getI18nString("checkout.upgrade_to_an_organization_plan"),
         userEmail: this.state.orgDetails.actorEmail
       });
-    } else e = t === X1.Confirmation ? jsx(_$$_2, {
+    } else e = t === OnboardingStepEnum.Confirmation ? jsx(_$$_2, {
       totalCents: this.getTotal(),
       orgMigrated: this.props.orgMigrated,
       onFileBrowserClick: this.onFileBrowserClick,
@@ -959,11 +959,11 @@ export class $$eM2 extends Component {
       }), isAllowedDomain(this.props.user.email) && jsx(VE, {
         onFileBrowserClick: this.onFileBrowserClick
       }), jsxs("div", {
-        style: _$$sx.$$if(t === X1.CreateTeam, _$$sx.flex.justifyCenter, _$$sx.grid.add({
+        style: styleBuilderInstance.$$if(t === OnboardingStepEnum.CreateTeam, styleBuilderInstance.flex.justifyCenter, styleBuilderInstance.grid.add({
           gridTemplateColumns: "1fr 280px",
           gap: "48px"
         })).$,
-        children: [t === X1.CreateTeam && jsx("div", {
+        children: [t === OnboardingStepEnum.CreateTeam && jsx("div", {
           className: Bb,
           children: jsx(_$$y, {
             type: _$$I.ORG,
@@ -971,12 +971,12 @@ export class $$eM2 extends Component {
             setTeamName: this.onChangeNewTeamName,
             onNext: this.onSubmit
           })
-        }), t === X1.TeamSelect && (this.state.loading ? jsx(_$$f, {}) : jsx(eN, {
+        }), t === OnboardingStepEnum.TeamSelect && (this.state.loading ? jsx(_$$f, {}) : jsx(eN, {
           teams: a,
           selectedTeamIds: this.state.selectedTeamIds,
           onToggle: this.onTeamToggle,
           newTeamName: this.state.newTeamName
-        })), t === X1.SeatSelect && (this.state.loading ? jsx(_$$f, {}) : jsx(ek, {
+        })), t === OnboardingStepEnum.SeatSelect && (this.state.loading ? jsx(_$$f, {}) : jsx(ek, {
           users: function ({
             eligibleUsersByUserId: e,
             eligibleTeamsByTeamId: t,
@@ -1014,7 +1014,7 @@ export class $$eM2 extends Component {
             });
           },
           onChangeAdditionalSeats: this.updateAdditionalEmptySeats
-        })), t === X1.Payment && jsxs("form", {
+        })), t === OnboardingStepEnum.Payment && jsxs("form", {
           "data-testid": "org-payment-and-details-step",
           children: [jsx(eC, {
             orgDetails: this.state.orgDetails,
@@ -1051,7 +1051,7 @@ export class $$eM2 extends Component {
               })]
             })
           })]
-        }), t !== X1.CreateTeam && this.renderPurchaseSummary()]
+        }), t !== OnboardingStepEnum.CreateTeam && this.renderPurchaseSummary()]
       })]
     });
     return jsxs(TrackingProvider, {
@@ -1066,7 +1066,7 @@ export class $$eM2 extends Component {
       },
       enabled: !this.state.loading,
       trackingOptions: getRumLoggingConfig(),
-      children: [t !== X1.Confirmation && jsx("div", {
+      children: [t !== OnboardingStepEnum.Confirmation && jsx("div", {
         className: _$$s.sticky.top0.zIndexTopBar.selectNone.$,
         children: jsx(U, {
           currentStep: this.props.step,
@@ -1087,7 +1087,7 @@ export class $$eM2 extends Component {
         })
       }), jsxs("div", {
         className: _$$s.selectNone.$,
-        style: _$$sx.mxAuto.add({
+        style: styleBuilderInstance.mxAuto.add({
           padding: "48px",
           maxWidth: "1400px"
         }).$,
@@ -1127,10 +1127,10 @@ export function $$eR1(e) {
   let [c] = handleSuspenseRetainRelease(o);
   if ("loaded" !== c.status) return jsx(_$$K, {});
   let u = c.data;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     team: _$$e.MONETIZATION_UPGRADES,
     boundaryKey: "OrgSelfServeBillingRemodelPage",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: y4,
     children: jsx($$eM2, {
       ...e,
@@ -1148,13 +1148,13 @@ export function $$eO0({
 }) {
   let t = function (e) {
     switch (e) {
-      case X1.TeamSelect:
+      case OnboardingStepEnum.TeamSelect:
         return getI18nString("checkout.org_self_serve.select_teams_title");
-      case X1.SeatSelect:
+      case OnboardingStepEnum.SeatSelect:
         return getI18nString("checkout.org_self_serve.select_seats_header");
-      case X1.Payment:
+      case OnboardingStepEnum.Payment:
         return getI18nString("checkout.enter_your_payment_details");
-      case X1.Review:
+      case OnboardingStepEnum.Review:
         return getI18nString("checkout.everything_look_good");
       default:
         return null;
@@ -1171,13 +1171,13 @@ export function $$eO0({
       children: renderI18nText("checkout.learn_more_about_seats")
     });
     switch (e) {
-      case X1.TeamSelect:
+      case OnboardingStepEnum.TeamSelect:
         return getI18nString("checkout.org_self_serve.select_teams_subtitle");
-      case X1.SeatSelect:
+      case OnboardingStepEnum.SeatSelect:
         return renderI18nText("checkout.select_seats_table.seat_types_have_been_suggested", {
           learnMoreAboutSeatsLink: t
         });
-      case X1.Review:
+      case OnboardingStepEnum.Review:
         return getI18nString("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set");
       default:
         return null;

@@ -12,7 +12,7 @@ import { postUserFlag } from "../905/985254";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { X } from "../905/482718";
 import { Q } from "../905/11928";
 function y(e) {
@@ -148,8 +148,8 @@ export function $$j0(e) {
               state: n,
               editorType: FFileType.WHITEBOARD,
               team: void 0,
-              from: f6.FIGJAM_WHATS_NEW_MODAL,
-              openNewFileIn: ai.NEW_TAB
+              from: FileBrowserLocation.FIGJAM_WHATS_NEW_MODAL,
+              openNewFileIn: TabOpenBehavior.NEW_TAB
             }));
           },
           children: renderI18nText("rcs.whats_new_in_figjam.try_fig_jam")

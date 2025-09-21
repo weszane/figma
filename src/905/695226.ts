@@ -1,7 +1,7 @@
-import { useRef } from 'react'
-import { SI } from '../905/705398'
-import { setSelectionToEnd, setSelectionToStart } from '../905/914656'
-import { compareElementPosition } from '../905/987614'
+import { useRef } from 'react';
+import { findFirstTextInput } from '../905/705398';
+import { setSelectionToEnd, setSelectionToStart } from '../905/914656';
+import { compareElementPosition } from '../905/987614';
 
 /**
  * Handles pointer events for faux focus and selection logic.
@@ -10,7 +10,7 @@ import { compareElementPosition } from '../905/987614'
  * @returns Pointer event handler function.
  */
 export function setupFauxFocusHandler(handler?: (event: React.PointerEvent) => void) {
-  const lastSelectTimeRef = useRef(0)
+  const lastSelectTimeRef = useRef(0);
 
   /**
    * Pointer event handler for faux focus and selection.
@@ -18,47 +18,33 @@ export function setupFauxFocusHandler(handler?: (event: React.PointerEvent) => v
    * @param event PointerEvent
    */
   const handlePointerEvent = (event: React.PointerEvent) => {
-    handler?.(event)
-
-    if (event.pointerType !== 'mouse')
-      return
-
-    const target = event.target as Element
-    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)
-      return
-
-    const currentTarget = SI(event.currentTarget)
-    if (!currentTarget)
-      return
-
-    currentTarget.focus()
-    if (target instanceof HTMLButtonElement)
-      return
-
-    currentTarget.setPointerCapture(event.pointerId)
-    currentTarget.setAttribute('data-faux-focus', '')
-
+    handler?.(event);
+    if (event.pointerType !== 'mouse') return;
+    const target = event.target as Element;
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) return;
+    const currentTarget = findFirstTextInput(event.currentTarget);
+    if (!currentTarget) return;
+    currentTarget.focus();
+    if (target instanceof HTMLButtonElement) return;
+    currentTarget.setPointerCapture(event.pointerId);
+    currentTarget.setAttribute('data-faux-focus', '');
     setTimeout(() => {
-      currentTarget.focus()
-      currentTarget.removeAttribute('data-faux-focus')
-    })
-
+      currentTarget.focus();
+      currentTarget.removeAttribute('data-faux-focus');
+    });
     if (compareElementPosition(target, currentTarget) < 0) {
-      setSelectionToStart(currentTarget)
+      setSelectionToStart(currentTarget);
+    } else {
+      setSelectionToEnd(currentTarget);
     }
-    else {
-      setSelectionToEnd(currentTarget)
-    }
-
-    const now = Date.now()
+    const now = Date.now();
     if (now - lastSelectTimeRef.current < 500) {
-      currentTarget.select()
+      currentTarget.select();
     }
-    lastSelectTimeRef.current = now
-  }
-
-  return handlePointerEvent
+    lastSelectTimeRef.current = now;
+  };
+  return handlePointerEvent;
 }
 
 // Refactored export name for clarity and consistency
-export const o = setupFauxFocusHandler
+export const o = setupFauxFocusHandler;

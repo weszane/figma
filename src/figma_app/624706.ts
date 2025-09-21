@@ -58,7 +58,7 @@ import { aG } from "../figma_app/728657";
 import { H as _$$H } from "../905/75186";
 import { Lm } from "../905/71";
 import { A5, ci } from "../figma_app/274104";
-import { F2 } from "../905/826900";
+import { KeyboardFocusManager } from "../905/826900";
 import { kA, IO } from "../905/962318";
 import { H as _$$H2 } from "../figma_app/731109";
 import { E as _$$E2 } from "../905/453826";
@@ -90,7 +90,7 @@ import { UpsellModalType } from "../905/165519";
 import { SubscriptionType } from "../figma_app/831101";
 import { hK } from "../5132/334833";
 import { CloseButton } from "../905/17223";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout, Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { NJ } from "../figma_app/419216";
@@ -629,12 +629,12 @@ function te({
           className: _$$s.w300.h150.colorBgSecondary.$
         }),
         children: jsx("img", {
-          style: _$$sx.colorBorder.b1.colorBorder.bl0.br0.$,
+          style: styleBuilderInstance.colorBorder.b1.colorBorder.bl0.br0.$,
           src: o,
           alt: "professional features animation"
         })
       }), jsx("div", {
-        style: _$$sx.p16.pb0.$,
+        style: styleBuilderInstance.p16.pb0.$,
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           children: t
@@ -3361,7 +3361,7 @@ let t7 = class e extends RecordingPureComponent {
             options: this.renderDropdownOptions()
           })
         }), !!this.props.fileKey && jsx("div", {
-          onFocus: F2.focusCustomCanvasFocusElement,
+          onFocus: KeyboardFocusManager.focusCustomCanvasFocusElement,
           tabIndex: 0
         })]
       }), $() && jsx(q, {

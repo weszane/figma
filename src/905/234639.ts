@@ -5,14 +5,14 @@ import { Sb } from "../905/359847";
 import { c_ } from "../905/497882";
 import { V } from "../905/513628";
 import { Z } from "../905/909123";
-import { aP } from "../figma_app/530167";
+import { updateProfileThunk } from "../figma_app/530167";
 import { Ri } from "../figma_app/49598";
 import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
 import { trimOrEmpty } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { liveStoreInstance } from "../905/713695";
 import { ProductStatus } from "../905/54385";
-import { H } from "../905/473998";
+import { hubFileAPI } from "../905/473998";
 var a = r;
 export async function $$y2({
   carouselMedia: e,
@@ -120,7 +120,7 @@ export async function $$E1(e) {
           profile_created
         }
       }
-    } = await H.publishHubFile(d);
+    } = await hubFileAPI.publishHubFile(d);
     return {
       hubFile: hub_file,
       actingProfile: acting_profile,
@@ -140,7 +140,7 @@ export async function $$x6(e) {
       data: {
         meta
       }
-    } = await H.updateHubFile(existingHubFile.id, t);
+    } = await hubFileAPI.updateHubFile(existingHubFile.id, t);
     return {
       hubFile: meta
     };
@@ -165,7 +165,7 @@ export async function $$S3({
     ...i,
     profile_created: n
   })), await new Promise(e => {
-    debugState.dispatch(aP({
+    debugState.dispatch(updateProfileThunk({
       profileHandle: c_(r).currentValue,
       profileId: i.id,
       onSuccess: e
@@ -185,7 +185,7 @@ export async function $$w4(e) {
           third_party_m10n_status
         }
       }
-    } = await H.getStatuses({
+    } = await hubFileAPI.getStatuses({
       id: e
     });
     if (third_party_m10n_status !== ProductStatus.PENDING_AUTO_VALIDATION) return publishing_status;

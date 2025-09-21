@@ -1,7 +1,7 @@
 import { includesEqual } from "../905/382883";
 import { atom } from "../figma_app/27355";
-import { qM, S2, sd, hp } from "../905/171315";
-import { Q8, BA } from "../905/61477";
+import { getFacetTypeLabel, getResourceTypeLabel, hasFacetType, MAX_TRUNCATE_LENGTH } from "../905/171315";
+import { searchInputAtom, isSearchViewAtom } from "../905/61477";
 import { nv } from "../905/182534";
 import { CreatorResourceType, TeamSpaceType, FolderType } from "../figma_app/162807";
 import { L8, zD, _4, J, P_, q$ } from "../905/124270";
@@ -13,12 +13,12 @@ let $$p3 = atom(e => e(u), (e, t, i) => {
 let $$m0 = atom(e => {
   let t = e(L8);
   let i = e(zD);
-  let n = e(Q8);
-  let r = e(BA);
+  let n = e(searchInputAtom);
+  let r = e(isSearchViewAtom);
   let o = $$_2(t, i);
   if (n.length < 2 || 0 === o.length || r) return null;
   for (let e of o) {
-    let t = y(qM(e) + ":");
+    let t = y(getFacetTypeLabel(e) + ":");
     let i = y(n, !0).lastIndexOf(t);
     if (i >= 0) return {
       suggestionType: "TYPE",
@@ -42,7 +42,7 @@ let h = atom(e => {
   let i = t.valueToQuery;
   if (t.facetType === CreatorResourceType.RESOURCE) {
     let n = e(_4);
-    let r = n.map(S2);
+    let r = n.map(getResourceTypeLabel);
     let s = [];
     return (n.forEach((e, t) => {
       A(i, r[t]) && s.push(e);
@@ -120,15 +120,15 @@ let $$g1 = atom(e => {
 let $$f5 = atom(null);
 export function $$_2(e, t) {
   let i = new Set(t);
-  sd(CreatorResourceType.RESOURCE, e) && i.$$delete(CreatorResourceType.RESOURCE);
+  hasFacetType(CreatorResourceType.RESOURCE, e) && i.$$delete(CreatorResourceType.RESOURCE);
   let n = 0;
   let r = 0;
   for (let t of e) {
     t.type === CreatorResourceType.CREATOR && n++;
     t.type === CreatorResourceType.SPACE && r++;
   }
-  n >= hp && i.$$delete(CreatorResourceType.CREATOR);
-  r >= hp && i.$$delete(CreatorResourceType.SPACE);
+  n >= MAX_TRUNCATE_LENGTH && i.$$delete(CreatorResourceType.CREATOR);
+  r >= MAX_TRUNCATE_LENGTH && i.$$delete(CreatorResourceType.SPACE);
   return Array.from(i);
 }
 let A = (e, t) => y(t).startsWith(y(e));

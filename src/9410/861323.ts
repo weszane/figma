@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { fC } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
@@ -282,7 +282,7 @@ function z() {
 export let $$V0 = memo(function ({
   toolbarIconScale: e
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     fallback: jsx(z, {}),
     boundaryKey: "UniversalInsertCollage",
     children: jsx(H, {

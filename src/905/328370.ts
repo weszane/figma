@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { eE } from "../figma_app/336853";
+import { isEmailAllowed } from "../figma_app/336853";
 class l extends PureComponent {
   render() {
-    let e = this.props.org && this.props.email && eE(this.props.orgDomains, this.props.email);
+    let e = this.props.org && this.props.email && isEmailAllowed(this.props.orgDomains, this.props.email);
     let t = this.props.pending ? this.props.displayString + " " + getI18nString("role_row.invite_sent") : this.props.displayString;
     return e ? jsx("div", {
       className: this.props.className,

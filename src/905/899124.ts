@@ -22,7 +22,7 @@ import { mE } from "../905/561087";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FUserRoleType, FPlanRestrictionType } from "../figma_app/191312";
 import { AccessibleFoldersV2 } from "../figma_app/43951";
-import { kA } from "../figma_app/336853";
+import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { hasTeamStatePaidAccess, isTeamLocked } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
@@ -206,7 +206,7 @@ export let $$en0 = registerModal(function (e) {
       orgPermission: t,
       isEnterprise: i = !1
     }) => t === FUserRoleType.GUEST ? "Guest" : e && i ? "Enterprise" : "Org";
-    let i = e => !!e && kA(eu.orgById[e]);
+    let i = e => !!e && isBigmaEnabledSimple(eu.orgById[e]);
     let n = (ep.data?.currentUser?.teamRoles?.map(e => e.team).filter(e => !!e) ?? []).filter(e => e && !e.deletedAt).sort((e, t) => e.name.localeCompare(t.name)).map(t => ({
       name: t?.name ?? "",
       folderId: t?.currentTeamUser?.draftsFolderId,

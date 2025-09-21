@@ -103,7 +103,7 @@ import { postUserFlag } from "../905/985254";
 import { isDevHandoffEditorType, isDesignFileType } from "../figma_app/976749";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { B as _$$B2 } from "../figma_app/539422";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -3316,7 +3316,7 @@ function n5({
       })]
     })]
   });
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     name: "create-annotation",
     focusOnMount: !0,
     handleKeyDown: e => {

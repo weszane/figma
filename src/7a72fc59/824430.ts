@@ -185,7 +185,7 @@ import { E as _$$E7 } from '../905/730894';
 import { Point } from '../905/736624';
 import { E as _$$E3 } from '../905/737393';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { H as _$$H2, i as _$$i3 } from '../905/777871';
 import { I as _$$I3 } from '../905/783004';
 import { cq as _$$cq } from '../905/794154';
@@ -193,7 +193,7 @@ import { n as _$$n6 } from '../905/796896';
 import { K as _$$K5 } from '../905/799615';
 import { f as _$$f } from '../905/809171';
 import { z as _$$z6 } from '../905/821223';
-import { vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { Spacer, AutoLayout } from '../905/470281';
 import { q as _$$q } from '../905/838985';
 import { useCurrentUserOrgId, useCurrentUserOrg } from '../905/845253';
@@ -314,7 +314,7 @@ import { A as _$$A15 } from '../af221b13/388839';
 import { K as _$$K6 } from '../b2835def/230877';
 import u_ from '../b2835def/987714';
 import { s as _$$s } from '../cssbuilder/589278';
-import { n as _$$n2 } from '../figma_app/3731';
+import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
 import { a8 as _$$a, Dm } from '../figma_app/8833';
 import { EI as _$$EI } from '../figma_app/21029';
@@ -440,7 +440,7 @@ import { R as _$$R2 } from '../figma_app/652260';
 import { _ as _$$_4 } from '../figma_app/658134';
 import { X as _$$X } from '../figma_app/668312';
 import { Zr } from '../figma_app/678782';
-import { VF } from '../figma_app/679183';
+import { useCachedSubtree } from '../figma_app/679183';
 import { rp as _$$rp } from '../figma_app/703988';
 import { wY } from '../figma_app/708845';
 import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useAppModelProperty, useOnSelectionChange, useSceneGraphSelection } from '../figma_app/722362';
@@ -473,7 +473,7 @@ import { j as _$$j, k as _$$k2 } from '../figma_app/904944';
 import { mY } from '../figma_app/915281';
 import { utilityNoop } from '../figma_app/918700';
 import { kx } from '../figma_app/920333';
-import { Dy, ky } from '../figma_app/925970';
+import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { capitalize } from '../figma_app/930338';
 import { AV, Gb, Oe } from '../figma_app/933328';
 import { _Y as _$$_Y } from '../figma_app/936646';
@@ -1286,18 +1286,18 @@ function td({
   let r = g5('import_from_design_search_bar');
   let i = Xr(Lm);
   let d = useCallback(e => {
-    e === '' && n ? l(ky()) : e === '' || n || l(Dy({
+    e === '' && n ? l(searchEndSession()) : e === '' || n || l(searchStartSession({
       entryPoint: ts
     }));
     t(e);
   }, [n, l, t]);
   let c = () => {
     r();
-    n && l(ky());
+    n && l(searchEndSession());
     t('');
   };
   let u = useCallback(() => {
-    e === '' || n || l(Dy({
+    e === '' || n || l(searchStartSession({
       entryPoint: ts
     }));
   }, [n, e, l]);
@@ -1307,7 +1307,7 @@ function td({
       className: _$$t3,
       clearSearch: () => {
         t('');
-        n && l(ky());
+        n && l(searchEndSession());
       },
       customClearSearchIcon: jsx(_$$C, {
         style: {
@@ -1346,13 +1346,13 @@ function tx({
   let c = g5('search_bar');
   let u = i === Gu.NEW_FILE_MODAL;
   let x = useCallback(e => {
-    e === '' && l ? r(ky()) : e === '' || l || r(Dy({
+    e === '' && l ? r(searchEndSession()) : e === '' || l || r(searchStartSession({
       entryPoint: tu
     }));
     t(e);
   }, [l, r, t]);
   let m = useCallback(() => {
-    e === '' || l || r(Dy({
+    e === '' || l || r(searchStartSession({
       entryPoint: tu
     }));
   }, [l, e, r]);
@@ -1361,13 +1361,13 @@ function tx({
     searchQuery: e,
     clearSearch: () => {
       t('');
-      l && r(ky());
+      l && r(searchEndSession());
     },
     placeholder: n ?? getI18nString('cooper.templates.search'),
     onChange: x,
     onClose: () => {
       u ? c() : d(!1);
-      l && r(ky());
+      l && r(searchEndSession());
       t('');
     },
     onFocus: m
@@ -1880,7 +1880,7 @@ function t9() {
   let e = useCurrentUserOrg();
   return e ? jsx('div', {
     className: 'x1057jvv',
-    children: jsx(_$$n2, {
+    children: jsx(renderAvatar, {
       userId: e.id,
       orgId: e.id,
       teamId: null
@@ -2654,7 +2654,7 @@ function nX({
     E = E.filter(e => e.components.length > 0);
   }
   let v = useCallback(() => {
-    j && y.length === 0 && r(ky());
+    j && y.length === 0 && r(searchEndSession());
     n(t.type === mF.TEMPLATES ? t.parentView : {
       type: mF.ALL
     });
@@ -3710,7 +3710,7 @@ function lN({
   let t = useCurrentPrivilegedPlan('CurrentWorkspaceIcon');
   let n = useCurrentPlanUser('CurrentWorkspaceIcon').unwrapOr(null);
   let l = n?.userId;
-  return l ? jsx(_$$n2, {
+  return l ? jsx(renderAvatar, {
     size: e,
     userId: l,
     teamId: t.data?.key.type === 'team' ? t.data.key.parentId : void 0,
@@ -9909,17 +9909,17 @@ function dX({
     name: _$$$2.FocusedEditingMenu,
     children: jsx(ro, {
       leftItems: jsxs(Fragment, {
-        children: [jsx(dv, {}), getFeatureFlags().buzz_video_export && jsx(VF, {
+        children: [jsx(dv, {}), getFeatureFlags().buzz_video_export && jsx(useCachedSubtree, {
           isVisible: l,
           children: () => jsx(d$, {
             nodeIds: n
           })
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.FILL_ITEM] && !!t,
           children: () => jsx(de, {
             singleImagePaint: t
           })
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.INSTANCE_ITEM],
           children: () => jsx(dI, {})
         })]
@@ -9952,38 +9952,38 @@ function dY({
     name: _$$$2.FreeformEditingMenu,
     children: jsx(ro, {
       leftItems: jsxs(Fragment, {
-        children: [jsx(VF, {
+        children: [jsx(useCachedSubtree, {
           isVisible: onlyCooperFrames,
           children: () => jsx(_$$_3, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.TYPE_ITEM],
           children: () => jsx(aS, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.INSTANCE_ITEM],
           children: () => jsx(dI, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.FILL_ITEM],
           children: () => jsx(s4, {})
-        }), getFeatureFlags().buzz_video_export && jsx(VF, {
+        }), getFeatureFlags().buzz_video_export && jsx(useCachedSubtree, {
           isVisible: l,
           children: () => jsx(d$, {
             nodeIds: n
           })
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.STROKE_ITEM],
           children: () => jsx(dM, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: s,
           children: () => jsx(de, {
             singleImagePaint: t
           })
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: a,
           children: () => jsx(rP, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: e[ItemType.TYPE_ITEM],
           children: () => jsx(ay, {})
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: !anyCooperFrames,
           children: () => jsx(dq, {})
         })]
@@ -11534,7 +11534,7 @@ function uH({
     children: [t && jsx(uX, {}), jsx('div', {
       ..._$$xk(uY.iframeContainer, n && uY.iframeContainerVisible),
       'data-testid': 'cooperPluginPanelContainer',
-      'children': jsx(VF, {
+      'children': jsx(useCachedSubtree, {
         isVisible: !0,
         children: () => jsx(_$$jv, {
           iframeId: _$$Wh.BUZZ_LEFT_PANEL,
@@ -12650,17 +12650,17 @@ function xK({
   let n = useSelector(e => e.search.sessionId);
   let l = useDispatch();
   let r = useCallback(e => {
-    e === '' && n ? l(ky()) : e === '' || n || l(Dy({
+    e === '' && n ? l(searchEndSession()) : e === '' || n || l(searchStartSession({
       entryPoint: xU
     }));
     t(e);
   }, [n, l, t]);
   let i = useCallback(() => {
     t('');
-    n && l(ky());
+    n && l(searchEndSession());
   }, [t, n, l]);
   let d = useCallback(() => {
-    e === '' || n || l(Dy({
+    e === '' || n || l(searchStartSession({
       entryPoint: xU
     }));
   }, [n, e, l]);
@@ -13259,7 +13259,7 @@ function x4() {
       'children': [!i && !c && jsx('div', {
         className: 'xz9dl7a',
         children: jsx(_$$d5, {})
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: !i,
         children: () => jsxs('div', {
           className: 'x1n2onr6 x1iyjqo2 x78zum5 xdt5ytf x6ikm8r x10wlt62',
@@ -13346,39 +13346,39 @@ function x6({
   positionerRef: t
 }) {
   return jsxs(Fragment, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.FIELDS,
       children: () => jsx(xo, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.FIND,
       children: () => jsx(xs, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.BULK_CREATE,
       children: () => jsx(uF, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.SHAPES,
       children: () => jsx(cJ, {
         positionerRef: t
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.INSERTS,
       children: () => getFeatureFlags().buzz_plugins ? jsx(cH, {
         positionerRef: t
       }) : jsx(cL, {
         positionerRef: t
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.TEXT,
       children: () => jsx(c1, {
         positionerRef: t
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.MEDIA,
       children: () => jsx(xW, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.TEMPLATES,
       children: () => jsx(x2, {})
-    }), getFeatureFlags().buzz_plugins && jsx(VF, {
+    }), getFeatureFlags().buzz_plugins && jsx(useCachedSubtree, {
       isVisible: e === AssetCategoryEnum.PLUGINS,
       children: () => jsx(uH, {
         panelWidth: bQ
@@ -14126,7 +14126,7 @@ function pH({
     onPaintChange: n,
     onCustomColorClick: l
   }) : g ? jsxs(Fragment, {
-    children: [jsx(vL, {
+    children: [jsx(KeyboardReceiver, {
       name: 'Cooper gradient picker',
       ref: c,
       handleKeyDown: e => {
@@ -14535,9 +14535,9 @@ let mI = memo(({
         }
       });
     });
-  }, [d, c, l, x, s, m]), l !== _$$u.HIDDEN && l !== _$$u.SHOWN) ? null : jsx(_$$tH, {
+  }, [d, c, l, x, s, m]), l !== _$$u.HIDDEN && l !== _$$u.SHOWN) ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: 'BuzzInlinePreview',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
       s({
         type: 'HANDLE_PREVIEW_CRASHED'
@@ -14662,7 +14662,7 @@ let mw = memo(({
         openFile: b
       }), jsx(_$$l4, {
         centeredInPanels: !0
-      }), y.showing && jsx(_$$tH, {
+      }), y.showing && jsx(ErrorBoundaryCrash, {
         boundaryKey: 'CooperBrowseAllResourcesModal',
         onError: () => {
           E(VisualBellActions.enqueue({
@@ -14670,7 +14670,7 @@ let mw = memo(({
             type: 'react-error'
           }));
         },
-        fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+        fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(_$$K7, {})
       })]
     }), g && jsx(_$$K6, {

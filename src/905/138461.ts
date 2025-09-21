@@ -1,37 +1,76 @@
-export let $$n2 = !!navigator.locks;
-export function $$r1(e) {
-  return navigator.locks ? new Promise((t, i) => {
-    let n = navigator.locks.request(e, {
-      ifAvailable: !0
-    }, async i => {
-      if (!i) {
-        t(null);
-        return;
+// Original code names: $$n2, $$r1, $$a0, Ph, ly, yp
+
+/**
+ * Interface for a lock object returned by requestLock.
+ */
+interface Lock {
+  name: string
+  release: () => Promise<void>
+}
+
+/**
+ * Checks if the Web Locks API is supported.
+ * Original: $$n2
+ */
+export const isLocksSupported: boolean = !!navigator.locks
+
+/**
+ * Requests a lock with the given name, returning a lock object if acquired, or null if not available.
+ * If the Web Locks API is not supported, returns a mock lock object with a no-op release.
+ * Original: $$r1
+ * @param lockName - The name of the lock to request.
+ * @returns A promise resolving to a Lock object or null.
+ */
+export async function requestLock(lockName: string): Promise<Lock | null> {
+  if (!navigator.locks) {
+    return { name: lockName, release: async () => {} }
+  }
+
+  return new Promise<Lock | null>((resolve) => {
+    navigator.locks.request(lockName, { ifAvailable: true }, async (lock) => {
+      if (!lock) {
+        resolve(null)
+        return
       }
-      await new Promise((i, r) => {
-        t({
-          name: e,
-          release: async () => {
-            i();
-            await n;
-          }
-        });
-      });
-    }).catch(e => {
+
+      // Create a promise that resolves when the lock is released
+      let resolveRelease: () => void
+      const releasePromise = new Promise<void>((resolveRel) => {
+        resolveRelease = resolveRel
+      })
+
+      const lockObject: Lock = {
+        name: lockName,
+        release: async () => {
+          resolveRelease()
+        },
+      }
+
+      resolve(lockObject)
+      return releasePromise
+    }).catch((error) => {
+      // Delay throwing the error to avoid unhandled promise rejection
       setTimeout(() => {
-        throw e;
-      });
-    });
-  }) : Promise.resolve({
-    name: e,
-    release: async () => { }
-  });
+        throw error
+      })
+    })
+  })
 }
-export async function $$a0(e) {
-  return navigator.locks ? await navigator.locks.request(e, {
-    ifAvailable: !0
-  }, e => !!e) : Promise.resolve(!0);
+
+/**
+ * Checks if a lock with the given name is available.
+ * Original: $$a0
+ * @param lockName - The name of the lock to check.
+ * @returns A promise resolving to true if the lock is available, false otherwise.
+ */
+export async function isLockAvailable(lockName: string): Promise<boolean> {
+  if (!navigator.locks) {
+    return true
+  }
+  return navigator.locks.request(lockName, { ifAvailable: true }, lock => !!lock)
 }
-export const Ph = $$a0;
-export const ly = $$r1;
-export const yp = $$n2; 
+
+// Refactored exports to match new function names
+export const Ph = isLockAvailable
+export const ly = requestLock
+export const yp = isLocksSupported

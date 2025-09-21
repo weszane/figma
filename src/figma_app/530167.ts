@@ -8,9 +8,9 @@ import { NEW_COMMENT_ID } from '../905/380385'
 import { trackEventAnalytics } from '../905/449184'
 import { FlashActions } from '../905/573154'
 import { getFeatureFlags } from '../905/601108'
-import { s as _$$s2 } from '../905/608932'
+import { profileServiceAPI } from '../905/608932'
 import { setupLoadingStateHandler } from '../905/696711'
-import { yr } from '../905/827765'
+import { uploadRequest } from '../905/827765'
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, patchOrgs, putCommunityProfile, setCommunityAuthedActiveProfile } from '../905/890368'
 import { XHR } from '../905/910117'
 import { selectViewAction } from '../905/929976'
@@ -22,17 +22,26 @@ import { Co, HD } from '../figma_app/471982'
 import { persistCommunityProfileId } from '../figma_app/502247'
 import { getDefaultBrowseOptions } from '../figma_app/640564'
 import { DEFAULT_PAGE_SIZE, fetchPaginatedData, hasMorePages, PAGINATION_NEXT } from '../figma_app/661371'
-import { kE } from '../figma_app/703138'
+import { commitEditedComment } from '../figma_app/703138'
 import { getHubTypeString, isHandleView, mapCommentsAndAuthors } from '../figma_app/740025'
 import { UU } from '../figma_app/770088'
 import { switchAccountAndNavigate } from '../figma_app/976345'
 
-let $$P2 = createActionCreator('COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER')
-let $$D27 = createActionCreator('COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER')
-let $$k14 = setCommunityAuthedActiveProfile
-let $$M3 = createOptimistThunk((e, t) => {
-  let r
-  let {
+// Original file: /Users/allen/github/fig/src/figma_app/530167.ts
+
+// Action creators for admin profile banner
+export const showAdminProfileBanner = createActionCreator('COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER') // original $$P2
+export const hideAdminProfileBanner = createActionCreator('COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER') // original $$D27
+
+// Alias for imported function
+export const setCommunityAuthedActiveProfileAlias = setCommunityAuthedActiveProfile // original $$k14
+
+/**
+ * Thunk to switch community profile and handle navigation/account switching.
+ * @param {object} params - Parameters including profileId and view.
+ */
+export const switchCommunityProfileThunk = createOptimistThunk(({ dispatch, getState }, params) => { // original $$M3
+  const {
     user,
     authedUsers,
     orgUsersByOrgId,
@@ -41,223 +50,256 @@ let $$M3 = createOptimistThunk((e, t) => {
     authedProfilesById,
     selectedView,
     currentUserOrgId,
-  } = e.getState()
-  let m = t.profileId ? authedProfilesById[t.profileId] : null
-  let f = t.view
-    ? t.view
-    : {
-        view: 'communityHub',
-        subView: 'searchAndBrowse',
-        data: getDefaultBrowseOptions(),
-      }
-  if (!m) {
-    e.dispatch(VisualBellActions.enqueue({
+  } = getState()
+
+  const profile = params.profileId ? authedProfilesById[params.profileId] : null
+  const view = params.view || {
+    view: 'communityHub',
+    subView: 'searchAndBrowse',
+    data: getDefaultBrowseOptions(),
+  }
+
+  if (!profile) {
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString('community.actions.profile_not_found'),
       type: 'COMMUNITY_PROFILE_ERROR',
     }))
-    e.dispatch(selectViewAction(f))
+    dispatch(selectViewAction(view))
     return
   }
-  let E = currentUserOrgId
-  if (m.org_id) {
-    E = m.org_id
-    let e = orgUsersByOrgId[m.org_id]
-    r = Object.keys(authedUsers.byId).find((t) => {
-      let r = e[t]
-      if (r && mapUserRoleToOrgUserRoleAlias(r.permission) >= OrgUserRoleEnum.ADMIN)
-        return r.user_id
+
+  let targetOrgId = currentUserOrgId
+  let adminUserId: string | undefined
+
+  if (profile.org_id) {
+    targetOrgId = profile.org_id
+    const orgUsers = orgUsersByOrgId[profile.org_id]
+    adminUserId = Object.keys(authedUsers.byId).find((userId) => {
+      const userRole = orgUsers[userId]
+      return userRole && mapUserRoleToOrgUserRoleAlias(userRole.permission) >= OrgUserRoleEnum.ADMIN
+    })
+  }
+  else if (profile.team_id) {
+    targetOrgId = authedTeamsById[profile.team_id]?.org_id || null
+    adminUserId = Object.keys(authedUsers.byId).find((userId) => {
+      const roles = teamAdminRolesForAuthedUsers[userId]
+      return roles?.find(role => role.team_id === profile.team_id)?.user_id
     })
   }
   else {
-    m.team_id
-      ? (E = authedTeamsById[m.team_id]?.org_id || null, r = Object.keys(authedUsers.byId).find((e) => {
-          let t = teamAdminRolesForAuthedUsers[e]
-          return t?.find(e => e.team_id === m.team_id)?.user_id
-        }))
-      : r = m.primary_user_id === user?.id ? user?.id : authedUsers.orderedIds.find(e => m.associated_users?.find(t => t.user_id === e)?.user_id)
+    adminUserId = profile.primary_user_id === user?.id ? user?.id : authedUsers.orderedIds.find(id => profile.associated_users?.find(assoc => assoc.user_id === id)?.user_id)
   }
-  if (persistCommunityProfileId(m.id), trackEventAnalytics('Community profile IA switched', {
-    profileId: m.id,
+
+  persistCommunityProfileId(profile.id)
+  trackEventAnalytics('Community profile IA switched', {
+    profileId: profile.id,
     view: selectedView.view,
-  }), e.dispatch($$k14(m)), e.dispatch($$P2()), r && (r !== user?.id || currentUserOrgId !== E)) {
-    let t = {
-      userId: r,
-      orgId: E,
+  })
+
+  dispatch(setCommunityAuthedActiveProfileAlias(profile))
+  dispatch(showAdminProfileBanner())
+
+  if (adminUserId && (adminUserId !== user?.id || currentUserOrgId !== targetOrgId)) {
+    const workspace = {
+      userId: adminUserId,
+      orgId: targetOrgId,
     }
-    e.dispatch(switchAccountAndNavigate({
-      workspace: t,
-      view: f,
+    dispatch(switchAccountAndNavigate({
+      workspace,
+      view,
     }))
   }
   else {
-    e.dispatch(selectViewAction(f))
+    dispatch(selectViewAction(view))
   }
 })
-let $$F6 = createActionCreator('COMMUNITY_HUB_ADD_FOLLOW')
-let $$j7 = createActionCreator('COMMUNITY_HUB_DELETE_FOLLOW')
-let $$U0 = createActionCreator('COMMUNITY_HUB_SAVE_PAGE_STATE')
-let $$B13 = createActionCreator('COMMUNITY_HUB_RESET_COMMENT_STATE')
-let $$G26 = createActionCreator('COMMUNITY_HUB_SET_COMMENTS')
-let $$V9 = createActionCreator('COMMUNITY_HUB_SET_COMMENTS_ACTIVE_FEED_TYPE')
-let $$H22 = createActionCreator('COMMUNITY_HUB_SET_COMMENT_REPLIES')
-let $$z11 = createActionCreator('COMMUNITY_HUB_FLUSH_NEW_COMMENTS_QUEUE')
-let $$W4 = createActionCreator('COMMENTS_INSERT_COMMUNITY_MENTION')
-let K = (e, t) => {
-  let r = /\?/.test(e) ? '&' : '?'
-  return `${e}${r}${t}`
+
+// Action creators for follow/unfollow
+export const addFollow = createActionCreator('COMMUNITY_HUB_ADD_FOLLOW') // original $$F6
+export const deleteFollow = createActionCreator('COMMUNITY_HUB_DELETE_FOLLOW') // original $$j7
+
+// Action creators for page state and comments
+export const savePageState = createActionCreator('COMMUNITY_HUB_SAVE_PAGE_STATE') // original $$U0
+export const resetCommentState = createActionCreator('COMMUNITY_HUB_RESET_COMMENT_STATE') // original $$B13
+export const setComments = createActionCreator('COMMUNITY_HUB_SET_COMMENTS') // original $$G26
+export const setCommentsActiveFeedType = createActionCreator('COMMUNITY_HUB_SET_COMMENTS_ACTIVE_FEED_TYPE') // original $$V9
+export const setCommentReplies = createActionCreator('COMMUNITY_HUB_SET_COMMENT_REPLIES') // original $$H22
+export const flushNewCommentsQueue = createActionCreator('COMMUNITY_HUB_FLUSH_NEW_COMMENTS_QUEUE') // original $$z11
+export const insertCommunityMention = createActionCreator('COMMENTS_INSERT_COMMUNITY_MENTION') // original $$W4
+
+/**
+ * Helper function to append query parameters to URL.
+ * @param {string} url - The base URL.
+ * @param {string} param - The query parameter string.
+ * @returns {string} The URL with appended parameter.
+ */
+function appendQueryParam(url: string, param: string): string { // original K
+  const separator = /\?/.test(url) ? '&' : '?'
+  return `${url}${separator}${param}`
 }
-let $$Y24 = createOptimistThunk((e, t) => {
-  if (!hasMorePages(t))
+
+/**
+ * Thunk to fetch paginated comments for a resource.
+ * @param {object} params - Parameters including resourceType, resourceId, etc.
+ */
+export const fetchCommentsThunk = createOptimistThunk(({ dispatch }, params) => {
+  if (!hasMorePages(params))
     return
-  let r = `/api/${getHubTypeString(t.resourceType)}/${t.resourceId}/comments`
-  t.selectedCommentId && t.selectedCommentId !== NEW_COMMENT_ID && !t.pagination?.selected_comment && (r = K(r, `selected_comment_id=${t.selectedCommentId}`))
-  t.activeFeedType === CommentTabType.ME && (r = K(r, `feed_type=${t.activeFeedType}`), void 0 === t.numCommentsForResource && (r = K(r, 'include_total_count=true')))
-  fetchPaginatedData(r, t.pageSizeOverride ?? DEFAULT_PAGE_SIZE, t, PAGINATION_NEXT).then((e) => {
-    let r = !e.selected_comment || e.comments.find(t => t.id === e.selected_comment?.id)
-    let {
-      commentsById,
-      authorsById,
-      feed,
-    } = mapCommentsAndAuthors(r ? e.comments : [...e.comments, e.selected_comment])
-    let s = e.pagination
-    e.selected_comment && (s.selected_comment = e.selected_comment)
-    let o = {
-      ...e,
-      pagination: e.pagination,
-      totalNumberOfComments: e.total_count,
-      commentsById,
-      authorsById,
-      feed,
-      activeFeedType: t.activeFeedType,
-      type: t.resourceType,
-      id: t.resourceId,
-      mentionedProfiles: e.mentioned_profiles,
+
+  let url = `/api/${getHubTypeString(params.resourceType)}/${params.resourceId}/comments`
+  if (params.selectedCommentId && params.selectedCommentId !== NEW_COMMENT_ID && !params.pagination?.selected_comment) {
+    url = appendQueryParam(url, `selected_comment_id=${params.selectedCommentId}`)
+  }
+  if (params.activeFeedType === CommentTabType.ME) {
+    url = appendQueryParam(url, `feed_type=${params.activeFeedType}`)
+    if (params.numCommentsForResource === undefined) {
+      url = appendQueryParam(url, 'include_total_count=true')
     }
-    e.selected_comment && (o.selectedCommentId = e.selected_comment.id)
-    t.onSuccess && t.onSuccess(o)
-  }).catch((r) => {
-    e.dispatch(FlashActions.error(getI18nString('community.actions.unable_to_fetch_comments')))
-    t.onError && t.onError()
+  }
+
+  fetchPaginatedData(url, params.pageSizeOverride ?? DEFAULT_PAGE_SIZE, params, PAGINATION_NEXT).then((response) => {
+    const hasSelectedComment = !response.selected_comment || response.comments.find(comment => comment.id === response.selected_comment?.id)
+    const { commentsById, authorsById, feed } = mapCommentsAndAuthors(hasSelectedComment ? response.comments : [...response.comments, response.selected_comment])
+    const pagination = response.pagination
+    if (response.selected_comment) {
+      pagination.selected_comment = response.selected_comment
+    }
+    const result = {
+      ...response,
+      pagination,
+      totalNumberOfComments: response.total_count,
+      commentsById,
+      authorsById,
+      feed,
+      activeFeedType: params.activeFeedType,
+      type: params.resourceType,
+      id: params.resourceId,
+      mentionedProfiles: response.mentioned_profiles,
+    }
+    if (response.selected_comment) {
+      result.selectedCommentId = response.selected_comment.id
+    }
+    params.onSuccess && params.onSuccess(result)
+  }).catch(() => {
+    dispatch(FlashActions.error(getI18nString('community.actions.unable_to_fetch_comments')))
+    params.onError && params.onError()
   })
 })
-let $$$5 = createActionCreator('COMMUNITY_HUB_RESTRICT_PROFILE')
-let $$X10 = createOptimistThunk((e, {
-  profileId: t,
-  blockedProfileId: r,
-  onSuccess: n,
-}) => {
-  XHR.post(`/api/profile/${r}/block`, {
+
+// Action creators for restrict/unrestrict
+export const restrictProfile = createActionCreator('COMMUNITY_HUB_RESTRICT_PROFILE') // original $$$5
+
+/**
+ * Thunk to restrict a profile.
+ * @param {object} params - Parameters including profileId, blockedProfileId, onSuccess.
+ */
+export const restrictProfileThunk = createOptimistThunk(({ dispatch }, params) => { // original $$X10
+  const { profileId, blockedProfileId, onSuccess } = params
+  XHR.post(`/api/profile/${blockedProfileId}/block`, {
     block_type: 'restrict',
-    profile_id: t,
+    profile_id: profileId,
   }).then(() => {
-    n && n()
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.couldnt_restrict_profile_error', {
-        error: r,
-      }),
-      type: 'RESTRICT_PROFILE_ERROR',
-    }))
+    onSuccess && onSuccess()
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message) {
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('community.actions.couldnt_restrict_profile_error', { error: message }),
+        type: 'RESTRICT_PROFILE_ERROR',
+      }))
+    }
   })
-  e.dispatch($$$5({
-    profileId: t,
-    blockedProfileId: r,
-    onSuccess: n,
-  }))
+  dispatch(restrictProfile({ profileId, blockedProfileId, onSuccess }))
 })
-let $$q25 = createActionCreator('COMMUNITY_HUB_UNRESTRICT_PROFILE')
-let $$J16 = createOptimistThunk((e, {
-  profileId: t,
-  blockedProfileId: r,
-  onSuccess: n,
-}) => {
-  XHR.del(`/api/profile/${r}/block`, {
+
+export const unrestrictProfile = createActionCreator('COMMUNITY_HUB_UNRESTRICT_PROFILE') // original $$q25
+
+/**
+ * Thunk to unrestrict a profile.
+ * @param {object} params - Parameters including profileId, blockedProfileId, onSuccess.
+ */
+export const unrestrictProfileThunk = createOptimistThunk(({ dispatch }, params) => { // original $$J16
+  const { profileId, blockedProfileId, onSuccess } = params
+  XHR.del(`/api/profile/${blockedProfileId}/block`, {
     block_type: 'restrict',
-    profile_id: t,
+    profile_id: profileId,
   }).then(() => {
-    n && n()
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.couldnt_unrestrict_profile_error', {
-        error: r,
-      }),
-      type: 'UNRESTRICT_PROFILE_ERROR',
-    }))
+    onSuccess && onSuccess()
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message) {
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('community.actions.couldnt_unrestrict_profile_error', { error: message }),
+        type: 'UNRESTRICT_PROFILE_ERROR',
+      }))
+    }
   })
-  e.dispatch($$q25({
-    profileId: t,
-    blockedProfileId: r,
-    onSuccess: n,
-  }))
+  dispatch(unrestrictProfile({ profileId, blockedProfileId, onSuccess }))
 })
-let $$Z20 = createActionCreator('COMMUNITY_HUB_SET_COMMENT_STATE')
-let $$Q29 = createOptimistThunk((e, t) => {
-  let {
-    id,
-    type,
-  } = t;
-  (id !== e.getState().communityHub.comments.id || type !== e.getState().communityHub.comments.type) && e.dispatch($$B13())
-  e.dispatch($$G26(t))
-  e.dispatch($$Z20(t))
+
+// Action creators for comment state
+export const setCommentState = createActionCreator('COMMUNITY_HUB_SET_COMMENT_STATE') // original $$Z20
+
+/**
+ * Thunk to set comment state for a resource.
+ * @param {object} params - Parameters including id and type.
+ */
+export const setCommentStateThunk = createOptimistThunk(({ dispatch, getState }, params) => { // original $$Q29
+  const { id, type } = params
+  const state = getState()
+  if (id !== state.communityHub.comments.id || type !== state.communityHub.comments.type) {
+    dispatch(resetCommentState())
+  }
+  dispatch(setComments(params))
+  dispatch(setCommentState(params))
 })
-createOptimistThunk((e, {
-  profileId: t,
-  on404Redirect: r,
-}, {
-  loadingKey: n,
-}) => {
-  let i = _$$s2.getProfile({
-    profileId: t,
+
+// Thunk to fetch profile by ID
+createOptimistThunk((context, params, { loadingKey }) => { // no original name, inline
+  const { dispatch, getState } = context
+  const { profileId, on404Redirect } = params
+  const request = profileServiceAPI.getProfile({ profileId })
+  setupLoadingStateHandler(request, context, loadingKey)
+  request.then(({ data }: { data: any }) => {
+    dispatch(putCommunityProfile(data.meta.profile))
+    dispatch(selectViewAction(getState().selectedView))
+  }).catch((error) => {
+    if (error.status === 404 && on404Redirect) {
+      on404Redirect()
+    }
+    else {
+      dispatch(FlashActions.error(getI18nString('community.actions.error_fetching_profile_information')))
+    }
   })
-  setupLoadingStateHandler(i, e, n)
-  i.then(({
-    data: t,
-  }) => {
-    e.dispatch(putCommunityProfile(t.meta.profile))
-    e.dispatch(selectViewAction(e.getState().selectedView))
-  }).catch(t => (t.status === 404 && r ? r() : e.dispatch(FlashActions.error(getI18nString('community.actions.error_fetching_profile_information'))), null))
 })
-createOptimistThunk((e, {
-  handle: t,
-  on404Redirect: r,
-}, {
-  loadingKey: n,
-}) => {
-  let i = e.getState().currentUserOrgId
-  let a = _$$s2.getHandle({
-    currentOrgId: i || void 0,
-    handle: t,
+
+// Thunk to fetch profile by handle
+createOptimistThunk((context, params, { loadingKey }) => { // no original name, inline
+  const { dispatch, getState } = context
+  const { handle, on404Redirect } = params
+  const currentOrgId = getState().currentUserOrgId
+  const request = profileServiceAPI.getHandle({
+    currentOrgId: currentOrgId || undefined,
+    handle,
   })
-  setupLoadingStateHandler(a, e, n)
-  a.then(({
-    data: t,
-  }) => {
-    e.dispatch(putCommunityProfile(t.meta.profile))
-  }).catch(({
-    data: t,
-  }) => {
-    t?.status === 404 && r && r()
-    e.dispatch(FlashActions.error(getI18nString('community.actions.error_fetching_profile_information')))
+  setupLoadingStateHandler(request, context, loadingKey)
+  request.then(({ data }: { data: any }) => {
+    dispatch(putCommunityProfile(data.meta.profile))
+  }).catch(({ data }) => {
+    if (data?.status === 404 && on404Redirect)
+      on404Redirect()
+    dispatch(FlashActions.error(getI18nString('community.actions.error_fetching_profile_information')))
   })
-}, ({
-  handle: e,
-}) => `COMMUNITY_HUB_GET_PROFILE_BY_HANDLE_${e}`)
-let $$ee28 = createOptimistThunk((e, t, {
-  loadingKey: r,
-}) => {
-  let {
-    website,
-    description,
-    location,
-    profileHandle,
-    onSuccess,
-    userId,
-    teamId,
-    orgId,
-  } = t
-  let m = XHR.post('/api/profile', {
+}, ({ handle }) => `COMMUNITY_HUB_GET_PROFILE_BY_HANDLE_${handle}`)
+
+/**
+ * Thunk to create a new community profile.
+ * @param {object} params - Parameters including website, description, etc.
+ */
+export const createProfileThunk = createOptimistThunk((context, params, { loadingKey }) => { // original $$ee28
+  const { dispatch, getState } = context
+  const { website, description, location, profileHandle, onSuccess, userId, teamId, orgId } = params
+  const request = XHR.post('/api/profile', {
     website,
     description,
     location,
@@ -266,359 +308,353 @@ let $$ee28 = createOptimistThunk((e, t, {
     team_id: teamId,
     org_id: orgId,
   })
-  setupLoadingStateHandler(m, e, r)
-  m.then(({
-    data: t,
-  }) => {
-    e.dispatch(addAuthedCommunityProfileToHub(t.meta))
-    e.dispatch(putCommunityProfile(t.meta))
-    let {
-      currentUserOrgId,
-      orgById,
-    } = e.getState()
-    let a = currentUserOrgId && orgById[currentUserOrgId]
-    if (currentUserOrgId && a && currentUserOrgId === orgId && e.dispatch(patchOrgs({
-      id: currentUserOrgId,
-      community_profile_handle: t.meta.profile_handle,
-      community_profile_id: t.meta.id,
-    })), getFeatureFlags().ext_plugin_publish_rearch && teamId) {
-      let r = e.getState().teams[teamId]
-      r && e.dispatch(setTeamOptimistThunk({
-        team: {
-          ...r,
-          community_profile_id: t.meta.id,
-          community_profile_handle: t.meta.profile_handle,
-        },
-        userInitiated: !1,
+  setupLoadingStateHandler(request, context, loadingKey)
+  request.then(({ data }) => {
+    dispatch(addAuthedCommunityProfileToHub(data.meta))
+    dispatch(putCommunityProfile(data.meta))
+    const { currentUserOrgId, orgById } = getState()
+    const org = currentUserOrgId && orgById[currentUserOrgId]
+    if (currentUserOrgId && org && currentUserOrgId === orgId) {
+      dispatch(patchOrgs({
+        id: currentUserOrgId,
+        community_profile_handle: data.meta.profile_handle,
+        community_profile_id: data.meta.id,
       }))
     }
-    onSuccess && onSuccess(e)
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(FlashActions.error(r))
+    if (getFeatureFlags().ext_plugin_publish_rearch && teamId) {
+      const team = getState().teams[teamId]
+      if (team) {
+        dispatch(setTeamOptimistThunk({
+          team: {
+            ...team,
+            community_profile_id: data.meta.id,
+            community_profile_handle: data.meta.profile_handle,
+          },
+          userInitiated: false,
+        }))
+      }
+    }
+    onSuccess && onSuccess(dispatch)
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message)
+      dispatch(FlashActions.error(message))
   })
-}, ({
-  userId: e,
-}) => `COMMUNITY_HUB_CREATE_PROFILE_${e}`)
-let $$et21 = createOptimistThunk((e, t) => {
-  XHR.post('/api/profile/generate_handle').then(({
-    data: r,
-  }) => {
-    e.dispatch(addAuthedCommunityProfileToHub(r.meta))
-    e.dispatch(putCommunityProfile(r.meta))
-    t.onSuccess && t.onSuccess(e)
-  }).catch(({
-    data: t,
-  }) => {
-    e.dispatch(FlashActions.error(t.message))
+}, ({ userId }) => `COMMUNITY_HUB_CREATE_PROFILE_${userId}`)
+
+/**
+ * Thunk to generate a profile handle.
+ * @param {object} params - Parameters including onSuccess.
+ */
+export const generateProfileHandleThunk = createOptimistThunk(({ dispatch }, params) => { // original $$et21
+  XHR.post('/api/profile/generate_handle').then(({ data }) => {
+    dispatch(addAuthedCommunityProfileToHub(data.meta))
+    dispatch(putCommunityProfile(data.meta))
+    params.onSuccess && params.onSuccess(dispatch)
+  }).catch(({ data }) => {
+    dispatch(FlashActions.error(data.message))
   })
 })
-let $$er12 = createOptimistThunk((e, t, {
-  loadingKey: r,
-}) => {
-  let {
-    website,
-    twitter,
-    instagram,
-    pronouns,
-    description,
-    location,
-    profileId,
-    profileHandle,
-    onSuccess,
-  } = t
-  let E = e.getState().communityHub.currentProfile
-  if (profileId === E?.id && Object.entries(t).every(([e, t]) => void 0 === t || e in E && E[e] === t))
+
+/**
+ * Thunk to update a community profile.
+ * @param {object} params - Parameters including profile details.
+ */
+export const updateProfileThunk = createOptimistThunk((context, params, { loadingKey }) => { // original $$er12
+  const { dispatch, getState } = context
+  const { website, twitter, instagram, pronouns, description, location, profileId, profileHandle, onSuccess } = params
+  const currentProfile = getState().communityHub.currentProfile
+  if (profileId === currentProfile?.id && Object.entries(params).every(([key, value]) => value === undefined || (key in currentProfile && currentProfile[key] === value))) {
     return
-  let b = twitter?.trim()
-  let I = instagram?.trim()
-  if (b && E?.twitter !== b && !HD.test(b)) {
-    e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.your_twitter_handle_is_not_valid', {
-        handle: b,
-      }),
-      error: !0,
+  }
+  const trimmedTwitter = twitter?.trim()
+  const trimmedInstagram = instagram?.trim()
+  if (trimmedTwitter && currentProfile?.twitter !== trimmedTwitter && !HD.test(trimmedTwitter)) {
+    dispatch(VisualBellActions.enqueue({
+      message: getI18nString('community.actions.your_twitter_handle_is_not_valid', { handle: trimmedTwitter }),
+      error: true,
     }))
     return
   }
-  if (I && E?.instagram !== I && !Co.test(I)) {
-    e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.your_instagram_handle_is_not_valid', {
-        handle: I,
-      }),
-      error: !0,
+  if (trimmedInstagram && currentProfile?.instagram !== trimmedInstagram && !Co.test(trimmedInstagram)) {
+    dispatch(VisualBellActions.enqueue({
+      message: getI18nString('community.actions.your_instagram_handle_is_not_valid', { handle: trimmedInstagram }),
+      error: true,
     }))
     return
   }
-  let S = XHR.put(`/api/profile/${profileId}`, {
+  const request = XHR.put(`/api/profile/${profileId}`, {
     website,
-    twitter: b,
-    instagram: I,
+    twitter: trimmedTwitter,
+    instagram: trimmedInstagram,
     pronouns,
     description,
     location,
     profile_handle: profileHandle,
   })
-  setupLoadingStateHandler(S, e, r)
-  let A = e.getState().user?.community_profile_handle
-  S.then(({
-    data: r,
-  }) => {
-    let {
-      communityHub,
-      currentUserOrgId,
-      orgById,
-    } = e.getState()
-    communityHub.currentProfile?.id === r.meta.id && e.dispatch(putCommunityProfile(r.meta))
-    let s = orgById[currentUserOrgId]
-    if (s && typeof s.id == 'string' && s.id === r.meta.org_id && e.dispatch(patchOrgs({
-      id: r.meta.org_id,
-      community_profile_handle: r.meta.profile_handle,
-    })), profileHandle) {
-      let t = e.getState().selectedView
-      isHandleView(t) && t?.handle === A && e.dispatch(selectViewAction({
-        view: 'communityHub',
-        subView: 'handle',
-        handle: profileHandle,
-      }))
-      r.meta.primary_user_id
-        ? e.dispatch(VisualBellActions.enqueue({
-            message: getI18nString('community.actions.your_profile_handle_was_set_to_profile_handle', {
-              profileHandle,
-            }),
-            type: 'profile-handle',
-          }))
-        : r.meta.team_id
-          ? e.dispatch(VisualBellActions.enqueue({
-              message: getI18nString('community.actions.your_team_s_handle_was_set_to_profile_handle', {
-                profileHandle,
-              }),
-              type: 'team-handle',
-            }))
-          : r.meta.org_id && e.dispatch(VisualBellActions.enqueue({
-            message: getI18nString('community.actions.your_organization_s_handle_was_set_to_profile_handle', {
-              profileHandle,
-            }),
-            type: 'org-handle',
-          }))
+  setupLoadingStateHandler(request, context, loadingKey)
+  const userCommunityHandle = getState().user?.community_profile_handle
+  request.then(({ data }) => {
+    const { communityHub, currentUserOrgId, orgById } = getState()
+    if (communityHub.currentProfile?.id === data.meta.id) {
+      dispatch(putCommunityProfile(data.meta))
     }
-    ['twitter', 'location', 'instagram', 'website', 'description'].forEach((n) => {
-      if (n in r.meta && n in t) {
-        let t = {
+    const org = orgById[currentUserOrgId]
+    if (org && typeof org.id === 'string' && org.id === data.meta.org_id) {
+      dispatch(patchOrgs({
+        id: data.meta.org_id,
+        community_profile_handle: data.meta.profile_handle,
+      }))
+    }
+    if (profileHandle) {
+      const selectedView = getState().selectedView
+      if (isHandleView(selectedView) && selectedView?.handle === userCommunityHandle) {
+        dispatch(selectViewAction({
+          view: 'communityHub',
+          subView: 'handle',
+          handle: profileHandle,
+        }))
+      }
+      if (data.meta.primary_user_id) {
+        dispatch(VisualBellActions.enqueue({
+          message: getI18nString('community.actions.your_profile_handle_was_set_to_profile_handle', { profileHandle }),
+          type: 'profile-handle',
+        }))
+      }
+      else if (data.meta.team_id) {
+        dispatch(VisualBellActions.enqueue({
+          message: getI18nString('community.actions.your_team_s_handle_was_set_to_profile_handle', { profileHandle }),
+          type: 'team-handle',
+        }))
+      }
+      else if (data.meta.org_id) {
+        dispatch(VisualBellActions.enqueue({
+          message: getI18nString('community.actions.your_organization_s_handle_was_set_to_profile_handle', { profileHandle }),
+          type: 'org-handle',
+        }))
+      }
+    }
+    ['twitter', 'location', 'instagram', 'website', 'description'].forEach((field) => {
+      if (field in data.meta && field in params) {
+        const messages = {
           twitter: getI18nString('community.actions.your_twitter_handle_was_updated'),
           location: getI18nString('community.actions.your_location_was_updated'),
           instagram: getI18nString('community.actions.your_instagram_handle_was_updated'),
           website: getI18nString('community.actions.your_website_url_was_updated'),
           description: getI18nString('community.actions.your_description_was_updated'),
         }
-        e.dispatch(VisualBellActions.enqueue({
-          message: t[n],
+        dispatch(VisualBellActions.enqueue({
+          message: messages[field],
           type: 'profile-updated',
         }))
       }
     })
-    onSuccess && onSuccess(e)
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(FlashActions.error(r))
+    onSuccess && onSuccess(dispatch)
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message)
+      dispatch(FlashActions.error(message))
   })
-}, ({
-  profileId: e,
-}) => `COMMUNITY_HUB_UPDATE_PROFILE_${e}`)
-let $$en23 = createOptimistThunk((e, t, {
-  loadingKey: r,
-}) => {
-  let {
-    profileId,
-    handle,
-  } = t
+}, ({ profileId }) => `COMMUNITY_HUB_UPDATE_PROFILE_${profileId}`)
+
+/**
+ * Thunk to delete a community profile.
+ * @param {object} params - Parameters including profileId and handle.
+ */
+export const deleteProfileThunk = createOptimistThunk((context, params) => { // original $$en23
+  const { dispatch, getState } = context
+  const { profileId, handle } = params
   XHR.del(`/api/profile/${profileId}`).then(() => {
-    e.dispatch(clearCommunityProfile(handle))
-    let {
-      currentUserOrgId,
-      orgById,
-    } = e.getState()
-    let a = currentUserOrgId && orgById[currentUserOrgId]
-    currentUserOrgId && a && a.community_profile_id === profileId && e.dispatch(patchOrgs({
-      id: currentUserOrgId,
-      community_profile_handle: void 0,
-      community_profile_id: void 0,
-    }))
-    e.dispatch(VisualBellActions.enqueue({
+    dispatch(clearCommunityProfile(handle))
+    const { currentUserOrgId, orgById } = getState()
+    const org = currentUserOrgId && orgById[currentUserOrgId]
+    if (currentUserOrgId && org && org.community_profile_id === profileId) {
+      dispatch(patchOrgs({
+        id: currentUserOrgId,
+        community_profile_handle: undefined,
+        community_profile_id: undefined,
+      }))
+    }
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString('community.actions.profile_deleted'),
     }))
   }).catch(() => {
-    e.dispatch(FlashActions.error(getI18nString('community.actions.unable_to_delete_profile_please_try_again_later')))
+    dispatch(FlashActions.error(getI18nString('community.actions.unable_to_delete_profile_please_try_again_later')))
   })
 })
-let $$ei1 = createOptimistThunk(async (e, {
-  file: t,
-  profileId: r,
-  onSuccessCallback: n,
-}, {
-  loadingKey: i,
-}) => {
-  let a = readImageBytes(t).then(e => ea(`/api/profile/${r}/upload`, e, t))
-  setupLoadingStateHandler(a, e, i)
-  await a.then(({
-    signature: e,
-  }) => XHR.put(`/api/profile/${r}`, {
-    signature: e,
-  })).then(({
-    data: t,
-  }) => {
-    e.dispatch(putCommunityProfile(t.meta))
-    n()
-  }).catch((t) => {
-    e.dispatch(FlashActions.error(t
-      ? getI18nString('community.actions.an_error_occurred_with_error', {
-          error: t,
-        })
-      : getI18nString('community.actions.an_error_occurred')))
+
+/**
+ * Thunk to upload profile cover image.
+ * @param {object} params - Parameters including file, profileId, onSuccessCallback.
+ */
+export const uploadProfileCoverImageThunk = createOptimistThunk(async (context, params, { loadingKey }) => { // original $$ei1
+  const { dispatch } = context
+  const { file, profileId, onSuccessCallback } = params
+  const uploadPromise = readImageBytes(file).then(bytes => uploadCoverImage(`/api/profile/${profileId}/upload`, bytes, file))
+  setupLoadingStateHandler(uploadPromise, context, loadingKey)
+  await uploadPromise.then(({ signature }) => XHR.put(`/api/profile/${profileId}`, { signature })).then(({ data }) => {
+    dispatch(putCommunityProfile(data.meta))
+    onSuccessCallback()
+  }).catch((error) => {
+    dispatch(FlashActions.error(error ? getI18nString('community.actions.an_error_occurred_with_error', { error }) : getI18nString('community.actions.an_error_occurred')))
   })
-}, ({
-  profileId: e,
-}) => `COMMUNITY_HUB_UPLOAD_PROFILE_COVER_IMAGE_${e}`)
-async function ea(e, t, r) {
-  if (!t) {
-    return {
-      cover_image_path: '',
-      signature: '',
+}, ({ profileId }) => `COMMUNITY_HUB_UPLOAD_PROFILE_COVER_IMAGE_${profileId}`)
+
+/**
+ * Helper function to upload cover image.
+ * @param {string} url - The upload URL.
+ * @param {ArrayBuffer} bytes - The image bytes.
+ * @param {File} file - The file object.
+ * @returns {Promise<object>} The upload result.
+ */
+export async function uploadCoverImage(url: string, bytes: ArrayBuffer, file: File) { // original ea
+  if (!bytes) {
+    return { cover_image_path: '', signature: '' }
+  }
+  const { cover_image_path, signature, fields } = (await XHR.post(url)).data.meta
+  const formData = new FormData()
+  if (fields)
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value as string))
+  formData.set('content-type', file.type)
+  formData.append('file', file)
+  await uploadRequest(cover_image_path, formData)
+  return { cover_image_path, signature }
+}
+
+// Action creators for follow/unfollow entities
+export const followEntity = createActionCreator('COMMUNTY_HUB_FOLLOW_ENTITY') // original $$es17
+
+/**
+ * Thunk to follow an entity.
+ * @param {string} followedProfileId - The ID of the profile to follow.
+ */
+export const followEntityThunk = createOptimistThunk(async (context, followedProfileId, { loadingKey }) => { // original $$eo18
+  const { dispatch, getState } = context
+  const request = XHR.put('/api/follows', { followed_profile_id: followedProfileId })
+  setupLoadingStateHandler(request, context, loadingKey)
+  await request.then(({ data }) => {
+    if (getState().user?.community_profile_id) {
+      dispatch(addFollow({
+        followedProfileId,
+        currentUserProfileId: getState().user?.community_profile_id,
+      }))
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('community.actions.followed_profile_name', { profileName: data.meta.followed_profile.name }),
+        type: 'COMMUNITY_HUB_FOLLOW',
+      }))
     }
-  }
-  let {
-    cover_image_path,
-    signature,
-    fields,
-  } = (await XHR.post(e)).data.meta
-  let o = new FormData()
-  fields && Object.entries(fields).forEach(([e, t]) => o.append(e, t))
-  o.set('content-type', r.type)
-  o.append('file', r)
-  await yr(cover_image_path, o)
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message) {
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('community.actions.unable_to_follow_this_profile_profile_name', { profileName: message }),
+        type: 'COMMUNITY_HUB_FOLLOW_FAILED',
+        error: true,
+      }))
+    }
+  })
+  dispatch(followEntity(followedProfileId))
+}, followedProfileId => `COMMUNTY_HUB_FOLLOW_ENTITY_${followedProfileId}`)
+
+export const unfollowEntity = createActionCreator('COMMUNTY_HUB_UNFOLLOW_ENTITY') // original $$el19
+
+/**
+ * Thunk to unfollow an entity.
+ * @param {string} followedProfileId - The ID of the profile to unfollow.
+ */
+export const unfollowEntityThunk = createOptimistThunk((context, followedProfileId, { loadingKey }) => { // original $$ed8
+  const { dispatch, getState } = context
+  const request = XHR.del('/api/follows', { followed_profile_id: followedProfileId })
+  setupLoadingStateHandler(request, context, loadingKey)
+  request.then(() => {
+    if (getState().user?.community_profile_id) {
+      dispatch(deleteFollow({
+        followedProfileId,
+        currentUserProfileId: getState().user?.community_profile_id,
+      }))
+      dispatch(VisualBellActions.enqueue({
+        message: getI18nString('community.actions.unfollowed_profile'),
+        type: 'COMMUNITY_HUB_UNFOLLOW',
+      }))
+    }
+  }).catch((error) => {
+    const message = resolveMessage(error)
+    if (message) {
+      dispatch(VisualBellActions.enqueue({
+        message: `Unable to unfollow this profile: ${message}`,
+        type: 'COMMUNITY_HUB_UNFOLLOW_FAILED',
+        error: true,
+      }))
+    }
+  })
+  dispatch(unfollowEntity(followedProfileId))
+}, followedProfileId => `COMMUNTY_HUB_UNFOLLOW_ENTITY_${followedProfileId}`)
+
+/**
+ * Function to create action creators for publishing.
+ * @param {string} prefix - The prefix for action types.
+ * @returns {object} Object with action creators.
+ */
+export function createPublishActionCreators(prefix: string) { // original $$ec15
   return {
-    cover_image_path,
-    signature,
+    updateStatus: createActionCreator(`${prefix}_UPDATE_PUBLISH_STATUS`),
+    updateMetadata: createActionCreator(`${prefix}_UPDATE_PUBLISH_METADATA`),
+    clearMetadata: createActionCreator(`${prefix}_CLEAR_PUBLISH_METADATA`),
+    clearMetadataAndStatus: createActionCreator(`${prefix}_CLEAR_PUBLISHING`),
   }
 }
-let $$es17 = createActionCreator('COMMUNTY_HUB_FOLLOW_ENTITY')
-let $$eo18 = createOptimistThunk(async (e, t, {
-  loadingKey: r,
-}) => {
-  let n = XHR.put('/api/follows', {
-    followed_profile_id: t,
-  })
-  setupLoadingStateHandler(n, e, r)
-  await n.then(({
-    data: r,
-  }) => {
-    e.getState().user?.community_profile_id && (e.dispatch($$F6({
-      followedProfileId: t,
-      currentUserProfileId: e.getState().user?.community_profile_id,
-    })), e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.followed_profile_name', {
-        profileName: r.meta.followed_profile.name,
-      }),
-      type: 'COMMUNITY_HUB_FOLLOW',
-    })))
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.unable_to_follow_this_profile_profile_name', {
-        profileName: r,
-      }),
-      type: 'COMMUNITY_HUB_FOLLOW_FAILED',
-      error: !0,
-    }))
-  })
-  e.dispatch($$es17(t))
-}, e => `COMMUNTY_HUB_FOLLOW_ENTITY_${e}`)
-let $$el19 = createActionCreator('COMMUNTY_HUB_UNFOLLOW_ENTITY')
-let $$ed8 = createOptimistThunk((e, t, {
-  loadingKey: r,
-}) => {
-  let n = XHR.del('/api/follows', {
-    followed_profile_id: t,
-  })
-  setupLoadingStateHandler(n, e, r)
-  n.then(() => {
-    e.getState().user?.community_profile_id && (e.dispatch($$j7({
-      followedProfileId: t,
-      currentUserProfileId: e.getState().user?.community_profile_id,
-    })), e.dispatch(VisualBellActions.enqueue({
-      message: getI18nString('community.actions.unfollowed_profile'),
-      type: 'COMMUNITY_HUB_UNFOLLOW',
-    })))
-  }).catch((t) => {
-    let r = resolveMessage(t)
-    r && e.dispatch(VisualBellActions.enqueue({
-      message: `Unable to unfollow this profile: ${r}`,
-      type: 'COMMUNITY_HUB_UNFOLLOW_FAILED',
-      error: !0,
-    }))
-  })
-  e.dispatch($$el19(t))
-}, e => `COMMUNTY_HUB_UNFOLLOW_ENTITY_${e}`)
-export function $$ec15(e) {
-  return {
-    updateStatus: createActionCreator(`${e}_UPDATE_PUBLISH_STATUS`),
-    updateMetadata: createActionCreator(`${e}_UPDATE_PUBLISH_METADATA`),
-    clearMetadata: createActionCreator(`${e}_CLEAR_PUBLISH_METADATA`),
-    clearMetadataAndStatus: createActionCreator(`${e}_CLEAR_PUBLISHING`),
+
+// Thunk to resolve/unresolve comment thread
+createOptimistThunk(async ({ dispatch, getState }, params) => { // no original name, inline
+  const { thread, resolved } = params
+  const state = getState()
+  if (resolved && state.comments.activeThread?.id === thread.id && !state.comments.showResolved) {
+    dispatch(UU())
   }
-}
-createOptimistThunk(async (e, t) => {
-  let r
-  let {
-    thread,
-    resolved,
-  } = t
-  let a = e.getState()
-  resolved && a.comments.activeThread?.id === thread.id && !a.comments.showResolved && e.dispatch(UU())
-  r = resolved ? XHR.put(`/api/community_comments/${thread.id}/resolve`) : XHR.put(`/api/community_comments/${thread.id}/unresolve`)
-  await r.then(({
-    data: t,
-  }) => {
-    e.dispatch(kE({
+  const request = resolved ? XHR.put(`/api/community_comments/${thread.id}/resolve`) : XHR.put(`/api/community_comments/${thread.id}/unresolve`)
+  await request.then(({ data }) => {
+    dispatch(commitEditedComment({
       comment: {
         id: thread.id,
-        resolved_at: t.meta.resolved_at,
+        resolved_at: data.meta.resolved_at,
       },
     }))
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
-      error: !0,
+  }).catch(() => {
+    dispatch(VisualBellActions.enqueue({
+      error: true,
       message: resolved ? getI18nString('community.actions.failed_to_resolve_comment') : getI18nString('community.actions.failed_to_unresolve_comment'),
     }))
   })
 })
-export const Ad = $$U0
-export const Ai = $$ei1
-export const Ch = $$P2
-export const Dg = $$M3
-export const Hx = $$W4
-export const LO = $$$5
-export const RS = $$F6
-export const Rx = $$j7
-export const X2 = $$ed8
-export const Zj = $$V9
-export const _8 = $$X10
-export const _F = $$z11
-export const aP = $$er12
-export const cO = $$B13
-export const cR = $$k14
-export const d6 = $$ec15
-export const dL = $$J16
-export const dv = $$es17
-export const e6 = $$eo18
-export const eg = $$el19
-export const gT = $$Z20
-export const h1 = $$et21
-export const ig = $$H22
-export const oB = $$en23
-export const p4 = $$Y24
-export const qo = $$q25
-export const r1 = $$G26
-export const rO = $$D27
-export const vQ = $$ee28
-export const vr = $$Q29
+
+// Exports with original names
+export const Ad = savePageState
+export const Ai = uploadProfileCoverImageThunk
+export const Ch = showAdminProfileBanner
+export const Dg = switchCommunityProfileThunk
+export const Hx = insertCommunityMention
+export const LO = restrictProfile
+export const RS = addFollow
+export const Rx = deleteFollow
+export const X2 = unfollowEntityThunk
+export const Zj = setCommentsActiveFeedType
+export const _8 = restrictProfileThunk
+export const _F = flushNewCommentsQueue
+export const aP = updateProfileThunk
+export const cO = resetCommentState
+export const cR = setCommunityAuthedActiveProfileAlias
+export const d6 = createPublishActionCreators
+export const dL = unrestrictProfileThunk
+export const dv = followEntity
+export const e6 = followEntityThunk
+export const eg = unfollowEntity
+export const gT = setCommentState
+export const h1 = generateProfileHandleThunk
+export const ig = setCommentReplies
+export const oB = deleteProfileThunk
+export const p4 = fetchCommentsThunk
+export const qo = unrestrictProfile
+export const r1 = setComments
+export const rO = hideAdminProfileBanner
+export const vQ = createProfileThunk
+export const vr = setCommentStateThunk

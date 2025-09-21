@@ -5,13 +5,13 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { J, jM, P_, wf, a3 } from "../905/124270";
-import { nX, Rj, hp, GX } from "../905/171315";
+import { buildQueryObject, createCreatorFacet, MAX_TRUNCATE_LENGTH, isLongText } from "../905/171315";
 import { e as _$$e } from "../905/404280";
 import { n as _$$n } from "../905/624711";
 import { k as _$$k } from "../905/252342";
 import { P as _$$P } from "../905/16832";
 import { F as _$$F } from "../905/801537";
-import { R9 } from "../905/61477";
+import { selectedItemAtom } from "../905/61477";
 import { nv } from "../905/182534";
 import { CreatorResourceType, TeamSpaceType, InputType, PillType } from "../figma_app/162807";
 import { HY, b3, kI } from "../905/779036";
@@ -27,7 +27,7 @@ export function $$v0({
   let S = useAtomWithSubscription(J);
   let w = useAtomWithSubscription(jM);
   let C = useAtomWithSubscription(P_);
-  let T = useAtomWithSubscription(R9);
+  let T = useAtomWithSubscription(selectedItemAtom);
   let k = useAtomWithSubscription(wf);
   let [R, N] = useAtomValueAndSetter(a3);
   let P = _$$n();
@@ -38,13 +38,13 @@ export function $$v0({
   }, [E]);
   let L = useCallback((e, t, n) => {
     if (!t || void 0 === n) {
-      i(e, null, nX(w, null, C, T ?? void 0));
+      i(e, null, buildQueryObject(w, null, C, T ?? void 0));
       O({}, PillType.CLEAR_ALL, InputType.DROPDOWN);
       return;
     }
     let r = S ? n ? S.value.filter(e => !deepEqual(e, t)) : S.value.concat(t) : [t];
-    let s = Rj(r);
-    let o = nX(w, s, C, T ?? void 0);
+    let s = createCreatorFacet(r);
+    let o = buildQueryObject(w, s, C, T ?? void 0);
     i(e, s, o);
     n ? O({
       creatorId: t.id
@@ -53,7 +53,7 @@ export function $$v0({
     }, l);
   }, [S, w, C, T, i, P, O, l]);
   let F = S?.value ?? [];
-  let M = F.length >= hp;
+  let M = F.length >= MAX_TRUNCATE_LENGTH;
   return jsxs(Fragment, {
     children: [M ? jsx("div", {
       className: Ze,
@@ -64,7 +64,7 @@ export function $$v0({
       placeholder: getI18nString("search.facets.find_someone"),
       query: l,
       setQuery: v
-    }), GX(l) ? jsx("div", {
+    }), isLongText(l) ? jsx("div", {
       className: p$,
       children: renderI18nText("search.error.max_query_length_exceeded")
     }) : jsxs(Fragment, {

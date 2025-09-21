@@ -71,10 +71,10 @@ import { SvgComponent } from '../905/714743';
 import { l as _$$l2 } from '../905/716947';
 import { u as _$$u, BL, or, qW, Ss, xY } from '../905/720292';
 import { getResourceDataOrFallback } from '../905/723791';
-import { l as _$$l } from '../905/728491';
+import { useHasFilePermission } from '../905/728491';
 import { nS as _$$nS, tW as _$$tW, ak, FA, qj, ss, wy } from '../905/746499';
 import { G as _$$G2 } from '../905/750789';
-import { tH as _$$tH, Hb } from '../905/751457';
+import { ErrorBoundaryCrash, useErrorBoundaryContext } from '../905/751457';
 import { handleModalError } from '../905/760074';
 import { WB } from '../905/761735';
 import { fG } from '../905/772425';
@@ -133,7 +133,7 @@ import { _5, ec as _$$ec, Yz } from '../figma_app/449837';
 import { assertNotNullish, throwTypeError } from '../figma_app/465776';
 import { B3 } from '../figma_app/481279';
 import { selectOpenFile } from '../figma_app/516028';
-import { F4 } from '../figma_app/527873';
+import { setHeapMemoryMode } from '../figma_app/527873';
 import { jq } from '../figma_app/563413';
 import { $z } from '../figma_app/617427';
 import { getStyleTypeLabel } from '../figma_app/646357';
@@ -2875,7 +2875,7 @@ function ny(e) {
       return a;
     });
   }(u?.id || null, m).data || new Map();
-  let g = _$$l(FileCanEdit, c?.key ?? '').unwrapOr(!1) && !readOnly;
+  let g = useHasFilePermission(FileCanEdit, c?.key ?? '').unwrapOr(!1) && !readOnly;
   let f = _$$$n().mergeBranch.status === 'enabled';
   let [_, A] = useState(!1);
   let b = new Map(Array.from(h).filter(([e]) => !l.has(e)));
@@ -3253,7 +3253,7 @@ let nw = memo(e => {
   } : null, [mergeRequest]);
   let x = I?.review_number;
   let S = selectCurrentUser();
-  let C = _$$l(FileCanEdit, branch.key).unwrapOr(!1);
+  let C = useHasFilePermission(FileCanEdit, branch.key).unwrapOr(!1);
   let O = I?.owner?.id === S?.id;
   let D = !!branch.trashed_at;
   let L = !D && (!I && C || !!I && O);
@@ -5652,7 +5652,7 @@ function rO({
   });
 }
 function rD(e) {
-  let t = Hb();
+  let t = useErrorBoundaryContext();
   _$$h(() => {
     let i = {
       direction: e.mergeDirection,
@@ -5722,7 +5722,7 @@ function rF(e) {
     })();
   }, [_diffInfo.displayGroups, diffInfo.displayGroups, o, e.direction]);
   useEffect(() => {
-    F4(DocumentMode.MERGE_MODAL);
+    setHeapMemoryMode(DocumentMode.MERGE_MODAL);
   }, []);
   useEffect(() => {
     if (!c && diffInfo.styleKeyToLibraryKey != null && _diffInfo.styleKeyToLibraryKey != null && l == null && p) {
@@ -6023,7 +6023,7 @@ export let $$rj0 = registerModal(e => {
   }));
   return jsx(ss.Provider, {
     value: rL,
-    children: jsx(_$$tH, {
+    children: jsx(ErrorBoundaryCrash, {
       fallback: jsx(rD, {
         mergeDirection: e.direction,
         sourceCheckpointKey: e.sourceCheckpointKey,

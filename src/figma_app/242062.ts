@@ -9,13 +9,13 @@ import { globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { getTextColorForBackground, textOnDarkCanvas, getDarkerShade, textOnLightCanvas } from "../figma_app/191804";
 import { usePrefersReducedMotion } from "../figma_app/469468";
 import { selectWithShallowEqual } from "../905/103090";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getCurrentFileType } from "../figma_app/976749";
 import { x as _$$x } from "../figma_app/943271";
 import { d as _$$d } from "../905/758967";
 import { zw } from "../figma_app/682945";
 import { viewportToScreen, getViewportInfo, useLatestViewportRef } from "../figma_app/62612";
-import { R9 } from "../905/977824";
+import { multiplayerSessionManager } from "../905/977824";
 import { XM } from "../905/486443";
 import { useAppModelProperty } from "../figma_app/722362";
 import { KP, _E } from "../figma_app/440875";
@@ -41,12 +41,12 @@ import { EO, aG } from "../figma_app/178273";
 import { K as _$$K } from "../figma_app/824081";
 import { getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
-import { Ho, mu } from "../figma_app/308685";
+import { stopChattingThunk, stopReactingAction } from "../figma_app/308685";
 import { n3, Tc } from "../905/797478";
 import { oP } from "../figma_app/580087";
 import { w3 } from "../figma_app/728075";
 import { Rt, iU, VW, S8, z8, bu, iY, Lo, vD, hD, Dy, or, p as _$$p3, u0, Bj, DE, Lw, W7, PT, zr } from "../figma_app/938674";
-import { S as _$$S } from "../figma_app/403368";
+import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { debug } from "../figma_app/465776";
 import { x as _$$x2 } from "../905/437800";
 import { BrowserInfo } from "../figma_app/778880";
@@ -79,7 +79,7 @@ L.forEach((e, t) => {
 });
 let k = (e, t) => {
   let r = t.get(e);
-  r && R9.sendReaction(r);
+  r && multiplayerSessionManager.sendReaction(r);
 };
 class V extends _$$w {
   constructor() {
@@ -773,7 +773,7 @@ function eG(e) {
     }, [e, t]);
     let i = useCallback(() => {
       Multiplayer?.sendChatMessage("", "");
-      n(Ho());
+      n(stopChattingThunk());
     }, [n]);
     useEffect(() => {
       r && i();
@@ -781,7 +781,7 @@ function eG(e) {
     useEffect(() => () => i(), [i]);
   })(h, m, S, u);
   let x = useCallback(() => {
-    u(Ho());
+    u(stopChattingThunk());
     A({
       type: ey.STOP_CHATTING
     });
@@ -1216,7 +1216,7 @@ function td({
   viewportInfo: e,
   multiplayerCursorsEnabled: t
 }) {
-  let r = R9.useReactionsBySessionId();
+  let r = multiplayerSessionManager.useReactionsBySessionId();
   let n = Object.keys(r);
   let s = KP();
   let o = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
@@ -1248,7 +1248,7 @@ function tc({
   let [c, u] = useState(!1);
   let p = useDispatch();
   let _ = useCallback(() => {
-    p(mu());
+    p(stopReactingAction());
   }, [p]);
   _$$Y(_, {
     closeOnEsc: !0,
@@ -1269,7 +1269,7 @@ function tc({
     let e = null;
     let t = null;
     let r = () => {
-      R9.sendReaction(reactImageUrl);
+      multiplayerSessionManager.sendReaction(reactImageUrl);
       _$$H.trigger(SnapshotLevel.GENERIC);
       d(to);
       null != e && clearTimeout(e);
@@ -1599,7 +1599,7 @@ function t_() {
       }, [e, o]);
       useEffect(() => {
         let r = e.onWiggleModeChange(r => {
-          R9.sendHighFiveStatus(r);
+          multiplayerSessionManager.sendHighFiveStatus(r);
           n(r);
           r && e.getHighFiveKeyPressed() ? t("figjam_cursor_high_five_events", {
             type: "enter_hands_up",
@@ -1676,13 +1676,13 @@ function t_() {
       oldWiggleMode: !1,
       oldWiggleStatus: "HIDDEN"
     });
-    R9.useInfoBySessionIdSubscription(useMemo(() => _$$n(100, () => {
+    multiplayerSessionManager.useInfoBySessionIdSubscription(useMemo(() => _$$n(100, () => {
       let r = u.current;
       if (!r) return;
       (function (e, t, r) {
         if (!debugState || !Multiplayer) return;
         let n = debugState.getState();
-        let i = R9.infoBySessionId();
+        let i = multiplayerSessionManager.infoBySessionId();
         if (!n.mirror || !n.mirror.appModel) return;
         let a = Multiplayer.currentSessionID();
         let s = n.multiplayer;
@@ -1727,7 +1727,7 @@ function t_() {
                 cursorOnRightForWindup: 0 === r ? m : !m,
                 cursorOnRightForCollision: 0 === r ? g : !g,
                 sessionId: e.sessionId,
-                getUserCursorTransform: () => es(R9.infoBySessionId()[e.sessionId]?.mouse?.canvasSpacePosition || {
+                getUserCursorTransform: () => es(multiplayerSessionManager.infoBySessionId()[e.sessionId]?.mouse?.canvasSpacePosition || {
                   x: 0,
                   y: 0
                 }, n.cursorKinematics, e.sessionId, t, 0 === r ? c : u)
@@ -1871,13 +1871,13 @@ function tm({
   let c = usePrefersReducedMotion();
   let u = getCurrentFileType();
   let p = getObservableOrFallback(_$$d().showOutlines);
-  let _ = _$$S();
+  let _ = setupCursorChatDisabledCheck();
   let m = useSelector(({
     multiplayer: {
       observingSessionID: e
     }
   }) => -1 !== e);
-  let g = R9.useInfoBySessionId({
+  let g = multiplayerSessionManager.useInfoBySessionId({
     updateSynchronously: m
   })[e];
   let E = !_ && g ? g.chatMessage : [null];
@@ -1930,9 +1930,9 @@ function tm({
   });
 }
 export function $$tg1() {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "MultiplayerCursors",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(t_, {})
   });
 }

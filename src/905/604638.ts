@@ -4,7 +4,7 @@ import { jsx } from 'react/jsx-runtime';
 import { selectWithShallowEqual } from '../905/103090';
 import { StatusEnum } from '../905/129884';
 import { y as _$$y } from '../905/320282';
-import { lM } from '../905/574958';
+import { getSession } from '../905/574958';
 import { hideTooltip } from '../905/765855';
 import { hideDropdownAction } from '../905/929976';
 import { atomStoreManager } from '../figma_app/27355';
@@ -105,7 +105,7 @@ export function $$x0({
   let d = selectCurrentFile();
   let c = useRef(!1);
   useEffect(() => {
-    d?.key && !c.current && (c.current = !0, _$$y.startTimer(d.key, lM()));
+    d?.key && !c.current && (c.current = !0, _$$y.startTimer(d.key, getSession()));
   }, [d?.key]);
   return jsx(E, {
     recordingKey: e,

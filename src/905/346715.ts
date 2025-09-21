@@ -21,7 +21,7 @@ import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
-import { mg, nX } from "../figma_app/336853";
+import { isFigmaFileUrl, extractFigmaFileId } from "../figma_app/336853";
 import { isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { c as _$$c } from "../905/32166";
@@ -90,7 +90,7 @@ let $$F0 = registerModal(function (e) {
     $(null);
     en(!1);
     let t = isTeamUrl(G);
-    let i = mg(G);
+    let i = isFigmaFileUrl(G);
     if (!(i || t)) {
       X("url_format");
       return;
@@ -101,7 +101,7 @@ let $$F0 = registerModal(function (e) {
     }
     let n = null;
     if (i) {
-      if ($(FOrganizationLevelType.ORG), (n = nX(G) || null) === D) {
+      if ($(FOrganizationLevelType.ORG), (n = extractFigmaFileId(G) || null) === D) {
         X("url_same_plan");
         return;
       }

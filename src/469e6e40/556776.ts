@@ -13,7 +13,7 @@ import { useMemoStable } from "../905/19536";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { hh } from "../905/417232";
 import { c$ } from "../figma_app/236327";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -54,7 +54,7 @@ export let $$B0 = memo(function (e) {
       return () => cancelAnimationFrame(e);
     }, []);
     return e;
-  }() ? null : jsx(tH, {
+  }() ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: "PinnedPlugins",
     fallback: jsx(Fragment, {}),
     children: jsxs(hh, {

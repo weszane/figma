@@ -29,7 +29,7 @@ import { useCurrentTool, useAppModelProperty } from "../figma_app/722362";
 import { normalizePath } from "../905/309735";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { qo, S7, sX } from "../figma_app/259578";
 import { T_, n8 } from "../905/713167";
 import { n as _$$n } from "../905/264891";
@@ -226,7 +226,7 @@ function Z({
         E !== e && (C(0 === e ? "SOLID" : "GRADIENT_LINEAR"), y(e), 1 === e ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : m === LayoutTabType.GRADIENT && fullscreenValue.triggerAction("leave-edit-mode"));
       },
       recordingKey: s
-    }), r && 1 === E && T && jsx(vL, {
+    }), r && 1 === E && T && jsx(KeyboardReceiver, {
       name: "Slides color picker",
       ref: g,
       handleKeyDown: e => {

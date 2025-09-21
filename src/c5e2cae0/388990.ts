@@ -6,7 +6,7 @@ import n from "classnames";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
@@ -250,7 +250,7 @@ function U(e) {
 export let $$z0 = withTracking(function (e) {
   let t = sx();
   let a = getCurrentTeam();
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeSingleTeamModal",
     team: _$$e.BILLING_EXPERIENCE,
     fallback: jsx(K, {}),

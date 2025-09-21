@@ -85,7 +85,7 @@ import { Um } from "../905/848862";
 import { l6, c$, sK } from "../905/794875";
 import { e as _$$e4 } from "../figma_app/509285";
 import { X as _$$X } from "../1250/115566";
-import { G7 } from "../figma_app/336853";
+import { isBigmaEnabledAlias } from "../figma_app/336853";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { useSubscription } from "../figma_app/288654";
 import { w4, y1 } from "../905/445814";
@@ -1303,7 +1303,7 @@ function tm({
     requestLoadMore,
     requestLoadMoreForTeam
   } = GR(e, FFileType.SLIDES);
-  let d = G7(e);
+  let d = isBigmaEnabledAlias(e);
   let c = fK();
   let {
     teamTemplates,
@@ -1816,7 +1816,7 @@ function tL({
     requestLoadMore,
     requestLoadMoreForTeam
   } = GR(e, FFileType.SLIDES);
-  let u = G7(e);
+  let u = isBigmaEnabledAlias(e);
   let {
     teamTemplates,
     isLoading,

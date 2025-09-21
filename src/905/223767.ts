@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { selectWithShallowEqual } from "../905/103090";
 import { CloseButton } from "../905/17223";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { dR } from "../figma_app/109538";
@@ -18,7 +18,7 @@ import { Bq, WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { K } from "../905/3140";
-import { vp } from "../905/967587";
+import { setupWorkspaceIdentity } from "../905/967587";
 import { selectPermissionsState } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { getUserCurrency } from "../figma_app/514043";
@@ -32,7 +32,7 @@ function O(e) {
   let t = useDispatch();
   let i = TN(e.teamId ?? "");
   let [n, h] = useState(getUserCurrency());
-  let g = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let g = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
   let D = getEditableTeamsWithoutPaidAccess(selectPermissionsState());
   let L = _$$h.useTrackingContext({
@@ -46,7 +46,7 @@ function O(e) {
   };
   let j = _$$s.overflowAuto.$;
   let U = e.isProCurrent ? renderI18nText("plan_comparison.title.working_group") : renderI18nText("plan_comparison.title");
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "UpgradeChoosePlanModal",
     fallback: jsx(K, {}),
     team: _$$e.MONETIZATION_UPGRADES,

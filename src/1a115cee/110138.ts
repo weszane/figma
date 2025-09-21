@@ -23,14 +23,14 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
 import { hideModal, popModalStack } from "../905/156213";
 import { Gg, go, ZW, bD } from "../figma_app/840917";
-import { cu, Zt } from "../905/25189";
-import { y8 } from "../905/327522";
-import { hp, a as _$$a } from "../905/725909";
+import { createPrefixKeyRange, createSessionNodeKeyRange } from "../905/25189";
+import { isAutosaveFile } from "../905/327522";
+import { ipcStorageHandler, restoredAutosaveKey } from "../905/725909";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { getDesignFileUrlConditional } from "../905/612685";
 import { fileEntityDataMapper } from "../905/943101";
-import { U as _$$U } from "../905/18613";
-import { ai } from "../figma_app/915202";
+import { NotificationType } from "../905/18613";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { fileApiHandler } from "../figma_app/787550";
 import { O2, ho, Ay as _$$Ay, DA, hL, ns, dd, eX, Vz, MV, DD, Jm, fH, QW, IC } from "../1a115cee/533320";
 import { A as _$$A2 } from "../svg/619883";
@@ -76,12 +76,12 @@ let P = (e, a) => debounce(() => {
 });
 let K = (e, a) => debounce(() => e(NA({
   file: a,
-  openNewFileIn: ai.NEW_TAB,
-  source: _$$U.AUTOSAVE_MODAL
+  openNewFileIn: TabOpenBehavior.NEW_TAB,
+  source: NotificationType.AUTOSAVE_MODAL
 })));
 let Q = _$$y.SMALL;
 function W(e, a, s) {
-  return y8(a) ? {
+  return isAutosaveFile(a) ? {
     fileName: a.file.name,
     onClick: P(a.file, s.id),
     thumbnail: jsx(NU, {
@@ -271,7 +271,7 @@ function z(e) {
     try {
       for (let a of e.users) {
         let e = a?.id;
-        e && (await go(cu(e)));
+        e && (await go(createPrefixKeyRange(e)));
       }
     } finally {
       x(!0);
@@ -420,10 +420,10 @@ export function $$J0(e) {
           }), reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to call autosave callback"));
         }
       };
-      hp.register(_$$a, a);
+      ipcStorageHandler.register(restoredAutosaveKey, a);
       a();
       return function () {
-        hp.unregister(_$$a, a);
+        ipcStorageHandler.unregister(restoredAutosaveKey, a);
       };
     }, [a, e]);
     return s;
@@ -434,7 +434,7 @@ export function $$J0(e) {
     nextGarbageCollectionTimestamp: multiUserGarbageCollectionTimestamp,
     files: multiUserUnsyncedFiles,
     onLogOut: () => {
-      for (let e of autosaveFilesToDelete) go(Zt(e.userID, e.fileKey)).catch(e => {
+      for (let e of autosaveFilesToDelete) go(createSessionNodeKeyRange(e.userID, e.fileKey)).catch(e => {
         reportError(_$$e.UNOWNED, Error("Failed to delete autosave data for sessions"));
       });
       e.onLogOut();

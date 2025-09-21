@@ -17,7 +17,7 @@ import { sF } from "../figma_app/777207";
 import { t as _$$t3 } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
 import { useCurrentUserOrg } from "../905/845253";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { KindEnum } from "../905/129884";
 import { fI } from "../figma_app/626177";
 import { zz, b8, aX } from "../905/794523";
@@ -34,7 +34,7 @@ function T({
   onSetSelect: a
 }) {
   let l = trackFileEventWithStore();
-  let d = Oe(useCurrentUserOrg());
+  let d = isBigmaEnabledAlias3(useCurrentUserOrg());
   let {
     pass,
     fail

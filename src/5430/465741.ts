@@ -23,7 +23,7 @@ import { gM } from "../5430/823351";
 import { useSafeRouteStateInstance } from "../figma_app/321395";
 import { getAllTimeSortOption } from "../figma_app/324237";
 import { BrowseUtils } from "../905/942203";
-import { n6 } from "../figma_app/600006";
+import { SearchRouteWithCommunity } from "../figma_app/600006";
 import { selectEditorResource, syncEditorResourceWithHistory } from "../figma_app/773663";
 import { z } from "../5430/143080";
 import { MAX_BANNER_CLICKS } from "../figma_app/350203";
@@ -168,7 +168,7 @@ export function $$V0() {
 }
 function W() {
   let e = usePrefersMediaQuery(`(max-width: ${N6X})`);
-  let t = useSafeRouteStateInstance(n6);
+  let t = useSafeRouteStateInstance(SearchRouteWithCommunity);
   syncEditorResourceWithHistory(t);
   let r = H(t);
   useEffect(() => {

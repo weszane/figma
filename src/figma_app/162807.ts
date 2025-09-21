@@ -490,11 +490,11 @@ export const MAX_RESULTS = 10
 export const MAX_ITEMS = 30
 
 // Exported variables (original export const ...)
-export const YJ = SearchModelType // $L
-export const Y0 = ContentPreviewMode // L0
-export const Yk = TeamSortField // Lk
-export const Yr = convertFilterKeysToApiParams // Lr
-export const YU = MAX_RESULTS // MU
+export const $L = SearchModelType // $L
+export const L0 = ContentPreviewMode // L0
+export const Lk = TeamSortField // Lk
+export const Lr = convertFilterKeysToApiParams // Lr
+export const MU = MAX_RESULTS // MU
 export const Or = DEFAULT_PAGE_SIZE // Or
 export const Rr = SearchTypeMode // Rr
 export const Rx = SpaceAccessType // Rx

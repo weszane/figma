@@ -4,7 +4,7 @@ import { GP } from "../figma_app/15927";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { gq } from "../905/125333";
 import { Gm } from "../figma_app/91703";
-import { QA, Xp, n0, Lh, uQ, Mc, oI } from "../905/854717";
+import { updateSelectionPaintsFromFullscreen, forceUpdateSelectionPaintsForUndo, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, clearSelectionPaintsDueToLimitExceeded, updateCurrentSelectionPaintInPicker } from "../905/854717";
 import { Yr, o$ } from "../figma_app/8833";
 import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { S, K } from "../905/733706";
@@ -49,7 +49,7 @@ export class $$g1 {
   updateSelectionPaintsWithFillEncodedPaints(e, t, r, i, a, s, o, l) {
     let c = S(e, t, r, i, a, s, l);
     let u = this.store.getState().mirror.selectionPaints;
-    (!deepEqual(u.paints, c) || u.emptyDueToLimitExceeded || o) && (this.store.dispatch(QA(c)), o && this.store.dispatch(Xp(!0)));
+    (!deepEqual(u.paints, c) || u.emptyDueToLimitExceeded || o) && (this.store.dispatch(updateSelectionPaintsFromFullscreen(c)), o && this.store.dispatch(forceUpdateSelectionPaintsForUndo(!0)));
   }
   updatePaintsDirectlyOnSingleNodeWithFillEncodedPaints(e, t) {
     var r = [];
@@ -59,7 +59,7 @@ export class $$g1 {
     }
     r = r.map((e, r) => (e.variableScopes = new Set(t ? t[r] : []), e));
     let i = this.store.getState().mirror.selectionPaints;
-    (!deepEqual(i.paintsDirectlyOnSingleNode, r) || i.emptyDueToLimitExceeded) && this.store.dispatch(n0(r));
+    (!deepEqual(i.paintsDirectlyOnSingleNode, r) || i.emptyDueToLimitExceeded) && this.store.dispatch(updatePaintsDirectlyOnSingleNodeFromFullscreen(r));
   }
   updatePaintStyles(e, t, r) {
     let i = this.store.getState().library;
@@ -90,7 +90,7 @@ export class $$g1 {
     (!deepEqual(e, s) || this.store.getState().mirror.selectionPaints.emptyDueToLimitExceeded) && this.store.dispatch(r(s));
   }
   updateSelectionPaintsWithStyles(e) {
-    this.updatePaintStyles(this.store.getState().mirror.selectionPaints.styles, e, Lh);
+    this.updatePaintStyles(this.store.getState().mirror.selectionPaints.styles, e, updateSelectionStylesFromFullscreen);
   }
   updateSelectionTextAndEffectStyles(e) {
     gq.syncFromFullscreen({
@@ -98,10 +98,10 @@ export class $$g1 {
     });
   }
   updatePaintsDirectlyOnSingleNodeWithStyles(e) {
-    this.updatePaintStyles(this.store.getState().mirror.selectionPaints.stylesDirectlyOnSingleNode, e, uQ);
+    this.updatePaintStyles(this.store.getState().mirror.selectionPaints.stylesDirectlyOnSingleNode, e, updateStylesDirectlyOnSingleNodeFromFullscreen);
   }
   clearSelectionPaintsDueToLimitExceeded() {
-    this.store.dispatch(Mc());
+    this.store.dispatch(clearSelectionPaintsDueToLimitExceeded());
   }
   clearSelectionTextAndEffectStylesDueToLimitExceeded() {
     gq.syncFromFullscreen({
@@ -112,7 +112,7 @@ export class $$g1 {
     let t = this.store.getState().currentSelectionPaintInPicker;
     if (null == t.originalPaint) return !1;
     let r = K(e);
-    return null == r ? (console.error(`Failed to apply paint: ${e}`), !1) : (SelectionPaintHelpers?.updatePaint(GP(t.originalPaint), e, !0, null), this.store.dispatch(oI({
+    return null == r ? (console.error(`Failed to apply paint: ${e}`), !1) : (SelectionPaintHelpers?.updatePaint(GP(t.originalPaint), e, !0, null), this.store.dispatch(updateCurrentSelectionPaintInPicker({
       ...t,
       updatedPaintFromDropper: r.paint
     })), !0);

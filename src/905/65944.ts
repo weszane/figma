@@ -19,7 +19,7 @@ import { M as _$$M } from "../figma_app/648761";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { generateRecordingKey, useHandleMouseEvent, useSetupPlayback } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
-import { tH as _$$tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ZI } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
@@ -35,7 +35,7 @@ import { useCurrentUserOrgId } from "../905/845253";
 import { getCurrentTeam } from "../figma_app/598018";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { Rk } from "../figma_app/844696";
 import { nZ, tX as _$$tX, O1, AG } from "../905/28111";
 import { s2 } from "../905/107436";
@@ -1162,7 +1162,7 @@ function tN({
   });
   return jsxs(_$$P, {
     maxHeight: 500,
-    children: [jsxs(vL, {
+    children: [jsxs(KeyboardReceiver, {
       className: "gradient_editor--root--YXS31",
       ref: x,
       focusOnMount: !0,
@@ -1992,7 +1992,7 @@ export let $$ii1 = forwardRef(function ({
       resolvedType: VariableResolvedDataType.COLOR
     }) : null)]
   });
-  return er ? jsx(_$$tH, {
+  return er ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "color_picker_with_color_contrast_tool",
     fallback: eD,
     team: _$$e.EDITOR_USABILITY,
@@ -2118,7 +2118,7 @@ function ia({
     }), X && function (e) {
       let t = getColorAtStop(e, s);
       return jsxs(Fragment, {
-        children: [jsx(vL, {
+        children: [jsx(KeyboardReceiver, {
           name: "Color picker",
           ref: Y,
           handleKeyDown: m,

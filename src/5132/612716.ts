@@ -6,7 +6,7 @@ import c from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { ModalCloseButton } from "../905/17223";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -201,7 +201,7 @@ export function $$N0({
     isClickable: I,
     ...e
   }, z + e.headerText + l));
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FullscreenHelpUpsellsModalBase",
     fallback: jsx(K, {}),
     team: _$$e.MONETIZATION_UPGRADES,

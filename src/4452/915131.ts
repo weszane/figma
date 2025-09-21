@@ -23,7 +23,7 @@ import { KQ as _$$KQ } from "../figma_app/475472";
 import { selectCurrentUser } from "../905/372672";
 import { FPermissionLevelType, FAccessLevelType, FBasicPermissionType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { TeamCreationWorkspaceView } from "../figma_app/43951";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
 import { useCurrentPlanUser, useIsOrgAdminUser, useCurrentPublicPlan } from "../figma_app/465071";
@@ -361,7 +361,7 @@ export let $$K0 = registerModal(function (e) {
             }), jsx(ButtonBasePrimaryTracked, {
               onClick: function () {
                 if (0 === er) ei(1);else {
-                  let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => isValidEmail(e) && !H_(k.domains, e)) : [];
+                  let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => isValidEmail(e) && !checkDomainExists(k.domains, e)) : [];
                   e.length > 0 ? function (e) {
                     if (N?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
                       t(showModalHandler({

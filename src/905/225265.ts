@@ -26,7 +26,7 @@ import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { KH } from "../905/81982";
 import { vx } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
-import { Ei } from "../905/574958";
+import { generateSessionId } from "../905/574958";
 import { r6 } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
@@ -49,7 +49,7 @@ let W = {
   3: "figjam_tool_bar"
 };
 let $$K2 = W;
-let Y = createRemovableAtomFamily(e => atom(t => (t(Z(e).debouncedValueAtom), t(ee(e)), Ei())));
+let Y = createRemovableAtomFamily(e => atom(t => (t(Z(e).debouncedValueAtom), t(ee(e)), generateSessionId())));
 function q(e, t) {
   return t(et(e)).queryId ?? t(Y(e));
 }

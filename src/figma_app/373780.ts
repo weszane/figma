@@ -9,7 +9,7 @@ import { h as _$$h, f as _$$f } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { isAnyMobile } from "../figma_app/778880";
 import { formatList } from "../figma_app/930338";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { mC } from "../905/193529";
@@ -1299,7 +1299,7 @@ function e8() {
       loadAction,
       RootComponent
     } = d;
-    return jsx(tH, {
+    return jsx(ErrorBoundaryCrash, {
       onError: () => {
         o || s(VisualBellActions.enqueue({
           message: getI18nString("fullscreen.accessibility.dom_error"),

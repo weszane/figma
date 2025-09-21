@@ -3,7 +3,7 @@ import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { CO } from "../5430/297093";
 import { anchorEditorResource } from "../figma_app/773663";
 import { n as _$$n } from "../5430/859486";
@@ -34,7 +34,7 @@ export function $$h1({
   includeMixed: n = !1
 }) {
   let l = CO(r, n);
-  let _ = Jm();
+  let _ = getSearchSessionIdFromSelector();
   return jsx(_$$n, {
     context: e,
     defaultOption: n ? getI18nString("community.view_bar.all_resources") : getI18nString("community.view_bar.files"),

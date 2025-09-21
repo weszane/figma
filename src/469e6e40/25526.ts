@@ -113,7 +113,7 @@ import { R as _$$R } from "../905/298004";
 import { WZ } from "../905/893645";
 import { f as _$$f, jD, Vl as _$$Vl, OK } from "../figma_app/481749";
 import { KJ, H3 as _$$H, Bd } from "../figma_app/994725";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { d as _$$d2 } from "../905/44199";
 import { um, Rs as _$$Rs, N$ } from "../figma_app/761870";
 import { P as _$$P2 } from "../905/392438";
@@ -152,7 +152,7 @@ import { g as _$$g4 } from "../469e6e40/136803";
 import { OJ } from "../905/519092";
 import { SvgComponent } from "../905/714743";
 import { p as _$$p3 } from "../469e6e40/348454";
-import { sx as _$$sx2 } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { V as _$$V2, $ as _$$$ } from "../905/355181";
 import { R as _$$R2 } from "../7021/67076";
 import { S as _$$S3 } from "../469e6e40/885592";
@@ -1095,10 +1095,10 @@ let tK = (e, t, a) => [tD, {
 }, {
   value: ["org_library_setting_change"],
   description: renderI18nText("activity_log.filter.org_library_setting_changed")
-}, ...(e ? t$ : []), ...(e && Oe(t) ? [{
+}, ...(e ? t$ : []), ...(e && isBigmaEnabledAlias3(t) ? [{
   value: ["workspace_library_approve", "workspace_library_unapprove"],
   description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
-}] : []), ...(e && Oe(t) ? [{
+}] : []), ...(e && isBigmaEnabledAlias3(t) ? [{
   value: ["org_library_approve", "org_library_unapprove"],
   description: renderI18nText("activity_log.filter.org_library_approval_changed")
 }] : []), {
@@ -2439,7 +2439,7 @@ function aB({
       children: renderI18nText("org_admin_settings.billing.no_billing_groups_yet")
     }), jsx("div", {
       className: _$$s.pb8.alignCenter.$,
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         maxWidth: "540px"
       }).$,
       children: jsx(TextWithTruncation, {
@@ -2683,7 +2683,7 @@ function ni(e) {
       removeNegativeMargin: !0,
       children: [jsx("span", {
         className: _$$s.inlineFlex.$,
-        style: _$$sx2.mr6.$,
+        style: styleBuilderInstance.mr6.$,
         children: jsx(_$$b3, {
           style: {
             "--color-icon": "var(--color-icon-ondesign)"
@@ -2720,7 +2720,7 @@ function nr(e) {
       removeNegativeMargin: !0,
       children: [jsx("span", {
         className: _$$s.inlineFlex.$,
-        style: _$$sx2.mr6.$,
+        style: styleBuilderInstance.mr6.$,
         children: jsx(_$$Z, {
           style: {
             "--color-icon": "var(--color-icon-ondanger)"
@@ -2868,7 +2868,7 @@ let nb = registerModal(function ({
       tintedModalBackground: !0,
       confirmationTitle: renderI18nText("workspace.create_confirmation_modal.title"),
       children: [renderI18nText("workspace.create_confirmation_modal.description.intro"), jsx("ul", {
-        style: _$$sx2.ml18.my16.add({
+        style: styleBuilderInstance.ml18.my16.add({
           listStyle: "disc"
         }).$,
         children: [0, 1, 2, 3].map(e => jsx("li", {
@@ -3011,7 +3011,7 @@ let nk = registerModal(function (e) {
             })
           }), jsx(_$$Y3, {
             className: "workspace_edit_modal--yellowIcon--uYKLJ admin_notifications_count_badge--yellowIcon--7SC5D",
-            style: _$$sx2.$$if(!a, _$$sx2.invisible).$
+            style: styleBuilderInstance.$$if(!a, styleBuilderInstance.invisible).$
           })]
         }), jsxs("label", {
           className: nv,
@@ -3045,7 +3045,7 @@ let nk = registerModal(function (e) {
           })]
         }), a && jsxs("div", {
           className: "workspace_edit_modal--banner--aEtck",
-          style: _$$sx2.mb32.p16.flex.itemsCenter.bRadius6.$,
+          style: styleBuilderInstance.mb32.p16.flex.itemsCenter.bRadius6.$,
           children: [jsx(SvgComponent, {
             className: _$$s.mr16.$,
             svg: _$$A3,
@@ -4161,7 +4161,7 @@ function su({
       };
       return jsxs(Hj, {
         className: e4()(_$$s.flex.itemsCenter.gap16.relative.$, sd),
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           border: "none"
         }).px32.py12.$,
         useAdminTableStyles: !0,
@@ -4201,11 +4201,11 @@ function sm({
     header: !0,
     useAdminTableStyles: !0,
     className: e4()(_$$s.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
     children: [jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "20%"
       }).$,
       children: jsx(_$$tD, {
@@ -4219,7 +4219,7 @@ function sm({
         })
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "40%"
       }).$,
       children: jsx(TextWithTruncation, {
@@ -4227,7 +4227,7 @@ function sm({
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
       children: jsx(_$$tD, {
@@ -4241,7 +4241,7 @@ function sm({
         })
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "20%"
       }).justifyStart.$,
       children: jsx(TextWithTruncation, {
@@ -4249,7 +4249,7 @@ function sm({
         children: renderI18nText("resources_tab.approved_plugins.table.approved_for_column")
       })
     }), jsxs(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
       children: [jsx("span", {}), " "]
@@ -4263,7 +4263,7 @@ function sp({
 }) {
   return jsxs("div", {
     className: _$$s.flex.itemsCenter.gap12.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "20%"
     }).$,
     children: [jsx("img", {
@@ -4291,7 +4291,7 @@ function sg({
 }) {
   return jsx("div", {
     className: _$$s.flex.itemsCenter.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "40%"
     }).$,
     children: jsx(TextWithTruncation, {
@@ -4306,7 +4306,7 @@ function sh({
 }) {
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "10%"
     }).$,
     children: jsx(h1, {
@@ -4348,7 +4348,7 @@ function sx({
   }, [e.allowlistGroups, t]);
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "20%"
     }).$,
     children: a
@@ -4357,7 +4357,7 @@ function sx({
 function sb() {
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyEnd.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "10%"
     }).$,
     children: jsx(In, {
@@ -4513,11 +4513,11 @@ function sC({
     header: !0,
     useAdminTableStyles: !0,
     className: e4()(_$$s.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
     children: [jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "20%"
       }).$,
       children: jsx(_$$tD, {
@@ -4531,7 +4531,7 @@ function sC({
         })
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "40%"
       }).$,
       children: jsx(TextWithTruncation, {
@@ -4539,7 +4539,7 @@ function sC({
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
       children: jsx(_$$tD, {
@@ -4553,7 +4553,7 @@ function sC({
         })
       })
     }), jsx(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "20%"
       }).justifyStart.$,
       children: jsx(TextWithTruncation, {
@@ -4561,7 +4561,7 @@ function sC({
         children: renderI18nText("resources_tab.approved_plugins.table.requested_by_column")
       })
     }), jsxs(A3, {
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
       children: [jsx("span", {}), " "]
@@ -4573,7 +4573,7 @@ function sS({
 }) {
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "10%"
     }).$,
     children: jsx(h1, {
@@ -4610,7 +4610,7 @@ function sN({
     let n = e.map(e => e.name).join("\n");
     a = jsx("button", {
       onClick: t,
-      style: _$$sx2.add({
+      style: styleBuilderInstance.add({
         backgroundColor: "inherit"
       }).$,
       "data-tooltip-type": KindEnum.TEXT,
@@ -4627,7 +4627,7 @@ function sN({
   }
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "20%"
     }).$,
     children: jsx("div", {
@@ -4639,7 +4639,7 @@ function sN({
 function sI() {
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyEnd.overflowHidden.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: "10%"
     }).$,
     children: jsx(ButtonBasePrimary, {
@@ -4695,7 +4695,7 @@ function sT(e) {
   };
   return jsxs(Hj, {
     className: e4()(_$$s.flex.itemsCenter.gap16.relative.$, sd),
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       border: "none"
     }).px32.py12.$,
     useAdminTableStyles: !0,

@@ -1,290 +1,419 @@
-import { deepEqual, includesEqual } from "../905/382883";
-import { truncate } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { isCooperFeatureEnabled } from "../figma_app/828186";
-import { FolderType, CreatorResourceType, $L, PublicModelType, convertSearchModelTypeToFileKind, convertSearchModelTypeToModelType } from "../figma_app/162807";
-import { isFigmakeSitesEnabled } from "../figma_app/552876";
-import { isSitesFeatureEnabled } from "../905/561485";
-let $$c15 = 5;
-let $$u19 = {
+import { getI18nString } from '../905/303541'
+import { deepEqual, includesEqual } from '../905/382883'
+import { isSitesFeatureEnabled } from '../905/561485'
+import { convertSearchModelTypeToFileKind, convertSearchModelTypeToModelType, CreatorResourceType, FolderType, PublicModelType, SearchModelType } from '../figma_app/162807'
+import { isFigmakeSitesEnabled } from '../figma_app/552876'
+import { isCooperFeatureEnabled } from '../figma_app/828186'
+import { truncate } from '../figma_app/930338'
+
+// Original: $$c15
+const MAX_TRUNCATE_LENGTH = 5
+
+// Original: $$u19
+const EMPTY_SPACE_MAP: Record<FolderType, any[]> = {
   [FolderType.FOLDER]: [],
   [FolderType.TEAM]: [],
-  [FolderType.ORG]: []
-};
-export function $$p21(e) {
+  [FolderType.ORG]: [],
+}
+
+/**
+ * Gets the label for a facet type.
+ * Original: $$p21
+ */
+export function getFacetTypeLabel(type: CreatorResourceType): string {
   return {
-    [CreatorResourceType.RESOURCE]: getI18nString("search.facets.resource"),
-    [CreatorResourceType.CREATOR]: getI18nString("search.facets.creator"),
-    [CreatorResourceType.SPACE]: getI18nString("search.facets.in")
-  }[e];
+    [CreatorResourceType.RESOURCE]: getI18nString('search.facets.resource'),
+    [CreatorResourceType.CREATOR]: getI18nString('search.facets.creator'),
+    [CreatorResourceType.SPACE]: getI18nString('search.facets.in'),
+  }[type]
 }
-export function $$m14(e) {
-  return $$p21(e) + ": ";
+
+/**
+ * Gets the prefix for a facet type.
+ * Original: $$m14
+ */
+export function getFacetPrefix(type: CreatorResourceType): string {
+  return `${getFacetTypeLabel(type)}: `
 }
-export function $$h25(e) {
-  return e.type === CreatorResourceType.RESOURCE ? $$g11(e.value) : e.type === CreatorResourceType.CREATOR ? function (e) {
-    let t = e.value.length;
-    if (0 === t) return "";
-    if (1 === t) {
-      let t = e.value[0];
-      return truncate(t.name || t.handle, 15);
+
+/**
+ * Gets the display value for a facet.
+ * Original: $$h25
+ */
+export function getFacetDisplayValue(facet: any): string {
+  if (facet.type === CreatorResourceType.RESOURCE) {
+    return getResourceTypeLabel(facet.value)
+  }
+  if (facet.type === CreatorResourceType.CREATOR) {
+    const creators = facet.value
+    const count = creators.length
+    if (count === 0)
+      return ''
+    if (count === 1) {
+      const creator = creators[0]
+      return truncate(creator.name || creator.handle, 15)
     }
-    return getI18nString("search.facets.multiple_creators", {
-      numCreators: t
-    });
-  }(e) : e.type === CreatorResourceType.SPACE ? function (e) {
-    let t = Object.values(e.value).reduce((e, t) => e + t.length, 0);
-    return getI18nString("search.facets.multiple_spaces", {
-      numSpaces: t
-    });
-  }(e) : "";
+    return getI18nString('search.facets.multiple_creators', { numCreators: count })
+  }
+  if (facet.type === CreatorResourceType.SPACE) {
+    const totalSpaces = Object.values(facet.value).reduce((sum: number, arr: any[]) => sum + arr.length, 0)
+    return getI18nString('search.facets.multiple_spaces', { numSpaces: totalSpaces })
+  }
+  return ''
 }
-export function $$g11(e) {
+
+/**
+ * Gets the label for a resource type.
+ * Original: $$g11
+ */
+export function getResourceTypeLabel(type: SearchModelType): string {
   return {
-    [$L.DESIGN_FILES]: getI18nString("search.facets.design_files"),
-    [$L.FIGJAM_FILES]: getI18nString("search.facets.figjam_boards"),
-    [$L.SLIDES]: getI18nString("search.facets.slides"),
-    [$L.SITES]: getI18nString("search.facets.sites"),
-    [$L.BUZZ]: getI18nString("search.facets.buzz_files"),
-    [$L.MAKE]: getI18nString("search.facets.make_files"),
-    [$L.USERS]: getI18nString("search.facets.people"),
-    [$L.PROJECTS]: getI18nString("search.facets.projects"),
-    [$L.TEAMS]: getI18nString("search.facets.teams"),
-    [$L.ALL_FILES]: getI18nString("search.preview_section.all_files"),
-    [$L.PLUGINS]: "",
-    [$L.WIDGETS]: ""
-  }[e];
+    [SearchModelType.DESIGN_FILES]: getI18nString('search.facets.design_files'),
+    [SearchModelType.FIGJAM_FILES]: getI18nString('search.facets.figjam_boards'),
+    [SearchModelType.SLIDES]: getI18nString('search.facets.slides'),
+    [SearchModelType.SITES]: getI18nString('search.facets.sites'),
+    [SearchModelType.BUZZ]: getI18nString('search.facets.buzz_files'),
+    [SearchModelType.MAKE]: getI18nString('search.facets.make_files'),
+    [SearchModelType.USERS]: getI18nString('search.facets.people'),
+    [SearchModelType.PROJECTS]: getI18nString('search.facets.projects'),
+    [SearchModelType.TEAMS]: getI18nString('search.facets.teams'),
+    [SearchModelType.ALL_FILES]: getI18nString('search.preview_section.all_files'),
+    [SearchModelType.PLUGINS]: '',
+    [SearchModelType.WIDGETS]: '',
+  }[type]
 }
-export function $$f3() {
-  let e = [$L.DESIGN_FILES, $L.FIGJAM_FILES, $L.SLIDES];
-  isCooperFeatureEnabled() && e.push($L.BUZZ);
-  isSitesFeatureEnabled() && e.push($L.SITES);
-  isFigmakeSitesEnabled() && e.push($L.MAKE);
-  return e;
+
+/**
+ * Gets the default search model types based on enabled features.
+ * Original: $$f3
+ */
+export function getDefaultSearchTypes(): SearchModelType[] {
+  const types = [SearchModelType.DESIGN_FILES, SearchModelType.FIGJAM_FILES, SearchModelType.SLIDES]
+  if (isCooperFeatureEnabled())
+    types.push(SearchModelType.BUZZ)
+  if (isSitesFeatureEnabled())
+    types.push(SearchModelType.SITES)
+  if (isFigmakeSitesEnabled())
+    types.push(SearchModelType.MAKE)
+  return types
 }
-export function $$_0(e) {
-  return deepEqual(e, $$f3());
+
+/**
+ * Checks if the given types match the default search types.
+ * Original: $$_0
+ */
+export function isDefaultSearchTypes(types: SearchModelType[]): boolean {
+  return deepEqual(types, getDefaultSearchTypes())
 }
-export function $$A23(e, t) {
-  for (let i of t) if (i.type === e) return !0;
-  return !1;
+
+/**
+ * Checks if a facet list contains a specific type.
+ * Original: $$A23
+ */
+export function hasFacetType(type: CreatorResourceType, facets: any[]): boolean {
+  return facets.some(facet => facet.type === type)
 }
-export function $$y9(e, t) {
-  for (let [i, n] of t.entries()) if (n.type === e) return i;
-  return -1;
+
+/**
+ * Finds the index of a facet with a specific type.
+ * Original: $$y9
+ */
+export function findFacetIndex(type: CreatorResourceType, facets: any[]): number {
+  return facets.findIndex(facet => facet.type === type)
 }
-export function $$b4(e, t) {
-  if (!e) return "";
-  switch (e.type) {
+
+/**
+ * Gets the label for a facet's value.
+ * Original: $$b4
+ */
+export function getFacetValueLabel(facet: any, currentUserId?: string): string {
+  if (!facet)
+    return ''
+  switch (facet.type) {
     case CreatorResourceType.RESOURCE:
-      var i;
-      i = e.value;
       return {
-        [$L.DESIGN_FILES]: getI18nString("search.facets.design"),
-        [$L.FIGJAM_FILES]: getI18nString("search.facets.figjam"),
-        [$L.SLIDES]: getI18nString("search.facets.slides"),
-        [$L.SITES]: getI18nString("search.facets.sites"),
-        [$L.BUZZ]: getI18nString("search.facets.buzz"),
-        [$L.MAKE]: getI18nString("search.facets.make"),
-        [$L.USERS]: getI18nString("search.facets.people"),
-        [$L.PROJECTS]: getI18nString("search.facets.projects"),
-        [$L.TEAMS]: getI18nString("search.facets.teams"),
-        [$L.ALL_FILES]: "",
-        [$L.PLUGINS]: "",
-        [$L.WIDGETS]: ""
-      }[i];
+        [SearchModelType.DESIGN_FILES]: getI18nString('search.facets.design'),
+        [SearchModelType.FIGJAM_FILES]: getI18nString('search.facets.figjam'),
+        [SearchModelType.SLIDES]: getI18nString('search.facets.slides'),
+        [SearchModelType.SITES]: getI18nString('search.facets.sites'),
+        [SearchModelType.BUZZ]: getI18nString('search.facets.buzz'),
+        [SearchModelType.MAKE]: getI18nString('search.facets.make'),
+        [SearchModelType.USERS]: getI18nString('search.facets.people'),
+        [SearchModelType.PROJECTS]: getI18nString('search.facets.projects'),
+        [SearchModelType.TEAMS]: getI18nString('search.facets.teams'),
+        [SearchModelType.ALL_FILES]: '',
+        [SearchModelType.PLUGINS]: '',
+        [SearchModelType.WIDGETS]: '',
+      }[facet.value]
     case CreatorResourceType.CREATOR:
-      return function (e, t) {
-        let i = e.name || e.handle;
-        return t && e.id === t ? getI18nString("search.facets.name_and_you", {
-          name: i
-        }) : i;
-      }(e.value, t);
+      const name = facet.value.name || facet.value.handle
+      return currentUserId && facet.value.id === currentUserId
+        ? getI18nString('search.facets.name_and_you', { name })
+        : name
     case CreatorResourceType.SPACE:
-      return e.value.name;
+      return facet.value.name
     default:
-      return "";
+      return ''
   }
 }
-export function $$v12(e, t) {
-  switch (e) {
+
+/**
+ * Gets query parameters for a space type.
+ * Original: $$v12
+ */
+export function getSpaceQueryParams(type: FolderType, value: any): Record<string, any> {
+  switch (type) {
     case FolderType.FOLDER:
-      return {
-        folderId: t.id
-      };
+      return { folderId: value.id }
     case FolderType.TEAM:
-      return {
-        teamId: t.id
-      };
+      return { teamId: value.id }
     case FolderType.ORG:
-      return {
-        orgId: t.id
-      };
+      return { orgId: value.id }
   }
 }
-export function $$I18(e) {
-  switch (e.type) {
+
+/**
+ * Gets query parameters for a facet.
+ * Original: $$I18
+ */
+export function getFacetQueryParams(facet: any): Record<string, any> {
+  switch (facet.type) {
     case CreatorResourceType.RESOURCE:
-      return {
-        resourceType: e.value
-      };
+      return { resourceType: facet.value }
     case CreatorResourceType.CREATOR:
-      return {
-        creatorId: e.value.id
-      };
+      return { creatorId: facet.value.id }
     case CreatorResourceType.SPACE:
-      return $$v12(e.spaceType, e.value);
+      return getSpaceQueryParams(facet.spaceType, facet.value)
   }
 }
-export function $$E13(e, t, i, n, r) {
-  let a = !e.value || $$x6(e);
-  return e.type === CreatorResourceType.RESOURCE ? $$R17(a ? null : e, i, n, r) : e.type === CreatorResourceType.CREATOR ? $$R17(t, a ? null : e, n, r) : e.type === CreatorResourceType.SPACE ? $$R17(t, i, a ? null : e, r) : null;
+
+/**
+ * Builds a search query object.
+ * Original: $$E13
+ */
+export function buildSearchQuery(searchType: SearchModelType, creatorFacet: any, resourceFacet: any, spaceFacet: any, modelType?: PublicModelType): any {
+  const isEmpty = !spaceFacet?.value || isFacetEmpty(spaceFacet)
+  if (spaceFacet?.type === CreatorResourceType.RESOURCE) {
+    return buildQueryObject(isEmpty ? null : spaceFacet, resourceFacet, creatorFacet, modelType)
+  }
+  if (spaceFacet?.type === CreatorResourceType.CREATOR) {
+    return buildQueryObject(searchType, isEmpty ? null : spaceFacet, creatorFacet, modelType)
+  }
+  if (spaceFacet?.type === CreatorResourceType.SPACE) {
+    return buildQueryObject(searchType, resourceFacet, isEmpty ? null : spaceFacet, modelType)
+  }
+  return null
 }
-export function $$x6(e) {
-  return e.type === CreatorResourceType.CREATOR ? 0 === e.value.length : e.type === CreatorResourceType.SPACE && $$w24(e.value);
+
+/**
+ * Checks if a facet is empty.
+ * Original: $$x6
+ */
+export function isFacetEmpty(facet: any): boolean {
+  if (facet.type === CreatorResourceType.CREATOR) {
+    return facet.value.length === 0
+  }
+  if (facet.type === CreatorResourceType.SPACE) {
+    return isSpaceEmpty(facet.value)
+  }
+  return false
 }
-export function $$S7(e, t) {
-  return e === FolderType.FOLDER || e === FolderType.TEAM || e === FolderType.ORG ? {
-    type: CreatorResourceType.SPACE,
-    spaceType: e,
-    value: t
-  } : null;
+
+/**
+ * Creates a space facet.
+ * Original: $$S7
+ */
+export function createSpaceFacet(type: FolderType, value: any): any | null {
+  if (type === FolderType.FOLDER || type === FolderType.TEAM || type === FolderType.ORG) {
+    return {
+      type: CreatorResourceType.SPACE,
+      spaceType: type,
+      value,
+    }
+  }
+  return null
 }
-export function $$w24(e) {
-  for (let t of Object.values(e)) if (0 !== t.length) return !1;
-  return !0;
+
+/**
+ * Checks if a space map is empty.
+ * Original: $$w24
+ */
+export function isSpaceEmpty(spaceMap: Record<FolderType, any[]>): boolean {
+  return Object.values(spaceMap).every(arr => arr.length === 0)
 }
-export function $$C16(e) {
-  return e ? {
-    type: CreatorResourceType.RESOURCE,
-    value: e
-  } : null;
+
+/**
+ * Creates a resource facet.
+ * Original: $$C16
+ */
+export function createResourceFacet(value: SearchModelType): any | null {
+  return value ? { type: CreatorResourceType.RESOURCE, value } : null
 }
-export function $$T10(e) {
-  return e ? {
-    type: CreatorResourceType.CREATOR,
-    value: e
-  } : null;
+
+/**
+ * Creates a creator facet.
+ * Original: $$T10
+ */
+export function createCreatorFacet(value: any[]): any | null {
+  return value ? { type: CreatorResourceType.CREATOR, value } : null
 }
-export function $$k1(e) {
-  return e ? {
-    type: CreatorResourceType.SPACE,
-    value: e
-  } : null;
+
+/**
+ * Creates a space facet from a map.
+ * Original: $$k1
+ */
+export function createSpaceFacetFromMap(value: Record<FolderType, any[]>): any | null {
+  return value ? { type: CreatorResourceType.SPACE, value } : null
 }
-export function $$R17(e, t, i, n) {
-  let r = i && !$$x6(i) ? i.value : null;
-  let a = r ? r[FolderType.FOLDER].map(e => e.id) : [];
-  let s = r ? r[FolderType.TEAM].map(e => e.id) : [];
-  let l = r ? r[FolderType.ORG].map(e => e.id) : [];
-  if (t && !$$x6(t)) return {
-    searchModelType: PublicModelType.FILES,
-    editorType: convertSearchModelTypeToFileKind(e),
-    creatorIds: t.value.map(e => e.id),
-    folderIds: a,
-    teamIds: s,
-    orgIds: l
-  };
-  if (n ?? e) switch (n ?? convertSearchModelTypeToModelType(e)) {
+
+/**
+ * Builds the query object for search.
+ * Original: $$R17
+ */
+export function buildQueryObject(searchType: any, creatorFacet: any, spaceFacet: any, modelType?: PublicModelType): any {
+  const spaceValue = spaceFacet && !isFacetEmpty(spaceFacet) ? spaceFacet.value : null
+  const folderIds = spaceValue ? spaceValue[FolderType.FOLDER].map((item: any) => item.id) : []
+  const teamIds = spaceValue ? spaceValue[FolderType.TEAM].map((item: any) => item.id) : []
+  const orgIds = spaceValue ? spaceValue[FolderType.ORG].map((item: any) => item.id) : []
+
+  if (creatorFacet && !isFacetEmpty(creatorFacet)) {
+    return {
+      searchModelType: PublicModelType.FILES,
+      editorType: convertSearchModelTypeToFileKind(searchType),
+      creatorIds: creatorFacet.value.map((creator: any) => creator.id),
+      folderIds,
+      teamIds,
+      orgIds,
+    }
+  }
+
+  if (modelType ?? searchType) {
+    const effectiveModelType = modelType ?? convertSearchModelTypeToModelType(searchType)
+    switch (effectiveModelType) {
+      case PublicModelType.FILES:
+        return {
+          searchModelType: PublicModelType.FILES,
+          editorType: convertSearchModelTypeToFileKind(searchType),
+          folderIds,
+          teamIds,
+          orgIds,
+        }
+      case PublicModelType.USERS:
+        return { searchModelType: PublicModelType.USERS, orgIds }
+      case PublicModelType.PROJECTS:
+        return { searchModelType: PublicModelType.PROJECTS, teamIds, orgIds }
+      case PublicModelType.TEAMS:
+        return { searchModelType: PublicModelType.TEAMS, orgIds }
+      case PublicModelType.PRIVATE_PLUGINS:
+        return { searchModelType: PublicModelType.PRIVATE_PLUGINS, orgIds }
+      case PublicModelType.PRIVATE_WIDGETS:
+        return { searchModelType: PublicModelType.PRIVATE_WIDGETS, orgIds }
+      default:
+        return null
+    }
+  }
+
+  return spaceValue ? { searchModelType: null, folderIds, teamIds, orgIds } : null
+}
+
+/**
+ * Enum for facet operations.
+ * Original: $$N8
+ */
+export enum FacetOperation {
+  REMOVE_FROM_GROUP = 0,
+  ADD_TO_GROUP = 1,
+}
+
+/**
+ * Updates a creator facet based on operation.
+ * Original: $$P2
+ */
+export function updateCreatorFacet(facet: any, operation: FacetOperation, currentFacet?: any): any {
+  const currentValues = currentFacet?.value || []
+  let newValues: any[]
+  if (operation === FacetOperation.ADD_TO_GROUP && !includesEqual(currentValues, facet.value)) {
+    newValues = [...currentValues, facet.value]
+  }
+  else if (operation === FacetOperation.REMOVE_FROM_GROUP) {
+    newValues = currentValues.filter((val: any) => !deepEqual(val, facet.value))
+  }
+  else {
+    newValues = currentValues
+  }
+  return createCreatorFacet(newValues)
+}
+
+/**
+ * Updates a space facet based on operation.
+ * Original: $$O20
+ */
+export function updateSpaceFacet(facet: any, operation: FacetOperation, currentFacet?: any): any {
+  const currentMap = currentFacet?.value || EMPTY_SPACE_MAP
+  const currentSpaces = currentMap[facet.spaceType]
+  let newSpaces: any[]
+  if (operation === FacetOperation.ADD_TO_GROUP && !includesEqual(currentSpaces, facet.value)) {
+    newSpaces = [...currentSpaces, facet.value]
+  }
+  else if (operation === FacetOperation.REMOVE_FROM_GROUP) {
+    newSpaces = currentSpaces.filter((val: any) => !deepEqual(val, facet.value))
+  }
+  else {
+    newSpaces = currentSpaces
+  }
+  return createSpaceFacetFromMap({ ...currentMap, [facet.spaceType]: newSpaces })
+}
+
+/**
+ * Checks if text is longer than 50 characters.
+ * Original: $$D5
+ */
+export function isLongText(text: string): boolean {
+  return !!text && text.length > 50
+}
+
+/**
+ * Gets supported facet types for a model type.
+ * Original: $$L22
+ */
+export function getSupportedFacetTypes(modelType: PublicModelType): CreatorResourceType[] {
+  switch (modelType) {
     case PublicModelType.FILES:
-      return {
-        searchModelType: PublicModelType.FILES,
-        editorType: convertSearchModelTypeToFileKind(e),
-        folderIds: a,
-        teamIds: s,
-        orgIds: l
-      };
-    case PublicModelType.USERS:
-      return {
-        searchModelType: PublicModelType.USERS,
-        orgIds: l
-      };
-    case PublicModelType.PROJECTS:
-      return {
-        searchModelType: PublicModelType.PROJECTS,
-        teamIds: s,
-        orgIds: l
-      };
-    case PublicModelType.TEAMS:
-      return {
-        searchModelType: PublicModelType.TEAMS,
-        orgIds: l
-      };
-    case PublicModelType.PRIVATE_PLUGINS:
-      return {
-        searchModelType: PublicModelType.PRIVATE_PLUGINS,
-        orgIds: l
-      };
-    case PublicModelType.PRIVATE_WIDGETS:
-      return {
-        searchModelType: PublicModelType.PRIVATE_WIDGETS,
-        orgIds: l
-      };
-    default:
-      return null;
-  }
-  return r ? {
-    searchModelType: null,
-    folderIds: a,
-    teamIds: s,
-    orgIds: l
-  } : null;
-}
-export var $$N8 = (e => (e[e.REMOVE_FROM_GROUP = 0] = "REMOVE_FROM_GROUP", e[e.ADD_TO_GROUP = 1] = "ADD_TO_GROUP", e))($$N8 || {});
-export function $$P2(e, t, i) {
-  let r = i ? i.value : [];
-  let a = [];
-  1 !== t || includesEqual(r, e.value) ? 0 === t && (a = r.filter(t => !deepEqual(t, e.value))) : a = [...r, e.value];
-  return $$T10(a);
-}
-export function $$O20(e, t, i) {
-  let r;
-  let a = i ? i.value : $$u19;
-  let s = a[e.spaceType];
-  1 !== t || includesEqual(s, e.value) ? 0 === t && (r = s.flatMap(t => deepEqual(t, e.value) ? [] : [t])) : r = [...s, e.value];
-  return $$k1({
-    ...a,
-    [e.spaceType]: r
-  });
-}
-export function $$D5(e) {
-  return !!e && e.length > 50;
-}
-export function $$L22(e) {
-  switch (e) {
-    case PublicModelType.FILES:
-      return [CreatorResourceType.RESOURCE, CreatorResourceType.CREATOR, CreatorResourceType.SPACE];
+      return [CreatorResourceType.RESOURCE, CreatorResourceType.CREATOR, CreatorResourceType.SPACE]
     case PublicModelType.PROJECTS:
     case PublicModelType.TEAMS:
     case PublicModelType.USERS:
-      return [CreatorResourceType.SPACE];
+      return [CreatorResourceType.SPACE]
     default:
-      return [];
+      return []
   }
 }
-export const Aj = $$_0;
-export const Bu = $$k1;
-export const C8 = $$P2;
-export const ES = $$f3;
-export const FR = $$b4;
-export const GX = $$D5;
-export const II = $$x6;
-export const KI = $$S7;
-export const M2 = $$N8;
-export const Nz = $$y9;
-export const Rj = $$T10;
-export const S2 = $$g11;
-export const dd = $$v12;
-export const gh = $$E13;
-export const gl = $$m14;
-export const hp = $$c15;
-export const jN = $$C16;
-export const nX = $$R17;
-export const oM = $$I18;
-export const og = $$u19;
-export const q1 = $$O20;
-export const qM = $$p21;
-export const r4 = $$L22;
-export const sd = $$A23;
-export const wG = $$w24;
-export const yA = $$h25;
+
+// Updated exports with refactored names
+export const Aj = isDefaultSearchTypes
+export const Bu = createSpaceFacetFromMap
+export const C8 = updateCreatorFacet
+export const ES = getDefaultSearchTypes
+export const FR = getFacetValueLabel
+export const GX = isLongText
+export const II = isFacetEmpty
+export const KI = createSpaceFacet
+export const M2 = FacetOperation
+export const Nz = findFacetIndex
+export const Rj = createCreatorFacet
+export const S2 = getResourceTypeLabel
+export const dd = getSpaceQueryParams
+export const gh = buildSearchQuery
+export const gl = getFacetPrefix
+export const hp = MAX_TRUNCATE_LENGTH
+export const jN = createResourceFacet
+export const nX = buildQueryObject
+export const oM = getFacetQueryParams
+export const og = EMPTY_SPACE_MAP
+export const q1 = updateSpaceFacet
+export const qM = getFacetTypeLabel
+export const r4 = getSupportedFacetTypes
+export const sd = hasFacetType
+export const wG = isSpaceEmpty
+export const yA = getFacetDisplayValue
+export const yj = truncate

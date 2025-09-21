@@ -27,7 +27,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { SvgComponent } from '../905/714743';
 import { getFilteredFeatureFlags } from '../905/717445';
 import { k as _$$k3 } from '../905/749197';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { O as _$$O } from '../905/969533';
 import { S as _$$S } from '../905/999953';
 import { A as _$$A3 } from '../b2835def/15890';
@@ -777,7 +777,7 @@ let eA = memo(e => {
     'style': eY,
     'children': [e5 && jsxs('div', {
       className: cm,
-      style: sx.absolute.wFull.eventsNone.$,
+      style: styleBuilderInstance.absolute.wFull.eventsNone.$,
       children: [jsx('div', {
         className: _$$s.wFull.$
       }), jsx('div', {
@@ -790,7 +790,7 @@ let eA = memo(e => {
     }), jsx(_$$e2, {
       condition: e1,
       wrapper: e => jsx('div', {
-        style: sx.absolute.wFull.eventsNone.$,
+        style: styleBuilderInstance.absolute.wFull.eventsNone.$,
         children: jsx('div', {
           className: n4,
           children: jsx('div', {

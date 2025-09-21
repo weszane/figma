@@ -54,7 +54,7 @@ import { a } from "../905/964520";
 import { U as _$$U } from "../905/275247";
 import { S as _$$S } from "../905/794163";
 import { s as _$$s2 } from "../9314/287043";
-import { S as _$$S2 } from "../905/962956";
+import { CurrencyEnum } from "../905/962956";
 import { Button } from "../905/521428";
 import { R as _$$R } from "../7021/67076";
 import { Z as _$$Z } from "../469e6e40/658906";
@@ -751,7 +751,7 @@ function ek(e) {
 function eI(e) {
   let t = isProrationBillingEnabledForCurrentPlan();
   let a = useMemo(() => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.upcoming_invoice_card.heading.next_monthly_invoice") : getI18nString("admin_settings.upcoming_invoice_card.heading.next_quarterly_invoice"), [e.planType]);
-  let i = useMemo(() => new CurrencyFormatter(e.upcomingInvoice?.currency || e.planCurrency || _$$S2.USD), [e.upcomingInvoice, e.planCurrency]);
+  let i = useMemo(() => new CurrencyFormatter(e.upcomingInvoice?.currency || e.planCurrency || CurrencyEnum.USD), [e.upcomingInvoice, e.planCurrency]);
   let r = i.formatMoney(e.upcomingInvoice?.total || 0, {
     showCents: !0,
     currencySign: "accounting"

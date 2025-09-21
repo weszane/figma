@@ -39,7 +39,7 @@ import { buildFileUrl } from "../905/612685";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { useTeamPlanFeatures } from "../figma_app/465071";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { U as _$$U } from "../figma_app/65327";
 import { A as _$$A3 } from "../905/251970";
@@ -206,7 +206,7 @@ let eg = [{
       isDraftsFolder,
       editorType: FFileType.FIGMAKE,
       forceOpenNewTab: !0,
-      newFileFrom: f6.FIGMAKE_PROTOTYPE_ANNOUNCEMENT,
+      newFileFrom: FileBrowserLocation.FIGMAKE_PROTOTYPE_ANNOUNCEMENT,
       contextClicked: "figmake_prototype_announcement_created"
     });
     let c = {

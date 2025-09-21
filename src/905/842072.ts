@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { createVariableResConfig, mapVariableToWorkflow, searchAPIHandler } from '../905/144933';
-import { H } from '../905/473998';
+import { hubFileAPI } from '../905/473998';
 import { IT, liveStoreInstance } from '../905/713695';
 import { N4 } from '../figma_app/630951';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
@@ -30,7 +30,7 @@ let $$c1 = liveStoreInstance.Query({
     if (!i.length) return null;
     let n = Array.from(new Set(i));
     try {
-      let e = (await H.getLibraries({
+      let e = (await hubFileAPI.getLibraries({
         libraryIds: n
       })).data.meta;
       return {

@@ -97,7 +97,7 @@ import { gY as _$$gY, IT, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { G as _$$G } from '../905/750789';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { t as _$$t3 } from '../905/751495';
 import { _ as _$$_ } from '../905/799322';
 import { d as _$$d } from '../905/811033';
@@ -118,7 +118,7 @@ import { removeCommunityProfileUser, changeCommunityProfilePrimaryUser } from '.
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
 import { useRecording } from '../905/959312';
@@ -133,7 +133,7 @@ import { A as _$$A4 } from '../5724/663128';
 import { A as _$$A3 } from '../6041/209192';
 import { A as _$$A2 } from '../6828/523860';
 import { s as _$$s } from '../cssbuilder/589278';
-import { n as _$$n } from '../figma_app/3731';
+import { renderAvatar } from '../figma_app/3731';
 import { lW } from '../figma_app/11182';
 import { yJ } from '../figma_app/24841';
 import { useAtomWithSubscription } from '../figma_app/27355';
@@ -151,7 +151,7 @@ import { c$, MM, ms, wv } from '../figma_app/236327';
 import l, { DialogBody, DialogTitle, DialogActionStrip, DialogHiddenTitle, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { logAndTrackCTA } from '../figma_app/314264';
-import { kA, yK } from '../figma_app/336853';
+import { isBigmaEnabledSimple, isTemplatePickerDisabled } from '../figma_app/336853';
 import { tx as _$$tx2 } from '../figma_app/395505';
 import { useFplStrings } from '../figma_app/415899';
 import { getEmailDomain } from '../figma_app/416935';
@@ -1000,7 +1000,7 @@ function eZ(e) {
   let l = useCallback(() => {
     fetchNextPage && !t && (i(!0), s(!1), fetchNextPage().catch(() => {
       s(!0);
-    }).$$finally(() => {
+    }).finally(() => {
       i(!1);
     }));
   }, [fetchNextPage, t]);
@@ -1363,9 +1363,9 @@ function tA() {
   });
 }
 function ty() {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'FeedSettings',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e2.WAYFINDING
     },
@@ -2027,7 +2027,7 @@ let iv = registerModal(e => {
                 scope: IJ.FILE_VERSIONS,
                 accessLevel: d[IJ.FILE_VERSIONS],
                 onAccessLevelChange: I
-              }), org && kA(org) && jsx(ib, {
+              }), org && isBigmaEnabledSimple(org) && jsx(ib, {
                 scope: IJ.LIBRARY_ANALYTICS,
                 accessLevel: d[IJ.LIBRARY_ANALYTICS],
                 onAccessLevelChange: I
@@ -2047,7 +2047,7 @@ let iv = registerModal(e => {
                 scope: IJ.TEAM_LIBRARY_CONTENT,
                 accessLevel: d[IJ.TEAM_LIBRARY_CONTENT],
                 onAccessLevelChange: I
-              }), (getFeatureFlags().ds_variables_pp_force_enterprise || org && kA(org)) && jsx(ib, {
+              }), (getFeatureFlags().ds_variables_pp_force_enterprise || org && isBigmaEnabledSimple(org)) && jsx(ib, {
                 scope: IJ.VARIABLES,
                 accessLevel: d[IJ.VARIABLES],
                 onAccessLevelChange: I
@@ -2176,7 +2176,7 @@ function iw(e) {
         }) : renderI18nText('tokens.settings.never_used')
       }), jsx('button', {
         onClick: d,
-        style: _$$sx.$$if(o !== null, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).cursorPointer.mr0.p0.add({
+        style: styleBuilderInstance.$$if(o !== null, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).cursorPointer.mr0.p0.add({
           backgroundColor: 'transparent',
           border: 'none'
         }).$,
@@ -2312,7 +2312,7 @@ function iR({
       }));
     }).catch(() => {
       s(FlashActions.error('Could not revoke token, please try again'));
-    }).$$finally(() => {
+    }).finally(() => {
       n(!1);
     });
   }, [s, e]);
@@ -2443,7 +2443,7 @@ function iF({
         children: renderI18nText('sessions.session.current_session')
       }) : jsx(ButtonPrimitive, {
         className: 'security_view--sessionRevokeEnabled--Tm88T',
-        style: _$$sx.$$if(i, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).$,
+        style: styleBuilderInstance.$$if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
         onClick: () => o(e.id),
         children: renderI18nText('sessions.session.revoke_session')
       })
@@ -2709,7 +2709,7 @@ function iH({
         children: renderI18nText('sessions.session.current_session')
       }) : jsx(ButtonPrimitive, {
         className: 'sessions_view--sessionRevokeEnabled--d-6RK',
-        style: _$$sx.$$if(i, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).$,
+        style: styleBuilderInstance.$$if(i, styleBuilderInstance.colorTextDisabled, styleBuilderInstance.colorTextDanger).$,
         onClick: () => o(e.id),
         children: renderI18nText('sessions.session.revoke_session')
       })
@@ -3760,7 +3760,7 @@ function ro() {
       if (t !== 'error') {
         return jsxs('div', {
           children: [jsx('div', {
-            style: _$$sx.my12.$,
+            style: styleBuilderInstance.my12.$,
             children: renderI18nText('settings.account_settings.local_fonts_are_enabled_you_have_local_font_count_fonts_available_in_figma', {
               localFontCount: t
             })
@@ -3779,7 +3779,7 @@ function ro() {
       if (!BrowserInfo.mac && !BrowserInfo.windows || BrowserInfo.mobile) {
         return jsx('div', {
           children: jsx('div', {
-            style: _$$sx.my24.$,
+            style: styleBuilderInstance.my24.$,
             children: renderI18nText('settings.account_settings.local_fonts_are_currently_not_supported_for_this_operating_system')
           })
         });
@@ -3788,7 +3788,7 @@ function ro() {
         let e = BrowserInfo.mac ? 'https://desktop.figma.com/agent/mac/InstallFigmaAgent.dmg' : 'https://desktop.figma.com/agent/win/InstallFigmaAgent.exe';
         return jsxs('div', {
           children: [jsx('div', {
-            style: _$$sx.my12.$,
+            style: styleBuilderInstance.my12.$,
             children: renderI18nText('settings.account_settings.install_font_service_for_local', {
               learnMoreLink: jsx(Button.Link, {
                 onClick: n,
@@ -4052,7 +4052,7 @@ function rD(e) {
     direction: 'horizontal',
     spacing: 16,
     verticalAlignItems: 'start',
-    children: [jsx(_$$n, {
+    children: [jsx(renderAvatar, {
       size: 32,
       userId: user.id,
       orgId: type === FOrganizationLevelType.ORG ? parentId : null,
@@ -4220,7 +4220,7 @@ function rF({
     orgById: e.orgById,
     teams: e.teams,
     orgDomains: e.orgDomains,
-    currentOrgDisabledPresetsAndTemplates: yK(e)
+    currentOrgDisabledPresetsAndTemplates: isTemplatePickerDisabled(e)
   }));
   let s = useSubscription(UserFlagByName({
     name: 'disable_file_view_history'
@@ -4705,7 +4705,7 @@ let rj = {
       orgById: e.orgById,
       teams: e.teams,
       orgDomains: e.orgDomains,
-      currentOrgDisabledPresetsAndTemplates: yK(e)
+      currentOrgDisabledPresetsAndTemplates: isTemplatePickerDisabled(e)
     }));
     return e ? jsx(_$$P, {
       className: ei,

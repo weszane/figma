@@ -14,7 +14,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { RecentlyUsedActionsView } from "../figma_app/43951";
 import { getPluginByFileId } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
-import { CN } from "../figma_app/915202";
+import { PluginRunEventExtendedSchema } from "../figma_app/915202";
 import { hasLocalFileId, SV } from "../figma_app/155287";
 var l = o;
 export let $$I2 = atom([]);
@@ -41,7 +41,7 @@ export function $$S1() {
   if (!e.data) return [];
   let C = getResourceDataOrFallback(e.data.actionsHistory);
   if (!C || !C.recentlyUsedActions) return [];
-  let w = z.array(CN).safeParse(C.recentlyUsedActions);
+  let w = z.array(PluginRunEventExtendedSchema).safeParse(C.recentlyUsedActions);
   if (!w.success) {
     reportError(_$$e.AI_FOR_PRODUCTION, Error("Fetched invalid schema for QuickActionsRecentCommandSelectedArgs from actions history"), {});
     return [];

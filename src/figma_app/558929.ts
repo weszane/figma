@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { t as _$$t2 } from "../905/706346";
 import { _ as _$$_ } from "../905/456042";
-import { wr, Ux } from "../figma_app/387599";
+import { getCurrentSearchSessionId, getQueryIdFromState } from "../figma_app/387599";
 import { y as _$$y } from "../905/444931";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, showModalHandler } from "../905/156213";
@@ -17,7 +17,7 @@ import { addWidgetToRecentsThunk, addPluginToRecentsThunk } from "../figma_app/1
 import { mapEditorTypeTo } from "../905/808775";
 import { hb, VT } from "../905/551193";
 import { setupAuthedUserPlanLoader } from "../905/352022";
-import { HE } from "../905/967587";
+import { getWorkspaceName } from "../905/967587";
 import { F as _$$F2 } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
 import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_app/300692";
@@ -90,7 +90,7 @@ let G = createOptimistThunk(async (e, t) => {
   } = i;
   let o = workspaces.map(e => ({
     ...e,
-    workspaceName: HE(i, e),
+    workspaceName: getWorkspaceName(i, e),
     user: authedUsers.byId[e.userId]
   }));
   let l = await Promise.all(o.map(async e => {
@@ -204,7 +204,7 @@ let $$H0 = createOptimistThunk((e, t) => {
     let t = _$$O(e, n.id);
     return {
       ...t,
-      workspaceName: HE(r, t),
+      workspaceName: getWorkspaceName(r, t),
       user: n
     };
   });
@@ -268,8 +268,8 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   let {
     user
   } = r;
-  let s = wr(r);
-  let l = Ux(r);
+  let s = getCurrentSearchSessionId(r);
+  let l = getQueryIdFromState(r);
   let u = isWidget(t.resource);
   let p = getPluginVersion(t.resource);
   if (!user) {
@@ -354,7 +354,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   } else if (1 === m.length) {
     let n = m[0];
     if (n.orgId && !VT(t.resource, r.orgById[n.orgId]) && !(await hb(t.resource, r.orgById[n.orgId]))) {
-      e.dispatch(B(p.name, HE(r, n), e => {
+      e.dispatch(B(p.name, getWorkspaceName(r, n), e => {
         setRecentUserData(user.id, !1, null, void 0, e.id);
         _$$j(v, null, e.id, user.id);
         _();

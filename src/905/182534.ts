@@ -3,10 +3,10 @@ import { debugState } from "../905/407919";
 import { selectFolderView, selectTeamView } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
-import { Pj, Ns, PI } from "../905/977218";
+import { searchSessionSeeMoreClickAction, handleSearchParameterChangeThunk, searchThunk } from "../905/977218";
 import { Tq } from "../905/697795";
 import { buildFileUrl } from "../905/612685";
-import { PublicModelType, L0, SearchTypeMode } from "../figma_app/162807";
+import { PublicModelType, ContentPreviewMode, SearchTypeMode } from "../figma_app/162807";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { InterProfileType } from "../905/895626";
 export function $$h1(e) {
@@ -46,7 +46,7 @@ export function $$I13(e, t) {
 }
 export function $$E11() {
   let e = debugState.getState().selectedView;
-  return isIncludedView(e) ? "search" === e.view ? L0.FULL_PAGE : L0.PREVIEW : null;
+  return isIncludedView(e) ? "search" === e.view ? ContentPreviewMode.FULL_PAGE : ContentPreviewMode.PREVIEW : null;
 }
 export function $$x8(e, t, i, n, r, a) {
   e(selectViewAction({
@@ -54,13 +54,13 @@ export function $$x8(e, t, i, n, r, a) {
     entryPoint: "file_browser",
     previousView: t && (isIncludedView(t) || isOrgView(t)) ? t : void 0
   }));
-  e(Pj({
+  e(searchSessionSeeMoreClickAction({
     category: a ? void 0 : r
   }));
-  e(Ns({
+  e(handleSearchParameterChangeThunk({
     searchModelType: r
   }));
-  e(PI({
+  e(searchThunk({
     query: i,
     searchScope: n,
     searchModelType: r,

@@ -1,6 +1,6 @@
 import { createValidatedLocalStorageAtom, tx, createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { z } from "../905/239603";
-import { MZ } from "../figma_app/925970";
+import { generateSessionId } from "../figma_app/925970";
 let s = z.object({
   key: z.string()
 });
@@ -62,7 +62,7 @@ let g = createRemovableAtomFamily(e => atom(t => {
   let n = t(h);
   return n && n.key === r && n.type === e ? n.data : null;
 }, (t, r, n) => {
-  let i = MZ();
+  let i = generateSessionId();
   r(h, {
     data: n,
     type: e,

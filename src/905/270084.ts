@@ -14,7 +14,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import v, { AutoLayout } from "../905/470281";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
@@ -274,7 +274,7 @@ function P(e) {
         }), columns.map((t, i) => t.name ? jsx("div", {
           className: t.className,
           children: t.loadingComponent ? t.loadingComponent : jsx("div", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: `${50 * Math.abs(Math.sin(e + i + 1)) + 30}%`
             }).$,
             children: jsx(Wi, {
@@ -717,7 +717,7 @@ class j extends Component {
           }), this.props.columns.map((t, i) => t.name ? jsx("div", {
             className: t.className,
             children: t.loadingComponent ? t.loadingComponent : jsx("div", {
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 width: `${50 * Math.abs(Math.sin(e + i + 1)) + 30}%`
               }).$,
               children: jsx(Wi, {

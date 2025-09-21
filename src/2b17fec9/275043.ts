@@ -4,7 +4,7 @@ import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { um, useAtomWithSubscription, useAtomValueAndSetter, Xr, atom } from "../figma_app/27355";
 import { wY } from "../figma_app/708845";
-import { tH as _$$tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { F as _$$F } from "../figma_app/832508";
 import { z as _$$z } from "../figma_app/47967";
 import { XS, Iy } from "../figma_app/95367";
@@ -106,7 +106,7 @@ import { r as _$$r } from "../3276/289511";
 import { n6 } from "../9410/67768";
 import { y as _$$y2 } from "../figma_app/873852";
 import { Kj, $R as _$$$R, Hu, Iq } from "../2b17fec9/696626";
-import { Ho } from "../figma_app/308685";
+import { stopChattingThunk } from "../figma_app/308685";
 import { H1 } from "../figma_app/124493";
 import { CB } from "../figma_app/442259";
 import { hr } from "../9410/960980";
@@ -4002,7 +4002,7 @@ function iL({
         t && e(H1({
           votingStage: SessionStatus.NOT_JOINED
         }));
-        e(Ho());
+        e(stopChattingThunk());
       }, [e, t])
     };
   }();
@@ -4242,9 +4242,9 @@ function iP({
   });
 }
 export function $$iU0() {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "WhiteboardToolbelt",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(iF, {
       children: jsx(iH, {
         children: jsx(iB, {})

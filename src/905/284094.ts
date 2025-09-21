@@ -1,64 +1,147 @@
-import { useState, useEffect } from "react";
-import { flushSync } from "react-dom";
-class a {
+import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
+
+/**
+ * FrameBatcher (originally class a)
+ * Manages frame listeners and schedules UI updates using requestAnimationFrame.
+ */
+class FrameBatcher {
+  private _frameListeners: Set<() => void>
+  private _rafHandle: number
+
   constructor() {
-    this._frameListeners = new Set();
-    this._rafHandle = -1;
-    this.schedulePublishToUI = () => {
-      this._rafHandle >= 0 || (this._rafHandle = requestAnimationFrame(() => {
-        for (let e of this._frameListeners) e();
-        this._rafHandle = -1;
-      }));
-    };
+    this._frameListeners = new Set()
+    this._rafHandle = -1
   }
-  addFrameListener(e) {
-    if (this._frameListeners.has(e)) throw Error("Listener already present");
-    this._frameListeners.add(e);
+
+  /**
+   * Schedules publishing updates to the UI on the next animation frame.
+   */
+  schedulePublishToUI = (): void => {
+    if (this._rafHandle >= 0)
+      return
+    this._rafHandle = requestAnimationFrame(() => {
+      for (const listener of this._frameListeners) listener()
+      this._rafHandle = -1
+    })
   }
-  removeFrameListener(e) {
-    this._frameListeners.$$delete(e);
+
+  /**
+   * Adds a frame listener.
+   * @param listener - Function to be called on frame.
+   * @throws Error if listener already present.
+   */
+  addFrameListener(listener: () => void): void {
+    if (this._frameListeners.has(listener))
+      throw new Error('Listener already present')
+    this._frameListeners.add(listener)
+  }
+
+  /**
+   * Removes a frame listener.
+   * @param listener - Function to be removed.
+   */
+  removeFrameListener(listener: () => void): void {
+    this._frameListeners.delete(listener) // original: $$delete
   }
 }
-export class $$s0 {
-  constructor(e) {
-    this._frameBatcher = new a();
-    this._value = e;
+
+/**
+ * StatePublisher (originally class $$s0)
+ * Publishes state changes and provides React hooks for subscription.
+ */
+export class StatePublisher {
+  private _frameBatcher: FrameBatcher
+  private _value: any
+
+  /**
+   * @param initialValue - Initial state value.
+   */
+  constructor(initialValue: any) {
+    this._frameBatcher = new FrameBatcher()
+    this._value = initialValue
   }
-  set(e) {
-    this._value !== e && (this._value = e, this._frameBatcher.schedulePublishToUI());
+
+  /**
+   * Sets the state value and schedules UI update if changed.
+   * @param newValue - New state value.
+   */
+  set(newValue: any): void {
+    if (this._value === newValue)
+      return
+    this._value = newValue
+    this._frameBatcher.schedulePublishToUI()
   }
-  get() {
-    return this._value;
+
+  /**
+   * Gets the current state value.
+   * @returns Current state value.
+   */
+  get(): any {
+    return this._value
   }
-  use(e) {
-    let [t, i] = useState(this._value);
-    this.useSubscription(i, e);
-    return t;
+
+  /**
+   * React hook to subscribe to state changes.
+   * @param callback - Function to call on state update.
+   * @returns Current state value.
+   */
+  use(callback?: any): any {
+    const [state, setState] = useState(this._value)
+    this.useSubscription(setState, callback)
+    return state
   }
-  useSubscription(e, {
-    updateSynchronously: t = !1
-  } = {}) {
+
+  /**
+   * Subscribes to state changes with optional synchronous update.
+   * @param setState - React setState function.
+   * @param options - Subscription options.
+   */
+  useSubscription(
+    setState: (value: any) => void,
+    { updateSynchronously = false }: { updateSynchronously?: boolean } = {},
+  ): void {
     useEffect(() => {
-      let i = () => {
-        let i = () => e(this._value);
-        t ? flushSync(i) : i();
-      };
-      this._frameBatcher.addFrameListener(i);
+      const frameListener = () => {
+        const update = () => setState(this._value)
+        updateSynchronously ? flushSync(update) : update()
+      }
+      this._frameBatcher.addFrameListener(frameListener)
       return () => {
-        this._frameBatcher.removeFrameListener(i);
-      };
-    }, [e, t]);
+        this._frameBatcher.removeFrameListener(frameListener)
+      }
+    }, [setState, updateSynchronously])
   }
 }
-export class $$o1 extends $$s0 {
-  constructor(e, t) {
-    super(e);
-    this.comparisonFunction = t;
+
+/**
+ * ComparableStatePublisher (originally class $$o1)
+ * Publishes state changes only if comparison function returns false.
+ */
+export class ComparableStatePublisher extends StatePublisher {
+  private comparisonFunction: (prev: any, next: any) => boolean
+
+  /**
+   * @param initialValue - Initial state value.
+   * @param comparisonFunction - Function to compare previous and next values.
+   */
+  constructor(initialValue: any, comparisonFunction: (prev: any, next: any) => boolean) {
+    super(initialValue)
+    this.comparisonFunction = comparisonFunction
   }
-  set(e) {
-    let t = super.get();
-    this.comparisonFunction(t, e) || super.set(e);
+
+  /**
+   * Sets the state value if comparison function returns false.
+   * @param newValue - New state value.
+   */
+  set(newValue: any): void {
+    const prevValue = super.get()
+    if (this.comparisonFunction(prevValue, newValue))
+      return
+    super.set(newValue)
   }
 }
-export const N = $$s0;
-export const B = $$o1;
+
+// Export original variable names mapped to refactored classes
+export const N = StatePublisher // original: N
+export const B = ComparableStatePublisher // original: B

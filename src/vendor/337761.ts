@@ -348,7 +348,7 @@ var P = function() {
           });
         });
         r.newFailedRequest(O, n);
-      }).$$finally(function() {
+      }).finally(function() {
         return i(r, void 0, void 0, function() {
           return s(this, function(r) {
             e && (this.queue.length > 0 && (this.addFailedRequest({

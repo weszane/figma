@@ -14,7 +14,7 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { B } from "../905/261906";
 import { tI } from "../figma_app/847597";
@@ -24,7 +24,7 @@ import { hY, ww, Vt, II } from "../figma_app/80683";
 import { useSeatManagementWidgetProExperiment } from "../figma_app/297957";
 import { viewCollaboratorSet } from "../905/332483";
 import { d as _$$d } from "../figma_app/603561";
-let E = sx.flex.flexRow.justifyBetween.gap16.p4.add({
+let E = styleBuilderInstance.flex.flexRow.justifyBetween.gap16.p4.add({
   width: "calc(100% - 8px)"
 }).$;
 function C(e) {
@@ -112,7 +112,7 @@ function S(e) {
     seatType: tI(e.seatType)
   })}: ${e.totalSeats.toLocaleString()}`;
   return jsx("div", {
-    style: sx.py8.px12.fpl__textBodyMediumFontWeight.add({
+    style: styleBuilderInstance.py8.px12.fpl__textBodyMediumFontWeight.add({
       minWidth: "185px"
     }).$,
     children: jsxs(AutoLayout, {

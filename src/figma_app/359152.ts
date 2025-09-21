@@ -15,7 +15,7 @@ import { qI, GR, L_ } from "../figma_app/622574";
 import { gp } from "../figma_app/973927";
 import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-import { G7 } from "../figma_app/336853";
+import { isBigmaEnabledAlias } from "../figma_app/336853";
 import { s as _$$s2 } from "../905/82276";
 import { e0 } from "../905/696396";
 import { Ht } from "../figma_app/522930";
@@ -271,7 +271,7 @@ export function $$D1(e) {
 export function $$k3(e) {
   let t = useRef(null);
   let r = useCurrentUserOrg();
-  let a = G7(r);
+  let a = isBigmaEnabledAlias(r);
   let {
     filterOptions,
     selectedTeamOrWorkspaceOrLicenseGroupIds,

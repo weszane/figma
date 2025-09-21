@@ -11,7 +11,7 @@ import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_ap
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { WO, Ai, jm, Y3 } from "../figma_app/242339";
-import { ai, f6 } from "../figma_app/915202";
+import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { N as _$$N } from "../figma_app/268271";
 import { hH, Qe } from "../9410/728210";
 import { J as _$$J } from "../figma_app/553179";
@@ -617,10 +617,10 @@ export function $$eo1() {
     onPrimaryCtaClick: () => {
       let e = getNewFileConfig({
         state: L.getState(),
-        openNewFileIn: ai.NEW_TAB,
+        openNewFileIn: TabOpenBehavior.NEW_TAB,
         folderOverride: "drafts",
         trackingInfo: {
-          from: f6.CURSOR_BOT_END_MODAL,
+          from: FileBrowserLocation.CURSOR_BOT_END_MODAL,
           selectedView: L.getState().selectedView
         },
         editorType: FFileType.DESIGN

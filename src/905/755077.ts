@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { BigTextInputForwardRef, BaseLinkComponent } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { validateProfileHandle } from "../figma_app/740025";
-import { s as _$$s2 } from "../905/608932";
+import { profileServiceAPI } from "../905/608932";
 export function $$c0(e) {
   let {
     onProfileHandleValidationSuccess,
@@ -23,7 +23,7 @@ export function $$c0(e) {
       });
       return;
     }
-    e.length > 0 ? _$$s2.getHandleAvailable({
+    e.length > 0 ? profileServiceAPI.getHandleAvailable({
       profileHandle: e
     }).then(({
       data: n

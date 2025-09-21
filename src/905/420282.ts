@@ -14,13 +14,13 @@ import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
 import { In } from "../905/672640";
@@ -51,9 +51,9 @@ export function $$Q0(e) {
   let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   }).key.parentId;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "TeamRenewalModal",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     team: _$$e.BILLING_EXPERIENCE,
     children: jsx(TrackingProvider, {
@@ -324,7 +324,7 @@ function ee(e) {
     children: renderI18nText(e.noAnnualSeat ? "billing_modals.team_renewal.disclaimer_banner.no_seat" : "billing_modals.team_renewal.disclaimer_banner", {
       peoplePageLink: jsx(ButtonPrimitive, {
         className: h()(h7, _$$s.inline.$),
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           backgroundColor: "unset"
         }).$,
         onClick: function () {

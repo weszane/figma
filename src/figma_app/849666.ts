@@ -15,7 +15,7 @@ import { selectOpenFile, useCurrentFileKey, selectCurrentFile } from "../figma_a
 import { selectCurrentUser } from "../905/372672";
 import { Button } from "../905/521428";
 import { setupThemeContext } from "../905/614223";
-import { l as _$$l } from "../905/728491";
+import { useHasFilePermission } from "../905/728491";
 import { useSubscription } from "../figma_app/288654";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -124,8 +124,8 @@ function k() {
   let o = getRepoByIdAlt(t ?? {
     fileRepoId: null
   }, i.repos);
-  let l = _$$l(FileCanView, o?.default_file_key ?? "").unwrapOr(!1);
-  let d = _$$l(FileCanManage, t?.key ?? "").unwrapOr(!1);
+  let l = useHasFilePermission(FileCanView, o?.default_file_key ?? "").unwrapOr(!1);
+  let d = useHasFilePermission(FileCanManage, t?.key ?? "").unwrapOr(!1);
   if (!t || !r || !o) return null;
   let c = o.default_file_key;
   let u = "loaded" === s.status && (null === s.data.file || s.data.file && AM(s.data.file) === pT.MERGED);

@@ -34,7 +34,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { t as _$$t } from "../figma_app/501766";
 import { yU } from "../figma_app/221114";
 import { A5 } from "../figma_app/274104";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { At } from "../figma_app/74043";
 import { M as _$$M } from "../figma_app/119924";
 import { zK, zM, lk } from "../905/182453";
@@ -48,7 +48,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { compareLibraryItemWithKey } from "../905/709171";
 import { getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { getShownNonLocalStyle, getAssetUniqueId } from "../figma_app/646357";
-import { VF } from "../figma_app/679183";
+import { useCachedSubtree } from "../figma_app/679183";
 import { Button } from "../905/521428";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
@@ -377,7 +377,7 @@ function eS({
       dragHeaderOnly: !0,
       children: jsxs("div", {
         className: FY,
-        children: [jsx(VF, {
+        children: [jsx(useCachedSubtree, {
           isVisible: !0,
           children: () => jsx(e_, {
             recordingKey: generateRecordingKey(t, "stylePreviewPanel"),
@@ -386,7 +386,7 @@ function eS({
             isRenaming: a.isRenamingSelectedStyle,
             stylePreviewShown: d
           }, "style-preview-panel")
-        }), jsx(VF, {
+        }), jsx(useCachedSubtree, {
           isVisible: f,
           children: () => jsx(ev, {
             stylePreviewShown: d
@@ -402,7 +402,7 @@ function ek({
   recordingKey: s,
   shouldAnimate: n
 }) {
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     name: "propertiesPanel",
     focusOnMount: !0,
     handleKeyDown: t,
@@ -760,7 +760,7 @@ export function $$e20({
     trackingEnabled: getFeatureFlags().trackable_properties || p,
     alsoTrack: I,
     trackImpressions: !1,
-    children: jsx(vL, {
+    children: jsx(KeyboardReceiver, {
       name: "propertiesPanel",
       focusOnMount: !T,
       handleKeyDown: b,

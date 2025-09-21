@@ -650,7 +650,7 @@ let $$er40 = createOptimistThunk((e, t) => {
       messageMeta: o.reply.messageMeta,
       attachments: o.reply.attachments,
     })
-  }).$$finally(() => {
+  }).finally(() => {
     getFeatureFlags().comments_faster_saving_ux && !getFeatureFlags().comments_faster_saving_ux_v2 && e.dispatch($$eG53({
       commentUuid: t.uuid,
     }))
@@ -852,7 +852,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
         }))
       }
     }
-  }).$$finally(() => {
+  }).finally(() => {
     getFeatureFlags().comments_faster_saving_ux && !getFeatureFlags().comments_faster_saving_ux_v2 && e.dispatch($$eG53({
       commentUuid: t.uuid,
     }))

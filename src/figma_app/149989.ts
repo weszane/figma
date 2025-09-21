@@ -11,7 +11,7 @@ import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
@@ -24,7 +24,7 @@ import { Um } from "../905/848862";
 import { useCurrentTool } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { PrimaryWorkflowEnum, LibraryItemTypeEnum } from "../figma_app/633080";
 import { t as _$$t2 } from "../905/62933";
 import { Id, jT } from "../figma_app/626177";
@@ -109,7 +109,7 @@ export function $$Q1({
     A.current && A.current.focus();
     toggleLayout();
   }, [toggleLayout, A]);
-  return jsxs(tH, {
+  return jsxs(ErrorBoundaryCrash, {
     boundaryKey: "VariablePicker",
     fallback: Z(S, currentView.layout, !!h, t),
     children: [jsx(T, {
@@ -546,7 +546,7 @@ export function $$el3({
   let eE = _$$A(eg, l?.type !== "CMS_FIELD" ? l : null, ef);
   let ey = useCurrentUserOrg();
   let eb = Fl();
-  let eT = Oe(ey) && NX(eb);
+  let eT = isBigmaEnabledAlias3(ey) && NX(eb);
   let eI = ed({
     selectedItem: l,
     resolvedType: u,
@@ -803,7 +803,7 @@ function ed({
   let o = _$$A(a, e?.type !== "CMS_FIELD" ? e : null, s);
   let l = useCurrentUserOrg();
   let d = Fl();
-  let c = Oe(l) && NX(d);
+  let c = isBigmaEnabledAlias3(l) && NX(d);
   return useMemo(() => {
     if (c) {
       let e = o.map(({

@@ -7,7 +7,7 @@ import { ButtonSecondary, ButtonNegativeTracked } from "../figma_app/637027";
 import { LazyInputForwardRef } from "../905/408237";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { deleteTeamAction } from "../figma_app/240735";
 import { TrackingProvider } from "../figma_app/831799";
@@ -136,7 +136,7 @@ export let $$E0 = registerModal(function (e) {
         teamName: e.team.name
       }),
       children: jsx("div", {
-        style: sx.add({
+        style: styleBuilderInstance.add({
           height: "200px"
         }).$,
         children: jsx(LargeLoadingSpinner, {})

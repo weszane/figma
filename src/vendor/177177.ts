@@ -1913,7 +1913,7 @@ import { parse } from "596768";
                   });
                   this.fontLoader.bind(n).catch(r => messageHandler.sendWithPromise("FontFallback", {
                     id: t
-                  })).$$finally(() => {
+                  })).finally(() => {
                     !a.fontExtraProperties && n.data && (n.data = null);
                     this.commonObjs.resolve(t, n);
                   });
@@ -2000,7 +2000,7 @@ import { parse } from "596768";
               numPages: this._numPages,
               annotationStorage: this.annotationStorage.serializable,
               filename: this._fullReader?.filename ?? null
-            }).$$finally(() => {
+            }).finally(() => {
               this.annotationStorage.resetModified();
             });
           }
@@ -7751,7 +7751,7 @@ import { parse } from "596768";
             this._capability = s.createPromiseCapability();
             this._renderTimer = null;
             this._bounds = [];
-            this._capability.promise.$$finally(() => {
+            this._capability.promise.finally(() => {
               this._enhanceTextSelection || (this._textDivProperties = null);
               this._layoutTextCtx && (this._layoutTextCtx.canvas.width = 0, this._layoutTextCtx.canvas.height = 0, this._layoutTextCtx = null);
             }).catch(() => { });

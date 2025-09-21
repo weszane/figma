@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { hasMonetizedResourceMetadata, hasClientMeta, isWidget } from "../figma_app/45218";
@@ -24,7 +24,7 @@ export function $$c0(e) {
   };
 }
 export function $$d1(e) {
-  let t = Jm();
+  let t = getSearchSessionIdFromSelector();
   return useMemo(() => ({
     ...u(e),
     searchSessionId: t

@@ -7,7 +7,7 @@ import { Xf } from "../figma_app/153916";
 import { useSubscription } from "../figma_app/288654";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { BadgeColor, Badge } from "../figma_app/919079";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -181,7 +181,7 @@ function P(e) {
   };
 }
 export function $$D1(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgAdminBillingStatusBadge",
     fallback: jsx("div", {}),
     children: jsx(B, {

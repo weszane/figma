@@ -10,7 +10,7 @@ import u from "classnames";
 import { isEmbedAllowed } from "../figma_app/916560";
 import { Wx } from "../figma_app/708845";
 import { getI18nString } from "../905/303541";
-import { Ho } from "../figma_app/308685";
+import { stopChattingThunk } from "../figma_app/308685";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -256,7 +256,7 @@ let M = forwardRef(function (e, t) {
       },
       onMouseOver: () => {
         Multiplayer?.sendChatMessage("", "");
-        i(Ho());
+        i(stopChattingThunk());
       },
       src: srcUrl,
       title: getI18nString("whiteboard.embeds.embed_overlay_iframe_title")

@@ -7,7 +7,7 @@ import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { up, Vh, kV, N9 } from "../figma_app/692987";
 import { s$ } from "../figma_app/361035";
@@ -89,7 +89,7 @@ export function $$E0({
     enabled: r,
     children: jsxs("div", {
       children: [jsx("div", {
-        style: sx.add({
+        style: styleBuilderInstance.add({
           marginBottom: "24px"
         }).$,
         children: Object.keys(e).sort(compareProductAccessTypes).map(t => jsx(A, {

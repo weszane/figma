@@ -1,57 +1,56 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { getFeatureFlags } from "../905/601108";
-import l from "classnames";
-import { trackEventAnalytics } from "../905/449184";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { MZ, pY, Pj, Dy, ky } from "../figma_app/925970";
-import { e as _$$e } from "../905/579755";
-import { $3 } from "../figma_app/487970";
-import { AG } from "../figma_app/999312";
-import { A6 } from "../905/350234";
-import { W as _$$W } from "../5430/53744";
-import { Jm } from "../figma_app/387599";
-import { Lj } from "../figma_app/835219";
-import { getCurrentVersion, buildCommunityPathById, TransparentGifDataUri } from "../figma_app/471982";
-import { buildSearchUrl, defaultSearchOptions } from "../figma_app/640564";
-import { PerfTimer } from "../905/609396";
-import { VisualBellActions } from "../905/302958";
-import { searchAPIHandler } from "../905/144933";
-import { SortOptions } from "../figma_app/324237";
-import { PF } from "../figma_app/930386";
-import { zj, bT, AS } from "../5430/438185";
-import { ProfileRouteState } from "../905/934145";
-import { eK, w2 } from "../905/977218";
-import { HubEventType } from "../figma_app/350203";
-import { Ei } from "../905/574958";
-import { V as _$$V } from "../905/480825";
-import { I$ } from "../figma_app/940844";
-var c = l;
-let L = "community_search_duration";
-let M = "search_dropdown--meta--a-aV4";
-let O = "search_dropdown--pluginOrWidgetTilePreview--Rfef1";
-let B = "search_dropdown--section--VJbkB";
-let D = "search_dropdown--sectionTitle--x7FyO";
-let F = "search_dropdown--title--eiIIy";
-let H = "search_dropdown--authorRow--Uk00Y";
-let U = "search_dropdown--authorRowText--vsAii";
-let V = "search_dropdown--monetizationBadge--ogSCz";
-let W = "search_dropdown--authorRowAvatar--jFZyx";
-let $$G = "search_dropdown--resourceRowExtension--v4dY8 search_dropdown--resourceRow--P-Lig";
-let $ = "search_dropdown--hover--stEGe";
+import l from 'classnames';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { searchAPIHandler } from '../905/144933';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { A6 } from '../905/350234';
+import { trackEventAnalytics } from '../905/449184';
+import { V as _$$V } from '../905/480825';
+import { e as _$$e } from '../905/579755';
+import { getFeatureFlags } from '../905/601108';
+import { PerfTimer } from '../905/609396';
+import { ProfileRouteState } from '../905/934145';
+import { searchSetQueryIdAction, searchSetLastLoadedQueryAction } from '../905/977218';
+import { W as _$$W } from '../5430/53744';
+import { AS, bT, zj } from '../5430/438185';
+import { SortOptions } from '../figma_app/324237';
+import { HubEventType } from '../figma_app/350203';
+import { getSearchSessionIdFromSelector } from '../figma_app/387599';
+import { buildCommunityPathById, getCurrentVersion, TransparentGifDataUri } from '../figma_app/471982';
+import { $3 } from '../figma_app/487970';
+import { buildSearchUrl, defaultSearchOptions } from '../figma_app/640564';
+import { Lj } from '../figma_app/835219';
+import { generateSessionId, searchEndSession, searchIncrementQueryCount, searchSessionSeeMoreClick, searchStartSession } from '../figma_app/925970';
+import { PF } from '../figma_app/930386';
+import { I$ } from '../figma_app/940844';
+import { AG } from '../figma_app/999312';
+let c = l;
+let L = 'community_search_duration';
+let M = 'search_dropdown--meta--a-aV4';
+let O = 'search_dropdown--pluginOrWidgetTilePreview--Rfef1';
+let B = 'search_dropdown--section--VJbkB';
+let D = 'search_dropdown--sectionTitle--x7FyO';
+let F = 'search_dropdown--title--eiIIy';
+let H = 'search_dropdown--authorRow--Uk00Y';
+let U = 'search_dropdown--authorRowText--vsAii';
+let V = 'search_dropdown--monetizationBadge--ogSCz';
+let W = 'search_dropdown--authorRowAvatar--jFZyx';
+let $$G = 'search_dropdown--resourceRowExtension--v4dY8 search_dropdown--resourceRow--P-Lig';
+let $ = 'search_dropdown--hover--stEGe';
 function z({
   profiles: e,
   onResourceClick: t,
   onResourceHover: r,
   selectedIdx: i
 }) {
-  return e && 0 !== e.length ? jsxs("div", {
+  return e && e.length !== 0 ? jsxs('div', {
     className: B,
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: D,
-      children: renderI18nText("community.view_bar.creators")
+      children: renderI18nText('community.view_bar.creators')
     }), jsx(Q, {
       profiles: e.map(e => e.model),
       onResourceClick: t,
@@ -66,9 +65,9 @@ function Q({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  return jsx("div", {
-    className: "search_dropdown--resourceRowProfiles--bz2ck",
-    children: e.map((e, n) => jsx("div", {
+  return jsx('div', {
+    className: 'search_dropdown--resourceRowProfiles--bz2ck',
+    children: e.map((e, n) => jsx('div', {
       onMouseEnter: () => r(n),
       className: c()({
         [$]: i === n
@@ -84,27 +83,27 @@ function Z({
   profile: e,
   onResourceClick: t
 }) {
-  return jsx("div", {
-    className: "search_dropdown--profile--HRd2s",
+  return jsx('div', {
+    className: 'search_dropdown--profile--HRd2s',
     children: jsxs(Link, {
       to: new ProfileRouteState({
         profileHandle: e.profile_handle
       }).to,
-      className: "search_dropdown--resourceRowProfile--HScpw",
+      className: 'search_dropdown--resourceRowProfile--HScpw',
       onClick: () => {
         document.activeElement.blur();
         t();
       },
       children: [jsx(_$$e, {
-        adtlClassName: "search_dropdown--profileRowAvatar--TOSBT",
+        adtlClassName: 'search_dropdown--profileRowAvatar--TOSBT',
         entity: e,
         size: 40
-      }), jsx("div", {
-        className: "search_dropdown--profileRowName--oRTAf ellipsis--ellipsis--Tjyfa text--fontPos12--YsUAh text--_fontBase--QdLsd",
+      }), jsx('div', {
+        className: 'search_dropdown--profileRowName--oRTAf ellipsis--ellipsis--Tjyfa text--fontPos12--YsUAh text--_fontBase--QdLsd',
         children: e.name
-      }), jsxs("div", {
-        className: "search_dropdown--profileRowProfileHandle--DuEYR ellipsis--ellipsis--Tjyfa text--fontPos12--YsUAh text--_fontBase--QdLsd",
-        children: ["@", e.profile_handle]
+      }), jsxs('div', {
+        className: 'search_dropdown--profileRowProfileHandle--DuEYR ellipsis--ellipsis--Tjyfa text--fontPos12--YsUAh text--_fontBase--QdLsd',
+        children: ['@', e.profile_handle]
       })]
     })
   }, e.id);
@@ -115,15 +114,15 @@ function q({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  return e && 0 !== e.length ? jsxs("div", {
+  let o = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile : null);
+  return e && e.length !== 0 ? jsxs('div', {
     className: B,
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: D,
-      children: renderI18nText("community.view_bar.widgets")
+      children: renderI18nText('community.view_bar.widgets')
     }), e.slice(0, 4).map((e, n) => {
       let a = getCurrentVersion(e);
-      return jsx("div", {
+      return jsx('div', {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
@@ -142,23 +141,23 @@ function q({
             className: O,
             alt: a.name,
             onError: e => e.target.src = TransparentGifDataUri
-          }), jsxs("div", {
+          }), jsxs('div', {
             className: M,
-            children: [jsx("div", {
+            children: [jsx('div', {
               className: F,
               children: a.name
-            }), jsxs("div", {
+            }), jsxs('div', {
               className: H,
               children: [e.community_publishers.accepted.map(e => jsx(_$$e, {
                 entity: e,
                 size: 16,
                 adtlClassName: W
-              }, e.id)), jsx("div", {
+              }, e.id)), jsx('div', {
                 className: U,
                 children: Lj(e)
               })]
             })]
-          }), jsx("div", {
+          }), jsx('div', {
             className: V,
             children: $3({
               resource: e,
@@ -176,15 +175,15 @@ function Y({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  return e && 0 !== e.length ? jsxs("div", {
+  let o = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile : null);
+  return e && e.length !== 0 ? jsxs('div', {
     className: B,
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: D,
-      children: renderI18nText("community.view_bar.plugins")
+      children: renderI18nText('community.view_bar.plugins')
     }), e.slice(0, 4).map((e, n) => {
       let a = getCurrentVersion(e);
-      return jsx("div", {
+      return jsx('div', {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
@@ -198,28 +197,28 @@ function Y({
             document.activeElement.blur();
             t();
           },
-          children: [jsx("img", {
+          children: [jsx('img', {
             src: a.redirect_icon_url,
             className: O,
             alt: a.name,
             onError: e => e.target.src = TransparentGifDataUri
-          }), jsxs("div", {
+          }), jsxs('div', {
             className: M,
-            children: [jsx("div", {
+            children: [jsx('div', {
               className: F,
               children: a.name
-            }), jsxs("div", {
+            }), jsxs('div', {
               className: H,
               children: [e.community_publishers.accepted.map(e => jsx(_$$e, {
                 entity: e,
                 size: 16,
                 adtlClassName: W
-              }, e.id)), jsx("div", {
+              }, e.id)), jsx('div', {
                 className: U,
                 children: Lj(e)
               })]
             })]
-          }), jsx("div", {
+          }), jsx('div', {
             className: V,
             children: $3({
               resource: e,
@@ -237,17 +236,17 @@ function X({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  if (!e || 0 === e.length) return null;
+  let o = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile : null);
+  if (!e || e.length === 0) return null;
   let l = getFeatureFlags().cmty_thumbnail_16x9_ar;
-  return jsxs("div", {
+  return jsxs('div', {
     className: B,
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: D,
-      children: renderI18nText("community.view_bar.files")
+      children: renderI18nText('community.view_bar.files')
     }), e.slice(0, 4).map((e, n) => {
       let a = getCurrentVersion(e);
-      return jsx("div", {
+      return jsx('div', {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
@@ -256,33 +255,33 @@ function X({
           to: buildCommunityPathById({
             resource: e
           }),
-          className: "search_dropdown--resourceRow--P-Lig",
+          className: 'search_dropdown--resourceRow--P-Lig',
           onClick: () => {
             document.activeElement.blur();
             t();
           },
-          children: [jsx("img", {
+          children: [jsx('img', {
             src: e.thumbnail_url,
-            className: l ? "search_dropdown--fileTilePreview16x9---1A4y" : "search_dropdown--fileTilePreview--uCbva",
+            className: l ? 'search_dropdown--fileTilePreview16x9---1A4y' : 'search_dropdown--fileTilePreview--uCbva',
             alt: a.name,
             onError: e => e.target.src = TransparentGifDataUri
-          }), jsxs("div", {
+          }), jsxs('div', {
             className: M,
-            children: [jsx("div", {
+            children: [jsx('div', {
               className: F,
               children: a.name
-            }), jsxs("div", {
+            }), jsxs('div', {
               className: H,
               children: [e.community_publishers.accepted.map(e => jsx(_$$e, {
                 entity: e,
                 size: 16,
                 adtlClassName: W
-              }, e.id)), jsx("div", {
+              }, e.id)), jsx('div', {
                 className: U,
                 children: Lj(e)
               })]
             })]
-          }), jsx("div", {
+          }), jsx('div', {
             className: V,
             children: $3({
               resource: e,
@@ -306,8 +305,8 @@ let J = function (e, t) {
   return (t, r) => {
     let s = new PerfTimer(L, {});
     s.start();
-    let i = r().search?.sessionId || "unattributed";
-    let n = MZ();
+    let i = r().search?.sessionId || 'unattributed';
+    let n = generateSessionId();
     return Promise.all([function (e, t, r) {
       let s = {
         session_id: e,
@@ -335,7 +334,7 @@ let J = function (e, t) {
       };
       return searchAPIHandler.getHubProfiles(i);
     }(i, n, e)]).then(r => {
-      "unattributed" !== i && t(pY());
+      i !== 'unattributed' && t(searchIncrementQueryCount());
       let n = s.stop();
       trackEventAnalytics(L, {
         elapsedMs: n,
@@ -348,16 +347,16 @@ let J = function (e, t) {
       });
       return r;
     }).catch(e => (t(VisualBellActions.enqueue({
-      message: e.message || getI18nString("community.error.search_request_failed"),
+      message: e.message || getI18nString('community.error.search_request_failed'),
       error: !0,
-      type: "community-search-error",
+      type: 'community-search-error',
       timeoutOverride: 2e3
     })), Promise.reject(e)));
   };
 }({
   query: e,
   sort_by: SortOptions.Search.RELEVANCY,
-  resourceType: "mixed",
+  resourceType: 'mixed',
   limit: 12,
   isPreview: !0,
   profileLimit: 3
@@ -376,28 +375,28 @@ export function $$K0(e) {
     setSelectedIdx
   } = _$$W(context);
   let v = useDispatch();
-  let j = Jm(!0);
+  let j = getSearchSessionIdFromSelector(!0);
   let w = AG();
   let C = useCallback(() => {
-    v(Pj({}));
-    trackEventAnalytics("search_show_all_clicked", {
+    v(searchSessionSeeMoreClick({}));
+    trackEventAnalytics('search_show_all_clicked', {
       query,
-      scope: "community",
-      entryPoint: w ? "resource_hub" : "community",
+      scope: 'community',
+      entryPoint: w ? 'resource_hub' : 'community',
       searchSessionId: j
     });
   }, [v, query, j, w]);
   useEffect(() => {
     if (!query) return;
-    j || v(Dy({
-      entryPoint: w ? "resource_hub" : "community"
+    j || v(searchStartSession({
+      entryPoint: w ? 'resource_hub' : 'community'
     }));
-    let e = Ei();
-    v(eK({
+    let e = generateSessionId();
+    v(searchSetQueryIdAction({
       queryId: e
     }));
-    v(w2({
-      sessionId: j || "",
+    v(searchSetLastLoadedQueryAction({
+      sessionId: j || '',
       query,
       queryId: e
     }));
@@ -415,11 +414,11 @@ export function $$K0(e) {
       setSelectedIdx({
         idx: -1
       });
-      let c = context === PF.LANDING ? "searchPreviewLanding" : "searchPreview";
+      let c = context === PF.LANDING ? 'searchPreviewLanding' : 'searchPreview';
       trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query,
         mixed: n.length,
-        entry_point: "community",
+        entry_point: 'community',
         context: c,
         search_session_id: j,
         query_id: e,
@@ -431,17 +430,17 @@ export function $$K0(e) {
     }).catch(() => {});
   }, [query, v, j, context, setResources, setSelectedIdx, w]);
   let L = useCallback(e => {
-    trackEventAnalytics("search_result_clicked", {
+    trackEventAnalytics('search_result_clicked', {
       query,
       resourceType: e,
-      scope: "community",
+      scope: 'community',
       is_preview: !0,
-      entry_point: "community",
+      entry_point: 'community',
       searchSessionId: j
     });
     clearSearchInput();
     setResources({});
-    v(ky());
+    v(searchEndSession());
   }, [query, v, j, setResources, clearSearchInput]);
   let T = useCallback((e, t) => {
     resources[t] && !((resources[t] ?? []).length < e) && setSelectedIdx({
@@ -455,41 +454,41 @@ export function $$K0(e) {
     ...defaultSearchOptions,
     query
   });
-  return jsxs("div", {
-    className: c()("search_dropdown--searchDropdown--HqMrn", {
-      "search_dropdown--searchDropdownLanding--HJ002": context === PF.LANDING,
-      "search_dropdown--categoryNavDropdownResponsiveWidth--HzoIl": "small-responsive" === width
+  return jsxs('div', {
+    'className': c()('search_dropdown--searchDropdown--HqMrn', {
+      'search_dropdown--searchDropdownLanding--HJ002': context === PF.LANDING,
+      'search_dropdown--categoryNavDropdownResponsiveWidth--HzoIl': width === 'small-responsive'
     }),
-    style: "small-responsive" !== width ? {
+    'style': width !== 'small-responsive' ? {
       width: `${width}px`
     } : void 0,
-    "data-testid": "homepage-search-dropdown",
-    children: [jsx(X, {
+    'data-testid': 'homepage-search-dropdown',
+    'children': [jsx(X, {
       resources: resources.files,
-      onResourceClick: () => L("files"),
-      onResourceHover: e => T(e, "files"),
-      selectedIdx: selectedIdx?.type === "files" ? selectedIdx?.idx : null
+      onResourceClick: () => L('files'),
+      onResourceHover: e => T(e, 'files'),
+      selectedIdx: selectedIdx?.type === 'files' ? selectedIdx?.idx : null
     }), jsx(Y, {
       resources: resources.plugins,
-      onResourceClick: () => L("plugins"),
-      onResourceHover: e => T(e, "plugins"),
-      selectedIdx: selectedIdx?.type === "plugins" ? selectedIdx?.idx : null
+      onResourceClick: () => L('plugins'),
+      onResourceHover: e => T(e, 'plugins'),
+      selectedIdx: selectedIdx?.type === 'plugins' ? selectedIdx?.idx : null
     }), jsx(q, {
       resources: resources.widgets,
-      onResourceClick: () => L("widgets"),
-      onResourceHover: e => T(e, "widgets"),
-      selectedIdx: selectedIdx?.type === "widgets" ? selectedIdx?.idx : null
+      onResourceClick: () => L('widgets'),
+      onResourceHover: e => T(e, 'widgets'),
+      selectedIdx: selectedIdx?.type === 'widgets' ? selectedIdx?.idx : null
     }), jsx(z, {
       profiles: resources.creators,
-      onResourceClick: () => L("profiles"),
-      onResourceHover: e => T(e, "creators"),
-      selectedIdx: selectedIdx?.type === "creators" ? selectedIdx?.idx : null
-    }), E ? jsx("div", {
-      className: "search_dropdown--searchAllLink--VCaxM text--fontPos12--YsUAh text--_fontBase--QdLsd",
+      onResourceClick: () => L('profiles'),
+      onResourceHover: e => T(e, 'creators'),
+      selectedIdx: selectedIdx?.type === 'creators' ? selectedIdx?.idx : null
+    }), E ? jsx('div', {
+      className: 'search_dropdown--searchAllLink--VCaxM text--fontPos12--YsUAh text--_fontBase--QdLsd',
       children: jsx(A6, {
         to: A,
         onClick: C,
-        children: renderI18nText("community.search.show_all_search_results")
+        children: renderI18nText('community.search.show_all_search_results')
       })
     }) : null]
   });

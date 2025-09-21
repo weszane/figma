@@ -12,13 +12,13 @@ import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
 import { _H } from "../figma_app/598111";
 import { isStudentValidated } from "../figma_app/141320";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Vh } from "../figma_app/692987";
 import { s$, ZY, GL, vm } from "../figma_app/361035";
 import { R9, Jh, Tj, gS } from "../figma_app/441925";
@@ -108,7 +108,7 @@ function D({
     }), jsx(Spacing, {
       multiple: 4
     }), jsxs("div", {
-      style: _$$sx.flex.flexColumn.add({
+      style: styleBuilderInstance.flex.flexColumn.add({
         maxWidth: "400px"
       }).mlAuto.mrAuto.gap12.$,
       children: [t.map((e, t) => jsx(BigTextInput, {
@@ -120,14 +120,14 @@ function D({
           a([...t, ""]);
         },
         trusted: !0,
-        style: _$$sx.alignLeft.font14.fontMedium.$,
+        style: styleBuilderInstance.alignLeft.font14.fontMedium.$,
         children: renderI18nText("pro_cart.add_collaborators.add_another")
       })]
     }), jsxs("div", {
-      style: _$$sx.flex.flexColumn.itemsCenter.mlAuto.mrAuto.mt24.gap24.fontMedium.font14.$,
+      style: styleBuilderInstance.flex.flexColumn.itemsCenter.mlAuto.mrAuto.mt24.gap24.fontMedium.font14.$,
       children: [jsx(ButtonBasePrimaryTracked, {
         disabled: !!e,
-        style: _$$sx.font14.add({
+        style: styleBuilderInstance.font14.add({
           height: "44px",
           width: "110px"
         }).$,
@@ -136,7 +136,7 @@ function D({
       }), jsx(clickableBaseLinkTracked, {
         trusted: !0,
         onClick: i,
-        style: _$$sx.colorTextSecondary.alignCenter.$,
+        style: styleBuilderInstance.colorTextSecondary.alignCenter.$,
         children: renderI18nText("pro_cart.add_collaborators.skip_for_now")
       })]
     })]
@@ -153,7 +153,7 @@ function F({
 }) {
   let d = _$$U(i);
   return jsxs("div", {
-    style: _$$sx.grid.gap16.p36.pb24.selectNone.mxAuto.add({
+    style: styleBuilderInstance.grid.gap16.p36.pb24.selectNone.mxAuto.add({
       width: "945px",
       maxWidth: "1049px"
     }).$,
@@ -244,7 +244,7 @@ function eB(e) {
           paymentMethods: e.paymentMethods
         })
       }), jsx(SvgComponent, {
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           position: "absolute",
           right: "16px",
           pointerEvents: "none",
@@ -804,7 +804,7 @@ function eY(e) {
         selectedView: e.selectedView,
         isCampfireCart: !0
       }), jsxs("div", {
-        style: _$$sx.mxAuto.add({
+        style: styleBuilderInstance.mxAuto.add({
           padding: "98px 48px 48px",
           maxWidth: "1400px"
         }).$,
@@ -1005,7 +1005,7 @@ function eY(e) {
             userEmail: a?.email || ""
           })]
         }) : jsxs("div", {
-          style: _$$sx.grid.add({
+          style: styleBuilderInstance.grid.add({
             gridTemplateColumns: "1fr 280px",
             gap: "48px"
           }).$,
@@ -1076,10 +1076,10 @@ function eY(e) {
   });
 }
 export function $$eK0(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     team: _$$e.MONETIZATION_UPGRADES,
     boundaryKey: "TeamUpgradeBillingRemodel",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: y4,
     children: jsx(eY, {
       ...e

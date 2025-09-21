@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { z } from "../905/788559";
 import { r as _$$r } from "../905/189361";
 import { TT, Bw } from "../figma_app/604494";
@@ -74,7 +74,7 @@ function m({
   }, "tertiary-action") : null;
   return jsxs("div", {
     className: _$$s.flex.flexRow.gap8.justifyBetween.py8.bSolid.colorBorder.bt1.itemsCenter.colorBg.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       minHeight: "28px",
       paddingLeft: `${c}px`,
       paddingRight: `${c}px`

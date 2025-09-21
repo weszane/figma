@@ -1254,7 +1254,7 @@ export let layoutComponentCollection = {
   AutoLayout: AutoLayoutComponent,
   Rectangle: RectangleComponent,
   Ellipse: EllipseComponent,
-  Text: (props:any, t: MapperContext) => eh(props, t, es),
+  Text: (props: any, t: MapperContext) => eh(props, t, es),
   SVG: SVGComponent,
   Image: (props: any, t: MapperContext) =>
     RectangleComponent(

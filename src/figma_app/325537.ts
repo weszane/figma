@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { R9 } from "../905/977824";
+import { multiplayerSessionManager } from "../905/977824";
 import { KP, Ww } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
@@ -40,7 +40,7 @@ export function $$E1(e) {
 }
 export function $$y6(e) {
   let t = KP();
-  let r = R9.useInfoBySessionId({
+  let r = multiplayerSessionManager.useInfoBySessionId({
     updateSynchronously: !1
   });
   let n = selectCurrentUser();
@@ -64,7 +64,7 @@ export function $$T0(e) {
   let t;
   let r;
   let a = KP();
-  let c = R9.useInfoBySessionId({
+  let c = multiplayerSessionManager.useInfoBySessionId({
     updateSynchronously: !1
   });
   let u = selectCurrentUser();

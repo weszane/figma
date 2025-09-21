@@ -19,7 +19,7 @@ import { getNewFileConfig } from "../905/766303";
 import { oe, RJ, I7 } from "../figma_app/630951";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { FFileType } from "../figma_app/191312";
-import { ai, f6 } from "../figma_app/915202";
+import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { VF, uY, TG } from "../figma_app/989514";
 import { K as _$$K } from "../figma_app/605682";
 import { J as _$$J } from "../figma_app/553179";
@@ -180,10 +180,10 @@ function j({
     onPrimaryCtaClick: () => {
       let e = getNewFileConfig({
         state: r.getState(),
-        openNewFileIn: ai.NEW_TAB,
+        openNewFileIn: TabOpenBehavior.NEW_TAB,
         folderOverride: "drafts",
         trackingInfo: {
-          from: f6.DESIGN_TOOLTIPS_PLUS_OUTRO_MODAL,
+          from: FileBrowserLocation.DESIGN_TOOLTIPS_PLUS_OUTRO_MODAL,
           selectedView: r.getState().selectedView
         },
         editorType: FFileType.DESIGN

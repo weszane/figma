@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { MZ } from "../figma_app/925970";
+import { generateSessionId } from "../figma_app/925970";
 import { OM } from "../905/124270";
 import { li } from "../905/182534";
 import { dd } from "../figma_app/604494";
@@ -13,7 +13,7 @@ export function $$c0() {
   let u = useSelector(e => e.search.parameters.query);
   let p = li();
   return (n, i) => {
-    let o = MZ();
+    let o = generateSessionId();
     trackEventAnalytics("facet_type_selected", {
       facetSessionId: o,
       fragmentSearchSessionId: t,

@@ -1,5 +1,5 @@
 import { createActionCreator } from "../905/73481";
-import { ky } from "../figma_app/925970";
+import { searchEndSession } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
 import { fullscreenValue } from "../figma_app/455680";
 import { getFullscreenViewEditorType } from "../figma_app/300692";
@@ -42,7 +42,7 @@ let $$h7 = createOptimistThunk((e, t) => {
 });
 let $$g3 = createActionCreator("SET_UNIVERSAL_INSERT_MODAL_PIN");
 let $$f2 = createOptimistThunk(e => {
-  e.getState().search.sessionId && e.dispatch(ky());
+  e.getState().search.sessionId && e.dispatch(searchEndSession());
   e.dispatch($$_5());
 });
 let $$_5 = createActionCreator("SET_UNIVERSAL_INSERT_MODAL_ClOSE");

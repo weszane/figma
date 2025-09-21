@@ -13,7 +13,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { hideModal } from "../905/156213";
 import { no } from "../figma_app/701001";
 import { Tm, Zz, xk } from "../figma_app/952446";
@@ -160,29 +160,29 @@ function N() {
     children: jsxs("div", {
       children: [jsx("p", {
         children: jsx("b", {
-          style: _$$sx.fontSemiBold.$,
+          style: styleBuilderInstance.fontSemiBold.$,
           children: renderI18nText("memory_warning_modal.memory_reduction_tips_modal_title")
         })
       }), jsx("br", {}), jsxs("ol", {
         className: "manage_memory--bulletedListManageMemory--pyJyb",
         children: [jsxs("li", {
           children: [jsx("b", {
-            style: _$$sx.fontMedium.$,
+            style: styleBuilderInstance.fontMedium.$,
             children: renderI18nText("memory_warning_modal.memory_reduction_tips_break_files_header")
           }), renderI18nText("memory_warning_modal.memory_reduction_tips_break_files")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
-            style: _$$sx.fontMedium.$,
+            style: styleBuilderInstance.fontMedium.$,
             children: renderI18nText("memory_warning_modal.memory_reduction_tips_clean_layers_header")
           }), renderI18nText("memory_warning_modal.memory_reduction_tips_clean_layers")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
-            style: _$$sx.fontMedium.$,
+            style: styleBuilderInstance.fontMedium.$,
             children: renderI18nText("memory_warning_modal.memory_reduction_tips_flatten_shapes_header")
           }), renderI18nText("memory_warning_modal.memory_reduction_tips_flatten_shapes")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
-            style: _$$sx.fontMedium.$,
+            style: styleBuilderInstance.fontMedium.$,
             children: renderI18nText("memory_warning_modal.memory_reduction_tips_trim_components_header")
           }), renderI18nText("memory_warning_modal.memory_reduction_tips_trim_components")]
         })]

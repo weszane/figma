@@ -8,7 +8,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { U as _$$U } from "../905/815805";
 import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
@@ -18,7 +18,7 @@ import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
-import { vp } from "../905/967587";
+import { setupWorkspaceIdentity } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
 import { getUserCurrency } from "../figma_app/514043";
 import { PRICING_URL } from "../figma_app/345997";
@@ -68,7 +68,7 @@ export function $$D0({
 }) {
   let G = useDispatch();
   let [V, H] = useState(getUserCurrency());
-  let z = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let z = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));
   let W = useCurrentPublicPlan("PlanComparisonModalContent");
   let K = W.unwrapOr(null)?.tier || null;
   let Y = _$$U(M ?? V);
@@ -83,7 +83,7 @@ export function $$D0({
     trackingOptions: $,
     children: jsxs("div", {
       className: _$$s.grid.gap16.p36.pb24.selectNone.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         width: X
       }).$,
       children: [j ?? (null !== j && jsx(k, {})), U ?? jsx(_$$f, {

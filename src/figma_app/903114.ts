@@ -11,7 +11,7 @@ import { A as _$$A } from "../905/920142";
 import { normalizeJobRole, getJobRoleDisplay } from "../3973/538504";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { h1 } from "../905/986103";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
@@ -422,9 +422,9 @@ function er({
   });
 }
 export let $$en1 = registerModal(function (e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "ModifyPlanUserSeatModal",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     children: jsx(Suspense, {
       fallback: jsx(_$$N2, {

@@ -6,7 +6,7 @@ import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { renderI18nText } from "../905/303541";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
@@ -202,7 +202,7 @@ let D = memo(function (e) {
       className: c()("rich_media_overlay--richMediaOverlay--G9rnR", {
         "rich_media_overlay--maximizedMediaPositioner--vewL5": d
       }),
-      children: jsx(tH, {
+      children: jsx(ErrorBoundaryCrash, {
         fallback: jsx(P, {
           mediaType,
           mediaHash

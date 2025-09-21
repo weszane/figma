@@ -5,7 +5,7 @@ import { M } from "../figma_app/648761";
 import { KeyCodes } from "../905/63728";
 import { RecordableAnchor, RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { withTrackedClick } from "../figma_app/831799";
 import { dD } from "../figma_app/941824";
 import { En } from "../figma_app/613182";
@@ -23,7 +23,7 @@ forwardRef(function (e, t) {
     className: r,
     ref: t,
     children: jsxs(Fragment, {
-      children: [jsx(_$$t, {
+      children: [jsx(MediaQuerySvgComponent, {
         svg: e.svg,
         fallbackSvg: e.fallbackSvg,
         useOriginalSrcFills_DEPRECATED: e.useOriginalSrcFills_DEPRECATED,
@@ -102,7 +102,7 @@ let $$f0 = forwardRef(function (e, t) {
     tabIndex: null != e.tabIndex ? e.tabIndex : e.disabled ? -1 : 0,
     target: e.target,
     type: e.type,
-    children: e.children || jsx(_$$t, {
+    children: e.children || jsx(MediaQuerySvgComponent, {
       svg: e.svg,
       fallbackSvg: e.fallbackSvg,
       useOriginalSrcFills_DEPRECATED: e.useOriginalSrcFills_DEPRECATED,

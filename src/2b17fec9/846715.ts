@@ -11,7 +11,7 @@ import { wY } from "../figma_app/708845";
 import { l as _$$l } from "../905/745972";
 import { BrowserInfo } from "../figma_app/778880";
 import { X as _$$X } from "../figma_app/776368";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
@@ -66,8 +66,8 @@ import { Lt, sD, fp as _$$fp, qG, Xn, wz, EY, cd, Mg, Bp, eB as _$$eB, gz, Sk, q
 import { kf } from "../figma_app/391056";
 import { A as _$$A } from "../svg/897148";
 import { A as _$$A2 } from "../svg/366068";
-import { sx } from "../905/941192";
-import { S as _$$S } from "../figma_app/403368";
+import { styleBuilderInstance } from "../905/941192";
+import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { N as _$$N2, Q as _$$Q2 } from "../figma_app/287368";
 import { uk, VQ, fn } from "../figma_app/580087";
 import { oh, c5, Yg as _$$Yg } from "../905/526509";
@@ -368,7 +368,7 @@ let eA = memo(function (e) {
     }, [e]);
     return [t, n, s];
   }(a);
-  let p = _$$S();
+  let p = setupCursorChatDisabledCheck();
   let h = !!selectCurrentFile()?.org?.figjamDisabledAt;
   let m = useMemo(() => p && h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org_no_chat", {
     commentKey: jsx(uk, {
@@ -423,7 +423,7 @@ let eA = memo(function (e) {
     })
   }), [p, h, d, c, u, o]);
   let f = useMemo(() => jsx("div", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       margin: "0 5px"
     }).$,
     children: jsx(RJ, {
@@ -1193,9 +1193,9 @@ function tI(e) {
   }) : _$$O() ? jsx(_$$X2, {}) : null, [t, a, i, s, l, e.toolbarContainerRef, e.onCloseForViewOnlyBanner]);
 }
 export function $$tL0() {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "DelightfulToolbar",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(tw, {})
   });
 }

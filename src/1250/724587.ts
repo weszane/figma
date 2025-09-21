@@ -8,7 +8,7 @@ import { isReduxDeprecationCutover, ConfigGroups, isReduxDeprecationShadowreadOr
 import { useShadowRead, adminPermissionConfig, useShadowReadLoaded } from "../figma_app/391338";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
 import { getUserOrgUserByOrgId } from "../figma_app/951233";
-import { kA } from "../figma_app/336853";
+import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { getPermissionsStateMemoized, hasEditorRoleAccessOnTeam } from "../figma_app/642025";
 import { useState, useRef } from "react";
 import { getFeatureFlags } from "../905/601108";
@@ -36,7 +36,7 @@ function p(e) {
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7)
   });
   let p = useShadowRead({
-    oldValue: kA(t.orgById[e.orgId]),
+    oldValue: isBigmaEnabledSimple(t.orgById[e.orgId]),
     newValue: e.planTier === FPlanNameType.ENTERPRISE,
     label: adminPermissionConfig.PlanSwitcherOrgBadges.isEnterprise,
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7)

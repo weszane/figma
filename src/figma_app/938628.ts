@@ -88,7 +88,7 @@ import { C as _$$C } from "../figma_app/630916";
 import { G as _$$G } from "../figma_app/80900";
 import { N as _$$N2 } from "../905/995635";
 import { logError } from "../905/714362";
-import { t as _$$t3 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nState } from "../figma_app/363242";
 import { isNullish } from "../figma_app/95419";
 import { Q as _$$Q3 } from "../figma_app/67145";
@@ -2256,7 +2256,7 @@ function re(e) {
         let [i, a] = XO[t];
         r.push(jsx(_$$c$2, {
           additionalStylesClassName: wO,
-          iconToReplaceCheck: jsx(_$$t3, {
+          iconToReplaceCheck: jsx(MediaQuerySvgComponent, {
             className: tX,
             svg: i,
             fallbackSvg: a
@@ -2271,7 +2271,7 @@ function re(e) {
         r.push(jsx(_$$c$2, {
           additionalStylesClassName: wO,
           value: zg,
-          iconToReplaceCheck: jsx(_$$t3, {
+          iconToReplaceCheck: jsx(MediaQuerySvgComponent, {
             className: tX,
             svg: t,
             fallbackSvg: i
@@ -2457,7 +2457,7 @@ function rd(e) {
     let t = rh(e.size);
     return jsxs("div", {
       className: f()(e.className, "stack_sizing_select_v5--flexContainer--nrpIK"),
-      children: [jsx(_$$t3, {
+      children: [jsx(MediaQuerySvgComponent, {
         svg: D,
         fallbackSvg: F,
         className: Vb

@@ -531,7 +531,7 @@ let eR = registerModal(e => {
       maxNumResults: 50
     }).then(e => {
       eB.current === eV && (e$(e.data.meta.results), ez(eV));
-    }).$$finally(() => {
+    }).finally(() => {
       eM(!1);
     });
   }, [eV, e.orgId, e$]);

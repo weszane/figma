@@ -7,7 +7,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { isStudentValidated } from "../figma_app/141320";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { liveStoreInstance, IT } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
@@ -23,11 +23,11 @@ export function $$v0(e) {
     isCampfireCart
   } = e;
   return jsx("div", {
-    style: sx.$$if(isProCart, sx.add({
+    style: styleBuilderInstance.$$if(isProCart, styleBuilderInstance.add({
       marginTop: "-16px"
-    }).mb32, sx.mt16).$$if(isCampfireCart, sx.mt16.add({
+    }).mb32, styleBuilderInstance.mt16).$$if(isCampfireCart, styleBuilderInstance.mt16.add({
       marginBottom: "40px"
-    }), sx.flex.justifyCenter.px16).$,
+    }), styleBuilderInstance.flex.justifyCenter.px16).$,
     children: jsx(y, {
       ...e
     })
@@ -64,9 +64,9 @@ function y({
     name: "Campfire Cart Banner",
     children: jsxs("div", {
       className: _$$s.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         borderRadius: "13px"
-      }).$$if(a, sx.add({
+      }).$$if(a, styleBuilderInstance.add({
         maxWidth: t ? "693px" : "758px"
       })).$,
       "data-testid": "campfire-cart-banner",

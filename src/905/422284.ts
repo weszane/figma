@@ -18,7 +18,7 @@ import { kq } from "../905/292918";
 import { Ad } from "../905/300250";
 import { Nf } from "../figma_app/864378";
 import { showModalHandler } from "../905/156213";
-import { PI } from "../905/977218";
+import { searchThunk } from "../905/977218";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { Xg } from "../figma_app/199513";
 import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
@@ -238,7 +238,7 @@ let K = createOptimistThunk((e, t) => {
       searchModelType,
       searchScope
     } = jr(t.params, i, i.selectedView);
-    query && e.dispatch(PI({
+    query && e.dispatch(searchThunk({
       searchModelType,
       query,
       searchScope,

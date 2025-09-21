@@ -16,7 +16,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { linkWithTracking } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
@@ -24,7 +24,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout } from "../905/470281";
@@ -54,9 +54,9 @@ var f = g;
 var A = _;
 var b = y;
 export function $$er0(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgRenewalModal",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     team: _$$e.BILLING_EXPERIENCE,
     children: jsx(Suspense, {
@@ -343,7 +343,7 @@ function es(e) {
       date: e.renewalDate,
       manageAssignedSeatsLink: jsx(ButtonPrimitive, {
         className: h()(h7, _$$s.inline.$),
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           backgroundColor: "unset"
         }).$,
         onClick: function () {

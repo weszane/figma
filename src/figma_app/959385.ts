@@ -16,7 +16,7 @@ import { SvgComponent } from "../905/714743";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { H8, Pf } from "../905/590952";
 import { X as _$$X } from "../figma_app/514836";
 import { S as _$$S } from "../figma_app/11182";
@@ -153,7 +153,7 @@ function ee({
   }, [h, r, u]);
   return jsx("div", {
     className: _$$s.p8.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       height: "48 px"
     }).$,
     children: jsxs("div", {
@@ -198,14 +198,14 @@ function et({
   let r = _$$X(e);
   return jsx("div", {
     className: _$$s.overflowHidden.bRadius5.mb12.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: r ? "16/9" : "2/1",
       background: "var(--color-loading)"
     }).$,
     children: jsx("img", {
       src: e,
       className: _$$s.hFull.wFull.eventsNone.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         objectFit: "cover"
       }).$,
       alt: `Thumbnail for ${t}`
@@ -229,7 +229,7 @@ function er({
         children: [jsx(SvgComponent, {
           svg: _$$A2,
           className: _$$s.colorIconSecondary.$,
-          style: sx.add({
+          style: styleBuilderInstance.add({
             margin: "3px"
           }).$
         }), jsx("div", {

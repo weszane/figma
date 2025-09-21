@@ -34,7 +34,7 @@ import { $ as _$$$ } from "../figma_app/61705";
 import { useDraftsFolderProject } from "../905/461685";
 import { FFileType } from "../figma_app/191312";
 import { COOPER_STRING } from "../figma_app/53721";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 import { BannerInline } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { Button } from "../905/521428";
@@ -137,7 +137,7 @@ function ei() {
   let i = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.COOPER,
-    newFileFrom: f6.DESIGN_TO_BUZZ_ENTRYPOINT,
+    newFileFrom: FileBrowserLocation.DESIGN_TO_BUZZ_ENTRYPOINT,
     contextClicked: `frame_presets_banner_${COOPER_STRING}_created`,
     forceOpenNewTab: !0
   });
@@ -161,7 +161,7 @@ function es() {
   let i = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.SITES,
-    newFileFrom: f6.DESIGN_TO_SITES_ENTRYPOINT,
+    newFileFrom: FileBrowserLocation.DESIGN_TO_SITES_ENTRYPOINT,
     contextClicked: "frame_presets_banner_sites_created",
     forceOpenNewTab: !0
   });
@@ -185,7 +185,7 @@ function el() {
   let i = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.SLIDES,
-    newFileFrom: f6.DESIGN_TO_SLIDES_ENTRYPOINT,
+    newFileFrom: FileBrowserLocation.DESIGN_TO_SLIDES_ENTRYPOINT,
     contextClicked: "frame_presets_banner_slides_created",
     forceOpenNewTab: !0
   });

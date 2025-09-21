@@ -8,22 +8,22 @@ import { isIframe } from '../905/508367';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { OrganizationType } from '../905/833838';
-import { oI } from '../905/854717';
-import { v as _$$v } from '../905/906499';
+import { updateCurrentSelectionPaintInPicker } from '../905/854717';
+import { autosaveErrorModal } from '../905/906499';
 import { selectViewAction } from '../905/929976';
 import { $T, _V, AB, F7, h2, k8, yJ } from '../figma_app/8833';
-import { Ed } from '../figma_app/139113';
+import { startAutosaveWait } from '../figma_app/139113';
 import { getInitialOptions } from '../figma_app/169182';
 import { getSelectedViewUrl, replaceOrgOrTeamId, selectedViewToPath } from '../figma_app/193867';
 import { trackFileEvent } from '../figma_app/314264';
-import { nX } from '../figma_app/336853';
+import { extractFigmaFileId } from '../figma_app/336853';
 import { fullscreenValue } from '../figma_app/455680';
 import { sendBackToFilesAction } from '../figma_app/564528';
 import { extractTeamIdFromUrl } from '../figma_app/598018';
 import { Dg, k6, Ug, V } from '../figma_app/682945';
 import { AppStateTsApi, SaveConnectionIssues, SelectionPaintHelpers } from '../figma_app/763686';
 import { desktopAPIInstance } from '../figma_app/876459';
-import { M8 } from '../figma_app/915202';
+import { MULTIPLAYER_USER_STATE_CHANGE } from '../figma_app/915202';
 let $$w18 = createActionCreator('CLEAR_SELECTED_VIEW_COMMENT_ID');
 let $$O17 = createActionCreator('UPDATE_RECENTLY_USED_QUICK_COMMAND');
 let $$R13 = createActionCreator('RECENTLY_USED_QUICK_COMMANDS');
@@ -89,7 +89,7 @@ function Q(e, t, r) {
   m ? SelectionPaintHelpers?.setIsPaintPickerOpen(!0) : E && SelectionPaintHelpers?.setIsPaintPickerOpen(!1);
   b ? SelectionPaintHelpers?.setIsStylePickerOpen(!0) : T && SelectionPaintHelpers?.setIsStylePickerOpen(!1);
   _ ? AppStateTsApi?.uiState().minMaxModalShown.set(!0) : h && AppStateTsApi?.uiState().minMaxModalShown.set(!1);
-  E && r(oI({
+  E && r(updateCurrentSelectionPaintInPicker({
     paintId: void 0,
     originalPaint: void 0,
     updatedPaintFromDropper: void 0
@@ -113,10 +113,10 @@ let $$es24 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let i = t.newSelectedView;
   if (r.saveStatus && r.saveStatus.hasUnsavedChanges && r.saveStatus.tabCloseText !== SaveConnectionIssues.SUPPRESS_UNSAVED_CHANGES_UI) {
-    if (!Ed(() => e.dispatch($$eA35()))) {
+    if (!startAutosaveWait(() => e.dispatch($$eA35()))) {
       let t = getI18nString('autosave.unable_to_leave_document.unsaved_changes_save_in_background');
       e.dispatch(showModalHandler({
-        type: _$$v,
+        type: autosaveErrorModal,
         data: {
           message: t
         }
@@ -148,7 +148,7 @@ let $$e_31 = createActionCreator('FULLSCREEN_STOP_OBSERVING_OTHER_USER');
 let $$eh22 = createActionCreator('FULLSCREEN_UPDATE_MULTIPLAYER_STATE');
 let $$em6 = createOptimistThunk((e, t) => {
   void 0 !== t.allUsers && (k6(t.allUsers.length, t.presenterSessionID), handleAtomEvent({
-    id: M8
+    id: MULTIPLAYER_USER_STATE_CHANGE
   }));
   e.dispatch($$eh22(t));
 });
@@ -193,7 +193,7 @@ let $$eA35 = createOptimistThunk((e, t) => {
     if (selectedView.view === 'fullscreen' && r.lastVisitedPlan && r.lastVisitedPlan.planId !== (r.lastVisitedPlan.planType === OrganizationType.ORG ? openFile?.parentOrgId : openFile?.teamId)) {
       let e = getSelectedViewUrl(r, p);
       selectedView.prevSelectedView && (e = getSelectedViewUrl(r, selectedView.prevSelectedView));
-      let t = nX(e);
+      let t = extractFigmaFileId(e);
       let n = extractTeamIdFromUrl(e);
       (t || n) && (e = replaceOrgOrTeamId(e, t ? OrganizationType.ORG : OrganizationType.TEAM, t || n, r.lastVisitedPlan.planType, r.lastVisitedPlan.planId));
       customHistory.redirect(e);

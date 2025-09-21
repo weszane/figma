@@ -22,7 +22,7 @@ import { logInfo } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { cq } from '../905/794154';
 import { n as _$$n } from '../905/895449';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { A as _$$A2 } from '../1617/325876';
 import { A as _$$A3 } from '../1617/495612';
 import { A as _$$A } from '../5724/594037';
@@ -425,13 +425,13 @@ function Y({
   let s = '';
   t === 'skip' ? s = `Skip "${i.name}"` : t === 'freeform' ? s = e : t === 'tryAgain' ? (s = 'Try again', a = jsx(SvgComponent, {
     svg: _$$A,
-    style: _$$sx.colorIcon.$
+    style: styleBuilderInstance.colorIcon.$
   })) : t === 'keep' ? (s = 'Keep', a = jsx(SvgComponent, {
     svg: _$$A2,
-    style: _$$sx.colorIcon.$
+    style: styleBuilderInstance.colorIcon.$
   })) : t === 'feedback' ? (s = 'Feedback', a = jsx(SvgComponent, {
     svg: _$$A3,
-    style: _$$sx.colorIcon.$
+    style: styleBuilderInstance.colorIcon.$
   })) : (s = t.name, a = jsx(Q, {
     parameter: t,
     className: ZR

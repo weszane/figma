@@ -6,10 +6,10 @@ import { createOptimistThunk } from "../905/350402";
 import { liveStoreInstance } from "../905/713695";
 import { fileEntityModel } from "../905/806985";
 import { fileApiHandler } from "../figma_app/787550";
-import { H } from "../905/473998";
+import { hubFileAPI } from "../905/473998";
 export let $$p2 = createActionCreator("ONBOARDING_TEMPLATES_PUT_ALL");
 createOptimistThunk(e => {
-  H.getTemplates({
+  hubFileAPI.getTemplates({
     type: "onboarding"
   }).then(({
     data: t
@@ -39,7 +39,7 @@ export let $$_1 = liveStoreInstance.Query({
 });
 liveStoreInstance.Query({
   fetch: async () => {
-    let e = await H.getStartingPointsTemplates();
+    let e = await hubFileAPI.getStartingPointsTemplates();
     if (200 !== e.status) throw Error("Failed to fetch starting points templates");
     return e.data.meta;
   },
@@ -47,7 +47,7 @@ liveStoreInstance.Query({
 });
 export let $$h0 = liveStoreInstance.Query({
   fetch: async () => {
-    let e = await H.getStartingPointsTemplatesAndAssets();
+    let e = await hubFileAPI.getStartingPointsTemplatesAndAssets();
     if (200 !== e.status) throw Error("Failed to fetch starting points templates and assets");
     return e.data.meta;
   },

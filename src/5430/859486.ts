@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { customHistory } from "../905/612521";
-import { v$ } from "../figma_app/455722";
+import { getActiveSearchRouteWithCommunity } from "../figma_app/455722";
 import { gM } from "../5430/823351";
 import { useRouteStateInstance } from "../figma_app/321395";
 import { ResourceHubCategoryRoute } from "../figma_app/805898";
@@ -37,7 +37,7 @@ export function $$x0({
     manager
   } = setupMenu();
   let f = useRouteStateInstance(ResourceHubCategoryRoute);
-  let y = v$();
+  let y = getActiveSearchRouteWithCommunity();
   let g = e === gM.CATEGORY ? f : e === gM.SEARCH ? y : null;
   return g || _ ? jsxs(MenuRootComp, {
     manager,

@@ -37,7 +37,7 @@ import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, Clien
 import { t as _$$t2 } from '../905/897919';
 import { XHR } from '../905/910117';
 import { lQ } from '../905/934246';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { f1, Iu, Ng, q_ } from '../905/997533';
 import { A as _$$A5 } from '../1617/720259';
 import { A as _$$A3 } from '../5724/332367';
@@ -708,12 +708,12 @@ let e_ = (e, t, i, n) => {
 function eA(e) {
   let [t, i] = e.email.split('@');
   return jsxs('div', {
-    style: _$$sx.inlineFlex.maxWFull.$,
+    style: styleBuilderInstance.inlineFlex.maxWFull.$,
     children: [jsx('span', {
-      style: _$$sx.noWrap.overflowHidden.ellipsis.pl16.$,
+      style: styleBuilderInstance.noWrap.overflowHidden.ellipsis.pl16.$,
       children: t
     }), jsxs('span', {
-      style: _$$sx.pr16.$,
+      style: styleBuilderInstance.pr16.$,
       children: ['@', i]
     })]
   });

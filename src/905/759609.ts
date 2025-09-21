@@ -29,7 +29,7 @@ import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/550089";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { AX, UX } from "../905/542608";
 import { se, TM, Mz, a7, RL } from "../figma_app/435826";
 import { Ao } from "../905/748636";
@@ -336,7 +336,7 @@ function Z({
   } = e;
   let u = gU(previousHandler ?? void 0, nextHandler ?? void 0);
   let p = i === PrimaryWorkflowEnum.COMPONENT || i === PrimaryWorkflowEnum.STATE_GROUP;
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     handleKeyDown: u,
     name: "review-updates-modal",
     focusOnMount: !0,

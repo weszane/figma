@@ -8,7 +8,7 @@ import { RecordingComponent, SKIP_RECORDING, handleMouseEvent, setupPlayback } f
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { S } from "../figma_app/552746";
-import { H4 } from "../figma_app/679183";
+import { CachedSubtreeRenderer } from "../figma_app/679183";
 import { dD, xp } from "../figma_app/941824";
 import { kR, CZ, LE, l$, Aw, gB, tp, kI, wD, KT, VY } from "../figma_app/459377";
 import { A } from "../5724/713301";
@@ -260,7 +260,7 @@ class b extends RecordingComponent {
     return this.props.updateSelection ? new Set(this.props.selectedIndices) : new Set();
   }
   cachedItemCallback(e) {
-    return new H4(() => this.props.renderListItem(this.props.listItems[e], e, !!this.props.updateSelection && this.props.selectedIndices.indexOf(e) >= 0, this.state.isDraggingSelection, this.onListItemMouseDown.bind(this, e), this.onListItemMouseMove.bind(this, e), this.onListItemMouseUp.bind(this, e), this.onListItemContextMenu.bind(this, e)));
+    return new CachedSubtreeRenderer(() => this.props.renderListItem(this.props.listItems[e], e, !!this.props.updateSelection && this.props.selectedIndices.indexOf(e) >= 0, this.state.isDraggingSelection, this.onListItemMouseDown.bind(this, e), this.onListItemMouseMove.bind(this, e), this.onListItemMouseUp.bind(this, e), this.onListItemContextMenu.bind(this, e)));
   }
   render() {
     let e = this._cachedListItems;

@@ -6,10 +6,10 @@ import { showModalHandler } from "../905/156213";
 import { selectCurrentUser } from "../905/372672";
 import { hasClientMeta } from "../figma_app/45218";
 import { T } from "../5132/203178";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 export function $$u0(e, l = !1, i = !1, _ = !1) {
   let h = useDispatch();
-  let m = Jm();
+  let m = getSearchSessionIdFromSelector();
   let f = T();
   let g = selectCurrentUser();
   if (!hasClientMeta(e)) return () => {};

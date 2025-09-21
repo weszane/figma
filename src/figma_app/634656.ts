@@ -32,7 +32,7 @@ export function $$N2() {
       a || t(VisualBellActions.enqueue({
         message: getI18nString("fullscreen.color_palette.apply_palette_failure")
       }));
-    }).$$finally(() => {
+    }).finally(() => {
       r(0);
     }));
   };

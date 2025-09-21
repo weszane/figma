@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { QA } from "../figma_app/703138";
+import { editComment } from "../figma_app/703138";
 import { CommentComposer } from "../draftjs_composer/577988";
 export function $$l0(e) {
   let {
@@ -18,7 +18,7 @@ export function $$l0(e) {
       messageMeta: _messageMeta,
       onSuccess
     } = e;
-    d(QA({
+    d(editComment({
       message: _message,
       messageMeta: _messageMeta,
       commentId,

@@ -22,7 +22,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { LR } from "../figma_app/120210";
 import { selectOpenFile } from "../figma_app/516028";
 import { B0 } from "../figma_app/807786";
@@ -581,7 +581,7 @@ function ey({
       keyPrefix: _$$V(e),
       type: "compact"
     }) : jsx("div", {
-      style: _$$sx.colorBgSecondary.radiusMedium.add({
+      style: styleBuilderInstance.colorBgSecondary.radiusMedium.add({
         height: `${subpathGridHeight - 8}px`,
         width: `${subpathGridHeight - 8}px`
       }).$
@@ -1252,7 +1252,7 @@ function ew({
   top: e
 }) {
   return jsx("div", {
-    style: _$$sx.absolute.colorBorder.add({
+    style: styleBuilderInstance.absolute.colorBorder.add({
       top: `${e}px`,
       borderBottomWidth: "1px",
       borderStyle: "solid",

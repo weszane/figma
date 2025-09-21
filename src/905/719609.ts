@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 var a = r;
 var $$l1 = (e => (e.DEFAULT = "default", e.BRAND = "brand", e.ON_MENU = "on_menu", e.UI3 = "ui3", e.SLIDES_SPEAKER_NOTES = "slides_speaker_notes", e))($$l1 || {});
 export function $$d0({
@@ -19,7 +19,7 @@ export function $$d0({
     "badge--menuBadge--va-CK": "on_menu" === t,
     "badge--speakerNotes--glkoC": "slides_speaker_notes" === t
   });
-  let l = sx.$$if(i, sx.add({
+  let l = styleBuilderInstance.$$if(i, styleBuilderInstance.add({
     borderColor: "var(--color-border-selected)"
   })).$;
   return jsx("div", {

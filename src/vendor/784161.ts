@@ -204,7 +204,7 @@ t = function() {
             let o = [a.onLoadedStream(), a.ensureCatalog("acroForm"), a.ensureCatalog("acroFormRef"), a.ensureDoc("xref"), a.ensureDoc("startXRef")];
             if (e) o.push(a.serializeXfaData(r)); else for (let e = 0; e < t; e++) o.push(a.getPage(e).then(function(t) {
               let a = new f(`Save: page ${e}`);
-              return t.save(A, a, r).$$finally(function() {
+              return t.save(A, a, r).finally(function() {
                 O(a);
               });
             }));

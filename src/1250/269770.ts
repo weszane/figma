@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { s4, Dm } from "../figma_app/8833";
 import { flagAtom, requestsAtom, NetworkState } from "../905/149196";
 import { getFigmentDebuggerFlag } from "../figma_app/347406";
@@ -12,7 +12,7 @@ var $$m1 = (e => (e.FILE_BROWSER = "file_browser", e))($$m1 || {});
 export function $$p0({
   entryPoint: e
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "figment-debugger",
     fallback: jsx("div", {}),
     children: jsx(g, {

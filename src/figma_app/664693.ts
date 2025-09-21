@@ -15,7 +15,7 @@ import { Y1 } from "../905/143116";
 import { h as _$$h } from "../905/207101";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -137,9 +137,9 @@ export function $$B2() {
   let {
     pop
   } = cq();
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FirstDraftLintViewForMakeKit",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: ServiceCategories.AI_GENERATION
     },

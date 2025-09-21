@@ -12,14 +12,14 @@ import { getResourceDataOrFallback } from "../905/663269";
 import p from "../vendor/116389";
 import { selectWithShallowEqual } from "../905/103090";
 import { g as _$$g } from "../1556/359896";
-import { n as _$$n } from "../figma_app/3731";
+import { renderAvatar } from "../figma_app/3731";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
 import { postUserFlag } from "../905/985254";
 import { setupOptimistPlanLoader } from "../905/352022";
-import { vp, HE } from "../905/967587";
+import { setupWorkspaceIdentity, getWorkspaceName } from "../905/967587";
 import { V as _$$V } from "../1250/329133";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanFeatures } from "../figma_app/465071";
@@ -39,7 +39,7 @@ export let $$$$U0 = "PLAN_SWITCHER_ONBOARDING_KEY";
 export function $$G1() {
   let e = useDispatch();
   let t = useSelector(e => getPermissionsStateMemoized(e));
-  let n = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let n = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));
   let o = useSelector(e => e.user);
   let s = useSelector(e => e.plans);
   let l = useTeamPlanFeatures();
@@ -50,7 +50,7 @@ export function $$G1() {
   }, []), !n || !o) return null;
   let d = jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4 xb3r6kr",
-    children: [jsx(_$$n, {
+    children: [jsx(renderAvatar, {
       size: 16,
       userId: n.userId,
       orgId: n.orgId,
@@ -64,7 +64,7 @@ export function $$G1() {
         fontWeight: "medium",
         color: "default",
         truncate: !0,
-        children: HE(t, n)
+        children: getWorkspaceName(t, n)
       })
     })]
   });

@@ -12,7 +12,7 @@ import { dh } from "../figma_app/186343";
 import { openFileKeyAtom, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { getCurrentTeam, currentTeamAtom } from "../figma_app/598018";
-import { ai } from "../figma_app/915202";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { S, E as _$$E } from "../figma_app/999099";
 import { V } from "../figma_app/761984";
 export function $$b3() {
@@ -75,7 +75,7 @@ function I({
     from: i,
     editorType: FFileType.SLIDES,
     team: n,
-    openNewFileIn: ai.NEW_TAB,
+    openNewFileIn: TabOpenBehavior.NEW_TAB,
     slidesAiNewFileData: {
       source: i
     },

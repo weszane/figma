@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createRef, useState, useEffect, memo, useCallback } from "react";
 import { AppStateTsApi, ViewType } from "../figma_app/763686";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { tt, iT } from "../figma_app/74165";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { qw } from "../figma_app/740163";
@@ -39,7 +39,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { A as _$$A2 } from "../b2835def/491732";
 import { oW } from "../905/675859";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { FU } from "../905/26824";
 import { showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
@@ -325,7 +325,7 @@ function ee({
   let l = Xr(QU);
   return jsxs("button", {
     className: _$$s2.cursorPointer.$,
-    style: _$$sx.radiusMedium.b1.colorBorder.flex.flexRow.wFull.add({
+    style: styleBuilderInstance.radiusMedium.b1.colorBorder.flex.flexRow.wFull.add({
       height: "74px",
       overflow: "hidden"
     }).$,
@@ -340,7 +340,7 @@ function ee({
     children: [jsx(oW, {
       src: e.image,
       alt: "",
-      style: _$$sx.m0.add({
+      style: styleBuilderInstance.m0.add({
         width: "108px",
         height: "74px",
         borderRadius: "var(--radius-medium) 0 0 var(--radius-medium)"
@@ -741,7 +741,7 @@ function ek() {
   let t = Xr(QU);
   return jsxs("button", {
     className: _$$s2.radiusMedium.b1.colorBorder.flex.flexRow.m16.cursorPointer.overflowHidden.$,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       height: "74px"
     }).$,
     onClick: async () => {
@@ -751,14 +751,14 @@ function ek() {
     children: [jsx(oW, {
       src: buildUploadUrl("c657cef6e7f2fec74ceef573832e097f2d0ce4cd"),
       alt: "",
-      style: _$$sx.m0.add({
+      style: styleBuilderInstance.m0.add({
         width: "108px",
         height: "74px",
         borderRadius: "var(--radius-medium) 0 0 var(--radius-medium)"
       }).$
     }), jsxs("div", {
       className: _$$s2.flex.flexColumn.gap2.m12.font11.ellipsis.alignLeft.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         margin: "auto 12px"
       }).$,
       children: [jsx("p", {
@@ -861,9 +861,9 @@ export function $$eO0({
   }, [setPropertiesPanelCollapsed, b]), b) ? jsx("div", {
     className: KF,
     children: jsx(v2, {})
-  }) : jsx(tH, {
+  }) : jsx(ErrorBoundaryCrash, {
     boundaryKey: e,
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: C && g && jsxs(Fragment, {
       children: [t, "hidden" !== inProductHelpViewType && jsx(eP, {
         propertiesPanelWidth: j

@@ -5,7 +5,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { withTrackedClick } from "../figma_app/831799";
 import { F } from "../905/759613";
 import { Q6, nK, QC, aj, AH, Vs, b, Rf, uI, J, Lb } from "../905/856036";
@@ -43,13 +43,13 @@ export function $$f0(e) {
     }),
     children: [e.title ? jsx("div", {
       className: l()(_$$s.font13.fontMedium.flexGrow1.$$if(!e.hideCloseButton, _$$s.pr32).$, AH),
-      style: sx.add({
+      style: styleBuilderInstance.add({
         letterSpacing: "-0.032px"
       }).$,
       children: e.title
     }) : jsx("div", {
       className: l()(_$$s.font11.fontNormal.lh16.wFull.$$if(!e.hideCloseButton, _$$s.pr32).$, Vs),
-      style: sx.add({
+      style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,
       children: e.description
@@ -74,7 +74,7 @@ export function $$_1(e) {
     }),
     children: [jsx("div", {
       className: _$$s.$$if(e.emphasized, _$$s.colorTextOnbrandSecondary, _$$s.colorTextSecondary).$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,
       children: e.stepCounter && renderI18nText("rcs.rcs_shared.step_counter", {

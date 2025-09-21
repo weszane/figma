@@ -4,12 +4,12 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { z5, a6, jM, J, P_ } from "../905/124270";
-import { jN, nX, Aj, S2 } from "../905/171315";
+import { createResourceFacet, buildQueryObject, isDefaultSearchTypes, getResourceTypeLabel } from "../905/171315";
 import { cr, CO } from "../905/703676";
 import { n as _$$n } from "../905/624711";
 import { k } from "../905/252342";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
-import { PillType, InputType, $L } from "../figma_app/162807";
+import { PillType, InputType, SearchModelType } from "../figma_app/162807";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { isSitesFeatureEnabled } from "../905/561485";
 import { zH, Kk } from "../905/954985";
@@ -27,8 +27,8 @@ export function $$y0({
   let x = _$$n();
   let S = k();
   let w = useCallback((e, t) => {
-    let n = jN(t);
-    let r = nX(n, I, E);
+    let n = createResourceFacet(t);
+    let r = buildQueryObject(n, I, E);
     i(e, n, r);
     y(null);
     t ? x({
@@ -43,14 +43,14 @@ export function $$y0({
       onClickCallback: e => w(e, null),
       path: [...t, 0],
       rowHeight: CO.SHORT,
-      sideElement: v && v.value !== $L.ALL_FILES ? void 0 : jsx(SvgComponent, {
+      sideElement: v && v.value !== SearchModelType.ALL_FILES ? void 0 : jsx(SvgComponent, {
         svg: _$$A,
         className: Kk
       }),
       sideElementAlwaysVisible: !0,
-      text: Aj(b) ? getI18nString("search.preview_section.all_files") : getI18nString("search.preview_section.all_resources")
+      text: isDefaultSearchTypes(b) ? getI18nString("search.preview_section.all_files") : getI18nString("search.preview_section.all_resources")
     }), b.map((i, r) => {
-      if (i === $L.SITES && !isSitesFeatureEnabled() || i === $L.BUZZ && !isCooperFeatureEnabled() || i === $L.MAKE && !isFigmakeSitesEnabled() || i === $L.ALL_FILES || i === $L.PLUGINS || i === $L.WIDGETS) return null;
+      if (i === SearchModelType.SITES && !isSitesFeatureEnabled() || i === SearchModelType.BUZZ && !isCooperFeatureEnabled() || i === SearchModelType.MAKE && !isFigmakeSitesEnabled() || i === SearchModelType.ALL_FILES || i === SearchModelType.PLUGINS || i === SearchModelType.WIDGETS) return null;
       let a = `${e}-resource-option-${r}`;
       let o = v?.value === i;
       return jsx(cr, {
@@ -64,7 +64,7 @@ export function $$y0({
           className: Kk
         }) : void 0,
         sideElementAlwaysVisible: !0,
-        text: S2(i)
+        text: getResourceTypeLabel(i)
       }, a);
     })]
   });

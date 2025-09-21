@@ -386,7 +386,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
           metricName: 'design_systems.subscribed_component.insert_time',
           duration: performance.now() - t
         });
-      }).$$finally(() => {
+      }).finally(() => {
         i();
       });
     }
@@ -519,7 +519,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
           metricName: 'design_systems.subscribed_state_group.insert_time',
           duration: performance.now() - t
         });
-      }).$$finally(() => {
+      }).finally(() => {
         i();
       });
     }

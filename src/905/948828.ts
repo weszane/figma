@@ -4,7 +4,7 @@ import { q } from "../905/636218";
 import { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { EK, tg } from "../figma_app/396432";
 import { B } from "../905/261906";
 import { ProductAccessTypeEnum } from "../905/513035";
@@ -219,7 +219,7 @@ function R({
   t ? r = _$$s.colorTextDesignTertiary.colorBgDesignTertiary : i && (r = _$$s.colorText.colorBgTertiary);
   return jsx("span", {
     className: _$$s.ml4.px4.py2.fontNormal.font11.lh16.bRadius5.add(r).$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       verticalAlign: "text-bottom"
     }).$,
     children: e

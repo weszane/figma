@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { VisualBellActions } from "../905/302958";
 import { R } from "../905/687502";
@@ -55,16 +55,16 @@ export function $$_0(e) {
   let v = e.errorBoundaryConfig?.figmaTeam ?? _$$e.WAYFINDING;
   let I = e.errorBoundaryConfig?.boundaryKeySuffix ? `-${e.errorBoundaryConfig.boundaryKeySuffix}` : "";
   let E = jsxs(Fragment, {
-    children: [!!e.banner && jsx(tH, {
+    children: [!!e.banner && jsx(ErrorBoundaryCrash, {
       team: v,
       boundaryKey: `FileBrowserPageBanner${I}`,
-      fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+      fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       hasCustomWASMBuild: y4,
       children: e.banner
-    }), jsx(tH, {
+    }), jsx(ErrorBoundaryCrash, {
       team: v,
       boundaryKey: `FileBrowserPageToolbar${I}`,
-      fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+      fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       onError: () => {
         _(VisualBellActions.enqueue({
           message: "Something went wrong.",
@@ -78,10 +78,10 @@ export function $$_0(e) {
     }), e.viewbar && jsx(f, {
       isSticky: e.viewBarSticky,
       children: e.viewbar
-    }), !!e.belowToolbarBanner && jsx(tH, {
+    }), !!e.belowToolbarBanner && jsx(ErrorBoundaryCrash, {
       team: v,
       boundaryKey: `FileBrowserPageBannerBelowToolbar${I}`,
-      fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+      fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       hasCustomWASMBuild: y4,
       children: e.belowToolbarBanner
     }), jsx("div", {
@@ -90,7 +90,7 @@ export function $$_0(e) {
         className: `${containerStyle} ${e.containerClass || ""}`,
         children: [e.metaContent && jsx("div", {
           className: metaContainerStyle,
-          children: jsx(tH, {
+          children: jsx(ErrorBoundaryCrash, {
             team: v,
             boundaryKey: `FileBrowserPageMetaContent${I}`,
             fallback: jsx(R, {}),
@@ -99,7 +99,7 @@ export function $$_0(e) {
           })
         }), jsx("main", {
           className: `file_browser_page_view--contentContainer--m6UCY ${e.contentContainerClass || ""}`,
-          children: jsx(tH, {
+          children: jsx(ErrorBoundaryCrash, {
             team: v,
             boundaryKey: `FileBrowserPageContent${I}`,
             fallback: jsx(R, {}),
@@ -110,7 +110,7 @@ export function $$_0(e) {
       })
     })]
   });
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     team: v,
     boundaryKey: `FileBrowserPageHeader${I}`,
     fallback: jsx(R, {}),

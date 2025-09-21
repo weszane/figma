@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { r as _$$r } from "../905/571838";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents } from "../figma_app/272243";
 import { C as _$$C } from "../905/520159";
@@ -50,7 +50,7 @@ function v({
         className: _$$s.flex.flexGrow1.wFull.flexColumn.$,
         children: [!T && jsx("div", {
           className: _$$s.absolute.$,
-          style: sx.add({
+          style: styleBuilderInstance.add({
             top: "8px",
             right: "8px"
           }).$,
@@ -65,7 +65,7 @@ function v({
         }), jsx("div", {
           className: _$$s.overflowAuto.flexGrow1.bb1.bSolid.colorBorder.$,
           children: jsx("div", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               height: `min(${w}px, calc(80vh - 80px))`,
               minHeight: `min(${w}px, calc(80vh - 80px))`,
               gridTemplateColumns: "285px 2fr"
@@ -77,7 +77,7 @@ function v({
           className: _$$s.px16.flex.flexColumn.borderBox.justifyEnd.itemsCenter.gap8.itemSelfStretch.py16.wFull.$,
           children: jsxs("div", {
             className: _$$s.wFull.$,
-            style: sx.add({
+            style: styleBuilderInstance.add({
               display: "grid",
               gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center"
@@ -96,7 +96,7 @@ function v({
                 length: a
               }, (e, a) => jsx("div", {
                 className: _$$s.w8.h8.bRadiusFull.b1.$,
-                style: sx.add({
+                style: styleBuilderInstance.add({
                   backgroundColor: "var(--color-bg)"
                 }).$$if(t === a + 1, {
                   backgroundColor: "var(--color-bg-inverse)",
@@ -175,14 +175,14 @@ function P({
 }) {
   return jsxs(Fragment, {
     children: [jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         padding: "40px"
       }).$,
       className: _$$s.flex.flexColumn.itemsStart.gap16.flex1.br1.bSolid.colorBorder.colorBgPressed.$,
       children: e
     }), jsx("div", {
       className: _$$s.flex.flexColumn.flex1.itemSelfStretch.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         padding: "40px"
       }).$,
       children: t
@@ -191,7 +191,7 @@ function P({
 }
 function D() {
   return jsx("hr", {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       gridColumn: "1 / -1",
       strokeWidth: "1px",
       stroke: "var(--color-border)"
@@ -312,7 +312,7 @@ export function $$B0({
       children: 1 === g ? jsx(P, {
         leftChildren: jsxs(Fragment, {
           children: [jsx("div", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               width: "221px"
             }).$,
             className: _$$s.textHeadingLarge.colorText.$,
@@ -347,7 +347,7 @@ export function $$B0({
               })]
             }), jsx("div", {
               className: _$$s.grid.p24.b1.bSolid.colorBorder.$,
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 gridTemplateColumns: "auto auto 1fr",
                 gridTemplateRows: "auto auto auto auto auto",
                 gridColumnGap: "16px",

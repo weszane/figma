@@ -1,286 +1,443 @@
-import { deepEqual } from "../905/382883";
-import { PaintTools, Multiplayer } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { globalPerfTimer, distributionAnalytics } from "../905/542194";
-import { debugState } from "../905/407919";
-import { N, B } from "../905/284094";
-import { mu } from "../figma_app/308685";
-export let $$n0;
-let u = 0;
-class p {
+import { ComparableStatePublisher, StatePublisher } from '../905/284094';
+import { deepEqual } from '../905/382883';
+import { debugState } from '../905/407919';
+import { trackEventAnalytics } from '../905/449184';
+import { distributionAnalytics, globalPerfTimer } from '../905/542194';
+import { stopReactingAction } from '../figma_app/308685';
+import { Multiplayer, PaintTools } from '../figma_app/763686';
+
+/**
+ * Information about a user's cursor in a multiplayer session.
+ * Original type name: CursorInfo
+ */
+export interface CursorInfo {
+  sessionId: string;
+  mouse: any;
+  isHoveringWidgetWithHiddenCursors: boolean;
+  chatMessage: [string | null, any | null];
+  highFiveStatus: boolean;
+  cursorType: PaintTools;
+  lastMouseMoveMs: number;
+  focusOnTextCursor?: boolean;
+}
+
+/**
+ * @typedef {object} VoiceMetadata
+ * @property {string} connectedCallId
+ */
+
+/**
+ * @typedef {object} Reaction
+ * @property {string} localId
+ * @property {string} reactionId
+ * @property {any} canvasSpacePosition
+ * @property {any} pageId
+ */
+
+/**
+ * @typedef {object} CursorChatConfig
+ * @property {string} eventName
+ * @property {number[]} bins
+ * @property {number} sendToDataDogEveryMs
+ */
+
+/**
+ * Configuration for cursor chat analytics.
+ * Original type name: CursorChatConfig
+ */
+export interface CursorChatConfig {
+  eventName: string;
+  bins: number[];
+  sendToDataDogEveryMs: number;
+}
+export let multiplayerSessionManager;
+let reactionCounter = 0;
+
+/**
+ * Manages multiplayer cursor, chat, voice, and reaction state.
+ * Original class name: p
+ */
+class MultiplayerSessionManager {
+  private _currentSessionId: number;
+  private _infoBySessionId: StatePublisher;
+  private _voiceMetadataBySessionId: ComparableStatePublisher;
+  private _reactionsBySessionId: StatePublisher;
+  private _reactionTimeout: number;
+  private _onReactionsUpdated?: () => void;
+  private _onInfoBySessionIdUpdated?: () => void;
+  private _onOtherUserMouseMoved?: () => void;
+  private _cursorChatLoggerTimerID: ReturnType<typeof setTimeout> | null;
   constructor() {
     this._currentSessionId = -1;
-    this._infoBySessionId = new N({});
-    this._voiceMetadataBySessionId = new B({}, deepEqual);
-    this._reactionsBySessionId = new N({});
+    this._infoBySessionId = new StatePublisher({});
+    this._voiceMetadataBySessionId = new ComparableStatePublisher({}, deepEqual);
+    this._reactionsBySessionId = new StatePublisher({});
     this._reactionTimeout = -1;
-    this._onReactionsUpdated = void 0;
-    this._onInfoBySessionIdUpdated = void 0;
-    this._onOtherUserMouseMoved = void 0;
+    this._onReactionsUpdated = undefined;
+    this._onInfoBySessionIdUpdated = undefined;
+    this._onOtherUserMouseMoved = undefined;
     this._cursorChatLoggerTimerID = null;
   }
-  infoBySessionId() {
+
+  /** Returns a copy of infoBySessionId state. */
+  infoBySessionId(): Record<string, CursorInfo> {
     return {
       ...this._infoBySessionId.get()
     };
   }
+
+  /** Returns a copy of voiceMetadataBySessionId state. */
   voiceMetadataBySessionId() {
     return {
       ...this._voiceMetadataBySessionId.get()
     };
   }
-  reactionsBySessionId() {
+
+  /** Returns a copy of reactionsBySessionId state. */
+  reactionsBySessionId(): Record<string, Record<string, Reaction>> {
     return {
       ...this._reactionsBySessionId.get()
     };
   }
-  handleConnect(e) {
-    -1 !== this._currentSessionId && this.removeUser(this._currentSessionId);
-    this._currentSessionId = e;
+
+  /** Handles user connection by removing previous and adding new user. */
+  handleConnect(sessionId: number): void {
+    if (this._currentSessionId !== -1) {
+      this.removeUser(this._currentSessionId);
+    }
+    this._currentSessionId = sessionId;
     this.addUser(this._currentSessionId);
   }
-  addUser(e) {
-    let t = this._infoBySessionId.get();
-    let i = {
-      sessionId: e.toString(),
+
+  /** Adds a user to all session states. */
+  addUser(sessionId: number): void {
+    const info = this._infoBySessionId.get();
+    const newInfo: CursorInfo = {
+      sessionId: sessionId.toString(),
       mouse: null,
-      isHoveringWidgetWithHiddenCursors: !1,
+      isHoveringWidgetWithHiddenCursors: false,
       chatMessage: [null, null],
-      highFiveStatus: !1,
+      highFiveStatus: false,
       cursorType: PaintTools.DEFAULT,
       lastMouseMoveMs: -1
     };
     this.setInfoBySessionId({
-      ...t,
-      [e]: i
+      ...info,
+      [sessionId]: newInfo
     });
-    let n = this._voiceMetadataBySessionId.get();
+    const voice = this._voiceMetadataBySessionId.get();
     this._voiceMetadataBySessionId.set({
-      ...n,
-      [e]: {
-        connectedCallId: ""
+      ...voice,
+      [sessionId]: {
+        connectedCallId: ''
       }
     });
-    let r = this._reactionsBySessionId.get();
+    const reactions = this._reactionsBySessionId.get();
     this.setReactionsBySessionId({
-      ...r,
-      [e]: {}
+      ...reactions,
+      [sessionId]: {}
     });
   }
-  removeUser(e) {
-    let t = {
+
+  /** Removes a user from all session states. */
+  removeUser(sessionId: number): void {
+    const info = {
       ...this._infoBySessionId.get()
     };
-    delete t[e];
-    this.setInfoBySessionId(t);
-    let i = {
+    delete info[sessionId];
+    this.setInfoBySessionId(info);
+    const voice = {
       ...this._voiceMetadataBySessionId.get()
     };
-    delete i[e];
-    this._voiceMetadataBySessionId.set(i);
-    let n = {
+    delete voice[sessionId];
+    this._voiceMetadataBySessionId.set(voice);
+    const reactions = {
       ...this._reactionsBySessionId.get()
     };
-    delete n[e];
-    this.setReactionsBySessionId(n);
+    delete reactions[sessionId];
+    this.setReactionsBySessionId(reactions);
   }
-  setMouseCursor(e, t) {
-    let i = this._infoBySessionId.get();
+
+  /** Sets the cursor type for a user. */
+  setMouseCursor(sessionId: number, cursorType: PaintTools): void {
+    const info = this._infoBySessionId.get();
     this.setInfoBySessionId({
-      ...i,
-      [e]: {
-        ...i[e],
-        cursorType: t
+      ...info,
+      [sessionId]: {
+        ...info[sessionId],
+        cursorType
       }
     });
   }
-  setMousePosition(e, t, i, n) {
-    let r = this._infoBySessionId.get();
-    if (e in r) {
-      let a = r[e];
-      let s = {
-        ...a,
+
+  /** Sets the mouse position for a user. */
+  setMousePosition(sessionId: number, pageId: any, x: number, y: number): void {
+    const info = this._infoBySessionId.get();
+    if (sessionId in info) {
+      const prev = info[sessionId];
+      const updated: CursorInfo = {
+        ...prev,
         mouse: {
           canvasSpacePosition: {
-            x: i,
-            y: n
+            x,
+            y
           },
-          pageId: t
+          pageId
         },
         lastMouseMoveMs: window.performance.now()
       };
-      this.otherUserMouseMoved(e, s, a) && this._onOtherUserMouseMoved?.();
+      if (this.otherUserMouseMoved(sessionId, updated, prev)) {
+        this._onOtherUserMouseMoved?.();
+      }
       this.setInfoBySessionId({
-        ...r,
-        [e]: s
+        ...info,
+        [sessionId]: updated
       });
     }
   }
-  setIsHoveringWidgetWithHiddenCursors(e, t) {
-    let i = this._infoBySessionId.get();
-    e in i && this.setInfoBySessionId({
-      ...i,
-      [e]: {
-        ...i[e],
-        isHoveringWidgetWithHiddenCursors: t
-      }
-    });
+
+  /** Sets hovering widget with hidden cursors for a user. */
+  setIsHoveringWidgetWithHiddenCursors(sessionId: number, isHovering: boolean): void {
+    const info = this._infoBySessionId.get();
+    if (sessionId in info) {
+      this.setInfoBySessionId({
+        ...info,
+        [sessionId]: {
+          ...info[sessionId],
+          isHoveringWidgetWithHiddenCursors: isHovering
+        }
+      });
+    }
   }
-  otherUserMouseMoved(e, t, i) {
-    return e !== this._currentSessionId && t.mouse?.canvasSpacePosition !== i.mouse?.canvasSpacePosition;
+
+  /** Checks if another user's mouse moved. */
+  otherUserMouseMoved(sessionId: number, updated: CursorInfo, prev: CursorInfo): boolean {
+    return sessionId !== this._currentSessionId && updated.mouse?.canvasSpacePosition !== prev.mouse?.canvasSpacePosition;
   }
-  setFocusOnTextCursor(e, t) {
-    let i = this._infoBySessionId.get();
+
+  /** Sets focus on text cursor for a user. */
+  setFocusOnTextCursor(sessionId: number, focus: boolean): void {
+    const info = this._infoBySessionId.get();
     this.setInfoBySessionId({
-      ...i,
-      [e]: {
-        ...i[e],
-        focusOnTextCursor: t
+      ...info,
+      [sessionId]: {
+        ...info[sessionId],
+        focusOnTextCursor: focus
       }
     });
   }
-  setChatMessage(e, t, i) {
-    let n = this._infoBySessionId.get();
-    let {
+
+  /** Sets chat message for a user and triggers analytics. */
+  setChatMessage(sessionId: number, message: string, meta: any): void {
+    const info = this._infoBySessionId.get();
+    const {
       eventName,
       sendToDataDogEveryMs
-    } = m.CURSOR_CHAT;
-    globalPerfTimer.start(`${eventName}_${e}_${t}`);
-    null === this._cursorChatLoggerTimerID && (this._cursorChatLoggerTimerID = setTimeout(() => {
-      let e = distributionAnalytics.analyticsProperties(eventName);
-      trackEventAnalytics(eventName, e, {
-        forwardToDatadog: !0
-      });
-      distributionAnalytics.reset(eventName);
-      this._cursorChatLoggerTimerID = null;
-    }, sendToDataDogEveryMs));
-    e in n && this.setInfoBySessionId({
-      ...n,
-      [e]: {
-        ...n[e],
-        chatMessage: [t, i]
-      }
-    });
-  }
-  setHighFiveStatus(e, t) {
-    let i = this._infoBySessionId.get();
-    e in i && this.setInfoBySessionId({
-      ...i,
-      [e]: {
-        ...i[e],
-        highFiveStatus: t
-      }
-    });
-  }
-  sendHighFiveStatus(e) {
-    Multiplayer?.sendHighFiveStatus(e);
-  }
-  setVoiceMetadata(e, t) {
-    let i = this._voiceMetadataBySessionId.get();
-    e in i && this._voiceMetadataBySessionId.set({
-      ...i,
-      [e]: {
-        ...i[e],
-        connectedCallId: t
-      }
-    });
-  }
-  sendVoiceMetadata(e) {
-    Multiplayer?.sendVoiceMetadata(e);
-  }
-  addReactionForSessionId(e, t, i, n) {
-    let r = ++u + "";
-    let a = this._reactionsBySessionId.get();
-    e in a && this.setReactionsBySessionId({
-      ...a,
-      [e]: {
-        ...a[e],
-        [r]: {
-          localId: r,
-          reactionId: t,
-          canvasSpacePosition: i,
-          pageId: n
+    } = cursorChatConfig.CURSOR_CHAT;
+    globalPerfTimer.start(`${eventName}_${sessionId}_${message}`);
+    if (this._cursorChatLoggerTimerID === null) {
+      this._cursorChatLoggerTimerID = setTimeout(() => {
+        const props = distributionAnalytics.analyticsProperties(eventName);
+        trackEventAnalytics(eventName, props, {
+          forwardToDatadog: true
+        });
+        distributionAnalytics.reset(eventName);
+        this._cursorChatLoggerTimerID = null;
+      }, sendToDataDogEveryMs);
+    }
+    if (sessionId in info) {
+      this.setInfoBySessionId({
+        ...info,
+        [sessionId]: {
+          ...info[sessionId],
+          chatMessage: [message, meta]
         }
-      }
-    });
-    return r;
-  }
-  removeReactionWithId(e, t) {
-    let i = this._reactionsBySessionId.get();
-    if (e in i) {
-      let n = {
-        ...i[e]
-      };
-      delete n[t];
-      this.setReactionsBySessionId({
-        ...i,
-        [e]: n
       });
     }
   }
-  setOnReactionsUpdatedCallback(e) {
-    this._onReactionsUpdated = e;
+
+  /** Sets high five status for a user. */
+  setHighFiveStatus(sessionId: number, status: boolean): void {
+    const info = this._infoBySessionId.get();
+    if (sessionId in info) {
+      this.setInfoBySessionId({
+        ...info,
+        [sessionId]: {
+          ...info[sessionId],
+          highFiveStatus: status
+        }
+      });
+    }
   }
-  setInfoBySessionIdUpdatedCallback(e) {
-    this._onInfoBySessionIdUpdated = e;
+
+  /** Sends high five status via Multiplayer. */
+  sendHighFiveStatus(status: boolean): void {
+    Multiplayer?.sendHighFiveStatus(status);
   }
-  setOtherUserMouseMovedCallback(e) {
-    this._onOtherUserMouseMoved = e;
+
+  /** Sets voice metadata for a user. */
+  setVoiceMetadata(sessionId: number, callId: string): void {
+    const voice = this._voiceMetadataBySessionId.get();
+    if (sessionId in voice) {
+      this._voiceMetadataBySessionId.set({
+        ...voice,
+        [sessionId]: {
+          ...voice[sessionId],
+          connectedCallId: callId
+        }
+      });
+    }
   }
-  setReactionsBySessionId(e) {
-    this._reactionsBySessionId.set(e);
-    this._onReactionsUpdated && this._onReactionsUpdated();
+
+  /** Sends voice metadata via Multiplayer. */
+  sendVoiceMetadata(metadata: any): void {
+    Multiplayer?.sendVoiceMetadata(metadata);
   }
-  setInfoBySessionId(e) {
-    this._infoBySessionId.set(e);
-    this._onInfoBySessionIdUpdated && this._onInfoBySessionIdUpdated();
+
+  /** Adds a reaction for a session and returns its localId. */
+  addReactionForSessionId(sessionId: number, reactionId: string, position: any, pageId: any): string {
+    const localId = `${++reactionCounter}`;
+    const reactions = this._reactionsBySessionId.get();
+    if (sessionId in reactions) {
+      this.setReactionsBySessionId({
+        ...reactions,
+        [sessionId]: {
+          ...reactions[sessionId],
+          [localId]: {
+            localId,
+            reactionId,
+            canvasSpacePosition: position,
+            pageId
+          }
+        }
+      });
+    }
+    return localId;
   }
-  resetReactions() {
+
+  /** Removes a reaction by localId for a session. */
+  removeReactionWithId(sessionId: number, localId: string): void {
+    const reactions = this._reactionsBySessionId.get();
+    if (sessionId in reactions) {
+      const updated = {
+        ...reactions[sessionId]
+      };
+      delete updated[localId];
+      this.setReactionsBySessionId({
+        ...reactions,
+        [sessionId]: updated
+      });
+    }
+  }
+
+  /** Sets callback for reactions updated. */
+  setOnReactionsUpdatedCallback(callback: () => void): void {
+    this._onReactionsUpdated = callback;
+  }
+
+  /** Sets callback for infoBySessionId updated. */
+  setInfoBySessionIdUpdatedCallback(callback: () => void): void {
+    this._onInfoBySessionIdUpdated = callback;
+  }
+
+  /** Sets callback for other user mouse moved. */
+  setOtherUserMouseMovedCallback(callback: () => void): void {
+    this._onOtherUserMouseMoved = callback;
+  }
+
+  /** Sets reactionsBySessionId state and triggers callback. */
+  setReactionsBySessionId(state: Record<string, Record<string, Reaction>>): void {
+    this._reactionsBySessionId.set(state);
+    this._onReactionsUpdated?.();
+  }
+
+  /** Sets infoBySessionId state and triggers callback. */
+  setInfoBySessionId(state: Record<string, CursorInfo>): void {
+    this._infoBySessionId.set(state);
+    this._onInfoBySessionIdUpdated?.();
+  }
+
+  /** Resets reaction timeout. */
+  resetReactions(): void {
     clearTimeout(this._reactionTimeout);
   }
-  sendReaction(e) {
-    Multiplayer && (Multiplayer.sendReaction(e), this.handleReactionForSession(Multiplayer.currentSessionID(), e));
+
+  /** Sends a reaction and handles it for current session. */
+  sendReaction(reactionId: string): void {
+    if (Multiplayer) {
+      Multiplayer.sendReaction(reactionId);
+      this.handleReactionForSession(Multiplayer.currentSessionID(), reactionId);
+    }
   }
-  handleReactionFromServer(e, t) {
-    e !== Multiplayer?.currentSessionID() && this.handleReactionForSession(e, t);
+
+  /** Handles a reaction from server for a session. */
+  handleReactionFromServer(sessionId: number, reactionId: string): void {
+    if (sessionId !== Multiplayer?.currentSessionID()) {
+      this.handleReactionForSession(sessionId, reactionId);
+    }
   }
-  handleReactionForSession(e, t) {
-    let i = this._infoBySessionId.get()[e];
-    let n = i?.mouse?.canvasSpacePosition;
-    let r = i?.mouse?.pageId;
-    if (null == i || null == n || null == r) return null;
-    let s = this.addReactionForSessionId(e, t, n, r);
-    setTimeout(() => this.removeReactionWithId(e, s), 2500);
-    Multiplayer && e === Multiplayer.currentSessionID() && (this._reactionTimeout = setTimeout(() => {
-      0 === Object.keys(this._reactionsBySessionId.get()[e + ""] || []).length && debugState.dispatch(mu());
-    }, 2500));
-    return s;
+
+  /** Handles a reaction for a session, adds and schedules removal. */
+  handleReactionForSession(sessionId: number, reactionId: string): string | null {
+    const info = this._infoBySessionId.get()[sessionId];
+    const position = info?.mouse?.canvasSpacePosition;
+    const pageId = info?.mouse?.pageId;
+    if (!info || !position || !pageId) return null;
+    const localId = this.addReactionForSessionId(sessionId, reactionId, position, pageId);
+    setTimeout(() => this.removeReactionWithId(sessionId, localId), 2500);
+    if (Multiplayer && sessionId === Multiplayer.currentSessionID()) {
+      this._reactionTimeout = setTimeout(() => {
+        const sessionReactions = this._reactionsBySessionId.get()[`${sessionId}`] || {};
+        if (Object.keys(sessionReactions).length === 0) {
+          debugState.dispatch(stopReactingAction());
+        }
+      }, 2500);
+    }
+    return localId;
   }
-  useInfoBySessionId(e) {
-    return this._infoBySessionId.use(e);
+
+  /** React hook for infoBySessionId. */
+  useInfoBySessionId(selector: any): any {
+    return this._infoBySessionId.use(selector);
   }
-  useInfoBySessionIdSubscription(e) {
-    return this._infoBySessionId.useSubscription(e);
+
+  /** React hook for infoBySessionId subscription. */
+  useInfoBySessionIdSubscription(selector: any): any {
+    return this._infoBySessionId.useSubscription(selector);
   }
-  useVoiceMetadataBySessionId() {
+
+  /** React hook for voiceMetadataBySessionId. */
+  useVoiceMetadataBySessionId(): any {
     return this._voiceMetadataBySessionId.use();
   }
-  useReactionsBySessionId() {
+
+  /** React hook for reactionsBySessionId. */
+  useReactionsBySessionId(): any {
     return this._reactionsBySessionId.use();
   }
 }
-let m = {
+
+/** Cursor chat analytics configuration. Original variable name: m */
+const cursorChatConfig: Record<string, CursorChatConfig> = {
   CURSOR_CHAT: {
-    eventName: "view_cursor_chat_message",
+    eventName: 'view_cursor_chat_message',
     bins: [1, 9, 17, 19, 20, 23, 25, 29, 32, 48, 64, 80, 96, 112, 224, 448, 896, 1792, 3584, 1e4],
-    sendToDataDogEveryMs: 6e4
+    sendToDataDogEveryMs: 60000
   }
 };
-export function $$h1() {
-  Object.entries(m).forEach(([e, t]) => {
-    distributionAnalytics.create(t.eventName, t.bins);
+
+/**
+ * Initializes multiplayer session manager and analytics. Original function name: $$h1
+ */
+export function setupMultiplayerSession(): void {
+  Object.entries(cursorChatConfig).forEach(([_, config]) => {
+    distributionAnalytics.create(config.eventName, config.bins);
   });
-  $$n0 = new p();
+  multiplayerSessionManager = new MultiplayerSessionManager();
 }
-export const R9 = $$n0;
-export const pO = $$h1;
+
+/** Exported variable for session manager. Original export name: R9 */
+export const R9 = multiplayerSessionManager;
+
+/** Exported function for initialization. Original export name: pO */
+export const pO = setupMultiplayerSession;

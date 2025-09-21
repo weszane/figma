@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { Q9 } from "../905/773401";
 import { renderI18nText } from "../905/303541";
-import { h1 } from "../figma_app/530167";
+import { generateProfileHandleThunk } from "../figma_app/530167";
 import { hideModal } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
@@ -160,7 +160,7 @@ registerModal(function ({
         onClick: () => {
           E();
           let n = S(r, 1);
-          n && (m(h1({
+          n && (m(generateProfileHandleThunk({
             onSuccess: t
           })), y());
           S(r, 0) && e && (y(), n || t?.());

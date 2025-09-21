@@ -1,26 +1,58 @@
-import n from "../vendor/879378";
-import { IpcStorageHandler } from "../905/724705";
-import { W6 } from "../905/327522";
-var r = n;
-let $$o5 = new IpcStorageHandler();
-let $$l2 = "restored-autosave";
-let $$d0 = "Autosave Commit Changes";
-let $$c4 = "autosave-new-files-update";
-let $$u3 = "autosave-new-files-delete";
-let $$p6 = "autosave-new-file-sync-start";
-let $$m1 = r()(() => {
+import { throttle } from 'lodash-es'
+import { logAutosaveError } from '../905/327522'
+import { IpcStorageHandler } from '../905/724705'
+
+/**
+ * Handler for IPC storage operations.
+ */
+export const ipcStorageHandler = new IpcStorageHandler()
+
+/**
+ * Key for restored autosave state.
+ */
+export const restoredAutosaveKey = 'restored-autosave'
+
+/**
+ * Message for autosave commit changes.
+ */
+export const autosaveCommitMessage = 'Autosave Commit Changes'
+
+/**
+ * Event name for autosave new files update.
+ */
+export const autosaveNewFilesUpdate = 'autosave-new-files-update'
+
+/**
+ * Event name for autosave new files delete.
+ */
+export const autosaveNewFilesDelete = 'autosave-new-files-delete'
+
+/**
+ * Event name for autosave new file sync start.
+ */
+export const autosaveNewFileSyncStart = 'autosave-new-file-sync-start'
+
+/**
+ * Throttled function to notify all tabs of new files update.
+ * Throttled to prevent excessive calls within 1 second.
+ * @param ipcStorageHandler - The IPC storage handler instance.
+ * @param autosaveNewFilesUpdate - The event name for the update.
+ */
+export const throttledNotifyNewFilesUpdate = throttle(() => {
   try {
-    $$o5.sendToAllTabs($$c4);
-  } catch (e) {
-    W6("Failed to notify all tabs of new files update", {
-      error: e.message
-    });
+    ipcStorageHandler.sendToAllTabs(autosaveNewFilesUpdate)
   }
-}, 1e3);
-export const Cr = $$d0;
-export const HZ = $$m1;
-export const a = $$l2;
-export const c6 = $$u3;
-export const ec = $$c4;
-export const hp = $$o5;
-export const m6 = $$p6;
+  catch (e) {
+    logAutosaveError('Failed to notify all tabs of new files update', {
+      error: e.message,
+    })
+  }
+}, 1000)
+
+export const Cr = autosaveCommitMessage
+export const HZ = throttledNotifyNewFilesUpdate
+export const a = restoredAutosaveKey
+export const c6 = autosaveNewFilesDelete
+export const ec = autosaveNewFilesUpdate
+export const hp = ipcStorageHandler
+export const m6 = autosaveNewFileSyncStart

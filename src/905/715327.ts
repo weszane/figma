@@ -40,7 +40,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -1104,7 +1104,7 @@ function tT({
           })]
         }), jsx("div", {
           className: _$$s.mt12.bt1.mxAuto.colorBorder.bSolid.$,
-          style: _$$sx.add({
+          style: styleBuilderInstance.add({
             width: "94%"
           }).$
         }), jsx(e4, {

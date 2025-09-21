@@ -7,7 +7,7 @@ import { colorToRgbaString } from "../figma_app/191804";
 import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { jS, Pv } from "../905/619652";
 import { KindEnum } from "../905/129884";
@@ -191,7 +191,7 @@ export function $$k5({
       "data-tooltip-offset-y": o,
       "data-tooltip-show-above": !0,
       className: b,
-      children: jsx(_$$t, {
+      children: jsx(MediaQuerySvgComponent, {
         svg: e,
         className: l()(S, A),
         style: {

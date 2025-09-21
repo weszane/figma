@@ -10,7 +10,7 @@ import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, Ih } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { lk } from "../figma_app/109538";
 import { B } from "../905/380801";
 import { D as _$$D } from "../905/251759";
@@ -46,7 +46,7 @@ function R() {
       })]
     }), jsx(e6, {
       className: _$$s.colorBgSecondary.colorBorderDisabled.bSolid.b1.bRadius4.px8.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         paddingTop: "3px",
         paddingBottom: "3px"
       }).$,
@@ -155,7 +155,7 @@ export function $$P0({
       })
     }), jsx("div", {
       className: _$$s.grid.bSolid.b1.colorBorder.bRadius8.overflowHidden.colorBgTertiary.gap1.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         gridTemplateColumns: `repeat(${M.length}, 1fr)`
       }).$,
       children: M.map(e => {
@@ -233,7 +233,7 @@ function O({
     }), jsx("div", {
       id: `${planTier}PlanCard`,
       className: _$$s.flex.flexColumnReverse.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         minHeight: "198px"
       }).$,
       children: jsxs("div", {
@@ -368,7 +368,7 @@ function M({
         }, t.seatType);
       })
     }) : jsx(Wi, {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         height: "72px"
       }).$
     })

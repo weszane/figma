@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { UI3ConditionalWrapper } from "../905/341359";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
 import { M } from "../905/152487";
 import { F_ } from "../905/748636";
@@ -109,7 +109,7 @@ function w(e) {
   } = e;
   let s = _$$s.fixed.borderBox.bRadius2.pb16.pl16.pr16.fontInter.flex.flexColumn.match(zIndex, S).$$if(!!e.media, _$$s.pt12, _$$s.pt16).$;
   let u = e.width ?? 240;
-  let p = sx.$$if(e.emphasized, sx.colorBgBrand.colorTextOnbrand, sx.colorBg.colorText).$$if(e.isTooltip, sx.colorBgTooltip.colorTextTooltip).add({
+  let p = styleBuilderInstance.$$if(e.emphasized, styleBuilderInstance.colorBgBrand.colorTextOnbrand, styleBuilderInstance.colorBg.colorText).$$if(e.isTooltip, styleBuilderInstance.colorBgTooltip.colorTextTooltip).add({
     width: `${u}px`,
     boxShadow: "var(--elevation-400-menu-panel)",
     left: `${location.left}px`,

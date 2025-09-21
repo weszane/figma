@@ -8,7 +8,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
 import { L as _$$L } from "../figma_app/819472";
 import { renderI18nText } from "../905/303541";
-import { Ho } from "../figma_app/308685";
+import { stopChattingThunk } from "../figma_app/308685";
 import { H1 } from "../figma_app/124493";
 import { CB } from "../figma_app/442259";
 import { LR } from "../figma_app/120210";
@@ -45,7 +45,7 @@ let $$R0 = memo(function () {
     o && e(H1({
       votingStage: SessionStatus.NOT_JOINED
     }));
-    e(Ho());
+    e(stopChattingThunk());
   }, [e, o]);
   let N = LR();
   let A = _$$L();

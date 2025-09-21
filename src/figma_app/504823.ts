@@ -4,7 +4,7 @@ import { ColorSpaceEnum, ColorProfileEnum, colorManagementStateJs, webGPUBinding
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, AtomProvider } from "../figma_app/27355";
 import { ap, WQ } from "../figma_app/149304";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { fullscreenValue } from "../figma_app/455680";
 import { l as _$$l } from "../figma_app/773170";
 import { y4 } from "../figma_app/298277";
@@ -118,9 +118,9 @@ function C({
   viewer: e,
   target: t
 }) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "color-management",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: y4,
     children: jsx(AtomProvider, {
       children: jsx(y, {

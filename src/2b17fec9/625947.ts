@@ -81,7 +81,7 @@ import { zW } from '../905/162414';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { F as _$$F6 } from '../905/172964';
-import { t as _$$t6 } from '../905/181774';
+import { isFullscreenInterceptElement } from '../905/181774';
 import { P as _$$P6 } from '../905/184837';
 import { InputComponent } from '../905/185998';
 import { W as _$$W8 } from '../905/187396';
@@ -118,7 +118,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { x as _$$x3 } from '../905/312412';
 import { r as _$$r } from '../905/319631';
-import { t as _$$t9 } from '../905/331623';
+import { MediaQuerySvgComponent } from '../905/331623';
 import { f as _$$f8 } from '../905/335032';
 import { f6 as _$$f, ri as _$$ri } from '../905/337179';
 import { I as _$$I } from '../905/342732';
@@ -208,7 +208,7 @@ import { N as _$$N5 } from '../905/720559';
 import { n as _$$n5 } from '../905/734251';
 import { E as _$$E8 } from '../905/737393';
 import { l as _$$l1 } from '../905/745972';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g4 } from '../905/757007';
 import { getRepoById } from '../905/760074';
 import { H as _$$H5 } from '../905/762413';
@@ -224,7 +224,7 @@ import { c$ as _$$c$3, l6 as _$$l9, sK as _$$sK, uQ as _$$uQ2 } from '../905/794
 import { f as _$$f9 } from '../905/809171';
 import { EventShield } from '../905/821217';
 import { z as _$$z6 } from '../905/821223';
-import { F2 } from '../905/826900';
+import { KeyboardFocusManager } from '../905/826900';
 import { noop } from '../905/834956';
 import { dY as _$$dY, sU as _$$sU, WM } from '../905/838765';
 import { useCurrentUserOrg } from '../905/845253';
@@ -254,7 +254,7 @@ import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q4 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { p as _$$p9 } from '../905/951634';
 import { t as _$$t8 } from '../905/958417';
 import { CU, z6 } from '../905/963340';
@@ -461,7 +461,7 @@ import { KD, O1 } from '../figma_app/317394';
 import { bJ as _$$bJ, dO as _$$dO, ft as _$$ft, H4 as _$$H4, l1 as _$$l8, RJ as _$$RJ, Sn as _$$Sn, tz as _$$tz, xc as _$$xc, yt as _$$yt, zS as _$$zS, A0, Ac, J1, JV, KL, Pg, Wl } from '../figma_app/318123';
 import { d4 as _$$d7, Fk as _$$Fk2, nB as _$$nB2, rT as _$$rT, te as _$$te, Xb as _$$Xb, AZ, Dz, Id, Mv, Uq } from '../figma_app/325158';
 import { B as _$$B6 } from '../figma_app/327027';
-import { G7 } from '../figma_app/336853';
+import { isBigmaEnabledAlias } from '../figma_app/336853';
 import { bE as _$$bE, k as _$$k7, p6 as _$$p6, tj as _$$tj, U9 as _$$U3, xp as _$$xp2, yp as _$$yp, zD as _$$zD2, E5, FC, LK, MC, X4 } from '../figma_app/340893';
 import { Tj } from '../figma_app/342207';
 import { U1 } from '../figma_app/343967';
@@ -613,7 +613,7 @@ import { ConfirmationModal2 } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { cX as _$$cX, ik as _$$ik, mk as _$$mk, s3 as _$$s3, t$ as _$$t$, H6, Hb, kx, qZ, Sp } from '../figma_app/920333';
 import { useLatestRef } from '../figma_app/922077';
-import { Dy, MZ } from '../figma_app/925970';
+import { searchStartSession, generateSessionId } from '../figma_app/925970';
 import { base64ToUint8Array, kebabToCamel, pluralize } from '../figma_app/930338';
 import { ZE } from '../figma_app/932285';
 import { uO as _$$uO, Gb } from '../figma_app/933328';
@@ -854,7 +854,7 @@ function X() {
           maxMentions: 0,
           type: 'mentions',
           search: r
-        }), i && _ && o(MZ()), n(t));
+        }), i && _ && o(generateSessionId()), n(t));
       }, 100);
       return function () {
         clearTimeout(t);
@@ -1968,10 +1968,10 @@ function tz({
 }
 function tZ() {
   let e = ke();
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'FigJamShapesSidebar',
     team: _$$e.FIGJAM,
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
       e();
     },
@@ -3990,7 +3990,7 @@ let aT = memo(e => {
   }) : c ? jsx(Vv, {
     children: renderI18nText('community.buyer.update')
   }) : m ? jsx('div', {
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       width: '80px'
     }).$,
     children: jsx(_$$s4, {
@@ -5262,7 +5262,7 @@ function sQ({
         setSearchQuery: i,
         showCloseButton: !0,
         topBarStyle: 'browse_all_resources_modal_container--figjamTopBarContainer--KF-6s',
-        onFocus: () => y(Dy({
+        onFocus: () => y(searchStartSession({
           entryPoint: 'figjam:inserts'
         }))
       }), jsx('div', {
@@ -5572,7 +5572,7 @@ function ob() {
       },
       children: jsx('div', {
         className: _$$s.wFull.h1.$,
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           backgroundColor: 'var(--color-border)'
         }).$
       })
@@ -6423,7 +6423,7 @@ function lh() {
           widget: e
         }, e.id)), jsx('div', {
           className: _$$s.wFull.h1.$,
-          style: _$$sx2.add({
+          style: styleBuilderInstance.add({
             backgroundColor: 'var(--color-border)'
           }).$
         })]
@@ -6443,7 +6443,7 @@ function lm({
       className: _$$s.relative.$,
       children: [jsx('div', {
         className: _$$s.absolute.w8.h8.bRadiusHalf.colorBgDanger.$,
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           left: '-8px',
           top: '-8px'
         }).$
@@ -7064,7 +7064,7 @@ function lF({
   let eo = Object.keys(useLocalPluginsExcludingWidgets()).join(',');
   let el = selectCurrentUser();
   let ed = useCurrentUserOrg();
-  let ec = G7(ed);
+  let ec = isBigmaEnabledAlias(ed);
   let eu = Gi();
   let ep = useRef(null);
   let eh = useRef(null);
@@ -8238,7 +8238,7 @@ function d7({
 function ct() {
   let e = useAtomWithSubscription(_$$dO);
   return getFeatureFlags().cortex_execution_tracing && (e.status === _$$c6.SUCCESS || e.status === _$$c6.ERROR) && e.trace ? jsx('div', {
-    style: _$$sx2.mb16.$,
+    style: styleBuilderInstance.mb16.$,
     className: _$$s.mx16.mt16.$,
     children: jsxs('div', {
       className: _$$s.px12.py12.flex.gap12.bRadius6.colorBgFigjamTertiary.font11.colorTextFigjam.overflowBreakWord.$,
@@ -8329,7 +8329,7 @@ function ci({
                   [di]: !0,
                   [dn]: r === IPanelType.BASIC
                 }),
-                style: _$$sx2.add({
+                style: styleBuilderInstance.add({
                   borderRadius: '6px 0px 0px 6px',
                   fontSize: '10px'
                 }).$,
@@ -8342,7 +8342,7 @@ function ci({
                   [di]: !0,
                   [dn]: r === IPanelType.EXPANDED
                 }),
-                style: _$$sx2.add({
+                style: styleBuilderInstance.add({
                   borderRadius: '0px 6px 6px 0px',
                   fontSize: '10px'
                 }).$,
@@ -8368,7 +8368,7 @@ function ca() {
   let n = useRef(null);
   O1(() => {
     let r = document.activeElement;
-    return !!(e && t !== Wl.NONE && (n.current?.contains(r) || r?.classList.contains('focus-target') || _$$t6(r))) && (i(), !0);
+    return !!(e && t !== Wl.NONE && (n.current?.contains(r) || r?.classList.contains('focus-target') || isFullscreenInterceptElement(r))) && (i(), !0);
   }, KD.MODAL);
   return n;
 }
@@ -8530,23 +8530,23 @@ function cu() {
         },
         innerText: 'start with template',
         className: _$$s.flex.itemsCenter.justifyCenter.py6.bgTransparent.wFull.$,
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           height: '42px'
         }).$,
         children: [jsx('div', {
           children: cn.map((e, t) => jsx(_$$P3.img, {
             src: e,
             alt: getI18nString('whiteboard.ai_modal.template_image_alt'),
-            style: _$$sx2.add({
+            style: styleBuilderInstance.add({
               width: '51px',
               position: 'relative'
-            }).$$if(t === 1, _$$sx2.add({
+            }).$$if(t === 1, styleBuilderInstance.add({
               width: '44px',
               top: '-5px',
               marginLeft: '-26px'
-            })).$$if(t === 0, _$$sx2.add({
+            })).$$if(t === 0, styleBuilderInstance.add({
               top: '3px'
-            })).$$if(t === 2, _$$sx2.add({
+            })).$$if(t === 2, styleBuilderInstance.add({
               marginLeft: '-24px',
               top: '3px'
             })).$,
@@ -9348,7 +9348,7 @@ function uD({
         className: ex()(_$$s.flex.relative.overflowHidden.$, Dm),
         children: jsxs('div', {
           className: _$$s.flex1.relative.font13.ml8.$,
-          style: _$$sx2.add({
+          style: styleBuilderInstance.add({
             lineHeight: `${$g}px`
           }).$,
           children: [jsx('div', {
@@ -12594,7 +12594,7 @@ let fS = (e, t) => {
     let a = n?.every(e => e?.type === 'HIGHLIGHT') ?? !1;
     return new Map([['WHITEBOARD_STROKE', t || i], ['PENCIL_STROKE', e && r], ['HIGHLIGHTER_STROKE', e && a]]);
   }();
-  let p = MZ();
+  let p = generateSessionId();
   let h = fI(!1, p);
   let f = kl('locked');
   let _ = function () {
@@ -17887,7 +17887,7 @@ function g9({
       'dropdownWidth': s,
       'formatter': g8,
       'hideDropdownWhenContainerMoves': !0,
-      'icon': m === g4 ? jsx(_$$t9, {
+      'icon': m === g4 ? jsx(MediaQuerySvgComponent, {
         className: 'music_dropdown--musicIcon--rYDUF',
         svg: _$$A75
       }) : void 0,
@@ -22715,7 +22715,7 @@ function yF() {
   let a = _$$n0();
   let s = _$$z7.getIsExtension();
   useEffect(() => {
-    !r && t.current && t.current === document.activeElement && F2.focusCustomCanvasFocusElement();
+    !r && t.current && t.current === document.activeElement && KeyboardFocusManager.focusCustomCanvasFocusElement();
   }, [r, t]);
   useEffect(() => {
     if (n && r) {
@@ -24410,7 +24410,7 @@ let vW = memo(({
       }), jsx(_$$A, {
         editorType: FEditorType.Whiteboard,
         openFile: p
-      }), jsx(_$$l3, {}), y.showing && jsx(_$$tH, {
+      }), jsx(_$$l3, {}), y.showing && jsx(ErrorBoundaryCrash, {
         boundaryKey: 'FigJamBrowseAllResourcesModal',
         onError: () => {
           I(VisualBellActions.enqueue({
@@ -24418,7 +24418,7 @@ let vW = memo(({
             type: 'react-error'
           }));
         },
-        fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+        fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(lU, {})
       }), !a && w && jsx(nj, {}), N && jsx(_$$u, {})]
     })

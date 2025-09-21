@@ -8,13 +8,13 @@ import { AG } from "../figma_app/999312";
 import { ms } from "../figma_app/209680";
 import { E } from "../5430/741319";
 import { D } from "../5430/253633";
-import { v$ } from "../figma_app/455722";
+import { getActiveSearchRouteWithCommunity } from "../figma_app/455722";
 import { isResourceHubInternalSearchEnabled } from "../figma_app/275462";
 import { PF } from "../figma_app/930386";
 import { G } from "../5430/654859";
 import { useDispatch } from "react-redux";
 import { SvgComponent } from "../905/714743";
-import { ky, Dy, Je } from "../figma_app/925970";
+import { searchEndSession, searchStartSession, searchSessionEnteredSearchViewViaEnter } from "../figma_app/925970";
 import { A as _$$A } from "../1617/586892";
 import { h63 } from "../figma_app/27776";
 function b({
@@ -32,7 +32,7 @@ function b({
     children: [jsx("button", {
       className: "search_input_mobile--searchIconButton--jvchC",
       onClick: () => {
-        d ? c(ky()) : (a.current?.focus(), c(Dy({
+        d ? c(searchEndSession()) : (a.current?.focus(), c(searchStartSession({
           entryPoint: "community"
         })));
         u(!d);
@@ -56,7 +56,7 @@ function b({
         },
         onKeyDown: e => {
           let r = e.currentTarget.value.trim();
-          "Enter" === e.key ? (e.preventDefault(), n(r), a.current?.blur(), t && !r ? c(ky()) : !t && r && c(Je({
+          "Enter" === e.key ? (e.preventDefault(), n(r), a.current?.blur(), t && !r ? c(searchEndSession()) : !t && r && c(searchSessionEnteredSearchViewViaEnter({
             entryPoint: "community"
           }))) : "Escape" === e.key && a.current?.blur();
         },
@@ -80,7 +80,7 @@ export function $$w0({
   dropdownSelector: r
 }) {
   let f = AG();
-  let y = v$();
+  let y = getActiveSearchRouteWithCommunity();
   let g = !!y;
   let v = y?.search.query;
   let [w, C] = useState("");

@@ -6,7 +6,7 @@ import { setTagGlobal } from "../905/11";
 import { getProductType } from "../figma_app/314264";
 import { isActiveAtom } from "../905/617744";
 import { y as _$$y } from "../905/913008";
-import { le } from "../figma_app/527873";
+import { getMemoryUsage } from "../figma_app/527873";
 export class $$p0 {
   constructor() {
     this._fullscreenCrashed = !1;
@@ -16,7 +16,7 @@ export class $$p0 {
     this._fileLoadTime = null;
   }
   oomState(e) {
-    let t = le();
+    let t = getMemoryUsage();
     let i = this._fileLoadTime;
     let n = i ? window.performance.now() - i : 0;
     return {
@@ -56,7 +56,7 @@ export class $$m1 extends $$p0 {
     if (this._receivedFailedAllocation) return;
     setTagGlobal("wasm_oom", "yes");
     this._receivedFailedAllocation = !0;
-    let A = le();
+    let A = getMemoryUsage();
     let y = (m / 1024).toFixed(1);
     let b = (i / 1024 / 1024).toFixed(1);
     let v = (A / 1024 / 1024).toFixed(1);

@@ -1,5 +1,5 @@
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { Lr } from "../figma_app/162807";
+import { convertFilterKeysToApiParams } from "../figma_app/162807";
 export let $$a0 = new class {
   constructor() {
     this.CopyPasteBufferUrlsSchemaValidator = createNoOpValidator();
@@ -33,7 +33,7 @@ export let $$a0 = new class {
     })));
   }
   searchParamsForFilters(e) {
-    let t = Lr(e || null);
+    let t = convertFilterKeysToApiParams(e || null);
     return APIParameterUtils.toAPIParameters({
       ...t
     });

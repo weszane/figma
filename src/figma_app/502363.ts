@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { BrowserInfo } from "../figma_app/778880";
 import { r } from "../905/398386";
-import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
+import { clearWorkspaceFilterThunk, searchSetLastAckedQueryIdAction, searchSetLastLoadedQueryAction, loadSearchResultsThunk, sortStateThunk, searchSetScrollTopAction, startSearchSessionAction, searchThunk, searchClearQueryAction, searchEndSessionAction, handleSearchParameterChangeThunk } from "../905/977218";
 import { isLoading, isSuccess, isFailure, getValue } from "../905/18797";
 import { PublicModelType, getModelTypeEmptyStateI18n, SearchTypeMode, InputType, SpaceAccessType } from "../figma_app/162807";
 import { ViewMode, FileType } from "../figma_app/756995";
@@ -19,7 +19,7 @@ import { H as _$$H } from "../905/799228";
 import { p as _$$p } from "../figma_app/837956";
 import { D6 } from "../figma_app/863319";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
-import { vj } from "../905/574958";
+import { SearchAnalytics } from "../905/574958";
 import { Q0 } from "../905/994947";
 import { Of } from "../905/378567";
 import { Of as _$$Of } from "../905/869282";
@@ -60,7 +60,7 @@ import { z5, L8, q4 } from "../905/124270";
 import { K as _$$K } from "../905/328468";
 import { Y as _$$Y } from "../905/720957";
 import { P as _$$P } from "../905/347284";
-import { ky as _$$ky } from "../figma_app/925970";
+import { searchEndSession } from "../figma_app/925970";
 import { registerModal } from "../905/102752";
 import { utilityNoop } from "../figma_app/918700";
 import { s as _$$s } from "../figma_app/576667";
@@ -69,7 +69,7 @@ import { j as _$$j } from "../905/294703";
 import { a3, Vm } from "../905/703676";
 import { L as _$$L3 } from "../905/740963";
 import { A as _$$A8 } from "../905/484713";
-import { Q as _$$Q, Q8 } from "../905/61477";
+import { searchQueryAtom, searchInputAtom } from "../905/61477";
 import { r as _$$r2 } from "../905/264954";
 import { RAo, aIx } from "../figma_app/27776";
 import { PP as _$$PP, xx, v$ } from "../905/981129";
@@ -104,10 +104,10 @@ let j = {
 };
 class U extends Component {
   componentDidMount() {
-    !this.props.isLoading && this.props.search.queryId !== this.props.search.lastAckedQueryId && this.props.search.parameters.query.length > 0 && (this.props.setSearchLastAckedQueryId(this.props.search.queryId), this.props.setLastLoadedQuery(this.props.search.sessionId, this.props.search.parameters.query, this.props.search.queryId), vj.Session.trackClientResult(this.props.search, this.props.selectedView));
+    !this.props.isLoading && this.props.search.queryId !== this.props.search.lastAckedQueryId && this.props.search.parameters.query.length > 0 && (this.props.setSearchLastAckedQueryId(this.props.search.queryId), this.props.setLastLoadedQuery(this.props.search.sessionId, this.props.search.parameters.query, this.props.search.queryId), SearchAnalytics.Session.trackClientResult(this.props.search, this.props.selectedView));
   }
   componentDidUpdate() {
-    !this.props.isLoading && this.props.search.queryId !== this.props.search.lastAckedQueryId && this.props.search.parameters.query.length > 0 && (this.props.setSearchLastAckedQueryId(this.props.search.queryId), this.props.setLastLoadedQuery(this.props.search.sessionId, this.props.search.parameters.query, this.props.search.queryId), vj.Session.trackClientResult(this.props.search, this.props.selectedView));
+    !this.props.isLoading && this.props.search.queryId !== this.props.search.lastAckedQueryId && this.props.search.parameters.query.length > 0 && (this.props.setSearchLastAckedQueryId(this.props.search.queryId), this.props.setLastLoadedQuery(this.props.search.sessionId, this.props.search.parameters.query, this.props.search.queryId), SearchAnalytics.Session.trackClientResult(this.props.search, this.props.selectedView));
   }
   renderContent() {
     let e;
@@ -195,15 +195,15 @@ let B = connect((e, t) => ({
   selectedView: e.selectedView
 }), (e, t) => ({
   onResetWorkspaceFilter: () => {
-    e(HI({}));
+    e(clearWorkspaceFilterThunk({}));
   },
   setSearchLastAckedQueryId: t => {
-    e(_$$ej({
+    e(searchSetLastAckedQueryIdAction({
       lastAckedQueryId: t
     }));
   },
   setLastLoadedQuery: (t, r, n) => {
-    e(w2({
+    e(searchSetLastLoadedQueryAction({
       sessionId: t,
       query: r,
       queryId: n
@@ -272,7 +272,7 @@ class V extends Component {
       this.props.setScrollTop(window.pageYOffset);
     };
     this.shouldScroll = () => 0 !== this.props.searchScrollTop;
-    this.getLoadingKey = () => $P.loadingKeyForPayload({
+    this.getLoadingKey = () => loadSearchResultsThunk.loadingKeyForPayload({
       parameters: this.props.parameters
     });
     this.isLoading = () => isLoading(this.props.loadingState, this.getLoadingKey());
@@ -378,12 +378,12 @@ let z = connect((e, t) => {
   };
 }, e => ({
   onChangeSortState: t => {
-    e(qv({
+    e(sortStateThunk({
       sortState: t
     }));
   },
   setScrollTop: t => {
-    e(PP({
+    e(searchSetScrollTopAction({
       top: t
     }));
   }
@@ -411,7 +411,7 @@ export function $$e_0() {
   } = function () {
     let e = useSelector(e => e.search);
     let t = useSelector(e => e.search.parameters);
-    let r = $P.loadingKeyForPayload({
+    let r = loadSearchResultsThunk.loadingKeyForPayload({
       parameters: t
     });
     let n = useSelector(e => e.loadingState[r]);
@@ -424,11 +424,11 @@ export function $$e_0() {
   }();
   let u = useSelector(e => gt(e));
   let _ = useCallback(t => {
-    "" === r && "" !== t && e(Dy({
+    "" === r && "" !== t && e(startSearchSessionAction({
       entryPoint: "desktop_new_tab"
     }));
     e(Ri(t));
-    e(PI({
+    e(searchThunk({
       query: t,
       searchModelType: PublicModelType.FILES,
       searchScope: u,
@@ -439,17 +439,17 @@ export function $$e_0() {
   }, [e, r, u]);
   let h = useCallback(() => {
     e(Ri(""));
-    e(_z({}));
+    e(searchClearQueryAction({}));
   }, [e]);
   let m = useCallback(t => {
     e(j3(!0));
-    "" === r || t || e(Dy({
+    "" === r || t || e(startSearchSessionAction({
       entryPoint: "desktop_new_tab"
     }));
   }, [e, r]);
   let g = useCallback(() => {
     e(j3(!1));
-    e(ky());
+    e(searchEndSessionAction());
   }, [e]);
   let f = !isLoading && !!s && 0 !== searchResults.length;
   return jsxs("div", {
@@ -560,13 +560,13 @@ function em(e) {
   let t = useDispatch();
   let r = useSelector(e => e.search);
   let i = useSelector(e => e.selectedView);
-  e.hasLoaded && e.completedQuery && r.queryId !== r.lastAckedQueryId && (t(_$$ej({
+  e.hasLoaded && e.completedQuery && r.queryId !== r.lastAckedQueryId && (t(searchSetLastAckedQueryIdAction({
     lastAckedQueryId: r.queryId
-  })), t(w2({
+  })), t(searchSetLastLoadedQueryAction({
     sessionId: r.sessionId,
     query: r.parameters.query,
     queryId: r.queryId
-  })), vj.Session.trackClientResult(r, i));
+  })), SearchAnalytics.Session.trackClientResult(r, i));
   return jsx("div", {
     className: "search_bar--searchResults--jURfV",
     onMouseDown: e => {
@@ -616,7 +616,7 @@ function eg(e) {
     t(Gb({
       result,
       index,
-      clickAction: vj.Query.ClickAction.CLICK
+      clickAction: SearchAnalytics.Query.ClickAction.CLICK
     }));
   }, [result, index, t]);
   let c = useMemo(() => [J1, index], [index]);
@@ -749,15 +749,15 @@ let eK = registerModal(function () {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown);
   let r = useSelector(e => e.search.sessionId);
-  let s = useAtomWithSubscription(_$$Q);
+  let s = useAtomWithSubscription(searchQueryAtom);
   let [o, l] = useAtomValueAndSetter(z5);
   let d = useAtomWithSubscription(L8);
   let c = _$$A8();
   useEffect(() => () => {
-    r && vj.Session.searchModalExit(r);
+    r && SearchAnalytics.Session.searchModalExit(r);
   }, [r]);
   let u = useCallback(() => {
-    e(_$$ky());
+    e(searchEndSession());
     o && (l(null), c(InputType.DROPDOWN, o));
   }, [e, l, o, c]);
   if (!t) return null;
@@ -839,12 +839,12 @@ export function $$e53({
       let n = await _$$Q2(getPlanUserTeamAtomFamily(!0));
       let i = isOrgOrEnterprisePlan(r);
       let a = checkOrgUserPermission(n, FMemberRoleType.MEMBER);
-      e(Ns({
+      e(handleSearchParameterChangeThunk({
         searchScope: t ? SpaceAccessType.COMMUNITY : i ? a ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST : SpaceAccessType.PERSONAL
       }));
     }, [e, t]);
   }();
-  let [d, u] = useAtomValueAndSetter(Q8);
+  let [d, u] = useAtomValueAndSetter(searchInputAtom);
   let _ = useAtomWithSubscription(L8);
   let h = useRef(null);
   let g = Xr(q4);
@@ -881,7 +881,7 @@ export function $$e53({
   }, [r, s, f]);
   let E = useAtomWithSubscription(hO.isFragmentSearchAtom);
   return (useEffect(() => {
-    E || "search" === o.view || (r(_z({})), u(""), g());
+    E || "search" === o.view || (r(searchClearQueryAction({})), u(""), g());
   }, [r, o, u, g, E]), "search" === o.view) ? jsx("div", {
     className: $()("faceted_search_entrypoint--fullResultsSearchWrapper--UiZa5", {
       [e1]: getFeatureFlags().file_browser_sidebar_row_ui

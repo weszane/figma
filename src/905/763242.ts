@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 export function $$l1(e) {
   if ("team" !== e.selectedView.view) return !1;
   let t = e.teams[e.selectedView.teamId];
@@ -24,7 +24,7 @@ export function $$d0(e) {
       }) : renderI18nText("shared_fonts.error_message_for_upload_failure_429");
     default:
       return jsx("div", {
-        style: sx.lhNormal.$,
+        style: styleBuilderInstance.lhNormal.$,
         children: renderI18nText("shared_fonts.error_message_for_upload_failure_default_with_help_center", {
           helpCenterLink: jsx(Link, {
             href: "https://help.figma.com/hc/articles/360039956774",

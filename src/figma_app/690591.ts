@@ -17,7 +17,7 @@ import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
 import { filePutAction } from "../figma_app/78808";
 import { hideModal } from "../905/156213";
-import { _z, ky } from "../905/977218";
+import { searchClearQueryAction, searchEndSessionAction } from "../905/977218";
 import { PublishModalState } from "../figma_app/350203";
 import { useGroupedUserWidgets, useGroupedUserPlugins, useLocalPluginsByPluginId, getTotalUserWidgetsCount, getTotalUserWidgetsWithDevelopmentCount } from "../figma_app/844435";
 import { Sz } from "../figma_app/12535";
@@ -225,7 +225,7 @@ function q(e) {
       mobileNavTabTitle: l,
       selectedTab: e.selectedTab,
       onClick: () => {
-        e.activeSearchQuery && (t(_z({})), t(ky()));
+        e.activeSearchQuery && (t(searchClearQueryAction({})), t(searchEndSessionAction()));
         trackEventAnalytics("publish_type_changed", {
           userId: r.id,
           resourceType: l
@@ -276,7 +276,7 @@ let $$Q0 = registerModal(function (e) {
   IT(se());
   IT(fd());
   useEffect(() => {
-    r(_z({}));
+    r(searchClearQueryAction({}));
     o && (r(_J()), r(aq()));
     let e = document.body.style.overflowY;
     document.body.style.overflowY = "hidden";
@@ -300,7 +300,7 @@ let $$Q0 = registerModal(function (e) {
     return !t && r;
   }, [k]);
   let $ = () => {
-    eo && r(ky());
+    eo && r(searchEndSessionAction());
     trackEventAnalytics("community_publish_modal", {
       user: t.id,
       step: PublishModalState.CLOSED

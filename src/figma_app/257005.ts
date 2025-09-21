@@ -11,14 +11,14 @@ import { ne } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isLibraryResource } from "../figma_app/471982";
-import { Dy } from "../905/977218";
+import { startSearchSessionAction } from "../905/977218";
 import { Q1 } from "../905/201596";
 import { nb } from "../figma_app/543100";
 import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
 import { mapRecentFilesAndRepos, filterValidRecentFiles } from "../figma_app/349248";
-import { Lk, PublicModelType } from "../figma_app/162807";
+import { TeamSortField, PublicModelType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
 import { GQ, lJ } from "../905/50159";
 import { bx, Uz as _$$Uz, SL, Vg, g4, ZF, Tm, qc, Rt, i3 } from "../figma_app/312949";
@@ -161,12 +161,12 @@ export function $$D0(e) {
   } = e;
   let d = useDispatch();
   let u = useCallback(() => {
-    query && (d(Dy({
+    query && (d(startSearchSessionAction({
       entryPoint: "community:universal_posting"
     })), setSearchResults(null), searchAPIHandler.getFullResults({
       query,
       desc: !0,
-      sort: Lk.RELEVANCY,
+      sort: TeamSortField.RELEVANCY,
       orgId: void 0,
       isGlobal: !0,
       searchModelType: PublicModelType.FILES

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
-import { n as _$$n } from "../figma_app/3731";
+import { renderAvatar } from "../figma_app/3731";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
 import { renderI18nText } from "../905/303541";
@@ -73,7 +73,7 @@ export function $$I1({
       src: b,
       alt: "",
       className: c.exampleFileThumbnail
-    }), a && jsx(_$$n, {
+    }), a && jsx(renderAvatar, {
       className: s()(c.avatar, c.orgAvatar),
       userId: a.id,
       orgId: r,

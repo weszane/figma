@@ -2993,7 +2993,7 @@ async function ek(e, t) {
         }
       }
     });
-  }).$$finally(() => {
+  }).finally(() => {
     s && weakHandleHelpers?.isAlive(s.handle) && a && s.unsubscribeFromJs(a);
     Fullscreen?.cleanUpGetHashForImageDesignToReactRequest(r.getRequestId());
   });

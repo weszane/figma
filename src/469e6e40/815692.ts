@@ -86,7 +86,7 @@ import { SvgComponent } from '../905/714743';
 import { getResourceDataOrFallback } from '../905/723791';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { q as _$$q } from '../905/749058';
-import { tH as _$$tH } from '../905/751457';
+import { ErrorBoundaryCrash } from '../905/751457';
 import { s as _$$s4 } from '../905/761565';
 import { u as _$$u2 } from '../905/774364';
 import { N as _$$N2 } from '../905/809096';
@@ -99,7 +99,7 @@ import { XHR } from '../905/910117';
 import { A as _$$A } from '../905/920142';
 import { selectViewAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { B as _$$B } from '../905/950875';
 import { a as _$$a2 } from '../905/964520';
 import { TextWithTruncation } from '../905/984674';
@@ -137,7 +137,7 @@ import { useSubscription } from '../figma_app/288654';
 import { useScimGroupExperiment } from '../figma_app/297957';
 import { isSingleDevWithCodegen, isDevModePlugin, isDevModeWithCodegen } from '../figma_app/300692';
 import { V as _$$V3 } from '../figma_app/312987';
-import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
+import { isBigmaAndSecurityEnabled, getMfaGuestControlSetting, isBigmaSecurityAddOnEnabled, getAuthType, hasScimToken, getCostCenterTypeString, isBigmaEnabledSimple, isDomainCaptureAndBigmaEnabled, areAllDomainsVerified, isBigmaAndSecurityAddOnEnabled, getGuestControlApprovalStatus, isBigmaEnabled } from '../figma_app/336853';
 import { handleErrorWithToast } from '../figma_app/345997';
 import { getParentOrgIdIfOrgLevel, useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
@@ -161,7 +161,7 @@ import { pL, v0 } from '../figma_app/639088';
 import { DashboardSection } from '../figma_app/650409';
 import { QN, v4 } from '../figma_app/655139';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
-import { Ct, CT, Gv, OE } from '../figma_app/736948';
+import { AuthTypeEnum, UserTypeEnum, ApprovalStatusEnum, USEURegionEnum } from '../figma_app/736948';
 import { dG } from '../figma_app/753501';
 import { ls, V0 } from '../figma_app/755395';
 import { Rs as _$$Rs } from '../figma_app/761870';
@@ -310,7 +310,7 @@ function ed(e) {
       },
       className: _$$s.pl10.pt16.$,
       children: [jsx(_$$Z, {
-        value: Ct.ANY,
+        value: AuthTypeEnum.ANY,
         disabled: !!desktopAPIInstance,
         children: renderI18nText('org_settings.sign_in_method.any', {
           default: jsx('span', {
@@ -319,13 +319,13 @@ function ed(e) {
           })
         })
       }), jsx(_$$Z, {
-        value: Ct.GOOGLE,
+        value: AuthTypeEnum.GOOGLE,
         disabled: !!desktopAPIInstance || a,
         tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : void 0,
         children: renderI18nText('org_settings.sign_in_method.members_must_log_in_with_a_google_account')
       }), jsx(_$$Z, {
         tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : t ? void 0 : getI18nString('org_settings.sign_in_method.you_need_to_configure_saml_sso_first'),
-        value: Ct.SAML,
+        value: AuthTypeEnum.SAML,
         disabled: !!desktopAPIInstance || !t || a,
         children: renderI18nText('org_settings.sign_in_method.members_must_log_in_with_saml_sso')
       })]
@@ -344,13 +344,13 @@ function e_(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
   let l = useLatestRef(e.mfaRequiredSetting);
-  let o = l === CT.GUESTS || l === CT.ALL_USERS;
-  let d = l === CT.MEMBERS || l === CT.ALL_USERS;
-  let c = e.mfaRequiredSetting === CT.MEMBERS || e.mfaRequiredSetting === CT.ALL_USERS;
+  let o = l === UserTypeEnum.GUESTS || l === UserTypeEnum.ALL_USERS;
+  let d = l === UserTypeEnum.MEMBERS || l === UserTypeEnum.ALL_USERS;
+  let c = e.mfaRequiredSetting === UserTypeEnum.MEMBERS || e.mfaRequiredSetting === UserTypeEnum.ALL_USERS;
   return jsxs(Fragment, {
     children: [jsx('div', {
       className: _$$s.flex.alignLeft.mt16.pt10.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
       children: jsx(Checkbox, {
@@ -359,7 +359,7 @@ function e_(e) {
         }),
         checked: c,
         onChange: t => {
-          t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.MEMBERS) : e.setMfaRequiredSetting(o ? CT.GUESTS : null);
+          t ? e.setMfaRequiredSetting(o ? UserTypeEnum.ALL_USERS : UserTypeEnum.MEMBERS) : e.setMfaRequiredSetting(o ? UserTypeEnum.GUESTS : null);
         },
         disabled: !!desktopAPIInstance,
         children: renderI18nText('org_settings.mfa_for_members.checkbox_description', {
@@ -411,11 +411,11 @@ let eu = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = useSelector(e => e.orgSamlConfig);
-  let r = _g(t);
+  let r = getAuthType(t);
   let [l, o] = useState(r);
   let d = function (e) {
     let t = selectExperimentConfigHook('ff_mfa_for_members');
-    return !!(e && kA(e) && e.security_add_on_enabled_at && t.getConfig().getValue('enabled', !1));
+    return !!(e && isBigmaEnabledSimple(e) && e.security_add_on_enabled_at && t.getConfig().getValue('enabled', !1));
   }(t);
   let c = useSubscription(OrgMfaMemberInfoView, {
     orgId: t.id
@@ -430,7 +430,7 @@ let eu = registerModal(() => {
   };
   let h = Number(g.totalMemberCount);
   let b = Number(g.nonMfaMemberCount);
-  let v = d && l === Ct.ANY;
+  let v = d && l === AuthTypeEnum.ANY;
   let f = () => e(popModalStack());
   return jsxs(OJ, {
     containerClassName: jT,
@@ -450,7 +450,7 @@ let eu = registerModal(() => {
           orgSamlConfig: a.config,
           signInMethod: l,
           setSignInMethod: o,
-          isMfaForMembersEnabled: m === CT.MEMBERS || m === CT.ALL_USERS
+          isMfaForMembersEnabled: m === UserTypeEnum.MEMBERS || m === UserTypeEnum.ALL_USERS
         }), v && jsx(e_, {
           mfaRequiredSetting: m,
           setMfaRequiredSetting: p,
@@ -471,15 +471,15 @@ let eu = registerModal(() => {
         children: jsx(Button, {
           variant: 'primary',
           onClick: () => {
-            l === Ct.GOOGLE ? e(Xw({
+            l === AuthTypeEnum.GOOGLE ? e(Xw({
               orgId: t.id,
               googleSsoOnly: !0,
               mfaRequired: m
-            })) : l === Ct.SAML ? e(hi({
+            })) : l === AuthTypeEnum.SAML ? e(hi({
               orgId: t.id,
               samlSsoOnly: !0,
               mfaRequired: m
-            })) : r === Ct.GOOGLE ? e(Xw({
+            })) : r === AuthTypeEnum.GOOGLE ? e(Xw({
               orgId: t.id,
               googleSsoOnly: !1,
               mfaRequired: m
@@ -1405,7 +1405,7 @@ let tF = registerModal(() => {
         })),
         children: Object.values(FCostCenterType).map(e => jsx(_$$Z, {
           value: e,
-          children: du(e)
+          children: getCostCenterTypeString(e)
         }, e))
       }), jsx(ButtonWhite, {
         onClick: a,
@@ -2056,7 +2056,7 @@ function aP(e) {
           value: a ? 'on' : 'off'
         });
       },
-      disabled: !kA(t) && !e.isActive,
+      disabled: !isBigmaEnabledSimple(t) && !e.isActive,
       dataTestId: `dev-mode-setting-toggle-${e.label.split(' ').map(e => e.toLowerCase()).join('-')}`
     })]
   });
@@ -2070,7 +2070,7 @@ function aU({
   let [o, d] = useAtomValueAndSetter(aE);
   let [_, u] = useAtomValueAndSetter(aA);
   let [m, p] = useAtomValueAndSetter(aR);
-  let g = getFeatureFlags().dev_mode_org_pinned_plugins_ent && kA(t) || !getFeatureFlags().dev_mode_org_pinned_plugins_ent;
+  let g = getFeatureFlags().dev_mode_org_pinned_plugins_ent && isBigmaEnabledSimple(t) || !getFeatureFlags().dev_mode_org_pinned_plugins_ent;
   let h = () => {
     l(!r);
   };
@@ -2088,7 +2088,7 @@ function aU({
     'children': [getFeatureFlags().dev_mode_org_pinned_plugins_ent ? jsxs('div', {
       className: _$$s.mb8.$,
       children: [jsx('div', {
-        className: _$$s.$$if(!kA(t) && !o, _$$s.opacity0_5).$,
+        className: _$$s.$$if(!isBigmaEnabledSimple(t) && !o, _$$s.opacity0_5).$,
         children: jsx(aP, {
           label: getI18nString('settings_tab.pinned_plugins_label'),
           description: getI18nString('settings_tab.pinned_plugins_description'),
@@ -2098,7 +2098,7 @@ function aU({
             d(!o);
           }
         })
-      }), !kA(t) && e && e.pinnedPlugins.length > 0 && jsx(aF, {})]
+      }), !isBigmaEnabledSimple(t) && e && e.pinnedPlugins.length > 0 && jsx(aF, {})]
     }) : jsxs(Fragment, {
       children: [jsx('div', {
         className: _$$s.mb4.$,
@@ -2326,7 +2326,7 @@ function az({
   }, [a]);
   let b = useSelector(e => e.whitelistedPlugins);
   return jsxs('div', {
-    'className': _$$s.m16.$$if(!kA(t), _$$s.opacity0_5).$,
+    'className': _$$s.m16.$$if(!isBigmaEnabledSimple(t), _$$s.opacity0_5).$,
     'id': 'org-admin-codegen-settings',
     'data-testid': 'org-admin-codegen-settings',
     'children': [jsx(aP, {
@@ -2337,7 +2337,7 @@ function az({
       onToggle: () => {
         l(!r);
       }
-    }), r && kA(t) && (e?.loaded ? jsxs('div', {
+    }), r && isBigmaEnabledSimple(t) && (e?.loaded ? jsxs('div', {
       className: _$$s.flexColumn.py8.$,
       children: [jsx(aq, {
         onCodeLanguageChange: t => {
@@ -2351,7 +2351,7 @@ function az({
       }), u && jsx(aj, {
         value: p,
         onClick: () => {
-          if (!t || !kA(t)) {
+          if (!t || !isBigmaEnabledSimple(t)) {
             d(getI18nString('settings_tab.plugin_not_enterprise_err'));
             return;
           }
@@ -2437,7 +2437,7 @@ function aW() {
     t.loaded && !g && (u(t.plugin), h(!0));
   }, [t.loaded, t.plugin, u, g, h]);
   return jsxs('div', {
-    'className': _$$s.m16.$$if(!kA(e), _$$s.opacity0_5).$,
+    'className': _$$s.m16.$$if(!isBigmaEnabledSimple(e), _$$s.opacity0_5).$,
     'data-testid': 'dev-mode-settings-modal-auto-run',
     'children': [jsx(aP, {
       label: getI18nString('settings_tab.auto_run_label'),
@@ -2447,7 +2447,7 @@ function aW() {
       onToggle: () => {
         l(!r);
       }
-    }), r && kA(e) && jsx('div', {
+    }), r && isBigmaEnabledSimple(e) && jsx('div', {
       children: g ? jsx(Fragment, {
         children: c ? jsxs(Fragment, {
           children: [jsx(aV, {
@@ -2463,7 +2463,7 @@ function aW() {
         }) : jsx(aj, {
           value: o,
           onClick: () => {
-            if (!e || !kA(e)) {
+            if (!e || !isBigmaEnabledSimple(e)) {
               p(getI18nString('settings_tab.plugin_not_enterprise_err'));
               return;
             }
@@ -2549,7 +2549,7 @@ let aH = registerModal(() => {
     if (e) {
       I('Dev Handoff Org Commit Plugin Changes', {});
       let n = a?.serialize();
-      !kA(e) && n && (n.codegenSettings = null, n.removedInheritedPins = []);
+      !isBigmaEnabledSimple(e) && n && (n.codegenSettings = null, n.removedInheritedPins = []);
       try {
         await _$$s5.updateOrgPreferences(e, {
           preferences: n,
@@ -2577,7 +2577,7 @@ let aH = registerModal(() => {
       preferences: a
     }), jsx(ay, {}), jsx(az, {
       preferences: a
-    }), jsx(ay, {}), jsx(aW, {}), !kA(e) && getFeatureFlags().dev_mode_org_pinned_plugins_ent && jsx('div', {
+    }), jsx(ay, {}), jsx(aW, {}), !isBigmaEnabledSimple(e) && getFeatureFlags().dev_mode_org_pinned_plugins_ent && jsx('div', {
       className: _$$s.m16.$,
       children: jsxs(_$$z2, {
         orientation: 'vertical',
@@ -3072,13 +3072,13 @@ function n_(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
   let l = useLatestRef(e.mfaRequiredSetting);
-  let o = l === CT.MEMBERS || l === CT.ALL_USERS;
-  let d = l === CT.GUESTS || l === CT.ALL_USERS;
-  let c = e.mfaRequiredSetting === CT.GUESTS || e.mfaRequiredSetting === CT.ALL_USERS;
+  let o = l === UserTypeEnum.MEMBERS || l === UserTypeEnum.ALL_USERS;
+  let d = l === UserTypeEnum.GUESTS || l === UserTypeEnum.ALL_USERS;
+  let c = e.mfaRequiredSetting === UserTypeEnum.GUESTS || e.mfaRequiredSetting === UserTypeEnum.ALL_USERS;
   return jsxs(Fragment, {
     children: [jsx('div', {
       className: _$$s.flex.alignLeft.mt16.pt10.pb16.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
       children: jsx(Checkbox, {
@@ -3087,7 +3087,7 @@ function n_(e) {
         }),
         checked: c,
         onChange: t => {
-          t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.GUESTS) : e.setMfaRequiredSetting(o ? CT.MEMBERS : null);
+          t ? e.setMfaRequiredSetting(o ? UserTypeEnum.ALL_USERS : UserTypeEnum.GUESTS) : e.setMfaRequiredSetting(o ? UserTypeEnum.MEMBERS : null);
         },
         children: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_description', {
           orgName: e.org.name
@@ -3206,18 +3206,18 @@ let nm = registerModal(() => {
         children: [jsxs(_$$Z, {
           value: 'none',
           labelClassName: nc,
-          children: [W3(null), jsx('span', {
+          children: [getGuestControlApprovalStatus(null), jsx('span', {
             className: 'guest_invite_settings_modal--secondary--qBSkc',
             children: renderI18nText('org_settings.guest_control.default')
           })]
         }), jsx(_$$Z, {
-          value: Gv.REQUIRE_APPROVAL,
+          value: ApprovalStatusEnum.REQUIRE_APPROVAL,
           labelClassName: nc,
-          children: W3(Gv.REQUIRE_APPROVAL)
+          children: getGuestControlApprovalStatus(ApprovalStatusEnum.REQUIRE_APPROVAL)
         }), jsx(_$$Z, {
-          value: Gv.BANNED,
+          value: ApprovalStatusEnum.BANNED,
           labelClassName: nc,
-          children: W3(Gv.BANNED)
+          children: getGuestControlApprovalStatus(ApprovalStatusEnum.BANNED)
         })]
       }), !Bg(t.shared_container_setting) && g != null && jsx('div', {
         className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? _$$s.mt16.$ : _$$s.my16.$),
@@ -3255,8 +3255,8 @@ let nm = registerModal(() => {
             p();
             return;
           }
-          let s = a ? W3(g) : n ? _$$nn(o) : '';
-          if (Bg(t.shared_container_setting) || g !== Gv.BANNED) {
+          let s = a ? getGuestControlApprovalStatus(g) : n ? getMfaGuestControlSetting(o) : '';
+          if (Bg(t.shared_container_setting) || g !== ApprovalStatusEnum.BANNED) {
             let t = {};
             n && (t.mfa_required = o);
             a && (t.invite_whitelist_guest_invite_setting = g);
@@ -3362,7 +3362,7 @@ function nw(e) {
 }
 function nk(e) {
   return jsx('div', {
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       marginTop: '-8px'
     }).$,
     className: _$$s.colorTextSecondary.ml20.mb8.$,
@@ -4197,7 +4197,7 @@ function n3(e) {
   });
 }
 let n8 = registerModal(e => {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'OrgChangePaymentModal',
     fallback: jsx(_$$K2, {}),
     children: jsx(Suspense, {
@@ -4669,9 +4669,9 @@ export function $$sr0(e) {
     title: '',
     settings: []
   };
-  let eN = org.target_locality === OE.EU ? getI18nString('settings_tab.data_storage_eu') : getI18nString('settings_tab.data_storage_us');
+  let eN = org.target_locality === USEURegionEnum.EU ? getI18nString('settings_tab.data_storage_eu') : getI18nString('settings_tab.data_storage_us');
   eE.title = getI18nString('settings_tab.section_header.data');
-  OW(org) && eE.settings.push(jsx(Ke, {
+  isBigmaAndSecurityAddOnEnabled(org) && eE.settings.push(jsx(Ke, {
     user: B,
     tag: 'a_something_else',
     label: getI18nString('settings_tab.discovery.label'),
@@ -4722,7 +4722,7 @@ export function $$sr0(e) {
       }));
     }
   }, 'guest-controls'));
-  mU(org) ? eI.push(jsx(x8, {
+  isDomainCaptureAndBigmaEnabled(org) ? eI.push(jsx(x8, {
     label: getI18nString('settings_tab.external_collaboration_controls_label'),
     description: getI18nString('settings_tab.external_collaboration_controls_description', {
       orgName: org.name
@@ -4733,7 +4733,7 @@ export function $$sr0(e) {
         type: nr
       }));
     }
-  }, 'external-collab-controls')) : ZY(org) && eI.push(jsx(Ke, {
+  }, 'external-collab-controls')) : isBigmaEnabled(org) && eI.push(jsx(Ke, {
     user: B,
     tag: 'a_permissions',
     label: getI18nString('settings_tab.external_collaboration_controls_label'),
@@ -4790,7 +4790,7 @@ export function $$sr0(e) {
       }));
     }
   }, 'autogen-password-controls'));
-  _$$ag(org) && eI.push(jsx(Ke, {
+  isBigmaAndSecurityEnabled(org) && eI.push(jsx(Ke, {
     user: B,
     tag: 'a_something_else',
     label: getI18nString('settings_tab.network_access_restriction_label'),
@@ -4829,13 +4829,13 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.authentication_label'),
     description: getI18nString('settings_tab.authentication_description'),
     currentValue: function (e) {
-      let t = _g(e);
+      let t = getAuthType(e);
       switch (t) {
-        case Ct.SAML:
+        case AuthTypeEnum.SAML:
           return getI18nString('settings_tab.sso_method.saml_only');
-        case Ct.GOOGLE:
+        case AuthTypeEnum.GOOGLE:
           return getI18nString('settings_tab.sso_method.google_only');
-        case Ct.ANY:
+        case AuthTypeEnum.ANY:
           return getI18nString('settings_tab.sso_method.any_method');
         default:
           throwTypeError(t);
@@ -4874,14 +4874,14 @@ export function $$sr0(e) {
   if (q || e6.push(jsx(x8, {
     label: getI18nString('settings_tab.scim_label'),
     description: V() ? getI18nString('settings_tab.scim_group_description') : getI18nString('settings_tab.scim_description'),
-    currentValue: cg(orgSamlConfig) ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled'),
+    currentValue: hasScimToken(orgSamlConfig) ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled'),
     onClick: () => {
       $(showModalHandler({
         type: G
       }));
     }
-  }, 'scim')), e5.push(k, ...e6), e3.push(...e6), e8.push(k, ...e6), _$$s3(org)) {
-    let e = oB(org);
+  }, 'scim')), e5.push(k, ...e6), e3.push(...e6), e8.push(k, ...e6), isBigmaSecurityAddOnEnabled(org)) {
+    let e = areAllDomainsVerified(org);
     let t = org.shared_container_setting?.ip_allowlist ?? !1;
     e5.push(jsx(x8, {
       label: getI18nString('settings_tab.ip_allowlist_label'),
@@ -5419,10 +5419,10 @@ export function $$sr0(e) {
         successMessage: e ? getI18nString('settings_tab.enable_community_file_publishing_success') : getI18nString('settings_tab.disable_community_file_publishing_success')
       }));
     }
-  }, 'community-file-publishing')), cg(orgSamlConfig) && tp.settings.push(jsx(x8, {
+  }, 'community-file-publishing')), hasScimToken(orgSamlConfig) && tp.settings.push(jsx(x8, {
     label: getI18nString('settings_tab.member_metadata_label'),
     description: getI18nString('settings_tab.member_metadata_description'),
-    currentValue: org.featured_scim_metadata ? du(org.featured_scim_metadata) : '',
+    currentValue: org.featured_scim_metadata ? getCostCenterTypeString(org.featured_scim_metadata) : '',
     onClick: () => $(showModalHandler({
       type: tF
     }))

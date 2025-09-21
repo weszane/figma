@@ -22,11 +22,11 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { wr } from "../figma_app/387599";
+import { getCurrentSearchSessionId } from "../figma_app/387599";
 import { Sb } from "../905/359847";
 import { m as _$$m } from "../905/909123";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { d6 } from "../figma_app/530167";
+import { createPublishActionCreators } from "../figma_app/530167";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
@@ -55,7 +55,7 @@ import { PreviewMode } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
 import { BuyerAPIHandler } from "../905/180";
 import { D as _$$D } from "../905/17527";
-import { H as _$$H } from "../905/473998";
+import { hubFileAPI } from "../905/473998";
 import { z as _$$z } from "../905/931953";
 import { AuthModal } from "../905/749159";
 import { Y as _$$Y } from "../905/582047";
@@ -110,7 +110,7 @@ let $$eb16 = createOptimistThunk((e, t, {
     trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
       hubFileId: t.hubFileId,
       figFileKey: i.key,
-      searchSessionId: wr(n)
+      searchSessionId: getCurrentSearchSessionId(n)
     });
     "whiteboard" === i.editor_type && e.dispatch(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
@@ -221,7 +221,7 @@ let $$eI20 = createOptimistThunk(async (e, {
 }) => {
   let i = null;
   let a = Promise.resolve(null);
-  let s = _$$H.getVersions({
+  let s = hubFileAPI.getVersions({
     id: t
   });
   a = s;
@@ -298,11 +298,11 @@ let $$eS17 = createOptimistThunk(async (e, {
     getFeatureFlags().ce_new_missing_fonts_logging && DI();
   }).catch(e => {
     console.error(e);
-  }).$$finally(() => {
+  }).finally(() => {
     atomStoreManager.set(_$$x, !0);
   }));
 });
-let $$ev22 = d6("HUB_FILE");
+let $$ev22 = createPublishActionCreators("HUB_FILE");
 let {
   updateMetadata,
   updateStatus,
@@ -465,7 +465,7 @@ async function eO(e, t) {
     cover_image_carousel_image: r?.carousel_images[R]
   };
   try {
-    let e = await _$$H.publishHubFile(L);
+    let e = await hubFileAPI.publishHubFile(L);
     return {
       hubFile: e.data.meta.hub_file,
       actingProfile: e.data.meta.acting_profile,
@@ -535,7 +535,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     signature: i?.cover_image.signature
   };
   try {
-    let t = (await _$$H.updateHubFile(hubFileId, R)).data.meta;
+    let t = (await hubFileAPI.updateHubFile(hubFileId, R)).data.meta;
     e.dispatch(Sb({
       hubFiles: [t],
       src: "updateHubFile"
@@ -615,7 +615,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
       hubFileId: t,
       figFileKey: a.key,
       viewContext: r,
-      searchSessionId: wr(e.getState())
+      searchSessionId: getCurrentSearchSessionId(e.getState())
     });
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(n));
@@ -637,7 +637,7 @@ let ek = liveStoreInstance.Mutation(({
   id: e
 }), e => {
   e.like_count += 1;
-}), _$$H.likeHubFile({
+}), hubFileAPI.likeHubFile({
   id: e
 })));
 let $$eM24 = createOptimistThunk((e, {
@@ -684,7 +684,7 @@ let eF = liveStoreInstance.Mutation(({
   id: e
 }), e => {
   e.like_count -= 1;
-}), _$$H.unlikeHubFile({
+}), hubFileAPI.unlikeHubFile({
   id: e
 })));
 let $$ej6 = createOptimistThunk((e, {

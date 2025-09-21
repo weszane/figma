@@ -18,13 +18,13 @@ import { h as _$$h } from "../905/284399";
 import { LN, q3 } from "../figma_app/450829";
 import { $T1 } from "../figma_app/6204";
 import { buildUploadUrl } from "../figma_app/169182";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Gv, ak } from "../figma_app/532170";
 import { T as _$$T } from "../3276/255140";
 function P() {
   return jsxs(Fragment, {
     children: [jsx("div", {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         backgroundColor: "#5551ff"
       }).$,
       children: jsx(Gv, {
@@ -39,7 +39,7 @@ function P() {
 function I() {
   return jsxs(Fragment, {
     children: [jsx("div", {
-      style: _$$sx.flex.alignCenter.wFull.borderBox.p18.h200.add({
+      style: styleBuilderInstance.flex.alignCenter.wFull.borderBox.p18.h200.add({
         backgroundColor: "#5551ff"
       }).$,
       children: jsx(_$$T, {})

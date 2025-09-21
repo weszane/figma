@@ -81,7 +81,7 @@ import { l as _$$l2 } from "../905/493845";
 import { PP, PH, Pn, OA } from "../905/230175";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { i as _$$i2 } from "../905/970229";
-import { yr } from "../905/827765";
+import { uploadRequest } from "../905/827765";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { T as _$$T, e as _$$e3 } from "../905/15569";
@@ -487,7 +487,7 @@ let e6 = _$$T({
       a.set("content-type", _$$i2(p) ?? "image/png");
       a.append("file", new Blob([p]));
       try {
-        await yr(cover_image_upload_url, a);
+        await uploadRequest(cover_image_upload_url, a);
       } catch (e) {
         reportError(_$$e2.COMMUNITY, e);
         return new _$$o3.SubmissionError({
@@ -1265,7 +1265,7 @@ function tO({
         onSuccess: eP,
         onFailure: eO,
         dispatch: y
-      }).$$finally(() => {
+      }).finally(() => {
         R(!1);
       });
     }

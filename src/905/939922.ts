@@ -16,9 +16,9 @@ import { getSelectedView } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { liveStoreInstance } from "../905/713695";
 import { getCurrentTeamId } from "../figma_app/598018";
-import { U } from "../905/18613";
+import { NotificationType } from "../905/18613";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
-import { ai } from "../figma_app/915202";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { OrganizationType } from "../905/833838";
 export function $$S0() {
   let e = selectCurrentUser();
@@ -120,8 +120,8 @@ let w = ({
     case nb.OFFLINE_FILE:
       i(NA({
         file: e.file,
-        openNewFileIn: ai.NEW_TAB,
-        source: U.OFFLINE_FILE_TILE
+        openNewFileIn: TabOpenBehavior.NEW_TAB,
+        source: NotificationType.OFFLINE_FILE_TILE
       }));
       break;
     default:
@@ -136,8 +136,8 @@ let C = ({
 }) => {
   e.type === nb.OFFLINE_FILE && n(NA({
     file: e.file,
-    openNewFileIn: ai.NEW_TAB,
-    source: U.OFFLINE_FILE_TILE
+    openNewFileIn: TabOpenBehavior.NEW_TAB,
+    source: NotificationType.OFFLINE_FILE_TILE
   }));
   let r = Tf.getEditUrl(e, i);
   customHistory.redirect(r, "_blank");
@@ -224,8 +224,8 @@ let T = async ({
     case nb.OFFLINE_FILE:
       i(NA({
         file: e.file,
-        openNewFileIn: ai.SAME_TAB,
-        source: U.OFFLINE_FILE_TILE
+        openNewFileIn: TabOpenBehavior.SAME_TAB,
+        source: NotificationType.OFFLINE_FILE_TILE
       }));
       break;
     default:

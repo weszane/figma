@@ -13,7 +13,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
 import { AssetAtomMap } from "../figma_app/31188";
-import { R9 } from "../905/977824";
+import { multiplayerSessionManager } from "../905/977824";
 import { getSingleSelectedNode } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
@@ -53,7 +53,7 @@ export function $$G4(e) {
 }
 export function $$V19() {
   let e = KP();
-  let t = R9.useInfoBySessionId({
+  let t = multiplayerSessionManager.useInfoBySessionId({
     updateSynchronously: !1
   });
   let r = selectCurrentUser();

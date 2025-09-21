@@ -6,7 +6,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l4 } from "../905/124270";
-import { II, yA } from "../905/171315";
+import { isFacetEmpty, getFacetDisplayValue } from "../905/171315";
 import { s as _$$s2 } from "../figma_app/576667";
 import { f as _$$f } from "../figma_app/882858";
 import { A as _$$A } from "../905/484713";
@@ -86,7 +86,7 @@ export function $$I0({
     children: [jsx("span", {
       ref: x,
       className: _$$s.noWrap.$,
-      children: !w || II(w) ? T(t) : yA(w)
+      children: !w || isFacetEmpty(w) ? T(t) : getFacetDisplayValue(w)
     }), jsx("div", {
       className: k,
       children: jsx(SvgComponent, {

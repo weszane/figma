@@ -264,7 +264,7 @@ export let $$B0 = async ({
       modelType: zw.IMAGEN_3,
       clientLifecycleId: i,
       abortController: e
-    }).$$finally(() => ks(t.guid)))));
+    }).finally(() => ks(t.guid)))));
     return {
       iterationParams: {
         ...t,

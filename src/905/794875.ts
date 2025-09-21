@@ -21,7 +21,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { gw, wv } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
@@ -913,7 +913,7 @@ export class $$en1 extends RecordingPureComponent {
         ...this.props,
         originalComponent: ei,
         overrideKey: "leftCheckIcon"
-      }), this.props.svg && jsx(_$$t, {
+      }), this.props.svg && jsx(MediaQuerySvgComponent, {
         className: H9,
         svg: this.props.svg,
         fallbackSvg: this.props.fallbackSvg

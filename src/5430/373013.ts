@@ -3,7 +3,7 @@ import { xk } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { PricingOptions } from "../905/237873";
 import { gM } from "../5430/823351";
 import { Ay } from "../905/506641";
@@ -66,7 +66,7 @@ export function $$I0({
     creators = BrowseUtils.ALL
   } = e;
   let k = usePrefersMediaQuery(`(max-width: ${_C6})`);
-  let A = Jm();
+  let A = getSearchSessionIdFromSelector();
   return ("search" !== x && (A = void 0), x === gM.SEARCH && "profiles" === resourceType) ? null : jsxs("div", {
     className: hs,
     "data-resource-type": resourceType,

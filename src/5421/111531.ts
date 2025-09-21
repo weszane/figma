@@ -3547,7 +3547,7 @@ class n$ {
           throw Error(n.error);
         }
       })();
-      let o = await n.$$finally(() => e.record("code_bundle_stop"));
+      let o = await n.finally(() => e.record("code_bundle_stop"));
       if (o) {
         let e = await bB();
         o.css = [o.css ?? "", e].join("\n");

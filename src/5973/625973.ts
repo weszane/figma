@@ -1,31 +1,31 @@
 import { createErrorAccumulator } from '../905/18160';
 import { B as _$$B } from '../905/94678';
-import { toMatrix2x3, toArray2x3 } from '../905/117560';
-import { sha1BytesFromHex, bytesToHex, sha1Hex, sha1HexFromString } from '../905/125019';
-import { c as _$$c } from '../905/154079';
+import { toArray2x3, toMatrix2x3 } from '../905/117560';
+import { bytesToHex, sha1BytesFromHex, sha1Hex, sha1HexFromString } from '../905/125019';
+import { filterFieldGroups } from '../905/154079';
 import { permissionScopeHandler, zk } from '../905/189185';
-import { _6, dL, fg, M1, uw, y4, zA } from '../905/321541';
+import { colorOrPaintArraySchema, matrix2x3Schema, transformedBehaviorsSchema, jsxExpressionContainerSchema, solidPaintArraySchema, paintWithImageGenerationArraySchema, tailwindClassesSchema } from '../905/321541';
 import { AffineTransformSchema, SessionInfoSchema } from '../905/333600';
-import { Aw, LV, Mn, Ug } from '../905/340677';
+import { createUnhandledNodeFrame, SerializeError, deserializeErrorSchema, DeserializeError } from '../905/340677';
 import { deepEqual } from '../905/382883';
 import { DI, JQ } from '../905/389786';
 import { getGradientTransformMatrix, getLinearGradientPoints, getRadialGradientPoints } from '../905/409381';
-import { $2, loadNonPluginFont, waitForAllFontsLoaded, getClosestFontName } from '../905/426868';
+import { $2, getClosestFontName, loadNonPluginFont, waitForAllFontsLoaded } from '../905/426868';
 import { SceneNode } from '../905/499575';
 import { Cv, fx, pu, sJ, u0, x_, y$ } from '../905/532366';
 import { yX } from '../905/642476';
 import { id as _$$id, Bj, fW } from '../905/648693';
 import { iN as _$$iN, Hn, Kx, VS } from '../905/696699';
 import { getSingletonSceneGraph } from '../905/700578';
-import { normalizeBlendMode, denormalizeBlendMode, BlendModeSchema } from '../905/722575';
+import { BlendModeSchema, denormalizeBlendMode, normalizeBlendMode } from '../905/722575';
 import { k as _$$k } from '../905/749197';
 import { transformZodSchema } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
-import { defaultSessionLocalIDString, sessionLocalIDToString, parseSessionLocalID } from '../905/871411';
-import { nodeProperties, getResolvedTypeName, textStyleProperties } from '../905/929949';
-import { parseFontStyle, getFontStyleName } from '../905/946258';
+import { defaultSessionLocalIDString, parseSessionLocalID, sessionLocalIDToString } from '../905/871411';
+import { getResolvedTypeName, nodeProperties, textStyleProperties } from '../905/929949';
+import { getFontStyleName, parseFontStyle } from '../905/946258';
 import { n as _$$n } from '../905/992140';
-import { tV as _$$tV, ao, D1, KQ, sU, UD, Y_ } from '../905/998509';
+import { tV as _$$tV, ao, D1, defaultSerializationOptions, sU, extractBooleanFieldDescriptions, combinedSerializationOptionsSchema } from '../905/998509';
 import { O as _$$O, S as _$$S2 } from '../3383/83383';
 import { h as _$$h, iz as _$$iz, rt as _$$rt, c1, jd, KY, qK, s$, v6 } from '../figma_app/17669';
 import { MaterializeInvisibleChildrenBindings } from '../figma_app/175377';
@@ -34,7 +34,7 @@ import { StyleIdHandler, VariableIdHandler } from '../figma_app/243058';
 import { findStackContainer, isSpecialType } from '../figma_app/387100';
 import { throwTypeError } from '../figma_app/465776';
 import { CUSTOM_IMAGE_TYPE_STR, getComponentInfoById, getInstanceIdsForDef, getInstanceNodeProps, getTypeInfoCached, toCamelCase, toTitleCase, usagePropsToRawProps } from '../figma_app/664063';
-import { TrackType, Confirmation, LayoutSizingMode, AssistantTools, VariableResolvedDataType, LayoutSizingType, TextOverflowType, SourceType } from '../figma_app/763686';
+import { AssistantTools, Confirmation, LayoutSizingMode, LayoutSizingType, SourceType, TextOverflowType, TrackType, VariableResolvedDataType } from '../figma_app/763686';
 import { QW, si } from '../figma_app/941074';
 import { z as _$$z } from '../vendor/835909';
 let n;
@@ -1859,12 +1859,12 @@ let ey = {
   GROUP: ['Group']
 };
 let eI = _$$z.union([_$$z.number(), _$$z.object({
-  vertical: _$$z.number().or(M1),
-  horizontal: _$$z.number().or(M1),
-  top: _$$z.number().or(M1),
-  left: _$$z.number().or(M1),
-  bottom: _$$z.number().or(M1),
-  right: _$$z.number().or(M1),
+  vertical: _$$z.number().or(jsxExpressionContainerSchema),
+  horizontal: _$$z.number().or(jsxExpressionContainerSchema),
+  top: _$$z.number().or(jsxExpressionContainerSchema),
+  left: _$$z.number().or(jsxExpressionContainerSchema),
+  bottom: _$$z.number().or(jsxExpressionContainerSchema),
+  right: _$$z.number().or(jsxExpressionContainerSchema),
   type: _$$z.literal('JSXExpressionContainer'),
   expression: _$$z.string()
 }).partial()]).optional().describe('Determines the padding between the border of the frame and its children.');
@@ -1936,8 +1936,8 @@ function eN({
   };
 }
 let ev = _$$z.object({
-  vertical: _$$z.number().or(_$$z.literal('auto')).or(M1),
-  horizontal: _$$z.number().or(_$$z.literal('auto')).or(M1),
+  vertical: _$$z.number().or(_$$z.literal('auto')).or(jsxExpressionContainerSchema),
+  horizontal: _$$z.number().or(_$$z.literal('auto')).or(jsxExpressionContainerSchema),
   type: _$$z.literal('JSXExpressionContainer'),
   expression: _$$z.string()
 }).partial();
@@ -2231,7 +2231,7 @@ let eR = ei({
   name: 'AutoLayout',
   includeInTailwind: !0,
   fieldGroups: new Set(['layout']),
-  outputSchema: e => e.tailwind ? zA : e.flavor === 'flow' ? eA : eO,
+  outputSchema: e => e.tailwind ? tailwindClassesSchema : e.flavor === 'flow' ? eA : eO,
   defaults: ({
     nodeInfo: e,
     options: t
@@ -2364,22 +2364,22 @@ let eV = _$$z.object({
   })]).optional().describe('The y position of the node. This field is ignored if the node is a direct child of an auto-layout frame and is not absolutely positioned. Group nodes do not have an `y` field because they are always positioned and sized to fit their children.'),
   position: _$$z.literal('absolute').optional().describe('For a direct child of an auto-layout frame, setting the value of this field to `absolute` will take the child out of auto-layout flow and allows explicitly setting `x` and `y`. This field is ignored if the node is not a direct child of an auto-layout frame.'),
   length: _$$z.union([_$$z.literal('fill-parent'), _$$z.number()]).optional().describe('For Line nodes only. For direct children of an auto-layout frame, the length can also be set to "fill-parent".'),
-  width: _$$z.union([_$$z.literal('fill-parent'), _$$z.literal('hug-contents'), _$$z.number(), M1]).optional().describe('Defines the width of the node. For auto-layout frames, the width defaults to "hug-contents". For direct children of an auto-layout frame, the width can also be set to "fill-parent". This field will be ignored if the `x` field has a `left-right` or `scale` constraint, which already controls the width.'),
-  height: _$$z.union([_$$z.literal('fill-parent'), _$$z.literal('hug-contents'), _$$z.number(), M1]).optional().describe('Defines the height of the node. For auto-layout frames, the height defaults to "hug-contents". For direct children of an auto-layout frame, the height can also be set to "fill-parent". This field will be ignored if the `y` field has a `top-bottom` or `scale` constraint, which already controls the height.'),
+  width: _$$z.union([_$$z.literal('fill-parent'), _$$z.literal('hug-contents'), _$$z.number(), jsxExpressionContainerSchema]).optional().describe('Defines the width of the node. For auto-layout frames, the width defaults to "hug-contents". For direct children of an auto-layout frame, the width can also be set to "fill-parent". This field will be ignored if the `x` field has a `left-right` or `scale` constraint, which already controls the width.'),
+  height: _$$z.union([_$$z.literal('fill-parent'), _$$z.literal('hug-contents'), _$$z.number(), jsxExpressionContainerSchema]).optional().describe('Defines the height of the node. For auto-layout frames, the height defaults to "hug-contents". For direct children of an auto-layout frame, the height can also be set to "fill-parent". This field will be ignored if the `y` field has a `top-bottom` or `scale` constraint, which already controls the height.'),
   fallbackWidthIfHug: _$$z.number().optional(),
   fallbackHeightIfHug: _$$z.number().optional(),
   flipHorizontal: _$$z.boolean().optional(),
   flipVertical: _$$z.boolean().optional(),
-  maxWidth: _$$z.union([_$$z.number(), M1]).nullable().optional().describe('The maximum width of the node. Only applies to an auto-layout frame and its direct children.'),
-  minWidth: _$$z.union([_$$z.number(), M1]).nullable().optional().describe('The minimum width of the node. Only applies to an auto-layout frame and its direct children.'),
-  maxHeight: _$$z.union([_$$z.number(), M1]).nullable().optional().describe('The maximum height of the node. Only applies to an auto-layout frame and its direct children.'),
-  minHeight: _$$z.union([_$$z.number(), M1]).nullable().optional().describe('The minimum height of the node. Only applies to an auto-layout frame and its direct children.'),
+  maxWidth: _$$z.union([_$$z.number(), jsxExpressionContainerSchema]).nullable().optional().describe('The maximum width of the node. Only applies to an auto-layout frame and its direct children.'),
+  minWidth: _$$z.union([_$$z.number(), jsxExpressionContainerSchema]).nullable().optional().describe('The minimum width of the node. Only applies to an auto-layout frame and its direct children.'),
+  maxHeight: _$$z.union([_$$z.number(), jsxExpressionContainerSchema]).nullable().optional().describe('The maximum height of the node. Only applies to an auto-layout frame and its direct children.'),
+  minHeight: _$$z.union([_$$z.number(), jsxExpressionContainerSchema]).nullable().optional().describe('The minimum height of the node. Only applies to an auto-layout frame and its direct children.'),
   gridRowStart: _$$z.number().$$int().nonnegative().optional().describe('Determines the starting row index for this node within the parent grid. Only applies to direct children of a grid-layout frame.'),
   gridRowSpan: _$$z.number().$$int().positive().optional().describe('Determines the number of rows this node spans within the parent grid. Only applies to direct children of a grid-layout frame.'),
   gridColumnStart: _$$z.number().$$int().nonnegative().optional().describe('Determines the starting column index for this node within the parent grid. Only applies to direct children of a grid-layout frame.'),
   gridColumnSpan: _$$z.number().$$int().positive().optional().describe('Determines the number of columns this node spans within the parent grid. Only applies to direct children of a grid-layout frame.')
 });
-let eM = zA.merge(eV.pick({
+let eM = tailwindClassesSchema.merge(eV.pick({
   x: !0,
   y: !0,
   flipHorizontal: !0,
@@ -2389,7 +2389,7 @@ let e_ = ei({
   name: 'PositionSize',
   includeInTailwind: !0,
   fieldGroups: new Set(['layout']),
-  outputSchema: e => e.tailwindOnly ? zA : e.tailwind ? eM : e.flavor === 'flow' ? eV : eV.omit({
+  outputSchema: e => e.tailwindOnly ? tailwindClassesSchema : e.tailwind ? eM : e.flavor === 'flow' ? eV : eV.omit({
     gridRowStart: !0,
     gridRowSpan: !0,
     gridColumnStart: !0,
@@ -2861,7 +2861,7 @@ function eB(e, t) {
   return t && !t.isSection && (!i || r);
 }
 let eG = _$$z.object({
-  hidden: _$$z.boolean().or(M1).optional()
+  hidden: _$$z.boolean().or(jsxExpressionContainerSchema).optional()
 });
 function eJ(e, t, i) {
   if (t.includeVariables) {
@@ -3351,9 +3351,9 @@ let tn = ({
   };
 };
 let to = _$$z.object({
-  fill: y4.optional()
+  fill: paintWithImageGenerationArraySchema.optional()
 });
-let ta = zA.merge(to);
+let ta = tailwindClassesSchema.merge(to);
 function tl(e, t, i) {
   let {
     fills
@@ -3439,11 +3439,11 @@ let td = ei({
   fieldGroups: new Set(['rendering']),
   outputSchema: e => {
     let t = to;
-    e.tailwindOnly ? t = zA : e.tailwind && (t = ta);
+    e.tailwindOnly ? t = tailwindClassesSchema : e.tailwind && (t = ta);
     !e.includeAssetGenerationRequests && 'fill' in t.shape && (t = t.omit({
       fill: !0
     }).extend({
-      fill: uw.optional()
+      fill: solidPaintArraySchema.optional()
     }));
     return t;
   },
@@ -3533,13 +3533,13 @@ function tp(e, t) {
 }
 let tc = _$$z.object({
   cornerRadius: _$$z.number().or(_$$z.object({
-    topLeft: _$$z.number().or(M1),
-    topRight: _$$z.number().or(M1),
-    bottomLeft: _$$z.number().or(M1),
-    bottomRight: _$$z.number().or(M1)
-  })).or(M1).describe('uniform corner radius, or 4 independent corner radii: topLeft topRight bottomRight bottomLeft').optional()
+    topLeft: _$$z.number().or(jsxExpressionContainerSchema),
+    topRight: _$$z.number().or(jsxExpressionContainerSchema),
+    bottomLeft: _$$z.number().or(jsxExpressionContainerSchema),
+    bottomRight: _$$z.number().or(jsxExpressionContainerSchema)
+  })).or(jsxExpressionContainerSchema).describe('uniform corner radius, or 4 independent corner radii: topLeft topRight bottomRight bottomLeft').optional()
 });
-let tf = zA;
+let tf = tailwindClassesSchema;
 function th(e, t, i) {
   if (!e.cornerRadius && !e.rectangleCornerRadiiIndependent) return;
   let n = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.topLeftRadius : void 0) ?? e.rectangleTopLeftCornerRadius;
@@ -3744,18 +3744,18 @@ function ty(e) {
 let tb = _$$z.enum(['inside', 'outside', 'center']);
 let tS = _$$z.enum(['none', 'round', 'square', 'arrow-lines', 'arrow-equilateral']);
 let tT = _$$z.object({
-  stroke: y4.optional(),
+  stroke: paintWithImageGenerationArraySchema.optional(),
   strokeDashPattern: _$$z.array(_$$z.number()).optional().describe('The alternating stroke dash and gap lengths, in pixels, in the format `<length> <gap>`. An empty array gives a solid stroke and a single value will be applied to both the dash and gap length.'),
   strokeWidth: _$$z.number().or(_$$z.object({
-    top: _$$z.number().or(M1),
-    bottom: _$$z.number().or(M1),
-    left: _$$z.number().or(M1),
-    right: _$$z.number().or(M1)
-  })).or(M1).optional(),
+    top: _$$z.number().or(jsxExpressionContainerSchema),
+    bottom: _$$z.number().or(jsxExpressionContainerSchema),
+    left: _$$z.number().or(jsxExpressionContainerSchema),
+    right: _$$z.number().or(jsxExpressionContainerSchema)
+  })).or(jsxExpressionContainerSchema).optional(),
   strokeAlign: tb.optional().describe('The alignment of the stroke with respect to the boundaries of the node. Defaults to inside alignment.'),
   strokeCap: tS.optional().describe('The decoration applied to vertices which have only one connected segment.')
 });
-let tz = zA.merge(tT.pick({
+let tz = tailwindClassesSchema.merge(tT.pick({
   stroke: !0,
   strokeDashPattern: !0,
   strokeAlign: !0,
@@ -3767,9 +3767,9 @@ let tx = ei({
   fieldGroups: new Set(['rendering']),
   outputSchema: e => {
     let t = tT;
-    e.tailwindOnly ? t = zA : e.tailwind && (t = tz);
+    e.tailwindOnly ? t = tailwindClassesSchema : e.tailwind && (t = tz);
     !e.includeAssetGenerationRequests && 'stroke' in t.shape && (t = _$$z.object({
-      stroke: uw.optional()
+      stroke: solidPaintArraySchema.optional()
     }).merge(t.omit({
       stroke: !0
     })));
@@ -4020,32 +4020,32 @@ let tx = ei({
 });
 let tI = _$$z.object({
   type: _$$z.literal('drop-shadow'),
-  color: _6,
+  color: colorOrPaintArraySchema,
   offset: _$$z.object({
-    x: _$$z.number().or(M1),
-    y: _$$z.number().or(M1)
+    x: _$$z.number().or(jsxExpressionContainerSchema),
+    y: _$$z.number().or(jsxExpressionContainerSchema)
   }),
-  blur: _$$z.number().or(M1),
+  blur: _$$z.number().or(jsxExpressionContainerSchema),
   blendMode: BlendModeSchema.optional(),
-  spread: _$$z.number().or(M1).optional(),
+  spread: _$$z.number().or(jsxExpressionContainerSchema).optional(),
   visible: _$$z.boolean().optional(),
   showShadowBehindNode: _$$z.boolean().optional()
 }).describe('@name(DropShadowEffect)');
 let tE = _$$z.object({
   type: _$$z.literal('inner-shadow'),
-  color: _6,
+  color: colorOrPaintArraySchema,
   offset: _$$z.object({
-    x: _$$z.number().or(M1),
-    y: _$$z.number().or(M1)
+    x: _$$z.number().or(jsxExpressionContainerSchema),
+    y: _$$z.number().or(jsxExpressionContainerSchema)
   }),
-  blur: _$$z.number().or(M1),
+  blur: _$$z.number().or(jsxExpressionContainerSchema),
   blendMode: BlendModeSchema.optional(),
-  spread: _$$z.number().or(M1).optional(),
+  spread: _$$z.number().or(jsxExpressionContainerSchema).optional(),
   visible: _$$z.boolean().optional()
 }).describe('@name(InnerShadowEffect)');
 let tN = _$$z.object({
   type: _$$z.union([_$$z.literal('layer-blur'), _$$z.literal('background-blur')]),
-  blur: _$$z.number().or(M1),
+  blur: _$$z.number().or(jsxExpressionContainerSchema),
   visible: _$$z.boolean().optional()
 }).describe('@name(BlurEffect)');
 let tv = _$$z.union([tI, tE, tN]);
@@ -4287,7 +4287,7 @@ let tj = ei({
   }
 });
 let tL = _$$z.object({
-  opacity: _$$z.number().or(M1).optional()
+  opacity: _$$z.number().or(jsxExpressionContainerSchema).optional()
 });
 function tD(e, t, i) {
   let {
@@ -4847,10 +4847,10 @@ let iR = ei({
   deserialize: iw,
   deserializeOverrides: iw
 });
-let ij = dL.describe('@name(TransformMatrix)');
+let ij = matrix2x3Schema.describe('@name(TransformMatrix)');
 let iL = new Set();
 let iD = new Set();
-let iV = transformZodSchema(fg, (e, t) => e === SessionInfoSchema ? (iL.add(t.join('/')), _$$z.string()) : e === AffineTransformSchema ? (iD.add(t.join('/')), ij) : e);
+let iV = transformZodSchema(transformedBehaviorsSchema, (e, t) => e === SessionInfoSchema ? (iL.add(t.join('/')), _$$z.string()) : e === AffineTransformSchema ? (iD.add(t.join('/')), ij) : e);
 function iM(e, t, i) {
   let [n, ...r] = t;
   return e && void 0 !== n && void 0 !== e[n] ? n === '*' ? Array.isArray(e) ? e.map(e => iM(e, r, i)) : e : r.length === 0 ? {
@@ -4870,7 +4870,7 @@ let i_ = ei({
     behaviors: {}
   }),
   serialize(e) {
-    let t = fg.safeParse(e.behaviors);
+    let t = transformedBehaviorsSchema.safeParse(e.behaviors);
     if (!t || !t.success) return;
     let {
       data
@@ -5600,19 +5600,19 @@ function nr(e, t) {
   return t.replaceIrregularWhitespace ? e.characters.replace(/\v/g, '\v').replace(/\f/g, '\f').replace(/\u00A0/g, ' ').replace(/\u0085/g, '\n').replace(/\u1680/g, ' ').replace(/\u180E/g, '').replace(/\uFEFF/g, '').replace(/\u2000/g, ' ').replace(/\u2001/g, ' ').replace(/\u2002/g, ' ').replace(/\u2003/g, ' ').replace(/\u2004/g, ' ').replace(/\u2005/g, ' ').replace(/\u2006/g, ' ').replace(/\u2007/g, ' ').replace(/\u2008/g, ' ').replace(/\u2009/g, ' ').replace(/\u200A/g, ' ').replace(/\u200B/g, '').replace(/\u2028/g, '\n').replace(/\u2029/g, '\n\n').replace(/\u202F/g, ' ').replace(/\u205F/g, ' ').replace(/\u3000/g, ' ') : e.characters;
 }
 let na = _$$z.object({
-  fontFamily: _$$z.string().or(M1).optional().describe('Defaults to "Inter".'),
-  fontSize: _$$z.number().or(M1).optional().describe('Font size in px. Defaults to 12.'),
-  fontWeight: _$$z.number().or(M1).optional(),
+  fontFamily: _$$z.string().or(jsxExpressionContainerSchema).optional().describe('Defaults to "Inter".'),
+  fontSize: _$$z.number().or(jsxExpressionContainerSchema).optional().describe('Font size in px. Defaults to 12.'),
+  fontWeight: _$$z.number().or(jsxExpressionContainerSchema).optional(),
   italic: _$$z.boolean().optional(),
-  lineHeight: _$$z.union([_$$z.literal('auto'), _$$z.string(), _$$z.number(), M1]).optional().describe('Defaults to "auto", which is the font\'s default line height. Can also be set to a percentage of the font size like "100%", or a fixed line height in pixels like "20px", or a multiplier of the font size like 1.5.'),
-  letterSpacing: _$$z.union([_$$z.string().describe('Eg. 100% or 20px'), _$$z.number().describe('Raw values will be automatically inferred as px units'), M1]).optional().describe('The spacing between individual characters. Defaults to "0%". Can be set to a percentage of the font size like "100%", or a fixed spacing in pixels like "20px".'),
+  lineHeight: _$$z.union([_$$z.literal('auto'), _$$z.string(), _$$z.number(), jsxExpressionContainerSchema]).optional().describe('Defaults to "auto", which is the font\'s default line height. Can also be set to a percentage of the font size like "100%", or a fixed line height in pixels like "20px", or a multiplier of the font size like 1.5.'),
+  letterSpacing: _$$z.union([_$$z.string().describe('Eg. 100% or 20px'), _$$z.number().describe('Raw values will be automatically inferred as px units'), jsxExpressionContainerSchema]).optional().describe('The spacing between individual characters. Defaults to "0%". Can be set to a percentage of the font size like "100%", or a fixed spacing in pixels like "20px".'),
   textCase: _$$z.union([_$$z.literal('original'), _$$z.literal('upper'), _$$z.literal('lower'), _$$z.literal('title'), _$$z.literal('small_caps'), _$$z.literal('small_caps_forced')]).optional(),
   textDecoration: _$$z.union([_$$z.literal('none'), _$$z.literal('underline'), _$$z.literal('strikethrough')]).optional(),
   href: _$$z.string().optional(),
   truncate: _$$z.boolean().or(_$$z.number()).optional().describe('Whether the text should truncate if it overflows the size of the node. Set to a number to truncate after a specific number of lines.'),
-  fill: y4.optional()
+  fill: paintWithImageGenerationArraySchema.optional()
 });
-let nl = zA.merge(na.pick({
+let nl = tailwindClassesSchema.merge(na.pick({
   fontFamily: !0,
   letterSpacing: !0,
   textCase: !0,
@@ -5626,11 +5626,11 @@ let ns = ei({
   fieldGroups: new Set(['text']),
   outputSchema: e => {
     let t = na;
-    e.tailwindOnly ? t = zA : e.tailwind && (t = nl);
+    e.tailwindOnly ? t = tailwindClassesSchema : e.tailwind && (t = nl);
     !e.includeAssetGenerationRequests && 'fill' in t.shape && (t = t.omit({
       fill: !0
     }).extend({
-      fill: uw.optional()
+      fill: solidPaintArraySchema.optional()
     }));
     return t;
   },
@@ -6159,7 +6159,7 @@ let nm = _$$z.object({
   horizontalAlignText: _$$z.enum(['left', 'right', 'center', 'justified']).optional(),
   verticalAlignText: _$$z.enum(['top', 'center', 'bottom']).optional()
 });
-let ng = zA;
+let ng = tailwindClassesSchema;
 function ny(e, t) {
   if (e.type !== 'TEXT') return;
   let i = {};
@@ -6872,8 +6872,8 @@ function nU(e) {
   } : void 0;
 }
 let nW = _$$z.object({
-  vertical: _$$z.number().or(M1),
-  horizontal: _$$z.number().or(M1),
+  vertical: _$$z.number().or(jsxExpressionContainerSchema),
+  horizontal: _$$z.number().or(jsxExpressionContainerSchema),
   type: _$$z.literal('JSXExpressionContainer'),
   expression: _$$z.string()
 }).partial();
@@ -6881,12 +6881,12 @@ let nK = _$$z.object({
   gridTemplateRows: _$$z.string(),
   gridTemplateColumns: _$$z.string(),
   padding: _$$z.union([_$$z.number(), _$$z.object({
-    vertical: _$$z.number().or(M1),
-    horizontal: _$$z.number().or(M1),
-    top: _$$z.number().or(M1),
-    left: _$$z.number().or(M1),
-    bottom: _$$z.number().or(M1),
-    right: _$$z.number().or(M1),
+    vertical: _$$z.number().or(jsxExpressionContainerSchema),
+    horizontal: _$$z.number().or(jsxExpressionContainerSchema),
+    top: _$$z.number().or(jsxExpressionContainerSchema),
+    left: _$$z.number().or(jsxExpressionContainerSchema),
+    bottom: _$$z.number().or(jsxExpressionContainerSchema),
+    right: _$$z.number().or(jsxExpressionContainerSchema),
     type: _$$z.literal('JSXExpressionContainer'),
     expression: _$$z.string()
   }).partial()]).optional().describe('Determines the padding between the border of the frame and its children.'),
@@ -7026,7 +7026,7 @@ let nY = {
 };
 export function $$nZ29(e) {
   let t = {
-    ...KQ,
+    ...defaultSerializationOptions,
     ...e
   };
   let i = [nC, iZ];
@@ -7092,7 +7092,7 @@ function n6({
       return (i === -1 ? $$n024.length : i) - (n === -1 ? $$n024.length : n);
     });
     let f = {};
-    for (let t of c = _$$c(c, {
+    for (let t of c = filterFieldGroups(c, {
       ...i
     })) {
       let n = t.serializeNodeInfoForDefaults?.(e, i);
@@ -7241,7 +7241,7 @@ function n3({
     if (!a) continue;
     if (i?.includeNodeTypes && !i.includeNodeTypes.includes(a)) return null;
     let l = o.getFieldSerializers(i);
-    l = _$$c(l, {
+    l = filterFieldGroups(l, {
       ...i
     });
     let s = {
@@ -7305,7 +7305,7 @@ function n3({
     },
     location: e.parsedLocations?.full
   }), i.transformUnhandledNodes) ? n3({
-    jsxElement: Aw(e),
+    jsxElement: createUnhandledNodeFrame(e),
     nodeSerializers: t,
     options: {
       ...i,
@@ -7636,7 +7636,7 @@ function rn(e, t = null) {
   }
   ri === null && (ri = rt.getFieldSerializers({
     scene: getSingletonSceneGraph(),
-    ...KQ
+    ...defaultSerializationOptions
   }).map(e => `${e.name}Fields`));
   let r = ri;
   i.propsTypeRepr.typeDefBody !== '{}' && (r = [...r, `{ componentProps: ${i.propsTypeRepr.typeDefBody} }`]);
@@ -7946,7 +7946,7 @@ class ru {
     this.deserializeStats.componentLookupFailures += 1;
   }
   trackSerializeIssue(e) {
-    if (this.options.strict) throw new LV(e.message, e.context);
+    if (this.options.strict) throw new SerializeError(e.message, e.context);
     this.serializeIssues.push(e);
   }
   getSerializeIssues() {
@@ -7958,7 +7958,7 @@ class ru {
     };
   }
   trackDeserializeIssue(e) {
-    if (this.options.strict) throw new Ug(e.message, e.context);
+    if (this.options.strict) throw new DeserializeError(e.message, e.context);
     this.deserializeIssues.push(e);
   }
   getDeserializeIssues() {
@@ -8063,7 +8063,7 @@ export function $$rm39(e, t = {}) {
 }
 export function $$rg40(e, t = {}) {
   let i = {
-    ...KQ,
+    ...defaultSerializationOptions,
     scene: e.sceneGraph,
     ...t,
     tailwind: t.tailwind || t.tailwindOnly,
@@ -8074,7 +8074,7 @@ export function $$rg40(e, t = {}) {
     rootNode: e
   }, i);
   if (!e.isAlive) {
-    throw new LV('Node does not exist', {
+    throw new SerializeError('Node does not exist', {
       guid: e.guid
     });
   }
@@ -8236,7 +8236,7 @@ export function $$rg40(e, t = {}) {
       return y;
     }(d) : n6(d);
     if (!t) {
-      throw new LV('Unable to serialize node', {
+      throw new SerializeError('Unable to serialize node', {
         guid: e.guid
       });
     }
@@ -8378,7 +8378,7 @@ async function rb(e, t, i) {
 }
 export async function $$rS22(e, t = {}) {
   let i = {
-    ...KQ,
+    ...defaultSerializationOptions,
     scene: getSingletonSceneGraph(),
     ...t,
     componentInfoByJSXName: {
@@ -8465,7 +8465,7 @@ export async function $$rz35({
   }
   let l = t?.sceneGraph ?? getSingletonSceneGraph();
   let s = {
-    ...KQ,
+    ...defaultSerializationOptions,
     scene: l,
     ...n
   };
@@ -8949,7 +8949,7 @@ export async function $$rG27(e, {
   includeInteractionProps: t = !1
 } = {}) {
   let i = {
-    ...KQ,
+    ...defaultSerializationOptions,
     scene: getSingletonSceneGraph(),
     ...e
   };
@@ -9075,7 +9075,7 @@ ${n}
             s && (o && (s.body += ' | null'), n[l] = s);
           });
           return n;
-        }(_$$c((fieldSerializers ?? n).filter(e => e.name !== 'SharedPluginData'), i), d, i);
+        }(filterFieldGroups((fieldSerializers ?? n).filter(e => e.name !== 'SharedPluginData'), i), d, i);
         Object.assign(a, l);
         let s = Object.keys(l).map(e => `${e}`);
         let p = e.supportsChildren(i);
@@ -9256,7 +9256,7 @@ class rK {
     if (!n) throw new Error(`Node not found for guid ${e}`);
     let a = {
       scene: n.sceneGraph,
-      ...KQ,
+      ...defaultSerializationOptions,
       includeIDs: !1,
       includeNames: !1
     };
@@ -9347,7 +9347,7 @@ export async function $$rq38({
   serializerOptions: i
 }) {
   let n = {
-    ...KQ,
+    ...defaultSerializationOptions,
     scene: e.sceneGraph,
     ...i
   };
@@ -9497,7 +9497,7 @@ export async function $$rq38({
 }
 export const CallMethodRecord = D1;
 export const CreateNodeRecord = ao;
-export const DeserializeIssueSchema = Mn;
+export const DeserializeIssueSchema = deserializeErrorSchema;
 export const JSXPatchInsertSchema = $$rv3;
 export const JSXPatchRemovePropSchema = $$rw4;
 export const JSXPatchRemoveSchema = $$rO5;
@@ -9511,11 +9511,11 @@ export const JSXPathSchema = $$rE12;
 export const ReconciliationRuntime = $$Y13;
 export const SceneNodeRecord = sU;
 export const SceneNodeShim = $$K15;
-export const SerializerOptionsSchema = Y_;
+export const SerializerOptionsSchema = combinedSerializationOptionsSchema;
 export const SetPropertyRecord = _$$tV;
 export const applyFieldSerializersToDeclarativeNode = $$n918;
 export const createSerializerContext = $$rp19;
-export const defaultOptions = KQ;
+export const defaultOptions = defaultSerializationOptions;
 export const deserializeJSX = $$ry21;
 export const deserializeJSXElement = $$rS22;
 export const diffJSX = $$r_23;
@@ -9523,7 +9523,7 @@ export const fieldSerializerOrdering = $$n024;
 export const formatError = $$rc25;
 export const generateComponentsSchema = $$rr26;
 export const generateSchema = $$rG27;
-export const getDescribedBooleanOptionLabels = UD;
+export const getDescribedBooleanOptionLabels = extractBooleanFieldDescriptions;
 export const getNodeSerializers = $$nZ29;
 export const getReactFunctionComponentDefinition = $$rJ30;
 export const getStrictParseError = $$rx31;

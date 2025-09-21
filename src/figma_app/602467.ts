@@ -17,7 +17,7 @@ import { linkWithTracking } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F } from "../figma_app/482495";
@@ -532,7 +532,7 @@ function el() {
       trusted: !0,
       href: nG,
       className: m()(_$$s.inlineBlock.cursorDefault.$, "slides_rewrite_modal--disclaimerLink--a2jK5"),
-      style: sx.add({
+      style: styleBuilderInstance.add({
         verticalAlign: "bottom"
       }).$,
       target: "_blank",

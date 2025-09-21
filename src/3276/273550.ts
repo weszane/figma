@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { permissionScopeHandler } from "../905/189185";
 import s from "classnames";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { usePluginedWidgets } from "../figma_app/844435";
 import { checkResourceEligibility } from "../figma_app/86989";
 import { j } from "../905/813868";
@@ -60,7 +60,7 @@ export function $$b0(e) {
         draggable: !1
       }), jsx("div", {
         className: DJ,
-        children: w && jsx(_$$t, {
+        children: w && jsx(MediaQuerySvgComponent, {
           svg: A,
           useOriginalSrcFills_DEPRECATED: !0,
           fallbackSvg: A

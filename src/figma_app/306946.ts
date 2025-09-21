@@ -1,20 +1,20 @@
-import { z } from 'zod'
-import { productSchema, ProductSource, ProductStatus } from '../905/54385'
-import { HubFileSchema, HubFileVersionSchema } from '../905/71785'
-import { ContainerTypeMap } from '../905/186961'
-import { SubscriptionMetadataSchema } from '../905/272080'
-import { cK } from '../905/604501'
-import { fileEntityModel } from '../905/806985'
-import { BadgeType } from '../905/875063'
-import { CommunityOrgType } from '../905/878245'
-import { AcceptedPendingUsersSchema, PublisherInfoSchema } from '../figma_app/10554'
-import { createContentFilterSchema } from '../figma_app/70618'
-import { EditorType, PluginDetailsSchema, PluginInstallStatus, PluginMetadataSchema, R2, WidgetDetailsSchema } from '../figma_app/155287'
-import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312'
-import { DesignToolType } from '../figma_app/277543'
-import { PrimaryWorkflowEnum } from '../figma_app/633080'
-import * as Ip from '../figma_app/709165'
-import { fE, Fy, P1 } from '../figma_app/809727'
+import { z } from 'zod';
+import { productSchema, ProductSource, ProductStatus } from '../905/54385';
+import { HubFileSchema, HubFileVersionSchema } from '../905/71785';
+import { ContainerTypeMap } from '../905/186961';
+import { SubscriptionMetadataSchema } from '../905/272080';
+import { cK } from '../905/604501';
+import { fileEntityModel } from '../905/806985';
+import { BadgeType } from '../905/875063';
+import { CommunityOrgType } from '../905/878245';
+import { AcceptedPendingUsersSchema, PublisherInfoSchema } from '../figma_app/10554';
+import { createContentFilterSchema } from '../figma_app/70618';
+import { EditorType, PluginDetailsSchema, PluginInstallStatus, PluginMetadataSchema, R2, WidgetDetailsSchema } from '../figma_app/155287';
+import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312';
+import { DesignToolType } from '../figma_app/277543';
+import { PrimaryWorkflowEnum } from '../figma_app/633080';
+import * as Ip from '../figma_app/709165';
+import { communityFilesRecordSchema, videoFilesRecordSchema, resizedThumbnailUrlsSchema } from '../figma_app/809727';
 
 /**
  * ResourceTypeEnum - Original: $$y10
@@ -58,10 +58,10 @@ export const ResourceSchema = z.object({
   tags_v2: z.record(z.any()).optional(),
   icon_url: z.string().nullish(),
   thumbnail_url: z.string().optional(),
-  thumbnail_src_set: P1.nullish(),
+  thumbnail_src_set: resizedThumbnailUrlsSchema.nullish(),
   carousel_media: z.object({
-    images: fE,
-    videos: Fy.optional(),
+    images: communityFilesRecordSchema,
+    videos: videoFilesRecordSchema.optional()
   }).optional(),
   unpublished_at: z.string().nullable(),
   publishing_status: z.nativeEnum(FPublicationStatusType).nullable(),
@@ -71,8 +71,8 @@ export const ResourceSchema = z.object({
   is_3rd_party_monetized: z.boolean(),
   third_party_m10n_url: z.string().nullable(),
   support_contact: z.string().nullable(),
-  publish_scope: z.nativeEnum(CommunityOrgType).optional(),
-}).and(PublisherInfoSchema)
+  publish_scope: z.nativeEnum(CommunityOrgType).optional()
+}).and(PublisherInfoSchema);
 
 /**
  * ResourceSummarySchema - Original: T
@@ -94,12 +94,12 @@ export const ResourceSummarySchema = z.object({
   tags_v2: z.record(z.any()).optional(),
   icon_url: z.string().nullish(),
   thumbnail_url: z.string().optional(),
-  thumbnail_src_set: P1.nullish(),
+  thumbnail_src_set: resizedThumbnailUrlsSchema.nullish(),
   unpublished_at: z.string().nullable(),
   publishing_status: z.nativeEnum(FPublicationStatusType).nullable(),
   like_count: z.number(),
-  publish_scope: z.nativeEnum(CommunityOrgType).optional(),
-}).and(PublisherInfoSchema)
+  publish_scope: z.nativeEnum(CommunityOrgType).optional()
+}).and(PublisherInfoSchema);
 
 /**
  * ComponentV2RecordSchema - Original: I
@@ -118,7 +118,7 @@ export const ComponentV2RecordSchema = z.object({
     node_id: z.string(),
     page_id: z.string(),
     page_name: z.string(),
-    background_color: z.string(),
+    background_color: z.string()
   }),
   min_node_height: z.number(),
   min_node_width: z.number(),
@@ -140,8 +140,8 @@ export const ComponentV2RecordSchema = z.object({
   type: z.nativeEnum(PrimaryWorkflowEnum),
   canvas_url: z.string(),
   thumbnail_url: z.string(),
-  library_key: z.string(),
-})
+  library_key: z.string()
+});
 
 /**
  * ComponentV2Schema - Original: S
@@ -172,8 +172,8 @@ export const ComponentV2Schema = z.object({
   userFacingVersion: z.string().nullable(),
   destination_key: z.string().nullable(),
   isLocal: z.boolean().nullable(),
-  _component_v2_record: ComponentV2RecordSchema.optional(),
-})
+  _component_v2_record: ComponentV2RecordSchema.optional()
+});
 
 /**
  * TemplateSchema - Original: v
@@ -198,8 +198,8 @@ export const TemplateSchema = z.object({
   has_custom_thumbnail: z.boolean().optional(),
   signed_canvas_url: z.string().optional(),
   thumbnail_guid: z.string().optional(),
-  library_key: z.string(),
-})
+  library_key: z.string()
+});
 
 /**
  * ResourceContentSchema - Original: A
@@ -210,8 +210,8 @@ export const ResourceContentSchema = z.object({
   plugin: Ip.ignore(PluginDetailsSchema).optional(),
   widget: Ip.ignore(WidgetDetailsSchema).optional(),
   template: Ip.ignore(TemplateSchema).optional(),
-  component_v2: Ip.ignore(ComponentV2Schema).optional(),
-})
+  component_v2: Ip.ignore(ComponentV2Schema).optional()
+});
 
 /**
  * ResourceWithContentSchema - Original: $$x4
@@ -220,10 +220,10 @@ export const ResourceContentSchema = z.object({
 export const ResourceWithContentSchema = ResourceSchema.and(z.object({
   content: ResourceContentSchema,
   carousel_media: z.object({
-    images: fE,
-    videos: Fy.optional(),
-  }),
-}))
+    images: communityFilesRecordSchema,
+    videos: videoFilesRecordSchema.optional()
+  })
+}));
 
 /**
  * RecommendationDimensionsSchema - Original: $$N8
@@ -232,16 +232,16 @@ export const ResourceWithContentSchema = ResourceSchema.and(z.object({
 export const RecommendationDimensionsSchema = z.object({
   dimensions: z.object({
     job_title: z.array(z.string()),
-    paid_status: z.array(z.string()),
+    paid_status: z.array(z.string())
   }),
   recommendations: z.array(z.object({
     resources: z.array(ResourceSchema),
     properties: z.object({
       job_title: z.string(),
-      paid_status: z.string(),
-    }),
-  })),
-})
+      paid_status: z.string()
+    })
+  }))
+});
 
 /**
  * UserResourceSchema - Original: $$C9
@@ -252,23 +252,16 @@ export const UserResourceSchema = z.object({
   user_id: z.string(),
   resource_id: z.string(),
   created_at: z.string(),
-  updated_at: z.string(),
-}).optional()
+  updated_at: z.string()
+}).optional();
 
 /**
  * LimitedResourceSchema - Original: w
  * Schema for limited resource types.
  */
 export const LimitedResourceSchema = ResourceSchema.and(z.object({
-  resource_type: z.enum([
-    'design_template',
-    'figjam_template',
-    'slide_template',
-    'cooper_template_file',
-    'figmake_template',
-    'site_template',
-  ]),
-}))
+  resource_type: z.enum(['design_template', 'figjam_template', 'slide_template', 'cooper_template_file', 'figmake_template', 'site_template'])
+}));
 
 /**
  * RecommendedResourcesSchema - Original: $$O0
@@ -276,8 +269,8 @@ export const LimitedResourceSchema = ResourceSchema.and(z.object({
  */
 export const RecommendedResourcesSchema = z.object({
   recommended_resources: z.array(LimitedResourceSchema),
-  internal_resources: z.array(LimitedResourceSchema),
-})
+  internal_resources: z.array(LimitedResourceSchema)
+});
 
 /**
  * ResourceWithOptionalContentSchema - Original: $$R6
@@ -286,16 +279,16 @@ export const RecommendedResourcesSchema = z.object({
 export const ResourceWithOptionalContentSchema = ResourceSchema.and(z.object({
   content: z.optional(ResourceContentSchema),
   carousel_media: z.object({
-    images: fE,
-    videos: Fy.optional(),
-  }).optional(),
-}))
+    images: communityFilesRecordSchema,
+    videos: videoFilesRecordSchema.optional()
+  }).optional()
+}));
 
 /**
  * ResourceWithOptionalContentListSchema - Original: $$L7
  * Array of ResourceWithOptionalContentSchema.
  */
-export const ResourceWithOptionalContentListSchema = z.array(ResourceWithOptionalContentSchema)
+export const ResourceWithOptionalContentListSchema = z.array(ResourceWithOptionalContentSchema);
 
 /**
  * SameCreatorContentSchema - Original: $$P3
@@ -303,34 +296,26 @@ export const ResourceWithOptionalContentListSchema = z.array(ResourceWithOptiona
  */
 export const SameCreatorContentSchema = z.object({
   is_same_creator: z.boolean(),
-  content: z.array(ResourceSchema),
-})
+  content: z.array(ResourceSchema)
+});
 
 /**
  * ResourceTypeGroups - Original: $$D5, $$k1, $$M2
  * Arrays for resource type groupings.
  */
-export const ResourceTypeGroupTemplates = [
-  'design_template',
-  'figjam_template',
-  'slide_template',
-  'ui_kit',
-  'prototype',
-  'site_template',
-  'cooper_template_file',
-]
-export const ResourceTypeGroupPlugins = ['plugin']
-export const ResourceTypeGroupWidgets = ['widget']
+export const ResourceTypeGroupTemplates = ['design_template', 'figjam_template', 'slide_template', 'ui_kit', 'prototype', 'site_template', 'cooper_template_file'];
+export const ResourceTypeGroupPlugins = ['plugin'];
+export const ResourceTypeGroupWidgets = ['widget'];
 
 // Exported variables with refactored names
-export const Bn = RecommendedResourcesSchema
-export const Dm = ResourceTypeGroupPlugins
-export const GT = ResourceTypeGroupWidgets
-export const ME = SameCreatorContentSchema
-export const Q3 = ResourceWithContentSchema
-export const U$ = ResourceTypeGroupTemplates
-export const UL = ResourceWithOptionalContentSchema
-export const Y9 = ResourceWithOptionalContentListSchema
-export const _s = RecommendationDimensionsSchema
-export const tF = UserResourceSchema
-export const vt = ResourceTypeEnum
+export const Bn = RecommendedResourcesSchema;
+export const Dm = ResourceTypeGroupPlugins;
+export const GT = ResourceTypeGroupWidgets;
+export const ME = SameCreatorContentSchema;
+export const Q3 = ResourceWithContentSchema;
+export const U$ = ResourceTypeGroupTemplates;
+export const UL = ResourceWithOptionalContentSchema;
+export const Y9 = ResourceWithOptionalContentListSchema;
+export const _s = RecommendationDimensionsSchema;
+export const tF = UserResourceSchema;
+export const vt = ResourceTypeEnum;

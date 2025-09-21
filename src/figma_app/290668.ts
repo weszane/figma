@@ -3,7 +3,7 @@ import { tabbable } from "tabbable";
 import { f as _$$f, h } from "../905/693155";
 import { KeyCodes } from "../905/63728";
 import { e as _$$e } from "../905/810168";
-import { F2 } from "../905/826900";
+import { KeyboardFocusManager } from "../905/826900";
 import { useFullscreenReady } from "../905/924253";
 let $$c5 = "focus-next-area";
 let $$u1 = "focus-previous-area";
@@ -44,7 +44,7 @@ export function $$g8(e) {
     if (!i) return;
     let e = document.querySelector("#fullscreen-root");
     if (e) {
-      f(e, F2.focusCustomCanvasFocusElement);
+      f(e, KeyboardFocusManager.focusCustomCanvasFocusElement);
       return () => {
         E(e);
       };

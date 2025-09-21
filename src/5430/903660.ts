@@ -3,7 +3,7 @@ import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { PricingOptions } from "../905/237873";
 import { n as _$$n } from "../5430/859486";
 import { km, u9 } from "../5430/184698";
@@ -41,7 +41,7 @@ export function $$h0({
   onUpdate: r
 }) {
   let i = _();
-  let n = Jm();
+  let n = getSearchSessionIdFromSelector();
   return jsx(_$$n, {
     context: e,
     defaultOption: getI18nString("community.landing_page.sort.paid_and_free"),

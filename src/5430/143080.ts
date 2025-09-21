@@ -5,10 +5,10 @@ import a from "lodash-es/mapValues";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { useSafeRouteStateInstance } from "../figma_app/321395";
 import { ResourceTypes } from "../905/178090";
-import { n6 } from "../figma_app/600006";
+import { SearchRouteWithCommunity } from "../figma_app/600006";
 import { anchorEditorResource } from "../figma_app/773663";
 var o = n;
 var l = a;
@@ -95,9 +95,9 @@ export function $$g0({
   resultsByType: t
 }) {
   getFeatureFlags().statsig_aa_flag_web_cmtysidebar;
-  let r = useSafeRouteStateInstance(n6);
+  let r = useSafeRouteStateInstance(SearchRouteWithCommunity);
   let n = $$y1(t);
-  let a = Jm();
+  let a = getSearchSessionIdFromSelector();
   let l = [[ResourceTypes.SearchResourceTypes.MIXED, getI18nString("community.view_bar.all"), m.All], [ResourceTypes.SearchResourceTypes.FILES, getI18nString("community.view_bar.files_and_templates"), m.Files], [ResourceTypes.SearchResourceTypes.PLUGINS, getI18nString("community.view_bar.plugins"), m.Plugins], [ResourceTypes.SearchResourceTypes.WIDGETS, getI18nString("community.view_bar.widgets"), m.Widgets], [ResourceTypes.SearchResourceTypes.PROFILES, getI18nString("community.view_bar.creators"), m.Union]];
   return jsx("div", {
     className: "search_sidebar--sidebar--PZz8B",

@@ -15,7 +15,7 @@ import { zE } from "../905/738636";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { fV, es } from "../figma_app/610446";
 import w from "classnames";
 import { c as _$$c } from "../905/320067";
@@ -109,10 +109,10 @@ export function $$I0({
   let E = (e, t) => {
     u(zE({
       state: g,
-      from: f6.COMMUNITY_COLLECTIONS_PAGE,
+      from: FileBrowserLocation.COMMUNITY_COLLECTIONS_PAGE,
       editorType: FFileType.WHITEBOARD,
       team: void 0,
-      openNewFileIn: ai.NEW_TAB,
+      openNewFileIn: TabOpenBehavior.NEW_TAB,
       figjamAiNewFileData: {
         prompt: e,
         subtitle: e,

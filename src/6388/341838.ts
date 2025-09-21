@@ -19,7 +19,7 @@ import { C as _$$C } from "../1291/839924";
 import { AppStateTsApi, DesignGraphElements } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Dy } from "../figma_app/925970";
+import { searchStartSession } from "../figma_app/925970";
 import { B as _$$B } from "../1291/448960";
 import { b as _$$b2 } from "../figma_app/300024";
 import { ButtonPrimitive } from "../905/632989";
@@ -72,7 +72,7 @@ function C({
         searchPlaceholder: getI18nString("design_systems.assets_panel.search"),
         topBarStyle: _$$s.flex.itemsCenter.p8.$,
         shouldHideTabs: !0,
-        onFocus: () => m(Dy({
+        onFocus: () => m(searchStartSession({
           entryPoint: "figjam:inserts"
         }))
       }), jsx(_$$B.ScrollContainer, {

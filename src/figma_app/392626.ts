@@ -23,7 +23,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
 import { TeamHasPublishedSite } from "../figma_app/43951";
-import { mg, nX } from "../figma_app/336853";
+import { isFigmaFileUrl, extractFigmaFileId } from "../figma_app/336853";
 import { isTeamFileUrl, isTeamUrl, extractTeamIdFromUrl } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
@@ -290,17 +290,17 @@ function B(e) {
                   ei(null);
                   let t = isTeamFileUrl(Y);
                   let r = isTeamUrl(Y);
-                  let n = mg(Y);
+                  let n = isFigmaFileUrl(Y);
                   if (ep && !r && !t || !n && !ep) {
                     ei("url_format");
                     return;
                   }
-                  if (n && nX(Y) === P) {
+                  if (n && extractFigmaFileId(Y) === P) {
                     ei("same_org");
                     return;
                   }
                   if (ep ? t && n || r : n) {
-                    let e = nX(Y);
+                    let e = extractFigmaFileId(Y);
                     if (e && Eh.getOrgName({
                       orgId: e
                     }).then(({

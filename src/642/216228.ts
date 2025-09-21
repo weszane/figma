@@ -89,12 +89,12 @@ import { Point } from '../905/736624';
 import { qG } from '../905/742325';
 import { l as _$$l3 } from '../905/745972';
 import { G as _$$G2 } from '../905/750789';
-import { tH as _$$tH } from '../905/751457';
+import { ErrorBoundaryCrash } from '../905/751457';
 import { hideTooltip } from '../905/765855';
 import { K as _$$K3 } from '../905/770444';
 import { R as _$$R } from '../905/782411';
 import { EventShield } from '../905/821217';
-import { vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { AutoLayout } from '../905/470281';
 import { Um } from '../905/848862';
 import { t as _$$t4 } from '../905/851577';
@@ -113,7 +113,7 @@ import { lQ as _$$lQ } from '../905/934246';
 import { logCmsError } from '../905/937198';
 import { lY as _$$lY } from '../905/939482';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { Sn } from '../905/946805';
 import { $3 } from '../905/946937';
 import { t as _$$t7 } from '../905/947268';
@@ -2619,12 +2619,12 @@ let s3 = memo(({
   }) : null].filter(isNotNullish);
   if (!position || !g.length) return null;
   let f = jsxs(s0, {
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       top: `${position.top}px`,
       right: `${position.right}px`,
       bottom: `${position.bottom}px`,
       left: `${position.left}px`
-    }).add(_$$sx2.fixed).$,
+    }).add(styleBuilderInstance.fixed).$,
     children: [...g]
   });
   return t ? createPortal(f, document.body) : f;
@@ -2663,12 +2663,12 @@ let s7 = memo(({
   }) : null;
   if (!d) return null;
   let c = jsx(s6, {
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       top: `${position.top}px`,
       right: `${position.right}px`,
       bottom: `${position.bottom}px`,
       left: `${position.left}px`
-    }).add(_$$sx2.fixed).$,
+    }).add(styleBuilderInstance.fixed).$,
     children: d
   });
   return t ? createPortal(c, document.body) : c;
@@ -2962,7 +2962,7 @@ function rB() {
                   if (logError('auto_suggest', 'Error fetching suggestions', {
                     error: e
                   }), e.name === 'AbortError') {}
-                }).$$finally(() => {
+                }).finally(() => {
                   signal.aborted || (c(!1), l(`${rw(n)} - FINISHED`));
                   try {
                     d.destroy();
@@ -3449,7 +3449,7 @@ function r9({
   let c = numHiddenStubs === collapsibleStubs.length;
   return jsxs('div', {
     'className': _$$s.flex.itemsCenter.overflowHidden.flexShrink1.flexGrow1.$,
-    'style': _$$sx2.add({
+    'style': styleBuilderInstance.add({
       flexBasis: 'content'
     }).$,
     'ref': breadcrumbRef,
@@ -7835,7 +7835,7 @@ function lQ({
     })
   }) : jsx(_$$y2, {}), [a]);
   O1(() => (e(), !0), KD.MODAL);
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     name: 'visual_search_modal',
     handleKeyDown: x,
     focusOnMount: !0,
@@ -8348,7 +8348,7 @@ function aa() {
 export function $$ao0({
   width: e
 }) {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'AssetPanelUI3',
     fallback: jsx(aa, {}),
     children: jsx(an, {

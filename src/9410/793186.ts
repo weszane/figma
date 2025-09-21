@@ -17,7 +17,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { debugState } from "../905/407919";
 import { trackUserEvent } from "../figma_app/314264";
-import { kF } from "../figma_app/915202";
+import { PluginRunForContext } from "../figma_app/915202";
 import { $2 } from "../3276/545630";
 import { yL } from "../figma_app/242062";
 import { InputPrimitive } from "../905/246212";
@@ -833,11 +833,11 @@ export function $$eD3() {
   let i = useDispatch();
   if (e.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
   switch (t) {
-    case kF.FOR_OPEN:
+    case PluginRunForContext.FOR_OPEN:
       return jsx(_$$g, {
         dispatch: i
       });
-    case kF.FOR_MENU:
+    case PluginRunForContext.FOR_MENU:
       return jsx(_$$s, {
         dispatch: i
       });

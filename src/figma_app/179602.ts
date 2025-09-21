@@ -6,8 +6,8 @@ import { linkWithTracking } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { _8, dL } from "../figma_app/530167";
-import { s as _$$s } from "../905/608932";
+import { restrictProfileThunk, unrestrictProfileThunk } from "../figma_app/530167";
+import { profileServiceAPI } from "../905/608932";
 import { registerModal } from "../905/102752";
 import { y as _$$y } from "../905/617004";
 import { ModalContainer } from "../figma_app/918700";
@@ -23,7 +23,7 @@ export function $$f1(e) {
   let [y, b] = useState(!1);
   useEffect(() => {
     b(!0);
-    _$$s.getRestrictedProfiles({
+    profileServiceAPI.getRestrictedProfiles({
       profileId
     }).then(({
       data: e
@@ -52,14 +52,14 @@ export function $$f1(e) {
     }));
   };
   let S = t => {
-    m(_8({
+    m(restrictProfileThunk({
       profileId: e.profileId,
       blockedProfileId: t,
       onSuccess: () => I(t, !0)
     }));
   };
   let v = t => {
-    m(dL({
+    m(unrestrictProfileThunk({
       profileId: e.profileId,
       blockedProfileId: t,
       onSuccess: () => I(t, !1)

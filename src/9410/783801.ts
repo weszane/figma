@@ -11,7 +11,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { hx } from "../905/292918";
 import { isDevHandoffEditorType } from "../figma_app/976749";
@@ -119,7 +119,7 @@ function j(e) {
   useEffect(() => {
     if (t && j) {
       dispatch(notificationActions.dequeue({
-        type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED
+        type: NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED
       }));
       return;
     }
@@ -129,7 +129,7 @@ function j(e) {
       fileRepoId
     }), dispatch(notificationActions.enqueue({
       notification: {
-        type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED,
+        type: NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED,
         message: getI18nString("collaboration.branching.updates_available_from_main_file"),
         acceptCallback: () => {
           dispatch(hx({
@@ -151,7 +151,7 @@ function j(e) {
         }
       }
     }))) : dispatch(notificationActions.dequeue({
-      type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED
+      type: NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED
     }));
   }, [canEdit, key, fileRepoId, modalShown, topLevelMode, j, dispatch, t]);
   return null;

@@ -11,7 +11,7 @@ import { fU } from "../905/492004";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P2 } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { w9, rT } from "../figma_app/124493";
 import { n3 } from "../905/797478";
 import { wW } from "../figma_app/656450";
@@ -178,7 +178,7 @@ let F = memo(function ({
     window.addEventListener("click", e);
     return () => window.removeEventListener("click", e);
   }, [i, p, e.guid]);
-  let W = t ? sx.colorBgvotingtertiary.$.backgroundColor : sx.colorBg.$.backgroundColor;
+  let W = t ? styleBuilderInstance.colorBgvotingtertiary.$.backgroundColor : styleBuilderInstance.colorBg.$.backgroundColor;
   let Y = {
     default: {
       transform: `scale(${V})`,
@@ -207,7 +207,7 @@ let F = memo(function ({
     selected: {
       transform: "scale(1)",
       backgroundColor: W,
-      ...sx.colorBorderSelectedStrong.$,
+      ...styleBuilderInstance.colorBorderSelectedStrong.$,
       opacity: 1,
       paddingTop: "8px",
       paddingBottom: "12px",

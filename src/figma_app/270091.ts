@@ -57,7 +57,7 @@ import { Cn } from "../905/225265";
 import { YG } from "../905/921418";
 import { ko } from "../figma_app/807786";
 import { isLoading, isLoaded } from "../905/18797";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { useSubscribedLibraryKeys } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
@@ -457,7 +457,7 @@ function eW(e) {
     });
   }, [tm, e.searchBarRef, eY, tg, sessionId, e4, pickerType, isSearching]);
   let tj = useCurrentUserOrg();
-  let tU = Oe(tj);
+  let tU = isBigmaEnabledAlias3(tj);
   let tB = tc.type === iN.FILE ? tc.libraryKey : void 0;
   let tG = Fl();
   let tV = useMemo(() => ({

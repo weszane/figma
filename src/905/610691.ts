@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { analyticsEventManager } from "../905/449184";
 import { xD } from "../905/174697";
 import { useWebLoggerTimerEffect } from "../905/485103";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { pH } from "../figma_app/147337";
 import { $ } from "../905/293658";
 import { w } from "../905/13390";
@@ -84,12 +84,12 @@ export function $$I0({
       durationMs: Math.round(e),
       type: "tile-action-dropdown"
     });
-  }), !x || null === i || N) ? null : jsx(tH, {
+  }), !x || null === i || N) ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: "TileActionDropdown",
     sentryTags: {
       area: _$$e.WAYFINDING
     },
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(w, {
       className: "subscribed_tile_action_dropdown--tileActions--zsKOG",
       loadedQueries: R.data,

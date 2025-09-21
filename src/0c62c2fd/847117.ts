@@ -21,7 +21,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
 import { hideModal, showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -565,7 +565,7 @@ export function $$ei1(e) {
           className: _$$s.$$if(r, _$$s.pb6).$,
           children: [jsx("div", {
             className: _$$s.truncate.lh32.$,
-            style: _$$sx.add({
+            style: styleBuilderInstance.add({
               maxWidth: "384px"
             }).$,
             "data-tooltip": file.name,

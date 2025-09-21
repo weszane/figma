@@ -12,7 +12,7 @@ import { DM } from "../figma_app/223206";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
 import { FFileType } from "../figma_app/191312";
-import { ai, f6 } from "../figma_app/915202";
+import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { i0 } from "../figma_app/632248";
 import { Fullscreen } from "../figma_app/763686";
 import { getInitialDynamicConfig } from "../figma_app/594947";
@@ -174,7 +174,7 @@ let S = (e, t) => ({
           from: t,
           editorType: FFileType.FIGMAKE,
           team: void 0,
-          openNewFileIn: ai.NEW_TAB,
+          openNewFileIn: TabOpenBehavior.NEW_TAB,
           newFileDataLocalStorageKey: r
         }));
       }({
@@ -206,11 +206,11 @@ let $$j1 = {
   tags: [$.AI],
   iconType: jsx(t, {}),
   searchSynonyms: ["send to make", "export to make", "create make file", "figma make", "figmake"],
-  ...S("AI Quick Actions V2", f6.SEND_TO_MAKE_FROM_DESIGN_QA_V2_MENU)
+  ...S("AI Quick Actions V2", FileBrowserLocation.SEND_TO_MAKE_FROM_DESIGN_QA_V2_MENU)
 };
 let $$I0 = {
   name: "send-to-make-from-design",
-  ...S("SelectionContextMenu", f6.SEND_TO_MAKE_FROM_DESIGN_CONTEXT_MENU)
+  ...S("SelectionContextMenu", FileBrowserLocation.SEND_TO_MAKE_FROM_DESIGN_CONTEXT_MENU)
 };
 export const V6 = $$I0;
 export const Bc = $$j1;

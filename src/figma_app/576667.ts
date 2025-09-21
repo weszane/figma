@@ -5,7 +5,7 @@ import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { hO } from "../figma_app/545293";
 import { l4 } from "../905/124270";
 import { L } from "../905/713563";
-import { Q8, sC, R9 } from "../905/61477";
+import { searchInputAtom, searchScopeAtom, selectedItemAtom } from "../905/61477";
 import { hideDropdownAction } from "../905/929976";
 import { PublicModelType, CreatorResourceType } from "../figma_app/162807";
 import { q } from "../905/801222";
@@ -17,11 +17,11 @@ export function $$g0({
   path: r
 }) {
   let g = useDispatch();
-  let f = useAtomWithSubscription(Q8);
-  let E = useAtomWithSubscription(sC);
+  let f = useAtomWithSubscription(searchInputAtom);
+  let E = useAtomWithSubscription(searchScopeAtom);
   let y = useSelector(e => "search" === e.selectedView.view);
   let b = Xr(l4(e));
-  let T = Xr(R9);
+  let T = Xr(selectedItemAtom);
   let I = useAtomWithSubscription(hO.isFragmentSearchAtom);
   let S = L(I ? "fragment_search_modal" : "file_browser", E, !0);
   let v = useCallback((e, t, r) => {

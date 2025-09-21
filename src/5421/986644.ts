@@ -238,7 +238,7 @@ export function $$b1(e, t) {
                   }
                 };
                 i();
-              }).$$finally(() => {
+              }).finally(() => {
                 e && clearInterval(e);
               });
               s({

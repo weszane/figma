@@ -1,94 +1,155 @@
-import { jsx } from "react/jsx-runtime";
-import { useRef, Component } from "react";
-import { connect } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import o from "classnames";
-import { F2 } from "../905/826900";
-var l = o;
-export let $$c1 = Symbol("NotVisibleRunAnyway");
-export class $$u0 {
-  constructor(e) {
-    this._callback = e;
+import classNames from 'classnames';
+import { Component, useRef } from 'react';
+import { connect } from 'react-redux';
+import { jsx } from 'react/jsx-runtime';
+import { KeyboardFocusManager } from '../905/826900';
+import { throwTypeError } from '../figma_app/465776';
+
+// Symbol for special visibility behavior - run callback even when not visible
+export const NOT_VISIBLE_RUN_ANYWAY = Symbol('NotVisibleRunAnyway');
+
+/**
+ * Class for rendering cached subtree based on visibility.
+ * Original class: $$u0
+ */
+export class CachedSubtreeRenderer {
+  private _callback: (...args: any[]) => any;
+  private _previousValue: any;
+  constructor(callback: (...args: any[]) => any) {
+    this._callback = callback;
     this._previousValue = null;
   }
+
+  /**
+   * Renders cached subtree or array of subtrees.
+   * @param params - Render parameters
+   */
   render({
-    isVisible: e,
-    className: t,
-    displayAs: r,
-    valueArgs: i = []
+    isVisible,
+    className,
+    displayAs,
+    valueArgs = []
+  }: {
+    isVisible: boolean | symbol;
+    className?: string;
+    displayAs?: 'block' | 'contents';
+    valueArgs?: any[];
   }) {
-    let a = !0 === e || e === $$c1 ? this._previousValue = this._callback(...i) : this._previousValue;
-    let s = !0 === e;
-    return a instanceof Array ? a.map((e, i) => e && jsx(_, {
-      isVisible: s,
-      className: t,
-      displayAs: r,
-      children: e
-    }, e.key ?? i)) : a && jsx(_, {
-      isVisible: s,
-      className: t,
-      displayAs: r,
-      children: a
-    }, a.key ?? void 0);
+    // Update cached value if visible or special symbol
+    const shouldUpdate = isVisible === true || isVisible === NOT_VISIBLE_RUN_ANYWAY;
+    const value = shouldUpdate ? this._previousValue = this._callback(...valueArgs) : this._previousValue;
+    const visible = isVisible === true;
+    if (Array.isArray(value)) {
+      return value.map((child, idx) => child && jsx(CachedSubtreeComponent, {
+        isVisible: visible,
+        className,
+        displayAs,
+        children: child
+      }, child.key ?? idx));
+    }
+    return value && jsx(CachedSubtreeComponent, {
+      isVisible: visible,
+      className,
+      displayAs,
+      children: value
+    }, value.key ?? undefined);
   }
 }
-export function $$p2(e) {
-  let {
+
+/**
+ * Renders a cached subtree using a ref and children callback.
+ * Original function: $$p2
+ */
+export function useCachedSubtree(props: {
+  isVisible: boolean;
+  children: () => React.ReactNode;
+}) {
+  const {
     isVisible,
     children
-  } = e;
-  let a = useRef(null);
-  let s = !0 === isVisible ? a.current = children() : a.current;
-  return s && jsx(_, {
-    isVisible: !0 === isVisible,
-    children: s
+  } = props;
+  const ref = useRef<React.ReactNode>(null);
+  const subtree = isVisible === true ? ref.current = children() : ref.current;
+  return subtree && jsx(CachedSubtreeComponent, {
+    isVisible: isVisible === true,
+    children: subtree
   });
 }
-class _ extends Component {
-  constructor() {
-    super(...arguments);
-    this.ref = e => {
-      this.el = e;
-    };
+
+/**
+ * Component for caching subtree content based on visibility.
+ * Manages focus/blur behavior when visibility changes.
+ */
+class CachedSubtreeComponent extends Component<{
+  isVisible: boolean;
+  className?: string;
+  displayAs?: 'block' | 'contents';
+  children: React.ReactNode;
+}> {
+  el: HTMLElement | null = null;
+  constructor(props: any) {
+    super(props);
+    this.ref = this.ref.bind(this);
   }
-  componentDidUpdate(e) {
-    this.el && (!e.isVisible && this.props.isVisible && F2.focusSubtreeIfNecessary(this.el), e.isVisible && !this.props.isVisible && F2.blurSubtreeIfNecessary(this.el));
+  ref(el: HTMLElement | null) {
+    this.el = el;
+  }
+  componentDidUpdate(prevProps: {
+    isVisible: boolean;
+  }) {
+    if (this.el) {
+      // Focus subtree when becoming visible
+      if (!prevProps.isVisible && this.props.isVisible) {
+        KeyboardFocusManager.focusSubtreeIfNecessary(this.el);
+      }
+      // Blur subtree when becoming hidden
+      if (prevProps.isVisible && !this.props.isVisible) {
+        KeyboardFocusManager.blurSubtreeIfNecessary(this.el);
+      }
+    }
   }
   getClassNameForDisplayAs() {
-    let {
-      displayAs
+    const {
+      displayAs = 'contents'
     } = this.props;
     switch (displayAs) {
-      case "block":
-        return "";
-      case "contents":
-        return "displayContents";
+      case 'block':
+        return '';
+      case 'contents':
+        return 'displayContents';
       default:
         throwTypeError(displayAs);
     }
   }
+
+  /**
+   * Renders the component.
+   * Original method: render
+   */
   render() {
-    let {
-      isVisible
+    const {
+      isVisible,
+      className,
+      children
     } = this.props;
-    let t = l()(this.props.className ? this.props.className : "cachedSubtree", this.getClassNameForDisplayAs());
-    return jsx("div", {
+    const combinedClassName = classNames(className || 'cachedSubtree', this.getClassNameForDisplayAs());
+    return jsx('div', {
       ref: this.ref,
-      className: t,
+      className: combinedClassName,
       style: {
-        display: isVisible ? "" : "none"
+        display: isVisible ? '' : 'none'
       },
-      children: this.props.children
+      children
     });
   }
+  static defaultProps = {
+    displayAs: 'contents'
+  };
+  static displayName = 'CachedSubtreeComponent';
 }
-_.defaultProps = {
-  displayAs: "contents"
-};
-_.displayName = "CachedSubtreeComponent";
-connect(void 0, e => ({
+connect(undefined, e => ({
   dispatch: e
 }));
-export const H4 = $$u0;
-export const Ud = $$c1;
-export const VF = $$p2;
+export const H4 = CachedSubtreeRenderer;
+export const Ud = NOT_VISIBLE_RUN_ANYWAY;
+export const VF = useCachedSubtree;

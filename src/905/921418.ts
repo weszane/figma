@@ -6,10 +6,10 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getExperimentConfigAsync } from "../figma_app/594947";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { Dy, pY } from "../figma_app/925970";
+import { searchStartSession, searchIncrementQueryCount } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
 import { setAssetsSearchNoResults, setAssetsSearchResults } from "../905/879323";
-import { eK, w2 } from "../905/977218";
+import { searchSetQueryIdAction, searchSetLastLoadedQueryAction } from "../905/977218";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
@@ -22,7 +22,7 @@ import { isLoaded } from "../905/18797";
 import { KH } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Ei } from "../905/574958";
+import { generateSessionId } from "../905/574958";
 import { r6 } from "../figma_app/517115";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
@@ -57,7 +57,7 @@ class M {
     };
     this.debouncedComputeResults = debounce(e => {
       this.refreshSourcesIfNeeded(e);
-      "" === e.getState().library.assetsPanelSearch.query || e.getState().search.sessionId || e.dispatch(Dy({
+      "" === e.getState().library.assetsPanelSearch.query || e.getState().search.sessionId || e.dispatch(searchStartSession({
         entryPoint: "editor:assets_panel"
       }));
       this.computeResultsRedux(e);
@@ -208,7 +208,7 @@ let $$G0 = new class extends M {
     this.computeResultsRedux = async e => {
       let t = B0();
       let i = e.getState();
-      let n = Ei();
+      let n = generateSessionId();
       let r = atomStoreManager.get(qp);
       let s = i.library.assetsPanelSearch.query;
       let d = i.openFile?.key;
@@ -216,18 +216,18 @@ let $$G0 = new class extends M {
       let m = i.openFile?.parentOrgId;
       if (!s || !d) {
         e.dispatch(setAssetsSearchNoResults());
-        e.dispatch(eK({
+        e.dispatch(searchSetQueryIdAction({
           queryId: null
         }));
         return;
       }
-      e.dispatch(eK({
+      e.dispatch(searchSetQueryIdAction({
         queryId: n
       }));
       let _ = i.library.assetsPanelSearch.searchOptions;
       if (_ && !eu(_)) {
         e.dispatch(setAssetsSearchNoResults());
-        e.dispatch(eK({
+        e.dispatch(searchSetQueryIdAction({
           queryId: null
         }));
         return;
@@ -244,7 +244,7 @@ let $$G0 = new class extends M {
         fileOrgId: m ?? void 0,
         queryId: n
       });
-      i.search.sessionId && e.dispatch(pY());
+      i.search.sessionId && e.dispatch(searchIncrementQueryCount());
       let v = Date.now();
       if (v <= this.lastUpdatedQuery) return;
       let E = await this.computeResultsReduxSearchTypeHelper(s, _, b, r, i.search.sessionId, i.library.assetsPanelSearch.entryPoint, n);
@@ -263,7 +263,7 @@ let $$G0 = new class extends M {
       };
       if (_?.type === _$$I.LOCAL) {
         e.dispatch(setAssetsSearchResults(E));
-        e.dispatch(w2({
+        e.dispatch(searchSetLastLoadedQueryAction({
           sessionId: i.search.sessionId,
           query: s,
           queryId: n
@@ -301,7 +301,7 @@ let $$G0 = new class extends M {
       }
       if (s !== e.getState().library.assetsPanelSearch.query) return;
       e.dispatch(setAssetsSearchResults(E));
-      e.dispatch(w2({
+      e.dispatch(searchSetLastLoadedQueryAction({
         sessionId: i.search.sessionId,
         query: s,
         queryId: i.search.queryId
@@ -355,7 +355,7 @@ let $$G0 = new class extends M {
 let $$z3 = createOptimistThunk((e, {
   ignoreLoadingState: t = !1
 } = {}) => {
-  e.getState().search.sessionId || e.dispatch(Dy({
+  e.getState().search.sessionId || e.dispatch(searchStartSession({
     entryPoint: "editor:assets_panel"
   }));
   $$H5(e.getState(), {

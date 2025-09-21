@@ -6,7 +6,7 @@ import { reportError } from "../905/11";
 import { toTitleCase } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { FOrganizationLevelType, FLicenseType } from "../figma_app/191312";
-import { D } from "../905/962956";
+import { CurrencySchema } from "../905/962956";
 import { BillingCycle } from "../figma_app/831101";
 import { createProductAccessSchema } from "../905/513035";
 var s = a;
@@ -62,7 +62,7 @@ let $$C1 = z.object({
   total: z.number(),
   state: z.nativeEnum($$I2),
   subtype: z.nativeEnum($$S3),
-  currency: D,
+  currency: CurrencySchema,
   hosted_invoice_url: z.string().nullable(),
   invoice_pdf_url: z.string().nullable(),
   number: z.string().nullable(),

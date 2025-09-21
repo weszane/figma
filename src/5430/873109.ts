@@ -37,7 +37,7 @@ import { handleAtomEvent } from "../905/502364";
 import { VisualBellActions } from "../905/302958";
 import { AG } from "../figma_app/999312";
 import { FL } from "../figma_app/248365";
-import { wr } from "../figma_app/387599";
+import { getCurrentSearchSessionId } from "../figma_app/387599";
 import { ProfileRouteState } from "../905/934145";
 import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { e as _$$e2 } from "../5430/411458";
@@ -384,7 +384,7 @@ function eo({
     viewContext: s,
     loggedIn: n,
     forOrgId: o,
-    searchSessionId: wr(e)
+    searchSessionId: getCurrentSearchSessionId(e)
   };
 }
 function ea(e, t) {

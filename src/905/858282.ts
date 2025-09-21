@@ -10,7 +10,7 @@ import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Uu, Dm } from "../figma_app/8833";
 import { ft } from "../figma_app/753501";
-import { vL, pS } from "../905/826900";
+import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
 import { ZD } from "../905/519092";
 import { O } from "../905/208152";
 import { OP, as } from "../figma_app/792958";
@@ -196,7 +196,7 @@ export class $$w2 extends RecordingComponent {
       onMouseDown: a ? void 0 : this.onContentMouseDown,
       "data-testid": this.props.dataTestId,
       "data-onboarding-key": this.props.dataOnboardingKey,
-      children: jsx(vL, {
+      children: jsx(KeyboardReceiver, {
         name: "Draggable modal",
         handleKeyDown: this.onKeyDown,
         focusOnMount: !this.props.preventKeyboardFocus,
@@ -226,7 +226,7 @@ export class $$w2 extends RecordingComponent {
         onClick: this.onClick,
         onFocus: this.onFocus,
         onKeyDown: e => {
-          "Escape" === e.key && (e.stopPropagation(), this.onKeyDown(new pS(e.nativeEvent)));
+          "Escape" === e.key && (e.stopPropagation(), this.onKeyDown(new KeyboardEventWrapper(e.nativeEvent)));
         },
         onMouseDown: a ? void 0 : this.mouseDown,
         onPointerDown: a ? this.mouseDown : this.props.preventClickEventBubbling ? this.stopPropagation : void 0,

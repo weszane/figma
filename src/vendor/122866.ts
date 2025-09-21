@@ -25847,7 +25847,7 @@ const _require = require(a, !0);
       var b = a("Promise", function() {
         var e = o(n);
         var t = e !== String(n);
-        if (!t && 66 === h || c && (!u.catch || !u.$$finally)) return !0;
+        if (!t && 66 === h || c && (!u.catch || !u.finally)) return !0;
         if (!h || h < 51 || !/native code/.test(e)) {
           var r = new n(function(e) {
             e(1);
@@ -27073,7 +27073,7 @@ const _require = require(a, !0);
         proto: !0,
         real: !0,
         forced: !!s && a(function() {
-          u.$$finally.call({
+          u.finally.call({
             then: function() { }
           }, function() { });
         })
@@ -27092,8 +27092,8 @@ const _require = require(a, !0);
           } : e);
         }
       }), !n && l(s)) {
-        var d = o("Promise").prototype.$$finally;
-        u.$$finally !== d && h(u, "finally", d, {
+        var d = o("Promise").prototype.finally;
+        u.finally !== d && h(u, "finally", d, {
           unsafe: !0
         });
       }
@@ -34927,7 +34927,7 @@ const _require = require(a, !0);
                   }
                   return r;
                 }
-                (t.exports = f).prototype.$$finally = function(e) {
+                (t.exports = f).prototype.finally = function(e) {
                   if ("function" != typeof e) return this;
                   var t = this.constructor;
                   return this.then(function(r) {

@@ -21,7 +21,7 @@ import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { CZ, q4 } from "../905/294085";
 import { hO, cN, vz, G4, G1, Hl, d3 } from "../figma_app/545293";
@@ -234,7 +234,7 @@ export function $$eR6({
     }
     return jsxs("div", {
       className: r,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         paddingTop: "3px",
         paddingBottom: "3px",
         marginRight: "8px"

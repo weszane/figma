@@ -216,7 +216,7 @@ export function loadable(e) {
           state: "hasError",
           error: e
         });
-      }).$$finally(f), n.get(a) || (n.set(a, b), b));
+      }).finally(f), n.get(a) || (n.set(a, b), b));
     }, (e, n) => {
       n(i, e => e + 1);
     });
@@ -247,7 +247,7 @@ export function unwrap(e, n = E) {
       if (!S(l)) return {
         v: l
       };
-      if (l !== u?.p && ("fulfilled" === l.status ? f.set(l, l.value) : "rejected" === l.status ? i.set(l, l.reason) : l.then(e => f.set(l, e), e => i.set(l, e)).$$finally(o)), i.has(l)) throw i.get(l);
+      if (l !== u?.p && ("fulfilled" === l.status ? f.set(l, l.value) : "rejected" === l.status ? i.set(l, l.reason) : l.then(e => f.set(l, e), e => i.set(l, e)).finally(o)), i.has(l)) throw i.get(l);
       return f.has(l) ? {
         p: l,
         v: f.get(l)

@@ -15,12 +15,12 @@ import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
 import { getSelectedViewUrl } from "../figma_app/193867";
 import { getBackgroundColorForTheme } from "../905/187165";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { ai, f6 } from "../figma_app/915202";
+import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { PublicModelType, SpaceAccessType } from "../figma_app/162807";
-import { vj } from "../905/574958";
+import { SearchAnalytics } from "../905/574958";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
-import { Rz, r0, ky } from "../905/977218";
+import { searchSetParametersAction, searchSessionEnteredSearchViewAction, searchEndSessionAction } from "../905/977218";
 let x = createOptimistThunk((e, {
   viewport: t
 }) => {
@@ -39,12 +39,12 @@ let x = createOptimistThunk((e, {
 let $$N6 = createOptimistThunk(e => {
   let t = e.getState();
   let r = $$k5(t);
-  e.dispatch(Rz({
+  e.dispatch(searchSetParametersAction({
     query: t.desktopNewTab.searchQuery,
     searchScope: r,
     searchModelType: PublicModelType.FILES
   }));
-  e.dispatch(r0({
+  e.dispatch(searchSessionEnteredSearchViewAction({
     entryPoint: "desktop_new_tab"
   }));
   t = e.getState();
@@ -72,10 +72,10 @@ let $$R0 = createOptimistThunk((e, t) => {
   let s = {
     plan: _$$S(r)
   };
-  new vj.Analytics(r.search, a, s).click(n.search_model_type, r.selectedView, {
+  new SearchAnalytics.Analytics(r.search, a, s).click(n.search_model_type, r.selectedView, {
     action: t.clickAction
   });
-  e.dispatch(ky());
+  e.dispatch(searchEndSessionAction());
   e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: i.key,
@@ -114,7 +114,7 @@ let $$P1 = createOptimistThunk(async (e, t, {
 let $$D10 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.desktopNewTab.isCreatingFile) {
-    let n = isChromebookTabbed() ? ai.SAME_TAB : ai.NEW_TAB;
+    let n = isChromebookTabbed() ? TabOpenBehavior.SAME_TAB : TabOpenBehavior.NEW_TAB;
     let i = getNewFileConfig({
       state: e.getState(),
       openNewFileIn: n,
@@ -122,7 +122,7 @@ let $$D10 = createOptimistThunk((e, t) => {
         folderId: t.projectId
       } : "drafts",
       trackingInfo: {
-        from: f6.DESKTOP_NEW_TAB_BUTTON,
+        from: FileBrowserLocation.DESKTOP_NEW_TAB_BUTTON,
         selectedView: r.selectedView
       },
       editorType: t.editorType

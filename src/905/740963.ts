@@ -3,14 +3,14 @@ import { useCallback, useMemo, useEffect } from "react";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { zD, L8, jM, J, P_, l4, a3, wf } from "../905/124270";
 import { Hz, RF, p2, H9, aI } from "../905/714062";
-import { gl, jN, yA, FR, C8, M2, q1, gh, oM, nX } from "../905/171315";
+import { getFacetPrefix, createResourceFacet, getFacetDisplayValue, getFacetValueLabel, updateCreatorFacet, FacetOperation, updateSpaceFacet, buildSearchQuery, getFacetQueryParams, buildQueryObject } from "../905/171315";
 import { CreatorResourceType, PublicModelType, InputType } from "../figma_app/162807";
 import { P } from "../905/16832";
 import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/484713";
 import { hO } from "../figma_app/545293";
-import { Q8, sC, BA, R9 } from "../905/61477";
+import { searchInputAtom, searchScopeAtom, isSearchViewAtom, selectedItemAtom } from "../905/61477";
 import { n as _$$n } from "../905/624711";
 import { f as _$$f } from "../figma_app/882858";
 import { L as _$$L } from "../905/713563";
@@ -41,7 +41,7 @@ function C({
   id: s,
   path: o
 }) {
-  let d = useAtomWithSubscription(Q8);
+  let d = useAtomWithSubscription(searchInputAtom);
   let {
     setKeyboardNavigationElement,
     isFauxFocused
@@ -60,7 +60,7 @@ function C({
       className: "faceted_search_preview_suggestion_row--container--a6EET",
       children: [jsx("div", {
         className: I()("faceted_search_preview_suggestion_row--pill---AWE3", isFauxFocused && "faceted_search_preview_suggestion_row--hoveredPill--QO2uT"),
-        children: gl(e)
+        children: getFacetPrefix(e)
       }), !!t && jsx("div", {
         className: "faceted_search_preview_suggestion_row--valueContainer--oWST3",
         children: jsx(_$$f2, {
@@ -76,10 +76,10 @@ function C({
 }
 let T = (e, t, i) => {
   if (t === CreatorResourceType.RESOURCE) {
-    let t = jN(e);
-    return t ? yA(t) : "";
+    let t = createResourceFacet(e);
+    return t ? getFacetDisplayValue(t) : "";
   }
-  return t === CreatorResourceType.CREATOR || t === CreatorResourceType.SPACE ? FR(e, i) : "";
+  return t === CreatorResourceType.CREATOR || t === CreatorResourceType.SPACE ? getFacetValueLabel(e, i) : "";
 };
 export function $$k0({
   id: e,
@@ -88,18 +88,18 @@ export function $$k0({
   let i = useAtomWithSubscription(zD);
   let b = useAtomWithSubscription(L8);
   let v = useAtomWithSubscription(Hz);
-  let [I, E] = useAtomValueAndSetter(Q8);
+  let [I, E] = useAtomValueAndSetter(searchInputAtom);
   let x = selectCurrentUser();
   let S = RF(b, i);
   let w = function () {
     let e = useAtomWithSubscription(Hz);
-    let t = useAtomWithSubscription(sC);
-    let i = useAtomWithSubscription(BA);
+    let t = useAtomWithSubscription(searchScopeAtom);
+    let i = useAtomWithSubscription(isSearchViewAtom);
     let n = useAtomWithSubscription(jM);
     let c = useAtomWithSubscription(J);
     let u = useAtomWithSubscription(P_);
-    let [p, m] = useAtomValueAndSetter(R9);
-    let [y, b] = useAtomValueAndSetter(Q8);
+    let [p, m] = useAtomValueAndSetter(selectedItemAtom);
+    let [y, b] = useAtomValueAndSetter(searchInputAtom);
     let v = _$$f();
     let I = _$$n();
     let E = Xr(l4(e?.facetType ?? null));
@@ -115,19 +115,19 @@ export function $$k0({
             value: a
           } : a;
           let o = null;
-          r === CreatorResourceType.RESOURCE ? o = jN(a) : r === CreatorResourceType.CREATOR ? o = C8(a, M2.ADD_TO_GROUP, c) : r === CreatorResourceType.SPACE && (o = q1(a, M2.ADD_TO_GROUP, u));
+          r === CreatorResourceType.RESOURCE ? o = createResourceFacet(a) : r === CreatorResourceType.CREATOR ? o = updateCreatorFacet(a, FacetOperation.ADD_TO_GROUP, c) : r === CreatorResourceType.SPACE && (o = updateSpaceFacet(a, FacetOperation.ADD_TO_GROUP, u));
           E(o);
           let p = y.slice(0, e.facetTypeIndex);
           if (b(p), !o) return;
-          let h = gh(o, n, c, u);
+          let h = buildSearchQuery(o, n, c, u);
           m(h?.searchModelType ?? null);
           x || S(p, PublicModelType.FILES, h, i, !1, !1);
-          I(oM(s), y);
+          I(getFacetQueryParams(s), y);
         } else {
           let t = y.split(" ").slice(0, -1).join(" ");
-          let r = t + (t ? " " : "") + gl(e.facetType);
+          let r = t + (t ? " " : "") + getFacetPrefix(e.facetType);
           b(r);
-          let a = nX(n, c, u, p ?? void 0);
+          let a = buildQueryObject(n, c, u, p ?? void 0);
           x || S(r, PublicModelType.FILES, a, i, !1, !1);
           v(InputType.AUTOCOMPLETE, e.facetType);
         }
@@ -141,7 +141,7 @@ export function $$k0({
   }, [w]);
   let R = useCallback((e, t) => {
     e.preventDefault();
-    let i = gl(t);
+    let i = getFacetPrefix(t);
     E(I ? I + " " + i : i);
   }, [I, E]);
   return (!function () {

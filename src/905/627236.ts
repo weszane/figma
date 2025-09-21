@@ -19,7 +19,7 @@ import b from "../vendor/523035";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { z as _$$z } from "../905/284530";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -74,9 +74,9 @@ export function $$Z0(e) {
   let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   }).key.parentId;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "TeamAddAnnualSeatsModal",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     team: _$$e.BILLING_EXPERIENCE,
     children: jsx(TrackingProvider, {

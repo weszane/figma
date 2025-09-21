@@ -59,7 +59,7 @@ import { UpsellModalType } from "../905/165519";
 import { CURRENT_VERSION_ID, setActiveVersion, exitVersionHistoryMode, startCompareChanges, fetchVersionHistory } from "../figma_app/841351";
 import { FeatureFlag } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
-import { lF } from "../figma_app/915202";
+import { LoadingBarStatus } from "../figma_app/915202";
 import { KindEnum } from "../905/129884";
 import { shouldShowView, isBranchView } from "../905/218608";
 import { isFullscreenDevHandoffView } from "../905/782918";
@@ -699,7 +699,7 @@ class eM extends RecordingComponent {
       }));
       this.props.dispatch(Y6({
         mode: UIVisibilitySetting.KEEP_UI,
-        type: lF.SPINNER
+        type: LoadingBarStatus.SPINNER
       }));
       this.setState({
         isLoadingVersion: !0,
@@ -785,7 +785,7 @@ class eM extends RecordingComponent {
     this.startComparingChanges = e => {
       this.props.dispatch(Y6({
         mode: UIVisibilitySetting.KEEP_UI,
-        type: lF.SPINNER
+        type: LoadingBarStatus.SPINNER
       }));
       this.setState({
         isLoadingCompareChanges: !0,

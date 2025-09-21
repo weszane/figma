@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck, isEvalViewPathCheck } from "../figma_app/897289";
 import { selectCurrentUser } from "../905/372672";
-import { VF } from "../figma_app/679183";
+import { useCachedSubtree } from "../figma_app/679183";
 import { nl as _$$nl } from "../figma_app/359943";
 import { useState, useEffect, useMemo, memo, useCallback } from "react";
 import { IconButton } from "../905/443068";
@@ -563,36 +563,36 @@ function ty() {
   } = fC("numSelected", "stateGroupSelectionInfo");
   let o = SQ();
   return jsxs(Fragment, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: o,
       children: () => jsx(_$$x, {
         recordingKey: "vectorOperationPanel",
         numSelected
       }, "vectorOperation")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: tV(r, stateGroupSelectionInfo),
       children: () => jsx(BS, {
         recordingKey: "propsPanel",
         isInSelectionActionsPanel: !0
       }, "componentProperties")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: r[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c, {
         recordingKey: "componentPanel",
         isInSelectionActionsPanel: !0
       }, "component")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: M0(r),
       children: () => jsx(_$$_, {
         recordingKey: "instancePanel",
         isInSelectionActionsPanel: !0
       }, "instance")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: Br(r),
       children: () => jsx(eI, {
         isInSelectionActionsPanel: !0
       }, "slot")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: r[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
@@ -735,40 +735,40 @@ function tb({
       shouldShowVectorOperationPanel: w,
       shouldShowSlotPanel: Br(b),
       withBottomBorder: !b[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM]
-    }), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: b[ItemType.JSX_ITEM],
       children: () => jsx(_$$_2, {})
-    }), !eh && jsx(VF, {
+    }), !eh && jsx(useCachedSubtree, {
       isVisible: w,
       children: () => jsx(_$$x, {
         recordingKey: "vectorOperationPanel",
         numSelected
       }, "vectorOperation")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: C,
       children: () => jsx(sX, {}, "transformModifiers")
-    }), !eh && jsx(VF, {
+    }), !eh && jsx(useCachedSubtree, {
       isVisible: tV(b, stateGroupSelectionInfo),
       children: () => jsx(BS, {
         recordingKey: "propsPanel"
       }, "componentProperties")
-    }), !eh && jsx(VF, {
+    }), !eh && jsx(useCachedSubtree, {
       isVisible: b[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c, {
         recordingKey: "componentPanel"
       }, "component")
-    }), !eh && jsx(VF, {
+    }), !eh && jsx(useCachedSubtree, {
       isVisible: M0(b),
       children: () => jsx(_$$_, {
         recordingKey: "instancePanel"
       }, "instance")
-    }), !Z && jsx(VF, {
+    }), !Z && jsx(useCachedSubtree, {
       isVisible: Br(b),
       children: () => jsx(eI, {}, "slot")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: $,
       children: () => jsx(q, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !$ && (d6(b) || b[ItemType.TRANSFORM_ITEM]),
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
@@ -777,7 +777,7 @@ function tb({
         canEditConstraints: GG(b),
         onlyShowXYInputsRow: E === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && isValidValue(areOnlyResponsiveSetsSelected)) ?? !1)
       }, "transform")
-    }), !eh && jsx(VF, {
+    }), !eh && jsx(useCachedSubtree, {
       isVisible: b[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
@@ -785,7 +785,7 @@ function tb({
         dispatch: I,
         dropdownShown: n
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !$ && k,
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
@@ -794,7 +794,7 @@ function tb({
       }, "stack")
     }), jsx(F$, {
       isVisible: b[ItemType.SCALE_ITEM]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         isUI3: !0,
@@ -802,21 +802,21 @@ function tb({
         dispatch: I,
         dropdownShown: n
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.MASK_ITEM],
       children: () => jsx(_$$B, {
         recordingKey: "maskPanel",
         maskType
       }, "mask")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.LAYER_ITEM],
       children: () => jsx(X2, {
         recordingKey: "appearancePanel"
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.TYPE_ITEM],
       children: () => jsx(gc, {}, "type")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v, {
         colorFormat: t,
@@ -831,15 +831,15 @@ function tb({
         recordingKey: "canvasBackgroundPanel",
         sceneGraphSelection: j
       }, "canvas-background")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: P
       }, "fill")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: t,
@@ -857,10 +857,10 @@ function tb({
         stylePickerListLayout: T,
         stylePickerShown: f
       }, "stroke")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.EFFECTS_ITEM],
       children: () => jsx(w5, {}, "effects")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: B,
       children: () => jsx(UA, {
         colorFormat: t,
@@ -874,19 +874,19 @@ function tb({
         sceneGraphSelection: j,
         stylePickerListLayout: T
       }, "selection-paints")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: U,
       children: () => jsx(_$$B2, {}, "local-variables")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: ww(b, j),
       children: () => jsx(_$$Q, {
         recordingKey: "local-styles",
         scrollContainer: S
       }, "local-styles")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: b[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, "grids")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: P1(b, u),
       children: () => jsx(LI, {
         currentPage: K,
@@ -904,7 +904,7 @@ function tb({
         sceneGraphSelection: j,
         singleNodeName: V
       }, "export")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !NR(b),
       children: () => jsx(_$$Q2, {
         allSavedPlugins: e.plugins,
@@ -929,12 +929,12 @@ function tT(e) {
   return ((isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && !isEvalViewPathCheck() && logError("PropertiesPanel", "Rendering design tab with no shownPropertiesPanels", {
     isEmpty: isEmptyObject(e.shownPanels),
     shouldRenderInspectTab: n
-  }), e.shownPanels[ItemType.FRAME_PRESETS]) ? jsx(VF, {
+  }), e.shownPanels[ItemType.FRAME_PRESETS]) ? jsx(useCachedSubtree, {
     isVisible: !0,
     children: () => jsx(_$$nl, {
       recordingKey: "framePresetPanel"
     }, "frame-presets")
-  }) : e.shownPanels[ItemType.PENCIL_TOOL] ? jsx(VF, {
+  }) : e.shownPanels[ItemType.PENCIL_TOOL] ? jsx(useCachedSubtree, {
     isVisible: !0,
     children: () => jsx(_$$q, {
       recordingKey: "pencilToolPanel",
@@ -993,15 +993,15 @@ function tw({
       shouldShowComponentPropertiesPanel: tV(S, stateGroupSelectionInfo),
       shouldShowSlotPanel: Br(S),
       shouldShowInstancePanel: M0(S)
-    }), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: S[ItemType.JSX_ITEM],
       children: () => jsx(_$$_2, {})
-    }), !L && jsx(VF, {
+    }), !L && jsx(useCachedSubtree, {
       isVisible: !NR(S),
       children: () => jsx(_$$_, {
         recordingKey: "instancePanel"
       }, "instance")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
@@ -1010,7 +1010,7 @@ function tw({
         canEditConstraints: GG(S),
         onlyShowXYInputsRow: I === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && isValidValue(areOnlyResponsiveSetsSelected)) ?? !1)
       }, "transform")
-    }), !L && jsx(VF, {
+    }), !L && jsx(useCachedSubtree, {
       isVisible: S[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
@@ -1018,7 +1018,7 @@ function tw({
         dispatch: f,
         dropdownShown: n
       }, "vector-transform")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: V,
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
@@ -1030,17 +1030,17 @@ function tw({
     }), I === GR.DEFAULT_SIMPLIFIED && jsx(_$$Y2, {
       onExpand: () => E(GR.OVERRIDDEN_EXPANDED)
     }), I === GR.OVERRIDDEN_EXPANDED && jsxs(Fragment, {
-      children: [jsx(VF, {
+      children: [jsx(useCachedSubtree, {
         isVisible: S[ItemType.LAYER_ITEM],
         children: () => jsx(X2, {
           recordingKey: "appearancePanel"
         })
-      }), !L && jsx(VF, {
+      }), !L && jsx(useCachedSubtree, {
         isVisible: S[ItemType.COMPONENT_ITEM],
         children: () => jsx(_$$c, {
           recordingKey: "componentPanel"
         }, "component")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.VECTOR_ITEM],
         children: () => jsx(VR, {
           isUI3: !0,
@@ -1048,16 +1048,16 @@ function tw({
           dispatch: f,
           dropdownShown: n
         }, "vector-transform")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.MASK_ITEM],
         children: () => jsx(_$$B, {
           recordingKey: "maskPanel",
           maskType
         }, "mask")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.TYPE_ITEM],
         children: () => jsx(gc, {}, "type")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.CANVAS_ITEM],
         children: () => jsx(_$$v, {
           colorFormat: t,
@@ -1072,15 +1072,15 @@ function tw({
           recordingKey: "canvasBackgroundPanel",
           sceneGraphSelection: j
         }, "canvas-background")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
         children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.FILL_ITEM],
         children: () => jsx(B8, {
           variableScopes: w
         }, "fill")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.STROKE_ITEM],
         children: () => jsx($p, {
           colorFormat: t,
@@ -1098,10 +1098,10 @@ function tw({
           stylePickerListLayout: b,
           stylePickerShown: T
         }, "stroke")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.EFFECTS_ITEM],
         children: () => jsx(w5, {}, "effects")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: D,
         children: () => jsx(UA, {
           colorFormat: t,
@@ -1115,11 +1115,11 @@ function tw({
           sceneGraphSelection: j,
           stylePickerListLayout: b
         }, "selection-paints")
-      }), jsx(VF, {
+      }), jsx(useCachedSubtree, {
         isVisible: S[ItemType.GRIDS_ITEM],
         children: () => jsx(_$$tC, {}, "grids")
       })]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: P1(S, u),
       children: () => jsx(LI, {
         currentPage: P.currentPage,
@@ -1137,7 +1137,7 @@ function tw({
         sceneGraphSelection: j,
         singleNodeName: C
       }, "export")
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !NR(S),
       children: () => jsx(_$$Q2, {
         allSavedPlugins: e.plugins,

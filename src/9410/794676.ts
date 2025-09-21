@@ -13,7 +13,7 @@ import { BrowserInfo, isIpadDevice } from "../figma_app/778880";
 import { selectWithShallowEqual } from "../905/103090";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { k as _$$k2 } from "../905/582200";
-import { Hb, tH as _$$tH, H4 } from "../905/751457";
+import { useErrorBoundaryContext, ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { oQ } from "../figma_app/332085";
 import { PQ, sx } from "../figma_app/91703";
@@ -67,7 +67,7 @@ import { a4 } from "../figma_app/457074";
 import { RECENT_PLUGINS_FIGMA_DESIGN, RECENT_PLUGINS_FIGJAM, RECENT_PLUGINS_SLIDES, RECENT_WIDGETS_FIGMA_DESIGN, RECENT_WIDGETS_FIGJAM, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { DW } from "../figma_app/578011";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { lM } from "../905/574958";
+import { getSession } from "../905/574958";
 import { e0 as _$$e } from "../905/696396";
 import { L as _$$L } from "../905/92291";
 import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
@@ -90,7 +90,7 @@ import { Ob } from "../905/191560";
 import { u as _$$u } from "../905/684425";
 import { Ji } from "../905/739314";
 import { d as _$$d } from "../905/241150";
-import { PG } from "../figma_app/453508";
+import { MemoryWarningModal } from "../figma_app/453508";
 import { useLatestRef } from "../figma_app/922077";
 import { S as _$$S } from "../5132/668270";
 import { showModal, showModalHandler } from "../905/156213";
@@ -140,9 +140,9 @@ import { rH } from "../figma_app/49598";
 import { _J } from "../figma_app/378195";
 import { x4 as _$$x4 } from "../figma_app/913823";
 import { nz, Yx } from "../figma_app/933328";
-import { h as _$$h2 } from "../figma_app/276445";
+import { fullscreenCrashStateAtom } from "../figma_app/276445";
 import { N as _$$N } from "../figma_app/115586";
-import { le } from "../figma_app/527873";
+import { getMemoryUsage } from "../figma_app/527873";
 import { DI } from "../figma_app/557318";
 import { WR } from "../figma_app/109130";
 import { G_ } from "../figma_app/251115";
@@ -533,7 +533,7 @@ let t5 = memo(({
   let s = t?.parentOrgId || "";
   let o = useRef(null);
   let d = useDispatch();
-  let c = useAtomWithSubscription(_$$h2);
+  let c = useAtomWithSubscription(fullscreenCrashStateAtom);
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = useAppModelProperty("isReadOnly");
   let h = useCurrentUserOrgId();
@@ -599,7 +599,7 @@ let t5 = memo(({
       }
       return {
         metadata: JSON.parse(JSON.stringify(i)),
-        reservedWasmMemory: le() || 0,
+        reservedWasmMemory: getMemoryUsage() || 0,
         rendererGpuMemory: n(FullscreenPerfInfo?.getRendererGpuMemory()) || 0,
         rendererBreakdown: function (e) {
           return {
@@ -1228,7 +1228,7 @@ export function $$t80({
   }, [B, i]);
   let es = useRef(!1);
   useEffect(() => {
-    d?.key && !es.current && (es.current = !0, _$$y2.startTimer(d.key, lM()));
+    d?.key && !es.current && (es.current = !0, _$$y2.startTimer(d.key, getSession()));
   }, [d?.key]);
   let eo = getFeatureFlags().figjam_toolbelt_in_page_view;
   let el = jsxs(Fragment, {
@@ -1284,14 +1284,14 @@ function t9({
   let f = function () {
     let {
       error
-    } = Hb();
+    } = useErrorBoundaryContext();
     return !!(error instanceof Error && error.message.includes("Out of memory"));
   }();
   let g = jsx(_$$R3, {
     children: jsx(_$$P, {
-      children: jsx(_$$tH, {
+      children: jsx(ErrorBoundaryCrash, {
         boundaryKey: "InAppPage",
-        fallback: f ? jsx(PG, {}) : H4.DEFAULT_FULL_PAGE,
+        fallback: f ? jsx(MemoryWarningModal, {}) : errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
         hasCustomWASMBuild: y4,
         children: jsx(t5, {
           children: e

@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { hasContent } from "../figma_app/427318";
 import { liveStoreInstance } from "../905/713695";
-import { H } from "../905/473998";
+import { hubFileAPI } from "../905/473998";
 import { pluginAPIService } from "../905/3209";
 import { a as _$$a } from "../figma_app/601188";
 import { widgetAPIClient } from "../905/424668";
@@ -15,7 +15,7 @@ let $$$$m1 = liveStoreInstance.Query({
   }) => {
     switch (e) {
       case "file":
-        return (await H.getVersions({
+        return (await hubFileAPI.getVersions({
           id: t
         })).data.meta;
       case "plugin":

@@ -27,7 +27,7 @@ import { Button } from '../905/521428';
 import { ButtonPrimitive } from '../905/632989';
 import { Hj, iA } from '../905/682977';
 import { getResourceDataOrFallback } from '../905/723791';
-import { H4, tH } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { x as _$$x } from '../905/811596';
 import { useCurrentUserOrg } from '../905/845253';
 import { a as _$$a2 } from '../905/964520';
@@ -475,12 +475,12 @@ function ed(e) {
     })]
   });
 }
-let ec = forwardRef((e, t) => jsx(tH, {
+let ec = forwardRef((e, t) => jsx(ErrorBoundaryCrash, {
   boundaryKey: e.errorBoundaryKey,
   sentryTags: {
     area: _$$e.IAM
   },
-  fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+  fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
   children: jsx(TrackingProvider, {
     name: 'IDP Management Flyout',
     enabled: e.open,

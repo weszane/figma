@@ -11,7 +11,7 @@ import { FFileType, FPaymentHealthStatusType, FPlanLimitationType, FPlanRestrict
 import { isFigmaEmailSuffix } from '../figma_app/416935';
 import { hasRootPathOptional, isRootPath, isTeamFolderV2 } from '../figma_app/528509';
 import { canEditTeam } from '../figma_app/642025';
-import { ZG } from '../figma_app/736948';
+import { BillingStatusEnum } from '../figma_app/736948';
 import { BillingCycle, SubscriptionType } from '../figma_app/831101';
 
 /**
@@ -303,7 +303,7 @@ interface OrgState {
  */
 export function isOrgDelinquent(orgId: string, orgState: OrgState): boolean {
   const org = orgState.orgById[orgId];
-  return org && org.standing === ZG.DELINQUENT;
+  return org && org.standing === BillingStatusEnum.DELINQUENT;
 }
 
 /**
@@ -314,7 +314,7 @@ export function isOrgDelinquent(orgId: string, orgState: OrgState): boolean {
  */
 export function isOrgSuspendedOrDeactivated(orgId: string, orgState: OrgState): boolean {
   const org = orgState.orgById[orgId];
-  const suspendedStates = compact([ZG.SUSPENDED, getFeatureFlags().scheduled_cancellation_enabled && ZG.DEACTIVATED]);
+  const suspendedStates = compact([BillingStatusEnum.SUSPENDED, getFeatureFlags().scheduled_cancellation_enabled && BillingStatusEnum.DEACTIVATED]);
   return org && suspendedStates.includes(org.standing);
 }
 

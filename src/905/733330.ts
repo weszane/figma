@@ -1,9 +1,9 @@
-import { UpsellModalType } from '../905/165519'
-import { getI18nString } from '../905/303541'
-import { parseQuery, serializeQuery } from '../905/634134'
-import { CreateUpgradeAction } from '../figma_app/707808'
-import { X1 } from '../figma_app/736948'
-import { UpgradeSteps } from '../figma_app/831101'
+import { UpsellModalType } from '../905/165519';
+import { getI18nString } from '../905/303541';
+import { parseQuery, serializeQuery } from '../905/634134';
+import { CreateUpgradeAction } from '../figma_app/707808';
+import { OnboardingStepEnum } from '../figma_app/736948';
+import { UpgradeSteps } from '../figma_app/831101';
 /**
  * Organization Self-Serve View Path Handler
  * Refactored from $$d0
@@ -20,46 +20,42 @@ export class OrgSelfServePathHandler {
     if (routeParts[1] === 'purchase-organization') {
       const selectedView: any = {
         view: 'orgSelfServe',
-        step: X1.Initial,
+        step: OnboardingStepEnum.Initial,
         orgMigrated: false,
-        upsellSource: UpsellModalType.UNSET,
-      }
-
+        upsellSource: UpsellModalType.UNSET
+      };
       if (queryString) {
-        const queryObj = parseQuery(queryString)
+        const queryObj = parseQuery(queryString);
         if (queryObj.ds) {
-          selectedView.initialDesignEditors = parseInt(queryObj.ds)
+          selectedView.initialDesignEditors = parseInt(queryObj.ds);
         }
       }
-
-      const params = new URLSearchParams(queryString)
-
-      const teamFlowType = params.get('team_flow_type')
+      const params = new URLSearchParams(queryString);
+      const teamFlowType = params.get('team_flow_type');
       if (teamFlowType) {
         if (teamFlowType === CreateUpgradeAction.CREATE) {
           return {
             view: 'teamUpgrade',
             teamFlowType,
             teamId: null,
-            paymentStep: UpgradeSteps.CREATE_TEAM,
-          }
+            paymentStep: UpgradeSteps.CREATE_TEAM
+          };
         }
-        selectedView.newTeamProps = { teamFlowType }
-      }
-      else if (routeParts[2] === 'create-team') {
         selectedView.newTeamProps = {
-          teamFlowType: CreateUpgradeAction.CREATE_AND_UPGRADE,
-        }
+          teamFlowType
+        };
+      } else if (routeParts[2] === 'create-team') {
+        selectedView.newTeamProps = {
+          teamFlowType: CreateUpgradeAction.CREATE_AND_UPGRADE
+        };
       }
-
-      const entryPoint = params.get('entryPoint')
+      const entryPoint = params.get('entryPoint');
       if (entryPoint) {
-        selectedView.entryPoint = parseInt(entryPoint)
+        selectedView.entryPoint = parseInt(entryPoint);
       }
-
-      return selectedView
+      return selectedView;
     }
-    return null
+    return null;
   }
 
   /**
@@ -69,48 +65,39 @@ export class OrgSelfServePathHandler {
    */
   selectedViewToPath(selectedView: any): string | null {
     if (selectedView.view === 'orgSelfServe') {
-      let path = '/purchase-organization'
-      const { step, newTeamProps } = selectedView
-
-      if (step === X1.CreateTeam || (!step && newTeamProps)) {
-        path += '/create-team'
-      }
-      else if (step !== X1.TeamSelect && step) {
-        if (step === X1.Details) {
-          path += '/details'
-        }
-        else if (step === X1.Payment) {
-          path += '/payment'
-        }
-        else if (step === X1.Review) {
-          path += '/review'
-        }
-        else if (step && step !== X1.Initial) {
+      let path = '/purchase-organization';
+      const {
+        step,
+        newTeamProps
+      } = selectedView;
+      if (step === OnboardingStepEnum.CreateTeam || !step && newTeamProps) {
+        path += '/create-team';
+      } else if (step !== OnboardingStepEnum.TeamSelect && step) {
+        if (step === OnboardingStepEnum.Details) {
+          path += '/details';
+        } else if (step === OnboardingStepEnum.Payment) {
+          path += '/payment';
+        } else if (step === OnboardingStepEnum.Review) {
+          path += '/review';
+        } else if (step && step !== OnboardingStepEnum.Initial) {
           // No path change
+        } else if (newTeamProps) {
+          path += '/create-team';
+        } else {
+          path += '/team-select';
         }
-        else if (newTeamProps) {
-          path += '/create-team'
-        }
-        else {
-          path += '/team-select'
-        }
+      } else {
+        path += '/team-select';
       }
-      else {
-        path += '/team-select'
-      }
-
-      const query: Record<string, any> = {}
-      if (newTeamProps)
-        query.team_flow_type = newTeamProps.teamFlowType
-      if (selectedView.entryPoint)
-        query.entryPoint = selectedView.entryPoint
-
+      const query: Record<string, any> = {};
+      if (newTeamProps) query.team_flow_type = newTeamProps.teamFlowType;
+      if (selectedView.entryPoint) query.entryPoint = selectedView.entryPoint;
       if (Object.keys(query).length > 0) {
-        path += `?${serializeQuery(query)}`
+        path += `?${serializeQuery(query)}`;
       }
-      return path
+      return path;
     }
-    return null
+    return null;
   }
 
   /**
@@ -120,10 +107,9 @@ export class OrgSelfServePathHandler {
    * @returns True if history change is required
    */
   requireHistoryChange(prevView: any, nextView: any): boolean {
-    const isOrgSelfServePrev = prevView.view === 'orgSelfServe'
-    const isOrgSelfServeNext = nextView.view === 'orgSelfServe'
-    return isOrgSelfServePrev !== isOrgSelfServeNext
-      || (isOrgSelfServePrev && isOrgSelfServeNext && prevView.step !== nextView.step)
+    const isOrgSelfServePrev = prevView.view === 'orgSelfServe';
+    const isOrgSelfServeNext = nextView.view === 'orgSelfServe';
+    return isOrgSelfServePrev !== isOrgSelfServeNext || isOrgSelfServePrev && isOrgSelfServeNext && prevView.step !== nextView.step;
   }
 
   /**
@@ -132,9 +118,8 @@ export class OrgSelfServePathHandler {
    * @returns Display name string or null
    */
   selectedViewName(selectedView: any): string | null {
-    if (selectedView.view !== 'orgSelfServe')
-      return null
-    return getI18nString('org_view.view_selector.upgrade_to_organization')
+    if (selectedView.view !== 'orgSelfServe') return null;
+    return getI18nString('org_view.view_selector.upgrade_to_organization');
   }
 
   /**
@@ -144,9 +129,9 @@ export class OrgSelfServePathHandler {
    * @returns Always false
    */
   selectedViewHasMissingResources(_selectedView: any, _resources: any): boolean {
-    return false
+    return false;
   }
 }
 
 // Export with original variable name for compatibility
-export const _ = OrgSelfServePathHandler
+export const _ = OrgSelfServePathHandler;

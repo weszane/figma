@@ -11,8 +11,8 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { mW } from "../469e6e40/182832";
 import { showModalHandler, popModalStack } from "../905/156213";
-import { _g } from "../figma_app/336853";
-import { Ct } from "../figma_app/736948";
+import { getAuthType } from "../figma_app/336853";
+import { AuthTypeEnum } from "../figma_app/736948";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
@@ -94,7 +94,7 @@ function j(e) {
   }, [o, e.orgSamlConfig]);
   let j = !!e.orgSamlConfig.idp_name;
   let y = useCallback(() => {
-    let t = _g(e.org) === Ct.SAML;
+    let t = getAuthType(e.org) === AuthTypeEnum.SAML;
     return jsx(Button, {
       disabled: t,
       onClick: a,

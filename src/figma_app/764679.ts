@@ -10,7 +10,7 @@ import { y1, w4 } from "../905/445814";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getCurrentVersion } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -133,7 +133,7 @@ function G(e) {
     resource,
     editorTypes
   } = e;
-  let d = Jm();
+  let d = getSearchSessionIdFromSelector();
   let c = e => {
     if (!e.org_id) return;
     let r = getCurrentVersion(resource);
@@ -214,7 +214,7 @@ function V({
 }) {
   let s = useDispatch();
   let o = getPluginVersion(i);
-  let l = Jm();
+  let l = getSearchSessionIdFromSelector();
   let d = AG();
   return jsx(j, {
     onClick: () => {
@@ -250,7 +250,7 @@ export function $$H1(e, t, r) {
     let a = useCurrentPrivilegedPlan("usePluginTrySwitchEditorDropdown").unwrapOr(null);
     let h = a?.figjamDisabledAt ?? null;
     let b = a?.type === FOrganizationLevelType.ORG ? a?.key.parentId : void 0;
-    let A = Jm();
+    let A = getSearchSessionIdFromSelector();
     let [R, L] = useState();
     _$$h(() => {
       !async function () {

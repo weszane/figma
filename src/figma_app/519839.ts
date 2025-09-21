@@ -15,7 +15,7 @@ import { reportError } from "../905/11";
 import { logError, logWarning } from "../905/714362";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -47,7 +47,7 @@ let $$$3 = createActionCreator("PUBLISH_REQUEST_FINISHED");
 let $$X0 = createActionCreator("SAVE_PUBLISH_DESCRIPTION");
 let $$q2 = createOptimistThunk(e => {
   e.dispatch(notificationActions.dequeue({
-    type: NotificationType.MOVE_COMPONENTS_PROMPT
+    type: NotificationCategory.MOVE_COMPONENTS_PROMPT
   }));
   handleAtomEvent({
     id: "Finished publishing components"

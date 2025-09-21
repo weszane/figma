@@ -6,7 +6,7 @@ import { cZ } from "../figma_app/272902";
 import l from "classnames";
 import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
-import { t as _$$t } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { wH, Sn, r9, Pf, Qq, q3, VI, FH, cN, Ot, sc } from "../905/99033";
 import { A } from "../2854/769773";
 var d = l;
@@ -43,7 +43,7 @@ export class $$f0 extends RecordingComponent {
     t = this.props.selected ? wH : this.props.enabled ? Sn : r9;
     this.props.isUI3 && this.props.ui3Icon ? e = this.props.ui3Icon : this.props.useSvgNode ? e = this.props.svgNode ? jsx("span", {
       children: this.props.svgNode
-    }) : null : this.props.svg && (e = jsx(_$$t, {
+    }) : null : this.props.svg && (e = jsx(MediaQuerySvgComponent, {
       svg: this.props.svg,
       fallbackSvg: this.props.fallbackSvg,
       useOriginalSrcFills_DEPRECATED: this.props.useOriginalSrcFills_DEPRECATED,

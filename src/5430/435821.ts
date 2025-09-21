@@ -10,7 +10,7 @@ import { Fragment as _$$Fragment } from "react";
 import { ModalCloseButton } from "../905/17223";
 import { linkWithTracking } from "../figma_app/637027";
 import { z } from "../905/284530";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { FRequestStatusType } from "../figma_app/191312";
 import { registerModal } from "../905/102752";
 import { g as _$$g } from "../905/356410";
@@ -121,7 +121,7 @@ function C({
               })]
             }), r?.length > 0 && r.map((e, t) => jsxs(_$$Fragment, {
               children: [e.prompt ? jsx("ul", {
-                style: _$$sx.add({
+                style: styleBuilderInstance.add({
                   listStyle: "disc",
                   verticalAlign: "baseline"
                 }).$,

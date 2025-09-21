@@ -24,10 +24,10 @@ import { AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
 import { valueOrFallback, isValidValue, isInvalidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
-import { zy } from "../figma_app/915202";
+import { ClipboardOperation } from "../figma_app/915202";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { f as _$$f3 } from "../905/135117";
 import { JH } from "../figma_app/479313";
 import { kp, UJ, _D } from "../905/657318";
@@ -377,8 +377,8 @@ class er extends RecordingComponent {
       let n = e.event.clipboardData || window.clipboardData;
       let r = this.props.selectionHandler.getSelectedIndices();
       switch (t) {
-        case zy.COPY:
-        case zy.CUT:
+        case ClipboardOperation.COPY:
+        case ClipboardOperation.CUT:
           if (r.length) {
             let a = normalizeValue(this.props.propertyList);
             let s = a ? r.map(e => a[e]) : [];
@@ -388,11 +388,11 @@ class er extends RecordingComponent {
             });
             if (!o) break;
             C4(n, o, "");
-            t === zy.CUT && this.removeProperty();
+            t === ClipboardOperation.CUT && this.removeProperty();
             e.accept();
           }
           break;
-        case zy.PASTE:
+        case ClipboardOperation.PASTE:
           if ("prototypeInteractions" === i) break;
           if (r.length) {
             let t = yH(n);
@@ -463,7 +463,7 @@ class er extends RecordingComponent {
     let t = this.props.propertyList === MIXED_MARKER || this.props.isMixed;
     let i = this.props.renderHeader;
     let r = this.props.headerClickTriggersAddProperty ?? !0;
-    return jsxs(vL, {
+    return jsxs(KeyboardReceiver, {
       name: "Draggable property list",
       handleKeyDown: this.onKeyDown,
       handleClipboard: this.onClipboard,

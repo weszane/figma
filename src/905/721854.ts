@@ -7,7 +7,7 @@ import { handleUrlAction } from "../905/280005";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { JT } from "../905/913055";
 import { Yh } from "../figma_app/357047";
@@ -135,7 +135,7 @@ export function $$x0({
             className: _$$s.flex.justifyCenter.itemsCenter.$,
             children: T
           }) : 1 === N.length ? jsx("div", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               stroke: "var(--color-icon-brand)"
             }).$,
             children: jsx(Bf, {

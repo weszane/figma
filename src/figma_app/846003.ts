@@ -11,7 +11,7 @@ import { filePutAction } from "../figma_app/78808";
 import { yJ as _$$yJ, bE } from "../figma_app/598926";
 import { OB } from "../figma_app/91703";
 import { yJ as _$$yJ2 } from "../905/466026";
-import { Rz } from "../905/977218";
+import { searchSetParametersAction } from "../905/977218";
 import { trackUserEvent } from "../figma_app/314264";
 import { getRepoById } from "../905/760074";
 import { Qr, hL, OR } from "../905/697795";
@@ -161,7 +161,7 @@ let $$P0 = e => t => function (r) {
         jsCommitHash: Qr()
       });
     }
-  } else if (Rz.matches(r)) {
+  } else if (searchSetParametersAction.matches(r)) {
     let t = e.getState().selectedView;
     t?.view === "search" && (customHistory.replace(selectedViewToPath(P, t), {
       ...t,

@@ -280,11 +280,11 @@ export function selectLimitedTeamSharedProjectsView() { // $$Y14
  * Tracking thunks
  * Originals: $$$7 (T5), $$X8 (UN), $$q4, $$J5, $$Z19
  */
-const trackRecentFileClicked = createOptimistThunk((_: ThunkAPI, { index }: { index: number }) => {
+export const trackRecentFileClicked = createOptimistThunk((_: ThunkAPI, { index }: { index: number }) => {
   trackEventAnalytics('Recent File Clicked', { index }, { forwardToDatadog: true })
 })
 
-const trackFileClicked = createOptimistThunk((dispatchApi, { fileKey, entrypoint, currentPlanFilter, currentSharedByFilter, viewMode }: any) => {
+export const trackFileClicked = createOptimistThunk((dispatchApi, { fileKey, entrypoint, currentPlanFilter, currentSharedByFilter, viewMode }: any) => {
   trackFileBrowserFileClicked(fileKey, {
     state: dispatchApi.getState(),
     entrypoint,
@@ -295,15 +295,15 @@ const trackFileClicked = createOptimistThunk((dispatchApi, { fileKey, entrypoint
   })
 })
 
-const trackFontInstallerDownloaded = createOptimistThunk((dispatchApi) => {
+export const trackFontInstallerDownloaded = createOptimistThunk((dispatchApi) => {
   trackUserEvent('Font Installer Downloaded', dispatchApi.getState())
 })
 
-const trackFontUninstallerDownloaded = createOptimistThunk((dispatchApi) => {
+export const trackFontUninstallerDownloaded = createOptimistThunk((dispatchApi) => {
   trackUserEvent('Font Uninstaller Downloaded', dispatchApi.getState())
 })
 
-const trackNavTreeClicked = createOptimistThunk((dispatchApi, { clickedResourceType, resourceIdOrKey }: { clickedResourceType: string, resourceIdOrKey: string }) => {
+export const trackNavTreeClicked = createOptimistThunk((dispatchApi, { clickedResourceType, resourceIdOrKey }: { clickedResourceType: string, resourceIdOrKey: string }) => {
   trackUserEvent('File Browser Nav Tree Clicked', dispatchApi.getState(), {
     clickedResourceType,
     resourceIdOrKey,
@@ -314,7 +314,7 @@ const trackNavTreeClicked = createOptimistThunk((dispatchApi, { clickedResourceT
  * Query for trashed folders using liveStoreInstance.
  * Original: $$Q22
  */
-const trashedFoldersQuery = liveStoreInstance.Query({
+export const trashedFoldersQuery = liveStoreInstance.Query({
   fetch: async (args: any) => ((await trashedFoldersAPI.getTrashedFolders(args)).data as any).meta,
   schema: (e: any) => e.object({
     folders: e.array(FolderSchema.extend({ touched_at: e.string() })),
@@ -331,7 +331,7 @@ const trashedFoldersQuery = liveStoreInstance.Query({
  * Load trashed files and repos and update store.
  * Original: $$ee17
  */
-const loadTrashedFiles = createOptimistThunk((dispatchApi, { orgId, teamId }: TrashedFilesArgs, { loadingKey }: LoadingOptions = {}) => {
+export const loadTrashedFiles = createOptimistThunk((dispatchApi, { orgId, teamId }: TrashedFilesArgs, { loadingKey }: LoadingOptions = {}) => {
   const request = trashedFilesValidatorAPI.getTrashedFilesV2({ orgId: orgId || '', teamId: teamId || '' })
   setupLoadingStateHandler(request, dispatchApi, loadingKey)
   request.then((res: any) => {
@@ -416,7 +416,7 @@ export function isViewReloadSensitive(selectedView: any, additionalViewsToReload
  * Reload if pending reload exists and the current selected view matches the pending criteria.
  * Original: $$es10
  */
-const reloadIfPending = createOptimistThunk((_: ThunkAPI, context: { selectedView: any }) => {
+export const reloadIfPending = createOptimistThunk((_: ThunkAPI, context: { selectedView: any }) => {
   if (pendingReload && isViewReloadSensitive(context.selectedView, pendingReload.additionalViewsToReload)) {
     customHistory.reload(pendingReload.reason, pendingReload.metadata)
   }
@@ -442,7 +442,7 @@ export enum ReloadReasonEnum {
  * Schedule a reload after a delay; if view matches now, reload immediately, otherwise store pending reload.
  * Original: $$ec2
  */
-const scheduleReload = createOptimistThunk(async (_: ThunkAPI, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
+export const scheduleReload = createOptimistThunk(async (_: ThunkAPI, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
   await delay(args.delay)
   if (isViewReloadSensitive((_.getState()).selectedView, args.additionalViewsToReload)) {
     customHistory.reload(args.reason, args.metadata)
@@ -460,7 +460,7 @@ const scheduleReload = createOptimistThunk(async (_: ThunkAPI, args: { delay: nu
  * Handle org migration: if current view is orgSelfServe then mark orgMigrated, else schedule reload.
  * Original: $$eu1
  */
-const handleOrgMigration = createOptimistThunk((dispatchApi, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
+export const handleOrgMigration = createOptimistThunk((dispatchApi, args: { delay: number, reason: string, metadata?: any, additionalViewsToReload?: string[] }) => {
   const selectedView = dispatchApi.getState().selectedView
   if (selectedView.view === 'orgSelfServe') {
     dispatchApi.dispatch(selectViewAction({

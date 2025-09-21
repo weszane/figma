@@ -79,7 +79,7 @@ function _({
         let i = Aw(e.family, t.data);
         m(i);
         f[e.previewPath] = i;
-      }).catch(() => {}).$$finally(() => {
+      }).catch(() => {}).finally(() => {
         _(!0);
       });
     } catch (e) {

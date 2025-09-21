@@ -4,7 +4,7 @@ import { getAtomMutate } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getResourceTypeLabel, mapVtResourceType } from "../figma_app/471982";
 import { hasContent, hasHubFile, isWidgetResource, getMainContent, getResourceType } from "../figma_app/427318";
 import { Z } from "../905/909123";
@@ -22,7 +22,7 @@ export function $$k0(e, t, i, p) {
   let b = function (e, t, i, l) {
     let a = useDispatch();
     let s = selectCurrentUser();
-    let r = Jm();
+    let r = getSearchSessionIdFromSelector();
     let o = () => {
       hasContent(e) || (logAndTrackCTA(v()), hasClientMeta(e) ? a(zm({
         hubFileId: e.id
@@ -82,7 +82,7 @@ export function $$k0(e, t, i, p) {
   let v = function (e, t, i, p) {
     let x = useDispatch();
     let m = selectCurrentUser();
-    let b = Jm();
+    let b = getSearchSessionIdFromSelector();
     let y = getAtomMutate($$w);
     let v = getAtomMutate(S);
     let k = () => {

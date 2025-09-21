@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogHiddenTitle, DialogContents } from "../figma_app/272243";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
@@ -679,9 +679,9 @@ function eT(e) {
   });
 }
 export function $$eI0(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "PlanInviteModal",
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {

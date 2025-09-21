@@ -88,7 +88,7 @@ import { debounce } from '../905/915765';
 import { A as _$$A } from '../905/920142';
 import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b2 } from '../905/946806';
 import { A as _$$A4 } from '../905/956262';
 import { h1 } from '../905/986103';
@@ -127,7 +127,7 @@ import { usePlanInviteWithSeatExperiment } from '../figma_app/297957';
 import { V as _$$V2 } from '../figma_app/312987';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { L7 } from '../figma_app/329496';
-import { du } from '../figma_app/336853';
+import { getCostCenterTypeString } from '../figma_app/336853';
 import { p as _$$p2 } from '../figma_app/353099';
 import { m as _$$m } from '../figma_app/369596';
 import { isValidEmail } from '../figma_app/416935';
@@ -956,7 +956,7 @@ function tj(e) {
   let t = _$$R();
   return jsx('div', {
     className: _$$s3.px32.$$if(t, _$$s3.py16, _$$s3.pb24).flex.$,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       minWidth: e.minWidth ?? 0
     }).$,
     children: e.children
@@ -2935,7 +2935,7 @@ function nn(e) {
           let l = s;
           if (j && totalSelectable === null) {
             return jsx('div', {
-              style: _$$sx.w150.$,
+              style: styleBuilderInstance.w150.$,
               children: jsx(Wi, {
                 className: _$$s3.h12.w150.$,
                 animationType: JR.SHIMMER_ON_MENU
@@ -2945,7 +2945,7 @@ function nn(e) {
           let o = !1;
           if (j && totalSelectable !== null && (o = e.isLoading), o && status === APILoadingStatus.LOADING) {
             return jsx('div', {
-              style: _$$sx.w150.$,
+              style: styleBuilderInstance.w150.$,
               children: jsx(Wi, {
                 className: _$$s3.h12.w150.$,
                 animationType: JR.SHIMMER_ON_MENU
@@ -3319,7 +3319,7 @@ export function $$nc0(e) {
       })
     });
     e.featured_scim_metadata && _.push({
-      name: du(e.featured_scim_metadata),
+      name: getCostCenterTypeString(e.featured_scim_metadata),
       sorting_key: ColumnName.SCIM_DATA,
       className: b8,
       getSortValue: e => tn(e) ? `a${tn(e)}` : 'z',

@@ -1,101 +1,224 @@
-import { trackEventAnalytics } from "../905/449184";
-import { localStorageRef } from "../905/657224";
-import { Timer } from "../905/609396";
-import { logError } from "../905/714362";
-import { yp, Ph, ly } from "../905/138461";
-let o = "ping-request:";
-let l = "ping-response:";
-function c({
-  userID: e,
-  fileKey: t,
-  sessionID: i
-}) {
-  return `autosave-${e}-${t}-${i}`;
+import { isLockAvailable, isLocksSupported, requestLock } from '../905/138461'
+import { trackEventAnalytics } from '../905/449184'
+import { Timer } from '../905/609396'
+import { localStorageRef } from '../905/657224'
+import { logError } from '../905/714362'
+
+// Constants for ping mechanism
+const PING_REQUEST_PREFIX = 'ping-request:'
+const PING_RESPONSE_PREFIX = 'ping-response:'
+
+/**
+ * Generates a unique autosave key based on user ID, file key, and session ID.
+ * Original: c
+ * @param params - Object containing userID, fileKey, and sessionID
+ * @returns The autosave key string
+ */
+function generateAutosaveKey({
+  userID,
+  fileKey,
+  sessionID,
+}: {
+  userID: string
+  fileKey: string
+  sessionID: number
+}): string {
+  return `autosave-${userID}-${fileKey}-${sessionID}`
 }
-export function $$u1(e, t) {
-  return e.name === c(t);
+
+/**
+ * Checks if the lock name matches the generated autosave key.
+ * Original: $$u1
+ * @param lock - The lock object with a name property
+ * @param params - Object containing userID, fileKey, and sessionID
+ * @returns True if the lock name matches
+ */
+export function isLockNameMatching(
+  lock: { name: string },
+  params: { userID: string, fileKey: string, sessionID: number },
+): boolean {
+  return lock.name === generateAutosaveKey(params)
 }
-export async function $$p3(e) {
-  let t = c(e);
-  return yp ? !(await Ph(t)) : function (e, t, i) {
-    let n = localStorageRef;
-    if (!n) return Promise.reject("Local storage not available");
-    let d = o + e;
-    let c = l + e;
-    let u = new Timer();
-    let p = !1;
-    let m = e => {};
-    let h = new Promise(e => {
-      m = e;
-    });
-    let g = () => {
-      n.removeItem(d);
-      n.removeItem(c);
-      window.removeEventListener("storage", f);
-    };
-    let f = e => {
-      e.storageArea === n && null !== e.newValue && e.key === c && (u.stop(), g(), p ? logError("storage", "ping: responded after timeout interval") : m(!0));
-    };
-    n.removeItem(d);
-    n.removeItem(c);
-    window.addEventListener("storage", f);
-    let _ = Date.now();
-    n.setItem(d, _.toString());
-    u.start();
-    setTimeout(() => {
-      setTimeout(g, 1e4);
-      p = !0;
-      m(!1);
-    }, 200);
-    window.addEventListener("unload", g);
-    return h;
-  }(t, 0, 0);
-}
-export async function $$m2(e, t) {
-  return await $$p3({
-    userID: e,
-    fileKey: t.fileKey,
-    sessionID: 0
-  });
-}
-export async function $$h0(e) {
-  let t = c(e);
-  let i = null;
-  if (yp) i = await ly(t);else {
-    let e = function (e) {
-      let t = localStorageRef;
-      if (!t) throw Error("Local storage not available");
-      let i = o + e;
-      let n = l + e;
-      t.removeItem(n);
-      let a = e => {
-        if (e.storageArea === t && null !== e.newValue && e.key === i) {
-          let e = Date.now();
-          t.setItem(n, e.toString());
-          setTimeout(() => {
-            t.removeItem(i);
-            t.removeItem(n);
-          }, 1e3);
-        }
-      };
-      window.addEventListener("storage", a, !1);
-      return {
-        unregister: () => window.removeEventListener("storage", a, !1)
-      };
-    }(t);
-    i = {
-      name: t,
-      release: () => (e.unregister(), Promise.resolve())
-    };
+
+/**
+ * Performs a ping-pong mechanism using localStorage to check if a lock is available.
+ * Original: inner function in $$p3
+ * @param key - The autosave key
+ * @returns Promise resolving to true if lock is available, false otherwise
+ */
+async function checkLockViaLocalStorage(key: string): Promise<boolean> {
+  const storage = localStorageRef
+  if (!storage) {
+    throw new Error('Local storage not available')
   }
-  i || trackEventAnalytics("autosave_acquiring_lock_failed", {
-    lockName: t,
-    sessionID: e.sessionID,
-    webLocksAvailable: yp
-  });
-  return i;
+
+  const requestKey = PING_REQUEST_PREFIX + key
+  const responseKey = PING_RESPONSE_PREFIX + key
+  const timer = new Timer()
+  let timedOut = false
+  let resolvePromise: (value: boolean) => void
+  const promise = new Promise<boolean>((resolve) => {
+    resolvePromise = resolve
+  })
+
+  const cleanup = () => {
+    storage.removeItem(requestKey)
+    storage.removeItem(responseKey)
+    window.removeEventListener('storage', handleStorage)
+  }
+
+  const handleStorage = (event: StorageEvent) => {
+    if (
+      event.storageArea === storage
+      && event.newValue !== null
+      && event.key === responseKey
+    ) {
+      timer.stop()
+      cleanup()
+      if (timedOut) {
+        logError('storage', 'ping: responded after timeout interval')
+      }
+      else {
+        resolvePromise(true)
+      }
+    }
+  }
+
+  storage.removeItem(requestKey)
+  storage.removeItem(responseKey)
+  window.addEventListener('storage', handleStorage)
+
+  const timestamp = Date.now()
+  storage.setItem(requestKey, timestamp.toString())
+  timer.start()
+
+  setTimeout(() => {
+    setTimeout(cleanup, 10000) // Additional cleanup delay
+    timedOut = true
+    resolvePromise(false)
+  }, 200)
+
+  window.addEventListener('unload', cleanup)
+  return promise
 }
-export const A2 = $$h0;
-export const LX = $$u1;
-export const M = $$m2;
-export const mc = $$p3;
+
+/**
+ * Checks if a lock is available for the given autosave parameters.
+ * Uses Web Locks API if supported, otherwise falls back to localStorage ping.
+ * Original: $$p3
+ * @param params - Object containing userID, fileKey, and sessionID
+ * @returns Promise resolving to true if lock is available
+ */
+export async function isLockAvailableForAutosave(params: {
+  userID: string
+  fileKey: string
+  sessionID: number
+}): Promise<boolean> {
+  const key = generateAutosaveKey(params)
+  if (isLocksSupported) {
+    return !(await isLockAvailable(key))
+  }
+  else {
+    return await checkLockViaLocalStorage(key)
+  }
+}
+
+/**
+ * Checks if an autosave lock is available, using sessionID 0.
+ * Original: $$m2
+ * @param userID - The user ID
+ * @param file - Object containing fileKey
+ * @returns Promise resolving to true if lock is available
+ */
+export async function isAutosaveLockAvailable(
+  userID: string,
+  file: { fileKey: string },
+): Promise<boolean> {
+  return await isLockAvailableForAutosave({
+    userID,
+    fileKey: file.fileKey,
+    sessionID: 0,
+  })
+}
+
+/**
+ * Registers a ping listener for localStorage-based locking.
+ * Original: inner function in $$h0
+ * @param key - The autosave key
+ * @returns Object with unregister method
+ */
+function registerPingListener(key: string) {
+  const storage = localStorageRef
+  if (!storage) {
+    throw new Error('Local storage not available')
+  }
+
+  const requestKey = PING_REQUEST_PREFIX + key
+  const responseKey = PING_RESPONSE_PREFIX + key
+  storage.removeItem(responseKey)
+
+  const handleStorage = (event: StorageEvent) => {
+    if (
+      event.storageArea === storage
+      && event.newValue !== null
+      && event.key === requestKey
+    ) {
+      const timestamp = Date.now()
+      storage.setItem(responseKey, timestamp.toString())
+      setTimeout(() => {
+        storage.removeItem(requestKey)
+        storage.removeItem(responseKey)
+      }, 1000)
+    }
+  }
+
+  window.addEventListener('storage', handleStorage, false)
+  return {
+    unregister: () => window.removeEventListener('storage', handleStorage, false),
+  }
+}
+
+/**
+ * Acquires a lock for autosave, using Web Locks API if supported, otherwise localStorage.
+ * Original: $$h0
+ * @param params - Object containing userID, fileKey, and sessionID
+ * @returns Promise resolving to the lock object or null if failed
+ */
+export async function acquireAutosaveLock(params: {
+  userID: string
+  fileKey: string
+  sessionID: number
+}): Promise<{ name: string, release: () => Promise<void> } | null> {
+  const key = generateAutosaveKey(params)
+  let lock = null
+
+  if (isLocksSupported) {
+    lock = await requestLock(key)
+  }
+  else {
+    const listener = registerPingListener(key)
+    lock = {
+      name: key,
+      release: () => {
+        listener.unregister()
+        return Promise.resolve()
+      },
+    }
+  }
+
+  if (!lock) {
+    trackEventAnalytics('autosave_acquiring_lock_failed', {
+      lockName: key,
+      sessionID: params.sessionID,
+      webLocksAvailable: isLocksSupported,
+    })
+  }
+
+  return lock
+}
+
+// Refactored exports with meaningful names
+export const A2 = acquireAutosaveLock
+export const LX = isLockNameMatching
+export const M = isAutosaveLockAvailable
+export const mc = isLockAvailableForAutosave

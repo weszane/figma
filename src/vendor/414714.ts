@@ -349,7 +349,7 @@ var M = function() {
                     var i = e.message;
                     var s = n.options.getInitCompletionCallback();
                     s && s(now() - n.startTime, r, i);
-                  }).$$finally(function() {
+                  }).finally(function() {
                     return h(n, void 0, void 0, function() {
                       return d(this, function(r) {
                         this.pendingInitPromise = null;
@@ -597,7 +597,7 @@ var M = function() {
                     return [2, Promise.resolve(!0)];
                   }
                   a = this.identity.getUser();
-                  this.pendingInitPromise = this.fetchAndSaveValues(a).$$finally(function() {
+                  this.pendingInitPromise = this.fetchAndSaveValues(a).finally(function() {
                     p.pendingInitPromise = null;
                   });
                   return [2, this.pendingInitPromise.then(function() {

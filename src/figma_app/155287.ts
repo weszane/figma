@@ -10,7 +10,7 @@ import { AcceptedPendingUsersSchema, PublisherInfoSchema } from '../figma_app/10
 import { createContentFilterSchema } from '../figma_app/70618';
 import { DropdownEnableState } from '../figma_app/188152';
 import { FPinStatusType, FPublicationStatusType, FPublisherType } from '../figma_app/191312';
-import { fE, Fy } from '../figma_app/809727';
+import { communityFilesRecordSchema, videoFilesRecordSchema } from '../figma_app/809727';
 import { MM } from '../figma_app/979658';
 
 /**
@@ -315,8 +315,8 @@ export const PluginDetailsSchema = PluginVersionsRecordSchema.merge(zod.object({
   third_party_m10n_status: zod.nativeEnum(ProductStatus).nullish(),
   creator_policy: zod.string().optional(),
   plugin_publishers: AcceptedPendingUsersSchema.optional(),
-  carousel_media_urls: zod.optional(fE),
-  carousel_videos: zod.optional(Fy)
+  carousel_media_urls: zod.optional(communityFilesRecordSchema),
+  carousel_videos: zod.optional(videoFilesRecordSchema)
 })).and(PublisherInfoSchema).and(BadgeSchema).and(monetizedResourceMetadataSchema).and(CommunityRatingStatsContainerSchema);
 export const WidgetDetailsSchema = PluginDetailsSchema.and(zod.object({
   is_widget: zod.literal(true)

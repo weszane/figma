@@ -1,4 +1,5 @@
 import type { Dispatch, Store } from 'redux'
+import type { AppState as App } from './app.js'
 import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
 
 declare global {
@@ -9,6 +10,7 @@ declare global {
   let Fig: FigType
   type AppDispatch = Dispatch<any>
   let mpGlobal: any
+  type AppState = App
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs

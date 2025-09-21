@@ -133,7 +133,7 @@ import { Point } from '../905/736624';
 import { Qx, xA } from '../905/742325';
 import { Ao } from '../905/748636';
 import { G as _$$G } from '../905/750789';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { c as _$$c2 } from '../905/752260';
 import { pluginState, generateRandomID, handlePluginError } from '../905/753206';
 import { x as _$$x3 } from '../905/773818';
@@ -171,7 +171,7 @@ import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { ou as _$$ou } from '../905/942991';
 import { BY, Jc, Sn } from '../905/946805';
 import { b as _$$b3 } from '../905/946806';
@@ -381,7 +381,7 @@ import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { Jj, vj } from '../figma_app/883990';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
 import { PN } from '../figma_app/897289';
-import { f6 as _$$f2 } from '../figma_app/915202';
+import { FileBrowserLocation } from '../figma_app/915202';
 import { D as _$$D2, p as _$$p4 } from '../figma_app/930185';
 import { bL, C5, GX, jb, JT, Nf, Oy, vA, wj, ZM } from '../figma_app/930214';
 import { formatNumber, truncate } from '../figma_app/930338';
@@ -2650,9 +2650,9 @@ function am({
       mlEvent: !0
     });
   }, [r, i]);
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'FirstDraftMakeChanges',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
       area: _$$e.AI_GENERATION
@@ -5369,9 +5369,9 @@ function sT() {
       mlEvent: !0
     });
   }, [i, e]);
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'FirstDraft',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
       area: _$$e.AI_GENERATION
@@ -6680,9 +6680,9 @@ let oi = [{
           aiTrackingContext
         } = _$$wj(_$$JT.FIRST_DRAFT_FINE_TUNE);
         let r = aiTrackingContext.clientLifecycleId;
-        return jsx(_$$tH, {
+        return jsx(ErrorBoundaryCrash, {
           boundaryKey: 'FirstDraftFineTune',
-          fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+          fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             clientLifecycleId: r,
             area: _$$e.AI_GENERATION
@@ -6742,9 +6742,9 @@ let oi = [{
         let {
           pop
         } = cq();
-        return jsx(_$$tH, {
+        return jsx(ErrorBoundaryCrash, {
           boundaryKey: 'FirstDraftMakeKitView',
-          fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+          fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             area: _$$e.AI_GENERATION
           },
@@ -7003,9 +7003,9 @@ let oi = [{
     module: {
       module: jsx(() => {
         let e = lazy(() => _require3);
-        return jsx(_$$tH, {
+        return jsx(ErrorBoundaryCrash, {
           boundaryKey: 'MakeEdits',
-          fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+          fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             area: _$$e.AI_GENERATION
           },
@@ -8106,14 +8106,14 @@ function oF({
         if (e.iconType && typeof e.iconType != 'string') return e.iconType;
       }(e),
       badge: e.menuActionType === 'run-local-plugin' || e.menuActionType === 'insert-local-widget' ? jsx('div', {
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           maxWidth: '110px'
         }).$,
         children: jsx(oA, {
           text: getI18nString('fullscreen_actions.development')
         })
       }) : G && (B.some(t => t.plugin_id === e.pluginId) || U.some(t => t.plugin_id === e.pluginId)) ? jsx('div', {
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           maxWidth: '110px'
         }).$,
         children: jsx(oA, {
@@ -8285,7 +8285,7 @@ function oB({
           _$$rN(n, VY({
             openFile: t,
             fileVersion: i
-          }), _$$f2.SEND_TO_BUZZ_FROM_DESIGN_QA_V2_MENU);
+          }), FileBrowserLocation.SEND_TO_BUZZ_FROM_DESIGN_QA_V2_MENU);
         }
       }), [i, t]);
       return useMemo(() => {
@@ -9152,7 +9152,7 @@ function lT({
       augmentedExtension: e
     }), jsx('div', {
       className: _$$s3.px8.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: l ? '205px' : '300px'
       }).$,
       children: jsx(_$$G, {
@@ -9162,7 +9162,7 @@ function lT({
       augmentedExtension: e,
       submenuRef: r
     }), l && jsx('div', {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: '110px'
       }).$,
       children: jsx(oA, {
@@ -9177,7 +9177,7 @@ function lT({
       className: _$$s3.flex.itemsCenter.$,
       onClick: a.onClick,
       onFocus: a.onFocus,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         background: 'transparent',
         flexGrow: 1
       }).$,
@@ -9679,7 +9679,7 @@ function l8({
       }), jsx(l9, {}), jsx(SvgComponent, {
         svg: _$$A16,
         className: _$$s3.colorIconSecondary.$,
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           margin: '3px'
         }).$
       }), jsx('div', {
@@ -9692,7 +9692,7 @@ function l8({
 function l9() {
   return jsx('div', {
     'className': _$$s3.w1.hFull.mx6.$,
-    'style': _$$sx.add({
+    'style': styleBuilderInstance.add({
       backgroundColor: 'var(--color-border-fs)'
     }).$,
     'data-testid': 'divider'
@@ -9756,14 +9756,14 @@ function dt({
     className: _$$s3.flex.itemsCenter.ml8.$,
     children: [jsx('div', {
       className: _$$s3.pr8.colorText.textBodyLarge.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: i ? '205px' : '300px'
       }).$,
       children: jsx(_$$G, {
         text: extension.name
       })
     }), i && jsx('div', {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: '110px'
       }).$,
       children: jsx(oA, {
@@ -10909,7 +10909,7 @@ export function $$dG0(e) {
   let r = PE();
   return (useEffect(() => {
     Fullscreen?.handleHasDesignAIPermissionChange();
-  }, [r]), i) ? jsx(_$$tH, {
+  }, [r]), i) ? jsx(ErrorBoundaryCrash, {
     boundaryKey: 'QuickActionsV2',
     onError: () => {
       t(VisualBellActions.enqueue({
@@ -10918,7 +10918,7 @@ export function $$dG0(e) {
       }));
     },
     team: _$$e.AI_FOR_PRODUCTION,
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(TabLoop, {
       children: jsx(QT, {
         value: Ct(e),

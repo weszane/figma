@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { Q } from "../1250/227834";
 import { l as _$$l } from "../1250/135829";
 import { f as _$$f } from "../figma_app/859253";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -36,7 +36,7 @@ export function $$y0({
   useEventSubscription(f, useCallback(() => manager.setOpen(!0), [manager]));
   useEventSubscription(h, useCallback(() => manager.setOpen(!1), [manager]));
   let x = Q({
-    newFileFrom: f6.FILE_BROWSER_SIDEBAR_DRAFTS,
+    newFileFrom: FileBrowserLocation.FILE_BROWSER_SIDEBAR_DRAFTS,
     folderId: e,
     contextClicked: "file_browser_sidebar_drafts_new_file_created"
   });

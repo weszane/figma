@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { getUserId } from "../905/372672";
 import { OrgUserIsMfaRestrictedView, FileByKey } from "../figma_app/43951";
-import { CT } from "../figma_app/736948";
+import { UserTypeEnum } from "../figma_app/736948";
 import { Ro } from "../figma_app/805373";
 import { J } from "../905/71895";
 import { t as _$$t2 } from "../905/751495";
@@ -31,7 +31,7 @@ export function $$I0({
   let w = "loaded" === S.status;
   let C = w ? S.data.currentUser.baseOrgUser?.isMfaRestricted : void 0;
   let T = !0 === getResourceDataOrFallback(C);
-  let k = w && (S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.GUESTS || S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.ALL_USERS);
+  let k = w && (S.data.currentUser.baseOrgUser?.org?.mfaRequired === UserTypeEnum.GUESTS || S.data.currentUser.baseOrgUser?.org?.mfaRequired === UserTypeEnum.ALL_USERS);
   let R = useSubscription(FileByKey, {
     fileKey: I ?? ""
   }, {

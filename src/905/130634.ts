@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { oB } from "../figma_app/530167";
+import { deleteProfileThunk } from "../figma_app/530167";
 import { StatusType } from "../figma_app/175992";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -10,7 +10,7 @@ class u extends Component {
   constructor() {
     super(...arguments);
     this.deleteProfile = () => {
-      this.props.dispatch(oB({
+      this.props.dispatch(deleteProfileThunk({
         profileId: this.props.profileId,
         handle: this.props.handle
       }));

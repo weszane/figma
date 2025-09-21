@@ -7,7 +7,7 @@ import { Ay } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
@@ -199,7 +199,7 @@ export function $$P1() {
   if (e?.type !== B || !t) return null;
   let r = t.library_key;
   return r ? jsx(L, {
-    style: sx.add(e?.data?.position).add(sx.fixed).$,
+    style: styleBuilderInstance.add(e?.data?.position).add(styleBuilderInstance.fixed).$,
     children: jsx(A, {
       onClick: () => {
         a(hideDropdownAction());

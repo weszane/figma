@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { MZ } from "../figma_app/925970";
+import { generateSessionId } from "../figma_app/925970";
 import { FUserRoleType } from "../figma_app/191312";
 var s = (e => (e.org_member = "org_member", e.org_guest = "org_guest", e.team_user = "team_user", e.personal_user = "personal_user", e))(s || {});
 export function $$o3(e, t, i) {
@@ -45,7 +45,7 @@ export class $$p5 {
   }
   startSession() {
     this.state = {
-      sessionId: MZ(),
+      sessionId: generateSessionId(),
       queryCount: 0,
       resultsCount: 0
     };

@@ -9,7 +9,7 @@ import { createContentFilterSchema } from '../figma_app/70618';
 import { DropdownEnableState } from '../figma_app/188152';
 import { FFileType, FPublicationStatusType, FPublisherType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312';
 import * as Ip from '../figma_app/709165';
-import { fE, P1 } from '../figma_app/809727';
+import { communityFilesRecordSchema, resizedThumbnailUrlsSchema } from '../figma_app/809727';
 
 /**
  * FileTypeEnum - Refactored from $$h2
@@ -56,8 +56,8 @@ export const HubFileSchema = z.object({
   realtime_token: z.string().optional(),
   created_at: z.string(),
   thumbnail_url: z.string(),
-  resized_thumbnail_urls: z.optional(P1),
-  carousel_media_urls: z.optional(fE),
+  resized_thumbnail_urls: z.optional(resizedThumbnailUrlsSchema),
+  carousel_media_urls: z.optional(communityFilesRecordSchema),
   cover_image_carousel_media_id: z.string().optional(),
   redirect_canvas_url: z.string(),
   current_hub_file_version_id: z.string(),

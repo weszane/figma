@@ -7,11 +7,11 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { $z } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
 import { RR } from "../figma_app/307841";
@@ -76,7 +76,7 @@ export let $$O0 = registerModal(function ({
     href: "https://www.figma.com/pricing/",
     trusted: !0,
     newTab: !0,
-    style: sx.colorTextBrand.cursorPointer.$,
+    style: styleBuilderInstance.colorTextBrand.cursorPointer.$,
     trackingProperties: {
       ...D,
       trackingContext: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
@@ -85,9 +85,9 @@ export let $$O0 = registerModal(function ({
     children: getI18nString("admin_auto_upgrade_confirmation_modal.body.other_products")
   });
   let Z = So(e, L, $, M);
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "AdminAutoUpgradeConfirmationModal",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },

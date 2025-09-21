@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TrackedButton } from "../figma_app/831799";
 import { A } from "../c5e2cae0/809027";
 import { A as _$$A } from "../c5e2cae0/97605";
@@ -45,7 +45,7 @@ export function $$m0(e) {
           className: "seat_counter--headerSubText--c9SXC seat_counter--headerText--xIHXf",
           children: e.headerSubText
         }), e.clarificationText && jsx("span", {
-          style: sx.colorText.colorBgSecondary.h16.pl4.pr4.mt8.bRadius1.inlineBlock.add({
+          style: styleBuilderInstance.colorText.colorBgSecondary.h16.pl4.pr4.mt8.bRadius1.inlineBlock.add({
             fontSize: "9px"
           }).$,
           children: e.clarificationText

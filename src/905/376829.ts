@@ -11,17 +11,17 @@ import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
 import { t } from "../905/150656";
 import { useLatestRef } from "../figma_app/922077";
-import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, Lk, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, $L } from "../figma_app/162807";
+import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, TeamSortField, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, SearchModelType } from "../figma_app/162807";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { HI, vj, qv, c3, tw, MB } from "../905/977218";
+import { clearWorkspaceFilterThunk, trackLicenseGroupFilterDropdownClickThunk, sortStateThunk, selectPlanFilterThunk, clearPlanFilterThunk, selectWorkspaceFilterThunk } from "../905/977218";
 import { Um } from "../905/848862";
 import { SortOrder } from "../figma_app/756995";
 import { y2 } from "../905/776312";
 import { P_, J as _$$J, l4 } from "../905/124270";
 import { l as _$$l } from "../figma_app/676249";
-import { r4, jN, nX } from "../905/171315";
+import { getSupportedFacetTypes, createResourceFacet, buildQueryObject } from "../905/171315";
 import { L as _$$L } from "../905/713563";
-import { R9, sC, Q8 } from "../905/61477";
+import { selectedItemAtom, searchScopeAtom, searchInputAtom } from "../905/61477";
 import { trackEventAnalytics } from "../905/449184";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -91,7 +91,7 @@ function M({
   onChange: d
 }) {
   let u = useDispatch();
-  let p = useAtomWithSubscription(R9);
+  let p = useAtomWithSubscription(selectedItemAtom);
   let m = useCallback((t, i, n) => {
     t.stopPropagation();
     u(hideDropdownAction());
@@ -420,7 +420,7 @@ function eT(e) {
           ...this.props.sortState,
           [this.props.searchModelType]: {
             sortKey: e,
-            sortDesc: void 0 === t ? e === Lk.TOUCHED_AT || e === Lk.CREATED_AT : t === SortOrder.DESC
+            sortDesc: void 0 === t ? e === TeamSortField.TOUCHED_AT || e === TeamSortField.CREATED_AT : t === SortOrder.DESC
           }
         };
         this.props.onChange(i);
@@ -564,11 +564,11 @@ export function $$eD0(e) {
   let t = useDispatch();
   let i = useSelector(e => e.search.parameters);
   let n = useSelector(e => e.viewBarViewModeOptionByView);
-  let [o, l] = useAtomValueAndSetter(R9);
+  let [o, l] = useAtomValueAndSetter(selectedItemAtom);
   let d = useAtomWithSubscription(P_);
   let p = useAtomWithSubscription(_$$J);
   let h = o ?? PublicModelType.FILES;
-  let g = r4(h);
+  let g = getSupportedFacetTypes(h);
   let f = g.includes(CreatorResourceType.RESOURCE);
   let y = g.includes(CreatorResourceType.CREATOR);
   let v = g.includes(CreatorResourceType.SPACE);
@@ -577,25 +577,25 @@ export function $$eD0(e) {
   let k = E.viewMode;
   let R = !v && (E.shouldShowPlanFilter ?? !1);
   let N = useAtomWithSubscription(hO.isFragmentSearchAtom);
-  let P = useAtomWithSubscription(sC);
+  let P = useAtomWithSubscription(searchScopeAtom);
   let O = _$$L(N ? "fragment_search_modal" : "file_browser", P, !1);
-  let D = useAtomWithSubscription(Q8);
+  let D = useAtomWithSubscription(searchInputAtom);
   let L = Xr(l4(CreatorResourceType.RESOURCE));
   let F = useCallback(e => {
     if (e === h) return;
     let i = convertModelTypeToSearchModelType(e);
-    let n = jN(i);
+    let n = createResourceFacet(i);
     L(n);
     l(e);
-    let r = r4(e).includes(CreatorResourceType.CREATOR);
-    let a = r4(e).includes(CreatorResourceType.SPACE);
-    (n?.value === $L.PLUGINS || n?.value === $L.WIDGETS) && t(HI({}));
-    let s = nX(n, r ? p : null, a ? d : null, e);
+    let r = getSupportedFacetTypes(e).includes(CreatorResourceType.CREATOR);
+    let a = getSupportedFacetTypes(e).includes(CreatorResourceType.SPACE);
+    (n?.value === SearchModelType.PLUGINS || n?.value === SearchModelType.WIDGETS) && t(clearWorkspaceFilterThunk({}));
+    let s = buildQueryObject(n, r ? p : null, a ? d : null, e);
     O(D, e, s, !0, !0, !1);
     window.scrollTo(0, 0);
   }, [h, t, p, d, O, D, L, l]);
   let M = e => {
-    t(vj({
+    t(trackLicenseGroupFilterDropdownClickThunk({
       clickType: e
     }));
   };
@@ -604,7 +604,7 @@ export function $$eD0(e) {
     searchModelType: h,
     sortState: i.sortState,
     onChange: e => {
-      t(qv({
+      t(sortStateThunk({
         sortState: e
       }));
     },
@@ -622,13 +622,13 @@ export function $$eD0(e) {
       sortControlsDisabled: e.sortControlsDisabled,
       planFilter: i.planFilter,
       onChangePlanFilter: e => {
-        t(c3({
+        t(selectPlanFilterThunk({
           planFilter: e
         }));
       },
       onClickDropdown: M,
       onResetPlanFilter: () => {
-        t(tw({}));
+        t(clearPlanFilterThunk({}));
       }
     }, "search-view-bar-search-plan-filter-dropdown")
   });
@@ -651,13 +651,13 @@ export function $$eD0(e) {
       sortControlsDisabled: e.sortControlsDisabled,
       workspaceFilter: i.workspaceFilter,
       onChangeWorkspaceFilter: e => {
-        t(MB({
+        t(selectWorkspaceFilterThunk({
           workspaceFilter: e
         }));
       },
       onClickDropdown: M,
       onResetWorkspaceFilter: () => {
-        t(HI({}));
+        t(clearWorkspaceFilterThunk({}));
       },
       planId: H
     })

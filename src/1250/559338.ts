@@ -17,7 +17,7 @@ import { TY, Ht } from "../figma_app/701001";
 import { Wy, xk, P3, Zz, Tm, Vu, eE, pl, im } from "../figma_app/952446";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { FEditorType } from "../figma_app/53721";
-import { $w } from "../figma_app/453508";
+import { setupMemoryWarningAnalytics } from "../figma_app/453508";
 import { hideModal, showModalHandler } from "../905/156213";
 import { gG } from "../905/684180";
 import { A as _$$A } from "../6828/7452";
@@ -190,7 +190,7 @@ export function $$P1(e) {
         topLevelMode: s,
         isReadOnly: o
       };
-      $w(t, {
+      setupMemoryWarningAnalytics(t, {
         warningOnPct: xk,
         errorOnPct: pl,
         ...r

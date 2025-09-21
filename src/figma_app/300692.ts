@@ -43,7 +43,7 @@ import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
 import { centsToDollars, isGreater, isNotInteger, isPriceOutOfRange, isRatioHigh, MIN_PRICE } from '../figma_app/808294';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
-import { gU, YH } from '../figma_app/930338';
+import { isValidUrl, stringToUint8Array } from '../figma_app/930338';
 import { getEditorTypeFromView } from '../figma_app/976749';
 
 /**
@@ -1183,7 +1183,7 @@ export function hasRoleOrOrgChanged(resource: any, roleObj: any): boolean {
  */
 export function validatePluginCodeSize(code: string): number {
   if (!code) throw new Error('Code string cannot be empty');
-  const length = YH(code).length;
+  const length = stringToUint8Array(code).length;
   if (length > MAX_RESOURCE_SIZE) throw new Error(`plugin code exceeds max size of ${Math.floor(MAX_RESOURCE_SIZE / 1e6)}MB`);
   return length;
 }
@@ -1511,7 +1511,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
   const supportContact = trimOrEmpty(data.supportContact);
   if (supportContact.length === 0) {
     errors.supportContact = getI18nString('community.publishing.support_contact_must_not_be_empty');
-  } else if (isValidEmail(supportContact) || gU(supportContact)) {
+  } else if (isValidEmail(supportContact) || isValidUrl(supportContact)) {
     // valid
   } else {
     errors.supportContact = getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url');

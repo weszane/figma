@@ -39,7 +39,7 @@ import { FFileType } from "../figma_app/191312";
 import { getPermissionsState } from "../figma_app/642025";
 import { p9 } from "../figma_app/803787";
 import { getCurrentTeamId } from "../figma_app/598018";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { Yh } from "../figma_app/357047";
 import { C as _$$C } from "../figma_app/444297";
 import { getSelectedEditorType, getCurrentFileType } from "../figma_app/976749";
@@ -50,7 +50,7 @@ export function $$J1({
 }) {
   let t = $n();
   let r = Q({
-    newFileFrom: f6.EDITOR_MENU,
+    newFileFrom: FileBrowserLocation.EDITOR_MENU,
     branchingActionsStatus: t,
     shouldShowSlideConversionEntrypoint: !1
   });
@@ -96,7 +96,7 @@ export function $$Z2() {
   }();
   let t = _$$C();
   let r = Q({
-    newFileFrom: f6.EDITOR_QUICK_ACTIONS,
+    newFileFrom: FileBrowserLocation.EDITOR_QUICK_ACTIONS,
     branchingActionsStatus: e,
     shouldShowSlideConversionEntrypoint: t
   });
@@ -143,7 +143,7 @@ function Q({
     let w = Zr("send-to-make-from-design");
     let R = useSendToMakeExperiment();
     let D = void 0 !== A.find(e => e.editorType === FFileType.FIGMAKE);
-    let k = e === f6.EDITOR_QUICK_ACTIONS && D && w && R();
+    let k = e === FileBrowserLocation.EDITOR_QUICK_ACTIONS && D && w && R();
     let F = useMemo(() => {
       let e = [...A];
       k && (e = e.filter(e => e.editorType !== FFileType.FIGMAKE));
@@ -151,14 +151,14 @@ function Q({
     }, [t, A, k]);
     let U = useCallback(t => {
       trackFullScreenAnalytics(t, _$$r({
-        source: e === f6.EDITOR_MENU ? "menu" : "quick-actions"
+        source: e === FileBrowserLocation.EDITOR_MENU ? "menu" : "quick-actions"
       }));
     }, [e]);
     let G = useCallback(({
       editorType: t,
       trackingEventName: n
     }) => () => {
-      let i = _$$m ? ai.SAME_TAB : ai.NEW_TAB;
+      let i = _$$m ? TabOpenBehavior.SAME_TAB : TabOpenBehavior.NEW_TAB;
       let a = zE({
         isDraftsFolder: !0,
         state: I,
@@ -176,7 +176,7 @@ function Q({
         } : void 0
       });
       U(n);
-      return i === ai.SAME_TAB ? fullscreenValue.dispatchIfSaved(a) : r(a);
+      return i === TabOpenBehavior.SAME_TAB ? fullscreenValue.dispatchIfSaved(a) : r(a);
     }, [r, I, g, f, e, U]);
     let V = useMemo(() => {
       if (t !== FFileType.DESIGN) return null;

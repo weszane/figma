@@ -19,7 +19,7 @@ import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
 import { b2 } from "../figma_app/622574";
 import { setupFlushTimer, setupConnectionStateHandler } from "../figma_app/582924";
 import { isLoading } from "../905/18797";
-import { av } from "../figma_app/915202";
+import { TabState } from "../figma_app/915202";
 import { l as _$$l } from "../905/26554";
 import { $5 } from "../figma_app/869006";
 import { jsxs, jsx } from "react/jsx-runtime";
@@ -46,7 +46,7 @@ import { z4 } from "../905/37051";
 import { handleSyncEvent } from "../905/412815";
 import { DH } from "../905/327855";
 import { fullscreenPerfManager } from "../905/125218";
-import { Js, QY, pi } from "../figma_app/139113";
+import { getAutosaveState, FileProcessingStatus, finishAutosaveWait } from "../figma_app/139113";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { c3, Lt } from "../figma_app/440875";
 import { usedComponentsPromise, findLibraryNameForAsset } from "../figma_app/646357";
@@ -261,7 +261,7 @@ export class $$eu0 {
     }));
   }
   updateSaveStatus(e, t, i, r) {
-    let a = new av(r, {
+    let a = new TabState(r, {
       hasAutosaveChanges: e,
       hasMultiplayerChanges: t
     }, i);
@@ -270,9 +270,9 @@ export class $$eu0 {
     }));
     let s = this.store.getState().saveStatus;
     s && a.equals(s) || (this.dispatch(_$$E(a)), handleSyncEvent(a));
-    let o = Js();
-    if (o && o.status === QY.WAITING && !e && !t && i === SyncError.NONE) {
-      pi(!1);
+    let o = getAutosaveState();
+    if (o && o.status === FileProcessingStatus.WAITING && !e && !t && i === SyncError.NONE) {
+      finishAutosaveWait(!1);
       setTimeout(() => this.dispatch(eH()));
       return;
     }

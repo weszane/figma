@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { l as _$$l } from "../905/745972";
 import { KeyCodes } from "../905/63728";
 import { APILoadingStatus } from "../905/520829";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Oz, Lp, sg, wc, tH } from "../905/251509";
 import { Cc, lX, lu } from "../905/545842";
 import { Ok, ux, uW, NY } from "../figma_app/851625";
@@ -252,7 +252,7 @@ function ex({
   let k = b?.object.id === g.id;
   return jsx(eh, {
     style: {
-      ...sx.fixed.$,
+      ...styleBuilderInstance.fixed.$,
       left: o,
       top: c
     },
@@ -1133,7 +1133,7 @@ function e9({
     setAppSelection: r,
     children: jsxs("div", {
       className: zr,
-      style: sx.$$if(v || N, {
+      style: styleBuilderInstance.$$if(v || N, {
         cursor: "ew-resize"
       }).$,
       onKeyDown: D,

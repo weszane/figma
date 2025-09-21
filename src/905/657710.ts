@@ -1,39 +1,39 @@
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { Lk, ProjectSortField, OrgSortField, UserSortField } from "../figma_app/162807";
+import { TeamSortField, ProjectSortField, OrgSortField, UserSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 import { s as _$$s } from "../905/77553";
 let $$l0 = {
   viewId: "search-files",
-  sortKeys: [Lk.RELEVANCY, Lk.NAME, Lk.TOUCHED_AT, Lk.CREATED_AT],
-  listSortKeys: [Lk.NAME, Lk.TOUCHED_AT, Lk.CREATED_AT, Lk.OWNER],
-  tabletListSortKeys: [Lk.NAME, Lk.TOUCHED_AT],
-  mobileListSortKeys: [Lk.NAME],
+  sortKeys: [TeamSortField.RELEVANCY, TeamSortField.NAME, TeamSortField.TOUCHED_AT, TeamSortField.CREATED_AT],
+  listSortKeys: [TeamSortField.NAME, TeamSortField.TOUCHED_AT, TeamSortField.CREATED_AT, TeamSortField.OWNER],
+  tabletListSortKeys: [TeamSortField.NAME, TeamSortField.TOUCHED_AT],
+  mobileListSortKeys: [TeamSortField.NAME],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [Lk.NAME]: renderI18nText("search.sort_option.name"),
-      [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
-      [Lk.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
-      [Lk.OWNER]: renderI18nText("search.sort_option.owner")
+      [TeamSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [TeamSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [TeamSortField.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
+      [TeamSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [TeamSortField.OWNER]: renderI18nText("search.sort_option.owner")
     },
     [ViewMode.LIST]: {
-      [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [Lk.NAME]: renderI18nText("search.sort_option.name"),
-      [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
-      [Lk.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
-      [Lk.OWNER]: renderI18nText("search.sort_option.owner")
+      [TeamSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [TeamSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [TeamSortField.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
+      [TeamSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [TeamSortField.OWNER]: renderI18nText("search.sort_option.owner")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: Lk.RELEVANCY,
+      sortKey: TeamSortField.RELEVANCY,
       sortDesc: !1
     }
   },
   listHeaderClassName: "search_results--row--yQX3r search_results--rowTemplate--z9hsq search_list_row--row--xo6wT text--fontPos13--xW8hS text--_fontBase--QdLsd",
-  includeSortDirection: e => -1 === [Lk.RELEVANCY].indexOf(e),
+  includeSortDirection: e => -1 === [TeamSortField.RELEVANCY].indexOf(e),
   settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$d1 = {

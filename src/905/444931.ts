@@ -1,5 +1,5 @@
 import { isFigmaLibrariesEnabled } from "../figma_app/657017";
-import { HE } from "../905/967587";
+import { getWorkspaceName } from "../905/967587";
 import { isExternalRestricted } from "../figma_app/12796";
 export function $$s0(e, t, i, s, o) {
   let {
@@ -16,7 +16,7 @@ export function $$s0(e, t, i, s, o) {
     ...e,
     [t.id]: t
   }), {}) : i.teams;
-  let h = HE(i, e, p, m);
+  let h = getWorkspaceName(i, e, p, m);
   let g = isExternalRestricted(u, orgId);
   let f = !!o && !isFigmaLibrariesEnabled(orgId ? p[orgId] : null, teamId ? m[teamId] : null, null);
   if (!orgId) {

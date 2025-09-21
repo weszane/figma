@@ -9,7 +9,7 @@ import { selectedViewAtom, modalTypeAtom, notificationTypeAtom } from "../figma_
 import { NT } from "../figma_app/579169";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { trackEventAnalytics } from "../905/449184";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { m as _$$m } from "../905/92222";
 import { E1 } from "../905/696065";
 import { isSyntheticTesterEmail } from "../figma_app/416935";
@@ -47,7 +47,7 @@ let _ = new _$$m("PreventModalCollisions", "A rule that prevents overlays from b
 }), !1)));
 let A = new _$$m("PreventNotificationCollisions", "A rule that prevents overlays from being shown while a notification is displayed", (e, t) => {
   if (null === e.uiState.currentNotificationType) return !0;
-  let i = NotificationType[e.uiState.currentNotificationType];
+  let i = NotificationCategory[e.uiState.currentNotificationType];
   trackEventAnalytics("curator_collision", {
     blocked_overlay_id: _$$y(t.id),
     blocking_notif_type: i

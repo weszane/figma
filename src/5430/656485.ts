@@ -10,7 +10,7 @@ import { QP, op } from "../figma_app/487970";
 import { X as _$$X } from "../figma_app/514836";
 import { W as _$$W } from "../905/841666";
 import { getCommunityResourcePayment } from "../figma_app/4253";
-import { Jm, BY } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { buildCommunityPath, buildCarouselMedia, getCurrentVersion, buildCommunityPathById, TransparentGifDataUri, buildProfileRouteState } from "../figma_app/471982";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { isSubscriptionActive } from "../figma_app/808294";
@@ -32,7 +32,7 @@ import { gz, kJ, GJ } from "../5430/455879";
 import { cz, i8 } from "../905/14017";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { P as _$$P, Mf } from "../5430/367577";
 import { A as _$$A } from "../figma_app/882803";
 import { d as _$$d } from "../5430/772148";
@@ -73,7 +73,7 @@ function G({
   let a = useMemo(() => e.map(e => _$$P(e)[0]), [e]);
   return jsx("div", {
     className: V,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: r
     }).$,
     children: a.map((e, r) => jsx("img", {
@@ -88,10 +88,10 @@ function $({
   pluginVideo: t,
   aspectRatio: r
 }) {
-  let i = Jm();
+  let i = getSearchSessionIdFromSelector();
   return jsx("div", {
     className: "plugin_dropdown_preview--pluginVideo--IlluJ",
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: r
     }).$,
     children: jsx(_$$A, {
@@ -117,7 +117,7 @@ function z({
 }) {
   return jsx("div", {
     className: V,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: r
     }).$,
     children: jsx("img", {
@@ -298,10 +298,10 @@ export function $$ea0({
   let P = AG();
   let O = isResourceHubProfilesEnabled();
   let B = useDispatch();
-  let D = Jm();
+  let D = getSearchSessionIdFromSelector();
   let F = useResourceRouteParams();
   let U = useResourceFuid() ?? void 0;
-  let V = BY();
+  let V = getCurrentQueryId();
   let W = getCurrentVersion(e);
   let G = hasMonetizedResourceMetadata(e);
   let $ = hasFreemiumCode(e);

@@ -14,7 +14,7 @@ import { selectViewAction } from "../905/929976";
 import { Tn } from "../figma_app/933328";
 import { NJ } from "../figma_app/518077";
 import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
-import { U5 } from "../figma_app/336853";
+import { isBigmaEnabledAlias2 } from "../figma_app/336853";
 import { DefaultFilters, DefaultSortConfig } from "../figma_app/967319";
 import { EntityType } from "../figma_app/707808";
 import { SectionType } from "../figma_app/858344";
@@ -193,7 +193,7 @@ function G({
       });
       break;
     case SectionType.SETTINGS:
-      if (!U5(a)) break;
+      if (!isBigmaEnabledAlias2(a)) break;
       D = jsx($, {
         workspaceId: e
       });

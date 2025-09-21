@@ -5,7 +5,7 @@ import o from "classnames";
 import { h1 } from "../905/986103";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { H8 } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { wo } from "../figma_app/753501";
@@ -46,7 +46,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
       className: _$$s.flex.$,
       children: [jsx("div", {
         className: _$$s.relative.flex.itemsCenter.justifyCenter.$$if(n, _$$s.mr6, _$$s.mr4).flexShrink0.$,
-        style: sx.$$if(i, {
+        style: styleBuilderInstance.$$if(i, {
           top: "1px",
           width: "14px",
           height: "14px"
@@ -102,7 +102,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
   }) {
     return jsx("div", {
       className: l()(D, _$$s.colorBgSecondary.$),
-      style: sx.add({
+      style: styleBuilderInstance.add({
         height: "11px",
         borderRadius: "4px",
         width: t ? y[e % A.length] : A[e % A.length]
@@ -114,7 +114,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
   }) {
     return jsx("div", {
       className: _$$s.flex.flexColumn.colorTextSecondary.maxWFull.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         gap: "3px"
       }).$,
       role: "button",

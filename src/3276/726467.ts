@@ -9,7 +9,7 @@ import { d9, $5 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { getUserCreatedAt } from "../905/372672";
-import { M8 } from "../figma_app/915202";
+import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
 import { h as _$$h2 } from "../905/284399";
 import { q3 } from "../figma_app/450829";
@@ -109,7 +109,7 @@ export function $$M0() {
     j();
   }, [y, j]);
   _$$h(w);
-  E(y.uniqueId, M8, w);
+  E(y.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, w);
   return jsxs(Fragment, {
     children: [jsx(_$$h2, {
       element: ({

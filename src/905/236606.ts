@@ -6,7 +6,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
 import d from "classnames";
 import { jB, My } from "../vendor/46587";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/963262";
 import { Fj } from "../figma_app/793429";
@@ -131,9 +131,9 @@ let L = registerModal(function (e) {
     entrypoint: e.entryPoint,
     variableTypeForTracking: l
   }), [e.entryPoint, e.vars.ids.length, l]);
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "suggestedVars_modal",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
@@ -175,9 +175,9 @@ let B = registerModal(function (e) {
   let o = useCallback(() => {
     i(hideModalHandler());
   }, [i]);
-  return "loading" === t.status ? null : jsx(tH, {
+  return "loading" === t.status ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: "varDetails_modal",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
@@ -360,7 +360,7 @@ function ee({
   });
   let _ = isVsCodeEnvironment() ? t === m.variableIdForDetailsPanel : f?.type === B.type && f.data?.variableId === t && f.data?.rowRef === h;
   let A = i?.subscriptionStatus === "LOCAL" && i.isSoftDeleted;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "varDetails_codeEntry",
     fallback: jsx(Fragment, {
       children: e
@@ -442,7 +442,7 @@ function et({
     children: e
   });
   let C = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : _?.type === StyleDetailModal && _.data?.styleNodeId === S && _.data?.rowRef === m;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "styleDetails_codeEntry",
     fallback: jsx(Fragment, {
       children: e
@@ -492,7 +492,7 @@ function ei({
     children: e
   });
   let _ = h?.type === L.type && h.data?.vars?.rawValue === t.rawValue && h.data?.rowRef === d;
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "suggestedVars_codeEntry",
     fallback: jsx(Fragment, {
       children: e

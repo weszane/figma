@@ -8,7 +8,7 @@ import { CloseButton } from "../905/17223";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
@@ -114,13 +114,13 @@ function x(e) {
       children: M
     }), m && jsx("div", {
       className: _$$s2.wFull.bb1.bSolid.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         borderColor: "var(--color-bg-secondary)"
       }).$,
       role: "list",
       children: x.map(e => jsxs("div", {
         className: _$$s2.flex.itemsCenter.gap10.wFull.bt1.bSolid.pb12.pt12.fontMedium.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           borderColor: "var(--color-bg-secondary)"
         }).$,
         role: "listitem",

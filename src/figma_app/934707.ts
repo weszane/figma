@@ -3,7 +3,7 @@ import { createActionCreator } from "../905/73481";
 import { analyticsEventManager } from "../905/449184";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -90,7 +90,7 @@ let $$T2 = createOptimistThunk((e, t) => {
     setTimeout(() => {
       e.dispatch(notificationActions.enqueue({
         notification: {
-          type: NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS,
+          type: NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS,
           message: getI18nString("comments.get_notified_about_all_comments_prompt"),
           acceptCallback: () => r(!0),
           dismissCallback: () => r(!1)

@@ -1,57 +1,108 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "react-redux";
-import { t as _$$t } from "../905/331623";
-import { getCurrentFileType } from "../figma_app/976749";
-import { Ro } from "../figma_app/805373";
-import { oi, YV, D8, zc, VT, t7, kL } from "../905/498633";
-import { A } from "../6041/915738";
-import { A as _$$A } from "../6041/980297";
-import { A as _$$A2 } from "../5724/83071";
-export function $$p0(e) {
-  let t;
-  let r = useSelector(t => t.authedUsers.byId[e.userId]);
-  let p = useSelector(t => e.profileId ? t.authedProfilesById[e.profileId] : null);
-  let _ = useSelector(t => e.orgId ? t.orgById[e.orgId] : null);
-  let h = useSelector(t => e.teamId ? t.teams[e.teamId] : null);
-  let m = "whiteboard" === getCurrentFileType();
-  let g = !e.forceAvatar;
-  let f = 16 === e.size ? oi : 32 === e.size ? YV : D8;
-  e.skipExternalTeamsIcon || (t = 16 === e.size ? jsx(_$$t, {
-    svg: _$$A2
-  }) : jsx(_$$t, {
-    svg: A,
-    fallbackSvg: _$$A
-  }));
-  g || e.skipUserIcon || (e.personalSpaceIcon && e.personalSpaceIcon1x ? t = jsx(_$$t, {
-    svg: e.personalSpaceIcon,
-    fallbackSvg: e.personalSpaceIcon1x
-  }) : r && (t = jsxs("div", {
-    className: zc,
-    children: [jsx(Ro, {
-      size: e.size ?? 24,
-      entity: p || r
-    }), jsx("div", {
-      className: f
-    })]
-  })));
-  let E = _ || h;
-  return (E && (t = jsxs("div", {
-    className: zc,
-    children: [jsx(Ro, {
-      size: e.size ?? 24,
-      entity: E,
-      className: m && !e.forceNoWhiteboardBorder ? VT : void 0
-    }), !m && jsx("div", {
-      className: f
-    })]
-  })), t) ? jsx("div", {
-    className: `${16 === e.size ? t7 : kL} ${e.className || ""}`,
-    "data-tooltip-type": e["data-tooltip-type"],
-    "data-tooltip": e["data-tooltip"],
-    "data-tooltip-show-immediately": e["data-tooltip-show-immediately"],
-    "data-tooltip-max-width": e["data-tooltip-max-width"],
-    "data-tooltip-offset-y": e["data-tooltip-offset-y"],
-    children: t
-  }) : null;
+import { useSelector } from 'react-redux'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { MediaQuerySvgComponent } from '../905/331623'
+import { D8, kL, oi, t7, VT, YV, zc } from '../905/498633'
+import { A as SVG } from '../5724/83071'
+import { A as SVG2 } from '../6041/915738'
+import { A as SVG1 } from '../6041/980297'
+import { Ro } from '../figma_app/805373'
+import { getCurrentFileType } from '../figma_app/976749'
+
+/**
+ * Renders an avatar or icon based on user, profile, org, or team context.
+ * Original function name: $$p0
+ * @param props - Avatar rendering options and entity IDs.
+ * @returns JSX.Element | null
+ */
+export function renderAvatar(props: {
+  userId: string
+  profileId?: string
+  orgId?: string
+  teamId?: string
+  size?: number
+  forceAvatar?: boolean
+  skipExternalTeamsIcon?: boolean
+  skipUserIcon?: boolean
+  personalSpaceIcon?: any
+  personalSpaceIcon1x?: any
+  forceNoWhiteboardBorder?: boolean
+  className?: string
+  ['data-tooltip-type']?: string
+  ['data-tooltip']?: string
+  ['data-tooltip-show-immediately']?: boolean
+  ['data-tooltip-max-width']?: number
+  ['data-tooltip-offset-y']?: number
+}) {
+  // Select user, profile, org, and team from Redux store
+  const user = useSelector<AppState>(state => state.authedUsers.byId[props.userId])
+  const profile = useSelector<AppState>(state => props.profileId ? state.authedProfilesById[props.profileId] : null)
+  const org = useSelector<AppState>(state => props.orgId ? state.orgById[props.orgId] : null)
+  const team = useSelector<AppState>(state => props.teamId ? state.teams[props.teamId] : null)
+  const isWhiteboard = getCurrentFileType() === 'whiteboard'
+  const showAvatar = !props.forceAvatar
+  const sizeClass = props.size === 16 ? oi : props.size === 32 ? YV : D8
+
+  let content: React.ReactElement | null = null
+
+  // Render external teams icon if not skipped
+  if (!props.skipExternalTeamsIcon) {
+    content = props.size === 16
+      ? jsx(MediaQuerySvgComponent, { svg: SVG })
+      : jsx(MediaQuerySvgComponent, { svg: SVG2, fallbackSvg: SVG1 })
+  }
+
+  // Render user icon if allowed
+  if (showAvatar && !props.skipUserIcon) {
+    if (props.personalSpaceIcon && props.personalSpaceIcon1x) {
+      content = jsx(MediaQuerySvgComponent, {
+        svg: props.personalSpaceIcon,
+        fallbackSvg: props.personalSpaceIcon1x,
+      })
+    }
+    else if (user) {
+      content = jsxs('div', {
+        className: zc,
+        children: [
+          jsx(Ro, {
+            size: props.size ?? 24,
+            entity: profile || user,
+          }),
+          jsx('div', { className: sizeClass }),
+        ],
+      })
+    }
+  }
+
+  // Render org or team icon if available
+  const entity = org || team
+  if (entity) {
+    content = jsxs('div', {
+      className: zc,
+      children: [
+        jsx(Ro, {
+          size: props.size ?? 24,
+          entity,
+          className: isWhiteboard && !props.forceNoWhiteboardBorder ? VT : undefined,
+        }),
+        !isWhiteboard && jsx('div', { className: sizeClass }),
+      ],
+    })
+  }
+
+  // Wrap content with tooltip and className if content exists
+  if (content) {
+    return jsx('div', {
+      'className': `${props.size === 16 ? t7 : kL} ${props.className || ''}`,
+      'data-tooltip-type': props['data-tooltip-type'],
+      'data-tooltip': props['data-tooltip'],
+      'data-tooltip-show-immediately': props['data-tooltip-show-immediately'],
+      'data-tooltip-max-width': props['data-tooltip-max-width'],
+      'data-tooltip-offset-y': props['data-tooltip-offset-y'],
+      'children': content,
+    })
+  }
+  return null
 }
-export const n = $$p0;
+
+/** Exported as n (original: $$p0) */
+export const n = renderAvatar

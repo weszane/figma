@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { EventEmitter } from "../905/690073";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { N } from "../905/284094";
+import { StatePublisher } from "../905/284094";
 import { hg, bi } from "../figma_app/425489";
 let d = new EventEmitter("variableEventEmitter");
 let c = new class {
   constructor() {
-    if (this.variableModeToDebugValue = new N({}), this.isInitialized = new N(!1), !getFeatureFlags().prototype_variable_debug_view) return;
+    if (this.variableModeToDebugValue = new StatePublisher({}), this.isInitialized = new StatePublisher(!1), !getFeatureFlags().prototype_variable_debug_view) return;
     window.addEventListener("message", e => {
       if (e.origin === window.origin) {
         let t = e.data.debugPrototypeActionFromPreview;

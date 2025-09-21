@@ -14,7 +14,7 @@ export class $$a0 {
         await this.inFlightFormatRequests.get(e);
         continue;
       }
-      let t = e.onFormatTriggered().$$finally(() => {
+      let t = e.onFormatTriggered().finally(() => {
         this.inFlightFormatRequests.$$delete(e);
       });
       this.inFlightFormatRequests.set(e, t);

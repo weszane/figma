@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { ProductAccessTypeEnumSchema, AICreditsTypeEnumSchema } from "../905/513035";
-import { D } from "../905/962956";
+import { CurrencySchema } from "../905/962956";
 let $$s1 = {
   YEAR: "year",
   MONTH: "month"
@@ -19,7 +19,7 @@ let c = z.object({
   billable_product_variant_key: AICreditsTypeEnumSchema.nullable(),
   renewal_term: o,
   unit: o,
-  currency: D,
+  currency: CurrencySchema,
   amount: z.number()
 });
 let $$u0 = z.object({

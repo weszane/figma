@@ -22,7 +22,7 @@ import { getCurrentFileType } from "../figma_app/976749";
 import { y as _$$y } from "../905/810168";
 import { FFileType } from "../figma_app/191312";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { F2 } from "../905/826900";
+import { KeyboardFocusManager } from "../905/826900";
 export let $$C0 = registerModal(function ({
   open: e,
   onClose: t
@@ -40,7 +40,7 @@ export let $$C0 = registerModal(function ({
     brand
   } = useTheme();
   let j = useCallback(() => {
-    D === FFileType.WHITEBOARD && F2.focusCustomCanvasFocusElement();
+    D === FFileType.WHITEBOARD && KeyboardFocusManager.focusCustomCanvasFocusElement();
     t();
   }, [t, D]);
   let U = useModalManager({

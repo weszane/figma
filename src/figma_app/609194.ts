@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
 import { r3 } from "../figma_app/599327";
 import { FUserRoleType } from "../figma_app/191312";
-import { du } from "../figma_app/336853";
+import { getCostCenterTypeString } from "../figma_app/336853";
 import { s as _$$s } from "../905/82276";
 import { ColumnName, SpecialUserTypes } from "../figma_app/967319";
 export function $$c5(e, t) {
@@ -32,7 +32,7 @@ export function $$c5(e, t) {
     case ColumnName.LICENSE_GROUP:
       return getI18nString("members_table.column_header.billing_group");
     case ColumnName.SCIM_DATA:
-      return t ? du(t) : getI18nString("members_table.column_header.scim");
+      return t ? getCostCenterTypeString(t) : getI18nString("members_table.column_header.scim");
     case ColumnName.DESIGN_UPGRADE_REASON:
     case ColumnName.WHITEBOARD_UPGRADE_REASON:
       return getI18nString("members_table.column_header.upgrade_reason");

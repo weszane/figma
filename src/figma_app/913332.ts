@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _ as _$$_ } from "../905/410717";
 import { c as _$$c } from "../905/425573";
 import { SeverityLevel } from "../905/11";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { renderI18nText } from "../905/303541";
 import { useOneClickAskToEditExperiment } from "../figma_app/297957";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -29,9 +29,9 @@ function $$f(e) {
   let f = renderI18nText("fullscreen.toolbar_banner.you_can_only_view_and_comment_on_this_file");
   let E = _$$_;
   g() && (f = renderI18nText("1_click_expansion.you_need_a_full_seat"), E = _$$c);
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "AutoUpgradeConfirmationModal",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     severity: SeverityLevel.Critical,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION

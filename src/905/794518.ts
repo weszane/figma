@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { createLabel } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { fI } from "../figma_app/626177";
 var a = r;
 export function $$c0({
@@ -22,7 +22,7 @@ export function $$c0({
     className: "publish_modal_row--contentRowUI3--4rMQY plugin_publish_modal--contentRowUI3--U1FRw publish_modal--contentRowUI3--BzgV4 publish_modal--_rowUI3--NFLnG",
     children: [jsxs("div", {
       className: _$$s.font11.flex.flexRow.fontSemiBold.justifyBetween.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         gridColumn: "2 / 18"
       }).$,
       children: [jsxs("div", {
@@ -43,7 +43,7 @@ export function $$c0({
         })]
       }), u]
     }), jsxs("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         gridColumn: "20 / 68",
         placeSelf: g || "stretch"
       }).$,

@@ -2188,7 +2188,7 @@ r = function() {
         }
         return a;
       }
-      (t.exports = l).prototype.$$finally = function(e) {
+      (t.exports = l).prototype.finally = function(e) {
         if ("function" != typeof e) return this;
         var t = this.constructor;
         return this.then(function(a) {

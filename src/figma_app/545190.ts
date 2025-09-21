@@ -33,7 +33,7 @@ import { U as _$$U } from '../905/708285';
 import { logError } from '../905/714362';
 import { hideTooltip } from '../905/765855';
 import { c$ as _$$c$, l6, sK } from '../905/794875';
-import { vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { yG } from '../905/859698';
 import { A as _$$A } from '../905/891805';
 import { V as _$$V } from '../905/900932';
@@ -702,7 +702,7 @@ function eP({
   let {
     setIsDraggingSomePropDef
   } = w();
-  return jsxs(vL, {
+  return jsxs(KeyboardReceiver, {
     handleKeyDown: g,
     ref: b,
     name: 'typed-props-list',
@@ -1410,7 +1410,7 @@ function tp({
     setIsDraggingSomePropDef
   } = w();
   let A = o3(nt.useGridPart2);
-  return jsxs(vL, {
+  return jsxs(KeyboardReceiver, {
     handleKeyDown: b,
     ref: S,
     name: 'variant-props-list',

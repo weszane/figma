@@ -5,7 +5,7 @@ import { Link } from "../905/438674";
 import { formatList } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { tI } from "../figma_app/599327";
 import { hideModal } from "../905/156213";
 import { Z } from "../469e6e40/184197";
@@ -54,7 +54,7 @@ function k(e) {
               children: e.groupsToReview.map(t => {
                 let a = e.licenseGroupUrls?.[t.id];
                 return jsxs("li", {
-                  style: sx.add({
+                  style: styleBuilderInstance.add({
                     listStyleType: "disc"
                   }).$,
                   children: [a ? jsx(Link, {
@@ -126,7 +126,7 @@ export let $$E0 = registerModal(function (e) {
           let t = tI(e);
           let a = y[e] ?? 0;
           return jsx("li", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               listStyleType: "disc"
             }).$,
             children: r ? getI18nString("plan_invoices.new_seats_quantity", {

@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { O } from "../905/969533";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { z } from "../905/905430";
 import { aS, Im } from "../905/608145";
@@ -84,7 +84,7 @@ export function $$A3({
     className: _$$s.bgTransparent.$,
     "data-testid": "submenu-button",
     ref: t,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       marginLeft: "-8px"
     }).$,
     children: jsx(O, {})

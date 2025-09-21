@@ -22,7 +22,7 @@ import { A3, Hj } from '../905/682977';
 import { g as _$$g } from '../905/687265';
 import { A as _$$A } from '../905/920142';
 import { selectViewAction } from '../905/929976';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { a as _$$a } from '../905/964520';
 import { I as _$$I } from '../4452/82228';
 import { b as _$$b } from '../4452/320061';
@@ -777,7 +777,7 @@ let ej = {
 };
 function ey() {
   return jsx('span', {
-    style: sx.add({
+    style: styleBuilderInstance.add({
       paddingLeft: '6px'
     }).$,
     children: getI18nString('plan_invoices.description_column_label')

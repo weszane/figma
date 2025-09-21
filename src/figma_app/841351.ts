@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { reportError } from '../905/11'
 import { ServiceCategories as _$$e } from '../905/165054'
-import { NotificationType } from '../905/170564'
+import { NotificationCategory } from '../905/170564'
 import { LRUCache } from '../905/196201'
 import { CompareViewType } from '../905/218608'
 import { VisualBellActions } from '../905/302958'
@@ -417,7 +417,7 @@ const showVersionDiffNotification = createOptimistThunk(async (dispatch: any, { 
   trackEventAnalytics('Version Diffing Notification Shown', { ...trackingProps, pagesWithChanges: numPagesWithChanges, durationMs: elapsedTime }, { forwardToDatadog: true })
   dispatch(notificationActions.enqueueFront({
     notification: {
-      type: NotificationType.SEE_WHATS_CHANGED,
+      type: NotificationCategory.SEE_WHATS_CHANGED,
       message: 'See what\'s changed since the last time you viewed this file',
       acceptCallback: () => {
         trackEventAnalytics('Version Diffing Notification Opened', trackingProps)

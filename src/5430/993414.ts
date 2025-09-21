@@ -3,7 +3,7 @@ import i from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { Vr } from "../5430/297093";
 import { useRouteParams } from "../figma_app/321395";
 import { ResourceHubHomeRouteClass } from "../figma_app/979714";
@@ -44,7 +44,7 @@ export function $$y1({
   let l = useRouteParams(ResourceHubHomeRouteClass)?.tab;
   let x = l && l === PublishSourceType.INTERNAL;
   let f = Vr(t, i, x);
-  let y = Jm();
+  let y = getSearchSessionIdFromSelector();
   return f.length <= 1 ? null : jsx(_$$n, {
     context: e,
     defaultOption: getI18nString("community.landing_page.sort.all_products"),

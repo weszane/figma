@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 export function $$i2() {
   return jsx($$a1, {
     children: jsx("p", {
@@ -14,7 +14,7 @@ export function $$l0({
   "string" == typeof e ? t = e : e instanceof Error && (t = e.message, console.error(e));
   return jsx($$a1, {
     children: jsx("p", {
-      style: sx.colorTextOndanger.colorBgDanger.p16.font20.maxW400.$,
+      style: styleBuilderInstance.colorTextOndanger.colorBgDanger.p16.font20.maxW400.$,
       children: t
     })
   });
@@ -23,7 +23,7 @@ export function $$a1({
   children: e
 }) {
   return jsx("div", {
-    style: sx.fillPositionedContainer.flex.itemsCenter.justifyCenter.flexColumn.lh1_5Lines.font16.$,
+    style: styleBuilderInstance.fillPositionedContainer.flex.itemsCenter.justifyCenter.flexColumn.lh1_5Lines.font16.$,
     children: e
   });
 }

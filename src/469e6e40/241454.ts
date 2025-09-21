@@ -23,7 +23,7 @@ import { ProductAccessTypeEnum } from "../905/513035";
 import { jL } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { isLoading } from "../905/18797";
-import { cg } from "../figma_app/336853";
+import { hasScimToken } from "../figma_app/336853";
 import { setupLoadingStateHandler } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
 import { AccessLevelEnum } from "../905/557142";
@@ -711,7 +711,7 @@ let $$Y0 = registerModal(function (e) {
               orgName: a.name
             }), " ", E]
           })]
-        }), !y && cg(r) && jsx("div", {
+        }), !y && hasScimToken(r) && jsx("div", {
           className: "confirm_org_user_actions--banner--T7B90",
           children: renderI18nText("org_join_request.scim_enabled_banner")
         })]

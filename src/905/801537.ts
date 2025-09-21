@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Xr } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
-import { MZ } from "../figma_app/925970";
+import { generateSessionId } from "../figma_app/925970";
 import { wf } from "../905/124270";
 import { IT, liveStoreInstance } from "../905/713695";
 import { CreatorResourceType } from "../figma_app/162807";
@@ -23,7 +23,7 @@ export function $$p0(e, t) {
   let [f] = IT(g);
   let _ = useDebouncedCallback(t => {
     d(t);
-    e && e.length > 0 && c(MZ());
+    e && e.length > 0 && c(generateSessionId());
   }, 500, {
     leading: !0
   });

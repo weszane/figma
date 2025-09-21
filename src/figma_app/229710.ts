@@ -16,7 +16,7 @@ import { defaultGrayColor } from "../figma_app/385874";
 import { kl, pw, zj, ER, wR, DQ, fC } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { VF } from "../figma_app/679183";
+import { useCachedSubtree } from "../figma_app/679183";
 import { cM } from "../figma_app/803787";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Tn } from "../figma_app/323320";
@@ -955,7 +955,7 @@ export let $$ek5 = o.ConnectedTypePanel;
 export function $$eM0({
   isVisible: e
 }) {
-  return jsx(VF, {
+  return jsx(useCachedSubtree, {
     isVisible: e,
     children: () => getFeatureFlags().ce_scale_tool_v2 ? jsx(eI, {
       recordingKey: "scalePanel"

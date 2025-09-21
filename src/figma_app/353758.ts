@@ -179,7 +179,7 @@ export let $$eu0 = new class {
       for (let t of e) this._dirtyNodes.add(t);
       return;
     }
-    _$$M && (this._isUpdating = !0, _$$M(e).$$finally(() => {
+    _$$M && (this._isUpdating = !0, _$$M(e).finally(() => {
       if (this._isUpdating = !1, this._dirtyNodes.size > 0) {
         let e = this._dirtyNodes;
         this._dirtyNodes = new Set();
@@ -247,7 +247,7 @@ export let $$eu0 = new class {
             c = !1;
             let r = t.message || String(t);
             e.isAlive && (e.codeComponentError = r);
-          }).$$finally(() => {
+          }).finally(() => {
             r--;
             let e = a.getElapsedTime();
             if (a.stop(), 0 === r) {

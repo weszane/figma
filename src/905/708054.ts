@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { ButtonSecondary, ButtonBasePrimary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";
 import { renderI18nText } from "../905/303541";
-import { aP, vQ } from "../figma_app/530167";
+import { updateProfileThunk, createProfileThunk } from "../figma_app/530167";
 import { selectViewAction } from "../905/929976";
 import { popModalStack, hideModal } from "../905/156213";
 import { HubAction, FigmaResourceType } from "../figma_app/350203";
@@ -1454,9 +1454,9 @@ let w = class e extends Component {
           profileId: t,
           onSuccess: this.props.onFinish
         };
-        this.props.dispatch(aP(e));
+        this.props.dispatch(updateProfileThunk(e));
         this.setState({
-          loadingKey: aP.loadingKeyForPayload(e)
+          loadingKey: updateProfileThunk.loadingKeyForPayload(e)
         });
       } else if (1 == [this.props.userId, this.props.teamId, this.props.orgId].filter(e => e).length) {
         let e = {
@@ -1466,9 +1466,9 @@ let w = class e extends Component {
           userId: this.props.userId,
           onSuccess: this.props.onFinish
         };
-        this.props.dispatch(vQ(e));
+        this.props.dispatch(createProfileThunk(e));
         this.setState({
-          loadingKey: vQ.loadingKeyForPayload(e)
+          loadingKey: createProfileThunk.loadingKeyForPayload(e)
         });
       }
     };
@@ -1477,7 +1477,7 @@ let w = class e extends Component {
       this.setState({
         submitDisabled: !0
       });
-      this.props.profileId && this.props.dispatch(aP({
+      this.props.profileId && this.props.dispatch(updateProfileThunk({
         profileHandle: this.state.newProfileHandle,
         profileId: this.props.profileId
       }));

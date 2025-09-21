@@ -9,14 +9,14 @@ import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { O as _$$O } from "../905/539306";
 import { reportError } from "../905/11";
-import { n as _$$n } from "../figma_app/3731";
+import { renderAvatar } from "../figma_app/3731";
 import { getI18nString } from "../905/303541";
 import { switchAccountAndNavigate } from "../figma_app/976345";
 import { A } from "../1250/724587";
 import { postUserFlag } from "../905/985254";
 import { z } from "../905/373223";
 import { trackUserEvent } from "../figma_app/314264";
-import { HE, O_ } from "../905/967587";
+import { getWorkspaceName, isSameWorkspaceIdentity } from "../905/967587";
 import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -145,8 +145,8 @@ export function $$A1({
 }
 function S(e, t, n, r) {
   let i = _$$O(e, t.id);
-  let o = HE(n, i);
-  let l = O_(n, i);
+  let o = getWorkspaceName(n, i);
+  let l = isSameWorkspaceIdentity(n, i);
   let d = getFeatureFlags().dtm_deprecation_post_migration_onboarding && r?.starterTeamCreated && r?.isDraftsToMovePlan && r?.dtmMigrationCompleted && !r?.seenDtmPostMigrationBadge;
   return {
     planId: e.plan_id,
@@ -159,7 +159,7 @@ function S(e, t, n, r) {
       isGuest: e.is_guest,
       shouldShowDtmPostMigrationBadge: d
     }),
-    icon: jsx(_$$n, {
+    icon: jsx(renderAvatar, {
       userId: i.userId,
       orgId: i.orgId,
       teamId: i.teamId,

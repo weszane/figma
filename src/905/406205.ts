@@ -15,7 +15,7 @@ import { isCommandOrShift } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { BrowserInfo } from "../figma_app/778880";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { x as _$$x } from "../figma_app/475340";
 import { C as _$$C } from "../905/196436";
@@ -51,11 +51,11 @@ import { FEntityType, FFileType } from "../figma_app/191312";
 import { FavoritesByResourceId } from "../figma_app/43951";
 import { mapProjectProperties } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { F as _$$F } from "../905/915030";
 import { KindEnum } from "../905/129884";
-import { P as _$$P } from "../905/200237";
+import { EXTERNAL_TEAMS } from "../905/200237";
 import { X as _$$X } from "../905/718513";
 import { A as _$$A } from "../5724/361376";
 import { A as _$$A2 } from "../5724/663128";
@@ -129,7 +129,7 @@ function em(e) {
       entrypoint: "folder list card"
     }));
     t(setLastVisitedId({
-      planId: d || _$$P
+      planId: d || EXTERNAL_TEAMS
     }));
     let n = "recentsAndSharing" === o.view || "folder" === o.view ? o : void 0;
     compareValues(d, e.parent_org_id, u, e.team_id) ? navigateToFile({
@@ -242,9 +242,9 @@ function em(e) {
   });
 }
 export function $$eh1(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FolderListCard",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(em, {
       ...e
     })
@@ -447,8 +447,8 @@ function eb(e) {
         editorType: FFileType.DESIGN,
         folderId: e.folder.id,
         team: r,
-        from: f6.FILE_BROWSER_FOLDER_EMPTY_TILE,
-        openNewFileIn: isCommandOrShift(n) ? ai.NEW_TAB : ai.SAME_TAB
+        from: FileBrowserLocation.FILE_BROWSER_FOLDER_EMPTY_TILE,
+        openNewFileIn: isCommandOrShift(n) ? TabOpenBehavior.NEW_TAB : TabOpenBehavior.SAME_TAB
       }));
     },
     trusted: !0,

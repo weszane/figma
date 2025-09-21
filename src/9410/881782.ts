@@ -108,7 +108,7 @@ class L {
     startPerformanceSpan(tF, _$$e.UNOWNED);
     let r = window.performance.now();
     this.currentTutorialRunningPromise = i();
-    this.currentTutorialRunningPromise.$$finally(() => {
+    this.currentTutorialRunningPromise.finally(() => {
       endPerformanceSpan(tF);
       let t = window.performance.now() - r;
       logInfo(tF, 'Tutorial completed or stopped', {

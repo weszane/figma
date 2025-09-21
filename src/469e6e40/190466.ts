@@ -72,7 +72,7 @@ import { H as _$$H, az } from "../figma_app/805373";
 import { r as _$$r } from "../469e6e40/505264";
 import { l6, c$, sK } from "../905/794875";
 import { Wi } from "../figma_app/162641";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { A as _$$A2 } from "../svg/977613";
 var v = b;
 function ev(e, t) {
@@ -179,16 +179,16 @@ function eC() {
   return jsxs("div", {
     className: _$$s2.p24.flex.itemsCenter.gap16.$,
     children: [jsx(Wi, {
-      style: _$$sx.w48.h48.bRadiusFull.$
+      style: styleBuilderInstance.w48.h48.bRadiusFull.$
     }), jsxs("div", {
       className: _$$s2.flex.flexColumn.gap4.flexGrow1.$,
       children: [jsx(Wi, {
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           height: "25px",
           width: "45%"
         }).flexGrow1.$
       }), jsx(Wi, {
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           height: "13px",
           width: "40%"
         }).flexGrow1.$
@@ -199,11 +199,11 @@ function eC() {
 function eS() {
   return jsxs("div", {
     children: [jsx(Wi, {
-      style: _$$sx.h16.mb8.add({
+      style: styleBuilderInstance.h16.mb8.add({
         width: "25%"
       }).$
     }), jsx(Wi, {
-      style: _$$sx.h32.$
+      style: styleBuilderInstance.h32.$
     })]
   });
 }

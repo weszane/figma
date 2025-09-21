@@ -1,12 +1,12 @@
 import { z } from "../905/239603";
 import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { createProductAccessSchema } from "../905/513035";
-import { D } from "../905/962956";
+import { CurrencySchema } from "../905/962956";
 let o = z.object({
   charge_per_seat: z.number(),
   credit_per_seat: z.number(),
   max_seats_to_credit: z.number(),
-  currency: D,
+  currency: CurrencySchema,
   savings_per_seat: z.number()
 });
 let $$l0 = new class {

@@ -1,42 +1,112 @@
-import { z as _$$z } from '../905/4823'
+import { nativeEnum, z } from 'zod'
+import { stripeCustomerSchema } from '../905/4823'
 import { ExperimentAssignmentsSchema } from '../905/13165'
-import { N4 } from '../905/158283'
-import { fc, z } from '../905/239603'
-import { S as _$$S } from '../905/962956'
+import { domainsStateSchema } from '../905/158283'
+import { CurrencyEnum } from '../905/962956'
 import { FCostCenterType, FDomainVerificationStatusType, FPlanFeatureType, FPlanNameType } from '../figma_app/191312'
 import { TeamSettingsSchema } from '../figma_app/482728'
-
-let c = fc(FCostCenterType)
-let u = fc(FPlanFeatureType)
-let p = fc(FDomainVerificationStatusType)
-export var $$_1 = (e => (e.ANY = 'any', e.GOOGLE = 'google', e.SAML = 'saml', e))($$_1 || {})
-let h = z.union([z.literal('AUTO'), z.literal('GOOD'), z.literal('DELINQUENT'), z.literal('SUSPENDED'), z.literal('DEACTIVATED')])
-let $$m6 = {
-  AUTO: 'AUTO',
-  GOOD: 'GOOD',
-  DELINQUENT: 'DELINQUENT',
-  SUSPENDED: 'SUSPENDED',
-  DEACTIVATED: 'DEACTIVATED',
+/**
+ * Enum for authentication types ($$_1)
+ */
+export enum AuthTypeEnum {
+  ANY = 'any',
+  GOOGLE = 'google',
+  SAML = 'saml',
 }
-export var $$g2 = (e => (e.MANUAL = 'manual', e.DISABLED = 'disabled', e.QUARTERLY = 'quarterly', e.CHARGE_IMMEDIATELY = 'quarterly_auto_charge', e))($$g2 || {})
-let f = z.nativeEnum($$g2)
-export var $$E3 = (e => (e.REQUIRE_APPROVAL = 'require_approval', e.BANNED = 'banned', e))($$E3 || {})
-let y = z.nativeEnum($$E3)
-export var $$b4 = (e => (e.US = 'US', e.EU = 'EU', e))($$b4 || {})
-let T = z.nativeEnum($$b4)
-z.object({
-  name: z.string(),
-  img_url: z.string().optional(),
-  id: z.string(),
-})
-var $$I5 = (e => (e.Initial = 'Initial', e.ChoosePlan = 'ChoosePlan', e.AddCollaborators = 'AddCollaborators', e.PseudoCreateTeam = 'PseudoCreateTeam', e.CreateTeam = 'CreateTeam', e.TeamSelect = 'TeamSelect', e.SeatSelect = 'SeatSelect', e.Details = 'Details', e.Payment = 'Payment', e.Review = 'Review', e.Confirmation = 'Confirmation', e))($$I5 || {})
-var S = (e => (e.DEPROVISION = 'deprovision', e))(S || {})
-var $$v0 = (e => (e.GUESTS = 'guests', e.MEMBERS = 'members', e.ALL_USERS = 'all_users', e))($$v0 || {})
-let A = z.object({
+
+/**
+ * Enum for billing status ($$m6)
+ */
+export enum BillingStatusEnum {
+  AUTO = 'AUTO',
+  GOOD = 'GOOD',
+  DELINQUENT = 'DELINQUENT',
+  SUSPENDED = 'SUSPENDED',
+  DEACTIVATED = 'DEACTIVATED',
+}
+
+/**
+ * Enum for billing settings ($$g2)
+ */
+export enum BillingSettingEnum {
+  MANUAL = 'manual',
+  DISABLED = 'disabled',
+  QUARTERLY = 'quarterly',
+  CHARGE_IMMEDIATELY = 'quarterly_auto_charge',
+}
+
+/**
+ * Enum for approval status ($$E3)
+ */
+export enum ApprovalStatusEnum {
+  REQUIRE_APPROVAL = 'require_approval',
+  BANNED = 'banned',
+}
+
+/**
+ * Enum for region ($$b4)
+ */
+export enum USEURegionEnum {
+  US = 'US',
+  EU = 'EU',
+}
+
+/**
+ * Enum for onboarding steps ($$I5)
+ */
+export enum OnboardingStepEnum {
+  Initial = 'Initial',
+  ChoosePlan = 'ChoosePlan',
+  AddCollaborators = 'AddCollaborators',
+  PseudoCreateTeam = 'PseudoCreateTeam',
+  CreateTeam = 'CreateTeam',
+  TeamSelect = 'TeamSelect',
+  SeatSelect = 'SeatSelect',
+  Details = 'Details',
+  Payment = 'Payment',
+  Review = 'Review',
+  Confirmation = 'Confirmation',
+}
+
+/**
+ * Enum for deprovision action (S)
+ */
+export enum DeprovisionActionEnum {
+  DEPROVISION = 'deprovision',
+}
+
+/**
+ * Enum for user types ($$v0)
+ */
+export enum UserTypeEnum {
+  GUESTS = 'guests',
+  MEMBERS = 'members',
+  ALL_USERS = 'all_users',
+}
+
+/**
+ * Schema for operation state (A)
+ */
+export const OperationStateSchema = z.object({
   scheduled_run_at: z.string().optional().nullable(),
   operation_state: z.string(),
 })
-ExperimentAssignmentsSchema.extend({
+
+/**
+ * Schema for standing status (h)
+ */
+export const StandingStatusSchema = z.union([
+  z.literal(BillingStatusEnum.AUTO),
+  z.literal(BillingStatusEnum.GOOD),
+  z.literal(BillingStatusEnum.DELINQUENT),
+  z.literal(BillingStatusEnum.SUSPENDED),
+  z.literal(BillingStatusEnum.DEACTIVATED),
+])
+
+/**
+ * Main extended ExperimentAssignmentsSchema
+ */
+export const ExtendedExperimentAssignmentsSchema = ExperimentAssignmentsSchema.extend({
   id: z.string(),
   name: z.string(),
   legal_name: z.string().optional(),
@@ -48,9 +118,9 @@ ExperimentAssignmentsSchema.extend({
   handle: z.string().optional(),
   figjam_disabled_at: z.date().nullable(),
   realtime_token: z.string().optional(),
-  standing: h,
+  standing: StandingStatusSchema,
   stripe_customer_id: z.string().optional(),
-  invite_whitelist_guest_invite_setting: y.nullable(),
+  invite_whitelist_guest_invite_setting: z.nativeEnum(ApprovalStatusEnum).nullable(),
   invite_whitelist_member_allowlist_enabled: z.boolean().nullable(),
   ip_ranges: z.array(z.string()),
   past_due_at: z.string().nullable(),
@@ -60,10 +130,10 @@ ExperimentAssignmentsSchema.extend({
   widget_requests_allowed: z.boolean(),
   public_plugins_allowed: z.boolean(),
   voice_enabled: z.boolean().optional(),
-  billing: f.nullable(),
+  billing: z.nativeEnum(BillingSettingEnum).nullable(),
   google_sso_only: z.boolean(),
   saml_sso_only: z.boolean(),
-  featured_scim_metadata: c.nullable(),
+  featured_scim_metadata: z.nativeEnum(FCostCenterType).nullable(),
   community_profile_id: z.string().optional(),
   community_profile_handle: z.string().optional(),
   template_picker_disabled: z.boolean().optional(),
@@ -75,17 +145,17 @@ ExperimentAssignmentsSchema.extend({
   discovery_enabled: z.boolean().optional(),
   workshop_enabled: z.boolean().optional(),
   cursor_chat_disabled: z.boolean().optional(),
-  design_default_paid_status: u.optional(),
-  whiteboard_default_paid_status: u.optional(),
+  design_default_paid_status: z.nativeEnum(FPlanFeatureType).optional(),
+  whiteboard_default_paid_status: z.nativeEnum(FPlanFeatureType).optional(),
   k12_google_org: z.boolean(),
   shared_container_setting: TeamSettingsSchema.nullable(),
   vat_gst_id: z.string().optional().nullable(),
-  tax_id_verification_status: p.optional(),
+  tax_id_verification_status: z.nativeEnum(FDomainVerificationStatusType).optional(),
   are_custom_templates_allowed: z.boolean(),
   should_auto_renew: z.boolean(),
   has_automatic_upcoming_invoice: z.boolean(),
-  target_locality: T.optional(),
-  org_domains: N4.optional().nullable(),
+  target_locality: z.nativeEnum(USEURegionEnum).optional(),
+  org_domains: domainsStateSchema.optional().nullable(),
   workspaces_count: z.number().optional(),
   cmty_publish_as_user_enabled: z.boolean().optional(),
   license_groups_count: z.number().optional(),
@@ -96,10 +166,10 @@ ExperimentAssignmentsSchema.extend({
   is_dev_mode_opt_in_accepted: z.boolean().optional(),
   has_invalid_upgrades: z.boolean().optional(),
   figma_provided_libraries_disabled: z.boolean().optional(),
-  billing_api: _$$z,
+  billing_api: stripeCustomerSchema,
   stripe_memo: z.string().optional(),
   self_serve: z.boolean().optional(),
-  invoice_currency: z.nativeEnum(_$$S).optional(),
+  invoice_currency: z.nativeEnum(CurrencyEnum).optional(),
   is_slides_disabled: z.boolean().optional(),
   activity_logs_max_query_duration_in_days: z.number().optional(),
   tier: z.nativeEnum(FPlanNameType),
@@ -108,12 +178,16 @@ ExperimentAssignmentsSchema.extend({
   all_domains_verified: z.boolean().optional(),
   can_use_multi_idp: z.boolean(),
   is_non_admin_tos_banner_disabled: z.number().optional().nullable(),
-  org_downgrade: A.optional().nullable(),
+  org_downgrade: OperationStateSchema.optional().nullable(),
 })
-export const CT = $$v0
-export const Ct = $$_1
-export const EZ = $$g2
-export const Gv = $$E3
-export const OE = $$b4
-export const X1 = $$I5
-export const ZG = $$m6
+
+/**
+ * Export original variable names mapped to new enums/schemas for compatibility
+ */
+export const CT = UserTypeEnum // $$v0
+export const Ct = AuthTypeEnum // $$_1
+export const EZ = BillingSettingEnum // $$g2
+export const Gv = ApprovalStatusEnum // $$E3
+export const OE = USEURegionEnum // $$b4
+export const X1 = OnboardingStepEnum // $$I5
+export const ZG = BillingStatusEnum // $$m6

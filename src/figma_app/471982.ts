@@ -23,7 +23,7 @@ import { throwTypeError } from '../figma_app/465776';
 import { usePrefersMediaQuery } from '../figma_app/469468';
 import { getCurrentCommunityBasePath, parseCommunityPath } from '../figma_app/598412';
 import { communityViewerMaxWidth } from '../figma_app/786175';
-import { Z4 } from '../figma_app/809727';
+import { MediaType } from '../figma_app/809727';
 import { createEmptyAddress } from '../figma_app/831101';
 import { processSlug } from '../figma_app/930338';
 import { matchPath } from '../vendor/130505';
@@ -422,9 +422,9 @@ export function getViewerWidth(isFullWidth: boolean) {
  * @param resource
  */
 export function getEmbedType(resource: any) {
-  if (isPrototype(resource)) return Z4.EMBED;
+  if (isPrototype(resource)) return MediaType.EMBED;
   const hubFile = getHubFile(resource);
-  return hubFile && !hubFile.thumbnail_is_set ? Z4.EMBED : Z4.CURATED_IMAGE;
+  return hubFile && !hubFile.thumbnail_is_set ? MediaType.EMBED : MediaType.CURATED_IMAGE;
 }
 
 /**

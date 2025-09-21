@@ -152,7 +152,7 @@ import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { Oi, QZ } from "../905/862913";
 import { Q3, Cy, Bg } from "../figma_app/246699";
-import { Gv } from "../figma_app/736948";
+import { ApprovalStatusEnum } from "../figma_app/736948";
 import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
 import { m_ } from "../figma_app/209680";
 import { $ as _$$$ } from "../figma_app/995722";
@@ -171,7 +171,7 @@ import { HU } from "../figma_app/926061";
 import { h1 as _$$h4 } from "../905/986103";
 import { BannerInsetModal, BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { t as _$$t4 } from "../905/833100";
 import { A as _$$A6 } from "../905/563377";
 import { PageTypeEnum } from "../figma_app/10554";
@@ -180,7 +180,7 @@ import { y4I, _YF } from "../figma_app/822011";
 import { deepEqual } from "../905/382883";
 import { useMemoShallow } from "../905/19536";
 import nA from "../vendor/241899";
-import { t as _$$t5 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { W as _$$W2 } from "../905/841666";
 import { decimalToPercent } from "../figma_app/808294";
 import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/777551";
@@ -266,7 +266,7 @@ import { d as _$$d4 } from "../905/762622";
 import { $ as _$$$2, t as _$$t8 } from "../905/628632";
 import { XHR } from "../905/910117";
 import { cL } from "../905/748726";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { Ef, rq as _$$rq2, kF } from "../905/351260";
 import { Z as _$$Z } from "../figma_app/761870";
 import { isValidEmail } from "../figma_app/416935";
@@ -2753,7 +2753,7 @@ function na({
           selectedPermissionsLevel: G,
           setSelectedPermissionsLevel: eg,
           disabled: !x,
-          disableEdit: !(G === J4.EDIT || (i ? !(i.invite_whitelist_guest_invite_setting === Gv.BANNED && U === _9.ANYONE) : !!Oi(o || null, isDraftFileLG)))
+          disableEdit: !(G === J4.EDIT || (i ? !(i.invite_whitelist_guest_invite_setting === ApprovalStatusEnum.BANNED && U === _9.ANYONE) : !!Oi(o || null, isDraftFileLG)))
         }), jsx("div", {
           className: VA,
           children: G === J4.VIEW ? getI18nString("permissions_modal.file_share_settings.can_view_and_comment_on_this_file") : getI18nString("permissions_modal.file_share_settings.can_edit_this_file")
@@ -3028,7 +3028,7 @@ function nc(e) {
               target: "_blank",
               rel: "noopener",
               href: "",
-              style: _$$sx.add({
+              style: styleBuilderInstance.add({
                 color: "var(--color-text-figjam)",
                 cursor: "pointer",
                 userSelect: "auto"
@@ -3779,7 +3779,7 @@ class rt extends Component {
           className: ZD,
           children: [jsx("div", {
             className: Zq,
-            children: jsx(_$$t5, {
+            children: jsx(MediaQuerySvgComponent, {
               svg: _$$A8,
               fallbackSvg: _$$A9,
               className: Ac
@@ -5411,7 +5411,7 @@ function aq({
         file: e
       });
       let l = _$$Z(r);
-      if (i && l.filter(e => !H_(i.org_domains?.domains || [], e)).length > 0) {
+      if (i && l.filter(e => !checkDomainExists(i.org_domains?.domains || [], e)).length > 0) {
         n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.external_sharing_unavailable", {
             planName: i.name
@@ -5598,7 +5598,7 @@ function a$({
       }
       let d = i?.org_domains?.domains;
       if (i?.invite_whitelist_guest_invite_setting == null && d && d.length > 0) {
-        let e = _$$Z(r).filter(e => isValidEmail(e) && !H_(d, e));
+        let e = _$$Z(r).filter(e => isValidEmail(e) && !checkDomainExists(d, e));
         if (e.length > 0) {
           u(showModalHandler({
             type: _$$F3,

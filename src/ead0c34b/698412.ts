@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { reportError } from "../905/11";
 import { N } from "../905/809096";
 import { getI18nString } from "../905/303541";
@@ -62,7 +62,7 @@ function C(e) {
   });
 }
 export function $$m0(e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "PurchaseAiCreditsModal",
     team: _$$e.BILLING_EXPERIENCE,
     fallback: jsx(_, {

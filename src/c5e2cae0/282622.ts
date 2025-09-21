@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { clickableBaseLinkTracked, linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -132,7 +132,7 @@ function A({
       isAnnual: a === BillingCycle.YEAR
     }), jsx(_$$_, {}), jsx("div", {
       className: _$$s.my24.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         marginLeft: "-10px"
       }).$,
       "data-testid": "cart-review-terms-checkbox",
@@ -188,7 +188,7 @@ function k({
         }(e, t)
       }), jsx(clickableBaseLinkTracked, {
         className: _$$s.textBodyMediumStrong.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           height: "16px"
         }).$,
         target: "_blank",
@@ -221,7 +221,7 @@ function P() {
           className: _$$s.pt4.$,
           children: renderI18nText("org_self_serve.review_step.what_is_a_true_up")
         }), jsxs("ul", {
-          style: sx.ml16.mt4.add({
+          style: styleBuilderInstance.ml16.mt4.add({
             listStyle: "disc"
           }).$,
           children: [jsx("li", {
@@ -245,7 +245,7 @@ function P() {
 }
 export function $$R0(e) {
   return jsxs("div", {
-    style: sx.grid.add({
+    style: styleBuilderInstance.grid.add({
       gridTemplateColumns: "400px 1fr",
       gap: "48px"
     }).$,

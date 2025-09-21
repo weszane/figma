@@ -186,7 +186,7 @@ function U({
       message: "Failed to generate token, please try again later",
       error: !0
     }));
-  }).$$finally(() => {
+  }).finally(() => {
     d(!1);
   }));
   let g = async e => {

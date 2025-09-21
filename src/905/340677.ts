@@ -1,52 +1,82 @@
 import { z } from 'zod'
-import { gx } from '../905/321541'
+import { positionRangeSchema } from '../905/321541'
 
-function a(e, t, i) {
-  t in e
-    ? Object.defineProperty(e, t, {
-        value: i,
-        enumerable: !0,
-        configurable: !0,
-        writable: !0,
-      })
-    : e[t] = i
-  return e
-}
-let s = z.object({
+/**
+ * Schema for context object containing a guid.
+ * Original variable: s
+ */
+const contextSchema = z.object({
   guid: z.string(),
 })
-let $$o4 = z.object({
+
+/**
+ * Schema for error message and context.
+ * Original variable: $$o4
+ */
+export const errorMessageSchema = z.object({
   message: z.string(),
-  context: s,
+  context: contextSchema,
 })
-export class $$l1 extends Error {
-  constructor(e, t) {
-    super(e)
-    a(this, 'context', void 0)
-    a(this, 'errorMessage', void 0)
+
+/**
+ * Error class for serialization errors.
+ * Original class: $$l1
+ */
+export class SerializeError extends Error {
+  context: unknown
+  errorMessage: string
+
+  /**
+   * @param errorMessage - The error message.
+   * @param context - The context for the error.
+   */
+  constructor(errorMessage: string, context: unknown) {
+    super(errorMessage)
     this.name = 'SerializeError'
-    this.context = t
-    this.errorMessage = e
+    this.context = context
+    this.errorMessage = errorMessage
   }
 }
-export let $$d2 = z.object({
+
+/**
+ * Schema for deserialization error details.
+ * Original variable: $$d2
+ */
+export const deserializeErrorSchema = z.object({
   message: z.string(),
   context: z.any(),
-  location: gx.optional(),
+  location: positionRangeSchema.optional(),
 }).extend({
   formatted: z.string().optional(),
 })
-export class $$c3 extends Error {
-  constructor(e, t) {
-    super(e)
-    a(this, 'context', void 0)
-    a(this, 'errorMessage', void 0)
+
+/**
+ * Error class for deserialization errors.
+ * Original class: $$c3
+ */
+export class DeserializeError extends Error {
+  context: unknown
+  errorMessage: string
+
+  /**
+   * @param errorMessage - The error message.
+   * @param context - The context for the error.
+   */
+  constructor(errorMessage: string, context: unknown) {
+    super(errorMessage)
     this.name = 'DeserializeError'
-    this.context = t
-    this.errorMessage = e
+    this.context = context
+    this.errorMessage = errorMessage
   }
 }
-export function $$u0(e) {
+
+/**
+ * Returns a frame node for unhandled node types.
+ * Original function: $$u0
+ * @param node - The node with an unhandled type.
+ * @returns A frame node with error message.
+ */
+export function createUnhandledNodeFrame(node: { type: string }) {
   return {
     type: 'Frame',
     props: {
@@ -55,12 +85,14 @@ export function $$u0(e) {
     children: [{
       type: 'Text',
       props: {},
-      children: [`Unhandled node type: ${e.type}`],
+      children: [`Unhandled node type: ${node.type}`],
     }],
   }
 }
-export const Aw = $$u0
-export const LV = $$l1
-export const Mn = $$d2
-export const Ug = $$c3
-export const w5 = $$o4
+
+// Refactored exports for clarity and traceability
+export const Aw = createUnhandledNodeFrame
+export const LV = SerializeError
+export const Mn = deserializeErrorSchema
+export const Ug = DeserializeError
+export const w5 = errorMessageSchema

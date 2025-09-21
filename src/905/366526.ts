@@ -63,7 +63,7 @@ import { c as _$$c3 } from '../905/167005';
 import { a as _$$a2 } from '../905/173279';
 import { C as _$$C, Y as _$$Y } from '../905/180528';
 import { g as _$$g } from '../905/181093';
-import { t as _$$t4 } from '../905/181774';
+import { isFullscreenInterceptElement } from '../905/181774';
 import { i as _$$i4 } from '../905/182187';
 import { Z as _$$Z4 } from '../905/184216';
 import { getMPVisibleTheme, getThemePreferenceFromLocalStorage, isEnhancedContrastEnabled } from '../905/187165';
@@ -72,7 +72,7 @@ import { getGpuDeviceInfo } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
 import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
 import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redirectAfterRedeem, startSamlEmailVerification } from '../905/194276';
-import { j as _$$j4 } from '../905/200237';
+import { getSelectedId } from '../905/200237';
 import { px as _$$px2 } from '../905/201014';
 import { sessionApiInstance } from '../905/202181';
 import { h as _$$h } from '../905/207101';
@@ -184,7 +184,7 @@ import { registerDeferredCallback, requestDeferredExecution } from '../905/56143
 import { i as _$$i2 } from '../905/565139';
 import { nD as _$$nD, uB as _$$uB } from '../905/572991';
 import { FlashActions } from '../905/573154';
-import { vj, zQ } from '../905/574958';
+import { SearchAnalytics, getEntryPoint } from '../905/574958';
 import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
 import { l as _$$l7 } from '../905/579959';
@@ -254,7 +254,7 @@ import { AuthModal } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
 import { StatsigContext } from '../905/749933';
-import { tH as _$$tH, As, H4, S1 } from '../905/751457';
+import { ErrorBoundaryCrash, attachReactStackToError, errorBoundaryFallbackTypes, RootErrorBoundaryFallback } from '../905/751457';
 import { handlePluginError } from '../905/753206';
 import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
 import { m as _$$m } from '../905/760316';
@@ -275,7 +275,7 @@ import { d as _$$d5 } from '../905/811033';
 import { TeamType } from '../905/814802';
 import { languageCodes } from '../905/816253';
 import { F0 } from '../905/820492';
-import { F2 } from '../905/826900';
+import { KeyboardFocusManager } from '../905/826900';
 import { setupPluginCodeCache } from '../905/827944';
 import { u as _$$u3 } from '../905/831362';
 import { OrganizationType } from '../905/833838';
@@ -289,7 +289,7 @@ import { mergeWithObject } from '../905/848904';
 import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
 import { fileUpdateSavepointAction } from '../905/852057';
-import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
+import { updatePaintsDirectlyOnSingleNodeFromFullscreen, updateCurrentSelectionPaintInPicker, updateSelectionPaintsFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, clearSelectionPaintsDueToLimitExceeded, forceUpdateSelectionPaintsForUndo } from '../905/854717';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, SIGNED_UP_FROM_OPEN_SESSIONS } from '../905/862321';
@@ -318,14 +318,14 @@ import { A7, EL, H_ } from '../905/932769';
 import { b as _$$b3 } from '../905/937225';
 import { o as _$$o3 } from '../905/938553';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { F1 } from '../905/941249';
 import { Gk as _$$Gk, jH } from '../905/950959';
 import { hv as _$$hv } from '../905/952832';
 import { Mt as _$$Mt, AJ, CG, qI, vB, XJ } from '../905/959568';
 import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
-import { ej as _$$ej, eK as _$$eK2, hS as _$$hS3, Je as _$$Je, KQ as _$$KQ, Ns as _$$Ns, pY as _$$pY, qv as _$$qv, r0 as _$$r8, _z, Dy, H7, HI, ky, NR, PI, Pj, PP, qr, R7, Rz, vK, W0, w2, Z6, zy } from '../905/977218';
+import { searchSetLastAckedQueryIdAction, searchSetQueryIdAction, setSearchTypeBehaviorAction, searchSessionEnteredSearchViewViaEnterAction, setResponseAction, handleSearchParameterChangeThunk, searchIncrementQueryCountAction, sortStateThunk, searchSessionEnteredSearchViewAction, searchClearQueryAction, startSearchSessionAction, setResponseSortStateAction, clearWorkspaceFilterThunk, searchEndSessionAction, searchRestoreSessionAction, searchThunk, searchSessionSeeMoreClickAction, searchSetScrollTopAction, searchClearResponsesAction, setFullResultsSearchResponseAction, searchSetParametersAction, searchResetFileTypeFilterAction, searchSelectedAction, searchSetLastLoadedQueryAction, setFocusAction, setResponsesAction } from '../905/977218';
 import { qp } from '../905/977779';
 import { postUserFlag, setAllUserFlags } from '../905/985254';
 import { Y as _$$Y4 } from '../905/986107';
@@ -401,7 +401,7 @@ import { wl, y4 } from '../figma_app/298277';
 import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
 import { RR } from '../figma_app/307841';
-import { mu as _$$mu, sm as _$$sm, V9 as _$$V4, K6, PU, yc } from '../figma_app/308685';
+import { stopReactingAction, updateEmojiWheelPosition, toggleEmojiWheelAction, clearEmojiState, startReactingAction, startChattingAction } from '../figma_app/308685';
 import { trackFileCopyEvent, trackFileEvent, trackRoleEvent, trackUserEvent } from '../figma_app/314264';
 import { dO as _$$dO2 } from '../figma_app/318123';
 import { mg as _$$mg, on as _$$on, j3, Ri } from '../figma_app/327577';
@@ -447,7 +447,7 @@ import { openFileKeyAtom, selectCurrentFile } from '../figma_app/516028';
 import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
 import { A as _$$A9 } from '../figma_app/526287';
 import { P as _$$P, Z as _$$Z } from '../figma_app/529847';
-import { cO as _$$cO, cR as _$$cR, dv as _$$dv, eg as _$$eg, ig as _$$ig, r1 as _$$r6, rO as _$$rO2, _F, Ad, Ch, gT, Hx, LO, qo, RS, Rx, Zj } from '../figma_app/530167';
+import { resetCommentState, setCommunityAuthedActiveProfileAlias, followEntity, unfollowEntity, setCommentReplies, setComments, hideAdminProfileBanner, flushNewCommentsQueue, savePageState, showAdminProfileBanner, setCommentState, insertCommunityMention, restrictProfile, unrestrictProfile, addFollow, deleteFollow, setCommentsActiveFeedType } from '../figma_app/530167';
 import { Tf } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
@@ -467,7 +467,7 @@ import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
 import { fl, ye, zw } from '../figma_app/682945';
 import { FileCreationPermissionsGenerator } from '../figma_app/687776';
-import { kE as _$$kE, mH as _$$mH, QA as _$$QA, tG as _$$tG2, TW as _$$TW, HF, zs, Zv } from '../figma_app/703138';
+import { commitEditedComment, setShowResolved, editComment, commitCreatedComment, resetCommentStatus, commitHideComment, submitComment, commitDeletedComment } from '../figma_app/703138';
 import { y as _$$y5 } from '../figma_app/705249';
 import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
@@ -475,7 +475,7 @@ import { loadingStateDelete, loadingStatePutFailure, loadingStatePutFailureReaso
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { LP } from '../figma_app/728005';
-import { ZG } from '../figma_app/736948';
+import { BillingStatusEnum } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
 import { findProfile, getSelectedViewPluginVersions, getStatusOrDefault, isCommunityHubView, isUserAssociatedWithProfile, mapCommentsAndAuthors, mergeVersions } from '../figma_app/740025';
 import { LQ } from '../figma_app/741211';
@@ -510,7 +510,7 @@ import { o as _$$o } from '../figma_app/885533';
 import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { iN as _$$iN, lF as _$$lF3, Mv as _$$Mv, pS as _$$pS, to as _$$to2, U6 as _$$U4, X7 as _$$X4, gG, jv, N9, qP } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
-import { ai as _$$ai, kF as _$$kF, lF as _$$lF2 } from '../figma_app/915202';
+import { TabOpenBehavior, PluginRunForContext, LoadingBarStatus } from '../figma_app/915202';
 import { l0 as _$$l9, OP } from '../figma_app/920435';
 import { useLatestRef } from '../figma_app/922077';
 import { desktopVisibilityEmitter } from '../figma_app/925651';
@@ -967,7 +967,7 @@ function eb(e) {
 function eC(e) {
   return jsx('div', {
     'data-testid': e['data-testid'],
-    'style': _$$sx2.colorBg.add({
+    'style': styleBuilderInstance.colorBg.add({
       width: '100vw',
       height: '100vh'
     }).$,
@@ -991,7 +991,7 @@ class e$ extends PureComponent {
     };
   }
   componentDidCatch(e, t) {
-    e instanceof eX || (As(e, t), reportError(_$$e.GROWTH_PLATFORM, e, {
+    e instanceof eX || (attachReactStackToError(e, t), reportError(_$$e.GROWTH_PLATFORM, e, {
       tags: {
         react: !0,
         errorBoundary: 'StatsigProvider'
@@ -1017,7 +1017,7 @@ class eZ extends PureComponent {
     };
   }
   componentDidCatch(e, t) {
-    As(e, t);
+    attachReactStackToError(e, t);
   }
   render() {
     if (this.state.error != null) throw this.state.error;
@@ -1283,7 +1283,7 @@ async function e7(e) {
         severity: SeverityLevel.Critical
       }
     });
-    _$$Q2().render(jsx(S1, {
+    _$$Q2().render(jsx(RootErrorBoundaryFallback, {
       sentryId: e
     }));
     document.querySelector('#filebrowser-loading-page')?.remove();
@@ -2286,7 +2286,7 @@ let na = async e => {
       profileId: user.community_profile_id,
       userId: user.id
     }));
-    a && (persistCommunityProfileId(a.id), e.dispatch(_$$cR(a)));
+    a && (persistCommunityProfileId(a.id), e.dispatch(setCommunityAuthedActiveProfileAlias(a)));
   }
 };
 let ns = e => t => function (i) {
@@ -2306,12 +2306,12 @@ let ns = e => t => function (i) {
     let s = !!i.payload.profileTab;
     let o = modalShown?.type && nr.includes(modalShown.type);
     if (selectedView.view === 'communityHub' && o && !s && e.dispatch(hideModal()), i.payload.view === 'communityHub') {
-      if (e.dispatch(Ad(i.payload)), e.dispatch(AUTH_SET_REDIRECT_URL({
+      if (e.dispatch(savePageState(i.payload)), e.dispatch(AUTH_SET_REDIRECT_URL({
         redirectUrl: selectedViewToPath(t, i.payload)
       })), i.payload.subView === 'hubFile' || i.payload.subView === 'plugin' || i.payload.subView === 'widget') {
         let t = !1;
         i.payload.subView === 'hubFile' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'hubFile' && i.payload.hubFileId === selectedView.hubFileId : i.payload.subView === 'plugin' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'plugin' && i.payload.publishedPluginId === selectedView.publishedPluginId : i.payload.subView === 'widget' && (t = selectedView.view === 'communityHub' && selectedView.subView === 'widget' && i.payload.widgetId === selectedView.widgetId);
-        t || (e.dispatch(Zj(CommentTabType.ALL)), e.dispatch(_F()));
+        t || (e.dispatch(setCommentsActiveFeedType(CommentTabType.ALL)), e.dispatch(flushNewCommentsQueue()));
       }
       user && setCommunityProfileId(user.id);
     } else {
@@ -3509,7 +3509,7 @@ let ao = e => t => function (i) {
     let n = e.getState();
     let r = n.orgById[n.currentUserOrgId];
     let a = n.user && n.orgUsersByOrgId[n.currentUserOrgId] && n.orgUsersByOrgId[n.currentUserOrgId][n.user.id];
-    r && a && r.standing !== ZG.GOOD && a.permission !== FUserRoleType.GUEST && e.dispatch(Pg({
+    r && a && r.standing !== BillingStatusEnum.GOOD && a.permission !== FUserRoleType.GUEST && e.dispatch(Pg({
       orgId: n.currentUserOrgId
     }));
     return;
@@ -5630,7 +5630,7 @@ async function sB(e, t) {
       ...e.data.meta,
       fromRealtime: !0
     }));
-  }).$$finally(() => {
+  }).finally(() => {
     sU = !1;
   });
 }
@@ -6301,7 +6301,7 @@ function on(e = ot, t) {
       return n;
     }
   }
-  if (Rz.matches(t) && t.payload.fileTypeFilter != null) {
+  if (searchSetParametersAction.matches(t) && t.payload.fileTypeFilter != null) {
     let i = {
       ...e,
       search: {
@@ -6333,16 +6333,16 @@ let oo = e => t => function (i) {
     let {
       view
     } = n;
-    if (view === 'search' && i.payload.view !== 'search' && (e.dispatch(ky()), e.dispatch(_$$qv({
+    if (view === 'search' && i.payload.view !== 'search' && (e.dispatch(searchEndSessionAction()), e.dispatch(sortStateThunk({
       sortState: s6.parameters.sortState
-    })), e.dispatch(HI({})), e.dispatch(vK({})), e.dispatch(setBrowserTileSortView({
+    })), e.dispatch(clearWorkspaceFilterThunk({})), e.dispatch(searchResetFileTypeFilterAction({})), e.dispatch(setBrowserTileSortView({
       selectedView: n,
       config: oe
     }))), view !== 'search' && i.payload.view === 'search') {
-      e.dispatch(Dy({
+      e.dispatch(startSearchSessionAction({
         entryPoint: i.payload.entryPoint
       }));
-      e.dispatch(_$$r8({
+      e.dispatch(searchSessionEnteredSearchViewAction({
         entryPoint: i.payload.entryPoint
       }));
       let t = e.getState();
@@ -6352,26 +6352,26 @@ let oo = e => t => function (i) {
         searchScope,
         fileFilter
       } = jr(customHistory.location.search, t, i.payload);
-      fileFilter && e.dispatch(Rz({
+      fileFilter && e.dispatch(searchSetParametersAction({
         fileTypeFilter: fileFilter
       }));
-      t.search.parameters.facetFilters || (searchModelType === PublicModelType.HUB_FILES || searchModelType === PublicModelType.PUBLIC_PLUGINS || searchModelType === PublicModelType.PUBLIC_PROFILES || searchModelType === PublicModelType.PUBLIC_WIDGETS ? (atomStoreManager.set(R9, PublicModelType.FILES), e.dispatch(Rz({
+      t.search.parameters.facetFilters || (searchModelType === PublicModelType.HUB_FILES || searchModelType === PublicModelType.PUBLIC_PLUGINS || searchModelType === PublicModelType.PUBLIC_PROFILES || searchModelType === PublicModelType.PUBLIC_WIDGETS ? (atomStoreManager.set(R9, PublicModelType.FILES), e.dispatch(searchSetParametersAction({
         facetFilters: {
           searchModelType: PublicModelType.FILES
         }
-      }))) : (atomStoreManager.set(R9, searchModelType), e.dispatch(Rz({
+      }))) : (atomStoreManager.set(R9, searchModelType), e.dispatch(searchSetParametersAction({
         facetFilters: {
           searchModelType
         }
       }))));
-      query ? (atomStoreManager.set(Q8, query), e.dispatch(PI({
+      query ? (atomStoreManager.set(Q8, query), e.dispatch(searchThunk({
         searchModelType,
         query,
         searchScope,
         forceRefreshSearchResults: !0,
         debounce: !1,
         overrideIsFullResultsView: !0
-      }))) : e.dispatch(_$$Ns({
+      }))) : e.dispatch(handleSearchParameterChangeThunk({
         searchModelType,
         searchScope
       }));
@@ -6387,7 +6387,7 @@ let oo = e => t => function (i) {
       index: i.payload.index
     });
     os = !0;
-  } else if (_$$KQ.matches(i)) {
+  } else if (setResponseAction.matches(i)) {
     let n = e.getState().search;
     if (n.parameters.query !== i.payload.parameters.query) return t(i);
     let r = e.getState().search;
@@ -6403,7 +6403,7 @@ let oo = e => t => function (i) {
     let c = d.every(e => n.completedQueries[e] === i.payload.parameters.query);
     let u = d.every(e => r.completedQueries[e] === i.payload.parameters.query);
     let p = a.view === 'desktopNewTab';
-    (c && !u || p) && vj.Session.trackResult(n);
+    (c && !u || p) && SearchAnalytics.Session.trackResult(n);
   }
   return t(i);
 };
@@ -6832,7 +6832,7 @@ let oG = HY({
         ...e,
         state: BusyReadyState.BUSY
       };
-    } else if (zs.matches(t) && !t.payload.parentId && t.payload.pageId) {
+    } else if (submitComment.matches(t) && !t.payload.parentId && t.payload.pageId) {
       return {
         ...e,
         state: BusyReadyState.BUSY
@@ -6847,7 +6847,7 @@ let oG = HY({
         ...t.payload,
         state: BusyReadyState.READY
       };
-    } else if (_$$TW.matches(t) && t.payload.commentId === NEW_COMMENT_ID) {
+    } else if (resetCommentStatus.matches(t) && t.payload.commentId === NEW_COMMENT_ID) {
       return {
         ...e,
         state: BusyReadyState.READY
@@ -7012,16 +7012,16 @@ let oZ = {};
 let oX = {};
 let oQ = HY({
   activeFeedType(e = oW, t) {
-    return Zj.matches(t) ? t.payload : _F.matches(t) ? CommentTabType.ALL : e;
+    return setCommentsActiveFeedType.matches(t) ? t.payload : flushNewCommentsQueue.matches(t) ? CommentTabType.ALL : e;
   },
   authorsById(e = oK, t) {
-    if (_$$r6.matches(t)) {
+    if (setComments.matches(t)) {
       return {
         ...e,
         ...t.payload.authorsById
       };
     }
-    if (_$$tG2.matches(t)) {
+    if (commitCreatedComment.matches(t)) {
       let {
         comment
       } = t.payload;
@@ -7030,7 +7030,7 @@ let oQ = HY({
         [comment.author.id]: comment.author
       };
     }
-    if (_$$dv.matches(t)) {
+    if (followEntity.matches(t)) {
       let i = t.payload;
       return {
         ...e,
@@ -7040,7 +7040,7 @@ let oQ = HY({
         }
       };
     }
-    if (_$$eg.matches(t)) {
+    if (unfollowEntity.matches(t)) {
       let i = t.payload;
       return {
         ...e,
@@ -7050,7 +7050,7 @@ let oQ = HY({
         }
       };
     }
-    if (_$$ig.matches(t)) {
+    if (setCommentReplies.matches(t)) {
       let {
         authorsById
       } = mapCommentsAndAuthors(t.payload.replies);
@@ -7059,7 +7059,7 @@ let oQ = HY({
         ...authorsById
       };
     }
-    if (LO.matches(t)) {
+    if (restrictProfile.matches(t)) {
       let {
         blockedProfileId
       } = t.payload;
@@ -7071,7 +7071,7 @@ let oQ = HY({
         }
       };
     }
-    if (qo.matches(t)) {
+    if (unrestrictProfile.matches(t)) {
       let {
         blockedProfileId
       } = t.payload;
@@ -7086,13 +7086,13 @@ let oQ = HY({
     return e;
   },
   commentsById(e = oY, t) {
-    if (_$$r6.matches(t)) {
+    if (setComments.matches(t)) {
       return {
         ...e,
         ...t.payload.commentsById
       };
     }
-    if (_$$tG2.matches(t)) {
+    if (commitCreatedComment.matches(t)) {
       let {
         comment
       } = t.payload;
@@ -7110,7 +7110,7 @@ let oQ = HY({
       }
       return n;
     }
-    if (_$$kE.matches(t)) {
+    if (commitEditedComment.matches(t)) {
       let {
         comment
       } = t.payload;
@@ -7122,7 +7122,7 @@ let oQ = HY({
         }
       };
     }
-    if (_$$QA.matches(t) && t.payload.clientMeta) {
+    if (editComment.matches(t) && t.payload.clientMeta) {
       let {
         commentId,
         clientMeta
@@ -7135,7 +7135,7 @@ let oQ = HY({
         }
       };
     }
-    if (_$$ig.matches(t)) {
+    if (setCommentReplies.matches(t)) {
       let {
         commentsById
       } = mapCommentsAndAuthors(t.payload.replies);
@@ -7144,7 +7144,7 @@ let oQ = HY({
         ...commentsById
       };
     }
-    if (HF.matches(t)) {
+    if (commitHideComment.matches(t)) {
       let {
         commentId
       } = t.payload;
@@ -7156,7 +7156,7 @@ let oQ = HY({
         }
       };
     }
-    if (Zv.matches(t)) {
+    if (commitDeletedComment.matches(t)) {
       let {
         comments
       } = t.payload;
@@ -7177,8 +7177,8 @@ let oQ = HY({
     return e;
   },
   feeds(e = oq, t) {
-    if (_$$cO.matches(t)) return oq;
-    if (_$$r6.matches(t)) {
+    if (resetCommentState.matches(t)) return oq;
+    if (setComments.matches(t)) {
       let i = e[t.payload.activeFeedType]?.feed || [];
       let n = t.payload.feed.filter(e => !i.includes(e));
       return {
@@ -7190,7 +7190,7 @@ let oQ = HY({
         }
       };
     }
-    if (Zj.matches(t)) {
+    if (setCommentsActiveFeedType.matches(t)) {
       return {
         ...e,
         [t.payload]: e[t.payload] || {
@@ -7198,7 +7198,7 @@ let oQ = HY({
         }
       };
     }
-    if (_$$tG2.matches(t)) {
+    if (commitCreatedComment.matches(t)) {
       let {
         comment,
         isReply
@@ -7216,7 +7216,7 @@ let oQ = HY({
         });
         return t;
       }
-    } else if (Zv.matches(t)) {
+    } else if (commitDeletedComment.matches(t)) {
       let {
         comments
       } = t.payload;
@@ -7234,7 +7234,7 @@ let oQ = HY({
         };
       });
       return n;
-    } else if (HF.matches(t)) {
+    } else if (commitHideComment.matches(t)) {
       let {
         commentId
       } = t.payload;
@@ -7251,7 +7251,7 @@ let oQ = HY({
         } : n[CommentTabType.ALL]?.pagination
       };
       return n;
-    } else if (_F.matches(t)) {
+    } else if (flushNewCommentsQueue.matches(t)) {
       return {
         ...e,
         [CommentTabType.ALL]: {
@@ -7262,10 +7262,10 @@ let oQ = HY({
     return e;
   },
   id(e = null, t) {
-    return gT.matches(t) ? t.payload.id : _$$tG2.matches(t) ? t.payload.resourceId : e;
+    return setCommentState.matches(t) ? t.payload.id : commitCreatedComment.matches(t) ? t.payload.resourceId : e;
   },
   replyInfoByParentId(e = oX, t) {
-    if (_$$tG2.matches(t)) {
+    if (commitCreatedComment.matches(t)) {
       let {
         comment
       } = t.payload;
@@ -7280,7 +7280,7 @@ let oQ = HY({
           }
         };
       }
-    } else if (Zv.matches(t)) {
+    } else if (commitDeletedComment.matches(t)) {
       let {
         comments
       } = t.payload;
@@ -7297,7 +7297,7 @@ let oQ = HY({
         }
       });
       return n;
-    } else if (_$$ig.matches(t)) {
+    } else if (setCommentReplies.matches(t)) {
       let {
         feed
       } = mapCommentsAndAuthors(t.payload.replies);
@@ -7317,7 +7317,7 @@ let oQ = HY({
           newReplyMessageMeta: t.payload.messageMeta
         }
       };
-    } else if (zs.matches(t) && t.payload.parentId) {
+    } else if (submitComment.matches(t) && t.payload.parentId) {
       return {
         ...e,
         [t.payload.parentId]: {
@@ -7325,7 +7325,7 @@ let oQ = HY({
           status: BusyReadyState.BUSY
         }
       };
-    } else if (_$$TW.matches(t) && t.payload.commentId !== NEW_COMMENT_ID) {
+    } else if (resetCommentStatus.matches(t) && t.payload.commentId !== NEW_COMMENT_ID) {
       return {
         ...e,
         [t.payload.commentId]: {
@@ -7337,23 +7337,23 @@ let oQ = HY({
     return e;
   },
   selectedCommentId(e = null, t) {
-    return _$$r6.matches(t) ? t.payload.selectedCommentId || e : _$$Fm.matches(t) ? t.payload.threadId : _$$cL3.matches(t) ? null : $0.matches(t) ? NEW_COMMENT_ID : e;
+    return setComments.matches(t) ? t.payload.selectedCommentId || e : _$$Fm.matches(t) ? t.payload.threadId : _$$cL3.matches(t) ? null : $0.matches(t) ? NEW_COMMENT_ID : e;
   },
   type(e = null, t) {
-    return gT.matches(t) ? t.payload.type : _$$tG2.matches(t) ? t.payload.resourceType : e;
+    return setCommentState.matches(t) ? t.payload.type : commitCreatedComment.matches(t) ? t.payload.resourceType : e;
   },
   showResolved(e = !1, t) {
-    return _$$mH.matches(t) ? t.payload : e;
+    return setShowResolved.matches(t) ? t.payload : e;
   },
   mentionedProfiles(e = oZ, t) {
-    if (_$$r6.matches(t)) {
+    if (setComments.matches(t)) {
       return {
         ...e,
         ...t.payload.mentionedProfiles
       };
     }
-    if (_$$cO.matches(t)) return oZ;
-    if (Hx.matches(t)) {
+    if (resetCommentState.matches(t)) return oZ;
+    if (insertCommunityMention.matches(t)) {
       let i = {
         ...e
       };
@@ -7367,19 +7367,19 @@ let o0 = HY({
   currentProfile(e = null, t) {
     if (putCommunityProfile.matches(t)) return t.payload;
     if (clearCommunityProfile.matches(t)) return null;
-    if (LO.matches(t) && t.payload.blockedProfileId === e?.id) {
+    if (restrictProfile.matches(t) && t.payload.blockedProfileId === e?.id) {
       return {
         ...e,
         is_restricted_by_current_user: !0
       };
     }
-    if (qo.matches(t) && t.payload.blockedProfileId === e?.id) {
+    if (unrestrictProfile.matches(t) && t.payload.blockedProfileId === e?.id) {
       return {
         ...e,
         is_restricted_by_current_user: !1
       };
     }
-    if (RS.matches(t)) {
+    if (addFollow.matches(t)) {
       if (t.payload.followedProfileId === e?.id) {
         return {
           ...e,
@@ -7394,7 +7394,7 @@ let o0 = HY({
         };
       }
     }
-    if (Rx.matches(t)) {
+    if (deleteFollow.matches(t)) {
       if (t.payload.followedProfileId === e?.id) {
         return {
           ...e,
@@ -7421,7 +7421,7 @@ let o0 = HY({
     } : e;
   },
   pageState(e = null, t) {
-    return Ad.matches(t) ? {
+    return savePageState.matches(t) ? {
       ...e,
       ...t.payload
     } : clearCommunityProfile.matches(t) && e?.view === 'communityHub' && e.subView === 'handle' && e.handle === t.payload ? null : e;
@@ -7434,7 +7434,7 @@ let o0 = HY({
     } : e;
   },
   showingCommunityAdminBanner(e = !1, t) {
-    return !!Ch.matches(t) || !_$$rO2.matches(t) && e;
+    return !!showAdminProfileBanner.matches(t) || !hideAdminProfileBanner.matches(t) && e;
   }
 });
 let o5 = {
@@ -10044,30 +10044,30 @@ let cE = HY({
     emptyDueToLimitExceeded: !1,
     forceUpdateForUndo: !1
   }, t) {
-    return _$$QA2.matches(t) ? {
+    return updateSelectionPaintsFromFullscreen.matches(t) ? {
       ...e,
       paints: t.payload,
       emptyDueToLimitExceeded: !1
-    } : Lh.matches(t) ? {
+    } : updateSelectionStylesFromFullscreen.matches(t) ? {
       ...e,
       styles: t.payload,
       emptyDueToLimitExceeded: !1
-    } : _$$n4.matches(t) ? {
+    } : updatePaintsDirectlyOnSingleNodeFromFullscreen.matches(t) ? {
       ...e,
       paintsDirectlyOnSingleNode: t.payload,
       emptyDueToLimitExceeded: !1
-    } : _$$uQ.matches(t) ? {
+    } : updateStylesDirectlyOnSingleNodeFromFullscreen.matches(t) ? {
       ...e,
       stylesDirectlyOnSingleNode: t.payload,
       emptyDueToLimitExceeded: !1
-    } : Mc.matches(t) ? {
+    } : clearSelectionPaintsDueToLimitExceeded.matches(t) ? {
       paints: [],
       styles: [],
       paintsDirectlyOnSingleNode: [],
       stylesDirectlyOnSingleNode: [],
       emptyDueToLimitExceeded: !0,
       forceUpdateForUndo: !1
-    } : Xp.matches(t) ? {
+    } : forceUpdateSelectionPaintsForUndo.matches(t) ? {
       ...e,
       forceUpdateForUndo: t.payload
     } : e;
@@ -10166,7 +10166,7 @@ function cj(e = !1, t) {
 }
 function cU(e = {
   mode: UIVisibilitySetting.OFF,
-  type: _$$lF2.BAR
+  type: LoadingBarStatus.BAR
 }, t) {
   let i = e;
   initAction.matches(t) ? i = {
@@ -10186,7 +10186,7 @@ function cU(e = {
 }
 function cB(e = !1, t) {
   if (HO.matches(t)) {
-    if (t.payload.openNewFileIn === _$$ai.SAME_TAB) return !1;
+    if (t.payload.openNewFileIn === TabOpenBehavior.SAME_TAB) return !1;
   } else if (initAction.matches(t) || _$$ho2.matches(t) || Qm.matches(t) || _$$o8.matches(t)) {
     return !1;
   } else if (yv.matches(t)) {
@@ -10194,8 +10194,8 @@ function cB(e = !1, t) {
   }
   return e;
 }
-function cV(e = _$$kF.NONE, t) {
-  return _$$aK.matches(t) ? t.payload : Z1.matches(t) ? _$$kF.NONE : e;
+function cV(e = PluginRunForContext.NONE, t) {
+  return _$$aK.matches(t) ? t.payload : Z1.matches(t) ? PluginRunForContext.NONE : e;
 }
 function cG(e = null, t) {
   return initAction.matches(t) ? null : _$$v5.matches(t) ? t.payload : e;
@@ -10261,7 +10261,7 @@ function c2(e = {
     type: 'NONE',
     wheelType: c1()
   }, t) => {
-    if (_$$V4.matches(t)) {
+    if (toggleEmojiWheelAction.matches(t)) {
       let i = e.wheelType;
       let n = e.type;
       if (t.payload.wheelType) {
@@ -10293,30 +10293,30 @@ function c2(e = {
         wheelType: i
       };
     }
-    return PU.matches(t) ? {
+    return startReactingAction.matches(t) ? {
       type: 'REACTING_OR_CHATTING',
       wheelType: e.wheelType,
       isChatting: e.type === 'REACTING_OR_CHATTING' && e.isChatting,
       imageUrl: t.payload.imageUrl,
       name: t.payload.name,
       viewportPosition: t.payload.position
-    } : _$$mu.matches(t) && e.type === 'REACTING_OR_CHATTING' ? e.isChatting ? {
+    } : stopReactingAction.matches(t) && e.type === 'REACTING_OR_CHATTING' ? e.isChatting ? {
       ...e,
       imageUrl: null
     } : {
       type: 'NONE',
       wheelType: e.wheelType
-    } : yc.matches(t) ? {
+    } : startChattingAction.matches(t) ? {
       type: 'REACTING_OR_CHATTING',
       wheelType: e.wheelType,
       imageUrl: e.type === 'REACTING_OR_CHATTING' ? e.imageUrl : null,
       name: e.type === 'REACTING_OR_CHATTING' ? e.name : null,
       viewportPosition: t.payload.position,
       isChatting: !0
-    } : K6.matches(t) ? {
+    } : clearEmojiState.matches(t) ? {
       type: 'NONE',
       wheelType: e.wheelType
-    } : _$$sm.matches(t) && e.type === 'WHEEL' ? {
+    } : updateEmojiWheelPosition.matches(t) && e.type === 'WHEEL' ? {
       ...e,
       viewportX: t.payload.viewportX,
       viewportY: t.payload.viewportY
@@ -10400,7 +10400,7 @@ function c7(e = {
   return e;
 }
 function c8(e = {}, t) {
-  return _$$oI3.matches(t) ? t.payload : e;
+  return updateCurrentSelectionPaintInPicker.matches(t) ? t.payload : e;
 }
 let c9 = 'style-picker-list-layout';
 let ue = localStorageRef?.getItem(c9);
@@ -10579,7 +10579,7 @@ let uD = Oi((e = {}, t) => {
     for (let e of t.payload) delete i[e.id];
     return i;
   }
-  if (_$$tG2.matches(t)) {
+  if (commitCreatedComment.matches(t)) {
     let {
       resourceType,
       resourceId
@@ -10595,7 +10595,7 @@ let uD = Oi((e = {}, t) => {
       });
       return t;
     }
-  } else if (Zv.matches(t)) {
+  } else if (commitDeletedComment.matches(t)) {
     let {
       resourceType,
       resourceId,
@@ -10612,7 +10612,7 @@ let uD = Oi((e = {}, t) => {
       t[resourceId] = i;
       return t;
     }
-  } else if (HF.matches(t)) {
+  } else if (commitHideComment.matches(t)) {
     let {
       resourceType,
       resourceId
@@ -12166,7 +12166,7 @@ let pg = {
       });
       return i;
     }
-    if (_$$tG2.matches(t)) {
+    if (commitCreatedComment.matches(t)) {
       let {
         resourceType,
         resourceId,
@@ -12183,7 +12183,7 @@ let pg = {
         });
         return t;
       }
-    } else if (Zv.matches(t)) {
+    } else if (commitDeletedComment.matches(t)) {
       let {
         resourceType,
         resourceId,
@@ -12202,7 +12202,7 @@ let pg = {
         t[resourceId] = i;
         return t;
       }
-    } else if (HF.matches(t)) {
+    } else if (commitHideComment.matches(t)) {
       let {
         resourceType,
         resourceId
@@ -12573,45 +12573,45 @@ let pg = {
     return e;
   },
   search(e = s6, t) {
-    if (W0.matches(t)) {
+    if (searchSelectedAction.matches(t)) {
       let {
         entryPoint
       } = t.payload;
-      let n = zQ(entryPoint);
-      return vj.Session.select(e, {
+      let n = getEntryPoint(entryPoint);
+      return SearchAnalytics.Session.select(e, {
         entryPoint: n
       });
     }
-    if (Dy.matches(t)) {
+    if (startSearchSessionAction.matches(t)) {
       let {
         entryPoint
       } = t.payload;
-      let n = zQ(entryPoint);
-      return vj.Session.start(e, {
+      let n = getEntryPoint(entryPoint);
+      return SearchAnalytics.Session.start(e, {
         entryPoint: n
       });
     }
-    if (ky.matches(t)) return vj.Session.trackEnd(e);
-    if (NR.matches(t)) {
+    if (searchEndSessionAction.matches(t)) return SearchAnalytics.Session.trackEnd(e);
+    if (searchRestoreSessionAction.matches(t)) {
       return {
         ...e,
         sessionId: t.payload.sessionId
       };
     }
-    if (_$$r8.matches(t)) {
-      vj.Session.enterSearchView(e, t.payload.entryPoint);
+    if (searchSessionEnteredSearchViewAction.matches(t)) {
+      SearchAnalytics.Session.enterSearchView(e, t.payload.entryPoint);
       return e;
     }
-    if (_$$Je.matches(t)) {
-      vj.Session.enterSearchViewViaEnter(e, t.payload.entryPoint);
+    if (searchSessionEnteredSearchViewViaEnterAction.matches(t)) {
+      SearchAnalytics.Session.enterSearchViewViaEnter(e, t.payload.entryPoint);
       return e;
     }
-    if (Pj.matches(t)) {
-      vj.Session.trackSeeMore(e, t.payload.category);
+    if (searchSessionSeeMoreClickAction.matches(t)) {
+      SearchAnalytics.Session.trackSeeMore(e, t.payload.category);
       return e;
     }
-    if (_$$pY.matches(t)) return vj.Session.incrementQueryCount(e);
-    if (Rz.matches(t)) {
+    if (searchIncrementQueryCountAction.matches(t)) return SearchAnalytics.Session.incrementQueryCount(e);
+    if (searchSetParametersAction.matches(t)) {
       let i = {
         ...e.parameters,
         ...t.payload
@@ -12623,7 +12623,7 @@ let pg = {
         parameters: i
       };
     }
-    if (H7.matches(t)) {
+    if (setResponseSortStateAction.matches(t)) {
       let i = {
         ...e.parameters.sortState,
         ...e.responseSortState,
@@ -12634,7 +12634,7 @@ let pg = {
         responseSortState: i
       };
     }
-    if (_z.matches(t)) {
+    if (searchClearQueryAction.matches(t)) {
       let {
         keepFocus
       } = t.payload;
@@ -12653,7 +12653,7 @@ let pg = {
         ...n
       };
     }
-    if (qr.matches(t)) {
+    if (searchClearResponsesAction.matches(t)) {
       return {
         ...e,
         responses: s6.responses,
@@ -12661,33 +12661,33 @@ let pg = {
         completedQueries: s6.completedQueries
       };
     }
-    if (Z6.matches(t)) {
+    if (setFocusAction.matches(t)) {
       return {
-        ...(t.payload.persistAnalyticsSession || t.payload.isFocused ? e : vj.Session.trackEnd(e)),
+        ...(t.payload.persistAnalyticsSession || t.payload.isFocused ? e : SearchAnalytics.Session.trackEnd(e)),
         isFocused: t.payload.isFocused
       };
     }
-    if (_$$ej.matches(t)) {
+    if (searchSetLastAckedQueryIdAction.matches(t)) {
       return {
         ...e,
         lastAckedQueryId: t.payload.lastAckedQueryId
       };
     }
-    if (PP.matches(t)) {
+    if (searchSetScrollTopAction.matches(t)) {
       return {
         ...e,
         searchScrollTop: t.payload.top
       };
     }
-    if (_$$hS3.matches(t)) {
+    if (setSearchTypeBehaviorAction.matches(t)) {
       return {
         ...e,
         searchTypeBehavior: t.payload.searchTypeBehavior
       };
     }
-    if (_$$KQ.matches(t)) {
+    if (setResponseAction.matches(t)) {
       if (e.parameters.query !== t.payload.parameters.query) return e;
-      t.payload.reset && vj.Session.incrementQueryCount(e);
+      t.payload.reset && SearchAnalytics.Session.incrementQueryCount(e);
       let i = {
         ...t.payload.response
       };
@@ -12715,7 +12715,7 @@ let pg = {
         queryId: t.payload.queryId
       };
     }
-    if (R7.matches(t)) {
+    if (setFullResultsSearchResponseAction.matches(t)) {
       if (e.parameters.query !== t.payload.parameters.query) return e;
       let i = {
         ...t.payload.response
@@ -12744,9 +12744,9 @@ let pg = {
         queryId: t.payload.queryId
       };
     }
-    if (zy.matches(t)) {
+    if (setResponsesAction.matches(t)) {
       if (e.parameters.query !== t.payload.parameters.query) return e;
-      vj.Session.incrementQueryCount(e);
+      SearchAnalytics.Session.incrementQueryCount(e);
       let i = t.payload.responses.filter(e => e.results.length > 0).map(e => e.search_model_type);
       let n = t.payload.responses.reduce((e, i) => {
         if (i.results) {
@@ -12792,7 +12792,7 @@ let pg = {
         searchPreviewOrder: t.payload.reset ? s6.searchPreviewOrder : i
       };
     }
-    if (w2.matches(t)) {
+    if (searchSetLastLoadedQueryAction.matches(t)) {
       return {
         ...e,
         lastLoadedQuery: {
@@ -12802,13 +12802,13 @@ let pg = {
         }
       };
     }
-    if (_$$eK2.matches(t)) {
+    if (searchSetQueryIdAction.matches(t)) {
       return {
         ...e,
         queryId: t.payload.queryId
       };
     }
-    if (vK.matches(t)) {
+    if (searchResetFileTypeFilterAction.matches(t)) {
       return {
         ...e,
         parameters: {
@@ -12846,7 +12846,7 @@ let pg = {
     }
     return e;
   },
-  lastVisitedPlanId: _$$j4,
+  lastVisitedPlanId: getSelectedId,
   lastVisitedPlan(e = null, t) {
     let i = e?.planId || null;
     let n = e?.planType || null;
@@ -13315,7 +13315,7 @@ let md = createOptimistThunk((e, {
     updateJoinStatus(t, i);
     i === SchemaJoinStatus.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === SchemaJoinStatus.JOINED && e.dispatch(D9());
   }(e, r, a);
-  void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(_$$mu());
+  void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(stopReactingAction());
 });
 let mp = createOptimistThunk((e, t) => {
   let i = e.getState().mirror.appModel;
@@ -14455,7 +14455,7 @@ export async function $$hz0(e, t, d = {
           } : void 0;
           let n = getNewFileConfig({
             state: b.getState(),
-            openNewFileIn: _$$ai.NEW_TAB,
+            openNewFileIn: TabOpenBehavior.NEW_TAB,
             folderOverride: 'drafts',
             trackingInfo: i,
             editorType: e
@@ -14466,7 +14466,7 @@ export async function $$hz0(e, t, d = {
             let {
               activeElement
             } = document;
-            if (activeElement?.classList.contains('focus-target') || _$$t4(activeElement)) {
+            if (activeElement?.classList.contains('focus-target') || isFullscreenInterceptElement(activeElement)) {
               let e = null;
               switch (t.pageCommand) {
                 case 'redo':
@@ -15293,9 +15293,9 @@ export async function $$hz0(e, t, d = {
         });
         let i = document.getElementById('react-page');
         getFeatureFlags().disable_google_translate && i.setAttribute('translate', 'no');
-        _$$H(i).render(jsx(_$$tH, {
+        _$$H(i).render(jsx(ErrorBoundaryCrash, {
           boundaryKey: 'root',
-          fallback: H4.DEFAULT_FULL_PAGE,
+          fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
           hasCustomWASMBuild: y4,
           children: jsx(t, {})
         }));
@@ -15335,6 +15335,6 @@ function hW() {
 }
 function hK() {
   reactTimerGroup.stop('react-render');
-  (!isIntegrationContext() || isZoomIntegration()) && F2.focusIfUnfocused();
+  (!isIntegrationContext() || isZoomIntegration()) && KeyboardFocusManager.focusIfUnfocused();
 }
 export const n = $$hz0;

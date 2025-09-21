@@ -17,7 +17,7 @@ import { FProductAccessType, FFileType, FOrganizationLevelType } from "../figma_
 import { OpenEditorFileData, EditButtonView } from "../figma_app/43951";
 import { isExportRestricted } from "../figma_app/12796";
 import { wH } from "../figma_app/680166";
-import { Gv } from "../figma_app/736948";
+import { ApprovalStatusEnum } from "../figma_app/736948";
 import { J as _$$J, q as _$$q } from "../905/202542";
 import { getRumLoggingConfig } from "../905/16237";
 import { TrackingProvider } from "../figma_app/831799";
@@ -328,7 +328,7 @@ export function $$et3(e) {
     type: "editButtonLoading"
   };
   if ("loaded" === F.status) {
-    let e = t.org?.inviteWhitelist?.guestInviteSetting === Gv.REQUIRE_APPROVAL && !!F.data.orgJoinRequest;
+    let e = t.org?.inviteWhitelist?.guestInviteSetting === ApprovalStatusEnum.REQUIRE_APPROVAL && !!F.data.orgJoinRequest;
     let i = F.data.file?.fileRoleRequests.find(e => e.requesterUserId === r?.id);
     j?.updateHasPendingEditRequest && j.updateHasPendingEditRequest(!!i);
     let a = getI18nString("fullscreen.toolbar.pending-org-join-request-tooltip", {

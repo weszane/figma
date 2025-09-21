@@ -13,7 +13,7 @@ import { UK } from "../figma_app/740163";
 import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
 import { BK, Um } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { zy } from "../figma_app/915202";
+import { ClipboardOperation } from "../figma_app/915202";
 import { isExtension, everyLocalSubscription, isLocalSubscription, isLocalSubscriptionStatus } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { P as _$$P } from "../905/201667";
@@ -142,7 +142,7 @@ import { k9 } from "../905/182598";
 import { l as _$$l } from "../905/745972";
 import { c as _$$c } from "../905/210851";
 import { n as _$$n } from "../905/971006";
-import { vL, pS } from "../905/826900";
+import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
 var R = k;
 function K({
   targetRect: e,
@@ -3631,7 +3631,7 @@ function i2({
         "data-testid": "variables-modal-backdrop",
         className: "x1w4pau8 xn9wirt x1dr59a3 x13vifvy xu96u03 xixxii4"
       })
-    }), jsx(vL, {
+    }), jsx(KeyboardReceiver, {
       handleKeyDown: i,
       handleClipboard: o,
       ref: A,
@@ -3658,7 +3658,7 @@ function i2({
             p(e);
             e.stopPropagation();
           },
-          onKeyDown: e => i?.(new pS(e.nativeEvent))
+          onKeyDown: e => i?.(new KeyboardEventWrapper(e.nativeEvent))
         },
         manager: N,
         onClose: e => {
@@ -4207,11 +4207,11 @@ export let $$i50 = registerModal(function () {
     }, [i, a]);
   }(variableList, actions.setSelectedVariableIDs, actions.pasteClipboardVariables), everyLocalSubscription(variableList));
   let W = useCallback((e, t) => {
-    t === zy.COPY && (actions.copySelectedVariables?.({
+    t === ClipboardOperation.COPY && (actions.copySelectedVariables?.({
       action: "keyboard_shortcut",
       ...N
     }), e.accept(), e.shouldPropagate = !1);
-    t === zy.PASTE && (H?.({
+    t === ClipboardOperation.PASTE && (H?.({
       action: "keyboard_shortcut",
       ...N
     }), e.accept(), e.shouldPropagate = !1);

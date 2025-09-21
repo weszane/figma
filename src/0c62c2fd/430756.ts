@@ -26,7 +26,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FTeamAccessPermissionType, FPlanNameType, FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { FolderCreation, UserFlagByName } from "../figma_app/43951";
 import { mapOrgDomainProperties } from "../figma_app/349248";
-import { H_ } from "../figma_app/336853";
+import { checkDomainExists } from "../figma_app/336853";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
 import { Wj } from "../905/913057";
@@ -167,7 +167,7 @@ export function $$er0(e) {
     let t = getFeatureFlags().folder_creation_restricted_guests_err_ui && ed?.invite_whitelist_guest_invite_setting != null;
     return yI(e, K.usersByEmail[e] || e, ed, e_, er.email, t ? getI18nString("project_creation.restricted_against_adding_external_users") : null);
   };
-  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => isValidEmail(e) && !H_(e_.domains, e)) : [];
+  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => isValidEmail(e) && !checkDomainExists(e_.domains, e)) : [];
   let eI = e => {
     if (ed && ed?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
       t(showModalHandler({

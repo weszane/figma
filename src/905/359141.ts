@@ -1,5 +1,6 @@
 import ek from 'classnames';
 import { Fragment as _$$Fragment, createContext, createElement, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { isLoading } from '../905/18797';
@@ -42,6 +43,7 @@ import { J as _$$J2 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { $ as _$$$2 } from '../905/455748';
 import { a as _$$a } from '../905/462280';
+import { AutoLayout } from '../905/470281';
 import { formatI18nMessage } from '../905/482208';
 import { z as _$$z2 } from '../905/491916';
 import { getLibraryName } from '../905/506188';
@@ -73,7 +75,7 @@ import { TabLoop } from '../905/718764';
 import { gB, Xm } from '../905/723791';
 import { W as _$$W2 } from '../905/729905';
 import { G as _$$G } from '../905/750789';
-import { tH as _$$tH } from '../905/751457';
+import { ErrorBoundaryCrash } from '../905/751457';
 import { er as _$$er, sz, Tp, zm } from '../905/753512';
 import { $$ei1, $$et0 } from '../905/759609';
 import { isBranchAlt } from '../905/760074';
@@ -84,9 +86,7 @@ import { _w, Ir, mq } from '../905/789781';
 import { i as _$$i } from '../905/797975';
 import { handleLoadAllPagesWithVersionCheck } from '../905/807667';
 import { _5, eS as _$$eS2, W as _$$W, b1, mG, Pq, Px, Qj, ry } from '../905/825399';
-import { AutoLayout } from '../905/470281';
 import { V as _$$V } from '../905/843013';
-import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { getParentOrgId } from '../905/872904';
 import { $z } from '../905/909811';
@@ -95,7 +95,7 @@ import { n as _$$n } from '../905/913636';
 import { hideDropdownAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { Xm as _$$Xm } from '../905/935570';
-import { sx as _$$sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { $3 } from '../905/946937';
 import { qp } from '../905/977779';
 import { h1 } from '../905/986103';
@@ -104,14 +104,13 @@ import { h as _$$h3 } from '../905/994594';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { KP } from '../figma_app/12491';
 import { atom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { useSyncedState, useLatestRef } from '../figma_app/922077';
 import { LibraryModalAssetsDataByLibraryKey, OrgTeamView } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { h as _$$h2 } from '../figma_app/58251';
 import { assertNotNullish, isNotNullish } from '../figma_app/95419';
 import { M3 } from '../figma_app/119475';
 import { directlySubscribedStylesUniqueKeysAtom } from '../figma_app/141508';
-import { useUntransformedSubscribedLibraries, useSubscribedLibraries, LibrarySubscriptionType } from '../figma_app/155728';
+import { LibrarySubscriptionType, useSubscribedLibraries, useUntransformedSubscribedLibraries } from '../figma_app/155728';
 import { JR, Qp, Wi } from '../figma_app/162641';
 import { t as _$$t3 } from '../figma_app/162756';
 import { Qk } from '../figma_app/188908';
@@ -121,12 +120,12 @@ import { Ay } from '../figma_app/272902';
 import { useSubscription } from '../figma_app/288654';
 import { lo } from '../figma_app/297733';
 import { f9 } from '../figma_app/328188';
-import { Oe } from '../figma_app/336853';
+import { isBigmaEnabledAlias3 } from '../figma_app/336853';
 import { getSelectedView } from '../figma_app/386952';
 import { se } from '../figma_app/435826';
 import { assert, throwError, throwTypeError } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
-import { useCurrentFileKey, useOpenFileLibraryKey, openFileLibraryKeyAtom, selectCurrentFile, openFileAtom } from '../figma_app/516028';
+import { openFileAtom, openFileLibraryKeyAtom, selectCurrentFile, useCurrentFileKey, useOpenFileLibraryKey } from '../figma_app/516028';
 import { P as _$$P2, Au } from '../figma_app/518077';
 import { e as _$$e } from '../figma_app/522702';
 import { TF } from '../figma_app/524618';
@@ -137,8 +136,8 @@ import { lX } from '../figma_app/588397';
 import { getCurrentTeam } from '../figma_app/598018';
 import { createTrackedAtom } from '../figma_app/615482';
 import { $z as _$$$z } from '../figma_app/617427';
-import { PublishStatusEnum, isTeamLibrary, isPublishedTeamLibrary, PrimaryWorkflowEnum, LibraryPublishStatusEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
-import { useSubscribedAssets, AssetFilterMode, getAssetKey, getAssetVersion, LibrarySubscriptionContext, useCurrentUserOrg, getAssetLibraryKey } from '../figma_app/646357';
+import { isPublishedLibraryWithAssets, isPublishedTeamLibrary, isTeamLibrary, LibraryPublishStatusEnum, PrimaryWorkflowEnum, PublishStatusEnum } from '../figma_app/633080';
+import { AssetFilterMode, getAssetKey, getAssetLibraryKey, getAssetVersion, LibrarySubscriptionContext, useCurrentUserOrg, useSubscribedAssets } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { i as _$$i2 } from '../figma_app/709177';
 import { ig as _$$ig } from '../figma_app/713624';
@@ -154,13 +153,13 @@ import { C as _$$C } from '../figma_app/872960';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { localStylesWithUsagesOnLoadedPagesAtom } from '../figma_app/889655';
 import { Badge, BadgeColor } from '../figma_app/919079';
+import { useLatestRef, useSyncedState } from '../figma_app/922077';
 import { R8 } from '../figma_app/933221';
 import iC from '../vendor/3757';
 import eg from '../vendor/73823';
 import th from '../vendor/241899';
 import tf from '../vendor/260986';
 import iH from '../vendor/338009';
-import { useDispatch, useSelector } from 'react-redux';
 import ex from '../vendor/523035';
 let _ = new PerfTimer('performance.ds_eco.load_time', {});
 let A = createTrackedAtom(!1);
@@ -386,7 +385,7 @@ function el() {
       className: 'library_view--loadingComponentContainer--jnhEK component_tiles--componentContainer_v2--cgysm',
       children: range(4).map(e => jsx(Qp, {
         animationType: JR.SHIMMER,
-        style: _$$sx.radiusMedium.add({
+        style: styleBuilderInstance.radiusMedium.add({
           width: `${$z}px`,
           height: `${$z}px`
         }).$
@@ -603,7 +602,7 @@ function eB({
             thumbnailUrl: e.thumbnail_url,
             coverThumbnail: h,
             name: e.library_name,
-            style: _$$sx.add({
+            style: styleBuilderInstance.add({
               width: `${d}px`,
               height: `${c}px`
             }).$
@@ -755,7 +754,7 @@ function eH({
   margin: e = 16
 }) {
   return jsx('div', {
-    style: _$$sx.colorBorder.wFull.add({
+    style: styleBuilderInstance.colorBorder.wFull.add({
       borderBottomWidth: '1px',
       borderStyle: 'solid',
       margin: `${e}px 0`
@@ -2898,7 +2897,7 @@ function nh({
 }) {
   let c;
   let u = useCurrentUserOrg();
-  let p = Oe(u);
+  let p = isBigmaEnabledAlias3(u);
   let m = useMemo(() => e.components.length > 0 ? e.components[0] : e.stateGroups.length > 0 ? e.stateGroups[0] : e.styles.length > 0 ? e.styles[0] : e.variableSets.length > 0 ? e.variableSets[0] : e.codeComponents.length > 0 ? e.codeComponents[0] : null, [e]);
   let h = R8({
     assetKey: m != null ? getAssetKey(m) : void 0,
@@ -3705,7 +3704,7 @@ export function $$nG0({
         children: jsx('div', {
           className: 'library_modal--modalBody--pNi0C',
           tabIndex: -1,
-          children: jsxs(_$$tH, {
+          children: jsxs(ErrorBoundaryCrash, {
             boundaryKey: 'LibraryModalUI3',
             fallback: jsx(x, {}),
             children: [jsx(nV, {}), jsx(nx, {})]

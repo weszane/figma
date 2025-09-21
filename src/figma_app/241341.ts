@@ -50,7 +50,7 @@ import { _W, DS, q0, Q4, Qp, R$, t$ } from '../figma_app/571341';
 import { useSceneGraphSelector } from '../figma_app/722362';
 import { DiffImpl, SceneGraphHelpers, Fullscreen, FileSourceType, UIVisibilitySetting } from '../figma_app/763686';
 import { loadCanvasForVersion, canvasCache, setActiveVersion, versionHistoryKeyAtom, CURRENT_VERSION_ID, invalidateCanvasCache } from '../figma_app/841351';
-import { lF } from '../figma_app/915202';
+import { LoadingBarStatus } from '../figma_app/915202';
 import { Ib } from '../figma_app/955484';
 import { useSelector, useDispatch } from 'react-redux';
 let y = E;
@@ -1067,7 +1067,7 @@ let $$eT0 = registerModal(e => {
   let C = useCallback(e => {
     !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== CURRENT_VERSION_ID && (s(Y6({
       mode: UIVisibilitySetting.KEEP_UI,
-      type: lF.SPINNER
+      type: LoadingBarStatus.SPINNER
     })), requestAnimationFrame(() => {
       s(setActiveVersion({
         id: d,

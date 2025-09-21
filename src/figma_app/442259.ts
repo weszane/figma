@@ -1,9 +1,9 @@
 import { Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { F6, Ho, sp, sm } from "../figma_app/308685";
+import { startChattingThunk, stopChattingThunk, toggleEmojiWheelThunk, updateEmojiWheelPosition } from "../figma_app/308685";
 import { gR } from "../905/486443";
 import { FEditorType } from "../figma_app/53721";
-import { q } from "../figma_app/403368";
+import { fetchCursorChatDisabledStatus } from "../figma_app/403368";
 export let $$n0;
 class c {
   constructor() {
@@ -11,8 +11,8 @@ class c {
     this._triggerActiveWheelButtonListeners = [];
   }
   startChat(e, t, r) {
-    q().then(n => {
-      n || debugState.dispatch(F6({
+    fetchCursorChatDisabledStatus().then(n => {
+      n || debugState.dispatch(startChattingThunk({
         position: {
           x: e,
           y: t
@@ -22,7 +22,7 @@ class c {
     });
   }
   closeWheel() {
-    debugState.dispatch(Ho());
+    debugState.dispatch(stopChattingThunk());
   }
   handleShortcutPressWithType({
     viewportX: e,
@@ -36,7 +36,7 @@ class c {
     this._wheelActivatedAtMs = window.performance.now();
     let u = c.multiplayerEmoji;
     "WHEEL" === u.type ? (e = u.viewportX, t = u.viewportY, n = n ?? u.openedViaHover) : n || Fullscreen?.triggerAction("set-tool-default", null);
-    debugState.dispatch(sp({
+    debugState.dispatch(toggleEmojiWheelThunk({
       wheelType: d && ("STAMP" === d ? "STAMP2" : "REACTION1"),
       isReadonly: c.mirror.appModel.isReadOnly,
       isJoinedToActiveVotingSession: gR(c),
@@ -70,7 +70,7 @@ class c {
   }
   updateEmojiWheelPosition(e, t) {
     let r = debugState.getState();
-    "fullscreen" === r.selectedView.view && r.selectedView.editorType === FEditorType.Whiteboard && debugState.dispatch(sm({
+    "fullscreen" === r.selectedView.view && r.selectedView.editorType === FEditorType.Whiteboard && debugState.dispatch(updateEmojiWheelPosition({
       viewportX: e,
       viewportY: t
     }));

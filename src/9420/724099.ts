@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { wn, dl, Ix } from "../9420/795870";
 import { E as _$$E } from "../905/712094";
 import { d2, lB } from "../905/148137";
@@ -86,7 +86,7 @@ export function $$N0({
       children: M.message
     })]
   }) : jsxs("div", {
-    style: sx.$$if(L, {
+    style: styleBuilderInstance.$$if(L, {
       height: "0px",
       overflow: "hidden",
       opacity: 0
@@ -107,7 +107,7 @@ export function $$N0({
     }), jsx("div", {
       id: Ix
     }), V ? jsxs("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         marginTop: "7px"
       }).$$if(O && d2.includes(O), {
         marginTop: "15px"
@@ -145,7 +145,7 @@ export function $$N0({
         children: renderI18nText("pro_cart.payment.sepa_direct_debit_mandate")
       }), K && jsx("div", {
         className: R,
-        style: sx.$$if(Q, {
+        style: styleBuilderInstance.$$if(Q, {
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-legal-name-checkbox",
@@ -168,7 +168,7 @@ export function $$N0({
         updateLegalCompanyName: x
       }), K && jsx("div", {
         className: R,
-        style: sx.$$if(H, {
+        style: styleBuilderInstance.$$if(H, {
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-shipping-address-checkbox",

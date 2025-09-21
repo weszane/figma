@@ -19,7 +19,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { o as _$$o } from "../905/160095";
 import { getI18nString } from "../905/303541";
-import { Jm, BY } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { y$ } from "../figma_app/835219";
 import { copyToClipboard, extractResourceInfoFromUrl, buildFullCommunityUrl } from "../figma_app/471982";
 import { getResourceName } from "../figma_app/777551";
@@ -203,8 +203,8 @@ let Z = registerModal(function (e) {
     }
   });
   let er = eJ();
-  let es = Jm();
-  let ei = BY();
+  let es = getSearchSessionIdFromSelector();
+  let ei = getCurrentQueryId();
   let en = W6(q || "", Z || "", es, ei);
   let eo = J && isFigmakeTemplate(J);
   let ea = !i && jsx(Q, {

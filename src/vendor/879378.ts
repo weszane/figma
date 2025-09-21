@@ -1,15 +1,19 @@
-import i from "../vendor/805353";
-import s from "../vendor/509185";
-var o = "Expected a function";
+import s from '../vendor/509185'
+import i from '../vendor/805353'
+
+let o = 'Expected a function'
 function a(e, r, n) {
-  var a = !0;
-  var h = !0;
-  if ("function" != typeof e) throw TypeError(o);
-  s(n) && (a = "leading" in n ? !!n.leading : a, h = "trailing" in n ? !!n.trailing : h);
+  let a = !0
+  let h = !0
+  if (typeof e != 'function')
+    throw new TypeError(o)
+  s(n) && (a = 'leading' in n ? !!n.leading : a, h = 'trailing' in n ? !!n.trailing : h)
   return i(e, r, {
     leading: a,
     maxWait: r,
-    trailing: h
-  });
+    trailing: h,
+  })
 }
-module.exports = a;
+
+// lodash throttle v4.1.1 (Custom Build) <https://lodash.com/>
+module.exports = a

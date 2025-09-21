@@ -50,7 +50,7 @@ import { Gv, ak, iy, GV } from "../figma_app/532170";
 import { debugState } from "../905/407919";
 import { uM } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
-import { ai as _$$ai } from "../figma_app/915202";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { c4, Au } from "../figma_app/518077";
 import { K as _$$K } from "../1250/166809";
 import { OC } from "../1250/791136";
@@ -471,7 +471,7 @@ function eE(e) {
         let e = debugState.getState();
         debugState.dispatch(uM(getNewFileConfig({
           state: e,
-          openNewFileIn: _$$ai.SAME_TAB
+          openNewFileIn: TabOpenBehavior.SAME_TAB
         })));
       })();
     },

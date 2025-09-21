@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
@@ -34,7 +34,7 @@ export function $$h0({
         children: e
       }), jsx("div", {
         className: o()(_$$s.absolute.right0.top0.mr8.mt8.opacity0.$, "code_suggestion--hoverChildOpacity1--gs35c"),
-        style: sx.add({
+        style: styleBuilderInstance.add({
           transition: "opacity 200ms ease-out"
         }).$,
         onTransitionEnd: () => g(!1),

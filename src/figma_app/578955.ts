@@ -177,7 +177,7 @@ export function $$f1(e, t, r, c) {
       }
     }).catch(e => {
       "AbortError" !== e.name && console.error(`Error getting results: ${e}`);
-    }).$$finally(() => {
+    }).finally(() => {
       n.signal.aborted || y(!1);
     });
     return () => {

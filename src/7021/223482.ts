@@ -14,7 +14,7 @@ import { collaboratorSet } from "../905/332483";
 import { selectUserFlag } from "../905/940356";
 import { FBillingModelType, FOrganizationLevelType } from "../figma_app/191312";
 import { liveStoreInstance, gY } from "../905/713695";
-import { kA } from "../figma_app/336853";
+import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../7021/108292";
@@ -48,7 +48,7 @@ export function $$$$k0({
   let q = jv({
     billableProductKeys: collaboratorSet,
     baseQuery: {
-      tier: kA(e) ? Ju.ENTERPRISE : Ju.ORG,
+      tier: isBigmaEnabledSimple(e) ? Ju.ENTERPRISE : Ju.ORG,
       currency: k.data,
       renewalTerm: IX.YEAR,
       unit: IX.MONTH
@@ -87,7 +87,7 @@ export function $$$$k0({
       orgId: e?.id,
       organizationName: orgTermsInfo.organizationName,
       renewalDate: orgTermsInfo.renewalDate,
-      isEnterprise: kA(e),
+      isEnterprise: isBigmaEnabledSimple(e),
       onAccept: () => {
         e?.id && a({
           planParentId: e.id,

@@ -32,7 +32,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { Ay } from "../642/998522";
 import { QU } from "../1250/559338";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { E as _$$E } from "../905/95280";
 import { Z as _$$Z } from "../905/104740";
@@ -177,7 +177,7 @@ function V() {
   }, [t, i, d]);
   return (useEffect(() => {
     e(notificationActions.dequeue({
-      type: NotificationType.SEE_WHATS_CHANGED
+      type: NotificationCategory.SEE_WHATS_CHANGED
     }));
   }, [e]), useEffect(() => {
     s && 0 !== i && d(Fullscreen.navigateToFirstVisibleOrClosestChange());

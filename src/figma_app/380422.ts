@@ -11,7 +11,7 @@ import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { fi } from "../figma_app/913823";
 import { g5 } from "../figma_app/178752";
 import { selectOpenFile } from "../figma_app/516028";
@@ -348,7 +348,7 @@ function $({
   let _ = _$$F(e, _$$K.ACTIONS_ASSETS, t, "Actions Component Search");
   return jsx("div", {
     className: _$$s.wFull.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: "1/1"
     }).$,
     children: jsx("div", {

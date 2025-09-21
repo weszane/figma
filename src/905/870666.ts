@@ -12,7 +12,7 @@ import { isAppShellEnabled } from '../905/561581';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { parseAndNormalizeQuery, parseQuery, serializeQuery } from '../905/634134';
-import { h as _$$h } from '../905/662353';
+import { fileKeyAtom } from '../905/662353';
 import { replaceColonWithDash } from '../905/691205';
 import { getSingletonSceneGraph } from '../905/700578';
 import { buildUrlPath, getDisplayName, getRepoById } from '../905/760074';
@@ -527,7 +527,7 @@ export class SelectedViewPathManager {
         queryParams.fullscreen = '1';
       }
       if (desktopAPIInstance) {
-        const localFileKey = atomStoreManager.get(_$$h);
+        const localFileKey = atomStoreManager.get(fileKeyAtom);
         if (localFileKey != null) {
           queryParams.localFileKey = localFileKey;
         }

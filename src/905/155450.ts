@@ -1,6 +1,6 @@
 import { getI18nString } from "../905/303541";
-import { F6 } from "../figma_app/308685";
-import { q } from "../figma_app/403368";
+import { startChattingThunk } from "../figma_app/308685";
+import { fetchCursorChatDisabledStatus } from "../figma_app/403368";
 export let $$s0 = [{
   type: "REACTION",
   name: "r-fire",
@@ -31,8 +31,8 @@ export let $$s0 = [{
   image: "d1de3f6fe1f8ffa74d3db5203b2df761d0fed1cc",
   position: 6,
   action: (e, t) => {
-    q().then(i => {
-      i || t(F6({
+    fetchCursorChatDisabledStatus().then(i => {
+      i || t(startChattingThunk({
         position: e,
         source: "emoji_wheel_reactions"
       }));

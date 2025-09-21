@@ -1,69 +1,71 @@
-import { useCallback } from "react";
-import { tx, atom, createRemovableAtomFamily, AY } from "../figma_app/27355";
-import { generateUUIDv4 } from "../905/871474";
-import { Jc } from "../905/946805";
-let $$o1 = tx({});
-let $$l10 = tx(null);
-let $$d8 = tx("");
-let $$c9 = atom(generateUUIDv4());
+import { atomWithReset } from 'jotai/utils'
+import { useCallback } from 'react'
+import { generateUUIDv4 } from '../905/871474'
+import { Jc } from '../905/946805'
+import { atom, AY, createRemovableAtomFamily } from '../figma_app/27355'
+
+let $$o1 = atomWithReset({})
+let $$l10 = atomWithReset(null)
+let $$d8 = atomWithReset('')
+let $$c9 = atom(generateUUIDv4())
 let $$u7 = atom({
   loaded: !1,
-  extensions: []
-});
-let $$p6 = tx(Jc.ALL);
-let $$_13 = tx(null);
-let $$h4 = atom(null);
-let $$m11 = tx([]);
-let $$g16 = createRemovableAtomFamily(e => atom(t => {
-  let [r] = t($$m11);
-  return r?.name === e;
-}));
-let $$f0 = atom(!1);
-let $$E18 = atom(null);
-let $$y14 = atom(0);
-let $$b12 = atom(!1);
+  extensions: [],
+})
+let $$p6 = atomWithReset(Jc.ALL)
+let $$_13 = atomWithReset(null)
+let $$h4 = atom(null)
+let $$m11 = atomWithReset([])
+let $$g16 = createRemovableAtomFamily(e => atom((t) => {
+  let [r] = t($$m11)
+  return r?.name === e
+}))
+let $$f0 = atom(!1)
+let $$E18 = atom(null)
+let $$y14 = atom(0)
+let $$b12 = atom(!1)
 export function $$T5() {
-  let e = AY($$l10);
+  let e = AY($$l10)
   return useCallback(() => {
-    e();
-  }, [e]);
+    e()
+  }, [e])
 }
 export function $$I17() {
-  let e = AY($$l10);
-  let t = AY($$d8);
-  let r = AY($$m11);
-  let a = AY($$p6);
+  let e = AY($$l10)
+  let t = AY($$d8)
+  let r = AY($$m11)
+  let a = AY($$p6)
   return useCallback(() => {
-    e();
-    t();
-    r();
-    a();
-  }, [r, t, e, a]);
+    e()
+    t()
+    r()
+    a()
+  }, [r, t, e, a])
 }
 export function $$S15() {
-  let e = AY($$d8);
+  let e = AY($$d8)
   return useCallback(() => {
-    e();
-  }, [e]);
+    e()
+  }, [e])
 }
-let $$v3 = atom(null);
-let $$A2 = atom(null);
-export const Bu = $$f0;
-export const Bw = $$o1;
-export const DZ = $$A2;
-export const F3 = $$v3;
-export const IH = $$h4;
-export const JB = $$T5;
-export const Lk = $$p6;
-export const P_ = $$u7;
-export const Q8 = $$d8;
-export const Rt = $$c9;
-export const TT = $$l10;
-export const YH = $$m11;
-export const ZG = $$b12;
-export const dd = $$_13;
-export const fq = $$y14;
-export const hw = $$S15;
-export const iV = $$g16;
-export const jh = $$I17;
-export const rE = $$E18;
+let $$v3 = atom(null)
+let $$A2 = atom(null)
+export const Bu = $$f0
+export const Bw = $$o1
+export const DZ = $$A2
+export const F3 = $$v3
+export const IH = $$h4
+export const JB = $$T5
+export const Lk = $$p6
+export const P_ = $$u7
+export const Q8 = $$d8
+export const Rt = $$c9
+export const TT = $$l10
+export const YH = $$m11
+export const ZG = $$b12
+export const dd = $$_13
+export const fq = $$y14
+export const hw = $$S15
+export const iV = $$g16
+export const jh = $$I17
+export const rE = $$E18

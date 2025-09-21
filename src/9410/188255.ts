@@ -126,7 +126,7 @@ import { xZ } from "../1250/927871";
 import { f as _$$f2 } from "../1250/46310";
 import { A as _$$A6 } from "../figma_app/882803";
 import { renameFileOptimistic, fileOnboardingFlag } from "../figma_app/78808";
-import { f6, ai as _$$ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { _l, Jm } from "../figma_app/995208";
 import { S as _$$S, bg } from "../figma_app/446435";
 import { P as _$$P } from "../1250/232298";
@@ -135,7 +135,7 @@ import { selectExperimentConfigHook, useUserFlagExperimentConfig } from "../figm
 import { FP } from "../figma_app/91703";
 import { F_, EL } from "../905/858282";
 import { S as _$$S2 } from "../figma_app/420927";
-import { sx as _$$sx2 } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { browserCapabilities } from "../905/409121";
 import ix from "classnames";
 import { CloseButton } from "../905/17223";
@@ -1369,7 +1369,7 @@ function ir() {
   });
   let a = _$$S({
     templateId: "1522715486231239473",
-    source: f6.EDITOR_GLASS_ONBOARDING_MODAL,
+    source: FileBrowserLocation.EDITOR_GLASS_ONBOARDING_MODAL,
     forceOpenNewTab: !0,
     isDrawMode: !0,
     enabled: !isDevEnvironment()
@@ -1548,7 +1548,7 @@ function i_() {
     description: jsxs("div", {
       children: [renderI18nText("fullscreen.link_shortcuts_onboarding.description"), jsxs("ul", {
         className: _$$s.py8.$,
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           listStyle: "disc inside"
         }).$,
         children: [jsx("li", {
@@ -1729,7 +1729,7 @@ class iX extends PureComponent {
     return jsxs("div", {
       className: iz,
       children: [jsxs("div", {
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           width: `${this.props.imgContainerWidth}px`
         }).$,
         className: iV,
@@ -4620,10 +4620,10 @@ function no(e) {
     onClickUseCaseTile(e) {
       l(zE({
         state: d,
-        from: f6.FIGJAM_MAKE_SOMETHING_POPUP,
+        from: FileBrowserLocation.FIGJAM_MAKE_SOMETHING_POPUP,
         editorType: FFileType.WHITEBOARD,
         team: void 0,
-        openNewFileIn: _$$ai.NEW_TAB,
+        openNewFileIn: TabOpenBehavior.NEW_TAB,
         figjamMakeSomethingUseCase: e
       }));
       trackUseCaseClick(e);

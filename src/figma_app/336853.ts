@@ -1,144 +1,280 @@
-import { useMemo } from 'react';
-import { getI18nString } from '../905/303541';
-import { getFeatureFlags } from '../905/601108';
-import { OrgWorkspaceCount } from '../figma_app/43951';
-import { Qw } from '../figma_app/47866';
-import { isDevEnvironment, isGovCluster } from '../figma_app/169182';
-import { FCostCenterType } from '../figma_app/191312';
-import { useSubscription } from '../figma_app/288654';
-import { isValidEmail, getEmailDomain } from '../figma_app/416935';
-import { useCurrentPlanUser, useCurrentPublicPlan, useIsOrgGuestUser, useIsOrgOrEnterprisePlan } from '../figma_app/465071';
-import { throwTypeError } from '../figma_app/465776';
-import { Ct, CT, Gv } from '../figma_app/736948';
-export function $$m2(e, t) {
-  let r = e.map(e => e.domain.toLowerCase());
-  let n = getEmailDomain(t);
-  return r.length !== 0 && !!n && r.includes(n);
+import { useMemo } from 'react'
+import { getI18nString } from '../905/303541'
+import { getFeatureFlags } from '../905/601108'
+import { resourceUtils } from '../905/989992'
+import { OrgWorkspaceCount } from '../figma_app/43951'
+import { isDevEnvironment, isGovCluster } from '../figma_app/169182'
+import { FCostCenterType } from '../figma_app/191312'
+import { useSubscription } from '../figma_app/288654'
+import { getEmailDomain, isValidEmail } from '../figma_app/416935'
+import { useCurrentPlanUser, useCurrentPublicPlan, useIsOrgGuestUser, useIsOrgOrEnterprisePlan } from '../figma_app/465071'
+import { throwTypeError } from '../figma_app/465776'
+import { ApprovalStatusEnum, AuthTypeEnum, UserTypeEnum } from '../figma_app/736948'
+
+/**
+ * Checks if the given email domain exists in the provided domain list.
+ * Original: $$m2
+ */
+export function checkDomainExists(domains: { domain: string }[], email: string): boolean {
+  const domainList = domains.map(d => d.domain.toLowerCase())
+  const emailDomain = getEmailDomain(email)
+  return domainList.length !== 0 && !!emailDomain && domainList.includes(emailDomain)
 }
-export function $$g10(e) {
-  return e.saml_sso_only ? Ct.SAML : e.google_sso_only ? Ct.GOOGLE : Ct.ANY;
+
+/**
+ * Determines the authentication type based on SSO flags.
+ * Original: $$g10
+ */
+export function getAuthType(org: { saml_sso_only?: boolean, google_sso_only?: boolean }): AuthTypeEnum {
+  if (org.saml_sso_only)
+    return AuthTypeEnum.SAML
+  if (org.google_sso_only)
+    return AuthTypeEnum.GOOGLE
+  return AuthTypeEnum.ANY
 }
-export function $$f12(e) {
-  return e.config?.has_scim_token;
+
+/**
+ * Checks if SCIM token exists in config.
+ * Original: $$f12
+ */
+export function hasScimToken(org: { config?: { has_scim_token?: boolean } }): boolean | undefined {
+  return org.config?.has_scim_token
 }
-export function $$E6(e) {
-  return e?.id !== void 0;
+
+/**
+ * Checks if the object has a valid id.
+ * Original: $$E6
+ */
+export function hasValidId(obj: { id?: unknown }): boolean {
+  return obj?.id !== void 0
 }
-export function $$y14(e, t) {
-  let r = $$E6(t) ? t.email : t;
-  return !!r && isValidEmail(r) && e.domains.length > 0 && !$$m2(e.domains, r);
+
+/**
+ * Validates if the email is not in the domain list and is a valid email.
+ * Original: $$y14
+ */
+export function isEmailAllowed(domainsObj: { domains: { domain: string }[] }, user: { email?: string } | string): boolean {
+  const email = hasValidId(user as { id?: unknown }) ? (user as { email?: string }).email : user as string
+  return !!email && isValidEmail(email) && domainsObj.domains.length > 0 && !checkDomainExists(domainsObj.domains, email)
 }
-export function $$b24(e) {
-  return !!e.currentUserOrgId && !!e.orgById[e.currentUserOrgId]?.template_picker_disabled;
+
+/**
+ * Checks if template picker is disabled for the current org.
+ * Original: $$b24
+ */
+export function isTemplatePickerDisabled(state: { currentUserOrgId?: string, orgById: Record<string, { template_picker_disabled?: boolean }> }): boolean {
+  return !!state.currentUserOrgId && !!state.orgById[state.currentUserOrgId]?.template_picker_disabled
 }
-export function $$T23(e) {
-  return e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null;
+
+/**
+ * Gets the current user's org object.
+ * Original: $$T23
+ */
+export function getCurrentUserOrg(state: { currentUserOrgId?: string, orgById: Record<string, unknown> }): unknown | null {
+  return state.currentUserOrgId ? state.orgById[state.currentUserOrgId] : null
 }
-export function $$I16(e) {
-  return e.isAccountLockedDuringOrgOperation;
+
+/**
+ * Checks if account is locked during org operation.
+ * Original: $$I16
+ */
+export function isAccountLockedDuringOrgOperation(state: { isAccountLockedDuringOrgOperation?: boolean }): boolean | undefined {
+  return state.isAccountLockedDuringOrgOperation
 }
-export function $$S8(e) {
-  switch (e) {
+
+/**
+ * Returns i18n string for guest control approval status.
+ * Original: $$S8
+ */
+export function getGuestControlApprovalStatus(status: ApprovalStatusEnum | null): string {
+  switch (status) {
     case null:
-      return getI18nString('org_settings.guest_control.null');
-    case Gv.REQUIRE_APPROVAL:
-      return getI18nString('org_settings.guest_control.require_approval');
-    case Gv.BANNED:
-      return getI18nString('org_settings.guest_control.banned');
+      return getI18nString('org_settings.guest_control.null')
+    case ApprovalStatusEnum.REQUIRE_APPROVAL:
+      return getI18nString('org_settings.guest_control.require_approval')
+    case ApprovalStatusEnum.BANNED:
+      return getI18nString('org_settings.guest_control.banned')
     default:
-      throwTypeError(e);
+      throwTypeError(status)
   }
 }
-export function $$v20(e) {
-  return e === CT.GUESTS || e === CT.ALL_USERS ? getI18nString('org_settings.guest_control.mfa_for_guests_setting_required') : getI18nString('org_settings.guest_control.mfa_for_guests_setting_null');
+
+/**
+ * Returns i18n string for MFA guest control setting.
+ * Original: $$v20
+ */
+export function getMfaGuestControlSetting(userType: UserTypeEnum): string {
+  if (userType === UserTypeEnum.GUESTS || userType === UserTypeEnum.ALL_USERS) {
+    return getI18nString('org_settings.guest_control.mfa_for_guests_setting_required')
+  }
+  return getI18nString('org_settings.guest_control.mfa_for_guests_setting_null')
 }
-export function $$A13(e) {
-  switch (e) {
+
+/**
+ * Returns i18n string for cost center type.
+ * Original: $$A13
+ */
+export function getCostCenterTypeString(type: FCostCenterType): string {
+  switch (type) {
     case FCostCenterType.COST_CENTER:
-      return getI18nString('scim_metadata_display_text.cost_center');
+      return getI18nString('scim_metadata_display_text.cost_center')
     case FCostCenterType.ORGANIZATION:
-      return getI18nString('scim_metadata_display_text.organization');
+      return getI18nString('scim_metadata_display_text.organization')
     case FCostCenterType.DIVISION:
-      return getI18nString('scim_metadata_display_text.division');
+      return getI18nString('scim_metadata_display_text.division')
     case FCostCenterType.DEPARTMENT:
-      return getI18nString('scim_metadata_display_text.department');
+      return getI18nString('scim_metadata_display_text.department')
     default:
-      throwTypeError(e);
+      throwTypeError(type)
   }
 }
-export function $$x11(e) {
-  return !!e?.bigma_enabled && (e.security_add_on_enabled_at || e.ip_ranges.length > 0);
+
+/**
+ * Checks if bigma and security add-on are enabled.
+ * Original: $$x11
+ */
+export function isBigmaAndSecurityEnabled(org: { bigma_enabled?: boolean, security_add_on_enabled_at?: unknown, ip_ranges?: unknown[] }) {
+  return !!org?.bigma_enabled && (org.security_add_on_enabled_at || (org.ip_ranges && org.ip_ranges.length > 0)) as boolean
 }
-export function $$N22(e) {
-  return $$j15(e) && !!e.security_add_on_enabled_at;
+
+/**
+ * Checks if bigma and security add-on are enabled.
+ * Original: $$N22
+ */
+export function isBigmaSecurityAddOnEnabled(org: { bigma_enabled?: boolean, security_add_on_enabled_at?: unknown }): boolean {
+  return isBigmaEnabled(org) && !!org.security_add_on_enabled_at
 }
-export function $$C21(e) {
-  return !!e.all_domains_verified;
+
+/**
+ * Checks if all domains are verified.
+ * Original: $$C21
+ */
+export function areAllDomainsVerified(org: { all_domains_verified?: boolean }): boolean {
+  return !!org.all_domains_verified
 }
-export function $$w9(e) {
-  return !!(e && e.bigma_enabled);
+
+/**
+ * Checks if bigma is enabled.
+ * Original: $$w9
+ */
+export function isBigmaEnabled(org: { bigma_enabled?: boolean }): boolean {
+  return !!(org && org.bigma_enabled)
 }
-export function $$O17(e) {
-  return !!e?.domain_capture && $$w9(e);
+
+/**
+ * Checks if domain capture and bigma are enabled.
+ * Original: $$O17
+ */
+export function isDomainCaptureAndBigmaEnabled(org: { domain_capture?: boolean, bigma_enabled?: boolean }): boolean {
+  return !!org?.domain_capture && isBigmaEnabled(org)
 }
-export function $$R4(e) {
-  return !!(e?.bigma_enabled && e?.security_add_on_enabled_at);
+
+/**
+ * Checks if bigma and security add-on are enabled.
+ * Original: $$R4
+ */
+export function isBigmaAndSecurityAddOnEnabled(org: { bigma_enabled?: boolean, security_add_on_enabled_at?: unknown }): boolean {
+  return !!(org?.bigma_enabled && org?.security_add_on_enabled_at)
 }
-export function $$L3(e) {
-  let t = useCurrentPublicPlan('useEnterpriseOrgDirectoryEnabled');
-  let r = useCurrentPlanUser('useEnterpriseOrgDirectoryEnabled');
-  let i = useIsOrgOrEnterprisePlan(t);
-  let a = useIsOrgGuestUser(r);
-  let s = useSubscription(OrgWorkspaceCount({
-    orgId: e
-  }));
-  return useMemo(() => Qw.transformAll([i, a, s], (e, t, r) => !!e && !t && !!r.org?.workspaceCount.data), [i, a, s]);
+
+/**
+ * Returns whether enterprise org directory is enabled.
+ * Original: $$L3
+ */
+export function useEnterpriseOrgDirectoryEnabled(orgId: string): boolean {
+  const publicPlan = useCurrentPublicPlan('useEnterpriseOrgDirectoryEnabled')
+  const planUser = useCurrentPlanUser('useEnterpriseOrgDirectoryEnabled')
+  const isOrgOrEnterprise = useIsOrgOrEnterprisePlan(publicPlan)
+  const isOrgGuest = useIsOrgGuestUser(planUser)
+  const subscription = useSubscription(OrgWorkspaceCount({ orgId }))
+  return useMemo(
+    () => resourceUtils.transformAll([isOrgOrEnterprise, isOrgGuest, subscription], (orgPlan, guest, sub) => !!orgPlan && !guest && !!sub.org?.workspaceCount.data),
+    [isOrgOrEnterprise, isOrgGuest, subscription],
+  )
 }
-let P = new RegExp(/[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/(\d+)/);
-export function $$D18(e) {
-  return P.test(e);
+
+const figmaFileRegExp = /[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/(\d+)/
+
+/**
+ * Checks if string matches figma file regexp.
+ * Original: $$D18
+ */
+export function isFigmaFileUrl(url: string): boolean {
+  return figmaFileRegExp.test(url)
 }
-export function $$k19(e) {
-  let t = e.match(P);
-  return t ? t[1] : null;
+
+/**
+ * Extracts file id from figma file url.
+ * Original: $$k19
+ */
+export function extractFigmaFileId(url: string): string | null {
+  const match = url.match(figmaFileRegExp)
+  return match ? match[1] : null
 }
-export function $$M1(e) {
-  return $$j15(e);
+
+/**
+ * Alias for isBigmaEnabled.
+ * Original: $$M1
+ */
+export function isBigmaEnabledAlias(org: { bigma_enabled?: boolean }): boolean {
+  return isBigmaEnabled(org)
 }
-export function $$F0() {
-  return !!isGovCluster() || !!isDevEnvironment() && !!getFeatureFlags().fig_gov_magic_links;
+
+/**
+ * Checks if gov cluster or dev environment with gov magic links is enabled.
+ * Original: $$F0
+ */
+export function isGovOrDevWithMagicLinks(): boolean {
+  return !!isGovCluster() || (!!isDevEnvironment() && !!getFeatureFlags().fig_gov_magic_links)
 }
-export function $$j15(e) {
-  return !!e?.bigma_enabled;
+
+/**
+ * Checks if bigma is enabled.
+ * Original: $$j15
+ */
+export function isBigmaEnabledSimple(org: { bigma_enabled?: boolean }): boolean {
+  return !!org?.bigma_enabled
 }
-export function $$U7(e) {
-  return $$j15(e);
+
+/**
+ * Alias for isBigmaEnabledSimple.
+ * Original: $$U7
+ */
+export function isBigmaEnabledAlias2(org: { bigma_enabled?: boolean }): boolean {
+  return isBigmaEnabledSimple(org)
 }
-export function $$B5(e) {
-  return $$j15(e);
+
+/**
+ * Alias for isBigmaEnabledSimple.
+ * Original: $$B5
+ */
+export function isBigmaEnabledAlias3(org: { bigma_enabled?: boolean }): boolean {
+  return isBigmaEnabledSimple(org)
 }
-export const Aj = $$F0;
-export const G7 = $$M1;
-export const H_ = $$m2;
-export const LM = $$L3;
-export const OW = $$R4;
-export const Oe = $$B5;
-export const Ts = $$E6;
-export const U5 = $$U7;
-export const W3 = $$S8;
-export const ZY = $$w9;
-export const _g = $$g10;
-export const ag = $$x11;
-export const cg = $$f12;
-export const du = $$A13;
-export const eE = $$y14;
-export const kA = $$j15;
-export const kY = $$I16;
-export const mU = $$O17;
-export const mg = $$D18;
-export const nX = $$k19;
-export const nn = $$v20;
-export const oB = $$C21;
-export const s = $$N22;
-export const wA = $$T23;
-export const yK = $$b24;
+
+// Export original variable names mapped to new function names
+export const Aj = isGovOrDevWithMagicLinks
+export const G7 = isBigmaEnabledAlias
+export const H_ = checkDomainExists
+export const LM = useEnterpriseOrgDirectoryEnabled
+export const OW = isBigmaAndSecurityAddOnEnabled
+export const Oe = isBigmaEnabledAlias3
+export const Ts = hasValidId
+export const U5 = isBigmaEnabledAlias2
+export const W3 = getGuestControlApprovalStatus
+export const ZY = isBigmaEnabled
+export const _g = getAuthType
+export const ag = isBigmaAndSecurityEnabled
+export const cg = hasScimToken
+export const du = getCostCenterTypeString
+export const eE = isEmailAllowed
+export const kA = isBigmaEnabledSimple
+export const kY = isAccountLockedDuringOrgOperation
+export const mU = isDomainCaptureAndBigmaEnabled
+export const mg = isFigmaFileUrl
+export const nX = extractFigmaFileId
+export const nn = getMfaGuestControlSetting
+export const oB = areAllDomainsVerified
+export const s = isBigmaSecurityAddOnEnabled
+export const wA = getCurrentUserOrg
+export const yK = isTemplatePickerDisabled

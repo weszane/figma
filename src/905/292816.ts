@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { isNullish, isNotNullish } from "../figma_app/95419";
 import { b } from "../figma_app/246400";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { U1 } from "../figma_app/681712";
 import { B } from "../905/261906";
@@ -46,10 +46,10 @@ function _(e) {
   return jsxs(AutoLayout, {
     direction: "vertical",
     children: [jsx("div", {
-      style: sx.textBodyMedium.colorTextTooltip.$,
+      style: styleBuilderInstance.textBodyMedium.colorTextTooltip.$,
       children: O(e.seatType)
     }), null !== t && jsxs("div", {
-      style: sx.textBodyMedium.colorTextTooltipSecondary.wFull.$,
+      style: styleBuilderInstance.textBodyMedium.colorTextTooltipSecondary.wFull.$,
       children: [jsxs(AutoLayout, {
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
@@ -62,7 +62,7 @@ function _(e) {
         children: [jsx("div", {
           children: renderI18nText("billing_modals.seat_type_popover.annual_rate_percent_off", {
             percentOff: jsx("span", {
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 color: "var(--color-multiplayergreen)"
               }).$,
               children: getI18nString("billing_modals.seat_type_popover.percent_off_in_parens", {
@@ -71,7 +71,7 @@ function _(e) {
             })
           })
         }), jsx("div", {
-          style: sx.textBodyMedium.colorTextTooltipSecondary.$,
+          style: styleBuilderInstance.textBodyMedium.colorTextTooltipSecondary.$,
           children: t.annualPrice
         })]
       })]
@@ -93,10 +93,10 @@ function A({
     direction: "horizontal",
     horizontalAlignItems: "space-between",
     children: [jsx("div", {
-      style: sx.textBodyMedium.colorTextTooltip.$,
+      style: styleBuilderInstance.textBodyMedium.colorTextTooltip.$,
       children: O(i)
     }), null !== c && jsx("div", {
-      style: sx.textBodyMedium.colorTextTooltipSecondary.$,
+      style: styleBuilderInstance.textBodyMedium.colorTextTooltipSecondary.$,
       children: c
     })]
   });
@@ -122,7 +122,7 @@ function y({
         planKey: t,
         seatType: i
       }), jsx("div", {
-        style: sx.py4.$,
+        style: styleBuilderInstance.py4.$,
         children: jsx(AutoLayout, {
           direction: "vertical",
           spacing: 8,

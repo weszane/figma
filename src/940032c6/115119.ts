@@ -267,7 +267,7 @@ import { l as _$$l4 } from '../905/745972';
 import { F_ as _$$F_, od as _$$od, Ao } from '../905/748636';
 import { H as _$$H6 } from '../905/748658';
 import { G as _$$G9 } from '../905/750789';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { g as _$$g2 } from '../905/757007';
 import { WB } from '../905/761735';
 import { I as _$$I3 } from '../905/783004';
@@ -283,7 +283,7 @@ import { x as _$$x3 } from '../905/811596';
 import { EventShield } from '../905/821217';
 import { z as _$$z12 } from '../905/821223';
 import { z as _$$z4 } from '../905/825185';
-import { vL as _$$vL } from '../905/826900';
+import { KeyboardReceiver } from '../905/826900';
 import { dY as _$$dY, sU as _$$sU, Wh as _$$Wh, WM as _$$WM } from '../905/838765';
 import { q as _$$q } from '../905/838985';
 import { useCurrentUserOrg } from '../905/845253';
@@ -321,7 +321,7 @@ import { lQ as _$$lQ } from '../905/934246';
 import { O as _$$O } from '../905/936515';
 import { logCmsError } from '../905/937198';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { R as _$$R3 } from '../905/943003';
 import { b as _$$b7 } from '../905/946806';
 import { B as _$$B3 } from '../905/950875';
@@ -721,7 +721,7 @@ import { lg as _$$lg2, QY } from '../figma_app/651753';
 import { _ as _$$_4 } from '../figma_app/658134';
 import { X as _$$X2 } from '../figma_app/668312';
 import { K3 } from '../figma_app/678300';
-import { VF } from '../figma_app/679183';
+import { useCachedSubtree } from '../figma_app/679183';
 import { wH as _$$wH } from '../figma_app/680166';
 import { TJ as _$$TJ, YD } from '../figma_app/690664';
 import { m as _$$m6 } from '../figma_app/694193';
@@ -782,7 +782,7 @@ import { $D as _$$$D, up as _$$up, HB, MT } from '../figma_app/903209';
 import { j as _$$j1, k as _$$k1 } from '../figma_app/904944';
 import { cF as _$$cF, iG as _$$iG2, LS as _$$LS, ZH as _$$ZH, P4, PR } from '../figma_app/911880';
 import { z0 } from '../figma_app/914216';
-import { zy } from '../figma_app/915202';
+import { ClipboardOperation } from '../figma_app/915202';
 import { parseEmbedInput } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
 import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
@@ -3054,7 +3054,7 @@ function lG({
       },
       autoComplete: 'off'
     },
-    style: n === 'lg' ? _$$sx2.px12.$ : void 0,
+    style: n === 'lg' ? styleBuilderInstance.px12.$ : void 0,
     recordingKey: s
   });
 }
@@ -7496,7 +7496,7 @@ function oY({
                 error: !0,
                 icon: VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE
               }));
-            }).$$finally(() => {
+            }).finally(() => {
               i(!1);
             });
             let l = getResourceDataOrFallback(_.data?.siteMount)?.siteDomain?.id ?? '';
@@ -7938,7 +7938,7 @@ function dn({
         children: [jsx(InputComponent, {
           id: 'domain',
           className: _$$s4.wFull.ellipsis.$,
-          style: _$$sx2.py8.hAuto.$,
+          style: styleBuilderInstance.py8.hAuto.$,
           value: m,
           onChange: e => {
             h(e);
@@ -8091,7 +8091,7 @@ let ds = registerModal(e => {
                 }));
               }).catch(e => {
                 e instanceof XHRError ? n(FlashActions.error(e.data.message)) : n(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
-              }).$$finally(() => {
+              }).finally(() => {
                 n(hideModalHandler());
               });
             },
@@ -9642,7 +9642,7 @@ function cr({
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
-      'style': _$$sx2.py8.px12.hAuto.$$if(c, _$$sx2.colorBorderWarningStrong).$,
+      'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'onChange': e => {
         let i = e.currentTarget.value;
         i ? o(i) : o(null);
@@ -9763,7 +9763,7 @@ function cc({
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
-      'style': _$$sx2.py8.px12.hAuto.$$if(c, _$$sx2.colorBorderWarningStrong).$,
+      'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'maxLength': 13,
       'onChange': e => {
         let i = e.currentTarget.value;
@@ -11072,7 +11072,7 @@ function us({
   requestClose: e,
   codeLibraryInstance: t
 }) {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'figmake.full_width_empty_state',
     fallback: jsx(Fragment, {}),
     team: _$$e2.ACTIVATION,
@@ -19184,9 +19184,9 @@ let g9 = memo(() => {
       children: [!h && b, _]
     })
   });
-  return jsxs(_$$tH, {
+  return jsxs(ErrorBoundaryCrash, {
     boundaryKey: 'SitesLeftPanel',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e2.SITES_EDITOR,
     onError: () => {
       n(VisualBellActions.enqueue({
@@ -22296,7 +22296,7 @@ function bF() {
 function bH() {
   let e = useSceneGraphSelection();
   return jsx(TabLoop, {
-    children: jsx(VF, {
+    children: jsx(useCachedSubtree, {
       isVisible: !0,
       children: () => jsx(mw, {
         selection: e
@@ -25462,57 +25462,57 @@ function ku({
       shouldShowInstancePanel: M0(i),
       shouldShowSlotPanel: Br(i),
       withBottomBorder: !_$$jd(i) && !_$$cR(i) && !I
-    }), getFeatureFlags().react_scenegraph && jsx(VF, {
+    }), getFeatureFlags().react_scenegraph && jsx(useCachedSubtree, {
       isVisible: i[ItemType.JSX_ITEM],
       children: () => jsx(_$$_10, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !!numSelected && areOnlyResponsiveSetsSelected,
       children: () => jsx(_$$wu, {
         showExplicitOnly: !0,
         recordingKey: 'sitesDesignPanel-variableModeEntries'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: I,
       children: () => jsx(yS, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.SITES_HTML_WIDGET_ITEM],
       children: () => jsx(j0, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$tV2(i, D),
       children: () => jsx(BS, {
         recordingKey: 'propsPanel'
       }, 'componentProperties')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c0, {
         recordingKey: 'componentPanel'
       }, 'component')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !_$$NR(i) && M0(i),
       children: () => jsx(_$$_1, {
         recordingKey: 'instancePanel'
       }, 'instance')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !_$$NR(i) && _$$jd(i),
       children: () => jsx(jj, {
         recordingKey: 'codeInstancePanel'
       }, 'codeInstance')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.CODE_INSTANCE_HTML_FIBER],
       children: () => jsx(vu, {
         recordingKey: 'webDirectManipulation'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.SITES_LINK_ITEM],
       children: () => jsx(_$$rC2, {
         recordingKey: 'linkPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.SITES_POSITION_ITEM],
       children: () => jsx(kc, {
         recordingKey: 'positionPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.TRANSFORM_ITEM],
       children: () => jsx(zq, {
         recordingKey: 'transformPanel',
@@ -25521,7 +25521,7 @@ function ku({
         canEditConstraints: GG(i),
         onlyShowXYInputsRow: v === GR.DEFAULT_SIMPLIFIED || (areOnlyResponsiveSetsSelected ?? !1)
       }, 'transform')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: 'transformPanel',
@@ -25529,7 +25529,7 @@ function ku({
         dispatch: y,
         dropdownShown: a
       }, 'vector-transform')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: A,
       children: () => jsx(Vy, {
         onlyShowResizingRow: v === GR.DEFAULT_SIMPLIFIED,
@@ -25537,12 +25537,12 @@ function ku({
         hideToggleButton: I,
         recordingKey: 'stackPanel'
       }, 'stack')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: E,
       children: () => jsx(b1, {})
     }), jsx(F$, {
       isVisible: i[ItemType.SCALE_ITEM]
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         recordingKey: 'vectorTransformPanel',
@@ -25551,31 +25551,31 @@ function ku({
         dropdownShown: a,
         isUI3: !0
       }, 'vector-transform')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q1, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
         openFile: j
       }, 'pencilToolPanel')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.MASK_ITEM],
       children: () => jsx(_$$B8, {
         recordingKey: 'maskPanel',
         maskType
       }, 'mask')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.LAYER_ITEM],
       children: () => jsx(X2, {
         recordingKey: 'appearancePanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.TYPE_ITEM],
       children: () => jsx(_$$gc, {}, 'type')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: E,
       children: () => jsx(ys, {})
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v1, {
         colorFormat: d,
@@ -25590,15 +25590,15 @@ function ku({
         recordingKey: 'canvasBackgroundPanel',
         sceneGraphSelection: t
       }, 'canvas-background')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C0, {}, 'remove-group-fill-stroke')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: N
       }, 'fill')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: d,
@@ -25616,10 +25616,10 @@ function ku({
         stylePickerListLayout: g,
         stylePickerShown: u
       }, 'stroke')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.EFFECTS_ITEM],
       children: () => jsx(_$$w5, {}, 'effects')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: z,
       children: () => jsx(UA, {
         colorFormat: d,
@@ -25633,27 +25633,27 @@ function ku({
         sceneGraphSelection: t,
         stylePickerListLayout: g
       }, 'selection-paints')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, 'grids')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.SITES_ACCESSIBILITY_ITEM],
       children: () => jsx(jr, {
         recordingKey: 'accessibilityPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.SITES_RESPONSIVENESS_ITEM],
       children: () => jsx(j3, {}, 'responsiveness')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: R,
       children: () => jsx(_$$B9, {}, 'local-variables')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$ww(i, t),
       children: () => jsx(_$$Q1, {
         scrollContainer: n,
         recordingKey: 'local-styles'
       }, 'local-styles')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: !_$$NR(i),
       children: () => jsx(_$$Q11, {
         allSavedPlugins: f.plugins,
@@ -25667,7 +25667,7 @@ function ku({
         publishedPlugins: b,
         recordingKey: 'pluginPanel'
       }, 'plugin')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: i[ItemType.EXPORT_ITEM],
       children: () => jsx(LI, {
         currentPage: S.currentPage,
@@ -29765,7 +29765,7 @@ function TA(e) {
       let t = typeof e == 'object' ? e.type : e;
       l[t] = q[t];
     }), t) {
-      case zy.COPY:
+      case ClipboardOperation.COPY:
         {
           let t = JSON.parse(JSON.stringify(l));
           let i = JSON.parse(JSON.stringify(selectedInteractions));
@@ -30287,7 +30287,7 @@ function TA(e) {
   return jsx(_$$k10, {
     name: 'interactions_panel',
     children: jsx(_$$Zk, {
-      children: jsxs(_$$vL, {
+      children: jsxs(KeyboardReceiver, {
         name: 'Sites Interaction Panel',
         handleClipboard: e_,
         ref: Q,
@@ -30620,7 +30620,7 @@ function TY({
   let m = (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && x;
   let h = !x && !_$$jd(n) && !n[ItemType.SITES_LINK_ITEM] && !n[ItemType.SITES_INTERACTIONS_ITEM] && !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL];
   return jsxs(TabLoop, {
-    children: [jsx(VF, {
+    children: [jsx(useCachedSubtree, {
       isVisible: x,
       children: () => jsx(_$$k10, {
         name: 'create_code_layer_from_design_panel',
@@ -30643,7 +30643,7 @@ function TY({
           })
         })
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$jd(n),
       children: () => jsx(_$$_i, {
         recordingKey: 'toolbarView',
@@ -30653,34 +30653,34 @@ function TY({
         shouldShowInstancePanel: !1,
         withBottomBorder: !1
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: _$$jd(n),
       children: () => jsx(jj, {
         recordingKey: 'codeInstancePanel'
       }, 'codeInstance')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: n[ItemType.SITES_LINK_ITEM],
       children: () => jsx(_$$rC2, {
         recordingKey: 'linkPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: n[ItemType.SITES_INTERACTIONS_ITEM],
       children: () => jsx(TA, {
         recordingKey: 'interactionsPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: n[ItemType.FRAME_PRESETS],
       children: () => jsx(_$$nl3, {
         recordingKey: 'framePresetPanel'
       }, 'frame-presets')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: n[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q1, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
         openFile: a
       }, 'pencilToolPanel')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: c,
       children: () => jsx(_$$Z8, {
         recordingKey: 'prototypePanel',
@@ -30690,12 +30690,12 @@ function TY({
         sceneGraphSelection: i,
         userFlags: o
       }, 'prototype')
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: n[ItemType.SITES_ACCESSIBILITY_ITEM],
       children: () => jsx(jr, {
         recordingKey: 'accessibilityPanel'
       })
-    }), jsx(VF, {
+    }), jsx(useCachedSubtree, {
       isVisible: h,
       children: () => jsx(TG, {})
     })]

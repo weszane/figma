@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 export function $$l0({
   title: e,
   children: t,
   dataTestId: a
 }) {
   return jsxs("div", {
-    style: sx.p24.colorBg.add({
+    style: styleBuilderInstance.p24.colorBg.add({
       borderRadius: "13px",
       height: "fit-content"
     }).$,

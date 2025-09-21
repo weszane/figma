@@ -9,9 +9,9 @@ import c from "classnames";
 import { M3 } from "../figma_app/119475";
 import { f as _$$f } from "../905/287602";
 import { S as _$$S } from "../905/417453";
-import { Q8 } from "../905/61477";
-import { nG } from "../905/977218";
-import { vj } from "../905/574958";
+import { searchInputAtom } from "../905/61477";
+import { updateRecentSearchesWithSortThunk } from "../905/977218";
+import { SearchAnalytics } from "../905/574958";
 var u = c;
 let A = "faceted_search_preview_row_base--fauxFocus--4pg6O";
 export var $$y4 = (e => (e.PREVIEW = "PREVIEW", e.DROPDOWN = "DROPDOWN", e))($$y4 || {});
@@ -39,7 +39,7 @@ export function $$E0({
 }) {
   let O = assertNotNullish(useContext($$b3), "Must use `FacetedSearchPreviewRowBase` inside `<SearchRowContext.Provider>");
   let D = useDispatch();
-  let L = useAtomWithSubscription(Q8);
+  let L = useAtomWithSubscription(searchInputAtom);
   let F = useSelector(e => e.currentUserOrgId);
   let M = _$$S(F)?.searches;
   let {
@@ -50,11 +50,11 @@ export function $$E0({
     path: c
   });
   let B = useCallback(() => {
-    L && !I && D(nG({
+    L && !I && D(updateRecentSearchesWithSortThunk({
       searchQuery: L,
       previousSearches: M
     }));
-    N?.(vj.Query.ClickAction.CLICK);
+    N?.(SearchAnalytics.Query.ClickAction.CLICK);
   }, [I, D, M, L, N]);
   let V = useCallback(e => {
     B();
@@ -64,7 +64,7 @@ export function $$E0({
     1 === e.button && (B(), E?.(e));
   }, [B, E]);
   let z = useCallback(e => {
-    "Enter" === e.key && (N?.(vj.Query.ClickAction.ENTER), S?.(e));
+    "Enter" === e.key && (N?.(SearchAnalytics.Query.ClickAction.ENTER), S?.(e));
   }, [S, N]);
   let H = useCallback(e => {
     x?.(e);

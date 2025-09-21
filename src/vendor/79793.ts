@@ -21,7 +21,7 @@ let d = e => !!e.write;
 let s = new WeakMap();
 let c = (e, n) => {
   s.set(e, n);
-  e.catch(() => { }).$$finally(() => s.$$delete(e));
+  e.catch(() => { }).finally(() => s.$$delete(e));
 };
 let h = (e, n) => {
   let i = s.get(e);

@@ -7,8 +7,8 @@ import l from "classnames";
 import { reportError } from "../905/11";
 import { oW } from "../905/675859";
 import { c as _$$c } from "../905/320067";
-import { t as _$$t } from "../905/331623";
-import { Jm, BY } from "../figma_app/387599";
+import { MediaQuerySvgComponent } from "../905/331623";
+import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { buildCommunityUrl } from "../figma_app/471982";
 import { Q } from "../905/978641";
 import { getResourceTaglineOrDescription, trackResourceClickEvent } from "../figma_app/777551";
@@ -64,7 +64,7 @@ export function $$I1({
       className: c()("resource_tile--resourceTileImageContainer--s9lq8", {
         "resource_tile--selectedResourceTileImageContainer--aRRdF": t
       }),
-      children: [n === ResourceTypeEnum.PROTOTYPE && jsx(_$$t, {
+      children: [n === ResourceTypeEnum.PROTOTYPE && jsx(MediaQuerySvgComponent, {
         svg: A,
         className: "resource_tile--prototypeIcon--sQEUY",
         useOriginalSrcFills_DEPRECATED: !0,
@@ -111,8 +111,8 @@ export function $$E0({
   index: i,
   onClickTracking: n
 }) {
-  let o = Jm();
-  let a = BY();
+  let o = getSearchSessionIdFromSelector();
+  let a = getCurrentQueryId();
   return jsxs("div", {
     className: "resource_tile--resourceTile--SiKPd",
     "data-testid": "community-resource-tile",

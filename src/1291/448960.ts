@@ -22,7 +22,7 @@ import { t as _$$t2 } from "../905/192333";
 import { t as _$$t3 } from "../905/150656";
 import { Z } from "../905/189618";
 import { Q } from "../1291/188959";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { p as _$$p } from "../905/42189";
 import { cX } from "../figma_app/920333";
 import { DN, kD, FL, mS, HI, SK } from "../figma_app/293326";
@@ -38,7 +38,7 @@ function k() {
   return jsx(Z, {
     fadeEdges: !0,
     children: jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         display: "inline-flex",
         padding: "12px 20px"
       }).$,

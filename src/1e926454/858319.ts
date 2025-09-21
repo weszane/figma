@@ -4,7 +4,7 @@ import { hZ, cL } from "../905/748726";
 import { um } from "../905/14223";
 import { selectUser } from "../905/372672";
 import { yI, t9 } from "../905/915142";
-import { ls } from "../905/158283";
+import { initialDomainsState } from "../905/158283";
 export function $$c0({
   prepopulatedEmail: e,
   parentOrg: n,
@@ -16,7 +16,7 @@ export function $$c0({
   useEffect(() => {
     c(um());
   }, [c]);
-  let _ = t ?? ls;
+  let _ = t ?? initialDomainsState;
   let m = useCallback(e => yI(e, p.usersByEmail[e] || e, null, _, u.email), [p.usersByEmail, u.email, _]);
   useEffect(() => {
     if (e) {

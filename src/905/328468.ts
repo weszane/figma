@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";
-import { gl, FR, oM } from "../905/171315";
+import { getFacetPrefix, getFacetValueLabel, getFacetQueryParams } from "../905/171315";
 import { k } from "../905/252342";
 import { v as _$$v } from "../905/281500";
 import { r as _$$r } from "../905/264954";
@@ -30,14 +30,14 @@ function g({
   let g = useAtomWithSubscription(L8);
   let f = Xr(rG);
   let _ = _$$v(e);
-  let A = gl(e.type);
-  let y = FR(e);
+  let A = getFacetPrefix(e.type);
+  let y = getFacetValueLabel(e);
   let b = k();
   let v = useCallback(t => {
     i ? (f(null), s.current?.blur()) : (t.stopPropagation(), f(e), s.current?.focus());
   }, [e, i, f]);
   let I = useCallback(n => {
-    i && (("Backspace" === n.key || "Delete" === n.key) && (_(), b(oM(e), PillType.PILL, InputType.AUTOCOMPLETE)), "ArrowLeft" === n.key && t > 0 && f(g[t - 1]), "ArrowRight" === n.key && (t < g.length - 1 ? f(g[t + 1]) : f(null)));
+    i && (("Backspace" === n.key || "Delete" === n.key) && (_(), b(getFacetQueryParams(e), PillType.PILL, InputType.AUTOCOMPLETE)), "ArrowLeft" === n.key && t > 0 && f(g[t - 1]), "ArrowRight" === n.key && (t < g.length - 1 ? f(g[t + 1]) : f(null)));
   }, [g, t, i, _, f, b, e]);
   let E = useCallback(e => {
     h && v(e);

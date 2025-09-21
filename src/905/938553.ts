@@ -46,7 +46,7 @@ import { D as _$$D2 } from "../905/274925";
 import { DropdownEnableState } from "../figma_app/188152";
 import { getUserId, selectUser } from "../905/372672";
 import { liveStoreInstance, IT } from "../905/713695";
-import { eE as _$$eE, Ts, wA as _$$wA } from "../figma_app/336853";
+import { isEmailAllowed, hasValidId, getCurrentUserOrg } from "../figma_app/336853";
 import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642025";
 import { getPluginVersion, pluginMetadata, validateAndResizeIconImage, getFirstFileOrThrow, getFullscreenViewEditorType, getPublishingRole, hasRoleOrOrgChanged, getLocalFileId, getOrgRole, isDevModePlugin, getPublishingErrors, validatePublishingData, validatePublishingDataLengths, getPublishedResourceOrNull, getPublishedResource, getPublishingData } from "../figma_app/300692";
 import { qu, UR } from "../905/671449";
@@ -67,7 +67,7 @@ import { Ao } from "../905/748636";
 import { $ as _$$$ } from "../905/241406";
 import eA from "classnames";
 import { s as _$$s4 } from "../cssbuilder/589278";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { gI } from "../905/277373";
 import { sU, WM, Wh } from "../905/838765";
 import { z as _$$z } from "../905/255946";
@@ -93,7 +93,7 @@ import { A as _$$A6 } from "../905/794518";
 import { O as _$$O } from "../905/483217";
 import { $ as _$$$2 } from "../905/668315";
 import { Oc, EY as _$$EY, Fu, YK, KG, iS as _$$iS, YT, r9, $h, er as _$$er, j as _$$j, e0 as _$$e3, Oh, jB, xe, UI, Zg, Ub, q1, fl, QB, YN } from "../905/599844";
-import { t as _$$t2 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { A as _$$A7 } from "../1617/805095";
 import { v as _$$v } from "../905/442517";
 import { useDebouncedCallback } from "use-debounce";
@@ -175,7 +175,7 @@ function eR() {
   return jsxs("div", {
     className: ey()(_$$s4.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
     children: [jsx("span", {
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         boxSizing: "content-box",
         margin: "-20px auto",
         opacity: "0.3"
@@ -248,7 +248,7 @@ let eD = withTrackedClick(function (e) {
         widgetSnapshotImageBlob: e,
         widgetSnapshotImageError: null
       });
-    }).$$finally(() => s(!1));
+    }).finally(() => s(!1));
   }, [pluginId, metadata.widgetSnapshotImageSrc, localPlugin, updatePluginPublishingMetadata]);
   return jsx(sU, {
     onClick: onTileClicked,
@@ -275,7 +275,7 @@ let eD = withTrackedClick(function (e) {
             hasSrc: !!_
           }), jsx("div", {
             className: _$$s4.absolute.left0.top0.hFull.wFull.opacity1.eventsNone.$,
-            style: _$$sx.$$if(t, {
+            style: styleBuilderInstance.$$if(t, {
               opacity: .1
             }).$,
             children: _ && jsx(_$$z, {
@@ -641,7 +641,7 @@ let e9 = function ({
       },
       onPaste: A,
       role: "button",
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         borderRadius: "12px"
       }).$,
       tabIndex: 0,
@@ -651,11 +651,11 @@ let e9 = function ({
         className: _$$s4.w48.h48.eventsNone.$,
         src: t.iconSrc,
         alt: ""
-      }) : jsx(_$$t2, {
+      }) : jsx(MediaQuerySvgComponent, {
         className: _$$s4.colorIcon.w48.h48.b1.colorBorder.borderBox.flex.itemsCenter.justifyCenter.$$with({
           colorBorderDanger: !!o
         }).$,
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           borderRadius: "12px",
           borderStyle: "dashed"
         }).$,
@@ -664,7 +664,7 @@ let e9 = function ({
       })]
     }), jsx("input", {
       className: _$$s4.absolute.w1.h1.$,
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         clip: "rect(0,0,0,0)"
       }).$,
       id: "icon-upload-input",
@@ -849,7 +849,7 @@ function tx({
   } : n.roles.is_public || null == n.roles.org || !r || r.id !== n.roles.org.id ? {
     state: _$$d.OK,
     content: a
-  } : _$$eE(i, a) ? {
+  } : isEmailAllowed(i, a) ? {
     state: _$$d.ERROR,
     content: a
   } : {
@@ -1026,7 +1026,7 @@ function tD({
 function tL({
   token: e
 }) {
-  let t = Ts(e.content) ? e.content.handle : e.content;
+  let t = hasValidId(e.content) ? e.content.handle : e.content;
   return jsx("span", {
     className: _$$s4.maxW300.overflowHidden.ellipsis.noWrap.$,
     children: jsx(TextWithTruncation, {
@@ -1149,7 +1149,7 @@ function tM({
           g({
             inputValue: "",
             tokens: t.tokens.filter(e => {
-              let t = Ts(e.content) ? e.content.email : e.content;
+              let t = hasValidId(e.content) ? e.content.email : e.content;
               return n.has(t);
             }).map(e => ({
               ...e,
@@ -1166,7 +1166,7 @@ function tM({
             message: resolveMessage(e, e.message),
             error: !0
           }));
-        }).$$finally(() => {
+        }).finally(() => {
           _(!1);
         });
       },
@@ -1228,7 +1228,7 @@ function tj({
     children: renderI18nText("community.publishing.people_given_update_permissions_are_not_visible_to_the_public", {
       createdByLink: jsx("button", {
         onClick: i,
-        style: _$$sx.colorTextBrand.cursorPointer.mr0.p0.bgTransparent.add({
+        style: styleBuilderInstance.colorTextBrand.cursorPointer.mr0.p0.bgTransparent.add({
           border: "none"
         }).$,
         children: renderI18nText("community.publishing.created_by_link")
@@ -1834,7 +1834,7 @@ function iP({
   let a = e.length > i && e.length <= t;
   return jsx("div", {
     className: _$$s4.$$case([[n, _$$s4.colorTextDanger], [a, _$$s4.colorTextWarning]], _$$s4.colorTextTertiary).ml8.$,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       gridColumnStart: 16,
       gridColumnEnd: 18
     }).$,
@@ -3454,7 +3454,7 @@ let iY = connect((e, t) => {
     localPlugin: s,
     publishedPlugin: d,
     validPluginId: u,
-    currentOrg: _$$wA(e),
+    currentOrg: getCurrentUserOrg(e),
     isCurrentOrgMember: canMemberOrg(e.currentUserOrgId, e, e.user.id),
     orgDomains: e.orgDomains,
     authedProfilesById: e.authedProfilesById,

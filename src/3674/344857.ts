@@ -8,7 +8,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager,
 import { useHasParentOrgId } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { tH as _$$tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
@@ -34,7 +34,7 @@ import { isColorDark, colorToRgbaString } from "../figma_app/191804";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx as _$$sx2 } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { DialogLabel } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -70,7 +70,7 @@ import { Q as _$$Q } from "../9410/629866";
 import { A as _$$A } from "../6828/523860";
 import { lQ as _$$lQ } from "../905/934246";
 import { O as _$$O } from "../905/587457";
-import { t as _$$t3 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { ue as _$$ue, n2 as _$$n3, vl, yT } from "../figma_app/332598";
 import { WEB as _$$uz, FIGMA_PROPERTIES, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
 import { ButtonPrimitive } from "../905/632989";
@@ -365,7 +365,7 @@ import { Y6 } from "../figma_app/91703";
 import { wg } from "../figma_app/101956";
 import { getSelectedView } from "../figma_app/386952";
 import { exitVersionHistoryMode, CURRENT_VERSION_ID, setActiveVersion } from "../figma_app/841351";
-import { lF as _$$lF } from "../figma_app/915202";
+import { LoadingBarStatus } from "../figma_app/915202";
 import { jP, YL, s3 as _$$s8, yU } from "../figma_app/221114";
 import { handleCopyViewUrl } from "../905/262176";
 import { DevModeSavepointModalContainer, SavepointModalContainer } from "../figma_app/504415";
@@ -438,7 +438,7 @@ import { V as _$$V2 } from "../469e6e40/782251";
 import { VERSION_HISTORY_SET_ACTIVE } from "../905/784363";
 import { m as _$$m3 } from "../905/99004";
 import { x as _$$x3 } from "../905/106997";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { V_ as _$$V_ } from "../9410/904355";
 import { B as _$$B4 } from "../3276/756841";
 import { _ as _$$_2 } from "../905/569825";
@@ -783,7 +783,7 @@ function ev() {
 function ey() {
   return jsx("div", {
     className: _$$s.fixed.top0.left0.right0.bottom0.wFull.hFull.zIndexModal.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       backgroundColor: "var(--color-modalbackdrop)"
     }).$
   });
@@ -796,7 +796,7 @@ function eb() {
   }) : "var(--color-modalbackdrop)";
   return jsx("div", {
     className: _$$s.fixed.top0.right0.bottom0.left0.$,
-    style: _$$sx2.add({
+    style: styleBuilderInstance.add({
       backgroundColor: t
     }).$
   });
@@ -1656,7 +1656,7 @@ function t6() {
                   className: _$$s.flex.flexRow.gap8.itemsCenter.wFull.$,
                   children: [jsx("span", {
                     className: "right_panel--layerIcon--9-ijp",
-                    children: jsx(_$$t3, {
+                    children: jsx(MediaQuerySvgComponent, {
                       svg: _$$A2
                     })
                   }), jsx(Wi, {
@@ -1944,9 +1944,9 @@ function nr() {
     doReport: !1
   });
   let [n, o] = useAtomValueAndSetter(_$$t);
-  return (useEffect(() => () => o(_$$c.DEFAULT), [o]), e) ? jsx(ns, {}) : jsx(_$$tH, {
+  return (useEffect(() => () => o(_$$c.DEFAULT), [o]), e) ? jsx(ns, {}) : jsx(ErrorBoundaryCrash, {
     boundaryKey: "DevModePaywall",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },
@@ -5194,7 +5194,7 @@ function o6({
     },
     children: [jsx("p", {
       className: "developer_related_link_row--linkName--p0e0K ellipsis--ellipsis--Tjyfa",
-      style: n ? _$$sx2.add({
+      style: n ? styleBuilderInstance.add({
         maxWidth: "50%"
       }).$ : void 0,
       children: e
@@ -5491,9 +5491,9 @@ let lD = memo(({
                       modes: modeData || {}
                     })
                   })]
-                }), jsx(_$$tH, {
+                }), jsx(ErrorBoundaryCrash, {
                   boundaryKey: "Figmadoc",
-                  fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+                  fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
                   children: jsx(Qd, {
                     isPlayground: !0,
                     onInstancePillClick: C
@@ -6590,9 +6590,9 @@ function sO() {
   });
 }
 function sM() {
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "Figmadoc",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(Qd, {})
   });
 }
@@ -6644,7 +6644,7 @@ function s0({
 }) {
   return jsxs("div", {
     className: "dev_handoff_nodes_panel--historyIconContainer--QkDx6",
-    children: [jsx(_$$t3, {
+    children: [jsx(MediaQuerySvgComponent, {
       className: "dev_handoff_nodes_panel--historyIcon--dprKz",
       svg: _$$A15
     }), e === Uy.RECENTLY_EDITED && jsx("div", {
@@ -8155,7 +8155,7 @@ function rq() {
     horizontalAlignItems: "center",
     children: jsxs(Fragment, {
       children: [jsx("span", {
-        style: _$$sx2.add({
+        style: styleBuilderInstance.add({
           boxSizing: "content-box",
           margin: "-20px auto",
           opacity: "0.3"
@@ -8463,7 +8463,7 @@ function df({
         horizontalAlignItems: "center",
         spacing: 4,
         children: [jsx("div", {
-          style: _$$sx2.add({
+          style: styleBuilderInstance.add({
             marginTop: "-3px"
           }).$,
           children: jsx(_$$d9, {
@@ -9093,7 +9093,7 @@ function ca({
         }));
         s(Y6({
           mode: UIVisibilitySetting.KEEP_UI,
-          type: _$$lF.SPINNER
+          type: LoadingBarStatus.SPINNER
         }));
         requestAnimationFrame(() => {
           s(setActiveVersion({
@@ -9242,9 +9242,9 @@ function cf() {
   });
   let t = Rb().length;
   let n = generateRecordingKey("fullVarsTable", "panelEntry");
-  return t ? jsx(_$$tH, {
+  return t ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_inspectEntry",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
@@ -11570,7 +11570,7 @@ let pL = memo(function () {
   let w = versionHistoryActive && !isNodeSelected && !r;
   let N = c === IAssertResource.PRIMARY && !commentsActive && !w;
   let k = c === IAssertResource.STRING_MANAGEMENT;
-  let A = jsx(vL, {
+  let A = jsx(KeyboardReceiver, {
     name: "rightPanels",
     focusOnMount: !0,
     handleKeyDown: _$$lQ,
@@ -12425,9 +12425,9 @@ function hO() {
     children: [jsxs(hD, {
       forSmallScreen: !0,
       containerClassName: hk,
-      children: [jsx(_$$tH, {
+      children: [jsx(ErrorBoundaryCrash, {
         boundaryKey: "Figmadoc",
-        fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+        fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(Qd, {})
       }), jsx(_$$J0, {}), jsx(dw, {}), jsx(_$$G3, {}), jsx(_$$t6, {}), jsx(_$$r_, {}), jsx("div", {
         className: hA,

@@ -21,7 +21,7 @@ import { ViewSectionMap, SCORE_OFFSET } from "../figma_app/701107";
 import { COMMUNITY_WIDTH, COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { getDynamicContentTranslation, normalizeSearchString, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
-import { Z4 } from "../figma_app/809727";
+import { MediaType } from "../figma_app/809727";
 import { e0 as _$$e2 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
 import { T as _$$T } from "../5132/203178";
@@ -96,7 +96,7 @@ import { getCurrentLocale } from "../figma_app/598412";
 import { LJ } from "../figma_app/930386";
 import { categoryBySlugQuery } from "../figma_app/188671";
 import { BrowseCategoryRoute } from "../figma_app/805898";
-import { n6 } from "../figma_app/600006";
+import { SearchRouteWithCommunity } from "../figma_app/600006";
 import { TrackedLink } from "../figma_app/831799";
 import { Pr, Pc, Tc, Cy, AT } from "../figma_app/950781";
 import { u as _$$u2 } from "../5430/533104";
@@ -1255,7 +1255,7 @@ function tR({
       className: Cy,
       children: c.map(e => jsx(TrackedLink, {
         className: AT,
-        to: new n6({}, {
+        to: new SearchRouteWithCommunity({}, {
           query: normalizeSearchString(e)
         }).to,
         trackingEventName: "Tag clicked",
@@ -1406,7 +1406,7 @@ export function $$tF0({
   let a = function (e, t) {
     if (isPluginOrWidget(e)) return !1;
     let r = isMonetizedFigJamTemplate(e, t);
-    let s = getEmbedType(e) === Z4.EMBED;
+    let s = getEmbedType(e) === MediaType.EMBED;
     return !r && !s && !isSlideTemplate(e);
   }(e, r);
   let l = hasHubFileOrPresetKey(r.id) && t();

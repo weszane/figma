@@ -47,7 +47,7 @@ import { getStyleTypeLabel } from "../figma_app/646357";
 import { useSubscribedLibraries } from "../figma_app/155728";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { bf, GC, hg } from "../figma_app/635062";
@@ -72,7 +72,7 @@ import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
-import { Oe } from "../figma_app/336853";
+import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { F as _$$F2 } from "../905/258517";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { K0, YW } from "../figma_app/778125";
@@ -280,7 +280,7 @@ function ek({
 }) {
   let u = s[c];
   let p = useCurrentUserOrg();
-  let _ = Oe(p);
+  let _ = isBigmaEnabledAlias3(p);
   let h = fV(u?.type === _$$b2.LibraryName ? u.libraryKey : void 0);
   if (!u) return null;
   switch (u.type) {
@@ -511,7 +511,7 @@ export function $$ej4({
   let r = useCallback(e => {
     [KeyCodes.ENTER, KeyCodes.UP_ARROW, KeyCodes.DOWN_ARROW, KeyCodes.LEFT_ARROW, KeyCodes.RIGHT_ARROW].includes(e.event.keyCode) && e.accept();
   }, []);
-  return jsx(vL, {
+  return jsx(KeyboardReceiver, {
     name: e || "",
     handleKeyDown: r,
     focusOnMount: !0,

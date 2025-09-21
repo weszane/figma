@@ -10,7 +10,7 @@ import { le } from "../905/904854";
 import { ViewMode } from "../figma_app/756995";
 import { g as _$$g } from "../905/607862";
 import h from "classnames";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
@@ -25,16 +25,16 @@ function $$A(e) {
   return jsxs("div", {
     className: _$$s.relative.$,
     children: [e.selectedItems.slice(0, 3).map((t, i) => jsx("div", {
-      style: sx.match(i, {
-        0: sx.add({
+      style: styleBuilderInstance.match(i, {
+        0: styleBuilderInstance.add({
           top: 0,
           left: 0
         }),
-        1: sx.add({
+        1: styleBuilderInstance.add({
           top: "8px",
           left: "8px"
         }),
-        2: sx.add({
+        2: styleBuilderInstance.add({
           top: "16px",
           left: "16px"
         })
@@ -43,7 +43,7 @@ function $$A(e) {
       children: e.renderDragImage(t)
     }, `DragImageItem${i}`)).reverse(), !e.multiselectDisabled && e.selectedItems.length ? jsx("div", {
       className: _$$s.h24.w24.colorBgBrand.bRadiusFull.absolute.flex.justifyCenter.itemsCenter.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         top: "-12px",
         left: "-12px"
       }).$,

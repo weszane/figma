@@ -3,13 +3,13 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { OM } from "../905/124270";
 import { getSelectedView } from "../figma_app/386952";
-import { L0 } from "../figma_app/162807";
+import { ContentPreviewMode } from "../figma_app/162807";
 export function $$d0() {
   let [e, t] = useAtomValueAndSetter(OM);
   let i = useSelector(e => e.search.sessionId);
   let d = useSelector(e => e.search.queryId);
   let c = useSelector(e => e.search.parameters.query);
-  let u = "search" === getSelectedView().view ? L0.FULL_PAGE : L0.PREVIEW;
+  let u = "search" === getSelectedView().view ? ContentPreviewMode.FULL_PAGE : ContentPreviewMode.PREVIEW;
   return (n, r) => {
     e && (trackEventAnalytics("facet_type_unselected", {
       facetSessionId: e,

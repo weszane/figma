@@ -34,7 +34,7 @@ import { decimalToPercent } from "../figma_app/808294";
 import { gH } from "../905/104173";
 import { W as _$$W2, T as _$$T } from "../905/336482";
 import { allCategoriesQuery } from "../figma_app/188671";
-import { cO } from "../figma_app/530167";
+import { resetCommentState } from "../figma_app/530167";
 import { i9, N4, VS, oO, bk } from "../figma_app/49598";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { M3 } from "../figma_app/91703";
@@ -61,7 +61,7 @@ import { ShareAction } from "../figma_app/707808";
 import { SourceType } from "../figma_app/175992";
 import { Rs } from "../figma_app/761870";
 import { e0 as _$$e3 } from "../905/696396";
-import { s as _$$s2 } from "../905/608932";
+import { profileServiceAPI } from "../905/608932";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { pz } from "../figma_app/825489";
 import { OJ } from "../905/519092";
@@ -458,7 +458,7 @@ class ts extends Component {
           this.hasSucceededToPublish = !0;
           let t = this.props.hubFile.comments_setting === DropdownEnableState.ENABLED && this.props.hubFile.viewer_mode !== FTemplateCategoryType.PROTOTYPE;
           let i = metadata.commentsSetting === DropdownEnableState.ENABLED && metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE;
-          (metadata.commentsSetting !== this.props.hubFile.comments_setting || t !== i) && this.props.dispatch(cO());
+          (metadata.commentsSetting !== this.props.hubFile.comments_setting || t !== i) && this.props.dispatch(resetCommentState());
           this.props.isEditHubFilePageMode && customHistory.reload("Published hubfile updated");
           this.props.dispatch(VisualBellActions.enqueue({
             message: getI18nString("community.publishing.changes_saved"),
@@ -797,7 +797,7 @@ class ts extends Component {
       let {
         data,
         status
-      } = await _$$s2.getEditors({
+      } = await profileServiceAPI.getEditors({
         fileKey: this.props.figFile.key
       });
       200 === status && this.setState({

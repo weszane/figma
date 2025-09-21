@@ -14,7 +14,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
 import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTemplatesByTeam, BrowseTemplatesView, PaginatedTemplatesSearch } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
-import { G7 } from "../figma_app/336853";
+import { isBigmaEnabledAlias } from "../figma_app/336853";
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
 import { AC, tz } from "../figma_app/803787";
 import { getCurrentTeam } from "../figma_app/598018";
@@ -113,7 +113,7 @@ export function $$V1(e, t) {
   let [u, p] = useState([]);
   let [_, h] = useState(0);
   let [m, g] = useState(!0);
-  let f = G7(e);
+  let f = isBigmaEnabledAlias(e);
   let E = getFeatureFlags().pro_templates_lg;
   let b = useCallback(({
     ids: r,
@@ -487,7 +487,7 @@ export function $$$14({
   };
 }
 let X = e => {
-  let t = G7(e);
+  let t = isBigmaEnabledAlias(e);
   let r = useSubscription(BrowseTemplatesView, {
     currentOrgId: e?.id || ""
   }, {

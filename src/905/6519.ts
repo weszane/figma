@@ -30,7 +30,7 @@ import { lQ } from "../905/934246";
 import W from "lodash-es/mapValues";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { SK, Fq, vu } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
@@ -289,7 +289,7 @@ function es({
   }));
   let I = _$$s.flex.justifyBetween.itemsCenter.gap6.$;
   let E = _$$s.fontMedium.font11.colorText.$;
-  let x = _$$sx.flex.flexColumn.add({
+  let x = styleBuilderInstance.flex.flexColumn.add({
     maxWidth: "50%"
   }).$;
   let S = _$$s.fontSemiBold.font16.colorText.$;
@@ -377,7 +377,7 @@ function eo({
       "data-tooltip-type": KindEnum.TEXT,
       disabled: !0,
       onClick: lQ,
-      style: _$$sx.wFull.h32.$,
+      style: styleBuilderInstance.wFull.h32.$,
       children: t ? renderI18nText("plan_comparison.plans.starter.limit_reached") : renderI18nText("plan_comparison.plans.button.current_plan")
     });
   }
@@ -401,7 +401,7 @@ function eo({
   };
   let A = h ? ButtonSecondaryTracked : ButtonBasePrimaryTracked;
   return jsx(A, {
-    style: _$$sx.wFull.h32.$,
+    style: styleBuilderInstance.wFull.h32.$,
     className: ei,
     onClick: _[e],
     disabled: f,

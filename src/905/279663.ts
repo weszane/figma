@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { J } from "../905/273120";
 import { D } from "../905/621624";
 var $$n0;
@@ -12,7 +12,7 @@ export function $$p1({
 }) {
   return jsx("div", {
     className: o()(D, _$$s.colorBgSecondary.wFull.flex.alignCenter.justifyCenter.p16.radiusMedium.$),
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: "1/1",
       animationFillMode: "backwards",
       animationDelay: `${e}ms`
@@ -27,7 +27,7 @@ export function $$p1({
   }, n) => jsx("div", {
     ref: n,
     className: _$$s.colorBgSecondary.flex.wFull.alignCenter.justifyCenter.radiusMedium.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       aspectRatio: "1/1",
       padding: `${t}px`
     }).$,
@@ -42,7 +42,7 @@ export function $$p1({
       src: e,
       alt: t,
       className: _$$s.maxWFull.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         objectFit: "scale-down"
       }).$,
       draggable: !1

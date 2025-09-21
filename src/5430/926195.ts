@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { HI } from "../figma_app/173838";
 import { selectCurrentUser } from "../905/372672";
@@ -16,7 +16,7 @@ export let $$p0 = registerModal(function ({
   ...m
 }) {
   let p = HI(e);
-  let h = Jm();
+  let h = getSearchSessionIdFromSelector();
   let x = useDispatch();
   let f = selectCurrentUser();
   return p ? jsx(AppleEulaModal, {

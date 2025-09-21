@@ -5,7 +5,7 @@ import { f as _$$f } from "../905/54715";
 import o from "classnames";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { ZI, z3, $e, hh, pj, Ij, G, YE } from "../905/660757";
 import { A } from "../5724/600086";
 var l = o;
@@ -22,7 +22,7 @@ export function $$m1({
 }) {
   return jsxs("div", {
     "data-testid": m,
-    style: sx.$$if(!o, {
+    style: styleBuilderInstance.$$if(!o, {
       borderRadius: "0px"
     }).$$if(void 0 !== g, {
       padding: g + "px"

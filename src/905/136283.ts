@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import $$r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 var a = $$r;
 export function $$l0(e) {
   return jsx("div", {
     className: _$$s.flex.overflowAuto.gap4.itemsCenter.pr1.$,
-    style: sx.$$if(e.height, {
+    style: styleBuilderInstance.$$if(e.height, {
       height: "auto" === e.height ? "auto" : `${e.height}px`
-    }, sx.h32).$,
+    }, styleBuilderInstance.h32).$,
     children: e.tabs
   });
 }

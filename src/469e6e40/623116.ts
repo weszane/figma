@@ -27,7 +27,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me, $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -1451,7 +1451,7 @@ function tL(e) {
   }
   function e6(e, t) {
     return "loaded" !== eX.status ? jsx("div", {
-      style: sx.w64.$,
+      style: styleBuilderInstance.w64.$,
       children: jsx(Wi, {
         className: _$$s.h24.w64.$,
         animationType: JR.SHIMMER
@@ -1667,7 +1667,7 @@ function tL(e) {
       actionBar: e => {
         let t = new Set(e.map(e => e.id));
         if (et && null === totalSelectable) return jsx("div", {
-          style: sx.w150.$,
+          style: styleBuilderInstance.w150.$,
           children: jsx(Wi, {
             className: _$$s.h12.w150.$,
             animationType: JR.SHIMMER_ON_MENU
@@ -1675,7 +1675,7 @@ function tL(e) {
         });
         let a = !1;
         if (et && null !== totalSelectable && (a = isLoading), a && status === APILoadingStatus.LOADING) return jsx("div", {
-          style: sx.w150.$,
+          style: styleBuilderInstance.w150.$,
           children: jsx(Wi, {
             className: _$$s.h12.w150.$,
             animationType: JR.SHIMMER_ON_MENU

@@ -12,7 +12,7 @@ import { Y } from "../905/506207";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
 import { B2, al, b6 } from "../figma_app/681697";
 import { u as _$$u } from "../905/997541";
@@ -60,7 +60,7 @@ function E({
             })
           }), jsxs("div", {
             className: _$$s.flex.flex1.flexColumn.justifyCenter.gap24.borderBox.b1.colorBorder.bRadius4.$$if(a, _$$s.b2.colorBgSelected.colorBorderSelectedStrong).$,
-            style: sx.add({
+            style: styleBuilderInstance.add({
               minHeight: "316px",
               borderStyle: "dashed"
             }).$$if(a, {
@@ -73,7 +73,7 @@ function E({
                 children: renderI18nText("file_browser.file_import_view.import_header_with_pptx")
               }), jsx("span", {
                 className: _$$s.textBodyLarge.colorTextSecondary.$,
-                style: sx.add({
+                style: styleBuilderInstance.add({
                   width: "calc(100% * 2/3)"
                 }).$,
                 children: renderI18nText("file_browser.file_import_view.import_description_with_pptx")

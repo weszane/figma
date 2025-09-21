@@ -7,7 +7,7 @@ import { isIpadDevice } from "../figma_app/778880";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { notificationActions } from "../905/851662";
-import { NotificationType } from "../905/170564";
+import { NotificationCategory } from "../905/170564";
 import { getCurrentFileType } from "../figma_app/976749";
 import { FDeviceType } from "../figma_app/191312";
 import { LatestClipboardData } from "../figma_app/43951";
@@ -58,11 +58,11 @@ export function $$y1() {
           retryCount: d
         });
         e(notificationActions.dequeue({
-          type: NotificationType.CLIPBOARD_DATA_AVAILABLE
+          type: NotificationCategory.CLIPBOARD_DATA_AVAILABLE
         }));
         e(notificationActions.enqueue({
           notification: {
-            type: NotificationType.CLIPBOARD_DATA_AVAILABLE,
+            type: NotificationCategory.CLIPBOARD_DATA_AVAILABLE,
             message: getI18nString("fullscreen.notification.clipboard_data_available"),
             downloadUrl: n.presignedDownloadUrl,
             deviceType: n.deviceType,
@@ -75,7 +75,7 @@ export function $$y1() {
         }));
         setTimeout(() => {
           a() && t.current === l && e(notificationActions.dequeue({
-            type: NotificationType.CLIPBOARD_DATA_AVAILABLE
+            type: NotificationCategory.CLIPBOARD_DATA_AVAILABLE
           }));
         }, 6e4);
       }

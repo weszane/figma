@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { c } from "../905/320067";
 import { y } from "../905/978641";
-import { a as _$$a, B } from "../905/458036";
+import { communityHubFileThumbnailSettings, communityHubFileThumbnailSizes } from "../905/458036";
 var $$o0 = (e => (e.DETAIL = "detail", e.UNIVERSAL_INSERT = "universal_insert", e))($$o0 || {});
 export function $$l2(e) {
   let t = {
@@ -15,10 +15,10 @@ export function $$l2(e) {
         case "universal_insert":
           return;
         case "detail":
-          t = _$$a.COMMUNITY_HUB_FILE_THUMBNAIL_DETAIL;
+          t = communityHubFileThumbnailSettings.COMMUNITY_HUB_FILE_THUMBNAIL_DETAIL;
           break;
         default:
-          t = _$$a.COMMUNITY_HUB_FILE_THUMBNAIL_DEFAULT;
+          t = communityHubFileThumbnailSettings.COMMUNITY_HUB_FILE_THUMBNAIL_DEFAULT;
       }
       var t;
       var r = Object.entries(t).map(([e, t], r) => `(min-width: ${e}px) ${t}vw`);
@@ -36,7 +36,7 @@ export function $$l2(e) {
           let r = e.indexOf(".", t);
           return e.substring(t + 1, r);
         }(t);
-        a = Object.keys(B.COMMUNITY_HUB_FILE_THUMBNAIL).map(t => [t, `/community/file/${e}/thumbnail/${t}?signature=${r}`]);
+        a = Object.keys(communityHubFileThumbnailSizes.COMMUNITY_HUB_FILE_THUMBNAIL).map(t => [t, `/community/file/${e}/thumbnail/${t}?signature=${r}`]);
       }
       return (a.push(["1600", t]), "universal_insert" === n ? a.map(([e, t]) => {
         let r = Math.round(parseInt(e) / 80 * 10) / 10;

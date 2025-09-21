@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
@@ -212,7 +212,7 @@ function M(e) {
     recordingKey: e.recordingKey,
     children: [t && jsx(SvgComponent, {
       className: Kk,
-      style: _$$sx.$$if(r === _$$A, _$$sx.add({
+      style: styleBuilderInstance.$$if(r === _$$A, styleBuilderInstance.add({
         transform: "rotate(90deg)"
       })).$,
       svg: r

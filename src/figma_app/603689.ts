@@ -43,7 +43,7 @@ import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { m as _$$m2 } from '../905/168176';
-import { NotificationType } from '../905/170564';
+import { NotificationCategory } from '../905/170564';
 import { P as _$$P3 } from '../905/175083';
 import { g as _$$g2 } from '../905/181093';
 import { Y as _$$Y3 } from '../905/185567';
@@ -74,7 +74,7 @@ import { b as _$$b } from '../905/275748';
 import { E as _$$E8 } from '../905/277716';
 import { handleUrlAction } from '../905/280005';
 import { h as _$$h5 } from '../905/284399';
-import { V as _$$V2 } from '../905/292707';
+import { ConnectedAppModal } from '../905/292707';
 import { e as _$$e1 } from '../905/295932';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -193,7 +193,7 @@ import { c as _$$c0, s as _$$s7 } from '../905/744710';
 import { T as _$$T3 } from '../905/745591';
 import { u as _$$u5 } from '../905/747030';
 import { EL } from '../905/748636';
-import { H4 as _$$H4, tH as _$$tH, Hb, S1 } from '../905/751457';
+import { errorBoundaryFallbackTypes, ErrorBoundaryCrash, useErrorBoundaryContext, RootErrorBoundaryFallback } from '../905/751457';
 import { Bm } from '../905/755627';
 import { isDefaultFile } from '../905/760074';
 import { D as _$$D2 } from '../905/771179';
@@ -207,7 +207,7 @@ import { MultiValueMap } from '../905/810750';
 import { $ as _$$$ } from '../905/819786';
 import { EventShield } from '../905/821217';
 import { m as _$$m4 } from '../905/822676';
-import { F2 } from '../905/826900';
+import { KeyboardFocusManager } from '../905/826900';
 import { AutoLayout } from '../905/470281';
 import { K as _$$K4 } from '../905/833668';
 import { l as _$$l7 } from '../905/840533';
@@ -244,12 +244,12 @@ import { I as _$$I2 } from '../905/932503';
 import { lQ as _$$lQ } from '../905/934246';
 import { v as _$$v4 } from '../905/939922';
 import { selectUserFlag } from '../905/940356';
-import { sx as _$$sx2 } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { fileEntityDataMapper } from '../905/943101';
 import { h as _$$h2 } from '../905/943864';
 import { PluginIframeMode } from '../905/968269';
 import { O as _$$O2 } from '../905/969533';
-import { R9 } from '../905/977824';
+import { multiplayerSessionManager } from '../905/977824';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { h1 } from '../905/986103';
@@ -364,7 +364,7 @@ import { z5 } from '../figma_app/268172';
 import { N as _$$N5 } from '../figma_app/268271';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
-import { h as _$$h3 } from '../figma_app/276445';
+import { fullscreenCrashStateAtom } from '../figma_app/276445';
 import { W6 } from '../figma_app/287316';
 import { useMultiSubscription, useSubscription, getLivegraphClient } from '../figma_app/288654';
 import { imageAPI } from '../figma_app/291892';
@@ -541,7 +541,7 @@ import { j as _$$j2 } from '../figma_app/911344';
 import { Dt } from '../figma_app/912411';
 import { f as _$$f } from '../figma_app/913332';
 import { QE, z0 } from '../figma_app/914216';
-import { ai as _$$ai, f6 } from '../figma_app/915202';
+import { TabOpenBehavior, FileBrowserLocation } from '../figma_app/915202';
 import { utilityNoop } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { w as _$$w } from '../figma_app/922802';
@@ -769,7 +769,7 @@ function eu() {
             'aria-hidden': !0
           })
         }), user && jsx('div', {
-          style: _$$sx2.w24.h24.p8.pr0.$,
+          style: styleBuilderInstance.w24.h24.p8.pr0.$,
           children: jsx(H8, {
             user
           })
@@ -1741,7 +1741,7 @@ let ns = {
   CurrentUserInfo: () => inputValue,
   WebSelection: () => sessionValue,
   WebMultiplayer: () => flagValue,
-  WebUserSyncing: () => R9,
+  WebUserSyncing: () => multiplayerSessionManager,
   EmojiWheelBindings: () => CB,
   Comments: () => _$$lS,
   PluginCallbacks: () => _$$d4,
@@ -3444,7 +3444,7 @@ function si() {
   let o = useStableMemo(s ? e.urlParams : null);
   return s ? jsx('div', {
     ref: a,
-    style: _$$sx2.overflowHidden.m0.colorBg.colorText.add({
+    style: styleBuilderInstance.overflowHidden.m0.colorBg.colorText.add({
       height: '100vh'
     }).$,
     children: o ? 'backend' in o && o.backend === 'fullscreen' ? jsx(ss, {
@@ -3576,7 +3576,7 @@ function so({
   }, [i, s, e]);
   let o = useMemo(() => jsxs(_$$tV, {
     children: [jsx('h1', {
-      style: _$$sx2.font24.fontBold.mb16.$,
+      style: styleBuilderInstance.font24.fontBold.mb16.$,
       children: 'Welcome to FigmaScope!'
     }), jsxs('p', {
       children: ['This tool lets you inspect the internals of Fig files. Check out the Readme', ' ', jsx('a', {
@@ -3585,7 +3585,7 @@ function so({
         children: 'here'
       }), '.']
     }), jsx('h2', {
-      style: _$$sx2.font20.fontBold.mt32.mb16.$,
+      style: styleBuilderInstance.font20.fontBold.mt32.mb16.$,
       children: 'Getting started'
     }), jsx('p', {
       children: 'Drag a .fig or .figd file here to view its contents. Or drag two files to diff them.'
@@ -3594,7 +3594,7 @@ function so({
     }), jsx('p', {
       children: 'Copy a file key or URL and paste it here to view it.'
     }), jsx('h2', {
-      style: _$$sx2.font20.fontBold.mt32.mb16.$,
+      style: styleBuilderInstance.font20.fontBold.mt32.mb16.$,
       children: 'Other ways to access FigmaScope'
     }), jsx('p', {
       children: 'Use the "Show in FigmaScope" menu option in the editor to open an embedded version of FigmaScope.'
@@ -3607,7 +3607,7 @@ function so({
     onTargetDrop: s,
     onTargetDragEnter: _$$lQ,
     onTargetDragLeave: _$$lQ,
-    style: _$$sx2.hFull.$,
+    style: styleBuilderInstance.hFull.$,
     children: jsx(_$$J3, {
       onClose: n,
       emptyStateContent: o
@@ -6273,7 +6273,7 @@ function dJ() {
 function d1({
   onRetry: e
 }) {
-  let t = Hb();
+  let t = useErrorBoundaryContext();
   return jsx('div', {
     className: 'x1mg88bx x1gcgh60 x1jwbysl',
     children: jsxs(BannerInline, {
@@ -6476,7 +6476,7 @@ function ca() {
   });
 }
 function cs() {
-  return getFullscreenFileKey() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(ErrorBoundaryCrash, {
     boundaryKey: 'file-list-other-files',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6515,7 +6515,7 @@ function cd() {
   });
 }
 function cc() {
-  return getFullscreenFileKey() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(ErrorBoundaryCrash, {
     boundaryKey: 'file-list-pinned-files',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6587,7 +6587,7 @@ let ch = {
   }
 };
 function cm() {
-  return getFullscreenFileKey() ? jsx(_$$tH, {
+  return getFullscreenFileKey() ? jsx(ErrorBoundaryCrash, {
     boundaryKey: 'file-drawer-header',
     fallback: e => jsx(d1, {
       onRetry: e
@@ -6629,7 +6629,7 @@ function cg() {
         children: n.description
       }), jsx(Lo, {
         lgFolder: n,
-        newFileFrom: f6.FULLSCREEN_FILE_DRAWER
+        newFileFrom: FileBrowserLocation.FULLSCREEN_FILE_DRAWER
       })]
     }), jsx(cd, {})]
   });
@@ -8100,10 +8100,10 @@ function pz() {
             children: [jsx(uj, {}), jsx(uO, {})]
           })]
         })]
-      }), jsx(_$$tH, {
+      }), jsx(ErrorBoundaryCrash, {
         boundaryKey: 'DesignSecondaryToolbelts',
         team: _$$e.EDITOR_USABILITY,
-        fallback: _$$H4.NONE_I_KNOW_WHAT_IM_DOING,
+        fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(pV, {
           recordingKey: 'secondary_toolbelt'
         })
@@ -8358,21 +8358,21 @@ class _p extends _a {
       let e = this.getCurrentNotif();
       if (!e) return null;
       switch (e.type) {
-        case NotificationType.COMPONENT_PUBLISH_ERROR:
-        case NotificationType.DOWNTIME:
+        case NotificationCategory.COMPONENT_PUBLISH_ERROR:
+        case NotificationCategory.DOWNTIME:
           return _$$A15;
-        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationCategory.AUTOSAVE_CHANGES_RESTORED:
           return _$$A10;
-        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED:
           return _$$A13;
-        case NotificationType.MOVE_COMPONENTS_PROMPT:
+        case NotificationCategory.MOVE_COMPONENTS_PROMPT:
           return _$$A12;
-        case NotificationType.BRANCHING_OTHER_USER_MERGING:
-        case NotificationType.SEE_WHATS_CHANGED:
+        case NotificationCategory.BRANCHING_OTHER_USER_MERGING:
+        case NotificationCategory.SEE_WHATS_CHANGED:
           return _$$A13;
-        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationCategory.CLIPBOARD_DATA_AVAILABLE:
           return _$$A11;
-        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return _$$A14;
       }
     };
@@ -8381,23 +8381,23 @@ class _p extends _a {
       if (!e) return null;
       let t = e.type;
       switch (t) {
-        case NotificationType.COMPONENT_PUBLISH_ERROR:
+        case NotificationCategory.COMPONENT_PUBLISH_ERROR:
           return 'Retry...';
-        case NotificationType.DOWNTIME:
+        case NotificationCategory.DOWNTIME:
           return 'Learn more';
-        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationCategory.AUTOSAVE_CHANGES_RESTORED:
           return null;
-        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED:
           return getI18nString('collaboration.branching.update');
-        case NotificationType.MOVE_COMPONENTS_PROMPT:
+        case NotificationCategory.MOVE_COMPONENTS_PROMPT:
           return getI18nString('design_systems.updates.publish');
-        case NotificationType.BRANCHING_OTHER_USER_MERGING:
+        case NotificationCategory.BRANCHING_OTHER_USER_MERGING:
           return null;
-        case NotificationType.SEE_WHATS_CHANGED:
+        case NotificationCategory.SEE_WHATS_CHANGED:
           return getI18nString('collaboration.feedback.compare');
-        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationCategory.CLIPBOARD_DATA_AVAILABLE:
           return getI18nString('fullscreen_actions.paste');
-        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return getI18nString('comments.turn_on');
         default:
           throwTypeError(t);
@@ -8408,7 +8408,7 @@ class _p extends _a {
       if (!e) return;
       let t = e.type;
       switch (t) {
-        case NotificationType.COMPONENT_PUBLISH_ERROR:
+        case NotificationCategory.COMPONENT_PUBLISH_ERROR:
           this.props.dispatch(showModalHandler({
             type: _$$dD,
             data: {
@@ -8416,19 +8416,19 @@ class _p extends _a {
             }
           }));
           return;
-        case NotificationType.DOWNTIME:
-        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
-        case NotificationType.MOVE_COMPONENTS_PROMPT:
+        case NotificationCategory.DOWNTIME:
+        case NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationCategory.MOVE_COMPONENTS_PROMPT:
           e && e.acceptCallback && e.acceptCallback();
           return;
-        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
-        case NotificationType.BRANCHING_OTHER_USER_MERGING:
+        case NotificationCategory.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationCategory.BRANCHING_OTHER_USER_MERGING:
           return;
-        case NotificationType.SEE_WHATS_CHANGED:
-        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationCategory.SEE_WHATS_CHANGED:
+        case NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           e && e.acceptCallback && e.acceptCallback();
           return;
-        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationCategory.CLIPBOARD_DATA_AVAILABLE:
           e && (Fullscreen.pasteFromSerializedClipboardData(e.downloadUrl, e.deviceType, e.timestamp), e.acceptCallback && e.acceptCallback());
           return;
         default:
@@ -8441,16 +8441,16 @@ class _p extends _a {
       if (this.props.hasMobileNativeToolbar) return _i.TOP_CENTER;
       let t = e.type;
       switch (t) {
-        case NotificationType.COMPONENT_PUBLISH_ERROR:
-        case NotificationType.DOWNTIME:
-        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
-        case NotificationType.MOVE_COMPONENTS_PROMPT:
-        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
-        case NotificationType.BRANCHING_OTHER_USER_MERGING:
-        case NotificationType.SEE_WHATS_CHANGED:
-        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationCategory.COMPONENT_PUBLISH_ERROR:
+        case NotificationCategory.DOWNTIME:
+        case NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationCategory.MOVE_COMPONENTS_PROMPT:
+        case NotificationCategory.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationCategory.BRANCHING_OTHER_USER_MERGING:
+        case NotificationCategory.SEE_WHATS_CHANGED:
+        case NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return _i.BOTTOM_RIGHT;
-        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationCategory.CLIPBOARD_DATA_AVAILABLE:
           return e.isFigJam ? _i.TOP_CENTER : _i.BOTTOM_RIGHT;
         default:
           throwTypeError(t);
@@ -8461,16 +8461,16 @@ class _p extends _a {
       if (!e) return !1;
       let t = e.type;
       switch (t) {
-        case NotificationType.COMPONENT_PUBLISH_ERROR:
+        case NotificationCategory.COMPONENT_PUBLISH_ERROR:
           return !0;
-        case NotificationType.DOWNTIME:
-        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
-        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
-        case NotificationType.MOVE_COMPONENTS_PROMPT:
-        case NotificationType.BRANCHING_OTHER_USER_MERGING:
-        case NotificationType.SEE_WHATS_CHANGED:
-        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
-        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationCategory.DOWNTIME:
+        case NotificationCategory.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationCategory.MOVE_COMPONENTS_PROMPT:
+        case NotificationCategory.BRANCHING_OTHER_USER_MERGING:
+        case NotificationCategory.SEE_WHATS_CHANGED:
+        case NotificationCategory.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationCategory.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return !1;
         default:
           throwTypeError(t);
@@ -8495,7 +8495,7 @@ function _m(e) {
   return (useEffect(() => {
     a && s !== null && trackEventAnalytics('curator_collision', {
       blocking_overlay_id: a,
-      blocked_notif_type: NotificationType[s]
+      blocked_notif_type: NotificationCategory[s]
     });
   }, [a, s]), a) ? null : jsx(_p, {
     recordingKey: e.recordingKey,
@@ -8743,13 +8743,13 @@ let _x = memo(() => {
 });
 function _N(e) {
   let t = getSelectedView();
-  let r = useAtomWithSubscription(_$$h3);
+  let r = useAtomWithSubscription(fullscreenCrashStateAtom);
   if (t.view === 'fullscreen' && r !== 'ok') {
     let {
       type,
       sentryId
     } = r;
-    return type === 'oom' ? jsx(_$$V2, {}) : jsx(S1, {
+    return type === 'oom' ? jsx(ConnectedAppModal, {}) : jsx(RootErrorBoundaryFallback, {
       sentryId
     });
   }
@@ -8766,7 +8766,7 @@ let _C = memo(() => {
   let a = useSelector(e => e.mirror.appModel.showUi);
   useLayoutEffect(() => {
     let e = () => {
-      setTimeout(() => F2.focusIfUnfocused());
+      setTimeout(() => KeyboardFocusManager.focusIfUnfocused());
     };
     document.body.addEventListener('blur', e, !0);
     return () => {
@@ -8896,16 +8896,16 @@ let _C = memo(() => {
               children: jsx(_$$ds, {
                 children: jsxs(FplStringsProvider, {
                   strings: s,
-                  children: [!1, jsx(_$$tH, {
+                  children: [!1, jsx(ErrorBoundaryCrash, {
                     boundaryKey: 'InAppPage',
-                    fallback: _$$H4.DEFAULT_FULL_PAGE,
+                    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
                     hasCustomWASMBuild: y4,
                     children: jsx(_x, {})
                   }), getFeatureFlags().fpl_flash_view_migration ? jsx(_$$J, {
                     flashes: t
                   }) : jsx(_$$a4, {
                     flashes: t
-                  }), jsx(_$$V2, {}), a && jsx(_m, {
+                  }), jsx(ConnectedAppModal, {}), a && jsx(_m, {
                     recordingKey: 'notificationsView'
                   }), jsx(iL, {}), jsx(_$$Z, {
                     positioner: Pm
@@ -9081,7 +9081,7 @@ function _D() {
       folder_id: e.folder_id,
       org_id: e.org_id,
       trackingInfo: d,
-      openNewFileIn: _$$ai.SAME_TAB,
+      openNewFileIn: TabOpenBehavior.SAME_TAB,
       framePresetName: e.frame_preset_name,
       fileName: e.name,
       localFileKey: r,
@@ -9178,7 +9178,7 @@ t(async () => {
           WebAsync: () => _$$F,
           WebSelection: () => sessionValue,
           WebMultiplayer: () => flagValue,
-          WebUserSyncing: () => R9,
+          WebUserSyncing: () => multiplayerSessionManager,
           EmojiWheelBindings: () => CB,
           JsBindingsTestHelpers: () => rx,
           WebReporting: () => _$$F2,

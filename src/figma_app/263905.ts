@@ -866,7 +866,7 @@ class ei {
       scaleLinearly: p,
       width: _,
       height: h
-    }).$$finally(() => {
+    }).finally(() => {
       o7(this);
       isInteractionPathCheck() && window.dispatchEvent(new CustomEvent(U5));
     });

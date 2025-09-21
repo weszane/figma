@@ -35,7 +35,7 @@ import { setNodeExpanded } from '../figma_app/741237';
 import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { trackFileEventWithStore } from '../figma_app/901889';
-import { ky } from '../figma_app/925970';
+import { searchEndSession } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDebounce } from 'use-debounce';
@@ -184,7 +184,7 @@ export function $$ee13(e) {
     n({
       source: e
     });
-    i && l(ky());
+    i && l(searchEndSession());
     permissionScopeHandler.user('Create blank template', () => {
       let e = SocialMediaFormats.CUSTOM;
       let n = CooperTemplateTypesTsBindings?.getCooperTemplateTypeSize(e);

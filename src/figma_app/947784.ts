@@ -11,7 +11,7 @@ import { L } from '../905/606555';
 import { M } from '../905/722875';
 import { XHR } from '../905/910117';
 import { s as _$$s } from '../cssbuilder/589278';
-import { Jm } from '../figma_app/387599';
+import { getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { isUserOrIdMatch } from '../figma_app/471982';
 import { TrackedLink } from '../figma_app/831799';
 export function $$y2({
@@ -19,7 +19,7 @@ export function $$y2({
   following: t,
   onFollowChange: r
 }) {
-  let i = Jm();
+  let i = getSearchSessionIdFromSelector();
   return jsx('button', {
     'onClick': n => {
       n.preventDefault();

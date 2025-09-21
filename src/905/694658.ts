@@ -249,7 +249,7 @@ let z = _$$D((e, t, i) => {
   })]).then(null, t => {
     window.arkoseResult = window.arkose;
     e.onCompleted();
-  }).$$finally(() => {
+  }).finally(() => {
     H(t);
   });
 });

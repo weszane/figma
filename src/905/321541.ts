@@ -53,7 +53,7 @@ let o = z.object({
   effects: z.array(VariableAliasSchema),
   layoutGrids: z.array(VariableAliasSchema),
 }).partial().optional()
-let l = z.object({
+let accessibilityPropertiesSchema = z.object({
   accessibleHTMLTag: z.string().optional(),
   accessibleLabel: z.string().optional(),
   ariaAttributes: z.object({
@@ -63,104 +63,104 @@ let l = z.object({
   }).optional(),
   isDecorativeImage: z.boolean().optional(),
 })
-let d = z.nativeEnum(AnimationTriggerType)
-let c = z.object({
+let animationTriggerTypeSchema = z.nativeEnum(AnimationTriggerType)
+let animationTransitionSchema = z.object({
   easingType: z.nativeEnum(EasingType),
   easingFunction: z.array(z.number()).length(4),
   transitionDuration: z.number(),
   delay: z.number(),
 })
-let u = z.object({
+let animationStateSchema = z.object({
   opacity: z.number(),
   transform: AffineTransformSchema,
 })
-let p = z.enum(['PAGE_LOAD', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW', 'SCROLL_DIRECTION'])
-let m = z.enum(['PAGE_HEIGHT', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW'])
-let h = z.object({
-  behaviorType: z.literal(d.enum.Appear),
-  trigger: p,
-  enterTransition: c,
-  enterState: u,
+let animationAppearTriggerTypes = z.enum(['PAGE_LOAD', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW', 'SCROLL_DIRECTION'])
+let animationScrollTriggerTypes = z.enum(['PAGE_HEIGHT', 'THIS_LAYER_IN_VIEW', 'OTHER_LAYER_IN_VIEW'])
+let baseAppearAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Appear),
+  trigger: animationAppearTriggerTypes,
+  enterTransition: animationTransitionSchema,
+  enterState: animationStateSchema,
 })
-let g = z.object({
-  ...h.shape,
-  exitTransition: c,
-  exitState: u,
+let baseAppearExitAnimationSchema = z.object({
+  ...baseAppearAnimationSchema.shape,
+  exitTransition: animationTransitionSchema,
+  exitState: animationStateSchema,
 })
-let f = z.object({
-  ...h.shape,
-  trigger: z.literal(p.enum.PAGE_LOAD),
+let pageLoadAnimationSchema = z.object({
+  ...baseAppearAnimationSchema.shape,
+  trigger: z.literal(animationAppearTriggerTypes.enum.PAGE_LOAD),
 })
-let _ = z.object({
-  ...g.shape,
-  trigger: z.literal(p.enum.THIS_LAYER_IN_VIEW),
+let thisLayerInViewAnimationSchema = z.object({
+  ...baseAppearExitAnimationSchema.shape,
+  trigger: z.literal(animationAppearTriggerTypes.enum.THIS_LAYER_IN_VIEW),
   playsOnce: z.boolean(),
 })
-let A = z.object({
-  ...g.shape,
-  trigger: z.literal(p.enum.OTHER_LAYER_IN_VIEW),
+let otherLayerInViewAnimationSchema = z.object({
+  ...baseAppearExitAnimationSchema.shape,
+  trigger: z.literal(animationAppearTriggerTypes.enum.OTHER_LAYER_IN_VIEW),
   otherLayer: SessionInfoSchema,
   playsOnce: z.boolean(),
 })
-let y = z.object({
-  ...h.shape,
-  trigger: z.literal(p.enum.SCROLL_DIRECTION),
+let scrollDirectionAnimationSchema = z.object({
+  ...baseAppearAnimationSchema.shape,
+  trigger: z.literal(animationAppearTriggerTypes.enum.SCROLL_DIRECTION),
   playsOnce: z.boolean(),
 })
-let b = z.object({
-  behaviorType: z.literal(d.enum.Hover),
-  transition: c,
-  state: u,
+let hoverAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Hover),
+  transition: animationTransitionSchema,
+  state: animationStateSchema,
 })
-let v = z.object({
-  behaviorType: z.literal(d.enum.Press),
-  transition: c,
-  state: u,
+let pressAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Press),
+  transition: animationTransitionSchema,
+  state: animationStateSchema,
 })
-let I = z.object({
-  behaviorType: z.literal(d.enum.Focus),
-  transition: c,
-  state: u,
+let focusAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Focus),
+  transition: animationTransitionSchema,
+  state: animationStateSchema,
 })
-let E = z.object({
-  behaviorType: z.literal(d.enum.ScrollParallax),
+let scrollParallaxAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.ScrollParallax),
   speed: z.number(),
 })
-let x = z.object({
-  behaviorType: z.literal(d.enum.ScrollTransform),
-  fromState: u,
-  toState: u,
-  transition: c,
+let baseScrollTransformAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.ScrollTransform),
+  fromState: animationStateSchema,
+  toState: animationStateSchema,
+  transition: animationTransitionSchema,
 })
-let S = z.object({
-  ...x.shape,
-  trigger: z.literal(m.enum.PAGE_HEIGHT),
+let pageHeightScrollTransformAnimationSchema = z.object({
+  ...baseScrollTransformAnimationSchema.shape,
+  trigger: z.literal(animationScrollTriggerTypes.enum.PAGE_HEIGHT),
 })
-let w = z.object({
-  ...x.shape,
-  trigger: z.literal(m.enum.THIS_LAYER_IN_VIEW),
+let thisLayerInViewScrollTransformAnimationSchema = z.object({
+  ...baseScrollTransformAnimationSchema.shape,
+  trigger: z.literal(animationScrollTriggerTypes.enum.THIS_LAYER_IN_VIEW),
   playsOnce: z.boolean(),
 })
-let C = z.object({
-  ...x.shape,
-  trigger: z.literal(m.enum.OTHER_LAYER_IN_VIEW),
+let otherLayerInViewScrollTransformAnimationSchema = z.object({
+  ...baseScrollTransformAnimationSchema.shape,
+  trigger: z.literal(animationScrollTriggerTypes.enum.OTHER_LAYER_IN_VIEW),
   otherLayer: SessionInfoSchema,
   playsOnce: z.boolean(),
 })
-let T = z.object({
-  behaviorType: z.literal(d.enum.Cursor),
+let cursorAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Cursor),
   hotspotX: z.number(),
   hotspotY: z.number(),
   cursorGuid: SessionInfoSchema,
   cursorFileName: z.string().optional(),
 })
-let k = z.object({
-  behaviorType: z.literal(d.enum.Marquee),
+let marqueeAnimationSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Marquee),
   direction: z.enum(['LEFT', 'RIGHT', 'UP', 'DOWN']),
   speed: z.number(),
   shouldLoopInfinitely: z.boolean(),
 })
-let R = z.object({
+let imageDataSchema = z.object({
   image: z.string().nullable(),
   imageThumbnail: z.string().nullable(),
   animatedImage: z.string().nullable(),
@@ -169,38 +169,33 @@ let R = z.object({
   originalImageWidth: z.number(),
   animationFrame: z.number(),
 })
-z.object({
-  src: z.string(),
-  alt: z.string().optional(),
-  height: z.number().optional(),
-  width: z.number().optional(),
-})
-let N = z.object({
-  behaviorType: z.literal(d.enum.Code),
+
+let codeBehaviorSchema = z.object({
+  behaviorType: z.literal(animationTriggerTypeSchema.enum.Code),
   codeComponentId: z.string(),
-  assignments: z.record(z.string(), z.union([z.string(), z.boolean(), z.number(), R])),
+  assignments: z.record(z.string(), z.union([z.string(), z.boolean(), z.number(), imageDataSchema])),
   codeBehaviorData: z.object({
     category: z.string().optional(),
     nodeTypes: z.array(z.string()).optional(),
   }),
 })
-let D = z.discriminatedUnion('trigger', [f, _, A, y])
-let L = z.discriminatedUnion('trigger', [S, w, C])
-let F = z.object({
-  appear: D,
-  hover: b,
-  press: v,
-  focus: I,
-  scrollParallax: E,
-  scrollTransform: L,
-  cursor: T,
-  marquee: k,
-  code: z.array(N),
+let appearAnimationUnion = z.discriminatedUnion('trigger', [pageLoadAnimationSchema, thisLayerInViewAnimationSchema, otherLayerInViewAnimationSchema, scrollDirectionAnimationSchema])
+let scrollTransformAnimationUnion = z.discriminatedUnion('trigger', [pageHeightScrollTransformAnimationSchema, thisLayerInViewScrollTransformAnimationSchema, otherLayerInViewScrollTransformAnimationSchema])
+let animationsSchema = z.object({
+  appear: appearAnimationUnion,
+  hover: hoverAnimationSchema,
+  press: pressAnimationSchema,
+  focus: focusAnimationSchema,
+  scrollParallax: scrollParallaxAnimationSchema,
+  scrollTransform: scrollTransformAnimationUnion,
+  cursor: cursorAnimationSchema,
+  marquee: marqueeAnimationSchema,
+  code: z.array(codeBehaviorSchema),
 }).partial().nullable()
-let M = z.object({
-  behaviors: F,
+let behaviorsSchema = z.object({
+  behaviors: animationsSchema,
 }).partial()
-let j = z.object({
+let nodePropertiesSchema = z.object({
   id: z.string(),
   name: z.string(),
   type: z.string(),
@@ -212,28 +207,26 @@ let j = z.object({
   componentPropertyReferences: z.record(z.string()).optional(),
   boundVariables: o,
   explicitVariableModes: z.record(z.string()).optional(),
-  ...l.shape,
+  ...accessibilityPropertiesSchema.shape,
 })
-let U = z.nativeEnum(BlendMode)
-let B = z.object({
-  blendMode: U.optional(),
+let blendModeSchema = z.nativeEnum(BlendMode)
+let blendPropertiesSchema = z.object({
+  blendMode: blendModeSchema.optional(),
   opacity: z.number().gte(0).lte(1).optional(),
 })
-let V = z.object({
-  children: z.array(z.string()),
-})
-let G = z.object({
+
+let constraintsSchema = z.object({
   vertical: z.nativeEnum(VerticalAlign),
   horizontal: z.nativeEnum(HorizontalAlign),
 })
-let zkkk = z.object({
+let pixelOffsetSchema = z.object({
   pixelOffset: z.number(),
   sizeFraction: z.number(),
 }).optional()
 let H = z.object({
   absoluteBoundingBox: RectangleSchema,
   isolatedAbsoluteRenderBounds: z.union([RectangleSchema, z.null()]).optional(),
-  constraints: G.optional(),
+  constraints: constraintsSchema.optional(),
   relativeTransform: VectorPairSchema,
   size: PointSchema,
   layoutAlign: z.enum(['INHERIT', 'STRETCH', 'MIN', 'CENTER', 'MAX']).optional(),
@@ -253,16 +246,16 @@ let H = z.object({
   layoutSizingVertical: z.enum(['FIXED', 'HUG', 'FILL']).optional(),
   targetAspectRatio: PointSchema.optional(),
   constraintValues: z.object({
-    top: zkkk,
-    right: zkkk,
-    left: zkkk,
-    bottom: zkkk,
+    top: pixelOffsetSchema,
+    right: pixelOffsetSchema,
+    left: pixelOffsetSchema,
+    bottom: pixelOffsetSchema,
   }).optional(),
 })
 let W = z.object({
   visible: z.boolean(),
   opacity: z.number().gte(0).lte(1),
-  blendMode: U,
+  blendMode: blendModeSchema,
 })
 let K = z.object({
   ...W.shape,
@@ -339,7 +332,7 @@ let ei = z.object({
 })
 let en = z.object({
   color: ColorRGBASchema,
-  blendMode: U,
+  blendMode: blendModeSchema,
   offset: PointSchema,
   radius: z.number().gte(0),
   spread: z.number(),
@@ -553,13 +546,13 @@ let eG = z.object({
 }).partial()
 
 let ez = z.object({
-  ...j.shape,
-  ...B.shape,
+  ...nodePropertiesSchema.shape,
+  ...blendPropertiesSchema.shape,
   ...H.shape,
   ...ei.shape,
   ...eu.shape,
   ...ep.shape,
-  ...M.shape,
+  ...behaviorsSchema.shape,
   ...eG.shape,
 })
 let eH = z.object({
@@ -696,36 +689,7 @@ let e6 = z.object({
 let e7 = e3.omit({
   style: !0,
 })
-z.union([z.boolean(), z.string(), e7, z.number(), R])
-let e8 = z.discriminatedUnion('type', [z.object({
-  type: z.literal('BOOLEAN'),
-  defaultValue: z.boolean(),
-  preferredValues: z.array(e6).optional(),
-}), z.object({
-  type: z.literal('NUMBER'),
-  defaultValue: z.number(),
-  preferredValues: z.array(e6).optional(),
-}), z.object({
-  type: z.literal('INSTANCE_SWAP'),
-  defaultValue: z.string(),
-  preferredValues: z.array(e6).optional(),
-}), z.object({
-  type: z.literal('TEXT'),
-  defaultValue: e7,
-  preferredValues: z.array(e6).optional(),
-}), z.object({
-  type: z.literal('VARIANT'),
-  defaultValue: z.string(),
-  variantOptions: z.array(z.string()).optional(),
-  preferredValues: z.array(e6).optional(),
-}), z.object({
-  type: z.literal('IMAGE'),
-  defaultValue: R,
-  preferredValues: z.array(e6).optional(),
-})])
-let e9 = z.object({
-  componentPropertyDefinitions: z.record(e8),
-}).partial()
+
 let te = z.discriminatedUnion('type', [z.object({
   type: z.literal('BOOLEAN'),
   value: z.boolean(),
@@ -748,7 +712,7 @@ let te = z.discriminatedUnion('type', [z.object({
   variantOptions: z.array(z.string()).optional(),
 }), z.object({
   type: z.literal('IMAGE'),
-  value: R,
+  value: imageDataSchema,
   variantOptions: z.array(z.string()).optional(),
 })])
 z.object({
@@ -791,7 +755,7 @@ let tt = z.discriminatedUnion('type', [z.object({
   }).partial().optional(),
 }), z.object({
   type: z.literal('IMAGE'),
-  value: R,
+  value: imageDataSchema,
   variantOptions: z.array(z.string()).optional(),
   boundVariables: z.object({
     value: VariableAliasSchema,
@@ -820,34 +784,17 @@ let tr = z.object({
   cmsRichTextStyleMap: z.record(z.string(), tn),
   ...eA.shape,
 })
-z.object({
-  ...l.shape,
-  ...V.shape,
-  ...j.shape,
-  ...B.shape,
-  ...H.shape,
-  ...eM.shape,
-  ...ej.shape,
-  ...ei.shape,
-  ...eu.shape,
-  ...ep.shape,
-  ...eB.shape,
-  ...em.shape,
-  ...eF.shape,
-  ...M.shape,
-  ...eH.shape,
-  ...e3.shape,
-  ...e9.shape,
-  ...ti.shape,
-  ...tr.shape,
-}).partial()
+
 let ta = ((e) => {
-  let t = Object.entries(e.shape).reduce((e, [t, i]) => (e[t] = i.nullable(), e), {})
+  let t = Object.entries(e.shape).reduce((acc, [key, schema]) => {
+    acc[key] = schema.nullable()
+    return acc
+  }, {})
   return z.object(t)
 })(z.object({
-  ...l.shape,
-  ...j.shape,
-  ...B.shape,
+  ...accessibilityPropertiesSchema.shape,
+  ...nodePropertiesSchema.shape,
+  ...blendPropertiesSchema.shape,
   ...H.shape,
   ...eM.shape,
   ...ej.shape,
@@ -857,7 +804,7 @@ let ta = ((e) => {
   ...eB.shape,
   ...em.shape,
   ...eF.shape,
-  ...M.shape,
+  ...behaviorsSchema.shape,
   ...eH.shape,
   ...e3.shape,
   ...ti.shape,
@@ -869,49 +816,61 @@ let ts = z.object({
   value: z.lazy(() => ta),
 }).describe('Override')
 z.array(ts).describe('Overrides')
-let tl = z.object({
+// Schema for position
+export let positionSchema = z.object({
   line: z.number(),
   column: z.number(),
 })
-let $$td5 = z.object({
-  start: tl,
-  end: tl,
+// Schema for position range
+export let positionRangeSchema = z.object({
+  start: positionSchema,
+  end: positionSchema,
 })
-let $$tc3 = z.object({
+// Schema for JSX expression container
+let jsxExpressionContainerSchema = z.object({
   type: z.literal('JSXExpressionContainer'),
   expression: z.string(),
-  location: $$td5.optional(),
+  location: positionRangeSchema.optional(),
 })
-let tu = z.object({
+// Schema for RGBA color
+let rgbaColorSchema = z.object({
   r: z.number(),
   g: z.number(),
   b: z.number(),
   a: z.number(),
 })
-let $$tp0 = z.union([z.string(), tu, $$tc3])
-let tm = z.object({
+// Schema for color or paint array
+let colorOrPaintArraySchema = z.union([z.string(), rgbaColorSchema, jsxExpressionContainerSchema])
+// Schema for 2D point
+let point2DSchema = z.object({
   x: z.number(),
   y: z.number(),
 })
-let $$th7 = z.array(z.array(z.number()).length(3)).length(2)
-let tg = z.object({
-  color: $$tp0,
+// Schema for 2x3 matrix
+let matrix2x3Schema = z.array(z.array(z.number()).length(3)).length(2)
+// Schema for gradient stop
+let gradientStopSchema = z.object({
+  color: colorOrPaintArraySchema,
   position: z.number(),
 })
-let tf = z.object({
+// Schema for base paint properties
+let basePaintPropertiesSchema = z.object({
   blendMode: BlendModeSchema.optional(),
   opacity: z.number().optional(),
 })
-let t_ = tf.extend({
+// Schema for solid paint
+let solidPaintSchema = basePaintPropertiesSchema.extend({
   type: z.literal('solid'),
-  color: $$tp0,
+  color: colorOrPaintArraySchema,
 })
-let tA = tf.extend({
+// Schema for gradient paint
+let gradientPaintSchema = basePaintPropertiesSchema.extend({
   type: z.enum(['gradient-linear', 'gradient-radial', 'gradient-angular', 'gradient-diamond']),
-  gradientHandlePositions: z.array(tm).length(3),
-  gradientStops: z.array(tg),
+  gradientHandlePositions: z.array(point2DSchema).length(3),
+  gradientStops: z.array(gradientStopSchema),
 })
-let ty = z.object({
+// Schema for image filters
+let imageFiltersSchema = z.object({
   exposure: z.number().optional(),
   contrast: z.number().optional(),
   vibrance: z.number().optional(),
@@ -920,40 +879,49 @@ let ty = z.object({
   highlights: z.number().optional(),
   shadows: z.number().optional(),
 })
-let tb = tf.extend({
+// Schema for image paint
+let imagePaintSchema = basePaintPropertiesSchema.extend({
   type: z.literal('image'),
   imageRef: z.string().describe('The hash of the image to be used for this fill'),
   scaleMode: z.enum(['fill', 'fit', 'tile', 'crop']).optional(),
-  imageTransform: $$th7.optional().describe('Applicable only for scaleMode == "crop". Determines how the image is positioned (thus, cropped) within the layer.'),
+  imageTransform: matrix2x3Schema.optional().describe('Applicable only for scaleMode == "crop". Determines how the image is positioned (thus, cropped) within the layer.'),
   scalingFactor: z.number().optional().describe('Applicable only for scaleMode == "tile" (automatic for other modes). Determines the scaling (thus, repetition) of the image within the layer.'),
   rotation: z.number().optional().describe('Applicable only for scaleMode == "tile" | "fill" | "fit" (automatic for scaleMode == "CROP"). Determines the rotation of the image within the layer. Must be in increments of +90.'),
-  filters: ty.optional().describe('Filters applied to the image, such as blur or brightness.'),
+  filters: imageFiltersSchema.optional().describe('Filters applied to the image, such as blur or brightness.'),
 })
-let tv = z.object({
+// Schema for image generation
+let imageGenerationSchema = z.object({
   type: z.literal('image-generation'),
   caption: z.string().describe('A description of the image.  Will be used to generate a new image if no imageRef is provided.'),
-}).merge(tb.omit({
+}).merge(imagePaintSchema.omit({
   type: !0,
   imageRef: !0,
 }))
-let tI = z.union([t_, tA, tb])
-let tE = z.union([t_, tA, tb, tv])
-let tx = '@name(ColorOrPaintArray) Colors can be represented as 3 or 6 character hex values (#F000) or objects with rgba values from 0-1'
-let $$tS2 = z.union([z.string(), z.array(tI), $$tc3]).describe(tx)
-let $$tw1 = z.union([z.string(), z.array(tE), $$tc3]).describe(tx)
-let $$tC6 = z.object({
+// Schema for paint union
+export let paintUnionSchema = z.union([solidPaintSchema, gradientPaintSchema, imagePaintSchema])
+// Schema for paint with image generation union
+export let paintWithImageGenerationUnionSchema = z.union([solidPaintSchema, gradientPaintSchema, imagePaintSchema, imageGenerationSchema])
+// Description for color or paint array
+export let colorOrPaintArrayDescription = '@name(ColorOrPaintArray) Colors can be represented as 3 or 6 character hex values (#F000) or objects with rgba values from 0-1'
+// Schema for solid paint array
+export let solidPaintArraySchema = z.union([z.string(), z.array(paintUnionSchema), jsxExpressionContainerSchema]).describe(colorOrPaintArrayDescription)
+// Schema for paint with image generation array
+export let paintWithImageGenerationArraySchema = z.union([z.string(), z.array(paintWithImageGenerationUnionSchema), jsxExpressionContainerSchema]).describe(colorOrPaintArrayDescription)
+// Schema for Tailwind CSS classes
+export let tailwindClassesSchema = z.object({
   className: z.string().optional().describe('A string of tailwind classes'),
 })
-let $$tT4 = transformZodSchema(F, e => e instanceof z.ZodObject && e._def.shape().behaviorType
+// Schema for transformed behaviors
+export let transformedBehaviorsSchema = transformZodSchema(animationsSchema, e => e instanceof z.ZodObject && e._def.shape().behaviorType
   ? e.omit({
     behaviorType: !0,
   })
   : e)
-export const _6 = $$tp0
-export const y4 = $$tw1
-export const uw = $$tS2
-export const M1 = $$tc3
-export const fg = $$tT4
-export const gx = $$td5
-export const zA = $$tC6
-export const dL = $$th7
+export const _6 = colorOrPaintArraySchema
+export const y4 = paintWithImageGenerationArraySchema
+export const uw = solidPaintArraySchema
+export const M1 = jsxExpressionContainerSchema
+export const fg = transformedBehaviorsSchema
+export const gx = positionRangeSchema
+export const zA = tailwindClassesSchema
+export const dL = matrix2x3Schema

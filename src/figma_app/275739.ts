@@ -7,7 +7,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { We } from "../figma_app/165623";
 import { reportError } from "../905/11";
 import { trackFileEvent } from "../figma_app/314264";
-import { R9 } from "../905/977824";
+import { multiplayerSessionManager } from "../905/977824";
 import { b as _$$b } from "../905/154029";
 import { T as _$$T } from "../905/312425";
 import { _ as _$$_ } from "../905/199441";
@@ -158,7 +158,7 @@ let I = class e {
       this.recentlySpokeIdStore.set(e);
     };
     this.onCallDisconnect = () => {
-      R9.sendVoiceMetadata("");
+      multiplayerSessionManager.sendVoiceMetadata("");
       this.stopPollingVolumeData();
       desktopAPIInstance?.setIsInVoiceCall(!1);
       desktopAPIInstance?.setUsingMicrophone(!1);
@@ -381,7 +381,7 @@ let I = class e {
       let r;
       switch (t) {
         case "CONNECTED":
-          if (R9.sendVoiceMetadata(e), this.setParticipantIdsCallback?.(await this.getParticipantIds()), this.startPollingVolumeData(), this._microphonePermissionDenied) {
+          if (multiplayerSessionManager.sendVoiceMetadata(e), this.setParticipantIdsCallback?.(await this.getParticipantIds()), this.startPollingVolumeData(), this._microphonePermissionDenied) {
             r = $E.CONNECTED_WITH_MIC_DISABLED;
             break;
           }

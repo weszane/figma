@@ -10,7 +10,7 @@ import { p as _$$p } from "../905/896627";
 import { A as _$$A } from "../905/17894";
 import { Zc, Lz } from "../905/497882";
 import { nK, Gp } from "../figma_app/599979";
-import { Sq, dE } from "../figma_app/809727";
+import { hasId, hasBuffer } from "../figma_app/809727";
 var a = r;
 var o = s;
 function A({
@@ -39,7 +39,7 @@ function A({
           duplicateMediaBySha1
         } = e.data;
         let a = Object.values(duplicateMediaBySha1).reduce((e, i) => {
-          let r = i.find(e => Sq(e)) ?? i[0];
+          let r = i.find(e => hasId(e)) ?? i[0];
           let a = i.filter(e => e !== r);
           t.thumbnailMedium && a.includes(t.thumbnailMedium) && (n = r, e.push(t.thumbnailMedium));
           e.push(...a);
@@ -91,7 +91,7 @@ export function $$b0(e, t) {
       currentValue
     } = e;
     if (currentValue !== _$$A) {
-      o()(r.current, ...currentValue.allMedia).filter(e => dE(e) && (i.status !== APILoadingStatus.SUCCESS || e.url !== i.value?.url)).forEach(e => {
+      o()(r.current, ...currentValue.allMedia).filter(e => hasBuffer(e) && (i.status !== APILoadingStatus.SUCCESS || e.url !== i.value?.url)).forEach(e => {
         nK(e);
       });
       return () => {

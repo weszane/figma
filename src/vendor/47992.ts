@@ -1,5 +1,5 @@
 function n() {
-  Promise.prototype.$$finally = Promise.prototype.$$finally || {
+  Promise.prototype.finally = Promise.prototype.finally || {
     finally: function (e) {
       var r = function (r) {
         return Promise.resolve(e()).then(r);
@@ -14,6 +14,6 @@ function n() {
         });
       });
     }
-  }.$$finally;
+  }.finally;
 }
 exports.$$default = n;

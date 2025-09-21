@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { getVisibleTheme } from "../905/640017";
 var a = r;
 export function $$d0({
@@ -42,7 +42,7 @@ export function $$d0({
     let r = t && t.length > 40;
     return jsxs("div", {
       className: a()(r ? "artwork_with_text_below--textPretty--xEO0y" : "artwork_with_text_below--textBalance--yjPSu", _$$s.$$if(r, _$$s.gap4).$, _$$s.flex.flexColumn.itemsCenter.alignCenter.$),
-      style: sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: "30em"
       }).$,
       "data-testid": i,

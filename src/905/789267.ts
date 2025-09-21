@@ -7,7 +7,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -68,9 +68,9 @@ export let $$N0 = registerModal(function ({
   let H = mV(e);
   let W = KL(e, O);
   D && D === DeepLinkType.USER_SETTINGS && (H = k0(e), W = m3(e, O));
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "AutoUpgradeConfirmationModal",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },

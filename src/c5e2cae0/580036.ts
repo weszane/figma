@@ -8,7 +8,7 @@ import { Label } from "../905/270045";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
 import { D as _$$D } from "../905/251759";
 import { UpgradeAction } from "../905/370443";
@@ -88,7 +88,7 @@ export function $$b0({
           })]
         }), I && R && jsx("div", {
           className: _$$s.my16.$,
-          style: sx.add({
+          style: styleBuilderInstance.add({
             marginLeft: "-8px"
           }).$,
           "data-testid": "cart-sidebar-billing-interval",
@@ -104,7 +104,7 @@ export function $$b0({
                 className: _$$s.flex.itemsCenter.gap16.$,
                 children: [renderI18nText("checkout.sidebar.annual"), " ", jsx("b", {
                   className: _$$s.colorTextSuccess.fontSemiBold.colorBgSuccessTertiary.bRadius2.px4.block.$,
-                  style: sx.add({
+                  style: styleBuilderInstance.add({
                     fontSize: "10px"
                   }).$,
                   children: renderI18nText("checkout.sidebar.save_up_to_20")
@@ -132,7 +132,7 @@ export function $$b0({
         children: renderI18nText("checkout.sidebar.cannot_calculate_subtotal")
       })
     }), jsxs("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         marginTop: "80px"
       }).$,
       children: [B && jsx(C, {}), jsx(N, {
@@ -161,7 +161,7 @@ function C() {
     children: jsx(_$$_, {
       color: _$$S.WARNING,
       text: jsx("p", {
-        style: sx.lh14.add({
+        style: styleBuilderInstance.lh14.add({
           fontSize: "9px"
         }).$,
         children: renderI18nText("checkout.sidebar.paid_seat_minimum_banner")

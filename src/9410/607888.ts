@@ -18,7 +18,7 @@ import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { currentTeamAtom } from "../figma_app/598018";
-import { ai } from "../figma_app/915202";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { t as _$$t2 } from "../905/825647";
 import { R as _$$R } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
@@ -31,7 +31,7 @@ export function $$j2(e, t, i) {
     from: i,
     editorType: FFileType.COOPER,
     team: r ?? void 0,
-    openNewFileIn: ai.NEW_TAB,
+    openNewFileIn: TabOpenBehavior.NEW_TAB,
     newFileDataLocalStorageKey: t
   }));
 }

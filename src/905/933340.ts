@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { H } from "../905/286442";
 import { b } from "../905/222272";
 let d = "assets-tab-empty-state";
@@ -11,7 +11,7 @@ let c = forwardRef(({
 }, i) => t ? jsx("div", {
   className: _$$s.hFull.flex.flexColumn.itemsCenter.justifyCenter.$,
   "data-testid": d,
-  style: sx.add({
+  style: styleBuilderInstance.add({
     paddingBottom: "48px"
   }).$,
   ref: i,

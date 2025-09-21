@@ -1,7 +1,7 @@
 import { MentionsCppBindings } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { MZ } from "../figma_app/925970";
+import { generateSessionId } from "../figma_app/925970";
 import { VisualBellActions } from "../905/302958";
 import { W } from "../figma_app/669294";
 import { h1, LQ, wm, MX } from "../905/77316";
@@ -34,7 +34,7 @@ class p {
     });
   }
   startSearchSession() {
-    let e = MZ();
+    let e = generateSessionId();
     atomStoreManager.set(wm, e);
     return e;
   }

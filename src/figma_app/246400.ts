@@ -3,11 +3,11 @@ import { useState, Suspense } from "react";
 import { k } from "../905/443820";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 let d = "184px";
 function c() {
   return jsx("div", {
-    style: sx.flex.itemsCenter.justifyCenter.add({
+    style: styleBuilderInstance.flex.itemsCenter.justifyCenter.add({
       width: d,
       height: "100px"
     }).$,
@@ -36,13 +36,13 @@ export function $$u0({
     softDismiss: !0
   });
   return jsxs("div", {
-    style: sx.inlineBlock.$,
+    style: styleBuilderInstance.inlineBlock.$,
     children: [jsx(ButtonPrimitive, {
       className: "text_with_popover--textWithPopoverButton--JjWpS",
-      style: sx.radiusMedium.$,
+      style: styleBuilderInstance.radiusMedium.$,
       ...getTriggerProps(),
       children: jsx("span", {
-        style: sx.underline.add({
+        style: styleBuilderInstance.underline.add({
           lineHeight: "24px",
           padding: "0px 0.25rem",
           textDecorationColor: "var(--color-text-secondary, var(--fallback-color-text-secondary))",
@@ -54,7 +54,7 @@ export function $$u0({
     }), jsx(PopoverPrimitiveContainer, {
       "data-preferred-theme": "dark",
       ...getContainerProps({
-        style: sx.colorTextOnbrand.colorBgTooltip.fontMedium.radiusMedium.add({
+        style: styleBuilderInstance.colorTextOnbrand.colorBgTooltip.fontMedium.radiusMedium.add({
           boxShadow: "var(--elevation-300-tooltip)",
           letterSpacing: "0.055px",
           lineHeight: "var(--body-medium-lineHeight, 16px)",

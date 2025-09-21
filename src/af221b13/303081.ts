@@ -91,13 +91,13 @@ import { A as _$$A8 } from "../5724/965092";
 import { communityPagePaths } from "../905/528121";
 import { setupDynamicConfigHandler } from "../figma_app/594947";
 import { getCurrentLocale, getCurrentCommunityBasePath, parseCommunityPath, generateCommunityPagePaths } from "../figma_app/598412";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { RouteState, captureRouteEvent, withCommunityRoute, useRouteStateInstance, useSafeRouteParams, useSafeRouteQuery, useSafeRouteStateInstance } from "../figma_app/321395";
 import { _ as _$$_2 } from "../5430/511077";
 import { ProfileRouteState } from "../905/934145";
 import { CommunityRoute, ResourceType } from "../figma_app/354658";
 import { ResourceTypeEnum } from "../figma_app/306946";
-import { n6 as _$$n } from "../figma_app/600006";
+import { SearchRouteWithCommunity } from "../figma_app/600006";
 import { getFeatureFlags } from "../905/601108";
 import { isChromebookTabbed } from "../figma_app/347146";
 import { parsePxNumber } from "../figma_app/783094";
@@ -124,7 +124,7 @@ import { setupBrowseRoute } from "../figma_app/640564";
 import { M as _$$M } from "../905/722875";
 import { f as _$$f } from "../figma_app/316722";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
-import { rO } from "../figma_app/530167";
+import { hideAdminProfileBanner } from "../figma_app/530167";
 import { A as _$$A12 } from "../svg/927263";
 import { u as _$$u2 } from "../5430/521178";
 import { $ as _$$$2 } from "../905/302575";
@@ -177,7 +177,7 @@ import { categoryBySlugQuery } from "../figma_app/188671";
 import { e as _$$e5 } from "../5430/604204";
 import { Ay as _$$Ay6 } from "../figma_app/103728";
 import { ButtonLarge } from "../905/521428";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 import { AG } from "../figma_app/999312";
 import { O as _$$O } from "../5430/638907";
 import { D as _$$D3 } from "../5430/769256";
@@ -1576,7 +1576,7 @@ function tS({
   });
 }
 function tA() {
-  let e = Jm();
+  let e = getSearchSessionIdFromSelector();
   let [t, i] = useState();
   useEffect(() => customHistory.listen(() => {
     i(e);
@@ -3003,14 +3003,14 @@ function iB({
   });
 }
 function iM() {
-  let e = useRouteStateInstance(_$$n);
+  let e = useRouteStateInstance(SearchRouteWithCommunity);
   let t = !!e;
   return {
     onSubmit: i => {
       let n;
       n = e ? e.copyWith({}, {
         query: i
-      }).href : new _$$n({}, {
+      }).href : new SearchRouteWithCommunity({}, {
         query: i
       }).href;
       i.length ? customHistory.push(n) : t && customHistory.push("/community");
@@ -3065,7 +3065,7 @@ function iQ() {
     }), jsx("div", {
       className: "admin_profile_banner--closeIconContainer--bm5wf",
       onClick: () => {
-        e(rO());
+        e(hideAdminProfileBanner());
       },
       children: jsx(SvgComponent, {
         svg: _$$A12,
@@ -4978,7 +4978,7 @@ function au() {
   let t = ac({
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
-    newFileFrom: f6.COMMUNITY_MAKE_PAGE,
+    newFileFrom: FileBrowserLocation.COMMUNITY_MAKE_PAGE,
     triggerElement: "pill",
     contextClicked: "community-make-page"
   });
@@ -5802,7 +5802,7 @@ function a5({
   resource: e,
   resourceContent: t
 }) {
-  let i = Jm();
+  let i = getSearchSessionIdFromSelector();
   let [n, r] = useState(0);
   let [o, l] = useState(0);
   let c = buildCarouselMedia(e);
@@ -5936,7 +5936,7 @@ function a2({
   resourceContent: t,
   selectedMedium: i
 }) {
-  let n = Jm();
+  let n = getSearchSessionIdFromSelector();
   if (i && "video" === i.type) return jsx("div", {
     className: aK,
     children: jsx(_$$A31, {
@@ -6240,7 +6240,7 @@ function sl() {
         path: CommunityRoute.localizedPaths,
         children: [jsx(tA, {}), jsx(so, {})]
       }), jsxs(Route, {
-        path: _$$n.localizedPaths,
+        path: SearchRouteWithCommunity.localizedPaths,
         children: [jsx(tA, {}), jsx(_$$g3, {})]
       }), jsx(Route, {
         path: tQ.localizedPaths,

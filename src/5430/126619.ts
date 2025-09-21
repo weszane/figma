@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { MenuRootComp, MenuContainerComp, MenuItemComp, MenuGroupComp, setupMenu } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
-import { Jm, BY } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector, getCurrentQueryId } from "../figma_app/387599";
 import { getResourceUserCount, getResourceName } from "../figma_app/777551";
 import { hasLibraryKey, mapEditorTypeToVt, hasResourceType, getTemplateType, isWidgetResource, isCooperTemplateFile, hasOrgPrivateContent, getTemplateContent, hasOrgPrivateResourceType } from "../figma_app/427318";
 import { useResourceRouteParams } from "../figma_app/979714";
@@ -274,8 +274,8 @@ export function $$F0({
   let f = useResourceRouteParams();
   let y = useCurrentPrivilegedPlan("ResourceHubItemsView").unwrapOr(null);
   let g = useCurrentPlanUser("ResourceHubItemsView").unwrapOr(null);
-  let v = Jm();
-  let b = BY();
+  let v = getSearchSessionIdFromSelector();
+  let b = getCurrentQueryId();
   let [j, w] = useState(null);
   let {
     getContextMenuTriggerProps,

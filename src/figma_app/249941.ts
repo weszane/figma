@@ -67,7 +67,7 @@ import { LRUCache } from "../905/196201";
 import { memoizeByArgs } from "../figma_app/815945";
 import ef from "classnames";
 import { SvgComponent, V as _$$V2 } from "../905/714743";
-import { t as _$$t2 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { U as _$$U } from "../905/492359";
 import { s$ } from "../905/432493";
@@ -762,7 +762,7 @@ export function $$tI2(e) {
         "data-tooltip-type": KindEnum.TEXT,
         "aria-label": y,
         role: "img",
-        children: ["string" == typeof e ? jsx(_$$t2, {
+        children: ["string" == typeof e ? jsx(MediaQuerySvgComponent, {
           svg: e,
           fallbackSvg: t
         }) : jsx("span", {

@@ -195,7 +195,7 @@ let z = registerModal(function (e) {
       maxNumResults: 50
     }).then(e => {
       D.current === L && (Y(e.data.meta.results), M(L));
-    }).$$finally(() => {
+    }).finally(() => {
       U(!1);
     });
   }, [L, W, K, Y]);

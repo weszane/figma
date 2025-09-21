@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { S } from "../905/539306";
-import { jr, vj } from "../905/574958";
+import { CAPTURE_FLAG, SearchAnalytics } from "../905/574958";
 let $$l1 = "search_file_browser_full_results";
 let d = e => "href" in e ? e.href : null;
 class c extends Component {
@@ -11,7 +11,7 @@ class c extends Component {
     this.onClick = e => {
       let t = e.target;
       let i = t.closest("[data-search-click-action]")?.getAttribute("data-search-click-action");
-      i !== jr && this.props.analytics?.click(this.props.category, this.props.selectedView, {
+      i !== CAPTURE_FLAG && this.props.analytics?.click(this.props.category, this.props.selectedView, {
         action: i || "click",
         target: d(t)
       }, this.props.planFilter);
@@ -19,7 +19,7 @@ class c extends Component {
     this.onContextMenu = e => {
       let t = e.target;
       let i = t.closest("[data-search-context-menu-action]")?.getAttribute("data-search-context-menu-action");
-      i !== jr && this.props.analytics?.click(this.props.category, this.props.selectedView, {
+      i !== CAPTURE_FLAG && this.props.analytics?.click(this.props.category, this.props.selectedView, {
         action: i || "context-click",
         target: d(t)
       });
@@ -49,7 +49,7 @@ let u = e => {
   };
 };
 let $$p0 = connect((e, t) => {
-  let i = new vj.Analytics(e.search, u(t), {
+  let i = new SearchAnalytics.Analytics(e.search, u(t), {
     plan: S(e)
   });
   return (t, n) => (i.update(t.search, u(n), {

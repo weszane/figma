@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reportError } from '../905/11'
 import { selectWithShallowEqual } from '../905/103090'
 import { ServiceCategories } from '../905/165054'
-import { NotificationType } from '../905/170564'
+import { NotificationCategory } from '../905/170564'
 import { getI18nString } from '../905/303541'
 import { getDirname } from '../905/309735'
 import { generateUniqueKey } from '../905/383708'
@@ -1018,16 +1018,16 @@ export function updateLocalLibraryItems(store: any) {
 
   if (movedItemIds.size > 0) {
     const movePrompts = state.notifications.filter(
-      (n: any) => n.type === NotificationType.MOVE_COMPONENTS_PROMPT,
+      (n: any) => n.type === NotificationCategory.MOVE_COMPONENTS_PROMPT,
     )
     if (movePrompts.length > 0) {
       const itemIds
-        = movePrompts[0].type === NotificationType.MOVE_COMPONENTS_PROMPT
+        = movePrompts[0].type === NotificationCategory.MOVE_COMPONENTS_PROMPT
           && movePrompts[0].movableItemIds
       if (itemIds && areSetsSubset(itemIds, movedItemIds)) {
         store.dispatch(
           notificationActions.dequeue({
-            type: NotificationType.MOVE_COMPONENTS_PROMPT,
+            type: NotificationCategory.MOVE_COMPONENTS_PROMPT,
           }),
         )
       }

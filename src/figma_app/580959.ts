@@ -30,7 +30,7 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { formatCount } from "../figma_app/930338";
 import { k as _$$k2 } from "../905/582200";
 import { Y as _$$Y } from "../905/506207";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _j } from "../figma_app/843119";
@@ -39,7 +39,7 @@ import { XE, u1, Uv, Y as _$$Y2, bS } from "../figma_app/91703";
 import { AV, nh } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D, w as _$$w } from "../905/295712";
-import { oI, Xp } from "../905/854717";
+import { updateCurrentSelectionPaintInPicker, forceUpdateSelectionPaintsForUndo } from "../905/854717";
 import { sw } from "../figma_app/914957";
 import { yJ, F7 } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
@@ -102,7 +102,7 @@ import { ZQ, UX } from "../905/668609";
 import { a as _$$a } from "../905/597867";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { sO } from "../figma_app/21029";
-import { f as _$$f2 } from "../figma_app/252485";
+import { isSlidesFile } from "../figma_app/252485";
 import { Sw, rM, UM } from "../905/95091";
 import { s as _$$s2 } from "../figma_app/268276";
 import { P as _$$P } from "../905/907246";
@@ -161,9 +161,9 @@ let $$ti6 = memo(function (e) {
     getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-fill-color-picker-show");
   }, []);
   let m = o3(nt.useGrid);
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FillPanel",
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(_$$k2, {
       name: "fill_panel",
       children: jsx("div", {
@@ -1520,7 +1520,7 @@ $$t_2.displayName = "Paint";
       this.row = createRef();
       this.paintPickerInitialView = void 0;
       this.componentWillUnmount = () => {
-        this.props.dispatch(oI({
+        this.props.dispatch(updateCurrentSelectionPaintInPicker({
           paintId: void 0,
           originalPaint: void 0,
           updatedPaintFromDropper: void 0
@@ -1538,7 +1538,7 @@ $$t_2.displayName = "Paint";
         }));
         this.props.dispatch(sw());
         this.props.dispatch(Uv());
-        this.props.dispatch(oI({
+        this.props.dispatch(updateCurrentSelectionPaintInPicker({
           paintId: this.props.id,
           originalPaint: this.props.paint,
           updatedPaintFromDropper: void 0
@@ -1618,7 +1618,7 @@ $$t_2.displayName = "Paint";
         this.setState({
           paintValueInPicker: i
         });
-        this.props.dispatch(oI({
+        this.props.dispatch(updateCurrentSelectionPaintInPicker({
           paintId: this.props.id,
           originalPaint: this.props.paint,
           updatedPaintFromDropper: void 0
@@ -1775,7 +1775,7 @@ $$t_2.displayName = "Paint";
         opensPicker: !1,
         key: "detatchVariableButton"
       });else {
-        let t = _$$f2(this.props.openFile?.editorType ?? null);
+        let t = isSlidesFile(this.props.openFile?.editorType ?? null);
         e.push({
           button: jsx("span", {
             className: zm,
@@ -1887,7 +1887,7 @@ export function $$tb4(e) {
     forceUpdateForUndo
   } = u;
   useEffect(() => {
-    (!B(S, sceneGraphSelection) || forceUpdateForUndo && F.current !== forceUpdateForUndo) && (v(sceneGraphSelection), C(e => e + 1), L(!1), M(!1), G(Xp(!1)));
+    (!B(S, sceneGraphSelection) || forceUpdateForUndo && F.current !== forceUpdateForUndo) && (v(sceneGraphSelection), C(e => e + 1), L(!1), M(!1), G(forceUpdateSelectionPaintsForUndo(!1)));
     F.current = forceUpdateForUndo;
   }, [forceUpdateForUndo, S, sceneGraphSelection, G, B]);
   let H = () => {

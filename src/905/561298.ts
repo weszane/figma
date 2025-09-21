@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { v } from "../905/755077";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { aP } from "../figma_app/530167";
+import { updateProfileThunk } from "../figma_app/530167";
 import { isSuccess, isFailure, isLoading } from "../905/18797";
 import { Bj } from "../905/708054";
 import { qw, Py, H5, BU, Ng as _$$Ng, rh, qr, PJ, GC, u1 } from "../905/599844";
@@ -107,7 +107,7 @@ export function $$v3(e) {
           disableSubmit: !0
         });
       };
-      this.loadingKey = () => aP.loadingKeyForPayload({
+      this.loadingKey = () => updateProfileThunk.loadingKeyForPayload({
         profileHandle: this.state.handle,
         onSuccess: Bj,
         profileId: this.props.publisher.id
@@ -116,7 +116,7 @@ export function $$v3(e) {
         this.setState({
           didTriggerChangeProfileHandle: !0
         });
-        this.props.dispatch(aP({
+        this.props.dispatch(updateProfileThunk({
           profileHandle: this.state.handle,
           onSuccess: Bj,
           profileId: this.props.publisher.id

@@ -1,46 +1,80 @@
-import { logError, logWarning } from "../905/714362";
-export function $$r2(e, t) {
-  logError("Autosave", e, t, {
-    reportAsSentryError: !0
-  });
+import { logError, logWarning } from '../905/714362'
+
+/**
+ * Logs an autosave error with additional context.
+ * Original function name: $$r2
+ * @param error - The error to log.
+ * @param context - Additional context for the error.
+ */
+export function logAutosaveError(error: any, context?: any) {
+  logError('Autosave', error, context, {
+    reportAsSentryError: true,
+  })
 }
-export function $$a0(e, t) {
-  $$r2(e, {
-    "original message": t.message
-  });
+
+/**
+ * Logs an autosave error with the original message from the error object.
+ * Original function name: $$a0
+ * @param error - The error to log.
+ * @param originalError - The original error object containing the message.
+ */
+export function logAutosaveErrorWithOriginalMessage(error: any, originalError: { message: string }) {
+  logAutosaveError(error, {
+    'original message': originalError.message,
+  })
 }
-export function $$s4(e) {
-  return "autosave-file" === e.type;
+
+/**
+ * Checks if the given object represents an autosave file.
+ * Original function name: $$s4
+ * @param obj - The object to check.
+ * @returns True if the object is an autosave file, false otherwise.
+ */
+export function isAutosaveFile(obj: { type: string }) {
+  return obj.type === 'autosave-file'
 }
-export function $$o3() {
-  return !1;
+
+/**
+ * Determines if autosave is enabled. Currently always returns false.
+ * Original function name: $$o3
+ * @returns Always false.
+ */
+export function isAutosaveEnabled() {
+  return false
 }
-export async function $$l1() {
+
+/**
+ * Retrieves storage usage and quota estimates from the navigator.
+ * Original function name: $$l1
+ * @returns A promise resolving to an object with usageBytes and quotaBytes.
+ */
+export async function getStorageEstimate() {
   try {
-    if (!navigator.storage?.estimate) return Promise.resolve({
-      usageBytes: void 0,
-      quotaBytes: void 0
-    });
-    let {
-      usage,
-      quota
-    } = await navigator.storage.estimate();
+    if (!navigator.storage?.estimate) {
+      return Promise.resolve({
+        usageBytes: undefined,
+        quotaBytes: undefined,
+      })
+    }
+    const { usage, quota } = await navigator.storage.estimate()
     return {
       usageBytes: usage,
-      quotaBytes: quota
-    };
-  } catch (e) {
-    logWarning("Autosave", "Failed to get storage usage", {
-      message: e?.message
-    });
+      quotaBytes: quota,
+    }
+  }
+  catch (error) {
+    logWarning('Autosave', 'Failed to get storage usage', {
+      message: error?.message,
+    })
     return Promise.resolve({
-      usageBytes: void 0,
-      quotaBytes: void 0
-    });
+      usageBytes: undefined,
+      quotaBytes: undefined,
+    })
   }
 }
-export const Lf = $$a0;
-export const U4 = $$l1;
-export const W6 = $$r2;
-export const rQ = $$o3;
-export const y8 = $$s4;
+
+export const Lf = logAutosaveErrorWithOriginalMessage
+export const U4 = getStorageEstimate
+export const W6 = logAutosaveError
+export const rQ = isAutosaveEnabled
+export const y8 = isAutosaveFile

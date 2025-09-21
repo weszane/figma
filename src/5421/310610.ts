@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { AD, lV } from "../figma_app/617606";
 import { ChatMessageType } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { ly } from "../905/138461";
+import { requestLock } from "../905/138461";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Xu } from "../figma_app/588582";
@@ -49,7 +49,7 @@ export function $$f0({
   let L = Xu();
   return {
     triggerSelfHeal: useCallback(async (e, o, i) => {
-      let r = await ly("auto-error-fix");
+      let r = await requestLock("auto-error-fix");
       if (r) try {
         if (v || t || !f || !i || L && (j || N === Ut.DEPLOYING || P) || 0 === o.length || !A || !C || "user" === C || Date.now() - i > 2e3 || (w.get(A) || 0) >= 2) return;
         let r = Array.from(new Set(o));

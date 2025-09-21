@@ -2,7 +2,7 @@ import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { logInfo } from "../905/714362";
 import { ZG, mu, t } from "../figma_app/840917";
-import { W6 } from "../905/327522";
+import { logAutosaveError } from "../905/327522";
 export let $$n0;
 class d {
   readyToAcceptAutosaveChanges() {
@@ -14,7 +14,7 @@ class d {
   async enqueueAutosaveCommit(e, t, r, n, a, s) {
     let d = ZG();
     if (!d) {
-      W6("AutosaveManager should not be null when committing");
+      logAutosaveError("AutosaveManager should not be null when committing");
       return !0;
     }
     let c = d.session();

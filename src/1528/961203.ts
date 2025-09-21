@@ -20,7 +20,7 @@ import { RecordableButton } from "../905/511649";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { useIsCooperBulkCreateMode, useNodeHasVideoPaint } from "../figma_app/334505";
 import { getVisibleTheme } from "../905/640017";
@@ -453,7 +453,7 @@ let $$el0 = forwardRef(function ({
       onDrag: z,
       onDragEnd: V,
       onDragStart: G,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         scrollMargin: "8px"
       }).$,
       transition: {
@@ -476,14 +476,14 @@ let $$el0 = forwardRef(function ({
         onMouseDown: R,
         onMouseUp: O,
         recordingKey: M,
-        style: J ? sx.relative.add({
+        style: J ? styleBuilderInstance.relative.add({
           outline: "1px solid var(--color-bordertranslucent)",
           outlineColor: eM,
           borderBottomRightRadius: eH,
           borderBottomLeftRadius: eH,
           borderTopRightRadius: eH,
           borderTopLeftRadius: eH
-        }).$ : sx.relative.$$if(eP, {
+        }).$ : styleBuilderInstance.relative.$$if(eP, {
           backgroundColor: eB
         }).$$if(p, {
           borderTopLeftRadius: eH,
@@ -506,7 +506,7 @@ let $$el0 = forwardRef(function ({
           children: [Z && jsx("div", {
             className: _$$s.flex.flexColumn.itemsStart.itemSelfStart.gap16.$,
             style: {
-              ...sx.add({
+              ...styleBuilderInstance.add({
                 width: `${ev}px`,
                 marginRight: `${SlideConstantsCppBindings?.singleSlideThumbnailNumberMargin() ?? 0}px`,
                 marginLeft: X ? `${g}px` : "0px"
@@ -515,7 +515,7 @@ let $$el0 = forwardRef(function ({
             children: jsx("span", {
               className: _$$s.alignLeft.font13.$$if(eA, _$$s.opacity0).$,
               style: {
-                ...sx.add({
+                ...styleBuilderInstance.add({
                   color: ez
                 }).$$if(number && number > 99, {
                   marginLeft: "5px",
@@ -531,7 +531,7 @@ let $$el0 = forwardRef(function ({
               className: _$$s.absolute.top0.left0.$,
               children: L
             }) : null, jsx("div", {
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 background: J ? "var(--color-bg-secondary)" : eG,
                 borderRadius: J ? "0px" : "5px",
                 aspectRatio: J ? "1 / 1" : "16 / 9",
@@ -715,7 +715,7 @@ export function $$ed1({
       id: "carousel-item-thumbnail-image",
       alt: "",
       className: "xh8yej3 xt7dq6l",
-      style: sx.add({
+      style: styleBuilderInstance.add({
         aspectRatio: n ? "1 / 1" : "16 / 9",
         objectFit: "contain"
       }).$$if(t, {
@@ -735,7 +735,7 @@ function ec({
   return jsx(Fragment, {
     children: [2, 1].map(t => jsx("div", {
       className: _$$s.bRadius3.eventsNone.absolute.zIndexMinus1.elevation100.borderBox.top0.wFull.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         transitionProperty: "transform, opacity",
         transitionDuration: "0.1s, 0.001s",
         transitionDelay: "0s, 0.2s",

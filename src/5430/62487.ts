@@ -1,22 +1,21 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { trackEventAnalytics } from "../905/449184";
-import { PerfTimer } from "../905/609396";
-import { getI18nString } from "../905/303541";
-import { pY, MZ, Dy } from "../figma_app/925970";
-import { VisualBellActions } from "../905/302958";
-import { mk } from "../figma_app/999312";
-import { getResourceTypesForBrowse } from "../figma_app/777551";
-import { ResourceTypes } from "../905/178090";
-import { mapEditorToType } from "../figma_app/277543";
-import { selectEditorResource } from "../figma_app/773663";
-import { w2, eK } from "../905/977218";
-import { HubEventType } from "../figma_app/350203";
-import { Ei } from "../905/574958";
-import { searchAPIHandler } from "../905/144933";
-import { Jm } from "../figma_app/387599";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchAPIHandler } from '../905/144933';
+import { ResourceTypes } from '../905/178090';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString } from '../905/303541';
+import { trackEventAnalytics } from '../905/449184';
+import { PerfTimer } from '../905/609396';
+import { searchSetLastLoadedQueryAction, searchSetQueryIdAction } from '../905/977218';
+import { mapEditorToType } from '../figma_app/277543';
+import { HubEventType } from '../figma_app/350203';
+import { getSearchSessionIdFromSelector } from '../figma_app/387599';
+import { selectEditorResource } from '../figma_app/773663';
+import { getResourceTypesForBrowse } from '../figma_app/777551';
+import { generateSessionId, searchIncrementQueryCount, searchStartSession } from '../figma_app/925970';
+import { mk } from '../figma_app/999312';
 function v(e) {
-  return 0 === e.length ? [] : e.map(e => e.model);
+  return e.length === 0 ? [] : e.map(e => e.model);
 }
 function b() {
   return {
@@ -40,7 +39,7 @@ function w() {
     profiles: []
   };
 }
-let C = (e, t) => null === e ? $$j1() : t === ResourceTypes.SearchResourceTypes.PLUGINS ? T(e) : L(e);
+let C = (e, t) => e === null ? $$j1() : t === ResourceTypes.SearchResourceTypes.PLUGINS ? T(e) : L(e);
 let L = e => {
   let t = v(e.data.meta.results);
   return {
@@ -50,7 +49,7 @@ let L = e => {
 };
 let T = e => {
   let t = function (e) {
-    return 0 === e.length ? [] : e.map(e => e.model.content.plugin);
+    return e.length === 0 ? [] : e.map(e => e.model.content.plugin);
   }(e.data.meta.results);
   return {
     resources: t,
@@ -59,14 +58,14 @@ let T = e => {
 };
 let I = (e, t) => {
   e(VisualBellActions.enqueue({
-    message: t.message || getI18nString("community.error.search_request_failed"),
+    message: t.message || getI18nString('community.error.search_request_failed'),
     error: !0,
-    type: "community-search-error",
+    type: 'community-search-error',
     timeoutOverride: 2e3
   }));
 };
 let N = (e, t) => {
-  "unattributed" !== t && e(pY());
+  t !== 'unattributed' && e(searchIncrementQueryCount());
 };
 let E = async (e, t, r, s, i) => {
   try {
@@ -85,7 +84,7 @@ let E = async (e, t, r, s, i) => {
       ...a,
       resource_type: m,
       session_id: r,
-      query_id: MZ(),
+      query_id: generateSessionId(),
       include_content: i,
       resource_editor_type: mapEditorToType(t.editor_type)
     };
@@ -106,7 +105,7 @@ let S = async (e, t, r, s, i) => {
   }
 };
 let R = async (e, t, r, s) => {
-  let i = new PerfTimer("searchResourcesAndProfiles", {});
+  let i = new PerfTimer('searchResourcesAndProfiles', {});
   let a = null;
   i.start();
   try {
@@ -155,11 +154,11 @@ export function $$A0(e) {
   let [t, r] = useState(w());
   let [o, a] = useState(!0);
   let [c, d] = useState(!0);
-  let u = Jm() ?? "unattributed";
+  let u = getSearchSessionIdFromSelector() ?? 'unattributed';
   let _ = useDispatch();
   useEffect(() => {
-    "unattributed" === u && _(Dy({
-      entryPoint: "community"
+    u === 'unattributed' && _(searchStartSession({
+      entryPoint: 'community'
     }));
   }, [u, _]);
   let p = useSelector(e => e.search.queryId);
@@ -172,15 +171,15 @@ export function $$A0(e) {
       b.current = t;
       a(!0);
       d(!0);
-      let s = y?.query !== e.query ? Ei() : p;
-      y?.query !== e.query && (_(w2({
+      let s = y?.query !== e.query ? generateSessionId() : p;
+      y?.query !== e.query && (_(searchSetLastLoadedQueryAction({
         sessionId: u,
         query: e.query,
         queryId: s
-      })), _(eK({
+      })), _(searchSetQueryIdAction({
         queryId: s
       })));
-      let i = await R(e, u, s || "", _);
+      let i = await R(e, u, s || '', _);
       let o = $$j1();
       let l = [];
       if (i && (o = i.resourcesResponse ? L(i.resourcesResponse) : $$j1(), l = i.profilesResponse.data.meta.results), t !== b.current) return;
@@ -225,8 +224,8 @@ export function $$A0(e) {
       })), d(!1), trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query: e.query,
         mixed: o.resources.length,
-        entry_point: "community",
-        context: "searchView",
+        entry_point: 'community',
+        context: 'searchView',
         search_session_id: u,
         query_id: s,
         files: g.resources.length,
@@ -245,10 +244,10 @@ export function $$P2(e, t) {
   let [r, o] = useState(w());
   let [a, c] = useState(b());
   let u = useDispatch();
-  let _ = useSelector(e => e.search.sessionId) || "unattributed";
+  let _ = useSelector(e => e.search.sessionId) || 'unattributed';
   useEffect(() => {
-    "unattributed" === _ && u(Dy({
-      entryPoint: "resource_hub"
+    _ === 'unattributed' && u(searchStartSession({
+      entryPoint: 'resource_hub'
     }));
   }, [_, u]);
   let p = useSelector(e => e.search.queryId);
@@ -263,12 +262,12 @@ export function $$P2(e, t) {
       c(b());
       let s = C(await S(t, e, _, u, v || t === ResourceTypes.SearchResourceTypes.PLUGINS), t);
       if (r !== g.current) return;
-      let i = y.query !== e.query ? Ei() : p;
-      y.query !== e.query && (u(w2({
+      let i = y.query !== e.query ? generateSessionId() : p;
+      y.query !== e.query && (u(searchSetLastLoadedQueryAction({
         sessionId: _,
         query: e.query,
         queryId: i
-      })), u(eK({
+      })), u(searchSetQueryIdAction({
         queryId: i
       })));
       o(e => ({
@@ -297,7 +296,7 @@ export function $$P2(e, t) {
         query: e.query,
         scope: mk.RESOURCE_HUB,
         entry_point: mk.RESOURCE_HUB,
-        context: "searchView",
+        context: 'searchView',
         search_session_id: _,
         query_id: i,
         files: l.resources.length,

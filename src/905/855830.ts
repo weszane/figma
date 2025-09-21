@@ -34,7 +34,7 @@ import { oW } from '../905/675859';
 import { e0 } from '../905/696396';
 import { SvgComponent } from '../905/714743';
 import { c as _$$c2, t as _$$t2 } from '../905/722657';
-import { tH } from '../905/751457';
+import { ErrorBoundaryCrash } from '../905/751457';
 import { a as _$$a } from '../905/948337';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../2854/660288';
@@ -506,7 +506,7 @@ export function $$eb0(e) {
       editorType: e.licenseType
     })
   };
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'RequestUpgradeModal',
     fallback: jsx('div', {}),
     sentryTags: {

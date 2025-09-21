@@ -22,7 +22,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -221,7 +221,7 @@ function ef({
     className: _$$s2.flex.flexRow.$,
     children: [jsx("div", {
       className: r ?? void 0,
-      style: sx.noWrap.overflowHidden.ellipsis.add({
+      style: styleBuilderInstance.noWrap.overflowHidden.ellipsis.add({
         maxWidth: `${i}px`
       }).$,
       ref: d,
@@ -245,13 +245,13 @@ function eS({
     spacing: 16,
     verticalAlignItems: "start",
     children: [jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         minWidth: "80px",
         maxWidth: "80px"
       }).colorText.fontSemiBold.lh16.$,
       children: e
     }), t ? jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: "275px"
       }).$,
       children: t
@@ -297,7 +297,7 @@ let eI = registerModal(function ({
       e && m(e.id);
     }).catch(() => {
       g(!1);
-    }).$$finally(() => g(!1)) : g(!1);
+    }).finally(() => g(!1)) : g(!1);
   }, [_, t, e.userId, r, l]);
   let x = useSubscription(OrgUsersByIdView, {
     orgId: t,
@@ -890,7 +890,7 @@ export function $$eD0({
       });
     }).catch(() => {
       tR();
-    }).$$finally(() => {
+    }).finally(() => {
       eP(e => {
         let t = new Set(e);
         t.$$delete(n);
@@ -970,7 +970,7 @@ export function $$eD0({
       eH(e => e + 1);
     }).catch(() => {
       tR();
-    }).$$finally(() => {
+    }).finally(() => {
       s && z(VisualBellActions.dequeue({
         matchType: eO
       }));
@@ -979,7 +979,7 @@ export function $$eD0({
       c(e.status, e.data.meta.failed_attempts, e.data.meta.successful_attempts);
     }).catch(() => {
       tR();
-    }).$$finally(() => {
+    }).finally(() => {
       _();
     });
   };
@@ -1211,7 +1211,7 @@ export function $$eD0({
         })
       })]
     }), !!d && tj.length > 0 && jsx("div", {
-      style: sx.add({
+      style: styleBuilderInstance.add({
         maxWidth: "760px"
       }).mt16.mb16.$,
       children: jsx(_$$z, {
@@ -1236,7 +1236,7 @@ export function $$eD0({
     children: jsxs("div", {
       className: c()("upgrade_requests_table--fontSmoothing---uY3Z", _$$s2.pt16.bRadius6.b1.colorBorder.$),
       children: [tV, jsx("div", {
-        style: sx.add({
+        style: styleBuilderInstance.add({
           width: "780px",
           height: tw ? `${tw}px` : void 0
         }).$,
@@ -1289,7 +1289,7 @@ export function $$eD0({
               className: _$$s2.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
               children: renderI18nText(d && tu ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.empty.primary_text")
             }), jsx("div", {
-              style: sx.add({
+              style: styleBuilderInstance.add({
                 maxWidth: "500px"
               }).lh16.cursorDefault.alignCenter.colorTextSecondary.$,
               children: d ? tz(!1) : renderI18nText("admin_dashboard.requests.empty.secondary_text")

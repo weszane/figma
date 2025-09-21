@@ -7,10 +7,10 @@ import { customHistory } from "../905/612521";
 import { KeyCodes } from "../905/63728";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Dy, ky, Je } from "../figma_app/925970";
+import { searchStartSession, searchEndSession, searchSessionEnteredSearchViewViaEnter } from "../figma_app/925970";
 import { x0 } from "../5430/908946";
 import { W as _$$W } from "../5430/53744";
-import { Jm } from "../figma_app/387599";
+import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { buildCommunityPathById } from "../figma_app/471982";
 import { ProfileRouteState } from "../905/934145";
 import { AG } from "../figma_app/999312";
@@ -32,7 +32,7 @@ export function $$b0({
   dropdownSelector: I
 }) {
   let N = useDispatch();
-  let E = Jm(!0);
+  let E = getSearchSessionIdFromSelector(!0);
   let S = AG();
   let [R, k] = useState(!1);
   let A = useRef(null);
@@ -66,7 +66,7 @@ export function $$b0({
     onFocus: () => {
       k(!0);
       null !== A.current && A.current.focus();
-      N(Dy({
+      N(searchStartSession({
         entryPoint: S ? "resource_hub" : "community"
       }));
     },
@@ -100,7 +100,7 @@ export function $$b0({
             A.current?.blur();
             r("");
             setResources({});
-            N(ky());
+            N(searchEndSession());
             trackEventAnalytics("search_result_clicked", {
               query: e,
               resourceType: renderedOrder[renderedSelectedIdx]?.type,
@@ -112,7 +112,7 @@ export function $$b0({
             });
           } else {
             b(i);
-            t && !i ? N(ky()) : !t && i && N(Je({
+            t && !i ? N(searchEndSession()) : !t && i && N(searchSessionEnteredSearchViewViaEnter({
               entryPoint: "community"
             }));
           }
@@ -140,7 +140,7 @@ export function $$b0({
       onClick: () => {
         r("");
         t && b("");
-        N(ky());
+        N(searchEndSession());
       }
     })]
   });

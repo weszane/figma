@@ -9,7 +9,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { i4 } from "../figma_app/770088";
-import { eT } from "../figma_app/703138";
+import { createComment } from "../figma_app/703138";
 import { mz } from "../figma_app/12220";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { j as _$$j } from "../draftjs_composer/390258";
@@ -284,7 +284,7 @@ export function $$L2(e) {
       onSuccess,
       onError
     } = e;
-    c && l(eT({
+    c && l(createComment({
       message,
       messageMeta,
       resourceType,

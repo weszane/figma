@@ -3,7 +3,7 @@ import { useRef, useMemo, createContext, useEffect, useContext } from "react";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { a as _$$a, i as _$$i } from "../905/44915";
 import { A } from "../905/780920";
 import { c as _$$c } from "../905/566438";
@@ -141,7 +141,7 @@ export function $$g0({
     }), [D]);
     return jsx("button", {
       className: _$$s.flex.flexColumn.$,
-      style: sx.$$if(f, {
+      style: styleBuilderInstance.$$if(f, {
         gridColumn: "1 / -1"
       }).$,
       onClick: V,

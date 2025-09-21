@@ -23,7 +23,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
-import { t as _$$t2 } from "../905/331623";
+import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -3600,7 +3600,7 @@ function iw(e) {
       recordingKey: generateRecordingKey(e, "listSpacing"),
       smallNudgeAmount: e.smallNudgeAmount,
       value: e.listSpacing,
-      children: jsx(_$$t2, {
+      children: jsx(MediaQuerySvgComponent, {
         svg: _$$A7,
         className: _$$Kk
       })

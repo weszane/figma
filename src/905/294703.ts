@@ -5,12 +5,12 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { APILoadingStatus } from "../905/520829";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jM, CZ, L8 } from "../905/124270";
-import { GX } from "../905/171315";
+import { isLongText } from "../905/171315";
 import { y as _$$y } from "../905/713563";
 import { useDispatch, useSelector } from "react-redux";
-import { $P, ej, w2 } from "../905/977218";
-import { vj } from "../905/574958";
-import { Q8, Q, ih, Yj, ic, sC } from "../905/61477";
+import { loadSearchResultsThunk, searchSetLastAckedQueryIdAction, searchSetLastLoadedQueryAction } from "../905/977218";
+import { SearchAnalytics } from "../905/574958";
+import { searchInputAtom, searchQueryAtom, facetFiltersAtom, searchPreviewOrderAtom, searchResponsesAtom, searchScopeAtom } from "../905/61477";
 import { Q0, kq } from "../905/994947";
 import { convertSearchModelTypeToModelType, PublicModelType, getModelTypeEmptyStateI18n, getModelTypeHeaderI18n } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
@@ -39,7 +39,7 @@ function N({
   onContextMenuCallback: o
 }) {
   let l = useDispatch();
-  let d = useAtomWithSubscription(Q8);
+  let d = useAtomWithSubscription(searchInputAtom);
   let c = uF(e.model);
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
@@ -106,7 +106,7 @@ function D({
   onContextMenuCallback: o
 }) {
   let l = useDispatch();
-  let d = useAtomWithSubscription(Q);
+  let d = useAtomWithSubscription(searchQueryAtom);
   let c = Xx(e.model);
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
@@ -165,7 +165,7 @@ function $$j({
   onContextMenuCallback: o
 }) {
   let d = useDispatch();
-  let c = useAtomWithSubscription(Q);
+  let c = useAtomWithSubscription(searchQueryAtom);
   let u = useSelector(e => e.currentUserOrgId || void 0);
   let m = useSelector(e => e.orgById);
   let h = hl(a.model, u);
@@ -225,7 +225,7 @@ function V({
   path: i,
   showResultsForModelType: a
 }) {
-  let o = useAtomWithSubscription(Q8);
+  let o = useAtomWithSubscription(searchInputAtom);
   let c = useAtomWithSubscription(jM);
   let u = a && c ? convertSearchModelTypeToModelType(c) : null;
   let p = useCallback(t => {
@@ -296,32 +296,32 @@ export function $$z0({
   path: t
 }) {
   let i = useAtomWithSubscription(jM);
-  let b = useAtomWithSubscription(ih);
+  let b = useAtomWithSubscription(facetFiltersAtom);
   let v = useAtomWithSubscription(CZ);
-  let I = useAtomWithSubscription(Yj);
-  let E = useAtomWithSubscription(ic);
-  let x = useAtomWithSubscription(Q);
+  let I = useAtomWithSubscription(searchPreviewOrderAtom);
+  let E = useAtomWithSubscription(searchResponsesAtom);
+  let x = useAtomWithSubscription(searchQueryAtom);
   let S = convertSearchModelTypeToModelType(i);
   let w = function () {
     let e = useDispatch();
     let t = useSelector(e => e.search);
     let i = useSelector(e => e.selectedView);
     let n = useSelector(e => e.search.parameters);
-    let r = $P.loadingKeyForPayload({
+    let r = loadSearchResultsThunk.loadingKeyForPayload({
       parameters: n
     });
     let a = useSelector(e => e.loadingState[r]);
     let l = useAtomWithSubscription(L8);
-    a === APILoadingStatus.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(ej({
+    a === APILoadingStatus.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(searchSetLastAckedQueryIdAction({
       lastAckedQueryId: t.queryId
-    })), e(w2({
+    })), e(searchSetLastLoadedQueryAction({
       sessionId: t.sessionId,
       query: t.parameters.query,
       queryId: t.queryId
-    })), vj.Session.trackClientResult(t, i));
+    })), SearchAnalytics.Session.trackClientResult(t, i));
     return a;
   }();
-  let C = useAtomWithSubscription(sC);
+  let C = useAtomWithSubscription(searchScopeAtom);
   let T = _$$y("file_browser", C, !0);
   let k = useMemo(() => !w || w === APILoadingStatus.LOADING || !deepEqual(b, v), [v, w, b]);
   let R = useMemo(() => {
@@ -332,7 +332,7 @@ export function $$z0({
     }
     return !0;
   }, [I, E]);
-  return GX(x) ? jsx("div", {
+  return isLongText(x) ? jsx("div", {
     className: G,
     children: renderI18nText("search.error.max_query_length_exceeded")
   }) : k ? jsx(_$$e, {

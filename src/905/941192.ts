@@ -1,3 +1,4 @@
-import { r } from "../cssbuilder/539057";
-export let $$n0 = new r();
-export const sx = $$n0;
+import { StyleBuilderFactory } from '../cssbuilder/539057'
+
+const styleBuilderInstance = StyleBuilderFactory()
+export const sx = styleBuilderInstance

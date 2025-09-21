@@ -6,7 +6,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { addTemplateToRecentsThunk } from "../905/321397";
 import { VisualBellActions } from "../905/302958";
-import { wr } from "../figma_app/387599";
+import { getCurrentSearchSessionId } from "../figma_app/387599";
 import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { shouldSkipWorkspaceSelection } from "../figma_app/275462";
 import { y as _$$y } from "../905/444931";
@@ -76,7 +76,7 @@ let $$T1 = (e, l = {
         figFileKey: d.key,
         isMonetized: h,
         paidStatus: f,
-        searchSessionId: wr(u),
+        searchSessionId: getCurrentSearchSessionId(u),
         file_team_id: _.team_id,
         org_id: _.org_id,
         file_folder_id: d.folder_id

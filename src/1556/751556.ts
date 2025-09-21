@@ -60,7 +60,7 @@ import { ScreenReaderOnly } from "../905/172252";
 import { SubTrigger, MenuItemPrimitive } from "../905/465888";
 import { g as _$$g3 } from "../905/687265";
 import { resolveDisplayName } from "../figma_app/11961";
-import { Dg } from "../figma_app/530167";
+import { switchCommunityProfileThunk } from "../figma_app/530167";
 import { K as _$$K } from "../1556/124168";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { X as _$$X } from "../figma_app/91315";
@@ -223,7 +223,7 @@ function eT({
   let A = useRef(!0);
   let M = () => {
     close();
-    h ? e(Dg({
+    h ? e(switchCommunityProfileThunk({
       profileId: c.id,
       view: {
         view: "communityHub",

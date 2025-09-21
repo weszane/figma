@@ -2,7 +2,7 @@
  * Enum representing various notification types.
  * Original variable: $$n0
  */
-export enum NotificationType {
+export enum NotificationCategory {
   COMPONENT_PUBLISH_ERROR = 0,
   DOWNTIME = 1,
   AUTOSAVE_CHANGES_RESTORED = 2,
@@ -18,4 +18,4 @@ export enum NotificationType {
  * Alias for NotificationType enum.
  * Original export: const _ = $$n0;
  */
-export const _ = NotificationType;
+export const _ = NotificationCategory

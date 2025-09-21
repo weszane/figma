@@ -5,7 +5,7 @@ import { eBU } from "../figma_app/822011";
 import { LayoutSizingMode, StackBindingsCpp, HandoffBindingsCpp, AppStateTsApi, IAssertResource, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { y6 } from "../figma_app/681951";
-import { tH, H4 } from "../905/751457";
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { lerp, clamp } from "../figma_app/492908";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -820,9 +820,9 @@ let eX = memo(({
           commentsDetailContainerRef: f
         }), jsx(Nz, {}), jsx("div", {
           ref: f
-        }), !isVsCodeEnvironment() && !p && jsx(tH, {
+        }), !isVsCodeEnvironment() && !p && jsx(ErrorBoundaryCrash, {
           boundaryKey: "DevModeLeftPanel",
-          fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+          fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             area: eBU.DEVELOPER_TOOLS
           },

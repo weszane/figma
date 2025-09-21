@@ -21,7 +21,7 @@ import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -574,7 +574,7 @@ export function $$e$0({
       });
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       e8(e => {
         let a = new Set(e);
         a.$$delete(t);
@@ -658,7 +658,7 @@ export function $$e$0({
       tr(e => e + 1);
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       a && eS(VisualBellActions.dequeue({
         matchType: eG
       }));
@@ -668,7 +668,7 @@ export function $$e$0({
       tr(e => e + 1);
     }).catch(() => {
       dispatchGenericError();
-    }).$$finally(() => {
+    }).finally(() => {
       u();
     });
   }, [tb, eK, eS, dispatchGenericError, dispatchProcessingError, dispatchSuccess, tv, tp, J, te, $, V, tV, seatAvailability, ew, eW, tL]);
@@ -1073,7 +1073,7 @@ export function $$e$0({
             className: _$$s2.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
             children: renderI18nText(tC && tk ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.no_requests_to_approve")
           }), jsx("div", {
-            style: sx.add({
+            style: styleBuilderInstance.add({
               maxWidth: "500px"
             }).lh16.cursorDefault.alignCenter.colorTextSecondary.$,
             children: tC ? tC === UpgradeRequestSetting.MEMBERS ? renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.members") : renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.all_users") : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")

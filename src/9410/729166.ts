@@ -65,7 +65,7 @@ import { SvgComponent, V as _$$V } from '../905/714743';
 import { Point } from '../905/736624';
 import { od } from '../905/748636';
 import { G as _$$G2 } from '../905/750789';
-import { tH as _$$tH, H4 } from '../905/751457';
+import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { getSelectedFile } from '../905/766303';
 import { nm } from '../905/782020';
 import { q as _$$q2 } from '../905/820062';
@@ -1094,9 +1094,9 @@ function tu() {
   let I = variablesTableData.length === 0;
   let k = currentVariableSet?.modes.length === 1;
   let N = `${b} ${C}`;
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'varTable',
-    fallback: H4.DEFAULT_FULL_PAGE,
+    fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     team: _$$e.DEVELOPER_TOOLS,
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
@@ -2657,9 +2657,9 @@ let r$ = memo(({
   let [{
     previewKeyForErrorBoundary: i
   }, n] = useAtomValueAndSetter(t.stateAtom);
-  return jsx(_$$tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'InlinePreviewModal',
-    fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+    fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
       if (trackEventAnalytics('inline_preview_crashed', {}, {
         forwardToDatadog: !0
@@ -3441,33 +3441,33 @@ export function $$r40({
     children: [e ?? null, jsx(r5, {}), t && jsx(r$, {
       viewerControl: _$$e7,
       pageId: i
-    }), n && jsx(_$$tH, {
+    }), n && jsx(ErrorBoundaryCrash, {
       boundaryKey: 'DevModeOverview',
-      fallback: H4.DEFAULT_FULL_PAGE,
+      fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
         area: _$$e.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(iQ, {})
-    }), l && jsx(_$$tH, {
+    }), l && jsx(ErrorBoundaryCrash, {
       boundaryKey: 'ComponentBrowser',
-      fallback: H4.DEFAULT_FULL_PAGE,
+      fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
         area: _$$e.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(ea, {})
-    }), s && u && jsx(_$$tH, {
+    }), s && u && jsx(ErrorBoundaryCrash, {
       boundaryKey: 'DevModeVariablesTable',
-      fallback: H4.DEFAULT_FULL_PAGE,
+      fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
         area: _$$e.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(tu, {})
-    }), jsx(_$$tH, {
+    }), jsx(ErrorBoundaryCrash, {
       boundaryKey: 'McpUnmappedComponentsBanner',
-      fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
+      fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       sentryTags: {
         area: _$$e.DEVELOPER_TOOLS
       },

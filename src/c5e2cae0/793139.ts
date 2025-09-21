@@ -16,7 +16,7 @@ import { ex } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { SvgComponent } from '../905/714743';
 import { showTooltip } from '../905/765855';
-import { sx } from '../905/941192';
+import { styleBuilderInstance } from '../905/941192';
 import { TextWithTruncation } from '../905/984674';
 import { s as _$$s } from '../c5e2cae0/341232';
 import { s as _$$s2 } from '../cssbuilder/589278';
@@ -43,7 +43,7 @@ let O = ex('org_upgrade_user_info_extended', ({
       return jsxs('div', {
         className: 'org_self_serve_modal_tooltip_content--tooltipRow--CyDdQ',
         children: [jsx('div', {
-          style: sx.add({
+          style: styleBuilderInstance.add({
             backgroundColor: r,
             minWidth: '10px',
             height: '10px',
@@ -421,7 +421,7 @@ function K({
 }) {
   return jsx('div', {
     className: _$$s2.w8.h8.bRadius2.minW8.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       backgroundColor: $L(e, us)
     }).$
   });

@@ -118,7 +118,7 @@ import { LoadingSpinner } from '../figma_app/858013';
 import { ab, ox } from '../figma_app/870683';
 import { Q as _$$Q } from '../figma_app/904819';
 import { zK } from '../figma_app/913823';
-import { Dy, ky } from '../figma_app/925970';
+import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { getCurrentFileType, isDevHandoffEditorType } from '../figma_app/976749';
 import { A as _$$A7 } from '../svg/4102';
 import { A as _$$A6 } from '../svg/55550';
@@ -1708,17 +1708,17 @@ function sd({
   let R = LR();
   let M = useCallback(s => s.key === 'Escape' && (e ? t('') : R(), !0), [R, e, t]);
   let B = useDebouncedCallback(e => {
-    e.length > 0 ? r(Dy({
+    e.length > 0 ? r(searchStartSession({
       entryPoint: 'figma:inserts'
-    })) : r(ky());
+    })) : r(searchEndSession());
     t(e);
   }, 300);
   let D = () => {
-    r(ky());
+    r(searchEndSession());
     t('');
   };
   useEffect(() => () => {
-    r(ky());
+    r(searchEndSession());
   }, [r]);
   let H = useCallback(() => {
     h ? r(hideDropdownAction()) : r(showDropdownThunk({

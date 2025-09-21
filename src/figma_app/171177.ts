@@ -5,7 +5,7 @@ import { useHandleKeyboardEvent, useHandleInputEvent, generateRecordingKey } fro
 import { ModifierKeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { jr } from "../figma_app/896988";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { x } from "../905/179739";
 import { Jc, Sn } from "../905/946805";
 export function $$_4() {
@@ -144,7 +144,7 @@ export function $$f5({
       },
       setAllowDefaultTabOverride: m
     },
-    children: jsx(vL, {
+    children: jsx(KeyboardReceiver, {
       name: e,
       handleKeyDown: b,
       focusOnMount: !0,

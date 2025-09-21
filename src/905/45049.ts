@@ -24,7 +24,7 @@ import { P as _$$P } from "../vendor/348225";
 import { h as _$$h } from "../905/207101";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { Dm } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
 import { registerModal } from "../905/102752";
@@ -78,7 +78,7 @@ function V({
 }) {
   return jsx("button", {
     className: _$$s2.colorBg.flex.overflowHidden.$$case([["large" === t, _$$s2.radiusLarge]]).$,
-    style: _$$sx.add({
+    style: styleBuilderInstance.add({
       boxShadow: "var(--elevation-100-canvas)"
     }).$,
     onClick: i,
@@ -174,7 +174,7 @@ function H({
         enableZoomControls: !0
       }, `details::${i.thumbnail_url}`), jsx("div", {
         className: _$$s2.absolute.$,
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           top: "16px",
           left: "16px"
         }).$,
@@ -182,7 +182,7 @@ function H({
           radius: "large",
           onClick: () => r(i, t.index),
           children: jsxs("div", {
-            style: _$$sx.add({
+            style: styleBuilderInstance.add({
               width: "30em"
             }).$,
             children: [jsx("div", {
@@ -269,7 +269,7 @@ let K = registerModal(function ({
     forwardUnhandledEventsToFullscreen: !1,
     children: [jsx(_$$P.div, {
       className: x()(_$$s2.fixed.top0.right0.bottom0.left0.zIndexModal.$),
-      style: _$$sx.add({
+      style: styleBuilderInstance.add({
         backgroundColor: "var(--color-modalbackdrop, $figmaFGBlack3)"
       }).$,
       animate: o,
@@ -286,7 +286,7 @@ let K = registerModal(function ({
       children: jsxs(_$$P.div, {
         tabIndex: 0,
         className: x()(Gt, _$$s2.overflowHidden.relative.$),
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           aspectRatio: "16 / 9",
           width: "100%",
           maxHeight: "100%"
@@ -305,7 +305,7 @@ let K = registerModal(function ({
           entryPoint: r
         }), jsx("div", {
           className: _$$s2.absolute.$,
-          style: _$$sx.add({
+          style: styleBuilderInstance.add({
             top: "13px",
             right: "13px"
           }).$,

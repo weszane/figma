@@ -15,7 +15,7 @@ import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { f6 } from "../figma_app/915202";
+import { FileBrowserLocation } from "../figma_app/915202";
 import { N as _$$N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { CBZ } from "../figma_app/6204";
@@ -81,7 +81,7 @@ export function $$I0() {
   let M = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
-    newFileFrom: f6.FIGMAKE_PROMO_MODAL,
+    newFileFrom: FileBrowserLocation.FIGMAKE_PROMO_MODAL,
     contextClicked: "figmake_marketing_modal"
   });
   let {

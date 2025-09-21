@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { eT } from "../figma_app/703138";
+import { createComment } from "../figma_app/703138";
 import { CommentComposer } from "../draftjs_composer/577988";
 export function $$l0(e) {
   let {
@@ -20,7 +20,7 @@ export function $$l0(e) {
       onSuccess,
       onError
     } = e;
-    u(eT({
+    u(createComment({
       message,
       messageMeta,
       resourceType,

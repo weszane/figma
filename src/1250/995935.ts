@@ -31,7 +31,7 @@ import { BaseLinkComponent, SecureLink, ButtonSecondaryTracked } from "../figma_
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { $z, e6 as _$$e, c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx as _$$sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { V as _$$V } from "../905/355181";
 import { lQ } from "../905/934246";
 import { b as _$$b } from "../905/946806";
@@ -46,7 +46,7 @@ import { vK, jv } from "../905/84777";
 import { collaboratorSet } from "../905/332483";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanLimitationType, FOrganizationLevelType, FFileType, FPaymentHealthStatusType, FStudentTeamStatusType, FUserRoleType } from "../figma_app/191312";
-import { wA as _$$wA, kA } from "../figma_app/336853";
+import { getCurrentUserOrg, isBigmaEnabledSimple } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
 import { C as _$$C } from "../figma_app/198698";
 import { x1, MA, om } from "../figma_app/465413";
@@ -326,7 +326,7 @@ let tL = {
         }),
         description: jsxs(Fragment, {
           children: [jsx("b", {
-            style: _$$sx.fontSemiBold.$,
+            style: styleBuilderInstance.fontSemiBold.$,
             children: "This file is almost out of browser memory."
           }), " Remove content to lower memory use to 50% or less. This will ensure you can continue to work in this file safely."]
         }),
@@ -793,7 +793,7 @@ let tK = {
         let a = !!r.stripe_customer_id;
         let i = d ? getI18nString("locked_team.banner.this_board_is_part_of_a_locked_team") : getI18nString("locked_team.banner.this_file_is_part_of_a_locked_team");
         let o = jsx("div", {
-          style: _$$sx.add({
+          style: styleBuilderInstance.add({
             marginLeft: "-32px"
           }).$,
           children: renderI18nText(l ? "locked_team.banner.all_of_this_teams_work_is_currently_view_only_dev_mode" : "locked_team.banner.all_of_this_teams_work_is_currently_view_only", {
@@ -842,7 +842,7 @@ let tK = {
         let a;
         a = m ? jsxs("span", {
           children: [jsxs("b", {
-            style: _$$sx.fontSemiBold.$,
+            style: styleBuilderInstance.fontSemiBold.$,
             children: [renderI18nText("banner.free_limit_locked.team_locked_over_starter_limits", {
               teamName: r.name
             }), " "]
@@ -866,7 +866,7 @@ let tK = {
           })]
         }) : jsxs("span", {
           children: [jsx("b", {
-            style: _$$sx.fontSemiBold.$,
+            style: styleBuilderInstance.fontSemiBold.$,
             children: renderI18nText("banner.free_limit_locked.team_locked_over_starter_limits", {
               teamName: r.name
             })
@@ -904,7 +904,7 @@ let tY = {
   Banner: function (e) {
     let t = selectCurrentFile();
     let n = useCurrentUserOrgId();
-    let r = useSelector(_$$wA);
+    let r = useSelector(getCurrentUserOrg);
     let i = null;
     let o = null;
     if (i = n && getResourceDataOrFallback(t?.isAbandonedDraftFile), o = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
@@ -1669,7 +1669,7 @@ let nr = {
     let p = jv({
       billableProductKeys: collaboratorSet,
       baseQuery: {
-        tier: kA(n) ? Ju.ENTERPRISE : Ju.ORG,
+        tier: isBigmaEnabledSimple(n) ? Ju.ENTERPRISE : Ju.ORG,
         currency: u.data,
         renewalTerm: IX.YEAR,
         unit: IX.MONTH
@@ -1702,7 +1702,7 @@ let nr = {
       },
       children: jsx("div", {
         className: _$$s2.sticky.top0.$,
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           zIndex: 2
         }).$,
         children: jsx(_$$C, {
@@ -1724,7 +1724,7 @@ let nr = {
                     orgId: n.id,
                     organizationName: n.name,
                     renewalDate: g,
-                    isEnterprise: kA(n),
+                    isEnterprise: isBigmaEnabledSimple(n),
                     onAccept: () => o({
                       planParentId: n.id,
                       planType: FOrganizationLevelType.ORG
@@ -1873,7 +1873,7 @@ let ns = {
       },
       children: jsxs("div", {
         className: _$$s2.sticky.top0.$,
-        style: _$$sx.add({
+        style: styleBuilderInstance.add({
           zIndex: 2
         }).$,
         children: [jsxs(BannerFullWidth, {
@@ -2036,7 +2036,7 @@ let nd = {
         type: MA.CUSTOM,
         element: jsx(_$$e, {
           onClick: d,
-          style: _$$sx.mr8.colorTextBrand.$,
+          style: styleBuilderInstance.mr8.colorTextBrand.$,
           children: renderI18nText("banner.starter_view_only.upgrade_button")
         })
       } : void 0

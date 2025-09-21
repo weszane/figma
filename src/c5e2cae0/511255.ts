@@ -7,13 +7,13 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
-import { tH } from "../905/751457";
+import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../905/941192";
+import { styleBuilderInstance } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -53,7 +53,7 @@ function X({
   let n = useDispatch();
   return jsxs("div", {
     className: _$$s2.flex.flexColumn.gap8.$,
-    style: sx.add({
+    style: styleBuilderInstance.add({
       padding: "48px 56px",
       maxWidth: "650px"
     }).$,
@@ -62,7 +62,7 @@ function X({
       children: renderI18nText("org_upgrade.multi_team.bring_your_teams_together")
     }), jsx("p", {
       className: _$$s2.textHeadingMedium.$,
-      style: sx.add({
+      style: styleBuilderInstance.add({
         fontWeight: 400
       }).$,
       children: renderI18nText("plan_comparison.campfire.org.description")
@@ -257,7 +257,7 @@ function ea(e) {
   let B = D.data;
   let L = jsx("div", {
     className: "org_upgrade_multi_team_modal--teamIllustrationLeftSection--MLN4f",
-    style: sx.$$if(l, sx.add({
+    style: styleBuilderInstance.$$if(l, styleBuilderInstance.add({
       width: "200px"
     })).$,
     children: jsxs("div", {
@@ -303,7 +303,7 @@ function ea(e) {
         })]
       }), l && jsxs("div", {
         className: _$$s2.flex.b1.bRadius3.itemsCenter.absolute.pr4.py4.ml36.$,
-        style: sx.add({
+        style: styleBuilderInstance.add({
           top: "100%",
           marginTop: "15px",
           maxWidth: "100px"
@@ -315,7 +315,7 @@ function ea(e) {
           children: renderI18nText("org_upgrade.illustration.sign_in_with_sso")
         }), jsx("div", {
           className: _$$s2.absolute.mt32.$,
-          style: sx.add({
+          style: styleBuilderInstance.add({
             right: "-8px"
           }).$,
           children: jsx(es, {})
@@ -487,7 +487,7 @@ export let $$er0 = connect(e => {
     unsortedTeamIds: getFilteredTeamMemberIds(e.user, e.roles, e.teams)
   };
 })(withTracking(function (e) {
-  return jsx(tH, {
+  return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeMultiTeamModal",
     team: _$$e.BILLING_EXPERIENCE,
     fallback: jsx(_$$K, {}),

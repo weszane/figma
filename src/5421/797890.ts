@@ -27,9 +27,9 @@ import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
 import { _P } from "../figma_app/2590";
-import { zy } from "../figma_app/915202";
+import { ClipboardOperation } from "../figma_app/915202";
 import { KindEnum } from "../905/129884";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { ht } from "../figma_app/741785";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -942,8 +942,8 @@ let e7 = memo(function ({
   let tn = useCallback((e, t) => {
     let n = e.event.clipboardData || window.clipboardData;
     switch (t) {
-      case zy.COPY:
-      case zy.CUT:
+      case ClipboardOperation.COPY:
+      case ClipboardOperation.CUT:
         {
           let o = JSON.parse(JSON.stringify(selectedInteractions));
           let i = lg(o);
@@ -951,7 +951,7 @@ let e7 = memo(function ({
             prototypeInteractions: i
           });
           if (!r) break;
-          if (C4(n, r, ""), t === zy.CUT) {
+          if (C4(n, r, ""), t === ClipboardOperation.CUT) {
             let e = [];
             for (let t of selectedInteractions) {
               let {
@@ -1349,7 +1349,7 @@ let e7 = memo(function ({
     }),
     children: tA
   });
-  let tk = ec ? tw : jsx(vL, {
+  let tk = ec ? tw : jsx(KeyboardReceiver, {
     name: "Prototype Draggable modal",
     className: "prototype_interaction_edit_modal--prototypeDraggableModal--njJ6A",
     handleClipboard: tn,

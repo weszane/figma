@@ -4,20 +4,20 @@ import { useDispatch } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
-import { n as _$$n } from "../figma_app/3731";
+import { renderAvatar } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { q$, P_, J, jM, wf, a3 } from "../905/124270";
-import { og, Bu, nX, hp, GX, wG, dd } from "../905/171315";
+import { EMPTY_SPACE_MAP, createSpaceFacetFromMap, buildQueryObject, MAX_TRUNCATE_LENGTH, isLongText, isSpaceEmpty, getSpaceQueryParams } from "../905/171315";
 import { e as _$$e } from "../905/404280";
 import { n as _$$n2 } from "../905/624711";
 import { k as _$$k } from "../905/252342";
 import { P as _$$P } from "../905/16832";
 import { A as _$$A } from "../905/421315";
 import { F as _$$F } from "../905/801537";
-import { R9 } from "../905/61477";
+import { selectedItemAtom } from "../905/61477";
 import { nv } from "../905/182534";
-import { HI } from "../905/977218";
+import { clearWorkspaceFilterThunk } from "../905/977218";
 import { getUserId } from "../905/372672";
 import { CreatorResourceType, FolderType, TeamSpaceType, InputType, PillType } from "../figma_app/162807";
 import { HY, kI, b3 } from "../905/779036";
@@ -67,7 +67,7 @@ export function $$R0({
   let C = useAtomWithSubscription(P_);
   let T = useAtomWithSubscription(J);
   let k = useAtomWithSubscription(jM);
-  let R = useAtomWithSubscription(R9);
+  let R = useAtomWithSubscription(selectedItemAtom);
   let P = useAtomWithSubscription(wf);
   let [O, D] = useAtomValueAndSetter(a3);
   let L = _$$P();
@@ -77,24 +77,24 @@ export function $$R0({
   let F = _$$k();
   let M = useCallback((e, t, n) => {
     let r = {
-      ...(C ? C.value : og),
+      ...(C ? C.value : EMPTY_SPACE_MAP),
       [t]: n
     };
-    let a = Bu(r);
-    let s = nX(k, T, a, R ?? void 0);
-    u(HI({}));
+    let a = createSpaceFacetFromMap(r);
+    let s = buildQueryObject(k, T, a, R ?? void 0);
+    u(clearWorkspaceFilterThunk({}));
     i(e, a, s);
   }, [u, T, k, C, R, i]);
   let j = useCallback(e => {
-    let t = nX(k, T, null, R ?? void 0);
-    u(HI({}));
+    let t = buildQueryObject(k, T, null, R ?? void 0);
+    u(clearWorkspaceFilterThunk({}));
     i(e, null, t);
     F({}, PillType.CLEAR_ALL, InputType.DROPDOWN);
   }, [u, T, k, R, i, F]);
-  let U = C?.value ?? og;
+  let U = C?.value ?? EMPTY_SPACE_MAP;
   let B = Object.values(FolderType).reduce(function (e, t) {
     return e + (U[t]?.length || 0);
-  }, 0) >= hp;
+  }, 0) >= MAX_TRUNCATE_LENGTH;
   let {
     restrictOrgId,
     restrictTeamId
@@ -110,7 +110,7 @@ export function $$R0({
       placeholder: z,
       query: s,
       setQuery: l
-    }), GX(s) ? jsx("div", {
+    }), isLongText(s) ? jsx("div", {
       className: p$,
       children: renderI18nText("search.error.max_query_length_exceeded")
     }) : jsxs(Fragment, {
@@ -146,7 +146,7 @@ function N({
   filterLimitReached: p
 }) {
   let h = getUserId();
-  return wG(o) && wG(e) ? jsx("div", {
+  return isSpaceEmpty(o) && isSpaceEmpty(e) ? jsx("div", {
     className: p$,
     children: s ? renderI18nText("search.empty_state.no_results_matching", {
       searchQuery: s
@@ -188,7 +188,7 @@ function N({
       appliedSpaces: e[FolderType.ORG],
       baseId: `${t}-org`,
       basePath: [...i, 2],
-      computeOverrideIcon: e => jsx(_$$n, {
+      computeOverrideIcon: e => jsx(renderAvatar, {
         userId: h || "",
         orgId: e.id
       }),
@@ -202,7 +202,7 @@ function N({
       query: s,
       results: o.orgs,
       spaceFacetType: FolderType.ORG
-    }), !!e && !wG(e) && jsx(kI, {
+    }), !!e && !isSpaceEmpty(e) && jsx(kI, {
       baseId: t,
       basePath: [...i, 3],
       onClick: a
@@ -227,7 +227,7 @@ function P({
   let y = _$$k();
   let b = useCallback((t, i, n, r) => {
     l(t, i, n ? r ? e.filter(e => !deepEqual(e, n)) : e.concat(n) : []);
-    !r && n ? A(dd(i, n), c) : y(n ? dd(i, n) : {}, PillType.SELECTION, InputType.DROPDOWN);
+    !r && n ? A(getSpaceQueryParams(i, n), c) : y(n ? getSpaceQueryParams(i, n) : {}, PillType.SELECTION, InputType.DROPDOWN);
   }, [e, l, A, c, y]);
   let v = useMemo(() => {
     if (h) return e;

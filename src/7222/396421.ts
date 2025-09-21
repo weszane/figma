@@ -27,7 +27,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
-import { Lk, PublicModelType } from "../figma_app/162807";
+import { TeamSortField, PublicModelType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
 import { uW } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
@@ -307,7 +307,7 @@ export function $$el8(e) {
       a((await searchAPIHandler.getFullResults({
         query: l,
         desc: !0,
-        sort: Lk.RELEVANCY,
+        sort: TeamSortField.RELEVANCY,
         isGlobal: !0,
         searchModelType: PublicModelType.FILES
       }).then(({

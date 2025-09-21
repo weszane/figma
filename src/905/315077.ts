@@ -8,12 +8,12 @@ import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { renderI18nText } from "../905/303541";
 import { G } from "../905/720066";
-import { Q } from "../905/61477";
+import { searchQueryAtom } from "../905/61477";
 import { EN, AR, K4 } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
 import { getSelectedView } from "../figma_app/386952";
 import { FileSearchResult } from "../figma_app/43951";
-import { vj } from "../905/574958";
+import { SearchAnalytics } from "../905/574958";
 import { cr } from "../905/703676";
 import { a as _$$a } from "../905/682573";
 export function $$v0({
@@ -28,7 +28,7 @@ export function $$v0({
   let b = useSelector(e => e.currentTeamId);
   let v = useSelector(e => e.user);
   let E = useSelector(e => e.search.sessionId);
-  let x = useAtomWithSubscription(Q);
+  let x = useAtomWithSubscription(searchQueryAtom);
   let S = $E();
   let w = getSelectedView();
   let C = EN(e);
@@ -52,7 +52,7 @@ export function $$v0({
     }, e);
   }, [k, d]);
   let L = useCallback(t => {
-    C ? N(t) : vj.Recents.trackRecentsClick(E, l, e.key, vj.RecentType.FILE);
+    C ? N(t) : SearchAnalytics.Recents.trackRecentsClick(E, l, e.key, SearchAnalytics.RecentType.FILE);
   }, [e, C, l, E, N]);
   let F = S(T);
   return jsx(cr, {

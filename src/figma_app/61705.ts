@@ -6,7 +6,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { ai } from "../figma_app/915202";
+import { TabOpenBehavior } from "../figma_app/915202";
 import { P4 } from "../figma_app/911880";
 import { zE } from "../905/738636";
 export function $$h1({
@@ -37,7 +37,7 @@ export function $$h1({
       triggerElement: a,
       team: b || T,
       from: e,
-      openNewFileIn: h || isCommandOrShift(l) ? ai.NEW_TAB : ai.SAME_TAB,
+      openNewFileIn: h || isCommandOrShift(l) ? TabOpenBehavior.NEW_TAB : TabOpenBehavior.SAME_TAB,
       folderId: r,
       isDraftsFolder: t,
       callback: e => {

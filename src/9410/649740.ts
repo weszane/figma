@@ -4,7 +4,7 @@ import { RecordingPureComponent } from "../figma_app/878298";
 import { ms } from "../figma_app/236327";
 import { P } from "../905/347284";
 import { Dm } from "../figma_app/8833";
-import { vL } from "../905/826900";
+import { KeyboardReceiver } from "../905/826900";
 import { DU } from "../figma_app/575164";
 export class $$u0 extends RecordingPureComponent {
   constructor(e) {
@@ -31,7 +31,7 @@ export class $$u0 extends RecordingPureComponent {
       top: window.innerHeight / 8,
       width: 400
     };
-    return jsx(vL, {
+    return jsx(KeyboardReceiver, {
       name: this.props.recordingKey || "",
       handleKeyDown: this.onKeyDownFromFullscreen,
       focusOnMount: !0,

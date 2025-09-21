@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { M3 } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
-import { ky, Dy } from "../figma_app/925970";
+import { searchEndSession, searchStartSession } from "../figma_app/925970";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -55,7 +55,7 @@ export function $$y1(e) {
   let F = useCallback(e => !!(e.altKey && fullscreenValue.isReady()) && f7(e), []);
   _$$h(() => {
     function e() {
-      R(ky());
+      R(searchEndSession());
     }
     M();
     e();
@@ -70,15 +70,15 @@ export function $$y1(e) {
       fileOrgId: L?.parentOrgId ?? void 0
     });
     f(e) ? e.onClearSearch() : onChange("");
-    R(ky());
+    R(searchEndSession());
   }, [entryPointForTracking, e, R, query, D, L?.key, L?.teamId, L?.parentOrgId, onChange]);
   let U = useCallback(e => {
-    entryPointForTracking && ("" === e && P ? R(ky()) : "" === e || P || R(Dy({
+    entryPointForTracking && ("" === e && P ? R(searchEndSession()) : "" === e || P || R(searchStartSession({
       entryPoint: entryPointForTracking
     })), onChange(e));
   }, [R, entryPointForTracking, P, onChange]);
   let B = useCallback(() => {
-    "" === query || P || R(Dy({
+    "" === query || P || R(searchStartSession({
       entryPoint: entryPointForTracking
     }));
     "editor:assets_panel" === entryPointForTracking && analyticsEventManager.trackDefinedEvent("assets_panel.search_focused", {

@@ -12,19 +12,19 @@ import { A as _$$A } from "../905/560427";
 import { registerModal } from "../905/102752";
 import { showModalHandler } from "../905/156213";
 import { getNewFileConfig } from "../905/766303";
-import { M as _$$M } from "../905/58217";
+import { isAutosaveLockAvailable } from "../905/58217";
 import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { N as _$$N, L as _$$L } from "../905/293182";
 import { isIntegrationContext } from "../figma_app/469876";
 import { _I, $N, J5 } from "../905/327855";
-import { Yu } from "../figma_app/139113";
+import { setAutosaveStatus } from "../figma_app/139113";
 import { FPlanLimitationType, FFileType } from "../figma_app/191312";
 import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
-import { B } from "../905/18613";
+import { createFileConfig } from "../905/18613";
 import { PageFolderFile, FeatureFlag } from "../905/652992";
-import { f6, ai } from "../figma_app/915202";
+import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { fileActionEnum } from "../figma_app/630077";
 import { t as _$$t } from "../figma_app/32680";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
@@ -94,7 +94,7 @@ let $$j0 = createOptimistThunk((e, {
   }
   let v = d ? {
     folderId: d
-  } : i !== f6.FILE_BROWSER_SIDEBAR_DRAFTS && s ? null : "drafts";
+  } : i !== FileBrowserLocation.FILE_BROWSER_SIDEBAR_DRAFTS && s ? null : "drafts";
   let I = getNewFileConfig({
     state: t,
     openNewFileIn: o,
@@ -127,14 +127,14 @@ let $$B1 = createOptimistThunk((e, {
   let r = e.getState().user;
   if (!r) return;
   let a = () => {
-    let r = B(t, i);
+    let r = createFileConfig(t, i);
     e.dispatch($$U2(r));
     trackEventAnalytics("New Autosave File Open", {
       openNewFileIn: i,
       source: n
     });
   };
-  desktopAPIInstance ? a() : _$$M(r.id, t).then(i => {
+  desktopAPIInstance ? a() : isAutosaveLockAvailable(r.id, t).then(i => {
     if (i) {
       e.dispatch(showModalHandler({
         type: g,
@@ -155,7 +155,7 @@ let V = createOptimistThunk((e, t) => {
       J5(e, t);
       return;
     }
-  } else if (t.openNewFileIn === ai.NEW_TAB) {
+  } else if (t.openNewFileIn === TabOpenBehavior.NEW_TAB) {
     let e = serializeQuery(i);
     customHistory.redirect(`/file/new${e ? "?" + e : ""}`, "_blank");
   } else if (compareValues(e.getState().currentUserOrgId, t.org_id)) {
@@ -163,8 +163,8 @@ let V = createOptimistThunk((e, t) => {
     customHistory.redirect(`/file/new${e ? "?" + e : ""}`);
   } else $N(e, t, !1);
   _$$L();
-  let r = t.openNewFileIn === ai.SAME_TAB && (!desktopAPIInstance || t.allowOnDesktop) ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF;
-  Yu(!0);
+  let r = t.openNewFileIn === TabOpenBehavior.SAME_TAB && (!desktopAPIInstance || t.allowOnDesktop) ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF;
+  setAutosaveStatus(!0);
   e.dispatch($$G3({
     openNewFileIn: t.openNewFileIn,
     progressBarMode: r
