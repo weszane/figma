@@ -92,7 +92,7 @@ import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nState } from "../figma_app/363242";
 import { isNullish } from "../figma_app/95419";
 import { Q as _$$Q3 } from "../figma_app/67145";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { ak } from "../figma_app/8833";
 import { e as _$$e2 } from "../905/579635";
@@ -2407,7 +2407,7 @@ function re(e) {
       options: v,
       formatOption: e => e && e.props.value ? L.format(e.props.value) : "",
       getIcon: () => jsx("div", {
-        className: _$$s.w24.$
+        className: cssBuilderInstance.w24.$
       })
     })]
   });
@@ -2694,7 +2694,7 @@ function rg({
 function rf() {
   let e = !rE();
   return jsxs("div", {
-    className: f()("constraints_preview_icon--container--n518S", _$$s.relative.$, "constraints_preview_icon--isV2Constraints---SJMy"),
+    className: f()("constraints_preview_icon--container--n518S", cssBuilderInstance.relative.$, "constraints_preview_icon--isV2Constraints---SJMy"),
     "data-testid": e ? "disabled-constraints-preview" : "enabled-constraints-preview",
     children: [jsx(ry, {
       axis: "HORIZONTAL",

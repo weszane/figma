@@ -15,7 +15,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { linkWithTracking } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
@@ -293,9 +293,9 @@ let $$ei0 = memo(function () {
     ref: l,
     "data-testid": "figjam-tone-dial",
     children: [jsxs("div", {
-      className: _$$s.flex.gap8.itemsCenter.p8.pl16.bb1.bSolid.colorBorder.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.p8.pl16.bb1.bSolid.colorBorder.$,
       children: [jsx("div", {
-        className: _$$s.textBodyMediumStrong.flex1.$,
+        className: cssBuilderInstance.textBodyMediumStrong.flex1.$,
         children: renderI18nText("slides.properties_panel.rewrite_text.adjust_tone")
       }), jsx(_$$v, {
         location: "SLIDES_REWRITE_MODAL"
@@ -309,7 +309,7 @@ let $$ei0 = memo(function () {
     }), jsx(_$$P, {
       className: Ff,
       children: jsx("div", {
-        className: _$$s.p16.$,
+        className: cssBuilderInstance.p16.$,
         children: jsx(es, {
           recordingKey: "figjamToneDial"
         })
@@ -444,7 +444,7 @@ let es = memo(function ({
     setPositionAndRun: x
   }), [x, tonePosition, setTonePosition, N]);
   return jsx("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: jsxs(_$$u.Provider, {
       value: P,
       children: [jsx(J, {}), jsx(eo, {
@@ -489,7 +489,7 @@ function eo({
   let g = getFeatureFlags().qa_text_features && m;
   return jsxs("div", {
     children: [jsxs("div", {
-      className: _$$s.flex.justifyBetween.itemsCenter.mb16.textBodyMedium.colorTextSecondary.$,
+      className: cssBuilderInstance.flex.justifyBetween.itemsCenter.mb16.textBodyMedium.colorTextSecondary.$,
       children: [g ? renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset_or_rewrite") : renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset"), g && jsx(IconButton, {
         "aria-label": getI18nString("slides.properties_panel.rewrite_text.rewrite_redirect"),
         onClick: () => {
@@ -518,7 +518,7 @@ function eo({
       })]
     }), jsxs("div", {
       ref: d,
-      className: _$$s.grid.gap8.gridTemplateColumns2.gridTemplateRows2.$,
+      className: cssBuilderInstance.grid.gap8.gridTemplateColumns2.gridTemplateRows2.$,
       "aria-label": getI18nString("slides.properties_panel.rewrite_text.tone_presets"),
       role: "group",
       children: [h("executive"), h("technical"), h("basic"), h("educational")]
@@ -527,11 +527,11 @@ function eo({
 }
 function el() {
   return jsxs("div", {
-    className: _$$s.textBodySmall.colorTextSecondary.fontNormal.overflowBreakWord.$,
+    className: cssBuilderInstance.textBodySmall.colorTextSecondary.fontNormal.overflowBreakWord.$,
     children: [renderI18nText("whiteboard.ai_modal.disclaimer"), jsx(linkWithTracking, {
       trusted: !0,
       href: nG,
-      className: m()(_$$s.inlineBlock.cursorDefault.$, "slides_rewrite_modal--disclaimerLink--a2jK5"),
+      className: m()(cssBuilderInstance.inlineBlock.cursorDefault.$, "slides_rewrite_modal--disclaimerLink--a2jK5"),
       style: styleBuilderInstance.add({
         verticalAlign: "bottom"
       }).$,

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { X } from "../905/859195";
@@ -39,7 +39,7 @@ function E({
   return jsx(ConfirmationModal2, {
     size: 360,
     confirmationTitle: jsx("p", {
-      className: _$$s.fontSemiBold.font11.$,
+      className: cssBuilderInstance.fontSemiBold.font11.$,
       children: e
     }),
     confirmText: i,
@@ -48,7 +48,7 @@ function E({
     onConfirm: l,
     trackedConfirmationProperties: r,
     children: jsx("p", {
-      className: _$$s.colorText.pr8.$,
+      className: cssBuilderInstance.colorText.pr8.$,
       style: {
         marginBottom: "-8px"
       },

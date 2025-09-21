@@ -5,7 +5,7 @@ import { U } from "../905/275247";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { CloseButton } from "../905/17223";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -97,9 +97,9 @@ function x(e) {
     strokeColor: "default",
     height: "hug-contents",
     children: [jsxs("div", {
-      className: _$$s2.flex.justifyBetween.wFull.$,
+      className: cssBuilderInstance.flex.justifyBetween.wFull.$,
       children: [jsx("div", {
-        className: _$$s2.flex.itemsCenter.justifyCenter.w32.h32.bRadius5.colorBgWarning.$,
+        className: cssBuilderInstance.flex.itemsCenter.justifyCenter.w32.h32.bRadius5.colorBgWarning.$,
         children: jsx(_$$s, {
           className: K
         })
@@ -107,27 +107,27 @@ function x(e) {
         onClick: e.onClose
       })]
     }), jsx("div", {
-      className: _$$s2.font14.fontSemiBold.lh24.$,
+      className: cssBuilderInstance.font14.fontSemiBold.lh24.$,
       children: k
     }), jsx("div", {
-      className: _$$s2.font13.lh24.$,
+      className: cssBuilderInstance.font13.lh24.$,
       children: M
     }), m && jsx("div", {
-      className: _$$s2.wFull.bb1.bSolid.$,
+      className: cssBuilderInstance.wFull.bb1.bSolid.$,
       style: styleBuilderInstance.add({
         borderColor: "var(--color-bg-secondary)"
       }).$,
       role: "list",
       children: x.map(e => jsxs("div", {
-        className: _$$s2.flex.itemsCenter.gap10.wFull.bt1.bSolid.pb12.pt12.fontMedium.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap10.wFull.bt1.bSolid.pb12.pt12.fontMedium.$,
         style: styleBuilderInstance.add({
           borderColor: "var(--color-bg-secondary)"
         }).$,
         role: "listitem",
         children: [jsx(U, {
-          className: _$$s2.minW24.$
+          className: cssBuilderInstance.minW24.$
         }), jsx("div", {
-          className: _$$s2.font11.lh16.$,
+          className: cssBuilderInstance.font11.lh16.$,
           children: j(e)
         })]
       }, e.limitExceededType))

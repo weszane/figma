@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { noop } from "../905/419236";
 import { oW } from "../905/675859";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getValueOrFallback } from "../905/872825";
 import { Q as _$$Q } from "../905/978641";
@@ -132,7 +132,7 @@ export let $$T0 = forwardRef(function ({
         "aria-describedby": Q,
         "aria-errormessage": B ? J : void 0,
         "aria-invalid": !!B,
-        className: _$$s.hidden.$,
+        className: cssBuilderInstance.hidden.$,
         "data-testid": "resource-publishing-thumbnail-uploader-input",
         disabled: H || !setThumbnailMediumFromInput,
         id: X,

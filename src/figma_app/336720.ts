@@ -11,7 +11,7 @@ import { J5, FM } from "../figma_app/835688";
 import { useDispatch } from "react-redux";
 import { r as _$$r } from "../905/857502";
 import { getInitialOptions } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -59,7 +59,7 @@ let $$A0 = {
       return jsx(ButtonPrimitive, {
         onClick: r,
         children: jsxs("div", {
-          className: _$$s.flex.flexRow.itemsCenter.justifyCenter.$,
+          className: cssBuilderInstance.flex.flexRow.itemsCenter.justifyCenter.$,
           children: [jsx(_$$r, {}), renderI18nText("fullscreen_actions.copy-presentation-link")]
         })
       });

@@ -6,7 +6,7 @@ import { l as _$$l } from "../905/509505";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
@@ -40,10 +40,10 @@ function R() {
   }), i) ? jsxs("div", {
     className: "ui_kit_select--container--lFmF-",
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.alignCenter.$,
+      className: cssBuilderInstance.colorTextSecondary.alignCenter.$,
       children: renderI18nText("design_systems.assets_panel.ui_kit_empty_state")
     }), jsx("div", {
-      className: _$$s.flex.flexColumn.gap8.mt16.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.mt16.$,
       children: t.map((e, t) => jsx(L, {
         library: e,
         index: t
@@ -82,9 +82,9 @@ function L({
       },
       className: "ui_kit_select--thumbnail--BSVO8"
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.itemsStart.overflowHidden.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsStart.overflowHidden.$,
       children: [jsx("div", {
-        className: _$$s.flex.itemsCenter.gap2.maxWFull.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap2.maxWFull.$,
         children: jsx("div", {
           className: "ui_kit_select--uiKitName--ZMf0J ellipsis--ellipsis--Tjyfa",
           children: jsx(Link, {
@@ -162,7 +162,7 @@ export function $$M2() {
   let e = useFigmaLibrariesEnabled();
   let t = useParentOrgOfOpenFile();
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: [jsx($$F1, {}), e && !t && jsx(R, {})]
   });
 }
@@ -204,7 +204,7 @@ function j({
     disabled: i
   });
   return jsxs("div", {
-    className: d()("empty_states--ui3EmptyState--8bWkh", _$$s.$$if(r, _$$s.bgTransparent, _$$s.colorBgSecondary).$),
+    className: d()("empty_states--ui3EmptyState--8bWkh", cssBuilderInstance.$$if(r, cssBuilderInstance.bgTransparent, cssBuilderInstance.colorBgSecondary).$),
     style: {
       width: t
     },

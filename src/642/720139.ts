@@ -14,7 +14,7 @@ import { h as _$$h } from "../905/207101";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { c2, Nt, yn, lv } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { vq } from "../905/8732";
@@ -239,7 +239,7 @@ function e_({
         children: fileName
       })
     }), isPresetLibrary && jsx("div", {
-      className: _$$s.flex.alignCenter.justifyCenter.ml2.$,
+      className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml2.$,
       children: jsx(_$$E, {
         libraryKey: e,
         showTooltip: !0
@@ -289,7 +289,7 @@ function ez({
     };
   }, [i]);
   return "loading" === i.status ? jsx(Wi, {
-    className: _$$s.h16.w100.$,
+    className: cssBuilderInstance.h16.w100.$,
     animationType: JR.LIGHT_SHIMMER
   }) : avatar && authorName ? jsxs("div", {
     className: "asset_updated_details--updatedAtAvatar--uf4Gy",
@@ -849,7 +849,7 @@ export function $$tu1({
     ew(e.event, () => e.accept());
   }, [ew]);
   var eN = jsxs("div", {
-    className: _$$s.minW0.flex1.$,
+    className: cssBuilderInstance.minW0.flex1.$,
     children: [jsx("h1", {
       children: getI18nString("design_systems.assets_panel.details")
     }), jsxs(AutoLayout, {
@@ -859,7 +859,7 @@ export function $$tu1({
         assetLibraryKey: e.library_key,
         assetNodeId: e.node_id
       }), ec && jsx("div", {
-        className: _$$s.pr4.$,
+        className: cssBuilderInstance.pr4.$,
         children: jsx(KP, {
           libraryKey: e.library_key,
           variant: "secondary",

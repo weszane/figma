@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { j as _$$j } from "../figma_app/602140";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { logWarning } from "../905/714362";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
@@ -153,7 +153,7 @@ export function $$y0() {
   switch (state) {
     case qy.INITIAL:
       return jsxs("div", {
-        className: _$$s.p8.borderBox.$,
+        className: cssBuilderInstance.p8.borderBox.$,
         "data-testid": "readyForPromptView",
         children: [jsx(XG, {
           action: JT.FIRST_DRAFT_FINE_TUNE,

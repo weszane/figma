@@ -14,7 +14,7 @@ import { registerModal } from "../905/102752";
 import { u as _$$u } from "../905/56919";
 import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { vx } from "../905/91038";
 import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../figma_app/633080";
 import { e0 } from "../905/696396";
@@ -106,7 +106,7 @@ function D({
           tabManager: ee,
           tabProps: Q
         }), getFeatureFlags().dse_fpl_wave_1 ? jsxs("div", {
-          className: _$$s.minH0.$,
+          className: cssBuilderInstance.minH0.$,
           children: [jsx(_$$t.TabPanel, {
             ...J.overview,
             height: "fill",

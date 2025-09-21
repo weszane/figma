@@ -71,7 +71,7 @@ import { teamLibraryCache } from "../figma_app/80990";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { loadStyleCanvases } from "../figma_app/646357";
 import { EU, KV, _U } from "../905/255097";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { QH, lx } from "../figma_app/333571";
 import { x7 } from "../figma_app/492929";
 import { X7 } from "../905/713167";
@@ -394,7 +394,7 @@ function ek({
 }
 function eV() {
   return jsx("div", {
-    className: _()(x7, _$$s.m4.$),
+    className: _()(x7, cssBuilderInstance.m4.$),
     children: jsx("div", {
       className: _()(QH, lx)
     })

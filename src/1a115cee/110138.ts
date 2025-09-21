@@ -18,7 +18,7 @@ import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { A as _$$A } from "../905/222027";
 import { y as _$$y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
 import { hideModal, popModalStack } from "../905/156213";
@@ -107,7 +107,7 @@ function Y(e) {
   return jsxs("div", {
     className: ho,
     children: [jsx("div", {
-      className: _$$s.hFull.$,
+      className: cssBuilderInstance.hFull.$,
       children: thumbnail
     }), jsxs("div", {
       className: _$$Ay,
@@ -182,7 +182,7 @@ function V({
       }), jsxs("div", {
         className: Vz,
         children: [jsx("div", {
-          className: _$$s.hFull.$,
+          className: cssBuilderInstance.hFull.$,
           children: b
         }), jsx("div", {
           className: MV,

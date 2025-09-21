@@ -98,7 +98,7 @@ import { b as _$$b3 } from '../4452/320061';
 import { B as _$$B2 } from '../4452/541264';
 import { v as _$$v } from '../4452/562448';
 import { VU, zx } from '../4452/650793';
-import { s as _$$s3 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { EKN, fQh, swf } from '../figma_app/6204';
 import { II } from '../figma_app/11182';
 import { getPermissionLevelNameCapitalized } from '../figma_app/12796';
@@ -552,7 +552,7 @@ function tb({
   if (i && r === null) {
     return jsx(AutoLayout, {
       children: jsx(Wi, {
-        className: _$$s3.h12.w150.$,
+        className: cssBuilderInstance.h12.w150.$,
         animationType: JR.SHIMMER,
         dataTestId: 'loading-unassigned-select-all'
       })
@@ -562,7 +562,7 @@ function tb({
   if (i && r !== null && (g = t || a), g && s) {
     return jsx(AutoLayout, {
       children: jsx(Wi, {
-        className: _$$s3.h12.w150.$,
+        className: cssBuilderInstance.h12.w150.$,
         animationType: JR.SHIMMER,
         dataTestId: 'loading-unassigned-select-all'
       })
@@ -736,7 +736,7 @@ function tv({
   let Q = Y && (c?.length || 0) > 0;
   return jsxs(Fragment, {
     children: [jsxs('div', {
-      className: _$$s3.p16.pb8.flex.flexColumn.$,
+      className: cssBuilderInstance.p16.pb8.flex.flexColumn.$,
       children: [jsx(TextWithTruncation, {
         children: t?.id ? renderI18nText('add_unassigned_members_modal.billing_group_description', {
           licenseGroupName: t?.name
@@ -777,7 +777,7 @@ function tv({
     }), jsx(Cj, {
       columns: K,
       emptyContent: jsx('div', {
-        'className': _$$s3.mt24.$,
+        'className': cssBuilderInstance.mt24.$,
         'data-testid': 'add-unassigned-modal-empty-search-content',
         'children': jsx(TextWithTruncation, {
           color: 'secondary',
@@ -929,7 +929,7 @@ let tf = registerModal(({
         o(popModalStack());
       },
       containerClassName: c === eN.ADD_MEMBERS ? 'add_unassigned_members_modal--unassignedMembersTab--gWAtH' : 'add_unassigned_members_modal--inviteTab--dPRBa',
-      innerContainerClassName: _$$s3.hFull.flex.flexColumn.$,
+      innerContainerClassName: cssBuilderInstance.hFull.flex.flexColumn.$,
       fixedTop: !0,
       children: c === eN.ADD_MEMBERS ? jsx(tv, {
         org: d,
@@ -955,7 +955,7 @@ let tf = registerModal(({
 function tj(e) {
   let t = _$$R();
   return jsx('div', {
-    className: _$$s3.px32.$$if(t, _$$s3.py16, _$$s3.pb24).flex.$,
+    className: cssBuilderInstance.px32.$$if(t, cssBuilderInstance.py16, cssBuilderInstance.pb24).flex.$,
     style: styleBuilderInstance.add({
       minWidth: e.minWidth ?? 0
     }).$,
@@ -1085,7 +1085,7 @@ function tT(e) {
         selectedTab: FRequestsStr.REQUESTS
       }));
     },
-    className: _$$s3.cursorPointer.mt24.$,
+    className: cssBuilderInstance.cursorPointer.mt24.$,
     children: jsx(AutoLayout, {
       height: 'hug-contents',
       padding: {
@@ -1126,7 +1126,7 @@ function tT(e) {
               })
             })]
           }), jsx('div', {
-            className: _$$s3.ml36.$,
+            className: cssBuilderInstance.ml36.$,
             children: jsx(TextWithTruncation, {
               fontSize: 11,
               fontWeight: 'regular',
@@ -1134,7 +1134,7 @@ function tT(e) {
             })
           })]
         }), jsx(Spacer, {}), jsx('div', {
-          className: _$$s3.mr16.$,
+          className: cssBuilderInstance.mr16.$,
           children: jsx(In, {
             icon: 'chevron-right-32'
           })
@@ -2599,7 +2599,7 @@ function nn(e) {
   };
   let ex = () => jsx(Fragment, {
     children: e.selectedView.view === 'licenseGroup' && jsx('div', {
-      className: _$$s3.pb12.$$if(ef, _$$s3.pl32).$,
+      className: cssBuilderInstance.pb12.$$if(ef, cssBuilderInstance.pl32).$,
       children: jsx(TextWithTruncation, {
         fontWeight: 'medium',
         fontSize: 13,
@@ -2641,7 +2641,7 @@ function nn(e) {
             'placeholder': getI18nString('team_view.search_bar.search_members_with_ellipsis')
           })
         }), jsxs('div', {
-          className: _$$s3.flex.flexRow.gap8.mlAuto.$,
+          className: cssBuilderInstance.flex.flexRow.gap8.mlAuto.$,
           children: [jsx(ar, {
             afterApply: ev,
             currentFilters: (t = e.filters, {
@@ -2685,7 +2685,7 @@ function nn(e) {
           'clearSearch': e.onClearSearch,
           'placeholder': getI18nString('team_view.search_bar.search_members_with_ellipsis')
         }), jsx('div', {
-          className: _$$s3.pl8.$
+          className: cssBuilderInstance.pl8.$
         }), w6(e.selectedView.view) && jsx(_$$y, {
           selectedWorkspaceId: e.filters.workspaceFilter,
           onFilterUpdate: t => {
@@ -2817,13 +2817,13 @@ function nn(e) {
         planParentId: e.org.id,
         planType: FOrganizationLevelType.ORG
       }), jsx('div', {
-        className: _$$s3.mr8.$
+        className: cssBuilderInstance.mr8.$
       })]
     }), eA && jsxs(Fragment, {
       children: [jsx(dK, {
         licenseGroupId: eA
       }), jsx('div', {
-        className: _$$s3.mr8.$
+        className: cssBuilderInstance.mr8.$
       })]
     }), e.selectedView.view !== 'orgAdminSettings' || getFeatureFlags().user_groups ? jsx(_$$V, {
       'icon': 'plus-32',
@@ -2937,7 +2937,7 @@ function nn(e) {
             return jsx('div', {
               style: styleBuilderInstance.w150.$,
               children: jsx(Wi, {
-                className: _$$s3.h12.w150.$,
+                className: cssBuilderInstance.h12.w150.$,
                 animationType: JR.SHIMMER_ON_MENU
               })
             });
@@ -2947,7 +2947,7 @@ function nn(e) {
             return jsx('div', {
               style: styleBuilderInstance.w150.$,
               children: jsx(Wi, {
-                className: _$$s3.h12.w150.$,
+                className: cssBuilderInstance.h12.w150.$,
                 animationType: JR.SHIMMER_ON_MENU
               })
             });

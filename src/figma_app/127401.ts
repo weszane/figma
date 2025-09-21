@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { setupThemeContext } from "../905/614223";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { j } from "../905/261906";
 import { FProductAccessType } from "../figma_app/191312";
@@ -24,7 +24,7 @@ function u({
       mode: "dark",
       children: u
     }) : u, jsx("div", {
-      className: _$$s.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       children: getDisplayProductName(e)
     })]
   });

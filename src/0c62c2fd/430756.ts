@@ -12,7 +12,7 @@ import { useSubscription } from "../figma_app/288654";
 import { BigTextInputForwardRef, BUTTON_INTERNAL_CONST_Q33 } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { stopCreateNewFolder } from "../905/34809";
@@ -66,7 +66,7 @@ function X() {
   });
   let i = jsx("a", {
     href: "https://help.figma.com/hc/articles/360038006494-Create-a-new-project",
-    className: _$$s.colorTextOnbrand.underline.$,
+    className: cssBuilderInstance.colorTextOnbrand.underline.$,
     children: renderI18nText("rcs.sharing_clarity.learn_more")
   });
   return jsx(rq, {
@@ -340,7 +340,7 @@ export function $$er0(e) {
             },
             text: jsxs(Fragment, {
               children: [jsx("p", {
-                className: _$$s.textBodyMediumStrong.$,
+                className: cssBuilderInstance.textBodyMediumStrong.$,
                 children: getI18nString("project_creation.figma_has_connected_projects")
               }), jsx("p", {
                 children: renderI18nText("project_creation.learn_more_about_the_benefit", {

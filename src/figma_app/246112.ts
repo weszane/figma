@@ -5,7 +5,7 @@ import { Y1 } from "../vendor/891888";
 import { setupDragHandler } from "../905/97346";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { dP } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Spacer } from "../905/470281";
 import { IV } from "../905/154591";
 import { nK } from "../905/836986";
@@ -88,7 +88,7 @@ let S = memo(function ({
       id: t
     }), jsx("div", {
       title: r,
-      className: _$$s.ellipsis.noWrap.overflowHidden.$,
+      className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
       children: r
     }), jsx(Spacer, {})]
   });

@@ -12,7 +12,7 @@ import { A as _$$A } from "../905/920142";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
 import { hideModal } from "../905/156213";
@@ -36,7 +36,7 @@ function P(e) {
 }
 function D() {
   return jsx("div", {
-    className: _$$s.h1.wFull.colorBgTertiary.$
+    className: cssBuilderInstance.h1.wFull.colorBgTertiary.$
   });
 }
 function k(e) {
@@ -175,8 +175,8 @@ function F() {
       children: K
     })
   });
-  let $ = _$$s.p8.$;
-  let X = _$$s.pr4.$;
+  let $ = cssBuilderInstance.p8.$;
+  let X = cssBuilderInstance.pr4.$;
   return jsx(TrackingProvider, {
     name: e0.BRANCHES_MODAL,
     properties: {

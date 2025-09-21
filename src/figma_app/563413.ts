@@ -16,7 +16,7 @@ import { KeyCodes } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
@@ -195,7 +195,7 @@ let $$k4 = forwardRef((e, t) => {
     className: `${_} ${e.className || ""}`,
     children: [jsx("button", {
       onClick: e.onBack,
-      className: _$$s.colorBgSecondary.$,
+      className: cssBuilderInstance.colorBgSecondary.$,
       children: jsx(In, {
         icon: "chevron-left-32"
       })
@@ -235,7 +235,7 @@ let $$M6 = forwardRef((e, t) => {
       ...e,
       smallFont: !0,
       hasTransparentBackground: !0,
-      className: p()(_$$s.wFull.$, e.className),
+      className: p()(cssBuilderInstance.wFull.$, e.className),
       ref: r
     })
   });
@@ -553,7 +553,7 @@ let $$H10 = forwardRef((e, t) => {
       placeholder: e.placeholder,
       maxInputLength: e.maxInputLength,
       smallFont: !0,
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       ref: r
     })
   });

@@ -10,12 +10,12 @@ import { S } from "../5885/332447";
 import { registerModal } from "../905/102752";
 import { xx } from "../figma_app/995208";
 import { buildUploadUrl } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { X } from "../5885/331878";
 let h = "seen_pro_onboarding_welcome_modal";
 function y() {
   return jsxs("div", {
-    className: _$$s.mt16.$,
+    className: cssBuilderInstance.mt16.$,
     children: [jsx(X, {
       bulletLabel: getI18nString("pro_onboarding.unlimited_files_for_all_your_ideas")
     }), jsx(X, {

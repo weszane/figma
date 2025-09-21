@@ -17,7 +17,7 @@ import { z } from '../905/654860';
 import { SvgComponent } from '../905/714743';
 import { cq } from '../905/794154';
 import { A as _$$A3 } from '../1617/377036';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Dm } from '../figma_app/8833';
 import { C as _$$C2 } from '../figma_app/523506';
 import { generateRecordingKey, useHandleChangeEvent } from '../figma_app/878298';
@@ -118,7 +118,7 @@ let $$P2 = forwardRef(({
     svg: _$$A3,
     className: qc
   }) : jsx('div', {
-    className: _$$s.pl4.pr4.$,
+    className: cssBuilderInstance.pl4.pr4.$,
     children: jsx(_$$o, {
       recordingKey: generateRecordingKey(C, 'back-button')
     })
@@ -126,7 +126,7 @@ let $$P2 = forwardRef(({
   return jsxs('div', {
     className: $P,
     children: [u ? P : jsx('div', {
-      className: _$$s.pl4.pr4.$
+      className: cssBuilderInstance.pl4.pr4.$
     }), d, jsx(R, {
       onSearchChange: onSearchChangeInner,
       placeholder: s,
@@ -135,13 +135,13 @@ let $$P2 = forwardRef(({
       ref: searchInputRef,
       descriptorId: h
     }), r && e ? jsx('div', {
-      className: _$$s.flex.mr6.$,
+      className: cssBuilderInstance.flex.mr6.$,
       children: jsx(w, {
         onClear: r,
         focus
       })
     }) : a ? jsx('div', {
-      className: _$$s.mr6.$,
+      className: cssBuilderInstance.mr6.$,
       children: jsx(_$$b, {
         children: a
       })
@@ -185,7 +185,7 @@ let $$D0 = forwardRef(({
     children: [jsxs('div', {
       className: 'x1iyjqo2 x78zum5 x6s0dn4 x1sxf85j x1v8gsql',
       children: [m ? C : jsx('div', {
-        className: _$$s.pl4.pr4.$
+        className: cssBuilderInstance.pl4.pr4.$
       }), c, jsx(R, {
         onSearchChange: onSearchChangeInner,
         placeholder: l,
@@ -194,13 +194,13 @@ let $$D0 = forwardRef(({
         descriptorId: g,
         ref: searchInputRef
       }), r && e ? jsx('div', {
-        className: _$$s.flex.mr6.$,
+        className: cssBuilderInstance.flex.mr6.$,
         children: jsx(w, {
           onClear: r,
           focus
         })
       }) : s ? jsx('div', {
-        className: _$$s.mr6.$,
+        className: cssBuilderInstance.mr6.$,
         children: jsx(_$$b, {
           children: s
         })

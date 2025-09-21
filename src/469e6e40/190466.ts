@@ -23,7 +23,7 @@ import { reportError } from "../905/11";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/925868";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -177,11 +177,11 @@ function ev(e, t) {
 }
 function eC() {
   return jsxs("div", {
-    className: _$$s2.p24.flex.itemsCenter.gap16.$,
+    className: cssBuilderInstance.p24.flex.itemsCenter.gap16.$,
     children: [jsx(Wi, {
       style: styleBuilderInstance.w48.h48.bRadiusFull.$
     }), jsxs("div", {
-      className: _$$s2.flex.flexColumn.gap4.flexGrow1.$,
+      className: cssBuilderInstance.flex.flexColumn.gap4.flexGrow1.$,
       children: [jsx(Wi, {
         style: styleBuilderInstance.add({
           height: "25px",
@@ -209,7 +209,7 @@ function eS() {
 }
 function eN() {
   return jsx("div", {
-    className: _$$s2.flex.flexColumn.mx24.py24.$,
+    className: cssBuilderInstance.flex.flexColumn.mx24.py24.$,
     "data-testid": "member-flyout-skeleton",
     children: jsx(AutoLayout, {
       direction: "vertical",
@@ -228,7 +228,7 @@ function eO(e) {
   let t = !!(e.avatarEntity.handle ?? e.avatarEntity.name);
   let a = useDispatch();
   return jsx("div", {
-    className: _$$s2.py24.pl24.pr4.overflowHidden.$,
+    className: cssBuilderInstance.py24.pl24.pr4.overflowHidden.$,
     "data-testid": "member-flyout-header",
     children: t && !e.isPending ? jsx(_$$r, {
       dispatch: a,
@@ -297,10 +297,10 @@ function eL(e) {
   return jsxs("div", {
     children: [jsx("div", {
       id: c,
-      className: _$$s2.textBodyMediumStrong.pb8.$,
+      className: cssBuilderInstance.textBodyMediumStrong.pb8.$,
       children: e.label
     }), jsx("div", {
-      className: _$$s2.flex.$,
+      className: cssBuilderInstance.flex.$,
       ...(h ? t ? {
         "data-tooltip-proxy-element-id": d
       } : x : void 0),
@@ -351,7 +351,7 @@ function eL(e) {
         })
       })
     }), e.extraCopy && jsx("div", {
-      className: _$$s2.pt8.textBodyMedium.colorTextSecondary.overflowBreakWord.$,
+      className: cssBuilderInstance.pt8.textBodyMedium.colorTextSecondary.overflowBreakWord.$,
       "data-testid": `member-flyout-${e.id}-extra`,
       children: e.extraCopy
     })]
@@ -504,16 +504,16 @@ function eq(e) {
       spacing: 8,
       direction: "horizontal",
       children: [jsx("div", {
-        className: _$$s2.textBodyMediumStrong.$,
+        className: cssBuilderInstance.textBodyMediumStrong.$,
         children: renderI18nText("members_table.menu_bar_filter.role.seat_rename")
       }), !e.showBillingIntervalDropdown && jsx(e$, {
         ...e
       })]
     }), jsx("div", {
       ...l,
-      className: _$$s2.b1.colorBorder.bRadius2.px4.py4.wFull.borderBox.$,
+      className: cssBuilderInstance.b1.colorBorder.bRadius2.px4.py4.wFull.borderBox.$,
       children: jsxs("div", {
-        className: _$$s2.flex.flexRow.wFull.gap4.itemsCenter.$,
+        className: cssBuilderInstance.flex.flexRow.wFull.gap4.itemsCenter.$,
         children: [jsx(BC, {
           type: t.currentSeatType,
           size: "24"
@@ -987,7 +987,7 @@ function eQ(e) {
   }, {
     key: "remove",
     content: l && jsx("div", {
-      className: _$$s2.flexGrow1.flexBasis0.minW200.$,
+      className: cssBuilderInstance.flexGrow1.flexBasis0.minW200.$,
       children: jsx(eX, {
         ...e
       })
@@ -996,7 +996,7 @@ function eQ(e) {
     content: e
   }) => e);
   return 0 === o.length ? null : jsx("div", {
-    className: _$$s2.flex.flexWrap.mx24.py24.gap8.bt1.colorBorder.bSolid.$,
+    className: cssBuilderInstance.flex.flexWrap.mx24.py24.gap8.bt1.colorBorder.bSolid.$,
     children: o.map(({
       key: e,
       content: t
@@ -1025,7 +1025,7 @@ function eZ(e) {
   let u = e.planType === FOrganizationLevelType.ORG && a3(e.org, e.licenseGroupsById) && PR(t);
   let m = e.planType === FOrganizationLevelType.ORG && e.workspacesCanMoveTo.length > 0 && w6(t);
   return jsxs("div", {
-    className: _$$s2.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: [jsxs(AutoLayout, {
       direction: "vertical",
       horizontalAlignItems: "stretch",
@@ -1068,19 +1068,19 @@ function e0(e) {
       console.error("Unable to load recent activity", e);
     });
   }, [t, e.orgUser.id]), r) ? jsx(eN, {}) : o && 0 !== o.length ? jsxs("div", {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     "data-testid": "activity-log-table",
     children: [jsxs("div", {
-      className: _$$s2.flex.justifyBetween.fontMedium.h48.py16.px24.$$if(c, _$$s2.bb1.bSolid.colorBorder, _$$s2.b0).$,
+      className: cssBuilderInstance.flex.justifyBetween.fontMedium.h48.py16.px24.$$if(c, cssBuilderInstance.bb1.bSolid.colorBorder, cssBuilderInstance.b0).$,
       "data-testid": "activity-log-table-header",
       children: [jsx("div", {
-        className: `${eA} ${_$$s2.colorTextSecondary.flex.justifyStart.itemsCenter.flexRow.borderBox.$}`,
+        className: `${eA} ${cssBuilderInstance.colorTextSecondary.flex.justifyStart.itemsCenter.flexRow.borderBox.$}`,
         children: renderI18nText("column_header.date")
       }), jsx("div", {
-        className: `${eT} ${_$$s2.colorTextSecondary.borderBox.flex.itemsCenter.$}`,
+        className: `${eT} ${cssBuilderInstance.colorTextSecondary.borderBox.flex.itemsCenter.$}`,
         children: renderI18nText("column_header.event")
       }), jsx("div", {
-        className: `${eA} ${_$$s2.colorTextSecondary.borderBox.flex.itemsCenter.justifyEnd.$}`,
+        className: `${eA} ${cssBuilderInstance.colorTextSecondary.borderBox.flex.itemsCenter.justifyEnd.$}`,
         children: renderI18nText("column_header.product")
       })]
     }), jsxs(_$$P, {
@@ -1092,10 +1092,10 @@ function e0(e) {
       }), o.map(t => function (e, t) {
         let a = $X(e, t.org.name, t.orgUser.user.email || "", t.displayPlanUserMembershipRecord);
         return null === a ? jsx(Fragment, {}) : jsxs("div", {
-          className: `member_flyout--tableRow--T8j4q ${_$$s2.flex.itemsCenter.justifyBetween.minH48.my4.mx24.bt1.bSolid.$}`,
+          className: `member_flyout--tableRow--T8j4q ${cssBuilderInstance.flex.itemsCenter.justifyBetween.minH48.my4.mx24.bt1.bSolid.$}`,
           "data-testid": "activity-log-table-row",
           children: [jsxs("div", {
-            className: `${eA} ${_$$s2.flex.flexColumn.itemsStart.borderBox.$}`,
+            className: `${eA} ${cssBuilderInstance.flex.flexColumn.itemsStart.borderBox.$}`,
             children: [jsx(TextWithTruncation, {
               color: "default",
               children: renderI18nText("recent_activity_modal.activity_log_created_at", {
@@ -1108,16 +1108,16 @@ function e0(e) {
               })
             })]
           }), jsx("div", {
-            className: `${eT} ${_$$s2.borderBox.flex.itemsCenter.$}`,
+            className: `${eT} ${cssBuilderInstance.borderBox.flex.itemsCenter.$}`,
             children: a
           }), jsx("div", {
-            className: `${eA} ${_$$s2.borderBox.flex.itemsCenter.justifyEnd.$}`,
+            className: `${eA} ${cssBuilderInstance.borderBox.flex.itemsCenter.justifyEnd.$}`,
             children: Bn(e)
           })]
         }, e.id);
       }(t, e))]
     }), "orgAdminSettings" === a && jsx("div", {
-      className: _$$s2.flex.justifyEnd.p8.bt1.bSolid.colorBorder.$,
+      className: cssBuilderInstance.flex.justifyEnd.p8.bt1.bSolid.colorBorder.$,
       "data-testid": "activity-log-table-footer",
       children: jsx(Button, {
         variant: "secondary",
@@ -1134,7 +1134,7 @@ function e0(e) {
       })
     })]
   }) : jsx("div", {
-    className: _$$s2.flex.flexColumn.hFull.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.justifyCenter.itemsCenter.$,
     children: jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("recent_activity_modal.no_activity_found")
@@ -1153,9 +1153,9 @@ function e1(e) {
     defaultActive: "manage"
   });
   return jsxs("div", {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx("div", {
-      className: _$$s2.pt6.pb6.pl16.pr16.h32.flexGrow0.bb1.bSolid.colorBorder.flex.flexRow.itemsCenter.$,
+      className: cssBuilderInstance.pt6.pb6.pl16.pr16.h32.flexGrow0.bb1.bSolid.colorBorder.flex.flexRow.itemsCenter.$,
       "data-testid": "tab-strip",
       children: jsxs(_$$t.TabStrip, {
         manager: r,
@@ -1168,7 +1168,7 @@ function e1(e) {
         })]
       })
     }), jsxs("div", {
-      className: _$$s2.flexGrow1.hFull.overflowAuto.$,
+      className: cssBuilderInstance.flexGrow1.hFull.overflowAuto.$,
       children: [jsx(_$$t.TabPanel, {
         ...i.manage,
         children: jsx(eZ, {

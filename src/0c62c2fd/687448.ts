@@ -12,7 +12,7 @@ import { countGraphemes } from "../figma_app/819288";
 import { w4 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
 import { e as _$$e } from "../905/457828";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { l as _$$l } from "../905/767868";
@@ -90,11 +90,11 @@ function B({
     className: "emoji_text_area--textAreaContainer--4FHeL",
     onClick: f,
     children: [jsxs(_$$P, {
-      className: S()(_$$s.flexGrow1.overflowAuto.maxWFull.borderBox.$$if(u, _$$s.bb1.bSolid.colorBorder).$, l),
-      innerClassName: _$$s.hFull.$,
+      className: S()(cssBuilderInstance.flexGrow1.overflowAuto.maxWFull.borderBox.$$if(u, cssBuilderInstance.bb1.bSolid.colorBorder).$, l),
+      innerClassName: cssBuilderInstance.hFull.$,
       children: [jsx(iX, {
         ref: p,
-        className: _$$s.pt16.px16.borderBox.$$if(u, _$$s.pb4).$,
+        className: cssBuilderInstance.pt16.px16.borderBox.$$if(u, cssBuilderInstance.pb4).$,
         currentOrgUsers: {
           orgUsers: {}
         },
@@ -120,7 +120,7 @@ function B({
         onIntersectionChange: e => m(!e.isIntersecting)
       })]
     }), jsxs("div", {
-      className: _$$s.flex.justifyBetween.itemsCenter.pl12.pr16.py12.$,
+      className: cssBuilderInstance.flex.justifyBetween.itemsCenter.pl12.pr16.py12.$,
       children: [jsx(D, {
         buttonClassName: "emoji_text_area--emojiPickerButton--CGYqF",
         onInsert: e => {
@@ -131,7 +131,7 @@ function B({
         },
         closeOnInsert: !0
       }), n && jsxs("div", {
-        className: _$$s.$$if(g > n, _$$s.colorTextDanger, _$$s.colorTextSecondary).cursorDefault.$,
+        className: cssBuilderInstance.$$if(g > n, cssBuilderInstance.colorTextDanger, cssBuilderInstance.colorTextSecondary).cursorDefault.$,
         children: [g, "/", n]
       })]
     })]
@@ -171,9 +171,9 @@ export function $$U0({
   let P = _$$C(S);
   let L = jsxs(Fragment, {
     children: [jsxs("div", {
-      className: _$$s.p16.gap16.flex.flexColumn.$,
+      className: cssBuilderInstance.p16.gap16.flex.flexColumn.$,
       children: [jsxs("div", {
-        className: _$$s.flex.flexColumn.gap16.$,
+        className: cssBuilderInstance.flex.flexColumn.gap16.$,
         children: [jsx("div", {
           children: jsx(_$$e, {
             tile: S,
@@ -185,7 +185,7 @@ export function $$U0({
             size: 16,
             type: P
           }), jsxs("div", {
-            className: _$$s.flex.flexColumn.gap2.flexGrow1.justifyCenter.overflowHidden.cursorDefault.$,
+            className: cssBuilderInstance.flex.flexColumn.gap2.flexGrow1.justifyCenter.overflowHidden.cursorDefault.$,
             children: [jsx("div", {
               ...Ay.props($.title),
               children: i.name
@@ -201,12 +201,12 @@ export function $$U0({
         onChange: I,
         onSubmit: O,
         maxLength: 100,
-        textAreaClassName: _$$s.maxH100.$
+        textAreaClassName: cssBuilderInstance.maxH100.$
       })]
     }), b ? jsxs("div", {
-      className: _$$s.colorBgWarningTertiary.px16.py12.flex.columnGap8.$,
+      className: cssBuilderInstance.colorBgWarningTertiary.px16.py12.flex.columnGap8.$,
       children: [jsx(_$$R, {
-        className: _$$s.flexShrink0.$
+        className: cssBuilderInstance.flexShrink0.$
       }), jsx("span", {
         children: b
       })]
@@ -232,7 +232,7 @@ export function $$U0({
           }), N ? jsx(Button, {
             disabled: !0,
             children: jsx(LoadingSpinner, {
-              className: _$$s.colorIconOnbrand.$
+              className: cssBuilderInstance.colorIconOnbrand.$
             })
           }) : jsx(Button, {
             disabled: !A,

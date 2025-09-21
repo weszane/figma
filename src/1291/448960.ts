@@ -9,7 +9,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { hideDropdownAction } from "../905/929976";
@@ -230,7 +230,7 @@ function H({
           focusOnMount: !m,
           hasTransparentBackground: !0,
           hideXIcon: !0,
-          iconClassName: _$$s.colorIconSecondary.$,
+          iconClassName: cssBuilderInstance.colorIconSecondary.$,
           isKeyDownHandled: s => s.keyCode === KeyCodes.ESCAPE && (e ? t("") : onClose(), !0),
           onChange: t,
           onFocus: h,

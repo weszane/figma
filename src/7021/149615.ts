@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
 import { r as _$$r } from "../905/571838";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { ModalRootComponent } from "../905/38914";
@@ -47,9 +47,9 @@ function v({
         "stepped_modal--borderRadius--rmCvw": y
       }),
       children: jsxs("div", {
-        className: _$$s.flex.flexGrow1.wFull.flexColumn.$,
+        className: cssBuilderInstance.flex.flexGrow1.wFull.flexColumn.$,
         children: [!T && jsx("div", {
-          className: _$$s.absolute.$,
+          className: cssBuilderInstance.absolute.$,
           style: styleBuilderInstance.add({
             top: "8px",
             right: "8px"
@@ -63,27 +63,27 @@ function v({
             children: jsx(_$$A, {})
           })
         }), jsx("div", {
-          className: _$$s.overflowAuto.flexGrow1.bb1.bSolid.colorBorder.$,
+          className: cssBuilderInstance.overflowAuto.flexGrow1.bb1.bSolid.colorBorder.$,
           children: jsx("div", {
             style: styleBuilderInstance.add({
               height: `min(${w}px, calc(80vh - 80px))`,
               minHeight: `min(${w}px, calc(80vh - 80px))`,
               gridTemplateColumns: "285px 2fr"
             }).$,
-            className: _$$s.grid.$,
+            className: cssBuilderInstance.grid.$,
             children: e
           })
         }), x || jsx("div", {
-          className: _$$s.px16.flex.flexColumn.borderBox.justifyEnd.itemsCenter.gap8.itemSelfStretch.py16.wFull.$,
+          className: cssBuilderInstance.px16.flex.flexColumn.borderBox.justifyEnd.itemsCenter.gap8.itemSelfStretch.py16.wFull.$,
           children: jsxs("div", {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             style: styleBuilderInstance.add({
               display: "grid",
               gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center"
             }).$,
             children: [jsx("div", {
-              className: _$$s.flex.$,
+              className: cssBuilderInstance.flex.$,
               children: t > 1 && jsx($z, {
                 iconPrefix: jsx(_$$C, {}),
                 variant: "ghost",
@@ -91,11 +91,11 @@ function v({
                 children: renderI18nText("seat_billing_terms.modal.back")
               })
             }), jsx("div", {
-              className: _$$s.flex.gap8.$,
+              className: cssBuilderInstance.flex.gap8.$,
               children: Array.from({
                 length: a
               }, (e, a) => jsx("div", {
-                className: _$$s.w8.h8.bRadiusFull.b1.$,
+                className: cssBuilderInstance.w8.h8.bRadiusFull.b1.$,
                 style: styleBuilderInstance.add({
                   backgroundColor: "var(--color-bg)"
                 }).$$if(t === a + 1, {
@@ -105,7 +105,7 @@ function v({
                 }).$
               }, `modal-progress-${a + 1}`))
             }), jsx("div", {
-              className: _$$s.flex.gap8.justifyEnd.$,
+              className: cssBuilderInstance.flex.gap8.justifyEnd.$,
               children: t === a ? jsxs(Fragment, {
                 children: [jsx($z, {
                   variant: "secondary",
@@ -120,9 +120,9 @@ function v({
                 variant: "ghost",
                 onClick: i,
                 children: jsxs("div", {
-                  className: _$$s.flex.itemsCenter.gap4.$,
+                  className: cssBuilderInstance.flex.itemsCenter.gap4.$,
                   children: [jsx("span", {
-                    className: _$$s.colorText.alignCenter.textBodyMedium.$,
+                    className: cssBuilderInstance.colorText.alignCenter.textBodyMedium.$,
                     children: renderI18nText("seat_billing_terms.modal.next")
                   }), jsx(_$$a, {})]
                 })
@@ -136,7 +136,7 @@ function v({
 }
 function O(e) {
   return jsx("div", {
-    className: _$$s.flex.justifyEnd.itemsStart.gap4.$,
+    className: cssBuilderInstance.flex.justifyEnd.itemsStart.gap4.$,
     children: e.licenseTypes.map(t => createElement("div", {
       className: "x78zum5 xl56j7k x6s0dn4 xjwf9q1",
       key: t,
@@ -178,10 +178,10 @@ function P({
       style: styleBuilderInstance.add({
         padding: "40px"
       }).$,
-      className: _$$s.flex.flexColumn.itemsStart.gap16.flex1.br1.bSolid.colorBorder.colorBgPressed.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsStart.gap16.flex1.br1.bSolid.colorBorder.colorBgPressed.$,
       children: e
     }), jsx("div", {
-      className: _$$s.flex.flexColumn.flex1.itemSelfStretch.$,
+      className: cssBuilderInstance.flex.flexColumn.flex1.itemSelfStretch.$,
       style: styleBuilderInstance.add({
         padding: "40px"
       }).$,
@@ -196,7 +196,7 @@ function D() {
       strokeWidth: "1px",
       stroke: "var(--color-border)"
     }).$,
-    className: _$$s.m0.$
+    className: cssBuilderInstance.m0.$
   });
 }
 function M({
@@ -220,30 +220,30 @@ function M({
   });
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.textBodyLarge.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyLarge.colorTextSecondary.$,
       children: e
     }), jsx("div", {
-      className: _$$s.colorText.textBodyLarge.$,
+      className: cssBuilderInstance.colorText.textBodyLarge.$,
       children: "\u2192"
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       "data-testid": n,
       children: [jsxs("div", {
-        className: _$$s.flex.justifyBetween.$,
+        className: cssBuilderInstance.flex.justifyBetween.$,
         children: [jsx("div", {
-          className: _$$s.textBodyLargeStrong.$,
+          className: cssBuilderInstance.textBodyLargeStrong.$,
           children: t
         }), jsx(O, {
           licenseTypes: l,
           size: u
         })]
       }), jsx("div", {
-        className: _$$s.colorText.textBodyLarge.$,
+        className: cssBuilderInstance.colorText.textBodyLarge.$,
         children: renderI18nText("seat_billing_terms.modal.price_per_month", {
           price: h
         })
       }), jsx("div", {
-        className: _$$s.textBodyLarge.colorText.$,
+        className: cssBuilderInstance.textBodyLarge.colorText.$,
         children: g
       })]
     }), m && jsx(D, {})]
@@ -315,27 +315,27 @@ export function $$B0({
             style: styleBuilderInstance.add({
               width: "221px"
             }).$,
-            className: _$$s.textHeadingLarge.colorText.$,
+            className: cssBuilderInstance.textHeadingLarge.colorText.$,
             children: renderI18nText("seat_billing_terms.modal.please_review")
           }), jsx("div", {
-            className: _$$s.textBodyLargeStrong.colorText.$,
+            className: cssBuilderInstance.textBodyLargeStrong.colorText.$,
             children: renderI18nText("seat_billing_terms.modal.evolving_terms")
           }), jsx("span", {
-            className: _$$s.textBodyLarge.itemSelfStretch.$,
+            className: cssBuilderInstance.textBodyLarge.itemSelfStretch.$,
             children: renderI18nText("seat_billing_terms.modal.confirm_terms")
           }), jsx("span", {
-            className: _$$s.textBodyLarge.itemSelfStretch.$,
+            className: cssBuilderInstance.textBodyLarge.itemSelfStretch.$,
             children: renderI18nText("seat_billing_terms.modal.learn_more_about", {
               updatedSeatsLink: A
             })
           })]
         }),
         rightChildren: jsx("div", {
-          className: _$$s.justifyCenter.itemsCenter.gap32.$,
+          className: cssBuilderInstance.justifyCenter.itemsCenter.gap32.$,
           children: jsxs("div", {
-            className: _$$s.flex.flexColumn.itemsStart.gap16.itemSelfStretch.$,
+            className: cssBuilderInstance.flex.flexColumn.itemsStart.gap16.itemSelfStretch.$,
             children: [jsxs("div", {
-              className: _$$s.flex.flexRow.colorText.textBodyMediumStrong.gap4.$,
+              className: cssBuilderInstance.flex.flexRow.colorText.textBodyMediumStrong.gap4.$,
               children: [jsx("div", {
                 children: jsx(_$$r, {})
               }), jsx("div", {
@@ -346,7 +346,7 @@ export function $$B0({
                 })
               })]
             }), jsx("div", {
-              className: _$$s.grid.p24.b1.bSolid.colorBorder.$,
+              className: cssBuilderInstance.grid.p24.b1.bSolid.colorBorder.$,
               style: styleBuilderInstance.add({
                 gridTemplateColumns: "auto auto 1fr",
                 gridTemplateRows: "auto auto auto auto auto",
@@ -374,23 +374,23 @@ export function $$B0({
       }) : jsx(P, {
         leftChildren: jsxs(Fragment, {
           children: [jsx("div", {
-            className: _$$s.textHeadingLarge.colorText.$,
+            className: cssBuilderInstance.textHeadingLarge.colorText.$,
             children: renderI18nText("seat_billing_terms.modal.finish_and_agree")
           }), jsx("div", {
-            className: _$$s.textBodyLarge.itemSelfStretch.textBodyLarge.$,
+            className: cssBuilderInstance.textBodyLarge.itemSelfStretch.textBodyLarge.$,
             children: renderI18nText("seat_billing_terms.modal.agreement_terms", {
               softwareAgreementLink: E
             })
           })]
         }),
         rightChildren: jsxs("div", {
-          className: _$$s.flex.flexColumn.gap12.overflowAuto.textBodyMedium.$,
+          className: cssBuilderInstance.flex.flexColumn.gap12.overflowAuto.textBodyMedium.$,
           children: [jsxs("div", {
             children: [jsx("div", {
-              className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
+              className: cssBuilderInstance.colorTextSecondary.textBodyMediumStrong.mb2.$,
               children: renderI18nText("seat_billing_terms.modal.tos.subscription.header")
             }), jsx("div", {
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               children: renderI18nText("seat_billing_terms.modal.tos.subscription.terms", {
                 planTier: S,
                 renewalDate: a.toDate(),
@@ -398,28 +398,28 @@ export function $$B0({
               })
             })]
           }), jsx("div", {
-            className: _$$s.colorText.$,
+            className: cssBuilderInstance.colorText.$,
             children: renderI18nText("seat_billing_terms.modal.tos.subscription.pricing", {
               organizationName: t
             })
           }), jsxs("div", {
             children: [jsx("div", {
-              className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
+              className: cssBuilderInstance.colorTextSecondary.textBodyMediumStrong.mb2.$,
               children: renderI18nText("seat_billing_terms.modal.tos.additional_seats.header")
             }), jsx("div", {
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               children: renderI18nText("seat_billing_terms.modal.tos.additional_seats.terms")
             })]
           }), jsxs("div", {
             children: [jsx("div", {
-              className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
+              className: cssBuilderInstance.colorTextSecondary.textBodyMediumStrong.mb2.$,
               children: renderI18nText("seat_billing_terms.modal.tos.invoices.header")
             }), jsx("div", {
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               children: renderI18nText("seat_billing_terms.modal.tos.invoices.terms")
             })]
           }), jsx("div", {
-            className: _$$s.colorText.$,
+            className: cssBuilderInstance.colorText.$,
             children: renderI18nText("seat_billing_terms.modal.tos.learn_more", {
               updatedSeatsLink: A,
               supportLink: I

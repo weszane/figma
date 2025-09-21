@@ -3,7 +3,7 @@ import { l as _$$l } from "../905/479687";
 import a from "classnames";
 import { c$ } from "../figma_app/236327";
 import { S } from "../figma_app/420927";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 var s = a;
 export function $$c2(e) {
   return jsx("div", {
@@ -66,9 +66,9 @@ export function $$h1(e) {
       simulateHover: e.simulateHover,
       tooltip: e.tooltip,
       children: jsxs("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsxs("div", {
-          className: _$$s.flex.flexColumn.alignLeft.$,
+          className: cssBuilderInstance.flex.flexColumn.alignLeft.$,
           children: [jsx("div", {
             className: "action_option--largeText--d3Px5 action_option--text--fSMIm",
             children: e.text

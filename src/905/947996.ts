@@ -3,7 +3,7 @@ import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
 import o from "classnames";
 import { h1 } from "../905/986103";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { H8 } from "../905/590952";
@@ -22,7 +22,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     dataTestId: i
   }) {
     return jsx("div", {
-      className: _$$s.flex.overflowHidden.$,
+      className: cssBuilderInstance.flex.overflowHidden.$,
       "data-testid": i,
       children: "default" === e ? jsx(TextWithTruncation, {
         fontWeight: "medium",
@@ -31,7 +31,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
         showTooltipWhenTruncated: !0,
         children: t
       }) : jsx("div", {
-        className: _$$s.textBodyLargeStrong.colorText.truncate.$,
+        className: cssBuilderInstance.textBodyLargeStrong.colorText.truncate.$,
         children: t
       })
     });
@@ -43,9 +43,9 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     hideEditorName: n = !1
   }) {
     return jsxs("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [jsx("div", {
-        className: _$$s.relative.flex.itemsCenter.justifyCenter.$$if(n, _$$s.mr6, _$$s.mr4).flexShrink0.$,
+        className: cssBuilderInstance.relative.flex.itemsCenter.justifyCenter.$$if(n, cssBuilderInstance.mr6, cssBuilderInstance.mr4).flexShrink0.$,
         style: styleBuilderInstance.$$if(i, {
           top: "1px",
           width: "14px",
@@ -58,12 +58,12 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
           size: 14
         })
       }), jsxs("div", {
-        className: _$$s.inlineFlex.flexRowReverse.overflowHidden.$,
+        className: cssBuilderInstance.inlineFlex.flexRowReverse.overflowHidden.$,
         children: [jsx(TextWithTruncation, {
           truncate: !0,
           showTooltipWhenTruncated: !0,
           children: jsx("span", {
-            className: _$$s.pre.$,
+            className: cssBuilderInstance.pre.$,
             children: renderI18nText(n ? "fragment_search.last.edited_time_without_separator" : "fragment_search.last.edited_time_with_separator", {
               time: jsx(h1, {
                 date: t
@@ -82,7 +82,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     name: e
   }) {
     return jsxs("div", {
-      className: _$$s.flex.gap2.$,
+      className: cssBuilderInstance.flex.gap2.$,
       children: [jsx(TextWithTruncation, {
         truncate: !0,
         showTooltipWhenTruncated: !0,
@@ -101,7 +101,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     bottom: t
   }) {
     return jsx("div", {
-      className: l()(D, _$$s.colorBgSecondary.$),
+      className: l()(D, cssBuilderInstance.colorBgSecondary.$),
       style: styleBuilderInstance.add({
         height: "11px",
         borderRadius: "4px",
@@ -113,7 +113,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     children: e
   }) {
     return jsx("div", {
-      className: _$$s.flex.flexColumn.colorTextSecondary.maxWFull.$,
+      className: cssBuilderInstance.flex.flexColumn.colorTextSecondary.maxWFull.$,
       style: styleBuilderInstance.add({
         gap: "3px"
       }).$,
@@ -128,16 +128,16 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     children: t
   }) {
     let i;
-    let n = l()("metadata--colorIconSecondary--O8FUA", _$$s.flexShrink0.$);
+    let n = l()("metadata--colorIconSecondary--O8FUA", cssBuilderInstance.flexShrink0.$);
     i = "page" === e ? jsx(_$$A, {
       className: n
     }) : jsx(q, {
       className: n
     });
     return jsxs("div", {
-      className: _$$s.flex.itemsCenter.gap4.relative.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap4.relative.$,
       children: [i, jsx("span", {
-        className: _$$s.colorTextSecondary.truncate.$,
+        className: cssBuilderInstance.colorTextSecondary.truncate.$,
         children: t
       })]
     });

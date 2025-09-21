@@ -9,7 +9,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { Yh, TN, Kr, ud } from "../905/334566";
 import { S as _$$S } from "../figma_app/552746";
 import { H as _$$H } from "../905/734998";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import y from "classnames";
 let $$g = (e, t, i) => ({
   height: Math.abs(e.y - t.y),
@@ -52,7 +52,7 @@ function _(e) {
     }, 80));
   };
   return jsxs(_$$S.div, {
-    className: _$$s.hFull.wFull.relative.$,
+    className: cssBuilderInstance.hFull.wFull.relative.$,
     ref: t,
     onMouseDown: e => {
       if (e.stopPropagation(), t.current) {
@@ -137,16 +137,16 @@ function v(e) {
     role: "gridcell",
     tabIndex: 0,
     children: jsxs("div", {
-      className: b()(_$$s.flex.$$if("right" === e.tileFooterPosition, _$$s.flexRow.itemsCenter, _$$s.flexColumn.wFull.hFull).$, e.tileClassName),
+      className: b()(cssBuilderInstance.flex.$$if("right" === e.tileFooterPosition, cssBuilderInstance.flexRow.itemsCenter, cssBuilderInstance.flexColumn.wFull.hFull).$, e.tileClassName),
       children: [jsx("div", {
-        className: b()(_$$s.overflowHidden.flexShrink0.$, {
+        className: b()(cssBuilderInstance.overflowHidden.flexShrink0.$, {
           "grid_item--bRadius16--ljQxD": 16 === e.tileBorderRadius,
-          [_$$s.bRadius8.$]: 8 === e.tileBorderRadius,
-          [_$$s.bRadius4.$]: 4 === e.tileBorderRadius,
-          [_$$s.radiusSmall.$]: "small" === e.tileBorderRadius,
-          [_$$s.radiusMedium.$]: "medium" === e.tileBorderRadius,
-          [_$$s.radiusLarge.$]: "large" === e.tileBorderRadius,
-          [_$$s.flexGrow1.$]: "bottom" === e.tileFooterPosition
+          [cssBuilderInstance.bRadius8.$]: 8 === e.tileBorderRadius,
+          [cssBuilderInstance.bRadius4.$]: 4 === e.tileBorderRadius,
+          [cssBuilderInstance.radiusSmall.$]: "small" === e.tileBorderRadius,
+          [cssBuilderInstance.radiusMedium.$]: "medium" === e.tileBorderRadius,
+          [cssBuilderInstance.radiusLarge.$]: "large" === e.tileBorderRadius,
+          [cssBuilderInstance.flexGrow1.$]: "bottom" === e.tileFooterPosition
         }, function (e) {
           switch (e) {
             case "dashed":
@@ -164,7 +164,7 @@ function v(e) {
           isHovered: a
         })
       }), jsx("div", {
-        className: _$$s.overflowHidden.$,
+        className: cssBuilderInstance.overflowHidden.$,
         onFocus: t => {
           e.clearSelected();
           t.stopPropagation();
@@ -307,7 +307,7 @@ export function $$I0(e) {
         if (i || t.ctrlKey) return C;
         r = multiselectDisabled ? new Set() : new Set([...C].filter(t => t !== e));
       } else r = new Set(multiselectDisabled ? [e] : [...C, e]);
-    } else if (t.shiftKey) r = new Set(void 0 === I || void 0 === y || multiselectDisabled ? [e] : n ? [...C, e] : I > e ? [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(I - e + 1)].map((t, i) => i + e)] : [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(e - I + 1)].map((e, t) => t + I)]); else {
+    } else if (t.shiftKey) r = new Set(void 0 === I || void 0 === y || multiselectDisabled ? [e] : n ? [...C, e] : I > e ? [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(I - e + 1)].map((t, i) => i + e)] : [...[...C].filter(e => e > Math.max(y, I) || e < Math.min(y, I)), ...[...Array(e - I + 1)].map((e, t) => t + I)]);else {
       if (i && C.has(e)) return C;
       r = new Set([e]);
     }
@@ -346,7 +346,7 @@ export function $$I0(e) {
         t.stopPropagation();
         break;
       case "ArrowLeft":
-        if (void 0 === y || void 0 === I) Y(items.length - 1, t, !1, !0); else if (t.altKey) Y(0, t, !1, !0); else {
+        if (void 0 === y || void 0 === I) Y(items.length - 1, t, !1, !0);else if (t.altKey) Y(0, t, !1, !0);else {
           let e = y;
           if (t.shiftKey && y < I) for (; e > 0 && C.has(e - 1);) e--;
           e > 0 && Y(e - 1, t, !1, !0);
@@ -355,7 +355,7 @@ export function $$I0(e) {
         t.stopPropagation();
         break;
       case "ArrowRight":
-        if (void 0 === y || void 0 === I) Y(0, t, !1, !0); else if (t.altKey) Y(items.length - 1, t, !1, !0); else {
+        if (void 0 === y || void 0 === I) Y(0, t, !1, !0);else if (t.altKey) Y(items.length - 1, t, !1, !0);else {
           let e = y;
           if (t.shiftKey && y > I) for (; e < items.length - 1 && C.has(e + 1);) e++;
           e < items.length - 1 && Y(e + 1, t, !1, !0);
@@ -383,7 +383,7 @@ export function $$I0(e) {
     }
   };
   let J = useCallback(t => i => {
-    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t); else {
+    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t);else {
       let e = Y(t, i);
       if (e.size && !e.has(t)) {
         let i = t + 1;

@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { isValidEmail } from "../figma_app/416935";
 import { BigTextInputForwardRef } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -51,7 +51,7 @@ let $$w0 = registerModal(function (e) {
           })
         }), jsxs(DialogBody, {
           children: [jsx("div", {
-            className: _$$s.colorTextSecondary.mb8.font11.$,
+            className: cssBuilderInstance.colorTextSecondary.mb8.font11.$,
             children: renderI18nText(e.isOrg ? "payments.org_enter_an_email_address" : "payments.pro_enter_an_email_address")
           }), e.isOrg ? jsx(P, {
             autocomplete: v,

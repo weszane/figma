@@ -83,7 +83,7 @@ import { X as _$$X } from '../5430/966412';
 import { m as _$$m } from '../5430/992484';
 import { H as _$$H } from '../5430/997712';
 import { A as _$$A9 } from '../5724/191519';
-import { s as _$$s4 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { O9D } from '../figma_app/6204';
 import { TeamOrgType } from '../figma_app/10554';
 import { lW } from '../figma_app/11182';
@@ -1716,14 +1716,14 @@ function rZ() {
 }
 function rq() {
   return jsxs('div', {
-    className: _$$s4.flex.itemsCenter.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.itemsCenter.flexColumn.gap16.$,
     children: [jsx(rZ, {}), jsxs('div', {
-      className: _$$s4.flex.flexColumn.gap8.alignCenter.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.alignCenter.$,
       children: [jsx('h2', {
-        className: _$$s4.font14.fontMedium.$,
+        className: cssBuilderInstance.font14.fontMedium.$,
         children: renderI18nText('community.saves.no_saves_title')
       }), jsx('p', {
-        className: _$$s4.font11.$,
+        className: cssBuilderInstance.font11.$,
         children: renderI18nText('community.saves.no_saves_subtitle')
       })]
     }), jsx(ButtonSecondary, {

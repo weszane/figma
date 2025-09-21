@@ -13,7 +13,7 @@ import { h as _$$h } from "../905/207101";
 import { KeyCodes, getModifierBitmask, ModifierKeyCodes } from "../905/63728";
 import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { Dm } from "../figma_app/8833";
@@ -36,7 +36,7 @@ let $$j0 = 24;
 let $$U1 = 96;
 export function $$B7() {
   return jsx("div", {
-    className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.$,
+    className: cssBuilderInstance.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.$,
     children: renderI18nText("whiteboard.ai_modal.hint_tab")
   });
 }
@@ -114,12 +114,12 @@ export let $$V5 = forwardRef(({
     maxHeight: d,
     ref: T,
     children: jsxs("div", {
-      className: _$$s.grid.borderBox.overflowWrapAnywhere.$,
+      className: cssBuilderInstance.grid.borderBox.overflowWrapAnywhere.$,
       style: S,
       children: [jsx("textarea", {
         ref: m,
         "aria-describedby": "textarea-desc",
-        className: _$$s.resizeNone.borderBox.bgTransparent.overflowHidden.zIndex1.$,
+        className: cssBuilderInstance.resizeNone.borderBox.bgTransparent.overflowHidden.zIndex1.$,
         "data-testid": "textArea",
         maxLength: s,
         minLength: a,
@@ -138,7 +138,7 @@ export let $$V5 = forwardRef(({
         role: "form",
         children: _
       }), jsx("div", {
-        className: _$$s.preWrap.invisible.borderBox.$,
+        className: cssBuilderInstance.preWrap.invisible.borderBox.$,
         style: {
           gridArea: "1 / 1 / 2 / 2"
         },
@@ -200,7 +200,7 @@ export function $$H3({
   w && X.current?.focus();
   let ec = $$z2(el, K);
   return jsxs("div", {
-    className: m()(_$$s.borderBox.p4.mb8.colorBgSecondary.wFull.flex.flexColumn.bRadius5.relative.$),
+    className: m()(cssBuilderInstance.borderBox.p4.mb8.colorBgSecondary.wFull.flex.flexColumn.bRadius5.relative.$),
     style: styleBuilderInstance.$$if(ed, styleBuilderInstance.add(styleBuilderInstance.$$if(M, {
       minHeight: "128px"
     }, {
@@ -213,14 +213,14 @@ export function $$H3({
       e && e.focus();
     },
     children: [jsxs("div", {
-      className: m()(_$$s.flex.relative.overflowHidden.$$if(ed, _$$s.flexColumn).$, Dm),
+      className: m()(cssBuilderInstance.flex.relative.overflowHidden.$$if(ed, cssBuilderInstance.flexColumn).$, Dm),
       style: ed && !M ? {
         height: 128
       } : {},
       children: [(eo || ed) && jsxs("div", {
-        className: _$$s.h24.flex.flexRow.relative.justifyBetween.$,
+        className: cssBuilderInstance.h24.flex.flexRow.relative.justifyBetween.$,
         children: [jsx("div", {
-          className: _$$s.flex.flexRow.gap4.$,
+          className: cssBuilderInstance.flex.flexRow.gap4.$,
           children: eo && jsx(IconButton, {
             recordingKey: generateRecordingKey(g, "backButton"),
             onClick: y || pop,
@@ -229,24 +229,24 @@ export function $$H3({
           })
         }), ed && jsxs(Fragment, {
           children: [jsx("div", {
-            className: _$$s.flex.flexGrow1.$,
+            className: cssBuilderInstance.flex.flexGrow1.$,
             children: L
           }), jsx("div", {
-            className: _$$s.flex.pr4.$,
+            className: cssBuilderInstance.flex.pr4.$,
             children: jsx(_$$y2, {
               helpUrlVariant: e
             })
           })]
         })]
       }), jsxs("div", {
-        className: _$$s.flex1.relative.font13.ml8.$,
+        className: cssBuilderInstance.flex1.relative.font13.ml8.$,
         style: styleBuilderInstance.add({
           lineHeight: `${$$j0}px`
         }).$$if(!M, {
           height: `${$$U1}px`
         }).$,
         children: [jsx("div", {
-          className: _$$s.$$if(!M, _$$s.absolute.top0.left0.right0).$,
+          className: cssBuilderInstance.$$if(!M, cssBuilderInstance.absolute.top0.left0.right0).$,
           children: jsx($$V5, {
             ref: X,
             ariaLabel: Y,
@@ -262,20 +262,20 @@ export function $$H3({
             verticalPromptLayout: el
           })
         }), q && jsxs("div", {
-          className: m()(_$$s.absolute.top0.wFull.selectNone.eventsNone.colorTextTertiary.overflowWrapAnywhere.$, J ? _$$m : ""),
+          className: m()(cssBuilderInstance.absolute.top0.wFull.selectNone.eventsNone.colorTextTertiary.overflowWrapAnywhere.$, J ? _$$m : ""),
           style: ec,
           children: [jsx("span", {
-            className: _$$s.invisible.$,
+            className: cssBuilderInstance.invisible.$,
             children: t
           }), jsx("span", {
-            className: _$$s.$,
+            className: cssBuilderInstance.$,
             children: Z
           }), J && jsx("span", {
-            className: _$$s.inlineFlex.itemsCenter.ml4.$,
+            className: cssBuilderInstance.inlineFlex.itemsCenter.ml4.$,
             children: jsx($$B7, {})
           })]
         }), el && jsxs("div", {
-          className: _$$s.absolute.flex.flexRow.$,
+          className: cssBuilderInstance.absolute.flex.flexRow.$,
           style: {
             top: K ? 0 : 4,
             right: K ? 0 : 4
@@ -295,7 +295,7 @@ export function $$H3({
         })]
       })]
     }), (er || en) && jsxs("div", {
-      className: m()(_$$s.wFull.flex.flexWrap.pre.pr16.gap8.$, _$$s.absolute.zIndex1.$, _$$s.overflowHidden.$),
+      className: m()(cssBuilderInstance.wFull.flex.flexWrap.pre.pr16.gap8.$, cssBuilderInstance.absolute.zIndex1.$, cssBuilderInstance.overflowHidden.$),
       style: {
         bottom: 8,
         left: 8,
@@ -318,7 +318,7 @@ export function $$H3({
         children: e.label
       }, t))]
     }), k && jsx("div", {
-      className: m()(_$$s.wFull.$),
+      className: m()(cssBuilderInstance.wFull.$),
       children: k
     })]
   });

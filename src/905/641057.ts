@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { parsePxNumber } from "../figma_app/783094";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 export function $$o0(e) {
   let {
@@ -25,7 +25,7 @@ export function $$o0(e) {
   }).join(" ");
   let c = `repeat(${e.items.length + 2}, 55px)`;
   return jsxs("div", {
-    className: _$$s.wFull.grid.$,
+    className: cssBuilderInstance.wFull.grid.$,
     style: styleBuilderInstance.add({
       gridTemplateColumns: d,
       gridTemplateRows: c
@@ -61,11 +61,11 @@ function l(e) {
   let i = e => {
     switch (e.textAlign) {
       case "right":
-        return _$$s.alignRight;
+        return cssBuilderInstance.alignRight;
       case "center":
-        return _$$s.alignCenter;
+        return cssBuilderInstance.alignCenter;
       default:
-        return _$$s.alignLeft;
+        return cssBuilderInstance.alignLeft;
     }
   };
   return jsx(Fragment, {
@@ -75,7 +75,7 @@ function l(e) {
       let d = l && r.aggregateColumnSpan ? `span ${r.aggregateColumnSpan}` : void 0;
       return l && 0 === r.aggregateColumnSpan ? null : jsx("div", {
         "data-testid": `aggregated-table-cell-${o}-${r.id}`,
-        className: _$$s.contentCenter.add(i(r)).$$if("aggregate" !== e.type, _$$s.textBodyMedium.bb1.bSolid.colorBorder, _$$s.textBodyMediumStrong).$,
+        className: cssBuilderInstance.contentCenter.add(i(r)).$$if("aggregate" !== e.type, cssBuilderInstance.textBodyMedium.bb1.bSolid.colorBorder, cssBuilderInstance.textBodyMediumStrong).$,
         style: {
           paddingLeft: 0,
           paddingRight: e.getColumnGap(s),

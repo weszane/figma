@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { z } from "../905/788559";
 import { r as _$$r } from "../905/189361";
@@ -73,7 +73,7 @@ function m({
     children: i.text
   }, "tertiary-action") : null;
   return jsxs("div", {
-    className: _$$s.flex.flexRow.gap8.justifyBetween.py8.bSolid.colorBorder.bt1.itemsCenter.colorBg.$,
+    className: cssBuilderInstance.flex.flexRow.gap8.justifyBetween.py8.bSolid.colorBorder.bt1.itemsCenter.colorBg.$,
     style: styleBuilderInstance.add({
       minHeight: "28px",
       paddingLeft: `${c}px`,
@@ -82,7 +82,7 @@ function m({
       height: `${m}px`
     }).$,
     children: [h && g && jsx("div", {
-      className: _$$s.flex.itemsCenter.gap8.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap8.$,
       children: jsx(z, {
         aiTrackingContext: g,
         rateOutputStrOverride: f,
@@ -90,7 +90,7 @@ function m({
         additionalFeedbackCallback: A
       })
     }), jsxs("div", {
-      className: _$$s.flex.itemsCenter.gap8.mlAuto.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap8.mlAuto.$,
       children: [I, v, b]
     }), r]
   });

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import a from "classnames";
 import { Qp, JR, Wi } from "../figma_app/162641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { bY, Vf } from "../figma_app/60023";
 import { Ji } from "../figma_app/553488";
 import { r$ } from "../7222/396421";
@@ -18,7 +18,7 @@ function g() {
     [C9]: e === Ji.OVERLAY_MODAL,
     [_P]: e === Ji.PICKER || e === Ji.OUTLINE_TO_DECK,
     [cb]: t.type === Vf.TEMPLATE_PICKER
-  }, _$$s.m8.$);
+  }, cssBuilderInstance.m8.$);
   return jsx(Qp, {
     className: i,
     animationType: JR.LIGHT_SHIMMER
@@ -37,7 +37,7 @@ function _() {
 }
 export function $$x3() {
   return jsx(Qp, {
-    className: s()("loading_state--title--YIpQO", _$$s.m8.$),
+    className: s()("loading_state--title--YIpQO", cssBuilderInstance.m8.$),
     animationType: JR.LIGHT_SHIMMER
   });
 }
@@ -49,7 +49,7 @@ export function $$y4({
   let a = useAtomWithSubscription(bY).type === Vf.TEMPLATE_PICKER ? 3 : 4;
   return jsx("div", {
     className: s()("loading_state--loadingStateContainer--dcv3D", {
-      [_$$s.px8.$]: !e
+      [cssBuilderInstance.px8.$]: !e
     }),
     children: Array.from({
       length: t
@@ -58,9 +58,9 @@ export function $$y4({
         children: Array.from({
           length: i ?? a
         }).map((e, t) => jsxs("div", {
-          className: _$$s.flex.flexColumn.$,
+          className: cssBuilderInstance.flex.flexColumn.$,
           children: [jsx(g, {}), jsx(Wi, {
-            className: _$$s.h16.mx8.w100.$,
+            className: cssBuilderInstance.h16.mx8.w100.$,
             animationType: JR.LIGHT_SHIMMER
           })]
         }, t))
@@ -90,13 +90,13 @@ export function $$C1() {
 }
 export function $$v0() {
   return jsxs("div", {
-    className: s()(Vg, _$$s.px16.pb16.pt8.gap16.overflowHidden.hFull.$),
+    className: s()(Vg, cssBuilderInstance.px16.pb16.pt8.gap16.overflowHidden.hFull.$),
     children: [jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {}), jsx(E, {})]
   });
 }
 function E() {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap4.$,
+    className: cssBuilderInstance.flex.flexColumn.gap4.$,
     children: [jsx(Qp, {
       className: "loading_state--file--g4dxg",
       animationType: JR.LIGHT_SHIMMER

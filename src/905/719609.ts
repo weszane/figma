@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 var a = r;
 var $$l1 = (e => (e.DEFAULT = "default", e.BRAND = "brand", e.ON_MENU = "on_menu", e.UI3 = "ui3", e.SLIDES_SPEAKER_NOTES = "slides_speaker_notes", e))($$l1 || {});
@@ -9,12 +9,12 @@ export function $$d0({
   variant: t = "default",
   focused: i = !1
 }) {
-  let r = a()(_$$s.b1.flex.h16.py0.px4.font11.itemsCenter.justifyCenter.gap4.bRadius5.match(t, {
-    default: _$$s.colorBorder.colorTextSecondary,
-    brand: _$$s.colorTextBrand,
-    on_menu: _$$s.colorTextMenuSecondary,
-    ui3: _$$s.colorBorderBrand.colorTextBrand,
-    slides_speaker_notes: _$$s.colorTextTertiary
+  let r = a()(cssBuilderInstance.b1.flex.h16.py0.px4.font11.itemsCenter.justifyCenter.gap4.bRadius5.match(t, {
+    default: cssBuilderInstance.colorBorder.colorTextSecondary,
+    brand: cssBuilderInstance.colorTextBrand,
+    on_menu: cssBuilderInstance.colorTextMenuSecondary,
+    ui3: cssBuilderInstance.colorBorderBrand.colorTextBrand,
+    slides_speaker_notes: cssBuilderInstance.colorTextTertiary
   }).$, {
     "badge--menuBadge--va-CK": "on_menu" === t,
     "badge--speakerNotes--glkoC": "slides_speaker_notes" === t

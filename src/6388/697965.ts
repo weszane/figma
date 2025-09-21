@@ -15,7 +15,7 @@ import { ie } from "../figma_app/524655";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { lW } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFocusedNodeId, isFullscreenAndInFocusedNodeView, getFocusNodeFunction } from "../figma_app/327588";
 import { useSelectedCooperFrameGuids } from "../figma_app/334505";
@@ -289,7 +289,7 @@ function K(e) {
       scrollToCarouselItem: e => requestAnimationFrame(() => scrollToCarouselItem(e, !0)),
       backButtonText
     }), jsx("div", {
-      className: d()(F1, _$$s.flexGrow1.wFull.pr2.py8.borderBox.overflowYScroll.relative.itemsCenter.hFull.$, _$$T),
+      className: d()(F1, cssBuilderInstance.flexGrow1.wFull.pr2.py8.borderBox.overflowYScroll.relative.itemsCenter.hFull.$, _$$T),
       style: {
         overflowAnchor: "none",
         scrollBehavior: didSetScrollTopOnMount && !Q.isDraggingCarouselItems ? "smooth" : "auto",
@@ -300,7 +300,7 @@ function K(e) {
       "data-testid": smallSquares ? "mini-carousel-scroll-container" : "carousel-scroll-container",
       children: jsx(_$$_.Group, {
         axis: "y",
-        className: _$$s.flex.flexColumn.justifyStart.borderBox.wFull.absolute.top0.left0.$$if(smallSquares, _$$s.itemsCenter.gap12.colorBgSecondary.p12).$$if(!smallSquares, _$$s.itemsEnd).$,
+        className: cssBuilderInstance.flex.flexColumn.justifyStart.borderBox.wFull.absolute.top0.left0.$$if(smallSquares, cssBuilderInstance.itemsCenter.gap12.colorBgSecondary.p12).$$if(!smallSquares, cssBuilderInstance.itemsEnd).$,
         "data-testid": testId,
         layoutScroll: !0,
         onContextMenu: handleContextMenu,
@@ -493,12 +493,12 @@ function V({
 }
 function U() {
   return jsxs("div", {
-    className: _$$s.p16.$,
+    className: cssBuilderInstance.p16.$,
     children: [jsx("div", {
-      className: _$$s.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       children: renderI18nText("slides.carousel.error")
     }), jsx("div", {
-      className: _$$s.mt4.$,
+      className: cssBuilderInstance.mt4.$,
       children: renderI18nText("slides.carousel.error_solution")
     })]
   });

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { buildUploadUrl } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { ic } from "../figma_app/688398";
 import { _Q, Xe } from "../figma_app/224338";
@@ -27,7 +27,7 @@ export function $$c1() {
     }), jsx("div", {
       className: "present_large_slide_icon--speakerNotesIcon--N7ajq",
       children: jsxs("div", {
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         children: [jsx("img", {
           width: 108,
           height: 64,

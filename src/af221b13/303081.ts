@@ -15,7 +15,7 @@ import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { BigButtonInverseTracked, interactiveAnchorTracked } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
 import { AuthFlowStep } from "../905/862321";
 import { FL, Ay as _$$Ay } from "../figma_app/248365";
@@ -433,7 +433,7 @@ function M(e) {
       paddingLeft: 40,
       paddingRight: 40,
       children: [jsx("div", {
-        className: _$$s.mxAuto.$,
+        className: cssBuilderInstance.mxAuto.$,
         children: jsx(F, {})
       }), jsx("h1", {
         className: "continue_after_verification--title---5Cuw",
@@ -1262,7 +1262,7 @@ function te({
         collection: e
       }), jsx("div", {
         className: e9()("collection_banner--collectionHeader--85DYX text--fontPos24Whyte--gYiFz text--_fontBaseWhyte--efAjI", {
-          [_$$s.flexColumn.$]: i
+          [cssBuilderInstance.flexColumn.$]: i
         }),
         children: jsx("h1", {
           children: e.title
@@ -1644,7 +1644,7 @@ function t2({
       onClick: () => {
         t();
       },
-      className: e9()(_$$s.colorText.block.$),
+      className: e9()(cssBuilderInstance.colorText.block.$),
       ...i,
       children: e.text
     }, e.key)
@@ -1670,13 +1670,13 @@ function t4({
     className: t5,
     children: [jsxs("button", {
       onClick: t,
-      className: _$$s.flex.justifyStart.alignLeft.colorText.itemsCenter.$,
+      className: cssBuilderInstance.flex.justifyStart.alignLeft.colorText.itemsCenter.$,
       children: [i.text, jsx(SvgComponent, {
         svg: _$$A9,
         className: e9()("mobile_flyout_item_group--mobileFlyoutItemGroupCaret--lbbaU", {
           "mobile_flyout_item_group--mobileFlyoutItemGroupCaretExpanded--P269f": e
         }),
-        svgClassName: _$$s.w8.h8.$,
+        svgClassName: cssBuilderInstance.w8.h8.$,
         style: {
           fill: getIconColor("default")
         }
@@ -1725,14 +1725,14 @@ function t7({
         children: jsxs(TrackingProvider, {
           ...d,
           children: [jsxs("div", {
-            className: _$$s.flex.justifyBetween.itemsCenter.$,
+            className: cssBuilderInstance.flex.justifyBetween.itemsCenter.$,
             children: [jsx(SvgComponent, {
               svg: _$$A0,
               className: "mobile_flyout--communitySvgContainer--R6Qs9",
               style: {
                 fill: getIconColor("default")
               },
-              svgClassName: _$$s.w32.h32.$,
+              svgClassName: cssBuilderInstance.w32.h32.$,
               onClick: () => {
                 customHistory.push("/community");
                 t();
@@ -1746,7 +1746,7 @@ function t7({
               }
             })]
           }), jsx("div", {
-            className: _$$s.flex.flexWrap.flexColumn.gap2.pt32.$,
+            className: cssBuilderInstance.flex.flexWrap.flexColumn.gap2.pt32.$,
             children: e.map(e => "children" in e ? jsx(t4, {
               isExpanded: o === e.text,
               toggleExpanded: () => c(o === e.text ? null : e.text),
@@ -2001,7 +2001,7 @@ function t6({
   }();
   return jsxs("div", {
     "data-testid": "flyout-category-selector",
-    className: _$$s.p12.flexShrink0.$,
+    className: cssBuilderInstance.p12.flexShrink0.$,
     children: [t && jsx(t7, {
       navItems: n,
       onClose: () => i(!1),
@@ -2009,12 +2009,12 @@ function t6({
         name: "community_mobile_nav_flyout"
       }
     }), jsxs("button", {
-      className: _$$s.flex.gap6.flexNowrap.fontMedium.colorText.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap6.flexNowrap.fontMedium.colorText.itemsCenter.$,
       onClick: () => i(!0),
       children: [e ? jsx(_$$Z, {}) : jsx(In, {
         icon: "workspace-16"
       }), jsx("span", {
-        className: _$$s.font13.$,
+        className: cssBuilderInstance.font13.$,
         children: renderI18nText("community.view_bar.browse")
       })]
     })]
@@ -2964,7 +2964,7 @@ function iB({
     },
     role: "button",
     tabIndex: 0,
-    className: _$$s.flex.itemsCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.$,
     children: jsxs(TrackingProvider, {
       name: "Global Nav Category",
       properties: {
@@ -3077,7 +3077,7 @@ function iQ() {
 function iq() {
   let e = getCurrentLocale();
   return jsxs("div", {
-    className: _$$s.flex.flexShrink0.alignCenter.alignCenter.gap16.$,
+    className: cssBuilderInstance.flex.flexShrink0.alignCenter.alignCenter.gap16.$,
     children: [jsx(TrackedButton, {
       className: "auth_buttons--logInButton--ln482 shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       trackingProperties: {
@@ -3156,7 +3156,7 @@ function iX({
     children: jsxs(TrackedLink, {
       trackingEventName: "community_nav_click_communitiy_heading",
       to: getCurrentCommunityBasePath(),
-      className: _$$s.font14.fontSemiBold.lh24.flex.flexNowrap.$,
+      className: cssBuilderInstance.font14.fontSemiBold.lh24.flex.flexNowrap.$,
       children: [jsx("div", {
         className: "homepage_link--logoLinkWrapper---5vec",
         children: jsx(iY, {})
@@ -4106,7 +4106,7 @@ function nz({
   isActive: s
 }) {
   return jsxs(_$$P.span, {
-    className: _$$s.colorTextBrand.$,
+    className: cssBuilderInstance.colorTextBrand.$,
     variants: {
       hidden: {
         opacity: .9
@@ -4128,7 +4128,7 @@ function nz({
       className: "hero--elementWrapper--RtXY3",
       "aria-hidden": !0,
       children: Object.entries(e).map(([e, t]) => jsx(_$$P.span, {
-        className: _$$s.absolute.eventsNone.$,
+        className: cssBuilderInstance.absolute.eventsNone.$,
         variants: t.variants,
         transition: t.transition,
         children: t.element
@@ -4305,16 +4305,16 @@ function nJ({
   content: s
 }) {
   return jsxs("div", {
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: [jsxs("div", {
-      className: _$$s.alignLeft.pb16.$,
+      className: cssBuilderInstance.alignLeft.pb16.$,
       children: [jsx("h3", {
-        className: _$$s.fontMedium.font15.lh24.$,
+        className: cssBuilderInstance.fontMedium.font15.lh24.$,
         children: e
       }), jsxs("div", {
         className: "homepage_section--subheaderAndLink---Rv7r",
         children: [t && jsx("div", {
-          className: _$$s.font13.colorTextSecondary.lh24.pt4.$,
+          className: cssBuilderInstance.font13.colorTextSecondary.lh24.pt4.$,
           children: t
         }), i && n && jsx(nH, {
           buttonLabel: i,
@@ -4817,7 +4817,7 @@ function n1({
             onIntersectionChange: S
           })
         }), jsx("div", {
-          className: _$$s.wFull.$,
+          className: cssBuilderInstance.wFull.$,
           children: jsx(_$$A4, {})
         })]
       })]
@@ -4837,7 +4837,7 @@ function n9({
       className: e9()("feed_banner--headerContainer--qZsxI", "feed_banner--breadcrumbsPadding--HmkPD"),
       children: [jsx(i, {}), jsx("div", {
         className: e9()("feed_banner--categoryHeaderRedesign--QFb-O text--fontPos24Whyte--gYiFz text--_fontBaseWhyte--efAjI", {
-          [_$$s.flexColumn.$]: s
+          [cssBuilderInstance.flexColumn.$]: s
         }),
         children: jsx("h1", {
           children: e

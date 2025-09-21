@@ -39,7 +39,7 @@ import { a as _$$a } from '../905/948337';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../2854/660288';
 import { A as _$$A3 } from '../5724/628206';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { ConfiguredUpgradeRequestModalView } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
@@ -177,7 +177,7 @@ function eh(e) {
     onClose?.();
   };
   let R = v && jsxs('div', {
-    className: _$$s.flex.itemsCenter.gap4.pl4.pr8.bRadius5.colorBgHover.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap4.pl4.pr8.bRadius5.colorBgHover.$,
     children: [jsx(_$$a, {}), A, jsx(Link, {
       href: '#',
       onClick: () => {
@@ -235,7 +235,7 @@ function eh(e) {
       children: [_ ? renderI18nText('org_upgrade.action_text.dev_mode', {
         requestUpgradeInstructions: getI18nString('org_upgrade.action_text.configurable_request_upgrade_instructions')
       }) : getI18nString('org_upgrade.action_text.configurable_request_upgrade_instructions'), jsx('div', {
-        className: _$$s.mt16.mb8.$,
+        className: cssBuilderInstance.mt16.mb8.$,
         children: jsx(TextWithTruncation, {
           fontWeight: 'semi-bold',
           children: renderI18nText('configured_upgrade_request_modal.from_the_admins', {
@@ -259,12 +259,12 @@ function eh(e) {
             }
           },
           children: jsx('div', {
-            className: _$$s.preWrap.ml8.$,
+            className: cssBuilderInstance.preWrap.ml8.$,
             children: customMessage
           })
         })
       }), isEligibleForProvisionalAccess ? R : jsx('div', {
-        className: _$$s.flex.justifyEnd.$,
+        className: cssBuilderInstance.flex.justifyEnd.$,
         children: jsx(_$$$, {
           variant: 'secondary',
           onClick: T,

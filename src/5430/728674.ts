@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { range } from "../figma_app/492908";
 import n from "classnames";
 import { usePrefersMediaQuery } from "../figma_app/469468";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { hasResourceType } from "../figma_app/427318";
 import { fz } from "../figma_app/795938";
 import { Qp, JR, Wi } from "../figma_app/162641";
@@ -11,7 +11,7 @@ import { ikM } from "../figma_app/27776";
 var o = n;
 function m() {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap12.$,
+    className: cssBuilderInstance.flex.flexColumn.gap12.$,
     "data-testid": "resource-loading-tile",
     children: [jsx("div", {
       className: "resource_loading_tile--loadingImageWrapper--J9BDB",
@@ -20,7 +20,7 @@ function m() {
         animationType: JR.NO_SHIMMER
       })
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.gap4.$,
+      className: cssBuilderInstance.flex.flexColumn.gap4.$,
       children: [jsx(Wi, {
         className: "resource_loading_tile--loadingTitleText--osfVq",
         animationType: JR.NO_SHIMMER
@@ -42,7 +42,7 @@ function y({
     children: range(t).map(t => jsx("div", {
       className: o()({
         [f]: e
-      }, _$$s.p1.$),
+      }, cssBuilderInstance.p1.$),
       children: jsx(m, {}, t)
     }, t))
   });
@@ -57,7 +57,7 @@ function g({
     children: e.map((e, n) => jsx("div", {
       className: o()({
         [f]: t
-      }, _$$s.p1.$),
+      }, cssBuilderInstance.p1.$),
       children: hasResourceType(e) ? jsx(_$$f, {
         resource: e,
         index: n,

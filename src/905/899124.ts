@@ -9,7 +9,7 @@ import { Badge, BadgeColor } from "../figma_app/919079";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Pf, nl } from "../905/590952";
@@ -360,7 +360,7 @@ export let $$en0 = registerModal(function (e) {
           width: 480,
           ref: ec,
           children: jsxs("div", {
-            className: _$$s.pl8.pr8.$,
+            className: cssBuilderInstance.pl8.pr8.$,
             children: [jsx(function (e) {
               return jsxs("button", {
                 "data-testid": "drafts-move-new-starter-team-button",
@@ -469,7 +469,7 @@ function er(e) {
       userOrgNames: function (e) {
         let t = e.map(e => e.name);
         let i = e => jsx("span", {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           children: e
         });
         switch (t.length) {
@@ -494,7 +494,7 @@ function er(e) {
               orgName2: i(t[1]),
               orgName3: i(t[2]),
               numRemainingOrgsSubstring: jsx("span", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: renderI18nText("file_browser.drafts_to_move.org_restriction_text_orgs_remaining", {
                   numRemainingOrgs: t.length - 3
                 })
@@ -586,7 +586,7 @@ function ea(e) {
       text: i,
       dataTestId: `${e.name}-badge`,
       color: e.checked ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
-      className: l()("draft_move_modal--teamBadge--ODLch", _$$s.mr8.$$if(!e.checked, _$$s.colorBgBrandTertiary.colorText).$)
+      className: l()("draft_move_modal--teamBadge--ODLch", cssBuilderInstance.mr8.$$if(!e.checked, cssBuilderInstance.colorBgBrandTertiary.colorText).$)
     })]
   });
 }

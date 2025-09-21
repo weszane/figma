@@ -5,7 +5,7 @@ import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/6
 import { z as _$$z, Z } from "../905/306088";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { R as _$$R } from "../905/304671";
@@ -119,7 +119,7 @@ export function $$I0(e) {
   };
   let z = () => {
     if (T) return jsx("p", {
-      className: _$$s.pt24.$,
+      className: cssBuilderInstance.pt24.$,
       children: T.source_org_name ? B() : G()
     });
   };
@@ -135,7 +135,7 @@ export function $$I0(e) {
       let l = T.is_transfer_copy;
       if (!l && (e || t || i)) return jsxs("div", {
         children: [jsx("p", {
-          className: _$$s.pt16.$,
+          className: cssBuilderInstance.pt16.$,
           children: jsx("span", {
             className: y,
             children: r ? renderI18nText("asset_transfers.handle_request_modal.about_this_project") : renderI18nText("asset_transfers.handle_request_modal.about_this_team")
@@ -257,7 +257,7 @@ export function $$I0(e) {
             let e = T?.transfer_type === "team" && !T?.source_org_name;
             return jsxs("div", {
               children: [T && z(), jsx("p", {
-                className: _$$s.pt16.$,
+                className: cssBuilderInstance.pt16.$,
                 children: jsx("span", {
                   className: y,
                   children: renderI18nText("asset_transfers.handle_request_modal.if_you_accept")

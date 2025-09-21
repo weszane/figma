@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { V as _$$V } from "../905/453937";
@@ -85,7 +85,7 @@ function E(e) {
   let i = Tf.getSharedBy(e.tile) ?? null;
   let o = wW(i).user;
   return i ? jsxs("div", {
-    className: _$$s.flex.itemsCenter.gap8.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap8.$,
     children: [o && jsx(H8, {
       user: o,
       size: Pf.MEDIUM
@@ -107,9 +107,9 @@ function E(e) {
 function N(e) {
   let t = _$$C(e.tile);
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.gap12.overflowHidden.h48.wFull.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap12.overflowHidden.h48.wFull.$,
     children: [jsxs("div", {
-      className: _$$s.relative.flexShrink0.hFull.$,
+      className: cssBuilderInstance.relative.flexShrink0.hFull.$,
       children: [jsx("div", {
         className: "tile_name_and_preview--iconContainer--sybhv",
         children: jsx(w4, {
@@ -122,7 +122,7 @@ function N(e) {
         borderRadius: 4
       })]
     }), jsx("div", {
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 13,
@@ -156,7 +156,7 @@ function O({
   return r && (a || t || i) ? jsx(_$$e, {
     tile: e,
     entrypoint: "file_list_row",
-    containerClassName: _$$s.pl8.wFull.$
+    containerClassName: cssBuilderInstance.pl8.wFull.$
   }) : jsx(Fragment, {});
 }
 export function $$D1({
@@ -173,7 +173,7 @@ export function $$D1({
 }
 let L = e => ({
   field: SortField.NAME,
-  headerCellClassName: _$$s.wHalf.$,
+  headerCellClassName: cssBuilderInstance.wHalf.$,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_name_column")

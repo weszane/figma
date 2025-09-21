@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import a from "classnames";
 import { oW } from "../905/675859";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 var s = a;
 export function $$d0({
   thumbnailUrl: e,
@@ -30,7 +30,7 @@ export function $$d0({
     }), e && jsx(oW, {
       src: e,
       onLoad: m,
-      className: _$$s.hidden.$,
+      className: cssBuilderInstance.hidden.$,
       alt: ""
     })]
   });

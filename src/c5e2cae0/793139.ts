@@ -19,7 +19,7 @@ import { showTooltip } from '../905/765855';
 import { styleBuilderInstance } from '../905/941192';
 import { TextWithTruncation } from '../905/984674';
 import { s as _$$s } from '../c5e2cae0/341232';
-import { s as _$$s2 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { nR } from '../figma_app/60079';
 import { $L, us } from '../figma_app/136698';
 import { compareProductAccessTypes, getProductAccessTypeByKey } from '../figma_app/217457';
@@ -413,14 +413,14 @@ function J({
 }
 function Y() {
   return jsx('div', {
-    className: _$$s2.wFull.colorBgTertiary.h1.$
+    className: cssBuilderInstance.wFull.colorBgTertiary.h1.$
   });
 }
 function K({
   teamId: e
 }) {
   return jsx('div', {
-    className: _$$s2.w8.h8.bRadius2.minW8.$,
+    className: cssBuilderInstance.w8.h8.bRadius2.minW8.$,
     style: styleBuilderInstance.add({
       backgroundColor: $L(e, us)
     }).$
@@ -448,7 +448,7 @@ function Z({
     children: [jsx(K, {
       teamId: e.teamIds[0]
     }), jsx('div', {
-      className: _$$s2.noWrap.ellipsis.overflowHidden.$,
+      className: cssBuilderInstance.noWrap.ellipsis.overflowHidden.$,
       children: jsx(TextWithTruncation, {
         color: 'default',
         children: e.teams[0]?.name

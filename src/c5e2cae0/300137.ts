@@ -5,7 +5,7 @@ import { openWindow } from "../905/508367";
 import { A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { isStudentValidated } from "../figma_app/141320";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
@@ -63,7 +63,7 @@ function y({
   return jsx(TrackingProvider, {
     name: "Campfire Cart Banner",
     children: jsxs("div", {
-      className: _$$s.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
+      className: cssBuilderInstance.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
       style: styleBuilderInstance.add({
         borderRadius: "13px"
       }).$$if(a, styleBuilderInstance.add({
@@ -71,9 +71,9 @@ function y({
       })).$,
       "data-testid": "campfire-cart-banner",
       children: [jsxs("div", {
-        className: _$$s.flex.itemsCenter.$,
+        className: cssBuilderInstance.flex.itemsCenter.$,
         children: [jsx(_$$b, {}), jsx("p", {
-          className: _$$s.fontMedium.px4.$,
+          className: cssBuilderInstance.fontMedium.px4.$,
           children: h ? b : N
         })]
       }), jsx(S, {

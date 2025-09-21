@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import a from "classnames";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
@@ -71,7 +71,7 @@ function I(e) {
   });
   if (workspace.publicPluginsOrWidgetDisabled) {
     if (hasPendingRequest) return jsx("div", {
-      className: _$$s.mlAuto.$,
+      className: cssBuilderInstance.mlAuto.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "secondary",
@@ -99,7 +99,7 @@ function I(e) {
         extension
       });
       return jsx("div", {
-        className: _$$s.mlAuto.$,
+        className: cssBuilderInstance.mlAuto.$,
         children: jsx($, {
           disabled: !0,
           "data-tooltip": e,
@@ -109,14 +109,14 @@ function I(e) {
       });
     }
     return jsx("div", {
-      className: _$$s.mlAuto.$,
+      className: cssBuilderInstance.mlAuto.$,
       children: jsx($, {
         children: renderI18nText("community.try.pick_workspace.request_approval")
       })
     });
   }
   return jsx(SvgComponent, {
-    className: _$$s.pl16.pr16.mlAuto.colorIcon.$,
+    className: cssBuilderInstance.pl16.pr16.mlAuto.colorIcon.$,
     svg: _$$A,
     dataTestId: "chevron-right"
   });
@@ -137,8 +137,8 @@ function E({
     disabled: i,
     children: [jsx("div", {
       className: s()({
-        [_$$s.ml8.mr8.$]: !0,
-        [_$$s.opacity0_5.$]: i
+        [cssBuilderInstance.ml8.mr8.$]: !0,
+        [cssBuilderInstance.opacity0_5.$]: i
       }),
       children: jsx(a, {
         name: t.workspaceName,
@@ -146,7 +146,7 @@ function E({
         orgId: t.orgId
       })
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.itemsStart.mr8.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsStart.mr8.$,
       children: [jsx("div", {
         className: bv,
         children: jsx(TextWithTruncation, {
@@ -168,7 +168,7 @@ function x(e) {
     disabled: !1,
     onClick: e.onClick,
     rowIcon: jsx(SvgComponent, {
-      className: _$$s.pl16.pr16.mlAuto.colorIcon.$,
+      className: cssBuilderInstance.pl16.pr16.mlAuto.colorIcon.$,
       svg: _$$A,
       dataTestId: "chevron-right"
     }),
@@ -236,7 +236,7 @@ export function $$w2(e) {
   } = e;
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.alignCenter.$,
+      className: cssBuilderInstance.alignCenter.$,
       children: "manage_allowlist" === e.mode ? jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 20,
@@ -249,7 +249,7 @@ export function $$w2(e) {
         children: renderI18nText("community.using.pick_workspace.title")
       })
     }), jsx("div", {
-      className: _$$s.alignCenter.pt6.$,
+      className: cssBuilderInstance.alignCenter.pt6.$,
       children: "manage_allowlist" === e.mode ? jsx(TextWithTruncation, {
         fontSize: 13,
         color: "default",

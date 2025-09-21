@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { VisualBellActions } from "../905/302958";
 import { R } from "../905/687502";
 import { y4 } from "../figma_app/298277";
@@ -18,8 +18,8 @@ function f({
 }) {
   return jsx("div", {
     className: l()("file_browser_page_view--viewBarWrapper--LVp2Z", {
-      [_$$s.sticky.$]: e,
-      [_$$s.bSolid.colorBorder.bt1.$]: t
+      [cssBuilderInstance.sticky.$]: e,
+      [cssBuilderInstance.bSolid.colorBorder.bt1.$]: t
     }),
     children: i
   });

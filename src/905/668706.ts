@@ -11,7 +11,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { KeyCodes } from "../905/63728";
 import { useSprigWithSampling } from "../905/99656";
 import { xD, Qv, Cp, IW, o_ } from "../figma_app/563413";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { searchSelectedAction, setFocusAction, searchClearQueryAction } from "../905/977218";
 import { y as _$$y } from "../905/713563";
 import { R } from "../905/186289";
@@ -85,7 +85,7 @@ let E = connect((e, t) => ({
   }, [S]);
   return jsx("form", {
     onSubmit: T,
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: e.useCommunityLandingStyles ? jsx(xD, {
       focusOnMount: x,
       query: t,

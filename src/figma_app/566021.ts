@@ -28,7 +28,7 @@ import { G as _$$G } from "../figma_app/404079";
 import { uA, Wv, Im, kL } from "../figma_app/454622";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
 import { XE } from "../figma_app/91703";
@@ -210,7 +210,7 @@ function B() {
     return e.mirror.sceneGraph.get(t)?.simplifyInstancePanels ?? !1;
   });
   return jsx("div", {
-    className: _$$s.bSolid.bt1.colorBorder.pt16.pb28.pl12.pr12.$,
+    className: cssBuilderInstance.bSolid.bt1.colorBorder.pt16.pb28.pl12.pr12.$,
     children: jsxs(Checkbox, {
       checked: e,
       label: jsx(Label, {

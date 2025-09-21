@@ -5,7 +5,7 @@ import { SelectPrimitiveTrigger } from "../905/408073";
 import { k } from "../905/44647";
 import { r as _$$r } from "../905/571562";
 import d from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -24,7 +24,7 @@ export function $$x0(e) {
       className: h
     }), !e.hideChevron && jsxs(Fragment, {
       children: [jsx(Spacer, {}), jsx(k, {
-        className: c()("highlight--chevron--vUd7C", _$$s.ml8.$)
+        className: c()("highlight--chevron--vUd7C", cssBuilderInstance.ml8.$)
       })]
     })]
   });

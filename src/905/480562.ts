@@ -7,7 +7,7 @@ import { B as _$$B } from "../905/950875";
 import { L as _$$L } from "../905/704296";
 import { getFeatureFlags } from "../905/601108";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { selectUserFlag } from "../905/940356";
@@ -582,7 +582,7 @@ function eA({
   for (let e of t) i.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
   let r = "data:text/plain;charset=utf-8," + encodeURIComponent(i.join("\r\n"));
   return jsx("span", {
-    className: _$$s.ml12.$,
+    className: cssBuilderInstance.ml12.$,
     children: jsx(Ph, {
       href: r,
       download: getI18nString("design_systems.libraries_modal.dsa_csv_file_name", {
@@ -669,7 +669,7 @@ let eS = _$$ex("dsa_graph", function ({
     useGrouping: !0
   }).format(e), [e]);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.justifyCenter.$,
     children: [jsx("div", {
       children: renderI18nText("design_systems.libraries_modal.dsa_graph_tooltip", {
         numInsertions: i
@@ -1117,7 +1117,7 @@ function eM({
   for (let e of i) r.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
   let a = "data:text/plain;charset=utf-8," + encodeURIComponent(r.join("\r\n"));
   return jsx("span", {
-    className: _$$s.ml12.$,
+    className: cssBuilderInstance.ml12.$,
     children: jsx(Ph, {
       href: a,
       download: getI18nString("design_systems.libraries_modal.dsa_csv_team_file_name", {
@@ -1247,7 +1247,7 @@ function e$({
           children: getI18nString("design_systems.libraries_modal.modes")
         })]
       }), m && jsxs("div", {
-        className: _$$s.flex.alignCenter.gap8.$,
+        className: cssBuilderInstance.flex.alignCenter.gap8.$,
         children: [jsx(Label, {
           className: "library_item_stats_by_asset--dropdownLabel--pciWg text--fontPos11--2LvXf text--_fontBase--QdLsd",
           htmlFor: A,
@@ -1326,11 +1326,11 @@ export function $$eJ0({
     page: _$$e.DSA_FILE_VIEW_ANALYTICS,
     properties: T,
     children: jsxs("div", {
-      className: _$$s.flexAuto.minH0.flex.flexColumn.maxHFull.$,
+      className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.maxHFull.$,
       children: [jsxs(_$$P, {
         width: h,
         ref: f,
-        className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+        className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         children: [jsx(e1, {}), jsx(R, {
           assetType: e,
           comparisonLibrary: b,
@@ -1380,16 +1380,16 @@ function e1() {
     }));
   }, [t]);
   return !getFeatureFlags().dsa_missing_data_banner || e ? null : jsxs("div", {
-    className: _$$s.colorBgInfo.p8.radiusMedium.flex.flexRow.my8.mx16.gap8.$,
+    className: cssBuilderInstance.colorBgInfo.p8.radiusMedium.flex.flexRow.my8.mx16.gap8.$,
     children: [jsx(_$$B, {}), jsxs("div", {
-      className: _$$s.flex.flex1.flexColumn.gap1.$,
+      className: cssBuilderInstance.flex.flex1.flexColumn.gap1.$,
       children: [jsx("strong", {
         children: renderI18nText("design_systems.libraries_modal.dsa_missing_data_header")
       }), jsx("div", {
         children: renderI18nText("design_systems.libraries_modal.dsa_missing_data_message")
       })]
     }), jsx("div", {
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.libraries_modal.dsa_missing_data_dismiss"),
         onClick: i,

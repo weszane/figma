@@ -9,7 +9,7 @@ import { isCommandOrShift } from "../905/63728";
 import { h1, Ak } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { NU } from "../figma_app/204891";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { trackFileClicked } from "../figma_app/976345";
@@ -34,7 +34,7 @@ export function $$R1(e) {
   }) : "loaded" !== t.status ? null : jsxs("div", {
     className: m2,
     children: [jsx("span", {
-      className: _$$s.inlineFlex.$,
+      className: cssBuilderInstance.inlineFlex.$,
       children: e.left || null
     }), jsxs("span", {
       className: ag,
@@ -100,7 +100,7 @@ function N(e) {
       }), jsxs("div", {
         className: SC,
         children: [e.hasUnsyncedChanges && jsx("div", {
-          className: _$$s.pr4.$,
+          className: cssBuilderInstance.pr4.$,
           children: jsx(K, {})
         }), jsx("div", {
           className: e.disabled ? Dv : VA,

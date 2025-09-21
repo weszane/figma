@@ -4,7 +4,7 @@ import a from "classnames";
 import { formatNumber } from "../figma_app/930338";
 import { a as _$$a } from "../905/925868";
 import { MediaQuerySvgComponent } from "../905/331623";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n, v as _$$v } from "../905/458699";
 import { QP } from "../figma_app/487970";
@@ -246,7 +246,7 @@ export function $$D2({
       children: [jsxs("div", {
         className: $P,
         children: [jsx("span", {
-          className: _$$s.ellipsis.noWrap.overflowHidden.$,
+          className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
           children: model.name
         }), jsx(_$$l, {
           profile: model,

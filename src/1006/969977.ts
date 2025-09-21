@@ -12,7 +12,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { logger } from "../905/651849";
 import { selectWithShallowEqual } from "../905/103090";
 import { BaseLinkComponent } from "../905/551536";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
 import { z5 } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -54,7 +54,7 @@ function M(e) {
 function P(e) {
   let t = e.href ? jsx(BaseLinkComponent, {
     href: e.href,
-    className: _$$s.cursorDefault.wFull.hFull.$,
+    className: cssBuilderInstance.cursorDefault.wFull.hFull.$,
     target: "_blank",
     trusted: !1,
     children: jsx("img", {
@@ -83,7 +83,7 @@ function P(e) {
 function O(e) {
   let t = e.href ? jsx(BaseLinkComponent, {
     href: e.href,
-    className: d()(B, _$$s.cursorDefault.wFull.hFull.$),
+    className: d()(B, cssBuilderInstance.cursorDefault.wFull.hFull.$),
     target: "_blank",
     trusted: !1,
     children: e.label
@@ -92,7 +92,7 @@ function O(e) {
     children: e.label
   });
   return jsx($n, {
-    className: _$$s.flexShrink0.$,
+    className: cssBuilderInstance.flexShrink0.$,
     tooltip: e.tooltip === e.label ? void 0 : e.tooltip,
     onClick: e.onClick,
     active: e.active ? e.active : "NONE",

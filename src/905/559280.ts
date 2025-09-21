@@ -9,7 +9,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { l as _$$l } from "../905/30301";
 import { x as _$$x } from "../905/211326";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
 import { wrapWithTracking, useTracking } from "../figma_app/831799";
@@ -265,14 +265,14 @@ export class $$R0 extends Component {
                 }), jsxs("div", {
                   className: v0,
                   children: [e.additionalButton && jsx("div", {
-                    className: _$$s.ml8.$,
+                    className: cssBuilderInstance.ml8.$,
                     children: jsx(O, {
                       additionalButton: e.additionalButton,
                       dismissModal: this.props.dismissModal,
                       dispatch: this.props.dispatch
                     })
                   }), jsx("div", {
-                    className: _$$s.ml8.$,
+                    className: cssBuilderInstance.ml8.$,
                     children: jsx($z, {
                       ref: this.nextButtonRef,
                       onClick: this.props.onClickPrimaryCta,

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { a as _$$a } from "../905/925868";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { C } from "../figma_app/514836";
 import { T } from "../5132/203178";
@@ -28,7 +28,7 @@ export function $$p1({
       children: [jsx("div", {
         className: _$$e,
         children: jsx("div", {
-          className: _$$s.relative.$,
+          className: cssBuilderInstance.relative.$,
           children: jsx(Gm, {
             resource: e,
             resourceContent: t,

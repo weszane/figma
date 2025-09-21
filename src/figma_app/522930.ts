@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { localStorageRef } from "../905/657224";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/965990";
@@ -21,7 +21,7 @@ export function $$E0({
   fullWidth: e = !1
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.itemsCenter.mxAuto.gap12.alignCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.mxAuto.gap12.alignCenter.justifyCenter.$,
     style: {
       width: e ? "100%" : "360px",
       paddingTop: "100px"
@@ -32,7 +32,7 @@ export function $$E0({
         useCurrentFileAsThumbnail: !1
       })
     }), jsx("div", {
-      className: _$$s.font13.fontSemiBold.$,
+      className: cssBuilderInstance.font13.fontSemiBold.$,
       children: renderI18nText("whiteboard.inserts.custom_templates_header")
     }), jsx("div", {
       children: renderI18nText("whiteboard.inserts.custom_templates_description")
@@ -74,7 +74,7 @@ function b({
     f();
   }, []);
   return jsxs("div", {
-    className: _$$s.bRadius5.flex.flexRow.itemsStart.gap12.itemsCenter.p18.colorBgSecondary.mb20.$$if(e, _$$s.m24).$$if(t, _$$s.m12.p12.pt16.mb12).$,
+    className: cssBuilderInstance.bRadius5.flex.flexRow.itemsStart.gap12.itemsCenter.p18.colorBgSecondary.mb20.$$if(e, cssBuilderInstance.m24).$$if(t, cssBuilderInstance.m12.p12.pt16.mb12).$,
     "data-testid": "teamplates-announcement-card",
     children: [jsx("div", {
       children: jsx($z, {
@@ -82,14 +82,14 @@ function b({
         useCurrentFileAsThumbnail: !1
       })
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.justifyBetween.$,
+      className: cssBuilderInstance.flex.flexColumn.justifyBetween.$,
       children: [jsx("div", {
-        className: _$$s.font13.fontSemiBold.pb8.$,
+        className: cssBuilderInstance.font13.fontSemiBold.pb8.$,
         children: renderI18nText("whiteboard.inserts.custom_templates_header")
       }), jsx("div", {
         children: renderI18nText("whiteboard.inserts.custom_templates_description")
       }), jsxs("div", {
-        className: _$$s.flex.gap8.pt16.$,
+        className: cssBuilderInstance.flex.gap8.pt16.$,
         children: [jsx(pW, {
           newTab: !0,
           href: A,

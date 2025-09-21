@@ -8,7 +8,7 @@ import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Zl } from "../905/211621";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { zE } from "../905/8732";
 import { dG } from "../figma_app/753501";
@@ -76,7 +76,7 @@ export function $$k1(e) {
   let Z = useMemo(() => V ? [V] : [], [V]);
   return jsxs(Fragment, {
     children: [jsxs(ButtonPrimitive, {
-      className: c()($, _$$s.alignLeft.$),
+      className: c()($, cssBuilderInstance.alignLeft.$),
       ref: H,
       onClick: q,
       recordingKey: generateRecordingKey("instanceSwapToggle", pickerID),

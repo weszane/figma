@@ -114,7 +114,7 @@ import { A as _$$A5 } from '../6828/865061';
 import { d as _$$d2 } from '../7021/966231';
 import { fm } from '../c5e2cae0/453906';
 import { WQ } from '../c5e2cae0/705272';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { useLatestRef } from '../figma_app/922077';
 import { IpAllowlistRangesView, OrgAdminSettingsPage, OrgMfaGuestInfoView, Plugin, OrgWorkspacesWithControlSettingsView, OrgMfaMemberInfoView, OrgSharedSettingView, ToggledDevModeSettingsView } from '../figma_app/43951';
@@ -308,7 +308,7 @@ function ed(e) {
       onChange: t => {
         e.setSignInMethod(t);
       },
-      className: _$$s.pl10.pt16.$,
+      className: cssBuilderInstance.pl10.pt16.$,
       children: [jsx(_$$Z, {
         value: AuthTypeEnum.ANY,
         disabled: !!desktopAPIInstance,
@@ -349,7 +349,7 @@ function e_(e) {
   let c = e.mfaRequiredSetting === UserTypeEnum.MEMBERS || e.mfaRequiredSetting === UserTypeEnum.ALL_USERS;
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: _$$s.flex.alignLeft.mt16.pt10.$,
+      className: cssBuilderInstance.flex.alignLeft.mt16.pt10.$,
       style: styleBuilderInstance.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
@@ -367,7 +367,7 @@ function e_(e) {
         })
       })
     }), !d && c && jsx('div', {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx(BannerInsetModal, {
         variant: 'warn',
         children: jsxs(BannerMessage, {
@@ -461,7 +461,7 @@ let eu = registerModal(() => {
         })]
       })]
     }), jsxs('div', {
-      className: J()(_$$qr, v ? void 0 : _$$s.mt2.$),
+      className: J()(_$$qr, v ? void 0 : cssBuilderInstance.mt2.$),
       children: [jsx(Button, {
         variant: 'secondary',
         onClick: f,
@@ -1912,16 +1912,16 @@ function aj({
   });
   return jsxs(Fragment, {
     children: [jsxs('div', {
-      className: _$$s.flex.flexColumn.gap8.py8.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.py8.$,
       children: [jsx(TextWithTruncation, {
         children: renderI18nText('settings_tab.paste_plugin_link', {
           orgLink: _,
           communityLink: u
         })
       }), jsxs('div', {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [jsx(BigTextInputForwardRef, {
-          className: _$$s.flexGrow1.mr8.$,
+          className: cssBuilderInstance.flexGrow1.mr8.$,
           onChange: t,
           value: a,
           placeholder: Nz(),
@@ -1932,14 +1932,14 @@ function aj({
         })]
       })]
     }), s && jsx('div', {
-      className: _$$s.colorTextDanger.$,
+      className: cssBuilderInstance.colorTextDanger.$,
       children: s
     })]
   });
 }
 function ay() {
   return jsx('div', {
-    className: _$$s.colorBorder.bSolid.bt1.$
+    className: cssBuilderInstance.colorBorder.bSolid.bt1.$
   });
 }
 let aE = atom(!1);
@@ -1979,7 +1979,7 @@ function aD({
   text: e
 }) {
   return jsx('div', {
-    className: _$$s.mx8.$,
+    className: cssBuilderInstance.mx8.$,
     children: jsx(TextWithTruncation, {
       color: 'default',
       children: e
@@ -2003,18 +2003,18 @@ function aM({
       id: t.plugin_id,
       translate: 'no',
       children: jsxs('div', {
-        className: _$$s.justifyBetween.flex.h32.alignCenter.$,
+        className: cssBuilderInstance.justifyBetween.flex.h32.alignCenter.$,
         children: [jsxs('div', {
-          className: _$$s.flex.itemsCenter.$,
+          className: cssBuilderInstance.flex.itemsCenter.$,
           children: [jsx(_$$V2, {
-            className: _$$s.w16.h16.br2.$,
+            className: cssBuilderInstance.w16.h16.br2.$,
             plugin: t
           }), jsx('div', {
-            className: _$$s.h32.flex.itemsCenter.mx4.alignLeft.$,
+            className: cssBuilderInstance.h32.flex.itemsCenter.mx4.alignLeft.$,
             children: t.name
           })]
         }), jsx('div', {
-          className: _$$s.justifyEnd.$,
+          className: cssBuilderInstance.justifyEnd.$,
           children: jsx(_$$$, {
             'icon': 'minus-32',
             'onClick': () => {
@@ -2035,10 +2035,10 @@ function aM({
 function aP(e) {
   let t = useCurrentUserOrg() || null;
   return jsxs('div', {
-    className: _$$s.flex.justifyBetween.py8.$,
+    className: cssBuilderInstance.flex.justifyBetween.py8.$,
     children: [jsxs('div', {
       children: [jsx('div', {
-        className: _$$s.mb4.$,
+        className: cssBuilderInstance.mb4.$,
         children: jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: e.label
@@ -2083,12 +2083,12 @@ function aU({
     'plugin' in n ? n.plugin ? isSingleDevWithCodegen(n.plugin) ? p(getI18nString('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(getI18nString('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
   };
   return jsxs('div', {
-    'className': _$$s.m16.$,
+    'className': cssBuilderInstance.m16.$,
     'data-testid': 'dev-mode-settings-modal-pinned-plugins',
     'children': [getFeatureFlags().dev_mode_org_pinned_plugins_ent ? jsxs('div', {
-      className: _$$s.mb8.$,
+      className: cssBuilderInstance.mb8.$,
       children: [jsx('div', {
-        className: _$$s.$$if(!isBigmaEnabledSimple(t) && !o, _$$s.opacity0_5).$,
+        className: cssBuilderInstance.$$if(!isBigmaEnabledSimple(t) && !o, cssBuilderInstance.opacity0_5).$,
         children: jsx(aP, {
           label: getI18nString('settings_tab.pinned_plugins_label'),
           description: getI18nString('settings_tab.pinned_plugins_description'),
@@ -2101,7 +2101,7 @@ function aU({
       }), !isBigmaEnabledSimple(t) && e && e.pinnedPlugins.length > 0 && jsx(aF, {})]
     }) : jsxs(Fragment, {
       children: [jsx('div', {
-        className: _$$s.mb4.$,
+        className: cssBuilderInstance.mb4.$,
         children: jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.pinned_plugins_label')
@@ -2112,25 +2112,25 @@ function aU({
         })
       })]
     }), o && !e.loaded ? jsx(LoadingSpinner, {
-      className: _$$s.pt8.flex.alignCenter.justifyCenter.$
+      className: cssBuilderInstance.pt8.flex.alignCenter.justifyCenter.$
     }) : getFeatureFlags().dev_mode_org_pinned_plugins_ent ? o && jsxs(Fragment, {
       children: [jsx(aM, {
         preferences: e
       }), jsx('div', {
-        className: _$$s.flex.bSolid.b1.bRadius3.colorBorder.h40.my16.$,
+        className: cssBuilderInstance.flex.bSolid.b1.bRadius3.colorBorder.h40.my16.$,
         children: jsxs('div', {
-          className: _$$s.flex.itemsCenter.justifyBetween.wFull.px8.$,
+          className: cssBuilderInstance.flex.itemsCenter.justifyBetween.wFull.px8.$,
           children: [jsxs('div', {
-            className: _$$s.flex.$,
+            className: cssBuilderInstance.flex.$,
             children: [jsx('div', {
-              className: _$$s.flex.mx8.$,
+              className: cssBuilderInstance.flex.mx8.$,
               children: jsx(TextWithTruncation, {
                 color: 'secondary',
                 fontWeight: 'medium',
                 children: renderI18nText('settings_tab.pinned_plugins_inspect')
               })
             }), jsx('div', {
-              className: _$$s.flex.mx8.$,
+              className: cssBuilderInstance.flex.mx8.$,
               children: jsx(TextWithTruncation, {
                 color: 'secondary',
                 fontWeight: 'medium',
@@ -2138,9 +2138,9 @@ function aU({
               })
             })]
           }), jsxs('div', {
-            className: _$$s.flex.itemsCenter.$,
+            className: cssBuilderInstance.flex.itemsCenter.$,
             children: [g && jsx('div', {
-              className: _$$s.mr1.$,
+              className: cssBuilderInstance.mr1.$,
               children: jsx(_$$$, {
                 icon: 'plus-32',
                 variant: r ? 'primary' : 'text',
@@ -2161,9 +2161,9 @@ function aU({
       })]
     }) : jsxs(Fragment, {
       children: [g && jsxs('div', {
-        className: _$$s.flex.py12.$,
+        className: cssBuilderInstance.flex.py12.$,
         children: [jsx(BigTextInputForwardRef, {
-          className: _$$s.flexGrow1.mr8.$,
+          className: cssBuilderInstance.flexGrow1.mr8.$,
           onChange: x,
           value: _,
           placeholder: Nz(),
@@ -2173,28 +2173,28 @@ function aU({
           children: renderI18nText('settings_tab.pinned_plugins_add')
         })]
       }), m && jsx('div', {
-        className: _$$s.colorTextDanger.$,
+        className: cssBuilderInstance.colorTextDanger.$,
         children: m
       }), jsx(aM, {
         preferences: e
       }), jsx('div', {
-        className: _$$s.flex.bSolid.b1.bRadius3.colorBorder.h32.my12.$,
+        className: cssBuilderInstance.flex.bSolid.b1.bRadius3.colorBorder.h32.my12.$,
         children: jsxs('div', {
-          className: _$$s.flex.itemsCenter.justifyBetween.wFull.px8.$,
+          className: cssBuilderInstance.flex.itemsCenter.justifyBetween.wFull.px8.$,
           children: [jsx('div', {
-            className: _$$s.flex.mx8.$,
+            className: cssBuilderInstance.flex.mx8.$,
             children: jsx(TextWithTruncation, {
               fontWeight: 'bold',
               children: renderI18nText('settings_tab.pinned_plugins_inspect')
             })
           }), jsx('div', {
-            className: _$$s.flex.mx8.$,
+            className: cssBuilderInstance.flex.mx8.$,
             children: jsx(TextWithTruncation, {
               fontWeight: 'regular',
               children: renderI18nText('settings_tab.pinned_plugins_plugins')
             })
           }), jsx('div', {
-            className: _$$s.flexGrow1.$,
+            className: cssBuilderInstance.flexGrow1.$,
             children: e.pinnedPlugins.length > 0 && jsx(pG, {
               ...e
             })
@@ -2231,13 +2231,13 @@ function aq({
     currentSavedCodeLanguage: a
   });
   return jsxs('div', {
-    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'className': cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-language-row',
     'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: renderI18nText('settings_tab.codegen_language_dropdown_label')
     }), jsx('div', {
-      className: _$$s.flex.justifyEnd.$,
+      className: cssBuilderInstance.flex.justifyEnd.$,
       children: jsx(ls, {
         dropdownId: 'ORG_ADMIN_SETTINGS_CODE_LANGUAGE_DROPDOWN',
         codeLanguageApi: i
@@ -2250,13 +2250,13 @@ function a$({
   onCodeLanguageUnitChange: t
 }) {
   return isCodegenSupportedForLanguage() ? jsxs('div', {
-    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'className': cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-unit-row',
     'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: renderI18nText('settings_tab.codegen_language_unit_dropdown_label')
     }), jsx('div', {
-      className: _$$s.flex.justifyEnd.mr4.$,
+      className: cssBuilderInstance.flex.justifyEnd.mr4.$,
       children: jsx(gn, {
         currentUnit: e || MeasurementUnit.PIXEL,
         onChangeUnit: t
@@ -2286,13 +2286,13 @@ function aG({
   item: e
 }) {
   return jsxs('div', {
-    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'className': cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-plugin-settings-row',
     'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: e.displayText
     }), jsx('div', {
-      className: _$$s.flex.justifyEnd.$,
+      className: cssBuilderInstance.flex.justifyEnd.$,
       children: jsx(jp, {
         item: e
       })
@@ -2326,7 +2326,7 @@ function az({
   }, [a]);
   let b = useSelector(e => e.whitelistedPlugins);
   return jsxs('div', {
-    'className': _$$s.m16.$$if(!isBigmaEnabledSimple(t), _$$s.opacity0_5).$,
+    'className': cssBuilderInstance.m16.$$if(!isBigmaEnabledSimple(t), cssBuilderInstance.opacity0_5).$,
     'id': 'org-admin-codegen-settings',
     'data-testid': 'org-admin-codegen-settings',
     'children': [jsx(aP, {
@@ -2338,7 +2338,7 @@ function az({
         l(!r);
       }
     }), r && isBigmaEnabledSimple(t) && (e?.loaded ? jsxs('div', {
-      className: _$$s.flexColumn.py8.$,
+      className: cssBuilderInstance.flexColumn.py8.$,
       children: [jsx(aq, {
         onCodeLanguageChange: t => {
           e?.setCodegenSettingsLanguage(t);
@@ -2403,7 +2403,7 @@ function az({
         })]
       })]
     }) : jsx(LoadingSpinner, {
-      className: _$$s.m16.pt8.flex.alignCenter.justifyCenter.$
+      className: cssBuilderInstance.m16.pt8.flex.alignCenter.justifyCenter.$
     }))]
   });
 }
@@ -2411,12 +2411,12 @@ function aV({
   plugin: e
 }) {
   return e ? jsxs('div', {
-    className: _$$s.flex.py8.itemsCenter.$,
+    className: cssBuilderInstance.flex.py8.itemsCenter.$,
     children: [jsx(_$$V2, {
-      className: _$$s.w24.h24.br2.$,
+      className: cssBuilderInstance.w24.h24.br2.$,
       plugin: e
     }), jsx('div', {
-      className: _$$s.mx8.$,
+      className: cssBuilderInstance.mx8.$,
       children: jsx(TextWithTruncation, {
         fontWeight: 'semi-bold',
         children: e.name
@@ -2437,7 +2437,7 @@ function aW() {
     t.loaded && !g && (u(t.plugin), h(!0));
   }, [t.loaded, t.plugin, u, g, h]);
   return jsxs('div', {
-    'className': _$$s.m16.$$if(!isBigmaEnabledSimple(e), _$$s.opacity0_5).$,
+    'className': cssBuilderInstance.m16.$$if(!isBigmaEnabledSimple(e), cssBuilderInstance.opacity0_5).$,
     'data-testid': 'dev-mode-settings-modal-auto-run',
     'children': [jsx(aP, {
       label: getI18nString('settings_tab.auto_run_label'),
@@ -2453,7 +2453,7 @@ function aW() {
           children: [jsx(aV, {
             plugin: c
           }), jsx('div', {
-            className: _$$s.py8.$,
+            className: cssBuilderInstance.py8.$,
             children: jsx(SecureLink, {
               trusted: !0,
               onClick: () => u(null),
@@ -2498,7 +2498,7 @@ function aW() {
           buttonText: getI18nString('settings_tab.dev_mode_setting_set')
         })
       }) : jsx(LoadingSpinner, {
-        className: _$$s.pt8.flex.alignCenter.justifyCenter.$
+        className: cssBuilderInstance.pt8.flex.alignCenter.justifyCenter.$
       })
     })]
   });
@@ -2578,7 +2578,7 @@ let aH = registerModal(() => {
     }), jsx(ay, {}), jsx(az, {
       preferences: a
     }), jsx(ay, {}), jsx(aW, {}), !isBigmaEnabledSimple(e) && getFeatureFlags().dev_mode_org_pinned_plugins_ent && jsx('div', {
-      className: _$$s.m16.$,
+      className: cssBuilderInstance.m16.$,
       children: jsxs(_$$z2, {
         orientation: 'vertical',
         iconSrc: _$$A6,
@@ -2608,7 +2608,7 @@ let aH = registerModal(() => {
         })]
       })
     }), jsxs('div', {
-      className: _$$s.flex.flexRow.gap8.justifyEnd.m16.$,
+      className: cssBuilderInstance.flex.flexRow.gap8.justifyEnd.m16.$,
       children: [jsx(_$$$, {
         onClick: A,
         children: renderI18nText('general.cancel')
@@ -2983,7 +2983,7 @@ let nr = registerModal(() => {
             children: renderI18nText('org_settings.external_collaboration_controls.banner', {
               let_org_know: jsx(SecureLink, {
                 href: 'https://help.figma.com/hc/articles/12080587805719',
-                className: _$$s.font11.$,
+                className: cssBuilderInstance.font11.$,
                 trusted: !0,
                 children: renderI18nText('org_settings.external_collaboration_controls.let_org_know')
               })
@@ -3077,7 +3077,7 @@ function n_(e) {
   let c = e.mfaRequiredSetting === UserTypeEnum.GUESTS || e.mfaRequiredSetting === UserTypeEnum.ALL_USERS;
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: _$$s.flex.alignLeft.mt16.pt10.pb16.$,
+      className: cssBuilderInstance.flex.alignLeft.mt16.pt10.pb16.$,
       style: styleBuilderInstance.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
@@ -3094,7 +3094,7 @@ function n_(e) {
         })
       })
     }), !d && c && jsx('div', {
-      className: _$$s.mb10.$,
+      className: cssBuilderInstance.mb10.$,
       children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx(BannerInsetModal, {
         variant: 'warn',
         children: jsxs(BannerMessage, {
@@ -3197,7 +3197,7 @@ let nm = registerModal(() => {
         },
         children: renderI18nText('org_settings.guest_control.guest_question')
       }), jsxs(_$$z, {
-        className: _$$s.pl10.$,
+        className: cssBuilderInstance.pl10.$,
         value: g ?? 'none',
         onChange: e => {
           let t = e === 'none' ? null : e;
@@ -3220,7 +3220,7 @@ let nm = registerModal(() => {
           children: getGuestControlApprovalStatus(ApprovalStatusEnum.BANNED)
         })]
       }), !Bg(t.shared_container_setting) && g != null && jsx('div', {
-        className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? _$$s.mt16.$ : _$$s.my16.$),
+        className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? cssBuilderInstance.mt16.$ : cssBuilderInstance.my16.$),
         children: renderI18nText('org_settings.guest_control.link_sharing_on', {
           enabled: jsx('span', {
             style: {
@@ -3346,8 +3346,8 @@ function nw(e) {
   let a = Um();
   let s = a?.type === e.id;
   return jsxs(_$$V3, {
-    chevronClassName: _$$s.mlAuto.$,
-    className: _$$s.bRadius3.b1.bSolid.colorBorder.wFull.$,
+    chevronClassName: cssBuilderInstance.mlAuto.$,
+    className: cssBuilderInstance.bRadius3.b1.bSolid.colorBorder.wFull.$,
     dispatch: t,
     type: e.id,
     showingDropdown: s,
@@ -3365,7 +3365,7 @@ function nk(e) {
     style: styleBuilderInstance.add({
       marginTop: '-8px'
     }).$,
-    className: _$$s.colorTextSecondary.ml20.mb8.$,
+    className: cssBuilderInstance.colorTextSecondary.ml20.mb8.$,
     children: e.children
   });
 }
@@ -3381,7 +3381,7 @@ function nE(e) {
     duration
   });
   return jsx('div', {
-    className: _$$s.mt8.font11.fontNormal.colorTextSecondary.$,
+    className: cssBuilderInstance.mt8.font11.fontNormal.colorTextSecondary.$,
     children: renderI18nText(`settings_tab.idle_session_timeout.configured_time_description.${key}`, {
       duration: i
     })
@@ -3492,7 +3492,7 @@ let nC = registerModal(e => {
       padding: 16,
       spacing: 16,
       children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(_$$z, {
-        className: _$$s.wFull.mt16.$,
+        className: cssBuilderInstance.wFull.mt16.$,
         value: o,
         onChange: k,
         children: [jsx(_$$Z, {
@@ -3501,12 +3501,12 @@ let nC = registerModal(e => {
         }), jsx(nk, {
           children: jsxs(Fragment, {
             children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.default_choice_timeframe'), jsx('div', {
-              className: _$$s.inline.$,
+              className: cssBuilderInstance.inline.$,
               children: jsx(BaseLinkComponent, {
                 trusted: !0,
                 target: '_blank',
                 href: 'https://help.figma.com/hc/articles/14376092335127',
-                className: _$$s.inline.ml4.$,
+                className: cssBuilderInstance.inline.ml4.$,
                 children: renderI18nText('workspace.create_confirmation_modal.description.outro.learn_more')
               })
             })]
@@ -3518,7 +3518,7 @@ let nC = registerModal(e => {
           children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.configured_choice_subtitle')
         }), o === ng.CONFIGURED && jsxs('div', {
           'data-testid': 'dropdown-group',
-          'className': _$$s.mlAuto.$,
+          'className': cssBuilderInstance.mlAuto.$,
           'children': [jsxs(AutoLayout, {
             direction: 'horizontal',
             horizontalAlignItems: 'end',
@@ -3564,7 +3564,7 @@ let nC = registerModal(e => {
           })]
         })]
       }), o === ng.CONFIGURED && x && jsx('div', {
-        className: _$$s.bRadius4.px12.py8.colorBgInfo.$,
+        className: cssBuilderInstance.bRadius4.px12.py8.colorBgInfo.$,
         children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.warning_description')
       }), jsxs(AutoLayout, {
         direction: 'horizontal',
@@ -3622,9 +3622,9 @@ let nT = registerModal(e => {
     confirmText: getI18nString('settings_tab.ip_allowlist_modal.save'),
     disabled: x,
     children: [jsxs('div', {
-      className: _$$s.flex.itemsCenter.justifyBetween.mb16.$,
+      className: cssBuilderInstance.flex.itemsCenter.justifyBetween.mb16.$,
       children: [jsxs('div', {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.ip_allowlist_modal.enable')
@@ -3643,13 +3643,13 @@ let nT = registerModal(e => {
           children: renderI18nText('settings_tab.ip_allowlist_modal.allowed_ranges')
         })
       }), jsx('p', {
-        className: _$$s.mb8.$,
+        className: cssBuilderInstance.mb8.$,
         children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('settings_tab.ip_allowlist_modal.input_instructions')
         })
       }), jsx('div', {
-        className: _$$s.mb12.$,
+        className: cssBuilderInstance.mb12.$,
         children: jsx(_$$v2, {
           value: c,
           placeholder: '0.0.0.0',
@@ -4120,10 +4120,10 @@ function n3(e) {
           innerText: 'close'
         })]
       }), e.canSeeBillingAddressExp && jsx('div', {
-        className: _$$s.mb16.$,
+        className: cssBuilderInstance.mb16.$,
         children: jsx('label', {
           htmlFor: 'updatePaymentDetails',
-          className: _$$s.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: renderI18nText('change_payment.update_payment_details_description')
         })
       }), h != null ? jsx('div', {
@@ -4800,7 +4800,7 @@ export function $$sr0(e) {
           orgName: org.name
         })
       }), jsx('span', {
-        className: _$$s.mt8.$,
+        className: cssBuilderInstance.mt8.$,
         children: org.ip_ranges.length !== 0 ? renderI18nText('settings_tab.ip_restriction_range', {
           ipRanges: jsx(_$$T, {
             formatType: 'unit',
@@ -5550,12 +5550,12 @@ let sl = createOptimistThunk((e, t, {
 });
 export function $$so1() {
   return jsxs('div', {
-    className: _$$s.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
     children: [jsx('span', {
       'aria-label': getI18nString('plan_settings.seat_upgrade_digests_tooltip'),
       'data-tooltip': getI18nString('plan_settings.seat_upgrade_digests_tooltip'),
       'data-tooltip-type': 'text',
-      'className': _$$s.mr4.$,
+      'className': cssBuilderInstance.mr4.$,
       'children': jsx(In, {
         icon: 'info-16',
         fill: 'secondary'
@@ -5572,12 +5572,12 @@ function sd(e) {
   let s = null;
   t && (s = getI18nString('settings_tab.ip_allowlist_domain_verification_tooltip'));
   return jsxs('div', {
-    className: _$$s.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
     children: [t && jsx('span', {
       'aria-label': s,
       'data-tooltip': s,
       'data-tooltip-type': 'text',
-      'className': _$$s.mr4.$,
+      'className': cssBuilderInstance.mr4.$,
       'children': jsx(In, {
         icon: 'info-16',
         fill: 'secondary'

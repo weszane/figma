@@ -11,7 +11,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { ModalCloseButton } from "../905/17223";
 import { z, Z } from "../905/306088";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getRefundReasonString } from "../figma_app/808294";
@@ -54,14 +54,14 @@ let $$N0 = registerModal(function (e) {
     confirmText: renderI18nText("general.confirm"),
     confirmationTitle: renderI18nText("community.buyer.need_a_refund"),
     content: jsxs("div", {
-      className: _$$s.flexColumn.colorText.$,
+      className: cssBuilderInstance.flexColumn.colorText.$,
       children: [renderI18nText("community.buyer.we_re_sorry_to_hear_resource_name_didnt_work_out", {
         resourceName: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: name
         })
       }), getFeatureFlags().cmty_refund_modal_radio_input_migration ? jsxs("form", {
-        className: _$$s.my16.$,
+        className: cssBuilderInstance.my16.$,
         children: [jsx(_$$b, {
           value: f ?? void 0,
           onChange: e => {
@@ -77,7 +77,7 @@ let $$N0 = registerModal(function (e) {
             })
           }, e))
         }), f === CancellationReason.OTHER ? jsx("div", {
-          className: _$$s.mt8.$,
+          className: cssBuilderInstance.mt8.$,
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
@@ -86,19 +86,19 @@ let $$N0 = registerModal(function (e) {
           })
         }) : null]
       }) : jsxs("div", {
-        className: _$$s.my16.$,
+        className: cssBuilderInstance.my16.$,
         children: [jsx(z, {
           value: f,
           onChange: e => {
             b(e);
           },
           children: Object.values(CancellationReason).map(e => jsx(Z, {
-            className: _$$s.font11.selectNone.$,
+            className: cssBuilderInstance.font11.selectNone.$,
             value: e,
             children: getRefundReasonString(e)
           }, e))
         }), f === CancellationReason.OTHER ? jsx("div", {
-          className: _$$s.mt8.$,
+          className: cssBuilderInstance.mt8.$,
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
@@ -172,7 +172,7 @@ let w = registerModal(function (e) {
     size: "small",
     confirmationTitle: renderI18nText("community.buyer.unable_to_process_refund"),
     content: jsx("span", {
-      className: _$$s.colorText.$,
+      className: cssBuilderInstance.colorText.$,
       children: renderI18nText("community.buyer.error_requesting_refund_please_contact_support")
     }),
     confirmText: renderI18nText("community.buyer.get_support"),

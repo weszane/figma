@@ -11,7 +11,7 @@ import m from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { oW } from "../905/675859";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { B } from "../905/900597";
@@ -47,7 +47,7 @@ export function $$w0() {
   });
   let q = useMemo(() => "loaded" !== k.status || !!k.data?.currentUser?.userFlagByName, [k]);
   let M = getFeatureFlags().fc_initial_onboarding_enabled && !q ? jsx("div", {
-    className: _()(_$$s.pt10.$, $$A),
+    className: _()(cssBuilderInstance.pt10.$, $$A),
     children: jsx(BannerFullWidth, {
       variant: "brand",
       icon: jsx(L, {
@@ -73,7 +73,7 @@ export function $$w0() {
       className: "connected_projects_tab_header--contentContainer--xKmY8",
       children: jsxs(Fragment, {
         children: [jsx("div", {
-          className: _$$s.textBodyLarge.$,
+          className: cssBuilderInstance.textBodyLarge.$,
           children: renderI18nText("resource_connection.admin_ui.create_a_connected_project_to_collaborate_with_external_teams_without_being_charged_for_their_seats", {
             learnMore: C
           })
@@ -85,7 +85,7 @@ export function $$w0() {
               children: getI18nString("resource_connection.admin_ui.connect_project")
             })
           }), jsx("div", {
-            className: _$$s.colorTextSecondary.$,
+            className: cssBuilderInstance.colorTextSecondary.$,
             children: a && w && N ? a.unlimitedConnectionsEnabled || a.testingOnlyUnlimitedConnectionsEnabled ? renderI18nText("resource_connection.admin_ui.unlimited_connections", {
               numConnections: N
             }) : _$$b2[w] - N > 0 ? renderI18nText("resource_connection.admin_ui.using_num_of_connections", {

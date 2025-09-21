@@ -14,7 +14,7 @@ import { h as _$$h } from "../905/207101";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/716094";
@@ -348,7 +348,7 @@ function ei(e) {
       style: {
         padding: e.itemPadding
       },
-      className: _$$s.hFull.borderBox.$,
+      className: cssBuilderInstance.hFull.borderBox.$,
       "data-testid": p,
       children: e.buttonProps ? e.buttonProps ? jsx(ButtonPrimitive, {
         className: m,

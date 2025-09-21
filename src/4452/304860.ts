@@ -29,7 +29,7 @@ import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
 import { styleBuilderInstance } from '../905/941192';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { isNullish, isNotNullish } from '../figma_app/95419';
 import { i as _$$i } from '../figma_app/127401';
 import { FPlanNameType, FOrganizationLevelType } from '../figma_app/191312';
@@ -98,10 +98,10 @@ function ee({
             direction: 'vertical',
             spacing: 0,
             children: [jsx('div', {
-              className: _$$s.textBodyMedium.$,
+              className: cssBuilderInstance.textBodyMedium.$,
               children: d
             }), jsx('div', {
-              className: _$$s.textBodyMedium.preWrap.$$if(!u, _$$s.colorTextMenuSecondary).$,
+              className: cssBuilderInstance.textBodyMedium.preWrap.$$if(!u, cssBuilderInstance.colorTextMenuSecondary).$,
               children: c
             })]
           })]
@@ -149,7 +149,7 @@ function ea({
             type: t,
             size: '24'
           }), jsx('div', {
-            className: _$$s.textBodyMediumStrong.$,
+            className: cssBuilderInstance.textBodyMediumStrong.$,
             children: c
           })]
         }), jsx(es, {
@@ -161,8 +161,8 @@ function ea({
     }), jsx(Ve, {
       label: SI(a),
       options: u,
-      className: _$$s.wFull.radiusMedium.$,
-      dropdownOptionsClassName: _$$s.wFull.$
+      className: cssBuilderInstance.wFull.radiusMedium.$,
+      dropdownOptionsClassName: cssBuilderInstance.wFull.$
     })]
   });
 }
@@ -307,7 +307,7 @@ function er(e) {
         allowOverflow: !0,
         children: [jsx(DialogBody, {
           children: jsxs('div', {
-            'className': _$$s.pt32.pb8.px8.flex.flexColumn.$,
+            'className': cssBuilderInstance.pt32.pb8.px8.flex.flexColumn.$,
             'data-testid': 'auto-approval-settings-modal-header',
             'children': [jsx(Ro, {
               entity: {
@@ -316,13 +316,13 @@ function er(e) {
               },
               shape: 'CIRCLE',
               size: 48,
-              className: _$$s.mb16.$
+              className: cssBuilderInstance.mb16.$
             }), jsx('div', {
-              className: _$$s.textHeadingMedium.mb8.$,
+              className: cssBuilderInstance.textHeadingMedium.mb8.$,
               children: e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings.title.curf_enabled_for_members') : renderI18nText('plan_settings.auto_approval_settings.title')
             }), jsxs('span', {
               children: [jsx('span', {
-                className: _$$s.textBodyMedium.colorTextSecondary.preWrap.$,
+                className: cssBuilderInstance.textBodyMedium.colorTextSecondary.preWrap.$,
                 children: g ? e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings_subtitle_ela_and_curf_enabled_for_members') : renderI18nText('plan_settings.auto_approval_settings_subtitle_ela') : e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings.subtitle_curf_members') : renderI18nText('plan_settings.auto_approval_settings.subtitle')
               }), jsx(Link, {
                 href: 'https://help.figma.com/hc/articles/4414038570007',
@@ -330,7 +330,7 @@ function er(e) {
                 children: renderI18nText('plan_settings.auto_approval_settings.learn_about_seat_management_options')
               })]
             }), jsxs('div', {
-              className: _$$s.mt24.flex.flexColumn.gap24.mb8.$,
+              className: cssBuilderInstance.mt24.flex.flexColumn.gap24.mb8.$,
               children: [Object.keys(Y).map(e => {
                 let t = billableProductKeyContractPrices[e];
                 if (isNullish(t)) return null;
@@ -424,7 +424,7 @@ function eo() {
         direction: 'vertical',
         spacing: 4,
         children: [jsx('p', {
-          className: _$$s.textBodyMediumStrong.$,
+          className: cssBuilderInstance.textBodyMediumStrong.$,
           children: renderI18nText('plan_settings.auto_approval_settings.curf_badge.title')
         }), jsxs('p', {
           children: [' ', renderI18nText('plan_settings.auto_approval_settings.curf_badge.subtitle')]
@@ -461,7 +461,7 @@ let eu = registerModal(e => {
       children: jsxs(DialogContents, {
         children: [jsx(DialogBody, {
           children: jsxs('div', {
-            'className': _$$s.pt32.px8.pb8.flex.flexColumn.$,
+            'className': cssBuilderInstance.pt32.px8.pb8.flex.flexColumn.$,
             'data-testid': 'auto-approval-settings-modal-header',
             'children': [jsx(Ro, {
               entity: {
@@ -470,12 +470,12 @@ let eu = registerModal(e => {
               },
               shape: 'CIRCLE',
               size: 48,
-              className: _$$s.mb16.$
+              className: cssBuilderInstance.mb16.$
             }), jsx('div', {
-              className: _$$s.textHeadingMedium.mb8.$,
+              className: cssBuilderInstance.textHeadingMedium.mb8.$,
               children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.title')
             }), jsx('span', {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.description')
             })]
           })

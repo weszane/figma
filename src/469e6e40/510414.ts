@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { SM } from "../figma_app/153916";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { R as _$$R } from "../c5e2cae0/276031";
@@ -80,12 +80,12 @@ let y = memo(function ({
         })
       }), jsx(DialogBody, {
         children: jsxs("div", {
-          className: _$$s.mt12.$,
+          className: cssBuilderInstance.mt12.$,
           children: [jsx("div", {
-            className: _$$s.mb16.$,
+            className: cssBuilderInstance.mb16.$,
             children: jsx("label", {
               htmlFor: "shippingAddress",
-              className: _$$s.colorTextSecondary.$,
+              className: cssBuilderInstance.colorTextSecondary.$,
               children: renderI18nText("team_view.settings_table.update_invoice_details.modal_description")
             })
           }), jsx(_$$E, {

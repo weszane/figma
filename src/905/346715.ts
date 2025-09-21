@@ -14,7 +14,7 @@ import { oW } from "../905/675859";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
@@ -162,14 +162,14 @@ let $$F0 = registerModal(function (e) {
         }), jsx(DialogBody, {
           padding: 0,
           children: jsx("div", {
-            className: _$$s2.pb12.$,
+            className: cssBuilderInstance.pb12.$,
             children: 1 === L ? jsxs(Fragment, {
               children: [jsx(oW, {
                 className: CE,
                 src: buildUploadUrl("679f86548ac7c464e28b281f1090fa6f744cf61b"),
                 alt: "Connected projects logo"
               }), jsxs("div", {
-                className: _$$s2.p16.$,
+                className: cssBuilderInstance.p16.$,
                 children: [jsx("p", {
                   className: XK,
                   children: renderI18nText("resource_connection.request_modal.get_their_figma_link", {
@@ -204,7 +204,7 @@ let $$F0 = registerModal(function (e) {
                     })]
                   })
                 }), jsx("div", {
-                  className: _$$s2.pt16.$,
+                  className: cssBuilderInstance.pt16.$,
                   children: renderI18nText("resource_connection.request_modal.or", {
                     askThemToCreateOneButton: jsx("button", {
                       className: C2,
@@ -222,7 +222,7 @@ let $$F0 = registerModal(function (e) {
                 })]
               })]
             }) : jsxs("div", {
-              className: _$$s2.p16.$,
+              className: cssBuilderInstance.p16.$,
               children: [jsx("p", {
                 className: XK,
                 children: renderI18nText("resource_connection.request_modal.your_contact_will_be_added_to_the_connected_project", {
@@ -238,7 +238,7 @@ let $$F0 = registerModal(function (e) {
                 value: j,
                 placeholder: getI18nString("resource_connection.request_modal.add_your_contact_email")
               }), Q && jsxs("span", {
-                className: _$$s2.colorTextDanger.$,
+                className: cssBuilderInstance.colorTextDanger.$,
                 children: [" ", er(Q), " "]
               }), jsx(BigTextInputForwardRef, {
                 onChange: e => V(e.currentTarget.value),
@@ -251,13 +251,13 @@ let $$F0 = registerModal(function (e) {
           })
         }), jsx(DialogFooter, {
           children: jsxs("div", {
-            className: _$$s2.flex.justifyBetween.itemsCenter.wFull.pl2.$,
+            className: cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {
               children: [renderI18nText("resource_connection.request_modal.step_1_of_2", {
                 stepNumber: L
               }), " "]
             }), jsxs("div", {
-              className: _$$s2.flex.gap8.itemsCenter.$,
+              className: cssBuilderInstance.flex.gap8.itemsCenter.$,
               children: [jsx(Button, {
                 variant: "secondary",
                 onClick: 1 === L ? u : () => {
@@ -372,10 +372,10 @@ let M = registerModal(function (e) {
         })
       }), jsxs(DialogBody, {
         children: [jsx("p", {
-          className: _$$s2.py8.$,
+          className: cssBuilderInstance.py8.$,
           children: renderI18nText("resource_connection.create_new_team_modal.we_will_email_them_with_a_link_to_set_up_a_figma_team")
         }), jsxs("div", {
-          className: _$$s2.pb12.$,
+          className: cssBuilderInstance.pb12.$,
           children: [jsx(BigTextInputForwardRef, {
             value: g,
             onChange: e => w(e.target.value),
@@ -383,7 +383,7 @@ let M = registerModal(function (e) {
             maxLength: 255,
             placeholder: getI18nString("resource_connection.create_new_team_modal.add_your_contacts_email")
           }), A && jsxs("span", {
-            className: _$$s2.colorTextDanger.$,
+            className: cssBuilderInstance.colorTextDanger.$,
             children: [" ", (t => {
               switch (t) {
                 case "email_format":

@@ -338,7 +338,7 @@ import { OperationStatus, ProviderType } from '../3973/473379';
 import { h as _$$h6, I as _$$I3 } from '../3973/647885';
 import { numericAtom, processSelector } from '../3973/697935';
 import { trackStatsigPlanKeyBootstrap } from '../3973/890507';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { at as _$$at } from '../figma_app/987';
 import { DFF } from '../figma_app/6204';
 import { aN as _$$aN, o$ as _$$o$, AB, h2, J6, vu } from '../figma_app/8833';
@@ -972,7 +972,7 @@ function eC(e) {
       height: '100vh'
     }).$,
     'children': jsx('div', {
-      className: _$$s.wFull.hFull.flex.contentCenter.justifyCenter.flexWrap.$,
+      className: cssBuilderInstance.wFull.hFull.flex.contentCenter.justifyCenter.flexWrap.$,
       children: jsx(_$$k2, {})
     })
   });
@@ -2828,7 +2828,7 @@ function ry({
       tabManager: v,
       tabProps: y
     }), getFeatureFlags().dse_fpl_wave_1 ? jsxs('div', {
-      className: _$$s.minH0.$,
+      className: cssBuilderInstance.minH0.$,
       children: [jsx(_$$t5.TabPanel, {
         ...b.overview,
         height: 'fill',
@@ -14024,7 +14024,7 @@ function hP() {
     'children': jsx(SvgComponent, {
       svg: _$$A12,
       width: '40px',
-      className: rP()('frontend_commit_preview_indicator--icon--aQl-E', o ? 'frontend_commit_preview_indicator--animated--gwUR5' : null, s ? _$$s.colorIconDisabled.$ : _$$s.colorIconDanger.$),
+      className: rP()('frontend_commit_preview_indicator--icon--aQl-E', o ? 'frontend_commit_preview_indicator--animated--gwUR5' : null, s ? cssBuilderInstance.colorIconDisabled.$ : cssBuilderInstance.colorIconDanger.$),
       autosize: !0,
       dataTestId: 'frontend-commit-preview-indicator'
     })

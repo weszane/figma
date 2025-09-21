@@ -18,7 +18,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { SX, mq } from "../figma_app/199513";
@@ -142,13 +142,13 @@ function el({
       teamId: t === OrganizationType.ORG ? void 0 : r
     },
     children: jsx("div", {
-      className: i === eo.MOVE_DRAFT ? _$$s.pt8.pb4.px8.$ : void 0,
+      className: i === eo.MOVE_DRAFT ? cssBuilderInstance.pt8.pb4.px8.$ : void 0,
       children: jsx(_$$_, {
         dataTestId: "viewer-upgrade-banner",
         color: _$$S.INFORMATION,
         text: jsxs(Fragment, {
           children: [jsx("p", {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: renderI18nText("viewer_upgrade_awareness.you_re_working_in_drafts_on_a_free_seat")
           }), jsx("p", {
             children: function (e, t, r) {
@@ -1128,7 +1128,7 @@ export class $$e32 extends PureComponent {
               },
               children: renderI18nText("file_browser.file_move.zero_state")
             }), this.props.currentOrg && jsx("div", {
-              className: _$$s.pt20.$,
+              className: cssBuilderInstance.pt20.$,
               children: jsx(ButtonBasePrimary, {
                 onClick: this.onOrgViewLinkClick,
                 children: this.props.currentOrg.bigma_enabled ? getI18nString("file_browser.file_move.view_workspaces") : getI18nString("file_browser.file_move.view_teams")

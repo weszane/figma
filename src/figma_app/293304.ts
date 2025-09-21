@@ -10,7 +10,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { setIsRenamingSelectedStyle } from "../905/879323";
@@ -106,7 +106,7 @@ function w({
     }
   });
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.pl16.pr16.pt8.pb8.bb1.bSolid.colorBorder.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.pl16.pr16.pt8.pb8.bb1.bSolid.colorBorder.$,
     children: [jsx(JU, {
       disabled: I,
       children: renderI18nText("design_systems.create_style.name")

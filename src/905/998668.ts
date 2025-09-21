@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { getVisibleTheme } from "../905/640017";
 var a = r;
@@ -8,7 +8,7 @@ export function $$d0({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexColumn.itemsCenter.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.gap8.$,
     children: e
   });
 }
@@ -41,16 +41,16 @@ export function $$d0({
   }) {
     let r = t && t.length > 40;
     return jsxs("div", {
-      className: a()(r ? "artwork_with_text_below--textPretty--xEO0y" : "artwork_with_text_below--textBalance--yjPSu", _$$s.$$if(r, _$$s.gap4).$, _$$s.flex.flexColumn.itemsCenter.alignCenter.$),
+      className: a()(r ? "artwork_with_text_below--textPretty--xEO0y" : "artwork_with_text_below--textBalance--yjPSu", cssBuilderInstance.$$if(r, cssBuilderInstance.gap4).$, cssBuilderInstance.flex.flexColumn.itemsCenter.alignCenter.$),
       style: styleBuilderInstance.add({
         maxWidth: "30em"
       }).$,
       "data-testid": i,
       children: [jsx("span", {
-        className: _$$s.textBodyLarge.$$if(t, _$$s.fontMedium.colorText, _$$s.colorTextSecondary).$,
+        className: cssBuilderInstance.textBodyLarge.$$if(t, cssBuilderInstance.fontMedium.colorText, cssBuilderInstance.colorTextSecondary).$,
         children: e
       }), t && jsx("span", {
-        className: _$$s.$$if(r, _$$s.textBodyMedium, _$$s.textBodyLarge).colorTextSecondary.$,
+        className: cssBuilderInstance.$$if(r, cssBuilderInstance.textBodyMedium, cssBuilderInstance.textBodyLarge).colorTextSecondary.$,
         children: t
       })]
     });

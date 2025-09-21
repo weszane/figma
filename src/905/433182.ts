@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { SX } from "../figma_app/199513";
@@ -36,7 +36,7 @@ export function $$p0(e) {
       onFolderCreated: setSelectedFolder
     })),
     children: [jsx("div", {
-      className: _$$s.p4.mr4.$,
+      className: cssBuilderInstance.p4.mr4.$,
       children: jsx(In, {
         icon: "plus-32",
         fill: p ? "default" : "disabled"

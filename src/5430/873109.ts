@@ -54,7 +54,7 @@ import { w as _$$w } from "../5430/495667";
 import { showDropdownThunk } from "../905/929976";
 import { j as _$$j } from "../905/834956";
 import { W as _$$W2, C as _$$C } from "../5430/92864";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../5430/229559";
 import { A as _$$A } from "../5430/838986";
@@ -738,13 +738,13 @@ function eL({
   let x = d ? savesByOrgId : {};
   let f = useRef(null);
   let y = l()("save_button--buttonContainerBase--m8dS8 text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L", {
-    [_$$s2.gap6.pl16.pr16.$]: "containText" === o,
+    [cssBuilderInstance.gap6.pl16.pr16.$]: "containText" === o,
     "save_button--buttonContainerBrandColors--xQhK7": "brand" === a,
-    [_$$s2.w40.h40.$]: "square" === o,
+    [cssBuilderInstance.w40.h40.$]: "square" === o,
     "save_button--buttonContainerBaseWide--EDZcF": u
   });
   let g = l()("save_button--iconContainer--Brlqe", {
-    [_$$s2.ml2.$]: "containText" === o
+    [cssBuilderInstance.ml2.$]: "containText" === o
   });
   let v = "brand" === a ? "var(--color-icon-onbrand)" : void 0;
   let b = isResourceSavedForUser || Object.values(x).some(e => e);

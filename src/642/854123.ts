@@ -14,7 +14,7 @@ import { debounce } from "../905/915765";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import C from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -73,7 +73,7 @@ function P() {
   let o = createRef();
   return jsxs(Fragment, {
     children: [jsx("button", {
-      className: j()(_$$s2.flex.justifyCenter.itemsCenter.absolute.bottom0.left0.wFull.h40.colorBg.font11.fpl__textBodyMediumStrongFontWeight.cursorPointer.$, _$$s2.b1.colorBorder.bb0.br0.bl0.$, "first_level_resource_contact_support--contactSupportButton--Ioy3K"),
+      className: j()(cssBuilderInstance.flex.justifyCenter.itemsCenter.absolute.bottom0.left0.wFull.h40.colorBg.font11.fpl__textBodyMediumStrongFontWeight.cursorPointer.$, cssBuilderInstance.b1.colorBorder.bb0.br0.bl0.$, "first_level_resource_contact_support--contactSupportButton--Ioy3K"),
       onClick: () => {
         if (trackEventAnalytics("help_widget_get_help", {
           isEditingFile,
@@ -103,9 +103,9 @@ function D() {
     hideInProductHelpView
   } = A5();
   return jsxs("div", {
-    className: _$$s2.flex.flexRow.justifyBetween.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexRow.justifyBetween.itemsCenter.$,
     children: [jsx("p", {
-      className: _$$s2.font16.colorText.fpl__textHeadingLargeFontWeight.$,
+      className: cssBuilderInstance.font16.colorText.fpl__textHeadingLargeFontWeight.$,
       children: getI18nString("in_product_help_and_learning.first_level_header.title")
     }), jsx(IconButton, {
       onClick: () => {
@@ -147,14 +147,14 @@ function G() {
     className: "first_level_resource_search_bar--searchBar--BexQF",
     ref: d,
     children: [jsx(IW, {
-      className: j()(_$$s2.h32.wFull.colorBgSecondary.bRadius8.$, {
+      className: j()(cssBuilderInstance.h32.wFull.colorBgSecondary.bRadius8.$, {
         "first_level_resource_search_bar--isFocused--1E4mp": l
       }),
       clearSearch: () => i(""),
       focusOnMount: !0,
       hasTransparentBackground: !0,
       hideXIcon: !0,
-      iconClassName: _$$s2.colorIconSecondary.$,
+      iconClassName: cssBuilderInstance.colorIconSecondary.$,
       isFocused: l,
       onBlur: () => a(!1),
       onChange: i,
@@ -176,9 +176,9 @@ function W({
   sectionOptions: t
 }) {
   return jsxs("div", {
-    className: _$$s2.flex.flexColumn.gap10.font11.fpl__textBodyMediumStrongFontWeight.mt8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap10.font11.fpl__textBodyMediumStrongFontWeight.mt8.$,
     children: [jsx("p", {
-      className: _$$s2.mb2.$,
+      className: cssBuilderInstance.mb2.$,
       children: e
     }), t]
   });
@@ -215,7 +215,7 @@ let Y = () => {
 };
 let X = memo(function () {
   let e = Y().map(e => jsx("span", {
-    className: _$$s2.flex.gap8.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.flex.gap8.colorTextBrand.cursorPointer.$,
     children: jsx($z, {
       variant: "link",
       onClick: () => {
@@ -225,7 +225,7 @@ let X = memo(function () {
       iconPrefix: jsx(SvgComponent, {
         svg: _$$A2,
         width: "16px",
-        className: _$$s2.colorIconBrand.mr8.$
+        className: cssBuilderInstance.colorIconBrand.mr8.$
       }),
       children: e.label
     })
@@ -324,7 +324,7 @@ function ee({
   let i = Xr(Zf);
   let l = Xr(QU);
   return jsxs("button", {
-    className: _$$s2.cursorPointer.$,
+    className: cssBuilderInstance.cursorPointer.$,
     style: styleBuilderInstance.radiusMedium.b1.colorBorder.flex.flexRow.wFull.add({
       height: "74px",
       overflow: "hidden"
@@ -346,12 +346,12 @@ function ee({
         borderRadius: "var(--radius-medium) 0 0 var(--radius-medium)"
       }).$
     }), jsxs("div", {
-      className: _$$s2.flex.flexColumn.gap2.m12.wFull.font11.ellipsis.alignLeft.$,
+      className: cssBuilderInstance.flex.flexColumn.gap2.m12.wFull.font11.ellipsis.alignLeft.$,
       children: [jsx("p", {
-        className: _$$s2.colorText.fpl__textBodyMediumStrongFontWeight.$,
+        className: cssBuilderInstance.colorText.fpl__textBodyMediumStrongFontWeight.$,
         children: e.title
       }), jsx("p", {
-        className: _$$s2.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: e.description
       })]
     })]
@@ -385,9 +385,9 @@ function et() {
     image: buildUploadUrl("02377d4618e4b063422da13c18efd5debece9591")
   }];
   return jsxs("div", {
-    className: _$$s2.flex.flexColumn.rowGap8.$,
+    className: cssBuilderInstance.flex.flexColumn.rowGap8.$,
     children: [jsx("p", {
-      className: _$$s2.font13.colorText.fpl__textBodyMediumStrongFontWeight.$,
+      className: cssBuilderInstance.font13.colorText.fpl__textBodyMediumStrongFontWeight.$,
       children: getI18nString("in_product_help_and_learning.popular_resources.section_title")
     }), e.map(e => jsx(ee, {
       resource: e
@@ -398,7 +398,7 @@ function el({
   option: e
 }) {
   return jsx("span", {
-    className: _$$s2.flex.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.flex.colorTextBrand.cursorPointer.$,
     children: jsx($z, {
       variant: "link",
       onClick: e.onClick,
@@ -446,12 +446,12 @@ function eo({
     children: jsxs(TrackingProvider, {
       name: "First Level",
       children: [jsxs("div", {
-        className: _$$s2.flex.flexColumn.gap16.p16.pb8.$,
+        className: cssBuilderInstance.flex.flexColumn.gap16.p16.pb8.$,
         children: [jsx(D, {}), jsx(G, {})]
       }), jsx(_$$P, {
         className: e ? "first_level_resources--floatingModalScrollContainer--i7yEe" : "first_level_resources--scrollContainer--t1Gzz",
         children: jsxs("div", {
-          className: _$$s2.flex.flexColumn.gap16.pb16.$,
+          className: cssBuilderInstance.flex.flexColumn.gap16.pb16.$,
           children: [jsx(et, {}), jsx(ea, {}), jsx(X, {})]
         })
       }), jsx(P, {})]
@@ -499,13 +499,13 @@ function em() {
   } = A5();
   let s = Xr(J9);
   return jsxs("div", {
-    className: _$$s2.flex.flexRow.justifyBetween.p16.pl12.$,
+    className: cssBuilderInstance.flex.flexRow.justifyBetween.p16.pl12.$,
     children: [jsxs(ButtonPrimitive, {
       onClick: () => {
         s(e - 1);
       },
       "aria-label": getI18nString("general.back"),
-      className: _$$s2.flex.flexRow.itemsCenter.justifyCenter.font11.colorText.fpl__textBodyMediumStrongFontWeight.cursorPointer.$,
+      className: cssBuilderInstance.flex.flexRow.itemsCenter.justifyCenter.font11.colorText.fpl__textBodyMediumStrongFontWeight.cursorPointer.$,
       children: [jsx(_$$C, {}), renderI18nText("general.back")]
     }), jsx(IconButton, {
       onClick: () => {
@@ -603,17 +603,17 @@ function eC({
       children: [jsx(em, {}), !!s && 3 === i && jsxs("h3", {
         className: "third_level_resources--breadcrumb--yQHOD",
         children: [s.title, " /", " ", jsx("span", {
-          className: _$$s2.fpl__textBodySmallStrongFontWeight.$,
+          className: cssBuilderInstance.fpl__textBodySmallStrongFontWeight.$,
           children: l.name
         })]
       }), jsx("h1", {
-        className: _$$s2.lh24.fontSemiBold.font16.fontInter.pt0.px16.pb12.$,
+        className: cssBuilderInstance.lh24.fontSemiBold.font16.fontInter.pt0.px16.pb12.$,
         children: l.name
       }), jsxs("div", {
         className: "third_level_resources--container--RY81c",
         ref: a,
         children: [jsx("div", {
-          className: j()(_$$s2.p16.pt8.$, eb),
+          className: j()(cssBuilderInstance.p16.pt8.$, eb),
           dangerouslySetInnerHTML: {
             __html: e_().sanitize(l.body)
           }
@@ -686,9 +686,9 @@ function ev() {
     children: jsxs(TrackingProvider, {
       name: "Second Level",
       children: [jsx(em, {}), jsxs("div", {
-        className: _$$s2.flex.flexColumn.p16.pt8.pb0.$,
+        className: cssBuilderInstance.flex.flexColumn.p16.pt8.pb0.$,
         children: [jsx("p", {
-          className: _$$s2.font16.colorText.fpl__textHeadingLargeFontWeight.pb8.$,
+          className: cssBuilderInstance.font16.colorText.fpl__textHeadingLargeFontWeight.pb8.$,
           children: t.title
         }), n]
       })]
@@ -709,7 +709,7 @@ function eS({
       muted: !0,
       loop: !0,
       playsInline: !0,
-      className: _$$s2.wFull.hAuto.borderBox.mt16.bRadius5.$,
+      className: cssBuilderInstance.wFull.hAuto.borderBox.mt16.bRadius5.$,
       children: [jsx("source", {
         type: "video/webm",
         src: e.webm
@@ -718,9 +718,9 @@ function eS({
         src: e.mp4
       })]
     }), jsx("div", {
-      className: _$$s2.flex.flexColumn.gap16.pt24.$,
+      className: cssBuilderInstance.flex.flexColumn.gap16.pt24.$,
       children: e.articles.map(e => jsx("span", {
-        className: _$$s2.colorTextBrand.cursorPointer.alignLeft.fpl__textBodyMediumStrongFontWeight.$,
+        className: cssBuilderInstance.colorTextBrand.cursorPointer.alignLeft.fpl__textBodyMediumStrongFontWeight.$,
         children: jsx($z, {
           variant: "link",
           trackingProperties: {
@@ -740,7 +740,7 @@ function ek() {
   let e = Yj();
   let t = Xr(QU);
   return jsxs("button", {
-    className: _$$s2.radiusMedium.b1.colorBorder.flex.flexRow.m16.cursorPointer.overflowHidden.$,
+    className: cssBuilderInstance.radiusMedium.b1.colorBorder.flex.flexRow.m16.cursorPointer.overflowHidden.$,
     style: styleBuilderInstance.add({
       height: "74px"
     }).$,
@@ -757,15 +757,15 @@ function ek() {
         borderRadius: "var(--radius-medium) 0 0 var(--radius-medium)"
       }).$
     }), jsxs("div", {
-      className: _$$s2.flex.flexColumn.gap2.m12.font11.ellipsis.alignLeft.$,
+      className: cssBuilderInstance.flex.flexColumn.gap2.m12.font11.ellipsis.alignLeft.$,
       style: styleBuilderInstance.add({
         margin: "auto 12px"
       }).$,
       children: [jsx("p", {
-        className: _$$s2.colorText.fpl__textBodyMediumStrongFontWeight.$,
+        className: cssBuilderInstance.colorText.fpl__textBodyMediumStrongFontWeight.$,
         children: renderI18nText("in_product_help_and_learning.article.design_an_interactive_button")
       }), jsxs("p", {
-        className: _$$s2.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: [renderI18nText("in_product_help_and_learning.design_an_interactive_button.description"), " \u2022", " ", renderI18nText("in_product_help_and_learning.minute_estimate", {
           minutes: 20
         })]

@@ -33,7 +33,7 @@ import { Y as _$$Y } from '../905/912236';
 import { lQ } from '../905/934246';
 import { styleBuilderInstance } from '../905/941192';
 import { d as _$$d } from '../905/976845';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { ay, RW } from '../figma_app/17220';
 import { sO } from '../figma_app/21029';
 import { JQ, LB } from '../figma_app/29089';
@@ -373,7 +373,7 @@ let ez = memo(({
     case 'FRAME':
       if (t && t.getDakotaSelector()?.collectionId) {
         return jsxs('div', {
-          className: _$$s.flex.wFull.justifyBetween.$,
+          className: cssBuilderInstance.flex.wFull.justifyBetween.$,
           children: [jsx(eK, {
             node: t,
             nodeTypeStringToDisplay: renderI18nText('dakota.properties_panel.repeater_header'),
@@ -398,7 +398,7 @@ let ez = memo(({
         }) : null;
       }
       return jsx('div', {
-        className: _$$s.inlineFlex.$,
+        className: cssBuilderInstance.inlineFlex.$,
         children: jsx(tV, {
           value: {
             chevron: () => jsx(_$$r, {
@@ -416,13 +416,13 @@ let ez = memo(({
     case 'RESPONSIVE_SET':
     case 'WEBPAGE':
       return t ? jsxs('div', {
-        className: _$$s.flex.wFull.justifyBetween.$,
+        className: cssBuilderInstance.flex.wFull.justifyBetween.$,
         children: [jsx(eK, {
           node: t,
           nodeTypeStringToDisplay: getFeatureFlags().cms_bindings_ux_improvements && t.getDakotaSelectorCollectionId() ? renderI18nText('sites.panel.toolbar_header.webpage_bound_to_cms') : renderI18nText('sites.panel.toolbar_header.webpage'),
           panelTitleRef: c
         }), jsxs('div', {
-          className: _$$s.flex.justifyEnd.itemsCenter.$,
+          className: cssBuilderInstance.flex.justifyEnd.itemsCenter.$,
           children: [jsx(_$$M, {
             showLibrarySets: !1,
             recordingKey: 'pageLevel'
@@ -742,9 +742,9 @@ function tr({
       }),
       'style': I ? void 0 : styleBuilderInstance.bb0.pb4.$,
       'children': [jsxs('div', {
-        className: p()(mp, _$$s.flex.alignLeft.borderBox.itemsCenter.h24.$, _$$s.pl8.pr8.gap8.$),
+        className: p()(mp, cssBuilderInstance.flex.alignLeft.borderBox.itemsCenter.h24.$, cssBuilderInstance.pl8.pr8.gap8.$),
         children: [jsx('div', {
-          'className': _$$s.hFull.flexGrow1.flex.itemsCenter.minW0.$,
+          'className': cssBuilderInstance.hFull.flexGrow1.flex.itemsCenter.minW0.$,
           'data-non-interactive': !0,
           'children': jsx(ez, {
             panelTitleRef: M,

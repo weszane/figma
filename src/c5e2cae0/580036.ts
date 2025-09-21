@@ -6,7 +6,7 @@ import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Label } from "../905/270045";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
@@ -61,7 +61,7 @@ export function $$b0({
     return [i, d];
   }(E, t, a, P);
   let V = jsx("div", {
-    className: _$$s.flex.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     "data-testid": "cart-sidebar-loading",
     children: jsx(_$$k, {})
   });
@@ -69,10 +69,10 @@ export function $$b0({
     title: e,
     dataTestId: "cart-sidebar",
     children: [jsx("div", {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: R ? jsxs(Fragment, {
         children: [O && jsxs("div", {
-          className: _$$s.flex.justifyBetween.itemsCenter.pb16.bb1.bSolid.colorBorder.$,
+          className: cssBuilderInstance.flex.justifyBetween.itemsCenter.pb16.bb1.bSolid.colorBorder.$,
           "data-testid": "cart-sidebar-currency-switcher",
           children: [jsx("p", {
             children: renderI18nText("checkout.sidebar.currency_label")
@@ -87,7 +87,7 @@ export function $$b0({
             paddingOverride: 0
           })]
         }), I && R && jsx("div", {
-          className: _$$s.my16.$,
+          className: cssBuilderInstance.my16.$,
           style: styleBuilderInstance.add({
             marginLeft: "-8px"
           }).$,
@@ -101,9 +101,9 @@ export function $$b0({
             children: [jsx(_$$c, {
               value: BillingCycle.YEAR,
               label: jsxs(Label, {
-                className: _$$s.flex.itemsCenter.gap16.$,
+                className: cssBuilderInstance.flex.itemsCenter.gap16.$,
                 children: [renderI18nText("checkout.sidebar.annual"), " ", jsx("b", {
-                  className: _$$s.colorTextSuccess.fontSemiBold.colorBgSuccessTertiary.bRadius2.px4.block.$,
+                  className: cssBuilderInstance.colorTextSuccess.fontSemiBold.colorBgSuccessTertiary.bRadius2.px4.block.$,
                   style: styleBuilderInstance.add({
                     fontSize: "10px"
                   }).$,
@@ -118,7 +118,7 @@ export function $$b0({
             })]
           })
         }), jsxs("div", {
-          className: _$$s.pt16.$,
+          className: cssBuilderInstance.pt16.$,
           children: [jsx(_$$O, {
             countByBillableProductKey: t,
             billingInterval: i,
@@ -128,7 +128,7 @@ export function $$b0({
           }), jsx(_$$_2, {})]
         })]
       }) : jsx("p", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: renderI18nText("checkout.sidebar.cannot_calculate_subtotal")
       })
     }), jsxs("div", {
@@ -147,7 +147,7 @@ export function $$b0({
         },
         children: w ? V : x
       }), k && jsx("div", {
-        className: _$$s.mt16.$,
+        className: cssBuilderInstance.mt16.$,
         "data-testid": "cart-sidebar-footer",
         children: k
       })]
@@ -156,7 +156,7 @@ export function $$b0({
 }
 function C() {
   return jsx("div", {
-    className: _$$s.my8.$,
+    className: cssBuilderInstance.my8.$,
     "data-testid": "cart-sidebar-paid-seat-minimum-banner",
     children: jsx(_$$_, {
       color: _$$S.WARNING,

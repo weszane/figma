@@ -8,7 +8,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { q } from '../905/820062';
 import { BK } from '../905/848862';
 import { defaultSessionLocalIDString } from '../905/871411';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { addViewportOffset, getViewportInfo } from '../figma_app/62612';
 import { J } from '../figma_app/63663';
 import { isNullish } from '../figma_app/95419';
@@ -240,7 +240,7 @@ function F({
       type: it.DEFAULT,
       maxWidth: 150,
       lean: 'left',
-      className: f()(_$$s.eventsAuto.$),
+      className: f()(cssBuilderInstance.eventsAuto.$),
       recordingKey: 'sitesBreakpointDropdown',
       preventEventCapture: !0,
       children: B
@@ -260,12 +260,12 @@ function j(e) {
     onClick: disabled ? void 0 : onClick,
     recordingKey: generateRecordingKey('breakpointDropdownAction', title),
     children: jsxs('div', {
-      className: _$$s.flex.flexRow.justifyBetween.wFull.alignCenter.$,
+      className: cssBuilderInstance.flex.flexRow.justifyBetween.wFull.alignCenter.$,
       children: [jsxs('div', {
-        className: _$$s.flex.flexRow.itemsCenter.gap4.$,
+        className: cssBuilderInstance.flex.flexRow.itemsCenter.gap4.$,
         children: [icon, title]
       }), width && jsx('div', {
-        className: _$$s.colorTextMenuTertiary.textBodyMedium.contentCenter.$,
+        className: cssBuilderInstance.colorTextMenuTertiary.textBodyMedium.contentCenter.$,
         children: width
       })]
     })

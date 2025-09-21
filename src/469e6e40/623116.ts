@@ -24,7 +24,7 @@ import { ButtonSecondary, ButtonBasePrimaryTracked, FocusCheckbox } from "../fig
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Me, $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -327,7 +327,7 @@ let eV = registerModal(function ({
         entity: e,
         size: 22
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.minW0.$,
+        className: cssBuilderInstance.flex.flexColumn.minW0.$,
         children: [jsxs(AutoLayout, {
           spacing: "2px",
           children: [jsx(TextWithTruncation, {
@@ -359,7 +359,7 @@ let eV = registerModal(function ({
           height: 22
         },
         children: jsx(Wi, {
-          className: _$$s.wFull.hFull.$,
+          className: cssBuilderInstance.wFull.hFull.$,
           animationType: JR.NO_SHIMMER
         })
       }), jsxs(AutoLayout, {
@@ -371,7 +371,7 @@ let eV = registerModal(function ({
             width: 128
           },
           children: jsx(Wi, {
-            className: _$$s.wFull.h14.$,
+            className: cssBuilderInstance.wFull.h14.$,
             animationType: JR.NO_SHIMMER
           })
         }), jsx("div", {
@@ -379,7 +379,7 @@ let eV = registerModal(function ({
             width: 80
           },
           children: jsx(Wi, {
-            className: _$$s.wFull.h14.$,
+            className: cssBuilderInstance.wFull.h14.$,
             animationType: JR.NO_SHIMMER
           })
         })]
@@ -402,7 +402,7 @@ let eV = registerModal(function ({
         width: 80
       },
       children: jsx(Wi, {
-        className: _$$s.wFull.h14.$,
+        className: cssBuilderInstance.wFull.h14.$,
         animationType: JR.NO_SHIMMER
       })
     })
@@ -427,7 +427,7 @@ let eV = registerModal(function ({
           width: 80
         },
         children: jsx(Wi, {
-          className: _$$s.h12.wFull.$,
+          className: cssBuilderInstance.h12.wFull.$,
           animationType: JR.SHIMMER_ON_MENU,
           dataTestId: "add-unassigned-teams-modal-button-loading"
         })
@@ -464,7 +464,7 @@ let eV = registerModal(function ({
       maxWidth: 480,
       onClose: q,
       containerClassName: "add_unassigned_teams_modal--unassignedTab--My2Tq",
-      innerContainerClassName: _$$s.hFull.flex.flexColumn.$,
+      innerContainerClassName: cssBuilderInstance.hFull.flex.flexColumn.$,
       fixedTop: !0,
       children: [jsx(AutoLayout, {
         height: "hug-contents",
@@ -1105,7 +1105,7 @@ function tC(e) {
           })]
         }), t.workspaceName && jsxs(Fragment, {
           children: [jsx("span", {
-            className: _$$s.maxW150.ellipsis.noWrap.overflowHidden.$,
+            className: cssBuilderInstance.maxW150.ellipsis.noWrap.overflowHidden.$,
             children: t.workspaceName
           }), jsx("span", {
             children: "\xa0\xb7\xa0"
@@ -1171,7 +1171,7 @@ let tN = registerModal(function (e) {
     a(hideModal());
   };
   let f = jsx("span", {
-    className: _$$s.fontSemiBold.$,
+    className: cssBuilderInstance.fontSemiBold.$,
     children: c?.name
   });
   let j = c?.name ? renderI18nText("workspace.when_people_join_workspace_name", {
@@ -1229,12 +1229,12 @@ let tN = registerModal(function (e) {
             TokenComponent: tE
           })
         }), m.errorMessage && jsx("span", {
-          className: _$$s.colorTextDanger.$,
+          className: cssBuilderInstance.colorTextDanger.$,
           "data-testid": "error-label",
           children: m.errorMessage
         }), jsxs("span", {
           children: [jsx("span", {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: getI18nString("workspace.note")
           }), getI18nString("workspace.new_users_will_join_updated")]
         })]
@@ -1453,7 +1453,7 @@ function tL(e) {
     return "loaded" !== eX.status ? jsx("div", {
       style: styleBuilderInstance.w64.$,
       children: jsx(Wi, {
-        className: _$$s.h24.w64.$,
+        className: cssBuilderInstance.h24.w64.$,
         animationType: JR.SHIMMER
       })
     }) : jsx(_$$J2, {
@@ -1669,7 +1669,7 @@ function tL(e) {
         if (et && null === totalSelectable) return jsx("div", {
           style: styleBuilderInstance.w150.$,
           children: jsx(Wi, {
-            className: _$$s.h12.w150.$,
+            className: cssBuilderInstance.h12.w150.$,
             animationType: JR.SHIMMER_ON_MENU
           })
         });
@@ -1677,7 +1677,7 @@ function tL(e) {
         if (et && null !== totalSelectable && (a = isLoading), a && status === APILoadingStatus.LOADING) return jsx("div", {
           style: styleBuilderInstance.w150.$,
           children: jsx(Wi, {
-            className: _$$s.h12.w150.$,
+            className: cssBuilderInstance.h12.w150.$,
             animationType: JR.SHIMMER_ON_MENU
           })
         });
@@ -1753,7 +1753,7 @@ function tL(e) {
           children: [jsxs("div", {
             className: cE,
             children: [jsx("div", {
-              className: _$$s.pr8.$,
+              className: cssBuilderInstance.pr8.$,
               children: jsx(y2, {
                 onChange: onSearch,
                 query: searchQuery,

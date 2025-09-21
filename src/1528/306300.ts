@@ -22,7 +22,7 @@ import { KindEnum } from "../905/129884";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { l6, c$, sK } from "../905/794875";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fn } from "../figma_app/811257";
 import { No } from "../1528/842139";
 import { iw, UE, Mo, Ws, Yn, kN, iR, d2, hZ, ZP, Yc } from "../figma_app/152690";
@@ -38,7 +38,7 @@ let D = forwardRef(function ({
   return jsx(fn, {
     ref: l,
     leftInput: jsx("span", {
-      className: _$$s.textBodyMedium.pl1.flex.$,
+      className: cssBuilderInstance.textBodyMedium.pl1.flex.$,
       children: e
     }),
     rightInput: t,

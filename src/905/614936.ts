@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { h as _$$h } from "../905/207101";
 import { dP } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Um } from "../905/848862";
 import { JB } from "../figma_app/604494";
 import { Yf, Uz } from "../905/479155";
@@ -34,7 +34,7 @@ export function $$m0({
   return jsx(dP, {
     allowHorizontalNavigationWhileInputFocused: !0,
     ref: m,
-    className: _$$s.$$if(t, _$$s.flex.flexColumn.hFull.overflowHidden).$$if(i, _$$s.wFull).$,
+    className: cssBuilderInstance.$$if(t, cssBuilderInstance.flex.flexColumn.hFull.overflowHidden).$$if(i, cssBuilderInstance.wFull).$,
     onClick: e => {
       0 !== e.detail && b();
     },

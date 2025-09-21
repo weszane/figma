@@ -9,7 +9,7 @@ import c from "../vendor/73823";
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { useLatestRef } from "../figma_app/922077";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout, Spacer } from "../905/470281";
 import { Ru } from "../905/251509";
 import { Thumbnail } from "../figma_app/763686";
@@ -61,7 +61,7 @@ function M({
   let t = x(e);
   let i = c6(c1.fromKiwi(e));
   return t ? jsx("div", {
-    className: _$$s.wFull.flex.flexShrink1.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.wFull.flex.flexShrink1.itemsCenter.justifyCenter.$,
     style: i,
     children: jsx(_$$J, {
       className: "node_thumbnail_display--thumbnailPreview--9qgOD",
@@ -70,7 +70,7 @@ function M({
       height: t.renderHeight > L ? L : t.renderHeight
     })
   }) : jsx("span", {
-    className: _$$s.noWrap.colorTextDesign.$,
+    className: cssBuilderInstance.noWrap.colorTextDesign.$,
     children: "Error generating thumbnail"
   });
 }
@@ -203,7 +203,7 @@ function j({
       throwTypeError(e);
   }
 }
-let U = _$$s.noWrap;
+let U = cssBuilderInstance.noWrap;
 let B = U.colorTextDesign;
 let V = U.colorTextSuccess;
 let G = U.colorTextDanger;
@@ -257,7 +257,7 @@ function q({
   return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx("span", {
-      className: _$$s.inlineBlock.w12.h12.bRadius2.$,
+      className: cssBuilderInstance.inlineBlock.w12.h12.bRadius2.$,
       style: {
         backgroundColor: t
       }
@@ -556,10 +556,10 @@ let eh = memo(function ({
       value: m
     }) : jsxs(Fragment, {
       children: [jsx("span", {
-        className: _$$s.colorText.$,
+        className: cssBuilderInstance.colorText.$,
         children: d
       }), jsx("div", {
-        className: _$$s.ellipsis.noWrap.overflowHidden.alignCenter.$,
+        className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.alignCenter.$,
         children: jsx(em, {
           diffValue: h,
           value: m

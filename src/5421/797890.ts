@@ -39,7 +39,7 @@ import { hh } from "../905/417232";
 import { AutoLayout } from "../905/470281";
 import { rp, Zk, fI, U8, JU, nV } from "../figma_app/626177";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ex as _$$ex } from "../905/524523";
 import { A as _$$A2 } from "../svg/420906";
 import { j as _$$j, u as _$$u } from "../642/638075";
@@ -83,12 +83,12 @@ let o;
 var f = y;
 let Y = _$$ex("prototype_action_info", function () {
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
     children: [jsx(SvgComponent, {
       className: "prototype_action_info_tooltip--prototypeDestinationInfoIcon--GeQWS",
       svg: _$$A2
     }), jsx("span", {
-      className: _$$s.flexGrow1.m6.$,
+      className: cssBuilderInstance.flexGrow1.m6.$,
       style: {
         maxWidth: 144
       },

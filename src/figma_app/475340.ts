@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { getFalseValue } from "../figma_app/897289";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { X } from "../905/538562";
 var o = s;
 export function $$u0({
@@ -33,7 +33,7 @@ export function $$u0({
   return jsxs(Fragment, {
     children: [r && t, jsx("div", {
       ref: _,
-      className: o()(u, _$$s.eventsNone.absolute.top0.left0.right0.bottom0.overflowHidden.opacity1.$, {
+      className: o()(u, cssBuilderInstance.eventsNone.absolute.top0.left0.right0.bottom0.overflowHidden.opacity1.$, {
         [X]: r
       }),
       style: m
@@ -48,14 +48,14 @@ export function $$p1({
 }) {
   let s = useRef(e);
   return jsxs("div", {
-    className: _$$s.grid.$,
+    className: cssBuilderInstance.grid.$,
     children: [(e || r) && jsx("div", {
-      className: o()(_$$s.gridRowEnd1.gridColumnEnd1.$),
+      className: o()(cssBuilderInstance.gridRowEnd1.gridColumnEnd1.$),
       children: a
     }), jsx("div", {
-      className: o()(_$$s.eventsNone.gridRowEnd1.gridColumnEnd1.overflowHidden.$, {
+      className: o()(cssBuilderInstance.eventsNone.gridRowEnd1.gridColumnEnd1.overflowHidden.$, {
         [X]: e,
-        [_$$s.opacity1.$]: !s.current
+        [cssBuilderInstance.opacity1.$]: !s.current
       }),
       children: t
     })]

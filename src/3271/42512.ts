@@ -66,7 +66,7 @@ import { A as _$$A5 } from '../6828/564422';
 import { _W, nN } from '../7492/254275';
 import { ff as _$$ff, tO as _$$tO, GJ, R7 } from '../7492/487492';
 import { h as _$$h } from '../9410/146161';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { S as _$$S3 } from '../figma_app/11182';
 import { mG } from '../figma_app/15924';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
@@ -296,7 +296,7 @@ function ef({
         let e = [];
         for (let t = 0; t < 5; t++) {
           e.push(jsx('span', {
-            className: _$$s.flex.$,
+            className: cssBuilderInstance.flex.$,
             onMouseEnter: () => v(t),
             onMouseLeave: () => x(!1),
             onClick: () => j(t),
@@ -387,7 +387,7 @@ function eQ(e) {
     resourceId: e.resourceId,
     resource: d
   }) : jsx('div', {
-    className: _$$s.flex.wFull.borderBox.justifyCenter.pt32.$,
+    className: cssBuilderInstance.flex.wFull.borderBox.justifyCenter.pt32.$,
     children: jsx(LoadingSpinner, {
       size: 'medium'
     })
@@ -490,7 +490,7 @@ function eG(e) {
           children: [jsxs('div', {
             className: isVsCodeEnvironment() ? 'detail_view--coverImageContainerVsCode--4UADZ detail_view--coverImageContainer--2AZZG detail_view--coverImageContainer--2AZZG' : 'detail_view--coverImageContainer--2AZZG',
             children: [jsx('img', {
-              className: _()(isVsCodeEnvironment() ? 'detail_view--coverImageVsCode--ZtGDB' : r ? 'detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1' : 'detail_view--coverImage---G-H1', _$$s.$$if(isVsCodeEnvironment(), _$$s.bRadius5).$),
+              className: _()(isVsCodeEnvironment() ? 'detail_view--coverImageVsCode--ZtGDB' : r ? 'detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1' : 'detail_view--coverImage---G-H1', cssBuilderInstance.$$if(isVsCodeEnvironment(), cssBuilderInstance.bRadius5).$),
               src: W.redirect_cover_image_url || '',
               alt: `${W.name}`,
               onPointerDown: e => !r && onInsertableResourcePointerDown(e)
@@ -540,7 +540,7 @@ function eG(e) {
                   isPlugin: r
                 }) : ee
               }), jsx('div', {
-                className: _$$s.ml8.flex.itemsCenter.$,
+                className: cssBuilderInstance.ml8.flex.itemsCenter.$,
                 children: jsx(_W, {
                   resourceId: e.resourceId,
                   resourceType: r ? ResourceTypeNoComment.PLUGIN : ResourceTypeNoComment.WIDGET,
@@ -646,7 +646,7 @@ function e4({
     horizontalAlignItems: 'center',
     children: [jsx(SvgComponent, {
       svg: _$$A7,
-      className: _$$s.colorIconSecondary.pb24.$,
+      className: cssBuilderInstance.colorIconSecondary.pb24.$,
       autosize: !0,
       height: isVsCodeEnvironment() ? '64px' : void 0
     }), jsx(e5, {
@@ -667,7 +667,7 @@ function e5({
   return jsx(Fragment, {
     children: e ? jsxs(Fragment, {
       children: [jsxs('div', {
-        className: _$$s.alignCenter.$,
+        className: cssBuilderInstance.alignCenter.$,
         children: [jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('dev_handoff.inspect_panel.create_first_here')
@@ -676,7 +676,7 @@ function e5({
         })]
       }), jsx(e8, {})]
     }) : jsxs('div', {
-      className: _$$s.alignCenter.$,
+      className: cssBuilderInstance.alignCenter.$,
       children: [jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('dev_handoff.inspect_panel.inspect_plugins_go_here')
@@ -702,7 +702,7 @@ function e8() {
     }));
   }, [e, s]);
   return jsxs('div', {
-    className: _$$s.pt16.$,
+    className: cssBuilderInstance.pt16.$,
     children: [jsx(Button, {
       onClick: r,
       variant: 'secondary',
@@ -711,7 +711,7 @@ function e8() {
         verticalAlignItems: 'center',
         padding: 0,
         children: [jsx(_$$e, {
-          className: _$$s.pr8.$
+          className: cssBuilderInstance.pr8.$
         }), jsx(TextWithTruncation, {
           children: renderI18nText('dev_handoff.inspect_panel.new_plugin')
         }), jsx(_$$r, {})]
@@ -1843,7 +1843,7 @@ function sc(e) {
     }), jsx(_$$P, {
       height: c,
       onScroll: x,
-      innerClassName: s ? _$$s.hFull.$ : '',
+      innerClassName: s ? cssBuilderInstance.hFull.$ : '',
       ref: u,
       children: p
     })]

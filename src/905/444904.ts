@@ -8,7 +8,7 @@ import { h as _$$h } from "../905/207101";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { u as _$$u } from "../905/684425";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { getUserId } from "../905/372672";
@@ -40,7 +40,7 @@ export function $$I0({
   let N = "loaded" === R.status && R.data.file?.canRead;
   function P() {
     return jsx("div", {
-      className: _$$s.pb16.$,
+      className: cssBuilderInstance.pb16.$,
       children: jsx(Ro, {
         entity: t,
         size: 64
@@ -54,7 +54,7 @@ export function $$I0({
       fileKey: I
     });
   }), k && !T || N) ? jsx("div", {
-    className: _$$s.zIndex0.$,
+    className: cssBuilderInstance.zIndex0.$,
     children: jsx(_$$u, {
       headerImage: jsx(P, {}),
       headerText: N ? getI18nString("mfa_required_modal.regained_access_to_file.title") : getI18nString("mfa_required_modal.mfa_enabled.title"),
@@ -70,7 +70,7 @@ export function $$I0({
       })
     })
   }) : jsx("div", {
-    className: _$$s.zIndex0.$,
+    className: cssBuilderInstance.zIndex0.$,
     children: jsxs(_$$u, {
       headerImage: jsx(P, {}),
       headerText: getI18nString("mfa_required_modal.title", {
@@ -93,7 +93,7 @@ export function $$I0({
         },
         children: renderI18nText("mfa_required_modal.cta")
       }), jsx("div", {
-        className: _$$s.pt20.font13.justifyCenter.fontNormal.$,
+        className: cssBuilderInstance.pt20.font13.justifyCenter.fontNormal.$,
         children: jsx(Link, {
           newTab: !0,
           href: "https://help.figma.com/hc/articles/360039817634-Enable-two-factor-authentication-2FA",

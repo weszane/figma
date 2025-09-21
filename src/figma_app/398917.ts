@@ -22,7 +22,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { BK } from "../905/848862";
@@ -331,7 +331,7 @@ function et({
   return jsxs(Fragment, {
     children: [jsx(pG, {
       input: jsxs("div", {
-        className: (_$$s.alignLeft.$, "responsive_text_style_variants--breakpointIconAndText--yCSLI"),
+        className: (cssBuilderInstance.alignLeft.$, "responsive_text_style_variants--breakpointIconAndText--yCSLI"),
         children: [d && jsx(Z, {
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")

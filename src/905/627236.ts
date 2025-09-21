@@ -21,7 +21,7 @@ import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { z as _$$z } from "../905/284530";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
@@ -168,7 +168,7 @@ function X(e) {
   let em = es ? {
     id: "cost",
     name: jsx("span", {
-      className: _$$s.textBodyMedium.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
       children: getI18nString("billing_modals.team_add_seats.table.header.projected_cost")
     }),
     textAlign: "right",
@@ -228,7 +228,7 @@ function X(e) {
           },
           dataTestId: "team-add-seats-modal-header",
           children: [jsx("div", {
-            className: _$$s.mb8.$,
+            className: cssBuilderInstance.mb8.$,
             children: jsx(Ro, {
               size: Pf.XLARGE,
               entity: {
@@ -239,7 +239,7 @@ function X(e) {
           }), jsx(DialogHiddenTitle, {
             children: ei
           }), jsx("div", {
-            className: _$$s.textHeadingMedium.$,
+            className: cssBuilderInstance.textHeadingMedium.$,
             children: ei
           }), jsx("div", {
             ...Ay.props(W ? Y.modalDescriptionWithProjectedCost : Y.modalDescriptionLegacy),
@@ -273,7 +273,7 @@ function X(e) {
           }, {
             id: "monthly",
             name: jsx("span", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
@@ -286,12 +286,12 @@ function X(e) {
           }, {
             id: "annual",
             name: jsx("span", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.team_add_seats.table.header.annual")
             }),
             textAlign: "center",
             cellComponent: e => jsx("div", {
-              className: _$$s.mxAuto.$,
+              className: cssBuilderInstance.mxAuto.$,
               children: jsx(_$$r, {
                 value: X[e] || 0,
                 onChange: J(e),

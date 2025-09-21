@@ -13,7 +13,7 @@ import p from "../vendor/116389";
 import { selectWithShallowEqual } from "../905/103090";
 import { g as _$$g } from "../1556/359896";
 import { renderAvatar } from "../figma_app/3731";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
@@ -223,8 +223,8 @@ function z({
     }), l.current && _ && jsx(Uo, {
       items: g()([...menuGroups.flatMap(e => [e.title && {
         displayText: e.title,
-        className: _$$s.wFull.$,
-        displayTextClassName: _$$s.colorTextMenuTertiary.$,
+        className: cssBuilderInstance.wFull.$,
+        displayTextClassName: cssBuilderInstance.colorTextMenuTertiary.$,
         disabled: !0
       }, ...e.items.map(e => ({
         displayText: e.displayText,

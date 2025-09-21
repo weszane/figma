@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { Button } from "../905/521428";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { Zk } from "../figma_app/626177";
 import { Ad } from "../figma_app/811257";
@@ -16,7 +16,7 @@ export function $$u0({
   let u = renderI18nText("fullscreen.properties_panel.vector_operation.update_button");
   return jsxs(Zk, {
     children: [jsx("p", {
-      className: _$$s.pl16.pr16.mb12.font11.$,
+      className: cssBuilderInstance.pl16.pr16.mb12.font11.$,
       children: n
     }), jsx(Ad, {
       label: null,

@@ -19,7 +19,7 @@ import { A as _$$A } from '../905/891805';
 import { bL } from '../905/911410';
 import { cn } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { kX } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { XE } from '../figma_app/91703';
@@ -315,20 +315,20 @@ function $({
     children: [jsx(_$$E2, {
       name: 'slides_add_custom_color',
       children: jsx('div', {
-        className: _$$s.flex.justifyCenter.itemsCenter.w32.h32.$,
+        className: cssBuilderInstance.flex.justifyCenter.itemsCenter.w32.h32.$,
         children: jsx(ButtonPrimitive, {
           'htmlAttributes': {
             'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('slides.properties_panel.color_picker.add_color_aria_label')
           },
-          'className': _$$s.w24.h24.$,
+          'className': cssBuilderInstance.w24.h24.$,
           'aria-label': getI18nString('slides.properties_panel.color_picker.add_color_aria_label'),
           'onClick': a,
           'recordingKey': generateRecordingKey(o, 'addColor'),
           'children': jsx('img', {
             src: H,
             alt: '',
-            className: _$$s.w24.h24.$
+            className: cssBuilderInstance.w24.h24.$
           })
         })
       })
@@ -344,7 +344,7 @@ function $({
         isSelected: !s && colorsEqual(t.color, e?.color) && t.opacity === e?.opacity,
         recordingKey: generateRecordingKey(o, 'documentColor', colorCSSManipulatorInstance.format(t.color))
       }, i)), E && jsx(ButtonPrimitive, {
-        className: _$$s.wFull.h32.flex.itemsCenter.justifyCenter.$,
+        className: cssBuilderInstance.wFull.h32.flex.itemsCenter.justifyCenter.$,
         onClick: () => u(!0),
         recordingKey: generateRecordingKey(o, 'documentColors', 'more'),
         children: jsx(_$$k, {})
@@ -360,15 +360,15 @@ function X({
   children: a
 }) {
   return jsxs('div', {
-    className: _$$s.pl12.pr8.$$if(i, _$$s.bb1.bSolid.colorBorder).$$if(!r, _$$s.pb12).$,
+    className: cssBuilderInstance.pl12.pr8.$$if(i, cssBuilderInstance.bb1.bSolid.colorBorder).$$if(!r, cssBuilderInstance.pb12).$,
     children: [jsxs('div', {
-      className: _$$s.h40.pl4.flex.justifyBetween.itemsCenter.$,
+      className: cssBuilderInstance.h40.pl4.flex.justifyBetween.itemsCenter.$,
       children: [jsx('div', {
-        className: _$$s.textBodyMedium.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
         children: e
       }), t]
     }), jsx('div', {
-      className: _$$s.flex.flexWrap.gap4.$,
+      className: cssBuilderInstance.flex.flexWrap.gap4.$,
       children: a
     })]
   });
@@ -422,7 +422,7 @@ export function $$q2({
         onContextMenu: h
       },
       'onClick': a,
-      'className': _$$s.w24.h24.relative.$,
+      'className': cssBuilderInstance.w24.h24.relative.$,
       'recordingKey': _,
       'aria-label': e,
       'children': [jsx('div', {

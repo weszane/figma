@@ -5,7 +5,7 @@ import s from "classnames";
 import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { Y } from "../905/315917";
@@ -51,7 +51,7 @@ export let $$v2 = forwardRef(({
   return jsxs("div", {
     ref: L,
     className: o()(zr, {
-      [_$$s.wFull.$]: x,
+      [cssBuilderInstance.wFull.$]: x,
       [yQ]: S
     }),
     "data-testid": "variable-pill-root",
@@ -62,7 +62,7 @@ export let $$v2 = forwardRef(({
       actionOnMouseDown: C,
       "aria-label": R,
       className: o()(Io, {
-        [_$$s.wFull.$]: x
+        [cssBuilderInstance.wFull.$]: x
       }, v, N && EE, O && Mk, S && yQ),
       colorTheme: B,
       "data-testid": E,

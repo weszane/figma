@@ -374,7 +374,7 @@ import { l as _$$l4 } from '../9410/990893';
 import { _K as _$$_K, ak as _$$ak, BV as _$$BV, c1 as _$$c9, Cu as _$$Cu, dA as _$$dA2, dH as _$$dH2, G7 as _$$G6, h9 as _$$h1, H0 as _$$H7, lm as _$$lm2, pt as _$$pt, qn as _$$qn, rQ as _$$rQ, sJ as _$$sJ, Vq as _$$Vq3, xf as _$$xf2, yc as _$$yc2, CB, D5, EW, Gg, H$, HK, I5, JK, kj, Mi, N$, QD, QZ, R8, Un, Yl, zp } from '../9410/995608';
 import { T as _$$T3 } from '../940032c6/307867';
 import { d as _$$d6 } from '../c5e2cae0/368426';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getWorkshopModeStatus, isWorkshopModeEnabled, useCurrentFileWorkshopModeStatus } from '../figma_app/789';
 import { Dm, K9, LO } from '../figma_app/8833';
 import { canPerformAction, canRunExtensions } from '../figma_app/12796';
@@ -2087,14 +2087,14 @@ function t$() {
     'size': qm,
     'defaultSize': qm,
     'onResize': _$$lQ,
-    'className': ex()(_$$cx, _$$s.relative.wFitContent.flex.flexShrink1.flexGrow1.overflowAuto.$, Dm),
+    'className': ex()(_$$cx, cssBuilderInstance.relative.wFitContent.flex.flexShrink1.flexGrow1.overflowAuto.$, Dm),
     'disableResizing': !0,
     'side': 'right',
     'data-cancel-insertable-resource-drag-and-drop': !0,
     'children': jsxs('div', {
       'id': YV,
       'data-testid': YV,
-      'className': ex()(kL, _$$s.relative.wFitContent.borderBox.selectNone.radiusLarge.flex.flexColumn.itemsCenter.colorBg.elevation100.overflowHidden.$),
+      'className': ex()(kL, cssBuilderInstance.relative.wFitContent.borderBox.selectNone.radiusLarge.flex.flexColumn.itemsCenter.colorBg.elevation100.overflowHidden.$),
       'children': [jsx(tQ, {
         searchQuery: c,
         handleSearch: N,
@@ -2132,7 +2132,7 @@ function t$() {
           query: c,
           metadataByLibraryKey: metadata
         }), jsx('div', {
-          className: _$$s.h12.flexShrink0.$
+          className: cssBuilderInstance.h12.flexShrink0.$
         })]
       })]
     })
@@ -2182,7 +2182,7 @@ function tX({
 }
 function tq() {
   return jsx('div', {
-    className: _$$s.flexGrow0.flexShrink0.wFull.h1.bt1.bSolid.colorBorder.$
+    className: cssBuilderInstance.flexGrow0.flexShrink0.wFull.h1.bt1.bSolid.colorBorder.$
   });
 }
 function tJ({
@@ -2240,15 +2240,15 @@ function tQ({
     categoryTitle: n
   }) : getI18nString('whiteboard.shapes_sidebar.search_shapes');
   return jsxs('div', {
-    className: _$$s.wFull.py12.$,
+    className: cssBuilderInstance.wFull.py12.$,
     children: [jsxs('div', {
       'data-onboarding-key': Zh,
-      'className': _$$s.flex.flexRow.pl16.pr8.gap8.$,
+      'className': cssBuilderInstance.flex.flexRow.pl16.pr8.gap8.$,
       'children': [jsx('div', {
-        className: _$$s.itemSelfCenter.textBodyLargeStrong.flexGrow1.$,
+        className: cssBuilderInstance.itemSelfCenter.textBodyLargeStrong.flexGrow1.$,
         children: getI18nString('whiteboard.shapes_sidebar.title')
       }), jsx('div', {
-        className: _$$s.flexGrow0.flex.flexRow.gap8.$,
+        className: cssBuilderInstance.flexGrow0.flex.flexRow.gap8.$,
         children: jsx(IconButton, {
           'aria-label': getI18nString('whiteboard.shapes_sidebar.close'),
           'onClick': () => {
@@ -2262,15 +2262,15 @@ function tQ({
         })
       })]
     }), jsx('div', {
-      className: _$$s.pr8.pl12.mt8.flexGrow1.$,
+      className: cssBuilderInstance.pr8.pl12.mt8.flexGrow1.$,
       children: jsx('div', {
-        className: _$$s.p0.colorBgSecondary.radiusMedium.mb4.$,
+        className: cssBuilderInstance.p0.colorBgSecondary.radiusMedium.mb4.$,
         children: jsx(IW, {
           className: ON,
           clearSearch: a,
           focusOnMount: !i?.shouldOptimizeForIpadApp,
           hasTransparentBackground: !0,
-          iconClassName: _$$s.colorIconSecondary.$,
+          iconClassName: cssBuilderInstance.colorIconSecondary.$,
           onChange: t,
           placeholder: d,
           query: e,
@@ -4062,7 +4062,7 @@ let aT = memo(e => {
           children: C
         })]
       }), jsx('div', {
-        className: ex()(_$$s.flex.itemsCenter.mr8.$$if(isSavedForUser, _$$s.visible).$),
+        className: ex()(cssBuilderInstance.flex.itemsCenter.mr8.$$if(isSavedForUser, cssBuilderInstance.visible).$),
         children: jsx(_$$_W, {
           resourceId: e.pluginId,
           resourceType: ResourceTypeNoComment.PLUGIN,
@@ -5529,7 +5529,7 @@ function of(e) {
       })]
     })
   }) : jsx('div', {
-    className: ex()(om, _$$s.ml8.mt2.mb2.$),
+    className: ex()(om, cssBuilderInstance.ml8.mt2.mb2.$),
     children: jsx('div', {
       className: 'browse_main_view_selector--mainViewSelectorTitle--WL5Qi text--fontPos13--xW8hS text--_fontBase--QdLsd',
       children: n(r[0])
@@ -5571,7 +5571,7 @@ function ob() {
         horizontal: 24
       },
       children: jsx('div', {
-        className: _$$s.wFull.h1.$,
+        className: cssBuilderInstance.wFull.h1.$,
         style: styleBuilderInstance.add({
           backgroundColor: 'var(--color-border)'
         }).$
@@ -5581,7 +5581,7 @@ function ob() {
 }
 function oE() {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.itemsCenter.alignCenter.pl16.pr16.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.alignCenter.pl16.pr16.$,
     children: [jsx('div', {
       children: jsx(SvgComponent, {
         svg: _$$A0,
@@ -5590,7 +5590,7 @@ function oE() {
         autosize: !0
       })
     }), jsx('div', {
-      className: _$$s.mb24.mt16.pl36.pr36.$,
+      className: cssBuilderInstance.mb24.mt16.pl36.pr36.$,
       children: renderI18nText('whiteboard.inserts.plugin_community_disabled', {
         private_plugins: jsx(Link, {
           newTab: !0,
@@ -5693,7 +5693,7 @@ function oM() {
   let m = isWorkshopModeEnabled();
   if (!r.loaded && !m) {
     return jsx('div', {
-      className: _$$s.flex.justifyCenter.alignCenter.p24.$,
+      className: cssBuilderInstance.flex.justifyCenter.alignCenter.p24.$,
       children: jsx(_$$k4, {})
     });
   }
@@ -5752,9 +5752,9 @@ function oU() {
   let i = !!t?.pluginsWhitelistEnforced;
   return jsxs('div', {
     children: [jsx(ob, {}), jsxs('div', {
-      className: _$$s.flex.justifyBetween.wFull.minW0.$,
+      className: cssBuilderInstance.flex.justifyBetween.wFull.minW0.$,
       children: [jsx(oP, {}), e === oh.DEVELOPMENT && jsx('div', {
-        className: _$$s.flex.itemsCenter.pr16.$,
+        className: cssBuilderInstance.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
           resourceType: HubTypeEnum.PLUGIN
         })
@@ -6222,9 +6222,9 @@ function la(e) {
         templates: s,
         templateInsertionLocation: RD.CURRENT_FILE
       }), !e.teamTemplatesFromSearchIsLoading && jsx('div', {
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         children: jsx(_$$a2, {
-          'className': _$$s.absolute.h300.$,
+          'className': cssBuilderInstance.absolute.h300.$,
           'style': {
             top: '-150px'
           },
@@ -6364,14 +6364,14 @@ function lu() {
   return jsxs(Fragment, {
     children: [h && jsxs(Fragment, {
       children: [jsx('div', {
-        className: ex()(ok, _$$s.mb8.$),
+        className: ex()(ok, cssBuilderInstance.mb8.$),
         children: renderI18nText('universal_insert.recents')
       }), jsx(sH, {
         items: p
       })]
     }), h && m && jsx(_$$F2, {}), m && jsxs(Fragment, {
       children: [jsx('div', {
-        className: ex()(ok, _$$s.mb8.$),
+        className: ex()(ok, cssBuilderInstance.mb8.$),
         children: renderI18nText('universal_insert.saved')
       }), jsx(sH, {
         items: u
@@ -6408,7 +6408,7 @@ function lh() {
   return e.length === 0 ? null : jsx(TrackingProvider, {
     name: 'invited',
     children: jsx('div', {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: jsxs(AutoLayout, {
         width: 'fill-parent',
         verticalAlignItems: 'center',
@@ -6422,7 +6422,7 @@ function lh() {
         children: [e.map(e => jsx(lm, {
           widget: e
         }, e.id)), jsx('div', {
-          className: _$$s.wFull.h1.$,
+          className: cssBuilderInstance.wFull.h1.$,
           style: styleBuilderInstance.add({
             backgroundColor: 'var(--color-border)'
           }).$
@@ -6440,9 +6440,9 @@ function lm({
   } = _$$cX();
   return jsxs(AutoLayout, {
     children: [jsxs('div', {
-      className: _$$s.relative.$,
+      className: cssBuilderInstance.relative.$,
       children: [jsx('div', {
-        className: _$$s.absolute.w8.h8.bRadiusHalf.colorBgDanger.$,
+        className: cssBuilderInstance.absolute.w8.h8.bRadiusHalf.colorBgDanger.$,
         style: styleBuilderInstance.add({
           left: '-8px',
           top: '-8px'
@@ -6459,7 +6459,7 @@ function lm({
             context: _$$_Y.WHITEBOARD
           })
         }),
-        className: _$$s.w200.$
+        className: cssBuilderInstance.w200.$
       })]
     }), jsx(PE, {
       resource: e
@@ -6468,7 +6468,7 @@ function lm({
 }
 function lg() {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.$,
     children: [jsx('div', {
       children: jsx(SvgComponent, {
         svg: _$$A12,
@@ -6477,7 +6477,7 @@ function lg() {
         autosize: !0
       })
     }), jsx('div', {
-      className: _$$s.mt16.mb24.$,
+      className: cssBuilderInstance.mt16.mb24.$,
       children: renderI18nText('whiteboard.inserts.disabled_org_widgets_empty_state_description')
     })]
   });
@@ -6564,9 +6564,9 @@ function lC() {
   let i = !!(t && t.widgets_whitelist_enforced);
   return jsxs('div', {
     children: [jsx(lh, {}), jsxs('div', {
-      className: _$$s.flex.justifyBetween.wFull.minW0.$,
+      className: cssBuilderInstance.flex.justifyBetween.wFull.minW0.$,
       children: [jsx(lv, {}), e === oh.DEVELOPMENT && jsx('div', {
-        className: _$$s.flex.itemsCenter.pr16.$,
+        className: cssBuilderInstance.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
           resourceType: HubTypeEnum.WIDGET
         })
@@ -6624,14 +6624,14 @@ function lN({
   return templatesByTeam ? jsx(TrackingProvider, {
     name: 'custom_templates_by_team',
     children: jsxs('div', {
-      className: _$$s.pt20.$,
+      className: cssBuilderInstance.pt20.$,
       children: [jsx(_$$g3, {
         templates: templatesByTeam.templates.map(e => ({
           type: _$$n4.TeamTemplateLg,
           template: e
         }))
       }), jsx(_$$a2, {
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         style: {
           bottom: '250px'
         },
@@ -6720,7 +6720,7 @@ function lk(e) {
     }), jsxs('div', {
       className: _$$pG,
       children: [jsx('div', {
-        className: _$$s.mr8.$,
+        className: cssBuilderInstance.mr8.$,
         children: _ && !getFeatureFlags().community_hub_admin_reviewer ? jsx(_$$I3, {
           resource: r,
           context: ShelfViewType.INSERTS,
@@ -6877,7 +6877,7 @@ function lD(e) {
     }), jsxs('div', {
       className: _$$pG,
       children: [jsx('div', {
-        className: _$$s.mr8.$,
+        className: cssBuilderInstance.mr8.$,
         children: O && !getFeatureFlags().community_hub_admin_reviewer ? jsx(_$$I3, {
           resource: n,
           context: ShelfViewType.INSERTS
@@ -6893,7 +6893,7 @@ function lD(e) {
             'data-not-draggable': !0
           },
           children: jsxs('span', {
-            className: _$$s.flex.flexRow.justifyCenter.itemsCenter.$,
+            className: cssBuilderInstance.flex.flexRow.justifyCenter.itemsCenter.$,
             children: [getI18nString('whiteboard.inserts.add_widget'), _ && jsx(SvgComponent, {
               svg: _$$A6,
               className: _$$sD
@@ -7205,7 +7205,7 @@ function lF({
         })
       }, e)), jsx(_$$a2, {
         'data-testid': 'load-more-teams',
-        'className': _$$s.relative.$,
+        'className': cssBuilderInstance.relative.$,
         'style': {
           bottom: '250px'
         },
@@ -7219,7 +7219,7 @@ function lF({
     categoryViewHeader: function () {
       if (!e) return;
       let t = e.resourceType === Rt.TEAM_TEMPLATES && e.id === '' ? jsx('div', {
-        className: _$$s.mr8.$,
+        className: cssBuilderInstance.mr8.$,
         children: jsx(DL, {
           filterOptions: eR,
           selectedIds: eM,
@@ -7485,7 +7485,7 @@ function de({
       className: 'figjam_panel_header--title--n9fHo',
       children: e
     }), jsxs('div', {
-      className: _$$s.flex.itemsCenter.gap4.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap4.$,
       children: [i, jsx(Me, {
         'onClick': t,
         'aria-label': getI18nString('common.close'),
@@ -7514,18 +7514,18 @@ function dl({
 }) {
   return jsx(ButtonPrimitive, {
     onClick: n,
-    className: ex()(_$$s.flex.justifyBetween.itemsCenter.py16.pl16.pr12.b1.colorBorder.bRadius6.wFull.alignLeft.$, 'ai_modal--oneClickButton--VqeLK'),
+    className: ex()(cssBuilderInstance.flex.justifyBetween.itemsCenter.py16.pl16.pr12.b1.colorBorder.bRadius6.wFull.alignLeft.$, 'ai_modal--oneClickButton--VqeLK'),
     htmlAttributes: {
       'data-testid': 'figjam-ai-one-click-v2'
     },
     children: jsxs('div', {
-      className: _$$s.flex.itemsCenter.justifyBetween.gap12.wFull.$,
+      className: cssBuilderInstance.flex.itemsCenter.justifyBetween.gap12.wFull.$,
       children: [jsx('div', {
-        className: _$$s.flex.flexRow.itemsStart.$,
+        className: cssBuilderInstance.flex.flexRow.itemsStart.$,
         children: jsxs('div', {
-          className: ex()(_$$s.colorTextSecondary.font11.fontInter.normal.overflowHidden.ellipsis.$, 'ai_modal--oneClickText--36sek'),
+          className: ex()(cssBuilderInstance.colorTextSecondary.font11.fontInter.normal.overflowHidden.ellipsis.$, 'ai_modal--oneClickText--36sek'),
           children: [jsx('span', {
-            className: _$$s.colorText.font11.fontInter.fontMedium.normal.$,
+            className: cssBuilderInstance.colorText.font11.fontInter.fontMedium.normal.$,
             children: e
           }), ` ${t}`]
         })
@@ -7533,7 +7533,7 @@ function dl({
         className: 'ai_modal--oneClickIcon--J1-2k',
         children: wg(i)
       }), jsx(SvgComponent, {
-        'className': ex()(_$$s.hidden.colorIconBrand.bRadius2.$, 'ai_modal--oneClickAiIcon--fQNmm'),
+        'className': ex()(cssBuilderInstance.hidden.colorIconBrand.bRadius2.$, 'ai_modal--oneClickAiIcon--fQNmm'),
         'data-tooltip': getI18nString('whiteboard.ai_modal.make'),
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-above': 'true',
@@ -7563,7 +7563,7 @@ function dg({
   setInitialPrompt: t
 }) {
   let i = {
-    paragraph: ex()(_$$s.lh24.$, 'prompt_editor_v2--promptParagraph--NNM8M prompt_editor_v2--paragraph--poJzZ'),
+    paragraph: ex()(cssBuilderInstance.lh24.$, 'prompt_editor_v2--promptParagraph--NNM8M prompt_editor_v2--paragraph--poJzZ'),
     list: {
       listitem: 'prompt_editor_v2--listItem--annrO',
       ol: 'prompt_editor_v2--ol--ic0Fx',
@@ -7714,7 +7714,7 @@ function d$() {
       className: 'ai_announcement_modal--headerText--iJ5yO',
       children: renderI18nText('whiteboard.ai_feature_announcement.more_prompts.title')
     }), jsx('span', {
-      className: _$$s.font13.$,
+      className: cssBuilderInstance.font13.$,
       children: renderI18nText('whiteboard.ai_feature_announcement.more_prompts.description')
     })]
   });
@@ -7753,7 +7753,7 @@ function dX({
       className: 'ai_announcement_modal--morePromptIcon--vM2Pj',
       children: r
     }), jsx('div', {
-      className: _$$s.inline.alignLeft.$,
+      className: cssBuilderInstance.inline.alignLeft.$,
       children: t.map((e, i) => jsxs('span', {
         className: e.bold ? 'ai_announcement_modal--boldedText--DaSsh' : 'ai_announcement_modal--normalText--zPNO-',
         children: [e.text, i !== t.length ? ' ' : '']
@@ -7772,7 +7772,7 @@ function dq({
   return jsxs('div', {
     className: 'ai_announcement_modal--morePromptsFooter--peV6H',
     children: [r ? jsx(dZ, {}) : jsx('div', {}), jsx('div', {
-      className: _$$s.flex.gap16.$,
+      className: cssBuilderInstance.flex.gap16.$,
       children: jsx('button', {
         onClick() {
           let r = _$$FN()[t];
@@ -7793,9 +7793,9 @@ function dq({
           e();
         },
         children: jsx('div', {
-          className: ex()(_$$s.py4.pl8.pr16.b1.bRadius6.font13.fontMedium.lh24.$, 'ai_announcement_modal--primaryBtn--Hp0e- ai_announcement_modal--btn--I8Apa'),
+          className: ex()(cssBuilderInstance.py4.pl8.pr16.b1.bRadius6.font13.fontMedium.lh24.$, 'ai_announcement_modal--primaryBtn--Hp0e- ai_announcement_modal--btn--I8Apa'),
           children: jsxs('div', {
-            className: _$$s.flex.flexRow.itemsCenter.$,
+            className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
             children: [jsx(SvgComponent, {
               svg: _$$A13,
               className: 'ai_announcement_modal--aiIcon--u4hnd'
@@ -7815,7 +7815,7 @@ let dJ = registerModal(e => {
     children: jsxs(DialogContents, {
       children: [jsx(DialogHeader, {
         children: jsx('div', {
-          className: ex()(_$$s.absolute.h18.$, 'ai_announcement_modal--aiBadge--DSi1-'),
+          className: ex()(cssBuilderInstance.absolute.h18.$, 'ai_announcement_modal--aiBadge--DSi1-'),
           children: jsx(_$$v2, {
             location: 'MODAL',
             onPointerUp: () => {
@@ -7852,7 +7852,7 @@ function d1({
   let s = useAtomWithSubscription(_$$dO);
   let [l, c] = useAtomValueAndSetter(JV);
   let u = ex()('ai_modal--suggestionPill--w44sw text--fontPos11--2LvXf text--_fontBase--QdLsd', dt);
-  let h = ex()(_$$s.colorBg.pl10.pr8.font11.lh16.borderBox.b1.bRadius6.wFitContent.$, dt);
+  let h = ex()(cssBuilderInstance.colorBg.pl10.pr8.font11.lh16.borderBox.b1.bRadius6.wFitContent.$, dt);
   let m = dx();
   return jsx(Fragment, {
     children: e.length > 0 && jsxs('div', {
@@ -7882,10 +7882,10 @@ function d1({
           },
           disabled: s.status === _$$c6.LOADING,
           children: jsxs('div', {
-            className: _$$s.flex.itemsCenter.gap6.$,
+            className: cssBuilderInstance.flex.itemsCenter.gap6.$,
             children: [_$$UH(n) && Oo(n.categoryKey), n.title, !_$$UH(n) && jsx(SvgComponent, {
               svg: _$$A18,
-              className: _$$s.colorIconTertiary.$
+              className: cssBuilderInstance.colorIconTertiary.$
             })]
           })
         }, n.title))
@@ -7898,10 +7898,10 @@ function d1({
           }));
         },
         children: jsxs('div', {
-          className: _$$s.flex.itemsCenter.gap4.cursorDefault.$,
+          className: cssBuilderInstance.flex.itemsCenter.gap4.cursorDefault.$,
           children: [renderI18nText('whiteboard.ai_modal.suggestion.more_prompts'), jsx(SvgComponent, {
             svg: _$$A17,
-            className: _$$s.colorIconFigjam.$
+            className: cssBuilderInstance.colorIconFigjam.$
           })]
         })
       })]
@@ -7924,7 +7924,7 @@ function d3() {
   if (e.length <= 0 || !i) return null;
   let n = _$$jJ(e);
   return jsx('div', {
-    className: ex()(_$$s.absolute.zIndex0.top0.left0.bgTransparent.overflowHidden.colorTextTertiary.font13.wFull.lh24.$, 'prompt_editor_v2--placeholderParagraph--D5ueD prompt_editor_v2--paragraph--poJzZ'),
+    className: ex()(cssBuilderInstance.absolute.zIndex0.top0.left0.bgTransparent.overflowHidden.colorTextTertiary.font13.wFull.lh24.$, 'prompt_editor_v2--placeholderParagraph--D5ueD prompt_editor_v2--paragraph--poJzZ'),
     children: `${n}${getI18nString('whiteboard.ai_modal.prompt_builder.trailing_ellipsis')}`
   });
 }
@@ -7981,9 +7981,9 @@ function d5({
         setInitialPrompt: n
       }),
       children: [jsx('div', {
-        className: ex()('prompt_editor_v2--promptBox--SdF5B', _$$s.flex.flexColumn.colorBgSecondary.p16.mx16.bRadius6.$$if(c.status === _$$c6.LOADING, _$$s.opacity0_5).$),
+        className: ex()('prompt_editor_v2--promptBox--SdF5B', cssBuilderInstance.flex.flexColumn.colorBgSecondary.p16.mx16.bRadius6.$$if(c.status === _$$c6.LOADING, cssBuilderInstance.opacity0_5).$),
         children: jsxs('div', {
-          className: _$$s.relative.flex.flexColumn.font13.resizeNone.wFull.hFull.justifyBetween.$,
+          className: cssBuilderInstance.relative.flex.flexColumn.font13.resizeNone.wFull.hFull.justifyBetween.$,
           children: [jsx(_$$$2, {
             contentEditable: jsx(d9, {
               contentEditableClassName: df,
@@ -8038,13 +8038,13 @@ function d6({
 }) {
   let t = useAtomWithSubscription(QY);
   return jsx('div', {
-    'className': ex()(_$$s.colorBgSecondary.p16.bRadius6.cursorText.$, 'prompt_editor_v2--entryViewPromptBox--EkmRO'),
+    'className': ex()(cssBuilderInstance.colorBgSecondary.p16.bRadius6.cursorText.$, 'prompt_editor_v2--entryViewPromptBox--EkmRO'),
     'data-onboarding-key': AI,
     'children': jsxs('div', {
-      className: _$$s.relative.font13.fontInter.normal.fontNormal.lh24.flex.itemsStart.wFull.hFull.$,
+      className: cssBuilderInstance.relative.font13.fontInter.normal.fontNormal.lh24.flex.itemsStart.wFull.hFull.$,
       children: [jsx(_$$$2, {
         contentEditable: jsx(d9, {
-          contentEditableClassName: ex()(_$$s.overflowYScroll.zIndex1.wFull.hFull.alignLeft.$, df),
+          contentEditableClassName: ex()(cssBuilderInstance.overflowYScroll.zIndex1.wFull.hFull.alignLeft.$, df),
           dataTestid: 'figjam-ai-modal-entry-view-prompt-editor',
           disabled: !1,
           isAutoFocused: !0,
@@ -8053,7 +8053,7 @@ function d6({
         }),
         placeholder: jsx('div', {
           'aria-hidden': !0,
-          'className': ex()(_$$s.eventsNone.colorTextTertiary.absolute.$, t.showing ? null : d_),
+          'className': ex()(cssBuilderInstance.eventsNone.colorTextTertiary.absolute.$, t.showing ? null : d_),
           'children': jsx('span', {
             children: getI18nString('whiteboard.ai_modal.prompt_placeholder')
           })
@@ -8073,7 +8073,7 @@ function d6({
 }
 function d4() {
   return jsx(Badge, {
-    className: ex()(_$$s.font11.fontMedium.h16.px4.bRadius5.ml4.hFitContent.colorTextSecondary.$, 'prompt_editor_v2--tabBadge--bntTA'),
+    className: ex()(cssBuilderInstance.font11.fontMedium.h16.px4.bRadius5.ml4.hFitContent.colorTextSecondary.$, 'prompt_editor_v2--tabBadge--bntTA'),
     text: getI18nString('whiteboard.ai_modal.hint_tab'),
     color: BadgeColor.TERTIARY
   });
@@ -8195,7 +8195,7 @@ function d8({
           }), jsx('div', {
             className: 'ai_modal--oneClickPromptSection--K-kml',
             children: jsx('div', {
-              className: ex()(_$$s.mx16.grid.rowGap12.overflowHidden.$, 'ai_modal--oneClickPromptGridV2--yc8rD'),
+              className: ex()(cssBuilderInstance.mx16.grid.rowGap12.overflowHidden.$, 'ai_modal--oneClickPromptGridV2--yc8rD'),
               children: r.map((e, i) => jsx(d7, {
                 shouldAnimate: t === Wl.NEW_FILE,
                 index: i,
@@ -8239,13 +8239,13 @@ function ct() {
   let e = useAtomWithSubscription(_$$dO);
   return getFeatureFlags().cortex_execution_tracing && (e.status === _$$c6.SUCCESS || e.status === _$$c6.ERROR) && e.trace ? jsx('div', {
     style: styleBuilderInstance.mb16.$,
-    className: _$$s.mx16.mt16.$,
+    className: cssBuilderInstance.mx16.mt16.$,
     children: jsxs('div', {
-      className: _$$s.px12.py12.flex.gap12.bRadius6.colorBgFigjamTertiary.font11.colorTextFigjam.overflowBreakWord.$,
+      className: cssBuilderInstance.px12.py12.flex.gap12.bRadius6.colorBgFigjamTertiary.font11.colorTextFigjam.overflowBreakWord.$,
       children: [jsx('div', {
         children: renderI18nText('whiteboard.ai_modal.share_trace_nudge_in_modal', {
           weirdOutput: jsx('span', {
-            className: _$$s.font11.colorTextFigjam.fontBold.$,
+            className: cssBuilderInstance.font11.colorTextFigjam.fontBold.$,
             children: getI18nString('whiteboard.ai_modal.share_trace_nudge_weird_output')
           })
         })
@@ -8255,7 +8255,7 @@ function ct() {
           noop(JSON.stringify(e.trace, null, 2), 'trace.json');
         },
         children: jsx('div', {
-          className: _$$s.font11.lh16.noWrap.$,
+          className: cssBuilderInstance.font11.lh16.noWrap.$,
           children: renderI18nText('whiteboard.ai_modal.share_trace')
         })
       })]
@@ -8309,7 +8309,7 @@ function ci({
       }), jsxs(_$$P, {
         className: da,
         children: [jsx('div', {
-          className: _$$s.pt16.$,
+          className: cssBuilderInstance.pt16.$,
           children: jsx(d5, {
             onSubmit: m
           })
@@ -8318,14 +8318,14 @@ function ci({
           children: jsxs('div', {
             className: 'ai_modal--ganttChartStyleContainerInner--GQHQh',
             children: [jsx('div', {
-              className: ex()(_$$s.colorTextSecondary.$),
+              className: ex()(cssBuilderInstance.colorTextSecondary.$),
               children: renderI18nText('whiteboard.ai_modal.style')
             }), jsxs('div', {
               children: [jsx('button', {
                 onClick: () => {
                   f(IPanelType.BASIC);
                 },
-                className: ex()(_$$s.inline.itemsCenter.py6.px14.b1.colorBorder.fontMedium.lh16.$, {
+                className: ex()(cssBuilderInstance.inline.itemsCenter.py6.px14.b1.colorBorder.fontMedium.lh16.$, {
                   [di]: !0,
                   [dn]: r === IPanelType.BASIC
                 }),
@@ -8338,7 +8338,7 @@ function ci({
                 onClick: () => {
                   f(IPanelType.EXPANDED);
                 },
-                className: ex()(_$$s.inline.itemsCenter.py6.px14.bSolid.br1.bt1.bb1.colorBorder.fontMedium.lh16.$, {
+                className: ex()(cssBuilderInstance.inline.itemsCenter.py6.px14.bSolid.br1.bt1.bb1.colorBorder.fontMedium.lh16.$, {
                   [di]: !0,
                   [dn]: r === IPanelType.EXPANDED
                 }),
@@ -8409,7 +8409,7 @@ function co() {
     throw new Error('Unsupported AI Modal Display Type');
   }
   return jsx('div', {
-    className: _$$s.$$if(!n, _$$s.hidden).$,
+    className: cssBuilderInstance.$$if(!n, cssBuilderInstance.hidden).$,
     children: e
   });
 }
@@ -8499,14 +8499,14 @@ function cu() {
       fileKey: e
     },
     children: [jsxs('div', {
-      className: _$$s.flex.justifyCenter.itemsCenter.mt16.mb10.$,
+      className: cssBuilderInstance.flex.justifyCenter.itemsCenter.mt16.mb10.$,
       children: [jsx('div', {
-        className: ex()(_$$s.h2.flex1.$, 'ai_modal--hrLeft--trcI7')
+        className: ex()(cssBuilderInstance.h2.flex1.$, 'ai_modal--hrLeft--trcI7')
       }), jsx('div', {
-        className: ex()(_$$s.relative.px10.py4.font11.colorTextSecondary.fontNormal.$),
+        className: ex()(cssBuilderInstance.relative.px10.py4.font11.colorTextSecondary.fontNormal.$),
         children: renderI18nText('whiteboard.ai_modal.or')
       }), jsx('div', {
-        className: ex()(_$$s.h2.flex1.$, 'ai_modal--hrRight--rxij6')
+        className: ex()(cssBuilderInstance.h2.flex1.$, 'ai_modal--hrRight--rxij6')
       })]
     }), jsx(_$$P3.div, {
       variants: {
@@ -8529,7 +8529,7 @@ function cu() {
           }));
         },
         innerText: 'start with template',
-        className: _$$s.flex.itemsCenter.justifyCenter.py6.bgTransparent.wFull.$,
+        className: cssBuilderInstance.flex.itemsCenter.justifyCenter.py6.bgTransparent.wFull.$,
         style: styleBuilderInstance.add({
           height: '42px'
         }).$,
@@ -8553,7 +8553,7 @@ function cu() {
             variants: i
           }, e))
         }), jsxs(_$$P3.div, {
-          className: _$$s.flex.itemsCenter.justifyCenter.gap4.$,
+          className: cssBuilderInstance.flex.itemsCenter.justifyCenter.gap4.$,
           variants: {
             rest: {
               x: 0
@@ -8567,10 +8567,10 @@ function cu() {
             }
           },
           children: [jsx('div', {
-            className: ex()(_$$s.font13.$, 'ai_modal--templateCtaV2--n1GTF'),
+            className: ex()(cssBuilderInstance.font13.$, 'ai_modal--templateCtaV2--n1GTF'),
             children: renderI18nText('whiteboard.ai_modal.template_cta')
           }), jsx('div', {
-            className: ex()(_$$s.colorIconSecondary.mt2.$),
+            className: ex()(cssBuilderInstance.colorIconSecondary.mt2.$),
             children: jsx(_$$k5, {})
           })]
         })]
@@ -8585,7 +8585,7 @@ function cp({
   let i = useAtomWithSubscription(userFlagAtomFamily(Pg));
   return jsxs('div', {
     'data-fullscreen-prevent-event-capture': !0,
-    'className': ex()(_$$s.colorBg.flex.flexColumn.$, 'ai_modal--generateContainerV2--vAeZh', {
+    'className': ex()(cssBuilderInstance.colorBg.flex.flexColumn.$, 'ai_modal--generateContainerV2--vAeZh', {
       'ai_modal--border--WpxWn': !t
     }),
     'data-testid': 'figjam-ai-modal-content-v2',
@@ -9339,15 +9339,15 @@ function uD({
       className: 'x6drftx',
       children: p
     }), jsxs('div', {
-      className: ex()(_$$s.borderBox.p4.colorBg.wFull.flex.flexColumn.bRadius5.relative.$),
+      className: ex()(cssBuilderInstance.borderBox.p4.colorBg.wFull.flex.flexColumn.bRadius5.relative.$),
       onClick: () => {
         let e = f?.current;
         e && e.focus();
       },
       children: [jsx('div', {
-        className: ex()(_$$s.flex.relative.overflowHidden.$, Dm),
+        className: ex()(cssBuilderInstance.flex.relative.overflowHidden.$, Dm),
         children: jsxs('div', {
-          className: _$$s.flex1.relative.font13.ml8.$,
+          className: cssBuilderInstance.flex1.relative.font13.ml8.$,
           style: styleBuilderInstance.add({
             lineHeight: `${$g}px`
           }).$,
@@ -9366,16 +9366,16 @@ function uD({
             ..._$$xk(uU.suggestionText, _ ? uU.promptBoxTextShimmer : null),
             style: T,
             children: [jsx('span', {
-              className: _$$s.invisible.$,
+              className: cssBuilderInstance.invisible.$,
               children: t
             }), jsx('span', {
               children: x
             }), _ && jsx('span', {
-              className: _$$s.inlineFlex.itemsCenter.ml4.$,
+              className: cssBuilderInstance.inlineFlex.itemsCenter.ml4.$,
               children: jsx(_$$qy, {})
             })]
           }), jsx('div', {
-            className: _$$s.absolute.flex.flexRow.$,
+            className: cssBuilderInstance.absolute.flex.flexRow.$,
             style: {
               top: 4,
               right: 4
@@ -19823,7 +19823,7 @@ function jf(e) {
       className: 'meeting_tool_cancel_view--descriptionSection--9D1U7 text--fontPos11--2LvXf text--_fontBase--QdLsd',
       children: bodyText
     }), jsxs('div', {
-      className: _$$s.flex.gap10.$,
+      className: cssBuilderInstance.flex.gap10.$,
       children: [jsx(jh, {
         flexGrow: !0,
         onClick: onCancel,
@@ -20597,7 +20597,7 @@ function bn() {
     'className': 'timer_view--timerContainer--kRcU1',
     'data-testid': 'timer-modal',
     'children': jsxs('div', {
-      className: _$$s.flex.flexColumn.p16.gap12.$,
+      className: cssBuilderInstance.flex.flexColumn.p16.gap12.$,
       children: [jsx('div', {
         className: 'timer_view--timerBackground--NUQ4g',
         children: jsx(j9, {
@@ -20609,7 +20609,7 @@ function bn() {
           isInUI3Toolbar: !1
         })
       }), jsxs('div', {
-        className: _$$s.flex.justifyBetween.itemsCenter.$,
+        className: cssBuilderInstance.flex.justifyBetween.itemsCenter.$,
         children: [jsx(jh, {
           'onClick': e => {
             addMinutes(TIMER_INCREMENT_STEP);
@@ -20624,7 +20624,7 @@ function bn() {
             })]
           })
         }), jsxs('div', {
-          className: _$$s.flex.gap12.$,
+          className: cssBuilderInstance.flex.gap12.$,
           children: [!x && jsx(jv, {
             buttonState: jy.STOP,
             onClick: () => {
@@ -20948,7 +20948,7 @@ function bw({
         userVoteLimit: n.userVoteLimit
       })
     }), !BrowserInfo.isMeetDevice && jsx('div', {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: jsx(jh, {
         'flexGrow': !0,
         'onClick': () => {
@@ -21506,12 +21506,12 @@ function bR({
     }));
   }, [t]));
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.p16.$,
+    className: cssBuilderInstance.flex.flexColumn.p16.$,
     children: [jsx('div', {
-      className: _$$s.flex.gap8.itemsCenter.mb8.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.mb8.$,
       children: jsx(bk, {})
     }), jsx('div', {
-      className: _$$s.flex.justifyCenter.$,
+      className: cssBuilderInstance.flex.justifyCenter.$,
       children: jsx(jm, {
         onClick: i,
         recordingKey: generateRecordingKey(e, 'joinVotingSession'),
@@ -21544,7 +21544,7 @@ function bF() {
   }, [s, e]);
   let u = r || a;
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.p16.gap12.$,
+    className: cssBuilderInstance.flex.flexColumn.p16.gap12.$,
     children: [jsx(bk, {}), jsx(bH, {
       userVoteLimitInput: s,
       setUserVoteLimitInput: c,
@@ -21690,12 +21690,12 @@ function bV(e) {
   let r = useCurrentFileKey();
   let a = void 0 !== setOnPastVotesClick;
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.p16.$,
+    className: cssBuilderInstance.flex.flexColumn.p16.$,
     children: [jsx('div', {
-      className: _$$s.flex.gap8.itemsCenter.mb12.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.mb12.$,
       children: jsx(bk, {})
     }), jsxs('div', {
-      className: _$$s.flex.gap6.justifyCenter.$,
+      className: cssBuilderInstance.flex.gap6.justifyCenter.$,
       children: [a && jsx(jh, {
         flexGrow: a,
         onClick: () => {
@@ -21718,7 +21718,7 @@ function bV(e) {
         },
         recordingKey: generateRecordingKey(recordingKey, 'newVote'),
         children: jsx('div', {
-          className: _$$s.px4.$,
+          className: cssBuilderInstance.px4.$,
           children: renderI18nText('meetings_panel.voting.new_vote')
         })
       })]
@@ -21944,7 +21944,7 @@ let b8 = memo(({
   if (!i) return null;
   let a = !!n.length;
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.minH0.flexGrow1.$,
+    className: cssBuilderInstance.flex.flexColumn.minH0.flexGrow1.$,
     children: [jsx('div', {
       className: 'voting_results_detail_view--titleContainer--gt1pA',
       children: jsx(bS, {
@@ -22229,7 +22229,7 @@ let yr = memo(e => {
         className: 'meetings_panel_header--meetingsPanelHeaderText--KW2Jw text--fontPos11--2LvXf text--_fontBase--QdLsd',
         children: headerText
       }), jsx('div', {
-        className: _$$s.mlAuto.$,
+        className: cssBuilderInstance.mlAuto.$,
         ref: dropdownTargetRef,
         children: _ && jsx(_$$d1, {
           'aria-label': getI18nString('meetings_panel.header.overflow_menu_aria_label'),
@@ -22687,7 +22687,7 @@ function yS() {
   let i = e && BrowserInfo.isMeetDevice && t;
   let n = BrowserInfo.isMeetDevice ? i : e;
   return jsxs('div', {
-    className: _$$s.colorBg.$,
+    className: cssBuilderInstance.colorBg.$,
     children: [jsx(yv, {}), jsx(b5, {}), jsx(bn, {}), jsx(b5, {}), jsx(jC, {}), n && jsxs(Fragment, {
       children: [jsx(b5, {}), jsx(bK, {})]
     })]

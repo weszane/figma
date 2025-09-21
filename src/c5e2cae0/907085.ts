@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 export function $$l0({
   title: e,
@@ -13,7 +13,7 @@ export function $$l0({
     }).$,
     "data-testid": a,
     children: [e && jsx("h3", {
-      className: _$$s.mb16.fontMedium.font15.$,
+      className: cssBuilderInstance.mb16.fontMedium.font15.$,
       children: e
     }), t]
   });

@@ -9,7 +9,7 @@ import { B } from "../905/950875";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { LoadingOverlay } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b, A as _$$A } from "../905/723768";
@@ -82,14 +82,14 @@ export let $$A0 = registerModal(function (e) {
           children: [jsx(oW, {
             src: buildUploadUrl("79f17ef7df0c5ed50af97e6c5e98651536c94352"),
             alt: "Connected projects logo",
-            className: _$$s.maxWFull.$
+            className: cssBuilderInstance.maxWFull.$
           }), jsxs("div", {
-            className: _$$s.flex.flexColumn.pl16.pr16.pt16.pb0.maxWFull.$,
+            className: cssBuilderInstance.flex.flexColumn.pl16.pr16.pt16.pb0.maxWFull.$,
             children: [jsx("p", {
-              className: _$$s.$,
+              className: cssBuilderInstance.$,
               children: renderI18nText("resource_connection.confirm_modal.in_a_connected_project_anyone_you_invite_can_edit", {
                 connectingPlanName: jsx("span", {
-                  className: _$$s.fontSemiBold.$,
+                  className: cssBuilderInstance.fontSemiBold.$,
                   children: C.name
                 })
               })
@@ -163,14 +163,14 @@ export let $$A0 = registerModal(function (e) {
             children: [jsx("a", {
               href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
               target: "_blank",
-              className: _$$s.mr8.$,
+              className: cssBuilderInstance.mr8.$,
               children: jsx(Button, {
                 variant: "link",
                 onClick: e => e.stopPropagation(),
                 children: renderI18nText("resource_connection.request_modal.learn_more")
               })
             }), jsxs("div", {
-              className: _$$s.flex.gap8.itemsCenter.$,
+              className: cssBuilderInstance.flex.gap8.itemsCenter.$,
               children: [jsx(Button, {
                 variant: "secondary",
                 onClick: () => {

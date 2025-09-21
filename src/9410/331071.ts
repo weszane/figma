@@ -231,7 +231,7 @@ import { B as _$$B4 } from '../9410/958580';
 import { g as _$$g4 } from '../9410/995605';
 import _require2 from '../9756/399756';
 import { A as _$$A1 } from '../af221b13/388839';
-import { s as _$$s3 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { r as _$$r2 } from '../figma_app/6042';
 import { Dm } from '../figma_app/8833';
@@ -992,7 +992,7 @@ function t$({
 }) {
   return jsx('img', {
     src: e,
-    className: _$$s3.maxW100.$,
+    className: cssBuilderInstance.maxW100.$,
     alt: 'debug'
   });
 }
@@ -1003,7 +1003,7 @@ function t0(e) {
   } = e;
   if (obj === null) {
     return jsx('span', {
-      className: _$$s3.colorTextTertiary.$,
+      className: cssBuilderInstance.colorTextTertiary.$,
       children: getI18nString('assistant.debug.null')
     });
   }
@@ -1023,15 +1023,15 @@ function t0(e) {
       }) : obj.length > 300 && obj.match(/^([A-Z0-9+/]{4})*([A-Z0-9+/]{3}=|[A-Z0-9+/]{2}==)?$/i) ? jsx(t$, {
         url: `data:image/jpeg;base64,${obj}`
       }) : jsxs('span', {
-        className: _$$s3.colorTextSuccess.$,
+        className: cssBuilderInstance.colorTextSuccess.$,
         children: ['"', obj, '"']
       });
     }
     return typeof obj == 'number' ? jsx('span', {
-      className: _$$s3.colorTextSelected.$,
+      className: cssBuilderInstance.colorTextSelected.$,
       children: obj
     }) : typeof obj == 'boolean' ? jsx('span', {
-      className: _$$s3.colorTextComponent.$,
+      className: cssBuilderInstance.colorTextComponent.$,
       children: obj.toString()
     }) : jsx('span', {
       children: obj
@@ -1047,7 +1047,7 @@ function t0(e) {
     children: [a[0], s.length > 0 && jsx('div', {
       children: s.map(([e, t], a) => jsxs('div', {
         children: [!r && jsx('span', {
-          className: _$$s3.colorTextDanger.$,
+          className: cssBuilderInstance.colorTextDanger.$,
           children: `"${e}:" `
         }), jsx(t0, {
           obj: t,
@@ -1074,7 +1074,7 @@ function t2({
 }) {
   return jsx('div', {
     children: jsx('div', {
-      className: _$$s3.px2.py2.$,
+      className: cssBuilderInstance.px2.py2.$,
       children: jsx(t1, {
         data: e
       })
@@ -1096,7 +1096,7 @@ let t3 = registerModal(({
     title: getI18nString('assistant.debug.title'),
     dragHeaderOnly: !0,
     children: jsxs('div', {
-      className: _$$s3.px2.py2.$,
+      className: cssBuilderInstance.px2.py2.$,
       style: {
         height: 600,
         overflowX: 'scroll',
@@ -1152,7 +1152,7 @@ function t5() {
         useBottomPinning: !0,
         enableScrollShadow: !0,
         children: jsxs('div', {
-          className: _$$s3.py8.flex.flexColumn.gap4.$,
+          className: cssBuilderInstance.py8.flex.flexColumn.gap4.$,
           children: [i.messages.map((e, t) => jsx(ie, {
             message: e
           }, `msg-${t}`)), jsx('div', {
@@ -1185,11 +1185,11 @@ function t5() {
 }
 function t4() {
   return jsxs('div', {
-    className: _$$s3.flex.flexColumn.itemsCenter.justifyEnd.hFull.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.justifyEnd.hFull.gap8.$,
     children: [jsx(_$$m, {}), jsxs('div', {
-      className: _$$s3.flex.flexRow.gap16.$,
+      className: cssBuilderInstance.flex.flexRow.gap16.$,
       children: [jsxs('div', {
-        className: _$$s3.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
+        className: cssBuilderInstance.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
         children: [jsxs(t6, {
           inputToSend: 'Find similar designs to my selection',
           children: [jsx(tA, {}), 'Find designs']
@@ -1198,7 +1198,7 @@ function t4() {
           children: [jsx(_$$V3, {}), getI18nString('assistant.chat.suggestion.request_feature')]
         })]
       }), jsxs('div', {
-        className: _$$s3.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
+        className: cssBuilderInstance.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
         children: [jsxs(t6, {
           inputToSend: 'Make a plugin that creates rectangles in a grid',
           children: [jsx(_$$x2, {}), getI18nString('assistant.chat.suggestion.make_tool')]
@@ -1221,7 +1221,7 @@ function t6({
     tC(t, r.messages, s, tx);
   }, [t, r.messages, s]);
   return jsx('button', {
-    className: _$$s3.flex.flexColumn.justifyEnd.wFull.b1.colorBorder.gap8.textBodyLargeStrong.p12.$$if(i, _$$s3.colorTextSecondary).$,
+    className: cssBuilderInstance.flex.flexColumn.justifyEnd.wFull.b1.colorBorder.gap8.textBodyLargeStrong.p12.$$if(i, cssBuilderInstance.colorTextSecondary).$,
     style: {
       borderRadius: 13,
       minWidth: 150,
@@ -1238,7 +1238,7 @@ function t7({
   children: e
 }) {
   return jsx('div', {
-    className: _$$s3.flex.flexRow.itemsCenter.wFull.b1.colorBorder.gap8.h40.textBodyLargeStrong.px4.mr12.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.wFull.b1.colorBorder.gap8.h40.textBodyLargeStrong.px4.mr12.$,
     style: {
       borderRadius: 13
     },
@@ -1256,10 +1256,10 @@ function t8({
     case tn.Loading:
       t = jsxs(t7, {
         children: [jsx('div', {
-          className: _$$s3.pl4.flex.itemsCenter.justifyCenter.$,
+          className: cssBuilderInstance.pl4.flex.itemsCenter.justifyCenter.$,
           children: jsx(_$$k2, {})
         }), jsx('div', {
-          className: _$$s3.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: getI18nString('assistant.chat.status.loading')
         })]
       });
@@ -1355,22 +1355,22 @@ function ie({
 }) {
   let t = selectCurrentUser();
   return e.role === 'user' && typeof e.content != 'string' && e.content?.length && e.content[0]?.type === 'text' && e.content[0].text.startsWith('\x3C!--') || e.role === 'assistant' && !e.content || e.role === 'tool' && !e.content ? null : jsx('div', {
-    className: _$$s3.px12.py4.flex.wFull.$,
+    className: cssBuilderInstance.px12.py4.flex.wFull.$,
     children: jsxs('div', {
-      className: _$$s3.gap8.flex.wFull.$,
+      className: cssBuilderInstance.gap8.flex.wFull.$,
       children: [jsx('div', {
-        className: _$$s3.w24.h24.flexShrink0.flex.itemsCenter.justifyCenter.$,
+        className: cssBuilderInstance.w24.h24.flexShrink0.flex.itemsCenter.justifyCenter.$,
         children: e.role === 'assistant' || e.role === 'tool' ? jsx(_$$m, {}) : t?.img_url ? jsx(_$$J, {
           src: t.img_url,
-          className: _$$s3.w16.h16.radiusFull.$
+          className: cssBuilderInstance.w16.h16.radiusFull.$
         }) : jsx(_$$_2, {})
       }), jsxs('div', {
-        className: _$$s3.flex.flexColumn.wFull.pt2.$,
+        className: cssBuilderInstance.flex.flexColumn.wFull.pt2.$,
         children: [jsx('span', {
-          className: _$$s3.textBodyLargeStrong.$,
+          className: cssBuilderInstance.textBodyLargeStrong.$,
           children: e.role === 'assistant' || e.role === 'tool' ? 'Figma' : 'You'
         }), e.role === 'tool' ? jsx('div', {
-          className: _$$s3.wFull.pt4.$,
+          className: cssBuilderInstance.wFull.pt4.$,
           children: jsx(t9, {
             ...e
           })
@@ -1960,7 +1960,7 @@ function nW(e) {
   return jsx(nU, {
     primaryAction: e.onClick,
     children: jsx('div', {
-      className: _$$s3.radiusFull.$,
+      className: cssBuilderInstance.radiusFull.$,
       children: e.activeColorIdx === -1 ? jsx(cd, {
         size: 'medium',
         value: e.value,
@@ -2005,7 +2005,7 @@ function nY({
   return jsx(nB, {
     defaultActiveIndex: c,
     children: jsx('div', {
-      className: _$$s3.flex.flexGrow1.justifyBetween.$,
+      className: cssBuilderInstance.flex.flexGrow1.justifyBetween.$,
       style: {
         boxSizing: 'content-box'
       },
@@ -2123,30 +2123,30 @@ function n7({
     canAcceptVariables: !1
   };
   return jsxs('div', {
-    className: _$$s3.flex.pr16.pl16.pt8.pb4.flexRow.justifyCenter.itemsEnd.flexGrow1.gap16.$,
+    className: cssBuilderInstance.flex.pr16.pl16.pt8.pb4.flexRow.justifyCenter.itemsEnd.flexGrow1.gap16.$,
     children: [jsxs('div', {
-      className: _$$s3.flex.flexRow.justifyCenter.itemsCenter.flexGrow1.gap8.$,
+      className: cssBuilderInstance.flex.flexRow.justifyCenter.itemsCenter.flexGrow1.gap8.$,
       children: [jsx(IconButton, {
         'aria-label': getI18nString('first_draft.theme_tool.close_panel'),
         'onClick': () => r(),
         'recordingKey': 'closeSectionEditor',
         'children': jsx(_$$C3, {})
       }), jsxs('div', {
-        className: _$$s3.flex.flexColumn.justifyBetween.wFull.itemsEnd.gap4.$,
+        className: cssBuilderInstance.flex.flexColumn.justifyBetween.wFull.itemsEnd.gap4.$,
         children: [jsx('div', {
-          className: _$$s3.flex.justifyBetween.itemsCenter.wFull.$,
+          className: cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.$,
           children: jsx(_$$e5, {
             width: 168,
             color: h,
             changeCallback: C
           })
         }), jsxs('div', {
-          className: _$$s3.flex.justifyBetween.itemsCenter.wFull.gap8.$,
+          className: cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.gap8.$,
           style: {
             maxWidth: 210
           },
           children: [jsx(_$$p2, {
-            selectClassName: rB()(_$$s3.flexShrink1.flexGrow0.flex.$, 'theme_editor--colorSelect--wIbMH', 'theme_editor--precedence--lvYGC'),
+            selectClassName: rB()(cssBuilderInstance.flexShrink1.flexGrow0.flex.$, 'theme_editor--colorSelect--wIbMH', 'theme_editor--precedence--lvYGC'),
             colorFormat: u,
             onColorFormatChange: e => {
               p(e);
@@ -2166,7 +2166,7 @@ function n7({
         })]
       })]
     }), jsx('div', {
-      className: _$$s3.flex.justifyCenter.itemsCenter.relative.mr8.$,
+      className: cssBuilderInstance.flex.justifyCenter.itemsCenter.relative.mr8.$,
       ref: y,
       children: jsx('div', {
         style: {
@@ -2180,14 +2180,14 @@ function n7({
             ...f
           },
           children: [jsx('div', {
-            className: rB()('theme_editor--pickerUnderlay--gfCHS', _$$s3.colorBg.elevation200.absolute.p2.$),
+            className: rB()('theme_editor--pickerUnderlay--gfCHS', cssBuilderInstance.colorBg.elevation200.absolute.p2.$),
             style: {
               width: 115,
               height: 115,
               borderRadius: 14
             }
           }), jsx('div', {
-            className: rB()('theme_editor--pickerOverlay--Ykwy9', _$$s3.flex.colorBg.absolute.p2.overflowHidden.justifyCenter.alignCenter.$),
+            className: rB()('theme_editor--pickerOverlay--Ykwy9', cssBuilderInstance.flex.colorBg.absolute.p2.overflowHidden.justifyCenter.alignCenter.$),
             style: {
               width: 115,
               height: 115,
@@ -2294,11 +2294,11 @@ let ae = {
       onHide: o,
       ...e
     }) : jsxs('div', {
-      className: _$$s3.flex.flexRow.flexGrow1.p16.pt12.pb12.gap16.itemsCenter.$,
+      className: cssBuilderInstance.flex.flexRow.flexGrow1.p16.pt12.pb12.gap16.itemsCenter.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
       }), jsx('div', {
-        className: _$$s3.flex0.flexShrink0.$,
+        className: cssBuilderInstance.flex0.flexShrink0.$,
         children: jsxs(_$$bL, {
           onChange: e.onChangeColorMode,
           value: e.colorMode,
@@ -2310,14 +2310,14 @@ let ae = {
             'value': 'light',
             'aria-label': getI18nString('first_draft.theme_tool.color.light_mode'),
             'icon': jsx('div', {
-              className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
+              className: cssBuilderInstance.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$Z2, {})
             })
           }), jsx(c$, {
             'value': 'dark',
             'aria-label': getI18nString('first_draft.theme_tool.color.dark_mode'),
             'icon': jsx('div', {
-              className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
+              className: cssBuilderInstance.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$a2, {})
             })
           })]
@@ -2333,11 +2333,11 @@ let ae = {
   [nq.RADIUS](e) {
     let [t, i] = useState(e.cornerRadiusStop);
     return jsxs('div', {
-      className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
+      className: cssBuilderInstance.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
       }), jsx(Label, {
-        className: _$$s3.opacity0_5.$,
+        className: cssBuilderInstance.opacity0_5.$,
         children: renderI18nText('first_draft.theme_panel.radius')
       }), jsx(_$$A5, {
         'aria-label': getI18nString('first_draft.theme_panel.radius'),
@@ -2356,11 +2356,11 @@ let ae = {
   [nq.SPACING](e) {
     let [t, i] = useState(e.spacingStop);
     return jsxs('div', {
-      className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
+      className: cssBuilderInstance.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
       }), jsx(Label, {
-        className: _$$s3.opacity0_5.$,
+        className: cssBuilderInstance.opacity0_5.$,
         children: renderI18nText('first_draft.theme_panel.spacing')
       }), jsx(_$$A5, {
         'aria-label': getI18nString('first_draft.theme_panel.spacing'),
@@ -2385,9 +2385,9 @@ let ae = {
       recordingKey: generateRecordingKey(e, 'fontEditor')
     });
     return jsxs('div', {
-      className: _$$s3.flex.flex1.flexColumn.$,
+      className: cssBuilderInstance.flex.flex1.flexColumn.$,
       children: [jsxs('div', {
-        className: _$$s3.flex.flex1.flexRow.gap8.p8.$,
+        className: cssBuilderInstance.flex.flex1.flexRow.gap8.p8.$,
         children: [jsx(as, {
           recordingKey: e.recordingKey
         }), jsxs(_$$t3.TabStrip, {
@@ -2404,9 +2404,9 @@ let ae = {
           })]
         })]
       }), jsx('div', {
-        className: _$$s3.wFull.colorBgTertiary.h1.$
+        className: cssBuilderInstance.wFull.colorBgTertiary.h1.$
       }), jsxs('div', {
-        className: _$$s3.flex.flex1.flexColumn.gap8.p8.$,
+        className: cssBuilderInstance.flex.flex1.flexColumn.gap8.p8.$,
         children: [jsx(_$$t3.TabPanel, {
           ...i.title,
           children: jsx(ar, {
@@ -2437,7 +2437,7 @@ function at(e) {
   return jsx('div', {
     ref: t,
     tabIndex: -1,
-    className: rB()('theme_editor--boxInherit--BjYCO', _$$s3.flex.relative.wFull.$),
+    className: rB()('theme_editor--boxInherit--BjYCO', cssBuilderInstance.flex.relative.wFull.$),
     children: jsx(r, {
       focusParent: i,
       ...e
@@ -2456,7 +2456,7 @@ function ai({
     defaultActiveIndex: r > -1 ? r : 0,
     itemsPerRow: 5,
     children: jsx('div', {
-      className: _$$s3.flex.flex1.flexWrap.itemsCenter.rowGap8.justifyBetween.$,
+      className: cssBuilderInstance.flex.flex1.flexWrap.itemsCenter.rowGap8.justifyBetween.$,
       children: t.map(({
         key: t,
         name: r,
@@ -2531,7 +2531,7 @@ function as({
   kz(KeyCodes.ESCAPE, pop);
   kz(KeyCodes.BACKSPACE, pop);
   return jsx('div', {
-    className: _$$s3.h24.$,
+    className: cssBuilderInstance.h24.$,
     children: jsx(IconButton, {
       'recordingKey': generateRecordingKey(e, 'backButton'),
       'onClick': pop,
@@ -3439,7 +3439,7 @@ function ag({
         titleFont: ea(L)
       })
     }), jsxs('div', {
-      'className': rB()(_$$s3.p8.relative.$, r.activeTab === 'theme' && 'first_draft_make_changes_view--contentBoxed--L-H0e', eu && _$$s3.elevation500.radiusLarge.$),
+      'className': rB()(cssBuilderInstance.p8.relative.$, r.activeTab === 'theme' && 'first_draft_make_changes_view--contentBoxed--L-H0e', eu && cssBuilderInstance.elevation500.radiusLarge.$),
       'data-testid': 'readyForPromptView',
       'children': [jsx(_$$t3.TabPanel, {
         ...o.prompt,
@@ -3964,12 +3964,12 @@ function aP(e) {
       }
     },
     children: jsxs('div', {
-      className: _$$s3.flex.flexColumn.p4.wFull.$,
+      className: cssBuilderInstance.flex.flexColumn.p4.wFull.$,
       children: [jsx('div', {
-        className: _$$s3.font13.wFitContent.$,
+        className: cssBuilderInstance.font13.wFitContent.$,
         children: e.title
       }), jsx('div', {
-        className: _$$s3.font11.colorTextSecondary.lh16.wFitContent.$,
+        className: cssBuilderInstance.font11.colorTextSecondary.lh16.wFitContent.$,
         children: e.description
       })]
     })
@@ -3980,11 +3980,11 @@ function aP(e) {
         hideActionPanel: !0,
         children: [jsx(_$$n.Header, {
           children: jsxs('div', {
-            className: _$$s3.wFull.flex.flexColumn.p8.$,
+            className: cssBuilderInstance.wFull.flex.flexColumn.p8.$,
             children: [jsxs('div', {
-              className: _$$s3.wFull.flex.gap4.$,
+              className: cssBuilderInstance.wFull.flex.gap4.$,
               children: [jsx('div', {
-                className: _$$s3.h24.$,
+                className: cssBuilderInstance.h24.$,
                 children: jsx(IconButton, {
                   'recordingKey': generateRecordingKey(e.recordingKey, 'backButton'),
                   'onClick': e.onBack,
@@ -3992,11 +3992,11 @@ function aP(e) {
                   'children': jsx(_$$C3, {})
                 })
               }), jsx('div', {
-                className: _$$s3.colorText.textBodyLarge.$,
+                className: cssBuilderInstance.colorText.textBodyLarge.$,
                 children: renderI18nText('fullscreen_actions.quick_actions.first-draft-make-kit')
               })]
             }), jsx('div', {
-              className: _$$s3.wFull.flex.font11.$,
+              className: cssBuilderInstance.wFull.flex.font11.$,
               children: renderI18nText('first_draft.make_kit.description')
             })]
           })
@@ -4659,12 +4659,12 @@ function sc({
     recordingKey: 'firstDraftKitPicker',
     children: jsx(_$$dP, {
       children: jsxs('div', {
-        'className': _$$s3.flex.flexColumn.gap8.pt8.$,
+        'className': cssBuilderInstance.flex.flexColumn.gap8.pt8.$,
         'data-testid': 'kitSelectionListContainer',
         'children': [jsxs('div', {
           className: rB()('kit_picker_view--navContainer--JHIEY', Dm),
           children: [jsx('div', {
-            className: _$$s3.h24.$,
+            className: cssBuilderInstance.h24.$,
             children: jsx(IconButton, {
               'recordingKey': generateRecordingKey('firstDraftKitSelection', 'backButton'),
               'onClick': pop,
@@ -4695,7 +4695,7 @@ function sc({
             helpUrlVariant: _$$JT.FIRST_DRAFT_MAKE_KIT
           })]
         }), kitsAreLoaded && getFeatureFlags().first_draft_direct_gen ? jsx('div', {
-          className: _$$s3.wFull.pl8.pr8.$,
+          className: cssBuilderInstance.wFull.pl8.pr8.$,
           children: v ? jsxs(fu, {
             value: _,
             onChange: _$$lQ,
@@ -4724,7 +4724,7 @@ function sc({
           'style': {
             height: 312
           },
-          'className': _$$s3.relative.$,
+          'className': cssBuilderInstance.relative.$,
           'data-testid': 'kitSelectionListView',
           'children': kitsAreLoaded ? jsx(su, {
             kitsToShow: E,
@@ -4744,7 +4744,7 @@ function su({
   if (t && e.length === 0) {
     let e = t.length > 20 ? `${t.slice(0, 20)}\u2026` : t;
     return jsx('div', {
-      className: _$$s3.p8.selfCenter.justifyCenter.flex.flexGrow0.$,
+      className: cssBuilderInstance.p8.selfCenter.justifyCenter.flex.flexGrow0.$,
       children: renderI18nText('first_draft.kits.no_results', {
         searchQuery: e
       })
@@ -4768,7 +4768,7 @@ function su({
         actionLabel: !1,
         recordingKey: generateRecordingKey('firstDraftKitSelection', t, 'list-item'),
         children: jsxs('div', {
-          'className': _$$s3.p4.gap8.flexRow.flex.itemsCenter.$,
+          'className': cssBuilderInstance.p4.gap8.flexRow.flex.itemsCenter.$,
           'data-testid': 'fd-kit-item',
           'children': [jsx('div', {
             className: 'kit_picker_view--fileThumbnail--aGgkC',
@@ -4807,10 +4807,10 @@ function sh() {
   return jsxs('div', {
     className: 'kit_picker_view--tempGettingStartedNotice--ADe-Q',
     children: [jsx('div', {
-      className: _$$s3.fontBold.$,
+      className: cssBuilderInstance.fontBold.$,
       children: renderI18nText('first_draft.direct_gen.getting_started.heading')
     }), jsxs('div', {
-      className: _$$s3.inline.colorTextSecondary.flexWrap.$,
+      className: cssBuilderInstance.inline.colorTextSecondary.flexWrap.$,
       children: [renderI18nText('first_draft.direct_gen.getting_started.notice'), ' ', jsx(Link, {
         newTab: !0,
         trusted: !0,
@@ -4874,9 +4874,9 @@ function sf({
     y: 0
   });
   return jsxs('div', {
-    className: _$$s3.p4.flex.flexRow.flexWrap.minW0.flexShrink0.$,
+    className: cssBuilderInstance.p4.flex.flexRow.flexWrap.minW0.flexShrink0.$,
     children: [s?.map(i => jsxs('div', {
-      className: _$$s3.relative.$,
+      className: cssBuilderInstance.relative.$,
       style: {
         display: 'flex'
       },
@@ -4891,7 +4891,7 @@ function sf({
           t(i.guid);
         }
       }), jsx('div', {
-        className: _$$s3.absolute.colorBgSecondary.p4.$,
+        className: cssBuilderInstance.absolute.colorBgSecondary.p4.$,
         style: {
           bottom: '-4px',
           left: '-4px',
@@ -5197,7 +5197,7 @@ function sg({
     growVertically: !1
   };
   return jsxs('div', {
-    'className': _$$s3.borderBox.$,
+    'className': cssBuilderInstance.borderBox.$,
     'style': {
       padding: 8
     },
@@ -5293,7 +5293,7 @@ function sy({
     enableFauxFocus: !1,
     children: jsx(_$$x3.GridItemHighlight, {
       children: jsx('div', {
-        className: _$$s3.colorBgSecondary.b1.colorBorder.wFull.flex.alignCenter.justifyCenter.$,
+        className: cssBuilderInstance.colorBgSecondary.b1.colorBorder.wFull.flex.alignCenter.justifyCenter.$,
         style: {
           aspectRatio: '1/1',
           height: '56px',
@@ -5306,7 +5306,7 @@ function sy({
             index: e + 1
           }),
           src: t.dataURI,
-          className: _$$s3.maxWFull.$,
+          className: cssBuilderInstance.maxWFull.$,
           draggable: !1
         })
       })
@@ -6331,7 +6331,7 @@ function s0({
     accept: IMAGE_TYPE_VALUES.join(','),
     onChange: t,
     multiple: !1,
-    className: _$$s3.hidden.$
+    className: cssBuilderInstance.hidden.$
   });
 }
 function s1({
@@ -6866,7 +6866,7 @@ let oi = [{
                   children: [jsx(TextWithTruncation, {
                     children: i
                   }), jsx('textarea', {
-                    className: _$$s3.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
+                    className: cssBuilderInstance.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
                     rows: s,
                     value: l.override,
                     placeholder: o,
@@ -7572,9 +7572,9 @@ function od(e) {
     },
     actionLabel: !1,
     children: jsxs('div', {
-      className: _$$s3.flex.justifyBetween.wFull.$,
+      className: cssBuilderInstance.flex.justifyBetween.wFull.$,
       children: [jsx('div', {
-        className: _$$s3.ml28.$,
+        className: cssBuilderInstance.ml28.$,
         children: s
       }), submenuItem.submenu && jsx(_$$a4, {})]
     })
@@ -7628,11 +7628,11 @@ function oC({
 }) {
   return jsx('div', {
     'data-testid': a,
-    'className': _$$s3.colorBgBrandTertiary.p8.bRadius8.$,
+    'className': cssBuilderInstance.colorBgBrandTertiary.p8.bRadius8.$,
     'children': jsxs('div', {
-      className: _$$s3.flex.gap8.$,
+      className: cssBuilderInstance.flex.gap8.$,
       children: [i, jsxs('div', {
-        className: _$$s3.flex.flexColumn.flexGrow1.$,
+        className: cssBuilderInstance.flex.flexColumn.flexGrow1.$,
         children: [jsx('span', {
           className: 'banner--title--gNQoq',
           children: e
@@ -7756,7 +7756,7 @@ function ov() {
       throwTypeError(reason);
   }
   return jsx('div', {
-    className: _$$s3.mx8.mb8.$,
+    className: cssBuilderInstance.mx8.mb8.$,
     children: jsx(oC, {
       title: d,
       subTitle: e,
@@ -7849,7 +7849,7 @@ function oO(e) {
   } = _$$ou(x0()).debugData(searchQuery, _g(fullscreenMenuAction).searchItem);
   let o = `Score:${score.toFixed(2)}`;
   return jsx('div', {
-    'className': _$$s3.ml8.colorTextSecondary.noWrap.$,
+    'className': cssBuilderInstance.ml8.colorTextSecondary.noWrap.$,
     'data-tooltip': [details, r].filter(Boolean).join('\n'),
     'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-max-width': 300,
@@ -8086,11 +8086,11 @@ function oF({
               ...N
             }
           })), t && !hasLocalFileId(t)) ? jsx(_$$V, {
-            className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
+            className: cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$,
             plugin: t,
             role: 'presentation'
           }) : jsx(SvgComponent, {
-            className: _$$s3.colorIcon.w20.h20.bRadius4.$,
+            className: cssBuilderInstance.colorIcon.w20.h20.bRadius4.$,
             svg: _$$A14,
             ariaLabel: `${e.name} icon`,
             autosize: !0
@@ -8100,7 +8100,7 @@ function oF({
           let t;
           return (t = e.iconType) === 'external_link' ? jsx(SvgComponent, {
             svg: _$$A13,
-            className: _$$s3.colorIcon.$
+            className: cssBuilderInstance.colorIcon.$
           }) : t === 'import' ? jsx(_$$R, {}) : t === 'plus' ? jsx(_$$e2, {}) : t === 'widget' ? jsx(_$$v, {}) : void 0;
         }
         if (e.iconType && typeof e.iconType != 'string') return e.iconType;
@@ -8149,13 +8149,13 @@ function oF({
         shortcut: w
       }) : j || I ? jsxs(Fragment, {
         children: [jsx('div', {
-          'className': _$$s3.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
+          'className': cssBuilderInstance.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
           'aria-hidden': !0,
           'id': 'tab-hint',
           'children': renderI18nText('whiteboard.ai_modal.hint_tab')
         }), jsx(SvgComponent, {
           'svg': _$$A12,
-          'className': _$$s3.colorIcon.$,
+          'className': cssBuilderInstance.colorIcon.$,
           'aria-describedby': 'tab-hint'
         })]
       }) : void 0,
@@ -8973,18 +8973,18 @@ function la({
     return jsx(_$$V, {
       'aria-hidden': t,
       'plugin': extension,
-      'className': _$$s3.colorIcon.w20.h20.m2.bRadius4.$
+      'className': cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$
     });
   }
   let a = publishedExtension && getCurrentPluginVersion(publishedExtension);
   return a && a.redirect_icon_url ? jsx(_$$V, {
     'aria-hidden': t,
     'plugin': a,
-    'className': _$$s3.colorIcon.w20.h20.m2.bRadius4.$
+    'className': cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$
   }) : jsx(SvgComponent, {
     ariaHidden: t,
     svg: _$$A14,
-    className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
+    className: cssBuilderInstance.colorIcon.w20.h20.m2.bRadius4.$,
     dataTestId: 'qa2-dev-plugin-icon',
     autosize: !0
   });
@@ -9053,14 +9053,14 @@ function lv({
     children: jsx(_$$J5, {})
   });
   return jsx('div', {
-    className: _$$s3.flex.pl8.$,
+    className: cssBuilderInstance.flex.pl8.$,
     children: i ? jsx('button', {
       'aria-label': getI18nString('qa.plugins_widget.more_options', {
         widget: e.name
       }),
       'onClick': s,
       'onPointerUp': dG,
-      'className': rB()(_$$s3.bgTransparent.h24.$),
+      'className': rB()(cssBuilderInstance.bgTransparent.h24.$),
       'data-testid': 'extension-options-button',
       'children': o
     }) : jsx(_$$S3.div, {
@@ -9068,7 +9068,7 @@ function lv({
       'tabIndex': 0,
       'onClick': s,
       'onPointerUp': dG,
-      'className': rB()(_$$s3.bgTransparent.h24.$),
+      'className': rB()(cssBuilderInstance.bgTransparent.h24.$),
       'data-testid': 'extension-options-button',
       'children': o
     })
@@ -9151,7 +9151,7 @@ function lT({
       isAccessibleIcon: a.isAccessibleExtensionRow,
       augmentedExtension: e
     }), jsx('div', {
-      className: _$$s3.px8.$,
+      className: cssBuilderInstance.px8.$,
       style: styleBuilderInstance.add({
         maxWidth: l ? '205px' : '300px'
       }).$,
@@ -9172,9 +9172,9 @@ function lT({
     })]
   });
   return jsxs('div', {
-    className: _$$s3.flex.itemsCenter.justifyBetween.wFull.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.wFull.$,
     children: [a.isAccessibleExtensionRow ? jsx('button', {
-      className: _$$s3.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       onClick: a.onClick,
       onFocus: a.onFocus,
       style: styleBuilderInstance.add({
@@ -9183,7 +9183,7 @@ function lT({
       }).$,
       children: d
     }) : jsx('div', {
-      className: _$$s3.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: d
     }), jsx('div', {
       children: t ? jsx(lv, {
@@ -9203,7 +9203,7 @@ function lw({
   manifestError: e
 }) {
   return jsx('div', {
-    className: _$$s3.alignLeft.font11.lh16.pl32.$,
+    className: cssBuilderInstance.alignLeft.font11.lh16.pl32.$,
     children: jsx(TextWithTruncation, {
       color: 'danger',
       children: e.displayText
@@ -9214,7 +9214,7 @@ function lS({
   extension: e
 }) {
   return jsx(_$$R7, {
-    className: _$$s3.font11.alignLeft.colorTextSecondary.lh16.pl32.$,
+    className: cssBuilderInstance.font11.alignLeft.colorTextSecondary.lh16.pl32.$,
     text: e.localFilePath.replace('/manifest.json', '')
   });
 }
@@ -9307,7 +9307,7 @@ function lj({
     setActive: l,
     children: (i, r) => jsxs(Fragment, {
       children: [jsxs('div', {
-        className: _$$s3.flex.flexColumn.wFull.$,
+        className: cssBuilderInstance.flex.flexColumn.wFull.$,
         children: [jsx(lT, {
           augmentedExtension: e,
           hasFauxFocus: o,
@@ -9323,7 +9323,7 @@ function lj({
     primaryAction: x,
     setActive: l,
     children: [jsxs('div', {
-      className: _$$s3.flex.flexColumn.wFull.$,
+      className: cssBuilderInstance.flex.flexColumn.wFull.$,
       children: [jsx(lT, {
         augmentedExtension: e,
         hasFauxFocus: o,
@@ -9383,7 +9383,7 @@ function lI({
     setActive: c,
     children: (i, r) => jsxs(Fragment, {
       children: [jsx('div', {
-        className: _$$s3.flex.flexColumn.wFull.$,
+        className: cssBuilderInstance.flex.flexColumn.wFull.$,
         children: jsx(lT, {
           augmentedExtension: e,
           hasFauxFocus: d,
@@ -9477,11 +9477,11 @@ function lN({
   return jsx(_$$p4, {
     primaryAction: o,
     children: jsx('div', {
-      className: _$$s3.flex.itemsCenter.alignLeft.wFull.justifyBetween.$,
+      className: cssBuilderInstance.flex.itemsCenter.alignLeft.wFull.justifyBetween.$,
       children: jsxs('div', {
-        className: _$$s3.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [jsx(i, {}), jsx('div', {
-          className: _$$s3.ml8.$,
+          className: cssBuilderInstance.ml8.$,
           children: t
         })]
       })
@@ -9578,10 +9578,10 @@ function l1({
   let t = R_(e);
   let i = _$$JB(e);
   return jsxs('div', {
-    'className': _$$s3.mx8.mb8.p8.bRadius8.flex.justifyBetween.gap4.colorBgInfo.$,
+    'className': cssBuilderInstance.mx8.mb8.p8.bRadius8.flex.justifyBetween.gap4.colorBgInfo.$,
     'data-testid': 'extension-invite-row',
     'children': [jsxs('div', {
-      className: _$$s3.flex.gap8.itemsCenter.font11.lh16.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.font11.lh16.$,
       children: [jsx(H8, {
         user: e.creator,
         size: Pf.MEDIUM
@@ -9589,7 +9589,7 @@ function l1({
         resource: e
       })]
     }), jsxs('div', {
-      className: _$$s3.flex.gap4.$,
+      className: cssBuilderInstance.flex.gap4.$,
       children: [jsx(l0, {
         action: i,
         dataTestId: 'decline-invite-button',
@@ -9639,7 +9639,7 @@ function l2({
   });
   return r.length === 0 ? null : jsx('div', {
     'data-testid': 'extension-invite-section',
-    'className': _$$s3.flex.flexColumn.$,
+    'className': cssBuilderInstance.flex.flexColumn.$,
     'children': jsx(_$$B6.Section, {
       header: getI18nString('community.detail_view.invitations'),
       children: r.map(e => jsx(l1, {
@@ -9664,26 +9664,26 @@ function l8({
   }) : null;
   let l = _$$g5(publishedExtension);
   return jsx('div', {
-    className: _$$s3.flex.flexColumn.colorTextSecondary.textBodyMedium.$,
+    className: cssBuilderInstance.flex.flexColumn.colorTextSecondary.textBodyMedium.$,
     children: jsxs('div', {
-      className: _$$s3.flex.flexRow.$,
+      className: cssBuilderInstance.flex.flexRow.$,
       children: [r, jsx(l9, {}), jsx(SvgComponent, {
         svg: _$$A15,
-        className: _$$s3.mx2.colorIconSecondary.$
+        className: cssBuilderInstance.mx2.colorIconSecondary.$
       }), jsx('div', {
-        className: _$$s3.ml2.$,
+        className: cssBuilderInstance.ml2.$,
         children: getI18nString('qa.extensions.num_users', {
           numUsers: a,
           numUsersStr: formatNumber(a)
         })
       }), jsx(l9, {}), jsx(SvgComponent, {
         svg: _$$A16,
-        className: _$$s3.colorIconSecondary.$,
+        className: cssBuilderInstance.colorIconSecondary.$,
         style: styleBuilderInstance.add({
           margin: '3px'
         }).$
       }), jsx('div', {
-        className: _$$s3.ml2.$,
+        className: cssBuilderInstance.ml2.$,
         children: formatNumber(s)
       }), l && jsx(l9, {}), o]
     })
@@ -9691,7 +9691,7 @@ function l8({
 }
 function l9() {
   return jsx('div', {
-    'className': _$$s3.w1.hFull.mx6.$,
+    'className': cssBuilderInstance.w1.hFull.mx6.$,
     'style': styleBuilderInstance.add({
       backgroundColor: 'var(--color-border-fs)'
     }).$,
@@ -9724,19 +9724,19 @@ function de({
     primaryAction: c,
     setActive: o,
     children: jsxs('div', {
-      className: _$$s3.flex.flexColumn.alignLeft.wFull.$,
+      className: cssBuilderInstance.flex.flexColumn.alignLeft.wFull.$,
       children: [jsxs('div', {
-        className: _$$s3.flex.itemsCenter.overflowHidden.$,
+        className: cssBuilderInstance.flex.itemsCenter.overflowHidden.$,
         children: [jsx(la, {
           augmentedExtension: e
         }), jsx(dt, {
           augmentedExtension: e
         })]
       }), jsxs('div', {
-        className: _$$s3.flex.flexColumn.overflowHidden.ml32.$,
+        className: cssBuilderInstance.flex.flexColumn.overflowHidden.ml32.$,
         children: [jsx(_$$G, {
           text: u,
-          className: _$$s3.mb4.colorTextSecondary.textBodyMedium.$,
+          className: cssBuilderInstance.mb4.colorTextSecondary.textBodyMedium.$,
           showTooltip: _$$i5.NEVER
         }), jsx(l8, {
           augmentedExtension: e
@@ -9753,9 +9753,9 @@ function dt({
   } = e;
   let i = oN(e);
   return jsxs('div', {
-    className: _$$s3.flex.itemsCenter.ml8.$,
+    className: cssBuilderInstance.flex.itemsCenter.ml8.$,
     children: [jsx('div', {
-      className: _$$s3.pr8.colorText.textBodyLarge.$,
+      className: cssBuilderInstance.pr8.colorText.textBodyLarge.$,
       style: styleBuilderInstance.add({
         maxWidth: i ? '205px' : '300px'
       }).$,
@@ -9796,7 +9796,7 @@ function di({
   });
   return jsxs('div', {
     'data-testid': r,
-    'className': _$$s3.flex.flexColumn.$,
+    'className': cssBuilderInstance.flex.flexColumn.$,
     'children': [t && jsx(_$$B6.Section, {
       header: t,
       children: s
@@ -9808,7 +9808,7 @@ function dr({
 }) {
   return e.length === 0 ? null : jsx('div', {
     'data-testid': 'extension-actions-section',
-    'className': _$$s3.flex.flexColumn.$,
+    'className': cssBuilderInstance.flex.flexColumn.$,
     'children': e.map(({
       itemKey: e,
       ...t
@@ -9830,7 +9830,7 @@ function dn({
 function da() {
   let e = isEditorTypeSupported();
   return jsx('div', {
-    'className': _$$s3.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
+    'className': cssBuilderInstance.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
     'data-testid': 'no-extensions-found',
     'children': e ? renderI18nText('qa.no_plugins_widgets_found') : renderI18nText('qa.no_plugins')
   });
@@ -10019,7 +10019,7 @@ function dl({
     header: getI18nString('qa.suggested'),
     showExtensionDetails: !0
   }) : jsx('div', {
-    className: _$$s3.p8.$,
+    className: cssBuilderInstance.p8.$,
     children: jsx(_$$R6, {})
   });
 }
@@ -10508,7 +10508,7 @@ function dI() {
     clientLifecycleId: void 0
   });
   let e_ = v || b ? jsx('div', {
-    className: _$$s3.flex.$,
+    className: cssBuilderInstance.flex.$,
     children: jsx(hc, {
       entryPoint: G4.ACTIONS_ASSETS_TAB,
       aiTrackingContext: eg,
@@ -10535,7 +10535,7 @@ function dI() {
       }), eC && jsx(mr, {
         id: eb
       }), (x || ex) && jsx('div', {
-        className: _$$s3.px8.pb8.$,
+        className: cssBuilderInstance.px8.pb8.$,
         children: jsxs(_$$b2, {
           primary: !1,
           gap: 8,
@@ -10797,7 +10797,7 @@ function dP() {
                 }), jsxs(_$$B, {
                   align: 'center',
                   children: [jsx('span', {
-                    className: _$$s3.textBodyMediumStrong.$,
+                    className: cssBuilderInstance.textBodyMediumStrong.$,
                     children: jsx(TextWithTruncation, {
                       color: 'brand',
                       children: x

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { SecureLink } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -42,7 +42,7 @@ export function $$N1({
     [HubTypeEnum.WIDGET]: getI18nString("community.publishing.resource_id.widget")
   };
   let u = isResourcePendingPublishing(a) ? jsx("div", {
-    className: _$$s.mb8.$,
+    className: cssBuilderInstance.mb8.$,
     children: jsx(P, {
       submittedAt: a.created_at
     })
@@ -97,11 +97,11 @@ function P({
     variant: "brand",
     orientation: "horizontal",
     children: jsxs("div", {
-      className: _$$s.flex.flexRowNoWrap.itemsCenter.justifyBetween.$,
+      className: cssBuilderInstance.flex.flexRowNoWrap.itemsCenter.justifyBetween.$,
       children: [jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.awaiting_review")
       }), jsx("span", {
-        className: _$$s.w300.flexShrink1.$
+        className: cssBuilderInstance.w300.flexShrink1.$
       }), jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("community.publishing.submitted_with_date", {
@@ -267,7 +267,7 @@ function j({
         direction: "horizontal",
         verticalAlignItems: "center",
         children: [jsx(SvgComponent, {
-          className: _$$s.bRadius4.overflowHidden.$,
+          className: cssBuilderInstance.bRadius4.overflowHidden.$,
           svg: svgSrc,
           useOriginalSrcFills_DEPRECATED: !0
         }), jsx(TextWithTruncation, {
@@ -287,7 +287,7 @@ function U({
       networkAccess: i,
       isWidget: e === HubTypeEnum.WIDGET
     }), i.allowedDomains.includes("*") && null == i.reasoning && jsx("div", {
-      className: _$$s.mt8.$,
+      className: cssBuilderInstance.mt8.$,
       children: jsx(z, {
         variant: "danger",
         iconSrc: _$$A9,

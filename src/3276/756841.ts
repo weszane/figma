@@ -6,7 +6,7 @@ import { T as _$$T } from "../905/745591";
 import { U1 } from "../figma_app/343967";
 import { getFeatureFlags } from "../905/601108";
 import { x as _$$x } from "../905/211326";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
 import { wrapWithTracking } from "../figma_app/831799";
@@ -1478,11 +1478,11 @@ export function $$tT0(e) {
   let B = e.copyLinkOverride ?? F;
   let U = U1(A);
   return disableSidebar ? jsxs("div", {
-    className: _$$s.flex.flexColumn.justifyStart.alignCenter.m8.mt18.$,
+    className: cssBuilderInstance.flex.flexColumn.justifyStart.alignCenter.m8.mt18.$,
     children: [renderI18nText("comments.you_have_disabled_the_comments_sidebar_via_the_debug_menu"), jsx("div", {
-      className: _$$s.flex.flexRow.justifyCenter.alignCenter.$,
+      className: cssBuilderInstance.flex.flexRow.justifyCenter.alignCenter.$,
       children: jsx("button", {
-        className: _$$s.p10.w100.m8.$,
+        className: cssBuilderInstance.p10.w100.m8.$,
         style: {
           backgroundColor: "green",
           color: "white"

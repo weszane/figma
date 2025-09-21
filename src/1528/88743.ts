@@ -10,7 +10,7 @@ import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, atom,
 import { generateRecordingKey } from "../figma_app/878298";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
@@ -877,13 +877,13 @@ function eF(e) {
       }), jsx("div", {
         className: Oh,
         children: jsxs("div", {
-          className: _$$s.flex.itemsCenter.$,
+          className: cssBuilderInstance.flex.itemsCenter.$,
           children: [!R && !I && (k || !A) && !j && jsx(QE, {
             item: v ? Ax : f ? IS : Fz,
             recordingKey: e.recordingKey,
             numUnreadComments: 0
           }), j && !I && !A && jsxs("div", {
-            className: _$$s.flex.flexRow.$,
+            className: cssBuilderInstance.flex.flexRow.$,
             children: [jsx(IconButton, {
               "aria-label": getI18nString("fullscreen_actions.present-as-prototype"),
               onClick: () => F(Command.PRESENT_AS_PROTOTYPE),

@@ -16,7 +16,7 @@ import f from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/241436";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -402,14 +402,14 @@ let eu = ex("variable_value_from_other_mode", function ({
   collectionName: t
 }) {
   return jsx("div", {
-    className: _$$s.cursorDefault.colorTextTooltip.wFitContent.$,
+    className: cssBuilderInstance.cursorDefault.colorTextTooltip.wFitContent.$,
     children: renderI18nText("dev_handoff.variables.details_value_from_other_mode", {
       modeName: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: e
       }),
       collectionName: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: t
       })
     })
@@ -776,7 +776,7 @@ function ey({
 }) {
   return e && Object.keys(e).length > 0 ? jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.h8.$
+      className: cssBuilderInstance.h8.$
     }), jsx(VZ, {
       title: getI18nString("dev_handoff.variables.details_code_syntax"),
       recordingKey: "dev-var-details-code-syntax",

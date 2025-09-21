@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 import { kL, m, nP, wx, IE, UU, h_, qw, qr } from "../figma_app/32844";
 var $$a = r;
@@ -26,7 +26,7 @@ export function $$d0(e) {
       children: [jsx("div", {
         children: e.headerLeft
       }), jsx("div", {
-        className: $$a()(IE, e.isCardActive ? _$$s.flex.$ : _$$s.hidden.$),
+        className: $$a()(IE, e.isCardActive ? cssBuilderInstance.flex.$ : cssBuilderInstance.hidden.$),
         "data-testid": "generic-tile-header-right",
         children: e.headerRight
       })]

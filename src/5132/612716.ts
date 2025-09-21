@@ -7,7 +7,7 @@ import { P as _$$P } from "../vendor/348225";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { ModalCloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { V } from "../905/355181";
@@ -53,14 +53,14 @@ function z({
         height: 146
       })
     }), jsxs("div", {
-      className: _$$s.p12.pl10.pr10.flex.flexColumn.gap2.$,
+      className: cssBuilderInstance.p12.pl10.pr10.flex.flexColumn.gap2.$,
       children: [jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
         color: "default",
         children: e
       }), jsx("div", {
-        className: _$$s.minH32.$,
+        className: cssBuilderInstance.minH32.$,
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
@@ -112,7 +112,7 @@ function E() {
     children: [jsxs("div", {
       className: "fullscreen_help_upsells_modal_base--priceContainer--XWuz1",
       children: [jsxs("div", {
-        className: _$$s.wHalf.flex.flexColumn.gap8.$,
+        className: cssBuilderInstance.wHalf.flex.flexColumn.gap8.$,
         "data-testid": "fullscreen_help_upsells_modal_pricing_text_design",
         children: [jsx(TextWithTruncation, {
           color: "design",
@@ -127,7 +127,7 @@ function E() {
       }), jsx("div", {
         className: "fullscreen_help_upsells_modal_base--priceContainerDivider--zsPMB"
       }), jsxs("div", {
-        className: _$$s.wHalf.flex.flexColumn.gap8.$,
+        className: cssBuilderInstance.wHalf.flex.flexColumn.gap8.$,
         "data-testid": "fullscreen_help_upsells_modal_pricing_text_figjam",
         children: [jsx(TextWithTruncation, {
           color: "figjam",
@@ -141,7 +141,7 @@ function E() {
         })]
       })]
     }), jsx("div", {
-      className: _$$s.p4.pt0.$,
+      className: cssBuilderInstance.p4.pt0.$,
       children: jsx(TextWithTruncation, {
         color: "secondary",
         fontSize: 11,
@@ -167,14 +167,14 @@ export function $$N0({
   let [z, N] = useState(e[0].id);
   let M = useDispatch();
   let W = 1 === T ? jsx("div", {
-    className: _$$s.p16.pt14.pb36.$,
+    className: cssBuilderInstance.p16.pt14.pb36.$,
     children: jsx(TextWithTruncation, {
       fontSize: 18,
       fontWeight: "semi-bold",
       children: l
     })
   }) : jsx("div", {
-    className: _$$s.p16.pt14.pb4.$,
+    className: cssBuilderInstance.p16.pt14.pb4.$,
     children: jsx(TextWithTruncation, {
       fontSize: 13,
       color: "secondary",
@@ -256,7 +256,7 @@ export function $$N0({
                 height: "fill-parent",
                 spacing: 0,
                 children: [jsxs("div", {
-                  className: _$$s.pl32.pt24.pb20.$,
+                  className: cssBuilderInstance.pl32.pt24.pb20.$,
                   children: [c && jsx(TextWithTruncation, {
                     fontSize: 20,
                     fontWeight: "semi-bold",
@@ -273,9 +273,9 @@ export function $$N0({
                     }
                   })]
                 }), jsx("div", {
-                  className: _$$s.wFull.hFull.overflowAuto.$,
+                  className: cssBuilderInstance.wFull.hFull.overflowAuto.$,
                   children: jsx("div", {
-                    className: _$$s.pl32.pb24.$,
+                    className: cssBuilderInstance.pl32.pb24.$,
                     children: jsx(AutoLayout, {
                       spacing: 16,
                       verticalAlignItems: "start",

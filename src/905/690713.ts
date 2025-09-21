@@ -17,7 +17,7 @@ import { $J, o2, sd, Cq } from "../905/278499";
 import { r as _$$r } from "../905/189361";
 import { C as _$$C } from "../905/504203";
 import v from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { B as _$$B } from "../905/222272";
 import { y as _$$y } from "../905/236825";
 var I = v;
@@ -26,15 +26,15 @@ function x({
   secondaryMessage: t
 }) {
   return jsxs("div", {
-    className: I()(_$$s.wFull.flex.gap4.justifyCenter.itemsCenter.selectNone.textBodyMediumStrong.$, "error--icon--s8H64"),
+    className: I()(cssBuilderInstance.wFull.flex.gap4.justifyCenter.itemsCenter.selectNone.textBodyMediumStrong.$, "error--icon--s8H64"),
     children: [jsx(_$$C, {
       style: {
         "--color-icon": "var(--color-icon-danger)"
       }
     }), jsxs("div", {
-      className: _$$s.flex1.minW0.$,
+      className: cssBuilderInstance.flex1.minW0.$,
       children: [e, t && jsx("span", {
-        className: _$$s.textBodyMedium.colorTextSecondary.ml4.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.ml4.$,
         children: t
       })]
     })]

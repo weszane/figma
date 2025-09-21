@@ -24,7 +24,7 @@ import { TabLoop } from "../905/718764";
 import { BrowserInfo } from "../figma_app/778880";
 import { OJ } from "../905/519092";
 import { getFeatureFlags } from "../905/601108";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { sR as _$$sR, gq, KZ } from "../905/932881";
 import { k as _$$k2 } from "../905/443820";
 import { m as _$$m } from "../905/701558";
@@ -634,24 +634,24 @@ let eX = registerModal(function (e) {
   }, [s, fileKey, c]);
   let p = hasPasswordSet ? renderI18nText("whiteboard.open_sessions.share_modal_start_session_with_link_and_password", {
     audience: jsx("span", {
-      className: _$$s.fontSemiBold.$,
+      className: cssBuilderInstance.fontSemiBold.$,
       children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_anyone_with_link_and_password")
     })
   }) : renderI18nText("whiteboard.open_sessions.share_modal_start_session_with_link");
   let h = renderI18nText("whiteboard.open_sessions.share_modal_how_to_end_session", {
     share: jsx("span", {
-      className: _$$s.fontSemiBold.$,
+      className: cssBuilderInstance.fontSemiBold.$,
       children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_share")
     }),
     end_now: jsx("span", {
-      className: _$$s.fontSemiBold.$,
+      className: cssBuilderInstance.fontSemiBold.$,
       children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_end_now")
     })
   });
   return jsx(eZ, {
     title: getI18nString("whiteboard.open_sessions.start_open_session"),
     content: jsxs("div", {
-      className: _$$s.flex.flexColumn.gap16.$,
+      className: cssBuilderInstance.flex.flexColumn.gap16.$,
       children: [jsx("p", {
         children: p
       }), jsx("p", {
@@ -867,21 +867,21 @@ let to = registerModal(function (e) {
           children: [jsxs(DialogBody, {
             padding: 0,
             children: [jsxs("div", {
-              className: _$$s.flex.flexRow.pl12.pt12.pb16.pr16.$,
+              className: cssBuilderInstance.flex.flexRow.pl12.pt12.pb16.pr16.$,
               children: [jsx(_$$m2, {
-                className: _$$s.mr8.$
+                className: cssBuilderInstance.mr8.$
               }), jsxs("div", {
                 className: "google_device_screenshare_modal--screenshareCodeRight--sw85z",
                 children: [jsx("p", {
                   className: "google_device_screenshare_modal--subtitle--KJKUp text--fontPos11--2LvXf text--_fontBase--QdLsd",
                   children: renderI18nText("file_permissions_modal.share_as.google_device.enter_code")
                 }), jsxs("div", {
-                  className: _$$s.maxW400.$,
+                  className: cssBuilderInstance.maxW400.$,
                   children: [jsx("p", {
                     className: tt,
                     children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.description", {
                       location: jsx("span", {
-                        className: _$$s.fontBold.inline.$,
+                        className: cssBuilderInstance.fontBold.inline.$,
                         children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.location")
                       })
                     })
@@ -889,13 +889,13 @@ let to = registerModal(function (e) {
                     className: tt,
                     children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.description_unique_code", {
                       reset: jsx("span", {
-                        className: _$$s.fontBold.inline.$,
+                        className: cssBuilderInstance.fontBold.inline.$,
                         children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
                       })
                     })
                   })]
                 }), jsxs("div", {
-                  className: _$$s.flex.gap16.itemsCenter.mt16.$,
+                  className: cssBuilderInstance.flex.gap16.itemsCenter.mt16.$,
                   children: [jsxs("div", {
                     className: "google_device_screenshare_modal--screenshareCodeContainer--iZ4Kq",
                     children: [jsx(ta, {
@@ -919,7 +919,7 @@ let to = registerModal(function (e) {
             })]
           }), jsx(DialogFooter, {
             children: jsx("div", {
-              className: _$$s.inline.$,
+              className: cssBuilderInstance.inline.$,
               children: renderI18nText("file_permissions_modal.share_as.google_device.open_session_countdown", {
                 remainingHours: i?.remainingHours,
                 remainingMinutes: i?.remainingMinutes,
@@ -943,7 +943,7 @@ let to = registerModal(function (e) {
           children: [jsx(DialogBody, {
             scrolling: "none",
             children: jsx("div", {
-              className: _$$s.colorTextSecondary.$,
+              className: cssBuilderInstance.colorTextSecondary.$,
               children: renderI18nText("file_permissions_modal.screenshare_to_google_device.error_generating_code")
             })
           }), jsx(DialogFooter, {
@@ -962,7 +962,7 @@ let to = registerModal(function (e) {
         }) : jsx(DialogBody, {
           scrolling: "none",
           children: jsx("div", {
-            className: _$$s.flex.itemsCenter.justifyCenter.my8.minH250.minW400.$,
+            className: cssBuilderInstance.flex.itemsCenter.justifyCenter.my8.minH250.minW400.$,
             children: jsx(_$$k2, {})
           })
         })]
@@ -1023,10 +1023,10 @@ function tu({
           className: Ke,
           children: renderI18nText("file_permissions_modal.screenshare_to_google_device")
         }), jsx("div", {
-          className: _$$s.flex.alignRight.$,
+          className: cssBuilderInstance.flex.alignRight.$,
           "aria-label": getI18nString("file_permissions_modal.screenshare_to_google_device.aria_label"),
           children: jsx(SvgComponent, {
-            className: _$$s.colorIconSecondary.p6.$,
+            className: cssBuilderInstance.colorIconSecondary.p6.$,
             svg: _$$A2,
             height: "12px",
             width: "12px",
@@ -1785,16 +1785,16 @@ function is({
   return (eb.length > 4 && (eR = eb.splice(3)), getFeatureFlags().aip_flower_garden_share && ee && eT && eb.push(ee), 0 === eb.length) ? null : jsxs("div", {
     className: fS,
     children: [eb.map((e, t) => jsx("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: e
     }, t)), eR && jsxs(Fragment, {
       children: [!m && jsx("div", {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: jsx(gq, {
           onClick: () => g(!0)
         })
       }), m && eR.map((e, t) => jsx("div", {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: e
       }, t))]
     }), et]
@@ -1868,7 +1868,7 @@ function im(e) {
         children: [jsx("div", {
           children: getI18nString("file_permissions_modal.external_teams_in_connected_projects.description")
         }), jsx("div", {
-          className: _$$s.py8.$,
+          className: cssBuilderInstance.py8.$,
           children: jsxs(_$$bL, {
             value: m,
             onChange: e => g(e ?? t),
@@ -1884,7 +1884,7 @@ function im(e) {
                 value: i,
                 children: d
               }), jsx("div", {
-                className: _$$s.py4.px8.$,
+                className: cssBuilderInstance.py4.px8.$,
                 children: jsx("div", {
                   className: dG
                 })
@@ -1950,7 +1950,7 @@ function iA(e) {
         className: UU,
         children: r
       }, `name-${team.id}`), jsx("span", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? getI18nString("permissions.level_name.can_view") : getI18nString("permissions.level_name.can_access")
       })]
     })]
@@ -1960,7 +1960,7 @@ function iy(e) {
   let t = s5();
   return jsxs(iu, {
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: renderI18nText(t ? "folder_share_settings.the_following_people_have_access_remove_their_access_at_any_time" : "folder_share_settings.the_following_people_have_access", {
         projectName: e.folder.name
       })
@@ -2967,7 +2967,7 @@ function ns(e) {
       children: [jsx("div", {
         className: _$$G,
         children: jsx(_$$R4, {
-          className: _$$s.flexShrink0.$
+          className: cssBuilderInstance.flexShrink0.$
         })
       }), jsx("div", {
         children: renderI18nText("file_permissions_modal.library_warning_banner.share_settings_will_change_library_publish_audience", {
@@ -3014,15 +3014,15 @@ function nc(e) {
   return jsx(TrackingProvider, {
     name: "google_device_screenshare_disclaimer_modal",
     children: jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx("img", {
         src: tp,
         alt: getI18nString("file_permissions_modal.google_confirmation_modal.image_alt_text"),
-        className: _$$s.wFull.$
+        className: cssBuilderInstance.wFull.$
       }), jsxs("div", {
-        className: _$$s.p16.$,
+        className: cssBuilderInstance.p16.$,
         children: [jsx("div", {
-          className: _$$s.colorTextSecondary.pb8.$,
+          className: cssBuilderInstance.colorTextSecondary.pb8.$,
           children: renderI18nText("file_permissions_modal.google_confirmation_modal.subtext", {
             link: jsx(TrackedAnchor, {
               target: "_blank",
@@ -3043,7 +3043,7 @@ function nc(e) {
             children: renderI18nText("file_permissions_modal.google_confirmation_modal.description")
           })
         }), jsx("div", {
-          className: _$$s.flex.justifyEnd.pt16.$,
+          className: cssBuilderInstance.flex.justifyEnd.pt16.$,
           children: jsx($z, {
             onClick: () => {
               i(!0);
@@ -3069,7 +3069,7 @@ function nk({
       horizontalAlignItems: "start",
       width: "hug-contents",
       children: e.slice(0, 3).map(e => jsx(Ro, {
-        className: _$$s.borderBox.relative.b1.colorBorderBg.$,
+        className: cssBuilderInstance.borderBox.relative.b1.colorBorderBg.$,
         entity: e,
         size: Pf.MEDIUM
       }, e.id))
@@ -4241,7 +4241,7 @@ function rb() {
           isHubFileRemixed: _
         }),
         icon: T.inProgress ? jsx("div", {
-          className: _$$s.w32.h32.flex.itemsCenter.justifyCenter.$,
+          className: cssBuilderInstance.w32.h32.flex.itemsCenter.justifyCenter.$,
           children: jsx(_$$k2, {
             size: "lg"
           })
@@ -4526,7 +4526,7 @@ function rM({
     planUser
   } = getPlanAndPlanUser(i);
   let h = jsx("button", {
-    className: _$$s.colorTextBrand.bgTransparent.cursorPointer.$,
+    className: cssBuilderInstance.colorTextBrand.bgTransparent.cursorPointer.$,
     onClick: () => {
       fm({
         licenseType: i,
@@ -4645,23 +4645,23 @@ let r1 = registerModal(function (e) {
     },
     truncateTitleText: !0,
     children: [jsx("p", {
-      className: _$$s.p16.$,
+      className: cssBuilderInstance.p16.$,
       children: e.folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED ? renderI18nText("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_without_team_access", {
         folderNameBolded: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: renderI18nText("file_permissions.enable_folder_access.folder_name", {
             folderName: e.folder.name
           })
         })
       }) : renderI18nText("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_with_team_access", {
         teamNameBolded: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: renderI18nText("file_permissions.enable_folder_access.team_name", {
             teamName: e.team.name
           })
         }),
         folderNameBolded: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: renderI18nText("file_permissions.enable_folder_access.folder_name", {
             folderName: e.folder.name
           })
@@ -4698,10 +4698,10 @@ let r2 = registerModal(function (e) {
     },
     truncateTitleText: !0,
     children: [jsx("p", {
-      className: _$$s.p16.$,
+      className: cssBuilderInstance.p16.$,
       children: renderI18nText("file_permissions.disable_folder_access.keep_in_mind_that_member_of_the_folder_name_project_may_lose_access", {
         folderNameBolded: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: renderI18nText("file_permissions.disable_folder_access.folder_name", {
             folderName: e.folder.name
           })

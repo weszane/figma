@@ -24,7 +24,7 @@ import { WN } from "../figma_app/638601";
 import { pz } from "../figma_app/60079";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W } from "../3276/514864";
 import { toggleDropdown } from "../figma_app/976345";
@@ -355,7 +355,7 @@ function eI({
       })]
     }), "" !== en && ec && jsxs(Fragment, {
       children: [eu, jsx("div", {
-        className: `${Tw} ${_$$s.mb8.$}`,
+        className: `${Tw} ${cssBuilderInstance.mb8.$}`,
         children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), ed && jsxs(Fragment, {
@@ -391,7 +391,7 @@ function eI({
             children: _searchResults
           })]
         }), jsx("div", {
-          className: _$$s.pt12.$
+          className: cssBuilderInstance.pt12.$
         })]
       })]
     })]
@@ -569,7 +569,7 @@ function ek({
       })]
     }), "" !== ed && ef && jsxs(Fragment, {
       children: [ex, jsx("div", {
-        className: `${hg} ${_$$s.mb8.$}`,
+        className: `${hg} ${cssBuilderInstance.mb8.$}`,
         children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), em && jsxs(Fragment, {
@@ -592,7 +592,7 @@ function ek({
             children: ey(e, !1)
           }, `previousViewer-${e.userID}`))]
         }), jsx("div", {
-          className: _$$s.pt12.$
+          className: cssBuilderInstance.pt12.$
         })]
       })]
     })]

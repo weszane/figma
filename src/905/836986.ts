@@ -3,7 +3,7 @@ import { StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableS
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "classnames";
 import { copyTextToClipboard } from "../figma_app/623293";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { c1, r4, dB } from "../905/589717";
 import { Cc, lX } from "../905/545842";
@@ -160,7 +160,7 @@ export function $$T4({
   });
 }
 var k = (e => (e[e.Invalid = 0] = "Invalid", e[e.Normal = 1] = "Normal", e[e.Seconary = 2] = "Seconary", e[e.Link = 3] = "Link", e))(k || {});
-let R = _$$s.inlineBlock;
+let R = cssBuilderInstance.inlineBlock;
 let N = {
   0: R.colorTextDanger.$,
   1: R.colorText.fontSemiBold.$,
@@ -181,7 +181,7 @@ function P({
     isValid: !1
   }) : jsx("span", {
     role: "button",
-    className: o()(_$$s.inlineBlock.$, "badge_display--guidLink--3Avjv"),
+    className: o()(cssBuilderInstance.inlineBlock.$, "badge_display--guidLink--3Avjv"),
     onClick: () => s(e.id),
     children: jsxs(AutoLayout, {
       spacing: 4,
@@ -191,7 +191,7 @@ function P({
         className: o()(N[3], g),
         children: t
       }), jsx("span", {
-        className: o()(N[3], g, _$$s.fontNormal.$),
+        className: o()(N[3], g, cssBuilderInstance.fontNormal.$),
         children: e.displayProperties.name
       })]
     })

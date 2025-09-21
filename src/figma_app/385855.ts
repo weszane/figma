@@ -9,7 +9,7 @@ import { oW } from "../905/675859";
 import { A as _$$A2 } from "../905/222027";
 import { q } from "../905/600041";
 import { F, y as _$$y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { J } from "../905/337735";
 import { Kf, _k, gc, pQ } from "../905/188961";
 var l = o;
@@ -44,7 +44,7 @@ export function $$y0({
       if (!r || n[e]) u(e);else {
         let t = new Image();
         t.crossOrigin = "anonymous";
-        t.className = _$$s.fixed.hidden.$;
+        t.className = cssBuilderInstance.fixed.hidden.$;
         t.onload = () => {
           let r = J(t);
           r && a(t => ({
@@ -108,11 +108,11 @@ export function $$y0({
         src: latestThumbnailUrl,
         alt: "",
         draggable: !!S,
-        className: l()(_$$s.hFull.wFull.$, pQ, {
-          [_$$s.p10.$]: O && y !== _$$y.SMALL,
-          [_$$s.p4.$]: O && y === _$$y.SMALL,
-          [_$$s.py12.$]: O && t === F.COOPER,
-          [_$$s.px6.$]: O && t === F.COOPER
+        className: l()(cssBuilderInstance.hFull.wFull.$, pQ, {
+          [cssBuilderInstance.p10.$]: O && y !== _$$y.SMALL,
+          [cssBuilderInstance.p4.$]: O && y === _$$y.SMALL,
+          [cssBuilderInstance.py12.$]: O && t === F.COOPER,
+          [cssBuilderInstance.px6.$]: O && t === F.COOPER
         }),
         ...(v ? {} : {
           crossOrigin: "anonymous"

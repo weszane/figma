@@ -13,7 +13,7 @@ import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { h1 } from "../905/986103";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -145,7 +145,7 @@ function $$Z(e) {
               currentSeatType: e.planUser.currentSeatType,
               jobTitle: e.planUser.jobTitle
             }), jsx("div", {
-              className: _$$s.mb24.$
+              className: cssBuilderInstance.mb24.$
             }), jsx(Q, {
               billableProductKeyContractPrices: z,
               currentSeatPaidFor: x,

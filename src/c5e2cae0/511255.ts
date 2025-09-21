@@ -11,7 +11,7 @@ import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
@@ -52,16 +52,16 @@ function X({
 }) {
   let n = useDispatch();
   return jsxs("div", {
-    className: _$$s2.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     style: styleBuilderInstance.add({
       padding: "48px 56px",
       maxWidth: "650px"
     }).$,
     children: [jsx("p", {
-      className: _$$s2.textHeadingLarge.$,
+      className: cssBuilderInstance.textHeadingLarge.$,
       children: renderI18nText("org_upgrade.multi_team.bring_your_teams_together")
     }), jsx("p", {
-      className: _$$s2.textHeadingMedium.$,
+      className: cssBuilderInstance.textHeadingMedium.$,
       style: styleBuilderInstance.add({
         fontWeight: 400
       }).$,
@@ -71,9 +71,9 @@ function X({
       onClick: t,
       children: jsx(_$$A, {})
     }), jsxs("div", {
-      className: _$$s2.flex.gap16.$,
+      className: cssBuilderInstance.flex.gap16.$,
       children: [jsxs("div", {
-        className: _$$s2.flex.flexColumn.gap16.flex1.mt16.$,
+        className: cssBuilderInstance.flex.flexColumn.gap16.flex1.mt16.$,
         children: [jsx(W, {
           currency: e
         }), jsxs("div", {
@@ -81,10 +81,10 @@ function X({
             onClick: a,
             children: renderI18nText("plan_comparison.campfire.choose_plan")
           }), jsx("div", {
-            className: _$$s2.font11.lh16.alignCenter.mt4.$,
+            className: cssBuilderInstance.font11.lh16.alignCenter.mt4.$,
             children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
-                className: _$$s2.colorTextBrand.cursorPointer.$,
+                className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
                 onClick: () => n(showModalHandler({
                   type: lk,
                   data: {
@@ -96,12 +96,12 @@ function X({
             })
           })]
         }), jsx("div", {
-          className: _$$s2.bt1.bSolid.colorBorder.$
+          className: cssBuilderInstance.bt1.bSolid.colorBorder.$
         }), jsx(J, {
           upsellSource: l
         })]
       }), jsx("div", {
-        className: _$$s2.flex.flex1.itemsCenter.justifyCenter.$,
+        className: cssBuilderInstance.flex.flex1.itemsCenter.justifyCenter.$,
         children: r
       })]
     })]
@@ -124,17 +124,17 @@ function W({
   if (null === r.data) throw Error("Price data is null");
   let i = new CurrencyFormatter(e);
   return jsx("div", {
-    className: _$$s2.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: collaboratorSet.sort(compareProductAccessTypes).map(e => isNullish(r.data[e]) ? null : jsxs("div", {
-      className: _$$s2.flex.justifyBetween.$,
+      className: cssBuilderInstance.flex.justifyBetween.$,
       children: [jsxs("div", {
-        className: _$$s2.flex.gap4.itemsCenter.$,
+        className: cssBuilderInstance.flex.gap4.itemsCenter.$,
         children: [_$$B3({
           type: e,
           size: "24",
           removeBackgroundColor: !0
         }), jsx("p", {
-          className: _$$s2.textBodyLarge.$,
+          className: cssBuilderInstance.textBodyLarge.$,
           children: function (e) {
             switch (e) {
               case ProductAccessTypeEnum.EXPERT:
@@ -151,10 +151,10 @@ function W({
           }(e)
         })]
       }), jsx("p", {
-        className: _$$s2.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: renderI18nText("nux.price_per_month", {
           price: jsx("span", {
-            className: _$$s2.textBodyLargeStrong.$,
+            className: cssBuilderInstance.textBodyLargeStrong.$,
             children: i.formatMoney(r.data[e].amount)
           })
         })
@@ -170,20 +170,20 @@ function J(e) {
   return jsx("div", {
     children: a.map((e, a) => {
       let r = t && 0 === a ? jsx("span", {
-        className: _$$s2.textBodyLargeStrong.$,
+        className: cssBuilderInstance.textBodyLargeStrong.$,
         children: e
       }) : jsx("span", {
         children: e
       });
       return jsxs("div", {
-        className: _$$s2.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [jsx(_$$g, {
-          className: _$$s2.minW24.$,
+          className: cssBuilderInstance.minW24.$,
           style: {
             "--color-icon": "var(--color-icon-secondary)"
           }
         }), jsx("p", {
-          className: _$$s2.textBodyLarge.$,
+          className: cssBuilderInstance.textBodyLarge.$,
           children: r
         })]
       }, a);
@@ -302,19 +302,19 @@ function ea(e) {
           alt: ""
         })]
       }), l && jsxs("div", {
-        className: _$$s2.flex.b1.bRadius3.itemsCenter.absolute.pr4.py4.ml36.$,
+        className: cssBuilderInstance.flex.b1.bRadius3.itemsCenter.absolute.pr4.py4.ml36.$,
         style: styleBuilderInstance.add({
           top: "100%",
           marginTop: "15px",
           maxWidth: "100px"
         }).$,
         children: [jsx(_$$s, {
-          className: _$$s2.minW16.$
+          className: cssBuilderInstance.minW16.$
         }), jsx("p", {
-          className: _$$s2.textBodySmallStrong.$,
+          className: cssBuilderInstance.textBodySmallStrong.$,
           children: renderI18nText("org_upgrade.illustration.sign_in_with_sso")
         }), jsx("div", {
-          className: _$$s2.absolute.mt32.$,
+          className: cssBuilderInstance.absolute.mt32.$,
           style: styleBuilderInstance.add({
             right: "-8px"
           }).$,

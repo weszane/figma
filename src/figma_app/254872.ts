@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { O } from "../905/969533";
 import { reportError } from "../905/11";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { z } from "../905/905430";
@@ -81,7 +81,7 @@ export function $$A3({
     canRun
   } = e;
   return $$T4(extension) && canRun ? jsx("span", {
-    className: _$$s.bgTransparent.$,
+    className: cssBuilderInstance.bgTransparent.$,
     "data-testid": "submenu-button",
     ref: t,
     style: styleBuilderInstance.add({

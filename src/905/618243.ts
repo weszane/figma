@@ -29,7 +29,7 @@ import { registerModal } from "../905/102752";
 import { customHistory } from "../905/612521";
 import { linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { V as _$$V } from "../905/223767";
 import { FPlanNameType } from "../figma_app/191312";
@@ -380,7 +380,7 @@ function Y({
       confirmText: n,
       confirmationTitle: i,
       helperText: c,
-      helperTextClass: _$$s.flexGrow1.$,
+      helperTextClass: cssBuilderInstance.flexGrow1.$,
       hideCancel: u,
       hideOnCancel: !1,
       hideOnConfirm: !1,
@@ -393,7 +393,7 @@ function Y({
         upsellSource: t
       },
       children: [jsx("div", {
-        className: _$$s.lh24.font13.pt24.pr0.pb32.pl0.$,
+        className: cssBuilderInstance.lh24.font13.pt24.pr0.pb32.pl0.$,
         children: jsxs(AutoLayout, {
           spacing: 24,
           children: [jsx("div", {
@@ -403,7 +403,7 @@ function Y({
           })]
         })
       }), jsx("div", {
-        className: _$$s.bt1.colorBorder.bSolid.$
+        className: cssBuilderInstance.bt1.colorBorder.bSolid.$
       })]
     })
   });
@@ -436,12 +436,12 @@ let X = registerModal(function ({
     })
   });
   let o = t ? void 0 : jsxs("div", {
-    className: _$$s.flex.flexRow.gap8.mr36.$,
+    className: cssBuilderInstance.flex.flexRow.gap8.mr36.$,
     children: [jsx(SvgComponent, {
-      className: _$$s.colorIcon.$,
+      className: cssBuilderInstance.colorIcon.$,
       svg: _$$A
     }), jsx("div", {
-      className: _$$s.maxW300.$,
+      className: cssBuilderInstance.maxW300.$,
       children: renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.text")
     })]
   });
@@ -458,7 +458,7 @@ let X = registerModal(function ({
         direction: "vertical",
         spacing: 8,
         children: [jsx("p", {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           children: renderI18nText("oss_exposure_branching_upsell_modal.body2")
         }), jsx(AutoLayout, {
           direction: "vertical",

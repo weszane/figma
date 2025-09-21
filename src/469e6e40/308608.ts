@@ -20,7 +20,7 @@ import { SecureLink } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -154,7 +154,7 @@ let ev = registerModal(function ({
     numRequests: t
   }) : renderI18nText("admin_dashboard.requests.approve_all_modal.confirm");
   return jsxs(ModalContainer, {
-    className: _$$s2.cursorDefault.selectNone.$,
+    className: cssBuilderInstance.cursorDefault.selectNone.$,
     title: "",
     size: 360,
     padding: 0,
@@ -167,13 +167,13 @@ let ev = registerModal(function ({
       },
       spacing: 8,
       children: [jsx("div", {
-        className: _$$s2.fontSemiBold.lh16.colorText.$,
+        className: cssBuilderInstance.fontSemiBold.lh16.colorText.$,
         children: d
       }), jsx(Spacer, {}), jsx(CloseButton, {
         onClick: r
       })]
     }), jsx("div", {
-      className: _$$s2.p16.$,
+      className: cssBuilderInstance.p16.$,
       children: jsx(TextWithTruncation, {
         children: o
       })
@@ -218,7 +218,7 @@ function ef({
     c();
   }, [e]);
   return jsxs("div", {
-    className: _$$s2.flex.flexRow.$,
+    className: cssBuilderInstance.flex.flexRow.$,
     children: [jsx("div", {
       className: r ?? void 0,
       style: styleBuilderInstance.noWrap.overflowHidden.ellipsis.add({
@@ -256,7 +256,7 @@ function eS({
       }).$,
       children: t
     }) : jsx("div", {
-      className: _$$s2.colorTextTertiary.$,
+      className: cssBuilderInstance.colorTextTertiary.$,
       children: Lv
     })]
   });
@@ -269,7 +269,7 @@ function eN({
     color: _$$S.WARNING,
     rounded: !1,
     text: jsx("p", {
-      className: _$$s2.fontMedium.$,
+      className: cssBuilderInstance.fontMedium.$,
       children: renderI18nText("admin_dashboard.requests.details.reminder_banner", {
         requesterName: e
       })
@@ -313,7 +313,7 @@ let eI = registerModal(function ({
     _(hideModal());
   };
   return r && (p || !(b || v)) ? jsx(ModalContainer, {
-    className: _$$s2.cursorDefault.selectNone.$,
+    className: cssBuilderInstance.cursorDefault.selectNone.$,
     title: "",
     size: 400,
     padding: 0,
@@ -331,7 +331,7 @@ let eI = registerModal(function ({
       entryPoint: c || void 0
     },
     children: jsxs(ModalContainer, {
-      className: _$$s2.cursorDefault.selectNone.$,
+      className: cssBuilderInstance.cursorDefault.selectNone.$,
       title: "",
       size: 400,
       padding: 0,
@@ -343,7 +343,7 @@ let eI = registerModal(function ({
           bottom: 4
         },
         children: [jsx("div", {
-          className: _$$s2.fontSemiBold.lh16.colorText.$,
+          className: cssBuilderInstance.fontSemiBold.lh16.colorText.$,
           children: renderI18nText("admin_dashboard.requests.details.title")
         }), jsx(Spacer, {}), jsx(CloseButton, {
           onClick: y,
@@ -1044,12 +1044,12 @@ export function $$eD0({
     className: "upgrade_requests_table--noteColumn--SysRF upgrade_requests_table--column--o-mlT admin_settings_page--membersColumn--E3seT table--column--974RA",
     cellComponent: e => {
       let t = !!ex || eM.has(e.id);
-      let a = c()(_$$s2.mr8.bgTransparent.$, e.hasBeenNudged ? "" : "upgrade_requests_table--rowDetailButton--lCxCS");
+      let a = c()(cssBuilderInstance.mr8.bgTransparent.$, e.hasBeenNudged ? "" : "upgrade_requests_table--rowDetailButton--lCxCS");
       return jsxs(AutoLayout, {
         spacing: 8,
         children: [jsx(ef, {
           text: e.message ?? Lv,
-          textClassName: null === e.message ? _$$s2.colorTextTertiary.$ : void 0,
+          textClassName: null === e.message ? cssBuilderInstance.colorTextTertiary.$ : void 0,
           textMaxWidth: 200,
           onClickLink: () => {
             tB(e);
@@ -1100,7 +1100,7 @@ export function $$eD0({
     }
   };
   let tV = jsxs("div", {
-    className: _$$s2.mx24.mb12.cursorDefault.selectNone.$,
+    className: cssBuilderInstance.mx24.mb12.cursorDefault.selectNone.$,
     children: [t_ && jsx(_$$p, {
       children: jsx(Z, {
         hasBillingGroups: !!e2.length,
@@ -1114,7 +1114,7 @@ export function $$eD0({
         children: [jsx("div", {
           role: "button",
           tabIndex: 0,
-          className: eK === V7.ALL_MANAGED_REQUESTS || eY === V7.ALL_MANAGED_REQUESTS ? _$$s2.font13.fontMedium.lh24.colorText.mr8.py4.$ : _$$s2.font13.fontMedium.lh24.colorTextSecondary.mr8.py4.$,
+          className: eK === V7.ALL_MANAGED_REQUESTS || eY === V7.ALL_MANAGED_REQUESTS ? cssBuilderInstance.font13.fontMedium.lh24.colorText.mr8.py4.$ : cssBuilderInstance.font13.fontMedium.lh24.colorTextSecondary.mr8.py4.$,
           onClick: () => {
             eX(V7.ALL_MANAGED_REQUESTS);
             eZ(V7.ALL_MANAGED_REQUESTS);
@@ -1143,7 +1143,7 @@ export function $$eD0({
       }), t_ && e2.length > 0 && jsx("div", {
         role: "button",
         tabIndex: 0,
-        className: eK === V7.ALL_ORG_REQUESTS || eY === V7.ALL_ORG_REQUESTS ? _$$s2.font13.fontMedium.lh24.colorText.mr8.py4.$ : _$$s2.font13.fontMedium.lh24.colorTextSecondary.mr8.py4.$,
+        className: eK === V7.ALL_ORG_REQUESTS || eY === V7.ALL_ORG_REQUESTS ? cssBuilderInstance.font13.fontMedium.lh24.colorText.mr8.py4.$ : cssBuilderInstance.font13.fontMedium.lh24.colorTextSecondary.mr8.py4.$,
         onClick: () => {
           eX(V7.ALL_ORG_REQUESTS);
           eZ(V7.ALL_ORG_REQUESTS);
@@ -1173,12 +1173,12 @@ export function $$eD0({
       }), jsx(Spacer, {}), q && jsx(SecureLink, {
         trusted: !0,
         onClick: q,
-        className: _$$s2.fontMedium.$,
+        className: cssBuilderInstance.fontMedium.$,
         children: jsx(TextWithTruncation, {
           children: renderI18nText("admin_dashboard.requests.view_history")
         })
       }), tg > 0 && jsx("div", {
-        className: _$$s2.pl16.$,
+        className: cssBuilderInstance.pl16.$,
         children: jsx(_$$V2, {
           variant: "primary",
           onClick: () => {
@@ -1219,7 +1219,7 @@ export function $$eD0({
         iconSrc: _$$A2,
         variant: "gray",
         children: jsx("div", {
-          className: _$$s2.pr16.$,
+          className: cssBuilderInstance.pr16.$,
           children: tz(!0)
         })
       })
@@ -1234,7 +1234,7 @@ export function $$eD0({
       entryPoint: "dashDeepLinkEntryPoint" in eC ? eC.dashDeepLinkEntryPoint : ""
     },
     children: jsxs("div", {
-      className: c()("upgrade_requests_table--fontSmoothing---uY3Z", _$$s2.pt16.bRadius6.b1.colorBorder.$),
+      className: c()("upgrade_requests_table--fontSmoothing---uY3Z", cssBuilderInstance.pt16.bRadius6.b1.colorBorder.$),
       children: [tV, jsx("div", {
         style: styleBuilderInstance.add({
           width: "780px",
@@ -1242,9 +1242,9 @@ export function $$eD0({
         }).$,
         children: jsx(Cj, {
           actionBar: "approving_all_button" === ex ? void 0 : e => tf ? jsx("div", {
-            className: _$$s2.w150.$,
+            className: cssBuilderInstance.w150.$,
             children: jsx(Wi, {
-              className: _$$s2.h12.w150.$,
+              className: cssBuilderInstance.h12.w150.$,
               animationType: JR.SHIMMER_ON_MENU
             })
           }) : jsx("div", {
@@ -1286,7 +1286,7 @@ export function $$eD0({
           disabled: !!ex,
           emptyContent: (G = 0 === Y.length && null === K && eQ === eK && null === e0 ? jsxs(Fragment, {
             children: [jsx("div", {
-              className: _$$s2.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
+              className: cssBuilderInstance.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
               children: renderI18nText(d && tu ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.empty.primary_text")
             }), jsx("div", {
               style: styleBuilderInstance.add({
@@ -1295,10 +1295,10 @@ export function $$eD0({
               children: d ? tz(!1) : renderI18nText("admin_dashboard.requests.empty.secondary_text")
             })]
           }) : Y.length > 0 && null === K && eQ === eK && null === e0 ? jsx("div", {
-            className: _$$s2.lh16.cursorDefault.colorText.$,
+            className: cssBuilderInstance.lh16.cursorDefault.colorText.$,
             children: renderI18nText("admin_dashboard.requests.empty.no_search_results")
           }) : jsx("div", {
-            className: _$$s2.lh16.cursorDefault.colorText.$,
+            className: cssBuilderInstance.lh16.cursorDefault.colorText.$,
             children: renderI18nText("admin_dashboard.requests.empty.no_filter_results", {
               resetFiltersLink: jsx(SecureLink, {
                 trusted: !0,

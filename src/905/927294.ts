@@ -3,7 +3,7 @@ import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { withTrackedClick } from "../figma_app/831799";
@@ -37,18 +37,18 @@ export let $$g2 = withTrackedClick(({
 }));
 export function $$f0(e) {
   return jsxs("div", {
-    className: l()(_$$s.flex.justifyBetween.itemsCenter.$, nK, {
+    className: l()(cssBuilderInstance.flex.justifyBetween.itemsCenter.$, nK, {
       [QC]: e.emphasized,
       [aj]: !e.title
     }),
     children: [e.title ? jsx("div", {
-      className: l()(_$$s.font13.fontMedium.flexGrow1.$$if(!e.hideCloseButton, _$$s.pr32).$, AH),
+      className: l()(cssBuilderInstance.font13.fontMedium.flexGrow1.$$if(!e.hideCloseButton, cssBuilderInstance.pr32).$, AH),
       style: styleBuilderInstance.add({
         letterSpacing: "-0.032px"
       }).$,
       children: e.title
     }) : jsx("div", {
-      className: l()(_$$s.font11.fontNormal.lh16.wFull.$$if(!e.hideCloseButton, _$$s.pr32).$, Vs),
+      className: l()(cssBuilderInstance.font11.fontNormal.lh16.wFull.$$if(!e.hideCloseButton, cssBuilderInstance.pr32).$, Vs),
       style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,
@@ -69,11 +69,11 @@ export function $$f0(e) {
 }
 export function $$_1(e) {
   return jsxs("div", {
-    className: l()(_$$s.flex.itemsCenter.justifyBetween.font11.fontMedium.lh16.$, J, {
+    className: l()(cssBuilderInstance.flex.itemsCenter.justifyBetween.font11.fontMedium.lh16.$, J, {
       [Lb]: e.emphasized
     }),
     children: [jsx("div", {
-      className: _$$s.$$if(e.emphasized, _$$s.colorTextOnbrandSecondary, _$$s.colorTextSecondary).$,
+      className: cssBuilderInstance.$$if(e.emphasized, cssBuilderInstance.colorTextOnbrandSecondary, cssBuilderInstance.colorTextSecondary).$,
       style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,
@@ -82,7 +82,7 @@ export function $$_1(e) {
         totalNumSteps: e.stepCounter.totalNumSteps
       })
     }), jsxs("div", {
-      className: _$$s.flex.flexWrap.gap8.$,
+      className: cssBuilderInstance.flex.flexWrap.gap8.$,
       children: [e.secondaryCta && jsx(F, {
         defaultVariant: "secondary",
         emphasized: e.emphasized,

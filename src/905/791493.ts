@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { Ct, MA } from "../905/478473";
@@ -48,7 +48,7 @@ function p(e) {
       });
   }
   return jsx(SvgComponent, {
-    className: _$$s.pl16.pr16.mlAuto.colorIcon.$,
+    className: cssBuilderInstance.pl16.pr16.mlAuto.colorIcon.$,
     svg: A,
     dataTestId: "chevron-right"
   });
@@ -75,7 +75,7 @@ export function $$m0(e) {
         children: renderI18nText("plan_picker.pick_plan.title")
       })
     }), jsx("div", {
-      className: _$$s.alignCenter.pt6.$,
+      className: cssBuilderInstance.alignCenter.pt6.$,
       children: "figjamTry" === useCase ? jsx(TextWithTruncation, {
         fontSize: 13,
         color: "default",

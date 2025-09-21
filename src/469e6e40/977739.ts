@@ -9,7 +9,7 @@ import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip 
 import { getAtomMutate } from "../figma_app/566371";
 import { z as _$$z, Z } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -99,7 +99,7 @@ function $$q(e) {
       teamId: planId
     }).then(g);
   }, [initialEmails, initialEmailsLoaded, g, planId, planType, setAutocomplete]), initialEmailsLoaded) ? jsxs("div", {
-    className: _$$s.p2.w400.$,
+    className: cssBuilderInstance.p2.w400.$,
     children: [jsx(_$$P, {
       autocomplete,
       autocompleteResultsClassName: "admin_search_input--autocompleteResults--N5LMj",
@@ -223,7 +223,7 @@ let $$z0 = registerModal(function ({
   let [V, W] = useState(!1);
   let [H, Y] = useState(!1);
   let J = "loaded" !== T.status ? jsx(LoadingSpinner, {
-    className: _$$s.mlAuto.mrAuto.mt32.$
+    className: cssBuilderInstance.mlAuto.mrAuto.mt32.$
   }) : jsxs(Fragment, {
     children: [jsx(AutoLayout, {
       direction: "vertical",
@@ -244,7 +244,7 @@ let $$z0 = registerModal(function ({
           O(a);
         },
         label: jsx(Label, {
-          className: _$$s.fontMedium.$,
+          className: cssBuilderInstance.fontMedium.$,
           children: $(e).label
         }),
         htmlAttributes: {

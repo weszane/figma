@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
 import { Qq } from "../905/736956";
 export let $$d0 = ex("ai_features_tooltip", function () {
   return getFeatureFlags().figjam_synthesize_handbrake ? jsxs("div", {
-    className: _$$s.flex.flexColumn.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.justifyCenter.$,
     children: [jsx("p", {
       className: Qq,
       children: getI18nString("whiteboard.inline_menu.ai_quick_actions_disabled_header")

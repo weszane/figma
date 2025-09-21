@@ -17,7 +17,7 @@ import { oW } from "../905/675859";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { A as _$$A } from "../905/615098";
 import { F as _$$F } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
@@ -48,9 +48,9 @@ let W = {
 };
 export function $$z1() {
   return jsx("div", {
-    className: _$$s.flexColumn.alignCenter.pt32.pb16.$,
+    className: cssBuilderInstance.flexColumn.alignCenter.pt32.pb16.$,
     children: jsx("div", {
-      className: _$$s.mxAuto.w24.h24.$,
+      className: cssBuilderInstance.mxAuto.w24.h24.$,
       children: jsx(_$$k, {})
     })
   });
@@ -92,7 +92,7 @@ export function $$q8({
             noBorder: !0
           })
         }) : jsx("div", {
-          className: _$$s.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
+          className: cssBuilderInstance.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
           children: jsx(_$$Q, {
             src: n || void 0,
             alt: e,
@@ -120,7 +120,7 @@ export function $$V10() {
     children: [jsx("div", {
       className: O,
       children: jsx("div", {
-        className: _$$s.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
+        className: cssBuilderInstance.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
         children: jsx(Qp, {
           className: "cooper_template_ui--tilePlaceholderImage--AwOc0",
           animationType: JR.LIGHT_SHIMMER,
@@ -169,7 +169,7 @@ export function $$H7({
       ariaLabel: e,
       hasVideo: l,
       children: jsx("span", {
-        className: _$$s.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
+        className: cssBuilderInstance.flex.justifyCenter.itemsCenter.overflowHidden.wFull.hFull.$,
         children: jsx(oW, {
           onLoad: () => {
             c(!0);

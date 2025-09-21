@@ -46,7 +46,7 @@ import { d as _$$d } from "../469e6e40/727017";
 import { A as _$$A } from "../905/891805";
 import { U as _$$U } from "../905/275247";
 import { Xf, SM } from "../figma_app/153916";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
 import { o as _$$o } from "../469e6e40/744116";
 import { Ii } from "../figma_app/425283";
@@ -110,7 +110,7 @@ let el = "seen_team_admin_manage_unassigned_drafts_onboarding";
 let eo = userFlagExistsAtomFamily(el);
 function ex(e) {
   return jsx("div", {
-    className: _$$s.h24.w24.$,
+    className: cssBuilderInstance.h24.w24.$,
     children: e.children
   });
 }
@@ -698,7 +698,7 @@ function eU() {
   }) => e);
   return jsx("div", {
     "data-test-id": "admin-sidebar-user-information",
-    className: _$$s.bb1.bSolid.wFull.colorBorder.$$if(e, _$$s.bt1).$,
+    className: cssBuilderInstance.bb1.bSolid.wFull.colorBorder.$$if(e, cssBuilderInstance.bt1).$,
     children: jsx(Xg, {})
   });
 }

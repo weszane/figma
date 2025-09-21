@@ -110,7 +110,7 @@ import { aq, cD, CN, FO, KW, Xt } from '../9410/855699';
 import { iZ as _$$iZ2, _d, k9, Q0 } from '../9410/874933';
 import { Lx, v7 } from '../9410/896213';
 import { yh } from '../9410/974031';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { ei as _$$ei } from '../figma_app/9054';
 import { jY, sO } from '../figma_app/21029';
@@ -775,7 +775,7 @@ function eH({
     variableTypeForTracking: i,
     recordingKey: n,
     children: jsx('div', {
-      className: _$$s.textBodyMedium.truncate.$,
+      className: cssBuilderInstance.textBodyMedium.truncate.$,
       children: a
     })
   });
@@ -797,7 +797,7 @@ function ez({
     pillClassName: 'variable_cell_content--rawColorPillContainer--uuD03'
   });
   return jsx('div', {
-    className: _$$s.flex.alignCenter.gap8.h16.minW0.itemsCenter.$,
+    className: cssBuilderInstance.flex.alignCenter.gap8.h16.minW0.itemsCenter.$,
     children: jsx(eG, {
       valueToCopy: s,
       isCopyable: t,
@@ -1297,7 +1297,7 @@ function th({
   return jsxs('div', {
     className: 'variables_table--header--412jw',
     children: [jsxs('div', {
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsx(IconButton, {
         'aria-label': getI18nString('general.close'),
         'htmlAttributes': {
@@ -1314,7 +1314,7 @@ function th({
         'children': e
       })]
     }), jsxs('div', {
-      className: _$$s.flex.itemsCenter.gap4.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap4.$,
       children: [t && jsx(v7, {
         dropdownShown: i,
         multiplayer: s,
@@ -2008,7 +2008,7 @@ function iQ() {
         children: [Q && jsx('span', {
           className: 'overview--emptyMessage--lyEC8',
           children: searchActive ? renderI18nText('dev_handoff.workflows.overview.empty_message_search') : jsx('div', {
-            className: _$$s.preWrap.$,
+            className: cssBuilderInstance.preWrap.$,
             children: renderI18nText('dev_handoff.workflows.overview.no_designs', {
               status: function (e) {
                 switch (e) {

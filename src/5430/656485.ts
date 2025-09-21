@@ -31,7 +31,7 @@ import { EditorType } from "../figma_app/155287";
 import { gz, kJ, GJ } from "../5430/455879";
 import { cz, i8 } from "../905/14017";
 import { trackEventAnalytics } from "../905/449184";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { P as _$$P, Mf } from "../5430/367577";
 import { A as _$$A } from "../figma_app/882803";
@@ -170,7 +170,7 @@ function Z({
       children: [jsx("div", {
         className: "plugin_dropdown_preview--pluginName--qx9M6 text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: jsx("span", {
-          className: _$$s.ellipsis.noWrap.overflowHidden.$,
+          className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
           children: i.name
         })
       }), n && jsx("div", {

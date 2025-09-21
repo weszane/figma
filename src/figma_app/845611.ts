@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { LoadingSpinner } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { ProductAccessMap } from "../figma_app/765689";
@@ -63,12 +63,12 @@ export function $$k9({
   showSpinner: t
 }) {
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
     children: [jsx("span", {
-      className: t ? _$$s.invisible.$ : "",
+      className: t ? cssBuilderInstance.invisible.$ : "",
       children: e
     }), t && jsx(LoadingSpinner, {
-      className: _$$s.absolute.$,
+      className: cssBuilderInstance.absolute.$,
       shouldMatchTextColor: !0,
       size: "small"
     })]

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { nl } from "../905/590952";
 import { In } from "../905/672640";
@@ -97,7 +97,7 @@ export function $$O2(e) {
     numMembers: U
   });
   let ee = jsxs("div", {
-    className: _$$s.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
     children: [X && Q && jsx(_$$H2, {
       entityId: Q.id,
       entityName: Q.name,
@@ -139,9 +139,9 @@ export function $$O2(e) {
     isCardActive: e.isHovered || e.isSelected || Y
   });
   let en = jsxs("div", {
-    className: _$$s.flex.$,
+    className: cssBuilderInstance.flex.$,
     children: [jsx("div", {
-      className: e.isHovered || e.isSelected || Y ? _$$s.opacity1.$ : _$$s.opacity0.$,
+      className: e.isHovered || e.isSelected || Y ? cssBuilderInstance.opacity1.$ : cssBuilderInstance.opacity0.$,
       children: ei
     }), O && K && jsx("div", {
       className: "x1iog12x",
@@ -156,7 +156,7 @@ export function $$O2(e) {
   e.team.org_access === FAccessLevelType.PRIVATE ? t = getI18nString("file_browser.team_header.closed_team_header") : e.team.org_access === FAccessLevelType.SECRET && (t = getI18nString("file_browser.team_header.secret_team_header"));
   let er = e.team.org_access === FAccessLevelType.PRIVATE ? getI18nString("file_browser.team_header.closed_team_subtitle") : e.team.org_access === FAccessLevelType.SECRET ? getI18nString("file_browser.team_header.secret_team_subtitle") : void 0;
   let ea = e.team.org_access === FAccessLevelType.PRIVATE || e.team.org_access === FAccessLevelType.SECRET ? jsx("div", {
-    className: _$$s.mr4.$,
+    className: cssBuilderInstance.mr4.$,
     style: {
       marginLeft: "4px"
     },

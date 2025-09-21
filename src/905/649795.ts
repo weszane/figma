@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { A } from "../vendor/737188";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Vt } from "../905/780715";
 export let $$c0 = memo(e => {
@@ -17,7 +17,7 @@ export let $$c0 = memo(e => {
         })), e.stopPropagation(), e.preventDefault());
       }
     },
-    className: _$$s.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
     validate: {
       url: e => Vt(e).length > 0
     }

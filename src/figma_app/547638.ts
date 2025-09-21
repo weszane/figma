@@ -23,7 +23,7 @@ import { AffineTransform } from "../905/583953";
 import { defaultSessionLocalIDString, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dk } from "../figma_app/396372";
 let b = memo(function (e) {
@@ -100,7 +100,7 @@ function L({
   text: e
 }) {
   return jsx("span", {
-    className: _$$s2.colorText.$,
+    className: cssBuilderInstance.colorText.$,
     children: e
   });
 }

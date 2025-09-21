@@ -29,7 +29,7 @@ import { b as _$$b } from "../figma_app/556971";
 import { SvgComponent } from "../905/714743";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { i as _$$i, L as _$$L } from "../figma_app/942671";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
@@ -517,7 +517,7 @@ let $$eB8 = memo(function (e) {
   let i = isWorkshopModeEnabled();
   let s = useDispatch();
   return jsx("span", {
-    className: _$$s.mr8.$,
+    className: cssBuilderInstance.mr8.$,
     "data-preferred-theme": e.useDarkTheme ? "dark" : void 0,
     children: jsx(_$$c, {
       variant: "secondary",

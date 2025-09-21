@@ -12,7 +12,7 @@ import { P as _$$P } from "../905/347284";
 import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
 import { F as _$$F, y as _$$y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -306,16 +306,16 @@ let ey = function ({
     }), jsx(ej, {
       label: getI18nString("resources_tab.libraries.library_name"),
       children: jsxs("span", {
-        className: _$$s.maxWFull.overflowBreakWord.alignTop.$,
+        className: cssBuilderInstance.maxWFull.overflowBreakWord.alignTop.$,
         "data-testid": "library-info-library-name",
         children: [e.name, (f || y) && jsx("div", {
-          className: _$$s.inlineBlock.ml4.$,
+          className: cssBuilderInstance.inlineBlock.ml4.$,
           children: jsx(cX, {
             orgNameForTooltip: y ? t.name : void 0,
             workspaceNameForTooltip: f ? k : void 0
           })
         }), C && jsx("div", {
-          className: _$$s.inlineBlock.ml4.$,
+          className: cssBuilderInstance.inlineBlock.ml4.$,
           children: jsx(_$$E2, {
             libraryKey: e.libraryKey,
             showTooltip: !0,
@@ -331,7 +331,7 @@ let ey = function ({
     }), jsx(ej, {
       label: getI18nString("resources_tab.libraries.library_owner"),
       children: jsxs("div", {
-        className: _$$s.pt2.wFull.$,
+        className: cssBuilderInstance.pt2.wFull.$,
         children: [o && jsx(az, {
           includeUserEmailAddress: !0,
           size: 24,
@@ -354,7 +354,7 @@ let ey = function ({
         })]
       })
     }), "file" === e.type && jsx("a", {
-      className: _$$s.cursorPointer.colorTextBrand.$,
+      className: cssBuilderInstance.cursorPointer.colorTextBrand.$,
       href: buildFileUrl({
         file: {
           key: e.fileKey,
@@ -368,7 +368,7 @@ let ey = function ({
           children: renderI18nText("resources_tab.libraries.open_library_file")
         }), jsx(SvgComponent, {
           svg: _$$A2,
-          className: _$$s.colorIconBrand.$
+          className: cssBuilderInstance.colorIconBrand.$
         })]
       })
     })]
@@ -496,7 +496,7 @@ function eY({
       bottom: 4
     },
     children: [jsx("div", {
-      className: _$$s.minW0.wFull.fontMedium.$,
+      className: cssBuilderInstance.minW0.wFull.fontMedium.$,
       children: jsx(AutoLayout, {
         direction: "vertical",
         height: "hug-contents",
@@ -596,7 +596,7 @@ function eX({
       bottom: 4
     },
     children: [jsx("div", {
-      className: _$$s.minW0.wFull.fontMedium.$,
+      className: cssBuilderInstance.minW0.wFull.fontMedium.$,
       children: jsx(AutoLayout, {
         direction: "vertical",
         height: "hug-contents",
@@ -870,14 +870,14 @@ function e9({
           vertical: P ? 4 : 8
         },
         children: [jsx("div", {
-          className: _$$s.minW0.wFull.$,
+          className: cssBuilderInstance.minW0.wFull.$,
           children: jsxs(AutoLayout, {
             direction: "vertical",
             height: "hug-contents",
             width: "fill-parent",
             spacing: 0,
             children: [jsx("div", {
-              className: _$$s.inlineFlex.pre.maxWFull.$,
+              className: cssBuilderInstance.inlineFlex.pre.maxWFull.$,
               children: renderI18nText("resources_tab.libraries.use_orgs_setting", {
                 orgName: jsx(TextWithTruncation, {
                   truncate: !0,
@@ -922,7 +922,7 @@ function e9({
           })
         })]
       }), !P && jsx("div", {
-        className: _$$s.bt1.bSolid.colorBorder.wFull.h1.mt8.$
+        className: cssBuilderInstance.bt1.bSolid.colorBorder.wFull.h1.mt8.$
       })]
     }), "community" === e.type && jsx(te, {
       hideLineBreak: !0
@@ -978,13 +978,13 @@ function e9({
         dataOnboardingKey: e4[e],
         value: e,
         disabled: F,
-        className: _$$s.mt8.mb8.h16.$$if(F, _$$s.opacity0_5).$,
-        labelClassName: _$$s.font11.$,
+        className: cssBuilderInstance.mt8.mb8.h16.$$if(F, cssBuilderInstance.opacity0_5).$,
+        labelClassName: cssBuilderInstance.font11.$,
         children: e8(e)
       }, e))
     }), a && (p?.length ?? 0) > 0 && jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s.bt1.bSolid.colorBorder.wFull.h1.mt16.$
+        className: cssBuilderInstance.bt1.bSolid.colorBorder.wFull.h1.mt16.$
       }), jsx(TextWithTruncation, {
         fontWeight: "medium",
         truncate: "line-clamp",
@@ -1018,7 +1018,7 @@ function te({
 }) {
   return jsxs(Fragment, {
     children: [!e && jsx("div", {
-      className: _$$s.bb1.bSolid.colorBorder.wFull.h1.mt8.mb8.$
+      className: cssBuilderInstance.bb1.bSolid.colorBorder.wFull.h1.mt8.mb8.$
     }), jsx(TextWithTruncation, {
       fontWeight: "medium",
       truncate: "line-clamp",
@@ -1027,7 +1027,7 @@ function te({
     })]
   });
 }
-let tt = _$$s.lh32.h32.pl16.wFull.cursorDefault;
+let tt = cssBuilderInstance.lh32.h32.pl16.wFull.cursorDefault;
 function ta({
   content: e
 }) {
@@ -1038,7 +1038,7 @@ function ta({
         a(!e.isIntersecting);
       }
     }), jsx("div", {
-      className: tt.sticky.top0.colorBg.zIndex1.pt8.bRadius4.$$if(t, _$$s.bb1.bSolid.colorBorder).$,
+      className: tt.sticky.top0.colorBg.zIndex1.pt8.bRadius4.$$if(t, cssBuilderInstance.bb1.bSolid.colorBorder).$,
       children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         children: e
@@ -1054,7 +1054,7 @@ function tn({
 }) {
   return jsx("div", {
     onClick: s,
-    className: eE()(tt.borderBox.$, a ? _$$s.colorBgSelected.$ : "library_subscription_settings--rowHover--VPDsJ"),
+    className: eE()(tt.borderBox.$, a ? cssBuilderInstance.colorBgSelected.$ : "library_subscription_settings--rowHover--VPDsJ"),
     role: "link",
     tabIndex: 0,
     children: jsxs(AutoLayout, {
@@ -1100,12 +1100,12 @@ let tr = function ({
     g(void 0);
   }), [a, g]);
   return jsx("div", {
-    className: _$$s.b1.bRadius4.colorBorder.wFull.hFull.minW0.$,
+    className: cssBuilderInstance.b1.bRadius4.colorBorder.wFull.hFull.minW0.$,
     children: jsxs(AutoLayout, {
       spacing: 0,
       height: "fill-parent",
       children: [jsxs(_$$P, {
-        className: _$$s.wHalf.hFull.$,
+        className: cssBuilderInstance.wHalf.hFull.$,
         children: [l && jsxs(Fragment, {
           children: [jsx(ta, {
             content: getI18nString("resources_tab.libraries.organization")
@@ -1124,7 +1124,7 @@ let tr = function ({
             top: 8
           },
           children: jsx("div", {
-            className: _$$s.bt1.bSolid.colorBorder.wFull.h1.$
+            className: cssBuilderInstance.bt1.bSolid.colorBorder.wFull.h1.$
           })
         }), u && jsxs(AutoLayout, {
           direction: "vertical",
@@ -1139,9 +1139,9 @@ let tr = function ({
           }, e.id))]
         })]
       }), jsx("div", {
-        className: _$$s.wHalf.hFull.bl1.colorBorder.bSolid.$,
+        className: cssBuilderInstance.wHalf.hFull.bl1.colorBorder.bSolid.$,
         children: (l || a) && jsx(_$$P, {
-          className: _$$s.wFull.hFull.$,
+          className: cssBuilderInstance.wFull.hFull.$,
           children: jsx(e9, {
             libraryData: e,
             orgData: t,
@@ -1205,9 +1205,9 @@ let td = registerModal(function ({
         trusted: !0,
         target: "_blank",
         href: "https://help.figma.com/hc/articles/21310245473815",
-        className: _$$s.flex.itemsCenter.fontNormal.$,
+        className: cssBuilderInstance.flex.itemsCenter.fontNormal.$,
         children: [jsx(SvgComponent, {
-          className: _$$s.colorIconBrand.pr2.$,
+          className: cssBuilderInstance.colorIconBrand.pr2.$,
           svg: _$$A3
         }), jsx(TextWithTruncation, {
           color: "brand",
@@ -1293,7 +1293,7 @@ function tg({
             size: _$$y.SMALL
           })
         }), jsxs("div", {
-          className: _$$s.flex.alignCenter.$,
+          className: cssBuilderInstance.flex.alignCenter.$,
           children: [jsx(TextWithTruncation, {
             truncate: !0,
             children: e.library_name
@@ -1538,11 +1538,11 @@ export function $$tx1(e) {
     style: styleBuilderInstance.add({
       minWidth: "800px"
     }).$,
-    className: _$$s.pb24.$,
+    className: cssBuilderInstance.pb24.$,
     children: [jsxs("div", {
       className: "libraries_section--tableRowHeader--VKGT- libraries_section--tableRow--Y2bLC",
       children: [jsx("div", {
-        className: _$$s.pt8.pb8.colorBorder.bSolid.bt1.bb1.wFull.$,
+        className: cssBuilderInstance.pt8.pb8.colorBorder.bSolid.bt1.bb1.wFull.$,
         children: jsx(y2, {
           query: K,
           onChange: Q,
@@ -1561,7 +1561,7 @@ export function $$tx1(e) {
               width: "40%"
             }).$,
             children: jsx(tD, {
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("NAME"),
               field: "NAME",
@@ -1577,7 +1577,7 @@ export function $$tx1(e) {
               width: "30%"
             }).$,
             children: jsx(tD, {
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("ENABLED_FOR"),
               field: "ENABLED_FOR",
@@ -1594,7 +1594,7 @@ export function $$tx1(e) {
             }).justifyEnd.$,
             children: jsx(tD, {
               rightAligned: !0,
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("COMPONENTS"),
               field: "COMPONENTS",
@@ -1611,7 +1611,7 @@ export function $$tx1(e) {
             }).justifyEnd.$,
             children: jsx(tD, {
               rightAligned: !0,
-              className: _$$s.colorText.$,
+              className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("STYLES"),
               field: "STYLES",
@@ -1645,17 +1645,17 @@ export function $$tx1(e) {
         let r = s && er.has(s);
         let l = Z.has(e.library_key);
         let o = i ? jsx("div", {
-          className: _$$s.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: jsx(cX, {
             orgNameForTooltip: org.name
           })
         }) : r ? jsx("div", {
-          className: _$$s.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: jsx(cX, {
             workspaceNameForTooltip: t
           })
         }) : l ? jsx("div", {
-          className: _$$s.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: jsx(_$$E2, {
             libraryKey: e.library_key,
             showTooltip: !0,
@@ -1698,12 +1698,12 @@ export function $$tx1(e) {
         rightActions: ex
       })]
     }), isLoading ? jsx("div", {
-      className: _$$s.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
+      className: cssBuilderInstance.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
       children: jsx(_$$k, {})
     }) : jsx("div", {
-      className: _$$s.overflowAuto.$,
+      className: cssBuilderInstance.overflowAuto.$,
       children: jsx(_$$P, {
-        className: _$$s.wFull.hFull.$,
+        className: cssBuilderInstance.wFull.hFull.$,
         minContentWidth: 800,
         children: eb
       })

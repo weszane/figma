@@ -10,7 +10,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
 import { getViewerInstance, useEventListener } from "../figma_app/632319";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -195,7 +195,7 @@ function C({
     deviceFrame: m,
     invalidateThumbnail: d,
     children: jsxs("div", {
-      className: _$$s.hFull.wFull.$,
+      className: cssBuilderInstance.hFull.wFull.$,
       style: {
         pointerEvents: l ? "none" : "auto"
       },
@@ -247,7 +247,7 @@ export let $$F4 = memo(({
     backgroundImage: `url(${a})`
   } : {};
   return e ? jsx(ButtonPrimitive, {
-    className: f()(d, _$$s.cursorPointer.$),
+    className: f()(d, cssBuilderInstance.cursorPointer.$),
     style: u,
     onClick: i,
     children: jsx(_$$l, {
@@ -257,7 +257,7 @@ export let $$F4 = memo(({
     className: d,
     style: u,
     children: jsx(_$$l, {
-      className: f()(uZ, _$$s.cursorPointer.$),
+      className: f()(uZ, cssBuilderInstance.cursorPointer.$),
       onClick: i
     })
   });

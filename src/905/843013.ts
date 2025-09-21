@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { hx } from "../905/66449";
 import { H } from "../905/348433";
 import { D } from "../905/169680";
@@ -36,7 +36,7 @@ export function $$u0({
     _ && v.current && E(v.current.offsetWidth);
   }, [_, m, p]);
   return jsxs("div", {
-    className: _$$s.relative.$,
+    className: cssBuilderInstance.relative.$,
     "data-testid": "library-list-item-container",
     children: [jsxs(ButtonPrimitive, {
       className: h ? RU : hv,

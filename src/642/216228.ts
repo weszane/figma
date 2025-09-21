@@ -127,7 +127,7 @@ import { H as _$$H2 } from '../9410/195555';
 import { $A as _$$$A2 } from '../9410/212974';
 import { B as _$$B } from '../9410/966396';
 import { A as _$$A6 } from '../af221b13/388839';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { we } from '../figma_app/987';
 import { QI3 } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
@@ -1621,7 +1621,7 @@ function t1({
     'aria-label': L,
     ...O,
     'children': [jsx('div', {
-      className: l()(j ? e1 : e0, _$$s.relative.$),
+      className: l()(j ? e1 : e0, cssBuilderInstance.relative.$),
       children: jsx(_$$lX, {
         alwaysShowBorder: !1,
         cmsCollectionMappings: t,
@@ -1901,7 +1901,7 @@ function sc({
       opacityOverride: 0.5
     }), jsx(_$$n3.div, {
       onPointerDown: C,
-      className: _$$s.flex.$$if(f, _$$s.wFull).$,
+      className: cssBuilderInstance.flex.$$if(f, cssBuilderInstance.wFull).$,
       children: jsxs(ButtonPrimitive, {
         className: E,
         ref: setKeyboardNavigationElement,
@@ -2483,7 +2483,7 @@ function sF({
   let [t] = MA();
   return jsx(xU, {
     children: jsx('div', {
-      className: t === 'grid' ? 'asset_panel_assets--embeds--kl79b' : _$$s.flex.flexColumn.itemsCenter.$,
+      className: t === 'grid' ? 'asset_panel_assets--embeds--kl79b' : cssBuilderInstance.flex.flexColumn.itemsCenter.$,
       children: jsx(sd, {
         embeds: e.embeds
       })
@@ -3448,7 +3448,7 @@ function r9({
   }, [ellipsisRef]);
   let c = numHiddenStubs === collapsibleStubs.length;
   return jsxs('div', {
-    'className': _$$s.flex.itemsCenter.overflowHidden.flexShrink1.flexGrow1.$,
+    'className': cssBuilderInstance.flex.itemsCenter.overflowHidden.flexShrink1.flexGrow1.$,
     'style': styleBuilderInstance.add({
       flexBasis: 'content'
     }).$,
@@ -3563,7 +3563,7 @@ let ns = forwardRef(({
   return jsxs('div', {
     children: [jsxs('div', {
       ref: i,
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsx(nl, {}), jsx('button', {
         'ref': setKeyboardNavigationElement,
         'className': k,
@@ -3678,7 +3678,7 @@ function nr({
     },
     children: visualAssetsType === G3.IconSets ? renderI18nText('design_systems.assets_panel.icon_sets') : renderI18nText('design_systems.assets_panel.illustrations')
   }) : jsx('div', {
-    className: _$$s.flex.overflowHidden.$,
+    className: cssBuilderInstance.flex.overflowHidden.$,
     children: jsx('button', {
       onClick: I,
       className: M,
@@ -3720,7 +3720,7 @@ let nn = forwardRef(({
   });
   return e ? jsxs('div', {
     ref: s,
-    className: _$$s.flex.itemsCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.$,
     children: [jsx(nl, {}), jsx('button', {
       ref: setKeyboardNavigationElement,
       onClick: g,
@@ -3753,12 +3753,12 @@ function ni({
       textRef: s
     })), 0);
   }, [pageId, folderPath]), e) ? jsxs('div', {
-    className: _$$s.noWrap.flex.itemsCenter.$$if(t, _$$s.overflowHidden).$,
+    className: cssBuilderInstance.noWrap.flex.itemsCenter.$$if(t, cssBuilderInstance.overflowHidden).$,
     children: [jsx(nl, {}), jsx('div', {
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': o ? e : void 0,
       'ref': s,
-      'className': _$$s.mx4.px2.$$if(t, _$$s.overflowHidden.pre.ellipsis).$,
+      'className': cssBuilderInstance.mx4.px2.$$if(t, cssBuilderInstance.overflowHidden.pre.ellipsis).$,
       'aria-current': 'location',
       'children': e
     })]
@@ -6261,14 +6261,14 @@ function ib({
         width: t
       }
     }), jsx('div', {
-      className: _$$s.flex.flexColumn.itemsCenter.wFull.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsCenter.wFull.$,
       style: {
         width: t
       },
       children: jsxs('span', {
         className: 'site_kit_pages--pageName--ARhz3 site_kit_pages--text--gyBIU',
         children: [widthForCentering > 0 && jsx('div', {
-          className: _$$s.flexShrink0.$,
+          className: cssBuilderInstance.flexShrink0.$,
           style: {
             width: widthForCentering
           }
@@ -7659,7 +7659,7 @@ function lR({
       onClick: () => goToLibrary(t)
     })));
     librariesForConnectedProject.length > 0 && (e.push(jsx(wv, {})), e.push(jsx('div', {
-      className: l()(_$$s.textBodyMedium.$, 'asset_panel_settings--optionSubtitle--9d2Ib'),
+      className: l()(cssBuilderInstance.textBodyMedium.$, 'asset_panel_settings--optionSubtitle--9d2Ib'),
       children: getI18nString('design_systems.libraries_modal.connected_project_libraries')
     })), e.push(...librariesForConnectedProject.map(({
       name: e,
@@ -7729,7 +7729,7 @@ function lO({
       }), jsx('div', {
         className: 'asset_panel_settings--optionRightIcon--zi-2v',
         children: t ? jsx(_$$FX, {}) : s ? jsx('div', {
-          className: _$$s.ml2.$,
+          className: cssBuilderInstance.ml2.$,
           children: jsx(_$$E3, {
             libraryKey: void 0
           })
@@ -8341,7 +8341,7 @@ function al({
 }
 function aa() {
   return jsx('div', {
-    className: _$$s.colorTextSecondary.my8.mx16.$,
+    className: cssBuilderInstance.colorTextSecondary.my8.mx16.$,
     children: renderI18nText('design_systems.assets_panel.error')
   });
 }

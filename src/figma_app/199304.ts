@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import i from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { AT, CJ } from "../905/927294";
 import { g } from "../905/939506";
@@ -18,7 +18,7 @@ export function $$c0(e) {
       emphasized: e.emphasized,
       hideCloseButton: e.hideCloseButton
     }), t && e.media, r && jsx("div", {
-      className: a()(_$$s.font11.fontNormal.lh16.$, g),
+      className: a()(cssBuilderInstance.font11.fontNormal.lh16.$, g),
       style: styleBuilderInstance.add({
         letterSpacing: "0.055px"
       }).$,

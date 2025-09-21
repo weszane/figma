@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { isStudentValidated } from "../figma_app/141320";
 import { linkWithTracking } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6, Ih } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -28,11 +28,11 @@ import { Y } from "../905/26051";
 function R() {
   let e = useDispatch();
   return jsxs("div", {
-    className: _$$s.p8.bRadius8.colorBgSecondary.flex.justifyBetween.itemsCenter.$,
+    className: cssBuilderInstance.p8.bRadius8.colorBgSecondary.flex.justifyBetween.itemsCenter.$,
     children: [jsxs("div", {
-      className: _$$s.flex.gap4.itemsCenter.mr16.$,
+      className: cssBuilderInstance.flex.gap4.itemsCenter.mr16.$,
       children: [jsx(Y, {}), jsx("span", {
-        className: _$$s.fontMedium.$,
+        className: cssBuilderInstance.fontMedium.$,
         children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_header")
       }), jsx("span", {
         children: renderI18nText("universal_upgrade.enterpise_plan_banner_v2.banner_body_text", {
@@ -45,7 +45,7 @@ function R() {
         })
       })]
     }), jsx(e6, {
-      className: _$$s.colorBgSecondary.colorBorderDisabled.bSolid.b1.bRadius4.px8.$,
+      className: cssBuilderInstance.colorBgSecondary.colorBorderDisabled.bSolid.b1.bRadius4.px8.$,
       style: styleBuilderInstance.add({
         paddingTop: "3px",
         paddingBottom: "3px"
@@ -65,13 +65,13 @@ function N({
   setBillingPeriod: t
 }) {
   return jsxs("div", {
-    className: _$$s.colorBgSecondary.bRadius7.bSolid.b1.colorBorder.inlineBlock.p2.$,
+    className: cssBuilderInstance.colorBgSecondary.bRadius7.bSolid.b1.colorBorder.inlineBlock.p2.$,
     children: [jsx("button", {
-      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.MONTHLY, _$$s.colorBgSecondary.colorTextSecondary).$,
+      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.MONTHLY, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(SubscriptionType.MONTHLY),
       children: renderI18nText("plan_comparison.campfire.monthly")
     }), jsx("button", {
-      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.ANNUAL, _$$s.colorBgSecondary.colorTextSecondary).$,
+      className: cssBuilderInstance.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.ANNUAL, cssBuilderInstance.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(SubscriptionType.ANNUAL),
       children: renderI18nText("plan_comparison.campfire.annual")
     })]
@@ -145,7 +145,7 @@ export function $$P0({
   let j = !u && Hw(w);
   return jsxs("div", {
     children: [isNonUsdUserCurrency() && jsx("div", {
-      className: _$$s.flex.justifyEnd.$,
+      className: cssBuilderInstance.flex.justifyEnd.$,
       children: jsx(_$$D, {
         currency: e,
         dropdownShown: v,
@@ -154,7 +154,7 @@ export function $$P0({
         shortFormDisplay: !0
       })
     }), jsx("div", {
-      className: _$$s.grid.bSolid.b1.colorBorder.bRadius8.overflowHidden.colorBgTertiary.gap1.$,
+      className: cssBuilderInstance.grid.bSolid.b1.colorBorder.bRadius8.overflowHidden.colorBgTertiary.gap1.$,
       style: styleBuilderInstance.add({
         gridTemplateColumns: `repeat(${M.length}, 1fr)`
       }).$,
@@ -220,24 +220,24 @@ function O({
     features
   } = e;
   return jsxs("div", {
-    className: _$$s.p24.pt16.colorBg.$,
+    className: cssBuilderInstance.p24.pt16.colorBg.$,
     children: [jsxs("div", {
       id: `${planTier}Title`,
-      className: _$$s.font15.fontMedium.lh24.$,
+      className: cssBuilderInstance.font15.fontMedium.lh24.$,
       children: [name, l]
     }), jsx("div", {
-      className: _$$s.font11.colorTextSecondary.h32.$,
+      className: cssBuilderInstance.font11.colorTextSecondary.h32.$,
       children: description
     }), jsx(hK, {
       height: 16
     }), jsx("div", {
       id: `${planTier}PlanCard`,
-      className: _$$s.flex.flexColumnReverse.$,
+      className: cssBuilderInstance.flex.flexColumnReverse.$,
       style: styleBuilderInstance.add({
         minHeight: "198px"
       }).$,
       children: jsxs("div", {
-        className: _$$s.grid.gap16.$,
+        className: cssBuilderInstance.grid.gap16.$,
         "data-testid": `${planTier}Prices`,
         children: [jsx(j, {
           planDetails: e,
@@ -246,12 +246,12 @@ function O({
           monthlyPrices: s?.monthly,
           annualPrices: s?.annual
         }), jsxs("div", {
-          className: _$$s.mb12.$,
+          className: cssBuilderInstance.mb12.$,
           children: [r, planTier === FPlanNameType.ORG ? jsx("div", {
-            className: _$$s.font11.lh16.alignCenter.mt4.$,
+            className: cssBuilderInstance.font11.lh16.alignCenter.mt4.$,
             children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
-                className: _$$s.colorTextBrand.$,
+                className: cssBuilderInstance.colorTextBrand.$,
                 onClick: () => u(showModalHandler({
                   type: lk,
                   data: {
@@ -262,7 +262,7 @@ function O({
               })
             })
           }) : planTier === FPlanNameType.PRO && d ? jsx("div", {
-            className: _$$s.font11.lh16.alignCenter.mt4.$,
+            className: cssBuilderInstance.font11.lh16.alignCenter.mt4.$,
             children: jsx(linkWithTracking, {
               onClick: () => d(t),
               "data-testid": "plan-information-upgrade-existing",
@@ -278,19 +278,19 @@ function O({
         })]
       })
     }), jsx("div", {
-      className: _$$s.bSolid.bb1.colorBorder.wFull.$
+      className: cssBuilderInstance.bSolid.bb1.colorBorder.wFull.$
     }), jsxs("div", {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: [planTier === FPlanNameType.ORG && jsx("div", {
-        className: _$$s.font13.fontMedium.lh24.$,
+        className: cssBuilderInstance.font13.fontMedium.lh24.$,
         children: renderI18nText("plan_comparison.campfire.everything_on_pro")
       }), features.map((e, t) => jsxs("div", {
-        className: _$$s.flex.gap2.$,
+        className: cssBuilderInstance.flex.gap2.$,
         children: [jsx("div", {
-          className: _$$s.minW24.$,
+          className: cssBuilderInstance.minW24.$,
           children: jsx(_$$g, {})
         }), jsx("div", {
-          className: _$$s.font13.lh24.$,
+          className: cssBuilderInstance.font13.lh24.$,
           children: e
         })]
       }, t))]
@@ -325,13 +325,13 @@ function D({
 }
 function L() {
   return jsx("div", {
-    className: _$$s.font13.lh24.$,
+    className: cssBuilderInstance.font13.lh24.$,
     children: j_
   });
 }
 function F() {
   return jsx("div", {
-    className: _$$s.font13.lh24.$,
+    className: cssBuilderInstance.font13.lh24.$,
     children: renderI18nText("plan_comparison.campfire.edu.price")
   });
 }
@@ -343,7 +343,7 @@ function M({
 }) {
   var a;
   return jsx("div", {
-    className: _$$s.mt16.$,
+    className: cssBuilderInstance.mt16.$,
     children: e ? jsx(TrackingProvider, {
       name: "Pricing Component",
       properties: {
@@ -355,10 +355,10 @@ function M({
       children: t.map(t => {
         let a = i === SubscriptionType.MONTHLY && r ? r[t.seatType] : e[t.seatType];
         return isNullish(a) ? null : jsxs("div", {
-          className: _$$s.font13.lh24.flex.justifyBetween.$,
+          className: cssBuilderInstance.font13.lh24.flex.justifyBetween.$,
           "data-testid": `${i === SubscriptionType.MONTHLY && r ? "monthly" : "yearly"}-prices`,
           children: [jsxs("div", {
-            className: _$$s.flex.itemsCenter.gap4.$,
+            className: cssBuilderInstance.flex.itemsCenter.gap4.$,
             children: [t.icon, t.name]
           }), jsx("div", {
             children: renderI18nText("plan_comparison.campfire.price_per_month", {

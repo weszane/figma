@@ -8,7 +8,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleCom
 import { H_ } from "../905/963340";
 import { O } from "../905/969533";
 import { trackEventAnalytics } from "../905/449184";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { setBrowserTileSortView } from "../905/34809";
@@ -24,7 +24,7 @@ import { E as _$$E } from "../905/409917";
 export function $$x7(e) {
   let t = wW(e.userId).user;
   return jsx("div", {
-    className: _$$s.mr4.flex.itemsCenter.$,
+    className: cssBuilderInstance.mr4.flex.itemsCenter.$,
     children: t && jsx(H8, {
       user: t,
       size: 14
@@ -37,7 +37,7 @@ export function $$N5(e) {
   if (!e.planOption?.plan_id) return null;
   let i = "org" === e.planOption.plan_type && e.planOption.plan_id ? r[e.planOption.plan_id]?.img_url : t[e.planOption.plan_id]?.img_url;
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.$,
     children: jsx(H, {
       entityId: e.planOption.plan_id,
       entityName: e.planOption.label,

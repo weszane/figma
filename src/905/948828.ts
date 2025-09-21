@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { g as _$$g } from "../905/125190";
 import { q } from "../905/636218";
 import { getFeatureFlags } from "../905/601108";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { EK, tg } from "../figma_app/396432";
@@ -198,13 +198,13 @@ export function $$k2(e) {
     }
     let d = e.includes(t);
     return (3 !== t || isSitesFeatureEnabled()) && (5 !== t || getFeatureFlags().bake_full_seat_description) ? jsxs("div", {
-      className: _$$s.flex.my4.$,
+      className: cssBuilderInstance.flex.my4.$,
       children: [d ? jsx(_$$g, {}) : jsx(q, {
         style: {
           "--color-icon": "var(--color-icon-tertiary)"
         }
       }), jsxs("div", {
-        className: _$$s.font13.lh24.$$if(!d, _$$s.colorTextSecondary).$,
+        className: cssBuilderInstance.font13.lh24.$$if(!d, cssBuilderInstance.colorTextSecondary).$,
         children: [i, 3 === t && d && jsx(O, {}), 5 === t && d && !getFeatureFlags().ai_ga && jsx(O, {})]
       })]
     }, t) : null;
@@ -215,10 +215,10 @@ function R({
   isStaticColor: t,
   isNoColor: i
 }) {
-  let r = _$$s.colorTextBrandTertiary.colorBgBrandTertiary;
-  t ? r = _$$s.colorTextDesignTertiary.colorBgDesignTertiary : i && (r = _$$s.colorText.colorBgTertiary);
+  let r = cssBuilderInstance.colorTextBrandTertiary.colorBgBrandTertiary;
+  t ? r = cssBuilderInstance.colorTextDesignTertiary.colorBgDesignTertiary : i && (r = cssBuilderInstance.colorText.colorBgTertiary);
   return jsx("span", {
-    className: _$$s.ml4.px4.py2.fontNormal.font11.lh16.bRadius5.add(r).$,
+    className: cssBuilderInstance.ml4.px4.py2.fontNormal.font11.lh16.bRadius5.add(r).$,
     style: styleBuilderInstance.add({
       verticalAlign: "text-bottom"
     }).$,

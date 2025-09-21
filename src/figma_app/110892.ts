@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonWide } from "../905/521428";
 import { UserActionState } from "../figma_app/763686";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -31,7 +31,7 @@ export function $$y0() {
   }, [v]), !T || !S.length || I || e) ? null : jsx(TrackingProvider, {
     name: "Slides conversion properties panel entrypoint",
     children: jsx(Ad, {
-      appendedClassName: _$$s.pt4.$,
+      appendedClassName: cssBuilderInstance.pt4.$,
       label: null,
       input: jsx(ButtonWide, {
         variant: "secondary",

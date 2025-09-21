@@ -31,7 +31,7 @@ import { Kt } from "../figma_app/835688";
 import { l as _$$l } from "../9410/430547";
 import { Y } from "../905/1768";
 import { q } from "../9410/847736";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ModalContainer } from "../figma_app/918700";
 import { vN, Jn, S7 } from "../7222/396421";
 import { uRR, M$q } from "../figma_app/27776";
@@ -55,7 +55,7 @@ function G({
     enableEscapeToClose: canDismiss,
     "data-testid": "slides-template-modal",
     children: jsx("div", {
-      className: _$$s.overflowHidden.$,
+      className: cssBuilderInstance.overflowHidden.$,
       style: {
         height: "600px"
       },

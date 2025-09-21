@@ -24,7 +24,7 @@ import { ViewTypeEnum } from "../figma_app/471068";
 import { SortOrder } from "../figma_app/756995";
 import { Xg, qf, mM } from "../905/375175";
 import { y as _$$y } from "../905/171275";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 import { E as _$$E2 } from "../905/53857";
 import { z as _$$z } from "../905/947624";
@@ -61,7 +61,7 @@ import { i as _$$i } from "../905/977961";
 import { TF, l1, X_, TM } from "../905/811749";
 function N(e) {
   return jsxs("div", {
-    className: _$$s2.gap8.h40.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.gap8.h40.flex.flexRow.itemsCenter.$,
     children: [jsx("div", {
       className: "tile_drag_image--thumbnailContainer--1rhVM",
       children: jsx(_$$e, {
@@ -240,7 +240,7 @@ function ef(e) {
         maxWidth: "100%",
         height: "fit-content"
       },
-      className: _$$s2.$$if(e.hideOverflow, _$$s2.overflowHidden).$,
+      className: cssBuilderInstance.$$if(e.hideOverflow, cssBuilderInstance.overflowHidden).$,
       onClick: t => {
         e.propogateOnClick || t.stopPropagation();
         o();

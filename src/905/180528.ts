@@ -9,7 +9,7 @@ import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { getSelectedFile } from "../905/766303";
@@ -122,7 +122,7 @@ export function $$O1({
       redirectToHubFile: !0
     })
   }) : U ? jsx("div", {
-    className: _$$s.pl4.$,
+    className: cssBuilderInstance.pl4.$,
     children: g ? jsx(L1, {
       libraryKey: i
     }) : jsx(KP, {

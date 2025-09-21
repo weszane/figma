@@ -5,7 +5,7 @@ import n from "classnames";
 import { P as _$$P } from "../5430/455826";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { lo, wn, dl } from "../9420/795870";
@@ -95,10 +95,10 @@ function w({
             maxHeight: Math.min(B - 49 - 65, 652)
           },
           children: [P && j && jsx("div", {
-            className: _$$s.mb16.$,
+            className: cssBuilderInstance.mb16.$,
             children: jsx("label", {
               htmlFor: "updatePaymentDetails",
-              className: _$$s.colorTextSecondary.$,
+              className: cssBuilderInstance.colorTextSecondary.$,
               children: renderI18nText("change_payment.update_payment_details_description_default")
             })
           }), jsx(S, {

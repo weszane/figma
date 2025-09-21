@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { H as _$$H } from "../905/507464";
 import { j as _$$j } from "../905/206476";
 import { P } from "../905/697522";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
@@ -38,7 +38,7 @@ function N(e) {
       title: jsx(T, {
         invoiceType: e.invoiceType
       }),
-      innerContainerClassName: _$$s.p16.$,
+      innerContainerClassName: cssBuilderInstance.p16.$,
       disableHeaderBottomBorder: !0,
       onClose: l,
       maxWidth: 380,
@@ -108,17 +108,17 @@ export let $$A0 = registerModal(function (e) {
     orgId: e.orgId,
     invoiceType: _ ? "true_up" : "annual",
     invoiceDetails: jsxs("div", {
-      className: _$$s.flex.flexColumn.p16.gap16.mx8.mb16.b1.colorBorder.bSolid.radiusMedium.$,
+      className: cssBuilderInstance.flex.flexColumn.p16.gap16.mx8.mb16.b1.colorBorder.bSolid.radiusMedium.$,
       children: [a.sort(compareProductAccessTypes).map(t => {
         let a = u[t] ?? 0;
         let i = tI(t);
         return jsxs("div", {
-          className: _$$s.pb16.bb1.colorBorder.bSolid.flex.justifyBetween.gap16.$,
+          className: cssBuilderInstance.pb16.bb1.colorBorder.bSolid.flex.justifyBetween.gap16.$,
           "data-testid": `invoice-details-${t}`,
           children: [jsxs("div", {
-            className: _$$s.flex.gap8.$,
+            className: cssBuilderInstance.flex.gap8.$,
             children: [jsx("span", {
-              className: _$$s.inlineFlex.$,
+              className: cssBuilderInstance.inlineFlex.$,
               children: designSet.has(t) ? function (e) {
                 switch (e) {
                   case FProductAccessType.DESIGN:
@@ -133,7 +133,7 @@ export let $$A0 = registerModal(function (e) {
                 size: "24"
               })
             }), jsx("span", {
-              className: _$$s.selfCenter.$,
+              className: cssBuilderInstance.selfCenter.$,
               children: _ ? getI18nString("plan_invoices.new_seats_quantity", {
                 quantity: a,
                 seatType: i
@@ -149,7 +149,7 @@ export let $$A0 = registerModal(function (e) {
           })]
         }, t);
       }), jsxs("div", {
-        className: _$$s.textBodyMediumStrong.flex.justifyBetween.gap16.$,
+        className: cssBuilderInstance.textBodyMediumStrong.flex.justifyBetween.gap16.$,
         "data-testid": "invoice-details-total",
         children: [jsx("div", {
           children: getI18nString("org_admin_settings.billing.finalize_invoice_modal.invoice_subtotal")

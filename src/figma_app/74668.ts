@@ -21,7 +21,7 @@ import { M3 } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -191,7 +191,7 @@ function ea({
         let i = tx(t);
         return jsx(m3, {
           dsStyle: t,
-          additionalClassName: _$$s.flex.wFull.$,
+          additionalClassName: cssBuilderInstance.flex.wFull.$,
           children: jsx($$eh0, {
             dsStyle: t,
             hideContextMenu: m,
@@ -379,12 +379,12 @@ function ec({
         className: $u,
         children: name
       }), p && _ && jsx("div", {
-        className: _$$s.flex.alignCenter.justifyCenter.ml4.$,
+        className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
         children: jsx(KP, {
           libraryKey
         })
       }), f && jsx("div", {
-        className: _$$s.flex.alignCenter.justifyCenter.ml4.$,
+        className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
         children: jsx(_$$E2, {
           libraryKey
         })
@@ -402,12 +402,12 @@ function ec({
         className: $u,
         children: name
       }), p && _ && jsx("div", {
-        className: _$$s.flex.alignCenter.justifyCenter.ml4.$,
+        className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
         children: jsx(KP, {
           libraryKey
         })
       }), f && jsx("div", {
-        className: _$$s.flex.alignCenter.justifyCenter.ml4.$,
+        className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
         children: jsx(_$$E2, {
           libraryKey
         })

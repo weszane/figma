@@ -7,7 +7,7 @@ import { useState, useRef, useCallback, useEffect, useMemo, createElement, useCo
 import n, { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { usePrefersMediaQuery } from "../figma_app/469468";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../5430/816957";
 import { Lj } from "../figma_app/835219";
@@ -211,7 +211,7 @@ function Y(e) {
       let i = itemsByPageId[e][0].containing_frame?.pageName;
       return i && jsx("div", {
         ref: t ? h : void 0,
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: jsx("button", {
           className: a()(z, {
             [$]: t
@@ -393,7 +393,7 @@ function eu({
     children: [n && jsx("div", {
       className: G,
       children: jsx("div", {
-        className: a()(_$$s.wFull.$, z, $),
+        className: a()(cssBuilderInstance.wFull.$, z, $),
         children: getI18nString("community.detail_view.library_viewer.search_no_results")
       })
     }), jsxs("div", {
@@ -403,10 +403,10 @@ function eu({
         useOriginalSrcFills_DEPRECATED: !0,
         className: "library_detail_page_viewer--libraryViewerEmptyIcon--6OLZt"
       }), jsx("div", {
-        className: _$$s.flexRow.$,
+        className: cssBuilderInstance.flexRow.$,
         children: renderI18nText("search.empty_state.no_results_matching", {
           searchQuery: jsx("span", {
-            className: _$$s.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: e
           })
         })
@@ -414,11 +414,11 @@ function eu({
     })]
   });
   let f = jsx("div", {
-    className: n ? _$$s.flexRow.mb8.$ : _$$s.flexRow.mb16.$,
+    className: n ? cssBuilderInstance.flexRow.mb8.$ : cssBuilderInstance.flexRow.mb16.$,
     children: renderI18nText("community.detail_view.library_viewer.search_results_num", {
       numResults: numSearchResults,
       query: jsx("span", {
-        className: _$$s.fontBold.$,
+        className: cssBuilderInstance.fontBold.$,
         children: e
       })
     })
@@ -1412,7 +1412,7 @@ export function $$tF0({
   let l = hasHubFileOrPresetKey(r.id) && t();
   return a && !l ? jsxs(Fragment, {
     children: [jsx("h3", {
-      className: _$$s.font14.fontSemiBold.mb16.$,
+      className: cssBuilderInstance.font14.fontSemiBold.mb16.$,
       children: getI18nString("community.embed.preview_title")
     }), jsx(_$$A, {
       enableEmbedOnSmallScreens: !0,

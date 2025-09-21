@@ -313,7 +313,7 @@ import { a as _$$a2 } from '../940032c6/310444';
 import { A as _$$A15 } from '../af221b13/388839';
 import { K as _$$K6 } from '../b2835def/230877';
 import u_ from '../b2835def/987714';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
 import { a8 as _$$a, Dm } from '../figma_app/8833';
@@ -1261,7 +1261,7 @@ function e0({
   return jsx(setupThemeContext, {
     brand: t,
     children: jsx('div', {
-      className: em()(Dm, _$$s.fixed.flex.justifyCenter.eventsNone.$),
+      className: em()(Dm, cssBuilderInstance.fixed.flex.justifyCenter.eventsNone.$),
       style: {
         marginBottom: r,
         marginLeft: -1 * rightOffset,
@@ -1553,7 +1553,7 @@ function tD({
   } = gH();
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: em()(_$$s.pt16.pb24.px16.flex.flexColumn.gap2.$, {
+      className: em()(cssBuilderInstance.pt16.pb24.px16.flex.flexColumn.gap2.$, {
         [_$$me]: showSeparator
       }),
       children: jsx(_$$_, {
@@ -1587,13 +1587,13 @@ function t$({
   let c = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let u = useCurrentFileKey() === null;
   return e === J_.LOADING || !c || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx('div', {
-    className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
     children: jsx(tG, {
       debouncedSearchQuery: t,
       status: e
     })
   }) : jsx(_$$P, {
-    className: em()(_$$s.px8.hFull.$),
+    className: em()(cssBuilderInstance.px8.hFull.$),
     onScroll: (e, t) => {
       onScroll(e, t);
       onShowSeparatorScroll(e, t);
@@ -1601,7 +1601,7 @@ function t$({
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
     children: jsx('div', {
-      className: em()(Vg, _$$s.pb12.$),
+      className: em()(Vg, cssBuilderInstance.pb12.$),
       children: n.map(e => jsx(tV, {
         file: e
       }, e.key))
@@ -1618,7 +1618,7 @@ function tV({
   let i = useSelector(e => e.currentTeamId);
   let a = useSelector(e => e.selectedView);
   return jsx('div', {
-    className: em()(_$$s.pt8.px8.$, _$$Fj),
+    className: em()(cssBuilderInstance.pt8.px8.$, _$$Fj),
     children: jsx(GQ, {
       activeFileUsers: [],
       currentUser: t,
@@ -1650,11 +1650,11 @@ function tG({
 }) {
   return t === J_.NO_QUERY_RESULTS ? renderI18nText('slides.templates.file_picker.no_files_match', {
     searchQuery: jsx('p', {
-      className: _$$s.colorText.textBodyLargeStrong.$,
+      className: cssBuilderInstance.colorText.textBodyLargeStrong.$,
       children: e
     })
   }) : t === J_.NO_RECENT_FILES ? jsx('h1', {
-    className: _$$s.colorText.textBodyLarge.$,
+    className: cssBuilderInstance.colorText.textBodyLarge.$,
     children: renderI18nText('cooper.templates.import_from_design.no_recent_files')
   }) : null;
 }
@@ -2701,7 +2701,7 @@ function nX({
           templateSet: E[0]
         })
       }) : jsx('div', {
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         children: E.map(e => jsx(nH, {
           templateSet: e,
           library: T
@@ -3314,7 +3314,7 @@ function lj({
 }) {
   let t = e ? renderI18nText('cooper.templates.couldnt_find_templates_error', {
     searchTerm: jsx('span', {
-      className: _$$s.fontBold.$,
+      className: cssBuilderInstance.fontBold.$,
       children: e
     })
   }) : renderI18nText('cooper.templates.no_templates_found');
@@ -4071,7 +4071,7 @@ function lG({
         className: 'cooper_template_view--orgAvatar--wRUGh',
         children: jsx(lN, {})
       }), jsx('div', {
-        className: _$$s.textBodyLargeStrong.$,
+        className: cssBuilderInstance.textBodyLargeStrong.$,
         children: getI18nString('cooper.templates.from_plan_name', {
           planName: e
         })
@@ -4217,14 +4217,14 @@ function lY({
         type: Ef.DEFAULT
       })
     }), jsx(_$$P, {
-      className: _$$s.hFull.$,
+      className: cssBuilderInstance.hFull.$,
       children: jsx('div', {
         className: 'xz9dl7a',
         children: h.length === 1 && h[0] ? jsx(nq, {
           library: g,
           templateSet: h[0]
         }) : jsx('div', {
-          className: _$$s.relative.$,
+          className: cssBuilderInstance.relative.$,
           children: h.map(e => jsx(nH, {
             templateSet: e,
             library: g
@@ -4407,7 +4407,7 @@ function l5({
     'enableEscapeToClose': !0,
     'data-testid': 'cooper-template-modal',
     'children': jsx('div', {
-      className: _$$s.overflowHidden.$,
+      className: cssBuilderInstance.overflowHidden.$,
       style: {
         height: '600px'
       },
@@ -5393,12 +5393,12 @@ let oO = memo(({
         top: 24
       },
       children: [jsx('div', {
-        className: _$$s.wFull.h2.colorBgTertiary.$
+        className: cssBuilderInstance.wFull.h2.colorBgTertiary.$
       }), jsxs(AutoLayout, {
         spacing: 8,
         verticalAlignItems: 'center',
         children: [jsx(SvgComponent, {
-          className: _$$s.colorIcon.$,
+          className: cssBuilderInstance.colorIcon.$,
           svg: _$$A11
         }), jsx('div', {
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text')
@@ -5537,16 +5537,16 @@ let oO = memo(({
           },
           spacing: '12px',
           children: [jsx(SvgComponent, {
-            className: _$$s.colorIcon.$,
+            className: cssBuilderInstance.colorIcon.$,
             svg: e
           }), jsx('p', {
-            className: _$$s.px4.alignCenter.$,
+            className: cssBuilderInstance.px4.alignCenter.$,
             children: t
           }), r]
         });
       })()
     }), !!h && A != null && jsx('div', {
-      className: _$$s.bt1.bSolid.colorBorder.p8.$,
+      className: cssBuilderInstance.bt1.bSolid.colorBorder.p8.$,
       children: jsx(ButtonWide, {
         variant: 'secondary',
         onClick: () => {
@@ -7096,18 +7096,18 @@ let aD = forwardRef(({
   ref: l,
   children: jsxs('div', {
     className: em()({
-      [_$$s.px16.py12.$]: n === 'normal',
-      [_$$s.px12.py12.$]: n === 'small'
+      [cssBuilderInstance.px16.py12.$]: n === 'normal',
+      [cssBuilderInstance.px12.py12.$]: n === 'small'
     }),
     children: [e ? jsx('p', {
-      className: _$$s.textBodyMediumStrong.pb12.colorText.$,
+      className: cssBuilderInstance.textBodyMediumStrong.pb12.colorText.$,
       children: e
     }) : null, t]
   })
 }));
 function a$() {
   return jsx('div', {
-    className: _$$s.bSolid.bb1.wFull.colorBorder.$
+    className: cssBuilderInstance.bSolid.bb1.wFull.colorBorder.$
   });
 }
 function aV({
@@ -7695,13 +7695,13 @@ function sr({
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('cooper.inline_menu.fill_panel.custom_color_picker_button_tooltip')
     },
-    'className': _$$s.h32.w32.flex.itemsCenter.justifyCenter.$,
+    'className': cssBuilderInstance.h32.w32.flex.itemsCenter.justifyCenter.$,
     'aria-label': getI18nString('cooper.inline_menu.fill_panel.custom_color_picker_button_tooltip'),
     'onClick': e,
     'children': jsx(_$$oW, {
       src: sn,
       alt: '',
-      className: _$$s.w24.h24.$
+      className: cssBuilderInstance.w24.h24.$
     })
   });
 }
@@ -7813,7 +7813,7 @@ function sh({
         }, l)
       }, l))]
     }), jsx('div', {
-      className: _$$s.py8.pl16.pr12.textBodyMediumStrong.colorTextSecondary.$,
+      className: cssBuilderInstance.py8.pl16.pr12.textBodyMediumStrong.colorTextSecondary.$,
       children: getI18nString('cooper.inline_menu.fill_submenu.color.other_colors')
     }), jsxs('div', {
       className: sp,
@@ -9124,7 +9124,7 @@ function da({
     children: jsx(_$$E2, {
       name: _$$_2.ImageCropSlider,
       children: jsx('div', {
-        className: _$$s.w150.contentCenter.$,
+        className: cssBuilderInstance.w150.contentCenter.$,
         children: jsx(_$$A6, {
           'aria-label': getI18nString('cooper.inline_menu.image.scale_image'),
           'value': s,
@@ -10855,7 +10855,7 @@ function uu({
       return jsx('div', {
         className: 'x78zum5 xh8yej3 xctdprf x1n5zjp5 x9f619',
         children: jsxs('div', {
-          'className': _$$s.wFull.h24.flex.justifyCenter.$,
+          'className': cssBuilderInstance.wFull.h24.flex.justifyCenter.$,
           'data-element-target': 'left-panel-add-template-button',
           'children': [jsxs(RecordableButton, {
             'className': 'x78zum5 x6s0dn4 xxk0z11 x16v0e3u x1bamp8i xl56j7k xq5q4zq x1iyjqo2 xy5cce4 xgfja2r xda6en0',
@@ -10883,7 +10883,7 @@ function uu({
       onResize: e => m(b - e),
       disableResizing: !f,
       unsetSizeWhenDisabled: !0,
-      className: _$$s.relative.flex.flexColumn.$$if(!f, _$$s.flex1.overflowHidden).$,
+      className: cssBuilderInstance.relative.flex.flexColumn.$$if(!f, cssBuilderInstance.flex1.overflowHidden).$,
       children: jsx(_$$G2, {})
     }), c && u && jsx(Hg, {
       isLayersPanelExpanded: h,
@@ -11956,7 +11956,7 @@ function xl() {
       hideBorderBottom: !I,
       dataTestId: 'cooperFieldsTextPanel',
       children: [jsxs('div', {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx(xi, {
           icon: jsx(_$$I3, {}),
           title: getI18nString('cooper.properties_panel.fields.text')
@@ -12028,9 +12028,9 @@ function xi({
   title: t
 }) {
   return jsxs('div', {
-    className: _$$s.flex.flexRow.pl16.pb14.pt12.$,
+    className: cssBuilderInstance.flex.flexRow.pl16.pb14.pt12.$,
     children: [e, jsx('h2', {
-      className: _$$s.colorText.textBodyMediumStrong.pl8.$,
+      className: cssBuilderInstance.colorText.textBodyMediumStrong.pl8.$,
       children: t
     })]
   });
@@ -14066,7 +14066,7 @@ function pK({
     }), jsx(DialogBody, {
       padding: 0,
       children: jsxs('div', {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx(pH, {
           pickerRef: l,
           paint: e,

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, createContext, useEffect, useContext } from "react";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { a as _$$a, i as _$$i } from "../905/44915";
 import { A } from "../905/780920";
@@ -36,7 +36,7 @@ export function $$g0({
     value: _,
     children: jsx("div", {
       ref: m,
-      className: _$$s.grid.$,
+      className: cssBuilderInstance.grid.$,
       style: {
         gridTemplateColumns: `repeat(${t}, ${s || "minmax(0, 1fr)"})`,
         padding: `0 ${a}px ${a}px ${a}px`,
@@ -140,7 +140,7 @@ export function $$g0({
       active: D
     }), [D]);
     return jsx("button", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       style: styleBuilderInstance.$$if(f, {
         gridColumn: "1 / -1"
       }).$,
@@ -168,7 +168,7 @@ export function $$g0({
     children: e
   }) {
     return jsx("div", {
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       children: e
     });
   };

@@ -17,7 +17,7 @@ import { getFeatureFlags, M as _$$M } from "../905/601108";
 import { useDebounce } from 'use-debounce';
 import { getFeatureFlagRulesExport, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { BigTextInputForwardRef } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
@@ -38,25 +38,25 @@ let D = memo(function (e) {
   return jsxs(Fragment, {
     children: [jsx(_$$d, {
       label: jsxs("div", {
-        className: _$$s.flex.justifyBetween.itemsCenter.$,
+        className: cssBuilderInstance.flex.justifyBetween.itemsCenter.$,
         children: [jsxs("div", {
-          className: _$$s.flex.itemsCenter.gap8.$,
+          className: cssBuilderInstance.flex.itemsCenter.gap8.$,
           children: [jsx(Label, {
             children: e.flagName
           }), jsxs("div", {
-            className: _$$s.flex.itemsCenter.gap2.$,
+            className: cssBuilderInstance.flex.itemsCenter.gap2.$,
             children: [jsx(Link, {
               newTab: !0,
               href: `https://console.statsig.com/5ETXMP5xDW3P7AMyQ14tey/gates/${encodeURIComponent(e.flagName)}`,
               children: jsx("img", {
-                className: _$$s.flex.$,
+                className: cssBuilderInstance.flex.$,
                 src: buildUploadUrl("bf11a5c5f29b282039d94f59b56517aa288aa536"),
                 alt: getI18nString("feature_flag_overrides.statsig_logo"),
                 width: "16",
                 height: "16"
               })
             }), jsx(_$$X, {
-              className: _$$s.cursorPointer.$,
+              className: cssBuilderInstance.cursorPointer.$,
               onClick: () => {
                 navigator.clipboard.writeText(e.flagName);
                 t(VisualBellActions.enqueue({
@@ -69,13 +69,13 @@ let D = memo(function (e) {
               "data-tooltip": getI18nString("feature_flag_overrides.copy_to_clipboard"),
               "data-tooltip-type": KindEnum.TEXT
             }), !e.status && a && e.enabled !== i && jsx(Z, {
-              className: _$$s.cursorPointer.$,
+              className: cssBuilderInstance.cursorPointer.$,
               "data-tooltip": `This flag is ${i ? "enabled" : "disabled"} in the current tab, but ${e.enabled ? "enabled" : "disabled"} in statsig. Refresh the tab to apply the change.`,
               "data-tooltip-type": KindEnum.TEXT
             })]
           })]
         }), e.status ? jsxs("div", {
-          className: _$$s.flex.gap8.itemsCenter.$,
+          className: cssBuilderInstance.flex.gap8.itemsCenter.$,
           children: ["pending" === e.status && jsx(_$$x, {
             "aria-label": getI18nString("feature_flag_overrides.pending_change")
           }), "loading" === e.status && jsx("div", {
@@ -92,9 +92,9 @@ let D = memo(function (e) {
       onChange: t => e.onToggle?.(e.flagName, t),
       children: e.flagDescription || "-"
     }, e.flagName), e.errorMessage && jsx("div", {
-      className: _$$s.colorBgDanger.bRadius4.$,
+      className: cssBuilderInstance.colorBgDanger.bRadius4.$,
       children: jsx("div", {
-        className: _$$s.p8.colorTextOndanger.$,
+        className: cssBuilderInstance.p8.colorTextOndanger.$,
         children: e.errorMessage
       })
     })]
@@ -128,14 +128,14 @@ function F(e) {
   let R = getFeatureFlags().fpl_window_scroll_container;
   let N = jsxs(Fragment, {
     children: [jsxs("div", {
-      className: _$$s.sticky.top0.zIndex1.colorBg.pt8.$,
+      className: cssBuilderInstance.sticky.top0.zIndex1.colorBg.pt8.$,
       children: [renderI18nText("feature_flag_overrides.description"), jsxs("div", {
-        className: _$$s.flex.gap8.pt8.$,
+        className: cssBuilderInstance.flex.gap8.pt8.$,
         children: [jsx(BigTextInputForwardRef, {
           placeholder: getI18nString("feature_flag_overrides.search_feature_flags"),
           value: i,
           onChange: e => a(e.target.value),
-          className: _$$s.wFull.$,
+          className: cssBuilderInstance.wFull.$,
           ref: t
         }), jsx(setupToggleButton, {
           onIcon: jsx(M, {}),
@@ -184,9 +184,9 @@ function F(e) {
         top: 0
       },
       scrolling: R ? void 0 : "custom",
-      className: R ? _$$s.flex.flexColumn.gap8.$ : void 0,
+      className: R ? cssBuilderInstance.flex.flexColumn.gap8.$ : void 0,
       children: R ? N : jsx("div", {
-        className: _$$s.flex.flexColumn.gap8.$,
+        className: cssBuilderInstance.flex.flexColumn.gap8.$,
         children: N
       })
     }), jsx(DialogFooter, {
@@ -266,7 +266,7 @@ function V(e) {
   return jsxs(Fragment, {
     children: [jsx(DialogBody, {
       children: jsxs("div", {
-        className: _$$s.flex.flexColumn.gap8.$,
+        className: cssBuilderInstance.flex.flexColumn.gap8.$,
         children: [m ? renderI18nText("feature_flag_overrides.waiting_for_changes_to_propagate") : renderI18nText("feature_flag_overrides.review_changes_description"), i.map(i => jsx(D, {
           flagName: i,
           flagDescription: e.flagDescriptions[i],

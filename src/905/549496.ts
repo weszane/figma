@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/920165";
 import { trackEventAnalytics } from "../905/449184";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { x } from "../905/211326";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { pI, nx, _E } from "../figma_app/443991";
@@ -217,16 +217,16 @@ class w extends Component {
           children: jsx(x, {
             isLoading: this.props.avatarEditorState.status !== hv.POSITIONING,
             children: () => jsxs("div", {
-              className: _$$s.flex.flexColumn.gap24.itemsCenter.$,
+              className: cssBuilderInstance.flex.flexColumn.gap24.itemsCenter.$,
               children: [jsx("canvas", {
                 ref: this.mountCanvas,
                 style: this.canvasStyle,
                 onMouseDown: this.onCanvasDown
               }), jsxs("div", {
-                className: _$$s.itemSelfStretch.flex.gap16.itemsCenter.font20.$,
+                className: cssBuilderInstance.itemSelfStretch.flex.gap16.itemsCenter.font20.$,
                 children: [jsx("span", {
                   "aria-hidden": "true",
-                  className: _$$s.selectNone.$,
+                  className: cssBuilderInstance.selectNone.$,
                   children: "-"
                 }), jsx(_$$A, {
                   "aria-label": getI18nString("avatar_editor.scale"),
@@ -249,7 +249,7 @@ class w extends Component {
                   }
                 }), jsx("span", {
                   "aria-hidden": "true",
-                  className: _$$s.selectNone.$,
+                  className: cssBuilderInstance.selectNone.$,
                   children: "+"
                 })]
               }), jsx(ButtonBasePrimaryTracked, {

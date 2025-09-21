@@ -21,7 +21,7 @@ import { X as _$$X } from "../905/736922";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createLocalStorageAtom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { n as _$$n } from "../draftjs_composer/589474";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { uQ } from "../figma_app/311375";
@@ -503,7 +503,7 @@ export default App
               onClick: () => {
                 h(!1);
               },
-              className: _$$s.cursorPointer.wFull.$,
+              className: cssBuilderInstance.cursorPointer.wFull.$,
               children: jsx(ec, {})
             })
           }), jsx(DialogBody, {
@@ -524,7 +524,7 @@ function ec() {
   let s = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name, t);
   return jsx(DialogTitle, {
     children: jsxs("div", {
-      className: _$$s.flex.itemsCenter.fontSemiBold.$,
+      className: cssBuilderInstance.flex.itemsCenter.fontSemiBold.$,
       children: [e, jsx(_$$R, {}), jsx(_$$q, {}), s]
     })
   });
@@ -539,9 +539,9 @@ function ed() {
     defaultSize: 300,
     onResize: e => setChatPanelWidth(Math.min(e, 400)),
     side: "right",
-    className: _$$s.relative.flex.flexColumn.minW200.$,
+    className: cssBuilderInstance.relative.flex.flexColumn.minW200.$,
     children: jsx("div", {
-      className: _$$s.flex.flexColumn.flex1.hFull.overflowYScroll.bSolid.colorBorder.br1.$,
+      className: cssBuilderInstance.flex.flexColumn.flex1.hFull.overflowYScroll.bSolid.colorBorder.br1.$,
       children: jsx(ep, {})
     })
   });
@@ -554,7 +554,7 @@ function ep() {
     defaultActive: "chat"
   });
   return jsxs("section", {
-    className: _$$s.flex.flexColumn.flexGrow1.p4.$,
+    className: cssBuilderInstance.flex.flexColumn.flexGrow1.p4.$,
     children: [jsxs(_$$t.TabStrip, {
       manager: s,
       children: [jsx(_$$t.Tab, {
@@ -596,9 +596,9 @@ function eu() {
     setLastMessageActions(ea);
   }, [setLastMessageActions]);
   return jsxs("div", {
-    className: _$$s.hFull.flex.flexColumn.flex1.itemsStretch.justifyCenter.overflowYScroll.$,
+    className: cssBuilderInstance.hFull.flex.flexColumn.flex1.itemsStretch.justifyCenter.overflowYScroll.$,
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.flexGrow1.$,
+      className: cssBuilderInstance.flex.flexColumn.flexGrow1.$,
       children: [messages.map((t, s) => jsx(eb, {
         message: t,
         isLastMessage: s === messages.length - 1
@@ -611,13 +611,13 @@ function eu() {
         submitMessage(input);
       },
       children: jsxs("div", {
-        className: _$$s.flex.flexShrink0.bRadius8.m8.overflowHidden.bSolid.colorBorder.b1.$,
+        className: cssBuilderInstance.flex.flexShrink0.bRadius8.m8.overflowHidden.bSolid.colorBorder.b1.$,
         style: {
           position: "sticky",
           bottom: 0
         },
         children: [jsx("textarea", {
-          className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
+          className: cssBuilderInstance.flexGrow1.resizeNone.minH64.flex.p8.$,
           placeholder: getI18nString("dev_handoff.mc.chat_placeholder"),
           onChange: e => {
             setInput(e.target.value);
@@ -627,7 +627,7 @@ function eu() {
             "Enter" !== e.key || e.shiftKey || (e.preventDefault(), submitMessage(input));
           }
         }), jsx("div", {
-          className: _$$s.absolute.$,
+          className: cssBuilderInstance.absolute.$,
           style: {
             right: 8,
             bottom: 8
@@ -653,24 +653,24 @@ function em() {
   let [g, y] = useState(l);
   let [b, v] = useState(p);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.hFull.borderBox.gap16.p16.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.borderBox.gap16.p16.$,
     children: [jsx("div", {
-      className: _$$s.flex.flexRow.gap8.$,
+      className: cssBuilderInstance.flex.flexRow.gap8.$,
       children: jsx(Checkbox, {
         checked: e,
         onChange: () => t(!e),
         label: jsx("label", {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           children: getI18nString("dev_handoff.mc.refactor_with_prompts")
         })
       })
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.flexGrow1.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.flexGrow1.gap8.$,
       children: [jsx("label", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: getI18nString("dev_handoff.mc.figma_system_prompt")
       }), jsx("textarea", {
-        className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
+        className: cssBuilderInstance.flexGrow1.resizeNone.minH64.flex.p8.$,
         placeholder: getI18nString("dev_handoff.mc.figma_system_prompt_placeholder"),
         value: m,
         onChange: e => f(e.target.value)
@@ -679,12 +679,12 @@ function em() {
         setFiles: y
       })]
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.flexGrow1.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.flexGrow1.gap8.$,
       children: [jsx("label", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: getI18nString("dev_handoff.mc.user_system_prompt")
       }), jsx("textarea", {
-        className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
+        className: cssBuilderInstance.flexGrow1.resizeNone.minH64.flex.p8.$,
         placeholder: getI18nString("dev_handoff.mc.user_system_prompt_placeholder"),
         value: h,
         onChange: e => x(e.target.value)
@@ -693,7 +693,7 @@ function em() {
         setFiles: v
       })]
     }), jsx("button", {
-      className: _$$s.flex.itemsCenter.justifyCenter.p8.bSolid.colorBorder.b1.bRadius8.colorBgHover.$,
+      className: cssBuilderInstance.flex.itemsCenter.justifyCenter.p8.bSolid.colorBorder.b1.bRadius8.colorBgHover.$,
       onClick: () => {
         o(m);
         a(h);
@@ -710,7 +710,7 @@ function ef({
 }) {
   let s = useRef(null);
   return jsxs("div", {
-    className: _$$s.flex.flexRow.gap8.$,
+    className: cssBuilderInstance.flex.flexRow.gap8.$,
     children: [jsx(_$$n, {
       svgAltText: getI18nString("dev_handoff.mc.upload_file"),
       acceptedFileTypes: "*",
@@ -741,13 +741,13 @@ function ef({
       "data-tooltip": getI18nString("dev_handoff.mc.upload_file"),
       children: jsx(_$$e, {})
     }), jsx("div", {
-      className: _$$s.flex.flexRow.gap8.overflowAuto.$,
+      className: cssBuilderInstance.flex.flexRow.gap8.overflowAuto.$,
       children: e.map((e, s) => jsxs("div", {
-        className: _$$s.flex.flexRow.gap4.itemsCenter.pl8.colorBgMenu.radiusMedium.flexShrink0.$,
+        className: cssBuilderInstance.flex.flexRow.gap4.itemsCenter.pl8.colorBgMenu.radiusMedium.flexShrink0.$,
         children: [e.name, " ", jsx("div", {
           role: "button",
           tabIndex: 0,
-          className: _$$s.cursorPointer.$,
+          className: cssBuilderInstance.cursorPointer.$,
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("dev_handoff.mc.remove_file"),
           onClick: () => t(e => e.filter((e, t) => t !== s)),
@@ -761,9 +761,9 @@ function eh({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexColumn.p8.$,
+    className: cssBuilderInstance.flex.flexColumn.p8.$,
     children: jsx("div", {
-      className: _$$s.flex.flexRow.itemsEnd.gap8.$,
+      className: cssBuilderInstance.flex.flexRow.itemsEnd.gap8.$,
       children: e
     })
   });
@@ -772,7 +772,7 @@ function ex({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexColumn.py14.px16.bSolid.colorBorder.b1.preWrap.$,
+    className: cssBuilderInstance.flex.flexColumn.py14.px16.bSolid.colorBorder.b1.preWrap.$,
     style: {
       borderRadius: "24px 24px 24px 5px"
     },
@@ -783,7 +783,7 @@ function eg({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexColumn.gap8.mt8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.mt8.$,
     children: e
   });
 }
@@ -813,15 +813,15 @@ function eb({
           if ("assistant" !== e.role) return null;
           let r = Co(t);
           return r ? r.isComplete ? jsxs("div", {
-            className: _$$s.flex.flexRow.bRadius8.p4.bSolid.colorBorder.b1.itemsCenter.my8.$,
+            className: cssBuilderInstance.flex.flexRow.bRadius8.p4.bSolid.colorBorder.b1.itemsCenter.my8.$,
             children: [jsx(_$$g, {}), jsx("span", {
-              className: _$$s.fontSemiBold.$,
+              className: cssBuilderInstance.fontSemiBold.$,
               children: r.fileName
             })]
           }, s) : jsxs("div", {
-            className: _$$s.flex.flexRow.bRadius8.p4.bSolid.colorBorder.b1.itemsCenter.my8.$,
+            className: cssBuilderInstance.flex.flexRow.bRadius8.p4.bSolid.colorBorder.b1.itemsCenter.my8.$,
             children: [jsx(_$$k, {}), jsx("span", {
-              className: _$$s.fontSemiBold.$,
+              className: cssBuilderInstance.fontSemiBold.$,
               children: r.fileName
             })]
           }, s) : null;
@@ -964,7 +964,7 @@ ${l.contents}`, {
     let e = t && !chat.isStreaming ? chat.lastMessageActions : [];
     return jsxs(eh, {
       children: [jsx("div", {
-        className: _$$s.bRadiusFull.bSolid.colorBorder.b1.$,
+        className: cssBuilderInstance.bRadiusFull.bSolid.colorBorder.b1.$,
         children: jsx(_$$T, {})
       }), jsxs(ex, {
         children: [r, e.length > 0 && jsx(eg, {
@@ -988,22 +988,22 @@ function ev() {
     defaultSize: 500,
     onResize: e => setCodePanelWidth(Math.min(Math.max(e, 200), 500)),
     side: "right",
-    className: _$$s.relative.minW200.$,
+    className: cssBuilderInstance.relative.minW200.$,
     children: jsxs("div", {
-      className: _$$s.flex.flexColumn.flex1.hAuto.$,
+      className: cssBuilderInstance.flex.flexColumn.flex1.hAuto.$,
       children: [jsx(eS, {}), jsx(e_, {})]
     })
   });
 }
 function eS() {
   return jsxs("div", {
-    className: _$$s.flex.justifyBetween.p8.$,
+    className: cssBuilderInstance.flex.justifyBetween.p8.$,
     children: [jsx(ew, {}), jsx(ej, {})]
   });
 }
 function ew() {
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.$,
     children: [jsx(_$$V, {}), getI18nString("dev_handoff.mc.simple_components")]
   });
 }
@@ -1024,7 +1024,7 @@ function ej() {
 }
 function e_() {
   return jsx("div", {
-    className: _$$s.flex.flex1.itemsStretch.$,
+    className: cssBuilderInstance.flex.flex1.itemsStretch.$,
     children: jsx(eE, {})
   });
 }
@@ -1035,7 +1035,7 @@ function eE() {
     setSelectedFileIndex
   } = U();
   return jsx("div", {
-    className: _$$s.flexColumn.colorBorder.bSolid.bt1.itemsStretch.flex1.$,
+    className: cssBuilderInstance.flexColumn.colorBorder.bSolid.bt1.itemsStretch.flex1.$,
     children: jsxs(Fragment, {
       children: [jsx(eC, {
         files: chat.codegen?.files ?? [],
@@ -1054,7 +1054,7 @@ function eC({
 }) {
   let r = e.map(e => e.name);
   return jsx("div", {
-    className: _$$s.flex.colorBgSecondary.$,
+    className: cssBuilderInstance.flex.colorBgSecondary.$,
     children: r.map((e, r) => jsx(eN, {
       active: r === t,
       index: r,
@@ -1070,7 +1070,7 @@ function eN({
   onClick: r
 }) {
   return jsx("button", {
-    className: _$$s.flex.p8.gap10.colorBorder.bSolid.$$if(t, _$$s.colorBg, _$$s.colorBgSecondary).$$if(0 !== s, _$$s.bl1).$,
+    className: cssBuilderInstance.flex.p8.gap10.colorBorder.bSolid.$$if(t, cssBuilderInstance.colorBg, cssBuilderInstance.colorBgSecondary).$$if(0 !== s, cssBuilderInstance.bl1).$,
     onClick: r,
     children: e
   });
@@ -1086,7 +1086,7 @@ function e$({
   let i = useCallback(() => e, [e]);
   let a = chat.codegen?.files[selectedFileIndex]?.name || "index.tsx";
   return jsx("div", {
-    className: _$$s.$$if(chat.isLoading, _$$s.opacity0_5).$,
+    className: cssBuilderInstance.$$if(chat.isLoading, cssBuilderInstance.opacity0_5).$,
     children: jsx(_$$d, {
       editable: !chat.isLoading,
       initialText: i,
@@ -1106,7 +1106,7 @@ function ek() {
     chatPanelWidth
   } = U();
   return jsx("div", {
-    className: _$$s.flex.flexColumn.flex1.hAuto.bSolid.colorBorder.bl1.$,
+    className: cssBuilderInstance.flex.flexColumn.flex1.hAuto.bSolid.colorBorder.bl1.$,
     style: {
       width: 1300 - codePanelWidth - chatPanelWidth
     },
@@ -1115,9 +1115,9 @@ function ek() {
 }
 function eT() {
   return jsxs("div", {
-    className: _$$s.relative.flex.justifyCenter.p8.$,
+    className: cssBuilderInstance.relative.flex.justifyCenter.p8.$,
     children: [jsx("div", {
-      className: _$$s.absolute.top0.bottom0.flex.itemsCenter.fontSemiBold.$,
+      className: cssBuilderInstance.absolute.top0.bottom0.flex.itemsCenter.fontSemiBold.$,
       style: {
         left: 8
       },
@@ -1162,7 +1162,7 @@ function eA({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.wFull.hFull.$,
+    className: cssBuilderInstance.flex.wFull.hFull.$,
     style: {
       minHeight: 700
     },

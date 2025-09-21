@@ -5,7 +5,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getDaysUntilExpiration, isStudentValidated } from "../figma_app/141320";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
@@ -77,9 +77,9 @@ export let $$k0 = registerModal(function (e) {
       maxWidth: 381,
       onClose: S,
       children: [jsxs("div", {
-        className: o()(_$$s.flex.itemsCenter.p8.$, _$$s.$$if(C > 0, _$$s.colorBgWarningTertiary, _$$s.colorBgDangerTertiary).$),
+        className: o()(cssBuilderInstance.flex.itemsCenter.p8.$, cssBuilderInstance.$$if(C > 0, cssBuilderInstance.colorBgWarningTertiary, cssBuilderInstance.colorBgDangerTertiary).$),
         children: [jsx(SvgComponent, {
-          className: _$$s.p8.colorIcon.$,
+          className: cssBuilderInstance.p8.colorIcon.$,
           svg: _$$A
         }), jsx("p", {
           children: jsx("strong", {
@@ -89,13 +89,13 @@ export let $$k0 = registerModal(function (e) {
           })
         })]
       }), jsxs("div", {
-        className: _$$s.px16.pt8.pb12.$,
+        className: cssBuilderInstance.px16.pt8.pb12.$,
         children: [jsx("p", {
           children: A
         }), jsxs("div", {
-          className: _$$s.pt16.flex.$,
+          className: cssBuilderInstance.pt16.flex.$,
           children: [jsx("div", {
-            className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
+            className: cssBuilderInstance.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.if_you_graduated")
@@ -108,9 +108,9 @@ export let $$k0 = registerModal(function (e) {
             }) : renderI18nText("edu.offboarding_modal.create_a_new_professional_team_and_start_fresh")]
           })]
         }), !E && jsxs("div", {
-          className: _$$s.pt16.flex.$,
+          className: cssBuilderInstance.pt16.flex.$,
           children: [jsx("div", {
-            className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
+            className: cssBuilderInstance.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.if_you_re_still_in_education")
@@ -124,9 +124,9 @@ export let $$k0 = registerModal(function (e) {
             })]
           })]
         }), jsxs("div", {
-          className: _$$s.pt16.flex.$,
+          className: cssBuilderInstance.pt16.flex.$,
           children: [jsx("div", {
-            className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
+            className: cssBuilderInstance.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.to_save_your_work")
@@ -140,7 +140,7 @@ export let $$k0 = registerModal(function (e) {
             }) : renderI18nText("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later")]
           })]
         }), jsx("div", {
-          className: _$$s.flex.flexColumn.itemsEnd.pt32.$,
+          className: cssBuilderInstance.flex.flexColumn.itemsEnd.pt32.$,
           children: I ? jsx(ButtonBasePrimaryTracked, {
             onClick: () => {
               S();

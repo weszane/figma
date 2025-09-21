@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { capitalize } from "../figma_app/930338";
 import { getThemeContextOrDefault } from "../905/158740";
 import p from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { lR, e6 } from "../figma_app/617427";
 import { styleBuilderInstance } from "../905/941192";
 import { getVisibleTheme } from "../905/640017";
@@ -44,10 +44,10 @@ function y({
   let g = "light" === getVisibleTheme();
   let y = "ui3" === getThemeContextOrDefault().version;
   return jsxs("div", {
-    className: _$$s.py24.px16.cursorDefault.selectNone.flex.flexColumn.gap24.$,
+    className: cssBuilderInstance.py24.px16.cursorDefault.selectNone.flex.flexColumn.gap24.$,
     "data-testid": "paywall-modal",
     children: [jsx("div", {
-      className: _$$s.bRadius4.overflowHidden.$$if(g && !i, _$$s.b1.colorBorder).$,
+      className: cssBuilderInstance.bRadius4.overflowHidden.$$if(g && !i, cssBuilderInstance.b1.colorBorder).$,
       style: styleBuilderInstance.add({
         height: `${n}px`
       }).$,
@@ -57,10 +57,10 @@ function y({
         width: t
       })
     }), jsx("div", {
-      className: _$$s.flex.flexColumn.gap6.$,
+      className: cssBuilderInstance.flex.flexColumn.gap6.$,
       children: o
     }), jsxs("div", {
-      className: h()(_$$s.flex.flexColumn.gap8.$, UD),
+      className: h()(cssBuilderInstance.flex.flexColumn.gap8.$, UD),
       children: [l && s && jsx(b, {
         label: l,
         onClick: s,
@@ -80,7 +80,7 @@ function b({
   trackingProperties: n = {}
 }) {
   return jsx("span", {
-    className: _$$s.cursorPointer.$,
+    className: cssBuilderInstance.cursorPointer.$,
     children: jsx(lR, {
       variant: "primary",
       onClick: t,
@@ -118,7 +118,7 @@ function j({
       })
     })
   }) : jsx(e6, {
-    className: h()(_$$s.flex.justifyCenter.alignCenter.py8.px32.h40.maxWFull.cursorPointer.$, zr),
+    className: h()(cssBuilderInstance.flex.justifyCenter.alignCenter.py8.px32.h40.maxWFull.cursorPointer.$, zr),
     onClick: n,
     htmlAttributes: {
       "data-testid": "secondary-button"
@@ -334,7 +334,7 @@ function P() {
 }
 function L() {
   return jsx(Wi, {
-    className: h()(_$$s.h12.wFull.inlineBlock.$, "dev_mode_social_proof_skeletons--textSkeleton--Vjugs"),
+    className: h()(cssBuilderInstance.h12.wFull.inlineBlock.$, "dev_mode_social_proof_skeletons--textSkeleton--Vjugs"),
     animationType: JR.NO_SHIMMER
   });
 }

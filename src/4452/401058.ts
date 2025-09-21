@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { B } from "../905/900597";
@@ -36,10 +36,10 @@ export function $$h0(e) {
       alt: "Connected projects logo",
       width: 150
     }), jsx("div", {
-      className: _$$s.textHeadingMedium.$,
+      className: cssBuilderInstance.textHeadingMedium.$,
       children: getI18nString("connected_projects_table.collaborate_in_a_connected_project")
     }), jsx("div", {
-      className: _$$s.textBodyLarge.$,
+      className: cssBuilderInstance.textBodyLarge.$,
       style: {
         width: "508px",
         textAlign: "center"
@@ -62,7 +62,7 @@ export function $$h0(e) {
         children: getI18nString("resource_connection.admin_ui.connect_project")
       }), x]
     }), jsx("div", {
-      className: _$$s.h100.$
+      className: cssBuilderInstance.h100.$
     })]
   });
 }

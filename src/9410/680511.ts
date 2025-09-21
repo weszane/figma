@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { $ } from "../figma_app/938538";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Tc } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
 import { Y } from "../905/1768";
@@ -31,7 +31,7 @@ export function $$m0({
     minWidth: 152,
     center: f,
     children: jsx("div", {
-      className: _$$s.flex.flexWrap.p8.itemsCenter.contentCenter.gap8.$,
+      className: cssBuilderInstance.flex.flexWrap.p8.itemsCenter.contentCenter.gap8.$,
       style: {
         width: 152
       },

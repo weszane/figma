@@ -101,7 +101,7 @@ import { qp } from '../905/977779';
 import { h1 } from '../905/986103';
 import { LOADING_STATUS } from '../905/989992';
 import { h as _$$h3 } from '../905/994594';
-import { s as _$$s2 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { KP } from '../figma_app/12491';
 import { atom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { LibraryModalAssetsDataByLibraryKey, OrgTeamView } from '../figma_app/43951';
@@ -242,13 +242,13 @@ function ea({
   }();
   let p = mq.useTabContentsWidth();
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     onMouseDown: u,
     children: [jsx(_$$d, {
       library: e,
       onBack: t,
       rightElement: l ? jsx('span', {
-        className: _$$s2.textBodyMedium.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
         children: renderI18nText('design_systems.libraries_modal.current_file')
       }) : jsx(eo, {
         library: e,
@@ -349,9 +349,9 @@ function eo({
     listItemButtonWidth
   } = _$$H();
   return jsxs('div', {
-    className: _$$s2.flex.gap16.itemsCenter.maxW300.$,
+    className: cssBuilderInstance.flex.gap16.itemsCenter.maxW300.$,
     children: [c && jsx(_$$G, {
-      className: _$$s2.textBodyMedium.colorTextSecondary.noWrap.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.noWrap.$,
       text: c
     }), jsx('div', {
       style: {
@@ -372,7 +372,7 @@ function eo({
 }
 function el() {
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx('div', {
       className: 'library_view--loadingSectionHeader----lXg subscription_file_view_overview--fileAssetSectionHeader--AUyLc library_section_header--fileAssetSectionHeader--FApn3 text--fontPos12--YsUAh text--_fontBase--QdLsd',
       children: jsx(Wi, {
@@ -595,7 +595,7 @@ function eB({
       'data-testid': 'library-card-button',
       'ref': Ay(setKeyboardNavigationElement, Y),
       'children': jsxs('div', {
-        className: _$$s2.flex.flexColumn.gap8.wFull.$,
+        className: cssBuilderInstance.flex.flexColumn.gap8.wFull.$,
         children: [jsx('div', {
           className: 'library_card--thumbnailContainer--dGEyh',
           children: jsx(_$$B, {
@@ -610,7 +610,7 @@ function eB({
         }), jsxs('div', {
           className: eF,
           children: [jsxs('div', {
-            className: _$$s2.flex.itemsCenter.gap2.wFull.$,
+            className: cssBuilderInstance.flex.itemsCenter.gap2.wFull.$,
             children: [jsx(_$$G, {
               className: 'library_card--libraryName--NkfAQ ellipsis--ellipsis--Tjyfa',
               text: e.library_name
@@ -693,12 +693,12 @@ function eG({
     return i;
   }, [t, e]);
   return jsx('div', {
-    className: _$$s2.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     style: {
       marginLeft: '-8px'
     },
     children: o.map((e, r) => jsxs('div', {
-      className: _$$s2.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [e.map((e, s) => jsx(eB, {
         library: e,
         kbPath: [...i, r],
@@ -718,7 +718,7 @@ function ez() {
   let t = ej();
   let i = eU();
   return jsxs('div', {
-    'className': eR()(_$$s2.flex.flexColumn.gap8.p8.$, 'library_card--loadingCardContainer--07e1V'),
+    'className': eR()(cssBuilderInstance.flex.flexColumn.gap8.p8.$, 'library_card--loadingCardContainer--07e1V'),
     'style': {
       width: `${e}px`
     },
@@ -730,19 +730,19 @@ function ez() {
       },
       children: jsx(Qp, {
         animationType: JR.SHIMMER,
-        className: _$$s2.hFull.$
+        className: cssBuilderInstance.hFull.$
       })
     }), jsxs('div', {
       className: eF,
       children: [jsx(Wi, {
         animationType: JR.SHIMMER,
-        className: _$$s2.h16.$,
+        className: cssBuilderInstance.h16.$,
         style: {
           width: '15ch'
         }
       }), jsx(Wi, {
         animationType: JR.SHIMMER,
-        className: _$$s2.h16.$,
+        className: cssBuilderInstance.h16.$,
         style: {
           width: '10ch'
         }
@@ -822,13 +822,13 @@ function eK({
     disabled: !s
   });
   return jsxs('div', {
-    'className': _$$s2.flex.flexColumn.gap16.$,
+    'className': cssBuilderInstance.flex.flexColumn.gap16.$,
     'data-testid': 'team-libraries-row',
     'children': [jsxs('div', {
-      'className': _$$s2.flex.justifyBetween.textBodyMedium.$,
+      'className': cssBuilderInstance.flex.justifyBetween.textBodyMedium.$,
       'data-testid': 'team-libraries-header',
       'children': [jsx(_$$h2, {
-        className: _$$s2.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         text: t ? t.name : getI18nString('design_systems.libraries_modal.draft_libraries'),
         as: 'h3'
       }), s && jsx(ButtonPrimitive, {
@@ -841,7 +841,7 @@ function eK({
         children: renderI18nText('design_systems.libraries_modal.see_more')
       })]
     }), jsx('div', {
-      className: _$$s2.flex.$,
+      className: cssBuilderInstance.flex.$,
       style: {
         marginLeft: '-8px'
       },
@@ -857,18 +857,18 @@ function eK({
 }
 function eY() {
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     children: [jsx('div', {
-      className: _$$s2.flex.justifyBetween.textBodyMedium.$,
+      className: cssBuilderInstance.flex.justifyBetween.textBodyMedium.$,
       children: jsx(Wi, {
         animationType: JR.SHIMMER,
-        className: _$$s2.h16.$,
+        className: cssBuilderInstance.h16.$,
         style: {
           width: '15ch'
         }
       })
     }), jsxs('div', {
-      className: _$$s2.flex.$,
+      className: cssBuilderInstance.flex.$,
       style: {
         marginLeft: '-8px'
       },
@@ -901,7 +901,7 @@ function eX({
   children: e
 }) {
   return jsx('div', {
-    className: _$$s2.px16.py8.bSolid.colorBorder.bt1.$,
+    className: cssBuilderInstance.px16.py8.bSolid.colorBorder.bt1.$,
     children: e
   });
 }
@@ -960,15 +960,15 @@ function eQ({
     metadata: m
   });
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx(_$$Q, {
       title: t,
       workspace: s,
       onBack: e,
       backAriaLabel: getI18nString('design_systems.libraries_modal.back_to_teams')
     }), jsx(_$$$, {
-      className: _$$s2.flexGrow1.$,
-      innerClassName: _$$s2.px16.pb16.$,
+      className: cssBuilderInstance.flexGrow1.$,
+      innerClassName: cssBuilderInstance.px16.pb16.$,
       children: jsx(eG, {
         libraries: filteredLibraries,
         kbPath: [m3.TabBodySection.Body]
@@ -988,12 +988,12 @@ function eJ({
   cta: i
 }) {
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.itemsCenter.justifyCenter.hFull.mx32.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.justifyCenter.hFull.mx32.$,
     children: [jsx('h2', {
-      className: _$$s2.textHeadingMedium.mb4.$,
+      className: cssBuilderInstance.textHeadingMedium.mb4.$,
       children: e
     }), jsx('div', {
-      className: _$$s2.textBodyLarge.colorTextSecondary.alignCenter.mb12.$,
+      className: cssBuilderInstance.textBodyLarge.colorTextSecondary.alignCenter.mb12.$,
       children: t
     }), i]
   });
@@ -1192,7 +1192,7 @@ function e5({
   });
   return jsx(_$$P, {
     children: jsx('div', {
-      className: _$$s2.flex.flexColumn.gap16.p16.$,
+      className: cssBuilderInstance.flex.flexColumn.gap16.p16.$,
       children: d ? jsx(e9, {}) : jsxs(Fragment, {
         children: [p && jsx(e4, {
           workspace: p,
@@ -1216,10 +1216,10 @@ function e4({
   }, [t, e.id]);
   return jsxs(Fragment, {
     children: [jsx('h2', {
-      className: _$$s2.textBodyLargeStrong.$,
+      className: cssBuilderInstance.textBodyLargeStrong.$,
       children: renderI18nText('design_systems.libraries_modal.your_workspace')
     }), jsx('div', {
-      className: _$$s2.grid.gap8.$,
+      className: cssBuilderInstance.grid.gap8.$,
       style: {
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
       },
@@ -1242,12 +1242,12 @@ function e3({
   let o = s + (i ? 1 : 0);
   return jsxs(Fragment, {
     children: [jsx('h2', {
-      className: _$$s2.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       children: renderI18nText('design_systems.libraries_modal.orgs_workspaces', {
         orgName: a.name
       })
     }), jsxs('div', {
-      className: _$$s2.grid.gap8.$,
+      className: cssBuilderInstance.grid.gap8.$,
       style: {
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
       },
@@ -1290,12 +1290,12 @@ function e6({
     metadata: l
   });
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx(_$$Q, {
       title: e,
       onBack: i
     }), jsx(_$$$, {
-      innerClassName: _$$s2.px16.pb16.pt1.$,
+      innerClassName: cssBuilderInstance.px16.pb16.pt1.$,
       children: jsx(eW, {
         teamsWithLibraries: t,
         onSeeMoreClick: a
@@ -1366,7 +1366,7 @@ function e8({
     },
     ref: setKeyboardNavigationElement,
     children: [e, jsx(_$$G, {
-      className: _$$s2.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       text: t
     })]
   });
@@ -1379,12 +1379,12 @@ function e9() {
         width: '15ch'
       }
     }), jsx('div', {
-      className: _$$s2.grid.gap8.$,
+      className: cssBuilderInstance.grid.gap8.$,
       style: {
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
       },
       children: jsx(Qp, {
-        className: _$$s2.radiusMedium.h16.$,
+        className: cssBuilderInstance.radiusMedium.h16.$,
         style: {
           height: 85
         },
@@ -1396,12 +1396,12 @@ function e9() {
         width: '15ch'
       }
     }), jsx('div', {
-      className: _$$s2.grid.gap8.$,
+      className: cssBuilderInstance.grid.gap8.$,
       style: {
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
       },
       children: range(3).map(e => jsx(Qp, {
-        className: _$$s2.radiusMedium.h16.$,
+        className: cssBuilderInstance.radiusMedium.h16.$,
         style: {
           height: 85
         },
@@ -1612,26 +1612,26 @@ function td({
     metadata: s
   });
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.pt16.borderBox.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.pt16.borderBox.hFull.$,
     children: [jsx('div', {
-      className: _$$s2.pb16.px16.flex.flexColumn.gap4.$,
+      className: cssBuilderInstance.pb16.px16.flex.flexColumn.gap4.$,
       children: r ? jsx(Wi, {
         animationType: JR.SHIMMER,
-        className: _$$s2.h16.$,
+        className: cssBuilderInstance.h16.$,
         style: {
           width: '15ch'
         }
       }) : jsxs(Fragment, {
         children: [jsx('h2', {
-          className: _$$s2.textBodyLargeStrong.$,
+          className: cssBuilderInstance.textBodyLargeStrong.$,
           children: a ? renderI18nText('design_systems.libraries_modal.team_libraries') : renderI18nText('design_systems.libraries_modal.all_teams_in_your_organization')
         }), jsx('div', {
-          className: _$$s2.textBodyMedium.colorTextSecondary.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
           children: a ? renderI18nText('design_systems.libraries_modal.team_libraries_description') : renderI18nText('design_systems.libraries_modal.team_libraries_description_org')
         })]
       })
     }), jsx(_$$$, {
-      innerClassName: _$$s2.px16.pb16.pt1.$,
+      innerClassName: cssBuilderInstance.px16.pb16.pt1.$,
       children: r ? jsx(eY, {}) : jsx(eW, {
         teamsWithLibraries: e,
         draftLibraries: t,
@@ -1712,7 +1712,7 @@ function tv({
   nameForLogging: r
 }) {
   return t.length === 0 ? null : jsxs('div', {
-    className: _$$s2.px16.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.px16.flex.flexColumn.gap16.$,
     children: [e, jsx(eG, {
       libraries: t,
       kbPath: [i],
@@ -1722,7 +1722,7 @@ function tv({
 }
 function tI() {
   return jsxs('div', {
-    className: _$$s2.flex.px8.$,
+    className: cssBuilderInstance.flex.px8.$,
     children: [jsx(ez, {}), jsx(ez, {}), jsx(ez, {})]
   });
 }
@@ -1763,11 +1763,11 @@ function tE({
   return e.status === 'loading' ? jsx(tI, {}) : jsx(Fragment, {
     children: d.map((e, t) => jsxs(_$$Fragment, {
       children: [t > 0 && jsx('hr', {
-        className: _$$s2.m0.$
+        className: cssBuilderInstance.m0.$
       }), jsx(tv, {
         header: e.header ? jsx(_$$G, {
           text: e.header,
-          className: _$$s2.textBodyMedium.$
+          className: cssBuilderInstance.textBodyMedium.$
         }) : null,
         libraries: e.libraries,
         idx: t,
@@ -1778,12 +1778,12 @@ function tE({
 }
 function tx() {
   return jsxs('div', {
-    className: _$$s2.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
     children: [jsx(_$$h2, {
       text: getI18nString('design_systems.libraries_modal.recommended_libraries'),
       as: 'h3'
     }), jsx('span', {
-      className: _$$s2.colorTextSecondary.textBodyMedium.$,
+      className: cssBuilderInstance.colorTextSecondary.textBodyMedium.$,
       children: renderI18nText('design_systems.libraries_modal.your_admins_suggest')
     })]
   });
@@ -1854,12 +1854,12 @@ function tS() {
     name: 'overview',
     children: jsx(ec, {
       children: jsxs('div', {
-        className: _$$s2.flex.flexColumn.pt16.borderBox.hFull.wFull.gap16.$,
+        className: cssBuilderInstance.flex.flexColumn.pt16.borderBox.hFull.wFull.gap16.$,
         children: [jsx(_$$W2.PageViewTracker, {
           metadata: s,
           loading: t
         }), jsx(tx, {}), jsx(_$$$, {
-          innerClassName: _$$s2.pb16.flex.flexColumn.gap16.$,
+          innerClassName: cssBuilderInstance.pb16.flex.flexColumn.gap16.$,
           children: jsx(tE, {
             recommendedLibraries: e
           })
@@ -2671,17 +2671,17 @@ function iv() {
     name: 'overview',
     children: jsx(ec, {
       children: jsxs('div', {
-        className: _$$s2.flex.flexColumn.pt16.borderBox.hFull.wFull.gap16.$,
+        className: cssBuilderInstance.flex.flexColumn.pt16.borderBox.hFull.wFull.gap16.$,
         children: [jsxs('div', {
-          className: _$$s2.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
+          className: cssBuilderInstance.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
           children: [jsx('h2', {
             children: renderI18nText('design_systems.libraries_modal.ui_kits')
           }), jsx('span', {
-            className: _$$s2.colorTextSecondary.textBodyMedium.$,
+            className: cssBuilderInstance.colorTextSecondary.textBodyMedium.$,
             children: renderI18nText('design_systems.libraries_modal.ui_kits_description')
           })]
         }), jsx(_$$$, {
-          innerClassName: _$$s2.px16.pb16.$,
+          innerClassName: cssBuilderInstance.px16.pb16.$,
           children: t.status === 'loading' ? jsx(iI, {}) : jsxs(Fragment, {
             children: [jsx(eG, {
               libraries: s,
@@ -2697,7 +2697,7 @@ function iv() {
 }
 function iI() {
   return jsxs('div', {
-    className: _$$s2.flex.gap8.$,
+    className: cssBuilderInstance.flex.gap8.$,
     children: [jsx(ez, {}), jsx(ez, {}), jsx(ez, {})]
   });
 }
@@ -2792,7 +2792,7 @@ function np({
     disabled: !toggleReviewUpdatesModal
   });
   return jsxs('div', {
-    className: _$$s2.relative.$,
+    className: cssBuilderInstance.relative.$,
     children: [(o = jsxs('div', {
       className: nl,
       children: [jsx(lX, {
@@ -2871,15 +2871,15 @@ function nm({
         className: nd,
         children: jsx(Qp, {
           animationType: JR.LIGHT_SHIMMER,
-          className: _$$s2.h64.w64.$
+          className: cssBuilderInstance.h64.w64.$
         })
       }), jsxs('div', {
         className: nc,
         children: [jsx(Wi, {
-          className: _$$s2.h12.w150.mb12.$,
+          className: cssBuilderInstance.h12.w150.mb12.$,
           animationType: JR.LIGHT_SHIMMER
         }), jsx(Wi, {
-          className: _$$s2.h12.w64.$,
+          className: cssBuilderInstance.h12.w64.$,
           animationType: JR.LIGHT_SHIMMER
         })]
       })]
@@ -2924,7 +2924,7 @@ function nh({
             'data-tooltip': formatI18nMessage('library-updates-from-current-file')
           })
         }), !e.isOpenFile && p && sF(e.libraryKey) && jsx('div', {
-          className: _$$s2.pl4.$,
+          className: cssBuilderInstance.pl4.$,
           children: jsx(KP, {
             libraryKey: e.libraryKey
           })
@@ -2933,7 +2933,7 @@ function nh({
         className: 'updates_checkpoint--updatesSubText--oVu98',
         children: h.status === 'loading' ? jsx(Wi, {
           animationType: JR.LIGHT_SHIMMER,
-          className: _$$s2.h16.w150.$
+          className: cssBuilderInstance.h16.w150.$
         }) : (c = e.publishDate, g && c ? renderI18nText('design_systems.updates.publishedByHandle', {
           publishUserHandle: g,
           relativeTimeStr: jsx(h1, {
@@ -3272,7 +3272,7 @@ function ny({
   return c ? jsx(_$$W2.Page, {
     name: 'updates',
     children: jsx('div', {
-      className: _$$s2.hFull.$,
+      className: cssBuilderInstance.hFull.$,
       children: ei
     })
   }) : jsx(TabLoop, {
@@ -3409,13 +3409,13 @@ function nv() {
       children: [jsxs('div', {
         className: 'updates--updatesMetadata--oXl17',
         children: [jsx(Wi, {
-          className: _$$s2.h12.w100.mb8.$,
+          className: cssBuilderInstance.h12.w100.mb8.$,
           animationType: JR.LIGHT_SHIMMER
         }), jsx(Wi, {
-          className: _$$s2.h12.w150.mb8.$,
+          className: cssBuilderInstance.h12.w150.mb8.$,
           animationType: JR.LIGHT_SHIMMER
         }), jsx(Wi, {
-          className: _$$s2.h12.w200.mb8.$,
+          className: cssBuilderInstance.h12.w200.mb8.$,
           animationType: JR.LIGHT_SHIMMER
         })]
       }), Array.from({

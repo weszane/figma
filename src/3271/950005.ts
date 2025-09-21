@@ -3,7 +3,7 @@ import { useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { BaseLinkComponent, ButtonBase } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getVsCodeLinkProps } from "../905/850671";
@@ -89,21 +89,21 @@ export function $$v0({
   return jsxs("div", {
     className: "empty_development_view--developmentPluginEmptyStateContainer--cTeAp",
     children: [jsx("span", {
-      className: _$$s.m16.$,
+      className: cssBuilderInstance.m16.$,
       children: e ? jsx(m, {}) : jsx(_, {})
     }), jsx("span", {
-      className: _$$s.font11.fontNormal.colorTextSecondary.mb4.$,
+      className: cssBuilderInstance.font11.fontNormal.colorTextSecondary.mb4.$,
       children: e ? renderI18nText("community.plugins.no_widgets_created_yet") : renderI18nText("community.plugins.no_plugins_created_yet")
     }), e ? jsx(BaseLinkComponent, {
       href,
       onClick,
-      className: _$$s.font11.fontNormal.noUnderline.inline.$,
+      className: cssBuilderInstance.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
       children: renderI18nText("community.plugins.learn_more_about_widget_development")
     }) : jsx(BaseLinkComponent, {
       href: _href,
       onClick: _onClick,
-      className: _$$s.font11.fontNormal.noUnderline.inline.$,
+      className: cssBuilderInstance.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
       children: renderI18nText("community.plugins.learn_more_about_plugin_development")
     }), jsx(ButtonBase, {

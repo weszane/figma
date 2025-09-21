@@ -3,7 +3,7 @@ import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import r from "classnames";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { I } from "../figma_app/638694";
@@ -30,7 +30,7 @@ function x(e) {
     children: [e.icon, jsx("span", {
       children: e.title
     }), jsx("span", {
-      className: _$$s.fontNormal.pl24.$,
+      className: cssBuilderInstance.fontNormal.pl24.$,
       children: e.secondaryText
     })]
   });
@@ -75,7 +75,7 @@ export function $$f3(e) {
           className: G,
           svg: e.icon
         }), jsx("span", {
-          className: _$$s.wFull.$,
+          className: cssBuilderInstance.wFull.$,
           children: e.children
         })]
       }), jsx(IconButton, {

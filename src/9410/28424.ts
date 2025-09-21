@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createElement } from "react";
 import { Z } from "../905/279476";
 import { b } from "../figma_app/556971";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { KindEnum } from "../905/129884";
 export function $$d1() {
   return !1;
@@ -22,7 +22,7 @@ export function $$u0() {
     icon
   } = $$c2();
   return shouldShow ? jsx("span", {
-    className: _$$s.h32.w32.inlineFlex.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.h32.w32.inlineFlex.itemsCenter.justifyCenter.$,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": label,
     "data-tooltip-show-right": e,

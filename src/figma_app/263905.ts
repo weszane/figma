@@ -22,7 +22,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { generateUUIDv4 } from '../905/871474';
 import { J as _$$J } from '../905/916681';
 import { z as _$$z } from '../905/931953';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { _p, q5 } from '../figma_app/11610';
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { Zr } from '../figma_app/114522';
@@ -88,14 +88,14 @@ function z() {
           })
         }), jsx(DialogBody, {
           children: jsx('div', {
-            className: _$$s.flex.flexColumn.gap8.$,
+            className: cssBuilderInstance.flex.flexColumn.gap8.$,
             children: errors.map((e, t) => jsxs('div', {
-              className: _$$s.p8.b1.radiusMedium.textBodyMedium.$,
+              className: cssBuilderInstance.p8.b1.radiusMedium.textBodyMedium.$,
               children: [e.nodeId && jsx('div', {
-                className: _$$s.textHeadingMedium.mb4.$,
+                className: cssBuilderInstance.textHeadingMedium.mb4.$,
                 children: e.nodeId
               }), jsx('div', {
-                className: _$$s.preWrap.textBodySmall.$,
+                className: cssBuilderInstance.preWrap.textBodySmall.$,
                 children: e.errorMessage
               })]
             }, e.nodeId || t))

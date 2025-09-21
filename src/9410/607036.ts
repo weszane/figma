@@ -17,7 +17,7 @@ import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -135,9 +135,9 @@ function P({
 }) {
   return jsxs(Fragment, {
     children: [jsxs("div", {
-      className: h()("slides_insert_embed_modal--headerContainer--5xFbR", i ? _$$s.pl8.$ : _$$s.pl16.$),
+      className: h()("slides_insert_embed_modal--headerContainer--5xFbR", i ? cssBuilderInstance.pl8.$ : cssBuilderInstance.pl16.$),
       children: [jsxs("div", {
-        className: _$$s.textBodyMediumStrong.flex.itemsCenter.$,
+        className: cssBuilderInstance.textBodyMediumStrong.flex.itemsCenter.$,
         children: [i ? jsx(IconButton, {
           onClick: n,
           "aria-label": getI18nString("general.back"),
@@ -168,7 +168,7 @@ function F({
   return jsxs("div", {
     className: "slides_insert_embed_modal--widgetContainer--LvggL",
     children: [jsx("div", {
-      className: _$$s.textBodyMedium.colorTextSecondary.pb16.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.pb16.$,
       children: renderI18nText("slides.flapp.embed.widget_modal_description")
     }), jsxs("div", {
       className: "slides_insert_embed_modal--widgetGrid---WhKd",
@@ -209,7 +209,7 @@ function B({
   recordingKey: n
 }) {
   return jsxs(ButtonPrimitive, {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     onClick: i,
     recordingKey: n,
     children: [jsx("img", {
@@ -218,7 +218,7 @@ function B({
       alt: t,
       draggable: !1
     }), jsx("p", {
-      className: _$$s.wFull.textBodyMediumStrong.alignLeft.$,
+      className: cssBuilderInstance.wFull.textBodyMediumStrong.alignLeft.$,
       children: t
     })]
   });
@@ -260,12 +260,12 @@ function G({
 }
 function K() {
   return jsx("div", {
-    className: _$$s.wFull.colorBgTertiary.h1.$
+    className: cssBuilderInstance.wFull.colorBgTertiary.h1.$
   });
 }
 function H() {
   return jsx("div", {
-    className: h()(_$$s.colorTextSecondary.textBodyMedium.$, k),
+    className: h()(cssBuilderInstance.colorTextSecondary.textBodyMedium.$, k),
     children: renderI18nText("slides.flapp.embed.modal_description")
   });
 }
@@ -278,7 +278,7 @@ function z({
   });
   return jsxs("div", {
     children: [jsx("div", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: renderI18nText("slides.flapp.embed.add_prototype_link_header")
     }), jsxs("div", {
       className: "slides_insert_embed_modal--prototypePasteContainer--PozcZ",
@@ -312,7 +312,7 @@ function V({
   return !a || a.length < 1 ? null : jsx("div", {
     className: k,
     children: jsxs("div", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: [renderI18nText("slides.flapp.embed.recent_prototypes_header"), a.map(e => jsx(W, {
         thumbnailUrl: e.thumbnail_url,
         title: e.name,
@@ -347,12 +347,12 @@ function W({
     }) : jsx("div", {
       className: N
     }), jsxs("div", {
-      className: _$$s.alignLeft.$,
+      className: cssBuilderInstance.alignLeft.$,
       children: [jsx("p", {
-        className: _$$s.textBodyMediumStrong.$,
+        className: cssBuilderInstance.textBodyMediumStrong.$,
         children: t
       }), jsx("p", {
-        className: _$$s.textBodySmall.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodySmall.colorTextSecondary.$,
         children: i
       })]
     })]

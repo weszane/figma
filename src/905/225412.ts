@@ -5,7 +5,7 @@ import s from "classnames";
 import { RecordingPureComponent, handleKeyboardEvent, handleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getFillColor } from "../figma_app/80990";
 import { getImageManager } from "../figma_app/624361";
@@ -168,7 +168,7 @@ class L extends RecordingPureComponent {
       let r = jsx(_$$M, {
         item: e,
         shouldGenerateLocalThumbnail: !0,
-        className: _$$s.wFull.$
+        className: cssBuilderInstance.wFull.$
       });
       return b4(this.props) ? jsx(ButtonPrimitive, {
         ...this.generateContainerProps(),

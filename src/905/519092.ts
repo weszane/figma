@@ -7,7 +7,7 @@ import { KeyCodes } from "../905/63728";
 import { CloseButton } from "../905/17223";
 import { ButtonNegativeTracked, ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { Dm } from "../figma_app/8833";
@@ -145,14 +145,14 @@ export function $$v0(e) {
     onClose: r,
     ...e,
     containerClassName: e.useRedesign ? l()(e.containerClassName, EO) : void 0,
-    headerClassName: e.useRedesign ? l()(_$$s.textBodyLargeStrong.pb4.pt4.$, e.headerClassName) : void 0,
+    headerClassName: e.useRedesign ? l()(cssBuilderInstance.textBodyLargeStrong.pb4.pt4.$, e.headerClassName) : void 0,
     children: e.useRedesign ? jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx("div", {
-        className: _$$s.$$if(!e.fullWidthContent, _$$s.p16).flex.flexColumn.$,
+        className: cssBuilderInstance.$$if(!e.fullWidthContent, cssBuilderInstance.p16).flex.flexColumn.$,
         children: e.children
       }), jsx("div", {
-        className: _$$s.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
+        className: cssBuilderInstance.flex.justifyEnd.p16.bt1.colorBorder.bSolid.$,
         children: s
       })]
     }) : jsxs("div", {
@@ -181,7 +181,7 @@ export class $$I2 extends Component {
       }
     })();
     let t = l()(e, this.props.headerClassname, {
-      [_$$s.sticky.top0.left0.zIndex1.colorBg.$]: this.props.stickyHeader,
+      [cssBuilderInstance.sticky.top0.left0.zIndex1.colorBg.$]: this.props.stickyHeader,
       [Jg]: !this.props.disableHeaderBottomBorder
     });
     let i = jsx(CloseButton, {

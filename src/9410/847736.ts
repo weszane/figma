@@ -6,7 +6,7 @@ import { bY, Vf, q7, oQ, V6, i6, ux, VZ, Ei, OR, xw } from "../figma_app/60023";
 import d from "classnames";
 import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText, getTranslatedDynamicContent } from "../905/303541";
 import { selectCurrentFile, useCurrentFileKey, openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
 import { JY } from "../9410/236102";
@@ -99,7 +99,7 @@ function x({
   dataTestId: t
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     "data-testid": t,
     children: e
   });
@@ -221,7 +221,7 @@ function X({
   onSeeAllClick: e
 }) {
   return jsx("button", {
-    className: c()("see_all_button--seeAllButton--TAlLw", _$$s.font11.fontMedium.fontInter.flexShrink0.$),
+    className: c()("see_all_button--seeAllButton--TAlLw", cssBuilderInstance.font11.fontMedium.fontInter.flexShrink0.$),
     onClick: e,
     children: renderI18nText("slides.templates.view_type.see_all")
   });
@@ -373,18 +373,18 @@ function eo({
     onShowSeparatorScroll
   } = gH();
   return e && 0 === i.length ? jsx("div", {
-    className: _$$s.p8.$,
+    className: cssBuilderInstance.p8.$,
     children: jsx(gu, {})
   }) : 0 === i.length ? jsxs("div", {
-    className: _$$s.p10.flex.flex1.flexColumn.itemsCenter.alignCenter.textBodyMedium.colorTextDisabled.$,
+    className: cssBuilderInstance.p10.flex.flex1.flexColumn.itemsCenter.alignCenter.textBodyMedium.colorTextDisabled.$,
     children: [jsx(SvgComponent, {
-      className: _$$s.h200.$,
+      className: cssBuilderInstance.h200.$,
       svg: _$$A,
       useOriginalSrcFills_DEPRECATED: !0
     }), jsx("div", {
       children: renderI18nText("slides.templates.search.empty", {
         searchTerm: jsx("span", {
-          className: _$$s.fontBold.$,
+          className: cssBuilderInstance.fontBold.$,
           children: t
         })
       })
@@ -392,10 +392,10 @@ function eo({
       children: renderI18nText("slides.templates.search.empty.tip")
     })]
   }) : jsx(_$$P, {
-    className: _$$s.px8.hFull.$,
+    className: cssBuilderInstance.px8.hFull.$,
     onScroll: onShowSeparatorScroll,
     children: jsxs("div", {
-      className: _$$s.pt8.$,
+      className: cssBuilderInstance.pt8.$,
       children: [jsx(p9, {
         children: i.map(e => jsx(AK, {
           template: e
@@ -434,7 +434,7 @@ function ed({
   } = JY();
   let E = Xr(bY);
   return (useEffect(() => () => resetScrollTop([Vf.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(_$$P, {
-    className: _$$s.px8.hFull.$,
+    className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
     onScroll: (e, t) => {
@@ -505,7 +505,7 @@ function em({
   showSeparator: o = !0
 }) {
   return jsxs("div", {
-    className: c()(_$$s.borderBox.flex.flexRow.itemsCenter.p8.minH48.$, {
+    className: c()(cssBuilderInstance.borderBox.flex.flexRow.itemsCenter.p8.minH48.$, {
       [me]: o
     }),
     children: [jsx(IconButton, {
@@ -554,7 +554,7 @@ function ef({
       title: getTranslatedDynamicContent(t.i18n_meta.title, t.title),
       onClick: d
     }), jsx(_$$P, {
-      className: _$$s.px8.pt16.hFull.$,
+      className: cssBuilderInstance.px8.pt16.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
       onScroll,
@@ -949,7 +949,7 @@ function e8() {
         isEqual: (e, t) => e.type === t.type && (e.type !== i6.SINGLE || t.type !== i6.SINGLE || e.page.guid === t.page.guid && e.page.name === t.page.name)
       },
       id: "slides-ai-file-picker-page-select",
-      inputClassName: _$$s.fontMedium.colorText.ellipsis.alignTop.maxW150.$,
+      inputClassName: cssBuilderInstance.fontMedium.colorText.ellipsis.alignTop.maxW150.$,
       onChange: e => {
         c(e);
       },
@@ -981,7 +981,7 @@ function e9() {
   return jsxs("div", {
     className: "slides_template_page_selector--pageSelectorLoadingState--oaDQH",
     children: [jsx("div", {
-      className: _$$s.fontMedium.overflowHidden.colorTextSecondary.$,
+      className: cssBuilderInstance.fontMedium.overflowHidden.colorTextSecondary.$,
       children: getI18nString("slides.templates.file_picker.page_selector.loading")
     }), jsx(LoadingSpinner, {})]
   });
@@ -1012,7 +1012,7 @@ function tt({
     isCreateSlidesOutlineEnabled
   } = mp();
   return jsxs("div", {
-    className: c()(_$$s.flex.itemsCenter.justifyEnd.py8.pr16.gap8.$, qr),
+    className: c()(cssBuilderInstance.flex.itemsCenter.justifyEnd.py8.pr16.gap8.$, qr),
     children: [isCreateSlidesOutlineEnabled && jsx(Button, {
       iconPrefix: jsx(_$$V2, {}),
       variant: "secondary",
@@ -1032,7 +1032,7 @@ function ti({
 }) {
   return jsx(ta, {
     children: jsxs("div", {
-      className: _$$s.flex.gap8.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.$,
       children: [jsx(e8, {}), e]
     })
   });
@@ -1074,9 +1074,9 @@ function ta({
   children: e
 }) {
   return jsxs("div", {
-    className: c()(_$$s.flex.itemsCenter.justifyBetween.pl12.pr8.py8.$, qr),
+    className: c()(cssBuilderInstance.flex.itemsCenter.justifyBetween.pl12.pr8.py8.$, qr),
     children: [jsx("div", {
-      className: _$$s.flex.itemsCenter.justifyStart.gap8.$,
+      className: cssBuilderInstance.flex.itemsCenter.justifyStart.gap8.$,
       children: jsx(_$$y, {
         helpUrlVariant: JT.BOARD_TO_DECK
       })
@@ -1108,7 +1108,7 @@ function to({
       },
       showSeparator: !1
     }), jsx("div", {
-      className: _$$s.px16.overflowHidden.$,
+      className: cssBuilderInstance.px16.overflowHidden.$,
       children: jsx(oJ, {})
     }), d === Ji.OVERLAY_MODAL && !c && jsx(tt, {
       createOutline: lQ,
@@ -1272,7 +1272,7 @@ function tc({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.mr8.mlAuto.$,
+    className: cssBuilderInstance.mr8.mlAuto.$,
     children: e
   });
 }
@@ -1346,7 +1346,7 @@ function tm({
       title: e.name,
       onClick: S
     }), jsx(_$$P, {
-      className: _$$s.px8.hFull.$,
+      className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
       onScroll,
@@ -1422,7 +1422,7 @@ function t_({
         });
       }
     }), templatesByTeam ? jsx(_$$P, {
-      className: _$$s.p8.hFull.$,
+      className: cssBuilderInstance.p8.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
       onScroll,
@@ -1432,7 +1432,7 @@ function t_({
         onRequestMore: requestLoadMoreForTeam
       })
     }) : jsx("div", {
-      className: _$$s.p8.$,
+      className: cssBuilderInstance.p8.$,
       children: jsx(gu, {})
     })]
   });
@@ -1472,7 +1472,7 @@ function tE({
       showCloseButton: !!e,
       placeholder: getI18nString("slides.templates.file_picker.search_files")
     }), jsx("div", {
-      className: c()(_$$s.pt16.pb24.px16.flex.flexColumn.gap2.$, {
+      className: c()(cssBuilderInstance.pt16.pb24.px16.flex.flexColumn.gap2.$, {
         [me]: showSeparator
       }),
       children: jsx(_8, {
@@ -1506,13 +1506,13 @@ function tT({
   let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let u = null === useCurrentFileKey();
   return e === J_.LOADING || !d || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
     children: jsx(tS, {
       debouncedSearchQuery: t,
       status: e
     })
   }) : jsx(_$$P, {
-    className: c()(_$$s.px8.hFull.$),
+    className: c()(cssBuilderInstance.px8.hFull.$),
     onScroll: (e, t) => {
       onScroll(e, t);
       onShowSeparatorScroll(e, t);
@@ -1520,7 +1520,7 @@ function tT({
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
     children: jsx("div", {
-      className: c()(Vg, _$$s.pb12.$),
+      className: c()(Vg, cssBuilderInstance.pb12.$),
       children: i.map(e => jsx(tw, {
         file: e
       }, e.key))
@@ -1562,7 +1562,7 @@ function tw({
     };
   }(e.key);
   return jsx("div", {
-    className: c()(_$$s.pt8.px8.$, Fj),
+    className: c()(cssBuilderInstance.pt8.px8.$, Fj),
     children: jsx(GQ, {
       activeFileUsers: [],
       currentUser: t,
@@ -1589,11 +1589,11 @@ function tS({
 }) {
   return t === J_.NO_QUERY_RESULTS ? renderI18nText("slides.templates.file_picker.no_files_match", {
     searchQuery: jsx("p", {
-      className: _$$s.colorText.textBodyLargeStrong.$,
+      className: cssBuilderInstance.colorText.textBodyLargeStrong.$,
       children: e
     })
   }) : t === J_.NO_RECENT_FILES ? jsx("h1", {
-    className: _$$s.colorText.textBodyLarge.$,
+    className: cssBuilderInstance.colorText.textBodyLarge.$,
     children: renderI18nText("slides.templates.file_picker.no_recent_files")
   }) : null;
 }
@@ -1649,7 +1649,7 @@ function tI({
   } = gH();
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: c()(_$$s.p16.flex.flexColumn.gap2.$, {
+      className: c()(cssBuilderInstance.p16.flex.flexColumn.gap2.$, {
         [me]: trimmedSearchQuery && showSeparator
       }),
       children: jsx(_8, {
@@ -1657,7 +1657,7 @@ function tI({
           style: {
             "--color-icon": "var(--color-icon-menu-onselected)"
           },
-          className: _$$s.colorBgBrand.h14.w14.bRadius2.flex.alignCenter.itemsCenter.$,
+          className: cssBuilderInstance.colorBgBrand.h14.w14.bRadius2.flex.alignCenter.itemsCenter.$,
           children: jsx(_$$Q, {})
         }),
         title: getI18nString("slides.templates.template_picker.title"),
@@ -1724,14 +1724,14 @@ function tN() {
   let C = t.find(e => e.id === r);
   return C ? jsxs(Fragment, {
     children: [jsx("div", {
-      className: c()(_$$s.flex.flexRow.gap6.alignCenter.itemsCenter.px16.pb16.$, {
+      className: c()(cssBuilderInstance.flex.flexRow.gap6.alignCenter.itemsCenter.px16.pb16.$, {
         [me]: showSeparator
       }),
       children: t.map(e => jsx("button", {
-        className: c()(_$$s.textBodyMedium.colorText.spacingWide.alignCenter.px8.h24.$, {
+        className: c()(cssBuilderInstance.textBodyMedium.colorText.spacingWide.alignCenter.px8.h24.$, {
           [_$$eg]: r === e.id,
-          [_$$s.textBodyMediumStrong.$]: r === e.id,
-          [_$$s.colorTextSecondary.$]: r !== e.id
+          [cssBuilderInstance.textBodyMediumStrong.$]: r === e.id,
+          [cssBuilderInstance.colorTextSecondary.$]: r !== e.id
         }),
         onClick: y(e.id),
         children: 2 === e.type ? getTranslatedDynamicContent(e.shelf.i18n_meta.title, e.shelf.title) : e.label
@@ -1764,7 +1764,7 @@ function tA({
 }) {
   let r = _$$eE(FDocumentType.Slides);
   return 0 === r.length ? null : jsx(_$$P, {
-    className: _$$s.px8.hFull.$,
+    className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: e,
     initialScrollTop: t,
     onScroll: i,
@@ -1795,7 +1795,7 @@ function tO({
       showSeparator: !1
     }), templatesByTeam ? jsx(_$$P, {
       scrollContainerRef: l,
-      className: _$$s.px8.hFull.$,
+      className: cssBuilderInstance.px8.hFull.$,
       children: jsx(tg, {
         scrollContainerRef: l,
         templates: templatesByTeam.templates,
@@ -1845,7 +1845,7 @@ function tL({
     onBackClick: () => E(null)
   }) : (x ? isLoading : isLoadingTeamTemplates) ? jsx(kM, {}) : jsx(Fragment, {
     children: jsx(_$$P, {
-      className: _$$s.px8.hFull.$,
+      className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: t,
       initialScrollTop: i,
       onScroll: r,
@@ -1877,7 +1877,7 @@ function tR({
   if ("loading" === a) return jsx(kM, {});
   let s = e.id;
   return jsx(_$$P, {
-    className: _$$s.px8.hFull.$,
+    className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: t,
     initialScrollTop: i,
     onScroll: r,

@@ -14,7 +14,7 @@ import { logger } from "../905/651849";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
 import { Fe, uz } from "../905/284552";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { j as _$$j, Y5, bb, _v, YC, TN, yG, qD, sf, Ct, It, tS, xE, CN, Yq, CY, ct, J_ } from "../905/765801";
@@ -135,7 +135,7 @@ export let $$N0 = memo(({
     ref: E,
     onPointerMove: D,
     children: [jsx(ButtonPrimitive, {
-      className: _$$s.hFull.wFull.bgTransparent.$,
+      className: cssBuilderInstance.hFull.wFull.bgTransparent.$,
       onClick: useCallback(() => {
         I && C && x(I, R);
       }, [R, C, I]),

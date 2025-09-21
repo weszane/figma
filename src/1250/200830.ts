@@ -56,7 +56,7 @@ import { K as _$$K } from "../1250/166809";
 import { OC } from "../1250/791136";
 import { $z } from "../figma_app/617427";
 import { y as _$$y } from "../905/129046";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { D6 } from "../figma_app/863319";
 import { orgSubscriptionAtom } from "../905/296690";
 import { RG } from "../figma_app/684446";
@@ -691,13 +691,13 @@ function eK() {
   let r = renderI18nText("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
   D6(e) ? r = n ? renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = renderI18nText("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
     orgName: jsx("span", {
-      className: _$$s.fontBold.$,
+      className: cssBuilderInstance.fontBold.$,
       children: t.name
     })
   }));
   return jsxs(Fragment, {
     children: [jsx("p", {
-      className: _$$s.pb8.$,
+      className: cssBuilderInstance.pb8.$,
       children: renderI18nText("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
     }), r]
   });
@@ -752,24 +752,24 @@ function ti({
   if (!s) throw Error("org is not defined");
   ("fullscreen" === o.view || "prototype" === o.view) && t();
   let l = jsxs("div", {
-    className: _$$s.flexShrink0.flex.flexColumn.itemsCenter.gap8.$,
+    className: cssBuilderInstance.flexShrink0.flex.flexColumn.itemsCenter.gap8.$,
     children: [jsx("img", {
-      className: _$$s.w100.h100.$,
+      className: cssBuilderInstance.w100.h100.$,
       src: buildUploadUrl("b907892c6132bbea2173d8e95c096187288f54f9"),
       alt: "",
       width: 100,
       height: 100
     }), jsx("span", {
-      className: _$$s.textHeadingLarge.colorText.$,
+      className: cssBuilderInstance.textHeadingLarge.colorText.$,
       children: renderI18nText("onboarding.workspace_step.title")
     }), jsx("span", {
-      className: _$$s.textBodyLarge.colorText.$,
+      className: cssBuilderInstance.textBodyLarge.colorText.$,
       children: jsx("div", {
         className: "workspace_selector--descriptionContainer---ZBF1",
         children: renderI18nText("onboarding.workspace_step.subtitle_v2", {
           orgName: s.name,
           tipText: jsx("span", {
-            className: _$$s.textBodyLargeStrong.$,
+            className: cssBuilderInstance.textBodyLargeStrong.$,
             children: renderI18nText("onboarding.workspace_step.tip")
           })
         })
@@ -777,8 +777,8 @@ function ti({
     })]
   });
   let d = jsx(_$$P, {
-    className: _$$s.flexShrink1.minH200.mt24.$,
-    innerClassName: _$$s.flex.flexColumn.gap12.p16.pt2.$,
+    className: cssBuilderInstance.flexShrink1.minH200.mt24.$,
+    innerClassName: cssBuilderInstance.flex.flexColumn.gap12.p16.pt2.$,
     children: e.map(e => jsx(to, {
       workspace: e,
       onClick: () => r(e),
@@ -786,9 +786,9 @@ function ti({
     }, e.id))
   });
   let _ = jsx("div", {
-    className: _$$s.flex.justifyEnd.p16.colorBorder.bSolid.bt1.$,
+    className: cssBuilderInstance.flex.justifyEnd.p16.colorBorder.bSolid.bt1.$,
     children: jsxs("div", {
-      className: _$$s.flex.gap10.$,
+      className: cssBuilderInstance.flex.gap10.$,
       children: [jsx(_$$tM, {
         onClick: t,
         trackingProperties: {
@@ -812,7 +812,7 @@ function ti({
   return jsx(TrackingProvider, {
     name: tr,
     children: jsxs(ModalView, {
-      className: _$$s.relative.$,
+      className: cssBuilderInstance.relative.$,
       size: 680,
       height: 576,
       padding: 0,
@@ -826,14 +826,14 @@ function ti({
       },
       disableClickOutsideToHide: !0,
       children: [jsxs("div", {
-        className: _$$s.flex.flexColumn.hFull.$,
+        className: cssBuilderInstance.flex.flexColumn.hFull.$,
         children: [jsxs(_$$P, {
-          className: _$$s.flexGrow1.$,
-          innerClassName: _$$s.borderBox.hFull.flex.flexColumn.itemsCenter.alignCenter.px32.pt32.$,
+          className: cssBuilderInstance.flexGrow1.$,
+          innerClassName: cssBuilderInstance.borderBox.hFull.flex.flexColumn.itemsCenter.alignCenter.px32.pt32.$,
           children: [l, d]
         }), _]
       }), jsx(CloseButton, {
-        className: _$$s.absolute.top0.right0.mt8.mr8.$,
+        className: cssBuilderInstance.absolute.top0.right0.mt8.mr8.$,
         onClick: t,
         trackingProperties: {
           trackingDescriptor: UpgradeAction.CLOSE_BUTTON
@@ -857,7 +857,7 @@ function to({
       entity: e,
       size: 32
     }), jsx("span", {
-      className: _$$s.flexGrow1.truncate.textBodyLarge.colorText.ml16.$,
+      className: cssBuilderInstance.flexGrow1.truncate.textBodyLarge.colorText.ml16.$,
       children: e.name
     }), jsx("div", {
       className: l()("workspace_selector--radioButton--So7uS", {
@@ -988,7 +988,7 @@ let tC = memo(({
         className: "plan_spaces_launch_modal_components--titleProperties--rAj1j",
         children: e
       }), jsx("div", {
-        className: _$$s.pb16.$,
+        className: cssBuilderInstance.pb16.$,
         children: t
       }), jsx("div", {
         children: r
@@ -1180,7 +1180,7 @@ function tW({
       direction: "vertical",
       children: [jsx("div", {
         tabIndex: 0,
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         role: "button",
         onClick: () => {
           r && r(o);
@@ -1190,14 +1190,14 @@ function tW({
           horizontalAlignItems: "space-between",
           verticalAlignItems: "center",
           children: [jsx("div", {
-            className: _$$s.font14.fontMedium.$,
+            className: cssBuilderInstance.font14.fontMedium.$,
             children: e
           }), jsx(In, {
             icon: o ? "chevron-up-32" : "chevron-down-32"
           })]
         })
       }), o && jsx("div", {
-        className: _$$s.font13.$,
+        className: cssBuilderInstance.font13.$,
         children: i
       })]
     })]
@@ -1297,7 +1297,7 @@ function t0() {
       },
       children: jsx(SvgComponent, {
         svg: _$$A3,
-        className: _$$s.colorIconDanger.$
+        className: cssBuilderInstance.colorIconDanger.$
       })
     })
   }, {
@@ -1315,7 +1315,7 @@ function t0() {
       },
       children: jsx(SvgComponent, {
         svg: _$$A4,
-        className: _$$s.colorIconDanger.$
+        className: cssBuilderInstance.colorIconDanger.$
       })
     })
   }, {
@@ -1333,7 +1333,7 @@ function t0() {
       },
       children: jsx(SvgComponent, {
         svg: _$$A4,
-        className: _$$s.colorIconDanger.$
+        className: cssBuilderInstance.colorIconDanger.$
       })
     })
   }], []);

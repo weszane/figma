@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import r from "../vendor/523035";
 import { customHistory } from "../905/612521";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/355181";
 import { aO, vn } from "../figma_app/109538";
@@ -131,7 +131,7 @@ function N(e) {
       }) : renderI18nText("org_admin_settings.banners.renewal.body.legacy") : renderI18nText("org_admin_settings.banners.renewal.body.non_auto"),
       icon: jsx(SvgComponent, {
         svg: A,
-        className: _$$s.p8.$
+        className: cssBuilderInstance.p8.$
       }),
       button: jsxs(Fragment, {
         children: [!a && jsx(V, {
@@ -141,7 +141,7 @@ function N(e) {
           },
           variant: "secondary",
           children: jsx("span", {
-            className: _$$s.fontMedium.$,
+            className: cssBuilderInstance.fontMedium.$,
             "data-testid": "admin-renewal-banner-learn-more",
             children: renderI18nText("general.learn_more")
           })
@@ -154,7 +154,7 @@ function N(e) {
           onClick: r,
           variant: "inverse",
           children: jsx("span", {
-            className: _$$s.fontMedium.$,
+            className: cssBuilderInstance.fontMedium.$,
             "data-testid": "admin-renewal-banner-cta",
             children: renderI18nText("org_admin_settings.banners.renewal.cta")
           })

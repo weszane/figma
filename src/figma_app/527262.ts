@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
 import { selectWithShallowEqual } from "../905/103090";
 import { linkWithTracking } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { U as _$$U } from "../905/815805";
@@ -82,7 +82,7 @@ export function $$D0({
     },
     trackingOptions: $,
     children: jsxs("div", {
-      className: _$$s.grid.gap16.p36.pb24.selectNone.$,
+      className: cssBuilderInstance.grid.gap16.p36.pb24.selectNone.$,
       style: styleBuilderInstance.add({
         width: X
       }).$,
@@ -139,7 +139,7 @@ export function $$D0({
       }), jsx(hK, {
         height: 8
       }), B ?? jsx(_$$L, {}), jsx("p", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: renderI18nText("plan_comparison.campfire.applicable_taxes")
       })]
     })
@@ -148,21 +148,21 @@ export function $$D0({
 function k() {
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.textHeadingLarge.$,
+      className: cssBuilderInstance.textHeadingLarge.$,
       children: renderI18nText("plan_comparison.campfire.title")
     }), jsx("div", {
-      className: _$$s.textHeadingMedium.fontNormal.$,
+      className: cssBuilderInstance.textHeadingMedium.fontNormal.$,
       children: renderI18nText("plan_comparison.campfire.description", {
         plan: jsx("span", {
-          className: _$$s.textHeadingMedium.fontMedium.$,
+          className: cssBuilderInstance.textHeadingMedium.fontMedium.$,
           children: renderI18nText("plan_comparison.campfire.description.plan")
         }),
         seat: jsx("span", {
-          className: _$$s.textHeadingMedium.fontMedium.$,
+          className: cssBuilderInstance.textHeadingMedium.fontMedium.$,
           children: renderI18nText("plan_comparison.campfire.description.seat")
         }),
         learnMoreLink: jsx(linkWithTracking, {
-          className: _$$s.textHeadingMedium.fontNormal.$,
+          className: cssBuilderInstance.textHeadingMedium.fontNormal.$,
           href: PRICING_URL,
           target: "_blank",
           trusted: !0,

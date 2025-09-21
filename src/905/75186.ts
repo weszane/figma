@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { registerModal } from "../905/102752";
@@ -52,7 +52,7 @@ let $$A0 = registerModal(function (e) {
           "data-testid": "set-commit-sha-modal"
         },
         children: [y && jsx("div", {
-          className: _$$s.mb8.$,
+          className: cssBuilderInstance.mb8.$,
           children: jsx(TextWithTruncation, {
             color: "danger",
             children: y
@@ -61,7 +61,7 @@ let $$A0 = registerModal(function (e) {
           type: "text",
           ref: v,
           value: i,
-          className: _$$s.wFull.borderBox.b1.bRadius2.p8.colorBorder.mb8.$,
+          className: cssBuilderInstance.wFull.borderBox.b1.bRadius2.p8.colorBorder.mb8.$,
           onChange: e => u(e.target.value),
           placeholder: w,
           onKeyDown: S,
@@ -69,7 +69,7 @@ let $$A0 = registerModal(function (e) {
         }), jsx("input", {
           type: "text",
           value: g,
-          className: _$$s.wFull.borderBox.b1.bRadius2.p8.colorBorder.$,
+          className: cssBuilderInstance.wFull.borderBox.b1.bRadius2.p8.colorBorder.$,
           onChange: e => A(e.target.value),
           placeholder: "feature flags, comma-separated",
           onKeyDown: S,

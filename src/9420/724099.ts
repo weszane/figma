@@ -8,7 +8,7 @@ import { EnhancedInput } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S2 } from "../figma_app/490799";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { wn, dl, Ix } from "../9420/795870";
@@ -152,7 +152,7 @@ export function $$N0({
         children: jsx(Checkbox, {
           label: jsx(Label, {
             children: jsx("span", {
-              className: _$$s.font13.$,
+              className: cssBuilderInstance.font13.$,
               children: renderI18nText("checkout.i_have_a_different_legal_name")
             })
           }),
@@ -175,7 +175,7 @@ export function $$N0({
         children: jsx(Checkbox, {
           label: jsx(Label, {
             children: jsx("span", {
-              className: _$$s.font13.$,
+              className: cssBuilderInstance.font13.$,
               children: renderI18nText("checkout.i_have_a_different_shipping_address")
             })
           }),

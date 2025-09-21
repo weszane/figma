@@ -13,7 +13,7 @@ import { useSubscription } from "../figma_app/288654";
 import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
@@ -286,7 +286,7 @@ export let $$K0 = registerModal(function (e) {
       onClose: eD,
       maxWidth: 480,
       children: jsxs("div", {
-        className: _$$s.m16.$,
+        className: cssBuilderInstance.m16.$,
         children: [0 === er ? jsxs(Fragment, {
           children: [jsx(Ay, {
             className: W,

@@ -113,7 +113,7 @@ import { A as _$$A11 } from '../6828/250823';
 import { A as _$$A15 } from '../6828/364616';
 import { A as _$$A9 } from '../6828/555288';
 import { A as _$$A14 } from '../6828/954206';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { BranchingSourceViewSidebarView, BranchOpenMergeRequest, FileCanEdit, RepoReviewerSuggestions } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
@@ -1033,10 +1033,10 @@ function th({
 }) {
   return t ? jsx(ButtonPrimitive, {
     onClick: t,
-    className: ev()(tm, 'chunk_row--containerClickable--jquBH chunk_tile--clickable---Aa4s', _$$s.wFull.$),
+    className: ev()(tm, 'chunk_row--containerClickable--jquBH chunk_tile--clickable---Aa4s', cssBuilderInstance.wFull.$),
     children: e
   }) : jsx('div', {
-    className: ev()(tm, _$$s.wFull.$),
+    className: ev()(tm, cssBuilderInstance.wFull.$),
     children: e
   });
 }
@@ -1079,7 +1079,7 @@ function t_({
         children: i ? jsx(In, {
           icon: 'chevron-right-32'
         }) : jsx('div', {
-          className: _$$s.h32.$
+          className: cssBuilderInstance.h32.$
         })
       })]
     })

@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 import { Q4 } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
@@ -120,7 +120,7 @@ let E = registerModal(function ({
         className: tW,
         onClick: R,
         children: [jsx("div", {
-          className: _$$s.pl12.pr12.$,
+          className: cssBuilderInstance.pl12.pr12.$,
           children: jsx(_$$e, {})
         }), jsx("div", {
           className: L,

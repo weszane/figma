@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import a from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { LoadingSpinner } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { withTrackedClick } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 import { Yd, XH, zp, nf, U1, nM, z5, tk, e4, LI } from "../905/832675";
@@ -90,7 +90,7 @@ export class $$_5 extends PureComponent {
   render() {
     let e = this.props.isDescending ? "\u2193" : "\u2191";
     return jsxs("div", {
-      className: s()(LI, _$$s.$$if(!this.props.rightAligned, _$$s.pr6, _$$s.pl6).$, this.props.className),
+      className: s()(LI, cssBuilderInstance.$$if(!this.props.rightAligned, cssBuilderInstance.pr6, cssBuilderInstance.pl6).$, this.props.className),
       style: this.props.style ? this.props.style : {},
       onClick: this.sortBy,
       children: [this.props.rightAligned && this.props.hasArrow && jsx("div", {

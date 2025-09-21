@@ -44,7 +44,7 @@ import { A as _$$A3 } from '../5724/332367';
 import { A as _$$A4 } from '../5724/600086';
 import { A as _$$A2 } from '../5724/643251';
 import { A as _$$A } from '../6828/71291';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { getInitialOptions } from '../figma_app/169182';
 import { FResourceCategoryType } from '../figma_app/191312';
@@ -1455,7 +1455,7 @@ function eX(e) {
       children: [jsx(_$$k, {
         multiple: 3
       }), jsx('div', {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: jsx(_$$_2, {
           fullWidth: !0,
           color: _$$S.INFORMATION,
@@ -1842,7 +1842,7 @@ function te() {
   let s = useSelector(e => e.auth.redirectUrl || '/');
   let o = useSelector(e => e.user?.email === t);
   let d = i === AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD;
-  let c = _$$s.alignCenter.font16.lh24.$;
+  let c = cssBuilderInstance.alignCenter.font16.lh24.$;
   let [p, h] = useState('');
   let [g, f] = useState(!1);
   let _ = jsx(LinkPrimitive, {
@@ -1887,13 +1887,13 @@ function te() {
     customHistory.redirect(s || '/');
   };
   return jsxs('div', {
-    className: y()(_$$s.flex.flexColumn.px36.pt8.pb12.$, e5),
+    className: y()(cssBuilderInstance.flex.flexColumn.px36.pt8.pb12.$, e5),
     style: {
       maxWidth: '400px',
       minHeight: '120px'
     },
     children: [jsx('div', {
-      className: _$$s.mxAuto.mb12.$,
+      className: cssBuilderInstance.mxAuto.mb12.$,
       children: jsx(e9, {})
     }), jsx('h1', {
       className: y()(e4, e5),
@@ -1934,7 +1934,7 @@ function te() {
         children: getI18nString('auth.two-factor.log-in')
       })]
     }) : null, jsx(LinkPrimitive, {
-      className: _$$s.block.mt24.$,
+      className: cssBuilderInstance.block.mt24.$,
       href: 'https://mail.google.com/mail/u/0/',
       newTab: !0,
       children: jsx(N, {
@@ -1945,7 +1945,7 @@ function te() {
         text: getI18nString('auth.magic_link_check_email.open_gmail')
       })
     }), !t.endsWith('@gmail.com') && jsx(LinkPrimitive, {
-      className: _$$s.block.mt16.$,
+      className: cssBuilderInstance.block.mt16.$,
       href: 'https://outlook.live.com/mail/0/inbox',
       newTab: !0,
       children: jsx(N, {
@@ -1956,7 +1956,7 @@ function te() {
         text: getI18nString('auth.magic_link_check_email.open_outlook')
       })
     }), jsx('p', {
-      className: y()(c, _$$s.mt16.$),
+      className: y()(c, cssBuilderInstance.mt16.$),
       children: renderI18nText('auth.magic_link_check_email.wrong_address_go_back', {
         goBackLink: _
       })
@@ -2041,7 +2041,7 @@ function ts() {
   let t = useSelector(e => e.auth.email);
   let i = useSelector(e => e.auth.redirectUrl);
   let s = useSelector(e => e.auth.origin);
-  let o = _$$s.alignCenter.font16.lh24.$;
+  let o = cssBuilderInstance.alignCenter.font16.lh24.$;
   let d = jsx('strong', {
     className: e6,
     children: t
@@ -2084,13 +2084,13 @@ function ts() {
     };
   }, [i]);
   return jsxs('div', {
-    className: y()(_$$s.flex.flexColumn.$$if(isAndroidOrIphoneNotFigmaMobile, _$$s.p28, _$$s.p36).$, e5),
+    className: y()(cssBuilderInstance.flex.flexColumn.$$if(isAndroidOrIphoneNotFigmaMobile, cssBuilderInstance.p28, cssBuilderInstance.p36).$, e5),
     style: {
       maxWidth: '400px',
       minHeight: '120px'
     },
     children: [jsx('div', {
-      className: _$$s.mxAuto.mb12.$,
+      className: cssBuilderInstance.mxAuto.mb12.$,
       children: jsx(tr, {})
     }), jsx('h1', {
       className: y()({
@@ -2104,14 +2104,14 @@ function ts() {
         emailAddress: d
       })
     }), isAndroidOrIphoneNotFigmaMobile && jsx('p', {
-      className: y()(o, _$$s.mt16.$, 'validate_email--mobileValidateEmailTextWithInnerLink--H4HMt validate_email--validateEmailTextWithInnerLink--lU6fE auth_brand--text--yNin9 auth_brand--innerLink---m7Kv'),
+      className: y()(o, cssBuilderInstance.mt16.$, 'validate_email--mobileValidateEmailTextWithInnerLink--H4HMt validate_email--validateEmailTextWithInnerLink--lU6fE auth_brand--text--yNin9 auth_brand--innerLink---m7Kv'),
       children: renderI18nText('auth.validate-email.log-out-only', {
         logOutLink: jsx(ta, {
           checkInIframe: () => window.self !== window.top
         })
       })
     }), jsx(LinkPrimitive, {
-      className: _$$s.block.mt32.$,
+      className: cssBuilderInstance.block.mt32.$,
       href: 'https://mail.google.com/mail/u/0/',
       newTab: !0,
       children: jsx(N, {
@@ -2122,7 +2122,7 @@ function ts() {
         text: getI18nString('auth.magic_link_check_email.open_gmail')
       })
     }), !t.endsWith('@gmail.com') && jsx(LinkPrimitive, {
-      className: _$$s.block.mt16.$,
+      className: cssBuilderInstance.block.mt16.$,
       href: 'https://outlook.live.com/mail/0/inbox',
       newTab: !0,
       children: jsx(N, {
@@ -2133,12 +2133,12 @@ function ts() {
         text: getI18nString('auth.magic_link_check_email.open_outlook')
       })
     }), isAndroidOrIphoneNotFigmaMobile ? jsx('button', {
-      className: y()(o, e3, _$$s.mt24.$, 'validate_email--resendEmailText--iRAOS'),
+      className: y()(o, e3, cssBuilderInstance.mt24.$, 'validate_email--resendEmailText--iRAOS'),
       onClick: p,
       children: renderI18nText('auth.validate-email.resend-email-text')
     }) : jsxs(Fragment, {
       children: [jsx('p', {
-        className: y()(o, e3, _$$s.mt16.$, e7),
+        className: y()(o, e3, cssBuilderInstance.mt16.$, e7),
         children: renderI18nText('auth.validate-email.resend-email', {
           resendEmailLink: jsx(Link, {
             onClick: p,
@@ -2148,7 +2148,7 @@ function ts() {
           })
         })
       }), jsx('p', {
-        className: y()(o, e3, _$$s.mt16.$, e7),
+        className: y()(o, e3, cssBuilderInstance.mt16.$, e7),
         children: renderI18nText('auth.validate-email.log-out-only', {
           logOutLink: jsx(ta, {
             checkInIframe: () => window.self !== window.top

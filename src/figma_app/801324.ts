@@ -7,7 +7,7 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import d from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { lC, U9 } from "../905/125333";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { k as _$$k2 } from "../905/545760";
 import { Sk, gz, eB, ID, xI, t3, iD, ZJ, B4, i0, BE, rh, uh, WX, SN, Wq, cq, BN, cP, dP, $d } from "../figma_app/731560";
@@ -371,7 +371,7 @@ function D(e, t) {
     strokeOpacity: styleType === BorderStyle.NONE ? .2 : 1,
     strokeDasharray: styleType === BorderStyle.DASHED ? `${i * w} ${i * w}` : "",
     strokeLinecap: "round",
-    className: _$$s.$$if(isDragging, _$$s.hidden).$
+    className: cssBuilderInstance.$$if(isDragging, cssBuilderInstance.hidden).$
   };
 }
 function k(e, t) {

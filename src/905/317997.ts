@@ -5,7 +5,7 @@ import s from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { X, U as _$$U } from "../905/77000";
 import { getSelectedFile } from "../905/766303";
@@ -62,7 +62,7 @@ export function $$w1(e) {
   let H = z ? PV : eT;
   let W = jsxs(_$$P, {
     width,
-    className: _$$s.flexGrow1.$,
+    className: cssBuilderInstance.flexGrow1.$,
     children: [jsx(C, {
       inline: !1,
       publishedLibrary,
@@ -113,7 +113,7 @@ export function $$w1(e) {
   });
   let K = X(libraryKey, teamId ?? void 0);
   return jsxs("div", {
-    className: o()(H, _$$s.flex.flexColumn.$),
+    className: o()(H, cssBuilderInstance.flex.flexColumn.$),
     children: [K.data && jsx(_$$U, {
       connectedProjects: K.data,
       padding: 8

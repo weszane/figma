@@ -96,7 +96,7 @@ import { pA, eI as _$$eI, QP } from "../7021/724859";
 import { l as _$$l } from "../905/479687";
 import { resourceUtils } from "../905/989992";
 import { Wi, Qp, JR } from "../figma_app/162641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { styleBuilderInstance } from "../905/941192";
 import { B as _$$B3 } from "../905/261906";
@@ -1182,9 +1182,9 @@ function rm({
         className: sV
       }, t);
       let l = jsxs("div", {
-        className: _$$s.flex.itemsCenter.gap4.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.$,
         children: [jsx("p", {
-          className: _$$s.textBodyMedium.colorTextSecondary.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
           style: styleBuilderInstance.add({
             textDecoration: "line-through"
           }).$,
@@ -1195,16 +1195,16 @@ function rm({
         })]
       });
       return jsxs("div", {
-        className: _$$s.flex.justifyBetween.$,
+        className: cssBuilderInstance.flex.justifyBetween.$,
         children: [jsxs("div", {
-          className: _$$s.flex.gap4.itemsCenter.$,
+          className: cssBuilderInstance.flex.gap4.itemsCenter.$,
           "data-testid": "choose-plan-seat-name",
           children: [_$$B3({
             type: t,
             size: "16",
             removeBackgroundColor: !0
           }), jsx("p", {
-            className: _$$s.textBodyMedium.$,
+            className: cssBuilderInstance.textBodyMedium.$,
             children: function (e) {
               switch (e) {
                 case ProductAccessTypeEnum.EXPERT:
@@ -1233,11 +1233,11 @@ function rE({
   localizeCurrency: r
 }) {
   return jsx("p", {
-    className: _$$s.textBodySmall.$,
+    className: cssBuilderInstance.textBodySmall.$,
     "data-testid": "choose-plan-seat-price",
     children: renderI18nText("nux.price_per_month", {
       price: jsx("span", {
-        className: _$$s.textBodyMediumStrong.$,
+        className: cssBuilderInstance.textBodyMediumStrong.$,
         children: r.formatMoney(e)
       })
     })
@@ -1248,19 +1248,19 @@ function rb({
   isOrg: r
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap4.$,
+    className: cssBuilderInstance.flex.flexColumn.gap4.$,
     children: [r && jsx("p", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: renderI18nText("nux.org.feature.everything_on_pro")
     }), e.map((e, r) => jsxs("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [jsx(_$$l, {
-        className: _$$s.minW16.$,
+        className: cssBuilderInstance.minW16.$,
         style: styleBuilderInstance.add({
           "--color-icon": "var(--color-icon-secondary)"
         }).$
       }), jsx("p", {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: e
       })]
     }, r))]
@@ -1463,7 +1463,7 @@ function rk({
   planTestId: c
 }) {
   return jsxs("button", {
-    className: _$$s.flex1.p16.alignLeft.cursorPointer.flex.bt1.bb1.flexColumn.$$if(i, _$$s.colorBgSelected).$,
+    className: cssBuilderInstance.flex1.p16.alignLeft.cursorPointer.flex.bt1.bb1.flexColumn.$$if(i, cssBuilderInstance.colorBgSelected).$,
     style: styleBuilderInstance.$$if("left" === t, styleBuilderInstance.add({
       borderTopLeftRadius: "13px",
       borderBottomLeftRadius: "13px",
@@ -1476,18 +1476,18 @@ function rk({
     onClick: o,
     "data-testid": c,
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.justifyBetween.$,
+      className: cssBuilderInstance.flex.flexColumn.justifyBetween.$,
       style: styleBuilderInstance.add({
         height: "136px"
       }).$,
       children: [jsxs("div", {
-        className: _$$s.flex.justifyBetween.$,
+        className: cssBuilderInstance.flex.justifyBetween.$,
         children: [jsxs("div", {
           children: [jsx("h2", {
-            className: _$$s.textHeadingMedium.$,
+            className: cssBuilderInstance.textHeadingMedium.$,
             children: e
           }), jsx("p", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: r
           })]
         }), jsx("div", {
@@ -1498,7 +1498,7 @@ function rk({
         })]
       }), jsx(l, {})]
     }), jsx("div", {
-      className: _$$s.wFull.my16.bSolid.bt1.$$if(i, _$$s.colorBorderSelected, _$$s.colorBorder).$
+      className: cssBuilderInstance.wFull.my16.bSolid.bt1.$$if(i, cssBuilderInstance.colorBorderSelected, cssBuilderInstance.colorBorder).$
     }), jsx(n, {}), a && jsx(a, {})]
   });
 }
@@ -3234,7 +3234,7 @@ function tA() {
         onItemsChange: c,
         getOptionDisplay
       }), e ? jsx("div", {
-        className: a ? void 0 : _$$s.font12.bRadius5.colorBgSecondary.p12.mt20.$$if(x, _$$s.alignCenter).$,
+        className: a ? void 0 : cssBuilderInstance.font12.bRadius5.colorBgSecondary.p12.mt20.$$if(x, cssBuilderInstance.alignCenter).$,
         ..._$$Ay2.props(a && tP.disclaimerContainer),
         children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
           tos: jsx(Link, {

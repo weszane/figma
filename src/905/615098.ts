@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import s from "classnames";
 import { logError } from "../905/714362";
 import { V } from "../figma_app/385855";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { E as _$$E, N as _$$N } from "../905/139531";
 import { j6, Om, o as _$$o, rR, r$, R as _$$R } from "../905/708693";
 var o = s;
@@ -61,7 +61,7 @@ export let $$m0 = forwardRef(({
     clearInterval(x.current);
     clearTimeout(E.current);
   }, []), !S) return jsx("div", {
-    className: _$$s.hFull.wFull.$,
+    className: cssBuilderInstance.hFull.wFull.$,
     children: jsx(V, {
       thumbnailUrl: e,
       thumbnailType: i,
@@ -83,7 +83,7 @@ export let $$m0 = forwardRef(({
     }, t)
   }, t));
   return jsx("div", {
-    className: _$$s.hFull.wFull.$,
+    className: cssBuilderInstance.hFull.wFull.$,
     ref: g,
     onMouseEnter: () => {
       y(!0);
@@ -96,7 +96,7 @@ export let $$m0 = forwardRef(({
     onDragStart: P,
     children: jsxs("div", {
       ref: I,
-      className: _$$s.hFull.wFull.$,
+      className: cssBuilderInstance.hFull.wFull.$,
       children: [jsx("div", {
         className: rR
       }), jsx(V, {

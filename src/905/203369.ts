@@ -6,7 +6,7 @@ import { KeyCodes, isModifierMatch, ModifierKeyCodes } from "../905/63728";
 import { By } from "../905/777187";
 import { BrowserInfo } from "../figma_app/778880";
 import { SKIP_RECORDING } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { _L, mb, ql } from "../905/668764";
 import { LS } from "../figma_app/975811";
@@ -245,7 +245,7 @@ export class $$I3 extends PureComponent {
         "aria-label": this.props.ariaLabel,
         autoFocus: !BrowserInfo.safari && this.props.autoFocus,
         className: o()({
-          [_$$s.ellipsis.$]: this.props.ellipsis
+          [cssBuilderInstance.ellipsis.$]: this.props.ellipsis
         }, this.props.className),
         dataOnboardingKey: this.props.dataOnboardingKey,
         dataTestId: this.props.dataTestId,

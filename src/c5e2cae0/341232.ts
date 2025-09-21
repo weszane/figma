@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackedButton } from "../figma_app/831799";
 import { A } from "../c5e2cae0/809027";
@@ -9,7 +9,7 @@ let c = e => e.maxSeatsCount ? Math.min(e.maxSeatsCount, 99) : 99;
 export function $$m0(e) {
   return jsx(Fragment, {
     children: jsxs("div", {
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsxs("div", {
         className: "seat_counter--seatCounter--DiuEb",
         children: [jsx(TrackedButton, {

@@ -476,7 +476,7 @@ import { A as _$$A15 } from '../af221b13/388839';
 import { A as _$$A9 } from '../b2835def/114344';
 import ha from '../b2835def/987714';
 import { d as _$$d4 } from '../c5e2cae0/368426';
-import { s as _$$s4 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import _require2 from '../f2246930/453829';
 import { getWorkshopModeStatus } from '../figma_app/789';
 import { at as _$$at, lz as _$$lz, N as _$$N4, uy as _$$uy, we as _$$we, Ab, Iv, R0, Vc, ZH } from '../figma_app/987';
@@ -3071,12 +3071,12 @@ function l5({
   inLine: s
 }) {
   return jsxs('div', {
-    className: v()(_$$s4.$$case([[t === 'secondary', _$$s4.colorBgSecondary], [t === 'danger', _$$s4.colorBgDangerTertiary], [t === 'warning', _$$s4.colorBgWarningTertiary]]).$$if(a, _$$s4.mx16.mt16.mb20, _$$s4.mb12).$$if(s, _$$s4.flex.flexRow.itemsCenter.p8, _$$s4.pt4.pb8.px8).bRadius5.$),
+    className: v()(cssBuilderInstance.$$case([[t === 'secondary', cssBuilderInstance.colorBgSecondary], [t === 'danger', cssBuilderInstance.colorBgDangerTertiary], [t === 'warning', cssBuilderInstance.colorBgWarningTertiary]]).$$if(a, cssBuilderInstance.mx16.mt16.mb20, cssBuilderInstance.mb12).$$if(s, cssBuilderInstance.flex.flexRow.itemsCenter.p8, cssBuilderInstance.pt4.pb8.px8).bRadius5.$),
     children: [e && jsx('div', {
-      className: v()('styles-module--warningIconWrapper--1toyP', _$$s4.$$if(s, _$$s4.mbAuto, _$$s4.mb4).$),
+      className: v()('styles-module--warningIconWrapper--1toyP', cssBuilderInstance.$$if(s, cssBuilderInstance.mbAuto, cssBuilderInstance.mb4).$),
       children: e
     }), i && jsx('h4', {
-      className: _$$s4.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: i
     }), n]
   });
@@ -3086,7 +3086,7 @@ function an({
   dataTestId: t
 }) {
   return jsx(_$$F5, {
-    'className': _$$s4.inlineBlock.px4.bRadius5.textBodyMedium.$$if(e, _$$s4.colorBgSelected.colorTextBrand, _$$s4.colorBgSecondary.colorText).$,
+    'className': cssBuilderInstance.inlineBlock.px4.bRadius5.textBodyMedium.$$if(e, cssBuilderInstance.colorBgSelected.colorTextBrand, cssBuilderInstance.colorBgSecondary.colorText).$,
     'data-testid': t,
     'children': e ? renderI18nText('sites.metadata.controls.publish_status.published') : renderI18nText('sites.metadata.controls.publish_status.not_published')
   });
@@ -3100,9 +3100,9 @@ function al({
 }) {
   let s = _$$e6();
   return jsxs('div', {
-    className: _$$s4.maxH400.$,
+    className: cssBuilderInstance.maxH400.$,
     children: [jsx('div', {
-      className: _$$s4.h32.flex.itemsCenter.colorTextSecondary.$,
+      className: cssBuilderInstance.h32.flex.itemsCenter.colorTextSecondary.$,
       children: getI18nString('sites.toolbar.publish_modal.ready_to_publish')
     }), s && jsx(as, {
       guid: s,
@@ -3118,7 +3118,7 @@ function al({
       isSitePublished: e,
       isPagePublished: n?.includes(t) ?? !1
     }, t)), t.some(e => !i.has(e)) && jsx('div', {
-      className: _$$s4.h32.flex.itemsCenter.colorTextSecondary.$,
+      className: cssBuilderInstance.h32.flex.itemsCenter.colorTextSecondary.$,
       children: getI18nString('sites.toolbar.publish_modal.hide_from_publish')
     }), t.filter(e => !i.has(e)).map(t => jsx(as, {
       guid: t,
@@ -3134,7 +3134,7 @@ function aa({
   isPagePublished: t
 }) {
   return e ? jsx('div', {
-    className: _$$s4.ml8.$,
+    className: cssBuilderInstance.ml8.$,
     children: jsx(an, {
       isPublished: t,
       dataTestId: 'sitesPagePublishStatusBadge'
@@ -3155,7 +3155,7 @@ function as({
   let x = `checkbox-${useId()}`;
   let m = `label-${useId()}`;
   return d ? jsxs('div', {
-    className: _$$s4.h48.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.h48.flex.flexRow.itemsCenter.$,
     children: [jsx(ManuallyLabeledCheckbox, {
       'htmlAttributes': {
         'data-testid': `${d}-checkbox`
@@ -3166,20 +3166,20 @@ function as({
       'onChange': t => i(e, t),
       'aria-describedby': m
     }), jsx('div', {
-      className: _$$s4.ml4.$,
+      className: cssBuilderInstance.ml4.$,
       children: n ? jsx(_$$I2, {}) : jsx(_$$g3, {})
     }), jsx(Label, {
       htmlAttributes: {
         id: m
       },
-      className: _$$s4.maxW250.ml4.$,
+      className: cssBuilderInstance.maxW250.ml4.$,
       children: c ? jsxs(Fragment, {
         children: [jsx(ar, {
           labelText: c,
           isSitePublished: s,
           isPagePublished: r
         }), jsx('div', {
-          className: _$$s4.colorTextSecondary.maxW250.truncate.$,
+          className: cssBuilderInstance.colorTextSecondary.maxW250.truncate.$,
           children: d
         })]
       }) : jsx(ar, {
@@ -3188,7 +3188,7 @@ function as({
         isPagePublished: r
       })
     }), !t && s && r && jsx(_$$b7, {
-      'className': _$$s4.mlAuto.colorIconWarningPressed.$,
+      'className': cssBuilderInstance.mlAuto.colorIconWarningPressed.$,
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.toolbar.publish_modal.page_will_unpublish_at_next_update'),
       'data-tooltip-show-above': !0,
@@ -3205,9 +3205,9 @@ function ar({
   isPagePublished: i
 }) {
   return jsxs('div', {
-    className: _$$s4.flex.flexRow.itemsCenter.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
     children: [jsx('div', {
-      className: _$$s4.truncate.maxW150.$,
+      className: cssBuilderInstance.truncate.maxW150.$,
       children: e
     }), jsx('div', {
       children: jsx(aa, {
@@ -3447,13 +3447,13 @@ function af({
   forceShortContentStyle: n
 }) {
   return jsxs('div', {
-    className: _$$s4.flex.justifyBetween.itemsCenter.minH24.$,
+    className: cssBuilderInstance.flex.justifyBetween.itemsCenter.minH24.$,
     children: [jsxs('div', {
-      className: _$$s4.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsx('div', {
         className: 'styles-module--publishModalRowLabel--WRR8e',
         children: jsx('span', {
-          className: _$$s4.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: e
         })
       }), jsx('div', {
@@ -3461,7 +3461,7 @@ function af({
         children: t
       })]
     }), i && jsx('div', {
-      className: _$$s4.maxW32.$,
+      className: cssBuilderInstance.maxW32.$,
       children: i
     })]
   });
@@ -3475,13 +3475,13 @@ function a_(e) {
   let a = Array.from(selectedResponsiveSetGuids).reduce((e, t) => e + (n[t]?.length ?? 0), 0);
   return jsx('div', {
     'data-testid': 'site-review-issues-row',
-    'className': _$$s4.py4.$,
+    'className': cssBuilderInstance.py4.$,
     'children': jsx(af, {
       label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: a > 0 ? jsx('div', {
-        className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
+        className: cssBuilderInstance.flex.justifyBetween.itemsCenter.overflowHidden.$,
         children: jsx(ButtonPrimitive, {
-          className: v()(_$$s4.wFull.flex.justifyBetween.py4.bRadius5.$),
+          className: v()(cssBuilderInstance.wFull.flex.justifyBetween.py4.bRadius5.$),
           onClick: onViewErrors,
           children: jsx(_$$E6, {
             variant: 'warningFilled',
@@ -3495,7 +3495,7 @@ function a_(e) {
       }),
       action: a > 0 ? jsx(ButtonPrimitive, {
         'aria-label': getI18nString('sites.toolbar.publish_modal.review_issues_aria'),
-        'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
+        'className': v()(cssBuilderInstance.wFull.flex.justifyBetween.bRadius5.$, l0),
         'onClick': onViewErrors,
         'children': jsx(_$$a4, {
           style: {
@@ -3508,7 +3508,7 @@ function a_(e) {
 }
 function ab() {
   return jsx('div', {
-    className: _$$s4.py4.$,
+    className: cssBuilderInstance.py4.$,
     children: jsx(af, {
       label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: jsxs('div', {
@@ -3655,13 +3655,13 @@ function aD({
     href: _$$uw(n),
     newTab: !0,
     children: jsx('span', {
-      className: _$$s4.overflowHidden.ellipsis.colorTextBrand.$,
+      className: cssBuilderInstance.overflowHidden.ellipsis.colorTextBrand.$,
       children: _$$RT(n)
     })
   }) : jsxs('div', {
-    className: _$$s4.flex.itemsStart.gap4.$,
+    className: cssBuilderInstance.flex.itemsStart.gap4.$,
     children: [jsx('span', {
-      className: _$$s4.overflowHidden.ellipsis.colorTextSecondary.$,
+      className: cssBuilderInstance.overflowHidden.ellipsis.colorTextSecondary.$,
       children: `example.${_$$nC()}`
     }), jsx(_$$B3, {
       'data-testid': 'info-icon',
@@ -3705,7 +3705,7 @@ function az({
   return jsx(l5, {
     bannerType: e ? l1.DANGER : l1.SECONDARY,
     children: jsxs('p', {
-      className: _$$s4.pt4.flex.itemsCenter.gap8.fontMedium.$,
+      className: cssBuilderInstance.pt4.flex.itemsCenter.gap8.fontMedium.$,
       children: [jsx(_$$b7, {
         style: {
           minWidth: '24px'
@@ -4034,7 +4034,7 @@ function st() {
   return e || !a.data ? null : jsx('div', {
     children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
       upgradePlanLink: jsx(linkWithTracking, {
-        className: _$$s4.noWrap.cursorDefault.$,
+        className: cssBuilderInstance.noWrap.cursorDefault.$,
         onClick: s,
         trackingProperties: {
           trackingDescriptor: UpgradeAction.PROFESSIONAL_PLAN,
@@ -4118,7 +4118,7 @@ function sc({
   let t = e ? getI18nString('figmake.publish_modal.site_title_label') : getI18nString('sites.metadata.controls.title_site.label');
   return jsx('div', {
     'data-testid': 'site-title-row',
-    'className': _$$s4.py4.$,
+    'className': cssBuilderInstance.py4.$,
     'children': jsx(af, {
       label: t,
       content: jsx(lX, {}),
@@ -4172,22 +4172,22 @@ function sp({
     case 'main':
       M = jsx(DialogBody, {
         children: jsxs('div', {
-          className: _$$s4.py4.$,
+          className: cssBuilderInstance.py4.$,
           children: [jsx(sc, {
             isFigmake: A
           }), jsx('div', {
             'data-testid': 'site-domain-row',
-            'className': _$$s4.py4.$,
+            'className': cssBuilderInstance.py4.$,
             'children': jsx(aD, {
               fileKey: e
             })
           }), jsx('div', {
             'data-testid': 'site-status-row',
-            'className': _$$s4.py4.$,
+            'className': cssBuilderInstance.py4.$,
             'children': jsx(af, {
               label: getI18nString('sites.toolbar.publish_modal.status_header'),
               content: jsx('div', {
-                className: _$$s4.flex.itemsCenter.h24.$,
+                className: cssBuilderInstance.flex.itemsCenter.h24.$,
                 children: jsx(an, {
                   isPublished: f,
                   dataTestId: 'sitesPublishStatusBadge'
@@ -4196,13 +4196,13 @@ function sp({
             })
           }), O && jsx('div', {
             'data-testid': 'site-pages-row',
-            'className': _$$s4.py4.$,
+            'className': cssBuilderInstance.py4.$,
             'children': jsx(af, {
               label: getI18nString('sites.toolbar.publish_modal.pages_label'),
               content: jsx('div', {
-                className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
+                className: cssBuilderInstance.flex.justifyBetween.itemsCenter.overflowHidden.$,
                 children: jsx(ButtonPrimitive, {
-                  className: v()(_$$s4.wFull.flex.justifyBetween.py4.bRadius5.$),
+                  className: v()(cssBuilderInstance.wFull.flex.justifyBetween.py4.bRadius5.$),
                   onClick: () => C('page-selection'),
                   children: renderI18nText('sites.toolbar.publish_modal.num_pages', {
                     numPages: p.size
@@ -4211,7 +4211,7 @@ function sp({
               }),
               action: jsx(ButtonPrimitive, {
                 'aria-label': getI18nString('sites.toolbar.publish_modal.select_pages_to_publish'),
-                'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
+                'className': v()(cssBuilderInstance.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => C('page-selection'),
                 'children': jsx(_$$a4, {
                   style: {
@@ -4230,20 +4230,20 @@ function sp({
             }
           }), d && jsx('div', {
             'data-testid': 'site-last-published-row',
-            'className': _$$s4.py4.$,
+            'className': cssBuilderInstance.py4.$,
             'children': jsx(af, {
               label: getI18nString('sites.toolbar.publish_modal.last_published_header'),
               content: jsxs('div', {
-                className: _$$s4.flex.itemsCenter.$,
+                className: cssBuilderInstance.flex.itemsCenter.$,
                 children: [jsx(_$$h5, {
                   date: d,
                   capitalize: !0
                 }), x && jsxs('span', {
-                  className: _$$s4.flex.justifyCenter.itemsCenter.ml4.$,
+                  className: cssBuilderInstance.flex.justifyCenter.itemsCenter.ml4.$,
                   children: [` \xB7 `, jsxs('div', {
-                    className: _$$s4.flex.justifyCenter.itemsCenter.$,
+                    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
                     children: [jsx('div', {
-                      className: _$$s4.flex.itemsCenter.justifyCenter.h24.w24.$,
+                      className: cssBuilderInstance.flex.itemsCenter.justifyCenter.h24.w24.$,
                       children: jsx(H8, {
                         size: Pf.SMALL,
                         user: x || {
@@ -4259,7 +4259,7 @@ function sp({
               }),
               action: getFeatureFlags().sts_revert_publish && y ? jsx(ButtonPrimitive, {
                 'aria-label': getI18nString('sites.toolbar.publish_modal.publish_history'),
-                'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
+                'className': v()(cssBuilderInstance.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => {
                   C('publish-history');
                   trackEventAnalytics('sites_publish_history_opened', {
@@ -4280,7 +4280,7 @@ function sp({
     case 'page-selection':
       M = jsx(DialogBody, {
         children: jsx('div', {
-          className: _$$s4.py4.$,
+          className: cssBuilderInstance.py4.$,
           children: jsx(al, {
             isSitePublished: f,
             allResponsiveSetGuids: c,
@@ -4370,7 +4370,7 @@ function sp({
           }), m === 'failed' && g && !r && jsx(l5, {
             bannerType: l1.DANGER,
             children: jsxs('p', {
-              className: _$$s4.pt4.flex.itemsCenter.gap8.fontMedium.$,
+              className: cssBuilderInstance.pt4.flex.itemsCenter.gap8.fontMedium.$,
               children: [jsx(_$$z4, {
                 style: {
                   minWidth: '16px'
@@ -4385,7 +4385,7 @@ function sp({
           }), X && q && jsx(l5, {
             bannerType: l1.WARNING,
             children: jsxs('p', {
-              className: _$$s4.pt4.flex.itemsCenter.gap8.fontMedium.$,
+              className: cssBuilderInstance.pt4.flex.itemsCenter.gap8.fontMedium.$,
               children: [jsx(_$$z4, {
                 style: {
                   minWidth: '16px'
@@ -4396,7 +4396,7 @@ function sp({
             isPublishing: r,
             isUpdating: Z
           }), jsxs('div', {
-            className: _$$s4.flex.gap8.$,
+            className: cssBuilderInstance.flex.gap8.$,
             children: [j && !j.hasCustomDomain && jsx(ButtonWide, {
               'variant': 'secondary',
               'onClick': () => {
@@ -4420,7 +4420,7 @@ function sp({
               'disabled': r || inProgress || z || K || H || X,
               'data-testid': 'sitesModalPublishButton',
               'children': r || inProgress ? jsxs('div', {
-                className: v()(_$$s4.flex.itemsCenter.gap4.justifyCenter.$, 'styles-module--loadingSpinnerWrapper--mnPxw'),
+                className: v()(cssBuilderInstance.flex.itemsCenter.gap4.justifyCenter.$, 'styles-module--loadingSpinnerWrapper--mnPxw'),
                 children: [jsx(_$$k7, {
                   size: 'sm'
                 }), renderI18nText('sites.toolbar.publish_modal.publishing_label')]
@@ -4456,13 +4456,13 @@ function sm({
       });
     case 'page-selection':
       return jsxs(DialogLabel, {
-        className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
-          className: _$$s4.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
           children: renderI18nText('sites.toolbar.publish_modal.pages_label')
@@ -4470,13 +4470,13 @@ function sm({
       });
     case 'review-issues':
       return jsxs(DialogLabel, {
-        className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
-          className: _$$s4.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
           children: renderI18nText('sites.toolbar.publish_modal.review_issues_label')
@@ -4484,13 +4484,13 @@ function sm({
       });
     case 'publish-history':
       return jsxs(DialogLabel, {
-        className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
-          className: _$$s4.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
           children: renderI18nText('sites.toolbar.publish_modal.publish_history_label')
@@ -7085,9 +7085,9 @@ let oA = ({
     }
   }
   return e ? t ? jsx(_$$Q4, {
-    className: _$$s4.flexShrink0.$
+    className: cssBuilderInstance.flexShrink0.$
   }) : jsx(_$$A0, {
-    className: _$$s4.flexShrink0.$
+    className: cssBuilderInstance.flexShrink0.$
   }) : n === _$$p6.SUPABASE ? jsx('div', {
     className: 'x78zum5 x6s0dn4 xlup9mm x1kky2od',
     children: jsx(SvgComponent, {
@@ -7937,7 +7937,7 @@ function dn({
         className: 'x78zum5 x6s0dn4',
         children: [jsx(InputComponent, {
           id: 'domain',
-          className: _$$s4.wFull.ellipsis.$,
+          className: cssBuilderInstance.wFull.ellipsis.$,
           style: styleBuilderInstance.py8.hAuto.$,
           value: m,
           onChange: e => {
@@ -8512,9 +8512,9 @@ function dS({
   }, [d, p, x, m]);
   let g = r || d;
   return jsxs('div', {
-    className: _$$s4.flex.flexRow.justifyBetween.itemsCenter.pt4.pb4.$,
+    className: cssBuilderInstance.flex.flexRow.justifyBetween.itemsCenter.pt4.pb4.$,
     children: [jsxs('div', {
-      className: _$$s4.flex.flexRow.gap8.h16.$,
+      className: cssBuilderInstance.flex.flexRow.gap8.h16.$,
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
         children: renderI18nText('sites.metadata.domains.domain_status')
@@ -9122,7 +9122,7 @@ function d$({
   children: e
 }) {
   return jsx('h2', {
-    className: _$$s4.textBodyLargeStrong.px16.py8.$,
+    className: cssBuilderInstance.textBodyLargeStrong.px16.py8.$,
     children: e
   });
 }
@@ -9149,14 +9149,14 @@ function dK({
       paddingLeft: 16,
       paddingRight: 16
     },
-    className: _$$s4.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: jsxs(dU, {
       useLabel: a,
       children: [jsx('div', {
-        className: _$$s4.textBodyMediumStrong.minH32.flex.itemsCenter.$,
+        className: cssBuilderInstance.textBodyMediumStrong.minH32.flex.itemsCenter.$,
         children: e
       }), jsxs('div', {
-        className: _$$s4.flex.itemsCenter.$,
+        className: cssBuilderInstance.flex.itemsCenter.$,
         children: [t, n && jsx(_$$Z5, {
           style: {
             'marginLeft': '-28px',
@@ -9164,7 +9164,7 @@ function dK({
           }
         })]
       }), i ? jsx('div', {
-        className: _$$s4.colorTextSecondary.$$if(n, _$$s4.colorTextWarning).textBodyMedium.minH24.flex.itemsCenter.$,
+        className: cssBuilderInstance.colorTextSecondary.$$if(n, cssBuilderInstance.colorTextWarning).textBodyMedium.minH24.flex.itemsCenter.$,
         children: i
       }) : null]
     })
@@ -9455,7 +9455,7 @@ let d7 = e => {
       return jsx(_$$y9, {});
     default:
       return jsx(_$$T2, {
-        className: _$$s4.invisible.$
+        className: cssBuilderInstance.invisible.$
       });
   }
 };
@@ -9528,7 +9528,7 @@ function ci({
   let o = r ? renderI18nText('figmake.unpublish_modal.header') : renderI18nText('sites.toolbar.publish_modal.unpublish_site');
   let d = a && a.hasCustomDomain && a.verifiedAt ? a.customDomain : a?.domain;
   let c = jsx('span', {
-    className: _$$s4.overflowHidden.ellipsis.colorTextBrand.$,
+    className: cssBuilderInstance.overflowHidden.ellipsis.colorTextBrand.$,
     children: d ?? ''
   });
   let p = s ? renderI18nText('figmake.unpublish_modal.unpublish_from_web_and_cmty_confirmation', {
@@ -9549,7 +9549,7 @@ function ci({
         })
       }), jsx(DialogBody, {
         children: jsx('div', {
-          className: _$$s4.py8.$,
+          className: cssBuilderInstance.py8.$,
           children: p
         })
       }), jsx(DialogFooter, {
@@ -9641,7 +9641,7 @@ function cr({
     label: getI18nString('sites.metadata.controls.language.label'),
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
-      'className': _$$s4.wFull.$,
+      'className': cssBuilderInstance.wFull.$,
       'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'onChange': e => {
         let i = e.currentTarget.value;
@@ -9762,7 +9762,7 @@ function cc({
     label: getI18nString('sites.metadata.controls.google_analytics_id.label'),
     control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
-      'className': _$$s4.wFull.$,
+      'className': cssBuilderInstance.wFull.$,
       'style': styleBuilderInstance.py8.px12.hAuto.$$if(c, styleBuilderInstance.colorBorderWarningStrong).$,
       'maxLength': 13,
       'onChange': e => {
@@ -9799,7 +9799,7 @@ function cu({
   x && (m = [t, ...(n ?? [])]);
   let h = useMemo(() => x ? getI18nString('figmake.metadata.controls.no_indexing_site.label') : i ? getI18nString('sites.metadata.controls.no_indexing_site.label') : getI18nString('sites.metadata.controls.no_indexing_page.label'), [i, x]);
   return jsx('div', {
-    className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
+    className: cssBuilderInstance.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
     children: jsx(Checkbox, {
       disabled: o,
       label: jsxs(Label, {
@@ -9833,7 +9833,7 @@ function cp({
   let [n, s] = useState(i.addBypassLinks);
   let o = OG('bypass_link');
   return jsx('div', {
-    className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
+    className: cssBuilderInstance.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
     children: jsx(Checkbox, {
       label: jsx(Label, {
         className: 'x78zum5',
@@ -9862,7 +9862,7 @@ function cx({
   let [n, s] = useState(i.ignoreReducedMotion);
   let o = OG('ignore_reduced_motion');
   return jsx('div', {
-    className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
+    className: cssBuilderInstance.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
     children: jsx(Checkbox, {
       label: jsx(Label, {
         className: 'x78zum5',
@@ -10148,11 +10148,11 @@ function cb({
   }
   let o = n.lastPublishedAt !== null;
   return jsxs('div', {
-    className: _$$s4.wFull.flex.gap4.justifyBetween.itemsCenter.$,
+    className: cssBuilderInstance.wFull.flex.gap4.justifyBetween.itemsCenter.$,
     children: [jsx(an, {
       isPublished: o
     }), jsx('div', {
-      className: _$$s4.flex.gap4.$,
+      className: cssBuilderInstance.flex.gap4.$,
       children: o ? jsx(Button, {
         onClick: () => a(showModalConditional({
           type: ct
@@ -10293,7 +10293,7 @@ function cj({
     })]
   });
   return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
-    className: v()(_$$s4.flex.flexColumn.gap24.$, {
+    className: v()(cssBuilderInstance.flex.flexColumn.gap24.$, {
       [Qx]: n
     }),
     children: [jsx(cv, {
@@ -10344,7 +10344,7 @@ function ck({
     }, `social-image-${t}`)]
   });
   return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
-    className: v()(_$$s4.flex.flexColumn.gap24.$, {
+    className: v()(cssBuilderInstance.flex.flexColumn.gap24.$, {
       [Qx]: n
     }),
     children: [jsx(cv, {
@@ -12851,7 +12851,7 @@ function xc(e) {
     children: jsx(_$$$3, {
       contentEditable: jsx(_$$a9, {
         'id': e.id,
-        'className': _$$s4.flexGrow1.p14.$,
+        'className': cssBuilderInstance.flexGrow1.p14.$,
         'spellCheck': !0,
         'data-testid': 'dakota-content-editable'
       }),
@@ -14840,7 +14840,7 @@ function mv({
             });
           case _$$_j.RICH_TEXT:
             return jsx('div', {
-              className: v()(_$$s4.flexGrow1.$, 'dakota_item_panel--rowRichTextEditor--YewDN'),
+              className: v()(cssBuilderInstance.flexGrow1.$, 'dakota_item_panel--rowRichTextEditor--YewDN'),
               children: jsx(xu, {
                 id: i.id,
                 collection: e,
@@ -14995,7 +14995,7 @@ function mI({
     size: t,
     side: 'left',
     children: [jsx(mT, {}), jsx(_$$P2, {
-      className: _$$s4.overflowHidden.hFull.wFull.$,
+      className: cssBuilderInstance.overflowHidden.hFull.wFull.$,
       children: jsx(mk, {
         collection,
         itemQuery: u,
@@ -15297,7 +15297,7 @@ function mH({
   return jsx(Fragment, {
     children: jsxs('div', {
       ref: dropdownTargetRef,
-      className: v()(_$$s4.wFull.$),
+      className: v()(cssBuilderInstance.wFull.$),
       children: [jsx(ButtonWide, {
         'variant': 'secondary',
         'onClick': toggleDropdown,
@@ -15342,7 +15342,7 @@ function mX({
   let d = i === 'renaming' ? s : e.name;
   return jsx(Ad, {
     label: jsx('span', {
-      className: _$$s4.textBodyMedium.selectNone.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyMedium.selectNone.colorTextSecondary.$,
       children: renderI18nText('dakota.collection_field_editor.property.name')
     }),
     alwaysShowLabel: !0,
@@ -15375,7 +15375,7 @@ function mV({
   let a = n === _$$ap.PLAIN_DATE_TIME || n === _$$ap.ZONED_DATE_TIME;
   return jsx(Ad, {
     label: jsx('span', {
-      className: _$$s4.textBodyMedium.selectNone.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyMedium.selectNone.colorTextSecondary.$,
       children: renderI18nText('dakota.collection_field_editor.property.include_time')
     }),
     alwaysShowLabel: !0,
@@ -15407,7 +15407,7 @@ function mG({
     updateFieldProperties: i
   }, 'datetime'));
   return jsxs('div', {
-    className: _$$s4.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: [n, e.name === _$$rU.Slug && jsx('div', {
       className: 'dakota_field_editor--slugInfoPadding--SBNCU',
       children: jsx('span', {
@@ -15521,15 +15521,15 @@ let mW = registerModal(({
         }), jsx(DialogBody, {
           padding: 0,
           children: jsxs('div', {
-            className: v()(_$$s4.flex.flexRow.$),
+            className: v()(cssBuilderInstance.flex.flexRow.$),
             children: [jsxs('div', {
-              className: v()(_$$s4.flex.flexColumn.$, 'dakota_field_editor--fieldList--IquMu'),
+              className: v()(cssBuilderInstance.flex.flexColumn.$, 'dakota_field_editor--fieldList--IquMu'),
               children: [jsx(_$$P2, {
                 scrollContainerRef: h,
                 scrollContentRef: g,
-                className: v()(_$$s4.flex.flex1.$),
+                className: v()(cssBuilderInstance.flex.flex1.$),
                 children: jsx('div', {
-                  className: _$$s4.flex.flexColumn.relative.pt4.pb2.$,
+                  className: cssBuilderInstance.flex.flexColumn.relative.pt4.pb2.$,
                   children: collectionFields.map(e => jsx(mz, {
                     Icon: _$$Tu(e.fieldType),
                     id: e.id,
@@ -15547,13 +15547,13 @@ let mW = registerModal(({
                   }, e.id))
                 })
               }), jsx('div', {
-                className: v()(_$$s4.flex.itemsCenter.justifyBetween.p8.borderBox.wFull.$, x && 'dakota_field_editor--overscroll--opa1C'),
+                className: v()(cssBuilderInstance.flex.itemsCenter.justifyBetween.p8.borderBox.wFull.$, x && 'dakota_field_editor--overscroll--opa1C'),
                 children: jsx(mH, {
                   createField
                 })
               })]
             }), jsx('div', {
-              className: _$$s4.flex.flexColumn.flex1.pt8.pr8.$,
+              className: cssBuilderInstance.flex.flexColumn.flex1.pt8.pr8.$,
               children: jsx(mq, {
                 children: O && B && jsx(mG, {
                   fieldSchema: B,
@@ -17073,7 +17073,7 @@ function hF() {
         children: [jsx(hL, {
           isCollectionListLoading: status === 'loading'
         }), jsxs('div', {
-          className: v()(_$$s4.relative.wFull.hFull.flex.$, Dm),
+          className: v()(cssBuilderInstance.relative.wFull.hFull.flex.$, Dm),
           ref: p,
           children: [g, u.size === 1 && jsx(mI, {
             parentContainerWidth: x ?? 0
@@ -17386,7 +17386,7 @@ function h1(e) {
         onClick: onToggle,
         children: [isOpen ? jsx(_$$O4, {}) : jsx(_$$k0, {}), title]
       }), addButtonProps && fileInEditableState && jsx('div', {
-        className: _$$s4.flex.gap8.itemsCenter.$,
+        className: cssBuilderInstance.flex.gap8.itemsCenter.$,
         children: jsx(IconButton, {
           'recordingKey': generateRecordingKey(e.recordingKey, addButtonProps.recordingKey ?? ''),
           'aria-label': addButtonProps.label,
@@ -17797,11 +17797,11 @@ function ga() {
   let S = (y?.data?.length ?? 0) > 0;
   return jsxs(Fragment, {
     children: [jsxs('div', {
-      className: v()(_$$s4.relative.zIndex1.flex.itemsCenter.pl16.pr8.minH40.$, {
+      className: v()(cssBuilderInstance.relative.zIndex1.flex.itemsCenter.pl16.pr8.minH40.$, {
         'dakota_collections_panel--headerScrollLine--cJpPa': f
       }),
       children: [jsx('div', {
-        className: v()(_$$s4.flex.flexGrow1.itemsCenter.pl0.pr4.fontSemiBold.colorText.$),
+        className: v()(cssBuilderInstance.flex.flexGrow1.itemsCenter.pl0.pr4.fontSemiBold.colorText.$),
         onContextMenu: e => {
           e.preventDefault();
           e.stopPropagation();
@@ -21736,7 +21736,7 @@ function bc({
       children: jsx(_$$dY.TextMetadataLayout, {
         onClick: i,
         primaryText: jsx('div', {
-          className: _$$s4.font11.colorText.ellipsis.overflowHidden.$,
+          className: cssBuilderInstance.font11.colorText.ellipsis.overflowHidden.$,
           children: e
         })
       })
@@ -21945,12 +21945,12 @@ function bw({
   };
   let o = (n.data != null ? [r, ...Object.values(n.data.carousel_media.images).slice(1)] : [r]).filter(Boolean);
   return jsxs('div', {
-    className: _$$s4.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx(bS, {
       title: i.name,
       publisherName: getI18nString('community.view_bar.figma')
     }), jsx(_$$P2, {
-      className: _$$s4.px8.hFull.$,
+      className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: t,
       children: jsxs('div', {
         className: 'sites_template_view--grid--mnDHb',
@@ -22228,7 +22228,7 @@ function bA({
     'enableEscapeToClose': !0,
     'data-testid': 'sites-template-modal',
     'children': jsx('div', {
-      className: _$$s4.overflowHidden.$,
+      className: cssBuilderInstance.overflowHidden.$,
       style: {
         height: '600px'
       },
@@ -24652,12 +24652,12 @@ function jz({
   }, [i]);
   return jsxs('div', {
     children: [jsx('div', {
-      className: _$$s4.textBodyMedium.colorTextSecondary.pb8.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.pb8.$,
       children: jL(e.parameterName)
     }), jsxs('div', {
-      className: _$$s4.flex.gap8.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.$,
       children: [jsx('div', {
-        className: _$$s4.flex1.$,
+        className: cssBuilderInstance.flex1.$,
         children: jsx(_$$A21, {
           'aria-label': jL(e.parameterName),
           'min': e.min,
@@ -24738,7 +24738,7 @@ function jU({
         icon: null,
         label: null,
         input: jsx('div', {
-          className: _$$s4.pb8.$,
+          className: cssBuilderInstance.pb8.$,
           children: jsx(jB, {
             parameter: t,
             htmlWidgetDerivedProperty: t.htmlWidgetDerivedProperty,
@@ -24749,7 +24749,7 @@ function jU({
         icon: null,
         label: null,
         input: jsx('div', {
-          className: _$$s4.pb8.$,
+          className: cssBuilderInstance.pb8.$,
           children: jsx(j$, {
             parameter: t,
             onChange: e => n(t, e),
@@ -24797,7 +24797,7 @@ function jH({
     children: i.map((i, a) => {
       let s = e === i.value;
       return jsx(ButtonPrimitive, {
-        className: v()('text_segmented_control--option--iiNv3', _$$s4.textBodyMedium.$, {
+        className: v()('text_segmented_control--option--iiNv3', cssBuilderInstance.textBodyMedium.$, {
           'text_segmented_control--selected--K-gRk': s
         }),
         onClick: () => t(i.value),
@@ -25024,7 +25024,7 @@ function jY() {
   return jsxs(Fragment, {
     children: [jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.google_map.location')
       })
     }), jsx(_$$fI, {
@@ -25035,7 +25035,7 @@ function jY() {
       })
     }), jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.google_map.zoom')
       })
     }), jsx(_$$fI, {
@@ -25061,7 +25061,7 @@ function jQ() {
   return jsxs(Fragment, {
     children: [jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.mailchimp.form_url')
       })
     }), jsx(_$$fI, {
@@ -25076,11 +25076,11 @@ function jQ() {
         placeholder: getI18nString('sites.panel.html_widget.mailchimp.form_url')
       })
     }), jsx('div', {
-      className: _$$s4.gridColumnStart2.gridColumnEnd19.font11.colorTextSecondary.pt8.pb8.pl18.pr36.$,
+      className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.font11.colorTextSecondary.pt8.pb8.pl18.pr36.$,
       children: renderI18nText('sites.panel.html_widget.mailchimp.form_url_tip')
     }), jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.mailchimp.input_placeholder')
       })
     }), jsx(_$$fI, {
@@ -25091,7 +25091,7 @@ function jQ() {
       })
     }), jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.mailchimp.submit_button_label')
       })
     }), jsx(_$$fI, {
@@ -25135,7 +25135,7 @@ function j1() {
   return jsxs(Fragment, {
     children: [jsx(_$$fI, {
       children: jsx('span', {
-        className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
+        className: cssBuilderInstance.gridColumnStart2.gridColumnEnd19.$,
         children: renderI18nText('sites.panel.html_widget.youtube.video_link')
       })
     }), jsx(_$$fI, {
@@ -27226,7 +27226,7 @@ function Sv(e) {
   });
   return jsxs(k8, {
     children: [jsx('div', {
-      className: _$$s4.flex.flexColumn.px16.pb8.pt4.$,
+      className: cssBuilderInstance.flex.flexColumn.px16.pb8.pt4.$,
       children: jsx(d8, {
         addImage: _$$lQ,
         base64String: y,

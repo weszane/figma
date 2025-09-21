@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { cq } from "../905/794154";
 import { r as _$$r } from "../905/189361";
 import { B } from "../905/222272";
@@ -20,7 +20,7 @@ export function $$d0({
       fullHeight: !0,
       children: [jsx(B, {
         children: jsx("span", {
-          className: _$$s.textBodyMediumStrong.ml8.$,
+          className: cssBuilderInstance.textBodyMediumStrong.ml8.$,
           children: e
         })
       }), jsx(B, {

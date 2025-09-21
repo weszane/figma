@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from "react";
 import { createPortal } from "react-dom";
 import s from "classnames";
 import { Point } from "../905/736624";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
 import { Fullscreen } from "../figma_app/763686";
@@ -103,7 +103,7 @@ function b({
   if (!e?.dragPosition || !e?.grabbedPointerPercentageOffset || !i) return null;
   let r = e.dragPosition.subtract(new Point(e.grabbedPointerPercentageOffset.x * i.x, e.grabbedPointerPercentageOffset.y * i.y));
   return createPortal(jsx("div", {
-    className: o()(_$$s.flex.$, ik, {
+    className: o()(cssBuilderInstance.flex.$, ik, {
       [oK]: e.isDraggingOverCanvas
     }),
     style: {

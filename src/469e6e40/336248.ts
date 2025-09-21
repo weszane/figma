@@ -5,7 +5,7 @@ import { v } from "../905/442517";
 import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
@@ -30,7 +30,7 @@ export function $$v1(e) {
       }), jsx("div", {
         children: e.title
       }), e.badge && jsx("span", {
-        className: _$$s.inlineFlex.ml8.$,
+        className: cssBuilderInstance.inlineFlex.ml8.$,
         children: e.badge
       })]
     }), jsxs("ul", {

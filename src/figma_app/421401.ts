@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { gw, rr, wv, ru } from "../figma_app/236327";
 import { V } from "../figma_app/312987";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { TrackedDiv, TrackingProvider } from "../figma_app/831799";
@@ -47,16 +47,16 @@ export function $$C2(e) {
     showingDropdown: t,
     children: [jsx("div", {
       "data-onboarding-key": e["data-onboarding-key"],
-      className: _$$s.maxW200.ellipsis.overflowHidden.$,
+      className: cssBuilderInstance.maxW200.ellipsis.overflowHidden.$,
       children: e.getSelectedDisplayText ? jsx("span", {
-        className: _$$s.noWrap.$,
+        className: cssBuilderInstance.noWrap.$,
         children: e.getSelectedDisplayText(e.selectedValue)
       }) : jsxs(Fragment, {
         children: [jsxs("span", {
-          className: _$$s.noWrap.$,
+          className: cssBuilderInstance.noWrap.$,
           children: [e.label, ":"]
         }), " ", jsx("span", {
-          className: _$$s.noWrap.$,
+          className: cssBuilderInstance.noWrap.$,
           children: i
         })]
       })

@@ -10,7 +10,7 @@ import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -201,7 +201,7 @@ function M(e) {
             },
             children: secondaryLinkButton.text
           }), secondaryButtonText && secondaryAction && jsx("span", {
-            className: _$$s.ml8.$,
+            className: cssBuilderInstance.ml8.$,
             children: jsx(Button, {
               variant: "secondary",
               onClick: () => {
@@ -216,7 +216,7 @@ function M(e) {
               children: secondaryButtonText
             })
           }), jsx("span", {
-            className: _$$s.ml8.$,
+            className: cssBuilderInstance.ml8.$,
             children: jsx(Button, {
               variant: "primary",
               onClick: () => {

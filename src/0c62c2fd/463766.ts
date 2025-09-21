@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Wi } from "../figma_app/162641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { RR } from "../figma_app/307841";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
@@ -43,9 +43,9 @@ export function $$T0() {
       resourceType: k
     })) : R && e(selectViewAction(o0));
   }, [e, k, R, S]), "loaded" !== t.status || "loaded" !== r.status || R || S) ? jsx("div", {
-    className: _$$s.wFull.pl32.py24.bb1.colorBorder.bSolid.$,
+    className: cssBuilderInstance.wFull.pl32.py24.bb1.colorBorder.bSolid.$,
     children: jsx(Wi, {
-      className: _$$s.w200.h32.$,
+      className: cssBuilderInstance.w200.h32.$,
       dataTestId: "srpv-loading"
     })
   }) : (T || (t.data.key.type === FOrganizationLevelType.ORG ? e(selectViewAction({

@@ -17,7 +17,7 @@ import { r as _$$r } from "../905/786998";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -185,7 +185,7 @@ function J(e) {
           },
           dataTestId: "team-renewal-modal-header",
           children: [jsx("div", {
-            className: _$$s.mb8.$,
+            className: cssBuilderInstance.mb8.$,
             children: jsx(Ro, {
               size: Pf.XLARGE,
               entity: {
@@ -196,10 +196,10 @@ function J(e) {
           }), jsx(DialogHiddenTitle, {
             children: Q
           }), jsx("div", {
-            className: _$$s.textHeadingMedium.$,
+            className: cssBuilderInstance.textHeadingMedium.$,
             children: Q
           }), jsx("div", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.team_renewal.description", {
               monthlySeats: jsx(Link, {
                 href: "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan",
@@ -234,7 +234,7 @@ function J(e) {
           }, {
             id: "monthly",
             name: jsx("span", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.team_renewal.table.header.monthly")
             }),
             textAlign: "right",
@@ -247,7 +247,7 @@ function J(e) {
             id: "annual",
             name: jsx(_$$b, {
               text: jsx("span", {
-                className: _$$s.textBodyMedium.colorTextSecondary.$,
+                className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                 children: getI18nString("billing_modals.team_renewal.table.header.annual")
               }),
               popoverText: getI18nString("billing_modals.renewal.table.tooltip.annual_seats", {
@@ -256,7 +256,7 @@ function J(e) {
             }),
             textAlign: "center",
             cellComponent: e => jsxs("div", {
-              className: _$$s.flex.flexRow.gap4.$,
+              className: cssBuilderInstance.flex.flexRow.gap4.$,
               children: [e === ProductAccessTypeEnum.COLLABORATOR && !m && !C && jsxs("div", {
                 "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("billing_modals.team_renewal.table.collab_tooltip"),
@@ -267,7 +267,7 @@ function J(e) {
                   fill: "secondary"
                 }), " "]
               }), jsx("div", {
-                className: _$$s.mlAuto.$,
+                className: cssBuilderInstance.mlAuto.$,
                 children: jsx(_$$r, {
                   value: D[e] || 0,
                   onChange: M(e),
@@ -285,7 +285,7 @@ function J(e) {
           onClose: e.onClose,
           noAnnualSeat: 0 === J
         }), X && jsx("div", {
-          className: _$$s.pt16.$,
+          className: cssBuilderInstance.pt16.$,
           children: jsx(TextWithTruncation, {
             color: "danger",
             children: X
@@ -323,7 +323,7 @@ function ee(e) {
     dataTestId: "team-renewal-disclaimer",
     children: renderI18nText(e.noAnnualSeat ? "billing_modals.team_renewal.disclaimer_banner.no_seat" : "billing_modals.team_renewal.disclaimer_banner", {
       peoplePageLink: jsx(ButtonPrimitive, {
-        className: h()(h7, _$$s.inline.$),
+        className: h()(h7, cssBuilderInstance.inline.$),
         style: styleBuilderInstance.add({
           backgroundColor: "unset"
         }).$,

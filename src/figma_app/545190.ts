@@ -41,7 +41,7 @@ import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { cn } from '../905/959568';
 import { O as _$$O } from '../905/969533';
 import { d as _$$d } from '../905/976845';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { uj0 } from '../figma_app/27776';
 import { wS, xP } from '../figma_app/65182';
 import { Q as _$$Q } from '../figma_app/67145';
@@ -155,7 +155,7 @@ function eu({
     tabIndex: 0,
     children: e
   }) : jsx('div', {
-    className: _$$s.hFull.wFull.relative.$,
+    className: cssBuilderInstance.hFull.wFull.relative.$,
     children: e
   });
 }
@@ -517,7 +517,7 @@ function eO({
     }));
   }
   en.length || en.push(jsx('div', {
-    className: _$$s.w24.$
+    className: cssBuilderInstance.w24.$
   }));
   let ey = useMemo(() => {
     if (v.kind === uN.VARIANT) {
@@ -957,7 +957,7 @@ function $$e6(e) {
         }) : z && jsx('div', {
           className: K8,
           children: jsx(_$$P, {
-            classNameOverride: _$$s.wFull.$,
+            classNameOverride: cssBuilderInstance.wFull.$,
             fullWidth: !0,
             invalid: void 0 !== t,
             isDeleted: _$$eF(z),

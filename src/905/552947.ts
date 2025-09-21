@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import s from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
@@ -28,12 +28,12 @@ export function $$h0({
           stringToCopy: e
         }));
       },
-      className: o()(_$$s.relative.colorBgSecondary.b1.bRadius6.colorBorder.p8.wFull.alignLeft.$, "code_suggestion--hoverParent--DV-OL"),
+      className: o()(cssBuilderInstance.relative.colorBgSecondary.b1.bRadius6.colorBorder.p8.wFull.alignLeft.$, "code_suggestion--hoverParent--DV-OL"),
       children: [jsx(TextWithTruncation, {
         fontFamily: "monospace",
         children: e
       }), jsx("div", {
-        className: o()(_$$s.absolute.right0.top0.mr8.mt8.opacity0.$, "code_suggestion--hoverChildOpacity1--gs35c"),
+        className: o()(cssBuilderInstance.absolute.right0.top0.mr8.mt8.opacity0.$, "code_suggestion--hoverChildOpacity1--gs35c"),
         style: styleBuilderInstance.add({
           transition: "opacity 200ms ease-out"
         }).$,
@@ -45,7 +45,7 @@ export function $$h0({
         })
       })]
     }), jsx("div", {
-      className: _$$s.py4.$,
+      className: cssBuilderInstance.py4.$,
       children: "string" == typeof t ? jsx(TextWithTruncation, {
         children: t
       }) : t

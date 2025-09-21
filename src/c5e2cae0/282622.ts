@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { styleBuilderInstance } from "../905/941192";
 import { clickableBaseLinkTracked, linkWithTracking } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { Ju } from "../905/712921";
@@ -48,7 +48,7 @@ function _(e) {
       dataTestId: "cart-plan-details-shipping-address"
     }), jsx(clickableBaseLinkTracked, {
       onClick: e.navigateToEditDetails,
-      className: _$$s.font13.py12.$,
+      className: cssBuilderInstance.font13.py12.$,
       trackingProperties: {
         trackingDescriptor: UpgradeAction.EDIT_PLAN_DETAILS
       },
@@ -64,13 +64,13 @@ function u({
   dataTestId: a
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.py16.bb1.bSolid.colorBorder.itemsStart.$,
+    className: cssBuilderInstance.flex.flexColumn.py16.bb1.bSolid.colorBorder.itemsStart.$,
     "data-testid": a,
     children: [jsx("p", {
-      className: _$$s.font13.lh24.spacingWide.colorTextSecondary.pb4.$,
+      className: cssBuilderInstance.font13.lh24.spacingWide.colorTextSecondary.pb4.$,
       children: e
     }), jsx("p", {
-      className: _$$s.font13.lh24.colorText.breakWord.$,
+      className: cssBuilderInstance.font13.lh24.colorText.breakWord.$,
       children: t
     })]
   });
@@ -102,7 +102,7 @@ function A({
   let A = jsx(Checkbox, {
     label: jsx(Label, {
       children: jsx("span", {
-        className: _$$s.font13.$,
+        className: cssBuilderInstance.font13.$,
         children: p === Ju.ORG ? jsx(W, {}) : jsx(Um, {})
       })
     }),
@@ -110,7 +110,7 @@ function A({
     onChange: b
   });
   let k = jsx("div", {
-    className: _$$s.flex.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     "data-testid": "cart-review-submit-loading",
     children: jsx(_$$k, {})
   });
@@ -118,7 +118,7 @@ function A({
     title: e,
     dataTestId: "cart-review",
     children: [jsx("div", {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: jsx(O, {
         countByBillableProductKey: t,
         billingInterval: a,
@@ -131,7 +131,7 @@ function A({
       tier: p,
       isAnnual: a === BillingCycle.YEAR
     }), jsx(_$$_, {}), jsx("div", {
-      className: _$$s.my24.$,
+      className: cssBuilderInstance.my24.$,
       style: styleBuilderInstance.add({
         marginLeft: "-10px"
       }).$,
@@ -166,12 +166,12 @@ function k({
 }) {
   let a = e === Ju.ORG ? "https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans" : "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan";
   return jsx("div", {
-    className: _$$s.mt24.$,
+    className: cssBuilderInstance.mt24.$,
     "data-testid": "cart-review-upgrade-information-banner",
     children: jsxs("div", {
-      className: _$$s.py8.px16.colorBgSecondary.bRadius5.flex.flexColumn.gap4.$,
+      className: cssBuilderInstance.py8.px16.colorBgSecondary.bRadius5.flex.flexColumn.gap4.$,
       children: [jsx("p", {
-        className: _$$s.textBodyMediumStrong.$,
+        className: cssBuilderInstance.textBodyMediumStrong.$,
         children: renderI18nText("checkout.how_do_new_seat_additions_and_upgrades_work")
       }), jsx("p", {
         children: function (e, t) {
@@ -187,7 +187,7 @@ function k({
           }
         }(e, t)
       }), jsx(clickableBaseLinkTracked, {
-        className: _$$s.textBodyMediumStrong.$,
+        className: cssBuilderInstance.textBodyMediumStrong.$,
         style: styleBuilderInstance.add({
           height: "16px"
         }).$,
@@ -204,21 +204,21 @@ function P() {
   let a = new Date().getMonth();
   let d = new Date().setMonth(a + 3);
   return jsxs("div", {
-    className: _$$s.mt24.$,
+    className: cssBuilderInstance.mt24.$,
     "data-testid": "cart-review-org-true-up-banner",
     children: [e && jsx(LJ, {
       onClose: () => t(!1)
     }), jsxs("div", {
-      className: _$$s.flexColumn.pt4.pb8.px8.colorBgSecondary.bRadius5.$,
+      className: cssBuilderInstance.flexColumn.pt4.pb8.px8.colorBgSecondary.bRadius5.$,
       children: [jsx(G, {}), jsxs("div", {
-        className: _$$s.px8.$,
+        className: cssBuilderInstance.px8.$,
         children: [jsx("p", {
-          className: _$$s.pt4.fontMedium.$,
+          className: cssBuilderInstance.pt4.fontMedium.$,
           children: renderI18nText("org_self_serve.review_step.next_quarterly_true_up_on_date", {
             trueUpDate: new Date(d)
           })
         }), jsx("p", {
-          className: _$$s.pt4.$,
+          className: cssBuilderInstance.pt4.$,
           children: renderI18nText("org_self_serve.review_step.what_is_a_true_up")
         }), jsxs("ul", {
           style: styleBuilderInstance.ml16.mt4.add({
@@ -234,7 +234,7 @@ function P() {
             children: renderI18nText("checkout.org_self_serve.true_up_description4_seat_rename")
           })]
         }), jsx(clickableBaseLinkTracked, {
-          className: _$$s.pt8.fontMedium.inline.$,
+          className: cssBuilderInstance.pt8.fontMedium.inline.$,
           onClick: () => t(!0),
           trusted: !0,
           children: renderI18nText("org_self_serve.review_step.learn_more_about_true_ups")

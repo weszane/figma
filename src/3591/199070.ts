@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { R } from "../3591/975641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { JZ } from "../figma_app/696043";
@@ -51,7 +51,7 @@ function g({
       e.stopPropagation();
       i();
     },
-    className: _$$s.underline.bgTransparent.$$with({
+    className: cssBuilderInstance.underline.bgTransparent.$$with({
       colorTextDanger: t,
       colorTextSecondary: !t
     }).$,

@@ -6,7 +6,7 @@ import { C as _$$C } from "../905/520159";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -173,7 +173,7 @@ function j({
   return jsx(_$$s3, {
     width: i,
     title: jsxs("div", {
-      className: _$$s.pl4.flex.flexRow.justifyBetween.itemsCenter.gap4.$,
+      className: cssBuilderInstance.pl4.flex.flexRow.justifyBetween.itemsCenter.gap4.$,
       children: [jsx(IconButton, {
         onClick: () => {
           r(popModalStack());

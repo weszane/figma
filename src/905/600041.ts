@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 var a = r;
 export function $$o0({
   backgroundColor: e,
@@ -11,11 +11,11 @@ export function $$o0({
 }) {
   return jsx("div", {
     "data-testid": "thumbnail-container",
-    className: a()(_$$s.hFull.wFull.borderBox.$$if(!r, _$$s.b1.bSolid.colorBorder).overflowHidden.$, {
-      [_$$s.bRadius2.$]: 2 === i,
-      [_$$s.bRadius4.$]: 4 === i,
-      [_$$s.bRadius6.$]: 6 === i,
-      [_$$s.bRadius8.$]: 8 === i
+    className: a()(cssBuilderInstance.hFull.wFull.borderBox.$$if(!r, cssBuilderInstance.b1.bSolid.colorBorder).overflowHidden.$, {
+      [cssBuilderInstance.bRadius2.$]: 2 === i,
+      [cssBuilderInstance.bRadius4.$]: 4 === i,
+      [cssBuilderInstance.bRadius6.$]: 6 === i,
+      [cssBuilderInstance.bRadius8.$]: 8 === i
     }, t),
     style: e ? {
       backgroundColor: e

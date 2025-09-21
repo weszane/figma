@@ -22,7 +22,7 @@ import E from "classnames";
 import { s as _$$s } from "../vendor/45699";
 import { P as _$$P } from "../vendor/348225";
 import { h as _$$h } from "../905/207101";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { styleBuilderInstance } from "../905/941192";
 import { Dm } from "../figma_app/8833";
@@ -77,7 +77,7 @@ function V({
   onClick: i
 }) {
   return jsx("button", {
-    className: _$$s2.colorBg.flex.overflowHidden.$$case([["large" === t, _$$s2.radiusLarge]]).$,
+    className: cssBuilderInstance.colorBg.flex.overflowHidden.$$case([["large" === t, cssBuilderInstance.radiusLarge]]).$,
     style: styleBuilderInstance.add({
       boxShadow: "var(--elevation-100-canvas)"
     }).$,
@@ -159,12 +159,12 @@ function H({
   return (useEffect(() => {
     a.current && !a.current.contains(document.activeElement) && a.current.focus();
   }), i.thumbnail_url) ? jsxs("div", {
-    className: _$$s2.hFull.flex.flexColumn.colorBgSecondary.$,
+    className: cssBuilderInstance.hFull.flex.flexColumn.colorBgSecondary.$,
     ref: a,
     tabIndex: 0,
     "data-testid": "peek-view-viewer",
     children: [jsxs("div", {
-      className: _$$s2.relative.flex1.minH0.$,
+      className: cssBuilderInstance.relative.flex1.minH0.$,
       children: [jsx(DH, {
         imageSrc: i.thumbnail_url,
         shouldZoomToStart: !1,
@@ -173,7 +173,7 @@ function H({
         enableZoomKeyControls: !0,
         enableZoomControls: !0
       }, `details::${i.thumbnail_url}`), jsx("div", {
-        className: _$$s2.absolute.$,
+        className: cssBuilderInstance.absolute.$,
         style: styleBuilderInstance.add({
           top: "16px",
           left: "16px"
@@ -186,7 +186,7 @@ function H({
               width: "30em"
             }).$,
             children: [jsx("div", {
-              className: _$$s2.flex.flexColumn.itemsStart.p12.gap4.$,
+              className: cssBuilderInstance.flex.flexColumn.itemsStart.p12.gap4.$,
               children: jsxs(_$$O.Container, {
                 children: [jsx(_$$O.Title, {
                   size: "large",
@@ -205,9 +205,9 @@ function H({
                 })]
               })
             }), jsx("hr", {
-              className: _$$s2.m0.$
+              className: cssBuilderInstance.m0.$
             }), jsx("div", {
-              className: _$$s2.p12.$,
+              className: cssBuilderInstance.p12.$,
               children: jsx(_$$O.Container, {
                 children: jsx(_$$O.IconRow, {
                   iconName: "page",
@@ -268,7 +268,7 @@ let K = registerModal(function ({
     recordingKey: Y,
     forwardUnhandledEventsToFullscreen: !1,
     children: [jsx(_$$P.div, {
-      className: x()(_$$s2.fixed.top0.right0.bottom0.left0.zIndexModal.$),
+      className: x()(cssBuilderInstance.fixed.top0.right0.bottom0.left0.zIndexModal.$),
       style: styleBuilderInstance.add({
         backgroundColor: "var(--color-modalbackdrop, $figmaFGBlack3)"
       }).$,
@@ -277,7 +277,7 @@ let K = registerModal(function ({
         opacity: 0
       }
     }), jsx(_$$n.div, {
-      className: x()("fragment_search_peek_modal--base--MOQE-", _$$s2.p32.fixed.top0.right0.bottom0.left0.zIndexModal.$, Dm),
+      className: x()("fragment_search_peek_modal--base--MOQE-", cssBuilderInstance.p32.fixed.top0.right0.bottom0.left0.zIndexModal.$, Dm),
       "data-testid": "fragment-search-peek-modal",
       onMouseDown: e => {
         e.preventDefault();
@@ -285,7 +285,7 @@ let K = registerModal(function ({
       },
       children: jsxs(_$$P.div, {
         tabIndex: 0,
-        className: x()(Gt, _$$s2.overflowHidden.relative.$),
+        className: x()(Gt, cssBuilderInstance.overflowHidden.relative.$),
         style: styleBuilderInstance.add({
           aspectRatio: "16 / 9",
           width: "100%",
@@ -304,7 +304,7 @@ let K = registerModal(function ({
           fragments: e,
           entryPoint: r
         }), jsx("div", {
-          className: _$$s2.absolute.$,
+          className: cssBuilderInstance.absolute.$,
           style: styleBuilderInstance.add({
             top: "13px",
             right: "13px"

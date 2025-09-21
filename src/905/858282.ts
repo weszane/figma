@@ -7,7 +7,7 @@ import { A as _$$A } from "../vendor/518290";
 import { KeyCodes } from "../905/63728";
 import { RecordingComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Uu, Dm } from "../figma_app/8833";
 import { ft } from "../figma_app/753501";
 import { KeyboardReceiver, KeyboardEventWrapper } from "../905/826900";
@@ -186,9 +186,9 @@ export class $$w2 extends RecordingComponent {
     let i = this.props.scrollOverflow ? F7 : Gt;
     this.props.isFigJam && (i = this.props.scrollOverflow ? F4 : wH);
     this.props.transparentContentBackground && (i = aX);
-    this.props.minSize && (i += ` ${_$$s.minW200.minH200.$}`);
-    this.props.fullFrame && (i += ` ${_$$s.wFull.hFull.$}`);
-    this.props.overflowHidden && (i += ` ${_$$s.overflowHidden.$}`);
+    this.props.minSize && (i += ` ${cssBuilderInstance.minW200.minH200.$}`);
+    this.props.fullFrame && (i += ` ${cssBuilderInstance.wFull.hFull.$}`);
+    this.props.overflowHidden && (i += ` ${cssBuilderInstance.overflowHidden.$}`);
     let a = ft();
     let o = jsx("div", {
       className: `${hQ} ${this.props.contentContainerClassName || ""}`,

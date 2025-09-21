@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import r from "classnames";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { A as _$$A } from "../1617/57383";
 var a = r;
 export function $$d0({
@@ -10,8 +10,8 @@ export function $$d0({
 }) {
   return jsxs("div", {
     className: a()("publish_modal_banner--infoBannerContainerUI3--9wN7P", {
-      [_$$s.colorBgBrandTertiary.$]: "brand" === e,
-      [_$$s.colorBgWarningTertiary.$]: "warning" === e
+      [cssBuilderInstance.colorBgBrandTertiary.$]: "brand" === e,
+      [cssBuilderInstance.colorBgWarningTertiary.$]: "warning" === e
     }),
     children: [jsx(Fragment, {
       children: jsx(SvgComponent, {

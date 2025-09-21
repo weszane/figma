@@ -9,7 +9,7 @@ import { o as _$$o } from "../c5e2cae0/371580";
 import { x as _$$x } from "../905/211326";
 import { JR } from "../9420/975542";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { J } from "../9420/278106";
@@ -88,7 +88,7 @@ export function $$b0({
             index: 3
           })
         }), jsxs("div", {
-          className: _$$s.flex.flexColumn.itemsCenter.alignCenter.$,
+          className: cssBuilderInstance.flex.flexColumn.itemsCenter.alignCenter.$,
           children: [jsx(JR, {
             children: renderI18nText("edu.almost_done_everything_look_good")
           }), jsx(Spacing, {

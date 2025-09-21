@@ -100,7 +100,7 @@ import { B3, $o } from "../905/54042";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { c$ as _$$c$ } from "../figma_app/236327";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n3 } from "../figma_app/537817";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
@@ -849,11 +849,11 @@ function tb(e) {
         img_url: item.imgUrl
       }
     }), jsxs("span", {
-      className: _$$s2.flex.gap12.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap12.itemsCenter.$,
       children: [jsx("span", {
         children: item.name
       }), jsx("span", {
-        className: _$$s2.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: `(${item.description})`
       })]
     })]
@@ -864,7 +864,7 @@ function tv(e) {
     item
   } = e;
   return jsxs("div", {
-    className: _$$s2.flex.itemsCenter.justifyBetween.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.$,
     children: [jsxs("div", {
       className: tf,
       children: [jsx(_$$n3, {
@@ -877,7 +877,7 @@ function tv(e) {
         children: item.name
       })]
     }), jsx("span", {
-      className: _$$s2.colorTextMenuSecondary.$,
+      className: cssBuilderInstance.colorTextMenuSecondary.$,
       children: item.description
     })]
   });

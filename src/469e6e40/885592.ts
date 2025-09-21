@@ -30,7 +30,7 @@ import { v as _$$v2 } from '../4452/513456';
 import { B as _$$B } from '../4452/541264';
 import { v as _$$v } from '../4452/562448';
 import { m as _$$m } from '../4452/688074';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { BannerInsetModal, BannerInset } from '../figma_app/59509';
 import { isNotNullish } from '../figma_app/95419';
 import { FBillingPeriodType, FOrganizationLevelType } from '../figma_app/191312';
@@ -99,7 +99,7 @@ function B(e) {
     'children': e.subheading
   });
   let i = e => jsx('div', {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: e
   });
   if (e.lines.length === 0) return i(a);
@@ -119,14 +119,14 @@ function B(e) {
         });
         return jsxs('li', {
           'data-testid': e.testIdPrefix && `${e.testIdPrefix}-line-${t.bpKey}`,
-          'className': _$$s.flex.justifyBetween.textBodyMedium.colorTextSecondary.gap16.itemsCenter.$,
+          'className': cssBuilderInstance.flex.justifyBetween.textBodyMedium.colorTextSecondary.gap16.itemsCenter.$,
           'children': [jsx('span', {
             children: getI18nString('plan_invoices.seat_type_count', {
               quantity: t.quantity,
               seatType: tI(t.bpKey)
             })
           }), jsx('span', {
-            className: _$$s.flex.$,
+            className: cssBuilderInstance.flex.$,
             children: a
           })]
         }, t.bpKey);
@@ -316,10 +316,10 @@ function z(e) {
     }, a(), s()];
   }, [l, m, e.invoice, r, d, _]);
   return jsx('div', {
-    'className': _$$s.flex.flexColumn.p24.$,
+    'className': cssBuilderInstance.flex.flexColumn.p24.$,
     'data-testid': 'invoice-flyout-breakdown',
     'children': jsxs('div', {
-      className: _$$s.flex.flexColumn.gap24.$,
+      className: cssBuilderInstance.flex.flexColumn.gap24.$,
       children: [d && jsxs(Fragment, {
         children: [l.map(({
           key: e,
@@ -327,10 +327,10 @@ function z(e) {
         }) => jsx(_$$Fragment, {
           children: t
         }, e)), jsx('div', {
-          className: _$$s.wFull.h0.bb1.colorBorder.bSolid.$
+          className: cssBuilderInstance.wFull.h0.bb1.colorBorder.bSolid.$
         })]
       }), jsx('ul', {
-        className: _$$s.flex.flexColumn.gap16.$,
+        className: cssBuilderInstance.flex.flexColumn.gap16.$,
         children: p.map(({
           key: e,
           label: a,
@@ -348,7 +348,7 @@ function z(e) {
           })
         })))
       }), jsx('div', {
-        className: _$$s.wFull.h0.bb1.colorBorder.bSolid.$
+        className: cssBuilderInstance.wFull.h0.bb1.colorBorder.bSolid.$
       })]
     })
   });
@@ -406,7 +406,7 @@ function W(e) {
       label: t,
       value: a
     }) => jsxs('li', {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx('span', {
         ...xk(V.label),
         children: t
@@ -789,7 +789,7 @@ let ew = [{
   renderCell: ({
     dueDate: e
   }) => jsx('span', {
-    className: _$$s.colorText.$,
+    className: cssBuilderInstance.colorText.$,
     children: e
   }),
   className: () => 'plan_invoices_table--dateColumn--BKGII plan_invoices_table--_column--1Fkpv'
@@ -800,7 +800,7 @@ let ew = [{
     invoice: e,
     description: t
   }) => jsxs('span', {
-    className: _$$s.inlineFlex.itemsCenter.gap2.colorText.$,
+    className: cssBuilderInstance.inlineFlex.itemsCenter.gap2.colorText.$,
     children: [jsx(eg, {
       invoice: e,
       size: 24
@@ -814,7 +814,7 @@ let ew = [{
     invoice: e,
     currentDate: t
   }) => jsx('div', {
-    className: _$$s.flex.$,
+    className: cssBuilderInstance.flex.$,
     children: jsx(_$$Z, {
       invoice: e,
       currentDate: t
@@ -828,7 +828,7 @@ let ew = [{
     invoice: e,
     localizeCurrency: t
   }) => jsx('span', {
-    className: _$$s.colorText.$,
+    className: cssBuilderInstance.colorText.$,
     children: e.state === qH.PENDING ? jsxs(Fragment, {
       children: [jsx('span', {
         'aria-hidden': !0,
@@ -878,12 +878,12 @@ function eE(e) {
 function eC(e) {
   return jsx('div', {
     role: 'rowgroup',
-    className: _$$s.sticky.top0.zIndex1.$,
+    className: cssBuilderInstance.sticky.top0.zIndex1.$,
     children: jsxs('div', {
-      className: _$$s.flex.flexColumn.colorBg.$,
+      className: cssBuilderInstance.flex.flexColumn.colorBg.$,
       children: [e.stickyContent && jsxs(Fragment, {
         children: [e.stickyContent, jsx('div', {
-          className: _$$s.wFull.h0.bb1.bSolid.colorBorder.$
+          className: cssBuilderInstance.wFull.h0.bb1.bSolid.colorBorder.$
         })]
       }), jsx(eE, {
         header: !0,
@@ -894,7 +894,7 @@ function eC(e) {
         }) => jsx(A3, {
           className: t,
           children: jsx('span', {
-            className: _$$s.colorText.$,
+            className: cssBuilderInstance.colorText.$,
             children: a()
           })
         }, e))
@@ -904,7 +904,7 @@ function eC(e) {
 }
 function eS(e) {
   return e.invoices.length === 0 ? jsx('div', {
-    className: _$$s.mt36.mxAuto.alignCenter.$,
+    className: cssBuilderInstance.mt36.mxAuto.alignCenter.$,
     children: getI18nString('plan_invoices.no_invoices_to_show')
   }) : jsx('div', {
     role: 'rowgroup',

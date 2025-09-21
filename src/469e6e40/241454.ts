@@ -9,7 +9,7 @@ import { XHR } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
@@ -66,7 +66,7 @@ export let $$z2 = registerModal(function (e) {
   let c = renderI18nText("org_settings.remove_user_modal.information_text", {
     userCount: s,
     sharedProjects: jsx("span", {
-      className: _$$s.fontSemiBold.$,
+      className: cssBuilderInstance.fontSemiBold.$,
       children: renderI18nText("org_settings.remove_user_modal.unassigned_drafts")
     })
   });
@@ -126,18 +126,18 @@ function V(e) {
     return 1 === e ? t ? renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.singular", {
       userName: t,
       seatType: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
     }) : renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.singular.no_username", {
       seatType: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
     }) : renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.plural", {
       numUsers: e,
       seatType: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
     });
@@ -145,22 +145,22 @@ function V(e) {
   function o(e, t) {
     return 1 === e ? t ? renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.singular", {
       userName: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: t
       }),
       viewerRestricted: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
     }) : renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.singular.no_username", {
       viewerRestricted: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
     }) : renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.plural", {
       numUsers: e,
       viewerRestricted: jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
     });
@@ -173,35 +173,35 @@ function V(e) {
       case ProductAccessTypeEnum.DESIGN:
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.upgrade.design.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), jsx("span", {
-                className: _$$s.mr4.$,
+                className: cssBuilderInstance.mr4.$,
                 children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access")
               }), jsx("a", {
                 className: q,
@@ -216,26 +216,26 @@ function V(e) {
       case ProductAccessTypeEnum.FIGJAM:
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.upgrade.design.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
             })]
@@ -246,36 +246,36 @@ function V(e) {
         d = 1 === a ? renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.singular.no_username") : renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.plural");
         return jsxs(Fragment, {
           children: [s(a, i), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.upgrade.dev_mode.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIcon.mr8.$,
+                className: cssBuilderInstance.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
             })]
           }), jsxs("div", {
-            className: _$$s.flex.mt32.mb8.py8.px4.colorBgSecondary.$,
+            className: cssBuilderInstance.flex.mt32.mb8.py8.px4.colorBgSecondary.$,
             children: [jsx("div", {
-              className: _$$s.w48.mr8.$,
+              className: cssBuilderInstance.w48.mr8.$,
               children: jsx(_$$P, {})
             }), jsxs("div", {
-              className: _$$s.flexGrow1.$,
+              className: cssBuilderInstance.flexGrow1.$,
               children: [d, jsx("br", {}), jsx("a", {
                 className: q,
                 target: "_blank",
@@ -292,41 +292,41 @@ function V(e) {
       case ProductAccessTypeEnum.DESIGN:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.downgrade.design.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), jsx("span", {
-                className: _$$s.mr4.$,
+                className: cssBuilderInstance.mr4.$,
                 children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access")
               }), jsx("a", {
                 className: q,
@@ -341,32 +341,32 @@ function V(e) {
       case ProductAccessTypeEnum.FIGJAM:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.downgrade.design.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
             })]
@@ -375,26 +375,26 @@ function V(e) {
       case ProductAccessTypeEnum.DEV_MODE:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: renderI18nText("confirm_account_change.downgrade.dev_mode.description_p2")
           }), jsxs("ul", {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
-              className: _$$s.flex.ml2.mt8.$,
+              className: cssBuilderInstance.flex.ml2.mt8.$,
               children: [jsx(SvgComponent, {
-                className: _$$s.colorIconDanger.mr8.$,
+                className: cssBuilderInstance.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
             })]
@@ -694,9 +694,9 @@ let $$Y0 = registerModal(function (e) {
             }
           }), renderI18nText("org_join_request.user_deprovisioned_warning")]
         }), jsxs("div", {
-          className: _$$s.flex.flexRow.gap10.$,
+          className: cssBuilderInstance.flex.flexRow.gap10.$,
           children: [o.file && jsx("div", {
-            className: _$$s.hFull.$,
+            className: cssBuilderInstance.hFull.$,
             children: jsx(NU, {
               file: o.file,
               borderRadius: 4,

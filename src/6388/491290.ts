@@ -6,7 +6,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
 import { v as _$$v } from "../642/135773";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Yr } from "../figma_app/8833";
 import { z5 } from "../905/713722";
@@ -60,7 +60,7 @@ export function $$C0({
         recordingKey: t,
         "aria-label": getI18nString("slides.properties_panel.overlay"),
         children: jsxs("span", {
-          className: _$$s.inlineFlex.gap6.pl4.ellipsis.noWrap.overflowHidden.$,
+          className: cssBuilderInstance.inlineFlex.gap6.pl4.ellipsis.noWrap.overflowHidden.$,
           children: [jsx(_$$v, {
             paint: y,
             colors: []
@@ -78,7 +78,7 @@ export function $$C0({
         autoflowHeight: !0,
         recordingKey: t,
         children: jsx("div", {
-          className: _$$s.py12.pr8.$,
+          className: cssBuilderInstance.py12.pr8.$,
           children: jsx(N, {
             recordingKey: t
           })
@@ -120,7 +120,7 @@ function N({
       step: .01,
       value: h ? MIXED_MARKER : overlayPaint?.opacity || 0
     }), jsx("div", {
-      className: _$$s.pt8.pb4.pr8.pl16.$,
+      className: cssBuilderInstance.pt8.pb4.pr8.pl16.$,
       children: jsx(_$$u, {
         paint: h ? MIXED_MARKER : overlayPaint || T,
         onChange: onPaintChange,

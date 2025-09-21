@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { DesignWorkspace } from "../figma_app/763686";
 import { findLatestNodeMatching, findNodeMatching } from "../figma_app/387100";
 import { getInitialOptions } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
@@ -176,7 +176,7 @@ export function $$x0(e, t) {
         isFollowUp: i.isFollowUp,
         lowerLeftText: i.onClickBack ? jsx(TrackedButton, {
           onClick: i.onClickBack,
-          className: _$$s.textInherit.bgTransparent.$,
+          className: cssBuilderInstance.textInherit.bgTransparent.$,
           trackingProperties: {
             ctaTrackingDescriptor: UpgradeAction.BACK
           },

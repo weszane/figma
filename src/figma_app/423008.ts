@@ -5,7 +5,7 @@ import { setupThemeContext } from "../905/614223";
 import o from "classnames";
 import { isGovCluster } from "../figma_app/169182";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Z } from "../905/224161";
 import { getSelectedView } from "../figma_app/386952";
@@ -32,7 +32,7 @@ export function $$E0({
         htmlAttributes: {
           "data-test-id": "google-btn"
         },
-        className: l()(x6, zB, t ? as : Hg, r && _$$s.colorTextBrand.$),
+        className: l()(x6, zB, t ? as : Hg, r && cssBuilderInstance.colorTextBrand.$),
         "aria-label": getI18nString("footer_banner.continue_with_google"),
         ...o,
         children: jsxs("span", {

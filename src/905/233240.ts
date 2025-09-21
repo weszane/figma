@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { A } from "../5724/663128";
@@ -10,8 +10,8 @@ export function $$u0({
   hasTaxIdVerificationError: e
 }) {
   return jsxs("div", {
-    className: a()(_$$s.flex.flexRow.itemsCenter.$, {
-      [_$$s.colorTextDanger.$]: e
+    className: a()(cssBuilderInstance.flex.flexRow.itemsCenter.$, {
+      [cssBuilderInstance.colorTextDanger.$]: e
     }),
     children: [renderI18nText("community.monetization.address"), jsx(SvgComponent, {
       svg: A,

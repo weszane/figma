@@ -6,7 +6,7 @@ import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { formatList } from "../figma_app/930338";
 import { NG } from "../figma_app/709893";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { processLocalComponents } from "../figma_app/80990";
@@ -71,7 +71,7 @@ let M = registerModal(function ({
     children: getFeatureFlags().cmty_lib_admin_publish && o ? jsxs("div", {
       className: F,
       children: [jsx("div", {
-        className: _$$s.mb8.$,
+        className: cssBuilderInstance.mb8.$,
         children: renderI18nText("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
       }), jsx(_$$U, {
         label: jsx(Label, {
@@ -124,7 +124,7 @@ export function $$W0(e) {
     let r = getI18nString("design_systems.libraries_modal.plural.num_style", {
       numStyles: t
     });
-    if (e > 0 && t > 0) i = formatList([n, r], "unit"); else if (e > 0) i = n; else {
+    if (e > 0 && t > 0) i = formatList([n, r], "unit");else if (e > 0) i = n;else {
       if (!(t > 0)) return "";
       i = r;
     }
@@ -180,7 +180,7 @@ export function $$W0(e) {
     hasTeamPaidAccess(a) && (r += w.numUpdates + C.numUpdates);
     let l = (D = r) > 0 ? renderI18nText("design_systems.libraries_modal.current_file_has_x_changes", {
       numChangesText: jsx("div", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: renderI18nText("design_systems.libraries_modal.x_changes", {
           numChanges: D
         })
@@ -244,7 +244,7 @@ function K({
     column: a
   });
   return jsx("div", {
-    className: _$$s.ml6.$,
+    className: cssBuilderInstance.ml6.$,
     children: jsx(Button, {
       variant: i,
       disabled: e,

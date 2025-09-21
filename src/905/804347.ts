@@ -77,7 +77,7 @@ import { FolderSortKey } from "../905/316062";
 import { w as _$$w } from "../905/191841";
 import { lQ } from "../905/934246";
 import eq from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { customHistory } from "../905/612521";
@@ -801,25 +801,25 @@ function e7(e) {
     return jsxs("div", {
       className: "search_results_users_items_view--tileContainer--QZxVL",
       children: [jsx("div", {
-        className: e$()(_$$s.flex.justifyEnd.pt12.pr12.minW32.minH32.$, "search_results_users_items_view--settingsButton--UFVFe"),
+        className: e$()(cssBuilderInstance.flex.justifyEnd.pt12.pr12.minW32.minH32.$, "search_results_users_items_view--settingsButton--UFVFe"),
         children: jsx(_$$C, {
           showSettingsIcon: i
         })
       }), jsxs("div", {
-        className: e$()(_$$s.flex.flexColumn.cursorDefault.selectNone.itemsCenter.$, "search_results_users_items_view--tileContent--YoM64"),
+        className: e$()(cssBuilderInstance.flex.flexColumn.cursorDefault.selectNone.itemsCenter.$, "search_results_users_items_view--tileContent--YoM64"),
         children: [jsx(H8, {
           user: e,
           size: Pf.XLARGE
         }), jsx("div", {
-          className: e$()(_$$s.mt16.font13.$, "search_results_users_items_view--tileName--ffWxq search_results_users_items_view--gridEllipsis--ROrDw ellipsis--ellipsis--Tjyfa"),
+          className: e$()(cssBuilderInstance.mt16.font13.$, "search_results_users_items_view--tileName--ffWxq search_results_users_items_view--gridEllipsis--ROrDw ellipsis--ellipsis--Tjyfa"),
           children: e.name || e.handle
         }), jsx("div", {
-          className: e$()(_$$s.minH16.$, "search_results_users_items_view--email--KxUch search_results_users_items_view--gridEllipsis--ROrDw ellipsis--ellipsis--Tjyfa"),
+          className: e$()(cssBuilderInstance.minH16.$, "search_results_users_items_view--email--KxUch search_results_users_items_view--gridEllipsis--ROrDw ellipsis--ellipsis--Tjyfa"),
           children: e.email
         }), jsxs("div", {
-          className: e$()(_$$s.h36.py36.$, "search_results_users_items_view--lastActiveAt--DbBT1"),
+          className: e$()(cssBuilderInstance.h36.py36.$, "search_results_users_items_view--lastActiveAt--DbBT1"),
           children: [t && jsxs("div", {
-            className: _$$s.flex.flexRow.itemsCenter.justifyCenter.mb4.$,
+            className: cssBuilderInstance.flex.flexRow.itemsCenter.justifyCenter.mb4.$,
             children: [jsx(_$$H, {
               entityId: t.id,
               entityName: t.name,
@@ -836,7 +836,7 @@ function e7(e) {
     });
   }, [s, i]);
   return jsxs("div", {
-    className: _$$s.mb32.mx32.$,
+    className: cssBuilderInstance.mb32.mx32.$,
     children: [jsx(_$$A, {
       viewType: ViewMode.GRID,
       getAriaLabel: e => e.handle,

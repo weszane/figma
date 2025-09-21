@@ -112,7 +112,7 @@ import { R as _$$R3 } from '../7021/67076';
 import { d as _$$d3 } from '../7021/966231';
 import { L as _$$L } from '../c5e2cae0/262856';
 import { fm } from '../c5e2cae0/453906';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { iq7, L69 } from '../figma_app/6204';
 import { II } from '../figma_app/11182';
 import { canPerformActionBasedOnLevel } from '../figma_app/12796';
@@ -203,7 +203,7 @@ function B({
     }).$,
     'data-testid': 'admin-dashboard-tab',
     'children': [jsxs('div', {
-      className: _$$s.flex.flexRow.gap24.py24.px16.justifyStart.$,
+      className: cssBuilderInstance.flex.flexRow.gap24.py24.px16.justifyStart.$,
       children: [jsx(ER, {
         dispatch: t,
         entityType: ck.TEAM,
@@ -211,13 +211,13 @@ function B({
         size: 80,
         avatarEditorState: a
       }), jsxs('div', {
-        className: _$$s.flex.flexColumn.justifyCenter.itemsStart.$,
+        className: cssBuilderInstance.flex.flexColumn.justifyCenter.itemsStart.$,
         children: [jsx(TextWithTruncation, {
           fontWeight: 'regular',
           fontSize: 24,
           children: e.name
         }), e.community_profile_handle && jsxs(TrackedDiv, {
-          className: C()(_$$s.lh24.font13.cursorPointer.$, 'admin_dashboard_tab--communityHandle--uBlsg'),
+          className: C()(cssBuilderInstance.lh24.font13.cursorPointer.$, 'admin_dashboard_tab--communityHandle--uBlsg'),
           onClick: () => {
             t(selectViewAction({
               view: 'communityHub',
@@ -238,12 +238,12 @@ function B({
         }));
       }
     }), jsx('div', {
-      className: _$$s.mb16.$
+      className: cssBuilderInstance.mb16.$
     }), e.pro_team && jsx(AutoLayout, {
       spacing: 16,
       direction: 'vertical',
       children: jsx('div', {
-        className: _$$s.mb16.$,
+        className: cssBuilderInstance.mb16.$,
         children: jsx($, {
           team: e
         })
@@ -707,7 +707,7 @@ let e5 = withTracking(e => {
     children: jsxs('div', {
       className: cE,
       children: [jsx('div', {
-        className: _$$s.pr8.$,
+        className: cssBuilderInstance.pr8.$,
         children: jsx(y2, {
           onChange: e.onSearch,
           query: e.searchQuery,
@@ -973,7 +973,7 @@ function e8(e) {
     }
   });
   return jsx('div', {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: jsx(e5, {
       billing: e.billing,
       currentMemberId: e.currentMemberId,
@@ -1791,7 +1791,7 @@ function ah({
               planType: FOrganizationLevelType.TEAM,
               isActiveAnnualPlan: c
             }), jsx('div', {
-              className: _$$s.mr8.$
+              className: cssBuilderInstance.mr8.$
             })]
           }), jsx(_$$V2, {
             icon: 'plus-32',
@@ -1817,7 +1817,7 @@ function ay(e) {
   return jsx(_$$Q2, {
     minContentWidth: 1024,
     children: jsx('div', {
-      className: _$$s.pb36.$,
+      className: cssBuilderInstance.pb36.$,
       children: jsx(_$$S4, {
         invoices: e.planInvoices,
         adjustAnnualSeatsAction: e.adjustAnnualSeatsAction,
@@ -1833,7 +1833,7 @@ function aw(e) {
     planId: e.teamId
   });
   return t.status !== 'loaded' || e.isLoading ? jsx('div', {
-    'className': _$$s.flex.alignCenter.justifyCenter.p24.$,
+    'className': cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     'data-testid': 'invoices-tab-loading',
     'children': jsx(_$$k3, {})
   }) : jsx(ay, {
@@ -1953,7 +1953,7 @@ function aA(e) {
     }));
   } : null, [w.data?.show, E, k, t]);
   return a.status !== 'loaded' || g.status !== 'loaded' || h.status !== 'loaded' || w.status === 'loading' || e.isLoading ? jsx('div', {
-    'className': _$$s.flex.alignCenter.justifyCenter.p24.$,
+    'className': cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     'data-testid': 'billing-overview-tab-loading',
     'children': jsx(_$$k3, {})
   }) : jsx(_$$i2, {
@@ -2047,7 +2047,7 @@ function aO(e) {
         teamId: e.team.id
       },
       children: jsxs('div', {
-        className: _$$s.hFull.flex.flexColumn.$,
+        className: cssBuilderInstance.hFull.flex.flexColumn.$,
         children: [jsx(ah, {
           selectedTab: DashboardSections.BILLING,
           teamId: e.team.id,
@@ -2113,7 +2113,7 @@ function aP(e) {
       teamId: e.team.id
     },
     children: jsxs('div', {
-      className: _$$s.hFull.flex.flexColumn.$,
+      className: cssBuilderInstance.hFull.flex.flexColumn.$,
       children: [jsx(ah, {
         selectedTab: DashboardSections.CONTENT,
         teamId: e.team.id,

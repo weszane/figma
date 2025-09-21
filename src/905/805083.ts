@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { e0 } from "../905/696396";
 import { a as _$$a } from "../905/275092";
@@ -46,7 +46,7 @@ export let $$v0 = memo(function ({
     page: e0.DSA_VARIABLE_VIEW,
     properties: E,
     children: jsxs("div", {
-      className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+      className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
       "data-testid": "variable-drilldown",
       children: [jsx(_$$i, {
         assetOrFileName: t.name,
@@ -56,7 +56,7 @@ export let $$v0 = memo(function ({
         })
       }), jsxs(P, {
         width: l,
-        className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+        className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: x,
         children: [jsx(I, {
           libraryFileKey: e,

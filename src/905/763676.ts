@@ -10,7 +10,7 @@ import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { ImageBackedLoading } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { setupPlaybackHandler, PluginAction } from "../905/656545";
 import { am } from "../figma_app/430563";
@@ -168,7 +168,7 @@ function ec({
           args: e.libraryKey,
           recordingKey: e.name,
           rightIcon: jsx("div", {
-            className: _$$s.flex.alignCenter.justifyCenter.flexShrink0.$,
+            className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.$,
             children: jsx(_$$t2, {})
           })
         };
@@ -339,7 +339,7 @@ function ep({
   id: r
 }) {
   return jsx("div", {
-    className: _$$s.flex.justifyEnd.$,
+    className: cssBuilderInstance.flex.justifyEnd.$,
     children: jsx(ManuallyLabeledCheckbox, {
       checked: e,
       disabled: t,
@@ -406,7 +406,7 @@ function eh({
   }, [e.node_id, t, d]);
   return jsxs("div", {
     className: O()("replace_libraries_modal--fileMapRowWithBorder--ATB65 replace_libraries_modal--fileMapRow--Q9j-c replace_libraries_modal--_fileMapRowBase--agNce", {
-      [_$$s.mb8.$]: s
+      [cssBuilderInstance.mb8.$]: s
     }),
     children: [jsx(q9, {
       htmlFor: o,
@@ -536,7 +536,7 @@ export function $$ef0({
       }), z && jsxs("div", {
         className: "subscription_file_replace_libraries_view--footer--ySYCK file_view_styles--fileViewFooter--y5O8t",
         children: [jsx("div", {
-          className: _$$s.flexGrow1.$,
+          className: cssBuilderInstance.flexGrow1.$,
           children: k && jsx(_$$d, {
             checked: L,
             onChange: F,
@@ -545,7 +545,7 @@ export function $$ef0({
             })
           })
         }), jsx("div", {
-          className: _$$s.flex.$,
+          className: cssBuilderInstance.flex.$,
           children: jsx("div", {
             className: "subscription_file_replace_libraries_view--footerButton--KzAD-",
             children: jsxs(Button, {

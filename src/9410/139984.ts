@@ -33,7 +33,7 @@ import { W as _$$W2 } from "../9410/216737";
 import { C7, e7, HX, b7, mg, Ur, xK, g1, $5, ok, qw, A8, $j, N1 } from "../9410/837048";
 import { e as _$$e } from "../figma_app/278289";
 import { findNodeMatching } from "../figma_app/387100";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
 import { b as _$$b3 } from "../figma_app/5657";
@@ -170,7 +170,7 @@ function z(e) {
     dismissModal: e.onClose,
     lowerLeftText: jsx(TrackedButton, {
       onClick: e.onBackCtaClick,
-      className: _$$s2.textInherit.bgTransparent.$,
+      className: cssBuilderInstance.textInherit.bgTransparent.$,
       trackingProperties: {
         ctaTrackingDescriptor: UpgradeAction.BACK
       },

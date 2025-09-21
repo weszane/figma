@@ -11,7 +11,7 @@ import m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { fC } from "../figma_app/968813";
@@ -385,10 +385,10 @@ export function $$eo1({
           onClick: onToggleLibraryModal,
           "data-onboarding-key": _$$D,
           children: [jsx(SvgComponent, {
-            className: _$$s.colorIcon.$,
+            className: cssBuilderInstance.colorIcon.$,
             svg: _$$A2
           }), jsx("span", {
-            className: _$$s.colorText.$,
+            className: cssBuilderInstance.colorText.$,
             children: renderI18nText("whiteboard.inserts.add_your_own")
           })]
         })

@@ -10,7 +10,7 @@ import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { ModalUpperRightCorner } from "../905/17223";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { $z } from "../905/599896";
@@ -291,11 +291,11 @@ function V({
     spacing: 0,
     height: "auto",
     children: [e, jsx("p", {
-      className: _$$s.font13.colorText.fontMedium.lh24.mt4.$,
+      className: cssBuilderInstance.font13.colorText.fontMedium.lh24.mt4.$,
       className: "x2b8uid x4z9k3i xk50ysn x1o2sk6j x1gslohp",
       children: t
     }), jsx("p", {
-      className: _$$s.font11.colorText.lh16.colorTextSecondary.alignCenter.$,
+      className: cssBuilderInstance.font11.colorText.lh16.colorTextSecondary.alignCenter.$,
       children: i
     })]
   });
@@ -317,10 +317,10 @@ function G({
       verticalAlignItems: "center",
       spacing: 0,
       children: [jsx("p", {
-        className: _$$s.font13.colorText.fontMedium.lh24.$,
+        className: cssBuilderInstance.font13.colorText.fontMedium.lh24.$,
         children: e
       }), jsx(TrackedAnchor, {
-        className: _$$s.font13.colorText.lh24.colorTextBrand.cursorPointer.$,
+        className: cssBuilderInstance.font13.colorText.lh24.colorTextBrand.cursorPointer.$,
         onClick: i,
         children: t
       })]
@@ -383,7 +383,7 @@ export let $$z0 = registerModal(function ({
   }, "published-stat-box"));
   K > 1 && q.push(jsx(V, {
     image: jsx(_$$W, {
-      className: _$$s.my4.$,
+      className: cssBuilderInstance.my4.$,
       maxNumHeads: 3,
       overlapped: !0,
       entityList: Y,
@@ -400,7 +400,7 @@ export let $$z0 = registerModal(function ({
     direction: "vertical",
     spacing: 16,
     children: [jsx("p", {
-      className: _$$s.font13.colorText.lh24.$,
+      className: cssBuilderInstance.font13.colorText.lh24.$,
       children: renderI18nText("churn_friction.modal.your_team_will_lose")
     }), Z.map(({
       title: e,
@@ -418,7 +418,7 @@ export let $$z0 = registerModal(function ({
       direction: "vertical",
       spacing: 16,
       children: [jsx("p", {
-        className: _$$s.font13.colorText.lh24.$,
+        className: cssBuilderInstance.font13.colorText.lh24.$,
         children: B() && y ? renderI18nText("churn_friction.modal.view_only_on_date", {
           date: y
         }) : renderI18nText("churn_friction.modal.converted_to_view_only")
@@ -432,7 +432,7 @@ export let $$z0 = registerModal(function ({
       direction: "vertical",
       spacing: 16,
       children: [jsx("p", {
-        className: _$$s.font13.colorText.lh24.$,
+        className: cssBuilderInstance.font13.colorText.lh24.$,
         children: renderI18nText("churn_friction.modal.your_team_will_lose")
       }), jsx(G, {
         title: renderI18nText("churn_friction.modal.feature_examples"),
@@ -449,12 +449,12 @@ export let $$z0 = registerModal(function ({
     },
     children: jsxs(ModalContainer, {
       size: 520,
-      className: _$$s.px32.pt32.pb24.cursorDefault.$,
+      className: cssBuilderInstance.px32.pt32.pb24.cursorDefault.$,
       "data-testid": "downgrade-churn-friction-modal",
       children: [jsx(ModalUpperRightCorner, {
         onClick: P
       }), jsx("p", {
-        className: _$$s.font20.colorText.fontSemiBold.lh32.$,
+        className: cssBuilderInstance.font20.colorText.fontSemiBold.lh32.$,
         children: renderI18nText("churn_friction.modal.title")
       }), jsxs(AutoLayout, {
         direction: "vertical",
@@ -476,7 +476,7 @@ export let $$z0 = registerModal(function ({
               icon: "navigate-back-32"
             })
           }), jsx(Spacer, {}), jsx("button", {
-            className: _$$s.mx12.my8.underline.cursorPointer.fontMedium.lh16.$,
+            className: cssBuilderInstance.mx12.my8.underline.cursorPointer.fontMedium.lh16.$,
             onClick: P,
             children: renderI18nText("churn_friction.modal.cta.keep_plan")
           }), jsx($z, {
@@ -492,7 +492,7 @@ export let $$z0 = registerModal(function ({
               }));
             },
             children: jsx("div", {
-              className: _$$s.fontMedium.lh16.$,
+              className: cssBuilderInstance.fontMedium.lh16.$,
               children: renderI18nText("churn_friction.modal.cta.continue")
             })
           })]

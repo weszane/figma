@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6, lR } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
@@ -130,19 +130,19 @@ function S({
       propagateCloseClick: !0,
       maxWidth: 384,
       children: jsxs("div", {
-        className: _$$s.flex.flexRow.gap14.mb4.mt4.ml8.mr8.$,
+        className: cssBuilderInstance.flex.flexRow.gap14.mb4.mt4.ml8.mr8.$,
         "data-testid": "SharedVrDraftTooltipView",
         children: [jsx(D, {
           plan: g
         }), jsxs("div", {
           children: [jsx("div", {
-            className: _$$s.colorTextOnbrand.fontBold.$,
+            className: cssBuilderInstance.colorTextOnbrand.fontBold.$,
             children: x
           }), jsx("div", {
-            className: _$$s.colorTextOnbrandSecondary.mt2.$,
+            className: cssBuilderInstance.colorTextOnbrandSecondary.mt2.$,
             children: b
           }), jsxs("div", {
-            className: _$$s.flex.flexRow.mt8.gap8.$,
+            className: cssBuilderInstance.flex.flexRow.mt8.gap8.$,
             children: [jsx(e6, {
               className: "shared_vr_draft_tooltip--ignoreButton---wVA0",
               onClick: v,

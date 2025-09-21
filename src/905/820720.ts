@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { IAssertResource } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import l from "../vendor/128080";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../905/477505";
 import { defaultViewAtom, isModalOpenAtom } from "../figma_app/69680";
@@ -25,7 +25,7 @@ function E(e, t, i, r = {}) {
     let s = getCodegenLanguages(e).filter(t => !r.shouldHideLanguagesWithNoAltUnitSupport || !!findUnitSchema(e, t));
     if (0 === s.length) return;
     let o = hasLocalFileId(e) ? void 0 : jsx("div", {
-      className: _$$s.mr4.$,
+      className: cssBuilderInstance.mr4.$,
       children: jsx(_$$d, {
         plugin: e
       })

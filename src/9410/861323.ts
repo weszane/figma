@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fC } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
 import { IntegrationUtils } from "../figma_app/469876";
@@ -138,7 +138,7 @@ function U({
   isHovered: i
 }) {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyCenter.mx20.h40.w40.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.mx20.h40.w40.$,
     children: jsx(_$$I, {
       toolType: "universal-insert-collage",
       recordingKey: hx("universal-insert-plus"),

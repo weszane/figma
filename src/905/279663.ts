@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import s from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { J } from "../905/273120";
 import { D } from "../905/621624";
@@ -11,7 +11,7 @@ export function $$p1({
   animationDelay: e = 0
 }) {
   return jsx("div", {
-    className: o()(D, _$$s.colorBgSecondary.wFull.flex.alignCenter.justifyCenter.p16.radiusMedium.$),
+    className: o()(D, cssBuilderInstance.colorBgSecondary.wFull.flex.alignCenter.justifyCenter.p16.radiusMedium.$),
     style: styleBuilderInstance.add({
       aspectRatio: "1/1",
       animationFillMode: "backwards",
@@ -26,7 +26,7 @@ export function $$p1({
     onPointerDown: i
   }, n) => jsx("div", {
     ref: n,
-    className: _$$s.colorBgSecondary.flex.wFull.alignCenter.justifyCenter.radiusMedium.$,
+    className: cssBuilderInstance.colorBgSecondary.flex.wFull.alignCenter.justifyCenter.radiusMedium.$,
     style: styleBuilderInstance.add({
       aspectRatio: "1/1",
       padding: `${t}px`
@@ -41,7 +41,7 @@ export function $$p1({
     return jsx(J, {
       src: e,
       alt: t,
-      className: _$$s.maxWFull.$,
+      className: cssBuilderInstance.maxWFull.$,
       style: styleBuilderInstance.add({
         objectFit: "scale-down"
       }).$,

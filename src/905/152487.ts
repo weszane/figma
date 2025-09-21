@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
 import { setupThemeContext } from "../905/614223";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
@@ -41,7 +41,7 @@ export function $$g0(e) {
           brand: e.forceEditorTheme,
           children: jsx("div", {
             "data-testid": testId,
-            className: _$$s.$$if(f, _$$s.invisible).$,
+            className: cssBuilderInstance.$$if(f, cssBuilderInstance.invisible).$,
             children: e.children
           })
         })

@@ -23,7 +23,7 @@ import { mergeSorted } from "../figma_app/656233";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { useStableMemo, useMemoStable } from "../905/19536";
 import F from "../vendor/73823";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Spacer, AutoLayout } from "../905/470281";
 import { X9, nE, IO } from "../905/721983";
 import { debounce } from "../905/915765";
@@ -369,14 +369,14 @@ let em = memo(function ({
       secondary: !0
     }), jsx("div", {
       title: g,
-      className: _$$s.ellipsis.noWrap.overflowHidden.$,
+      className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
       children: g
     }), jsx(Spacer, {}), jsx(IV, {
       badges: f
     }), x && jsx(IV, {
       badges: x
     }), null != p && jsxs("span", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       title: "Node memory usage",
       children: [(100 * p).toFixed(3), "%"]
     })]
@@ -605,7 +605,7 @@ function eF({
     t(e.object.id);
   }, [o, t]);
   return jsxs(dP, {
-    className: _$$s.flex1.$,
+    className: cssBuilderInstance.flex1.$,
     ref: d,
     allowVim: !0,
     children: [jsx(eP, {
@@ -693,7 +693,7 @@ function e$({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.absolute.zIndexModal.colorBg.b1.colorBorder.mt2.overflowAuto.$,
+    className: cssBuilderInstance.absolute.zIndexModal.colorBg.b1.colorBorder.mt2.overflowAuto.$,
     style: {
       maxHeight: 450,
       minWidth: 500,
@@ -719,7 +719,7 @@ function eO({
 }) {
   return jsx(e$, {
     children: (Array.isArray(e) ? e : [e]).map((e, t) => jsx("div", {
-      className: _$$s.colorBg.colorTextSecondary.px8.py4.$,
+      className: cssBuilderInstance.colorBg.colorTextSecondary.px8.py4.$,
       children: e
     }, t))
   });
@@ -749,7 +749,7 @@ function eU({
   }, [keyboardNavigationItem, t]);
   return jsx("button", {
     ref: setKeyboardNavigationElement,
-    className: eD()(_$$s.block.wFull.px4.py8.colorText.flex.itemsCenter.alignLeft.$, "search_bar--searchResult--0iOvc", isFauxFocused && "search_bar--fauxFocus--BYHwu"),
+    className: eD()(cssBuilderInstance.block.wFull.px4.py8.colorText.flex.itemsCenter.alignLeft.$, "search_bar--searchResult--0iOvc", isFauxFocused && "search_bar--fauxFocus--BYHwu"),
     onClick: r,
     children: jsxs(AutoLayout, {
       spacing: 4,
@@ -758,7 +758,7 @@ function eU({
       }), jsx(nK, {
         id: object.displayProperties.primaryId
       }), jsx(_$$R2, {
-        className: _$$s.overflowHidden.$,
+        className: cssBuilderInstance.overflowHidden.$,
         text: displayProperties.name
       }), jsx(Spacer, {}), matches.filter(({
         property: e
@@ -781,7 +781,7 @@ function ez({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.colorBorder.px8.py4.bb1.bSolid.$,
+    className: cssBuilderInstance.colorBorder.px8.py4.bb1.bSolid.$,
     children: jsx(AutoLayout, {
       children: e
     })
@@ -922,14 +922,14 @@ function eZ({
     })]
   });
 }
-let eQ = _$$s.flex1.ml10.my4.$;
+let eQ = cssBuilderInstance.flex1.ml10.my4.$;
 function e0({
   object: e
 }) {
   return jsx("div", {
     className: eQ,
     children: jsx("span", {
-      className: _$$s.fontSemiBold.$,
+      className: cssBuilderInstance.fontSemiBold.$,
       children: e.displayProperties.longName
     })
   });
@@ -942,23 +942,23 @@ function e1({
 }) {
   let i = Xr(AJ);
   return jsxs("div", {
-    className: _$$s.flex1.ml10.my4.$,
+    className: cssBuilderInstance.flex1.ml10.my4.$,
     children: [jsxs("div", {
       children: [jsx("span", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: "Diffing "
       }), jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: e.displayProperties.longName
       }), jsx("span", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: " against "
       }), jsx("span", {
-        className: _$$s.fontSemiBold.$,
+        className: cssBuilderInstance.fontSemiBold.$,
         children: t.displayProperties.longName
       })]
     }), r && jsx("div", {
-      className: _$$s.colorTextSecondary.mt8.$,
+      className: cssBuilderInstance.colorTextSecondary.mt8.$,
       children: jsxs(AutoLayout, {
         spacing: 8,
         width: "hug-contents",
@@ -967,7 +967,7 @@ function e1({
         children: [jsxs("span", {
           children: ["Snapshot of", " ", jsx(SecureLink, {
             onClick: () => i(r.object.id),
-            className: _$$s.colorTextFigjam.fontSemiBold.$,
+            className: cssBuilderInstance.colorTextFigjam.fontSemiBold.$,
             trusted: !0,
             children: r.object.displayProperties.name
           }), r.type === Lp.Tree && " and full subtree", " was taken at", " ", r.time.toLocaleTimeString("en-US")]
@@ -975,14 +975,14 @@ function e1({
           onClick: () => s({
             type: "refresh"
           }),
-          className: _$$s.colorTextDesign.$,
+          className: cssBuilderInstance.colorTextDesign.$,
           trusted: !0,
           children: "Refresh"
         }), jsx(SecureLink, {
           onClick: () => s({
             type: "clear"
           }),
-          className: _$$s.colorTextDanger.$,
+          className: cssBuilderInstance.colorTextDanger.$,
           trusted: !0,
           children: "Finish"
         })]
@@ -1006,7 +1006,7 @@ function e4({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.hFull.$,
+    className: cssBuilderInstance.hFull.$,
     children: jsxs(AutoLayout, {
       direction: "vertical",
       width: "fill-parent",

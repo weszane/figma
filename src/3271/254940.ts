@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { ButtonSecondary } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
@@ -27,7 +27,7 @@ export function $$g0(e) {
     let e = "figjam_plugin_tile" === variant ? renderI18nText("universal_insert.request") : renderI18nText("universal_insert.approval_pending");
     return jsx(ButtonSecondary, {
       disabled: !0,
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       dataTestId: "request-button-approval-pending",
       children: e
     });
@@ -52,7 +52,7 @@ export function $$g0(e) {
         data: j
       }));
     },
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     dataTestId: "request-button",
     children: y
   });

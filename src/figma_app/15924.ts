@@ -6,7 +6,7 @@ import { renderI18nText } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
 import { e0 } from '../905/696396';
 import { O as _$$O } from '../905/791978';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { ShelfViewType, isMonetizedWithClientMeta, isPlugin, hasMonetizedResourceMetadata, hasClientMeta, isWidget, isThirdPartyMonetized } from '../figma_app/45218';
 import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
@@ -105,7 +105,7 @@ export function $$S1({
           className: s()({
             'purchase_button_view--secondaryText--P5Gzo': !R,
             [b]: r === ShelfViewType.PLUGIN_ROW,
-            [_$$s.colorText.$]: r === ShelfViewType.REDESIGNED_PLUGIN_ROW
+            [cssBuilderInstance.colorText.$]: r === ShelfViewType.REDESIGNED_PLUGIN_ROW
           }),
           children: x && getProductPriceString(e.monetized_resource_metadata)
         })]

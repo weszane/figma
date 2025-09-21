@@ -1,4 +1,4 @@
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
 import { s6 } from "../figma_app/443991";
 import { showModalHandler } from "../905/156213";
@@ -12,7 +12,7 @@ let $$d0 = createOptimistThunk((e, {
   let o = document.createElement("input");
   o.type = "file";
   o.accept = "image/*";
-  o.className = _$$s.hidden.$;
+  o.className = cssBuilderInstance.hidden.$;
   o.style.display = "none";
   o.onchange = () => {
     let n = o.files;

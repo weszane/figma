@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { w as _$$w } from "../c5e2cae0/59973";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
@@ -103,13 +103,13 @@ export function $$E0({
           hasPriceAsterisk: o && t === ProductAccessTypeEnum.EXPERT
         }, t))
       }), jsxs("div", {
-        className: _$$s.flex.justifyBetween.py4.$,
+        className: cssBuilderInstance.flex.justifyBetween.py4.$,
         "data-testid": "purchase-summary-subtotal",
         children: [jsx("h3", {
-          className: _$$s.fontMedium.$$if(r, _$$s.font13.lh24).$,
+          className: cssBuilderInstance.fontMedium.$$if(r, cssBuilderInstance.font13.lh24).$,
           children: renderI18nText("checkout.subtotal")
         }), jsx("p", {
-          className: _$$s.$$if(r, _$$s.font13.lh24).$,
+          className: cssBuilderInstance.$$if(r, cssBuilderInstance.font13.lh24).$,
           children: k({
             price: V,
             isCartReviewSummary: r,
@@ -125,21 +125,21 @@ export function $$E0({
         })
       }), r && jsxs("div", {
         children: [jsxs("div", {
-          className: _$$s.flex.justifyBetween.py4.itemsCenter.$,
+          className: cssBuilderInstance.flex.justifyBetween.py4.itemsCenter.$,
           "data-testid": "purchase-summary-taxes",
           children: [jsxs("div", {
-            className: _$$s.flexColumn.$,
+            className: cssBuilderInstance.flexColumn.$,
             children: [jsx("h3", {
-              className: _$$s.font13.lh24.$,
+              className: cssBuilderInstance.font13.lh24.$,
               children: renderI18nText("checkout.purchase_summary.tax")
             }), jsx("h3", {
-              className: _$$s.colorTextSecondary.font13.lh24.$,
+              className: cssBuilderInstance.colorTextSecondary.font13.lh24.$,
               children: renderI18nText("pro_cart.review.tax_percent", {
                 taxPercent: R
               })
             })]
           }), jsx("p", {
-            className: _$$s.font13.lh24.$,
+            className: cssBuilderInstance.font13.lh24.$,
             children: k({
               price: $,
               isAnnual: F,
@@ -147,13 +147,13 @@ export function $$E0({
             })
           })]
         }), jsxs("div", {
-          className: _$$s.flex.justifyBetween.py4.$,
+          className: cssBuilderInstance.flex.justifyBetween.py4.$,
           "data-testid": "purchase-summary-total-due",
           children: [jsx("h3", {
-            className: _$$s.fontMedium.font13.lh24.$,
+            className: cssBuilderInstance.fontMedium.font13.lh24.$,
             children: renderI18nText("checkout.purchase_summary.total_due_today")
           }), jsx("p", {
-            className: _$$s.font13.lh24.$,
+            className: cssBuilderInstance.font13.lh24.$,
             children: k({
               price: U,
               isAnnual: F,
@@ -163,9 +163,9 @@ export function $$E0({
         }), jsx("div", {
           "data-testid": "purchase-summary-plan-renewal",
           children: jsxs("p", {
-            className: _$$s.font13.lh24.flex.$,
+            className: cssBuilderInstance.font13.lh24.flex.$,
             children: [jsx(_$$w, {
-              className: _$$s.minW24.$
+              className: cssBuilderInstance.minW24.$
             }), jsx(I, {
               tier: l,
               isAnnual: F
@@ -204,29 +204,29 @@ function A({
   let f = g.formatMoney(p * t, {
     showCents: n
   });
-  let v = _$$s.font13.lh24;
+  let v = cssBuilderInstance.font13.lh24;
   let y = getI18nString("checkout.price_per_month", {
     price: g.formatMoney(h)
   });
   return jsxs("div", {
     "data-testid": `purchase-summary-${e}-row`,
-    className: _$$s.flex.justifyBetween.py8.bb1.bSolid.colorBorder.$$if(n, _$$s.itemsCenter, _$$s.itemsStart).$,
+    className: cssBuilderInstance.flex.justifyBetween.py8.bb1.bSolid.colorBorder.$$if(n, cssBuilderInstance.itemsCenter, cssBuilderInstance.itemsStart).$,
     children: [jsxs("div", {
       children: [jsx("h3", {
-        className: _$$s.$$if(n, v).$,
+        className: cssBuilderInstance.$$if(n, v).$,
         children: renderI18nText("checkout.purchase_summary.cart_line_item", {
           quantity: t,
           productLabel: tI(e)
         })
       }), jsx("p", {
-        className: _$$s.colorTextSecondary.$$if(n, v).$,
+        className: cssBuilderInstance.colorTextSecondary.$$if(n, v).$,
         children: renderI18nText(r ? "checkout.product_cost_breakdown_annually" : "checkout.product_cost_breakdown_monthly", {
           price: y,
           quantity: t
         })
       })]
     }), jsx("p", {
-      className: _$$s.$$if(n, v).$,
+      className: cssBuilderInstance.$$if(n, v).$,
       children: k({
         price: f,
         isCartReviewSummary: n,

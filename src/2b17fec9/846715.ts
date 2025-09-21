@@ -41,7 +41,7 @@ import { qW } from "../figma_app/27927";
 import { Ao } from "../figma_app/751648";
 import { Button } from "../905/521428";
 import { a as _$$a2 } from "../905/948337";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { showModalHandler } from "../905/156213";
 import { UISection } from "../905/15667";
 import { YG } from "../figma_app/186402";
@@ -160,7 +160,7 @@ function Q(e) {
     },
     content: jsx("div", {
       children: jsx("span", {
-        className: _$$s.textBodyLargeStrong.$,
+        className: cssBuilderInstance.textBodyLargeStrong.$,
         children: e.text
       })
     }),
@@ -209,7 +209,7 @@ let eo = memo(function () {
 });
 function el(e) {
   return jsxs("div", {
-    className: _$$s.flex.gap8.itemsCenter.mr6.$,
+    className: cssBuilderInstance.flex.gap8.itemsCenter.mr6.$,
     children: [jsx(RJ, {
       viewOnly: !0,
       variant: "brand-secondary"

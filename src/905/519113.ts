@@ -39,7 +39,7 @@ import { i6, v2, x$ } from "../905/188715";
 import { C as _$$C, O as _$$O2 } from "../905/696698";
 import { B as _$$B } from "../905/521763";
 import { Ml, bj } from "../905/971098";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { d$ } from "../figma_app/664693";
 import { MIXED_MARKER } from "../905/216495";
 import { nN, SR } from "../figma_app/852050";
@@ -136,7 +136,7 @@ function K(e) {
   } = e;
   let r = localKits[0];
   return 1 === localKits.length && getFeatureFlags().first_draft_publish_ux && validationResults ? jsxs("div", {
-    className: _$$s.pt10.$,
+    className: cssBuilderInstance.pt10.$,
     children: [jsx(d$, {
       validationFailures: validationResults,
       selectedKit: r,
@@ -440,7 +440,7 @@ function eY({
       fraction: t,
       pathFill: "#4B4B4B"
     }), jsx("span", {
-      className: _$$s.truncate.$,
+      className: cssBuilderInstance.truncate.$,
       children: renderI18nText("design_systems.publishing_modal.assembling_components_styles_and_variables")
     })]
   });
@@ -481,7 +481,7 @@ function eq({
       cornerRadius: 5,
       verticalAlignItems: "start",
       children: [jsx(_$$R, {
-        className: _$$s.flexShrink0.$
+        className: cssBuilderInstance.flexShrink0.$
       }), jsx("div", {
         children: u
       })]
@@ -640,7 +640,7 @@ let tI = _$$ex("publish_as_move_info", function (e) {
     moveAssetType
   } = e;
   let r = jsx("span", {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: fileNameForMove
   });
   return jsx("div", {
@@ -667,7 +667,7 @@ function tx(e) {
     isComponent
   } = e;
   let r = fileNameForMove ? jsx("span", {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: fileNameForMove
   }) : getI18nString("design_systems.publishing_modal.filename_fallback");
   return jsx("div", {
@@ -971,12 +971,12 @@ function tF({
             title: e.name,
             children: e.name
           }), m && jsx("span", {
-            className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
+            className: cssBuilderInstance.colorTextSecondary.textBodyMedium.noWrap.$,
             children: renderI18nText("design_systems.publishing_modal.hidden_variable_count_within_collection", {
               count: T.length
             })
           }), k && !m && jsx("span", {
-            className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
+            className: cssBuilderInstance.colorTextSecondary.textBodyMedium.noWrap.$,
             children: renderI18nText("design_systems.publishing_modal.list_item_changed_variable_count", {
               count: w.length
             })
@@ -1112,7 +1112,7 @@ function tW({
   total: t
 }) {
   return jsx("span", {
-    className: _$$s.colorTextSecondary.fontNormal.$,
+    className: cssBuilderInstance.colorTextSecondary.fontNormal.$,
     children: t ? renderI18nText("design_systems.publishing_modal.count_with_total", {
       count: e,
       total: t
@@ -1147,7 +1147,7 @@ function tq({
     }), jsx("div", {
       className: "variable_collection_header--variableCollectionHeaderRight--g0he-",
       children: jsx("div", {
-        className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
+        className: cssBuilderInstance.colorTextSecondary.textBodyMedium.noWrap.$,
         children: "hidden" === t ? renderI18nText("design_systems.publishing_modal.hidden_variable_count_no_parentheses", {
           count: r
         }) : renderI18nText("design_systems.publishing_modal.header_changed_variable_count_no_parentheses", {

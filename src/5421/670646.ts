@@ -63,7 +63,7 @@ import { Rk as _$$Rk, Ge, wi } from "../figma_app/451499";
 import { getObservableValue } from "../figma_app/84367";
 import { l6, c$ as _$$c$2 } from "../905/794875";
 import { iE } from "../figma_app/711157";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ex as _$$ex } from "../905/524523";
 import { A as _$$A5 } from "../svg/94747";
 import { A as _$$A6 } from "../svg/330785";
@@ -723,13 +723,13 @@ function eD(e) {
     type
   } = e;
   return jsxs("div", {
-    className: _$$s.flex.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     children: [jsx(SvgComponent, {
-      className: _$$s.flexGrow1.mx12.$,
+      className: cssBuilderInstance.flexGrow1.mx12.$,
       useOriginalSrcFills_DEPRECATED: !0,
       svg: "horizontal" === type ? _$$A5 : _$$A6
     }), jsx("span", {
-      className: _$$s.flexGrow1.m6.$,
+      className: cssBuilderInstance.flexGrow1.m6.$,
       style: {
         maxWidth: 144
       },
@@ -747,9 +747,9 @@ let eM = _$$ex("prototype_scroll_vertical_info", eD, () => ({
 }));
 let eV = _$$ex("prototype_scroll_marquee_info", function () {
   return jsx("div", {
-    className: _$$s.flex.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     children: jsx("span", {
-      className: _$$s.flexGrow1.m6.$,
+      className: cssBuilderInstance.flexGrow1.m6.$,
       style: {
         maxWidth: 144
       },

@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useLayoutEffect, useMemo, useContext, us
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import s from "classnames";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { H } from "../905/286442";
 import { A as _$$A } from "../905/780920";
 import { L0, MQ, AD } from "../905/479155";
@@ -68,16 +68,16 @@ export function $$f0({
     value: b,
     children: jsx("div", {
       ref: g,
-      className: _$$s.flex.gap4.$$if(void 0 === a, _$$s.absolute.left0.right0.top0.bottom0).$,
+      className: cssBuilderInstance.flex.gap4.$$if(void 0 === a, cssBuilderInstance.absolute.left0.right0.top0.bottom0).$,
       "data-testid": s,
       children: jsx(P, {
         ref: h,
         height: y,
         hideScrollbar: !0,
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: jsx(AD, {
           children: jsx("div", {
-            className: o()("list--list--1-cyL", _$$s.flex.flexColumn.pb8.$),
+            className: o()("list--list--1-cyL", cssBuilderInstance.flex.flexColumn.pb8.$),
             children: jsx(_$$A.Provider, {
               value: c,
               children: e
@@ -123,7 +123,7 @@ export function $$f0({
       itemsPerRow: 1,
       debug: l
     });
-    let T = _$$s.flex.alignCenter.bRadius5.ml8.mr8.p4.flex1.$$if(active && !m, _$$s.colorBgHover).$;
+    let T = cssBuilderInstance.flex.alignCenter.bRadius5.ml8.mr8.p4.flex1.$$if(active && !m, cssBuilderInstance.colorBgHover).$;
     let {
       onClickCallback
     } = k({
@@ -206,9 +206,9 @@ export function $$f0({
     children: t
   }) {
     return jsxs("section", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx("h2", {
-        className: _$$s.textBodyMedium.colorTextSecondary.ml16.mb4.mt12.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.ml16.mb4.mt12.$,
         children: e
       }), t]
     });

@@ -26,7 +26,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { xd, uO, qy } from "../905/972515";
 import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { U8, fG } from "../figma_app/91703";
@@ -655,7 +655,7 @@ function eW(e) {
           },
           disabled: !0,
           children: jsx("div", {
-            className: _$$s2.w150.mx12.flex.justifyCenter.$,
+            className: cssBuilderInstance.w150.mx12.flex.justifyCenter.$,
             children: jsx(_$$k, {})
           })
         }, "loading");
@@ -729,7 +729,7 @@ function eW(e) {
   let t1 = jsxs("div", {
     className: pickerType === Zl.RESOURCE_INSERT_MODAL ? b()(FK, k2) : _M,
     children: [tQ, jsx("div", {
-      className: _$$s2.ml4.$,
+      className: cssBuilderInstance.ml4.$,
       children: jsx(sX, {
         pickerType,
         includeFolderSetting: validDropdownSelection.type === iN.FILE && !isSearching,
@@ -764,12 +764,12 @@ function eW(e) {
       className: eY ? qv : void 0,
       children: renderI18nText("design_systems.instance_swap_picker.no_components")
     }), jsx("div", {
-      className: _$$s2.mt8.$$if(!eY, _$$s2.flex.itemsCenter.justifyCenter.mt12).$,
+      className: cssBuilderInstance.mt8.$$if(!eY, cssBuilderInstance.flex.itemsCenter.justifyCenter.mt12).$,
       children: jsx(Button, {
         onClick: tH,
         variant: "secondary",
         iconPrefix: jsx(_$$l, {
-          className: _$$s2.mr2.$
+          className: cssBuilderInstance.mr2.$
         }),
         children: renderI18nText("design_systems.instance_swap_picker.browse_libraries")
       })

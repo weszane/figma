@@ -7,7 +7,7 @@ import { HiddenLabel } from "../905/270045";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { KeyCodes } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, d3 } from "../figma_app/545293";
@@ -27,7 +27,7 @@ export function $$w0({
   hideSpacesFilter: i
 }) {
   return jsxs("div", {
-    className: _$$s.flex.gap8.$,
+    className: cssBuilderInstance.flex.gap8.$,
     "data-testid": "fragment-search-filters",
     children: [jsx(C, {
       dropdownId: "same-energy-modal-creator-facet-dropdown",

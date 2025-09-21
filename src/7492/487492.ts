@@ -32,7 +32,7 @@ import { A as _$$A } from '../3591/199070';
 import { jZ } from '../3591/828414';
 import { L as _$$L } from '../3591/956338';
 import { _W, nN } from '../7492/254275';
-import { s as _$$s2 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { w5 } from '../figma_app/15924';
 import { _n, EJ, lD, NR, T9 } from '../figma_app/38430';
 import { ResourceTypeNoComment } from '../figma_app/45218';
@@ -628,7 +628,7 @@ function eP(e) {
         spacing: 4,
         children: [jsx('div', {
           className: p()(_$$B2, {
-            [_$$s2.colorTextDisabled.$]: e.visuallyDisabled
+            [cssBuilderInstance.colorTextDisabled.$]: e.visuallyDisabled
           }),
           children: t
         }), isPluginSetToAutoRun && jsx(Ex, {
@@ -640,7 +640,7 @@ function eP(e) {
           className: UK,
           children: J
         }), e.publishingStatusIcon && jsx('div', {
-          className: _$$s2.colorIcon.$,
+          className: cssBuilderInstance.colorIcon.$,
           children: jsx(MediaQuerySvgComponent, {
             svg: e.publishingStatusIcon
           })
@@ -1058,13 +1058,13 @@ let eM = memo(e => {
           verticalAlignItems: 'center',
           children: [jsx('div', {
             className: p()(Y2, {
-              [_$$s2.colorTextDisabled.$]: e.visuallyDisabled
+              [cssBuilderInstance.colorTextDisabled.$]: e.visuallyDisabled
             }),
             children: m
           }), e.inReview && jsx(_$$L, {
             height: '16'
           }), !!e.secondaryIcon && e.secondaryIcon, e.publishingStatusIcon && jsx('div', {
-            className: _$$s2.colorIcon.$,
+            className: cssBuilderInstance.colorIcon.$,
             children: jsx(MediaQuerySvgComponent, {
               svg: e.publishingStatusIcon
             })

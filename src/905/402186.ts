@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { IT } from "../905/713695";
 import { e0 } from "../905/696396";
@@ -46,7 +46,7 @@ export let $$v0 = memo(function ({
     page: e0.DSA_STYLE_VIEW,
     properties: E,
     children: jsxs("div", {
-      className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+      className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
       "data-testid": "style-drilldown",
       children: [jsx(_$$i, {
         assetOrFileName: t.name,
@@ -56,7 +56,7 @@ export let $$v0 = memo(function ({
         })
       }), jsxs(P, {
         width: o,
-        className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+        className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: x,
         children: [jsx(I, {
           libraryFileKey: e,

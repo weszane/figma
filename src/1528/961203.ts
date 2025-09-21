@@ -18,7 +18,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useHandleChangeEvent, useHandleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableButton } from "../905/511649";
 import { oW } from "../905/675859";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -416,7 +416,7 @@ let $$el0 = forwardRef(function ({
   let e$ = eA && g > 0 && !X;
   return jsxs(Fragment, {
     children: [eA && (!eg || g <= 0 || J) ? jsx("div", {
-      className: _$$s.colorBgDesign.h0.p1.bRadius3.mr8.$,
+      className: cssBuilderInstance.colorBgDesign.h0.p1.bRadius3.mr8.$,
       style: X ? {
         width: `calc(100% - 24px - ${g}px - ${ev}px)`
       } : {
@@ -439,7 +439,7 @@ let $$el0 = forwardRef(function ({
       collapsedStatesDisabled: el
     }) : null, jsxs(_$$_2.Item, {
       ref: _$$Ay(es, eE),
-      className: _$$s.wFull.relative.$,
+      className: cssBuilderInstance.wFull.relative.$,
       "data-testid": J ? "mini-carousel-item" : "carousel-item",
       "data-tooltip": children.length > 0 && isCollapsed ? W(eN, ey) : void 0,
       "data-tooltip-type": KindEnum.TEXT,
@@ -468,7 +468,7 @@ let $$el0 = forwardRef(function ({
         "aria-label": eV,
         "aria-pressed": u,
         "aria-selected": u,
-        className: _$$s.eventsAuto.bgTransparent.relative.wFull.zIndex0.opacity1.$$if(eA, _$$s.zIndex1).$$if(ew, _$$s.opacity0).$$if(J, _$$s.w48.h48.colorBgSecondary).$,
+        className: cssBuilderInstance.eventsAuto.bgTransparent.relative.wFull.zIndex0.opacity1.$$if(eA, cssBuilderInstance.zIndex1).$$if(ew, cssBuilderInstance.opacity0).$$if(J, cssBuilderInstance.w48.h48.colorBgSecondary).$,
         "data-fullscreen-intercept": !0,
         onFocus: () => {
           AppStateTsApi && AppStateTsApi.singleSlideView().isCarouselFocused.set(!0);
@@ -499,12 +499,12 @@ let $$el0 = forwardRef(function ({
         }).$,
         tabIndex: u ? 0 : -1,
         children: jsxs("div", {
-          className: _$$s.inlineFlex.bgTransparent.bRadius5.wFull.justifyCenter.itemsCenter.$$if(!J, _$$s.p8).borderBox.overflowHidden.$,
+          className: cssBuilderInstance.inlineFlex.bgTransparent.bRadius5.wFull.justifyCenter.itemsCenter.$$if(!J, cssBuilderInstance.p8).borderBox.overflowHidden.$,
           style: J ? {} : {
             paddingBottom: `${8 + 7.5 * eU}px`
           },
           children: [Z && jsx("div", {
-            className: _$$s.flex.flexColumn.itemsStart.itemSelfStart.gap16.$,
+            className: cssBuilderInstance.flex.flexColumn.itemsStart.itemSelfStart.gap16.$,
             style: {
               ...styleBuilderInstance.add({
                 width: `${ev}px`,
@@ -513,7 +513,7 @@ let $$el0 = forwardRef(function ({
               }).$
             },
             children: jsx("span", {
-              className: _$$s.alignLeft.font13.$$if(eA, _$$s.opacity0).$,
+              className: cssBuilderInstance.alignLeft.font13.$$if(eA, cssBuilderInstance.opacity0).$,
               style: {
                 ...styleBuilderInstance.add({
                   color: ez
@@ -526,9 +526,9 @@ let $$el0 = forwardRef(function ({
               children: number || "-"
             })
           }), jsxs("div", {
-            className: _$$s.eventsNone.wFull.flex.relative.$,
+            className: cssBuilderInstance.eventsNone.wFull.flex.relative.$,
             children: [L ? jsx("div", {
-              className: _$$s.absolute.top0.left0.$,
+              className: cssBuilderInstance.absolute.top0.left0.$,
               children: L
             }) : null, jsx("div", {
               style: styleBuilderInstance.add({
@@ -558,7 +558,7 @@ let $$el0 = forwardRef(function ({
               useDifferentColorForTemplates: q,
               backgroundColor: eu
             }), eI ? jsx("div", {
-              className: f()(_$$s.absolute.colorBg.b1.bRadius2.$, _$$w),
+              className: f()(cssBuilderInstance.absolute.colorBg.b1.bRadius2.$, _$$w),
               children: jsx("span", {
                 children: jsx(s, {})
               })
@@ -573,7 +573,7 @@ let $$el0 = forwardRef(function ({
           e.stopPropagation();
           w(e);
         },
-        className: _$$s.bgTransparent.absolute.$,
+        className: cssBuilderInstance.bgTransparent.absolute.$,
         style: {
           justifySelf: "center",
           transition: "transform 0.25s",
@@ -637,7 +637,7 @@ function ei({
   collapsedStatesDisabled: n
 }) {
   return jsxs("div", {
-    className: _$$s.relative.h16.wFull.$,
+    className: cssBuilderInstance.relative.h16.wFull.$,
     children: [jsx("div", {
       ...Ay.props(t ? er.rowDividerWithCaret : er.rowDividerWithoutCaret)
     }), t && !n && jsx(ButtonPrimitive, {
@@ -734,7 +734,7 @@ function ec({
   let i = [`linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 89%, rgba(0,0,0,0) 98%) ${n}`, n];
   return jsx(Fragment, {
     children: [2, 1].map(t => jsx("div", {
-      className: _$$s.bRadius3.eventsNone.absolute.zIndexMinus1.elevation100.borderBox.top0.wFull.$,
+      className: cssBuilderInstance.bRadius3.eventsNone.absolute.zIndexMinus1.elevation100.borderBox.top0.wFull.$,
       style: styleBuilderInstance.add({
         transitionProperty: "transform, opacity",
         transitionDuration: "0.1s, 0.001s",

@@ -418,7 +418,7 @@ import { X as _$$X7 } from '../9420/381913';
 import { JR as _$$JR, Kh } from '../9420/975542';
 import { O as _$$O6 } from '../9420/998877';
 import { z as _$$z5 } from '../940032c6/265110';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { A as _$$A29 } from '../f2246930/458609';
 import { nk as _$$nk } from '../figma_app/2023';
 import { rv as _$$rv, BTz, c6t, cJy, cvy, Duq, fQh, HaT, hxO, I3H, I5n, I$z, j0N, j9$, jQF, K69, kBq, kmq, LB2, LPt, LQ8, Msu, NM0, O5v, O9D, Ob5, Q16, Ql8, Qlc, r3Y, rQs, sqw, tBR, Tp6, tUL, tZO, Ult, UmN, USq, Wb3, X5_, XIg, xPo, YHe, yjU, YPG } from '../figma_app/6204';
@@ -800,7 +800,7 @@ function e4(e) {
   });
   let l = useMemo(() => n.status === 'loaded' && !!n.data?.currentUser?.userFlagByName, [n]) && getFeatureFlags().fc_initial_onboarding_enabled && (r?.tier === FPlanNameType.PRO || r?.tier === FPlanNameType.ORG || r?.tier === FPlanNameType.ENTERPRISE);
   let d = jsx('div', {
-    className: _$$s.h24.w24.$,
+    className: cssBuilderInstance.h24.w24.$,
     children: jsx(_$$I2, {})
   });
   let c = jsx(e2, {
@@ -810,7 +810,7 @@ function e4(e) {
     'wrapInListItem': !1,
     'icon': d,
     'text': jsx('div', {
-      'className': _$$s.pr36.$,
+      'className': cssBuilderInstance.pr36.$,
       'data-onboarding-key': e.dataOnboardingKey,
       'children': jsx(TextWithTruncation, {
         truncate: !0,
@@ -1125,7 +1125,7 @@ function tv(e) {
 let tN = registerModal(e => {
   let t = useDispatch();
   let r = jsx('span', {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: e.sectionName
   });
   return jsx(ConfirmationModal2, {
@@ -1513,7 +1513,7 @@ function rj(e) {
     children: [jsx(SidebarRow, {
       dragKey: e.dragKey,
       icon: o.imgUrl ? jsx('div', {
-        className: _$$s.colorIcon.$,
+        className: cssBuilderInstance.colorIcon.$,
         children: jsx(_$$nl, {
           shape: 'ROUNDED_SQUARE',
           size: {
@@ -1997,7 +1997,7 @@ function rV(e) {
     entity: e.favorite.workspace,
     size: 16
   }) : jsx(_$$t2, {
-    className: _$$s.colorIcon.$
+    className: cssBuilderInstance.colorIcon.$
   });
   return jsxs('div', {
     children: [jsx(SidebarRow, {
@@ -2040,7 +2040,7 @@ let rz = (e, t) => {
     zIndex: -1
   });
   r.style.overflow = 'hidden';
-  t && (r.classList.add(t), r.classList.add(_$$s.colorText.$));
+  t && (r.classList.add(t), r.classList.add(cssBuilderInstance.colorText.$));
   a.appendChild(r);
   document.body.appendChild(a);
   return a;
@@ -2441,7 +2441,7 @@ function rq(e) {
   let B = useCallback(() => {
     g(!1);
   }, []);
-  let $ = U()(_$$s.relative.$, 'favorited_section--showsCaret--vjo7-', f || b?.draggedOverSectionId && e.section && !d && b.draggedOverSectionId === e.section.id ? tP : '');
+  let $ = U()(cssBuilderInstance.relative.$, 'favorited_section--showsCaret--vjo7-', f || b?.draggedOverSectionId && e.section && !d && b.draggedOverSectionId === e.section.id ? tP : '');
   let G = e.section?.name === '' || e.section?.name === void 0 ? renderI18nText('sidebar.starred') : e.section.name;
   let V = k?.data?.customSection?.id === e.section?.id;
   let H = e.isCreatingNewSection || e.isRenaming;
@@ -2549,7 +2549,7 @@ function rq(e) {
         })]
       })
     }), jsx('div', {
-      className: p ? void 0 : _$$s.hidden.$,
+      className: p ? void 0 : cssBuilderInstance.hidden.$,
       children: o.length === 0 ? e.allSections.length === 1 && R3(e.allSections[0]) && !e.isCreatingNewSection ? jsx(tH, {
         setNewCustomSectionIndex: e.setNewCustomSectionIndex
       }) : jsx(Fragment, {}) : jsx('div', {
@@ -2675,7 +2675,7 @@ function rZ(e) {
     });
   }
   let T = jsx('div', {
-    className: _$$s.mb8.$,
+    className: cssBuilderInstance.mb8.$,
     children: jsx(rq, {
       allSections: f,
       favorites: [],
@@ -2690,10 +2690,10 @@ function rZ(e) {
     })
   });
   return jsxs('div', {
-    className: _$$s.mt8.$,
+    className: cssBuilderInstance.mt8.$,
     children: [n === 0 && T, f.map((t, s) => {
       let i = r.type === _$$R4.Favorite ? tP : _ ? 'favorited_section--dropBefore--6poyi sidebar--dropBefore--wZDYO' : 'favorited_section--dropAfter--7G6L7 sidebar--dropAfter--JEX7d';
-      let o = U()(d === t.id ? i : '', _$$s.mb8.$);
+      let o = U()(d === t.id ? i : '', cssBuilderInstance.mb8.$);
       return jsxs('div', {
         children: [jsx(_$$Y, {
           className: o,
@@ -2756,7 +2756,7 @@ let at = registerModal(e => {
       children: [c && jsx(_$$P2, {
         width: 480,
         children: jsx('div', {
-          className: _$$s.pl8.pr8.$,
+          className: cssBuilderInstance.pl8.pr8.$,
           children: c.map(e => jsx(ar, {
             planId: e.plan_id,
             name: e.name,
@@ -2801,12 +2801,12 @@ let at = registerModal(e => {
 function ar(e) {
   return jsxs('button', {
     'data-testid': `${e.name}-button`,
-    'className': U()('move_favorites_modal--teamRow--qNRGf', e.checked ? _$$s.colorBgSelected.$ : ''),
+    'className': U()('move_favorites_modal--teamRow--qNRGf', e.checked ? cssBuilderInstance.colorBgSelected.$ : ''),
     'onClick': e.onSelect,
     'children': [jsx('div', {
       className: 'move_favorites_modal--iconContainer--oDATP',
       children: e.checked ? jsx(SvgComponent, {
-        className: _$$s.colorIcon.$,
+        className: cssBuilderInstance.colorIcon.$,
         svg: _$$A7
       }) : jsx(_$$nl, {
         size: Pf.MEDIUM,
@@ -2876,20 +2876,20 @@ function ai(e) {
       numFiles: _.length
     },
     children: jsxs('div', {
-      className: U()('favorited_section--moveFavoritesContainer--qp39R', _$$s.pt4.pb4.ml8.mr8.mb8.$),
+      className: U()('favorited_section--moveFavoritesContainer--qp39R', cssBuilderInstance.pt4.pb4.ml8.mr8.mb8.$),
       children: [jsxs('div', {
-        className: U()(_$$s.flex.itemsCenter.justifyBetween.pl8.pr8.$, 'favorited_section--favoriteToMoveHeaderContainer--2RB9p favorited_section--sectionHeaderContainer--otgqF sidebar--sectionHeaderContainer--TcvBb sidebar--sectionHeaderName--xToHG sidebar--sectionName--4N7hT sidebar--sectionText--KAGhn sidebar--sectionContent--NHX7b ellipsis--ellipsis--Tjyfa'),
+        className: U()(cssBuilderInstance.flex.itemsCenter.justifyBetween.pl8.pr8.$, 'favorited_section--favoriteToMoveHeaderContainer--2RB9p favorited_section--sectionHeaderContainer--otgqF sidebar--sectionHeaderContainer--TcvBb sidebar--sectionHeaderName--xToHG sidebar--sectionName--4N7hT sidebar--sectionText--KAGhn sidebar--sectionContent--NHX7b ellipsis--ellipsis--Tjyfa'),
         children: [jsxs('div', {
           onClick: f,
-          className: _$$s.flex.itemsCenter.justifyBetween.$,
+          className: cssBuilderInstance.flex.itemsCenter.justifyBetween.$,
           role: 'button',
           tabIndex: 0,
           children: [jsx(SvgComponent, {
-            className: U()(_$$s.flex.itemsCenter.p6.mr12.colorIcon.$, 'favorited_section--moveFavoritesContainerHeaderLeftBlockItems--pl1Hf'),
+            className: U()(cssBuilderInstance.flex.itemsCenter.p6.mr12.colorIcon.$, 'favorited_section--moveFavoritesContainerHeaderLeftBlockItems--pl1Hf'),
             svg: p ? _$$A5 : _$$A6
           }), renderI18nText('sidebar.move_these_starred_items'), jsx(SvgComponent, {
             'svg': _$$A8,
-            'className': U()('favorited_section--helpIcon--vfl5Y', _$$s.flex.itemsBaseline.ml4.$),
+            'className': U()('favorited_section--helpIcon--vfl5Y', cssBuilderInstance.flex.itemsBaseline.ml4.$),
             'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('file_browser.planless_favorites.your_favorited_items_tooltip'),
             'data-tooltip-timeout-delay': 50,
@@ -2898,12 +2898,12 @@ function ai(e) {
         }), p ? null : jsx(Badge, {
           text: _.length > 99 ? '99+' : `${_.length}`,
           color: BadgeColor.DEFAULT,
-          className: _$$s.mr8.colorText.colorBgSelectedSecondary.$
+          className: cssBuilderInstance.mr8.colorText.colorBgSelectedSecondary.$
         })]
       }), p ? jsxs('div', {
         className: 'favorited_section--favoritesToMoveContentContainer--xYv6p',
         children: [h, jsxs('div', {
-          className: _$$s.flex.justifyBetween.m8.h24.$,
+          className: cssBuilderInstance.flex.justifyBetween.m8.h24.$,
           children: [jsx($$, {
             className: 'favorited_section--favoritesToMoveActionButtons--FUt77',
             onClick: () => {
@@ -2978,7 +2978,7 @@ function ad({
       }));
     },
     icon: jsx(_$$t2, {
-      className: _$$s.colorIcon.$
+      className: cssBuilderInstance.colorIcon.$
     }),
     text: jsx(TextWithTruncation, {
       truncate: !0,
@@ -3156,7 +3156,7 @@ function a$(e) {
         className: 'base_upgrade_section--closeButton--cbjWt',
         onClick: e.onDismiss
       }), e.header && jsxs('div', {
-        className: _$$s.wFull.$$if(e.demure, _$$s.font13.lh24, _$$s.mb12).$,
+        className: cssBuilderInstance.wFull.$$if(e.demure, cssBuilderInstance.font13.lh24, cssBuilderInstance.mb12).$,
         children: [e.header, (!e.demure || e.collapsible && !t) && jsx(aW, {})]
       }), !!e.icon && e.icon, e.countDownDaysLeft && jsx('div', {
         className: 'base_upgrade_section--countdownTicker--6YLVt',
@@ -3882,7 +3882,7 @@ function sU() {
   };
   return jsxs(TrackedAnchor, {
     'trackingEventName': 'community_browser_sidebar_action_clicked',
-    'className': U()(_$$s.flex.flexRow.itemsCenter.gap12.h48.pl12.pr12.colorText.cursorDefault.$, 'explore_community_button--hoverColor--mDUIs'),
+    'className': U()(cssBuilderInstance.flex.flexRow.itemsCenter.gap12.h48.pl12.pr12.colorText.cursorDefault.$, 'explore_community_button--hoverColor--mDUIs'),
     'data-onboarding-key': vM,
     'onClick': e => {
       e.preventDefault();
@@ -3915,16 +3915,16 @@ function sW(e) {
   let c = d && t && !s && r.status === 'loaded';
   let u = d && (!t || s) && r.status === 'loaded';
   return jsxs('div', {
-    className: _$$s.sticky.bottom0.colorBg.zIndex1.$$if(e.hasTopBorder, _$$s.bt1.colorBorder.bSolid).$,
+    className: cssBuilderInstance.sticky.bottom0.colorBg.zIndex1.$$if(e.hasTopBorder, cssBuilderInstance.bt1.colorBorder.bSolid).$,
     children: [e.shouldShowUUBInFooter && jsx('div', {
-      className: _$$s.pb10.pt12.$,
+      className: cssBuilderInstance.pb10.pt12.$,
       children: jsx(sy, {})
     }), i && jsx(sN, {}), n && jsx(aC, {}), c && jsx(sL, {}), u && jsx(sU, {})]
   });
 }
 function sV(e) {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.colorBg.$$if(e.hasBottomBorder, _$$s.bb1.colorBorder.bSolid).$,
+    className: cssBuilderInstance.flex.flexColumn.colorBg.$$if(e.hasBottomBorder, cssBuilderInstance.bb1.colorBorder.bSolid).$,
     children: [jsx(_$$Xg, {}), jsx(Zn, {})]
   });
 }
@@ -3998,7 +3998,7 @@ function sJ() {
       },
       icon: jsx(_$$z5, {}),
       text: jsx('div', {
-        className: _$$s.pr36.$,
+        className: cssBuilderInstance.pr36.$,
         children: jsx(TextWithTruncation, {
           children: renderI18nText('file_browser.tool_bar.trash')
         })
@@ -4452,7 +4452,7 @@ function iI(e) {
   return jsxs(Fragment, {
     children: [jsx(_$$z6, {
       query: `(min-width: ${iE}px)`,
-      defaultClass: _$$s.sticky.top0.colorBg.zIndexTopBar.$,
+      defaultClass: cssBuilderInstance.sticky.top0.colorBg.zIndexTopBar.$,
       children: jsx(iw, {
         pageHeaderContent: e.pageHeaderContent ? jsx('h1', {
           className: 'x193iq5w xuxw1ft xb3r6kr xlyipyv x13saxwh xg4jxnz x39l7i4 x1uvdjgy xo1l8bm',
@@ -4544,7 +4544,7 @@ function iN(e) {
     }
   });
   return jsxs('div', {
-    className: _$$s.flex.flexRow.flexGrow1.$,
+    className: cssBuilderInstance.flex.flexRow.flexGrow1.$,
     ref: t,
     children: [jsx(s2, {
       showLoadingState: !1,
@@ -4631,7 +4631,7 @@ function iD({
     });
   }
   return _ ? jsx('div', {
-    className: _$$s.mt24.$,
+    className: cssBuilderInstance.mt24.$,
     children: jsx(_$$w3, {
       orgTeams: p,
       orgTeamStatus: e.status,
@@ -4676,7 +4676,7 @@ function iU({
   return jsxs('section', {
     'aria-label': getI18nString('file_browser.teams'),
     'children': [jsx('div', {
-      className: _$$s.mx32.textBodyLargeStrong.$,
+      className: cssBuilderInstance.mx32.textBodyLargeStrong.$,
       children: jsx('div', {
         children: getI18nString('file_browser.teams')
       })
@@ -4693,16 +4693,16 @@ function iG({
   badge: o
 }) {
   return jsx('div', {
-    className: U()(_$$s.mx32.mb20.$, 'page_header--marginMobile--ocPfX'),
+    className: U()(cssBuilderInstance.mx32.mb20.$, 'page_header--marginMobile--ocPfX'),
     children: jsxs('div', {
-      className: _$$s.flex.mt8.itemsCenter.justifyBetween.$,
+      className: cssBuilderInstance.flex.mt8.itemsCenter.justifyBetween.$,
       children: [jsxs('div', {
-        className: _$$s.flex.itemsCenter.minH40.minW0.$,
+        className: cssBuilderInstance.flex.itemsCenter.minH40.minW0.$,
         children: [e, jsx('div', {
-          className: _$$s.wFull.overflowHidden.$,
+          className: cssBuilderInstance.wFull.overflowHidden.$,
           style: styleBuilderInstance.$$if(e && !i, styleBuilderInstance.ml16).$,
           children: jsxs('span', {
-            className: _$$s.flex.itemsCenter.$,
+            className: cssBuilderInstance.flex.itemsCenter.$,
             children: [i, jsx('div', {
               style: {
                 wordBreak: 'break-word'
@@ -4715,13 +4715,13 @@ function iG({
                 children: [t, ' ']
               })
             }), jsx('div', {
-              className: _$$s.ml8.$,
+              className: cssBuilderInstance.ml8.$,
               children: o
             }), s && s.element]
           })
         })]
       }), jsx('div', {
-        className: _$$s.flex.ml16.gap8.$,
+        className: cssBuilderInstance.flex.ml16.gap8.$,
         children: r?.map(e => jsx(_$$K3, {
           action: e
         }, e.key))
@@ -4846,7 +4846,7 @@ function iZ() {
       rightSideActions: t ? [t] : void 0
     }),
     content: jsx('div', {
-      className: _$$s.flex.flexColumn.my24.$,
+      className: cssBuilderInstance.flex.flexColumn.my24.$,
       children: jsx(iU, {
         children: jsx(iD, {
           orgTeamsQuery: r,
@@ -4974,12 +4974,12 @@ let np = registerModal(({
   return jsx(_$$c4, {
     title: getI18nString('workspace_view.description_modal.title'),
     subtitle: jsx('div', {
-      className: _$$s.mb16.$,
+      className: cssBuilderInstance.mb16.$,
       children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('workspace_view.description_modal.subtitle', {
           allWorkspacesText: jsx('span', {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: getI18nString('sidebar.browse.all_workspaces')
           })
         })
@@ -5057,24 +5057,24 @@ function nw({
     no_fill: getI18nString('workspace_view.toolbar.no_fill')
   };
   return jsx(Ve, {
-    className: _$$s.ml8.colorTextMenuSecondary.colorIconMenuSecondary.$,
+    className: cssBuilderInstance.ml8.colorTextMenuSecondary.colorIconMenuSecondary.$,
     dropdownButton({
       onClick: t
     }) {
       return jsx(_$$$n, {
-        className: _$$s.ml4.mr4.$,
+        className: cssBuilderInstance.ml4.mr4.$,
         role: 'combobox',
         onClick: t,
         caret: 'down',
         children: jsx('span', {
-          className: _$$s.minW32.mr8.$,
+          className: cssBuilderInstance.minW32.mr8.$,
           children: r[e]
         })
       });
     },
-    dropdownOptionsClassName: _$$s.mt4.$,
+    dropdownOptionsClassName: cssBuilderInstance.mt4.$,
     options: ['solid', 'no_fill'].map((e, s) => jsx(_$$c$, {
-      className: _$$s.colorTextMenuSecondary.$,
+      className: cssBuilderInstance.colorTextMenuSecondary.$,
       id: e,
       onClick: () => {
         t(e);
@@ -5137,10 +5137,10 @@ function nT({
       'role': 'button',
       'aria-label': getI18nString('common.close'),
       'tabIndex': 0,
-      'className': _$$s.absolute.wFull.hFull.top0.left0.zIndexTertiaryModal.$,
+      'className': cssBuilderInstance.absolute.wFull.hFull.top0.left0.zIndexTertiaryModal.$,
       'onClick': t
     }), jsxs('div', {
-      className: _$$s.absolute.flex.h40.justifyCenter.alignCenter.flexShrink0.bRadius4.colorBgMenu.elevation400.mt8.ml32.zIndexModal.$,
+      className: cssBuilderInstance.absolute.flex.h40.justifyCenter.alignCenter.flexShrink0.bRadius4.colorBgMenu.elevation400.mt8.ml32.zIndexModal.$,
       ref: l,
       children: [jsx(nw, {
         selectedFillOption: _,
@@ -5154,7 +5154,7 @@ function nT({
         }
       }), ix(f) && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(qW, {
-          buttonClassName: _$$s.ml2.mr2.$,
+          buttonClassName: cssBuilderInstance.ml2.mr2.$,
           buttonSize: 'xsmall',
           dropperDisabled: !0,
           fixedNumColumns: 9,
@@ -5176,14 +5176,14 @@ function nT({
           }
         })]
       }), jsx(wv, {}), jsx(_$$$n, {
-        className: _$$s.ml4.mr2.$,
+        className: cssBuilderInstance.ml4.mr2.$,
         onClick: t,
         children: jsx('span', {
-          className: _$$s.mr1.colorTextToolbarSecondary.$,
+          className: cssBuilderInstance.mr1.colorTextToolbarSecondary.$,
           children: getI18nString('workspace_view.color.toolbar.cancel')
         })
       }), jsx(_$$$n, {
-        className: _$$s.mr8.$,
+        className: cssBuilderInstance.mr8.$,
         onClick: () => {
           n({
             workspaceId: e.id,
@@ -5200,7 +5200,7 @@ function nT({
           t();
         },
         children: jsx('span', {
-          className: _$$s.colorTextOnbrand.$,
+          className: cssBuilderInstance.colorTextOnbrand.$,
           children: getI18nString('workspace_view.color.toolbar.save')
         })
       })]
@@ -5218,7 +5218,7 @@ let nR = connect(e => ({
   let s = e.membersToShow || 10;
   return jsxs('div', {
     children: [!e.removeHeader && jsx('div', {
-      className: _$$s.font13.fontMedium.mb12.$,
+      className: cssBuilderInstance.font13.fontMedium.mb12.$,
       children: e.label || getI18nString('file_browser.team_overview.member_label')
     }), e.members.slice(0, s).map(r => {
       let s = r.id === e.currentUserId;
@@ -5226,7 +5226,7 @@ let nR = connect(e => ({
       return jsx(_$$az, {
         size: 24,
         entity: r,
-        className: e.customAvatarRowStyle ? e.customAvatarRowStyle : _$$s.font13.mb16.$,
+        className: e.customAvatarRowStyle ? e.customAvatarRowStyle : cssBuilderInstance.font13.mb16.$,
         showIsMe: s,
         onClick: e.onMemberClick,
         badge: i ? {
@@ -5601,7 +5601,7 @@ function nU(e) {
     e.baseOrgUser && (o[e.baseOrgUser.user.id] = e.permission);
   });
   return jsxs('div', {
-    className: _$$s.my24.mr8.ml24.$,
+    className: cssBuilderInstance.my24.mr8.ml24.$,
     children: [jsx('div', {
       className: 'workspace_page_meta_content--membersHeader--0jaJ3 text--fontPos13--xW8hS text--_fontBase--QdLsd',
       children: getI18nString('workspace_view.sidebar.members')
@@ -5660,16 +5660,16 @@ function nV({
   content: s
 }) {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.wFull.$,
+    className: cssBuilderInstance.flex.flexColumn.wFull.$,
     children: [jsxs('div', {
-      className: _$$s.flex.flexRow.gap4.itemsCenter.wFull.$,
+      className: cssBuilderInstance.flex.flexRow.gap4.itemsCenter.wFull.$,
       children: [jsx(nG, {
         isExpanded: e,
         fill: 'secondary',
         onClick: t
       }), r]
     }), jsx('div', {
-      'className': _$$s.grid.ml20.$,
+      'className': cssBuilderInstance.grid.ml20.$,
       'aria-hidden': !e,
       'style': styleBuilderInstance.add({
         transition: 'grid-template-rows 0.3s ease'
@@ -5679,7 +5679,7 @@ function nV({
         gridTemplateRows: '0fr'
       })).$,
       'children': jsx('div', {
-        className: _$$s.$$if(!e, _$$s.overflowHidden).$,
+        className: cssBuilderInstance.$$if(!e, cssBuilderInstance.overflowHidden).$,
         children: s
       })
     })]
@@ -5766,18 +5766,18 @@ function nX({
     useRedesign: !0,
     fullWidthContent: !0,
     children: [jsx(IW, {
-      className: U()(_$$s.px16.py8.colorBg.wFull.bb1.bSolid.colorBorder.borderBox.$, 'choose_file_modal--heightOverride--QTue5'),
+      className: U()(cssBuilderInstance.px16.py8.colorBg.wFull.bb1.bSolid.colorBorder.borderBox.$, 'choose_file_modal--heightOverride--QTue5'),
       hasTransparentBackground: !0,
       placeholder: d,
       focusOnMount: !0,
       query: n,
       onChange: o,
       clearSearch: l,
-      iconClassName: _$$s.colorIcon.$,
+      iconClassName: cssBuilderInstance.colorIcon.$,
       hideXIcon: !0
     }), jsx(_$$P2, {
       className: 'choose_file_modal--gridMaxHeight--8NKvW',
-      innerClassName: _$$s.hFull.gap12.flex.flexColumn.pt16.px24.borderBox.$,
+      innerClassName: cssBuilderInstance.hFull.gap12.flex.flexColumn.pt16.px24.borderBox.$,
       children: i
     })]
   });
@@ -5932,7 +5932,7 @@ let n2 = registerModal(({
       clearSearch: _$$lQ,
       searchPlaceholder: getI18nString('file_browser.choose_file_modal.search_for_a_file'),
       children: jsx('div', {
-        className: U()(_$$s.flex.itemsCenter.justifyCenter.wFull.hFull.flexGrow1.$),
+        className: U()(cssBuilderInstance.flex.itemsCenter.justifyCenter.wFull.hFull.flexGrow1.$),
         children: jsx(LoadingOverlay, {})
       })
     });
@@ -5945,7 +5945,7 @@ let n2 = registerModal(({
     confirmText: getI18nString('general.next'),
     emptyStateText: l ? renderI18nText('file_browser.workspace_pinning.no_files_matching_query', {
       searchQuery: jsx('div', {
-        className: _$$s.colorText.fontMedium.truncate.$,
+        className: cssBuilderInstance.colorText.fontMedium.truncate.$,
         children: l
       })
     }) : getI18nString('file_browser.workspace_pinning.no_suggested_files'),
@@ -6130,16 +6130,16 @@ function oo({
     return z1(t, e);
   }(e);
   t = r.status !== 'loaded' ? jsx('div', {
-    className: _$$s.py1.h20.wFull.$,
+    className: cssBuilderInstance.py1.h20.wFull.$,
     children: jsx(LoadingOverlay, {})
   }) : r.data.length > 0 ? jsx(os, {
     suggestedFiles: r.data
   }) : jsx('span', {
-    className: _$$s.colorTextSecondary.truncate.textBodyLarge.alignCenter.$,
+    className: cssBuilderInstance.colorTextSecondary.truncate.textBodyLarge.alignCenter.$,
     children: getI18nString('file_browser.pinning.no_pinned_files')
   });
   return jsx('div', {
-    className: _$$s.bRadius8.colorBgSecondary.px32.py24.flex.flexColumn.gap16.mt8.$,
+    className: cssBuilderInstance.bRadius8.colorBgSecondary.px32.py24.flex.flexColumn.gap16.mt8.$,
     children: t
   });
 }
@@ -6151,16 +6151,16 @@ function ob({
   let r = _$$l2(e.file.folderId);
   let s = _$$C2(t);
   return jsxs('div', {
-    className: _$$s.bRadius8.borderBox.p16.flex.flexColumn.gap16.colorBg.colorText.b1.bSolid.colorBorder.elevation300.flexGrow1.$,
+    className: cssBuilderInstance.bRadius8.borderBox.p16.flex.flexColumn.gap16.colorBg.colorText.b1.bSolid.colorBorder.elevation300.flexGrow1.$,
     style: styleBuilderInstance.add({
       width: '422px',
       overflowY: 'auto',
       overflowX: 'hidden'
     }).$,
     children: [jsxs('div', {
-      className: _$$s.flex.flexRow.gap16.$,
+      className: cssBuilderInstance.flex.flexRow.gap16.$,
       children: [jsx('div', {
-        className: _$$s.flexBasisAuto.$,
+        className: cssBuilderInstance.flexBasisAuto.$,
         children: jsx(_$$e10, {
           entity: {
             id: e.creator.id,
@@ -6170,15 +6170,15 @@ function ob({
           }
         })
       }), jsxs('div', {
-        className: _$$s.flex.flexColumn.overflowHidden.$,
+        className: cssBuilderInstance.flex.flexColumn.overflowHidden.$,
         children: [jsxs('div', {
-          className: _$$s.flex.flexRow.gap8.textBodyLarge.$,
+          className: cssBuilderInstance.flex.flexRow.gap8.textBodyLarge.$,
           children: [jsx(TextWithTruncation, {
             fontWeight: 'semi-bold',
             truncate: !0,
             children: e.creator.name
           }), jsx('span', {
-            className: _$$s.flexBasisAuto.flexGrow1.flexShrink0.$,
+            className: cssBuilderInstance.flexBasisAuto.flexGrow1.flexShrink0.$,
             children: jsx(TextWithTruncation, {
               color: 'secondary',
               children: jsx(_$$h6, {
@@ -6187,30 +6187,30 @@ function ob({
             })
           })]
         }), jsx('div', {
-          className: _$$s.textBodyLarge.overflowBreakWord.$,
+          className: cssBuilderInstance.textBodyLarge.overflowBreakWord.$,
           dangerouslySetInnerHTML: {
             __html: sanitizeHtml(_$$sP(e.description))
           }
         })]
       })]
     }), jsx('div', {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: jsxs('div', {
-        className: _$$s.bRadius8.b1.colorBorder.bSolid.wFull.overflowHidden.$,
+        className: cssBuilderInstance.bRadius8.b1.colorBorder.bSolid.wFull.overflowHidden.$,
         children: [jsx('div', {
           children: jsx(_$$e1, {
             tile: t,
             noBorder: !0
           })
         }), jsx('div', {
-          className: _$$s.flex.flexRow.gap8.itemsCenter.bt1.bSolid.colorBorder.p16.$,
+          className: cssBuilderInstance.flex.flexRow.gap8.itemsCenter.bt1.bSolid.colorBorder.p16.$,
           children: jsxs('div', {
             className: 'x78zum5 x1q0g3np x1v2ro7d x6s0dn4',
             children: [jsx(w4, {
               size: 16,
               type: s
             }), jsxs('div', {
-              className: _$$s.flex.flexColumn.gap2.flexGrow1.justifyCenter.overflowHidden.cursorDefault.$,
+              className: cssBuilderInstance.flex.flexColumn.gap2.flexGrow1.justifyCenter.overflowHidden.cursorDefault.$,
               children: [jsx('div', {
                 ..._$$Ay2.props(ow.title),
                 children: e.file.name
@@ -6530,12 +6530,12 @@ function ok({
       isOpen: r,
       toggleIsOpen: o,
       collapseHeader: jsxs('div', {
-        className: _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+        className: cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.$,
         children: [jsx('div', {
           'aria-expanded': r,
           'role': 'button',
           'tabIndex': 0,
-          'className': _$$s.flex.flexRow.gap4.itemsCenter.textBodyLargeStrong.cursorDefault.$,
+          'className': cssBuilderInstance.flex.flexRow.gap4.itemsCenter.textBodyLargeStrong.cursorDefault.$,
           'onClick': o,
           'children': getI18nString('file_browser.pinning.pinned_files')
         }), c && jsx(Button, {
@@ -6669,10 +6669,10 @@ function oA({
       showMembersButton: d
     }),
     content: jsxs('div', {
-      className: _$$s.flex.flexColumn.gap24.my24.$,
+      className: cssBuilderInstance.flex.flexColumn.gap24.my24.$,
       children: [jsx('section', {
         'aria-label': getI18nString('file_browser.pinning.pinned_files'),
-        'className': _$$s.pl12.pr32.borderBox.wFull.$,
+        'className': cssBuilderInstance.pl12.pr32.borderBox.wFull.$,
         'children': jsx(ok, {
           workspace: t,
           isAssignedWorkspace: i
@@ -10931,7 +10931,7 @@ function us(e) {
         onTileMouseDown: e.onTileMouseDown,
         noAvatar: !0
       }), jsxs('div', {
-        className: _$$s.flex.flexRow.$,
+        className: cssBuilderInstance.flex.flexRow.$,
         children: [jsx(Wu, {
           hideTarget: !x,
           feedPost: e.feedPost,
@@ -11151,10 +11151,10 @@ function un(e) {
       children: F ? jsxs('div', {
         className: 'feed_list_view--noPostsFound--COpgM',
         children: [jsx('div', {
-          className: _$$s.fontMedium.$,
+          className: cssBuilderInstance.fontMedium.$,
           children: renderI18nText('fig_feed.no_posts_found_title')
         }), jsx('div', {
-          className: _$$s.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: renderI18nText('fig_feed.no_posts_found_description')
         })]
       }) : jsx('div', {
@@ -11389,17 +11389,17 @@ function uC({
   return jsxs(AutoLayout, {
     spacing: 'auto',
     children: [jsxs('div', {
-      className: _$$s.relative.wFull.$,
+      className: cssBuilderInstance.relative.wFull.$,
       className: 'x1b68738 x1n2onr6',
       children: [jsx('div', {
-        className: _$$s.absolute.wFull.$,
+        className: cssBuilderInstance.absolute.wFull.$,
         children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 6,
           backgroundColor: 'secondary'
         })
       }), jsx('div', {
-        className: _$$s.absolute.wFull.flex.itemsCenter.$,
+        className: cssBuilderInstance.absolute.wFull.flex.itemsCenter.$,
         children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 6,
@@ -11452,16 +11452,16 @@ function uS({
         children: [r, '/', s]
       })]
     }), jsxs('div', {
-      className: _$$s.relative.wFull.$,
+      className: cssBuilderInstance.relative.wFull.$,
       children: [jsx('div', {
-        className: _$$s.absolute.wFull.$,
+        className: cssBuilderInstance.absolute.wFull.$,
         children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 5,
           backgroundColor: 'disabled'
         })
       }), jsx('div', {
-        className: _$$s.absolute.wFull.$,
+        className: cssBuilderInstance.absolute.wFull.$,
         children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 5,
@@ -11532,7 +11532,7 @@ function uO({
     name: 'Starter Limit Overview',
     properties: n,
     children: jsx('div', {
-      className: U()(_$$s.cursorDefault.mr32.maxW300.colorBg.$, 'starter_limit_overview--responsiveHide--nMkA0'),
+      className: U()(cssBuilderInstance.cursorDefault.mr32.maxW300.colorBg.$, 'starter_limit_overview--responsiveHide--nMkA0'),
       style: styleBuilderInstance.sticky.add({
         alignSelf: 'flex-start',
         top: '128px',
@@ -11647,9 +11647,9 @@ function uJ(e) {
     strokeColor: 'default',
     height: 'hug-contents',
     children: [jsx('div', {
-      className: _$$s.flex.justifyBetween.wFull.$,
+      className: cssBuilderInstance.flex.justifyBetween.wFull.$,
       children: jsx('div', {
-        className: _$$s.flex.itemsCenter.justifyCenter.w32.h32.bRadius5.colorBgWarning.$,
+        className: cssBuilderInstance.flex.itemsCenter.justifyCenter.w32.h32.bRadius5.colorBgWarning.$,
         children: r ? jsx(_$$s5, {
           className: uY
         }) : jsx(_$$R8, {
@@ -11657,13 +11657,13 @@ function uJ(e) {
         })
       })
     }), jsx('div', {
-      className: _$$s.font14.fontSemiBold.lh24.$,
+      className: cssBuilderInstance.font14.fontSemiBold.lh24.$,
       children: s
     }), jsx('div', {
-      className: _$$s.font13.lh24.$,
+      className: cssBuilderInstance.font13.lh24.$,
       children: n
     }), !!o && jsx('div', {
-      className: _$$s.flex.justifyEnd.wFull.$,
+      className: cssBuilderInstance.flex.justifyEnd.wFull.$,
       children: jsx(ButtonWide, {
         onClick: () => t(selectViewAction({
           view: 'teamAdminConsole',
@@ -12229,15 +12229,15 @@ function me({
       return jsx('div', {
         className: uZ,
         children: jsxs('div', {
-          className: _$$s.flex.$,
+          className: cssBuilderInstance.flex.$,
           children: [e, V && jsx('div', {
-            className: _$$s.mr32.$,
+            className: cssBuilderInstance.mr32.$,
             children: jsx(_$$R9, {
               teamId: O.id,
               canEditTeam: D
             })
           }), z && jsx('div', {
-            className: _$$s.mr32.$,
+            className: cssBuilderInstance.mr32.$,
             children: jsx(uq, {
               team: O,
               canAdminTeam: M
@@ -12268,7 +12268,7 @@ function me({
     children: [jsxs('div', {
       className: eu,
       children: [jsxs('div', {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [em && jsx(_$$d7, {
           sortConfig: x.tileSortFilterConfig.sort,
           handleOpenTile: es,
@@ -12297,13 +12297,13 @@ function me({
             isLockedTeam: !0
           } : void 0
         }), em && (V ? jsx('div', {
-          className: _$$s.mr32.$,
+          className: cssBuilderInstance.mr32.$,
           children: jsx(_$$R9, {
             teamId: O.id,
             canEditTeam: D
           })
         }) : z ? jsx('div', {
-          className: _$$s.mr32.$,
+          className: cssBuilderInstance.mr32.$,
           children: jsx(uq, {
             team: O,
             canAdminTeam: M
@@ -12313,7 +12313,7 @@ function me({
           isDraftsFolder: C
         }))]
       }), !(BrowserInfo.mobile || BrowserInfo.tablet) && _ && !userExternallyRestricted && !em && jsxs('div', {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [jsx('div', {
           className: 'tiles_view--importPrompt--srrJn',
           children: jsxs('div', {
@@ -12324,13 +12324,13 @@ function me({
             }), renderI18nText('file_browser.folder.create_a_new_file_to_start_from_scratch_with_pptx')]
           })
         }), V ? jsx('div', {
-          className: _$$s.mr32.$,
+          className: cssBuilderInstance.mr32.$,
           children: jsx(_$$R9, {
             teamId: O.id,
             canEditTeam: D
           })
         }) : z ? jsx('div', {
-          className: _$$s.mr32.$,
+          className: cssBuilderInstance.mr32.$,
           children: jsx(uq, {
             team: O,
             canAdminTeam: M
@@ -12522,7 +12522,7 @@ function ma() {
   return jsxs(_$$A2, {
     loadingElementId: 'loading-content-pane',
     loaded: subscription.status !== 'loading',
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: [jsx(_$$B4, {
       onShouldFetchNextPage: x,
       isFetchingNextPage,
@@ -12569,7 +12569,7 @@ function mc({
   });
   if (!(t = useCurrentPublicPlan('FolderUpsellCard').unwrapOr(null)) || !e || t.tier !== FPlanNameType.STARTER || n === 'recentsAndSharing' || n === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
   let d = jsx(linkWithTracking, {
-    className: _$$s.noWrap.cursorDefault.$,
+    className: cssBuilderInstance.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
       r(showModalHandler({
@@ -12591,7 +12591,7 @@ function mc({
     name: 'Folder Upsell Card',
     properties: l,
     children: jsxs(TrackedButton, {
-      className: U()(_$$s.flex.flexColumn.alignLeft.p24.$, 'folder_upsell--card--m7-Lh'),
+      className: U()(cssBuilderInstance.flex.flexColumn.alignLeft.p24.$, 'folder_upsell--card--m7-Lh'),
       onClick: () => {
         r(showModalHandler({
           type: ConsumptionPaywallModalPlansPricing,
@@ -12611,7 +12611,7 @@ function mc({
       },
       dataTestId: 'folder_upsell_button',
       children: [jsxs('div', {
-        className: _$$s.relative.wFull.$,
+        className: cssBuilderInstance.relative.wFull.$,
         children: [jsx(_$$X6, {
           FileThumbnailComponent: mu
         }), jsx('div', {
@@ -12653,7 +12653,7 @@ function mc({
 }
 function mu() {
   return jsx('div', {
-    className: _$$s.wFull.hFull.colorBg.$
+    className: cssBuilderInstance.wFull.hFull.colorBg.$
   });
 }
 function mm({
@@ -12668,7 +12668,7 @@ function mm({
   let o = selectExperimentConfigHook('exp_fbg_project_limit_upsell');
   if (!r || !e || hasTeamPaidAccess(r) || s === 'recentsAndSharing' || s === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
   let l = jsx(linkWithTracking, {
-    className: _$$s.noWrap.cursorDefault.$,
+    className: cssBuilderInstance.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
       t(showModalHandler({
@@ -12690,12 +12690,12 @@ function mm({
     name: 'Folder Upsell List',
     properties: n,
     children: jsx('div', {
-      className: _$$s.flex.mt16.bRadius8.b1.colorBorder.$,
+      className: cssBuilderInstance.flex.mt16.bRadius8.b1.colorBorder.$,
       style: styleBuilderInstance.add({
         borderStyle: 'dashed'
       }).$,
       children: jsxs(TrackedButton, {
-        className: U()(_$$s.flex.alignLeft.gap12.py24.px16.bRadius8.wFull.pl36.$, 'folder_upsell--list--2Higk'),
+        className: U()(cssBuilderInstance.flex.alignLeft.gap12.py24.px16.bRadius8.wFull.pl36.$, 'folder_upsell--list--2Higk'),
         onClick: () => {
           t(showModalHandler({
             type: ConsumptionPaywallModalPlansPricing,
@@ -12715,7 +12715,7 @@ function mm({
         },
         dataTestId: 'folder_upsell_button',
         children: [jsxs('div', {
-          className: U()(_$$s.relative.flexShrink0.h40.w64.py4.px8.colorBgSecondary.bRadius4.$, 'folder_upsell--listCard--qnkxf'),
+          className: U()(cssBuilderInstance.relative.flexShrink0.h40.w64.py4.px8.colorBgSecondary.bRadius4.$, 'folder_upsell--listCard--qnkxf'),
           children: [jsx('div', {
             style: styleBuilderInstance.absolute.topHalf.leftHalf.add({
               transform: 'translate(-50%, -50%)'
@@ -13025,7 +13025,7 @@ function my() {
     loadingElementId: 'loading-content-pane',
     delay: 250,
     loaded: u !== 'loading',
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: jsx('div', {
       style: styleBuilderInstance.mt1.$,
       children: jsx(mv, {
@@ -14055,7 +14055,7 @@ function _c(e) {
   let v = jsx(_$$A2, {
     loadingElementId: 'loading-content-pane',
     loaded: b,
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: jsx(_$$B4, {
       onShouldFetchNextPage: d,
       children: h
@@ -14346,7 +14346,7 @@ function _L(e) {
   };
   let d = _$$C2(item);
   return jsxs('div', {
-    className: _$$s.inlineFlex.minW0.$,
+    className: cssBuilderInstance.inlineFlex.minW0.$,
     children: [jsxs('button', {
       'className': 'drafts_to_move_page_view--draftThumbnail--whTtS',
       'onClick': l(item),
@@ -14362,7 +14362,7 @@ function _L(e) {
         })
       })]
     }), jsxs('div', {
-      className: _$$s.ml14.minW0.flex.flexColumn.itemSelfCenter.$,
+      className: cssBuilderInstance.ml14.minW0.flex.flexColumn.itemSelfCenter.$,
       children: [jsx('button', {
         className: 'drafts_to_move_page_view--fileName--U3mn4',
         onClick: l(item),
@@ -14641,7 +14641,7 @@ function _M() {
       className: 'drafts_to_move_page_view--moveButtonColumn--Mvc2P drafts_to_move_page_view--column--jpRzM table--column--974RA',
       cellComponent: s => r === 0 ? jsxs(Fragment, {
         children: [jsx(ButtonSecondaryTracked, {
-          className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', _$$s.$$if(!!_$$Tf.getTrashedAt(s), _$$s.invisible).$),
+          className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', cssBuilderInstance.$$if(!!_$$Tf.getTrashedAt(s), cssBuilderInstance.invisible).$),
           onClick: e => t(e, s),
           children: renderI18nText('file_browser.drafts_to_move.open_draft_button')
         }), jsx(ButtonSecondaryTracked, {
@@ -15141,7 +15141,7 @@ function _Z({
   let x = _$$nw(h);
   let b = useMemo(() => t.sort((e, t) => e.file.createdAt > t.file.createdAt ? 1 : -1), [t]);
   return jsxs('div', {
-    className: _$$s.px32.pb8.m0.$,
+    className: cssBuilderInstance.px32.pb8.m0.$,
     children: [t.length > 0 ? jsx(_$$A10, {
       handleContextMenu: f,
       items: b,
@@ -15192,9 +15192,9 @@ function _1({
   pinnedFile: e
 }) {
   return jsxs('div', {
-    className: _$$s.pt8.flex.flexColumn.$,
+    className: cssBuilderInstance.pt8.flex.flexColumn.$,
     children: [jsx('span', {
-      className: _$$s.ellipsis.textBodyLargeStrong.truncate.$,
+      className: cssBuilderInstance.ellipsis.textBodyLargeStrong.truncate.$,
       children: e.file.name
     }), jsx(TextWithTruncation, {
       truncate: !0,
@@ -15470,7 +15470,7 @@ function pp(e) {
         })
       }), jsx(zx.Center, {
         children: jsx('div', {
-          className: U()('templates_bar--useTemplateButton--4KFhz', _$$s.bRadius6.$),
+          className: U()('templates_bar--useTemplateButton--4KFhz', cssBuilderInstance.bRadius6.$),
           tabIndex: -1,
           children: jsx(setupThemeContext, {
             brand: p_(r.viewer_mode),
@@ -15845,7 +15845,7 @@ function p$(e) {
   }, [l, e.folder.id]);
   if (l.status !== 'loaded') {
     return jsx('div', {
-      className: _$$s.flex.itemsCenter.colorIcon.$,
+      className: cssBuilderInstance.flex.itemsCenter.colorIcon.$,
       children: jsx(SvgComponent, {
         svg: _$$A23
       })
@@ -15862,7 +15862,7 @@ function p$(e) {
   }, 'share'));
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
-      className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
+      className: cssBuilderInstance.flex.justifyBetween.itemsCenter.w150.$,
       children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
         svg: _$$A24
       })]
@@ -15881,7 +15881,7 @@ function p$(e) {
   }, 'add-to-favorites-section'));
   return jsxs('span', {
     children: [jsx(ButtonPrimitive, {
-      className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
+      className: U()(cssBuilderInstance.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
         e.dropdownKey && _ && t(showDropdownThunk({
@@ -16309,7 +16309,7 @@ function p8({
   });
   return wrapWithTracking(jsx(_$$r4, {
     content: jsxs('div', {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx(pk, {
         activeProjectConnection: y ? {
           id: y.id,
@@ -16512,7 +16512,7 @@ function fn() {
     return t != null ? mapProjectSummary(t) : null;
   }).filter(e => e !== null), [i]);
   return e.status !== 'loaded' || i.status !== 'loaded' ? jsx('div', {
-    className: _$$s.flex.wFull.hFull.alignCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.wFull.hFull.alignCenter.justifyCenter.$,
     children: jsx(_$$k3, {
       htmlAttributes: {
         'data-testid': 'loading-spinner'
@@ -16527,7 +16527,7 @@ function fn() {
     children: [jsx(_$$A25, {}), jsx('div', {
       className: 'org_connected_projects_view--tabContentContainer--qFQ6s',
       children: jsx('div', {
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: jsx(_$$m3, {
           folderList: o,
           dataOnboardingKeyIndex: void 0,
@@ -16544,7 +16544,7 @@ function fc({
   org: e
 }) {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.rowGap16.$,
+    className: cssBuilderInstance.flex.flexColumn.rowGap16.$,
     children: [jsx(Ro, {
       entity: e,
       size: 36
@@ -16612,7 +16612,7 @@ function f_({
       teamCount: t.discoverableTeamCount.data
     })]
   }) : jsx(Wi, {
-    className: _$$s.mb4.$,
+    className: cssBuilderInstance.mb4.$,
     animationType: JR.SHIMMER
   });
   return jsxs('div', {
@@ -16620,15 +16620,15 @@ function f_({
     children: [jsx(fc, {
       org: e
     }), jsx('span', {
-      className: _$$s.mt4.$,
+      className: cssBuilderInstance.mt4.$,
       children: r
     }), e.community_profile_handle ? jsx('span', {
-      className: _$$s.mt2.$,
+      className: cssBuilderInstance.mt2.$,
       children: jsx(fu, {
         handle: e.community_profile_handle
       })
     }) : null, jsx('span', {
-      className: _$$s.mt32.$,
+      className: cssBuilderInstance.mt32.$,
       children: jsx(fm, {
         orgId: e.id
       })
@@ -16665,12 +16665,12 @@ function fg({
     children: [jsx(fc, {
       org: e
     }), e.community_profile_handle ? jsx('span', {
-      className: _$$s.mt4.$,
+      className: cssBuilderInstance.mt4.$,
       children: jsx(fu, {
         handle: e.community_profile_handle
       })
     }) : null, jsx('span', {
-      className: _$$s.mt4.$,
+      className: cssBuilderInstance.mt4.$,
       children: jsxs(TextWithTruncation, {
         fontSize: 11,
         color: 'secondary',
@@ -16881,13 +16881,13 @@ function fk(e) {
   let w = useMemo(() => void 0 !== e.teamCount ? renderI18nText('org_view.license_group.team_count', {
     teamCount: e.teamCount
   }) : g.status !== 'loaded' ? jsx(Wi, {
-    className: _$$s.w64.$,
+    className: cssBuilderInstance.w64.$,
     dataTestId: 'workspace-tile-teams-loading-text'
   }) : renderI18nText('org_view.license_group.team_count', {
     teamCount: g.data
   }), [e.teamCount, g]);
   let j = jsxs('div', {
-    className: U()(_$$s.flex.flexRow.itemsCenter.$, r),
+    className: U()(cssBuilderInstance.flex.flexRow.itemsCenter.$, r),
     children: [renderI18nText('org_view.license_group.member_count', {
       memberCount: workspace.memberCount.data ?? 0
     }), jsx('span', {
@@ -16901,7 +16901,7 @@ function fk(e) {
     orgId: m
   });
   let E = workspace.orgAccess === FAccessLevelType.SECRET ? jsx('div', {
-    'className': _$$s.ml4.$,
+    'className': cssBuilderInstance.ml4.$,
     'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('workspace_table.secret_workspace_lock_tooltip'),
     'data-tooltip-subtext': getI18nString('workspace_table.secret_workspace_lock_tooltip_subtext'),
@@ -17239,7 +17239,7 @@ function fD() {
         }));
       },
       displayText: getI18nString('internal_profile.view_community_profile'),
-      styleClass: _$$s.colorText.$
+      styleClass: cssBuilderInstance.colorText.$
     }
   });
 }
@@ -18687,7 +18687,7 @@ function gz(e) {
     loadingElementId: 'loading-content-pane',
     delay: 250,
     loaded: p,
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: jsx(_$$B4, {
       onShouldFetchNextPage: _,
       children: jsx(me, {
@@ -18820,7 +18820,7 @@ function gH(e) {
     loadingElementId: 'loading-content-pane',
     delay: 250,
     loaded: y,
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: jsx(_$$B4, {
       onShouldFetchNextPage: x,
       children: jsx(mv, {
@@ -18971,7 +18971,7 @@ function g2({
   return jsxs(_$$A2, {
     loadingElementId: 'loading-content-pane',
     loaded: f,
-    loadingElementClassName: _$$s.pr32.$,
+    loadingElementClassName: cssBuilderInstance.pr32.$,
     children: [jsx(me, {
       tiles: _.data,
       tileActions: g4,
@@ -19048,7 +19048,7 @@ function hr(e) {
   let t = e.options.tileSortFilterConfig.filters.sharedBy;
   let r = e.options.tileSortFilterConfig.filters.plan;
   return jsxs('div', {
-    className: _$$s.flex.flexWrap.gap8.$,
+    className: cssBuilderInstance.flex.flexWrap.gap8.$,
     children: [e.filters?.sharer && Object.keys(e.filters?.sharer).length > 1 && jsxs(Fragment, {
       children: [t && jsx(qD, {
         userId: t
@@ -19208,7 +19208,7 @@ function ha(e) {
     tab: t
   });
   let b = jsxs('div', {
-    className: _$$s.flex.gap8.$,
+    className: cssBuilderInstance.flex.gap8.$,
     children: [x, h]
   }, 'sortWithViewOptions');
   let v = jsx(hr, {
@@ -19363,9 +19363,9 @@ function ho({
 }
 function h_() {
   return jsxs('div', {
-    className: _$$s.flex.p12.colorBgSelected.bRadius6.$,
+    className: cssBuilderInstance.flex.p12.colorBgSelected.bRadius6.$,
     children: [jsx('div', {
-      className: _$$s.mr12.colorIcon.itemSelfCenter.$,
+      className: cssBuilderInstance.mr12.colorIcon.itemSelfCenter.$,
       children: jsx(SvgComponent, {
         svg: _$$A28
       })
@@ -19415,16 +19415,16 @@ function hp({
   return jsx(TrackingProvider, {
     name: 'Starter Team Upsell Footer',
     children: jsx('div', {
-      'className': U()(_$$s.flex.p32.mt16.bRadius6.justifyCenter.colorBorder.$, 'starter_team_upsell_footer--borderStyle--pM4nA'),
+      'className': U()(cssBuilderInstance.flex.p32.mt16.bRadius6.justifyCenter.colorBorder.$, 'starter_team_upsell_footer--borderStyle--pM4nA'),
       'data-testid': 'starterTeamUpsellFooter',
       'children': jsxs('div', {
-        className: U()(_$$s.flex.flexColumn.itemsCenter.lh24.$, 'starter_team_upsell_footer--contentWrapper--H-soB'),
+        className: U()(cssBuilderInstance.flex.flexColumn.itemsCenter.lh24.$, 'starter_team_upsell_footer--contentWrapper--H-soB'),
         children: [jsx('strong', {
           children: o === PRIMARY_LIMIT ? renderI18nText('file_browser.starter_team.project_limit_warning', {
             maxProjects: PRIMARY_LIMIT
           }) : renderI18nText('file_browser.starter_team.project_limit_warning_over_max_projects')
         }), jsx('p', {
-          className: _$$s.alignCenter.$,
+          className: cssBuilderInstance.alignCenter.$,
           children: renderI18nText('file_browser.starter_team.project_limit_info', {
             upgradeLink: d
           })
@@ -19449,7 +19449,7 @@ function hf(e) {
   }, [l, e.team.id]);
   if (l.status !== 'loaded') {
     return jsx('div', {
-      className: _$$s.flex.itemsCenter.colorIcon.$,
+      className: cssBuilderInstance.flex.itemsCenter.colorIcon.$,
       children: jsx(SvgComponent, {
         svg: _$$A23
       })
@@ -19470,7 +19470,7 @@ function hf(e) {
   }, 'share'));
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
-      className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
+      className: cssBuilderInstance.flex.justifyBetween.itemsCenter.w150.$,
       children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
         svg: _$$A24
       })]
@@ -19489,7 +19489,7 @@ function hf(e) {
   }, 'add-to-favorites-section'));
   return jsxs('span', {
     children: [jsx(ButtonPrimitive, {
-      className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
+      className: U()(cssBuilderInstance.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
         e.dropdownKey && _ && t(showDropdownThunk({
@@ -20151,7 +20151,7 @@ function hM({
       badge: jsxs(AutoLayout, {
         direction: 'horizontal',
         children: [O ? jsx('div', {
-          'className': _$$s.ml4.mr4.$,
+          'className': cssBuilderInstance.ml4.mr4.$,
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': O,
           'data-tooltip-offset-y': -4,
@@ -20227,7 +20227,7 @@ function h1(e) {
     }));
   };
   return jsx('div', {
-    className: _$$s.flex.flexColumn.ml16.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.ml16.hFull.$,
     children: jsx(_$$x8, {
       isLoading: e.isLoading,
       children: () => jsxs(Fragment, {
@@ -20265,8 +20265,8 @@ function h1(e) {
         }), s && e.user?.id === r?.id && jsx(h6, {
           user: e.user
         }), n && jsxs(_$$P2, {
-          className: _$$s.flexShrink1.bt1.bSolid.colorBorder.$,
-          innerClassName: _$$s.p16.borderBox.flex.flexColumn.$,
+          className: cssBuilderInstance.flexShrink1.bt1.bSolid.colorBorder.$,
+          innerClassName: cssBuilderInstance.p16.borderBox.flex.flexColumn.$,
           children: [jsx('div', {
             className: h0,
             children: renderI18nText('internal_profile.teams')
@@ -20459,7 +20459,7 @@ let h3 = connect((e, t) => ({
   return jsx(_$$x8, {
     isLoading: d,
     children: () => jsxs('div', {
-      className: _$$s.flex.flexColumn.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.$,
       children: [l.map(e => {
         let t = n.data?.[e.id];
         return jsx(_$$rE, {
@@ -21407,24 +21407,24 @@ function x_({
 }
 function xp(e) {
   return e.query ? jsxs('div', {
-    className: _$$s.flex.columnGap8.$,
+    className: cssBuilderInstance.flex.columnGap8.$,
     children: [jsx('span', {
-      className: _$$s.flexShrink0.$,
+      className: cssBuilderInstance.flexShrink0.$,
       children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('search.search_results_for')
       })
     }), jsxs('div', {
-      className: _$$s.flex.fontMedium.minW0.$,
+      className: cssBuilderInstance.flex.fontMedium.minW0.$,
       children: ['\u201C', jsx(TextWithTruncation, {
         truncate: !0,
         children: e.query
       }), '\u201D']
     })]
   }) : jsx('div', {
-    className: _$$s.flex.columnGap8.$,
+    className: cssBuilderInstance.flex.columnGap8.$,
     children: jsx('span', {
-      className: _$$s.flexShrink0.$,
+      className: cssBuilderInstance.flexShrink0.$,
       children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('search.search_results')
@@ -21785,9 +21785,9 @@ function xU({
             }), x ? jsxs('div', {
               className: 'team_creation--orgTeamSettings--bDW2R',
               children: [jsxs('div', {
-                className: _$$s.flex.$,
+                className: cssBuilderInstance.flex.$,
                 children: [jsx('div', {
-                  className: _$$s.fontSemiBold.$,
+                  className: cssBuilderInstance.fontSemiBold.$,
                   children: renderI18nText('team_creation.access_within_the_organization')
                 }), jsx(xM, {
                   orgAccess: f,
@@ -21807,7 +21807,7 @@ function xU({
                   }),
                   [FAccessLevelType.SECRET]: renderI18nText('org_access_strings.secret.description_with_org_name', {
                     disclaimerLabel: jsx('span', {
-                      className: _$$s.fontSemiBold.$,
+                      className: cssBuilderInstance.fontSemiBold.$,
                       children: renderI18nText('org_access_strings.secret.description.disclaimer_label')
                     }),
                     orgName: c
@@ -22056,7 +22056,7 @@ function xq(e) {
                 children: renderI18nText('plan_details.choose_your_team_plan')
               })
             }), d ? jsx('div', {
-              className: _$$s.mxAuto.$,
+              className: cssBuilderInstance.mxAuto.$,
               style: styleBuilderInstance.add({
                 width: '1049px'
               }).$,
@@ -22247,7 +22247,7 @@ function bt(e) {
     n && t(b6(e));
   }, [t, n]);
   return jsxs(_$$Y, {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     isDragTarget: _$$al,
     onTargetDragEnter: d,
     onTargetDragLeave: c,

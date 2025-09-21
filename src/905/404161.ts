@@ -9,7 +9,7 @@ import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { zE } from "../905/64735";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
@@ -68,7 +68,7 @@ function w(e) {
     children: renderI18nText("extension_request_modal.plugin_approved", c)
   });
   return jsx("div", {
-    className: _$$s.mb16.$,
+    className: cssBuilderInstance.mb16.$,
     "data-testid": "approved-banner",
     children: jsx(z, {
       variant: "success",
@@ -100,7 +100,7 @@ function T({
       fileLink: o
     });
     return jsx("div", {
-      className: _$$s.my8.$,
+      className: cssBuilderInstance.my8.$,
       "data-testid": "file-request-text",
       children: jsx(TextWithTruncation, {
         color: "default",
@@ -120,7 +120,7 @@ function T({
     workspace: l
   });
   return jsx("div", {
-    className: _$$s.my8.$,
+    className: cssBuilderInstance.my8.$,
     "data-testid": "file-request-text",
     children: jsx(TextWithTruncation, {
       color: "default",
@@ -177,11 +177,11 @@ export let $$k0 = registerModal(function ({
       }), jsxs(DialogBody, {
         scrolling: "none",
         children: [jsxs("div", {
-          className: _$$s.mb16.flex.itemsCenter.$,
+          className: cssBuilderInstance.mb16.flex.itemsCenter.$,
           children: [jsx("img", {
             src: iconUrl ?? "",
             alt: "plugin icon",
-            className: _$$s.w24.h24.bRadius6.mr8.$
+            className: cssBuilderInstance.w24.h24.bRadius6.mr8.$
           }), jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
@@ -208,7 +208,7 @@ export let $$k0 = registerModal(function ({
             children: '"' + R.declineNote + '"'
           })]
         }), jsxs("div", {
-          className: _$$s.mb16.mt16.$,
+          className: cssBuilderInstance.mb16.mt16.$,
           children: [jsx(T, {
             workspaceDetails: s,
             isWidget: t
@@ -216,7 +216,7 @@ export let $$k0 = registerModal(function ({
             children: S
           })]
         }), jsx("textarea", {
-          className: _$$s.wFull.borderBox.b1.h64.bRadius2.p8.resizeNone.colorBorder.$,
+          className: cssBuilderInstance.wFull.borderBox.b1.h64.bRadius2.p8.resizeNone.colorBorder.$,
           value: D,
           onChange: e => {
             L(e.target.value);

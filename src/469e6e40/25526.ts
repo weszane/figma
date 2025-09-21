@@ -100,7 +100,7 @@ import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
 import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink, BUTTON_INTERNAL_CONST_Z12, ButtonBasePrimaryTracked, clickableBaseLinkTracked, ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -1531,10 +1531,10 @@ class tZ extends PureComponent {
           children: jsx(_$$v, {})
         })
       }), jsx("div", {
-        className: _$$s.wFull.hFull.overflowAuto.$,
+        className: cssBuilderInstance.wFull.hFull.overflowAuto.$,
         children: jsxs(_$$P, {
           horizontalScrollingDisabled: !0,
-          className: e4()(jG, _$$s.wFull.hFull.$),
+          className: e4()(jG, cssBuilderInstance.wFull.hFull.$),
           innerClassName: this.props.hideHeader ? void 0 : NM,
           onScroll: this.handleScroll,
           ref: e => this.scrollContainerRef = e,
@@ -1936,7 +1936,7 @@ function aC({
           })
         })]
       }), jsx("label", {
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: jsxs(AutoLayout, {
           width: "fill-parent",
           direction: "vertical",
@@ -1965,7 +1965,7 @@ function aC({
           })]
         })
       }), jsxs("label", {
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: [jsx("span", {
           className: "license_group_edit_modal--inputLabel--ir31K",
           children: renderI18nText("billing_groups_table.admins_input")
@@ -1975,7 +1975,7 @@ function aC({
             children: renderI18nText("billing_groups_table.admins_input_help_text")
           })
         }), jsx("div", {
-          className: _$$s.mt8.relative.$,
+          className: cssBuilderInstance.mt8.relative.$,
           children: jsx(_$$g4, {
             placeholder: getI18nString("billing_groups_table.admin_input_placeholder"),
             autocomplete: t,
@@ -1983,7 +1983,7 @@ function aC({
           })
         })]
       }), jsxs("div", {
-        className: _$$s.flex.justifyEnd.wFull.$,
+        className: cssBuilderInstance.flex.justifyEnd.wFull.$,
         children: [jsx(ButtonSecondary, {
           onClick: l,
           children: renderI18nText("general.cancel")
@@ -2193,7 +2193,7 @@ function aL({
   count: e
 }) {
   return jsx("div", {
-    className: _$$s.borderBox.minW16.px4.alignCenter.$$if(0 === e, _$$s.colorBgHover, _$$s.colorBgWarning).$,
+    className: cssBuilderInstance.borderBox.minW16.px4.alignCenter.$$if(0 === e, cssBuilderInstance.colorBgHover, cssBuilderInstance.colorBgWarning).$,
     style: {
       borderRadius: "100px"
     },
@@ -2289,9 +2289,9 @@ function aU(e) {
       });
       let a = !NV(t, e.invoices);
       return jsxs("span", {
-        className: _$$s.flex.itemsCenter.$,
+        className: cssBuilderInstance.flex.itemsCenter.$,
         children: [jsx(pw, {
-          className: _$$s.mr8.$,
+          className: cssBuilderInstance.mr8.$,
           size: 8,
           color: a ? _.colorTextSuccess : _.colorTextWarning
         }), a ? getI18nString("billing_groups_table.confirmed") : getI18nString("billing_groups_table.unconfirmed")]
@@ -2438,7 +2438,7 @@ function aB({
       color: "secondary",
       children: renderI18nText("org_admin_settings.billing.no_billing_groups_yet")
     }), jsx("div", {
-      className: _$$s.pb8.alignCenter.$,
+      className: cssBuilderInstance.pb8.alignCenter.$,
       style: styleBuilderInstance.add({
         maxWidth: "540px"
       }).$,
@@ -2463,7 +2463,7 @@ function aG(e) {
   let a = Xf(e.org.id);
   let n = a.data?.invoices;
   return e.isLoading || "loaded" !== a.status ? jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "billing-groups-tab-loading",
     children: jsx(_$$k3, {})
   }) : jsx(Fragment, {
@@ -2497,13 +2497,13 @@ function aH(e) {
   });
   let a = _$$R2();
   return "loaded" !== t.status ? jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "invoices-tab-loading",
     children: jsx(_$$k3, {})
   }) : jsx(_$$Q3, {
     minContentWidth: 1024,
     children: jsx("div", {
-      className: _$$s.pb36.$,
+      className: cssBuilderInstance.pb36.$,
       children: jsx(_$$S3, {
         invoices: t.data ?? [],
         currentDate: a,
@@ -2525,7 +2525,7 @@ function aY(e) {
 }
 function a4() {
   return jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     "data-testid": "billing-overview-tab-loading",
     children: jsx(_$$k3, {})
   });
@@ -2673,7 +2673,7 @@ function a8(e) {
     })
   });
 }
-let ns = _$$s.cursorPointer.underline.textInherit.bgNone.$;
+let ns = cssBuilderInstance.cursorPointer.underline.textInherit.bgNone.$;
 function ni(e) {
   let t = Math.floor((new Date(e.pastDueAt).getTime() - Date.now()) / 1e3 / 60 / 60 / 24);
   return jsx("div", {
@@ -2682,7 +2682,7 @@ function ni(e) {
       color: Sn.BLUE,
       removeNegativeMargin: !0,
       children: [jsx("span", {
-        className: _$$s.inlineFlex.$,
+        className: cssBuilderInstance.inlineFlex.$,
         style: styleBuilderInstance.mr6.$,
         children: jsx(_$$b3, {
           style: {
@@ -2719,7 +2719,7 @@ function nr(e) {
       color: Sn.RED,
       removeNegativeMargin: !0,
       children: [jsx("span", {
-        className: _$$s.inlineFlex.$,
+        className: cssBuilderInstance.inlineFlex.$,
         style: styleBuilderInstance.mr6.$,
         children: jsx(_$$Z, {
           style: {
@@ -2876,7 +2876,7 @@ let nb = registerModal(function ({
         }, e))
       }), renderI18nText("workspace.create_confirmation_modal.description.outro", {
         learnMore: jsx(clickableBaseLinkTracked, {
-          className: _$$s.inline.$,
+          className: cssBuilderInstance.inline.$,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/4409676189207-Guide-to-workspaces",
           trusted: !0,
@@ -3047,7 +3047,7 @@ let nk = registerModal(function (e) {
           className: "workspace_edit_modal--banner--aEtck",
           style: styleBuilderInstance.mb32.p16.flex.itemsCenter.bRadius6.$,
           children: [jsx(SvgComponent, {
-            className: _$$s.mr16.$,
+            className: cssBuilderInstance.mr16.$,
             svg: _$$A3,
             useOriginalSrcFills_DEPRECATED: !0
           }), jsx("p", {
@@ -3144,7 +3144,7 @@ let nL = registerModal(function (e) {
       maxWidth: 372,
       onClose: d,
       children: jsxs("div", {
-        className: _$$s.font11.p16.$,
+        className: cssBuilderInstance.font11.p16.$,
         children: [renderI18nText("workspace_table.deleting_the_workspaces_will_cause", {
           licenseGroupsCount: e.workspaces.length,
           licenseGroupsNames: jsx(TextWithTruncation, {
@@ -3304,49 +3304,49 @@ function nM({
     height: "49",
     viewBox: "0 0 49 49",
     fill: "none",
-    className: _$$s.colorIcon.$,
+    className: cssBuilderInstance.colorIcon.$,
     children: [jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M37.1443 11.9928L45.5223 20.4496L19.0803 47.1707L4.35542 32.3646L12.7172 23.8917L19.0636 30.2731L37.1443 11.9928ZM37.145 13.6986L19.0659 31.9772L12.7204 25.5967L6.04459 32.3613L19.0782 45.4668L43.8336 20.45L37.145 13.6986Z"
     }), jsx("path", {
       d: "M37.2101 11.8238C37.8652 11.8238 38.3963 12.3549 38.3963 13.0101C38.3963 13.6652 37.8652 14.1963 37.2101 14.1963C36.5549 14.1963 36.0238 13.6652 36.0238 13.0101C36.0238 12.3549 36.5549 11.8238 37.2101 11.8238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M37.2101 10.6238C38.528 10.6238 39.5963 11.6922 39.5963 13.0101C39.5963 14.328 38.528 15.3963 37.2101 15.3963C35.8922 15.3963 34.8238 14.328 34.8238 13.0101C34.8238 11.6922 35.8922 10.6238 37.2101 10.6238ZM38.3963 13.0101C38.3963 12.3549 37.8652 11.8238 37.2101 11.8238C36.5549 11.8238 36.0238 12.3549 36.0238 13.0101C36.0238 13.6652 36.5549 14.1963 37.2101 14.1963C37.8652 14.1963 38.3963 13.6652 38.3963 13.0101Z"
     }), jsx("path", {
       d: "M44.7101 19.0238C45.3652 19.0238 45.8963 19.5549 45.8963 20.2101C45.8963 20.8652 45.3652 21.3963 44.7101 21.3963C44.0549 21.3963 43.5238 20.8652 43.5238 20.2101C43.5238 19.5549 44.0549 19.0238 44.7101 19.0238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M44.7101 17.8238C46.028 17.8238 47.0963 18.8922 47.0963 20.2101C47.0963 21.528 46.028 22.5963 44.7101 22.5963C43.3922 22.5963 42.3238 21.528 42.3238 20.2101C42.3238 18.8922 43.3922 17.8238 44.7101 17.8238ZM45.8963 20.2101C45.8963 19.5549 45.3652 19.0238 44.7101 19.0238C44.0549 19.0238 43.5238 19.5549 43.5238 20.2101C43.5238 20.8652 44.0549 21.3963 44.7101 21.3963C45.3652 21.3963 45.8963 20.8652 45.8963 20.2101Z"
     }), jsx("path", {
       d: "M18.6863 45.1238C19.3414 45.1238 19.8725 45.6549 19.8725 46.3101C19.8725 46.9652 19.3414 47.4963 18.6863 47.4963C18.0311 47.4963 17.5 46.9652 17.5 46.3101C17.5 45.6549 18.0311 45.1238 18.6863 45.1238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M18.6863 43.9238C20.0041 43.9238 21.0725 44.9922 21.0725 46.3101C21.0725 47.628 20.0041 48.6963 18.6863 48.6963C17.3684 48.6963 16.3 47.628 16.3 46.3101C16.3 44.9922 17.3684 43.9238 18.6863 43.9238ZM19.8725 46.3101C19.8725 45.6549 19.3414 45.1238 18.6863 45.1238C18.0311 45.1238 17.5 45.6549 17.5 46.3101C17.5 46.9652 18.0311 47.4963 18.6863 47.4963C19.3414 47.4963 19.8725 46.9652 19.8725 46.3101Z"
     }), jsx("path", {
       d: "M18.6863 29.5238C19.3414 29.5238 19.8725 30.0549 19.8725 30.7101C19.8725 31.3652 19.3414 31.8963 18.6863 31.8963C18.0311 31.8963 17.5 31.3652 17.5 30.7101C17.5 30.0549 18.0311 29.5238 18.6863 29.5238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M18.6863 28.3238C20.0041 28.3238 21.0725 29.3922 21.0725 30.7101C21.0725 32.028 20.0041 33.0963 18.6863 33.0963C17.3684 33.0963 16.3 32.028 16.3 30.7101C16.3 29.3922 17.3684 28.3238 18.6863 28.3238ZM19.8725 30.7101C19.8725 30.0549 19.3414 29.5238 18.6863 29.5238C18.0311 29.5238 17.5 30.0549 17.5 30.7101C17.5 31.3652 18.0311 31.8963 18.6863 31.8963C19.3414 31.8963 19.8725 31.3652 19.8725 30.7101Z"
     }), jsx("path", {
       d: "M12.6863 23.8238C13.3414 23.8238 13.8725 24.3549 13.8725 25.0101C13.8725 25.6652 13.3414 26.1963 12.6863 26.1963C12.0311 26.1963 11.5 25.6652 11.5 25.0101C11.5 24.3549 12.0311 23.8238 12.6863 23.8238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
       d: "M12.6863 22.6238C14.0041 22.6238 15.0725 23.6922 15.0725 25.0101C15.0725 26.328 14.0041 27.3963 12.6863 27.3963C11.3684 27.3963 10.3 26.328 10.3 25.0101C10.3 23.6922 11.3684 22.6238 12.6863 22.6238ZM13.8725 25.0101C13.8725 24.3549 13.3414 23.8238 12.6863 23.8238C12.0311 23.8238 11.5 24.3549 11.5 25.0101C11.5 25.6652 12.0311 26.1963 12.6863 26.1963C13.3414 26.1963 13.8725 25.6652 13.8725 25.0101Z"
     }), jsx("path", {
       d: "M5.18625 31.6238C5.8414 31.6238 6.3725 32.1549 6.3725 32.8101C6.3725 33.4652 5.8414 33.9963 5.18625 33.9963C4.5311 33.9963 4 33.4652 4 32.8101C4 32.1549 4.5311 31.6238 5.18625 31.6238Z",
-      className: _$$s.colorIconOninverse.$
+      className: cssBuilderInstance.colorIconOninverse.$
     }), jsx("path", {
       fillRule: "evenodd",
       clipRule: "evenodd",
@@ -3515,7 +3515,7 @@ function nz(e) {
       entity: e,
       size: 22
     }), jsx("div", {
-      className: _$$s.wFitContent.hFitContent.$,
+      className: cssBuilderInstance.wFitContent.hFitContent.$,
       children: e.name
     }), e.orgAccess === FAccessLevelType.SECRET && jsx("div", {
       "data-tooltip-type": KindEnum.TEXT,
@@ -3568,7 +3568,7 @@ function nz(e) {
       return jsx(Fragment, {
         children: a.length > 1 ? jsxs(AutoLayout, {
           children: [jsx(_$$f2, {
-            className: _$$s.flexShrink0.$,
+            className: cssBuilderInstance.flexShrink0.$,
             textColor: "onselected",
             backgroundColor: "onselected",
             text: `${a.length}`,
@@ -3592,7 +3592,7 @@ function nz(e) {
         data
       } = e.workspaceTeamCounts;
       if ("loaded" !== status) return jsx(Wi, {
-        className: _$$s.h12.w100.$,
+        className: cssBuilderInstance.h12.w100.$,
         animationType: JR.SHIMMER,
         dataTestId: "teams-count-shimmer"
       });
@@ -3612,7 +3612,7 @@ function nz(e) {
         data
       } = filterCountsViewResult;
       if ("loaded" !== status) return jsx(Wi, {
-        className: _$$s.h12.w100.$,
+        className: cssBuilderInstance.h12.w100.$,
         animationType: JR.SHIMMER,
         dataTestId: "members-count-shimmer"
       });
@@ -4120,10 +4120,10 @@ function su({
     }
   }, [u, t, n, a, o]);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     "data-testid": "extension-allowlist-table",
     children: [jsx("div", {
-      className: _$$s.pl32.$,
+      className: cssBuilderInstance.pl32.$,
       children: jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
@@ -4160,7 +4160,7 @@ function su({
         }));
       };
       return jsxs(Hj, {
-        className: e4()(_$$s.flex.itemsCenter.gap16.relative.$, sd),
+        className: e4()(cssBuilderInstance.flex.itemsCenter.gap16.relative.$, sd),
         style: styleBuilderInstance.add({
           border: "none"
         }).px32.py12.$,
@@ -4184,7 +4184,7 @@ function su({
         }), jsx(sb, {})]
       }, e.extensionId);
     }) : jsx("div", {
-      className: _$$s.mt32.mlAuto.mrAuto.$,
+      className: cssBuilderInstance.mt32.mlAuto.mrAuto.$,
       children: jsx(so, {
         extensionType: n,
         onAddExtension: l
@@ -4200,7 +4200,7 @@ function sm({
   return jsxs(Hj, {
     header: !0,
     useAdminTableStyles: !0,
-    className: e4()(_$$s.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
+    className: e4()(cssBuilderInstance.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
@@ -4262,14 +4262,14 @@ function sp({
   numWorkspaces: a
 }) {
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.gap12.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap12.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "20%"
     }).$,
     children: [jsx("img", {
       src: t ?? "",
       alt: "approved for workspace",
-      className: _$$s.w24.h24.bRadius6.$
+      className: cssBuilderInstance.w24.h24.bRadius6.$
     }), jsx(TextWithTruncation, {
       truncate: !0,
       children: e
@@ -4290,7 +4290,7 @@ function sg({
   tagline: t
 }) {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "40%"
     }).$,
@@ -4305,7 +4305,7 @@ function sh({
   entry: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyStart.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
@@ -4331,7 +4331,7 @@ function sx({
         "data-tooltip": a,
         "data-tooltip-text-left": !0,
         type: "button",
-        className: _$$s.bgTransparent.cursorPointer.$,
+        className: cssBuilderInstance.bgTransparent.cursorPointer.$,
         onClick: e => {
           e.stopPropagation();
           t("edit");
@@ -4347,7 +4347,7 @@ function sx({
     return a.name;
   }, [e.allowlistGroups, t]);
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyStart.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "20%"
     }).$,
@@ -4356,7 +4356,7 @@ function sx({
 }
 function sb() {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyEnd.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyEnd.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
@@ -4412,23 +4412,23 @@ let sy = registerModal(function ({
       }), jsxs(DialogBody, {
         scrolling: "none",
         children: [jsxs("div", {
-          className: _$$s.mb16.flex.itemsCenter.$,
+          className: cssBuilderInstance.mb16.flex.itemsCenter.$,
           children: [jsx("img", {
             src: iconUrl ?? "",
             alt: "plugin icon",
-            className: _$$s.w24.h24.bRadius6.mr8.$
+            className: cssBuilderInstance.w24.h24.bRadius6.mr8.$
           }), jsx(TextWithTruncation, {
             fontWeight: "medium",
             truncate: !0,
             children: name
           })]
         }), jsx("div", {
-          className: _$$s.mb16.$,
+          className: cssBuilderInstance.mb16.$,
           children: jsx(TextWithTruncation, {
             children: g
           })
         }), jsx("textarea", {
-          className: _$$s.wFull.borderBox.b1.h64.bRadius2.p8.resizeNone.colorBorder.$,
+          className: cssBuilderInstance.wFull.borderBox.b1.h64.bRadius2.p8.resizeNone.colorBorder.$,
           value: c,
           onChange: e => {
             _(e.target.value);
@@ -4512,7 +4512,7 @@ function sC({
   return jsxs(Hj, {
     header: !0,
     useAdminTableStyles: !0,
-    className: e4()(_$$s.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
+    className: e4()(cssBuilderInstance.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
@@ -4572,7 +4572,7 @@ function sS({
   lastRequestedDate: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyStart.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
@@ -4593,7 +4593,7 @@ function sN({
         size: Pf.MEDIUM,
         user: t
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.ml8.$,
+        className: cssBuilderInstance.flex.flexColumn.ml8.$,
         children: [jsx(TextWithTruncation, {
           color: "default",
           fontSize: 11,
@@ -4626,19 +4626,19 @@ function sN({
     });
   }
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyStart.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyStart.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "20%"
     }).$,
     children: jsx("div", {
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: a
     })
   });
 }
 function sI() {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyEnd.overflowHidden.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyEnd.overflowHidden.$,
     style: styleBuilderInstance.add({
       width: "10%"
     }).$,
@@ -4694,7 +4694,7 @@ function sT(e) {
     }));
   };
   return jsxs(Hj, {
-    className: e4()(_$$s.flex.itemsCenter.gap16.relative.$, sd),
+    className: e4()(cssBuilderInstance.flex.itemsCenter.gap16.relative.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
     }).px32.py12.$,
@@ -4749,9 +4749,9 @@ function sA(e) {
   let g = Array.from(p.entries());
   sortBySelectors(g, d[r.column], r.isReversed, r.secondaryColumn && d?.[r.secondaryColumn], r.isSecondaryReversed);
   return jsxs("div", {
-    className: _$$s.pb32.$,
+    className: cssBuilderInstance.pb32.$,
     children: [jsx("div", {
-      className: _$$s.pl32.$,
+      className: cssBuilderInstance.pl32.$,
       children: jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
@@ -4772,7 +4772,7 @@ function sA(e) {
       },
       sortState: r
     }), jsx("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       "data-testid": "extension-request-table",
       children: g.map(([e, i], r) => jsx(sT, {
         extensionType,
@@ -4831,7 +4831,7 @@ function sR({
     widgetsWhitelistEnforced: x?.widgetsWhitelistEnforced || !1
   });
   let v = useMemo(() => jsxs("div", {
-    className: _$$s.flex.flexRow.gap8.$,
+    className: cssBuilderInstance.flex.flexRow.gap8.$,
     children: [jsx(_$$$, {
       onClick: h,
       children: renderI18nText("resources_tab.approved_plugins.actions.settings")
@@ -4857,16 +4857,16 @@ function sR({
   });
   return "loading" !== m.status && "errors" !== m.status && x ? jsxs(Fragment, {
     children: [f, jsxs(_$$P, {
-      className: _$$s.wFull.hFull.$,
+      className: cssBuilderInstance.wFull.hFull.$,
       children: [!b && jsx("div", {
-        className: _$$s.ml32.mr32.mb24.$,
+        className: cssBuilderInstance.ml32.mr32.mb24.$,
         children: jsx(n9, {
           extensionType: t,
           onGoToSettings: h,
           settingsText: getI18nString("resources_tab.approved_plugins.plugin_approval_banner.open_settings")
         })
       }), jsxs("div", {
-        className: _$$s.$$if(!b, _$$s.opacity0_3.eventsNone).$,
+        className: cssBuilderInstance.$$if(!b, cssBuilderInstance.opacity0_3.eventsNone).$,
         children: [jsx(sA, {
           orgId: e,
           extensionToUsageData: p.data,

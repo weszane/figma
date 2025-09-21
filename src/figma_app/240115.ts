@@ -5,7 +5,7 @@ import { A } from "../905/891805";
 import { AppStateTsApi, StateHierarchy, ItemType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { E as _$$E } from "../905/277716";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { K } from "../figma_app/566021";
@@ -71,7 +71,7 @@ export function $$A0() {
     name: "layer_component_panel_button",
     children: jsx("div", {
       "data-non-interactive": !0,
-      className: _$$s.pt8.pb4.$,
+      className: cssBuilderInstance.pt8.pb4.$,
       children: jsx(_$$K, {
         recordingKey: "createStateGroup"
       })

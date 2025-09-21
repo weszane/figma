@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { h as _$$h } from "../figma_app/58251";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { P } from "../figma_app/582341";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
@@ -34,7 +34,7 @@ export function $$_0({
     onClick: f
   });
   return jsxs("div", {
-    className: _$$s.flex.pl8.pr16.py16.gap4.h32.minH32.itemsCenter.bSolid.colorBorder.$,
+    className: cssBuilderInstance.flex.pl8.pr16.py16.gap4.h32.minH32.itemsCenter.bSolid.colorBorder.$,
     style: g ? {
       borderBottomWidth: "1px"
     } : void 0,
@@ -47,7 +47,7 @@ export function $$_0({
       },
       children: jsx(C, {})
     }), jsxs("div", {
-      className: _$$s.textBodyMedium.minW0.flexGrow1.$$if(!u, _$$s.ml10).$,
+      className: cssBuilderInstance.textBodyMedium.minW0.flexGrow1.$$if(!u, cssBuilderInstance.ml10).$,
       children: ["string" == typeof e ? jsx(_$$h, {
         as: "h2",
         text: e
@@ -89,7 +89,7 @@ export function $$A1(e) {
   return jsx($$_0, {
     ...i,
     title: jsxs("div", {
-      className: _$$s.flex.itemsCenter.gap2.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap2.$,
       children: [jsx(_$$h, {
         as: "h2",
         text: library.library_name

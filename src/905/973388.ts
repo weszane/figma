@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, popModalStack } from "../905/156213";
@@ -35,11 +35,11 @@ export let $$g0 = registerModal(function (e) {
           children: jsx("div", {
             children: renderI18nText("resource_connection.revoke_modal.this_will_end_the_connection_request", {
               connectingPlanName: jsx("span", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: e.resourceConnectionInvite.connectingPlan.name
               }),
               projectName: jsx("span", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: e.resourceConnectionInvite.projectName
               })
             })

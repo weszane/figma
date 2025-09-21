@@ -6,7 +6,7 @@ import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { SecureLink, ButtonBase } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
@@ -124,7 +124,7 @@ function F(e) {
     })
   });
   return jsxs("div", {
-    className: _$$s.flex.gap4.$,
+    className: cssBuilderInstance.flex.gap4.$,
     children: [jsx(_$$u, {
       avatarSize: Pf.SMALL16,
       users: requesters,
@@ -228,13 +228,13 @@ function q({
   let W = useMemo(() => j || Object.values(R).some(e => e), [j, R]);
   let H = useMemo(() => j ? [] : Object.entries(R).filter(([, e]) => e).map(([e]) => e), [R, j]);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.$,
     children: [jsx("div", {
-      className: _$$s.px8.py4.flex.itemsCenter.bb1.bSolid.colorBorder.$,
+      className: cssBuilderInstance.px8.py4.flex.itemsCenter.bb1.bSolid.colorBorder.$,
       children: jsxs("div", {
-        className: _$$s.wFull.flex.itemsCenter.$,
+        className: cssBuilderInstance.wFull.flex.itemsCenter.$,
         children: [jsxs("div", {
-          className: _$$s.wFull.flex.itemsCenter.gap4.$,
+          className: cssBuilderInstance.wFull.flex.itemsCenter.gap4.$,
           children: [jsx(_$$$, {
             icon: "chevron-left-32",
             onClick: a,
@@ -253,9 +253,9 @@ function q({
         })]
       })
     }), jsxs("div", {
-      className: _$$s.flex.itemsCenter.px16.h48.bb1.colorBorder.bSolid.gap8.$,
+      className: cssBuilderInstance.flex.itemsCenter.px16.h48.bb1.colorBorder.bSolid.gap8.$,
       children: [jsx("div", {
-        className: _$$s.p8.$,
+        className: cssBuilderInstance.p8.$,
         children: jsx(_$$l, {
           on: j,
           onChange: () => {
@@ -269,7 +269,7 @@ function q({
         })
       })]
     }), !j && S && jsx("div", {
-      className: _$$s.px16.pt16.$,
+      className: cssBuilderInstance.px16.pt16.$,
       children: jsx(_$$z, {
         dataTestId: "plugin-request-from-drafts-warning",
         variant: "warning",
@@ -278,13 +278,13 @@ function q({
         children: "plugin" === v ? getI18nString("resources_tab.approved_plugins.modal.individual_workspaces_approval_warning") : getI18nString("resources_tab.approved_widgets.modal.individual_workspaces_approval_warning")
       })
     }), jsx(_$$P, {
-      className: _$$s.flexGrow1.$,
+      className: cssBuilderInstance.flexGrow1.$,
       children: jsx("div", {
-        className: _$$s.py8.$$if(j, _$$s.opacity0_5.eventsNone).$,
+        className: cssBuilderInstance.py8.$$if(j, cssBuilderInstance.opacity0_5.eventsNone).$,
         children: G.map(e => jsxs("div", {
-          className: _$$s.px16.h48.flex.itemsCenter.gap8.$,
+          className: cssBuilderInstance.px16.h48.flex.itemsCenter.gap8.$,
           children: [jsx("div", {
-            className: _$$s.p8.$,
+            className: cssBuilderInstance.p8.$,
             children: jsx(_$$l, {
               dataTestId: `workspace-allowlist-toggle-${e.id}`,
               on: R[e.id],
@@ -294,7 +294,7 @@ function q({
               }))
             })
           }), jsxs("div", {
-            className: _$$s.flex.flexColumn.gap4.$,
+            className: cssBuilderInstance.flex.flexColumn.gap4.$,
             children: [jsx(TextWithTruncation, {
               children: e.name
             }), jsx(F, {
@@ -304,7 +304,7 @@ function q({
         }, e.id))
       })
     }), jsxs("div", {
-      className: _$$s.flex.itemsCenter.p16.bt1.colorBorder.bSolid.gap8.justifyEnd.$,
+      className: cssBuilderInstance.flex.itemsCenter.p16.bt1.colorBorder.bSolid.gap8.justifyEnd.$,
       children: ["review" === r && jsxs(Fragment, {
         children: [jsx(_$$$, {
           onClick: a,
@@ -518,7 +518,7 @@ function ea({
   });
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       style: t ? {
         WebkitMaskImage: "linear-gradient(0deg, transparent, var(--color-bg))"
       } : {},
@@ -529,9 +529,9 @@ function ea({
           img_url: e.img_url
         };
         return jsxs("div", {
-          className: _$$s.pt16.flex.justifyBetween.alignCenter.itemsCenter.$,
+          className: cssBuilderInstance.pt16.flex.justifyBetween.alignCenter.itemsCenter.$,
           children: [jsxs("div", {
-            className: _$$s.flex.breakWord.alignLeft.itemsCenter.pr8.gap8.$,
+            className: cssBuilderInstance.flex.breakWord.alignLeft.itemsCenter.pr8.gap8.$,
             children: [!t && jsx(H8, {
               user: a,
               size: Pf.MEDIUM
@@ -556,7 +556,7 @@ function ea({
         }, e.user_id);
       })
     }), t && jsx("div", {
-      className: _$$s.mt16.px16.py16.bRadius4.colorBgSecondary.breakWord.$,
+      className: cssBuilderInstance.mt16.px16.py16.bRadius4.colorBgSecondary.breakWord.$,
       children: c
     })]
   });
@@ -573,9 +573,9 @@ function en({
   }
   let s = Object.keys(t);
   return jsx("div", {
-    className: _$$s.flex.flexColumn.pl16.pr16.$,
+    className: cssBuilderInstance.flex.flexColumn.pl16.pr16.$,
     children: s.map(e => jsx("div", {
-      className: _$$s.pt16.breakWord.alignLeft.pr8.$,
+      className: cssBuilderInstance.pt16.breakWord.alignLeft.pr8.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         children: e
@@ -613,7 +613,7 @@ function ei(e) {
   let w = 0 !== f.n_extension_actions || 0 !== f.n_extension_users || a;
   let k = jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.wFull.bb1.bSolid.colorBorder.$
+      className: cssBuilderInstance.wFull.bb1.bSolid.colorBorder.$
     }), 0 === l && jsx(ea, {
       users: f.top_org_users,
       showUpsell: a,
@@ -623,19 +623,19 @@ function ei(e) {
     })]
   });
   return jsxs("div", {
-    className: _$$s.hFull.py8.px16.$,
+    className: cssBuilderInstance.hFull.py8.px16.$,
     "data-testid": "extension-usage-data",
     children: [jsxs("div", {
-      className: _$$s.flex.justifyBetween.py8.$,
+      className: cssBuilderInstance.flex.justifyBetween.py8.$,
       children: [jsxs("div", {
-        className: _$$s.block.$,
+        className: cssBuilderInstance.block.$,
         children: [jsxs(ButtonBase, {
           defaultClass: "",
           onClick: () => v(!b),
           dataTestId: "usage-window-dropdown",
           children: [et.get(g), jsx(SvgComponent, {
             svg: _$$A4,
-            className: _$$s.colorIconSecondary.inlineBlock.pl8.$
+            className: cssBuilderInstance.colorIconSecondary.inlineBlock.pl8.$
           })]
         }), b && jsx(ms, {
           className: K,
@@ -643,14 +643,14 @@ function ei(e) {
           children: y
         })]
       }), jsxs("div", {
-        className: _$$s.block.$,
+        className: cssBuilderInstance.block.$,
         children: [jsxs(ButtonBase, {
           defaultClass: "",
           onClick: a ? lQ : () => m(!c),
           dataTestId: "user-workspace-dropdown",
           children: [0 === l ? renderI18nText("resources_tab.extension_usage_data.users") : renderI18nText("resources_tab.extension_usage_data.workspaces"), !a && jsx(SvgComponent, {
             svg: _$$A4,
-            className: _$$s.colorIconSecondary.inlineBlock.pl8.$
+            className: cssBuilderInstance.colorIconSecondary.inlineBlock.pl8.$
           })]
         }), c && jsx(ms, {
           className: K,
@@ -659,11 +659,11 @@ function ei(e) {
         })]
       })]
     }), jsxs("div", {
-      className: _$$s.flex.pt16.pb16.wFull.justifyBetween.$,
+      className: cssBuilderInstance.flex.pt16.pb16.wFull.justifyBetween.$,
       children: [jsx("div", {
-        className: _$$s.w16.$
+        className: cssBuilderInstance.w16.$
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.alignCenter.$,
+        className: cssBuilderInstance.flex.flexColumn.alignCenter.$,
         children: [jsx("div", {
           "data-testid": "total-num-runs",
           children: jsx(TextWithTruncation, {
@@ -679,7 +679,7 @@ function ei(e) {
           })
         })]
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.alignCenter.$,
+        className: cssBuilderInstance.flex.flexColumn.alignCenter.$,
         children: [jsx("div", {
           "data-testid": "total-num-users",
           children: jsx(TextWithTruncation, {
@@ -695,7 +695,7 @@ function ei(e) {
           })
         })]
       }), jsx("div", {
-        className: _$$s.w16.$
+        className: cssBuilderInstance.w16.$
       })]
     }), w && k]
   });
@@ -740,7 +740,7 @@ function ed({
     imgUrl: e.actor?.imgUrl ?? ""
   };
   let x = e.actor?.email ?? "";
-  let b = 0 === t ? _$$s.flex.flexColumn.pb16.$ : _$$s.flex.flexColumn.pb16.pt16.bt1.colorBorder.bSolid.$;
+  let b = 0 === t ? cssBuilderInstance.flex.flexColumn.pb16.$ : cssBuilderInstance.flex.flexColumn.pb16.pt16.bt1.colorBorder.bSolid.$;
   switch (a) {
     case "approve":
       l = p ? getI18nString("extension_decline_modal.approved_access_workspace", {
@@ -766,14 +766,14 @@ function ed({
   return jsxs("div", {
     className: b,
     children: [jsxs("div", {
-      className: _$$s.flex.flexRow.itemsCenter.gap8.$,
+      className: cssBuilderInstance.flex.flexRow.itemsCenter.gap8.$,
       children: [jsx(H8, {
         user: g,
         size: Pf.MEDIUM
       }), jsx("div", {
         role: "button",
         tabIndex: 0,
-        className: _$$s.noWrap.overflowHidden.ellipsis.cursorPointer.$,
+        className: cssBuilderInstance.noWrap.overflowHidden.ellipsis.cursorPointer.$,
         "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": x,
         "data-tooltip-show-immediately": !0,
@@ -784,7 +784,7 @@ function ed({
           children: g.name
         })
       }), jsx("div", {
-        className: _$$s.noWrap.$,
+        className: cssBuilderInstance.noWrap.$,
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
@@ -794,14 +794,14 @@ function ed({
         })
       })]
     }), jsx("div", {
-      className: _$$s.ml32.mt4.overflowBreakWord.$,
+      className: cssBuilderInstance.ml32.mt4.overflowBreakWord.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "secondary",
         children: l
       })
     }), c && jsx("div", {
-      className: _$$s.ml32.mt4.overflowBreakWord.$,
+      className: cssBuilderInstance.ml32.mt4.overflowBreakWord.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "default",
@@ -846,7 +846,7 @@ function ec(e) {
     }, e.id) : void 0;
   };
   return jsx(_$$P, {
-    className: _$$s.hFull.flex.flexColumn.p16.gap16.$,
+    className: cssBuilderInstance.hFull.flex.flexColumn.p16.gap16.$,
     children: jsx("div", {
       "data-testid": "extension-request-sidebar",
       children: i.map((e, t) => r(e, t))
@@ -872,7 +872,7 @@ function eu(e) {
       numWorkspaces
     })
   })), t) ? jsxs("div", {
-    className: _$$s.colorBg.py12.px16.flex.flexRow.gap8.bb1.bSolid.colorBorder.$,
+    className: cssBuilderInstance.colorBg.py12.px16.flex.flexRow.gap8.bb1.bSolid.colorBorder.$,
     children: [jsx(SvgComponent, {
       width: "16px",
       height: "16px",
@@ -893,9 +893,9 @@ function em(e) {
   } = e;
   let [m, p] = useState("requests");
   return jsxs("div", {
-    className: _$$s.hFull.wFull.flex.flexColumn.bl1.bSolid.colorBorder.$,
+    className: cssBuilderInstance.hFull.wFull.flex.flexColumn.bl1.bSolid.colorBorder.$,
     children: [jsxs("div", {
-      className: _$$s.colorBg.py12.px16.flex.flexRow.gap16.bb1.bSolid.colorBorder.$,
+      className: cssBuilderInstance.colorBg.py12.px16.flex.flexRow.gap16.bb1.bSolid.colorBorder.$,
       children: [jsx("button", {
         onClick: () => p("requests"),
         children: jsx(TextWithTruncation, {
@@ -944,17 +944,17 @@ function ej({
   let r = currentPluginVersion.name ?? "";
   let l = currentPluginVersion.description ?? "";
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap16.p16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.p16.$,
     "data-testid": "extension-allowlist-overview-section",
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.$,
       children: [jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "semi-bold",
         truncate: "end",
         children: r
       }), jsxs("div", {
-        className: _$$s.flex.gap4.$,
+        className: cssBuilderInstance.flex.gap4.$,
         children: [jsx(ew, {
           plugin: t
         }), "review" === e && jsx(TextWithTruncation, {
@@ -967,11 +967,11 @@ function ej({
     }), currentPluginVersion.coverImageUrl && jsx("img", {
       alt: "extension cover",
       src: currentPluginVersion.coverImageUrl,
-      className: _$$s.wFull.bRadius4.$
+      className: cssBuilderInstance.wFull.bRadius4.$
     }), jsx(ey, {
       description: l
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.gap16.$,
+      className: cssBuilderInstance.flex.flexColumn.gap16.$,
       children: [jsx(eE, {
         extension: t,
         securityFormResponse: a,
@@ -992,7 +992,7 @@ function ey({
     t.current && i(t.current.isTruncated);
   }, [e]);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: [r ? jsx(TextWithTruncation, {
       ref: t,
       children: stripHtmlTags(e).trim()
@@ -1037,7 +1037,7 @@ function ew({
     };
   }), [e.communityPublishers]);
   return jsxs("div", {
-    className: _$$s.flex.gap8.$,
+    className: cssBuilderInstance.flex.gap8.$,
     children: [jsx(_$$L, {
       publishers: t,
       size: 16
@@ -1081,7 +1081,7 @@ function eE({
     if (e) return parseAndValidateManifest(e);
   }, [currentPluginVersion?.manifest]);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     children: [jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("resources_tab.approved_plugins.modal.security")
@@ -1101,7 +1101,7 @@ function eC({
   extension: e
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     children: [jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("resources_tab.approved_plugins.modal.licenses")
@@ -1232,7 +1232,7 @@ function eq(e) {
         orgName: y
       }) : void 0,
       children: jsxs("div", {
-        className: _$$s.flex.itemsCenter.gap4.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.$,
         children: [jsx(TextWithTruncation, {
           children: renderI18nText("resources_tab.approved_plugins.modal.try_it_out")
         }), jsx(_$$I, {
@@ -1479,18 +1479,18 @@ export function $$eV0({
     onClose: () => C(popModalStack()),
     closeOnEsc: !0,
     children: jsxs("div", {
-      className: _$$s.relative.$,
+      className: cssBuilderInstance.relative.$,
       style: {
         height: 560
       },
       "data-testid": "plugin-allowlist-modal",
       children: ["overview" === I && jsxs("div", {
-        className: _$$s.flex.flexColumn.hFull.$,
+        className: cssBuilderInstance.flex.flexColumn.hFull.$,
         children: [jsxs("div", {
-          className: _$$s.flex.flexGrow1.overflowHidden.$,
+          className: cssBuilderInstance.flex.flexGrow1.overflowHidden.$,
           children: [jsx(_$$P, {
-            className: _$$s.flexGrow1.flexRow.flexWrap.$,
-            innerClassName: _$$s.hFull.$,
+            className: cssBuilderInstance.flexGrow1.flexRow.flexWrap.$,
+            innerClassName: cssBuilderInstance.hFull.$,
             children: jsx(ej, {
               extension: N.data.plugin,
               mode: m,
@@ -1510,9 +1510,9 @@ export function $$eV0({
             })
           })]
         }), jsxs("div", {
-          className: _$$s.flex.itemsCenter.p16.bt1.colorBorder.bSolid.gap8.$,
+          className: cssBuilderInstance.flex.itemsCenter.p16.bt1.colorBorder.bSolid.gap8.$,
           children: [jsx(SecureLink, {
-            className: _$$s.mrAuto.$,
+            className: cssBuilderInstance.mrAuto.$,
             href: A,
             target: "_blank",
             trusted: !0,

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { CM, hP } from "../905/144598";
 import { zn, H, $S, NE, UU } from "../905/372455";
@@ -18,7 +18,7 @@ export function $$c0(e) {
   return jsxs("div", {
     className: zn,
     children: [jsx("div", {
-      className: a()(t.plan ? _$$s.w36.mr4.$ : H),
+      className: a()(t.plan ? cssBuilderInstance.w36.mr4.$ : H),
       children: t.plan ? jsx(CM, {
         user: r,
         id: t.id,
@@ -34,7 +34,7 @@ export function $$c0(e) {
         className: e.pending ? NE : UU,
         children: i
       }, `name-${e.id}`), jsx("span", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: getPermissionLevelName(e.level)
       })]
     })]

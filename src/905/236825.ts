@@ -3,14 +3,14 @@ import { forwardRef, useRef, useLayoutEffect } from "react";
 import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { B } from "../905/222272";
 function u({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.p8.flex.borderBox.$,
+    className: cssBuilderInstance.p8.flex.borderBox.$,
     children: e
   });
 }
@@ -30,7 +30,7 @@ export let $$p0 = forwardRef(function ({
       });
       if (e.length > 1) return jsx(Fragment, {
         children: e.map((e, t) => jsx("div", {
-          className: _$$s.$$if(t > 0, _$$s.bSolid.bt1.colorBorder).$,
+          className: cssBuilderInstance.$$if(t > 0, cssBuilderInstance.bSolid.bt1.colorBorder).$,
           children: jsx(u, {
             children: e
           })
@@ -58,7 +58,7 @@ export let $$p0 = forwardRef(function ({
           gap: 4,
           align: "center",
           children: [jsx("div", {
-            className: _$$s.flex1.$,
+            className: cssBuilderInstance.flex1.$,
             children: t
           }), e && jsx(IconButton, {
             "aria-label": "close",
@@ -69,7 +69,7 @@ export let $$p0 = forwardRef(function ({
         }), i]
       })
     }), _ && jsx("div", {
-      className: _$$s.bt1.bSolid.colorBorder.$,
+      className: cssBuilderInstance.bt1.bSolid.colorBorder.$,
       children: _
     })]
   });

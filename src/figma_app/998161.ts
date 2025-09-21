@@ -16,7 +16,7 @@ import { C as _$$C } from "../905/108595";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { LazyInputForwardRef } from "../905/408237";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
@@ -83,7 +83,7 @@ function X({
   let r = isGradientType(e.type);
   let i = validateGradientPaint(e);
   return r && i ? jsxs("div", {
-    className: _$$s.flex.pl8.$,
+    className: cssBuilderInstance.flex.pl8.$,
     children: [jsx(Y, {}), jsx(_$$n, {
       gradientPaint: i,
       onChange: t
@@ -279,7 +279,7 @@ function Q({
     optionRecordingKey: "gradient"
   }];
   return jsx("div", {
-    className: _$$s.wFull.py8.bb1.bSolid.colorBorder.$,
+    className: cssBuilderInstance.wFull.py8.bb1.bSolid.colorBorder.$,
     children: jsx("div", {
       className: X9,
       children: i.map(({
@@ -309,9 +309,9 @@ function ee({
     VariablesBindings?.renameVariable(t?.varId ?? "", normalizePath(a));
   }, [t, a]);
   return t ? jsxs("div", {
-    className: _$$s.px16.py12.flex.itemsCenter.bt1.bSolid.colorBorder.$,
+    className: cssBuilderInstance.px16.py12.flex.itemsCenter.bt1.bSolid.colorBorder.$,
     children: [jsx("span", {
-      className: _$$s.colorTextSecondary.textBodyMedium.w64.$,
+      className: cssBuilderInstance.colorTextSecondary.textBodyMedium.w64.$,
       children: renderI18nText("slides.properties_panel.color_picker.rename_color_label")
     }), jsx(LazyInputForwardRef, {
       ref: o,

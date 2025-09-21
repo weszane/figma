@@ -26,7 +26,7 @@ import { styleBuilderInstance } from '../905/941192';
 import { A as _$$A2 } from '../1617/325876';
 import { A as _$$A3 } from '../1617/495612';
 import { A as _$$A } from '../5724/594037';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Dm } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { kz } from '../figma_app/171177';
@@ -327,11 +327,11 @@ export function $$K0(e) {
           ignoreFocusStyle: !0,
           actionLabel: !1,
           children: jsxs('div', {
-            className: _$$s.flex.justifyCenter.itemsCenter.h32.mb4.wFull.$,
+            className: cssBuilderInstance.flex.justifyCenter.itemsCenter.h32.mb4.wFull.$,
             children: [jsxs('div', {
               className: U,
               children: [jsx('div', {
-                className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
+                className: cssBuilderInstance.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
                 children: renderI18nText('fullscreen_actions.plugin_parameters.tab')
               }), jsx('div', {
                 className: B,
@@ -340,7 +340,7 @@ export function $$K0(e) {
             }), jsxs('div', {
               className: U,
               children: [jsx('div', {
-                className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
+                className: cssBuilderInstance.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
                 children: renderI18nText('fullscreen_actions.plugin_parameters.enter')
               }), jsx('div', {
                 className: B,
@@ -393,7 +393,7 @@ export function $$K0(e) {
     t = jsxs('div', {
       className: Tk,
       children: [jsx('div', {
-        className: _$$s.mr4.$,
+        className: cssBuilderInstance.mr4.$,
         style: {
           '--color-icon': 'var(--color-text-tertiary'
         },
@@ -408,7 +408,7 @@ export function $$K0(e) {
     recordingKey: 'parameterEntry',
     children: [eb, !!eI && jsx('div', {
       'data-testid': `parameter-description-${ev?.key}`,
-      'className': h()('parameter_entry--parameterDescription--cx7jk text--fontPos11--2LvXf text--_fontBase--QdLsd', _$$s.mb8.$),
+      'className': h()('parameter_entry--parameterDescription--cx7jk text--fontPos11--2LvXf text--_fontBase--QdLsd', cssBuilderInstance.mb8.$),
       'children': eI
     }), jsx(_$$n.Body, {
       children: t
@@ -505,7 +505,7 @@ function $({
         });
         return jsxs(Fragment, {
           children: [jsx('div', {
-            className: _$$s.ml4.h24.$,
+            className: cssBuilderInstance.ml4.h24.$,
             children: jsx(IconButton, {
               'onClick': pop,
               'aria-label': getI18nString('qa.go_back'),
@@ -602,7 +602,7 @@ function Z({
 }
 function X(e) {
   return e.value ? jsxs('div', {
-    className: h()('parameter_entry--pill--nC1Kj text--fontPos11--2LvXf text--_fontBase--QdLsd', _$$s.flex.itemsCenter.gap4.$),
+    className: h()('parameter_entry--pill--nC1Kj text--fontPos11--2LvXf text--_fontBase--QdLsd', cssBuilderInstance.flex.itemsCenter.gap4.$),
     children: [e.icon, e.value]
   }) : jsx(Fragment, {});
 }

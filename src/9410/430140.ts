@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import n from "classnames";
 import { IW, RE } from "../figma_app/563413";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { vN } from "../7222/396421";
 import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
@@ -28,9 +28,9 @@ export function $$m1({
     maybeUseLightTemplateOnDismiss
   } = vN();
   return jsxs("div", {
-    className: _$$s.flex.flexRow.itemsCenter.pl8.pr12.py8.gap12.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.pl8.pr12.py8.gap12.$,
     children: [jsx(IW, {
-      className: a()(ON, _$$s.wFull.borderBox.bRadius6.colorBgSecondary.$),
+      className: a()(ON, cssBuilderInstance.wFull.borderBox.bRadius6.colorBgSecondary.$),
       query: e,
       clearSearch: () => t(""),
       onChange: t,
@@ -54,9 +54,9 @@ export function $$f2({
     maybeUseLightTemplateOnDismiss
   } = vN();
   return jsxs("div", {
-    className: a()(_$$s.flex.flexRow.itemsCenter.pl8.pr12.py8.gap12.$),
+    className: a()(cssBuilderInstance.flex.flexRow.itemsCenter.pl8.pr12.py8.gap12.$),
     children: [jsx(RE, {
-      className: a()(ON, _$$s.wFull.borderBox.bRadius6.colorBgSecondary.$),
+      className: a()(ON, cssBuilderInstance.wFull.borderBox.bRadius6.colorBgSecondary.$),
       query: e,
       clearSearch: () => t(""),
       onChange: t,
@@ -76,13 +76,13 @@ export function $$g0({
 }) {
   return jsxs(Fragment, {
     children: [jsxs("div", {
-      className: _$$s.flex.flexRow.gap6.lh24.itemsCenter.$,
+      className: cssBuilderInstance.flex.flexRow.gap6.lh24.itemsCenter.$,
       children: [e, jsx("h1", {
-        className: _$$s.colorText.fontInter.font14.fontNormal.fontSemiBold.spacingCompact.$,
+        className: cssBuilderInstance.colorText.fontInter.font14.fontNormal.fontSemiBold.spacingCompact.$,
         children: t
       })]
     }), jsx("h2", {
-      className: _$$s.colorTextSecondary.textBodyMedium.$,
+      className: cssBuilderInstance.colorTextSecondary.textBodyMedium.$,
       children: i
     })]
   });

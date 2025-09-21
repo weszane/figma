@@ -9,7 +9,7 @@ import { getAtomMutate } from "../figma_app/566371";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { p as _$$p } from "../905/991924";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { renameFileOptimistic } from "../figma_app/78808";
@@ -69,7 +69,7 @@ export function $$S0(e) {
     } : void 0;
     let a = !!e.checksForViewOnlyLabels && e.tile.type === nb.FILE && e.tile.file.teamId === e.checksForViewOnlyLabels.teamId && e.checksForViewOnlyLabels.isLockedTeam;
     return jsxs("div", {
-      className: e.isListView ? Cu : _$$s.flex.flexRow.itemsCenter.gap4.$,
+      className: e.isListView ? Cu : cssBuilderInstance.flex.flexRow.itemsCenter.gap4.$,
       onMouseEnter: r,
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t,
@@ -97,7 +97,7 @@ function w({
   tile: e
 }) {
   return C(e, useSelector(e => e.currentTeamId), useSelector(e => e.currentUserOrgId)) ? jsx(SvgComponent, {
-    className: _$$s.colorIconBrand.$,
+    className: cssBuilderInstance.colorIconBrand.$,
     svg: _$$A,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("tile.tooltip.external_file"),

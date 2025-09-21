@@ -21,7 +21,7 @@ import { x as _$$x } from "../figma_app/475340";
 import { C as _$$C } from "../905/196436";
 import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { trackNavTreeClicked, trackFileClicked } from "../figma_app/976345";
@@ -65,14 +65,14 @@ let eo = ex("team_folder_rename", function (e) {
     folderId
   } = e;
   return jsxs("div", {
-    className: _$$s.cursorDefault.colorTextTooltip.pl8.pr8.$,
+    className: cssBuilderInstance.cursorDefault.colorTextTooltip.pl8.pr8.$,
     children: [jsx("span", {
       children: renderI18nText("team_view.folder_list_card.team_root_folder_info")
     }), jsx("div", {
-      className: _$$s.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
+      className: cssBuilderInstance.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
     }), jsx(LinkPrimitive, {
       href: `/files/project/${folderId}?renameProject=true`,
-      className: _$$s.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
+      className: cssBuilderInstance.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
       children: renderI18nText("team_view.folder_list_card.team_root_folder_rename")
     })]
   });
@@ -88,7 +88,7 @@ function ed() {
 function ec() {
   return jsx(Qp, {
     animationType: JR.LIGHT_SHIMMER,
-    className: c()(_$$s.wFull.hFull.$)
+    className: c()(cssBuilderInstance.wFull.hFull.$)
   });
 }
 function em(e) {
@@ -294,7 +294,7 @@ function e_(e) {
           dataTooltipType: KindEnum.TEXT,
           className: "folder_list_card--viewOnlyLabel--in8ZA"
         }), !r && t.is_connected_project && jsx("div", {
-          className: _$$s.pl4.$,
+          className: cssBuilderInstance.pl4.$,
           children: jsx(_$$W, {
             hostPlanName: t.resource_connection?.hostPlanName,
             connectedPlanName: t.resource_connection?.connectedPlanName
@@ -333,7 +333,7 @@ function eA({
   let i = "trashedFolders" === getSelectedView().view;
   let r = _$$x2(e.id, i);
   if ("loaded" !== r.status) return jsx(Wi, {
-    className: _$$s.h16.w150.$,
+    className: cssBuilderInstance.h16.w150.$,
     animationType: JR.NO_SHIMMER
   });
   let a = getI18nString("file_browser.folder.number_of_files", {
@@ -341,7 +341,7 @@ function eA({
     formattedNumFiles: _$$t2(r.data)
   });
   return jsxs("div", {
-    className: _$$s.flex.flexRow.itemsCenter.justifyStart.$,
+    className: cssBuilderInstance.flex.flexRow.itemsCenter.justifyStart.$,
     children: [jsx(TextWithTruncation, {
       fontSize: 11,
       children: t

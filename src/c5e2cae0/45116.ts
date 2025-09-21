@@ -6,7 +6,7 @@ import { d as _$$d } from "../c5e2cae0/368426";
 import { Q } from "../905/553231";
 import { analyticsEventManager } from "../905/449184";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UL, iB, O$ } from "../figma_app/361035";
 import { Tj, gS, gu } from "../figma_app/441925";
@@ -70,7 +70,7 @@ let R = registerModal(function (e) {
         })
       }), jsxs(DialogBody, {
         children: [jsx("div", {
-          className: _$$s.pt8.pb24.colorTextSecondary.$,
+          className: cssBuilderInstance.pt8.pb24.colorTextSecondary.$,
           children: jsx("p", {
             children: renderI18nText("checkout.additional_seats.pre_purchase_seats_for_your_team_to_help_you_budget_and_save_time_later_on")
           })
@@ -195,7 +195,7 @@ let H = registerModal(function (e) {
               vertical: 16
             },
             children: [jsx("div", {
-              className: _$$s.mb24.$,
+              className: cssBuilderInstance.mb24.$,
               children: jsx(_$$j, {
                 user,
                 text: getI18nString("modify_plan_user_seat_modal.choose_seat", {
@@ -298,7 +298,7 @@ function Z({
           size: "24"
         }),
         children: jsxs("span", {
-          className: _$$s.flex.justifyBetween.ml2.$,
+          className: cssBuilderInstance.flex.justifyBetween.ml2.$,
           children: [t[a].displayName, jsx(_$$k, {})]
         })
       })
@@ -381,7 +381,7 @@ export function $$q0({
                 }), jsxs("th", {
                   className: W,
                   children: [renderI18nText("checkout.select_seats_table.user_column"), " ", jsx("div", {
-                    className: _$$s.inlineBlock.$,
+                    className: cssBuilderInstance.inlineBlock.$,
                     "data-testid": "select-seats-table-sort-users-button",
                     children: jsx(IconButton, {
                       onClick: () => A(e => !e),
@@ -428,7 +428,7 @@ export function $$q0({
             })]
           })
         }), jsxs("div", {
-          className: _$$s.py12.px24.bt1.bSolid.colorBorder.flex.itemsCenter.justifyBetween.$,
+          className: cssBuilderInstance.py12.px24.bt1.bSolid.colorBorder.flex.itemsCenter.justifyBetween.$,
           children: [jsx(O, {
             tier: S,
             seatTypes: t,

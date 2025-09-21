@@ -20,7 +20,7 @@ import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { linkWithTracking } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -202,7 +202,7 @@ function ea(e) {
             },
             dataTestId: "org-renewal-modal-header",
             children: [jsx("div", {
-              className: _$$s.mb8.$,
+              className: cssBuilderInstance.mb8.$,
               children: jsx(Ro, {
                 size: Pf.XLARGE,
                 entity: {
@@ -213,10 +213,10 @@ function ea(e) {
             }), jsx(DialogHiddenTitle, {
               children: en
             }), jsx("div", {
-              className: _$$s.textHeadingMedium.$,
+              className: cssBuilderInstance.textHeadingMedium.$,
               children: en
             }), jsx("div", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.org_renewal.description")
             })]
           }), jsx(_$$C, {
@@ -244,7 +244,7 @@ function ea(e) {
               id: "assigned",
               name: jsx(_$$b, {
                 text: jsx("span", {
-                  className: _$$s.textBodyMedium.colorTextSecondary.$,
+                  className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                   children: getI18nString("billing_modals.org_renewal.table.header.assigned")
                 }),
                 popoverText: getI18nString("billing_modals.renewal.table.tooltip.assigned", {
@@ -261,7 +261,7 @@ function ea(e) {
               id: "unassigned",
               name: jsx(_$$b, {
                 text: jsx("span", {
-                  className: _$$s.textBodyMedium.colorTextSecondary.$,
+                  className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                   children: getI18nString("billing_modals.org_renewal.table.header.unassigned")
                 }),
                 popoverText: renderI18nText("billing_modals.renewal.table.tooltip.unassigned", {
@@ -275,7 +275,7 @@ function ea(e) {
               }),
               textAlign: "center",
               cellComponent: e => jsx("div", {
-                className: _$$s.mxAuto.$,
+                className: cssBuilderInstance.mxAuto.$,
                 children: jsx(_$$r, {
                   value: y[e] || 0,
                   onChange: S(e)
@@ -303,7 +303,7 @@ function ea(e) {
             renewalDate: e.renewalDate,
             onClose: e.onClose
           }), ei && jsx("div", {
-            className: _$$s.pt16.$,
+            className: cssBuilderInstance.pt16.$,
             children: jsx(TextWithTruncation, {
               color: "danger",
               children: ei
@@ -342,7 +342,7 @@ function es(e) {
     children: renderI18nText("billing_modals.org_renewal.disclaimer_banner.these_numbers_may_change", {
       date: e.renewalDate,
       manageAssignedSeatsLink: jsx(ButtonPrimitive, {
-        className: h()(h7, _$$s.inline.$),
+        className: h()(h7, cssBuilderInstance.inline.$),
         style: styleBuilderInstance.add({
           backgroundColor: "unset"
         }).$,

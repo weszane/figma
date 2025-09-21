@@ -14,7 +14,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { sendUrlToParent } from "../figma_app/564528";
 import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { postUserFlag } from "../905/985254";
@@ -216,10 +216,10 @@ export function $$Y1() {
         });
       },
       additionalContentsBottom: jsx("div", {
-        className: _$$s.mt4.$
+        className: cssBuilderInstance.mt4.$
       }),
       additionalContentsTop: jsx("div", {
-        className: _$$s.mt4.$
+        className: cssBuilderInstance.mt4.$
       }),
       onChange: (e, t) => {
         t.preventDefault();
@@ -378,7 +378,7 @@ function q({
           className: "organize_actions_control--submenuContainer--TmBn7",
           children: jsx(W1, {
             children: jsx("div", {
-              className: _$$s.flex.flexColumn.py6.w200.$,
+              className: cssBuilderInstance.flex.flexColumn.py6.w200.$,
               "aria-label": getI18nString("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
               role: "listbox",
               tabIndex: -1,
@@ -474,7 +474,7 @@ let Q = withTrackedClick(function ({
       tabIndex: -1,
       children: jsx(c$, {
         children: jsxs("div", {
-          className: _$$s.flex.justifyBetween.itemsCenter.gap8.$,
+          className: cssBuilderInstance.flex.justifyBetween.itemsCenter.gap8.$,
           children: [jsx(TextWithTruncation, {
             truncate: !0,
             children: i
@@ -490,7 +490,7 @@ let Q = withTrackedClick(function ({
               }
             })
           }), m && jsx("span", {
-            className: _$$s.pl4.mr0.$,
+            className: cssBuilderInstance.pl4.mr0.$,
             children: jsx(SvgComponent, {
               svg: _$$A2
             })

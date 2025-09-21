@@ -17,7 +17,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { q4 } from "../905/294085";
 import { hO, cN, d3, G4, G1 } from "../figma_app/545293";
@@ -236,7 +236,7 @@ export function $$ef1({
         children: jsx(_$$S2, {
           fillHeight: !0,
           children: jsx("span", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             "data-testid": "assets-tab-no-results",
             children: renderI18nText("assets_in_actions.no_results.title", {
               query: E()(e, {
@@ -270,7 +270,7 @@ export function $$ef1({
   let eV = e_ && ev.length > 0 && s;
   return jsx(_$$q2, {
     children: jsxs("div", {
-      className: g()(_$$s.flex.flexColumn.gap6.$$if(eO, _$$s.hFull).$, "assets_tab--bodyFontMedium--PGKXZ text--fontPos11--2LvXf text--_fontBase--QdLsd"),
+      className: g()(cssBuilderInstance.flex.flexColumn.gap6.$$if(eO, cssBuilderInstance.hFull).$, "assets_tab--bodyFontMedium--PGKXZ text--fontPos11--2LvXf text--_fontBase--QdLsd"),
       "data-testid": "assets-tab",
       children: [jsx(_$$O, {
         onLoadStateChange: ew,
@@ -550,22 +550,22 @@ export function $$eE0({
   let eY = f?.searchId;
   let e$ = E?.searchId;
   let eX = d && currentSearch && "loaded" === currentSearch.result.status ? jsxs("div", {
-    className: _$$s.flex.wFull.colorBgSecondary.itemsCenter.px8.py6.radiusMedium.$,
+    className: cssBuilderInstance.flex.wFull.colorBgSecondary.itemsCenter.px8.py6.radiusMedium.$,
     children: [jsx(_$$N, {
       style: {
         "--color-icon": "var(--color-icon-brand)"
       }
     }), jsx("span", {
-      className: _$$s.ml8.textBodyMedium.$,
+      className: cssBuilderInstance.ml8.textBodyMedium.$,
       children: _ ? renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion", {
         boldText: jsx("span", {
-          className: _$$s.textBodyMediumStrong.$,
+          className: cssBuilderInstance.textBodyMediumStrong.$,
           children: renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion_bold_text")
         }),
         orgText: truncate(_, 20)
       }) : renderI18nText("assets_in_actions.fragments_section.empty_state.text")
     }), jsx("span", {
-      className: _$$s.mlAuto.textBodyMediumStrong.colorTextBrand.$,
+      className: cssBuilderInstance.mlAuto.textBodyMediumStrong.colorTextBrand.$,
       children: renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion_hint")
     })]
   }) : void 0;
@@ -585,7 +585,7 @@ export function $$eE0({
     children: [jsx(_$$n.Header, {
       children: jsxs("div", {
         ref: eM,
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx(vj, {
           ref: m,
           searchQuery: C,
@@ -605,7 +605,7 @@ export function $$eE0({
           }),
           placeholder: M
         }), (d || c || eq) && jsx("div", {
-          className: _$$s.px8.pb8.$,
+          className: cssBuilderInstance.px8.pb8.$,
           children: jsxs(_$$b2, {
             primary: !1,
             gap: 8,
@@ -618,7 +618,7 @@ export function $$eE0({
               children: [eq && jsx(_$$t.TabPanel, {
                 ...ej[xA.COMPONENTS],
                 children: jsx("div", {
-                  className: _$$s.h24.flex.itemsCenter.$,
+                  className: cssBuilderInstance.h24.flex.itemsCenter.$,
                   children: jsx(_$$i, {
                     onSetAssetType: eD,
                     value: eR,
@@ -630,7 +630,7 @@ export function $$eE0({
               }), d && jsx(_$$t.TabPanel, {
                 ...ej[xA.FRAGMENTS],
                 children: jsx("div", {
-                  className: _$$s.h24.flex.itemsCenter.$,
+                  className: cssBuilderInstance.h24.flex.itemsCenter.$,
                   children: f && jsx(_$$s2, {
                     containerRef: eM,
                     entryPoint: G4.ACTIONS_ASSETS_TAB_DETAIL
@@ -639,7 +639,7 @@ export function $$eE0({
               }), c && jsx(_$$t.TabPanel, {
                 ...ej[xA.COMMUNITY],
                 children: jsx("div", {
-                  className: _$$s.h24.$
+                  className: cssBuilderInstance.h24.$
                 })
               })]
             })]

@@ -7,7 +7,7 @@ import { f as _$$f } from "../905/54715";
 import { _ as _$$_ } from "../vendor/853977";
 import c from "../vendor/116389";
 import { O as _$$O } from "../905/164014";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { p as _$$p } from "../figma_app/882803";
 import { U as _$$U } from "../905/331038";
@@ -132,7 +132,7 @@ export let $$C0 = forwardRef(function ({
       accept: V.join(", "),
       "aria-errormessage": O ? K : void 0,
       "aria-invalid": !!O,
-      className: _$$s.hidden.$,
+      className: cssBuilderInstance.hidden.$,
       disabled: j || !addMediaFromInput,
       id: W,
       multiple: !0,

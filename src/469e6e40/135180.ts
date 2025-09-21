@@ -19,7 +19,7 @@ import { y2 } from "../figma_app/563413";
 import { lv } from "../figma_app/204891";
 import { V as _$$V } from "../figma_app/385855";
 import { y as _$$y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { p as _$$p } from "../905/597320";
@@ -281,9 +281,9 @@ function ee(e) {
         sorting_key: K,
         getSortValue: e => e.name,
         cellComponent: e => jsxs("div", {
-          className: _$$s.flex.itemsCenter.gap12.overflowHidden.h48.wFull.$,
+          className: cssBuilderInstance.flex.itemsCenter.gap12.overflowHidden.h48.wFull.$,
           children: [jsx("div", {
-            className: _$$s.relative.flexShrink0.hFull.$,
+            className: cssBuilderInstance.relative.flexShrink0.hFull.$,
             children: jsx(_$$V, {
               thumbnailUrl: e.signedThumbnailUrl,
               thumbnailType: lv(e.editorType, !1),

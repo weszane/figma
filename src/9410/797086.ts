@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Ml } from "../905/971098";
 import { m as _$$m } from "../figma_app/175364";
@@ -19,13 +19,13 @@ function x({
   text: e
 }) {
   return jsxs("div", {
-    className: d()(_$$s.flex.flexRow.$),
+    className: d()(cssBuilderInstance.flex.flexRow.$),
     children: [jsx(i, {
       style: {
         marginLeft: -2
       }
     }), " ", jsx("span", {
-      className: d()(_$$s.pl4.$),
+      className: d()(cssBuilderInstance.pl4.$),
       children: e
     })]
   });

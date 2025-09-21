@@ -33,7 +33,7 @@ import { jn } from "../figma_app/522082";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { useStarterGlobalFileLimitsExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
@@ -236,7 +236,7 @@ function ee(e) {
           className: "file_tracker_upsell_modal--modalBody--x728y",
           children: f
         }), jsx("div", {
-          className: _$$s.font11.colorText.lh16.fontMedium.mb24.pr24.$,
+          className: cssBuilderInstance.font11.colorText.lh16.fontMedium.mb24.pr24.$,
           children: jsx(AutoLayout, {
             direction: "vertical",
             spacing: 16,

@@ -4,7 +4,7 @@ import a from "classnames";
 import { camelToKebab } from "../figma_app/930338";
 import { Spacing } from "../figma_app/637027";
 import { S } from "../figma_app/420927";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { formatI18nMessage } from "../905/482208";
 import { c1 } from "../figma_app/357047";
 import { TT, oo } from "../905/114390";
@@ -35,7 +35,7 @@ function h({
       loop: !0,
       muted: !0,
       playsInline: !0,
-      className: _$$s.maxWFull.$,
+      className: cssBuilderInstance.maxWFull.$,
       style: {
         position: "absolute",
         top: 0,
@@ -54,7 +54,7 @@ export function $$g0({
   let g = c1(t, i);
   let f = TT.includes(e) ? oo[e]?.getDescription() : null;
   return jsxs("div", {
-    className: s()(_$$s.flex.flexColumn.colorBg.$, "animated_tooltip--contentWrapper--lL3Ks"),
+    className: s()(cssBuilderInstance.flex.flexColumn.colorBg.$, "animated_tooltip--contentWrapper--lL3Ks"),
     children: [jsx(h, {
       tooltipKey: e
     }), jsxs("div", {
@@ -62,18 +62,18 @@ export function $$g0({
         padding: "12px"
       },
       children: [jsxs("div", {
-        className: _$$s.flex.columnGap4.$,
+        className: cssBuilderInstance.flex.columnGap4.$,
         children: [jsx("span", {
-          className: _$$s.font11.fontSemiBold.colorText.$,
+          className: cssBuilderInstance.font11.fontSemiBold.colorText.$,
           children: a
         }), jsx(S, {
           shortcut: g,
-          className: s()(_$$s.flex.columnGap4.fontSemiBold.colorTextSecondary.$, "animated_tooltip--shortcut--kyqA8")
+          className: s()(cssBuilderInstance.flex.columnGap4.fontSemiBold.colorTextSecondary.$, "animated_tooltip--shortcut--kyqA8")
         })]
       }), jsx(Spacing, {
         multiple: .5
       }), jsx("div", {
-        className: _$$s.colorText.$,
+        className: cssBuilderInstance.colorText.$,
         children: f
       })]
     })]

@@ -3,7 +3,7 @@ import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { BrowserInfo } from "../figma_app/778880";
 import { a as _$$a } from "../905/925868";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { li } from "../figma_app/622574";
@@ -28,7 +28,7 @@ export function $$f0({
     editorType: FFileType.WHITEBOARD
   });
   return templatesByTeam ? jsxs("div", {
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: [jsxs(AutoLayout, {
       horizontalAlignItems: "start",
       height: k,
@@ -46,18 +46,18 @@ export function $$f0({
         onClick: y,
         children: jsx(C, {})
       }), jsx("div", {
-        className: _$$s.font13.fontMedium.$,
+        className: cssBuilderInstance.font13.fontMedium.$,
         children: renderI18nText("browse_templates_modal.published_by_current_org_name", {
           orgName: t
         })
       })]
     }), jsxs("section", {
-      className: _$$s.overflowYScroll.$,
+      className: cssBuilderInstance.overflowYScroll.$,
       style: {
         height: `calc(100% - ${k}px)`
       },
       children: [jsx("div", {
-        className: _$$s.px24.my20.$,
+        className: cssBuilderInstance.px24.my20.$,
         children: jsx(iq, {
           children: templatesByTeam.templates.map(e => jsx(AF, {
             templateInsertionLocation: r,
@@ -73,7 +73,7 @@ export function $$f0({
           }, e.fileKey))
         })
       }), jsx(_$$a, {
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         style: {
           bottom: "250px"
         },

@@ -14,7 +14,7 @@ import { _H } from "../figma_app/598111";
 import { isStudentValidated } from "../figma_app/141320";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -212,13 +212,13 @@ function eD(e) {
         return t.join(", ");
       }(e.address);
       return jsxs("option", {
-        className: _$$s.flex.justifyBetween.gap2.$,
+        className: cssBuilderInstance.flex.justifyBetween.gap2.$,
         value: e.id,
         children: [jsx("span", {
-          className: _$$s.font13.$,
+          className: cssBuilderInstance.font13.$,
           children: t
         }), a && jsx("span", {
-          className: _$$s.colorTextSecondary.font13.$,
+          className: cssBuilderInstance.colorTextSecondary.font13.$,
           children: ` - ${a}`
         })]
       }, e.id);
@@ -229,7 +229,7 @@ function eB(e) {
   return jsx("div", {
     className: ri,
     children: jsxs("div", {
-      className: _$$s.flex.relative.wFull.itemsCenter.$,
+      className: cssBuilderInstance.flex.relative.wFull.itemsCenter.$,
       children: [jsx(eO, {
         name: "selected_saved_payment_method",
         trackingFieldName: "SelectExistingPaymentMethod",
@@ -263,12 +263,12 @@ function eL(e) {
   } = e;
   let r = jsx(Label, {
     children: jsx("span", {
-      className: _$$s.font13.$,
+      className: cssBuilderInstance.font13.$,
       children: getI18nString("checkout.use_saved_payment_method")
     })
   });
   return jsx("div", {
-    className: _$$s.mb6.$$if(!enableSavedPaymentMethods, _$$s.mb0).$,
+    className: cssBuilderInstance.mb6.$$if(!enableSavedPaymentMethods, cssBuilderInstance.mb0).$,
     children: jsx(Checkbox, {
       label: r,
       onChange: e => {
@@ -294,7 +294,7 @@ function eV(e) {
   return jsxs(_$$x, {
     title: getI18nString("checkout.payment_details"),
     children: [paymentMethods.length > 0 && jsxs("div", {
-      className: _$$s.alignLeft.$,
+      className: cssBuilderInstance.alignLeft.$,
       children: [jsx(eL, {
         enableSavedPaymentMethods,
         setEnableSavedPaymentMethods
@@ -305,7 +305,7 @@ function eV(e) {
         paymentMethods
       })]
     }), jsx("div", {
-      className: _$$s.alignLeft.$,
+      className: cssBuilderInstance.alignLeft.$,
       children: jsx(_$$S3, {
         billingAddress: e.billingAddress,
         canSeeBillingAddressExp: e.canSeeBillingAddressExp,
@@ -799,7 +799,7 @@ function eY(e) {
     trackingOptions: getRumLoggingConfig(),
     children: jsxs("div", {
       "data-testid": "team-upgrade-billing-remodel",
-      className: _$$s.selectNone.$,
+      className: cssBuilderInstance.selectNone.$,
       children: [jsx(vU, {
         selectedView: e.selectedView,
         isCampfireCart: !0
@@ -882,7 +882,7 @@ function eY(e) {
           }
         }), R === UpgradeSteps.CONFIRM_PAY ? jsxs(Fragment, {
           children: [tD && jsx("div", {
-            className: _$$s.mxAuto.alignLeft.mb16.$,
+            className: cssBuilderInstance.mxAuto.alignLeft.mb16.$,
             children: jsx(_$$_, {
               color: _$$S.INFORMATION,
               text: getI18nString("pro_cart.review.extra_validation")
@@ -1102,10 +1102,10 @@ function eZ({
     children: renderI18nText("checkout.learn_more_about_seats")
   });
   return jsxs("div", {
-    className: _$$s.mb32.$,
+    className: cssBuilderInstance.mb32.$,
     "data-testid": "cart-pro-header",
     children: [jsx("h2", {
-      className: _$$s.font15.lh24.fontMedium.$,
+      className: cssBuilderInstance.font15.lh24.fontMedium.$,
       children: function (e, t, a) {
         switch (t = t || getI18nString("checkout.select_seats_header.your_team"), e) {
           case UpgradeSteps.PLAN_COMPARISON:
@@ -1126,12 +1126,12 @@ function eZ({
         }
       }(e, t, r())
     }), e === UpgradeSteps.CHOOSE_PLAN && jsx("p", {
-      className: _$$s.colorTextSecondary.font13.mt8.$,
+      className: cssBuilderInstance.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.select_seats_table.seat_types_have_been_suggested", {
         learnMoreAboutSeatsLink: i
       })
     }), e === UpgradeSteps.CONFIRM_PAY && jsx("p", {
-      className: _$$s.colorTextSecondary.font13.mt8.$,
+      className: cssBuilderInstance.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
     }), UR() && jsx(_$$W, {
       billingPeriod: getSubscriptionTypeFromBillingCycle(a) ?? void 0,

@@ -4,7 +4,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
@@ -52,7 +52,7 @@ export function $$f0(e) {
         }), jsxs(DialogBody, {
           scrolling: "none",
           children: [jsx("div", {
-            className: _$$s.py8.$,
+            className: cssBuilderInstance.py8.$,
             children: isTransferTeam ? renderI18nText("revoke_transfer_modal.transfer_details_team", {
               sourceUserEmail: b,
               destinationUserEmail: v
@@ -64,7 +64,7 @@ export function $$f0(e) {
               destinationUserEmail: v
             })
           }), jsx("div", {
-            className: _$$s.py8.$,
+            className: cssBuilderInstance.py8.$,
             children: renderI18nText("revoke_transfer_modal.function_explanation")
           })]
         }), jsx(DialogFooter, {

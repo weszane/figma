@@ -21,7 +21,7 @@ import { SectionType } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { z6 } from "../figma_app/805373";
 import { getResourceDataOrFallback } from "../905/723791";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { m as _$$m } from "../469e6e40/248185";
 import { FAccessType } from "../figma_app/191312";
 import { PublicLinkControlsSetting } from "../figma_app/482728";
@@ -37,13 +37,13 @@ import { nF, lF } from "../469e6e40/68843";
 var R = A;
 function F(e) {
   let t = jsx("div", {
-    className: R()(_$$s.minW150.maxW300.mr8.$, "settings_section--loadingBlock--zK-f-")
+    className: R()(cssBuilderInstance.minW150.maxW300.mr8.$, "settings_section--loadingBlock--zK-f-")
   });
   let a = e.finishedLoading ? jsx(_$$s2, {
     publicLinkControlsSetting: e.publicLinkControlsSetting
   }) : t;
   let s = e.finishedLoading ? e.publicLinkControlsMaxExp ? jsx("div", {
-    className: R()(_$$s.pl16.pt8.$, "settings_section--secondaryText--hGnD9"),
+    className: R()(cssBuilderInstance.pl16.pt8.$, "settings_section--secondaryText--hGnD9"),
     children: jsx(q, {
       expiration: e.publicLinkControlsMaxExp
     })
@@ -52,21 +52,21 @@ function F(e) {
     exportControlsSetting: e.exportControlsSetting
   }) : t;
   let r = [jsx("div", {
-    className: _$$s.pl16.flex.gap4.pt16.$,
+    className: cssBuilderInstance.pl16.flex.gap4.pt16.$,
     children: renderI18nText("workspace_admin_tab.public_sharing_setting", {
       settingComponent: a
     })
   }, 2)];
   s && r.push(s);
   getFeatureFlags().plan_level_file_export_controls && r.push(jsx("div", {
-    className: _$$s.pl16.flex.gap4.pt8.$,
+    className: cssBuilderInstance.pl16.flex.gap4.pt8.$,
     children: renderI18nText("workspace_admin_tab.export_controls_setting", {
       settingComponent: i
     })
   }, 2));
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.mt16.mb8.$,
+      className: cssBuilderInstance.mt16.mb8.$,
       children: jsx(_$$_, {
         dataTestId: "workspace-settings-banner",
         color: _$$S.PLAIN,
@@ -91,7 +91,7 @@ function q(e) {
     time: initialMaxDuration
   });
   return jsx("div", {
-    className: _$$s.gap4.$,
+    className: cssBuilderInstance.gap4.$,
     children: s
   }, 3);
 }
@@ -108,7 +108,7 @@ function $({
     }), jsx("div", {
       className: "settings_section--container--QpIP- admin_settings_page--container--LZSr8",
       children: jsx("div", {
-        className: _$$s.bt1.bSolid.colorBorder.$,
+        className: cssBuilderInstance.bt1.bSolid.colorBorder.$,
         children: jsx(F, {
           finishedLoading: "loaded" === t.status,
           publicLinkControlsSetting: t.data?.workspace?.publicLinkControlsSetting ?? PublicLinkControlsSetting.ALLOWED,

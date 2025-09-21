@@ -66,7 +66,7 @@ import { s as _$$s3 } from "../figma_app/504088";
 import { Ao } from "../905/748636";
 import { $ as _$$$ } from "../905/241406";
 import eA from "classnames";
-import { s as _$$s4 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { gI } from "../905/277373";
 import { sU, WM, Wh } from "../905/838765";
@@ -173,7 +173,7 @@ let ec = new class {
 var ey = eA;
 function eR() {
   return jsxs("div", {
-    className: ey()(_$$s4.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
+    className: ey()(cssBuilderInstance.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
     children: [jsx("span", {
       style: styleBuilderInstance.add({
         boxSizing: "content-box",
@@ -192,7 +192,7 @@ function eN(e) {
   let t = jsx("a", {
     href: "https://help.figma.com/hc/articles/4410337103639#Publish_your_widget",
     target: "_blank",
-    className: _$$s4.cursorPointer.font11.colorTextBrand.$,
+    className: cssBuilderInstance.cursorPointer.font11.colorTextBrand.$,
     onMouseDown: e => {
       e.preventDefault();
     },
@@ -202,7 +202,7 @@ function eN(e) {
     children: renderI18nText("community.cards.learn_more")
   });
   return jsxs("div", {
-    className: ey()(_$$s4.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
+    className: ey()(cssBuilderInstance.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
     children: [jsx(SvgComponent, {
       svg: _$$A3
     }), jsx(TextWithTruncation, {
@@ -269,12 +269,12 @@ let eD = withTrackedClick(function (e) {
             editorType: f ? f?.manifest.editorType : localManifest?.editorType
           })
         }), jsxs("div", {
-          className: _$$s4.flex.hFull.p32.relative.borderBox.$,
+          className: cssBuilderInstance.flex.hFull.p32.relative.borderBox.$,
           children: [A && jsx(eP, {
             showLoading: n && !t,
             hasSrc: !!_
           }), jsx("div", {
-            className: _$$s4.absolute.left0.top0.hFull.wFull.opacity1.eventsNone.$,
+            className: cssBuilderInstance.absolute.left0.top0.hFull.wFull.opacity1.eventsNone.$,
             style: styleBuilderInstance.$$if(t, {
               opacity: .1
             }).$,
@@ -399,13 +399,13 @@ function e2({
   let f = getFeatureFlags().ext_plugin_publish_rearch ? _$$A5 : _$$A6;
   return jsx(f, {
     label: jsx("div", {
-      className: _$$s4.noWrap.$,
+      className: cssBuilderInstance.noWrap.$,
       children: renderI18nText("community.publishing.playground_file")
     }),
     textLabel: getI18nString("community.publishing.playground_file"),
     error: n,
     children: jsx("div", {
-      className: ey()("plugin_publish_modal--rightColumn--Ym-vV publish_modal--rightColumn--m4M9Z", _$$s4.flex.flexRow.relative.itemsCenter.$),
+      className: ey()("plugin_publish_modal--rightColumn--Ym-vV publish_modal--rightColumn--m4M9Z", cssBuilderInstance.flex.flexRow.relative.itemsCenter.$),
       children: s ? jsxs(Fragment, {
         children: [jsx("button", {
           type: "button",
@@ -483,14 +483,14 @@ function e5({
   let p = n === _$$J2.Actions.NOOP && i && i.id !== u.playground_file_version_id;
   let m = t && n === _$$J2.Actions.SET && a?.key === u.playground_fig_file?.key;
   return jsxs("div", {
-    className: ey()(_$$s4.flex.flexRow.flexGrow1.itemsCenter.justifyBetween.minW0.$, "playground_file_row--playgroundFileTile--AzCVH"),
+    className: ey()(cssBuilderInstance.flex.flexRow.flexGrow1.itemsCenter.justifyBetween.minW0.$, "playground_file_row--playgroundFileTile--AzCVH"),
     children: [jsxs("div", {
-      className: _$$s4.ml16.mr4.alignLeft.fontSemiBold.minW0.$,
+      className: cssBuilderInstance.ml16.mr4.alignLeft.fontSemiBold.minW0.$,
       children: [jsx("p", {
-        className: _$$s4.font13.ellipsis.noWrap.overflowHidden.fontSemiBold.$,
+        className: cssBuilderInstance.font13.ellipsis.noWrap.overflowHidden.fontSemiBold.$,
         children: a?.name
       }), p && jsx("button", {
-        className: _$$s4.bgTransparent.cursorPointer.fontNormal.$,
+        className: cssBuilderInstance.bgTransparent.cursorPointer.fontNormal.$,
         onClick: () => {
           c(hideDropdownAction());
           o();
@@ -505,7 +505,7 @@ function e5({
           color: "secondary",
           children: renderI18nText("community.publishing.playground_file.updated_version_confirmation", {
             undoButton: jsx("button", {
-              className: _$$s4.bgTransparent.cursorPointer.$,
+              className: cssBuilderInstance.bgTransparent.cursorPointer.$,
               onClick: () => {
                 c(hideDropdownAction());
                 l();
@@ -620,10 +620,10 @@ let e9 = function ({
     };
   }, [u, i]);
   return jsxs("div", {
-    className: _$$s4.flex.itemsCenter.selfCenter.gap16.$,
+    className: cssBuilderInstance.flex.itemsCenter.selfCenter.gap16.$,
     ref: d,
     children: [jsxs("div", {
-      className: ey()("plugin_publish_icon_upload--uploadIconFocus--DMPjs plugin_publish_modal--uploadFileFocus--PaUOh", _$$s4.flex.itemsCenter.justifyCenter.borderBox.relative.flexShrink0.w48.h48.overflowHidden.$),
+      className: ey()("plugin_publish_icon_upload--uploadIconFocus--DMPjs plugin_publish_modal--uploadFileFocus--PaUOh", cssBuilderInstance.flex.itemsCenter.justifyCenter.borderBox.relative.flexShrink0.w48.h48.overflowHidden.$),
       onBlur: v,
       onDragOver: e => {
         e.preventDefault();
@@ -646,13 +646,13 @@ let e9 = function ({
       }).$,
       tabIndex: 0,
       children: [jsx("div", {
-        className: _$$s4.absolute.wFull.hFull.$
+        className: cssBuilderInstance.absolute.wFull.hFull.$
       }), t.iconSrc ? jsx("img", {
-        className: _$$s4.w48.h48.eventsNone.$,
+        className: cssBuilderInstance.w48.h48.eventsNone.$,
         src: t.iconSrc,
         alt: ""
       }) : jsx(MediaQuerySvgComponent, {
-        className: _$$s4.colorIcon.w48.h48.b1.colorBorder.borderBox.flex.itemsCenter.justifyCenter.$$with({
+        className: cssBuilderInstance.colorIcon.w48.h48.b1.colorBorder.borderBox.flex.itemsCenter.justifyCenter.$$with({
           colorBorderDanger: !!o
         }).$,
         style: styleBuilderInstance.add({
@@ -663,7 +663,7 @@ let e9 = function ({
         fallbackSvg: _$$A7
       })]
     }), jsx("input", {
-      className: _$$s4.absolute.w1.h1.$,
+      className: cssBuilderInstance.absolute.w1.h1.$,
       style: styleBuilderInstance.add({
         clip: "rect(0,0,0,0)"
       }).$,
@@ -675,12 +675,12 @@ let e9 = function ({
       onBlur: v,
       onFocus: b
     }), jsx("div", {
-      className: _$$s4.invisible.$$with({
+      className: cssBuilderInstance.invisible.with({
         visible: u
       }).$,
       children: renderI18nText("community.publishing.drop_or_paste_your_icon_image_here_or_choose_a_file_from_your_computer", {
         chooseFileLink: jsx("label", {
-          className: _$$s4.cursorPointer.noWrap.colorTextBrand.$,
+          className: cssBuilderInstance.cursorPointer.noWrap.colorTextBrand.$,
           htmlFor: "icon-upload-input",
           children: renderI18nText("community.publishing.choose_a_file")
         })
@@ -696,7 +696,7 @@ function tt({
   let n = useId();
   return jsxs(Label, {
     htmlFor: n,
-    className: _$$s4.flex.itemsCenter.hFull.justifyEnd.gap8.$,
+    className: cssBuilderInstance.flex.itemsCenter.hFull.justifyEnd.gap8.$,
     children: [jsx(ti, {
       reviewStatus: i
     }), jsx(_$$v, {
@@ -902,7 +902,7 @@ function tP({
 }) {
   return jsxs(AutoLayout, {
     children: [jsx("div", {
-      className: _$$s4.$$with({
+      className: cssBuilderInstance.$$with({
         opacity0_5: t
       }).$,
       children: jsx(H8, {
@@ -1005,7 +1005,7 @@ function tD({
       variant: "brand",
       children: renderI18nText("community.publishing.publish_first_to_invite", {
         publishThisResourceLink: jsx("button", {
-          className: _$$s4.colorTextBrand.cursorPointer.mr0.p0.bgTransparent.b0.$,
+          className: cssBuilderInstance.colorTextBrand.cursorPointer.mr0.p0.bgTransparent.b0.$,
           onClick: e,
           children: renderI18nText("community.publishing.publish_this_resource")
         })
@@ -1028,7 +1028,7 @@ function tL({
 }) {
   let t = hasValidId(e.content) ? e.content.handle : e.content;
   return jsx("span", {
-    className: _$$s4.maxW300.overflowHidden.ellipsis.noWrap.$,
+    className: cssBuilderInstance.maxW300.overflowHidden.ellipsis.noWrap.$,
     children: jsx(TextWithTruncation, {
       children: t
     })
@@ -1181,7 +1181,7 @@ function tM({
       },
       validateToken: y
     }), jsx(_$$P, {
-      className: _$$s4.maxH300.$,
+      className: cssBuilderInstance.maxH300.$,
       children: jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 8,
@@ -1267,7 +1267,7 @@ function tU({
     owner: t
   });
   return jsx("div", {
-    className: _$$s4.py8.$,
+    className: cssBuilderInstance.py8.$,
     children: p
   });
 }
@@ -1336,7 +1336,7 @@ function tK({
     })]
   }) : jsxs("div", {
     children: [jsx("div", {
-      className: _$$s4.h32.flex.flexRow.itemsCenter.ellipsis.noWrap.overflowHidden.$,
+      className: cssBuilderInstance.h32.flex.flexRow.itemsCenter.ellipsis.noWrap.overflowHidden.$,
       children: jsx(TextWithTruncation, {
         fontSize: 12,
         children: renderI18nText("community.community")
@@ -1516,9 +1516,9 @@ function ia({
     }
   });
   return jsxs("div", {
-    className: _$$s4.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: [jsx("div", {
-      className: _$$s4.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       ...getComboboxProps(),
       children: jsx(BigTextInputForwardRef, {
         className: "plugin_publish_modal--textInputUI3--YaTWB publish_modal--textInputUI3--bgKs8",
@@ -1526,12 +1526,12 @@ function ia({
         ...getInputProps()
       })
     }), jsx("ul", {
-      className: ey()(_$$s4.absolute.zIndex1.b1.colorBg.colorBorder.bRadius4.mt4.maxH300.overflowYScroll.$$with({
+      className: ey()(cssBuilderInstance.absolute.zIndex1.b1.colorBg.colorBorder.bRadius4.mt4.maxH300.overflowYScroll.$$with({
         hidden: !isOpen || !s.length
       }).$, "plugin_creators_autocomplete--dropdownUI3---ShTX"),
       ...getMenuProps(),
       children: isOpen && s.map((e, t) => jsx("li", {
-        className: _$$s4.p8.$$with({
+        className: cssBuilderInstance.p8.$$with({
           colorBgBrandTertiary: highlightedIndex === t
         }).$,
         ...getItemProps({
@@ -1568,7 +1568,7 @@ function il({
   let s = useMemo(() => e.some(e => e.isPending), [e]);
   let o = useMemo(() => e.filter(e => !("user_id" in n) || e.primary_user_id !== n.user_id), [e, n]);
   return jsxs("div", {
-    className: _$$s4.flex.flexColumn.gap8.relative.itemsStretch.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.relative.itemsStretch.$,
     children: [jsx(is, {
       creators: o,
       removeCreator: i => {
@@ -1722,7 +1722,7 @@ function iE({
       })
     }) : 0 === o ? jsxs(ix, {
       children: [jsx(SvgComponent, {
-        className: _$$s4.colorIcon.$,
+        className: cssBuilderInstance.colorIcon.$,
         svg: _$$A26
       }), jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.data_security.ready_to_submit", {
@@ -1761,7 +1761,7 @@ function iE({
     case FRequestStatusType.PENDING:
       s = jsxs(ix, {
         children: [jsx(SvgComponent, {
-          className: _$$s4.colorIcon.$,
+          className: cssBuilderInstance.colorIcon.$,
           svg: _$$A26
         }), jsx(TextWithTruncation, {
           children: renderI18nText("community.publishing.data_security.pending", {
@@ -1821,7 +1821,7 @@ function iS({
 }) {
   return jsx("button", {
     onClick: t,
-    className: _$$s4.bgTransparent.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.bgTransparent.colorTextBrand.cursorPointer.$,
     children: e
   });
 }
@@ -1833,7 +1833,7 @@ function iP({
   let n = e.length > t;
   let a = e.length > i && e.length <= t;
   return jsx("div", {
-    className: _$$s4.$$case([[n, _$$s4.colorTextDanger], [a, _$$s4.colorTextWarning]], _$$s4.colorTextTertiary).ml8.$,
+    className: cssBuilderInstance.$$case([[n, cssBuilderInstance.colorTextDanger], [a, cssBuilderInstance.colorTextWarning]], cssBuilderInstance.colorTextTertiary).ml8.$,
     style: styleBuilderInstance.add({
       gridColumnStart: 16,
       gridColumnEnd: 18

@@ -34,7 +34,7 @@ import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { h1 } from "../905/986103";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
@@ -1206,7 +1206,7 @@ export function $$ej5(e) {
       className: qd,
       children: renderI18nText("collaboration.feedback.version_history")
     }), jsxs("div", {
-      className: _$$s.flex.itemsCenter.gap4.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap4.$,
       children: [filterOptions && jsx(eU, {
         showAutosaves: filterOptions.showAutosaves,
         setShowAutosaves: filterOptions.setShowAutosaves,

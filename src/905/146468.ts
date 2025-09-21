@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { Button } from "../905/521428";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { defaultValidator } from "../figma_app/181241";
@@ -32,9 +32,9 @@ export function $$u0({
   return jsx(TrackingProvider, {
     name: "Library Subscription Toggle",
     children: jsxs("div", {
-      className: _$$s.flex.flexRow.itemsCenter.gap10.maxW250.$,
+      className: cssBuilderInstance.flex.flexRow.itemsCenter.gap10.maxW250.$,
       children: [d && jsx("div", {
-        className: _$$s.colorTextSecondary.pb1.$,
+        className: cssBuilderInstance.colorTextSecondary.pb1.$,
         children: d
       }), jsx(Button, {
         variant: i ? "secondary" : "primary",

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { IconButton } from "../905/443068";
 import { f } from "../905/335032";
 import { x } from "../905/587214";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { jT } from "../figma_app/626177";
 export function $$u0({
@@ -26,7 +26,7 @@ export function $$u0({
     t(e => e + 1);
   }, [t]);
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.wFitContent.colorBorder.b1.bRadius5.$,
+    className: cssBuilderInstance.flex.itemsCenter.wFitContent.colorBorder.b1.bRadius5.$,
     children: [jsx(IconButton, {
       "aria-label": getI18nString("billing_modals.decrement_aria_label"),
       disabled: e <= 0,

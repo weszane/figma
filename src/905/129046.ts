@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 let s = "media--overlayImageContainer--EjKlj";
 export function $$o0(e) {
@@ -13,7 +13,7 @@ export function $$o0(e) {
     children: jsx("img", {
       src: e.src,
       alt: e.alt,
-      className: _$$s.flex.justifyCenter.alignCenter.overflowHidden.$
+      className: cssBuilderInstance.flex.justifyCenter.alignCenter.overflowHidden.$
     })
   });
 }

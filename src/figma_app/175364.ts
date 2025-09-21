@@ -7,7 +7,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { BK } from "../905/848862";
 import { Jz } from "../905/504727";
 import { Button } from "../905/521428";
@@ -38,9 +38,9 @@ function f({
       id: c
     },
     children: jsxs("div", {
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsx("span", {
-        className: _$$s.noWrap.$,
+        className: cssBuilderInstance.noWrap.$,
         children: t
       }), jsx("span", {
         style: {
@@ -165,7 +165,7 @@ function v(e) {
             return jsx(c$, {
               disabled: !0,
               children: jsx("div", {
-                className: _$$s.overflowHidden.ellipsis.block.$,
+                className: cssBuilderInstance.overflowHidden.ellipsis.block.$,
                 children: t.text
               })
             }, r);
@@ -176,7 +176,7 @@ function v(e) {
               disabled: t.disabled,
               onClick: () => x(t),
               children: jsx("div", {
-                className: _$$s.overflowHidden.ellipsis.block.$,
+                className: cssBuilderInstance.overflowHidden.ellipsis.block.$,
                 children: t.text
               })
             }, r);
@@ -186,7 +186,7 @@ function v(e) {
               onClick: () => x(t),
               checked: l()(e.selected, t.value),
               children: jsx("div", {
-                className: _$$s.overflowHidden.ellipsis.block.$,
+                className: cssBuilderInstance.overflowHidden.ellipsis.block.$,
                 children: t.text
               })
             }, r);

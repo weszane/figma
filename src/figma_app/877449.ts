@@ -15,7 +15,7 @@ import { sR } from '../905/932881';
 import { styleBuilderInstance } from '../905/941192';
 import { postUserFlag } from '../905/985254';
 import { normalizeJobRole } from '../3973/538504';
-import { s as _$$s2 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { buildUploadUrl } from '../figma_app/169182';
 import { selectCurrentFile } from '../figma_app/516028';
 import { ShareAction } from '../figma_app/707808';
@@ -93,12 +93,12 @@ export function $$F2(e) {
   return jsx(TrackingProvider, {
     name: 'google_classroom_share_modal',
     children: jsxs('div', {
-      className: _$$s2.flex.flexColumn.p16.$,
+      className: cssBuilderInstance.flex.flexColumn.p16.$,
       children: [jsx('form', {
         children: jsx(_$$b, {
           legend: jsx(_$$s, {
             children: t ? jsx('div', {
-              'className': _$$s2.textBodyMedium.pb8.$,
+              'className': cssBuilderInstance.textBodyMedium.pb8.$,
               'data-testid': 'share-to-google-classroom-disclaimer',
               'children': renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer', {
                 link: jsx(TrackedButton, {
@@ -113,7 +113,7 @@ export function $$F2(e) {
           value: a,
           onChange: s,
           children: jsxs('div', {
-            className: _$$s2.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: [jsx(_$$c, {
               value: 'edit',
               label: jsx(Label, {
@@ -142,7 +142,7 @@ export function $$F2(e) {
           })
         })
       }), jsx('div', {
-        className: _$$s2.flex.flexRow.justifyEnd.$,
+        className: cssBuilderInstance.flex.flexRow.justifyEnd.$,
         children: jsx(D, {
           variant: 'primary',
           onClick: () => {

@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { LoadingOverlay } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
@@ -44,7 +44,7 @@ let b = registerModal(function (e) {
         }), jsxs(DialogBody, {
           scrolling: "none",
           children: [jsx("div", {
-            className: _$$s.pt8.$,
+            className: cssBuilderInstance.pt8.$,
             children: renderI18nText("resource_connection.disconnect_success_modal.you_deactivated_the_connected_project", {
               connectedPlanName: e.connectedPlanName,
               projectName: e.projectName,
@@ -66,7 +66,7 @@ let b = registerModal(function (e) {
               })
             })
           }), jsx("div", {
-            className: _$$s.pt8.pb16.$,
+            className: cssBuilderInstance.pt8.pb16.$,
             children: renderI18nText("resource_connection.disconnect_success_modal.you_now_have_space_to_create_a_new_connected_project")
           })]
         })]
@@ -97,19 +97,19 @@ let $$v0 = registerModal(function (e) {
         }), jsxs(DialogBody, {
           scrolling: "none",
           children: [jsx("div", {
-            className: _$$s.pt8.$,
+            className: cssBuilderInstance.pt8.$,
             children: renderI18nText("resource_connection.disconnect_modal.all_connecting_plan_members_will_lose_access", {
               connectingPlanName: jsx("span", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: e.connectedPlan.name
               }),
               projectName: jsx("span", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: e.projectName
               })
             })
           }), jsx("div", {
-            className: _$$s.pt8.$,
+            className: cssBuilderInstance.pt8.$,
             children: e.isHostPlanAdmin ? renderI18nText("resource_connection.disconnect_modal.we_recommend_you_share_a_copy", {
               learnMore: jsx("a", {
                 href: "https://help.figma.com/hc/articles/10250387712407-Transfer-a-project-or-team-to-a-different-account#h_01J5BDVCA0YGB4N1KMS59QJQ93",

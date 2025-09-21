@@ -10,7 +10,7 @@ import { Y1 } from "../905/143116";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
 import { ms, c$ } from "../figma_app/236327";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/11182";
 import { hideDropdownAction } from "../905/929976";
@@ -89,7 +89,7 @@ function k({
         children: [jsx("span", {
           children: renderI18nText("browse_templates_modal.context_menu.view_original_file")
         }), jsx("span", {
-          className: _$$s.$$if("loading" !== c.status, _$$s.invisible).$,
+          className: cssBuilderInstance.$$if("loading" !== c.status, cssBuilderInstance.invisible).$,
           children: jsx(_$$k, {})
         })]
       })
@@ -183,13 +183,13 @@ export function $$j7({
 }
 function U() {
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.h40.my8.wFull.$,
+    className: cssBuilderInstance.flex.itemsCenter.h40.my8.wFull.$,
     children: jsx(B, {})
   });
 }
 function B() {
   return jsx("div", {
-    className: u()(_$$s.w100.h16.bRadius3.$, Mm)
+    className: u()(cssBuilderInstance.w100.h16.bRadius3.$, Mm)
   });
 }
 function G({
@@ -211,11 +211,11 @@ function G({
     image: jsx(FK, {
       removeBorder: !0,
       children: jsx("div", {
-        className: u()(t, _$$s.wFull.hFull.$)
+        className: u()(t, cssBuilderInstance.wFull.hFull.$)
       })
     }),
     bottomRow: jsx("div", {
-      className: u()(t, _$$s.h16.w100.bRadius3.$)
+      className: u()(t, cssBuilderInstance.h16.w100.bRadius3.$)
     })
   });
 }
@@ -234,7 +234,7 @@ function V({
 }
 export function $$H3() {
   return jsxs("div", {
-    className: _$$s.px24.$,
+    className: cssBuilderInstance.px24.$,
     children: [jsx(U, {}), jsxs($$P5, {
       children: [jsx(V, {}), jsx(V, {}), jsx(V, {
         shouldFade: !0
@@ -246,9 +246,9 @@ export function $$z2({
   shouldFade: e
 }) {
   return jsxs("div", {
-    className: _$$s.pb20.$,
+    className: cssBuilderInstance.pb20.$,
     children: [jsx("div", {
-      className: _$$s.h24.mb16.$,
+      className: cssBuilderInstance.h24.mb16.$,
       children: jsx(B, {})
     }), jsx($$P5, {
       children: jsx(V, {

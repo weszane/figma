@@ -19,7 +19,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
@@ -212,7 +212,7 @@ export function $$eR6({
     let s;
     switch (t) {
       case qG.COMPONENTS:
-        r = _$$s.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgComponentTertiary.colorTextComponent.colorBorderComponent.$;
+        r = cssBuilderInstance.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgComponentTertiary.colorTextComponent.colorBorderComponent.$;
         i = {
           "--color-icon": "var(--color-icon-component)"
         };
@@ -221,7 +221,7 @@ export function $$eR6({
         });
         break;
       case qG.DESIGNS:
-        r = _$$s.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgBrandTertiary.colorTextBrand.colorBorderBrand.$;
+        r = cssBuilderInstance.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgBrandTertiary.colorTextBrand.colorBorderBrand.$;
         i = {
           "--color-icon": "var(--color-icon-brand)"
         };
@@ -240,10 +240,10 @@ export function $$eR6({
         marginRight: "8px"
       }).$,
       children: [jsx("div", {
-        className: _$$s.flex.itemsCenter.justifyCenter.w16.h16.flexShrink0.$,
+        className: cssBuilderInstance.flex.itemsCenter.justifyCenter.w16.h16.flexShrink0.$,
         children: s
       }), jsx("span", {
-        className: _$$s.truncate.$,
+        className: cssBuilderInstance.truncate.$,
         children: t
       }), jsx(ButtonPrimitive, {
         recordingKey: generateRecordingKey(tZ, "dismiss"),
@@ -273,7 +273,7 @@ export function $$eR6({
           });
           tm(void 0);
         },
-        className: _$$s.bgTransparent.$,
+        className: cssBuilderInstance.bgTransparent.$,
         "aria-label": getI18nString("assets_in_actions.clear_search_tag", {
           tagType: t
         }),
@@ -465,7 +465,7 @@ export function $$eR6({
       ref: eD
     }, tJ), jsx(_$$n.Header, {
       children: jsxs("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         ref: ej,
         children: [e ? jsx(eP, {
           searchTag: tg ? tf(th) : void 0,
@@ -491,7 +491,7 @@ export function $$eR6({
           placeholder: eR,
           searchTag: tg ? tf(th) : void 0
         }), to && jsx("div", {
-          className: _$$s.$$if(e, _$$s.py4).px8.$$if(!e, _$$s.pb8).$,
+          className: cssBuilderInstance.$$if(e, cssBuilderInstance.py4).px8.$$if(!e, cssBuilderInstance.pb8).$,
           children: jsxs(_$$b2, {
             primary: !1,
             gap: 8,
@@ -503,7 +503,7 @@ export function $$eR6({
             }), jsx(_$$t.TabPanel, {
               ...td[Qx.PLAN_FILE_ASSETS],
               children: jsxs("div", {
-                className: _$$s.$$if(!e, _$$s.h24).$$if(e, _$$s.h32).flex.itemsCenter.$,
+                className: cssBuilderInstance.$$if(!e, cssBuilderInstance.h24).$$if(e, cssBuilderInstance.h32).flex.itemsCenter.$,
                 children: [t1 && jsx(_$$i, {
                   onSetAssetType: t => {
                     if (currentSearch) switch (currentSearch.input.type) {
@@ -538,7 +538,7 @@ export function $$eR6({
             }), jsx(_$$t.TabPanel, {
               ...td[Qx.COMMUNITY],
               children: jsx("div", {
-                className: _$$s.$$if(!e, _$$s.h24).$$if(e, _$$s.h32).flex.itemsCenter.$
+                className: cssBuilderInstance.$$if(!e, cssBuilderInstance.h24).$$if(e, cssBuilderInstance.h32).flex.itemsCenter.$
               })
             })]
           })
@@ -565,7 +565,7 @@ export function $$eR6({
                   bgTransparentUI3: !0
                 })
               }) : jsxs("div", {
-                className: y()(_$$s.gap6.$$if(tj, _$$s.hFull).$),
+                className: y()(cssBuilderInstance.gap6.$$if(tj, cssBuilderInstance.hFull).$),
                 children: [tk && jsx(_$$O, {
                   onLoadStateChange: eH,
                   header: !th && Q ? {
@@ -703,10 +703,10 @@ function eP({
   }
   _$$z(t);
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyBetween.py12.$$if(s, _$$s.bSolid.bb1.colorBorder).$$if(t, _$$s.px12, _$$s.px8).$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.py12.$$if(s, cssBuilderInstance.bSolid.bb1.colorBorder).$$if(t, cssBuilderInstance.px12, cssBuilderInstance.px8).$,
     ref: o,
     children: jsxs("div", {
-      className: _$$s.flex.gap6.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap6.itemsCenter.$,
       children: [!t && jsx(_$$o, {
         recordingKey: generateRecordingKey(l, "backButton")
       }), jsx(TextWithTruncation, {

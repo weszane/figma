@@ -27,7 +27,7 @@ import { hT } from "../figma_app/878651";
 import { Link } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/103637";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { postUserFlag } from "../905/985254";
 import { selectUserFlag } from "../905/940356";
 import { pz, vC, D5, wP, X6, Mo, rb, xQ, w0, $I, ON, hW, jE } from "../figma_app/589564";
@@ -106,13 +106,13 @@ function B({
       })
     }), y(g), d.map(e => jsxs("div", {
       children: [jsx("div", {
-        className: _$$s.minH16.p0.$
+        className: cssBuilderInstance.minH16.p0.$
       }), jsx("div", {
         className: vC,
         children: e.title
       }), y(e.categoryIds)]
     }, e.id)), jsx("div", {
-      className: _$$s.minH8.$
+      className: cssBuilderInstance.minH8.$
     }), jsxs("span", {
       className: D5,
       children: [jsx(_$$U, {
@@ -371,7 +371,7 @@ function en(e) {
             errorFallback: null,
             value: o.description
           }), jsx("div", {
-            className: _$$s.mt16.$,
+            className: cssBuilderInstance.mt16.$,
             children: jsx(Link, {
               href: `/community/file/${e.templateId}`,
               newTab: !0,
@@ -424,7 +424,7 @@ function eo({
   }, [e, d]);
   let g = `/community/search?resource_type=files&editor_type=figjam&query=${e}`;
   return 0 !== t.length || 0 !== templates.length || isLoading ? isLoading && 0 === templates.length ? jsx(Cm, {}) : jsxs("section", {
-    className: _$$s.wFull.p24.overflowYScroll.$,
+    className: cssBuilderInstance.wFull.p24.overflowYScroll.$,
     ref: l,
     children: [jsxs(iq, {
       children: [d && templates.map(e => jsx(AF, {
@@ -450,7 +450,7 @@ function eo({
         e && !requestLoadMore() && u(!0);
       }
     }), !isLoading && jsx("div", {
-      className: _$$s.mt24.$,
+      className: cssBuilderInstance.mt24.$,
       children: jsx(tJ, {
         url: g,
         fileKey: o

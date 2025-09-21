@@ -18,7 +18,7 @@ import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
@@ -205,7 +205,7 @@ function H(e) {
           },
           dataTestId: "team-start-annual-plan-modal-header",
           children: [jsx("div", {
-            className: _$$s.mb8.$,
+            className: cssBuilderInstance.mb8.$,
             children: jsx(Ro, {
               size: Pf.XLARGE,
               entity: {
@@ -216,7 +216,7 @@ function H(e) {
           }), jsx(DialogHiddenTitle, {
             children: Z
           }), jsx("div", {
-            className: _$$s.textHeadingMedium.$,
+            className: cssBuilderInstance.textHeadingMedium.$,
             children: Z
           }), $ ? jsx("div", {
             className: "xemv814 x1n0bwc9",
@@ -251,7 +251,7 @@ function H(e) {
           }, {
             id: "monthly",
             name: jsx("span", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
@@ -264,12 +264,12 @@ function H(e) {
           }, {
             id: "annual",
             name: jsx("span", {
-              className: _$$s.textBodyMedium.colorTextSecondary.$,
+              className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
               children: getI18nString("billing_modals.team_start_annual_plan.table.header.annual")
             }),
             textAlign: "center",
             cellComponent: e => jsx("div", {
-              className: _$$s.mxAuto.$,
+              className: cssBuilderInstance.mxAuto.$,
               children: jsx(_$$r, {
                 value: P[e] || 0,
                 onChange: U(e),
@@ -286,10 +286,10 @@ function H(e) {
           children: [jsx(z, {
             annualSubscriptionStartDate: c
           }), jsx("br", {}), jsx("div", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.start_annual_plan.footer.your_annual_subscription_will_automatically_renew")
           }), jsx("div", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
               termsOfService: jsx(Link, {
                 href: "https://www.figma.com/legal/tos/",
@@ -301,12 +301,12 @@ function H(e) {
           })]
         }), !$ && jsxs(Fragment, {
           children: [jsxs("div", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: [renderI18nText("billing_modals.start_annual_plan.your_annual_plan_will_start", {
               date: c
             }), " ", jsx(G, {})]
           }), jsx("br", {}), jsx("div", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
               termsOfService: jsx(Link, {
                 href: "https://www.figma.com/legal/tos/",
@@ -317,7 +317,7 @@ function H(e) {
             })
           })]
         }), K && jsx("div", {
-          className: _$$s.pt16.$,
+          className: cssBuilderInstance.pt16.$,
           children: jsx(TextWithTruncation, {
             color: "danger",
             children: K

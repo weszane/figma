@@ -281,7 +281,7 @@ import { tV as _$$tV } from '../9831/302304';
 import { J as _$$J3 } from '../9831/379831';
 import _require4 from '../940032c6/115119';
 import _require2 from '../af221b13/303081';
-import { s as _$$s3 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { aBI, Dkp, evB, GFz, KP, MYY, t8H, Ujx, Xu4 } from '../figma_app/6204';
 import { bN } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
@@ -2088,7 +2088,7 @@ function iL() {
           ref: m,
           children: [jsx(DialogTitle, {
             children: jsx('div', {
-              className: _$$s3.flex.justifyBetween.alignCenter.cursorDefault.selectNone.$,
+              className: cssBuilderInstance.flex.justifyBetween.alignCenter.cursorDefault.selectNone.$,
               children: jsxs('div', {
                 style: {
                   display: 'flex',
@@ -3950,11 +3950,11 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
   }
   function r(e) {
     return jsxs('div', {
-      className: j()(_$$s3.grid.columnGap8.py16.px0.bb1.bSolid.colorBorder.$, s2),
+      className: j()(cssBuilderInstance.grid.columnGap8.py16.px0.bb1.bSolid.colorBorder.$, s2),
       children: [jsx('div', {
-        className: _$$s3.textBodyMedium.lhNormal.p0.$
+        className: cssBuilderInstance.textBodyMedium.lhNormal.p0.$
       }), e.choices.map((e, t) => jsx('p', {
-        className: j()(_$$s3.mb0.flex.justifyCenter.itemsCenter.alignCenter.textBodySmall.lhNormal.$, s5),
+        className: j()(cssBuilderInstance.mb0.flex.justifyCenter.itemsCenter.alignCenter.textBodySmall.lhNormal.$, s5),
         children: e
       }, t))]
     });
@@ -3965,15 +3965,15 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       'onChange': e.onClickChoice,
       'aria-labelledby': e.id,
       'children': jsxs('div', {
-        className: j()(_$$s3.grid.columnGap8.py16.px0.bb1.bSolid.colorBorder.$, s2),
+        className: j()(cssBuilderInstance.grid.columnGap8.py16.px0.bb1.bSolid.colorBorder.$, s2),
         children: [jsx(_$$s6, {
           id: e.id,
           children: jsx('span', {
-            className: _$$s3.textBodyMedium.lhNormal.p0.$,
+            className: cssBuilderInstance.textBodyMedium.lhNormal.p0.$,
             children: e.question
           })
         }), e.choices.map((t, r) => jsxs('div', {
-          className: j()(_$$s3.mb0.flex.justifyCenter.itemsCenter.alignCenter.textBodySmall.lhNormal.$, s5),
+          className: j()(cssBuilderInstance.mb0.flex.justifyCenter.itemsCenter.alignCenter.textBodySmall.lhNormal.$, s5),
           children: [jsx(q9, {
             htmlFor: `${e.id}-${t}`,
             children: t
@@ -4035,7 +4035,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         value: n?.answer,
         onChange: e => i(t.find(t => t.answer === e) ?? null),
         legend: jsx('legend', {
-          className: _$$s3.fontBold.textBodyLarge.pr36.mb8.$,
+          className: cssBuilderInstance.fontBold.textBodyLarge.pr36.mb8.$,
           children: e
         }),
         children: t.map(({
@@ -4047,7 +4047,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           value: e
         }, e))
       }), jsx('div', {
-        className: _$$s3.mt6.flex.justifyEnd.$,
+        className: cssBuilderInstance.mt6.flex.justifyEnd.$,
         children: jsx(Button, {
           disabled: !n,
           variant: 'secondary',
@@ -4082,7 +4082,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     };
     return jsxs('div', {
       children: [jsx('h1', {
-        className: _$$s3.textHeadingSmall.$,
+        className: cssBuilderInstance.textHeadingSmall.$,
         children: e.header
       }), jsx(Spacing, {
         multiple: 1
@@ -4101,9 +4101,9 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       }), jsx(Spacing, {
         multiple: 2
       }), jsxs('div', {
-        className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
+        className: cssBuilderInstance.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
         children: [e.progress && jsx('p', {
-          className: _$$s3.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: renderI18nText('rcs.surveys.question_counter', {
             currentStep: e.progress.currentStep,
             totalSteps: e.progress.totalSteps
@@ -4148,9 +4148,9 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           multiple: 1.5
         })]
       }), jsxs('div', {
-        className: j()(_$$s3.flex.flexColumn.justifyStart.$, 'survey_view--surveyOtherInput--68kbm'),
+        className: j()(cssBuilderInstance.flex.flexColumn.justifyStart.$, 'survey_view--surveyOtherInput--68kbm'),
         children: [jsx('p', {
-          className: _$$s3.fontBold.textBodyLarge.pr36.$,
+          className: cssBuilderInstance.fontBold.textBodyLarge.pr36.$,
           children: e.question
         }), jsx(Spacing, {
           multiple: 2
@@ -4179,20 +4179,20 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           onChange: s,
           maxLength: 1e3
         }), n ? jsx('p', {
-          className: _$$s3.textBodyMedium.colorTextDanger.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextDanger.$,
           children: n
         }) : jsx(Spacing, {
           multiple: 2
         }), jsxs('div', {
-          className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
+          className: cssBuilderInstance.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
           children: [e.progress && jsx('p', {
-            className: _$$s3.colorTextSecondary.$,
+            className: cssBuilderInstance.colorTextSecondary.$,
             children: renderI18nText('rcs.surveys.question_counter', {
               currentStep: e.progress.currentStep,
               totalSteps: e.progress.totalSteps
             })
           }), jsx('div', {
-            className: _$$s3.mlAuto.$,
+            className: cssBuilderInstance.mlAuto.$,
             children: jsx($z, {
               onClick: () => {
                 !e.required || t ? e.onSubmit() : i(getI18nString('rcs.surveys.this_field_is_required'));
@@ -4718,7 +4718,7 @@ function oj(e) {
         })
       })]
     }) : jsx('div', {
-      className: _$$s3.pr8.$,
+      className: cssBuilderInstance.pr8.$,
       children: jsx(TextWithTruncation, {
         children: renderI18nText('payments_modal.org_trial_pending.trial_still_needs_admin_approval', {
           planText: c
@@ -4765,9 +4765,9 @@ function oU(e) {
     spacing: 8,
     verticalAlignItems: 'start',
     children: [jsx('div', {
-      className: _$$s3.h16.flex.flexColumn.justifyCenter.$,
+      className: cssBuilderInstance.h16.flex.flexColumn.justifyCenter.$,
       children: jsx('div', {
-        className: _$$s3.colorBgInverse.h4.w4.$
+        className: cssBuilderInstance.colorBgInverse.h4.w4.$
       })
     }), e.text]
   });
@@ -4949,9 +4949,9 @@ function oQ(e) {
     spacing: 8,
     verticalAlignItems: 'start',
     children: [jsx('div', {
-      className: _$$s3.h16.flex.flexColumn.justifyCenter.$,
+      className: cssBuilderInstance.h16.flex.flexColumn.justifyCenter.$,
       children: jsx('div', {
-        className: _$$s3.colorBgInverse.h4.w4.$
+        className: cssBuilderInstance.colorBgInverse.h4.w4.$
       })
     }), e.text]
   });
@@ -6802,7 +6802,7 @@ let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
     });
   });
   return jsx('div', {
-    className: _$$s3.cursorDefault.colorTextTooltip.$,
+    className: cssBuilderInstance.cursorDefault.colorTextTooltip.$,
     style: {
       textAlign: 'center',
       maxWidth: 180
@@ -6823,26 +6823,26 @@ let c7 = _$$ex('devmode_toggle_disabled_personal_draft', ({
       reason: e ? 'personal_draft_owner' : 'personal_draft'
     });
   }), e) ? jsxs('div', {
-    className: _$$s3.cursorDefault.colorTextTooltip.$,
+    className: cssBuilderInstance.cursorDefault.colorTextTooltip.$,
     children: [jsx('span', {
       children: renderI18nText('dev_handoff.paywall.toggle_disabled_for_personal_drafts')
     }), jsx('div', {
-      className: _$$s3.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
+      className: cssBuilderInstance.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
     }), jsx('a', {
       href: '/files/drafts-to-move',
-      className: _$$s3.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
+      className: cssBuilderInstance.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
       children: renderI18nText('dev_handoff.paywall.toggle_disabled_go_to_drafts_to_move')
     })]
   }) : jsxs('div', {
-    className: _$$s3.cursorDefault.colorTextTooltip.flex.flexColumn.gap4.$,
+    className: cssBuilderInstance.cursorDefault.colorTextTooltip.flex.flexColumn.gap4.$,
     style: {
       width: 'min-content'
     },
     children: [jsx('div', {
-      className: _$$s3.noWrap.$,
+      className: cssBuilderInstance.noWrap.$,
       children: renderI18nText('dev_handoff.paywall.toggle_disabled_viewer_title')
     }), jsx('div', {
-      className: _$$s3.colorTextTooltipSecondary.$,
+      className: cssBuilderInstance.colorTextTooltipSecondary.$,
       children: renderI18nText('dev_handoff.paywall.toggle_disabled_viewer_details')
     })]
   });

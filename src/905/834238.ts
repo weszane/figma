@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { normalizeJobRole, JOB_ROLE_KEYS, getJobRoleDisplayWithEducation } from "../3973/538504";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { ConfirmationModal } from "../905/441305";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -88,7 +88,7 @@ function I(e) {
       }, e))
     }), v(x) && jsx(BigTextInputForwardRef, {
       id: "other-job-title-input",
-      className: _$$s.wFull.mt10.$,
+      className: cssBuilderInstance.wFull.mt10.$,
       value: C,
       placeholder: getI18nString("job-title.other.input-placeholder"),
       onChange: e => {

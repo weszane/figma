@@ -8,7 +8,7 @@ import d from "classnames";
 import { rr, Jn, wv, Ve } from "../figma_app/236327";
 import { a as _$$a } from "../905/925868";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { qI, GR, L_ } from "../figma_app/622574";
@@ -169,7 +169,7 @@ export function $$L0({
     spacing: 0,
     width: "hug-contents",
     children: [jsx("span", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: renderI18nText("browse_templates_modal.published_from")
     }), jsx(Ve, {
       label: T,
@@ -196,24 +196,24 @@ export function $$P2(e) {
   }, [t]);
   return jsxs("section", {
     children: [jsx("button", {
-      className: c()(_$$s.wFull.alignLeft.sticky.top0.zIndexTemplateModalTeamName.font13.my8.h40.fontMedium.colorBg.$, MY),
+      className: c()(cssBuilderInstance.wFull.alignLeft.sticky.top0.zIndexTemplateModalTeamName.font13.my8.h40.fontMedium.colorBg.$, MY),
       onClick: () => r(!t),
       ref: a,
       children: jsxs("h2", {
         children: [jsx(SvgComponent, {
-          className: _$$s.relative.inlineFlex.justifyCenter.colorIconTertiary.mx2.w16.$,
+          className: cssBuilderInstance.relative.inlineFlex.justifyCenter.colorIconTertiary.mx2.w16.$,
           style: {
             top: "-2px"
           },
           svg: t ? _$$A : _$$A2
         }), e.workspaceName && jsxs("span", {
-          className: _$$s.colorTextSecondary.fontNormal.$,
+          className: cssBuilderInstance.colorTextSecondary.fontNormal.$,
           children: [e.workspaceName, " /", " "]
         }), e.teamName]
       })
     }), t && jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s.$$if(e.minimalSpacing, _$$s.px0.mb0, _$$s.px24.mb20).$,
+        className: cssBuilderInstance.$$if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
         children: e.children
       }), jsx(_$$a, {
         "data-testid": `load-more-team-${e.teamId}`,
@@ -239,7 +239,7 @@ export function $$D1(e) {
       children: [jsxs("div", {
         className: bV,
         children: [e.workspaceName && jsxs("span", {
-          className: _$$s.colorTextSecondary.fontNormal.$,
+          className: cssBuilderInstance.colorTextSecondary.fontNormal.$,
           children: [e.workspaceName, " /", " "]
         }), e.teamName]
       }), jsx(gZ, {
@@ -250,11 +250,11 @@ export function $$D1(e) {
         })
       })]
     }) : jsxs("div", {
-      className: c()(_$$s.borderBox.$, a0),
+      className: c()(cssBuilderInstance.borderBox.$, a0),
       children: [jsxs("div", {
         className: bV,
         children: [e.workspaceName && jsxs("span", {
-          className: _$$s.colorTextSecondary.fontNormal.$,
+          className: cssBuilderInstance.colorTextSecondary.fontNormal.$,
           children: [e.workspaceName, " /", " "]
         }), e.teamName]
       }), e.onSeeAllClick && jsx("button", {
@@ -263,7 +263,7 @@ export function $$D1(e) {
         children: renderI18nText("whiteboard.inserts.see_all")
       })]
     }), jsx("div", {
-      className: _$$s.$$if(e.minimalSpacing, _$$s.px0.mb0, _$$s.px24.mb20).$,
+      className: cssBuilderInstance.$$if(e.minimalSpacing, cssBuilderInstance.px0.mb0, cssBuilderInstance.px24.mb20).$,
       children: e.children
     })]
   });
@@ -313,7 +313,7 @@ export function $$k3(e) {
   let W = B ? isLoading : isLoadingTeamTemplates;
   let K = B ? teamTemplates : templatesByTeam;
   return jsxs("div", {
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: [jsxs(AutoLayout, {
       horizontalAlignItems: "space-between",
       height: _$$k,
@@ -326,7 +326,7 @@ export function $$k3(e) {
       },
       strokeColor: "default",
       children: [jsx("div", {
-        className: _$$s.font13.fontMedium.$,
+        className: cssBuilderInstance.font13.fontMedium.$,
         children: renderI18nText("browse_templates_modal.published_by_current_org_name", {
           orgName: r.name
         })
@@ -345,7 +345,7 @@ export function $$k3(e) {
         showWorkspaces: a
       })]
     }), 0 === K.length ? B ? isLoading : W ? jsx(Kt, {}) : jsx(Ht, {}) : jsxs("section", {
-      className: _$$s.overflowYScroll.$,
+      className: cssBuilderInstance.overflowYScroll.$,
       ref: t,
       style: {
         height: `calc(100% - ${_$$k}px)`
@@ -385,7 +385,7 @@ export function $$k3(e) {
         }, t);
       }), jsx(_$$a, {
         "data-testid": "load-more-teams",
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         style: {
           bottom: "250px"
         },

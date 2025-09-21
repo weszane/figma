@@ -5,7 +5,7 @@ import { b } from "../905/22449";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { H } from "../905/286442";
 import { m as _$$m } from "../figma_app/175364";
 import { c as _$$c2 } from "../905/566438";
@@ -73,7 +73,7 @@ export function $$b2({
           value: e
         }), jsx("label", {
           htmlFor: e,
-          className: _$$s.noWrap.$,
+          className: cssBuilderInstance.noWrap.$,
           children: r
         })]
       })

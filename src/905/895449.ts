@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import a from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { p } from "../905/133304";
 import { _ } from "../905/614936";
 import { T } from "../905/172092";
@@ -14,14 +14,14 @@ export function $$u0(e) {
   return jsxs(T.Provider, {
     value: i,
     children: [jsxs("div", {
-      className: _$$s.flex.wFull.flexColumn.borderBox.$,
+      className: cssBuilderInstance.flex.wFull.flexColumn.borderBox.$,
       style: {
         width: e.width,
         height: e.height
       },
       "data-testid": e.dataTestId,
       children: [jsx("div", {
-        className: s()(_$$s.wFull.flex1.$, {
+        className: s()(cssBuilderInstance.wFull.flex1.$, {
           "module--bodyFontMedium--37-oM text--fontPos11--2LvXf text--_fontBase--QdLsd": e.bodyFontMedium
         }),
         children: jsx(_, {
@@ -47,25 +47,25 @@ export function $$u0(e) {
 (e => {
   e.Header = function (e) {
     return jsx("div", {
-      className: _$$s.relative.zIndex1.$,
+      className: cssBuilderInstance.relative.zIndex1.$,
       children: e.children
     });
   };
   e.Body = function (e) {
     return jsx("div", {
-      className: _$$s.flex1.relative.$,
+      className: cssBuilderInstance.flex1.relative.$,
       children: e.children
     });
   };
   e.Footer = function (e) {
     return jsx("div", {
-      className: _$$s.relative.zIndex1.$,
+      className: cssBuilderInstance.relative.zIndex1.$,
       children: e.children
     });
   };
   e.Stretch = forwardRef((e, t) => jsx("div", {
     ref: t,
-    className: _$$s.absolute.left0.right0.top0.bottom0.$,
+    className: cssBuilderInstance.absolute.left0.right0.top0.bottom0.$,
     children: e.children
   }));
 })($$u0 || ($$u0 = {}));

@@ -181,7 +181,7 @@ import { _ as _$$_, h as _$$h3 } from '../9410/755019';
 import { jx, Nd } from '../9410/793186';
 import { j as _$$j } from '../9410/853982';
 import { $_, e_ as _$$e_ } from '../9410/960980';
-import { s as _$$s3 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import _require2 from '../f2246930/661721';
 import _require from '../f2246930/661721';
 import { i as _$$i, s9 as _$$s2, si as _$$si, t4 as _$$t2, AM, bx, C9, d2, Dm, DT, J7, jQ, K9, ku, kX, LO, OI, Rb, SA, Sl, U3, V6, Vl, Vx, W_, wi, WJ, XX, Z7, Zn } from '../figma_app/8833';
@@ -1376,7 +1376,7 @@ class tk extends PureComponent {
         onClick: a,
         disabled: s,
         children: this.state.renamingLayersRunning ? renderI18nText('fullscreen.export.cancel') : jsxs('div', {
-          className: _$$s3.flex.flexRow.justifyCenter.gap8.$,
+          className: cssBuilderInstance.flex.flexRow.justifyCenter.gap8.$,
           children: [renderI18nText('fullscreen.context_menu.auto_rename_layers'), jsx(_$$y4, {
             helpUrlVariant: JT.AUTO_RENAME_LAYERS
           })]
@@ -2609,7 +2609,7 @@ function iV({
     separator: !0
   }, {
     render: () => jsxs('div', {
-      className: _$$s3.flex.itemsCenter.colorTextMenuSecondary.columnGap4.pl4.pb4.pr10.pt0.$,
+      className: cssBuilderInstance.flex.itemsCenter.colorTextMenuSecondary.columnGap4.pl4.pb4.pr10.pt0.$,
       children: [jsx(_$$V, {
         style: {
           '--color-icon': 'var(--color-text-menu-secondary)'
@@ -5429,7 +5429,7 @@ let aa = registerModal(({
     children: jsx(ConfirmationModal2, {
       confirmationTitle: jsxs('div', {
         children: [jsx('p', {
-          className: el()(_$$s3.fontSemiBold.font15.$, 'section_preset_picker--alertHeader--oa08R'),
+          className: el()(cssBuilderInstance.fontSemiBold.font15.$, 'section_preset_picker--alertHeader--oa08R'),
           children: renderI18nText('whiteboard.section_preset_picker.confirmation_modal.header')
         }), renderI18nText('whiteboard.section_preset_picker.confirmation_modal.description')]
       }),
@@ -6295,7 +6295,7 @@ function aQ({
   let [p, h] = useState(_$$Rs());
   return jsx(_$$P4, {
     autoFocus: !0,
-    autocompleteResultsClassName: _$$s3.maxW300.$,
+    autocompleteResultsClassName: cssBuilderInstance.maxW300.$,
     autocomplete: p,
     placeholder: getI18nString('fullscreen_actions.search_menus_commands_and_plugins'),
     onChange: t => {
@@ -6714,7 +6714,7 @@ function sn() {
             children: renderI18nText('keyboard_settings.custom_keyboard_shortcuts.add')
           })
         }), jsx(Spacer, {}), jsx(Badge, {
-          className: _$$s3.mt4.$,
+          className: cssBuilderInstance.mt4.$,
           text: 'Internal only - #feat-custom-keyboard-shortcuts',
           color: BadgeColor.WARNING,
           onClick: () => openWindow('https://figma.slack.com/archives/C055MQJ2E5P', '_blank')
@@ -6752,7 +6752,7 @@ function sn() {
           })
         })]
       }, `custom-shortcuts-${e}`)), e.step === 'ADDING_WAITING_FOR_ACTION_INPUT' && jsx('div', {
-        className: _$$s3.relative.mt4.$,
+        className: cssBuilderInstance.relative.mt4.$,
         children: jsx(aQ, {
           onAutocompleteChange: e => {
             let i = e.tokens[0];
@@ -6769,7 +6769,7 @@ function sn() {
           color: 'menu',
           children: EG(e.menuItem)
         }), jsx(Spacer, {}), jsx('div', {
-          className: _$$s3.py4.$,
+          className: cssBuilderInstance.py4.$,
           children: jsx('div', {
             className: el()(a4, a6),
             children: jsx(Button, {

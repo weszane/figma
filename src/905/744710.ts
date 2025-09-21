@@ -132,7 +132,7 @@ import { A as _$$A5 } from '../5724/501642';
 import { A as _$$A4 } from '../5724/663128';
 import { A as _$$A3 } from '../6041/209192';
 import { A as _$$A2 } from '../6828/523860';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
 import { lW } from '../figma_app/11182';
 import { yJ } from '../figma_app/24841';
@@ -300,7 +300,7 @@ function H(e) {
         hasTaxIdVerificationError: l
       })
     }), jsxs('div', {
-      className: _$$s.flex.flexColumn.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.$,
       children: [jsx(_$$C2, {
         shippingAddress: s,
         vatGstId: i
@@ -1957,7 +1957,7 @@ let iv = registerModal(e => {
           children: [jsx(TextWithTruncation, {
             children: renderI18nText('tokens.settings.dev_token_modal.description')
           }), jsx(BigTextInputForwardRef, {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             placeholder: getI18nString('tokens.settings.dev_token_modal.name_placeholder'),
             value: t,
             onChange: e => {
@@ -2151,7 +2151,7 @@ function iw(e) {
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': u,
         'data-tooltip-text-left': !0,
-        'className': _$$s.colorIcon.$,
+        'className': cssBuilderInstance.colorIcon.$,
         'children': jsx(_$$m, {})
       }), jsxs(AutoLayout, {
         direction: 'vertical',
@@ -2162,7 +2162,7 @@ function iw(e) {
           'data-tooltip-text-left': !0,
           'children': token.description
         }), jsx('div', {
-          className: _$$s.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: p
         })]
       })]
@@ -2211,7 +2211,7 @@ function iC(e) {
         })
       }), jsxs('div', {
         children: [jsx('button', {
-          className: _$$s.colorTextWarning.bgTransparent.cursorPointer.$,
+          className: cssBuilderInstance.colorTextWarning.bgTransparent.cursorPointer.$,
           onClick: () => {
             i(lW({
               stringToCopy: t.token || ''
@@ -2221,7 +2221,7 @@ function iC(e) {
         }), ' ', renderI18nText('tokens.settings.new_token_reminder')]
       })]
     }), jsx('button', {
-      'className': _$$s.h16.px2.bgTransparent.cursorPointer.$,
+      'className': cssBuilderInstance.h16.px2.bgTransparent.cursorPointer.$,
       'aria-label': getI18nString('general.close'),
       'onClick': () => {
         e.onClose(t.id);
@@ -2754,19 +2754,19 @@ function nn({
   let i = useCurrentPrivilegedPlan('EmailChangeWarning').unwrapOr(null);
   let n = i?.name;
   return t && n ? jsx('div', {
-    className: _$$s.flex.mt16.bRadius8.p16.colorBgDangerTertiary.flexColumn.$,
+    className: cssBuilderInstance.flex.mt16.bRadius8.p16.colorBgDangerTertiary.flexColumn.$,
     children: jsxs('div', {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx(SvgComponent, {
         svg: _$$A4,
-        className: _$$s.mb4.$
+        className: cssBuilderInstance.mb4.$
       }), jsx('div', {
-        className: _$$s.flex.itemsCenter.fontMedium.$,
+        className: cssBuilderInstance.flex.itemsCenter.fontMedium.$,
         children: renderI18nText('settings.account_setting.change_email_mfa_required_warning.title', {
           orgName: n
         })
       }), jsx('div', {
-        className: _$$s.colorTextSecondary.mt4.$,
+        className: cssBuilderInstance.colorTextSecondary.mt4.$,
         children: renderI18nText('settings.account_setting.change_email_mfa_required_warning.description', {
           orgName: n
         })
@@ -3649,7 +3649,7 @@ let rt = registerModal(e => {
               children: renderI18nText('settings.account_settings.file_view_history_modal.turn_off_description')
             }, (!0).toString())]
           }), jsx('div', {
-            className: _$$s.mt8.$,
+            className: cssBuilderInstance.mt8.$,
             children: d && jsx(_$$_2, {
               color: n === 'true' ? _$$S4.ERROR : _$$S4.INFORMATION,
               text: n === 'true' ? renderI18nText('settings.account_settings.file_view_history_modal.turn_off.change_only_applies_moving_forward') : renderI18nText('settings.account_settings.file_view_history_modal.turn_on.change_only_applies_moving_forward')
@@ -4420,7 +4420,7 @@ function rF({
               className: ee,
               children: renderI18nText('settings.account_settings.upgrade_figma_plan_reason')
             }), jsx('div', {
-              className: _$$s.mt16.$,
+              className: cssBuilderInstance.mt16.$,
               children: jsx($z, {
                 onClick: () => {
                   t(showModalHandler({
@@ -4548,10 +4548,10 @@ function rF({
         className: Z,
         children: renderI18nText('settings.account_settings.file_view_history')
       }), jsx('div', {
-        className: _$$s.mb12.$,
+        className: cssBuilderInstance.mb12.$,
         children: o ? renderI18nText('settings.account_settings.file_view_history_disabled_description', {
           off: jsx('span', {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: renderI18nText('settings.account_settings.file_view_history.off')
           }),
           learnMore: jsx(Link, {
@@ -4781,7 +4781,7 @@ let $$rB0 = registerModal(e => {
       children: jsxs('div', {
         className: 'account_settings_modal--backButton--miMJn text--fontPos13--xW8hS text--_fontBase--QdLsd',
         children: [jsx('span', {
-          className: _$$s.mr2.$,
+          className: cssBuilderInstance.mr2.$,
           children: jsx(IconButton, {
             'aria-label': getI18nString('general.back'),
             'onClick': v,

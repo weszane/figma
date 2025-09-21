@@ -13,7 +13,7 @@ import { XHR } from "../905/910117";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -251,12 +251,12 @@ function eb({
       children: [jsx(nl, {
         team: e
       }), jsxs("span", {
-        className: _$$s.maxWFull.$,
+        className: cssBuilderInstance.maxWFull.$,
         children: [jsx("span", {
-          className: _$$s.block.maxWFull.font14.fpl__textBodyLargeLineHeight.colorText.truncate.$,
+          className: cssBuilderInstance.block.maxWFull.font14.fpl__textBodyLargeLineHeight.colorText.truncate.$,
           children: e.name
         }), jsx("span", {
-          className: _$$s.block.font11.colorTextSecondary.ellipsis.$,
+          className: cssBuilderInstance.block.font11.colorTextSecondary.ellipsis.$,
           children: renderI18nText("checkout.org_select_teams_member_count", {
             count: e.numMembers
           })
@@ -275,7 +275,7 @@ function eC({
   return jsx(_$$x, {
     title: getI18nString("checkout.organization_details"),
     children: jsxs("div", {
-      className: _$$s.font13.$,
+      className: cssBuilderInstance.font13.$,
       children: [jsx(EnhancedInput, {
         htmlName: "legal_org_name",
         label: getI18nString("org_self_serve.details_step.legal_company_name"),
@@ -1020,11 +1020,11 @@ export class $$eM2 extends Component {
             orgDetails: this.state.orgDetails,
             onChangeFormInput: this.onChangeOrgDetails
           }), jsx("div", {
-            className: _$$s.pt24.$,
+            className: cssBuilderInstance.pt24.$,
             children: jsxs(_$$x, {
               title: getI18nString("checkout.payment_details"),
               children: [this.state.paymentError && jsx("div", {
-                className: _$$s.mb20.$,
+                className: cssBuilderInstance.mb20.$,
                 children: jsx(_$$_, {
                   color: _$$S.ERROR,
                   text: this.state.paymentError
@@ -1067,7 +1067,7 @@ export class $$eM2 extends Component {
       enabled: !this.state.loading,
       trackingOptions: getRumLoggingConfig(),
       children: [t !== OnboardingStepEnum.Confirmation && jsx("div", {
-        className: _$$s.sticky.top0.zIndexTopBar.selectNone.$,
+        className: cssBuilderInstance.sticky.top0.zIndexTopBar.selectNone.$,
         children: jsx(U, {
           currentStep: this.props.step,
           setStep: this.setStep,
@@ -1086,7 +1086,7 @@ export class $$eM2 extends Component {
           isCampfireCart: !0
         })
       }), jsxs("div", {
-        className: _$$s.selectNone.$,
+        className: cssBuilderInstance.selectNone.$,
         style: styleBuilderInstance.mxAuto.add({
           padding: "48px",
           maxWidth: "1400px"
@@ -1184,13 +1184,13 @@ export function $$eO0({
     }
   }(e);
   return t ? jsxs("div", {
-    className: _$$s.mb32.$,
+    className: cssBuilderInstance.mb32.$,
     "data-testid": "cart-org-header",
     children: [jsx("h2", {
-      className: _$$s.font15.lh24.fontMedium.$,
+      className: cssBuilderInstance.font15.lh24.fontMedium.$,
       children: t
     }), a && jsx("p", {
-      className: _$$s.colorTextSecondary.font13.mt8.$,
+      className: cssBuilderInstance.colorTextSecondary.font13.mt8.$,
       children: a
     }), UR() && jsx(_$$W, {
       billingPeriod: SubscriptionType.ANNUAL,

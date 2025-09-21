@@ -1,6 +1,6 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 export let $$s0 = ex("style_info", function (e) {
   let {
@@ -10,7 +10,7 @@ export let $$s0 = ex("style_info", function (e) {
     styleElementType
   } = e;
   return jsxs("div", {
-    className: s.alignLeft.$,
+    className: cssBuilderInstance.alignLeft.$,
     children: [styleName && jsx("div", {
       children: styleName
     }), styleElementType && jsx("div", {

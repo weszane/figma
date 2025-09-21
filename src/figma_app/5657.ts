@@ -4,7 +4,7 @@ import { setupThemeContext } from "../905/614223";
 import { Xr } from "../figma_app/27355";
 import o from "classnames";
 import { Spacing } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -44,8 +44,8 @@ function A(e) {
         spacing: 8,
         children: [jsx("div", {
           className: l()({
-            [_$$s.colorTextOnbrand.$]: t,
-            [_$$s.colorTextSecondary.$]: !t
+            [cssBuilderInstance.colorTextOnbrand.$]: t,
+            [cssBuilderInstance.colorTextSecondary.$]: !t
           }),
           children: e.lowerLeftText
         }), jsx(Spacer, {}), e.onSecondaryCtaClick && jsx(setupThemeContext, {
@@ -186,7 +186,7 @@ export function $$x0(e) {
       targetKey: e.targetKey,
       width: jK,
       children: [jsx("div", {
-        className: _$$s.overflowHidden.absolute.top0.left0.wFull.hFull.eventsNone.$,
+        className: cssBuilderInstance.overflowHidden.absolute.top0.left0.wFull.hFull.eventsNone.$,
         children: jsx("div", {
           className: "cursor_bot_tooltip--expandingBlue--7HBiv",
           ref: r

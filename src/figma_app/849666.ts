@@ -58,7 +58,7 @@ import { APILoadingStatus } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { registerModal } from "../905/102752";
 import { A as _$$A2, Uw, bO, JD } from "../905/219868";
@@ -232,7 +232,7 @@ let eE = registerModal(function (e) {
             },
             children: jsx(_$$x, {
               isLoading: !!u,
-              className: _$$s.flex.justifyCenter.$,
+              className: cssBuilderInstance.flex.justifyCenter.$,
               children: () => renderI18nText("google_device_try_file_modal.enter_email.button")
             })
           }), jsx(_$$k2, {

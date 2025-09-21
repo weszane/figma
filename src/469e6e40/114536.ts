@@ -40,7 +40,7 @@ import { B as _$$B } from '../4452/541264';
 import { v as _$$v } from '../4452/562448';
 import { cd, VU, zx } from '../4452/650793';
 import { m as _$$m } from '../4452/688074';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { DomainOrgAdminsToRemove, OrgDomainManagementPage, UnclaimedDomainUserView } from '../figma_app/43951';
 import { JR, Wi } from '../figma_app/162641';
 import { FOrganizationLevelType, FPlanFeatureType } from '../figma_app/191312';
@@ -68,7 +68,7 @@ function D() {
   return jsx('a', {
     target: '_blank',
     rel: 'noopener',
-    className: _$$s.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
     href: 'https://help.figma.com/hc/articles/360045953273',
     children: jsx(TextWithTruncation, {
       children: renderI18nText('general.learn_more')
@@ -191,7 +191,7 @@ function $(e) {
         }
       }));
     } : void 0,
-    className: _$$s.b1.bRadius8.colorBorder.p16.wFull.borderBox.bgTransparent.$,
+    className: cssBuilderInstance.b1.bRadius8.colorBorder.p16.wFull.borderBox.bgTransparent.$,
     children: jsxs(AutoLayout, {
       direction: 'horizontal',
       verticalAlignItems: 'center',
@@ -216,7 +216,7 @@ function $(e) {
           color: 'default',
           children: renderI18nText('domain_management.domain_capture.label')
         }), e.loadingStatus === 'loaded' && jsx('span', {
-          className: _$$s.alignLeft.$,
+          className: cssBuilderInstance.alignLeft.$,
           children: e.enabled ? jsx(TextWithTruncation, {
             color: 'secondary',
             children: renderI18nText('domain_management.domain_capture.domain_capture_enabled_body', {
@@ -294,13 +294,13 @@ function V(e) {
     a.current && clearTimeout(a.current);
   }, []);
   return jsx('div', {
-    className: _$$s.colorBgHover.minH32.wFull.$,
+    className: cssBuilderInstance.colorBgHover.minH32.wFull.$,
     children: jsxs(AutoLayout, {
       cornerRadius: 2,
       padding: 8,
       direction: 'vertical',
       children: [jsx('span', {
-        className: _$$s.breakWord.$,
+        className: cssBuilderInstance.breakWord.$,
         children: jsx(TextWithTruncation, {
           fontFamily: 'monospace',
           children: e.dnsToken
@@ -534,7 +534,7 @@ let Q = registerModal(e => {
           }) : jsx(TextWithTruncation, {
             children: renderI18nText('domain_management.add_domain_modal.body_text')
           }), jsx('div', {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             children: jsx(_$$e2, {
               TokenComponent: ee,
               addOnBlur: !0,
@@ -592,7 +592,7 @@ let Q = registerModal(e => {
 let Z = /^\b([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]\b$/;
 function ee(e) {
   return jsx('span', {
-    className: _$$s.breakWord.$,
+    className: cssBuilderInstance.breakWord.$,
     children: jsx(TextWithTruncation, {
       children: e.token.content
     })
@@ -640,7 +640,7 @@ function ea(e) {
     }));
   }, [t, e.domainCaptureEnabled, e.orgId, e.dnsToken, e.currentDomains, e.domainsRequireVerification]);
   return jsx('div', {
-    className: _$$s.bSolid.colorBorder.bb1.px32.mb16.pb24.$,
+    className: cssBuilderInstance.bSolid.colorBorder.bb1.px32.mb16.pb24.$,
     children: jsxs(AutoLayout, {
       horizontalAlignItems: 'space-between',
       verticalAlignItems: 'center',
@@ -740,7 +740,7 @@ function ek({
   });
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: _$$s.p16.pb8.flex.flexColumn.$,
+      className: cssBuilderInstance.p16.pb8.flex.flexColumn.$,
       children: y
     }), jsx(Cj, {
       actionBar(e) {
@@ -822,7 +822,7 @@ function eE({
         }
       }));
     },
-    className: _$$s.bgNone.colorTextBrand.cursorPointer.$,
+    className: cssBuilderInstance.bgNone.colorTextBrand.cursorPointer.$,
     children: jsx(TextWithTruncation, {
       children: renderI18nText('domain_insights.unclaimed_users.enable_domain_capture')
     })
@@ -836,21 +836,21 @@ function eC({
 }) {
   return jsxs('div', {
     children: [jsx('div', {
-      className: _$$s.textBodyMedium.p16.$,
+      className: cssBuilderInstance.textBodyMedium.p16.$,
       children: jsx(TextWithTruncation, {
         color: 'default',
         children: renderI18nText('domain_insights.unclaimed_users.description')
       })
     }), !a && jsxs('div', {
-      className: _$$s.bRadius4.colorBgBrandTertiary.pb12.pt8.pl8.ml16.mr16.$,
+      className: cssBuilderInstance.bRadius4.colorBgBrandTertiary.pb12.pt8.pl8.ml16.mr16.$,
       children: [s && jsxs(AutoLayout, {
         direction: 'horizontal',
         verticalAlignItems: 'start',
         children: [jsx('span', {
-          className: _$$s.ml2.p0.$,
+          className: cssBuilderInstance.ml2.p0.$,
           children: jsx(_$$b, {})
         }), jsx('span', {
-          className: _$$s.pt4.$,
+          className: cssBuilderInstance.pt4.$,
           children: jsx(TextWithTruncation, {
             color: 'default',
             children: renderI18nText('domain_insights.unclaimed_users.domain_capture_notice', {
@@ -869,7 +869,7 @@ function eC({
           verticalAlignItems: 'center',
           spacing: '5px',
           children: [jsx('span', {
-            className: _$$s.ml2.$,
+            className: cssBuilderInstance.ml2.$,
             children: jsx(_$$b, {})
           }), jsx(TextWithTruncation, {
             color: 'default',
@@ -877,7 +877,7 @@ function eC({
             children: renderI18nText('domain_insights.unclaimed_users.verify_domains_note')
           })]
         }), jsx('span', {
-          className: _$$s.ml32.mr16.$,
+          className: cssBuilderInstance.ml32.mr16.$,
           children: jsx(TextWithTruncation, {
             color: 'default',
             children: renderI18nText('domain_insights.unclaimed_users.verify_domains_note_body')
@@ -1280,14 +1280,14 @@ function eq({
 function e$(e) {
   let t = [{
     name: getI18nString('domain_management.column_header.name'),
-    className: _$$s.flex1.$,
+    className: cssBuilderInstance.flex1.$,
     cellComponent: e => jsx(TextWithTruncation, {
       children: e.domain
     }),
     getSortValue: e => e.domain
   }, {
     name: getI18nString('domain_management.column_header.status'),
-    className: _$$s.flex1.$,
+    className: cssBuilderInstance.flex1.$,
     cellComponent: t => function (e, t, a, s, i) {
       let r = e.verifiedAt ? jsx(_$$x, {
         style: {
@@ -1301,7 +1301,7 @@ function e$(e) {
       let l = e.verifiedAt ? jsx(TextWithTruncation, {
         children: renderI18nText('domain_management.domain_verified')
       }) : jsx('button', {
-        className: el()('org_domain_management_page_view--unverifiedHover--9SaqO', _$$s.colorTextTertiary.bgTransparent.$),
+        className: el()('org_domain_management_page_view--unverifiedHover--9SaqO', cssBuilderInstance.colorTextTertiary.bgTransparent.$),
         onClick: n => {
           n.stopPropagation();
           s(showModalHandler({
@@ -1321,7 +1321,7 @@ function e$(e) {
         verticalAlignItems: 'center',
         spacing: 4,
         children: [jsx('span', {
-          className: _$$s.ml2.$,
+          className: cssBuilderInstance.ml2.$,
           children: r
         }), l]
       });
@@ -1339,7 +1339,7 @@ function e$(e) {
         verticalAlignItems: 'center',
         spacing: 4,
         children: [e, jsx('span', {
-          className: _$$s.ml2.$,
+          className: cssBuilderInstance.ml2.$,
           children: jsx(_$$b, {
             'data-tooltip': getI18nString('domain_management.column_header.unclaimed_users_tooltip'),
             'data-tooltip-type': KindEnum.TEXT,
@@ -1349,13 +1349,13 @@ function e$(e) {
         })]
       });
     }(),
-    className: _$$s.flex1.$,
+    className: cssBuilderInstance.flex1.$,
     cellComponent: e => e.verifiedAt ? void 0 !== e.unclaimedUserCount ? jsx(TextWithTruncation, {
       children: renderI18nText('domain_management.unclaimed_user_count', {
         userCount: e.unclaimedUserCount ?? 0
       })
     }) : jsx(Wi, {
-      className: _$$s.h12.$,
+      className: cssBuilderInstance.h12.$,
       animationType: JR.SHIMMER
     }) : jsx(TextWithTruncation, {
       color: 'tertiary',
@@ -1364,7 +1364,7 @@ function e$(e) {
   }];
   let a = [...(e.orgDomains.some(e => !e.verifiedAt) ? [{
     name: 'verify-domain',
-    className: _$$s.minW200.alignRight.$,
+    className: cssBuilderInstance.minW200.alignRight.$,
     cellComponent: t => jsx(eF, {
       orgId: e.orgId,
       orgDomain: t,
@@ -1541,7 +1541,7 @@ function eB(e) {
         domain: e
       }) => e)
     }), jsx('div', {
-      className: _$$s.px32.$,
+      className: cssBuilderInstance.px32.$,
       children: jsxs(AutoLayout, {
         spacing: 0,
         direction: 'vertical',

@@ -35,7 +35,7 @@ import { analyticsEventManager } from "../905/449184";
 import { n2 } from "../figma_app/478006";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/46262";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { w as _$$w } from "../905/281010";
 import { rq } from "../905/425180";
@@ -215,7 +215,7 @@ function J({
     arrowPosition: F_.TOP,
     clickOutsideToHide: !0,
     description: jsx("div", {
-      className: _$$s.pr16.$,
+      className: cssBuilderInstance.pr16.$,
       children: getI18nString("fullscreen.toolbar.if_you_re_still_waiting_to_edit_you_can_send_your_admins_a_reminder_to_review_your_request")
     }),
     disableHighlight: !0,
@@ -260,7 +260,7 @@ function Z(e) {
   return jsx(TrackingProvider, {
     name: e0.REQUEST_SENT_NUDGE_STATUS,
     children: jsxs("div", {
-      className: _$$s.relative.$,
+      className: cssBuilderInstance.relative.$,
       onMouseEnter: () => !a && requestCanBeNudged ? s(!0) : null,
       children: [jsx(e6, {
         disabled: !0,

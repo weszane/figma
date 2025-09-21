@@ -6,7 +6,7 @@ import { r as _$$r } from "../905/571562";
 import { WorkspaceType } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Te } from "../1250/12342";
@@ -72,7 +72,7 @@ export function $$v0({
   }
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.absolute.w8.h8.$,
+      className: cssBuilderInstance.absolute.w8.h8.$,
       ref: dropdownTargetRef,
       style: {
         bottom: `${I}px`,

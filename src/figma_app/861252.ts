@@ -15,7 +15,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/335032";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
@@ -69,7 +69,7 @@ let O = memo(function ({
     children: jsxs("div", {
       "data-onboarding-key": _$$q,
       className: p()("zoom_menu--zoomControls--Ob0t9", {
-        [_$$s.opacity0_3.eventsNone.$]: s
+        [cssBuilderInstance.opacity0_3.eventsNone.$]: s
       }),
       children: [jsx(L, {
         recordingKey: e,

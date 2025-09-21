@@ -7,7 +7,7 @@ import { Button } from "../905/521428";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { C as _$$C, wR } from "../905/346715";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -51,9 +51,9 @@ function G({
     name: e.name || ""
   });
   let d = jsx("div", {
-    className: _$$s.flex.flexColumn.itemsCenter.py2.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.py2.$,
     children: jsx("div", {
-      className: _$$s.colorBorder.bSolid.bt1.wFull.$
+      className: cssBuilderInstance.colorBorder.bSolid.bt1.wFull.$
     })
   });
   let c = useSubscription(DestinationProjectsForTeam, {
@@ -64,10 +64,10 @@ function G({
   let u = useMemo(() => c.data ? getResourceDataOrFallback(c.data.team?.allActiveProjects) : void 0, [c]);
   let h = "loaded" !== c.status;
   let g = u?.length === 0 ? jsx("div", {
-    className: _$$s.h300.flex.justifyCenter.itemsCenter.colorTextSecondary.$,
+    className: cssBuilderInstance.h300.flex.justifyCenter.itemsCenter.colorTextSecondary.$,
     children: renderI18nText("file_browser.file_move.no_projects_in_this_team")
   }) : u?.map(e => jsx("div", {
-    className: _$$s.my6.wFull.$,
+    className: cssBuilderInstance.my6.wFull.$,
     children: jsx(_$$o, {
       folderId: e.id || "",
       folderName: e.name || "",
@@ -101,10 +101,10 @@ function G({
     }, `all-team-${e.id}}`))
   });
   return jsxs("div", {
-    className: _$$s.h400.$,
+    className: cssBuilderInstance.h400.$,
     children: [s && jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s.px12.py8.$,
+        className: cssBuilderInstance.px12.py8.$,
         children: jsxs("div", {
           className: Yf,
           children: [jsx(ButtonPrimitive, {
@@ -118,17 +118,17 @@ function G({
             children: [jsx(TextWithTruncation, {
               children: "/"
             }), jsx("div", {
-              className: _$$s.ml6.mr6.ellipsis.noWrap.overflowHidden.$,
+              className: cssBuilderInstance.ml6.mr6.ellipsis.noWrap.overflowHidden.$,
               children: o?.name
             })]
           })]
         })
       }), d]
     }), jsx("div", {
-      className: _$$s.py8.$,
+      className: cssBuilderInstance.py8.$,
       children: jsx(_$$P, {
         children: o ? h ? jsx("div", {
-          className: _$$s.h350.$,
+          className: cssBuilderInstance.h350.$,
           children: jsx(LoadingOverlay, {})
         }) : jsxs(Fragment, {
           children: [jsx(_$$S2, {
@@ -273,11 +273,11 @@ let z = registerModal(function (e) {
       children: [!B?.length && jsxs("div", {
         className: Al,
         children: [renderI18nText("file_browser.file_move.no_project_or_team_results_matching_query"), jsx("br", {}), jsx("span", {
-          className: _$$s.fontBold.ml2.$,
+          className: cssBuilderInstance.fontBold.ml2.$,
           children: _ || ""
         })]
       }), B?.map(e => jsx("div", {
-        className: _$$s.my6.wFull.$,
+        className: cssBuilderInstance.my6.wFull.$,
         children: jsx(_$$o, {
           canDisableForConnectedProject: !0,
           checked: !!c && c.id === e.model.id,
@@ -321,9 +321,9 @@ let z = registerModal(function (e) {
         }), jsxs(DialogBody, {
           padding: 0,
           children: [ei, jsx("div", {
-            className: _$$s.h400.$,
+            className: cssBuilderInstance.h400.$,
             children: er ? jsx("div", {
-              className: _$$s.hFull.$,
+              className: cssBuilderInstance.hFull.$,
               children: jsx(LoadingOverlay, {})
             }) : B ? en : jsx(G, {
               currentPlan: H,
@@ -369,7 +369,7 @@ export let $$W0 = registerModal(function (e) {
         }), jsxs(DialogBody, {
           padding: 0,
           children: [A && jsx("div", {
-            className: _$$s.mb12.$,
+            className: cssBuilderInstance.mb12.$,
             children: jsx(_$$_, {
               dataTestId: "resource-connect-warning-banner",
               color: _$$S.WARNING,

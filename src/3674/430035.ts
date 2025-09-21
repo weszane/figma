@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { DialogLabel } from "../905/799737";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { M, n as _$$n } from "../3674/214307";
 import { BC } from "../3674/61752";
@@ -66,7 +66,7 @@ function N() {
     plan
   } = getPlanAndPlanUser(FProductAccessType.DEV_MODE);
   return [_$$J.ADMIN_AUTO_PATHWAY, _$$J.AUTO_PATHWAY].includes(n) ? jsx("div", {
-    className: _$$s.alignCenter.colorTextSecondary.mt16.$,
+    className: cssBuilderInstance.alignCenter.colorTextSecondary.mt16.$,
     children: jsx("span", {
       children: renderI18nText("auto_upgrade_confirmation.dev_mode.body", {
         planName: plan?.name

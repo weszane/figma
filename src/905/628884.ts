@@ -7,7 +7,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { Xr, atomStoreManager } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cP, Xi, mj } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
@@ -98,7 +98,7 @@ export function $$k0({
             gap: 4,
             align: "center",
             children: [av(e), jsx("span", {
-              className: _$$s.textBodyMediumStrong.$,
+              className: cssBuilderInstance.textBodyMediumStrong.$,
               children: i
             })]
           }), jsx(B, {
@@ -122,7 +122,7 @@ export function $$k0({
               }],
               variant: "secondary",
               children: jsx("span", {
-                className: _$$s.textBodyMediumStrong.$,
+                className: cssBuilderInstance.textBodyMediumStrong.$,
                 children: renderI18nText("magic_link.remove")
               })
             })

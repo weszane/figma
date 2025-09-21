@@ -8,7 +8,7 @@ import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { e as _$$e, v as _$$v } from "../642/135773";
 import { o as _$$o2 } from "../905/96108";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { TI } from "../905/713722";
@@ -102,7 +102,7 @@ function D({
   ...n
 }) {
   return jsx(ButtonPrimitive, {
-    className: _$$s.hFull.px4.bgTransparent.$,
+    className: cssBuilderInstance.hFull.px4.bgTransparent.$,
     onClick: t => {
       t.stopPropagation();
       t.preventDefault();
@@ -242,7 +242,7 @@ function B({
         recordingKey: C,
         "aria-label": getI18nString("slides.properties_panel.color_picker.open.aria_label"),
         children: jsxs("span", {
-          className: _$$s.pl4.inlineFlex.gap6.overflowHidden.$,
+          className: cssBuilderInstance.pl4.inlineFlex.gap6.overflowHidden.$,
           children: [A, !i && E ? jsx(K, {
             variableId: E,
             fallbackText: M()
@@ -260,7 +260,7 @@ function K({
 }) {
   let s = _$$u(e);
   return jsx(_$$o2, {
-    lastClassName: _$$s.overflowHidden.noWrap.ellipsis.$,
+    lastClassName: cssBuilderInstance.overflowHidden.noWrap.ellipsis.$,
     text: s?.name ?? t
   });
 }

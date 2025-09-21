@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { R as _$$R } from "../905/304671";
@@ -88,7 +88,7 @@ export function $$D0({
       selectedTab: getGroupOrDefault(GroupType.MEMBERS)
     })) : t(selectViewAction(o0)));
   });
-  let $ = _$$s.wFull.flex.justifyBetween.px16.py24.$;
+  let $ = cssBuilderInstance.wFull.flex.justifyBetween.px16.py24.$;
   if (!a || !D || T) return null;
   let B = U ? R ? e === FRequestsStr.ALL_REQUESTS ? jsx(_$$l, {
     plan: R,
@@ -120,7 +120,7 @@ export function $$D0({
       spacing: 16,
       direction: "vertical",
       children: jsx("div", {
-        className: _$$s.mb16.$,
+        className: cssBuilderInstance.mb16.$,
         children: jsx(O, {
           org: a,
           isOrgAdmin: T

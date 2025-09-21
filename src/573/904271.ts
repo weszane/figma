@@ -126,7 +126,7 @@ import { eT as _$$eT } from "../figma_app/116234";
 import { rp, PI, A5, rj } from "../figma_app/703988";
 import { AD, iE, QX, Gr, HR, Bm, UU, OW, Md, Rm, Ki } from "../figma_app/645801";
 import { A as _$$A3 } from "../1617/775065";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { BS, T as _$$T3, FX as _$$FX, Nz, cP, uY } from "../figma_app/475869";
@@ -674,12 +674,12 @@ class tK extends Component {
           className: s,
           children: this.props.title
         }), sF(this.props.subscribedLibraryKey) && jsx("div", {
-          className: _$$s2.flex.alignCenter.justifyCenter.ml4.$,
+          className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
           children: jsx(KP, {
             libraryKey: this.props.subscribedLibraryKey
           })
         }), (hasResourcePresetKeyStatic(this.props.subscribedLibraryKey) || isKeyInQNOrR9(this.props.subscribedLibraryKey)) && jsx("div", {
-          className: _$$s2.flex.alignCenter.justifyCenter.ml4.$,
+          className: cssBuilderInstance.flex.alignCenter.justifyCenter.ml4.$,
           children: jsx(_$$E2, {
             libraryKey: this.props.subscribedLibraryKey,
             showTooltip: !0,

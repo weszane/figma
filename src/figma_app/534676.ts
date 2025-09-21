@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import i from "classnames";
 import { isAnyMobile } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getSubscriptionPriceString } from "../figma_app/808294";
 import { KindEnum } from "../905/129884";
@@ -24,7 +24,7 @@ export function $$f1({
     children: isAnyMobile ? a : jsx(m_, {
       preview: i,
       children: jsxs("div", {
-        className: _$$s.flex.$,
+        className: cssBuilderInstance.flex.$,
         children: [jsx("div", {
           className: "small" === r ? m : h,
           children: a

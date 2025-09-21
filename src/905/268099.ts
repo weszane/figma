@@ -3,7 +3,7 @@ import { e as _$$e } from "../905/295932";
 import a from "classnames";
 import { AT } from "../905/672745";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W } from "../905/95038";
 import { x } from "../905/98916";
@@ -32,27 +32,27 @@ export function $$g0(e) {
     "data-tooltip-timeout-delay": 100,
     "data-tooltip-max-width": 250,
     children: [jsx(_$$e, {
-      className: _$$s.p8.mr4.minW24.minH24.colorIcon.$
+      className: cssBuilderInstance.p8.mr4.minW24.minH24.colorIcon.$
     }), jsxs("div", {
-      className: _$$s.alignLeft.minW0.mr6.$,
+      className: cssBuilderInstance.alignLeft.minW0.mr6.$,
       children: [jsxs("div", {
-        className: _$$s.flex.alignCenter.gap6.$,
+        className: cssBuilderInstance.flex.alignCenter.gap6.$,
         children: [jsx("div", {
-          className: _$$s.ellipsis.noWrap.overflowHidden.$,
+          className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
           children: e.folderName
         }), e.isCurrentFolder ? jsx(Badge, {
           color: BadgeColor.INFORMATIONAL,
           text: getI18nString("file_browser.file_move.current_location"),
-          className: _$$s.eventsNone.flexShrink0.$
+          className: cssBuilderInstance.eventsNone.flexShrink0.$
         }) : e.isConnectedProject && g ? jsx("div", {
-          className: _$$s.eventsNone.flex.alignCenter.gap4.$,
+          className: cssBuilderInstance.eventsNone.flex.alignCenter.gap4.$,
           children: jsx(W, {
             hostPlanName: g.hostPlanName,
             connectedPlanName: g.connectedPlanName
           })
         }) : null]
       }), jsxs("span", {
-        className: s()(_$$s.colorTextSecondary.$, _$$s.noWrap.flex.pre.$),
+        className: s()(cssBuilderInstance.colorTextSecondary.$, cssBuilderInstance.noWrap.flex.pre.$),
         children: [e.teamName && jsx("div", {
           className: Ps,
           children: e.teamName

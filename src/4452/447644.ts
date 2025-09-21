@@ -19,7 +19,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -758,7 +758,7 @@ export function $$e$0({
     {
       let t = e.billableProductKey;
       return jsxs("div", {
-        className: _$$s2.flex.gap8.itemsCenter.$,
+        className: cssBuilderInstance.flex.gap8.itemsCenter.$,
         children: [jsx(_$$B, {
           type: t,
           size: "24"
@@ -799,7 +799,7 @@ export function $$e$0({
     cellComponent: e => jsx(_$$G, {
       text: e.message ?? "",
       showTooltip: _$$i.NEVER,
-      className: _$$s2.colorTextSecondary.$
+      className: cssBuilderInstance.colorTextSecondary.$
     })
   }], [t2, t8, t3]);
   let t9 = e => {
@@ -811,7 +811,7 @@ export function $$e$0({
     return jsxs("div", {
       role: "button",
       tabIndex: 0,
-      className: _$$s2.flex.gap8.itemsCenter.font11.fontMedium.lh16.mr8.py4.px8.$$if(ti === a, _$$s2.colorText.bRadius5.colorBgPressed, _$$s2.colorTextSecondary).$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.font11.fontMedium.lh16.mr8.py4.px8.$$if(ti === a, cssBuilderInstance.colorText.bRadius5.colorBgPressed, cssBuilderInstance.colorTextSecondary).$,
       onClick: () => {
         tl(a);
         td(a);
@@ -835,7 +835,7 @@ export function $$e$0({
     });
   };
   let ae = jsxs("div", {
-    className: _$$s2.flex.columnGap8.pl16.$,
+    className: cssBuilderInstance.flex.columnGap8.pl16.$,
     children: [tp && t && jsx(_$$eS, {}), (!tp || t) && jsxs(Fragment, {
       children: [jsx(Rj, {
         planId: $,
@@ -881,7 +881,7 @@ export function $$e$0({
     })]
   });
   let at = jsx("div", {
-    className: _$$s2.h32.cursorDefault.selectNone.$,
+    className: cssBuilderInstance.h32.cursorDefault.selectNone.$,
     children: jsxs(AutoLayout, {
       spacing: 0,
       children: [jsx(AutoLayout, {
@@ -913,7 +913,7 @@ export function $$e$0({
         defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.user_type_default"),
         filterLabel: renderI18nText("admin_dashboard.requests.filter.user_type", {
           selectedUserTypeFilter: jsx("span", {
-            className: _$$s2.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: tK(tc)
           })
         }),
@@ -935,7 +935,7 @@ export function $$e$0({
         defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.seat_type_default"),
         filterLabel: renderI18nText("admin_dashboard.requests.filter.seat_type", {
           selectedSeatTypeFilter: jsx("span", {
-            className: _$$s2.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: _$$tI(eq ?? ViewAccessTypeEnum.VIEW)
           })
         }),
@@ -957,7 +957,7 @@ export function $$e$0({
         defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.billing_group_default"),
         filterLabel: renderI18nText("admin_dashboard.requests.filter.billing_group", {
           selectedBillingGroupFilter: jsx("span", {
-            className: _$$s2.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: to === V7.ALL_ORG_REQUESTS || to === V7.ALL_MANAGED_REQUESTS ? getI18nString("admin_dashboard.requests.from_all") : to === V7.ALL_UNASSIGNED_REQUESTS ? getI18nString("admin_dashboard.requests.from_unassigned") : tm.find(e => e.id === to).name
           })
         }),
@@ -1005,12 +1005,12 @@ export function $$e$0({
       title: getI18nString("admin_dashboard.requests.seat_title"),
       rightActions: !tR || tm.length < 1 ? ae : void 0
     }), jsx("div", {
-      className: u()(M2, _$$s2.$$if(!tR || 0 === tm.length, _$$s2.pt4, _$$s2.pt12).$),
+      className: u()(M2, cssBuilderInstance.$$if(!tR || 0 === tm.length, cssBuilderInstance.pt4, cssBuilderInstance.pt12).$),
       children: jsx(Cj, {
         actionBar: "approving_all" === e$ ? void 0 : t => tG ? jsx("div", {
-          className: _$$s2.w150.$,
+          className: cssBuilderInstance.w150.$,
           children: jsx(Wi, {
-            className: _$$s2.h12.w150.$,
+            className: cssBuilderInstance.h12.w150.$,
             animationType: JR.SHIMMER_ON_MENU
           })
         }) : jsx("div", {
@@ -1070,7 +1070,7 @@ export function $$e$0({
         disabled: !!e$,
         emptyContent: (c = 0 === eC.length && null === eq && to === ti && null === tc ? jsxs(Fragment, {
           children: [jsx("div", {
-            className: _$$s2.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
+            className: cssBuilderInstance.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
             children: renderI18nText(tC && tk ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.no_requests_to_approve")
           }), jsx("div", {
             style: styleBuilderInstance.add({
@@ -1079,10 +1079,10 @@ export function $$e$0({
             children: tC ? tC === UpgradeRequestSetting.MEMBERS ? renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.members") : renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.all_users") : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
           })]
         }) : eC.length > 0 && null === eq && to === ti && null === tc ? jsx("div", {
-          className: _$$s2.lh16.cursorDefault.colorText.$,
+          className: cssBuilderInstance.lh16.cursorDefault.colorText.$,
           children: renderI18nText("admin_dashboard.requests.empty.no_search_results")
         }) : jsx("div", {
-          className: _$$s2.lh16.cursorDefault.colorText.$,
+          className: cssBuilderInstance.lh16.cursorDefault.colorText.$,
           children: renderI18nText("admin_dashboard.requests.empty.no_filter_results", {
             resetFiltersLink: jsx(SecureLink, {
               trusted: !0,

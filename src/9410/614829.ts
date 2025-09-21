@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useIsFullscreenOverview } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
@@ -91,7 +91,7 @@ export function $$v0({
         })]
       })
     }), !e && jsx("div", {
-      className: _$$s.flex.relative.mr8.justifyEnd.itemsCenter.$,
+      className: cssBuilderInstance.flex.relative.mr8.justifyEnd.itemsCenter.$,
       children: D ? jsx(_$$t, {
         recordingKey: j
       }) : jsx(_$$i, {

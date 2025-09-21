@@ -22,7 +22,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { P as _$$P } from "../905/347284";
 import { ne } from "../figma_app/563413";
 import { SvgComponent, V as _$$V } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -556,7 +556,7 @@ function eL({
           onUpsellCtaClick: to
         })
       }), !!P && null != selectedFontBeforePreviews && jsx("div", {
-        className: _$$s.bt1.bSolid.colorBorder.p8.$,
+        className: cssBuilderInstance.bt1.bSolid.colorBorder.p8.$,
         children: jsx(ButtonWide, {
           variant: "secondary",
           onClick: () => {
@@ -858,10 +858,10 @@ function eG({
     },
     spacing: "12px",
     children: [jsx(SvgComponent, {
-      className: _$$s.colorIcon.$,
+      className: cssBuilderInstance.colorIcon.$,
       svg: a
     }), jsx("p", {
-      className: _$$s.px4.alignCenter.$,
+      className: cssBuilderInstance.px4.alignCenter.$,
       children: r
     }), e ? o : s]
   });
@@ -876,12 +876,12 @@ function ez({
       top: 24
     },
     children: [jsx("div", {
-      className: _$$s.wFull.h2.colorBgTertiary.$
+      className: cssBuilderInstance.wFull.h2.colorBgTertiary.$
     }), jsxs(AutoLayout, {
       spacing: 8,
       verticalAlignItems: "center",
       children: [jsx(SvgComponent, {
-        className: _$$s.colorIcon.$,
+        className: cssBuilderInstance.colorIcon.$,
         svg: _$$A6
       }), jsx("div", {
         children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text")

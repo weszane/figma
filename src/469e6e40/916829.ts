@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { Link } from "../905/438674";
 import { formatList } from "../figma_app/930338";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { tI } from "../figma_app/599327";
@@ -42,15 +42,15 @@ function k(e) {
       title: getI18nString("members_table.true_up.freeze_invoice_checkbox_title"),
       disableClickOutsideToHide: !0,
       children: jsxs("div", {
-        className: _$$s.lh16.font11.$,
+        className: cssBuilderInstance.lh16.font11.$,
         children: [a && jsxs(Fragment, {
           children: [jsx("p", {
-            className: _$$s.mb8.$,
+            className: cssBuilderInstance.mb8.$,
             children: renderI18nText("members_table.true_up.freeze_invoice_billing_group_info")
           }), jsx("div", {
-            className: _$$s.maxH300.overflowAuto.$,
+            className: cssBuilderInstance.maxH300.overflowAuto.$,
             children: jsx("ul", {
-              className: _$$s.ml16.mb8.$,
+              className: cssBuilderInstance.ml16.mb8.$,
               children: e.groupsToReview.map(t => {
                 let a = e.licenseGroupUrls?.[t.id];
                 return jsxs("li", {
@@ -63,7 +63,7 @@ function k(e) {
                     trusted: !0,
                     children: t.name
                   }) : t.name, " ", !t.is_orphaned && e.showAdminEmails && jsx("span", {
-                    className: _$$s.colorTextSecondary.$,
+                    className: cssBuilderInstance.colorTextSecondary.$,
                     children: "(" + formatList(t.admin_users_metadata.map(e => e.email || "")) + ")"
                   })]
                 }, t.id);
@@ -71,11 +71,11 @@ function k(e) {
             })
           })]
         }), jsx("p", {
-          className: _$$s.mb8.mt8.$,
+          className: cssBuilderInstance.mb8.mt8.$,
           "data-testid": "freeze-invoice-copy",
           children: e.copy
         }), jsx("div", {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           "data-testid": "freeze-invoice-details",
           children: e.details
         })]
@@ -118,10 +118,10 @@ export let $$E0 = registerModal(function (e) {
     planInvoiceId: e.invoice.id,
     details: jsxs(Fragment, {
       children: [jsx("p", {
-        className: _$$s.mt16.mb8.$,
+        className: cssBuilderInstance.mt16.mb8.$,
         children: r ? getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.true_up") : getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.annual")
       }), jsx("ul", {
-        className: _$$s.ml16.$,
+        className: cssBuilderInstance.ml16.$,
         children: a.sort(compareProductAccessTypes).map(e => {
           let t = tI(e);
           let a = y[e] ?? 0;

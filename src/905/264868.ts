@@ -5,7 +5,7 @@ import { atom, Xr } from "../figma_app/27355";
 import o from "classnames";
 import { logError } from "../905/714362";
 import { V } from "../figma_app/385855";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { E as _$$E, N as _$$N } from "../905/139531";
 import { xn, rR } from "../905/708693";
 var l = o;
@@ -84,7 +84,7 @@ let $$g0 = forwardRef(({
       return i;
     });
   }), [M, e, L]), T) ? jsx("div", {
-    className: l()(_$$s.hFull.wFull.$, xn),
+    className: l()(cssBuilderInstance.hFull.wFull.$, xn),
     ref: A,
     onMouseMove: O,
     onMouseEnter: () => {
@@ -94,7 +94,7 @@ let $$g0 = forwardRef(({
     onDragStart: D,
     children: jsxs("div", {
       ref: C,
-      className: _$$s.hFull.wFull.$,
+      className: cssBuilderInstance.hFull.wFull.$,
       children: [jsx("div", {
         "data-onboarding-key": M ? "scrubbable-thumbnail" : void 0,
         className: rR
@@ -115,7 +115,7 @@ let $$g0 = forwardRef(({
         e.target.style.opacity = "1";
       }, 200);
     } : void 0,
-    className: _$$s.hFull.wFull.$,
+    className: cssBuilderInstance.hFull.wFull.$,
     children: jsx(V, {
       thumbnailUrl: e,
       thumbnailType: i,

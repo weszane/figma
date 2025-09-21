@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { H8 } from "../905/590952";
@@ -26,7 +26,7 @@ export function $$p0({
     dataTestId: p,
     children: [jsxs(AutoLayout, {
       children: [jsx("div", {
-        className: _$$s.$$with({
+        className: cssBuilderInstance.$$with({
           opacity0_5: isPending
         }).$,
         children: jsx(H8, {

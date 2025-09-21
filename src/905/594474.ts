@@ -58,7 +58,7 @@ import { A as _$$A8 } from "../905/552947";
 import { gG, ic as _$$ic } from "../905/702716";
 import { u as _$$u } from "../905/952696";
 import { K as _$$K } from "../figma_app/364226";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getPluginWidgetLabel, mapFileTypeToEnum } from "../figma_app/471982";
 import { LG, WN, wC, bx } from "../905/448440";
 import { A as _$$A9 } from "../905/562488";
@@ -489,7 +489,7 @@ function ew({
   let i = Lz(t, !1);
   let r = LG(t.deps.existingExtension);
   return jsx("div", {
-    className: _$$s.pt8.pb8.$,
+    className: cssBuilderInstance.pt8.pb8.$,
     children: jsx(_$$A9, {
       resourceType: getPluginWidgetLabel(e),
       isSubscription: i,
@@ -815,7 +815,7 @@ let eX = forwardRef(function ({
       "Backspace" === e.key && (i?.(), deleteIcon?.(), e.preventDefault());
     },
     children: [jsx("input", {
-      className: _$$s.hidden.$,
+      className: cssBuilderInstance.hidden.$,
       type: "file",
       ref: m,
       accept: CW.join(", "),
@@ -1344,7 +1344,7 @@ let tP = forwardRef(function ({
           t && (i?.(), setSnapshotFromFile(t), e.preventDefault());
         },
         children: [jsx("input", {
-          className: _$$s.hidden.$,
+          className: cssBuilderInstance.hidden.$,
           type: "file",
           ref: p,
           accept: IMAGE_TYPES.PNG,

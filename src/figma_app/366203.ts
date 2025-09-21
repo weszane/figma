@@ -10,7 +10,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { colorToHexString } from "../figma_app/191804";
 import { generateUUIDv4 } from "../905/871474";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
@@ -150,7 +150,7 @@ export function $$W3() {
       children: e
     }) {
       return jsx("div", {
-        className: _$$s.flex.flexRow.itemsCenter.itemsStart.h32.my4.px4.bb1.bSolid.colorBorderMenu.$,
+        className: cssBuilderInstance.flex.flexRow.itemsCenter.itemsStart.h32.my4.px4.bb1.bSolid.colorBorderMenu.$,
         children: jsx(_$$b, {
           value: w,
           onChange: D,
@@ -236,7 +236,7 @@ export function $$W3() {
       };
       return S && "divider" !== e ? jsx(_$$c, {
         icon: jsx(SvgComponent, {
-          className: _$$s.colorIconOnbrand.$,
+          className: cssBuilderInstance.colorIconOnbrand.$,
           svg: X(e, c, p, y)
         }),
         value: G(e),

@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { KJ, $T, Vx, V0 } from "../905/657710";
 import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
@@ -611,7 +611,7 @@ export function $$eD0(e) {
     disabled: e.sortControlsDisabled
   }, "search-view-bar-search-sort-dropdown");
   let U = jsx("div", {
-    className: _$$s.flex.itemsCenter.mlAuto.$,
+    className: cssBuilderInstance.flex.itemsCenter.mlAuto.$,
     children: jsx(eP, {
       searchModelType: h,
       disabled: e.sortControlsDisabled
@@ -646,7 +646,7 @@ export function $$eD0(e) {
   }, "search-view-bar-space-facet-dropdown");
   let H = d && 1 === d.value[FolderType.ORG].length ? d.value[FolderType.ORG][0].id : void 0;
   let W = [B, V, G, z, I && jsx("div", {
-    className: _$$s.flex.itemsCenter.mlAuto.$,
+    className: cssBuilderInstance.flex.itemsCenter.mlAuto.$,
     children: jsx(em, {
       sortControlsDisabled: e.sortControlsDisabled,
       workspaceFilter: i.workspaceFilter,

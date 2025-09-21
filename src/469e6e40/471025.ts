@@ -13,7 +13,7 @@ import { useDebounce } from 'use-debounce';
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { B } from "../905/261906";
@@ -59,7 +59,7 @@ function C(e) {
       ...getTriggerProps(),
       className: "x9f619 xfj9a5l x17fksa9 x186i4p8",
       children: jsxs("div", {
-        className: _$$s.flex.itemsCenter.gap4.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.$,
         children: [jsx(Badge, {
           text: g.toLocaleString(),
           size: BadgeSize.LARGE,

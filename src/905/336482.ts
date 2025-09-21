@@ -87,7 +87,7 @@ import { t as _$$t3 } from "../905/104116";
 import { P as _$$P } from "../905/19648";
 import { $ as _$$$ } from "../905/410306";
 import { H as _$$H2 } from "../905/367945";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { A as _$$A8 } from "../905/172237";
 import { r as _$$r4 } from "../905/783627";
 import { x as _$$x } from "../905/956141";
@@ -855,7 +855,7 @@ function eY({
     existingResourceContent
   } = t.deps;
   return hasClientMeta(existingResourceContent) ? jsx("div", {
-    className: _$$s.pt8.pb8.$,
+    className: cssBuilderInstance.pt8.pb8.$,
     children: jsx(_$$A8, {
       pagesList: e,
       isFirstTimePublish: !existingResourceContent,
@@ -870,7 +870,7 @@ function e0({
   return Zc(e) || t === FTemplateCategoryType.PROTOTYPE ? jsx(_$$A9, {
     label: getI18nString("community.publishing.prototype_preview"),
     children: jsxs("div", {
-      className: _$$s.flex.itemsCenter.gap8.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap8.$,
       children: [jsx(_$$d, {
         label: jsx(HiddenLabel, {
           children: getI18nString("community.publishing.include_prototypes_in_thumbnail")

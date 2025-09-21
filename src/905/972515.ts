@@ -41,7 +41,7 @@ import { dP, M3 } from "../figma_app/119475";
 import { vq } from "../905/8732";
 import { ButtonPrimitive } from "../905/632989";
 import { ph } from "../figma_app/709893";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Qx } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { getVisibleTheme } from "../905/640017";
@@ -410,9 +410,9 @@ let el = memo(function (e) {
     children: jsxs(Label, {
       htmlAttributes: j,
       htmlFor: $,
-      className: f()(_$$s.flex.$, {
-        [_$$s.flexColumn.$]: !V,
-        [_$$s.wFull.itemsCenter.$]: V
+      className: f()(cssBuilderInstance.flex.$, {
+        [cssBuilderInstance.flexColumn.$]: !V,
+        [cssBuilderInstance.wFull.itemsCenter.$]: V
       }),
       children: [eu, jsx("div", {
         className: f()(V ? "drilldown_item--checkboxList--kqmln" : "drilldown_item--checkboxGrid--aXuyI", Qx, {

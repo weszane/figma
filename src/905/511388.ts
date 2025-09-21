@@ -8,7 +8,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import u from "classnames";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { FAuthProviderType } from "../figma_app/191312";
@@ -55,7 +55,7 @@ let S = ex("apple_ui_kit", function () {
     children: renderI18nText("design_systems.preset_libraries.tooltip.apple_license_link")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: jsx("div", {
       children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
@@ -72,13 +72,13 @@ let C = ex("community_fragment_license_tooltip", function () {
       newTab: !0,
       href: "https://creativecommons.org/licenses/by/4.0/",
       children: jsx("div", {
-        className: _$$s.colorTextBrand.justifyCenter.hAuto.$,
+        className: cssBuilderInstance.colorTextBrand.justifyCenter.hAuto.$,
         children: renderI18nText("community.community_license")
       })
     })
   });
   return jsx("div", {
-    className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.alignCenter.justifyCenter.$,
     children: jsx(setupThemeContext, {
       mode: "dark",
       children: jsx("div", {
@@ -97,7 +97,7 @@ let T = ex("figma_ui_kit", function () {
     children: renderI18nText("design_systems.preset_libraries.tooltip.figma_license_link")
   });
   return jsx("div", {
-    className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.alignCenter.justifyCenter.$,
     children: jsx("div", {
       children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
@@ -114,7 +114,7 @@ let k = ex("google_ui_kit", function () {
     children: renderI18nText("design_systems.preset_libraries.tooltip.google_license_link")
   });
   return jsx("div", {
-    className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.flexColumn.alignCenter.justifyCenter.$,
     children: jsx("div", {
       children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
@@ -125,14 +125,14 @@ let k = ex("google_ui_kit", function () {
 });
 let N = ex("visual_assets_tooltip", function (e) {
   let t = jsx(BaseLinkComponent, {
-    className: _$$s.colorTextBrand.justifyCenter.hAuto.$,
+    className: cssBuilderInstance.colorTextBrand.justifyCenter.hAuto.$,
     trusted: !1,
     target: "_blank",
     href: "https://creativecommons.org/licenses/by/4.0/",
     children: renderI18nText("community.visual_assets.license_tooltip.license_link")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: e.authorName ? renderI18nText("community.visual_assets.license_tooltip_with_link", {
       authorName: e.authorName,
       licenseLink: t
@@ -269,7 +269,7 @@ export function $$L0({
     className: B
   });
   return E && e ? jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.flexShrink0.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.$,
     onClick: j,
     onMouseDown: U,
     onPointerDown: U,
@@ -278,14 +278,14 @@ export function $$L0({
     ...(F ?? {}),
     children: V
   }) : jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.flexShrink0.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.$,
     ...(F ?? {}),
     children: V
   });
 }
 export function $$F1() {
   return jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.flexShrink0.ml4.mr4.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.ml4.mr4.$,
     children: jsx($$L0, {
       libraryKey: void 0,
       forSelect: !0

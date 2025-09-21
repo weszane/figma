@@ -33,7 +33,7 @@ import { getFeatureFlags } from "../905/601108";
 import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { hideTooltip } from "../905/765855";
 import { getViewportZoom } from "../figma_app/62612";
 import { $J } from "../figma_app/634656";
@@ -293,13 +293,13 @@ let ec = memo(function ({
       shouldVerticallyCenter: !0,
       children: jsx(ButtonPrimitive, {
         onClick: () => L(),
-        className: _$$s2.flex.b0.noWrap.gap0.flexRow.hFull.px8.itemsCenter.$,
+        className: cssBuilderInstance.flex.b0.noWrap.gap0.flexRow.hFull.px8.itemsCenter.$,
         recordingKey: generateRecordingKey(e, "MORESHAPES"),
         htmlAttributes: {
           "data-onboarding-key": W2
         },
         children: jsx("span", {
-          className: _$$s2.colorText.textBodyMedium.$,
+          className: cssBuilderInstance.colorText.textBodyMedium.$,
           children: getI18nString("whiteboard.shapes.more_shapes")
         })
       })

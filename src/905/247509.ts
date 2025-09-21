@@ -7,7 +7,7 @@ import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
 import { X } from "../figma_app/953068";
@@ -273,9 +273,9 @@ let L = memo(({
     preferences: l
   });
   return jsxs("div", {
-    className: _$$s.pb8.$,
+    className: cssBuilderInstance.pb8.$,
     children: [!hasDiffs && jsx("div", {
-      className: _$$s.pt16.pl16.pr16.pb8.$,
+      className: cssBuilderInstance.pt16.pl16.pr16.pb8.$,
       children: jsx(_$$_, {
         color: _$$S.PLAIN,
         text: jsxs(Fragment, {

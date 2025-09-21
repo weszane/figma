@@ -11,7 +11,7 @@ import { YO } from "../figma_app/672951";
 import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
@@ -111,7 +111,7 @@ let Y = registerModal(function (e) {
   let $ = jsxs("div", {
     className: YM,
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: p ? renderI18nText("resource_connection.connected_by") : renderI18nText("resource_connection.approved_by")
     }), jsx("div", {
       children: renderI18nText("resource_connection.connected_by_info", {
@@ -152,7 +152,7 @@ let Y = registerModal(function (e) {
             right: 0
           },
           children: [i && jsx("div", {
-            className: _$$s.mb16.$,
+            className: cssBuilderInstance.mb16.$,
             children: jsx(_$$_, {
               rounded: !1,
               dataTestId: "viewer-upgrade-banner",
@@ -162,9 +162,9 @@ let Y = registerModal(function (e) {
               })
             })
           }), jsxs("div", {
-            className: _$$s.pl16.pr16.$,
+            className: cssBuilderInstance.pl16.pr16.$,
             children: [jsx("div", {
-              className: _$$s.textBodyMediumStrong.pb4.$,
+              className: cssBuilderInstance.textBodyMediumStrong.pb4.$,
               children: getI18nString("resource_connection.teams")
             }), jsxs("div", {
               className: Ec,
@@ -173,12 +173,12 @@ let Y = registerModal(function (e) {
                 shape: "CIRCLE",
                 team: d
               }), jsxs("div", {
-                className: _$$s.flex.flexColumn.$,
+                className: cssBuilderInstance.flex.flexColumn.$,
                 children: [jsx("div", {
                   children: d.name
                 }), jsxs("span", {
                   children: [I && jsxs("span", {
-                    className: _$$s.textBodyMedium.colorTextSecondary.$,
+                    className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                     children: [getI18nString("resource_connection.num_members", {
                       count: v
                     }), " \xb7\xa0"]
@@ -195,18 +195,18 @@ let Y = registerModal(function (e) {
                 shape: "CIRCLE",
                 team: c
               }), jsxs("div", {
-                className: _$$s.flex.flexColumn.$,
+                className: cssBuilderInstance.flex.flexColumn.$,
                 children: [jsx("div", {
                   children: c.name
                 }), jsx("div", {
-                  className: _$$s.textBodyMedium.colorTextSecondary.$,
+                  className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                   children: i ? renderI18nText("resource_connection.invite_pending") : I ? getI18nString("resource_connection.num_members", {
                     count: b
                   }) : null
                 })]
               })]
             }), jsx("div", {
-              className: _$$s.py8.$,
+              className: cssBuilderInstance.py8.$,
               children: !i && (() => {
                 let t = [];
                 p && e.resourceConnection.projectTeamId && t.push({
@@ -234,7 +234,7 @@ let Y = registerModal(function (e) {
                 className: lK,
                 onClick: e.onClick,
                 children: [jsxs("div", {
-                  className: _$$s.flex.flexColumn.my6.$,
+                  className: cssBuilderInstance.flex.flexColumn.my6.$,
                   children: [jsx("div", {
                     className: ed,
                     children: e.label
@@ -252,7 +252,7 @@ let Y = registerModal(function (e) {
             }), i ? jsxs("div", {
               className: YM,
               children: [jsx("div", {
-                className: _$$s.colorTextSecondary.$,
+                className: cssBuilderInstance.colorTextSecondary.$,
                 children: renderI18nText("resource_connection.invite_sent")
               }), jsx("div", {
                 children: renderI18nText("resource_connection.invite_sent_info", {
@@ -261,7 +261,7 @@ let Y = registerModal(function (e) {
                 })
               })]
             }) : $, jsx("div", {
-              className: _$$s.mb8.mt12.$,
+              className: cssBuilderInstance.mb8.mt12.$,
               children: jsx(Button, {
                 variant: "link",
                 onClick: () => {
@@ -622,9 +622,9 @@ let $$el0 = registerModal(function (e) {
               disabled: e.disabled,
               onClick: b(e),
               children: [jsxs("div", {
-                className: _$$s.flex.flexColumn.my6.$,
+                className: cssBuilderInstance.flex.flexColumn.my6.$,
                 children: [jsx("div", {
-                  className: p()("folder_settings_modal--optionLabel--ZvxkO", i && _$$s.colorTextSecondary.$),
+                  className: p()("folder_settings_modal--optionLabel--ZvxkO", i && cssBuilderInstance.colorTextSecondary.$),
                   children: e.label
                 }), e.description && jsx("div", {
                   className: "folder_settings_modal--optionDescription--i7lA7",

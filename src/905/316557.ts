@@ -14,7 +14,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv, RecordableButton } from "../905/511649";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
@@ -221,9 +221,9 @@ function e_({
   });
   return jsxs(Fragment, {
     children: [jsx(ew, {}), jsxs("div", {
-      className: _$$s.pt8.pb16.$,
+      className: cssBuilderInstance.pt8.pb16.$,
       children: [jsx("p", {
-        className: _$$s.pl16.pr8.pb8.$,
+        className: cssBuilderInstance.pl16.pr8.pb8.$,
         children: jsx(eS, {
           sectionName: getI18nString("slides.properties_panel.text_styles"),
           buttonLabel: getI18nString("slides.properties_panel.theme.add_text_style_label"),
@@ -400,9 +400,9 @@ function eb({
 }) {
   let i = e.length > 10 ? e : void 0;
   return jsxs("div", {
-    className: _$$s.flex.gap2.textBodySmall.colorTextSecondary.flexGrow1.contentCenter.justifyEnd.alignRight.$,
+    className: cssBuilderInstance.flex.gap2.textBodySmall.colorTextSecondary.flexGrow1.contentCenter.justifyEnd.alignRight.$,
     children: [jsx("p", {
-      className: _$$s.noWrap.overflowHidden.ellipsis.$,
+      className: cssBuilderInstance.noWrap.overflowHidden.ellipsis.$,
       style: {
         maxWidth: "10ch"
       },
@@ -471,7 +471,7 @@ function eI({
     draggable: !1,
     alt: e
   }) : jsx("div", {
-    className: _$$s.fontMedium.colorText.$,
+    className: cssBuilderInstance.fontMedium.colorText.$,
     children: e
   });
 }
@@ -558,16 +558,16 @@ function ex({
   let F = !!_ && !!h;
   return jsxs(Fragment, {
     children: [jsx(ew, {}), jsxs("div", {
-      className: _$$s.pt8.pb16.$,
+      className: cssBuilderInstance.pt8.pb16.$,
       children: [jsx("div", {
-        className: _$$s.pl16.pr8.pb8.$,
+        className: cssBuilderInstance.pl16.pr8.pb8.$,
         children: jsx(eS, {
           sectionName: getI18nString("slides.properties_panel.theme.colors"),
           buttonLabel: getI18nString("slides.properties_panel.theme.add_color_label"),
           onClickAdd: O
         })
       }), jsx("div", {
-        className: _$$s.flex.flexWrap.gap4.pl12.pr12.$,
+        className: cssBuilderInstance.flex.flexWrap.gap4.pl12.pr12.$,
         ref: g,
         children: i.map(e => {
           let {
@@ -616,9 +616,9 @@ function eS({
   onClickAdd: i
 }) {
   return jsxs("div", {
-    className: _$$s.flex.justifyBetween.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyBetween.itemsCenter.$,
     children: [jsx("p", {
-      className: _$$s.textBodyMediumStrong.alignLeft.$,
+      className: cssBuilderInstance.textBodyMediumStrong.alignLeft.$,
       children: e
     }), jsx(IconButton, {
       onClick: i,
@@ -629,7 +629,7 @@ function eS({
 }
 function ew() {
   return jsx("div", {
-    className: _$$s.h1.wFull.colorBgTertiary.$
+    className: cssBuilderInstance.h1.wFull.colorBgTertiary.$
   });
 }
 let ek = memo(function (e) {
@@ -760,7 +760,7 @@ function ej({
     children: [jsxs("div", {
       className: "x78zum5 x10w6t97 x1td3qas x192jxwq xb3r6kr x2lah0s x1n2onr6",
       children: [e, jsx("div", {
-        className: _$$s.h32.w32.b1.radiusSmall.borderBox.absolute.top0.left0.eventsNone.$,
+        className: cssBuilderInstance.h32.w32.b1.radiusSmall.borderBox.absolute.top0.left0.eventsNone.$,
         style: {
           borderColor: "var(--color-bordertranslucent)"
         }
@@ -796,7 +796,7 @@ function eU({
   }) : jsx(ej, {
     chit: null,
     description: jsx("div", {
-      className: _$$s.ml8.flexGrow1.colorText.overflowHidden.$,
+      className: cssBuilderInstance.ml8.flexGrow1.colorText.overflowHidden.$,
       children: jsx(eG, {
         name: getI18nString("slides.properties_panel.theme.mixed"),
         width: e
@@ -816,9 +816,9 @@ function eB({
     className: "slides_theme_preview_row--diagonalLine--7UGbz"
   }) : jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.flex.h32.w32.$,
+      className: cssBuilderInstance.flex.h32.w32.$,
       children: t.map(e => jsx("div", {
-        className: _$$s.h32.flexGrow1.$,
+        className: cssBuilderInstance.h32.flexGrow1.$,
         style: {
           backgroundColor: e
         }
@@ -846,10 +846,10 @@ function eV({
   googleFontPreviews: o
 }) {
   return kO(e) ? jsx("div", {
-    className: _$$s.ml8.flexGrow1.colorTextSecondary.overflowHidden.$,
+    className: cssBuilderInstance.ml8.flexGrow1.colorTextSecondary.overflowHidden.$,
     children: getI18nString("slides.properties_panel.theme.dropdown_deleted_theme_name")
   }) : jsxs("div", {
-    className: _$$s.ml8.flexGrow1.colorText.overflowHidden.$,
+    className: cssBuilderInstance.ml8.flexGrow1.colorText.overflowHidden.$,
     children: [jsx(eG, {
       name: t || getI18nString("slides.properties_panel.theme.generic_theme_name"),
       width: i
@@ -857,19 +857,19 @@ function eV({
       className: "slides_theme_preview_row--fontPreview--GZAXr",
       children: Object.keys(a).slice(0, 2).map((e, t) => jsxs(_$$Fragment, {
         children: [s[e] ? jsx("div", {
-          className: _$$s.block.$,
+          className: cssBuilderInstance.block.$,
           children: jsx(_$$A3, {
             fontItem: s[e],
             setPreviewState: lQ,
             hasFetchedGoogleFontPreviews: !!o,
-            fallbackClass: _$$s.font15.noWrap.$,
+            fallbackClass: cssBuilderInstance.font15.noWrap.$,
             fallbackUnloadedGooglePreview: !0
           })
         }, e) : jsx("div", {
-          className: _$$s.block.font15.noWrap.$,
+          className: cssBuilderInstance.block.font15.noWrap.$,
           children: e
         }), Object.keys(a).length > 1 && 0 === t && jsx("div", {
-          className: _$$s.block.w8.minW8.font15.$,
+          className: cssBuilderInstance.block.w8.minW8.font15.$,
           children: ","
         })]
       }, e))
@@ -881,7 +881,7 @@ function eG({
   width: t
 }) {
   return jsx("div", {
-    className: _$$s.h16.fpl__textBodyMediumStrongFontWeight.overflowHidden.ellipsis.noWrap.$,
+    className: cssBuilderInstance.h16.fpl__textBodyMediumStrongFontWeight.overflowHidden.ellipsis.noWrap.$,
     style: {
       width: t ? `${t - 76}px` : "140px"
     },
@@ -890,7 +890,7 @@ function eG({
 }
 function ez() {
   return jsx("div", {
-    className: _$$s.w12.$,
+    className: cssBuilderInstance.w12.$,
     children: jsx(_$$O, {})
   });
 }
@@ -901,7 +901,7 @@ function eH({
   themeId: r
 }) {
   return e && jsx("span", {
-    className: i ? _$$s.visible.$ : _$$s.invisible.$,
+    className: i ? cssBuilderInstance.visible.$ : cssBuilderInstance.invisible.$,
     children: jsx(_$$d, {
       "aria-label": getI18nString("slides.properties_panel.theme.edit_template_style"),
       onClick: e,
@@ -1238,7 +1238,7 @@ export function $$eX0({
           onClose: z,
           initialWidth: j,
           autoflowHeight: !0,
-          contentContainerClassName: _$$s.p8.$,
+          contentContainerClassName: cssBuilderInstance.p8.$,
           disableDragging: !0,
           children: jsx("div", {
             className: "theme_dropdown--dropdownContainer--Imk2n",
@@ -1293,7 +1293,7 @@ let eQ = forwardRef((e, t) => {
       width
     })
   }) : jsx(RecordableButton, {
-    className: g()(_$$t2, _$$s.h48.flex.my8.wFull.radiusMedium.b1.colorBorder.borderBox.alignLeft.$$if(isActive, _$$s.colorBgSecondary, _$$s.colorBg).$),
+    className: g()(_$$t2, cssBuilderInstance.h48.flex.my8.wFull.radiusMedium.b1.colorBorder.borderBox.alignLeft.$$if(isActive, cssBuilderInstance.colorBgSecondary, cssBuilderInstance.colorBg).$),
     onMouseDown: e => {
       e.stopPropagation();
       onClick();
@@ -1321,7 +1321,7 @@ function eJ({
   recordingKey: t
 }) {
   return jsx("div", {
-    className: _$$s.p4.$,
+    className: cssBuilderInstance.p4.$,
     children: jsx(ButtonWide, {
       variant: "secondary",
       onClick: e,

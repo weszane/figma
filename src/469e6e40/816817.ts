@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { FileExportSetting } from "../figma_app/482728";
 export function $$l0({
   exportControlsSetting: e
 }) {
   return jsx("span", {
-    className: _$$s.flex.gap2.$,
+    className: cssBuilderInstance.flex.gap2.$,
     children: jsx("span", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: function (e) {
         switch (e) {
           case FileExportSetting.BANNED:

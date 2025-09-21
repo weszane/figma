@@ -11,7 +11,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { zd, Bb, B7 } from "../905/651696";
 import { ConfirmationModal } from "../905/441305";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { N$, qk } from "../905/355291";
@@ -158,12 +158,12 @@ function P({
         className: z3,
         children: r.currentError
       }), jsx("div", {
-        className: _$$s.mt12.colorTextTertiary.$,
+        className: cssBuilderInstance.mt12.colorTextTertiary.$,
         children: renderI18nText("auth.two-factor-setup.phone-number-opt-in")
       })]
     }), jsx(DialogFooter, {
       children: jsxs("div", {
-        className: t.two_factor_app_enabled ? _$$s.flex.wFull.justifyEnd.$ : Hx,
+        className: t.two_factor_app_enabled ? cssBuilderInstance.flex.wFull.justifyEnd.$ : Hx,
         children: [!t.two_factor_app_enabled && jsx(Button, {
           variant: "link",
           onClick: () => {

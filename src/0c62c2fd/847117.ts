@@ -18,7 +18,7 @@ import { linkWithTracking, clickableBaseLinkTracked } from "../figma_app/637027"
 import { w4, Y8 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -89,7 +89,7 @@ function q(e) {
         });
         i = renderI18nText("file_browser.file_import_view.repo.attaching_branch");
         o = jsx("span", {
-          className: _$$s.textBodyMedium.$,
+          className: cssBuilderInstance.textBodyMedium.$,
           children: renderI18nText("file_browser.file_import_view.to_continue_working", {
             openANewTabLink: jsx(linkWithTracking, {
               href: window.location.href,
@@ -160,7 +160,7 @@ function q(e) {
         })
       }), jsx(DialogBody, {
         children: fileImport && jsx(_$$P, {
-          innerClassName: _$$s.flex.flexColumn.$,
+          innerClassName: cssBuilderInstance.flex.flexColumn.$,
           className: J,
           children: Object.values(fileImport.files).map(e => jsx($$ei1, {
             file: e
@@ -168,17 +168,17 @@ function q(e) {
         })
       }), jsx(DialogFooter, {
         children: jsxs("div", {
-          className: _$$s.flex.flexRow.wFull.justifyBetween.py8.gap16.bt1.bSolid.colorBorder.$,
+          className: cssBuilderInstance.flex.flexRow.wFull.justifyBetween.py8.gap16.bt1.bSolid.colorBorder.$,
           children: [jsxs("div", {
-            className: _$$s.flex.flexRow.itemsCenter.gap8.$,
+            className: cssBuilderInstance.flex.flexRow.itemsCenter.gap8.$,
             children: [statusIcon && jsx("div", {
-              className: _$$s.flex.itemsCenter.justifyCenter.h32.w32.$,
+              className: cssBuilderInstance.flex.itemsCenter.justifyCenter.h32.w32.$,
               children: statusIcon
             }), statusMessage && jsx("span", {
-              className: _$$s.fontSemiBold.$,
+              className: cssBuilderInstance.fontSemiBold.$,
               children: statusMessage
             }), statusMessageSecondary && jsx("span", {
-              className: _$$s.ml8.$,
+              className: cssBuilderInstance.ml8.$,
               children: statusMessageSecondary
             })]
           }), jsx("div", {
@@ -445,7 +445,7 @@ export function $$er5(e, t, r) {
   let i = null;
   let n = null;
   e ? t.importedFiles === t.totalFiles ? (i = jsx("div", {
-    className: _$$s.fontSemiBold.inline.$,
+    className: cssBuilderInstance.fontSemiBold.inline.$,
     children: renderI18nText("file_browser.file_import_view.file_import_all_succeeded", {
       totalFiles: t.totalFiles,
       folder: r
@@ -453,7 +453,7 @@ export function $$er5(e, t, r) {
   }), s = jsx(_$$l, {
     "data-testid": "checkIcon"
   })) : (i = jsx("div", {
-    className: _$$s.fontSemiBold.inline.$,
+    className: cssBuilderInstance.fontSemiBold.inline.$,
     children: renderI18nText("file_browser.file_import_view.file_import_progress_to_folder", {
       importedFiles: t.importedFiles,
       totalFiles: t.totalFiles,
@@ -468,7 +468,7 @@ export function $$er5(e, t, r) {
     processedFiles: t.processedFiles,
     totalFiles: t.totalFiles
   }), n = jsx("span", {
-    className: _$$s.textBodyMedium.$,
+    className: cssBuilderInstance.textBodyMedium.$,
     children: renderI18nText("file_browser.file_import_view.to_continue_working", {
       openANewTabLink: jsx(linkWithTracking, {
         href: window.location.href,
@@ -553,18 +553,18 @@ export function $$ei1(e) {
     status: file.status,
     fileKey: file.fileKey,
     children: jsx("div", {
-      className: _$$s.flex.itemsCenter.justifyBetween.flex1.pl8.pr16.textBodyMedium.$,
+      className: cssBuilderInstance.flex.itemsCenter.justifyBetween.flex1.pl8.pr16.textBodyMedium.$,
       children: jsxs("div", {
-        className: _$$s.flex.gap8.$$if(r, _$$s.itemsStart, _$$s.itemsCenter).$,
+        className: cssBuilderInstance.flex.gap8.$$if(r, cssBuilderInstance.itemsStart, cssBuilderInstance.itemsCenter).$,
         children: [jsx("div", {
-          className: _$$s.flex.justifyCenter.h32.w32.itemsCenter.$,
+          className: cssBuilderInstance.flex.justifyCenter.h32.w32.itemsCenter.$,
           children: jsx(en, {
             file
           })
         }), jsxs("div", {
-          className: _$$s.$$if(r, _$$s.pb6).$,
+          className: cssBuilderInstance.$$if(r, cssBuilderInstance.pb6).$,
           children: [jsx("div", {
-            className: _$$s.truncate.lh32.$,
+            className: cssBuilderInstance.truncate.lh32.$,
             style: styleBuilderInstance.add({
               maxWidth: "384px"
             }).$,
@@ -572,9 +572,9 @@ export function $$ei1(e) {
             "data-tooltip-type": "text",
             children: file.name
           }), r && jsxs("div", {
-            className: _$$s.flex.flexColumn.mt4.colorTextSecondary.$,
+            className: cssBuilderInstance.flex.flexColumn.mt4.colorTextSecondary.$,
             children: [r, file.cta && jsx(linkWithTracking, {
-              className: _$$s.colorTextSecondary.underline.ml8.$,
+              className: cssBuilderInstance.colorTextSecondary.underline.ml8.$,
               role: "button",
               onClick: file.cta.action,
               trusted: !0,
@@ -601,7 +601,7 @@ function en({
     case mO.CANCELED:
       return jsx(_$$A, {
         "data-testid": "failIcon",
-        className: _$$s.colorIconDanger.$
+        className: cssBuilderInstance.colorIconDanger.$
       });
     case mO.SUCCESS:
     case mO.WARNING:

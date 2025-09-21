@@ -9,7 +9,7 @@ import { selectExperimentConfigHook } from "../figma_app/594947";
 import { BadgeColor, Badge } from "../figma_app/919079";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { ps, ZY } from "../figma_app/845611";
@@ -79,7 +79,7 @@ export function $$k0(e) {
   return void 0 !== g && j > 0 && e.isDataLoaded ? jsx(Badge, {
     text: j.toString(),
     color: I,
-    className: I === BadgeColor.DEFAULT ? _$$s.mr0.colorText.colorBgSelectedSecondary.$ : _$$s.mr0.$,
+    className: I === BadgeColor.DEFAULT ? cssBuilderInstance.mr0.colorText.colorBgSelectedSecondary.$ : cssBuilderInstance.mr0.$,
     dataTestId: "admin-notifications-badge"
   }) : null;
 }

@@ -5,7 +5,7 @@ import { shallowEqual, useStore, Provider } from "react-redux";
 import { AtomProvider } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { LivegraphProvider } from "../905/436043";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { le } from "../905/904854";
 import { ViewMode } from "../figma_app/756995";
 import { g as _$$g } from "../905/607862";
@@ -23,7 +23,7 @@ import { tD, ZY } from "../905/682977";
 var g = h;
 function $$A(e) {
   return jsxs("div", {
-    className: _$$s.relative.$,
+    className: cssBuilderInstance.relative.$,
     children: [e.selectedItems.slice(0, 3).map((t, i) => jsx("div", {
       style: styleBuilderInstance.match(i, {
         0: styleBuilderInstance.add({
@@ -39,10 +39,10 @@ function $$A(e) {
           left: "16px"
         })
       }).$,
-      className: g()(_$$s.absolute.bRadius8.b2.colorBorderSelected.colorBg.overflowHidden.$, "items_view_drag_image--dragImageSizeBounds--OJfPU"),
+      className: g()(cssBuilderInstance.absolute.bRadius8.b2.colorBorderSelected.colorBg.overflowHidden.$, "items_view_drag_image--dragImageSizeBounds--OJfPU"),
       children: e.renderDragImage(t)
     }, `DragImageItem${i}`)).reverse(), !e.multiselectDisabled && e.selectedItems.length ? jsx("div", {
-      className: _$$s.h24.w24.colorBgBrand.bRadiusFull.absolute.flex.justifyCenter.itemsCenter.$,
+      className: cssBuilderInstance.h24.w24.colorBgBrand.bRadiusFull.absolute.flex.justifyCenter.itemsCenter.$,
       style: styleBuilderInstance.add({
         top: "-12px",
         left: "-12px"
@@ -57,18 +57,18 @@ function $$A(e) {
 }
 function C(e) {
   return jsx("th", {
-    className: g()(e.containerClassName, _$$s.alignMiddle.$),
+    className: g()(e.containerClassName, cssBuilderInstance.alignMiddle.$),
     children: jsx("div", {
-      className: _$$s.mt8.mb8.$$if(e.hasLeftBorder, _$$s.colorBorder.bSolid.pl8.pr4, _$$s.$$if(!e.noPadding, _$$s.pl4.pr4)).$,
+      className: cssBuilderInstance.mt8.mb8.$$if(e.hasLeftBorder, cssBuilderInstance.colorBorder.bSolid.pl8.pr4, cssBuilderInstance.$$if(!e.noPadding, cssBuilderInstance.pl4.pr4)).$,
       children: e.sortOptions ? jsx(tD, {
-        className: _$$s.$$if(!e.sortOptions.hasArrow, _$$s.colorTextSecondary).font11.$,
+        className: cssBuilderInstance.$$if(!e.sortOptions.hasArrow, cssBuilderInstance.colorTextSecondary).font11.$,
         isDescending: e.sortOptions.isDescending,
         hasArrow: e.sortOptions.hasArrow,
         field: e.sortOptions.field,
         sortBy: e.sortOptions.handleSortBy,
         children: e.children
       }) : jsx(ZY, {
-        className: _$$s.colorTextSecondary.font11.$,
+        className: cssBuilderInstance.colorTextSecondary.font11.$,
         children: e.children
       })
     })
@@ -77,7 +77,7 @@ function C(e) {
 function T(e) {
   return jsxs("tr", {
     children: [e.hasGutterColumn && jsx("th", {
-      className: _$$s.w32.minW32.$
+      className: cssBuilderInstance.w32.minW32.$
     }), e.columns.map((t, i) => jsx(C, {
       containerClassName: t.headerCellClassName,
       hasLeftBorder: i > 0,
@@ -97,7 +97,7 @@ function k(e) {
   let i = e.isSelected && !e.isBelowSelected;
   let r = e.isSelected && e.isFirstSelectableCell;
   let a = e.isSelected && e.isLastSelectableCell;
-  let s = _$$s.borderBox.alignMiddle.hFull.$$if(t, _$$s.pt4).$$if(i, _$$s.pb4).$;
+  let s = cssBuilderInstance.borderBox.alignMiddle.hFull.$$if(t, cssBuilderInstance.pt4).$$if(i, cssBuilderInstance.pb4).$;
   return jsx("td", {
     draggable: e.isDraggable,
     onClick: e.onClick,
@@ -106,7 +106,7 @@ function k(e) {
     onContextMenu: e.onContextMenu,
     className: s,
     children: jsx("div", {
-      className: g()(_$$s.flex.flexRow.itemsCenter.overflowHidden.borderBox.ellipsis.bSolid.colorBorderSelected.hFull.wFull.$$if(t, _$$s.bt2.pt2, _$$s.pt8).$$if(i, _$$s.bb2.pb2, _$$s.pb8).$$if(a, _$$s.br2, _$$s.pr2).$$if(r, _$$s.bl2.$$if(e.hasLeftPadding, _$$s.pl6, _$$s.pl2), _$$s.$$if(e.hasLeftPadding, _$$s.pl8, _$$s.pl4)).$, {
+      className: g()(cssBuilderInstance.flex.flexRow.itemsCenter.overflowHidden.borderBox.ellipsis.bSolid.colorBorderSelected.hFull.wFull.$$if(t, cssBuilderInstance.bt2.pt2, cssBuilderInstance.pt8).$$if(i, cssBuilderInstance.bb2.pb2, cssBuilderInstance.pb8).$$if(a, cssBuilderInstance.br2, cssBuilderInstance.pr2).$$if(r, cssBuilderInstance.bl2.$$if(e.hasLeftPadding, cssBuilderInstance.pl6, cssBuilderInstance.pl2), cssBuilderInstance.$$if(e.hasLeftPadding, cssBuilderInstance.pl8, cssBuilderInstance.pl4)).$, {
         "list_view_cell--topRightBorderRadius--qPV-m": e.isLastSelectableCell && !e.isAboveSelected,
         "list_view_cell--bottomRightBorderRadius--tuU0n": e.isLastSelectableCell && !e.isBelowSelected,
         "list_view_cell--topLeftBorderRadius--zeTRC": e.isFirstSelectableCell && !e.isAboveSelected,
@@ -468,7 +468,7 @@ export function $$O0(e) {
     }
     m.dataTransfer.effectAllowed = "move";
     let g = document.createElement("div");
-    g.className = _$$s.absolute.zIndexMinus1.$;
+    g.className = cssBuilderInstance.absolute.zIndexMinus1.$;
     g.style.left = "-9999px";
     m.currentTarget.appendChild(g);
     H(g).render(jsx(LivegraphProvider, {

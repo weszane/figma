@@ -4,7 +4,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { Spacing } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { In } from "../905/672640";
@@ -127,11 +127,11 @@ export function $$w3(e) {
 }
 function O(e) {
   return jsxs("div", {
-    className: _$$s.flex.$,
+    className: cssBuilderInstance.flex.$,
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.justifyCenter.p32.$,
+      className: cssBuilderInstance.flex.flexColumn.justifyCenter.p32.$,
       children: [jsx("div", {
-        className: _$$s.textHeadingLarge.$,
+        className: cssBuilderInstance.textHeadingLarge.$,
         style: styleBuilderInstance.add({
           letterSpacing: "-0.456px"
         }).$,
@@ -140,7 +140,7 @@ function O(e) {
         direction: "y",
         multiple: 1
       }), jsx("div", {
-        className: _$$s.textBodyLarge.$,
+        className: cssBuilderInstance.textBodyLarge.$,
         style: styleBuilderInstance.add({
           letterSpacing: "-0.084px"
         }).$,
@@ -150,7 +150,7 @@ function O(e) {
           direction: "y",
           multiple: 3
         }), jsxs("div", {
-          className: _$$s.flex.gap8.$,
+          className: cssBuilderInstance.flex.gap8.$,
           children: [e.primaryCta && jsx(_$$F, {
             defaultVariant: "primary",
             large: !0,
@@ -162,7 +162,7 @@ function O(e) {
           })]
         })]
       }), e.disclaimerFooter && jsx("div", {
-        className: _$$s.textBodySmall.colorTextSecondary.pt8.$,
+        className: cssBuilderInstance.textBodySmall.colorTextSecondary.pt8.$,
         children: e.disclaimerFooter
       })]
     }), e.media]
@@ -170,24 +170,24 @@ function O(e) {
 }
 function R(e) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.$,
+    className: cssBuilderInstance.flex.flexColumn.$,
     children: [e.media, jsxs("div", {
-      className: _$$s.flex.pl32.pr32.pt32.pb24.gap32.$,
+      className: cssBuilderInstance.flex.pl32.pr32.pt32.pb24.gap32.$,
       children: [jsx("div", {
-        className: _$$s.textHeadingLarge.w200.flexShrink0.$,
+        className: cssBuilderInstance.textHeadingLarge.w200.flexShrink0.$,
         style: styleBuilderInstance.add({
           letterSpacing: "-0.456px"
         }).$,
         children: e.title
       }), jsx("div", {
-        className: _$$s.textBodyLarge.$,
+        className: cssBuilderInstance.textBodyLarge.$,
         style: styleBuilderInstance.add({
           letterSpacing: "-0.084px"
         }).$,
         children: e.description
       })]
     }), jsxs("div", {
-      className: _$$s.flex.pl32.pr32.gap8.justifyEnd.$,
+      className: cssBuilderInstance.flex.pl32.pr32.gap8.justifyEnd.$,
       children: [e.secondaryCta && jsx(_$$F, {
         defaultVariant: "secondary",
         large: !0,
@@ -198,7 +198,7 @@ function R(e) {
         ctaButtonMeta: e.primaryCta
       })]
     }), e.disclaimerFooter && jsx("div", {
-      className: _$$s.textBodySmall.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodySmall.colorTextSecondary.$,
       children: e.disclaimerFooter
     }), jsx(Spacing, {
       direction: "y",
@@ -235,13 +235,13 @@ export function $$P2(e) {
 }
 function D(e) {
   return jsx("div", {
-    className: _$$s.absolute.left0.pl8.$,
+    className: cssBuilderInstance.absolute.left0.pl8.$,
     hidden: e.hidden,
     children: jsx(Button, {
       variant: "ghost",
       onClick: e.onBack,
       children: jsxs("div", {
-        className: _$$s.font13.lh24.flex.itemsCenter.pr12.$,
+        className: cssBuilderInstance.font13.lh24.flex.itemsCenter.pr12.$,
         children: [jsx(In, {
           icon: "chevron-left-32"
         }), renderI18nText("general.back")]
@@ -251,13 +251,13 @@ function D(e) {
 }
 function k(e) {
   return jsx("div", {
-    className: _$$s.absolute.right0.pr8.$,
+    className: cssBuilderInstance.absolute.right0.pr8.$,
     hidden: e.hidden,
     children: jsx(Button, {
       variant: "ghost",
       onClick: e.onNext,
       children: jsxs("div", {
-        className: _$$s.font13.lh24.flex.itemsCenter.pl12.$,
+        className: cssBuilderInstance.font13.lh24.flex.itemsCenter.pl12.$,
         children: [renderI18nText("general.next"), jsx(In, {
           icon: "chevron-right-32"
         })]
@@ -267,13 +267,13 @@ function k(e) {
 }
 function M(e) {
   return jsx("div", {
-    className: _$$s.absolute.right0.pr8.$,
+    className: cssBuilderInstance.absolute.right0.pr8.$,
     hidden: e.hidden,
     children: jsx(Button, {
       variant: "ghost",
       onClick: e.onDone,
       children: jsx("div", {
-        className: _$$s.font13.lh24.flex.itemsCenter.$,
+        className: cssBuilderInstance.font13.lh24.flex.itemsCenter.$,
         children: renderI18nText("general.done")
       })
     })
@@ -282,9 +282,9 @@ function M(e) {
 function F(e) {
   let t = t => t + 1 === e.stepNum;
   return jsx("div", {
-    className: _$$s.flex.gap8.h32.justifyCenter.itemsCenter.absolute.left0.right0.mxAuto.$,
+    className: cssBuilderInstance.flex.gap8.h32.justifyCenter.itemsCenter.absolute.left0.right0.mxAuto.$,
     children: Array(e.totalNumSteps).fill(0).map((e, r) => jsx("div", {
-      className: _$$s.w8.h8.bRadius8.b1.colorBorder.$$if(t(r), _$$s.colorBgInverse, _$$s.colorBg).$
+      className: cssBuilderInstance.w8.h8.bRadius8.b1.colorBorder.$$if(t(r), cssBuilderInstance.colorBgInverse, cssBuilderInstance.colorBg).$
     }, r))
   });
 }
@@ -296,7 +296,7 @@ function j(e) {
   let r = 1 === stepCounter.stepNum;
   let i = stepCounter.stepNum === stepCounter.totalNumSteps;
   return jsxs("div", {
-    className: _$$s.p8.bt1.colorBorder.bSolid.h32.$,
+    className: cssBuilderInstance.p8.bt1.colorBorder.bSolid.h32.$,
     children: [jsx(F, {
       stepNum: stepCounter.stepNum,
       totalNumSteps: stepCounter.totalNumSteps

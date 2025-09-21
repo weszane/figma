@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import n from "classnames";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { gH } from "../7222/396421";
 import { ag } from "../9410/356923";
@@ -15,7 +15,7 @@ export function $$u0({
   if (!e.length) return null;
   let i = e[0].library_key;
   return jsx(P, {
-    className: _$$s.px16.hFull.$,
+    className: cssBuilderInstance.px16.hFull.$,
     onScroll: onShowSeparatorScroll,
     children: jsx($$m3, {
       children: e.map((t, i) => jsx(ag, {
@@ -32,7 +32,7 @@ export function $$p2({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexWrap.pb8.gap0.$,
+    className: cssBuilderInstance.flex.flexWrap.pb8.gap0.$,
     children: e
   });
 }
@@ -45,10 +45,10 @@ export function $$h1({
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: a()({
-        [_$$s.flex.justifyBetween.alignLeft.itemsCenter.pt16.pb8.px8.$]: n
+        [cssBuilderInstance.flex.justifyBetween.alignLeft.itemsCenter.pt16.pb8.px8.$]: n
       }),
       children: [e && jsx("div", {
-        className: _$$s.font13.colorText.fontSemiBold.fontInter.noWrap.overflowHidden.ellipsis.pr4.$,
+        className: cssBuilderInstance.font13.colorText.fontSemiBold.fontInter.noWrap.overflowHidden.ellipsis.pr4.$,
         children: e
       }), i]
     }), jsx($$p2, {
@@ -60,7 +60,7 @@ export function $$m3({
   children: e
 }) {
   return jsx("div", {
-    className: _$$s.flex.flexWrap.pb16.gap8.$,
+    className: cssBuilderInstance.flex.flexWrap.pb16.gap8.$,
     children: e
   });
 }

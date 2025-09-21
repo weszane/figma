@@ -48,6 +48,7 @@ export default declare((_, opts) => {
             //     }
             //   }
             // }
+    
             const isReserved =
               path.scope.hasBinding(prop.key.name) || check(prop.key.name);
             const newName = isReserved

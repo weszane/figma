@@ -61,7 +61,7 @@ import { Y as _$$Y } from '../4452/914022';
 import { A as _$$A5 } from '../5724/663128';
 import { A as _$$A3 } from '../6828/154709';
 import { d as _$$d3 } from '../7021/966231';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { i as _$$i } from '../figma_app/4979';
 import { canPerformActionBasedOnLevel, getPermissionLevelNameCapitalized } from '../figma_app/12796';
 import { PendingAssetTransferRequestByTeam, PendingTeamRoleRequestsByTeamId, TeamAdminSettingsPage, TeamById, TeamMembersModalView, TeamSettings } from '../figma_app/43951';
@@ -640,7 +640,7 @@ function eI(e) {
 function eN(e) {
   let t = useSelector(e => e.roles || {});
   return hasValidSubscription(e.team) && e.canAdmin ? jsx('div', {
-    className: _$$s.font12.lh16.pt8.pr32.pb16.pl4.colorText.$,
+    className: cssBuilderInstance.font12.lh16.pt8.pr32.pb16.pl4.colorText.$,
     children: renderI18nText('file_browser.team_settings_modal.paid_status_explanation_no_link')
   }) : jsx('div', {
     className: 'team_settings_modal--membersHeader--Ac-UZ',
@@ -1134,7 +1134,7 @@ function tf(e) {
         className: td,
         children: [renderI18nText('admin_settings.ai.section_title'), !D && jsxs(Fragment, {
           children: [jsx('span', {
-            className: _$$s.inlineFlex.ml8.$,
+            className: cssBuilderInstance.inlineFlex.ml8.$,
             children: jsx(Badge, {
               color: BadgeColor.BRAND,
               text: getI18nString('general.beta')

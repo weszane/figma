@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 export function $$a1(e) {
   let t = e.split(". ");
   if (t.length < 3) return e;
   let i = jsx("span", {
-    className: s.underline.$,
+    className: cssBuilderInstance.underline.$,
     children: t[1]
   });
   return jsxs(Fragment, {
@@ -27,7 +27,7 @@ export function $$s0() {
 
         `, jsxs("ul", {
       children: [jsx("li", {
-        className: s.ml12.$,
+        className: cssBuilderInstance.ml12.$,
         style: {
           listStyleType: "disc"
         },
@@ -35,7 +35,7 @@ export function $$s0() {
 
           `
       }, "header-bullet-one"), jsx("li", {
-        className: s.ml12.$,
+        className: cssBuilderInstance.ml12.$,
         style: {
           listStyleType: "disc"
         },

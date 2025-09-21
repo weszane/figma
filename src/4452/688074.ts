@@ -11,7 +11,7 @@ import { xQ } from "../vendor/222851";
 import { d as _$$d } from "../vendor/456530";
 import { P } from "../vendor/348225";
 import { M } from "../figma_app/648761";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 var u = c;
 let v = createContext(null);
@@ -26,7 +26,7 @@ function y() {
 function j() {
   let e = y();
   return jsx("div", {
-    className: u()(_$$s.absolute.flex.itemsCenter.justifyCenter.$, "flyout--close--SKgKT"),
+    className: u()(cssBuilderInstance.absolute.flex.itemsCenter.justifyCenter.$, "flyout--close--SKgKT"),
     children: jsx(IconButton, {
       onClick: () => e("button"),
       "aria-label": getI18nString("modal.close"),
@@ -82,12 +82,12 @@ export let $$I0 = {
     return jsx(TabLoop, {
       children: jsx(DialogRoot, {
         ...t,
-        className: u()(_$$s.fixed.top0.right0.bottom0.left0.zIndexModal.colorText.eventsNone.$, t.zIndexOverrideClassName),
+        className: u()(cssBuilderInstance.fixed.top0.right0.bottom0.left0.zIndexModal.colorText.eventsNone.$, t.zIndexOverrideClassName),
         ref: o,
         children: jsx("div", {
-          className: u()(_$$s.my0.mr0.mlAuto.top0.wFull.eventsAuto.$, "flyout--contents--g9Ra6"),
+          className: u()(cssBuilderInstance.my0.mr0.mlAuto.top0.wFull.eventsAuto.$, "flyout--contents--g9Ra6"),
           children: jsxs(P.div, {
-            className: _$$s.hFull.elevation400.colorBg.flex.flexColumn.$,
+            className: cssBuilderInstance.hFull.elevation400.colorBg.flex.flexColumn.$,
             style: {
               transform: m,
               ...(d ? {
@@ -108,14 +108,14 @@ export let $$I0 = {
   },
   Header: function (e) {
     return jsx("div", {
-      className: u()(_$$s.minH40.bb1.colorBorder.bSolid.flex.itemsCenter.selectNone.flexShrink0.overflowHidden.$, "flyout--header--AZ5ed"),
+      className: u()(cssBuilderInstance.minH40.bb1.colorBorder.bSolid.flex.itemsCenter.selectNone.flexShrink0.overflowHidden.$, "flyout--header--AZ5ed"),
       children: e.children
     });
   },
   HiddenTitle: DialogHiddenTitle,
   Title: function (e) {
     return jsx(DialogLabel, {
-      className: _$$s.textBodyMediumStrong.pl16.pr4.wFull.noWrap.ellipsis.overflowHidden.$,
+      className: cssBuilderInstance.textBodyMediumStrong.pl16.pr4.wFull.noWrap.ellipsis.overflowHidden.$,
       children: e.children
     });
   },
@@ -125,7 +125,7 @@ export let $$I0 = {
       ...a
     } = e;
     return jsx("div", {
-      className: u()(_$$s.overflowAuto.$$if("fill" === e.height, _$$s.hFull).$, "flyout--body--2bx8h"),
+      className: u()(cssBuilderInstance.overflowAuto.$$if("fill" === e.height, cssBuilderInstance.hFull).$, "flyout--body--2bx8h"),
       "data-testid": "flyout-body",
       children: a.children
     });

@@ -29,7 +29,7 @@ import { logInfo } from "../905/714362";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -83,11 +83,11 @@ var w = S;
 var T = C;
 function ec() {
   return jsxs("div", {
-    className: _$$s.flex.gap8.itemsCenter.p8.colorBgSecondary.$,
+    className: cssBuilderInstance.flex.gap8.itemsCenter.p8.colorBgSecondary.$,
     children: [jsx(_$$R, {
-      className: _$$s.m2.colorIcon.$
+      className: cssBuilderInstance.m2.colorIcon.$
     }), jsx("div", {
-      className: _$$s.lh16.cursorDefault.$,
+      className: cssBuilderInstance.lh16.cursorDefault.$,
       children: getI18nString("fullscreen.toolbar.missing_fonts_modal.google_only_banner.text")
     })]
   });
@@ -161,7 +161,7 @@ function ej(e) {
   });
   return jsx(ev, {
     icon: jsx(SvgComponent, {
-      className: _$$s.m2.colorIcon.$,
+      className: cssBuilderInstance.m2.colorIcon.$,
       svg: _$$A3
     }),
     content: jsx("div", {
@@ -513,12 +513,12 @@ export let $$eZ0 = registerModal(function (e) {
         upsellBannerInfo: ej
       },
       title: jsxs("div", {
-        className: _$$s.flex.flexGrow1.ml8.$,
+        className: cssBuilderInstance.flex.flexGrow1.ml8.$,
         children: [jsx("span", {
-          className: _$$s.textBodyMediumStrong.flexGrow1.$,
+          className: cssBuilderInstance.textBodyMediumStrong.flexGrow1.$,
           children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.missing_font")
         }), jsx("span", {
-          className: _$$s.textBodyMediumStrong.pl4.borderBox.$,
+          className: cssBuilderInstance.textBodyMediumStrong.pl4.borderBox.$,
           style: styleBuilderInstance.add({
             width: `calc(${ef} - 16px)`
           }).$,
@@ -533,7 +533,7 @@ export let $$eZ0 = registerModal(function (e) {
           width: Kyn
         }).$,
         children: [jsxs("div", {
-          className: _$$s.flex.maxH300.flexColumn.overflowAuto.py4.$,
+          className: cssBuilderInstance.flex.maxH300.flexColumn.overflowAuto.py4.$,
           children: [Object.entries(x()(missingFontsInfoForCurrentScope.missingFonts.map((e, t) => ({
             ...e,
             index: t
@@ -559,7 +559,7 @@ export let $$eZ0 = registerModal(function (e) {
             },
             versionsForStyles
           }, e)), eE && missingFontsInfoForCurrentScope.missingFonts.some(e => !e.inSelection) && jsxs(ButtonPrimitive, {
-            className: I()(_$$s.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.px12.colorTextSecondary.$, ey),
+            className: I()(cssBuilderInstance.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.px12.colorTextSecondary.$, ey),
             onClick: () => {
               ex(!1);
               setScope(PageSelectionType.CURRENT_PAGE);
@@ -570,11 +570,11 @@ export let $$eZ0 = registerModal(function (e) {
             }), renderI18nText("fullscreen.toolbar.missing_fonts_modal.show_other_missing_fonts")]
           })]
         }), k && jsx("div", {
-          className: _$$s.mt8.$,
+          className: cssBuilderInstance.mt8.$,
           children: jsx(ec, {})
         })]
       }), jsxs("div", {
-        className: _$$s.p12.flex.bt1.bSolid.colorBorder.$$if(e0 || eE, _$$s.justifyBetween, _$$s.justifyEnd).$,
+        className: cssBuilderInstance.p12.flex.bt1.bSolid.colorBorder.$$if(e0 || eE, cssBuilderInstance.justifyBetween, cssBuilderInstance.justifyEnd).$,
         children: [eE && jsx(Checkbox, {
           checked: scope === PageSelectionType.CURRENT_PAGE,
           onChange: () => setScope(scope === PageSelectionType.CURRENT_PAGE ? PageSelectionType.CURRENT_SELECTION : PageSelectionType.CURRENT_PAGE),
@@ -587,12 +587,12 @@ export let $$eZ0 = registerModal(function (e) {
             variant: "secondary",
             ref: eM,
             children: jsxs("div", {
-              className: _$$s.inlineFlex.overflowHidden.itemsCenter.$,
+              className: cssBuilderInstance.inlineFlex.overflowHidden.itemsCenter.$,
               style: {
                 marginRight: "-8px"
               },
               children: [currentScopeString, jsx(_$$r, {
-                className: _$$s.mr0.$
+                className: cssBuilderInstance.mr0.$
               })]
             })
           }), jsx(eV, {
@@ -605,7 +605,7 @@ export let $$eZ0 = registerModal(function (e) {
             }
           })]
         }), jsxs("div", {
-          className: _$$s.flex.justifyEnd.$,
+          className: cssBuilderInstance.flex.justifyEnd.$,
           children: [!e1 && jsx(Button, {
             variant: "secondary",
             onClick: onClose,
@@ -618,7 +618,7 @@ export let $$eZ0 = registerModal(function (e) {
               style: styleBuilderInstance.$$if(isReplacing, styleBuilderInstance.invisible).$,
               children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_fonts")
             }), isReplacing && jsx("span", {
-              className: _$$s.absolute.leftHalf.topHalf.$,
+              className: cssBuilderInstance.absolute.leftHalf.topHalf.$,
               style: styleBuilderInstance.add({
                 "--color-icon": "var(--btn-color)",
                 transform: "translate(-50%, -50%)"
@@ -677,11 +677,11 @@ function eX({
     (await Cj(x.family, w, d, u, "missing_fonts_modal")) && e && v(e);
   }, [u, x.family, d, v, w]);
   return jsxs("div", {
-    className: I()(_$$s.flex.itemsStretch.flexNone.$$if(s, _$$s.flexColumn, _$$s.itemsCenter).py4.px12.$, s ? "" : eb),
+    className: I()(cssBuilderInstance.flex.itemsStretch.flexNone.$$if(s, cssBuilderInstance.flexColumn, cssBuilderInstance.itemsCenter).py4.px12.$, s ? "" : eb),
     children: [jsxs("div", {
-      className: I()(_$$s.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.$, eb),
+      className: I()(cssBuilderInstance.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.$, eb),
       children: [jsxs(ButtonPrimitive, {
-        className: I()(_$$s.flex.flexGrow1.itemsCenter.alignLeft.textBodyMedium.minH32.$, ey, "missing_fonts_modal--fontFamilyRowButton--TTmK3"),
+        className: I()(cssBuilderInstance.flex.flexGrow1.itemsCenter.alignLeft.textBodyMedium.minH32.$, ey, "missing_fonts_modal--fontFamilyRowButton--TTmK3"),
         onClick: () => {
           l(!s);
         },
@@ -692,25 +692,25 @@ function eX({
         }), x.family]
       }), s && !E && O]
     }), s && jsx("div", {
-      className: _$$s.flex.flexColumn.pl16.$,
+      className: cssBuilderInstance.flex.flexColumn.pl16.$,
       children: e.map(e => {
         let r = i[eY(e)];
         let a = getI18nString("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
           numItems: m.counts?.[e.index] ?? 1
         });
         return jsxs("div", {
-          className: I()(_$$s.flex.flexNone.$, "missing_fonts_modal--fontStyleRow--e8GDG"),
+          className: I()(cssBuilderInstance.flex.flexNone.$, "missing_fonts_modal--fontStyleRow--e8GDG"),
           children: [jsxs("div", {
-            className: _$$s.flex.flexGrow1.itemsCenter.justifyBetween.$,
+            className: cssBuilderInstance.flex.flexGrow1.itemsCenter.justifyBetween.$,
             children: [jsx("div", {
-              className: _$$s.flex.itemsCenter.$,
+              className: cssBuilderInstance.flex.itemsCenter.$,
               children: e.style
             }), jsx(SvgComponent, {
               svg: _$$A4,
-              className: I()(e_, _$$s.mr8.$)
+              className: I()(e_, cssBuilderInstance.mr8.$)
             })]
           }), jsxs("div", {
-            className: I()("missing_fonts_modal--replacementRight--UxaN-", _$$s.gap8.$),
+            className: I()("missing_fonts_modal--replacementRight--UxaN-", cssBuilderInstance.gap8.$),
             children: [jsx("div", {
               style: styleBuilderInstance.add({
                 width: "224px"
@@ -771,9 +771,9 @@ function eX({
     }), !s && jsxs(Fragment, {
       children: [jsx(SvgComponent, {
         svg: _$$A4,
-        className: I()(e_, _$$s.mr8.$)
+        className: I()(e_, cssBuilderInstance.mr8.$)
       }), jsxs("div", {
-        className: _$$s.flex.itemsCenter.gap8.minW0.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap8.minW0.$,
         style: styleBuilderInstance.add({
           width: ef
         }).$,
@@ -781,7 +781,7 @@ function eX({
           onClick: () => l(!s),
           variant: "secondary",
           children: jsx("div", {
-            className: _$$s.inlineFlex.overflowHidden.wFull.itemsStart.$,
+            className: cssBuilderInstance.inlineFlex.overflowHidden.wFull.itemsStart.$,
             children: getI18nString("fullscreen.mixed")
           })
         }) : jsxs(Fragment, {
@@ -794,7 +794,7 @@ function eX({
               children: getI18nString("fullscreen.toolbar.missing_fonts_modal.or")
             })]
           }), jsx("div", {
-            className: _$$s.flexAuto.minW0.$,
+            className: cssBuilderInstance.flexAuto.minW0.$,
             children: jsx(ay, {
               clearable: !0,
               customPlaceholder: R ? getI18nString("fullscreen.toolbar.missing_fonts_modal.select_font_replace") : getI18nString("fullscreen.toolbar.missing_fonts_modal.select_font"),

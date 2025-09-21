@@ -117,7 +117,7 @@ import { defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID
 import { generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleGenericEvent } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { logError } from "../905/714362";
-import { s as _$$s5 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeValue } from "../905/216495";
 import { A5, lJ as _$$lJ, kl, pw, DQ, Gt, fC } from "../905/275640";
@@ -2767,7 +2767,7 @@ var i0 = (e => (e[e.FULL = 0] = "FULL", e[e.OUTLINE_ONLY = 1] = "OUTLINE_ONLY", 
         role: "button",
         tabIndex: 0,
         children: [jsx("div", {
-          className: _$$s5.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: i
         }), jsx("div", {
           id: f,
@@ -3182,13 +3182,13 @@ function nV({
   animationPhase: i
 }) {
   return jsx("div", {
-    className: _$$s5.flex.itemsCenter.colorBgSecondary.radiusMedium.textBodySmall.colorText.$,
+    className: cssBuilderInstance.flex.itemsCenter.colorBgSecondary.radiusMedium.textBodySmall.colorText.$,
     children: e ? jsx(nU, {}) : jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s5.px4.$,
+        className: cssBuilderInstance.px4.$,
         children: nF.format(t)
       }), i && jsx("div", {
-        className: _$$s5.px4.bl1.bSolid.colorBorder.$,
+        className: cssBuilderInstance.px4.bl1.bSolid.colorBorder.$,
         children: nT.format(i)
       })]
     })
@@ -3235,9 +3235,9 @@ function n$({
     E && updateHoveredNode(f ? E : defaultSessionLocalIDString);
   }, [f, E]);
   return jsxs("div", {
-    className: _$$s5.flex.wFull.py4.$,
+    className: cssBuilderInstance.flex.wFull.py4.$,
     children: [jsx(RecordableDiv, {
-      className: _$$s5.h32.w16.flex.itemsCenter.$$if(b, _$$s5.opacity1, _$$s5.opacity0).$,
+      className: cssBuilderInstance.h32.w16.flex.itemsCenter.$$if(b, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
       },
@@ -3282,7 +3282,7 @@ function n$({
       title: v ?? "",
       tooltip: d ? getI18nString("slides.properties_panel.object_animations.icon.tooltip_invalid_animation") : void 0,
       children: jsxs("div", {
-        className: _$$s5.flex.flexColumn.px16.py8.$,
+        className: cssBuilderInstance.flex.flexColumn.px16.py8.$,
         children: [jsx(nR, {
           recordingKey: generateRecordingKey(_, "animationType")
         }), jsx(nj, {
@@ -3352,11 +3352,11 @@ function nB({
     getContextMenuTriggerProps
   } = useMenu();
   return jsxs("div", {
-    className: _$$s5.flex.wFull.py4.$,
+    className: cssBuilderInstance.flex.wFull.py4.$,
     onMouseEnter: () => f(!0),
     onMouseLeave: () => f(!1),
     children: [jsx(RecordableDiv, {
-      className: _$$s5.h32.w16.flex.itemsCenter.$$if(v, _$$s5.opacity1, _$$s5.opacity0).$,
+      className: cssBuilderInstance.h32.w16.flex.itemsCenter.$$if(v, cssBuilderInstance.opacity1, cssBuilderInstance.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
       },
@@ -3405,7 +3405,7 @@ function nB({
         }), jsx(nc, {
           isOpen: j,
           children: jsxs("div", {
-            className: _$$s5.flex.flexColumn.px16.py8.$,
+            className: cssBuilderInstance.flex.flexColumn.px16.py8.$,
             children: [jsx(nR, {
               recordingKey: generateRecordingKey(m, "animationType")
             }), jsx(nj, {
@@ -3444,7 +3444,7 @@ function nz({
     }), jsx(useCachedSubtree, {
       isVisible: !n,
       children: () => jsxs("div", {
-        className: _$$s5.flex.itemsCenter.mr8.$,
+        className: cssBuilderInstance.flex.itemsCenter.mr8.$,
         children: [jsx("div", {
           children: nA(e.action.animationType)
         }), jsx(nV, {
@@ -3557,7 +3557,7 @@ function nq({
         })
       }), jsx(DialogBody, {
         children: jsxs("div", {
-          className: _$$s5.flex.flexColumn.$,
+          className: cssBuilderInstance.flex.flexColumn.$,
           children: [jsx(nR, {
             recordingKey: generateRecordingKey(i, "animationType")
           }), jsx(nj, {
@@ -3695,7 +3695,7 @@ function nW({
       sceneGraphSelection: i,
       recordingKey: e
     }), jsx("div", {
-      className: _$$s5.pr16.$,
+      className: cssBuilderInstance.pr16.$,
       ref: n,
       children: 0 === u.length ? jsx(n0, {}) : jsx(_$$q2, {
         canInsertItemsIn: _$$eB,
@@ -3721,7 +3721,7 @@ function nW({
           let x = uc(t) ? Gu(t.action.transitionNodeID) : null;
           let m = !!h && h === x;
           return jsxs("div", {
-            className: _$$s5.relative.wFull.$,
+            className: cssBuilderInstance.relative.wFull.$,
             children: [_$$eB(t) && jsx(n1, {
               item: t,
               isDraggingInGeneral: f,
@@ -3889,9 +3889,9 @@ function nZ({
 }
 function n0() {
   return jsx("div", {
-    className: _$$s5.pl16.relative.$,
+    className: cssBuilderInstance.pl16.relative.$,
     children: jsx("p", {
-      className: _$$s5.textBodyMedium.colorTextSecondary.alignLeft.py8.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.alignLeft.py8.$,
       children: getI18nString("slides.properties_panel.object_animations.empty_state_text")
     })
   });
@@ -3908,7 +3908,7 @@ function n1({
     onMouseMove: i,
     onMouseUp: n,
     children: !t && !l && jsx("div", {
-      className: _$$s5.textBodySmall.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodySmall.colorTextSecondary.$,
       children: e.interactionIndex + 1
     })
   });
@@ -4502,7 +4502,7 @@ function lk({
   let [T, S] = _$$d2();
   let I = Math.round(s / 400 * 100);
   return jsxs("div", {
-    className: iG()(_$$s5.flex.flexColumn.itemsCenter.absolute.bottom0.borderBox.$, "speaker_notes_overlay--speakerNotesOverlayContainer--KDKx7"),
+    className: iG()(cssBuilderInstance.flex.flexColumn.itemsCenter.absolute.bottom0.borderBox.$, "speaker_notes_overlay--speakerNotesOverlayContainer--KDKx7"),
     style: {
       marginLeft: T,
       marginRight: S,
@@ -4514,7 +4514,7 @@ function lk({
       ...b({
         className: iG()({
           "speaker_notes_overlay--dragHandleContainer--7VUGa": !0,
-          [_$$s5.wFull.flex.justifyCenter.$]: !0,
+          [cssBuilderInstance.wFull.flex.justifyCenter.$]: !0,
           "speaker_notes_overlay--hiddenDragHandleHoverTarget--gUtvC": h
         }),
         style: {
@@ -4556,7 +4556,7 @@ function lk({
         })]
       })
     }), jsx("div", {
-      className: iG()(_$$s5.relative.wFull.borderBox.$, Dm),
+      className: iG()(cssBuilderInstance.relative.wFull.borderBox.$, Dm),
       style: {
         ...styleBuilderInstance.add({
           padding: `0px ${d}px`,
@@ -4632,12 +4632,12 @@ function lw({
     });
   };
   let a = useMemo(() => e && isSlidesAiEnabled && i && !n ? jsxs("div", {
-    className: _$$s5.flex.justifyBetween.$,
+    className: cssBuilderInstance.flex.justifyBetween.$,
     children: [getI18nString("slides.speaker_notes.placeholder"), jsxs(ButtonPrimitive, {
       className: "speaker_notes_overlay--generateButton--OoZBZ",
       onClick: () => s(),
       children: [jsx(_$$B2, {}), getI18nString("slides.speaker_notes.draft"), jsx("div", {
-        className: _$$s5.ml4.$,
+        className: cssBuilderInstance.ml4.$,
         children: jsx(_$$y, {
           variant: _$$x3.SLIDES_SPEAKER_NOTES,
           helpUrlVariant: JT.SLIDES_GENERATE_SPEAKER_NOTES
@@ -4645,7 +4645,7 @@ function lw({
       })]
     })]
   }) : e && isSlidesAiEnabled && n ? jsxs("div", {
-    className: _$$s5.flex.gap8.$,
+    className: cssBuilderInstance.flex.gap8.$,
     children: [jsx(LoadingSpinner, {
       size: "small"
     }), getI18nString("slides.speaker_notes.loading")]
@@ -4972,7 +4972,7 @@ class sp extends ub {
         children: jsx("img", {
           src: this.props.belowThumbnailUrl,
           alt: "",
-          className: _$$s5.relative.wFull.hFull.$
+          className: cssBuilderInstance.relative.wFull.hFull.$
         })
       }), jsx("div", {
         className: iG()(i, sc),
@@ -4980,7 +4980,7 @@ class sp extends ub {
         children: jsx("img", {
           src: this.props.aboveThumbnailUrl,
           alt: "",
-          className: _$$s5.relative.wFull.hFull.$
+          className: cssBuilderInstance.relative.wFull.hFull.$
         })
       }), jsx("div", {
         className: "slides_animation_panel--screenContainer--6eR6r transition_preview--screenContainer--iuLzq transition_preview--previewFrame--WAa8e transition_preview--_previewItem--o2gce slides_animation_panel--previewFrame--cO6cR transition_preview--previewFrame--WAa8e transition_preview--_previewItem--o2gce",
@@ -5229,7 +5229,7 @@ function sD({
     onClick: o,
     recordingKey: n
   }) : jsx("div", {
-    className: _$$s5.pr8.$,
+    className: cssBuilderInstance.pr8.$,
     children: jsx(nV, {
       animationDuration: s.duration
     })
@@ -5275,7 +5275,7 @@ function sM({
   let p = u && (o || n);
   let x = o ? i0.FULL : void 0;
   return jsx(Ad, {
-    appendedClassName: _$$s5.py4.$,
+    appendedClassName: cssBuilderInstance.py4.$,
     label: null,
     input: jsxs(_$$bL2, {
       isOpen: o,
@@ -5332,7 +5332,7 @@ function sF({
   let c = sd(e.behavior);
   let u = c && (o || n);
   return jsx(Ad, {
-    appendedClassName: _$$s5.py4.$,
+    appendedClassName: cssBuilderInstance.py4.$,
     label: null,
     input: jsx(_ExpandableSection, {
       expanded: o,
@@ -5755,7 +5755,7 @@ function am({
       children: [jsx(_$$r, {
         titleTx: renderI18nText("slides.properties_panel.theme.panel_title")
       }), jsx("div", {
-        className: _$$s5.grid.px16.$,
+        className: cssBuilderInstance.grid.px16.$,
         children: jsx(_$$n4, {
           selectedThemeId: i ?? n,
           onChange: x,
@@ -6377,7 +6377,7 @@ function oN({
             showProperties: x,
             onEnterPressed: j
           }), !styleRef && jsx("div", {
-            className: _$$s5.pl16.pr16.pt16.$,
+            className: cssBuilderInstance.pl16.pr16.pt16.$,
             children: renderI18nText("design_systems.create_style.an_error_occurred_while_creating_the_style")
           }), jsx(AutoLayout, {
             horizontalAlignItems: p.current ? void 0 : "end",
@@ -6514,7 +6514,7 @@ function o$({
       children: [jsxs("div", {
         className: "slides_text_style_dropdown_contents--dropdownHeader--m278H",
         children: [jsx("span", {
-          className: _$$s5.flexGrow1.$,
+          className: cssBuilderInstance.flexGrow1.$,
           children: renderI18nText("slides.properties_panel.text_styles")
         }), jsx(oU, {
           parentRef: f,
@@ -6550,7 +6550,7 @@ function o$({
           children: jsx(_$$e5, {})
         })]
       }), jsxs("div", {
-        className: _$$s5.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         style: {
           padding: "8px"
         },
@@ -6580,7 +6580,7 @@ function o$({
           closePicker: n
         })]
       }), !e && jsx("div", {
-        className: _$$s5.p8.bt1.bSolid.colorBorder.$,
+        className: cssBuilderInstance.p8.bt1.bSolid.colorBorder.$,
         children: jsx(oH, {
           closePicker: n,
           recordingKey: generateRecordingKey(o, "custom")
@@ -6593,7 +6593,7 @@ function oB({
   isDeletedTheme: e
 }) {
   return jsx("span", {
-    className: _$$s5.px8.colorTextSecondary.$,
+    className: cssBuilderInstance.px8.colorTextSecondary.$,
     children: e ? renderI18nText("slides.properties_panel.text_style.deleted_theme") : renderI18nText("slides.properties_panel.text_style.empty_styles", {
       title: jsx("strong", {
         children: renderI18nText("slides.properties_panel.text_style.title_style")
@@ -6625,7 +6625,7 @@ function oz({
   return jsxs(RecordableDiv, {
     forwardedRef: j,
     className: iG()(oV, {
-      [_$$s5.colorBgHover.$]: i || _ && !n
+      [cssBuilderInstance.colorBgHover.$]: i || _ && !n
     }),
     onMouseDown: e => {
       e.target === e.currentTarget && d(e);
@@ -6645,24 +6645,24 @@ function oz({
     onMouseLeave: () => g(!1),
     recordingKey: generateRecordingKey(h, e.name),
     children: [jsx("span", {
-      className: iG()(_$$s5.eventsNone.$, t ? _$$s5.visible.$ : _$$s5.invisible.$),
+      className: iG()(cssBuilderInstance.eventsNone.$, t ? cssBuilderInstance.visible.$ : cssBuilderInstance.invisible.$),
       children: jsx(_$$l2, {})
     }), jsxs("div", {
-      className: _$$s5.flexGrow1.ellipsis.eventsNone.inlineFlex.truncate.$,
+      className: cssBuilderInstance.flexGrow1.ellipsis.eventsNone.inlineFlex.truncate.$,
       children: [jsx("span", {
-        className: iG()(_$$s5.colorText.$),
+        className: iG()(cssBuilderInstance.colorText.$),
         children: e.name
       }), y && jsx("span", {
-        className: _$$s5.colorTextSecondary.pl2.$,
+        className: cssBuilderInstance.colorTextSecondary.pl2.$,
         children: renderI18nText("slides.properties_panel.text.style_description_font_size", {
           fontSize: roundTo2Decimals(y)
         })
       })]
     }), f && jsx("span", {
-      className: _$$s5.w24.$,
+      className: cssBuilderInstance.w24.$,
       children: jsx(_$$z2, {})
     }), jsx("span", {
-      className: E ? _$$s5.visible.$ : _$$s5.invisible.$,
+      className: E ? cssBuilderInstance.visible.$ : cssBuilderInstance.invisible.$,
       children: jsx(_$$d6, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
@@ -6718,7 +6718,7 @@ function oH({
   let i = kl("fontFamily");
   let n = kl("fontSize");
   return jsxs("div", {
-    className: _$$s5.pb4.$,
+    className: cssBuilderInstance.pb4.$,
     children: [jsx("div", {
       className: oK,
       children: renderI18nText("slides.properties_panel.text_style.custom")
@@ -6727,16 +6727,16 @@ function oH({
       onClick: e,
       recordingKey: generateRecordingKey(t, "custom"),
       children: [jsx("div", {
-        className: _$$s5.pr8.$,
+        className: cssBuilderInstance.pr8.$,
         children: jsx(In, {
           icon: "checkmark-on-16"
         })
       }), isValidValue(i) && isValidValue(n) ? jsxs(Fragment, {
         children: [jsx("div", {
-          className: _$$s5.colorText.$,
+          className: cssBuilderInstance.colorText.$,
           children: i
         }), jsx("div", {
-          className: _$$s5.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           style: {
             paddingLeft: "3px"
           },
@@ -6814,7 +6814,7 @@ function oW({
       previouslyAppliedStyle: n,
       textPreviewColor: l
     }), jsx("span", {
-      className: _$$s5.pl4.colorTextSecondary.$,
+      className: cssBuilderInstance.pl4.colorTextSecondary.$,
       children: renderI18nText("slides.properties_panel.text_style.edited")
     })]
   }) : renderI18nText("design_systems.styles.custom");
@@ -6825,10 +6825,10 @@ function oW({
         "data-tooltip": getI18nString("slides.properties_panel.text_style.tooltip")
       },
       recordingKey: d,
-      className: iG()(_$$t3, _$$s5.relative.wFull.h40.py4.pl8.pr4.$, _$$s5.bRadius5.b1.bSolid.colorBorder.$, _$$s5.flex.itemsCenter.$),
+      className: iG()(_$$t3, cssBuilderInstance.relative.wFull.h40.py4.pl8.pr4.$, cssBuilderInstance.bRadius5.b1.bSolid.colorBorder.$, cssBuilderInstance.flex.itemsCenter.$),
       onClick: a,
       children: [jsx("div", {
-        className: iG()(_$$s5.flexGrow1.$, _$$s5.fontMedium.colorText.alignLeft.ellipsis.$, _$$s5.flex.itemsCenter.overflowHidden.$),
+        className: iG()(cssBuilderInstance.flexGrow1.$, cssBuilderInstance.fontMedium.colorText.alignLeft.ellipsis.$, cssBuilderInstance.flex.itemsCenter.overflowHidden.$),
         children: u
       }), jsx(_$$r5, {}), !e && x && jsx(o0, {
         themeStyleToUpdate: n,
@@ -6960,7 +6960,7 @@ function oZ({
     src: e,
     alt: "Text style preview"
   }) : jsx("div", {
-    className: _$$s5.fontMedium.colorText.$,
+    className: cssBuilderInstance.fontMedium.colorText.$,
     children: t
   });
 }
@@ -7235,9 +7235,9 @@ function o2({
   let u = o.every(e => !o4(e));
   return jsx(Ad, {
     label: null,
-    appendedClassName: _$$s5.pt2.$,
+    appendedClassName: cssBuilderInstance.pt2.$,
     input: jsxs("div", {
-      className: _$$s5.flex.wFull.gap4.$,
+      className: cssBuilderInstance.flex.wFull.gap4.$,
       children: [jsx(o6, {
         selected: isBold,
         disabled: d,
@@ -7620,7 +7620,7 @@ function df({
         displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_big"),
         icon: jsx(SvgComponent, {
           svg: _$$A0,
-          className: _$$s5.colorIconSecondary.$
+          className: cssBuilderInstance.colorIconSecondary.$
         })
       },
       DASHED_SMALL: {
@@ -7628,7 +7628,7 @@ function df({
         displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_small"),
         icon: jsx(SvgComponent, {
           svg: _$$A1,
-          className: _$$s5.colorIconSecondary.$
+          className: cssBuilderInstance.colorIconSecondary.$
         })
       }
     }), []);
@@ -8016,7 +8016,7 @@ function dV({
   }, [t, i]);
   return jsx(_$$r, {
     titleTx: e ? jsx("div", {
-      className: _$$s5.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: jsx(_$$F3, {
         tooltip: e,
         children: e
@@ -8086,7 +8086,7 @@ function cr({
         recordingKey: t,
         "aria-label": getI18nString("slides.properties_panel.blur.label"),
         children: jsxs("div", {
-          className: _$$s5.inlineFlex.itemsCenter.$,
+          className: cssBuilderInstance.inlineFlex.itemsCenter.$,
           children: [jsx(_$$V2, {}), jsx("div", {
             id: "flyout-label",
             children: renderI18nText("slides.properties_panel.blur.label")
@@ -8104,7 +8104,7 @@ function cr({
         autoflowHeight: !0,
         recordingKey: t,
         children: jsx("div", {
-          className: _$$s5.py12.pr8.$,
+          className: cssBuilderInstance.py12.pr8.$,
           children: jsx(cl, {
             recordingKey: t
           })
@@ -8194,11 +8194,11 @@ function co({
       },
       recordingKey: generateRecordingKey(n, "imageDragTarget"),
       children: jsxs("div", {
-        className: iG()(_$$s5.relative.wAuto.h100.flex.itemsCenter.justifyCenter.radiusMedium.$, xm, {
-          [_$$s5.colorBorderSelected.bSolid.b1.$]: d
+        className: iG()(cssBuilderInstance.relative.wAuto.h100.flex.itemsCenter.justifyCenter.radiusMedium.$, xm, {
+          [cssBuilderInstance.colorBorderSelected.bSolid.b1.$]: d
         }),
         children: [F ? jsx(Fragment, {}) : A && R ? jsx(_$$A10, {
-          className: _$$s5.opacity1.block.$,
+          className: cssBuilderInstance.opacity1.block.$,
           currentTime: p,
           height: 100,
           imagePaint: A,
@@ -8228,7 +8228,7 @@ function co({
           forceUpdate: !1
         }) : null, jsx(_$$k8, {
           isVisible: !1,
-          wrapperClassName: iG()(_$$s5.absolute.top0.bottom0.left0.right0.flex.itemsCenter.justifyCenter.$, CL),
+          wrapperClassName: iG()(cssBuilderInstance.absolute.top0.bottom0.left0.right0.flex.itemsCenter.justifyCenter.$, CL),
           children: jsx(_$$E5, {
             name: "slides_media_upload",
             children: jsx(_$$v7, {
@@ -8250,7 +8250,7 @@ function co({
       })
     }), R ? null : jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s5.py4.pr8.pl16.$,
+        className: cssBuilderInstance.py4.pr8.pl16.$,
         children: jsx(_$$E5, {
           name: "slides_image_scale_mode",
           children: jsxs(_$$bL, {
@@ -8486,7 +8486,7 @@ function ch({
           }
         }, e))
       }), E && jsx("div", {
-        className: _$$s5.py4.pr8.pl16.$,
+        className: cssBuilderInstance.py4.pr8.pl16.$,
         children: jsx(_$$u7, {
           paint: d,
           onChange: g,
@@ -8564,7 +8564,7 @@ function cf({
     children: jsxs(Zk, {
       children: [jsx(_$$r, {
         titleTx: jsx("p", {
-          className: _$$s5.textBodyMediumStrong.$,
+          className: cssBuilderInstance.textBodyMediumStrong.$,
           children: n.displayName
         }),
         icon: jsx(cb, {
@@ -8583,14 +8583,14 @@ function cf({
 }
 function cj() {
   return jsx("div", {
-    className: _$$s5.p8.$,
+    className: cssBuilderInstance.p8.$,
     children: jsxs("div", {
-      className: _$$s5.colorBgSecondary.radiusMedium.p8.$,
+      className: cssBuilderInstance.colorBgSecondary.radiusMedium.p8.$,
       children: [jsx("div", {
-        className: _$$s5.textBodyMediumStrong.colorText.pb4.$,
+        className: cssBuilderInstance.textBodyMediumStrong.colorText.pb4.$,
         children: renderI18nText("slides.properties_panel.interactive_widget.usage_guidance_header")
       }), jsx("div", {
-        className: _$$s5.textBodyMedium.colorTextTertiary.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextTertiary.$,
         children: renderI18nText("slides.properties_panel.interactive_widget.usage_guidance_text")
       })]
     })

@@ -5,7 +5,7 @@ import { _ as _$$_ } from "../905/862468";
 import { k as _$$k } from "../905/727631";
 import { ActionType, Fullscreen } from "../figma_app/763686";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { B as _$$B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -56,18 +56,18 @@ function P({
         align: "center",
         fullWidth: !0,
         children: [jsxs("div", {
-          className: _$$s.flex.itemsCenter.gap4.$,
+          className: cssBuilderInstance.flex.itemsCenter.gap4.$,
           children: [jsx("div", {
-            className: _$$s.w24.h24.flex.itemsCenter.justifyCenter.$,
+            className: cssBuilderInstance.w24.h24.flex.itemsCenter.justifyCenter.$,
             children: jsx("div", {
               style: {
                 "--color-icon": "var(--color-icon-brand)"
               },
-              className: _$$s.flex.justifyCenter.itemsCenter.$,
+              className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
               children: e
             })
           }), jsx("span", {
-            className: _$$s.textBodyMediumStrong.colorTextBrand.$,
+            className: cssBuilderInstance.textBodyMediumStrong.colorTextBrand.$,
             children: renderI18nText("auto_rename_layers.missing_n_layer_names", {
               n: a
             })
@@ -169,9 +169,9 @@ export function $$D0(e) {
             align: "center",
             fullWidth: !0,
             children: [jsx("div", {
-              className: _$$s.flex.itemsCenter.gap4.ml8.$,
+              className: cssBuilderInstance.flex.itemsCenter.gap4.ml8.$,
               children: jsx("span", {
-                className: _$$s.textBodyMediumStrong.truncate.maxW150.$,
+                className: cssBuilderInstance.textBodyMediumStrong.truncate.maxW150.$,
                 children: renderI18nText("auto_rename_layers.error.no_nameable_items")
               })
             }), jsx(_$$r, {
@@ -191,12 +191,12 @@ export function $$D0(e) {
             align: "center",
             fullWidth: !0,
             children: [jsxs("div", {
-              className: _$$s.flex.itemsCenter.gap4.ml8.$,
+              className: cssBuilderInstance.flex.itemsCenter.gap4.ml8.$,
               children: [jsx("span", {
-                className: _$$s.textBodyMediumStrong.truncate.maxW150.$,
+                className: cssBuilderInstance.textBodyMediumStrong.truncate.maxW150.$,
                 children: renderI18nText("auto_rename_layers.too_many_layers_selected")
               }), jsx("span", {
-                className: _$$s.textBodyMedium.colorTextSecondary.$,
+                className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                 children: renderI18nText("auto_rename_layers.too_many_layers_count", {
                   selected: V,
                   limit: NB

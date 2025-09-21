@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { P } from "../905/994270";
 import { nP, LU } from "../905/487011";
@@ -73,10 +73,10 @@ export function $$g0({
         children: jsxs(B, {
           gap: 8,
           children: [jsx("span", {
-            className: _$$s.textBodyMediumStrong.$,
+            className: cssBuilderInstance.textBodyMediumStrong.$,
             children: e
           }), !!t && jsx("span", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: t
           })]
         })

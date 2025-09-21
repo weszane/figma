@@ -5,7 +5,7 @@ import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { ButtonSecondaryTracked, ButtonBasePrimary, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { D as _$$D } from "../905/251759";
 import { TrackingProvider } from "../figma_app/831799";
@@ -177,12 +177,12 @@ function en(e) {
   } = SO[e.planTier];
   return jsxs("div", {
     children: [jsxs("h2", {
-      className: _$$s.font16.fontSemiBold.flex.flexWrap.itemsCenter.$,
+      className: cssBuilderInstance.font16.fontSemiBold.flex.flexWrap.itemsCenter.$,
       children: [name(), " ", jsx(er, {
         ...e
       })]
     }), jsxs("p", {
-      className: _$$s.mt8.colorTextSecondary.$,
+      className: cssBuilderInstance.mt8.colorTextSecondary.$,
       children: [description(), " ", e.isProCurrent && e.planTier !== FPlanNameType.PRO ? renderI18nText("plan_comparison.plans.billed_yearly") : null]
     })]
   });
@@ -198,11 +198,11 @@ function er({
   let {
     highlightBadgeText
   } = SO[e];
-  let d = _$$s.ml8.fontMedium.font11.colorTextBrand.$;
+  let d = cssBuilderInstance.ml8.fontMedium.font11.colorTextBrand.$;
   let c = useSelector(e => e.isFreeUser);
   if (e === FPlanNameType.STARTER) {
     if (o === UpsellModalType.CREATE_NEW_PAID_TEAM && c) return jsx("strong", {
-      className: _$$s.ml8.fontMedium.font11.colorTextSecondary.$,
+      className: cssBuilderInstance.ml8.fontMedium.font11.colorTextSecondary.$,
       children: renderI18nText("plan_comparison.plans.starter.current_plan")
     });
   } else if (e === FPlanNameType.PRO && i) return jsx("strong", {
@@ -287,14 +287,14 @@ function es({
   let v = K()(A.data, e => b.formatMoney(e.amount, {
     showFullFormat: r
   }));
-  let I = _$$s.flex.justifyBetween.itemsCenter.gap6.$;
-  let E = _$$s.fontMedium.font11.colorText.$;
+  let I = cssBuilderInstance.flex.justifyBetween.itemsCenter.gap6.$;
+  let E = cssBuilderInstance.fontMedium.font11.colorText.$;
   let x = styleBuilderInstance.flex.flexColumn.add({
     maxWidth: "50%"
   }).$;
-  let S = _$$s.fontSemiBold.font16.colorText.$;
-  let w = _$$s.noWrap.$;
-  let C = _$$s.noWrap.$;
+  let S = cssBuilderInstance.fontSemiBold.font16.colorText.$;
+  let w = cssBuilderInstance.noWrap.$;
+  let C = cssBuilderInstance.noWrap.$;
   return jsxs("div", {
     className: "plan_information--priceContainer--vjnZv",
     children: [jsxs("div", {
@@ -427,11 +427,11 @@ function el({
     additionalMessage
   } = SO[e];
   return jsxs("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: [canContactSales && jsx("p", {
       children: renderI18nText("plan_comparison.plans.or_contact_sales", {
         contactSalesLink: jsx(linkWithTracking, {
-          className: _$$s.noWrap.cursorDefault.$,
+          className: cssBuilderInstance.noWrap.cursorDefault.$,
           onClick: () => i(showModalHandler({
             type: lk,
             data: {
@@ -583,7 +583,7 @@ export function $$em0({
               children: [jsx("th", {
                 className: eu
               }), orderedPlans.map(e => jsx("th", {
-                className: o()(ec, _$$s.pt24.pb12.$, {
+                className: o()(ec, cssBuilderInstance.pt24.pb12.$, {
                   [ed]: e === highlightedPlan
                 }),
                 children: jsx(en, {
@@ -599,7 +599,7 @@ export function $$em0({
               children: [jsx("th", {
                 className: eu
               }), orderedPlans.map(t => jsx("th", {
-                className: o()(ec, _$$s.pt12.pb12.$, {
+                className: o()(ec, cssBuilderInstance.pt12.pb12.$, {
                   [ed]: t === highlightedPlan
                 }),
                 children: jsx(ea, {
@@ -615,7 +615,7 @@ export function $$em0({
               children: [jsx("th", {
                 className: eu
               }), orderedPlans.map(e => jsx("th", {
-                className: o()(ec, _$$s.pt12.$, {
+                className: o()(ec, cssBuilderInstance.pt12.$, {
                   [ed]: e === highlightedPlan
                 }),
                 children: jsx(eo, {
@@ -631,7 +631,7 @@ export function $$em0({
               children: [jsx("th", {
                 className: eu
               }), orderedPlans.map(e => jsx("th", {
-                className: o()(ec, _$$s.pt8.pb12.$, {
+                className: o()(ec, cssBuilderInstance.pt8.pb12.$, {
                   [ed]: e === highlightedPlan
                 }),
                 children: jsx(el, {

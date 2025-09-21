@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { LinkPrimitive } from "../figma_app/496441";
 import s from "classnames";
 import { NG } from "../figma_app/709893";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { KindEnum } from "../905/129884";
 var o = s;
 export function $$u0({
@@ -19,7 +19,7 @@ export function $$u0({
     disabled: !i
   });
   return jsx(LinkPrimitive, {
-    className: o()(_$$s.truncate.$, "library_breadcrumb_link--link--ZmjG0"),
+    className: o()(cssBuilderInstance.truncate.$, "library_breadcrumb_link--link--ZmjG0"),
     ref: u,
     href: e,
     htmlAttributes: {

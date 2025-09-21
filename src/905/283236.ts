@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
 import { isEmptyAddress } from "../figma_app/471982";
 import s from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { VA } from "../905/941408";
 var o = s;
 function c({
@@ -15,9 +15,9 @@ function c({
     let i = e[t];
     i && (r += `, ${i}`);
   }
-  let a = o()(VA, _$$s.$$if(t, _$$s.colorTextSecondary, _$$s.colorText).$);
+  let a = o()(VA, cssBuilderInstance.$$if(t, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorText).$);
   return jsxs("div", {
-    className: _$$s.flex.itemsStart.flexColumn.$,
+    className: cssBuilderInstance.flex.itemsStart.flexColumn.$,
     children: [jsx("div", {
       className: a,
       children: i

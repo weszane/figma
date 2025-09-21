@@ -68,7 +68,7 @@ import { useDebounce } from 'use-debounce';
 import { I6, lp } from "../figma_app/688398";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { X as _$$X, C as _$$C } from "../642/70391";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { gz, el as _$$el, Rp, $V } from "../figma_app/605071";
 import { Qr, pZ, Wm, nM, bV, ct, j3, cb, sc } from "../figma_app/622978";
 import { SvgComponent } from "../905/714743";
@@ -309,7 +309,7 @@ function eA({
   }, [l, e, s]);
   return jsx("div", {
     ref: i,
-    className: f()(_$$s.absolute.invisible.$, Qr),
+    className: f()(cssBuilderInstance.absolute.invisible.$, Qr),
     "data-testid": "autoscroll-measurement-node",
     children: t
   });

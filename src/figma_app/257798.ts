@@ -13,7 +13,7 @@ import { Q as _$$Q } from "../905/384324";
 import { O as _$$O } from "../905/410575";
 import { u as _$$u } from "../905/486140";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
@@ -74,7 +74,7 @@ function G() {
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
     description: jsx("span", {
-      className: _$$s2.preWrap.$,
+      className: cssBuilderInstance.preWrap.$,
       children: renderI18nText("ui3_labels_curator.description", {
         view: jsx("strong", {
           children: renderI18nText("fullscreen_actions.view-menu")
@@ -271,12 +271,12 @@ function q(e) {
     recordingKey: e.recordingKey
   });
   if (e.inSlidesPanel) return jsxs("div", {
-    className: _$$s2.flex.p8.gap8.itemsCenter.$,
+    className: cssBuilderInstance.flex.p8.gap8.itemsCenter.$,
     children: [jsx("div", {
-      className: _$$s2.flexGrow1.$,
+      className: cssBuilderInstance.flexGrow1.$,
       children: T
     }), jsx("div", {
-      className: _$$s2.flexGrow1.$,
+      className: cssBuilderInstance.flexGrow1.$,
       children: S
     }), jsx(gf, {
       actions: Rg,
@@ -286,7 +286,7 @@ function q(e) {
   });
   let N = jsx("div", {
     "data-onboarding-key": "ui3_labels_onboarding",
-    className: _$$s2.inline.$,
+    className: cssBuilderInstance.inline.$,
     children: renderI18nText("fullscreen.properties_panel.section_position.label_alignment")
   });
   return jsxs(Fragment, {

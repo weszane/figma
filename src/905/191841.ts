@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { dr } from "../figma_app/643789";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { trackNavTreeClicked } from "../figma_app/976345";
 import { RQ } from "../figma_app/544879";
@@ -144,7 +144,7 @@ export function $$P0(e) {
       onCreateTeam: e.onCreateTeam
     })
   }) : jsxs("div", {
-    className: _$$s.mb32.mx32.$,
+    className: cssBuilderInstance.mb32.mx32.$,
     children: [jsx(_$$A, {
       getAriaLabel: e => e.name,
       gridViewProps: {

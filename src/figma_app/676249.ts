@@ -3,7 +3,7 @@ import { useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l4 } from "../905/124270";
 import { isFacetEmpty, getFacetDisplayValue } from "../905/171315";
@@ -60,8 +60,8 @@ export function $$I0({
         return "Filter";
     }
   }, [t]);
-  let D = I ? _$$s.relative.lhNormal.flex.itemsCenter.bRadius4.px8.py4.b1.colorBorder.fontMedium.$ : "facet_dropdown_entry--dropdownContainer--VoPFx tile_sort_filter--dropdownContainer--443h- text--fontPos11--2LvXf text--_fontBase--QdLsd";
-  let k = I ? _$$s.ml8.flex.itemsCenter.$ : "facet_dropdown_entry--caretContainer--4agJ1 tile_sort_filter--caretContainer--kkZQq";
+  let D = I ? cssBuilderInstance.relative.lhNormal.flex.itemsCenter.bRadius4.px8.py4.b1.colorBorder.fontMedium.$ : "facet_dropdown_entry--dropdownContainer--VoPFx tile_sort_filter--dropdownContainer--443h- text--fontPos11--2LvXf text--_fontBase--QdLsd";
+  let k = I ? cssBuilderInstance.ml8.flex.itemsCenter.$ : "facet_dropdown_entry--caretContainer--4agJ1 tile_sort_filter--caretContainer--kkZQq";
   let M = r && r.current ? r.current.getBoundingClientRect().right : void 0;
   return jsxs("div", {
     className: D,
@@ -85,7 +85,7 @@ export function $$I0({
     tabIndex: -1,
     children: [jsx("span", {
       ref: x,
-      className: _$$s.noWrap.$,
+      className: cssBuilderInstance.noWrap.$,
       children: !w || isFacetEmpty(w) ? T(t) : getFacetDisplayValue(w)
     }), jsx("div", {
       className: k,

@@ -11,7 +11,7 @@ import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import j from "classnames";
 import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Qx, Uu } from "../figma_app/8833";
 import { p as _$$p } from "../905/167135";
@@ -247,7 +247,7 @@ function B({
   return jsx(setupThemeContext, {
     mode: j.preferredTokenTheme,
     children: jsxs("div", {
-      className: b()(_$$s.wFull.flex.flexColumn.justifyCenter.itemsCenter.$, "alignment_scale--alignmentScaleThemeWrapper--1VvHW"),
+      className: b()(cssBuilderInstance.wFull.flex.flexColumn.justifyCenter.itemsCenter.$, "alignment_scale--alignmentScaleThemeWrapper--1VvHW"),
       "data-transparency-mode": j.transparentMode,
       children: [jsxs("div", {
         className: "alignment_scale--mainContainer--aIN2p",
@@ -301,7 +301,7 @@ function V({
     children: [jsx("div", {
       className: "alignment_scale--scaleContainerSolidBackground--s4pRF"
     }), jsxs(ButtonPrimitive, {
-      className: b()("alignment_scale--scaleContainer--gmwd3", l ? _$$s.cursorPointer.$ : ""),
+      className: b()("alignment_scale--scaleContainer--gmwd3", l ? cssBuilderInstance.cursorPointer.$ : ""),
       ref: n,
       onClick: i,
       children: [jsx("div", {
@@ -601,7 +601,7 @@ function es({
   let c = stamps.slice(o);
   let d = e && s && !currentUserStamped;
   return jsxs("div", {
-    className: _$$s.flex.gap12.pt36.pb24.itemsCenter.alignCenter.$,
+    className: cssBuilderInstance.flex.gap12.pt36.pb24.itemsCenter.alignCenter.$,
     children: [p.map(e => {
       let t = n && s && e.userId === s.id;
       let l = {
@@ -1173,16 +1173,16 @@ function eq({
     configData
   } = p();
   return jsxs("div", {
-    className: _$$s.wFull.hFull.$,
+    className: cssBuilderInstance.wFull.hFull.$,
     children: [configData.srcUrl && configData.title ? jsx("iframe", {
       src: configData.srcUrl,
-      className: _$$s.wFull.hFull.$,
+      className: cssBuilderInstance.wFull.hFull.$,
       onLoad: e => t?.(e.target),
       title: configData.title,
       allowFullScreen: !1,
       allow: "autoplay"
     }) : null, e ? jsx("div", {
-      className: _$$s.wFull.hFull.absolute.top0.left0.$
+      className: cssBuilderInstance.wFull.hFull.absolute.top0.left0.$
     }) : null]
   });
 }
@@ -1191,7 +1191,7 @@ function eH() {
     configData
   } = p();
   return configData.url && configData.title ? jsx("a", {
-    className: _$$s.wFull.hFull.cursorPointer.relative.$,
+    className: cssBuilderInstance.wFull.hFull.cursorPointer.relative.$,
     style: {
       pointerEvents: "auto"
     },
@@ -1202,7 +1202,7 @@ function eH() {
     children: configData.thumbnailUrl ? jsx("img", {
       src: configData.thumbnailUrl,
       alt: configData.title,
-      className: _$$s.wFull.hFull.$,
+      className: cssBuilderInstance.wFull.hFull.$,
       style: {
         objectFit: "cover"
       }
@@ -1245,10 +1245,10 @@ let eY = {
         } catch (e) {}
       });
     }, [configData.url, configData.srcUrl, nodeId, setConfigData, isReadOnly]), configData.url && !configData.srcUrl) ? jsx("div", {
-      className: _$$s.absolute.w48.h48.$,
+      className: cssBuilderInstance.absolute.w48.h48.$,
       children: jsx(LoadingSpinner, {
         size: "custom",
-        className: _$$s.w48.h48.$
+        className: cssBuilderInstance.w48.h48.$
       })
     }) : jsx(eq, {
       disablePointerEvents: !0

@@ -8,7 +8,7 @@ import s from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { d as _$$d } from "../figma_app/429226";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
 import { isDesignFileType, isSitesFileType } from "../figma_app/976749";
@@ -945,7 +945,7 @@ function eX({
           children: jsx("div", {
             className: eY,
             children: isInvalidValue(t) ? jsx("div", {
-              className: d()(_$$s.pt2.$, _$$s.pb2.$),
+              className: d()(cssBuilderInstance.pt2.$, cssBuilderInstance.pb2.$),
               children: getI18nString("fullscreen.mixed")
             }) : y ? jsx(wG, {
               text: y,
@@ -957,7 +957,7 @@ function eX({
               isDeleted: !1,
               colorTheme: J2.COMPONENT
             }) : jsx("div", {
-              className: d()(_$$s.pt2.$, _$$s.pb2.$, "prototype_set_variable_controls--placeholderTextColorUI3--Pc-4N"),
+              className: d()(cssBuilderInstance.pt2.$, cssBuilderInstance.pb2.$, "prototype_set_variable_controls--placeholderTextColorUI3--Pc-4N"),
               children: B
             })
           })
@@ -1809,7 +1809,7 @@ export function $$tv0({
       updateMultipleDestinationNodes: m,
       updateSelectionProperties: y
     })), U && jsx("div", {
-      className: _$$s.ml0.$,
+      className: cssBuilderInstance.ml0.$,
       children: jsx(ek, {
         onChange: ep,
         nodeId: e.transitionNodeID || defaultSessionLocalID,

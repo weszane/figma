@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, forwardRef } from "react";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { L0, MQ, AD } from "../905/479155";
 export function $$o1(e) {
   let t = useRef(null);
@@ -27,7 +27,7 @@ export function $$o1(e) {
 }
 export let $$l0 = forwardRef((e, t) => jsx("div", {
   ref: t,
-  className: _$$s.flex.$$if("space-between" === e.justify, _$$s.justifyBetween).$$if("end" === e.justify, _$$s.justifyEnd).$$if("center" === e.justify, _$$s.justifyCenter).$$if("center" === e.align, _$$s.itemsCenter).$$if("end" === e.align, _$$s.itemsEnd).$$if(e.fullWidth, _$$s.wFull).$$if(e.fullHeight, _$$s.hFull).$,
+  className: cssBuilderInstance.flex.$$if("space-between" === e.justify, cssBuilderInstance.justifyBetween).$$if("end" === e.justify, cssBuilderInstance.justifyEnd).$$if("center" === e.justify, cssBuilderInstance.justifyCenter).$$if("center" === e.align, cssBuilderInstance.itemsCenter).$$if("end" === e.align, cssBuilderInstance.itemsEnd).$$if(e.fullWidth, cssBuilderInstance.wFull).$$if(e.fullHeight, cssBuilderInstance.hFull).$,
   style: {
     gap: e.gap ?? 8
   },

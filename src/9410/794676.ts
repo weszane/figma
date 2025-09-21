@@ -81,7 +81,7 @@ import { M as _$$M2 } from "../figma_app/333189";
 import { Button } from "../905/521428";
 import eY from "classnames";
 import { w as _$$w } from "../figma_app/922802";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { H as _$$H } from "../905/444904";
 import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
@@ -347,7 +347,7 @@ function e6(e) {
       switchAccountsSection: jsx(function () {
         let e = selectCurrentUser();
         return !e || desktopAPIInstance ? null : jsx("div", {
-          className: eJ()(_$$s2.mt24.$, "mfa_required--secondaryText--eCIsl"),
+          className: eJ()(cssBuilderInstance.mt24.$, "mfa_required--secondaryText--eCIsl"),
           children: renderI18nText("mfa_required_modal.account_switcher.text", {
             userEmail: e.email,
             link: jsx(Button, {

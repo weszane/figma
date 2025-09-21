@@ -7,7 +7,7 @@ import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -122,7 +122,7 @@ let R = registerModal(function (e) {
                 });
               },
               children: jsxs("div", {
-                className: _$$s2.flex.flexRow.gap20.mb12.$,
+                className: cssBuilderInstance.flex.flexRow.gap20.mb12.$,
                 children: [jsx(_$$c, {
                   value: M.SRGB,
                   label: jsx(Label, {

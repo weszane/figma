@@ -2,7 +2,7 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import { l as _$$l } from '../905/241412';
 import { renderI18nText } from '../905/303541';
 import { Button } from '../905/521428';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { B7, My } from '../figma_app/143628';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { selectCurrentFile } from '../figma_app/516028';
@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export function $$h1() {
   return renderI18nText('slides.properties_panel.visual_bell.remove_stack', {
     secondaryText: jsx('span', {
-      className: _$$s.colorTextSecondary.pl8.$,
+      className: cssBuilderInstance.colorTextSecondary.pl8.$,
       children: renderI18nText('slides.properties_panel.visual_bell.remove_stack_undo')
     })
   });

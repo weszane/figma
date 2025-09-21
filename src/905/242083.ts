@@ -238,7 +238,7 @@ import { Ts as _$$Ts, qV } from '../905/994545';
 import { A as _$$A3 } from '../4711/61765';
 import { A as _$$A2 } from '../4711/145260';
 import { A as _$$A4 } from '../4711/621307';
-import { s as _$$s6 } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
 import { parseEditorStateToPlainText } from '../figma_app/9619';
@@ -2014,7 +2014,7 @@ let rx = registerModal(() => {
     let e = `JSON for fragment with id ${n.file_id}-${n.node_id}`;
     return jsxs('div', {
       children: [jsx('div', {
-        className: _$$s6.ml8.fontSemiBold.font11.fontUi.$,
+        className: cssBuilderInstance.ml8.fontSemiBold.font11.fontUi.$,
         children: e
       }), jsx('pre', {
         children: JSON.stringify(n, null, 2)
@@ -2029,16 +2029,16 @@ let rx = registerModal(() => {
     ref: i,
     onClose: e,
     title: jsx('div', {
-      className: rg()('fragment_inspect_modal--antialiased--Pqy2m', _$$s6.flex.flex1.itemsCenter.justifyBetween.pr6.$),
+      className: rg()('fragment_inspect_modal--antialiased--Pqy2m', cssBuilderInstance.flex.flex1.itemsCenter.justifyBetween.pr6.$),
       role: 'button',
       tabIndex: 0,
       children: jsx('div', {
-        className: _$$s6.ml8.fontSemiBold.font11.fontUi.$,
+        className: cssBuilderInstance.ml8.fontSemiBold.font11.fontUi.$,
         children: renderI18nText('fragment_search.fragment_inspect_modal_title')
       })
     }),
     children: jsx('div', {
-      className: _$$s6.flex.flexColumn.hFull.overflowYScroll.overflowWrapAnywhere.px16.$,
+      className: cssBuilderInstance.flex.flexColumn.hFull.overflowYScroll.overflowWrapAnywhere.px16.$,
       children: r
     })
   });

@@ -10,7 +10,7 @@ import { _ as _$$_ } from "../vendor/853977";
 import { trackEventAnalytics } from "../905/449184";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../905/343721";
@@ -182,7 +182,7 @@ function D({
         className: "publish_resource_card_preview--placeholderHeroFileInputText--6opB8 publish_resource_card_preview--placeholderHeroText--cJgeG text--fontPos11--2LvXf text--_fontBase--QdLsd",
         onClick: i,
         children: [jsx("input", {
-          className: _$$s.absolute.w1.h1.$,
+          className: cssBuilderInstance.absolute.w1.h1.$,
           style: {
             display: "none"
           },
@@ -193,7 +193,7 @@ function D({
           multiple: !0
         }), renderI18nText("community.publishing.upload_instructions", {
           chooseFileLink: jsx("label", {
-            className: _$$s.cursorPointer.colorTextBrand.inlineBlock.$,
+            className: cssBuilderInstance.cursorPointer.colorTextBrand.inlineBlock.$,
             htmlFor: "cover-upload-input",
             role: "link",
             onClick: e => {

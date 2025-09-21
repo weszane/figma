@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { useHandleFocusEvent, generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
 import { JT } from "../figma_app/632248";
@@ -152,11 +152,11 @@ export function $$L0({
       shouldShowAdditionalFeedback: !0
     }));
   };
-  let U = D.selectedFeedback ? _$$s.flex1.textBodyMedium.$ : _$$s.colorTextSecondary.textBodyMedium.flex1.$;
+  let U = D.selectedFeedback ? cssBuilderInstance.flex1.textBodyMedium.$ : cssBuilderInstance.colorTextSecondary.textBodyMedium.flex1.$;
   let B = useSelector(e => !!e.modalShown && e.modalShown.type === T.type);
   let V = D.selectedFeedback || !v;
   return jsx("div", {
-    className: _$$s.pl4.flex.$,
+    className: cssBuilderInstance.pl4.flex.$,
     ref: M,
     tabIndex: -1,
     children: jsxs(_$$B, {
@@ -166,7 +166,7 @@ export function $$L0({
         fullWidth: !0,
         justify: "space-between",
         children: D.selectedFeedback && D.shouldShowAdditionalFeedback && getFeatureFlags().qa_user_additional_feedback ? jsx("div", {
-          className: _$$s.ml4.textBodyMedium.$,
+          className: cssBuilderInstance.ml4.textBodyMedium.$,
           children: jsx(Button, {
             variant: "link",
             onClick: () => {
@@ -198,7 +198,7 @@ export function $$L0({
           children: D.selectedFeedback ? getI18nString("qa.feeback_thank_you") : t || getI18nString("qa.rate_output")
         })
       }), jsx("div", {
-        className: _$$s.minH24.$,
+        className: cssBuilderInstance.minH24.$,
         children: !D.selectedFeedback && jsxs(_$$B, {
           gap: 4,
           children: [jsx("div", {

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { D, _ as _$$_ } from "../figma_app/169991";
 import { Fragment as _$$Fragment } from "react";
@@ -33,13 +33,13 @@ function y({
     iconSrc: _$$A,
     dataTestId: "pending-response-banner",
     children: jsx("div", {
-      className: _$$s.preWrap.overflowBreakWord.$,
+      className: cssBuilderInstance.preWrap.overflowBreakWord.$,
       children: getI18nString("community.detail_view.data_security_modal_pending", {
         date: e.updatedAt
       })
     })
   }) : e.status === FRequestStatusType.APPROVED ? jsx("div", {
-    className: _$$s.gap4.flex.$,
+    className: cssBuilderInstance.gap4.flex.$,
     children: t ? renderI18nText("community.detail_view.data_security_modal_badge_info_widget") : renderI18nText("community.detail_view.data_security_modal_badge_info_plugin")
   }) : e.status === FRequestStatusType.REJECTED ? jsx(z, {
     variant: "warning",
@@ -47,7 +47,7 @@ function y({
     iconSrc: _$$A,
     dataTestId: "rejected-response-banner",
     children: jsx("div", {
-      className: _$$s.preWrap.overflowBreakWord.$,
+      className: cssBuilderInstance.preWrap.overflowBreakWord.$,
       children: getI18nString("community.detail_view.data_security_modal_rejected", {
         date: e.updatedAt
       })
@@ -79,13 +79,13 @@ let w = registerModal(function ({
       "data-testid": "program-explanation",
       children: r
     }), jsx("div", {
-      className: _$$s.mt16.$,
+      className: cssBuilderInstance.mt16.$,
       children: jsx(y, {
         securityFormResponse: e,
         isWidget: t
       })
     }), jsx("div", {
-      className: _$$s.pt24.$,
+      className: cssBuilderInstance.pt24.$,
       children: jsx(k, {
         securityFormResponse: e
       })
@@ -96,9 +96,9 @@ function k({
   securityFormResponse: e
 }) {
   return jsx("div", {
-    className: _$$s.colorBgSecondary.$,
+    className: cssBuilderInstance.colorBgSecondary.$,
     children: jsx("div", {
-      className: _$$s.py4.px20.$,
+      className: cssBuilderInstance.py4.px20.$,
       children: e.responses.map((e, t) => {
         let a = function (e) {
           if ("text" === e.inputType) return [];
@@ -106,15 +106,15 @@ function k({
           return [];
         }(e);
         return jsx("div", {
-          className: _$$s.mb24.$,
+          className: cssBuilderInstance.mb24.$,
           children: jsxs("div", {
             className: "data_security_modal--gridContainer--4yiTg",
             children: [e.prompt && jsxs(Fragment, {
               children: [jsxs("div", {
-                className: _$$s.fontSemiBold.$,
+                className: cssBuilderInstance.fontSemiBold.$,
                 children: [_$$g(E(e.prompt)), " "]
               }), jsx("div", {
-                className: _$$s.$,
+                className: cssBuilderInstance.$,
                 children: jsx(I, {
                   question: e
                 })
@@ -126,7 +126,7 @@ function k({
                   verticalAlign: "baseline"
                 }).$,
                 children: jsx("li", {
-                  className: _$$s.fontSemiBold.ml16.$,
+                  className: cssBuilderInstance.fontSemiBold.ml16.$,
                   children: _$$g(function (e) {
                     let t = e.indexOf("For example,");
                     return -1 !== t ? e.substring(0, t) : e;
@@ -151,9 +151,9 @@ function C(e) {
     value
   } = e;
   return jsx("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     children: jsx("ul", {
-      className: _$$s.italic.$,
+      className: cssBuilderInstance.italic.$,
       children: `"${value}"`
     })
   });
@@ -163,10 +163,10 @@ function S(e) {
     options
   } = e;
   return jsx("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: jsx(Fragment, {
       children: options.map((e, t) => e.isSelected ? jsx("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: jsx("div", {
           children: e.label
         })
@@ -180,12 +180,12 @@ function N(e) {
   } = e;
   let a = options.filter(e => e.isSelected);
   return 0 === a.length ? null : jsx("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: jsx("ul", {
       children: a.map((e, t) => jsx("li", {
         style: a.length > 1 ? j : void 0,
         children: jsx("div", {
-          className: _$$s.flex.flexColumn.$,
+          className: cssBuilderInstance.flex.flexColumn.$,
           children: jsx("div", {
             children: e.label
           })
@@ -230,7 +230,7 @@ export function $$L1({
       updatedAt
     } = e;
     return status === FRequestStatusType.REJECTED ? "admin_manage" === t ? jsxs("div", {
-      className: _$$s.flex.gap4.$,
+      className: cssBuilderInstance.flex.gap4.$,
       children: [renderI18nText("community.badge.extension_security_updated_on", {
         date: updatedAt
       }), jsx(SvgComponent, {
@@ -250,10 +250,10 @@ export function $$L1({
     is24x24: _
   });
   return jsxs("div", {
-    className: _$$s.flex.$,
+    className: cssBuilderInstance.flex.$,
     "data-testid": "extension-security-response-status",
     children: [jsx("div", {
-      className: _$$s.flex.itemsStart.pt4.$,
+      className: cssBuilderInstance.flex.itemsStart.pt4.$,
       children: p
     }), jsx("button", {
       className: "community_detail" === t ? _ ? "extension_security_response--communitySecurityText24x24--IyRkA extension_security_response--extensionSecurityText--kCA-d" : "extension_security_response--communitySecurityText--8N545 extension_security_response--extensionSecurityText--kCA-d" : "extension_security_response--adminSecurityText--xRb4T extension_security_response--extensionSecurityText--kCA-d",

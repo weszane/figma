@@ -10,7 +10,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import h from "classnames";
 import { l } from "../6388/697965";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Te } from "../1250/12342";
 import { fullscreenValue } from "../figma_app/455680";
@@ -171,7 +171,7 @@ function ep() {
 function eg({
   isSelected: e
 }) {
-  let t = e ? _$$s.colorIcon.$ : _$$s.colorIconSecondary.$;
+  let t = e ? cssBuilderInstance.colorIcon.$ : cssBuilderInstance.colorIconSecondary.$;
   return jsx(SvgComponent, {
     className: t,
     svg: _$$A2
@@ -180,7 +180,7 @@ function eg({
 function ef({
   isSelected: e
 }) {
-  let t = e ? _$$s.colorIcon.$ : _$$s.colorIconSecondary.$;
+  let t = e ? cssBuilderInstance.colorIcon.$ : cssBuilderInstance.colorIconSecondary.$;
   return jsx(_$$O2, {
     className: t
   });
@@ -303,7 +303,7 @@ export let $$eI2 = memo(function () {
         },
         disableResizing: !y,
         unsetSizeWhenDisabled: !0,
-        className: _$$s.relative.flex.flexColumn.$$if(!y, _$$s.flex1.overflowHidden).$,
+        className: cssBuilderInstance.relative.flex.flexColumn.$$if(!y, cssBuilderInstance.flex1.overflowHidden).$,
         children: jsx(eC, {
           padding: z,
           isReadOnly: e
@@ -358,7 +358,7 @@ export function $$eT3() {
         },
         disableResizing: !1,
         unsetSizeWhenDisabled: !0,
-        className: _$$s.relative.flex.flexColumn.$$if(!1, _$$s.flex1.overflowHidden).$,
+        className: cssBuilderInstance.relative.flex.flexColumn.$$if(!1, cssBuilderInstance.flex1.overflowHidden).$,
         children: jsx(eC, {
           padding: c,
           isReadOnly: u
@@ -381,7 +381,7 @@ function eC({
 }) {
   return jsxs(Fragment, {
     children: [t ? null : jsx("div", {
-      className: _$$s.wFull.flex.gap8.py8.bb1.colorBorder.bSolid.borderBox.$,
+      className: cssBuilderInstance.wFull.flex.gap8.py8.bb1.colorBorder.bSolid.borderBox.$,
       style: {
         paddingLeft: `${e}px`,
         paddingRight: `${e}px`
@@ -399,17 +399,17 @@ export function $$eN1({
   guid: n
 }) {
   return jsxs("div", {
-    className: eL(_$$s.flex.flexColumn.overflowHidden.relative.colorBg.$$if(e, _$$s.flexGrow1).$),
+    className: eL(cssBuilderInstance.flex.flexColumn.overflowHidden.relative.colorBg.$$if(e, cssBuilderInstance.flexGrow1).$),
     style: {
       marginBottom: "-1px"
     },
     children: [jsx("div", {
-      className: _$$s.h0.wFull.bb1.bSolid.colorBorder.$
+      className: cssBuilderInstance.h0.wFull.bb1.bSolid.colorBorder.$
     }), jsx("button", {
-      className: _$$s.relative.flex.h40.itemsCenter.flexShrink0.$,
+      className: cssBuilderInstance.relative.flex.h40.itemsCenter.flexShrink0.$,
       onClick: () => t?.(),
       children: jsxs("div", {
-        className: _$$s.flex.itemsCenter.$,
+        className: cssBuilderInstance.flex.itemsCenter.$,
         children: [null != t && (e ? jsx(_$$O, {}) : jsx(_$$k, {})), jsx("span", {
           ...xk(null == t && ew.indentedHeader),
           children: renderI18nText("fullscreen.pages_panel.layers_tab")
@@ -486,7 +486,7 @@ export function $$eA0({
     left: 0,
     hide: !e,
     children: jsx("div", {
-      className: eL(_$$s.hFull.$),
+      className: eL(cssBuilderInstance.hFull.$),
       children: jsx(eR, {
         guid: e,
         width: a
@@ -547,7 +547,7 @@ function eB({
     toggleLayersAction
   } = vr();
   return jsx("div", {
-    className: eL(_$$s.bt1.colorBorder.bSolid.borderBox.$),
+    className: eL(cssBuilderInstance.bt1.colorBorder.bSolid.borderBox.$),
     style: {
       height: t
     },

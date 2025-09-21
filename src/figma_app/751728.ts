@@ -4,7 +4,7 @@ import { r as _$$r } from "../905/571838";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "../vendor/524488";
 import { z3 } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -62,12 +62,12 @@ export function $$w0({
         length: o ?? 3 * i
       }).map((e, t) => jsxs(_$$V.Item, {
         children: [jsx("div", {
-          className: _$$s.wFull.flex.itemsCenter.justifyCenter.radiusMedium.$,
+          className: cssBuilderInstance.wFull.flex.itemsCenter.justifyCenter.radiusMedium.$,
           children: jsx(Y, {
             animationDelay: 150 * t
           })
         }), jsx("div", {
-          className: _$$s.wFull.pt8.$,
+          className: cssBuilderInstance.wFull.pt8.$,
           children: jsxs(O.Container, {
             children: [jsx(O.SkeletonLine, {
               index: t
@@ -111,7 +111,7 @@ export function $$w0({
         searchResultRef: L
       })]
     }) : jsx("div", {
-      className: _$$s.$$if(d, _$$s.hFull).$,
+      className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
       children: jsx(_$$S, {
         fillHeight: d,
         children: jsxs(_$$N, {
@@ -128,7 +128,7 @@ export function $$w0({
     });
   }
   if ("errors" === k.result.status) return jsxs("div", {
-    className: _$$s.$$if(d, _$$s.hFull).$,
+    className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
     children: [g && jsx(R, {
       title: g.title,
       icon: g.icon
@@ -149,14 +149,14 @@ export function $$w0({
     let e = "";
     "input-text" === k.input.type ? e = k.input.value : F && (e = F.name);
     return jsxs("div", {
-      className: _$$s.$$if(d, _$$s.hFull).$,
+      className: cssBuilderInstance.$$if(d, cssBuilderInstance.hFull).$,
       children: [g && jsx(R, {
         title: g.title,
         icon: g.icon
       }), jsx(_$$S, {
         fillHeight: d,
         children: jsx("span", {
-          className: _$$s.textBodyMedium.colorTextSecondary.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
           children: renderI18nText("assets_in_actions.fragments_section.no_results.title", {
             query: l()(e, {
               length: 24
@@ -259,7 +259,7 @@ export function $$O1({
           })
         }), jsx(_$$x.ItemFooter, {
           children: jsx("div", {
-            className: _$$s.pt8.$,
+            className: cssBuilderInstance.pt8.$,
             children: d
           })
         })]
@@ -279,7 +279,7 @@ function R({
     recordingKey: r.recordingKey,
     children: r.title
   }) : jsx("div", {
-    className: _$$s.h24.$
+    className: cssBuilderInstance.h24.$
   });
   return jsxs(X, {
     px: a,

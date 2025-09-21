@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { T } from "../7021/675372";
 import l from "classnames";
 import { Wi } from "../figma_app/162641";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ export function $$j0(e) {
     }));
   }, [a]);
   if (!l || l?.tier === FPlanNameType.STARTER || l?.tier === FPlanNameType.STUDENT || y()) return null;
-  let E = o()(_$$s.colorTextBrand.cursorPointer.$, "billing_plan_tier--focusVisibleOutline--rv9Xk");
+  let E = o()(cssBuilderInstance.colorTextBrand.cursorPointer.$, "billing_plan_tier--focusVisibleOutline--rv9Xk");
   let C = {
     userId: j?.userId,
     orgId: l.type === FOrganizationLevelType.ORG ? l.key.parentId : void 0,
@@ -66,7 +66,7 @@ export function $$j0(e) {
     children: getI18nString("admin_settings.billing_plan_tier.upgrade_label")
   }) : (l.tier, t = null);
   let I = jsx("span", {
-    className: _$$s.textBodyMediumStrong.$,
+    className: cssBuilderInstance.textBodyMediumStrong.$,
     children: l.tier === FPlanNameType.PRO && w ? getI18nString(`admin_settings.billing_plan_tier.${l.tier}.${w}`) : getI18nString(`admin_settings.billing_plan_tier.${l.tier}`)
   });
   return e.isLoading ? jsx(Wi, {
@@ -75,9 +75,9 @@ export function $$j0(e) {
       width: "16rem"
     }).$
   }) : jsxs("div", {
-    className: _$$s.textBodyMedium.colorTextSecondary.flex.pl36.$,
+    className: cssBuilderInstance.textBodyMedium.colorTextSecondary.flex.pl36.$,
     children: [jsx("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       "aria-hidden": !0,
       children: jsx(T, {})
     }), jsx("div", {

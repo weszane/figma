@@ -8,7 +8,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import c from "classnames";
 import { wp, SK } from "../905/125333";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { AW } from "../figma_app/451499";
@@ -124,7 +124,7 @@ let N = forwardRef(function ({
       top: e.dragPosition.y,
       transform: `scale(${o})`
     },
-    className: u()(_$$s.relative.$, hD, Nb),
+    className: u()(cssBuilderInstance.relative.$, hD, Nb),
     children: jsx(i, {
       color: l,
       ref: r

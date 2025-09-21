@@ -14,7 +14,7 @@ import { o as _$$o2 } from "../905/688631";
 import { _ as _$$_ } from "../905/154979";
 import { B } from "../905/548640";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { DesignToolType } from "../figma_app/277543";
 import { FileTypeEnum } from "../905/71785";
@@ -154,7 +154,7 @@ export function $$F0({
     fill: "none",
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.insert_modal.codegen_plugin_icon_tooltip"),
-    className: e ? _$$s.w24.h24.colorBorder.$ : void 0,
+    className: e ? cssBuilderInstance.w24.h24.colorBorder.$ : void 0,
     children: [jsx("path", {
       d: "M0 4C0 1.79086 1.79086 0 4 0H12C14.2091 0 16 1.79086 16 4V12C16 14.2091 14.2091 16 12 16H4C1.79086 16 0 14.2091 0 12V4Z",
       fill: "var(--color-bg)"

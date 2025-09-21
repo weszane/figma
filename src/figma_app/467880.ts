@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { textOnDarkCanvas } from "../figma_app/191804";
 import { usePrefersReducedMotion } from "../figma_app/469468";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { k_ } from "../figma_app/242062";
@@ -130,7 +130,7 @@ function T() {
     });
   }, []);
   return jsxs("div", {
-    className: _$$s.absolute.top0.left0.w20.$,
+    className: cssBuilderInstance.absolute.top0.left0.w20.$,
     children: [jsx("div", {
       className: lN,
       ref: e,

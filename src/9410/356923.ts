@@ -12,7 +12,7 @@ import h from "classnames";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { LoadingSpinner } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
 import { wo } from "../figma_app/753501";
@@ -75,7 +75,7 @@ export function $$P2({
   let E = scopeAwareFunction.user(g, onInsertableResourcePointerDown);
   let j = useMemo(() => c ? new Point(SlideConstantsCppBindings?.singleSlideThumbnailWidth() ?? 0, SlideConstantsCppBindings?.singleSlideThumbnailHeight() ?? 0) : void 0, [c]);
   return jsxs("div", {
-    className: m()(_$$s.flex.alignCenter.justifyCenter.gap8.$, {
+    className: m()(cssBuilderInstance.flex.alignCenter.justifyCenter.gap8.$, {
       [e4]: i === Ji.PICKER || i === Ji.OUTLINE_TO_DECK,
       [pz]: i === Ji.OVERLAY_MODAL,
       [a3]: !c
@@ -112,7 +112,7 @@ export function $$F1({
   ...c
 }) {
   return jsxs(ButtonPrimitive, {
-    className: m()(_$$s.flex.flexColumn.itemsStart.hFull.wFull.$, ln),
+    className: m()(cssBuilderInstance.flex.flexColumn.itemsStart.hFull.wFull.$, ln),
     onClick: l ? void 0 : a,
     actionOnPointerDown: !0,
     "aria-label": c["aria-label"],
@@ -135,7 +135,7 @@ export function $$F1({
         loading: "lazy"
       })]
     }), e && jsx("div", {
-      className: _$$s.font11.fontInter.colorTextSecondary.$,
+      className: cssBuilderInstance.font11.fontInter.colorTextSecondary.$,
       children: e
     })]
   });
@@ -152,7 +152,7 @@ function B({
   let l = useAtomWithSubscription(bY);
   return jsx("div", {
     "data-testid": t,
-    className: m()(_$$s.p8.$, a),
+    className: m()(cssBuilderInstance.p8.$, a),
     children: jsx(sU, {
       image: jsx("div", {
         onPointerDown: i,
@@ -172,7 +172,7 @@ function B({
         children: jsx(dY.TextMetadataLayout, {
           onClick: i,
           primaryText: jsx("div", {
-            className: _$$s.font11.colorText.ellipsis.overflowHidden.$,
+            className: cssBuilderInstance.font11.colorText.ellipsis.overflowHidden.$,
             children: e
           })
         })

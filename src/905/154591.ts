@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { x, z } from "../905/407439";
 import { YY, nP } from "../figma_app/722791";
@@ -41,7 +41,7 @@ function c({
       });
   }
 }
-let u = _$$s.px4.minW10.inlineBlock.bRadius4.h16.flex.alignCenter.justifyCenter.fontSemiBold;
+let u = cssBuilderInstance.px4.minW10.inlineBlock.bRadius4.h16.flex.alignCenter.justifyCenter.fontSemiBold;
 let p = u.colorBgSecondary.colorText.$;
 let m = u.colorBgBrandSecondary.colorTextOnbrand.$;
 let h = u.colorBgBrand.colorTextOnbrand.$;

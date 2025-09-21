@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import $$r from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 var a = $$r;
 export function $$l0(e) {
   return jsx("div", {
-    className: _$$s.flex.overflowAuto.gap4.itemsCenter.pr1.$,
+    className: cssBuilderInstance.flex.overflowAuto.gap4.itemsCenter.pr1.$,
     style: styleBuilderInstance.$$if(e.height, {
       height: "auto" === e.height ? "auto" : `${e.height}px`
     }, styleBuilderInstance.h32).$,
@@ -14,7 +14,7 @@ export function $$l0(e) {
 }
 export function $$d1(e) {
   return jsx("button", {
-    className: a()("tab_group--tabSelectorOverrides--misNs", _$$s.h24.lh16.bRadius5.pl8.pr8.$$if(e.isSelected, _$$s.colorBgPressed, _$$s.colorTextSecondary).$),
+    className: a()("tab_group--tabSelectorOverrides--misNs", cssBuilderInstance.h24.lh16.bRadius5.pl8.pr8.$$if(e.isSelected, cssBuilderInstance.colorBgPressed, cssBuilderInstance.colorTextSecondary).$),
     onPointerDown: e.onPointerDown,
     onClick: t => {
       e.onClick(e.tab);

@@ -5,7 +5,7 @@ import { A as _$$A } from "../905/920142";
 import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -220,7 +220,7 @@ function M({
     });
     if (!N) return jsx("span", {
       "data-testid": "empty-seat-type-cell",
-      className: _$$s.pl8.$,
+      className: cssBuilderInstance.pl8.$,
       children: "\u2013"
     });
   }
@@ -258,9 +258,9 @@ function M({
       } : null;
     }(a, d, c)),
     "data-testid": "billable-product-seat-cell-outer",
-    className: r()(e, _$$s.wFull.$),
+    className: r()(e, cssBuilderInstance.wFull.$),
     children: jsx("div", {
-      className: r()(_$$s.wFull.$, {
+      className: r()(cssBuilderInstance.wFull.$, {
         [t]: C === FOrganizationLevelType.ORG
       }),
       "data-testid": "billable-product-seat-cell",
@@ -290,7 +290,7 @@ function M({
           });
         },
         children: jsxs("div", {
-          className: _$$s.flex.itemsCenter.gap8.$,
+          className: cssBuilderInstance.flex.itemsCenter.gap8.$,
           "data-onboarding-key": C === FOrganizationLevelType.ORG && E ? `${e6}-${E}` : void 0,
           children: [jsx(_$$B, {
             type: $,

@@ -61,7 +61,7 @@ import { e as _$$e2 } from "../905/462154";
 import { Zk } from "../figma_app/626177";
 import { dD, lt } from "../figma_app/941824";
 import { Y9, s2 } from "../figma_app/811257";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { j as _$$j, u as _$$u2 } from "../642/638075";
 import { qd } from "../5421/889757";
 import { zL, pL } from "../figma_app/369750";
@@ -134,9 +134,9 @@ let ey = _$$ex("prototype_info", function (e) {
     tooltipText
   } = e;
   return jsx("div", {
-    className: _$$s2.flex.justifyCenter.itemsCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
     children: jsx("span", {
-      className: _$$s2.m6.flexGrow1.$,
+      className: cssBuilderInstance.m6.flexGrow1.$,
       style: {
         maxWidth: 144
       },

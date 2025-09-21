@@ -14,7 +14,7 @@ import { trackFileEventWithStore } from "../figma_app/901889";
 import { hh } from "../905/417232";
 import { c$ } from "../figma_app/236327";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -85,7 +85,7 @@ function W() {
   }, [t]);
   return e ? createPortal(jsx(_$$V, {
     plugin: e,
-    className: _$$s.h16.w16.bRadius2.$,
+    className: cssBuilderInstance.h16.w16.bRadius2.$,
     style: {
       position: "fixed",
       left: n.x - 8,
@@ -132,7 +132,7 @@ function G(e) {
     }));
   }, [b, p]);
   return jsx("div", {
-    className: _$$s.flex.flexRow.flexGrow1.itemsEnd.$,
+    className: cssBuilderInstance.flex.flexRow.flexGrow1.itemsEnd.$,
     "data-testid": "pinned-plugins",
     children: jsxs("div", {
       className: "pinned_plugins--pins--1aHI1",
@@ -232,7 +232,7 @@ function U({
   }, [y, H, e.plugin_id]);
   let G = x.current?.getBoundingClientRect();
   return jsxs("div", {
-    className: _$$s.relative.$,
+    className: cssBuilderInstance.relative.$,
     ref: x,
     children: [jsx("button", {
       className: c?.plugin_id === e.plugin_id ? "pinned_plugins--runningPin--SFxzi pinned_plugins--basePin--ivx6q" : "pinned_plugins--pin--QIbCP pinned_plugins--basePin--ivx6q",
@@ -252,7 +252,7 @@ function U({
       children: jsx(_$$V, {
         plugin: e,
         draggable: !1,
-        className: _$$s.h16.w16.bRadius2.$,
+        className: cssBuilderInstance.h16.w16.bRadius2.$,
         ref: V,
         style: {
           opacity: B ? .5 : 1

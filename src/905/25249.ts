@@ -19,7 +19,7 @@ import { useWebLoggerTimerEffect } from "../905/485103";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { LoadingOverlay } from "../figma_app/858013";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
@@ -308,7 +308,7 @@ function ez(e) {
   }), [e.teamRoles]);
   return jsxs(Fragment, {
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       "data-testid": "team-access-settings-description",
       children: e.teamAccess === FTeamAccessPermissionType.TEAM_ACCESS_EDIT ? renderI18nText("folder_share_settings.the_following_people_have_access_team", {
         teamName: e.teamName
@@ -740,11 +740,11 @@ export let $$eK0 = registerModal(function (e) {
                       children: jsx(BannerMessage, {
                         children: renderI18nText("folder_permissions_modal.this_is_a_connected_project_banner", {
                           hostPlanName: jsx("span", {
-                            className: _$$s.fontSemiBold.$,
+                            className: cssBuilderInstance.fontSemiBold.$,
                             children: resourceConnection.hostPlanName
                           }),
                           connectedPlanName: jsx("span", {
-                            className: _$$s.fontSemiBold.$,
+                            className: cssBuilderInstance.fontSemiBold.$,
                             children: resourceConnection.connectedPlanName
                           }),
                           connectedProjectLink: jsx(Link, {

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
-import { s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
 import { S as _$$S } from "../3276/591174";
@@ -81,7 +81,7 @@ export function $$y1(e) {
 }
 export function $$j0() {
   return jsx(sU, {
-    className: s.invisible.$,
+    className: cssBuilderInstance.invisible.$,
     image: jsx("div", {
       children: jsx(WM, {
         children: jsx(Ho, {

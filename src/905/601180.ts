@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { K } from "../figma_app/694593";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
@@ -11,7 +11,7 @@ export function $$d0(e) {
   let c = !d && !e.center;
   let u = vL;
   let p = e.tabs && void 0 !== e.showDividerBeforeTabIndex ? (t = e.tabs, i = e.showDividerBeforeTabIndex, [...t.slice(0, i), jsx("div", {
-    className: _$$s.colorBorder.bl1.bSolid.h24.mx12.$
+    className: cssBuilderInstance.colorBorder.bl1.bSolid.h24.mx12.$
   }, "toolbar-divider"), ...t.slice(i)]) : e.tabs;
   return jsx("div", {
     className: h3,
@@ -33,7 +33,7 @@ export function $$d0(e) {
           name: "Toolbar",
           trackingTargets: RCSMessageType.RCS,
           children: e.rightSideActions && jsx("div", {
-            className: _$$s.flex.flexRow.gap8.$,
+            className: cssBuilderInstance.flex.flexRow.gap8.$,
             children: e.rightSideActions.map(e => jsx(K, {
               action: e
             }, e.key))

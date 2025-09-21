@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { g as _$$g } from "../1250/701065";
 import { customHistory } from "../905/612521";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
@@ -76,9 +76,9 @@ export function $$w1(e) {
   let j = n.seen_drafts_to_move_notice_icon ? w > 0 ? jsx(Badge, {
     text: w > 99 ? "99+" : `${w}`,
     color: T ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
-    className: _$$s.mr8.$$if(!T, _$$s.colorBgBrandTertiary.colorText).$
+    className: cssBuilderInstance.mr8.$$if(!T, cssBuilderInstance.colorBgBrandTertiary.colorText).$
   }) : void 0 : jsx(_$$E, {
-    className: _$$s.mr8.$
+    className: cssBuilderInstance.mr8.$
   });
   return w > 0 || T ? jsx(SidebarRow, {
     isSelected: T,

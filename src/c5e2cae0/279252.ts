@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { x } from "../c5e2cae0/907085";
 if (443 == require.j) {}
@@ -9,7 +9,7 @@ export function $$d0() {
     title: null,
     dataTestId: "loading-cart-card",
     children: jsx("div", {
-      className: _$$s.flex.flexColumn.itemsCenter.justifyCenter.wFull.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsCenter.justifyCenter.wFull.$,
       style: styleBuilderInstance.add({
         height: "208px"
       }).$,

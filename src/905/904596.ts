@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/757007";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { x as _$$x } from "../905/312412";
 import { P } from "../905/994270";
@@ -46,7 +46,7 @@ export function $$I0({
   let I = !!i;
   let w = (() => {
     if ((v || I) && (!p || I || 0 !== e.length)) return jsx("div", {
-      className: _$$s.flex.wFull.flexColumn.gap8.$,
+      className: cssBuilderInstance.flex.wFull.flexColumn.gap8.$,
       children: jsxs(B, {
         fullWidth: !0,
         justify: "space-between",
@@ -74,7 +74,7 @@ export function $$I0({
         children: [jsx(S, {
           completionString: c
         }), jsx("span", {
-          className: _$$s.textBodyMedium.colorTextSecondary.ml4.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.ml4.$,
           children: t
         }), w ? void 0 : p && v && !I ? jsx(z, {
           aiTrackingContext: a
@@ -223,7 +223,7 @@ function S({
         "--color-icon": "var(--color-icon-success)"
       }
     }), jsx("span", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       "data-testid": "iterateDoneText",
       children: e || renderI18nText("ai.done")
     })]

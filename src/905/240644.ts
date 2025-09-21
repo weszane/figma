@@ -1,18 +1,18 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 export function $$o0({
   children: e
 }) {
   return jsxs("div", {
-    className: _$$s.flex.justifyCenter.itemsCenter.h24.gap4.$,
+    className: cssBuilderInstance.flex.justifyCenter.itemsCenter.h24.gap4.$,
     "data-testid": "actions-loading-component",
     children: [jsx("div", {
-      className: _$$s.h24.w24.flex.justifyCenter.itemsCenter.$,
+      className: cssBuilderInstance.h24.w24.flex.justifyCenter.itemsCenter.$,
       children: jsx(k, {})
     }), jsx("div", {
-      className: _$$s.overflowHidden.noWrap.ellipsis.$,
+      className: cssBuilderInstance.overflowHidden.noWrap.ellipsis.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",

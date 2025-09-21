@@ -5,7 +5,7 @@ import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { logger } from "../905/651849";
 import { x } from "../905/211326";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { e6, c as _$$c, $z, lR } from "../figma_app/617427";
 import { pW } from "../905/160095";
 let m = {
@@ -47,7 +47,7 @@ export function $$h0(e) {
   } = e;
   let g = jsx(x, {
     isLoading: !!ctaButtonMeta.isLoading,
-    className: _$$s.flex.alignCenter.$,
+    className: cssBuilderInstance.flex.alignCenter.$,
     children: () => ctaButtonMeta.label
   });
   let f = e.ctaButtonMeta.variantOverride || defaultVariant;

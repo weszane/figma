@@ -24,7 +24,7 @@ import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { N as _$$N } from '../905/809096';
 import { h as _$$h } from '../905/864281';
 import { styleBuilderInstance } from '../905/941192';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { TeamCanEdit } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { E as _$$E } from '../figma_app/126651';
@@ -81,7 +81,7 @@ function J(e) {
       'consumption_paywall_modals--planFeatureParent--NBBWh': !0
     }),
     'children': jsxs('div', {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [hoverText && jsxs('span', {
         className: m()({
           'consumption_paywall_modals--planFeatureHoverState--hpPa3': a,
@@ -96,7 +96,7 @@ function J(e) {
         },
         className: m()({
           'consumption_paywall_modals--planFeatureHoverable--mqLZi': !!hoverText
-        }, _$$s.lh24.$),
+        }, cssBuilderInstance.lh24.$),
         children: text
       })]
     })
@@ -145,9 +145,9 @@ function ei({
   planDescription: e
 }) {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.justifyBetween.hFull.$,
+    className: cssBuilderInstance.flex.flexColumn.justifyBetween.hFull.$,
     children: [jsx('p', {
-      className: _$$s.textBodyLarge.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyLarge.colorTextSecondary.$,
       children: e
     }), jsx('p', {
       children: renderI18nText('consumption_paywalls.campfire.starter_pricing')
@@ -229,7 +229,7 @@ function er({
       children: _$$E(getProductAccessTypeFromFileType(e))
     });
     return e === FFileType.DESIGN ? jsxs('div', {
-      className: _$$s.flex.flexColumn.lh14.rowGap2.$,
+      className: cssBuilderInstance.flex.flexColumn.lh14.rowGap2.$,
       children: [t, jsx('span', {
         children: jsx(_$$G, {})
       })]
@@ -288,17 +288,17 @@ function ea({
       prices: Jh(d)
     },
     children: jsxs('div', {
-      className: _$$s.flex.flexColumn.justifyBetween.hFull.$,
+      className: cssBuilderInstance.flex.flexColumn.justifyBetween.hFull.$,
       children: [jsx('p', {
-        className: _$$s.textBodyLarge.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyLarge.colorTextSecondary.$,
         children: i
       }), jsx(hK, {
         height: 12
       }), jsx('div', {
         children: collaboratorSet.sort(compareProductAccessTypes).map(e => isNotNullish(d[e]) && jsxs('div', {
-          className: _$$s.flex.justifyBetween.textBodyLarge.$,
+          className: cssBuilderInstance.flex.justifyBetween.textBodyLarge.$,
           children: [jsxs('div', {
-            className: _$$s.flex.gap4.itemsCenter.$,
+            className: cssBuilderInstance.flex.gap4.itemsCenter.$,
             children: [BC({
               type: e,
               size: '16',
@@ -320,10 +320,10 @@ function ea({
               }(e)
             })]
           }), jsx('div', {
-            className: _$$s.textBodyMedium.$,
+            className: cssBuilderInstance.textBodyMedium.$,
             children: renderI18nText('consumption_paywalls.price_per_month', {
               price: jsx('span', {
-                className: _$$s.textBodyLargeStrong.$,
+                className: cssBuilderInstance.textBodyLargeStrong.$,
                 children: c.formatMoney(d[e].amount)
               })
             })
@@ -442,7 +442,7 @@ function eo({
   }, [w, T, m, h]);
   let R = e === consumptionPaywallUtils.Plan.STARTER;
   return jsxs('div', {
-    'className': g ? _$$s.flex.flexColumn.justifyBetween.p24.flex1.borderBox.$ : 'consumption_paywall_modals--planBox--M-XwQ',
+    'className': g ? cssBuilderInstance.flex.flexColumn.justifyBetween.p24.flex1.borderBox.$ : 'consumption_paywall_modals--planBox--M-XwQ',
     'data-testid': `consumption-paywall-modal-plans-pricing-inner-plan-box-${e}`,
     'children': [jsxs('div', {
       children: [jsxs('div', {
@@ -450,9 +450,9 @@ function eo({
         style: {
           height: m
         },
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsxs('div', {
-          className: g ? _$$s.textHeadingLarge.flex.itemsCenter.$ : 'consumption_paywall_modals--planName--ma-56 text--fontPos18--rYXJb text--_fontBase--QdLsd',
+          className: g ? cssBuilderInstance.textHeadingLarge.flex.itemsCenter.$ : 'consumption_paywall_modals--planName--ma-56 text--fontPos18--rYXJb text--_fontBase--QdLsd',
           children: [_, e === d && jsx(AutoLayout, {
             verticalAlignItems: 'center',
             padding: {
@@ -468,7 +468,7 @@ function eo({
             })
           })]
         }), u && p && jsxs('div', {
-          className: _$$s.flexGrow1.$,
+          className: cssBuilderInstance.flexGrow1.$,
           children: [jsx(hK, {
             height: 4
           }), R && (g ? jsx(ei, {
@@ -492,7 +492,7 @@ function eo({
       }), jsx('div', {
         className: 'consumption_paywall_modals--planBoxDivider--E4Hnj'
       }), t === FeatureFlag.ORG && e === consumptionPaywallUtils.Plan.ORG && jsx('p', {
-        className: _$$s.textBodyLargeStrong.$,
+        className: cssBuilderInstance.textBodyLargeStrong.$,
         children: getI18nString('plan_comparison.campfire.everything_on_pro')
       }), E]
     }), S]
@@ -630,7 +630,7 @@ function ec(e) {
         }
       }), jsxs('p', {
         'data-testid': 'consumption-paywall-modal-plans-pricing-inner-subtitle',
-        'className': C ? _$$s.textBodyLarge.colorTextSecondary.$ : 'consumption_paywall_modals--largeModalSubtitle--vwxPe',
+        'className': C ? cssBuilderInstance.textBodyLarge.colorTextSecondary.$ : 'consumption_paywall_modals--largeModalSubtitle--vwxPe',
         'style': styleBuilderInstance.$$if(C, styleBuilderInstance.add({
           marginTop: '-16px'
         })).$,
@@ -640,7 +640,7 @@ function ec(e) {
       }), C && jsx(hK, {
         height: 16
       }), jsxs('div', {
-        className: C ? _$$s.flex.justifyBetween.b1.colorBorder.font13.$ : 'consumption_paywall_modals--planBoxContainer--MmvjD text--fontPos13--xW8hS text--_fontBase--QdLsd',
+        className: C ? cssBuilderInstance.flex.justifyBetween.b1.colorBorder.font13.$ : 'consumption_paywall_modals--planBoxContainer--MmvjD text--fontPos13--xW8hS text--_fontBase--QdLsd',
         style: styleBuilderInstance.$$if(C, styleBuilderInstance.add({
           borderRadius: '13px'
         })).$,
@@ -659,7 +659,7 @@ function ec(e) {
           teamId: team?.id ?? null,
           upsellPlan
         }), C && jsx('div', {
-          className: _$$s.bSolid.br1.colorBorder.$
+          className: cssBuilderInstance.bSolid.br1.colorBorder.$
         }), jsx(eo, {
           currency: q,
           currentPlan,

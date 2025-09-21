@@ -9,7 +9,7 @@ import c from "../vendor/524488";
 import { wY } from "../figma_app/708845";
 import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { fi } from "../figma_app/913823";
@@ -83,12 +83,12 @@ export function $$W0({
         length: t ?? 3 * e
       }).map((e, t) => jsxs(_$$V.Item, {
         children: [jsx("div", {
-          className: _$$s.wFull.flex.itemsCenter.justifyCenter.radiusMedium.$,
+          className: cssBuilderInstance.wFull.flex.itemsCenter.justifyCenter.radiusMedium.$,
           children: jsx(_$$Y, {
             animationDelay: 150 * t
           })
         }), jsx("div", {
-          className: _$$s.wFull.pt8.$,
+          className: cssBuilderInstance.wFull.pt8.$,
           children: jsxs(_$$O.Container, {
             children: [jsx(_$$O.SkeletonLine, {
               index: t
@@ -103,7 +103,7 @@ export function $$W0({
   });
   if (!currentSearch || "disabled" === currentSearch.result.status) {
     if (0 === V.length || kK()) return jsx("div", {
-      className: _$$s.$$if(r, _$$s.hFull).$,
+      className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
       children: jsx(_$$S, {
         fillHeight: r,
         children: jsxs(_$$N, {
@@ -144,7 +144,7 @@ export function $$W0({
     });
   }
   if ("errors" === currentSearch.result.status) return jsxs("div", {
-    className: _$$s.$$if(r, _$$s.hFull).$,
+    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon,
@@ -163,7 +163,7 @@ export function $$W0({
     })]
   });
   if (x) return jsxs("div", {
-    className: _$$s.$$if(r, _$$s.hFull).$,
+    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon,
@@ -171,7 +171,7 @@ export function $$W0({
     }), jsx(_$$S, {
       fillHeight: r,
       children: jsx("span", {
-        className: _$$s.textBodyMedium.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
         "data-testid": "assets-grid-no-results",
         children: renderI18nText("assets_in_actions.no_results_no_libraries.title")
       })
@@ -179,14 +179,14 @@ export function $$W0({
   });
   let er = currentSearch.result.data;
   if (!er || 0 === er.length) return jsxs("div", {
-    className: _$$s.$$if(r, _$$s.hFull).$,
+    className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
     children: [c && jsx(K, {
       title: c.title,
       icon: c.icon
     }), jsx(_$$S, {
       fillHeight: r,
       children: jsx("span", {
-        className: _$$s.textBodyMedium.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
         "data-testid": "assets-grid-no-results",
         children: renderI18nText("assets_in_actions.assets_section.no_results.title", {
           query: u()(Z, {
@@ -250,7 +250,7 @@ function K({
     recordingKey: r.recordingKey,
     children: r.title
   }) : jsx("div", {
-    className: _$$s.h24.$
+    className: cssBuilderInstance.h24.$
   });
   return jsxs(X, {
     children: [t && jsx(X.Icon, {
@@ -313,12 +313,12 @@ export function $$Y1({
       })
     }), jsx(_$$x.ItemFooter, {
       children: jsxs("div", {
-        className: _$$s.pt8.flex.flexColumn.gap2.alignLeft.$,
+        className: cssBuilderInstance.pt8.flex.flexColumn.gap2.alignLeft.$,
         children: [jsx("span", {
-          className: _$$s.textBodyMedium.colorText.truncate.$,
+          className: cssBuilderInstance.textBodyMedium.colorText.truncate.$,
           children: getBasename(e.name)
         }), jsx("span", {
-          className: _$$s.textBodyMedium.colorTextSecondary.truncate.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.truncate.$,
           children: c
         })]
       })
@@ -347,13 +347,13 @@ function $({
   });
   let _ = _$$F(e, _$$K.ACTIONS_ASSETS, t, "Actions Component Search");
   return jsx("div", {
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     style: styleBuilderInstance.add({
       aspectRatio: "1/1"
     }).$,
     children: jsx("div", {
       ref: d,
-      className: _$$s.wFull.hFull.$,
+      className: cssBuilderInstance.wFull.hFull.$,
       children: jsx(lX, {
         alwaysShowBorder: !1,
         buttonProps: {

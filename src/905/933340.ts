@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { H } from "../905/286442";
 import { b } from "../905/222272";
@@ -9,7 +9,7 @@ let c = forwardRef(({
   children: e,
   fillHeight: t
 }, i) => t ? jsx("div", {
-  className: _$$s.hFull.flex.flexColumn.itemsCenter.justifyCenter.$,
+  className: cssBuilderInstance.hFull.flex.flexColumn.itemsCenter.justifyCenter.$,
   "data-testid": d,
   style: styleBuilderInstance.add({
     paddingBottom: "48px"
@@ -18,7 +18,7 @@ let c = forwardRef(({
   tabIndex: 0,
   children: e
 }) : jsx("div", {
-  className: _$$s.flex.flexColumn.itemsCenter.pt12.pb24.$,
+  className: cssBuilderInstance.flex.flexColumn.itemsCenter.pt12.pb24.$,
   "data-testid": d,
   ref: i,
   tabIndex: 0,

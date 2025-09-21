@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { $ } from "../905/355181";
@@ -196,7 +196,7 @@ export function $$F1(e) {
     children: [e.slice(0, t.index), jsx("a", {
       href: a,
       target: "_blank",
-      className: _$$s.colorTextBrand.cursorPointer.$,
+      className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
       children: r
     }), e.slice(t.index + i.length)]
   });
@@ -213,11 +213,11 @@ function M(e) {
   } = i;
   let o = L(question);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     children: [prompt && jsx("div", {
       children: $$F1(prompt)
     }), jsx(BigTextInputForwardRef, {
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       value: value ?? "",
       onChange,
       placeholder
@@ -238,7 +238,7 @@ function j(e) {
   } = getI18nString;
   let o = L(question);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: prompt
@@ -246,9 +246,9 @@ function j(e) {
       children: options.map((e, t) => {
         let a = `path-${path.join("-")}-option-input-${t}`;
         return jsxs("div", {
-          className: _$$s.flex.flexColumn.$,
+          className: cssBuilderInstance.flex.flexColumn.$,
           children: [jsxs("div", {
-            className: _$$s.flex.gap8.$,
+            className: cssBuilderInstance.flex.gap8.$,
             children: [jsx("input", {
               type: "radio",
               id: a,
@@ -260,14 +260,14 @@ function j(e) {
                   optionIndex: t
                 });
               },
-              className: _$$s.cursorPointer.$
+              className: cssBuilderInstance.cursorPointer.$
             }), jsx("label", {
               htmlFor: a,
-              className: _$$s.cursorPointer.$,
+              className: cssBuilderInstance.cursorPointer.$,
               children: e.label
             })]
           }), e.subQuestions && e.isSelected && jsx("div", {
-            className: _$$s.ml20.flex.flexColumn.gap8.pt8.$,
+            className: cssBuilderInstance.ml20.flex.flexColumn.gap8.pt8.$,
             children: e.subQuestions.map((e, a) => jsx(B, {
               question: e,
               dispatch,
@@ -293,7 +293,7 @@ function U(e) {
   } = r;
   let o = L(question);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: prompt
@@ -301,9 +301,9 @@ function U(e) {
       children: options.map((e, r) => {
         let a = `path-${path.join("-")}-option-input-${r}`;
         return jsxs("div", {
-          className: _$$s.flex.flexColumn.$,
+          className: cssBuilderInstance.flex.flexColumn.$,
           children: [jsxs("div", {
-            className: _$$s.flex.gap8.$,
+            className: cssBuilderInstance.flex.gap8.$,
             children: [jsx("input", {
               type: "checkbox",
               checked: e.isSelected ?? !1,
@@ -315,14 +315,14 @@ function U(e) {
                 });
               },
               id: a,
-              className: _$$s.cursorPointer.$
+              className: cssBuilderInstance.cursorPointer.$
             }), jsx("label", {
               htmlFor: a,
-              className: _$$s.cursorPointer.$,
+              className: cssBuilderInstance.cursorPointer.$,
               children: e.label
             })]
           }), e.subQuestions && e.isSelected && jsx("div", {
-            className: _$$s.ml20.flex.flexColumn.gap8.pt8.$,
+            className: cssBuilderInstance.ml20.flex.flexColumn.gap8.pt8.$,
             children: e.subQuestions.map((e, a) => jsx(B, {
               question: e,
               dispatch,
@@ -384,28 +384,28 @@ function V(e) {
   let a = "plugin" === extensionType ? renderI18nText("community.publishing.security_form.plugin_description") : renderI18nText("community.publishing.security_form.widget_description");
   let s = "plugin" === extensionType ? renderI18nText("community.publishing.security_form.plugin_sharing_description") : renderI18nText("community.publishing.security_form.widget_sharing_description");
   return jsxs("div", {
-    className: _$$s.p16.flex.flexColumn.$,
+    className: cssBuilderInstance.p16.flex.flexColumn.$,
     "data-testid": "extension-security-form",
     children: [jsx("div", {
-      className: _$$s.pb16.$,
+      className: cssBuilderInstance.pb16.$,
       children: jsx(TextWithTruncation, {
         fontSize: 14,
         fontWeight: "medium",
         children: renderI18nText("community.publishing.security_form.header")
       })
     }), jsx("div", {
-      className: _$$s.pb16.$,
+      className: cssBuilderInstance.pb16.$,
       children: a
     }), jsxs("div", {
-      className: _$$s.pb16.$,
+      className: cssBuilderInstance.pb16.$,
       children: [s, jsx("a", {
         href: "plugin" === extensionType ? "https://help.figma.com/hc/articles/360042293394" : "https://help.figma.com/hc/articles/4410337103639",
         target: "_blank",
-        className: _$$s.colorTextBrand.cursorPointer.$,
+        className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
         children: renderI18nText("community.publishing.security_form.learn_more")
       })]
     }), jsx("div", {
-      className: _$$s.flex.flexColumn.gap32.$,
+      className: cssBuilderInstance.flex.flexColumn.gap32.$,
       children: securityForm.questions.map((e, t) => jsx(B, {
         question: e,
         dispatch,
@@ -433,9 +433,9 @@ function G({
   let x = qu(i);
   let w = useDispatch();
   return jsxs("div", {
-    className: d()(_$$s.flex.gap8.p16.justifyBetween.alignCenter.absolute.bottom0.left0.right0.bSolid.bt1.colorBorder.colorBg.$, "extension_security_form--bottomBarUI3--cXlx-"),
+    className: d()(cssBuilderInstance.flex.gap8.p16.justifyBetween.alignCenter.absolute.bottom0.left0.right0.bSolid.bt1.colorBorder.colorBg.$, "extension_security_form--bottomBarUI3--cXlx-"),
     children: [!x && jsx("button", {
-      className: _$$s.bgTransparent.noWrap.$$if(optedOutOfSecurityForm, _$$s.colorTextSecondary, _$$s.colorTextBrand.cursorPointer).$,
+      className: cssBuilderInstance.bgTransparent.noWrap.$$if(optedOutOfSecurityForm, cssBuilderInstance.colorTextSecondary, cssBuilderInstance.colorTextBrand.cursorPointer).$,
       onClick: () => {
         w(showModalHandler({
           type: _$$i,
@@ -647,7 +647,7 @@ export function $$W0(e) {
       extensionId
     })
   }) : jsx("div", {
-    className: _$$s.p8.$,
+    className: cssBuilderInstance.p8.$,
     children: jsx(_$$R, {})
   });
 }

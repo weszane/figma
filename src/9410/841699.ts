@@ -6,7 +6,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import l from "classnames";
 import { RecordableAnchor } from "../905/511649";
 import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { d as _$$d, cR, hv } from "../figma_app/715641";
@@ -80,7 +80,7 @@ export function $$D0({
   isActive: i
 }) {
   return jsx(Badge, {
-    className: d()("overview_entry--countBadge---5UQw", t && "overview_entry--isInTab--J7wAV", i && _$$s.colorText.$),
+    className: d()("overview_entry--countBadge---5UQw", t && "overview_entry--isInTab--J7wAV", i && cssBuilderInstance.colorText.$),
     text: `${e}`,
     size: BadgeSize.SMALL,
     color: BadgeColor.DEFAULT,

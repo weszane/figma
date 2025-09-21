@@ -9,7 +9,7 @@ import { S as _$$S } from "../905/339549";
 import { V8, $c, Wy, Um } from "../figma_app/681712";
 import { sx } from "../figma_app/307841";
 import { useCartOptimizationsExperiment } from "../figma_app/297957";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { L } from "../c5e2cae0/262856";
@@ -112,7 +112,7 @@ function S({
   subtitle: e
 }) {
   return jsx("div", {
-    className: _$$s.font15.fontMedium.lh24.colorText.$,
+    className: cssBuilderInstance.font15.fontMedium.lh24.colorText.$,
     children: e
   });
 }
@@ -121,12 +121,12 @@ function T({
   value: t
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.mt16.$,
+    className: cssBuilderInstance.flex.flexColumn.mt16.$,
     children: [jsx("p", {
-      className: _$$s.font11.lh16.spacingWide.colorText.$,
+      className: cssBuilderInstance.font11.lh16.spacingWide.colorText.$,
       children: e
     }), jsx("p", {
-      className: _$$s.font13.lh24.fontMedium.colorText.breakWord.mb16.$,
+      className: cssBuilderInstance.font13.lh24.fontMedium.colorText.breakWord.mb16.$,
       children: t
     })]
   });

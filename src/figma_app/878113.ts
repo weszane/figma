@@ -11,7 +11,7 @@ import { oy } from "../figma_app/964367";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError, setTagGlobal } from "../905/11";
-import g, { s as _$$s } from "../cssbuilder/589278";
+import g, { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { on, Gc } from "../figma_app/456871";
 import { trackFileEvent } from "../figma_app/314264";
@@ -431,10 +431,10 @@ export function $$j5(e, t) {
   if (c > 4e4) return jsxs(B, {
     gap: 8,
     children: [jsx("span", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: renderI18nText("ai_text_tools.select_fewer_characters")
     }), jsx("span", {
-      className: _$$s.textBodyMedium.colorTextSecondary.$,
+      className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
       children: `${c.toLocaleString()} / ${4e4.toLocaleString()}`
     })]
   });

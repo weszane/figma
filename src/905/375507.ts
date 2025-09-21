@@ -26,7 +26,7 @@ import { V as _$$V } from "../figma_app/312987";
 import T, { BaseLinkComponent } from "../905/551536";
 import { y2, Lp } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
 import { p as _$$p } from "../905/597320";
@@ -216,7 +216,7 @@ function H(e) {
         rightActions: W
       })]
     }), e.isLoading ? jsx("div", {
-      className: _$$s.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
+      className: cssBuilderInstance.wFull.hFull.flex.flexRow.justifyCenter.itemsCenter.$,
       children: jsx(_$$k, {})
     }) : jsx(Cj, {
       actionBar: e => {
@@ -235,7 +235,7 @@ function H(e) {
           uploadFontsLink: jsx(BaseLinkComponent, {
             onClick: onUploadClick,
             trusted: !0,
-            className: _$$s.ml4.$,
+            className: cssBuilderInstance.ml4.$,
             children: renderI18nText("resources_tab.shared_fonts_table.embedded_upload_fonts_link")
           })
         }) : jsxs(AutoLayout, {
@@ -261,7 +261,7 @@ function H(e) {
       onSetSortState: A,
       sortState: _,
       stickyContent: jsx("div", {
-        className: _$$s.pt8.pb8.colorBorder.bSolid.bt1.bb1.wFull.$,
+        className: cssBuilderInstance.pt8.pb8.colorBorder.bSolid.bt1.bb1.wFull.$,
         children: jsx(y2, {
           onChange: setQuery,
           query,

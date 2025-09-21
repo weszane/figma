@@ -18,7 +18,7 @@ import { A } from "../905/721854";
 import { Oq, is } from "../905/904596";
 import { F as _$$F } from "../905/382217";
 import { KeyCodes } from "../905/63728";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { If } from "../figma_app/171177";
 import { B as _$$B2 } from "../905/388732";
 import S, { n as _$$n } from "../905/895449";
@@ -49,9 +49,9 @@ function I({
       actionLabel: !1,
       recordingKey: e.label,
       children: jsx("div", {
-        className: _$$s2.flex.justifyBetween.wFull.$,
+        className: cssBuilderInstance.flex.justifyBetween.wFull.$,
         children: jsx("div", {
-          className: _$$s2.ml28.$,
+          className: cssBuilderInstance.ml28.$,
           children: e.label
         })
       })

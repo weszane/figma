@@ -4,7 +4,7 @@ import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { H } from "../905/222445";
 import l from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { hideMobileNav, showMobileNav } from "../905/34809";
@@ -248,7 +248,7 @@ export function $$F0() {
     "data-testid": "admin-nav-toolbar",
     className: d()({
       "admin_nav_toolbar--showToolbarOnlyOnMobile--KWSro": !s && !o,
-      [_$$s.mb8.$]: o || s
+      [cssBuilderInstance.mb8.$]: o || s
     }),
     children: l
   });

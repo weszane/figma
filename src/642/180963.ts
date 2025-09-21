@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import a from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { t as _$$t } from "../905/100946";
 var o = a;
 export let $$u0 = forwardRef(function ({
@@ -29,7 +29,7 @@ export let $$u0 = forwardRef(function ({
       id: "slides-flyout-input-label",
       children: s
     }), jsx("div", {
-      className: _$$s.flexShrink0.$,
+      className: cssBuilderInstance.flexShrink0.$,
       "aria-hidden": !0,
       children: jsx(O, {})
     })]

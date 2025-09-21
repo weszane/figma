@@ -25,7 +25,7 @@ import { Button } from "../905/521428";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q as _$$Q } from "../905/553231";
 import I from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v as _$$v } from "../4452/562448";
 import { B as _$$B } from "../4452/541264";
@@ -155,9 +155,9 @@ function ey(e) {
     };
   })();
   let w = jsx("div", {
-    className: _$$s.flex.flexColumn.itemsCenter.py8.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsCenter.py8.$,
     children: jsx("div", {
-      className: _$$s.colorBorder.bSolid.bt1.wFull.$
+      className: cssBuilderInstance.colorBorder.bSolid.bt1.wFull.$
     })
   });
   let E = e => e ? e.toLocaleDateString(_$$A2(e).locale(), {
@@ -168,7 +168,7 @@ function ey(e) {
   let S = jsxs("div", {
     className: V,
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: isHostPlanAdmin ? renderI18nText("resource_connection.connected_by") : renderI18nText("resource_connection.approved_by")
     }), jsx("div", {
       children: renderI18nText("resource_connection.connected_by_info", {
@@ -178,10 +178,10 @@ function ey(e) {
     })]
   });
   let N = jsxs(ButtonPrimitive, {
-    className: T()(K, _$$s.mb8.$),
+    className: T()(K, cssBuilderInstance.mb8.$),
     onClick: e.openPeopleTab,
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx("div", {
         className: H,
         children: getI18nString("resource_connection.num_people", {
@@ -225,7 +225,7 @@ function ey(e) {
   });
   let I = jsxs(Fragment, {
     children: [N, isHostPlanAdmin && resourceTeamId && jsxs(ButtonPrimitive, {
-      className: T()(K, _$$s.mb4.$),
+      className: T()(K, cssBuilderInstance.mb4.$),
       onClick: () => {
         resourceTeamId && h(showModalHandler({
           type: _$$T,
@@ -241,7 +241,7 @@ function ey(e) {
         }));
       },
       children: [jsxs("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx("div", {
           className: H,
           children: getI18nString("resource_connection.manage_modal.libraries")
@@ -262,7 +262,7 @@ function ey(e) {
     }), w, projectLastModifiedAt && jsxs("div", {
       className: V,
       children: [jsx("div", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: renderI18nText("resource_connection.last_activity")
       }), jsx("div", {
         children: jsx(h1, {
@@ -270,7 +270,7 @@ function ey(e) {
         })
       })]
     }), S, w, jsx("div", {
-      className: _$$s.py12.$,
+      className: cssBuilderInstance.py12.$,
       children: jsx(Button, {
         variant: "destructiveSecondary",
         onClick: () => {
@@ -299,7 +299,7 @@ function ey(e) {
     children: [w, isHostPlanAdmin && jsxs("div", {
       className: V,
       children: [jsx("div", {
-        className: _$$s.colorTextSecondary.$,
+        className: cssBuilderInstance.colorTextSecondary.$,
         children: renderI18nText("resource_connection.invite_sent")
       }), jsx("div", {
         children: renderI18nText("resource_connection.invite_sent_info", {
@@ -308,7 +308,7 @@ function ey(e) {
         })
       })]
     }), w, jsx("div", {
-      className: _$$s.py12.$,
+      className: cssBuilderInstance.py12.$,
       children: jsx(Button, {
         variant: "destructiveSecondary",
         onClick: () => {
@@ -330,7 +330,7 @@ function ey(e) {
   });
   let L = jsxs(Fragment, {
     children: [w, S, w, disconnectedAt && jsxs("div", {
-      className: _$$s.colorTextSecondary.py12.$,
+      className: cssBuilderInstance.colorTextSecondary.py12.$,
       children: [getI18nString("resource_connection.disconnected_info", {
         connectedPlanName: connectingPlan.name,
         disconnectedAt: E(disconnectedAt),
@@ -378,7 +378,7 @@ function ey(e) {
     },
     disabled: !isHostPlanAdmin,
     children: [jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsx("div", {
         className: H,
         children: renderI18nText("file_browser.folder_settings_modal.description")
@@ -396,7 +396,7 @@ function ey(e) {
     })]
   });
   let U = projectDescription && "" !== projectDescription ? jsxs("div", {
-    className: _$$s.flex.flexColumn.my6.mb16.$,
+    className: cssBuilderInstance.flex.flexColumn.my6.mb16.$,
     children: [jsx("div", {
       className: H,
       children: renderI18nText("file_browser.folder_settings_modal.description")
@@ -407,24 +407,24 @@ function ey(e) {
   }) : void 0;
   return jsxs(Fragment, {
     children: [status === eP.ACTIVE && jsx("div", {
-      className: _$$s.mb16.$,
+      className: cssBuilderInstance.mb16.$,
       children: isHostPlanAdmin ? P : U
     }), jsx("div", {
-      className: _$$s.textBodyMediumStrong.pb4.$,
+      className: cssBuilderInstance.textBodyMediumStrong.pb4.$,
       children: getI18nString("resource_connection.teams")
     }), jsxs("div", {
-      className: T()(z, _$$s.pb4.$),
+      className: T()(z, cssBuilderInstance.pb4.$),
       children: [jsx(nl, {
         size: Pf.MEDIUM,
         shape: "CIRCLE",
         team: hostPlan
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx("div", {
           children: hostPlan.name
         }), jsxs("span", {
           children: [status === eP.ACTIVE && jsxs("span", {
-            className: _$$s.textBodyMedium.colorTextSecondary.$,
+            className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
             children: [getI18nString("resource_connection.num_members", {
               count: f
             }), " \xb7\xa0"]
@@ -435,17 +435,17 @@ function ey(e) {
         })]
       })]
     }), jsxs("div", {
-      className: T()(z, _$$s.pb12.$),
+      className: T()(z, cssBuilderInstance.pb12.$),
       children: [jsx(nl, {
         size: Pf.MEDIUM,
         shape: "CIRCLE",
         team: connectingPlan
       }), jsxs("div", {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsx("div", {
           children: connectingPlan.name
         }), status === eP.ACTIVE && jsx("div", {
-          className: _$$s.textBodyMedium.colorTextSecondary.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
           children: getI18nString("resource_connection.num_members", {
             count: v
           })
@@ -550,7 +550,7 @@ function eO(e) {
             value: "ALL",
             children: y.ALL
           }), jsx("div", {
-            className: _$$s.py4.px8.$,
+            className: cssBuilderInstance.py4.px8.$,
             children: jsx("div", {
               className: "connected_projects_flyout--selectDropdownDivider--UEuEC"
             })
@@ -565,7 +565,7 @@ function eO(e) {
   return jsxs("div", {
     children: [resourceConnectedUsersWithPlan.length > 0 && jsxs(Fragment, {
       children: [w, jsx("div", {
-        className: _$$s.colorBorder.bSolid.bt1.wFull.$
+        className: cssBuilderInstance.colorBorder.bSolid.bt1.wFull.$
       })]
     }), jsxs("div", {
       className: "connected_projects_flyout--peopleFlyoutBody--PBwlb",
@@ -686,7 +686,7 @@ let eM = {
     let h = Hg(e.resourceConnection.id);
     let x = o?.key.parentId === hostPlan.id && o?.key.type === hostPlan.type;
     return jsxs(_$$m.Contents, {
-      zIndexOverrideClassName: _$$s.zIndexTertiaryModal.$,
+      zIndexOverrideClassName: cssBuilderInstance.zIndexTertiaryModal.$,
       children: [jsx(_$$m.Header, {
         children: jsxs("div", {
           className: "connected_projects_table--flyoutHeaderContainer--aoer8",
@@ -696,17 +696,17 @@ let eM = {
             children: [jsx(et, {
               resourceConnection: e.resourceConnection
             }), jsxs("div", {
-              className: _$$s.flex.flexColumn.$,
+              className: cssBuilderInstance.flex.flexColumn.$,
               children: [jsxs("div", {
                 className: "connected_projects_table--flyoutHeaderTextContainer--fLp-E",
                 children: [jsx("p", {
-                  className: _$$s.textHeadingMedium.$,
+                  className: cssBuilderInstance.textHeadingMedium.$,
                   children: resourceName
                 }), jsx(ee, {
                   resourceConnection: e.resourceConnection
                 })]
               }), e.resourceConnection.status === eP.ACTIVE && x && jsx(ButtonPrimitive, {
-                className: _$$s.colorTextBrand.cursorPointer.$,
+                className: cssBuilderInstance.colorTextBrand.cursorPointer.$,
                 onClick: () => {
                   l(selectViewAction({
                     view: "folder",
@@ -722,7 +722,7 @@ let eM = {
             children: [jsx("div", {
               className: "connected_projects_table--separatorAboveTabStrip--zUAM-"
             }), jsx("div", {
-              className: _$$s.pl12.pr24.py8.$,
+              className: cssBuilderInstance.pl12.pr24.py8.$,
               children: jsxs(_$$t3.TabStrip, {
                 manager: m,
                 children: [jsx(_$$t3.Tab, {
@@ -894,9 +894,9 @@ function eU(e) {
     e.showResourceConnectionFlyout && p.find(t => t.id === e.showResourceConnectionFlyout) && setHighlightedItemId(e.showResourceConnectionFlyout);
   }, [e.showResourceConnectionFlyout, p, setHighlightedItemId]);
   let q = jsx("div", {
-    className: _$$s.pt16.px32.$,
+    className: cssBuilderInstance.pt16.px32.$,
     children: jsx("div", {
-      className: _$$s.colorBorder.bSolid.bt1.wFull.$
+      className: cssBuilderInstance.colorBorder.bSolid.bt1.wFull.$
     })
   });
   return jsxs(TrackingProvider, {
@@ -910,9 +910,9 @@ function eU(e) {
         name: getI18nString("connected_projects_table.project"),
         className: "connected_projects_table--projectNameColumn--KUW-P connected_projects_table--column--MWjlO table--column--974RA",
         cellComponent: e => jsx("div", {
-          className: T()(_$$s.mr32.$, G, f(e)),
+          className: T()(cssBuilderInstance.mr32.$, G, f(e)),
           children: jsx("div", {
-            className: _$$s.minW0.$,
+            className: cssBuilderInstance.minW0.$,
             children: e.resourceName
           })
         })
@@ -925,7 +925,7 @@ function eU(e) {
             size: 24,
             entity: e.hostPlan
           }), jsx("div", {
-            className: T()(_$$s.minW0.$, G),
+            className: T()(cssBuilderInstance.minW0.$, G),
             children: e.hostPlan.name
           })]
         })
@@ -938,7 +938,7 @@ function eU(e) {
             size: 24,
             entity: e.connectingPlan
           }), jsx("div", {
-            className: T()(_$$s.minW0.$, G),
+            className: T()(cssBuilderInstance.minW0.$, G),
             children: e.connectingPlan.name
           })]
         })
@@ -990,7 +990,7 @@ function eU(e) {
         row: "connected_projects_table--row--KUik6"
       }
     }), h && g && jsx("div", {
-      className: _$$s.px32.pb32.$,
+      className: cssBuilderInstance.px32.pb32.$,
       children: jsx(Button, {
         iconPrefix: _ ? jsx(_$$d, {}) : jsx(_$$Q, {}),
         variant: "ghost",

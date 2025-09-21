@@ -3,7 +3,7 @@ import { U } from "../905/275247";
 import { x } from "../905/811596";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Ho } from "../figma_app/236178";
 import { wZ } from "../figma_app/777207";
@@ -58,7 +58,7 @@ export function $$f2(e) {
 }
 export function $$E0() {
   return jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.flexShrink0.ml4.mr4.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.flexShrink0.ml4.mr4.$,
     children: jsx($$m3, {
       isForSelect: !0
     })

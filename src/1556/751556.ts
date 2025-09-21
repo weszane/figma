@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useIsCommunityHubView, useAuthedActiveCommunityProfile, getActiveProfileUserOrOrg, isOrgOrTeamExport, getTeamAdminAccess, getOrgAdminAccess, isProfilePublished } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -401,7 +401,7 @@ function eD(e) {
 }
 function ez(e) {
   return jsx("div", {
-    className: _$$s.p4.$,
+    className: cssBuilderInstance.p4.$,
     children: e
   });
 }
@@ -878,7 +878,7 @@ function eX() {
     className: "account_switcher--dropdownButtonContent--GPGDx",
     "data-testid": "ProfileButton",
     children: [jsx("div", {
-      className: _$$s.relative.inlineFlex.$,
+      className: cssBuilderInstance.relative.inlineFlex.$,
       children: jsx(H8, {
         user: d && isOrgOrTeamExport(a) ? u : n,
         size: Pf.MEDIUM
@@ -890,7 +890,7 @@ function eX() {
       truncate: !0,
       children: d && isOrgOrTeamExport(a) ? a.name : n.name
     }), d && isOrgOrTeamExport(a) && jsx(Badge, {
-      className: p()("account_switcher--adminBadge--ys5HM", _$$s.mr0.$),
+      className: p()("account_switcher--adminBadge--ys5HM", cssBuilderInstance.mr0.$),
       color: BadgeColor.TERTIARY,
       text: getI18nString("navbar.community.admin_label")
     })]
@@ -1174,7 +1174,7 @@ export function $$tm0({
   let a = t && !isProfilePublished(n);
   let r = !e && !a && !isAndroidOrIphoneNotFigmaMobile;
   return jsxs("div", {
-    className: _$$s.justifyBetween.flex.flexRow.itemsCenter.pt8.ml8.mr8.mb8.lh0.$,
+    className: cssBuilderInstance.justifyBetween.flex.flexRow.itemsCenter.pt8.ml8.mr8.mb8.lh0.$,
     children: [jsx(eX, {}), r && jsx($$th1, {})]
   });
 }

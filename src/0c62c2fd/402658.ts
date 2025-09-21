@@ -10,7 +10,7 @@ import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { _ as _$$_, S } from "../figma_app/490799";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cm } from "../figma_app/544879";
@@ -35,7 +35,7 @@ export function $$T0(e) {
       bottom: "1rem"
     },
     children: jsx("div", {
-      className: _$$s.flex.justifyCenter.$,
+      className: cssBuilderInstance.flex.justifyCenter.$,
       "data-testid": "loading-spinner-container",
       children: jsx(k, {})
     })
@@ -62,7 +62,7 @@ function E(e) {
     hasPublishedSite
   } = e;
   let j = jsx("span", {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: renderI18nText("file_browser.tool_bar.trash")
   });
   let T = (e => {
@@ -78,7 +78,7 @@ function E(e) {
     }
   })(numFiles);
   let E = jsx("span", {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: getSidebarPath(folder)
   });
   let I = (e => {
@@ -115,7 +115,7 @@ function E(e) {
   return jsxs(Fragment, {
     children: [jsxs(DialogBody, {
       children: [e.folderState && jsx("div", {
-        className: _$$s.mb12.$,
+        className: cssBuilderInstance.mb12.$,
         children: jsx(_$$_, {
           dataTestId: "trash-folder-warning-banner",
           color: S.ERROR,
@@ -133,10 +133,10 @@ function E(e) {
           })(e.folderState)
         })
       }), jsx("div", {
-        className: _$$s.mb12.$,
+        className: cssBuilderInstance.mb12.$,
         children: I
       }), hasPublishedSite && jsx("div", {
-        className: _$$s.mb12.$,
+        className: cssBuilderInstance.mb12.$,
         children: renderI18nText("file_browser.trash_project.published_site_warning")
       }), jsx("div", {
         children: renderI18nText("file_browser.trash_project.description_restore", {

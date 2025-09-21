@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import l from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { U3 } from "../figma_app/412189";
@@ -378,7 +378,7 @@ function R(e) {
       children: jsxs(e.MetadataContainer, {
         className: d()(JQ, !t.onClick && Q3),
         children: [jsxs("div", {
-          className: _$$s.flex.justifyBetween.wFull.minW0.$,
+          className: cssBuilderInstance.flex.justifyBetween.wFull.minW0.$,
           children: [jsx(e.TextMetadataLayout, {
             onClick: t.onClick,
             primaryText: jsx(Fragment, {

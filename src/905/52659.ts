@@ -24,7 +24,7 @@ import { FolderSortKey } from "../905/316062";
 import { SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../figma_app/198885";
 import { h1 } from "../905/986103";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TextWithTruncation } from "../905/984674";
 import { L as _$$L } from "../905/16143";
 import { n as _$$n } from "../905/502036";
@@ -52,7 +52,7 @@ function B({
   let t = "trashedFolders" === getSelectedView().view;
   let i = _$$x(e, t);
   return "loaded" !== i.status ? jsx(Wi, {
-    className: _$$s2.w48.$,
+    className: cssBuilderInstance.w48.$,
     animationType: JR.NO_SHIMMER
   }) : jsx(TextWithTruncation, {
     truncate: !0,
@@ -79,7 +79,7 @@ function H(e) {
   let i = e.folder.shared_by ?? null;
   let r = wW(i).user;
   return i ? jsxs("div", {
-    className: _$$s2.flex.itemsCenter.gap8.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap8.$,
     children: [r && jsx(H8, {
       user: r,
       size: Pf.MEDIUM
@@ -107,7 +107,7 @@ let K = {
   })
 };
 let Y = (e, t, i) => ({
-  headerCellClassName: _$$s2.wHalf.$,
+  headerCellClassName: cssBuilderInstance.wHalf.$,
   field: FolderSortKey.NAME,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,

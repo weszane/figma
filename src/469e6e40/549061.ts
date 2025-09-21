@@ -63,7 +63,7 @@ import { A$, aN, Td, uH, V4, x9, Z4 } from '../4452/846771';
 import { q as _$$q } from '../4452/876838';
 import { g as _$$g } from '../4452/983384';
 import { R as _$$R } from '../7021/67076';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { TaD } from '../figma_app/6204';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo, UserFlagByName } from '../figma_app/43951';
@@ -114,7 +114,7 @@ function R({
       borderRadius: '13px'
     }).borderBox.b1.colorBorder.$).$,
     children: a ? jsx(Wi, {
-      className: _$$s.wFull.hFull.$
+      className: cssBuilderInstance.wFull.hFull.$
     }) : s
   });
 }
@@ -125,7 +125,7 @@ function U({
   let a = useDispatch();
   let s = useSelector(e => e.avatarEditorState);
   return e ? jsx(Wi, {
-    className: _$$s.h32.w400.$
+    className: cssBuilderInstance.h32.w400.$
   }) : jsxs(AutoLayout, {
     height: 'hug-contents',
     spacing: 16,
@@ -139,7 +139,7 @@ function U({
       avatarEditorState: s,
       size: 32
     }), jsx('div', {
-      className: _$$s.textHeadingLarge.$,
+      className: cssBuilderInstance.textHeadingLarge.$,
       children: t?.name ? renderI18nText('admin_dashboard.title_with_plan', {
         planName: t.name
       }) : renderI18nText('admin_dashboard.title_without_plan')
@@ -327,9 +327,9 @@ function e_({
     typeof a == 'number' && (r = a.toLocaleString());
   }
   return jsxs('div', {
-    className: _$$s.flex.itemsCenter.justifyBetween.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.$,
     children: [jsxs('div', {
-      className: _$$s.flex.gap8.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.$,
       children: [e, t]
     }), s ? jsx(_$$k, {
       size: 'sm',
@@ -337,7 +337,7 @@ function e_({
         'data-testid': `${i}-loading-spinner`
       }
     }) : jsx('div', {
-      'className': _$$s.colorTextSecondary.$,
+      'className': cssBuilderInstance.colorTextSecondary.$,
       'data-testid': i,
       'children': r
     })]
@@ -395,11 +395,11 @@ function eu({
       planId: e
     },
     children: jsxs('div', {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsxs('div', {
-        className: _$$s.flex.p16.itemsCenter.justifyBetween.bb1.bSolid.colorBorder.$,
+        className: cssBuilderInstance.flex.p16.itemsCenter.justifyBetween.bb1.bSolid.colorBorder.$,
         children: [jsx('div', {
-          className: _$$s.textHeadingSmall.$,
+          className: cssBuilderInstance.textHeadingSmall.$,
           children: jsx(eo, {
             label: jsx('div', {
               children: getI18nString('admin_dashboard.seat_counts_overview_card.total_seats')
@@ -410,11 +410,11 @@ function eu({
               color: BadgeColor.INVERT,
               subtle: !0,
               size: BadgeSize.LARGE,
-              className: _$$s.colorBorder.px4.py0.$
+              className: cssBuilderInstance.colorBorder.px4.py0.$
             })
           })
         }), jsxs('div', {
-          className: _$$s.flex.gap8.$,
+          className: cssBuilderInstance.flex.gap8.$,
           children: [s && jsx($z, {
             variant: 'secondary',
             onClick: s,
@@ -433,7 +433,7 @@ function eu({
           })]
         })]
       }), jsx('div', {
-        className: _$$s.flex.flexColumn.textBodyLarge.gap8.rowGap16.p16.$,
+        className: cssBuilderInstance.flex.flexColumn.textBodyLarge.gap8.rowGap16.p16.$,
         children: p.map(({
           seatIcon: e,
           seatLabel: t,
@@ -539,17 +539,17 @@ function ts({
 }) {
   return jsx(Fragment, {
     children: jsxs('div', {
-      'className': _$$s.overflowXHidden.mtAuto.mbAuto.$,
+      'className': cssBuilderInstance.overflowXHidden.mtAuto.mbAuto.$,
       'data-testid': 'seat-requests-mini-view-row-seat-request',
       'children': [jsx('div', {
-        className: _$$s.font11.lh16.$,
+        className: cssBuilderInstance.font11.lh16.$,
         children: renderI18nText('admin_dashboard.requests.requested_a_seat', {
           name: jsx('span', {
-            className: _$$s.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: e.name ?? ''
           }),
           boldedSeat: jsx('span', {
-            className: _$$s.fontBold.$,
+            className: cssBuilderInstance.fontBold.$,
             children: renderI18nText('admin_dashboard.requests.product_seat', {
               billableProductKey: tI(e.billableProductKey)
             })
@@ -557,10 +557,10 @@ function ts({
         })
       }), !!e.message && jsx(_$$G, {
         'text': e.message,
-        'className': _$$s.mt4.colorTextSecondary.$,
+        'className': cssBuilderInstance.mt4.colorTextSecondary.$,
         'data-testid': 'seat-requests-mini-view-row-note'
       }), jsxs('div', {
-        'className': _$$s.flex.noWrap.pt4.textBodyMedium.colorTextSecondary.$,
+        'className': cssBuilderInstance.flex.noWrap.pt4.textBodyMedium.colorTextSecondary.$,
         'data-testid': 'seat-requests-mini-view-row-metadata',
         'children': [jsx(_$$G, {
           text: e.email ?? ''
@@ -598,7 +598,7 @@ function ti({
   let d = useAtomWithSubscription(V4);
   let c = getRumLoggingConfig();
   return jsxs('div', {
-    'className': _$$s.flex.gap8.$,
+    'className': cssBuilderInstance.flex.gap8.$,
     'data-testid': 'seat-requests-mini-view-row-cta',
     'children': [jsx($z, {
       variant: 'secondary',
@@ -656,7 +656,7 @@ function tr({
     'data-testid': 'seat-requests-mini-view-row',
     'onClick': r,
     'children': [jsxs('div', {
-      'className': _$$s.flex.gap12.overflowXHidden.$,
+      'className': cssBuilderInstance.flex.gap12.overflowXHidden.$,
       'data-testid': 'seat-requests-mini-view-row-info',
       'children': [jsx(tn, {
         request: t
@@ -1213,13 +1213,13 @@ function tu({
       },
       paddingBottom: 8,
       children: [jsxs('div', {
-        className: _$$s.flex.flexColumn.$,
+        className: cssBuilderInstance.flex.flexColumn.$,
         children: [jsxs('div', {
-          className: _$$s.flex.flexColumn.p16.bb1.bSolid.colorBorder.rowGap16.$,
+          className: cssBuilderInstance.flex.flexColumn.p16.bb1.bSolid.colorBorder.rowGap16.$,
           children: [jsxs('div', {
-            className: _$$s.flex.itemsCenter.justifyBetween.minH24.$,
+            className: cssBuilderInstance.flex.itemsCenter.justifyBetween.minH24.$,
             children: [jsx('div', {
-              className: _$$s.fontMedium.font13.colorText.$,
+              className: cssBuilderInstance.fontMedium.font13.colorText.$,
               children: jsx(eo, {
                 label: Z.length > 0 ? renderI18nText('admin_dashboard.managed_org_requests.title') : renderI18nText('admin_dashboard.requests.seat_title'),
                 count: jsx(_$$E, {
@@ -1237,7 +1237,7 @@ function tu({
                 })
               })
             }), tf && jsxs('div', {
-              className: _$$s.flex.gap8.$,
+              className: cssBuilderInstance.flex.gap8.$,
               children: [jsx(t_, {
                 plan: e,
                 hasBillingGroups: Z.length > 0,
@@ -1317,13 +1317,13 @@ function tu({
           children: e2 ? jsx('div', {
             className: 'seat_requests_table_mini_view--loadingView--FAKIu',
             children: jsx(LoadingSpinner, {
-              className: _$$s.selfCenter.$
+              className: cssBuilderInstance.selfCenter.$
             })
           }) : jsx(Fragment, {
             children: e9.length === 0 ? jsxs('div', {
               className: 'seat_requests_table_mini_view--emptyView--hliFK',
               children: [jsx('div', {
-                className: _$$s.fontMedium.$,
+                className: cssBuilderInstance.fontMedium.$,
                 children: tj ? renderI18nText('admin_dashboard.requests.no_requests_for_you_right_now') : renderI18nText('admin_dashboard.requests.no_requests_to_approve')
               }), jsx('div', {
                 style: styleBuilderInstance.add({
@@ -1382,7 +1382,7 @@ function tm({
 }
 function tp() {
   return jsx('div', {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    className: cssBuilderInstance.flex.alignCenter.justifyCenter.p24.$,
     children: jsx(_$$k, {})
   });
 }
@@ -1441,7 +1441,7 @@ export function $$tg0({
             isLoading: F
           }), V && jsxs(Fragment, {
             children: [jsx('div', {
-              className: _$$s.mb16.$
+              className: cssBuilderInstance.mb16.$
             }), jsx(_$$k3, {
               openConnectedProjects: () => {
                 q?.key.type === FOrganizationLevelType.TEAM ? a(selectViewAction({
@@ -1462,7 +1462,7 @@ export function $$tg0({
             }).$,
             ref: d,
             children: [jsx('div', {
-              className: c()(_$$s.gridColumnStart1.gridColumnEnd13.$, 'admin_dashboard--hideWhenEmpty--EyO2D'),
+              className: c()(cssBuilderInstance.gridColumnStart1.gridColumnEnd13.$, 'admin_dashboard--hideWhenEmpty--EyO2D'),
               children: jsx(ee, {
                 isOrgAdmin: !!e,
                 plan: q

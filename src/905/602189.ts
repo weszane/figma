@@ -11,7 +11,7 @@ import p from "classnames";
 import { analyticsEventManager } from "../905/449184";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { b as _$$b } from "../figma_app/246400";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -119,7 +119,7 @@ function U({
     padding: 16,
     spacing: a || i || t ? "auto" : 8,
     children: [jsx("div", {
-      className: _$$s.minW24.selfCenter.$,
+      className: cssBuilderInstance.minW24.selfCenter.$,
       children: jsx(_$$B, {
         type: e,
         size: "24"
@@ -181,13 +181,13 @@ function B({
   let a = void 0 !== t && t > 0;
   let s = null;
   return (r ? s = jsx("div", {
-    className: _$$s.colorBorder.b1.px4.bRadius5.noWrap.$,
+    className: cssBuilderInstance.colorBorder.b1.px4.bRadius5.noWrap.$,
     children: jsx(TextWithTruncation, {
       color: "default",
       children: getI18nString("modify_plan_user_seat_modal.current_seat_badge")
     })
   }) : a ? s = jsx("div", {
-    className: _$$s.colorBorderBrand.b1.px4.bRadius5.noWrap.$,
+    className: cssBuilderInstance.colorBorderBrand.b1.px4.bRadius5.noWrap.$,
     children: jsx(TextWithTruncation, {
       color: "brand",
       fontWeight: "medium",
@@ -196,14 +196,14 @@ function B({
       })
     })
   }) : e && (s = jsx("span", {
-    className: _$$s.noWrap.$,
+    className: cssBuilderInstance.noWrap.$,
     children: jsx(TextWithTruncation, {
       fontWeight: "medium",
       children: e
     })
   })), s) ? jsx("div", {
     "data-testid": `seat-data-${i}`,
-    className: _$$s.mlAuto.$,
+    className: cssBuilderInstance.mlAuto.$,
     children: s
   }) : null;
 }
@@ -220,7 +220,7 @@ export function $$V0({
   userName: A,
   userId: I
 }) {
-  let x = _$$s.bRadius4.b1.wFull.zIndex1.relative.colorBg.borderBox;
+  let x = cssBuilderInstance.bRadius4.b1.wFull.zIndex1.relative.colorBg.borderBox;
   let S = e > 0;
   let w = isGovCluster() && !S;
   let T = t !== ViewAccessTypeEnum.VIEW && (o || !d);
@@ -251,7 +251,7 @@ export function $$V0({
         })
       }), T && jsx("div", {
         "data-testid": "from-seat-type-message",
-        className: $$m()(O, _$$s.flex.flexRow.itemsCenter.colorBgSecondary.$),
+        className: $$m()(O, cssBuilderInstance.flex.flexRow.itemsCenter.colorBgSecondary.$),
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
@@ -265,7 +265,7 @@ export function $$V0({
     }), jsxs("div", {
       className: D,
       children: [jsx("div", {
-        className: x.colorBorderSelected.$$if(p, _$$s.colorBorder).$,
+        className: x.colorBorderSelected.$$if(p, cssBuilderInstance.colorBorder).$,
         children: jsx(U, {
           seatType: i,
           availableSeats: e,
@@ -274,7 +274,7 @@ export function $$V0({
         })
       }), k && jsx("div", {
         "data-testid": "to-seat-type-message",
-        className: $$m()(O, _$$s.colorBgSelected.$$if(p, _$$s.colorBgWarningTertiary).$),
+        className: $$m()(O, cssBuilderInstance.colorBgSelected.$$if(p, cssBuilderInstance.colorBgWarningTertiary).$),
         children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "default",

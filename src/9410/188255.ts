@@ -22,7 +22,7 @@ import { A as _$$A } from "../905/251970";
 import { Positioning, UserInterfaceElements, WhiteboardStarterKitCppBindings, CollaborationType, SchemaJoinStatus, Fullscreen, CustomPosition, LayoutTabType } from "../figma_app/763686";
 import { Rectangle } from "../905/249071";
 import { a as _$$a } from "../905/29104";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { FQ } from "../9410/571209";
@@ -452,7 +452,7 @@ function q({
       children: [jsxs("div", {
         className: "ai_summary_nudge--topBar--3FRaK",
         children: [jsx("span", {
-          className: _$$s.textHeadingMedium.$,
+          className: cssBuilderInstance.textHeadingMedium.$,
           children: renderI18nText("whiteboard.ai_summary.nudge.title")
         }), jsx("div", {
           className: "ai_summary_nudge--closeButton--2Lr8q",
@@ -466,7 +466,7 @@ function q({
           })
         })]
       }), jsx("div", {
-        className: _$$s.textBodyLarge.colorTextSecondary.$,
+        className: cssBuilderInstance.textBodyLarge.colorTextSecondary.$,
         children: renderI18nText("whiteboard.ai_summary.nudge.subtitle")
       }), jsxs("div", {
         className: "ai_summary_nudge--numberContainer--JqUxZ",
@@ -496,7 +496,7 @@ function q({
       className: "ai_summary_nudge--bottomContent--EiPHE",
       children: jsxs("div", {
         children: [jsx("span", {
-          className: _$$s.textBodyMedium.colorTextSecondary.mr2.$,
+          className: cssBuilderInstance.textBodyMedium.colorTextSecondary.mr2.$,
           children: renderI18nText("whiteboard.ai_summary.nudge.disclaimer")
         }), jsx(Link, {
           href: _$$nG,
@@ -1020,7 +1020,7 @@ function th() {
       trackingContextName: "custom_template_publish_nudge",
       onboardingKey: v4,
       title: jsx("div", {
-        className: _$$s.font13.fontMedium.pl8.pt16.pb16.$,
+        className: cssBuilderInstance.font13.fontMedium.pl8.pt16.pb16.$,
         children: renderI18nText("whiteboard.inserts.custom_templates_header")
       }),
       width: 300,
@@ -1547,7 +1547,7 @@ function i_() {
   return jsx(_$$X, {
     description: jsxs("div", {
       children: [renderI18nText("fullscreen.link_shortcuts_onboarding.description"), jsxs("ul", {
-        className: _$$s.py8.$,
+        className: cssBuilderInstance.py8.$,
         style: styleBuilderInstance.add({
           listStyle: "disc inside"
         }).$,
@@ -1627,13 +1627,13 @@ function iw() {
     targetKey: Qr,
     description: jsxs(Fragment, {
       children: [jsx("div", {
-        className: _$$s.pt6.mr36.$,
+        className: cssBuilderInstance.pt6.mr36.$,
         children: u ? renderI18nText("design_systems.assets_panel.drag_drop_component_draft") : renderI18nText("design_systems.assets_panel.drag_drop_component")
       }), jsx(CloseButton, {
         onClick: v,
         innerText: getI18nString("general.close"),
         "aria-label": getI18nString("general.close"),
-        className: iy()(Rf, _$$s.absolute.top0.right0.mr8.mt10.$)
+        className: iy()(Rf, cssBuilderInstance.absolute.top0.right0.mr8.mt10.$)
       })]
     }),
     primaryCta: {
@@ -4473,7 +4473,7 @@ function ns(e) {
     setHoveredUseCase(fD.NONE);
   }
   return canInsert ? jsx("div", {
-    className: _$$s.flex.justifyCenter.$,
+    className: cssBuilderInstance.flex.justifyCenter.$,
     children: jsx(DialogRoot, {
       className: "browse_templates_make_something_onboarding--modalContainer--tYRC4",
       htmlAttributes: {
@@ -4661,7 +4661,7 @@ function no(e) {
             children: jsx(_$$A, {})
           })]
         }), jsxs("div", {
-          className: _$$s.pt8.pr12.pb12.pl12.$,
+          className: cssBuilderInstance.pt8.pr12.pb12.pl12.$,
           children: [jsx("div", {
             "aria-activedescendant": hoveredUseCase,
             "aria-label": getI18nString("figjam_onboarding_make_something.use_case_listbox.aria_label"),
@@ -7067,7 +7067,7 @@ let sr = registerModal(function ({
     overrideOnHide: e,
     titleClass: "oss_sales_upsell_modal--title--wpaS5",
     children: [jsx("div", {
-      className: _$$s.lh24.font13.pt24.pr0.pb32.pl0.$,
+      className: cssBuilderInstance.lh24.font13.pt24.pr0.pb32.pl0.$,
       children: jsxs(AutoLayout, {
         spacing: "40px",
         children: [jsxs(AutoLayout, {
@@ -7079,7 +7079,7 @@ let sr = registerModal(function ({
             direction: "vertical",
             spacing: 8,
             children: [jsx("p", {
-              className: _$$s.fontSemiBold.$,
+              className: cssBuilderInstance.fontSemiBold.$,
               children: renderI18nText("oss_sales_upsell_overlay.body2")
             }), jsx(AutoLayout, {
               direction: "vertical",
@@ -7095,16 +7095,16 @@ let sr = registerModal(function ({
               }, e.key))
             })]
           }), jsx("p", {
-            className: _$$s.pt4.$,
+            className: cssBuilderInstance.pt4.$,
             children: renderI18nText("oss_sales_upsell_overlay.body3")
           })]
         }), jsx("div", {
-          className: _$$s.mr16.$,
+          className: cssBuilderInstance.mr16.$,
           children: jsx(st, {})
         })]
       })
     }), jsx("div", {
-      className: _$$s.bt1.colorBorder.bSolid.$
+      className: cssBuilderInstance.bt1.colorBorder.bSolid.$
     })]
   });
 }, "OssSalesUpsellModal");

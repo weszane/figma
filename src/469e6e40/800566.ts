@@ -12,7 +12,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { t as _$$t } from "../905/117577";
 import { useSubscription } from "../figma_app/288654";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { WO } from "../469e6e40/418374";
@@ -95,7 +95,7 @@ function S(e) {
         })
       })]
     }), "allowlist" === extensionsAllowed && jsx("div", {
-      className: _$$s2.flex.flexColumn.pt8.mt8.bt1.colorBorder.bSolid.$,
+      className: cssBuilderInstance.flex.flexColumn.pt8.mt8.bt1.colorBorder.bSolid.$,
       children: jsx(Checkbox, {
         checked: extensionRequestsAllowed,
         label: jsx(Label, {
@@ -111,7 +111,7 @@ function N({
   text: t
 }) {
   return jsxs("div", {
-    className: _$$s2.wFull.flex.itemsCenter.gap4.$,
+    className: cssBuilderInstance.wFull.flex.itemsCenter.gap4.$,
     children: [jsx(IconButton, {
       "aria-label": getI18nString("general.go_back"),
       onClick: e,

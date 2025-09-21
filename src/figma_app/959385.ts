@@ -14,7 +14,7 @@ import { formatNumber } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { x as _$$x } from "../905/868466";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { H8, Pf } from "../905/590952";
@@ -98,7 +98,7 @@ function Z({
       onGoBack: pop
     }), jsxs(_$$P, {
       height: _,
-      className: _$$s.px16.$,
+      className: cssBuilderInstance.px16.$,
       children: [jsx(et, {
         imgUrl: extension.redirect_cover_image_url,
         extensionName: extension.name
@@ -152,24 +152,24 @@ function ee({
     }));
   }, [h, r, u]);
   return jsx("div", {
-    className: _$$s.p8.$,
+    className: cssBuilderInstance.p8.$,
     style: styleBuilderInstance.add({
       height: "48 px"
     }).$,
     children: jsxs("div", {
-      className: _$$s.flex.h32.px4.itemsCenter.justifyBetween.$,
+      className: cssBuilderInstance.flex.h32.px4.itemsCenter.justifyBetween.$,
       children: [jsxs("div", {
-        className: _$$s.flex.flexRow.$,
+        className: cssBuilderInstance.flex.flexRow.$,
         children: [jsx(IconButton, {
           onClick: t,
           "aria-label": getI18nString("qa.go_back"),
           children: jsx(_$$C, {})
         }), jsx("div", {
-          className: _$$s.pl8.colorText.textBodyLarge.$,
+          className: cssBuilderInstance.pl8.colorText.textBodyLarge.$,
           children: s
         })]
       }), jsxs("div", {
-        className: _$$s.flex.flexRow.itemsCenter.gap8.$,
+        className: cssBuilderInstance.flex.flexRow.itemsCenter.gap8.$,
         children: [jsx(IconButton, {
           onClick: _,
           "aria-label": getI18nString("qa.extensions.open_in_community"),
@@ -197,14 +197,14 @@ function et({
 }) {
   let r = _$$X(e);
   return jsx("div", {
-    className: _$$s.overflowHidden.bRadius5.mb12.$,
+    className: cssBuilderInstance.overflowHidden.bRadius5.mb12.$,
     style: styleBuilderInstance.add({
       aspectRatio: r ? "16/9" : "2/1",
       background: "var(--color-loading)"
     }).$,
     children: jsx("img", {
       src: e,
-      className: _$$s.hFull.wFull.eventsNone.$,
+      className: cssBuilderInstance.hFull.wFull.eventsNone.$,
       style: styleBuilderInstance.add({
         objectFit: "cover"
       }).$,
@@ -218,17 +218,17 @@ function er({
   numRuns: r
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexRow.justifyBetween.$,
+    className: cssBuilderInstance.flex.flexRow.justifyBetween.$,
     children: [jsx("div", {
-      className: _$$s.colorText.textHeadingMedium.$,
+      className: cssBuilderInstance.colorText.textHeadingMedium.$,
       children: e
     }), jsxs("div", {
-      className: _$$s.flex.flexRow.itemsCenter.gap8.colorTextSecondary.textBodyMedium.$,
+      className: cssBuilderInstance.flex.flexRow.itemsCenter.gap8.colorTextSecondary.textBodyMedium.$,
       children: [jsxs("div", {
-        className: _$$s.flex.flexRow.gap2.$,
+        className: cssBuilderInstance.flex.flexRow.gap2.$,
         children: [jsx(SvgComponent, {
           svg: _$$A2,
-          className: _$$s.colorIconSecondary.$,
+          className: cssBuilderInstance.colorIconSecondary.$,
           style: styleBuilderInstance.add({
             margin: "3px"
           }).$
@@ -236,10 +236,10 @@ function er({
           children: formatNumber(t)
         })]
       }), jsxs("div", {
-        className: _$$s.flex.flexRow.gap2.$,
+        className: cssBuilderInstance.flex.flexRow.gap2.$,
         children: [jsx(SvgComponent, {
           svg: _$$A,
-          className: _$$s.mx2.colorIconSecondary.$
+          className: cssBuilderInstance.mx2.colorIconSecondary.$
         }), jsx("div", {
           children: formatNumber(r)
         })]
@@ -258,9 +258,9 @@ function en({
     name
   } = t;
   return jsxs("div", {
-    className: _$$s.pt4.flex.flexRow.itemsCenter.justifyBetween.colorTextSecondary.textBodyMedium.$,
+    className: cssBuilderInstance.pt4.flex.flexRow.itemsCenter.justifyBetween.colorTextSecondary.textBodyMedium.$,
     children: [jsxs("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [jsx(H8, {
         user: {
           img_url,
@@ -268,7 +268,7 @@ function en({
         },
         size: Pf.SMALL16
       }), jsx("div", {
-        className: _$$s.pl8.$,
+        className: cssBuilderInstance.pl8.$,
         children: kB(e)
       })]
     }), jsx("div", {
@@ -283,7 +283,7 @@ function ei({
   description: e
 }) {
   return jsx("div", {
-    className: _$$s.pt16.pb8.$,
+    className: cssBuilderInstance.pt16.pb8.$,
     children: jsx(_$$R, {
       value: e,
       quillClassName: _$$C2,

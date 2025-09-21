@@ -18,7 +18,7 @@ import { eg as _$$eg, O0 } from "../figma_app/452252";
 import { i as _$$i } from "../figma_app/825649";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { collaborationHostNameAtom, handleCollaborationHostNameMessage } from "../figma_app/564528";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
 import { lQ } from "../905/934246";
 import { EventShield } from "../905/821217";
@@ -126,11 +126,11 @@ function S(e) {
       width: 268,
       background: "dark",
       title: jsx("div", {
-        className: _$$s.alignLeft.$,
+        className: cssBuilderInstance.alignLeft.$,
         children: d
       }),
       children: jsx("p", {
-        className: _$$s.textBodyMedium.alignLeft.$,
+        className: cssBuilderInstance.textBodyMedium.alignLeft.$,
         children: getI18nString("fullscreen.filename_view.zoom-integration-popup-body")
       })
     })

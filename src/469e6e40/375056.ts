@@ -8,7 +8,7 @@ import { jH } from "../figma_app/342207";
 import { Ay } from "@stylexjs/stylex";
 import { isDevEnvironment } from "../figma_app/169182";
 import { Q as _$$Q2 } from "../469e6e40/825225";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { C as _$$C, e as _$$e } from "../469e6e40/517544";
 import { isNullish } from "../figma_app/95419";
 import { ScreenReaderOnly } from "../905/172252";
@@ -103,13 +103,13 @@ function P(e) {
 }
 function U(e) {
   return jsx("section", {
-    className: _$$s.wFull.flex.flexColumn.colorBg.colorText.colorBorder.b1.bSolid.radiusLarge.$,
+    className: cssBuilderInstance.wFull.flex.flexColumn.colorBg.colorText.colorBorder.b1.bSolid.radiusLarge.$,
     children: e.children
   });
 }
 function F(e) {
   return jsxs("div", {
-    className: _$$s.flex.justifyBetween.itemsBaseline.gap16.p16.bb1.colorBorder.bSolid.$,
+    className: cssBuilderInstance.flex.justifyBetween.itemsBaseline.gap16.p16.bb1.colorBorder.bSolid.$,
     "data-testid": "seat-counts-header",
     children: [e.children, jsx("div", {
       className: "x78zum5 x1nfngrj x6s0dn4 x1a02dak x13a6bvl",
@@ -119,7 +119,7 @@ function F(e) {
 }
 function q(e) {
   return jsx("ul", {
-    className: _$$s.flex.flexColumn.py8.textBodyLarge.$,
+    className: cssBuilderInstance.flex.flexColumn.py8.textBodyLarge.$,
     children: collaboratorSet.sort(compareProductAccessTypes).map(t => {
       if (isNullish(e.seatCountsData[t])) return null;
       let {
@@ -131,7 +131,7 @@ function q(e) {
         className: "seat_counts--seatType--FRALA",
         "data-testid": `seat-counts-${t}`,
         children: [jsxs("div", {
-          className: _$$s.noWrap.overflowHidden.ellipsis.flex.itemsCenter.gap8.$,
+          className: cssBuilderInstance.noWrap.overflowHidden.ellipsis.flex.itemsCenter.gap8.$,
           children: [jsx("div", {
             "aria-hidden": !0,
             children: jsx(_$$B, {
@@ -140,7 +140,7 @@ function q(e) {
             })
           }), i]
         }), jsxs("div", {
-          className: _$$s.flex.itemsCenter.noWrap.gap8.$,
+          className: cssBuilderInstance.flex.itemsCenter.noWrap.gap8.$,
           children: [!e.isELA && available > 0 && jsx(Badge, {
             size: BadgeSize.LARGE,
             color: BadgeColor.BRAND,
@@ -172,7 +172,7 @@ function $(e) {
         trackingProperties: t
       }, "manage")],
       children: jsxs("h2", {
-        className: _$$s.textBodyLargeStrong.flex.itemsCenter.gap6.overflowHidden.$,
+        className: cssBuilderInstance.textBodyLargeStrong.flex.itemsCenter.gap6.overflowHidden.$,
         children: [jsxs("span", {
           style: {
             display: "contents"
@@ -1210,7 +1210,7 @@ export function $$e80(e) {
     minContentWidth: 896,
     maxContentWidth: 1600,
     children: jsxs("div", {
-      className: _$$s.flex.flexColumn.itemsStretch.gap24.$,
+      className: cssBuilderInstance.flex.flexColumn.itemsStretch.gap24.$,
       "data-testid": "billing-overview-content",
       children: [x && jsxs(BannerInset, {
         children: [jsx(BannerMessage, {
@@ -1265,7 +1265,7 @@ export function $$e80(e) {
           isAnnualProPlan: e.isAnnualProPlan
         })]
       }) : jsxs("div", {
-        className: _$$s.flex.flexWrap.gap24.$,
+        className: cssBuilderInstance.flex.flexWrap.gap24.$,
         children: [jsx("div", {
           className: "billing_overview_content--seatCountsContainer--WMEhZ",
           children: jsx(z, {

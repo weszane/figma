@@ -15,7 +15,7 @@ import { BigTextInputForwardRef } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
@@ -228,12 +228,12 @@ function B(e) {
               })
             });
           })(), 1 === G ? jsxs("div", {
-            className: _$$s.flex.flexColumn.$,
+            className: cssBuilderInstance.flex.flexColumn.$,
             children: [jsx("p", {
-              className: _$$s.pt16.$,
+              className: cssBuilderInstance.pt16.$,
               children: ep ? ef : renderI18nText("asset_transfers.request_modal.you_can_transfer_this_team_and_its_content_to_another_organization")
             }), jsx("p", {
-              className: _$$s.pt16.fontSemiBold.$,
+              className: cssBuilderInstance.pt16.fontSemiBold.$,
               children: renderI18nText("asset_transfers.request_modal.next_steps")
             }), jsxs("ul", {
               className: p_,
@@ -272,10 +272,10 @@ function B(e) {
             children: [jsxs("div", {
               className: cx,
               children: [jsx("p", {
-                className: _$$s.pt16.fontSemiBold.$,
+                className: cssBuilderInstance.pt16.fontSemiBold.$,
                 children: renderI18nText("asset_transfers.request_modal.add_a_link")
               }), jsx("p", {
-                className: _$$s.pt12.$,
+                className: cssBuilderInstance.pt12.$,
                 children: renderI18nText("asset_transfers.request_modal.add_link_here_description", {
                   destinationType: eb,
                   learnMore: eg(renderI18nText("asset_transfers.request_modal.learn_how_to_find_the_link"))
@@ -347,7 +347,7 @@ function B(e) {
                 })
               })]
             }), jsx("span", {
-              className: _$$s.pt8.$,
+              className: cssBuilderInstance.pt8.$,
               style: {
                 fontWeight: 600
               },
@@ -358,7 +358,7 @@ function B(e) {
               value: H,
               placeholder: getI18nString("asset_transfers.request_modal.email_address")
             }), ("email_format" === en || "email_match" === en) && jsxs("span", {
-              className: _$$s.colorTextDanger.$,
+              className: cssBuilderInstance.colorTextDanger.$,
               children: [" ", eS(), " "]
             }), jsx(BigTextInputForwardRef, {
               onChange: e => K(e.currentTarget.value),
@@ -370,13 +370,13 @@ function B(e) {
           })]
         }), jsx(DialogFooter, {
           children: jsxs("div", {
-            className: _$$s.flex.justifyBetween.itemsCenter.wFull.pl2.$,
+            className: cssBuilderInstance.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {
               children: [renderI18nText("asset_transfers.request_modal.step_1_of_2", {
                 stepNumber: G
               }), " "]
             }), jsxs("div", {
-              className: _$$s.flex.gap8.itemsCenter.$,
+              className: cssBuilderInstance.flex.gap8.itemsCenter.$,
               children: [jsx(Button, {
                 variant: "secondary",
                 onClick: 1 === G ? eT : () => {

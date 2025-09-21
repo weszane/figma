@@ -4,7 +4,7 @@ import a from "classnames";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { NU } from "../figma_app/204891";
 import { y } from "../905/171275";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { R } from "../905/731725";
@@ -20,7 +20,7 @@ export function $$_0(e) {
   });
   let a = useMemo(() => (i.data ?? []).sort((e, t) => e.touched_at < t.touched_at ? 1 : -1).slice(0, 4), [i.data]);
   return jsxs("div", {
-    className: s()(_$$s.flex.flexRow.gap12.itemsCenter.wFull.$, e.containerClassName),
+    className: s()(cssBuilderInstance.flex.flexRow.gap12.itemsCenter.wFull.$, e.containerClassName),
     "data-onboarding-key": e.dataOnboardingKey,
     children: [jsx("div", {
       className: "folder_name_and_preview--folderFiles--8g7Iy",

@@ -5,7 +5,7 @@ import { y as _$$y } from "../905/175043";
 import { h as _$$h } from "../905/207101";
 import { handleUrlAction } from "../905/280005";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
@@ -55,9 +55,9 @@ function E({
       align: "center",
       fullWidth: !0,
       children: [jsxs("div", {
-        className: _$$s.flex.gap4.itemsCenter.$,
+        className: cssBuilderInstance.flex.gap4.itemsCenter.$,
         children: [jsx(_$$y, {}), jsx("span", {
-          className: _$$s.colorText.textBodyMediumStrong.$,
+          className: cssBuilderInstance.colorText.textBodyMediumStrong.$,
           children: t
         })]
       }), jsxs(B, {
@@ -125,14 +125,14 @@ export function $$x0({
       align: "center",
       fullWidth: !0,
       children: [jsxs("div", {
-        className: _$$s.flex.itemsCenter.gap4.$,
+        className: cssBuilderInstance.flex.itemsCenter.gap4.$,
         children: [jsx("div", {
-          className: _$$s.w24.h24.flex.itemsCenter.justifyCenter.$,
+          className: cssBuilderInstance.w24.h24.flex.itemsCenter.justifyCenter.$,
           children: N && 0 !== N.length ? T ? jsx("div", {
             style: {
               "--color-icon": "var(--color-icon-brand)"
             },
-            className: _$$s.flex.justifyCenter.itemsCenter.$,
+            className: cssBuilderInstance.flex.justifyCenter.itemsCenter.$,
             children: T
           }) : 1 === N.length ? jsx("div", {
             style: styleBuilderInstance.add({
@@ -140,7 +140,7 @@ export function $$x0({
             }).$,
             children: jsx(Bf, {
               guid: N[0].guid,
-              className: _$$s.flex.justifyCenter.itemsCenter.colorIconBrand.$
+              className: cssBuilderInstance.flex.justifyCenter.itemsCenter.colorIconBrand.$
             })
           }) : jsx(_$$y, {
             style: {
@@ -148,7 +148,7 @@ export function $$x0({
             }
           }) : null
         }), jsx("span", {
-          className: _$$s.textBodyMediumStrong.colorTextBrand.truncate.maxW150.$,
+          className: cssBuilderInstance.textBodyMediumStrong.colorTextBrand.truncate.maxW150.$,
           children: function (e, t) {
             if (!e) return null;
             let i = t ? t(e) : e.length;

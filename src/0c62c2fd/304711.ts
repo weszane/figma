@@ -6,7 +6,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/53773";
@@ -20,7 +20,7 @@ export function $$x0(e) {
   let b = getAtomMutate(Q4);
   let v = _$$x(e.folder.id, !0);
   let y = jsx("span", {
-    className: _$$s.fontBold.$,
+    className: cssBuilderInstance.fontBold.$,
     children: getSidebarPath(e.folder)
   });
   let w = getI18nString("file_browser.delete_project.delete_project");
@@ -43,7 +43,7 @@ export function $$x0(e) {
         })
       }), jsxs(DialogBody, {
         children: [jsx("div", {
-          className: _$$s.mb16.$,
+          className: cssBuilderInstance.mb16.$,
           children: j
         }), jsx("div", {
           children: T

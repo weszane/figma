@@ -64,7 +64,7 @@ import { WH } from "../figma_app/836943";
 import { EventShield } from "../905/821217";
 import { g as _$$g } from "../905/496772";
 import eh from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { i as _$$i } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
@@ -291,7 +291,7 @@ function ek({
           className: em()(IZ, t ? VK : void 0),
           style: _l(e, s, c),
           children: [u.name, t && jsx("div", {
-            className: _$$s.inlineBlock.alignTop.pl4.$,
+            className: cssBuilderInstance.inlineBlock.alignTop.pl4.$,
             children: jsx(KP, {
               libraryKey: u.libraryKey
             })
@@ -326,7 +326,7 @@ function ek({
           let p = `section.${e.library_key}`;
           return jsx(m3, {
             dsStyle: e,
-            additionalClassName: _$$s.flex.wFull.$,
+            additionalClassName: cssBuilderInstance.flex.wFull.$,
             children: jsx(eD, {
               column: t ? null : c % u.rowSize,
               dsStyle: e,
@@ -344,7 +344,7 @@ function ek({
       });
     case _$$b2.Separator:
       return jsx("div", {
-        className: _$$s.h16.flex.itemsCenter.$,
+        className: cssBuilderInstance.h16.flex.itemsCenter.$,
         style: _l(e, s, c),
         children: getFeatureFlags().fpl_style_picker_combobox ? jsx("hr", {
           "aria-hidden": !0,

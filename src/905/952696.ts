@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
@@ -52,18 +52,18 @@ export function $$g0({
     };
   }(e, t);
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     "data-testid": "extension-network-access",
     children: [jsxs("button", {
       onClick: () => y(!A),
-      className: _$$s.flex.itemsCenter.$,
+      className: cssBuilderInstance.flex.itemsCenter.$,
       children: [jsx(SvgComponent, {
         svg: _ ? _$$A4 : _$$A3,
-        svgClassName: _ ? _$$s.colorBgSecondary.bRadius4.$ : void 0,
+        svgClassName: _ ? cssBuilderInstance.colorBgSecondary.bRadius4.$ : void 0,
         useOriginalSrcFills_DEPRECATED: !0,
         dataTestId: "network-globe-icon"
       }), jsx("div", {
-        className: _ ? _$$s.ml12.alignLeft.$ : _$$s.ml8.alignLeft.$,
+        className: _ ? cssBuilderInstance.ml12.alignLeft.$ : cssBuilderInstance.ml8.alignLeft.$,
         children: jsx(TextWithTruncation, {
           color: "default",
           children: label
@@ -71,10 +71,10 @@ export function $$g0({
       }), !g && jsx(SvgComponent, {
         dataTestId: "network-access-chevron-icon",
         svg: b,
-        className: _$$s.colorIconSecondary.ml4.$
+        className: cssBuilderInstance.colorIconSecondary.ml4.$
       })]
     }), (A || g) && jsxs("div", {
-      className: _$$s.p12.flex.flexColumn.gap8.bRadius4.colorBgSecondary.breakWord.$,
+      className: cssBuilderInstance.p12.flex.flexColumn.gap8.bRadius4.colorBgSecondary.breakWord.$,
       style: styleBuilderInstance.add({
         maxWidth: "320px"
       }).$,
@@ -82,7 +82,7 @@ export function $$g0({
         fontSize: 11,
         children: description
       }), domains.length > 0 && jsx("ul", {
-        className: _$$s.ml16.$,
+        className: cssBuilderInstance.ml16.$,
         style: styleBuilderInstance.add({
           listStyle: "disc",
           verticalAlign: "baseline"

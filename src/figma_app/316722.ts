@@ -6,7 +6,7 @@ import { a as _$$a } from "../905/964520";
 import l from "classnames";
 import { isColorDarkByLuminance } from "../figma_app/191804";
 import { BrowserInfo } from "../figma_app/778880";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 var d = l;
 let h = "desktop_navigation_chevrons--darkBackgroundIcon--0W-DW";
@@ -23,7 +23,7 @@ export function $$$$f0(e) {
   })), e.parentBackgroundColor) {
     let t = isColorDarkByLuminance(e.parentBackgroundColor);
     return jsxs("div", {
-      className: _$$s.flex.flexRow.$,
+      className: cssBuilderInstance.flex.flexRow.$,
       children: [jsx(IconButton, {
         "aria-label": getI18nString("file_browser.navigation.desktop_back_to_previous"),
         disabled: !e.isLeftEnabled,
@@ -46,7 +46,7 @@ export function $$$$f0(e) {
     });
   }
   return jsxs("div", {
-    className: _$$s.flex.flexRow.$,
+    className: cssBuilderInstance.flex.flexRow.$,
     children: [jsx(IconButton, {
       "aria-label": getI18nString("file_browser.navigation.desktop_back_to_previous"),
       disabled: !e.isLeftEnabled,

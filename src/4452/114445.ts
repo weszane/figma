@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { aN, V4, D3 } from "../4452/846771";
 import { n as _$$n } from "../4452/550447";
@@ -52,7 +52,7 @@ function w({
   let l = !!r || i.has(n);
   let o = getRumLoggingConfig();
   return jsxs("div", {
-    className: _$$s.wFull.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.wFull.flex.flexColumn.gap8.$,
     children: [jsx(lR, {
       onClick: () => {
         t();
@@ -146,9 +146,9 @@ function V({
     text: t ?? "-"
   });
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.overflowBreakWord.textBodyMedium.$,
+    className: cssBuilderInstance.flex.flexColumn.overflowBreakWord.textBodyMedium.$,
     children: [jsx("div", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: e
     }), a ? jsx(e6, {
       className: "xt0psk2 xh8yej3 x1e9o9zf xt0b8zv",
@@ -236,10 +236,10 @@ function z({
   failedToLoadPrices: l
 }) {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.hFull.justifyBetween.gap16.mb8.$,
+    className: cssBuilderInstance.flex.flexColumn.hFull.justifyBetween.gap16.mb8.$,
     "data-testid": "request-flyout-body",
     children: [jsx("div", {
-      className: _$$s.flex.flexColumn.gap24.$,
+      className: cssBuilderInstance.flex.flexColumn.gap24.$,
       children: jsx($, {
         request: e,
         billingGroupName: a,
@@ -273,7 +273,7 @@ function Z({
   };
   return jsxs("div", {
     "data-testid": "request-flyout-header",
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     children: [jsxs("div", {
       className: "request_flyout--avatarContainer--S-J9Y",
       children: [jsx(H8, {
@@ -299,19 +299,19 @@ function Z({
         })
       })]
     }), jsxs("div", {
-      className: _$$s.flex.flexColumn.$,
+      className: cssBuilderInstance.flex.flexColumn.$,
       children: [jsxs("div", {
         className: "x78zum5 x1q0g3np x193iq5w x6s0dn4 xfex06f",
         children: [jsx(_$$G, {
           text: t,
-          className: _$$s.textHeadingMedium.fontSemiBold.$
+          className: cssBuilderInstance.textHeadingMedium.fontSemiBold.$
         }), e.orgPermission === FUserRoleType.GUEST && jsx(_$$E, {
           size: "lg",
           variant: "defaultOutline",
           children: renderI18nText("admin_dashboard.requests.badge.guest")
         })]
       }), jsx("div", {
-        className: _$$s.textHeadingMedium.fontMedium.$,
+        className: cssBuilderInstance.textHeadingMedium.fontMedium.$,
         children: renderI18nText("admin_dashboard.request_flyout.requested_a_seat", {
           seatType: tI(e.billableProductKey)
         })
@@ -332,7 +332,7 @@ function Z({
 }
 function et() {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap16.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.$,
     "data-testid": "request-flyout-loading-skeleton-header",
     children: [jsx(Wi, {
       style: styleBuilderInstance.w48.h48.bRadiusFull.$
@@ -349,18 +349,18 @@ function et() {
 }
 function ea() {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap16.wFull.$,
+    className: cssBuilderInstance.flex.flexColumn.gap16.wFull.$,
     "data-testid": "request-flyout-loading-skeleton-body",
     children: [jsx(Wi, {
-      className: _$$s.wFull.h32.$
+      className: cssBuilderInstance.wFull.h32.$
     }), jsx(Wi, {
-      className: _$$s.wFull.h200.$
+      className: cssBuilderInstance.wFull.h200.$
     })]
   });
 }
 function es() {
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap8.$,
+    className: cssBuilderInstance.flex.flexColumn.gap8.$,
     "data-testid": "request-flyout-loading-skeleton-footer",
     children: [jsx(Wi, {
       style: styleBuilderInstance.wFull.h32.$
@@ -489,11 +489,11 @@ let er = {
     }
     return jsx(_$$m.Contents, {
       children: jsxs("div", {
-        className: _$$s.flex.flexColumn.justifyBetween.hFull.p24.gap24.$,
+        className: cssBuilderInstance.flex.flexColumn.justifyBetween.hFull.p24.gap24.$,
         children: [jsx(_$$m.HiddenTitle, {
           children: e.id
         }), j, jsxs("div", {
-          className: _$$s.flex.flexColumn.justifyBetween.hFull.gap16.$,
+          className: cssBuilderInstance.flex.flexColumn.justifyBetween.hFull.gap16.$,
           children: [I, E]
         })]
       })

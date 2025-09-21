@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Badge, BadgeColor, BadgeLabels } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useSelector, useDispatch } from "react-redux";
 import { isReduxDeprecationCutover, ConfigGroups, isReduxDeprecationShadowreadOrCutover } from "../figma_app/121751";
@@ -43,7 +43,7 @@ function p(e) {
   });
   let g = n ? getI18nString("navbar.navbar.guest") : p ? getI18nString("navbar.navbar.enterprise") : getI18nString("navbar.navbar.org");
   return jsx(Badge, {
-    className: _$$s.ml4.mr0.$,
+    className: cssBuilderInstance.ml4.mr0.$,
     color: BadgeColor.TOOLBAR,
     text: g
   });
@@ -58,7 +58,7 @@ let O = ex("pro_trial", function (e) {
     })
   });
   return jsx("div", {
-    className: _$$s.flex.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
     children: jsx("p", {
       children: renderI18nText("team_list.pro_trial_time_left", {
         daysLeftText: t
@@ -120,7 +120,7 @@ function R(e) {
     if (e.isInDropdown) return jsx(Badge, {
       color: BadgeColor.TOOLBAR,
       text: getI18nString("navbar.navbar.edu"),
-      className: _$$s.ml4.mr0.noWrap.flex.$
+      className: cssBuilderInstance.ml4.mr0.noWrap.flex.$
     });
   } else if (isTeamLocked(_.id, u)) {
     if (_.student_team_at) return null;
@@ -128,12 +128,12 @@ function R(e) {
     let s = (e, t = !1) => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.trial_expired"),
-      className: `${_$$s.ml4.mr0.noWrap.$} ${!t && "plan_switcher_team_badges--warningBadgeHover--v60SF"}`
+      className: `${cssBuilderInstance.ml4.mr0.noWrap.$} ${!t && "plan_switcher_team_badges--warningBadgeHover--v60SF"}`
     });
     let l = e => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.locked"),
-      className: _$$s.ml4.mr0.noWrap.$
+      className: cssBuilderInstance.ml4.mr0.noWrap.$
     });
     return e.isInDropdown ? t ? s(BadgeColor.WARNING, !0) : l(BadgeColor.WARNING) : t ? jsx(TrackingProvider, {
       name: BadgeLabels.PRO_TRIAL_EXPIRED,
@@ -150,7 +150,7 @@ function R(e) {
       text: getI18nString("navbar.navbar.pro_trial"),
       className: `${t} ${!n && "plan_switcher_team_badges--proTrialBadgeHover--tuLFJ"}`
     });
-    return e.isInDropdown ? t(BadgeColor.TOOLBAR, _$$s.ml4.mr0.noWrap.$, !0) : jsx(TrackingProvider, {
+    return e.isInDropdown ? t(BadgeColor.TOOLBAR, cssBuilderInstance.ml4.mr0.noWrap.$, !0) : jsx(TrackingProvider, {
       name: BadgeLabels.PRO_TRIAL,
       properties: {
         userId: n.id,
@@ -160,7 +160,7 @@ function R(e) {
       children: jsx(TrackedButton, {
         type: "button",
         onClick: () => W(UpsellModalType.PRO_TRIAL_UPSELL_MODAL),
-        className: _$$s.ml8.noWrap.$,
+        className: cssBuilderInstance.ml8.noWrap.$,
         trackingProperties: ng.getTrackingProperties("Badge Clicked"),
         children: jsx("span", {
           "data-tooltip-type": KindEnum.SPECIAL,
@@ -169,21 +169,21 @@ function R(e) {
           "data-tooltip-show-right": !0,
           "data-tooltip-max-width": 195,
           "data-tooltip-timeout-delay": 50,
-          children: t(BadgeColor.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
+          children: t(BadgeColor.DEFAULT, cssBuilderInstance.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
         })
       })
     });
   } else if (p && e.isInDropdown) return jsx(Badge, {
     color: BadgeColor.TOOLBAR,
     text: getI18nString("navbar.navbar.pro"),
-    className: _$$s.ml4.mr0.noWrap.flex.$
+    className: cssBuilderInstance.ml4.mr0.noWrap.flex.$
   });else if (!p) {
     let s = (e, t, n = !1) => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.free"),
       className: `${t} ${!n && "plan_switcher_team_badges--freeBadgeHover--BSSXU"}`
     });
-    if (e.isInDropdown) return s(BadgeColor.TOOLBAR, _$$s.ml4.mr0.noWrap.flex.$, !0);
+    if (e.isInDropdown) return s(BadgeColor.TOOLBAR, cssBuilderInstance.ml4.mr0.noWrap.flex.$, !0);
     if (M) {
       let e = {
         monetization_surface: _$$h.MonetizationSurface.FILE_BROWSER,
@@ -213,8 +213,8 @@ function R(e) {
         onMouseLeave: () => {
           clearTimeout(G.current);
         },
-        className: _$$s.bgTransparent.$,
-        children: s(BadgeColor.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
+        className: cssBuilderInstance.bgTransparent.$,
+        children: s(BadgeColor.DEFAULT, cssBuilderInstance.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
       });
     }
   }
@@ -230,7 +230,7 @@ export function $$M0({
   if (l) return jsx(Badge, {
     color: BadgeColor.BRAND,
     text: getI18nString("file_browser.drafts_to_move.new"),
-    className: _$$s.ml4.mr0.noWrap.flex.$
+    className: cssBuilderInstance.ml4.mr0.noWrap.flex.$
   });
   if (e.orgId) {
     if (t) return jsx(p, {

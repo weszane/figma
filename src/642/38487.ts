@@ -37,7 +37,7 @@ import { A as _$$A5 } from '../b2835def/405864';
 import { A as _$$A2 } from '../b2835def/566447';
 import { A as _$$A6 } from '../b2835def/597304';
 import { A as _$$A7 } from '../b2835def/864187';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { sO } from '../figma_app/21029';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { gdM, yj4 } from '../figma_app/27776';
@@ -87,7 +87,7 @@ function W({
 }
 function el() {
   return jsx('div', {
-    className: _$$s.flex.itemsCenter.justifyCenter.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.$,
     children: jsx('div', {
       className: xE
     })
@@ -345,9 +345,9 @@ function eE({
   isPrimaryBreakpoint: e
 }) {
   return jsx('div', {
-    className: _$$s.flex.$,
+    className: cssBuilderInstance.flex.$,
     children: e && jsx('span', {
-      className: _$$s.colorTextBrand.pr8.$,
+      className: cssBuilderInstance.colorTextBrand.pr8.$,
       children: getI18nString('sites.panel.primary')
     })
   });
@@ -445,8 +445,8 @@ function eM(e) {
       value: t !== null ? t : e.name
     }), !e.isRenaming && jsxs('span', {
       className: g()(qg, e.staticTextOverridesClassName, {
-        [_$$s.justifyBetween.$]: a,
-        [_$$s.eventsAuto.$]: e.isFixedOnHScroll
+        [cssBuilderInstance.justifyBetween.$]: a,
+        [cssBuilderInstance.eventsAuto.$]: e.isFixedOnHScroll
       }),
       onDoubleClick: e.focusOnSingleClick ? void 0 : u,
       onClick: e.focusOnSingleClick ? u : void 0,
@@ -741,7 +741,7 @@ let eA = memo(e => {
           scrollLeft: e.scrollLeft,
           useUI3Icons: !0
         }), e.hasWarning && jsx('div', {
-          'className': g()(_$$s.flex.alignCenter.mr16.$, QW),
+          'className': g()(cssBuilderInstance.flex.alignCenter.mr16.$, QW),
           'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': e.warningMessage,
           'data-tooltip-max-lines': 4,
@@ -779,7 +779,7 @@ let eA = memo(e => {
       className: cm,
       style: styleBuilderInstance.absolute.wFull.eventsNone.$,
       children: [jsx('div', {
-        className: _$$s.wFull.$
+        className: cssBuilderInstance.wFull.$
       }), jsx('div', {
         className: V0,
         children: jsx('div', {

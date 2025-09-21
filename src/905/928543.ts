@@ -11,7 +11,7 @@ import { G5 } from "../figma_app/795674";
 import { JD, h1 } from "../905/986103";
 import { x as _$$x } from "../905/211326";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/217163";
@@ -145,7 +145,7 @@ let $$q1 = memo(function (e) {
     page: e0.DSA_STATE_GROUP_VIEW,
     properties: o,
     children: jsxs("div", {
-      className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+      className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
       children: [jsx(_$$i, {
         assetOrFileName: e.stateGroup.name,
         onBack: e.onBackClick,
@@ -154,7 +154,7 @@ let $$q1 = memo(function (e) {
         })
       }), jsxs(_$$P, {
         width: e.width,
-        className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+        className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: l,
         children: [jsx(ee, {
           item: e.stateGroup,
@@ -190,7 +190,7 @@ export function $$$0({
     page: e0.DSA_COMPONENT_VIEW,
     properties: c,
     children: jsxs("div", {
-      className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+      className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
       "data-testid": "component-drilldown",
       children: [jsx(_$$i, {
         assetOrFileName: u,
@@ -200,7 +200,7 @@ export function $$$0({
         })
       }), jsxs(_$$P, {
         width: i,
-        className: _$$s.flexAuto.minH0.flex.flexColumn.$,
+        className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         children: [jsx(ee, {
           item: e,
           fileVersion: s

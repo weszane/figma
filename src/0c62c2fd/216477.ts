@@ -4,7 +4,7 @@ import { Link } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { useSubscription } from "../figma_app/288654";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { BlockConnectedFileMove } from "../figma_app/43951";
@@ -31,7 +31,7 @@ export function $$p0(e) {
         }), jsx(DialogBody, {
           className: Yw,
           children: jsx("div", {
-            className: _$$s.mt4.mb4.$,
+            className: cssBuilderInstance.mt4.mb4.$,
             children: renderI18nText("resource_connection.block_file_move.learn_more_about_what_you_can_do_in_connected_projects", {
               learnMore: jsx(Link, {
                 href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",

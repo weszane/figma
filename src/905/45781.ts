@@ -7,7 +7,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue, isValidValue } from "../905/216495";
@@ -147,7 +147,7 @@ export function $$v0(e) {
         ariaLabel: e.ariaLabel,
         autoFocus: e.autoFocus,
         className: l()({
-          [_$$s.ellipsis.$]: e.ellipsis
+          [cssBuilderInstance.ellipsis.$]: e.ellipsis
         }, e.className),
         dataTestId: e.dataTestId,
         disabled: e.disabled,

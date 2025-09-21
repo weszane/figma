@@ -31,7 +31,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Y as _$$Y } from "../905/506207";
 import { TQ, Zl } from "../905/211621";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { n0 } from "../figma_app/389091";
 import { vq } from "../905/8732";
@@ -578,7 +578,7 @@ function eH({
       isStandalone: !0,
       thumbnailValue: "MIXED" !== p ? p : void 0,
       isDeleted: _$$eF(s),
-      classNameOverride: _$$s.wFull.$,
+      classNameOverride: cssBuilderInstance.wFull.$,
       variablePillContainerClassName: Ro,
       fullWidth: !0
     })

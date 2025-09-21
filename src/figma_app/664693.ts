@@ -17,7 +17,7 @@ import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { x as _$$x } from "../905/868466";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { i6, v2, x$ } from "../905/188715";
@@ -104,7 +104,7 @@ export function $$U0() {
         })]
       })]
     }), a && result && jsxs("div", {
-      className: _$$s.wFull.$,
+      className: cssBuilderInstance.wFull.$,
       children: [jsx(_$$t.TabPanel, {
         ...p.structure,
         children: jsx($$V1, {
@@ -170,15 +170,15 @@ function G(e) {
   return jsx(_$$n, {
     width: p,
     children: jsxs("div", {
-      className: _$$s.wFull.p8.$,
+      className: cssBuilderInstance.wFull.p8.$,
       children: [jsx(_$$n.Header, {
         children: jsx(B, {
           fullWidth: !0,
           justify: "space-between",
           children: jsxs("div", {
-            className: _$$s.wFull.flex.gap4.$,
+            className: cssBuilderInstance.wFull.flex.gap4.$,
             children: [jsx("div", {
-              className: _$$s.h24.$,
+              className: cssBuilderInstance.h24.$,
               children: jsx(IconButton, {
                 recordingKey: generateRecordingKey(e.recordingKey, "backButton"),
                 onClick: e.onBack,
@@ -186,16 +186,16 @@ function G(e) {
                 children: jsx(_$$C, {})
               })
             }), jsx("div", {
-              className: _$$s.colorText.textBodyLarge.$,
+              className: cssBuilderInstance.colorText.textBodyLarge.$,
               children: renderI18nText("first_draft.make_kit.lint.title")
             })]
           })
         })
       }), jsx(_$$n.Body, {
         children: jsx("div", {
-          className: _$$s.wFull.flexColumn.pb8.$,
+          className: cssBuilderInstance.wFull.flexColumn.pb8.$,
           children: d ? _ && h ? jsx("div", {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             children: jsx($$V1, {
               validationFailures: _,
               selectedKit: d,
@@ -204,12 +204,12 @@ function G(e) {
               shouldAutoFix: !0
             })
           }) : jsx("div", {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             children: jsx(_$$S, {
               children: renderI18nText("first_draft.make_kit.lint.no_lint_errors_found")
             })
           }) : jsx("div", {
-            className: _$$s.wFull.$,
+            className: cssBuilderInstance.wFull.$,
             children: jsx(_$$S, {
               children: renderI18nText("first_draft.make_kit.lint.no_kit_found")
             })
@@ -322,7 +322,7 @@ function W({
       align: "center",
       children: [jsxs("button", {
         onClick: () => u(!c),
-        className: _$$s.cursorPointer.flex.itemsCenter.$,
+        className: cssBuilderInstance.cursorPointer.flex.itemsCenter.$,
         children: [c ? jsx(_$$O, {}) : jsx(_$$k, {}), jsx(Y, {
           severity: e.severity
         }), jsx(TextWithTruncation, {
@@ -351,21 +351,21 @@ function W({
         children: "Select offending layers"
       }), jsxs("button", {
         onClick: () => d(!o),
-        className: _$$s.cursorPointer.flex.itemsCenter.$,
+        className: cssBuilderInstance.cursorPointer.flex.itemsCenter.$,
         children: [o ? jsx(_$$O, {}) : jsx(_$$k, {}), jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           children: "Show metadata"
         })]
       }), o && jsx("div", {
-        className: _$$s.flex.flexColumn.wFull.maxH100.px12.overflowYScroll.$,
+        className: cssBuilderInstance.flex.flexColumn.wFull.maxH100.px12.overflowYScroll.$,
         children: r ? jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "regular",
           color: "secondary",
           children: JSON.stringify(r)
         }) : jsx("div", {
-          className: _$$s.wFull.flex.flexWrap.gap4.$,
+          className: cssBuilderInstance.wFull.flex.flexWrap.gap4.$,
           children: S.map(e => jsx(K, {
             node: e
           }, e.guid))
@@ -383,7 +383,7 @@ function K({
     useUI3Icon: !0
   }), [e]);
   return jsxs(ButtonPrimitive, {
-    className: _$$s.borderBox.h24.flex.px8.gap4.itemsCenter.b1.radiusMedium.maxW150.font11.colorBorder.$,
+    className: cssBuilderInstance.borderBox.h24.flex.px8.gap4.itemsCenter.b1.radiusMedium.maxW150.font11.colorBorder.$,
     onClick: () => {
       Fullscreen.panToNode(e.guid, !1);
       let t = getSingletonSceneGraph().getCurrentPage();
@@ -391,7 +391,7 @@ function K({
     },
     recordingKey: "nodeButton",
     children: [t, jsx("span", {
-      className: _$$s.truncate.$,
+      className: cssBuilderInstance.truncate.$,
       children: e.name
     })]
   });
@@ -402,12 +402,12 @@ function Y({
   switch (e) {
     case x$.ERROR:
       return jsx("div", {
-        className: _$$s.p2.font11.colorTextDanger.justifyCenter.fontSemiBold.$,
+        className: cssBuilderInstance.p2.font11.colorTextDanger.justifyCenter.fontSemiBold.$,
         children: "[Error]"
       });
     case x$.WARNING:
       return jsx("div", {
-        className: _$$s.p2.font11.colorTextWarning.justifyCenter.fontSemiBold.$,
+        className: cssBuilderInstance.p2.font11.colorTextWarning.justifyCenter.fontSemiBold.$,
         children: "[Warning]"
       });
     default:

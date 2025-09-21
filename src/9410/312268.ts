@@ -8,7 +8,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { oY } from "../figma_app/524655";
@@ -44,7 +44,7 @@ let $$C1 = forwardRef(function ({
       },
       "aria-label": getI18nString("slides.carousel.add-slide-from-template"),
       children: [jsx("p", {
-        className: _$$s.noWrap.$,
+        className: cssBuilderInstance.noWrap.$,
         children: getI18nString("slides.carousel.new_slide")
       }), jsx(O, {})]
     }), jsx(ButtonPrimitive, {

@@ -34,7 +34,7 @@ import { ms, rr, c$, wv } from "../figma_app/236327";
 import { p as _$$p } from "../905/991924";
 import { S as _$$S } from "../figma_app/420927";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showDropdownIfNone } from "../figma_app/976345";
@@ -80,12 +80,12 @@ var n;
 var R = (e => (e.SET_CANVAS_SPACE_CENTER = "SET_CANVAS_SPACE_CENTER", e.SET_CURRENT_PAGE_ID = "SET_CURRENT_PAGE_ID", e.ADJUST_ZOOM = "ADJUST_ZOOM", e.SET_ZOOM = "SET_ZOOM", e.RESET_ZOOM_TO_FIT_CANVAS_CONTENT = "RESET_ZOOM_TO_FIT_CANVAS_CONTENT", e.SET_COMMENT_MODE = "SET_COMMENT_MODE", e.SET_CURSOR_STYLE = "SET_CURSOR_STYLE", e.SET_SCROLL_TO_PAN = "SET_SCROLL_TO_PAN", e))(R || {});
 _$$ex("preload_success", function () {
   return jsxs("div", {
-    className: _$$s.pr8.$,
+    className: cssBuilderInstance.pr8.$,
     children: [jsx("div", {
-      className: _$$s.colorTextTooltip.textBodyMediumStrong.$,
+      className: cssBuilderInstance.colorTextTooltip.textBodyMediumStrong.$,
       children: getI18nString("proto.preload.loaded.tooltip.header")
     }), jsx("div", {
-      className: _$$s.colorTextTooltipSecondary.$,
+      className: cssBuilderInstance.colorTextTooltipSecondary.$,
       children: getI18nString("proto.preload.loaded.tooltip.body")
     })]
   });
@@ -94,12 +94,12 @@ _$$ex("preload_error", function ({
   isSlides: e
 }) {
   return jsxs("div", {
-    className: _$$s.pr8.$,
+    className: cssBuilderInstance.pr8.$,
     children: [jsx("div", {
-      className: _$$s.colorTextTooltip.textBodyMediumStrong.$,
+      className: cssBuilderInstance.colorTextTooltip.textBodyMediumStrong.$,
       children: e ? getI18nString("proto.preload.error.tooltip.header.slides") : getI18nString("proto.preload.error.tooltip.header")
     }), jsx("div", {
-      className: _$$s.colorTextTooltipSecondary.$,
+      className: cssBuilderInstance.colorTextTooltipSecondary.$,
       children: getI18nString("proto.preload.error.tooltip.body")
     })]
   });
@@ -452,7 +452,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let n = 1;
     e.viewer && (n = e.getCurrentZoomScale());
     return jsx(ButtonPrimitive, {
-      className: _$$s.bgTransparent.h100.$,
+      className: cssBuilderInstance.bgTransparent.h100.$,
       onClick: e => {
         if (e.stopPropagation(), r) {
           t(hideDropdownAction());

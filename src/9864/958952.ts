@@ -19,7 +19,7 @@ import { oW } from "../905/675859";
 import { getI18nState } from "../figma_app/363242";
 import { useSelector } from "react-redux";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Pf } from "../905/590952";
 import { n as _$$n } from "../figma_app/537817";
 import { e as _$$e } from "../905/579755";
@@ -848,7 +848,7 @@ function es({
   return jsxs("div", {
     className: n()(Y, "whiteboard--teamHeader--L87B-"),
     children: [jsxs("div", {
-      className: _$$s.flex.gap16.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap16.itemsCenter.$,
       children: [jsx(_$$n, {
         team: e,
         size: Pf.LARGE40,

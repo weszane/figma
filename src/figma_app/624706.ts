@@ -38,7 +38,7 @@ import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UserAPIHandlers } from "../905/93362";
 import { F as _$$F } from "../5132/756360";
 import { S as _$$S } from "../figma_app/420927";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nState } from "../figma_app/363242";
 import { FU } from "../905/26824";
 import { yJ } from "../figma_app/24841";
@@ -626,7 +626,7 @@ function te({
         })]
       }), jsx(Suspense, {
         fallback: jsx("div", {
-          className: _$$s.w300.h150.colorBgSecondary.$
+          className: cssBuilderInstance.w300.h150.colorBgSecondary.$
         }),
         children: jsx("img", {
           style: styleBuilderInstance.colorBorder.b1.colorBorder.bl0.br0.$,
@@ -2752,7 +2752,7 @@ export function $$t60(e) {
     }), jsx(tR, {
       helpWidgetOnboardingKey: t8
     }), jsxs("div", {
-      className: _$$s.$$if(e.shouldShowBottomRightZoomMenu && e.hide, _$$s.hidden, _$$s.flexColumn.gap12.justifyCenter.itemsEnd).$,
+      className: cssBuilderInstance.$$if(e.shouldShowBottomRightZoomMenu && e.hide, cssBuilderInstance.hidden, cssBuilderInstance.flexColumn.gap12.justifyCenter.itemsEnd).$,
       children: [u && jsx(tc, {
         dropdownOpen: t
       }), jsx(t9, {

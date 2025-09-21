@@ -12,7 +12,7 @@ import { customHistory } from "../905/612521";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { WN } from "../figma_app/638601";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { $z, Me, lR } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -68,7 +68,7 @@ function el(e) {
       children: e.children
     })
   }) : jsx("div", {
-    className: _$$s.wFull.$,
+    className: cssBuilderInstance.wFull.$,
     children: jsx($z, {
       variant: "secondary",
       onClick: e.onClick,
@@ -125,7 +125,7 @@ function ed(e) {
               extended: !0,
               doNotReserveSpaceForChevron: !0,
               children: jsx("div", {
-                className: _$$s.$$with({
+                className: cssBuilderInstance.$$with({
                   ml8: !0
                 }).$,
                 children: e.title
@@ -350,7 +350,7 @@ let eg = [{
       description: getI18nString("inspect_panel.properties.dev_mode_upsell_message"),
       layoutStyle: "brand",
       mainButtonOverride: jsx("div", {
-        className: _$$s.wFull.$,
+        className: cssBuilderInstance.wFull.$,
         children: jsx(setupThemeContext, {
           brand: "dev-handoff",
           children: jsx(lR, {

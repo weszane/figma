@@ -37,7 +37,7 @@ import { A as _$$A7 } from '../1617/862644';
 import { A as _$$A6 } from '../5724/883516';
 import { A as _$$A5 } from '../6828/325173';
 import { A as _$$A3 } from '../6828/871993';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { tgj } from '../figma_app/27776';
 import { hasClientMeta, hasMonetizedResourceMetadata } from '../figma_app/45218';
 import { FDomainVerificationStatusType } from '../figma_app/191312';
@@ -89,7 +89,7 @@ function j({
       })]
     }), !l && jsxs(Fragment, {
       children: [jsx('div', {
-        className: _$$s.pb8.$,
+        className: cssBuilderInstance.pb8.$,
         children: jsx(_$$C2, {
           shippingAddress: e,
           vatGstId: i
@@ -233,7 +233,7 @@ function Z({
 }
 function X(e) {
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.alignCenter.gap12.$,
+    className: cssBuilderInstance.flex.flexColumn.alignCenter.gap12.$,
     children: [jsx(BigButtonPrimary, {
       onClick: e.submit,
       disabled: e.disabled || e.isLoading,
@@ -303,7 +303,7 @@ function J(e) {
     priceString: formatCurrency(priceInCents, !0)
   }));
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.itemsStart.gap12.$,
+    className: cssBuilderInstance.flex.flexColumn.itemsStart.gap12.$,
     children: [jsx(ee, {
       header: renderI18nText('community.buyer.subtotal'),
       subheader: t,
@@ -348,9 +348,9 @@ function J(e) {
 }
 function ee(e) {
   return jsxs('div', {
-    className: _$$s.flex.wFull.$ + (e.adtlClassName ? ` ${e.adtlClassName}` : ''),
+    className: cssBuilderInstance.flex.wFull.$ + (e.adtlClassName ? ` ${e.adtlClassName}` : ''),
     children: [jsxs('div', {
-      className: _$$s.flexColumn.$,
+      className: cssBuilderInstance.flexColumn.$,
       children: [jsx('div', {
         className: PX,
         children: e.header
@@ -413,7 +413,7 @@ function eh(e) {
     disabled || onRemove(paymentMethod.payment_method_id);
   }, [disabled, onRemove, paymentMethod]);
   let d = jsxs('div', {
-    className: _$$s.flex.gap12.alignCenter.$,
+    className: cssBuilderInstance.flex.gap12.alignCenter.$,
     children: [jsx('div', {
       className: IC,
       children: renderI18nText('community.buyer.exp', {
@@ -425,7 +425,7 @@ function eh(e) {
     }), jsx('div', {
       className: SU
     }), jsxs('div', {
-      className: _$$s.flex.itemsCenter.gap8.$,
+      className: cssBuilderInstance.flex.itemsCenter.gap8.$,
       children: [jsx(SecureLink, {
         onClick: o,
         trusted: !0,
@@ -447,11 +447,11 @@ function eh(e) {
     children: [jsx(_$$Ay2, {
       mediaQuery: `(min-width: ${parsePxNumber(tgj)}px)`,
       children: jsx('div', {
-        className: _$$s.flex.h32.wFull.itemsCenter.$,
+        className: cssBuilderInstance.flex.h32.wFull.itemsCenter.$,
         children: jsxs('div', {
-          className: _$$s.flex.wFull.justifyBetween.$,
+          className: cssBuilderInstance.flex.wFull.justifyBetween.$,
           children: [jsxs('div', {
-            className: _$$s.flex.gap8.itemsCenter.$,
+            className: cssBuilderInstance.flex.gap8.itemsCenter.$,
             children: [jsx(em, {
               brand: e.paymentMethod.brand
             }), t]
@@ -461,9 +461,9 @@ function eh(e) {
     }), jsx(_$$Ay2, {
       mediaQuery: `(max-width: ${parsePxNumber(tgj) - 1}px)`,
       children: jsxs('div', {
-        className: _$$s.flex.flexColumn.gap8.mt8.$,
+        className: cssBuilderInstance.flex.flexColumn.gap8.mt8.$,
         children: [jsxs('div', {
-          className: _$$s.flex.gap8.itemsCenter.$,
+          className: cssBuilderInstance.flex.gap8.itemsCenter.$,
           children: [jsx(em, {
             brand: e.paymentMethod.brand
           }), t]
@@ -484,12 +484,12 @@ function eg(e) {
       },
       legend: jsx(_$$s2, {
         children: jsx('span', {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           children: renderI18nText('community.buyer.payment_details')
         })
       }),
       children: [e.paymentMethods.map((t, i) => jsxs('div', {
-        className: _$$s.flex.itemsStart.$,
+        className: cssBuilderInstance.flex.itemsStart.$,
         children: [jsx(_$$c, {
           value: t.payment_method_id,
           readonly: e.disabled || void 0,
@@ -549,7 +549,7 @@ function ef({
       },
       legend: jsx(_$$s2, {
         children: jsx('span', {
-          className: _$$s.fontSemiBold.$,
+          className: cssBuilderInstance.fontSemiBold.$,
           children: renderI18nText('community.buyer.billing')
         })
       }),
@@ -563,7 +563,7 @@ function ef({
         }), jsx(_$$c, {
           value: SubscriptionInterval.ANNUALLY,
           label: jsxs(Label, {
-            className: _$$s.flex.flexRow.itemsCenter.$,
+            className: cssBuilderInstance.flex.flexRow.itemsCenter.$,
             children: [renderI18nText('community.buyer.yearly'), jsx('div', {
               className: C_,
               children: renderI18nText('community.buyer.save_percent', {
@@ -1139,7 +1139,7 @@ export const CommunityCheckoutModal = registerModal(props => {
           className: Ph
         })]
       }),
-      headerClassName: _$$s.font13.mx8.$,
+      headerClassName: cssBuilderInstance.font13.mx8.$,
       headerSize: 'large',
       onClose: handleClose,
       maxWidth: 864,
@@ -1167,12 +1167,12 @@ export const CommunityCheckoutModal = registerModal(props => {
             localResource,
             subscriptionInterval
           }), jsx('div', {
-            className: _$$s.my24.$,
+            className: cssBuilderInstance.my24.$,
             children: promoCodeUi
           }), jsx('div', {
             className: jH
           }), jsxs('div', {
-            className: _$$s.flex.flexColumn.gap32.$,
+            className: cssBuilderInstance.flex.flexColumn.gap32.$,
             children: [priceSummaryUi, submitButtonUi]
           })]
         })]
@@ -1196,7 +1196,7 @@ export const CommunityCheckoutModal = registerModal(props => {
         ref: mobileScrollContainerRef,
         className: AA,
         children: [annualDiscountUi, paymentUi, promoCodeUi, !isLoadingTaxInfo && shippingVatUi, jsxs('div', {
-          className: _$$s.flex.flexColumn.gap32.$,
+          className: cssBuilderInstance.flex.flexColumn.gap32.$,
           children: [priceSummaryUi, submitButtonUi]
         })]
       })]

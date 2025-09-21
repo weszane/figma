@@ -14,7 +14,7 @@ import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { f as _$$f, h as _$$h } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Fj, jI } from "../905/763714";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { fK } from "../905/469533";
@@ -67,7 +67,7 @@ export let $$C0 = registerModal(function ({
         })
       }), jsx(DialogBody, {
         children: jsxs("div", {
-          className: _$$s.pb8.$,
+          className: cssBuilderInstance.pb8.$,
           children: [H && jsxs(_$$d, {
             disabled: "platform_error" === P,
             checked: r,
@@ -85,7 +85,7 @@ export let $$C0 = registerModal(function ({
             ref: R,
             children: ["platform_error" === P ? getI18nString("fullscreen.accessibility.platform_error") : G, "render_error" === P && jsx("span", {
               role: "alert",
-              className: _$$s.block.mt8.$,
+              className: cssBuilderInstance.block.mt8.$,
               children: jsx(TextWithTruncation, {
                 color: "danger",
                 children: renderI18nText("fullscreen.accessibility.dom_error")

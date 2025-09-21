@@ -4,15 +4,15 @@ import { FPlanNameType } from "../figma_app/191312";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { jsx } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ex } from "../905/524523";
 let u = ex("plan_comparison_feature_custom_color_palettes", function () {
   let e = jsx("span", {
-    className: _$$s.colorTextFigjam.fontMedium.$,
+    className: cssBuilderInstance.colorTextFigjam.fontMedium.$,
     children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: renderI18nText("plan_comparison.chart.custom_color_palettes.details_with_callout", {
       figJamCallout: e
     })
@@ -20,11 +20,11 @@ let u = ex("plan_comparison_feature_custom_color_palettes", function () {
 });
 let p = ex("plan_comparison_feature_custom_templates", function () {
   let e = jsx("span", {
-    className: _$$s.colorTextFigjam.fontMedium.$,
+    className: cssBuilderInstance.colorTextFigjam.fontMedium.$,
     children: getI18nString("plan_comparison.chart.callout.figjam")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: renderI18nText("plan_comparison.chart.custom_templates_v2.details_with_callout", {
       figJamCallout: e
     })
@@ -32,11 +32,11 @@ let p = ex("plan_comparison_feature_custom_templates", function () {
 });
 let m = ex("plan_comparison_feature_open_sessions", function () {
   let e = jsx("span", {
-    className: _$$s.colorTextFigjam.fontMedium.$,
+    className: cssBuilderInstance.colorTextFigjam.fontMedium.$,
     children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: renderI18nText("plan_comparison.chart.open_sessions.details_with_callout", {
       figJamCallout: e
     })
@@ -44,11 +44,11 @@ let m = ex("plan_comparison_feature_open_sessions", function () {
 });
 let h = ex("plan_comparison_feature_voting", function () {
   let e = jsx("span", {
-    className: _$$s.colorTextFigjam.fontMedium.$,
+    className: cssBuilderInstance.colorTextFigjam.fontMedium.$,
     children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
-    className: _$$s.alignCenter.$,
+    className: cssBuilderInstance.alignCenter.$,
     children: renderI18nText("plan_comparison.chart.voting.details_with_callout", {
       figJamCallout: e
     })

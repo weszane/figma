@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 export function $$o0({
@@ -8,12 +8,12 @@ export function $$o0({
 }) {
   let i = useFigmaLibrariesEnabled() && !!t;
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.alignCenter.justifyCenter.mt36.wFull.$,
+    className: cssBuilderInstance.flex.flexColumn.alignCenter.justifyCenter.mt36.wFull.$,
     children: [jsx("h2", {
-      className: _$$s.font14.mb20.$,
+      className: cssBuilderInstance.font14.mb20.$,
       children: renderI18nText("design_systems.libraries_modal.no_libraries")
     }), jsxs("p", {
-      className: _$$s.colorTextSecondary.$,
+      className: cssBuilderInstance.colorTextSecondary.$,
       children: [e && renderI18nText("design_systems.libraries_modal.no_libraries_match_selected_filters"), !e && !i && renderI18nText("design_systems.libraries_modal.libraries_will_show_up_here_as_they_become_published"), !e && i && jsxs(Fragment, {
         children: [renderI18nText("design_systems.libraries_modal.presets.explore_presets"), jsx("p", {
           children: jsx("button", {

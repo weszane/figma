@@ -6,7 +6,7 @@ import { Link } from "../905/438674";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getI18nStringAlias } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -67,7 +67,7 @@ export function $$I2(e, t) {
       case BellId.FILE_MOVE_FOLDER_BELL_ID:
         return renderI18nText("visual_bell.file_move_folder", {
           folderName: jsx("span", {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: params.text
           })
         });
@@ -173,12 +173,12 @@ function E(e) {
 function x() {
   _$$_();
   return jsxs("div", {
-    className: _$$s.flex.itemsCenter.gap4.mr32.selectNone.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap4.mr32.selectNone.$,
     children: [jsx("span", {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: renderI18nText("design_linter.copy_selection_toast.main_text")
     }), jsx("span", {
-      className: _$$s.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       children: renderI18nText("design_linter.copy_selection_toast.sub_text")
     }), jsx(_$$E, {
       children: renderI18nText("general.beta")
@@ -214,9 +214,9 @@ function T({
   aiTrackingContext: e
 }) {
   return jsxs("div", {
-    className: _$$s.w350.flex.flexRow.justifyBetween.itemsCenter.$,
+    className: cssBuilderInstance.w350.flex.flexRow.justifyBetween.itemsCenter.$,
     children: [jsx("p", {
-      className: _$$s.textBodyMediumStrong.alignCenter.$,
+      className: cssBuilderInstance.textBodyMediumStrong.alignCenter.$,
       children: renderI18nText("slides.present_summary.visual_bells.complete")
     }), jsx(z, {
       aiTrackingContext: e

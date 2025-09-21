@@ -106,7 +106,7 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { _r } from "../figma_app/451499";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { A as _$$A4 } from "../6828/523860";
 import { A as _$$A5 } from "../6828/85206";
 import { bO, Hn } from "../905/435127";
@@ -1131,7 +1131,7 @@ function tQ({
           recordingKey: "VariableFontSection.OpticalSize",
           label: jsx(Label, {
             children: jsx("span", {
-              className: _$$s.colorTextSecondary.$,
+              className: cssBuilderInstance.colorTextSecondary.$,
               children: renderI18nText("type_settings.variable_fonts.set_optical_size_automatically")
             })
           })

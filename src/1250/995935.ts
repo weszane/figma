@@ -28,7 +28,7 @@ import { R as _$$R } from "../7021/67076";
 import { BrowserInfo } from "../figma_app/778880";
 import { getGracePeriodAccessForKey, isStudentValidated, getGracePeriodExpirationDate } from "../figma_app/141320";
 import { BaseLinkComponent, SecureLink, ButtonSecondaryTracked } from "../figma_app/637027";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z, e6 as _$$e, c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -911,7 +911,7 @@ let tY = {
       children: [renderI18nText("banner.orphaned_projects.move_to_project"), " ", jsx(BaseLinkComponent, {
         trusted: !0,
         target: "_blank",
-        className: _$$s2.inline.ml4.$,
+        className: cssBuilderInstance.inline.ml4.$,
         href: "https://help.figma.com/hc/articles/4420549259799",
         children: renderI18nText("general.learn_more")
       })]
@@ -945,7 +945,7 @@ let tQ = {
         children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(BaseLinkComponent, {
           trusted: !0,
           target: "_blank",
-          className: _$$s2.inline.ml4.$,
+          className: cssBuilderInstance.inline.ml4.$,
           href: "https://help.figma.com/hc/articles/4420549259799",
           children: renderI18nText("general.learn_more")
         })]
@@ -1543,7 +1543,7 @@ let nt = {
       madeByPublisherName: k
     }) : renderI18nText("templates.banner.republish.you_re_viewing_a_template_made_by_publisher_name", {
       madeByPublisherName: jsx("span", {
-        className: _$$s2.fontNormal.$,
+        className: cssBuilderInstance.fontNormal.$,
         children: k
       })
     }) : getI18nString("templates.banner.republish.you_re_viewing_a_template");
@@ -1701,7 +1701,7 @@ let nr = {
         variant: b ? s ? "error" : "warning" : "info"
       },
       children: jsx("div", {
-        className: _$$s2.sticky.top0.$,
+        className: cssBuilderInstance.sticky.top0.$,
         style: styleBuilderInstance.add({
           zIndex: 2
         }).$,
@@ -1872,7 +1872,7 @@ let ns = {
         variant
       },
       children: jsxs("div", {
-        className: _$$s2.sticky.top0.$,
+        className: cssBuilderInstance.sticky.top0.$,
         style: styleBuilderInstance.add({
           zIndex: 2
         }).$,

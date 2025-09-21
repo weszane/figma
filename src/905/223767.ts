@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { selectWithShallowEqual } from "../905/103090";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { dR } from "../figma_app/109538";
 import { w as _$$w } from "../figma_app/527262";
@@ -44,7 +44,7 @@ function O(e) {
     t(popModalStack());
     e.onDone?.();
   };
-  let j = _$$s.overflowAuto.$;
+  let j = cssBuilderInstance.overflowAuto.$;
   let U = e.isProCurrent ? renderI18nText("plan_comparison.title.working_group") : renderI18nText("plan_comparison.title");
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "UpgradeChoosePlanModal",

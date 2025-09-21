@@ -20,7 +20,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { _ as _$$_ } from "../figma_app/658134";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
@@ -167,10 +167,10 @@ function W({
         children: [jsxs("div", {
           className: "lint_error_modal--issueContent--j9ORI",
           children: [jsxs("div", {
-            className: _$$s.textBodyMediumStrong.$,
+            className: cssBuilderInstance.textBodyMediumStrong.$,
             children: [label, " \xb7 ", t.label]
           }), jsx("div", {
-            className: _$$s.colorTextSecondary.$,
+            className: cssBuilderInstance.colorTextSecondary.$,
             children: t.description
           })]
         }), jsx(z, {
@@ -272,7 +272,7 @@ export function $$K1({
         children: [jsx("div", {
           className: "lint_error_modal--lintErrorLocation--lkNBw",
           children: jsx("div", {
-            className: _$$s.textBodyMediumStrong.$,
+            className: cssBuilderInstance.textBodyMediumStrong.$,
             children: l
           })
         }), jsx("div", {

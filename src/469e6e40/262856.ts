@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import r from "classnames";
 import { WB } from "../905/761735";
 import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -74,14 +74,14 @@ let j = memo(function (e) {
     fixedTop: !0,
     children: jsxs("form", {
       onSubmit: S,
-      className: _$$s.p16.$,
+      className: cssBuilderInstance.p16.$,
       children: [jsxs("div", {
-        className: _$$s.mt4.$,
+        className: cssBuilderInstance.mt4.$,
         children: [jsxs("label", {
           htmlFor: "teamName",
-          className: _$$s.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: [jsx("strong", {
-            className: _$$s.block.colorText.$,
+            className: cssBuilderInstance.block.colorText.$,
             children: renderI18nText("pro_cart.review.edit_details.team_name_label")
           }), renderI18nText("pro_cart.review.edit_details.team_name_description")]
         }), jsx(BigTextInputForwardRef, {
@@ -91,15 +91,15 @@ let j = memo(function (e) {
             j(e.target.value);
           },
           dataTestId: "company-team-name",
-          className: _$$s.block.mt8.wFull.$
+          className: cssBuilderInstance.block.mt8.wFull.$
         })]
       }), !e.canSeeBillingAddressExp && jsxs("div", {
-        className: _$$s.mt20.$,
+        className: cssBuilderInstance.mt20.$,
         children: [jsxs("label", {
           htmlFor: "legalName",
-          className: _$$s.colorTextSecondary.$,
+          className: cssBuilderInstance.colorTextSecondary.$,
           children: [jsx("strong", {
-            className: _$$s.block.colorText.$,
+            className: cssBuilderInstance.block.colorText.$,
             children: renderI18nText("pro_cart.review.edit_details.company_name_label")
           }), renderI18nText("pro_cart.review.edit_details.company_name_description")]
         }), jsx(BigTextInputForwardRef, {
@@ -109,7 +109,7 @@ let j = memo(function (e) {
             w(e.target.value);
           },
           dataTestId: "company-name",
-          className: _$$s.block.mt8.wFull.$
+          className: cssBuilderInstance.block.mt8.wFull.$
         })]
       }), jsxs("div", {
         className: l()(v0, hF),

@@ -10,7 +10,7 @@ import { e as _$$e } from '../905/579755';
 import { L } from '../905/606555';
 import { M } from '../905/722875';
 import { XHR } from '../905/910117';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getSearchSessionIdFromSelector } from '../figma_app/387599';
 import { isUserOrIdMatch } from '../figma_app/471982';
 import { TrackedLink } from '../figma_app/831799';
@@ -138,7 +138,7 @@ export function $$T0({
         children: [jsx('div', {
           className: 'author_dropdown_preview--authorName--QMrjt',
           children: jsx('span', {
-            className: _$$s.ellipsis.noWrap.overflowHidden.$,
+            className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
             children: e.name
           })
         }), jsxs('div', {
@@ -180,7 +180,7 @@ function S({
     }), jsxs('div', {
       className: 'author_dropdown_preview--authorPreviewListName--sVzBY',
       children: [jsx('span', {
-        className: _$$s.ellipsis.noWrap.overflowHidden.$,
+        className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
         children: e.name
       }), jsx(_$$l, {
         profile: e

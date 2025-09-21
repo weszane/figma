@@ -14,7 +14,7 @@ import { Ve, c$ } from "../figma_app/236327";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { BellId } from "../905/576487";
@@ -239,7 +239,7 @@ export function $$ee2({
         children: [jsx("div", {
           className: "move_drafts_nudge_rcs_steps--avatarRow--cUnRs",
           children: i.map(e => jsx("div", {
-            className: _$$s.relative.$,
+            className: cssBuilderInstance.relative.$,
             children: jsx(H8, {
               user: {
                 name: e.name || e.email || "",

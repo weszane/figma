@@ -207,7 +207,7 @@ import { v as _$$v2 } from '../9410/916286';
 import { sk as _$$sk } from '../9410/973081';
 import { yh } from '../9410/974031';
 import { K as _$$K2 } from '../b2835def/230877';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { CommentsSubmitButton } from '../draftjs_composer/524876';
 import { Dqt, E5y, EYw, kBA, koo, KTt, L6E, l_p, Nh9, qiY, wRw } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
@@ -1349,7 +1349,7 @@ function th() {
       className: XQ,
       children: jsx(_$$O2, {})
     }), jsx('span', {
-      className: _$$s.textBodyMediumStrong.$,
+      className: cssBuilderInstance.textBodyMediumStrong.$,
       children: renderI18nText('dev_handoff.status.mark_status_sentence_part.ready_for_dev')
     })]
   });
@@ -1394,7 +1394,7 @@ function th() {
                 })
               })
             }), jsx('div', {
-              className: _$$s.py8.px16.$,
+              className: cssBuilderInstance.py8.px16.$,
               children: jsx(_$$E2, {
                 imgSrc,
                 content: modalContent,
@@ -4080,7 +4080,7 @@ let iw = memo(({
         className: 'x1sxf85j xb3r6kr xet2fuk x1db2dqx x1iyjqo2',
         children: jsx(m3, {
           dsStyle: i.style,
-          additionalClassName: _$$s.h24.flex.wFull.$,
+          additionalClassName: cssBuilderInstance.h24.flex.wFull.$,
           children: jsx(DL, {
             dsStyle: i.style,
             hideContextMenu: !0,
@@ -4123,14 +4123,14 @@ function iR({
   let s = useCallback(e => {
     t(e);
   }, [t]);
-  let o = _$$s.flex.justifyCenter.itemsCenter.colorBgSecondary.selectNone.bRadius5.$;
-  let a = _$$s.b2.colorBorderSelected.$;
+  let o = cssBuilderInstance.flex.justifyCenter.itemsCenter.colorBgSecondary.selectNone.bRadius5.$;
+  let a = cssBuilderInstance.b2.colorBorderSelected.$;
   return jsx('div', {
-    className: _$$s.grid.borderBox.gridTemplateColumns2.mt8.mb8.ml16.$,
+    className: cssBuilderInstance.grid.borderBox.gridTemplateColumns2.mt8.mb8.ml16.$,
     children: e.map(e => {
       let t = !!l && l(e);
       return e.type === 'GRID' ? jsxs('div', {
-        className: _$$s.textBodyMedium.colorText.truncate.selectNone.mt8.mr16.mb8.$,
+        className: cssBuilderInstance.textBodyMedium.colorText.truncate.selectNone.mt8.mr16.mb8.$,
         children: [jsx(ButtonPrimitive, {
           className: ls()('design_linter_suggestions_modal--thumbnailContainer--mBL-q', o, t ? a : null),
           onClick: () => {
@@ -4142,7 +4142,7 @@ function iR({
             alt: e.name
           })
         }), jsx('h3', {
-          className: _$$s.truncate.mt2.$,
+          className: cssBuilderInstance.truncate.mt2.$,
           children: e.name
         })]
       }, e.id) : null;
@@ -4452,64 +4452,64 @@ function iD() {
   }();
   return jsx(Fragment, {
     children: jsxs('div', {
-      className: _$$s.grid.gridTemplateColumns2.gap2.py8.$,
+      className: cssBuilderInstance.grid.gridTemplateColumns2.gap2.py8.$,
       children: [jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Linter status:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: e
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Variable context status:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: status
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Linting target:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.maxW200.overflowAuto.$,
+        className: cssBuilderInstance.textBodyMedium.maxW200.overflowAuto.$,
         children: `${l.join(',')}`
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Linting target nodes:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: r
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Lintable nodes:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: s
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Visual groups:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: o.size
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Violations:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: d
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Ungrouped violations:'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: u
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.pb4.$,
+        className: cssBuilderInstance.textHeadingSmall.pb4.$,
         children: 'Violations per rule:'
       }), jsx('ol', {
         children: c.map(({
           rule: e,
           count: t
         }) => jsxs('span', {
-          className: _$$s.textBodyMedium.block.$,
+          className: cssBuilderInstance.textBodyMedium.block.$,
           children: [jsx('strong', {
             children: e
           }), ': ', t]
@@ -4530,12 +4530,12 @@ function iG({
 }) {
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: ls()(_$$s.textHeadingSmall.mr1.$, {
-        [_$$s.textHeadingMedium.$]: l
+      className: ls()(cssBuilderInstance.textHeadingSmall.mr1.$, {
+        [cssBuilderInstance.textHeadingMedium.$]: l
       }),
       children: e
     }), jsx('div', {
-      className: _$$s.textBodyMedium.$,
+      className: cssBuilderInstance.textBodyMedium.$,
       children: iH(t)
     })]
   });
@@ -4544,17 +4544,17 @@ function iU({
   items: e
 }) {
   return jsx('div', {
-    className: _$$s.flex.flexColumn.overflowAuto.$,
+    className: cssBuilderInstance.flex.flexColumn.overflowAuto.$,
     children: jsx('table', {
       children: jsx('tbody', {
         children: e.map(([e, t]) => jsxs('tr', {
           children: [jsx('td', {
-            className: _$$s.textBodyMedium.pr2.italic.noWrap.$,
+            className: cssBuilderInstance.textBodyMedium.pr2.italic.noWrap.$,
             children: jsx('strong', {
               children: e
             })
           }), jsx('td', {
-            className: _$$s.textBodyMedium.alignLeft.$,
+            className: cssBuilderInstance.textBodyMedium.alignLeft.$,
             children: iH(t)
           })]
         }, e))
@@ -4573,10 +4573,10 @@ function iq() {
   let s = useAtomWithSubscription(zZ) ?? new Map();
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: _$$s.textHeadingSmall.mr1.textHeadingMedium.$,
+      className: cssBuilderInstance.textHeadingSmall.mr1.textHeadingMedium.$,
       children: 'Overall latency info:'
     }), jsxs('div', {
-      className: _$$s.grid.gridTemplateColumns2.gap2.py8.$,
+      className: cssBuilderInstance.grid.gridTemplateColumns2.gap2.py8.$,
       children: [jsx(iG, {
         label: 'Time until first group:',
         value: e
@@ -4584,7 +4584,7 @@ function iq() {
         label: 'Total loading time:',
         value: l
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Time per status:'
       }), jsx(iU, {
         items: t.map(({
@@ -4592,17 +4592,17 @@ function iq() {
           duration: t
         }) => [e, t])
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.pb4.$,
+        className: cssBuilderInstance.textHeadingSmall.pb4.$,
         children: 'Detection time per rule:'
       }), jsx(iU, {
         items: Array.from(i)
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.pb4.$,
+        className: cssBuilderInstance.textHeadingSmall.pb4.$,
         children: 'Avg detection time per rule per node:'
       }), jsx(iU, {
         items: Array.from(r)
       }), jsx('div', {
-        className: _$$s.textHeadingSmall.pb4.$,
+        className: cssBuilderInstance.textHeadingSmall.pb4.$,
         children: 'P95 detection time per rule:'
       }), jsx(iU, {
         items: Array.from(s).filter(([e, t]) => t !== null).map(([e, t]) => [e, t])
@@ -4618,15 +4618,15 @@ function iW() {
   let r = useAtomWithSubscription(ky);
   return jsxs(Fragment, {
     children: [jsx('div', {
-      className: _$$s.textHeadingSmall.italic.mt8.$,
+      className: cssBuilderInstance.textHeadingSmall.italic.mt8.$,
       children: 'For current group:'
     }), jsxs('div', {
-      className: _$$s.grid.gridTemplateColumns2.gap2.py8.$,
+      className: cssBuilderInstance.grid.gridTemplateColumns2.gap2.py8.$,
       children: [jsx('div', {
-        className: _$$s.textHeadingSmall.mr1.$,
+        className: cssBuilderInstance.textHeadingSmall.mr1.$,
         children: 'Group size (nodes):'
       }), jsx('div', {
-        className: _$$s.textBodyMedium.$,
+        className: cssBuilderInstance.textBodyMedium.$,
         children: t
       }), jsx(iG, {
         label: 'Fix loading time:',
@@ -4644,7 +4644,7 @@ function iW() {
 function iK() {
   let e = _$$r2();
   return jsxs('div', {
-    className: _$$s.flex.flexColumn.gap4.py8.w150.$,
+    className: cssBuilderInstance.flex.flexColumn.gap4.py8.w150.$,
     children: [jsx(Button, {
       onClick: () => {
         e?.debugLinterState();
@@ -4656,16 +4656,16 @@ function iK() {
 function iX() {
   let [e, t] = useState(!1);
   return jsx('div', {
-    className: _$$s.colorBg.mx16.mt16.flex.flexColumn.b2.bRadius4.colorBorder.p4.wAuto.$,
+    className: cssBuilderInstance.colorBg.mx16.mt16.flex.flexColumn.b2.bRadius4.colorBorder.p4.wAuto.$,
     children: jsxs('div', {
-      className: _$$s.p4.$,
+      className: cssBuilderInstance.p4.$,
       children: [jsxs(ButtonPrimitive, {
-        className: _$$s.colorBg.wFull.$,
+        className: cssBuilderInstance.colorBg.wFull.$,
         onClick: () => t(!e),
         children: [jsx('span', {
           children: e ? '\u25BC' : '\u25B6'
         }), jsx('span', {
-          className: _$$s.ml2.textHeadingMedium.$,
+          className: cssBuilderInstance.ml2.textHeadingMedium.$,
           children: 'Linter debug view'
         })]
       }), e && jsxs(Fragment, {

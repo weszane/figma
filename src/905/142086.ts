@@ -49,7 +49,7 @@ import { lQ } from '../905/934246';
 import { fileEntityDataMapper } from '../905/943101';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../5724/142155';
-import { s as _$$s } from '../cssbuilder/589278';
+import { cssBuilderInstance } from '../cssbuilder/589278';
 import { DestinationProjectsForTeam, MoveFileCurrentProject, MoveFileDestination, OrgUserDraftFolder, ProjectNameForFile } from '../figma_app/43951';
 import { BannerInsetModal } from '../figma_app/59509';
 import { $$, nR, vd } from '../figma_app/60079';
@@ -174,7 +174,7 @@ function eA(e) {
   let v = g.status === 'loaded' ? b && b.length === 0 ? jsxs('div', {
     className: Ub,
     children: [renderI18nText('file_browser.file_move.no_projects_in_this_team'), jsx('div', {
-      className: _$$s.colorTextSecondary.$
+      className: cssBuilderInstance.colorTextSecondary.$
     })]
   }) : b?.map(e => jsx(_$$o, {
     folderId: e.id || '',
@@ -192,7 +192,7 @@ function eA(e) {
     isCurrentFolder: currentFolderId === e.id,
     isConnectedProject: (e.activeProjectResourceConnections?.length ?? 0) > 0
   }, `team-folder-${e.id}}`)) : jsx('div', {
-    className: _$$s.h300.$,
+    className: cssBuilderInstance.h300.$,
     children: jsx(LoadingOverlay, {})
   });
   return jsxs('div', {
@@ -231,7 +231,7 @@ function ey(e) {
   let r = useMemo(() => sb(e.favorites, e.order), [e.favorites, e.order]);
   return jsxs('div', {
     children: [jsx('div', {
-      className: _$$s.p8.ml8.colorTextSecondary.$,
+      className: cssBuilderInstance.p8.ml8.colorTextSecondary.$,
       children: e.sectionName || getI18nString('sidebar.starred')
     }), r.map(t => {
       if (t.resourceType === 'folder') {
@@ -301,7 +301,7 @@ function eb(e) {
   let c = l.status === 'loaded' ? d && d.length === 0 ? jsxs('div', {
     className: Ub,
     children: [renderI18nText('file_browser.file_move.no_projects_in_this_team'), jsx('div', {
-      className: _$$s.colorTextSecondary.$
+      className: cssBuilderInstance.colorTextSecondary.$
     })]
   }) : d?.map(t => jsx(_$$o, {
     folderId: t.id || '',
@@ -320,7 +320,7 @@ function eb(e) {
     isCurrentFolder: e.currentFolderId === t.id,
     isConnectedProject: (t.activeProjectResourceConnections?.length ?? 0) > 0
   }, `all-folder-${t.id}}`)) : jsx('div', {
-    className: _$$s.h300.$,
+    className: cssBuilderInstance.h300.$,
     children: jsx(LoadingOverlay, {})
   });
   return i.length === 0 ? jsx('div', {
@@ -407,7 +407,7 @@ let eT = registerModal(e => {
   }, [t, i, d]);
   return jsx(OJ, {
     title: jsx('div', {
-      className: _$$s.alignCenter.flex.ml8.$,
+      className: cssBuilderInstance.alignCenter.flex.ml8.$,
       children: renderI18nText('file_browser.file_move.create_team')
     }),
     onClose: r,
@@ -542,7 +542,7 @@ let eR = registerModal(e => {
     }).then(e => e0(e.data.meta.filter(e => e.is_editable && e.id !== ex)));
   }, [ex, e.orgId]);
   let e1 = eJ === null ? jsx('div', {
-    className: _$$s.h300.$,
+    className: cssBuilderInstance.h300.$,
     children: jsx(LoadingOverlay, {})
   }) : eJ.length === 0 ? jsx('div', {
     className: Al,
@@ -778,9 +778,9 @@ let eR = registerModal(e => {
     children: jsx(TabLoop, {
       children: jsxs(OJ, {
         title: jsxs('div', {
-          className: _$$s.alignCenter.flex.ml8.maxW350.$,
+          className: cssBuilderInstance.alignCenter.flex.ml8.maxW350.$,
           children: [jsx('span', {
-            className: _$$s.ellipsis.noWrap.overflowHidden.$,
+            className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
             children: eI ? renderI18nText('file_browser.file_move.modal_header_restore_file', {
               fileName: tF
             }) : renderI18nText('file_browser.file_move.modal_header_move_file', {
@@ -789,7 +789,7 @@ let eR = registerModal(e => {
           }), tl && jsx(Badge, {
             color: BadgeColor.DEFAULT,
             text: to,
-            className: _$$s.ml6.mr0.noWrap.flex.$,
+            className: cssBuilderInstance.ml6.mr0.noWrap.flex.$,
             dataTooltipType: KindEnum.TEXT,
             dataTooltip: getI18nString('file_browser.file_move.files_can_only_be_moved_within_the_same_organization'),
             dataTooltipShowBelow: !0
@@ -806,18 +806,18 @@ let eR = registerModal(e => {
             children: getI18nString('resource_connection.when_you_move_files_everyone_in_the_connected_project_can_access_them')
           })
         }), bannerToDisplay && jsx('div', {
-          className: _$$s.mt8.mx8.mb4.$,
+          className: cssBuilderInstance.mt8.mx8.mb4.$,
           children: bannerToDisplay
         }), eI ? jsx(TrackingProvider, {
           name: 'Restore File From Trashed Project Banner',
           children: jsx('div', {
-            className: _$$s.pb2.px8.$,
+            className: cssBuilderInstance.pb2.px8.$,
             children: jsx(_$$_, {
               dataTestId: 'viewer-upgrade-banner',
               color: _$$S.INFORMATION,
               text: jsxs(Fragment, {
                 children: [jsx('p', {
-                  className: _$$s.fontSemiBold.$,
+                  className: cssBuilderInstance.fontSemiBold.$,
                   children: renderI18nText('file_browser.file_move.file_belongs_to_trashed_project_banner_title')
                 }), jsx('p', {
                   children: renderI18nText('file_browser.file_move.file_belongs_to_trashed_project_banner_text')
@@ -874,12 +874,12 @@ let eR = registerModal(e => {
                 }), jsx(TextWithTruncation, {
                   children: '/'
                 }), jsx('div', {
-                  className: _$$s.ml6.mr6.ellipsis.noWrap.overflowHidden.$,
+                  className: cssBuilderInstance.ml6.mr6.ellipsis.noWrap.overflowHidden.$,
                   children: eT?.name
                 })]
               })]
             }), eP === Q.SUGGESTED ? e1 : eP === Q.STARRED ? td.status === 'loading' ? jsx('div', {
-              className: _$$s.h300.$,
+              className: cssBuilderInstance.h300.$,
               children: jsx(LoadingOverlay, {})
             }) : tm && eT === null ? jsx(ev, {
               teamsList: ta,
@@ -927,13 +927,13 @@ let eR = registerModal(e => {
             width: 400,
             height: 346,
             children: eF ? jsx('div', {
-              className: _$$s.h300.$,
+              className: cssBuilderInstance.h300.$,
               children: jsx(LoadingOverlay, {})
             }) : jsxs('div', {
               children: [eH && eH.length === 0 && jsxs('div', {
                 className: Al,
                 children: [renderI18nText('file_browser.file_move.no_project_or_team_results_matching_query'), jsx('br', {}), jsx('span', {
-                  className: _$$s.fontBold.ml2.$,
+                  className: cssBuilderInstance.fontBold.ml2.$,
                   children: ej || ''
                 })]
               }), jsx('div', {
@@ -988,7 +988,7 @@ let eR = registerModal(e => {
             case LU.PROVISIONAL_ACCESS:
               s = C8(licenseType, shouldShowCurf);
               shouldShowCurf && (o = jsx('button', {
-                className: _$$s.colorTextBrand.bgTransparent.cursorPointer.$,
+                className: cssBuilderInstance.colorTextBrand.bgTransparent.cursorPointer.$,
                 onClick: () => {
                   destinationPlanUser && fm({
                     licenseType,
@@ -1052,7 +1052,7 @@ let eR = registerModal(e => {
                 }));
               };
               o = jsx('button', {
-                className: _$$s.colorTextBrand.bgTransparent.cursorPointer.$,
+                className: cssBuilderInstance.colorTextBrand.bgTransparent.cursorPointer.$,
                 onClick: () => {
                   c();
                 },
@@ -1060,13 +1060,13 @@ let eR = registerModal(e => {
               });
           }
           return s === null ? null : jsx('div', {
-            className: _$$s.p8.$,
+            className: cssBuilderInstance.p8.$,
             children: jsx(_$$_, {
               color: _$$S.INFORMATION,
               padding: 8,
               text: jsxs(Fragment, {
                 children: [r && jsx('p', {
-                  className: _$$s.fontSemiBold.$,
+                  className: cssBuilderInstance.fontSemiBold.$,
                   children: r
                 }), jsx('p', {
                   children: s
@@ -1075,7 +1075,7 @@ let eR = registerModal(e => {
             })
           });
         })(), i && (tC && t_ && !hasRootPathOptional(t_) && files.some(e => (e.editor_type === FFileType.SITES || e.editor_type === FFileType.FIGMAKE) && e.is_published_site && !e.parent_org_id && e.team_id !== t_.teamId) ? jsx('div', {
-          className: _$$s.p8.$,
+          className: cssBuilderInstance.p8.$,
           children: jsx(_$$_, {
             padding: 8,
             color: _$$S.WARNING,
@@ -1098,7 +1098,7 @@ let eR = registerModal(e => {
                 size: 'small',
                 shouldMatchTextColor: !0
               }), jsx('div', {
-                className: _$$s.ml6.$,
+                className: cssBuilderInstance.ml6.$,
                 children: renderI18nText('file_browser.file_move.moving')
               })]
             }) : eI ? renderI18nText('file_browser.file_move.restore') : renderI18nText('file_browser.file_move.move')
@@ -1125,7 +1125,7 @@ let eU = registerModal(e => {
     userHandle: r
   });
   let d = jsxs('div', {
-    className: _$$s.fontMedium.flex.columnGap2.$,
+    className: cssBuilderInstance.fontMedium.flex.columnGap2.$,
     children: [e.inDrafts ? jsx(_$$A3, {}) : jsx(_$$x, {}), l]
   });
   return jsxs(OJ, {
@@ -1136,7 +1136,7 @@ let eU = registerModal(e => {
     children: [jsxs('div', {
       className: IS,
       children: [jsx('div', {
-        className: _$$s.flex.columnGap4.$,
+        className: cssBuilderInstance.flex.columnGap4.$,
         children: renderI18nText('file_browser.file_move.current_location_project_name', {
           projectName: d
         })
@@ -1144,7 +1144,7 @@ let eU = registerModal(e => {
         children: e.inDrafts ? getI18nString('file_browser.file_move.you_cant_move_files_that_are_in_others_drafts') : jsxs(Fragment, {
           children: [renderI18nText('file_browser.file_move.you_need_edit_access_to_project_name_to_move_this_file', {
             projectName: jsx('span', {
-              className: _$$s.fontMedium.$,
+              className: cssBuilderInstance.fontMedium.$,
               children: l
             })
           }), ' ', jsx(SecureLink, {

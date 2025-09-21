@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { UI3ConditionalWrapper } from "../905/341359";
 import s from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider } from "../figma_app/831799";
 import { M } from "../905/152487";
@@ -95,11 +95,11 @@ export function $$x0(e) {
   });
 }
 let S = {
-  [R.MODAL]: _$$s.zIndexModal,
-  [R.SECONDARY_MODAL]: _$$s.zIndexSecondaryModal,
-  [R.TERTIARY_MODAL]: _$$s.zIndexTertiaryModal,
-  [R.UNSET]: _$$s,
-  [R.NOTIFICATION_MODAL]: _$$s
+  [R.MODAL]: cssBuilderInstance.zIndexModal,
+  [R.SECONDARY_MODAL]: cssBuilderInstance.zIndexSecondaryModal,
+  [R.TERTIARY_MODAL]: cssBuilderInstance.zIndexTertiaryModal,
+  [R.UNSET]: cssBuilderInstance,
+  [R.NOTIFICATION_MODAL]: cssBuilderInstance
 };
 function w(e) {
   let {
@@ -107,7 +107,7 @@ function w(e) {
     onClose,
     zIndex = R.SECONDARY_MODAL
   } = e;
-  let s = _$$s.fixed.borderBox.bRadius2.pb16.pl16.pr16.fontInter.flex.flexColumn.match(zIndex, S).$$if(!!e.media, _$$s.pt12, _$$s.pt16).$;
+  let s = cssBuilderInstance.fixed.borderBox.bRadius2.pb16.pl16.pr16.fontInter.flex.flexColumn.match(zIndex, S).$$if(!!e.media, cssBuilderInstance.pt12, cssBuilderInstance.pt16).$;
   let u = e.width ?? 240;
   let p = styleBuilderInstance.$$if(e.emphasized, styleBuilderInstance.colorBgBrand.colorTextOnbrand, styleBuilderInstance.colorBg.colorText).$$if(e.isTooltip, styleBuilderInstance.colorBgTooltip.colorTextTooltip).add({
     width: `${u}px`,

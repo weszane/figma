@@ -9,7 +9,7 @@ import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Label } from "../905/270045";
 import { WhiteboardIntegrationType } from "../figma_app/763686";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
@@ -64,11 +64,11 @@ export function $$x0({
         })
       }), jsx(DialogBody, {
         children: jsxs("div", {
-          className: _$$s.flex.flexColumn.pt4.gap16.textBodyMedium.$,
+          className: cssBuilderInstance.flex.flexColumn.pt4.gap16.textBodyMedium.$,
           children: [jsx("div", {
             children: e
           }), jsx("form", {
-            className: _$$s.mb8.$,
+            className: cssBuilderInstance.mb8.$,
             children: jsx(_$$b, {
               legend: jsx(q, {
                 children: renderI18nText("file_browser.file_import_view.select_pdf_source_input_legend")
@@ -78,7 +78,7 @@ export function $$x0({
               children: v.map(e => jsx(_$$c, {
                 value: e.value,
                 label: jsx(Label, {
-                  className: _$$s.textBodyMedium.$,
+                  className: cssBuilderInstance.textBodyMedium.$,
                   children: e.label
                 }),
                 children: e.key === WhiteboardIntegrationType.UNKNOWN && renderI18nText("file_browser.file_import_view.select_pdf_source_input_unknown_disclaimer")

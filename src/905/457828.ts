@@ -9,7 +9,7 @@ import { F } from "../905/171275";
 import { FFileType } from "../figma_app/191312";
 import { A as _$$A } from "../905/615098";
 import { _ as _$$_ } from "../905/264868";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { N } from "../905/794224";
 import { q } from "../905/600041";
 import { Tf, nb, hi } from "../figma_app/543100";
@@ -45,14 +45,14 @@ function g({
     c(1);
   }, [c]);
   return jsx("div", {
-    className: _$$s.hFull.wFull.$,
+    className: cssBuilderInstance.hFull.wFull.$,
     onMouseMove: f,
     onMouseEnter: _,
     onMouseLeave: A,
     onDragStart: A,
     children: jsx("div", {
       ref: m,
-      className: _$$s.hFull.wFull.$,
+      className: cssBuilderInstance.hFull.wFull.$,
       children: jsx(V, {
         thumbnailUrl: e,
         thumbnailType: t,

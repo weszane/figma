@@ -37,7 +37,7 @@ import B from "../vendor/946678";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -409,7 +409,7 @@ function te({
       redirectToHubFile: !0
     })
   }) : A ? jsx("div", {
-    className: _$$s.ml4.$,
+    className: cssBuilderInstance.ml4.$,
     children: jsx(KP, {
       libraryKey: f.libraryKey
     })
@@ -480,7 +480,7 @@ function tn({
     },
     children: [jsx(h5, {
       children: jsx("div", {
-        className: _$$s.font12.overflowHidden.ellipsis.$,
+        className: cssBuilderInstance.font12.overflowHidden.ellipsis.$,
         children: getI18nString("design_systems.libraries_modal.plural.includes_missing_library", {
           missingLibCount: a
         })
@@ -526,19 +526,19 @@ function tl({
     ariaLabel: _,
     children: [jsx(h5, {
       children: jsxs("div", {
-        className: _$$s.flex.itemsCenter.px6.minW0.$,
+        className: cssBuilderInstance.flex.itemsCenter.px6.minW0.$,
         children: [jsx(_$$u, {
           noMargin: !0,
           name: _
         }), y && jsx("div", {
-          className: _$$s.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: a ? jsx(L1, {
             libraryKey: e.library_key
           }) : jsx(KP, {
             libraryKey: e.library_key
           })
         }), b && jsx("div", {
-          className: _$$s.ml4.$,
+          className: cssBuilderInstance.ml4.$,
           children: jsx(_$$E2, {
             libraryKey: e.library_key,
             showTooltip: !0,
@@ -548,7 +548,7 @@ function tl({
       })
     }), jsx(yz, {
       children: p ? jsx("div", {
-        className: _$$s.mlAuto.$,
+        className: cssBuilderInstance.mlAuto.$,
         children: jsx(_$$B2, {
           resourceConnectionSharingGroupData: p
         })
@@ -908,7 +908,7 @@ function tS(e) {
   return jsxs("div", {
     className: "subscription_list_view--viewContainer--9nzVv",
     children: [!!mapFromLibraryKeyToSharingGroupData && jsx("div", {
-      className: _$$s.p8.$,
+      className: cssBuilderInstance.p8.$,
       children: jsx(_$$_, {
         color: _$$S.WARNING,
         text: eg
@@ -972,7 +972,7 @@ function tS(e) {
         })]
       })
     }), j && jsx("div", {
-      className: _$$s.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
+      className: cssBuilderInstance.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
       children: jsx(_$$d, {
         checked: B,
         label: jsx(Label, {
@@ -981,7 +981,7 @@ function tS(e) {
         onChange: V
       })
     }), H && jsx("div", {
-      className: _$$s.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
+      className: cssBuilderInstance.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
       children: jsx(_$$d, {
         checked: K,
         label: jsx(Label, {
@@ -1071,13 +1071,13 @@ function tT({
   return jsx(TrackingProvider, {
     name: _$$e.LIBRARY_MODAL_UPSELL,
     children: jsx("div", {
-      className: _$$s.pt16.mx16.$,
+      className: cssBuilderInstance.pt16.mx16.$,
       children: jsxs("div", {
-        className: _$$s.colorBgSecondary.bRadius6.flex.flexColumn.$,
+        className: cssBuilderInstance.colorBgSecondary.bRadius6.flex.flexColumn.$,
         children: [jsxs("div", {
-          className: _$$s.pt16.mx12.flex.flexColumn.font11.fpl__textBodyMediumLetterSpacing.$,
+          className: cssBuilderInstance.pt16.mx12.flex.flexColumn.font11.fpl__textBodyMediumLetterSpacing.$,
           children: [jsx("h2", {
-            className: _$$s.fontSemiBold.$,
+            className: cssBuilderInstance.fontSemiBold.$,
             children: renderI18nText("design_systems.libraries_modal.publish_components_as_a_library")
           }), jsx("p", {
             children: renderI18nText("design_systems.libraries_modal.share_components_on_new_plan", {
@@ -1103,7 +1103,7 @@ function tT({
             })
           })]
         }), jsx("div", {
-          className: _$$s.mt12.bt1.mxAuto.colorBorder.bSolid.$,
+          className: cssBuilderInstance.mt12.bt1.mxAuto.colorBorder.bSolid.$,
           style: styleBuilderInstance.add({
             width: "94%"
           }).$

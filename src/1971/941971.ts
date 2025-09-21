@@ -8,7 +8,7 @@ import { SceneGraphHelpers, ComponentPropsAiCPPBindings, FirstDraftHelpers, Layo
 import { getFeatureFlags } from "../905/601108";
 import { logError, logWarning } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
@@ -299,7 +299,7 @@ function ei() {
   return jsxs(AutoLayout, {
     direction: "horizontal",
     children: [jsx("div", {
-      className: _$$s.cursorPointer.flex.itemsCenter.wFull.$,
+      className: cssBuilderInstance.cursorPointer.flex.itemsCenter.wFull.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",
@@ -506,7 +506,7 @@ function ec({
       items: X,
       disabled: "loaded" !== evalSetsQueryStatus
     }), E === es && jsx("textarea", {
-      className: _$$s.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
+      className: cssBuilderInstance.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
       rows: 3,
       value: x,
       placeholder: 'Enter custom eval prompts as JSON array. E.g. ["prompt1", "prompt2"]',
@@ -957,14 +957,14 @@ function eS({
     },
     direction: "vertical",
     children: [jsx("button", {
-      className: _$$s.cursorPointer.flex.itemsCenter.wFull.$,
+      className: cssBuilderInstance.cursorPointer.flex.itemsCenter.wFull.$,
       children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",
         children: "Examples Debug"
       })
     }), jsx("textarea", {
-      className: _$$s.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
+      className: cssBuilderInstance.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
       rows: 1,
       value: s,
       placeholder: "Enter a prompt to retrieve examples",
@@ -1063,7 +1063,7 @@ export function $$eb0() {
     }))) : []);
   }, [allUsableKitEntries]);
   return jsxs("div", {
-    className: _$$s.p8.borderBox.$,
+    className: cssBuilderInstance.p8.borderBox.$,
     children: [jsx(eI, {
       selectedKitOption,
       clientLifecycleId: s
@@ -1196,7 +1196,7 @@ function eI({
         })
       })]
     }), jsx("textarea", {
-      className: _$$s.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
+      className: cssBuilderInstance.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
       rows: 3,
       value: m,
       placeholder: "Select an example to serialize it or enter JSX to insert directly",

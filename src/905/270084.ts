@@ -12,7 +12,7 @@ import { Og } from "../figma_app/243213";
 import { trackedSvgComponent } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import v, { AutoLayout } from "../905/470281";
@@ -278,12 +278,12 @@ function P(e) {
               width: `${50 * Math.abs(Math.sin(e + i + 1)) + 30}%`
             }).$,
             children: jsx(Wi, {
-              className: _$$s.h12.$,
+              className: cssBuilderInstance.h12.$,
               animationType: JR.SHIMMER
             })
           })
         }, t.name) : jsx("div", {
-          className: p()(_$$s.wFull.$, t.className)
+          className: p()(cssBuilderInstance.wFull.$, t.className)
         }, t.name)), rightActionColumns && jsx(L, {
           rightActionColumns
         })]
@@ -721,12 +721,12 @@ class j extends Component {
                 width: `${50 * Math.abs(Math.sin(e + i + 1)) + 30}%`
               }).$,
               children: jsx(Wi, {
-                className: _$$s.h12.$,
+                className: cssBuilderInstance.h12.$,
                 animationType: JR.SHIMMER
               })
             })
           }, t.name) : jsx("div", {
-            className: p()(_$$s.wFull.$, t.className)
+            className: p()(cssBuilderInstance.wFull.$, t.className)
           }, t.name)), this.props.rightActionColumns && jsx(V, {
             rightActionColumns: this.props.rightActionColumns
           })]

@@ -14,7 +14,7 @@ import { generateRecordingKey, useHandleChangeEvent } from "../figma_app/878298"
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { s as _$$s2 } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, G4, Hl } from "../figma_app/545293";
@@ -62,7 +62,7 @@ function Y(e) {
     pill
   } = e;
   let i = useMemo(() => jsx("div", {
-    className: _$$s2.flex.itemsCenter.justifyCenter.w16.h16.flexShrink0.$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyCenter.w16.h16.flexShrink0.$,
     children: "selection" === pill.type ? jsx("div", {
       style: styleBuilderInstance.add({
         stroke: "var(--color-icon-brand)"
@@ -70,7 +70,7 @@ function Y(e) {
       children: jsx(xH, {
         guid: pill.node.guid,
         node: pill.node,
-        className: _$$s2.colorIconBrand.$
+        className: cssBuilderInstance.colorIconBrand.$
       })
     }) : jsx(_$$_, {
       style: {
@@ -79,18 +79,18 @@ function Y(e) {
     })
   }), [pill.type, pill.node]);
   return jsxs("div", {
-    className: _$$s2.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgBrandTertiary.colorTextBrand.colorBorderBrand.$,
+    className: cssBuilderInstance.flex.px4.itemsCenter.gap4.b1.radiusMedium.maxW150.colorBgBrandTertiary.colorTextBrand.colorBorderBrand.$,
     style: styleBuilderInstance.add({
       paddingTop: "3px",
       paddingBottom: "3px"
     }).$,
     children: [i, jsx("span", {
-      className: _$$s2.truncate.$,
+      className: cssBuilderInstance.truncate.$,
       children: pill.name
     }), e.onDismiss && jsx(ButtonPrimitive, {
       recordingKey: generateRecordingKey(e.recordingKey, "dismiss"),
       onClick: e.onDismiss,
-      className: _$$s2.bgTransparent.$,
+      className: cssBuilderInstance.bgTransparent.$,
       children: jsx(_$$f, {
         style: {
           "--color-icon": "var(--color-icon-brand)"
@@ -236,7 +236,7 @@ export function $$ec2({
       ref: g
     }, Q), jsxs(_$$n.Header, {
       children: [jsx(em, {}), eh() > 1 && jsx("div", {
-        className: _$$s2.py4.px8.$,
+        className: cssBuilderInstance.py4.px8.$,
         ref: v,
         children: jsxs(_$$b2, {
           primary: !1,
@@ -246,7 +246,7 @@ export function $$ec2({
           children: [Y, Ko() && jsx(t.TabPanel, {
             ...H[xA.COMPONENTS],
             children: jsx("div", {
-              className: _$$s2.h32.flex.itemsCenter.$,
+              className: cssBuilderInstance.h32.flex.itemsCenter.$,
               children: currentSearch && !B && jsx(_$$i, {
                 onSetAssetType: e => {
                   if (currentSearch) switch (currentSearch.input.type) {
@@ -274,7 +274,7 @@ export function $$ec2({
           }), jsx(t.TabPanel, {
             ...H[xA.FRAGMENTS],
             children: jsx("div", {
-              className: _$$s2.h32.flex.itemsCenter.$,
+              className: cssBuilderInstance.h32.flex.itemsCenter.$,
               children: jsx(_$$s4, {
                 containerRef: v,
                 entryPoint: G4.ACTIONS_VISUAL_SEARCH_VIEW
@@ -283,7 +283,7 @@ export function $$ec2({
           }), G && jsx(t.TabPanel, {
             ...H[xA.COMMUNITY],
             children: jsx("div", {
-              className: _$$s2.h32.$
+              className: cssBuilderInstance.h32.$
             })
           })]
         })
@@ -369,7 +369,7 @@ export let $$eu0 = forwardRef(({
     accept: IMAGE_TYPE_VALUES.join(","),
     onChange: d,
     multiple: !1,
-    className: _$$s2.hidden.$
+    className: cssBuilderInstance.hidden.$
   });
 });
 export function $$ep1({
@@ -412,14 +412,14 @@ function em() {
     getFeatureFlags().fragment_search_tweaks && SceneGraphHelpers?.clearSelection();
   }, [i]);
   return jsxs("div", {
-    className: _$$s2.flex.itemsCenter.justifyBetween.px8.py12.$$if(eh() > 1, _$$s2.bSolid.bb1.colorBorder).$,
+    className: cssBuilderInstance.flex.itemsCenter.justifyBetween.px8.py12.$$if(eh() > 1, cssBuilderInstance.bSolid.bb1.colorBorder).$,
     ref: a,
     children: [jsxs("div", {
-      className: _$$s2.flex.gap8.itemsCenter.$,
+      className: cssBuilderInstance.flex.gap8.itemsCenter.$,
       children: [jsx(_$$o, {
         recordingKey: generateRecordingKey(s, "backButton")
       }), jsx("span", {
-        className: _$$s2.textBodyLarge.colorText.$,
+        className: cssBuilderInstance.textBodyLarge.colorText.$,
         children: renderI18nText("fragment_search.visual_search_results_title")
       }), t && jsx(Y, {
         pill: t,

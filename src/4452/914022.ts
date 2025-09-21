@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, S } from "../figma_app/490799";
 import { P } from "../905/347284";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -75,7 +75,7 @@ function I(e) {
               children: (() => {
                 if (b) {
                   let e = b.map(e => jsx("div", {
-                    className: _$$s.py8.$,
+                    className: cssBuilderInstance.py8.$,
                     children: jsx(az, {
                       entity: e,
                       includeUserEmailAddress: !0,

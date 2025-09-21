@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { BadgeColor } from "../figma_app/919079";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { l as _$$l } from "../905/152724";
 import { selectViewAction } from "../905/929976";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -39,7 +39,7 @@ export function $$h0(e) {
         children: [jsxs("div", {
           className: "profile_tile--profileRowTileProfileName--8Azkx ellipsis--ellipsis--Tjyfa text--fontPos13--xW8hS text--_fontBase--QdLsd",
           children: [jsx("span", {
-            className: _$$s.ellipsis.noWrap.overflowHidden.$,
+            className: cssBuilderInstance.ellipsis.noWrap.overflowHidden.$,
             children: profile.name
           }), jsx(_$$l, {
             profile

@@ -3,7 +3,7 @@ import { IconButton } from "../905/443068";
 import { LinkPrimitive } from "../figma_app/496441";
 import { ButtonPrimitive } from "../905/632989";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -43,9 +43,9 @@ export function $$h0({
         children: [jsx(g, {
           svg: e
         }), jsxs("div", {
-          className: _$$s.flex.flexRow.itemsCenter.flexGrow1.overflowHidden.gap16.$,
+          className: cssBuilderInstance.flex.flexRow.itemsCenter.flexGrow1.overflowHidden.gap16.$,
           children: [s && jsx("span", {
-            className: _$$s.flexShrink0.$,
+            className: cssBuilderInstance.flexShrink0.$,
             children: jsx(TextWithTruncation, {
               fontWeight: "semi-bold",
               color: "default",
@@ -57,7 +57,7 @@ export function $$h0({
             truncate: "end",
             children: t
           }), null != h && jsx("span", {
-            className: _$$s.mlAuto.px8.$,
+            className: cssBuilderInstance.mlAuto.px8.$,
             children: jsx(f, {
               variant: i,
               action: h
@@ -118,7 +118,7 @@ function g({
   svg: e
 }) {
   return jsx(SvgComponent, {
-    className: _$$s.w24.h24.flex.itemsCenter.justifyCenter.flexShrink0.colorIcon.$,
+    className: cssBuilderInstance.w24.h24.flex.itemsCenter.justifyCenter.flexShrink0.colorIcon.$,
     svg: e
   });
 }
@@ -126,15 +126,15 @@ function f({
   variant: e,
   action: t
 }) {
-  let i = _$$s.flexShrink0.hAuto.noWrap.ellipsis.overflowHidden.cursorPointer.bgTransparent.match(e, {
-    brand: _$$s.colorTextBrand,
-    design: _$$s.colorTextDesign,
-    figjam: _$$s.colorTextFigjam,
-    dev: _$$s.colorTextTertiary,
-    gray: _$$s.colorTextDesign,
-    warning: _$$s.colorTextWarning,
-    danger: _$$s.colorTextDanger,
-    success: _$$s.colorTextSuccess
+  let i = cssBuilderInstance.flexShrink0.hAuto.noWrap.ellipsis.overflowHidden.cursorPointer.bgTransparent.match(e, {
+    brand: cssBuilderInstance.colorTextBrand,
+    design: cssBuilderInstance.colorTextDesign,
+    figjam: cssBuilderInstance.colorTextFigjam,
+    dev: cssBuilderInstance.colorTextTertiary,
+    gray: cssBuilderInstance.colorTextDesign,
+    warning: cssBuilderInstance.colorTextWarning,
+    danger: cssBuilderInstance.colorTextDanger,
+    success: cssBuilderInstance.colorTextSuccess
   }).$;
   return t.href ? jsx(LinkPrimitive, {
     onClick: t.onClick,

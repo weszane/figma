@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
 import { vv } from "../figma_app/435872";
 import { an } from "../905/81009";
@@ -149,7 +149,7 @@ function k({
     });
   }
   return jsxs("div", {
-    className: _$$s.flex.flexColumn.gap12.$,
+    className: cssBuilderInstance.flex.flexColumn.gap12.$,
     children: [jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_multiple_warnings", {
         numFilesText: a
@@ -254,7 +254,7 @@ let R = registerModal(function ({
     onClose: p,
     destructive: "published_assets" === g[0] && getFeatureFlags().dse_library_deletion_warning,
     children: jsxs("div", {
-      className: _$$s.flex.flexColumn.gap8.$,
+      className: cssBuilderInstance.flex.flexColumn.gap8.$,
       children: [jsx(k, {
         warnings: g,
         numFiles: e,

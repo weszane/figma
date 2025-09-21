@@ -33,7 +33,7 @@ import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { isColorDark, colorToRgbaString } from "../figma_app/191804";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 import { DialogLabel } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
@@ -680,7 +680,7 @@ function em() {
   });
   let n = !_$$n();
   let i = jsxs("div", {
-    className: _$$s.gap6.$,
+    className: cssBuilderInstance.gap6.$,
     children: [jsx("div", {
       className: DD,
       children: renderI18nText("dev_handoff.paywall.blocking_modal.title.locked")
@@ -782,7 +782,7 @@ function ev() {
 }
 function ey() {
   return jsx("div", {
-    className: _$$s.fixed.top0.left0.right0.bottom0.wFull.hFull.zIndexModal.$,
+    className: cssBuilderInstance.fixed.top0.left0.right0.bottom0.wFull.hFull.zIndexModal.$,
     style: styleBuilderInstance.add({
       backgroundColor: "var(--color-modalbackdrop)"
     }).$
@@ -795,7 +795,7 @@ function eb() {
     a: 0.9
   }) : "var(--color-modalbackdrop)";
   return jsx("div", {
-    className: _$$s.fixed.top0.right0.bottom0.left0.$,
+    className: cssBuilderInstance.fixed.top0.right0.bottom0.left0.$,
     style: styleBuilderInstance.add({
       backgroundColor: t
     }).$
@@ -1619,7 +1619,7 @@ function t6() {
       children: jsxs("div", {
         className: ek()("right_panel--panelContainer--BwtVM dev_handoff_right_panel_container--panelContainer--XcbIk dev_handoff_right_panel_container--panelContainerBase--npHfL", KE, Dm, Ph),
         children: [t && jsx(v2, {}), jsxs("div", {
-          className: _$$s.wFull.flex.flexRow.flexShrink0.itemsCenter.borderBox.bSolid.bb1.pr8.colorBorder.justifyBetween.colorBg.$,
+          className: cssBuilderInstance.wFull.flex.flexRow.flexShrink0.itemsCenter.borderBox.bSolid.bb1.pr8.colorBorder.justifyBetween.colorBg.$,
           children: [jsxs(_$$y, {
             withBorder: !1,
             children: [jsx("div", {
@@ -1651,9 +1651,9 @@ function t6() {
             children: jsx("div", {
               className: tO,
               children: jsxs("div", {
-                className: _$$s.flex.flexColumn.gap16.pb8.wFull.$,
+                className: cssBuilderInstance.flex.flexColumn.gap16.pb8.wFull.$,
                 children: [jsxs("span", {
-                  className: _$$s.flex.flexRow.gap8.itemsCenter.wFull.$,
+                  className: cssBuilderInstance.flex.flexRow.gap8.itemsCenter.wFull.$,
                   children: [jsx("span", {
                     className: "right_panel--layerIcon--9-ijp",
                     children: jsx(MediaQuerySvgComponent, {
@@ -1667,7 +1667,7 @@ function t6() {
                     }
                   })]
                 }), jsxs("div", {
-                  className: _$$s.flex.flexRow.gap8.itemsCenter.wFull.$,
+                  className: cssBuilderInstance.flex.flexRow.gap8.itemsCenter.wFull.$,
                   children: [jsx(eF, {
                     className: tq
                   }), jsx(Wi, {
@@ -1701,7 +1701,7 @@ function t6() {
               onShowMore: _$$lQ,
               leftGutter: vl(t5)
             }), jsx("div", {
-              className: _$$s.wFull.h12.$
+              className: cssBuilderInstance.wFull.h12.$
             }), jsx(VZ, {
               title: getI18nString("inspect_panel.colors.title"),
               isSubsection: !0,
@@ -1715,7 +1715,7 @@ function t6() {
                 children: jsxs(_$$Z, {
                   isNonInteractive: !0,
                   hasIcon: !0,
-                  className: ek()(Io, yQ, _$$s.wFull.$),
+                  className: ek()(Io, yQ, cssBuilderInstance.wFull.$),
                   children: [jsx("div", {
                     className: "right_panel--colorThumbnailUI3--r9Rcx",
                     style: {
@@ -1835,9 +1835,9 @@ function nl({
   return jsx("div", {
     className: "vscode_paywall--wrapper--65Gba",
     children: jsxs("div", {
-      className: _$$s.flex.maxWFull.wFull.hFull.$,
+      className: cssBuilderInstance.flex.maxWFull.wFull.hFull.$,
       children: [jsx("div", {
-        className: _$$s.flex.flexGrow0.flexColumn.pl32.pt32.$,
+        className: cssBuilderInstance.flex.flexGrow0.flexColumn.pl32.pt32.$,
         children: jsx(SvgComponent, {
           dataTestId: "logo",
           title: "logo",
@@ -1846,7 +1846,7 @@ function nl({
           useOriginalSrcFills_DEPRECATED: !0
         })
       }), jsxs("div", {
-        className: _$$s.flex.flexGrow1.flexColumn.justifyCenter.alignTop.pt32.pl20.pr32.pb32.$,
+        className: cssBuilderInstance.flex.flexGrow1.flexColumn.justifyCenter.alignTop.pt32.pl20.pr32.pb32.$,
         children: [jsx("div", {
           className: "vscode_paywall--vscodePaywallTitle---OrBg text--fontPos24--YppUD text--_fontBase--QdLsd",
           children: renderI18nText("dev_handoff.paywall.vscode.title")
@@ -2232,7 +2232,7 @@ function nJ({
         size: u,
         defaultSize: h,
         onResize: p,
-        className: _$$s.relative.$,
+        className: cssBuilderInstance.relative.$,
         children: jsx(_$$P2, {
           className: "variables_side_panel--variableSetsScrollContainer--qTzl5",
           children: n.map(n => jsx(nq, {
@@ -2273,10 +2273,10 @@ function nQ({
       onClick: o,
       recordingKey: r ? generateRecordingKey("dev_handoff.variables_table.sidebar_row", r) : void 0,
       children: [jsx("div", {
-        className: _$$s.truncate.$$if(n, _$$s.textBodyMediumStrong).$,
+        className: cssBuilderInstance.truncate.$$if(n, cssBuilderInstance.textBodyMediumStrong).$,
         children: e
       }), void 0 !== t && jsx("div", {
-        className: ek()(_$$s.truncate.textBodyMedium.colorTextSecondary.$, nW),
+        className: ek()(cssBuilderInstance.truncate.textBodyMedium.colorTextSecondary.$, nW),
         "data-testid": r && `dev_handoff.variables_table.count.${r}`,
         children: t
       })]
@@ -2770,10 +2770,10 @@ function nZ({
           "variables_side_panel--noCaret--E9UAF": !r
         }),
         children: [jsx("div", {
-          className: _$$s.truncate.$,
+          className: cssBuilderInstance.truncate.$,
           children: labelToDisplay
         }), number && jsx("div", {
-          className: ek()(_$$s.truncate.textBodyMedium.colorTextSecondary.$, nW),
+          className: ek()(cssBuilderInstance.truncate.textBodyMedium.colorTextSecondary.$, nW),
           "data-testid": s && `dev_handoff.variables_table.count.${s}`,
           children: number
         })]
@@ -5169,7 +5169,7 @@ function o8({
         })
       })
     }), jsxs("div", {
-      className: ek()("developer_related_link_row--additionalButtons--tKT0M", S || L || g || isDropdownShown ? _$$s.opacity1.$ : _$$s.opacity0.$),
+      className: ek()("developer_related_link_row--additionalButtons--tKT0M", S || L || g || isDropdownShown ? cssBuilderInstance.opacity1.$ : cssBuilderInstance.opacity0.$),
       children: [C, isDropdownShown && jsx("div", {
         onMouseEnter: () => R(!1),
         children: jsx(Dropdown, {
@@ -5927,7 +5927,7 @@ function l8({
     className: l4,
     children: [jsx(SvgComponent, {
       svg: _$$A14,
-      className: _$$s.colorIconSecondary.$
+      className: cssBuilderInstance.colorIconSecondary.$
     }), jsx(LazyInputForwardRef, {
       ref: inputRef,
       autoCorrect: "off",
@@ -6514,7 +6514,7 @@ function sb({
     children: Array.from(o).map((e, t) => jsx(TextWithTruncation, {
       children: renderI18nText("dev_handoff.related_links.plugin.auth_required", {
         button: jsx("button", {
-          className: _$$s.colorTextBrand.bgTransparent.$,
+          className: cssBuilderInstance.colorTextBrand.bgTransparent.$,
           onClick: () => l({
             links: e.links,
             plugin: e.plugin
@@ -8039,9 +8039,9 @@ let rL = memo(() => {
 });
 function rO() {
   return jsx("div", {
-    className: _$$s.flex.flexRow.m16.$,
+    className: cssBuilderInstance.flex.flexRow.m16.$,
     children: jsx("div", {
-      className: _$$s.font11.$,
+      className: cssBuilderInstance.font11.$,
       children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
     })
   });
@@ -8124,7 +8124,7 @@ function rJ() {
     display: "none"
   };
   return jsx("div", {
-    className: _$$s.hFull.wFull.$$if(u, _$$s.block, _$$s.hidden).$,
+    className: cssBuilderInstance.hFull.wFull.$$if(u, cssBuilderInstance.block, cssBuilderInstance.hidden).$,
     "data-testid": "devHandoffPluginPanel",
     children: t ? jsx(rO, {}) : jsxs(Fragment, {
       children: [d && jsx(rq, {}), jsx("div", {
@@ -8162,7 +8162,7 @@ function rq() {
         }).$,
         children: jsx(y$, {})
       }), jsx("div", {
-        className: _$$s.pt16.px32.alignCenter.$,
+        className: cssBuilderInstance.pt16.px32.alignCenter.$,
         children: jsx(TextWithTruncation, {
           fontSize: 12,
           color: "secondary",
@@ -8222,7 +8222,7 @@ function r4({
         bottom: 4
       },
       children: [jsx("div", {
-        className: _$$s.minW0.$,
+        className: cssBuilderInstance.minW0.$,
         children: jsxs(AutoLayout, {
           direction: "horizontal",
           verticalAlignItems: "center",
@@ -8278,7 +8278,7 @@ function r7({
 }
 function r8(e) {
   return jsx("div", {
-    className: _$$s.wFull.bb1.bSolid.colorBorder.pl8.pb8.$,
+    className: cssBuilderInstance.wFull.bb1.bSolid.colorBorder.pl8.pb8.$,
     children: jsx(_$$t5.TabStrip, {
       manager: e.tabProps.manager,
       children: jsx(_$$t5.Tab, {
@@ -8312,7 +8312,7 @@ function r6(e) {
         })]
       })
     }), jsxs("div", {
-      className: _$$s.flex.$,
+      className: cssBuilderInstance.flex.$,
       children: [jsx("div", {
         className: "dev_handoff_panel_tab_group--pluginsContainer--V7X6w",
         children: jsx(qs, {})
@@ -11481,7 +11481,7 @@ function pA({
   let h = new ReduxSceneGraph(FileSourceType.LIVE_FILE).get(d ?? "");
   let f = h?.editInfo?.lastEditedAt;
   return p ? jsxs("div", {
-    className: _$$s.flex.flexColumn.borderBox.bSolid.bb1.colorBorder.$,
+    className: cssBuilderInstance.flex.flexColumn.borderBox.bSolid.bb1.colorBorder.$,
     children: [d ? null : jsx(_$$s8, {
       onClose: u,
       addSavepoint: () => {
@@ -11507,7 +11507,7 @@ function pA({
         version: p
       })]
     }), jsx("div", {
-      className: _$$s.flex.pt12.pb12.pl16.pr16.itemsCenter.$,
+      className: cssBuilderInstance.flex.pt12.pb12.pl16.pr16.itemsCenter.$,
       children: jsx(Button, {
         variant: "link",
         onClick: pN,
@@ -12725,7 +12725,7 @@ function hJ() {
       }), u && jsx(Fragment, {
         children: jsx(pG, {})
       }), jsxs("div", {
-        className: ek()("extension_bottom_panel--headerRightButtons--qVDj-", _$$s.pt4.$),
+        className: ek()("extension_bottom_panel--headerRightButtons--qVDj-", cssBuilderInstance.pt4.$),
         children: [jsx(_$$pm, {}), jsx("button", {
           onClick: function () {
             t(!e);

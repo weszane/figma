@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
-import { s as _$$s } from "../cssbuilder/589278";
+import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { getSubscriptionPriceString, hasTrialAvailable } from "../figma_app/808294";
@@ -15,7 +15,7 @@ function p({
   let r = getSubscriptionPriceString(e.monetized_resource_metadata);
   return t ? jsxs("div", {
     "data-testid": "freemium-text",
-    className: _$$s.flex.itemsCenter.gap4.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap4.$,
     "data-tooltip": r,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
@@ -25,7 +25,7 @@ function p({
       children: renderI18nText("community.buyer.in_app_purchases")
     }), jsx(SvgComponent, {
       svg: A,
-      className: _$$s.colorIconSecondary.$
+      className: cssBuilderInstance.colorIconSecondary.$
     })]
   }) : jsx("div", {
     "data-testid": "freemium-text",
@@ -53,7 +53,7 @@ function h({
 }) {
   return e ? jsxs("div", {
     "data-testid": "off-platform-text",
-    className: _$$s.flex.itemsCenter.gap4.$,
+    className: cssBuilderInstance.flex.itemsCenter.gap4.$,
     "data-tooltip": getI18nString("community.detail_view.resource_outside_of_figma"),
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
@@ -63,7 +63,7 @@ function h({
       children: renderI18nText("community.detail_view.third_party_badge.off_platform")
     }), jsx(SvgComponent, {
       svg: A,
-      className: _$$s.colorIconSecondary.$
+      className: cssBuilderInstance.colorIconSecondary.$
     })]
   }) : jsx("div", {
     "data-testid": "off-platform-text",
