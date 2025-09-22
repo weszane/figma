@@ -1,155 +1,265 @@
-import { KC, Yj, YO, Ik, eu, bz, E$, zM, g1, ai } from "../vendor/835909";
-var n;
-var r;
-var a;
-var s;
-let l = KC([Yj(), YO(KC([Ik({
-  type: eu("text"),
-  text: Yj()
-}), (n = {
-  type: eu("image"),
-  image: bz()
-}, Ik(n)), (r = {
-  type: eu("file"),
-  data: bz(),
-  mimeType: Yj()
-}, Ik(r))]))]);
-let $$d9 = E$(Ik({
-  type: eu("tool-result"),
-  toolName: Yj(),
-  toolCallId: Yj(),
-  isError: zM().optional()
-}), (a = {
-  result: bz()
-}, Ik(a)));
-let $$c7 = E$(Ik({
-  type: eu("tool-call"),
-  toolCallId: Yj(),
-  toolName: Yj()
-}), (s = {
-  args: bz()
-}, Ik(s)));
-let u = Ik({
-  type: eu("text"),
-  text: Yj()
-});
-let p = Ik({
-  type: eu("reasoning"),
-  text: Yj(),
-  signature: Yj().optional()
-});
-let m = Ik({
-  type: eu("redacted-reasoning"),
-  data: Yj()
-});
-let h = KC([Yj(), YO(KC([u, p, m, $$c7]))]);
-let $$g8 = Ik({
-  role: eu("tool"),
-  content: YO($$d9)
-});
-let f = Ik({
-  role: eu("user"),
-  content: l
-});
-let $$_0 = Ik({
-  role: eu("assistant"),
-  content: h
-});
-let A = Ik({
-  role: eu("system"),
-  content: Yj()
-});
-let y = KC([f, $$_0, $$g8, A]);
-let b = Ik({
-  openai: Ik({
-    logitBias: g1(ai()).optional(),
-    logprobs: KC([zM(), ai()]).optional(),
-    reasoningEffort: KC([eu("low"), eu("medium"), eu("high")]).optional(),
-    maxCompletionTokens: ai().optional(),
-    store: zM().optional(),
-    prediction: Ik({
-      type: eu("content"),
-      content: Yj()
+import { any, array, boolean, intersection, literal, number, object, record, string, union } from 'zod'
+
+// Grouped related schema definitions and added documentation comments for clarity
+
+// Message content schemas
+/**
+ * Text message schema (u)
+ */
+export const textMessageSchema = object({
+  type: literal('text'),
+  text: string(),
+})
+
+/**
+ * Reasoning message schema (p)
+ */
+export const reasoningMessageSchema = object({
+  type: literal('reasoning'),
+  text: string(),
+  signature: string().optional(),
+})
+
+/**
+ * Redacted reasoning schema (m)
+ */
+export const redactedReasoningSchema = object({
+  type: literal('redacted-reasoning'),
+  data: string(),
+})
+
+/**
+ * Tool call schema (gB, $$c7)
+ */
+export const toolCallArgs = {
+  args: any(),
+}
+export const toolCallSchema = intersection(
+  object({
+    type: literal('tool-call'),
+    toolCallId: string(),
+    toolName: string(),
+  }),
+  object(toolCallArgs),
+)
+
+/**
+ * Tool result schema (z7, $$d9)
+ */
+export const toolResultArgs = {
+  result: any(),
+}
+export const toolResultSchema = intersection(
+  object({
+    type: literal('tool-result'),
+    toolName: string(),
+    toolCallId: string(),
+    isError: boolean().optional(),
+  }),
+  object(toolResultArgs),
+)
+
+/**
+ * Tool role schema (NA, $$g8)
+ */
+export const toolRoleSchema = object({
+  role: literal('tool'),
+  content: array(toolResultSchema),
+})
+
+/**
+ * User message content schema (l)
+ */
+export const imageContent = {
+  type: literal('image'),
+  image: any(),
+}
+export const fileContent = {
+  type: literal('file'),
+  data: any(),
+  mimeType: string(),
+}
+export const userContentSchema = union([
+  string(),
+  array(
+    union([
+      object({
+        type: literal('text'),
+        text: string(),
+      }),
+      object(imageContent),
+      object(fileContent),
+    ]),
+  ),
+])
+
+/**
+ * User role schema (f)
+ */
+export const userRoleSchema = object({
+  role: literal('user'),
+  content: userContentSchema,
+})
+
+/**
+ * Assistant message content schema (h)
+ */
+export const assistantContentSchema = union([
+  string(),
+  array(
+    union([
+      textMessageSchema,
+      reasoningMessageSchema,
+      redactedReasoningSchema,
+      toolCallSchema,
+    ]),
+  ),
+])
+
+/**
+ * Assistant role schema (Dj, $$_0)
+ */
+export const assistantRoleSchema = object({
+  role: literal('assistant'),
+  content: assistantContentSchema,
+})
+
+/**
+ * System role schema (A)
+ */
+export const systemRoleSchema = object({
+  role: literal('system'),
+  content: string(),
+})
+
+/**
+ * Message union schema (y)
+ */
+export const messageSchema = union([
+  userRoleSchema,
+  assistantRoleSchema,
+  toolRoleSchema,
+  systemRoleSchema,
+])
+
+// Provider options schema (b)
+export const providerOptionsSchema = object({
+  openai: object({
+    logitBias: record(number()).optional(),
+    logprobs: union([boolean(), number()]).optional(),
+    reasoningEffort: union([literal('low'), literal('medium'), literal('high')]).optional(),
+    maxCompletionTokens: number().optional(),
+    store: boolean().optional(),
+    prediction: object({
+      type: literal('content'),
+      content: string(),
     }).optional(),
-    tryUseResponsesApi: zM().optional().describe("If true and the model supports it, the request will be sent with the Responses API instead of the Completions API."),
-    previousResponseId: Yj().optional().describe("The response ID from the previous request. This enables reusing reasoning across requests."),
-    priority: zM().optional(),
-    include: YO(KC([eu("reasoning.encrypted_content"), eu("file_search_call.results")])).optional(),
-    reasoningSummary: KC([eu("auto"), eu("detailed")]).optional()
+    tryUseResponsesApi: boolean().optional().describe('If true and the model supports it, the request will be sent with the Responses API instead of the Completions API.'),
+    previousResponseId: string().optional().describe('The response ID from the previous request. This enables reusing reasoning across requests.'),
+    priority: boolean().optional(),
+    include: array(union([literal('reasoning.encrypted_content'), literal('file_search_call.results')])).optional(),
+    reasoningSummary: union([literal('auto'), literal('detailed')]).optional(),
   }).optional(),
-  anthropic: Ik({
-    thinking: Ik({
-      type: eu("enabled"),
-      budgetTokens: ai()
-    })
+  anthropic: object({
+    thinking: object({
+      type: literal('enabled'),
+      budgetTokens: number(),
+    }),
   }).optional(),
-  bedrock: Ik({
-    reasoning_config: Ik({
-      type: eu("enabled"),
-      budget_tokens: ai()
-    })
+  bedrock: object({
+    reasoning_config: object({
+      type: literal('enabled'),
+      budget_tokens: number(),
+    }),
   }).optional(),
-  google: Ik({
-    vertexAnthropicRegion: Yj().optional(),
-    candidateCount: ai().optional()
+  google: object({
+    vertexAnthropicRegion: string().optional(),
+    candidateCount: number().optional(),
   }).optional(),
-  fireworks: Ik({
-    additionalModelRequestFields: g1(YO(Yj())).optional()
-  }).optional()
-});
-let $$v6 = Ik({
-  cortexAiModelId: Yj().optional(),
-  provider: Yj().optional(),
-  region: Yj().optional(),
-  model: Yj().optional(),
-  messages: YO(y),
-  system: Yj().optional(),
-  maxTokens: ai().optional(),
-  temperature: ai().optional(),
-  topP: ai().optional(),
-  topK: ai().optional(),
-  presencePenalty: ai().optional(),
-  frequencyPenalty: ai().optional(),
-  stopSequences: YO(Yj()).optional(),
-  seed: ai().optional(),
-  headers: g1(Yj(), Yj().optional()).optional(),
-  providerOptions: b.optional()
-});
-let $$I1 = KC([eu("stop"), eu("length"), eu("tool-calls"), eu("other"), eu("unknown")]);
-let $$E3 = Ik({
-  promptTokens: ai(),
-  completionTokens: ai(),
-  totalTokens: ai()
-});
-let $$x2 = Ik({
-  id: Yj(),
-  timestamp: Yj(),
-  modelId: Yj(),
-  headers: g1(Yj(), Yj()).optional()
-});
-let $$S4 = YO(Ik({
-  token: Yj(),
-  logprob: ai(),
-  topLogprobs: YO(Ik({
-    token: Yj(),
-    logprob: ai()
-  }))
-}));
-let $$w5 = KC([Ik({
-  type: eu("text"),
-  text: Yj(),
-  signature: Yj().optional()
-}), Ik({
-  type: eu("redacted"),
-  data: Yj()
-})]);
-export const Dj = $$_0;
-export const zF = $$I1;
-export const Ex = $$x2;
-export const cn = $$E3;
-export const ue = $$S4;
-export const Ph = $$w5;
-export const lF = $$v6;
-export const gB = $$c7;
-export const NA = $$g8;
-export const z7 = $$d9;
+  fireworks: object({
+    additionalModelRequestFields: record(array(string())).optional(),
+  }).optional(),
+})
+
+// Main request schema (lF, $$v6)
+export const requestSchema = object({
+  cortexAiModelId: string().optional(),
+  provider: string().optional(),
+  region: string().optional(),
+  model: string().optional(),
+  messages: array(messageSchema),
+  system: string().optional(),
+  maxTokens: number().optional(),
+  temperature: number().optional(),
+  topP: number().optional(),
+  topK: number().optional(),
+  presencePenalty: number().optional(),
+  frequencyPenalty: number().optional(),
+  stopSequences: array(string()).optional(),
+  seed: number().optional(),
+  headers: record(string(), string().optional()).optional(),
+  providerOptions: providerOptionsSchema.optional(),
+})
+
+// Completion reason enum (zF, $$I1)
+export const completionReasonEnum = union([
+  literal('stop'),
+  literal('length'),
+  literal('tool-calls'),
+  literal('other'),
+  literal('unknown'),
+])
+
+// Token usage schema (cn, $$E3)
+export const tokenUsageSchema = object({
+  promptTokens: number(),
+  completionTokens: number(),
+  totalTokens: number(),
+})
+
+// Response metadata schema (Ex, $$x2)
+export const responseMetadataSchema = object({
+  id: string(),
+  timestamp: string(),
+  modelId: string(),
+  headers: record(string(), string()).optional(),
+})
+
+// Logprobs schema (ue, $$S4)
+export const logprobsSchema = array(
+  object({
+    token: string(),
+    logprob: number(),
+    topLogprobs: array(
+      object({
+        token: string(),
+        logprob: number(),
+      }),
+    ),
+  }),
+)
+
+// Redacted content schema (Ph, $$w5)
+export const redactedContentSchema = union([
+  object({
+    type: literal('text'),
+    text: string(),
+    signature: string().optional(),
+  }),
+  object({
+    type: literal('redacted'),
+    data: string(),
+  }),
+])
+
+// Exported schemas with original variable names as comments
+export const Dj = assistantRoleSchema // $$_0
+export const zF = completionReasonEnum // $$I1
+export const Ex = responseMetadataSchema // $$x2
+export const cn = tokenUsageSchema // $$E3
+export const ue = logprobsSchema // $$S4
+export const Ph = redactedContentSchema // $$w5
+export const lF = requestSchema // $$v6
+export const gB = toolCallSchema // $$c7
+export const NA = toolRoleSchema // $$g8
+export const z7 = toolResultSchema // $$d9

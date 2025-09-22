@@ -21,7 +21,7 @@ import { OM, uL as _$$uL } from "../figma_app/422471";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile, useCanAccessFullDevMode } from "../figma_app/473493";
 import { W as _$$W } from "../905/200727";
 import { TrackingProvider } from "../figma_app/831799";
-import { UK, UX, Ku } from "../figma_app/740163";
+import { EditorPreferencesApi, getDevHandoffInspectSplitPosition, getColorFormat } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceFileKey, selectOpenFileKey } from "../figma_app/516028";
 import { M as _$$M } from "../905/152487";
@@ -247,7 +247,7 @@ import { getOpenExternalPluginIds, isAllowedUploadPluginId, isAllowedUpload } fr
 import { B as _$$B3 } from "../figma_app/539422";
 import { waitForAnimationFrame } from "../905/236856";
 import { getLocalPlugins, usePublishedPlugins, usePluginManifestsByIds, useCanRunExtension, useLocalPluginsExcludingWidgets, useInstalledPluginsAndWidgets } from "../figma_app/844435";
-import { se as _$$se, Ut, Jc, xG, r2 as _$$r5 } from "../figma_app/603466";
+import { se as _$$se, Ut, hasDevResourceOpenCallback, runDevResourceOpenCallback, runTimeoutDevResourceOpenCallback } from "../figma_app/603466";
 import { validateURLPattern, getPluginVersion, hasInspectOrPanelCapability } from "../figma_app/300692";
 import { createDeferredPromise } from "../905/263346";
 import { R as _$$R3 } from "../figma_app/612938";
@@ -361,7 +361,7 @@ import { Ak } from "../905/986103";
 import { isInteractiveInspectionAndRollbackEnabled, isDevModeFocusViewActive } from "../figma_app/544649";
 import { F_ as _$$F_ } from "../905/858282";
 import { WZ } from "../905/893645";
-import { Y6 } from "../figma_app/91703";
+import { setProgressBarState } from "../figma_app/91703";
 import { wg } from "../figma_app/101956";
 import { getSelectedView } from "../figma_app/386952";
 import { exitVersionHistoryMode, CURRENT_VERSION_ID, setActiveVersion } from "../figma_app/841351";
@@ -445,7 +445,7 @@ import { _ as _$$_2 } from "../905/569825";
 import { A as _$$A20 } from "../6828/70690";
 import { O as _$$O7 } from "../905/487602";
 import { e as _$$e8 } from "../905/149844";
-import { d as _$$d0 } from "../905/758967";
+import { getCanvasViewState } from "../905/758967";
 import { Zr as _$$Zr } from "../figma_app/678782";
 import { isVsCodeEnvironment } from "../905/858738";
 import { NB, pq as _$$pq } from "../figma_app/973219";
@@ -1938,7 +1938,7 @@ function nr() {
   let t = _$$W();
   useEffect(() => {
     xT(240, Yh, g_);
-    UK().devHandoffInspectSplitPosition.set(320);
+    EditorPreferencesApi().devHandoffInspectSplitPosition.set(320);
   }, []);
   b({
     doReport: !1
@@ -2899,7 +2899,7 @@ function im() {
       selectedOption: s,
       onSelect: e => {
         r(e);
-        e === _$$p ? UK().colorFormat.set(ColorFormatEnum.UIColor) : UK().colorFormat.set(ColorFormatEnum.HEX);
+        e === _$$p ? EditorPreferencesApi().colorFormat.set(ColorFormatEnum.UIColor) : EditorPreferencesApi().colorFormat.set(ColorFormatEnum.HEX);
         e === _$$p ? o({
           type: "first-party",
           id: d ? IOS_UIKIT : _$$p
@@ -4997,15 +4997,15 @@ function o8({
         nodeId: e.nodeId
       };
       let c = _$$R3.instance.isCurrentlyRunning(r);
-      return (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), c && Jc()) ? _$$R3.instance.enqueue({
+      return (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), c && hasDevResourceOpenCallback()) ? _$$R3.instance.enqueue({
         ...r,
-        onStart: async () => await xG({
+        onStart: async () => await runDevResourceOpenCallback({
           devResource: d
         })
       }) : _$$R3.instance.enqueue({
         ...r,
         reuseExistingRunState: !1,
-        onStart: async () => (_$$r5(5e3, {
+        onStart: async () => (runTimeoutDevResourceOpenCallback(5e3, {
           devResource: d
         }), (await o).triggerRunEvent({
           command: s,
@@ -7523,7 +7523,7 @@ function rN(e) {
     nameOverride,
     hideSectionIcon
   } = e;
-  let p = getObservableOrFallback(UK().showGuids);
+  let p = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let h = useDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? {
@@ -7597,7 +7597,7 @@ let rk = memo(function (e) {
     isSelected,
     onClick
   } = e;
-  let d = getObservableOrFallback(UK().showGuids);
+  let d = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let [c, u] = useState(!1);
   let p = function (e) {
     _$$uQ();
@@ -8104,7 +8104,7 @@ function rX() {
 function rJ() {
   let e = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let t = selectIsExportRestricted();
-  let n = UX();
+  let n = getDevHandoffInspectSplitPosition();
   let s = useAtomWithSubscription(_$$d8);
   let d = "LOADING" === s;
   let c = "RUNNING" === s;
@@ -8177,7 +8177,7 @@ function rq() {
 function rY({
   side: e
 }) {
-  let t = getObservableOrFallback(UK().renderRulers);
+  let t = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   let n = useCanAccessFullDevMode();
   let i = useIsFullscreenOverview();
   let o = !!useDevModeFocusId() && n;
@@ -8353,7 +8353,7 @@ function de(e) {
   let t = useSelector(e => e.mirror.appModel.showUi);
   let n = _$$lz();
   let [l, d] = useAtomValueAndSetter(XI);
-  let c = getObservableOrFallback(UK().renderRulers);
+  let c = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   let u = !!useDevModeFocusId();
   let p = _$$T();
   let h = _$$q() && !u;
@@ -9091,7 +9091,7 @@ function ca({
           ...r,
           versionId: t
         }));
-        s(Y6({
+        s(setProgressBarState({
           mode: UIVisibilitySetting.KEEP_UI,
           type: LoadingBarStatus.SPINNER
         }));
@@ -9368,7 +9368,7 @@ let c9 = memo(({
   let [u, p] = useAtomValueAndSetter(g6);
   let f = !ua() || u;
   let g = useSelector(e => e.saveAsState);
-  let x = getObservableOrFallback(UK().showGuids);
+  let x = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let _ = useSelector(e => e.mirror.sceneGraphSelection);
   let v = useMemo(() => {
     let t = Object.keys(_);
@@ -10974,7 +10974,7 @@ let pa = "mcp_panel--bannerDescription--80ohH";
 let pi = "https://help.figma.com/hc/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server";
 function po() {
   let e = $k();
-  let t = getObservableOrFallback(UK().enableCodegenMcpServer);
+  let t = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let n = getInitialDynamicConfig("dt_mcp_eligible_for_new_ui_date").get("date", null);
   let i = useAtomWithSubscription(userCreatedAtAtom);
   let o = !!n && !!i && new Date(n) <= new Date(i);
@@ -11026,7 +11026,7 @@ function pl() {
   });
 }
 function ps() {
-  let e = getObservableOrFallback(UK().enableCodegenMcpServer);
+  let e = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   return jsx(_$$E7, {
     variant: e ? "successOutline" : "inactiveOutline",
     size: "md",
@@ -11143,7 +11143,7 @@ function pu() {
   });
 }
 function pp() {
-  let e = getObservableOrFallback(UK().enableCodegenMcpServer);
+  let e = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   return jsxs("div", {
     className: pt,
     children: [jsx(Label, {
@@ -11197,7 +11197,7 @@ function pf() {
   let [x, m] = useAtomValueAndSetter(Pq);
   let _ = Fc();
   let v = getFeatureFlags();
-  let y = getObservableOrFallback(UK().enableCodegenMcpServer);
+  let y = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let b = [{
     visible: !0,
     element: jsx(MenuTitleComp, {
@@ -11822,7 +11822,7 @@ function p0() {
   let i = useDevModeFocusId();
   let o = _$$Zr("zoom-out");
   let r = _$$Zr("zoom-in");
-  let d = Math.round(100 * getObservableOrFallback(_$$d0().activeCanvasCurrentZoom)).toString();
+  let d = Math.round(100 * getObservableOrFallback(getCanvasViewState().activeCanvasCurrentZoom)).toString();
   let c = [{
     displayText: getI18nString("dev_handoff.vscode.zoom_control.zoom_options_actual_size"),
     callback: () => Fullscreen.setCanvasZoomScale(1)
@@ -12203,7 +12203,7 @@ function hx({
   guid: e
 }) {
   let t = hg(e);
-  let n = Ku();
+  let n = getColorFormat();
   let o = Ig();
   let l = useCallback(e => _$$dc(e, o), [o]);
   let s = useMemo(() => t?.map(l), [t, l]);
@@ -12678,11 +12678,11 @@ function hJ() {
   let [d, c] = useState(!1);
   let u = _$$uQ();
   let p = getObservableOrFallback(AppStateTsApi.devHandoffState().focusMode);
-  let h = getObservableOrFallback(UK().devHandoffInspectSplitPosition);
+  let h = getObservableOrFallback(EditorPreferencesApi().devHandoffInspectSplitPosition);
   useEffect(() => {
     let t;
     t = e ? n : hU;
-    UK().devHandoffInspectSplitPosition.set(t);
+    EditorPreferencesApi().devHandoffInspectSplitPosition.set(t);
   }, [e]);
   let f = useCallback(() => {
     c(!0);
@@ -12692,7 +12692,7 @@ function hJ() {
       var t;
       t = window.innerHeight - e.clientY;
       let n = Math.max(hU, Math.min(hK(), t || 0));
-      n !== h && (UK().devHandoffInspectSplitPosition.set(n), o(n));
+      n !== h && (EditorPreferencesApi().devHandoffInspectSplitPosition.set(n), o(n));
     }
   }, [d, h, o]);
   let x = useCallback(() => {
@@ -12717,7 +12717,7 @@ function hJ() {
         className: "extension_bottom_panel--edge--cuoAZ",
         onMouseDown: f,
         onDoubleClick: () => {
-          UK().devHandoffInspectSplitPosition.set(hX + hU);
+          EditorPreferencesApi().devHandoffInspectSplitPosition.set(hX + hU);
           o(hX + hU);
         }
       }), jsx(p4, {
@@ -12754,7 +12754,7 @@ function hJ() {
 let h8 = "floating_layers_panel--isSymbol--3KTvH";
 let h6 = "floating_layers_panel--layerName--LBYru";
 function h9() {
-  let e = getObservableOrFallback(UK().showGuids);
+  let e = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let t = Tv();
   let n = useImmediateSceneValue((e, t) => t && e.get(t), t[0] || null);
   let d = !!n && ["SYMBOL", "INSTANCE"].includes(n.type);
@@ -13058,7 +13058,7 @@ function fh() {
 }
 function ff() {
   let e = useDispatch();
-  let t = UX();
+  let t = getDevHandoffInspectSplitPosition();
   let n = useDevModeFocusId();
   let {
     isSection,

@@ -33,7 +33,7 @@ import { Y as _$$Y } from "../905/506207";
 import { TQ, Zl } from "../905/211621";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { n0 } from "../figma_app/389091";
+import { setSelectedTypedPropDefId } from "../figma_app/389091";
 import { vq } from "../905/8732";
 import { Oe, uP } from "../figma_app/933328";
 import { KD } from "../figma_app/975811";
@@ -230,7 +230,7 @@ function eU(e) {
   let F = useRef(null);
   let B = useRef(null);
   useEffect(() => {
-    L === typedPropDef.explicitDefID && O && (R(n0({
+    L === typedPropDef.explicitDefID && O && (R(setSelectedTypedPropDefId({
       propDefId: null
     })), M(!0), F.current && clearTimeout(F.current), F.current = setTimeout(() => {
       M(!1);

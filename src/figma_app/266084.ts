@@ -1,18 +1,18 @@
 import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { logInfo } from "../905/714362";
-import { ZG, mu, t } from "../figma_app/840917";
+import { getAutosaveManagerInstance, setupAutosaveManager, destroyAutosaveManagerAsync } from "../figma_app/840917";
 import { logAutosaveError } from "../905/327522";
 export let $$n0;
 class d {
   readyToAcceptAutosaveChanges() {
-    return !!ZG()?.session()?.readyToAcceptChanges();
+    return !!getAutosaveManagerInstance()?.session()?.readyToAcceptChanges();
   }
   hasOngoingCommitTask() {
-    return !!ZG()?.session()?.hasOngoingCommitTask();
+    return !!getAutosaveManagerInstance()?.session()?.hasOngoingCommitTask();
   }
   async enqueueAutosaveCommit(e, t, r, n, a, s) {
-    let d = ZG();
+    let d = getAutosaveManagerInstance();
     if (!d) {
       logAutosaveError("AutosaveManager should not be null when committing");
       return !0;
@@ -34,13 +34,13 @@ class d {
       logInfo("Autosave", "Not creating manager for logged out user");
       return;
     }
-    mu(e, t.id);
+    setupAutosaveManager(e, t.id);
   }
   destroyAutosaveManager() {
-    t();
+    destroyAutosaveManagerAsync();
   }
   isConnected() {
-    return ZG()?.managerState === "connected";
+    return getAutosaveManagerInstance()?.managerState === "connected";
   }
 }
 export function $$c1() {

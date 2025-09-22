@@ -4,7 +4,7 @@ import { selectFolderView, selectTeamView } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { searchSessionSeeMoreClickAction, handleSearchParameterChangeThunk, searchThunk } from "../905/977218";
-import { Tq } from "../905/697795";
+import { openFileInFullscreen } from "../905/697795";
 import { buildFileUrl } from "../905/612685";
 import { PublicModelType, ContentPreviewMode, SearchTypeMode } from "../figma_app/162807";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
@@ -82,7 +82,7 @@ export function $$S2(e, t, i, r, a) {
     user: a,
     teamId: r,
     orgId: i
-  }) : Tq(e, {
+  }) : openFileInFullscreen(e, {
     editorType: t.editor_type,
     key: t.key
   }, i || void 0, r || void 0);

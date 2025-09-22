@@ -100,7 +100,7 @@ import { FEditorType } from '../figma_app/53721';
 import { addRectOffset, applyOffsetToViewport, getBasicViewportRect, getViewportInfo, getViewportZoom, getVisibleArea, memoizedRect, roundedDivision, useViewportWithDelta, viewportToScreen } from '../figma_app/62612';
 import { Ao, c4, LX, xN } from '../figma_app/70421';
 import { getObservableValue } from '../figma_app/84367';
-import { ST } from '../figma_app/91703';
+import { clearSelectedViewCommentId } from '../figma_app/91703';
 import { wg as _$$wg } from '../figma_app/101956';
 import { $L, us, Xx } from '../figma_app/136698';
 import { buildStaticUrl, getInitialOptions } from '../figma_app/169182';
@@ -130,7 +130,7 @@ import { y as _$$y } from '../figma_app/705249';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { Dr, QQ, R3, Vm } from '../figma_app/728075';
 import { useAuthedActiveCommunityProfile } from '../figma_app/740025';
-import { dP } from '../figma_app/740163';
+import { getSidebarSplitPosition } from '../figma_app/740163';
 import { AppStateTsApi, DesignGraphElements, LayoutTabType, UserActionState } from '../figma_app/763686';
 import { C as _$$C, nb as _$$nb, _v, a$, CX, dB, hx, hY, k7, lV, pD, q4, QD, RI, RP, UU, vV, wg, Z5 } from '../figma_app/770088';
 import { K0 } from '../figma_app/778125';
@@ -1608,7 +1608,7 @@ function nr(e) {
   } = function () {
     let e = sO();
     let t = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !1);
-    let n = dP();
+    let n = getSidebarSplitPosition();
     let o = getObservableValue(AppStateTsApi?.editorPreferences().speakerNotesHeight, 0);
     let a = AppStateTsApi?.singleSlideView().bottomToolbeltHeightInViewport() ?? 0;
     return e && t ? {
@@ -3345,7 +3345,7 @@ function n0(e) {
   let T = !!u && b && !k && y;
   let E = _$$nq(u, b, activeId, x, s, e.requestToSelectCommentPin);
   useEffect(() => {
-    (E || T) && p(ST());
+    (E || T) && p(clearSelectedViewCommentId());
   }, [E, T, p]);
   let S = uB(activeId, e.pageId);
   let D = zf(v, s.getViewportInfo());

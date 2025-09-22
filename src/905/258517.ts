@@ -16,7 +16,7 @@ import { atomStoreManager } from '../figma_app/27355';
 import { isDevEnvironment } from '../figma_app/169182';
 import { Rf } from '../figma_app/546509';
 import { $G, sendConsecutiveImageChangeSkips, memoryPerformanceKeys, contextLostHandler, sendDirtyAfterLoad, contextRestoredHandler, postPerfMetric } from '../figma_app/553184';
-import { Cd, Cr, E7, JA, kq, P2, sl, w4, wl, Zp } from '../figma_app/682945';
+import { updateMaxRenderLayerCount, setIndependentLayerAdded, incrementNumAnimationsFromTs, onContextRestored, setIndependentLayerActive, updateMaxRenderedTileBytesUsed, setIndependentLayerAnimationActive, incrementNumAnimationsFromCpp, setIndependentLayerRemoved, setNonIndependentLayerAnimationActive } from '../figma_app/682945';
 import { DocumentSaveEvent, Multiplayer } from '../figma_app/763686';
 let A = [];
 function y(e) {
@@ -64,34 +64,34 @@ export let $$w0 = new class {
   }
   reportContextRestored() {
     contextRestoredHandler();
-    JA();
+    onContextRestored();
   }
   reportRenderLayerCount(e) {
-    Cd(e);
+    updateMaxRenderLayerCount(e);
   }
   reportIndependentLayerAnimationActive() {
-    sl();
+    setIndependentLayerAnimationActive();
   }
   reportNonIndependentLayerAnimationActive() {
-    Zp();
+    setNonIndependentLayerAnimationActive();
   }
   reportIndependentLayerActive() {
-    kq();
+    setIndependentLayerActive();
   }
   reportIndependentLayerAdded() {
-    Cr();
+    setIndependentLayerAdded();
   }
   reportIndependentLayerRemoved() {
-    wl();
+    setIndependentLayerRemoved();
   }
   reportRenderedTileBytesUsed(e) {
-    P2(e);
+    updateMaxRenderedTileBytesUsed(e);
   }
   reportAnimationFromCpp() {
-    w4();
+    incrementNumAnimationsFromCpp();
   }
   reportAnimationFromTs() {
-    E7();
+    incrementNumAnimationsFromTs();
   }
   recordRenderingEvent(e, t) {
     !function (e, t) {

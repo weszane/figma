@@ -22,7 +22,7 @@ import { Vi, GI } from "../905/125333";
 import { o as _$$o } from "../905/96108";
 import { rM } from "../figma_app/241541";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { deepEqual } from "../905/382883";
 import { W3 } from "../905/232641";
 import { vx } from "../figma_app/175258";
@@ -1003,7 +1003,7 @@ export function $$ez0(e) {
       left: $.x
     },
     onClose: () => {
-      t(XE());
+      t(hidePickerThunk());
       fullscreenValue.deselectProperty();
     },
     recordingKey: er,

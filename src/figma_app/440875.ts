@@ -14,7 +14,7 @@ import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/383776";
 import { useDevModeFocusId, useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
-import { J4 } from "../figma_app/91703";
+import { updateMultiplayerStateThunk } from "../figma_app/91703";
 import { z4 } from "../905/37051";
 import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
@@ -49,7 +49,7 @@ function O() {
   let t = useDispatch();
   let r = useSelector(e => e.multiplayer);
   let a = useCallback(e => {
-    t(J4({
+    t(updateMultiplayerStateThunk({
       ...r,
       observingSessionID: e
     }));

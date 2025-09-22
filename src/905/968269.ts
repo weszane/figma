@@ -14,19 +14,19 @@ export enum PluginIframeMode {
 }
 
 /** Internal constant for plugin rerun identifier */
-const INTERNAL_RERUN_PLUGIN_IDENTIFIER = '$INTERNAL_DO_NOT_USE$RERUN_PLUGIN$'
+export const INTERNAL_RERUN_PLUGIN_IDENTIFIER = '$INTERNAL_DO_NOT_USE$RERUN_PLUGIN$'
 
 /** Default allowed origins for iframe communication */
-const DEFAULT_ALLOWED_ORIGINS = ['*']
+export const DEFAULT_ALLOWED_ORIGINS = ['*']
 
 /** Timeout duration in milliseconds for plugin operations */
-const PLUGIN_TIMEOUT_MS = 300
+export const PLUGIN_TIMEOUT_MS = 300
 
 /** Retry delay in milliseconds for plugin operations */
-const PLUGIN_RETRY_DELAY_MS = 200
+export const PLUGIN_RETRY_DELAY_MS = 200
 
 /** Window reference path for parent context */
-const PARENT_WINDOW_REFERENCE = 'window.parent.parent.parent'
+export const PARENT_WINDOW_REFERENCE = 'window.parent.parent.parent'
 
 /** Plugin iframe modes enumeration ($$n2) */
 export const Wh = PluginIframeMode

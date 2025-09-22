@@ -242,7 +242,7 @@ import { fi as _$$fi } from '../figma_app/913823';
 import { _o, GT, YS } from '../figma_app/914674';
 import { dS, gO, Nz } from '../figma_app/915774';
 import { useAssetPanelContext, AssetPanelProvider } from '../figma_app/923271';
-import { LJ } from '../figma_app/930386';
+import { TemplateCategory } from '../figma_app/930386';
 import { jR } from '../figma_app/933328';
 import { h as _$$h5 } from '../figma_app/935454';
 import { r6 as _$$r3, P3, ZX } from '../figma_app/950074';
@@ -5827,7 +5827,7 @@ function is() {
       text: 'Browse more assets'
     },
     to: new BrowseCategoryRoute({
-      categorySlug: LJ.icons
+      categorySlug: TemplateCategory.icons
     }).to,
     className: n1,
     target: '_blank',

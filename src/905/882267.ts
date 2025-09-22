@@ -27,7 +27,7 @@ import { $z } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B2 } from "../905/330741";
 import { TrackingProvider } from "../figma_app/831799";
@@ -111,11 +111,11 @@ export function $$eD0({
   let w = useMemo(() => d ? new Point(d.initialX, d.initialY) : new Point(0, 0), [d]);
   let C = useSelector(e => e.variablePickerShown);
   let T = useCallback(() => {
-    i(XE());
+    i(hidePickerThunk());
     i(_$$B2());
   }, [i]);
   let k = useCallback(() => {
-    d?.modal && i(u1({
+    d?.modal && i(showPickerThunk({
       ...d,
       modal: !1
     }));
@@ -320,7 +320,7 @@ function eL({
     });
   }, [setSearchQueryPlaceholderFontFamily]);
   let e2 = useCallback(() => {
-    t(XE());
+    t(hidePickerThunk());
     t(_$$B2());
   }, [t]);
   let e5 = () => eo.current ? {
@@ -388,14 +388,14 @@ function eL({
       fileParentOrgId: eV?.id,
       fileTeamId: eG?.id
     });
-    !eX && i ? t(XE()) : eX && eD();
+    !eX && i ? t(hidePickerThunk()) : eX && eD();
     trackEventAnalytics("font picker font selected", {
       pageId: eZ,
       nodeIds: E,
       section: eg,
       font: e
     });
-    !eX && i ? t(XE()) : eX && eD();
+    !eX && i ? t(hidePickerThunk()) : eX && eD();
   }, [clearPreview, eV, eG, eH, setSelectedFontBeforePreviews, eg, t, eD, h, eX, d, eZ, E, ti]);
   let tr = useCallback(e => {
     if (e9.current = !0, "ArrowDown" === e.code || "ArrowDown" === e.key) {

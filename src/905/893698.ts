@@ -16,7 +16,7 @@ import { X3, MM } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { fG } from "../figma_app/91703";
+import { setInstanceSwapPickerListLayout } from "../figma_app/91703";
 import { Dm } from "../figma_app/8833";
 import { Um } from "../905/848862";
 import { R2 } from "../figma_app/188908";
@@ -98,7 +98,7 @@ function R({
   let E = R2("number" == typeof e?.top ? e.top : void 0);
   let C = useSelector(e => e.instanceSwapPickerListLayout);
   let T = useCallback(e => {
-    h(fG({
+    h(setInstanceSwapPickerListLayout({
       isListLayout: e
     }));
   }, [h]);

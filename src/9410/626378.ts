@@ -9,7 +9,7 @@ import { po } from "../9410/486658";
 import { getI18nString } from "../905/303541";
 import { iT } from "../figma_app/74165";
 import { a as _$$a } from "../9410/698287";
-import { qw } from "../figma_app/740163";
+import { getPropertiesPanelSplitPosition } from "../figma_app/740163";
 import { getObservableValue } from "../figma_app/84367";
 import { a as _$$a2 } from "../905/518538";
 import { mW, qN } from "../905/123443";
@@ -29,7 +29,7 @@ export function $$E0({
   let {
     isPropertiesPanelCollapsed
   } = iT();
-  let E = qw();
+  let E = getPropertiesPanelSplitPosition();
   E = isPropertiesPanelCollapsed ? 0 : E;
   let T = useCallback(e => {
     let t = e.comments[0]?.client_meta?.node_id;

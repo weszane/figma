@@ -10,7 +10,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { getVisibleTheme } from "../905/640017";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { browserCapabilities } from "../905/409121";
 import { getViewportWidth } from "../figma_app/62612";
@@ -159,7 +159,7 @@ function G({
   let t = getVisibleTheme();
   let r = "mouse" === e ? U(t) : M(t);
   let i = `${e} icon`;
-  let a = getObservableOrFallback(UK().scrollWheelZoom);
+  let a = getObservableOrFallback(EditorPreferencesApi().scrollWheelZoom);
   return jsxs("div", {
     className: C,
     children: [jsx("img", {
@@ -183,7 +183,7 @@ function V({
   peripheral: e
 }) {
   let t = getVisibleTheme();
-  let r = getObservableOrFallback(UK().rightClickPan);
+  let r = getObservableOrFallback(EditorPreferencesApi().rightClickPan);
   let i = `${e} icon`;
   return jsxs("div", {
     className: C,

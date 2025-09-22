@@ -24,7 +24,7 @@ import { E as _$$E } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { BK } from "../905/848862";
 import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
@@ -240,7 +240,7 @@ function ee({
   onCreateCustomBreakpoint: a
 }) {
   let o = useDispatch();
-  let u = sT();
+  let u = getNudgeAmounts();
   let [p, _] = useState("");
   let [h, m] = useState(1);
   let [g, y] = useState(!1);
@@ -380,7 +380,7 @@ function er({
   position: u
 }) {
   let p = useDispatch();
-  let _ = sT();
+  let _ = getNudgeAmounts();
   let [h, m] = useState(e.name ?? "");
   let [g, y] = useState(e.minWidth ?? 1);
   let [b, A] = useState(!1);
@@ -489,7 +489,7 @@ function en({
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let p = jsx(_$$E, {
     name: "responsive_text_style_variant_font_size",
     children: jsx(_$$Z, {

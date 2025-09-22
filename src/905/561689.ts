@@ -1,4 +1,4 @@
-import { xw, TU } from "../905/585727";
+import { ImageModelType, ImageProviderType } from "../905/585727";
 import { ImageToolsBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { AffineTransform } from "../905/583953";
@@ -55,7 +55,7 @@ export let $$g1 = async ({
         clientLifecycleId: _
       };
       if (i.length > 0) {
-        if (h === xw.GPT_4O_IMAGE && (h = TU.OPENAI_GPT_IMAGE_1), h && (l = h, !Object.values(TU).includes(l))) throw new fk("Invalid edit image model type", {
+        if (h === ImageModelType.GPT_4O_IMAGE && (h = ImageProviderType.OPENAI_GPT_IMAGE_1), h && (l = h, !Object.values(ImageProviderType).includes(l))) throw new fk("Invalid edit image model type", {
           reportToSentry: !0
         });
         a = (await Ay.design.imagesEdit({
@@ -70,7 +70,7 @@ export let $$g1 = async ({
           modelType: h
         }, d)).base64_image;
       } else {
-        if (h && (m = h, !Object.values(xw).includes(m))) throw new fk("Invalid make image model type", {
+        if (h && (m = h, !Object.values(ImageModelType).includes(m))) throw new fk("Invalid make image model type", {
           reportToSentry: !0
         });
         let e = await Ay.design.generateImages({

@@ -1,4 +1,4 @@
-export function $$i0(e) {
+export function makeParser(e) {
   let r;
   let n;
   let i;
@@ -78,4 +78,5 @@ let s = [239, 187, 191];
 function o(e) {
   return s.every((r, n) => e.charCodeAt(n) === r);
 }
-export const C = $$i0;
+// makeParser
+export const C = makeParser;

@@ -27,7 +27,7 @@ import { buildFileUrl, buildFileUrlInternal, getDesignFileUrl } from '../905/612
 import { j as _$$j, l as _$$l2 } from '../905/618243';
 import { g_ } from '../905/646788';
 import { e0 as _$$e2 } from '../905/696396';
-import { D4, nz } from '../905/697795';
+import { openPrototypeInNewTab, openFileInNewTab } from '../905/697795';
 import { l as _$$l } from '../905/714607';
 import { NA } from '../905/738636';
 import { generateUrl, findBranchById, isDefaultFile } from '../905/760074';
@@ -67,7 +67,7 @@ import { a9 } from '../figma_app/741211';
 import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 import { e as _$$e4 } from '../figma_app/831857';
 import { V1 } from '../figma_app/834392';
-import { dm, gp, OL } from '../figma_app/840917';
+import { setCurrentRenamingFileKey, mapOfflineFiles, autosaveFilesQuery } from '../figma_app/840917';
 import { rC, we } from '../figma_app/861982';
 import { D6 } from '../figma_app/863319';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -154,7 +154,7 @@ export function $$ek0(e) {
   }));
   let eU = e.tile;
   let eB = getUserId();
-  let [eV] = setupResourceAtomHandler(OL({
+  let [eV] = setupResourceAtomHandler(autosaveFilesQuery({
     userId: eB
   }));
   let eG = useMemo(() => eV?.data ?? {}, [eV]);
@@ -205,13 +205,13 @@ export function $$ek0(e) {
     })), t.type) {
       case nb.FILE:
         let n = getDesignFileUrl(t.file);
-        nz(n, t.file.key, selectedView, i);
+        openFileInNewTab(n, t.file.key, selectedView, i);
         break;
       case nb.PINNED_FILE:
-        nz(buildFileUrl(t), t.file.key, selectedView, i);
+        openFileInNewTab(buildFileUrl(t), t.file.key, selectedView, i);
         break;
       case nb.PROTOTYPE:
-        D4(t.prototype.url, t.prototype.file_key, t.prototype.page_id, selectedView);
+        openPrototypeInNewTab(t.prototype.url, t.prototype.file_key, t.prototype.page_id, selectedView);
         break;
       case nb.REPO:
         let r = findBranchById(t.repo, t.branches, selectedBranchKeyByRepoId);
@@ -344,7 +344,7 @@ export function $$ek0(e) {
     i(an());
   };
   let tn = e => {
-    dm(e);
+    setCurrentRenamingFileKey(e);
     i(an());
   };
   let tr = e => {
@@ -593,7 +593,7 @@ export function $$ek0(e) {
   let tN = useMemo(() => _H(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
   let tP = useMemo(() => CS(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
   let tO = useMemo(() => gX(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);
-  let tD = useMemo(() => Object.keys(gp(tileSelect[_$$F3.OFFLINE_FILES], {
+  let tD = useMemo(() => Object.keys(mapOfflineFiles(tileSelect[_$$F3.OFFLINE_FILES], {
     offlineFiles: eG
   })), [eG, tileSelect]);
   let tL = useMemo(() => ae(tv, e.permsByRepoId) || [], [e.permsByRepoId, tv]);

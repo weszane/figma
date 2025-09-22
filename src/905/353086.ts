@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { TU, xw, zw } from "../905/585727";
+import { ImageProviderType, ImageModelType, ImageSourceType } from "../905/585727";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
@@ -14,10 +14,10 @@ export function $$p0(e, t) {
         let t = [];
         getFeatureFlags().aip_edit_image_model_picker && (isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
-          value: TU.OPENAI_GPT_IMAGE_1
+          value: ImageProviderType.OPENAI_GPT_IMAGE_1
         }), t.push({
           label: getI18nString("image_ai.model_type.gemini_2_0_flash_preview_image_generation"),
-          value: TU.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION
+          value: ImageProviderType.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION
         }));
         return t;
       }(t);
@@ -26,15 +26,15 @@ export function $$p0(e, t) {
         let t = [];
         isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
-          value: xw.GPT_4O_IMAGE
+          value: ImageModelType.GPT_4O_IMAGE
         });
         t.push({
           label: getI18nString("image_ai.model_type.imagen_3"),
-          value: xw.IMAGEN_3
+          value: ImageModelType.IMAGEN_3
         });
         t.push({
           label: getI18nString("image_ai.model_type.titan_v2"),
-          value: xw.TITAN_V2
+          value: ImageModelType.TITAN_V2
         });
         return t;
       }(t);
@@ -43,19 +43,19 @@ export function $$p0(e, t) {
         let t = [];
         isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
-          value: zw.GPT_4O_IMAGE
+          value: ImageSourceType.GPT_4O_IMAGE
         });
         t.push({
           label: getI18nString("image_ai.model_type.imagen_3"),
-          value: zw.IMAGEN_3
+          value: ImageSourceType.IMAGEN_3
         });
         t.push({
           label: getI18nString("image_ai.model_type.titan_v2"),
-          value: zw.TITAN_V2
+          value: ImageSourceType.TITAN_V2
         });
         t.push({
           label: getI18nString("image_ai.model_type.unsplash"),
-          value: zw.UNSPLASH
+          value: ImageSourceType.UNSPLASH
         });
         return t;
       }(t);

@@ -9,7 +9,7 @@ import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { u1 } from "../figma_app/91703";
+import { showPickerThunk } from "../figma_app/91703";
 import { trackFileEvent } from "../figma_app/314264";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -206,7 +206,7 @@ export async function $$M0({
                       initialX,
                       initialY
                     } = t;
-                    void 0 !== initialX && void 0 !== initialY && debugState.dispatch(u1({
+                    void 0 !== initialX && void 0 !== initialY && debugState.dispatch(showPickerThunk({
                       id: e,
                       initialX,
                       initialY,

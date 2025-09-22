@@ -1,4 +1,4 @@
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { setTagGlobal, reportError } from "../905/11";
 import { renderI18nText } from "../905/303541";
@@ -54,7 +54,7 @@ export function $$p2({
 export var $$_1 = (e => (e.SEND_MESSAGE = "send_message", e.PREVIEW = "preview", e.FORMAT = "format", e.EDIT_LOCALLY = "edit_locally", e.LINT = "lint", e.RESIZE_PANEL = "resize_panel", e))($$_1 || {});
 export function $$h0(e, t, r, s) {
   let o = e;
-  e instanceof G1 && (o = Gx(e));
+  e instanceof CortexError && (o = Gx(e));
   "reportToSentry" in o && !o.reportToSentry || (setTagGlobal("chatFeatureType", t), setTagGlobal("userAction", r), reportError(_$$e.AI_FOR_PRODUCTION, o, {
     extra: s
   }));

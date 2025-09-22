@@ -26,7 +26,7 @@ import { J as _$$J } from "../figma_app/553179";
 import { e as _$$e2 } from "../figma_app/278289";
 import { P as _$$P, B as _$$B } from "../figma_app/846647";
 import { Fullscreen, UserInterfaceElements } from "../figma_app/763686";
-import { FP } from "../figma_app/91703";
+import { setLeftPanelTab } from "../figma_app/91703";
 import { clearSelection } from "../figma_app/741237";
 import { F_, EL } from "../905/858282";
 import { en as _$$en, aD, wy, eN, zU, nt, l7, d4 as _$$d } from "../figma_app/202626";
@@ -87,7 +87,7 @@ function k(e) {
   }), o = "Assets");
   useEffect(() => {
     clearSelection();
-    t(FP({
+    t(setLeftPanelTab({
       tab: UserInterfaceElements.ASSETS
     }));
   }, [t]);
@@ -102,7 +102,7 @@ function k(e) {
     }),
     onPrimaryCtaClick: e.onPrimaryCtaClick,
     onSecondaryCtaClick: () => {
-      t(FP({
+      t(setLeftPanelTab({
         tab: UserInterfaceElements.LAYERS
       }));
       e.onSecondaryCtaClick();
@@ -234,7 +234,7 @@ function z(e) {
   let o = "UI Kits";
   oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
   useEffect(() => {
-    t(FP({
+    t(setLeftPanelTab({
       tab: UserInterfaceElements.ASSETS
     }));
   }, [t]);
@@ -250,7 +250,7 @@ function z(e) {
       useLoadingBar: e.useLoadingBar
     }),
     onPrimaryCtaClick: () => {
-      t(FP({
+      t(setLeftPanelTab({
         tab: UserInterfaceElements.LAYERS
       }));
       e.onNext();

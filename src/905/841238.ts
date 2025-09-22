@@ -17,7 +17,7 @@ import { TQ, Zl } from "../905/211621";
 import { LazyInputForwardRef } from "../905/408237";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP } from "../figma_app/933328";
 import { hideModal } from "../905/156213";
@@ -267,7 +267,7 @@ let $$X0 = registerModal(function (e) {
       onCreateVariable: lQ,
       onClose: () => {
         isInstanceSwapPickerShown ? U(vq()) : U(hideModal());
-        U(XE());
+        U(hidePickerThunk());
       },
       refField,
       componentPropOnly: !0

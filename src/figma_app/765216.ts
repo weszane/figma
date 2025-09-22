@@ -12,7 +12,7 @@ import _ from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { Y as _$$Y } from "../905/506207";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { W3 } from "../905/232641";
 import { fullscreenValue } from "../figma_app/455680";
@@ -23,7 +23,7 @@ import { ku } from "../905/149223";
 import { WH } from "../figma_app/836943";
 import { w1 } from "../figma_app/405546";
 import { getI18nString } from "../905/303541";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { fE } from "../figma_app/359164";
 import { EX } from "../figma_app/709323";
 import { eN } from "../905/331848";
@@ -80,12 +80,12 @@ function R({
     });
   }, [styleId]);
   let V = useCallback(() => {
-    L(u1({
+    L(showPickerThunk({
       id: w
     }));
   }, [L]);
   let H = useCallback(() => {
-    L(XE());
+    L(hidePickerThunk());
     fullscreenValue.deselectProperty();
   }, [L]);
   let z = useCallback(() => {
@@ -185,7 +185,7 @@ function j({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let s = eN({
     min: 0,
     max: _$$N

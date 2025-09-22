@@ -145,7 +145,7 @@ import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
 import { q as _$$q5 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
-import { U as _$$U3 } from '../905/940056';
+import { Violation } from '../905/940056';
 import { selectUserFlag } from '../905/940356';
 import { b as _$$b5 } from '../905/946806';
 import { w as _$$w3 } from '../905/955293';
@@ -230,7 +230,7 @@ import { _J, DL, KL, Tg } from '../figma_app/74668';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { useIsFullscreenOverview, useHasReadyNodesWithParentOrg, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
 import { lM as _$$lM } from '../figma_app/90441';
-import { FP } from '../figma_app/91703';
+import { setLeftPanelTab } from '../figma_app/91703';
 import { $C, $H, E as _$$E4, r4 as _$$r3, _M, Bd, Bp, Dg, DJ, E7, E$, IZ, mE, NM, pR, Sg, vu } from '../figma_app/99772';
 import { LZ } from '../figma_app/101956';
 import { Fz, Zg } from '../figma_app/106207';
@@ -329,7 +329,7 @@ import { E as _$$E1 } from '../figma_app/714009';
 import { X as _$$X3, y0 } from '../figma_app/718307';
 import { useIsProgressBarHiddenOrLocked, useHasSceneGraphSelection, useSceneGraphSelector, useCurrentTool, useAppModelProperty } from '../figma_app/722362';
 import { lB as _$$lB, EE } from '../figma_app/731583';
-import { Ku, qw, UK } from '../figma_app/740163';
+import { getColorFormat, getPropertiesPanelSplitPosition, EditorPreferencesApi } from '../figma_app/740163';
 import { getPropertiesPanelTab, setPropertiesPanelTab } from '../figma_app/741237';
 import { M as _$$M2 } from '../figma_app/749682';
 import { nE as _$$nE, fY, g7, hx, Iy, jq, m7, qL, qp, qZ, u2, ui, Ut, v4, VG, W0 } from '../figma_app/761118';
@@ -2129,7 +2129,7 @@ function lV() {
       label: renderI18nText('rcs.presets_baseline.try_it'),
       type: 'button',
       onClick: () => {
-        a(FP({
+        a(setLeftPanelTab({
           tab: UserInterfaceElements.ASSETS
         }));
         complete();
@@ -6167,13 +6167,13 @@ function r0({
       } = t;
       let a = currentActiveToLinterGuidsMap?.get(guid);
       let d = suggestedActiveToLinterGuidsMap?.get(guid);
-      a && e.currentViolations.push(new _$$U3({
+      a && e.currentViolations.push(new Violation({
         ruleId,
         guid: a,
         detectionContext,
         nodeType
       }));
-      d && e.suggestedViolations.push(new _$$U3({
+      d && e.suggestedViolations.push(new Violation({
         ruleId,
         guid: d,
         detectionContext,
@@ -10225,11 +10225,11 @@ let a_ = memo(() => {
   let G = t || H;
   let U = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let q = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
-  let W = Ku();
-  let K = qw();
+  let W = getColorFormat();
+  let K = getPropertiesPanelSplitPosition();
   let X = _$$s_();
   let Z = !Oo() && X;
-  let Y = getObservableOrFallback(UK().renderRulers);
+  let Y = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   let {
     isRightPanelCollapsed
   } = useContext(_$$t4);
@@ -10802,7 +10802,7 @@ let dN = memo(({
   let v = _$$e3();
   let C = useIsFullscreenDevModeComponentBrowser();
   let k = useIsFullscreenOverview();
-  let E = getObservableValue(UK().enableCodegenMcpServer, !1);
+  let E = getObservableValue(EditorPreferencesApi().enableCodegenMcpServer, !1);
   let S = $();
   let w = BE();
   let R = jsx(_$$m, {

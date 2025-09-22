@@ -24,7 +24,7 @@ import { XHR } from "../905/910117";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { XE, Uv, u1 } from "../figma_app/91703";
+import { hidePickerThunk, hideStylePicker, showPickerThunk } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { J6 } from "../figma_app/8833";
 import { getEditorTypeFromView } from "../figma_app/976749";
@@ -168,11 +168,11 @@ export function $$em2({
   let eF = useRef(null);
   let ej = useRef(null);
   let eU = useCallback(e => {
-    if (ef?.id === eo) eg(XE());else {
+    if (ef?.id === eo) eg(hidePickerThunk());else {
       eC(!0);
-      eg(Uv());
+      eg(hideStylePicker());
       let e = "row" === em ? cn(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
-      eg(u1({
+      eg(showPickerThunk({
         id: eo,
         initialX: e.x,
         initialY: e.y,

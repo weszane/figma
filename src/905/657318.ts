@@ -25,7 +25,7 @@ import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Uv, XE, bS } from "../figma_app/91703";
+import { hideStylePicker, hidePickerThunk, showStylePicker } from "../figma_app/91703";
 import { AV, Qn } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { sw } from "../figma_app/914957";
@@ -94,9 +94,9 @@ class eA extends RecordingPureComponent {
         return;
       }
       if (zb(this.props)) {
-        this.props.dispatch(Uv());
+        this.props.dispatch(hideStylePicker());
         this.props.dispatch(sw());
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
       } else {
         let e = this.panelTitleRef.current.getBoundingClientRect();
         let t = e.left + (e.width - N2) / 2;
@@ -105,13 +105,13 @@ class eA extends RecordingPureComponent {
           x,
           y
         } = this.props.openStylePickerToLeft ? cn(this.panelTitleRef.current, N2) : new Point(t, i);
-        this.props.dispatch(bS({
+        this.props.dispatch(showStylePicker({
           id: OS(this.props.inheritStyleKeyField),
           initialX: x,
           initialY: y,
           modal: !0
         }));
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
         trackEventAnalytics("Style Picker Opened", {
           styleType: this.props.styleType,
           viewMode: this.props.stylePickerListLayout ? "LIST" : "GRID",

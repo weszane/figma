@@ -15,6 +15,7 @@ import { hasTextReviewCapability } from '../figma_app/300692';
 import { fullscreenValue } from '../figma_app/455680';
 import { nc, s6 } from '../figma_app/474636';
 import { DataLoadStatus, IPagePlugin, Multiplayer, PluginModalType } from '../figma_app/763686';
+import { AppModelElement } from '../../types/app';
 
 // Cache for incremental loading list
 let n: Set<string> | undefined;
@@ -96,7 +97,8 @@ async function shouldLoadAllPages(plugin: any, queryMode: boolean): Promise<bool
 export async function loadAllPagesWithUI(plugin: any, event: any, modalType: PluginModalType): Promise<{
   isCancelled: boolean;
 }> {
-  const unloadedPagesCount = debugState.getState().mirror.appModel.pagesList.filter(page => page.status === DataLoadStatus.NOT_LOADED).length;
+  const pageList = debugState.getState().mirror.appModel.pagesList as AppModelElement[]
+  const unloadedPagesCount = pageList.filter(page => page.status === DataLoadStatus.NOT_LOADED).length;
   if (unloadedPagesCount === 0) {
     return {
       isCancelled: false

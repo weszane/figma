@@ -15,8 +15,8 @@ import { VisualBellActions } from "../905/302958";
 import { mC } from "../905/193529";
 import { e as _$$e } from "../905/810168";
 import { k4 } from "../figma_app/290668";
-import { UK } from "../figma_app/740163";
-import { gf } from "../figma_app/682945";
+import { EditorPreferencesApi } from "../figma_app/740163";
+import { recordAccessibilityDomActive } from "../figma_app/682945";
 import { computeFullscreenViewportForNode, getViewportInfo } from "../figma_app/62612";
 import { getObservableValue, subscribeObservable, getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
@@ -848,7 +848,7 @@ function eL({
 }) {
   let i = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let a = _$$Z(r);
-  let s = getObservableOrFallback(UK().accessibilityDomDebug);
+  let s = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let o = J({
     extractorCtor: t,
     logAction: e
@@ -1164,7 +1164,7 @@ function eX({
   children: t
 }) {
   let r = _$$Z("figjam_navigate");
-  let i = getObservableOrFallback(UK().accessibilityDomDebug);
+  let i = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let s = useSelector(e => e.mirror.appModel.showComments);
   return jsx(Z3, {
     nodeId: e,
@@ -1406,9 +1406,9 @@ function e6({
   let [p] = useDebounce(o, 500, {
     trailing: !0
   });
-  let _ = getObservableOrFallback(UK().accessibilityDomDebug);
+  let _ = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let m = useIsCanvasEditDisabled();
-  gf();
+  recordAccessibilityDomActive();
   let f = useDispatch();
   useEffect(() => {
     f(mC({

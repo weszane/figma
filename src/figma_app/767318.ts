@@ -17,7 +17,7 @@ import { useDevModeFocusId } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
 import { Wo } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
@@ -48,7 +48,7 @@ export function $$G0(e) {
   } = useSprigWithSampling();
   let _ = function (e, t, r) {
     let o = useDispatch();
-    let d = getObservableOrFallback(UK().showGuids);
+    let d = getObservableOrFallback(EditorPreferencesApi().showGuids);
     let u = t === Jo.FOCUS_NODE;
     let _ = hZ(t);
     let g = useCallback((e, t, r) => {

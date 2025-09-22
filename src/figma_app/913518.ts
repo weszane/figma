@@ -8,7 +8,7 @@ import { XM } from "../905/486443";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { jo } from "../figma_app/629335";
 import { Qs, sx } from "../905/992395";
-import { D } from "../905/80656";
+import { deferCallback } from "../905/80656";
 import { C3 } from "../figma_app/587765";
 export let $$m4 = setupRemovableAtomFamily(() => atom(!1));
 var $$g0 = (e => (e.OPEN = "meetings_panel_open", e.CLOSE = "meetings_panel_close", e))($$g0 || {});
@@ -29,7 +29,7 @@ export function $$y2() {
   return useCallback(n => {
     n && t("meetings_panel_open", n.source);
     i && a(!1);
-    D(() => {
+    deferCallback(() => {
       r();
     });
     e({

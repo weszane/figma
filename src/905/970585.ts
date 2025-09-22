@@ -11,7 +11,7 @@ import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { nA, lp, eH, J4 } from "../figma_app/91703";
+import { stopRecordingThunk, startRecordingThunk, handleAutosaveAndNavigationThunk, updateMultiplayerStateThunk } from "../figma_app/91703";
 import { loadingStatePutSuccess } from "../figma_app/714946";
 import { hideModal, showModalHandler } from "../905/156213";
 import { E as _$$E } from "../905/344656";
@@ -251,11 +251,11 @@ export class $$eu0 {
     this.dispatch = e.dispatch;
   }
   reconnectingStarted() {
-    this.dispatch(nA());
+    this.dispatch(stopRecordingThunk());
   }
   reconnectingSucceeded() {
     getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer.sendClientRendered(fullscreenPerfManager.getClientRenderedMetadata()) : Multiplayer.sendSignal("client-rendered", "");
-    this.dispatch(lp());
+    this.dispatch(startRecordingThunk());
     isLoading(this.store.getState().loadingState, $5) && this.dispatch(loadingStatePutSuccess({
       key: $5
     }));
@@ -273,12 +273,12 @@ export class $$eu0 {
     let o = getAutosaveState();
     if (o && o.status === FileProcessingStatus.WAITING && !e && !t && i === SyncError.NONE) {
       finishAutosaveWait(!1);
-      setTimeout(() => this.dispatch(eH()));
+      setTimeout(() => this.dispatch(handleAutosaveAndNavigationThunk()));
       return;
     }
   }
   updateMultiplayerState(e) {
-    this.dispatch(J4(e));
+    this.dispatch(updateMultiplayerStateThunk(e));
   }
   restartPresentation(e) {
     Multiplayer.startPresenting();
@@ -324,7 +324,7 @@ export class $$eu0 {
     })));else if ("invalid-permissions" === e) {
       let e;
       let t;
-      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
+      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(handleAutosaveAndNavigationThunk({
         closeDesktopTabWithMessage: e
       })));
       trackEventAnalytics("Context Viewed", {
@@ -342,7 +342,7 @@ export class $$eu0 {
     } else if ("not-logged-in" === e) {
       let e;
       let t;
-      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_not_logged_in")) : (this.dispatch(eH()), t = getI18nString("unsaved_changes.syncing.logged_out"), e = getI18nString("unsaved_changes.syncing.you_have_been_logged_out_of_figma"));
+      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_not_logged_in")) : (this.dispatch(handleAutosaveAndNavigationThunk()), t = getI18nString("unsaved_changes.syncing.logged_out"), e = getI18nString("unsaved_changes.syncing.you_have_been_logged_out_of_figma"));
       this.dispatch(showModalHandler({
         type: G,
         data: {

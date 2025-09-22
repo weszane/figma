@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { PQ } from "../figma_app/91703";
+import { recentlyUsedQuickCommands } from "../figma_app/91703";
 import { NG, UK } from "../figma_app/506549";
 import { c4 } from "../figma_app/805925";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -17,7 +17,7 @@ export function $$u1() {
       displayName: n,
       runPluginArgs: i
     });
-    t(PQ(s));
+    t(recentlyUsedQuickCommands(s));
     _$$s({
       displayText: n,
       runPluginArgs: i,

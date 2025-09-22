@@ -15,13 +15,13 @@ import { L3 } from '../figma_app/385215';
 import { fullscreenValue } from '../figma_app/455680';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { useAppModelProperty } from '../figma_app/722362';
-import { dP, UK } from '../figma_app/740163';
+import { getSidebarSplitPosition, EditorPreferencesApi } from '../figma_app/740163';
 import { renameNode, renameSelectedNodes, expandNodeToRoot } from '../figma_app/741237';
 import { AppStateTsApi, ViewType, UserInterfaceElements, SelectionPanelType } from '../figma_app/763686';
 import { tu } from '../figma_app/779249';
 import { parseMsNumber } from '../figma_app/783094';
 import { d as _$$d, W as _$$W } from '../figma_app/833988';
-import { R } from '../figma_app/941983';
+import { EditorUIState } from '../figma_app/941983';
 import { U } from '../figma_app/964810';
 import { useSelector, useDispatch } from 'react-redux';
 let $$w4 = 240;
@@ -33,19 +33,19 @@ export function $$D1(e) {
   return e.reduce((e, t, r) => (e[t.nodeId] = r, e), {});
 }
 export function $$k0(e = $$w4, t = $$O10) {
-  return F(dP(), e, t);
+  return F(getSidebarSplitPosition(), e, t);
 }
 export function $$M16(e, t, r) {
   let n = F(e, t, r);
   document.documentElement.style.setProperty('--left-panel-width', `${n}px`);
-  UK().sidebarSplitPosition.set(n);
+  EditorPreferencesApi().sidebarSplitPosition.set(n);
 }
 function F(e, t, r) {
   return Math.max(t, Math.min(r, e || 0));
 }
 export function $$j3() {
-  getObservableValue(AppStateTsApi?.editorPreferences()?.showSidebar, R.showSidebar);
-  return getObservableValue(AppStateTsApi?.uiState()?.leftPanelCollapsedUI3, !R.showSidebar);
+  getObservableValue(AppStateTsApi?.editorPreferences()?.showSidebar, EditorUIState.showSidebar);
+  return getObservableValue(AppStateTsApi?.uiState()?.leftPanelCollapsedUI3, !EditorUIState.showSidebar);
 }
 export function $$U9() {
   return useMemo(() => parseMsNumber(getComputedStyle(document.body).getPropertyValue('--duration-md')) / 1e3, []);

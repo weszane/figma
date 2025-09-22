@@ -25,7 +25,7 @@ import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE, u1, Uv } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { h2, AB, Pr } from "../figma_app/8833";
 import { TrackedAnchor } from "../figma_app/831799";
@@ -72,7 +72,7 @@ import { OPTICAL_SIZE_AXIS_TAG } from "../905/165290";
 import { Point } from "../905/736624";
 import { P as _$$P2 } from "../905/347284";
 import { SvgComponent } from "../905/714743";
-import { Ku, sT } from "../figma_app/740163";
+import { getColorFormat, getNudgeAmounts } from "../figma_app/740163";
 import { pw, zj, tN as _$$tN, wR, kl } from "../905/275640";
 import { useOnSelectionChange } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -822,7 +822,7 @@ let tN = memo(function (e) {
   stylePickerListLayout: e.stylePickerListLayout,
   openFile: e.openFile
 }))(function (e) {
-  let t = Ku();
+  let t = getColorFormat();
   let {
     exportBackgroundDisabled,
     exportSettings,
@@ -1236,7 +1236,7 @@ function t3(e) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let u = "NONE" !== n && "ENDING" === o;
   return jsxs(Fragment, {
     children: [jsxs(fI, {
@@ -1313,7 +1313,7 @@ function t6(e) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let [o, d] = useState(TypographySettings.EMPTY);
   let [c, u] = useState(null);
   let [p, m] = useState(!1);
@@ -1333,7 +1333,7 @@ function t6(e) {
   let L = useRef(null);
   let M = useRef(null);
   let j = () => {
-    t(XE());
+    t(hidePickerThunk());
   };
   let B = e.editModeType === LayoutTabType.TEXT;
   let V = e => e in w.supported;
@@ -2785,7 +2785,7 @@ let t8 = forwardRef(function (e, t) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   return jsx($j, {
     bigNudgeAmount,
     className: eP()({
@@ -2935,10 +2935,10 @@ class iS extends PureComponent {
     };
     this.toggleSettings = e => {
       let t = this.isInStyleModal();
-      if (this.shownSettings()) this.props.dispatch(XE());else if (e.current) {
+      if (this.shownSettings()) this.props.dispatch(hidePickerThunk());else if (e.current) {
         let i = cn(e.current);
         let n = t ? h2 : AB;
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: n,
           initialX: i.x,
           initialY: i.y
@@ -2947,7 +2947,7 @@ class iS extends PureComponent {
         let r = this.getIsStyleConsumer();
         let a = this.props.isOnlyTextPath;
         r && "Basics" !== this.state.activeTab ? this.setActiveTab("Basics") : a && this.setActiveTab("Details");
-        !t && (this.props.stylePickerShown.isShown && this.props.dispatch(Uv()), this.props.stylePreviewShown.isShown && this.props.dispatch(sw()));
+        !t && (this.props.stylePickerShown.isShown && this.props.dispatch(hideStylePicker()), this.props.stylePreviewShown.isShown && this.props.dispatch(sw()));
       }
     };
     this.toggleSettingsFromAlignmentRow = () => {

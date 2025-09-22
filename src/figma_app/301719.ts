@@ -3,7 +3,7 @@ import { SelectionPaintHelpers, VariableResolvedDataType } from "../figma_app/76
 import { GP } from "../figma_app/15927";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { gq } from "../905/125333";
-import { Gm } from "../figma_app/91703";
+import { setEyedropper } from "../figma_app/91703";
 import { updateSelectionPaintsFromFullscreen, forceUpdateSelectionPaintsForUndo, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, clearSelectionPaintsDueToLimitExceeded, updateCurrentSelectionPaintInPicker } from "../905/854717";
 import { Yr, o$ } from "../figma_app/8833";
 import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
@@ -19,7 +19,7 @@ export class $$g1 {
     };
   }
   showEyedropper(e, t, r, n, i, a, s, o, d, c) {
-    this.dispatch(Gm({
+    this.dispatch(setEyedropper({
       color: e,
       width: t,
       height: r,
@@ -33,7 +33,7 @@ export class $$g1 {
     }));
   }
   hideEyedropper() {
-    this.dispatch(Gm(null));
+    this.dispatch(setEyedropper(null));
   }
   updateSelectionImages(e) {
     let t = atomStoreManager.get($$m0);

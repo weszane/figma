@@ -10,7 +10,7 @@ import u from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { f0 } from "../figma_app/975811";
-import { RU } from "../figma_app/740163";
+import { getBigNudgeAmount } from "../figma_app/740163";
 import { _P } from "../figma_app/2590";
 import { KindEnum } from "../905/129884";
 import { qd } from "../figma_app/178475";
@@ -30,7 +30,7 @@ export function $$E0(e) {
     setPlaying,
     setUserClickedControls
   } = e;
-  let k = RU();
+  let k = getBigNudgeAmount();
   let R = useDispatch();
   let N = useMemo(() => new f0(duration), [duration]);
   let P = X7();

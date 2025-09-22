@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
-
 import { Ye } from '../figma_app/32128';
-import { lK } from '../figma_app/740163';
-
-
+import { shouldRenderRulers } from '../figma_app/740163';
 export let $$l1 = {
   showNotificationSettings: !0,
   disableCommentsWhenHandToolEnabled: !0,
@@ -14,16 +11,14 @@ export function $$d0({
   leftSidePanelWidth: e
 } = {}) {
   let t = Ye();
-  let r = lK();
+  let r = shouldRenderRulers();
   return useMemo(() => {
     let n = 32 + 16;
     let a = r ? 20 : 0;
-    return t ?
-    {
+    return t ? {
       xDelta: a,
       yDelta: a + n + 8
-    } :
-    {
+    } : {
       xDelta: a + (e || 0) + 8,
       yDelta: a
     };

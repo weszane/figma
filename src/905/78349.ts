@@ -8,7 +8,7 @@ import { H } from "../figma_app/147959";
 import { logError } from "../905/714362";
 import { fullscreenValue } from "../figma_app/455680";
 import { j } from "../905/881708";
-import { H0 } from "../figma_app/682945";
+import { recordConnectDiagramShapeActive } from "../figma_app/682945";
 import { isConnector } from "../905/739338";
 import { AffineTransform } from "../905/583953";
 class f {
@@ -458,7 +458,7 @@ export class $$_0 extends j {
       if ((this._toolLineStyle === ConnectorType.ELBOWED || this._toolLineStyle === ConnectorType.CURVED) && s && this._endpointHoverzone === AbsolutePositionType.CENTER && (this._hoveredEndpoint.magnet = AutoLayoutAlignment.AUTO), t.connectorEnd = this._hoveredEndpoint, t.connectorStart?.endpointNodeID && t.connectorEnd?.endpointNodeID) {
         let e = getSingletonSceneGraph().get(t.connectorStart.endpointNodeID);
         let i = getSingletonSceneGraph().get(t.connectorEnd.endpointNodeID);
-        e?.type === "SHAPE_WITH_TEXT" && i?.type === "SHAPE_WITH_TEXT" && H0();
+        e?.type === "SHAPE_WITH_TEXT" && i?.type === "SHAPE_WITH_TEXT" && recordConnectDiagramShapeActive();
       }
       if (!this._shouldIgnoreMagnets) {
         let e = scopeAwareFunction.user("connector-tool-hover-ignore-magnets-timer", () => {

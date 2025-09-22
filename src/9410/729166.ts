@@ -173,7 +173,7 @@ import { flatten } from '../figma_app/656233';
 import { zy } from '../figma_app/656450';
 import { gk } from '../figma_app/715641';
 import { useSceneGraphSelector } from '../figma_app/722362';
-import { dP, Ku, UK } from '../figma_app/740163';
+import { getSidebarSplitPosition, getColorFormat, EditorPreferencesApi } from '../figma_app/740163';
 import { clearSelection } from '../figma_app/741237';
 import { AppStateTsApi, BuildStatus, Fullscreen, FullscreenPerfMetrics, HandoffBindingsCpp, Multiplayer, PresetType, PrototypingTsApi, RotationType, SelfDesignType, UIVisibilitySetting, VariableDataType, VariableResolvedDataType, webGPUBindings } from '../figma_app/763686';
 import { q as _$$q } from '../figma_app/777660';
@@ -785,7 +785,7 @@ function ez({
   isCopyable: t,
   recordingKey: i
 }) {
-  let n = Ku();
+  let n = getColorFormat();
   let a = Ig();
   let s = _$$q(e.value, n, a, {
     alphaInPercent: !0
@@ -850,7 +850,7 @@ function eW({
   isSelected: a = !1,
   variableTypeForTracking: s
 }) {
-  let o = getObservableOrFallback(UK().showGuids) && t ? `${e} (${t})` : e;
+  let o = getObservableOrFallback(EditorPreferencesApi().showGuids) && t ? `${e} (${t})` : e;
   let l = sD(o);
   useEffect(() => {
     a && l.current?.scrollIntoView({
@@ -950,7 +950,7 @@ function tc({
   });
 }
 function tu() {
-  let e = dP();
+  let e = getSidebarSplitPosition();
   let t = useRef(null);
   let [i, a] = useState(!1);
   let {
@@ -1712,7 +1712,7 @@ function iZ() {
 function iQ() {
   let e = useCanAccessFullDevMode();
   let t = selectCurrentFile()?.key;
-  let i = dP();
+  let i = getSidebarSplitPosition();
   isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
   let s = trackFileEventWithStore();
   let o = function () {

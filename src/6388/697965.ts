@@ -20,7 +20,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { getFocusedNodeId, isFullscreenAndInFocusedNodeView, getFocusNodeFunction } from "../figma_app/327588";
 import { useSelectedCooperFrameGuids } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { useAppModelProperty } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { l5 } from "../figma_app/224338";
@@ -148,7 +148,7 @@ function K(e) {
     toggleCollapsed
   } = Q;
   let Z = "boolean" != typeof isCarouselFocused || isCarouselFocused;
-  let ee = getObservableOrFallback(UK().showGuids);
+  let ee = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let et = useAppModelProperty("isReadOnly");
   useLayoutEffect(() => {
     Q.selectedItemIds.forEach(e => {

@@ -20,7 +20,7 @@ import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { Oe } from "../figma_app/933328";
 import { F as _$$F } from "../figma_app/8833";
 import { TI } from "../905/713722";
@@ -87,7 +87,7 @@ export function $$el2({
   let [f, A] = useState(!1);
   let [y, E] = useState(m);
   let S = useSetupPlayback(o, "close", () => {
-    h(XE());
+    h(hidePickerThunk());
     fullscreenValue.deselectProperty();
   });
   let C = createRef();

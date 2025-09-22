@@ -19,7 +19,7 @@ import { R as _$$R3 } from '../905/57445';
 import { KeyCodes, isExactModifier, ModifierKeyCodes } from '../905/63728';
 import { s as _$$s7 } from '../905/73603';
 import { n as _$$n3 } from '../905/79930';
-import { W as _$$W } from '../905/80656';
+import { setSideHandler } from '../905/80656';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { useSprigWithSampling } from '../905/99656';
 import { registerModal } from '../905/102752';
@@ -202,7 +202,7 @@ import { iT as _$$iT } from '../figma_app/74165';
 import { $m, copyShareLinkOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { getDevModeFocusId, useDevModeFocusId, useIsFullscreenOverview, isFullscreenOverview, useIsFullscreenDevModeComponentBrowser } from '../figma_app/88239';
-import { PQ as _$$PQ, kU, Ty, XE } from '../figma_app/91703';
+import { recentlyUsedQuickCommands, isSelectionStyleItem, isSelectionPaintItem, hidePickerThunk } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { kp, Sk } from '../figma_app/98578';
 import { wg } from '../figma_app/101956';
@@ -315,7 +315,7 @@ import { k1 } from '../figma_app/687767';
 import { _o } from '../figma_app/701001';
 import { U3 as _$$U4 } from '../figma_app/737746';
 import { getCurrentOrgAdminInfo } from '../figma_app/740025';
-import { dP, Ku, qw, UK, UX } from '../figma_app/740163';
+import { getSidebarSplitPosition, getColorFormat, getPropertiesPanelSplitPosition, EditorPreferencesApi, getDevHandoffInspectSplitPosition } from '../figma_app/740163';
 import { getPropertiesPanelTab, updateHoveredNode } from '../figma_app/741237';
 import { qZ, ui } from '../figma_app/761118';
 import { Rs as _$$Rs } from '../figma_app/761870';
@@ -657,7 +657,7 @@ function ej({
     }, [t, a, i, e.data, e.status]);
     return i;
   }();
-  let c = qw();
+  let c = getPropertiesPanelSplitPosition();
   let u = useCallback(e => {
     let t = l.get(e.id);
     if (t) return t;
@@ -744,7 +744,7 @@ function eO({
   let {
     isPropertiesPanelCollapsed
   } = _$$iT();
-  let o = qw();
+  let o = getPropertiesPanelSplitPosition();
   o = isPropertiesPanelCollapsed ? 0 : o;
   let l = useMemo(() => [mW.RESOLVED, mW.YOURS, mW.CURRENT_PAGE], []);
   let d = useMemo(() => [qN.CREATION_DATE, qN.UNREAD], []);
@@ -806,7 +806,7 @@ function eM({
   let {
     isPropertiesPanelCollapsed
   } = _$$iT();
-  let d = UX();
+  let d = getDevHandoffInspectSplitPosition();
   d = isPropertiesPanelCollapsed ? 0 : d;
   let c = parsePxNumber(ZB$);
   let u = useMemo(() => [mW.RESOLVED, mW.YOURS, mW.CURRENT_PAGE], []);
@@ -864,7 +864,7 @@ function eK({
   let t = Vi();
   let i = useMemo(() => [mW.RESOLVED, mW.YOURS], []);
   let a = useMemo(() => [qN.CREATION_DATE, qN.UNREAD], []);
-  let s = dP();
+  let s = getSidebarSplitPosition();
   let o = _$$R2({
     leftSidePanelWidth: s
   });
@@ -892,7 +892,7 @@ function eK({
     };
   }, [t]);
   let u = useCallback(() => {
-    _$$W('left', () => {});
+    setSideHandler('left', () => {});
   }, []);
   let p = useMemo(() => ({
     showNotificationSettings: !0,
@@ -1069,7 +1069,7 @@ function tS() {
   let c = useSelector(e => e.mirror.appModel.currentPage);
   let u = useDispatch();
   let p = () => {
-    u(XE());
+    u(hidePickerThunk());
   };
   let h = new Point(window.innerWidth - tw, o + 12);
   useEffect(() => {
@@ -1252,7 +1252,7 @@ class tk extends PureComponent {
       exportingJobIds: []
     };
     this.onCancel = () => {
-      this.props.dispatch(XE());
+      this.props.dispatch(hidePickerThunk());
     };
     this.autoRenameFrameAndFile = async e => {
       if (e.length === 0) return;
@@ -1338,7 +1338,7 @@ class tk extends PureComponent {
           exportingJobIds: []
         });
         Fullscreen.saveExportedItems();
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
         this.props.dispatch(_$$rg());
         handleAtomEvent({
           id: 'export_completed',
@@ -1561,7 +1561,7 @@ function tW({
   let c = useSelector(e => e.pickerShown);
   let u = useDispatch();
   function p() {
-    (Ty(c?.id ?? null) || kU(c?.id ?? null)) && u(XE());
+    (isSelectionPaintItem(c?.id ?? null) || isSelectionStyleItem(c?.id ?? null)) && u(hidePickerThunk());
   }
   let h = useMemo(() => ({
     type: VariableDataType.COLOR,
@@ -1997,15 +1997,15 @@ function ib({
   });
   let k = v4();
   let N = Ig();
-  let A = Ku();
+  let A = getColorFormat();
   let O = function () {
-    let e = Ku();
+    let e = getColorFormat();
     return useCallback(() => {
       let t = Object.keys(ColorFormatEnum).length / 2;
       let i = (e + 1) % (t - 1);
       let r = [ColorFormatEnum.CSS, ColorFormatEnum.UIColor];
       for (; r.includes(i);) i = (i + 1) % (t - 1);
-      UK().colorFormat.set(i);
+      EditorPreferencesApi().colorFormat.set(i);
     }, [e]);
   }();
   let L = tG({
@@ -3799,13 +3799,13 @@ let ns = class e extends PureComponent {
   getRulerUnitSubmenu() {
     let e = [{
       action: 'toggle-ruler-unit-pixels',
-      checked: UK().renderRulerUnitAsPixels.getCopy()
+      checked: EditorPreferencesApi().renderRulerUnitAsPixels.getCopy()
     }, {
       action: 'toggle-ruler-unit-inches',
-      checked: UK().renderRulerUnitAsInches.getCopy()
+      checked: EditorPreferencesApi().renderRulerUnitAsInches.getCopy()
     }, {
       action: 'toggle-ruler-unit-centimeters',
-      checked: UK().renderRulerUnitAsCentimeters.getCopy()
+      checked: EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy()
     }];
     return [{
       action: 'ruler-unit-menu',
@@ -4250,7 +4250,7 @@ function nl(e) {
   let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
-  let g = getObservableOrFallback(UK().spellCheckPreference);
+  let g = getObservableOrFallback(EditorPreferencesApi().spellCheckPreference);
   let _ = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     let i = t.length === 1 ? getSingletonSceneGraph().get(t[0]) : null;
@@ -4344,7 +4344,7 @@ function nc(e) {
   let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
-  let g = getObservableOrFallback(UK().spellCheckPreference);
+  let g = getObservableOrFallback(EditorPreferencesApi().spellCheckPreference);
   let _ = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     let i = t.length === 1 ? getSingletonSceneGraph().get(t[0]) : null;
@@ -8645,7 +8645,7 @@ class ow extends RecordingPureComponent {
       displayName: i,
       runPluginArgs: t
     });
-    this.props.dispatch(_$$PQ(r));
+    this.props.dispatch(recentlyUsedQuickCommands(r));
     this.props.updateFrecencyHistory(e, this.state.searchQuery);
     _$$s7({
       displayText: i,
@@ -8787,7 +8787,7 @@ function oj(e) {
   });
 }
 function oI(e) {
-  let t = getObservableOrFallback(UK().showQuickCommandRankDebug);
+  let t = getObservableOrFallback(EditorPreferencesApi().showQuickCommandRankDebug);
   return jsx(ok, {
     ...e,
     showQuickCommandRankDebug: t

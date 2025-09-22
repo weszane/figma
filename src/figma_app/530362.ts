@@ -23,7 +23,7 @@ import { TQ, Zl } from "../905/211621";
 import { P as _$$P } from "../905/347284";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
@@ -97,7 +97,7 @@ export function $$eE1({
     d && d !== e.name && (e.kind === uN.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(e.explicitDefID, d)) : permissionScopeHandler.user("edit-variant-prop-name", () => q1(e.name, d, r, s)));
   }, [e, d, r, s]);
   let L = useCallback(() => {
-    t && l(u1({
+    t && l(showPickerThunk({
       id: $$ef0,
       initialX: t.initialX,
       initialY: t.initialY,
@@ -121,7 +121,7 @@ export function $$eE1({
     togglePreferredValues
   } = xP(e);
   let U = useCallback(() => {
-    l(XE());
+    l(hidePickerThunk());
     l(vq());
   }, [l]);
   let B = new Point(t?.initialX, t?.initialY);

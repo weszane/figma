@@ -17,11 +17,11 @@ import { F_ } from "../905/748636";
 import { b as _$$b } from "../figma_app/47801";
 import { W as _$$W } from "../905/95038";
 import { renameFileOptimistic } from "../figma_app/78808";
-import { vg, Wk } from "../figma_app/91703";
+import { beginRenaming, stopRenaming } from "../figma_app/91703";
 import { NN } from "../905/466026";
-import { lu, b_, oE } from "../figma_app/840917";
+import { autosaveFileInfoAtom, renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { getDisplayNameAlt } from "../905/760074";
-import { hL } from "../905/697795";
+import { setEditorDocumentTitle } from "../905/697795";
 import { hx } from "../figma_app/290668";
 import { selectCurrentFile, selectOpenFile, useCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -66,14 +66,14 @@ class W extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.startRenaming = handleMouseEvent(this, "click", () => {
-      this.props.canRename && this.props.user && this.props.dispatch(vg());
+      this.props.canRename && this.props.user && this.props.dispatch(beginRenaming());
     });
     this.submitFileName = e => {
-      this.props.dispatch(Wk());
+      this.props.dispatch(stopRenaming());
       this.props.onRename(e);
     };
     this.cancelFileName = () => {
-      this.props.dispatch(Wk());
+      this.props.dispatch(stopRenaming());
     };
     this.nameRef = createRef();
   }
@@ -135,7 +135,7 @@ export function $$Y3(e) {
   let r = selectCurrentUser();
   let n = selectCurrentFile();
   let a = useSelector(e => e.isRenaming);
-  let o = useAtomWithSubscription(lu);
+  let o = useAtomWithSubscription(autosaveFileInfoAtom);
   let l = !!n && DF(n, r);
   let d = null == n && null != o ? {
     type: "new-autosave-file",
@@ -157,14 +157,14 @@ function $(e) {
   let t;
   let r;
   let n;
-  let s = getAtomMutate(b_);
+  let s = getAtomMutate(renameAutosaveFileMutation);
   let {
     renamableFile
   } = e;
   "open-file" === renamableFile.type ? (t = renamableFile.canRename, r = renamableFile.openFile?.name) : (t = !0, r = renamableFile.newAutosaveFile.name, n = renamableFile.newAutosaveFile.editorType);
   let d = "new-autosave-file" === renamableFile.type;
   useEffect(() => {
-    d && r && n && hL(r, mapFileTypeToEditorType(n));
+    d && r && n && setEditorDocumentTitle(r, mapFileTypeToEditorType(n));
   }, [d, r, n]);
   return jsx(W, {
     ...e,
@@ -174,7 +174,7 @@ function $(e) {
       "new-autosave-file" === renamableFile.type ? s({
         fileKey: renamableFile.newAutosaveFile.fileKey,
         name: t,
-        source: oE.EDITOR
+        source: OfflineFileType.EDITOR
       }) : renamableFile.openFile ? e.dispatch(renameFileOptimistic({
         file: renamableFile.openFile,
         name: t

@@ -23,7 +23,7 @@ import { R as _$$R } from "../7a72fc59/583347";
 import { Ku } from "../figma_app/755939";
 import { XH } from "../1250/322393";
 import { useCooperFrameSelectionInfo } from "../figma_app/334505";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
 import { KindEnum } from "../905/129884";
@@ -273,7 +273,7 @@ function Y({
   let _ = "";
   let m = 1;
   o = n.type;
-  [SocialMediaFormats.PRINT_US_LETTER, SocialMediaFormats.CARD_HORIZONTAL, SocialMediaFormats.CARD_VERTICAL, SocialMediaFormats.POSTER, SocialMediaFormats.NAME_TAG_LANDSCAPE, SocialMediaFormats.NAME_TAG_PORTRAIT].includes(o) && (UK().renderRulerUnitAsInches.getCopy() ? (_ = " in", m = 300, l && (u += " (inches)")) : UK().renderRulerUnitAsCentimeters.getCopy() && (_ = " cm", m = 300 / 2.54, l && (u += " (cm)")));
+  [SocialMediaFormats.PRINT_US_LETTER, SocialMediaFormats.CARD_HORIZONTAL, SocialMediaFormats.CARD_VERTICAL, SocialMediaFormats.POSTER, SocialMediaFormats.NAME_TAG_LANDSCAPE, SocialMediaFormats.NAME_TAG_PORTRAIT].includes(o) && (EditorPreferencesApi().renderRulerUnitAsInches.getCopy() ? (_ = " in", m = 300, l && (u += " (inches)")) : EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy() && (_ = " cm", m = 300 / 2.54, l && (u += " (cm)")));
   1 !== m && (a = (a / m).toFixed(2) + _, d = (d / m).toFixed(2) + _);
   return jsxs(ButtonPrimitive, {
     onClick: () => r(n.type),
@@ -303,7 +303,7 @@ function $() {
     })
   });
 }
-let H = e => UK().renderRulerUnitAsInches.getCopy() ? 300 * e : UK().renderRulerUnitAsCentimeters.getCopy() ? 300 * e / 2.54 : e;
+let H = e => EditorPreferencesApi().renderRulerUnitAsInches.getCopy() ? 300 * e : EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy() ? 300 * e / 2.54 : e;
 function Z() {
   let e = useDispatch();
   let [t, n] = lJ("width");
@@ -313,7 +313,7 @@ function Z() {
   let d = "number" == typeof t ? t : 0;
   let _ = "number" == typeof s ? s : 0;
   let m = 1;
-  UK().renderRulerUnitAsInches.getCopy() ? (m = 300, c = 1) : UK().renderRulerUnitAsCentimeters.getCopy() && (m = 300 / 2.54, c = 1);
+  EditorPreferencesApi().renderRulerUnitAsInches.getCopy() ? (m = 300, c = 1) : EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy() && (m = 300 / 2.54, c = 1);
   let g = 1 !== m ? d / m : d;
   let x = 1 !== m ? _ / m : _;
   1 !== m && (a /= m);

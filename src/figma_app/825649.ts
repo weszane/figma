@@ -20,7 +20,7 @@ import { hideDropdownAction } from "../905/929976";
 import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { U1, kj } from "../905/191601";
-import { vg } from "../figma_app/91703";
+import { beginRenaming } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { n6 } from "../905/234821";
@@ -483,7 +483,7 @@ export function $$eO1({
     displayText: tj ? getI18nString("fullscreen.filename_view.rename-branch") : getI18nString("fullscreen.filename_view.rename"),
     callback: () => {
       z(hideDropdownAction());
-      z(vg());
+      z(beginRenaming());
     }
   }]), ...ri(ez && !eC && tK, [{
     disabled: !tz,

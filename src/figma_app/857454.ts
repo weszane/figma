@@ -1,8 +1,8 @@
-import { jp } from "../figma_app/682945";
+import { recordStickyWidgetEvent } from "../figma_app/682945";
 export let $$n0;
 class a {
   onFrameDistributionTrackedEvent(e) {
-    jp(e);
+    recordStickyWidgetEvent(e);
   }
 }
 export function $$s1() {

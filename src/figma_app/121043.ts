@@ -39,11 +39,11 @@ import { n6 } from "../905/234821";
 import { formatI18nMessage } from "../905/482208";
 import { isWorkshopModeEnabled } from "../figma_app/789";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { ZG } from "../figma_app/840917";
+import { getAutosaveManagerInstance } from "../figma_app/840917";
 import { hx } from "../figma_app/290668";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
-import { d as _$$d } from "../905/758967";
+import { getCanvasViewState } from "../905/758967";
 import { isGoogleMeetIntegration } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
@@ -208,7 +208,7 @@ export function $$ew0(e) {
   });
 }
 export function $$eO4() {
-  return getObservableOrFallback(_$$d().showTimeSlicingEditRenderingDot) ? jsx("div", {
+  return getObservableOrFallback(getCanvasViewState().showTimeSlicingEditRenderingDot) ? jsx("div", {
     className: e1,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("time_sliced_edit_rendering.active"),
@@ -237,7 +237,7 @@ export function $$eR10() {
       }
       let t = e ? 6e3 : 1e4;
       let i = Date.now();
-      if (null != n && i - n > t || null != s && (i - Math.max(s, ZG()?.session()?.getLastCommitTime() ?? 0) > t || i - s > 3e4) || null != o && (i - Math.max(Multiplayer?.lastReceivedAckUnixtime() ?? 0, o) > t || i - o > 3e4)) {
+      if (null != n && i - n > t || null != s && (i - Math.max(s, getAutosaveManagerInstance()?.session()?.getLastCommitTime() ?? 0) > t || i - s > 3e4) || null != o && (i - Math.max(Multiplayer?.lastReceivedAckUnixtime() ?? 0, o) > t || i - o > 3e4)) {
         r(!0);
         return;
       }

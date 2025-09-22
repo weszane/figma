@@ -330,7 +330,7 @@ import { FEditorType } from '../figma_app/53721';
 import { getViewportInfo, scaleRect } from '../figma_app/62612';
 import { v as _$$v4 } from '../figma_app/79979';
 import { getObservableValue } from '../figma_app/84367';
-import { u1 as _$$u6, XE } from '../figma_app/91703';
+import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
 import { isNotNullish, isNullish } from '../figma_app/95419';
 import { dP as _$$dP2 } from '../figma_app/119475';
@@ -448,7 +448,7 @@ import { tG as _$$tG } from '../figma_app/723183';
 import { Ay as _$$Ay2, Tu } from '../figma_app/724968';
 import { E as _$$E4 } from '../figma_app/726115';
 import { lB as _$$lB, tB as _$$tB, EE } from '../figma_app/731583';
-import { dP as _$$dP, Ku as _$$Ku, lK as _$$lK, sT as _$$sT, UK } from '../figma_app/740163';
+import { getSidebarSplitPosition, getColorFormat, shouldRenderRulers, getNudgeAmounts, EditorPreferencesApi } from '../figma_app/740163';
 import { renameNode, replaceSelection, setPropertiesPanelTab } from '../figma_app/741237';
 import { Jo } from '../figma_app/755783';
 import { az as _$$az, ce as _$$ce, d2 as _$$d2, xB as _$$xB, Co, EC, Ef, Fs, Hb, hc, Ku, Lm, Lo, mF, Tw, U_, YA } from '../figma_app/755939';
@@ -477,7 +477,7 @@ import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { capitalize } from '../figma_app/930338';
 import { AV, Gb, Oe } from '../figma_app/933328';
 import { _Y as _$$_Y } from '../figma_app/936646';
-import { R as _$$R8 } from '../figma_app/941983';
+import { EditorUIState } from '../figma_app/941983';
 import { Vi } from '../figma_app/955650';
 import { _q, PA } from '../figma_app/957070';
 import { tZ as _$$tZ } from '../figma_app/960196';
@@ -4688,7 +4688,7 @@ function rM({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let d = useRef(new KD({
     min: 0
   }));
@@ -5060,7 +5060,7 @@ function iG({
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let r = createRef();
   return e ? jsx(_$$R4, {
     ref: r,
@@ -5302,7 +5302,7 @@ let oO = memo(({
     });
   }, [setSearchQueryPlaceholderFontFamily]);
   let en = useCallback(() => {
-    e(XE());
+    e(hidePickerThunk());
     e(_$$B3());
   }, [e]);
   let el = E.length === 0;
@@ -5364,7 +5364,7 @@ let oO = memo(({
       fileTeamId: U?.id,
       fileParentOrgId: G?.id
     });
-    n && e(XE());
+    n && e(hidePickerThunk());
   }, [R, l, J, d, S, ec, r, K, U, G, e]);
   useEffect(() => {
     let e = ei && V[ei?.id]?.family;
@@ -6007,7 +6007,7 @@ function al({
       } = TS({
         el: t.current
       });
-      u(_$$u6({
+      u(showPickerThunk({
         id: e,
         initialX: x + 4,
         initialY: y
@@ -6015,7 +6015,7 @@ function al({
     }
   }, [u]);
   let h = useCallback(() => {
-    u(XE());
+    u(hidePickerThunk());
   }, [u]);
   let g = useCallback((e, t) => {
     x && x.id === e ? h() : m(e, t);
@@ -7119,7 +7119,7 @@ function aV({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let c = useRef(new KD({
     min: 0
   }));
@@ -9589,7 +9589,7 @@ function dO({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   return jsxs(rT, {
     children: [jsx(_$$E2, {
       name: _$$_2.StrokeWeightSlider,
@@ -10896,7 +10896,7 @@ function uu({
 function ux({
   animationStatus: e
 }) {
-  let t = _$$dP();
+  let t = getSidebarSplitPosition();
   let n = t + _$$_4;
   let l = useRef(null);
   let r = U1();
@@ -13788,7 +13788,7 @@ function pI() {
   });
   let r = function () {
     let e = GV();
-    let t = _$$Ku();
+    let t = getColorFormat();
     let n = Um();
     let l = useSelector(e => e.library);
     let r = useSelector(e => e.mirror.sceneGraphSelection);
@@ -13828,7 +13828,7 @@ function pI() {
   let m = useRef(!0);
   return (useEffect(() => {
     m.current ? m.current = !1 : kB(p.current?.offsetWidth || 0);
-    l !== DesignWorkspace.COMMENT || UK().propertiesPanelSplitPosition.getCopy() !== 0 || u || UK().propertiesPanelSplitPosition.set(p.current?.offsetWidth || _$$R8.propertiesPanelSplitPosition);
+    l !== DesignWorkspace.COMMENT || EditorPreferencesApi().propertiesPanelSplitPosition.getCopy() !== 0 || u || EditorPreferencesApi().propertiesPanelSplitPosition.set(p.current?.offsetWidth || EditorUIState.propertiesPanelSplitPosition);
   }, [l, x, i, u]), u) ? jsxs(noop, {
     recordingKey: 'propertiesPanel',
     activeTab: l,
@@ -13868,7 +13868,7 @@ function pR({
   let i = validateGradientPaint(l);
   let a = useAppModelProperty('currentSelectedGradientStop');
   let d = getColorAtStop(r ?? i ?? s2, a);
-  let c = _$$Ku();
+  let c = getColorFormat();
   let {
     currentTool,
     dropdownShown
@@ -14024,7 +14024,7 @@ function pK({
         x,
         y
       } = _$$cn(t.current, n);
-      i(_$$u6({
+      i(showPickerThunk({
         id: e,
         initialX: x - 8,
         initialY: y
@@ -14032,7 +14032,7 @@ function pK({
     }
   }, [i]);
   let c = useCallback(() => {
-    i(XE());
+    i(hidePickerThunk());
   }, [i]);
   let u = useCallback((e, t, n) => {
     r && r.id === e ? c() : d(e, t, n);
@@ -14446,7 +14446,7 @@ function p8({
   useEffect(() => (kB(240 + parsePxNumber(p6)), () => {
     kB(0);
   }), []);
-  let i = _$$lK();
+  let i = shouldRenderRulers();
   return jsx(_$$bL, {
     onTransform: r,
     onClose: ({

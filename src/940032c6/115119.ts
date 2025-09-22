@@ -515,7 +515,7 @@ import { renameFileOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { $5 } from '../figma_app/84580';
 import { o0 as _$$o6, u3 as _$$u6, Kd } from '../figma_app/85384';
-import { bS as _$$bS, u1 as _$$u7, FP, Uv, XE } from '../figma_app/91703';
+import { showStylePicker, showPickerThunk, setLeftPanelTab, hideStylePicker, hidePickerThunk } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
 import { isNotNullish, isNullish } from '../figma_app/95419';
 import { hE as _$$hE2, sO as _$$sO } from '../figma_app/97020';
@@ -734,7 +734,7 @@ import { iE as _$$iE, r as _$$r8, Wv as _$$Wv } from '../figma_app/711157';
 import { y0 as _$$y0 } from '../figma_app/718307';
 import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useOnSelectionChange, useAppModelProperty, useAppModelPropsShallow, useSceneGraphSelection, useStableSelectedNode } from '../figma_app/722362';
 import { useCurrentOrgAdminInfo } from '../figma_app/740025';
-import { sT as _$$sT, UK as _$$UK, EU, Ku, RU } from '../figma_app/740163';
+import { getNudgeAmounts, EditorPreferencesApi, getSmallNudgeAmount, getColorFormat, getBigNudgeAmount } from '../figma_app/740163';
 import { addToSelection, getPropertiesPanelTab, normalizeTrackingEnum, removeFromSelection, renameNode, replaceSelection, setPropertiesPanelTab, transferSelection, updateHoveredNode } from '../figma_app/741237';
 import { s as _$$s9 } from '../figma_app/749682';
 import { wo as _$$wo } from '../figma_app/753501';
@@ -14496,7 +14496,7 @@ function mx({
   let j = `image_detail_modal-${t.id}`;
   let k = _$$kG(j);
   let w = () => {
-    v(XE());
+    v(hidePickerThunk());
   };
   return jsxs(Fragment, {
     children: [jsx('div', {
@@ -14519,7 +14519,7 @@ function mx({
               x,
               y
             } = _$$cn(y.current, 240).add(mo);
-            v(_$$u7({
+            v(showPickerThunk({
               id: j,
               initialX: x,
               initialY: y
@@ -18124,7 +18124,7 @@ function gR({
   let j = !!useDeepEqualSceneValue((e, t) => e.get(t)?.isResponsiveSetOrWebpage ?? '', t);
   let k = useDeepEqualSceneValue((e, t) => e.get(t)?.editInfo?.lastEditedAt ?? '-', t);
   let S = useSelector(e => e.mirror.sceneGraphSelection);
-  let C = getObservableOrFallback(_$$UK().showGuids);
+  let C = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let T = _$$OG({
     abbreviatedStateName: null,
     guid: t,
@@ -21665,7 +21665,7 @@ let bi = () => {
   let n = trackFileEventWithStore();
   return {
     onStartFromScratch: () => {
-      i(FP({
+      i(setLeftPanelTab({
         tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
@@ -21899,7 +21899,7 @@ function bf() {
       'aria-label': getI18nString('common.close'),
       'onClick': () => {
         t('sites_template_picker_dismissed');
-        n(FP({
+        n(setLeftPanelTab({
           tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
@@ -22013,7 +22013,7 @@ function bS({
       'aria-label': getI18nString('common.close'),
       'onClick': () => {
         n('sites_template_picker_dismissed');
-        c(FP({
+        c(setLeftPanelTab({
           tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
@@ -22136,7 +22136,7 @@ let bE = ({
               resourceId: e.id
             });
             n(!1);
-            i(FP({
+            i(setLeftPanelTab({
               tab: UserInterfaceElements.LAYERS,
               persist: !1
             }));
@@ -22175,7 +22175,7 @@ let bE = ({
             resourceId: e.id
           });
           n(!1);
-          i(FP({
+          i(setLeftPanelTab({
             tab: UserInterfaceElements.LAYERS,
             persist: !1
           }));
@@ -22214,7 +22214,7 @@ function bA({
     'className': 'sites_template_modal--templateModal--a3YSn',
     'size': 900,
     'onHide': () => {
-      n(FP({
+      n(setLeftPanelTab({
         tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
@@ -22467,7 +22467,7 @@ function ya({
   let f = useContext(_$$lk);
   let _ = h || g;
   let y = useCallback((t, i, l) => {
-    _ && o === t ? n(Uv()) : e && n(_$$bS({
+    _ && o === t ? n(hideStylePicker()) : e && n(showStylePicker({
       id: OS(m),
       initialX: e.left - N2,
       initialY: e.top,
@@ -23186,7 +23186,7 @@ function ve({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let m = [];
   m.push(y9.map(e => jsx(vt, {
     value: e,
@@ -25957,7 +25957,7 @@ function wl({
   setDelay: t,
   recordingKey: i
 }) {
-  let n = EU();
+  let n = getSmallNudgeAmount();
   let a = useDispatch();
   return jsx(Fragment, {
     children: isValidValue(e) && e != null && t != null && jsx(k5, {
@@ -25985,7 +25985,7 @@ function wa({
   recordingKey: a,
   setEasingFunction: r
 }) {
-  let o = EU();
+  let o = getSmallNudgeAmount();
   let d = useDispatch();
   let c = isValidValue(e) ? wr(e) : e;
   let p = wd(e);
@@ -27178,8 +27178,8 @@ let Sy = e => {
 };
 function Sv(e) {
   let t = useDispatch();
-  let i = EU();
-  let n = RU();
+  let i = getSmallNudgeAmount();
+  let n = getBigNudgeAmount();
   let [r, o] = Sj();
   let [d, c] = Sk();
   let [p, x] = Sw();
@@ -27349,8 +27349,8 @@ function SN(e) {
   let [o, d] = SR();
   let [c, p] = SL();
   let [x, m] = useState(void 0);
-  let h = EU();
-  let g = RU();
+  let h = getSmallNudgeAmount();
+  let g = getBigNudgeAmount();
   let f = [{
     label: getI18nString('sites.marquee.very_slow'),
     value: 25
@@ -30758,7 +30758,7 @@ function TJ({
   });
 }
 let TZ = memo(() => {
-  let e = Ku();
+  let e = getColorFormat();
   let t = Um();
   let i = Xo();
   let n = GV();

@@ -7,7 +7,7 @@ import { hW, vn, _p } from "../figma_app/814196";
 import { Point } from "../905/736624";
 import { FocusCheckbox, createLabel } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Z1 } from "../figma_app/91703";
+import { hideOpenDesktopAppModal } from "../figma_app/91703";
 import { Yk } from "../figma_app/644079";
 import { VisibilityOption } from "../figma_app/175992";
 import { Ao } from "../905/748636";
@@ -26,11 +26,11 @@ export class $$b0 extends PureComponent {
   constructor(e) {
     super(e);
     this.onClose = () => {
-      this.props.dispatch(Z1());
+      this.props.dispatch(hideOpenDesktopAppModal());
       hW(VisibilityOption.NEVER);
     };
     this.onClickOpenInApp = () => {
-      this.props.dispatch(Z1());
+      this.props.dispatch(hideOpenDesktopAppModal());
       hW(this.state.alwaysChecked ? VisibilityOption.ALWAYS : VisibilityOption.NEVER);
       Sr(location.href, B3.OPEN_IN_DESKTOP_MODAL);
     };

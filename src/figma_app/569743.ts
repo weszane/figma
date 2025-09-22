@@ -7,7 +7,7 @@ import { _ as _$$_ } from "../figma_app/658134";
 import { Gr } from "../figma_app/478006";
 import { isAssetViewActive } from "../figma_app/639711";
 import { Yk, uo } from "../figma_app/644079";
-import { dP } from "../figma_app/740163";
+import { getSidebarSplitPosition } from "../figma_app/740163";
 import { d as _$$d } from "../figma_app/550089";
 import { Q } from "../905/249555";
 import { E3, Oy } from "../figma_app/143628";
@@ -31,7 +31,7 @@ export function $$E0({
   let a = Yk();
   let o = useAtomWithSubscription(Gr);
   let l = uo();
-  let u = dP() + _$$_;
+  let u = getSidebarSplitPosition() + _$$_;
   let [h, m] = useState(null);
   l && t && l().then(e => {
     e !== h && m(e);

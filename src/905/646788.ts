@@ -3,7 +3,7 @@ import { useCallback, useState, memo, useEffect, useMemo, useRef, PureComponent,
 import { useSelector, useDispatch, connect } from "react-redux";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
-import { M3 } from "../figma_app/91703";
+import { fileSelectedShareModalTab } from "../figma_app/91703";
 import { DeepLinkType } from "../905/15667";
 import { TrackingProvider, TrackedAnchor } from "../figma_app/831799";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
@@ -3579,7 +3579,7 @@ function re({
     source: "community-publish-modal",
     onSubmit: a,
     onCancel: () => {
-      i(M3({
+      i(fileSelectedShareModalTab({
         view: ShareAction.INVITE
       }));
       i(popModalStack());
@@ -6375,7 +6375,7 @@ function sp({
       }, [Sprig, i]);
     }(e);
     return useCallback(() => {
-      t(M3({
+      t(fileSelectedShareModalTab({
         view: ShareAction.INVITE
       }));
       t(hideModal());
@@ -6401,7 +6401,7 @@ function sp({
   }(rolesByUserId);
   mK(file.key, file.mainFileLinkExpirationConfig);
   useEffect(() => {
-    let e = () => W(M3({
+    let e = () => W(fileSelectedShareModalTab({
       view: ShareAction.INVITE
     }));
     e();

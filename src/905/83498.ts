@@ -1,29 +1,48 @@
-export function $$n0(e) {
-  let t = e.type;
-  switch (t) {
-    case "NONE":
-      throw Error("Internal Figma error: Unknown node type for node in getPublicNodeType");
-    case "ROUNDED_RECTANGLE":
-      return "RECTANGLE";
-    case "REGULAR_POLYGON":
-      return "POLYGON";
-    case "SYMBOL":
-      return "COMPONENT";
-    case "FRAME":
-      if (e.isStateGroup) return "COMPONENT_SET";
-      if (e.resizeToFit) return "GROUP";
-      break;
-    case "WIDGET":
-      if (e.isLinkPreview) return "LINK_UNFURL";
-      if (e.isEmbed) return "EMBED";
-      break;
-    case "CANVAS":
-      return "PAGE";
-    case "TRANSFORM":
-      return "TRANSFORM_GROUP";
-    case "RESPONSIVE_SET":
-      return "WEBPAGE";
+/**
+ * Maps internal Figma node types to their public equivalents.
+ * Throws an error for unknown node types.
+ * @param node - The node object containing type and optional properties.
+ * @returns The public node type as a string.
+ * @original function $$n0
+ */
+export function getPublicNodeType(node: {
+  type: string
+  isStateGroup?: boolean
+  resizeToFit?: boolean
+  isLinkPreview?: boolean
+  isEmbed?: boolean
+}): string {
+  switch (node.type) {
+    case 'NONE':
+      throw new Error('Internal Figma error: Unknown node type for node in getPublicNodeType')
+    case 'ROUNDED_RECTANGLE':
+      return 'RECTANGLE'
+    case 'REGULAR_POLYGON':
+      return 'POLYGON'
+    case 'SYMBOL':
+      return 'COMPONENT'
+    case 'FRAME':
+      if (node.isStateGroup)
+        return 'COMPONENT_SET'
+      if (node.resizeToFit)
+        return 'GROUP'
+      break
+    case 'WIDGET':
+      if (node.isLinkPreview)
+        return 'LINK_UNFURL'
+      if (node.isEmbed)
+        return 'EMBED'
+      break
+    case 'CANVAS':
+      return 'PAGE'
+    case 'TRANSFORM':
+      return 'TRANSFORM_GROUP'
+    case 'RESPONSIVE_SET':
+      return 'WEBPAGE'
+    default:
+      return node.type
   }
-  return t;
 }
-export const w = $$n0;
+
+/** Exported alias for getPublicNodeType (original: w) */
+export const w = getPublicNodeType

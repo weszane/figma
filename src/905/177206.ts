@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { mergeNonNull } from "../figma_app/493477";
 import { trackEventAnalytics } from "../905/449184";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { R } from "../905/987929";
 let l = /[0-9]+\,[0-9]+/g;
 let d = {
@@ -31,7 +31,7 @@ export function $$u0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT(i, r);
+  } = getNudgeAmounts(i, r);
   return useMemo(() => new c({
     min: e,
     max: t,

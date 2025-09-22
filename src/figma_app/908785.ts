@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, getCommonFromArray, isValidValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { om, ui } from "../figma_app/395097";
@@ -24,7 +24,7 @@ import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { useDispatch } from "react-redux";
 import { AppStateTsApi, DrawingElementType } from "../figma_app/763686";
-import { XE, u1, Uv } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { Xo } from "../figma_app/482495";
 import { getObservableValue } from "../figma_app/84367";
@@ -152,15 +152,15 @@ function X(e) {
     let t = useDispatch();
     let r = U();
     return useCallback(() => {
-      if (r) t(XE());else {
+      if (r) t(hidePickerThunk());else {
         if (!e || !e.current) return;
         let r = cn(e.current);
-        t(u1({
+        t(showPickerThunk({
           id: j,
           initialX: r.x,
           initialY: r.y
         }));
-        t(Uv());
+        t(hideStylePicker());
         t(sw());
       }
     }, [t, e, r]);
@@ -219,7 +219,7 @@ export function $$J0(e) {
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let W = t === om.MIXED ? 1 : 0;
   let K = eN({
     min: W,

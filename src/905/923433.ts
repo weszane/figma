@@ -14,7 +14,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
-import { RU, EU } from "../figma_app/740163";
+import { getBigNudgeAmount, getSmallNudgeAmount } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, t8 } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -83,8 +83,8 @@ export function $$G1(e) {
 export function $$z2(e) {
   let t = useDispatch();
   let i = e.contextType ?? $.CELL;
-  let u = RU();
-  let p = EU();
+  let u = getBigNudgeAmount();
+  let p = getSmallNudgeAmount();
   let m = t => (e.onChange({
     type: VariableDataType.STRING,
     resolvedType: VariableResolvedDataType.STRING,

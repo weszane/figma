@@ -1,22 +1,22 @@
-import { z } from "../vendor/835909";
-import { k } from "../figma_app/970433";
-let a = k({
-  name: "view_tool",
-  trackingName: "view_tool",
+import { z } from 'zod'
+
+let viewTool = ({
+  name: 'view_tool',
+  trackingName: 'view_tool',
   parameters: z.object({
-    path: z.string().describe("Absolute path to file or directory, relative to the root at /, e.g. `/app.tsx` or `/`.")
-  })
-});
-let s = k({
-  name: "multi_edit_tool",
-  trackingName: "multi_edit_tool",
+    path: z.string().describe('Absolute path to file or directory, relative to the root at /, e.g. `/app.tsx` or `/`.'),
+  }),
+})
+let multi_edit_tool = ({
+  name: 'multi_edit_tool',
+  trackingName: 'multi_edit_tool',
   parameters: z.object({
-    diffs: z.string().describe("XML-formatted diffs to implemented the desired edits.".trim())
-  })
-});
-let o = k({
-  name: "diffTool",
-  trackingName: "diffTool",
+    diffs: z.string().describe('XML-formatted diffs to implemented the desired edits.'.trim()),
+  }),
+})
+let diffTool = ({
+  name: 'diffTool',
+  trackingName: 'diffTool',
   parameters: z.object({
     diffs: z.string().describe(`Generate XML-formatted diffs to implement requested code changes.
 
@@ -50,62 +50,62 @@ Example of correct format:
 7. Don't forget any visual elements that already exist.
 
 8. Return ONLY the XML diff tags such as <ORIGINAL_1>...</ORIGINAL_1><UPDATED_1>...</UPDATED_1>, nothing else.
-    `.trim())
-  })
-});
-let l = k({
-  name: "edit_tool",
-  trackingName: "edit_tool",
+    `.trim()),
+  }),
+})
+let edit_tool = ({
+  name: 'edit_tool',
+  trackingName: 'edit_tool',
   parameters: z.object({
-    path: z.string().describe("Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`."),
-    old_str: z.string().describe("Required parameter containing the string in `path` to replace."),
-    new_str: z.string().describe("Required parameter containing the new string.")
-  })
-});
-let d = k({
-  name: "supabase_connect",
-  trackingName: "supabase_connect",
-  parameters: z.object({})
-});
-let c = k({
-  name: "create_supabase_secret",
-  trackingName: "create_supabase_secret",
+    path: z.string().describe('Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`.'),
+    old_str: z.string().describe('Required parameter containing the string in `path` to replace.'),
+    new_str: z.string().describe('Required parameter containing the new string.'),
+  }),
+})
+let supabase_connect = ({
+  name: 'supabase_connect',
+  trackingName: 'supabase_connect',
+  parameters: z.object({}),
+})
+let create_supabase_secret = ({
+  name: 'create_supabase_secret',
+  trackingName: 'create_supabase_secret',
   parameters: z.object({
-    secretName: z.string().describe("The name of the secret to create.")
-  })
-});
-let $$u4 = k({
-  name: "str_replace_editor",
-  trackingName: "str_replace_editor",
+    secretName: z.string().describe('The name of the secret to create.'),
+  }),
+})
+export let str_replace_editor = ({
+  name: 'str_replace_editor',
+  trackingName: 'str_replace_editor',
   parameters: z.object({
-    command: z.enum(["view", "create", "str_replace"]).describe("The commands to run. Allowed options are: `view`, `create`, `str_replace`."),
-    path: z.string().describe("Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`."),
-    file_text: z.string().optional().describe("Required parameter of `create` command, with the content of the file to be created."),
-    old_str: z.string().optional().describe("Required parameter of `str_replace` command containing the string in `path` to replace."),
-    new_str: z.string().optional().describe("Optional parameter of `str_replace` command containing the new string (if not given, no string will be added). Required parameter of `insert` command containing the string to insert."),
-    view_range: z.array(z.number()).optional().describe("Optional parameter of `view` command when `path` points to a file. If none is given, the full file is shown. If provided, the file will be shown in the indicated line number range, e.g. [11, 12] will show lines 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all lines from `start_line` to the end of the file.")
-  })
-});
-let p = k({
-  name: "unsplash_tool",
-  trackingName: "unsplash_tool",
+    command: z.enum(['view', 'create', 'str_replace']).describe('The commands to run. Allowed options are: `view`, `create`, `str_replace`.'),
+    path: z.string().describe('Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`.'),
+    file_text: z.string().optional().describe('Required parameter of `create` command, with the content of the file to be created.'),
+    old_str: z.string().optional().describe('Required parameter of `str_replace` command containing the string in `path` to replace.'),
+    new_str: z.string().optional().describe('Optional parameter of `str_replace` command containing the new string (if not given, no string will be added). Required parameter of `insert` command containing the string to insert.'),
+    view_range: z.array(z.number()).optional().describe('Optional parameter of `view` command when `path` points to a file. If none is given, the full file is shown. If provided, the file will be shown in the indicated line number range, e.g. [11, 12] will show lines 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all lines from `start_line` to the end of the file.'),
+  }),
+})
+let unsplash_tool = ({
+  name: 'unsplash_tool',
+  trackingName: 'unsplash_tool',
   parameters: z.object({
-    query: z.string().describe("The search query for the image you want to find.")
-  })
-});
-let $$_3 = k({
-  name: "write_tool",
-  trackingName: "write_tool",
+    query: z.string().describe('The search query for the image you want to find.'),
+  }),
+})
+export let write_tool = ({
+  name: 'write_tool',
+  trackingName: 'write_tool',
   parameters: z.object({
-    path: z.string().describe("Absolute path to the file to be created, relative to the root at /, e.g. `/App.tsx`."),
-    file_text: z.string().describe("The content of the file to be created.")
-  })
-});
-let $$h2 = k({
-  name: "fast_apply_tool",
-  trackingName: "fast_apply_tool",
+    path: z.string().describe('Absolute path to the file to be created, relative to the root at /, e.g. `/App.tsx`.'),
+    file_text: z.string().describe('The content of the file to be created.'),
+  }),
+})
+export let fast_apply_tool = ({
+  name: 'fast_apply_tool',
+  trackingName: 'fast_apply_tool',
   parameters: z.object({
-    path: z.string().describe("Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`."),
+    path: z.string().describe('Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`.'),
     change_str: z.string().describe(`Your lazy diff of the change to apply to the file. Heres a reminder of the format, it can include multiple edits like so:
 
     // ... existing code ...
@@ -120,29 +120,29 @@ let $$h2 = k({
 
 It's crucial that the code is close to a true diff. Rewriting large amounts of code that already exists is unaceptable.
 The edit will be intelligently applied by the tool so it only needs a couple lines of context around the edit. You must use // ... existing code ... to represent the code that already exists.
-The tool is smart so you can be confident that it will figure out how to correctly apply your lazy diff.`)
-  })
-});
-let m = k({
-  name: "get_guidelines_outline",
-  trackingName: "get_guidelines_outline",
-  parameters: z.object({})
-});
-let g = k({
-  name: "get_guidelines_section",
-  trackingName: "get_guidelines_section",
+The tool is smart so you can be confident that it will figure out how to correctly apply your lazy diff.`),
+  }),
+})
+let get_guidelines_outline = ({
+  name: 'get_guidelines_outline',
+  trackingName: 'get_guidelines_outline',
+  parameters: z.object({}),
+})
+let get_guidelines_section = ({
+  name: 'get_guidelines_section',
+  trackingName: 'get_guidelines_section',
   parameters: z.object({
     ids: z.array(z.string()).describe('Array of section IDs to retrieve (e.g., ["components-button", "design-tokens"])'),
-    includeChildren: z.boolean().optional().describe("Whether to include child sections. If true, includes all child sections until the next header of the same or higher level. If false, stops at the next header of any level.")
-  })
-});
-let f = k({
-  name: "semantic_merge_editor",
-  trackingName: "semantic_merge_editor",
+    includeChildren: z.boolean().optional().describe('Whether to include child sections. If true, includes all child sections until the next header of the same or higher level. If false, stops at the next header of any level.'),
+  }),
+})
+let semantic_merge_editor = ({
+  name: 'semantic_merge_editor',
+  trackingName: 'semantic_merge_editor',
   parameters: z.object({
-    command: z.enum(["view", "create", "edit"]).describe("The commands to run. Allowed options are: `view`, `create`, `edit`."),
-    path: z.string().describe("Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`."),
-    file_text: z.string().optional().describe("Required parameter of `create` command, with the content of the file to be created."),
+    command: z.enum(['view', 'create', 'edit']).describe('The commands to run. Allowed options are: `view`, `create`, `edit`.'),
+    path: z.string().describe('Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`.'),
+    file_text: z.string().optional().describe('Required parameter of `create` command, with the content of the file to be created.'),
     semantic_edit_snippet: z.string().optional().describe(`Required parameter of \`edit\` command. The 'lazified' edit to an existing file.
 Here are the rules for formatting the edit snippet, follow them closely:
 
@@ -155,12 +155,12 @@ Here are the rules for formatting the edit snippet, follow them closely:
 - You must use the comment format applicable to the specific code provided to express these truncations.
 - Preserve the indentation and code structure of exactly how you believe the final code will look (do not output lines that will not be in the final code after they are merged).
 - Be as length efficient as possible without omitting key context.`),
-    view_range: z.array(z.number()).optional().describe("Optional parameter of `view` command when `path` points to a file. If none is given, the full file is shown. If provided, the file will be shown in the indicated line number range, e.g. [11, 12] will show lines 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all lines from `start_line` to the end of the file.")
-  })
-});
-let E = k({
-  name: "rewriteTool",
-  trackingName: "rewriteTool",
+    view_range: z.array(z.number()).optional().describe('Optional parameter of `view` command when `path` points to a file. If none is given, the full file is shown. If provided, the file will be shown in the indicated line number range, e.g. [11, 12] will show lines 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]` shows all lines from `start_line` to the end of the file.'),
+  }),
+})
+let updateCodeRewriteTool = ({
+  name: 'rewriteTool',
+  trackingName: 'rewriteTool',
   parameters: z.object({
     updated_code: z.string().describe(`Update the current code to implements all requested interactivity and output the updated code to <UPDATED_CODE_FILE> tags.
 
@@ -174,23 +174,23 @@ let E = k({
           6. Function as a complete standalone component that will be executed as-is -- no placeholders, comments like "TODO" or "Code here", or missing functionality are not allowed.
         </UPDATED_CODE_FILE>
         Note: do not forget to include the <UPDATED_CODE_FILE> tags in your response.
-  `.trim())
-  })
-});
-let y = k({
-  name: "rewriteTool",
-  trackingName: "rewriteTool",
+  `.trim()),
+  }),
+})
+let guidanceRewriteTool = ({
+  name: 'rewriteTool',
+  trackingName: 'rewriteTool',
   parameters: z.object({
     guidance: z.string().describe(`This guidance provide a structured, step-by-step approach for rewriting the code block. Include:
             - Identify the specific changes needed in the code.
             - Describe how to implement these changes.
             - Highlight any dependencies or imports that need to be added.
-    `.trim())
-  })
-});
-let b = k({
-  name: "zeroToOneTool",
-  trackingName: "zeroToOneTool",
+    `.trim()),
+  }),
+})
+let generateZeroToOneTool = ({
+  name: 'zeroToOneTool',
+  trackingName: 'zeroToOneTool',
   parameters: z.object({
     generated_code: z.string().describe(`Generated code with user required design and interactivity in <GENERATED_CODE_FILE> tags.
         <GENERATED_CODE_FILE>
@@ -204,12 +204,12 @@ let b = k({
             - Make your design and animation tasteful with appropriate motion curves
         </GENERATED_CODE_FILE>
         Note: do not forget to include the <GENERATED_CODE_FILE> tags in your response.
-      `.trim())
-  })
-});
-let T = k({
-  name: "zeroToOneTool",
-  trackingName: "zeroToOneTool",
+      `.trim()),
+  }),
+})
+let guidanceZeroToOneTool = ({
+  name: 'zeroToOneTool',
+  trackingName: 'zeroToOneTool',
   parameters: z.object({
     guidance: z.string().describe(`This guidance parameter must contain two essential components:
 
@@ -239,45 +239,45 @@ Example format:
 // ... styling approach ...
 
 
-`.trim())
-  })
-});
-let I = k({
-  name: "docsTool",
-  trackingName: "docsTool",
+`.trim()),
+  }),
+})
+let docsTool = ({
+  name: 'docsTool',
+  trackingName: 'docsTool',
   parameters: z.object({
     library: z.string().describe('The name of the library to get documentation for (e.g. "fictional-library")'),
-    path: z.string().describe('The path to the documentation to retrieve (e.g. "interactivity.md")')
-  })
-});
-let S = k({
-  name: "deprecatedTool",
-  trackingName: "deprecatedTool",
-  parameters: z.object({})
-});
-function v(e) {
+    path: z.string().describe('The path to the documentation to retrieve (e.g. "interactivity.md")'),
+  }),
+})
+let deprecatedTool = ({
+  name: 'deprecatedTool',
+  trackingName: 'deprecatedTool',
+  parameters: z.object({}),
+})
+function createToolCallSchema(e) {
   return z.object({
-    type: z.literal("toolCall"),
+    type: z.literal('toolCall'),
     toolCallId: z.string(),
     toolName: z.literal(e.name),
-    partialArgs: e.parameters.partial()
-  });
+    partialArgs: e.parameters.partial(),
+  })
 }
-export let $$A5 = z.union([v(a), v(s), v(l), v(d), v(c), v($$u4), v(p), v($$_3), v($$h2), v(f), v(m), v(g), v(o), v(E), v(y), v(b), v(T), v(I), v(S)]);
-function x({
-  name: e
+export let ToolCallUnionSchema = z.union([createToolCallSchema(viewTool), createToolCallSchema(multi_edit_tool), createToolCallSchema(edit_tool), createToolCallSchema(supabase_connect), createToolCallSchema(create_supabase_secret), createToolCallSchema(str_replace_editor), createToolCallSchema(unsplash_tool), createToolCallSchema(write_tool), createToolCallSchema(fast_apply_tool), createToolCallSchema(semantic_merge_editor), createToolCallSchema(get_guidelines_outline), createToolCallSchema(get_guidelines_section), createToolCallSchema(diffTool), createToolCallSchema(updateCodeRewriteTool), createToolCallSchema(guidanceRewriteTool), createToolCallSchema(generateZeroToOneTool), createToolCallSchema(guidanceZeroToOneTool), createToolCallSchema(docsTool), createToolCallSchema(deprecatedTool)])
+function createToolCallStartSchema({
+  name,
 }) {
   return z.object({
-    type: z.literal("toolCallStart"),
+    type: z.literal('toolCallStart'),
     toolCallId: z.string(),
-    toolName: z.literal(e)
-  });
+    toolName: z.literal(name),
+  })
 }
-let $$N1 = z.union([x(a), x(s), x(l), x(d), x(c), x($$u4), x(p), x($$_3), x($$h2), x(f), x(m), x(g), x(o), x(E), x(y), x(b), x(T), x(I), x(S)]);
-let $$C0 = [d.name, c.name];
-export const AD = $$C0;
-export const FJ = $$N1;
-export const OT = $$h2;
-export const b5 = $$_3;
-export const kQ = $$u4;
-export const rU = $$A5; 
+export let creativeToolCallStartSchemaUnion = z.union([createToolCallStartSchema(viewTool), createToolCallStartSchema(multi_edit_tool), createToolCallStartSchema(edit_tool), createToolCallStartSchema(supabase_connect), createToolCallStartSchema(create_supabase_secret), createToolCallStartSchema(str_replace_editor), createToolCallStartSchema(unsplash_tool), createToolCallStartSchema(write_tool), createToolCallStartSchema(fast_apply_tool), createToolCallStartSchema(semantic_merge_editor), createToolCallStartSchema(get_guidelines_outline), createToolCallStartSchema(get_guidelines_section), createToolCallStartSchema(diffTool), createToolCallStartSchema(updateCodeRewriteTool), createToolCallStartSchema(guidanceRewriteTool), createToolCallStartSchema(generateZeroToOneTool), createToolCallStartSchema(guidanceZeroToOneTool), createToolCallStartSchema(docsTool), createToolCallStartSchema(deprecatedTool)])
+export let supabaseNames = [supabase_connect.name, create_supabase_secret.name]
+export const AD = supabaseNames
+export const FJ = creativeToolCallStartSchemaUnion
+export const OT = fast_apply_tool
+export const b5 = write_tool
+export const kQ = str_replace_editor
+export const rU = ToolCallUnionSchema

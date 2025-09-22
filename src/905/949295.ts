@@ -1,18 +1,37 @@
-import { createNoOpValidator } from "../figma_app/181241";
-export let $$r0 = new class {
-  constructor() {
-    this.SongsSchemaValidator = createNoOpValidator();
-    this.ActiveSchemaValidator = createNoOpValidator();
+import { createNoOpValidator } from '../figma_app/181241'
+
+/**
+ * Handles API requests related to songs and active songs.
+ * Original class: anonymous class assigned to $$r0
+ */
+export class SongsApiHandler {
+  /** Validator for songs schema (original: SongsSchemaValidator) */
+  private songsSchemaValidator = createNoOpValidator()
+  /** Validator for active song schema (original: ActiveSchemaValidator) */
+  private activeSchemaValidator = createNoOpValidator()
+
+  /**
+   * Fetches the list of songs.
+   * Original method: getSongs
+   */
+  getSongs<T = any>() {
+    return this.songsSchemaValidator.validate<T>(async ({ xr }) => {
+      return await xr.get('/api/songs')
+    })
   }
-  getSongs() {
-    return this.SongsSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/songs"));
+
+  /**
+   * Fetches the active song by songID.
+   * Original method: getActive
+   * @param params - Object containing songID
+   */
+  getActive(params: { songID: string }) {
+    return this.activeSchemaValidator.validate(async ({ xr }) => {
+      return await xr.get(`/api/songs/active/${params.songID}`)
+    })
   }
-  getActive(e) {
-    return this.ActiveSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/songs/active/${e.songID}`));
-  }
-}();
-export const N = $$r0;
+}
+
+// Export refactored instance and variable names
+export const songAPIHandler = new SongsApiHandler() // original: $$r0
+export const N = songAPIHandler

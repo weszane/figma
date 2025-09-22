@@ -24,7 +24,7 @@ import { $3 } from '../figma_app/487970';
 import { buildSearchUrl, defaultSearchOptions } from '../figma_app/640564';
 import { Lj } from '../figma_app/835219';
 import { generateSessionId, searchEndSession, searchIncrementQueryCount, searchSessionSeeMoreClick, searchStartSession } from '../figma_app/925970';
-import { PF } from '../figma_app/930386';
+import { NavigationType } from '../figma_app/930386';
 import { I$ } from '../figma_app/940844';
 import { AG } from '../figma_app/999312';
 let c = l;
@@ -414,7 +414,7 @@ export function $$K0(e) {
       setSelectedIdx({
         idx: -1
       });
-      let c = context === PF.LANDING ? 'searchPreviewLanding' : 'searchPreview';
+      let c = context === NavigationType.LANDING ? 'searchPreviewLanding' : 'searchPreview';
       trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query,
         mixed: n.length,
@@ -456,7 +456,7 @@ export function $$K0(e) {
   });
   return jsxs('div', {
     'className': c()('search_dropdown--searchDropdown--HqMrn', {
-      'search_dropdown--searchDropdownLanding--HJ002': context === PF.LANDING,
+      'search_dropdown--searchDropdownLanding--HJ002': context === NavigationType.LANDING,
       'search_dropdown--categoryNavDropdownResponsiveWidth--HzoIl': width === 'small-responsive'
     }),
     'style': width !== 'small-responsive' ? {

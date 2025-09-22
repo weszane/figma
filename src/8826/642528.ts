@@ -29,7 +29,7 @@ import { W as _$$W } from '../figma_app/462192';
 import { iZ } from '../figma_app/473914';
 import { mapRange } from '../figma_app/492908';
 import { M as _$$M } from '../figma_app/634148';
-import { sT, UK } from '../figma_app/740163';
+import { getNudgeAmounts, EditorPreferencesApi } from '../figma_app/740163';
 import { Axis, GridDirection, GridLayoutApi, LayoutSizingType, SceneGraphHelpers, SpacingConstants, VariableResolvedDataType } from '../figma_app/763686';
 import { fn } from '../figma_app/811257';
 import { sA } from '../figma_app/841644';
@@ -69,7 +69,7 @@ function W({
     });
   });
   let [C, S] = useState(null);
-  let j = getObservableOrFallback(UK().showPropertyLabels);
+  let j = getObservableOrFallback(EditorPreferencesApi().showPropertyLabels);
   let {
     getTriggerProps,
     getContainerProps
@@ -773,7 +773,7 @@ function eg({
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let [u, h] = lJ('gridColumnGap');
   let g = useCallback((e, t) => {
     permissionScopeHandler.user('grid-panel', () => {
@@ -819,7 +819,7 @@ function e_({
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let [u, h] = lJ('gridRowGap');
   let g = useCallback((e, t) => {
     permissionScopeHandler.user('grid-panel', () => {

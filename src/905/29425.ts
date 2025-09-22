@@ -6,7 +6,7 @@ import { reactTimerGroup } from "../905/542194";
 import { z8 } from "../905/709095";
 import { getInitialOptions } from "../figma_app/169182";
 import { diffSets } from "../905/760682";
-import { ye } from "../figma_app/682945";
+import { performanceTracker } from "../figma_app/682945";
 import { getVisibleArea, roundedDivision } from "../figma_app/62612";
 import { nt } from "../905/226610";
 import { requestDeferredExecution } from "../905/561433";
@@ -338,7 +338,7 @@ let D = class e extends HTMLElement {
     let i = !1;
     o()(t, e) || (this.processViewportUpdate(e, t), i = !0);
     this._lastRenderedDataset !== this.ds && (this.processDatasetUpdate(e), i = !0);
-    i && ye && ye.setNumberOfRenderedComments(this.clusterElementsById.size);
+    i && performanceTracker && performanceTracker.setNumberOfRenderedComments(this.clusterElementsById.size);
     (e.isPanning !== t?.isPanning || e.isZooming !== t?.isZooming || this.shouldDisablePointerEvents !== this._lastRenderedShouldDisablePointerEvents) && (e.isPanning || e.isZooming || this.shouldDisablePointerEvents ? this.wrapper.classList.add("overlayPassthrough") : this.wrapper.classList.remove("overlayPassthrough"));
     reactTimerGroup.stop("comments-render");
   }

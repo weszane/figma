@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { zw } from "../905/585727";
+import { ImageSourceType } from "../905/585727";
 import { R } from "../905/531474";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
@@ -60,7 +60,7 @@ export async function $$f2({
       node: e,
       name: description,
       url: image,
-      scaleMode: t === zw.UNSPLASH ? "FILL" : void 0,
+      scaleMode: t === ImageSourceType.UNSPLASH ? "FILL" : void 0,
       abortController: n
     });
   } catch (t) {

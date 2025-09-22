@@ -2,7 +2,7 @@ import { getStorage } from "../905/657224";
 import { globalPerfTimer } from "../905/542194";
 import { selectViewAction } from "../905/929976";
 import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
-import { OB, M3, ST } from "../figma_app/91703";
+import { newFileLoaded, fileSelectedShareModalTab, clearSelectedViewCommentId } from "../figma_app/91703";
 import { clearTryPlugin, setWorkshopModeUntil, SEEN_TRY_ONBOARDING_KEY, setWorkshopUserName, setStarterKitHasBeenHidden, setFigmaEditorOnboardingStarted, setFigmaEditorOnboardingFinishedOrDismissed } from "../figma_app/107215";
 import { mapFileSummary } from "../figma_app/349248";
 import { generateAnonymouseName } from "../905/301652";
@@ -20,7 +20,7 @@ export function $$m0(e = $$p1, t) {
     } = t.payload;
     return n;
   }
-  if (OB.matches(t)) {
+  if (newFileLoaded.matches(t)) {
     let i = {
       ...e,
       fileKey: t.payload.file.key
@@ -34,7 +34,7 @@ export function $$m0(e = $$p1, t) {
     tryPluginName: void 0,
     tryPluginVersionId: void 0
   };
-  if (M3.matches(t)) return {
+  if (fileSelectedShareModalTab.matches(t)) return {
     ...e,
     filePermissionsModalTab: t.payload.view
   };
@@ -46,7 +46,7 @@ export function $$m0(e = $$p1, t) {
         ...t.payload.file
       })
     };
-  } else if (ST.matches(t) && ("fullscreen" === e.view || "prototype" === e.view)) return {
+  } else if (clearSelectedViewCommentId.matches(t) && ("fullscreen" === e.view || "prototype" === e.view)) return {
     ...e,
     commentThreadId: void 0
   };else if (setWorkshopModeUntil.matches(t) && "fullscreen" === e.view) {

@@ -21,7 +21,7 @@ import { Af, DP, aj, x5, ZN } from "../figma_app/803932";
 import N from "classnames";
 import { LN } from "../figma_app/975811";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { G as _$$G } from "../figma_app/194673";
 import { vG } from "../905/210945";
 import { VZ, x0 } from "../figma_app/727192";
@@ -160,7 +160,7 @@ function z(e) {
   let s = sD(getI18nString("inspect_panel.effects.density"));
   let l = sD(getI18nString("inspect_panel.effects.opacity"));
   let d = sD(getI18nString("inspect_panel.effects.radius"));
-  let c = Ku();
+  let c = getColorFormat();
   let u = Kx(e.noiseSize?.x);
   let p = Cm(e.density);
   let _ = Cm(e.opacity);

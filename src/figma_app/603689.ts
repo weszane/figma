@@ -232,7 +232,7 @@ import { IY } from '../905/901759';
 import { le as _$$le } from '../905/904854';
 import { getRequest, XHR } from '../905/910117';
 import { _L as _$$_L } from '../905/911410';
-import { y as _$$y } from '../905/913008';
+import { fullscreenCrashHandler } from '../905/913008';
 import { F as _$$F6 } from '../905/915030';
 import { A as _$$A6 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
@@ -312,7 +312,7 @@ import { o as _$$o2, v as _$$v3 } from '../figma_app/79979';
 import { getObservableValue } from '../figma_app/84367';
 import { useIsFullscreenOverview, useIsFullscreenDevModeComponentBrowser, useDevModeFocusId } from '../figma_app/88239';
 import { O8, Wn } from '../figma_app/88484';
-import { eH as _$$eH } from '../figma_app/91703';
+import { handleAutosaveAndNavigationThunk } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
 import { isNotNullish } from '../figma_app/95419';
 import { BF, fh } from '../figma_app/98072';
@@ -455,7 +455,7 @@ import { ConfigManagerProxy } from '../figma_app/594947';
 import { getCurrentTeam, checkTeamFileRestrictions, AddOperationType } from '../figma_app/598018';
 import { MR } from '../figma_app/598926';
 import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
-import { d1 as _$$d4 } from '../figma_app/603466';
+import { PluginCallbacks } from '../figma_app/603466';
 import { Bu } from '../figma_app/604494';
 import { hG } from '../figma_app/613182';
 import { $z, Ih } from '../figma_app/617427';
@@ -495,7 +495,7 @@ import { fm } from '../figma_app/723183';
 import { x as _$$x5 } from '../figma_app/731109';
 import { YN as _$$YN } from '../figma_app/738358';
 import { isHubFileEmbedView, isMonetizationRedirectView } from '../figma_app/740025';
-import { D as _$$D4, UX } from '../figma_app/740163';
+import { isHelpWidgetHidden, getDevHandoffInspectSplitPosition } from '../figma_app/740163';
 import { C as _$$C } from '../figma_app/747354';
 import { K7 } from '../figma_app/749805';
 import { Cg } from '../figma_app/751648';
@@ -518,7 +518,7 @@ import { fD } from '../figma_app/816671';
 import { I as _$$I3 } from '../figma_app/827540';
 import { TrackingProvider } from '../figma_app/831799';
 import { V1, XU } from '../figma_app/834392';
-import { OL as _$$OL } from '../figma_app/840917';
+import { autosaveFilesQuery } from '../figma_app/840917';
 import { M0, VG } from '../figma_app/841197';
 import { A as _$$A2 } from '../figma_app/849799';
 import { a as _$$a5 } from '../figma_app/850056';
@@ -1744,7 +1744,7 @@ let ns = {
   WebUserSyncing: () => multiplayerSessionManager,
   EmojiWheelBindings: () => CB,
   Comments: () => _$$lS,
-  PluginCallbacks: () => _$$d4,
+  PluginCallbacks: () => PluginCallbacks,
   WidgetBindings: () => _$$x2,
   VideoTsBindings: () => fm,
   JsKiwiSerialization: () => _$$K,
@@ -1810,9 +1810,9 @@ let ns = {
   SlotsBindingsWeb: () => mn,
   jsHelpers: {
     reportError: captureException,
-    preventEnteringCpp: () => _$$y.preventEnteringCpp(),
+    preventEnteringCpp: () => fullscreenCrashHandler.preventEnteringCpp(),
     fatalCppError(e, t) {
-      _$$y.fatalCppError(e, t);
+      fullscreenCrashHandler.fatalCppError(e, t);
     }
   },
   ThumbhashBindings: () => we
@@ -5679,7 +5679,7 @@ function dr() {
   }, [o]);
   let N = parsePxNumber('-120px');
   let C = getUserId();
-  setupResourceAtomHandler(_$$OL({
+  setupResourceAtomHandler(autosaveFilesQuery({
     userId: C ?? ''
   }), {
     enabled: C != null
@@ -6617,7 +6617,7 @@ function cg() {
           variant: 'ghost',
           iconPrefix: jsx(_$$e1, {}),
           onClick: () => {
-            i(_$$eH());
+            i(handleAutosaveAndNavigationThunk());
           },
           children: jsx('h2', {
             ...xk(ch.folderName),
@@ -8145,7 +8145,7 @@ function pY() {
   let e = useCanAccessFullDevMode();
   let t = _$$I3();
   let r = !!useDevModeFocusId() && e;
-  let n = UX();
+  let n = getDevHandoffInspectSplitPosition();
   let i = xn();
   let a = r && !(isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev) ? n : 0;
   let s = useAtomWithSubscription(_$$P2);
@@ -8487,7 +8487,7 @@ class _p extends _a {
 _p.displayName = 'NotificationsView';
 function _m(e) {
   let t = useSelector(e => e.notifications);
-  let r = _$$D4();
+  let r = isHelpWidgetHidden();
   let n = W6();
   let i = useDispatch();
   let a = useAtomWithSubscription(_$$D7);
@@ -9183,7 +9183,7 @@ t(async () => {
           JsBindingsTestHelpers: () => rx,
           WebReporting: () => _$$F2,
           Comments: () => _$$lS,
-          PluginCallbacks: () => _$$d4,
+          PluginCallbacks: () => PluginCallbacks,
           HTMLWindowBindings: () => IM,
           ImageIo: () => imageAPI,
           ImageTsBindings: () => imageServiceInstance,
@@ -9257,9 +9257,9 @@ t(async () => {
             reportError(e) {
               console.error('Stack Trace:', e.stack);
             },
-            preventEnteringCpp: () => _$$y.preventEnteringCpp(),
+            preventEnteringCpp: () => fullscreenCrashHandler.preventEnteringCpp(),
             fatalCppError(e, t) {
-              _$$y.fatalCppError(e, t);
+              fullscreenCrashHandler.fatalCppError(e, t);
             }
           }
         };

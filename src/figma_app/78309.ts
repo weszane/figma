@@ -22,7 +22,7 @@ import { colorCSSManipulatorInstance } from '../905/989956';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { kX } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
-import { XE } from '../figma_app/91703';
+import { hidePickerThunk } from '../figma_app/91703';
 import { buildUploadUrl } from '../figma_app/169182';
 import { E_ } from '../figma_app/177697';
 import { whiteColor } from '../figma_app/191804';
@@ -139,7 +139,7 @@ export function $$W0({
       onClose: () => {
         v(null);
         f(!1);
-        R || u(XE());
+        R || u(hidePickerThunk());
       },
       initialPosition: R ? E : new Point(l.initialX, l.initialY),
       enableGradients: !S,

@@ -93,7 +93,7 @@ import { CW as _$$CW, P1 } from "../5430/201744";
 import { R as _$$R2 } from "../905/792510";
 import { getValueOrFallback } from "../905/872825";
 import { getCurrentLocale } from "../figma_app/598412";
-import { LJ } from "../figma_app/930386";
+import { TemplateCategory } from "../figma_app/930386";
 import { categoryBySlugQuery } from "../figma_app/188671";
 import { BrowseCategoryRoute } from "../figma_app/805898";
 import { SearchRouteWithCommunity } from "../figma_app/600006";
@@ -1210,7 +1210,7 @@ function tR({
   disableHeader: r,
   showBottomDivider: i
 }) {
-  let n = getValueOrFallback(e.category_slug, LJ);
+  let n = getValueOrFallback(e.category_slug, TemplateCategory);
   let o = getCurrentLocale();
   let [a] = setupResourceAtomHandler(categoryBySlugQuery({
     categorySlug: n,

@@ -1,6 +1,6 @@
 import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
-import { Uv } from "../figma_app/91703";
+import { hideStylePicker } from "../figma_app/91703";
 import { zK } from "../figma_app/913823";
 import { sw } from "../figma_app/914957";
 import { isTrackedState } from "../figma_app/646357";
@@ -28,7 +28,7 @@ let $$m2 = createOptimistThunk((e, t) => {
     initialY: initialPosition.y,
     modal: !!modal,
     returnFocusToToggle: !!returnFocusToToggle
-  })), e.dispatch(Uv()), e.dispatch(sw()));
+  })), e.dispatch(hideStylePicker()), e.dispatch(sw()));
 });
 export const qX = $$u0;
 export const vq = $$p1;

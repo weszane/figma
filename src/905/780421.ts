@@ -5,7 +5,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { _A, W2 } from "../figma_app/814196";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Z1 } from "../figma_app/91703";
+import { hideOpenDesktopAppModal } from "../figma_app/91703";
 import { fullscreenValue } from "../figma_app/455680";
 import { N } from "../figma_app/240060";
 import { Xj } from "../905/748636";
@@ -17,11 +17,11 @@ export class $$f0 extends PureComponent {
     this.initialPosition = new Point(window.innerWidth / 2 - g / 2, window.innerHeight / 2 - 60);
     this.onClose = () => {
       _A("shown");
-      this.props.dispatch(Z1());
+      this.props.dispatch(hideOpenDesktopAppModal());
     };
     this.onAlwaysClick = () => {
       _A("shown");
-      this.props.dispatch(Z1());
+      this.props.dispatch(hideOpenDesktopAppModal());
       N.enableAutoOpen();
       fullscreenValue.showVisualBellLocalized("plugins-added-from-file", "desktop_open_views.open_in_desktop_from_now_on_modal.visual_bell", {}, !1);
     };

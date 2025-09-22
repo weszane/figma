@@ -132,7 +132,7 @@ import { S as _$$S, bg } from "../figma_app/446435";
 import { P as _$$P } from "../1250/232298";
 import { A as _$$A7 } from "../1250/545022";
 import { selectExperimentConfigHook, useUserFlagExperimentConfig } from "../figma_app/594947";
-import { FP } from "../figma_app/91703";
+import { setLeftPanelTab } from "../figma_app/91703";
 import { F_, EL } from "../905/858282";
 import { S as _$$S2 } from "../figma_app/420927";
 import { styleBuilderInstance } from "../905/941192";
@@ -209,7 +209,7 @@ import { k as _$$k3 } from "../905/443820";
 import { openUrlInContext } from "../figma_app/976345";
 import { dO } from "../figma_app/318123";
 import { c as _$$c3 } from "../905/850166";
-import { lu } from "../figma_app/389091";
+import { setTimerModalThunk } from "../figma_app/389091";
 import { TIMER_ONBOARDING_EVENT } from "../figma_app/152368";
 import { MR, qU, OO } from "../figma_app/913518";
 import { s2 as _$$s5, E$, WB as _$$WB, BC, Nr, yl } from "../figma_app/300024";
@@ -1464,11 +1464,11 @@ function ic() {
   useEffect(() => {
     if (!isShowing) return;
     let t = i.getState().leftPanel.activeTab;
-    e(FP({
+    e(setLeftPanelTab({
       tab: UserInterfaceElements.ASSETS
     }));
     return () => {
-      e(FP({
+      e(setLeftPanelTab({
         tab: t
       }));
     };
@@ -5513,14 +5513,14 @@ function ai(e) {
   });
   useEffect(() => (i({
     source: OO.MAKE_SOMETHING_V2_ONBOARDING
-  }), t(lu({
+  }), t(setTimerModalThunk({
     state: "open",
     userInitiated: !1
   })), o(TIMER_ONBOARDING_EVENT), () => {
     a({
       source: OO.MAKE_SOMETHING_V2_ONBOARDING
     });
-    t(lu({
+    t(setTimerModalThunk({
       state: "closed",
       userInitiated: !1
     }));

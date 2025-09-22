@@ -11,7 +11,7 @@ import { browserFeatures } from "../905/508367";
 import { isElementFocusable } from "../905/877503";
 import { KeyCodes } from "../905/63728";
 import { VisualBellActions } from "../905/302958";
-import { ql } from "../905/668764";
+import { incrementValue } from "../905/668764";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { Lh, D8 } from "../figma_app/242339";
@@ -539,7 +539,7 @@ export class $$F0 extends PureComponent {
           return t > 0 ? t : -(1 / t);
         }(e) * i;
         let r = e.distance.x * n;
-        return ql(this.props.formatter, t, r, {
+        return incrementValue(this.props.formatter, t, r, {
           snap: !0,
           snapResolution: this.props.resolution,
           coarse: e.isBigIncrement

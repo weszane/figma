@@ -14,7 +14,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Te } from "../1250/12342";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { expandNodeToRoot, renameNode } from "../figma_app/741237";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
@@ -258,8 +258,8 @@ export let $$eI2 = memo(function () {
   });
   let s = Te();
   let i = GQ(200, 306);
-  let [a, c] = useState(() => UK().slidesLayersPanelHeight.getCopy());
-  let [u, h] = useState(() => UK().slidesLayersPanelExpanded.getCopy());
+  let [a, c] = useState(() => EditorPreferencesApi().slidesLayersPanelHeight.getCopy());
+  let [u, h] = useState(() => EditorPreferencesApi().slidesLayersPanelExpanded.getCopy());
   let p = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let g = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let m = X();
@@ -267,8 +267,8 @@ export let $$eI2 = memo(function () {
   let y = u && b;
   let S = s && !y && !g;
   useEffect(() => {
-    UK().slidesLayersPanelHeight.set(a);
-    UK().slidesLayersPanelExpanded.set(u);
+    EditorPreferencesApi().slidesLayersPanelHeight.set(a);
+    EditorPreferencesApi().slidesLayersPanelExpanded.set(u);
   }, [a, u]);
   let C = Jb() ?? null;
   let k = eS(t, window.innerHeight);
@@ -332,7 +332,7 @@ export function $$eT3() {
   let x = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
   let h = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let p = X() && h;
-  let [g, m] = useState(() => UK().slidesLayersPanelHeight.getCopy());
+  let [g, m] = useState(() => EditorPreferencesApi().slidesLayersPanelHeight.getCopy());
   let v = Jb();
   let b = x && h && v;
   let y = Ye();

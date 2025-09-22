@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useRef, useMemo, useEffect } from "react";
-import { xw, TU } from "../905/585727";
-import { y1 } from "../905/869092";
+import { ImageModelType, ImageProviderType } from "../905/585727";
+import { MAX_IMAGE_URLS } from "../905/869092";
 import { lQ } from "../905/934246";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuTitleComp, MenuItemComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
@@ -265,7 +265,7 @@ function em({
   let [r, n] = useState([]);
   let o = useRef(null);
   let l = getFeatureFlags().aip_attach_reference_image;
-  let d = e && [xw.GPT_4O_IMAGE, TU.OPENAI_GPT_IMAGE_1, TU.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION].includes(e) ? r.length >= y1 ? "MAX_REFERENCES_EXCEEDED" : "SUCCESS" : "MODEL_DOES_NOT_SUPPORT_REFERENCES";
+  let d = e && [ImageModelType.GPT_4O_IMAGE, ImageProviderType.OPENAI_GPT_IMAGE_1, ImageProviderType.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION].includes(e) ? r.length >= MAX_IMAGE_URLS ? "MAX_REFERENCES_EXCEEDED" : "SUCCESS" : "MODEL_DOES_NOT_SUPPORT_REFERENCES";
   switch (d) {
     case "MODEL_DOES_NOT_SUPPORT_REFERENCES":
       t = getI18nString("image_ai.edit_image.model_does_not_support_reference_images");
@@ -286,7 +286,7 @@ function em({
     isReferenceButtonDisabled: "SUCCESS" !== d,
     isSubmitDisabled: c,
     handleFileUpload: e => {
-      n(t => t.length >= y1 ? t : [...t, e]);
+      n(t => t.length >= MAX_IMAGE_URLS ? t : [...t, e]);
     }
   };
 }

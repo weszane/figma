@@ -1,97 +1,165 @@
-let n;
-let r;
-function a(e, t, i) {
-  t in e ? Object.defineProperty(e, t, {
-    value: i,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = i;
-  return e;
+// Refactored from 898440.ts
+
+
+
+// Constant for localStorage key (original: s)
+const AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS = 'aws_waf_token_challenge_attempts'
+
+// Get window object, throws if not available (original: o)
+function getWindow(): Window {
+  const win = n ?? (typeof window !== 'undefined' ? window : undefined)
+  if (!win)
+    throw new Error('Expected window object to be defined')
+  return win
 }
-let s = "aws_waf_token_challenge_attempts";
-function o() {
-  let e = n ?? ("undefined" != typeof window ? window : void 0);
-  if (!e) throw Error("Expected window object to be defined");
-  return e;
+
+// Get document object, throws if not available (original: l)
+function getDocument(): Document {
+  const doc = r ?? (typeof document !== 'undefined' ? document : undefined)
+  if (!doc)
+    throw new Error('Expected document object to be defined')
+  return doc
 }
-function l() {
-  let e = r ?? ("undefined" != typeof document ? document : void 0);
-  if (!e) throw Error("Expected document object to be defined");
-  return e;
+
+// Deferred promise helper (original: inline in waitForWAFValidation)
+interface Deferred<T = void> {
+  promise: Promise<T>
+  resolve: (value: T) => void
+  reject: (reason?: any) => void
+  status: 'pending' | 'resolved' | 'rejected'
+  result?: T
+  error?: any
 }
-export let $$d1 = new class {
-  waitForWAFValidation(e) {
-    if (this.pendingWAFVerification) return this.pendingWAFVerification.deferred.promise;
-    let t = function () {
-      let e;
-      let t;
-      let i = {
-        promise: new Promise((i, n) => {
-          e = i;
-          t = n;
-        }),
-        resolve: t => {
-          i.status = "resolved";
-          i.result = t;
-          e(t);
-        },
-        reject: e => {
-          i.status = "rejected";
-          i.error = e;
-          t(e);
-        },
-        status: "pending"
-      };
-      return i;
-    }();
+
+/**
+ * Creates a deferred promise object.
+ */
+function createDeferred<T = void>(): Deferred<T> {
+  let resolve!: (value: T) => void
+  let reject!: (reason?: any) => void
+  const deferred: Deferred<T> = {
+    promise: new Promise<T>((res, rej) => {
+      resolve = res
+      reject = rej
+    }),
+    resolve: (value: T) => {
+      deferred.status = 'resolved'
+      deferred.result = value
+      resolve(value)
+    },
+    reject: (reason?: any) => {
+      deferred.status = 'rejected'
+      deferred.error = reason
+      reject(reason)
+    },
+    status: 'pending',
+  }
+  return deferred
+}
+
+// WAFVerification types
+type WAFVerificationType = 'challenge' | 'captcha'
+interface PendingWAFVerification {
+  type: WAFVerificationType
+  deferred: Deferred
+  iframe: HTMLIFrameElement
+}
+
+/**
+ * Handles WAF validation logic.
+ * Original class name: $$d1
+ */
+export class WAFValidationHandler {
+  private pendingWAFVerification?: PendingWAFVerification
+
+  /**
+   * Waits for WAF validation to complete.
+   * @param type - The type of WAF action ("challenge" or "captcha").
+   */
+  waitForWAFValidation(type: WAFVerificationType): Promise<void> {
+    if (this.pendingWAFVerification) {
+      return this.pendingWAFVerification.deferred.promise
+    }
+
+    const deferred = createDeferred()
+
+    // Update localStorage attempts
     try {
-      let e = o().localStorage.getItem(s);
-      if (e) {
-        let t = JSON.parse(e);
-        t.attempts = 1;
-        o().localStorage.setItem(s, JSON.stringify(t));
+      const attemptsRaw = getWindow().localStorage.getItem(AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS)
+      if (attemptsRaw) {
+        const attempts = JSON.parse(attemptsRaw)
+        attempts.attempts = 1
+        getWindow().localStorage.setItem(AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS, JSON.stringify(attempts))
       }
-    } catch (e) {
-      console.error(e);
     }
-    if ("challenge" === e) {
-      let e = l().createElement("iframe");
-      e.src = `${o().location.origin}/waf-validation`;
-      e.id = "waf-iframe";
-      l().body.appendChild(e);
-      o().addEventListener("message", this.onMessage);
+    catch (err) {
+      console.error(err)
+    }
+
+    if (type === 'challenge') {
+      const iframe = getDocument().createElement('iframe')
+      iframe.src = `${getWindow().location.origin}/waf-validation`
+      iframe.id = 'waf-iframe'
+      getDocument().body.appendChild(iframe)
+      getWindow().addEventListener('message', this.onMessage)
+
       this.pendingWAFVerification = {
-        type: "challenge",
-        deferred: t,
-        iframe: e
-      };
-      return t.promise;
-    }
-    if ("captcha" === e) throw Error("Unhandled in Cortex client");
-  }
-  constructor() {
-    a(this, "pendingWAFVerification", void 0);
-    a(this, "onMessage", e => {
-      if (this.pendingWAFVerification && "waf-successful" === e.data) {
-        if ("challenge" === this.pendingWAFVerification.type) {
-          let {
-            deferred,
-            iframe
-          } = this.pendingWAFVerification;
-          this.pendingWAFVerification = void 0;
-          deferred.resolve();
-          iframe.remove();
-        }
-        o().removeEventListener("message", this.onMessage);
+        type: 'challenge',
+        deferred,
+        iframe,
       }
-    });
+      return deferred.promise
+    }
+
+    if (type === 'captcha') {
+      throw new Error('Unhandled in Cortex client')
+    }
+
+    return deferred.promise
   }
-}();
-export function $$c0(e) {
-  if (!e.url || !e.url.startsWith(o().location.origin)) return null;
-  let t = e.headers.get("x-amzn-waf-action");
-  return t ? "challenge" === t ? "challenge" : "captcha" : null;
+
+  /**
+   * Handles postMessage events for WAF validation.
+   * Original property name: onMessage
+   */
+  private onMessage = (event: MessageEvent) => {
+    if (
+      this.pendingWAFVerification
+      && event.data === 'waf-successful'
+    ) {
+      if (this.pendingWAFVerification.type === 'challenge') {
+        const { deferred, iframe } = this.pendingWAFVerification
+        this.pendingWAFVerification = undefined
+        deferred.resolve()
+        iframe.remove()
+      }
+      getWindow().removeEventListener('message', this.onMessage)
+    }
+  }
 }
-export const HP = $$c0;
-export const Kg = $$d1;
+
+// Exported instance (original: $$d1)
+export const WAFValidationHandlerInstance = new WAFValidationHandler()
+export const Kg = WAFValidationHandlerInstance
+
+/**
+ * Determines the WAF action type from a fetch response.
+ * Original function name: $$c0
+ * @param response - The fetch response object.
+ * @returns "challenge", "captcha", or null.
+ */
+export function getWAFActionType(response: { url?: string, headers: Headers }): WAFVerificationType | null {
+  if (!response.url || !response.url.startsWith(getWindow().location.origin))
+    return null
+  const wafAction = response.headers.get('x-amzn-waf-action')
+  if (!wafAction)
+    return null
+  return wafAction === 'challenge' ? 'challenge' : 'captcha'
+}
+
+// Exported alias (original: HP)
+export const HP = getWAFActionType
+
+// Internal variables (original: n, r)
+let n: Window | undefined
+let r: Document | undefined

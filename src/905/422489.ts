@@ -5,7 +5,7 @@ import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { BrowserInfo } from "../figma_app/778880";
 import { j } from "../905/881708";
-import { HF } from "../figma_app/682945";
+import { recordReorderTableSpanActive } from "../figma_app/682945";
 import { Ro, xT, Dv } from "../905/962457";
 var p = (e => (e[e.LEFT = 0] = "LEFT", e[e.RIGHT = 1] = "RIGHT", e[e.UP = 2] = "UP", e[e.DOWN = 3] = "DOWN", e))(p || {});
 let m = class e extends j {
@@ -196,7 +196,7 @@ let m = class e extends j {
             interactionCpp: InteractionCpp
           });
           InteractionCpp.setActiveUserAction(UserActionState.DRAGGING);
-          HF();
+          recordReorderTableSpanActive();
           break;
         }
       case xT.ADD:
@@ -303,7 +303,7 @@ let m = class e extends j {
               element,
               axis: tableAxis,
               interactionCpp: InteractionCpp
-            }), HF(), !this.didDrag) {
+            }), recordReorderTableSpanActive(), !this.didDrag) {
               for (let e of (InteractionCpp.tableCellSelectionSelectedSpanIndexes(tableAxis).includes(elementIndex) || this._selectSpan({
                 axis: tableAxis,
                 spanIndex: elementIndex,
@@ -434,7 +434,7 @@ let m = class e extends j {
               tableAxis: _tableAxis
             } = this.state;
             if (this.didDrag && InteractionCpp.tableCellSelectionSelectedSpanIndexes(_tableAxis).length > 0) {
-              for (let e of (InteractionCpp.logTableSpanReordered(_tableAxis, elementId, _elementIndex), HF(), InteractionCpp.tableCellSelectionSelectedSpanIndexes(_tableAxis))) {
+              for (let e of (InteractionCpp.logTableSpanReordered(_tableAxis, elementId, _elementIndex), recordReorderTableSpanActive(), InteractionCpp.tableCellSelectionSelectedSpanIndexes(_tableAxis))) {
                 let t = InteractionCpp.getTableSpanIdAtIndex(_tableAxis, e);
                 InteractionCpp.setTableSpanFloating(t, !1);
               }

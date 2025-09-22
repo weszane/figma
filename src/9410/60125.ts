@@ -5,7 +5,7 @@ import { _ as _$$_ } from "../figma_app/658134";
 import { S } from "../figma_app/109947";
 import { isNotInFocusedNodeView } from "../figma_app/327588";
 import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
-import { dP, qw } from "../figma_app/740163";
+import { getSidebarSplitPosition, getPropertiesPanelSplitPosition } from "../figma_app/740163";
 import { getObservableValue } from "../figma_app/84367";
 import { C as _$$C } from "../figma_app/859828";
 export function $$$$h0() {
@@ -14,13 +14,13 @@ export function $$$$h0() {
   } = _$$l();
   let t = _$$C()?.bottomRightToolsNode;
   let i = useAtomWithSubscription(S);
-  let h = dP();
+  let h = getSidebarSplitPosition();
   let m = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let f = isNotInFocusedNodeView();
   let [g] = useAtomValueAndSetter(assetCategoryAtom);
   let _ = g === AssetCategoryEnum.ASSETS && f && m === SelfDesignType.SELF;
   let x = m === SelfDesignType.DESIGN;
-  let y = qw();
+  let y = getPropertiesPanelSplitPosition();
   let b = _ ? _$$_ : h + _$$_;
   let C = getObservableValue(AppStateTsApi?.uiState().showPropertiesPanel, !1);
   let v = x && C ? y : 0;

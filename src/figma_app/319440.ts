@@ -72,7 +72,7 @@ import { db } from '../figma_app/636678';
 import { W as _$$W2 } from '../figma_app/691750';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { bh, VE, X9 } from '../figma_app/730706';
-import { qw } from '../figma_app/740163';
+import { getPropertiesPanelSplitPosition } from '../figma_app/740163';
 import { dG } from '../figma_app/753501';
 import { AppStateTsApi, CmsRepeaterHelpers, ItemType, ViewType, LayoutTabType, InteractionCpp, Command, InsertSourceType, ChildRelationshipStatus } from '../figma_app/763686';
 import { bw, gc, jw, Xl } from '../figma_app/781981';
@@ -640,7 +640,7 @@ function e8() {
 }
 export let $$e90 = 'toolbarView';
 export function $$te5() {
-  return 4.5 + (qw() >= 280 ? 1 : 0);
+  return 4.5 + (getPropertiesPanelSplitPosition() >= 280 ? 1 : 0);
 }
 export function $$tt3(e) {
   return jsx(Ig, {

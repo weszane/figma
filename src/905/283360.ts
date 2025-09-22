@@ -1,4 +1,4 @@
-import { D2 } from "../905/528903";
+import { MissingRuleType } from "../905/528903";
 import { LinterCppBindings, VariableResolvedDataType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
@@ -75,7 +75,7 @@ export async function $$f1(e, t, i) {
   let p = await Ay.shared.getViolationFix({
     targetNodeGuid: e.guid,
     inputJsx: a.jsxStr,
-    ruleType: D2.MISSING_COLOR_TOKEN,
+    ruleType: MissingRuleType.MISSING_COLOR_TOKEN,
     context: c
   }, u);
   if (!p.propertyUpdates) throw Error("Missing property updates for color variable fix");

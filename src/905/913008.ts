@@ -12,92 +12,105 @@ import { MEMORY_WARNING_MODAL } from '../figma_app/453508'
 import { openFileAtom } from '../figma_app/516028'
 import { GLFailureType } from '../figma_app/763686'
 
-export let $$f0 = new class {
+// Refactored class: original $$f0
+class FullscreenCrashHandler {
+  private _preventEnteringCpp: boolean;
+  private _fullscreenCrashState: any;
+
   constructor() {
-    this._preventEnteringCpp = !1
-    this._fullscreenCrashState = 'ok'
+    this._preventEnteringCpp = false;
+    this._fullscreenCrashState = 'ok';
   }
 
-  fullscreenCrashed(e, t) {
+  // original: fullscreenCrashed
+  fullscreenCrashed(crash: { type: string; sentryId?: string }, shouldReport: boolean): void {
     if (this._fullscreenCrashState !== 'ok') {
       logInfo('crash', 'crash already reported', {
-        'new crash': e,
+        'new crash': crash,
         'original crash': this._fullscreenCrashState,
-      })
-      return
+      });
+      return;
     }
-    if (t) {
-      let t
-      logInfo('crash', 'updating crash state', {
-        crash: e,
-      })
-      this._preventEnteringCpp = !0
-      this._fullscreenCrashState = e
-      atomStoreManager.set(fullscreenCrashStateAtom, e)
-      let i = window.FigmaMobile
-      i?.dismissMediaLoadingToast && i.dismissMediaLoadingToast()
-      e.type === 'oom' && i?.handleAllocationFailure && i.handleAllocationFailure(GLFailureType.WASM_FAILURE)
-      let o = bY()
-      setTagGlobal('fullscreen_status', 'has_crashed')
-      try {
-        let e = atomStoreManager.get(openFileAtom)
-        t = e?.editorType
-      }
-      catch (e) {
-        reportError(_$$e.CLIENT_PLATFORM, e, {
-          tags: {
-            severity: SeverityLevel.Minor,
-          },
-        })
-      }
-      trackEventAnalytics('Fullscreen Hard Crash', {
-        crashType: e.type,
-        isMergeModalOpen: atomStoreManager.get(isActiveAtom),
-        editorType: t,
-        ...o,
-      }, {
-        forwardToDatadog: !0,
-      })
+
+    if (!shouldReport) return;
+
+    logInfo('crash', 'updating crash state', { crash });
+    this._preventEnteringCpp = true;
+    this._fullscreenCrashState = crash;
+    atomStoreManager.set(fullscreenCrashStateAtom, crash);
+
+    const figmaMobile = window.FigmaMobile;
+    figmaMobile?.dismissMediaLoadingToast?.();
+
+    if (crash.type === 'oom' && figmaMobile?.handleAllocationFailure) {
+      figmaMobile.handleAllocationFailure(GLFailureType.WASM_FAILURE);
     }
-  }
 
-  getFullscreenCrashState() {
-    return this._fullscreenCrashState
-  }
+    const additionalData = bY();
+    setTagGlobal('fullscreen_status', 'has_crashed');
 
-  preventEnteringCpp() {
-    return this._preventEnteringCpp
-  }
-
-  fatalCppError(e, t = 'other') {
-    t === 'bindings' && window.dispatchEvent(new ErrorEvent('bindingserror', {
-      error: e,
-    }))
-    setTagGlobal('fullscreen_status', 'crash')
-    let i = reportError(_$$e.UNOWNED, e, {
-      tags: {
-        severity: SeverityLevel.Critical,
-      },
-    })
-    setTagGlobal('fullscreen_status', 'has_crashed')
-    let r = t === 'oom' ? 'oom' : isStackOverflowError(e) ? 'stack-overflow' : 'other'
-    this.fullscreenCrashed({
-      type: r,
-      sentryId: i,
-    }, !0)
-  }
-
-  showMemoryCrashModal(e, t, i) {
-    if (t) {
-      if (!i)
-        throw new Error('Trying to dispatch before we\'ve been initialized')
-      i.dispatch(showModalHandler({
-        type: MEMORY_WARNING_MODAL,
-        data: {
-          isBranching: !!e.isBranching,
-        },
-      }))
+    let editorType: string | undefined;
+    try {
+      const openFile = atomStoreManager.get(openFileAtom);
+      editorType = openFile?.editorType;
+    } catch (error) {
+      reportError(_$$e.CLIENT_PLATFORM, error, {
+        tags: { severity: SeverityLevel.Minor },
+      });
     }
+
+    trackEventAnalytics('Fullscreen Hard Crash', {
+      crashType: crash.type,
+      isMergeModalOpen: atomStoreManager.get(isActiveAtom),
+      editorType,
+      ...additionalData,
+    }, { forwardToDatadog: true });
   }
-}()
-export const y = $$f0
+
+  // original: getFullscreenCrashState
+  getFullscreenCrashState(): string {
+    return this._fullscreenCrashState;
+  }
+
+  // original: preventEnteringCpp
+  preventEnteringCpp(): boolean {
+    return this._preventEnteringCpp;
+  }
+
+  // original: fatalCppError
+  fatalCppError(error: Error, type: string = 'other'): void {
+    if (type === 'bindings') {
+      window.dispatchEvent(new ErrorEvent('bindingserror', { error }));
+    }
+
+    setTagGlobal('fullscreen_status', 'crash');
+    const sentryId = reportError(_$$e.UNOWNED, error, {
+      tags: { severity: SeverityLevel.Critical },
+    });
+    setTagGlobal('fullscreen_status', 'has_crashed');
+
+    const crashType = type === 'oom' ? 'oom' : isStackOverflowError(error) ? 'stack-overflow' : 'other';
+    this.fullscreenCrashed({ type: crashType, sentryId }, true);
+  }
+
+  // original: showMemoryCrashModal
+  showMemoryCrashModal(
+    data: { isBranching?: boolean },
+    shouldShow: boolean,
+    dispatch: (action: any) => void
+  ): void {
+    if (!shouldShow) return;
+    if (!dispatch) {
+      throw new Error('Trying to dispatch before we\'ve been initialized');
+    }
+
+    dispatch(showModalHandler({
+      type: MEMORY_WARNING_MODAL,
+      data: { isBranching: !!data.isBranching },
+    }));
+  }
+}
+
+export const fullscreenCrashHandler = new FullscreenCrashHandler();
+// original: y
+export const y = fullscreenCrashHandler;

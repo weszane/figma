@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { UX } from "../figma_app/740163";
+import { getDevHandoffInspectSplitPosition } from "../figma_app/740163";
 import { QZ, VZ } from "../figma_app/727192";
 import { hD, LI } from "../figma_app/970285";
 export function $$p0() {
@@ -29,7 +29,7 @@ export function $$p0() {
     exportSettings: e.mirror.selectionProperties.exportSettings
   }));
   let E = hD();
-  let y = UX();
+  let y = getDevHandoffInspectSplitPosition();
   let b = useDispatch();
   let {
     collapsedInspectionPanelAtom,

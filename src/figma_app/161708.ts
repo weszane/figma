@@ -9,7 +9,7 @@ import { Q } from "../figma_app/67145";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
@@ -37,7 +37,7 @@ export function $$L3(e) {
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let s = useDispatch();
   let o = useRef(null);
   let d = useSelector(e => {

@@ -52,7 +52,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { useCurrentOrgAdminInfo } from "../figma_app/740025";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { blackColor, defaultGrayColor } from "../figma_app/385874";
 import { Gt, A5, kl, fC, pw, DQ } from "../905/275640";
@@ -540,7 +540,7 @@ function tM(e) {
   let i = useRef(null);
   let a = _$$W2();
   let d = useDispatch();
-  let u = Ku();
+  let u = getColorFormat();
   let h = Um();
   let f = Xo();
   let {
@@ -644,7 +644,7 @@ function tP({
   let a = useAtomWithSubscription(_$$b2);
   let o = _$$qh();
   let d = SQ();
-  let u = Ku();
+  let u = getColorFormat();
   let h = Um();
   let f = Xo();
   let p = GV();

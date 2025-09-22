@@ -11,7 +11,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { VU } from "../905/625959";
 import { Xo } from "../figma_app/482495";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -81,7 +81,7 @@ export function $$w0(e) {
       let u = r ?? c;
       let p = useCallback(() => {
         let t = u?.current ? cn(u.current, wh) : {};
-        s(u1({
+        s(showPickerThunk({
           id: aR,
           initialX: t?.x,
           initialY: t?.y,
@@ -91,7 +91,7 @@ export function $$w0(e) {
         }));
       }, [s, e?.explicitDefID, u]);
       let f = useCallback(() => {
-        d ? s(XE()) : p();
+        d ? s(hidePickerThunk()) : p();
       }, [s, d, p]);
       let y = useMemo(() => ({
         type: ZU.CUSTOM_ACTION,

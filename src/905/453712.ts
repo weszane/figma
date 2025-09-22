@@ -1,22 +1,33 @@
-import { Ik, g1, bz, Yj, YO, KC } from "../vendor/835909";
-import { lF, gB, z7, Ph, zF, cn, Dj, NA, ue } from "../905/31168";
-let $$a1 = lF.merge(Ik({
-  tools: g1(bz()).optional(),
-  toolChoice: bz()
-}));
-let $$s0 = Ik({
-  text: Yj(),
-  toolCalls: YO(gB),
-  toolResults: YO(z7),
-  reasoning: Yj().optional(),
-  reasoningDetails: YO(Ph),
-  finishReason: zF,
-  usage: cn,
-  response: Ik({
-    messages: YO(KC([Dj, NA]))
+import { any, array, object, record, string, union } from 'zod'
+import { assistantRoleSchema, completionReasonEnum, logprobsSchema, redactedContentSchema, requestSchema, tokenUsageSchema, toolCallSchema, toolResultSchema, toolRoleSchema } from '../905/31168'
+
+/**
+ * Schema for request payload with optional tools and toolChoice.
+ * Original variable: $$a1
+ */
+export const toolChoiceSchema = requestSchema.merge(object({
+  tools: record(any()).optional(),
+  toolChoice: any(),
+}))
+
+/**
+ * Schema for response object including text, tool calls, results, reasoning, and metadata.
+ * Original variable: $$s0
+ */
+export const responseSchema = object({
+  text: string(),
+  toolCalls: array(toolCallSchema),
+  toolResults: array(toolResultSchema),
+  reasoning: string().optional(),
+  reasoningDetails: array(redactedContentSchema),
+  finishReason: completionReasonEnum,
+  usage: tokenUsageSchema,
+  response: object({
+    messages: array(union([assistantRoleSchema, toolRoleSchema])),
   }),
-  providerMetadata: bz().optional(),
-  logprobs: ue.optional()
-});
-export const $ = $$s0;
-export const p = $$a1;
+  providerMetadata: any().optional(),
+  logprobs: logprobsSchema.optional(),
+})
+
+export const $ = responseSchema
+export const p = toolChoiceSchema

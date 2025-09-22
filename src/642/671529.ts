@@ -22,7 +22,7 @@ import { hasCmsCollection } from "../figma_app/618433";
 import { sw, Zs } from "../figma_app/914957";
 import { B as _$$B } from "../905/330741";
 import { Dm } from "../figma_app/8833";
-import { qw, UK } from "../figma_app/740163";
+import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
 import { q as _$$q, T as _$$T } from "../figma_app/590592";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
@@ -55,7 +55,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { getSingletonSceneGraph } from "../905/700578";
 import { AutoLayout } from "../figma_app/947482";
 import { ButtonBasePrimary } from "../figma_app/637027";
-import { XE, Uv } from "../figma_app/91703";
+import { hidePickerThunk, hideStylePicker } from "../figma_app/91703";
 import { u as _$$u } from "../9410/354452";
 import { O8 } from "../figma_app/393980";
 import { sO } from "../figma_app/21029";
@@ -129,8 +129,8 @@ function ef({
   let w = useHandleFocusEvent(d, "submit", () => {
     let e = createStyle();
     j && AppStateTsApi.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
-    c(XE());
-    g || c(Uv());
+    c(hidePickerThunk());
+    g || c(hideStylePicker());
     c(sw());
     a && a(e || "");
   });
@@ -445,10 +445,10 @@ function eK({
   let b = !!(m || f?.modal);
   let C = useHandleMouseEvent(l, "mousedown", () => {
     fullscreenValue.deselectProperty();
-    c(XE());
+    c(hidePickerThunk());
     c(vq());
     c(sw());
-    c(Uv());
+    c(hideStylePicker());
     _ && (y([]), Fullscreen?.setSelectedInteractions([]));
   });
   let j = se();
@@ -792,8 +792,8 @@ function e4({
   let x = e === DesignWorkspace.COMMENT;
   let y = useAppModelProperty("topLevelMode") === ViewType.HISTORY;
   let b = function () {
-    let e = qw();
-    return "number" != typeof e || e < e9 ? (UK().propertiesPanelSplitPosition.set(e9), e9) : e;
+    let e = getPropertiesPanelSplitPosition();
+    return "number" != typeof e || e < e9 ? (EditorPreferencesApi().propertiesPanelSplitPosition.set(e9), e9) : e;
   }();
   let k = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
   let {
@@ -811,7 +811,7 @@ function e4({
   let $ = useCurrentFileKey();
   let Y = hasCmsCollection($);
   let X = o3(nt.newResizablePanel);
-  let q = getObservableValue(UK().renderRulers, !1);
+  let q = getObservableValue(EditorPreferencesApi().renderRulers, !1);
   let J = _$$T();
   let Z = getFeatureFlags().properties_panel_resize_lag_fix;
   let Q = Xr(At);
@@ -921,7 +921,7 @@ function e6({
 }) {
   let n = _$$e();
   let i = isFullscreenDesignModeNotFocused();
-  let l = getObservableValue(UK().renderRulers, !1);
+  let l = getObservableValue(EditorPreferencesApi().renderRulers, !1);
   let a = _$$T();
   return jsx(lY, {
     className: g()(ux, Dm, {
@@ -960,7 +960,7 @@ let e9 = function (e) {
 }(uj0);
 function te(e) {
   let t = clamp(e, e9, e7);
-  UK().propertiesPanelSplitPosition.set(t);
+  EditorPreferencesApi().propertiesPanelSplitPosition.set(t);
   getFeatureFlags().properties_panel_resize_lag_fix && document.documentElement.style.setProperty("--properties-panel-width", `${t}px`);
 }
 export const j = $$e20;

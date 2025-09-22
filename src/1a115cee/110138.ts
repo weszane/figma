@@ -22,7 +22,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
 import { hideModal, popModalStack } from "../905/156213";
-import { Gg, go, ZW, bD } from "../figma_app/840917";
+import { useAutosaveFilesWithPermissions, deleteAutosaveDataForSessions, getUnsyncedAutosaveFilesForUsers, getAutosaveExpirationMs } from "../figma_app/840917";
 import { createPrefixKeyRange, createSessionNodeKeyRange } from "../905/25189";
 import { isAutosaveFile } from "../905/327522";
 import { ipcStorageHandler, restoredAutosaveKey } from "../905/725909";
@@ -247,7 +247,7 @@ export function $$X1(e) {
   let {
     unsyncedFiles,
     localUnsyncedFiles
-  } = Gg();
+  } = useAutosaveFilesWithPermissions();
   let i = useSelector(e => e.modalShown);
   let o = useSelector(e => e.autosave.nextGarbageCollectionTimestamp);
   let r = selectCurrentUser();
@@ -271,7 +271,7 @@ function z(e) {
     try {
       for (let a of e.users) {
         let e = a?.id;
-        e && (await go(createPrefixKeyRange(e)));
+        e && (await deleteAutosaveDataForSessions(createPrefixKeyRange(e)));
       }
     } finally {
       x(!0);
@@ -383,7 +383,7 @@ export function $$J0(e) {
     useEffect(() => {
       let a = async () => {
         try {
-          let a = await ZW(filterNotNullish(e.map(e => e?.id)));
+          let a = await getUnsyncedAutosaveFilesForUsers(filterNotNullish(e.map(e => e?.id)));
           let s = {};
           let t = [];
           let n = [];
@@ -434,7 +434,7 @@ export function $$J0(e) {
     nextGarbageCollectionTimestamp: multiUserGarbageCollectionTimestamp,
     files: multiUserUnsyncedFiles,
     onLogOut: () => {
-      for (let e of autosaveFilesToDelete) go(createSessionNodeKeyRange(e.userID, e.fileKey)).catch(e => {
+      for (let e of autosaveFilesToDelete) deleteAutosaveDataForSessions(createSessionNodeKeyRange(e.userID, e.fileKey)).catch(e => {
         reportError(_$$e.UNOWNED, Error("Failed to delete autosave data for sessions"));
       });
       e.onLogOut();
@@ -444,7 +444,7 @@ export function $$J0(e) {
 }
 $$X1.displayName = "HasAutosaveChangesModal";
 let Z = e => {
-  let a = Math.floor((bD() - (Date.now() - e)) / 864e5);
+  let a = Math.floor((getAutosaveExpirationMs() - (Date.now() - e)) / 864e5);
   return a > 5 ? null : a < 1 ? renderI18nText("autosave.has_changes.expiry_text_shortly") : renderI18nText("autosave.has_changes.expiry_text_days", {
     days: a
   });

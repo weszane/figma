@@ -9,8 +9,8 @@ import { H1 } from "../figma_app/451700";
 import { createOptimistThunk } from "../905/350402";
 import { cL } from "../figma_app/712525";
 import { cL as _$$cL } from "../figma_app/770088";
-import { ot, g6 } from "../figma_app/389091";
-import { XE } from "../figma_app/91703";
+import { resetLocalTimer, resetLocalMusicThunk } from "../figma_app/389091";
+import { hidePickerThunk } from "../figma_app/91703";
 let $$f1 = createActionCreator("FULLSCREEN_CLOSE");
 let $$_0 = createOptimistThunk(e => {
   logInfo("fullscreen cleanup", "Closing fullscreen file", {
@@ -18,13 +18,13 @@ let $$_0 = createOptimistThunk(e => {
   });
   e.dispatch(_$$cL());
   e.dispatch(cL());
-  e.dispatch(ot());
-  e.dispatch(g6());
+  e.dispatch(resetLocalTimer());
+  e.dispatch(resetLocalMusicThunk());
   CanvasSearchHelpers?.exitSearchMode(SelectionState.NONE);
   H1.destroyIndex();
   HandoffBindingsCpp?.setDevModeFocusViewNodeId(null, null);
   null != AppStateTsApi && AppStateTsApi.uiState().showMemoryUsage.set(!1);
-  e.dispatch(XE());
+  e.dispatch(hidePickerThunk());
   fullscreenValue.isReady() && (Fullscreen.fullscreenWasClosed(), handlePluginError());
   e.dispatch(VisualBellActions.dequeue({
     matchType: "unsaved_changes"

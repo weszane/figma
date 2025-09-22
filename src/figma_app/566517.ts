@@ -1,5 +1,5 @@
 import { getComponentInfoById, getTypeInfoCached } from "../figma_app/664063";
-import { G1, Iu } from "../figma_app/691470";
+import { CortexError, getErrorStatus } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { FirstDraftHelpers, PluginHelpers, LayoutSizingMode, AssetSource, SceneGraphHelpers, DraftState, FileSourceType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -198,7 +198,7 @@ async function j({
     try {
       await l;
     } catch (e) {
-      if (e instanceof G1 && 500 > Iu(e)) return;
+      if (e instanceof CortexError && 500 > getErrorStatus(e)) return;
       reportError(_$$e.AI_GENERATION, e);
     }
   }
@@ -289,7 +289,7 @@ async function U({
     y.push(I);
   }
   (await Promise.allSettled(y)).forEach(e => {
-    "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
+    "rejected" !== e.status || e.reason instanceof CortexError && 500 > getErrorStatus(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
   });
 }
 function B(e) {

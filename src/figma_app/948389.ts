@@ -1,5 +1,5 @@
 import { M_, OE, ZO, $L, NZ, PI as _$$PI, g6, rY } from "../905/369755";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, NotImplementedError, OfflineError, MeterExceededError, PayloadTooLargeError } from "../figma_app/316567";
 import { atomStoreManager } from "../figma_app/27355";
 import { getTrackingSessionId } from "../905/471229";
@@ -40,7 +40,7 @@ export function $$g5(e) {
     if (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) return B.UNSAFE_OR_HARMFUL_CONTENT;
     if (NotImplementedError.isInstance(e)) return B.NOT_IMPLEMENTED;else if (OfflineError.isInstance(e)) return B.OFFLINE;else if (MeterExceededError.isInstance(e)) return B.METER_EXCEEDED;else if (PayloadTooLargeError.isInstance(e) || e?.statusCode === 413) return B.CONTENT_LENGTH_LIMIT;
   }
-  if (e instanceof G1) switch (e.type) {
+  if (e instanceof CortexError) switch (e.type) {
     case "rate_limit_exceeded":
       return B.RATE_LIMIT_EXCEEDED;
     case "content_length_limit_exceeded":
@@ -65,7 +65,7 @@ export function $$f2(e) {
     data: {}
   });
   if (e instanceof CortexErrorV2) return e;
-  if (e instanceof G1) {
+  if (e instanceof CortexError) {
     let t = {
       type: e.type,
       data: e.data,
@@ -109,7 +109,7 @@ export function $$f2(e) {
   });
 }
 export function $$E4(e) {
-  return e instanceof G1 && "meter_exceeded" === e.type && !!e.data.resetsAt;
+  return e instanceof CortexError && "meter_exceeded" === e.type && !!e.data.resetsAt;
 }
 export const A0 = $$h0;
 export const Ay = $$_1;

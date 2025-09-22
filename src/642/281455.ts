@@ -23,7 +23,7 @@ import { lQ } from '../905/934246';
 import { cn } from '../905/959568';
 import { wu } from '../1528/306300';
 import { k8 } from '../figma_app/8833';
-import { u1, XE } from '../figma_app/91703';
+import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { Q } from '../figma_app/104130';
 import { M as _$$M } from '../figma_app/339170';
 import { fullscreenValue } from '../figma_app/455680';
@@ -160,14 +160,14 @@ export function $$G0(e) {
   let z = useMemo(() => isValidValue(backgroundOpacity) && typeof backgroundOpacity == 'number' && isNaN(backgroundOpacity) ? 0 : backgroundOpacity, [backgroundOpacity]);
   let W = () => {
     if (e.setDefaultToolOnPickerOpen && fullscreenValue.triggerAction('set-tool-default'), e.pickerShown && e.pickerShown.id === k8) {
-      k(XE());
+      k(hidePickerThunk());
     } else {
       getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics('editor-background-panel-color-picker-show');
       let e = t.current ? cn(t.current) : {
         x: 0,
         y: 0
       };
-      k(u1({
+      k(showPickerThunk({
         id: k8,
         initialX: e.x,
         initialY: e.y

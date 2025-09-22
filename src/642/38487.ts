@@ -55,7 +55,7 @@ import { $E, r as _$$r, _k, a6, bY, cb, cm, co, Cr, ct, dK, DT, Fq, GE, Gt, hF, 
 import { ks } from '../figma_app/626177';
 import { JT } from '../figma_app/632248';
 import { y0 } from '../figma_app/718307';
-import { UK } from '../figma_app/740163';
+import { EditorPreferencesApi } from '../figma_app/740163';
 import { ActionType, SceneGraphHelpers } from '../figma_app/763686';
 import { parsePxNumber } from '../figma_app/783094';
 import { indentWidthWithMargin, rowActionsWidth, scrollBarYWidth, trackPadding } from '../figma_app/786175';
@@ -238,7 +238,7 @@ function eb({
   isWebpage: t
 }) {
   let s = useIsFullscreenSitesView();
-  let n = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
+  let n = getObservableOrFallback(EditorPreferencesApi().showSemanticTagsOnLayerRows);
   let i = useDeepEqualSceneValue((e, s) => {
     let r = e.get(s);
     if (!r) {
@@ -590,7 +590,7 @@ let eA = memo(e => {
   let eG = eB && eF && X && eK && sq(eK);
   let eH = e.nodeType !== 'REACT_FIBER' && e.nodeType !== 'SLIDE';
   let eV = useAtomWithSubscription(r8(e.guid))?.state === 'pending';
-  let eU = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
+  let eU = getObservableOrFallback(EditorPreferencesApi().showSemanticTagsOnLayerRows);
   let ez = !X && getFeatureFlags().sts_a11y_layers_semantic_tags && eU;
   let eW = eF ? topLevelObjectRowHeight : nestedObjectRowHeight;
   let e$ = eF ? topLevelIconSize : nestedIconSize;

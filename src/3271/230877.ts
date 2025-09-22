@@ -6,7 +6,7 @@ import { lz } from "../figma_app/212767";
 import { Dm } from "../figma_app/8833";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
-import { qw, UK } from "../figma_app/740163";
+import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { Ds } from "../1528/88743";
@@ -15,13 +15,13 @@ var i = n;
 export function $$h0(e) {
   let t;
   let s = lz();
-  let n = qw();
+  let n = getPropertiesPanelSplitPosition();
   let h = getSelectedEditorType();
   let {
     isPropertiesPanelCollapsed
   } = iT();
   let f = useAtomWithSubscription(Ds);
-  let C = getObservableOrFallback(UK().renderRulers);
+  let C = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   t = {
     right: `calc(${h === FEditorType.DevHandoff ? s : n}px + ${parsePxNumber(M$q)}px)`,
     top: `${parsePxNumber(M$q)}px`

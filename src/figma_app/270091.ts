@@ -29,7 +29,7 @@ import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
-import { U8, fG } from "../figma_app/91703";
+import { setPreferredValuesPickerListLayout, setInstanceSwapPickerListLayout } from "../figma_app/91703";
 import { vq, qX } from "../905/8732";
 import { fi } from "../figma_app/913823";
 import { loadingStateDelete } from "../figma_app/714946";
@@ -1053,7 +1053,7 @@ export function $$e$0({
     isPreferredValues: !!t
   });
   let c = useSelector(e => t ? e.preferredValuesPickerListLayout : e.instanceSwapPickerListLayout);
-  let p = t ? U8 : fG;
+  let p = t ? setPreferredValuesPickerListLayout : setInstanceSwapPickerListLayout;
   let m = useCallback(n => {
     n.stopPropagation();
     l(p({

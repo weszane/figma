@@ -34,7 +34,7 @@ import { isSitesFileType, isDesignFileType } from "../figma_app/976749";
 import { Yk } from "../figma_app/644079";
 import { getVisibleTheme } from "../905/640017";
 import { getSelectedFile } from "../905/766303";
-import { D as _$$D } from "../figma_app/740163";
+import { isHelpWidgetHidden } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { getSelectedView } from "../figma_app/386952";
 import { getObservableValue } from "../figma_app/84367";
@@ -198,7 +198,7 @@ let $$eh0 = memo(function () {
     user,
     unsortedTeams
   } = $$em2();
-  let v = _$$D();
+  let v = isHelpWidgetHidden();
   let A = isDesignFileType();
   let x = _$$U();
   let N = sO();

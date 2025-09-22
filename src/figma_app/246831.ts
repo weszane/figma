@@ -31,7 +31,7 @@ import { Lp } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { Uv, XE, u1, bS } from "../figma_app/91703";
+import { hideStylePicker, hidePickerThunk, showPickerThunk, showStylePicker } from "../figma_app/91703";
 import { hideModal, showModalHandler } from "../905/156213";
 import { sw, rk } from "../figma_app/914957";
 import { hideTooltip } from "../905/765855";
@@ -423,9 +423,9 @@ export function $$eF1({
     g?.();
   }, [g]);
   let eo = useCallback(() => {
-    T(Uv());
+    T(hideStylePicker());
     T(sw());
-    T(XE());
+    T(hidePickerThunk());
   }, [T]);
   let el = useCallback(() => {
     v ? T(hideModal()) : T(showModalHandler({
@@ -650,8 +650,8 @@ function eG({
   let em = useMemo(() => !!modalShown && modalShown.type === LIBRARY_PREFERENCES_MODAL, [modalShown]);
   let eg = useMemo(() => {
     let e = () => Y(hideTooltip());
-    let r = () => Y(XE());
-    let n = () => Y(Uv());
+    let r = () => Y(hidePickerThunk());
+    let n = () => Y(hideStylePicker());
     let i = () => Y(sw());
     return {
       selectStyle(r) {
@@ -698,20 +698,20 @@ function eG({
     };
   }, [Y, s, l, X, stylePreviewShown, t.modal]);
   let ef = useCallback(() => {
-    Y(Uv());
+    Y(hideStylePicker());
     Y(sw());
-    Y(XE());
+    Y(hidePickerThunk());
   }, [Y]);
   let eE = useCallback(e => {
     e.stopPropagation();
     dropdownShown && Y(hideDropdownAction());
   }, [Y, dropdownShown]);
   let ey = useCallback(() => {
-    t.modal && Y(u1({
+    t.modal && Y(showPickerThunk({
       ...t,
       modal: !1
     }));
-    stylePickerShown.isShown && stylePickerShown.modal && Y(bS({
+    stylePickerShown.isShown && stylePickerShown.modal && Y(showStylePicker({
       ...stylePickerShown,
       modal: !1
     }));

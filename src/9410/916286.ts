@@ -16,7 +16,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { sendMetric } from "../905/485103";
 import { g3, zI } from "../figma_app/304207";
-import { UC } from "../figma_app/91703";
+import { updateOpenFile } from "../figma_app/91703";
 import { setWorkshopModeUntil } from "../figma_app/107215";
 import { workshopModeExpirationAtom } from "../figma_app/789";
 import { useInstalledPluginsAndWidgets } from "../figma_app/844435";
@@ -124,7 +124,7 @@ function L(e) {
     P.current = e.canEdit;
     R.current && e.isTryFile && (F.current = !0);
     let t = debugState.getState().selectedView;
-    "fullscreen" === t.view && t.fileKey === e?.key && B.current !== e && (o(UC({
+    "fullscreen" === t.view && t.fileKey === e?.key && B.current !== e && (o(updateOpenFile({
       openFile: {
         ...e,
         isFavorited: m

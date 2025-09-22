@@ -1,35 +1,47 @@
-var n;
-function i(e, t, r) {
-  t in e ? Object.defineProperty(e, t, {
-    value: r,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = r;
-  return e;
+// ErrorType Enum groups error type strings for clarity and maintainability (original: n)
+export enum ErrorType {
+  UNCLOSED_TAGS_BENIGN = 'unclosed_tags_benign',
+  MID_STREAM_REQUEST_EXCEEDS_CONTEXT_LIMIT = 'mid_stream_request_exceeds_context_limit',
 }
-(function (e) {
-  e.UNCLOSED_TAGS_BENIGN = "unclosed_tags_benign";
-  e.MID_STREAM_REQUEST_EXCEEDS_CONTEXT_LIMIT = "mid_stream_request_exceeds_context_limit";
-})(n || (n = {}));
-export class $$a0 extends Error {
-  constructor(e, t, r, n, a) {
-    super(r ?? function (e) {
-      let t = e.message;
-      return "string" == typeof t ? t : void 0;
-    }(t) ?? `CortexError of type ${e}`);
-    i(this, "type", void 0);
-    i(this, "data", void 0);
-    i(this, "trace", void 0);
-    i(this, "metadata", void 0);
-    i(this, "sentryTags", void 0);
-    null != n && (this.stack = n);
-    void 0 !== a && (this.trace = a);
-    this.type = e;
-    this.data = t;
+
+/**
+ * CortexError class for error handling with extended metadata (original: $$a0)
+ */
+export class CortexError extends Error {
+  type: string
+  data: any
+  trace?: any
+  metadata?: any
+  sentryTags?: any
+
+  constructor(
+    type: string,
+    data: any,
+    message?: string,
+    stack?: string,
+    trace?: any,
+  ) {
+    super(
+      message
+      ?? (typeof data?.message === 'string' ? data.message : undefined)
+      ?? `CortexError of type ${type}`,
+    )
+
+    if (stack != null) {
+      this.stack = stack
+    }
+    if (trace !== undefined) {
+      this.trace = trace
+    }
+    this.type = type
+    this.data = data
   }
 }
-let s = {
+
+/**
+ * Maps error types to HTTP status codes (original: s)
+ */
+const errorTypeToStatus: Record<string, number> = {
   parse_request: 400,
   content_length_limit_exceeded: 400,
   payload_too_large: 413,
@@ -62,11 +74,22 @@ let s = {
   make_changes_unsupported: 422,
   make_changes_moderated: 422,
   text_tool_no_text: 400,
-  unclosed_tags_benign: 500,
-  mid_stream_request_exceeds_context_limit: 413
-};
-export function $$o1(e) {
-  return e instanceof $$a0 && "generic" === e.type ? e.data.status ?? 500 : s[e.type] ?? 500;
+  [ErrorType.UNCLOSED_TAGS_BENIGN]: 500,
+  [ErrorType.MID_STREAM_REQUEST_EXCEEDS_CONTEXT_LIMIT]: 413,
 }
-export const G1 = $$a0;
-export const Iu = $$o1;
+
+/**
+ * Returns the HTTP status code for a given error (original: $$o1)
+ * @param error - The error object
+ * @returns The corresponding HTTP status code
+ */
+export function getErrorStatus(error: unknown): number {
+  if (error instanceof CortexError && error.type === 'generic') {
+    return error.data?.status ?? 500
+  }
+  return errorTypeToStatus[(error as any)?.type] ?? 500
+}
+
+// Export refactored names for external usage
+export const G1 = CortexError
+export const Iu = getErrorStatus

@@ -25,7 +25,7 @@ import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { AO, o$ } from "../figma_app/8833";
 import { JV, Eq, sX, cP, js, mj } from "../figma_app/451499";
 import { isSitesFileType } from "../figma_app/976749";
@@ -268,9 +268,9 @@ let $$eT0 = memo(function ({
     shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== NodePropertyCategory.PROTOTYPE_INTERACTION && s.type !== NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
-      if (f?.id === AO) t(XE());else {
+      if (f?.id === AO) t(hidePickerThunk());else {
         let e = cn(R.current);
-        t(u1({
+        t(showPickerThunk({
           id: AO,
           initialX: e.x,
           initialY: e.y
@@ -441,7 +441,7 @@ function eA({
   }, [U]);
   let eg = useCallback(() => {
     Fullscreen.setSelectedInteractions([]);
-    D(XE());
+    D(hidePickerThunk());
     fullscreenValue.deselectProperty();
   }, [D]);
   let eI = n => {
@@ -487,7 +487,7 @@ function eA({
       let e = Q && Q.shouldPin;
       if (U) {
         let t = el.length + o.length > 1;
-        i ? (i || t) && D(XE()) : (es([]), e || eh());
+        i ? (i || t) && D(hidePickerThunk()) : (es([]), e || eh());
       } else e || eh();
     } else eg();
   };

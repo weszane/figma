@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { H } from "../905/474029";
 import { Mv, jv } from "../figma_app/909778";
 import { useFBGNavigationUpdatesTreatment, FBGNavigationUpdatesVariants } from "../figma_app/297957";
-import { jm } from "../905/697795";
+import { userHasPlan } from "../905/697795";
 import { getSelectedView } from "../figma_app/386952";
 import { FEntityType } from "../figma_app/191312";
 export function $$p0(e) {
@@ -16,7 +16,7 @@ export function $$p0(e) {
   let m = useDispatch();
   let h = "recentsAndSharing" === i.view && "shared-projects" === i.tab ? e.folder.parent_org?.id ?? null : p;
   let g = e.folder.team_id;
-  let f = jm(h, g);
+  let f = userHasPlan(h, g);
   let _ = useFBGNavigationUpdatesTreatment() === FBGNavigationUpdatesVariants.CONTROL;
   let A = useCallback((e, i, n) => {
     let r = {

@@ -35,7 +35,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { sx as _$$sx, XE } from "../figma_app/91703";
+import { trackFileEventThunk, hidePickerThunk } from "../figma_app/91703";
 import { TrackingProvider } from "../figma_app/831799";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { J as _$$J2 } from "../905/445197";
@@ -343,7 +343,7 @@ export let $$eZ0 = registerModal(function (e) {
         let e = Object.values(u).map(e => e.oldName.family + ":" + e.newName.family);
         let t = "current_page";
         l && g === PageSelectionType.CURRENT_PAGE ? t = "current_selection_fallback" : g === PageSelectionType.CURRENT_SELECTION ? t = "current_selection" : g === PageSelectionType.ALL_PAGES && (t = "all_pages");
-        o(_$$sx({
+        o(trackFileEventThunk({
           name: "missing_fonts_replaced",
           params: {
             replaced_font_families: e,
@@ -481,7 +481,7 @@ export let $$eZ0 = registerModal(function (e) {
   let eU = useSelector(e => e.mirror.appModel.pagesList);
   let ez = useCallback(function () {
     g(hideDropdownAction());
-    g(XE());
+    g(hidePickerThunk());
   }, [g]);
   let e$ = useSelector(e => e.mirror.sceneGraphSelection);
   let [eZ, eJ] = useState();

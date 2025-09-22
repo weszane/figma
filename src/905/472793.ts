@@ -72,6 +72,7 @@ import { XHR } from '../905/910117'
 import { loadAllPagesWithUI } from '../905/916933'
 import { combinedNodes1, combinedNodes2, combinedNodes3, combinedNodes4, combinedNodes5, localWidgetCodeMD5Key, nodeTypeMappings, styleTypeMappings, timeRegex } from '../905/933084'
 import { incrementCounter } from '../905/949750'
+import { DEFAULT_ALLOWED_ORIGINS, INTERNAL_RERUN_PLUGIN_IDENTIFIER } from '../905/968269'
 import { TextWithTruncation } from '../905/984674'
 import { finalizeLinkPreviewHandler } from '../905/994901'
 import { fieldGroupSerializationOptionsSchema } from '../905/998509'
@@ -92,7 +93,7 @@ import { isStyleString, serializeStyle } from '../figma_app/276332'
 import { PluginPermissions } from '../figma_app/300692'
 import { hasImageOrVideoFill, useNodeMediaPaint } from '../figma_app/334505'
 import { hasReachedPageLimit } from '../figma_app/345997'
-import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091'
+import { adjustTimerThunk, pauseTimerThunk, resumeTimerThunk, startTimerThunk, stopTimerThunk } from '../figma_app/389091'
 import { openInBrowser } from '../figma_app/415217'
 import { Ay as _$$Ay2 } from '../figma_app/432652'
 import { getOpenExternalPluginIds } from '../figma_app/455620'
@@ -100,12 +101,12 @@ import { fullscreenValue } from '../figma_app/455680'
 import { assert, throwTypeError } from '../figma_app/465776'
 import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636'
 import { selectOpenFile } from '../figma_app/516028'
-import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, BT, cI, dG, dM, f2, fd, G1, H4, jG, jS, KB, LL, ME, Mw, OD, oZ, Q4, q$, Ql, Rp, sd, Sf, Sx, Ty, Vb, VM, W5, wk, Xx } from '../figma_app/603466'
+import { clearPluginPageLoadedCallback, dM, f2, ME, OD, oZ, registerAccessibleNodeIdsProvider, registerAccessiblePagesProvider, registerCodegenPreferencesChangeHandler, registerDocumentChangeHandler, registerNodeChangeHandler, registerPageChangeHandler, registerPluginPageLoadedHandler, registerSelectionHandler, registerSlidesViewChangeHandler, registerStackInvariantHandler, registerStyleChangeHandler, registerTimerChangeHandler, removeCloseCallback, setCloseCallback, setDevResourceOpenCallback, setPluginPageLoadedCallback, setSpellCheckCallback, unregisterAccessibleNodeIdsProvider, unregisterAccessiblePagesProvider, unregisterCodegenCallback, unregisterCodegenPreferencesChangeHandler, unregisterDevResourceOpenCallback, unregisterDocumentChangeHandler, unregisterNodeChangeHandler, unregisterPageChangeHandler, unregisterPluginPageLoadedHandler, unregisterSelectionHandler, unregisterSlidesViewChangeHandler, unregisterSpellCheckCallback, unregisterStackInvariantHandler, unregisterStyleChangeHandler, unregisterTimerChangeHandler } from '../figma_app/603466'
 import { findStyleDataByKey, iterateAssetsByTeam } from '../figma_app/646357'
 import { arraysEqual } from '../figma_app/656233'
 import * as _require from '../figma_app/664063'
 import { PluginModalTypeEnum } from '../figma_app/671547'
-import { UK } from '../figma_app/740163'
+import { EditorPreferencesApi } from '../figma_app/740163'
 import { updateActiveTextReviewPlugin } from '../figma_app/741237'
 import { createTrackingContext } from '../figma_app/757723'
 import { AppStateTsApi, Confirmation, CooperHelpers, CooperTemplateTypesTsBindings, DraftState, FirstDraftHelpers, Fullscreen, LibraryPubSub, LogicalOperation, MeasurementUnit, PluginHelpers, PluginModalType, ResourceLocation, SceneChangeType, SceneGraphHelpers, SceneIdentifier, SelectionPaintHelpers, SlideViewType, SocialMediaFormats, TrackType, VariableResolvedDataType } from '../figma_app/763686'
@@ -115,12 +116,11 @@ import { isInteractionPathCheck } from '../figma_app/897289'
 // Import UI Components and Controls Library - Phase 14
 import { parseEmbedInput } from '../figma_app/916560'
 import { Ky, u7, zn } from '../figma_app/933328'
-import { gH, IN } from '../figma_app/985200'
 import { AnnotationCategoryFactory } from './core/annotation'
-import { an, convertGridLayoutConfig, createImageProcessor, createNodeHash, eG, ez, generateJsxFromNode, getAllStorageKeysWithPrefix, getNodeById, getNodeGuid, getRowColumn, getStorageValueByKey, i5, isInImmutableContext, isVMPromiseLike, loadFontsForTextNode, parseColorInput, processEffect, processEffectWithValidation, processGridLayout, renameSelectedLayers, setStorageEntry, timerAndStateEvents, variableDefinitions, wrapVmPromise } from './core/helper'
+import { an, convertGridLayoutConfig, createImageProcessor, createNodeHash, generateJsxFromNode, getAllStorageKeysWithPrefix, getNodeById, getNodeGuid, getRowColumn, getStorageValueByKey, i5, isInImmutableContext, isVMPromiseLike, lightColorPalette, loadFontsForTextNode, parseColorInput, processEffect, processEffectWithValidation, processGridLayout, renameSelectedLayers, setStorageEntry, timerAndStateEvents, uiColorPalette, variableDefinitions, wrapVmPromise } from './core/helper'
 import { ImageStore } from './core/image-store'
 import { IncLoadingErrorLogger } from './core/incLoadingErrorLogger'
-import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI, processPaint, tB, validateAndExtractCollectionId } from './core/node-api'
+import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, processPaint, validateAndExtractCollectionId } from './core/node-api'
 import { NodeFactory } from './core/node-factory'
 import { PluginRuntimeBridge } from './core/plugin-runtime-bridge'
 import { StyleFactory } from './core/style-factory'
@@ -128,7 +128,7 @@ import { StyleManager } from './core/style-manager'
 import { VariableFactory } from './core/variable-api'
 import { VariableCollectionFactory } from './core/variable-collection-factory'
 import { VideoStore } from './core/video-store'
-import { convertInternalPaintToExternal } from './modules'
+import { convertInternalPaintToExternal, processURL } from './modules'
 
 let rp = registerModal(({
   resolve: e,
@@ -137,7 +137,7 @@ let rp = registerModal(({
   ...n
 }) => {
   let [r, a] = useState(!1)
-  let s = getObservableOrFallback(UK().spellCheckPreference)
+  let s = getObservableOrFallback(EditorPreferencesApi().spellCheckPreference)
   let o = () => {
     n.onClose()
     t()
@@ -884,8 +884,8 @@ class PluginRuntime {
       stats: options.stats,
       allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls,
     })
-    W5(this.pluginPageLoaded)
-    Ql(this.getAccessiblePages)
+    registerPluginPageLoadedHandler(this.pluginPageLoaded)
+    registerAccessiblePagesProvider(this.getAccessiblePages)
     this._hasRegisteredWidgetFunction = false
     if (this.isWidget) {
       const {
@@ -961,7 +961,7 @@ class PluginRuntime {
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
       enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
     })
-    Q4(this.getAllAccessedGuids)
+    registerAccessibleNodeIdsProvider(this.getAllAccessedGuids)
     this.styleFactory = new StyleFactory({
       vm,
       stats: this.options.stats,
@@ -1129,12 +1129,12 @@ class PluginRuntime {
       // No additional event callbacks needed for NoOp VMs
     }
     else {
-      LL(this.selectionCallback)
-      Xx(this.pageCallback)
-      Sf(this.timerCallback)
-      KB(this.dropCallback)
-      _$$i(this.codegenPreferencesChangeCallback)
-      _C(this.slidesViewChangeCallback)
+      registerSelectionHandler(this.selectionCallback)
+      registerPageChangeHandler(this.pageCallback)
+      registerTimerChangeHandler(this.timerCallback)
+      registerStackInvariantHandler(this.dropCallback)
+      registerCodegenPreferencesChangeHandler(this.codegenPreferencesChangeCallback)
+      registerSlidesViewChangeHandler(this.slidesViewChangeCallback)
     }
     this.options.addShutdownAction(e => this.tearDown(e))
     this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid)
@@ -1728,7 +1728,7 @@ class PluginRuntime {
         throw new Error('Cannot register documentchange handler in incremental mode without calling figma.loadAllPagesAsync first.')
       }
     }
-    Mw(this.documentChangeCallback)
+    registerDocumentChangeHandler(this.documentChangeCallback)
     return undefined
   }
 
@@ -1739,7 +1739,7 @@ class PluginRuntime {
    */
   setupStyleChangeEvent() {
     this.vm.registerPromise(loadInternalCanvasMemoized(this.documentAccessState)).then(() => {
-      _$$iP(this.styleChangeCallback)
+      registerStyleChangeHandler(this.styleChangeCallback)
     }).catch((error) => {
       throw new Error(`Cannot register stylechange handler: ${error.message}`)
     })
@@ -1757,7 +1757,7 @@ class PluginRuntime {
     if (targetNode.type !== 'CANVAS') {
       throw new Error('Cannot register nodechange handler on non-page node')
     }
-    BT(this.nodeChangeCallback)
+    registerNodeChangeHandler(this.nodeChangeCallback)
     return targetNode.guid
   }
 
@@ -1789,7 +1789,7 @@ class PluginRuntime {
     const callbackSetup = {
       textreview: () => {
         if (this.options.command === 'textreview') {
-          Sx(this.spellCheckCallback)
+          setSpellCheckCallback(this.spellCheckCallback)
         }
       },
       generate: () => {
@@ -1807,11 +1807,11 @@ class PluginRuntime {
         ME(this.authCallback)
       },
       open: () => {
-        B_(this.devResourceOpenCallback)
+        setDevResourceOpenCallback(this.devResourceOpenCallback)
       },
       close: () => {
         if (getFeatureFlags().plugins_async_on_close_handler) {
-          Bs(this.onCloseCallback)
+          setCloseCallback(this.onCloseCallback)
         }
       },
     }
@@ -1845,11 +1845,11 @@ class PluginRuntime {
           }
           n.splice(r, 1)
           this.vm.releaseHandle(i)
-          n.length || t !== 'nodechange' || q$(this.nodeChangeCallback)
-          n.length || t !== 'stylechange' || fd(this.styleChangeCallback)
-          n.length || t !== 'documentchange' || b_(this.documentChangeCallback)
-          n.length || t !== 'slidesviewchange' || _$$nf(this.slidesViewChangeCallback)
-          getFeatureFlags().plugins_async_on_close_handler && !n.length && t === 'close' && Vb(this.onCloseCallback)
+          n.length || t !== 'nodechange' || unregisterNodeChangeHandler(this.nodeChangeCallback)
+          n.length || t !== 'stylechange' || unregisterStyleChangeHandler(this.styleChangeCallback)
+          n.length || t !== 'documentchange' || unregisterDocumentChangeHandler(this.documentChangeCallback)
+          n.length || t !== 'slidesviewchange' || unregisterSlidesViewChangeHandler(this.slidesViewChangeCallback)
+          getFeatureFlags().plugins_async_on_close_handler && !n.length && t === 'close' && removeCloseCallback(this.onCloseCallback)
           return
         }
       }
@@ -2535,7 +2535,7 @@ class PluginRuntime {
     const vmHandle = this.vm
 
     // Handle special keyboard trigger message
-    if (messageEvent.data === IN) {
+    if (messageEvent.data === INTERNAL_RERUN_PLUGIN_IDENTIFIER) {
       fullscreenValue.triggerAction('plugins-run-last', {
         source: 'keyboard',
       })
@@ -2850,8 +2850,8 @@ class PluginRuntime {
    * setupWidgetManager - Set up widget management if in widget mode
    */
   setupWidgetManager() {
-    W5(this.pluginPageLoaded)
-    Ql(this.getAccessiblePages)
+    registerPluginPageLoadedHandler(this.pluginPageLoaded)
+    registerAccessiblePagesProvider(this.getAccessiblePages)
     if (this.isWidget) {
       const {
         runtimeBridge,
@@ -2946,12 +2946,12 @@ class PluginRuntime {
    * setupEventCallbacks - Set up event callbacks for VM instances
    */
   setupEventCallbacks() {
-    LL(this.selectionCallback)
-    Xx(this.pageCallback)
-    Sf(this.timerCallback)
-    KB(this.dropCallback)
-    _$$i(this.codegenPreferencesChangeCallback)
-    _C(this.slidesViewChangeCallback)
+    registerSelectionHandler(this.selectionCallback)
+    registerPageChangeHandler(this.pageCallback)
+    registerTimerChangeHandler(this.timerCallback)
+    registerStackInvariantHandler(this.dropCallback)
+    registerCodegenPreferencesChangeHandler(this.codegenPreferencesChangeCallback)
+    registerSlidesViewChangeHandler(this.slidesViewChangeCallback)
   }
 
   /**
@@ -3120,23 +3120,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * unregisterAllCallbacks - Unregister all callbacks and observers
    */
   async unregisterAllCallbacks() {
-    _$$po(this.timerCallback)
-    wk(this.selectionCallback)
-    cI(this.pageCallback)
-    Ty(this.dropCallback)
-    sd(this.spellCheckCallback)
-    G1(this.codegenCallback)
-    G1(this.legacyCodegenCallback)
-    Rp(this.pluginPageLoaded)
-    VM(this.getAllAccessedGuids)
-    jS(this.getAccessiblePages)
-    dG()
-    b_(this.documentChangeCallback)
-    fd(this.styleChangeCallback)
-    q$(this.nodeChangeCallback)
-    $y(this.codegenPreferencesChangeCallback)
-    _$$nf(this.slidesViewChangeCallback)
-    H4(this.devResourceOpenCallback)
+    unregisterTimerChangeHandler(this.timerCallback)
+    unregisterSelectionHandler(this.selectionCallback)
+    unregisterPageChangeHandler(this.pageCallback)
+    unregisterStackInvariantHandler(this.dropCallback)
+    unregisterSpellCheckCallback(this.spellCheckCallback)
+    unregisterCodegenCallback(this.codegenCallback)
+    unregisterCodegenCallback(this.legacyCodegenCallback)
+    unregisterPluginPageLoadedHandler(this.pluginPageLoaded)
+    unregisterAccessibleNodeIdsProvider(this.getAllAccessedGuids)
+    unregisterAccessiblePagesProvider(this.getAccessiblePages)
+    clearPluginPageLoadedCallback()
+    unregisterDocumentChangeHandler(this.documentChangeCallback)
+    unregisterStyleChangeHandler(this.styleChangeCallback)
+    unregisterNodeChangeHandler(this.nodeChangeCallback)
+    unregisterCodegenPreferencesChangeHandler(this.codegenPreferencesChangeCallback)
+    unregisterSlidesViewChangeHandler(this.slidesViewChangeCallback)
+    unregisterDevResourceOpenCallback(this.devResourceOpenCallback)
   }
 
   /**
@@ -3638,7 +3638,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       await f2(5000) // 5 second timeout
     }
     finally {
-      Vb(this.onCloseCallback)
+      removeCloseCallback(this.onCloseCallback)
       this.runningCloseEventHandler = false
     }
   }
@@ -3803,7 +3803,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   pauseTimer() {
     const timerState = this.getTimerState()
     if (getTimeRemaining(timerState.time) > 0) {
-      debugState.dispatch(_1(timerState.time))
+      debugState.dispatch(pauseTimerThunk(timerState.time))
     }
   }
 
@@ -3813,7 +3813,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   resumeTimer() {
     const timerState = this.getTimerState()
     if (getTimeRemaining(timerState.time) > 0 && timerState.time.isPaused) {
-      debugState.dispatch(_$$ne(timerState.time))
+      debugState.dispatch(resumeTimerThunk(timerState.time))
     }
   }
 
@@ -3838,7 +3838,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * startNewTimer - Start a completely new timer
    */
   startNewTimer(totalTimeMs) {
-    debugState.dispatch(Qv({
+    debugState.dispatch(startTimerThunk({
       totalTimeMs,
     }))
   }
@@ -3848,14 +3848,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   adjustExistingTimer(timerState, targetDurationMs, currentRemainingMs) {
     const deltaMs = targetDurationMs - currentRemainingMs
-    debugState.dispatch(VV({
+    debugState.dispatch(adjustTimerThunk({
       timer: timerState.time,
       deltaMs,
     }))
 
     // Resume if currently paused
     if (timerState.time?.isPaused) {
-      debugState.dispatch(_$$ne(this.getTimerState().time))
+      debugState.dispatch(resumeTimerThunk(this.getTimerState().time))
     }
   }
 
@@ -3865,7 +3865,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   stopTimer() {
     const timerState = this.getTimerState()
     if (getTimeRemaining(timerState.time) > 0) {
-      debugState.dispatch(Vk(timerState.time))
+      debugState.dispatch(stopTimerThunk(timerState.time))
     }
   }
 
@@ -4041,7 +4041,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (!photoUrl)
       return null
     try {
-      return tB(new URL(photoUrl))
+      return processURL(new URL(photoUrl))
     }
     catch {
       return null
@@ -4628,7 +4628,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     } = result
 
     // Handle spell check preference
-    if (turnOffSpellCheck && UK().spellCheckPreference.getCopy()) {
+    if (turnOffSpellCheck && EditorPreferencesApi().spellCheckPreference.getCopy()) {
       fullscreenValue.triggerAction('toggle-spell-check')
     }
 
@@ -5364,7 +5364,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       cb: () => {
         if (!this.checkoutRequested) {
           this.checkoutRequested = true
-          jG(this.requestCheckoutCallback)
+          setPluginPageLoadedCallback(this.requestCheckoutCallback)
         }
         return vm.undefined
       },
@@ -5769,13 +5769,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         get: () => {
           let t = e.newObject()
           let i = e.newObject()
-          for (let t in ez) {
-            let n = e.newString(ez[t])
+          for (let t in lightColorPalette) {
+            let n = e.newString(lightColorPalette[t])
             e.setProp(i, t, n)
           }
           let n = e.newObject()
-          for (let t in eG) {
-            let i = e.newString(eG[t])
+          for (let t in uiColorPalette) {
+            let i = e.newString(uiColorPalette[t])
             e.setProp(n, t, i)
           }
           e.setProp(t, 'figJamBase', n)
@@ -6234,7 +6234,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         zSchema: _$$z.string(),
         property: 'map.key',
       })
-      deleteWidgetSyncedMapEntry(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a)
+      deleteWidgetSyncedMapEntry(this.privateSceneGraph.get(variableDefinitions), validatedMapKey, a)
       widgetManager.scheduleRender(variableDefinitions)
       return vm.undefined
     })
@@ -10841,7 +10841,7 @@ export function createDefaultPluginOptions() {
     validatedPermissions: PluginPermissions.forConsoleGlobal(),
     isLocal: true,
     capabilities: [],
-    allowedDomains: gH,
+    allowedDomains: DEFAULT_ALLOWED_ORIGINS,
     editorType: [ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM, ManifestEditorType.INSPECT, ManifestEditorType.DEV, ManifestEditorType.SITES, ManifestEditorType.SLIDES],
     html: null,
     incrementalSafeApi: false,

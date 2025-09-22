@@ -73,7 +73,7 @@ import { A as _$$A6 } from "../svg/831814";
 import e8 from "classnames";
 import { L as _$$L, I as _$$I } from "../1577/16430";
 import { isValueInObject } from "../905/872825";
-import { LJ, HP, OE, PF } from "../figma_app/930386";
+import { TemplateCategory, WebsiteType, hasQuery, NavigationType } from "../figma_app/930386";
 import { BrowseCategoryRoute, CategoryRoute, useCategoryResourceHandler, categoryUrls } from "../figma_app/805898";
 import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
@@ -1522,7 +1522,7 @@ function tN() {
   }));
   return (useLayoutEffect(() => {
     let t = ey[urlSlug];
-    isValueInObject(t, LJ) && customHistory.replace(new BrowseCategoryRoute({
+    isValueInObject(t, TemplateCategory) && customHistory.replace(new BrowseCategoryRoute({
       categorySlug: t
     }).href);
     let i = ef[urlSlug];
@@ -1781,31 +1781,31 @@ function t6({
       children: [{
         text: getI18nString("categories.ui_kits"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.uiKits
+          categorySlug: TemplateCategory.uiKits
         }).href
       }, {
         text: getI18nString("categories.wireframes"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.wireframes
+          categorySlug: TemplateCategory.wireframes
         }).href
       }, {
         text: getI18nString("categories.navbar.social_media.title"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.socialMediaTemplates
+          categorySlug: TemplateCategory.socialMediaTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.navbar.print.title"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.printableTemplates
+          categorySlug: TemplateCategory.printableTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.all_design_libraries"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.libraries
+          categorySlug: TemplateCategory.libraries
         }).href
       }]
     }, {
@@ -1813,29 +1813,29 @@ function t6({
       children: [{
         text: getI18nString("categories.portfolio_templates"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.portfolios
+          categorySlug: TemplateCategory.portfolios
         }).href
       }, {
         text: getI18nString("categories.mobile_apps"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.mobileApps
+          categorySlug: TemplateCategory.mobileApps
         }).href
       }, {
         text: getI18nString("categories.resume_templates"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.resumes
+          categorySlug: TemplateCategory.resumes
         }).href
       }, {
         text: getI18nString("categories.navbar.web_ad"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.webAds
+          categorySlug: TemplateCategory.webAds
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.all_design_templates"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.designTemplates
+          categorySlug: TemplateCategory.designTemplates
         }).href
       }]
     }, {
@@ -1843,27 +1843,27 @@ function t6({
       children: [{
         text: getI18nString("categories.icons"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.icons
+          categorySlug: TemplateCategory.icons
         }).href
       }, {
         text: getI18nString("categories.illustrations"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.illustrations
+          categorySlug: TemplateCategory.illustrations
         }).href
       }, {
         text: getI18nString("categories.shapes_colors"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.shapesColors
+          categorySlug: TemplateCategory.shapesColors
         }).href
       }, {
         text: getI18nString("categories.device_mockups"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.deviceMockups
+          categorySlug: TemplateCategory.deviceMockups
         }).href
       }, {
         text: getI18nString("categories.all_assets"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.visualAssets
+          categorySlug: TemplateCategory.visualAssets
         }).href
       }]
     }, {
@@ -1871,37 +1871,37 @@ function t6({
       children: [{
         text: getI18nString("categories.navbar.landing_page.title"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.websiteTemplates,
-          tagSlug: HP.landingPageTemplates
+          categorySlug: TemplateCategory.websiteTemplates,
+          tagSlug: WebsiteType.landingPageTemplates
         }, {
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
         text: getI18nString("categories.navbar.portfolio.title"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.websiteTemplates,
-          tagSlug: HP.portfolioWebsiteTemplates
+          categorySlug: TemplateCategory.websiteTemplates,
+          tagSlug: WebsiteType.portfolioWebsiteTemplates
         }, {
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
         text: getI18nString("categories.navbar.business.title"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.websiteTemplates,
-          tagSlug: HP.businessWebsites
+          categorySlug: TemplateCategory.websiteTemplates,
+          tagSlug: WebsiteType.businessWebsites
         }, {
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
         text: getI18nString("categories.navbar.blog"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.websiteTemplates,
-          tagSlug: HP.blogWebsites
+          categorySlug: TemplateCategory.websiteTemplates,
+          tagSlug: WebsiteType.blogWebsites
         }).href
       }, {
         text: getI18nString("categories.all_websites"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.websiteTemplates
+          categorySlug: TemplateCategory.websiteTemplates
         }, {
           editor_type: _$$k2.Editors.SITES
         }).href
@@ -1911,37 +1911,37 @@ function t6({
       children: [{
         text: getI18nString("categories.editing_effects"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.editingEffects
+          categorySlug: TemplateCategory.editingEffects
         }).href
       }, {
         text: getI18nString("categories.file_organization"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.fileOrganization
+          categorySlug: TemplateCategory.fileOrganization
         }).href
       }, {
         text: getI18nString("categories.navbar.development"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.development
+          categorySlug: TemplateCategory.development
         }).href
       }, {
         text: getI18nString("categories.widgets"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.whiteboarding
+          categorySlug: TemplateCategory.whiteboarding
         }).href + "?resource_type=widgets"
       }, {
         text: getI18nString("categories.import_export"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.importExport
+          categorySlug: TemplateCategory.importExport
         }).href
       }, {
         text: getI18nString("categories.prototyping_animation"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.prototypingAnimation
+          categorySlug: TemplateCategory.prototypingAnimation
         }).href
       }, {
         text: getI18nString("categories.all_plugins"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.designTools
+          categorySlug: TemplateCategory.designTools
         }).href
       }]
     }, {
@@ -1949,32 +1949,32 @@ function t6({
       children: [{
         text: getI18nString("categories.brainstorming"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.brainstorming
+          categorySlug: TemplateCategory.brainstorming
         }).href
       }, {
         text: getI18nString("categories.diagramming"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.diagramming
+          categorySlug: TemplateCategory.diagramming
         }).href
       }, {
         text: getI18nString("categories.fun_games"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.funGames
+          categorySlug: TemplateCategory.funGames
         }).href
       }, {
         text: getI18nString("categories.team_meetings"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.teamMeetings
+          categorySlug: TemplateCategory.teamMeetings
         }).href
       }, {
         text: getI18nString("categories.strategic_planning"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.strategicPlanning
+          categorySlug: TemplateCategory.strategicPlanning
         }).href
       }, {
         text: getI18nString("categories.all_whiteboarding"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.whiteboarding
+          categorySlug: TemplateCategory.whiteboarding
         }).href + "?resource_type=widgets"
       }]
     }, {
@@ -1994,7 +1994,7 @@ function t6({
       }, {
         text: getI18nString("categories.all_presentations"),
         path: new BrowseCategoryRoute({
-          categorySlug: LJ.presentations
+          categorySlug: TemplateCategory.presentations
         }).href
       }]
     }];
@@ -2155,49 +2155,49 @@ function ij() {
     };
     return {
       uikitRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.uiKits
+        categorySlug: TemplateCategory.uiKits
       }),
       wireframesRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.wireframes
+        categorySlug: TemplateCategory.wireframes
       }),
       socialMediaRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.socialMediaTemplates
+        categorySlug: TemplateCategory.socialMediaTemplates
       }, e),
       printableTemplatesRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.printableTemplates
+        categorySlug: TemplateCategory.printableTemplates
       }, e),
       designTemplatesRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.designTemplates
+        categorySlug: TemplateCategory.designTemplates
       }),
       desktopAppRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.desktopAppsWebsites
+        categorySlug: TemplateCategory.desktopAppsWebsites
       }),
       mobileAppRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.mobileApps
+        categorySlug: TemplateCategory.mobileApps
       }),
       portfolioRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.portfolios
+        categorySlug: TemplateCategory.portfolios
       }),
       resumeRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.resumes
+        categorySlug: TemplateCategory.resumes
       }),
       webAdsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.webAds
+        categorySlug: TemplateCategory.webAds
       }),
       visualAssetsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.visualAssets
+        categorySlug: TemplateCategory.visualAssets
       }),
       illustrationsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.illustrations
+        categorySlug: TemplateCategory.illustrations
       }),
       iconsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.icons
+        categorySlug: TemplateCategory.icons
       }),
       shapesColorsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.shapesColors
+        categorySlug: TemplateCategory.shapesColors
       }),
       deviceMockupsRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.deviceMockups
+        categorySlug: TemplateCategory.deviceMockups
       })
     };
   }, []);
@@ -2338,47 +2338,47 @@ function iN() {
     designToolsRoute
   } = useMemo(() => ({
     editingEffectsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.editingEffects
+      categorySlug: TemplateCategory.editingEffects
     }, {
       resource_type: "plugins"
     }),
     fileOrganizationRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.fileOrganization
+      categorySlug: TemplateCategory.fileOrganization
     }, {
       resource_type: "plugins"
     }),
     developmentRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.development
+      categorySlug: TemplateCategory.development
     }, {
       resource_type: "plugins"
     }),
     widgetsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.whiteboarding
+      categorySlug: TemplateCategory.whiteboarding
     }, {
       resource_type: "widgets"
     }),
     pluginsRoute: t ? new iE() : new BrowseCategoryRoute({
-      categorySlug: LJ.designTools
+      categorySlug: TemplateCategory.designTools
     }, {
       resource_type: "plugins"
     }),
     importExportRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.importExport
+      categorySlug: TemplateCategory.importExport
     }, {
       resource_type: "plugins"
     }),
     accessibilityRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.accessibility
+      categorySlug: TemplateCategory.accessibility
     }, {
       resource_type: "plugins"
     }),
     prototypingAnimationRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.prototypingAnimation
+      categorySlug: TemplateCategory.prototypingAnimation
     }, {
       resource_type: "plugins"
     }),
     designToolsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.designTools
+      categorySlug: TemplateCategory.designTools
     }, {
       resource_type: "plugins"
     })
@@ -2494,7 +2494,7 @@ function iN() {
 }
 function iS() {
   let e = new BrowseCategoryRoute({
-    categorySlug: LJ.presentations
+    categorySlug: TemplateCategory.presentations
   }, {
     editor_type: _$$k2.Editors.SLIDES
   });
@@ -2564,29 +2564,29 @@ function iS() {
     text: getI18nString("categories.presentations.design_review")
   }] : "local" === getInitialOptions().cluster_name ? [{
     route: new BrowseCategoryRoute({
-      categorySlug: LJ.uiKits
+      categorySlug: TemplateCategory.uiKits
     }),
     text: getI18nString("categories.presentations.pitch_deck"),
     subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
     route: new BrowseCategoryRoute({
-      categorySlug: LJ.uiKits
+      categorySlug: TemplateCategory.uiKits
     }),
     text: getI18nString("categories.presentations.product_roadmap"),
     subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
     route: new BrowseCategoryRoute({
-      categorySlug: LJ.uiKits
+      categorySlug: TemplateCategory.uiKits
     }),
     text: getI18nString("categories.ui_kits")
   }, {
     route: new BrowseCategoryRoute({
-      categorySlug: LJ.uiKits
+      categorySlug: TemplateCategory.uiKits
     }),
     text: getI18nString("categories.ui_kits")
   }, {
     route: new BrowseCategoryRoute({
-      categorySlug: LJ.uiKits
+      categorySlug: TemplateCategory.uiKits
     }),
     text: getI18nString("categories.ui_kits")
   }] : [];
@@ -2650,35 +2650,35 @@ function iC() {
     };
     return {
       landingPageRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.landingPageTemplates
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.landingPageTemplates
       }, e),
       portfolioRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.portfolioWebsiteTemplates
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.portfolioWebsiteTemplates
       }, e),
       businessRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.businessWebsites
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.businessWebsites
       }, e),
       moreWebsitesRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates
+        categorySlug: TemplateCategory.websiteTemplates
       }, e),
       blogRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.blogWebsites
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.blogWebsites
       }, e),
       weddingRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.weddingWebsites
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.weddingWebsites
       }, e),
       photographyRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.photographyWebsites
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.photographyWebsites
       }, e),
       interiorDesignWebsiteRoute: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates,
-        tagSlug: HP.interiorDesignWebsites
+        categorySlug: TemplateCategory.websiteTemplates,
+        tagSlug: WebsiteType.interiorDesignWebsites
       }, e)
     };
   }, []);
@@ -2751,22 +2751,22 @@ function ik() {
     strategicPlanningRoute
   } = useMemo(() => ({
     brainstormingRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.brainstorming
+      categorySlug: TemplateCategory.brainstorming
     }),
     diagrammingRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.diagramming
+      categorySlug: TemplateCategory.diagramming
     }),
     funGamesRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.funGames
+      categorySlug: TemplateCategory.funGames
     }),
     teamMeetingsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.teamMeetings
+      categorySlug: TemplateCategory.teamMeetings
     }),
     whiteboardingRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.whiteboarding
+      categorySlug: TemplateCategory.whiteboarding
     }),
     strategicPlanningRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.strategicPlanning
+      categorySlug: TemplateCategory.strategicPlanning
     })
   }), []);
   return jsxs("div", {
@@ -3173,7 +3173,7 @@ function iZ({}) {
   let n = parsePxNumber(qvA) + (t ? parsePxNumber(ngI) : 0);
   let s = usePrefersMediaQuery(`(max-width: ${n}px)`);
   let o = usePrefersMediaQuery(`(max-width: ${OX3})`);
-  let l = OE(setupBrowseRoute(location.pathname));
+  let l = hasQuery(setupBrowseRoute(location.pathname));
   let c = !1;
   let d = null;
   l = useSelector(e => e?.selectedView?.view === "search");
@@ -3259,7 +3259,7 @@ function i7({
   let d = "light" === n.color;
   let u = c ? _$$u2 : _$$$2;
   let m = new BrowseCategoryRoute({
-    categorySlug: e === FileTypeEnum.COOPER ? LJ.socialMediaTemplates : LJ.websiteTemplates
+    categorySlug: e === FileTypeEnum.COOPER ? TemplateCategory.socialMediaTemplates : TemplateCategory.websiteTemplates
   }, {
     editor_type: e === FileTypeEnum.COOPER ? _$$k2.Editors.COOPER : _$$k2.Editors.SITES
   });
@@ -3411,7 +3411,7 @@ function ng({
     children: jsx(_$$G2, {
       query: o,
       clearSearchInput: d,
-      context: PF.LANDING,
+      context: NavigationType.LANDING,
       width: parsePxNumber(eZi)
     })
   });
@@ -3427,7 +3427,7 @@ function ng({
         query: o,
         inSearchPath,
         inputPlaceholder: e ? getI18nString("community.search.placeholder.search_for_a_resource") : getI18nString("community.search.search_everything_in_community"),
-        context: PF.LANDING,
+        context: NavigationType.LANDING,
         className: e ? "homepage_dropdown_search_input--redesignedSearchInput--CoAYJ text--fontPos11--2LvXf text--_fontBase--QdLsd" : "homepage_dropdown_search_input--searchInput--8x2Cp text--fontPos13--xW8hS text--_fontBase--QdLsd",
         searchIconClassName: e ? "homepage_dropdown_search_input--redesignedHomepageSearchIcon--RcD8I" : "homepage_dropdown_search_input--searchIcon--55Xdx",
         closeIconClassName: e ? "homepage_dropdown_search_input--redesignedHomepageCloseIcon--8bE70" : "homepage_dropdown_search_input--closeIcon--iurnp"
@@ -4536,7 +4536,7 @@ function n0() {
     status: r
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [ResourceTypeEnum.PLUGIN],
-    category: LJ.designTools,
+    category: TemplateCategory.designTools,
     caller: _$$z2.HOMEPAGE,
     pageSize: 10,
     includeContent: !0
@@ -4554,7 +4554,7 @@ function n0() {
     status: d
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [ResourceTypeEnum.WIDGET],
-    category: LJ.whiteboarding,
+    category: TemplateCategory.whiteboarding,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4666,33 +4666,33 @@ function n1({
     makeRoute
   } = useMemo(() => ({
     sitesTemplatesRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.websiteTemplates
+      categorySlug: TemplateCategory.websiteTemplates
     }, {
       editor_type: _$$k2.Editors.SITES
     }),
     cooperTemplatesRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.socialMediaTemplates
+      categorySlug: TemplateCategory.socialMediaTemplates
     }, {
       editor_type: _$$k2.Editors.COOPER
     }),
     slideTemplatesRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.presentations
+      categorySlug: TemplateCategory.presentations
     }, {
       editor_type: _$$k2.Editors.SLIDES
     }),
     designResourcesRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.designTemplates
+      categorySlug: TemplateCategory.designTemplates
     }),
     pluginsRoute: _ ? new iw() : new BrowseCategoryRoute({
-      categorySlug: LJ.designTools
+      categorySlug: TemplateCategory.designTools
     }, {
       resource_type: "plugins"
     }),
     figjamAssetsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.whiteboarding
+      categorySlug: TemplateCategory.whiteboarding
     }),
     widgetsRoute: new BrowseCategoryRoute({
-      categorySlug: LJ.whiteboarding
+      categorySlug: TemplateCategory.whiteboarding
     }, {
       resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS
     }),
@@ -5219,68 +5219,68 @@ function ab(e) {
 }
 let av = {
   accessibilityRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.accessibility
+    categorySlug: TemplateCategory.accessibility
   }, {
     resource_type: "plugins"
   }),
   editingEffectsRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.editingEffects
+    categorySlug: TemplateCategory.editingEffects
   }, {
     resource_type: "plugins"
   }),
   developmentRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.development
+    categorySlug: TemplateCategory.development
   }, {
     resource_type: "plugins"
   }),
   fileOrganizationRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.fileOrganization
+    categorySlug: TemplateCategory.fileOrganization
   }, {
     resource_type: "plugins"
   }),
   importExportRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.importExport
+    categorySlug: TemplateCategory.importExport
   }, {
     resource_type: "plugins"
   }),
   prototypingAnimationRoute: new BrowseCategoryRoute({
-    categorySlug: LJ.prototypingAnimation
+    categorySlug: TemplateCategory.prototypingAnimation
   }, {
     resource_type: "plugins"
   })
 };
 let aj = () => [{
-  title: xF(LJ.accessibility),
+  title: xF(TemplateCategory.accessibility),
   subtitle: getI18nString("community.plugins_page.explore_plugins.accessibility_subtitle"),
   leftImageUrl: buildUploadUrl("8a1b9c86d0b6e4c035e32f1375e6e7aa4aeee289"),
   rightImageUrl: buildUploadUrl("030d140fcb306f382f440c74333549a731b4ab02"),
   linkTo: av.accessibilityRoute.to
 }, {
-  title: xF(LJ.editingEffects),
+  title: xF(TemplateCategory.editingEffects),
   subtitle: getI18nString("community.plugins_page.explore_plugins.editing_effects_subtitle"),
   leftImageUrl: buildUploadUrl("df8cc099fcd567353d5ae74938799a6c4b81623c"),
   rightImageUrl: buildUploadUrl("266f1558d2130dbf66fcbb0afd35cd3a7b1861aa"),
   linkTo: av.editingEffectsRoute.to
 }, {
-  title: xF(LJ.development),
+  title: xF(TemplateCategory.development),
   subtitle: getI18nString("community.plugins_page.explore_plugins.development_subtitle"),
   leftImageUrl: buildUploadUrl("9f53347c6cd9c4b2112e837956e1497354ba97e6"),
   rightImageUrl: buildUploadUrl("1afe925e46d14c53354c0303e02c49512b45eb73"),
   linkTo: av.developmentRoute.to
 }, {
-  title: xF(LJ.fileOrganization),
+  title: xF(TemplateCategory.fileOrganization),
   subtitle: getI18nString("community.plugins_page.explore_plugins.file_organization_subtitle"),
   leftImageUrl: buildUploadUrl("efa1bdf797eedcef9fb8d082aa579b0258b0de1d"),
   rightImageUrl: buildUploadUrl("ec0fb1caae05a6af539cfad7a711e8fd2202aa34"),
   linkTo: av.fileOrganizationRoute.to
 }, {
-  title: xF(LJ.importExport),
+  title: xF(TemplateCategory.importExport),
   subtitle: getI18nString("community.plugins_page.explore_plugins.import_exports_subtitle"),
   leftImageUrl: buildUploadUrl("2ddba8d5bf86240daea1dd412984f774da1b82b9"),
   rightImageUrl: buildUploadUrl("a8b613e74486e7201423b7fc6637989773907f1d"),
   linkTo: av.importExportRoute.to
 }, {
-  title: xF(LJ.prototypingAnimation),
+  title: xF(TemplateCategory.prototypingAnimation),
   subtitle: getI18nString("community.plugins_page.explore_plugins.prototyping_animation_subtitle"),
   leftImageUrl: buildUploadUrl("b0549ed9f6488b0a1891cad8ac9ae11b2943cf92"),
   rightImageUrl: buildUploadUrl("45e76adcdb88d65c513cb2f25fe72cfb3a776cca"),

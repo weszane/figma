@@ -17,7 +17,7 @@ import { U2 } from "../figma_app/545293";
 import { setSessionState } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
-import { z$ } from "../figma_app/840917";
+import { hasUnsyncedAutosaveFiles } from "../figma_app/840917";
 import { isCommunityHubView } from "../figma_app/740025";
 import { y as _$$y, J } from "../905/235145";
 import { sessionApiInstance } from "../905/202181";
@@ -32,7 +32,7 @@ let $$A1 = createOptimistThunk(async () => {
 let $$x2 = createOptimistThunk(async e => {
   try {
     let t = e.getState();
-    for (let n of t.authedUsers.orderedIds) if (await z$(n)) {
+    for (let n of t.authedUsers.orderedIds) if (await hasUnsyncedAutosaveFiles(n)) {
       w();
       let n = _$$xv;
       e.dispatch(showModalHandler({
@@ -72,7 +72,7 @@ let N = createOptimistThunk(e => {
 });
 let $$C5 = createOptimistThunk(async (e, t) => {
   try {
-    if (await z$(t.user.id)) {
+    if (await hasUnsyncedAutosaveFiles(t.user.id)) {
       w();
       let n = xv;
       e.dispatch(showModalHandler({

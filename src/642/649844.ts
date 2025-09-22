@@ -8,7 +8,7 @@ import d from "classnames";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -36,7 +36,7 @@ export function $$M0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let [L, R] = lJ("stackCounterSpacing");
   let O = kl("stackCounterSpacingSynced");
   let [D, F] = lJ("stackCounterAlignContent");

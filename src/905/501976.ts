@@ -11,7 +11,7 @@ import { canAccessFullDevMode } from "../figma_app/473493";
 import { mapPlatformToFramework } from "../905/359509";
 import { postUserFlag } from "../905/985254";
 import { trackDefinedFileEvent } from "../figma_app/314264";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { getImageManager } from "../figma_app/624361";
 import { selectOpenFileLibraryKey, selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
@@ -213,7 +213,7 @@ export async function $$z1(e, t, i, d) {
   let _ = performance.now();
   if (function (e) {
     if ("fullscreen" !== e.getState().selectedView.view) throw Error("The MCP server is only available if your active tab is a Figma design file");
-    if (!getFeatureFlags().dt_my_cool_plugin || !UK().enableCodegenMcpServer) throw Error("The MCP server is not enabled for this user");
+    if (!getFeatureFlags().dt_my_cool_plugin || !EditorPreferencesApi().enableCodegenMcpServer) throw Error("The MCP server is not enabled for this user");
   }(i), i.dispatch(postUserFlag({
     dev_mode_mcp_has_used_a_tool: !0
   })), e === MCP_INTERNAL_GET_TOOLS) {

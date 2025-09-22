@@ -15,7 +15,7 @@ import { logInfo } from "../905/714362";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction } from "../905/929976";
-import { Rw } from "../figma_app/91703";
+import { updateRecentlyUsedQuickCommand } from "../figma_app/91703";
 import { isEditorTypeSupportedFor } from "../figma_app/844435";
 import { fullscreenValue } from "../figma_app/455680";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
@@ -462,7 +462,7 @@ class K extends RecordingPureComponent {
       let t = this.runArgs;
       if (this.runArgs = null, t.queryMode = !1, t.deferRunEvent = !1, t.parameterValues = e, this.props.recentlyUsedCommandName) {
         let e = this.props.recentlyUsedCommandName;
-        this.props.dispatch(Rw({
+        this.props.dispatch(updateRecentlyUsedQuickCommand({
           currentDisplayName: e,
           newCommand: {
             displayName: e,

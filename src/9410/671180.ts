@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback } from "react";
 import { yT, eb, Kf, BW, JF, sw } from "../figma_app/257655";
-import { G1, Iu } from "../figma_app/691470";
+import { CortexError, getErrorStatus } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { DraftState } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -243,7 +243,7 @@ export function $$E1({
       }
       let e = T.current.queuedEffects ?? {};
       (await Promise.allSettled(Array.from(Object.values(e)))).forEach(e => {
-        "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
+        "rejected" !== e.status || e.reason instanceof CortexError && 500 > getErrorStatus(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
       });
     });
   }, [O]);

@@ -18,7 +18,7 @@ import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { fullscreenValue } from "../figma_app/455680";
 import { ZH } from "../figma_app/504823";
 import { valueOrFallback } from "../905/216495";
@@ -69,7 +69,7 @@ export class $$B5 extends PureComponent {
   constructor() {
     super(...arguments);
     this.close = () => {
-      this.props.dispatch(XE());
+      this.props.dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     };
     this.onColorProfileChange = e => {

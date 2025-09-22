@@ -6,7 +6,7 @@ import { fetchDynamicConfig } from "../figma_app/594947";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/223332";
-import { qC } from "../figma_app/603466";
+import { setStackInvariantCallback } from "../figma_app/603466";
 import { nB, AK } from "../905/642684";
 import { Nq } from "../905/266529";
 import { n as _$$n } from "../905/347702";
@@ -1526,7 +1526,7 @@ let $$eu1 = _$$n(async e => {
       let J = new NoOpVm();
       q(() => J.destroy());
       q(JX);
-      q(qC(e => {
+      q(setStackInvariantCallback(e => {
         stats.stackInvariantsEnforced(e);
       }));
       createPluginInstance(J, {

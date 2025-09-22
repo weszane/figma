@@ -12,8 +12,8 @@ import { selectWithShallowEqual } from "../905/103090";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getCurrentFileType } from "../figma_app/976749";
 import { x as _$$x } from "../figma_app/943271";
-import { d as _$$d } from "../905/758967";
-import { zw } from "../figma_app/682945";
+import { getCanvasViewState } from "../905/758967";
+import { chatStateTracker } from "../figma_app/682945";
 import { viewportToScreen, getViewportInfo, useLatestViewportRef } from "../figma_app/62612";
 import { multiplayerSessionManager } from "../905/977824";
 import { XM } from "../905/486443";
@@ -32,7 +32,7 @@ import { w as _$$w, L as _$$L } from "../905/842040";
 import { debugState } from "../905/407919";
 import { H as _$$H } from "../figma_app/147959";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { Po } from "../figma_app/412189";
 import { p as _$$p2, I as _$$I } from "../figma_app/210457";
 import { P as _$$P } from "../vendor/348225";
@@ -1591,7 +1591,7 @@ function t_() {
         let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
         return e && !t && r !== LayoutTabType.TEXT;
       }();
-      let d = getObservableOrFallback(UK().cursorHighFiveWiggle);
+      let d = getObservableOrFallback(EditorPreferencesApi().cursorHighFiveWiggle);
       let c = useRef(null);
       let u = useRef(0);
       useEffect(() => {
@@ -1849,10 +1849,10 @@ let th = (e, t, r) => {
   let n = useRef(null);
   n.current = e?.sessionId ?? n.current;
   useEffect(() => {
-    n.current && r && zw?.setOtherUserChattingState(n.current, t);
+    n.current && r && chatStateTracker?.setOtherUserChattingState(n.current, t);
   }, [r, t]);
-  useEffect(() => (n.current && zw?.setOtherUserChattingState(n.current, !1), () => {
-    n.current && zw?.setOtherUserChattingState(n.current, !1);
+  useEffect(() => (n.current && chatStateTracker?.setOtherUserChattingState(n.current, !1), () => {
+    n.current && chatStateTracker?.setOtherUserChattingState(n.current, !1);
   }), []);
 };
 function tm({
@@ -1870,7 +1870,7 @@ function tm({
   let l = useAppModelProperty("currentPage");
   let c = usePrefersReducedMotion();
   let u = getCurrentFileType();
-  let p = getObservableOrFallback(_$$d().showOutlines);
+  let p = getObservableOrFallback(getCanvasViewState().showOutlines);
   let _ = setupCursorChatDisabledCheck();
   let m = useSelector(({
     multiplayer: {

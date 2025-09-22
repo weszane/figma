@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { bytesToHex } from "../905/125019";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
@@ -169,7 +169,7 @@ async function y({
       }
     };
   } catch (e) {
-    e instanceof G1 && u && e.trace && (u[o.guid] = e.trace);
+    e instanceof CortexError && u && e.trace && (u[o.guid] = e.trace);
     $$E2({
       node: o,
       shouldContinueStream: c

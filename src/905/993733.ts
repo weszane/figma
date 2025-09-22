@@ -11,7 +11,7 @@ import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zy } from "../figma_app/955484";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { KindEnum } from "../905/129884";
 import { UB } from "../figma_app/249941";
@@ -1680,7 +1680,7 @@ export function $$tx1({
   expandedLayers: d,
   setLayerExpanded: u
 }) {
-  let p = getObservableOrFallback(UK().showGuids);
+  let p = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let h = useMemo(() => {
     let t = e => {
       if (e.value) {

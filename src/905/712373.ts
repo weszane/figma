@@ -1,42 +1,91 @@
-import { z } from "../vendor/835909";
-let r = z.object({
+import { z } from "zod";
+
+/**
+ * Schema for text-delta type
+ * Original variable: r
+ */
+export const TextDeltaSchema = z.object({
   type: z.literal("text-delta"),
   textDelta: z.string()
 });
-let a = z.object({
+
+/**
+ * Schema for reasoning type
+ * Original variable: a
+ */
+export const ReasoningSchema = z.object({
   type: z.literal("reasoning"),
   textDelta: z.string()
 });
-let s = z.object({
+
+/**
+ * Schema for reasoning-signature type
+ * Original variable: s
+ */
+export const ReasoningSignatureSchema = z.object({
   type: z.literal("reasoning-signature"),
   signature: z.string()
 });
-let o = z.object({
+
+/**
+ * Schema for redacted-reasoning type
+ * Original variable: o
+ */
+export const RedactedReasoningSchema = z.object({
   type: z.literal("redacted-reasoning"),
   data: z.string()
 });
-let l = z.object({
+
+/**
+ * Schema for threadId type
+ * Original variable: l
+ */
+export const ThreadIdSchema = z.object({
   type: z.literal("threadId"),
   threadId: z.string()
 });
-let d = z.object({
+
+/**
+ * Schema for messagesCommitted type
+ * Original variable: d
+ */
+export const MessagesCommittedSchema = z.object({
   type: z.literal("messagesCommitted"),
   lastCommittedMessageIndex: z.number()
 });
-z.object({
-  type: z.literal("tool-call"),
-  toolCallId: z.string(),
-  toolName: z.string(),
-  args: z.any()
-});
-let c = z.object({
+
+/**
+ * Schema for tool-result type
+ * Original variable: c
+ */
+export const ToolResultSchema = z.object({
   type: z.literal("tool-result"),
   toolCallId: z.string(),
   toolName: z.string(),
   result: z.any()
 });
-let $$u0 = z.union([r, a, s, o, l, d, c]);
-export function $$p1(e) {
+
+/**
+ * Union schema for all supported types
+ * Original variable: $$u0
+ */
+export const UnifiedSchema = z.union([
+  TextDeltaSchema,
+  ReasoningSchema,
+  ReasoningSignatureSchema,
+  RedactedReasoningSchema,
+  ThreadIdSchema,
+  MessagesCommittedSchema,
+  ToolResultSchema
+]);
+
+/**
+ * Generates a schema for a tool-call type with specific tool name and parameters
+ * Original function: $$p1
+ * @param e - Object containing name and parameters for the tool
+ * @returns Zod schema for the tool-call
+ */
+export function createToolCallSchema(e: { name: string; parameters: any }) {
   return z.object({
     type: z.literal("tool-call"),
     toolCallId: z.string(),
@@ -44,5 +93,6 @@ export function $$p1(e) {
     args: e.parameters
   });
 }
-export const Uv = $$u0;
-export const d_ = $$p1;
+
+export const Uv = UnifiedSchema
+export const d_ = createToolCallSchema

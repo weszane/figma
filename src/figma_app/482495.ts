@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { Point } from "../905/736624";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 let $$l0 = createReduxSubscriptionAtomWithState(e => e.pickerShown);
 let $$d1 = createRemovableAtomFamily(e => atom(t => {
   let r = t($$l0);
@@ -18,14 +18,14 @@ export function $$u3(e) {
   return useMemo(() => {
     let n = r?.id === e;
     function i() {
-      t(XE());
+      t(hidePickerThunk());
     }
     function a(r) {
       let {
         x,
         y
       } = r;
-      t(u1({
+      t(showPickerThunk({
         id: e,
         initialX: x,
         initialY: y

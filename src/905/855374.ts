@@ -9,7 +9,7 @@ import { h4, Nz, hh } from "../905/417232";
 import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHandleInputEvent } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
 import { BK, Um } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -55,7 +55,7 @@ import { uC, z7, gX, ic as _$$ic, oR, Z_, r$, _h, q7 } from "../905/831801";
 import { permissionScopeHandler } from "../905/189185";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { useSessionStorageSync, getSessionStorage, useLocalStorageSync } from "../905/657224";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { Yf } from "../figma_app/933328";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B } from "../905/330741";
@@ -3700,7 +3700,7 @@ function i2({
   });
 }
 export let $$i50 = registerModal(function () {
-  let e = getObservableOrFallback(UK().showGuids);
+  let e = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let t = useSelector(e => e.modalShown?.type === eu.type);
   let {
     state: {
@@ -4104,7 +4104,7 @@ export let $$i50 = registerModal(function () {
                 variableSetId: u?.node_id ?? "",
                 onClose: function () {
                   t(popModalStack());
-                  t(XE());
+                  t(hidePickerThunk());
                   t(_$$B());
                 },
                 onSubmitRenameVar: e,

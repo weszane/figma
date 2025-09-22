@@ -8,7 +8,7 @@ import d from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { u1, Uv, XE } from "../figma_app/91703";
+import { showPickerThunk, hideStylePicker, hidePickerThunk } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback, isValidValue } from "../905/216495";
@@ -107,14 +107,14 @@ export let $$K0 = memo(function (e) {
   let k = useCallback(e => {
     if (e) {
       let e = cn(O.current, Im);
-      _(u1({
+      _(showPickerThunk({
         id: uA,
         initialX: e.x,
         initialY: e.y
       }));
       _(sw());
-      _(Uv());
-    } else _(XE());
+      _(hideStylePicker());
+    } else _(hidePickerThunk());
   }, [_]);
   return ($$W1(d), onlyInstances || onlyInstanceSublayers) ? jsxs(Zk, {
     className: Mx,

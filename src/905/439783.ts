@@ -9,7 +9,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import u from "classnames";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
-import { bA, _q } from "../905/668764";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
@@ -89,8 +89,8 @@ export function $$N0({
       disabled: t,
       dispatch: L,
       formatter: new O({
-        smallPixelNudgeAmount: f ?? bA,
-        bigPixelNudgeAmount: y ?? _q,
+        smallPixelNudgeAmount: f ?? DEFAULT_FINE_NUDGE,
+        bigPixelNudgeAmount: y ?? DEFAULT_COARSE_NUDGE,
         hasVariableBound: !E && !!consumedVariable
       }),
       inputClassName: KY,

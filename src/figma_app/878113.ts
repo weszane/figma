@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { xb } from "../figma_app/651866";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, TextModificationAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -311,7 +311,7 @@ export async function $$M0({
     } : e);
     r && r(Z);
     let e = t;
-    featureType === JT.SLIDES_REWRITE_TEXT && t instanceof G1 && (e = Gx(t));
+    featureType === JT.SLIDES_REWRITE_TEXT && t instanceof CortexError && (e = Gx(t));
     "reportToSentry" in e && !e.reportToSentry || (setTagGlobal("text_feature_type", X.featureType), reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         ...X,

@@ -19,7 +19,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, isValidValue, normalizeValue } from "../905/216495";
 import { kl, lJ, pw, zj } from "../905/275640";
 import { Um } from "../905/848862";
@@ -54,7 +54,7 @@ import { EventShield } from "../905/821217";
 import { H_, z6, CU } from "../905/963340";
 import { r as _$$r3 } from "../905/571562";
 import { ph } from "../figma_app/709893";
-import { sx as _$$sx } from "../figma_app/91703";
+import { trackFileEventThunk } from "../figma_app/91703";
 import { g1, sE, fS } from "../figma_app/681244";
 import { mJ, dj, bI, cl, VW } from "../figma_app/391215";
 import { Q as _$$Q2 } from "../905/346809";
@@ -298,7 +298,7 @@ function Q(e) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let s = kl("topRelativeToParent");
   let o = kl("bottomRelativeToParent");
   let l = kl("leftRelativeToParent");
@@ -1091,7 +1091,7 @@ function eA(e) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let o = kl("topRelativeToParent");
   let l = kl("rightRelativeToParent");
   let d = kl("bottomRelativeToParent");
@@ -1354,7 +1354,7 @@ function eH(e) {
     height
   });
   let O = useCallback(e => {
-    b(_$$sx({
+    b(trackFileEventThunk({
       name: "Frame Size Preset Chosen",
       params: {
         method: "Transform Panel",
@@ -3623,7 +3623,7 @@ export function $$nt5(e) {
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let i = ne(e.useContextualSelectionProperties);
   return e.isUI3 ? null : jsx(nr, {
     ...e,

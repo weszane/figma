@@ -1,4 +1,4 @@
-import { d as _$$d } from "../905/758967";
+import { getCanvasViewState } from "../905/758967";
 import { subscribeObservable } from "../figma_app/84367";
 import { jsx } from "react/jsx-runtime";
 import { Vm, ks } from "../figma_app/838407";
@@ -296,7 +296,7 @@ export function $$g0(e, t) {
     });
     i.cancel();
   }
-  subscribeObservable(_$$d().activeCanvasCurrentZoom, {
+  subscribeObservable(getCanvasViewState().activeCanvasCurrentZoom, {
     onChangeImmediate: i.cancel
   });
   h.forEach(e => {

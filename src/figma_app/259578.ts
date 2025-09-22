@@ -17,7 +17,7 @@ import { colorCSSManipulatorInstance } from "../905/989956";
 import { z5, rC } from "../905/713722";
 import { o1 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { useCurrentUserOrgId } from "../905/845253";
 import { Xo } from "../figma_app/482495";
 import { F as _$$F2 } from "../905/258517";
@@ -254,7 +254,7 @@ export function $$Q2({
       dropdownShown: t.dropdownShown,
       colorFormat: t.colorFormat,
       onColorFormatChange: e => {
-        UK().colorFormat.set(e);
+        EditorPreferencesApi().colorFormat.set(e);
       },
       containerRef: t.containerRef,
       recordingKey: e,

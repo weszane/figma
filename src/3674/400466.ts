@@ -30,7 +30,7 @@ import { UU } from "../figma_app/770088";
 import { Qx, Uu, ZR, Dm } from "../figma_app/8833";
 import { LO } from "../9410/571209";
 import { NW, E_ } from "../figma_app/355754";
-import { NB } from "../figma_app/682945";
+import { annotationVisibilityTracker } from "../figma_app/682945";
 import { XR, uA, FQ, yu, mi, AP, h9, Lw, cD } from "../figma_app/781512";
 import { y as _$$y } from "../905/661502";
 import { selectWithShallowEqual } from "../905/103090";
@@ -4371,8 +4371,8 @@ function aj() {
       nodesWithAnnotationsCount: H
     });
   }, [V, H, c, z]);
-  useEffect(() => (NB?.setIsShowingAnnotations(0 !== nodesWithAnnotationInfo.length), m(nodesWithAnnotationInfo.length), () => {
-    NB?.setIsShowingAnnotations(!1);
+  useEffect(() => (annotationVisibilityTracker?.setIsShowingAnnotations(0 !== nodesWithAnnotationInfo.length), m(nodesWithAnnotationInfo.length), () => {
+    annotationVisibilityTracker?.setIsShowingAnnotations(!1);
     m(0);
   }), [nodesWithAnnotationInfo.length, m]);
   let W = useCallback((e, t) => {

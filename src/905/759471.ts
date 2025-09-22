@@ -15,7 +15,7 @@ import { Q as _$$Q } from "../figma_app/67145";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { ey as _$$ey } from "../figma_app/451499";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
@@ -49,7 +49,7 @@ import { Y9 } from "../figma_app/811257";
 import { MF } from "../figma_app/473914";
 import { B as _$$B } from "../905/229357";
 import ed from "classnames";
-import { bA, _q } from "../905/668764";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { Lk } from "../figma_app/975811";
 import { L as _$$L } from "../905/827467";
 import { F as _$$F } from "../905/807573";
@@ -337,7 +337,7 @@ function er(e) {
     headerSize: "small",
     initialPosition: i,
     onClose: () => {
-      e.dispatch(XE());
+      e.dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     },
     recordingKey: generateRecordingKey(e, "modal"),
@@ -409,8 +409,8 @@ let eC = new Lk({
   floatingPointFormat: {
     maxNumDigits: 2
   },
-  smallNudgeAmount: bA,
-  bigNudgeAmount: _q
+  smallNudgeAmount: DEFAULT_FINE_NUDGE,
+  bigNudgeAmount: DEFAULT_COARSE_NUDGE
 });
 let eT = e => {
   if (void 0 === e) return "";
@@ -539,7 +539,7 @@ function eL(e) {
     0 === i.length ? fullscreenValue.triggerActionInUserEditScope("ungroup-selection", {
       source: "panel"
     }) : onChange(i);
-    dispatch(XE());
+    dispatch(hidePickerThunk());
     fullscreenValue.deselectProperty();
     analyticsEventManager.trackDefinedEvent("illustration.web_transform_delete_from_layer", {
       transformType: t,
@@ -713,7 +713,7 @@ function eB(e) {
   }, [onChange, transformModifier]);
   let ec = useCallback(e => {
     if (e && e.stopPropagation(), Z) {
-      dispatch(XE());
+      dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     } else {
       let e = cn(Q.current);
@@ -723,7 +723,7 @@ function eB(e) {
           indices: [index]
         }
       });
-      dispatch(u1({
+      dispatch(showPickerThunk({
         id,
         initialX: e.x,
         initialY: e.y,
@@ -735,7 +735,7 @@ function eB(e) {
   }, [dispatch, index, id, Z]);
   let eu = pickerShown?.id === id;
   let ep = useCallback(() => {
-    eu && dispatch(XE());
+    eu && dispatch(hidePickerThunk());
   }, [eu, dispatch]);
   let em = useCallback(e => transformModifier.type === e || -1 !== allowedTransformModifiers.indexOf(e), [allowedTransformModifiers, transformModifier.type]);
   let eh = useCallback(e => e.map((e, t) => jsx(eM, {

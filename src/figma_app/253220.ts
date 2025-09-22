@@ -3,7 +3,7 @@ import { localStorageRef } from "../905/657224";
 import { BrowserInfo } from "../figma_app/778880";
 import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { oi } from "../figma_app/598952";
 import { debugState } from "../905/407919";
 import { IpcStorageHandler } from "../905/724705";
@@ -67,11 +67,11 @@ export function $$S0() {
     callback: () => {
       g({
         navigationPreference: "mouse-scroll-wheel-zoom",
-        enabled: !UK().scrollWheelZoom.getCopy(),
+        enabled: !EditorPreferencesApi().scrollWheelZoom.getCopy(),
         eventOrigin: "user_manual_change"
       });
     },
-    property: UK().scrollWheelZoom,
+    property: EditorPreferencesApi().scrollWheelZoom,
     propertyValue: !0,
     flags: ["!figmake"]
   }, {
@@ -82,11 +82,11 @@ export function $$S0() {
     callback: () => {
       g({
         navigationPreference: "right-click-drag-to-pan",
-        enabled: !UK().rightClickPan.getCopy(),
+        enabled: !EditorPreferencesApi().rightClickPan.getCopy(),
         eventOrigin: "user_manual_change"
       });
     },
-    property: UK().rightClickPan,
+    property: EditorPreferencesApi().rightClickPan,
     propertyValue: !0,
     flags: ["!figmake"]
   }, {

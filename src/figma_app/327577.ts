@@ -8,7 +8,7 @@ import { S as _$$S } from "../905/539306";
 import { selectViewAction } from "../905/929976";
 import { uM } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
-import { ZG } from "../figma_app/840917";
+import { getAutosaveManagerInstance } from "../figma_app/840917";
 import { FFileType } from "../figma_app/191312";
 import { mapFileSummary } from "../figma_app/349248";
 import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
@@ -32,7 +32,7 @@ let x = createOptimistThunk((e, {
       ...selectedView,
       viewport: t
     }));
-    let n = ZG()?.fileKey || selectedView.fileKey;
+    let n = getAutosaveManagerInstance()?.fileKey || selectedView.fileKey;
     n && desktopAPIInstance?.updateViewport(n, t);
   }
 });

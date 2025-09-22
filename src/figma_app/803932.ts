@@ -19,7 +19,7 @@ import { Q } from "../905/217916";
 import { updateStyleThumbnailOptimist } from "../905/711212";
 import { ro } from "../figma_app/451499";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { Ku, UK } from "../figma_app/740163";
+import { getColorFormat, EditorPreferencesApi } from "../figma_app/740163";
 import { isInvalidValue } from "../905/216495";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { getStyleSubscriptionInfo } from "../figma_app/646357";
@@ -130,7 +130,7 @@ function et({
   onMouseEnter: c,
   onMouseLeave: u
 }) {
-  let p = Ku();
+  let p = getColorFormat();
   let _ = {
     ...t,
     a: t?.a ?? e.opacity ?? 1
@@ -647,7 +647,7 @@ export function $$eg7(e) {
   });
 }
 export function $$ef8(e) {
-  let t = Ku();
+  let t = getColorFormat();
   let r = e.formattableColors;
   let a = useMemo(() => ({
     format: t
@@ -673,7 +673,7 @@ export function $$eE6({
   let c = v4();
   let u = "TEXT" === s ? [...o, ...l] : o;
   let p = QT(u, a, d.inspectionMode, c, i);
-  let _ = Ku();
+  let _ = getColorFormat();
   let h = T4.useCopyAllColors(p, _);
   return p.length < 1 ? null : jsx(VZ, {
     title: i ? "TEXT" === s ? getI18nString("dev_handoff.inspect_panel.fills.text") : getI18nString("dev_handoff.inspect_panel.fills.background") : getI18nString("inspect_panel.colors.title"),
@@ -692,7 +692,7 @@ export function $$eE6({
 }
 export function $$ey3() {
   let e = e_();
-  let t = Ku();
+  let t = getColorFormat();
   let r = T4.useCopyAllColors(e, t);
   return e.length < 1 ? null : jsx(VZ, {
     title: getI18nString("inspect_panel.colors.title"),
@@ -707,11 +707,11 @@ export function $$ey3() {
 let eb = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.HSL, ColorFormatEnum.HSB, ColorFormatEnum.UIColor];
 let eT = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.CSS, ColorFormatEnum.HSL, ColorFormatEnum.HSB];
 export function $$eI1() {
-  let e = Ku();
+  let e = getColorFormat();
   let t = isDevHandoffEditorType();
   let r = SV("inspection_panel_color_format_change");
   let a = useCallback(e => {
-    UK().colorFormat.set(+e);
+    EditorPreferencesApi().colorFormat.set(+e);
     r({
       value: _$$F.format(+e)
     });

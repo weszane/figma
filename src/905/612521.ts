@@ -18,7 +18,7 @@ import { isInteractionPathCheck } from '../figma_app/897289'
  * @returns True if 'view' exists in obj, false otherwise.
  * (Original: $$u6)
  */
-export function hasViewProperty(obj: unknown): obj is { view: unknown } {
+export function hasViewProperty(obj: unknown) {
   return obj != null && typeof obj === 'object' && 'view' in obj
 }
 

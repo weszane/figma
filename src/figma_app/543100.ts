@@ -10,7 +10,7 @@ import { TrackTagsMapper } from "../905/190310";
 import { FEntityType, FFileType } from "../figma_app/191312";
 import { FileCanView, RepoCanView, PrototypeCanView } from "../figma_app/43951";
 import { F as _$$F } from "../905/915030";
-import { I4 } from "../figma_app/840917";
+import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917";
 import { Ph, Uj, i4 } from "../905/862913";
 import { getDesignFileUrlWithOptions, buildFileUrl, getDesignFileUrl } from "../905/612685";
 var $$E8 = (e => (e.FILE = "FILE", e.PROTOTYPE = "PROTOTYPE", e.REPO = "REPO", e.PINNED_FILE = "PINNED_FILE", e.OFFLINE_FILE = "OFFLINE_FILE", e))($$E8 || {});
@@ -559,7 +559,7 @@ export class $$x1 {
 }
 export function $$N4(e) {
   let t = $$x1.getFileKeyForAutosaveChanges(e);
-  return I4(t || "");
+  return useHasUnclaimedAutosaveChanges(t || "");
 }
 let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(FileCanView.Query({
   key: e.file.key

@@ -5,7 +5,7 @@ import { VariableResolvedDataType, LayoutSizingMode } from "../figma_app/763686"
 import o from "classnames";
 import { M as _$$M } from "../figma_app/648761";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { kl } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { Um } from "../905/848862";
@@ -96,7 +96,7 @@ export function $$C0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let e_ = useDispatch();
   let eh = useRef(!1);
   let em = _$$M(w);

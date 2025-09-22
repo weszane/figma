@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import a from "classnames";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { my } from "../figma_app/811257";
 var s = a;
@@ -37,7 +37,7 @@ function u({
   children: e,
   alwaysShowLabel: t
 }) {
-  return getObservableOrFallback(UK().showPropertyLabels) || t ? jsx("span", {
+  return getObservableOrFallback(EditorPreferencesApi().showPropertyLabels) || t ? jsx("span", {
     "aria-hidden": "true",
     className: "ui3_slides_rows--ui3SlidesRowLabelFirst--XzGgY ui3_rows--_ui3OrderedRowLabel--zh7nh ui3_rows--_ui3RowLabelBase--wNPq0",
     "data-non-interactive": !0,
@@ -47,7 +47,7 @@ function u({
 function p({
   children: e
 }) {
-  return getObservableOrFallback(UK().showPropertyLabels) ? jsx("span", {
+  return getObservableOrFallback(EditorPreferencesApi().showPropertyLabels) ? jsx("span", {
     "aria-hidden": "true",
     className: "ui3_slides_rows--ui3SlidesRowLabelSecond--AtE-a ui3_rows--_ui3OrderedRowLabel--zh7nh ui3_rows--_ui3RowLabelBase--wNPq0",
     "data-non-interactive": !0,

@@ -11,7 +11,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { getCurrentFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { updateHoveredNode } from "../figma_app/741237";
 import { FFileType } from "../figma_app/191312";
@@ -95,7 +95,7 @@ function L(e, t, r) {
   };
 }
 function P(e) {
-  let t = getObservableOrFallback(UK().renderRulers);
+  let t = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   let r = useSelector(e => e.mirror.appModel.showUi);
   let c = getCurrentFileType();
   let u = useRef(fullscreenValue.getViewportInfo());

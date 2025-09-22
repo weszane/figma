@@ -16,7 +16,7 @@ import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { shouldOptimizeForIpad } from "../905/355607";
 import { Qs, iN } from "../905/992395";
 import { qU } from "../figma_app/913518";
-import { D } from "../905/80656";
+import { deferCallback } from "../905/80656";
 import { jz, C3 } from "../figma_app/587765";
 export function $$E2(e) {
   let t = getI18nString("voting.modal.voting_setup_responsive_placeholder_prompt", {
@@ -101,7 +101,7 @@ export function $$R6() {
   useEffect(() => {
     e !== SessionStatus.ENDED || i || (t({
       type: "VOTING_ENDED"
-    }), D(o));
+    }), deferCallback(o));
   }, [e, t, i, o]);
 }
 export function $$D5(e) {

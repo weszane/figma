@@ -1,563 +1,1076 @@
-import { z as _$$z } from "../vendor/835909";
-import { B as _$$B } from "../905/985467";
-var n;
-var $$r0;
-let s = _$$z.number().min(0).max(1);
-let o = _$$z.number().min(0);
-let l = _$$z.number().$$int().min(0);
-let d = _$$z.object({
-  r: _$$z.number().min(0).max(1),
-  g: _$$z.number().min(0).max(1),
-  b: _$$z.number().min(0).max(1)
-});
-let c = _$$z.object({
-  r: _$$z.number().min(0).max(1),
-  g: _$$z.number().min(0).max(1),
-  b: _$$z.number().min(0).max(1),
-  a: _$$z.number().min(0).max(1)
-});
-let u = _$$z.tuple([_$$z.number(), _$$z.number(), _$$z.number()]);
-let p = _$$z.tuple([u, u]);
-let m = _$$z.object({
-  topLeft: o,
-  topRight: o,
-  bottomLeft: o,
-  bottomRight: o
-});
-let h = _$$z.object({
-  x: _$$z.number(),
-  y: _$$z.number()
-});
-let g = _$$z.object({
-  width: _$$z.number(),
-  height: _$$z.number()
-});
-let f = _$$z.enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
-let _ = _$$z.enum(["FIXED", "SCROLLS", "STICKY_SCROLLS"]);
-let A = _$$z.enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
-let y = _$$z.enum(["TOP", "BOTTOM", "TOP_BOTTOM", "STRETCH", "SCALE"]);
-let b = _$$z.enum(["LEFT", "RIGHT", "LEFT_RIGHT", "STRETCH", "SCALE"]);
-let v = _$$z.enum(["CENTER", "INSIDE", "OUTSIDE"]);
-let I = _$$z.enum(["NONE", "ROUND", "SQUARE", "LINE_ARROW", "TRIANGLE_ARROW", "DIAMOND_FILLED", "CIRCLE_FILLED", "TRIANGLE_FILLED"]);
-let E = _$$z.enum(["MITER", "BEVEL", "ROUND"]);
-let x = _$$z.object({
-  horizontal: b.optional(),
-  vertical: y.optional()
-});
-let S = _$$z.enum(["NONE", "HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING"]);
-let w = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "BASELINE", "INHERIT"]);
-let C = _$$z.enum(["NONE", "VERTICAL", "HORIZONTAL"]);
-let T = _$$z.enum(["MIN", "MAX", "CENTER", "BASELINE"]);
-let k = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_EVENLY", "SPACE_BETWEEN"]);
-let R = _$$z.enum(["FIXED", "AUTO"]);
-let N = _$$z.enum(["FIXED", "AUTO"]);
-let P = {
-  layoutMode: C.optional(),
-  layoutAlign: w.optional(),
-  itemSpacing: _$$z.number().optional(),
-  counterAxisSizingMode: R.optional(),
-  primaryAxisSizingMode: N.optional(),
-  counterAxisAlignItems: k.optional(),
-  primaryAxisAlignItems: T.optional(),
-  paddingLeft: _$$z.number().optional(),
-  paddingRight: _$$z.number().optional(),
-  paddingTop: _$$z.number().optional(),
-  paddingBottom: _$$z.number().optional()
-};
-let O = _$$z.enum(["AUTO", "ABSOLUTE"]);
-let D = _$$z.union([_$$z.object({
-  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-  alignment: _$$z.enum(["MIN", "MAX"]),
-  gutterSize: _$$z.number(),
-  count: l,
-  sectionSize: _$$z.number().min(0),
-  offset: _$$z.number().min(0),
-  visible: _$$z.boolean().optional(),
-  color: c.optional()
-}), _$$z.object({
-  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-  alignment: _$$z.literal("STRETCH"),
-  gutterSize: _$$z.number(),
-  count: l,
-  offset: _$$z.number().min(0),
-  visible: _$$z.boolean().optional(),
-  color: c.optional()
-}), _$$z.object({
-  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-  alignment: _$$z.literal("CENTER"),
-  gutterSize: _$$z.number(),
-  count: l,
-  sectionSize: _$$z.number().min(0),
-  visible: _$$z.boolean().optional(),
-  color: c.optional()
-}), _$$z.object({
-  pattern: _$$z.literal("GRID"),
-  sectionSize: _$$z.number().min(0),
-  visible: _$$z.boolean().optional(),
-  color: c.optional()
-})]);
-let L = {
-  offset: h,
-  color: c,
-  blendMode: f,
-  radius: _$$z.number().min(0),
-  spread: _$$z.number().optional(),
-  visible: _$$z.boolean()
-};
-let F = _$$z.object({
-  ...L,
-  type: _$$z.literal("INNER_SHADOW")
-});
-let M = _$$z.object({
-  ...L,
-  type: _$$z.literal("DROP_SHADOW"),
-  showShadowBehindNode: _$$z.boolean().optional()
-});
-let j = _$$z.object({
-  type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
-  radius: _$$z.number().min(0),
-  visible: _$$z.boolean()
-});
-let U = _$$z.discriminatedUnion("type", [F, M, j]);
-let B = _$$z.array(U);
-let V = _$$z.object({
-  position: s,
-  color: c
-});
-let G = _$$z.enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]);
-let z = _$$z.discriminatedUnion("type", [_$$z.object({
-  type: _$$z.literal("SOLID"),
-  color: d,
-  visible: _$$z.boolean().optional(),
-  opacity: s.optional(),
-  blendMode: f.optional()
-}), _$$z.object({
-  type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
-  gradientTransform: p,
-  gradientStops: _$$z.array(V),
-  visible: _$$z.boolean().optional(),
-  opacity: s.optional(),
-  blendMode: f.optional()
-}), _$$z.object({
-  type: _$$z.literal("IMAGE"),
-  scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]).optional(),
-  imageRef: _$$z.string(),
-  scalingFactor: o.optional(),
-  rotation: l.optional(),
-  imageTransform: p.optional(),
-  visible: _$$z.boolean().optional(),
-  opacity: s.optional(),
-  blendMode: f.optional()
-})]);
-let H = _$$z.array(z);
-let W = _$$z.object({
-  startingAngle: _$$z.number(),
-  endingAngle: _$$z.number(),
-  innerRadius: s
-});
-let K = _$$z.enum(["NONZERO", "EVENODD"]);
-let Y = _$$z.object({
-  x: _$$z.number(),
-  y: _$$z.number(),
-  strokeCap: I.optional(),
-  strokeJoin: E.optional(),
-  cornerRadius: o.optional()
-});
-let q = _$$z.object({
-  start: l,
-  end: l,
-  tangentStart: h.optional(),
-  tangentEnd: h.optional()
-});
-let $ = _$$z.object({
-  windingRule: K,
-  loops: _$$z.array(_$$z.array(l)),
-  fillStyleId: _$$z.string().optional()
-});
-let Z = _$$z.object({
-  vertices: _$$z.array(Y),
-  segments: _$$z.array(q),
-  regions: _$$z.array($).optional()
-});
-let X = _$$z.discriminatedUnion("format", [_$$z.object({
-  format: _$$z.enum(["PNG", "JPG"]),
-  contentsOnly: _$$z.boolean().optional(),
-  suffix: _$$z.string().optional(),
-  useAbsoluteBounds: _$$z.boolean().optional(),
-  constraint: _$$z.union([_$$z.object({
-    type: _$$z.enum(["SCALE"]),
-    value: _$$z.number()
-  }), _$$z.object({
-    type: _$$z.enum(["WIDTH", "HEIGHT"]),
-    value: _$$z.number().$$int()
-  })]).optional()
-}), _$$z.object({
-  format: _$$z.literal("PDF"),
-  contentsOnly: _$$z.boolean().optional(),
-  suffix: _$$z.string().optional(),
-  useAbsoluteBounds: _$$z.boolean().optional()
-}), _$$z.object({
-  format: _$$z.literal("SVG"),
-  contentsOnly: _$$z.boolean().optional(),
-  suffix: _$$z.string().optional(),
-  svgOutlineText: _$$z.boolean().optional(),
-  svgIdAttribute: _$$z.boolean().optional(),
-  svgSimplifyStroke: _$$z.boolean().optional(),
-  useAbsoluteBounds: _$$z.boolean().optional()
-})]);
-let Q = _$$z.array(X);
-let J = _$$z.record(_$$z.object({
-  fills: H
-}));
-let ee = {
-  cornerRadius: o.optional(),
-  rectangleCornerRadii: m.optional()
-};
-let et = _$$z.object(ee);
-let ei = {
-  strokeWeight: _$$z.number().optional(),
-  individualStrokeWeights: _$$z.object({
-    left: _$$z.number().optional(),
-    right: _$$z.number().optional(),
-    top: _$$z.number().optional(),
-    bottom: _$$z.number().optional()
-  }).optional()
-};
-let en = _$$z.object(ei);
-let er = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE"]);
-let ea = _$$z.enum(["NO_WRAP", "WRAP"]);
-let es = _$$z.object({
-  family: _$$z.string(),
-  style: _$$z.string()
-});
-let eo = _$$z.object({
-  fontSize: o.optional(),
-  fontName: es.optional(),
-  letterSpacing: _$$z.number().optional(),
-  textCase: er.optional(),
-  fillPaints: H.optional()
-});
-let el = _$$z.array(_$$z.record(_$$z.string()));
-let ed = _$$z.enum(["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROUNDED_RECTANGLE", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
-let ec = _$$z.enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
-let eu = _$$z.union([_$$z.object({
-  endpointNodeId: _$$z.string(),
-  magnet: _$$z.enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT"])
-}), _$$z.object({
-  endpointNodeId: _$$z.string().optional(),
-  position: _$$z.object({
-    x: _$$z.number(),
-    y: _$$z.number()
-  })
-})]);
-let ep = {
-  id: _$$z.string(),
-  parentId: _$$z.string().optional(),
-  name: _$$z.string().optional(),
-  visible: _$$z.boolean().optional(),
-  locked: _$$z.boolean().optional(),
-  scrollBehavior: _.optional(),
-  pluginData: _$$z.object({
-    desiredSize: _$$z.enum(["small", "medium", "large", "notice"]).optional(),
-    pluginSvgPreviewUrl: _$$z.string().optional(),
-    pluginSvgPreviewData: _$$z.string().optional()
-  }).optional()
-};
-let em = {
-  blendMode: f.optional(),
-  opacity: s.optional()
-};
-let eh = {
-  fills: H.optional(),
-  strokes: H.optional(),
-  fillOverrideTable: J.optional(),
-  strokeAlign: v.optional(),
-  strokeCap: I.optional(),
-  strokeJoin: E.optional(),
-  strokeMiterLimit: _$$z.number().min(0).optional(),
-  strokeDashes: _$$z.array(_$$z.number()).optional()
-};
-let eg = {
-  relativeTransform: p.optional(),
-  preserveRatio: _$$z.boolean().optional(),
-  constraints: x.optional(),
-  size: g.optional(),
-  layoutAlign: w.optional(),
-  layoutGrow: _$$z.number().optional(),
-  layoutPositioning: O.optional()
-};
-let ef = {
-  transitionNodeID: _$$z.string().optional(),
-  transitionDuration: _$$z.number().min(0).optional(),
-  transitionEasing: G.optional()
-};
-let e_ = {
-  clipsContent: _$$z.boolean().optional(),
-  fills: H.optional(),
-  strokes: H.optional(),
-  strokeAlign: v.optional(),
-  overflowDirection: S.optional(),
-  layoutGrids: D.optional(),
-  ...ee,
-  ...ei,
-  ...P
-};
-let eA = {
-  exportSettings: Q.optional()
-};
-let ey = {
-  effects: B.optional()
-};
-let eb = {
-  isMask: _$$z.boolean().optional()
-};
-let ev = {
-  ...ep,
-  ...em,
-  ...eg,
-  ...eh,
-  ...eA,
-  ...ey,
-  ...eb,
-  ...ef
-};
-let eI = _$$z.object({
-  uri: _$$z.string()
-});
-let eE = {
-  description: _$$z.string().optional(),
-  documentationLinks: _$$z.tuple([eI]).optional()
-};
-let ex = {
-  sectionContentsHidden: _$$z.boolean().optional()
-};
-let eS = {
-  fills: H.optional()
-};
-let ew = {
-  strokes: H.optional(),
-  strokeWeight: _$$z.number().optional(),
-  strokeAlign: v.optional(),
-  strokeJoin: E.optional(),
-  strokeDashes: _$$z.array(_$$z.number()).optional()
-};
-let eC = _$$z.object({
-  type: _$$z.literal("ELLIPSE"),
-  arcData: W,
-  ...ev
-});
-let eT = _$$z.object({
-  type: _$$z.enum(["STAR", "LINE", "REGULAR_POLYGON", "RECTANGLE"]),
-  ...ev
-});
-let ek = _$$z.object({
-  type: _$$z.literal("VECTOR"),
-  vectorNetwork: Z,
-  ...ev
-});
-let eR = _$$z.object({
-  type: _$$z.literal("BOOLEAN_OPERATION"),
-  booleanOperation: A,
-  ...ev
-});
-let eN = _$$z.object({
-  type: _$$z.literal("SLICE"),
-  ...ev,
-  ...eA
-});
-let eP = _$$z.enum(["ORDERED", "UNORDERED", "NONE"]);
-let eO = {
-  characters: _$$z.string(),
-  style: eo.optional(),
-  characterStyleOverrides: _$$z.array(_$$z.number()).optional(),
-  styleOverrideTable: _$$z.record(eo).optional(),
-  lineTypes: _$$z.array(eP).optional(),
-  lineIndentations: _$$z.array(_$$z.number().min(0)).optional()
-};
-let eD = {
-  layoutWrap: ea.optional()
-};
-let eL = _$$z.object({
-  type: _$$z.literal("TEXT"),
-  ...ev,
-  ...eO,
-  ...eD
-});
-let eF = _$$z.object({
-  type: _$$z.literal("FRAME"),
-  ...ev,
-  ...e_
-});
-let eM = _$$z.object({
-  type: _$$z.literal("GROUP"),
-  ...ep
-});
-let ej = _$$z.object({
-  type: _$$z.literal("COMPONENT"),
-  ...ep,
-  ...e_,
-  ...eE
-});
-let eU = _$$z.object({
-  type: _$$z.literal("COMPONENT_SET"),
-  ...ep,
-  ...e_,
-  ...eE
-});
-!function (e) {
-  e.COMPONENT = "COMPONENT";
-  e.COMPONENT_SET = "COMPONENT_SET";
-}(n || (n = {}));
-let eB = _$$z.object({
-  type: _$$z.literal("INSTANCE"),
-  componentKey: _$$z.string(),
-  componentType: _$$z.enum(["COMPONENT", "COMPONENT_SET"]),
-  componentId: _$$z.string().optional(),
-  uniformScaleFactor: _$$z.number().optional(),
-  ...ep,
-  ...e_,
-  ...ep
-});
-let eV = _$$z.object({
-  type: _$$z.literal("SECTION"),
-  ...ep,
-  ...ex,
-  ...eh,
-  ...eg
-});
-let eG = _$$z.object({
-  type: _$$z.literal("STICKY"),
-  authorVisible: _$$z.boolean(),
-  authorName: _$$z.string(),
-  ...ep,
-  ...eg,
-  ...em,
-  ...eS,
-  ...eb,
-  ...ey,
-  ...eA,
-  ...eO
-});
-let ez = _$$z.object({
-  type: _$$z.literal("SHAPE_WITH_TEXT"),
-  shapeType: ed,
-  ...ep,
-  ...eg,
-  ...em,
-  ...eS,
-  ...eb,
-  ...ey,
-  ...eA,
-  ...eO,
-  ...ee,
-  ...ew
-});
-let eH = _$$z.object({
-  type: _$$z.literal("CONNECTOR"),
-  connectorStart: eu,
-  connectorEnd: eu,
-  connectorStartStrokeCap: ec,
-  connectorEndStrokeCap: ec,
-  textBackground: et.merge(en).optional(),
-  connectorLineType: _$$z.enum(["ELBOWED", "STRAIGHT"]),
-  ...ep,
-  ...eg,
-  ...em,
-  ...ey,
-  ...eA,
-  ...eO,
-  ...ew
-});
-let eW = _$$z.object({
-  type: _$$z.literal("WIDGET"),
-  pluginId: _$$z.string(),
-  pluginVersionId: _$$z.optional(_$$z.string()),
-  size: g.optional(),
-  widgetSyncedState: el.optional(),
-  ...ep,
-  ...eA
-});
-let eK = _$$z.object({
-  type: _$$z.literal("TABLE"),
-  numRows: _$$z.number().$$int(),
-  numColumns: _$$z.number().$$int(),
-  ...ep,
-  ...eg,
-  ...em,
-  ...ey,
-  ...eA,
-  ...ew
-});
-let eY = _$$z.object({
-  type: _$$z.literal("TABLE_CELL"),
-  rowIndex: _$$z.number().$$int(),
-  columnIndex: _$$z.number().$$int(),
-  ...eg,
-  ...ep,
-  ...eS,
-  ...eO
-});
-let eq = _$$z.lazy(() => _$$z.discriminatedUnion("type", [eC, eT, ek, eN, eL, eB, eG, ez, eH, eW, eK, eY, eR.extend({
-  children: _$$z.array(eq).optional()
-}), eV.extend({
-  children: _$$z.array(eq).optional()
-}), eF.extend({
-  children: _$$z.array(eq).optional()
-}), eM.extend({
-  children: _$$z.array(eq).optional()
-}), ej.extend({
-  children: _$$z.array(eq).optional()
-}), eU.extend({
-  children: _$$z.array(eq).min(1)
-})]));
-let e$ = new WeakMap();
-let eZ = new WeakMap();
-let eX = new WeakMap();
-!function (e) {
-  e.DESCRIPTION = "description";
-  e.PASSTHROUGH_XML_DEBUG_ONLY = "passthroughXmlDebugOnly";
-}($$r0 || ($$r0 = {}));
-export let $$eJ1 = _$$z.object({
-  prompt: _$$z.string(),
-  mode: _$$z.enum(Object.values($$r0)).optional()
-});
-_$$z.discriminatedUnion("type", [_$$z.object({
-  type: _$$z.literal("TAG_OPEN"),
-  tag: _$$z.string(),
-  attrs: _$$z.record(_$$z.string(), _$$z.string().optional())
-}), _$$z.object({
-  type: _$$z.literal("TEXT_DELTA"),
-  delta: _$$z.string()
-}), _$$z.object({
-  type: _$$z.literal("TAG_CLOSE"),
-  tag: _$$z.string()
-}), _$$z.object({
-  type: _$$z.literal("COMMENT"),
-  comment: _$$z.string()
-})]);
-let e0 = _$$z.string();
-let $$e12 = _$$z.object({
-  requestId: _$$z.string().optional(),
-  createNodes: _$$z.object({
-    node: function (e, t) {
-      e$.set(e, e._def.getType);
-      eZ.set(e, t);
-      e._def.getType = (...t) => {
-        let i = e$.get(e);
-        let n = eZ.get(e);
-        return n && !eX.get(e) ? n.call(e._def, ...t) : i ? i.call(e._def, ...t) : void 0;
-      };
-      return e;
-    }(eq, e => e.factory.createKeywordTypeNode(e.SyntaxKind.AnyKeyword)),
-    parentId: e0.optional(),
-    index: _$$z.number().optional()
-  }).array().optional(),
-  cortex_error: _$$z.object({
-    type: _$$z.string(),
-    data: _$$z.any()
+import { z } from 'zod'
+import { NodeSchema } from '../905/985467'
+
+/**
+ * Enum for request modes (Wc).
+ * Original: $$r0
+ */
+enum Wc {
+  DESCRIPTION = 'description',
+  PASSTHROUGH_XML_DEBUG_ONLY = 'passthroughXmlDebugOnly',
+}
+
+/**
+ * Number between 0 and 1 (s).
+ */
+const number01 = z.number().min(0).max(1)
+
+/**
+ * Non-negative number (o).
+ */
+const nonNegativeNumber = z.number().min(0)
+
+/**
+ * Non-negative integer (l).
+ */
+const nonNegativeInt = z.number().int().min(0)
+
+/**
+ * RGB color object (d).
+ */
+const rgbColor = z.object({
+  r: number01,
+  g: number01,
+  b: number01,
+})
+
+/**
+ * RGBA color object (c).
+ */
+const rgbaColor = z.object({
+  r: number01,
+  g: number01,
+  b: number01,
+  a: number01,
+})
+
+/**
+ * 3D point tuple (u).
+ */
+const point3D = z.tuple([z.number(), z.number(), z.number()])
+
+/**
+ * Gradient transform tuple (p).
+ */
+const gradientTransform = z.tuple([point3D, point3D])
+
+/**
+ * Rectangle corner radii (m).
+ */
+const rectangleCornerRadii = z.object({
+  topLeft: nonNegativeNumber,
+  topRight: nonNegativeNumber,
+  bottomLeft: nonNegativeNumber,
+  bottomRight: nonNegativeNumber,
+})
+
+/**
+ * 2D point object (h).
+ */
+const point2D = z.object({
+  x: z.number(),
+  y: z.number(),
+})
+
+/**
+ * Size object (g).
+ */
+const size = z.object({
+  width: z.number(),
+  height: z.number(),
+})
+
+/**
+ * Blend mode enum (f).
+ */
+const blendMode = z.enum([
+  'PASS_THROUGH',
+  'NORMAL',
+  'DARKEN',
+  'MULTIPLY',
+  'LINEAR_BURN',
+  'COLOR_BURN',
+  'LIGHTEN',
+  'SCREEN',
+  'LINEAR_DODGE',
+  'COLOR_DODGE',
+  'OVERLAY',
+  'SOFT_LIGHT',
+  'HARD_LIGHT',
+  'DIFFERENCE',
+  'EXCLUSION',
+  'HUE',
+  'SATURATION',
+  'COLOR',
+  'LUMINOSITY',
+])
+
+/**
+ * Scroll behavior enum (_).
+ */
+const scrollBehavior = z.enum(['FIXED', 'SCROLLS', 'STICKY_SCROLLS'])
+
+/**
+ * Boolean operation enum (A).
+ */
+const booleanOperation = z.enum(['UNION', 'INTERSECT', 'SUBTRACT', 'EXCLUDE'])
+
+/**
+ * Vertical alignment enum (y).
+ */
+const verticalAlign = z.enum(['TOP', 'BOTTOM', 'TOP_BOTTOM', 'STRETCH', 'SCALE'])
+
+/**
+ * Horizontal alignment enum (b).
+ */
+const horizontalAlign = z.enum(['LEFT', 'RIGHT', 'LEFT_RIGHT', 'STRETCH', 'SCALE'])
+
+/**
+ * Stroke alignment enum (v).
+ */
+const strokeAlign = z.enum(['CENTER', 'INSIDE', 'OUTSIDE'])
+
+/**
+ * Stroke cap enum (I).
+ */
+const strokeCap = z.enum([
+  'NONE',
+  'ROUND',
+  'SQUARE',
+  'LINE_ARROW',
+  'TRIANGLE_ARROW',
+  'DIAMOND_FILLED',
+  'CIRCLE_FILLED',
+  'TRIANGLE_FILLED',
+])
+
+/**
+ * Stroke join enum (E).
+ */
+const strokeJoin = z.enum(['MITER', 'BEVEL', 'ROUND'])
+
+/**
+ * Constraints object (x).
+ */
+const constraints = z.object({
+  horizontal: horizontalAlign.optional(),
+  vertical: verticalAlign.optional(),
+})
+
+/**
+ * Overflow direction enum (S).
+ */
+const overflowDirection = z.enum([
+  'NONE',
+  'HORIZONTAL_SCROLLING',
+  'VERTICAL_SCROLLING',
+  'HORIZONTAL_AND_VERTICAL_SCROLLING',
+])
+
+/**
+ * Layout align enum (w).
+ */
+const layoutAlign = z.enum(['MIN', 'CENTER', 'MAX', 'STRETCH', 'BASELINE', 'INHERIT'])
+
+/**
+ * Layout mode enum (C).
+ */
+const layoutMode = z.enum(['NONE', 'VERTICAL', 'HORIZONTAL'])
+
+/**
+ * Primary axis align enum (T).
+ */
+const primaryAxisAlignItems = z.enum(['MIN', 'MAX', 'CENTER', 'BASELINE'])
+
+/**
+ * Counter axis align enum (k).
+ */
+const counterAxisAlignItems = z.enum(['MIN', 'MAX', 'CENTER', 'SPACE_EVENLY', 'SPACE_BETWEEN'])
+
+/**
+ * Counter axis sizing mode enum (R).
+ */
+const counterAxisSizingMode = z.enum(['FIXED', 'AUTO'])
+
+/**
+ * Primary axis sizing mode enum (N).
+ */
+const primaryAxisSizingMode = z.enum(['FIXED', 'AUTO'])
+
+/**
+ * Layout properties object (P).
+ */
+const layoutProperties = {
+  layoutMode: layoutMode.optional(),
+  layoutAlign: layoutAlign.optional(),
+  itemSpacing: z.number().optional(),
+  counterAxisSizingMode: counterAxisSizingMode.optional(),
+  primaryAxisSizingMode: primaryAxisSizingMode.optional(),
+  counterAxisAlignItems: counterAxisAlignItems.optional(),
+  primaryAxisAlignItems: primaryAxisAlignItems.optional(),
+  paddingLeft: z.number().optional(),
+  paddingRight: z.number().optional(),
+  paddingTop: z.number().optional(),
+  paddingBottom: z.number().optional(),
+}
+
+/**
+ * Positioning enum (O).
+ */
+const layoutPositioning = z.enum(['AUTO', 'ABSOLUTE'])
+
+/**
+ * Layout grid union (D).
+ */
+const layoutGrids = z.union([
+  z.object({
+    pattern: z.enum(['COLUMNS', 'ROWS']),
+    alignment: z.enum(['MIN', 'MAX']),
+    gutterSize: z.number(),
+    count: nonNegativeInt,
+    sectionSize: z.number().min(0),
+    offset: z.number().min(0),
+    visible: z.boolean().optional(),
+    color: rgbaColor.optional(),
+  }),
+  z.object({
+    pattern: z.enum(['COLUMNS', 'ROWS']),
+    alignment: z.literal('STRETCH'),
+    gutterSize: z.number(),
+    count: nonNegativeInt,
+    offset: z.number().min(0),
+    visible: z.boolean().optional(),
+    color: rgbaColor.optional(),
+  }),
+  z.object({
+    pattern: z.enum(['COLUMNS', 'ROWS']),
+    alignment: z.literal('CENTER'),
+    gutterSize: z.number(),
+    count: nonNegativeInt,
+    sectionSize: z.number().min(0),
+    visible: z.boolean().optional(),
+    color: rgbaColor.optional(),
+  }),
+  z.object({
+    pattern: z.literal('GRID'),
+    sectionSize: z.number().min(0),
+    visible: z.boolean().optional(),
+    color: rgbaColor.optional(),
+  }),
+])
+
+/**
+ * Shadow properties (L).
+ */
+const shadowProperties = {
+  offset: point2D,
+  color: rgbaColor,
+  blendMode,
+  radius: z.number().min(0),
+  spread: z.number().optional(),
+  visible: z.boolean(),
+}
+
+/**
+ * Inner shadow schema (F).
+ */
+const innerShadow = z.object({
+  ...shadowProperties,
+  type: z.literal('INNER_SHADOW'),
+})
+
+/**
+ * Drop shadow schema (M).
+ */
+const dropShadow = z.object({
+  ...shadowProperties,
+  type: z.literal('DROP_SHADOW'),
+  showShadowBehindNode: z.boolean().optional(),
+})
+
+/**
+ * Blur schema (j).
+ */
+const blur = z.object({
+  type: z.enum(['LAYER_BLUR', 'BACKGROUND_BLUR']),
+  radius: z.number().min(0),
+  visible: z.boolean(),
+})
+
+/**
+ * Effects union (U).
+ */
+const effectUnion = z.discriminatedUnion('type', [innerShadow, dropShadow, blur])
+
+/**
+ * Effects array (B).
+ */
+const effectsArray = z.array(effectUnion)
+
+/**
+ * Gradient stop schema (V).
+ */
+const gradientStop = z.object({
+  position: number01,
+  color: rgbaColor,
+})
+
+/**
+ * Transition easing enum (G).
+ */
+const transitionEasing = z.enum([
+  'EASE_IN',
+  'EASE_OUT',
+  'EASE_IN_AND_OUT',
+  'LINEAR',
+  'EASE_IN_BACK',
+  'EASE_OUT_BACK',
+  'EASE_IN_AND_OUT_BACK',
+  'CUSTOM_CUBIC_BEZIER',
+  'GENTLE',
+  'QUICK',
+  'BOUNCY',
+  'SLOW',
+  'CUSTOM_SPRING',
+])
+
+/**
+ * Shape descriptor union (shapeDescriptor).
+ */
+const shapeDescriptor = z.discriminatedUnion('type', [
+  z.object({
+    type: z.literal('SOLID'),
+    color: rgbColor,
+    visible: z.boolean().optional(),
+    opacity: number01.optional(),
+    blendMode: blendMode.optional(),
+  }),
+  z.object({
+    type: z.enum(['GRADIENT_LINEAR', 'GRADIENT_RADIAL', 'GRADIENT_ANGULAR', 'GRADIENT_DIAMOND']),
+    gradientTransform,
+    gradientStops: z.array(gradientStop),
+    visible: z.boolean().optional(),
+    opacity: number01.optional(),
+    blendMode: blendMode.optional(),
+  }),
+  z.object({
+    type: z.literal('IMAGE'),
+    scaleMode: z.enum(['FILL', 'FIT', 'CROP', 'TILE']).optional(),
+    imageRef: z.string(),
+    scalingFactor: nonNegativeNumber.optional(),
+    rotation: nonNegativeInt.optional(),
+    imageTransform: gradientTransform.optional(),
+    visible: z.boolean().optional(),
+    opacity: number01.optional(),
+    blendMode: blendMode.optional(),
+  }),
+])
+
+/**
+ * Fills array (H).
+ */
+const fillsArray = z.array(shapeDescriptor)
+
+/**
+ * Arc data schema (W).
+ */
+const arcData = z.object({
+  startingAngle: z.number(),
+  endingAngle: z.number(),
+  innerRadius: number01,
+})
+
+/**
+ * Winding rule enum (K).
+ */
+const windingRule = z.enum(['NONZERO', 'EVENODD'])
+
+/**
+ * Vertex schema (Y).
+ */
+const vertex = z.object({
+  x: z.number(),
+  y: z.number(),
+  strokeCap: strokeCap.optional(),
+  strokeJoin: strokeJoin.optional(),
+  cornerRadius: nonNegativeNumber.optional(),
+})
+
+/**
+ * Segment schema (q).
+ */
+const segment = z.object({
+  start: nonNegativeInt,
+  end: nonNegativeInt,
+  tangentStart: point2D.optional(),
+  tangentEnd: point2D.optional(),
+})
+
+/**
+ * Region schema ($).
+ */
+const region = z.object({
+  windingRule,
+  loops: z.array(z.array(nonNegativeInt)),
+  fillStyleId: z.string().optional(),
+})
+
+/**
+ * Vector network schema (Z).
+ */
+const vectorNetwork = z.object({
+  vertices: z.array(vertex),
+  segments: z.array(segment),
+  regions: z.array(region).optional(),
+})
+
+/**
+ * Export settings union (X).
+ */
+const exportSettingsUnion = z.discriminatedUnion('format', [
+  z.object({
+    format: z.enum(['PNG', 'JPG']),
+    contentsOnly: z.boolean().optional(),
+    suffix: z.string().optional(),
+    useAbsoluteBounds: z.boolean().optional(),
+    constraint: z.union([
+      z.object({
+        type: z.enum(['SCALE']),
+        value: z.number(),
+      }),
+      z.object({
+        type: z.enum(['WIDTH', 'HEIGHT']),
+        value: z.number().int(),
+      }),
+    ]).optional(),
+  }),
+  z.object({
+    format: z.literal('PDF'),
+    contentsOnly: z.boolean().optional(),
+    suffix: z.string().optional(),
+    useAbsoluteBounds: z.boolean().optional(),
+  }),
+  z.object({
+    format: z.literal('SVG'),
+    contentsOnly: z.boolean().optional(),
+    suffix: z.string().optional(),
+    svgOutlineText: z.boolean().optional(),
+    svgIdAttribute: z.boolean().optional(),
+    svgSimplifyStroke: z.boolean().optional(),
+    useAbsoluteBounds: z.boolean().optional(),
+  }),
+])
+
+/**
+ * Export settings array (Q).
+ */
+const exportSettingsArray = z.array(exportSettingsUnion)
+
+/**
+ * Fill override table (J).
+ */
+const fillOverrideTable = z.record(z.object({
+  fills: fillsArray,
+}))
+
+/**
+ * Corner radius properties (ee).
+ */
+const cornerRadiusProperties = {
+  cornerRadius: nonNegativeNumber.optional(),
+  rectangleCornerRadii: rectangleCornerRadii.optional(),
+}
+
+/**
+ * Corner radius schema (et).
+ */
+const cornerRadiusSchema = z.object(cornerRadiusProperties)
+
+/**
+ * Stroke weights properties (ei).
+ */
+const strokeWeightsProperties = {
+  strokeWeight: z.number().optional(),
+  individualStrokeWeights: z.object({
+    left: z.number().optional(),
+    right: z.number().optional(),
+    top: z.number().optional(),
+    bottom: z.number().optional(),
   }).optional(),
-  trace: _$$B.optional()
-});
-export const Wc = $$r0;
-export const Fs = $$eJ1;
-export const pp = $$e12; 
+}
+
+/**
+ * Stroke weights schema (en).
+ */
+const strokeWeightsSchema = z.object(strokeWeightsProperties)
+
+/**
+ * Text case enum (er).
+ */
+const textCase = z.enum(['ORIGINAL', 'UPPER', 'LOWER', 'TITLE'])
+
+/**
+ * Layout wrap enum (ea).
+ */
+const layoutWrap = z.enum(['NO_WRAP', 'WRAP'])
+
+/**
+ * Font name schema (es).
+ */
+const fontName = z.object({
+  family: z.string(),
+  style: z.string(),
+})
+
+/**
+ * Text style schema (eo).
+ */
+const textStyle = z.object({
+  fontSize: nonNegativeNumber.optional(),
+  fontName: fontName.optional(),
+  letterSpacing: z.number().optional(),
+  textCase: textCase.optional(),
+  fillPaints: fillsArray.optional(),
+})
+
+/**
+ * Widget synced state array (el).
+ */
+const widgetSyncedState = z.array(z.record(z.string()))
+
+/**
+ * Shape type enum (ed).
+ */
+const shapeType = z.enum([
+  'SQUARE',
+  'ELLIPSE',
+  'DIAMOND',
+  'TRIANGLE_UP',
+  'TRIANGLE_DOWN',
+  'ROUNDED_RECTANGLE',
+  'PARALLELOGRAM_RIGHT',
+  'PARALLELOGRAM_LEFT',
+  'ENG_DATABASE',
+  'ENG_QUEUE',
+  'ENG_FILE',
+  'ENG_FOLDER',
+  'TRAPEZOID',
+  'PREDEFINED_PROCESS',
+  'SHIELD',
+  'DOCUMENT_SINGLE',
+  'DOCUMENT_MULTIPLE',
+  'MANUAL_INPUT',
+  'HEXAGON',
+  'CHEVRON',
+  'PENTAGON',
+  'OCTAGON',
+  'STAR',
+  'PLUS',
+  'ARROW_LEFT',
+  'ARROW_RIGHT',
+  'SUMMING_JUNCTION',
+  'OR',
+  'SPEECH_BUBBLE',
+  'INTERNAL_STORAGE',
+])
+
+/**
+ * Connector stroke cap enum (ec).
+ */
+const connectorStrokeCap = z.enum([
+  'NONE',
+  'ARROW_EQUILATERAL',
+  'ARROW_LINES',
+  'TRIANGLE_FILLED',
+  'DIAMOND_FILLED',
+  'CIRCLE_FILLED',
+])
+
+/**
+ * Connector endpoint union (eu).
+ */
+const connectorEndpoint = z.union([
+  z.object({
+    endpointNodeId: z.string(),
+    magnet: z.enum(['NONE', 'AUTO', 'TOP', 'LEFT', 'BOTTOM', 'RIGHT']),
+  }),
+  z.object({
+    endpointNodeId: z.string().optional(),
+    position: z.object({
+      x: z.number(),
+      y: z.number(),
+    }),
+  }),
+])
+
+/**
+ * Node base properties (ep).
+ */
+const nodeBaseProperties = {
+  id: z.string(),
+  parentId: z.string().optional(),
+  name: z.string().optional(),
+  visible: z.boolean().optional(),
+  locked: z.boolean().optional(),
+  scrollBehavior: scrollBehavior.optional(),
+  pluginData: z.object({
+    desiredSize: z.enum(['small', 'medium', 'large', 'notice']).optional(),
+    pluginSvgPreviewUrl: z.string().optional(),
+    pluginSvgPreviewData: z.string().optional(),
+  }).optional(),
+}
+
+/**
+ * Blend/opacity properties (em).
+ */
+const blendOpacityProperties = {
+  blendMode: blendMode.optional(),
+  opacity: number01.optional(),
+}
+
+/**
+ * Fill/stroke properties (eh).
+ */
+const fillStrokeProperties = {
+  fills: fillsArray.optional(),
+  strokes: fillsArray.optional(),
+  fillOverrideTable: fillOverrideTable.optional(),
+  strokeAlign: strokeAlign.optional(),
+  strokeCap: strokeCap.optional(),
+  strokeJoin: strokeJoin.optional(),
+  strokeMiterLimit: z.number().min(0).optional(),
+  strokeDashes: z.array(z.number()).optional(),
+}
+
+/**
+ * Transform/layout properties (eg).
+ */
+const transformLayoutProperties = {
+  relativeTransform: gradientTransform.optional(),
+  preserveRatio: z.boolean().optional(),
+  constraints: constraints.optional(),
+  size: size.optional(),
+  layoutAlign: layoutAlign.optional(),
+  layoutGrow: z.number().optional(),
+  layoutPositioning: layoutPositioning.optional(),
+}
+
+/**
+ * Transition properties (ef).
+ */
+const transitionProperties = {
+  transitionNodeID: z.string().optional(),
+  transitionDuration: z.number().min(0).optional(),
+  transitionEasing: transitionEasing.optional(),
+}
+
+/**
+ * Frame properties (e_).
+ */
+const frameProperties = {
+  clipsContent: z.boolean().optional(),
+  fills: fillsArray.optional(),
+  strokes: fillsArray.optional(),
+  strokeAlign: strokeAlign.optional(),
+  overflowDirection: overflowDirection.optional(),
+  layoutGrids: layoutGrids.optional(),
+  ...cornerRadiusProperties,
+  ...strokeWeightsProperties,
+  ...layoutProperties,
+}
+
+/**
+ * Export settings properties (eA).
+ */
+const exportSettingsProperties = {
+  exportSettings: exportSettingsArray.optional(),
+}
+
+/**
+ * Effects properties (ey).
+ */
+const effectsProperties = {
+  effects: effectsArray.optional(),
+}
+
+/**
+ * Mask properties (eb).
+ */
+const maskProperties = {
+  isMask: z.boolean().optional(),
+}
+
+/**
+ * Node extended properties (ev).
+ */
+const nodeExtendedProperties = {
+  ...nodeBaseProperties,
+  ...blendOpacityProperties,
+  ...transformLayoutProperties,
+  ...fillStrokeProperties,
+  ...exportSettingsProperties,
+  ...effectsProperties,
+  ...maskProperties,
+  ...transitionProperties,
+}
+
+/**
+ * Documentation link schema (eI).
+ */
+const documentationLink = z.object({
+  uri: z.string(),
+})
+
+/**
+ * Documentation properties (eE).
+ */
+const documentationProperties = {
+  description: z.string().optional(),
+  documentationLinks: z.tuple([documentationLink]).optional(),
+}
+
+/**
+ * Section properties (ex).
+ */
+const sectionProperties = {
+  sectionContentsHidden: z.boolean().optional(),
+}
+
+/**
+ * Fills only (eS).
+ */
+const fillsOnly = {
+  fills: fillsArray.optional(),
+}
+
+/**
+ * Stroke only (ew).
+ */
+const strokeOnly = {
+  strokes: fillsArray.optional(),
+  strokeWeight: z.number().optional(),
+  strokeAlign: strokeAlign.optional(),
+  strokeJoin: strokeJoin.optional(),
+  strokeDashes: z.array(z.number()).optional(),
+}
+
+/**
+ * Ellipse node schema (eC).
+ */
+const ellipseNode = z.object({
+  type: z.literal('ELLIPSE'),
+  arcData,
+  ...nodeExtendedProperties,
+})
+
+/**
+ * Star/line/polygon/rectangle node schema (eT).
+ */
+const starLinePolygonRectangleNode = z.object({
+  type: z.enum(['STAR', 'LINE', 'REGULAR_POLYGON', 'RECTANGLE']),
+  ...nodeExtendedProperties,
+})
+
+/**
+ * Vector node schema (ek).
+ */
+const vectorNode = z.object({
+  type: z.literal('VECTOR'),
+  vectorNetwork,
+  ...nodeExtendedProperties,
+})
+
+/**
+ * Boolean operation node schema (eR).
+ */
+const booleanOperationNode = z.object({
+  type: z.literal('BOOLEAN_OPERATION'),
+  booleanOperation,
+  ...nodeExtendedProperties,
+})
+
+/**
+ * Slice node schema (eN).
+ */
+const sliceNode = z.object({
+  type: z.literal('SLICE'),
+  ...nodeExtendedProperties,
+  ...exportSettingsProperties,
+})
+
+/**
+ * List type enum (eP).
+ */
+const listType = z.enum(['ORDERED', 'UNORDERED', 'NONE'])
+
+/**
+ * Text node properties (eO).
+ */
+const textNodeProperties = {
+  characters: z.string(),
+  style: textStyle.optional(),
+  characterStyleOverrides: z.array(z.number()).optional(),
+  styleOverrideTable: z.record(textStyle).optional(),
+  lineTypes: z.array(listType).optional(),
+  lineIndentations: z.array(z.number().min(0)).optional(),
+}
+
+/**
+ * Layout wrap properties (eD).
+ */
+const layoutWrapProperties = {
+  layoutWrap: layoutWrap.optional(),
+}
+
+/**
+ * Text node schema (eL).
+ */
+const textNode = z.object({
+  type: z.literal('TEXT'),
+  ...nodeExtendedProperties,
+  ...textNodeProperties,
+  ...layoutWrapProperties,
+})
+
+/**
+ * Frame node schema (eF).
+ */
+const frameNode = z.object({
+  type: z.literal('FRAME'),
+  ...nodeExtendedProperties,
+  ...frameProperties,
+})
+
+/**
+ * Group node schema (eM).
+ */
+const groupNode = z.object({
+  type: z.literal('GROUP'),
+  ...nodeBaseProperties,
+})
+
+/**
+ * Component node schema (ej).
+ */
+const componentNode = z.object({
+  type: z.literal('COMPONENT'),
+  ...nodeBaseProperties,
+  ...frameProperties,
+  ...documentationProperties,
+})
+
+/**
+ * Component set node schema (eU).
+ */
+const componentSetNode = z.object({
+  type: z.literal('COMPONENT_SET'),
+  ...nodeBaseProperties,
+  ...frameProperties,
+  ...documentationProperties,
+})
+
+/**
+ * Instance node schema (eB).
+ */
+const instanceNode = z.object({
+  type: z.literal('INSTANCE'),
+  componentKey: z.string(),
+  componentType: z.enum(['COMPONENT', 'COMPONENT_SET']),
+  componentId: z.string().optional(),
+  uniformScaleFactor: z.number().optional(),
+  ...nodeBaseProperties,
+  ...frameProperties,
+  ...nodeBaseProperties,
+})
+
+/**
+ * Section node schema (eV).
+ */
+const sectionNode = z.object({
+  type: z.literal('SECTION'),
+  ...nodeBaseProperties,
+  ...sectionProperties,
+  ...fillStrokeProperties,
+  ...transformLayoutProperties,
+})
+
+/**
+ * Sticky node schema (eG).
+ */
+const stickyNode = z.object({
+  type: z.literal('STICKY'),
+  authorVisible: z.boolean(),
+  authorName: z.string(),
+  ...nodeBaseProperties,
+  ...transformLayoutProperties,
+  ...blendOpacityProperties,
+  ...fillsOnly,
+  ...maskProperties,
+  ...effectsProperties,
+  ...exportSettingsProperties,
+  ...textNodeProperties,
+})
+
+/**
+ * Shape with text node schema (ez).
+ */
+const shapeWithTextNode = z.object({
+  type: z.literal('SHAPE_WITH_TEXT'),
+  shapeType,
+  ...nodeBaseProperties,
+  ...transformLayoutProperties,
+  ...blendOpacityProperties,
+  ...fillsOnly,
+  ...maskProperties,
+  ...effectsProperties,
+  ...exportSettingsProperties,
+  ...textNodeProperties,
+  ...cornerRadiusProperties,
+  ...strokeOnly,
+})
+
+/**
+ * Connector node schema (eH).
+ */
+const connectorNode = z.object({
+  type: z.literal('CONNECTOR'),
+  connectorStart: connectorEndpoint,
+  connectorEnd: connectorEndpoint,
+  connectorStartStrokeCap: connectorStrokeCap,
+  connectorEndStrokeCap: connectorStrokeCap,
+  textBackground: cornerRadiusSchema.merge(strokeWeightsSchema).optional(),
+  connectorLineType: z.enum(['ELBOWED', 'STRAIGHT']),
+  ...nodeBaseProperties,
+  ...transformLayoutProperties,
+  ...blendOpacityProperties,
+  ...effectsProperties,
+  ...exportSettingsProperties,
+  ...textNodeProperties,
+  ...strokeOnly,
+})
+
+/**
+ * Widget node schema (eW).
+ */
+const widgetNode = z.object({
+  type: z.literal('WIDGET'),
+  pluginId: z.string(),
+  pluginVersionId: z.optional(z.string()),
+  size: size.optional(),
+  widgetSyncedState: widgetSyncedState.optional(),
+  ...nodeBaseProperties,
+  ...exportSettingsProperties,
+})
+
+/**
+ * Table node schema (eK).
+ */
+const tableNode = z.object({
+  type: z.literal('TABLE'),
+  numRows: z.number().int(),
+  numColumns: z.number().int(),
+  ...nodeBaseProperties,
+  ...transformLayoutProperties,
+  ...blendOpacityProperties,
+  ...effectsProperties,
+  ...exportSettingsProperties,
+  ...strokeOnly,
+})
+
+/**
+ * Table cell node schema (eY).
+ */
+const tableCellNode = z.object({
+  type: z.literal('TABLE_CELL'),
+  rowIndex: z.number().int(),
+  columnIndex: z.number().int(),
+  ...transformLayoutProperties,
+  ...nodeBaseProperties,
+  ...fillsOnly,
+  ...textNodeProperties,
+})
+
+/**
+ * Node discriminated union (eq).
+ */
+const nodeSchema = z.lazy(() =>
+  z.discriminatedUnion('type', [
+    ellipseNode,
+    starLinePolygonRectangleNode,
+    vectorNode,
+    sliceNode,
+    textNode,
+    instanceNode,
+    stickyNode,
+    shapeWithTextNode,
+    connectorNode,
+    widgetNode,
+    tableNode,
+    tableCellNode,
+    booleanOperationNode.extend({
+      children: z.array(nodeSchema).optional(),
+    }),
+    sectionNode.extend({
+      children: z.array(nodeSchema).optional(),
+    }),
+    frameNode.extend({
+      children: z.array(nodeSchema).optional(),
+    }),
+    groupNode.extend({
+      children: z.array(nodeSchema).optional(),
+    }),
+    componentNode.extend({
+      children: z.array(nodeSchema).optional(),
+    }),
+    componentSetNode.extend({
+      children: z.array(nodeSchema).min(1),
+    }),
+  ]),
+)
+
+/**
+ * WeakMaps for type overrides (e$, eZ, eX).
+ */
+const typeOverrideMap = new WeakMap()
+const typeFactoryMap = new WeakMap()
+const typeFlagMap = new WeakMap()
+
+/**
+ * Prompt schema (Fs).
+ * Original: $$eJ1
+ */
+export const PromptModeSchema = z.object({
+  prompt: z.string(),
+  mode: z.enum(Object.values(Wc) as [string, ...string[]]).optional(),
+})
+
+/**
+ * Request schema (pp).
+ * Original: $$e12
+ */
+export const createNodesRequestSchema = z.object({
+  requestId: z.string().optional(),
+  createNodes: z.object({
+    node: (function (schema, factory) {
+      typeOverrideMap.set(schema, schema._def.getType)
+      typeFactoryMap.set(schema, factory)
+      schema._def.getType = (...args) => {
+        const original = typeOverrideMap.get(schema)
+        const factoryFn = typeFactoryMap.get(schema)
+        return factoryFn && !typeFlagMap.get(schema)
+          ? factoryFn.call(schema._def, ...args)
+          : original
+            ? original.call(schema._def, ...args)
+            : undefined
+      }
+      return schema
+    })(nodeSchema, e => e.factory.createKeywordTypeNode(e.SyntaxKind.AnyKeyword)),
+    parentId: z.string().optional(),
+    index: z.number().optional(),
+  }).array().optional(),
+  cortex_error: z.object({
+    type: z.string(),
+    data: z.any(),
+  }).optional(),
+  trace: NodeSchema.optional(),
+})

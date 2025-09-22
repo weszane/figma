@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useRef, useEffect, useCallback, useMemo } from "react";
 import a from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { bA, _q } from "../905/668764";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { Lk, X9, ag, i5, NB, PZ, f0, LN, cu, h7 } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
 import { MIXED_MARKER, isInvalidValue } from "../905/216495";
@@ -20,8 +20,8 @@ var s = a;
 let I = {
   scrubMultiplier: 1,
   wheelMultiplier: 1,
-  smallNudgeAmount: bA,
-  bigNudgeAmount: _q
+  smallNudgeAmount: DEFAULT_FINE_NUDGE,
+  bigNudgeAmount: DEFAULT_COARSE_NUDGE
 };
 function S({
   children: e,
@@ -650,8 +650,8 @@ export function $$H4(e) {
 export function $$z3(e) {
   let {
     min,
-    smallNudgeAmount = bA,
-    bigNudgeAmount = _q,
+    smallNudgeAmount = DEFAULT_FINE_NUDGE,
+    bigNudgeAmount = DEFAULT_COARSE_NUDGE,
     formatter
   } = e;
   let o = useRef(!1);

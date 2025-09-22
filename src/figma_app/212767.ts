@@ -3,7 +3,7 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
-import { UX, UK } from "../figma_app/740163";
+import { getDevHandoffInspectSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
 import { QBm } from "../figma_app/27776";
 let c = parsePxNumber(QBm);
 let u = 300 + c;
@@ -13,7 +13,7 @@ export function $$h1(e) {
   return Math.max(u, Math.min(p, e || 0));
 }
 export function $$m2() {
-  return $$h1(UX());
+  return $$h1(getDevHandoffInspectSplitPosition());
 }
 let g = 320 + c;
 export function $$f4() {
@@ -29,10 +29,10 @@ export function $$E5() {
 }
 export function $$y6(e) {
   getFeatureFlags().properties_panel_resize_lag_fix && document.documentElement.style.setProperty("--dev-handoff-panel-width", `${e}px`);
-  UK().devHandoffInspectSplitPosition.set(e);
+  EditorPreferencesApi().devHandoffInspectSplitPosition.set(e);
 }
 export function $$b3() {
-  let e = UX();
+  let e = getDevHandoffInspectSplitPosition();
   useEffect(() => {
     let t = $$h1(e);
     t !== e && $$y6(t);

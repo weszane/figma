@@ -1,7 +1,7 @@
 import { FontSourceType } from "../figma_app/763686";
 import { addFontFamily } from "../905/240327";
 import { initAction } from "../905/929976";
-import { nN } from "../figma_app/91703";
+import { updateFontList } from "../figma_app/91703";
 import { X } from "../905/784599";
 function l(e) {
   switch (e.source) {
@@ -95,7 +95,7 @@ function g(e, t) {
 }
 export function $$f2(e = {}, t) {
   if (initAction.matches(t)) return Object.create(null);
-  if (nN.matches(t)) {
+  if (updateFontList.matches(t)) {
     let i = {
       ...e
     };

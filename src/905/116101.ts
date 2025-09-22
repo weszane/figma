@@ -6,7 +6,7 @@ import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { Rt } from "../figma_app/979658";
 import { t as _$$t } from "../905/192333";
 import { s as _$$s } from "../figma_app/504088";
-import { W } from "../905/80656";
+import { setSideHandler } from "../905/80656";
 let $$p6 = createActionCreator("UNIVERSAL_INSERT_UPDATE_SOURCE_RECT");
 let $$m8 = createOptimistThunk((e, {
   id: t,
@@ -35,7 +35,7 @@ let $$m8 = createOptimistThunk((e, {
   })));
 });
 let $$h7 = createOptimistThunk((e, t) => {
-  t.pinned === _$$t.PINNED_AND_DOCKED_LEFT && W("left", () => {
+  t.pinned === _$$t.PINNED_AND_DOCKED_LEFT && setSideHandler("left", () => {
     e.getState().universalInsertModal.pinned === _$$t.PINNED_AND_DOCKED_LEFT && e.dispatch($$f2());
   });
   e.dispatch($$g3(t));

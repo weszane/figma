@@ -34,7 +34,7 @@ import { Rb } from "../figma_app/8833";
 import { i as _$$i } from "../figma_app/85949";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
 import { updateTemporarilyExpandedInstanceLayers, expandNodeToRoot, selectNodesInRange, duplicateSelection, transferSelection, clearSelection, updateHoveredNode, setNodeExpandedRecursive, setSelectionExpanded, setNodeExpanded, setNodeLocked, setNodeVisible, replaceSelection, setNodeTemporarilyExpanded, removeFromSelection, addToSelection } from "../figma_app/741237";
 import { NF, Ht, no } from "../figma_app/701001";
@@ -1256,7 +1256,7 @@ class ez extends RecordingPureComponent {
 }
 function eW(e) {
   let t = useDispatch();
-  let s = getObservableOrFallback(UK().showImmutableFrameSublayers);
+  let s = getObservableOrFallback(EditorPreferencesApi().showImmutableFrameSublayers);
   let l = getObservableValue(AppStateTsApi?.uiState().reparentIntoStackInfo, null);
   let a = NF();
   let o = Ht();
@@ -1296,7 +1296,7 @@ function eW(e) {
     let t = e.getCurrentPage();
     return getFeatureFlags().derived_prop_slow_selectors ? (t ? t.socialImageGuidsOnPage : []).join(",") : [t?.responsiveSetSettings?.socialImageID, ...(t?.childrenNodes.map(e => "RESPONSIVE_SET" === e.type && e.responsiveSetSettings?.socialImageID) || [])].filter(e => "string" == typeof e).join(",");
   });
-  let H = getObservableOrFallback(UK().showGuids);
+  let H = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let z = useCurrentViewState().isLoading;
   let q = useMemo(() => new nV(k, x), [k, y, x]);
   let J = useRef(null);

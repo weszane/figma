@@ -13,7 +13,7 @@ import { W as _$$W } from '../905/63398';
 import { s as _$$s2 } from '../905/66404';
 import { M as _$$M } from '../905/69907';
 import { H as _$$H3 } from '../905/75186';
-import { D as _$$D6 } from '../905/80656';
+import { deferCallback } from '../905/80656';
 import { c as _$$c } from '../905/90943';
 import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { h as _$$h4 } from '../905/104000';
@@ -122,7 +122,7 @@ import { e as _$$e } from '../905/678389';
 import { p as _$$p2 } from '../905/682418';
 import { f as _$$f, h as _$$h7 } from '../905/693155';
 import { e0 as _$$e4 } from '../905/696396';
-import { Wq } from '../905/697795';
+import { openUrl } from '../905/697795';
 import { SingletonSceneGraph } from '../905/700578';
 import { E as _$$E4 } from '../905/701278';
 import { s as _$$s3 } from '../905/702260';
@@ -136,7 +136,7 @@ import { E as _$$E } from '../905/730894';
 import { X as _$$X } from '../905/736922';
 import { E as _$$E2 } from '../905/737393';
 import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
-import { d as _$$d } from '../905/758967';
+import { getCanvasViewState } from '../905/758967';
 import { N as _$$N6 } from '../905/778966';
 import { r as _$$r4 } from '../905/784543';
 import { S as _$$S } from '../905/788053';
@@ -172,7 +172,7 @@ import { y as _$$y4 } from '../figma_app/13082';
 import { S5 } from '../figma_app/24841';
 import { atomStoreManager } from '../figma_app/27355';
 import { $t, HZ } from '../figma_app/29287';
-import { eH as _$$eH } from '../figma_app/91703';
+import { handleAutosaveAndNavigationThunk } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { getUnitLabel } from '../figma_app/120227';
 import { Dc, hV, mU } from '../figma_app/151766';
@@ -213,7 +213,7 @@ import { AssetCategoryEnum, assetCategoryAtom } from '../figma_app/639711';
 import { fx, PF } from '../figma_app/657972';
 import { i as _$$i2 } from '../figma_app/714009';
 import { useSceneGraphSelector } from '../figma_app/722362';
-import { UK } from '../figma_app/740163';
+import { EditorPreferencesApi } from '../figma_app/740163';
 import { AppStateTsApi, SwitchState, Fullscreen, EasingType, SelfDesignType, LogToConsoleMode, ComponentPanelTab, MenuType, MeasurementUnit, Thumbnail } from '../figma_app/763686';
 import { X as _$$X4 } from '../figma_app/765161';
 import { BrowserInfo } from '../figma_app/778880';
@@ -3825,7 +3825,7 @@ function nT(e) {
 function nk() {
   return W7() && getFeatureFlags().aip_magnolia ? [{
     action: 'toggle-text-suggestions-preference',
-    property: UK().wantsTextSuggestions,
+    property: EditorPreferencesApi().wantsTextSuggestions,
     propertyValue: !0,
     flags: ['design', 'edit'],
     featureFlags: [],
@@ -3867,9 +3867,9 @@ export function $$nN0(e) {
         if (n.metaKey || n.button === 1) {
           let e = debugState.getState().openFile;
           let t = e?.project?.id || null;
-          hasKey(debugState.getState().folders, t) ? Wq(getProjectUrl(t, e?.parentOrgId ?? null), i) : Wq('/', i);
+          hasKey(debugState.getState().folders, t) ? openUrl(getProjectUrl(t, e?.parentOrgId ?? null), i) : openUrl('/', i);
         } else {
-          i(_$$eH());
+          i(handleAutosaveAndNavigationThunk());
           i(hideDropdownAction());
         }
       }
@@ -4423,35 +4423,35 @@ export function $$nN0(e) {
     children: [{
       action: 'toggle-grid',
       flags: ['design', 'sites', 'dev_handoff'],
-      property: UK().renderGrid,
+      property: EditorPreferencesApi().renderGrid,
       propertyValue: !0,
       displayForQuickCommand: 'show-pixel-grid',
       featureFlags: []
     }, {
       action: 'toggle-show-dot-grid',
       flags: ['whiteboard'],
-      property: UK().showDotGrid,
+      property: EditorPreferencesApi().showDotGrid,
       propertyValue: !0,
       displayForQuickCommand: 'toggle-show-dot-grid',
       featureFlags: []
     }, {
       action: 'toggle-shown-layout-grids',
       flags: ['edit', 'design', 'sites', 'slides', 'cooper', 'dev_handoff'],
-      property: UK().showFrameGrids,
+      property: EditorPreferencesApi().showFrameGrids,
       propertyValue: !0,
       displayForQuickCommand: 'show-layout-grids',
       featureFlags: []
     }, {
       action: 'toggle-shown-layout-grids',
       flags: ['!edit', 'design', 'sites', 'slides', 'cooper', 'dev_handoff'],
-      property: _$$d().showFrameGridsViewOnly,
+      property: getCanvasViewState().showFrameGridsViewOnly,
       propertyValue: !0,
       displayForQuickCommand: 'show-layout-grids',
       featureFlags: []
     }, {
       action: 'toggle-rulers',
       flags: ['design', 'dev_handoff', 'slides', 'cooper', 'sites'],
-      property: UK().renderRulers,
+      property: EditorPreferencesApi().renderRulers,
       propertyValue: !0,
       displayForQuickCommand: 'show-rulers',
       featureFlags: []
@@ -4462,58 +4462,58 @@ export function $$nN0(e) {
       children: [{
         action: 'toggle-ruler-unit-pixels',
         featureFlags: [],
-        property: UK().renderRulerUnitAsPixels,
+        property: EditorPreferencesApi().renderRulerUnitAsPixels,
         propertyValue: !0
       }, {
         action: 'toggle-ruler-unit-inches',
         featureFlags: [],
-        property: UK().renderRulerUnitAsInches,
+        property: EditorPreferencesApi().renderRulerUnitAsInches,
         propertyValue: !0
       }, {
         action: 'toggle-ruler-unit-centimeters',
         featureFlags: [],
-        property: UK().renderRulerUnitAsCentimeters,
+        property: EditorPreferencesApi().renderRulerUnitAsCentimeters,
         propertyValue: !0
       }]
     }, {
       action: 'toggle-print-marks',
       flags: ['cooper'],
-      property: UK().renderPrintMarks,
+      property: EditorPreferencesApi().renderPrintMarks,
       propertyValue: !0,
       displayForQuickCommand: 'show-print-marks',
       featureFlags: ['buzz_print_export']
     }, {
       action: 'toggle-stack-debug-mode',
       flags: ['design'],
-      property: UK().stackInsertionDebugMode,
+      property: EditorPreferencesApi().stackInsertionDebugMode,
       propertyValue: !0,
       displayForQuickCommand: 'toggle-stack-debug-mode',
       featureFlags: ['ce_al_experiments_disabled']
     }, {
       action: 'toggle-stack-shadows',
       flags: ['design'],
-      property: UK().renderStackShadows,
+      property: EditorPreferencesApi().renderStackShadows,
       propertyValue: !0,
       displayForQuickCommand: 'toggle-stack-shadows',
       featureFlags: ['ce_al_experiments_disabled']
     }, {
       action: 'toggle-dynamic-insertion-points',
       flags: ['design'],
-      property: UK().renderDynamicInsertionPoints,
+      property: EditorPreferencesApi().renderDynamicInsertionPoints,
       propertyValue: !0,
       displayForQuickCommand: 'toggle-dynamic-insertion-points',
       featureFlags: ['ce_al_experiments_disabled']
     }, {
       action: 'toggle-auto-fill-full-width-children',
       flags: ['design'],
-      property: UK().shouldSetFullWidthChildToFill,
+      property: EditorPreferencesApi().shouldSetFullWidthChildToFill,
       propertyValue: !0,
       displayForQuickCommand: 'toggle-auto-fill-full-width-children',
       featureFlags: ['ce_al_experiments_experimental']
     }, {
       action: 'toggle-show-slices',
       flags: ['design'],
-      property: UK().showSlices,
+      property: EditorPreferencesApi().showSlices,
       propertyValue: !0,
       displayForQuickCommand: 'show-slices',
       featureFlags: []
@@ -4548,7 +4548,7 @@ export function $$nN0(e) {
       featureFlags: [],
       children: [{
         action: 'toggle-outlines',
-        property: _$$d().showOutlines,
+        property: getCanvasViewState().showOutlines,
         propertyValue: !0,
         shortcutText: c1(debugState.getState().mirror.appModel.keyboardShortcuts, 'toggle-outlines'),
         featureFlags: []
@@ -4556,13 +4556,13 @@ export function $$nN0(e) {
         separator: !0
       }, {
         action: 'toggle-outline-mode-hidden-layers',
-        property: _$$d().showOutlineHiddenLayers,
+        property: getCanvasViewState().showOutlineHiddenLayers,
         propertyValue: !0,
         displayForQuickCommand: 'toggle-outline-mode-hidden-layers-qc',
         featureFlags: []
       }, {
         action: 'toggle-outline-mode-object-bounds',
-        property: _$$d().showOutlineObjectBounds,
+        property: getCanvasViewState().showOutlineObjectBounds,
         propertyValue: !0,
         displayForQuickCommand: 'toggle-outline-mode-object-bounds-qc',
         featureFlags: []
@@ -4570,21 +4570,21 @@ export function $$nN0(e) {
     }, {
       action: 'toggle-pixel-preview',
       flags: ['design', 'dev_handoff', 'slides', 'cooper', 'sites'],
-      property: UK().activeCanvasPixelPreview,
+      property: EditorPreferencesApi().activeCanvasPixelPreview,
       propertyValue: !0,
       displayForQuickCommand: 'show-pixel-preview',
       featureFlags: []
     }, {
       action: 'toggle-show-masks',
       flags: ['design'],
-      property: UK().showMasks,
+      property: EditorPreferencesApi().showMasks,
       propertyValue: !0,
       displayForQuickCommand: 'show-mask-outlines',
       featureFlags: []
     }, {
       action: 'toggle-show-artboard-outlines',
       flags: ['design'],
-      property: UK().showArtboardOutlines,
+      property: EditorPreferencesApi().showArtboardOutlines,
       propertyValue: !0,
       displayForQuickCommand: 'show-frame-outlines',
       featureFlags: []
@@ -4621,7 +4621,7 @@ export function $$nN0(e) {
         });
       },
       name: 'toggle-show-property-labels',
-      property: UK().showPropertyLabels,
+      property: EditorPreferencesApi().showPropertyLabels,
       propertyValue: !0,
       featureFlags: []
     }, {
@@ -4643,7 +4643,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, ...(AppStateTsApi.uiState().isUI3.getCopy() ? [] : [{
       action: 'toggle-sidebar',
-      property: UK().showSidebar,
+      property: EditorPreferencesApi().showSidebar,
       propertyValue: !0,
       flags: ['dev_handoff'],
       featureFlags: []
@@ -4714,7 +4714,7 @@ export function $$nN0(e) {
         separator: !0
       }, ...(AppStateTsApi.uiState().isUI3.getCopy() ? [] : [{
         action: 'toggle-sidebar',
-        property: UK().showSidebar,
+        property: EditorPreferencesApi().showSidebar,
         propertyValue: !0,
         featureFlags: []
       }])]
@@ -4954,7 +4954,7 @@ export function $$nN0(e) {
       iconType: createElement(_$$t)
     }, {
       action: 'focus-mode-responsive-set',
-      property: UK().toggleResponsiveSetAutoFocus,
+      property: EditorPreferencesApi().toggleResponsiveSetAutoFocus,
       propertyValue: !0,
       flags: ['sites'],
       featureFlags: ['sites', 'sts_multiedit_toggle'],
@@ -5667,25 +5667,25 @@ export function $$nN0(e) {
       flags: ['dev_handoff', '!limited_dev_mode']
     }, {
       action: 'toggle-snapping-to-geometry',
-      property: UK().snapToGeometry,
+      property: EditorPreferencesApi().snapToGeometry,
       propertyValue: !0,
       flags: ['edit', 'design'],
       featureFlags: []
     }, {
       action: 'toggle-snapping-to-objects',
-      property: UK().snapToObjects,
+      property: EditorPreferencesApi().snapToObjects,
       propertyValue: !0,
       flags: ['edit', 'design'],
       featureFlags: []
     }, {
       action: 'toggle-snapping-to-pixels',
-      property: UK().snapToPixelGrid,
+      property: EditorPreferencesApi().snapToPixelGrid,
       propertyValue: !0,
       flags: ['edit', 'design', 'slides', 'cooper', 'sites'],
       featureFlags: []
     }, {
       action: 'toggle-snapping-to-dots',
-      property: getFeatureFlags().figjam_snap_to_dot_grid_reset ? UK().snapToDotGridStagingReset : UK().snapToDotGrid,
+      property: getFeatureFlags().figjam_snap_to_dot_grid_reset ? EditorPreferencesApi().snapToDotGridStagingReset : EditorPreferencesApi().snapToDotGrid,
       propertyValue: !0,
       flags: ['edit', 'whiteboard'],
       featureFlags: []
@@ -5694,49 +5694,49 @@ export function $$nN0(e) {
       flags: ['edit']
     }, {
       action: 'toggle-sticky-tools',
-      property: UK().stickyTools,
+      property: EditorPreferencesApi().stickyTools,
       propertyValue: !0,
       flags: ['design', 'dev_handoff'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'disable-pinch-zoom-fix',
-      property: UK().disablePinchZoomFix,
+      property: EditorPreferencesApi().disablePinchZoomFix,
       propertyValue: !0,
       platforms: ['windows'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'toggle-layer-hover',
-      property: UK().layerHover,
+      property: EditorPreferencesApi().layerHover,
       propertyValue: !0,
       flags: ['design', 'dev_handoff'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'toggle-copy-renaming',
-      property: UK().copyRenaming,
+      property: EditorPreferencesApi().copyRenaming,
       propertyValue: !0,
       flags: ['edit', 'design'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'toggle-annotations',
-      property: UK().renderAnnotations,
+      property: EditorPreferencesApi().renderAnnotations,
       propertyValue: !0,
       flags: ['design'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'toggle-viewport-overlay-hiding',
-      property: UK().temporarilyHideViewportOverlay,
+      property: EditorPreferencesApi().temporarilyHideViewportOverlay,
       propertyValue: !0,
       flags: ['design'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'toggle-smart-quotes',
-      property: UK().smartQuotes,
+      property: EditorPreferencesApi().smartQuotes,
       propertyValue: !0,
       flags: ['edit', 'design'],
       hideForQuickCommand: !0,
@@ -5744,21 +5744,21 @@ export function $$nN0(e) {
       notFeatureFlags: ['ce_tv_typing_shortcuts']
     }, {
       action: 'toggle-smart-text-substitution',
-      property: UK().smartQuotes,
+      property: EditorPreferencesApi().smartQuotes,
       propertyValue: !0,
       flags: ['edit', 'design'],
       hideForQuickCommand: !0,
       featureFlags: ['ce_tv_typing_shortcuts']
     }, {
       action: 'toggle-flip-during-resize',
-      property: UK().flipDuringResize,
+      property: EditorPreferencesApi().flipDuringResize,
       propertyValue: !0,
       flags: ['edit', 'design'],
       hideForQuickCommand: !0,
       featureFlags: []
     }, {
       action: 'set-constraints-automatically-toggle',
-      property: UK().setConstraintsAutomaticallyToggle,
+      property: EditorPreferencesApi().setConstraintsAutomaticallyToggle,
       propertyValue: !0,
       featureFlags: ['sites', 'sts_auto_constraints'],
       flags: ['edit', 'sites']
@@ -5767,21 +5767,21 @@ export function $$nN0(e) {
       flags: ['edit', 'whiteboard']
     }, {
       action: 'toggle-keyboard-zoom-to-selection',
-      property: UK().keyboardZoomToSelection,
+      property: EditorPreferencesApi().keyboardZoomToSelection,
       propertyValue: !0,
       hideForQuickCommand: !0,
       featureFlags: [],
       flags: ['!figmake']
     }, {
       action: 'toggle-invert-zoom',
-      property: UK().invertZoom,
+      property: EditorPreferencesApi().invertZoom,
       propertyValue: !0,
       hideForQuickCommand: !0,
       featureFlags: [],
       flags: ['!figmake']
     }, {
       action: 'toggle-ctrl-click-context-menu',
-      property: UK().ctrlClickContextMenu,
+      property: EditorPreferencesApi().ctrlClickContextMenu,
       propertyValue: !0,
       hideForQuickCommand: !0,
       featureFlags: []
@@ -5790,7 +5790,7 @@ export function $$nN0(e) {
       flags: ['edit', 'whiteboard']
     }, {
       action: 'toggle-cursor-high-five-wiggle',
-      property: UK().cursorHighFiveWiggle,
+      property: EditorPreferencesApi().cursorHighFiveWiggle,
       propertyValue: !0,
       flags: ['whiteboard'],
       hideForQuickCommand: !0,
@@ -5804,7 +5804,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-use-old-outline-shortcuts',
-      property: UK().useOldOutlineShortcuts,
+      property: EditorPreferencesApi().useOldOutlineShortcuts,
       propertyValue: !0,
       flags: ['design', 'dev_handoff'],
       hideForQuickCommand: !0,
@@ -5824,7 +5824,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, ...(desktopAPIInstance?.hasFeature('addCodegenMCPStartupBinding') && getFeatureFlags().show_mcp_server_upsell && !mcpArgs?.canStartCodegenMcpServer && fileMenuArgs?.openFile?.plan?.tier === FPlanNameType.STARTER ? [{
       action: 'toggle-enable-codegen-mcp-server',
-      property: UK().enableCodegenMcpServer,
+      property: EditorPreferencesApi().enableCodegenMcpServer,
       flags: ['desktop', 'design', 'dev_handoff'],
       propertyValue: !0,
       callback: (e, t, i) => {
@@ -5845,7 +5845,7 @@ export function $$nN0(e) {
       featureFlags: ['dt_my_cool_plugin']
     }] : []), ...(desktopAPIInstance?.hasFeature('addCodegenMCPStartupBinding') && mcpArgs?.canStartCodegenMcpServer ? [{
       action: 'toggle-enable-codegen-mcp-server',
-      property: UK().enableCodegenMcpServer,
+      property: EditorPreferencesApi().enableCodegenMcpServer,
       flags: ['desktop', 'design', 'dev_handoff'],
       propertyValue: !0,
       featureFlags: ['dt_my_cool_plugin']
@@ -6537,7 +6537,7 @@ export function $$nN0(e) {
       trackEventAnalytics(Fn.OPEN, {
         source: OO.QUICK_ACTIONS
       });
-      _$$D6(() => {
+      deferCallback(() => {
         atomStoreManager.set(Qs, {
           type: 'CLOSE'
         });
@@ -6547,7 +6547,7 @@ export function $$nN0(e) {
   }, {
     action: 'toggle-help-widget',
     searchOnly: !0,
-    property: UK().hideHelpWidget,
+    property: EditorPreferencesApi().hideHelpWidget,
     propertyValue: !0,
     featureFlags: []
   }, {
@@ -6677,7 +6677,7 @@ export function $$nN0(e) {
       featureFlags: ['internal_only_debug_tools']
     }, {
       action: 'debug-toggle-whiteboard-pdf-import-node-replacement',
-      property: UK().disableWhiteboardPdfImportNodeReplacement,
+      property: EditorPreferencesApi().disableWhiteboardPdfImportNodeReplacement,
       propertyValue: !1,
       isLowPriorityMatch: !0,
       featureFlags: ['internal_only_debug_tools']
@@ -6686,7 +6686,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'debug-toggle-show-vector-network-labels',
-      property: UK().showVectorNetworkLabels,
+      property: EditorPreferencesApi().showVectorNetworkLabels,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: ['internal_only_debug_tools']
@@ -6764,13 +6764,13 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-show-guids',
-      property: UK().showGuids,
+      property: EditorPreferencesApi().showGuids,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: []
     }, {
       action: 'debug-toggle-figma-scope',
-      property: UK().showFigmaScope,
+      property: EditorPreferencesApi().showFigmaScope,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: ['internal_only_debug_tools']
@@ -6788,13 +6788,13 @@ export function $$nN0(e) {
       featureFlags: ['ds_force_publish_cmd']
     }, {
       action: 'toggle-canvas-search-debug',
-      property: UK().canvasSearchDebug,
+      property: EditorPreferencesApi().canvasSearchDebug,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: []
     }, {
       action: 'toggle-accessibility-dom-debug',
-      property: UK().accessibilityDomDebug,
+      property: EditorPreferencesApi().accessibilityDomDebug,
       flags: ['whiteboard'],
       propertyValue: !0,
       isLowPriorityMatch: !0,
@@ -6805,19 +6805,19 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-plugin-api-debug',
-      property: UK().pluginApiDebug,
+      property: EditorPreferencesApi().pluginApiDebug,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: []
     }, {
       action: 'toggle-show-quick-command-rank-debug',
-      property: UK().showQuickCommandRankDebug,
+      property: EditorPreferencesApi().showQuickCommandRankDebug,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-show-immutable-frame-sublayers',
       flags: ['design'],
-      property: UK().showImmutableFrameSublayers,
+      property: EditorPreferencesApi().showImmutableFrameSublayers,
       propertyValue: !0,
       featureFlags: []
     }, {
@@ -6827,7 +6827,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-pen-tool-avoid-single-handles',
-      property: UK().penToolAvoidSingleHandles,
+      property: EditorPreferencesApi().penToolAvoidSingleHandles,
       propertyValue: !0,
       featureFlags: []
     }, {
@@ -6871,37 +6871,37 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-display-dirty-rects',
-      property: UK().toggleDisplayDirtyRects,
+      property: EditorPreferencesApi().toggleDisplayDirtyRects,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-display-dirty-tiles',
-      property: UK().toggleDisplayDirtyTiles,
+      property: EditorPreferencesApi().toggleDisplayDirtyTiles,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-display-pixel-heat-map',
-      property: UK().toggleDisplayPixelHeatMap,
+      property: EditorPreferencesApi().toggleDisplayPixelHeatMap,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-display-expensive-tiles',
-      property: UK().toggleDisplayExpensiveTiles,
+      property: EditorPreferencesApi().toggleDisplayExpensiveTiles,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-display-gpu-metrics',
-      property: UK().toggleDisplayGpuMetrics,
+      property: EditorPreferencesApi().toggleDisplayGpuMetrics,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-display-cpu-timer-tree',
-      property: UK().toggleDisplayCpuTimerTree,
+      property: EditorPreferencesApi().toggleDisplayCpuTimerTree,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-perf-mode-medium',
-      property: UK().togglePerfModeMedium,
+      property: EditorPreferencesApi().togglePerfModeMedium,
       propertyValue: !0,
       featureFlags: []
     }, {
@@ -6955,20 +6955,20 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-overlay-ui-rendering',
-      property: _$$d().overlayUiRendering,
+      property: getCanvasViewState().overlayUiRendering,
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: []
     }, {
       action: 'toggle-allow-time-sliced-edit-rendering-optimization',
-      property: _$$d().allowTimeSlicedEditRenderingOptimization,
+      property: getCanvasViewState().allowTimeSlicedEditRenderingOptimization,
       flags: ['whiteboard'],
       propertyValue: !0,
       isLowPriorityMatch: !0,
       featureFlags: []
     }, {
       action: 'toggle-sync-cursor-rendering',
-      property: _$$d().syncCursorRenderingToSceneGraph,
+      property: getCanvasViewState().syncCursorRenderingToSceneGraph,
       flags: ['whiteboard'],
       propertyValue: !0,
       isLowPriorityMatch: !0,
@@ -6982,13 +6982,13 @@ export function $$nN0(e) {
     }, {
       action: 'similar-includes-matching',
       flags: ['design'],
-      property: UK().similarIncludesMatching,
+      property: EditorPreferencesApi().similarIncludesMatching,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-similar-highlights',
       flags: ['design'],
-      property: UK().toggleSimilarHighlights,
+      property: EditorPreferencesApi().toggleSimilarHighlights,
       featureFlags: []
     }, {
       name: 'toggle-figment-debugger',
@@ -7082,7 +7082,7 @@ export function $$nN0(e) {
       featureFlags: ['fullscreen_flanimations']
     }, {
       action: 'toggle-noodles-without-dragging',
-      property: UK().toggleNoodlesWithoutDragging,
+      property: EditorPreferencesApi().toggleNoodlesWithoutDragging,
       featureFlags: ['prototype_on_canvas_improvements'],
       searchOnly: !0,
       propertyValue: !0
@@ -7105,12 +7105,12 @@ export function $$nN0(e) {
     }, {
       action: 'toggle-undo-redo-debug',
       featureFlags: [],
-      property: UK().toggleUndoRedoDebugLogging,
+      property: EditorPreferencesApi().toggleUndoRedoDebugLogging,
       propertyValue: !0
     }, {
       action: 'toggle-collaborative-text-debug',
       featureFlags: [],
-      property: UK().toggleCollaborativeTextDebugLogging,
+      property: EditorPreferencesApi().toggleCollaborativeTextDebugLogging,
       propertyValue: !0
     }, {
       name: 'auto-suggest-eval',
@@ -7252,7 +7252,7 @@ export function $$nN0(e) {
   }, {
     action: 'back-to-files',
     callback: (e, t, i) => {
-      i(_$$eH());
+      i(handleAutosaveAndNavigationThunk());
     },
     searchOnly: !0,
     flags: ['!desktop', '!integration'],

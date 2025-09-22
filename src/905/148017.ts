@@ -16,7 +16,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { F as _$$F } from "../figma_app/8833";
 import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
@@ -331,7 +331,7 @@ class es extends PureComponent {
     this.ui3RowRef = createRef();
     this.toggleSettings = e => {
       if (e && e.stopPropagation(), this.settingsPickerShown()) {
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
         fullscreenValue.deselectProperty();
       } else {
         let e = cn("ui3" === this.props.version ? this.ui3RowRef.current : this.rowRef.current);
@@ -341,7 +341,7 @@ class es extends PureComponent {
             indices: [this.props.index]
           }
         });
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: this.pickerId,
           initialX: e.x,
           initialY: e.y

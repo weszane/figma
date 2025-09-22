@@ -81,7 +81,7 @@ import { qP, Fb } from "../figma_app/909778";
 import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { kj, U1 } from "../905/191601";
-import { vg } from "../figma_app/91703";
+import { beginRenaming } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
@@ -468,7 +468,7 @@ let ti = memo(function ({
     rename: function () {
       let e = useDispatch();
       return useCallback(() => {
-        e(vg());
+        e(beginRenaming());
       }, [e]);
     }(),
     deleteFile: function () {

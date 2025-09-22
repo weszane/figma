@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
 import { SvgComponent } from "../905/714743";
-import { Rw } from "../figma_app/91703";
+import { updateRecentlyUsedQuickCommand } from "../figma_app/91703";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { usePublishedPlugins, getLocalPlugins } from "../figma_app/844435";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -73,7 +73,7 @@ export function $$E0({
         let {
           isCancelled
         } = await waitForAllPagesForPlugin(n);
-        isCancelled || (n && (n.queryMode = !1, n.deferRunEvent = !1, n.parameterValues = i.parameters, w && (P(Rw({
+        isCancelled || (n && (n.queryMode = !1, n.deferRunEvent = !1, n.parameterValues = i.parameters, w && (P(updateRecentlyUsedQuickCommand({
           currentDisplayName: w,
           newCommand: {
             displayName: w,

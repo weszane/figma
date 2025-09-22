@@ -232,7 +232,7 @@ import { a as _$$a10 } from '../905/692930';
 import { e as _$$e17 } from '../905/693478';
 import { T as _$$T6 } from '../905/696189';
 import { e0 as _$$e7, qo } from '../905/696396';
-import { hL as _$$hL, nz as _$$nz, jm, Tq } from '../905/697795';
+import { setEditorDocumentTitle, openFileInNewTab, userHasPlan, openFileInFullscreen } from '../905/697795';
 import { X as _$$X } from '../905/698965';
 import { L as _$$L4 } from '../905/704296';
 import { H as _$$H3 } from '../905/706055';
@@ -619,7 +619,7 @@ import { TrackedAnchor, TrackedButton, TrackedLink, TrackingProvider, useTrackin
 import { e as _$$e5 } from '../figma_app/831857';
 import { y$ as _$$y$2, Lj } from '../figma_app/835219';
 import { p as _$$p9, u as _$$u7 } from '../figma_app/837956';
-import { Gg, Rp } from '../figma_app/840917';
+import { useAutosaveFilesWithPermissions, useUnsyncedAutosaveFiles } from '../figma_app/840917';
 import { xT as _$$xT, E4, Rk } from '../figma_app/841415';
 import { ps as _$$ps, ZY } from '../figma_app/845611';
 import { SW } from '../figma_app/846003';
@@ -642,7 +642,7 @@ import { C8 as _$$C, Be } from '../figma_app/920435';
 import { useLatestRef } from '../figma_app/922077';
 import { searchEndSession, searchStartSession } from '../figma_app/925970';
 import { encodeUri } from '../figma_app/930338';
-import { LJ } from '../figma_app/930386';
+import { TemplateCategory } from '../figma_app/930386';
 import { qW } from '../figma_app/932285';
 import { getAdminUsers, getCurrentUserOrgUser, getTopAdminUsers } from '../figma_app/951233';
 import { E as _$$E7, J as _$$J4 } from '../figma_app/953812';
@@ -1297,9 +1297,9 @@ function rh(e) {
   let f = [...rf(!0, () => getI18nString('tile.dropdown.open'), () => {
     DF('open');
     LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
-    Tq(t, n);
+    openFileInFullscreen(t, n);
   }), ...rf(!desktopAPIInstance && !isChromebookTabbed(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
-    _$$nz(buildFileUrl({
+    openFileInNewTab(buildFileUrl({
       file: n,
       allowDefaulting: !0
     }), n.key, r, t);
@@ -6645,7 +6645,7 @@ function oA({
   workspaceOrgTeamsQuery: s,
   isAssignedWorkspace: i
 }) {
-  _$$hL(t.name);
+  setEditorDocumentTitle(t.name);
   let n = {
     ...t,
     members: r.data ?? []
@@ -6715,11 +6715,11 @@ let oX = {
     $$css: !0
   }
 };
-let o5 = new Set([LJ.uiKits, LJ.wireframes, LJ.designTemplates, LJ.mobileApps, LJ.portfolios, LJ.resumes, LJ.visualAssets, LJ.illustrations, LJ.icons, LJ.shapesColors]);
-let o8 = new Set([LJ.brainstorming, LJ.diagramming, LJ.funGames, LJ.teamMeetings, LJ.whiteboarding, LJ.strategicPlanning]);
-let o6 = new Set([LJ.editingEffects, LJ.fileOrganization, LJ.development, LJ.whiteboarding, LJ.designTools, LJ.importExport, LJ.accessibility, LJ.prototypingAnimation]);
-let o3 = new Set([LJ.presentations]);
-let o7 = new Set([LJ.desktopAppsWebsites]);
+let o5 = new Set([TemplateCategory.uiKits, TemplateCategory.wireframes, TemplateCategory.designTemplates, TemplateCategory.mobileApps, TemplateCategory.portfolios, TemplateCategory.resumes, TemplateCategory.visualAssets, TemplateCategory.illustrations, TemplateCategory.icons, TemplateCategory.shapesColors]);
+let o8 = new Set([TemplateCategory.brainstorming, TemplateCategory.diagramming, TemplateCategory.funGames, TemplateCategory.teamMeetings, TemplateCategory.whiteboarding, TemplateCategory.strategicPlanning]);
+let o6 = new Set([TemplateCategory.editingEffects, TemplateCategory.fileOrganization, TemplateCategory.development, TemplateCategory.whiteboarding, TemplateCategory.designTools, TemplateCategory.importExport, TemplateCategory.accessibility, TemplateCategory.prototypingAnimation]);
+let o3 = new Set([TemplateCategory.presentations]);
+let o7 = new Set([TemplateCategory.desktopAppsWebsites]);
 let o9 = {
   DESIGN_RESOURCES: 'designResources',
   PLUGINS_AND_WIDGETS: 'pluginsAndWidgets',
@@ -6764,19 +6764,19 @@ function lr(e, t, r) {
   let s = WG(e);
   let i = r ? function (e, t) {
     let r = {
-      [LJ.whiteboarding]: {
+      [TemplateCategory.whiteboarding]: {
         [ResourceTypes.BrowseResourceTypes.WIDGETS]: getI18nString('categories.widgets')
       },
-      [LJ.designTools]: {
+      [TemplateCategory.designTools]: {
         [ResourceTypes.BrowseResourceTypes.PLUGINS]: getI18nString('community.view_bar.plugins')
       }
     };
     return r[e]?.[t];
   }(s, r) : void 0;
   return i || {
-    [LJ.mobileApps]: getI18nString('community.resource_hub.categories.mobile_app_templates'),
-    [LJ.desktopAppsWebsites]: getI18nString('community.resource_hub.categories.websites'),
-    [LJ.make]: getI18nString('community.view_bar.figmake')
+    [TemplateCategory.mobileApps]: getI18nString('community.resource_hub.categories.mobile_app_templates'),
+    [TemplateCategory.desktopAppsWebsites]: getI18nString('community.resource_hub.categories.websites'),
+    [TemplateCategory.make]: getI18nString('community.view_bar.figmake')
   }[s] || _$$xF(e);
 }
 let li = 'category_menu_button--buttonText--0inUk';
@@ -6821,7 +6821,7 @@ function lo({
   let _ = l && function (e, t) {
     if (!e) return null;
     let r = WG(e);
-    return e === LJ.whiteboarding ? t === ResourceTypes.BrowseResourceTypes.WIDGETS ? o9.PLUGINS_AND_WIDGETS : o9.WHITEBOARDING : o8.has(r) ? o9.WHITEBOARDING : o6.has(r) ? o9.PLUGINS_AND_WIDGETS : o5.has(r) ? o9.DESIGN_RESOURCES : o3.has(r) ? o9.PRESENTATIONS : o7.has(r) ? o9.WEBSITES : null;
+    return e === TemplateCategory.whiteboarding ? t === ResourceTypes.BrowseResourceTypes.WIDGETS ? o9.PLUGINS_AND_WIDGETS : o9.WHITEBOARDING : o8.has(r) ? o9.WHITEBOARDING : o6.has(r) ? o9.PLUGINS_AND_WIDGETS : o5.has(r) ? o9.DESIGN_RESOURCES : o3.has(r) ? o9.PRESENTATIONS : o7.has(r) ? o9.WEBSITES : null;
   }(l, m) === e;
   return jsxs(MenuRootComp, {
     manager,
@@ -6854,42 +6854,42 @@ function lo({
 function ll() {
   let e = le([{
     key: 'uikitRoute',
-    category: LJ.uiKits
+    category: TemplateCategory.uiKits
   }, {
     key: 'wireframesRoute',
-    category: LJ.wireframes
+    category: TemplateCategory.wireframes
   }, {
     key: 'socialMediaTemplatesRoute',
-    category: LJ.socialMediaTemplates,
+    category: TemplateCategory.socialMediaTemplates,
     editor_type: _$$k4.Editors.COOPER
   }, {
     key: 'cardTemplatesRoute',
-    category: LJ.cardTemplates,
+    category: TemplateCategory.cardTemplates,
     editor_type: _$$k4.Editors.COOPER
   }, {
     key: 'designTemplatesRoute',
-    category: LJ.designTemplates
+    category: TemplateCategory.designTemplates
   }, {
     key: 'mobileAppRoute',
-    category: LJ.mobileApps
+    category: TemplateCategory.mobileApps
   }, {
     key: 'portfolioRoute',
-    category: LJ.portfolios
+    category: TemplateCategory.portfolios
   }, {
     key: 'resumeRoute',
-    category: LJ.resumes
+    category: TemplateCategory.resumes
   }, {
     key: 'visualAssetsRoute',
-    category: LJ.visualAssets
+    category: TemplateCategory.visualAssets
   }, {
     key: 'illustrationsRoute',
-    category: LJ.illustrations
+    category: TemplateCategory.illustrations
   }, {
     key: 'iconsRoute',
-    category: LJ.icons
+    category: TemplateCategory.icons
   }, {
     key: 'shapesColorsRoute',
-    category: LJ.shapesColors
+    category: TemplateCategory.shapesColors
   }]);
   let t = [[{
     href: e.uikitRoute?.href,
@@ -6938,35 +6938,35 @@ function ll() {
 function lc() {
   let e = le([{
     key: 'editingEffectsRoute',
-    category: LJ.editingEffects,
+    category: TemplateCategory.editingEffects,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'fileOrganizationRoute',
-    category: LJ.fileOrganization,
+    category: TemplateCategory.fileOrganization,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'developmentRoute',
-    category: LJ.development,
+    category: TemplateCategory.development,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'widgetsRoute',
-    category: LJ.whiteboarding,
+    category: TemplateCategory.whiteboarding,
     resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS
   }, {
     key: 'pluginsRoute',
-    category: LJ.designTools,
+    category: TemplateCategory.designTools,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'importExportRoute',
-    category: LJ.importExport,
+    category: TemplateCategory.importExport,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'accessibilityRoute',
-    category: LJ.accessibility,
+    category: TemplateCategory.accessibility,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }, {
     key: 'prototypingAnimationRoute',
-    category: LJ.prototypingAnimation,
+    category: TemplateCategory.prototypingAnimation,
     resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS
   }]);
   let t = [[{
@@ -7004,27 +7004,27 @@ function lc() {
 function lm() {
   let e = le([{
     key: 'marketingRoute',
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     tag: lt.marketing,
     editor_type: _$$k4.Editors.SLIDES
   }, {
     key: 'productRoute',
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     tag: lt.product,
     editor_type: _$$k4.Editors.SLIDES
   }, {
     key: 'pitchDecksRoute',
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     tag: lt.pitchDeck,
     editor_type: _$$k4.Editors.SLIDES
   }, {
     key: 'salesRoute',
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     tag: lt.sales,
     editor_type: _$$k4.Editors.SLIDES
   }, {
     key: 'presentationsRoute',
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     editor_type: _$$k4.Editors.SLIDES
   }]);
   let t = [[{
@@ -7053,36 +7053,36 @@ function lm() {
 function l_() {
   let e = le([{
     key: 'websitesRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'landingPagesRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.landingPages,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'portfolioRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.portfolio,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'ecommerceRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.ecommerce,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'blogRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.blog,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'weddingRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.wedding,
     editor_type: _$$k4.Editors.SITES
   }, {
     key: 'photographyRoute',
-    category: LJ.desktopAppsWebsites,
+    category: TemplateCategory.desktopAppsWebsites,
     tag: lt.photography,
     editor_type: _$$k4.Editors.SITES
   }]);
@@ -7118,22 +7118,22 @@ function l_() {
 function lf() {
   let e = le([{
     key: 'brainstormingRoute',
-    category: LJ.brainstorming
+    category: TemplateCategory.brainstorming
   }, {
     key: 'diagrammingRoute',
-    category: LJ.diagramming
+    category: TemplateCategory.diagramming
   }, {
     key: 'funGamesRoute',
-    category: LJ.funGames
+    category: TemplateCategory.funGames
   }, {
     key: 'teamMeetingsRoute',
-    category: LJ.teamMeetings
+    category: TemplateCategory.teamMeetings
   }, {
     key: 'whiteboardingRoute',
-    category: LJ.whiteboarding
+    category: TemplateCategory.whiteboarding
   }, {
     key: 'strategicPlanningRoute',
-    category: LJ.strategicPlanning
+    category: TemplateCategory.strategicPlanning
   }]);
   let t = [[{
     href: e.diagrammingRoute?.href,
@@ -7165,7 +7165,7 @@ function lg() {
   let e = getI18nString('community.view_bar.figmake');
   let t = le([{
     key: 'categoryRoute',
-    category: LJ.make
+    category: TemplateCategory.make
   }]).categoryRoute;
   return t ? jsx(ButtonPrimitive, {
     'aria-label': e,
@@ -7548,7 +7548,7 @@ let lG = {
 var lV = (e => (e.BRAINSTORMING = 'brainstorming', e.CARD_TEMPLATES = 'cardTemplates', e.CLASSROOM_ACTIVITIES = 'classroomActivities', e.DATA_TEMPLATES = 'dataTemplates', e.DESIGN_TUTORIALS = 'designTutorials', e.DEVELOPMENT = 'development', e.DIAGRAMMING = 'diagramming', e.EDITING_EFFECTS = 'editingEffects', e.FILE_ORGANIZATION = 'fileOrganization', e.PRESENTATIONS_LARGE = 'presentationsLarge', e.PRESENTATIONS_SMALL = 'presentationsSmall', e.RESUMES = 'resumes', e.STRATEGIC_PLANNING = 'strategicPlanning', e.TEAM_MEETINGS_SMALL = 'teamMeetingsSmall', e.TEAM_MEETINGS_LARGE = 'teamMeetingsLarge', e.UI_KITS = 'uiKits', e.VISUAL_ASSETS = 'visualAssets', e.WIDGETS = 'widgets', e.WIREFRAMES = 'wireframes', e.WORKSHOP_TEMPLATES = 'workshopTemplates', e))(lV || {});
 let lz = {
   brainstorming: {
-    category: LJ.brainstorming,
+    category: TemplateCategory.brainstorming,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['f01ed35801ea5830119fbe503b42f18f8b8fa6bb', 'd96670e9dd7d8f500b1d82f97d4d08ca5762f014', '25a7262271550cf605425ae1f9dbb3186df9e938', '75319ef48f81cc1e0f733b2a9ee834ae20ad7383', '1d6892175c739459b51f88450efd4fd63647a2d6', '0e81b3f80cb2491aac0675bd33fbbbb79db59ddd'],
@@ -7558,7 +7558,7 @@ let lz = {
     brand: 'seascape'
   },
   cardTemplates: {
-    category: LJ.cardTemplates,
+    category: TemplateCategory.cardTemplates,
     editorType: _$$k4.Editors.COOPER,
     size: 'small',
     art: e => jsx(lM, {
@@ -7570,7 +7570,7 @@ let lz = {
     brand: 'cooper'
   },
   classroomActivities: {
-    category: LJ.classroomActivities,
+    category: TemplateCategory.classroomActivities,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['ad9ed6524f8541f00d3968f21e59fcc627be04a6', '9633b9c063fd07075008ee206a4ea712c2931994'],
@@ -7580,7 +7580,7 @@ let lz = {
     brand: 'seascape'
   },
   dataTemplates: {
-    category: LJ.dataTemplates,
+    category: TemplateCategory.dataTemplates,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['85c247027dd036bb720dbaac9ecf63318e138266', '55da4072453228deaa707a61fac742fd6b8a1022'],
@@ -7590,7 +7590,7 @@ let lz = {
     brand: 'seascape'
   },
   designTutorials: {
-    category: LJ.designTutorials,
+    category: TemplateCategory.designTutorials,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['f341d1cb6464b9ff5d2eb63c89eb380249fc7c78', '985e74dda7ed515202f6b7a55ffc2e1562c9ff94', 'd48320278ece5f694fe686c2c971bcb9c5381f88', '1864952e1f5b8fbc94fe85f548d41b77458dcc87', 'deb79a32eabbdaed5b86904ec9c4adda486345fb', '3e63b05276c55b2d9e95c49e90969cc51023344b'],
@@ -7599,7 +7599,7 @@ let lz = {
     backgroundColor: Tj.bgSecondary
   },
   development: {
-    category: LJ.development,
+    category: TemplateCategory.development,
     resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS,
     size: 'small',
     art: e => jsx(lL, {
@@ -7610,7 +7610,7 @@ let lz = {
     brand: 'design'
   },
   diagramming: {
-    category: LJ.diagramming,
+    category: TemplateCategory.diagramming,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['378c5389dc551daa4f2a3daa5f4e4748fa811eb9', 'f5fa32f34d57e6b4b01f67f10c13fa4ced6fa20f', '82cc8e76b689ad016a0e4871ad99f68fe7c67864', 'b1f9c2bb18232dd55c41e0528227a2a82ecdd151', '37903eb6b345c31cc1ad0967dc6ff8a541a16b90', '9f70f6b78199251bb1213c6f3e5e00df8fc0572b'],
@@ -7620,7 +7620,7 @@ let lz = {
     brand: 'seascape'
   },
   editingEffects: {
-    category: LJ.editingEffects,
+    category: TemplateCategory.editingEffects,
     resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS,
     size: 'small',
     art: e => jsx(lL, {
@@ -7631,7 +7631,7 @@ let lz = {
     brand: 'design'
   },
   fileOrganization: {
-    category: LJ.fileOrganization,
+    category: TemplateCategory.fileOrganization,
     resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS,
     size: 'small',
     art: e => jsx(lL, {
@@ -7642,7 +7642,7 @@ let lz = {
     brand: 'design'
   },
   presentationsLarge: {
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['0b6a114955ffe1c7a56e993323f212990422a525', '0b8f4c7881cf0404fb105a1a680d74564205bc8c', 'b9d5d2df7dfd58ee29a44ecd72c83dbb6f6588c0', '1eb484ec6df2d5d6874b92bae0b221fcbbebc79c', 'ed0ab6a51ef9b7275a9c123994db37df3188fee7', 'b616eae234aeefb2ad7c62d5f0bd84c843c3d86d'],
@@ -7652,7 +7652,7 @@ let lz = {
     brand: 'piper'
   },
   presentationsSmall: {
-    category: LJ.presentations,
+    category: TemplateCategory.presentations,
     size: 'small',
     art: e => jsx(lU, {
       imageSources: ['8b73180892c70a676c567732411c422e46f1fcae', '4963a5a549df301b0ba8dbdc788c2c3424c4217e', 'e66ce4f446be08f56a330a9b39c5e9c72e6d3338'],
@@ -7662,7 +7662,7 @@ let lz = {
     brand: 'piper'
   },
   teamMeetingsLarge: {
-    category: LJ.teamMeetings,
+    category: TemplateCategory.teamMeetings,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['b7e05a6d6b76b8b377e5c4f0eb006dfe99e5875d', '61830de70c1cec8ae28737c1f9c36ff5a7b07d18', '742fbce6b78404d48f62e39a6be510dce4cae699', '6405c322fda966de6578a55cb0c861d2fb774b84', 'd22c05d35fc088e4d089e814f42379b395b86e26', '89d7df8b21116cbf283086a5056f305de01f91a4'],
@@ -7672,7 +7672,7 @@ let lz = {
     brand: 'seascape'
   },
   teamMeetingsSmall: {
-    category: LJ.teamMeetings,
+    category: TemplateCategory.teamMeetings,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['742fbce6b78404d48f62e39a6be510dce4cae699', 'b7e05a6d6b76b8b377e5c4f0eb006dfe99e5875d'],
@@ -7682,7 +7682,7 @@ let lz = {
     brand: 'seascape'
   },
   resumes: {
-    category: LJ.resumes,
+    category: TemplateCategory.resumes,
     size: 'small',
     art: e => jsx(lM, {
       imageSource: 'ba7504eb5c18069ca8c0455768fcf46c6bc4ee52',
@@ -7693,7 +7693,7 @@ let lz = {
     brand: 'design'
   },
   strategicPlanning: {
-    category: LJ.strategicPlanning,
+    category: TemplateCategory.strategicPlanning,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['3b212f16a905705728bf1dc973fa25001844b4bc', '28c8e9a68927b0f9f55a41efd6df2251b8823eea'],
@@ -7703,7 +7703,7 @@ let lz = {
     brand: 'seascape'
   },
   uiKits: {
-    category: LJ.uiKits,
+    category: TemplateCategory.uiKits,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['52e2511dc978b4b6aad9ad3799dd2fb75139cb2a', 'fc614bae349b646e1ea8ffe00e5b6e723ec9f13f'],
@@ -7713,7 +7713,7 @@ let lz = {
     brand: 'design'
   },
   visualAssets: {
-    category: LJ.visualAssets,
+    category: TemplateCategory.visualAssets,
     size: 'large',
     art: e => jsx(lL, {
       imageSource: 'a9b2bb97699222fc52104170706120e06c6f971a',
@@ -7723,7 +7723,7 @@ let lz = {
     brand: 'design'
   },
   widgets: {
-    category: LJ.whiteboarding,
+    category: TemplateCategory.whiteboarding,
     resourceType: ResourceTypes.BrowseResourceTypes.WIDGETS,
     size: 'large',
     art: e => jsx(lM, {
@@ -7735,7 +7735,7 @@ let lz = {
     brand: 'seascape'
   },
   wireframes: {
-    category: LJ.wireframes,
+    category: TemplateCategory.wireframes,
     size: 'large',
     art: e => jsx(lA, {
       imageSources: ['4c787218f1399d78e7035575c6041d05b7c51abf', '4a119c09ddc4e5a598728b3121b81e7df52f30f0', 'd380df1c57eb9d1c6d963673d2c718d515b69e9e', 'c04936ee5bd33d718c78e37fd42e4f8dbe058f35', 'c8e4c4f9dd45d76797e4c8f1a7515fbbb0f49a61', '448ad0f1bc089057cf63f983b7fe865ae1395a56'],
@@ -7745,7 +7745,7 @@ let lz = {
     brand: 'design'
   },
   workshopTemplates: {
-    category: LJ.workshopTemplates,
+    category: TemplateCategory.workshopTemplates,
     size: 'small',
     art: e => jsx(lF, {
       imageSources: ['c6bfc0d07a504cbb9daa39452cb5d1afa29f4e36', '6899629efb49a4e0cb289017a2a6c8380e494fae'],
@@ -7921,92 +7921,92 @@ function lY() {
   let i = t.map(t => ({
     ...function (e) {
       switch (e) {
-        case LJ.brainstorming:
+        case TemplateCategory.brainstorming:
           return {
             title: getI18nString('categories.brainstorming'),
             description: getI18nString('community.resource_hub.category_description.brainstorming')
           };
-        case LJ.cardTemplates:
+        case TemplateCategory.cardTemplates:
           return {
             title: getI18nString('community.resource_hub.featured_categories.invites_templates'),
             description: getI18nString('community.resource_hub.category_description.card_templates')
           };
-        case LJ.classroomActivities:
+        case TemplateCategory.classroomActivities:
           return {
             title: getI18nString('community.resource_hub.featured_categories.classroom_activities'),
             description: getI18nString('community.resource_hub.category_description.classroom_activities')
           };
-        case LJ.dataTemplates:
+        case TemplateCategory.dataTemplates:
           return {
             title: getI18nString('community.footer.data_templates'),
             description: getI18nString('community.resource_hub.category_description.data_templates')
           };
-        case LJ.designTutorials:
+        case TemplateCategory.designTutorials:
           return {
             title: getI18nString('community.resource_hub.featured_categories.design_tutorials'),
             description: getI18nString('community.resource_hub.category_description.design_tutorials')
           };
-        case LJ.development:
+        case TemplateCategory.development:
           return {
             title: getI18nString('community.resource_hub.featured_categories.plugins_for_development'),
             description: getI18nString('community.resource_hub.category_description.development')
           };
-        case LJ.diagramming:
+        case TemplateCategory.diagramming:
           return {
             title: getI18nString('categories.diagramming'),
             description: getI18nString('community.resource_hub.category_description.diagramming')
           };
-        case LJ.editingEffects:
+        case TemplateCategory.editingEffects:
           return {
             title: getI18nString('community.resource_hub.featured_categories.plugins_for_editing_and_effects'),
             description: getI18nString('community.resource_hub.category_description.editing_effects')
           };
-        case LJ.fileOrganization:
+        case TemplateCategory.fileOrganization:
           return {
             title: getI18nString('community.resource_hub.featured_categories.plugins_for_file_organization'),
             description: getI18nString('community.resource_hub.category_description.file_organization')
           };
-        case LJ.presentations:
+        case TemplateCategory.presentations:
           return {
             title: getI18nString('categories.presentations'),
             description: getI18nString('community.resource_hub.category_description.presentations')
           };
-        case LJ.resumes:
+        case TemplateCategory.resumes:
           return {
             title: getI18nString('categories.resume_templates'),
             description: getI18nString('community.resource_hub.category_description.resumes')
           };
-        case LJ.strategicPlanning:
+        case TemplateCategory.strategicPlanning:
           return {
             title: getI18nString('categories.strategic_planning'),
             description: getI18nString('community.resource_hub.category_description.strategic_planning')
           };
-        case LJ.teamMeetings:
+        case TemplateCategory.teamMeetings:
           return {
             title: getI18nString('community.resource_hub.featured_categories.team_meetings'),
             description: getI18nString('community.resource_hub.category_description.team_meetings')
           };
-        case LJ.uiKits:
+        case TemplateCategory.uiKits:
           return {
             title: getI18nString('categories.ui_kits'),
             description: getI18nString('community.resource_hub.category_description.ui_kits')
           };
-        case LJ.visualAssets:
+        case TemplateCategory.visualAssets:
           return {
             title: getI18nString('community.resource_hub.featured_categories.assets'),
             description: getI18nString('community.resource_hub.category_description.visual_assets')
           };
-        case LJ.whiteboarding:
+        case TemplateCategory.whiteboarding:
           return {
             title: getI18nString('categories.widgets'),
             description: getI18nString('community.resource_hub.category_description.widgets')
           };
-        case LJ.wireframes:
+        case TemplateCategory.wireframes:
           return {
             title: getI18nString('categories.wireframes'),
             description: getI18nString('community.resource_hub.category_description.wireframes')
           };
-        case LJ.workshopTemplates:
+        case TemplateCategory.workshopTemplates:
           return {
             title: getI18nString('community.resource_hub.featured_categories.workshop_templates'),
             description: getI18nString('community.resource_hub.category_description.workshop_templates')
@@ -8063,15 +8063,15 @@ function lX({
       brainstorming: {
         key: 'brainstorming',
         header: getI18nString('categories.brainstorming'),
-        categoryForQuery: LJ.brainstorming,
-        categorySlug: LJ.brainstorming,
+        categoryForQuery: TemplateCategory.brainstorming,
+        categorySlug: TemplateCategory.brainstorming,
         resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       cooperTemplate: {
         key: 'cooperTemplate',
         header: getI18nString('categories.social_media_templates'),
-        categoryForQuery: LJ.socialMediaTemplates,
-        categorySlug: LJ.socialMediaTemplates,
+        categoryForQuery: TemplateCategory.socialMediaTemplates,
+        categorySlug: TemplateCategory.socialMediaTemplates,
         resourceType: ResourceTypeEnum.COOPER_TEMPLATE_FILE,
         resourceEditorType: DesignToolType.COOPER,
         apiEditorType: _$$k4.Editors.COOPER
@@ -8079,41 +8079,41 @@ function lX({
       dataTemplate: {
         key: 'dataTemplate',
         header: getI18nString('community.footer.data_templates'),
-        categoryForQuery: LJ.dataTemplates,
-        categorySlug: LJ.dataTemplates,
+        categoryForQuery: TemplateCategory.dataTemplates,
+        categorySlug: TemplateCategory.dataTemplates,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       designTemplate: {
         key: 'designTemplate',
         header: getI18nString('categories.design_templates'),
-        categorySlug: LJ.designTemplates,
+        categorySlug: TemplateCategory.designTemplates,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       designTools: {
         key: 'designTools',
         header: getI18nString('community.view_bar.plugins'),
-        categorySlug: LJ.designTools,
+        categorySlug: TemplateCategory.designTools,
         resourceType: ResourceTypeEnum.PLUGIN,
         isPlugin: !0
       },
       diagramming: {
         key: 'diagramming',
         header: getI18nString('categories.diagramming'),
-        categoryForQuery: LJ.diagramming,
-        categorySlug: LJ.diagramming,
+        categoryForQuery: TemplateCategory.diagramming,
+        categorySlug: TemplateCategory.diagramming,
         resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       education: {
         key: 'education',
         header: getI18nString('categories.education'),
-        categoryForQuery: LJ.education,
-        categorySlug: LJ.education,
+        categoryForQuery: TemplateCategory.education,
+        categorySlug: TemplateCategory.education,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       figJamTemplate: {
         key: 'figJamTemplate',
         header: getI18nString('community.resource_hub.figjam_templates'),
-        categorySlug: LJ.whiteboarding,
+        categorySlug: TemplateCategory.whiteboarding,
         resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE,
         resourceEditorType: DesignToolType.WHITEBOARD,
         apiEditorType: _$$k4.Editors.FIGJAM
@@ -8121,23 +8121,23 @@ function lX({
       funAndGames: {
         key: 'funAndGames',
         header: getI18nString('categories.fun_games'),
-        categoryForQuery: LJ.funGames,
-        categorySlug: LJ.funGames,
+        categoryForQuery: TemplateCategory.funGames,
+        categorySlug: TemplateCategory.funGames,
         resourceType: ResourceTypeEnum.WIDGET,
         apiResourceType: ResourceTypes.BrowseResourceTypes.WIDGETS
       },
       makeTemplate: {
         key: 'makeTemplate',
         header: getI18nString('community.resource_hub.make_shelf_header'),
-        categoryForQuery: LJ.make,
-        categorySlug: LJ.make,
+        categoryForQuery: TemplateCategory.make,
+        categorySlug: TemplateCategory.make,
         resourceType: ResourceTypeEnum.FIGMAKE_TEMPLATE
       },
       presentationTemplate: {
         key: 'presentationTemplate',
         header: getI18nString('community.footer.presentations'),
-        categoryForQuery: LJ.presentations,
-        categorySlug: LJ.presentations,
+        categoryForQuery: TemplateCategory.presentations,
+        categorySlug: TemplateCategory.presentations,
         resourceType: ResourceTypeEnum.SLIDE_TEMPLATE,
         resourceEditorType: DesignToolType.SLIDES,
         apiEditorType: _$$k4.Editors.SLIDES
@@ -8145,8 +8145,8 @@ function lX({
       siteTemplate: {
         key: 'siteTemplate',
         header: getI18nString('categories.website_templates'),
-        categoryForQuery: LJ.websiteTemplates,
-        categorySlug: LJ.websiteTemplates,
+        categoryForQuery: TemplateCategory.websiteTemplates,
+        categorySlug: TemplateCategory.websiteTemplates,
         resourceType: ResourceTypeEnum.SITE_TEMPLATE,
         resourceEditorType: DesignToolType.SITES,
         apiEditorType: _$$k4.Editors.SITES
@@ -8154,37 +8154,37 @@ function lX({
       strategicPlanning: {
         key: 'strategicPlanning',
         header: getI18nString('categories.strategic_planning'),
-        categoryForQuery: LJ.strategicPlanning,
-        categorySlug: LJ.strategicPlanning,
+        categoryForQuery: TemplateCategory.strategicPlanning,
+        categorySlug: TemplateCategory.strategicPlanning,
         resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       uiKits: {
         key: 'uiKits',
         header: getI18nString('categories.ui_kits'),
-        categoryForQuery: LJ.uiKits,
-        categorySlug: LJ.uiKits,
+        categoryForQuery: TemplateCategory.uiKits,
+        categorySlug: TemplateCategory.uiKits,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       websiteTemplate: {
         key: 'websiteTemplate',
         header: getI18nString('categories.website_templates'),
-        categoryForQuery: LJ.websiteTemplates,
-        categorySlug: LJ.websiteTemplates,
+        categoryForQuery: TemplateCategory.websiteTemplates,
+        categorySlug: TemplateCategory.websiteTemplates,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE,
         resourceEditorType: DesignToolType.DESIGN
       },
       whiteboarding: {
         key: 'whiteboarding',
         header: getI18nString('categories.whiteboarding'),
-        categoryForQuery: LJ.whiteboarding,
-        categorySlug: LJ.whiteboarding,
+        categoryForQuery: TemplateCategory.whiteboarding,
+        categorySlug: TemplateCategory.whiteboarding,
         resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       wireframes: {
         key: 'wireframes',
         header: getI18nString('categories.wireframes'),
-        categoryForQuery: LJ.wireframes,
-        categorySlug: LJ.wireframes,
+        categoryForQuery: TemplateCategory.wireframes,
+        categorySlug: TemplateCategory.wireframes,
         resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       }
     };
@@ -9527,7 +9527,7 @@ function dX({
   showTags: t = !1
 }) {
   let r = useSafeRouteStateInstance(ResourceHubCategoryRoute);
-  let s = getValueOrFallback(e.url_slug, LJ);
+  let s = getValueOrFallback(e.url_slug, TemplateCategory);
   if (!s) return null;
   let i = _$$m2(e, s, t, r);
   return jsx('div', {
@@ -9588,8 +9588,8 @@ function dZ() {
               filterState: g,
               allowedEditorTypes: o.editor_types,
               showEditorFilter: !0,
-              showResourceTypeFilter: categorySlug !== LJ.make,
-              showPriceFilter: categorySlug !== LJ.make,
+              showResourceTypeFilter: categorySlug !== TemplateCategory.make,
+              showPriceFilter: categorySlug !== TemplateCategory.make,
               allowMixedResourceType: !1
             })
           })]
@@ -10569,8 +10569,8 @@ function cB({
     categoryRoute: i
   }) {
     if (!e) return [];
-    let n = getValueOrFallback(t?.url_slug, LJ);
-    let o = getValueOrFallback(e.url_slug, LJ);
+    let n = getValueOrFallback(t?.url_slug, TemplateCategory);
+    let o = getValueOrFallback(e.url_slug, TemplateCategory);
     return [t && n && {
       text: lr(n, void 0, i?.search.resource_type) || getTranslatedDynamicContent(t.i18n_meta?.title, t.title),
       to: i ? i.copyWith({
@@ -14009,7 +14009,7 @@ function _c(e) {
     sortFilterOptions: _d(e.folderId, t.tileSortFilterStateByView),
     selectedBranchKeyByRepoId: t.selectedBranchKeyByRepoId
   }));
-  let n = Rp();
+  let n = useUnsyncedAutosaveFiles();
   let o = useSelector(({
     currentUserOrgId: e
   }) => e);
@@ -16010,7 +16010,7 @@ function p5({
   useEffect(() => {
     x && p && n(Rw());
   }, [x, n, p]);
-  let k = jm(g, h);
+  let k = userHasPlan(g, h);
   let R = l ? getI18nString('locked_team.label.tooltip') : void 0;
   let A = l ? KindEnum.TEXT : void 0;
   let O = (t, r, a) => {
@@ -16194,7 +16194,7 @@ function p8({
     });
     let r = t.transform(e => e.project?.name ?? null).unwrapOr(null);
     useEffect(() => {
-      r && _$$hL(r);
+      r && setEditorDocumentTitle(r);
     }, [r]);
   }(e);
   let r = selectPermissionsState();
@@ -18954,7 +18954,7 @@ function g2({
     return useMemo(() => e.map(e => _$$uy(e, t)), [e, t]);
   }();
   let m = function () {
-    let e = Rp();
+    let e = useUnsyncedAutosaveFiles();
     return useMemo(() => Object.values(e).map(_$$gB), [e]);
   }();
   let _ = useMemo(() => resourceUtils.merge([d, c], u, m), [m, d, c, u]);
@@ -20830,7 +20830,7 @@ let xr = e => {
                 selectedTiles: e ? [e] : [],
                 tile: e,
                 openTile: () => {
-                  e?.type === _$$nb.FILE && Tq(r, e.file);
+                  e?.type === _$$nb.FILE && openFileInFullscreen(r, e.file);
                 },
                 dropdownVisible: showing
               })
@@ -20915,7 +20915,7 @@ function xd(e) {
     }),
     error: !0,
     onDismiss: _$$lQ
-  })), _$$hL(r.handle), {
+  })), setEditorDocumentTitle(r.handle), {
     userNotInPlan: !!(l && !a),
     userId: e.userId,
     user: r,
@@ -21567,7 +21567,7 @@ function xO() {
   let {
     unsyncedFiles,
     localUnsyncedFiles
-  } = Gg();
+  } = useAutosaveFilesWithPermissions();
   return !r || e.lastSnoozeTime != null && Date.now() - e.lastSnoozeTime < 864e5 ? null : (unsyncedFiles.length > 0 || localUnsyncedFiles.length > 0) && xA.includes(t.view) ? jsx(xP, {
     unsyncedFiles,
     localUnsyncedFiles

@@ -9,11 +9,11 @@ import { $ } from "../905/489647";
 import { selectViewAction } from "../905/929976";
 import { Z, kq } from "../905/292918";
 import { Ad } from "../905/300250";
-import { Y6 } from "../figma_app/91703";
+import { setProgressBarState } from "../figma_app/91703";
 import { Nf } from "../figma_app/864378";
 import { isBranchAlt } from "../905/760074";
 import { rJ } from "../905/327855";
-import { Dd } from "../figma_app/682945";
+import { setFileInfo } from "../figma_app/682945";
 import { enterVersionHistoryMode, loadVersionIncrementally, startCompareChanges } from "../figma_app/841351";
 import { SourceDirection } from "../905/535806";
 import { versionHandlerInstance } from "../905/985740";
@@ -27,7 +27,7 @@ let $$S0 = createOptimistThunk(e => {
   }
   let t = e.getState();
   let i = t.selectedView;
-  t.openFile && Dd(t.openFile.key, i.editorType);
+  t.openFile && setFileInfo(t.openFile.key, i.editorType);
   i.fileKey && i.versionId && versionHandlerInstance.getVersion({
     fileKey: i.fileKey,
     versionId: i.versionId
@@ -43,7 +43,7 @@ let $$S0 = createOptimistThunk(e => {
     e.dispatch(enterVersionHistoryMode());
     let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
     e.dispatch(FlashActions.error(resolveMessage(t, i)));
-    e.dispatch(Y6({
+    e.dispatch(setProgressBarState({
       mode: UIVisibilitySetting.OFF
     }));
   });

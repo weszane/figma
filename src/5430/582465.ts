@@ -10,7 +10,7 @@ import { E } from "../5430/741319";
 import { D } from "../5430/253633";
 import { getActiveSearchRouteWithCommunity } from "../figma_app/455722";
 import { isResourceHubInternalSearchEnabled } from "../figma_app/275462";
-import { PF } from "../figma_app/930386";
+import { NavigationType } from "../figma_app/930386";
 import { G } from "../5430/654859";
 import { useDispatch } from "react-redux";
 import { SvgComponent } from "../905/714743";
@@ -107,7 +107,7 @@ export function $$w0({
     let e = !f && w && !g && window.innerWidth > 800 ? jsx(G, {
       query: w,
       clearSearchInput: N,
-      context: PF.NAV,
+      context: NavigationType.NAV,
       width: parsePxNumber(h63)
     }) : null;
     return jsx(ms, {
@@ -117,7 +117,7 @@ export function $$w0({
       children: jsx(D, {
         className: f ? "dropdown_search_input--searchInputResourceHub--naUt2" : "dropdown_search_input--searchInput--ALtDK text--fontPos13--xW8hS text--_fontBase--QdLsd",
         closeIconClassName: f ? "dropdown_search_input--closeIconResourceHub--6OJqK" : "dropdown_search_input--closeIcon--Zfoh0",
-        context: PF.NAV,
+        context: NavigationType.NAV,
         dropdownSelector: r,
         inSearchPath: g,
         inputPlaceholder: T,

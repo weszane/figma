@@ -41,7 +41,7 @@ import { TextWithTruncation } from "../905/984674";
 import { V as _$$V } from "../905/223767";
 import { D0 } from "../figma_app/867292";
 import { selectViewAction } from "../905/929976";
-import { Y6 } from "../figma_app/91703";
+import { setProgressBarState } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { fileUpdateSavepointAction } from "../905/852057";
 import { Dm } from "../figma_app/8833";
@@ -697,7 +697,7 @@ class eM extends RecordingComponent {
         ...this.props.selectedView,
         versionId: e.id
       }));
-      this.props.dispatch(Y6({
+      this.props.dispatch(setProgressBarState({
         mode: UIVisibilitySetting.KEEP_UI,
         type: LoadingBarStatus.SPINNER
       }));
@@ -783,7 +783,7 @@ class eM extends RecordingComponent {
       }
     });
     this.startComparingChanges = e => {
-      this.props.dispatch(Y6({
+      this.props.dispatch(setProgressBarState({
         mode: UIVisibilitySetting.KEEP_UI,
         type: LoadingBarStatus.SPINNER
       }));
@@ -823,7 +823,7 @@ class eM extends RecordingComponent {
         isLoadingCompareChanges: !1,
         loadingCompareId: ""
       });
-      this.props.dispatch(Y6({
+      this.props.dispatch(setProgressBarState({
         mode: UIVisibilitySetting.OFF
       }));
     };

@@ -50,7 +50,7 @@ import { P as _$$P2 } from "../5421/146016";
 import { Op, qQ, Vp } from "../figma_app/405038";
 import { A as _$$A3 } from "../figma_app/121266";
 import { Y as _$$Y2 } from "../5421/483739";
-import { RU } from "../figma_app/740163";
+import { getBigNudgeAmount } from "../figma_app/740163";
 import { W4, qd } from "../figma_app/178475";
 import { GameControllerListener } from "../905/550169";
 import { _i, E8, U8 as _$$U, RI, pu, wb } from "../figma_app/800999";
@@ -292,7 +292,7 @@ function ew(e) {
   return function (e) {
     let t = useDispatch();
     let n = e.updateSelectionProperties;
-    let o = RU();
+    let o = getBigNudgeAmount();
     let [l, s] = useState(!1);
     let d = YT();
     let c = d === Oz.SINGLE_COL;

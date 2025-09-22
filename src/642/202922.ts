@@ -14,7 +14,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { wP } from "../9410/845608";
 import { fullscreenValue } from "../figma_app/455680";
@@ -268,7 +268,7 @@ function eo() {
     initialWidth: wh,
     headerSize: "small",
     onClose: () => {
-      s(XE());
+      s(hidePickerThunk());
     },
     recordingKey: e,
     children: jsx("div", {
@@ -315,7 +315,7 @@ export function $$eg0({
   let q = useRef(null);
   let J = useRef(null);
   let Z = useCallback(e => {
-    F && s(XE());
+    F && s(hidePickerThunk());
     m ? s(hideDropdownAction()) : s(showDropdownThunk({
       type: C4
     }));
@@ -339,7 +339,7 @@ export function $$eg0({
   let es = useCallback(() => {
     let e = J.current;
     let t = e ? cn(e, wh) : {};
-    s(u1({
+    s(showPickerThunk({
       id: Dd,
       initialX: t?.x,
       initialY: t?.y

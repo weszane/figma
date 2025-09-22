@@ -4,9 +4,9 @@ import { AppStateTsApi, ViewType } from "../figma_app/763686";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { tt, iT } from "../figma_app/74165";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { qw } from "../figma_app/740163";
+import { getPropertiesPanelSplitPosition } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
-import { R as _$$R } from "../figma_app/941983";
+import { EditorUIState } from "../figma_app/941983";
 import { TY } from "../figma_app/701001";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentUser, selectUser } from "../905/372672";
@@ -844,11 +844,11 @@ export function $$eO0({
   let g = useFullscreenReady();
   let f = useAppModelProperty("topLevelMode");
   let x = selectCurrentUser();
-  let y = s ? _$$R.topLevelMode : f;
+  let y = s ? EditorUIState.topLevelMode : f;
   let _ = TY();
   let b = isUserNotLoggedInAndEditorSupported();
   let C = y === ViewType.LAYOUT || y === ViewType.BRANCHING || _ || !!x && y === ViewType.PREVIEW || y === ViewType.HISTORY;
-  let j = qw();
+  let j = getPropertiesPanelSplitPosition();
   tt();
   let {
     inProductHelpViewType

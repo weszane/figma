@@ -1,58 +1,124 @@
-import { z } from "../vendor/835909";
-import { p, $ } from "../905/453712";
-import { t8, LR } from "../905/460208";
-import { qA, Ru, cg, tQ } from "../905/693198";
-import { $l, tm } from "../905/707076";
-import { vD } from "../905/541395";
-import { k0 } from "../905/219321";
-import { Dj, NA } from "../905/31168";
-let u = z.object({
+import { z } from 'zod'
+import { assistantRoleSchema, toolRoleSchema } from '../905/31168'
+import { ImageGenerationRequestSchema } from '../905/219321'
+import { responseSchema, toolChoiceSchema } from '../905/453712'
+import { completionResponseSchema, outputSchemaOptions } from '../905/460208'
+import { embeddingRequestSchema } from '../905/541395'
+import { EmbeddingValue, EmbeddingValues, providerModelHeaderValue, ProviderValuesArray } from '../905/693198'
+import { ChatCompletionRequestSchema, ChatCompletionResponseSchema } from '../905/707076'
+
+/**
+ * ScoreItemSchema
+ * Represents an item with an associated score.
+ */
+const ScoreItemSchema = z.object({
   item: z.any(),
-  score: z.number()
-});
-let $$p0 = z.object({
+  score: z.number(),
+})
+
+/**
+ * ErrorSchema
+ * Represents an error with type, message, and optional stack trace.
+ */
+const ErrorSchema = z.object({
+  type: z.string(),
+  message: z.string(),
+  stack: z.string().optional(),
+})
+
+/**
+ * ChatSchema
+ * Represents a chat request and optional response.
+ */
+const ChatSchema = z.object({
+  request: ChatCompletionRequestSchema,
+  response: ChatCompletionResponseSchema.optional(),
+})
+
+/**
+ * ChatV2Schema
+ * Represents a chatV2 request and optional response with responseMessages.
+ */
+const ChatV2Schema = z.object({
+  request: toolChoiceSchema,
+  response: responseSchema.omit({
+    response: true,
+  }).merge(z.object({
+    responseMessages: z.array(z.union([assistantRoleSchema, toolRoleSchema])),
+  })).optional(),
+})
+
+/**
+ * ObjectV2Schema
+ * Represents an objectV2 request and optional response.
+ */
+const ObjectV2Schema = z.object({
+  request: outputSchemaOptions,
+  response: completionResponseSchema.optional(),
+})
+
+/**
+ * ImageV2Schema
+ * Represents an imageV2 request.
+ */
+const ImageV2Schema = z.object({
+  request: ImageGenerationRequestSchema,
+})
+
+/**
+ * EmbeddingsSchema
+ * Represents an embeddings request and optional choices.
+ */
+const EmbeddingsSchema = z.object({
+  request: embeddingRequestSchema,
+  choices: ScoreItemSchema.array().optional(),
+  filteredChoices: ScoreItemSchema.array().optional(),
+})
+
+/**
+ * EmbedV2Schema
+ * Represents an embedV2 request and optional response.
+ */
+const EmbedV2Schema = z.object({
+  request: z.union([providerModelHeaderValue, ProviderValuesArray]),
+  response: z.union([
+    EmbeddingValue.omit({ embedding: true }),
+    EmbeddingValues.omit({ embeddings: true }),
+  ]).optional(),
+})
+
+/**
+ * NodeSchema
+ * Represents a node with various types and optional children.
+ */
+export const NodeSchema = z.object({
   name: z.string(),
-  type: z.enum(["group", "chat", "chatV2", "objectV2", "embeddings", "embedV2", "error", "image", "imageV2"]),
+  type: z.enum([
+    'group',
+    'chat',
+    'chatV2',
+    'objectV2',
+    'embeddings',
+    'embedV2',
+    'error',
+    'image',
+    'imageV2',
+  ]),
   start: z.number(),
   end: z.number().optional(),
-  chat: z.object({
-    request: $l,
-    response: tm.optional()
-  }).optional(),
-  chatV2: z.object({
-    request: p,
-    response: $.omit({
-      response: !0
-    }).merge(z.object({
-      responseMessages: z.array(z.union([Dj, NA]))
-    })).optional()
-  }).optional(),
-  objectV2: z.object({
-    request: t8,
-    response: LR.optional()
-  }).optional(),
-  imageV2: z.object({
-    request: k0
-  }).optional(),
-  embeddings: z.object({
-    request: vD,
-    choices: u.array().optional(),
-    filteredChoices: u.array().optional()
-  }).optional(),
-  embedV2: z.object({
-    request: z.union([qA, Ru]),
-    response: z.union([cg.omit({
-      embedding: !0
-    }), tQ.omit({
-      embeddings: !0
-    })]).optional()
-  }).optional(),
-  error: z.object({
-    type: z.string(),
-    message: z.string(),
-    stack: z.string().optional()
-  }).optional()
+  chat: ChatSchema.optional(),
+  chatV2: ChatV2Schema.optional(),
+  objectV2: ObjectV2Schema.optional(),
+  imageV2: ImageV2Schema.optional(),
+  embeddings: EmbeddingsSchema.optional(),
+  embedV2: EmbedV2Schema.optional(),
+  error: ErrorSchema.optional(),
 }).extend({
-  children: z.lazy(() => $$p0.array())
-});
-export const B = $$p0;
+  children: z.lazy(() => NodeSchema.array()),
+})
+
+/**
+ * B
+ * Exported schema for node structure (original: $$p0).
+ */
+export const B = NodeSchema

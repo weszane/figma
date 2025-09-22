@@ -19,7 +19,7 @@ import v from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, useHandleMouseEvent, RecordingComponent, handleInputEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE, Uv, bS } from "../figma_app/91703";
+import { hidePickerThunk, hideStylePicker, showStylePicker } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
@@ -243,7 +243,7 @@ let ei = (e, t, i) => {
         type: e,
         indices: t
       }
-    }), l(XE()), l(Uv()));
+    }), l(hidePickerThunk()), l(hideStylePicker()));
   }, [n, e, l]);
   return useMemo(() => ({
     propertyList: t,
@@ -541,8 +541,8 @@ export class $$es2 extends RecordingComponent {
     };
     this.addProperty = e => {
       this.props.addProperty(e);
-      this.isInStyleModal() || this.props.dispatch(XE());
-      this.props.dispatch(Uv());
+      this.isInStyleModal() || this.props.dispatch(hidePickerThunk());
+      this.props.dispatch(hideStylePicker());
     };
     this.removeAllProperties = () => {
       A8(this.props.inheritStyleKey) && permissionScopeHandler.user("remove-all-properties", () => {
@@ -562,10 +562,10 @@ export class $$es2 extends RecordingComponent {
         });
         return;
       }
-      if (zb(this.props)) this.props.dispatch(Uv());else {
+      if (zb(this.props)) this.props.dispatch(hideStylePicker());else {
         let t = e.left + (e.width - N2) / 2;
         let i = e.top + e.height;
-        this.props.dispatch(bS({
+        this.props.dispatch(showStylePicker({
           id: OS(this.props.inheritStyleKeyField),
           initialX: t,
           initialY: i,

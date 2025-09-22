@@ -25,7 +25,7 @@ import { ei as _$$ei } from "../figma_app/795674";
 import { UpgradeAction } from "../905/370443";
 import { isDesignFileType } from "../figma_app/976749";
 import { e } from "../905/621515";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -70,7 +70,7 @@ function G() {
       canShow: () => a
     });
   }, [a, show]);
-  let s = getObservableOrFallback(UK().showPropertyLabels);
+  let s = getObservableOrFallback(EditorPreferencesApi().showPropertyLabels);
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
     description: jsx("span", {

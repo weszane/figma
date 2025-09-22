@@ -39,7 +39,7 @@ import { lE, mf, NI, X$ } from '../905/945781';
 import { kF, zg } from '../905/993733';
 import { E1 } from '../figma_app/9054';
 import { atom, useAtomValueAndSetter } from '../figma_app/27355';
-import { Y6 } from '../figma_app/91703';
+import { setProgressBarState } from '../figma_app/91703';
 import { rb } from '../figma_app/151869';
 import { aS, Cr } from '../figma_app/221114';
 import { mJ } from '../figma_app/311375';
@@ -1065,7 +1065,7 @@ let $$eT0 = registerModal(e => {
   let v = useSelector(e => e.selectedView.compareChangesActivityId ?? null);
   let N = useMemo(() => y ? versions.find(e => e.id === y) ?? null : v ? versions.find(e => e.dev_mode_activity?.some(e => e.id === v)) ?? null : null, [versions, y, v]);
   let C = useCallback(e => {
-    !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== CURRENT_VERSION_ID && (s(Y6({
+    !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== CURRENT_VERSION_ID && (s(setProgressBarState({
       mode: UIVisibilitySetting.KEEP_UI,
       type: LoadingBarStatus.SPINNER
     })), requestAnimationFrame(() => {

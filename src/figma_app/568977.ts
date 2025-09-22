@@ -11,10 +11,10 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { S as _$$S } from "../905/177206";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { XE } from "../figma_app/91703";
-import { bA, _q } from "../905/668764";
+import { hidePickerThunk } from "../figma_app/91703";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { Lk } from "../figma_app/975811";
-import { EU, RU, UK } from "../figma_app/740163";
+import { getSmallNudgeAmount, getBigNudgeAmount, EditorPreferencesApi } from "../figma_app/740163";
 import { Q7 } from "../905/203369";
 import { cS } from "../figma_app/334459";
 import { md8 } from "../figma_app/27776";
@@ -23,39 +23,39 @@ let $$v0 = "nudge-amount";
 let A = parsePxInt(md8);
 export function $$x1(e) {
   let t = useDispatch();
-  let r = EU();
-  let c = RU();
+  let r = getSmallNudgeAmount();
+  let c = getBigNudgeAmount();
   let I = _$$S({
     min: .1,
-    nudge: bA,
-    bigNudge: _q
+    nudge: DEFAULT_FINE_NUDGE,
+    bigNudge: DEFAULT_COARSE_NUDGE
   });
   let v = _$$S({
     min: 1,
-    nudge: bA,
-    bigNudge: _q
+    nudge: DEFAULT_FINE_NUDGE,
+    bigNudge: DEFAULT_COARSE_NUDGE
   });
   let x = new Lk({
     min: .1,
-    smallNudgeAmount: bA,
-    bigNudgeAmount: _q
+    smallNudgeAmount: DEFAULT_FINE_NUDGE,
+    bigNudgeAmount: DEFAULT_COARSE_NUDGE
   });
   let N = new Lk({
     min: 1,
-    smallNudgeAmount: bA,
-    bigNudgeAmount: _q
+    smallNudgeAmount: DEFAULT_FINE_NUDGE,
+    bigNudgeAmount: DEFAULT_COARSE_NUDGE
   });
   let C = () => {
-    t(XE());
+    t(hidePickerThunk());
   };
   let w = e => {
     e.keyCode === KeyCodes.ENTER && C();
   };
   let O = e => {
-    UK().smallNudgeAmount.set(e);
+    EditorPreferencesApi().smallNudgeAmount.set(e);
   };
   let R = e => {
-    UK().bigNudgeAmount.set(e);
+    EditorPreferencesApi().bigNudgeAmount.set(e);
   };
   let L = new Point(window.innerWidth / 2 - A / 2, window.innerHeight / 3);
   let P = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {

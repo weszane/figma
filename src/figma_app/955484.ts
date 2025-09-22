@@ -17,7 +17,7 @@ import { getI18nString } from "../905/303541";
 import { O as _$$O } from "../figma_app/140784";
 import { $R } from "../figma_app/883490";
 import { trackDefinedFileEvent } from "../figma_app/314264";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { removeFromSelection, addToSelection, selectNodesInRange, updateHoveredNode, currentSessionLocalIDString } from "../figma_app/741237";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { S as _$$S } from "../figma_app/106763";
@@ -387,7 +387,7 @@ function ee(e) {
   });
 }
 export let $$et1 = memo(e => {
-  let t = getObservableOrFallback(UK().showGuids);
+  let t = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let r = getObservableOrFallback(AppStateTsApi.devHandoffState().automaticIconDetection);
   let i = e.isAncestorAsset ? void 0 : e.assetInfo;
   let a = useSceneGraphSelector().get(e.guid);

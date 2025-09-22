@@ -27,7 +27,7 @@ import { Point } from "../905/736624";
 import { ph } from "../figma_app/709893";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { rg } from "../figma_app/401069";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { C9 } from "../figma_app/8833";
 import { mz } from "../figma_app/975811";
@@ -159,7 +159,7 @@ let ex = class e extends PureComponent {
         trackEventAnalytics("Export Picker Opened", {
           from: "export-panel"
         });
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: C9
         }));
       } else {
@@ -389,7 +389,7 @@ export function $$ew3(e) {
   let u = valueOrFallback(e.propertyList, []).length <= 1;
   let p = o3(nt.useGridPart2) && !0;
   let _ = useCallback(e => {
-    t(XE());
+    t(hidePickerThunk());
     onChange(valueOrFallback(propertyList, []).filter((t, r) => r !== e));
     fullscreenValue.deselectProperty();
   }, [t, onChange, propertyList]);
@@ -754,7 +754,7 @@ function eU(e) {
       onSuffixChange: r,
       onToggleModal: r => {
         if (r.stopPropagation(), a()) {
-          e.dispatch(XE());
+          e.dispatch(hidePickerThunk());
           fullscreenValue.deselectProperty();
         } else {
           let r = cn(t.current, _$$zk);
@@ -764,7 +764,7 @@ function eU(e) {
               indices: [e.index]
             }
           });
-          e.dispatch(u1({
+          e.dispatch(showPickerThunk({
             id: e.id,
             initialX: r.x,
             initialY: r.y

@@ -15,7 +15,7 @@ import { generateRecordingKey, useSetupPlayback } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { XE, Uv, u1 } from "../figma_app/91703";
+import { hidePickerThunk, hideStylePicker, showPickerThunk } from "../figma_app/91703";
 import { qj } from "../figma_app/451499";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
@@ -84,7 +84,7 @@ import { yT } from "../figma_app/836943";
 import { dD, o7 } from "../figma_app/941824";
 import { B as _$$B } from "../905/229357";
 import { IR } from "../905/668609";
-import { bA, _q } from "../905/668764";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { LN, Lk } from "../figma_app/975811";
 import { C as _$$C } from "../905/549861";
 import { i1 } from "../905/982943";
@@ -1975,7 +1975,7 @@ function tA(e) {
     }));
   };
   let l = () => {
-    e.dispatch(XE());
+    e.dispatch(hidePickerThunk());
     fullscreenValue.deselectProperty();
     t_();
   };
@@ -2068,8 +2068,8 @@ let tN = new Lk({
   floatingPointFormat: {
     maxNumDigits: 2
   },
-  smallNudgeAmount: bA,
-  bigNudgeAmount: _q
+  smallNudgeAmount: DEFAULT_FINE_NUDGE,
+  bigNudgeAmount: DEFAULT_COARSE_NUDGE
 });
 let tP = e => {
   let t = [];
@@ -2250,8 +2250,8 @@ class tU extends PureComponent {
       _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
         this.props.onChange(t.filter((t, i) => i !== e));
       });
-      this.props.dispatch(XE());
-      this.props.dispatch(Uv());
+      this.props.dispatch(hidePickerThunk());
+      this.props.dispatch(hideStylePicker());
       fullscreenValue.deselectProperty();
       trackEventAnalytics("editor-effects-panel-remove");
       a2("effects");
@@ -2359,7 +2359,7 @@ class tV extends PureComponent {
     };
     this.toggleSettings = e => {
       if (e && e.stopPropagation(), t_(), this.settingsPickerShown()) {
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
         fullscreenValue.deselectProperty();
       } else {
         let e = cn(this.rowRef.current);
@@ -2369,7 +2369,7 @@ class tV extends PureComponent {
             indices: [this.props.index]
           }
         });
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: this.pickerId,
           initialX: e.x,
           initialY: e.y,
@@ -2380,7 +2380,7 @@ class tV extends PureComponent {
       }
     };
     this.onRowFocus = () => {
-      this.props.pickerShown && this.props.pickerShown.id === this.props.id && this.props.dispatch(XE());
+      this.props.pickerShown && this.props.pickerShown.id === this.props.id && this.props.dispatch(hidePickerThunk());
     };
     this.maybeToggleProgressiveBlurEditMode = e => {
       if (ec() && e) {

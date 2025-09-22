@@ -9,6 +9,6 @@ applyTo: '**'
 - Split large functions or classes into smaller, focused units where logical separation improves clarity and maintainability.
 - Convert functions to named functions or arrow functions for better readability.
 - Simplify nested conditionals and loops by using early returns, guard clauses, or helper functions
-- Consider adding comments or documentation to clarify complex logic or important decisions. But add the original code name like (function, variable, class names. etc.) as comments to help trace back to the original code. Also add documenttation comments like JSDoc-style comments for functions and classes.
+- Consider adding comments or documentation to clarify complex logic or important decisions. But add the original code name like (function, variable, class names. etc.) as comments to help trace back to the original code. Also add documenttation comments for functions and classes.
 - Ensure that refactored code maintains the same functionality and behavior as the original.
 - **Refactor all the import variables same with the new refactored exported names **, like export const YJ = setupPlaybackHandler;setupPlaybackHandler is the refactored name.

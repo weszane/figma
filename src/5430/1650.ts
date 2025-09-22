@@ -6,7 +6,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { editorUtilities } from "../905/22009";
-import { LJ } from "../figma_app/930386";
+import { TemplateCategory } from "../figma_app/930386";
 import { BrowseCategoryRoute } from "../figma_app/805898";
 import { TrackedAnchor, TrackedLink } from "../figma_app/831799";
 import { A as _$$A } from "../svg/179418";
@@ -21,49 +21,49 @@ export function $$f0() {
     items: [{
       label: getI18nString("categories.social_media_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.socialMediaTemplates
+        categorySlug: TemplateCategory.socialMediaTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.web_ad_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.webAds
+        categorySlug: TemplateCategory.webAds
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.instagram_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.instagramTemplates
+        categorySlug: TemplateCategory.instagramTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.linkedin_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.linkedinTemplates
+        categorySlug: TemplateCategory.linkedinTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.facebook_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.facebookTemplates
+        categorySlug: TemplateCategory.facebookTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.youtube_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.youtubeTemplates
+        categorySlug: TemplateCategory.youtubeTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.card_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.cardTemplates
+        categorySlug: TemplateCategory.cardTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
@@ -73,39 +73,39 @@ export function $$f0() {
     items: [{
       label: getI18nString("categories.portfolio_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.portfolios
+        categorySlug: TemplateCategory.portfolios
       }).href
     }, {
       label: getI18nString("categories.resume_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.resumes
+        categorySlug: TemplateCategory.resumes
       }).href
     }, {
       label: getI18nString("categories.website_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.websiteTemplates
+        categorySlug: TemplateCategory.websiteTemplates
       }, {
         editor_type: editorUtilities.Editors.SITES
       }).href
     }, {
       label: getI18nString("categories.mobile_app_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.mobileApps
+        categorySlug: TemplateCategory.mobileApps
       }).href
     }, {
       label: getI18nString("categories.presentations"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.presentations
+        categorySlug: TemplateCategory.presentations
       }).href
     }, {
       label: getI18nString("categories.device_mockups"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.deviceMockups
+        categorySlug: TemplateCategory.deviceMockups
       }).href
     }, {
       label: getI18nString("categories.team_meetings"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.teamMeetings
+        categorySlug: TemplateCategory.teamMeetings
       }).href
     }]
   }, {
@@ -113,37 +113,37 @@ export function $$f0() {
     items: [{
       label: getI18nString("categories.calendar_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.calendarTemplates
+        categorySlug: TemplateCategory.calendarTemplates
       }).href
     }, {
       label: getI18nString("categories.data_templates"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.dataTemplates
+        categorySlug: TemplateCategory.dataTemplates
       }).href
     }, {
       label: getI18nString("categories.accessibility_tools"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.accessibility
+        categorySlug: TemplateCategory.accessibility
       }).href
     }, {
       label: getI18nString("categories.fonts_typography"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.fontsTypography
+        categorySlug: TemplateCategory.fontsTypography
       }).href
     }, {
       label: getI18nString("categories.design_inspirations"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.designInspirations
+        categorySlug: TemplateCategory.designInspirations
       }).href
     }, {
       label: getI18nString("categories.development_plugins"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.development
+        categorySlug: TemplateCategory.development
       }).href
     }, {
       label: getI18nString("categories.strategic_planning"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.strategicPlanning
+        categorySlug: TemplateCategory.strategicPlanning
       }).href
     }]
   }, {
@@ -151,32 +151,32 @@ export function $$f0() {
     items: [{
       label: getI18nString("categories.design_tools"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.designTools
+        categorySlug: TemplateCategory.designTools
       }).href
     }, {
       label: getI18nString("categories.libraries"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.libraries
+        categorySlug: TemplateCategory.libraries
       }).href
     }, {
       label: getI18nString("categories.education"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.education
+        categorySlug: TemplateCategory.education
       }).href
     }, {
       label: getI18nString("categories.whiteboarding"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.whiteboarding
+        categorySlug: TemplateCategory.whiteboarding
       }).href
     }, {
       label: getI18nString("categories.visual_assets"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.visualAssets
+        categorySlug: TemplateCategory.visualAssets
       }).href
     }, {
       label: getI18nString("categories.illustrations"),
       url: new BrowseCategoryRoute({
-        categorySlug: LJ.illustrations
+        categorySlug: TemplateCategory.illustrations
       }).href
     }]
   }];

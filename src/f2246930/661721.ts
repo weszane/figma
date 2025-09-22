@@ -16,7 +16,7 @@ import { Dm } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Z } from "../905/224161";
 import { useCurrentTheme } from "../905/640017";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { expandNodeToRoot, clearSelection } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
@@ -41,12 +41,12 @@ function O(e, t) {
   }, [e, t]);
 }
 export function $$L0() {
-  let e = getObservableOrFallback(UK().showFigmaScope);
+  let e = getObservableOrFallback(EditorPreferencesApi().showFigmaScope);
   let {
     setIsOpen,
     setClosed
   } = useMemo(() => {
-    let e = e => UK().showFigmaScope.set(e);
+    let e = e => EditorPreferencesApi().showFigmaScope.set(e);
     return {
       setIsOpen: e,
       setClosed: () => e(!1)

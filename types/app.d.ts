@@ -402,7 +402,7 @@ export interface ByID1352471826795235809 {
   screenreader_enabled: boolean
   community_purchasing_blocked_at: null
   experiment_assignments: any[]
-  plans: The1352471826795235809_Plan[]
+  plans: WelcomePlan[]
   has_content_from_other_plans: boolean
   can_sell_on_community: null
 }
@@ -1856,15 +1856,68 @@ export interface MultiplayerEmoji {
   wheelType: string
 }
 
+export interface Song {
+  active: boolean
+  active_order: number
+  album_art: string
+  artist: string
+  id: string
+  title: string
+  cuesheet: {
+    tracks: any[]
+  }
+  duration_ms: number
+  locatization_key: string
+  playback_url: string
+  song_id: string
+  start_at_ms: number
+  updated_at: string
+  created_at: string
+}
 export interface WelcomeMusic {
   music: MusicMusic
   modalState: string
   volume: number
   isMuted: boolean
-  activeSongs: any[]
-  allSongs: any[]
-  playerInstance: null
+  activeSongs: Meta[]
+  allSongs: Meta[]
+  playerInstance: HTMLAudioElement | null
 }
+
+export interface SongData {
+    error:  boolean;
+    status: number;
+    meta:   Meta[];
+    i18n:   null;
+}
+
+export interface Meta {
+    id:               string;
+    song_id:          string;
+    title:            string;
+    artist:           string;
+    duration_ms:      number;
+    album_art:        string;
+    playback_url:     string;
+    created_at:       Date;
+    updated_at:       Date;
+    cuesheet:         Cuesheet;
+    active:           boolean;
+    chime_url:        string;
+    active_order:     number;
+    localization_key: string;
+}
+
+export interface Cuesheet {
+    tracks: Track[];
+}
+
+export interface Track {
+    title:      string;
+    artist:     string;
+    start_time: number;
+}
+
 
 export interface MusicMusic {
   musicMessageID: number

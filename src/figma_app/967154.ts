@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { StateHierarchy } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { hideDropdownAction } from "../905/929976";
-import { XE, u1, Uv } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { qo, cn } from "../905/959568";
 import { C4 } from "../figma_app/164212";
@@ -74,7 +74,7 @@ export function $$T5(e) {
   let c = $$I2(e);
   return useCallback(e => {
     s && t(hideDropdownAction());
-    d ? t(XE()) : c(e, Wv, Im);
+    d ? t(hidePickerThunk()) : c(e, Wv, Im);
   }, [d, s, t, c]);
 }
 export function $$I2(e) {
@@ -83,13 +83,13 @@ export function $$I2(e) {
     if (!e || !e.current) return;
     let a = e.current;
     let s = cn(a, i);
-    t(u1({
+    t(showPickerThunk({
       id: n,
       initialX: s.x,
       initialY: s.y
     }));
     t(sw());
-    t(Uv());
+    t(hideStylePicker());
   }, [t, e]);
 }
 export const AK = $$f0;

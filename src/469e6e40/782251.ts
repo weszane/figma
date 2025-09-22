@@ -7,7 +7,7 @@ import { y as _$$y } from "../figma_app/404310";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { X } from "../figma_app/521331";
 import { M } from "../469e6e40/302359";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
@@ -74,7 +74,7 @@ function j({
   useOptimisticStyleThumbnailUpdate(dsStyle);
   let s = dsStyle.value;
   dsStyle.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY && (s.style_type = "FILL", s.node_id = dsStyle.value.node_id);
-  let i = Ku();
+  let i = getColorFormat();
   return jsx(Gz, {
     color: e,
     format: i,
@@ -90,7 +90,7 @@ function y({
     encodedPaint,
     valueFormatter
   } = e;
-  let i = Ku();
+  let i = getColorFormat();
   let {
     isVariableRow,
     onMouseEnter,

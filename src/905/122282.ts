@@ -1,4 +1,4 @@
-import { M3 } from "../figma_app/91703";
+import { fileSelectedShareModalTab } from "../figma_app/91703";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { FContainerType, FFileType, FAccessLevelType } from "../figma_app/191312";
@@ -1446,7 +1446,7 @@ export function $$tM1(e, t, i, d) {
       source: d,
       onSubmit: () => $$tL2(e, t, d),
       onCancel: () => {
-        e(M3({
+        e(fileSelectedShareModalTab({
           view: ShareAction.INVITE
         }));
         e(popModalStack());

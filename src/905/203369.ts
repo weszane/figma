@@ -8,7 +8,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { _L, mb, ql } from "../905/668764";
+import { getIncrementTargets, getNudgeAmount, incrementValue } from "../905/668764";
 import { LS } from "../figma_app/975811";
 import { jr, W0 } from "../figma_app/896988";
 import { isValidValue, valueOrFallback, isInvalidValue, normalizeValue } from "../905/216495";
@@ -102,11 +102,11 @@ export class $$I3 extends PureComponent {
         } catch (e) {}
         if (null == i && !this.props.allowEmpty) return;
         if (isValidValue(i)) {
-          let n = _L(this.props.formatter, t);
+          let n = getIncrementTargets(this.props.formatter, t);
           let r = e.shiftKey;
           let a = e.keyCode === KeyCodes.DOWN_ARROW ? -1 : 1;
-          let s = mb(this.props.formatter, r, i);
-          let o = ql(this.props.formatter, i, s * a, {
+          let s = getNudgeAmount(this.props.formatter, r, i);
+          let o = incrementValue(this.props.formatter, i, s * a, {
             incrementTargets: n
           });
           this.setState({
@@ -120,8 +120,8 @@ export class $$I3 extends PureComponent {
           this.props.mixedMathHandler.onChange(t, t => {
             let i = e.keyCode === KeyCodes.DOWN_ARROW ? -1 : 1;
             let n = e.shiftKey;
-            let r = mb(this.props.formatter, n, t);
-            return ql(this.props.formatter, t, r * i);
+            let r = getNudgeAmount(this.props.formatter, n, t);
+            return incrementValue(this.props.formatter, t, r * i);
           }, yesNoTrackingEnum.YES);
           this.props.onMixedMathNudge?.(e);
         }

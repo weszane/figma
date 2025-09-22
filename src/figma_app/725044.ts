@@ -3,408 +3,621 @@ import { SlowFrameTracker } from '../905/200059'
 import { trackEventAnalytics } from '../905/449184'
 import { reactTimerGroup } from '../905/542194'
 import { FPSDistribution } from '../905/609396'
-import { y } from '../905/913008'
+import { fullscreenCrashHandler } from '../905/913008'
 import { multiplayerSessionManager } from '../905/977824'
 import { Fullscreen, StickyWidgetType } from '../figma_app/763686'
 
-export function $$u1(e) {
-  switch (e) {
+// Original: $$u1
+/**
+ * Maps StickyWidgetType to corresponding analytics event names.
+ * @param type - The StickyWidgetType enum value.
+ * @returns The string representation of the event name.
+ */
+export function getStickyWidgetEventName(type: StickyWidgetType): string {
+  switch (type) {
     case StickyWidgetType.SWT_CREATED:
-      return 'shapeWithTextCreated'
+      return 'shapeWithTextCreated';
     case StickyWidgetType.SWT_EDITED:
-      return 'shapeWithTextEdited'
+      return 'shapeWithTextEdited';
     case StickyWidgetType.SWT_DELETED:
-      return 'shapeWithTextDeleted'
+      return 'shapeWithTextDeleted';
     case StickyWidgetType.SWT_RESIZED:
-      return 'shapeWithTextResized'
+      return 'shapeWithTextResized';
     case StickyWidgetType.STICKY_EDITED:
-      return 'stickyEdited'
+      return 'stickyEdited';
     case StickyWidgetType.STICKY_DELETED:
-      return 'stickyDeleted'
+      return 'stickyDeleted';
     case StickyWidgetType.STICKY_RESIZED:
-      return 'stickyResized'
+      return 'stickyResized';
+    default:
+      throw new Error(`Unknown StickyWidgetType: ${type}`);
   }
 }
-export class $$p0 {
-  constructor(e, t, r = 1, l = !1, u = null, p = () => {}, _ = !1, h = () => {}, m = () => {}) {
-    this._analyticsEventName = e
-    this._processTimersForLogging = t
-    this._timerDepth = r
-    this._forwardToDatadog = l
-    this._tsmerMetrics = u
-    this._customLogMetricsCallbackHistogram = p
-    this._isRecording = !1
-    this._isCanceled = !1
-    this._onFrameStartCallback = () => {}
-    this._isFirstLogForTab = !0
-    this._imagesLoadingState = null
-    this._ongoingSpotlight = !1
-    this._multiplayerUserCount = 1
-    this._numberOfRenderedCommentsWatermark = 0
-    this._lastRecordedNumberOfRenderedComments = 0
-    this._distributionByWorkName = new Map()
-    this._lastKnownFrameMs = null
-    this._lastKnownMetricsFrameMs = null
-    this._lastKnownFrameIndex = null
-    this._lastLogTime = null
-    this._scheduledLogAtMs = null
-    this._lastRecordedHitCountByName = {}
-    this._lastRecordedDurationSinceLastFrame = {}
-    this._fileKey = null
-    this._productType = 'unknown'
-    this._gpuDeviceInfo = getGpuDeviceInfo()
-    this._activeNamedEvents = new Set()
-    this._singleFrameNamedEvents = new Set()
-    this._eventTrackers = new Map()
-    this._contextRestoredCount = 0
-    this._maxRenderLayerCount = 0
-    this._maxRenderedTileBytesUsed = 0
-    this._numAnimationsFromCpp = 0
-    this._numAnimationsFromTs = 0
-    this._tileRenderersUsed = new Set()
-    this._currentTileRenderer = ''
-    this.scheduleLogTwoMinutesFromNow = () => {
-      this._scheduledLogAtMs === null && (this._scheduledLogAtMs = performance.now() + 12e4)
+
+// Original: $$p0
+/**
+ * Class responsible for tracking performance metrics, including frame rates, events, and analytics logging.
+ */
+export class PerformanceTracker {
+  private _analyticsEventName: string;
+  private _processTimersForLogging: (timers: any[]) => any[];
+  private _timerDepth: number;
+  private _forwardToDatadog: boolean;
+  private _tsmerMetrics: any;
+  private _customLogMetricsCallbackHistogram: (metrics: any) => void;
+  private _isRecording: boolean;
+  private _isCanceled: boolean;
+  private _onFrameStartCallback: () => void;
+  private _isFirstLogForTab: boolean;
+  private _imagesLoadingState: 'loading' | 'loaded' | null;
+  private _ongoingSpotlight: boolean;
+  private _multiplayerUserCount: number;
+  private _numberOfRenderedCommentsWatermark: number;
+  private _lastRecordedNumberOfRenderedComments: number;
+  private _distributionByWorkName: Map<string, FPSDistribution>;
+  private _lastKnownFrameMs: number | null;
+  private _lastKnownMetricsFrameMs: number | null;
+  private _lastKnownFrameIndex: number | null;
+  private _lastLogTime: number | null;
+  private _scheduledLogAtMs: number | null;
+  private _lastRecordedHitCountByName: Record<string, number>;
+  private _lastRecordedDurationSinceLastFrame: Record<string, number>;
+  private _fileKey: string | null;
+  private _productType: string;
+  private _gpuDeviceInfo: any;
+  private _activeNamedEvents: Set<string>;
+  private _singleFrameNamedEvents: Set<string>;
+  private _eventTrackers: Map<string, any>;
+  private _contextRestoredCount: number;
+  private _maxRenderLayerCount: number;
+  private _maxRenderedTileBytesUsed: number;
+  private _numAnimationsFromCpp: number;
+  private _numAnimationsFromTs: number;
+  private _tileRenderersUsed: Set<string>;
+  private _currentTileRenderer: string;
+  private _slowFrameTracker: SlowFrameTracker;
+
+  constructor(
+    analyticsEventName: string,
+    processTimersForLogging: (timers: any[]) => any[],
+    timerDepth: number = 1,
+    forwardToDatadog: boolean = false,
+    tsmerMetrics: any = null,
+    customLogMetricsCallbackHistogram: (metrics: any) => void = () => {},
+    enableSlowFrameTracking: boolean = false,
+    onSlowFrameDetected: Fn,
+    onFrameSampled: Fn
+  ) {
+    this._analyticsEventName = analyticsEventName;
+    this._processTimersForLogging = processTimersForLogging;
+    this._timerDepth = timerDepth;
+    this._forwardToDatadog = forwardToDatadog;
+    this._tsmerMetrics = tsmerMetrics;
+    this._customLogMetricsCallbackHistogram = customLogMetricsCallbackHistogram;
+    this._isRecording = false;
+    this._isCanceled = false;
+    this._onFrameStartCallback = () => {};
+    this._isFirstLogForTab = true;
+    this._imagesLoadingState = null;
+    this._ongoingSpotlight = false;
+    this._multiplayerUserCount = 1;
+    this._numberOfRenderedCommentsWatermark = 0;
+    this._lastRecordedNumberOfRenderedComments = 0;
+    this._distributionByWorkName = new Map();
+    this._lastKnownFrameMs = null;
+    this._lastKnownMetricsFrameMs = null;
+    this._lastKnownFrameIndex = null;
+    this._lastLogTime = null;
+    this._scheduledLogAtMs = null;
+    this._lastRecordedHitCountByName = {};
+    this._lastRecordedDurationSinceLastFrame = {};
+    this._fileKey = null;
+    this._productType = 'unknown';
+    this._gpuDeviceInfo = getGpuDeviceInfo();
+    this._activeNamedEvents = new Set();
+    this._singleFrameNamedEvents = new Set();
+    this._eventTrackers = new Map();
+    this._contextRestoredCount = 0;
+    this._maxRenderLayerCount = 0;
+    this._maxRenderedTileBytesUsed = 0;
+    this._numAnimationsFromCpp = 0;
+    this._numAnimationsFromTs = 0;
+    this._tileRenderersUsed = new Set();
+    this._currentTileRenderer = '';
+    this._slowFrameTracker = new SlowFrameTracker(enableSlowFrameTracking, onSlowFrameDetected, onFrameSampled);
+
+    // Event listeners
+    document.addEventListener('mousemove', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.addEventListener('keydown', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.addEventListener('touchdown', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.addEventListener('touchstart', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.addEventListener('touchmove', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.addEventListener('visibilitychange', this._onDocumentVisibilityChange.bind(this));
+  }
+
+  // Original: scheduleLogTwoMinutesFromNow
+  /**
+   * Schedules a log event to occur two minutes from now if not already scheduled.
+   */
+  private scheduleLogTwoMinutesFromNow(): void {
+    if (this._scheduledLogAtMs === null) {
+      this._scheduledLogAtMs = performance.now() + 120000; // 2 minutes
     }
-    this._onDocumentVisibilityChange = () => {
-      this.handleDocumentVisibilityChange(document.visibilityState)
+  }
+
+  // Original: _onDocumentVisibilityChange
+  /**
+   * Handles document visibility changes, logging if necessary.
+   */
+  private _onDocumentVisibilityChange(): void {
+    this.handleDocumentVisibilityChange(document.visibilityState);
+  }
+
+  // Original: updateLastKnownFrameMs
+  /**
+   * Updates the last known frame timestamp.
+   * @param ms - The timestamp in milliseconds.
+   */
+  updateLastKnownFrameMs(ms: number): void {
+    this._lastKnownFrameMs = ms;
+  }
+
+  // Original: startRecording
+  /**
+   * Starts recording performance metrics.
+   * @param scheduleLog - Whether to schedule a log event.
+   */
+  startRecording(scheduleLog: boolean = false): void {
+    this._isRecording = true;
+    this._resetLogState();
+    this._lastKnownFrameMs = performance.now();
+    if (this._lastLogTime === null) {
+      this._lastLogTime = this._lastKnownFrameMs;
     }
-    this.updateLastKnownFrameMs = (e) => {
-      this._lastKnownFrameMs = e
+    if (scheduleLog) {
+      this.scheduleLogTwoMinutesFromNow();
     }
-    this.startRecording = (e) => {
-      this._isRecording = !0
-      this._resetLogState()
-      this._lastKnownFrameMs = performance.now()
-      this._lastLogTime === null && (this._lastLogTime = this._lastKnownFrameMs)
-      e && this.scheduleLogTwoMinutesFromNow()
+  }
+
+  // Original: stopRecordingAndLog
+  /**
+   * Stops recording and logs the collected metrics.
+   * @param reason - The reason for stopping.
+   * @returns The distribution data.
+   */
+  stopRecordingAndLog(reason: string): Record<string, any> {
+    const distributions: Record<string, any> = {};
+    this._distributionByWorkName.forEach((dist, name) => {
+      distributions[name] = dist.toPOJO();
+    });
+    if (this._shouldLogToAnalytics()) {
+      this._logToAnalytics(reason);
+      this._resetLogState();
     }
-    this.stopRecordingAndLog = (e) => {
-      let t = {}
-      this._distributionByWorkName.forEach((e, r) => {
-        t[r] = e.toPOJO()
-      })
-      this._shouldLogToAnalytics() && (this._logToAnalytics(e), this._resetLogState())
-      this._isRecording = !1
-      return t
+    this._isRecording = false;
+    return distributions;
+  }
+
+  // Original: setFileInfo
+  /**
+   * Sets the file key and product type, resetting log state if changed.
+   * @param fileKey - The file key.
+   * @param productType - The product type.
+   */
+  setFileInfo(fileKey: string | null, productType: string): void {
+    if (fileKey !== this._fileKey || productType !== this._productType) {
+      this._fileKey = fileKey;
+      this._productType = productType;
+      this._resetLogState();
     }
-    this.setFileInfo = (e, t) => {
-      (e !== this._fileKey || t !== this._productType) && (this._fileKey = e, this._productType = t, this._resetLogState())
+  }
+
+  // Original: _startRecordingNamedEvent
+  /**
+   * Starts recording a named event.
+   * @param eventName - The name of the event.
+   */
+  private _startRecordingNamedEvent(eventName: string): void {
+    this._activeNamedEvents.add(eventName);
+  }
+
+  // Original: recordSingleFrameNamedEvent
+  /**
+   * Records a single-frame named event.
+   * @param eventName - The name of the event.
+   */
+  recordSingleFrameNamedEvent(eventName: string): void {
+    this._singleFrameNamedEvents.add(eventName);
+  }
+
+  // Original: _stopRecordingNamedEvent
+  /**
+   * Stops recording a named event.
+   * @param eventName - The name of the event.
+   */
+  private _stopRecordingNamedEvent(eventName: string): void {
+    this._activeNamedEvents.delete(eventName);
+  }
+
+  // Event handlers
+  handleZoomStart(): void {
+    this._startRecordingNamedEvent('zoomActive');
+  }
+
+  handleZoomStop(): void {
+    this._stopRecordingNamedEvent('zoomActive');
+  }
+
+  handleScrollEvent(): void {
+    this.recordSingleFrameNamedEvent('scrollActive');
+  }
+
+  onNodeDragStart(): void {
+    this._startRecordingNamedEvent('nodeDragActive');
+  }
+
+  onNodeDragEnd(): void {
+    this._stopRecordingNamedEvent('nodeDragActive');
+  }
+
+  onTileRendererChanged(renderer: string): void {
+    this._tileRenderersUsed.add(renderer);
+    this._currentTileRenderer = renderer;
+  }
+
+  onContextRestored(): void {
+    this._contextRestoredCount++;
+  }
+
+  updateMaxRenderLayerCount(count: number): void {
+    this._maxRenderLayerCount = Math.max(this._maxRenderLayerCount, count);
+  }
+
+  updateMaxRenderedTileBytesUsed(bytes: number): void {
+    this._maxRenderedTileBytesUsed = Math.max(this._maxRenderedTileBytesUsed, bytes);
+  }
+
+  incrementNumAnimationsFromCpp(): void {
+    this._numAnimationsFromCpp++;
+  }
+
+  incrementNumAnimationsFromTs(): void {
+    this._numAnimationsFromTs++;
+  }
+
+  handleDocumentVisibilityChange(state: DocumentVisibilityState): void {
+    if (state === 'hidden' && this._shouldLogToAnalytics()) {
+      this._logToAnalytics('tab-hidden');
+      this._resetLogState();
     }
-    this._startRecordingNamedEvent = (e) => {
-      this._activeNamedEvents.add(e)
+    if (state !== 'hidden') {
+      this._resetLogState();
     }
-    this.recordSingleFrameNamedEvent = (e) => {
-      this._singleFrameNamedEvents.add(e)
+  }
+
+  // Original: _logToAnalytics
+  /**
+   * Logs metrics to analytics.
+   * @param reason - The reason for logging.
+   * @param async - Whether to log asynchronously.
+   */
+  private _logToAnalytics(reason: string, async: boolean = false): void {
+    const metrics: Record<string, any> = {};
+    metrics.schema = new FPSDistribution().schema();
+    metrics.reason = reason;
+    metrics.isFirstLogAfterLoad = this._isFirstLogForTab;
+    metrics.imagesLoading = this._imagesLoadingState === 'loading';
+    metrics.multiplayerUserCount = this._multiplayerUserCount;
+    metrics.ongoingSpotlight = this._ongoingSpotlight;
+    metrics.fileKey = this._fileKey;
+    metrics.productType = this._productType;
+    metrics.refreshRate = this.refreshRate();
+    metrics.commentsRenderCount = this._numberOfRenderedCommentsWatermark;
+    metrics.contextRestoredCount = this._contextRestoredCount;
+    metrics.maxRenderLayerCount = this._maxRenderLayerCount;
+    metrics.maxRenderedTileBytesUsed = this._maxRenderedTileBytesUsed;
+    addDeviceInfoToTarget(this._gpuDeviceInfo, metrics);
+    metrics.numAnimationsFromCpp = this._numAnimationsFromCpp;
+    metrics.numAnimationsFromTs = this._numAnimationsFromTs;
+    this._isFirstLogForTab = false;
+    if (this._tsmerMetrics !== null) {
+      metrics.editFrames = this._tsmerMetrics.editFrameDistribution().toLogParams();
+      metrics.editFramesWhileNotPanningOrZooming = this._tsmerMetrics.editFrameDistributionWhileNotPanningOrZooming().toLogParams();
+      metrics.remoteFrames = this._tsmerMetrics.remoteFrameDistribution().toLogParams();
+      metrics.remoteFramesWhileNotPanningOrZooming = this._tsmerMetrics.remoteFrameDistributionWhileNotPanningOrZooming().toLogParams();
     }
-    this._stopRecordingNamedEvent = (e) => {
-      this._activeNamedEvents.$$delete(e)
-    }
-    this.handleZoomStart = () => {
-      this._startRecordingNamedEvent('zoomActive')
-    }
-    this.handleZoomStop = () => {
-      this._stopRecordingNamedEvent('zoomActive')
-    }
-    this.handleScrollEvent = () => {
-      this.recordSingleFrameNamedEvent('scrollActive')
-    }
-    this.onNodeDragStart = () => {
-      this._startRecordingNamedEvent('nodeDragActive')
-    }
-    this.onNodeDragEnd = () => {
-      this._stopRecordingNamedEvent('nodeDragActive')
-    }
-    this.onTileRendererChanged = (e) => {
-      this._tileRenderersUsed.add(e)
-      this._currentTileRenderer = e
-    }
-    this.onContextRestored = () => {
-      this._contextRestoredCount++
-    }
-    this.updateMaxRenderLayerCount = (e) => {
-      this._maxRenderLayerCount = Math.max(this._maxRenderLayerCount, e)
-    }
-    this.updateMaxRenderedTileBytesUsed = (e) => {
-      this._maxRenderedTileBytesUsed = Math.max(this._maxRenderedTileBytesUsed, e)
-    }
-    this.incrementNumAnimationsFromCpp = () => {
-      this._numAnimationsFromCpp++
-    }
-    this.incrementNumAnimationsFromTs = () => {
-      this._numAnimationsFromTs++
-    }
-    this.handleDocumentVisibilityChange = (e) => {
-      e === 'hidden' && this._shouldLogToAnalytics() && (this._logToAnalytics('tab-hidden'), this._resetLogState())
-      e !== 'hidden' && this._resetLogState()
-    }
-    this._logToAnalytics = (e, t = !1) => {
-      let r = {}
-      r.schema = new FPSDistribution().schema()
-      r.reason = e
-      r.isFirstLogAfterLoad = this._isFirstLogForTab
-      r.imagesLoading = this._imagesLoadingState === 'loading'
-      r.multiplayerUserCount = this._multiplayerUserCount
-      r.ongoingSpotlight = this._ongoingSpotlight
-      r.fileKey = this._fileKey
-      r.productType = this._productType
-      r.refreshRate = this.refreshRate()
-      r.commentsRenderCount = this._numberOfRenderedCommentsWatermark
-      r.contextRestoredCount = this._contextRestoredCount
-      r.maxRenderLayerCount = this._maxRenderLayerCount
-      r.maxRenderedTileBytesUsed = this._maxRenderedTileBytesUsed
-      addDeviceInfoToTarget(this._gpuDeviceInfo, r)
-      r.numAnimationsFromCpp = this._numAnimationsFromCpp
-      r.numAnimationsFromTs = this._numAnimationsFromTs
-      this._isFirstLogForTab = !1
-      this._tsmerMetrics !== null && (r.editFrames = this._tsmerMetrics.editFrameDistribution().toLogParams(), r.editFramesWhileNotPanningOrZooming = this._tsmerMetrics.editFrameDistributionWhileNotPanningOrZooming().toLogParams(), r.remoteFrames = this._tsmerMetrics.remoteFrameDistribution().toLogParams(), r.remoteFramesWhileNotPanningOrZooming = this._tsmerMetrics.remoteFrameDistributionWhileNotPanningOrZooming().toLogParams())
-      this._customLogMetricsCallbackHistogram(r)
-      r.tileRenderersUsed = JSON.stringify(Array.from(this._tileRenderersUsed))
-      this._tileRenderersUsed.clear()
-      this._tileRenderersUsed.add(this._currentTileRenderer)
-      this._distributionByWorkName.forEach((e, t) => {
-        if (t in r)
-          throw new Error(`attempt to track performance for a work item with a reserved name: ${t}`)
-        r[t] = e.toLogParams()
-      })
-      r.totalBatchTime = performance.now() - this._lastLogTime
-      this._lastLogTime = performance.now()
-      t
-        ? setTimeout(() => {
-            this._sendLogRequest(r)
-          }, 0)
-        : this._sendLogRequest(r)
-    }
-    this._sendLogRequest = (e) => {
-      let t = {
-        forwardToDatadog: this._forwardToDatadog,
-        batchRequest: !0,
+    this._customLogMetricsCallbackHistogram(metrics);
+    metrics.tileRenderersUsed = JSON.stringify(Array.from(this._tileRenderersUsed));
+    this._tileRenderersUsed.clear();
+    this._tileRenderersUsed.add(this._currentTileRenderer);
+    this._distributionByWorkName.forEach((dist, name) => {
+      if (name in metrics) {
+        throw new Error(`attempt to track performance for a work item with a reserved name: ${name}`);
       }
-      trackEventAnalytics(this._analyticsEventName, e, t)
+      metrics[name] = dist.toLogParams();
+    });
+    metrics.totalBatchTime = performance.now() - this._lastLogTime!;
+    this._lastLogTime = performance.now();
+    if (async) {
+      setTimeout(() => {
+        this._sendLogRequest(metrics);
+      }, 0);
+    } else {
+      this._sendLogRequest(metrics);
     }
-    this._processTimerTree = (e, t, r) => {
-      if (t >= this._timerDepth)
-        return []
-      let n = []
-      for (let i of e) {
-        let e = [...r, i.name]
-        let a = e.join('.')
-        if (!(a in this._lastRecordedHitCountByName) || !(a in this._lastRecordedDurationSinceLastFrame)) {
-          this._lastRecordedHitCountByName[a] = i.hitCount
-          this._lastRecordedDurationSinceLastFrame[a] = i.totalElapsedTime
-          continue
-        }
-        let s = i.hitCount - this._lastRecordedHitCountByName[a]
-        if (s === 0)
-          continue
-        s > i.elapsedTimes.length && console.warn(`Logged performance for ${a} too many times in one animation frame`)
-        let o = i.totalElapsedTime - this._lastRecordedDurationSinceLastFrame[a]
-        this._lastRecordedHitCountByName[a] = i.hitCount
-        this._lastRecordedDurationSinceLastFrame[a] = i.totalElapsedTime
-        n.push({
-          path: e,
-          elapsedTime: o,
-        })
-        let l = t + 1
-        l < this._timerDepth && i.children.length > 0 && (n = n.concat(this._processTimerTree(i.children, l, e)))
+  }
+
+  // Original: _sendLogRequest
+  /**
+   * Sends the log request to analytics.
+   * @param metrics - The metrics to send.
+   */
+  private _sendLogRequest(metrics: Record<string, any>): void {
+    const options = {
+      forwardToDatadog: this._forwardToDatadog,
+      batchRequest: true,
+    };
+    trackEventAnalytics(this._analyticsEventName, metrics, options);
+  }
+
+  // Original: _processTimerTree
+  /**
+   * Processes the timer tree for logging.
+   * @param timers - The timers array.
+   * @param depth - Current depth.
+   * @param path - Current path.
+   * @returns Processed timer data.
+   */
+  private _processTimerTree(timers: any[], depth: number, path: string[]): any[] {
+    if (depth >= this._timerDepth) {
+      return [];
+    }
+    const results: any[] = [];
+    for (const timer of timers) {
+      const currentPath = [...path, timer.name];
+      const pathStr = currentPath.join('.');
+      if (!(pathStr in this._lastRecordedHitCountByName) || !(pathStr in this._lastRecordedDurationSinceLastFrame)) {
+        this._lastRecordedHitCountByName[pathStr] = timer.hitCount;
+        this._lastRecordedDurationSinceLastFrame[pathStr] = timer.totalElapsedTime;
+        continue;
       }
-      return n
+      const hitCountDiff = timer.hitCount - this._lastRecordedHitCountByName[pathStr];
+      if (hitCountDiff === 0) {
+        continue;
+      }
+      if (hitCountDiff > timer.elapsedTimes.length) {
+        console.warn(`Logged performance for ${pathStr} too many times in one animation frame`);
+      }
+      const durationDiff = timer.totalElapsedTime - this._lastRecordedDurationSinceLastFrame[pathStr];
+      this._lastRecordedHitCountByName[pathStr] = timer.hitCount;
+      this._lastRecordedDurationSinceLastFrame[pathStr] = timer.totalElapsedTime;
+      results.push({
+        path: currentPath,
+        elapsedTime: durationDiff,
+      });
+      if (depth + 1 < this._timerDepth && timer.children.length > 0) {
+        results.push(...this._processTimerTree(timer.children, depth + 1, currentPath));
+      }
     }
-    this.onFrameStart = () => {
-      this._isRecording && !this._isCanceled && y.getFullscreenCrashState() === 'ok' && this._onFrameStartCallback()
+    return results;
+  }
+
+  onFrameStart(): void {
+    if (this._isRecording && !this._isCanceled && fullscreenCrashHandler.getFullscreenCrashState() === 'ok') {
+      this._onFrameStartCallback();
     }
-    this.setOnFrameStartCallback = (e) => {
-      this._onFrameStartCallback = e
+  }
+
+  setOnFrameStartCallback(callback: () => void): void {
+    this._onFrameStartCallback = callback;
+  }
+
+  checkNotVisibleOrRecording(): boolean {
+    return document.visibilityState !== 'visible' || !this._isRecording;
+  }
+
+  onMetricsEventLoopFrame(): void {
+    if (this.checkNotVisibleOrRecording()) {
+      this._lastKnownMetricsFrameMs = null;
+      return;
     }
-    this.checkNotVisibleOrRecording = () => document.visibilityState !== 'visible' || !this._isRecording
-    this.onMetricsEventLoopFrame = () => {
+    const now = performance.now();
+    if (this._lastKnownMetricsFrameMs != null) {
+      const delta = now - this._lastKnownMetricsFrameMs;
+      if (delta < 60000) { // 60 seconds
+        this._getOrCreateDistribution('metrics_loop').add(delta);
+      }
+    }
+    this._lastKnownMetricsFrameMs = now;
+  }
+
+  onFrame(): 'canceled' | 'not-recording' | 'success' {
+    if (fullscreenCrashHandler.getFullscreenCrashState() !== 'ok') {
+      return 'canceled';
+    }
+    try {
+      if (this._isCanceled) {
+        return 'canceled';
+      }
       if (this.checkNotVisibleOrRecording()) {
-        this._lastKnownMetricsFrameMs = null
-        return
+        return 'not-recording';
       }
-      let e = performance.now()
-      if (this._lastKnownMetricsFrameMs != null) {
-        let t = e - this._lastKnownMetricsFrameMs
-        t < 6e4 && this._getOrCreateDistribution('metrics_loop').add(t)
-      }
-      this._lastKnownMetricsFrameMs = e
-    }
-    this.onFrame = () => {
-      if (y.getFullscreenCrashState() !== 'ok')
-        return 'canceled'
-      try {
-        if (this._isCanceled)
-          return 'canceled'
-        if (this.checkNotVisibleOrRecording())
-          return 'not-recording'
-        let e = performance.now()
-        if (this._lastKnownFrameMs != null) {
-          let t = e - this._lastKnownFrameMs
-          if (t < 6e4) {
-            for (let e of (this._getOrCreateDistribution('all').add(t), this._activeNamedEvents)) this._getOrCreateDistribution(e).add(t)
-            let e = performance.now()
-            let r = []
-            for (let [e, n] of this._eventTrackers) n.didEventOccur() && (r.push(e), this._getOrCreateDistribution(e).add(t))
-            let i = performance.now() - e
-            for (let e of (Fullscreen?.updatePerfMode(r), this._singleFrameNamedEvents)) this._getOrCreateDistribution(e).add(t)
-            this._scheduledLogAtMs !== null && this._slowFrameTracker?.checkSlowFrameAndSample(t, r, i, this._fileKey, this._productType)
-            this._singleFrameNamedEvents.clear()
+      const now = performance.now();
+      if (this._lastKnownFrameMs != null) {
+        const delta = now - this._lastKnownFrameMs;
+        if (delta < 60000) {
+          this._getOrCreateDistribution('all').add(delta);
+          for (const event of this._activeNamedEvents) {
+            this._getOrCreateDistribution(event).add(delta);
           }
-        }
-        if (this._lastKnownFrameMs = e, reactTimerGroup.areTimersOpen()) {
-          this._isCanceled = !0
-          return 'canceled'
-        }
-        let t = this._processTimerTree(reactTimerGroup.report(), 0, [])
-        for (let e of this._processTimersForLogging(t)) this._getOrCreateDistribution(e.path.join('.')).add(e.elapsedTime)
-        this._tsmerMetrics?.onFrame()
-        this._scheduledLogAtMs !== null && performance.now() > this._scheduledLogAtMs && (this._logToAnalytics('two-minutes-elapsed', !0), this._resetLogState())
-        return 'success'
-      }
-      finally {
-        this._slowFrameTracker?.clearPerFrameMetricsAndIncrementFrameCounter()
-      }
-    }
-    this.testOnlyGetAllDistribution = () => this._getOrCreateDistribution('all')
-    this.pendingImagesChanged = (e) => {
-      if (this._imagesLoadingState === 'loaded')
-        return
-      let t = e > 0 ? 'loading' : 'loaded'
-      t !== this._imagesLoadingState && (this._imagesLoadingState === 'loading' && (this._logToAnalytics('images-loaded'), this._resetLogState()), this._imagesLoadingState = t)
-    }
-    this._slowFrameTracker = new SlowFrameTracker(_, h, m)
-    document.addEventListener('mousemove', this.scheduleLogTwoMinutesFromNow, !0)
-    document.addEventListener('keydown', this.scheduleLogTwoMinutesFromNow, !0)
-    document.addEventListener('touchdown', this.scheduleLogTwoMinutesFromNow, !0)
-    document.addEventListener('touchstart', this.scheduleLogTwoMinutesFromNow, !0)
-    document.addEventListener('touchmove', this.scheduleLogTwoMinutesFromNow, !0)
-    document.addEventListener('visibilitychange', this._onDocumentVisibilityChange)
-  }
-
-  uninstall() {
-    document.removeEventListener('mousemove', this.scheduleLogTwoMinutesFromNow, !0)
-    document.removeEventListener('keydown', this.scheduleLogTwoMinutesFromNow, !0)
-    document.removeEventListener('touchdown', this.scheduleLogTwoMinutesFromNow, !0)
-    document.removeEventListener('touchstart', this.scheduleLogTwoMinutesFromNow, !0)
-    document.removeEventListener('touchmove', this.scheduleLogTwoMinutesFromNow, !0)
-    document.removeEventListener('visibilitychange', this._onDocumentVisibilityChange)
-  }
-
-  hasScheduledLog() {
-    return this._scheduledLogAtMs != null
-  }
-
-  _shouldLogToAnalytics() {
-    return this._isRecording && this._scheduledLogAtMs != null
-  }
-
-  productTypeForTests() {
-    return this._productType
-  }
-
-  _resetLogState() {
-    this._lastKnownFrameMs = null
-    this._imagesLoadingState = null
-    this._ongoingSpotlight = !1
-    this._multiplayerUserCount = 1
-    this._distributionByWorkName = new Map()
-    this._scheduledLogAtMs = null
-    this._lastRecordedHitCountByName = {}
-    this._lastRecordedDurationSinceLastFrame = {}
-    this._activeNamedEvents.clear()
-    this._singleFrameNamedEvents.clear()
-    this._numberOfRenderedCommentsWatermark = this._lastRecordedNumberOfRenderedComments
-    this._contextRestoredCount = 0
-    this._maxRenderLayerCount = 0
-    this._maxRenderedTileBytesUsed = 0
-    this._numAnimationsFromCpp = 0
-    this._numAnimationsFromTs = 0
-    this._tsmerMetrics?.resetLogState()
-  }
-
-  getSlowFrameTracker() {
-    return this._slowFrameTracker
-  }
-
-  refreshRate() {
-    let e = this._distributionByWorkName.get('all')
-    if (e) {
-      let t = e.getMode()
-      if (t) {
-        if (t.min < 9)
-          return '120FPS'
-        if (t.min < 32)
-          return '60FPS'
-        if (t.min < 48)
-          return '30FPS'
-      }
-    }
-    return 'UNKNOWN'
-  }
-
-  estimatedRefreshRate() {
-    let e = this._distributionByWorkName.get('all')
-    if (e) {
-      let t = e.getMode()
-      if (t) {
-        if (t.min < 9) {
-          return {
-            frameLength: 1e3 / 120,
-            fps: 120,
+          const eventStart = performance.now();
+          const occurredEvents: string[] = [];
+          for (const [name, tracker] of this._eventTrackers) {
+            if (tracker.didEventOccur()) {
+              occurredEvents.push(name);
+              this._getOrCreateDistribution(name).add(delta);
+            }
           }
-        }
-        if (t.min < 32) {
-          return {
-            frameLength: 1e3 / 60,
-            fps: 60,
+          const eventProcessingTime = performance.now() - eventStart;
+          Fullscreen?.updatePerfMode(occurredEvents);
+          for (const event of this._singleFrameNamedEvents) {
+            this._getOrCreateDistribution(event).add(delta);
           }
+          if (this._scheduledLogAtMs !== null) {
+            this._slowFrameTracker?.checkSlowFrameAndSample(delta, occurredEvents, eventProcessingTime, this._fileKey, this._productType);
+          }
+          this._singleFrameNamedEvents.clear();
         }
-        t.min
+      }
+      this._lastKnownFrameMs = now;
+      if (reactTimerGroup.areTimersOpen()) {
+        this._isCanceled = true;
+        return 'canceled';
+      }
+      const processedTimers = this._processTimerTree(reactTimerGroup.report(), 0, []);
+      for (const timer of this._processTimersForLogging(processedTimers)) {
+        this._getOrCreateDistribution(timer.path.join('.')).add(timer.elapsedTime);
+      }
+      this._tsmerMetrics?.onFrame();
+      if (this._scheduledLogAtMs !== null && performance.now() > this._scheduledLogAtMs) {
+        this._logToAnalytics('two-minutes-elapsed', true);
+        this._resetLogState();
+      }
+      return 'success';
+    } finally {
+      this._slowFrameTracker?.clearPerFrameMetricsAndIncrementFrameCounter();
+    }
+  }
+
+  testOnlyGetAllDistribution(): FPSDistribution {
+    return this._getOrCreateDistribution('all');
+  }
+
+  pendingImagesChanged(count: number): void {
+    if (this._imagesLoadingState === 'loaded') {
+      return;
+    }
+    const newState: 'loading' | 'loaded' = count > 0 ? 'loading' : 'loaded';
+    if (newState !== this._imagesLoadingState) {
+      if (this._imagesLoadingState === 'loading') {
+        this._logToAnalytics('images-loaded');
+        this._resetLogState();
+      }
+      this._imagesLoadingState = newState;
+    }
+  }
+
+  uninstall(): void {
+    document.removeEventListener('mousemove', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.removeEventListener('keydown', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.removeEventListener('touchdown', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.removeEventListener('touchstart', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.removeEventListener('touchmove', this.scheduleLogTwoMinutesFromNow.bind(this), true);
+    document.removeEventListener('visibilitychange', this._onDocumentVisibilityChange.bind(this));
+  }
+
+  hasScheduledLog(): boolean {
+    return this._scheduledLogAtMs != null;
+  }
+
+  private _shouldLogToAnalytics(): boolean {
+    return this._isRecording && this._scheduledLogAtMs != null;
+  }
+
+  productTypeForTests(): string {
+    return this._productType;
+  }
+
+  private _resetLogState(): void {
+    this._lastKnownFrameMs = null;
+    this._imagesLoadingState = null;
+    this._ongoingSpotlight = false;
+    this._multiplayerUserCount = 1;
+    this._distributionByWorkName = new Map();
+    this._scheduledLogAtMs = null;
+    this._lastRecordedHitCountByName = {};
+    this._lastRecordedDurationSinceLastFrame = {};
+    this._activeNamedEvents.clear();
+    this._singleFrameNamedEvents.clear();
+    this._numberOfRenderedCommentsWatermark = this._lastRecordedNumberOfRenderedComments;
+    this._contextRestoredCount = 0;
+    this._maxRenderLayerCount = 0;
+    this._maxRenderedTileBytesUsed = 0;
+    this._numAnimationsFromCpp = 0;
+    this._numAnimationsFromTs = 0;
+    this._tsmerMetrics?.resetLogState();
+  }
+
+  getSlowFrameTracker(): SlowFrameTracker {
+    return this._slowFrameTracker;
+  }
+
+  refreshRate(): string {
+    const dist = this._distributionByWorkName.get('all');
+    if (dist) {
+      const mode = dist.getMode();
+      if (mode) {
+        if (mode.min < 9) return '120FPS';
+        if (mode.min < 32) return '60FPS';
+        if (mode.min < 48) return '30FPS';
       }
     }
-    return {
-      frameLength: 1e3 / 30,
-      fps: 30,
+    return 'UNKNOWN';
+  }
+
+  estimatedRefreshRate(): { frameLength: number; fps: number } {
+    const dist = this._distributionByWorkName.get('all');
+    if (dist) {
+      const mode = dist.getMode();
+      if (mode) {
+        if (mode.min < 9) {
+          return { frameLength: 1000 / 120, fps: 120 };
+        }
+        if (mode.min < 32) {
+          return { frameLength: 1000 / 60, fps: 60 };
+        }
+      }
     }
+    return { frameLength: 1000 / 30, fps: 30 };
   }
 
-  tsmerMetrics() {
-    return this._tsmerMetrics
+  tsmerMetrics(): any {
+    return this._tsmerMetrics;
   }
 
-  _getOrCreateDistribution(e) {
-    let t = this._distributionByWorkName.get(e)
-    t || (t = new FPSDistribution(), this._distributionByWorkName.set(e, t))
-    return t
+  private _getOrCreateDistribution(name: string): FPSDistribution {
+    let dist = this._distributionByWorkName.get(name);
+    if (!dist) {
+      dist = new FPSDistribution();
+      this._distributionByWorkName.set(name, dist);
+    }
+    return dist;
   }
 
-  addEventTracker(e, t) {
-    this._eventTrackers.set(e, t)
+  addEventTracker(name: string, tracker: any): void {
+    this._eventTrackers.set(name, tracker);
   }
 
-  addTimeEvent(e, t) {
-    this._getOrCreateDistribution(e).add(t)
+  addTimeEvent(name: string, time: number): void {
+    this._getOrCreateDistribution(name).add(time);
   }
 
-  setNumberOfRenderedComments(e) {
-    this._lastRecordedNumberOfRenderedComments = e
-    this._numberOfRenderedCommentsWatermark = Math.max(e, this._numberOfRenderedCommentsWatermark)
+  setNumberOfRenderedComments(count: number): void {
+    this._lastRecordedNumberOfRenderedComments = count;
+    this._numberOfRenderedCommentsWatermark = Math.max(count, this._numberOfRenderedCommentsWatermark);
   }
 
-  setMultiplayerPerfInfo(e) {
-    let {
-      multiplayerUserCount,
-      ongoingSpotlight,
-    } = e
-    this._ongoingSpotlight = ongoingSpotlight
-    this._multiplayerUserCount = multiplayerUserCount
+  setMultiplayerPerfInfo(info: { multiplayerUserCount: number; ongoingSpotlight: boolean }): void {
+    this._ongoingSpotlight = info.ongoingSpotlight;
+    this._multiplayerUserCount = info.multiplayerUserCount;
   }
 
-  trackOtherUserCursorMoved() {
+  trackOtherUserCursorMoved(): void {
     multiplayerSessionManager?.setOtherUserMouseMovedCallback(() => {
-      this.recordSingleFrameNamedEvent('otherUserCursorMoved')
-    })
+      this.recordSingleFrameNamedEvent('otherUserCursorMoved');
+    });
   }
 }
-export const AH = $$p0
-export const jY = $$u1
+
+export const AH = PerformanceTracker;
+export const jY = getStickyWidgetEventName;

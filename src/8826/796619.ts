@@ -23,7 +23,7 @@ import { d as _$$d } from "../905/976845";
 import { bL as _$$bL } from "../905/911410";
 import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k3 } from "../905/582200";
-import { u1 } from "../figma_app/91703";
+import { showPickerThunk } from "../figma_app/91703";
 import { hideTooltip } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
@@ -71,7 +71,7 @@ function T({
           let l = qo;
           let i = c();
           i && (l = window.innerWidth - i.getBoundingClientRect().left);
-          a(u1({
+          a(showPickerThunk({
             id: e,
             initialX: l,
             initialY: top

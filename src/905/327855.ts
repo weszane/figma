@@ -26,7 +26,7 @@ import { Lm, mF } from "../figma_app/755939";
 import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
-import { kP, OB, Y6, FP, JM } from "../figma_app/91703";
+import { setNeedsUpgrade, newFileLoaded, setProgressBarState, setLeftPanelTab, showFileCreationFailureBanner } from "../figma_app/91703";
 import { am } from "../figma_app/430563";
 import { showModalHandler } from "../905/156213";
 import { hZ } from "../figma_app/990058";
@@ -37,7 +37,7 @@ import { $K, bW, s5 } from "../figma_app/223206";
 import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
 import { trackFileEvent, trackFileObjEvent } from "../figma_app/314264";
-import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
+import { getAutosaveManagerInstance, getAutosaveFileInfo, setupAutosaveManager, destroyAutosaveManager, checkFileHasUnsyncedAutosave } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
 import { setupFileObject } from "../905/628874";
 import { getRandomString } from "../905/87821";
@@ -249,7 +249,7 @@ export async function $$ew5(e, t, i, n) {
     sources: [FontSourceType.SHARED]
   };
   _$$n(e, m);
-  e.dispatch(kP({
+  e.dispatch(setNeedsUpgrade({
     needsUpgrade: c.needs_upgrade
   }));
   fullscreenValue.figFileLoaded(t);
@@ -316,7 +316,7 @@ export async function $$ew5(e, t, i, n) {
   }), i = mapFileTypeToEditorType(N.editorType));
   (i === FEditorType.Sites || i === FEditorType.Figmake) && Fullscreen.addNewFileDefaultResponsiveSet();
   i === FEditorType.Figmake && Fullscreen?.setEnabledFigmake(!0);
-  e.dispatch(OB({
+  e.dispatch(newFileLoaded({
     file: N,
     fullscreenEditorType: i
   }));
@@ -330,7 +330,7 @@ export async function $$ew5(e, t, i, n) {
   desktopAPIInstance?.setIsTeamTemplate(!!O);
 }
 export async function $$eC4(e, t, i) {
-  e.dispatch(Y6({
+  e.dispatch(setProgressBarState({
     mode: i ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
   }));
   await fullscreenValue.loadAndStartFullscreenIfNecessary();
@@ -486,7 +486,7 @@ async function ek(e, t, i, r, p) {
     }, {
       forwardToDatadog: !0
     });
-    e.dispatch(FP({
+    e.dispatch(setLeftPanelTab({
       tab: UserInterfaceElements.ASSETS,
       persist: !0
     }));
@@ -520,9 +520,9 @@ async function ek(e, t, i, r, p) {
   };
   e.offlineFileCreated = function (e, t, i) {
     e > eR && (async () => {
-      let n = ZG()?.session();
+      let n = getAutosaveManagerInstance()?.session();
       let r = n ? await n.getNodeChangeCount().catch(() => 0) : 0;
-      let a = GT();
+      let a = getAutosaveFileInfo();
       trackEventAnalytics("Offline File Creation", {
         editorType: i.editorType,
         requestDuration: t,
@@ -567,13 +567,13 @@ export function $$eN8(e, t, i) {
   let o = e.getState().user;
   if (o) {
     let e = t.localFileKey ?? createLocalFileKey(generateUUIDv4);
-    a = mu(e, o.id);
+    a = setupAutosaveManager(e, o.id);
   } else logInfo("Autosave", "Not creating manager for logged out user");
   ek(e, t, s, i, a).catch(e => ({
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await yn();else if ("error" === i.status) {
+    if ("canceled" === i.status) await destroyAutosaveManager();else if ("error" === i.status) {
       let {
         error
       } = i;
@@ -583,13 +583,13 @@ export function $$eN8(e, t, i) {
       if (n.fileCreationFailed(l, error, d, c, t), "show_banner" === c) {
         logInfo("new file", "Leaving editor open because file has unsynced persisted changes.");
         e.dispatch(FlashActions.error(l));
-        e.dispatch(JM());
+        e.dispatch(showFileCreationFailureBanner());
       } else {
         if (o && a) {
           let e = a.fileKey;
-          isLocalFileKey(e) && (await $3(o.id, e));
+          isLocalFileKey(e) && (await checkFileHasUnsyncedAutosave(o.id, e));
         }
-        await yn();
+        await destroyAutosaveManager();
         e.dispatch(FlashActions.error(l));
         e.dispatch(selectViewAction({
           view: "recentsAndSharing"

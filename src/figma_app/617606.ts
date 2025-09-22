@@ -1,7 +1,7 @@
 import { lr, J6, gi, MK, oh, k4, s7 } from "../figma_app/178419";
 import { ChatMessageType, Fullscreen } from "../figma_app/763686";
 import { deepClone } from "../905/284190";
-import { FJ, Ym, kQ, OT, b5 } from "../figma_app/383733";
+import { FJ, ProductVariant, str_replace_editor, fast_apply_tool, write_tool } from "../figma_app/383733";
 import { V } from "../figma_app/365013";
 import { m as _$$m } from "../figma_app/226038";
 import { permissionScopeHandler } from "../905/189185";
@@ -9,7 +9,7 @@ import { z } from "../figma_app/602681";
 import { r } from "../figma_app/208194";
 import { F$ } from "../figma_app/304955";
 import { o as _$$o, j } from "../figma_app/171378";
-import { AD } from "../figma_app/419232";
+import { supabaseNames } from "../figma_app/419232";
 import { L } from "../figma_app/381700";
 import { l as _$$l } from "../905/150503";
 function d(e, t, r) {
@@ -332,7 +332,7 @@ export async function $$E5({
     if (!s) return;
     let o = s.toolName;
     let l = s.toolCallId;
-    if (AD.includes(o)) return {
+    if (supabaseNames.includes(o)) return {
       id: Fullscreen.generateUniqueID(),
       type: ChatMessageType.TOOL_MESSAGE,
       userId: r,
@@ -413,7 +413,7 @@ export async function $$E5({
       model: d,
       multiFileCodeLayersEnabled: A,
       entrypointFilePath: N,
-      productType: o === _$$l.FIGMAKE || o === _$$l.FIGMAKE_IN_DESIGN ? Ym.MAKE_STANDALONE : Ym.CODE_LAYERS,
+      productType: o === _$$l.FIGMAKE || o === _$$l.FIGMAKE_IN_DESIGN ? ProductVariant.MAKE_STANDALONE : ProductVariant.CODE_LAYERS,
       codeLibraryComponents: v ? u.getCodeLibraryComponents() : void 0
     }
   };
@@ -425,7 +425,7 @@ export function $$y22(e) {
     toolName,
     partialArgs
   } = t;
-  return toolName === kQ.name && "create" === partialArgs.command ? partialArgs.file_text : toolName === OT.name ? partialArgs.change_str : toolName === b5.name ? partialArgs.file_text : void 0;
+  return toolName === str_replace_editor.name && "create" === partialArgs.command ? partialArgs.file_text : toolName === fast_apply_tool.name ? partialArgs.change_str : toolName === write_tool.name ? partialArgs.file_text : void 0;
 }
 export async function $$S15({
   messages: e,

@@ -4,7 +4,7 @@ import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { VisualBellActions } from "../905/302958";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { selectOpenFile } from "../figma_app/516028";
 import { O } from "../905/207358";
 import { iy } from "../figma_app/342355";
@@ -72,7 +72,7 @@ async function N(e, t) {
   URL.revokeObjectURL(a);
 }
 export async function $$y0(e) {
-  if (!UK().enableCodegenMcpServer.getCopy()) {
+  if (!EditorPreferencesApi().enableCodegenMcpServer.getCopy()) {
     g(e, "Dev Mode MCP server is not enabled.");
     return null;
   }

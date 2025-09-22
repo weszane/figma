@@ -7,7 +7,7 @@ import { getFilteredFeatureFlags } from "../905/717445";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { isEditorTypeSupportedFor, useInstalledPluginsAndWidgets, useDedupedRecentlyUsedWidgets, isEditorTypeSupported } from "../figma_app/844435";
 import { getPluginVersions } from "../figma_app/740025";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
 import { getOrgByCurrentUserId } from "../905/845253";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -67,7 +67,7 @@ export function $$T3() {
   };
 }
 export function $$I0() {
-  let e = getObservableOrFallback(UK().enableCodegenMcpServer);
+  let e = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let t = useCanAccessFullDevMode();
   let r = Fc();
   let i = $k();

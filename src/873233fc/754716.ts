@@ -12,8 +12,8 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { getScaledValueWithUnit } from "../figma_app/120227";
-import { d as _$$d } from "../905/758967";
-import { UK } from "../figma_app/740163";
+import { getCanvasViewState } from "../905/758967";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { currentSessionLocalIDString, clearSelection, addToSelection, setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -112,7 +112,7 @@ function I(e) {
 }
 function E(e) {
   let t = I(e.guid);
-  let n = getObservableOrFallback(UK().showGuids);
+  let n = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let r = uQ();
   let a = useRef(null);
   let l = useCallback(e => -function (e) {
@@ -166,7 +166,7 @@ function O(e) {
     value: _value
   } = B("HEIGHT", t?.size.y ?? 0);
   let a = function (e) {
-    let t = getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
+    let t = getObservableOrFallback(getCanvasViewState().activeCanvasCurrentZoom);
     return useMemo(() => !!e && HandoffBindingsCpp?.isTLFCanvasHighlightBoxShown(e, t), [e, t]);
   }(e.guid);
   let d = useCallback(e => function (e, t) {
@@ -805,7 +805,7 @@ let eX = memo(({
   SI();
   Gb(_);
   _$$W();
-  let C = getObservableValue(UK().enableCodegenMcpServer, !1);
+  let C = getObservableValue(EditorPreferencesApi().enableCodegenMcpServer, !1);
   return jsxs(eG, {
     children: [jsx(ED, {}), jsxs(sk, {
       children: [t.mode !== UIVisibilitySetting.OFF && jsx("div", {

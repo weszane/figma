@@ -9,7 +9,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
 import { createRecordingCallback, useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
-import { Ku, sT } from "../figma_app/740163";
+import { getColorFormat, getNudgeAmounts } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
 import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { defaultGrayColor } from "../figma_app/385874";
@@ -612,7 +612,7 @@ export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DE
   stylePickerListLayout: e.stylePickerListLayout,
   openFile: e.openFile
 }))(function (e) {
-  let t = Ku();
+  let t = getColorFormat();
   let {
     inheritFillStyleKey,
     exportSettings,
@@ -663,7 +663,7 @@ export let $$eR2 = n.ConnectedFillPanel;
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let {
     effects,
     inheritEffectStyleKey,
@@ -712,7 +712,7 @@ export let $$eL1 = i.ConnectedEffectsPanel;
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let {
     transformModifiers
   } = zj("transformModifiers");
@@ -744,11 +744,11 @@ export let $$eP4 = a.ConnectedTransformModifiersPanel;
   stylePickerShown: e.stylePickerShown,
   openFile: e.openFile
 }))(function (e) {
-  let t = Ku();
+  let t = getColorFormat();
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let i = getObservableOrFallback(AppStateTsApi.editorPreferences().showFrameGrids);
   let {
     layoutGrids,
@@ -864,7 +864,7 @@ export let $$eD3 = s.ConnectedGridsPanel;
     let {
       smallNudgeAmount,
       bigNudgeAmount
-    } = sT();
+    } = getNudgeAmounts();
     let ey = WH(inheritTextStyleKey ?? null, styleIdForText ?? null, "TEXT");
     let eb = _$$L();
     let eT = selectWithShallowEqual(e => t(e, selectSceneGraphSelectionKeys(e), RR.TEXT));

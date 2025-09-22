@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import a from "classnames";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { T } from "../figma_app/590592";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
@@ -13,7 +13,7 @@ export let $$u0 = forwardRef(({
   floatingWhenExpanded: n,
   children: a
 }, u) => {
-  let p = getObservableOrFallback(UK().renderRulers);
+  let p = getObservableOrFallback(EditorPreferencesApi().renderRulers);
   let h = Ye();
   let m = T();
   return jsx("div", {

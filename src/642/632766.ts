@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { allEqual } from "../figma_app/656233";
 import { Fullscreen, SnapMode, VariableResolvedDataType } from "../figma_app/763686";
 import o from "classnames";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -45,7 +45,7 @@ export function $$j0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let N = useRef(!1);
   let I = C8[e];
   let E = `stack-padding-input-icon-${e}`;

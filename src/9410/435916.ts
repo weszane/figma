@@ -15,7 +15,7 @@ import { A as _$$A } from "../905/956262";
 import { Fy, g5, NT } from "../figma_app/579169";
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
@@ -677,7 +677,7 @@ function et() {
   }) : null;
 }
 export function $$ei1() {
-  return getFeatureFlags().figjam_nav_new_user_onboarding && UK().scrollWheelZoom.getCopy() && UK().rightClickPan.getCopy();
+  return getFeatureFlags().figjam_nav_new_user_onboarding && EditorPreferencesApi().scrollWheelZoom.getCopy() && EditorPreferencesApi().rightClickPan.getCopy();
 }
 export const X = $$$$X0;
 export const O = $$ei1;

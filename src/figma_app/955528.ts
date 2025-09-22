@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState, useMemo, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
-import { ch, DE } from "../figma_app/571325";
+import { ProductType, ToneType } from "../figma_app/571325";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { UnitType, UserActionState } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -20,7 +20,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { Tv } from "../figma_app/311375";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { vu } from "../figma_app/8833";
 import { Gc, nl, fN } from "../figma_app/456871";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
@@ -76,7 +76,7 @@ export function $$X6(e, t) {
     x: 0,
     y: 0
   } : cn(s, qo);
-  e(u1({
+  e(showPickerThunk({
     id: vu,
     initialX: o.x,
     initialY: o.y
@@ -87,7 +87,7 @@ export function $$X6(e, t) {
   });
 }
 export function $$q1(e) {
-  e(XE());
+  e(hidePickerThunk());
   _$$G({
     eventName: "modal_closed"
   });
@@ -117,7 +117,7 @@ export function $$J13(e, t, r, i) {
     return Ay.slides.rewriteText({
       texts: d,
       tones: r.tones,
-      productType: s ? ch.DESIGN : l ? ch.FIGJAM : ch.SLIDES
+      productType: s ? ProductType.DESIGN : l ? ProductType.FIGJAM : ProductType.SLIDES
     }, i);
   }, [s, l, e]);
   let {
@@ -308,7 +308,7 @@ export function $$Q9(e) {
         let r = t.error;
         let n = function (e) {
           if (e instanceof n4) return getI18nString("slides.properties_panel.rewrite_text.error.no_text_characters_found");
-          if (!(e instanceof G1 || e instanceof CortexErrorV2)) return getI18nString("slides.properties_panel.rewrite_text.error.default");
+          if (!(e instanceof CortexError || e instanceof CortexErrorV2)) return getI18nString("slides.properties_panel.rewrite_text.error.default");
           let t = {
             offline: getI18nString("slides.properties_panel.rewrite_text.error.connection"),
             meter_exceeded: getI18nString("slides.properties_panel.rewrite_text.error.rate_limit"),
@@ -323,7 +323,7 @@ export function $$Q9(e) {
             not_implemented: getI18nString("ai.error.not_implemented")
           };
           let r = "generic";
-          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
+          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof CortexError) switch (e.type) {
             case "content_length_limit_exceeded":
             case "meter_exceeded":
             case "rate_limit_exceeded":
@@ -484,17 +484,17 @@ export function $$el3([e, t]) {
   let r = [];
   let n = e => Math.abs(e);
   e < -$$W0 ? r.push({
-    tone: DE.CONCISE,
+    tone: ToneType.CONCISE,
     weight: n(e)
   }) : e > $$W0 && r.push({
-    tone: DE.EXPANDED,
+    tone: ToneType.EXPANDED,
     weight: n(e)
   });
   t < -$$W0 ? r.push({
-    tone: DE.CASUAL,
+    tone: ToneType.CASUAL,
     weight: n(t)
   }) : t > $$W0 && r.push({
-    tone: DE.PROFESSIONAL,
+    tone: ToneType.PROFESSIONAL,
     weight: n(t)
   });
   return r;
@@ -503,20 +503,20 @@ export function $$ed2(e) {
   return [(() => {
     let t = e.find(({
       tone: e
-    }) => e === DE.EXPANDED)?.weight;
+    }) => e === ToneType.EXPANDED)?.weight;
     if (t) return t;
     let r = e.find(({
       tone: e
-    }) => e === DE.CONCISE)?.weight;
+    }) => e === ToneType.CONCISE)?.weight;
     if (r) return -r;
   })() ?? 0, (() => {
     let t = e.find(({
       tone: e
-    }) => e === DE.PROFESSIONAL)?.weight;
+    }) => e === ToneType.PROFESSIONAL)?.weight;
     if (t) return t;
     let r = e.find(({
       tone: e
-    }) => e === DE.CASUAL)?.weight;
+    }) => e === ToneType.CASUAL)?.weight;
     if (r) return -r;
   })() ?? 0];
 }

@@ -18,7 +18,7 @@ import { v7 } from '../figma_app/475303';
 import { gk, tj } from '../figma_app/540726';
 import { isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { getInitialDynamicConfig } from '../figma_app/594947';
-import { I2 } from '../figma_app/603466';
+import { checkStackInvariants } from '../figma_app/603466';
 import { wo } from '../figma_app/753501';
 import { KeyboardLayout, EventTypeEnum, InsertErrorType, Fullscreen, PointerType, PanelType, DesignGraphElements, HTMLWindow, PageNavigation, ClipboardAction } from '../figma_app/763686';
 import { isMobileUA } from '../figma_app/778880';
@@ -1260,7 +1260,7 @@ class W {
       }
     }));
     this.viewElement.addEventListener('drop', G(e => {
-      if (e.preventDefault(), !I2(e)) {
+      if (e.preventDefault(), !checkStackInvariants(e)) {
         e.stopImmediatePropagation();
         return;
       }

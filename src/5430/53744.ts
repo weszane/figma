@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { MP, AU, nr, vW } from "../5430/908946";
-import { PF } from "../figma_app/930386";
+import { NavigationType } from "../figma_app/930386";
 export function $$a0(e) {
-  let t = e === PF.LANDING ? MP : AU;
-  let r = e === PF.LANDING ? nr : vW;
+  let t = e === NavigationType.LANDING ? MP : AU;
+  let r = e === NavigationType.LANDING ? nr : vW;
   let [a, l] = useAtomValueAndSetter(t);
   let [c, d] = useAtomValueAndSetter(r);
   let u = useMemo(() => ["files", "plugins", "widgets", "creators"].reduce((e, t) => {

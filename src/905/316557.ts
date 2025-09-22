@@ -39,7 +39,7 @@ import { useDebounce } from 'use-debounce';
 import { trackEventAnalytics } from "../905/449184";
 import { whiteColor, getColorBrightness } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { sw, rk } from "../figma_app/914957";
 import { Yr } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
@@ -506,7 +506,7 @@ function ex({
             x,
             y
           } = cn(t.current, jP);
-          i(u1({
+          i(showPickerThunk({
             id: eE,
             initialX: x,
             initialY: y
@@ -516,7 +516,7 @@ function ex({
         return !1;
       }, [e, t, i]),
       closeColorPicker: useCallback(() => {
-        i(XE());
+        i(hidePickerThunk());
       }, [i])
     };
   }(_, g);

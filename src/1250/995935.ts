@@ -74,7 +74,7 @@ import { h as _$$h } from "../905/142086";
 import { A6 } from "../905/350234";
 import { isCommunityResourceSubscriptionActive } from "../figma_app/4253";
 import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
-import { u1 } from "../figma_app/91703";
+import { showPickerThunk } from "../figma_app/91703";
 import { WX } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { bE } from "../figma_app/375098";
@@ -552,7 +552,7 @@ let t$ = {
         button: a ? void 0 : {
           buttonText: getI18nString("external_collaboration_restricted.banner.export_file"),
           onClick: () => {
-            n?.editorType === "design" ? t(u1({
+            n?.editorType === "design" ? t(showPickerThunk({
               id: C9
             })) : t(showModalHandler({
               type: _$$B,

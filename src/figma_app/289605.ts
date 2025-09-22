@@ -26,7 +26,7 @@ import { InspectState } from "../905/560959";
 import { g as _$$g } from "../905/246147";
 import { gs, ON, KP } from "../figma_app/31103";
 import { b as _$$b } from "../905/217163";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { u as _$$u, G6, Kd, BQ, t8, Xv, hg } from "../figma_app/852050";
 import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
@@ -631,7 +631,7 @@ function em({
   value: e,
   noChain: t
 }) {
-  let r = Ku();
+  let r = getColorFormat();
   let a = Ig();
   let s = _$$q(e.value, r, a, {
     alphaInPercent: !0

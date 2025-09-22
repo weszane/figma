@@ -253,7 +253,7 @@ export const XHR = {
     load: JSON.parse,
     withCredentials: false,
     timeout: 0,
-  } as XhrRequestSettings,
+  } as unknown as XhrRequestSettings,
   getDefaults: {} as XhrRequestSettings,
   crossOriginDefaults: {} as XhrRequestSettings,
   crossOriginGetDefaults: {} as XhrRequestSettings,

@@ -12,7 +12,7 @@ import { wK } from "../905/407352";
 import { useIsFullscreenOverview } from "../figma_app/88239";
 import { i as _$$i } from "../figma_app/85949";
 import { J } from "../905/445197";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
 import { Z } from "../905/104740";
 import { dh, $P } from "../figma_app/186343";
@@ -51,7 +51,7 @@ export function $$P2({
   let M = useRef(null);
   let P = Ht();
   let F = useSelector(e => e.versionHistory);
-  let B = getObservableOrFallback(UK().showGuids);
+  let B = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let {
     selectedPageIds,
     handleMultiselectClick,

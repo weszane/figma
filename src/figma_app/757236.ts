@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import a, { zw } from "../905/585727";
+import a, { ImageSourceType } from "../905/585727";
 import { assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../905/752260";
@@ -86,7 +86,7 @@ function k({
     addPromptToHistory
   } = _$$a(_$$i, e => e);
   let I = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-  let [N, C] = useState(zw.UNSPLASH);
+  let [N, C] = useState(ImageSourceType.UNSPLASH);
   let L = RL(JT.IMAGE_FILL, F1);
   let D = useMemo(() => {
     if (getFeatureFlags().aip_content_fill_image && I) {

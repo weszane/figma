@@ -21,8 +21,8 @@ import { getSelectedEditorType } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
-import { d as _$$d } from "../905/758967";
-import { UK } from "../figma_app/740163";
+import { getCanvasViewState } from "../905/758967";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { RF, oQ, DH } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
 import { BK } from "../905/848862";
@@ -50,9 +50,9 @@ function z({
     l("View Menu Opened");
   }, [l]);
   let u = getSelectedEditorType();
-  let p = getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
-  let _ = getObservableOrFallback(UK().activeCanvasPixelPreview);
-  let g = getObservableOrFallback(_$$d().activeCanvasRetinaMode);
+  let p = getObservableOrFallback(getCanvasViewState().activeCanvasCurrentZoom);
+  let _ = getObservableOrFallback(EditorPreferencesApi().activeCanvasPixelPreview);
+  let g = getObservableOrFallback(getCanvasViewState().activeCanvasRetinaMode);
   let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let E = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = useSelector(e => !!e.user);
@@ -70,15 +70,15 @@ function z({
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = getObservableOrFallback(AppStateTsApi.editorPreferences().showPropertyLabels);
   let X = getObservableOrFallback(AppStateTsApi.editorPreferences().showFrameGrids);
-  let q = getObservableOrFallback(_$$d().showFrameGridsViewOnly);
+  let q = getObservableOrFallback(getCanvasViewState().showFrameGridsViewOnly);
   let J = useIsCanvasEditDisabled();
   let Z = !J;
   let Q = Z ? "showFrameGrids" : "showFrameGridsViewOnly";
-  let ee = getObservableOrFallback(getFeatureFlags().figjam_snap_to_dot_grid_reset ? UK().snapToDotGridStagingReset : UK().snapToDotGrid);
-  let et = getObservableOrFallback(UK().snapToPixelGrid);
+  let ee = getObservableOrFallback(getFeatureFlags().figjam_snap_to_dot_grid_reset ? EditorPreferencesApi().snapToDotGridStagingReset : EditorPreferencesApi().snapToDotGrid);
+  let et = getObservableOrFallback(EditorPreferencesApi().snapToPixelGrid);
   let er = z ? et : ee;
-  let en = getObservableOrFallback(UK().showDotGrid);
-  let ei = getObservableOrFallback(UK().renderGrid);
+  let en = getObservableOrFallback(EditorPreferencesApi().showDotGrid);
+  let ei = getObservableOrFallback(EditorPreferencesApi().renderGrid);
   let ea = z ? ei : en;
   let es = z ? "renderGrid" : "showDotGrid";
   let eo = b;
@@ -158,7 +158,7 @@ function z({
     shortcut: c1(f, "toggle-rulers"),
     recordingKey: "renderRulers",
     hidden: !z,
-    isChecked: getObservableOrFallback(UK().renderRulers),
+    isChecked: getObservableOrFallback(EditorPreferencesApi().renderRulers),
     disabled: Zr("renderRulers")
   }, {
     type: "OUTLINES_MENU",
@@ -168,17 +168,17 @@ function z({
     children: [{
       type: "OUTLINES",
       shortcut: c1(f, "toggle-outlines"),
-      isChecked: getObservableOrFallback(_$$d().showOutlines),
+      isChecked: getObservableOrFallback(getCanvasViewState().showOutlines),
       recordingKey: "showOutlines"
     }, {
       type: "separator"
     }, {
       type: "OUTLINES_HIDDEN_LAYERS",
-      isChecked: getObservableOrFallback(_$$d().showOutlineHiddenLayers),
+      isChecked: getObservableOrFallback(getCanvasViewState().showOutlineHiddenLayers),
       recordingKey: "hiddenLayers"
     }, {
       type: "OUTLINES_OBJECT_BOUNDS",
-      isChecked: getObservableOrFallback(_$$d().showOutlineObjectBounds),
+      isChecked: getObservableOrFallback(getCanvasViewState().showOutlineObjectBounds),
       recordingKey: "objectBounds"
     }]
   }, {
@@ -265,7 +265,7 @@ function z({
     type: "SITES_SEMANTIC_LABELS",
     recordingKey: "sitesA11yAriaAttributes",
     hidden: !U || !getFeatureFlags().sts_a11y_layers_semantic_tags,
-    isChecked: getObservableOrFallback(UK().showSemanticTagsOnLayerRows)
+    isChecked: getObservableOrFallback(EditorPreferencesApi().showSemanticTagsOnLayerRows)
   }];
   let eu = useCallback(e => {
     Fullscreen.setCanvasZoomScale(e / 100);
@@ -531,7 +531,7 @@ export let $$K0 = memo(function ({
   recordingKey: e
 }) {
   let t = useRef(null);
-  let r = 100 * getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
+  let r = 100 * getObservableOrFallback(getCanvasViewState().activeCanvasCurrentZoom);
   let a = BK($$H);
   let [o, d] = useState(null);
   let {

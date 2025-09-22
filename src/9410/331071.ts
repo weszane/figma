@@ -346,17 +346,17 @@ import { S6, zY } from '../figma_app/664693';
 import { Zr } from '../figma_app/678782';
 import { getCurrentWorkspaceInfo } from '../figma_app/684168';
 import { bt } from '../figma_app/688194';
-import { G1 } from '../figma_app/691470';
+import { CortexError } from '../figma_app/691470';
 import { JZ } from '../figma_app/696043';
 import { ER, jF, K4, Ne, NT, pz, X4, Xy } from '../figma_app/702372';
-import { AR as _$$AR, Db } from '../figma_app/705029';
+import { MobileDesignComponentSchema, PromptSchema } from '../figma_app/705029';
 import { wY as _$$wY } from '../figma_app/708845';
 import { useSceneGraphSelector, useOnSelectionChange, useSceneGraphSelection, useAppModelProperty } from '../figma_app/722362';
 import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
 import { jR as _$$jR, k0 as _$$k5, N0, RO, Sb } from '../figma_app/728075';
 import { $L, mP, Sq } from '../figma_app/737746';
 import { FUSE_CONFIG_PROFILE, FUSE_CONFIG_COMMENT } from '../figma_app/740025';
-import { UK } from '../figma_app/740163';
+import { EditorPreferencesApi } from '../figma_app/740163';
 import { U as _$$U2 } from '../figma_app/751728';
 import { h as _$$h5 } from '../figma_app/752483';
 import { dG } from '../figma_app/753501';
@@ -2918,7 +2918,7 @@ function af(e) {
         let r = t.getItem(i);
         if (!r) return [];
         try {
-          return _$$z.array(Db).parse(JSON.parse(r));
+          return _$$z.array(PromptSchema).parse(JSON.parse(r));
         } catch {}
         return [];
       }(f.guid);
@@ -2978,7 +2978,7 @@ function af(e) {
             sendMetric('first_draft.client.make_changes.unsupported_action', {
               action: value.action.type
             });
-            E.push(Promise.reject(new G1('make_changes_unsupported', {})));
+            E.push(Promise.reject(new CortexError('make_changes_unsupported', {})));
             continue;
           }
           if (trackEventAnalytics('First Draft: Make Changes Prompt Action', {
@@ -2990,7 +2990,7 @@ function af(e) {
             mlEvent: !0
           }), value.action.type === 'iCantDoThis') {
             let e = value.action.rationaleCategory;
-            E.push(Promise.reject(new G1('make_changes_unsupported', {
+            E.push(Promise.reject(new CortexError('make_changes_unsupported', {
               rationaleCategory: e
             })));
           } else {
@@ -3009,7 +3009,7 @@ function af(e) {
           if (!E.length) {
             logWarning('makeChanges', 'No actions were applied from the prompt response');
             sendMetric('first_draft.client.make_changes.no_actions_applied');
-            return new G1('make_changes_unsupported', {});
+            return new CortexError('make_changes_unsupported', {});
           }
           if (e.every(e => e.status === 'rejected')) {
             for (let t of e) {
@@ -3037,7 +3037,7 @@ function af(e) {
       logWarning('makeChanges', 'Error', {
         error: a
       });
-      let e = a instanceof G1;
+      let e = a instanceof CortexError;
       let i = {
         ...r,
         timeElapsedMs: Date.now() - L,
@@ -3102,7 +3102,7 @@ function af(e) {
         error: C,
         customMessage: (e => {
           let t = getI18nString('first_draft.make_changes.i_cant_do_this');
-          if (e instanceof G1) {
+          if (e instanceof CortexError) {
             if (e.type === 'make_changes_moderated') return getI18nString('ai.error.unsafe_or_harmful');
             if (!getFeatureFlags().first_draft_make_changes_errors) return t;
             if (e.type === 'make_changes_unsupported' && e.data?.rationaleCategory) {
@@ -4305,7 +4305,7 @@ async function aH(e, t) {
       ...function (e) {
         if (!e) throw new Error('No content detected in GPT response');
         let t = JSON.parse(e.replace(/```json\n|```/g, ''));
-        let i = _$$AR.parse(t);
+        let i = MobileDesignComponentSchema.parse(t);
         return {
           isMobileDesign: i.isMobileDesign,
           components: i.components.reduce((e, t) => (e[t.guid] = t.name, e), {})
@@ -7876,7 +7876,7 @@ function oF({
   let {
     close
   } = cq();
-  let h = getObservableOrFallback(UK().showQuickCommandRankDebug);
+  let h = getObservableOrFallback(EditorPreferencesApi().showQuickCommandRankDebug);
   let m = useCanRunExtensions();
   let f = useAppModelProperty('keyboardShortcuts');
   let _ = useCallback(() => {

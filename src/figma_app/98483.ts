@@ -13,13 +13,13 @@ import { isNullish } from '../figma_app/95419';
 import { OU, vx } from '../figma_app/175258';
 import { Z } from '../figma_app/221818';
 import { M } from '../figma_app/634148';
-import { sT } from '../figma_app/740163';
+import { getNudgeAmounts } from '../figma_app/740163';
 import { dG } from '../figma_app/753501';
 import { a2 } from '../figma_app/762558';
 import { AppStateTsApi, Axis, DiagramElementType, Fullscreen, LayoutSizingMode, LayoutTabType, SceneGraphHelpers } from '../figma_app/763686';
 export function $$I3(e) {
   let t = useDispatch();
-  let r = sT();
+  let r = getNudgeAmounts();
   let {
     bigNudgeAmount,
     smallNudgeAmount
@@ -100,7 +100,7 @@ export function $$S6() {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   return {
     smallNudgeAmount,
     bigNudgeAmount,

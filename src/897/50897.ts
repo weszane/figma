@@ -16,7 +16,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _r, el } from "../figma_app/451499";
 import { isSitesFileType } from "../figma_app/976749";
-import { EU } from "../figma_app/740163";
+import { getSmallNudgeAmount } from "../figma_app/740163";
 import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { Um as _$$Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
@@ -255,7 +255,7 @@ export function $$q2({
 }) {
   let d = useDispatch();
   let h = _$$Um();
-  let T = EU();
+  let T = getSmallNudgeAmount();
   let w = useAtomWithSubscription(_$$x);
   let P = (t, n) => {
     let i = e.easingFunction;

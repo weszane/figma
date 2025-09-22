@@ -2,7 +2,7 @@ import { LayoutTabType } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { getSelectedViewPluginVersions } from "../figma_app/740025";
 import { updateActiveTextReviewPlugin } from "../figma_app/741237";
-import { Qx, IM, fS, It } from "../figma_app/603466";
+import { runSpellCheckCallback, hasSpellCheckCallback, hasPluginPageLoadedCallback, runPluginPageLoadedCallback } from "../figma_app/603466";
 import { canRunPlugin } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { hM } from "../905/851937";
@@ -17,14 +17,14 @@ let h = class {
     this.reviewText = async e => {
       if (hM() && SH()?.command !== "textreview") return [];
       this.startTextReviewPlugin();
-      let t = Qx(e);
+      let t = runSpellCheckCallback(e);
       let i = await Promise.race([t, new Promise(e => {
         setTimeout(() => e("timeout"), 3e3);
       })]);
       let n = SH()?.plugin;
       let r = n && hasLocalFileId(n);
       if ("timeout" === i) {
-        if (!IM()) {
+        if (!hasSpellCheckCallback()) {
           handlePluginError(r ? "Text review plugins must call on('textreview') upon running" : void 0);
           return [];
         }
@@ -39,7 +39,7 @@ let h = class {
     };
   }
   async onExitTextEditMode() {
-    this.onExitTextEditModeCallbackCalled || (this.onExitTextEditModeCallbackCalled = !0, fS() && !(await It()) && updateActiveTextReviewPlugin(null), handlePluginError());
+    this.onExitTextEditModeCallbackCalled || (this.onExitTextEditModeCallbackCalled = !0, hasPluginPageLoadedCallback() && !(await runPluginPageLoadedCallback()) && updateActiveTextReviewPlugin(null), handlePluginError());
   }
   startTextReviewPlugin() {
     if (this.runningPlugin) return;

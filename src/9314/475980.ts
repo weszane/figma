@@ -42,7 +42,7 @@ import { Nu } from '../figma_app/23780';
 import { dGl, jNX, uj0 } from '../figma_app/27776';
 import { useLatestRef } from '../figma_app/922077';
 import { formatFontMetrics } from '../figma_app/80990';
-import { XE } from '../figma_app/91703';
+import { hidePickerThunk } from '../figma_app/91703';
 import { Bs } from '../figma_app/229710';
 import { c$, ms, wv } from '../figma_app/236327';
 import { mapTypeToStyleKey } from '../figma_app/276332';
@@ -406,7 +406,7 @@ function eu({
         styleIds: new Set(E.node_id)
       }));
     }
-    M(XE());
+    M(hidePickerThunk());
   }, [M, m, R, E, Y]);
   let H = useCallback(e => {
     (e.button === 2 || e.ctrlKey) && T(F.current);
@@ -623,7 +623,7 @@ function eC({
         rowTop: t.top,
         rowLeft: t.left
       }));
-      f(XE());
+      f(hidePickerThunk());
     }
     a(l);
   }, [f, t, a, e]);
@@ -1173,7 +1173,7 @@ function ez({
     return d;
   }, [l]);
   let ea = useCallback(() => {
-    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
+    W.isShown && (z(sw()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [z, W.isShown]);
   let ei = useMemo(() => {
     if (!Q) return null;
@@ -1347,7 +1347,7 @@ function ez({
       return t;
     }));
     fullscreenValue.triggerAction('commit');
-    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
+    W.isShown && (z(sw()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
     P(null);
   }, [W.isShown, P, q, l, U?.key, X, z]);
   let eb = useMemo(() => {

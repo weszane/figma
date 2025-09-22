@@ -12,7 +12,7 @@ import { Y } from "../905/347011";
 import { d as _$$d } from "../figma_app/307143";
 import { ac } from "../905/930279";
 import { t$ } from "../figma_app/863319";
-import { jm } from "../905/697795";
+import { userHasPlan } from "../905/697795";
 import { ud } from "../905/862913";
 import { nb, Tf } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
@@ -52,7 +52,7 @@ export function $$I0({
     });
     let a = t ? Tf.getOrgId(t) : null;
     let s = t ? Tf.getFavoriteResourceTeamId(t) : null;
-    let o = jm(a, s);
+    let o = userHasPlan(a, s);
     let l = Y(n ?? "", FEntityType.FILE, a, s);
     let d = pH(e?.key ?? "", {
       enabled: !!e && i.pinToWorkspace

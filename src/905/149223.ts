@@ -12,12 +12,12 @@ import { selectWithShallowEqual } from "../905/103090";
 import { RecordingPureComponent, setupPlayback } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { Yi } from "../figma_app/933328";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { paintManager, isGradientType, validateGradientPaint } from "../figma_app/385874";
 import { lJ } from "../905/275640";
@@ -54,7 +54,7 @@ class M extends RecordingPureComponent {
     this.paintPickerSessionId = generateUUIDv4();
     this.onClose = setupPlayback(this, "close", () => {
       this.props.currentTool === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null);
-      this.props.onClose ? this.props.onClose() : this.props.dispatch(XE());
+      this.props.onClose ? this.props.onClose() : this.props.dispatch(hidePickerThunk());
       this.paintRef.current && d9(this.paintRef.current, this.paintPickerSessionId);
       fullscreenValue.deselectProperty();
     });
@@ -247,7 +247,7 @@ export function $$j1({
   positioningProps: V
 }) {
   let G = useDispatch();
-  let z = Ku();
+  let z = getColorFormat();
   let H = selectCurrentFile();
   let {
     currentTool,
@@ -340,7 +340,7 @@ class U extends RecordingPureComponent {
       let i = this.modalRef.current;
       if (!i || i.contains(t)) return;
       let n = document.querySelectorAll(".container-view");
-      !this.props.closeOnClickOutside && [...n].some(e => e.contains(t)) || debugState.dispatch(XE());
+      !this.props.closeOnClickOutside && [...n].some(e => e.contains(t)) || debugState.dispatch(hidePickerThunk());
     };
   }
   componentDidMount() {

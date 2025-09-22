@@ -1,45 +1,117 @@
-import { trackFileEvent } from "../figma_app/314264";
-let i = {
-  opens_music_dropdown: "opens_music_dropdown",
-  toggles_mute: "toggles_mute",
-  changes_song: "changes_song",
-  changes_volume: "changes_volume",
-  removes_song: "removes_song",
-  plays_song: "plays_song",
-  stops_song: "stops_song"
-};
-let a = (e, t, r, i) => {
-  trackFileEvent(e, t.openFile?.key, t, {
-    ...r,
-    multiplayer_count: t.multiplayer.allUsers.length
-  }, i);
-};
-let $$s1 = e => a(i.opens_music_dropdown, e);
-let $$o4 = (e, t, r) => a(i.changes_song, e, {
-  song_id: t,
-  isPlaying: r
-});
-let $$l0 = (e, t) => a(i.removes_song, e, {
-  song_id: t
-});
-let $$d6 = (e, t) => a(i.toggles_mute, e, {
-  isMuted: t
-});
-let $$c3 = (e, t) => a(i.changes_volume, e, {
-  volume: t
-});
-let $$u5 = (e, t) => a(i.plays_song, e, {
-  song_id: t
-}, {
-  forwardToDatadog: !0
-});
-let $$p2 = (e, t) => a(i.stops_song, e, {
-  song_id: t
-});
-export const $B = $$l0;
-export const eT = $$s1;
-export const fx = $$p2;
-export const qV = $$c3;
-export const tU = $$o4;
-export const xf = $$u5;
-export const ym = $$d6;
+import { trackFileEvent } from '../figma_app/314264'
+
+/**
+ * Enum for music event types.
+ * (original: i)
+ */
+enum MusicEventType {
+  OpensMusicDropdown = 'opens_music_dropdown',
+  TogglesMute = 'toggles_mute',
+  ChangesSong = 'changes_song',
+  ChangesVolume = 'changes_volume',
+  RemovesSong = 'removes_song',
+  PlaysSong = 'plays_song',
+  StopsSong = 'stops_song',
+}
+
+/**
+ * Tracks a music-related file event.
+ * @param eventType - Type of music event.
+ * @param fileContext - File context object.
+ * @param eventData - Additional event data.
+ * @param options - Optional tracking options.
+ * (original: a)
+ */
+function trackMusicEvent(eventType: MusicEventType, fileContext: any, eventData: Record<string, any> = {}, options?: Record<string, any>) {
+  trackFileEvent(
+    eventType,
+    fileContext.openFile?.key,
+    fileContext,
+    {
+      ...eventData,
+      multiplayer_count: fileContext.multiplayer.allUsers.length,
+    },
+    options,
+  )
+}
+
+/**
+ * Tracks opening the music dropdown.
+ * (original: $$s1)
+ */
+export function trackOpensMusicDropdown(fileContext: any) {
+  return trackMusicEvent(MusicEventType.OpensMusicDropdown, fileContext)
+}
+
+/**
+ * Tracks changing the song.
+ * (original: $$o4)
+ */
+export function trackChangesSong(fileContext: any, songId: string, isPlaying: boolean) {
+  return trackMusicEvent(MusicEventType.ChangesSong, fileContext, {
+    song_id: songId,
+    isPlaying,
+  })
+}
+
+/**
+ * Tracks removing a song.
+ * (original: $$l0)
+ */
+export function trackRemovesSong(fileContext: any, songId: string) {
+  return trackMusicEvent(MusicEventType.RemovesSong, fileContext, {
+    song_id: songId,
+  })
+}
+
+/**
+ * Tracks toggling mute.
+ * (original: $$d6)
+ */
+export function trackTogglesMute(fileContext: any, isMuted: boolean) {
+  return trackMusicEvent(MusicEventType.TogglesMute, fileContext, {
+    isMuted,
+  })
+}
+
+/**
+ * Tracks changing the volume.
+ * (original: $$c3)
+ */
+export function trackChangesVolume(fileContext: any, volume: number) {
+  return trackMusicEvent(MusicEventType.ChangesVolume, fileContext, {
+    volume,
+  })
+}
+
+/**
+ * Tracks playing a song.
+ * (original: $$u5)
+ */
+export function trackPlaysSong(fileContext: any, songId: string) {
+  return trackMusicEvent(
+    MusicEventType.PlaysSong,
+    fileContext,
+    { song_id: songId },
+    { forwardToDatadog: true },
+  )
+}
+
+/**
+ * Tracks stopping a song.
+ * (original: $$p2)
+ */
+export function trackStopsSong(fileContext: any, songId: string) {
+  return trackMusicEvent(MusicEventType.StopsSong, fileContext, {
+    song_id: songId,
+  })
+}
+
+// Refactored exports to match new function names
+export const $B = trackRemovesSong
+export const eT = trackOpensMusicDropdown
+export const fx = trackStopsSong
+export const qV = trackChangesVolume
+export const tU = trackChangesSong
+export const xf = trackPlaysSong
+export const ym = trackTogglesMute

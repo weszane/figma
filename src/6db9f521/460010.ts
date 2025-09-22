@@ -61,7 +61,7 @@ import { Button, ButtonLarge, ButtonWide } from "../905/521428";
 import { ScrollContainer } from "../905/143421";
 import { x as _$$x } from "../905/764527";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError } from "../figma_app/316567";
 import { Z as _$$Z } from "../905/829242";
 import { Ay as _$$Ay, c6 } from "../figma_app/432652";
@@ -237,11 +237,11 @@ import { K as _$$K4 } from "../6388/341838";
 import { Ah } from "../6388/574648";
 import { getAtomMutate } from "../figma_app/566371";
 import { yZ } from "../905/407352";
-import { lu as _$$lu, b_, oE as _$$oE } from "../figma_app/840917";
+import { autosaveFileInfoAtom, renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { DF as _$$DF } from "../figma_app/146384";
 import { useSprigWithSampling } from "../905/99656";
 import { iT as _$$iT } from "../figma_app/74165";
-import { sT as _$$sT, Ku } from "../figma_app/740163";
+import { getNudgeAmounts, getColorFormat } from "../figma_app/740163";
 import { Xo } from "../figma_app/482495";
 import { L as _$$L } from "../642/269105";
 import { o as _$$o3 } from "../642/854123";
@@ -353,7 +353,7 @@ import { r as _$$r5 } from "../905/571562";
 import { n3 as _$$n5, VariableStyleId as _$$IA } from "../905/859698";
 import { waitForAnimationFrame } from "../905/236856";
 import { useLatestRef } from "../figma_app/922077";
-import { XE, Uv, bS } from "../figma_app/91703";
+import { hidePickerThunk, hideStylePicker, showStylePicker } from "../figma_app/91703";
 import { TK } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Xo as _$$Xo, kO } from "../figma_app/687767";
@@ -983,7 +983,7 @@ let eU = async ({
       }
     }
   } catch (e) {
-    t.signal.aborted ? eM("Outline generation stopped") : e instanceof CortexErrorV2 ? (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) && eF(eV) : e instanceof G1 && ("unsafe_or_harmful_content" === e.type ? eF(eV) : eF(eK));
+    t.signal.aborted ? eM("Outline generation stopped") : e instanceof CortexErrorV2 ? (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) && eF(eV) : e instanceof CortexError && ("unsafe_or_harmful_content" === e.type ? eF(eV) : eF(eK));
     resetOutline();
   }
 };
@@ -6343,8 +6343,8 @@ function oN({
   });
   let j = useHandleFocusEvent(generateRecordingKey("createStyleModal"), "submit", () => {
     let t = createStyle();
-    o(XE());
-    o(Uv());
+    o(hidePickerThunk());
+    o(hideStylePicker());
     o(_$$sw());
     AppStateTsApi?.slideThemeLibBindings().addStyleToLocalTheme(t ?? "", i);
     e();
@@ -6459,10 +6459,10 @@ function oU({
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
         onClick: () => {
-          if (d) u(Uv());else if (e.current) {
+          if (d) u(hideStylePicker());else if (e.current) {
             let t = e.current.getBoundingClientRect();
             u(_$$sw());
-            u(bS({
+            u(showStylePicker({
               id: OS("inheritTextStyleKey"),
               initialX: t.left - t.width - 4,
               initialY: t.top,
@@ -6531,7 +6531,7 @@ function o$({
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
               });
-              d(Uv());
+              d(hideStylePicker());
               let e = f.current.getBoundingClientRect();
               v({
                 styleType: StyleType.TEXT,
@@ -6760,7 +6760,7 @@ function oq({
   let [c, u] = useState(!1);
   let p = _$$it();
   let x = useCallback(() => {
-    o(Uv());
+    o(hideStylePicker());
     u(!1);
   }, [o]);
   let h = useCallback(() => {
@@ -7091,7 +7091,7 @@ function o5({
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let f = useSelector(e => e.mirror.selectionProperties.fontVariations);
   let j = p ? LM({
     fontFamily: p,
@@ -7783,7 +7783,7 @@ function dv({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   return jsx(dT, {
     children: jsx(YZ, {
       bigNudgeAmount,
@@ -7861,7 +7861,7 @@ function dO({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = _$$sT();
+  } = getNudgeAmounts();
   let u = useMemo(() => new dC({
     min: 0,
     smallNudgeAmount,
@@ -9026,7 +9026,7 @@ function cF({
   });
 }
 let cU = memo(function () {
-  let e = Ku();
+  let e = getColorFormat();
   let t = selectCurrentFile();
   let i = Um();
   let n = Xo();
@@ -9204,7 +9204,7 @@ function cB() {
 function cz() {
   !function () {
     let e = selectCurrentFile();
-    let t = useAtomWithSubscription(_$$lu);
+    let t = useAtomWithSubscription(autosaveFileInfoAtom);
     (function (e, t) {
       let i = e?.name || t?.name;
       let n = !!i && i !== getI18nString("fullscreen.filename_view.title_placeholder");
@@ -9227,14 +9227,14 @@ function cz() {
       let n = useRef(t);
       n.current = t;
       let r = useDispatch();
-      let a = getAtomMutate(b_);
+      let a = getAtomMutate(renameAutosaveFileMutation);
       let o = selectCurrentUser();
       let d = yZ();
       let c = useMemo(() => !o || !d || !_$$DF(e, o), [o, d, e]);
       return useCallback(e => {
         !c && (!i.current && n.current ? a({
           fileKey: n.current.fileKey,
-          source: _$$oE.EDITOR,
+          source: OfflineFileType.EDITOR,
           name: e
         }) : i.current && r(renameFileOptimistic({
           file: i.current,

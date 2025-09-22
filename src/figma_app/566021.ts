@@ -31,7 +31,7 @@ import { Label } from "../905/270045";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { _P, k4 } from "../figma_app/164212";
 import { Tv } from "../figma_app/151869";
 import { Ao } from "../905/748636";
@@ -323,7 +323,7 @@ function X({
     initialPosition: p,
     initialWidth: Im,
     onClose: () => {
-      t(XE());
+      t(hidePickerThunk());
     },
     scrollOverflow: !1,
     title: _,

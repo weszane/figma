@@ -2,11 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { lV } from "../figma_app/617606";
 import { throwTypeError } from "../figma_app/465776";
-import { w as _$$w } from "../figma_app/970433";
 import { Fullscreen, ChatMessageType } from "../figma_app/763686";
 import { ClipboardContentType, ChatRole } from "../figma_app/175377";
 import { permissionScopeHandler } from "../905/189185";
-import { Ns } from "../figma_app/686647";
+import { design_editor } from "../figma_app/686647";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -674,8 +673,8 @@ export function $$X0() {
     let f = new h({
       trackingContext: y,
       tools: {
-        [Ns.name]: _$$w({
-          ...Ns,
+        [design_editor.name]: {
+          ...design_editor,
           executeWithTrackingContext: (e, t) => nR({
             params: {
               userInput: {
@@ -698,7 +697,7 @@ export function $$X0() {
             },
             abortController: d
           })
-        })
+        }
       },
       clientDependencies: {
         streamResponse: e => Ay.shared.aiAssistantChat(e, {

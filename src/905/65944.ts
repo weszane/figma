@@ -23,11 +23,11 @@ import { ErrorBoundaryCrash } from "../905/751457";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ZI } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
-import { XE } from "../figma_app/91703";
+import { hidePickerThunk } from "../figma_app/91703";
 import { Yl } from "../905/232641";
 import { isSitesFileType } from "../figma_app/976749";
 import { Ep } from "../figma_app/504823";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { isSolidType, isGradientType, getContrastingColor, validateGradientPaint, checkIfAnyEffectVisible, anchorPositionFromAlignment, alignmentFromAnchorPosition, getSolidPaint, getColorAtStop, getImageOrVideoPaint, getPatternPaint, getNoisePaint } from "../figma_app/385874";
 import { Um } from "../905/848862";
 import { useCurrentTool, useSceneGraphSelector, useAppModelPropsShallow } from "../figma_app/722362";
@@ -2216,7 +2216,7 @@ export function $$io0({
 }) {
   let v = useDispatch();
   let I = Um();
-  let S = Ku();
+  let S = getColorFormat();
   let C = useCurrentTool();
   let T = useMemo(() => f ? ["custom_color", "library"] : ["custom_color"], [f]);
   let [R, N, P] = _$$t.useTabs({
@@ -2256,7 +2256,7 @@ export function $$io0({
   }
   let Y = useSetupPlayback(h || "color_picker", "close", useCallback(() => {
     EyedropperBindings?.toggleOffEyedropper();
-    _ ? _() : v(XE());
+    _ ? _() : v(hidePickerThunk());
   }, [_, v]));
   ie(C, T, P.setActiveTab, !1);
   return jsxs(_$$k2, {

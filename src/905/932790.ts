@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { $7, Sy, yq, Ao, CN, Wz } from "../figma_app/651866";
 import { LI, qk, xK } from "../905/543466";
-import { zw } from "../905/585727";
+import { ImageSourceType } from "../905/585727";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
@@ -261,7 +261,7 @@ export let $$B0 = async ({
       borderRadiusStyle: _$$b(t)
     })), await xS({
       node: t,
-      modelType: zw.IMAGEN_3,
+      modelType: ImageSourceType.IMAGEN_3,
       clientLifecycleId: i,
       abortController: e
     }).finally(() => ks(t.guid)))));

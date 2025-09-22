@@ -13,7 +13,7 @@ import { v as _$$v } from "../905/50227";
 import { OX } from "../905/232489";
 import { lW } from "../figma_app/11182";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { u as _$$u, hg } from "../figma_app/852050";
@@ -237,12 +237,12 @@ export function $$j12(e) {
     return e.map(e => void 0 === e ? "" : "string" == typeof e ? e : `${$$R6(e)}px`);
   }
   e.useStrokeCopyValue = function (e, t, r) {
-    let n = Ku();
+    let n = getColorFormat();
     let a = _(t);
     return useMemo(() => m(n, e, a, r), [n, e, a, r]);
   };
   e.useCopyAllStrokes = function (e) {
-    let t = Ku();
+    let t = getColorFormat();
     return useMemo(() => e.map(e => m(t, e.strokeWeight, e.strokeColors, e.borderCSSKey)).join("\n"), [t, e]);
   };
   e.withPixels = f;
@@ -266,7 +266,7 @@ export function $$j12(e) {
     });
   };
   e.useCopyAllShadows = function (e) {
-    let t = Ku();
+    let t = getColorFormat();
     let r = OE(e, e => e.color);
     let n = e.flatMap(e => [e.xVar, e.yVar, e.radiusVar, e.spreadVar, e.colorVar]).map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0);
     let a = hg(n ?? []);

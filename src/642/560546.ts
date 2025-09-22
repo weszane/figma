@@ -10,7 +10,7 @@ import { e as _$$e, v as _$$v } from "../642/135773";
 import { o as _$$o2 } from "../905/96108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { TI } from "../905/713722";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
@@ -143,7 +143,7 @@ export function $$F0({
               x,
               y
             } = cn(r.current, l ? jP : pg);
-            a(u1({
+            a(showPickerThunk({
               id: t,
               initialX: x - 16,
               initialY: y
@@ -154,7 +154,7 @@ export function $$F0({
       }, [t, s, a, r, l, c]),
       closeColorPicker: useCallback(() => {
         d === LayoutTabType.GRADIENT && fullscreenValue.triggerAction("leave-edit-mode");
-        a(XE());
+        a(hidePickerThunk());
       }, [a, d])
     };
   }(e, d, m, g, x);

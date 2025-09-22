@@ -68,7 +68,7 @@ import { Ay as _$$Ay } from "../vendor/917855";
 import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { A as _$$A } from "../7a72fc59/43307";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { getSolidPaint, hashToHexString } from "../figma_app/385874";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { S7 } from "../figma_app/259578";
@@ -77,7 +77,7 @@ import { tb as _$$tb } from "../figma_app/703447";
 import { O as _$$O2 } from "../905/969533";
 import { permissionScopeHandler } from "../905/189185";
 import { h as _$$h2 } from "../905/207101";
-import { u1, XE } from "../figma_app/91703";
+import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { Qr } from "../905/690539";
 import { Xo } from "../figma_app/482495";
 import { pn as _$$pn } from "../905/714538";
@@ -699,7 +699,7 @@ function eF({
 }) {
   let n = e ? isInvalidValue(e) ? eU : e : eU;
   let r = getSolidPaint(n);
-  let a = Ku();
+  let a = getColorFormat();
   let {
     currentTool,
     dropdownShown
@@ -834,7 +834,7 @@ function e9() {
       } = VZ(d.current, n);
       let r = container.getBoundingClientRect();
       x < r.left ? o = r.left : x + n > r.left + container.clientWidth && (o = r.left + container.clientWidth - n);
-      u(u1({
+      u(showPickerThunk({
         id: t,
         initialX: x,
         initialY: y + 16
@@ -842,7 +842,7 @@ function e9() {
     }
   }, [container, u, d]);
   let _ = useCallback(() => {
-    u(XE());
+    u(hidePickerThunk());
   }, [u]);
   let b = useCallback(() => {
     s(!l);

@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { MM, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
@@ -221,7 +221,7 @@ function L({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let _ = useDispatch();
   let A = Ww(t);
   let E = useMemo(() => [function (e) {

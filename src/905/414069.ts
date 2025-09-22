@@ -1,38 +1,79 @@
-import { debugState } from "../905/407919";
-import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { VisualBellActions } from "../905/302958";
-import { subscribeObservable } from "../figma_app/84367";
-import { fullscreenValue } from "../figma_app/455680";
-import { N } from "../905/293182";
-let d = !1;
-export function $$c2(e) {
-  d = !0;
+import { getElapsedTime } from '../905/293182'
+import { VisualBellActions } from '../905/302958'
+import { debugState } from '../905/407919'
+import { subscribeObservable } from '../figma_app/84367'
+import { fullscreenValue } from '../figma_app/455680'
+import { isInteractionOrEvalMode } from '../figma_app/897289'
+
+/**
+ * Tracks whether a protected execution block is running.
+ * (original variable: d)
+ */
+let isProtectedExecution = false
+
+/**
+ * Executes a function within a protected block, setting a flag during execution.
+ * @param fn - Function to execute
+ * (original function: $$c2)
+ */
+export function runProtected(fn: () => void): void {
+  isProtectedExecution = true
   try {
-    e();
-  } finally {
-    d = !1;
+    fn()
+  }
+  finally {
+    isProtectedExecution = false
   }
 }
-export function $$u1() {
-  if (isInteractionOrEvalMode()) return !0;
-  if (d) return !1;
-  let e = fullscreenValue.fileLoadTime();
-  if (null == e) return !1;
-  let t = window.performance.now() - e;
-  return !(t > 0 && t < 1e3 || 1e3 > N());
+
+/**
+ * Determines if settings changes should be processed based on app mode and timing.
+ * @returns boolean
+ * (original function: $$u1)
+ */
+export function shouldProcessSettingsChange(): boolean {
+  if (isInteractionOrEvalMode())
+    return true
+  if (isProtectedExecution)
+    return false
+  const fileLoadTime = fullscreenValue.fileLoadTime()
+  if (fileLoadTime == null)
+    return false
+  const elapsed = window.performance.now() - fileLoadTime
+  return !(elapsed > 0 && elapsed < 1000 || getElapsedTime() < 1000)
 }
-export function $$p0(e) {
-  for (let t of e) subscribeObservable(t.getObservable(), {
-    onChangeImmediate() {
-      if (!$$u1()) return;
-      let e = t.getMessage(t.getObservable().getCopy());
-      e && debugState.dispatch(VisualBellActions.enqueue({
-        type: "settings_changed",
-        ...e
-      }));
-    }
-  });
+
+/**
+ * Subscribes to observables and dispatches a visual bell action when settings change.
+ * @param items - Array of objects with getObservable and getMessage methods
+ * (original function: $$p0)
+ */
+export function subscribeSettingsChange(
+  items: Array<{
+    getObservable: () => { getCopy: () => unknown }
+    getMessage: (copy: unknown) => Record<string, unknown> | null
+  }>,
+): void {
+  for (const item of items) {
+    subscribeObservable(item.getObservable(), {
+      onChangeImmediate() {
+        if (!shouldProcessSettingsChange())
+          return
+        const message = item.getMessage(item.getObservable().getCopy())
+        if (message) {
+          debugState.dispatch(
+            VisualBellActions.enqueue({
+              type: 'settings_changed',
+              ...message,
+            }),
+          )
+        }
+      },
+    })
+  }
 }
-export const Mo = $$p0;
-export const Ok = $$u1;
-export const WK = $$c2;
+
+// Export refactored names for compatibility
+export const Mo = subscribeSettingsChange
+export const Ok = shouldProcessSettingsChange
+export const WK = runProtected

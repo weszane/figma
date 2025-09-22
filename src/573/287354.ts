@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
@@ -61,7 +61,7 @@ function S({
     transform: `translate(${o}px, ${l}px)`
   };
   let c = useSelector(e => e.mirror?.appModel.showUi);
-  let u = getObservableOrFallback(UK().renderRulers) && c ? k : 0;
+  let u = getObservableOrFallback(EditorPreferencesApi().renderRulers) && c ? k : 0;
   let p = {
     x: -3.5 + u,
     y: -3.5 + u,
@@ -157,7 +157,7 @@ function w({
   l.x -= r / 2;
   l.y -= i / 2;
   let c = useSelector(e => e.mirror?.appModel.showUi);
-  let p = getObservableOrFallback(UK().renderRulers) && c ? k : 0;
+  let p = getObservableOrFallback(EditorPreferencesApi().renderRulers) && c ? k : 0;
   let g = 1 + p;
   let y = Math.max(g, t.width - 1 - r);
   let f = 1 + p;

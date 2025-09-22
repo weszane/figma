@@ -1,5 +1,5 @@
 import { ChatMessageType } from "../figma_app/763686";
-import { gB, rU, z7 } from "../figma_app/383733";
+import { ToolCallSchema, ToolCallUnionSchema, ToolCallResultSchema } from "../figma_app/383733";
 import { debug } from "../figma_app/465776";
 export function $$s14(e) {
   switch (e.type) {
@@ -78,10 +78,10 @@ function c(e, t) {
   return n.success ? n.data : null;
 }
 export function $$u8(e) {
-  return c(e, gB);
+  return c(e, ToolCallSchema);
 }
 export function $$p15(e) {
-  return c(e, rU);
+  return c(e, ToolCallUnionSchema);
 }
 export function $$_9(e) {
   let t = {
@@ -89,7 +89,7 @@ export function $$_9(e) {
     toolName: e.toolName,
     result: d(e.resultJson)
   };
-  let r = z7.safeParse(t);
+  let r = ToolCallResultSchema.safeParse(t);
   return r.success ? r.data : null;
 }
 export function $$h2(e) {

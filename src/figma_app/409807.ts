@@ -22,7 +22,7 @@ import { getI18nString } from "../905/303541";
 import { ak } from "../figma_app/8833";
 import { PZ, Lk } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue, arrayOrMixed, normalizeValue, AUTO_MARKER, isInvalidValue } from "../905/216495";
 import { M as _$$M3 } from "../figma_app/634148";
 import { zj, lJ, kl } from "../905/275640";
@@ -281,7 +281,7 @@ export function $$el23(e, t) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   return useMemo(() => new $$eS17({
     min: getFeatureFlags().editor_zero_width_input ? ak : 0,
     smallNudgeAmount,
@@ -293,7 +293,7 @@ export function $$ed12(e) {
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   return useMemo(() => new ev({
     min: "max" === e.minOrMax ? 1 : 0,
     smallNudgeAmount,

@@ -6,7 +6,7 @@ import o, { O4 } from "../905/777187";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { AUTO_MARKER, isAutoMarker } from "../905/216495";
-import { bA, _q } from "../905/668764";
+import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 export class $$p5 extends Error {
   constructor(e, t) {
     super(`${e}: ${t}`);
@@ -52,10 +52,10 @@ export class $$_3 {
     return this.options.max ?? this.defaultMax;
   }
   smallNudgeAmount() {
-    return this.options.smallNudgeAmount ?? bA;
+    return this.options.smallNudgeAmount ?? DEFAULT_FINE_NUDGE;
   }
   bigNudgeAmount() {
-    return this.options.bigNudgeAmount ?? _q;
+    return this.options.bigNudgeAmount ?? DEFAULT_COARSE_NUDGE;
   }
   preProcessForExpressionEvaluation(e) {
     return e.replace(RegExp(this.allowedUnits, "g"), "").replace(/[\u0660-\u0669]/g, e => "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669".indexOf(e).toString()).replace(/[\u06F0-\u06F9]/g, e => "\u06F0\u06F1\u06F2\u06F3\u06F4\u06F5\u06F6\u06F7\u06F8\u06F9".indexOf(e).toString()).replace(/\u066B/g, ",").replace(/\u066C/g, ",").replace(/\u060C/g, ",");
@@ -394,8 +394,8 @@ export class $$O13 {
   constructor(e) {
     this.min = e.min;
     this.max = e.max;
-    this.bigPixelNudgeAmount = e.bigPixelNudgeAmount || _q;
-    this.smallPixelNudgeAmount = e.smallPixelNudgeAmount || bA;
+    this.bigPixelNudgeAmount = e.bigPixelNudgeAmount || DEFAULT_COARSE_NUDGE;
+    this.smallPixelNudgeAmount = e.smallPixelNudgeAmount || DEFAULT_FINE_NUDGE;
     this.bigPercentageNudgeAmount = e.bigPercentageNudgeAmount || 10;
     this.smallPercentageNudgeAmount = e.smallPercentageNudgeAmount || 1;
   }
@@ -446,16 +446,16 @@ export class $$O13 {
   }
 }
 export let $$R20 = new $$O13({
-  bigPixelNudgeAmount: _q,
-  smallPixelNudgeAmount: bA
+  bigPixelNudgeAmount: DEFAULT_COARSE_NUDGE,
+  smallPixelNudgeAmount: DEFAULT_FINE_NUDGE
 });
 export class $$L1 extends $$O13 {
   constructor(e = {}) {
     super({
       min: e.min,
       max: e.max,
-      smallPixelNudgeAmount: e.smallPixelNudgeAmount || bA,
-      bigPixelNudgeAmount: e.bigPixelNudgeAmount || _q,
+      smallPixelNudgeAmount: e.smallPixelNudgeAmount || DEFAULT_FINE_NUDGE,
+      bigPixelNudgeAmount: e.bigPixelNudgeAmount || DEFAULT_COARSE_NUDGE,
       smallPercentageNudgeAmount: e.smallPercentageNudgeAmount || 1,
       bigPercentageNudgeAmount: e.bigPercentageNudgeAmount || 10
     });

@@ -11,7 +11,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/376628";
-import { FP } from "../figma_app/91703";
+import { setLeftPanelTab } from "../figma_app/91703";
 import { nE, fR, am } from "../figma_app/430563";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
@@ -168,7 +168,7 @@ function j({
           forwardToDatadog: !0
         });
         let t = e.libraryKey;
-        getAllAssetsArray(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(FP({
+        getAllAssetsArray(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(setLeftPanelTab({
           tab: UserInterfaceElements.ASSETS
         }));
       } else trackEventAnalytics("Library File Disabled", {

@@ -35,7 +35,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _j } from "../figma_app/843119";
 import { U as _$$U2 } from "../905/492359";
-import { XE, u1, Uv, Y as _$$Y2, bS } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk, hideStylePicker, stylePickerViewChangedThunk, showStylePicker } from "../figma_app/91703";
 import { AV, nh } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D, w as _$$w } from "../905/295712";
@@ -47,7 +47,7 @@ import { C1, rC } from "../905/713722";
 import { ZB } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isAutoMarker, isInvalidValue } from "../905/216495";
 import { isSolidType, paintManager, defaultGrayColor } from "../figma_app/385874";
 import { SK } from "../905/619652";
@@ -226,7 +226,7 @@ export function $$ta0(e) {
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let n = V0();
   let a = CL();
   let s = useAppModelProperty("currentSelectedProperty");
@@ -310,16 +310,16 @@ class to extends PureComponent {
     };
     this.forwardedRef = createRef();
     this.toggleSettings = () => {
-      if (this.props.pickerShown?.id === this.settingsId) this.props.dispatch(XE());else {
+      if (this.props.pickerShown?.id === this.settingsId) this.props.dispatch(hidePickerThunk());else {
         if (!this.forwardedRef || !this.forwardedRef.current) return;
         trackEventAnalytics("editor-paints-panel-advanced-stroke-show");
         let e = cn(this.forwardedRef.current);
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: this.settingsId,
           initialX: e.x,
           initialY: e.y
         }));
-        this.props.dispatch(Uv());
+        this.props.dispatch(hideStylePicker());
         this.props.dispatch(sw());
       }
     };
@@ -480,7 +480,7 @@ let $$tc5 = memo(function ({
     initialX: e,
     initialY: t
   }) => {
-    K() ? k(XE()) : k(u1({
+    K() ? k(hidePickerThunk()) : k(showPickerThunk({
       id: U,
       initialX: e,
       initialY: t
@@ -618,8 +618,8 @@ export function $$tu7(e) {
     recordingKey
   } = e;
   let v = useCallback(e => {
-    o() || r(XE());
-    r(Uv());
+    o() || r(hidePickerThunk());
+    r(hideStylePicker());
     let t = valueOrFallback(c, []).filter((t, r) => r !== e);
     _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
       onChange(t);
@@ -634,7 +634,7 @@ export function $$tu7(e) {
     paintManager.clearCache();
   }, []);
   let C = useCallback(() => {
-    r(_$$Y2({
+    r(stylePickerViewChangedThunk({
       isListLayout: !e.stylePickerListLayout
     }));
     r(sw());
@@ -779,7 +779,7 @@ export class $$tp1 extends PureComponent {
         id: this.props.id,
         initialX: e.x,
         initialY: e.y
-      })) : this.props.dispatch(u1({
+      })) : this.props.dispatch(showPickerThunk({
         id: this.props.id,
         initialX: e.x,
         initialY: e.y,
@@ -787,10 +787,10 @@ export class $$tp1 extends PureComponent {
           isInStyleModal: this.isInStyleModal()
         }
       }));
-      this.isInStyleModal() || (this.props.dispatch(sw()), this.props.dispatch(Uv()));
+      this.isInStyleModal() || (this.props.dispatch(sw()), this.props.dispatch(hideStylePicker()));
     };
     this.hidePicker = () => {
-      this.isInStyleModal() ? this.props.dispatch(_$$w()) : this.props.dispatch(XE());
+      this.isInStyleModal() ? this.props.dispatch(_$$w()) : this.props.dispatch(hidePickerThunk());
       fullscreenValue.deselectProperty();
     };
     this.togglePicker = () => {
@@ -1348,7 +1348,7 @@ function tf({
   let M = useStyleSubscriptionName(e, n);
   let F = useSelector(t => _$$b2(t, e, null));
   let j = useCallback(() => {
-    v(XE());
+    v(hidePickerThunk());
     Fullscreen.selectStyleByGuid("");
   }, [v]);
   let B = useCallback(() => {
@@ -1358,7 +1358,7 @@ function tf({
       x,
       y
     } = cn(C.current);
-    v(u1({
+    v(showPickerThunk({
       id: A,
       initialX: x,
       initialY: y
@@ -1531,13 +1531,13 @@ $$t_2.displayName = "Paint";
       this.showPicker = () => {
         if (!this.row.current) return;
         let e = cn(this.row.current);
-        this.props.dispatch(u1({
+        this.props.dispatch(showPickerThunk({
           id: this.pickerID(),
           initialX: e.x,
           initialY: e.y
         }));
         this.props.dispatch(sw());
-        this.props.dispatch(Uv());
+        this.props.dispatch(hideStylePicker());
         this.props.dispatch(updateCurrentSelectionPaintInPicker({
           paintId: this.props.id,
           originalPaint: this.props.paint,
@@ -1545,7 +1545,7 @@ $$t_2.displayName = "Paint";
         }));
       };
       this.hidePicker = () => {
-        this.props.dispatch(XE());
+        this.props.dispatch(hidePickerThunk());
         fullscreenValue.deselectProperty();
       };
       this.togglePicker = () => {
@@ -1832,17 +1832,17 @@ $$t_2.displayName = "Paint";
         left
       } = r.getBoundingClientRect();
       let [a, s] = [left - N2, top];
-      e(bS({
+      e(showStylePicker({
         id: t,
         initialX: a,
         initialY: s,
         modal: !0
       }));
       e(sw());
-      e(XE());
+      e(hidePickerThunk());
     },
     setPickerListLayout: t => {
-      e(_$$Y2({
+      e(stylePickerViewChangedThunk({
         isListLayout: t
       }));
     }

@@ -1,5 +1,5 @@
-import { G1 } from "../figma_app/691470";
-class r extends G1 {
+import { CortexError } from "../figma_app/691470";
+class r extends CortexError {
   constructor({
     type: e,
     data: t,

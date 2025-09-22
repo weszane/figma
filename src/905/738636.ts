@@ -15,7 +15,7 @@ import { getNewFileConfig } from "../905/766303";
 import { isAutosaveLockAvailable } from "../905/58217";
 import { consumptionPaywallUtils } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
-import { N as _$$N, L as _$$L } from "../905/293182";
+import { getElapsedTime, resetTimer } from "../905/293182";
 import { isIntegrationContext } from "../figma_app/469876";
 import { _I, $N, J5 } from "../905/327855";
 import { setAutosaveStatus } from "../figma_app/139113";
@@ -148,7 +148,7 @@ let $$B1 = createOptimistThunk((e, {
   });
 });
 let V = createOptimistThunk((e, t) => {
-  if (isIntegrationContext() || !t.allowOnDesktop && 600 > _$$N()) return;
+  if (isIntegrationContext() || !t.allowOnDesktop && 600 > getElapsedTime()) return;
   let i = _I(t);
   if (fullscreenValue.resetLoadedFigFile(), desktopAPIInstance) {
     if (t.allowOnDesktop) $N(e, t, !1);else {
@@ -162,7 +162,7 @@ let V = createOptimistThunk((e, t) => {
     let e = serializeQuery(i);
     customHistory.redirect(`/file/new${e ? "?" + e : ""}`);
   } else $N(e, t, !1);
-  _$$L();
+  resetTimer();
   let r = t.openNewFileIn === TabOpenBehavior.SAME_TAB && (!desktopAPIInstance || t.allowOnDesktop) ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF;
   setAutosaveStatus(!0);
   e.dispatch($$G3({

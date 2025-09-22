@@ -17,7 +17,7 @@ import { l as _$$l } from "../905/767868";
 import { A as _$$A } from "../905/100919";
 import { K } from "../905/226178";
 import { setLastVisitedPlan } from "../905/93909";
-import { I4 } from "../figma_app/840917";
+import { useHasUnclaimedAutosaveChanges } from "../figma_app/840917";
 import { i4 } from "../905/862913";
 import { fA } from "../figma_app/543100";
 import { OrganizationType } from "../905/833838";
@@ -119,7 +119,7 @@ function N(e) {
   });
 }
 export function $$P0(e) {
-  let t = I4(e.file.key).unwrapOr(!1);
+  let t = useHasUnclaimedAutosaveChanges(e.file.key).unwrapOr(!1);
   let i = useSelector(e => e.currentUserOrgId);
   let r = useSelector(e => e.currentTeamId);
   let s = useSelector(e => e.user);

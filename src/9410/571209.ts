@@ -8,7 +8,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { uc } from "../905/763714";
 import { clamp } from "../figma_app/492908";
 import { Vector2D } from "../905/512402";
-import { lK } from "../figma_app/740163";
+import { shouldRenderRulers } from "../figma_app/740163";
 import { ui3RulerMargin } from "../figma_app/786175";
 var r;
 function h(e, t, i, r) {
@@ -42,7 +42,7 @@ export function $$v1() {
     }
   }) => e.showUi);
   let t = 0;
-  lK() && e && (t += parsePxNumber(ui3RulerMargin));
+  shouldRenderRulers() && e && (t += parsePxNumber(ui3RulerMargin));
   return useMemo(() => ({
     left: t,
     right: 0

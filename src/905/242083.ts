@@ -1,16 +1,19 @@
 import { Ay as _$$Ay7 } from '@stylexjs/stylex';
 import rh from 'classnames';
+import { produce } from 'immer';
 import { createElement, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { H as _$$H2 } from 'react-dom';
+import { H as _$$H2, unmountComponentAtNode } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { reportError, setTagGlobal, reportNullOrUndefined } from '../905/11';
+import { useDebounce } from 'use-debounce';
+import { reportError, reportNullOrUndefined, setTagGlobal } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { PluginAction } from '../905/15667';
-import { createSessionGreaterEqualKeyRange, executeDatabaseTransaction, ACTIVITY_LOG_STORE, NODE_CHANGES_STORE, NEW_FILES_STORE, EDITOR_SESSIONS_STORE, SESSION_INDEX, getAutosaveDatabaseWithErrorHandling, createSessionNodeKeyRange } from '../905/25189';
+import { ACTIVITY_LOG_STORE, createSessionGreaterEqualKeyRange, createSessionNodeKeyRange, EDITOR_SESSIONS_STORE, executeDatabaseTransaction, getAutosaveDatabaseWithErrorHandling, NEW_FILES_STORE, NODE_CHANGES_STORE, SESSION_INDEX } from '../905/25189';
 import { FU, v6 } from '../905/26824';
 import { P as _$$P } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
-import { ModalRootComponent, ModalFormContents } from '../905/38914';
+import { ModalFormContents, ModalRootComponent } from '../905/38914';
 import { ae as _$$ae } from '../905/41973';
 import { p as _$$p } from '../905/42189';
 import { e as _$$e3, N as _$$N } from '../905/55273';
@@ -20,7 +23,7 @@ import { KeyCodes } from '../905/63728';
 import { l as _$$l5 } from '../905/65216';
 import { m as _$$m2 } from '../905/70820';
 import { z as _$$z2 } from '../905/95280';
-import { registerModal, ModalSupportsBackground } from '../905/102752';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { e5 as _$$e5 } from '../905/104019';
 import { Z as _$$Z2 } from '../905/104740';
 import { q as _$$q2, w as _$$w3 } from '../905/112768';
@@ -34,7 +37,7 @@ import { KindEnum } from '../905/129884';
 import { g as _$$g2 } from '../905/142432';
 import { hO } from '../905/145989';
 import { n as _$$n4 } from '../905/155450';
-import { showModal, showModalHandler, hideModalHandler, hideModal, hideSpecificModal, showModalConditional } from '../905/156213';
+import { hideModal, hideModalHandler, hideSpecificModal, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { Ph } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -53,7 +56,7 @@ import { Xo } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
 import { delay } from '../905/236856';
 import { T as _$$T4 } from '../905/239551';
-import { parseLinkForContext, copyHyperlinkToClipboard } from '../905/250387';
+import { copyHyperlinkToClipboard, parseLinkForContext } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
 import { HiddenLabel, Label } from '../905/270045';
 import { getPlanUserTeamAtomFamily } from '../905/276025';
@@ -65,7 +68,7 @@ import { createSavepoint } from '../905/294113';
 import { w as _$$w } from '../905/294864';
 import { _N, Vg } from '../905/300621';
 import { VisualBellActions } from '../905/302958';
-import { getI18nString, renderI18nText, getI18nStringAlias } from '../905/303541';
+import { getI18nString, getI18nStringAlias, renderI18nText } from '../905/303541';
 import { R as _$$R3 } from '../905/307199';
 import { b as _$$b3, c as _$$c4 } from '../905/308099';
 import { logAutosaveError, logAutosaveErrorWithOriginalMessage } from '../905/327522';
@@ -78,7 +81,7 @@ import { x as _$$x4 } from '../905/392802';
 import { isEffectOrGrid } from '../905/405710';
 import { Dn } from '../905/407352';
 import { debugState } from '../905/407919';
-import { WK } from '../905/414069';
+import { runProtected } from '../905/414069';
 import { JI, Yj } from '../905/416496';
 import { G as _$$G3 } from '../905/431526';
 import { useModalManager } from '../905/437088';
@@ -143,11 +146,11 @@ import { Timer } from '../905/609396';
 import { customHistory, isMainAppRoute } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
 import { isActiveAtom } from '../905/617744';
-import { getSelectedView, checkCanRunExtensions } from '../905/622391';
+import { checkCanRunExtensions, getSelectedView } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
 import { ButtonPrimitive } from '../905/632989';
 import { parseQuery } from '../905/634134';
-import { getSessionStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
+import { getSessionStorage, localStorageRef, useLocalStorageSync } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { a6 as _$$a2, il as _$$il, pM as _$$pM, sd as _$$sd, tS as _$$tS, dE, Fo, GZ, Oc, PC, pV, PZ, RU, Uj, un, W9, WE, XF, zN } from '../905/661614';
 import { fileKeyAtom } from '../905/662353';
@@ -155,14 +158,14 @@ import { getResourceDataOrFallback } from '../905/663269';
 import { gG } from '../905/684180';
 import { IM } from '../905/687477';
 import { EventEmitter } from '../905/690073';
-import { replaceColonWithDash, isFigmaDomain } from '../905/691205';
-import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
+import { isFigmaDomain, replaceColonWithDash } from '../905/691205';
+import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
 import { X as _$$X } from '../905/701807';
 import { y as _$$y } from '../905/705736';
 import { replaceThumbnailsOptimist } from '../905/711212';
 import { FR } from '../905/714160';
-import { logDebug, logInfo, logError, logWarning } from '../905/714362';
+import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { jk as _$$jk } from '../905/715541';
 import { l as _$$l } from '../905/716947';
@@ -175,10 +178,10 @@ import { l as _$$l4 } from '../905/745972';
 import { Ao } from '../905/748636';
 import { AuthModal } from '../905/749159';
 import { y as _$$y5 } from '../905/749689';
-import { pluginState, handlePluginError, generateRandomID } from '../905/753206';
+import { generateRandomID, handlePluginError, pluginState } from '../905/753206';
 import { L6 } from '../905/755627';
 import { Z as _$$Z } from '../905/757420';
-import { d as _$$d2, X as _$$X2 } from '../905/758967';
+import { getCanvasViewState, subscribeVisualBellSettings } from '../905/758967';
 import { isBranchAlt } from '../905/760074';
 import { getValueAtIndex, hasKey } from '../905/764747';
 import { getSelectedFile } from '../905/766303';
@@ -203,24 +206,24 @@ import { savepointOptimistThunk } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
 import { n3 as _$$n, F7, Rf } from '../905/859698';
 import { FDocumentType, isSupportedBlockType, ITemplateType } from '../905/862883';
-import { parseSessionLocalID, defaultSessionLocalIDString } from '../905/871411';
+import { defaultSessionLocalIDString, parseSessionLocalID } from '../905/871411';
+import { generateUUIDv4 } from '../905/871474';
 import { B as _$$B5 } from '../905/872019';
 import { setLocalStyleSelection } from '../905/879323';
-import { generateUUIDv4 } from '../905/871474';
 import { Db } from '../905/881862';
 import { g5, Iz, uM, wv } from '../905/888175';
 import { bS, bX, fs, pi, vU } from '../905/889931';
-import { Kg } from '../905/898440';
+import { WAFValidationHandlerInstance } from '../905/898440';
 import { G_ } from '../905/901759';
 import { autosaveErrorModal } from '../905/906499';
 import { XHR } from '../905/910117';
 import { bL } from '../905/911410';
-import { y as _$$y4 } from '../905/913008';
+import { fullscreenCrashHandler } from '../905/913008';
 import { debounce } from '../905/915765';
 import { a7 as _$$a4 } from '../905/917898';
 import { sZ as _$$sZ, J5, jd, K8, O8, Vq } from '../905/920793';
 import { hD } from '../905/921139';
-import { hideDropdownAction, selectViewAction, updateDropdownSelectionAction, showDropdownThunk } from '../905/929976';
+import { hideDropdownAction, selectViewAction, showDropdownThunk, updateDropdownSelectionAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { c as _$$c5 } from '../905/932790';
 import { lQ } from '../905/934246';
@@ -242,28 +245,28 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
 import { parseEditorStateToPlainText } from '../figma_app/9619';
-import { checkZoomWidgetAccess, isExportRestricted, canEditBasedOnPlan } from '../figma_app/12796';
+import { canEditBasedOnPlan, checkZoomWidgetAccess, isExportRestricted } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
-import { useAtomWithSubscription, atomStoreManager } from '../figma_app/27355';
+import { atomStoreManager, useAtomWithSubscription } from '../figma_app/27355';
 import { initializeAssetMirrorManager } from '../figma_app/31188';
 import { LibraryKeyToFileLink } from '../figma_app/43951';
-import { FEditorType, mapYFToEditorType, isDesignOrIllustration } from '../figma_app/53721';
+import { FEditorType, isDesignOrIllustration, mapYFToEditorType } from '../figma_app/53721';
 import { sF as _$$sF, zJ } from '../figma_app/59657';
 import { J as _$$J2 } from '../figma_app/61771';
-import { resetGlobalViewportPromise, globalViewportPromise, computeFullscreenViewportForNode } from '../figma_app/62612';
+import { computeFullscreenViewportForNode, globalViewportPromise, resetGlobalViewportPromise } from '../figma_app/62612';
 import { xP } from '../figma_app/65182';
 import { XR } from '../figma_app/67099';
 import { gh } from '../figma_app/76123';
 import { $m } from '../figma_app/78808';
-import { createObjectUrlFromBuffer, teamLibraryCache, fetchAndProcessComponentPublishingBuffers, fetchAndProcessVariablePublishingBuffers } from '../figma_app/80990';
+import { createObjectUrlFromBuffer, fetchAndProcessComponentPublishingBuffers, fetchAndProcessVariablePublishingBuffers, teamLibraryCache } from '../figma_app/80990';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { checkResourceEligibilityDebug } from '../figma_app/86989';
 import { getDevModeFocusId, isFullscreenOverview } from '../figma_app/88239';
-import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as _$$re, Bs, fk, FP, fy, Jt, pj, R5, u1, XE, XQ } from '../figma_app/91703';
+import { handleAutosaveAndNavigationThunk, hideDowntimeBanner, hidePickerThunk, setCanvasMentionPopup, setFileVersion, setHyperlinkPopup, setLeftPanelTab, showDowntimeBanner, showOpenDesktopAppModal, showPickerThunk, updateCanvasMentionPopupPosition, updateFontList, updateHyperlinkPopupPosition, updateLocalFontAgentVersion, updateSelectedStyleProperties, updateSelectedStyleThumbnailUrl } from '../figma_app/91703';
 import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
-import { sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
+import { Nl, sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { startAutosaveWait } from '../figma_app/139113';
 import { h8 } from '../figma_app/144974';
 import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../figma_app/147952';
@@ -271,7 +274,7 @@ import { H as _$$H } from '../figma_app/147959';
 import { IJ } from '../figma_app/149304';
 import { Dc as _$$Dc, hV } from '../figma_app/151766';
 import { getTimeRemaining } from '../figma_app/152368';
-import { ManifestEditorType, PluginInstallStatus, hasLocalFileId } from '../figma_app/155287';
+import { hasLocalFileId, ManifestEditorType, PluginInstallStatus } from '../figma_app/155287';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl, getInitialOptions, getSupportEmail, isDevEnvironment } from '../figma_app/169182';
 import { jx } from '../figma_app/171569';
@@ -293,21 +296,20 @@ import { N as _$$N3 } from '../figma_app/240060';
 import { T6 } from '../figma_app/242565';
 import { mr, U2 } from '../figma_app/247611';
 import { W7 } from '../figma_app/251115';
-import { isInteractionPathCheck } from '../figma_app/897289';
 import { fT as _$$fT } from '../figma_app/260703';
 import { n as _$$n3 } from '../figma_app/264395';
 import { z4 } from '../figma_app/266084';
 import { $W } from '../figma_app/268172';
-import { DialogBody, DialogFooter, DialogTitle, DialogActionStrip, DialogContents, DialogHeader } from '../figma_app/272243';
-import { Dl as _$$Dl, MAX_CANVAS_SIZE, fetchImageData } from '../figma_app/291892';
+import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
+import { Dl as _$$Dl, fetchImageData, MAX_CANVAS_SIZE } from '../figma_app/291892';
 import { pN } from '../figma_app/292212';
 import { e3 as _$$e4 } from '../figma_app/298277';
 import { PR } from '../figma_app/299859';
-import { loadPluginManifest, getFullscreenViewEditorType, showVisualBell, getWidgetVersionData, loadLocalPluginSource, isWidgetPlugin, PluginPermissions } from '../figma_app/300692';
+import { getFullscreenViewEditorType, getWidgetVersionData, isWidgetPlugin, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692';
 import { Z as _$$Z3 } from '../figma_app/301719';
 import { u1 as _$$u2, zi } from '../figma_app/305244';
 import { Tv, Zl } from '../figma_app/311375';
-import { logAndTrackCTA, mapEditorTypeToProductType, trackFileEvent, trackUserEvent, trackGenericEvent } from '../figma_app/314264';
+import { logAndTrackCTA, mapEditorTypeToProductType, trackFileEvent, trackGenericEvent, trackUserEvent } from '../figma_app/314264';
 import { _d, P5 } from '../figma_app/318590';
 import { $I, iP as _$$iP, h$, jD, Jf, KY } from '../figma_app/322845';
 import { c3 } from '../figma_app/327577';
@@ -324,12 +326,12 @@ import { pi as _$$pi, TY, Yh } from '../figma_app/357047';
 import { pH } from '../figma_app/357433';
 import { IU } from '../figma_app/357655';
 import { getI18nState } from '../figma_app/363242';
-import { widgetHandlerMap, isValidWidgetType } from '../figma_app/364284';
+import { isValidWidgetType, widgetHandlerMap } from '../figma_app/364284';
 import { Yg } from '../figma_app/365713';
 import { vE } from '../figma_app/376315';
 import { initializeDefaultImagePaint } from '../figma_app/385874';
-import { findVisibleSectionChild, isSpecialType, getResponsiveChildren } from '../figma_app/387100';
-import { lu as _$$lu, lV as _$$lV, k1, mI, OJ } from '../figma_app/389091';
+import { findVisibleSectionChild, getResponsiveChildren, isSpecialType } from '../figma_app/387100';
+import { setMusicStateThunk, setStartChimePlayed, setTimerModalThunk, setTimerNotification, setTimerThunk } from '../figma_app/389091';
 import { initializeShadowReadReporter } from '../figma_app/391338';
 import { g as _$$g6 } from '../figma_app/398051';
 import { sn as _$$sn, hf } from '../figma_app/407856';
@@ -339,8 +341,8 @@ import { Ay as _$$Ay5 } from '../figma_app/432652';
 import { eY as _$$eY2 } from '../figma_app/442259';
 import { U as _$$U } from '../figma_app/449815';
 import { A0, R4 } from '../figma_app/454974';
-import { setFlagValue, fullscreenPromise, setFullscreen, userValue, setSessionValue, setAdditionalValue, setUserValue, setInputValue, fullscreenValue, setModalValue } from '../figma_app/455680';
-import { isAIFeaturesDisabled, isLlamaEnabledForOrg, isEditDisabled } from '../figma_app/459490';
+import { fullscreenPromise, fullscreenValue, setAdditionalValue, setFlagValue, setFullscreen, setInputValue, setModalValue, setSessionValue, setUserValue, userValue } from '../figma_app/455680';
+import { isAIFeaturesDisabled, isEditDisabled, isLlamaEnabledForOrg } from '../figma_app/459490';
 import { EA } from '../figma_app/462456';
 import { debug, throwTypeError } from '../figma_app/465776';
 import { T as _$$T2 } from '../figma_app/472024';
@@ -349,11 +351,11 @@ import { _ as _$$_2 } from '../figma_app/485258';
 import { pP } from '../figma_app/492354';
 import { SavepointModalContainer } from '../figma_app/504415';
 import { ZH } from '../figma_app/504823';
-import { transformOpenFileObject, getFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
+import { getFullscreenViewFile, selectCurrentFile, transformOpenFileObject } from '../figma_app/516028';
 import { ZS } from '../figma_app/519839';
 import { oY as _$$oY } from '../figma_app/524655';
 import { mQ } from '../figma_app/527668';
-import { setHeapMemoryMode, getMemoryUsage, documentMode } from '../figma_app/527873';
+import { documentMode, getMemoryUsage, setHeapMemoryMode } from '../figma_app/527873';
 import { getProcessedValueByKey } from '../figma_app/528509';
 import { A9 as _$$A7 } from '../figma_app/533986';
 import { Zb } from '../figma_app/539925';
@@ -368,8 +370,8 @@ import { singletonAsync } from '../figma_app/562352';
 import { be, k6 } from '../figma_app/565197';
 import { O as _$$O } from '../figma_app/568977';
 import { wy } from '../figma_app/578011';
-import { getNextSessionId, subscribeToContainingPage, resolveSessionPromise, rejectAllSessionPromises } from '../figma_app/582924';
-import { d1 as _$$d, xi as _$$xi } from '../figma_app/603466';
+import { getNextSessionId, rejectAllSessionPromises, resolveSessionPromise, subscribeToContainingPage } from '../figma_app/582924';
+import { PluginCallbacks, setupEventHandlers } from '../figma_app/603466';
 import { Lk as _$$Lk, dd } from '../figma_app/604494';
 import { nd as _$$nd } from '../figma_app/612001';
 import { R as _$$R4 } from '../figma_app/612938';
@@ -381,9 +383,9 @@ import { hasNotLoaded } from '../figma_app/623300';
 import { batchDownloadImages } from '../figma_app/624361';
 import { Id, JU } from '../figma_app/626177';
 import { JT, zw } from '../figma_app/632248';
-import { SubscriptionStatusEnum, LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum } from '../figma_app/633080';
+import { LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { BG as _$$BG } from '../figma_app/634288';
-import { ButtonBaseReversedContainer, BigTextInputForwardRef } from '../figma_app/637027';
+import { BigTextInputForwardRef, ButtonBaseReversedContainer } from '../figma_app/637027';
 import { canMemberOrg } from '../figma_app/642025';
 import { Ju } from '../figma_app/644255';
 import { m3 } from '../figma_app/645694';
@@ -393,33 +395,32 @@ import { PluginModalTypeEnum } from '../figma_app/671547';
 import { _p } from '../figma_app/675605';
 import { fS } from '../figma_app/681244';
 import { b6 } from '../figma_app/681697';
-import { iW as _$$iW, o3 as _$$o, se as _$$se, Ts as _$$Ts2, ye as _$$ye, Ad, H0, LH, p7, PY, vK } from '../figma_app/682945';
+import { onNodeDragEnd, onNodeDragStart, onTileRendererChanged, performanceTracker, recordConnectDiagramShapeActive, recordCreateStickyActive, recordCreateTableActive, recordDifferentSectionClicked, recordEditTableTextActive, recordTileRenderingActive, setupPerformanceTracker } from '../figma_app/682945';
 import { g as _$$g4 } from '../figma_app/683763';
 import { YL as _$$YL } from '../figma_app/688194';
 import { ph } from '../figma_app/709893';
 import { pM } from '../figma_app/728005';
 import { Om } from '../figma_app/731583';
 import { qZ } from '../figma_app/738358';
-import { W_ as _$$W_, UK } from '../figma_app/740163';
-import { renameNode, registerFullscreenEventHandlers, updateFullscreenAppModel, setPropertiesPanelTab, updateSelectionProperties } from '../figma_app/741237';
+import { EditorPreferencesApi, registerVisualBellSettingsListener } from '../figma_app/740163';
+import { registerFullscreenEventHandlers, renameNode, setPropertiesPanelTab, updateFullscreenAppModel, updateSelectionProperties } from '../figma_app/741237';
 import { WJ as _$$WJ, P1, S9 } from '../figma_app/745458';
 import { s as _$$s4 } from '../figma_app/751989';
 import { w as _$$w2 } from '../figma_app/757236';
 import { cortexAnalyticsPluginIds } from '../figma_app/757723';
-import { PrototypingFacetTsApiGenerated, documentStateTsApi, ImageFormat, ComponentPropsAiCPPBindings, ImageCppBindings, VectorFacetTsApiGenerated, FullscreenWebSocketTsApi, SceneNodeCpp, AutosaveEventType, SaveConnectionIssues, TextEditAction, AppStateTsApi, DesignWorkspace, NodeTsApiGenerated, LayerFacetTsApiGenerated, Fullscreen, Multiplayer, TextFacetTsApiGenerated, CorePerfInfo, ComponentishFacetTsApiGenerated, DocumentColorProfileEnum, AutosaveHelpers, FigmaSite, ConstraintsFacetTsApiGenerated, FrameFacetTsApiGenerated, TabMode, FontSourceType, EmbedPanelType, WidgetFacetTsApiGenerated, StackFacetTsApiGenerated, ViewType, SettingsAction, ImageExportType, SceneGraphTsApi, interactionTestHelpers, PanelType, DesignGraphElements, CanvasFacetTsApiGenerated, FullscreenPerfInfo, EmailAction, DesignSystemsInternalHelpers, RenderableBaseFacetTsApiGenerated, PolygonFacetTsApiGenerated, UserActionState, Command, DocumentMode, NodePropertyCategory, StyleFacetTsApiGenerated, ImageToolsBindings, BaseNodeTsApiGenerated, StateSourceType, FontHelpers, RenderableRectangleFacetTsApiGenerated, DebuggingHelpers, NodeTsApi, ConnectionState, PageSelectionType, Fonts, Thumbnail, EditChangeMode, VisibilityCondition, PrototypingTsApi, ConnectorFacetTsApiGenerated, UserInterfaceElements, BindingsPerfBench, SymbolOverrideType, ColorProfileEnum, CanvasComponentType, WhiteboardAgendaCppBindings, SourceType, TextModificationAction } from '../figma_app/763686';
-import { isNotMobile, BrowserInfo } from '../figma_app/778880';
+import { AppStateTsApi, AutosaveEventType, AutosaveHelpers, BaseNodeTsApiGenerated, BindingsPerfBench, CanvasComponentType, CanvasFacetTsApiGenerated, ColorProfileEnum, Command, ComponentishFacetTsApiGenerated, ComponentPropsAiCPPBindings, ConnectionState, ConnectorFacetTsApiGenerated, ConstraintsFacetTsApiGenerated, CorePerfInfo, DebuggingHelpers, DesignGraphElements, DesignSystemsInternalHelpers, DesignWorkspace, DocumentColorProfileEnum, DocumentMode, documentStateTsApi, EditChangeMode, EmailAction, EmbedPanelType, FigmaSite, FontHelpers, Fonts, FontSourceType, FrameFacetTsApiGenerated, Fullscreen, FullscreenPerfInfo, FullscreenWebSocketTsApi, ImageCppBindings, ImageExportType, ImageFormat, ImageToolsBindings, interactionTestHelpers, LayerFacetTsApiGenerated, Multiplayer, NodePropertyCategory, NodeTsApi, NodeTsApiGenerated, PageSelectionType, PanelType, PolygonFacetTsApiGenerated, PrototypingFacetTsApiGenerated, PrototypingTsApi, RenderableBaseFacetTsApiGenerated, RenderableRectangleFacetTsApiGenerated, SaveConnectionIssues, SceneGraphTsApi, SceneNodeCpp, SettingsAction, SourceType, StackFacetTsApiGenerated, StateSourceType, StyleFacetTsApiGenerated, SymbolOverrideType, TabMode, TextEditAction, TextFacetTsApiGenerated, TextModificationAction, Thumbnail, UserActionState, UserInterfaceElements, VectorFacetTsApiGenerated, ViewType, VisibilityCondition, WhiteboardAgendaCppBindings, WidgetFacetTsApiGenerated } from '../figma_app/763686';
+import { BrowserInfo, isNotMobile } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { fileApiHandler } from '../figma_app/787550';
 import { T as _$$T } from '../figma_app/792332';
 import { Ts as _$$Ts3 } from '../figma_app/793953';
 import { handleEnterMode } from '../figma_app/806075';
-import { isRecordingEnabled } from '../figma_app/878298';
 import { setupHyperlinkHandler } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
 import { isProtoViewerUrl } from '../figma_app/831696';
 import { TrackingProvider } from '../figma_app/831799';
 import { bi } from '../figma_app/836943';
-import { mu, Ww, ZG } from '../figma_app/840917';
+import { dumpAutosaveData, getAutosaveManagerInstance, setupAutosaveManager } from '../figma_app/840917';
 import { enterVersionHistoryMode, exitVersionHistoryMode, findVersionById } from '../figma_app/841351';
 import { z6 } from '../figma_app/846841';
 import { qb } from '../figma_app/857454';
@@ -429,16 +430,18 @@ import { ZW } from '../figma_app/861982';
 import { B3 as _$$B3, Ag } from '../figma_app/862289';
 import { userIdAtom } from '../figma_app/864723';
 import { desktopAPIInstance } from '../figma_app/876459';
+import { isRecordingEnabled } from '../figma_app/878298';
 import { bJ } from '../figma_app/881578';
-import { getInstanceKeys, selectSceneGraph, getSingleSelectedKey } from '../figma_app/889655';
+import { getInstanceKeys, getSingleSelectedKey, selectSceneGraph } from '../figma_app/889655';
 import { a as _$$a } from '../figma_app/894185';
 import { f7 } from '../figma_app/896988';
+import { isInteractionPathCheck } from '../figma_app/897289';
 import { i as _$$i3 } from '../figma_app/904127';
 import { h as _$$h2 } from '../figma_app/907304';
 import { fG } from '../figma_app/912411';
 import { PluginRunForContext } from '../figma_app/915202';
 import { handleEmbedPaste } from '../figma_app/916560';
-import { toWellFormed, truncate, uint8ArrayToBase64, escapeHtml, base64ToUint8Array } from '../figma_app/930338';
+import { base64ToUint8Array, escapeHtml, toWellFormed, truncate, uint8ArrayToBase64 } from '../figma_app/930338';
 import { l7 as _$$l3 } from '../figma_app/932601';
 import { FU as _$$FU, b$ } from '../figma_app/933328';
 import { hR as _$$hR } from '../figma_app/945605';
@@ -452,14 +455,10 @@ import { KD, Lk } from '../figma_app/975811';
 import { getEditorTypeFromView } from '../figma_app/976749';
 import { gH } from '../figma_app/985200';
 import _require from '../vendor/89702';
-import { produce } from 'immer';
 import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
-import { useSelector, useDispatch } from 'react-redux';
 import oA from '../vendor/805353';
-import { useDebounce } from 'use-debounce';
-import { unmountComponentAtNode } from 'react-dom';
 let n;
 let r;
 function d(e) {
@@ -855,7 +854,7 @@ async function to(e) {
 }
 isDevEnvironment() && (window.exportLocalAutosaveFile = ts, window.importLocalAutosaveFile = to);
 function tV() {
-  _$$ye?.onMetricsEventLoopFrame();
+  performanceTracker?.onMetricsEventLoopFrame();
   requestAnimationFrame(tV);
 }
 class t4 {
@@ -1858,22 +1857,22 @@ class nQ extends KD {
   }
 }
 function nJ() {
-  let e = getObservableOrFallback(_$$d2().editFrameExtraSeconds);
+  let e = getObservableOrFallback(getCanvasViewState().editFrameExtraSeconds);
   let t = useCallback(e => {
-    _$$d2().editFrameExtraSeconds.set(e - 0.016);
+    getCanvasViewState().editFrameExtraSeconds.set(e - 0.016);
   }, []);
-  let i = getObservableOrFallback(_$$d2().editFrameExtraFramebufferSwitches);
+  let i = getObservableOrFallback(getCanvasViewState().editFrameExtraFramebufferSwitches);
   let n = useCallback(e => {
-    _$$d2().editFrameExtraFramebufferSwitches.set(e - 250);
+    getCanvasViewState().editFrameExtraFramebufferSwitches.set(e - 250);
   }, []);
-  let r = getObservableOrFallback(_$$d2().maxEditTimeSeconds);
+  let r = getObservableOrFallback(getCanvasViewState().maxEditTimeSeconds);
   let s = useCallback(e => {
-    _$$d2().maxEditTimeSeconds.set(e);
+    getCanvasViewState().maxEditTimeSeconds.set(e);
   }, []);
   let o = useCallback(() => {
-    _$$d2().editFrameExtraSeconds.set(0.026);
-    _$$d2().editFrameExtraFramebufferSwitches.set(0);
-    _$$d2().maxEditTimeSeconds.set(1);
+    getCanvasViewState().editFrameExtraSeconds.set(0.026);
+    getCanvasViewState().editFrameExtraFramebufferSwitches.set(0);
+    getCanvasViewState().maxEditTimeSeconds.set(1);
   }, []);
   return jsx(bL, {
     defaultPosition: new Point(0.7 * window.innerWidth, 0.5 * window.innerHeight),
@@ -3368,7 +3367,7 @@ function sP(e) {
         f7(e);
       };
       this.onReady = () => this._readyPromise;
-      this.isReady = () => this._fullscreenIsReady && _$$y4.getFullscreenCrashState() === 'ok' && !!Fullscreen;
+      this.isReady = () => this._fullscreenIsReady && fullscreenCrashHandler.getFullscreenCrashState() === 'ok' && !!Fullscreen;
       this.isFontListLoaded = () => this._fontListLoaded;
       this.fromFullscreen.on('console:initialize', () => {
         fullscreenPromise.then(() => {
@@ -3438,28 +3437,28 @@ function sP(e) {
       this.viewport.trigger('onSetViewport', this._viewportInfo);
     }
     onTilesRendered() {
-      Ad();
+      recordTileRenderingActive();
     }
     onCreateTable() {
-      _$$iW();
+      recordCreateTableActive();
     }
     onEditTableText() {
-      vK();
+      recordEditTableTextActive();
     }
     onNodeDragStart() {
-      _$$se();
+      onNodeDragStart();
     }
     onNodeDragEnd() {
-      p7();
+      onNodeDragEnd();
     }
     onTileRendererChanged(e) {
-      LH(e);
+      onTileRendererChanged(e);
     }
     onCreateSticky() {
-      PY();
+      recordCreateStickyActive();
     }
     onDifferentSectionClicked() {
-      _$$o();
+      recordDifferentSectionClicked();
     }
     getNextQueryRequestId() {
       return getNextSessionId();
@@ -3682,7 +3681,7 @@ class oo {
         _$$YL();
         break;
       case 'debug-inspect-layer-figma-scope':
-        if (UK().showFigmaScope.set(!0), this._figmascopeFollowSelectionOnceCallback) {
+        if (EditorPreferencesApi().showFigmaScope.set(!0), this._figmascopeFollowSelectionOnceCallback) {
           let e = getSingleSelectedKey(this._store.getState());
           e && this._figmascopeFollowSelectionOnceCallback(e);
         }
@@ -3863,7 +3862,7 @@ class oo {
           initialY: y,
           shouldPin: source === CanvasComponentType.PROPERTIES_PANEL
         };
-        this._store.dispatch(u1(d));
+        this._store.dispatch(showPickerThunk(d));
         break;
       case 'report-no-video-upload-permissions':
         _$$k3(this._store);
@@ -5126,7 +5125,7 @@ async function lG(e) {
   return (await lH(() => fetch(e))).arrayBuffer().then(e => new Uint8Array(e));
 }
 function lz() {
-  return Kg.waitForWAFValidation('challenge');
+  return WAFValidationHandlerInstance.waitForWAFValidation('challenge');
 }
 async function lH(e) {
   let t = !1;
@@ -5193,7 +5192,7 @@ export function $$lq1(e, t, i, n) {
     _$$eY2();
     $W();
     mQ();
-    _$$xi();
+    setupEventHandlers();
     _$$T4(new lV());
     _$$G2();
     _$$a();
@@ -5257,7 +5256,7 @@ export function $$lq1(e, t, i, n) {
     window.addEventListener('storage', e => {
       if (fullscreenValue.isReady() && e.key) {
         let t = e.key;
-        WK(() => {
+        runProtected(() => {
           Fullscreen?.onStorage(t);
         });
       }
@@ -5306,7 +5305,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = isInteractionPathCheck();
       if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
         this._isDesktopAppRunning = e;
-        e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(PluginRunForContext.FOR_OPEN));
+        e && _$$N3.shouldShowOnce() && this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
         await this.onReady();
         Fullscreen?.debugMacAppIsStartingFullscreen();
@@ -5321,8 +5320,8 @@ let lX = class e extends sP(sN(sR)) {
         await this.onReady();
         t && console.log('Finished onReady');
       }
-      _$$X2();
-      _$$W_();
+      subscribeVisualBellSettings();
+      registerVisualBellSettingsListener();
       setHeapMemoryMode(documentMode);
     });
     this._hasSelection = () => !!AppStateTsApi && !AppStateTsApi.editorState().selectionEmpty?.getCopy();
@@ -5426,7 +5425,7 @@ let lX = class e extends sP(sN(sR)) {
         return;
       }
       if (startAutosaveWait(() => {
-        this.dispatch(_$$eH());
+        this.dispatch(handleAutosaveAndNavigationThunk());
       })) {
         return;
       }
@@ -5576,16 +5575,16 @@ let lX = class e extends sP(sN(sR)) {
   addStackOverflowListener() {
     window.addEventListener('oom_trigger', e => {
       let t = atomStoreManager.get(isActiveAtom);
-      _$$y4.showMemoryCrashModal({
+      fullscreenCrashHandler.showMemoryCrashModal({
         isBranching: t
       }, this.openFileKey(), this._store);
     });
     window.addEventListener('error', e => {
       isStackOverflowError({
         message: e.message
-      }) ? _$$y4.fullscreenCrashed({
+      }) ? fullscreenCrashHandler.fullscreenCrashed({
         type: 'stack-overflow'
-      }, !0) : e.message.includes('Out of memory') && _$$y4.showMemoryCrashModal({}, this.openFileKey(), this._store);
+      }, !0) : e.message.includes('Out of memory') && fullscreenCrashHandler.showMemoryCrashModal({}, this.openFileKey(), this._store);
     });
   }
   static startFetchingFontList() {
@@ -5634,7 +5633,7 @@ let lX = class e extends sP(sN(sR)) {
     return !('getDirectlySelectedNodes' in this._state.mirror.sceneGraph) || this._state.mirror.sceneGraph.getDirectlySelectedNodes().length !== 1;
   }
   setFileVersion(e) {
-    this._store.dispatch(XQ({
+    this._store.dispatch(setFileVersion({
       fileVersion: e
     }));
   }
@@ -5669,7 +5668,7 @@ let lX = class e extends sP(sN(sR)) {
     this._actionHandler.setFigmascopeSelectedGuidCallback(e);
   }
   toggleDowntimeBanner() {
-    this._store?.getState().showingDowntimeBanner ? this._store.dispatch(_$$CN()) : this._store.dispatch(_$$re());
+    this._store?.getState().showingDowntimeBanner ? this._store.dispatch(hideDowntimeBanner()) : this._store.dispatch(showDowntimeBanner());
   }
   closeManageMemoryModal() {
     let e = this._store.getState().modalShown;
@@ -5695,7 +5694,7 @@ let lX = class e extends sP(sN(sR)) {
       Sr(location.href, B3.FULLSCREEN_MENU).then(t => {
         t && _$$s5.shouldShowOnce() && Promise.race([e, delay(3e3)]).then(() => {
           _$$N3.disableAutoOpenIfUnset();
-          this._store.dispatch(_$$aK(PluginRunForContext.FOR_MENU));
+          this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_MENU));
         });
       });
     } else {
@@ -5745,7 +5744,7 @@ let lX = class e extends sP(sN(sR)) {
     trackEventAnalytics('Export Picker Opened', {
       from: 'toolbar-or-keyboard'
     });
-    this.dispatch(u1({
+    this.dispatch(showPickerThunk({
       id: C9
     }));
   }
@@ -5811,13 +5810,13 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showNudgeAmountPicker() {
-    this.dispatch(u1({
+    this.dispatch(showPickerThunk({
       id: _$$O
     }));
   }
   openFplDebug() {}
   hidePicker() {
-    this.dispatch(XE());
+    this.dispatch(hidePickerThunk());
   }
   toggleInteractionRecorderVisibility() {
     if (isInteractionPathCheck()) {
@@ -6481,11 +6480,11 @@ let lX = class e extends sP(sN(sR)) {
       let c = 0;
       if (timer.time || t > 0 && t === i) {
         let e = null;
-        timer.time && (t === 0 ? (_$$d.timerChange('timerstop'), this.dispatch(_$$lu({
+        timer.time && (t === 0 ? (PluginCallbacks.timerChange('timerstop'), this.dispatch(setTimerModalThunk({
           state: 'closed',
           userInitiated: !1
-        }))) : t !== timer.time.totalTimeMs && getTimeRemaining(timer.time) > 0 ? (c = Math.round((t - timer.time.totalTimeMs) / 6e4), o && o.userName === a.name && performance.now() - o.timeOrigin < 1e4 && (c += o.minutesAdded), e = c > 0 ? 'INCREMENTED' : 'DECREMENTED', _$$d.timerChange('timeradjust')) : n ? (e = 'PAUSED', _$$d.timerChange('timerpause')) : t !== i ? (e = 'RESUMED', _$$d.timerChange('timerresume')) : s !== timer.selectedSongID ? _$$d.timerChange('timerupdatesongid') : (this.dispatch(k1(!1)), _$$d.timerChange('timerstart')));
-        e != null && this.dispatch(_$$lV({
+        }))) : t !== timer.time.totalTimeMs && getTimeRemaining(timer.time) > 0 ? (c = Math.round((t - timer.time.totalTimeMs) / 6e4), o && o.userName === a.name && performance.now() - o.timeOrigin < 1e4 && (c += o.minutesAdded), e = c > 0 ? 'INCREMENTED' : 'DECREMENTED', PluginCallbacks.timerChange('timeradjust')) : n ? (e = 'PAUSED', PluginCallbacks.timerChange('timerpause')) : t !== i ? (e = 'RESUMED', PluginCallbacks.timerChange('timerresume')) : s !== timer.selectedSongID ? PluginCallbacks.timerChange('timerupdatesongid') : (this.dispatch(setStartChimePlayed(!1)), PluginCallbacks.timerChange('timerstart')));
+        e != null && this.dispatch(setTimerNotification({
           action: e,
           timerID: r,
           userName: a.name,
@@ -6494,7 +6493,7 @@ let lX = class e extends sP(sN(sR)) {
         }));
       }
     }
-    this.dispatch(mI({
+    this.dispatch(setTimerThunk({
       totalTimeMs: t,
       timeRemainingMs: i,
       isPaused: n,
@@ -6505,7 +6504,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openTimerModal(e) {
-    this.dispatch(_$$lu({
+    this.dispatch(setTimerModalThunk({
       state: 'open',
       userInitiated: !0,
       source: e
@@ -6521,7 +6520,7 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   setMusic(e, t, i, n, r, a) {
-    this.dispatch(OJ({
+    this.dispatch(setMusicStateThunk({
       isPaused: t,
       musicMessageID: i,
       selectedSongID: n,
@@ -6621,7 +6620,7 @@ let lX = class e extends sP(sN(sR)) {
     return t;
   }
   startRenamingNodes(e) {
-    this.dispatch(FP({
+    this.dispatch(setLeftPanelTab({
       tab: UserInterfaceElements.LAYERS
     }));
     this.dispatch(showModal({
@@ -6633,13 +6632,13 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   startRenamingPage(e) {
-    this.dispatch(FP({
+    this.dispatch(setLeftPanelTab({
       tab: UserInterfaceElements.LAYERS
     }));
     atomStoreManager.set(_$$l3, e);
   }
   startRenamingPages(e) {
-    this.dispatch(FP({
+    this.dispatch(setLeftPanelTab({
       tab: UserInterfaceElements.LAYERS
     }));
     this.dispatch(showModal({
@@ -6719,7 +6718,7 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   backToFiles() {
-    this.dispatch(_$$eH());
+    this.dispatch(handleAutosaveAndNavigationThunk());
   }
   copyLinkToPage(e, t) {
     let i;
@@ -6829,7 +6828,7 @@ let lX = class e extends sP(sN(sR)) {
       name: 'DOCUMENT_IS_LOADED',
       value: performance.now() / 1e3
     }, '*'), window.DebuggingHelpers && (window.DebuggingHelpers.documentIsLoaded = !0), mpGlobal.shouldConnectToMultiplayer) {
-      let e = ZG();
+      let e = getAutosaveManagerInstance();
       let t = Multiplayer?.currentSessionID() ?? -1;
       e && !isLocalFileKey(e.fileKey) ? (t < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {
         reportErrorToSentry: !0
@@ -6842,8 +6841,8 @@ let lX = class e extends sP(sN(sR)) {
       })) : e || t !== 0 ? !e && t > 0 && this._store.getState().user && logAutosaveError('Autosave should have been initialized for logged in user.') : this._figFileLoadPromise.then(async e => {
         let t = this._store.getState().user;
         if (!t) return;
-        mu(e, t.id);
-        let i = ZG();
+        setupAutosaveManager(e, t.id);
+        let i = getAutosaveManagerInstance();
         if (i && !i.session()) {
           let e = Multiplayer?.currentSessionID() ?? -1;
           e < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {}, {
@@ -6938,8 +6937,8 @@ let lX = class e extends sP(sN(sR)) {
         showQuickActionsSuggestion: _$$iP,
         clearQuickActionsSuggestion: KY
       });
-      window.DebuggingHelpers.dumpAutosave = async () => console.log(JSON.stringify(await Ww()));
-      window.DebuggingHelpers.disableAutosave = () => ZG()?.terminateDueToError('Disabled for testing', !1);
+      window.DebuggingHelpers.dumpAutosave = async () => console.log(JSON.stringify(await dumpAutosaveData()));
+      window.DebuggingHelpers.disableAutosave = () => getAutosaveManagerInstance()?.terminateDueToError('Disabled for testing', !1);
       window.DebuggingHelpers.importLocalAutosaveFile = e => to(e);
       window.DebuggingHelpers.exportLocalAutosaveFile = async (e, t) => await ts(e, t);
       window.DebuggingHelpers.exportOfflineLog = () => {
@@ -6960,8 +6959,8 @@ let lX = class e extends sP(sN(sR)) {
             fullscreenValue.triggerActionInUserEditScope(e);
         }
       });
-      UK().enableCodegenMcpServer.getCopy() && this.enableCodegenMcpServer(!0);
-      _$$Ts2();
+      EditorPreferencesApi().enableCodegenMcpServer.getCopy() && this.enableCodegenMcpServer(!0);
+      setupPerformanceTracker();
       _$$Ts3('Fullscreen Periodic Metrics', () => this.openFileKey(), () => {
         let e = debugState.getState().selectedView;
         return mapEditorTypeToProductType(e.editorType);
@@ -7007,9 +7006,9 @@ let lX = class e extends sP(sN(sR)) {
       Nz(t) && gg();
       let i = LQ(t);
       let n = performance.now();
-      e(_$$nN(t));
+      e(updateFontList(t));
       i.redux = performance.now() - n;
-      t.localFontAgentVersion && this._store.dispatch(Bs(t.localFontAgentVersion));
+      t.localFontAgentVersion && this._store.dispatch(updateLocalFontAgentVersion(t.localFontAgentVersion));
       return i;
     };
     e.fontListPromise.then(e => {
@@ -7173,7 +7172,7 @@ let lX = class e extends sP(sN(sR)) {
         }) : getI18nString('my_cool_plugin.codegen_server_failed_to_start'),
         error: !0
       }));
-      UK().enableCodegenMcpServer.set(!1);
+      EditorPreferencesApi().enableCodegenMcpServer.set(!1);
     }));
   }
   sendMCPUpdate(e, t) {
@@ -7331,7 +7330,7 @@ let lX = class e extends sP(sN(sR)) {
     if (t.view === 'fullscreen') {
       if (t.editorType === FEditorType.Design || t.editorType === FEditorType.Illustration) {
         let t = e === UserInterfaceElements.ASSETS;
-        this.dispatch(FP({
+        this.dispatch(setLeftPanelTab({
           tab: e,
           persist: !0,
           shouldFocusSearchBar: t
@@ -7518,13 +7517,13 @@ let lX = class e extends sP(sN(sR)) {
     r != null && (s.variableConsumptionMap = r);
     a != null && (s.responsiveTextStyleVariants = a);
     s.leadingTrimEnabled = n;
-    this.dispatch(fk({
+    this.dispatch(updateSelectedStyleProperties({
       selectedStyleProperties: s
     }));
   }
   updateSelectedStyleThumbnail(e) {
     let t = URL.createObjectURL(new Blob([e]));
-    this.dispatch(fy({
+    this.dispatch(updateSelectedStyleThumbnailUrl({
       selectedStyleThumbnailURL: t
     }));
   }
@@ -7655,7 +7654,7 @@ let lX = class e extends sP(sN(sR)) {
         }
       }
     }
-    o ? this.dispatch(R5({
+    o ? this.dispatch(setHyperlinkPopup({
       urlString: e,
       data: o,
       position: t,
@@ -7663,10 +7662,10 @@ let lX = class e extends sP(sN(sR)) {
       mouse: n,
       guid: r,
       locked: a
-    })) : this.dispatch(R5(null));
+    })) : this.dispatch(setHyperlinkPopup(null));
   }
   updateHyperlinkPopupPosition(e, t) {
-    this.dispatch(_$$lz({
+    this.dispatch(updateHyperlinkPopupPosition({
       position: e,
       size: t
     }));
@@ -7681,17 +7680,17 @@ let lX = class e extends sP(sN(sR)) {
       mentionedUserId: e,
       mentionedByUserId: t
     };
-    o ? this.dispatch(Jt({
+    o ? this.dispatch(setCanvasMentionPopup({
       data: o,
       position: i,
       size: n,
       mouse: r,
       guid: a,
       locked: s
-    })) : this.dispatch(Jt(null));
+    })) : this.dispatch(setCanvasMentionPopup(null));
   }
   updateCanvasMentionPopupPosition(e, t) {
-    this.dispatch(pj({
+    this.dispatch(updateCanvasMentionPopupPosition({
       position: e,
       size: t
     }));
@@ -7963,7 +7962,7 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   pinchZoomFixDisabled() {
-    return UK().disablePinchZoomFix.getCopy();
+    return EditorPreferencesApi().disablePinchZoomFix.getCopy();
   }
   findInspiration(e = '') {
     $I({
@@ -8126,7 +8125,7 @@ let lX = class e extends sP(sN(sR)) {
     return i.error ? null : i.value;
   }
   onConnectDiagramShapeWithConnector() {
-    H0();
+    recordConnectDiagramShapeActive();
   }
   sendActiveStackRegionAnalytics(e) {
     trackUserEvent('Autolayout focused stack region', this._state, {

@@ -1,41 +1,74 @@
-import { z } from "../vendor/835909";
-var $$n0;
-var $$i2;
-!function (e) {
-  e.NEUTRAL = "neutral";
-  e.CASUAL = "casual";
-  e.PROFESSIONAL = "professional";
-  e.CONCISE = "concise";
-  e.EXPANDED = "expanded";
-}($$n0 || ($$n0 = {}));
-(function (e) {
-  e.DESIGN = "design";
-  e.SLIDES = "slides";
-  e.FIGJAM = "figjam";
-})($$i2 || ($$i2 = {}));
-let s = z.object({
+import { z } from 'zod'
+
+/**
+ * Enum for tone types (original: $$n0)
+ */
+export enum ToneType {
+  NEUTRAL = 'neutral',
+  CASUAL = 'casual',
+  PROFESSIONAL = 'professional',
+  CONCISE = 'concise',
+  EXPANDED = 'expanded',
+}
+
+/**
+ * Enum for product types (original: $$i2)
+ */
+export enum ProductType {
+  DESIGN = 'design',
+  SLIDES = 'slides',
+  FIGJAM = 'figjam',
+}
+
+/**
+ * Zod schema for an array of text objects (original: s)
+ */
+export const TextArraySchema = z.object({
   id: z.string(),
-  text: z.string()
-}).array();
-let o = z.object({
-  tone: z.nativeEnum($$n0),
-  weight: z.number()
-}).array();
-let l = z.enum(["design", "slides", "figjam"]);
-let $$d3 = z.union([z.object({
   text: z.string(),
-  tones: o,
-  productType: l.optional()
-}), z.object({
-  texts: s,
-  tones: o,
-  productType: l.optional()
-})]);
-let $$c1 = z.object({
+}).array()
+
+/**
+ * Zod schema for an array of tone objects (original: o)
+ */
+export const ToneArraySchema = z.object({
+  tone: z.nativeEnum(ToneType),
+  weight: z.number(),
+}).array()
+
+/**
+ * Zod enum for product types (original: l)
+ */
+export const ProductTypeEnum = z.enum(['design', 'slides', 'figjam'])
+
+/**
+ * Zod union schema for text/tones/productType (original: $$d3)
+ */
+export const TextTonesProductTypeSchema = z.union([
+  z.object({
+    text: z.string(),
+    tones: ToneArraySchema,
+    productType: ProductTypeEnum.optional(),
+  }),
+  z.object({
+    texts: TextArraySchema,
+    tones: ToneArraySchema,
+    productType: ProductTypeEnum.optional(),
+  }),
+])
+
+/**
+ * Zod schema for delta object (original: $$c1)
+ */
+export const DeltaSchema = z.object({
   id: z.string().optional(),
-  delta: z.string()
-});
-export const DE = $$n0;
-export const aC = $$c1;
-export const ch = $$i2;
-export const e3 = $$d3;
+  delta: z.string(),
+})
+
+/**
+ * Exported variables with refactored names
+ */
+export const DE = ToneType // original: $$n0
+export const aC = DeltaSchema // original: $$c1
+export const ch = ProductType // original: $$i2
+export const e3 = TextTonesProductTypeSchema // original: $$d3

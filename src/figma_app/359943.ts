@@ -17,10 +17,10 @@ import { k as _$$k2 } from "../905/582200";
 import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sx } from "../figma_app/91703";
+import { trackFileEventThunk } from "../figma_app/91703";
 import { sE, EZ, fS } from "../figma_app/681244";
 import { fullscreenValue } from "../figma_app/455680";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { isValidValue, MIXED_MARKER } from "../905/216495";
 import { getObservableValue } from "../figma_app/84367";
 import { KindEnum } from "../905/129884";
@@ -264,7 +264,7 @@ export function $$e_2({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let r = getObservableValue(UK().expandedFramePresetType, DeviceType.NONE);
+  let r = getObservableValue(EditorPreferencesApi().expandedFramePresetType, DeviceType.NONE);
   let l = useCallback(e => {
     r === e && (e = DeviceType.NONE);
     AppStateTsApi ? AppStateTsApi.editorPreferences().expandedFramePresetType.set(e) : logWarning("properties_panel", "failed to update user preference for frame presets types, AppStateTsApi is not available");
@@ -273,7 +273,7 @@ export function $$e_2({
     permissionScopeHandler.user("select-frame-preset", () => {
       let r = `${e.name} -`;
       Fullscreen && Fullscreen.createFrame(r, e.width, e.height, SideType.RIGHT, !0);
-      t(sx({
+      t(trackFileEventThunk({
         name: "Frame Size Preset Chosen",
         params: {
           method: "Frame Tool Preset List",
@@ -560,7 +560,7 @@ export class $$eE1 extends RecordingPureComponent {
       });
     };
     this.setPreset = e => {
-      this.props.dispatch(sx({
+      this.props.dispatch(trackFileEventThunk({
         name: "Frame Size Preset Chosen",
         params: {
           method: "Transform Panel",

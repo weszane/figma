@@ -5,7 +5,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { setTagGlobal } from "../905/11";
 import { getProductType } from "../figma_app/314264";
 import { isActiveAtom } from "../905/617744";
-import { y as _$$y } from "../905/913008";
+import { fullscreenCrashHandler } from "../905/913008";
 import { getMemoryUsage } from "../figma_app/527873";
 export class $$p0 {
   constructor() {
@@ -85,7 +85,7 @@ export class $$m1 extends $$p0 {
       productType: getProductType(this._state.selectedView, null)
     });
     let E = atomStoreManager.get(isActiveAtom);
-    _$$y.showMemoryCrashModal({
+    fullscreenCrashHandler.showMemoryCrashModal({
       isBranching: E
     }, this.openFileKey(), this._store);
   }

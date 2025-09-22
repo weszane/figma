@@ -23,12 +23,12 @@ import { b as _$$b } from "../905/620668";
 import { createOptimistThunk } from "../905/350402";
 import { filePutAction, markFileViewedOptimistic } from "../figma_app/78808";
 import { z as _$$z } from "../905/404751";
-import { kP, Y6, XQ, ho } from "../figma_app/91703";
+import { setNeedsUpgrade, setProgressBarState, setFileVersion, fullscreenOpen } from "../figma_app/91703";
 import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
 import { setTeamOptimistThunk } from "../figma_app/240735";
 import { UpgradeAction } from "../905/370443";
 import { trackDefinedFileEvent, logAndTrackCTA } from "../figma_app/314264";
-import { mu, yn } from "../figma_app/840917";
+import { setupAutosaveManager, destroyAutosaveManager } from "../figma_app/840917";
 import { isBranchAlt } from "../905/760074";
 import { Xg } from "../figma_app/199513";
 import { W as _$$W } from "../905/242083";
@@ -53,7 +53,7 @@ import { ag, u6, p9, Jt, yf } from "../905/509613";
 import { g_ } from "../905/646788";
 import { n as _$$n } from "../905/646812";
 import { e8 } from "../figma_app/557318";
-import { R as _$$R } from "../figma_app/941983";
+import { EditorUIState } from "../figma_app/941983";
 import { zR, DH, BL } from "../905/327855";
 import { Bz } from "../figma_app/298277";
 import { OpenEditorFileData } from "../figma_app/43951";
@@ -102,7 +102,7 @@ async function ea(e, t, i) {
   atomStoreManager.set(yf, new Set());
   let l = getFeatureFlags();
   let c = s.feature_flags;
-  if (t.dispatch(kP({
+  if (t.dispatch(setNeedsUpgrade({
     needsUpgrade: s.needs_upgrade
   })), s.file_repo && t.dispatch(bE({
     repo: s.file_repo
@@ -155,7 +155,7 @@ async function ea(e, t, i) {
   };
   getFeatureFlags().ce_new_missing_fonts_logging && e8();
   _$$n(t, I);
-  (selectedView.versionId || selectedView.compareVersionId || selectedView.compareLatest) && t.dispatch(Y6({
+  (selectedView.versionId || selectedView.compareVersionId || selectedView.compareLatest) && t.dispatch(setProgressBarState({
     mode: UIVisibilitySetting.ON_AND_LOCKED
   }));
   selectedView.compareLatest && t.dispatch(maybeShowVersionDiffNotification({
@@ -443,7 +443,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     fullscreenEditorType: a.editorType,
     didRedirectEditorTypeToStored: s
   }));
-  mpGlobal.shouldConnectToMultiplayer || e.dispatch(XQ({
+  mpGlobal.shouldConnectToMultiplayer || e.dispatch(setFileVersion({
     fileVersion: Ob
   }));
   fullscreenValue.figFileLoaded(n);
@@ -499,8 +499,8 @@ let eU = createOptimistThunk((e, t) => {
   isBranchAlt(file) && desktopAPIInstance?.setIsBranch(!0);
   let s = t.fullscreenEditorType;
   s && mapEditorTypeToFileType(s) === t.file.editorType || (s = mapFileTypeToEditorType(t.file.editorType));
-  _$$R.setEditorType(s);
-  _$$R.setLoggedIn(!!i);
+  EditorUIState.setEditorType(s);
+  EditorUIState.setLoggedIn(!!i);
   e.dispatch(eH({
     file,
     user: i,
@@ -509,7 +509,7 @@ let eU = createOptimistThunk((e, t) => {
     didRedirectEditorTypeToStored
   }));
   setAutosaveStatus(!1);
-  e.dispatch(ho(t));
+  e.dispatch(fullscreenOpen(t));
   file && "apple" === (file.license || "").toLowerCase() && e.dispatch(showModalHandler({
     type: eT
   }));
@@ -544,7 +544,7 @@ let eH = createOptimistThunk(async (e, {
       isNewFile: !1,
       state: A
     });
-    i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
+    i ? setupAutosaveManager(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
     let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : "";
     let v = getBackgroundColorForTheme(getMPVisibleTheme(A.theme.themePreference));
     BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (getImageManager().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
@@ -586,7 +586,7 @@ let eH = createOptimistThunk(async (e, {
       }, 4e3);
     });
   } catch (n) {
-    if (await yn(), n.message === er) return;
+    if (await destroyAutosaveManager(), n.message === er) return;
     let i = Number(n.cause?.status || 0);
     desktopAPIInstance ? desktopAPIInstance.reportFatalError(t.key, 0 === i ? {
       type: "load",

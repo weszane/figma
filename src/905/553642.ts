@@ -1,6 +1,6 @@
 import { getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { jI } from "../figma_app/506364";
 import { LE, i3, Ev, x5 } from "../905/543054";
 import { up, Up } from "../905/145989";
@@ -10,7 +10,7 @@ export function $$c1() {
     action: "toggle-spell-check",
     flags: ["design", "whiteboard", "slides"],
     propertyValue: !0,
-    property: UK().spellCheckPreference
+    property: EditorPreferencesApi().spellCheckPreference
   };
 }
 export function $$u0() {
@@ -41,7 +41,7 @@ export function $$u0() {
       let t = i3();
       let i = void 0 !== t ? t : QC.HUNSPELL;
       let n = up(i);
-      return UK().spellCheckPreference.getCopy() && Ev(n) === e;
+      return EditorPreferencesApi().spellCheckPreference.getCopy() && Ev(n) === e;
     },
     callback: async () => {
       let t = await x5();

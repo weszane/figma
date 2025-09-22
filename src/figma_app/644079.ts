@@ -10,7 +10,7 @@ import { r as _$$r } from "../figma_app/375550";
 import { isInteractionReady } from "../figma_app/433958";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { isWhiteboardFileType, isDevHandoffEditorType } from "../figma_app/976749";
-import { UX } from "../figma_app/740163";
+import { getDevHandoffInspectSplitPosition } from "../figma_app/740163";
 import { getViewportY } from "../figma_app/62612";
 import { isVsCodeEnvironment } from "../905/858738";
 import { kd } from "../figma_app/546509";
@@ -43,7 +43,7 @@ export function $$P0() {
   let t = useAtomWithSubscription(P4);
   let r = useAtomWithSubscription(O);
   let n = getObservableValue(AppStateTsApi?.editorPreferences()?.showFigmaScope, !1);
-  let d = UX();
+  let d = getDevHandoffInspectSplitPosition();
   let u = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
   let p = lq();
   let g = useAtomWithSubscription(_$$O);

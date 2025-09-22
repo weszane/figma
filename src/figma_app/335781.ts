@@ -10,7 +10,7 @@ import u from "classnames";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { F } from "../905/258517";
@@ -59,7 +59,7 @@ export function $$M0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let U = kl("stackDistributionMode");
   let B = kl("stackMode");
   let [G, V] = lJ("stackSpacing");

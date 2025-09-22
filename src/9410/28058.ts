@@ -12,7 +12,7 @@ import { u2 } from "../figma_app/223206";
 import { D as _$$D } from "../905/12032";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Tc } from "../905/797478";
-import { dP } from "../figma_app/740163";
+import { getSidebarSplitPosition } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -65,7 +65,7 @@ function G({
 }
 export function $$V1() {
   let [e, t] = useAtomValueAndSetter(Ei);
-  let i = dP();
+  let i = getSidebarSplitPosition();
   let s = _o();
   let l = Ye();
   let m = useDispatch();

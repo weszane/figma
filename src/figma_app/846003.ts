@@ -9,13 +9,13 @@ import { l5 } from "../figma_app/559491";
 import { hydrateFileBrowser, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { yJ as _$$yJ, bE } from "../figma_app/598926";
-import { OB } from "../figma_app/91703";
+import { newFileLoaded } from "../figma_app/91703";
 import { yJ as _$$yJ2 } from "../905/466026";
 import { searchSetParametersAction } from "../905/977218";
 import { trackUserEvent } from "../figma_app/314264";
 import { getRepoById } from "../905/760074";
-import { Qr, hL, OR } from "../905/697795";
-import { B8 } from "../figma_app/682945";
+import { getReleaseManifestGitCommit, setEditorDocumentTitle, setViewDocumentTitle } from "../905/697795";
+import { updateFileInfo } from "../figma_app/682945";
 import { isTeamInGracePeriod } from "../figma_app/345997";
 import { $Z, mapPathToSelectedView, selectedViewToPath, isResourceOrCommunityHubView } from "../figma_app/193867";
 import { w } from "../figma_app/119601";
@@ -62,7 +62,7 @@ let $$P0 = e => t => function (r) {
     })) : e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     }));
-  } else if (OB.matches(r)) {
+  } else if (newFileLoaded.matches(r)) {
     let e = {
       view: "fullscreen",
       fileKey: r.payload.file.key,
@@ -71,14 +71,14 @@ let $$P0 = e => t => function (r) {
     let t = selectedViewToPath(P, e);
     customHistory.replace(t, {
       ...e,
-      jsCommitHash: Qr()
+      jsCommitHash: getReleaseManifestGitCommit()
     });
   } else if (selectViewAction.matches(r)) {
     if ("prototype" !== o.view && "prototype" === r.payload.view && q()) {
       let e = selectedViewToPath(P, r.payload);
       customHistory.redirect(e);
     }
-    "fullscreen" === r.payload.view && ("fullscreen" !== o.view || r.payload.editorType !== o.editorType) && B8(r.payload.editorType);
+    "fullscreen" === r.payload.view && ("fullscreen" !== o.view || r.payload.editorType !== o.editorType) && updateFileInfo(r.payload.editorType);
     let {
       selectedView
     } = e.getState();
@@ -89,23 +89,23 @@ let $$P0 = e => t => function (r) {
       }), !r.payload.forceReplaceState && (customHistory.location.state || isResourceOrCommunityHubView(o)) && $$w1(o, r.payload) ? customHistory.push(t, {
         ...r.payload,
         previousSelectedView: o,
-        jsCommitHash: Qr()
+        jsCommitHash: getReleaseManifestGitCommit()
       }) : customHistory.replace(t, {
         ...r.payload,
         previousSelectedView: o,
-        jsCommitHash: Qr()
+        jsCommitHash: getReleaseManifestGitCommit()
       })) : null == customHistory.location.state && customHistory.replace(t, {
         ...r.payload,
         previousSelectedView: o,
-        jsCommitHash: Qr()
+        jsCommitHash: getReleaseManifestGitCommit()
       });
       e.getState()?.user?.appData?.loggedOut && "fullscreen" !== r.payload.view && customHistory.reload("User Logged out");
     }
     if ("searchAndBrowse" === r.payload.subView) {
       let e = r.payload.data;
-      e && !e.category && hL(getTabTitle(e));
-    } else OR(P, r.payload);
-  } else if (Af.matches(r) && "hubFile" === P.selectedView.subView) OR(P, {
+      e && !e.category && setEditorDocumentTitle(getTabTitle(e));
+    } else setViewDocumentTitle(P, r.payload);
+  } else if (Af.matches(r) && "hubFile" === P.selectedView.subView) setViewDocumentTitle(P, {
     hubFileId: r.payload.hubFileId,
     subView: "hubFile",
     view: "communityHub"
@@ -118,21 +118,21 @@ let $$P0 = e => t => function (r) {
         let e = selectedViewToPath(P, t);
         customHistory.replace(e);
       }
-      OR(P, t);
+      setViewDocumentTitle(P, t);
     }
   } else if (_$$yJ.matches(r)) {
     if (!getFeatureFlags().folder_page_fix_tab_titles) {
       let t = e.getState().selectedView;
-      "folder" === t.view && t.folderId === r.payload.folder.id && OR(P, t);
+      "folder" === t.view && t.folderId === r.payload.folder.id && setViewDocumentTitle(P, t);
     }
   } else if (bE.matches(r)) {
     let t = e.getState().selectedView;
     if ("folder" === t.view && t.folderId === r.payload.id) {
-      getFeatureFlags().folder_page_fix_tab_titles || OR(P, t);
+      getFeatureFlags().folder_page_fix_tab_titles || setViewDocumentTitle(P, t);
       let e = selectedViewToPath(P, t);
       customHistory.replace(e, {
         ...t,
-        jsCommitHash: Qr()
+        jsCommitHash: getReleaseManifestGitCommit()
       });
     }
   } else if (_$$yJ2.matches(r)) {
@@ -142,11 +142,11 @@ let $$P0 = e => t => function (r) {
       if (e) {
         let n = getRepoById(e, P.repos);
         if (n && n.id === r.payload.repo.id) {
-          OR(P, t);
+          setViewDocumentTitle(P, t);
           let e = selectedViewToPath(P, t);
           customHistory && customHistory.replace(e, {
             ...t,
-            jsCommitHash: Qr()
+            jsCommitHash: getReleaseManifestGitCommit()
           });
         }
       }
@@ -154,19 +154,19 @@ let $$P0 = e => t => function (r) {
   } else if (filePutAction.matches(r)) {
     let t = e.getState().selectedView;
     if ("fullscreen" === t.view && r.payload.file.key === t.fileKey || "prototype" === t.view && r.payload.file.key === t.file.key) {
-      OR(P, t);
+      setViewDocumentTitle(P, t);
       let e = selectedViewToPath(P, t);
       customHistory && customHistory.replace(e, {
         ...t,
-        jsCommitHash: Qr()
+        jsCommitHash: getReleaseManifestGitCommit()
       });
     }
   } else if (searchSetParametersAction.matches(r)) {
     let t = e.getState().selectedView;
     t?.view === "search" && (customHistory.replace(selectedViewToPath(P, t), {
       ...t,
-      jsCommitHash: Qr()
-    }), OR(P, t));
+      jsCommitHash: getReleaseManifestGitCommit()
+    }), setViewDocumentTitle(P, t));
   } else trackSidebarClick.matches(r) ? trackUserEvent("File Browser Sidebar Clicked", e.getState(), {
     clickedResourceType: r.payload.clickedResourceType,
     resourceIdOrKey: r.payload.resourceIdOrKey

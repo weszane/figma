@@ -37,7 +37,7 @@ import { allCategoriesQuery } from "../figma_app/188671";
 import { resetCommentState } from "../figma_app/530167";
 import { i9, N4, VS, oO, bk } from "../figma_app/49598";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
-import { M3 } from "../figma_app/91703";
+import { fileSelectedShareModalTab } from "../figma_app/91703";
 import { hideModal, popModalStack } from "../905/156213";
 import { PublishModalState } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
@@ -1331,7 +1331,7 @@ let to = connect((e, t) => {
     }));
   },
   hideModal: () => {
-    t.isEditHubFilePageMode || e(M3({
+    t.isEditHubFilePageMode || e(fileSelectedShareModalTab({
       view: ShareAction.INVITE
     }));
     e(popModalStack());

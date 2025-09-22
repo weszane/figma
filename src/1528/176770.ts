@@ -3,7 +3,7 @@ import { deepEqual } from "../905/382883";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { yj } from "../1528/306300";
 import { Mo, Yn, Ws, UE } from "../figma_app/152690";
@@ -13,7 +13,7 @@ export function $$p0({
   recordingKey: n,
   onChange: p
 }) {
-  let h = getObservableOrFallback(UK().showGuids);
+  let h = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let m = Object.entries(t).map(([e, t]) => ({
     ...t,
     setKey: e

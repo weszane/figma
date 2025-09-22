@@ -38,7 +38,7 @@ import { nc, NJ, nM } from '../figma_app/570630';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { H5, J6, jv, L6, Li, lV, MK, P5, U1, yZ } from '../figma_app/617606';
 import { f3 } from '../figma_app/690664';
-import { G1 } from '../figma_app/691470';
+import { CortexError } from '../figma_app/691470';
 import { e as _$$e, SE } from '../figma_app/735943';
 import { Fullscreen, ChatMessageType, SnapshotStatus } from '../figma_app/763686';
 import { nU } from '../figma_app/779249';
@@ -441,7 +441,7 @@ async function et({
       if (value && (B ? B.queue(value) : u(value)), done) break;
     }
   } catch (n) {
-    n instanceof G1 || n instanceof CortexErrorV2 ? atomStoreManager.set(QK(t?.guid || ''), {
+    n instanceof CortexError || n instanceof CortexErrorV2 ? atomStoreManager.set(QK(t?.guid || ''), {
       error: n,
       cortexClientGeneratedRequestUuid: _
     }) : atomStoreManager.set(QK(t?.guid || ''), {

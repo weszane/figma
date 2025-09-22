@@ -1,10 +1,4 @@
-export function $$n2(e) {
-  return !!e && void 0 !== e.query
-}
-var $$i1 = (e => (e.accessibility = 'accessibility', e.bannerTemplates = 'banner-templates', e.brainstorming = 'brainstorming', e.cardTemplates = 'card-templates', e.classroomActivities = 'classroom-activities', e.dataTemplates = 'data-templates', e.designInspirations = 'design-inspirations', e.designTemplates = 'design-templates', e.designTools = 'design-tools', e.designTutorials = 'design-tutorials', e.desktopAppsWebsites = 'website-templates', e.development = 'development', e.deviceMockups = 'device-mockups', e.diagramming = 'diagramming', e.editingEffects = 'editing-effects', e.education = 'education', e.facebookTemplates = 'facebook-templates', e.fileOrganization = 'file-organization', e.fontsTypography = 'fonts-typography', e.funGames = 'fun-games', e.flyerTemplates = 'flyer-templates', e.icons = 'icons', e.illustrations = 'illustrations', e.importExport = 'import-export', e.instagramTemplates = 'instagram-templates', e.invitationTemplates = 'invitation-templates', e.lessonPlans = 'lesson-plans', e.libraries = 'libraries', e.linkedinTemplates = 'linkedin-templates', e.make = 'make', e.mobileApps = 'mobile-apps', e.nameTagTemplates = 'name-tag-templates', e.onePagerTemplates = 'one-pager-templates', e.invoiceTemplates = 'invoice-templates', e.letterheadTemplates = 'letterhead-templates', e.portfolios = 'portfolio-templates', e.printableTemplates = 'printable-templates', e.calendarTemplates = 'calendar-templates', e.posterTemplates = 'poster-templates', e.presentations = 'presentations', e.prototypingAnimation = 'prototyping-animation', e.resumes = 'resume-templates', e.shapesColors = 'shapes-colors', e.socialMediaTemplates = 'social-media-templates', e.stockPhotography = 'stock-photography', e.strategicPlanning = 'strategic-planning', e.teamMeetings = 'team-meetings', e.tiktokTemplates = 'tiktok-templates', e.tutorials = 'design-tutorials', e.uiKits = 'ui-kits', e.visualAssets = 'visual-assets', e.webAds = 'web-ads', e.websiteTemplates = 'website-templates', e.whiteboarding = 'whiteboarding', e.wireframes = 'wireframes', e.workshopTemplates = 'workshop-templates', e.xTwitterTemplates = 'x-twitter-templates', e.youtubeTemplates = 'youtube-templates', e.zoomBackgroundTemplates = 'zoom-background-templates', e))($$i1 || {})
-var $$a0 = (e => (e.blogWebsites = 'blog', e.businessWebsites = 'business', e.landingPageTemplates = 'landing-pages', e.portfolioWebsiteTemplates = 'portfolio', e.photographyWebsites = 'photography', e.weddingWebsites = 'wedding', e.interiorDesignWebsites = 'interior-design', e))($$a0 || {})
-var $$s3 = (e => (e.LANDING = 'landing', e.NAV = 'nav', e))($$s3 || {})
-let $$o5 = {
+let localizationMappings = {
   'es-es': {
     'accesibilidad': 'accessibility',
     'actividades-del-aula': 'classroom-activities',
@@ -183,21 +177,140 @@ let $$o5 = {
     'wireframes': 'wireframes',
   },
 }
-let l = Object.entries($$o5).reduce((e, [t, r]) => (e[t] = Object.entries(r).reduce((e, [t, r]) => (e[r] = t, e), {}), e), {})
-export function $$d6(e, t) {
-  let r = $$o5[t]
-  if (r)
-    return r[e]
+
+/**
+ * Checks if the provided object has a 'query' property.
+ * Original: $$n2
+ */
+export function hasQuery(obj: any): boolean {
+  return !!obj && obj.query !== undefined;
 }
-export function $$c4(e, t) {
-  let r = l[t]
-  if (r)
-    return r[e]
+
+/**
+ * Enum for template categories.
+ * Original: $$i1
+ */
+export const TemplateCategory = {
+  accessibility: 'accessibility',
+  bannerTemplates: 'banner-templates',
+  brainstorming: 'brainstorming',
+  cardTemplates: 'card-templates',
+  classroomActivities: 'classroom-activities',
+  dataTemplates: 'data-templates',
+  designInspirations: 'design-inspirations',
+  designTemplates: 'design-templates',
+  designTools: 'design-tools',
+  designTutorials: 'design-tutorials',
+  desktopAppsWebsites: 'website-templates',
+  development: 'development',
+  deviceMockups: 'device-mockups',
+  diagramming: 'diagramming',
+  editingEffects: 'editing-effects',
+  education: 'education',
+  facebookTemplates: 'facebook-templates',
+  fileOrganization: 'file-organization',
+  fontsTypography: 'fonts-typography',
+  funGames: 'fun-games',
+  flyerTemplates: 'flyer-templates',
+  icons: 'icons',
+  illustrations: 'illustrations',
+  importExport: 'import-export',
+  instagramTemplates: 'instagram-templates',
+  invitationTemplates: 'invitation-templates',
+  lessonPlans: 'lesson-plans',
+  libraries: 'libraries',
+  linkedinTemplates: 'linkedin-templates',
+  make: 'make',
+  mobileApps: 'mobile-apps',
+  nameTagTemplates: 'name-tag-templates',
+  onePagerTemplates: 'one-pager-templates',
+  invoiceTemplates: 'invoice-templates',
+  letterheadTemplates: 'letterhead-templates',
+  portfolios: 'portfolio-templates',
+  printableTemplates: 'printable-templates',
+  calendarTemplates: 'calendar-templates',
+  posterTemplates: 'poster-templates',
+  presentations: 'presentations',
+  prototypingAnimation: 'prototyping-animation',
+  resumes: 'resume-templates',
+  shapesColors: 'shapes-colors',
+  socialMediaTemplates: 'social-media-templates',
+  stockPhotography: 'stock-photography',
+  strategicPlanning: 'strategic-planning',
+  teamMeetings: 'team-meetings',
+  tiktokTemplates: 'tiktok-templates',
+  tutorials: 'design-tutorials',
+  uiKits: 'ui-kits',
+  visualAssets: 'visual-assets',
+  webAds: 'web-ads',
+  websiteTemplates: 'website-templates',
+  whiteboarding: 'whiteboarding',
+  wireframes: 'wireframes',
+  workshopTemplates: 'workshop-templates',
+  xTwitterTemplates: 'x-twitter-templates',
+  youtubeTemplates: 'youtube-templates',
+  zoomBackgroundTemplates: 'zoom-background-templates',
+};
+
+/**
+ * Enum for website types.
+ * Original: $$a0
+ */
+export const WebsiteType = {
+  blogWebsites: 'blog',
+  businessWebsites: 'business',
+  landingPageTemplates: 'landing-pages',
+  portfolioWebsiteTemplates: 'portfolio',
+  photographyWebsites: 'photography',
+  weddingWebsites: 'wedding',
+  interiorDesignWebsites: 'interior-design',
+};
+
+/**
+ * Enum for navigation types.
+ * Original: $$s3
+ */
+export const NavigationType = {
+  LANDING: 'landing',
+  NAV: 'nav',
+};
+
+/**
+ * Reverse mapping for localization.
+ * Original: l
+ */
+const reverseLocalizationMappings: Record<string, Record<string, string>> = Object.entries(localizationMappings)
+  .reduce((acc, [locale, mapping]) => {
+    acc[locale] = Object.entries(mapping).reduce((innerAcc, [localized, canonical]) => {
+      innerAcc[canonical] = localized;
+      return innerAcc;
+    }, {} as Record<string, string>);
+    return acc;
+  }, {} as Record<string, Record<string, string>>);
+
+/**
+ * Gets the canonical category name from a localized string.
+ * Original: $$d6
+ */
+export function getCanonicalCategory(localized: string, locale: string): string | undefined {
+  const mapping = localizationMappings[locale];
+  return mapping ? mapping[localized] : undefined;
 }
-export const HP = $$a0
-export const LJ = $$i1
-export const OE = $$n2
-export const PF = $$s3
-export const Tr = $$c4
-export const gT = $$o5
-export const zU = $$d6
+
+/**
+ * Gets the localized string from a canonical category name.
+ * Original: $$c4
+ */
+export function getLocalizedCategory(canonical: string, locale: string): string | undefined {
+  const mapping = reverseLocalizationMappings[locale];
+  return mapping ? mapping[canonical] : undefined;
+}
+
+// Exported variables with refactored names
+export const HP = WebsiteType;
+export const LJ = TemplateCategory;
+export const OE = hasQuery;
+export const PF = NavigationType;
+export const Tr = getLocalizedCategory;
+export const gT = localizationMappings;
+export const zU = getCanonicalCategory;

@@ -86,7 +86,7 @@ import { KindEnum } from "../905/129884";
 import { zZ } from "../figma_app/299859";
 import { Link } from "../905/438674";
 import { BigTextInputForwardRef } from "../figma_app/637027";
-import { sT, RU } from "../figma_app/740163";
+import { getNudgeAmounts, getBigNudgeAmount } from "../figma_app/740163";
 import { oM, QK, Ti, PB, x as _$$x, iR } from "../897/934363";
 import { Y as _$$Y2 } from "../5421/483739";
 import { Ay } from "../figma_app/976110";
@@ -1346,7 +1346,7 @@ function tc({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let c = useDispatch();
   let p = (t, n) => (o, i) => {
     if (t) {
@@ -1440,7 +1440,7 @@ function tf({
   let g = "PLAY" === d || "PAUSE" === d || "TOGGLE_PLAY_PAUSE" === d;
   let y = "MUTE" === d || "UNMUTE" === d || "TOGGLE_MUTE_UNMUTE" === d;
   let _ = useDispatch();
-  let v = RU();
+  let v = getBigNudgeAmount();
   let I = useCallback(e => {
     n({
       mediaSkipToTime: e

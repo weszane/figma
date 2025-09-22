@@ -11,7 +11,7 @@ import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, withTracking } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { clearSelection } from "../figma_app/741237";
 import { valueOrFallback, isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { kl, lJ, pw, zj, DQ, fC, Gt } from "../905/275640";
@@ -31,7 +31,7 @@ import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { Q as _$$Q } from "../905/346809";
 import { Point } from "../905/736624";
-import { XE, u1 } from "../figma_app/91703";
+import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
 import { $T } from "../figma_app/8833";
 import { cn } from "../905/959568";
 import { J as _$$J2 } from "../905/225412";
@@ -113,9 +113,9 @@ function z(e) {
   } = e;
   let l = useCallback(() => {
     let e = t.current;
-    if (pickerShown && pickerShown.id === $T) dispatch(XE());else if (e && e instanceof HTMLElement) {
+    if (pickerShown && pickerShown.id === $T) dispatch(hidePickerThunk());else if (e && e instanceof HTMLElement) {
       let t = cn(e);
-      dispatch(u1({
+      dispatch(showPickerThunk({
         id: $T,
         initialX: t.x,
         initialY: t.y
@@ -1067,7 +1067,7 @@ export let $$e70 = withTracking(function (e) {
   let {
     bigNudgeAmount,
     smallNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let B = function (e) {
     let t = Gt("videoMediaLoop");
     let n = Gt("videoAutoplay");

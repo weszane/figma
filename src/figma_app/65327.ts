@@ -12,7 +12,7 @@ import { d as _$$d } from "../905/692836";
 import { t as _$$t, c as _$$c } from "../905/722657";
 import { r as _$$r } from "../905/12476";
 import { selectViewAction } from "../905/929976";
-import { Y6 } from "../figma_app/91703";
+import { setProgressBarState } from "../figma_app/91703";
 import { IN, pM, KE } from "../905/116101";
 import { postUserFlag } from "../905/985254";
 import { getSelectedEditorType } from "../figma_app/976749";
@@ -75,7 +75,7 @@ export function $$k0(e, t) {
         view: "fullscreen",
         editorType: FEditorType.DevHandoff
       }));
-      "fullscreen" === K.view && K.compareVersionId && (r(Y6({
+      "fullscreen" === K.view && K.compareVersionId && (r(setProgressBarState({
         mode: UIVisibilitySetting.KEEP_UI,
         type: LoadingBarStatus.SPINNER
       })), r(setActiveVersion({

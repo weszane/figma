@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getTranslatedDynamicContent } from "../905/303541";
 import { getValueOrFallback } from "../905/872825";
-import { LJ } from "../figma_app/930386";
+import { TemplateCategory } from "../figma_app/930386";
 import { BrowseCategoryRoute } from "../figma_app/805898";
 import { E } from "../5430/204549";
 import { _C6 } from "../figma_app/27776";
@@ -17,8 +17,8 @@ export function $$u0({
   } = e || {
     parent_category: null
   };
-  let m = getValueOrFallback(parent_category?.url_slug, LJ);
-  let _ = getValueOrFallback(e.url_slug, LJ);
+  let m = getValueOrFallback(parent_category?.url_slug, TemplateCategory);
+  let _ = getValueOrFallback(e.url_slug, TemplateCategory);
   let p = !!t;
   let h = [parent_category && m && {
     text: getTranslatedDynamicContent(parent_category.i18n_meta?.title, parent_category.title),

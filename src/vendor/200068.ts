@@ -1,4 +1,4 @@
-import { kY, Ii } from "../vendor/835909";
+import { ZodFirstPartyTypeKind, ZodOptional } from "../vendor/835909";
 let i;
 let s = Symbol("Let zodToJsonSchema decide on which parser to use");
 let o = {
@@ -62,7 +62,7 @@ function v(e, r) {
   let n = {
     type: "array"
   };
-  e.type?._def && e.type?._def?.typeName !== kY.ZodAny && (n.items = eo(e.type._def, {
+  e.type?._def && e.type?._def?.typeName !== ZodFirstPartyTypeKind.ZodAny && (n.items = eo(e.type._def, {
     ...r,
     currentPath: [...r.currentPath, "items"]
   }));
@@ -419,7 +419,7 @@ function L(e, r) {
   return s;
 }
 function j(e, r) {
-  if ("openAi" === r.target && console.warn("Warning: OpenAI may not support records in schemas! Try an array of key-value pairs instead."), "openApi3" === r.target && e.keyType?._def.typeName === kY.ZodEnum) return {
+  if ("openAi" === r.target && console.warn("Warning: OpenAI may not support records in schemas! Try an array of key-value pairs instead."), "openApi3" === r.target && e.keyType?._def.typeName === ZodFirstPartyTypeKind.ZodEnum) return {
     type: "object",
     required: e.keyType._def.values,
     properties: e.keyType._def.values.reduce((n, i) => ({
@@ -439,7 +439,7 @@ function j(e, r) {
     }) ?? r.allowedAdditionalProperties
   };
   if ("openApi3" === r.target) return n;
-  if (e.keyType?._def.typeName === kY.ZodString && e.keyType._def.checks?.length) {
+  if (e.keyType?._def.typeName === ZodFirstPartyTypeKind.ZodString && e.keyType._def.checks?.length) {
     let {
       type,
       ...s
@@ -449,13 +449,13 @@ function j(e, r) {
       propertyNames: s
     };
   }
-  if (e.keyType?._def.typeName === kY.ZodEnum) return {
+  if (e.keyType?._def.typeName === ZodFirstPartyTypeKind.ZodEnum) return {
     ...n,
     propertyNames: {
       enum: e.keyType._def.values
     }
   };
-  if (e.keyType?._def.typeName === kY.ZodBranded && e.keyType._def.type._def.typeName === kY.ZodString && e.keyType._def.type._def.checks?.length) {
+  if (e.keyType?._def.typeName === ZodFirstPartyTypeKind.ZodBranded && e.keyType._def.type._def.typeName === ZodFirstPartyTypeKind.ZodString && e.keyType._def.type._def.checks?.length) {
     let {
       type,
       ...s
@@ -627,7 +627,7 @@ function Y(e, r) {
     let a = o[e];
     if (void 0 === a || void 0 === a._def) continue;
     let h = X(a);
-    h && n && (a instanceof Ii && (a = a._def.innerType), a.isNullable() || (a = a.nullable()), h = !1);
+    h && n && (a instanceof ZodOptional && (a = a._def.innerType), a.isNullable() || (a = a.nullable()), h = !1);
     let p = eo(a._def, {
       ...r,
       currentPath: [...r.currentPath, "properties", e],
@@ -737,73 +737,73 @@ function en() {
 let ei = (e, r) => eo(e.innerType._def, r);
 let es = (e, r, n) => {
   switch (r) {
-    case kY.ZodString:
+    case ZodFirstPartyTypeKind.ZodString:
       return P(e, n);
-    case kY.ZodNumber:
+    case ZodFirstPartyTypeKind.ZodNumber:
       return W(e, n);
-    case kY.ZodObject:
+    case ZodFirstPartyTypeKind.ZodObject:
       return Y(e, n);
-    case kY.ZodBigInt:
+    case ZodFirstPartyTypeKind.ZodBigInt:
       return y(e, n);
-    case kY.ZodBoolean:
+    case ZodFirstPartyTypeKind.ZodBoolean:
       return b();
-    case kY.ZodDate:
+    case ZodFirstPartyTypeKind.ZodDate:
       return w(e, n);
-    case kY.ZodUndefined:
+    case ZodFirstPartyTypeKind.ZodUndefined:
       return er();
-    case kY.ZodNull:
+    case ZodFirstPartyTypeKind.ZodNull:
       return U(n);
-    case kY.ZodArray:
+    case ZodFirstPartyTypeKind.ZodArray:
       return v(e, n);
-    case kY.ZodUnion:
-    case kY.ZodDiscriminatedUnion:
+    case ZodFirstPartyTypeKind.ZodUnion:
+    case ZodFirstPartyTypeKind.ZodDiscriminatedUnion:
       return V(e, n);
-    case kY.ZodIntersection:
+    case ZodFirstPartyTypeKind.ZodIntersection:
       return C(e, n);
-    case kY.ZodTuple:
+    case ZodFirstPartyTypeKind.ZodTuple:
       return et(e, n);
-    case kY.ZodRecord:
+    case ZodFirstPartyTypeKind.ZodRecord:
       return j(e, n);
-    case kY.ZodLiteral:
+    case ZodFirstPartyTypeKind.ZodLiteral:
       return T(e, n);
-    case kY.ZodEnum:
+    case ZodFirstPartyTypeKind.ZodEnum:
       return E(e);
-    case kY.ZodNativeEnum:
+    case ZodFirstPartyTypeKind.ZodNativeEnum:
       return Z(e);
-    case kY.ZodNullable:
+    case ZodFirstPartyTypeKind.ZodNullable:
       return q(e, n);
-    case kY.ZodOptional:
+    case ZodFirstPartyTypeKind.ZodOptional:
       return H(e, n);
-    case kY.ZodMap:
+    case ZodFirstPartyTypeKind.ZodMap:
       return z(e, n);
-    case kY.ZodSet:
+    case ZodFirstPartyTypeKind.ZodSet:
       return ee(e, n);
-    case kY.ZodLazy:
+    case ZodFirstPartyTypeKind.ZodLazy:
       return () => e.getter()._def;
-    case kY.ZodPromise:
+    case ZodFirstPartyTypeKind.ZodPromise:
       return J(e, n);
-    case kY.ZodNaN:
-    case kY.ZodNever:
+    case ZodFirstPartyTypeKind.ZodNaN:
+    case ZodFirstPartyTypeKind.ZodNever:
       return F();
-    case kY.ZodEffects:
+    case ZodFirstPartyTypeKind.ZodEffects:
       return S(e, n);
-    case kY.ZodAny:
+    case ZodFirstPartyTypeKind.ZodAny:
       return p();
-    case kY.ZodUnknown:
+    case ZodFirstPartyTypeKind.ZodUnknown:
       return en();
-    case kY.ZodDefault:
+    case ZodFirstPartyTypeKind.ZodDefault:
       return _(e, n);
-    case kY.ZodBranded:
+    case ZodFirstPartyTypeKind.ZodBranded:
       return O(e, n);
-    case kY.ZodReadonly:
+    case ZodFirstPartyTypeKind.ZodReadonly:
       return ei(e, n);
-    case kY.ZodCatch:
+    case ZodFirstPartyTypeKind.ZodCatch:
       return x(e, n);
-    case kY.ZodPipeline:
+    case ZodFirstPartyTypeKind.ZodPipeline:
       return K(e, n);
-    case kY.ZodFunction:
-    case kY.ZodVoid:
-    case kY.ZodSymbol:
+    case ZodFirstPartyTypeKind.ZodFunction:
+    case ZodFirstPartyTypeKind.ZodVoid:
+    case ZodFirstPartyTypeKind.ZodSymbol:
       return;
     default:
       let i;

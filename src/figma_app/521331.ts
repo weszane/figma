@@ -1,6 +1,6 @@
 import { SelectionPaintHelpers } from "../figma_app/763686";
 import { whiteColor } from "../figma_app/191804";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { q } from "../figma_app/777660";
 import { _B } from "../figma_app/152690";
 export function $$l1({
@@ -18,7 +18,7 @@ export function $$l1({
     colorVar: t,
     opacity: l
   });
-  let _ = Ku();
+  let _ = getColorFormat();
   let h = () => {
     SelectionPaintHelpers.highlightOnlySamePaintInSublayers(r);
   };

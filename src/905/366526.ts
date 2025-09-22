@@ -93,7 +93,7 @@ import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { datadogRum } from '../905/270963';
 import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025';
 import { ThemeProvider2 } from '../905/289770';
-import { L as _$$L } from '../905/293182';
+import { resetTimer } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
 import { initializeIntegrationEnvironment, sendMessageToParent } from '../905/298920';
 import { setLastUsedEditorType } from '../905/298923';
@@ -130,7 +130,7 @@ import { withParsedMeta } from '../905/405710';
 import { debugState } from '../905/407919';
 import { FileKeySourceEnum, getFileKey } from '../905/412913';
 import { getCookieOrStorage } from '../905/414007';
-import { Ok } from '../905/414069';
+import { shouldProcessSettingsChange } from '../905/414069';
 import { t as _$$t6 } from '../905/414363';
 import { performanceMetricsTracker } from '../905/414972';
 import { v as _$$v3 } from '../905/417890';
@@ -226,7 +226,7 @@ import { Hc } from '../905/694658';
 import { e0 as _$$e3 } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
 import { R as _$$R3, V as _$$V3 } from '../905/697254';
-import { De as _$$De } from '../905/697795';
+import { setupPopstateListener } from '../905/697795';
 import { X as _$$X2 } from '../905/698965';
 import { getSingletonSceneGraph, SingletonSceneGraph } from '../905/700578';
 import { o as _$$o8 } from '../905/701807';
@@ -361,7 +361,7 @@ import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { isFullscreenOverview } from '../figma_app/88239';
-import { aK as _$$aK, ho as _$$ho2, il as _$$il, lz as _$$lz, p5 as _$$p3, pj as _$$pj, PQ as _$$PQ, re as _$$re, Uv as _$$Uv, bO, Bs, CN, D9, fG, fk, FP, fy, Gm, JM, Jt, kP, Kx, OB, Qm, R5, Rw, U8, UC, UM, vg, Wk, XE, XQ, Y6, yv, Z1, Z_ } from '../figma_app/91703';
+import { showOpenDesktopAppModal, fullscreenOpen, showUpgradeBanner, updateHyperlinkPopupPosition, updateMirror, updateCanvasMentionPopupPosition, recentlyUsedQuickCommands, showDowntimeBanner, hideStylePicker, attemptClose, updateLocalFontAgentVersion, hideDowntimeBanner, hideUpgradeBanner, setInstanceSwapPickerListLayout, updateSelectedStyleProperties, setLeftPanelTab, updateSelectedStyleThumbnailUrl, setEyedropper, showFileCreationFailureBanner, setCanvasMentionPopup, setNeedsUpgrade, setPickerListLayout, newFileLoaded, reconnectingSucceeded, setHyperlinkPopup, updateRecentlyUsedQuickCommand, setPreferredValuesPickerListLayout, updateOpenFile, updateMultiplayerState, beginRenaming, stopRenaming, hidePickerThunk, setFileVersion, setProgressBarState, reconnectingStarted, hideOpenDesktopAppModal, stopObservingOtherUser } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { Ob } from '../figma_app/111825';
 import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
@@ -382,7 +382,7 @@ import { createNoOpValidator } from '../figma_app/181241';
 import { DropdownEnableState } from '../figma_app/188152';
 import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPermissionLevelType, FPlanAccessType, FPlanRestrictionType, FProductAccessType, FPublicationStatusType, FResourceCategoryType, FTeamAccessPermissionType, FUserRoleType } from '../figma_app/191312';
 import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, getTeamIdFromPath, isRecentsAndSharingView, mapPathToSelectedView, selectedViewToPath } from '../figma_app/193867';
-import { P0 } from '../figma_app/198387';
+import { randomizeSongStartTimes } from '../figma_app/198387';
 import { iT as _$$iT, Q3, xT } from '../figma_app/199513';
 import { selectPermissionsState } from '../figma_app/212807';
 import { bO as _$$bO, Cg as _$$Cg, xA as _$$xA, jt, LC, qy } from '../figma_app/216057';
@@ -416,7 +416,7 @@ import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { paintManager } from '../figma_app/385874';
 import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
-import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
+import { setTimer, sendTimer, startMusic, setMusicIsMuted, setTimerNotification, setSelectedTypedPropDefId, setShowingFileFooter, setSelectedSongIdMusic, resetLocalTimer, setTimerAudioEnabled, setMainMusicPlayer, startTimer, setMusicStandaloneVolume, setSelectedSongId, setMusicState, resumeTimer, resumeMusic, setStartChimePlayed, setTimerAndMusicAreMuted, setMusicVolume, setTimerModal, setMusicModal, getActiveSongsSuccess, sendMusicMessage, resetLocalMusic, setStandaloneMusicPlayer } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217';
@@ -465,7 +465,7 @@ import { dispatchDeleteLoadingStates, resetAllAsyncPromises, batchFetchFiles, cl
 import { DashboardSection, FigResourceType } from '../figma_app/650409';
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
-import { fl, ye, zw } from '../figma_app/682945';
+import { reportFullscreenPerfMetrics, performanceTracker, chatStateTracker } from '../figma_app/682945';
 import { FileCreationPermissionsGenerator } from '../figma_app/687776';
 import { commitEditedComment, setShowResolved, editComment, commitCreatedComment, resetCommentStatus, commitHideComment, submitComment, commitDeletedComment } from '../figma_app/703138';
 import { y as _$$y5 } from '../figma_app/705249';
@@ -1818,13 +1818,13 @@ let i_ = !1;
 let iA = !1;
 let iy = !1;
 function ib() {
-  !ig && (ig = !0, requestAnimationFrame(iv), i_ || (iA && (perfTimerFrameManagerBindings?.stopRootProfile('no-frame', 100), iA = !1), iy || (iy = perfTimerFrameManagerBindings?.startRootProfile('request-frame', 100)), ye?.updateLastKnownFrameMs(performance.now())));
+  !ig && (ig = !0, requestAnimationFrame(iv), i_ || (iA && (perfTimerFrameManagerBindings?.stopRootProfile('no-frame', 100), iA = !1), iy || (iy = perfTimerFrameManagerBindings?.startRootProfile('request-frame', 100)), performanceTracker?.updateLastKnownFrameMs(performance.now())));
 }
 function iv() {
   i_ = !0;
   iA && (perfTimerFrameManagerBindings?.stopRootProfile('no-frame', 100), iA = !1);
   iy && (perfTimerFrameManagerBindings?.stopRootProfile('request-frame', 100), iy = !1);
-  ye?.onFrameStart();
+  performanceTracker?.onFrameStart();
   ig = !1;
   reactTimerGroup.start('frame');
   perfTimerFrameManagerBindings?.startProfile(vV, 100);
@@ -1839,8 +1839,8 @@ function iv() {
   perfTimerFrameManagerBindings?.stopProfile(vV, 100);
   reactTimerGroup.stop('frame');
   i_ = !1;
-  fl();
-  ye?.onFrame();
+  reportFullscreenPerfMetrics();
+  performanceTracker?.onFrame();
   iA = perfTimerFrameManagerBindings?.startRootProfile('no-frame', 100);
 }
 let iC = new Set();
@@ -2008,7 +2008,7 @@ let iz = e => t => function (i) {
               ...t,
               ...o.File[s.key]
             };
-            e.dispatch(UC({
+            e.dispatch(updateOpenFile({
               openFile: i
             }));
           }
@@ -2526,7 +2526,7 @@ let nS = e => t => function (i) {
     desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.MERGING);
   } else if (_$$E3.matches(i)) {
     desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.NOT_MERGING);
-  } else if (OB.matches(i)) {
+  } else if (newFileLoaded.matches(i)) {
     t(i);
     let n = e.getState();
     let r = new URL(selectedViewToPath(n, n.selectedView), document.baseURI);
@@ -2721,7 +2721,7 @@ let nQ = e => t => function (i) {
         throw new Error('selectView(...) was called with { view: \'fullscreen\', fileKey: undefined } while a file was already open. We don\'t handle this case.');
       } else if (r.editorType !== a.editorType) {
         let t = e.getState().mirror.appModel.currentTool === _$$ec.tool;
-        if (_$$L(), setLastUsedEditorType(a.editorType), fullscreenValue.isReady()) {
+        if (resetTimer(), setLastUsedEditorType(a.editorType), fullscreenValue.isReady()) {
           Fullscreen?.setEditorType(mapEditorTypeToWorkspaceType(a.editorType));
           let e = n.theme.visibleTheme;
           Fullscreen?.setEditorTheme(e || '');
@@ -9174,28 +9174,28 @@ function df() {
 HY(df());
 let dA = HY({
   folderSearchQuery(e = '', t) {
-    return hq.matches(t) ? t.payload.query : bO.matches(t) || hideModal.matches(t) ? '' : e;
+    return hq.matches(t) ? t.payload.query : attemptClose.matches(t) || hideModal.matches(t) ? '' : e;
   },
   folderRenaming(e = null, t) {
-    return JG.matches(t) ? t.payload.folderId : Mn.matches(t) || bO.matches(t) || hideModal.matches(t) ? null : e;
+    return JG.matches(t) ? t.payload.folderId : Mn.matches(t) || attemptClose.matches(t) || hideModal.matches(t) ? null : e;
   },
   focusedIndex(e = -1, t) {
-    return TL.matches(t) ? e === t.payload.upperBound - 1 ? e : e + 1 : zv.matches(t) ? e === 0 || e === -1 ? e : e - 1 : Dp.matches(t) ? t.payload.indexAt : _$$xH4.matches(t) || bO.matches(t) || hideModal.matches(t) ? -1 : e;
+    return TL.matches(t) ? e === t.payload.upperBound - 1 ? e : e + 1 : zv.matches(t) ? e === 0 || e === -1 ? e : e - 1 : Dp.matches(t) ? t.payload.indexAt : _$$xH4.matches(t) || attemptClose.matches(t) || hideModal.matches(t) ? -1 : e;
   },
   indexCount(e = null, t) {
-    return CU.matches(t) ? t.payload.indexCount : bO.matches(t) || hideModal.matches(t) ? null : e;
+    return CU.matches(t) ? t.payload.indexCount : attemptClose.matches(t) || hideModal.matches(t) ? null : e;
   },
   indexOffsets(e = {}, t) {
-    return _$$t8.matches(t) ? t.payload.indexOffsets : bO.matches(t) || hideModal.matches(t) ? {} : e;
+    return _$$t8.matches(t) ? t.payload.indexOffsets : attemptClose.matches(t) || hideModal.matches(t) ? {} : e;
   },
   folderRows(e = [], t) {
-    return OT.matches(t) ? t.payload.rows : bO.matches(t) || hideModal.matches(t) ? [] : e;
+    return OT.matches(t) ? t.payload.rows : attemptClose.matches(t) || hideModal.matches(t) ? [] : e;
   },
   teamOrder(e = [], t) {
-    return Mi.matches(t) ? t.payload.teamIds : bO.matches(t) || hideModal.matches(t) ? [] : e;
+    return Mi.matches(t) ? t.payload.teamIds : attemptClose.matches(t) || hideModal.matches(t) ? [] : e;
   },
   foldersByTeamId(e = {}, t) {
-    return Pb.matches(t) ? t.payload.foldersByTeamId : bO.matches(t) || hideModal.matches(t) ? {} : e;
+    return Pb.matches(t) ? t.payload.foldersByTeamId : attemptClose.matches(t) || hideModal.matches(t) ? {} : e;
   },
   isSearchResult(e = !1, t) {
     return EN.matches(t) ? t.payload.isSearchResult : !hideModal.matches(t) && e;
@@ -9204,10 +9204,10 @@ let dA = HY({
     return _$$YG.matches(t) ? t.payload.isSearchFocused : !(hideModal.matches(t) || zv.matches(t) || TL.matches(t)) && (!!hq.matches(t) || e);
   },
   upDownKeyPressed(e = !1, t) {
-    return !!(zv.matches(t) || TL.matches(t)) || !(qM.matches(t) || bO.matches(t) || hideModal.matches(t)) && e;
+    return !!(zv.matches(t) || TL.matches(t)) || !(qM.matches(t) || attemptClose.matches(t) || hideModal.matches(t)) && e;
   },
   canMouseFocus(e = !0, t) {
-    return Ww.matches(t) ? t.payload.canFocus : !!(bO.matches(t) || hideModal.matches(t)) || e;
+    return Ww.matches(t) ? t.payload.canFocus : !!(attemptClose.matches(t) || hideModal.matches(t)) || e;
   },
   userTeamCount(e = null, t) {
     return w3.matches(t) ? t.payload.userTeamCount : e;
@@ -9642,7 +9642,7 @@ let d5 = () => ({
 });
 function d4(e = d5(), t) {
   let i = (e.music?.musicMessageID || 0) + 1;
-  if (HS.matches(t) && (i = t.payload.musicMessageID), V9.matches(t) || HS.matches(t)) {
+  if (setMusicState.matches(t) && (i = t.payload.musicMessageID), sendMusicMessage.matches(t) || setMusicState.matches(t)) {
     let {
       selectedSongID,
       isPaused,
@@ -9661,21 +9661,21 @@ function d4(e = d5(), t) {
       }
     };
   }
-  if (Ox.matches(t)) {
+  if (setMusicModal.matches(t)) {
     let i = t.payload.state;
     return {
       ...e,
       modalState: i
     };
   }
-  if (UX.matches(t)) {
-    let i = P0(t.payload);
+  if (getActiveSongsSuccess.matches(t)) {
+    let i = randomizeSongStartTimes(t.payload);
     return {
       ...e,
       activeSongs: i
     };
   }
-  if (_$$oI2.matches(t)) {
+  if (setSelectedSongIdMusic.matches(t)) {
     let i = e.activeSongs.find(e => e.song_id === t.payload.selectedSongID);
     if (e.music) {
       return {
@@ -9687,19 +9687,19 @@ function d4(e = d5(), t) {
         }
       };
     }
-  } else if (WA.matches(t)) {
+  } else if (resetLocalMusic.matches(t)) {
     return d5();
-  } else if (_$$iy.matches(t)) {
+  } else if (setMusicIsMuted.matches(t)) {
     return {
       ...e,
       isMuted: t.payload.isMuted
     };
-  } else if (wk.matches(t)) {
+  } else if (setStandaloneMusicPlayer.matches(t)) {
     return {
       ...e,
       playerInstance: t.payload
     };
-  } else if (CE.matches(t)) {
+  } else if (setMusicStandaloneVolume.matches(t)) {
     let i = e.volume;
     i = t.payload > 100 ? 100 : t.payload < 0 ? 0 : Math.floor(t.payload);
     getStorage().set(d1, t.payload);
@@ -9707,7 +9707,7 @@ function d4(e = d5(), t) {
       ...e,
       volume: i
     };
-  } else if (_$$he.matches(t)) {
+  } else if (startMusic.matches(t)) {
     if (e.music && t.payload.musicStartTimeMs) {
       return {
         ...e,
@@ -9720,7 +9720,7 @@ function d4(e = d5(), t) {
         }
       };
     }
-  } else if (Ir.matches(t) && e.music) {
+  } else if (resumeMusic.matches(t) && e.music) {
     return {
       ...e,
       music: {
@@ -9849,8 +9849,8 @@ let cl = e => e.time ? {
 function cd(e = d9(), t) {
   let i = (e.time?.timerID || 0) + 1;
   let n = e.setBy;
-  if (_$$e4.matches(t) && (i = t.payload.timerID, n = t.payload.setBy), _$$e4.matches(t) || _$$h5.matches(t)) {
-    let r = _$$e4.matches(t) ? e.notification : null;
+  if (setTimer.matches(t) && (i = t.payload.timerID, n = t.payload.setBy), setTimer.matches(t) || sendTimer.matches(t)) {
+    let r = setTimer.matches(t) ? e.notification : null;
     return ce({
       state: e,
       payload: t.payload,
@@ -9859,34 +9859,34 @@ function cd(e = d9(), t) {
       setBy: n
     });
   }
-  if (OC.matches(t)) return ci(e, t.payload);
-  if (_$$Pg.matches(t)) return ct(e, t.payload);
-  if (NL.matches(t)) return cn(e, t.payload);
-  if (Cs.matches(t)) return cr(e, t.payload);
-  if (_$$ot.matches(t)) return ca();
-  if (k1.matches(t)) {
+  if (setTimerModal.matches(t)) return ci(e, t.payload);
+  if (setTimerAudioEnabled.matches(t)) return ct(e, t.payload);
+  if (setMusicVolume.matches(t)) return cn(e, t.payload);
+  if (setSelectedSongId.matches(t)) return cr(e, t.payload);
+  if (resetLocalTimer.matches(t)) return ca();
+  if (setStartChimePlayed.matches(t)) {
     return cs(e, t.payload);
-  } else if (bA.matches(t)) {
+  } else if (startTimer.matches(t)) {
     return co(e, t.payload, i);
-  } else if (I4.matches(t)) {
+  } else if (resumeTimer.matches(t)) {
     return cl(e);
-  } else if (ks.matches(t)) {
+  } else if (setTimerAndMusicAreMuted.matches(t)) {
     return {
       ...e,
       isMuted: t.payload.isMuted
     };
-  } else if (A3.matches(t)) {
+  } else if (setMainMusicPlayer.matches(t)) {
     return {
       ...e,
       musicPlayer: t.payload
     };
-  } else if (_$$lV.matches(t)) {
+  } else if (setTimerNotification.matches(t)) {
     return {
       ...e,
       notification: t.payload
     };
-  } else if (UX.matches(t)) {
-    let i = P0(t.payload);
+  } else if (getActiveSongsSuccess.matches(t)) {
+    let i = randomizeSongStartTimes(t.payload);
     return {
       ...e,
       activeSongs: i
@@ -9982,7 +9982,7 @@ let cE = HY({
   appModel: fj,
   selectionProperties(e = {}, t) {
     if (initAction.matches(t)) return Object.create(null);
-    if (_$$p3.matches(t) && t.payload.selectionProperties) {
+    if (updateMirror.matches(t) && t.payload.selectionProperties) {
       let i = t.payload.selectionProperties;
       let n = i.message;
       if (n == null && isEmptyObject(i.derivedProperties.changes) && isEmptyObject(i.derivedProperties.mixed)) return e;
@@ -10017,24 +10017,24 @@ let cE = HY({
     return e;
   },
   selectedStyleProperties(e = {}, t) {
-    if (fk.matches(t)) {
+    if (updateSelectedStyleProperties.matches(t)) {
       let i = t.payload.selectedStyleProperties || {};
       return areSessionLocalIDsEqual(i.guid, e.guid) ? {
         ...i,
         url: e.url
       } : i;
     }
-    return fy.matches(t) ? {
+    return updateSelectedStyleThumbnailUrl.matches(t) ? {
       ...e,
       url: t.payload.selectedStyleThumbnailURL
     } : e;
   },
   sceneGraph(e = cy, t) {
-    return initAction.matches(t) || _$$a4.matches(t) ? (X0(), cy) : _$$p3.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
+    return initAction.matches(t) || _$$a4.matches(t) ? (X0(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
   },
   sceneGraphSelection: bp,
   objectsPanelRowRebuildCounter(e = 0, t) {
-    return _$$p3.matches(t) && t.payload.invalidateSceneGraph && t.payload.invalidateSceneGraph.rebuildRows ? e + 1 : e;
+    return updateMirror.matches(t) && t.payload.invalidateSceneGraph && t.payload.invalidateSceneGraph.rebuildRows ? e + 1 : e;
   },
   selectionPaints(e = {
     paints: [],
@@ -10107,7 +10107,7 @@ function cN(e = cR, t) {
   return e;
 }
 function cP(e = !1, t) {
-  return !initAction.matches(t) && (!!vg.matches(t) || !Wk.matches(t) && e);
+  return !initAction.matches(t) && (!!beginRenaming.matches(t) || !stopRenaming.matches(t) && e);
 }
 function cO(e = null, t) {
   return initAction.matches(t) ? function (e = {}) {
@@ -10144,13 +10144,13 @@ function cO(e = null, t) {
       }),
       ...e
     };
-  }() : _$$ho2.matches(t) ? t.payload.file : OB.matches(t) ? e != null && e.key === t.payload.file.key ? e : t.payload.file : _$$a4.matches(t) ? null : UC.matches(t) ? {
+  }() : fullscreenOpen.matches(t) ? t.payload.file : newFileLoaded.matches(t) ? e != null && e.key === t.payload.file.key ? e : t.payload.file : _$$a4.matches(t) ? null : updateOpenFile.matches(t) ? {
     ...t.payload.openFile,
     name: t.payload.openFile._name || 'Untitled'
   } : e;
 }
 function cD(e = !1, t) {
-  return !(initAction.matches(t) || _$$ho2.matches(t)) && !_$$a4.matches(t) && (UC.matches(t) && !!t.payload.isLiveGraphSync || e);
+  return !(initAction.matches(t) || fullscreenOpen.matches(t)) && !_$$a4.matches(t) && (updateOpenFile.matches(t) && !!t.payload.isLiveGraphSync || e);
 }
 function cL(e = !1, t) {
   return !_$$a4.matches(t) && (!!_$$o8.matches(t) || e);
@@ -10159,10 +10159,10 @@ function cF(e = [], t) {
   return _$$o7.matches(t) ? t.payload : e;
 }
 function cM(e = null, t) {
-  return initAction.matches(t) ? Ob : XQ.matches(t) ? t.payload.fileVersion : e;
+  return initAction.matches(t) ? Ob : setFileVersion.matches(t) ? t.payload.fileVersion : e;
 }
 function cj(e = !1, t) {
-  return kP.matches(t) ? t.payload.needsUpgrade : e;
+  return setNeedsUpgrade.matches(t) ? t.payload.needsUpgrade : e;
 }
 function cU(e = {
   mode: UIVisibilitySetting.OFF,
@@ -10173,11 +10173,11 @@ function cU(e = {
     mode: getInitialOptions().editing_file ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
   } : HO.matches(t) ? i = {
     mode: t.payload.progressBarMode
-  } : _$$ho2.matches(t) ? i = {
+  } : fullscreenOpen.matches(t) ? i = {
     mode: UIVisibilitySetting.HIDE_UI
   } : _$$o8.matches(t) && e.mode !== UIVisibilitySetting.ON_AND_LOCKED ? i = {
     mode: UIVisibilitySetting.OFF
-  } : Y6.matches(t) && (i = {
+  } : setProgressBarState.matches(t) && (i = {
     mode: t.payload.mode,
     type: t.payload.type
   });
@@ -10187,15 +10187,15 @@ function cU(e = {
 function cB(e = !1, t) {
   if (HO.matches(t)) {
     if (t.payload.openNewFileIn === TabOpenBehavior.SAME_TAB) return !1;
-  } else if (initAction.matches(t) || _$$ho2.matches(t) || Qm.matches(t) || _$$o8.matches(t)) {
+  } else if (initAction.matches(t) || fullscreenOpen.matches(t) || reconnectingSucceeded.matches(t) || _$$o8.matches(t)) {
     return !1;
-  } else if (yv.matches(t)) {
+  } else if (reconnectingStarted.matches(t)) {
     return !0;
   }
   return e;
 }
 function cV(e = PluginRunForContext.NONE, t) {
-  return _$$aK.matches(t) ? t.payload : Z1.matches(t) ? PluginRunForContext.NONE : e;
+  return showOpenDesktopAppModal.matches(t) ? t.payload : hideOpenDesktopAppModal.matches(t) ? PluginRunForContext.NONE : e;
 }
 function cG(e = null, t) {
   return initAction.matches(t) ? null : _$$v5.matches(t) ? t.payload : e;
@@ -10210,25 +10210,25 @@ let cz = {
   sessionsNominatingCurrentUser: []
 };
 function cH(e = cz, t) {
-  return initAction.matches(t) || bO.matches(t) ? cz : UM.matches(t) ? t.payload : Z_.matches(t) ? {
+  return initAction.matches(t) || attemptClose.matches(t) ? cz : updateMultiplayerState.matches(t) ? t.payload : stopObservingOtherUser.matches(t) ? {
     ...e,
     observingSessionID: -1
   } : e;
 }
 function cW(e = !1, t) {
-  return !!_$$il.matches(t) || !D9.matches(t) && e;
+  return !!showUpgradeBanner.matches(t) || !hideUpgradeBanner.matches(t) && e;
 }
 function cK(e = !1, t) {
-  return !!_$$re.matches(t) || !CN.matches(t) && e;
+  return !!showDowntimeBanner.matches(t) || !hideDowntimeBanner.matches(t) && e;
 }
 function cY(e = !1, t) {
-  return !!JM.matches(t) || e;
+  return !!showFileCreationFailureBanner.matches(t) || e;
 }
 function cq(e, t) {
   return e == null ? {
     activeTab: UserInterfaceElements.LAYERS,
     shouldFocusSearchBar: !1
-  } : FP.matches(t) ? (t.payload.persist && _$$Cp(t.payload.tab), {
+  } : setLeftPanelTab.matches(t) ? (t.payload.persist && _$$Cp(t.payload.tab), {
     ...e,
     activeTab: t.payload.tab,
     shouldFocusSearchBar: t.payload.shouldFocusSearchBar ?? void 0
@@ -10322,29 +10322,29 @@ function c2(e = {
       viewportY: t.payload.viewportY
     } : e;
   })(e, t);
-  zw?.setIsCurrentUserChatting(!!i.isChatting);
+  chatStateTracker?.setIsCurrentUserChatting(!!i.isChatting);
   return i;
 }
 function c5(e = null, t) {
-  return Gm.matches(t) ? t.payload : e;
+  return setEyedropper.matches(t) ? t.payload : e;
 }
 function c4(e = null, t) {
-  return R5.matches(t) ? t.payload : _$$lz.matches(t) ? e && e.data ? {
+  return setHyperlinkPopup.matches(t) ? t.payload : updateHyperlinkPopupPosition.matches(t) ? e && e.data ? {
     ...e,
     position: t.payload.position,
     size: t.payload.size
   } : null : e;
 }
 function c3(e = null, t) {
-  return Jt.matches(t) ? t.payload : _$$pj.matches(t) ? e && e.data ? {
+  return setCanvasMentionPopup.matches(t) ? t.payload : updateCanvasMentionPopupPosition.matches(t) ? e && e.data ? {
     ...e,
     position: t.payload.position,
     size: t.payload.size
   } : null : e;
 }
 function c6(e = [], t) {
-  if (_$$PQ.matches(t)) return t.payload;
-  if (Rw.matches(t)) {
+  if (recentlyUsedQuickCommands.matches(t)) return t.payload;
+  if (updateRecentlyUsedQuickCommand.matches(t)) {
     let {
       currentDisplayName,
       newCommand
@@ -10406,28 +10406,28 @@ let c9 = 'style-picker-list-layout';
 let ue = localStorageRef?.getItem(c9);
 let ut = ue != null && ue === 'true';
 function ui(e = ut, t) {
-  return Kx.matches(t) ? (localStorageRef?.setItem(c9, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return setPickerListLayout.matches(t) ? (localStorageRef?.setItem(c9, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 let un = 'instance-swap-picker-list-layout';
 let ur = localStorageRef?.getItem(un) ?? null;
 let ua = ur == null || ur === 'true';
 function us(e = ua, t) {
-  return fG.matches(t) ? (localStorageRef?.setItem(un, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return setInstanceSwapPickerListLayout.matches(t) ? (localStorageRef?.setItem(un, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 let uo = 'preferred-values-picker-list-layout';
 let ul = localStorageRef?.getItem(uo) ?? null;
 let ud = ul == null || ul === 'true';
 function uc(e = ud, t) {
-  return U8.matches(t) ? (localStorageRef?.setItem(uo, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return setPreferredValuesPickerListLayout.matches(t) ? (localStorageRef?.setItem(uo, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 function uu(e = null, t) {
-  return Bs.matches(t) ? t.payload : e;
+  return updateLocalFontAgentVersion.matches(t) ? t.payload : e;
 }
 function up(e = null, t) {
-  return _$$n3.matches(t) ? t.payload.propDefId : e;
+  return setSelectedTypedPropDefId.matches(t) ? t.payload.propDefId : e;
 }
 function um(e = !1, t) {
-  return _$$N7.matches(t) ? t.payload : e;
+  return setShowingFileFooter.matches(t) ? t.payload : e;
 }
 let uA = HY({
   domains(e = [], t) {
@@ -12092,7 +12092,7 @@ let pg = {
       }
       return i;
     }
-    return _$$ho2.matches(t) || _$$a4.matches(t) ? {} : e;
+    return fullscreenOpen.matches(t) || _$$a4.matches(t) ? {} : e;
   },
   fetchedCanvasWidgetVersions(e = {}, t) {
     if (_$$uw.matches(t)) {
@@ -12110,7 +12110,7 @@ let pg = {
       }
       return i;
     }
-    return _$$ho2.matches(t) || _$$a4.matches(t) ? {} : e;
+    return fullscreenOpen.matches(t) || _$$a4.matches(t) ? {} : e;
   },
   publishingPlugins: uL,
   featuredPlugins(e = {}, t) {
@@ -13313,14 +13313,14 @@ let md = createOptimistThunk((e, {
   let a = t.multiplayerSessionState;
   void 0 !== a && function (e, t, i) {
     updateJoinStatus(t, i);
-    i === SchemaJoinStatus.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === SchemaJoinStatus.JOINED && e.dispatch(D9());
+    i === SchemaJoinStatus.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(showUpgradeBanner())) : i === SchemaJoinStatus.JOINED && e.dispatch(hideUpgradeBanner());
   }(e, r, a);
   void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(stopReactingAction());
 });
 let mp = createOptimistThunk((e, t) => {
   let i = e.getState().mirror.appModel;
   e.dispatch(mm(t));
-  e.dispatch(_$$p3(t));
+  e.dispatch(updateMirror(t));
   e.dispatch(mh({
     ...t,
     previousAppModel: i
@@ -13335,15 +13335,15 @@ let mm = createOptimistThunk((e, t) => {
   let o = AppStateTsApi.propertiesPanelState().shownPropertiesPanels.getCopy();
   if (t.selection) {
     let t = r.pickerShown;
-    t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(XE()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(_$$Uv());
+    t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(hidePickerThunk()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(hideStylePicker());
     r.instanceSwapPickerShown.isShown && e.dispatch(_$$vq());
     r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, VariableStyleId.INVALID));
     paintManager.clearCache();
   } else {
-    r.stylePickerShown.isShown && (o && o[ItemType.FILL_ITEM] || e.dispatch(_$$Uv()));
+    r.stylePickerShown.isShown && (o && o[ItemType.FILL_ITEM] || e.dispatch(hideStylePicker()));
   }
   if (i && (a.isInitialized && e.getState().progressBarState.mode === UIVisibilitySetting.OFF && function (e, t, i, n) {
-    if (Ok()) {
+    if (shouldProcessSettingsChange()) {
       for (let r in i) {
         let a = mf.get(r);
         if (!a) continue;
@@ -13366,7 +13366,7 @@ let mm = createOptimistThunk((e, t) => {
   }(e, a, i, n), i.selectedInteractions && s)) {
     let t = r.pickerShown?.id === _$$o$;
     let n = i.selectedInteractions.length > 0;
-    t && !n && e.dispatch(XE());
+    t && !n && e.dispatch(hidePickerThunk());
   }
 });
 let mh = createOptimistThunk((e, t) => {
@@ -14423,7 +14423,7 @@ export async function $$hz0(e, t, d = {
       performanceMetricsTracker.fileBrowserInitDurationMs = Math.round(measureSyncDuration('fileBrowserInit', _$$e.WAYFINDING, () => {
         _$$a5(getInitialOptions().user_data || null, b, b.getState().userFlags, t);
         initializeFileImporter();
-        b.dispatch(_$$De());
+        b.dispatch(setupPopstateListener());
         b.dispatch(_$$S6());
         b.dispatch(initAction());
       }));

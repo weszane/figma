@@ -61,7 +61,7 @@ import { T as _$$T2 } from '../905/68180';
 import { calculateTypography } from '../905/71149';
 import { h1 as _$$h, LQ, MX, wm } from '../905/77316';
 import { n as _$$n4 } from '../905/79930';
-import { W as _$$W9 } from '../905/80656';
+import { setSideHandler } from '../905/80656';
 import { yD as _$$yD } from '../905/92359';
 import { W as _$$W3 } from '../905/95038';
 import { m as _$$m6 } from '../905/99004';
@@ -399,7 +399,7 @@ import { teamLibraryCache } from '../figma_app/80990';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { getPublishedWidgetWithPayment, isResourcePaymentFailed, getResourcePaymentFromState, getPluginWithPayment, checkResourceEligibility } from '../figma_app/86989';
 import { lM as _$$lM, tJ as _$$tJ, Al, DH, T1 } from '../figma_app/90441';
-import { vg as _$$vg } from '../figma_app/91703';
+import { beginRenaming } from '../figma_app/91703';
 import { isNotNullish, isNullish } from '../figma_app/95419';
 import { eE as _$$eE, Fz } from '../figma_app/106207';
 import { zD as _$$zD } from '../figma_app/109758';
@@ -429,7 +429,7 @@ import { _D as _$$_D, _Y as _$$_Y, OL } from '../figma_app/191312';
 import { parseColorFormat } from '../figma_app/191804';
 import { isWorkshopModeActive } from '../figma_app/193867';
 import { Xq } from '../figma_app/194956';
-import { _s as _$$_s, b2 as _$$b0, eB as _$$eB, nz as _$$nz } from '../figma_app/198387';
+import { fetchActiveSong, areSongArraysEqual, isSameSong, isStale } from '../figma_app/198387';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { a6 as _$$a4, RD, Ve } from '../figma_app/198840';
 import { CF, kB } from '../figma_app/201703';
@@ -480,7 +480,7 @@ import { G as _$$G3 } from '../figma_app/373780';
 import { _J as _$$_J } from '../figma_app/378195';
 import { Aw } from '../figma_app/383828';
 import { B4 } from '../figma_app/385215';
-import { _1 as _$$_8, c$ as _$$c$5, g_ as _$$g_2, L as _$$L5, lm as _$$lm, lu as _$$lu, mF as _$$mF, ne as _$$ne, pX as _$$pX, rF as _$$rF, tk as _$$tk, UQ as _$$UQ, Dx, k1, qV, Qv, Vk, VV, wk } from '../figma_app/389091';
+import { pauseTimerThunk, pauseMusicThunk, stopMusicThunk, resetSelectedSongAndMusicStartTime, ACTIVE_SONG_NOT_FOUND, setTimerModalThunk, startMusicThunk, resumeTimerThunk, setMusicStandaloneVolumeThunk, updateEditorDocumentTitle, setMusicIsMutedThunk, getLastReceivedSongTimestamp, updateMusicSongIdThunk, setStartChimePlayed, fetchActiveSongsThunk, startTimerThunk, stopTimerThunk, adjustTimerThunk, setStandaloneMusicPlayer } from '../figma_app/389091';
 import { aq as _$$aq2, Xt } from '../figma_app/399472';
 import { lJ as _$$lJ3 } from '../figma_app/407856';
 import { S4 } from '../figma_app/407993';
@@ -528,7 +528,7 @@ import { lX as _$$lX } from '../figma_app/588397';
 import { _z as _$$_z, ec as _$$ec, Rs as _$$Rs, Wh } from '../figma_app/599095';
 import { vB as _$$vB } from '../figma_app/602467';
 import { F as _$$F3 } from '../figma_app/603239';
-import { d1 as _$$d0 } from '../figma_app/603466';
+import { PluginCallbacks } from '../figma_app/603466';
 import { es as _$$es2, fF as _$$fF, FN as _$$FN, fV as _$$fV, hZ as _$$hZ, jJ as _$$jJ, sM as _$$sM, UH as _$$UH, w4 as _$$w2, Zj as _$$Zj, assertNotNullish, Cb, Cd, LY, Oo, TQ, Uy, wg } from '../figma_app/610446';
 import { En as _$$En } from '../figma_app/613182';
 import { Yv } from '../figma_app/616107';
@@ -584,7 +584,7 @@ import { mW as _$$mW } from '../figma_app/797994';
 import { Ro } from '../figma_app/805373';
 import { getProductPriceString, hasTrialAvailable } from '../figma_app/808294';
 import { memoizeByArgs } from '../figma_app/815945';
-import { $B, eT as _$$eT, fx as _$$fx, tU as _$$tU, xf as _$$xf } from '../figma_app/818609';
+import { trackRemovesSong, trackOpensMusicDropdown, trackStopsSong, trackChangesSong, trackPlaysSong } from '../figma_app/818609';
 import { i as _$$i } from '../figma_app/825649';
 import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { ez as _$$ez2, um as _$$um2 } from '../figma_app/835718';
@@ -2623,7 +2623,7 @@ function iN({
       'htmlAttributes': {
         'onDoubleClick': () => {
           j(!1);
-          u && i(_$$vg());
+          u && i(beginRenaming());
         },
         'onContextMenu': e => {
           if (e.preventDefault(), r) {
@@ -17768,7 +17768,7 @@ class gY {
 let gq = e => useSelector(t => {
   let i = t.music.activeSongs.filter(t => e === t.song_id);
   return i.length ? i[0] : void 0;
-}, _$$eB);
+}, isSameSong);
 function gJ() {
   let e = useSelector(e => e.music.music);
   return !e?.isPaused && !e?.isStopped;
@@ -17824,7 +17824,7 @@ function g9({
     let n = t.length && !i;
     let r = !e;
     let a = t[0];
-    n && r && a && p(Dx({
+    n && r && a && p(updateMusicSongIdThunk({
       selectedSongID: a.song_id
     }));
   }, [i, e, p, t]);
@@ -17850,26 +17850,26 @@ function g9({
     })
   });
   let j = async t => {
-    t.song_id === g4.song_id ? e && ($B(u.getState(), e.song_id), p(_$$L5({
+    t.song_id === g4.song_id ? e && (trackRemovesSong(u.getState(), e.song_id), p(resetSelectedSongAndMusicStartTime({
       selectedSongID: '',
       musicStartTimeMs: 0
-    }))) : await _$$_s({
+    }))) : await fetchActiveSong({
       songID: t.song_id,
       onSuccess: () => {
         let e = h?.isPlaying();
-        _$$tU(u.getState(), t.song_id, e || !1);
+        trackChangesSong(u.getState(), t.song_id, e || !1);
         let i = t.song_id;
-        p(Dx({
+        p(updateMusicSongIdThunk({
           selectedSongID: i,
           dontTransmitWhenPaused: !0
         }));
       },
       onNotFound: () => {
-        p(qV());
+        p(fetchActiveSongsThunk());
         p(VisualBellActions.enqueue({
           message: getI18nString('whiteboard.timer.song_not_available_error'),
           error: !0,
-          type: _$$lm
+          type: ACTIVE_SONG_NOT_FOUND
         }));
       }
     });
@@ -17904,7 +17904,7 @@ function g9({
       'property': m,
       'targetDomNode': document.body,
       'willShowDropdown': () => new Promise(e => {
-        _$$eT(u.getState());
+        trackOpensMusicDropdown(u.getState());
         e();
       }),
       'children': x
@@ -19903,7 +19903,7 @@ function jC() {
   let s = a?.start_at_ms;
   let c = useSelector(e => e.multiplayer.allUsers.length);
   let [u, p] = useState(!1);
-  let h = useSelector(e => e.music.activeSongs, _$$b0);
+  let h = useSelector(e => e.music.activeSongs, areSongArraysEqual);
   let m = gJ();
   let f = useDispatch();
   useEffect(() => {
@@ -19911,21 +19911,21 @@ function jC() {
   }, [h.length]);
   let _ = useStore();
   let x = useCallback(() => {
-    r && _$$xf(_.getState(), r);
-    f(_$$mF({
+    r && trackPlaysSong(_.getState(), r);
+    f(startMusicThunk({
       musicStartTimeMs: s
     }));
   }, [f, s, r, _]);
   let g = useCallback(() => {
-    r && _$$fx(_.getState(), r);
-    f(_$$g_2());
+    r && trackStopsSong(_.getState(), r);
+    f(stopMusicThunk());
   }, [f, r, _]);
   let j = useCallback(() => {
     x();
   }, [x]);
   let b = useCallback(() => {
     let e = n?.lastPlayedTimestamp ? n.lastPlayedTimestamp : 0;
-    _$$nz(e, c) ? t(!0) : g();
+    isStale(e, c) ? t(!0) : g();
   }, [g, n, c]);
   let y = useCallback(() => x(), [x]);
   return e ? jsx(jf, {
@@ -19987,7 +19987,7 @@ function jF() {
   let t = useSelector(e => getSelectedFile(e));
   let i = useSelector(e => t ? getRepoById(t, e.repos) : null);
   let n = Math.ceil(getTimeRemaining(e.time) / 1e3);
-  n > 0 ? _$$rF(t, i, n) : _$$rF(t, i);
+  n > 0 ? updateEditorDocumentTitle(t, i, n) : updateEditorDocumentTitle(t, i);
 }
 let jH = () => {
   jM && jM.pause();
@@ -20003,18 +20003,18 @@ let jB = (e, t, i, n, r, a) => {
   if (e.lastAction.type === 'add-minutes') {
     if (jk && jk.pause(), a.current?.resetFades(), a.current?.fadeIn({}), !i.current.time || i.current.time.totalTimeMs === 0) return;
     let n = 6e4 * e.lastAction.minutes;
-    i.current.time && s + n < MAX_TIMER_DURATION_MS && t(VV({
+    i.current.time && s + n < MAX_TIMER_DURATION_MS && t(adjustTimerThunk({
       timer: i.current.time,
       deltaMs: n
     }));
   }
-  e.lastAction.type === 'start-timer' && (getStorage().set('last-timer-set-time', e.lastUsedTime), t(Qv({
+  e.lastAction.type === 'start-timer' && (getStorage().set('last-timer-set-time', e.lastUsedTime), t(startTimerThunk({
     totalTimeMs: 1e3 * e.lastUsedTime,
     musicStartTimeMs: i.current.musicStartTimeMs
   })), jM && n.current && !r.current && e.lastUsedTime > 5 && playTimerChime(jM, n.current));
-  e.lastAction.type === 'pause-timer' && t(_$$_8(i.current.time));
-  e.lastAction.type === 'resume-timer' && t(_$$ne(i.current.time));
-  e.lastAction.type === 'stop-timer' && (jH(), t(Vk()));
+  e.lastAction.type === 'pause-timer' && t(pauseTimerThunk(i.current.time));
+  e.lastAction.type === 'resume-timer' && t(resumeTimerThunk(i.current.time));
+  e.lastAction.type === 'stop-timer' && (jH(), t(stopTimerThunk()));
 };
 let jV = buildUploadUrl('304a1a341a619feb4af7d377c75dd325534e1734');
 let jG = buildUploadUrl('f45e11344ee4f618173695e2405a9a988affc910');
@@ -20053,7 +20053,7 @@ let jZ = () => {
         shouldStopWhenFadedOut: !0,
         targetVolumeMultiplier: 0
       }), playTimerChime(jk, t.current));
-      n.current || e(_$$lu({
+      n.current || e(setTimerModalThunk({
         state: 'open',
         userInitiated: !1
       }));
@@ -20061,25 +20061,25 @@ let jZ = () => {
     callbackToRunWhenTimerFinishes: useCallback((i, n) => {
       jk && jk.pause();
       i.current && jR && !r.current && playTimerChime(jR, t.current);
-      _$$d0.timerChange('timerdone');
-      n.current || e(_$$lu({
+      PluginCallbacks.timerChange('timerdone');
+      n.current || e(setTimerModalThunk({
         state: 'open',
         userInitiated: !1
       }));
     }, [e, r, t]),
     callbackToRunAfterAnimationFinishes: useCallback(t => {
-      if (s && e(_$$c$5(s)), document.visibilityState === 'visible') {
-        e(Vk());
+      if (s && e(pauseMusicThunk(s)), document.visibilityState === 'visible') {
+        e(stopTimerThunk());
         t({
           type: 'reset-state'
         });
-        i.current !== n.current?.name && e(_$$lu({
+        i.current !== n.current?.name && e(setTimerModalThunk({
           state: 'closed',
           userInitiated: !1
         }));
       } else {
         let t = () => {
-          e(_$$lu({
+          e(setTimerModalThunk({
             state: 'open',
             userInitiated: !1
           }));
@@ -20235,7 +20235,7 @@ function j9({
       } else if (e.key === 'Enter') {
         startTimer();
       } else if (e.key === 'Escape') {
-        u(_$$lu({
+        u(setTimerModalThunk({
           state: 'closed',
           userInitiated: !0,
           source: 'keyboard'
@@ -20281,7 +20281,7 @@ function j9({
           t.minutes !== '' && t.seconds !== '' && parseInt(t.minutes) + parseInt(t.seconds) !== 0 && startTimer();
           return;
         } else if (e.key === 'Escape') {
-          u(_$$lu({
+          u(setTimerModalThunk({
             state: 'closed',
             userInitiated: !0,
             source: 'keyboard'
@@ -22359,7 +22359,7 @@ function yu({
     e.preventDefault();
     e.stopPropagation();
     let t = Number(e.target.value);
-    s(_$$pX(t));
+    s(setMusicStandaloneVolumeThunk(t));
   };
   let c = 0;
   let u = 0;
@@ -22396,7 +22396,7 @@ function yu({
       onInput: l,
       onMouseUp: e => {
         let t = Number(e.target.value);
-        s(_$$tk({
+        s(setMusicIsMutedThunk({
           isMuted: t === 0,
           userInitiated: !0
         }));
@@ -22441,7 +22441,7 @@ function yj(e) {
   let p = useSelector(e => e.music.isMuted);
   let h = useDispatch();
   let m = useCallback(() => {
-    h(_$$tk({
+    h(setMusicIsMutedThunk({
       isMuted: !p,
       userInitiated: !0
     }));
@@ -22570,7 +22570,7 @@ function yT() {
     let t = useDispatch();
     let i = useSelector(e => e.timer);
     useEffect(() => {
-      !1 !== i.startChimePlayed || isTimerFinished(i.time) || isTimerPausedAndStarted(i.time) || isTimerDone(i.time) || (e(), t(k1(!0)));
+      !1 !== i.startChimePlayed || isTimerFinished(i.time) || isTimerPausedAndStarted(i.time) || isTimerDone(i.time) || (e(), t(setStartChimePlayed(!0)));
     }, [t, e, i.startChimePlayed, i.time]);
   }(t.playStartChime), !function () {
     jW();
@@ -22604,22 +22604,22 @@ function yT() {
     let a = useSelector(e => e.music.isMuted);
     let s = useDispatch();
     useEffect(() => {
-      s(qV());
+      s(fetchActiveSongsThunk());
     }, [s]);
     useEffect(() => {
-      s(wk(e));
+      s(setStandaloneMusicPlayer(e));
     }, [s, e]);
     useEffect(() => () => {
       e.stop();
     }, [e]);
     useEffect(() => {
-      s(_$$tk({
+      s(setMusicIsMutedThunk({
         isMuted: r === 0,
         userInitiated: !1
       }));
     }, [s, r]);
     let o = useCallback(() => {
-      s(_$$tk({
+      s(setMusicIsMutedThunk({
         isMuted: !0,
         userInitiated: !1
       }));
@@ -22628,7 +22628,7 @@ function yT() {
         button: {
           text: getI18nString('whiteboard.timer.unmute_music_button'),
           action: () => {
-            s(_$$tk({
+            s(setMusicIsMutedThunk({
               isMuted: !1,
               userInitiated: !0
             }));
@@ -22651,7 +22651,7 @@ function yT() {
         if (!e.isPaused() || !n) return;
         e.playAtTimestamp({
           src: n,
-          timestamp: _$$UQ(t),
+          timestamp: getLastReceivedSongTimestamp(t),
           onFailure: o
         });
       }
@@ -22720,7 +22720,7 @@ function yF() {
   useEffect(() => {
     if (n && r) {
       let e = !0;
-      _$$W9('right', () => {
+      setSideHandler('right', () => {
         e && fullscreenValue.triggerAction('set-tool-default');
       });
       return () => {
@@ -22764,7 +22764,7 @@ function yW() {
   let i = Xr(_$$tz);
   let n = useCallback(n => {
     n.preventDefault();
-    e === Wl.TOP_BAR ? i() : (_$$W9('right', i), t());
+    e === Wl.TOP_BAR ? i() : (setSideHandler('right', i), t());
   }, [e, i, t]);
   let r = getFeatureFlags().figjam_generate_handbrake;
   let a = r ? getI18nString('whiteboard.ai_modal.generate_handbrake') : getI18nString('whiteboard.ai_modal.make');

@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { NN } from "../905/466026";
-import { b_, oE } from "../figma_app/840917";
+import { renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { Y6, nb, Tf } from "../figma_app/543100";
 import { FileCanEdit } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
@@ -23,7 +23,7 @@ import { A as _$$A } from "../5724/663128";
 export function $$S0(e) {
   let [t, i] = useState(null);
   let m = useDispatch();
-  let x = getAtomMutate(b_);
+  let x = getAtomMutate(renameAutosaveFileMutation);
   let S = Xr(Y6);
   let C = useSubscription(FileCanEdit, {
     key: e.tile.type === nb.FILE ? e.tile.file.key : ""
@@ -50,14 +50,14 @@ export function $$S0(e) {
       })) : e.tile.type === nb.OFFLINE_FILE && x({
         fileKey: e.tile.file.fileKey,
         name: t,
-        source: oE.OFFLINE_FILE_TILE
+        source: OfflineFileType.OFFLINE_FILE_TILE
       });
     },
     cancel: () => {
       S(null);
       e.tile.type === nb.OFFLINE_FILE && x({
         fileKey: e.tile.file.fileKey,
-        source: oE.OFFLINE_FILE_TILE
+        source: OfflineFileType.OFFLINE_FILE_TILE
       });
     },
     dontPropagateKeyDown: !0

@@ -16,7 +16,7 @@ import { k as _$$k2 } from "../905/582200";
 import { useErrorBoundaryContext, ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { oQ } from "../figma_app/332085";
-import { PQ, sx } from "../figma_app/91703";
+import { recentlyUsedQuickCommands, trackFileEventThunk } from "../figma_app/91703";
 import { syncRecentPluginsThunk, syncRecentFaceStampsThunk, syncRecentWhiteboardToolsThunk, syncRecentWidgetsThunk } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
 import { TrackingProvider, wrapWithTracking } from "../figma_app/831799";
@@ -111,7 +111,7 @@ import { Wz } from "../figma_app/211694";
 import { u as _$$u2 } from "../905/14084";
 import { base64ToUint8Array } from "../figma_app/930338";
 import { Yk } from "../figma_app/644079";
-import { ZG } from "../figma_app/840917";
+import { getAutosaveManagerInstance } from "../figma_app/840917";
 import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { BI, m0 as _$$m, pt, Ef } from "../figma_app/546509";
 import { Yh } from "../figma_app/357047";
@@ -150,7 +150,7 @@ import { y1 } from "../figma_app/318590";
 import { Ky, RS } from "../9410/793186";
 import { FC, Wc } from "../figma_app/957070";
 import { jS } from "../figma_app/197432";
-import { dP, qw, UX } from "../figma_app/740163";
+import { getSidebarSplitPosition, getPropertiesPanelSplitPosition, getDevHandoffInspectSplitPosition } from "../figma_app/740163";
 let f = new Set(["-", "="]);
 let g = new Set(["-", "=", "f", "o", "p", "r", "s"]);
 function _(e) {
@@ -539,7 +539,7 @@ let t5 = memo(({
   let h = useCurrentUserOrgId();
   let f = getSelectedEditorType();
   let g = useLatestRef(f);
-  f !== g && g && d(PQ([]));
+  f !== g && g && d(recentlyUsedQuickCommands([]));
   G_(i, s);
   OQ(i);
   y1(i);
@@ -859,9 +859,9 @@ export function $$t80({
     }, [r, i]);
   })();
   (function () {
-    let e = dP();
-    let t = qw();
-    let i = UX();
+    let e = getSidebarSplitPosition();
+    let t = getPropertiesPanelSplitPosition();
+    let i = getDevHandoffInspectSplitPosition();
     let r = document.documentElement.style;
     useLayoutEffect(() => {
       r.setProperty("--left-panel-width", `${e}px`);
@@ -940,7 +940,7 @@ export function $$t80({
     let u = _$$m();
     useEffect(() => {
       u && (u._try_to_flush_autosave = async () => {
-        let e = ZG();
+        let e = getAutosaveManagerInstance();
         if (e) {
           let t = e.session();
           t && (await t.tryToFlushAutosave());
@@ -1208,14 +1208,14 @@ export function $$t80({
       if (B === _$$y.MERGING) {
         e.returnValue = "A merge operation is in progress. Closing the window could result in data loss or corruption; please wait until the operation completes.";
         e.preventDefault();
-        i(sx({
+        i(trackFileEventThunk({
           name: "Unload During Merge Warning Shown"
         }));
         return !1;
       }
     };
     let t = () => {
-      B === _$$y.MERGING && i(sx({
+      B === _$$y.MERGING && i(trackFileEventThunk({
         name: "Page Closed During Merge"
       }));
     };

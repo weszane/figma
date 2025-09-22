@@ -11,7 +11,7 @@ import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { PN, isInteractionPathCheck } from "../figma_app/897289";
-import { FP } from "../figma_app/91703";
+import { setLeftPanelTab } from "../figma_app/91703";
 import { me } from "../figma_app/223206";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../905/955316";
@@ -191,7 +191,7 @@ export let $$eu0 = new class {
     atomStoreManager.set(en, [...e]);
   }
   setLeftPanelTabToCode() {
-    debugState.dispatch(FP({
+    debugState.dispatch(setLeftPanelTab({
       tab: UserInterfaceElements.CODE
     }));
   }

@@ -8,7 +8,7 @@ import { applyCodeExtensionPreferences, filterCodegenPreferences, getPluginUniqu
 import { findCodegenLanguage } from '../905/661977';
 import { getUnit, resolveUnit, unitMapping } from '../905/762943';
 import { isActionSchema, isSelectSchema } from '../figma_app/155287';
-import { d1 } from '../figma_app/603466';
+import { PluginCallbacks } from '../figma_app/603466';
 import { AC, QN, v4 } from '../figma_app/655139';
 import { MeasurementUnit } from '../figma_app/763686';
 import { findPluginOrWidgetByFileId } from '../figma_app/844435';
@@ -306,7 +306,7 @@ export function getCodegenPreferencesSettings({
       settings.push({
         name: pref.propertyName,
         displayText: pref?.label || pref.propertyName,
-        callback: () => d1.codegenPreferencesChange({
+        callback: () => PluginCallbacks.codegenPreferencesChange({
           propertyName: pref.propertyName
         }),
         recordingKey: pref.propertyName

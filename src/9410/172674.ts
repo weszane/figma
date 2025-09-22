@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { G1 } from "../figma_app/691470";
+import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, PayloadTooLargeError, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
 import { permissionScopeHandler } from "../905/189185";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
@@ -47,14 +47,14 @@ class E extends Error {
     this.type = "unedited_slide";
   }
 }
-export let $$T2 = [b, v, E, G1, CortexErrorV2];
+export let $$T2 = [b, v, E, CortexError, CortexErrorV2];
 export function $$w4(e, t) {
   let i = function (e) {
     if (e instanceof b) return getI18nString("slides.speaker_notes.error.switched-slides");
     if (e instanceof C) return getI18nString("slides.speaker_notes.error.switched-to-grid-view");
     if (e instanceof v) return getI18nString("slides.speaker_notes.error.add-more-content");
     if (e instanceof E) return getI18nString("slides.speaker_notes.error.unmodified_slide");
-    if (!(e instanceof G1 || e instanceof CortexErrorV2)) return getI18nString("slides.speaker_notes.error.default");
+    if (!(e instanceof CortexError || e instanceof CortexErrorV2)) return getI18nString("slides.speaker_notes.error.default");
     if (e instanceof PayloadTooLargeError) return getI18nString("slides.speaker_notes.error.payload_too_large");
     let t = {
       offline: getI18nString("slides.speaker_notes.error.connection"),
@@ -81,7 +81,7 @@ export function $$w4(e, t) {
         if (MeterExceededError.isInstance(e)) return "meter_exceeded";
         if (ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e)) return "rate_limit_exceeded";
         if (ClientNoTextSelectedError.isInstance(e)) return "text_tool_no_text";else if (ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e)) return "service_issue";else if (OfflineError.isInstance(e)) return "offline";else if (UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e)) return "unsafe_or_harmful_content";else if (UnauthorizedError.isInstance(e)) return "unauthorized";else if (NotImplementedError.isInstance(e)) return "not_implemented";else if (e?.statusCode === 404) return "service_issue";else if (e?.statusCode === 429 || e?.statusCode === 529) return "rate_limit_exceeded";else if (e?.statusCode === 403) return "ai_opt_out_error";
-      } else if (e instanceof G1) switch (e.type) {
+      } else if (e instanceof CortexError) switch (e.type) {
         case "content_length_limit_exceeded":
         case "payload_too_large":
         case "meter_exceeded":

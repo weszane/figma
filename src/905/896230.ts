@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Iu } from "../figma_app/141088";
 import { EventEmitter } from "../905/690073";
-import { y as _$$y } from "../905/913008";
+import { fullscreenCrashHandler } from "../905/913008";
 import { N as _$$N } from "../905/718123";
 import { X } from "../905/91006";
 import { NP } from "../905/889931";
@@ -356,9 +356,9 @@ export let $$K0 = {
   SlotsBindingsWeb: () => new gQ(),
   jsHelpers: {
     reportError: captureException,
-    preventEnteringCpp: () => _$$y.preventEnteringCpp(),
+    preventEnteringCpp: () => fullscreenCrashHandler.preventEnteringCpp(),
     fatalCppError(e, t) {
-      _$$y.fatalCppError(e, t);
+      fullscreenCrashHandler.fatalCppError(e, t);
     }
   },
   ThumbhashBindings: () => new Bz()

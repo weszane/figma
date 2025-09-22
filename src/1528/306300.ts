@@ -13,7 +13,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Wo } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
@@ -138,7 +138,7 @@ export function $$$0({
   let o = kN();
   let d = iR();
   let c = d2();
-  let u = getObservableOrFallback(UK().showGuids);
+  let u = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let p = useSelector(selectSceneGraphSelectionKeys);
   let m = useMemo(() => JSON.stringify(p), [p]);
   let _ = hZ();

@@ -1,4 +1,5 @@
 import type { GridLayoutConfig, ProcessedRegion } from '../types'
+import { z } from 'zod'
 import { N as _$$N } from '../125137'
 import { permissionScopeHandler } from '../189185'
 import { Ay as _$$Ay3, jX } from '../281495'
@@ -223,7 +224,7 @@ export async function setStorageEntry(storageEntry) {
   return await setStorageValue(operationParams)
 }
 
-export let eG = {
+export let uiColorPalette = {
   black: '#1E1E1E',
   gray: '#B3B3B3',
   red: '#F24822',
@@ -234,7 +235,7 @@ export let eG = {
   violet: '#9747FF',
   white: '#FFFFFF',
 }
-export let ez = {
+export let lightColorPalette = {
   darkGray: '#757575',
   lightGray: '#E6E6E6',
   lightRed: '#FFC7C2',
@@ -290,30 +291,30 @@ export function processPublishStatus(e) {
 const publicVariableScopes = Object.keys(j0r).filter(scopeKey => isNaN(Number(scopeKey)) && scopeKey !== 'STROKE' && scopeKey !== 'FONT_VARIATIONS').concat(['STROKE_COLOR', 'FONT_WEIGHT']) as [string, ...string[]]
 // Public Variable Code Syntax Platform Properties - filtered numeric keys from y0x for platform-specific variable syntax
 const publicVariableCodeSyntaxPlatformProperties = Object.keys(y0x).filter(propertyKey => isNaN(Number(propertyKey))) as [string, ...string[]]
-const variableAlias = _$$z.strictObject({
-  id: _$$z.string(),
-  type: _$$z.literal('VARIABLE_ALIAS'),
+const variableAlias = z.strictObject({
+  id: z.string(),
+  type: z.literal('VARIABLE_ALIAS'),
 })
 export const variableDefinitions = {
-  PublicVariableScope: _$$z.enum([...publicVariableScopes]),
-  PublicVariableCodeSyntaxPlatformPropType: _$$z.enum([...publicVariableCodeSyntaxPlatformProperties]),
-  PublicVariableResolvedType: _$$z.enum([...primitiveTypes]),
-  VariableBindableNodeField: _$$z.enum([...hp]),
-  VariableBindableTextField: _$$z.enum([...SE]),
-  VariableBindableSubstringField: _$$z.enum([...MN]),
-  VariableBindablePaintField: _$$z.enum([...Lk]),
-  VariableBindableEffectField: _$$z.enum([...Wh]),
-  VariableBindableShadowEffectField: _$$z.enum([...Wh]),
-  VariableBindableBlurEffectField: _$$z.enum([...HC]),
-  VariableBindableMinMaxLayoutField: _$$z.enum([...JE]),
-  VariableBindableStretchLayoutField: _$$z.enum([...gO]),
-  VariableBindableCenterLayoutField: _$$z.enum([...W$]),
-  VariableBindableGridLayoutField: _$$z.enum([...Vw]),
-  VariableBindableLayoutField: _$$z.enum([...JE]),
-  VariableBindableComponentPropertyField: _$$z.enum([...fH]),
+  PublicVariableScope: z.enum([...publicVariableScopes]),
+  PublicVariableCodeSyntaxPlatformPropType: z.enum([...publicVariableCodeSyntaxPlatformProperties]),
+  PublicVariableResolvedType: z.enum([...primitiveTypes]),
+  VariableBindableNodeField: z.enum([...hp]),
+  VariableBindableTextField: z.enum([...SE]),
+  VariableBindableSubstringField: z.enum([...MN]),
+  VariableBindablePaintField: z.enum([...Lk]),
+  VariableBindableEffectField: z.enum([...Wh]),
+  VariableBindableShadowEffectField: z.enum([...Wh]),
+  VariableBindableBlurEffectField: z.enum([...HC]),
+  VariableBindableMinMaxLayoutField: z.enum([...JE]),
+  VariableBindableStretchLayoutField: z.enum([...gO]),
+  VariableBindableCenterLayoutField: z.enum([...W$]),
+  VariableBindableGridLayoutField: z.enum([...Vw]),
+  VariableBindableLayoutField: z.enum([...JE]),
+  VariableBindableComponentPropertyField: z.enum([...fH]),
   VariableAlias: variableAlias,
   VariableBinding: variableAlias,
-  VariableValue: _$$z.union([_$$z.boolean(), _$$N.FiniteNumber, _$$z.string(), _$$z.union([_$$N.ColorA, _$$N.Color]), variableAlias]),
+  VariableValue: z.union([z.boolean(), _$$N.FiniteNumber, z.string(), z.union([_$$N.ColorA, _$$N.Color]), variableAlias]),
 }
 
 export function hasResizeToFit(e) {
@@ -325,19 +326,19 @@ export function processWidgetSyncData(vm, state, i) {
     syncedState: vm.isUndefined(state)
       ? void 0
       : _$$u({
-        vm,
-        handle: state,
-        zSchema: _$$z.record(_$$z.any()).optional(),
-        property: 'cloneWidget',
-      }),
+          vm,
+          handle: state,
+          zSchema: z.record(z.any()).optional(),
+          property: 'cloneWidget',
+        }),
     syncedMap: vm.isUndefined(i)
       ? void 0
       : _$$u({
-        vm,
-        handle: i,
-        zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
-        property: 'cloneWidget',
-      }),
+          vm,
+          handle: i,
+          zSchema: z.record(z.record(z.any())).optional(),
+          property: 'cloneWidget',
+        }),
   }
 }
 
@@ -490,14 +491,14 @@ export function processEffect(effect) {
   const type = convertEffectType(effect.type)
   const baseEffect = effect.type === 'NOISE'
     ? {
-      type,
-      visible: effect.visible,
-    }
+        type,
+        visible: effect.visible,
+      }
     : {
-      type,
-      visible: effect.visible,
-      radius: effect.radius,
-    }
+        type,
+        visible: effect.visible,
+        radius: effect.radius,
+      }
   const boundVariables: any = {}
   if (effect.colorVar?.value?.alias) {
     boundVariables.color = createVariableAlias(effect.colorVar.value.alias)
@@ -1066,9 +1067,9 @@ export function mapColorName(colorName) {
   }
 }
 
-export let i5 = _$$z.strictObject({
-  label: _$$z.string().trim().min(1),
-  color: _$$z.enum(colors),
+export let i5 = z.strictObject({
+  label: z.string().trim().min(1),
+  color: z.enum(colors),
 })
 
 export async function loadFontsForTextNode(textNode) {
@@ -1226,8 +1227,8 @@ export function parseColorInput(colorInput: unknown) {
   return normalizeColorObjectAlpha(colorInput)
 }
 
-let timerStateEnum = _$$z.enum(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust'])
-export let timerAndStateEvents = _$$z.union([_$$z.enum(['close', 'selectionchange', 'currentpagechange', 'drop', 'input', 'run', 'message', 'documentchange', 'stylechange', 'nodechange', 'textreview', 'codegen', 'generate', 'preferenceschange', 'linkpreview', 'auth', 'open', 'slidesviewchange']), timerStateEnum])
+let timerStateEnum = z.enum(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust'])
+export let timerAndStateEvents = z.union([z.enum(['close', 'selectionchange', 'currentpagechange', 'drop', 'input', 'run', 'message', 'documentchange', 'stylechange', 'nodechange', 'textreview', 'codegen', 'generate', 'preferenceschange', 'linkpreview', 'auth', 'open', 'slidesviewchange']), timerStateEnum])
 
 /**
  * Generate Node JSX Function - creates JSX string representation for a node with visibility filtering

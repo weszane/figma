@@ -5,14 +5,14 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { fileKeyAtom } from "../905/662353";
-import { wI, JI, kl, OL, Gc } from "../figma_app/840917";
+import { deleteAutosaveExceptFileKeys, garbageCollectAutosave, getUnsyncedAutosaveFilesForUser, autosaveFilesQuery, setRenamedFileInfo } from "../figma_app/840917";
 import { ipcStorageHandler, autosaveNewFilesDelete, autosaveNewFilesUpdate, autosaveNewFileSyncStart } from "../905/725909";
 import { liveStoreInstance } from "../905/713695";
 let $$_4 = createOptimistThunk(async (e, t) => {
   let r = e.getState()?.user?.id;
   if (!r) return;
   let n = Object.keys(t);
-  await wI(r, n);
+  await deleteAutosaveExceptFileKeys(r, n);
   ipcStorageHandler.sendToAllTabs(autosaveNewFilesDelete, n);
   trackEventAnalytics("Delete New Autosave Files", {
     deletedCount: n.length
@@ -22,8 +22,8 @@ let $$h0 = createOptimistThunk(async e => {
   let t = e.getState();
   let r = t.user?.id;
   if (!r) return;
-  await JI(r);
-  let n = await kl(r);
+  await garbageCollectAutosave(r);
+  let n = await getUnsyncedAutosaveFilesForUser(r);
   e.dispatch($$f2({
     filesWithChangesInIDB: n.unsyncedFiles,
     filesCreatedOffline: n.newFiles
@@ -36,7 +36,7 @@ let $$f2 = createActionCreator("SET_UNCLAIMED_FILES");
 export function $$E3(e) {
   ipcStorageHandler.register(autosaveNewFilesUpdate, () => function (e) {
     let t = e.getState().user?.id ?? null;
-    liveStoreInstance.fetch(OL({
+    liveStoreInstance.fetch(autosaveFilesQuery({
       userId: t
     }), {
       policy: "networkOnly"
@@ -55,7 +55,7 @@ export function $$E3(e) {
   ipcStorageHandler.register(autosaveNewFileSyncStart, ({
     localFileKey: e,
     realFileKey: t
-  }) => Gc(e, t));
+  }) => setRenamedFileInfo(e, t));
 }
 export const Jw = $$h0;
 export const TP = $$m1;

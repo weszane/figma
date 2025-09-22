@@ -22,7 +22,7 @@ import { Av, az, yd, rJ, L2, I as _$$I, ZM, rT, KV, zZ } from "../figma_app/5422
 import { B } from "../905/610974";
 import { g as _$$g } from "../905/748145";
 import { p as _$$p } from "../905/223871";
-import { U } from "../905/940056";
+import { Violation } from "../905/940056";
 import { eA, gZ, YS, fQ } from "../905/695660";
 import { td } from "../figma_app/827216";
 let $$O0 = 25e3;
@@ -401,7 +401,7 @@ class L {
             continue;
           }
           for (let e of _) {
-            let t = U.createViolationList({
+            let t = Violation.createViolationList({
               ruleId: s.id,
               guid: e,
               detectionContext: c[e],

@@ -45,7 +45,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { uj0 } from '../figma_app/27776';
 import { wS, xP } from '../figma_app/65182';
 import { Q as _$$Q } from '../figma_app/67145';
-import { u1, XE } from '../figma_app/91703';
+import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { F$ } from '../figma_app/111825';
 import { P as _$$P } from '../figma_app/120873';
@@ -63,7 +63,7 @@ import { D as _$$D } from '../figma_app/335489';
 import { uN } from '../figma_app/338442';
 import { hg } from '../figma_app/355754';
 import { Aw } from '../figma_app/383828';
-import { n0 } from '../figma_app/389091';
+import { setSelectedTypedPropDefId } from '../figma_app/389091';
 import { eF as _$$eF } from '../figma_app/394327';
 import { ty as _$$ty } from '../figma_app/406976';
 import { fullscreenValue } from '../figma_app/455680';
@@ -283,13 +283,13 @@ function ew(e) {
     G ? (V(null), componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user('edit-prop-def-name', () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && permissionScopeHandler.user('edit-variant-prop-name', () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
   };
   let eg = useCallback(() => {
-    O(n0({
+    O(setSelectedTypedPropDefId({
       propDefId: null
     }));
     O(vq());
     let e = z.current;
     let t = e ? cn(e, wh) : {};
-    O(u1({
+    O(showPickerThunk({
       id: aR,
       initialX: t?.x,
       initialY: t?.y,
@@ -304,11 +304,11 @@ function ew(e) {
     ea && componentWithPropDefSelected && !el && eg();
   }, [ea, componentWithPropDefSelected, el, eg]);
   let ef = useCallback(e => {
-    pickerShown?.id !== aR || el || O(XE());
+    pickerShown?.id !== aR || el || O(hidePickerThunk());
     onPropertyMouseUp && !useGrid && onPropertyMouseUp(e);
   }, [O, el, pickerShown?.id, onPropertyMouseUp, useGrid]);
   let eE = useCallback(() => {
-    el ? O(XE()) : (eg(), useGrid || selectRow());
+    el ? O(hidePickerThunk()) : (eg(), useGrid || selectRow());
   }, [O, el, selectRow, useGrid, eg]);
   let ey = useCallback(() => {
     B(!0);
@@ -329,7 +329,7 @@ function ew(e) {
       O(hideDropdownAction());
       return;
     }
-    pickerShown?.id === aR && O(XE());
+    pickerShown?.id === aR && O(hidePickerThunk());
     O(showDropdownThunk({
       type: componentPropDef.kind === uN.TYPED ? eA : ex,
       data: {
@@ -354,7 +354,7 @@ function ew(e) {
   });
   let ew = useHandleMouseEvent(recordingKey, 'mousedown', e => {
     es && V(null);
-    el && O(XE());
+    el && O(hidePickerThunk());
     onPropertyMouseDown && !useGrid && onPropertyMouseDown(e);
   });
   let eR = useHandleMouseEvent(recordingKey, 'mousemove', e => {

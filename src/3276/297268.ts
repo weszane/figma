@@ -21,7 +21,7 @@ import { U6 } from "../figma_app/591738";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { Zz } from "../figma_app/12220";
 import { E as _$$E } from "../905/617605";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { Z as _$$Z } from "../905/104740";
 import { useViewportWithDelta, viewportToScreen, addRectOffset, getBasicViewportRect, useFullscreenViewportUpdates } from "../figma_app/62612";
 import { BI } from "../figma_app/546509";
@@ -458,7 +458,7 @@ let er = memo(function (e) {
     let e = _$$iZ?.getFocusedClusterId();
     return e ? e7.getById(e) : null;
   }, [e7]);
-  let ts = sT();
+  let ts = getNudgeAmounts();
   let tr = function (e) {
     let t = ed();
     return useCallback(n => {

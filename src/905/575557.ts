@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { oZ, LS, TK, F6, UH } from "../905/129660";
@@ -41,7 +41,7 @@ export function $$N0({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let F = oZ(t);
   let M = !!LS(t.lineHeight);
   let j = useRef(null);

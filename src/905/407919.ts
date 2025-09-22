@@ -2,7 +2,9 @@
  * Holds the current state object.
  * @see D
  */
-let currentState: any; // D
+let currentState: {
+  getState: () => AppState;
+}; // D
 
 /**
  * Initializes the debug store on the window object.

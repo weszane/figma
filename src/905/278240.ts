@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { Lk } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { sT } from "../figma_app/740163";
+import { getNudgeAmounts } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { TK } from "../905/129660";
@@ -102,7 +102,7 @@ function j({
   let {
     smallNudgeAmount,
     bigNudgeAmount
-  } = sT();
+  } = getNudgeAmounts();
   let K = _$$B2();
   let Y = !!P;
   let q = useCallback((e, t) => {

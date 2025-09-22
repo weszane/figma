@@ -18,7 +18,7 @@ import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Dm } from "../figma_app/8833";
-import { UK } from "../figma_app/740163";
+import { EditorPreferencesApi } from "../figma_app/740163";
 import { KindEnum } from "../905/129884";
 import { Zk } from "../figma_app/626177";
 import { Wv } from "../figma_app/711157";
@@ -42,7 +42,7 @@ import { h3, Mq, xN } from "../905/918995";
 import { l as _$$l } from "../905/674573";
 import { A as _$$A, a as _$$a } from "../905/904550";
 let K = (e, t, r) => {
-  UK().toggleCollaborativeTextDebugLogging.getCopy() && logInfo(e, t, r);
+  EditorPreferencesApi().toggleCollaborativeTextDebugLogging.getCopy() && logInfo(e, t, r);
 };
 let Y = () => !_H();
 function $({

@@ -30,7 +30,7 @@ import { W as _$$W } from "../3276/514864";
 import { toggleDropdown } from "../figma_app/976345";
 import { useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { hideDropdownAction } from "../905/929976";
-import { J4 } from "../figma_app/91703";
+import { updateMultiplayerStateThunk } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
@@ -180,7 +180,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
     })), i(postUserFlag({
       aware_of_observation_mode: !0
     })));
-    i(J4({
+    i(updateMultiplayerStateThunk({
       ...n,
       observingSessionID: t
     }));

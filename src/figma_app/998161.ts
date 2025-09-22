@@ -20,7 +20,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
-import { Ku } from "../figma_app/740163";
+import { getColorFormat } from "../figma_app/740163";
 import { isGradientType, validateGradientPaint, getSolidPaint, getColorAtStop, paintManager } from "../figma_app/385874";
 import { kl } from "../905/275640";
 import { tZ } from "../figma_app/852050";
@@ -208,7 +208,7 @@ function Z({
   let c = useCurrentTool();
   let u = Ep();
   let p = _$$C();
-  let _ = Ku();
+  let _ = getColorFormat();
   let m = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let g = useRef(null);
   let [E, y] = useState(isGradientType(e.type) ? 1 : 0);
