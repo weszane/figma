@@ -2,8 +2,8 @@ import { useMemo, useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { mapFileToProductType } from "../figma_app/314264";
-import { o as _$$o } from "../figma_app/915774";
-import { X } from "../905/853613";
+import { isEligibleElement } from "../figma_app/915774";
+import { getPartnerType } from "../905/853613";
 import { Hu, GZ } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -56,8 +56,8 @@ export function $$C1({
     sourceSection: $$w0,
     type: e.type === PrimaryWorkflowEnum.COMPONENT ? "component" : "state_group",
     subscriptionLevel: O,
-    isExample: _$$o(e, R),
-    partnerType: X(e.library_key),
+    isExample: isEligibleElement(e, R),
+    partnerType: getPartnerType(e.library_key),
     productType: mapFileToProductType({
       editorType: j?.editorType
     })

@@ -24,7 +24,7 @@ import { componentReplaceLocal } from "../905/879323";
 import { hideModal } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { getSelectedFile } from "../905/766303";
-import { z as _$$z } from "../905/853613";
+import { getLibrarySourceString } from "../905/853613";
 import { Hj } from "../figma_app/412398";
 import { tf } from "../905/295427";
 import { isStagedStatus, getContainingStateGroupNodeId } from "../figma_app/646357";
@@ -633,7 +633,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   });
   trackEventAnalytics("Library publish upload", {
     fileKey: X.key,
-    publishMode: _$$z(Io(A)),
+    publishMode: getLibrarySourceString(Io(A)),
     publishScope: t.publishScope,
     libraryModalSessionId: t.libraryModalSessionId,
     orgId: eh?.org_id,

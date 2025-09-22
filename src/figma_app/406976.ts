@@ -11,7 +11,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { logError } from "../905/714362";
 import { trackFileEvent } from "../figma_app/314264";
 import { ZR, O8 } from "../905/313095";
-import { X } from "../905/853613";
+import { getPartnerType } from "../905/853613";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { Ev, Eo } from "../figma_app/216057";
@@ -98,7 +98,7 @@ export function $$A2(e, t, r) {
       let A = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.sortPosition : null;
       let x = VariablesBindings.getSubscribedVariableInfo(d);
       let N = ZR(I ?? O8(x), p.openFile);
-      let C = X(N);
+      let C = getPartnerType(N);
       let w = p.mirror.selectedStyleProperties.guid;
       w && (_ = [sessionLocalIDToString(w)]);
       let O = function () {
@@ -152,7 +152,7 @@ export function $$A2(e, t, r) {
       let _ = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.sortPosition : null;
       let f = VariablesBindings.getSubscribedVariableInfo(r?.value);
       let E = ZR(u ?? O8(f), n.openFile);
-      let b = X(E);
+      let b = getPartnerType(E);
       let I = n.mirror.selectedStyleProperties.guid;
       for (let t of (I && (s = [sessionLocalIDToString(I)]), s)) trackFileEvent("ds_variable_reference_set", o, n, {
         userId: d,
@@ -188,7 +188,7 @@ export function $$x3(e, t) {
     let o = atomStoreManager.get(Ev(e));
     let d = VariablesBindings.getSubscribedVariableInfo(e);
     let u = ZR(o ?? O8(d), r.openFile);
-    let p = X(u);
+    let p = getPartnerType(u);
     for (let i of n) trackFileEvent("ds_variable_reference_set", a, r, {
       userId: s,
       variable_id: e,

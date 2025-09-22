@@ -14,8 +14,8 @@ import { Point } from "../905/736624";
 import { b$, FU, Bs, jR, a9, D6 } from "../figma_app/933328";
 import { getCurrentFileType } from "../figma_app/976749";
 import { teamLibraryCache } from "../figma_app/80990";
-import { o as _$$o } from "../figma_app/915774";
-import { X as _$$X } from "../905/853613";
+import { isEligibleElement } from "../figma_app/915774";
+import { getPartnerType } from "../905/853613";
 import { Ew } from "../figma_app/361662";
 import { fullscreenValue } from "../figma_app/455680";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
@@ -143,8 +143,8 @@ export function $$$$j0(e) {
     sectionDepth: e.sectionDepth,
     aiScore: G ? void 0 : V.ai_score ?? void 0,
     lexicalScore: G ? void 0 : V.lexical_score ?? void 0,
-    isExample: _$$o(V, B),
-    partnerType: G ? void 0 : _$$X(V.library_key)
+    isExample: isEligibleElement(V, B),
+    partnerType: G ? void 0 : getPartnerType(V.library_key)
   });
   let Q = e.isList ? _$$N.CENTERED : _$$N.RELATIVE;
   let {

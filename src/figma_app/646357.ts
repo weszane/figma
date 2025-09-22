@@ -361,7 +361,7 @@ function isAssetPublished(
  * @param file
  * @param assetKey
  */
-function isSameAssetKey(file: any, assetKey: string): boolean {
+export function isSameAssetKey(file: any, assetKey: string): boolean {
   return (
     generateUniqueKey(file.key) === assetKey
     || (!!file.source_file_key && generateUniqueKey(file.source_file_key) === assetKey)
@@ -373,7 +373,7 @@ function isSameAssetKey(file: any, assetKey: string): boolean {
  * @param defaultPublished
  * @param assetKey
  */
-function isSubscribedLibrary(defaultPublished: any, assetKey: string): boolean {
+export function isSubscribedLibrary(defaultPublished: any, assetKey: string): boolean {
   return !!defaultPublished?.libraryKeys?.includes(assetKey)
     || atomStoreManager.get(subscribedLibraryKeysAtom).has(assetKey)
 }
@@ -2088,18 +2088,18 @@ export function hasVariableSetError(asset: any): boolean {
 
 // Promise and callback management for async operations (original: resolveUsedComponentsStateGroups, usedComponentsStateGroupsPromise, resolveUsedComponents, usedComponentsPromise,
 // tx, tN, getUsedComponentsStateGroupsAsync, resolveUsedLibraries, usedLibrariesPromise, resolveUsedLibrariesAsync, usedLibrariesAsyncPromise)
-let resolveUsedComponentsStateGroups: () => void = () => {}
-let usedComponentsStateGroupsPromise = new Promise<void>((resolve) => {
+export let resolveUsedComponentsStateGroups: () => void = () => {}
+export let usedComponentsStateGroupsPromise = new Promise<void>((resolve) => {
   resolveUsedComponentsStateGroups = resolve
 })
 
-let resolveUsedComponents: () => void = () => {}
-let usedComponentsPromise = new Promise<void>((resolve) => {
+export let resolveUsedComponents: () => void = () => {}
+export let usedComponentsPromise = new Promise<void>((resolve) => {
   resolveUsedComponents = resolve
 })
 
-let resolveAsync: () => void = () => {}
-let asyncPromise = new Promise<void>((resolve) => {
+export let resolveAsync: () => void = () => {}
+export let asyncPromise = new Promise<void>((resolve) => {
   resolveAsync = resolve
 })
 
@@ -2117,13 +2117,13 @@ export function getUsedComponentsStateGroupsAsync(store: any) {
   }
 }
 
-let resolveUsedLibraries: () => void = () => {}
-let usedLibrariesPromise = new Promise<void>((resolve) => {
+export let resolveUsedLibraries: () => void = () => {}
+export let usedLibrariesPromise = new Promise<void>((resolve) => {
   resolveUsedLibraries = resolve
 })
 
-let resolveUsedLibrariesAsync: () => void = () => {}
-let usedLibrariesAsyncPromise = new Promise<void>((resolve) => {
+export let resolveUsedLibrariesAsync: () => void = () => {}
+export let usedLibrariesAsyncPromise = new Promise<void>((resolve) => {
   resolveUsedLibrariesAsync = resolve
 })
 
@@ -2758,7 +2758,7 @@ export function areFramesEqual(
  * Helper to compare containing state groups.
  * (original: inline in areFramesEqual)
  */
-function areContainingStateGroupsEqual(a: any, b: any): boolean {
+export function areContainingStateGroupsEqual(a: any, b: any): boolean {
   if (a == null && b == null)
     return true
   if (a == null || b == null)

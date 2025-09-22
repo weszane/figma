@@ -98,7 +98,7 @@ import { KeyboardReceiver } from '../905/826900';
 import { AutoLayout } from '../905/470281';
 import { Um } from '../905/848862';
 import { t as _$$t4 } from '../905/851577';
-import { X as _$$X2 } from '../905/853613';
+import { getPartnerType } from '../905/853613';
 import { F_ } from '../905/858282';
 import { FDocumentType } from '../905/862883';
 import { bL, RT } from '../905/867927';
@@ -240,7 +240,7 @@ import { selectSceneGraph, getSingleSelectedKey } from '../figma_app/889655';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { fi as _$$fi } from '../figma_app/913823';
 import { _o, GT, YS } from '../figma_app/914674';
-import { dS, gO, Nz } from '../figma_app/915774';
+import { isExamplesPreset, sortWithPriority, isExamplePreset } from '../figma_app/915774';
 import { useAssetPanelContext, AssetPanelProvider } from '../figma_app/923271';
 import { TemplateCategory } from '../figma_app/930386';
 import { jR } from '../figma_app/933328';
@@ -488,7 +488,7 @@ function e3({
   let {
     currentView
   } = wV();
-  let M = useMemo(() => _ ?? Nz(e, {
+  let M = useMemo(() => _ ?? isExamplePreset(e, {
     isPreset: hasLibraryKeyInSet(e, I)
   }), [e, _, I]);
   let A = _$$J2(e, p, u);
@@ -1006,9 +1006,9 @@ function tj(e, t = '', {
 }) {
   let n = new Map();
   let i = [];
-  r ? e.sort(r) : gO(e, {
+  r ? e.sort(r) : sortWithPriority(e, {
     sortFn: e => tC(e).join('/'),
-    priorityFn: e => Nz(e, {
+    priorityFn: e => isExamplePreset(e, {
       isPreset: s
     })
   });
@@ -1068,9 +1068,9 @@ function tv(e, t, {
   fM(itemsByPageId, c, itemsWithoutPage);
   fM(_itemsByPageId, c, _itemsWithoutPage, !0);
   let u = Object.keys(c);
-  for (let e of (gO(u, {
+  for (let e of (sortWithPriority(u, {
     sortFn: e => c[e],
-    priorityFn: e => dS(c[e], {
+    priorityFn: e => isExamplesPreset(c[e], {
       isPreset: s
     })
   }), u)) {
@@ -1081,13 +1081,13 @@ function tv(e, t, {
     let d = null;
     let u = null;
     if (i && i.length > 0) {
-      l = i.filter(e => !Nz(e, {
+      l = i.filter(e => !isExamplePreset(e, {
         isPreset: s
       }));
       let {
         sortedItems,
         sortedSubtrees
-      } = tj(o = i.filter(e => Nz(e, {
+      } = tj(o = i.filter(e => isExamplePreset(e, {
         isPreset: s
       })), 'examples', {
         isPreset: s
@@ -2506,12 +2506,12 @@ let sB = ({
   let d = t.join('/');
   let c = t.length;
   let u = folderPath?.length ?? 0;
-  let p = useMemo(() => !!(s && e?.items) && e?.items.every(e => Nz(e, {
+  let p = useMemo(() => !!(s && e?.items) && e?.items.every(e => isExamplePreset(e, {
     isPreset: s
   })), [s, e?.items]);
   let h = useCallback(e => {
     let t = e.subtrees.values().next().value;
-    return t && dS(t.name, {
+    return t && isExamplesPreset(t.name, {
       isPreset: s
     });
   }, [s]);
@@ -4383,7 +4383,7 @@ function nV({
         r ? i() : a();
       }, [r, i, a]);
     }();
-    let c = _$$X2(e.libraryKey);
+    let c = getPartnerType(e.libraryKey);
     let u = _$$b2({
       libraryKey: e.libraryKey
     });
@@ -6404,7 +6404,7 @@ function iS({
         height: l === 'list' ? iv : ij,
         key: e
       });
-      n === 0 && dS(s.name, {
+      n === 0 && isExamplesPreset(s.name, {
         isPreset: c
       }) && t.push({
         element: jsx(cG, {}),

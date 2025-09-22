@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
 import { selectWithShallowEqual } from "../905/103090";
 import { getComponentBreadcrumbs, memoizedProcessComponentsAndStateGroups, processLocalComponents, getFullComponentBreadcrumbs } from "../figma_app/80990";
-import { Nz } from "../figma_app/915774";
+import { isExamplePreset } from "../figma_app/915774";
 import { getNonDeletedAssets, flattenAssetsByTeam } from "../figma_app/646357";
 import { useMultipleLibraryMetadata } from "../905/726668";
 import { getBasename } from "../905/309735";
@@ -149,7 +149,7 @@ export function $$b6({
     let a = {};
     for (let s of r) {
       let r = e[s];
-      t[s]?.isHubFile && (r = r.filter(e => !Nz(e, {
+      t[s]?.isHubFile && (r = r.filter(e => !isExamplePreset(e, {
         isPreset: !0
       })));
       a[s] = A(r, i, n);

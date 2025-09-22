@@ -92,7 +92,7 @@ import { G as _$$G } from "../905/750789";
 import { p as _$$p } from "../905/927118";
 import { useMemoStable } from "../905/19536";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { Nz } from "../figma_app/915774";
+import { isExamplePreset } from "../figma_app/915774";
 import { LinkPrimitive } from "../figma_app/496441";
 import { SvgComponent } from "../905/714743";
 import { $8, Ni, md as _$$md, i4, $j, nw, Np } from "../905/737988";
@@ -560,10 +560,10 @@ function eJ(e, t) {
   return e.filter(e => {
     let i = e.node_id in t ? t[e.node_id] : void 0;
     if (i) {
-      let t = Nz(i, {
+      let t = isExamplePreset(i, {
         isPreset: !0
       });
-      let n = Nz(e, {
+      let n = isExamplePreset(e, {
         isPreset: !0
       });
       return !t && n;

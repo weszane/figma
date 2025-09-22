@@ -7,8 +7,8 @@ import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { V } from "../figma_app/473391";
-import { o as _$$o } from "../figma_app/915774";
-import { X } from "../905/853613";
+import { isEligibleElement } from "../figma_app/915774";
+import { getPartnerType } from "../905/853613";
 import { Ew } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
 import { selectOpenFileKey } from "../figma_app/516028";
@@ -177,8 +177,8 @@ export function $$P0({
     sourceForTracking: g ?? mZ,
     aiScore: n.ai_score ?? void 0,
     lexicalScore: n.lexical_score ?? void 0,
-    isExample: _$$o(n, b),
-    partnerType: X(n.library_key)
+    isExample: isEligibleElement(n, b),
+    partnerType: getPartnerType(n.library_key)
   });
   let S = ZV(T);
   return useCallback(i => {

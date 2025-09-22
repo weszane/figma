@@ -2,7 +2,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { NX, k9 } from "../figma_app/777207";
-import { gO, dS, Nz } from "../figma_app/915774";
+import { sortWithPriority, isExamplesPreset, isExamplePreset } from "../figma_app/915774";
 import { isTemplateAsset, isPrimaryWorkflowType } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { splitPath } from "../905/309735";
@@ -67,9 +67,9 @@ function g(e, t, r, n, i) {
     e.subtrees = g(e.subtrees, s, l, d, {
       isPreset: i?.isPreset ?? !1
     });
-    gO(e.subtrees, {
+    sortWithPriority(e.subtrees, {
       sortFn: e => e.name,
-      priorityFn: e => dS(e.name, {
+      priorityFn: e => isExamplesPreset(e.name, {
         isPreset: i?.isPreset ?? !1
       })
     });
@@ -78,9 +78,9 @@ function g(e, t, r, n, i) {
   return a;
 }
 function f(e, t, r) {
-  gO(t, {
+  sortWithPriority(t, {
     sortFn: e => e.name,
-    priorityFn: e => Nz(e, {
+    priorityFn: e => isExamplePreset(e, {
       isPreset: r?.isPreset ?? !1
     })
   });
@@ -164,9 +164,9 @@ function y(e, t, r) {
   } = $$_4(t, e => e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.MODULE ? e : null);
   $$m3(itemsByPageId, pageNamesByPageId, itemsWithoutPage);
   let s = Object.keys(itemsByPageId);
-  if (gO(s, {
+  if (sortWithPriority(s, {
     sortFn: e => pageNamesByPageId[e],
-    priorityFn: e => dS(pageNamesByPageId[e], {
+    priorityFn: e => isExamplesPreset(pageNamesByPageId[e], {
       isPreset: r?.isPreset ?? !1
     })
   }), s.length > 1 || 1 === s.length && itemsWithoutPage.length) {
@@ -192,9 +192,9 @@ function y(e, t, r) {
   e.subtrees = g(e.subtrees, [], [], e.name ? [e.name] : [], {
     isPreset: r?.isPreset ?? !1
   });
-  gO(e.subtrees, {
+  sortWithPriority(e.subtrees, {
     sortFn: e => e.name.trim(),
-    priorityFn: e => dS(e.name.trim(), {
+    priorityFn: e => isExamplesPreset(e.name.trim(), {
       isPreset: r?.isPreset ?? !1
     })
   });

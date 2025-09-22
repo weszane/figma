@@ -15,7 +15,7 @@ import { Q4 } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { A as _$$A } from "../5132/237216";
 import { hideModal, showModalHandler } from "../905/156213";
-import { X } from "../905/853613";
+import { getPartnerType } from "../905/853613";
 import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ModalView } from "../figma_app/918700";
@@ -51,7 +51,7 @@ let E = registerModal(function ({
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {
       userId: o?.id,
       hubFileId: e.id,
-      partnerType: X(e.library_key)
+      partnerType: getPartnerType(e.library_key)
     });
   });
   let E = useCallback(() => {
@@ -62,7 +62,7 @@ let E = registerModal(function ({
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
-      partnerType: X(e.library_key),
+      partnerType: getPartnerType(e.library_key),
       option: "cancel"
     });
   }, [E, e, o]);
@@ -83,7 +83,7 @@ let E = registerModal(function ({
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
-      partnerType: X(e.library_key),
+      partnerType: getPartnerType(e.library_key),
       option: "show_in_figma"
     });
   }, [r, E, e, o, t]);
@@ -93,7 +93,7 @@ let E = registerModal(function ({
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
-      partnerType: X(e.library_key),
+      partnerType: getPartnerType(e.library_key),
       option: "make_a_copy"
     });
   }, [E, e, o, j]);

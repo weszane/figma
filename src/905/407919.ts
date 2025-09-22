@@ -4,6 +4,7 @@
  */
 let currentState: {
   getState: () => AppState;
+  dispatch: (action: any) => any;
 }; // D
 
 /**

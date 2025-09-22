@@ -37,8 +37,8 @@ import { getPermissionsState, canGuestOrg, hasActiveEduTeam } from "../figma_app
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { x as _$$x } from "../figma_app/584132";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
-import { o as _$$o } from "../figma_app/915774";
-import { X as _$$X } from "../905/853613";
+import { isEligibleElement } from "../figma_app/915774";
+import { getPartnerType } from "../905/853613";
 import { tM, Hu } from "../figma_app/361662";
 import { fullscreenValue } from "../figma_app/455680";
 import { useSyncedRef } from "../905/633914";
@@ -695,7 +695,7 @@ export function $$tu1({
       fileParentOrgId: eu?.parentOrgId ?? void 0,
       fileTeamId: eu?.teamId ?? void 0,
       assetsPanelVersion: ex,
-      partnerType: _$$X(e.library_key),
+      partnerType: getPartnerType(e.library_key),
       queryId: ey ?? void 0
     });
   });
@@ -765,9 +765,9 @@ export function $$tu1({
       fileKey: eu?.key ?? void 0,
       fileParentOrgId: eu?.parentOrgId ?? void 0,
       fileTeamId: eu?.teamId ?? void 0,
-      isExample: _$$o(e, Q),
+      isExample: isEligibleElement(e, Q),
       libraryKey: e.library_key,
-      partnerType: _$$X(e.library_key),
+      partnerType: getPartnerType(e.library_key),
       sectionDepth: A,
       sourceSection: E ?? void 0,
       productType: mapFileToProductType({
