@@ -13,7 +13,7 @@ import { V } from "../0c62c2fd/421640";
 import { ud } from "../figma_app/681697";
 import { useCallback } from "react";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -161,7 +161,7 @@ export function $$R0({
               }) {
                 let o = getProductAccessType(t);
                 if (!o) {
-                  reportError(_$$e.MONETIZATION_UPGRADES, Error("Editor type has no corresponding license type for file creation upgrade flow"), {
+                  reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Editor type has no corresponding license type for file creation upgrade flow"), {
                     extra: {
                       editorType: t,
                       fileCreationOptionState: r

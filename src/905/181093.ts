@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, Suspense } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { getErrorStackHistory } from "../905/607410";
 import { h } from "../905/207101";
@@ -37,7 +37,7 @@ export function $$m0(e) {
           let t = Error(i.length > 0 ? `Suspense fallback (${e.source}) rendered more than once. The following breadcrumbs are from the most-recently thrown promises:
 ==============================================
 ` + i.join("\n") + "\n==============================================\n" : `Suspense fallback (${e.source}) rendered more than once -- no recent breadcrumbs were found?`);
-          reportError(_$$e.FRONTEND_PLATFORM, t);
+          reportError(ServiceCategories.FRONTEND_PLATFORM, t);
           l.current = !0;
         }
       }

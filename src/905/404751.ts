@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/663269";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
@@ -320,7 +320,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
       } catch (t) {
         if (onError && onError(), t.data?.failure_info?.code === "ERR_FILE_LIMIT") {
           if (!team) {
-            reportError(_$$e.WORKFLOW, Error("Team object is null in tryMove"));
+            reportError(ServiceCategories.WORKFLOW, Error("Team object is null in tryMove"));
             return;
           }
           c > 0 && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(showModalHandler({

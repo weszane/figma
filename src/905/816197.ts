@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { ServiceCategories as ServiceCategoriesExtensibility } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { waitForJoinStatus } from '../905/346794';
 import { n as createMemoized } from '../905/347702';
 import { debugState } from '../905/407919';
@@ -215,7 +215,7 @@ export function markPageLoaded(nodeId: string, tracker: DocumentAccessState, opt
       if (page && page.status === DataLoadStatus.LOADED) {
         tracker.addLoadedPageIds([containingCanvas]);
       } else {
-        reportError(ServiceCategoriesExtensibility.EXTENSIBILITY, new Error('Cannot call markPageLoaded without having loaded the page first.'));
+        reportError(ServiceCategories.EXTENSIBILITY, new Error('Cannot call markPageLoaded without having loaded the page first.'));
       }
     }
   }
@@ -259,7 +259,7 @@ export async function loadAllPluginPages(nodeIds: string[], tracker: DocumentAcc
 async function loadInternalCanvas(tracker: DocumentAccessState): Promise<void> {
   const internalCanvas = getSingletonSceneGraph().getInternalCanvas();
   if (!internalCanvas) {
-    reportError(ServiceCategoriesExtensibility.EXTENSIBILITY, new Error('loadInternalCanvas: internalCanvas does not exist'));
+    reportError(ServiceCategories.EXTENSIBILITY, new Error('loadInternalCanvas: internalCanvas does not exist'));
     return;
   }
   await ensurePluginPageLoaded(internalCanvas.guid, tracker);

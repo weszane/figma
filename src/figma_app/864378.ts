@@ -1,54 +1,75 @@
-import { ServiceCategories as _$$e } from "../905/165054";
-import { getFeatureFlags } from "../905/601108";
-import { reportError } from "../905/11";
-import { createOptimistThunk } from "../905/350402";
-import { componentUpdate } from "../905/879323";
-import { updateLocalLibraryItems } from "../figma_app/646357";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-let $$c0 = createOptimistThunk(e => {
-  updateLocalLibraryItems(e);
-});
-let $$u2 = createOptimistThunk((e, t) => {
-  e.dispatch(componentUpdate(t));
-  e.getState().openFile && e.dispatch($$c0());
-  !t.libraryKey && getFeatureFlags().dse_lk_realtime_audit && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("putProductComponents called without a libraryKey"), {
-    tags: {
-      libraryFileKey: t.fileKey,
-      openFileKey: e.getState().openFile?.key,
-      teamId: t.teamId,
-      type: t.type
-    }
-  });
-});
-let $$p1 = createOptimistThunk((e, t) => {
-  let {
-    stateGroups,
-    components,
-    fileKeyOrHubFileId,
-    libraryKey,
-    teamId
-  } = t;
-  if (0 !== stateGroups.length) {
-    let t = stateGroups.reduce((e, t) => (e[t.node_id] = t, e), {});
-    e.dispatch($$u2({
-      itemsById: t,
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { createOptimistThunk } from '../905/350402'
+import { getFeatureFlags } from '../905/601108'
+import { componentUpdate } from '../905/879323'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { updateLocalLibraryItems } from '../figma_app/646357'
+/**
+ * Thunk to update local library items.
+ * Original: $$c0
+ */
+export const updateLocalLibraryItemsThunk = createOptimistThunk((payload) => {
+  updateLocalLibraryItems(payload)
+})
+
+/**
+ * Thunk to put product components, with error reporting if libraryKey is missing.
+ * Original: $$u2
+ */
+export const putProductComponentsThunk = createOptimistThunk((dispatch, payload) => {
+  dispatch.dispatch(componentUpdate(payload))
+  if (dispatch.getState().openFile) {
+    dispatch.dispatch(updateLocalLibraryItemsThunk())
+  }
+  if (!payload.libraryKey && getFeatureFlags().dse_lk_realtime_audit) {
+    reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, new Error('putProductComponents called without a libraryKey'), {
+      tags: {
+        libraryFileKey: payload.fileKey,
+        openFileKey: dispatch.getState().openFile?.key,
+        teamId: payload.teamId,
+        type: payload.type,
+      },
+    })
+  }
+})
+
+/**
+ * Thunk to put product components in bulk, handling stateGroups and components.
+ * Original: $$p1
+ */
+export const putProductComponentsBulkThunk = createOptimistThunk((dispatch, payload) => {
+  const { stateGroups, components, fileKeyOrHubFileId, libraryKey, teamId } = payload
+
+  if (stateGroups.length !== 0) {
+    const itemsById = stateGroups.reduce((acc, item) => {
+      acc[item.node_id] = item
+      return acc
+    }, {})
+    dispatch.dispatch(putProductComponentsThunk({
+      itemsById,
       fileKey: fileKeyOrHubFileId,
       libraryKey,
       teamId: teamId ?? null,
-      type: PrimaryWorkflowEnum.STATE_GROUP
-    }));
+      type: PrimaryWorkflowEnum.STATE_GROUP,
+    }))
   }
-  if (0 !== components.length) {
-    let t = components.reduce((e, t) => (e[t.node_id] = t, e), {});
-    e.dispatch($$u2({
-      itemsById: t,
+
+  if (components.length !== 0) {
+    const itemsById = components.reduce((acc, item) => {
+      acc[item.node_id] = item
+      return acc
+    }, {})
+    dispatch.dispatch(putProductComponentsThunk({
+      itemsById,
       fileKey: fileKeyOrHubFileId,
       libraryKey,
       teamId: teamId ?? null,
-      type: PrimaryWorkflowEnum.COMPONENT
-    }));
+      type: PrimaryWorkflowEnum.COMPONENT,
+    }))
   }
-});
-export const Nf = $$c0;
-export const aW = $$p1;
-export const vP = $$u2;
+})
+
+export const Nf = updateLocalLibraryItemsThunk
+export const aW = putProductComponentsBulkThunk
+export const vP = putProductComponentsThunk

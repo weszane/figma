@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { isAppShellEnabled } from "../905/561581";
@@ -83,7 +83,7 @@ let w = z.object({
 });
 function O(e) {
   let t = w.safeParse(e.detail);
-  return t.success ? t.data : (reportError(_$$e.WAYFINDING, Error("Invalid detail for contentful paint tracker mark"), {
+  return t.success ? t.data : (reportError(ServiceCategories.WAYFINDING, Error("Invalid detail for contentful paint tracker mark"), {
     extra: {
       mark: e
     }
@@ -218,7 +218,7 @@ function j(e, t) {
 }
 export function $$U3() {
   performance.getEntriesByName(I, "mark").forEach(e => {
-    reportError(_$$e.WAYFINDING, Error("Stale navigation mark present"), {
+    reportError(ServiceCategories.WAYFINDING, Error("Stale navigation mark present"), {
       extra: {
         staleNavigationMark: e
       }

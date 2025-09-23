@@ -27,7 +27,7 @@ import { searchAPIHandler } from '../905/144933';
 import { e as _$$e2 } from '../905/149844';
 import { t as _$$t3 } from '../905/150656';
 import { hideModalHandler, popModalStack, showModalHandler, updateModal } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
 import { T as _$$T4 } from '../905/172092';
 import { x as _$$x } from '../905/179739';
@@ -1650,7 +1650,7 @@ async function nt({
   if (!a) return !1;
   let s = `${t}:${e.affectedId}`;
   if (ne.has(s)) {
-    reportError(_$$e.AI_GENERATION, new Error('first-draft: Attempted to apply content changes twice'), {
+    reportError(ServiceCategories.AI_GENERATION, new Error('first-draft: Attempted to apply content changes twice'), {
       extra: {
         clientLifecycleId: i
       }
@@ -1742,7 +1742,7 @@ async function na({
       l.removeSelfAndChildren();
     });
   } catch (t) {
-    reportError(_$$e.AI_GENERATION, t, {
+    reportError(ServiceCategories.AI_GENERATION, t, {
       extra: {
         action: e,
         dsKitKey: i
@@ -2655,7 +2655,7 @@ function am({
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
-      area: _$$e.AI_GENERATION
+      area: ServiceCategories.AI_GENERATION
     },
     onError: s,
     children: jsx(af, {
@@ -2703,7 +2703,7 @@ function af(e) {
             let n = t.get(i);
             return !!n && (n.guid === r || !!n.parentGuid && e(t, n.parentGuid, r));
           }(getSingletonSceneGraph(), e, s.rootNodeId)) {
-            reportError(_$$e.AI_GENERATION, new Error('first-draft: Node does not have root node as ancestor'), {
+            reportError(ServiceCategories.AI_GENERATION, new Error('first-draft: Node does not have root node as ancestor'), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -2713,7 +2713,7 @@ function af(e) {
             return;
           }
           if (e === s.rootNodeId) {
-            reportError(_$$e.AI_GENERATION, new Error('first-draft: Tried to mutate root node'), {
+            reportError(ServiceCategories.AI_GENERATION, new Error('first-draft: Tried to mutate root node'), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -3045,7 +3045,7 @@ function af(e) {
         status: 'failed',
         reason: 'error'
       };
-      let n = e ? 'handled_internally' : reportError(_$$e.AI_GENERATION, a, {
+      let n = e ? 'handled_internally' : reportError(ServiceCategories.AI_GENERATION, a, {
         extra: i
       });
       trackEventAnalytics('First Draft: Make Changes Ended', {
@@ -5152,7 +5152,7 @@ function sg({
       s[i] || (s[i] = t);
     }
     let l = Object.values(s).slice(0, e);
-    return l.length < e ? (reportError(_$$e.AI_GENERATION, new Error(`Unable to generate ${e} unique presets`), {
+    return l.length < e ? (reportError(ServiceCategories.AI_GENERATION, new Error(`Unable to generate ${e} unique presets`), {
       extra: {
         count: e,
         generatedCount: l.length,
@@ -5374,7 +5374,7 @@ function sT() {
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
-      area: _$$e.AI_GENERATION
+      area: ServiceCategories.AI_GENERATION
     },
     onError: r,
     children: jsx(_$$T4.Provider, {
@@ -6685,7 +6685,7 @@ let oi = [{
           fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             clientLifecycleId: r,
-            area: _$$e.AI_GENERATION
+            area: ServiceCategories.AI_GENERATION
           },
           children: jsx(_$$T4.Provider, {
             value: {
@@ -6746,7 +6746,7 @@ let oi = [{
           boundaryKey: 'FirstDraftMakeKitView',
           fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
-            area: _$$e.AI_GENERATION
+            area: ServiceCategories.AI_GENERATION
           },
           children: jsx(aP, {
             recordingKey: 'firstDraftMakeKitView',
@@ -7007,7 +7007,7 @@ let oi = [{
           boundaryKey: 'MakeEdits',
           fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
-            area: _$$e.AI_GENERATION
+            area: ServiceCategories.AI_GENERATION
           },
           children: jsx(_$$T4.Provider, {
             value: {
@@ -8007,12 +8007,12 @@ function oF({
     E(i);
     oM(e) && !PN() ? x() : e.keepMenuOpen || _();
     d ? d().catch(t => {
-      reportError(_$$e.AI_FOR_PRODUCTION, t, {
+      reportError(ServiceCategories.AI_FOR_PRODUCTION, t, {
         extra: {
           item: e
         }
       });
-    }) : reportError(_$$e.AI_FOR_PRODUCTION, new Error('No valid action triggered from quick actions'), {
+    }) : reportError(ServiceCategories.AI_FOR_PRODUCTION, new Error('No valid action triggered from quick actions'), {
       extra: {
         item: e
       }
@@ -9105,7 +9105,7 @@ function lE(e) {
   !hasLocalFileId(extension) && (C ? (d && g && y.push(d), y.push({
     displayText: getI18nString('qa.extensions.view_details'),
     callback: x
-  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(_$$e.AI_FOR_PRODUCTION, new Error('[Quick Actions] Published extension is missing publishedExtension from Redux state'), {
+  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(ServiceCategories.AI_FOR_PRODUCTION, new Error('[Quick Actions] Published extension is missing publishedExtension from Redux state'), {
     extra: {
       extensionId: extension.plugin_id,
       isWidget: manifestContainsWidget(extension),
@@ -10188,7 +10188,7 @@ function dv({
             localExtensions: []
           };
         case 'errors':
-          reportError(_$$e.EXTENSIBILITY, new Error('[useSearchExtensions] Unable to fetch search results'), {
+          reportError(ServiceCategories.EXTENSIBILITY, new Error('[useSearchExtensions] Unable to fetch search results'), {
             tags: {
               status
             },
@@ -10917,7 +10917,7 @@ export function $$dG0(e) {
         type: 'react-error'
       }));
     },
-    team: _$$e.AI_FOR_PRODUCTION,
+    team: ServiceCategories.AI_FOR_PRODUCTION,
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(TabLoop, {
       children: jsx(QT, {

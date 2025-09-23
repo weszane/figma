@@ -11,7 +11,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
-import { Nf } from "../figma_app/864378";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { hideModal, showModalHandler } from "../905/156213";
 import { rY, XA } from "../905/985490";
 import { gf, FK, fA, ds, Mt } from "../905/585030";
@@ -108,7 +108,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       });
       let o = await fA(mergeParams, rY.getDiffMigrationVersion(v), t, a, checkpointDiff.key);
       await O(o, e.dispatch, mergeParams, user.id, a);
-      e.dispatch(Nf());
+      e.dispatch(updateLocalLibraryItemsThunk());
     } catch (n) {
       e.dispatch(k());
       let t = new CustomCauseError("Error committing merge", {

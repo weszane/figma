@@ -57,7 +57,7 @@ import { liveStoreFileBinding } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
 import { ThemeProvider, useThemeContext } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { createFontMetadata, getFontOwner } from '../905/165290';
 import { c as _$$c3 } from '../905/167005';
 import { a as _$$a2 } from '../905/173279';
@@ -363,7 +363,7 @@ import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { isFullscreenOverview } from '../figma_app/88239';
 import { showOpenDesktopAppModal, fullscreenOpen, showUpgradeBanner, updateHyperlinkPopupPosition, updateMirror, updateCanvasMentionPopupPosition, recentlyUsedQuickCommands, showDowntimeBanner, hideStylePicker, attemptClose, updateLocalFontAgentVersion, hideDowntimeBanner, hideUpgradeBanner, setInstanceSwapPickerListLayout, updateSelectedStyleProperties, setLeftPanelTab, updateSelectedStyleThumbnailUrl, setEyedropper, showFileCreationFailureBanner, setCanvasMentionPopup, setNeedsUpgrade, setPickerListLayout, newFileLoaded, reconnectingSucceeded, setHyperlinkPopup, updateRecentlyUsedQuickCommand, setPreferredValuesPickerListLayout, updateOpenFile, updateMultiplayerState, beginRenaming, stopRenaming, hidePickerThunk, setFileVersion, setProgressBarState, reconnectingStarted, hideOpenDesktopAppModal, stopObservingOtherUser } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
-import { Ob } from '../figma_app/111825';
+import { EightSeven } from '../figma_app/111825';
 import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
 import { au as _$$au, cx as _$$cx, hL as _$$hL, Ho as _$$Ho, rT as _$$rT, D6, gA, H1, U6, Vw, w9 } from '../figma_app/124493';
 import { isStudentValidated } from '../figma_app/141320';
@@ -503,7 +503,7 @@ import { CURRENT_VERSION_ID } from '../figma_app/841351';
 import { Ay as _$$Ay5 } from '../figma_app/846003';
 import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
 import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
-import { vP } from '../figma_app/864378';
+import { putProductComponentsThunk } from '../figma_app/864378';
 import { bellFeedAPIInstance, desktopAPIInstance, OpenTarget } from '../figma_app/876459';
 import { Ed } from '../figma_app/883490';
 import { o as _$$o } from '../figma_app/885533';
@@ -991,7 +991,7 @@ class e$ extends PureComponent {
     };
   }
   componentDidCatch(e, t) {
-    e instanceof eX || (attachReactStackToError(e, t), reportError(_$$e.GROWTH_PLATFORM, e, {
+    e instanceof eX || (attachReactStackToError(e, t), reportError(ServiceCategories.GROWTH_PLATFORM, e, {
       tags: {
         react: !0,
         errorBoundary: 'StatsigProvider'
@@ -1185,7 +1185,7 @@ function e1({
   let c = useAtomWithSubscription(parentOrgIdAtom);
   let u = useAtomWithSubscription(teamOrOrgIdAtom);
   if (getFeatureFlags().statsig_plan_key_bootstrap) {
-    if (!l && (c || u) && reportError(_$$e.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
+    if (!l && (c || u) && reportError(ServiceCategories.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
           initialOptionsPlanKey: ${l}
           sidebarOrOpenFileOrgId: ${c}
           sidebarOrOpenFileTeamId: ${u}`)), l && isPlanKeyTargetingEnabled()) {
@@ -1277,7 +1277,7 @@ async function e7(e) {
     await e();
   } catch (t) {
     console.error('Failed to render react root', t);
-    let e = reportError(_$$e.FRONTEND_PLATFORM, t, {
+    let e = reportError(ServiceCategories.FRONTEND_PLATFORM, t, {
       tags: {
         rootRenderer: 'root',
         severity: SeverityLevel.Critical
@@ -2617,7 +2617,7 @@ let nQ = e => t => function (i) {
         'current selected file key': r.fileKey,
         'new selected file key': a.fileKey
       });
-      reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('File creation in progress'));
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error('File creation in progress'));
       return t(i);
     }
     let s = t(i);
@@ -3646,7 +3646,7 @@ function aF(e, t) {
   let d = r.fileByKey[s];
   let c = a[l];
   let u = getFeatureFlags().dse_lk_realtime_file_lookup ? c : d;
-  if (getFeatureFlags().dse_lk_realtime_audit && !c && d && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, new Error('Design System Asset Shim count not find file via library key'), {
+  if (getFeatureFlags().dse_lk_realtime_audit && !c && d && reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, new Error('Design System Asset Shim count not find file via library key'), {
     tags: {
       fileKey: s,
       libraryKey: l
@@ -3680,7 +3680,7 @@ function aF(e, t) {
         {
           let r = {};
           for (let e of i) r[e.node_id] = e;
-          e.dispatch(vP({
+          e.dispatch(putProductComponentsThunk({
             itemsById: r,
             fileKey: u.key,
             libraryKey: _$$l6(u.library_key),
@@ -10159,7 +10159,7 @@ function cF(e = [], t) {
   return _$$o7.matches(t) ? t.payload : e;
 }
 function cM(e = null, t) {
-  return initAction.matches(t) ? Ob : setFileVersion.matches(t) ? t.payload.fileVersion : e;
+  return initAction.matches(t) ? EightSeven : setFileVersion.matches(t) ? t.payload.fileVersion : e;
 }
 function cj(e = !1, t) {
   return setNeedsUpgrade.matches(t) ? t.payload.needsUpgrade : e;
@@ -10869,7 +10869,7 @@ let uZ = new LivestoreStore('TEAM_USER', {}, {
       let r = n.team_id;
       let a = n.user_id;
       if (!r || !a) {
-        reportError(_$$e.FRONTEND_PLATFORM, new Error('LiveStore received TeamUser with no team_id/user_id'), {
+        reportError(ServiceCategories.FRONTEND_PLATFORM, new Error('LiveStore received TeamUser with no team_id/user_id'), {
           tags: {
             teamUserId: e,
             teamId: r,
@@ -13272,7 +13272,7 @@ class p4 {
         this._state === 'reloading' ? t.status === 'safe' && (clearPendingReload(), atomStoreManager.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? logInfo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
       }
     } catch (e) {
-      pQ || (reportError(_$$e.SCENEGRAPH_AND_SYNC, e, {
+      pQ || (reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, {
         tags: {
           force_client_reload: !0
         }
@@ -14254,7 +14254,7 @@ export async function $$hz0(e, t, d = {
       return iP()(HY(e));
     }(), p);
     throttle(b);
-    let x = await measureAsyncDuration('initI18nStateWithLocale', _$$e.GROWTH_PLATFORM, () => loadI18nState(!0));
+    let x = await measureAsyncDuration('initI18nStateWithLocale', ServiceCategories.GROWTH_PLATFORM, () => loadI18nState(!0));
     performanceMetricsTracker.i18nInitStateWithLocaleDurationMs = Math.round(x.duration);
     (function () {
       let e = getI18nState()?.getPrimaryLocale(!1);
@@ -14283,7 +14283,7 @@ export async function $$hz0(e, t, d = {
     try {
       _$$d5.createInstance();
     } catch (e) {
-      reportError(_$$e.WAYFINDING, e);
+      reportError(ServiceCategories.WAYFINDING, e);
     }
     await hH();
     let T = null;
@@ -14408,7 +14408,7 @@ export async function $$hz0(e, t, d = {
       let i = getWAFChallengeType(P);
       i && (await wafManager.waitForWAFValidation(i));
       i || XHR.retryStrategyForStatusCode(P.status) !== XHR.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await getUserState('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
-      performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', _$$e.APPLICATION_PLATFORM, () => {
+      performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', ServiceCategories.APPLICATION_PLATFORM, () => {
         e = JSON.parse(t);
       }));
       T ? fullscreenPerfManager.time('hydrateActionWithUserState', () => {
@@ -14420,15 +14420,15 @@ export async function $$hz0(e, t, d = {
       await my(b);
     }
     function j(c) {
-      performanceMetricsTracker.fileBrowserInitDurationMs = Math.round(measureSyncDuration('fileBrowserInit', _$$e.WAYFINDING, () => {
+      performanceMetricsTracker.fileBrowserInitDurationMs = Math.round(measureSyncDuration('fileBrowserInit', ServiceCategories.WAYFINDING, () => {
         _$$a5(getInitialOptions().user_data || null, b, b.getState().userFlags, t);
         initializeFileImporter();
         b.dispatch(setupPopstateListener());
         b.dispatch(_$$S6());
         b.dispatch(initAction());
       }));
-      d.loadBlank ? U_(b, FEditorType.Design).catch(e => reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
-      performanceMetricsTracker.hydrateDurationMs = Math.round(measureSyncDuration('fileBrowserHydrate', _$$e.WAYFINDING, () => {
+      d.loadBlank ? U_(b, FEditorType.Design).catch(e => reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
+      performanceMetricsTracker.hydrateDurationMs = Math.round(measureSyncDuration('fileBrowserHydrate', ServiceCategories.WAYFINDING, () => {
         trackEventAnalytics('file-browser-hydrate', {
           location: 'app_entry'
         });
@@ -15220,7 +15220,7 @@ export async function $$hz0(e, t, d = {
         }), 36e5);
         let t = getFeatureFlags().force_client_reloads_v2_testing && isStagingCluster() && getInitialOptions().manifest_commit_sha_override_desired ? getInitialOptions().manifest_commit_sha_override_desired : getInitialOptions().release_manifest_git_commit;
         if (!t) {
-          isLocalCluster() || reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('Missing release'), {
+          isLocalCluster() || reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error('Missing release'), {
             extra: {
               release: t
             }
@@ -15238,7 +15238,7 @@ export async function $$hz0(e, t, d = {
         });
         window.addEventListener('online', async () => await p6?.check());
       })(b);
-      let u = fullscreenPerfManager.time('initialReactRender', () => measureSyncDuration('initialRender', _$$e.CLIENT_PLATFORM, () => {
+      let u = fullscreenPerfManager.time('initialReactRender', () => measureSyncDuration('initialRender', ServiceCategories.CLIENT_PLATFORM, () => {
         let t = function (e) {
           if (!mx()) return e;
           let t = getInitialOptions().launchdarkly_client_side_id || '';
@@ -15253,7 +15253,7 @@ export async function $$hz0(e, t, d = {
             t.sentryTags = {
               launchdarkly_sdk: !0
             };
-            reportError(_$$e.GROWTH_PLATFORM, t);
+            reportError(ServiceCategories.GROWTH_PLATFORM, t);
             return e;
           }
         }(() => {

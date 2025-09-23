@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
-import { Sb } from "../905/359847";
+import { processHubFilesThunk } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { liveStoreInstance } from "../905/713695";
 import { fileEntityModel } from "../905/806985";
@@ -16,7 +16,7 @@ createOptimistThunk(e => {
   }) => {
     let r = t.meta;
     Object.keys(r).forEach(t => {
-      e.dispatch(Sb({
+      e.dispatch(processHubFilesThunk({
         hubFiles: r[t],
         src: "getOnboardingTemplates"
       }));

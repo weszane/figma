@@ -27,7 +27,7 @@ import { deepEqual } from "../905/382883";
 import E from "../vendor/116389";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { getThemePreference } from "../905/640017";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { CU, z6 } from "../905/963340";
 import { A as _$$A } from "../905/891805";
 import { U as _$$U } from "../905/103637";
@@ -854,7 +854,7 @@ function eX() {
                 optionHeight: 24,
                 className: eB,
                 callback: () => a(n)
-              }] : (reportError(_$$e.WAYFINDING, Error("authedUsers.byId[userId] not defined")), []);
+              }] : (reportError(ServiceCategories.WAYFINDING, Error("authedUsers.byId[userId] not defined")), []);
             }), _$$w, {
               displayText: r,
               optionHeight: 24,

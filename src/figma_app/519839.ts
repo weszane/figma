@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { FirstDraftHelpers, LogToConsoleMode, Fullscreen } from "../figma_app/763686";
 import { StyleType } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
@@ -39,7 +39,7 @@ import { Gh } from "../figma_app/707567";
 import { b as _$$b2 } from "../905/76245";
 import { I6, fn, p$ } from "../905/831303";
 import { jO, cc, UN, tZ } from "../905/573265";
-import { Nf } from "../figma_app/864378";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 var u = c;
 let $$K1 = createActionCreator("START_PUBLISH");
 let $$Y5 = createActionCreator("PUBLISH_PROGRESS");
@@ -181,18 +181,18 @@ async function ee(e, t, r, n) {
   }) => {
     let r = b.shift();
     if (!r) {
-      reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Popped a concatenated buffer that does not exist"));
+      reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("Popped a concatenated buffer that does not exist"));
       return;
     }
     try {
-      T.push(await uploadToPresignedPost(_$$e.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
+      T.push(await uploadToPresignedPost(ServiceCategories.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
       sendHistogram("publish.thumbnails_buffer.bytes", r.buffer.byteLength);
     } catch (e) {
       e instanceof UploadError && (S = !0);
       c.push(...r.guids);
     }
   }));
-  S && reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("uploadThumbnails: encountered non-S3 presigned POST error"));
+  S && reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("uploadThumbnails: encountered non-S3 presigned POST error"));
   let v = i.stop();
   v && trackEventAnalytics("Library generate and upload thumbnails", {
     elapsedMs: v,
@@ -401,7 +401,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     has_published_library_items: !0
   }));
   let ea = (r, n, i, a) => {
-    e.dispatch(Nf());
+    e.dispatch(updateLocalLibraryItemsThunk());
     let o = a?.encounteredNonS3PresignedPostError ? "non_s3_error" : n;
     er(e.getState().library.publishProgress, r, `${ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.error.duration`, o);
     let l = a?.error;
@@ -712,7 +712,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
       assetType: e.assetType,
       guids: e.assets.map(e => {
         let t = p$(e);
-        t || (console.warn("Asset with null nodeId:", e), reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Asset with null node ID found during publish")));
+        t || (console.warn("Asset with null nodeId:", e), reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("Asset with null node ID found during publish")));
         return t;
       }).filter(isNotNullish)
     })),
@@ -737,7 +737,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   }
   try {
     let e = new TextEncoder();
-    T = await uploadToPresignedPost(_$$e.DESIGN_SYSTEMS_EDITOR, "publishChanges.params", p, y, e.encode(JSON.stringify(eA)), "application/json");
+    T = await uploadToPresignedPost(ServiceCategories.DESIGN_SYSTEMS_EDITOR, "publishChanges.params", p, y, e.encode(JSON.stringify(eA)), "application/json");
   } catch (t) {
     let e = t instanceof UploadError;
     ea("Unable to upload publishing params" + (e ? " (non-s3 error)" : ""), "upload_params", r.id, {

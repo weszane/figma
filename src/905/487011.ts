@@ -1,5 +1,5 @@
 import { useRef, useMemo } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -18,7 +18,7 @@ let _ = _$$n((e, t, i) => {
 let A = (e, t, i) => {
   let n = ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].filter(e => !i[e] || "invalid" === i[e]);
   n.length > 0 && (e += ` | Invalid or empty fields: ${n.join(", ")}`);
-  reportError(_$$e.AI_FOR_PRODUCTION, Error(e), {
+  reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(e), {
     extra: {
       event: t,
       properties: i

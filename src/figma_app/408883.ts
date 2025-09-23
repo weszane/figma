@@ -5,7 +5,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FProductAccessType } from "../figma_app/191312";
 import { useTeamPlanPublicInfo } from "../figma_app/465071";
 import { useEffect, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { DeepLinkType } from "../905/15667";
 import { wH } from "../figma_app/680166";
@@ -61,7 +61,7 @@ export function $$S1() {
       }
     }(e);
     useEffect(() => {
-      n || reportError(_$$e.MONETIZATION_EXPANSION, Error(`Upgrade license type not found for AI Action '${e}'`));
+      n || reportError(ServiceCategories.MONETIZATION_EXPANSION, Error(`Upgrade license type not found for AI Action '${e}'`));
     }, [e, n]);
     return {
       getIsUpgradeHandlerLoading: _getIsUpgradeHandlerLoading,

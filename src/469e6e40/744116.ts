@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { y3 } from "../figma_app/307841";
@@ -72,7 +72,7 @@ function k({
 }
 function E(e) {
   return _$$d({
-    reportErrorsToTeam: _$$e.MONETIZATION_EXPANSION
+    reportErrorsToTeam: ServiceCategories.MONETIZATION_EXPANSION
   }) ? null : jsx(k, {
     ...e
   });

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { defaultLanguage } from "../905/816253";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { $$default } from "../vendor/73080";
 import { ResourceStatus } from "../905/663269";
@@ -3848,7 +3848,7 @@ export function $$eg1(e) {
   if (!(["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete", "fig_file_create", "fig_file_duplicate", "fig_file_link_access_change", "fig_file_proto_link_access_change", "fig_file_viewer_access_change", "fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove", "fig_file_move", "fig_file_export", "fig_file_image_download", "fig_file_permanent_delete", "fig_file_permanent_undelete", "fig_file_rename", "fig_file_restore", "fig_file_save_as", "fig_file_set_password", "fig_file_trash", "fig_file_unset_password", "fig_file_view", "fig_file_view_prototype", "supabase_project_connected", "supabase_project_disconnected", "repo_branch_archive", "repo_branch_create", "repo_branch_delete", "repo_merge_to_source", "repo_branch_unarchive", "repo_merge_from_source", "file_repo_member_add", "file_repo_member_remove", "file_repo_member_permission_change", "org_user_account_type_change", "org_user_account_type_change_to_full", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "org_user_account_type_upgrade_requested", "sites_subdomain_changed", "sites_custom_domain_activate", "sites_custom_domain_removal", "sites_set_password", "sites_unset_password", "sites_publish", "sites_unpublish"].includes(e.event_name) && !ex(e.metadata))) return "\u2013";
   {
     let t = null;
-    if (e.metadata.editor_type && e.metadata.editor_type !== FFileType.SLIDES && e.metadata.editor_type !== FFileType.SITES && e.metadata.editor_type !== FFileType.FIGMAKE && e.metadata.editor_type !== FFileType.COOPER && !viewCollaboratorSet.has(e.metadata.editor_type)) (t = getProductAccessTypeFromString(e.metadata.editor_type)) || reportError(_$$e.SCALE, Error(`Unexpected editor_type '${e.metadata.editor_type}' encountered in event '${e.event_name}'`), {
+    if (e.metadata.editor_type && e.metadata.editor_type !== FFileType.SLIDES && e.metadata.editor_type !== FFileType.SITES && e.metadata.editor_type !== FFileType.FIGMAKE && e.metadata.editor_type !== FFileType.COOPER && !viewCollaboratorSet.has(e.metadata.editor_type)) (t = getProductAccessTypeFromString(e.metadata.editor_type)) || reportError(ServiceCategories.SCALE, Error(`Unexpected editor_type '${e.metadata.editor_type}' encountered in event '${e.event_name}'`), {
       tags: {
         id: e.id
       }

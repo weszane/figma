@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Agb } from "../figma_app/822011";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ViewType, SchemaJoinStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -241,7 +241,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         };
         let t = c.files;
         if (!t) {
-          reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Repo has no files"));
+          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Repo has no files"));
           return {
             status: "disabled",
             reason: "No files in repo"

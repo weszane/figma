@@ -9,7 +9,7 @@ import { KeyCodes } from '../905/63728';
 import { l as _$$l } from '../905/103989';
 import { Z as _$$Z } from '../905/104740';
 import { KindEnum } from '../905/129884';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
 import { R as _$$R } from '../905/256203';
 import { F as _$$F } from '../905/258517';
@@ -578,7 +578,7 @@ let eA = memo(e => {
   let eE = useCallback(t => {
     onDragLeaveCallback != null && onDragLeaveCallback(e.guid, t);
   }, [onDragLeaveCallback, e.guid]);
-  let eA = useCallback(() => e.nodeMemoryUsage != null && e.rootMemoryUsage != null ? pr(e.nodeMemoryUsage, e.rootMemoryUsage, !0) : (reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('node memory usage or root memory usage is null')), ''), [e.nodeMemoryUsage, e.rootMemoryUsage]);
+  let eA = useCallback(() => e.nodeMemoryUsage != null && e.rootMemoryUsage != null ? pr(e.nodeMemoryUsage, e.rootMemoryUsage, !0) : (reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error('node memory usage or root memory usage is null')), ''), [e.nodeMemoryUsage, e.rootMemoryUsage]);
   let eP = !e.visible || e.isAncestorHidden && e.panelType !== g$.CodeComponent;
   let eL = e.locked || e.isAncestorLocked;
   let eR = (e.level + 3) * parsePxNumber(indentWidthWithMargin);

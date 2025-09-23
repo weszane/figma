@@ -12,14 +12,14 @@ import m from "../vendor/626715";
 import { useSubscriptionAnalytics, useSubscription } from "../figma_app/288654";
 import { Xm, e1, gB } from "../905/723791";
 import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
-import { Nf } from "../figma_app/864378";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { resolveUsedLibrariesAsync } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
 import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
-import { Ns } from "../figma_app/409131";
+import { useCurrentFileModules } from "../figma_app/409131";
 import { wJ } from "../figma_app/630951";
 import { createFileLibraryKeys } from "../905/651613";
 import { hE, D1 } from "../figma_app/852050";
@@ -118,7 +118,7 @@ export function $$M4({
     let u = useMemo(() => h()(c, e => e.node_id), [c]);
     let p = D1();
     let _ = useMemo(() => h()(p, e => e.node_id), [p]);
-    let m = Ns();
+    let m = useCurrentFileModules();
     let g = useMemo(() => getFeatureFlags().dse_module_publish ? h()(m, e => e.node_id) : {}, [m]);
     let f = useDispatch();
     useLayoutEffect(() => {
@@ -130,7 +130,7 @@ export function $$M4({
         variables: _,
         modules: g
       }));
-      f(Nf());
+      f(updateLocalLibraryItemsThunk());
     }, [f, s, d, r, u, _, g]);
     useEffect(() => {
       (e?.status === "loaded" || e?.status === "errors") && resolveUsedLibrariesAsync();

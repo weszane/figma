@@ -5,26 +5,26 @@
 // Grouped related functionality: constants, utilities, analytics tracking, timer class, error reporting, and performance logging.
 // Ensured same functionality and behavior as original.
 
-import { reportError } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184'
-import { PerfTimer } from '../905/609396'
-import { customHistory } from '../905/612521'
-import { normalizePathname } from '../3973/348894'
-import { ActionType, BootstrapType, ErrorType, TimeoutError } from '../3973/473379'
-import { getInitialOptions } from '../figma_app/169182'
-import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from '../figma_app/778880'
-import { isInteractionPathCheck } from '../figma_app/897289'
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
+import { PerfTimer } from '../905/609396';
+import { customHistory } from '../905/612521';
+import { normalizePathname } from '../3973/348894';
+import { ActionType, BootstrapType, ErrorType, TimeoutError } from '../3973/473379';
+import { getInitialOptions } from '../figma_app/169182';
+import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from '../figma_app/778880';
+import { isInteractionPathCheck } from '../figma_app/897289';
 
 // Constants
-export const EXPERIMENT_NAME_FULLSCREEN_VIEW = 'exp_aa_test_fullscreen_view' // Original: $$p13
+export const EXPERIMENT_NAME_FULLSCREEN_VIEW = 'exp_aa_test_fullscreen_view'; // Original: $$p13
 
 // Utilities
 /**
  * Checks if a value is sampled at 10% probability.
  * @returns {boolean} True if sampled.
  */
-export const isSampled10Percent = () => Math.random() < 0.1 // Original: $$h9
+export const isSampled10Percent = () => Math.random() < 0.1; // Original: $$h9
 
 /**
  * Compares two values, considering null, undefined, or empty strings as equal.
@@ -33,9 +33,7 @@ export const isSampled10Percent = () => Math.random() < 0.1 // Original: $$h9
  * @returns {boolean} True if values are equal or both empty/null.
  */
 export function areValuesEqualOrEmpty(value1: any, value2: any): boolean {
-  return value1 == null || value1 === '' || value1 === undefined
-    ? value2 == null || value2 === '' || value2 === undefined
-    : value1 === value2
+  return value1 == null || value1 === '' || value1 === undefined ? value2 == null || value2 === '' || value2 === undefined : value1 === value2;
 } // Original: $$b12
 
 /**
@@ -46,10 +44,9 @@ export function areValuesEqualOrEmpty(value1: any, value2: any): boolean {
  * @returns {string} The string value or default.
  */
 export function getStringValueOrDefault(obj: any, key: string, defaultValue: string): string {
-  if (obj == null || typeof obj !== 'object')
-    return defaultValue
-  const value = obj[key]
-  return typeof value !== 'string' ? defaultValue : value
+  if (obj == null || typeof obj !== 'object') return defaultValue;
+  const value = obj[key];
+  return typeof value !== 'string' ? defaultValue : value;
 } // Original: $$w1
 
 /**
@@ -57,15 +54,15 @@ export function getStringValueOrDefault(obj: any, key: string, defaultValue: str
  * @returns {boolean} True if it's a relevant E2E test.
  */
 function isE2eTestForStatsig(): boolean {
-  const testName = getInitialOptions().e2e_test_name
-  return testName != null && ['statsig_init', 'statsig_context_switch'].includes(testName)
+  const testName = getInitialOptions().e2e_test_name;
+  return testName != null && ['statsig_init', 'statsig_context_switch'].includes(testName);
 } // Original: C
 
 /**
  * Checks if a value is sampled at 5% probability.
  * @returns {boolean} True if sampled.
  */
-const isSampled5Percent = (): boolean => Math.random() <= 0.05 // Original: O
+const isSampled5Percent = (): boolean => Math.random() <= 0.05; // Original: O
 
 // Performance Logging
 /**
@@ -75,9 +72,8 @@ const isSampled5Percent = (): boolean => Math.random() <= 0.05 // Original: O
  */
 export function logPerformanceMetric(metricName: string, value: number): void {
   if (getInitialOptions().is_second_page_for_perf_tests || isE2eTestForStatsig()) {
-    if (window.STATSIG_PERF === undefined)
-      window.STATSIG_PERF = {}
-    window.STATSIG_PERF[metricName] = value
+    if (window.STATSIG_PERF === undefined) window.STATSIG_PERF = {};
+    window.STATSIG_PERF[metricName] = value;
   }
 } // Original: $$m11
 
@@ -99,11 +95,11 @@ export function trackExperimentEvaluation(experiment: string, timeMs: number, me
     client_exp_eval_time_ms: timeMs,
     entry_point: window.ENTRY_POINT,
     rule_id: ruleId,
-    statsig_user: user == null ? null : JSON.stringify(user),
+    statsig_user: user == null ? null : JSON.stringify(user)
   }, {
     forwardToDatadog: true,
-    batchRequest: true,
-  })
+    batchRequest: true
+  });
 } // Original: $$f15
 
 /**
@@ -116,11 +112,11 @@ export function trackUserValuesBootstrapMismatch(reason: string, bootstrapValue:
   trackEventAnalytics('user_values_bootstrap_mismatch', {
     mismatch_reason: reason,
     bootstrap_value: bootstrapValue,
-    user_key_value: userKeyValue,
+    user_key_value: userKeyValue
   }, {
     forwardToDatadog: true,
-    batchRequest: true,
-  })
+    batchRequest: true
+  });
 } // Original: $$v0
 
 /**
@@ -137,8 +133,8 @@ export function trackInvalidBootstrapInfo(experimentName: string, bootstrapUserI
     bootstrap_user_id: bootstrapUserId,
     bootstrap_custom_ids: bootstrapCustomIds,
     statsig_user_user_id: statsigUserId,
-    statsig_user_custom_ids: statsigCustomIds,
-  })
+    statsig_user_custom_ids: statsigCustomIds
+  });
 } // Original: $$y2
 
 /**
@@ -165,8 +161,8 @@ export function trackStatsigPlanKeyBootstrap(featureFlagValue: any, planKey: str
     selected_view: selectedView,
     used_plan_key: usedPlanKey,
     used_org_id: usedOrgId,
-    used_user_id: usedUserId,
-  })
+    used_user_id: usedUserId
+  });
 } // Original: $$T3
 
 /**
@@ -183,33 +179,26 @@ export function trackStatsigPlanKeyBootstrap(featureFlagValue: any, planKey: str
  */
 export function trackStatsigClientInitTime(isProvider: boolean, bootstrapType: BootstrapType, success: boolean, initTimeMs: number, message: string, errorCause: ErrorType | null, user: any, bootstrap: any, hookLocation: string = ''): void {
   if (isInteractionPathCheck() || isE2eTestForStatsig()) {
-    logPerformanceMetric('INIT_TIME', initTimeMs)
+    logPerformanceMetric('INIT_TIME', initTimeMs);
   }
-  const isMobile = isFigmaMirrorAndroidApp() || isFigmaMobileIOSApp()
-  const userIds = user ? [user.userId, user.teamId, user.orgId, getAnonymousId(), user.planKey].map(id => id || '') : []
-  const bootstrapValues = getInitialOptions().statsig_bootstrap_values
-  const bootstrapObj = Array.isArray(bootstrapValues) ? bootstrapValues[0] : bootstrapValues
-  const bootstrapIds = ((bootstrapObj) => {
+  const isMobile = isFigmaMirrorAndroidApp() || isFigmaMobileIOSApp();
+  const userIds = user ? [user.userId, user.teamId, user.orgId, getAnonymousId(), user.planKey].map(id => id || '') : [];
+  const bootstrapValues = getInitialOptions().statsig_bootstrap_values;
+  const bootstrapObj = Array.isArray(bootstrapValues) ? bootstrapValues[0] : bootstrapValues;
+  const bootstrapIds = (bootstrapObj => {
     if (bootstrapObj && bootstrapObj.evaluated_keys !== null && typeof bootstrapObj.evaluated_keys === 'object') {
-      const keys = bootstrapObj.evaluated_keys
-      const customIds = keys.customIDs ?? {}
-      return [
-        getStringValueOrDefault(keys, 'userID', ''),
-        getStringValueOrDefault(customIds, 'teamID', ''),
-        getStringValueOrDefault(customIds, 'orgID', ''),
-        getStringValueOrDefault(customIds, 'stableID', ''),
-        getStringValueOrDefault(customIds, 'planKey', ''),
-      ]
+      const keys = bootstrapObj.evaluated_keys;
+      const customIds = keys.customIDs ?? {};
+      return [getStringValueOrDefault(keys, 'userID', ''), getStringValueOrDefault(customIds, 'teamID', ''), getStringValueOrDefault(customIds, 'orgID', ''), getStringValueOrDefault(customIds, 'stableID', ''), getStringValueOrDefault(customIds, 'planKey', '')];
     }
-    return []
-  })(bootstrap ?? bootstrapObj)
-  const entryRoute = normalizePathname(customHistory.location.pathname)
+    return [];
+  })(bootstrap ?? bootstrapObj);
+  const entryRoute = normalizePathname(customHistory.location.pathname);
   const userKeyComparison = (() => {
-    const keys = ['user_id', 'team_id', 'org_id', 'stable_id', 'plan_key']
-    if (userIds.length !== keys.length || bootstrapIds.length !== keys.length)
-      return 'n/a'
-    return keys.map((key, index) => areValuesEqualOrEmpty(userIds[index], bootstrapIds[index]) ? null : `mismatch ${key}`).find(Boolean) || 'valid'
-  })()
+    const keys = ['user_id', 'team_id', 'org_id', 'stable_id', 'plan_key'];
+    if (userIds.length !== keys.length || bootstrapIds.length !== keys.length) return 'n/a';
+    return keys.map((key, index) => areValuesEqualOrEmpty(userIds[index], bootstrapIds[index]) ? null : `mismatch ${key}`).find(Boolean) || 'valid';
+  })();
   trackEventAnalytics('Statsig Client Init Time', {
     client_init_time: initTimeMs,
     userId: getInitialOptions().user_data?.id,
@@ -228,10 +217,10 @@ export function trackStatsigClientInitTime(isProvider: boolean, bootstrapType: B
     bootstrap_user_team_org_stable_ids: bootstrapIds,
     user_key_comparison: userKeyComparison,
     statsig_api_enabled: true,
-    calling_hook_location: hookLocation,
+    calling_hook_location: hookLocation
   }, {
-    forwardToDatadog: true,
-  })
+    forwardToDatadog: true
+  });
 } // Original: $$E10
 
 /**
@@ -249,10 +238,10 @@ export function trackClientValuesNetworkCall(timer: StatsigTimer, endpoint: stri
     end_point: endpoint,
     timed_out: timer.getTimedOut(),
     statsig_api_enabled: false,
-    error_message: timer.getError()?.message,
+    error_message: timer.getError()?.message
   }, {
-    forwardToDatadog: true,
-  })
+    forwardToDatadog: true
+  });
 } // Original: $$k7
 
 /**
@@ -266,10 +255,10 @@ export function trackContextSwitchCacheMiss(keys: any[], cachedKeys: any, cached
     keys: JSON.stringify(keys),
     cached_keys: cachedKeys,
     cached_key_count: cachedKeyCount,
-    entry_point: window.ENTRY_POINT,
+    entry_point: window.ENTRY_POINT
   }, {
-    forwardToDatadog: true,
-  })
+    forwardToDatadog: true
+  });
 } // Original: $$R6
 
 /**
@@ -284,10 +273,10 @@ export function trackPrefetchCalls(userCount: number, cacheHits: number, errorMe
     cache_hits: cacheHits,
     error_message: errorMessage,
     success: errorMessage === null,
-    statsig_api_enabled: true,
+    statsig_api_enabled: true
   }, {
-    forwardToDatadog: true,
-  })
+    forwardToDatadog: true
+  });
 } // Original: $$I4
 
 /**
@@ -306,12 +295,12 @@ export function trackClientUpdateUserTime(updateTimeMs: number, success: boolean
     cache_hit: cacheHit,
     errored: !success,
     message,
-    statsig_api_enabled: true,
+    statsig_api_enabled: true
   }, {
-    forwardToDatadog: true,
-  })
+    forwardToDatadog: true
+  });
   if (success && isE2eTestForStatsig()) {
-    logPerformanceMetric('CONTEXT_SWITCH_TIME', updateTimeMs)
+    logPerformanceMetric('CONTEXT_SWITCH_TIME', updateTimeMs);
   }
 } // Original: $$D8
 
@@ -320,48 +309,39 @@ export function trackClientUpdateUserTime(updateTimeMs: number, success: boolean
  * Timer class for Statsig operations.
  */
 export class StatsigTimer {
-  private caughtError: boolean = false
-  private elapsedTimeMs: number = 0
-  private error: Error | null = null
-  private timer: PerfTimer
-
+  private caughtError: boolean = false;
+  private elapsedTimeMs: number = 0;
+  private error: Error | null = null;
+  private timer: PerfTimer;
   constructor(label: string) {
-    this.timer = new PerfTimer(label, {})
+    this.timer = new PerfTimer(label, {});
   }
-
   startTimer(): void {
-    this.timer.start()
+    this.timer.start();
   }
-
   isTimerRunning(): boolean {
-    return this.timer.isRunning
+    return this.timer.isRunning;
   }
-
   stopTimer(): void {
-    this.elapsedTimeMs = this.timer.stop()
+    this.elapsedTimeMs = this.timer.stop();
   }
-
   setCaughtError(error: Error): void {
-    this.caughtError = true
+    this.caughtError = true;
     if (error instanceof Error) {
-      this.error = error
+      this.error = error;
     }
   }
-
   getCaughtError(): boolean {
-    return this.caughtError
+    return this.caughtError;
   }
-
   getTimedOut(): boolean {
-    return this.error instanceof TimeoutError
+    return this.error instanceof TimeoutError;
   }
-
   getError(): Error | null {
-    return this.error
+    return this.error;
   }
-
   getElapsedTimeMs(): number {
-    return this.elapsedTimeMs
+    return this.elapsedTimeMs;
   }
 } // Original: $$S14
 
@@ -372,29 +352,29 @@ export class StatsigTimer {
  */
 export function reportStatsigError(message: string): void {
   if (message && isSampled5Percent()) {
-    const error = new Error(message)
+    const error = new Error(message);
     reportError(ServiceCategories.GROWTH_PLATFORM, error, {
       tags: {
-        statsig_sdk: true,
-      },
-    })
+        statsig_sdk: true
+      }
+    });
   }
 } // Original: $$x5
 
 // Exported Aliases (updated to match refactored names)
-export const AQ = trackUserValuesBootstrapMismatch
-export const B7 = getStringValueOrDefault
-export const Dr = trackInvalidBootstrapInfo
-export const N6 = trackStatsigPlanKeyBootstrap
-export const Tr = trackPrefetchCalls
-export const Us = reportStatsigError
-export const Vj = trackContextSwitchCacheMiss
-export const _q = trackClientValuesNetworkCall
-export const bz = trackClientUpdateUserTime
-export const cP = isSampled10Percent
-export const kX = trackStatsigClientInitTime
-export const pk = logPerformanceMetric
-export const q3 = areValuesEqualOrEmpty
-export const su = EXPERIMENT_NAME_FULLSCREEN_VIEW
-export const yY = StatsigTimer
-export const zz = trackExperimentEvaluation
+export const AQ = trackUserValuesBootstrapMismatch;
+export const B7 = getStringValueOrDefault;
+export const Dr = trackInvalidBootstrapInfo;
+export const N6 = trackStatsigPlanKeyBootstrap;
+export const Tr = trackPrefetchCalls;
+export const Us = reportStatsigError;
+export const Vj = trackContextSwitchCacheMiss;
+export const _q = trackClientValuesNetworkCall;
+export const bz = trackClientUpdateUserTime;
+export const cP = isSampled10Percent;
+export const kX = trackStatsigClientInitTime;
+export const pk = logPerformanceMetric;
+export const q3 = areValuesEqualOrEmpty;
+export const su = EXPERIMENT_NAME_FULLSCREEN_VIEW;
+export const yY = StatsigTimer;
+export const zz = trackExperimentEvaluation;

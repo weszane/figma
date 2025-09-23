@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { atom, Xr } from "../figma_app/27355";
 import o from "classnames";
 import { logError } from "../905/714362";
@@ -41,7 +41,7 @@ let $$g0 = forwardRef(({
     T || Promise.all(t.map(e => _$$N(e))).then(() => {
       k(!0);
     }).catch(e => {
-      logError(_$$e.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
+      logError(ServiceCategories.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
     });
   }, [T, t]);
   let O = useCallback(e => {

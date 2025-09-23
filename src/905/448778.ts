@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { L } from "../905/694400";
 export function $$s0(e, t, i) {
@@ -11,7 +11,7 @@ export function $$s0(e, t, i) {
         let i = e.createImage(t).hash;
         l(i);
       } catch (e) {
-        reportError(_$$e.FIGJAM, e);
+        reportError(ServiceCategories.FIGJAM, e);
         return;
       }
     }

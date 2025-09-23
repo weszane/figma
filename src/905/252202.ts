@@ -1,34 +1,37 @@
-import { WB } from "../905/761735";
-import { LibrarySubscriptionType } from "../figma_app/155728";
+import { WB } from '../905/761735'
+import { LibrarySubscriptionType } from '../figma_app/155728'
+
 export function $$a0(e, t, i, a, s, o, l, d) {
-  let c = function (e) {
+  let c = (function (e) {
     switch (e) {
       case LibrarySubscriptionType.USER:
-        return "LibraryUserSubscription";
+        return 'LibraryUserSubscription'
       case LibrarySubscriptionType.TEAM:
-        return "LibraryTeamSubscription";
+        return 'LibraryTeamSubscription'
     }
-  }(t);
-  e?.subscriptionType === t && e.subscriptionId ? WB()?.optimisticallyUpdate({
-    [c]: {
-      [e.subscriptionId]: {
-        isSubscribed: i,
-        figJamSubscribed: a,
-        slidesSubscribed: s,
-        buzzSubscribed: o
-      }
-    }
-  }, d) : WB().optimisticallyCreate({
-    [c]: {
-      [`${c}-${performance.now()}`]: {
-        ...l,
-        isSubscribed: i,
-        figJamSubscribed: a,
-        slidesSubscribed: s,
-        buzzSubscribed: o,
-        canRead: !0
-      }
-    }
-  }, d);
+  }(t))
+  e?.subscriptionType === t && e.subscriptionId
+    ? WB()?.optimisticallyUpdate({
+        [c]: {
+          [e.subscriptionId]: {
+            isSubscribed: i,
+            figJamSubscribed: a,
+            slidesSubscribed: s,
+            buzzSubscribed: o,
+          },
+        },
+      }, d)
+    : WB().optimisticallyCreate({
+        [c]: {
+          [`${c}-${performance.now()}`]: {
+            ...l,
+            isSubscribed: i,
+            figJamSubscribed: a,
+            slidesSubscribed: s,
+            buzzSubscribed: o,
+            canRead: !0,
+          },
+        },
+      }, d)
 }
-export const J = $$a0;
+export const J = $$a0

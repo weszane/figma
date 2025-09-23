@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { zRx } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
 import { resourceUtils } from "../905/989992";
@@ -260,7 +260,7 @@ export function $$B5(e) {
         curfContext: h
       });
       if (null === a) {
-        reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgrade"), {
+        reportError(ServiceCategories.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgrade"), {
           extra: {
             licenseType: t,
             fileKey: l,
@@ -589,7 +589,7 @@ export function $$z2({
     entryPoint: c
   });
   if (!m) {
-    reportError(_$$e.MONETIZATION_EXPANSION, Error(`Invalid ${n === _$$J.ADMIN_AUTO_PATHWAY ? "admin self" : "auto"} upgrade: missing billable product key`), {
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, Error(`Invalid ${n === _$$J.ADMIN_AUTO_PATHWAY ? "admin self" : "auto"} upgrade: missing billable product key`), {
       extra: {
         licenseType: e,
         fileKey: u,
@@ -606,7 +606,7 @@ export function $$z2({
   let y = i?.key.type;
   let S = i?.key.parentId;
   if (null === i || !y || !S) {
-    reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeAutoPathway"), {
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeAutoPathway"), {
       extra: {
         licenseType: e,
         fileKey: u,
@@ -747,7 +747,7 @@ export function $$Y3({
     entryPoint: r
   });
   if (!c) {
-    reportError(_$$e.MONETIZATION_EXPANSION, Error("Invalid upgrade request: missing billable product key"), {
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, Error("Invalid upgrade request: missing billable product key"), {
       extra: {
         licenseType: e,
         fileKey: a,
@@ -825,7 +825,7 @@ export function $$Y3({
     }));
   } : () => t(VisualBellActions.enqueue({
     message: "Encountered an error"
-  })) : (reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeManualPathway"), {
+  })) : (reportError(ServiceCategories.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeManualPathway"), {
     extra: {
       licenseType: e,
       fileKey: a,

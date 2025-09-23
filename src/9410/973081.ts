@@ -32,7 +32,7 @@ import { N as _$$N } from '../905/130112';
 import { Av, Pg } from '../905/149328';
 import { t as _$$t7 } from '../905/150656';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e3 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { b as _$$b } from '../905/168657';
 import { bL as _$$bL2, QB } from '../905/174266';
 import { zK, zM } from '../905/182453';
@@ -2473,7 +2473,7 @@ function iO(e) {
         });
       } catch (i) {
         trackEventAnalytics('Comment Attachment Download Failure', iA(e.attachment));
-        reportError(_$$e3.FEEDBACK, i);
+        reportError(ServiceCategories.FEEDBACK, i);
         t(VisualBellActions.enqueue({
           message: getI18nString('comments.download_attachment_error'),
           type: 'attachment-download',
@@ -2504,7 +2504,7 @@ function iO(e) {
         });
       } catch (i) {
         trackEventAnalytics('Comment Attachment Copy Failure', iA(e.attachment));
-        reportError(_$$e3.FEEDBACK, i);
+        reportError(ServiceCategories.FEEDBACK, i);
         t(VisualBellActions.enqueue({
           message: getI18nString('comments.copy_attachment_error'),
           type: 'copy-attachment',
@@ -2771,7 +2771,7 @@ let ri = e => {
   document.body.removeChild(t);
 };
 let rr = e => {
-  reportError(_$$e3.FIGJAM, new Error(`Error exporting video: ${e}`));
+  reportError(ServiceCategories.FIGJAM, new Error(`Error exporting video: ${e}`));
 };
 function ry(e) {
   return new URL(e).hostname.split('.').slice(-2).join('.');

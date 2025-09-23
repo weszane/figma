@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { n3, VariableStyleId } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -59,7 +59,7 @@ export function $$E0(e, t) {
             let s = e.absoluteTransform.m02;
             let o = e.size.x;
             if (s <= i + 16) {
-              if (e.parentGuid === t) HH(e, 16, e.relativeTransform.m12); else {
+              if (e.parentGuid === t) HH(e, 16, e.relativeTransform.m12);else {
                 let r = e;
                 for (; r.parentGuid !== t && r.parentNode;) r = r.parentNode;
                 HH(r, 16, r.relativeTransform.m12);
@@ -86,7 +86,7 @@ export function $$E0(e, t) {
               let d = Math.max(0, p + u - (o - 16));
               let _ = e.lineHeightOrMixed;
               "mixed" === _ && (_ = e.getRangeLineHeight(0, 1));
-              "mixed" === _ ? (t = 1, reportError(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed line height while resizing text node for slide bounds"))) : "PIXELS" === _.units ? (t = _.value / e.fontSize, e.lineHeight = {
+              "mixed" === _ ? (t = 1, reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Unexpected mixed line height while resizing text node for slide bounds"))) : "PIXELS" === _.units ? (t = _.value / e.fontSize, e.lineHeight = {
                 units: "RAW",
                 value: t
               }) : t = _.value;

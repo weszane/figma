@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, Command } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -22,7 +22,7 @@ class m {
     try {
       a = await O(e, t, r, n);
     } catch (e) {
-      reportError(_$$e.AI_PRODUCTIVITY, e);
+      reportError(ServiceCategories.AI_PRODUCTIVITY, e);
     }
     return {
       text: a?.text,

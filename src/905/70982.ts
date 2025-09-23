@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createActionCreator } from "../905/73481";
 import { Q } from "../905/150006";
 import { reportError } from "../905/11";
@@ -26,7 +26,7 @@ let $$u6 = createOptimistThunk((e, t) => {
     page_id: t.pageId
   }).then(i => {
     if (!i.data.meta) {
-      reportError(_$$e.FRONTEND_PLATFORM, Error("prototype/view response missing data.meta"), {
+      reportError(ServiceCategories.FRONTEND_PLATFORM, Error("prototype/view response missing data.meta"), {
         extra: {
           fileKey: t.fileKey,
           pageId: t.pageId,

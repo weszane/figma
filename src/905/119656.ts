@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import r from "../vendor/128080";
 import { reportError } from "../905/11";
 import { collaboratorSet } from "../905/332483";
@@ -9,7 +9,7 @@ export function $$l0(e, t = {
   let i = collaboratorSet.dict(t => e?.[t] ?? 0);
   if (!a()(e, i)) {
     let r = e ? Error(`Org billing data contains seat counts with keys ${Object.keys(e).sort()} but expected ${Object.keys(i).sort()}`) : Error("Org billing data missing seat counts");
-    if (reportError(_$$e.SCALE, r), t.throwOnError) throw r;
+    if (reportError(ServiceCategories.SCALE, r), t.throwOnError) throw r;
   }
   return i;
 }

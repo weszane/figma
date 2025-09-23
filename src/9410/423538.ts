@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import { eb } from "../figma_app/257655";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, FirstDraftHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -217,7 +217,7 @@ export function $$j2({
         try {
           await t?.(nodeIdRef.current, themeOverrideMapRef.current, M.current, D.current ?? []);
         } catch (e) {
-          reportError(_$$e.AI_GENERATION, e, {
+          reportError(ServiceCategories.AI_GENERATION, e, {
             extra: {
               nodeId: nodeIdRef.current,
               themeOverrideMap: themeOverrideMapRef.current,
@@ -296,7 +296,7 @@ export function $$j2({
         clientLifecycleId: k,
         kitIdentifier: P.current?.metadata.identifier ?? null
       };
-      let l = reportError(_$$e.AI_GENERATION, e, {
+      let l = reportError(ServiceCategories.AI_GENERATION, e, {
         extra: o
       });
       userFlowRef.current?.addContext({
@@ -359,7 +359,7 @@ export function $$j2({
     try {
       designSystem && (await Q(designSystem));
     } catch (e) {
-      reportError(_$$e.AI_GENERATION, e);
+      reportError(ServiceCategories.AI_GENERATION, e);
       return {
         nodeId: null,
         success: !1,

@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { GitReferenceType, DiffImpl, MergeStatus, PreviewStage, UndoActionStatus, StateTransitionResult, PluginModalType, AutosaveEventType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -173,7 +173,7 @@ let D = async (e, t, i, n, r) => {
     }
   } = await XHR.post(`/api/file_diff/checkpoint_diff/${d}/${t}?${p.toString()}`);
   getFeatureFlags().run_fig_diff_job && S.enqueueFigDiffAnalysis(e, t, checkpoint_diff.from_checkpoint_key, checkpoint_diff.to_checkpoint_key, d).catch(e => {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
   });
   logInfo("Branching", "fetched checkpoint diff", {
     direction: d,

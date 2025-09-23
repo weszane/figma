@@ -13,7 +13,7 @@ import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { getEditorViewType } from '../905/187165';
 import { h as _$$h3 } from '../905/207101';
 import { nt, o3 } from '../905/226610';
@@ -712,7 +712,7 @@ function eK({
   if (useEffect(() => {
     if (h) {
       let e = p && u ? 'Variables table cell has mixed value' : 'Variables table cell has no value';
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(e));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(e));
     }
   }, [h, p, u]), h) {
     return null;
@@ -1097,9 +1097,9 @@ function tu() {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'varTable',
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     hasCustomWASMBuild: !1,
     children: jsx(gs, {
@@ -1583,7 +1583,7 @@ function ij({
       message: getI18nString('dev_handoff.compare_changes.button.failed'),
       error: !0
     }));
-    reportError(_$$e.DEVELOPER_TOOLS, new Error('Open compare changes button failed'), {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('Open compare changes button failed'), {
       extra: {
         fileKey: n,
         activityInfoStatus: a?.file.status,
@@ -3445,7 +3445,7 @@ export function $$r40({
       boundaryKey: 'DevModeOverview',
       fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
-        area: _$$e.DEVELOPER_TOOLS
+        area: ServiceCategories.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(iQ, {})
@@ -3453,7 +3453,7 @@ export function $$r40({
       boundaryKey: 'ComponentBrowser',
       fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
-        area: _$$e.DEVELOPER_TOOLS
+        area: ServiceCategories.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(ea, {})
@@ -3461,7 +3461,7 @@ export function $$r40({
       boundaryKey: 'DevModeVariablesTable',
       fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
       sentryTags: {
-        area: _$$e.DEVELOPER_TOOLS
+        area: ServiceCategories.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: jsx(tu, {})
@@ -3469,7 +3469,7 @@ export function $$r40({
       boundaryKey: 'McpUnmappedComponentsBanner',
       fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
       sentryTags: {
-        area: _$$e.DEVELOPER_TOOLS
+        area: ServiceCategories.DEVELOPER_TOOLS
       },
       hasCustomWASMBuild: y4,
       children: (d || c) && jsx(eh, {})

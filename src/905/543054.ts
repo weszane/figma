@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { BrowserInfo } from "../figma_app/778880";
@@ -73,7 +73,7 @@ let v = new class {
       case QC.DESKTOP:
         {
           if (!desktopAPIInstance) {
-            reportError(_$$e.DESKTOP, Error("desktopApp is not defined, this should not happen as desktop spellcheck has already been initialized"));
+            reportError(ServiceCategories.DESKTOP, Error("desktopApp is not defined, this should not happen as desktop spellcheck has already been initialized"));
             return;
           }
           let n = await desktopAPIInstance.spellingGetLanguages();

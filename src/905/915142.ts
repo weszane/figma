@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { isValidEmail } from "../figma_app/416935";
 import { reportError } from "../905/11";
@@ -67,7 +67,7 @@ export function $$y0(e) {
   let t = e.team;
   return t ? t.roles?.map(e => {
     let t = e.user ? mapUserProperties(e.user) : null;
-    e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
+    e.pending || t || (reportError(ServiceCategories.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
       }
@@ -96,7 +96,7 @@ export function $$b3(e) {
   };
   let o = t.roles.map(e => {
     let t = e.user ? mapUserProperties(e.user) : null;
-    e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
+    e.pending || t || (reportError(ServiceCategories.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
       }

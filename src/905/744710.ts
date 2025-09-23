@@ -24,7 +24,7 @@ import { M as _$$M } from '../905/130634';
 import { t as _$$t } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { Ph } from '../905/160095';
-import { ServiceCategories as _$$e2 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { ScreenReaderOnly } from '../905/172252';
 import { InputComponent } from '../905/185998';
@@ -226,7 +226,7 @@ let y = createContext({
   setAccountModalSubViewData: () => {}
 });
 let E = I;
-let z = registerModal(e => {
+let z1 = registerModal(e => {
   let t = useDispatch();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
@@ -310,7 +310,7 @@ function H(e) {
           className: 'community_user_address--blueLink--1xHm5 blue_link--blueLink--9rlnd',
           onClick: () => {
             t(showModalHandler({
-              type: z,
+              type: z1,
               data: {
                 vatGstId: i,
                 shippingAddress: s,
@@ -1367,7 +1367,7 @@ function ty() {
     boundaryKey: 'FeedSettings',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e2.WAYFINDING
+      area: ServiceCategories.WAYFINDING
     },
     children: jsx(tA, {})
   });
@@ -1861,7 +1861,7 @@ let ip = createOptimistThunk(async (e, t) => {
     }));
   } catch (i) {
     let t = 'Could not add personal access token';
-    i instanceof XHRError && i.status >= 400 && i.status < 500 ? reportError(_$$e2.EXTENSIBILITY, i) : t = `Could not add personal access token: ${i.message}`;
+    i instanceof XHRError && i.status >= 400 && i.status < 500 ? reportError(ServiceCategories.EXTENSIBILITY, i) : t = `Could not add personal access token: ${i.message}`;
     e.dispatch(VisualBellActions.enqueue({
       message: t,
       error: !0

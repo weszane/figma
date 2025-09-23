@@ -1,7 +1,7 @@
 import { reportError } from '../905/11';
 import { pluginAPIService } from '../905/3209';
 import { createActionCreator } from '../905/73481';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { mergePublishedPluginThunk } from '../905/172918';
 import { resolveMessage } from '../905/231762';
 import { readImageBytes } from '../905/289751';
@@ -308,7 +308,7 @@ async function Z(e, t, r) {
   let f = Promise.resolve(!1);
   let E = t.iconBlob;
   void 0 !== E && (f = readImageBytes(E).then(e => Ac(g.iconUploadUrl, E, e)).then(() => !0).catch(t => {
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
     let r = resolveMessage(t, getI18nString('community.actions.could_not_connect_to_the_server'));
     throw new Error(isWidget(e) ? getI18nString('community.actions.error_uploading_widget_icon_error', {
       error: r
@@ -319,7 +319,7 @@ async function Z(e, t, r) {
   let y = Promise.resolve(!1);
   let b = t.coverBlob;
   void 0 !== b && (y = readImageBytes(b).then(e => Ac(g.coverImageUploadUrl, b, e)).then(() => !0).catch(t => {
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
     return new Error(isWidget(e) ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
       error: resolveMessage(t, t.data?.message || 'unknown error')
     }) : getI18nString('community.actions.error_uploading_plugin_artwork_image_error', {
@@ -334,7 +334,7 @@ async function Z(e, t, r) {
     if (!g.snapshotUploadUrl) throw new Error('Snapshot upload url is missing');
     return Ac(g.snapshotUploadUrl, snapshotBlob, e);
   }).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
       error: resolveMessage(e, e.data?.message || 'unknown error')
     }));
@@ -354,7 +354,7 @@ async function Z(e, t, r) {
       video_thumbnail_sha1: e.videoThumbnailSha1
     });
   }).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(getI18nString('community.actions.error_uploading_plugin_video_error', {
       error: resolveMessage(e, e.data?.message || 'unknown error')
     }));
@@ -380,7 +380,7 @@ async function Z(e, t, r) {
     playground_fig_file_key: t.playground_fig_file_key,
     playground_file_publish_type: r
   }).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(getI18nString('community.actions.error_finalizing_plugin_error', {
       error: resolveMessage(e, e.data?.message || 'unknown error')
     }));
@@ -432,7 +432,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   try {
     E = await PluginUploadApi.postPluginUpload(L, e, g);
   } catch (e) {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server')));
   }
   let {
@@ -447,7 +447,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   } = E;
   let G = Promise.resolve(!1);
   b && (G = $$ep30(codeUploadUrl, b).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     let t = $$e_25(e) ?? resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server'));
     throw new Error(g ? getI18nString('community.actions.error_uploading_widget_code_error', {
       error: t
@@ -458,7 +458,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let V = Promise.resolve(!1);
   let H = r.iconBlob;
   H != null && (V = readImageBytes(H).then(e => Ac(iconUploadUrl, H, e)).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     let t = $$e_25(e) ?? resolveMessage(e, e.data?.message || 'unknown error');
     throw new Error(g ? getI18nString('community.actions.error_uploading_widget_icon_error', {
       error: t
@@ -469,7 +469,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let z = Promise.resolve(!1);
   let W = r.coverBlob;
   W != null && (z = readImageBytes(W).then(e => Ac(coverImageUploadUrl, W, e)).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     let t = $$e_25(e) ?? resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server'));
     throw new Error(g ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
       error: t
@@ -482,7 +482,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   } = r;
   let Y = Promise.resolve(!1);
   snapshotBlob != null && snapshotUploadUrl && (Y = readImageBytes(snapshotBlob).then(e => Ac(snapshotUploadUrl, snapshotBlob, e)).then(() => !0).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
       error: $$e_25(e) ?? resolveMessage(e, e.data?.message || 'unknown error')
     }));
@@ -503,7 +503,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
       });
       return !0;
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new Error(getI18nString('community.actions.error_uploading_plugin_video_error', {
         error: resolveMessage(e, e.data?.message || 'unknown error')
       }));
@@ -529,7 +529,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
     playground_fig_file_key: r.playground_fig_file_key,
     playground_file_publish_type: f
   }).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(g ? getI18nString('community.actions.error_finalizing_widget_error', {
       error: resolveMessage(e, e.data?.message || '')
     }) : getI18nString('community.actions.error_finalizing_plugin_error', {
@@ -617,7 +617,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
       message: t,
       error: !0
     }));
-    reportError(_$$e.COMMUNITY, r);
+    reportError(ServiceCategories.COMMUNITY, r);
     return new Error(t);
   }
 });
@@ -665,7 +665,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
         error: t
       }
     }));
-    reportError(_$$e.COMMUNITY, r);
+    reportError(ServiceCategories.COMMUNITY, r);
     return new Error(`Failed plugin patchVersion: ${r.message}`);
   }
 });
@@ -704,7 +704,7 @@ let $$eo35 = createOptimistThunk(async (e, {
       }),
       error: !0
     }));
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
   });
 });
 let $$el10 = createOptimistThunk(async (e, t) => {
@@ -752,7 +752,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
       }),
       error: !0
     }));
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
   });
 });
 let $$ed17 = createOptimistThunk((e, {
@@ -781,7 +781,7 @@ let $$ed17 = createOptimistThunk((e, {
       }),
       error: !0
     }));
-    reportError(_$$e.COMMUNITY, r);
+    reportError(ServiceCategories.COMMUNITY, r);
   });
 });
 let $$ec15 = createOptimistThunk((e, {
@@ -867,7 +867,7 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
       message: resolveMessage(t, t.message),
       error: !0
     }));
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
     return new Error(t.message);
   }
 });

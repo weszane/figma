@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { getFeatureFlags } from "../905/601108";
@@ -28,7 +28,7 @@ function v({
   let b = A(e);
   if (!x) return null;
   if (!e || !b.isValid()) {
-    g || reportError(_$$e.MONETIZATION_UPGRADES, Error(`Contract Start have invalid date: ${e}`), {
+    g || reportError(ServiceCategories.MONETIZATION_UPGRADES, Error(`Contract Start have invalid date: ${e}`), {
       extra: a
     });
     return null;

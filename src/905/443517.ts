@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { KeyCodes } from '../905/63728';
 import { _ as _$$_ } from '../905/136246';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { Y as _$$Y } from '../905/193977';
 import { h as _$$h } from '../905/207101';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -91,7 +91,7 @@ export function $$K0(e) {
     G.current && n.requiredEntered !== n.requiredCount && (logInfo('Parameter Entry', 'parmeter mismatch', {
       requiredParameters: t,
       parameterValues: i
-    }), reportError(_$$e.AI_FOR_PRODUCTION, new Error('Parameter entry ran successfully with parameters, but not all parameters were recorded')));
+    }), reportError(ServiceCategories.AI_FOR_PRODUCTION, new Error('Parameter entry ran successfully with parameters, but not all parameters were recorded')));
     let r = ov({
       ...e,
       qaVersion: $L
@@ -626,11 +626,11 @@ function Q({
 }
 function J(e) {
   let t = new URL(e.src);
-  return t.hostname === window.location.hostname ? (reportError(_$$e.AI_FOR_PRODUCTION, new Error('same-origin URL blocked in UntrustedImage')), jsx(Fragment, {})) : ['https:', 'http:', 'data:', 'blob:'].includes(t.protocol) ? jsx('img', {
+  return t.hostname === window.location.hostname ? (reportError(ServiceCategories.AI_FOR_PRODUCTION, new Error('same-origin URL blocked in UntrustedImage')), jsx(Fragment, {})) : ['https:', 'http:', 'data:', 'blob:'].includes(t.protocol) ? jsx('img', {
     src: e.src,
     className: e.className,
     crossOrigin: 'anonymous',
     alt: ''
-  }) : (reportError(_$$e.AI_FOR_PRODUCTION, new Error('Unexpected protocol blocked in UntrustedImage')), jsx(Fragment, {}));
+  }) : (reportError(ServiceCategories.AI_FOR_PRODUCTION, new Error('Unexpected protocol blocked in UntrustedImage')), jsx(Fragment, {}));
 }
 export const ch = $$K0;

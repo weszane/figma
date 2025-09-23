@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { debounce } from "../905/915765";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -417,7 +417,7 @@ export function $$J0(e) {
           e instanceof Error ? (logError("Autosave", "Failed to call autosave callback", {
             name: e.name,
             message: e.message
-          }), reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to call autosave callback"));
+          }), reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e)) : reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Failed to call autosave callback"));
         }
       };
       ipcStorageHandler.register(restoredAutosaveKey, a);
@@ -435,7 +435,7 @@ export function $$J0(e) {
     files: multiUserUnsyncedFiles,
     onLogOut: () => {
       for (let e of autosaveFilesToDelete) deleteAutosaveDataForSessions(createSessionNodeKeyRange(e.userID, e.fileKey)).catch(e => {
-        reportError(_$$e.UNOWNED, Error("Failed to delete autosave data for sessions"));
+        reportError(ServiceCategories.UNOWNED, Error("Failed to delete autosave data for sessions"));
       });
       e.onLogOut();
     },

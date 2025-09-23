@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { xb } from "../figma_app/651866";
 import { CortexError } from "../figma_app/691470";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, TextModificationAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -301,7 +301,7 @@ export async function $$M0({
         t();
         mg(aiTrackingContext);
       });
-    } else reportError(_$$e.AI_PRODUCTIVITY, Error("Text tools commit failed unexpectedly"));
+    } else reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Text tools commit failed unexpectedly"));
   } catch (t) {
     clearAllLoadingStates();
     Z = Z.map(e => e.state !== z8.SUCCEEDED ? {
@@ -312,7 +312,7 @@ export async function $$M0({
     r && r(Z);
     let e = t;
     featureType === JT.SLIDES_REWRITE_TEXT && t instanceof CortexError && (e = Gx(t));
-    "reportToSentry" in e && !e.reportToSentry || (setTagGlobal("text_feature_type", X.featureType), reportError(_$$e.AI_PRODUCTIVITY, e, {
+    "reportToSentry" in e && !e.reportToSentry || (setTagGlobal("text_feature_type", X.featureType), reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
       extra: {
         ...X,
         numberOfNodes: targets.length

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { VariableIdHandler } from "../figma_app/243058";
 import { FileSourceType, VariableDataType, FirstDraftHelpers, SceneGraphTsApi, FacetType, Thumbnail, DraftState } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -132,7 +132,7 @@ async function v(e, t, r, n) {
 function A() {
   let e = Gy(FileSourceType.FIRST_DRAFT).filter(e => e.name === i2);
   if (e && 0 !== e.length) {
-    e.length > 1 && reportError(_$$e.AI_GENERATION, Error("Multiple Presets collections found, returning the first one"), {
+    e.length > 1 && reportError(ServiceCategories.AI_GENERATION, Error("Multiple Presets collections found, returning the first one"), {
       tags: {
         collectionIds: e.map(e => e.id).join(",")
       }
@@ -148,7 +148,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   let h = new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
   let m = p.map(e => h.get(e));
   if (m.some(e => !e)) {
-    reportError(_$$e.AI_GENERATION, Error("Copied node not found"));
+    reportError(ServiceCategories.AI_GENERATION, Error("Copied node not found"));
     return [];
   }
   let f = [];
@@ -241,7 +241,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
       t++;
     }
   } catch (e) {
-    reportError(_$$e.AI_GENERATION, e);
+    reportError(ServiceCategories.AI_GENERATION, e);
     return [];
   }
   return f;

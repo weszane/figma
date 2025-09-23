@@ -1,6 +1,6 @@
 import { createActionCreator } from "../905/73481";
 import { logError } from "../905/714362";
-import { Sb } from "../905/359847";
+import { processHubFilesThunk } from "../905/359847";
 import { mergePublishedPluginThunk } from "../905/172918";
 import { createOptimistThunk } from "../905/350402";
 import { getResourceTypeV2 } from "../figma_app/740025";
@@ -75,7 +75,7 @@ function m(e, t) {
     let t = getResourceTypeV2(e);
     t === ResourceTypeNoComment2.HUB_FILE ? r.push(e) : t === ResourceTypeNoComment2.PLUGIN ? n.push(e) : t === ResourceTypeNoComment2.WIDGET && i.push(e);
   });
-  e(Sb({
+  e(processHubFilesThunk({
     hubFiles: r,
     src: "fetchShelvesForShelfType"
   }));

@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createRemovableAtomFamily, atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { observabilityClient } from "../905/602906";
 import { reportError } from "../905/11";
@@ -29,13 +29,13 @@ let T = createRemovableAtomFamily(() => atom({
   tasks: []
 }));
 let I = {
-  [JT.FIRST_DRAFT_MAKE_CHANGES]: _$$e.AI_GENERATION,
-  [JT.FIRST_DRAFT_MAKE_KIT]: _$$e.AI_GENERATION,
-  [JT.FIRST_DRAFT_COMPONENTIZE]: _$$e.AI_GENERATION,
-  [JT.FIRST_DRAFT_SUGGEST_PROPS]: _$$e.AI_GENERATION,
-  [JT.MAKE_EDITS]: _$$e.AI_GENERATION,
-  [JT.FIRST_DRAFT]: _$$e.AI_GENERATION,
-  [JT.IMAGE_TO_DESIGN]: _$$e.AI_GENERATION
+  [JT.FIRST_DRAFT_MAKE_CHANGES]: ServiceCategories.AI_GENERATION,
+  [JT.FIRST_DRAFT_MAKE_KIT]: ServiceCategories.AI_GENERATION,
+  [JT.FIRST_DRAFT_COMPONENTIZE]: ServiceCategories.AI_GENERATION,
+  [JT.FIRST_DRAFT_SUGGEST_PROPS]: ServiceCategories.AI_GENERATION,
+  [JT.MAKE_EDITS]: ServiceCategories.AI_GENERATION,
+  [JT.FIRST_DRAFT]: ServiceCategories.AI_GENERATION,
+  [JT.IMAGE_TO_DESIGN]: ServiceCategories.AI_GENERATION
 };
 let S = "__ABORTED__";
 export async function $$v0(e, t, r, n?: any) {
@@ -110,7 +110,7 @@ export async function $$v0(e, t, r, n?: any) {
     logError("quick-actions", "Error encountered running action", {
       error: t
     });
-    t instanceof JB && !1 === t.reportToSentry || reportError(I[e] ?? _$$e.UNOWNED, t);
+    t instanceof JB && !1 === t.reportToSentry || reportError(I[e] ?? ServiceCategories.UNOWNED, t);
     atomStoreManager.set(s, e => ({
       state: "error",
       error: t,

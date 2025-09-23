@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, createRef, useRef, useCallback, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuHiddenTitleComp } from "../figma_app/860955";
 import { IconButton } from "../905/443068";
@@ -82,7 +82,7 @@ export function $$eN0(e) {
 export function $$eC6(e) {
   return e.label ? e.label : e.participating_users_array && e.participating_users_array[0] ? e.participating_users_array[0] : e.user.handle ? e.user.handle : (logError("version", "Verison history got user without a handle", {
     item: e
-  }), reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Verison history got user without a handle")), "(unknown user)");
+  }), reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Verison history got user without a handle")), "(unknown user)");
 }
 export function $$ew2(e) {
   switch (e.item.view) {
@@ -151,7 +151,7 @@ export class $$eR4 extends RecordingComponent {
         teamId: this.props.team?.id
       }), this.props.isStarterTeam) {
         if (!this.props.team) {
-          reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
+          reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
           return;
         }
         this.props.dispatch(showModalHandler({
@@ -863,7 +863,7 @@ class eM extends RecordingComponent {
       let e = this.getOpenFile();
       let t = e.teamId && this.props.teams[e.teamId];
       if (!t) {
-        reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
+        reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
         return;
       }
       this.props.dispatch(showModalHandler({

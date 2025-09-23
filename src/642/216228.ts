@@ -23,7 +23,7 @@ import { KindEnum } from '../905/129884';
 import { getAutoSuggestResults } from '../905/150554';
 import { showModalHandler } from '../905/156213';
 import { getThemeContextOrDefault } from '../905/158740';
-import { ServiceCategories as _$$e3 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { ScreenReaderOnly } from '../905/172252';
 import { y as _$$y2 } from '../905/175043';
 import { n as _$$n2 } from '../905/186638';
@@ -34,7 +34,7 @@ import { v as _$$v } from '../905/213481';
 import { b as _$$b2 } from '../905/217163';
 import { Cn } from '../905/225265';
 import { z as _$$z } from '../905/239603';
-import { P as _$$P2 } from '../905/262370';
+import { createRecentlyUsedAtom } from '../905/262370';
 import { h as _$$h3, K as _$$K2 } from '../905/275787';
 import { N as _$$N4 } from '../905/281143';
 import { u as _$$u } from '../905/290607';
@@ -166,7 +166,7 @@ import { jO } from '../figma_app/242339';
 import { Bf } from '../figma_app/249941';
 import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } from '../figma_app/255679';
 import { SearchEventType, MAX_CONCURRENT_FRAGMENT_LOADS, ContextType, SUPPORTED_NODE_TYPES, SearchResultType, SEARCH_CONFIG, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
-import { o as _$$o } from '../figma_app/267183';
+import { useRecentlyUsed } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
 import { Ay as _$$Ay4 } from '../figma_app/272902';
 import { alwaysFalseCallback2, setupStarterUserCallback } from '../figma_app/275462';
@@ -1937,7 +1937,7 @@ function sc({
     })]
   });
 }
-let su = _$$P2('recently-used-site-embeds', 'name', _$$z.object({
+let su = createRecentlyUsedAtom('recently-used-site-embeds', 'name', _$$z.object({
   name: _$$z.string()
 }), {
   transform: e => ({
@@ -6437,7 +6437,7 @@ function iE() {
   let e = useSiteKitAssets().data?.assetsByLibraryKey;
   let t = useMemo(() => e ? [...e.values()].flat() : [], [e]);
   let s = useMemo(() => filterEnabledFeatures(), []);
-  let r = _$$o(PrimaryWorkflowEnum.RESPONSIVE_SET);
+  let r = useRecentlyUsed(PrimaryWorkflowEnum.RESPONSIVE_SET);
   let i = useAtomWithSubscription(su);
   let l = getUserId();
   let a = useMemo(() => {
@@ -6580,7 +6580,7 @@ function iW() {
       try {
         e = (await iz.search(query)).map(e => e.item);
       } catch (e) {
-        logError(_$$e3.DESIGN_SYSTEMS_ECOSYSTEM, 'error in site kit search', {
+        logError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, 'error in site kit search', {
           message: e.message
         }, {
           reportAsSentryError: !0

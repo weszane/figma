@@ -2,7 +2,7 @@ import { useState } from "react";
 import { lV } from "../figma_app/617606";
 import { E } from "../1156/735202";
 import { EventEmitter } from "../905/690073";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/13528";
 import { ChatMessageType } from "../figma_app/175377";
 import { getFeatureFlags } from "../905/601108";
@@ -63,7 +63,7 @@ export async function $$E1(e, t, n, r) {
       atomStoreManager.set(Nm(e), "assistant");
     },
     createCodeSnapshot: O,
-    reportErrorToSentry: e => reportError(_$$e.AI_FOR_PRODUCTION, e),
+    reportErrorToSentry: e => reportError(ServiceCategories.AI_FOR_PRODUCTION, e),
     regenerateAttributions: z9
   });
 }

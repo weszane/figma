@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { FullscreenWebSocketTsApi, Multiplayer } from "../figma_app/763686";
 import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -96,7 +96,7 @@ export let $$A0 = {
         if (!b(t.url, e) && (logWarning("multiplayer", "Preconnect URL doesn't match URL", {
           preconnectUrl: t.url,
           url: e
-        }), getFeatureFlags().report_preconnect_mismatch && reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Multiplayer preconnect URL mismatch"))), t.readyState !== WebSocket.CONNECTING && t.readyState !== WebSocket.OPEN) {
+        }), getFeatureFlags().report_preconnect_mismatch && reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Multiplayer preconnect URL mismatch"))), t.readyState !== WebSocket.CONNECTING && t.readyState !== WebSocket.OPEN) {
           let e = null;
           t.readyState === WebSocket.CLOSED ? e = "closed" : t.readyState === WebSocket.CLOSING && (e = "closing");
           logWarning("multiplayer", "readyState is bad, skipping preconnect optimization", {

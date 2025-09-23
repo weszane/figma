@@ -47,7 +47,7 @@ import { wS, xP } from '../figma_app/65182';
 import { Q as _$$Q } from '../figma_app/67145';
 import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
-import { F$ } from '../figma_app/111825';
+import { checkCondition } from '../figma_app/111825';
 import { P as _$$P } from '../figma_app/120873';
 import { _f, D1, i$, OC, ow } from '../figma_app/150804';
 import { mY, Px, R1, u3, y$ } from '../figma_app/152690';
@@ -826,7 +826,7 @@ function $$e6(e) {
       t ? r(Yi({
         item: t,
         callback: r => {
-          let n = F$(l, getFeatureFlags().ds_variant_props_write) ? e.uguid : void 0;
+          let n = checkCondition(l, getFeatureFlags().ds_variant_props_write) ? e.uguid : void 0;
           t.resolvedType === VariableResolvedDataType.STRING ? i.value[e.name] = {
             type: VariableDataType.ALIAS,
             resolvedType: VariableResolvedDataType.STRING,

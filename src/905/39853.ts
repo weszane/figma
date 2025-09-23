@@ -1,5 +1,5 @@
 import { sha1Hex, sha1BytesFromHex, sha1HexFromBytes } from "../905/125019";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { SlidePptxImporterBindings, Fullscreen, FontSourceType } from "../figma_app/763686";
 import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
@@ -1571,21 +1571,21 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         raw: !0,
         retryCount: 3
       }).catch(e => {
-        reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
         return l;
       }).then(e => {
         if (e.error) throw Error(e.error);
         try {
           return JSON.parse(e.data);
         } catch (e) {
-          reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Unparseable canvas upload response"));
+          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Unparseable canvas upload response"));
           return l;
         }
       });
     }(t, n, a, s || eB, o, l, d);
     if (c = f.meta.file.key, t.hasCanceled()) throw new OL.Canceled();
     if (!c) {
-      reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Converted file upload did not return a file key"));
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Converted file upload did not return a file key"));
       return new lZ.ServiceUnavailable();
     }
     if (f.meta.file.file_repo_id) {
@@ -1800,7 +1800,7 @@ async function eW(e, t, i, n, a, s, o, l) {
       await e.addLinks(t);
     }
   } catch (e) {
-    reportError(_$$e.DEVELOPER_TOOLS, e);
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e);
   }
   return {
     warnings: g,

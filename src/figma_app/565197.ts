@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { encodeBase64 } from "../905/561685";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -185,7 +185,7 @@ export function $$N0(e, t) {
   for (let r of e) {
     let e = $$x5(r, t);
     e && T(e, m).catch(e => {
-      reportError(_$$e.FIGJAM, e);
+      reportError(ServiceCategories.FIGJAM, e);
     });
   }
 }
@@ -206,13 +206,13 @@ export async function $$C3(e, t) {
 function w(...e) {
   for (let t of e) if (t && (!(t instanceof HTMLImageElement) || !t.src || !t.width || !t.height)) {
     let e = t.outerHTML || Object.prototype.toString.call(t);
-    reportError(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${e}'`));
+    reportError(ServiceCategories.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${e}'`));
   }
 }
 function O(e, t) {
-  if (t && reportError(_$$e.FIGJAM, t), !e) return;
+  if (t && reportError(ServiceCategories.FIGJAM, t), !e) return;
   let r = e.outerHTML || Object.prototype.toString.call(e);
-  reportError(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${r}'`));
+  reportError(ServiceCategories.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${r}'`));
 }
 export const C7 = $$N0;
 export const LL = $$b1;

@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { ServiceCategories as _$$e2 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { AIScopeHandler, permissionScopeHandler } from '../905/189185';
 import { O as _$$O } from '../905/273186';
 import { getI18nString } from '../905/303541';
@@ -258,7 +258,7 @@ async function et({
     nodeIdGenerator: () => (throwIf(void 0 !== Fullscreen, 'Fullscreen must be defined'), Fullscreen.generateUniqueID()),
     initializeWithAssistantMessage: !0,
     excludeRedundantCodeFromMessageHistory: !!getFeatureFlags().bake_exclude_code_tag_web,
-    reportToSentry: (e, t) => reportError(_$$e2.MAKE, e, t)
+    reportToSentry: (e, t) => reportError(ServiceCategories.MAKE, e, t)
   });
   YZ({
     node: t.guid,
@@ -514,7 +514,7 @@ export async function $$en0({
         atomStoreManager.set(Nm(e), 'assistant');
       },
       createCodeSnapshot: _$$O2,
-      reportErrorToSentry: e => reportError(_$$e2.AI_FOR_PRODUCTION, e),
+      reportErrorToSentry: e => reportError(ServiceCategories.AI_FOR_PRODUCTION, e),
       regenerateAttributions: $$er2
     });
     e.type === ChatMessageType.USER_MESSAGE && gG(H5(e.textContent)) && px();

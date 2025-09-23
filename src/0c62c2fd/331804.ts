@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { FlashActions } from "../905/573154";
@@ -26,12 +26,12 @@ export function $$g0({
     pinnedFile
   } = x.data;
   if (!pinnedFile) {
-    reportError(_$$e.WAYFINDING, Error("EditPinModal unable to lookup pinned file by ID"));
+    reportError(ServiceCategories.WAYFINDING, Error("EditPinModal unable to lookup pinned file by ID"));
     g(popModalStack());
     return null;
   }
   if (pinnedFile.resourceType !== FContainerKindType.WORKSPACE) {
-    reportError(_$$e.WAYFINDING, Error("EditPinModal opened for pinned file with non-workspace resource type"), {
+    reportError(ServiceCategories.WAYFINDING, Error("EditPinModal opened for pinned file with non-workspace resource type"), {
       extra: {
         resourceType: pinnedFile.resourceType
       }

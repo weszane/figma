@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useStore } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IAssertResource } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { reportError } from "../905/11";
@@ -82,7 +82,7 @@ export function $$N1(e, t) {
   return useCallback(e => {
     if (!r) {
       console.error("Plugin version not found");
-      reportError(_$$e.EXTENSIBILITY, Error("Plugin version not found"));
+      reportError(ServiceCategories.EXTENSIBILITY, Error("Plugin version not found"));
       return;
     }
     let n = $$x4(r);

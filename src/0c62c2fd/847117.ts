@@ -40,7 +40,7 @@ import { FeatureFlag, PageFolderFile } from "../905/652992";
 import { Y5, mO, kI, NU } from "../905/163189";
 import { fileActionEnum } from "../figma_app/630077";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { uf, yA } from "../905/769";
 import { liveStoreInstance } from "../905/713695";
@@ -118,7 +118,7 @@ function q(e) {
       statusIcon: s,
       statusMessage: i,
       statusMessageSecondary: o
-    } : (reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Missing status in repo import")), {
+    } : (reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Missing status in repo import")), {
       statusIcon: jsx(_$$R, {}),
       statusMessage: renderI18nText("file_browser.file_import_view.repo.error"),
       statusMessageSecondary: null

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
 import { O as _$$O } from "../905/539306";
 import { isMobileUA } from "../figma_app/778880";
@@ -364,7 +364,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
     setRecentUserData(n.userId, !1, n.orgId, void 0, n.teamId ?? null);
     _$$j(v, n.orgId, n.teamId ?? null, n.userId);
   } else {
-    reportError(_$$e.COMMUNITY, Error("No workspaces found"));
+    reportError(ServiceCategories.COMMUNITY, Error("No workspaces found"));
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.error_try_again"),
       error: !0

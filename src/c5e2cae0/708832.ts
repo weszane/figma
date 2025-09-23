@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, Component } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { getEmailDomain, isAllowedDomain } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
@@ -875,7 +875,7 @@ export class $$eM2 extends Component {
     this.setState({
       apiPending: !0
     });
-    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(FlashActions.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
+    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(FlashActions.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
       extra: {
         eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
         eligibleUsersByUserId: this.state.eligibleUsersByUserId,
@@ -1128,7 +1128,7 @@ export function $$eR1(e) {
   if ("loaded" !== c.status) return jsx(_$$K, {});
   let u = c.data;
   return jsx(ErrorBoundaryCrash, {
-    team: _$$e.MONETIZATION_UPGRADES,
+    team: ServiceCategories.MONETIZATION_UPGRADES,
     boundaryKey: "OrgSelfServeBillingRemodelPage",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: y4,

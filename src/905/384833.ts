@@ -3,7 +3,7 @@ import { Suspense, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -58,7 +58,7 @@ export function $$er0(e) {
     boundaryKey: "OrgRenewalModal",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
         hiddenTitle: "Org Renewal Modal",
@@ -74,7 +74,7 @@ export function $$er0(e) {
 function ea(e) {
   let t = useModalManager(e);
   let i = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let p = i.key.parentId;
   let m = zz(p, FOrganizationLevelType.ORG);

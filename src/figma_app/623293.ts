@@ -7,16 +7,16 @@
 // Used early returns and guard clauses.
 // Updated export aliases to match new names.
 
-import dompurify from 'dompurify'
-import { reportError } from '../905/11'
-import { ServiceCategories as _$$e } from '../905/165054'
-import { CustomCauseError } from '../905/194389'
-import { getFeatureFlags } from '../905/601108'
-import { logInfo } from '../905/714362'
-import { Dm } from '../figma_app/8833'
-import { getInitialOptions } from '../figma_app/169182'
-import { BrowserInfo } from '../figma_app/778880'
-import { isInteractionPathCheck } from '../figma_app/897289'
+import dompurify from 'dompurify';
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { CustomCauseError } from '../905/194389';
+import { getFeatureFlags } from '../905/601108';
+import { logInfo } from '../905/714362';
+import { Dm } from '../figma_app/8833';
+import { getInitialOptions } from '../figma_app/169182';
+import { BrowserInfo } from '../figma_app/778880';
+import { isInteractionPathCheck } from '../figma_app/897289';
 
 // Script Loading Section
 
@@ -26,7 +26,7 @@ import { isInteractionPathCheck } from '../figma_app/897289'
  */
 export class ScriptLoadError extends CustomCauseError {
   constructor(cause: any) {
-    super('Script load error.', cause)
+    super('Script load error.', cause);
   }
 }
 
@@ -35,17 +35,17 @@ export class ScriptLoadError extends CustomCauseError {
  * Original: g
  */
 function createScriptElement(id?: string, cors: boolean = false, doc: Document = window.document): HTMLScriptElement {
-  const script = doc.createElement('script')
+  const script = doc.createElement('script');
   if (id && id.length > 0) {
-    script.id = id
+    script.id = id;
   }
-  script.type = 'text/javascript'
-  script.async = true
-  script.setAttribute('nonce', getInitialOptions().csp_nonce)
+  script.type = 'text/javascript';
+  script.async = true;
+  script.setAttribute('nonce', getInitialOptions().csp_nonce);
   if (cors) {
-    script.crossOrigin = 'anonymous'
+    script.crossOrigin = 'anonymous';
   }
-  return script
+  return script;
 }
 
 /**
@@ -53,85 +53,83 @@ function createScriptElement(id?: string, cors: boolean = false, doc: Document =
  * Original: $$f4
  */
 export async function loadScript(src: string, options?: {
-  window?: Window
-  id?: string
-  cors?: boolean
-  retry?: boolean
-  waitForCondition?: () => boolean
+  window?: Window;
+  id?: string;
+  cors?: boolean;
+  retry?: boolean;
+  waitForCondition?: () => boolean;
 }) {
-  const doc = options?.window?.document || window.document
+  const doc = options?.window?.document || window.document;
   if (!src) {
-    console.error('bad src')
-    reportError(_$$e.CLIENT_PLATFORM, new Error('bad loadScript src'))
-    throw new Error('bad src')
+    console.error('bad src');
+    reportError(ServiceCategories.CLIENT_PLATFORM, new Error('bad loadScript src'));
+    throw new Error('bad src');
   }
-
-  const id = options?.id
-  const cors = options?.cors !== false
-  const retry = options?.retry !== false
-  const waitForCondition = options?.waitForCondition
-  const originalError = new Error('original async stack')
-
+  const id = options?.id;
+  const cors = options?.cors !== false;
+  const retry = options?.retry !== false;
+  const waitForCondition = options?.waitForCondition;
+  const originalError = new Error('original async stack');
   return new Promise((resolve, reject) => {
     const handleLoad = async (script: HTMLScriptElement) => {
       if (waitForCondition) {
         try {
-          await waitForConditionWithTimeout(waitForCondition)
-        }
-        catch (error) {
-          logInfo('loadScript', 'waitForCondition timed out', { src })
-          reject(error)
-          return
+          await waitForConditionWithTimeout(waitForCondition);
+        } catch (error) {
+          logInfo('loadScript', 'waitForCondition timed out', {
+            src
+          });
+          reject(error);
+          return;
         }
       }
-      resolve(script)
-    }
-
-    const script = createScriptElement(id, cors, doc)
-
+      resolve(script);
+    };
+    const script = createScriptElement(id, cors, doc);
     const handleError = (event: Event) => {
       const logAndReject = (errorEvent: Event) => {
-        logInfo('loadScript', 'Script load error event', { event: errorEvent })
-        reject(new ScriptLoadError({ cause: originalError }))
-      }
-
+        logInfo('loadScript', 'Script load error event', {
+          event: errorEvent
+        });
+        reject(new ScriptLoadError({
+          cause: originalError
+        }));
+      };
       if (!retry) {
-        logAndReject(event)
-        return
+        logAndReject(event);
+        return;
       }
-
-      doc.head.removeChild(script)
-      const retryScript = createScriptElement(id, cors, doc)
-      retryScript.onload = () => handleLoad(retryScript)
+      doc.head.removeChild(script);
+      const retryScript = createScriptElement(id, cors, doc);
+      retryScript.onload = () => handleLoad(retryScript);
       retryScript.onerror = (e: any) => {
-        doc.head.removeChild(retryScript)
-        logAndReject(e)
-      }
-
+        doc.head.removeChild(retryScript);
+        logAndReject(e);
+      };
       if (!src) {
-        reject(new CustomCauseError('invalid src', { cause: originalError }))
-        return
+        reject(new CustomCauseError('invalid src', {
+          cause: originalError
+        }));
+        return;
       }
-
-      const separator = src.includes('?') ? '&' : '?'
-      retryScript.src = `${src}${separator}lsRetry=${Math.random()}`
-      doc.head.appendChild(retryScript)
-
-      const errorMessage = typeof event === 'string' ? event : (event as ErrorEvent).message
+      const separator = src.includes('?') ? '&' : '?';
+      retryScript.src = `${src}${separator}lsRetry=${Math.random()}`;
+      doc.head.appendChild(retryScript);
+      const errorMessage = typeof event === 'string' ? event : (event as ErrorEvent).message;
       logInfo('loadScript', 'Retrying script load', {
         originalSrc: src,
         retrySrc: retryScript.src,
-        initialError: errorMessage,
-      })
-    }
-    script.onload = () => handleLoad(script)
-    script.onerror = handleError
-    script.src = src
-    doc.head.appendChild(script)
-  }).catch((error) => {
-    console.error(`Fetching ${src} failed: ${error.toString()}`)
-    throw error
-  })
+        initialError: errorMessage
+      });
+    };
+    script.onload = () => handleLoad(script);
+    script.onerror = handleError;
+    script.src = src;
+    doc.head.appendChild(script);
+  }).catch(error => {
+    console.error(`Fetching ${src} failed: ${error.toString()}`);
+    throw error;
+  });
 }
 
 /**
@@ -140,20 +138,23 @@ export async function loadScript(src: string, options?: {
  */
 async function waitForConditionWithTimeout(condition: () => boolean): Promise<void> {
   return new Promise((resolve, reject) => {
-    let attempts = 0
+    let attempts = 0;
     const check = () => {
       if (condition()) {
-        resolve()
-        return
+        resolve();
+        return;
       }
       if (++attempts >= 50) {
-        reject(new Error('waitForCondition timed out'))
-        return
+        reject(new Error('waitForCondition timed out'));
+        return;
       }
-      scheduler.postTask(check, { delay: 100, priority: 'background' })
-    }
-    check()
-  })
+      scheduler.postTask(check, {
+        delay: 100,
+        priority: 'background'
+      });
+    };
+    check();
+  });
 }
 
 // Browser Fixes Section
@@ -163,16 +164,9 @@ async function waitForConditionWithTimeout(condition: () => boolean): Promise<vo
  * Original: $$E1
  */
 export function injectTextDecoderFix(): void {
-  const shouldInject = (
-    (BrowserInfo.safari && Number(BrowserInfo.version) >= 18 && Number(BrowserInfo.version) < 19)
-    || (BrowserInfo.ios && BrowserInfo.chrome && Number(BrowserInfo.version) >= 135 && Number(BrowserInfo.version) <= 137)
-    || (BrowserInfo.webkit && Number(BrowserInfo.version) >= 135 && Number(BrowserInfo.version) <= 137)
-  ) && getFeatureFlags().hook_webkit_text_decoder
-
-  if (!shouldInject)
-    return
-
-  const script = createScriptElement(undefined, true)
+  const shouldInject = (BrowserInfo.safari && Number(BrowserInfo.version) >= 18 && Number(BrowserInfo.version) < 19 || BrowserInfo.ios && BrowserInfo.chrome && Number(BrowserInfo.version) >= 135 && Number(BrowserInfo.version) <= 137 || BrowserInfo.webkit && Number(BrowserInfo.version) >= 135 && Number(BrowserInfo.version) <= 137) && getFeatureFlags().hook_webkit_text_decoder;
+  if (!shouldInject) return;
+  const script = createScriptElement(undefined, true);
   script.text = `
     try {
       const originalDecode = TextDecoder.prototype.decode;
@@ -193,8 +187,8 @@ export function injectTextDecoderFix(): void {
     } catch (e) {
       // noop
     }
-  `
-  document.head.appendChild(script)
+  `;
+  document.head.appendChild(script);
 }
 
 // Clipboard Operations Section
@@ -204,61 +198,62 @@ export function injectTextDecoderFix(): void {
  * Original: y
  */
 function isClipboardSupported(): boolean {
-  const hasClipboardAPI = !!(navigator.clipboard && navigator.clipboard.read && navigator.clipboard.write)
-  const hasMobileAPI = !!window.FigmaMobile?.readClipboardData
-  return (hasClipboardAPI || hasMobileAPI) && !isInteractionPathCheck()
+  const hasClipboardAPI = !!(navigator.clipboard && navigator.clipboard.read && navigator.clipboard.write);
+  const hasMobileAPI = !!window.FigmaMobile?.readClipboardData;
+  return (hasClipboardAPI || hasMobileAPI) && !isInteractionPathCheck();
 }
 
 /**
  * Copies text using the legacy method.
  * Original: b
  */
-async function copyTextLegacy(text: string, options: { withLineBreaks?: boolean } = {}): Promise<void> {
+async function copyTextLegacy(text: string, options: {
+  withLineBreaks?: boolean;
+} = {}): Promise<void> {
   return new Promise((resolve, reject) => {
-    const activeElement = document.activeElement
-    let success = false
+    const activeElement = document.activeElement;
+    let success = false;
     try {
       if (text.length > 104857.6) {
-        console.warn('string too long for copyText usage watchdog timer of 1s. formatting will take too long')
+        console.warn('string too long for copyText usage watchdog timer of 1s. formatting will take too long');
       }
-      const element = options.withLineBreaks ? document.createElement('textarea') : document.createElement('input')
-      element.style.cssText = 'position: fixed; top: -100px'
-      element.classList.add(Dm)
-      document.body.appendChild(element)
-      element.value = text
-      element.focus()
-      element.select()
-      success = document.execCommand('copy') || (!!BrowserInfo.msedge)
-      element.remove()
-    }
-    finally {
-      (activeElement as HTMLElement)?.focus()
+      const element = options.withLineBreaks ? document.createElement('textarea') : document.createElement('input');
+      element.style.cssText = 'position: fixed; top: -100px';
+      element.classList.add(Dm);
+      document.body.appendChild(element);
+      element.value = text;
+      element.focus();
+      element.select();
+      success = document.execCommand('copy') || !!BrowserInfo.msedge;
+      element.remove();
+    } finally {
+      (activeElement as HTMLElement)?.focus();
     }
     if (success) {
-      resolve()
+      resolve();
+    } else {
+      reject();
     }
-    else {
-      reject()
-    }
-  })
+  });
 }
 
 /**
  * Copies text to clipboard, preferring modern API.
  * Original: $$T0
  */
-export async function copyTextToClipboard(text: string, options: { withLineBreaks?: boolean } = {}): Promise<void> {
+export async function copyTextToClipboard(text: string, options: {
+  withLineBreaks?: boolean;
+} = {}): Promise<void> {
   if (isClipboardSupported()) {
     try {
-      const processedText = options.withLineBreaks ? text : text.replace(/\s+$/gm, '')
-      await navigator.clipboard.writeText(processedText)
-      return
-    }
-    catch {
+      const processedText = options.withLineBreaks ? text : text.replace(/\s+$/gm, '');
+      await navigator.clipboard.writeText(processedText);
+      return;
+    } catch {
       // Fall through to legacy
     }
   }
-  return copyTextLegacy(text, options)
+  return copyTextLegacy(text, options);
 }
 
 /**
@@ -266,21 +261,26 @@ export async function copyTextToClipboard(text: string, options: { withLineBreak
  * Original: I
  */
 async function writeRichTextToClipboard(html: string, plainText?: string): Promise<void> {
-  const htmlBlob = new Blob([html], { type: 'text/html' })
-  let plainBlob: Blob
+  const htmlBlob = new Blob([html], {
+    type: 'text/html'
+  });
+  let plainBlob: Blob;
   if (plainText === undefined) {
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = dompurify().sanitize(html)
-    plainBlob = new Blob([tempDiv.innerText], { type: 'text/plain' })
-  }
-  else {
-    plainBlob = new Blob([plainText], { type: 'text/plain' })
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = dompurify().sanitize(html);
+    plainBlob = new Blob([tempDiv.innerText], {
+      type: 'text/plain'
+    });
+  } else {
+    plainBlob = new Blob([plainText], {
+      type: 'text/plain'
+    });
   }
   const item = new ClipboardItem({
     'text/plain': plainBlob,
-    'text/html': htmlBlob,
-  })
-  await navigator.clipboard.write([item])
+    'text/html': htmlBlob
+  });
+  await navigator.clipboard.write([item]);
 }
 
 /**
@@ -290,44 +290,39 @@ async function writeRichTextToClipboard(html: string, plainText?: string): Promi
 export async function copyRichTextToClipboard(html: string): Promise<void> {
   if (isClipboardSupported()) {
     try {
-      await writeRichTextToClipboard(html)
-      return
-    }
-    catch {
+      await writeRichTextToClipboard(html);
+      return;
+    } catch {
       // Fall through to legacy
     }
   }
   return new Promise((resolve, reject) => {
-    const tempDiv = document.createElement('div')
-    tempDiv.style.cssText = 'position: fixed; transform: translateX(-200%)'
-    tempDiv.innerHTML = dompurify().sanitize(html)
-    tempDiv.classList.add(Dm)
-    document.body.appendChild(tempDiv)
+    const tempDiv = document.createElement('div');
+    tempDiv.style.cssText = 'position: fixed; transform: translateX(-200%)';
+    tempDiv.innerHTML = dompurify().sanitize(html);
+    tempDiv.classList.add(Dm);
+    document.body.appendChild(tempDiv);
     try {
-      const selection = window.getSelection()
+      const selection = window.getSelection();
       if (selection) {
-        const range = document.createRange()
-        range.selectNodeContents(tempDiv)
-        selection.removeAllRanges()
-        selection.addRange(range)
+        const range = document.createRange();
+        range.selectNodeContents(tempDiv);
+        selection.removeAllRanges();
+        selection.addRange(range);
         if (document.execCommand('copy')) {
-          resolve()
+          resolve();
+        } else {
+          reject();
         }
-        else {
-          reject()
-        }
+      } else {
+        reject();
       }
-      else {
-        reject()
-      }
+    } catch {
+      reject();
+    } finally {
+      tempDiv.remove();
     }
-    catch {
-      reject()
-    }
-    finally {
-      tempDiv.remove()
-    }
-  })
+  });
 }
 
 /**
@@ -337,20 +332,19 @@ export async function copyRichTextToClipboard(html: string): Promise<void> {
 export async function copyTextWithPlainFallback(html: string, plainText: string): Promise<void> {
   if (isClipboardSupported()) {
     try {
-      await writeRichTextToClipboard(html, plainText)
-      return
-    }
-    catch {
+      await writeRichTextToClipboard(html, plainText);
+      return;
+    } catch {
       // Fall through to legacy
     }
   }
-  return copyTextLegacy(plainText)
+  return copyTextLegacy(plainText);
 }
 
 // Export aliases with refactored names
-export const Dk = copyTextToClipboard // Original: $$T0
-export const RM = injectTextDecoderFix // Original: $$E1
-export const Xt = copyRichTextToClipboard // Original: $$S2
-export const gX = ScriptLoadError // Original: $$m3
-export const k0 = loadScript // Original: $$f4
-export const wY = copyTextWithPlainFallback // Original: $$v5
+export const Dk = copyTextToClipboard; // Original: $$T0
+export const RM = injectTextDecoderFix; // Original: $$E1
+export const Xt = copyRichTextToClipboard; // Original: $$S2
+export const gX = ScriptLoadError; // Original: $$m3
+export const k0 = loadScript; // Original: $$f4
+export const wY = copyTextWithPlainFallback; // Original: $$v5

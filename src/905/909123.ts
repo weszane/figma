@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { hasContent } from "../figma_app/427318";
 import { liveStoreInstance } from "../905/713695";
@@ -52,12 +52,12 @@ let $$h0 = liveStoreInstance.Query({
     })).data.meta;
     if (s.resource && s.private_plugin) {
       let e = Error("Resource and Private Plugin cannot both be present");
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return e;
     }
     if (!s.resource && !s.private_plugin) {
       let e = Error("Resource or Private Plugin must be present");
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return e;
     }
     return s.resource ? s.resource : s.private_plugin ? s.private_plugin : void 0;

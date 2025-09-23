@@ -1,12 +1,12 @@
-import { $generateNodesFromDOM } from '@lexical/html'
-import { $convertToMarkdownString } from '@lexical/markdown'
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { $getRoot, $insertNodes, $isElementNode } from 'lexical'
-import { useEffect } from 'react'
-import { Fragment, jsx } from 'react/jsx-runtime'
-import { reportError } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { sanitizeAndNormalizeHtmlToDocument } from '../figma_app/9619'
+import { $generateNodesFromDOM } from '@lexical/html';
+import { $convertToMarkdownString } from '@lexical/markdown';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $getRoot, $insertNodes, $isElementNode } from 'lexical';
+import { useEffect } from 'react';
+import { Fragment, jsx } from 'react/jsx-runtime';
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { sanitizeAndNormalizeHtmlToDocument } from '../figma_app/9619';
 
 /**
  * Converts HTML string to Lexical editor state or Markdown string.
@@ -19,15 +19,12 @@ import { sanitizeAndNormalizeHtmlToDocument } from '../figma_app/9619'
  */
 // Original function name: $$p0
 export function convertHtmlToEditorState(htmlString: string, editor: any, outputFormat: 'json' | 'markdown', markdownConfig?: any): string {
-  let markdownResult = ''
-  let hasNoValidNodes = false
-
+  let markdownResult = '';
+  let hasNoValidNodes = false;
   editor.update(() => {
-    const document = sanitizeAndNormalizeHtmlToDocument(htmlString)
-    const generatedNodes = $generateNodesFromDOM(editor, document)
-    const validNodes = generatedNodes.filter(
-      node => !!node.getParent() || $isElementNode(node),
-    )
+    const document = sanitizeAndNormalizeHtmlToDocument(htmlString);
+    const generatedNodes = $generateNodesFromDOM(editor, document);
+    const validNodes = generatedNodes.filter(node => !!node.getParent() || $isElementNode(node));
 
     // Error reporting for invalid nodes
     if (validNodes.length !== generatedNodes.length) {
@@ -35,36 +32,27 @@ export function convertHtmlToEditorState(htmlString: string, editor: any, output
         extra: {
           htmlString,
           generatedNodes,
-          validNodesToInsert: validNodes,
-        },
-      })
+          validNodesToInsert: validNodes
+        }
+      });
     }
-
     if (validNodes.length === 0) {
-      hasNoValidNodes = true
+      hasNoValidNodes = true;
     }
-
-    $getRoot().clear()
-    $insertNodes(validNodes)
-
-    markdownResult
-      = hasNoValidNodes || outputFormat !== 'markdown'
-        ? ''
-        : $convertToMarkdownString(markdownConfig, undefined, true)
+    $getRoot().clear();
+    $insertNodes(validNodes);
+    markdownResult = hasNoValidNodes || outputFormat !== 'markdown' ? '' : $convertToMarkdownString(markdownConfig, undefined, true);
   }, {
-    discrete: true,
-  })
-
+    discrete: true
+  });
   if (outputFormat === 'markdown') {
-    return markdownResult
+    return markdownResult;
   }
-
   if (hasNoValidNodes) {
     // Return empty paragraph node if no valid nodes
-    return '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
+    return '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
   }
-
-  return JSON.stringify(editor.getEditorState().toJSON())
+  return JSON.stringify(editor.getEditorState().toJSON());
 }
 
 /**
@@ -73,18 +61,18 @@ export function convertHtmlToEditorState(htmlString: string, editor: any, output
  * @returns Empty Fragment.
  */
 // Original function name: $$m1
-export const HtmlToLexicalEffect: React.FC<{ htmlString: string }> = ({
-  htmlString,
+export const HtmlToLexicalEffect: React.FC<{
+  htmlString: string;
+}> = ({
+  htmlString
 }) => {
-  const [editor] = useLexicalComposerContext()
-
+  const [editor] = useLexicalComposerContext();
   useEffect(() => {
-    convertHtmlToEditorState(htmlString, editor, 'json')
-  }, [editor, htmlString])
-
-  return jsx(Fragment, {})
-}
+    convertHtmlToEditorState(htmlString, editor, 'json');
+  }, [editor, htmlString]);
+  return jsx(Fragment, {});
+};
 
 // Refactored exports
-export const D = convertHtmlToEditorState
-export const _ = HtmlToLexicalEffect
+export const D = convertHtmlToEditorState;
+export const _ = HtmlToLexicalEffect;

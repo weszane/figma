@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -413,7 +413,7 @@ let er = {
     } = _$$n(A, e);
     let q = calculateCostForSeatTypeIncrease();
     let M = _$$d({
-      reportErrorsToTeam: _$$e.SCALE
+      reportErrorsToTeam: ServiceCategories.SCALE
     });
     let O = isProrationBillingEnabledForCurrentPlan();
     let [L, P] = useState();

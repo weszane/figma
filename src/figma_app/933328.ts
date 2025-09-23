@@ -62,13 +62,13 @@ import { postUserFlag } from '../905/985254';
 import { LibraryFileSubscriptions, LibraryOrgSubscriptions, LibraryTeamSubscriptions, LibraryUserSubscriptions } from '../figma_app/43951';
 import { batchPutFileAction, filePutAction } from '../figma_app/78808';
 import { teamLibraryCache } from '../figma_app/80990';
-import { Ob } from '../figma_app/111825';
+import { EightSeven } from '../figma_app/111825';
 import { subscribedStateGroupsUniqueKeysFromLoadedPagesSelector, subscribedSymbolsUniqueKeysFromLoadedPagesSelector } from '../figma_app/141508';
 import { VariableSetIdCompatHandler } from '../figma_app/243058';
-import { e as _$$e2 } from '../figma_app/267183';
+import { setRecentlyUsed } from '../figma_app/267183';
 import { useSubscription } from '../figma_app/288654';
 import { trackFileEvent } from '../figma_app/314264';
-import { RX } from '../figma_app/409131';
+import { isModuleEnabled } from '../figma_app/409131';
 import { am, F$ } from '../figma_app/430563';
 import { fullscreenValue } from '../figma_app/455680';
 import { C$ } from '../figma_app/457074';
@@ -82,7 +82,7 @@ import { addTrackedState, deletedLoadingStates, flattenAssetsArray, generateDefa
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { loadingStateDelete, loadingStatePutFailure, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946';
 import { AppStateTsApi, Confirmation, CopyPasteType, FileSourceType, Fullscreen, LibraryPubSub, SceneIdentifier, StyleVariableOperation, TemplateType, VariablesBindings } from '../figma_app/763686';
-import { vP } from '../figma_app/864378';
+import { putProductComponentsThunk } from '../figma_app/864378';
 import { useLatestRef } from '../figma_app/922077';
 import { fu, xB } from '../figma_app/990334';
 
@@ -641,7 +641,7 @@ let insertSharedModule = createOptimistThunk(async (e, t) => {
   let {
     item
   } = t;
-  if (!RX(item)) return;
+  if (!isModuleEnabled(item)) return;
   let {
     canvasPosition,
     percentageOffset,
@@ -723,7 +723,7 @@ let insertMultipleSlideModules = createOptimistThunk(async (e, t) => {
     selectAfterInsert,
     errorCallback
   } = t;
-  if (modules.some(e => e.moduleSource !== TemplateType.SLIDES_TEMPLATE || !RX(e))) return;
+  if (modules.some(e => e.moduleSource !== TemplateType.SLIDES_TEMPLATE || !isModuleEnabled(e))) return;
   let m = e.getState();
   let g = getUserOrAnonymousId(m);
   let f = (e, t) => permissionScopeHandler.user('insert-module', () => Fullscreen.insertModule(e, {
@@ -767,7 +767,7 @@ let insertResponsiveSet = createOptimistThunk(async (e, t) => {
     percentOffsetX: percentageOffset?.x || 0.5,
     percentOffsetY: percentageOffset?.y || 0.5
   } : null;
-  _$$e2(item);
+  setRecentlyUsed(item);
   let m = (t, r) => {
     let i = cmsCollectionMappings?.collectionId ?? null;
     let a = cmsCollectionMappings ? new Map(Object.entries(cmsCollectionMappings.fieldSchemaMappings)) : null;
@@ -1583,7 +1583,7 @@ export async function loadComponentV2ByKey(store: any, componentKey: string, sou
       response.data.meta.state_components.forEach((stateComponent: any) => {
         itemsById[stateComponent.node_id] = stateComponent;
       });
-      store.dispatch(vP({
+      store.dispatch(putProductComponentsThunk({
         itemsById,
         fileKey: file.key,
         libraryKey: file.library_key,
@@ -1591,7 +1591,7 @@ export async function loadComponentV2ByKey(store: any, componentKey: string, sou
         type: PrimaryWorkflowEnum.COMPONENT
       }));
       if (parentStateGroup) {
-        store.dispatch(vP({
+        store.dispatch(putProductComponentsThunk({
           itemsById: {
             [parentStateGroup.key]: parentStateGroup
           },
@@ -1651,7 +1651,7 @@ export async function loadStateGroupByKey(e, t) {
     let i = atomStoreManager.get(filesByLibraryKeyAtom)[r.library_key];
     if (!i) return r;
     r.team_id = i.team_id;
-    e.dispatch(vP({
+    e.dispatch(putProductComponentsThunk({
       itemsById: n,
       fileKey: i.key,
       libraryKey: i.library_key,
@@ -1774,7 +1774,7 @@ const getLibraryStats = liveStoreInstance.Query({
 async function fetchLibraryStats(dispatch: any, orgId: string): Promise<any> {
   const request = DSAApiServiceInstance.getLibraries({
     orgId,
-    fv: Ob
+    fv: EightSeven
   });
   const loadingKey = `LIBRARY${orgId ? `_${orgId}` : ''}_STATS`;
   setupLoadingStateHandler(request, {
@@ -2268,7 +2268,7 @@ export function processAndDispatchLibraryItems(items: any[], type: PrimaryWorkfl
 
   // Dispatch grouped items
   Object.entries(groupedItems).forEach(([libraryKey, group]) => {
-    dispatch(vP({
+    dispatch(putProductComponentsThunk({
       itemsById: keyBy(group, item => item.node_id),
       fileKey: getFileKey()(group[0]),
       libraryKey,

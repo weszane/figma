@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
@@ -25,7 +25,7 @@ export function $$p0() {
     content: jsx(_$$a, {}),
     toolbar: jsx(_$$g, {}),
     errorBoundaryConfig: {
-      figmaTeam: _$$e.IAM,
+      figmaTeam: ServiceCategories.IAM,
       boundaryKeySuffix: "OrgIdpManagementPageView"
     }
   }) : null;

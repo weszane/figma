@@ -27,7 +27,6 @@ import { Ji, Zx, h0, qm } from "../figma_app/553488";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../905/521428";
 import { useSetAtom } from "../vendor/525001";
-import { setupResourceAtomHandler } from "../figma_app/566371";
 import { eE as _$$eE } from "../figma_app/106207";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
@@ -48,7 +47,7 @@ import { setupResourceAtomHandler } from "../905/713695";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e3 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { logInfo, logError } from "../905/714362";
 import { Point } from "../905/736624";
@@ -1094,7 +1093,7 @@ function to({
   let u = Xr(ux);
   let p = Xr(oQ);
   return (useEffect(() => {
-    o || ["loading", "loaded"].includes(t.status) || logInfo(_$$e3.SLIDES, `Query result status has unexpected value: ${t.status}`);
+    o || ["loading", "loaded"].includes(t.status) || logInfo(ServiceCategories.SLIDES, `Query result status has unexpected value: ${t.status}`);
   }, [o, t.status]), "loading" === t.status || o) ? jsxs(x, {
     children: [jsx(em, {
       title: "",
@@ -1147,7 +1146,7 @@ function tl({
         });
         return;
       }
-      e ? (logError(_$$e3.SLIDES, "Expected to find at least one module in slides template", {
+      e ? (logError(ServiceCategories.SLIDES, "Expected to find at least one module in slides template", {
         libraryKey: e
       }, {
         reportAsSentryError: !0
@@ -1156,7 +1155,7 @@ function tl({
         message: getI18nString("slides.templates.toast.no_longer_available"),
         error: !0,
         icon: VisualBellIcon.EXCLAMATION
-      }))) : logError(_$$e3.SLIDES, "No library key found for slides template", {}, {
+      }))) : logError(ServiceCategories.SLIDES, "No library key found for slides template", {}, {
         reportAsSentryError: !0
       });
       d({

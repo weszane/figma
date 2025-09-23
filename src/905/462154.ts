@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { c as _$$c } from '../905/231180';
 import { g4 } from '../905/368836';
 import { debugState } from '../905/407919';
@@ -153,7 +153,7 @@ export let $$C1 = async ({
     }));
     return b;
   } catch (e) {
-    e instanceof FI && (logDebug('Magic Link', JSON.stringify(e.looseNodeInfo)), reportError(_$$e.PROTOTYPING, new Error(e.toString())));
+    e instanceof FI && (logDebug('Magic Link', JSON.stringify(e.looseNodeInfo)), reportError(ServiceCategories.PROTOTYPING, new Error(e.toString())));
     T(Zh({
       name: 'prototype.ai_magic_link_completed',
       params: {

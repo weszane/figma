@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Button } from "../905/521428";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
@@ -14,7 +14,7 @@ export function $$m0(e, t) {
     children: jsx(ErrorBoundaryCrash, {
       boundaryKey: t,
       fallback: jsx(h, {}),
-      team: _$$e.UNOWNED,
+      team: ServiceCategories.UNOWNED,
       children: e.children
     })
   };

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { analyticsEventManager } from "../905/449184";
 import { xD } from "../905/174697";
 import { useWebLoggerTimerEffect } from "../905/485103";
@@ -87,7 +87,7 @@ export function $$I0({
   }), !x || null === i || N) ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: "TileActionDropdown",
     sentryTags: {
-      area: _$$e.WAYFINDING
+      area: ServiceCategories.WAYFINDING
     },
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(w, {

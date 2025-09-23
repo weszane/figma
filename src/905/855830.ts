@@ -7,7 +7,7 @@ import { DeepLinkType, DevModeUI, PluginAction, UISection } from '../905/15667';
 import { getRumLoggingConfig } from '../905/16237';
 import { registerModal } from '../905/102752';
 import { popModalStack } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { getMPVisibleTheme } from '../905/187165';
 import { W as _$$W } from '../905/200727';
 import { h as _$$h } from '../905/207101';
@@ -94,7 +94,7 @@ function L(e, t, i, n) {
     case DeepLinkType.DOWNGRADE_EMAIL:
     case DeepLinkType.LIFECYCLE_REUPGRADE_EMAIL:
       if (void 0 === t) {
-        reportError(_$$e.MONETIZATION_EXPANSION, new Error('Undefined seatTypeKey passed in for User Settings entrypoint'));
+        reportError(ServiceCategories.MONETIZATION_EXPANSION, new Error('Undefined seatTypeKey passed in for User Settings entrypoint'));
         break;
       }
       switch (t) {
@@ -510,7 +510,7 @@ export function $$eb0(e) {
     boundaryKey: 'RequestUpgradeModal',
     fallback: jsx('div', {}),
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     severity: SeverityLevel.Critical,
     onError: () => {

@@ -1,5 +1,5 @@
 import { A$ } from "../figma_app/728005";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -72,7 +72,7 @@ export async function $$A2(e, t) {
     }
     return [[n, i], [{}, {}]];
   } catch (e) {
-    reportError(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
       extra: {
         toolName: t
       }
@@ -238,7 +238,7 @@ async function O({
       }
     } catch (e) {
       console.error("Error processing instance Code Connect:", e);
-      reportError(_$$e.DEVELOPER_TOOLS, e, {
+      reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
         extra: {
           instances: E,
           codeConnectDocRaw: u
@@ -250,7 +250,7 @@ async function O({
       y = JSON.parse(g.figmadoc);
     } catch (e) {
       console.error("Error parsing Code Connect:", e);
-      reportError(_$$e.DEVELOPER_TOOLS, e, {
+      reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
         extra: {
           figmadoc: g.figmadoc
         }

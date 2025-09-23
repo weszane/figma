@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
@@ -31,7 +31,7 @@ export function $$A3(e, t) {
     onFailure: t => {
       let i = atomStoreManager.get(UV);
       let l = Jw(i);
-      logError(_$$e.PROJECT_BUZZ, f, {
+      logError(ServiceCategories.PROJECT_BUZZ, f, {
         publishState: i,
         publishStep: l,
         error: t
@@ -104,7 +104,7 @@ let b = {
     } = e;
     let c = atomStoreManager.get(UV);
     let u = Jw(c);
-    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(_$$e.PROJECT_BUZZ, f, {
+    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.PROJECT_BUZZ, f, {
       publishState: c,
       publishStep: u,
       error

@@ -9,7 +9,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
 import { getAssetsForLibraryKey } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
-import { n as _$$n } from "../905/64411";
+import { getPublishedComponentsForLibraryThunk } from "../905/64411";
 let m = "\x3c!--(figcomponent)";
 let $$g1 = createOptimistThunk((e, t) => {
   let r = t.dataTransfer?.getData("text/html");
@@ -51,12 +51,12 @@ let $$f0 = createOptimistThunk(async (e, t) => {
   let g = getSelectedFile(m);
   let f = null;
   if (g && g.key === fileKey) f = m.library.local.components[nodeId] ?? null;else {
-    m.fileByKey[fileKey] || (await e.dispatch(_$$n({
+    m.fileByKey[fileKey] || (await e.dispatch(getPublishedComponentsForLibraryThunk({
       libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState());
     let t = m.fileByKey[fileKey];
     let n = t ? _$$l(t) : void 0;
-    !n || (f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null) || (await e.dispatch(_$$n({
+    !n || (f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null) || (await e.dispatch(getPublishedComponentsForLibraryThunk({
       libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState(), f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null);
   }

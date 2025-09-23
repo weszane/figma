@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { FolderSortKey } from "../905/316062";
 import { SortingCriteria } from "../figma_app/162807";
@@ -33,7 +33,7 @@ export function $$l0(e) {
       return SortType.OTHER;
     default:
       let t = Error(`Uncaught sort key: ${e}`);
-      reportError(_$$e.WAYFINDING, t);
+      reportError(ServiceCategories.WAYFINDING, t);
       return SortType.OTHER;
   }
 }

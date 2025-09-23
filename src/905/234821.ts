@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { splitEmojiAndSkinTone } from "../905/403166";
 import { Xm } from "../905/723791";
@@ -13,7 +13,7 @@ export function $$m2() {
   let [t, i] = useState(null);
   getFeatureFlags().usecommentscontext_warn_no_provider && null === t && void 0 === e && i(Error("useCommentsContext called outside of a LoadedCommentsContextProvider"));
   useEffect(() => {
-    t && reportError(_$$e.WAYFINDING, t);
+    t && reportError(ServiceCategories.WAYFINDING, t);
   }, [t]);
   return e;
 }

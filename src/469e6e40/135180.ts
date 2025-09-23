@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
@@ -408,7 +408,7 @@ export function $$et0(e) {
       planId: e.planId
     }),
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: "AbandonedDraftFilesPageView"
     }
   });

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useContext, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "../vendor/635";
@@ -217,7 +217,7 @@ let er = memo(function (e) {
   let e$ = useCallback(e => {
     if (ez) {
       if ("function" != typeof ez.onViewportUpdate) {
-        reportError(_$$e.WAYFINDING, Error("pinRenderer.onViewportUpdate is not a function"), {
+        reportError(ServiceCategories.WAYFINDING, Error("pinRenderer.onViewportUpdate is not a function"), {
           extra: {
             pinRendererProperties: Object.getOwnPropertyNames(ez)
           }

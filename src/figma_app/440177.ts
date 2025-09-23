@@ -30,7 +30,7 @@ import { ck, Rh, x$, iV } from "../figma_app/887579";
 import { d7, s0, Kx, hN, n5, yg } from "../figma_app/261761";
 import { yY, n1, Q5, qR, bN, cx } from "../figma_app/811711";
 import { L as _$$L2 } from "../figma_app/467950";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { D as _$$D } from "../figma_app/451499";
 import { filterValidImagePaints, hashToHexString } from "../figma_app/385874";
@@ -292,7 +292,7 @@ function Q(e) {
       onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
-        reportError(_$$e.FIGJAM, r, {
+        reportError(ServiceCategories.FIGJAM, r, {
           extra: {
             type: typeof t,
             value: t,

@@ -21,7 +21,7 @@ import { Um } from "../905/848862";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { a3, ow } from "../905/188421";
 import { c$, sK } from "../905/794875";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { c$ as _$$c$, bL, l9, mc } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { reportError } from "../905/11";
@@ -69,7 +69,7 @@ function F({
   let c = useMemo(() => null == l || 0 === d.length ? new Map() : new Map(d.map(e => {
     let t = e.id;
     let i = e.fields.find(e => e.fieldSchemaId === l)?.value;
-    return null == i || 0 === i.length ? (reportError(_$$e.CMS, Error("item slug is null or empty when computing CMS item page link options"), {
+    return null == i || 0 === i.length ? (reportError(ServiceCategories.CMS, Error("item slug is null or empty when computing CMS item page link options"), {
       extra: {
         itemId: t,
         itemSlug: i
@@ -81,7 +81,7 @@ function F({
     var t;
     return jsx(_$$c$, {
       value: e.id,
-      children: (t = e.id, c.get(t) || (reportError(_$$e.CMS, Error("invalid slug name when formatting a CMS item page link"), {
+      children: (t = e.id, c.get(t) || (reportError(ServiceCategories.CMS, Error("invalid slug name when formatting a CMS item page link"), {
         extra: {
           itemId: t
         }
@@ -92,7 +92,7 @@ function F({
     value: s,
     onChange: e => {
       if (null == e) {
-        reportError(_$$e.CMS, Error("item id is null when setting CMS item page link (slug selector)"));
+        reportError(ServiceCategories.CMS, Error("item id is null when setting CMS item page link (slug selector)"));
         return;
       }
       i({

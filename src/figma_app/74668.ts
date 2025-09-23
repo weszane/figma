@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useLayoutEffect, forwardRef, useRef, useImperativeHandle, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { d as _$$d } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R } from "../905/621802";
@@ -782,7 +782,7 @@ function ef({
       variableThumbnailIconType: sW.NONE
     });
   } catch (t) {
-    reportError(_$$e.CMS, Error("could not parse CMS image field value for VariableListCMSFieldItem thumbnail"), {
+    reportError(ServiceCategories.CMS, Error("could not parse CMS image field value for VariableListCMSFieldItem thumbnail"), {
       extra: {
         cmsItemFieldId: e.itemField.id,
         collectionFieldSchemaId: e.value.id

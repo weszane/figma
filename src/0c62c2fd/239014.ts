@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { o as _$$o } from "../905/530496";
 import { Xr } from "../figma_app/27355";
@@ -117,7 +117,7 @@ export function $$N1(e) {
       let t = JSON.parse(e.file.pagesSignedThumbnailData.data);
       return I.parse(t);
     } catch (r) {
-      reportError(_$$e.FIGJAM, Error(`PageSummaryPreview: Failed to parse page thumbnail data. Error: ${r.message}.`), {
+      reportError(ServiceCategories.FIGJAM, Error(`PageSummaryPreview: Failed to parse page thumbnail data. Error: ${r.message}.`), {
         tags: {
           fileKey: t?.key
         },

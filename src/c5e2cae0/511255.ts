@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, Suspense } from "react";
 import { useDispatch, connect } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
@@ -489,7 +489,7 @@ export let $$er0 = connect(e => {
 })(withTracking(function (e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeMultiTeamModal",
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     fallback: jsx(_$$K, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {

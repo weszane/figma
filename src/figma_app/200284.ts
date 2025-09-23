@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, Component, PureComponent, useId, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { Button, ButtonWide } from "../905/521428";
 import { c$, bL, l9, mc } from "../905/493196";
@@ -206,7 +206,7 @@ class eI extends Component {
         this.waitingForGIF && this.setState({
           animatedImage: _$$J(e)
         });
-      }).catch(e => reportError(_$$e.FIGJAM, e));
+      }).catch(e => reportError(ServiceCategories.FIGJAM, e));
     };
     this.loadVideoJs = async () => {
       if (!this.state.videoJsLib) {

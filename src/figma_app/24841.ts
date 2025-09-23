@@ -1,6 +1,6 @@
 import { xv } from "../figma_app/701982";
 import { xv as _$$xv } from "../figma_app/701982";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -47,7 +47,7 @@ let $$x2 = createOptimistThunk(async e => {
       return;
     }
   } catch (e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
   }
   e.dispatch(N());
 });
@@ -86,7 +86,7 @@ let $$C5 = createOptimistThunk(async (e, t) => {
       }));
     } else e.dispatch(O(t));
   } catch (r) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
     e.dispatch(O(t));
   }
 });

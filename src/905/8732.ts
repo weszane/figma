@@ -5,7 +5,7 @@ import { zK } from "../figma_app/913823";
 import { sw } from "../figma_app/914957";
 import { isTrackedState } from "../figma_app/646357";
 import { CX } from "../905/557338";
-import { n as _$$n } from "../905/64411";
+import { getPublishedComponentsForLibraryThunk } from "../905/64411";
 let $$u0 = createActionCreator("SHOW_INSTANCE_SWAP_PICKER");
 let $$p1 = createActionCreator("HIDE_INSTANCE_SWAP_PICKER");
 let $$m2 = createOptimistThunk((e, t) => {
@@ -20,7 +20,7 @@ let $$m2 = createOptimistThunk((e, t) => {
     modal,
     returnFocusToToggle
   } = t;
-  instanceSwapPickerShown.isShown && instanceSwapPickerShown.id === id ? e.dispatch($$p1()) : initialPosition && (e.dispatch(zK()), r && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", r) && e.dispatch(_$$n({
+  instanceSwapPickerShown.isShown && instanceSwapPickerShown.id === id ? e.dispatch($$p1()) : initialPosition && (e.dispatch(zK()), r && !isTrackedState("INVALID-FILE-KEY-SHOULD-BE-REMOVED", r) && e.dispatch(getPublishedComponentsForLibraryThunk({
     libraryKey: r
   })), e.dispatch($$u0({
     id,

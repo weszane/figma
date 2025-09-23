@@ -10,7 +10,7 @@ import { selectViewAction } from "../905/929976";
 import { Z, kq } from "../905/292918";
 import { Ad } from "../905/300250";
 import { setProgressBarState } from "../figma_app/91703";
-import { Nf } from "../figma_app/864378";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { isBranchAlt } from "../905/760074";
 import { rJ } from "../905/327855";
 import { setFileInfo } from "../figma_app/682945";
@@ -89,7 +89,7 @@ let $$S0 = createOptimistThunk(e => {
         user: t.user,
         branchModalTrackingId: i.mergeParams.branchModalTrackingId
       }));
-      e.dispatch(Nf());
+      e.dispatch(updateLocalLibraryItemsThunk());
     } else e.dispatch(kq(i.mergeParams));
   }
   let {

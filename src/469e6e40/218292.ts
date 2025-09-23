@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { bL, mc, wv, c$ } from "../905/493196";
 import { reportError } from "../905/11";
 import { X } from "../469e6e40/721568";
@@ -19,7 +19,7 @@ export function $$c0({
 }) {
   let p = a.filter(e => !d(e)).find(e => c(e) === m);
   return (useEffect(() => {
-    p || reportError(_$$e.SCALE, Error("[Members table - SelectCell] currently selected value not found in options list"), {
+    p || reportError(ServiceCategories.SCALE, Error("[Members table - SelectCell] currently selected value not found in options list"), {
       extra: {
         currentValue: m,
         options: a

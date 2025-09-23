@@ -14,7 +14,7 @@ import { J as _$$J } from '../905/129695';
 import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { InputComponent } from '../905/185998';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -478,7 +478,7 @@ function ed(e) {
 let ec = forwardRef((e, t) => jsx(ErrorBoundaryCrash, {
   boundaryKey: e.errorBoundaryKey,
   sentryTags: {
-    area: _$$e.IAM
+    area: ServiceCategories.IAM
   },
   fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
   children: jsx(TrackingProvider, {

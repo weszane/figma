@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { N as _$$N } from "../905/301843";
@@ -317,7 +317,7 @@ export function $$ea1({
   });
   return useCallback(() => {
     if (JT(e)) {
-      reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for a local extension, which should not be possible."), {
+      reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for a local extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
           isWidget: manifestContainsWidget(e.extension),
@@ -327,7 +327,7 @@ export function $$ea1({
       return;
     }
     if (!e.publishedExtension) {
-      reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for an extension without a published extension, which should not be possible."), {
+      reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for an extension without a published extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
           isWidget: manifestContainsWidget(e.extension),

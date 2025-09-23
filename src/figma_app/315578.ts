@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { J } from "../905/125993";
 import { D } from "../905/716990";
@@ -29,9 +29,9 @@ function x({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "varDetails_inspectEntry",
     fallback: jsx(O, {}),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.variables.details_button_aria_label"),
@@ -57,9 +57,9 @@ function N({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "suggestedVars_inspectEntry",
     fallback: jsx(O, {}),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
@@ -87,9 +87,9 @@ function C({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "styleDetails_inspectEntry",
     fallback: jsx(O, {}),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.styles.details_button_aria_label"),

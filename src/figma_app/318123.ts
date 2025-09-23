@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IPanelType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
@@ -102,7 +102,7 @@ let ea = atom(null, async (e, t, {
   pageNodeId: S
 }) => {
   let v;
-  if (null === r && reportError(_$$e.AI_PRODUCTIVITY, Error("No file key provided for FigJam AI Generate request")), !i) return {
+  if (null === r && reportError(ServiceCategories.AI_PRODUCTIVITY, Error("No file key provided for FigJam AI Generate request")), !i) return {
     status: _$$c.NONE
   };
   t(Mg, e => e + 1);
@@ -145,7 +145,7 @@ let ea = atom(null, async (e, t, {
     };
     h5(r, 0, 1, i, "inappropriate", s, T, c, y, b);
     fK(r, e.message);
-    e.reportToSentry && reportError(_$$e.AI_PRODUCTIVITY, a);
+    e.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, a);
     t($$ee14, v);
     return v;
   }
@@ -198,7 +198,7 @@ let ea = atom(null, async (e, t, {
         errorMessage: t.message,
         trace: e.trace
       };
-      t.reportToSentry && reportError(_$$e.AI_PRODUCTIVITY, e);
+      t.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, e);
       fK(r, t.message);
     }
   }
@@ -217,7 +217,7 @@ let $$es15 = atom(null, (e, t, {
 }) => {
   let p = e(openFileKeyAtom);
   if (null === p || 0 === p.length) {
-    reportError(_$$e.AI_PRODUCTIVITY, Error("No file key found for loaded file to use for FigJam AI Generate request"));
+    reportError(ServiceCategories.AI_PRODUCTIVITY, Error("No file key found for loaded file to use for FigJam AI Generate request"));
     return;
   }
   t(ea, {

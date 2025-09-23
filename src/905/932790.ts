@@ -3,7 +3,7 @@ import { $7, Sy, yq, Ao, CN, Wz } from "../figma_app/651866";
 import { LI, qk, xK } from "../905/543466";
 import { ImageSourceType } from "../905/585727";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -85,7 +85,7 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
           e.node && e.node.isAlive && c(e.node.guid);
         });
         commitId && (m = commitId);
-        status !== Sy.SUCCESS || commitId || reportError(_$$e.AI_PRODUCTIVITY, Error("Content fill missing commit id after successful text replacement"), {
+        status !== Sy.SUCCESS || commitId || reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Content fill missing commit id after successful text replacement"), {
           extra: {
             replaceableNodes: e,
             commitId,
@@ -165,7 +165,7 @@ async function N(e, t, i, n, a, s, o, d = !1) {
     c.numReplaced = O.numReplaced;
     return c;
   } catch (i) {
-    reportError(_$$e.AI_PRODUCTIVITY, i, {
+    reportError(ServiceCategories.AI_PRODUCTIVITY, i, {
       extra: {
         replaceableNodesLength: t.length,
         exampleNodesLength: e.length
@@ -200,7 +200,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
     let y = LI(e, i, h, t, u);
     if (!y) {
       let e = new SA("Can't regenerate text - no selected nodes");
-      reportError(_$$e.AI_PRODUCTIVITY, e);
+      reportError(ServiceCategories.AI_PRODUCTIVITY, e);
       return e;
     }
     if (!y.continuationNodes.length) throw new SA("Can't regenerate text - no replaceable nodes", {
@@ -215,7 +215,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
     }
     if (0 === b.numReplaced && m > 1) {
       let e = new YK("Failed to replace text content in all rows");
-      reportError(_$$e.AI_PRODUCTIVITY, e, {
+      reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
         extra: {
           attempts: m
         }
@@ -226,7 +226,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
   }
   if (m > 4) {
     let e = new YK("Failed to replace text content in all rows after maximum retries");
-    reportError(_$$e.AI_PRODUCTIVITY, e, {
+    reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
       extra: {
         attempts: m,
         max_attempts: 4

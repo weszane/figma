@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { assert, debug } from "../figma_app/465776";
 import { encodeStringToBase64, encodeBase64 } from "../905/561685";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { isExactModifier, ModifierKeyCodes, KeyCodes } from "../905/63728";
@@ -141,7 +141,7 @@ class K extends RecordingPureComponent {
           parameter: i.name,
           keyPress: t
         });
-        reportError(_$$e.EXTENSIBILITY, Error(n));
+        reportError(ServiceCategories.EXTENSIBILITY, Error(n));
         return;
       }
       let a = this.state.items[e];
@@ -381,7 +381,7 @@ class K extends RecordingPureComponent {
     this.ranWithParameters && e.requiredEntered !== e.requiredCount && (logInfo("PluginParameterEntry", "Parameter entry mismatch", {
       requiredParameters: this.props.parameters,
       parameterValues: this.state.parameterValues
-    }), reportError(_$$e.EXTENSIBILITY, Error("Plugin ran successfully with parameters, but not all parameters were recorded")));
+    }), reportError(ServiceCategories.EXTENSIBILITY, Error("Plugin ran successfully with parameters, but not all parameters were recorded")));
     let t = ov({
       ...this.props,
       qaVersion: U3
@@ -723,12 +723,12 @@ W.displayName = "ParameterSuggestion";
 class J extends RecordingPureComponent {
   render() {
     let e = new URL(this.props.src);
-    return e.hostname === window.location.hostname ? (reportError(_$$e.EXTENSIBILITY, Error("same-origin URL blocked in UntrustedImage")), jsx(Fragment, {})) : ["https:", "http:", "data:", "blob:"].includes(e.protocol) ? jsx("img", {
+    return e.hostname === window.location.hostname ? (reportError(ServiceCategories.EXTENSIBILITY, Error("same-origin URL blocked in UntrustedImage")), jsx(Fragment, {})) : ["https:", "http:", "data:", "blob:"].includes(e.protocol) ? jsx("img", {
       src: this.props.src,
       className: this.props.className,
       crossOrigin: "anonymous",
       alt: ""
-    }) : (reportError(_$$e.EXTENSIBILITY, Error("Unexpected protocol blocked in UntrustedImage")), jsx(Fragment, {}));
+    }) : (reportError(ServiceCategories.EXTENSIBILITY, Error("Unexpected protocol blocked in UntrustedImage")), jsx(Fragment, {}));
   }
 }
 J.displayName = "UntrustedImage";

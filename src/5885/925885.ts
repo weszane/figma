@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { getPaymentFlowData } from "../figma_app/169182";
@@ -134,7 +134,7 @@ let $$D3 = createOptimistThunk((e, {
       G = F.payment.cartSelections?.countBySeatType ?? null;
     } else {
       e.dispatch(FlashActions.error(getI18nString("payments.errors.error_processing_upgrade_request")));
-      reportError(_$$e.MONETIZATION_UPGRADES, Error("Unable to retrieve valid selectedUserSeatTypes while submitting Pro upgrade request"), {
+      reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Unable to retrieve valid selectedUserSeatTypes while submitting Pro upgrade request"), {
         extra: {
           teamId: h,
           userIds: i,
@@ -335,7 +335,7 @@ let $$D3 = createOptimistThunk((e, {
       error_message: o,
       request_params: JSON.stringify(L)
     }) : trackEventAnalytics("Pro Checkout Error");
-    reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Pro checkout API failed: ${o}`), {
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`[Billing] Pro checkout API failed: ${o}`), {
       extra: {
         countByBillableProduct: G,
         selectedUserSeatTypes: q,

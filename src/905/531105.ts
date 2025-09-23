@@ -1,105 +1,88 @@
-import type { WidgetContext } from '../905/250412'
-import type { Fn } from '../../types/global'
-import { isObject, omit } from 'lodash-es'
-import { z } from 'zod'
-import { reportError } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { widgetErrorTracker } from '../905/250412'
-import {
-  extractFontProps,
-  extractTextRanges,
-  resolveFont,
-  splitTextStyle,
-} from '../905/285398'
-import { getGradientTransformMatrix } from '../905/409381'
-import { validateAndCollectErrors } from '../905/816730'
-import {
-  arcProps,
-  autoLayoutFramePropsFn,
-  clickableElementProps,
-  elementWithChildrenProps,
-  genericElementProps,
-  imageElementProps,
-  lineElementProps,
-  textInputProps,
-  vectorElementProps,
-} from '../905/828428'
-import { InternalError } from '../905/845428'
-import { filterNotNullish } from '../figma_app/656233'
-
+import type { WidgetContext } from '../905/250412';
+import type { Fn } from '../../types/global';
+import { isObject, omit } from 'lodash-es';
+import { z } from 'zod';
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { widgetErrorTracker } from '../905/250412';
+import { extractFontProps, extractTextRanges, resolveFont, splitTextStyle } from '../905/285398';
+import { getGradientTransformMatrix } from '../905/409381';
+import { validateAndCollectErrors } from '../905/816730';
+import { arcProps, autoLayoutFramePropsFn, clickableElementProps, elementWithChildrenProps, genericElementProps, imageElementProps, lineElementProps, textInputProps, vectorElementProps } from '../905/828428';
+import { InternalError } from '../905/845428';
+import { filterNotNullish } from '../figma_app/656233';
 interface RenderMetaData {
-  onTextEditEnd: any
-  direction: any
-  onClick: any
-  height: any
-  y: number
-  x: number
-  constraints: any
-  width?: number
-  fillSrc?: string
-  key?: string
-  children?: any
-  src?: string
+  onTextEditEnd: any;
+  direction: any;
+  onClick: any;
+  height: any;
+  y: number;
+  x: number;
+  constraints: any;
+  width?: number;
+  fillSrc?: string;
+  key?: string;
+  children?: any;
+  src?: string;
 }
-
 interface Props {
-  widgetInputBehavior: any
-  counterAxisSpacing: number
-  itemSpacing: number
-  layoutMode: string
-  arcData: any
-  counterAxisAlignItems: string
-  primaryAxisAlignItems: string
-  layoutWrap: string
-  maxHeight: any
-  maxWidth: any
-  minWidth: any
-  layoutPositioning: string
-  widgetHoverStyle: any
-  widgetTooltip: any
-  strokeCap: any
-  dashPattern: any
-  strokeAlign: any
-  strokeWeight: any
-  strokes: any[]
-  rotation: any
-  sharedPluginData?: any
-  pluginData?: any
-  fills?: any
-  fontName?: any
-  letterSpacing?: any
-  lineHeight?: any
-  textDecoration?: string
-  textCase?: string
-  fontSize?: number
-  hyperlink?: { type: 'URL', value: string }
-  textTruncation?: 'ENDING' | 'DISABLED'
-  maxLines?: number | null
-  name?: string
-  blendMode?: string
-  opacity?: number
-  visible?: boolean
-  layout?: string
-  cornerRadius?: number
-  bottomLeftRadius?: number
-  bottomRightRadius?: number
-  topLeftRadius?: number
-  topRightRadius?: number
-  effects?: any[]
+  widgetInputBehavior: any;
+  counterAxisSpacing: number;
+  itemSpacing: number;
+  layoutMode: string;
+  arcData: any;
+  counterAxisAlignItems: string;
+  primaryAxisAlignItems: string;
+  layoutWrap: string;
+  maxHeight: any;
+  maxWidth: any;
+  minWidth: any;
+  layoutPositioning: string;
+  widgetHoverStyle: any;
+  widgetTooltip: any;
+  strokeCap: any;
+  dashPattern: any;
+  strokeAlign: any;
+  strokeWeight: any;
+  strokes: any[];
+  rotation: any;
+  sharedPluginData?: any;
+  pluginData?: any;
+  fills?: any;
+  fontName?: any;
+  letterSpacing?: any;
+  lineHeight?: any;
+  textDecoration?: string;
+  textCase?: string;
+  fontSize?: number;
+  hyperlink?: {
+    type: 'URL';
+    value: string;
+  };
+  textTruncation?: 'ENDING' | 'DISABLED';
+  maxLines?: number | null;
+  name?: string;
+  blendMode?: string;
+  opacity?: number;
+  visible?: boolean;
+  layout?: string;
+  cornerRadius?: number;
+  bottomLeftRadius?: number;
+  bottomRightRadius?: number;
+  topLeftRadius?: number;
+  topRightRadius?: number;
+  effects?: any[];
 }
-
 interface MapperContext extends WidgetContext {
-  enableFullJsx?: boolean
-  isLocalWidget?: boolean
-  widgetApiVersion?: string
+  enableFullJsx?: boolean;
+  isLocalWidget?: boolean;
+  widgetApiVersion?: string;
 }
-
-type MapperFunction = (
-  element: { props: Props, renderMetaData: RenderMetaData, type?: string },
-  inputProps: any,
-  value: any,
-  context: MapperContext,
-) => void
+type MapperFunction = (element: {
+  props: Props;
+  renderMetaData: RenderMetaData;
+  type?: string;
+}, inputProps: any, value: any, context: MapperContext) => void;
 let defaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -127,15 +110,15 @@ let defaultPropsForVersion = {
       r: 0,
       g: 0,
       b: 0,
-      a: 1,
+      a: 1
     },
-    type: 'solid',
+    type: 'solid'
   },
   blendMode: 'pass-through',
   fontWeight: 400,
   paragraphIndent: 0,
-  paragraphSpacing: 0,
-}
+  paragraphSpacing: 0
+};
 let inputDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -162,16 +145,16 @@ let inputDefaultPropsForVersion = {
       r: 0,
       g: 0,
       b: 0,
-      a: 1,
+      a: 1
     },
-    type: 'solid',
+    type: 'solid'
   },
   blendMode: 'pass-through',
   fontWeight: 400,
   paragraphIndent: 0,
   paragraphSpacing: 0,
-  multiline: !1,
-}
+  multiline: !1
+};
 let frameDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -187,8 +170,8 @@ let frameDefaultPropsForVersion = {
   strokeAlign: 'inside',
   rotation: 0,
   cornerRadius: 0,
-  overflow: 'hidden',
-}
+  overflow: 'hidden'
+};
 let autolayoutDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -211,8 +194,8 @@ let autolayoutDefaultPropsForVersion = {
   spacing: 0,
   padding: 0,
   horizontalAlignItems: 'start',
-  verticalAlignItems: 'start',
-}
+  verticalAlignItems: 'start'
+};
 let rectangleDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -227,8 +210,8 @@ let rectangleDefaultPropsForVersion = {
   strokeAlign: 'inside',
   rotation: 0,
   flipVertical: !1,
-  cornerRadius: 0,
-}
+  cornerRadius: 0
+};
 let EllipseDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -242,8 +225,8 @@ let EllipseDefaultPropsForVersion = {
   strokeWidth: 1,
   strokeAlign: 'inside',
   rotation: 0,
-  flipVertical: !1,
-}
+  flipVertical: !1
+};
 let lineDefaultPropsForVersion = {
   name: '',
   hidden: !1,
@@ -256,75 +239,74 @@ let lineDefaultPropsForVersion = {
   length: 100,
   strokeCap: 'none',
   x: 0,
-  y: 0,
-}
-
+  y: 0
+};
 function createJSXMapper(e: Fn) {
   return (element: any, i: any, n: any, r: any) => {
-    r.enableFullJsx && e(element, i, n, r)
-  }
+    r.enableFullJsx && e(element, i, n, r);
+  };
 }
 let createComponentIdMapper = createJSXMapper((e, t, i, _n) => {
-  e.props.componentId = i
-})
+  e.props.componentId = i;
+});
 let createComponentPropsMapper = createJSXMapper((e, t, i, _n) => {
-  e.props.componentProps = i
-})
+  e.props.componentProps = i;
+});
 let createComponentPropsNestedMapper = createJSXMapper((e, t, i, _n) => {
-  e.props.componentPropsNested = i
-})
+  e.props.componentPropsNested = i;
+});
 let createJSXVisibilityMapper = createJSXMapper((e, t, i, _n) => {
-  e.props.nestedInstancesVisibility = i
-})
+  e.props.nestedInstancesVisibility = i;
+});
 let mapSharedPluginData: MapperFunction = (e, t, i, context) => {
-  context.enableFullJsx && (e.props.sharedPluginData = i)
-}
+  context.enableFullJsx && (e.props.sharedPluginData = i);
+};
 let mapPluginData: MapperFunction = (e, t, i, n) => {
-  n.enableFullJsx && (e.props.pluginData = i)
-}
+  n.enableFullJsx && (e.props.pluginData = i);
+};
 let mapWidth: MapperFunction = (e, t, i, _n) => {
-  e.renderMetaData.width = i
-}
+  e.renderMetaData.width = i;
+};
 let mapFills: MapperFunction = (e, t, i, n) => {
-  i?.type === 'image' && (e.renderMetaData.fillSrc = i.src)
-  let r = Array.isArray(i) ? i : [i]
-  e.props.fills = mapFillsUtil(r, 'fill', n)
-}
+  i?.type === 'image' && (e.renderMetaData.fillSrc = i.src);
+  let r = Array.isArray(i) ? i : [i];
+  e.props.fills = mapFillsUtil(r, 'fill', n);
+};
 let mapKey: MapperFunction = (e, t, _i, _n) => {
-  e.renderMetaData.key = String(t.key)
-}
+  e.renderMetaData.key = String(t.key);
+};
 let mapFontName: MapperFunction = (e, t, i, _n) => {
-  e.props.fontName = i
-}
+  e.props.fontName = i;
+};
 let mapLetterSpacing: MapperFunction = (e, t, i, _n) => {
-  let r = z.union([z.number(), z.string()]).default(0).transform(parseUnit)
-  e.props.letterSpacing = r.parse(i)
-}
+  let r = z.union([z.number(), z.string()]).default(0).transform(parseUnit);
+  e.props.letterSpacing = r.parse(i);
+};
 let mapLineHeight: MapperFunction = (e, t, i, _n) => {
-  let r = z.union([z.number(), z.string()]).default('auto').transform(parseUnit)
-  e.props.lineHeight = r.parse(i)
-}
+  let r = z.union([z.number(), z.string()]).default('auto').transform(parseUnit);
+  e.props.lineHeight = r.parse(i);
+};
 let mapTextDecoration: MapperFunction = (e, t, i, _n) => {
-  let r = z.string().default('none').transform(toEnumFormat)
-  e.props.textDecoration = r.parse(i)
-}
+  let r = z.string().default('none').transform(toEnumFormat);
+  e.props.textDecoration = r.parse(i);
+};
 let mapTextCase: MapperFunction = (e, t, i, _n) => {
-  let r = z.string().default('original').transform(toEnumFormat)
-  e.props.textCase = r.parse(i)
-}
+  let r = z.string().default('original').transform(toEnumFormat);
+  e.props.textCase = r.parse(i);
+};
 let mapFontSize: MapperFunction = (e, t, i, _n) => {
-  let r = z.number().default(16)
-  e.props.fontSize = r.parse(i)
-}
+  let r = z.number().default(16);
+  e.props.fontSize = r.parse(i);
+};
 let mapChildren: MapperFunction = (e, t, i, _n) => {
-  e.renderMetaData.children = i
-}
+  e.renderMetaData.children = i;
+};
 let mapHyperlink: MapperFunction = (e, t, _i, _n) => {
   e.props.hyperlink = {
     type: 'URL',
-    value: t.href,
-  }
-}
+    value: t.href
+  };
+};
 /**
  * Maps text truncation props to the appropriate element properties.
  * Original name: mapTextTruncation
@@ -335,229 +317,237 @@ let mapHyperlink: MapperFunction = (e, t, _i, _n) => {
  */
 const mapTextTruncation: MapperFunction = (element, mergedProps, value, _context) => {
   if (value === true || typeof value === 'number') {
-    element.props.textTruncation = 'ENDING'
-    element.props.maxLines = typeof value === 'number' && value >= 1 ? Math.floor(value) : null
-    return
+    element.props.textTruncation = 'ENDING';
+    element.props.maxLines = typeof value === 'number' && value >= 1 ? Math.floor(value) : null;
+    return;
   }
-  element.props.textTruncation = 'DISABLED'
-}
+  element.props.textTruncation = 'DISABLED';
+};
 
 /** Text truncation prop mapper (original: mapTextTruncation) */
-export const YJ = mapTextTruncation
+export const YJ = mapTextTruncation;
 function P(e, t, i, n) {
-  typeof n == 'number'
-    ? e === t.direction
-      ? (i.props.itemSpacing = n)
-      : t.wrap && (i.props.counterAxisSpacing = n)
-    : n === 'auto'
-      && (e === t.direction
-        ? (i.props.primaryAxisAlignItems = 'SPACE_BETWEEN')
-        : t.wrap && (i.props.counterAxisAlignContent = 'SPACE_BETWEEN'))
+  typeof n == 'number' ? e === t.direction ? i.props.itemSpacing = n : t.wrap && (i.props.counterAxisSpacing = n) : n === 'auto' && (e === t.direction ? i.props.primaryAxisAlignItems = 'SPACE_BETWEEN' : t.wrap && (i.props.counterAxisAlignContent = 'SPACE_BETWEEN'));
 }
 let O = (e, t, i, _n) => {
-  e.renderMetaData.children = i
-}
+  e.renderMetaData.children = i;
+};
 function toEnumFormat(e) {
-  return e.toUpperCase().replace(/-/g, '_')
+  return e.toUpperCase().replace(/-/g, '_');
 }
 function parsePadding(padding: number | Record<string, number>): Record<string, number> {
-  const result: Record<string, number> = {}
+  const result: Record<string, number> = {};
   if (typeof padding === 'number') {
-    result.paddingLeft = padding
-    result.paddingRight = padding
-    result.paddingTop = padding
-    result.paddingBottom = padding
-  }
-  else if (typeof padding === 'object') {
+    result.paddingLeft = padding;
+    result.paddingRight = padding;
+    result.paddingTop = padding;
+    result.paddingBottom = padding;
+  } else if (typeof padding === 'object') {
     if ('vertical' in padding && typeof padding.vertical === 'number') {
-      result.paddingTop = padding.vertical
-      result.paddingBottom = padding.vertical
+      result.paddingTop = padding.vertical;
+      result.paddingBottom = padding.vertical;
     }
     if ('horizontal' in padding && typeof padding.horizontal === 'number') {
-      result.paddingLeft = padding.horizontal
-      result.paddingRight = padding.horizontal
+      result.paddingLeft = padding.horizontal;
+      result.paddingRight = padding.horizontal;
     }
     if ('top' in padding && typeof padding.top === 'number') {
-      result.paddingTop = padding.top
+      result.paddingTop = padding.top;
     }
     if ('left' in padding && typeof padding.left === 'number') {
-      result.paddingLeft = padding.left
+      result.paddingLeft = padding.left;
     }
     if ('right' in padding && typeof padding.right === 'number') {
-      result.paddingRight = padding.right
+      result.paddingRight = padding.right;
     }
     if ('bottom' in padding && typeof padding.bottom === 'number') {
-      result.paddingBottom = padding.bottom
+      result.paddingBottom = padding.bottom;
     }
   }
-  return result
+  return result;
 }
 function alignToEnum(align: string) {
   switch (align) {
     case 'start':
-      return 'MIN'
+      return 'MIN';
     case 'center':
-      return 'CENTER'
+      return 'CENTER';
     case 'end':
-      return 'MAX'
+      return 'MAX';
     case 'baseline':
-      return 'BASELINE'
+      return 'BASELINE';
   }
 }
-function parseColor(hex: string): { r: number, g: number, b: number, a: number } {
+function parseColor(hex: string): {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+} {
   if (hex.length >= 7) {
-    const alpha = hex.length === 9 ? parseInt(hex.slice(7, 9), 16) / 255 : 1
+    const alpha = hex.length === 9 ? parseInt(hex.slice(7, 9), 16) / 255 : 1;
     return {
       r: parseInt(hex.slice(1, 3), 16) / 255,
       g: parseInt(hex.slice(3, 5), 16) / 255,
       b: parseInt(hex.slice(5, 7), 16) / 255,
-      a: alpha,
-    }
+      a: alpha
+    };
   }
-  const alpha = hex.length === 5 ? parseInt(hex.slice(4, 5), 16) / 15 : 1
+  const alpha = hex.length === 5 ? parseInt(hex.slice(4, 5), 16) / 15 : 1;
   return {
     r: parseInt(hex.slice(1, 2), 16) / 15,
     g: parseInt(hex.slice(2, 3), 16) / 15,
     b: parseInt(hex.slice(3, 4), 16) / 15,
-    a: alpha,
-  }
+    a: alpha
+  };
 }
-function normalizeColor(value: any): { r: number, g: number, b: number, a: number } {
+function normalizeColor(value: any): {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+} {
   if (typeof value === 'string') {
-    return parseColor(value)
+    return parseColor(value);
   }
   if (typeof value !== 'object' || Object.prototype.hasOwnProperty.call(value, 'a')) {
-    return value
+    return value;
   }
-  return { ...value, a: 1 }
+  return {
+    ...value,
+    a: 1
+  };
 }
-
 function mapFillsUtil(fills: any[], type: string, context: MapperContext): any[] {
-  return filterNotNullish(
-    fills.map((fill) => {
-      if (!fill)
-        return null
-      if (typeof fill === 'string') {
-        const { a, ...color } = parseColor(fill)
-        return {
-          type: 'SOLID',
-          color,
-          blendMode: 'NORMAL',
-          opacity: a,
-        }
+  return filterNotNullish(fills.map(fill => {
+    if (!fill) return null;
+    if (typeof fill === 'string') {
+      const {
+        a,
+        ...color
+      } = parseColor(fill);
+      return {
+        type: 'SOLID',
+        color,
+        blendMode: 'NORMAL',
+        opacity: a
+      };
+    }
+    if ('r' in fill && 'g' in fill && 'b' in fill && 'a' in fill) {
+      const isValid = (v: number) => v >= 0 && v <= 1;
+      const {
+        r,
+        g,
+        b,
+        a
+      } = fill;
+      if (!(isValid(r) && isValid(g) && isValid(b) && isValid(a))) {
+        console.error(`Expected rgba value to be between 0 and 1 but got ${JSON.stringify(fill)}.`);
+        return null;
       }
-      if ('r' in fill && 'g' in fill && 'b' in fill && 'a' in fill) {
-        const isValid = (v: number) => v >= 0 && v <= 1
-        const { r, g, b, a } = fill
-        if (!(isValid(r) && isValid(g) && isValid(b) && isValid(a))) {
-          console.error(`Expected rgba value to be between 0 and 1 but got ${JSON.stringify(fill)}.`)
-          return null
-        }
-        const { a: opacity, ...color } = fill
-        return {
-          type: 'SOLID',
-          color,
-          opacity,
-        }
-      }
-      const blendMode = fill.blendMode ? toEnumFormat(fill.blendMode) : undefined
-      if (fill.type === 'solid') {
-        const color = typeof fill.color === 'string' ? parseColor(fill.color) : { ...fill.color }
-        const opacity = (() => {
-          const colorAlpha = color.a != null ? color.a : undefined
-          const fillOpacity = fill.opacity != null ? fill.opacity : undefined
-          return fillOpacity != null && colorAlpha != null ? fillOpacity * colorAlpha : fillOpacity || colorAlpha
-        })()
-        delete color.a
-        return {
-          type: 'SOLID',
-          color,
-          blendMode,
-          opacity,
-        }
-      }
-      if (fill.type === 'image') {
-        return {
-          type: 'IMAGE',
-          scaleMode: fill.scaleMode ? toEnumFormat(fill.scaleMode) : 'FILL',
-          imageHash: fill.imageHash || null,
-          imageTransform: fill.imageTransform,
-          scalingFactor: fill.scalingFactor,
-          rotation: fill.rotation,
-          blendMode,
-          opacity: fill.opacity,
-        }
-      }
-      if (
-        fill.type === 'gradient-linear'
-        || fill.type === 'gradient-radial'
-        || fill.type === 'gradient-angular'
-        || fill.type === 'gradient-diamond'
-      ) {
-        return {
-          type: toEnumFormat(fill.type),
-          blendMode,
-          opacity: fill.opacity ?? undefined,
-          gradientStops: fill.gradientStops,
-          gradientTransform: getGradientTransformMatrix(fill.type, fill.gradientHandlePositions),
-        }
-      }
-      logInvalidProp(type, fill, context)
-      return null
-    }),
-  )
+      const {
+        a: opacity,
+        ...color
+      } = fill;
+      return {
+        type: 'SOLID',
+        color,
+        opacity
+      };
+    }
+    const blendMode = fill.blendMode ? toEnumFormat(fill.blendMode) : undefined;
+    if (fill.type === 'solid') {
+      const color = typeof fill.color === 'string' ? parseColor(fill.color) : {
+        ...fill.color
+      };
+      const opacity = (() => {
+        const colorAlpha = color.a != null ? color.a : undefined;
+        const fillOpacity = fill.opacity != null ? fill.opacity : undefined;
+        return fillOpacity != null && colorAlpha != null ? fillOpacity * colorAlpha : fillOpacity || colorAlpha;
+      })();
+      delete color.a;
+      return {
+        type: 'SOLID',
+        color,
+        blendMode,
+        opacity
+      };
+    }
+    if (fill.type === 'image') {
+      return {
+        type: 'IMAGE',
+        scaleMode: fill.scaleMode ? toEnumFormat(fill.scaleMode) : 'FILL',
+        imageHash: fill.imageHash || null,
+        imageTransform: fill.imageTransform,
+        scalingFactor: fill.scalingFactor,
+        rotation: fill.rotation,
+        blendMode,
+        opacity: fill.opacity
+      };
+    }
+    if (fill.type === 'gradient-linear' || fill.type === 'gradient-radial' || fill.type === 'gradient-angular' || fill.type === 'gradient-diamond') {
+      return {
+        type: toEnumFormat(fill.type),
+        blendMode,
+        opacity: fill.opacity ?? undefined,
+        gradientStops: fill.gradientStops,
+        gradientTransform: getGradientTransformMatrix(fill.type, fill.gradientHandlePositions)
+      };
+    }
+    logInvalidProp(type, fill, context);
+    return null;
+  }));
 }
 function logInvalidProp(propName: string, value: any, context: MapperContext): void {
-  const error = new Error(`The following prop failed to match a valid value: ${propName}={${JSON.stringify(value, null, 2)}}.`)
-  if (context.isLocalWidget)
-    throw error
-  widgetErrorTracker.trackInvalidPropError(error, context)
+  const error = new Error(`The following prop failed to match a valid value: ${propName}={${JSON.stringify(value, null, 2)}}.`);
+  if (context.isLocalWidget) throw error;
+  widgetErrorTracker.trackInvalidPropError(error, context);
 }
-
 function parseUnit(value: number | string): any {
   if (typeof value === 'number') {
-    return { unit: 'PIXELS', value }
+    return {
+      unit: 'PIXELS',
+      value
+    };
   }
   if (value === 'auto') {
-    return { unit: 'AUTO' }
+    return {
+      unit: 'AUTO'
+    };
   }
-  const parsed = parseFloat(value)
-  if (isNaN(parsed))
-    return undefined
+  const parsed = parseFloat(value);
+  if (isNaN(parsed)) return undefined;
   if (/.*%\w*/.test(value)) {
-    return { unit: 'PERCENT', value: parsed }
+    return {
+      unit: 'PERCENT',
+      value: parsed
+    };
   }
   if (/.*px\w*/.test(value)) {
-    return { unit: 'PIXELS', value: parsed }
+    return {
+      unit: 'PIXELS',
+      value: parsed
+    };
   }
-  return undefined
+  return undefined;
 }
-
 function retrievePropsByVersion(version: string) {
-  if (version === '1.0.0')
-    return defaultPropsForVersion
+  if (version === '1.0.0') return defaultPropsForVersion;
 }
-function validateProps(
-  props: any,
-  schema: any,
-  type: string,
-  context: MapperContext,
-): void {
-  let errors: string[] = []
+function validateProps(props: any, schema: any, type: string, context: MapperContext): void {
+  let errors: string[] = [];
   try {
-    errors = validateAndCollectErrors(props, schema, type)
-  }
-  catch (err) {
-    reportError(ServiceCategories.EXTENSIBILITY, new Error(`Error running widget prop validation: ${err}`))
+    errors = validateAndCollectErrors(props, schema, type);
+  } catch (err) {
+    reportError(ServiceCategories.EXTENSIBILITY, new Error(`Error running widget prop validation: ${err}`));
   }
   if (errors.length > 0) {
     if (context.isLocalWidget) {
-      const prefix = '\n\n * '
-      throw new Error(`The following validation errors were surfaced:${prefix}${errors.join(prefix)}`)
-    }
-    else {
-      const errorObjects = errors.map(msg => new Error(msg))
-      widgetErrorTracker.trackValidationErrors(errorObjects, context)
+      const prefix = '\n\n * ';
+      throw new Error(`The following validation errors were surfaced:${prefix}${errors.join(prefix)}`);
+    } else {
+      const errorObjects = errors.map(msg => new Error(msg));
+      widgetErrorTracker.trackValidationErrors(errorObjects, context);
     }
   }
 }
@@ -565,36 +555,36 @@ function createComponentFactory({
   type,
   getDefaultPropsForVersion,
   propMappers,
-  getSchemaForVersion,
+  getSchemaForVersion
 }: {
-  type: string
-  getDefaultPropsForVersion: (version: string) => any
-  propMappers: Record<string, MapperFunction>[]
-  getSchemaForVersion?: (version: string) => any
+  type: string;
+  getDefaultPropsForVersion: (version: string) => any;
+  propMappers: Record<string, MapperFunction>[];
+  getSchemaForVersion?: (version: string) => any;
 }) {
   return (inputProps: any, context: MapperContext) => {
     const element = {
       type,
       props: {} as Props,
-      renderMetaData: {} as RenderMetaData,
-    }
-    const version = context.widgetApiVersion
+      renderMetaData: {} as RenderMetaData
+    };
+    const version = context.widgetApiVersion;
     const mergedProps = {
       ...getDefaultPropsForVersion(version),
-      ...inputProps,
-    }
+      ...inputProps
+    };
     if (getSchemaForVersion) {
-      validateProps(mergedProps, getSchemaForVersion(version), type, context)
+      validateProps(mergedProps, getSchemaForVersion(version), type, context);
     }
     for (const propName in mergedProps) {
       for (const mapper of propMappers) {
         if (propName in mapper) {
-          mapper[propName](element, mergedProps, mergedProps[propName], context)
+          mapper[propName](element, mergedProps, mergedProps[propName], context);
         }
       }
     }
-    return element
-  }
+    return element;
+  };
 }
 /**
  * Prop mappers for generic element properties.
@@ -608,7 +598,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   hidden: (element, mergedProps, value, _context) => {
-    element.props.visible = !value
+    element.props.visible = !value;
   },
   /**
    * Maps name prop.
@@ -617,7 +607,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   name: (element, mergedProps, value, _context) => {
-    element.props.name = String(value)
+    element.props.name = String(value);
   },
   /**
    * Maps blendMode prop.
@@ -626,8 +616,8 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   blendMode: (element, mergedProps, value, _context) => {
-    const blendModeSchema = z.string().default('pass-through').transform(toEnumFormat)
-    element.props.blendMode = blendModeSchema.parse(value)
+    const blendModeSchema = z.string().default('pass-through').transform(toEnumFormat);
+    element.props.blendMode = blendModeSchema.parse(value);
   },
   /**
    * Maps opacity prop.
@@ -636,7 +626,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   opacity: (element, mergedProps, value, _context) => {
-    element.props.opacity = value
+    element.props.opacity = value;
   },
   /**
    * Maps effect prop.
@@ -652,10 +642,9 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
      */
     function mapEffect(eff: any, ctx: MapperContext): any[] {
       if (Array.isArray(eff)) {
-        return Array.prototype.concat.apply([], eff.map(item => mapEffect(item, ctx)))
+        return Array.prototype.concat.apply([], eff.map(item => mapEffect(item, ctx)));
       }
-      if (!eff)
-        return []
+      if (!eff) return [];
       switch (eff.type) {
         case 'drop-shadow':
           return [{
@@ -666,8 +655,8 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
             radius: eff.blur,
             spread: eff.spread,
             showShadowBehindNode: eff.showShadowBehindNode,
-            blendMode: 'NORMAL',
-          }]
+            blendMode: 'NORMAL'
+          }];
         case 'inner-shadow':
           return [{
             type: 'INNER_SHADOW',
@@ -676,28 +665,28 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
             visible: true,
             radius: eff.blur,
             spread: eff.spread,
-            blendMode: 'NORMAL',
-          }]
+            blendMode: 'NORMAL'
+          }];
         case 'layer-blur':
           return [{
             blurType: 'NORMAL',
             type: 'LAYER_BLUR',
             visible: true,
-            radius: eff.blur,
-          }]
+            radius: eff.blur
+          }];
         case 'background-blur':
           return [{
             blurType: 'NORMAL',
             type: 'BACKGROUND_BLUR',
             visible: true,
-            radius: eff.blur,
-          }]
+            radius: eff.blur
+          }];
         default:
-          logInvalidProp('effects', eff, ctx)
-          return []
+          logInvalidProp('effects', eff, ctx);
+          return [];
       }
     }
-    element.props.effects = mapEffect(value, context)
+    element.props.effects = mapEffect(value, context);
   },
   /**
    * Maps x prop.
@@ -708,11 +697,10 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    */
   x: (element, mergedProps, value, _context) => {
     if (typeof value === 'number') {
-      element.renderMetaData.x = value
-    }
-    else if (typeof value === 'object') {
-      element.renderMetaData.constraints = element.renderMetaData.constraints ?? {}
-      element.renderMetaData.constraints.xConstraint = value
+      element.renderMetaData.x = value;
+    } else if (typeof value === 'object') {
+      element.renderMetaData.constraints = element.renderMetaData.constraints ?? {};
+      element.renderMetaData.constraints.xConstraint = value;
     }
   },
   /**
@@ -724,11 +712,10 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    */
   y: (element, mergedProps, value, _context) => {
     if (typeof value === 'number') {
-      element.renderMetaData.y = value
-    }
-    else if (typeof value === 'object') {
-      element.renderMetaData.constraints = element.renderMetaData.constraints ?? {}
-      element.renderMetaData.constraints.yConstraint = value
+      element.renderMetaData.y = value;
+    } else if (typeof value === 'object') {
+      element.renderMetaData.constraints = element.renderMetaData.constraints ?? {};
+      element.renderMetaData.constraints.yConstraint = value;
     }
   },
   /**
@@ -738,7 +725,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   rotation: (element, mergedProps, value, _context) => {
-    element.props.rotation = value
+    element.props.rotation = value;
   },
   /**
    * Maps width prop.
@@ -751,7 +738,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   height: (element, mergedProps, value, _context) => {
-    element.renderMetaData.height = value
+    element.renderMetaData.height = value;
   },
   /**
    * Maps onClick prop.
@@ -760,7 +747,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   onClick: (element, mergedProps, value, _context) => {
-    element.renderMetaData.onClick = value
+    element.renderMetaData.onClick = value;
   },
   /**
    * Maps fill prop.
@@ -774,8 +761,8 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param context
    */
   stroke: (element, mergedProps, value, context) => {
-    const strokes = Array.isArray(value) ? value : [value]
-    element.props.strokes = mapFillsUtil(strokes, 'stroke', context)
+    const strokes = Array.isArray(value) ? value : [value];
+    element.props.strokes = mapFillsUtil(strokes, 'stroke', context);
   },
   /**
    * Maps strokeWidth prop.
@@ -784,7 +771,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   strokeWidth: (element, mergedProps, value, _context) => {
-    element.props.strokeWeight = value
+    element.props.strokeWeight = value;
   },
   /**
    * Maps strokeAlign prop.
@@ -793,7 +780,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   strokeAlign: (element, mergedProps, value, _context) => {
-    element.props.strokeAlign = toEnumFormat(value)
+    element.props.strokeAlign = toEnumFormat(value);
   },
   /**
    * Maps strokeDashPattern prop.
@@ -802,7 +789,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   strokeDashPattern: (element, mergedProps, value, _context) => {
-    element.props.dashPattern = value
+    element.props.dashPattern = value;
   },
   /**
    * Maps strokeCap prop.
@@ -811,7 +798,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   strokeCap: (element, mergedProps, value, _context) => {
-    element.props.strokeCap = toEnumFormat(value)
+    element.props.strokeCap = toEnumFormat(value);
   },
   /**
    * Maps key prop.
@@ -824,7 +811,7 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param value
    */
   tooltip: (element, mergedProps, value, _context) => {
-    element.props.widgetTooltip = value
+    element.props.widgetTooltip = value;
   },
   /**
    * Maps hoverStyle prop.
@@ -834,17 +821,17 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
    * @param context
    */
   hoverStyle: (element, mergedProps, value, context) => {
-    const hover: any = {}
+    const hover: any = {};
     if (value?.fill) {
-      hover.fill = mapFillsUtil(Array.isArray(value.fill) ? value.fill : [value.fill], 'fill', context)
+      hover.fill = mapFillsUtil(Array.isArray(value.fill) ? value.fill : [value.fill], 'fill', context);
     }
     if (value?.stroke) {
-      hover.stroke = mapFillsUtil(Array.isArray(value.stroke) ? value.stroke : [value.stroke], 'stroke', context)
+      hover.stroke = mapFillsUtil(Array.isArray(value.stroke) ? value.stroke : [value.stroke], 'stroke', context);
     }
     if (value?.opacity !== undefined) {
-      hover.opacity = value.opacity
+      hover.opacity = value.opacity;
     }
-    element.props.widgetHoverStyle = hover
+    element.props.widgetHoverStyle = hover;
   },
   /**
    * Maps positioning prop.
@@ -855,10 +842,12 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
   positioning: (element, mergedProps, value, _context) => {
     element.props.layoutPositioning = (() => {
       switch (value) {
-        case 'auto': return 'AUTO'
-        case 'absolute': return 'ABSOLUTE'
+        case 'auto':
+          return 'AUTO';
+        case 'absolute':
+          return 'ABSOLUTE';
       }
-    })()
+    })();
   },
   /**
    * Maps sharedPluginData prop.
@@ -867,11 +856,11 @@ const genericElementPropMappers: Record<string, MapperFunction> = {
   /**
    * Maps pluginData prop.
    */
-  pluginData: mapPluginData,
-}
+  pluginData: mapPluginData
+};
 
 /** Exported generic element prop mappers (original: ee) */
-export const ee = genericElementPropMappers
+export const ee = genericElementPropMappers;
 
 /**
  * Prop mappers for min/max width/height.
@@ -879,18 +868,18 @@ export const ee = genericElementPropMappers
  */
 export const sizeConstraintsMapper: Record<string, MapperFunction> = {
   minWidth: (element, mergedProps, value, _context) => {
-    element.props.minWidth = value
+    element.props.minWidth = value;
   },
   minHeight: (element, mergedProps, value, _context) => {
-    element.props.lineHeight = value
+    element.props.lineHeight = value;
   },
   maxWidth: (element, mergedProps, value, _context) => {
-    element.props.maxWidth = value
+    element.props.maxWidth = value;
   },
   maxHeight: (element, mergedProps, value, _context) => {
-    element.props.maxHeight = value
-  },
-}
+    element.props.maxHeight = value;
+  }
+};
 /**
  * Maps corner radius props to the appropriate element properties.
  * Original name: ei
@@ -901,44 +890,44 @@ export const sizeConstraintsMapper: Record<string, MapperFunction> = {
  */
 const mapCornerRadius: MapperFunction = (element, mergedProps, value, _context) => {
   if (typeof value === 'number') {
-    element.props.cornerRadius = value
-    return
+    element.props.cornerRadius = value;
+    return;
   }
   if (typeof value === 'object' && value !== null) {
     if (typeof value.bottomLeft === 'number') {
-      element.props.bottomLeftRadius = value.bottomLeft
+      element.props.bottomLeftRadius = value.bottomLeft;
     }
     if (typeof value.topLeft === 'number') {
-      element.props.topLeftRadius = value.topLeft
+      element.props.topLeftRadius = value.topLeft;
     }
     if (typeof value.bottomRight === 'number') {
-      element.props.bottomRightRadius = value.bottomRight
+      element.props.bottomRightRadius = value.bottomRight;
     }
     if (typeof value.topRight === 'number') {
-      element.props.topRightRadius = value.topRight
+      element.props.topRightRadius = value.topRight;
     }
   }
-}
+};
 
 /** Corner radius prop mapper (original: ei) */
 export const cornerRadiusConstraints = {
-  cornerRadius: mapCornerRadius,
-}
+  cornerRadius: mapCornerRadius
+};
 let en = {
   overflow: (e, t, i, _n) => {
-    e.props.clipsContent = i === 'hidden'
+    e.props.clipsContent = i === 'hidden';
   },
-  children: O,
-}
+  children: O
+};
 let er = {
   font: mapFontName,
   horizontalAlignText: (e, t, i, _n) => {
-    let r = z.string().default('left').transform(toEnumFormat)
-    e.props.textAlignHorizontal = r.parse(i)
+    let r = z.string().default('left').transform(toEnumFormat);
+    e.props.textAlignHorizontal = r.parse(i);
   },
   verticalAlignText: (e, t, i, _n) => {
-    let r = z.string().default('top').transform(toEnumFormat)
-    e.props.textAlignVertical = r.parse(i)
+    let r = z.string().default('top').transform(toEnumFormat);
+    e.props.textAlignVertical = r.parse(i);
   },
   letterSpacing: mapLetterSpacing,
   lineHeight: mapLineHeight,
@@ -946,69 +935,58 @@ let er = {
   textCase: mapTextCase,
   fontSize: mapFontSize,
   paragraphIndent: (e, t, i, _n) => {
-    let r = z.number().default(0)
-    e.props.paragraphIndent = r.parse(i)
+    let r = z.number().default(0);
+    e.props.paragraphIndent = r.parse(i);
   },
   paragraphSpacing: (e, t, i, _n) => {
-    let r = z.number().default(0)
-    e.props.paragraphSpacing = r.parse(i)
+    let r = z.number().default(0);
+    e.props.paragraphSpacing = r.parse(i);
   },
   children: mapChildren,
   href: mapHyperlink,
-  truncate: mapTextTruncation,
-}
+  truncate: mapTextTruncation
+};
 let ea = createComponentFactory({
   type: 'text',
   getDefaultPropsForVersion: retrievePropsByVersion,
   getSchemaForVersion: genericElementProps,
-  propMappers: [ee, er],
-})
+  propMappers: [ee, er]
+});
 let es = createComponentFactory({
   type: 'text',
   getDefaultPropsForVersion: retrievePropsByVersion,
   getSchemaForVersion: genericElementProps,
-  propMappers: [ee, sizeConstraintsMapper, er],
-})
+  propMappers: [ee, sizeConstraintsMapper, er]
+});
 let eo = createComponentFactory({
   type: 'input',
   getDefaultPropsForVersion(e) {
-    if (e === '1.0.0')
-      return inputDefaultPropsForVersion
+    if (e === '1.0.0') return inputDefaultPropsForVersion;
   },
   getSchemaForVersion: textInputProps,
-  propMappers: [
-    ee,
-    er,
-    {
-      widgetInputBehavior: (e, t, i, _n) => {
-        e.props.widgetInputBehavior = i.toUpperCase()
-      },
-      truncate: mapTextTruncation,
+  propMappers: [ee, er, {
+    widgetInputBehavior: (e, t, i, _n) => {
+      e.props.widgetInputBehavior = i.toUpperCase();
     },
-  ],
-})
+    truncate: mapTextTruncation
+  }]
+});
 let FrameComponent = createComponentFactory({
   type: 'frame',
   getDefaultPropsForVersion(e) {
-    if (e === '1.0.0')
-      return frameDefaultPropsForVersion
+    if (e === '1.0.0') return frameDefaultPropsForVersion;
   },
   getSchemaForVersion: clickableElementProps,
-  propMappers: [ee, sizeConstraintsMapper, en, cornerRadiusConstraints],
-})
+  propMappers: [ee, sizeConstraintsMapper, en, cornerRadiusConstraints]
+});
 /**
  * AutoLayout component factory.
  * Original name: AutoLayoutComponent
  */
 const mapDirection: MapperFunction = (element, mergedProps, value, _context) => {
-  element.props.layoutMode
-    = value === 'vertical'
-      ? 'VERTICAL'
-      : value === 'horizontal'
-        ? 'HORIZONTAL'
-        : 'NONE'
-  element.renderMetaData.direction = value
-}
+  element.props.layoutMode = value === 'vertical' ? 'VERTICAL' : value === 'horizontal' ? 'HORIZONTAL' : 'NONE';
+  element.renderMetaData.direction = value;
+};
 
 /**
  * Maps spacing prop for AutoLayout.
@@ -1016,239 +994,198 @@ const mapDirection: MapperFunction = (element, mergedProps, value, _context) => 
  */
 const mapSpacing: MapperFunction = (element, mergedProps, value, _context) => {
   if (typeof value === 'number') {
-    element.props.itemSpacing = value
+    element.props.itemSpacing = value;
     if (mergedProps.wrap) {
-      element.props.counterAxisSpacing = value
+      element.props.counterAxisSpacing = value;
     }
-    return
+    return;
   }
   if (value === 'auto') {
-    element.props.primaryAxisAlignItems = 'SPACE_BETWEEN'
+    element.props.primaryAxisAlignItems = 'SPACE_BETWEEN';
     if (mergedProps.wrap) {
-      element.props.counterAxisAlignItems = 'SPACE_BETWEEN'
+      element.props.counterAxisAlignItems = 'SPACE_BETWEEN';
     }
-    return
+    return;
   }
   if (isObject(value)) {
     if ('horizontal' in value) {
-      P('horizontal', mergedProps, element, value.horizontal)
+      P('horizontal', mergedProps, element, value.horizontal);
     }
     if ('vertical' in value) {
-      P('vertical', mergedProps, element, value.vertical)
+      P('vertical', mergedProps, element, value.vertical);
     }
   }
-}
+};
 
 /**
  * Maps padding prop for AutoLayout.
  * Original name: padding
  */
 const mapPadding: MapperFunction = (element, mergedProps, value, _context) => {
-  const paddingObj = parsePadding(value)
+  const paddingObj = parsePadding(value);
   for (const key in paddingObj) {
-    element.props[key] = paddingObj[key]
+    element.props[key] = paddingObj[key];
   }
-}
+};
 
 /**
  * Maps horizontalAlignItems prop for AutoLayout.
  * Original name: horizontalAlignItems
  */
 const mapHorizontalAlignItems: MapperFunction = (element, mergedProps, value, _context) => {
-  const alignEnum = alignToEnum(value)
-  if (
-    mergedProps.direction !== 'horizontal'
-    || mergedProps.spacing === 'auto'
-    || (isObject(mergedProps.spacing)
-      && 'horizontal' in mergedProps.spacing
-      && mergedProps.spacing.horizontal === 'auto')
-  ) {
+  const alignEnum = alignToEnum(value);
+  if (mergedProps.direction !== 'horizontal' || mergedProps.spacing === 'auto' || isObject(mergedProps.spacing) && 'horizontal' in mergedProps.spacing && mergedProps.spacing.horizontal === 'auto') {
     // Do nothing
-  }
-  else {
-    element.props.primaryAxisAlignItems = alignEnum
+  } else {
+    element.props.primaryAxisAlignItems = alignEnum;
   }
   if (mergedProps.direction === 'vertical') {
-    element.props.counterAxisAlignItems = alignEnum
+    element.props.counterAxisAlignItems = alignEnum;
   }
-}
+};
 
 /**
  * Maps verticalAlignItems prop for AutoLayout.
  * Original name: verticalAlignItems
  */
 const mapVerticalAlignItems: MapperFunction = (element, mergedProps, value, _context) => {
-  const alignEnum = alignToEnum(value)
+  const alignEnum = alignToEnum(value);
   if (mergedProps.direction === 'horizontal') {
-    element.props.counterAxisAlignItems = alignEnum
+    element.props.counterAxisAlignItems = alignEnum;
   }
-  if (
-    mergedProps.direction === 'vertical'
-    && mergedProps.spacing !== 'auto'
-  ) {
-    element.props.primaryAxisAlignItems = alignEnum
+  if (mergedProps.direction === 'vertical' && mergedProps.spacing !== 'auto') {
+    element.props.primaryAxisAlignItems = alignEnum;
   }
-}
+};
 
 /**
  * Maps wrap prop for AutoLayout.
  * Original name: wrap
  */
 const mapWrap: MapperFunction = (element, mergedProps, value, _context) => {
-  element.props.layoutWrap = value ? 'WRAP' : 'NO_WRAP'
-}
+  element.props.layoutWrap = value ? 'WRAP' : 'NO_WRAP';
+};
 
 /** AutoLayout component factory (original: AutoLayoutComponent) */
 export const AutoLayoutComponent = createComponentFactory({
   type: 'autolayout',
   getDefaultPropsForVersion(version: string) {
-    if (version === '1.0.0')
-      return autolayoutDefaultPropsForVersion
+    if (version === '1.0.0') return autolayoutDefaultPropsForVersion;
   },
   getSchemaForVersion: autoLayoutFramePropsFn,
-  propMappers: [
-    ee,
-    sizeConstraintsMapper,
-    en,
-    cornerRadiusConstraints,
-    {
-      direction: mapDirection,
-      spacing: mapSpacing,
-      padding: mapPadding,
-      horizontalAlignItems: mapHorizontalAlignItems,
-      verticalAlignItems: mapVerticalAlignItems,
-      wrap: mapWrap,
-    },
-  ],
-})
+  propMappers: [ee, sizeConstraintsMapper, en, cornerRadiusConstraints, {
+    direction: mapDirection,
+    spacing: mapSpacing,
+    padding: mapPadding,
+    horizontalAlignItems: mapHorizontalAlignItems,
+    verticalAlignItems: mapVerticalAlignItems,
+    wrap: mapWrap
+  }]
+});
 let RectangleComponent = createComponentFactory({
   type: 'rectangle',
   getDefaultPropsForVersion(e) {
-    if (e === '1.0.0')
-      return rectangleDefaultPropsForVersion
+    if (e === '1.0.0') return rectangleDefaultPropsForVersion;
   },
   getSchemaForVersion: vectorElementProps,
-  propMappers: [ee, sizeConstraintsMapper, cornerRadiusConstraints],
-})
+  propMappers: [ee, sizeConstraintsMapper, cornerRadiusConstraints]
+});
 let EllipseComponent = createComponentFactory({
   type: 'ellipse',
   getDefaultPropsForVersion(e) {
-    if (e === '1.0.0')
-      return EllipseDefaultPropsForVersion
+    if (e === '1.0.0') return EllipseDefaultPropsForVersion;
   },
   getSchemaForVersion: arcProps,
-  propMappers: [
-    ee,
-    sizeConstraintsMapper,
-    {
-      arcData: (e, t, i, _n) => {
-        e.props.arcData = i
-      },
-    },
-  ],
-})
+  propMappers: [ee, sizeConstraintsMapper, {
+    arcData: (e, t, i, _n) => {
+      e.props.arcData = i;
+    }
+  }]
+});
 let LineComponent = createComponentFactory({
   type: 'line',
   getDefaultPropsForVersion(e) {
-    if (e === '1.0.0')
-      return lineDefaultPropsForVersion
+    if (e === '1.0.0') return lineDefaultPropsForVersion;
   },
   getSchemaForVersion: lineElementProps,
-  propMappers: [
-    omit(ee, ['width', 'height']),
-    {
-      length: mapWidth,
-    },
-  ],
-})
-let em = (e, t) => eh(e, t, ea)
-
+  propMappers: [omit(ee, ['width', 'height']), {
+    length: mapWidth
+  }]
+});
+let em = (e, t) => eh(e, t, ea);
 let SpanComponent = createComponentFactory({
   type: 'span',
   getDefaultPropsForVersion: () => ({}),
-  propMappers: [
-    {
-      font: mapFontName,
-      letterSpacing: mapLetterSpacing,
-      lineHeight: mapLineHeight,
-      textDecoration: mapTextDecoration,
-      textCase: mapTextCase,
-      fontSize: mapFontSize,
-      children: mapChildren,
-      href: mapHyperlink,
-      fill: mapFills,
-    },
-  ],
-})
+  propMappers: [{
+    font: mapFontName,
+    letterSpacing: mapLetterSpacing,
+    lineHeight: mapLineHeight,
+    textDecoration: mapTextDecoration,
+    textCase: mapTextCase,
+    fontSize: mapFontSize,
+    children: mapChildren,
+    href: mapHyperlink,
+    fill: mapFills
+  }]
+});
 let SVGComponent = createComponentFactory({
   type: 'svg',
-  getDefaultPropsForVersion: (_e) => {},
+  getDefaultPropsForVersion: _e => {},
   getSchemaForVersion: imageElementProps,
-  propMappers: [
-    ee,
-    {
-      src: (e, t, i, _n) => {
-        e.renderMetaData.src = i
-      },
-    },
-  ],
-})
-
+  propMappers: [ee, {
+    src: (e, t, i, _n) => {
+      e.renderMetaData.src = i;
+    }
+  }]
+});
 function eh(props, elementProps, i) {
-  let n = i(
-    {
-      ...props,
-      font: resolveFont(props),
-    },
-    elementProps,
-  )
+  let n = i({
+    ...props,
+    font: resolveFont(props)
+  }, elementProps);
   let r = extractTextRanges({
     vNode: n,
     options: elementProps,
     Span: SpanComponent,
-    fontProps: extractFontProps(props),
-  })
+    fontProps: extractFontProps(props)
+  });
   let {
-    otherProps: { children, ...s },
-  } = splitTextStyle(n.props)
+    otherProps: {
+      children,
+      ...s
+    }
+  } = splitTextStyle(n.props);
   let o = {
     ...n.renderMetaData,
-    textStyle: r,
-  }
-  delete o.children
+    textStyle: r
+  };
+  delete o.children;
   return {
     ...n,
     props: s,
-    renderMetaData: o,
-  }
+    renderMetaData: o
+  };
 }
-
 let FragmentComponent = createComponentFactory({
   type: 'fragment',
   getDefaultPropsForVersion: elementWithChildrenProps,
-  propMappers: [
-    {
-      key: mapKey,
-      children: O,
-    },
-  ],
-})
-
+  propMappers: [{
+    key: mapKey,
+    children: O
+  }]
+});
 let InstanceComponent = createComponentFactory({
   type: 'instance',
   getDefaultPropsForVersion: () => ({}),
-  propMappers: [
-    ee,
-    {
-      componentId: createComponentIdMapper,
-      componentProps: createComponentPropsMapper,
-      componentPropsNested: createComponentPropsNestedMapper,
-      nestedInstancesVisibility: createJSXVisibilityMapper,
-      sharedPluginData: mapSharedPluginData,
-      pluginData: mapPluginData,
-    },
-  ],
-})
+  propMappers: [ee, {
+    componentId: createComponentIdMapper,
+    componentProps: createComponentPropsMapper,
+    componentPropsNested: createComponentPropsNestedMapper,
+    nestedInstancesVisibility: createJSXVisibilityMapper,
+    sharedPluginData: mapSharedPluginData,
+    pluginData: mapPluginData
+  }]
+});
 export let layoutComponentCollection = {
   Frame: FrameComponent,
   AutoLayout: AutoLayoutComponent,
@@ -1256,19 +1193,15 @@ export let layoutComponentCollection = {
   Ellipse: EllipseComponent,
   Text: (props: any, t: MapperContext) => eh(props, t, es),
   SVG: SVGComponent,
-  Image: (props: any, t: MapperContext) =>
-    RectangleComponent(
-      {
-        ...props,
-        fill: {
-          type: 'image',
-          src: props.src,
-        },
-      },
-      t,
-    ),
+  Image: (props: any, t: MapperContext) => RectangleComponent({
+    ...props,
+    fill: {
+      type: 'image',
+      src: props.src
+    }
+  }, t),
   Input: (props: any, t: MapperContext) => {
-    validateProps(props, textInputProps(t.widgetApiVersion), 'input', t)
+    validateProps(props, textInputProps(t.widgetApiVersion), 'input', t);
     let {
       placeholderProps,
       width = 200,
@@ -1281,78 +1214,63 @@ export let layoutComponentCollection = {
       y: _y,
       positioning,
       ...restProps
-    } = props
+    } = props;
     let m = {
       ...inputFrameProps,
       x,
       y: _y,
       positioning,
       width: width ?? 200,
-      height: height ?? 'hug-contents',
-    }
-    let h = parsePadding(m.padding)
-    let g
-      = typeof width == 'number'
-        ? width - (h?.paddingLeft ?? 0) - (h?.paddingRight ?? 0)
-        : 'fill-parent'
-    let f
-      = typeof height == 'number'
-        ? height - (h?.paddingTop ?? 0) - (h?.paddingBottom ?? 0)
-        : height === 'hug-contents' || height === 'fill-parent'
-          ? height
-          : 'hug-contents'
-    let { onClick, ...A } = props
-    let y = eh(
-      {
-        ...A,
-        widgetInputBehavior: inputBehavior,
-        font: resolveFont(props),
-        children: value ?? '',
-        width: g,
-        height: f,
-        truncate: inputBehavior === 'truncate',
-        positioning: 'auto',
-      },
-      t,
-      eo,
-    )
-    let b = em(
-      {
-        opacity: 0.3,
-        ...restProps,
-        ...placeholderProps,
-        font: placeholderProps ? resolveFont(placeholderProps) : resolveFont(props),
-        children: props.placeholder ?? '',
-        hidden: !!props.value,
-        width: 'fill-parent',
-        height: 'fill-parent',
-        x: h.paddingLeft ?? 0,
-        y: h.paddingTop ?? 0,
-        positioning: 'absolute',
-      },
-      t,
-    )
-    let InputFrame = AutoLayoutComponent(
-      {
-        ...m,
-        onClick,
-        children: [b, y],
-      },
-      t,
-    )
-    InputFrame.renderMetaData.onTextEditEnd = onTextEditEnd
-    InputFrame.type = 'inputframe'
-    return InputFrame
+      height: height ?? 'hug-contents'
+    };
+    let h = parsePadding(m.padding);
+    let g = typeof width == 'number' ? width - (h?.paddingLeft ?? 0) - (h?.paddingRight ?? 0) : 'fill-parent';
+    let f = typeof height == 'number' ? height - (h?.paddingTop ?? 0) - (h?.paddingBottom ?? 0) : height === 'hug-contents' || height === 'fill-parent' ? height : 'hug-contents';
+    let {
+      onClick,
+      ...A
+    } = props;
+    let y = eh({
+      ...A,
+      widgetInputBehavior: inputBehavior,
+      font: resolveFont(props),
+      children: value ?? '',
+      width: g,
+      height: f,
+      truncate: inputBehavior === 'truncate',
+      positioning: 'auto'
+    }, t, eo);
+    let b = em({
+      opacity: 0.3,
+      ...restProps,
+      ...placeholderProps,
+      font: placeholderProps ? resolveFont(placeholderProps) : resolveFont(props),
+      children: props.placeholder ?? '',
+      hidden: !!props.value,
+      width: 'fill-parent',
+      height: 'fill-parent',
+      x: h.paddingLeft ?? 0,
+      y: h.paddingTop ?? 0,
+      positioning: 'absolute'
+    }, t);
+    let InputFrame = AutoLayoutComponent({
+      ...m,
+      onClick,
+      children: [b, y]
+    }, t);
+    InputFrame.renderMetaData.onTextEditEnd = onTextEditEnd;
+    InputFrame.type = 'inputframe';
+    return InputFrame;
   },
   Line: LineComponent,
   Fragment: FragmentComponent,
   Span: () => {
-    throw new InternalError('Span is not valid outside of a Text component')
-  },
-}
+    throw new InternalError('Span is not valid outside of a Text component');
+  }
+};
 export let instanceComponentMap = {
-  Instance: InstanceComponent,
-}
+  Instance: InstanceComponent
+};
 /**
  * Checks if the given type is a container component.
  * Original name: eI
@@ -1360,7 +1278,7 @@ export let instanceComponentMap = {
  * @returns True if type is 'Frame', 'AutoLayout', or 'Fragment'.
  */
 function isContainerType(type: string): boolean {
-  return type === 'Frame' || type === 'AutoLayout' || type === 'Fragment'
+  return type === 'Frame' || type === 'AutoLayout' || type === 'Fragment';
 }
 
 /**
@@ -1371,38 +1289,26 @@ function isContainerType(type: string): boolean {
  * @returns The mapped children nodes.
  */
 function mapChildrenRecursively(children: any, context: MapperContext): any {
-  if (children == null || children === false)
-    return children
-  if (Array.isArray(children))
-    return children.map(child => mapChildrenRecursively(child, context))
-  const childType = typeof children
+  if (children == null || children === false) return children;
+  if (Array.isArray(children)) return children.map(child => mapChildrenRecursively(child, context));
+  const childType = typeof children;
   if (childType === 'string' || childType === 'number') {
-    throw new InternalError(
-      `Invalid node child of type "${childType}": ${JSON.stringify(children)}`,
-    )
+    throw new InternalError(`Invalid node child of type "${childType}": ${JSON.stringify(children)}`);
   }
   if (!isContainerType(children.type)) {
-    const componentFactory = getComponentFactory(children.type, context)
+    const componentFactory = getComponentFactory(children.type, context);
     if (!componentFactory) {
-      throw new InternalError(
-        `${children.type} is not a built in component`,
-      )
+      throw new InternalError(`${children.type} is not a built in component`);
     }
-    return componentFactory(
-      {
-        ...children.props,
-        children: children.children,
-      },
-      context,
-    )
-  }
-  return getComponentFactory(children.type, context)(
-    {
+    return componentFactory({
       ...children.props,
-      children: mapChildrenRecursively(children.children, context),
-    },
-    context,
-  )
+      children: children.children
+    }, context);
+  }
+  return getComponentFactory(children.type, context)({
+    ...children.props,
+    children: mapChildrenRecursively(children.children, context)
+  }, context);
 }
 
 /**
@@ -1413,10 +1319,9 @@ function mapChildrenRecursively(children: any, context: MapperContext): any {
  * @returns The component factory function.
  */
 function getComponentFactory(type: string, context: MapperContext): any {
-  let componentFactory = layoutComponentCollection[type]
-  if (!componentFactory && context.enableFullJsx)
-    componentFactory = instanceComponentMap[type]
-  return componentFactory
+  let componentFactory = layoutComponentCollection[type];
+  if (!componentFactory && context.enableFullJsx) componentFactory = instanceComponentMap[type];
+  return componentFactory;
 }
 
 /**
@@ -1427,21 +1332,16 @@ function getComponentFactory(type: string, context: MapperContext): any {
  * @returns The mapped component.
  */
 export function mapNodeToComponent(node: any, context: MapperContext): any {
-  const componentFactory = getComponentFactory(node.type, context)
-  return componentFactory(
-    {
-      ...node.props,
-      children: isContainerType(node.type)
-        ? mapChildrenRecursively(node.children, context)
-        : node.children,
-    },
-    context,
-  )
+  const componentFactory = getComponentFactory(node.type, context);
+  return componentFactory({
+    ...node.props,
+    children: isContainerType(node.type) ? mapChildrenRecursively(node.children, context) : node.children
+  }, context);
 }
 
 /** Exported layout component collection (original: layoutComponentCollection) */
-export const HB = layoutComponentCollection
+export const HB = layoutComponentCollection;
 /** Exported instance component collection (original: $$ev1) */
-export const cd = instanceComponentMap
+export const cd = instanceComponentMap;
 /** Exported node-to-component mapper (original: $$eE2) */
-export const P5 = mapNodeToComponent
+export const P5 = mapNodeToComponent;

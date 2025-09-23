@@ -11,7 +11,7 @@ import { E as _$$E2 } from '../905/53857';
 import { B as _$$B2 } from '../905/55104';
 import { useSprigWithSampling } from '../905/99656';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { R as _$$R2 } from '../905/165069';
 import { h as _$$h } from '../905/207101';
 import { U as _$$U } from '../905/275247';
@@ -820,7 +820,7 @@ function tu({
   });
   _$$u2(et, t);
   let eQ = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let e2 = !eN || d.loading || eC === null;
   let e4 = e_?.length ?? 0;
@@ -1399,7 +1399,7 @@ export function $$tg0({
     O(d.current?.clientWidth ?? 0);
   });
   let D = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let M = _$$R();
   let P = useTeamPlanFeatures();

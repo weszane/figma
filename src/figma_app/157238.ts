@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getInitialOptions } from "../figma_app/169182";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
@@ -197,7 +197,7 @@ function $$f(e) {
   try {
     return AccessLevelSchema.parse(e);
   } catch {
-    reportError(_$$e.IAM, Error(`IdpUser has invalid seat type: ${e}`));
+    reportError(ServiceCategories.IAM, Error(`IdpUser has invalid seat type: ${e}`));
   }
   return null;
 }

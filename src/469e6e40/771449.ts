@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Xf } from "../figma_app/153916";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -120,7 +120,7 @@ export function $$C0(e) {
     toolbar: jsx(_$$g, {}),
     content: W,
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: "LicenseGroupAdminSettingsPageView"
     }
   });

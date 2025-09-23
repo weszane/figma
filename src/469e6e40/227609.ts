@@ -41,7 +41,7 @@ import { createModalConfig, registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { b as _$$b3 } from '../905/173822';
 import { h as _$$h } from '../905/207101';
@@ -2433,7 +2433,7 @@ export function $$aG0(e) {
       })]
     }),
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: 'TeamAdminConsoleView'
     }
   });

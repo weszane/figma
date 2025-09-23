@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { N } from "../7222/898730";
@@ -46,7 +46,7 @@ export function $$p4({
     hasNextPage: h ?? !1,
     isFetchingNextPage: b,
     fetchNextPage: x
-  } : (reportError(_$$e.COMMUNITY, Error("useInternalResources: teamId and orgId cannot both be undefined"), {
+  } : (reportError(ServiceCategories.COMMUNITY, Error("useInternalResources: teamId and orgId cannot both be undefined"), {
     extra: {
       resourceTypes: t,
       caller: d

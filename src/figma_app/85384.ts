@@ -1,5 +1,5 @@
 import { deepEqual } from "../905/382883";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { sessionLocalIDToString, parseSessionLocalID, isValidSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -55,7 +55,7 @@ export function $$h6(e) {
       };
     }
   } catch (e) {
-    reportError(_$$e.CMS, Error("could not convert Fig.Hyperlink to Link"), {
+    reportError(ServiceCategories.CMS, Error("could not convert Fig.Hyperlink to Link"), {
       extra: {
         error: e.message
       }
@@ -83,7 +83,7 @@ export function $$m0(e) {
       }
     } : {
       guid: t
-    } : (reportError(_$$e.CMS, Error("Invalid node GUID for link"), {
+    } : (reportError(ServiceCategories.CMS, Error("Invalid node GUID for link"), {
       extra: {
         link: e
       }
@@ -115,7 +115,7 @@ export function $$f3(e, t, r, n, s) {
       openInNewTab: s
     } : null;
     if (d) return d;
-    reportError(_$$e.CMS, Error("could not create a valid CMS Link from CMSAlias and provided args"), {
+    reportError(ServiceCategories.CMS, Error("could not create a valid CMS Link from CMSAlias and provided args"), {
       extra: {
         cmsAlias: e,
         cmsTarget: t,

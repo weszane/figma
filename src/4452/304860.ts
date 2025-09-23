@@ -7,7 +7,7 @@ import { Ln } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { V as _$$V } from '../905/223084';
 import { B as _$$B } from '../905/261906';
 import { VisualBellActions } from '../905/302958';
@@ -200,7 +200,7 @@ function er(e) {
   } = e;
   let p = useModalManager(e);
   let g = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let x = isProrationBillingEnabledForCurrentPlan();
   let b = useTeamPlanFeatures();
@@ -212,13 +212,13 @@ function er(e) {
     V.status === 'errors' && console.error('orgManagesSeatsViaScimQueryResult error', V.errors);
   }, [V]), y.status !== 'loaded') {
     let e = new Error(y.status === 'disabled' ? 'Plan fetching disabled' : 'Error fetching plan');
-    reportError(_$$e.MONETIZATION_EXPANSION, e);
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, e);
     return e;
   }
   let z = y.data;
   if (!z) {
     let e = new Error('No Plan found');
-    reportError(_$$e.MONETIZATION_EXPANSION, e);
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, e);
     return e;
   }
   let {
@@ -232,7 +232,7 @@ function er(e) {
     let [n] = handleSuspenseRetainRelease(s);
     let r = isProrationBillingEnabledForCurrentPlan();
     let i = n.status === 'disabled' ? new Error('Missing contract rate args.') : n.status === 'errors' ? new Error('Error while fetching pricing.') : void 0;
-    if (i && reportError(_$$e.MONETIZATION_EXPANSION, i), i || !t) {
+    if (i && reportError(ServiceCategories.MONETIZATION_EXPANSION, i), i || !t) {
       return {
         billableProductKeyContractPrices: M,
         status: n.status

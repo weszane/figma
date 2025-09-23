@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/663269";
 import d from "../vendor/116389";
@@ -61,7 +61,7 @@ export function $$A1({
         e.forEach(e => {
           n ? e.plan_type === OrganizationType.ORG && e.plan_id === t.external_restricted_org_id ? a.push(e) : r.push(e) : e.is_guest ? r.push(e) : a.push(e);
         });
-        n && 0 === a.length && reportError(_$$e.WORKFLOW, Error(`Enterprise plan not found in Plan Switcher for user ${t.id}`), {
+        n && 0 === a.length && reportError(ServiceCategories.WORKFLOW, Error(`Enterprise plan not found in Plan Switcher for user ${t.id}`), {
           extra: {
             ...e
           }

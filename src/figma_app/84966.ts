@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/923386";
@@ -32,7 +32,7 @@ function w(e, t, r, n) {
   let [s] = handleSuspenseRetainRelease(i);
   let o = s.data;
   if (!o) {
-    reportError(_$$e.SCALE, Error("Plan renewal modal could not load price information"), {
+    reportError(ServiceCategories.SCALE, Error("Plan renewal modal could not load price information"), {
       extra: {
         planKey: t,
         prices: o
@@ -109,7 +109,7 @@ function G(e, t) {
   let i = collaboratorSet.dict(e => 0);
   r.forEach(e => {
     if (!e.billableProductKey || !isValidAccessType(e.billableProductKey)) {
-      reportError(_$$e.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
+      reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
       return;
     }
     let t = e.billableProductKey;
@@ -138,7 +138,7 @@ export function $$H5(e, t) {
   let [n] = handleSuspenseRetainRelease(r);
   if ("loaded" !== n.status) {
     let e = Error("Error fetching next annual renewal confirmed seat counts");
-    reportError(_$$e.SCALE, e);
+    reportError(ServiceCategories.SCALE, e);
     return e;
   }
   return n.data;

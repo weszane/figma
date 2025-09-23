@@ -3,7 +3,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { ModalRootComponent } from '../905/38914';
 import { registerModal } from '../905/102752';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { useModalManager } from '../905/437088';
@@ -239,7 +239,7 @@ export function showNetworkSettingsModal(dispatch) {
       feature
     }) => {
       try {
-        await uploadToPresignedPost(_$$e.SCENEGRAPH_AND_SYNC, 'test', url, fields, base64Png, 'image/png');
+        await uploadToPresignedPost(ServiceCategories.SCENEGRAPH_AND_SYNC, 'test', url, fields, base64Png, 'image/png');
         return {
           url,
           fields,

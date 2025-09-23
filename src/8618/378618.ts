@@ -113,7 +113,7 @@ import { W as _$$W3 } from "../figma_app/110892";
 import { G as _$$G, D as _$$D } from "../a88a4c5a/237102";
 import { r as _$$r2 } from "../figma_app/17220";
 import { yc, T0, gv, XS, sE } from "../figma_app/386160";
-import { ServiceCategories as _$$e3 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { TabLoop } from "../905/718764";
 import { Y as _$$Y2 } from "../a88a4c5a/416715";
@@ -1157,7 +1157,7 @@ function tw({
 function tC(e) {
   if (isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
     let e = Error("Rendering simplified design tab with no shownPropertiesPanels");
-    reportError(_$$e3.EDITOR_USABILITY, e);
+    reportError(ServiceCategories.EDITOR_USABILITY, e);
   }
   return jsx(tw, {
     ...e

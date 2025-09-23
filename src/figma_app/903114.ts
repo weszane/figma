@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -52,19 +52,19 @@ function $$Z(e) {
   let r = (e.planUser.handle || e.planUser.name) ?? "";
   let [a, u] = useState(e.nextSeatType ?? null);
   let p = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let _ = useCurrentPrivilegedPlan("ModifyPlanUserSeatModalInner");
   let [g] = handleSuspenseRetainRelease(_);
   if ("loaded" !== g.status) {
     let e = Error("disabled" === g.status ? "Plan fetching disabled" : "Error fetching plan");
-    reportError(_$$e.SCALE, e);
+    reportError(ServiceCategories.SCALE, e);
     return e;
   }
   let f = g.data;
   if (!f) {
     let e = Error("No Plan found");
-    reportError(_$$e.SCALE, e);
+    reportError(ServiceCategories.SCALE, e);
     return e;
   }
   let y = isProrationBillingEnabledForCurrentPlan();

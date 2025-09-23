@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getWasmModule } from "../figma_app/762706";
 import { reportError } from "../905/11";
 import { browserCapabilities } from "../905/409121";
@@ -158,7 +158,7 @@ let l = null;
 export function $$u0() {
   var e;
   var t;
-  e = e => reportError(_$$e.RENDERING_AND_ANIMATION, Error(e));
+  e = e => reportError(ServiceCategories.RENDERING_AND_ANIMATION, Error(e));
   t = browserCapabilities;
   null == l && (l = new s(e, t));
   return l;

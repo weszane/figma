@@ -1,6 +1,6 @@
 import { COMPONENT_PREFIX, getComponentJSXName } from "../figma_app/664063";
 import { id } from "../905/648693";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { FirstDraftHelpers, PluginHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
@@ -26,7 +26,7 @@ export function $$m0(e) {
 async function f(e, t, i) {
   if (t?.type === "LOCAL") throw Error("Can only insert library components");
   if (!i) {
-    reportError(_$$e.AI_GENERATION, Error("[First Draft] Attempted to insert component without kitContents"));
+    reportError(ServiceCategories.AI_GENERATION, Error("[First Draft] Attempted to insert component without kitContents"));
     return {
       status: "error"
     };

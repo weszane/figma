@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -608,7 +608,7 @@ export let $$eK0 = registerModal(function (e) {
     if (e0) {
       if (planPublicInfo?.tier === FPlanNameType.STARTER) {
         if (!team) {
-          reportError(_$$e.WORKFLOW, Error("Cannot read team when user tries to update team access for starter team"));
+          reportError(ServiceCategories.WORKFLOW, Error("Cannot read team when user tries to update team access for starter team"));
           return;
         }
         e0 === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? ep(showModalHandler({

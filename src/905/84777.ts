@@ -1,5 +1,5 @@
 import { isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { resourceUtils } from "../905/989992";
 import s from "lodash-es/mapValues";
 import { reportError } from "../905/11";
@@ -83,7 +83,7 @@ let m = new class {
 var $$h0 = (e => (e.CURRENT = "current", e.AT_NEXT_RENEWAL = "atNextRenewal", e))($$h0 || {});
 var $$g1 = (e => (e.ADMIN_SETTINGS = "admin-settings", e.ORG_CART = "org-cart", e.PRO_CART = "pro-cart", e.UPSELL_MODALS = "upsell-modals", e.UPSELL_MODALS_CONTRACT = "upsell-modals-contract", e))($$g1 || {});
 function f(e) {
-  reportError(_$$e.BILLING, e, t => (t.setExtras({
+  reportError(ServiceCategories.BILLING, e, t => (t.setExtras({
     error: e
   }), t));
 }
@@ -143,7 +143,7 @@ function v(e, t) {
   try {
     return e.transform(e => o()(t, t => _$$y(e, t)));
   } catch (e) {
-    reportError(_$$e.BILLING, e);
+    reportError(ServiceCategories.BILLING, e);
     return resourceUtils.errorSuspendable(e, {
       release: () => {}
     });
@@ -266,7 +266,7 @@ function k(e, t, i, s) {
         try {
           return _$$y(e, n);
         } catch (e) {
-          reportError(_$$e.BILLING, e);
+          reportError(ServiceCategories.BILLING, e);
           return;
         }
       });
@@ -276,7 +276,7 @@ function k(e, t, i, s) {
       return c;
     });
   } catch (e) {
-    reportError(_$$e.BILLING, e);
+    reportError(ServiceCategories.BILLING, e);
     return resourceUtils.errorSuspendable(e, {
       release: () => {}
     });

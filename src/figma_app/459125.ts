@@ -18,19 +18,19 @@ let a = new b({
     }
   }
 });
-let $$s0 = a.createLazyComponent(() => Promise.all([]).then(_require).then((e) => e.DelightfulToolbarWithErrorBoundary), {
+let $$s0 = a.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.DelightfulToolbarWithErrorBoundary), {
   componentName: "LazyDelightfulToolbar",
   team: ServiceCategories.FIGJAM,
   loading: NONE_SYMBOL.NONE,
   error: NONE_SYMBOL.NONE
 });
-let $$o2 = a.createLazyComponent(() => Promise.all([]).then(_require2).then((e) => e.WhiteboardUI3ToolbeltWithErrorBoundary), {
+let $$o2 = a.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.WhiteboardUI3ToolbeltWithErrorBoundary), {
   team: ServiceCategories.FIGJAM,
   componentName: "LazyWhiteboardUI3Toolbelt",
   loading: NONE_SYMBOL.NONE,
   error: NONE_SYMBOL.NONE
 });
-let $$l1 = a.createLazyComponent(() => Promise.all([]).then(_require3).then((e) => e.FigjamView), {
+let $$l1 = a.createLazyComponent(() => Promise.all([]).then(_require3).then(e => e.FigjamView), {
   componentName: "LazyFigjamView",
   team: ServiceCategories.FIGJAM,
   error: NONE_SYMBOL.NONE

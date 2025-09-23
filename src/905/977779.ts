@@ -15,28 +15,28 @@ import { getAssetKey, getAssetsForNodeIds } from '../figma_app/646357'
 /**
  * Atom for published components from the library.
  */
-const componentsAtom = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.components)
+export const componentsAtom = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.components)
 
 /**
  * Atom for published state groups from the library.
  */
-const stateGroupsAtom = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.stateGroups)
+export const stateGroupsAtom = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.stateGroups)
 
 /**
  * Atom for subscribed symbols from loaded pages.
  */
-const subscribedSymbolsAtom = createReduxSubscriptionAtomWithState(subscribedSymbolsFromLoadedPagesSelector)
+export const subscribedSymbolsAtom = createReduxSubscriptionAtomWithState(subscribedSymbolsFromLoadedPagesSelector)
 
 /**
  * Atom for subscribed state groups from loaded pages.
  */
-const subscribedStateGroupsAtom = createReduxSubscriptionAtomWithState(subscribedStateGroupsFromLoadedPagesSelector)
+export const subscribedStateGroupsAtom = createReduxSubscriptionAtomWithState(subscribedStateGroupsFromLoadedPagesSelector)
 
 /**
  * Atom that computes state group counts for components, grouped by library key and component key.
  * Original: $$b3
  */
-const stateGroupCountsAtom = atom((get) => {
+export const stateGroupCountsAtom = atom((get) => {
   const counts: Record<string, Record<string, Record<string, number>>> = {}
   const components = get(componentsAtom)
 
@@ -68,13 +68,13 @@ const stateGroupCountsAtom = atom((get) => {
  * Atom for files keyed by library key.
  * Original: $$v2
  */
-const filesByLibraryKeyAtom = atom(get => keyBy(get(fileByKeyAtom), file => file.library_key))
+export const filesByLibraryKeyAtom = atom(get => keyBy(get(fileByKeyAtom), file => file.library_key))
 
 /**
  * Atom that maps library keys to their names, combining from files and library key map.
  * Original: $$I1
  */
-const libraryKeyToNameAtom = atom((get) => {
+export const libraryKeyToNameAtom = atom((get) => {
   const nameMap: Record<string, string> = {}
   const files = get(filesByLibraryKeyAtom)
   for (const libraryKey of Object.keys(files)) {
@@ -96,13 +96,13 @@ const libraryKeyToNameAtom = atom((get) => {
 /**
  * Atom for file version selector.
  */
-const fileVersionAtom = createReduxSubscriptionAtomWithState(fileVersionSelector)
+export const fileVersionAtom = createReduxSubscriptionAtomWithState(fileVersionSelector)
 
 /**
  * Atom that computes assets for subscribed node IDs.
  * Original: x
  */
-const assetsAtom = atom((get) => {
+export const assetsAtom = atom((get) => {
   const sceneGraph = getSingletonSceneGraph()
   const symbolNodeIds = get(subscribedSymbolsAtom).map(symbol => symbol.nodeId)
   const stateGroupNodeIds = get(subscribedStateGroupsAtom).map(stateGroup => stateGroup.nodeId)
@@ -117,7 +117,7 @@ const assetsAtom = atom((get) => {
  * Atom for a set of asset keys from assets.
  * Original: $$S0
  */
-const assetKeysSetAtom = selectAtom(assetsAtom, assets => new Set(assets.map(asset => getAssetKey(asset))), equals)
+export const assetKeysSetAtom = selectAtom(assetsAtom, assets => new Set(assets.map(asset => getAssetKey(asset))), equals)
 
 export const hN = assetKeysSetAtom
 export const oE = libraryKeyToNameAtom

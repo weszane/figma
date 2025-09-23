@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
@@ -178,7 +178,7 @@ function $(e) {
       }) : renamableFile.openFile ? e.dispatch(renameFileOptimistic({
         file: renamableFile.openFile,
         name: t
-      })) : reportError(_$$e.UNOWNED, Error("Tried renaming but file does not exist"));
+      })) : reportError(ServiceCategories.UNOWNED, Error("Tried renaming but file does not exist"));
     },
     isUI3: !0,
     maxLength: 100

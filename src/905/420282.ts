@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Suspense, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish, isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -49,13 +49,13 @@ var h = m;
 var f = g;
 export function $$Q0(e) {
   let t = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   }).key.parentId;
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "TeamRenewalModal",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     children: jsx(TrackingProvider, {
       name: "Team Renewal Modal",
       properties: {
@@ -78,7 +78,7 @@ function J(e) {
   let t = useDispatch();
   let i = useModalManager(e);
   let p = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let m = isProrationBillingEnabledForCurrentPlan();
   let h = useSelector(e => e.teamBilling);

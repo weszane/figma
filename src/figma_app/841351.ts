@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { reportError } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { NotificationCategory } from '../905/170564';
 import { LRUCache } from '../905/196201';
 import { CompareViewType } from '../905/218608';
@@ -26,7 +26,7 @@ import { versionHandlerInstance } from '../905/985740';
 import { atom, atomStoreManager } from '../figma_app/27355';
 import { FEditorType, mapEditorTypeToStringWithError } from '../figma_app/53721';
 import { setProgressBarState } from '../figma_app/91703';
-import { NK } from '../figma_app/111825';
+import { getValidNumber } from '../figma_app/111825';
 import { sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { getFileKeyFromSelectedView } from '../figma_app/193867';
 import { fullscreenValue } from '../figma_app/455680';
@@ -93,7 +93,7 @@ export function loadCanvasForVersion(version: any, pageId: string) {
   const fileKey = state.openFile?.key;
   const nodesToExtract = [pageId, state.mirror.sceneGraph.getInternalCanvas()?.guid].filter(Boolean);
   if (!fileKey || !pageId) return null;
-  const key = generateCanvasKey(fileKey, pageId, version, NK(state.fileVersion));
+  const key = generateCanvasKey(fileKey, pageId, version, getValidNumber(state.fileVersion));
   if (canvasCache.has(key)) return canvasCache.get(key);
   const promise = new Promise((resolve, reject) => {
     loadCanvasData(`${version.canvas_url}&nodes_to_extract=${nodesToExtract.join(',')}`).then(([canvas,, fileVersion]) => {
@@ -120,7 +120,7 @@ export function invalidateCanvasCache(version: any): void {
   const fileKey = state.openFile?.key;
   const pageId = state.mirror.appModel.currentPage;
   if (!fileKey || !pageId) return;
-  const key = generateCanvasKey(fileKey, pageId, version, NK(state.fileVersion));
+  const key = generateCanvasKey(fileKey, pageId, version, getValidNumber(state.fileVersion));
   canvasCache.delete(key); // Original: $$K18
 }
 
@@ -640,7 +640,7 @@ export const setActiveVersion = createOptimistThunk(async ({
   } catch (error) {
     if (isDevMode) {
       const message = `[${eventType}] Failed load version for preview in focus view: ${error}`;
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`[LOAD_VERSION_FOR_PREVIEW] ${message}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[LOAD_VERSION_FOR_PREVIEW] ${message}`));
     }
     dispatch(FlashActions.error(error as string));
   } // Original: $$ec3
@@ -668,7 +668,7 @@ export const loadVersionIncrementally = createOptimistThunk(({
     }));
   }).catch(error => {
     const message = `[${eventType}] Failed load fig file for preview: ${error}`;
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${message}`));
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${message}`));
     dispatch(FlashActions.error(error as string));
   }); // Original: $$eu19
 });

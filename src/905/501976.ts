@@ -1,6 +1,6 @@
 import { sj, uf, C as _$$C, A$, o6, IO, JO, NE, Ff, ai, Gg, gG, LY, eZ, CM, q, If, Qn, Y9, Zj, rV, sl, xy, Ob, oA, fL, DA, g5, Dz, CN, xe, QV, Gy, k7, df } from "../figma_app/728005";
 import { MCP_INTERNAL_GET_RESOURCES_LIST, MCP_INTERNAL_GET_PROMPTS_LIST, MCP_INTERNAL_GET_RESOURCE, MCP_INTERNAL_GET_PROMPT, MCP_INTERNAL_GET_TOOLS } from "../905/106287";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { globalPerfTimer } from "../905/542194";
@@ -56,7 +56,7 @@ async function x({
     return `Successfully linked node ${e.guid} to Code Connect with source path ${n} and name ${i}.`;
   } catch (e) {
     console.error(e);
-    reportError(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
       extra: {
         backingLibraryKey,
         openFileKey: o,
@@ -232,7 +232,7 @@ export async function $$z1(e, t, i, d) {
   });
   if (!b.success) {
     let e = Error(`[MCP server] Invalid tool arguments: ${b.error.message}`);
-    reportError(_$$e.DEVELOPER_TOOLS, e);
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e);
     return e;
   }
   let v = b.data;
@@ -286,7 +286,7 @@ export async function $$z1(e, t, i, d) {
     } = v;
     if (!config) {
       let e = Error("[MCP server] No config provided");
-      reportError(_$$e.DEVELOPER_TOOLS, e);
+      reportError(ServiceCategories.DEVELOPER_TOOLS, e);
       return e;
     }
     atomStoreManager.set(Kx, config.codeOption);
@@ -558,7 +558,7 @@ async function W({
     }
   } catch (i) {
     let t = i instanceof Error ? i : Error(String(i));
-    if (t.message.includes(V) || reportError(_$$e.DEVELOPER_TOOLS, t, {
+    if (t.message.includes(V) || reportError(ServiceCategories.DEVELOPER_TOOLS, t, {
       extra: {
         toolName: e.toolName
       }

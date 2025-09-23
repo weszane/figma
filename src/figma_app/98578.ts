@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -125,7 +125,7 @@ export function $$I1(e) {
     let r = e.openFile?.key ?? "";
     let n = getProductType(e.selectedView, null);
     let l = atomStoreManager.get(dd) ?? "";
-    l || reportError(_$$e.EXTENSIBILITY, Error(`No quick actions session ID found when logging ${OW}`));
+    l || reportError(ServiceCategories.EXTENSIBILITY, Error(`No quick actions session ID found when logging ${OW}`));
     let _ = atomStoreManager.get(Rt);
     return {
       currentSelection: t,

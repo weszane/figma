@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -259,7 +259,7 @@ let $$P2 = {
     if (createNewVersionOnSubmit) try {
       i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
@@ -274,7 +274,7 @@ let $$P2 = {
     if (figFile?.editor_type === "figmake" && !y) try {
       await _$$r(figFile.key);
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o.SubmissionError({
         key: "ERROR_PUBLISHING_SITE",
         data: {
@@ -289,7 +289,7 @@ let $$P2 = {
         newVersionId: i
       });
     } catch (r) {
-      reportError(_$$e.COMMUNITY, r);
+      reportError(ServiceCategories.COMMUNITY, r);
       return new _$$o.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
@@ -321,7 +321,7 @@ let $$P2 = {
         ...d
       });
     } catch (t) {
-      reportError(_$$e.COMMUNITY, t);
+      reportError(ServiceCategories.COMMUNITY, t);
       return new _$$o.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
@@ -346,7 +346,7 @@ let $$P2 = {
         updateSource: "SitesForm.submit"
       });
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -358,7 +358,7 @@ let $$P2 = {
       let e = await Ur(p.id);
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
-        reportError(_$$e.COMMUNITY, e);
+        reportError(ServiceCategories.COMMUNITY, e);
         return new _$$o.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
@@ -369,7 +369,7 @@ let $$P2 = {
       p.publishing_status = getValueOrFallback(e, FPublicationStatusType) ?? null;
       RN(p, "SitesForm.submit");
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
@@ -380,7 +380,7 @@ let $$P2 = {
     try {
       nz(p);
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {

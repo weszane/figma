@@ -28,7 +28,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { XHR } from "../905/910117";
 import { z as _$$z } from "../905/239603";
@@ -84,7 +84,7 @@ async function j(e, t) {
   } catch (e) {
     i = JSON.stringify(e);
     r = !1;
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to load file buffer for too-many-connections fallback"), {
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Failed to load file buffer for too-many-connections fallback"), {
       extra: {
         error: i
       }

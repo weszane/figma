@@ -13,7 +13,7 @@ import { registerModal } from '../905/102752';
 import { J as _$$J } from '../905/129695';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { Cj } from '../905/270084';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -891,7 +891,7 @@ let eS = {
   Root: forwardRef((e, t) => jsx(ErrorBoundaryCrash, {
     boundaryKey: e.errorBoundaryKey,
     sentryTags: {
-      area: _$$e.SCALE
+      area: ServiceCategories.SCALE
     },
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(TrackingProvider, {
@@ -1594,7 +1594,7 @@ export function $$ez0() {
     }),
     toolbar: jsx(_$$g, {}),
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: 'OrgDomainManagementPageView'
     }
   }) : null;

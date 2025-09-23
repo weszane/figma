@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -292,7 +292,7 @@ export let $$eZ0 = registerModal(function (e) {
           Fonts.fontsAreLoading() ? $$eq2 = e : e();
         }).then(() => {
           let e = FontHelpers.getMissingFontInfoFromAllPages();
-          e && e.missingFonts ? x(e) : reportError(_$$e.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
+          e && e.missingFonts ? x(e) : reportError(ServiceCategories.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
           I(!1);
           o(VisualBellActions.dequeue({
             matchType: "missing-fonts-load-all-pages"
@@ -386,7 +386,7 @@ export let $$eZ0 = registerModal(function (e) {
     let a = missingFontsInfoForCurrentScope.missingFonts[e];
     if (!a) return;
     if (t && null == versionsForStyles[t]) {
-      reportError(_$$e.EDITOR_USABILITY, Error(`Attempted to replace missing font ${JSON.stringify(a)} with family ${t} but was not available`));
+      reportError(ServiceCategories.EDITOR_USABILITY, Error(`Attempted to replace missing font ${JSON.stringify(a)} with family ${t} but was not available`));
       return;
     }
     let o = null;

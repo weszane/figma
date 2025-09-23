@@ -1,5 +1,5 @@
 import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { PresetType } from "../figma_app/763686";
 import { produce } from "immer";
 import { KeyCodes } from "../905/63728";
@@ -193,7 +193,7 @@ let $$C7 = (() => {
     let n = t.params || {};
     let a = getFileKeyFromSelectedView(r.selectedView);
     if (!a) {
-      reportError(_$$e.PROTOTYPING, Error("No file key for prototype event"));
+      reportError(ServiceCategories.PROTOTYPING, Error("No file key for prototype event"));
       return;
     }
     trackDefinedFileEvent(t.name, a, r, n);

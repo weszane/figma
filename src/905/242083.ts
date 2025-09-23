@@ -40,7 +40,7 @@ import { n as _$$n4 } from '../905/155450';
 import { hideModal, hideModalHandler, hideSpecificModal, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { Ph } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { NotificationCategory } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
@@ -3239,7 +3239,7 @@ let aX = registerModal(e => {
   let t = useModalManager(e);
   let i = useRef(null);
   let n = setupAutofocusHandler(i);
-  let r = useSelector(e => (reportNullOrUndefined(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
+  let r = useSelector(e => (reportNullOrUndefined(ServiceCategories.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
   let s = useSelector(e => e.mirror.sceneGraph.get);
   return jsx(aZ, {
     ...e,
@@ -3600,7 +3600,7 @@ async function sq(e, t, i) {
       }));
     });
   } catch (n) {
-    reportError(_$$e.AI_PRODUCTIVITY, n, {
+    reportError(ServiceCategories.AI_PRODUCTIVITY, n, {
       extra: {
         numRows: e.length,
         numCols: e[0].length,
@@ -3957,7 +3957,7 @@ let ov = (e, t, i, n, r) => {
         frameID: i,
         frameName: n
       });
-      reportError(_$$e.MOBILE_PLATFORM, t);
+      reportError(ServiceCategories.MOBILE_PLATFORM, t);
     }
   }
 };
@@ -4423,7 +4423,7 @@ async function lN({
     m && lL(t.widgetNodeID, e, p);
   }
   if (i = i || (t.name === 'mount' ? t.context : t.name), !p) {
-    c.widgetVersionId && reportError(_$$e.EXTENSIBILITY, new Error('Could not find widget code to run'), {
+    c.widgetVersionId && reportError(ServiceCategories.EXTENSIBILITY, new Error('Could not find widget code to run'), {
       tags: {
         widgetAction: i,
         widgetId: c.widgetId || '',
@@ -4668,7 +4668,7 @@ let lM = new class {
         await lN(e);
       } catch (i) {
         let t = i instanceof Error ? i : new Error('Unable to run widget code');
-        i instanceof lR || reportError(_$$e.EXTENSIBILITY, t, {
+        i instanceof lR || reportError(ServiceCategories.EXTENSIBILITY, t, {
           tags: {
             widgetAction: e.widgetAction,
             widgetId: e.pluginID,
@@ -4912,7 +4912,7 @@ class lV {
   queueRender(e, t) {
     let i = getSceneGraphInstance().get(t);
     if (i?.isEmbed || i?.isLinkPreview) {
-      reportError(_$$e.EXTENSIBILITY, new Error(`Calling queuRender from a first party widget for pluginID=${e}, widgetNodeID=${t}`));
+      reportError(ServiceCategories.EXTENSIBILITY, new Error(`Calling queuRender from a first party widget for pluginID=${e}, widgetNodeID=${t}`));
       return;
     }
     lM.runLowPriority({
@@ -5021,7 +5021,7 @@ class lV {
       return await lG(e);
     } catch (i) {
       let t = i instanceof Error ? i : new Error('Failed to get widget icon');
-      reportError(_$$e.EXTENSIBILITY, t, {
+      reportError(ServiceCategories.EXTENSIBILITY, t, {
         extra: {
           widgetID: e,
           msg: t.message,
@@ -5550,7 +5550,7 @@ let lX = class e extends sP(sN(sR)) {
       });
     };
     this.logFullscreenActionToDatadogRum = (e, t) => {
-      observabilityClient.addAction(e, _$$e.SCENEGRAPH_AND_SYNC, LogLevelStr.INFO, t);
+      observabilityClient.addAction(e, ServiceCategories.SCENEGRAPH_AND_SYNC, LogLevelStr.INFO, t);
     };
     this.showNudgeDesignModeAfterTemplateSetPasted = () => {
       let e = atomStoreManager.get(getPlanUserTeamAtomFamily(!0));
@@ -6989,7 +6989,7 @@ let lX = class e extends sP(sN(sR)) {
       try {
         _I(_$$XT(), this.dispatch);
       } catch (e) {
-        reportError(_$$e.RENDERING_AND_ANIMATION, new Error(`Error checking hardware acceleration: ${e}`));
+        reportError(ServiceCategories.RENDERING_AND_ANIMATION, new Error(`Error checking hardware acceleration: ${e}`));
       }
       IJ(pi());
       fs();
@@ -7163,7 +7163,7 @@ let lX = class e extends sP(sN(sR)) {
       }
     }).catch(e => {
       let t = e.message.includes('EADDRINUSE');
-      t || reportError(_$$e.DEVELOPER_TOOLS, e);
+      t || reportError(ServiceCategories.DEVELOPER_TOOLS, e);
       console.error(getI18nString('my_cool_plugin.codegen_server_failed_to_start'), e);
       this.dispatch(VisualBellActions.enqueue({
         type: 'codegen-my-cool-plugin-server',
@@ -7440,7 +7440,7 @@ let lX = class e extends sP(sN(sR)) {
         timeNow: performance.now()
       }), this.missingFontPopoverReported = !0);
     }
-    Array.isArray(e) || reportError(_$$e.TEXT_AND_VECTOR, new Error('Attempting to show missing fonts dialog when missingFonts is not an array'));
+    Array.isArray(e) || reportError(ServiceCategories.TEXT_AND_VECTOR, new Error('Attempting to show missing fonts dialog when missingFonts is not an array'));
     let a = n === PageSelectionType.CURRENT_SELECTION;
     if (!i || this._state.modalShown?.type === CM.type) {
       let i = this._store.getState();
@@ -7605,7 +7605,7 @@ let lX = class e extends sP(sN(sR)) {
         if (t) {
           let i = t;
           for (; i && i.type !== 'CANVAS';) i = i.parentNode;
-          reportNullOrUndefined(_$$e.FIGJAM, e.appModel);
+          reportNullOrUndefined(ServiceCategories.FIGJAM, e.appModel);
           o = i && i.guid !== e.appModel.currentPage && t.type !== 'CANVAS' ? {
             type: _$$F3.FRAME,
             text: this.trimName(i.name, getI18nString('hyperlink.page')),

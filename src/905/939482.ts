@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { setupStarterUserCallback } from "../figma_app/275462";
@@ -19,7 +19,7 @@ export function $$f1(e) {
   let o = useCurrentUserOrgId();
   let m = selectCurrentFile();
   useEffect(() => {
-    t && "loaded" === i.status && 0 === i.data.length && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, p, {
+    t && "loaded" === i.status && 0 === i.data.length && reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, p, {
       tags: {
         orgId: o,
         hasOpenFile: !!m
@@ -36,7 +36,7 @@ export function $$_2() {
   let i = useCurrentUserOrgId();
   let u = selectCurrentFile();
   useEffect(() => {
-    e && "loaded" === t.status && 0 === t.data.length && reportError(_$$e.COMMUNITY, m, {
+    e && "loaded" === t.status && 0 === t.data.length && reportError(ServiceCategories.COMMUNITY, m, {
       tags: {
         orgId: i,
         hasOpenFile: !!u

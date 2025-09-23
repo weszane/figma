@@ -1,7 +1,7 @@
 import { reportError } from '../905/11';
 import { I as _$$I } from '../905/117966';
 import { gpuFullscreenEventNames, fullscreenPerfManager } from '../905/125218';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { r as _$$r } from '../905/210851';
 import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184';
 import { sendHistogram } from '../905/485103';
@@ -214,7 +214,7 @@ export let $$w0 = new class {
     trackEventAnalytics('quantized_color_equal_use', c);
   }
   tryReportError(e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error(e));
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(e));
   }
   startPerfTimer(e) {
     timerEventNames.has(e) && reactTimerGroup.start(e);

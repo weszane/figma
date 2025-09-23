@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { PrototypingTsApi } from "../figma_app/763686";
 import { openWindow } from "../905/508367";
 import { BrowserInfo } from "../figma_app/778880";
@@ -29,7 +29,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     scalingInfo
   } = t;
   let C = e.getState();
-  reportNullOrUndefined(_$$e.PROTOTYPING, C.mirror.appModel);
+  reportNullOrUndefined(ServiceCategories.PROTOTYPING, C.mirror.appModel);
   let T = C.mirror.appModel.currentPage;
   let k = isFirstPageCurrentSelector(C);
   let R = C.mirror.sceneGraph.get(T);

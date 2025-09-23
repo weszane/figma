@@ -1,82 +1,99 @@
-import { reportError } from '../905/11';
-import { isNullOrFailure } from '../905/18797';
-import { ServiceCategories as _$$e } from '../905/165054';
-import { createOptimistThunk } from '../905/350402';
-import { D3 } from '../905/359847';
-import { setupLoadingStateHandler } from '../905/696711';
-import { librariesAPI } from '../905/939602';
-import { batchPutFileAction } from '../figma_app/78808';
-import { generatePublishedComponentsCacheKey, addTrackedState, deletedLoadingStates } from '../figma_app/646357';
-import { aW } from '../figma_app/864378';
-export let $$m0 = createOptimistThunk(async (e, t) => {
-  let {
+import { reportError } from '../905/11'
+import { isNullOrFailure } from '../905/18797'
+import { ServiceCategories } from '../905/165054'
+import { createOptimistThunk } from '../905/350402'
+import { hubFilePutAll } from '../905/359847'
+import { setupLoadingStateHandler } from '../905/696711'
+import { librariesAPI } from '../905/939602'
+import { batchPutFileAction } from '../figma_app/78808'
+import { addTrackedState, deletedLoadingStates, generatePublishedComponentsCacheKey } from '../figma_app/646357'
+import { putProductComponentsBulkThunk } from '../figma_app/864378'
+
+// Original: export let $$m0 = createOptimistThunk(async (e, t) => { ... })
+// Refactored: Named function for better readability
+export const getPublishedComponentsForLibraryThunk = createOptimistThunk(async ({dispatch, getState}, params) => {
+  const { libraryKey, includeThumbnail, includeRealtime } = params
+  const loadingState = getState().loadingState
+  const cacheKey = generatePublishedComponentsCacheKey(libraryKey)
+
+  // Original: if (!isNullOrFailure(h, g)) return
+  if (!isNullOrFailure(loadingState, cacheKey)) {
+    return
+  }
+
+  const fetchPromise = librariesAPI.getLibraryPublishedComponentsV2({
     libraryKey,
     includeThumbnail,
-    includeRealtime
-  } = t;
-  let h = e.getState().loadingState;
-  let g = generatePublishedComponentsCacheKey(libraryKey);
-  if (!isNullOrFailure(h, g)) return;
-  let f = librariesAPI.getLibraryPublishedComponentsV2({
-    libraryKey,
-    includeThumbnail,
-    includeRealtime
-  });
-  setupLoadingStateHandler(f, {
-    dispatch: e.dispatch
-  }, g);
-  deletedLoadingStates.add(g);
+    includeRealtime,
+  })
+
+  setupLoadingStateHandler(fetchPromise, { dispatch }, cacheKey)
+  deletedLoadingStates.add(cacheKey)
+
   try {
-    let t = await f;
-    let {
-      components,
-      stateGroups
-    } = function ({
-      components: e,
-      stateGroups: t,
-      file: i
-    }) {
-      return i?.team_id ? {
-        components: e.map(e => ({
-          ...e,
-          team_id: i.team_id
-        })),
-        stateGroups: t.map(e => ({
-          ...e,
-          team_id: i.team_id
-        }))
-      } : {
-        components: e,
-        stateGroups: t
-      };
-    }({
-      components: t?.data?.meta?.components || [],
-      stateGroups: t?.data?.meta?.state_groups || [],
-      file: t?.data?.meta?.file
-    });
-    let c = t?.data?.meta?.file;
-    let u = t?.data?.meta?.hub_file;
-    c ? e.dispatch(batchPutFileAction({
-      files: [c],
-      subscribeToRealtime: includeRealtime
-    })) : u && e.dispatch(D3([u]));
-    let h = function (e, t, i) {
-      return i != null ? i.id : t != null ? t.key : (reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, new Error('getPublishedComponentsForLibrary: no hub file or file found'), {
-        tags: {
-          libraryKey: e
-        }
-      }), '');
-    }(libraryKey, c, u);
-    e.dispatch(aW({
+    const response = await fetchPromise
+    const { components, stateGroups } = transformComponentsAndStateGroups(response?.data?.meta)
+    const file = response?.data?.meta?.file
+    const hubFile = response?.data?.meta?.hub_file
+
+    if (file) {
+      dispatch(batchPutFileAction({
+        files: [file],
+        subscribeToRealtime: includeRealtime,
+      }))
+    }
+    else if (hubFile) {
+      dispatch(hubFilePutAll([hubFile]))
+    }
+
+    const fileKeyOrHubFileId = getFileKeyOrHubFileId(libraryKey, file, hubFile)
+
+    dispatch(putProductComponentsBulkThunk({
       components,
       stateGroups,
-      fileKeyOrHubFileId: h,
+      fileKeyOrHubFileId,
       libraryKey,
-      teamId: c?.team_id
-    }));
-    addTrackedState(libraryKey);
-  } catch (e) {
-    console.warn(`Failed to get published components from library with libraryKey ${libraryKey}`);
+      teamId: file?.team_id,
+    }))
+
+    addTrackedState(libraryKey)
   }
-});
-export const n = $$m0;
+  catch  {
+    console.warn(`Failed to get published components from library with libraryKey ${libraryKey}`)
+  }
+})
+
+// Original: export const n = $$m0
+export const n = getPublishedComponentsForLibraryThunk
+
+/**
+ * Transforms components and stateGroups by adding team_id if present in file.
+ * Original: (function ({ components: e, stateGroups: t, file: i }) { ... })
+ */
+function transformComponentsAndStateGroups(meta: any): { components: any[], stateGroups: any[] } {
+  const { components, stateGroups, file } = meta
+  if (file?.team_id) {
+    return {
+      components: components.map(c => ({ ...c, team_id: file.team_id })),
+      stateGroups: stateGroups.map(s => ({ ...s, team_id: file.team_id })),
+    }
+  }
+  return { components: components || [], stateGroups: stateGroups || [] }
+}
+
+/**
+ * Gets the file key or hub file ID, reporting error if neither is found.
+ * Original: (function (e, t, i) { ... })
+ */
+function getFileKeyOrHubFileId(libraryKey: string, file: any, hubFile: any): string {
+  if (hubFile?.id) {
+    return hubFile.id
+  }
+  if (file?.key) {
+    return file.key
+  }
+  reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, new Error('getPublishedComponentsForLibrary: no hub file or file found'), {
+    tags: { libraryKey },
+  })
+  return ''
+}

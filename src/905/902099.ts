@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { PerfResult, Fullscreen } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -80,7 +80,7 @@ export async function $$y1(e, t, i, o) {
     }(images);
   } catch (e) {
     I = !0;
-    reportError(_$$e.FIGJAM, e);
+    reportError(ServiceCategories.FIGJAM, e);
   }
   let E = Fullscreen.getScene();
   images.forEach(e => {

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { shallowEqual } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useMemoShallow, useStableState } from "../905/19536";
 import c from "lodash-es/mapValues";
@@ -63,7 +63,7 @@ export function $$_0(e) {
               error: i
             });
             console.error(`Unhandled exception in ${e.displayName}.validate:`, i);
-            reportError(_$$e.COMMUNITY, i, {
+            reportError(ServiceCategories.COMMUNITY, i, {
               extra: {
                 source: `${e.displayName}.validate`
               }
@@ -125,7 +125,7 @@ export function $$_0(e) {
           error: t
         });
         console.error(`Unhandled exception in ${e.displayName}.submit:`, t);
-        reportError(_$$e.COMMUNITY, t, {
+        reportError(ServiceCategories.COMMUNITY, t, {
           extra: {
             source: `${e.displayName}.submit`
           }

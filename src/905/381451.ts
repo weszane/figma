@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { shallowEqual } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useMemoShallow, useStableState } from "../905/19536";
 import { reportError } from "../905/11";
 import { A as _$$A } from "../905/17894";
@@ -34,7 +34,7 @@ export function $$c0(e, t, i = _$$A) {
             error: t
           };
           console.error(`Unhandled exception in ${e.displayName}.fetchInitialValue:`, t);
-          reportError(_$$e.COMMUNITY, t, {
+          reportError(ServiceCategories.COMMUNITY, t, {
             extra: {
               source: `${e.displayName}.fetchInitialValue`
             }
@@ -77,7 +77,7 @@ export function $$c0(e, t, i = _$$A) {
             error: i
           });
           console.error(`Unhandled exception in ${e.displayName}.validate:`, i);
-          reportError(_$$e.COMMUNITY, i, {
+          reportError(ServiceCategories.COMMUNITY, i, {
             extra: {
               source: `${e.displayName}.validate`
             }

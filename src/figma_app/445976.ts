@@ -1,7 +1,7 @@
 import { isPartOfGroup, resetTypeInfoCache, getTypeInfoCached, getComponentInfoById } from "../figma_app/664063";
 import { GroupItemType } from "../905/223510";
 import { __ } from "../figma_app/257655";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { collectSymbolsAndStateGroups } from "../905/94678";
 import { VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -79,7 +79,7 @@ async function T(e, t) {
         jsxComponentDef: i
       };
     } catch (t) {
-      reportError(_$$e.AI_GENERATION, t, {
+      reportError(ServiceCategories.AI_GENERATION, t, {
         extra: {
           nodeId: e.guid
         }

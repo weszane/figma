@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
@@ -143,19 +143,19 @@ function S(e, t) {
       try {
         t = JSON.parse(e);
       } catch (t) {
-        reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid JSON value for frecency history from DB: ${e}`), {});
+        reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Invalid JSON value for frecency history from DB: ${e}`), {});
         return null;
       }
       let r = SR.safeParse(t);
       if (!r.success) {
-        reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid format for frecency history object from DB: ${e}`), {});
+        reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Invalid format for frecency history object from DB: ${e}`), {});
         return null;
       }
       let n = {};
       for (let [e, t] of Object.entries(r.data)) {
         let r = Number(e);
         if (!B3.safeParse(r).success) {
-          reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid key in frecency history object from DB: ${e}`), {});
+          reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Invalid key in frecency history object from DB: ${e}`), {});
           return null;
         }
         n[r] = t;

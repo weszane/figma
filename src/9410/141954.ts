@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { parseHex } from "../figma_app/191804";
 import { reportError } from "../905/11";
 import { GS, u7 } from "../figma_app/846140";
@@ -474,7 +474,7 @@ export function $$h0(e, t) {
   try {
     return $$p1(e);
   } catch (i) {
-    i instanceof Error && reportError(_$$e.AI_GENERATION, Error(`[First Draft theme] Error parsing theme from output: ${i.message}`), {
+    i instanceof Error && reportError(ServiceCategories.AI_GENERATION, Error(`[First Draft theme] Error parsing theme from output: ${i.message}`), {
       extra: {
         ...t,
         theme: JSON.stringify(e),

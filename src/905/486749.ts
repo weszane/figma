@@ -1,26 +1,26 @@
-import { reportError } from '../905/11'
-import { ServiceCategories as ExtensibilityServiceCategory } from '../905/165054'
-import { permissionScopeHandler } from '../905/189185'
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { permissionScopeHandler } from '../905/189185';
 
 /**
  * Constants for synced state and synced map key prefixes.
  */
-const SYNCED_STATE_PREFIX = 'syncedState'
-const SYNCED_STATE_KEY_PREFIX = `${SYNCED_STATE_PREFIX}:`
-const SYNCED_MAP_PREFIX = 'syncedMap'
-const SYNCED_MAP_KEY_PREFIX = `${SYNCED_MAP_PREFIX}:`
+const SYNCED_STATE_PREFIX = 'syncedState';
+const SYNCED_STATE_KEY_PREFIX = `${SYNCED_STATE_PREFIX}:`;
+const SYNCED_MAP_PREFIX = 'syncedMap';
+const SYNCED_MAP_KEY_PREFIX = `${SYNCED_MAP_PREFIX}:`;
 
 /**
  * WidgetSyncedState interface for type safety.
  */
 interface WidgetSyncedState {
-  getWidgetSyncedState?: () => Record<string, string>
-  renderedSyncedState?: Record<string, string>
-  setWidgetSyncedState?: (key: string, value: string) => void
-  setInitialWidgetSyncedState?: (key: string, value: string) => void
-  clearWidgetSyncedState?: () => void
-  deleteWidgetSyncedState?: (key: string) => void
-  widgetId?: string
+  getWidgetSyncedState?: () => Record<string, string>;
+  renderedSyncedState?: Record<string, string>;
+  setWidgetSyncedState?: (key: string, value: string) => void;
+  setInitialWidgetSyncedState?: (key: string, value: string) => void;
+  clearWidgetSyncedState?: () => void;
+  deleteWidgetSyncedState?: (key: string) => void;
+  widgetId?: string;
 }
 
 /**
@@ -30,12 +30,12 @@ interface WidgetSyncedState {
  */
 export function getCombinedSyncedValues(mode: string, widget: WidgetSyncedState) {
   // $$c3
-  const state = getSyncedState(mode, widget)
-  const map = getSyncedMap(mode, widget)
+  const state = getSyncedState(mode, widget);
+  const map = getSyncedMap(mode, widget);
   return {
     ...state,
-    ...map,
-  }
+    ...map
+  };
 }
 
 /**
@@ -45,24 +45,20 @@ export function getCombinedSyncedValues(mode: string, widget: WidgetSyncedState)
  */
 export function getSyncedState(mode: string, widget: WidgetSyncedState) {
   // $$u1
-  const source = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState
-  const result: Record<string, any> = {}
+  const source = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState;
+  const result: Record<string, any> = {};
   try {
     for (const key of Object.keys(source ?? {})) {
       if (key.startsWith(SYNCED_STATE_KEY_PREFIX)) {
-        const value = JSON.parse(source![key])
-        result[key.substring(SYNCED_STATE_KEY_PREFIX.length)] = value
+        const value = JSON.parse(source![key]);
+        result[key.substring(SYNCED_STATE_KEY_PREFIX.length)] = value;
       }
     }
-    return result
+    return result;
+  } catch (err) {
+    reportError(ServiceCategories.EXTENSIBILITY, new Error(`Invalid syncedState for widgetID=${widget.widgetId}: ${err}`));
   }
-  catch (err) {
-    reportError(
-      ExtensibilityServiceCategory.EXTENSIBILITY,
-      new Error(`Invalid syncedState for widgetID=${widget.widgetId}: ${err}`),
-    )
-  }
-  return {}
+  return {};
 }
 
 /**
@@ -71,31 +67,27 @@ export function getSyncedState(mode: string, widget: WidgetSyncedState) {
  * @param stateValues - Synced state values
  * @param mapValues - Synced map values
  */
-export function setSyncedValues(
-  widget: WidgetSyncedState,
-  stateValues?: Record<string, any>,
-  mapValues?: Record<string, Record<string, any>>,
-) {
+export function setSyncedValues(widget: WidgetSyncedState, stateValues?: Record<string, any>, mapValues?: Record<string, Record<string, any>>) {
   // $$p8
   if (stateValues && Object.keys(stateValues).length > 0) {
     const mergedState = {
       ...getSyncedState('current', widget),
-      ...stateValues,
-    }
-    Object.keys(mergedState).forEach((key) => {
-      setWidgetSyncedState(widget, key, mergedState[key])
-    })
+      ...stateValues
+    };
+    Object.keys(mergedState).forEach(key => {
+      setWidgetSyncedState(widget, key, mergedState[key]);
+    });
   }
   if (mapValues && Object.keys(mapValues).length > 0) {
-    Object.keys(mapValues).forEach((mapKey) => {
-      Object.keys(getSyncedMapEntry('current', widget, mapKey)).forEach((entryKey) => {
-        deleteWidgetSyncedMapEntry(widget, mapKey, entryKey)
-      })
-      const entries = mapValues[mapKey]
-      Object.keys(entries).forEach((entryKey) => {
-        setWidgetSyncedMapEntry(widget, mapKey, entryKey, entries[entryKey])
-      })
-    })
+    Object.keys(mapValues).forEach(mapKey => {
+      Object.keys(getSyncedMapEntry('current', widget, mapKey)).forEach(entryKey => {
+        deleteWidgetSyncedMapEntry(widget, mapKey, entryKey);
+      });
+      const entries = mapValues[mapKey];
+      Object.keys(entries).forEach(entryKey => {
+        setWidgetSyncedMapEntry(widget, mapKey, entryKey, entries[entryKey]);
+      });
+    });
   }
 }
 
@@ -107,13 +99,11 @@ export function setSyncedValues(
  */
 function serializeSyncedStateValue(widget: WidgetSyncedState, key: string, value: any) {
   // m
-  const serialized = JSON.stringify(value)
+  const serialized = JSON.stringify(value);
   if (serialized === undefined) {
-    throw new Error(
-      `Invalid syncedState value for widgetID=${widget?.widgetId} name=${key} value=${value}`,
-    )
+    throw new Error(`Invalid syncedState value for widgetID=${widget?.widgetId} name=${key} value=${value}`);
   }
-  return serialized
+  return serialized;
 }
 
 /**
@@ -124,11 +114,7 @@ function serializeSyncedStateValue(widget: WidgetSyncedState, key: string, value
  */
 export function setWidgetSyncedState(widget: WidgetSyncedState, key: string, value: any) {
   // $$h4
-  permissionScopeHandler.plugin('set-widget-synced-state', () =>
-    widget?.setWidgetSyncedState?.(
-      `${SYNCED_STATE_PREFIX}:${key}`,
-      serializeSyncedStateValue(widget, key, value),
-    ))
+  permissionScopeHandler.plugin('set-widget-synced-state', () => widget?.setWidgetSyncedState?.(`${SYNCED_STATE_PREFIX}:${key}`, serializeSyncedStateValue(widget, key, value)));
 }
 
 /**
@@ -139,11 +125,7 @@ export function setWidgetSyncedState(widget: WidgetSyncedState, key: string, val
  */
 export function setInitialWidgetSyncedState(widget: WidgetSyncedState, key: string, value: any) {
   // $$g5
-  permissionScopeHandler.plugin('set-initial-widget-synced-state', () =>
-    widget?.setInitialWidgetSyncedState?.(
-      `${SYNCED_STATE_PREFIX}:${key}`,
-      serializeSyncedStateValue(widget, key, value),
-    ))
+  permissionScopeHandler.plugin('set-initial-widget-synced-state', () => widget?.setInitialWidgetSyncedState?.(`${SYNCED_STATE_PREFIX}:${key}`, serializeSyncedStateValue(widget, key, value)));
 }
 
 /**
@@ -152,7 +134,7 @@ export function setInitialWidgetSyncedState(widget: WidgetSyncedState, key: stri
  */
 export function clearWidgetSyncedState(widget: WidgetSyncedState) {
   // $$f0
-  permissionScopeHandler.plugin('clear-widget-synced-state', () => widget?.clearWidgetSyncedState?.())
+  permissionScopeHandler.plugin('clear-widget-synced-state', () => widget?.clearWidgetSyncedState?.());
 }
 
 /**
@@ -162,28 +144,24 @@ export function clearWidgetSyncedState(widget: WidgetSyncedState) {
  */
 export function getSyncedMap(mode: string, widget: WidgetSyncedState) {
   // $$_7
-  const source = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState
-  const result: Record<string, any> = {}
-  const seen = new Set<string>()
+  const source = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState;
+  const result: Record<string, any> = {};
+  const seen = new Set<string>();
   try {
     for (const key of Object.keys(source ?? {})) {
       if (key.startsWith(SYNCED_MAP_KEY_PREFIX)) {
-        const [, mapName] = key.split(':', 3)
+        const [, mapName] = key.split(':', 3);
         if (!seen.has(mapName)) {
-          seen.add(mapName)
-          result[mapName] = getSyncedMapEntry(mode, widget, mapName)
+          seen.add(mapName);
+          result[mapName] = getSyncedMapEntry(mode, widget, mapName);
         }
       }
     }
-    return result
+    return result;
+  } catch (err) {
+    reportError(ServiceCategories.EXTENSIBILITY, new Error(`Invalid syncedMap values for widgetID=${widget.widgetId}: ${err}`));
   }
-  catch (err) {
-    reportError(
-      ExtensibilityServiceCategory.EXTENSIBILITY,
-      new Error(`Invalid syncedMap values for widgetID=${widget.widgetId}: ${err}`),
-    )
-  }
-  return {}
+  return {};
 }
 
 /**
@@ -194,27 +172,22 @@ export function getSyncedMap(mode: string, widget: WidgetSyncedState) {
  */
 export function getSyncedMapEntry(mode: string, widget: WidgetSyncedState, mapName: string) {
   // $$A6
-  const source
-    = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState ?? {}
-  const prefix = `${SYNCED_MAP_PREFIX}:${mapName}:`
-  const prefixLength = prefix.length
-  const result: Record<string, any> = {}
+  const source = mode === 'current' ? widget?.getWidgetSyncedState?.() : widget?.renderedSyncedState ?? {};
+  const prefix = `${SYNCED_MAP_PREFIX}:${mapName}:`;
+  const prefixLength = prefix.length;
+  const result: Record<string, any> = {};
   try {
     for (const key of Object.keys(source)) {
       if (key.startsWith(prefix)) {
-        const value = JSON.parse(source[key])
-        result[key.substring(prefixLength)] = value
+        const value = JSON.parse(source[key]);
+        result[key.substring(prefixLength)] = value;
       }
     }
-    return result
+    return result;
+  } catch {
+    reportError(ServiceCategories.EXTENSIBILITY, new Error(`Invalid syncedMap for widgetID=${widget?.widgetId}, name=${mapName}`));
   }
-  catch  {
-    reportError(
-      ExtensibilityServiceCategory.EXTENSIBILITY,
-      new Error(`Invalid syncedMap for widgetID=${widget?.widgetId}, name=${mapName}`),
-    )
-  }
-  return {}
+  return {};
 }
 
 /**
@@ -224,20 +197,13 @@ export function getSyncedMapEntry(mode: string, widget: WidgetSyncedState, mapNa
  * @param entryKey - Entry key
  * @param value - Value to set
  */
-export function setWidgetSyncedMapEntry(
-  widget: WidgetSyncedState,
-  mapName: string,
-  entryKey: string,
-  value: any,
-) {
+export function setWidgetSyncedMapEntry(widget: WidgetSyncedState, mapName: string, entryKey: string, value: any) {
   // $$y2
-  const serialized = JSON.stringify(value)
+  const serialized = JSON.stringify(value);
   if (serialized === undefined) {
-    throw new Error(
-      `Invalid syncedMap value for widgetID=${widget?.widgetId} name=${mapName} key=${entryKey} value=${value}`,
-    )
+    throw new Error(`Invalid syncedMap value for widgetID=${widget?.widgetId} name=${mapName} key=${entryKey} value=${value}`);
   }
-  widget?.setWidgetSyncedState?.(`${SYNCED_MAP_PREFIX}:${mapName}:${entryKey}`, serialized)
+  widget?.setWidgetSyncedState?.(`${SYNCED_MAP_PREFIX}:${mapName}:${entryKey}`, serialized);
 }
 
 /**
@@ -246,13 +212,9 @@ export function setWidgetSyncedMapEntry(
  * @param mapName - Map name
  * @param entryKey - Entry key
  */
-export function deleteWidgetSyncedMapEntry(
-  widget: WidgetSyncedState,
-  mapName: string,
-  entryKey: string,
-) {
+export function deleteWidgetSyncedMapEntry(widget: WidgetSyncedState, mapName: string, entryKey: string) {
   // $$b10
-  widget?.deleteWidgetSyncedState?.(`${SYNCED_MAP_PREFIX}:${mapName}:${entryKey}`)
+  widget?.deleteWidgetSyncedState?.(`${SYNCED_MAP_PREFIX}:${mapName}:${entryKey}`);
 }
 
 /**
@@ -261,27 +223,23 @@ export function deleteWidgetSyncedMapEntry(
  * @param stateValues - Synced state values
  * @param mapValues - Synced map values
  */
-export function resetAndSetSyncedValues(
-  widget: WidgetSyncedState,
-  stateValues?: Record<string, any>,
-  mapValues?: Record<string, Record<string, any>>,
-) {
+export function resetAndSetSyncedValues(widget: WidgetSyncedState, stateValues?: Record<string, any>, mapValues?: Record<string, Record<string, any>>) {
   // $$v9
   if (widget) {
-    clearWidgetSyncedState(widget)
-    setSyncedValues(widget, stateValues, mapValues)
+    clearWidgetSyncedState(widget);
+    setSyncedValues(widget, stateValues, mapValues);
   }
 }
 
 // Exported aliases for backward compatibility and refactored names
-export const LX = clearWidgetSyncedState
-export const MN = getSyncedState
-export const Oi = setWidgetSyncedMapEntry
-export const RL = getCombinedSyncedValues
-export const Yp = setWidgetSyncedState
-export const _U = setInitialWidgetSyncedState
-export const hu = getSyncedMapEntry
-export const oj = getSyncedMap
-export const rJ = setSyncedValues
-export const sH = resetAndSetSyncedValues
-export const vH = deleteWidgetSyncedMapEntry
+export const LX = clearWidgetSyncedState;
+export const MN = getSyncedState;
+export const Oi = setWidgetSyncedMapEntry;
+export const RL = getCombinedSyncedValues;
+export const Yp = setWidgetSyncedState;
+export const _U = setInitialWidgetSyncedState;
+export const hu = getSyncedMapEntry;
+export const oj = getSyncedMap;
+export const rJ = setSyncedValues;
+export const sH = resetAndSetSyncedValues;
+export const vH = deleteWidgetSyncedMapEntry;

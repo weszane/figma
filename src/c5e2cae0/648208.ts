@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { throwError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { w as _$$w } from "../c5e2cae0/59973";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
@@ -187,17 +187,17 @@ function A({
   hasPriceAsterisk: u
 }) {
   if (!isValidAccessType(e)) {
-    reportError(_$$e.MONETIZATION_UPGRADES, Error(`Received invalid billable product key ${e}`));
+    reportError(ServiceCategories.MONETIZATION_UPGRADES, Error(`Received invalid billable product key ${e}`));
     return null;
   }
   let p = d[e];
   if (isNullish(p)) {
-    reportError(_$$e.BILLING_EXPERIENCE, Error(`Received null payment price on purchase summaryfor ${e}`));
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`Received null payment price on purchase summaryfor ${e}`));
     return null;
   }
   let h = _[e];
   if (isNullish(h)) {
-    reportError(_$$e.BILLING_EXPERIENCE, Error(`Received null line item price on purchase summary for ${e}`));
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`Received null line item price on purchase summary for ${e}`));
     return null;
   }
   let g = new CurrencyFormatter(a);

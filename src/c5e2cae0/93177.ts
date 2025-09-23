@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { isValidEmail } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
@@ -1077,7 +1077,7 @@ function eY(e) {
 }
 export function $$eK0(e) {
   return jsx(ErrorBoundaryCrash, {
-    team: _$$e.MONETIZATION_UPGRADES,
+    team: ServiceCategories.MONETIZATION_UPGRADES,
     boundaryKey: "TeamUpgradeBillingRemodel",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: y4,

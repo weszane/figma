@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback } from "react";
 import { yT, eb, Kf, BW, JF, sw } from "../figma_app/257655";
 import { CortexError, getErrorStatus } from "../figma_app/691470";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { DraftState } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -26,7 +26,7 @@ export function $$C0(e) {
       shareJSX: !!getFeatureFlags().first_draft_share_jsx,
       useAllComponents: !!getFeatureFlags().first_draft_publish_all_components,
       onError: (e, t) => {
-        reportError(_$$e.AI_GENERATION, e, t);
+        reportError(ServiceCategories.AI_GENERATION, e, t);
       }
     }
   });
@@ -66,7 +66,7 @@ async function v(e, t, i = {}) {
     let e = {
       elements: p.length
     };
-    reportError(_$$e.AI_GENERATION, t, e);
+    reportError(ServiceCategories.AI_GENERATION, t, e);
     return {};
   }
   let {
@@ -105,7 +105,7 @@ export function $$E1({
   useEffect(() => {
     N.current = observabilityClient.startUserFlow({
       name: "first_draft_generate",
-      team: _$$e.AI_GENERATION
+      team: ServiceCategories.AI_GENERATION
     });
   }, []);
   let A = useCallback(async t => {
@@ -191,7 +191,7 @@ export function $$E1({
           T.current.expandedJsx = expandedJsx;
           T.current.queuedEffects = T.current.queuedEffects || {};
         } catch (e) {
-          reportError(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
+          reportError(ServiceCategories.AI_GENERATION, e instanceof Error ? e : Error(e));
           w.current && !getSingletonSceneGraph().get(w.current) && (w.current = null, T.current.jsxStr = void 0, T.current.jsxJSON = void 0, T.current.expandedJsx = void 0);
         }
         try {
@@ -215,7 +215,7 @@ export function $$E1({
             e?.(w.current);
           }
         } catch (e) {
-          reportError(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
+          reportError(ServiceCategories.AI_GENERATION, e instanceof Error ? e : Error(e));
         }
       })();
       await T.current.donePromise;
@@ -243,7 +243,7 @@ export function $$E1({
       }
       let e = T.current.queuedEffects ?? {};
       (await Promise.allSettled(Array.from(Object.values(e)))).forEach(e => {
-        "rejected" !== e.status || e.reason instanceof CortexError && 500 > getErrorStatus(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
+        "rejected" !== e.status || e.reason instanceof CortexError && 500 > getErrorStatus(e.reason) || reportError(ServiceCategories.AI_GENERATION, e.reason);
       });
     });
   }, [O]);

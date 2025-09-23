@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi, LinterCppBindings, FileSourceType } from "../figma_app/763686";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -121,7 +121,7 @@ class L {
       } catch (e) {
         if (e instanceof eU) return;
         this.teardownLinter();
-        reportError(_$$e.AI_PRODUCTIVITY, e);
+        reportError(ServiceCategories.AI_PRODUCTIVITY, e);
       }
     }
   }
@@ -158,7 +158,7 @@ class L {
       console.error("Error updating violations:", e);
     } finally {
       let e = this.designLinterStateManager.getStatus();
-      e === td.RESPONDING_TO_CANVAS_CHANGE ? this.designLinterStateManager.setStatus(td.GROUPING_COMPLETE) : reportError(_$$e.AI_PRODUCTIVITY, Error("Linter status changed during updateViolationsForNodes"), {
+      e === td.RESPONDING_TO_CANVAS_CHANGE ? this.designLinterStateManager.setStatus(td.GROUPING_COMPLETE) : reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Linter status changed during updateViolationsForNodes"), {
         extra: {
           currentStatus: e
         }

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createHeadlessEditor } from "../vendor/24766";
 import { UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, STRIKETHROUGH, ITALIC_STAR, ITALIC_UNDERSCORE, CODE, HEADING, INLINE_CODE } from "../vendor/693164";
 import { x as _$$x } from "../vendor/952653";
@@ -70,7 +70,7 @@ export function $$L0({
       nodes: lexicalNodes,
       onError: t => {
         console.error(t);
-        reportError(_$$e.EXTENSIBILITY, t, {
+        reportError(ServiceCategories.EXTENSIBILITY, t, {
           extra: {
             htmlString: e
           }
@@ -83,7 +83,7 @@ export function $$L0({
     namespace: b,
     onError(r) {
       console.error(r);
-      reportError(_$$e.EXTENSIBILITY, r, {
+      reportError(ServiceCategories.EXTENSIBILITY, r, {
         extra: {
           namespace: b,
           editorInput: "lexical" === t ? e || R : B,

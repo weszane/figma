@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Link } from "../905/438674";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -38,13 +38,13 @@ var y = A;
 let B = "dynamic";
 export function $$V0(e) {
   let t = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   }).key.parentId;
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "TeamStartAnnualPlanModal",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     children: jsx(TrackingProvider, {
       name: "Team Start Annual Plan Modal",
       properties: {
@@ -90,7 +90,7 @@ function H(e) {
   let t = useDispatch();
   let i = useModalManager(e);
   let d = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let c = xQ();
   let f = useSelector(e => e.teamBilling);

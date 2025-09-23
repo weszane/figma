@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { FirstDraftHelpers, Thumbnail } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { uploadToPresignedPost } from "../905/623179";
@@ -161,16 +161,16 @@ async function f(e) {
     r[t.key] = n;
   }
   let a = (await b.getUploadThumbnailsPresignedPostUrls(Object.keys(r).length)).data.meta.presigned_posts;
-  a.length < Object.keys(r).length ? reportError(_$$e.AI_GENERATION, Error("Mismatch between number of thumbnails and presigned URLs")) : await Promise.allSettled(Object.entries(r).map(async ([e, r], i) => {
+  a.length < Object.keys(r).length ? reportError(ServiceCategories.AI_GENERATION, Error("Mismatch between number of thumbnails and presigned URLs")) : await Promise.allSettled(Object.entries(r).map(async ([e, r], i) => {
     let {
       url,
       fields
     } = a[i];
     try {
-      let i = await uploadToPresignedPost(_$$e.AI_GENERATION, "uploadThumbnails", url, fields, r, "application/octet-stream");
+      let i = await uploadToPresignedPost(ServiceCategories.AI_GENERATION, "uploadThumbnails", url, fields, r, "application/octet-stream");
       t[e] = i;
     } catch (e) {
-      reportError(_$$e.AI_GENERATION, Error("Unable to upload example thumbnail to S3"));
+      reportError(ServiceCategories.AI_GENERATION, Error("Unable to upload example thumbnail to S3"));
     }
   }));
   return t;

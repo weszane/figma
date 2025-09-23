@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ColorOptions, WhiteboardTsApi, WeightLevel } from "../figma_app/763686";
 import { reportError } from "../905/11";
 import { t1 } from "../figma_app/728075";
@@ -23,14 +23,14 @@ export function $$c0(e, t) {
       };
       let s = l.get(t);
       if (void 0 === s) {
-        reportError(_$$e.FIGJAM, Error(`The ${t} WhiteboardColor doesn't exist in the FigJam UI3 color ramp map from C++`));
+        reportError(ServiceCategories.FIGJAM, Error(`The ${t} WhiteboardColor doesn't exist in the FigJam UI3 color ramp map from C++`));
         continue;
       }
       d.set(s, e);
     }
   }();
   let i = d.get(e);
-  return i ? i[t] : (reportError(_$$e.FIGJAM, Error(`The ${e} ColorRampName doesn't exist in the whiteboardUI3ColorRamps map`)), t1);
+  return i ? i[t] : (reportError(ServiceCategories.FIGJAM, Error(`The ${e} ColorRampName doesn't exist in the whiteboardUI3ColorRamps map`)), t1);
 }
 export const W = $$c0;
 export const r = $$o1;

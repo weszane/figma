@@ -1,16 +1,16 @@
-import { reportError, setTagGlobal, setTagsGlobal } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { getI18nString } from '../905/303541'
-import { CPPEventType } from '../905/535806'
-import { AccessLevelEnum } from '../905/557142'
-import { getFeatureFlags } from '../905/601108'
-import { currentSelectionAtom } from '../905/617744'
-import { logError } from '../905/714362'
-import { WB as getObservableState } from '../905/761735'
-import { XHR } from '../905/910117'
-import { atomStoreManager } from '../figma_app/27355'
-import { FFileType } from '../figma_app/191312'
-import { encodeUri } from '../figma_app/930338'
+import { reportError, setTagGlobal, setTagsGlobal } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { getI18nString } from '../905/303541';
+import { CPPEventType } from '../905/535806';
+import { AccessLevelEnum } from '../905/557142';
+import { getFeatureFlags } from '../905/601108';
+import { currentSelectionAtom } from '../905/617744';
+import { logError } from '../905/714362';
+import { WB as getObservableState } from '../905/761735';
+import { XHR } from '../905/910117';
+import { atomStoreManager } from '../figma_app/27355';
+import { FFileType } from '../figma_app/191312';
+import { encodeUri } from '../figma_app/930338';
 
 // Refactored code with logical groupings, meaningful names, JSDoc comments, and type annotations.
 // Original function names are preserved in comments for traceability.
@@ -18,37 +18,34 @@ import { encodeUri } from '../figma_app/930338'
 
 // Type definitions for clarity
 export interface FileEntity {
-  default_file_key?: string
-  defaultFileKey?: string
-  file_repo_id?: string
-  source_file_key?: string
-  fileRepoId?: string
-  sourceFileKey?: string
-  sourceLibraryKey?: string
-  key: string
-  name?: string
-  trashedAt?: string
-  has_file_link_password?: boolean
-  has_proto_link_password?: boolean
-  touched_at?: number
-  id?: string
+  default_file_key?: string;
+  defaultFileKey?: string;
+  file_repo_id?: string;
+  source_file_key?: string;
+  fileRepoId?: string;
+  sourceFileKey?: string;
+  sourceLibraryKey?: string;
+  key: string;
+  name?: string;
+  trashedAt?: string;
+  has_file_link_password?: boolean;
+  has_proto_link_password?: boolean;
+  touched_at?: number;
+  id?: string;
 }
-
 export interface BranchEntity {
-  touched_at: any
-  key: string
-  name?: string
-  default_file_key?: string
-  defaultFileKey?: string
-  trashed_at?: string
+  touched_at: any;
+  key: string;
+  name?: string;
+  default_file_key?: string;
+  defaultFileKey?: string;
+  trashed_at?: string;
 }
-
 interface UserEntity {
-  name?: string
+  name?: string;
 }
-
 interface AccessInfo {
-  level: AccessLevelEnum
+  level: AccessLevelEnum;
 }
 
 // Type Checks
@@ -57,35 +54,35 @@ interface AccessInfo {
  * @param e - The file entity.
  * @returns True if it's a branch.
  */
-export const isBranch = (e: FileEntity): boolean => !!(e.file_repo_id && e.source_file_key)
+export const isBranch = (e: FileEntity): boolean => !!(e.file_repo_id && e.source_file_key);
 
 /**
  * Checks if the entity is a branch (original: $$_6).
  * @param e - The file entity.
  * @returns True if it's a branch.
  */
-export const isBranchAlt = (e: FileEntity): boolean => !!(e.fileRepoId && e.sourceFileKey)
+export const isBranchAlt = (e: FileEntity): boolean => !!(e.fileRepoId && e.sourceFileKey);
 
 /**
  * Returns the type string for the entity (original: $$v11).
  * @param e - The file entity.
  * @returns 'branch' or 'file'.
  */
-export const getEntityType = (e: FileEntity): string => isBranch(e) ? getI18nString('file_info_row.branch') : getI18nString('file_info_row.file')
+export const getEntityType = (e: FileEntity): string => isBranch(e) ? getI18nString('file_info_row.branch') : getI18nString('file_info_row.file');
 
 /**
  * Checks if the entity is trashed (original: $$x15).
  * @param e - The file entity.
  * @returns True if trashed.
  */
-export const isTrashed = (e: FileEntity): boolean => isBranchAlt(e) && !!e.trashedAt
+export const isTrashed = (e: FileEntity): boolean => isBranchAlt(e) && !!e.trashedAt;
 
 /**
  * Checks if the entity has a password (original: $$S25).
  * @param e - The file entity.
  * @returns True if it has a password.
  */
-export const hasPassword = (e: FileEntity): boolean => !!(e?.has_file_link_password || e?.has_proto_link_password)
+export const hasPassword = (e: FileEntity): boolean => !!(e?.has_file_link_password || e?.has_proto_link_password);
 
 // Comparisons
 
@@ -95,7 +92,7 @@ export const hasPassword = (e: FileEntity): boolean => !!(e?.has_file_link_passw
  * @param t - The key.
  * @returns True if matches.
  */
-export const matchesSourceKey = (e: FileEntity, t: string): boolean => isBranch(e) && e.source_file_key === t
+export const matchesSourceKey = (e: FileEntity, t: string): boolean => isBranch(e) && e.source_file_key === t;
 
 /**
  * Compares entity with key (original: $$A19).
@@ -103,7 +100,7 @@ export const matchesSourceKey = (e: FileEntity, t: string): boolean => isBranch(
  * @param t - The key.
  * @returns Comparison result.
  */
-export const compareWithKey = (e: FileEntity, t: any): boolean => matchesSourceKey(e, t.key)
+export const compareWithKey = (e: FileEntity, t: any): boolean => matchesSourceKey(e, t.key);
 
 /**
  * Matches source library key (original: $$b9).
@@ -111,7 +108,7 @@ export const compareWithKey = (e: FileEntity, t: any): boolean => matchesSourceK
  * @param t - The key.
  * @returns True if matches.
  */
-export const matchesLibraryKey = (e: FileEntity, t: string): boolean => isBranchAlt(e) && e.sourceLibraryKey === t
+export const matchesLibraryKey = (e: FileEntity, t: string): boolean => isBranchAlt(e) && e.sourceLibraryKey === t;
 
 /**
  * Checks if it's the default file (original: $$I12).
@@ -119,7 +116,7 @@ export const matchesLibraryKey = (e: FileEntity, t: string): boolean => isBranch
  * @param t - The file entity.
  * @returns True if default.
  */
-export const isDefaultFile = (e: BranchEntity, t: FileEntity): boolean => e.key === t.default_file_key
+export const isDefaultFile = (e: BranchEntity, t: FileEntity): boolean => e.key === t.default_file_key;
 
 /**
  * Checks if it's the default file (original: $$E10).
@@ -127,7 +124,7 @@ export const isDefaultFile = (e: BranchEntity, t: FileEntity): boolean => e.key 
  * @param t - The file entity.
  * @returns True if default.
  */
-export const isDefaultFileAlt = (e: BranchEntity, t: FileEntity): boolean => e.key === t.defaultFileKey
+export const isDefaultFileAlt = (e: BranchEntity, t: FileEntity): boolean => e.key === t.defaultFileKey;
 
 // URL Generation
 
@@ -137,7 +134,7 @@ export const isDefaultFileAlt = (e: BranchEntity, t: FileEntity): boolean => e.k
  * @param t - The file entity.
  * @returns The display name.
  */
-export const getDisplayName = (e: any, t: any): string => isDefaultFile(e, t) ? t.name || 'Untitled' : e.name || 'Untitled'
+export const getDisplayName = (e: any, t: any): string => isDefaultFile(e, t) ? t.name || 'Untitled' : e.name || 'Untitled';
 
 /**
  * Builds URL path (original: $$R18).
@@ -147,12 +144,11 @@ export const getDisplayName = (e: any, t: any): string => isDefaultFile(e, t) ? 
  * @returns The URL path.
  */
 export function buildUrlPath(e: FileEntity, t: BranchEntity, i: string): string {
-  let n = `/${i}`
-  n += isBranch(e) && t?.default_file_key ? `/${t.default_file_key}/branch/${e.key}` : `/${e.key}`
-  const r = encodeUri(getDisplayName(t, e))
-  if (r)
-    n += `/${r}`
-  return n
+  let n = `/${i}`;
+  n += isBranch(e) && t?.default_file_key ? `/${t.default_file_key}/branch/${e.key}` : `/${e.key}`;
+  const r = encodeUri(getDisplayName(t, e));
+  if (r) n += `/${r}`;
+  return n;
 }
 
 /**
@@ -163,12 +159,11 @@ export function buildUrlPath(e: FileEntity, t: BranchEntity, i: string): string 
  * @returns The URL path.
  */
 function buildUrlPathAlt(e: FileEntity, t: BranchEntity, i: string): string {
-  let n = `/${i}`
-  n += isBranchAlt(e) && t?.defaultFileKey ? `/${t.defaultFileKey}/branch/${e.key}` : `/${e.key}`
-  const r = encodeUri((t?.name ?? e?.name) || 'Untitled')
-  if (r)
-    n += `/${r}`
-  return n
+  let n = `/${i}`;
+  n += isBranchAlt(e) && t?.defaultFileKey ? `/${t.defaultFileKey}/branch/${e.key}` : `/${e.key}`;
+  const r = encodeUri((t?.name ?? e?.name) || 'Untitled');
+  if (r) n += `/${r}`;
+  return n;
 }
 
 /**
@@ -178,8 +173,8 @@ function buildUrlPathAlt(e: FileEntity, t: BranchEntity, i: string): string {
  * @returns The editor type.
  */
 function getEditorType(e: string, t: any): string {
-  const i = t.editor_type || t.editorType
-  return e === 'proto' ? e : i === FFileType.DESIGN ? 'design' : e
+  const i = t.editor_type || t.editorType;
+  return e === 'proto' ? e : i === FFileType.DESIGN ? 'design' : e;
 }
 
 /**
@@ -189,14 +184,10 @@ function getEditorType(e: string, t: any): string {
  */
 function optimizeUrl(e: URL): URL {
   try {
-    const t = e.pathname.split('/')[1]
-    if (t === 'file')
-      e.searchParams.append('type', FFileType.DESIGN)
-    else if (t === 'design')
-      e.searchParams.append('m', 'auto')
-  }
-  catch { }
-  return e
+    const t = e.pathname.split('/')[1];
+    if (t === 'file') e.searchParams.append('type', FFileType.DESIGN);else if (t === 'design') e.searchParams.append('m', 'auto');
+  } catch {}
+  return e;
 }
 
 /**
@@ -207,8 +198,8 @@ function optimizeUrl(e: URL): URL {
  * @returns The URL href.
  */
 export function generateUrl(e: FileEntity, t: BranchEntity, i: string): string {
-  const n = getEditorType(i, e)
-  return optimizeUrl(new URL(buildUrlPath(e, t, n), document.baseURI)).href
+  const n = getEditorType(i, e);
+  return optimizeUrl(new URL(buildUrlPath(e, t, n), document.baseURI)).href;
 }
 
 /**
@@ -219,8 +210,8 @@ export function generateUrl(e: FileEntity, t: BranchEntity, i: string): string {
  * @returns The URL.
  */
 export function generateUrlAlt(e: FileEntity, t: BranchEntity, i: string): URL {
-  const n = getEditorType(i, e)
-  return optimizeUrl(new URL(buildUrlPathAlt(e, t, n), document.baseURI))
+  const n = getEditorType(i, e);
+  return optimizeUrl(new URL(buildUrlPathAlt(e, t, n), document.baseURI));
 }
 
 // Data Manipulation
@@ -232,18 +223,23 @@ export function generateUrlAlt(e: FileEntity, t: BranchEntity, i: string): URL {
  * @param n - The user key.
  * @returns Filtered branches.
  */
-export function filterBranches(e: FileEntity, t: BranchEntity[], i: Record<string, Record<string, AccessInfo>>, n: string): Array<{ key: string, name: string, isMain: boolean, ownedByUser: boolean }> {
-  return t.filter(branch => !(isBranch(branch) && branch.trashed_at)).map((branch) => {
-    const r = isDefaultFile(branch, e)
-    const a = i[branch.key] && i[branch.key][n]
-    const s = !r && a?.level === AccessLevelEnum.OWNER
+export function filterBranches(e: FileEntity, t: BranchEntity[], i: Record<string, Record<string, AccessInfo>>, n: string): Array<{
+  key: string;
+  name: string;
+  isMain: boolean;
+  ownedByUser: boolean;
+}> {
+  return t.filter(branch => !(isBranch(branch) && branch.trashed_at)).map(branch => {
+    const r = isDefaultFile(branch, e);
+    const a = i[branch.key] && i[branch.key][n];
+    const s = !r && a?.level === AccessLevelEnum.OWNER;
     return {
       key: branch.key,
       name: r ? 'Main' : branch.name,
       isMain: r,
-      ownedByUser: s,
-    }
-  })
+      ownedByUser: s
+    };
+  });
 }
 
 /**
@@ -254,8 +250,8 @@ export function filterBranches(e: FileEntity, t: BranchEntity[], i: Record<strin
  * @returns The found branch.
  */
 export function findBranchById(e: FileEntity, t: BranchEntity[], i: Record<string, string>): BranchEntity {
-  const n = i[e.id] || ''
-  return findBestBranch(e, t, n)
+  const n = i[e.id] || '';
+  return findBestBranch(e, t, n);
 }
 
 /**
@@ -267,11 +263,10 @@ export function findBranchById(e: FileEntity, t: BranchEntity[], i: Record<strin
  */
 export function findBestBranch(e: FileEntity, t: BranchEntity[], i: string): BranchEntity {
   if (i) {
-    const found = t.find(branch => branch.key === i)
-    if (found)
-      return found
+    const found = t.find(branch => branch.key === i);
+    if (found) return found;
   }
-  return t.find(branch => isDefaultFile(branch, e)) || t.reduce((prev, curr) => prev.touched_at > curr.touched_at ? prev : curr, t[0])
+  return t.find(branch => isDefaultFile(branch, e)) || t.reduce((prev, curr) => prev.touched_at > curr.touched_at ? prev : curr, t[0]);
 }
 
 /**
@@ -280,7 +275,7 @@ export function findBestBranch(e: FileEntity, t: BranchEntity[], i: string): Bra
  * @param t - The user entity.
  * @returns The display name.
  */
-export const getDisplayNameAlt = (e: FileEntity, t: UserEntity): string => (e?.name ?? t?.name) || 'Untitled'
+export const getDisplayNameAlt = (e: FileEntity, t: UserEntity): string => (e?.name ?? t?.name) || 'Untitled';
 
 /**
  * Gets repo by ID (original: $$T7).
@@ -289,10 +284,9 @@ export const getDisplayNameAlt = (e: FileEntity, t: UserEntity): string => (e?.n
  * @returns The repo.
  */
 export function getRepoById(e: FileEntity, t: Record<string, any>): any {
-  if (!e)
-    return null
-  const i = e.file_repo_id
-  return i && t[i] || null
+  if (!e) return null;
+  const i = e.file_repo_id;
+  return i && t[i] || null;
 }
 
 /**
@@ -302,10 +296,9 @@ export function getRepoById(e: FileEntity, t: Record<string, any>): any {
  * @returns The repo.
  */
 export function getRepoByIdAlt(e: FileEntity, t: Record<string, any>): any {
-  if (!e)
-    return null
-  const i = e.fileRepoId
-  return i && t[i] || null
+  if (!e) return null;
+  const i = e.fileRepoId;
+  return i && t[i] || null;
 }
 
 // Async Operations
@@ -314,35 +307,62 @@ export function getRepoByIdAlt(e: FileEntity, t: Record<string, any>): any {
  * @param e - The file keys.
  * @returns The result.
  */
-export async function restoreFiles(e: string[]): Promise<{ status: 'success' | 'error', message?: string }> {
+export async function restoreFiles(e: string[]): Promise<{
+  status: 'success' | 'error';
+  message?: string;
+}> {
   const t = XHR.post('/api/files_batch/restore', {
-    files: e.map(key => ({ key })),
-    batch_fail_on_file_limit: true,
-  })
-  const i = { File: {} }
-  e.forEach((key) => {
-    i.File[key] = { key, trashedAt: undefined }
-  })
+    files: e.map(key => ({
+      key
+    })),
+    batch_fail_on_file_limit: true
+  });
+  const i = {
+    File: {}
+  };
+  e.forEach(key => {
+    i.File[key] = {
+      key,
+      trashedAt: undefined
+    };
+  });
   try {
-    const n = await getObservableState().optimisticallyUpdate(i, t)
+    const n = await getObservableState().optimisticallyUpdate(i, t);
     if (n.status === 207) {
       try {
-        const data = n.data
-        return { status: 'error', message: data.message }
-      }
-      catch {
-        return { status: 'error', message: getI18nString('collaboration.branching.error_restoring_branches', { branchCount: e.length }) }
+        const data = n.data;
+        return {
+          status: 'error',
+          message: data.message
+        };
+      } catch {
+        return {
+          status: 'error',
+          message: getI18nString('collaboration.branching.error_restoring_branches', {
+            branchCount: e.length
+          })
+        };
       }
     }
-    return { status: 'success' }
-  }
-  catch ({ response: t }) {
+    return {
+      status: 'success'
+    };
+  } catch ({
+    response: t
+  }) {
     try {
-      const data = JSON.parse(t)
-      return { status: 'error', message: data.message }
-    }
-    catch {
-      return { status: 'error', message: getI18nString('collaboration.branching.error_restoring_branches', { branchCount: e.length }) }
+      const data = JSON.parse(t);
+      return {
+        status: 'error',
+        message: data.message
+      };
+    } catch {
+      return {
+        status: 'error',
+        message: getI18nString('collaboration.branching.error_restoring_branches', {
+          branchCount: e.length
+        })
+      };
     }
   }
 }
@@ -352,7 +372,7 @@ export async function restoreFiles(e: string[]): Promise<{ status: 'success' | '
  * Gets diff version (original: $$B2).
  * @returns The version.
  */
-export const getDiffVersion = (): number => getFeatureFlags().fig_diff_remove_canvas_fields_write ? 7 : 6
+export const getDiffVersion = (): number => getFeatureFlags().fig_diff_remove_canvas_fields_write ? 7 : 6;
 
 /**
  * Creates tags (original: V).
@@ -364,8 +384,8 @@ function createTags(e: CPPEventType, t: string | null): Record<string, string> {
   return {
     'bm.branchingFailureType': e,
     'bm.diffVersion': `${getDiffVersion()}`,
-    'bm.mergeDirection': t ?? 'unknown',
-  }
+    'bm.mergeDirection': t ?? 'unknown'
+  };
 }
 
 /**
@@ -373,12 +393,12 @@ function createTags(e: CPPEventType, t: string | null): Record<string, string> {
  * @param e - The failure type.
  * @param t - The merge direction.
  */
-export const setGlobalTags = (e: CPPEventType, t: string | null): void => setTagsGlobal(createTags(e, t))
+export const setGlobalTags = (e: CPPEventType, t: string | null): void => setTagsGlobal(createTags(e, t));
 
 /**
  * Clears global tags (original: $$z23).
  */
-export const clearGlobalTags = (): void => Object.keys(createTags(CPPEventType.UNHANDLED, null)).forEach(key => setTagGlobal(key, undefined))
+export const clearGlobalTags = (): void => Object.keys(createTags(CPPEventType.UNHANDLED, null)).forEach(key => setTagGlobal(key, undefined));
 
 /**
  * Handles error (original: $$H4).
@@ -388,8 +408,10 @@ export const clearGlobalTags = (): void => Object.keys(createTags(CPPEventType.U
  * @param r - The context.
  */
 export function handleError(e: Error, t: CPPEventType, i: string | null, r: any): void {
-  logError('branching', e.message, r)
-  reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, { tags: createTags(t, i) })
+  logError('branching', e.message, r);
+  reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, {
+    tags: createTags(t, i)
+  });
 }
 
 /**
@@ -398,35 +420,37 @@ export function handleError(e: Error, t: CPPEventType, i: string | null, r: any)
  * @param t - The context.
  */
 export function handleModalError(e: Error, t: any): void {
-  const i: any = atomStoreManager.get(currentSelectionAtom)
-  logError('branching', e.message, t)
-  reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, { tags: createTags(CPPEventType.MODAL, i) })
+  const i: any = atomStoreManager.get(currentSelectionAtom);
+  logError('branching', e.message, t);
+  reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, {
+    tags: createTags(CPPEventType.MODAL, i)
+  });
 }
 
 // Updated exports with refactored names
-export const At = getDisplayName
-export const By = generateUrlAlt
-export const C2 = getDiffVersion
-export const CE = generateUrl
-export const HJ = handleError
-export const J8 = restoreFiles
-export const Kz = isBranchAlt
-export const L8 = getRepoById
-export const LH = findBestBranch
-export const LP = matchesLibraryKey
-export const Ns = isDefaultFileAlt
-export const Pn = getEntityType
-export const SA = isDefaultFile
-export const Xm = isBranch
-export const cb = handleModalError
-export const ci = isTrashed
-export const dn = setGlobalTags
-export const dp = matchesSourceKey
-export const gN = buildUrlPath
-export const gs = compareWithKey
-export const gx = filterBranches
-export const mr = findBranchById
-export const oj = getDisplayNameAlt
-export const qk = clearGlobalTags
-export const up = getRepoByIdAlt
-export const yR = hasPassword
+export const At = getDisplayName;
+export const By = generateUrlAlt;
+export const C2 = getDiffVersion;
+export const CE = generateUrl;
+export const HJ = handleError;
+export const J8 = restoreFiles;
+export const Kz = isBranchAlt;
+export const L8 = getRepoById;
+export const LH = findBestBranch;
+export const LP = matchesLibraryKey;
+export const Ns = isDefaultFileAlt;
+export const Pn = getEntityType;
+export const SA = isDefaultFile;
+export const Xm = isBranch;
+export const cb = handleModalError;
+export const ci = isTrashed;
+export const dn = setGlobalTags;
+export const dp = matchesSourceKey;
+export const gN = buildUrlPath;
+export const gs = compareWithKey;
+export const gx = filterBranches;
+export const mr = findBranchById;
+export const oj = getDisplayNameAlt;
+export const qk = clearGlobalTags;
+export const up = getRepoByIdAlt;
+export const yR = hasPassword;

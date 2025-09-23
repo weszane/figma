@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler, zk } from '../905/189185';
 import { maybeCreateSavepoint } from '../905/294113';
 import { getI18nString } from '../905/303541';
@@ -62,9 +62,9 @@ async function O(e, t, r, n, d) {
     try {
       let e = await maybeCreateSavepoint(h, zi(t) ?? void 0, m, p, !0);
       u = e?.id;
-      h && !u && reportError(_$$e.DEVELOPER_TOOLS, new Error('[Dev mode activity] createSavepoint returned no id'));
+      h && !u && reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('[Dev mode activity] createSavepoint returned no id'));
     } catch (e) {
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating version on status change: ${e.stack}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating version on status change: ${e.stack}`));
     }
   }
   let y = !1;
@@ -78,7 +78,7 @@ async function O(e, t, r, n, d) {
     }).then(() => {
       y = !0;
     }).catch(e => {
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${e.stack}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${e.stack}`));
     }).finally(() => {
       let t = performance.now() - g;
       trackFileEvent('dev_handoff_status_activity', h, _, {

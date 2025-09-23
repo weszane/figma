@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { webGPUBindings, GpuErrorType, ColorSpaceEnum } from "../figma_app/763686";
 import { getWasmModule } from "../figma_app/762706";
 import { getPreferredWebGLContext } from "../905/686312";
@@ -295,11 +295,11 @@ class _ {
         powerPreference: "low-power"
       })) && !t.isFallbackAdapter || (logWarning("GPU", "Failed to get low-power WebGPU adapter. Trying default."), t = await navigator.gpu.requestAdapter()));
     } catch (e) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
       try {
         t = await navigator.gpu.requestAdapter();
       } catch (e) {
-        reportError(_$$e.RENDERING_AND_ANIMATION, e);
+        reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
       }
     }
     if (!t) {
@@ -317,7 +317,7 @@ class _ {
     try {
       this._device = await t.requestDevice();
     } catch (t) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, t);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, t);
       this._initializationStatus = "webgpu_no_device";
       e();
       return;
@@ -398,7 +398,7 @@ class _ {
     try {
       l.writeBuffer(d, i, n, a, s);
     } catch (e) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
     }
   }
   writeTexture(e, t, i, n) {
@@ -423,7 +423,7 @@ class _ {
         height: o.height
       });
     } catch (e) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
     }
   }
   copyExternalImageToTexture(e, t, i) {
@@ -447,7 +447,7 @@ class _ {
         height: s.height
       });
     } catch (e) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
     }
   }
   readPixels(e, t, i, n, a, s, o) {
@@ -463,7 +463,7 @@ class _ {
     try {
       return this._syncReadback.readPixels(d, c, i, n, a, s, o, this._gpuDeviceInfo);
     } catch (e) {
-      reportError(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(ServiceCategories.RENDERING_AND_ANIMATION, e);
       return !1;
     }
   }
@@ -573,7 +573,7 @@ class _ {
     }
     if (e.jsErrorsToReport) for (; e.jsErrorsToReport.length > 0;) {
       let t = e.jsErrorsToReport.shift();
-      t && (reportError(_$$e.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.JS_ERROR));
+      t && (reportError(ServiceCategories.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.JS_ERROR));
     }
   }
   async _testCompositeTilePipeline() {

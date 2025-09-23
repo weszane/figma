@@ -3,7 +3,7 @@ import { useId, useRef, useState, useEffect, Fragment as _$$Fragment, useCallbac
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
@@ -433,7 +433,7 @@ function eF(e) {
     unsupported
   } = _$$d(e.userLabel, m, e.planUserMembershipRecord);
   useEffect(() => {
-    unsupported && e.planUserMembershipRecord?.source && null === i.current && (reportError(_$$e.SCALE, Error(`Unsupported plan join source ${e.planUserMembershipRecord.source}`)), i.current = !0);
+    unsupported && e.planUserMembershipRecord?.source && null === i.current && (reportError(ServiceCategories.SCALE, Error(`Unsupported plan join source ${e.planUserMembershipRecord.source}`)), i.current = !0);
   }, [unsupported, e.planUserMembershipRecord?.source]);
   let v = u?.toLocaleDateString(void 0, {
     year: "numeric",

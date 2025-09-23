@@ -4,7 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { debounce } from "../905/915765";
 import { deepEqual } from "../905/382883";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { b as _$$b } from "../905/618904";
 import { b as _$$b2, c as _$$c } from "../905/308099";
 import { Label } from "../905/270045";
@@ -2267,7 +2267,7 @@ class iW extends Component {
       this.setState({
         step: metadata.isPaid && !this.props.publishedPlugin.third_party_m10n_status ? 2 : 1
       });
-      this.props.validPluginId || reportError(_$$e.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
+      this.props.validPluginId || reportError(ServiceCategories.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
       let i = this.props.validPluginId ?? "";
       let n = this.props.publishedPlugin.third_party_m10n_status === ProductStatus.FLAGGED && metadata.isPaid;
       if (!this.isInEditPageMode() && (this.state.shouldIncrementVersion || n) && this.props.localPlugin) {
@@ -2366,7 +2366,7 @@ class iW extends Component {
       });
     };
     this.updatePublishedPlugin = (e, t, i = !0) => {
-      this.props.validPluginId || reportError(_$$e.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
+      this.props.validPluginId || reportError(ServiceCategories.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
       let n = this.props.validPluginId ?? "";
       this.submitSecurityForm();
       let r = getPublishingRole(this.getOrgToPublishTo(), this.state.roleToPublishAs);

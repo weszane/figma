@@ -101,4 +101,5 @@ export enum ServiceCategories {
   WEB_PLATFORM = 'web_platform',
   WORKFLOW = 'workflow',
 }
-export const e = ServiceCategories
+// export const  = ServiceCategories
+export const ServiceCategories = ServiceCategories

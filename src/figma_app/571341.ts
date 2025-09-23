@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
@@ -29,7 +29,7 @@ import { DevModeActivity } from "../figma_app/43951";
 import { setupResourceAtomHandler } from "../905/713695";
 import { generateCanvasKey, versionHistoryKeyAtom, fileVersionsQuery } from "../figma_app/841351";
 import { ViewType } from "../905/535806";
-import { NK } from "../figma_app/111825";
+import { getValidNumber } from "../figma_app/111825";
 import { compareChangesModalPadding } from "../figma_app/786175";
 import { Hb, KJ, DF, Lg, $0, Sl, GE } from "../905/850755";
 let $$F10 = {
@@ -47,7 +47,7 @@ export function $$V13(e, t) {
   let n = useSelector(e => e.mirror.appModel.currentPage);
   let i = t ?? n;
   let s = useSelector(e => e.fileVersion);
-  return !!r && !!i && !!e && generateCanvasKey(r, i, e, NK(s)) === atomStoreManager.get(versionHistoryKeyAtom);
+  return !!r && !!i && !!e && generateCanvasKey(r, i, e, getValidNumber(s)) === atomStoreManager.get(versionHistoryKeyAtom);
 }
 export function $$H7(e) {
   let t = new Map();
@@ -71,7 +71,7 @@ export function $$z8(e) {
     enabled: !!t
   });
   useEffect(() => {
-    "errors" === o.status && reportError(_$$e.FEEDBACK, Error(`Version fetch in CC error: ${o.errors}`));
+    "errors" === o.status && reportError(ServiceCategories.FEEDBACK, Error(`Version fetch in CC error: ${o.errors}`));
   }, [o.status]);
   return {
     versions: o.data || [],
@@ -95,7 +95,7 @@ export function $$K1(e) {
     if ("loaded" === n.status) {
       let t = n.data.file;
       if (t.status === tT.Error) {
-        reportError(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: File error = " + t.error));
+        reportError(ServiceCategories.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: File error = " + t.error));
         return null;
       }
       let r = t.data?.devModeActivity;
@@ -109,7 +109,7 @@ export function $$K1(e) {
       }));
       return i;
     }
-    return "errors" === n.status ? (reportError(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: " + JSON.stringify(n.errors))), null) : "loading" === n.status ? "loading" : null;
+    return "errors" === n.status ? (reportError(ServiceCategories.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: " + JSON.stringify(n.errors))), null) : "loading" === n.status ? "loading" : null;
   }, [n, a, e, o]);
 }
 export function $$Y0(e) {

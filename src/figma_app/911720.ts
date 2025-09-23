@@ -1,6 +1,6 @@
 import _require from "../2824/40443";
 import { sj, Ep, _0, s8, n2, pD, k9, NB, Zw, fJ } from "../figma_app/728005";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -85,7 +85,7 @@ export async function $$A0(e, t, l, c, p) {
       return n;
     } catch (t) {
       console.error("Error extracting annotations", t);
-      reportError(_$$e.DEVELOPER_TOOLS, t, {
+      reportError(ServiceCategories.DEVELOPER_TOOLS, t, {
         extra: {
           rootNode: e?.guid
         }

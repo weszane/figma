@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { Yx } from "../3276/926297";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
@@ -100,7 +100,7 @@ function P(e) {
   try {
     return new Set(JSON.parse(localStorage.getItem(e) ?? "[]"));
   } catch (t) {
-    reportError(_$$e.MONETIZATION_EXPANSION, Error(`Failed to parse read file requests from storage: ${t}`));
+    reportError(ServiceCategories.MONETIZATION_EXPANSION, Error(`Failed to parse read file requests from storage: ${t}`));
     localStorage.removeItem(e);
     return null;
   }

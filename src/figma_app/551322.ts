@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Wn } from "../figma_app/88484";
@@ -161,7 +161,7 @@ export function $$ee2({
   if ("loaded" !== B.status || 0 === B.data.currentUser.teamEditRoles.length) return null;
   let V = B.data.currentUser.teamEditRoles.map(e => e.team).filter(e => e && e.projects && !e.deletedAt && e.projects.length > 0);
   if (0 === V.length) {
-    reportError(_$$e.MONETIZATION_UPGRADES, Error("MoveDraftsTeamNudgeView rendered with noTeamWithProjects"));
+    reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("MoveDraftsTeamNudgeView rendered with noTeamWithProjects"));
     return null;
   }
   let H = 1 === V.length;

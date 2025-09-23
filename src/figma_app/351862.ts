@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { toCamelCase } from "../figma_app/664063";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ii, F7 } from "../905/859698";
 import { ConfirmationLevel, Fullscreen, WhiteboardTsApi, Command, DesignGraphElements, AlignmentPosition, LibraryPubSub, Confirmation, SceneIdentifier, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -423,7 +423,7 @@ export async function $$tW13(e, t, r) {
     Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
     atomStoreManager.set(W6, t);
   } catch (e) {
-    reportError(_$$e.FIGJAM, e);
+    reportError(ServiceCategories.FIGJAM, e);
   }
 }
 export function $$tK8(e, t) {
@@ -468,10 +468,10 @@ export function $$tY9(e, t) {
       }
       Fullscreen && (Fullscreen.triggerActionEnumInUserEditScope(Command.COMMIT, {}), Fullscreen.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, {}), (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
     }).catch(e => {
-      reportError(_$$e.FIGJAM, e);
+      reportError(ServiceCategories.FIGJAM, e);
     });
   } catch (e) {
-    reportError(_$$e.FIGJAM, e);
+    reportError(ServiceCategories.FIGJAM, e);
   }
 }
 export function $$t$2(e) {

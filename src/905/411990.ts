@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { T } from "../905/880327";
 import { showModalHandler } from "../905/156213";
@@ -19,7 +19,7 @@ export function $$m0() {
       prepopulatedEmail,
       ...u
     } = n;
-    "loaded" === i.status && m || reportError(_$$e.SCALE, Error("loading" === i.status ? "Tried to open team invite modal while plan is loading" : "Tried to open team invite modal but plan type failed to load"), {
+    "loaded" === i.status && m || reportError(ServiceCategories.SCALE, Error("loading" === i.status ? "Tried to open team invite modal while plan is loading" : "Tried to open team invite modal but plan type failed to load"), {
       extra: n
     });
     m === FOrganizationLevelType.TEAM && t({

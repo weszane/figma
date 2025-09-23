@@ -101,12 +101,12 @@ function createRemovableResourceAtomFamily(resourceKey: unknown) {
 }
 
 // Removable atom families for various app domain entities
-const userColorProfileAtomFamily = createRemovableObservableAtomFamily(UserColorProfilePreferenceView) // $$f4
-const variablesByCollectionAtomFamily = createRemovableObservableAtomFamily(VariablesByVariableCollectionKey) // $$_6
-const variableByKeyAtomFamily = createRemovableObservableAtomFamily(VariableByKey) // $$A3
-const libraryModuleDataAtomFamily = createRemovableObservableAtomFamily(LibraryModuleData) // $$y8
-const variableCollectionByKeyResourceAtomFamily = createRemovableResourceAtomFamily(VariableCollectionByKey) // $$b1
-const variableByKeyResourceAtomFamily = createRemovableResourceAtomFamily(VariableByKey) // $$v5
+export const userColorProfileAtomFamily = createRemovableObservableAtomFamily(UserColorProfilePreferenceView) // $$f4
+export const variablesByCollectionAtomFamily = createRemovableObservableAtomFamily(VariablesByVariableCollectionKey) // $$_6
+export const variableByKeyAtomFamily = createRemovableObservableAtomFamily(VariableByKey) // $$A3
+export const libraryModuleDataAtomFamily = createRemovableObservableAtomFamily(LibraryModuleData) // $$y8
+export const variableCollectionByKeyResourceAtomFamily = createRemovableResourceAtomFamily(VariableCollectionByKey) // $$b1
+export const variableByKeyResourceAtomFamily = createRemovableResourceAtomFamily(VariableByKey) // $$v5
 
 /**
  * Creates a composed atom with removable atom family and custom logic.

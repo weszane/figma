@@ -1,5 +1,5 @@
 import { asyncMap } from "../figma_app/656233";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ActionType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { a as _$$a, v as _$$v } from "../figma_app/163822";
@@ -401,7 +401,7 @@ export let $$F4 = async ({
     oZ();
     L(Z);
     fullscreenValue.triggerAction("commit");
-    reportError(_$$e.AI_PRODUCTIVITY, e, {
+    reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
       extra: {
         numItemsTotal: W,
         numItemsNameable: Q,

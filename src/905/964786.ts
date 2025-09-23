@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { trackFullScreenAnalytics } from "../905/449184";
@@ -70,7 +70,7 @@ function L(e, t, i) {
       path: []
     });
   } catch (e) {
-    reportError(_$$e.EXTENSIBILITY, e);
+    reportError(ServiceCategories.EXTENSIBILITY, e);
   }
   return a;
 }

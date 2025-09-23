@@ -16,7 +16,7 @@ import { c as _$$c3 } from '../905/144429';
 import { t as _$$t2 } from '../905/150656';
 import { hideModalHandler, showModalHandler } from '../905/156213';
 import { Ph } from '../905/160095';
-import { ServiceCategories as _$$e2 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { h as _$$h } from '../905/207101';
 import { c as _$$c2 } from '../905/210851';
@@ -3383,7 +3383,7 @@ function nb({
   }, [c, f]);
   return (_$$W2.useLogPageView({
     metadata: _
-  }), g && iT()(f)) ? (reportError(_$$e2.DESIGN_SYSTEMS_EDITOR, new Error('Library updates list is empty but shouldn\'t be')), jsx('div', {
+  }), g && iT()(f)) ? (reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, new Error('Library updates list is empty but shouldn\'t be')), jsx('div', {
     className: nf,
     children: renderI18nText('design_systems.updates.couldn_t_load_update_descriptions_error', {
       lineBreak: jsx('br', {})

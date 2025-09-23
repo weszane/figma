@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { addBreadcrumb } from '@sentry/browser'
 import { atom } from 'jotai'
 import { selectAtom } from 'jotai/utils'
@@ -14,11 +13,11 @@ import { getFeatureFlags } from '../905/601108'
 import { setupFileObject } from '../905/628874'
 import { createFileLibraryKeys } from '../905/651613'
 import { resourceUtils } from '../905/989992'
+import { useAtomWithSubscription } from '../figma_app/27355'
 import { FileCanTestPlanRecordPermission, FilePermissionsLgShadowView, OpenEditorFileData } from '../figma_app/43951'
 import { useSubscription, useSuspendableSubscription } from '../figma_app/288654'
 import { handleResourceAtomMetrics, setupResourceAtomHandler } from '../figma_app/566371'
 import { usePreviousValue } from '../figma_app/922077'
-import { useAtomWithSubscription } from '../figma_app/27355'
 /**
  * Retrieves the file object for the currently selected fullscreen view.
  * @param store - Redux store object.
@@ -108,7 +107,6 @@ export const openFileLibraryKeyAtom = createReduxSubscriptionAtomWithState(selec
 /** Hook to get openFile libraryKey (Original: $$P9) */
 export const useOpenFileLibraryKey = () => useAtomWithSubscription(openFileLibraryKeyAtom)
 
-
 /** Exported selector for current file (Original: $$j14) */
 export const selectCurrentFile = getFeatureFlags().preload_open_editor_file_data ? useCurrentFile : useOpenFile
 
@@ -123,7 +121,6 @@ export function useEditorType() {
 
 /** Hook to get current file key (Original: $$B17) */
 export const useCurrentFileKey = () => selectCurrentFile()?.key || null
-
 
 /**
  * Hook to create file library keys from openFile key and libraryKey.
@@ -163,7 +160,6 @@ export function useCurrentFile() {
   const openFile = useOpenFile()
   return isPrototypeView ? openFile : fullscreenFile.data ?? null
 }
-
 
 /**
  * Hook to get sourceFileKey or key from current file.

@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { getLocalStorage, useStorageEventSync } from "../905/657224";
 import { reportError } from "../905/11";
@@ -85,7 +85,7 @@ async function f(e, t, i) {
     i(s);
   } catch (e) {
     i([]);
-    reportError(_$$e.ML_PLATFORM, Error("Recent fragments error: " + e.message));
+    reportError(ServiceCategories.ML_PLATFORM, Error("Recent fragments error: " + e.message));
   }
 }
 export function $$_1(e = !1) {

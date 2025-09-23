@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { atom, Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { z } from "../905/239603";
 import o from "../vendor/260986";
@@ -43,7 +43,7 @@ export function $$S1() {
   if (!C || !C.recentlyUsedActions) return [];
   let w = z.array(PluginRunEventExtendedSchema).safeParse(C.recentlyUsedActions);
   if (!w.success) {
-    reportError(_$$e.AI_FOR_PRODUCTION, Error("Fetched invalid schema for QuickActionsRecentCommandSelectedArgs from actions history"), {});
+    reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("Fetched invalid schema for QuickActionsRecentCommandSelectedArgs from actions history"), {});
     return [];
   }
   w.data.forEach(e => {
@@ -81,7 +81,7 @@ export function $$S1() {
         extensionIdsCalledToFetch: s
       }) {
         if (!a) {
-          reportError(_$$e.AI_FOR_PRODUCTION, Error("Extension info missing for selectedRunPluginArgs"), {});
+          reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("Extension info missing for selectedRunPluginArgs"), {});
           return null;
         }
         let {
@@ -99,12 +99,12 @@ export function $$S1() {
           publishedExtensions: r
         });
         if (!h && !localFileId) {
-          extensionId in debugState.getState().recentlyUsed.plugins.fetchedResources || s.has(extensionId) || reportError(_$$e.AI_FOR_PRODUCTION, Error(`Published plugin with ID ${extensionId} not fetched`), {});
+          extensionId in debugState.getState().recentlyUsed.plugins.fetchedResources || s.has(extensionId) || reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Published plugin with ID ${extensionId} not fetched`), {});
           return null;
         }
         if (!h || !hasLocalFileId(h) && currentExtensionVersionId !== h.current_plugin_version_id) return null;
         if (!parameterValues) {
-          hasLocalFileId(h) ? reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for local plugin with ID ${extensionId}`), {}) : reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for published plugin with ID ${extensionId}`), {});
+          hasLocalFileId(h) ? reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for local plugin with ID ${extensionId}`), {}) : reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for published plugin with ID ${extensionId}`), {});
           return null;
         }
         let m = function (e) {
@@ -114,12 +114,12 @@ export function $$S1() {
             try {
               n = JSON.parse(e[r]);
             } catch (t) {
-              reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid JSON value for key '${r}': ${e[r]}`), {});
+              reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Invalid JSON value for key '${r}': ${e[r]}`), {});
               return null;
             }
             let a = SV.safeParse(n);
             if (!a.success) {
-              reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid ParameterValue for key '${r}': ${e[r]}`), {});
+              reportError(ServiceCategories.AI_FOR_PRODUCTION, Error(`Invalid ParameterValue for key '${r}': ${e[r]}`), {});
               return null;
             }
             t[r] = a.data;

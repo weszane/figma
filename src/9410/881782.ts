@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import { n as _$$n } from '../905/79930';
 import { Z } from '../905/104740';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { trackEventAnalytics } from '../905/449184';
 import { FlashActions } from '../905/573154';
@@ -105,7 +105,7 @@ class L {
       }
       this.resetStateAndMarkTutorialComplete(e.tutorialPlayedUserFlag, t);
     };
-    startPerformanceSpan(tF, _$$e.UNOWNED);
+    startPerformanceSpan(tF, ServiceCategories.UNOWNED);
     let r = window.performance.now();
     this.currentTutorialRunningPromise = i();
     this.currentTutorialRunningPromise.finally(() => {

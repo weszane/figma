@@ -4,7 +4,7 @@ import { jsx } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { _ as _$$_ } from '../905/144222';
 import { X } from '../905/145028';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { getI18nString } from '../905/303541';
 import { Nz } from '../905/417232';
@@ -109,7 +109,7 @@ function M(e, t, r, n = {}) {
     }
   }
   let s = n.properties || {};
-  e !== _j.DATE || ('dateType' in s ? Object.values(ap).includes(s.dateType) || (reportError(_$$e.CMS, new Error('Invalid DateType on Date field schema properties'), {
+  e !== _j.DATE || ('dateType' in s ? Object.values(ap).includes(s.dateType) || (reportError(ServiceCategories.CMS, new Error('Invalid DateType on Date field schema properties'), {
     extra: {
       properties: n.properties,
       fieldSchemaId: n.id
@@ -181,7 +181,7 @@ export function $$F0(e) {
       e ? e.fieldSchemas && n(O(e.fieldSchemas.map(e => ({
         ...e,
         action: 'noop'
-      })))) : reportError(_$$e.CMS, new Error('useCollectionFields hook could not get the collection from livegraph'), {
+      })))) : reportError(ServiceCategories.CMS, new Error('useCollectionFields hook could not get the collection from livegraph'), {
         extra: {
           collectionId: t
         }
@@ -204,7 +204,7 @@ export function $$F0(e) {
         let e = s.trim();
         if (e !== o && e.length > 0) {
           if (!r.find(e => e.id === i)) {
-            reportError(_$$e.CMS, new Error('Renaming field failed: field not found in collection'), {
+            reportError(ServiceCategories.CMS, new Error('Renaming field failed: field not found in collection'), {
               extra: {
                 fieldId: i,
                 collectionId: t

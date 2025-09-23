@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, ImageExportType } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { delay } from "../905/236856";
@@ -151,7 +151,7 @@ export function $$T1({
       0 === e.status ? D("OFFLINE") : D("GENERIC");
       O();
       p(t);
-      reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e, {
+      reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, e, {
         tags: {
           openFileKey: T,
           libraryKey: t.library_key,

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 export class $$a1 {
   constructor(e, t, r) {
@@ -57,7 +57,7 @@ export class $$s0 {
       try {
         return new RegExp(r, t ? "iu" : "i");
       } catch (a) {
-        reportError(_$$e.EXTENSIBILITY, a, {
+        reportError(ServiceCategories.EXTENSIBILITY, a, {
           extra: {
             query: e,
             acceptsUnicode: t,

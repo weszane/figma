@@ -73,7 +73,7 @@ import { searchQueryAtom, searchInputAtom } from "../905/61477";
 import { r as _$$r2 } from "../905/264954";
 import { RAo, aIx } from "../figma_app/27776";
 import { PP as _$$PP, xx, v$ } from "../905/981129";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { useIsCommunityHubView } from "../figma_app/740025";
 import { Q as _$$Q2 } from "../905/618914";
@@ -825,7 +825,7 @@ export function $$e53({
     let r = useSelector(e => getPermissionsStateMemoized(e));
     let n = useCurrentPublicPlan("useUpdateSearchScope");
     let s = useRef(!1);
-    r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, reportError(_$$e.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {
+    r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, reportError(ServiceCategories.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {
       extra: {
         currentTeamId: r.currentTeamId,
         currentUserOrgId: r.currentUserOrgId,

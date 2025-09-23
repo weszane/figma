@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { _ as _$$_ } from "../905/410717";
 import { c as _$$c } from "../905/425573";
 import { SeverityLevel } from "../905/11";
@@ -34,7 +34,7 @@ function $$f(e) {
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     severity: SeverityLevel.Critical,
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     children: jsx(G, {
       leftContent: jsx(E, {

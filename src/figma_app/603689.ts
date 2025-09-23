@@ -40,7 +40,7 @@ import { t as _$$t2 } from '../905/150656';
 import { M as _$$M2 } from '../905/152487';
 import { showModalHandler } from '../905/156213';
 import { ox as _$$ox } from '../905/163832';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { m as _$$m2 } from '../905/168176';
 import { NotificationCategory } from '../905/170564';
@@ -1710,7 +1710,7 @@ let na = {
         type: 'uint8array'
       });
     } catch (e) {
-      reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
       return new Uint8Array();
     }
   }
@@ -6763,7 +6763,7 @@ function c2() {
     } catch (t) {
       let e = 'Unknown error';
       t instanceof Error && (e = t.message);
-      reportError(_$$e.ACTIVATION, new Error(`[Dev Mode Link Defaulting] Error checking session storage: ${e}`));
+      reportError(ServiceCategories.ACTIVATION, new Error(`[Dev Mode Link Defaulting] Error checking session storage: ${e}`));
     }
   }
   let I = d.view === 'fullscreen' && !o && (s || l) && !m && !hasDesktopAPI() && h && _ && !a && b && i;
@@ -8102,7 +8102,7 @@ function pz() {
         })]
       }), jsx(ErrorBoundaryCrash, {
         boundaryKey: 'DesignSecondaryToolbelts',
-        team: _$$e.EDITOR_USABILITY,
+        team: ServiceCategories.EDITOR_USABILITY,
         fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
         children: jsx(pV, {
           recordingKey: 'secondary_toolbelt'
@@ -8706,7 +8706,7 @@ function _A() {
   return null;
 }
 (e, t) => {
-  reportError(_$$e.FPL, e, {
+  reportError(ServiceCategories.FPL, e, {
     extra: t
   });
 };
@@ -9030,7 +9030,7 @@ function _L() {
   let e = getSelectedViewType();
   let t = _$$s();
   yw();
-  e !== 'prototype' || isInteractionOrEvalMode() || _R || (reportError(_$$e.PROTOTYPING, new Error('Loading PrototypeAppView as part of AppView')), _R = !0);
+  e !== 'prototype' || isInteractionOrEvalMode() || _R || (reportError(ServiceCategories.PROTOTYPING, new Error('Loading PrototypeAppView as part of AppView')), _R = !0);
   return jsx(ThemeContext.Provider, {
     value: t,
     children: e === 'prototype' ? jsx(nu, {}) : e === 'feed' ? jsx(eu, {}) : jsx(_C, {})

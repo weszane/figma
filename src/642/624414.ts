@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { l as _$$l } from "../905/509505";
 import { trackEventAnalytics } from "../905/449184";
 import { CloseButton } from "../905/17223";
@@ -48,7 +48,7 @@ export function $$_0() {
     boundaryKey: "LibraryUpsellBanner",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e.MONETIZATION_UPGRADES
+      area: ServiceCategories.MONETIZATION_UPGRADES
     },
     children: jsx(TrackingProvider, {
       name: "library upsell badge",

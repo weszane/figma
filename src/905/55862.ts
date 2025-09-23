@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByProperty } from "../figma_app/656233";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
@@ -267,7 +267,7 @@ export function $$L3(e, t = !1) {
     type: "nonJoinedTeams"
   })), i.length) ? (f && i.push({
     type: "presetLibraries"
-  }), i) : (f && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, O, {
+  }), i) : (f && reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, O, {
     tags: {
       orgId: o?.id,
       hasOpenFile: !!y,

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useTheme } from "../905/289770";
 import { ColorStateTsApi } from "../figma_app/763686";
 import { b2 } from "../vendor/284505";
@@ -58,7 +58,7 @@ export let $$b1 = {
         } = t;
         return ((void 0 === alpha ? 255 : Math.round(255 * alpha)) << 24 | Math.round(255 * b) << 16 | Math.round(255 * g) << 8 | Math.round(255 * r)) >>> 0;
       }(i);
-      if (void 0 !== o) t[s] = o;else if (n) reportError(_$$e.FPL, Error(`Failed to find valid value for color token ${s}, found ${i}`));else {
+      if (void 0 !== o) t[s] = o;else if (n) reportError(ServiceCategories.FPL, Error(`Failed to find valid value for color token ${s}, found ${i}`));else {
         captureMessage("Cannot fetch color tokens from CSS, CSS was not loaded");
         e.hasRunTokenSync.set(!0);
         return;

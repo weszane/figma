@@ -50,7 +50,7 @@ import { _ as _$$_5 } from '../905/144222';
 import { e as _$$e9 } from '../905/149844';
 import { t as _$$t5 } from '../905/150656';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e2 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { L as _$$L3 } from '../905/173490';
 import { rA as _$$rA, bL, ke, QB, y_ } from '../905/174266';
@@ -1506,7 +1506,7 @@ function tz({
             useCase: l
           }), s({
             sidebarItem: l
-          })) : reportError(_$$e2.COMMUNITY, new Error('Missing useCase for use case view'));
+          })) : reportError(ServiceCategories.COMMUNITY, new Error('Missing useCase for use case view'));
           break;
         case mF.ALL:
           s({
@@ -1533,7 +1533,7 @@ function tz({
           });
           break;
         default:
-          reportError(_$$e2.COMMUNITY, new Error(`Unhandled view type: ${n}`), {
+          reportError(ServiceCategories.COMMUNITY, new Error(`Unhandled view type: ${n}`), {
             extra: {
               viewType: n
             }
@@ -10107,7 +10107,7 @@ let cm = new class {
             prevPage: i
           };
         } catch (e) {
-          reportError(_$$e2.PROJECT_BUZZ, e);
+          reportError(ServiceCategories.PROJECT_BUZZ, e);
           return e;
         }
       }
@@ -10138,7 +10138,7 @@ let cm = new class {
             prevPage
           };
         } catch (e) {
-          reportError(_$$e2.PROJECT_BUZZ, e);
+          reportError(ServiceCategories.PROJECT_BUZZ, e);
           return e;
         }
       }

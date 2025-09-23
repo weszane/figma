@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -101,7 +101,7 @@ function C(e, t, i) {
       });
     }
   } catch (e) {
-    reportError(_$$e.EXTENSIBILITY, e);
+    reportError(ServiceCategories.EXTENSIBILITY, e);
   }
   return h;
 }

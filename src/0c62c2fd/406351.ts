@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { flattenMessageMeta } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -38,13 +38,13 @@ export function $$y0({
     file
   } = j.data;
   if (!file) {
-    reportError(_$$e.WAYFINDING, Error("AddPinModal unable to lookup file by ID"));
+    reportError(ServiceCategories.WAYFINDING, Error("AddPinModal unable to lookup file by ID"));
     _(popModalStack());
     return null;
   }
   let I = file.computedWorkspace?.workspace;
   if (!I) {
-    reportError(_$$e.WAYFINDING, Error("AddPinModal opened for file with no workspace"));
+    reportError(ServiceCategories.WAYFINDING, Error("AddPinModal opened for file with no workspace"));
     _(popModalStack());
     return null;
   }

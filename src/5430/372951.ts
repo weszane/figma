@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { x as _$$x } from "../7222/491815";
 import { C as _$$C } from "../5430/935440";
 import { e as _$$e2 } from "../905/693478";
@@ -37,13 +37,13 @@ export function $$I1({
       loading: "lazy",
       className: "resource_tile--thumbnailImage--RJCYv"
     }
-  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : n === ResourceTypeEnum.COOPER_TEMPLATE_FILE ? e.thumbnail_url ? r = jsx(Q, {
+  }) : reportError(ServiceCategories.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : n === ResourceTypeEnum.COOPER_TEMPLATE_FILE ? e.thumbnail_url ? r = jsx(Q, {
     src: e.thumbnail_url,
     loading: "lazy",
     alt: e.name,
     draggable: !1,
     crossOrigin: "use-credentials"
-  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : [ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET].includes(n) && (e.icon_url ? r = jsxs("div", {
+  }) : reportError(ServiceCategories.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : [ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET].includes(n) && (e.icon_url ? r = jsxs("div", {
     className: "resource_tile--iconWrapper--K9Ds6",
     children: [jsx(oW, {
       className: c()({
@@ -57,7 +57,7 @@ export function $$I1({
       className: "resource_tile--pluginTaglineOrDescription--kfqm7 text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: getResourceTaglineOrDescription(e)
     })]
-  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no icon_url")));
+  }) : reportError(ServiceCategories.COMMUNITY, Error("ResourceTileImage: resource has no icon_url")));
   return jsx("div", {
     className: "resource_tile--aspectRatioContainer--61bXu",
     children: jsxs("div", {

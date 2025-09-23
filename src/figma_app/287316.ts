@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { sha1HexFromBytes } from "../905/125019";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { DesignGraphElements, Fullscreen, AppStateTsApi, ImageCppBindings } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -1497,7 +1497,7 @@ export function $$em6() {
         let t = setTimeout(() => {
           window.FigmaMobile.nativeToolbarSupportedVersions = void 0;
           n._native_toolbar_confirm_configuration = () => {};
-          reportError(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
+          reportError(ServiceCategories.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
         }, 2e3);
         n._native_toolbar_confirm_configuration = () => {
           clearTimeout(t);

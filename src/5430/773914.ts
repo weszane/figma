@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
@@ -113,7 +113,7 @@ function Q({
     href: t,
     newTab: !0,
     onClick: () => {
-      t ? e(hideModalHandler()) : reportError(_$$e.COMMUNITY, Error("newTabButton: route is empty"), {
+      t ? e(hideModalHandler()) : reportError(ServiceCategories.COMMUNITY, Error("newTabButton: route is empty"), {
         extra: {
           sharedRouteParams: n
         }
@@ -279,7 +279,7 @@ export function $$ea2(e, t) {
     }
   }(e, t);
   if (!r) {
-    reportError(_$$e.COMMUNITY, Error("ResourceHubResourceRoute is empty"), {
+    reportError(ServiceCategories.COMMUNITY, Error("ResourceHubResourceRoute is empty"), {
       extra: {
         resourceId: e.id,
         resourceType: getResourceType(e),
@@ -348,7 +348,7 @@ export function $$ed0(e, t, r, n) {
       !function (e, t, r, s) {
         let n = getPluginOrWidgetContent(t);
         if (!n) {
-          reportError(_$$e.COMMUNITY, Error("Plugin resource has no plugin"), {
+          reportError(ServiceCategories.COMMUNITY, Error("Plugin resource has no plugin"), {
             extra: {
               resourceId: t.id
             }
@@ -356,7 +356,7 @@ export function $$ed0(e, t, r, n) {
           return;
         }
         if (!(s?.key.type === FOrganizationLevelType.ORG ? s.key.parentId : null)) {
-          reportError(_$$e.COMMUNITY, Error("Internal extensions can only be used in an org"), {
+          reportError(ServiceCategories.COMMUNITY, Error("Internal extensions can only be used in an org"), {
             extra: {
               resourceId: t.id
             }
@@ -413,7 +413,7 @@ function eu(e) {
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;
-    reportError(_$$e.COMMUNITY, Error("Slide template has no library key"), {
+    reportError(ServiceCategories.COMMUNITY, Error("Slide template has no library key"), {
       extra: {
         resourceId: t,
         templateId: s
@@ -450,7 +450,7 @@ function em(e, t) {
   } else {
     let e = n ? void 0 : t.id;
     let r = n ? t.id : void 0;
-    reportError(_$$e.COMMUNITY, Error("FigJam template has no file key or name"), {
+    reportError(ServiceCategories.COMMUNITY, Error("FigJam template has no file key or name"), {
       extra: {
         resourceId: e,
         templateId: r
@@ -476,7 +476,7 @@ function e_(e) {
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;
-    reportError(_$$e.COMMUNITY, Error("Cooper template has no library key"), {
+    reportError(ServiceCategories.COMMUNITY, Error("Cooper template has no library key"), {
       extra: {
         resourceId: t,
         templateId: s
@@ -513,7 +513,7 @@ function ep(e, t) {
   } else {
     let e = n ? void 0 : t.id;
     let r = n ? t.id : void 0;
-    reportError(_$$e.COMMUNITY, Error("Figmake template has no file key or name"), {
+    reportError(ServiceCategories.COMMUNITY, Error("Figmake template has no file key or name"), {
       extra: {
         resourceId: e,
         templateId: r

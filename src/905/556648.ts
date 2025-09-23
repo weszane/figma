@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { FontSourceType, Fonts } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { buildStaticUrl } from "../figma_app/169182";
@@ -38,7 +38,7 @@ export async function $$h1(e) {
       let t = i.split(":")[0];
       let r = i.split(":")[1];
       if (!t || !r) {
-        reportError(_$$e.SITES_WEB_RUNTIME, Error(`Invalid font name format: ${i}. Expected format is "family:style".`));
+        reportError(ServiceCategories.SITES_WEB_RUNTIME, Error(`Invalid font name format: ${i}. Expected format is "family:style".`));
         return;
       }
       !function (e, t, i, n) {
@@ -46,7 +46,7 @@ export async function $$h1(e) {
         if (getFeatureFlags().sites_web_fonts) {
           let r = Fonts.fetchFontData(t, i);
           if (!r) {
-            reportError(_$$e.SITES_WEB_RUNTIME, Error(`Failed to fetch font data for ${t}:${i}`));
+            reportError(ServiceCategories.SITES_WEB_RUNTIME, Error(`Failed to fetch font data for ${t}:${i}`));
             return;
           }
           let o = n.source === FontSourceType.LOCAL ? `${t}:${i}` : n.id;

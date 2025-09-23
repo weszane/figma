@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Sm } from "../905/859698";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -14,7 +14,7 @@ export async function $$_2() {
     let e = await UI();
     await $$m0(e);
   } catch (e) {
-    reportError(_$$e.PROTOTYPING, e);
+    reportError(ServiceCategories.PROTOTYPING, e);
   }
 }
 export function $$h1() {

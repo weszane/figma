@@ -1,6 +1,6 @@
 import { f6 } from "../figma_app/516324";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
@@ -202,11 +202,11 @@ let $$C6 = createOptimistThunk(async e => {
         if (!t.hasOwnProperty("reportError") || t.reportError) {
           let e = t.warnings;
           if (e?.length > 0) for (let t of e) logWarning("import", t);
-          reportError(_$$e.SCENEGRAPH_AND_SYNC, t.cause ? t.cause : t);
+          reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, t.cause ? t.cause : t);
         }
       }
     } catch (e) {
-      reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
     } finally {
       e.dispatch(U());
     }

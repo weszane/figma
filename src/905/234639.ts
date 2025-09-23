@@ -1,7 +1,7 @@
 import { PresentationValidationStatus } from "../figma_app/763686";
 import r from "../vendor/336892";
 import { debugState } from "../905/407919";
-import { Sb } from "../905/359847";
+import { processHubFilesThunk } from "../905/359847";
 import { c_ } from "../905/497882";
 import { V } from "../905/513628";
 import { Z } from "../905/909123";
@@ -41,7 +41,7 @@ export async function $$y2({
   };
 }
 export function $$b0(e, t) {
-  debugState.dispatch(Sb({
+  debugState.dispatch(processHubFilesThunk({
     hubFiles: [e],
     src: t
   }));

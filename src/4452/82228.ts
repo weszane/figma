@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { TrackingProvider } from "../figma_app/831799";
 export function $$l0(e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: e.trackingName,
-    team: e.team ?? _$$e.SCALE,
+    team: e.team ?? ServiceCategories.SCALE,
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: jsx(TrackingProvider, {
       name: e.trackingName,

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { O } from "../905/969533";
 import { reportError } from "../905/11";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -37,7 +37,7 @@ export function $$I2({
     var t;
     Im(a, "quick-actions", e.menuAction);
     d(e, !0);
-    ("run-installed-plugin" !== (t = e.menuAction).type && "run-local-plugin" !== t.type ? (reportError(_$$e.AI_FOR_PRODUCTION, Error("shouldSubmenuCloseQuickActions expected 'run-installed-plugin' or 'run-local-plugin'")), 1) : t.parameterOnly && t.parameterEntry) || close();
+    ("run-installed-plugin" !== (t = e.menuAction).type && "run-local-plugin" !== t.type ? (reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("shouldSubmenuCloseQuickActions expected 'run-installed-plugin' or 'run-local-plugin'")), 1) : t.parameterOnly && t.parameterEntry) || close();
   }));
   return jsx(ms, {
     parentRect: r?.data.targetRect,

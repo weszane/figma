@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, createContext, useState, useMemo, useContext, useEffect, useRef, memo, createRef, forwardRef, useId } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { DialogHeader, DialogHiddenTitle, DialogTabStrip, DialogActionStrip, DialogContents, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { IconButton } from "../905/443068";
@@ -1995,9 +1995,9 @@ export let $$ii1 = forwardRef(function ({
   return er ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "color_picker_with_color_contrast_tool",
     fallback: eD,
-    team: _$$e.EDITOR_USABILITY,
+    team: ServiceCategories.EDITOR_USABILITY,
     sentryTags: {
-      area: _$$e.EDITOR_USABILITY
+      area: ServiceCategories.EDITOR_USABILITY
     },
     children: jsx(ir, {
       paint: e,

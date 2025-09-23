@@ -196,7 +196,7 @@ import { g as _$$g2, h as _$$h3 } from "../9410/28058";
 import { Dh, TN, i1 as _$$i, q0 } from "../figma_app/177697";
 import { s1 as _$$s6, sW as _$$sW } from "../figma_app/226737";
 import { TG } from "../figma_app/657972";
-import { ServiceCategories as _$$e2 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ScreenReaderOnly } from "../905/172252";
 import { B as _$$B2 } from "../9410/958580";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -4392,7 +4392,7 @@ function lS({
   let r = _$$k6();
   useEffect(() => {
     let e = n.registerEditableListener(e => {
-      e === i || r || logError(_$$e2.SLIDES, "lexical_editor_editable_mismatch", {
+      e === i || r || logError(ServiceCategories.SLIDES, "lexical_editor_editable_mismatch", {
         expectedIsEditable: i,
         actualIsEditable: e
       });
@@ -4437,7 +4437,7 @@ function lN({
       try {
         t.setEditorState(t.parseEditorState(r));
       } catch (e) {
-        reportError(_$$e2.SLIDES, Error("Speaker notes crash"), {
+        reportError(ServiceCategories.SLIDES, Error("Speaker notes crash"), {
           extra: {
             error: e
           }
@@ -6250,7 +6250,7 @@ function af(e) {
   useEffect(() => {
     if (isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
       let e = Error("Rendering SlidesPropertiesPanel design tab with no shownPanels");
-      reportError(_$$e2.SLIDES, e, {
+      reportError(ServiceCategories.SLIDES, e, {
         extra: {
           selectionCount: n.count,
           selectionNodeType: n.nodeType

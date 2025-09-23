@@ -1,5 +1,5 @@
 import { datadogRum } from '@datadog/browser-rum';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { z as _$$z } from '../905/239603';
 import { oJ as _$$oJ } from '../905/312028';
 import { setupAdvanceTimers } from '../905/346780';
@@ -93419,7 +93419,7 @@ export function $$NT0(e) {
       });
     }
   };
-  measureAsyncDuration('LiveGraph connection', _$$e.WEB_PLATFORM, async () => {
+  measureAsyncDuration('LiveGraph connection', ServiceCategories.WEB_PLATFORM, async () => {
     await observableState.get().connect();
   });
   return observableState.get();

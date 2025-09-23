@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { W, Hg } from "../figma_app/304955";
 import { VH, Ac } from "../figma_app/178419";
 import { j } from "../figma_app/171378";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -60,7 +60,7 @@ export function $$C2() {
           let t;
           t = null;
           null != (t = openWindow(e)) && t.focus();
-        } else reportError(_$$e.AI_FOR_PRODUCTION, Error("Failed to generate Rev preview link for navigation"));
+        } else reportError(ServiceCategories.AI_FOR_PRODUCTION, Error("Failed to generate Rev preview link for navigation"));
       }, [r]);
     }(),
     exitFigmakeFullscreenView: function () {

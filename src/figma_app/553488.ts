@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi, SceneGraphHelpers, SlidesAiBindings } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -45,7 +45,7 @@ export function $$S0({
 }) {
   return (d, u, p) => {
     if (1 !== d.length) {
-      logError(_$$e.SLIDES, "Expected to insert a single slide", {
+      logError(ServiceCategories.SLIDES, "Expected to insert a single slide", {
         insertedItems: d,
         viewType: t,
         isClick: p
@@ -86,7 +86,7 @@ export function $$v6({
   subscribeToLibrary: s
 }) {
   if (1 !== t.length) {
-    logError(_$$e.SLIDES, "Expected to insert a single slide", {
+    logError(ServiceCategories.SLIDES, "Expected to insert a single slide", {
       insertedItems: t,
       viewType: r
     });

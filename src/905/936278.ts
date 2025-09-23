@@ -1,5 +1,5 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { blendGradientColors, blendColors } from "../figma_app/191804";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
@@ -246,7 +246,7 @@ export function $$y1(e) {
           y: n,
           w: o,
           h: d
-        } : reportError(_$$e.EDITOR_USABILITY, Error("Background nodes do not overlap"));
+        } : reportError(ServiceCategories.EDITOR_USABILITY, Error("Background nodes do not overlap"));
       } else t = e.absoluteBoundingBox;
     }
     if (!i?.isTransparent && !i?.isTranslucent) break;

@@ -1,6 +1,6 @@
 import _require from "../0c62c2fd/653470";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { LogToConsoleMode, WhiteboardIntegrationType, Fullscreen, PerfResult } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import d from "../vendor/197638";
@@ -2653,7 +2653,7 @@ class eI {
         this.populatePdfImagesWithImageBytes(images);
       } catch (e) {
         i = !0;
-        reportError(_$$e.FIGJAM, e);
+        reportError(ServiceCategories.FIGJAM, e);
       }
       (hadImageExtractError || i) && debugState.dispatch(VisualBellActions.enqueue({
         type: eg,
@@ -2735,13 +2735,13 @@ class eI {
       let e = `PDF Import Error: ${t.message}`;
       try {
         t.message = e;
-        reportError(_$$e.FIGJAM, t);
+        reportError(ServiceCategories.FIGJAM, t);
       } catch {
-        reportError(_$$e.FIGJAM, Error(e));
+        reportError(ServiceCategories.FIGJAM, Error(e));
       }
     }
     let l = Error("PDF Import Error: unknown issue inside convertPDFToScene");
-    reportError(_$$e.FIGJAM, l);
+    reportError(ServiceCategories.FIGJAM, l);
     return {
       status: PerfResult.ERROR_OTHER
     };

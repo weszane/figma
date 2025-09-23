@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
@@ -72,7 +72,7 @@ export let $$N0 = registerModal(function ({
     boundaryKey: "AutoUpgradeConfirmationModal",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     onError: () => {
       F(VisualBellActions.enqueue({

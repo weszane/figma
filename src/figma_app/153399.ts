@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { WeightLevel, WhiteboardTsApi, ColorOptions, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { reportError } from "../905/11";
@@ -27,7 +27,7 @@ function g(e) {
     let e = WhiteboardTsApi?.getWhiteboardPaletteTypeToRampValue();
     if (e) for (let [t, r] of e.entries()) {
       if (!p.includes(t)) {
-        reportError(_$$e.FIGJAM, Error(`${t} doesn't exist in the WhiteboardPaletteType union type`));
+        reportError(ServiceCategories.FIGJAM, Error(`${t} doesn't exist in the WhiteboardPaletteType union type`));
         continue;
       }
       m.set(t, r);

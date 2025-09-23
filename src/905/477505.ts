@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { isDevEnvironment } from "../figma_app/169182";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
@@ -22,7 +22,7 @@ let h = liveStoreInstance.Query({
       let e = await pluginAPIService.postPluginsBatch(t);
       return e?.data?.meta ?? [];
     } catch (e) {
-      reportError(_$$e.DEVELOPER_TOOLS, e);
+      reportError(ServiceCategories.DEVELOPER_TOOLS, e);
       return [];
     }
   },

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -203,7 +203,7 @@ export async function $$H1(e, t) {
     }));
     t && t();
   } catch (t) {
-    if (reportError(_$$e.SEARCH_AI, t), atomStoreManager.get($$V3).currentSearch?.queryId !== U) return;
+    if (reportError(ServiceCategories.SEARCH_AI, t), atomStoreManager.get($$V3).currentSearch?.queryId !== U) return;
     atomStoreManager.set($$V3, () => ({
       currentSearch: {
         queryId: U,

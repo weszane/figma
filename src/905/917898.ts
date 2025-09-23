@@ -12,7 +12,7 @@ import { Nq } from "../905/266529";
 import { n as _$$n } from "../905/347702";
 import { isIpadDevice, BrowserInfo } from "../figma_app/778880";
 import { v as _$$v } from "../905/516963";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { PluginError, PluginWrapper, PLUGIN_CLOSED_ERROR } from "../905/572400";
 import { n as _$$n2 } from "../905/823050";
@@ -202,7 +202,7 @@ async function T(e) {
         e._jsvm_reset();
       } catch (e) {
         P();
-        reportError(_$$e.EXTENSIBILITY, e);
+        reportError(ServiceCategories.EXTENSIBILITY, e);
         return e;
       }
     },

@@ -1,7 +1,7 @@
-import { reportError } from '../905/11'
-import { sha1BytesFromHex } from '../905/125019'
-import { ServiceCategories } from '../905/165054'
-import { encodeBase64 } from '../905/561685'
+import { reportError } from '../905/11';
+import { sha1BytesFromHex } from '../905/125019';
+import { ServiceCategories } from '../905/165054';
+import { encodeBase64 } from '../905/561685';
 
 /**
  * Custom error class for upload failures.
@@ -9,7 +9,7 @@ import { encodeBase64 } from '../905/561685'
  */
 export class UploadError extends Error {
   constructor(message: string) {
-    super(message)
+    super(message);
   }
 }
 
@@ -24,58 +24,49 @@ export class UploadError extends Error {
  * @param contentType - The content type of the file.
  * @returns The key from the fields if successful, or throws an error.
  */
-export async function uploadToPresignedPost(
-  errorReporter: any,
-  operationName: string,
-  url: string,
-  fields: Record<string, string>,
-  fileBytes: Uint8Array<any>,
-  contentType: string,
-): Promise<string> {
-  const formData = new FormData()
-  let key = ''
+export async function uploadToPresignedPost(errorReporter: any, operationName: string, url: string, fields: Record<string, string>, fileBytes: Uint8Array<any>, contentType: string): Promise<string> {
+  const formData = new FormData();
+  let key = '';
   for (const field in fields) {
     if (field === 'key') {
-      key = fields[field]
+      key = fields[field];
     }
-    formData.append(field, fields[field])
+    formData.append(field, fields[field]);
   }
-  formData.append('content-type', contentType)
-  formData.append('file', new Blob([fileBytes]))
-
-  let response: Response | null = null
-  let fetchError: any = null
-
+  formData.append('content-type', contentType);
+  formData.append('file', new Blob([fileBytes]));
+  let response: Response | null = null;
+  let fetchError: any = null;
   try {
     response = await fetch(url, {
       method: 'POST',
-      body: formData,
-    })
+      body: formData
+    });
     if (response.status === 204) {
-      return key
+      return key;
     }
-  }
-  catch (error) {
-    fetchError = error
+  } catch (error) {
+    fetchError = error;
   }
 
   // Check if it's an S3 error response
-  const isS3Error = await checkIfS3Error(response)
+  const isS3Error = await checkIfS3Error(response);
   if (!isS3Error) {
-    const errorMessage = `[${operationName}] uploadToPresignedPost encountered non-S3 response`
+    const errorMessage = `[${operationName}] uploadToPresignedPost encountered non-S3 response`;
     const errorDetails = {
       response: await getResponseText(response),
       status: response?.status,
       responseUrl: response?.url,
       requestUrl: url,
-      error: fetchError?.toString(),
-    }
-    reportError(errorReporter, new Error(errorMessage), { extra: errorDetails })
-    console.error(errorMessage, errorDetails)
-    throw new UploadError(errorMessage)
+      error: fetchError?.toString()
+    };
+    reportError(errorReporter, new Error(errorMessage), {
+      extra: errorDetails
+    });
+    console.error(errorMessage, errorDetails);
+    throw new UploadError(errorMessage);
   }
-
-  throw new Error(`Failed to upload file: ${url}`)
+  throw new Error(`Failed to upload file: ${url}`);
 }
 
 /**
@@ -84,27 +75,21 @@ export async function uploadToPresignedPost(
  * @returns True if it's an S3 error, false otherwise.
  */
 async function checkIfS3Error(response: Response | null): Promise<boolean> {
-  if (!response?.body)
-    return false
-
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder()
-  let responseText = ''
+  if (!response?.body) return false;
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let responseText = '';
   while (true) {
-    const { done, value } = await reader.read()
-    if (done)
-      break
-    responseText += decoder.decode(value)
+    const {
+      done,
+      value
+    } = await reader.read();
+    if (done) break;
+    responseText += decoder.decode(value);
   }
-
-  const parser = new DOMParser()
-  const xmlDoc = parser.parseFromString(responseText, 'text/xml')
-  return !!(
-    xmlDoc.querySelector('Error')
-    && xmlDoc.querySelector('Method')?.textContent === 'POST'
-    && xmlDoc.querySelector('ResourceType')?.textContent === 'OBJECT'
-    && xmlDoc.querySelector('RequestId')
-  )
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(responseText, 'text/xml');
+  return !!(xmlDoc.querySelector('Error') && xmlDoc.querySelector('Method')?.textContent === 'POST' && xmlDoc.querySelector('ResourceType')?.textContent === 'OBJECT' && xmlDoc.querySelector('RequestId'));
 }
 
 /**
@@ -113,19 +98,19 @@ async function checkIfS3Error(response: Response | null): Promise<boolean> {
  * @returns The response text.
  */
 async function getResponseText(response: Response | null): Promise<string> {
-  if (!response?.body)
-    return ''
-
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder()
-  let text = ''
+  if (!response?.body) return '';
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let text = '';
   while (true) {
-    const { done, value } = await reader.read()
-    if (done)
-      break
-    text += decoder.decode(value)
+    const {
+      done,
+      value
+    } = await reader.read();
+    if (done) break;
+    text += decoder.decode(value);
   }
-  return text
+  return text;
 }
 
 /**
@@ -138,20 +123,17 @@ async function getResponseText(response: Response | null): Promise<string> {
  * @param serviceCategory - The service category, defaults to WAYFINDING.
  * @returns The result of the upload.
  */
-export async function uploadVideoToPresignedPost(
-  url: string,
-  fields: Record<string, string>,
-  fileInfo: { sha1: string, bytes: Uint8Array },
-  contentType: string,
-  serviceCategory = ServiceCategories.WAYFINDING,
-): Promise<string> {
-  const sha1Bytes = sha1BytesFromHex(fileInfo.sha1)
-  const base64Sha1 = encodeBase64(sha1Bytes)
-  fields['x-amz-checksum-sha1'] = base64Sha1
-  return await uploadToPresignedPost(serviceCategory, 'uploadVideoToPresignedPost', url, fields, fileInfo.bytes, contentType)
+export async function uploadVideoToPresignedPost(url: string, fields: Record<string, string>, fileInfo: {
+  sha1: string;
+  bytes: Uint8Array;
+}, contentType: string, serviceCategory = ServiceCategories.WAYFINDING): Promise<string> {
+  const sha1Bytes = sha1BytesFromHex(fileInfo.sha1);
+  const base64Sha1 = encodeBase64(sha1Bytes);
+  fields['x-amz-checksum-sha1'] = base64Sha1;
+  return await uploadToPresignedPost(serviceCategory, 'uploadVideoToPresignedPost', url, fields, fileInfo.bytes, contentType);
 }
 
 // Updated exports to match refactored names
-export const ET = uploadToPresignedPost
-export const VV = uploadVideoToPresignedPost
-export const qW = UploadError
+export const ET = uploadToPresignedPost;
+export const VV = uploadVideoToPresignedPost;
+export const qW = UploadError;

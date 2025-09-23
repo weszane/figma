@@ -95,7 +95,7 @@ import { x as _$$x2 } from '../905/149501';
 import { e as _$$e9 } from '../905/149844';
 import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { pW as _$$pW } from '../905/160095';
-import { ServiceCategories as _$$e2 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
 import { EmbedOption, EmbedProvider, EmbedParamKey } from '../905/165465';
 import { UpsellModalType } from '../905/165519';
@@ -1203,7 +1203,7 @@ function ei(e, t) {
             };
           }
         } catch (e) {
-          reportError(_$$e2.CMS, new Error('could not parse CMS link field value'), {
+          reportError(ServiceCategories.CMS, new Error('could not parse CMS link field value'), {
             extra: e
           });
         }
@@ -1225,7 +1225,7 @@ function ei(e, t) {
               };
             }
           } catch (e) {
-            reportError(_$$e2.CMS, new Error('could not parse CMS image field value'), {
+            reportError(ServiceCategories.CMS, new Error('could not parse CMS image field value'), {
               extra: e
             });
           }
@@ -1254,7 +1254,7 @@ function ei(e, t) {
               offset: -i.getTimezoneOffset() / 60
             });
           } catch (e) {
-            reportError(_$$e2.CMS, new Error('could not parse CMS date field value'), {
+            reportError(ServiceCategories.CMS, new Error('could not parse CMS date field value'), {
               extra: e
             });
           }
@@ -5638,7 +5638,7 @@ function rN({
   }], [r, e, t]);
   let d = useRef(null);
   let c = d.current?.getBoundingClientRect();
-  c || (n.showing && reportError(_$$e2.AI_PRODUCTIVITY, new Error('FigMake connected project view: dropdownBoundingRect is null')), c = new DOMRect(0, 0, 0, 0));
+  c || (n.showing && reportError(ServiceCategories.AI_PRODUCTIVITY, new Error('FigMake connected project view: dropdownBoundingRect is null')), c = new DOMRect(0, 0, 0, 0));
   return jsxs(Fragment, {
     children: [jsx(_$$d2, {
       'aria-expanded': n.showing,
@@ -11075,7 +11075,7 @@ function us({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'figmake.full_width_empty_state',
     fallback: jsx(Fragment, {}),
-    team: _$$e2.ACTIVATION,
+    team: ServiceCategories.ACTIVATION,
     children: jsx(TrackingProvider, {
       name: 'Make Full Width Empty State',
       children: jsx(ur, {
@@ -11119,7 +11119,7 @@ function ur({
           id: 'ai_for_production.chat_response_received'
         });
       } catch (e) {
-        reportError(_$$e2.ACTIVATION, e, {
+        reportError(ServiceCategories.ACTIVATION, e, {
           extra: {
             template: n
           }
@@ -12634,7 +12634,7 @@ function xa({
         };
         n.dispatchCommand(xl, s);
       } catch (e) {
-        reportError(_$$e2.CMS, new Error('Error uploading Rich Text field\'s image embed to CMS'), {
+        reportError(ServiceCategories.CMS, new Error('Error uploading Rich Text field\'s image embed to CMS'), {
           extra: e
         });
       }
@@ -12896,7 +12896,7 @@ function xx(e) {
   let i = useMemo(() => createHeadlessEditor({
     namespace: 'dakota-table-viewer',
     onError(e) {
-      reportError(_$$e2.CMS, e);
+      reportError(ServiceCategories.CMS, e);
     },
     nodes: pz
   }), []);
@@ -12951,7 +12951,7 @@ function xh({
           });
         }
       } catch (e) {
-        reportError(_$$e2.CMS, new Error('could not parse CMS image field value'));
+        reportError(ServiceCategories.CMS, new Error('could not parse CMS image field value'));
       }
     }
     e ? t() : i(null);
@@ -12977,7 +12977,7 @@ function xg(e) {
     if (!e) return '';
     let i = '';
     let n = new Date(e);
-    isNaN(n.getTime()) ? reportError(_$$e2.CMS, new Error('Invalid date value.')) : i = function (e, t) {
+    isNaN(n.getTime()) ? reportError(ServiceCategories.CMS, new Error('Invalid date value.')) : i = function (e, t) {
       let i = (() => {
         switch (t) {
           case _$$ap.PLAIN_DATE_TIME:
@@ -14421,7 +14421,7 @@ function mx({
       try {
         return _$$Cg.parse(JSON.parse(i));
       } catch (e) {
-        reportError(_$$e2.CMS, new Error('could not parse CMS image field value'), {
+        reportError(ServiceCategories.CMS, new Error('could not parse CMS image field value'), {
           extra: e
         });
       }
@@ -14462,7 +14462,7 @@ function mx({
         url: objectUrlSrc
       });
     } catch (e) {
-      reportError(_$$e2.CMS, new Error('Error uploading image to CMS'), {
+      reportError(ServiceCategories.CMS, new Error('Error uploading image to CMS'), {
         extra: e
       });
     } finally {
@@ -16406,7 +16406,7 @@ function hp() {
   let i = Xr(_$$iO);
   let n = trackDefinedFileEventWithStore();
   let l = t => {
-    reportError(_$$e2.CMS, new Error('Failed to import CSV'), {
+    reportError(ServiceCategories.CMS, new Error('Failed to import CSV'), {
       extra: {
         error: t.message
       }
@@ -16983,7 +16983,7 @@ function hL({
     recordingKey: 'cmsTableHeaderWithCollection'
   }) : jsx(hP, {
     title: e ? '' : getI18nString('dakota.table_view.header.default_title')
-  }) : (reportError(_$$e2.CMS, new Error('fileKey not found in DakotaTableViewHeader')), null);
+  }) : (reportError(ServiceCategories.CMS, new Error('fileKey not found in DakotaTableViewHeader')), null);
 }
 function hP({
   title: e
@@ -17787,7 +17787,7 @@ function ga() {
   let f = useAtomWithSubscription(ge);
   let _ = useAtomWithSubscription(_$$lT);
   let b = useCurrentFileKey();
-  b || reportError(_$$e2.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
+  b || reportError(ServiceCategories.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
   let y = getCollectionSummaryStatus(b);
   let k = e => {
     e.stopPropagation();
@@ -19187,7 +19187,7 @@ let g9 = memo(() => {
   return jsxs(ErrorBoundaryCrash, {
     boundaryKey: 'SitesLeftPanel',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e2.SITES_EDITOR,
+    team: ServiceCategories.SITES_EDITOR,
     onError: () => {
       n(VisualBellActions.enqueue({
         message: getI18nString('sites.left_panel.visual_bell.left_panel_error_boundary_message'),
@@ -21923,7 +21923,7 @@ let bk = liveStoreInstance.Query({
     })).data.meta;
     if (!t.resource) {
       let e = new Error('Resource or Private Plugin must be present');
-      reportError(_$$e2.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return e;
     }
     return t.resource;
@@ -22664,7 +22664,7 @@ function yv({
       },
       'onClick': () => {
         if (i(PanelType.DAKOTA), e?.id == null) {
-          reportError(_$$e2.CMS, new Error('CMS Collection ID is null in the properties panel'), {
+          reportError(ServiceCategories.CMS, new Error('CMS Collection ID is null in the properties panel'), {
             extra: {
               currentCollection: e
             }
@@ -27154,7 +27154,7 @@ function Sh(e, t) {
   let i = n;
   if (!i[e]) {
     let i = e.includes('sites.code_behaviors');
-    i && !Sm && (reportError(_$$e2.PROTOTYPING, new Error(`Localized code behavior string not found: ${e}`)), Sm = !0);
+    i && !Sm && (reportError(ServiceCategories.PROTOTYPING, new Error(`Localized code behavior string not found: ${e}`)), Sm = !0);
     return i ? t ?? e : e;
   }
   return i[e];
@@ -29378,7 +29378,7 @@ let Tg = function (e) {
   return () => {
     let [t, i] = _$$lJ2(Xc.Code);
     let n = Array.isArray(t) ? function (e) {
-      let t = e.filter(e => !!e || (kP || (reportError(_$$e2.MAKE, new Error('Expected code behavior on selected node but none found')), kP = !0), !1));
+      let t = e.filter(e => !!e || (kP || (reportError(ServiceCategories.MAKE, new Error('Expected code behavior on selected node but none found')), kP = !0), !1));
       return t.length !== 0 ? t : void 0;
     }(t) : t;
     let l = useCallback((t, l) => {

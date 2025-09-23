@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
-import { n as _$$n } from "../905/64411";
+import { getPublishedComponentsForLibraryThunk } from "../905/64411";
 import { lY } from "../905/939482";
 import { generatePublishedComponentsCacheKey } from "../figma_app/646357";
 import { isLoaded, isLoading } from "../905/18797";
@@ -35,7 +35,7 @@ export function $$p0({
     for (let t of y) {
       if (e >= 5) break;
       let n = generatePublishedComponentsCacheKey(t);
-      !isLoaded(m, n) && (e += 1, isLoading(m, n) || i(_$$n({
+      !isLoaded(m, n) && (e += 1, isLoading(m, n) || i(getPublishedComponentsForLibraryThunk({
         libraryKey: t,
         includeThumbnail: !0,
         includeRealtime: !0

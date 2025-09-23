@@ -6,7 +6,7 @@ import { Fullscreen, ChatMessageType } from "../figma_app/763686";
 import { ClipboardContentType, ChatRole } from "../figma_app/175377";
 import { permissionScopeHandler } from "../905/189185";
 import { design_editor } from "../figma_app/686647";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -714,7 +714,7 @@ export function $$X0() {
           ...y,
           ...e.fields
         }),
-        reportToSentry: e => reportError(_$$e.AI_ASSISTANT, e),
+        reportToSentry: e => reportError(ServiceCategories.AI_ASSISTANT, e),
         sloge: (e, t) => logError(g, e, t),
         setThreadId: J,
         onUpdateThread: (e, t) => {

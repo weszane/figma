@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { reportError } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { F } from '../905/422355';
 import { analyticsEventManager } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
@@ -49,7 +49,7 @@ export function $$S1() {
   try {
     P = L?.type === 'INSTANCE' ? L.componentProperties() : null;
   } catch (e) {
-    reportError(_$$e.SEARCH_EXPERIENCE, e);
+    reportError(ServiceCategories.SEARCH_EXPERIENCE, e);
   }
   let D = useLatestRef(e);
   useEffect(() => {
@@ -60,7 +60,7 @@ export function $$S1() {
       try {
         s = n?.type === 'INSTANCE' ? n?.componentProperties() : null;
       } catch (e) {
-        reportError(_$$e.SEARCH_EXPERIENCE, e);
+        reportError(ServiceCategories.SEARCH_EXPERIENCE, e);
       }
       if (a && s) {
         let e = {

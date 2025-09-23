@@ -1,5 +1,5 @@
 import { assert } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ImageExportType, SitesBindingsCpp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
@@ -204,7 +204,7 @@ let I = class {
       };
       this.cache.set(t, n);
     } catch (e) {
-      reportError(_$$e.SITES_WEB_RUNTIME, Error(`Failed to fetch video metadata for ${t}`));
+      reportError(ServiceCategories.SITES_WEB_RUNTIME, Error(`Failed to fetch video metadata for ${t}`));
     }
   }
   async populateCacheForHashes(e, t) {

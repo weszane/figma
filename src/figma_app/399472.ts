@@ -2,7 +2,7 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { Sb } from "../905/359847";
+import { processHubFilesThunk } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s2 } from "../905/58247";
@@ -117,7 +117,7 @@ let $$b0 = createOptimistThunk((e, t) => {
   });
 });
 function T(e) {
-  return e.hub_file ? Sb({
+  return e.hub_file ? processHubFilesThunk({
     hubFiles: [e.hub_file],
     src: "removeCommunityPublisher"
   }) : e.plugin ? Qi({

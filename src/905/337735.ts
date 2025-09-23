@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 let a = 16 / 9;
 export function $$s0(e) {
@@ -39,7 +39,7 @@ export function $$s0(e) {
       return i;
     }([u, p, m, h]);
   } catch (t) {
-    reportError(_$$e.WAYFINDING, t, {
+    reportError(ServiceCategories.WAYFINDING, t, {
       extra: {
         imageObject: e,
         "imageObject instanceof HTMLElement": e instanceof HTMLElement,

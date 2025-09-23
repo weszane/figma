@@ -3,7 +3,7 @@ import { useState, useId, Component } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { sha1Hex } from "../905/125019";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Thumbnail, SlideConstantsCppBindings, Fullscreen, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -852,7 +852,7 @@ class ts extends Component {
     try {
       e = await M();
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       logError("Community slide template thumbnail generation", e);
     }
     return e;

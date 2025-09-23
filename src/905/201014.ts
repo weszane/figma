@@ -9,7 +9,7 @@ import { B as _$$B } from '../905/113996';
 import { toMatrix2x3 } from '../905/117560';
 import { F as _$$F } from '../905/136718';
 import { BL, fw, J3, KH, qn, u_, XQ } from '../905/139004';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { LE, O$ } from '../905/232489';
 import { LI as _$$LI, O$ as _$$O$, lS, QE, Qf, RU } from '../905/235413';
 import { a3, bE, DX, Eu, F$, hO, JT, jX, Kp, LI, mJ, nb, nK, oE, oy, pO, vV, ZN, zr } from '../905/246310';
@@ -1462,7 +1462,7 @@ function eU(e, t, i, n, r, a, s = _$$DX) {
     case 'PATTERN':
       return null;
     default:
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`Unknown paint type: ${e.type}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`Unknown paint type: ${e.type}`));
       return null;
   }
 }
@@ -1742,7 +1742,7 @@ function eY(e, t, i = _$$DX) {
   } = function (e, t, i = _$$DX) {
     let n;
     if ((n = e.fills) && n.toString() === 'Symbol(figma.mixed)') {
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`Mixed value in fills in node ${e.id}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`Mixed value in fills in node ${e.id}`));
       return {};
     }
     let r = e.layout.relativeBounds().bounds;

@@ -61,7 +61,7 @@ import { D6 } from "../figma_app/863319";
 import { orgSubscriptionAtom } from "../905/296690";
 import { RG } from "../figma_app/684446";
 import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
-import { ServiceCategories as _$$e2 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { transformAtom } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
@@ -914,7 +914,7 @@ function tc() {
       onModalClose: complete,
       workspaces: d.data
     })
-  }) : (reportError(_$$e2.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
+  }) : (reportError(ServiceCategories.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
 }
 let tw = (e, t) => e ? jsx(TextWithTruncation, {
   fontSize: 20,

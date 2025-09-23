@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -497,7 +497,7 @@ let I = class e {
       this.decryptedUserMap[e] || (this.decryptedUserMap[e] = await We(this.userEncryptionKey, e.toString()));
       return this.decryptedUserMap[e];
     } catch {
-      reportError(_$$e.UNOWNED, Error(`Failed to decrypt encrypted user: ${e}`));
+      reportError(ServiceCategories.UNOWNED, Error(`Failed to decrypt encrypted user: ${e}`));
       this.callEventCallback?.($E.ERROR);
     }
   }

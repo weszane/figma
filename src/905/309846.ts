@@ -1,5 +1,5 @@
 import { v as _$$v } from "../905/516963";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, AppStateTsApi, DesignWorkspace, FontSourceType, UIVisibilitySetting, ColorStateTsApi } from "../figma_app/763686";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
@@ -60,7 +60,7 @@ import { OpenEditorFileData } from "../figma_app/43951";
 import { hasProjectRestrictions } from "../figma_app/345997";
 import { fetchTeamRoles } from "../905/672897";
 import { getBackgroundColorForTheme, getMPVisibleTheme } from "../905/187165";
-import { Ob } from "../figma_app/111825";
+import { EightSeven } from "../figma_app/111825";
 import { m as _$$m } from "../905/84999";
 import { fileApiHandler } from "../figma_app/787550";
 import { teamAPIClient } from "../905/834575";
@@ -86,7 +86,7 @@ let er = "Handling fullscreen metadata response not in a valid fullscreen state"
 async function ea(e, t, i) {
   let n = t.getState();
   let s = e.data.meta;
-  if (s || reportError(_$$e.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
+  if (s || reportError(ServiceCategories.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
     await customHistory.redirectAndWaitForever(buildFileUrl({
       file: {
         key: s.file_key,
@@ -444,7 +444,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     didRedirectEditorTypeToStored: s
   }));
   mpGlobal.shouldConnectToMultiplayer || e.dispatch(setFileVersion({
-    fileVersion: Ob
+    fileVersion: EightSeven
   }));
   fullscreenValue.figFileLoaded(n);
   let {
@@ -479,7 +479,7 @@ let $$ej0 = createOptimistThunk(async (e, {
       await $$eW1(C, t, user, e, u);
     }
   } catch (e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
   }
 });
 let eU = createOptimistThunk((e, t) => {
@@ -600,7 +600,7 @@ let eH = createOptimistThunk(async (e, {
       error: n instanceof Error ? void 0 !== n.cause ? `${n.message}: ${n.cause.message}` : n.message : JSON.stringify(n),
       statusCode: Number.isNaN(i) ? void 0 : i
     });
-    reportError(_$$e.UNOWNED, n, {
+    reportError(ServiceCategories.UNOWNED, n, {
       tags: {
         severity: SeverityLevel.Critical
       }

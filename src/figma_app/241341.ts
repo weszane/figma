@@ -7,7 +7,7 @@ import { _ as _$$_ } from '../905/39853';
 import { useSprigWithSampling } from '../905/99656';
 import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { hideModal } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { O0, Ox, wv } from '../905/247509';
 import { kiwiParserCodec } from '../905/294864';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -140,7 +140,7 @@ function eu({
       let f = 0;
       !function e(t) {
         if (f >= p.length) {
-          reportError(_$$e.DEVELOPER_TOOLS, new Error('History node index out of bounds'));
+          reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('History node index out of bounds'));
           return null;
         }
         for (let r of (g.set(t.id, {
@@ -161,7 +161,7 @@ function eu({
         let p;
         let f;
         if (S >= m.length) {
-          reportError(_$$e.DEVELOPER_TOOLS, new Error('Node index out of bounds'));
+          reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('Node index out of bounds'));
           return {};
         }
         let E = m[S];
@@ -258,7 +258,7 @@ function eu({
                 }
               }
             };
-            u.has(sessionLocalIDToString(g.get(r)?.change.guid)) && reportError(_$$e.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
+            u.has(sessionLocalIDToString(g.get(r)?.change.guid)) && reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
             let s = sessionLocalIDToString(i?.change.guid);
             I(s, a, t);
             g.$$delete(s);
@@ -1154,7 +1154,7 @@ let $$eT0 = registerModal(e => {
         entrypoint: 'lego_layer'
       });
     }).catch(e => {
-      reportError(_$$e.DEVELOPER_TOOLS, new Error(`Error fetching history canvas: ${e}`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, new Error(`Error fetching history canvas: ${e}`));
       invalidateCanvasCache(N);
       B(!0);
     });
@@ -1179,7 +1179,7 @@ let $$eT0 = registerModal(e => {
     let e = setTimeout(() => {
       let e = () => {
         Y(void 0);
-        reportError(_$$e.DEVELOPER_TOOLS, new Error('Current image loading error'));
+        reportError(ServiceCategories.DEVELOPER_TOOLS, new Error('Current image loading error'));
         B(!0);
       };
       let r = $$em3({

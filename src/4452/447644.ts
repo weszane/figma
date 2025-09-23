@@ -4,7 +4,7 @@ import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { ResourceStatus } from "../905/957591";
@@ -385,7 +385,7 @@ export function $$e$0({
   });
   _$$u(tp, t);
   let tq = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let tM = !tS || tT || tA || tw.loading;
   let tO = tj?.length ?? 0;

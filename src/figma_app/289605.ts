@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useId } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
@@ -281,9 +281,9 @@ function es({
   return r || "loaded" === l.status && "loaded" === d.status ? a ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_detailsEntry",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(_$$J, {
       libraryName: d?.data,
@@ -471,9 +471,9 @@ function ep({
   }) : f ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_detailsEntry",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(LinkPrimitive, {
       className: E()(YI, Iw),

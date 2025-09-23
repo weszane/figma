@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { createMetaValidator } from "../figma_app/181241";
 import { ResourceBaseTypeMap } from "../figma_app/701107";
@@ -16,7 +16,7 @@ export let $$c0 = new class {
           try {
             return await r.get(`/api/resources/${t}/${e.contentId}/related_content`);
           } catch (e) {
-            reportError(_$$e.COMMUNITY, e);
+            reportError(ServiceCategories.COMMUNITY, e);
             return e;
           }
         });

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { d as _$$d } from "../905/976845";
 import { $ } from "../905/411599";
 import { X } from "../905/647103";
@@ -89,7 +89,7 @@ export function $$C0({
   }], [p]);
   let C = useRef(null);
   let k = C.current?.getBoundingClientRect();
-  k || (i.showing && reportError(_$$e.AI_PRODUCTIVITY, Error("AiImageTools: dropdownBoundingRect is null")), k = new DOMRect(0, 0, 0, 0));
+  k || (i.showing && reportError(ServiceCategories.AI_PRODUCTIVITY, Error("AiImageTools: dropdownBoundingRect is null")), k = new DOMRect(0, 0, 0, 0));
   let R = _$$a() ? getI18nString("fullscreen.properties_panel.ai_image_tools") : getI18nString("fullscreen.properties_panel.ai_image_tools_ga");
   return jsxs(Fragment, {
     children: [jsx(_$$d, {

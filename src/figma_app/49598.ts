@@ -1,5 +1,5 @@
 import { ZS } from "../figma_app/519839";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -23,7 +23,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { getCurrentSearchSessionId } from "../figma_app/387599";
-import { Sb } from "../905/359847";
+import { processHubFilesThunk } from "../905/359847";
 import { m as _$$m } from "../905/909123";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { createPublishActionCreators } from "../figma_app/530167";
@@ -240,7 +240,7 @@ let $$eI20 = createOptimistThunk(async (e, {
   let u = d.remixed_to_metadata;
   let p = [...(c ? c.content : u || []), d];
   remixed_from_metadata && p.push(remixed_from_metadata);
-  e.dispatch(Sb({
+  e.dispatch(processHubFilesThunk({
     hubFiles: p,
     src: "getHubFileVersions"
   }));
@@ -290,7 +290,7 @@ let $$eS17 = createOptimistThunk(async (e, {
       fileKey: t
     }));
     let s = [n, i].filter(e => !!e);
-    s.length > 0 && e.dispatch(Sb({
+    s.length > 0 && e.dispatch(processHubFilesThunk({
       hubFiles: s,
       src: "getHubFileMetadata"
     }));
@@ -334,7 +334,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
     hubFile: r,
     actingProfile: n,
     profileCreated: i
-  }) => (e.dispatch(Sb({
+  }) => (e.dispatch(processHubFilesThunk({
     hubFiles: [r],
     src: "createHubFile"
   })), e.dispatch($$e_7({
@@ -429,13 +429,13 @@ async function eO(e, t) {
   if (authorOrgId && authorTeamId) throw Error(getI18nString("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"));
   if (viewerMode === FTemplateCategoryType.PROTOTYPE && PrototypingTsApi.firstPagePrototypeStatus() !== PresentationValidationStatus.VALID) throw Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
   let O = await maybeCreateSavepoint(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"));
   });
   try {
     r = await R1(thumbnailBuffer, carouselMedia || [], O);
   } catch (e) {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return Error(getI18nString("community.actions.error_uploading_images_e"));
   }
   let R = Z2(r?.carousel_images || [], customCarouselThumbnail);
@@ -472,7 +472,7 @@ async function eO(e, t) {
       profileCreated: e.data.meta.profile_created
     };
   } catch (e) {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return Error(resolveMessage(e, getI18nString("community.actions.could_not_publish_hub_file", {
       error: e.message
     })));
@@ -506,7 +506,7 @@ let $$eR4 = createOptimistThunk(async (e, {
   try {
     i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId);
   } catch (t) {
-    reportError(_$$e.COMMUNITY, t);
+    reportError(ServiceCategories.COMMUNITY, t);
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.error_uploading_images_publish_update_from_editor"),
       type: "hub-file-updated-error",
@@ -536,7 +536,7 @@ let $$eR4 = createOptimistThunk(async (e, {
   };
   try {
     let t = (await hubFileAPI.updateHubFile(hubFileId, R)).data.meta;
-    e.dispatch(Sb({
+    e.dispatch(processHubFilesThunk({
       hubFiles: [t],
       src: "updateHubFile"
     }));
@@ -552,7 +552,7 @@ let $$eR4 = createOptimistThunk(async (e, {
   } catch (r) {
     let t = resolveMessage(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
     e.dispatch(FlashActions.error(t));
-    reportError(_$$e.COMMUNITY, r);
+    reportError(ServiceCategories.COMMUNITY, r);
     return Error(`Error updating file ${r}`);
   }
 });
@@ -581,7 +581,7 @@ let $$eP10 = createOptimistThunk((e, {
     data: t
   }) => {
     let r = t.meta;
-    e.dispatch(Sb({
+    e.dispatch(processHubFilesThunk({
       hubFiles: [r],
       src: "unpublishHubFile"
     }));
@@ -590,7 +590,7 @@ let $$eP10 = createOptimistThunk((e, {
     r && customHistory.redirect(r);
     i?.();
   }).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     console.error(Error(`Error unpublishing file ${e}`));
     a?.();
   });

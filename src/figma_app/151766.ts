@@ -1,5 +1,5 @@
 import { sha1Hex } from "../905/125019";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { PluginModalType, documentStateTsApi, ImageCppBindings, ImageExportType, Fullscreen, SceneGraphTsApi, StateSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/656470";
@@ -175,7 +175,7 @@ async function P(e, t, r) {
   L(_$$h.SaveLocalFile, C, k);
   let M = handleLoadAllPagesWithVersionCheck(PluginModalType.SAVE_LOCAL_COPY);
   M.catch(() => {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
     h(VisualBellActions.dequeue({
       matchType: "save-as-progress"
     }));
@@ -360,7 +360,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
       attemptId: f
     });
   } catch (e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
   }
 }
 let M = createOptimistThunk((e, t) => {

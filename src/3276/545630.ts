@@ -13,7 +13,7 @@ import { Z as _$$Z2 } from '../905/104740';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { Qt, zW } from '../905/162414';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { b as _$$b } from '../905/168657';
 import { t as _$$t4 } from '../905/192333';
 import { c as _$$c2 } from '../905/196462';
@@ -3433,7 +3433,7 @@ export function $$n10(e) {
   let t = Qt(e.activeId);
   return jsxs(ErrorBoundaryCrash, {
     boundaryKey: 'FileCommentsOverlay',
-    team: _$$e.WAYFINDING,
+    team: ServiceCategories.WAYFINDING,
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     children: [jsx(_$$p, {
       featureFlag: 'mobile_reply_upsell',

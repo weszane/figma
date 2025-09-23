@@ -78,7 +78,7 @@ import { A as _$$A60 } from '../905/139173';
 import { t as _$$t3 } from '../905/150656';
 import { popModalStack, showModal, showModalHandler } from '../905/156213';
 import { zW } from '../905/162414';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { F as _$$F6 } from '../905/172964';
 import { isFullscreenInterceptElement } from '../905/181774';
@@ -808,7 +808,7 @@ async function Y(e, t, i, n, r, a) {
       }
     }));
   } catch (e) {
-    reportError(_$$e.FIGJAM, e);
+    reportError(ServiceCategories.FIGJAM, e);
   }
 }
 function X() {
@@ -1969,7 +1969,7 @@ function tZ() {
   let e = ke();
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'FigJamShapesSidebar',
-    team: _$$e.FIGJAM,
+    team: ServiceCategories.FIGJAM,
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
       e();
@@ -15033,7 +15033,7 @@ function xE({
   });
   let a = selectWithShallowEqual(hT);
   if (!a) {
-    reportError(_$$e.FIGJAM, new Error('No selected shape ghost node'));
+    reportError(ServiceCategories.FIGJAM, new Error('No selected shape ghost node'));
     return null;
   }
   let s = a.shapeWithTextType;
@@ -16901,7 +16901,7 @@ let gp = memo(() => {
           let t = setTimeout(() => {
             window.FigmaMobile.nativeContextualToolbarSupportedVersions = void 0;
             n._native_contextual_toolbar_confirm_configuration = () => {};
-            reportError(_$$e.FIGJAM, new Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
+            reportError(ServiceCategories.FIGJAM, new Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
           }, 2e3);
           n._native_contextual_toolbar_confirm_configuration = () => {
             clearTimeout(t);

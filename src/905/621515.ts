@@ -23,7 +23,7 @@ import { RI } from "../figma_app/621201";
 import { L as _$$L } from "../905/121508";
 import { useState, useContext, useRef, useMemo, useCallback, useEffect, useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e2 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useMemoShallow } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import G from "../vendor/575087";
@@ -171,7 +171,7 @@ export function $$es0({
     return useMemo(() => {
       if (!i) return t;
       let r = i.priorityMap.get(e);
-      return r ? getFeatureFlags().curator_file_browser_ordering ? r : t : (!n.current && getFeatureFlags().curator_file_browser_ordering && (reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Overlay not registered with gallery"), {
+      return r ? getFeatureFlags().curator_file_browser_ordering ? r : t : (!n.current && getFeatureFlags().curator_file_browser_ordering && (reportError(ServiceCategories.GROWTH_PLATFORM, Error("[Curator] Overlay not registered with gallery"), {
         tags: {
           overlayId: e,
           galleryName: i.name
@@ -255,7 +255,7 @@ export function $$es0({
     k(t);
     let i = experiment.predicate(t);
     let n = !1;
-    if ("loaded" === C.current.status ? n = experiment.postCheck(...ed(C.current.data)) : "loading" === C.current.status && reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
+    if ("loaded" === C.current.status ? n = experiment.postCheck(...ed(C.current.data)) : "loading" === C.current.status && reportError(ServiceCategories.GROWTH_PLATFORM, Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
       tags: {
         overlayId: r,
         dependencyStatus: C.current.status
@@ -285,7 +285,7 @@ export function $$es0({
   }, () => {
     if (null != e.lifecycle) {
       if ("loaded" !== A.current.status) {
-        reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
+        reportError(ServiceCategories.GROWTH_PLATFORM, Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
           tags: {
             overlayId: r,
             dependencyStatus: C.current.status

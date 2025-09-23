@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { eu } from "../vendor/421718";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -342,7 +342,7 @@ async function Y(e, t, i) {
     });
   }
   i(r, a);
-  reportError(_$$e.PRODUCT_SECURITY, Error(a));
+  reportError(ServiceCategories.PRODUCT_SECURITY, Error(a));
   return r;
 }
 export const p8 = $$B0;

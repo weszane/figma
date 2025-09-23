@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, Suspense } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
@@ -23,7 +23,7 @@ function E() {
 }
 function _(e) {
   useEffect(() => {
-    reportError(_$$e.BILLING_EXPERIENCE, Error("failed to load PurchaseAiCreditsModal"), {
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error("failed to load PurchaseAiCreditsModal"), {
       extra: {
         reason: e.reason
       }
@@ -40,7 +40,7 @@ function C(e) {
     let [e] = setupResourceAtomHandler(I({}));
     let [r] = handleSuspenseRetainRelease(e);
     useEffect(() => {
-      "loaded" !== r.status && reportError(_$$e.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));
+      "loaded" !== r.status && reportError(ServiceCategories.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));
     }, [r.status]);
     return r;
   }().status ? jsx(_, {
@@ -64,7 +64,7 @@ function C(e) {
 export function $$m0(e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "PurchaseAiCreditsModal",
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     fallback: jsx(_, {
       reason: "error_boundary"
     }),

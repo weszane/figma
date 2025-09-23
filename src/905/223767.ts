@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { selectWithShallowEqual } from "../905/103090";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
@@ -49,7 +49,7 @@ function O(e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "UpgradeChoosePlanModal",
     fallback: jsx(K, {}),
-    team: _$$e.MONETIZATION_UPGRADES,
+    team: ServiceCategories.MONETIZATION_UPGRADES,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
         hiddenTitle: U,

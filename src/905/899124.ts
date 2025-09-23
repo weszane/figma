@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import o from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -442,7 +442,7 @@ export let $$en0 = registerModal(function (e) {
               onClick: () => {
                 let e = ef.find(e => e.folderId === U);
                 if (!e) {
-                  reportError(_$$e.WORKFLOW, Error("Draft Move attempted without a selected destination folder"));
+                  reportError(ServiceCategories.WORKFLOW, Error("Draft Move attempted without a selected destination folder"));
                   onClose();
                   return;
                 }

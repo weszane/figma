@@ -1,6 +1,6 @@
 import { PluginMenu } from "../905/791556";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IAssertResource } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { getFeatureFlags } from "../905/601108";
@@ -97,7 +97,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
               menuActionType: "insert-local-widget"
             }
@@ -113,7 +113,7 @@ export function $$J0(e, t, i) {
           pluginID: t.plugin_id,
           widgetName: t.name,
           pluginVersionID: ""
-        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
+        }) : reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
           tags: {
             menuActionType: "insert-local-widget",
             localFileId: i.localFileId
@@ -125,7 +125,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_WIDGET);
         if (!Z(e)) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
               menuActionType: "insert-installed-widget"
             }
@@ -138,7 +138,7 @@ export function $$J0(e, t, i) {
           pluginID: t.id,
           widgetName: n.name,
           pluginVersionID: n.id
-        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
+        }) : reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
           tags: {
             menuActionType: "insert-installed-widget",
             widgetId: i.pluginId
@@ -150,7 +150,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
               menuActionType: "run-local-plugin"
             }
@@ -163,7 +163,7 @@ export function $$J0(e, t, i) {
         }
         let r = localExtensions[i.localFileId];
         if (!r) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
             tags: {
               menuActionType: "run-local-plugin"
             },
@@ -188,7 +188,7 @@ export function $$J0(e, t, i) {
             openFileKey: openFile?.key || "",
             isWidget: !1
           }
-        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
+        }) : reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
           tags: {
             menuActionType: "run-local-plugin",
             canRunMessage: s.message
@@ -200,7 +200,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
         if (!$(e)) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
               menuActionType: "run-installed-plugin"
             }
@@ -231,7 +231,7 @@ export function $$J0(e, t, i) {
           publishedPlugins: e.publishedPlugins
         });
         if (!r) {
-          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
+          reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
             tags: {
               menuActionType: "run-installed-plugin",
               pluginId: i.pluginId
@@ -253,7 +253,7 @@ export function $$J0(e, t, i) {
             openFileKey: openFile?.key || "",
             isWidget: !1
           }
-        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
+        }) : reportError(ServiceCategories.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
           tags: {
             menuActionType: "run-installed-plugin",
             pluginId: i.pluginId,

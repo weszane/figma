@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -21,7 +21,7 @@ export function $$_3(e) {
   for (let t of e) {
     let e = $$p2(t);
     e && T(e, d).catch(e => {
-      reportError(_$$e.FIGJAM, e);
+      reportError(ServiceCategories.FIGJAM, e);
     });
   }
 }

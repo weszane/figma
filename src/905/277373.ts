@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Thumbnail, SourceType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSceneGraphInstance } from "../905/830071";
@@ -27,13 +27,13 @@ export async function $$u1(e) {
   return widgetNodeID && widgetRunPromise ? (await widgetRunPromise, permissionScopeHandler(SourceType.SYSTEM, "generateWidgetThumbnail", () => {
     let e = getSceneGraphInstance().get(widgetNodeID);
     if (!e) {
-      reportError(_$$e.EXTENSIBILITY, Error("Failed to get the node from widget node when attempting to generate widget thumbnail"));
+      reportError(ServiceCategories.EXTENSIBILITY, Error("Failed to get the node from widget node when attempting to generate widget thumbnail"));
       return null;
     }
     let i = $$c2(e);
     e.removeWidgetWithoutSafetyChecks();
     return i;
-  })) : (reportError(_$$e.EXTENSIBILITY, Error("Failed to insert the widget on the internal page when attempting to generate widget thumbnail")), null);
+  })) : (reportError(ServiceCategories.EXTENSIBILITY, Error("Failed to insert the widget on the internal page when attempting to generate widget thumbnail")), null);
 }
 export const _e = $$d0;
 export const gI = $$u1;

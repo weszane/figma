@@ -4,7 +4,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Link } from "../905/438674";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/53857";
@@ -1124,7 +1124,7 @@ function eK({
       layerName: e.layerName
     }) : getFeatureFlags().dt_code_connect_id_error && e?.type === "CHILD_LAYER_ID_NOT_FOUND" ? t = getI18nString("dev_handoff.figmadocs.error_child_layer_id_not_found", {
       codeConnectId: e.codeConnectId
-    }) : e?.type === "MISSING_CODE_CONNECT_ID" ? t = I?.data.message : reportError(_$$e.DEVELOPER_TOOLS, Error("Error evaluating Code Connect template"), {
+    }) : e?.type === "MISSING_CODE_CONNECT_ID" ? t = I?.data.message : reportError(ServiceCategories.DEVELOPER_TOOLS, Error("Error evaluating Code Connect template"), {
       extra: {
         error: I?.data.error
       }

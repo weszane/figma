@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, PureComponent, Fragment as _$$Fragment, useCallback, useMemo, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findMatchingValue } from "../905/807535";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Xf } from "../figma_app/153916";
@@ -2533,7 +2533,7 @@ function a4() {
 function a5(e) {
   return e.children({
     isELA: _$$d3({
-      reportErrorsToTeam: _$$e.SCALE
+      reportErrorsToTeam: ServiceCategories.SCALE
     })
   });
 }
@@ -2696,7 +2696,7 @@ function ni(e) {
           differenceDays: t,
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(ServiceCategories.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId
@@ -2734,7 +2734,7 @@ function nr(e) {
           }),
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(ServiceCategories.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId
@@ -3934,7 +3934,7 @@ let n8 = new class {
           let _ = t[plugin_id];
           if (!_) {
             let e = Error(`Missing extension analytics data for org ${org_id} and plugin ${plugin_id}`);
-            reportError(_$$e.EXTENSIBILITY, e);
+            reportError(ServiceCategories.EXTENSIBILITY, e);
             return;
           }
           let u = _.usage_windows[extension_usage_window];
@@ -4735,7 +4735,7 @@ function sA(e) {
   });
   if ("loading" === c.status) return null;
   if ("errors" === c.status) {
-    reportError(_$$e.EXTENSIBILITY, Error("Failed to load plugin requests"));
+    reportError(ServiceCategories.EXTENSIBILITY, Error("Failed to load plugin requests"));
     return null;
   }
   let _ = getResourceDataOrFallback(c.data.org);
@@ -5342,7 +5342,7 @@ function sB(e) {
       toolbar: jsx(_$$g2, {}),
       content: eQ || !L ? eY : eH,
       errorBoundaryConfig: {
-        figmaTeam: _$$e.SCALE,
+        figmaTeam: ServiceCategories.SCALE,
         boundaryKeySuffix: "OrgAdminSettingsPageView"
       }
     }), jsx(W, {}), useSeatBillingTermsExperiment() && jsx(_$$k2, {

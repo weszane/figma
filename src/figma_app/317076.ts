@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { z } from "../905/239603";
 import { Gw, FB } from "../vendor/149334";
@@ -416,7 +416,7 @@ export async function $$D10({
     }, r);
     await r;
   } catch (r) {
-    reportError(_$$e.DEVELOPER_TOOLS, r, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, r, {
       extra: {
         link: e,
         linkPreviewJson: t

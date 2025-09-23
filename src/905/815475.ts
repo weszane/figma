@@ -1,6 +1,6 @@
-import { debugState } from '../905/407919'
-import { getRequest } from '../905/910117'
-import { NK } from '../figma_app/111825'
+import { debugState } from '../905/407919';
+import { getRequest } from '../905/910117';
+import { getValidNumber } from '../figma_app/111825';
 
 /**
  * Generates a URL with the current file version as a query parameter.
@@ -9,13 +9,13 @@ import { NK } from '../figma_app/111825'
  * (Original function: $$s0)
  */
 export function generateFileVersionUrl(baseUrl: string) {
-  const fileVersion = NK(debugState?.getState().fileVersion)
-  const urlObj = new URL(baseUrl, location.origin)
-  urlObj.searchParams.set('fv', fileVersion.toString())
+  const fileVersion = getValidNumber(debugState?.getState().fileVersion);
+  const urlObj = new URL(baseUrl, location.origin);
+  urlObj.searchParams.set('fv', fileVersion.toString());
   return {
     url: urlObj.toString(),
-    fileVersion,
-  }
+    fileVersion
+  };
 }
 
 /**
@@ -26,7 +26,11 @@ export function generateFileVersionUrl(baseUrl: string) {
  * (Original variable: o)
  */
 export function fetchArrayBuffer(url: string, _fileVersion?: number) {
-  return getRequest(url, null, { responseType: 'arraybuffer' }).then(({ data }) => data)
+  return getRequest(url, null, {
+    responseType: 'arraybuffer'
+  }).then(({
+    data
+  }) => data);
 }
 
 /**
@@ -38,17 +42,20 @@ export function fetchArrayBuffer(url: string, _fileVersion?: number) {
  */
 export async function loadCanvasData(canvasUrl: string, fetchFn: (url: string, fileVersion?: number) => Promise<any> = fetchArrayBuffer) {
   if (!canvasUrl) {
-    return Promise.reject(new Error('No canvas URL'))
+    return Promise.reject(new Error('No canvas URL'));
   }
-  const { url, fileVersion } = generateFileVersionUrl(canvasUrl)
-  const data = await fetchFn(url, fileVersion)
+  const {
+    url,
+    fileVersion
+  } = generateFileVersionUrl(canvasUrl);
+  const data = await fetchFn(url, fileVersion);
   // If the file version has changed, retry loading
-  if (NK(debugState?.getState().fileVersion) > fileVersion) {
-    return loadCanvasData(canvasUrl, fetchFn)
+  if (getValidNumber(debugState?.getState().fileVersion) > fileVersion) {
+    return loadCanvasData(canvasUrl, fetchFn);
   }
-  return [data, url, fileVersion]
+  return [data, url, fileVersion];
 }
 
 // Export aliases for compatibility with original names
-export const P = generateFileVersionUrl
-export const n = loadCanvasData
+export const P = generateFileVersionUrl;
+export const n = loadCanvasData;

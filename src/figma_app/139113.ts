@@ -1,7 +1,7 @@
-import { reportError } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { atom, atomStoreManager } from '../figma_app/27355'
-import { AutosaveHelpers } from '../figma_app/763686'
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { atom, atomStoreManager } from '../figma_app/27355';
+import { AutosaveHelpers } from '../figma_app/763686';
 /**
  * StatusEnum - Original: $$o2
  * Represents the status of the file system changes.
@@ -19,15 +19,15 @@ export enum FileProcessingStatus {
  */
 export const autosaveAtom = atom({
   status: FileProcessingStatus.EXISTING_FILE,
-  timeoutHandle: null as null | ReturnType<typeof setTimeout>,
-})
+  timeoutHandle: null as null | ReturnType<typeof setTimeout>
+});
 
 /**
  * getAutosaveState - Original: $$d1
  * Returns the current autosave state from atomStoreManager.
  */
 export function getAutosaveState() {
-  return atomStoreManager.get(autosaveAtom)
+  return atomStoreManager.get(autosaveAtom);
 }
 
 /**
@@ -37,23 +37,16 @@ export function getAutosaveState() {
  * @returns {boolean} True if waiting started, false otherwise.
  */
 export function startAutosaveWait(onTimeout: () => void): boolean {
-  const state = getAutosaveState()
-  if (
-    state.status !== FileProcessingStatus.NEW_FILE
-    || !AutosaveHelpers
-    || !AutosaveHelpers.hasOnlyNewFileSystemChanges()
-    || !navigator.onLine
-  ) {
-    return false
+  const state = getAutosaveState();
+  if (state.status !== FileProcessingStatus.NEW_FILE || !AutosaveHelpers || !AutosaveHelpers.hasOnlyNewFileSystemChanges() || !navigator.onLine) {
+    return false;
   }
-
   const timeoutHandle = setTimeout(() => {
-    finishAutosaveWait(true)
-    onTimeout()
-  }, 10000)
-
-  updateAutosaveStateToWaiting(timeoutHandle)
-  return true
+    finishAutosaveWait(true);
+    onTimeout();
+  }, 10000);
+  updateAutosaveStateToWaiting(timeoutHandle);
+  return true;
 }
 
 /**
@@ -62,21 +55,17 @@ export function startAutosaveWait(onTimeout: () => void): boolean {
  * @param fromTimeout Indicates if called from timeout.
  */
 export function finishAutosaveWait(fromTimeout: boolean) {
-  const state = getAutosaveState()
-  state.status = FileProcessingStatus.FINISHED_WAITING
+  const state = getAutosaveState();
+  state.status = FileProcessingStatus.FINISHED_WAITING;
   if (!fromTimeout) {
     if (state.timeoutHandle) {
-      clearTimeout(state.timeoutHandle)
-    }
-    else {
-      reportError(
-        ServiceCategories.SCENEGRAPH_AND_SYNC,
-        new Error('Finished waiting but no timeout handle'),
-      )
+      clearTimeout(state.timeoutHandle);
+    } else {
+      reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error('Finished waiting but no timeout handle'));
     }
   }
-  state.timeoutHandle = null
-  atomStoreManager.set(autosaveAtom, state)
+  state.timeoutHandle = null;
+  atomStoreManager.set(autosaveAtom, state);
 }
 
 /**
@@ -85,10 +74,10 @@ export function finishAutosaveWait(fromTimeout: boolean) {
  * @param timeoutHandle Timeout handle to store.
  */
 function updateAutosaveStateToWaiting(timeoutHandle: ReturnType<typeof setTimeout>) {
-  const state = getAutosaveState()
-  state.status = FileProcessingStatus.WAITING
-  state.timeoutHandle = timeoutHandle
-  atomStoreManager.set(autosaveAtom, state)
+  const state = getAutosaveState();
+  state.status = FileProcessingStatus.WAITING;
+  state.timeoutHandle = timeoutHandle;
+  atomStoreManager.set(autosaveAtom, state);
 }
 
 /**
@@ -97,19 +86,19 @@ function updateAutosaveStateToWaiting(timeoutHandle: ReturnType<typeof setTimeou
  * @param isNewFile True if status should be NEW_FILE, false for EXISTING_FILE.
  */
 export function setAutosaveStatus(isNewFile: boolean) {
-  const state = getAutosaveState()
-  state.status = isNewFile ? FileProcessingStatus.NEW_FILE : FileProcessingStatus.EXISTING_FILE
+  const state = getAutosaveState();
+  state.status = isNewFile ? FileProcessingStatus.NEW_FILE : FileProcessingStatus.EXISTING_FILE;
   if (state.timeoutHandle) {
-    clearTimeout(state.timeoutHandle)
+    clearTimeout(state.timeoutHandle);
   }
-  state.timeoutHandle = null
-  atomStoreManager.set(autosaveAtom, state)
+  state.timeoutHandle = null;
+  atomStoreManager.set(autosaveAtom, state);
 }
 
 // Export original variable names for compatibility
-export const QY = FileProcessingStatus // $$o2
-export const vE = autosaveAtom // $$l5
-export const Js = getAutosaveState // $$d1
-export const Ed = startAutosaveWait // $$c0
-export const pi = finishAutosaveWait // $$u4
-export const Yu = setAutosaveStatus // $$p3
+export const QY = FileProcessingStatus; // $$o2
+export const vE = autosaveAtom; // $$l5
+export const Js = getAutosaveState; // $$d1
+export const Ed = startAutosaveWait; // $$c0
+export const pi = finishAutosaveWait; // $$u4
+export const Yu = setAutosaveStatus; // $$p3

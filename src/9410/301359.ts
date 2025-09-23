@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -40,7 +40,7 @@ let $$E0 = async ({
   let T = atomStoreManager.get(ed);
   let w = atomStoreManager.get(hD);
   if (!w) {
-    reportError(_$$e.AI_PRODUCTIVITY, Error("Editor is null when trying to generate speaker notes"));
+    reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Editor is null when trying to generate speaker notes"));
     return;
   }
   let S = w.getEditorState();
@@ -128,7 +128,7 @@ let $$E0 = async ({
       errorType: e.type || e.marker
     });
     cT(JT.SLIDES_GENERATE_SPEAKER_NOTES);
-    dk.some(t => e instanceof t) || reportError(_$$e.AI_PRODUCTIVITY, Error(`Unexpected error encountered while generating speaker notes: ${e.message}`));
+    dk.some(t => e instanceof t) || reportError(ServiceCategories.AI_PRODUCTIVITY, Error(`Unexpected error encountered while generating speaker notes: ${e.message}`));
     return;
   }
 };

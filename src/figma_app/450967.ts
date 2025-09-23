@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { Z } from "../905/829242";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, Fonts, AppStateTsApi } from "../figma_app/763686";
 import { useMemoStable } from "../905/19536";
 import { reportError } from "../905/11";
@@ -163,7 +163,7 @@ let f = async ({
     }
   }
   let d = Error("Text preview generation failed after all retry attempts");
-  reportError(_$$e.SLIDES, d, {
+  reportError(ServiceCategories.SLIDES, d, {
     extra: {
       styleId: e,
       textToRender: t,

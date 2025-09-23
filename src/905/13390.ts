@@ -11,7 +11,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { h as _$$h, O as _$$O } from '../905/142086';
 import { showModalHandler } from '../905/156213';
 import { e as _$$e3 } from '../905/157975';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { Fh, Mw, U1 } from '../905/191601';
 import { J as _$$J, q as _$$q } from '../905/202542';
 import { F as _$$F } from '../905/300562';
@@ -822,7 +822,7 @@ export function $$ek0(e) {
             case nb.REPO:
               return findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             default:
-              reportError(_$$e.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
+              reportError(ServiceCategories.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
                 extra: {
                   'tile.type': e.type,
                   'numFilesSelected': t1,

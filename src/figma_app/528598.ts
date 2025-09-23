@@ -7,7 +7,7 @@ import { flatten } from "../figma_app/656233";
 import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/49800";
 import { HiddenLabel } from "../905/270045";
@@ -1103,7 +1103,7 @@ function e0({
     T.current = !0;
     Bc(d).then(e => {
       T.current && S(_$$J(e));
-    }).catch(e => reportError(_$$e.DESIGN_SYSTEMS_FOUNDATIONS, e));
+    }).catch(e => reportError(ServiceCategories.DESIGN_SYSTEMS_FOUNDATIONS, e));
   }, [d]);
   useEffect(function () {
     (v && !A || v && e !== x) && N();

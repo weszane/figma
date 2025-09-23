@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import o from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
@@ -52,7 +52,7 @@ export function $$_0(e) {
       batchRequest: !0
     }), y(!0));
   }, [b?.loadEventEnd, A, u.view]);
-  let v = e.errorBoundaryConfig?.figmaTeam ?? _$$e.WAYFINDING;
+  let v = e.errorBoundaryConfig?.figmaTeam ?? ServiceCategories.WAYFINDING;
   let I = e.errorBoundaryConfig?.boundaryKeySuffix ? `-${e.errorBoundaryConfig.boundaryKeySuffix}` : "";
   let E = jsxs(Fragment, {
     children: [!!e.banner && jsx(ErrorBoundaryCrash, {

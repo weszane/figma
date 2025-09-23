@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { WorkspaceType, Fullscreen, SchemaJoinStatus, AutosaveEventType, ViewType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -16,7 +16,7 @@ import { $ as _$$$2 } from "../905/489647";
 import { selectViewAction } from "../905/929976";
 import { kq } from "../905/292918";
 import { Ad } from "../905/300250";
-import { Nf } from "../figma_app/864378";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { showModalHandler } from "../905/156213";
 import { searchThunk } from "../905/977218";
 import { setTeamOptimistThunk } from "../figma_app/240735";
@@ -173,7 +173,7 @@ let $$H = createOptimistThunk((e, t, {
             migrationVersion: f.fileVersion,
             user: f.user
           }));
-          e.dispatch(Nf());
+          e.dispatch(updateLocalLibraryItemsThunk());
         } else e.dispatch(kq(t));
       }
     }
@@ -214,7 +214,7 @@ let $$H = createOptimistThunk((e, t, {
           });
         }
       } catch (e) {
-        reportError(_$$e.DESKTOP, e);
+        reportError(ServiceCategories.DESKTOP, e);
       }
     })();
   }

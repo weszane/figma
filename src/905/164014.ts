@@ -1,5 +1,5 @@
 import { useRef, useCallback } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { m as _$$m } from "../vendor/601859";
 import { reportError } from "../905/11";
 export function $$o0({
@@ -82,7 +82,7 @@ let l = e => {
   try {
     return Array.from(e.componentControls).find(e => e.isDragging);
   } catch (e) {
-    reportError(_$$e.SLIDES, e);
+    reportError(ServiceCategories.SLIDES, e);
     return;
   }
 };
@@ -90,7 +90,7 @@ let d = e => {
   try {
     return e.panSession.history[0];
   } catch (e) {
-    reportError(_$$e.SLIDES, e);
+    reportError(ServiceCategories.SLIDES, e);
     return;
   }
 };

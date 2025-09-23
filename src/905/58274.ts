@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { logError } from "../905/714362";
@@ -33,7 +33,7 @@ export function $$y3(e, t) {
     onFailure: t => {
       let i = atomStoreManager.get(_g);
       let r = Jw(i);
-      logError(_$$e.SLIDES, _, {
+      logError(ServiceCategories.SLIDES, _, {
         publishState: i,
         publishStep: r,
         error: t
@@ -97,7 +97,7 @@ function I(e) {
   } = e;
   let r = atomStoreManager.get(_g);
   let u = Jw(r);
-  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(_$$e.SLIDES, _, {
+  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(ServiceCategories.SLIDES, _, {
     publishState: r,
     publishStep: u,
     error

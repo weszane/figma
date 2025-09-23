@@ -1,5 +1,5 @@
 import { C } from "../905/222694";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getResourceDataOrFallback } from "../905/663269";
 import { bellFeedAPIInstance } from "../figma_app/876459";
 import { reportError } from "../905/11";
@@ -29,7 +29,7 @@ export class $$u2 {
         let i;
         let n = null;
         let a = t.data.file.key;
-        a !== e && reportError(_$$e.DESKTOP, Error(`Mismatched file keys for presenter data: got ${a} from livegraph but expected ${e}`), {
+        a !== e && reportError(ServiceCategories.DESKTOP, Error(`Mismatched file keys for presenter data: got ${a} from livegraph but expected ${e}`), {
           level: "warning"
         });
         let {
@@ -76,7 +76,7 @@ export class $$u2 {
       if ("loaded" === t.status && t.data.file?.currentUserCommentReadStatus) {
         let i = t.data.file.currentUserCommentReadStatus.userId;
         let n = t.data.file.id;
-        n !== e && reportError(_$$e.DESKTOP, Error(`Mismatched file keys for comment data: got ${n} from livegraph but expected ${e}`), {
+        n !== e && reportError(ServiceCategories.DESKTOP, Error(`Mismatched file keys for comment data: got ${n} from livegraph but expected ${e}`), {
           level: "warning"
         });
         let a = t.data.file.comments[0];

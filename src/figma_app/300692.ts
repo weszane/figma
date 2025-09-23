@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { reportError } from '../905/11';
 import { d as _$$d } from '../905/44199';
 import { ProductStatus } from '../905/54385';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { C8 } from '../905/216495';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
@@ -580,7 +580,7 @@ export class PluginPermissions {
       return new PluginPermissions(perms, '*');
     }
     const filtered = filterCapabilities(perms);
-    if (filtered.length < perms.length) reportError(_$$e.EXTENSIBILITY, new Error('Untrusted local plugin denied internal api permissions'));
+    if (filtered.length < perms.length) reportError(ServiceCategories.EXTENSIBILITY, new Error('Untrusted local plugin denied internal api permissions'));
     return new PluginPermissions(filtered, undefined);
   }
   static forInstalledPlugin(plugin: PluginData): PluginPermissions {
@@ -593,7 +593,7 @@ export class PluginPermissions {
       return new PluginPermissions(filterCapabilities(perms, getPluginPermissions(plugin.plugin_id)), getPluginDomain(plugin.plugin_id));
     }
     const filtered = filterCapabilities(perms);
-    if (filtered.length < perms.length) reportError(_$$e.UNOWNED, new Error('Untrusted installed plugin denied internal api permissions'));
+    if (filtered.length < perms.length) reportError(ServiceCategories.UNOWNED, new Error('Untrusted installed plugin denied internal api permissions'));
     return new PluginPermissions(filtered, undefined);
   }
 }
@@ -1622,7 +1622,7 @@ export function getWidgetVersionData(params: any): any | undefined {
       if (result.id === params.widgetVersionId || isInteractionPathCheck() || Lg()) {
         // ok
       } else {
-        reportError(_$$e.UNOWNED, new Error(`plugin versionId=${result?.id} doesn't match node.widgetVersionId=${params.widgetVersionId}`));
+        reportError(ServiceCategories.UNOWNED, new Error(`plugin versionId=${result?.id} doesn't match node.widgetVersionId=${params.widgetVersionId}`));
       }
     }
     return result;

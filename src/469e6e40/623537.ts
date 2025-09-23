@@ -29,7 +29,7 @@ import { e as _$$e5 } from '../905/86132';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { hideModal, popModalStack, showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { j as _$$j } from '../905/206476';
 import { h as _$$h } from '../905/207101';
 import { UNASSIGNED } from '../905/247093';
@@ -3211,7 +3211,7 @@ export function $$nc0(e) {
   let ee = !!(Z && Z.permission === FUserRoleType.ADMIN);
   let et = useSelector(e => e.licenseGroups);
   let ea = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let en = RG();
   let {

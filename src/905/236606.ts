@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, createContext, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
 import d from "classnames";
@@ -134,9 +134,9 @@ let L = registerModal(function (e) {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "suggestedVars_modal",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(gs, {
       name: "suggestions_modal",
@@ -178,9 +178,9 @@ let B = registerModal(function (e) {
   return "loading" === t.status ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: "varDetails_modal",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(bL, {
       defaultPosition: e.position,
@@ -365,9 +365,9 @@ function ee({
     fallback: jsx(Fragment, {
       children: e
     }),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       ref: h,
@@ -447,9 +447,9 @@ function et({
     fallback: jsx(Fragment, {
       children: e
     }),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       ref: m,
@@ -497,9 +497,9 @@ function ei({
     fallback: jsx(Fragment, {
       children: e
     }),
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(ButtonPrimitive, {
       htmlAttributes: {

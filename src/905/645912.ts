@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { SlideConstantsCppBindings, Fullscreen, InteractionCpp } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { AffineTransform } from "../905/583953";
@@ -137,7 +137,7 @@ export function $$L0(e, t) {
         searchPosition: v.fragmentPosition
       });
     } catch (e) {
-      reportError(_$$e.ML_PLATFORM, Error("Fragment search insert error: " + e.message));
+      reportError(ServiceCategories.ML_PLATFORM, Error("Fragment search insert error: " + e.message));
       i(VisualBellActions.enqueue({
         message: getI18nString("fragment_search.insert_toast_error"),
         error: !0

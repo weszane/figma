@@ -1,5 +1,5 @@
 import { useState, useEffect, createRef } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 export function $$s0(e, t, i) {
   let {
@@ -27,7 +27,7 @@ export function $$s0(e, t, i) {
         });
         c(e);
       } catch (e) {
-        reportError(_$$e.UNOWNED, Error(`Failed to initialize IntersectionObserver ${e}`));
+        reportError(ServiceCategories.UNOWNED, Error(`Failed to initialize IntersectionObserver ${e}`));
       }
     };
     setTimeout(function () {

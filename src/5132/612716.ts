@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Suspense, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import c from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
@@ -204,7 +204,7 @@ export function $$N0({
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FullscreenHelpUpsellsModalBase",
     fallback: jsx(K, {}),
-    team: _$$e.MONETIZATION_UPGRADES,
+    team: ServiceCategories.MONETIZATION_UPGRADES,
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
         hiddenTitle: l || "",

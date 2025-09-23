@@ -138,7 +138,7 @@ import { i as _$$i4 } from "../905/385727";
 import { n as _$$n3 } from "../figma_app/537817";
 import { xf, H as _$$H, $S as _$$$S, UU, N8, p4, R8, _O, RA, gJ, C9, x7, B5, A as _$$A3, gY, _V, AA, j7, sH, Jt, bU, rG as _$$rG, qj, ec as _$$ec, jq, JZ, H7, to as _$$to2, vQ } from "../905/372455";
 import { A as _$$A4 } from "../5724/240681";
-import { ServiceCategories as _$$e3 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { _ as _$$_ } from "../905/263184";
 import { R as _$$R4 } from "../905/256203";
 import { B as _$$B2 } from "../905/950875";
@@ -2874,7 +2874,7 @@ function na({
           onClick: () => {
             if (v && E !== FEditorType.Slides && T) {
               if (!isSlidesOrWhiteboardOrDesignOrIllustration(E)) {
-                reportError(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
+                reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
                   extra: {
                     editorType: E,
                     teamId: o?.id,
@@ -5575,7 +5575,7 @@ function a$({
       if (p && a && !y()) {
         let t = mapFileTypeToEditorType(e.editor_type);
         if (!isSlidesOrWhiteboardOrDesignOrIllustration(t)) {
-          reportError(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
+          reportError(ServiceCategories.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
             extra: {
               editorType: t,
               teamId: s?.id,
@@ -6296,7 +6296,7 @@ function su({
     let [h, g] = useState(m);
     let _ = useCallback(t => {
       if (!p.includes(t)) {
-        reportError(_$$e3.WORKFLOW, Error("Invalid invite level selected"), {
+        reportError(ServiceCategories.WORKFLOW, Error("Invalid invite level selected"), {
           extra: {
             level: t,
             inviteLevelOptions: p,

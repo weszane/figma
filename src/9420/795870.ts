@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
 import { logger } from "../905/651849";
 import { getInitialOptions, buildStaticUrl } from "../figma_app/169182";
@@ -298,7 +298,7 @@ let $$P3 = _$$D(e => {
       code: r,
       message: t
     });
-    "currency-validation-error" === r || h(e) || f(e) || S(e) || reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] ${"string" == typeof e ? e : e.code ?? "StripeError"}`), r => {
+    "currency-validation-error" === r || h(e) || f(e) || S(e) || reportError(ServiceCategories.BILLING_EXPERIENCE, Error(`[Billing] ${"string" == typeof e ? e : e.code ?? "StripeError"}`), r => {
       let t = "object" == typeof e ? {
         stripe_error_details: normalizeError(pV(e)),
         ...a

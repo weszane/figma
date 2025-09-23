@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { flattenMessageMeta } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -31,12 +31,12 @@ export function $$b0({
     pinnedFile
   } = T.data;
   if (!pinnedFile) {
-    reportError(_$$e.WAYFINDING, Error("DeletePinModal unable to lookup pinned file by ID"));
+    reportError(ServiceCategories.WAYFINDING, Error("DeletePinModal unable to lookup pinned file by ID"));
     r();
     return null;
   }
   if (pinnedFile.resourceType !== FContainerKindType.WORKSPACE) {
-    reportError(_$$e.WAYFINDING, Error("DeletePinModal opened for pinned file with non-workspace resource type"), {
+    reportError(ServiceCategories.WAYFINDING, Error("DeletePinModal opened for pinned file with non-workspace resource type"), {
       extra: {
         resourceType: pinnedFile.resourceType
       }

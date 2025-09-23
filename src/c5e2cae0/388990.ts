@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import n from "classnames";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G } from "../figma_app/361869";
@@ -126,7 +126,7 @@ export function $$$1(e) {
 }
 function U(e) {
   let t = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.BILLING_EXPERIENCE
+    reportErrorsToTeam: ServiceCategories.BILLING_EXPERIENCE
   });
   let a = {
     planParentId: t.key.parentId || "",
@@ -252,7 +252,7 @@ export let $$z0 = withTracking(function (e) {
   let a = getCurrentTeam();
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeSingleTeamModal",
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     fallback: jsx(K, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {

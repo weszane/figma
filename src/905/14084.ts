@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useTheme } from "../905/289770";
 import { setupThemeContext } from "../905/614223";
 import { g as _$$g } from "../905/687265";
@@ -122,7 +122,7 @@ let $$L0 = registerModal(function (e) {
   _$$h(() => {
     e.autoApproved || e.requestId || function (e) {
       if (isDevEnvironment()) throw e;
-      reportError(_$$e.ACTIVATION, e);
+      reportError(ServiceCategories.ACTIVATION, e);
       c(hideSpecificModal($$L0));
       c(VisualBellActions.enqueue({
         message: "Something went wrong.",

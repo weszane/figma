@@ -20,7 +20,7 @@ import { h as _$$h } from "../905/207101";
 import { YX, S0, bk, PG, ZE, xO, VQ, qV, r3 as _$$r, X9, bT, Nz, nt, $l, aV, uN, Q7, BG, eL as _$$eL, kd, SL, ni, fj, VN, _D, pr, JA, Xw, xo, JC } from "../905/98947";
 import { pu, XL, ug, Pp, Ig, zH, td as _$$td, nH } from "../7037/430062";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import R from "../vendor/128080";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { R as _$$R } from "../905/165069";
@@ -2377,7 +2377,7 @@ function te() {
   E && C++;
   b && C++;
   j && C++;
-  getIsUpgradeHandlerLoading() || !(C < 3) || r9 || (r9 = !0, reportError(_$$e.ACTIVATION, Error("Unexpectedly low number of seat options: " + C), {
+  getIsUpgradeHandlerLoading() || !(C < 3) || r9 || (r9 = !0, reportError(ServiceCategories.ACTIVATION, Error("Unexpectedly low number of seat options: " + C), {
     extra: {
       canUpgradeCollaborator: E,
       canUpgradeDeveloper: b,
@@ -3798,7 +3798,7 @@ function t7({
           });
         }
       } catch (e) {
-        reportError(_$$e.GROWTH_PLATFORM, e);
+        reportError(ServiceCategories.GROWTH_PLATFORM, e);
       }
       analyticsEventManager.trackDefinedEvent("i18n.nux_language_changed", {
         from_locale: t,
@@ -3807,7 +3807,7 @@ function t7({
       i(s);
       d(s);
     } catch (e) {
-      reportError(_$$e.GROWTH_PLATFORM, e);
+      reportError(ServiceCategories.GROWTH_PLATFORM, e);
     } finally {
       e(!1);
     }
@@ -4490,7 +4490,7 @@ function iE({
       return i;
     }, [l.status, l.data, a.status, a.data, f, e, t, c, r, s, p]);
     useEffect(() => {
-      h ? h === g[0] ? (x(g), i = [...g]) : I()(g, i) || reportError(_$$e.ACTIVATION, Error("NUX steps have unexpectedly changed in the middle of NUX"), {
+      h ? h === g[0] ? (x(g), i = [...g]) : I()(g, i) || reportError(ServiceCategories.ACTIVATION, Error("NUX steps have unexpectedly changed in the middle of NUX"), {
         extra: {
           currentQuestion: h,
           currentSteps: u,

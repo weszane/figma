@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { LoadingOverlay } from "../figma_app/858013";
 import { KX } from "../469e6e40/623537";
@@ -213,7 +213,7 @@ function G({
     toolbar: jsx(_$$g, {}),
     content: F,
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: "WorkspaceAdminSettingsPageView"
     }
   });

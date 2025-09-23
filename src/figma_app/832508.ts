@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Button } from "../905/521428";
 import { SeverityLevel } from "../905/11";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
@@ -12,7 +12,7 @@ export function $$u0(e) {
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     severity: SeverityLevel.Critical,
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     children: jsxs("div", {
       "data-onboarding-key": hH,

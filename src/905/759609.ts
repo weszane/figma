@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, memo, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ButtonLarge } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/479687";
@@ -499,7 +499,7 @@ let J = memo(function (e) {
       o(!0);
       return;
     }
-    t.type === PrimaryWorkflowEnum.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PrimaryWorkflowEnum.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : (reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
+    t.type === PrimaryWorkflowEnum.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PrimaryWorkflowEnum.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : (reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
   });
   let l = useRef(null);
   return jsx(_$$d, {

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { kiwiParserCodec } from '../905/294864';
 import { deepEqual } from '../905/382883';
 import { decodeBase64, encodeBase64 } from '../905/561685';
@@ -31,7 +31,7 @@ export function $$d2(e, t) {
       [e]: t.data
     }],
     blobs: t.blobs
-  }) : (logMessage(_$$e.DESIGN_SYSTEMS_EDITOR, new Error(`Invalid format for ${e}`), {
+  }) : (logMessage(ServiceCategories.DESIGN_SYSTEMS_EDITOR, new Error(`Invalid format for ${e}`), {
     extra: {
       type: typeof t,
       value: t,

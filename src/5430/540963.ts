@@ -14,7 +14,7 @@ import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/152487';
 import { l as _$$l } from '../905/152724';
 import { hideModal, showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e5 } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { ResourceTypes } from '../905/178090';
 import { h as _$$h } from '../905/207101';
 import { x as _$$x } from '../905/211326';
@@ -114,7 +114,6 @@ import { canSellOnCommunity, Co, getCurrentVersion, HD, isStripeAccepted, isView
 import { CurrencyFormatter } from '../figma_app/514043';
 import { restrictProfileThunk, uploadProfileCoverImageThunk, updateProfileThunk, unrestrictProfileThunk } from '../figma_app/530167';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
-import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Cw, kJ, l8 } from '../figma_app/599979';
 import { a as _$$a, z as _$$z } from '../figma_app/601188';
 import { BaseLinkComponent, ButtonSecondary, SecureLink } from '../figma_app/637027';
@@ -1593,7 +1592,7 @@ let r$ = new class {
             prevPage: r.data.pagination.prevPage
           };
         } catch (e) {
-          reportError(_$$e5.COMMUNITY, e);
+          reportError(ServiceCategories.COMMUNITY, e);
           return e;
         }
       }
@@ -1622,7 +1621,7 @@ let r$ = new class {
             prevPage: r.data.pagination.prevPage
           };
         } catch (e) {
-          reportError(_$$e5.COMMUNITY, e);
+          reportError(ServiceCategories.COMMUNITY, e);
           return e;
         }
       }

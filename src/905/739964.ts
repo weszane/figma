@@ -8,7 +8,7 @@ import { CloseButton } from '../905/17223';
 import { cw, Fq, I8, jv, vK, vu, yF } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { g as _$$g } from '../905/125190';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -512,7 +512,7 @@ export function $$ed1(e) {
     boundaryKey: 'ConsumptionPaywallModal',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e.MONETIZATION_UPGRADES
+      area: ServiceCategories.MONETIZATION_UPGRADES
     },
     onError: () => {
       t(VisualBellActions.enqueue({

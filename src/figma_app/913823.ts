@@ -1,12 +1,12 @@
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { getFileKey } from "../905/412913";
-import { D3 } from "../905/359847";
+import { hubFilePutAll } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { batchPutFileAction, filePutAction } from "../figma_app/78808";
 import { componentBatchUpdate, defaultLibraryInitializeLibraryKeys, defaultLibraryInitialize, putMoveLibraryItemKeyMappings } from "../905/879323";
@@ -74,7 +74,7 @@ async function R(e, t) {
     let T = m.data.meta.hub_files;
     T && (T.forEach(e => {
       addTrackedState(e.id);
-    }), e.dispatch(D3(T)));
+    }), e.dispatch(hubFilePutAll(T)));
     let I = m.data.meta.state_groups.map(e => ({
       ...e,
       team_id: y[e.library_key]?.team_id
@@ -92,7 +92,7 @@ async function R(e, t) {
     })), getFeatureFlags().dse_lk_realtime_audit) {
       let e = S.filter(e => !e.library_key);
       let t = I.filter(e => !e.library_key);
-      (e.length > 0 || t.length > 0) && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("Missing library keys for components or state groups"), {
+      (e.length > 0 || t.length > 0) && reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, Error("Missing library keys for components or state groups"), {
         tags: {
           numComponentsWithMissingLibraryKeys: e.length,
           numStateGroupsWithMissingLibraryKeys: t.length

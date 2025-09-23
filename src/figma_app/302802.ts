@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { lV, MK } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { RM, F$, es } from "../figma_app/304955";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, ChangesStagerBindings, UserExperienceMode, PanelType, AppStateTsApi, ChatMessageType, SceneGraphTsApi } from "../figma_app/763686";
 import { CodeFileIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { permissionScopeHandler } from "../905/189185";
@@ -80,7 +80,7 @@ export function $$z9(e) {
     try {
       return _$$jT(t);
     } catch (e) {
-      reportError(_$$e.MAKE, e);
+      reportError(ServiceCategories.MAKE, e);
       return {};
     }
   }, e);
@@ -105,7 +105,7 @@ export function $$K8(e) {
     try {
       return K8(t);
     } catch (e) {
-      reportError(_$$e.MAKE, e);
+      reportError(ServiceCategories.MAKE, e);
       return {};
     }
   }, e);

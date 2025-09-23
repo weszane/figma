@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
@@ -16,7 +16,7 @@ class p {
       let e;
       let t = getInitialOptions().user_data?.id;
       if (!t) {
-        reportError(_$$e.GROWTH_PLATFORM, Error(`Attempted to increment user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
+        reportError(ServiceCategories.GROWTH_PLATFORM, Error(`Attempted to increment user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
       this.pendingIncrementCount += 1;
@@ -55,7 +55,7 @@ class p {
     };
     this.reset = async () => {
       if (!getInitialOptions().user_data?.id) {
-        reportError(_$$e.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
+        reportError(ServiceCategories.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
       let e = await subscribeAndAwaitData(UserFlagByName, {

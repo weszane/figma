@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Suspense, useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Link } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
@@ -72,13 +72,13 @@ function $() {
 }
 export function $$Z0(e) {
   let t = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   }).key.parentId;
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "TeamAddAnnualSeatsModal",
     fallback: errorBoundaryFallbackTypes.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
-    team: _$$e.BILLING_EXPERIENCE,
+    team: ServiceCategories.BILLING_EXPERIENCE,
     children: jsx(TrackingProvider, {
       name: "Team Add Seats Modal",
       properties: {
@@ -99,7 +99,7 @@ function X(e) {
   let l = useDispatch();
   let h = useModalManager(e);
   let g = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let f = useSelector(e => e.teamBilling);
   let b = g.key.parentId;

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { IAssertResource } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -623,7 +623,7 @@ export let $$eo4 = _$$n(async e => {
           code: n
         });
       } catch (t) {
-        t instanceof er || reportError(_$$e.EXTENSIBILITY, t);
+        t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t);
         el(t, e.isWidget);
       }
     } finally {

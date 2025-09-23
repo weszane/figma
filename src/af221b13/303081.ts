@@ -7,7 +7,7 @@ import { i as _$$i } from "../af221b13/100282";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useState, useCallback, useLayoutEffect, useMemo, forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { reportError } from "../905/11";
@@ -49,7 +49,6 @@ import { MZ, o2, R2, Rn } from "../figma_app/146905";
 import { A as _$$A } from "../svg/60701";
 import { A as _$$A2 } from "../5724/172808";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
-import { setupResourceAtomHandler } from "../figma_app/566371";
 import { S as _$$S } from "../5430/465757";
 import { Link } from "react-router-dom";
 import { J as _$$J } from "../5430/284487";
@@ -5657,7 +5656,7 @@ function aA(e) {
           e.data.meta[0] && j(e.data.meta[0]);
           E("success");
         } catch (e) {
-          reportError(_$$e.COMMUNITY, e);
+          reportError(ServiceCategories.COMMUNITY, e);
           E("error");
         }
       }
@@ -6297,7 +6296,7 @@ export function $$sd0() {
   })), useEffect(() => {
     let e = document.getElementById("filebrowser-loading-page");
     e && "none" !== e.style.display && "none" !== e.style.display && setTimeout(() => {
-      e && "none" !== e.style.display && (e.style.display = "none", reportError(_$$e.COMMUNITY, Error("filebrowser-loading-page not hidden by lazy loader"), {
+      e && "none" !== e.style.display && (e.style.display = "none", reportError(ServiceCategories.COMMUNITY, Error("filebrowser-loading-page not hidden by lazy loader"), {
         extra: {
           elementId: e.id,
           elementClasses: e.className,

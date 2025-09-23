@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, AY, createLocalStorageAtom } from "../figma_app/27355";
 import { useHasParentOrgId } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -1948,7 +1948,7 @@ function nr() {
     boundaryKey: "DevModePaywall",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     children: jsxs(TrackingProvider, {
       name: "Dev Mode Paywall",
@@ -5968,7 +5968,7 @@ function so(e) {
     if (!n.success) return null;
     return n.data;
   } catch (t) {
-    reportError(_$$e.DEVELOPER_TOOLS, t, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, t, {
       extra: {
         previewJson: e
       }
@@ -9245,9 +9245,9 @@ function cf() {
   return t ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_inspectEntry",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    team: _$$e.DEVELOPER_TOOLS,
+    team: ServiceCategories.DEVELOPER_TOOLS,
     sentryTags: {
-      area: _$$e.DEVELOPER_TOOLS
+      area: ServiceCategories.DEVELOPER_TOOLS
     },
     children: jsx(VZ, {
       title: getI18nString("variables.authoring_modal.title"),
@@ -9893,7 +9893,7 @@ function us({
           withSourceImages: t && !!n
         }), x(_$$rg()));
       } catch (e) {
-        reportError(_$$e.DEVELOPER_TOOLS, e);
+        reportError(ServiceCategories.DEVELOPER_TOOLS, e);
         r && k.length > 1 && !b && x(VisualBellActions.enqueue({
           message: getI18nString("dev_handoff.assets.too_many_image_sources"),
           icon: VisualBellIcon.EXCLAMATION,
@@ -11552,7 +11552,7 @@ let pL = memo(function () {
   let [f, g, _] = _$$t5.useManagedTabs(h, r5[c] ?? r5[IAssertResource.PRIMARY], e => {
     let t = r3[e];
     if (null == t) {
-      reportError(_$$e.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
+      reportError(ServiceCategories.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
       return;
     }
     setSelectedDevModePropertiesPanelTab(t);

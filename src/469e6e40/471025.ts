@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -228,7 +228,7 @@ export function $$D0(e) {
 }
 function M(e) {
   let t = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   if (e.seatCountsByBillingInterval?.status === "loading" || "loading" === e.seatCounts.status) return jsx(LoadingSpinner, {});
   if (e.seatCountsByBillingInterval?.status === "loaded" && "loaded" === e.seatCounts.status) {

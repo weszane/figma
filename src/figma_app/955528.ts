@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
 import { ProductType, ToneType } from "../figma_app/571325";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { UnitType, UserActionState } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -190,7 +190,7 @@ export function $$Z14(e) {
       let i = e.getRangeFontSize(r, r + 1);
       let a = e.getRangeLineHeight(r, r + 1);
       let s = e.inheritedTextStyle;
-      ("mixed" === i || "mixed" === a) && reportError(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed font size or line height while saving initial font size and line height"));
+      ("mixed" === i || "mixed" === a) && reportError(ServiceCategories.AI_PRODUCTIVITY, Error("Unexpected mixed font size or line height while saving initial font size and line height"));
       n.set(e.guid, {
         nodeId: e.guid,
         nodeText: t.nodeText,

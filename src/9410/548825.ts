@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { AppStateTsApi } from "../figma_app/763686";
 import { v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -24,7 +24,7 @@ export function $$_8(e, t) {
   if (i) try {
     i.slideSpeakerNotes = t;
   } catch (e) {
-    logError(_$$e.SLIDES, "Failed to set slide speaker notes", {
+    logError(ServiceCategories.SLIDES, "Failed to set slide speaker notes", {
       error: e
     });
   }

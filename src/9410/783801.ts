@@ -4,7 +4,7 @@ import { L as _$$L } from "../905/477111";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { useMemo, useEffect, useState, useContext } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
@@ -69,13 +69,13 @@ function j(e) {
       let n = i.data.repo?.files;
       if (repo && isDefaultFileAlt(e, repo)) return !1;
       if (null == repo || !n) {
-        reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid repo or repo files data"));
+        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid repo or repo files data"));
         return !1;
       }
       let a = n.find(t => t.key === e.key);
       let s = n.find(e => isDefaultFileAlt(e, repo));
       if (!a || !s) {
-        reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid branch or source file data"));
+        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid branch or source file data"));
         return !1;
       }
       if (a.sourceCheckpointId === s.checkpointId) return !1;

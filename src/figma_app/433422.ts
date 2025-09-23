@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { bv } from "../figma_app/421401";
 import { getI18nString } from "../905/303541";
@@ -43,7 +43,7 @@ export function $$g5(e, t) {
 }
 export function $$f1(e, t) {
   if (!t.seatTypeKey) {
-    reportError(_$$e.BILLING_EXPERIENCE, Error("tried to update seat filter counts but they were not initialized"));
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error("tried to update seat filter counts but they were not initialized"));
     return;
   }
   let r = m(e);
@@ -56,7 +56,7 @@ export function $$E8() {
 }
 export function $$y7(e, t) {
   let r = collaboratorSet.dict(t => e[t]);
-  Object.values(r).some(e => e === FPlanAccessType.RESTRICTED) && reportError(_$$e.BILLING_EXPERIENCE, Error("tried to set restricted paid status for seat type"), {
+  Object.values(r).some(e => e === FPlanAccessType.RESTRICTED) && reportError(ServiceCategories.BILLING_EXPERIENCE, Error("tried to set restricted paid status for seat type"), {
     extra: {
       paidStatuses: e
     }
@@ -66,7 +66,7 @@ export function $$y7(e, t) {
   let o = i > 0;
   let l = Object.keys(Object.fromEntries(Object.entries(r).filter(([e, t]) => t === FPlanAccessType.STARTER))).length > 0;
   if (i > 1) {
-    reportError(_$$e.BILLING_EXPERIENCE, Error("we tried to upgrade multiple seat types at once, this is unsupported."), {
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error("we tried to upgrade multiple seat types at once, this is unsupported."), {
       extra: {
         paidStatuses: e
       }
@@ -74,7 +74,7 @@ export function $$y7(e, t) {
     return {};
   }
   if (o && l) {
-    reportError(_$$e.BILLING_EXPERIENCE, Error("we tried to upgrade and downgrade seat types at the same time, this is unsupported."), {
+    reportError(ServiceCategories.BILLING_EXPERIENCE, Error("we tried to upgrade and downgrade seat types at the same time, this is unsupported."), {
       extra: {
         paidStatuses: e
       }

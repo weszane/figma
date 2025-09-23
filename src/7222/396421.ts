@@ -29,7 +29,7 @@ import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
 import { TeamSortField, PublicModelType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
-import { uW } from "../figma_app/409131";
+import { useLibraryModules } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
 import { jY } from "../figma_app/21029";
 import { D as _$$D } from "../7222/938408";
@@ -93,7 +93,7 @@ let Q = (e, t) => {
   return isNaN(r) || isNaN(_) ? e.name.localeCompare(t.name) : r - _;
 };
 export function $$X5(e) {
-  let t = uW(new Set(f()([e])), TemplateType.SLIDES_TEMPLATE);
+  let t = useLibraryModules(new Set(f()([e])), TemplateType.SLIDES_TEMPLATE);
   return useMemo(() => {
     if (!e) return resourceUtils.loaded([]);
     if (t.status === LOADING_STATUS.LOADING) return resourceUtils.loading();

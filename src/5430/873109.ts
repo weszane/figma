@@ -24,7 +24,7 @@ import { hasOrgRole } from "../figma_app/300692";
 import { E as _$$E } from "../905/53857";
 import { I as _$$I } from "../5430/750114";
 import { J as _$$J } from "../905/125993";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { customHistory } from "../905/612521";
 import { WB } from "../905/761735";
 import { useSubscription } from "../figma_app/288654";
@@ -109,7 +109,7 @@ function et(e, t, r, s) {
       loggedIn: !!n.user,
       orgId: s
     }), ee), !n.user) {
-      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
+      reportError(ServiceCategories.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
     if (hasClientMeta(e)) {
@@ -133,7 +133,7 @@ function et(e, t, r, s) {
             type: "resource-save"
           }));
         }).catch(e => {
-          reportError(_$$e.COMMUNITY, e);
+          reportError(ServiceCategories.COMMUNITY, e);
         });
       };
       if (!n.authedActiveCommunityProfile?.public_at) {
@@ -172,13 +172,13 @@ function er(e, t, r, s, i) {
       loggedIn: !!a.user,
       orgId: s
     }), ee), !a.user) {
-      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
+      reportError(ServiceCategories.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
     if (isOrgPrivatePluginOrWidget(e)) {
       let t = getPluginOrWidgetContent(e);
       if (!t) {
-        reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
+        reportError(ServiceCategories.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
             resourceId: e.id
           }
@@ -235,7 +235,7 @@ function es({
 }) {
   let o = isTntSavingEnabled();
   if (!e.authedActiveCommunityProfile) {
-    reportError(_$$e.COMMUNITY, Error("Attempted to save resource without an active community profile"));
+    reportError(ServiceCategories.COMMUNITY, Error("Attempted to save resource without an active community profile"));
     return;
   }
   let a = _$$a.saveResource({
@@ -270,7 +270,7 @@ function es({
       } : void 0
     }));
   }).catch(e => {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     t(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_save_resource"),
       type: "RESOURCE_SAVE_FAILED",
@@ -282,7 +282,7 @@ function ei(e, t, r, s) {
   return function (r, i) {
     let n = i();
     if (!n.user) {
-      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
+      reportError(ServiceCategories.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
       return;
     }
     (logAndTrackCTA(eo({
@@ -299,7 +299,7 @@ function ei(e, t, r, s) {
         type: "resource-save"
       }));
     }).catch(e => {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
     }) : r(s1({
       id: e.id,
       resourceType: getResourceType(e),
@@ -314,7 +314,7 @@ function en(e, t, r, s) {
     let o = n();
     let a = isTntSavingEnabled();
     if (!o.user || !o.authedActiveCommunityProfile) {
-      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
+      reportError(ServiceCategories.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
       return;
     }
     if (logAndTrackCTA(eo({
@@ -328,7 +328,7 @@ function en(e, t, r, s) {
     }), ee), isOrgPrivatePluginOrWidget(e)) {
       let t = getPluginOrWidgetContent(e);
       if (!t) {
-        reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
+        reportError(ServiceCategories.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
             resourceId: e.id
           }
@@ -363,7 +363,7 @@ function en(e, t, r, s) {
           type: "resource-unsave"
         }));
       }).catch(e => {
-        reportError(_$$e.COMMUNITY, e);
+        reportError(ServiceCategories.COMMUNITY, e);
       });
     }
   };

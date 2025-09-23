@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { processInstancesAndGenerateCode } from "../905/100887";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
@@ -16,7 +16,7 @@ function f(e, t, r) {
   let n;
   let i = r.get(t.symbolId);
   if (!i) {
-    reportError(_$$e.DEVELOPER_TOOLS, Error("Cant find backing component of parent node " + t.symbolId));
+    reportError(ServiceCategories.DEVELOPER_TOOLS, Error("Cant find backing component of parent node " + t.symbolId));
     return;
   }
   let s = r.developerFriendlyIdFromGuid(e.guid);

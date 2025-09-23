@@ -1,7 +1,7 @@
 import { shallowEqual, useSelector } from 'react-redux';
 import { reportError } from '../905/11';
 import { sha1BytesFromHex, sha1Hex } from '../905/125019';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { resolveMessage } from '../905/231762';
 import { readImageBytes } from '../905/289751';
 import { getI18nString } from '../905/303541';
@@ -499,7 +499,7 @@ export function $$eI20(e, t) {
         await uploadRequest(e, t);
       }
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new Error(getI18nString('community.actions.error_uploading_carousel_image_error', {
         error: resolveMessage(e, e.data?.message || 'unknown error')
       }));
@@ -536,7 +536,7 @@ export async function $$ev18(e, t, r, n) {
       images_sha1: uploadImages
     })).data.meta;
   } catch (e) {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server')));
   }
   let l = [];
@@ -561,7 +561,7 @@ export async function $$ev18(e, t, r, n) {
       carousel_images: allMedia
     };
   } catch (e) {
-    reportError(_$$e.COMMUNITY, e);
+    reportError(ServiceCategories.COMMUNITY, e);
     return new Error(resolveMessage(e, getI18nString('community.actions.error_connecting_to_server_to_upload_file_images')));
   }
 }

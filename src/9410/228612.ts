@@ -1,6 +1,6 @@
 import { Gu } from "../figma_app/262240";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, AnimationTriggerType } from "../figma_app/763686";
 import { parseSessionLocalID } from "../905/871411";
 import { reportError } from "../905/11";
@@ -75,7 +75,7 @@ export function $$p3(e) {
       return e.map(e => {
         if ($$u0(e)) return null;
         if ("OBJECT_ANIMATION" !== e.action.connectionType || !e.action.transitionNodeID) {
-          reportError(_$$e.SLIDES, Error("Invalid object animation action"), {
+          reportError(ServiceCategories.SLIDES, Error("Invalid object animation action"), {
             extra: {
               action: e.action
             }
@@ -83,7 +83,7 @@ export function $$p3(e) {
           return null;
         }
         let i = Gu(e.action.transitionNodeID);
-        return i ? t.has(i) ? (reportError(_$$e.SLIDES, Error("Duplicate object animation transition node ID found:"), {
+        return i ? t.has(i) ? (reportError(ServiceCategories.SLIDES, Error("Duplicate object animation transition node ID found:"), {
           extra: {
             action: e.action
           }

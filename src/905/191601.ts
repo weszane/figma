@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { n as _$$n, G4 } from "../905/864644";
@@ -214,11 +214,11 @@ let R = registerModal(function ({
   a && g.push("team_template");
   i && g.push("unsynced_file");
   useEffect(() => {
-    g.length > 1 && 1 === e && reportError(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal has multiple warnings with only one file"));
+    g.length > 1 && 1 === e && reportError(ServiceCategories.WAYFINDING, Error("ConfirmFileDeleteModal has multiple warnings with only one file"));
   }, [g.length, e]);
   let f = g[0];
   useEffect(() => {
-    1 === e && "unsynced_file" === f && reportError(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal shown for single file with single warning of FileDeleteWarningType.UNSYNCED_FILE"));
+    1 === e && "unsynced_file" === f && reportError(ServiceCategories.WAYFINDING, Error("ConfirmFileDeleteModal shown for single file with single warning of FileDeleteWarningType.UNSYNCED_FILE"));
   }, [e, f]);
   let v = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
@@ -317,7 +317,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
   let d = Object.keys(t.offlineFilesByKey ?? {}).length;
   let m = Object.keys(t.filesByKey).length + Object.keys(t.reposById ?? {}).length + Object.keys(t.offlineFilesByKey ?? {}).length;
   if (!m) {
-    reportError(_$$e.WAYFINDING, Error("tryDeleteFiles dispatched with no selected files"));
+    reportError(ServiceCategories.WAYFINDING, Error("tryDeleteFiles dispatched with no selected files"));
     return;
   }
   async function h() {
@@ -337,7 +337,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
       }
       return !1;
     } catch (e) {
-      reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e);
+      reportError(ServiceCategories.DESIGN_SYSTEMS_ECOSYSTEM, e);
       return !1;
     }
   }
@@ -346,7 +346,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
   let A = Object.values(t.filesByKey).filter(e => e.is_team_template).length > 0;
   let y = d > 0;
   let b = "";
-  s > 0 ? b = Object.values(t.filesByKey)[0].name : o > 0 && t.reposById ? b = Object.values(t.reposById)[0].repo.name : d > 0 && t.offlineFilesByKey ? b = Object.values(t.offlineFilesByKey)[0].name : reportError(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteFiles"));
+  s > 0 ? b = Object.values(t.filesByKey)[0].name : o > 0 && t.reposById ? b = Object.values(t.reposById)[0].repo.name : d > 0 && t.offlineFilesByKey ? b = Object.values(t.offlineFilesByKey)[0].name : reportError(ServiceCategories.WAYFINDING, Error("Could not get firstFileName in tryDeleteFiles"));
   let v = () => {
     s > 0 && e.dispatch(VK({
       fileKeys: t.filesByKey,
@@ -396,7 +396,7 @@ let $$U3 = createOptimistThunk(async ({
   } = i;
   let s = fileKeys.length + repoIds.length;
   if (0 === s) {
-    reportError(_$$e.WAYFINDING, Error("tryDeleteFilesForever dispatched with no files to delete"));
+    reportError(ServiceCategories.WAYFINDING, Error("tryDeleteFilesForever dispatched with no files to delete"));
     return;
   }
   let o = "";
@@ -407,7 +407,7 @@ let $$U3 = createOptimistThunk(async ({
     let t = e().repos[repoIds[0]];
     t && (o = t.name);
   }
-  o || reportError(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteSelectedFilesForever"));
+  o || reportError(ServiceCategories.WAYFINDING, Error("Could not get firstFileName in tryDeleteSelectedFilesForever"));
   let l = fileKeys.reduce((e, t) => (e[t] = !0, e), {});
   t(showModalHandler({
     type: I,

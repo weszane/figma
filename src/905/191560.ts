@@ -8,7 +8,7 @@ import { isSuccess, isLoading } from '../905/18797';
 import { UserAPIHandlers } from '../905/93362';
 import { popModalStack } from '../905/156213';
 import { _G, Kf, nb } from '../905/164233';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { gK, Wv, ZH } from '../905/178707';
 import { AUTH_CLEAR_AUTH_LOADING, AUTH_CLEAR_ERROR, AUTH_CLICKED_SAML_SIGN_IN, AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_REDEEM_RESET, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redeemTeamJoinLink } from '../905/194276';
 import { sessionApiInstance } from '../905/202181';
@@ -1134,7 +1134,7 @@ function eM({
         })
       }));
     }).catch(e => {
-      reportError(_$$e.ACTIVATION, e);
+      reportError(ServiceCategories.ACTIVATION, e);
     });
   }, [t, e, i, s]);
   return jsx('div', {

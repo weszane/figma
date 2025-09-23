@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle, useState, createContext, useCo
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { t as _$$t } from "../905/150656";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
@@ -13,7 +13,6 @@ import { useDebouncedCallback } from "use-debounce";
 import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
-import { setupResourceAtomHandler } from "../figma_app/566371";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -2329,7 +2328,7 @@ let ic = _$$T2({
           isPublishing: !0
         }), loadLocalPluginSource(e?.localFileId)]);
       } catch (e) {
-        reportError(_$$e.COMMUNITY, e);
+        reportError(ServiceCategories.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_GETTING_EXTENSION_MANIFEST",
           data: {
@@ -2346,7 +2345,7 @@ let ic = _$$T2({
           isWidget: n
         });
       } catch (e) {
-        reportError(_$$e.COMMUNITY, e);
+        reportError(ServiceCategories.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_CREATING_EXTENSION_VERSION",
           data: {
@@ -2357,7 +2356,7 @@ let ic = _$$T2({
     } else try {
       p = await PluginUploadApi.postPluginImagesUpload(h, n, uploadImages);
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_POST_EXTENSION_IMAGES",
         data: {
@@ -2372,7 +2371,7 @@ let ic = _$$T2({
         code: c
       });
     } catch (e) {
-      if (reportError(_$$e.COMMUNITY, e), n1(e)) return new _$$o2.SubmissionError({
+      if (reportError(ServiceCategories.COMMUNITY, e), n1(e)) return new _$$o2.SubmissionError({
         key: "ERROR_FILE_TOO_LARGE",
         data: {
           rawError: e
@@ -2393,7 +2392,7 @@ let ic = _$$T2({
         allMedia
       });
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_VIDEO_UPLOAD",
         data: {
@@ -2409,7 +2408,7 @@ let ic = _$$T2({
         dataSecurityPromise: r
       });
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATE_SECURITY_FORM",
         data: {
@@ -2442,7 +2441,7 @@ let ic = _$$T2({
       });
       m = data.meta.plugin;
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: {
@@ -2460,7 +2459,7 @@ let ic = _$$T2({
         isExistingExtensionUnpublished: o
       });
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATE_ROLES",
         data: {
@@ -2482,7 +2481,7 @@ let ic = _$$T2({
       });
       m = data.meta;
     } catch (e) {
-      reportError(_$$e.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_EXTENSION",
         data: {
@@ -3477,7 +3476,7 @@ let $$iU0 = registerModal(function (e) {
     fallback: jsx(_$$r5, {
       title: e.isWidget ? getI18nString("community.publishing.publish_widget") : getI18nString("community.publishing.publish_plugin")
     }),
-    team: _$$e.EXTENSIBILITY_ECOSYSTEM,
+    team: ServiceCategories.EXTENSIBILITY_ECOSYSTEM,
     children: jsx(ij, {
       ...e,
       ...I

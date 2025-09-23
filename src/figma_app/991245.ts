@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -130,10 +130,10 @@ export function $$C0(e) {
     }
   }), N(), bellFeedAPIInstance) {
     let e = bellFeedAPIInstance.getRealtimeTokens();
-    if (null == e && (reportError(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on first try`), {
+    if (null == e && (reportError(ServiceCategories.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on first try`), {
       level: "warning"
     }), e = bellFeedAPIInstance.getRealtimeTokens()), null == e) {
-      reportError(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on second try`));
+      reportError(ServiceCategories.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on second try`));
       return;
     }
     y.updateSubscriptions(e, t);

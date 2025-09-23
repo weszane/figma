@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { R } from "../905/994802";
 var $$n0 = (e => (e.ExistingExperience = "ExistingExperience", e.HigherPriExperience = "HigherPriExperience", e.ExperimentCheckFail = "ExperimentCheckFail", e.RuleFail = "RuleFail", e.LifecycleCheckFail = "LifecycleCheckFail", e))($$n0 || {});
@@ -73,7 +73,7 @@ export class $$c3 {
       }
     }, "trace");
     let i = this.channels[t.channelID];
-    i?.currentExperience?.id === e ? (i.currentExperience = void 0, this.experienceMap.$$delete(e), this.runExperiencesForChannel(i.id)) : reportError(_$$e.GROWTH_PLATFORM, Error(`completeExperience called when experience is not current: ${e}`));
+    i?.currentExperience?.id === e ? (i.currentExperience = void 0, this.experienceMap.$$delete(e), this.runExperiencesForChannel(i.id)) : reportError(ServiceCategories.GROWTH_PLATFORM, Error(`completeExperience called when experience is not current: ${e}`));
   }
   dequeueExperience(e) {
     let t = this.experienceMap.get(e);

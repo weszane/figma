@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -134,7 +134,7 @@ export function $$D0({
     toolbar: jsx(_$$g, {}),
     content: B,
     errorBoundaryConfig: {
-      figmaTeam: _$$e.SCALE,
+      figmaTeam: ServiceCategories.SCALE,
       boundaryKeySuffix: "BillingGroupDashboardSettingsPageView"
     }
   });

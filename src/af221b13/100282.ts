@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { getIsMobile } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
@@ -141,7 +141,7 @@ export function $$I0({
         data: {
           dispatch: u
         }
-      })) : Object.values(es).includes(d) ? E(c, d) : reportError(_$$e.COMMUNITY, Error(`Invalid use case category (${d}) for figjam ai card: ${e}`));
+      })) : Object.values(es).includes(d) ? E(c, d) : reportError(ServiceCategories.COMMUNITY, Error(`Invalid use case category (${d}) for figjam ai card: ${e}`));
     },
     title: e,
     description: t,

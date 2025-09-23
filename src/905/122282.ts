@@ -79,7 +79,7 @@ import { X as _$$X2, S as _$$S } from "../905/109653";
 import { Ai, vu } from "../905/870778";
 import { l as _$$l2 } from "../905/493845";
 import { PP, PH, Pn, OA } from "../905/230175";
-import { ServiceCategories as _$$e2 } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { i as _$$i2 } from "../905/970229";
 import { uploadRequest } from "../905/827765";
 import { debugState } from "../905/407919";
@@ -451,7 +451,7 @@ let e6 = _$$T({
       });
     } catch (t) {
       let e = t instanceof Error ? t : void 0;
-      e && reportError(_$$e2.COMMUNITY, e);
+      e && reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_PUBLISHING_LIBRARY_CHANGES",
         data: {
@@ -489,7 +489,7 @@ let e6 = _$$T({
       try {
         await uploadRequest(cover_image_upload_url, a);
       } catch (e) {
-        reportError(_$$e2.COMMUNITY, e);
+        reportError(ServiceCategories.COMMUNITY, e);
         return new _$$o3.SubmissionError({
           key: "ERROR_UPLOADING_IMAGES",
           data: {
@@ -512,7 +512,7 @@ let e6 = _$$T({
         params: e
       })).data;
     } catch (e) {
-      reportError(_$$e2.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_FINALIZING_TEMPLATE",
         data: {
@@ -534,7 +534,7 @@ let e6 = _$$T({
         }
       }));
     } catch (e) {
-      reportError(_$$e2.COMMUNITY, e);
+      reportError(ServiceCategories.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {

@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -61,7 +61,7 @@ export function $$b3(e) {
       }), {});
     }
   } catch (e) {
-    "Component set for node has existing errors" !== e.message && reportError(_$$e.DEVELOPER_TOOLS, e);
+    "Component set for node has existing errors" !== e.message && reportError(ServiceCategories.DEVELOPER_TOOLS, e);
   }
   return {};
 }
@@ -189,7 +189,7 @@ export function $$x11({
   try {
     l = JSON.parse(o.figmadoc);
   } catch (e) {
-    reportError(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
       extra: {
         figmadoc: o.figmadoc
       }
@@ -336,7 +336,7 @@ export function $$N5(e, t, r, i) {
   try {
     F = JSON.parse(M.figmadoc);
   } catch (e) {
-    reportError(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
       extra: {
         figmadoc: M.figmadoc
       }

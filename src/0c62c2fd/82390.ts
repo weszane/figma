@@ -78,7 +78,7 @@ import { hideModal, hideModalHandler, hideSpecificModal, popModalStack, popPrevM
 import { i as _$$i } from '../905/159448';
 import { pW as _$$pW } from '../905/160095';
 import { Y5 } from '../905/163189';
-import { ServiceCategories as _$$e } from '../905/165054';
+import { ServiceCategories } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { NotificationCategory } from '../905/170564';
 import { F as _$$F4, y as _$$y2 } from '../905/171275';
@@ -552,7 +552,7 @@ import { S as _$$S0 } from '../figma_app/552746';
 import { sendAutosaveNotification } from '../figma_app/553184';
 import { pZ as _$$pZ } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
-import { handleSuspenseRetainRelease, setupResourceAtomHandler } from '../figma_app/566371';
+import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { hK as _$$hK } from '../figma_app/570310';
 import { Lm as _$$Lm } from '../figma_app/579169';
 import { oN as _$$oN } from '../figma_app/583114';
@@ -3562,7 +3562,7 @@ function sy() {
     boundaryKey: 'SidebarUpgradeSection',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
-      area: _$$e.MONETIZATION_UPGRADES
+      area: ServiceCategories.MONETIZATION_UPGRADES
     },
     children: jsx(sw, {
       ...e
@@ -4341,8 +4341,8 @@ function s0(e) {
 }
 var s1 = (e => (e.FILE_BROWSER = 'FileBrowserSidebar', e.ADMIN = 'AdminSettingsSidebar', e))(s1 || {});
 let s4 = {
-  FileBrowserSidebar: _$$e.WAYFINDING,
-  AdminSettingsSidebar: _$$e.SCALE
+  FileBrowserSidebar: ServiceCategories.WAYFINDING,
+  AdminSettingsSidebar: ServiceCategories.SCALE
 };
 function s2(e) {
   let t = useSelector(e => e.mobileNavShown);
@@ -12426,7 +12426,7 @@ function ma() {
     };
   }(l);
   let u = useSuspendCurrentPrivilegedPlan({
-    reportErrorsToTeam: _$$e.WAYFINDING
+    reportErrorsToTeam: ServiceCategories.WAYFINDING
   });
   let {
     subscription,
@@ -13117,7 +13117,7 @@ let mk = e => {
     case SortField.TOUCHED_AT:
       return 'touched_at';
     default:
-      reportError(_$$e.WAYFINDING, new Error(`Attempting to sort by an unsupported sort key: ${e}`));
+      reportError(ServiceCategories.WAYFINDING, new Error(`Attempting to sort by an unsupported sort key: ${e}`));
       return 'created_at';
   }
 };
@@ -16055,7 +16055,7 @@ function p5({
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     severity: SeverityLevel.Critical,
     sentryTags: {
-      area: _$$e.MONETIZATION_EXPANSION
+      area: ServiceCategories.MONETIZATION_EXPANSION
     },
     children: [jsx(iV, {
       title: t.name,
@@ -17795,7 +17795,7 @@ function gb() {
     'onClick': a => {
       q5();
       a.preventDefault();
-      r ? customHistory.push(r) : reportError(_$$e.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
+      r ? customHistory.push(r) : reportError(ServiceCategories.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
         extra: {
           sharedRouteParams: e,
           sharedSearchParams: t
@@ -17936,7 +17936,7 @@ function gy() {
     }));
   }, [trackRejectedResources, c, e]);
   if (o === 'errors') {
-    reportError(_$$e.COMMUNITY, l);
+    reportError(ServiceCategories.COMMUNITY, l);
     return null;
   }
   let _ = d.numberOfTiles < 2;
@@ -18053,7 +18053,7 @@ function gj({
 function gT() {
   let e = useDispatch();
   return jsx(ErrorBoundaryCrash, {
-    team: _$$e.COMMUNITY,
+    team: ServiceCategories.COMMUNITY,
     boundaryKey: 'RecommendedResourcesShelf',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
@@ -22282,7 +22282,7 @@ function ba(e) {
     fallback: jsx(Fragment, {
       children: e.children
     }),
-    team: _$$e.WAYFINDING,
+    team: ServiceCategories.WAYFINDING,
     children: jsx(bt, {
       ...e
     })

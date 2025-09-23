@@ -1,5 +1,5 @@
 import { CortexError } from "../figma_app/691470";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { setTagGlobal, reportError } from "../905/11";
 import { renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
@@ -55,7 +55,7 @@ export var $$_1 = (e => (e.SEND_MESSAGE = "send_message", e.PREVIEW = "preview",
 export function $$h0(e, t, r, s) {
   let o = e;
   e instanceof CortexError && (o = Gx(e));
-  "reportToSentry" in o && !o.reportToSentry || (setTagGlobal("chatFeatureType", t), setTagGlobal("userAction", r), reportError(_$$e.AI_FOR_PRODUCTION, o, {
+  "reportToSentry" in o && !o.reportToSentry || (setTagGlobal("chatFeatureType", t), setTagGlobal("userAction", r), reportError(ServiceCategories.AI_FOR_PRODUCTION, o, {
     extra: s
   }));
 }

@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRe
 import { useDispatch, useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { getSingleKey, isEmptyObject } from "../figma_app/493477";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Fullscreen, ScrollBehavior, LayoutTabType, SnapshotLevel, SceneGraphHelpers, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { isStamp } from "../figma_app/387100";
@@ -534,7 +534,7 @@ class ez extends RecordingPureComponent {
       });
       this.frameRequestX = null;
     };
-    this.isNodeSticky = e => (reportNullOrUndefined(_$$e.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
+    this.isNodeSticky = e => (reportNullOrUndefined(ServiceCategories.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
     this.isAncestorSticky = e => {
       let t = this.getScene();
       let s = e.parentGuid ? t.get(e.parentGuid) : null;

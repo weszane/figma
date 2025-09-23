@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, Suspense, useMemo, useId, useState, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogHiddenTitle, DialogContents } from "../figma_app/272243";
@@ -150,7 +150,7 @@ function Q({
 }) {
   let n = zz(e.key.parentId, e.key.type);
   let t = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let a = W(e);
   return jsx(mc, {
@@ -266,7 +266,7 @@ function en({
   let l = _$$I(e);
   let o = "loaded" === l.status && !l.data;
   let d = _$$d({
-    reportErrorsToTeam: _$$e.SCALE
+    reportErrorsToTeam: ServiceCategories.SCALE
   });
   let c = W(e);
   let p = n !== ViewAccessTypeEnum.VIEW ? c?.[n] : null;
@@ -532,7 +532,7 @@ function eb({
   let X = useId();
   if (handleSuspenseRetainRelease(L), !M) {
     let e = Error("Team permissions not loaded");
-    reportError(_$$e.SCALE, e);
+    reportError(ServiceCategories.SCALE, e);
     return e;
   }
   return jsxs(Fragment, {
@@ -648,7 +648,7 @@ function eT(e) {
   let p = t.data;
   handleSuspenseRetainRelease(t);
   useEffect(() => {
-    "loaded" === t.status && p?.type !== e.planType && reportError(_$$e.SCALE, Error("PlanInviteModal received planType incongruent with current plan context"), {
+    "loaded" === t.status && p?.type !== e.planType && reportError(ServiceCategories.SCALE, Error("PlanInviteModal received planType incongruent with current plan context"), {
       extra: {
         planTypeProp: e.planType,
         planType: p?.type,

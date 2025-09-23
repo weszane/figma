@@ -1,6 +1,6 @@
 import _require from "../2824/40443";
 import { W } from "../figma_app/304955";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { VariablesBindings, VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -121,7 +121,7 @@ async function O(e, t, i) {
         code: e.toString()
       });
     } catch (a) {
-      reportError(_$$e.MAKE, a, {
+      reportError(ServiceCategories.MAKE, a, {
         extra: {
           componentKey: n,
           fileKey: e,
@@ -188,7 +188,7 @@ async function D(e) {
         code: e.toString()
       });
     } catch (t) {
-      reportError(_$$e.MAKE, t, {
+      reportError(ServiceCategories.MAKE, t, {
         extra: {
           queryId: e
         }
@@ -465,7 +465,7 @@ async function z(e) {
       }
     }
     e && e(w);
-    reportError(_$$e.MAKE, t);
+    reportError(ServiceCategories.MAKE, t);
     N(y, "error", t instanceof Error ? t.message : String(t));
     return t;
   }

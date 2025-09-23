@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { n as _$$n } from '../905/64411';
+import { getPublishedComponentsForLibraryThunk } from '../905/64411';
 import { getResourceDataOrFallback } from '../905/419236';
 import { l as _$$l } from '../905/716947';
 import { useAtomWithSubscription } from '../figma_app/27355';
@@ -25,7 +25,7 @@ export function $$m0() {
       let e = new Set(x?.data?.map(e => e.libraryKey) ?? []);
       for (let t of f?.data?.libraryPresetSubscriptionsV2 ?? []) {
         let s = _$$l(getResourceDataOrFallback(t.libraryKey) ?? '');
-        s && e.has(s) && _$$n({
+        s && e.has(s) && getPublishedComponentsForLibraryThunk({
           libraryKey: s
         });
       }

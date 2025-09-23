@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { resourceUtils } from "../905/989992";
 import { h as _$$h } from "../905/207101";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -76,7 +76,7 @@ export function $$T3(e, t, r) {
   try {
     return n.transform(b);
   } catch (r) {
-    reportError(_$$e.SCALE, r, {
+    reportError(ServiceCategories.SCALE, r, {
       extra: {
         planType: t,
         planParentId: e

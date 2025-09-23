@@ -1,4 +1,4 @@
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { logMessage } from "../905/954389";
 import { parseStrict, parseLoose } from "../905/253473";
 import { id, Bj } from "../905/648693";
@@ -123,7 +123,7 @@ let l = class {
       case "CallExpression":
         let o = this.parseExpression(e.callee);
         if (void 0 === o) {
-          logMessage(_$$e.AI_GENERATION, Error("The CallExpression could not be resolved, resulting in an undefined return value."), {
+          logMessage(ServiceCategories.AI_GENERATION, Error("The CallExpression could not be resolved, resulting in an undefined return value."), {
             extra: {
               expression: e
             }
@@ -168,7 +168,7 @@ let l = class {
         }
         return;
       case "ArrowFunctionExpression":
-        (e.async || e.generator) && logMessage(_$$e.AI_GENERATION, Error("Async and generator arrow functions are not supported."));
+        (e.async || e.generator) && logMessage(ServiceCategories.AI_GENERATION, Error("Async and generator arrow functions are not supported."));
         return (...t) => {
           let i = {};
           e.params.forEach((e, n) => {
@@ -198,7 +198,7 @@ let l = class {
       return t;
     } catch (o) {
       let t = object?.name || "unknown";
-      logMessage(_$$e.AI_GENERATION, Error("Unable to parse member expression."), {
+      logMessage(ServiceCategories.AI_GENERATION, Error("Unable to parse member expression."), {
         extra: {
           target: s,
           name: t,

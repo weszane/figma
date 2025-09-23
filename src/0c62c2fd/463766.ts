@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ServiceCategories as _$$e } from "../905/165054";
+import { ServiceCategories } from "../905/165054";
 import { Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { RR } from "../figma_app/307841";
@@ -64,7 +64,7 @@ export function $$T0() {
     }),
     toolbar: jsx(_$$g, {}),
     errorBoundaryConfig: {
-      figmaTeam: _$$e.MONETIZATION_EXPANSION,
+      figmaTeam: ServiceCategories.MONETIZATION_EXPANSION,
       boundaryKeySuffix: "SeatRequestsPageView"
     }
   }));
