@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import s from "lodash-es/mapValues";
 import { useLatestRef } from "../figma_app/922077";
 import { F } from "../905/422355";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { fh } from "../figma_app/412189";
 import { nc } from "../figma_app/570630";
@@ -214,7 +214,7 @@ export function $$b1(e, t) {
           if ((_?.status === g.CREATING || _?.status === g.RECREATING) && _.attempt >= n.attempt || !I) break;
           let t = async () => {
             try {
-              await Ay.foundry.sandbox({
+              await cortexAPI.foundry.sandbox({
                 fileKeyHash: I,
                 forceProvision: n.status === g.RECREATING
               }, _$$Ay());
@@ -227,7 +227,7 @@ export function $$b1(e, t) {
                     return;
                   }
                   try {
-                    await Ay.foundry.ping({
+                    await cortexAPI.foundry.ping({
                       fileKeyHash: I
                     }, _$$Ay(), {
                       abortSignal: AbortSignal.timeout(4e3)
@@ -254,7 +254,7 @@ export function $$b1(e, t) {
             let e = 0;
             let t = setInterval(async () => {
               try {
-                await Ay.foundry.ping({
+                await cortexAPI.foundry.ping({
                   fileKeyHash: I
                 }, _$$Ay(), {
                   abortSignal: AbortSignal.timeout(4e3)
@@ -313,7 +313,7 @@ export function $$b1(e, t) {
               return;
             }
             try {
-              let t = await Ay.foundry.bundle({
+              let t = await cortexAPI.foundry.bundle({
                 fileKeyHash: I,
                 filesToUpsert: e.upsertedFilesByPath,
                 filePathsToDelete: Array.from(e.deletedFilePaths)

@@ -1,183 +1,255 @@
-import { yu } from '../905/96041'
+import { createCortexAPI } from '../905/96041'
 import { sendMetric } from '../905/485103'
 
+interface ParsedLine {
+  type: 'h1' | 'h2' | 'li' | 'p'
+  content: string
+}
 
+interface ParseCallback {
+  (line: ParsedLine, position: number): void
+}
 
-let o = class {
-  parseLine(e) {
-    if (e.startsWith('# ')) {
-      let t = e.slice(2)
-      return {
-        type: 'h1',
-        content: t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(),
-      }
-    }
-    return e.startsWith('## ')
-      ? {
-          type: 'h2',
-          content: e.slice(3),
-        }
-      : e.startsWith('### ')
-        ? {
-            type: 'h2',
-            content: e.slice(4),
-          }
-        : e.startsWith('- ')
-          ? {
-              type: 'li',
-              content: e.slice(2),
-            }
-          : {
-              type: 'p',
-              content: e,
-            }
-  }
+/**
+ * Parser for processing markdown-like formatted text with custom delimiters
+ * Original class name: o
+ */
+class NotesParser {
+  private onParse: ParseCallback
+  private state: number
+  private buffer: string
+  private cursor: number
 
-  feed(e) {
-    this.buffer += e
-    let t = (e) => {
-      this.buffer = this.buffer.slice(e)
-      this.cursor += e
-    }
-    for (; this.buffer.length > 0;) {
-      let e = this.buffer.indexOf('\n')
-      if (this.state === 0) {
-        if (e === -1)
-          return
-        this.buffer.slice(0, e) === '--- BEGIN NOTES' && (this.state = 1)
-        t(e + 1)
-      }
-      else if (this.state === 1) {
-        if (e === -1)
-          return
-        this.buffer.slice(0, e).startsWith('--- BEGIN SUMMARY BODY') && (this.state = 2)
-        t(e + 1)
-      }
-      else if (this.state === 2) {
-        if (this.buffer.startsWith('---')) {
-          this.state = 3
-          return
-        }
-        if (e === -1) {
-          if (this.buffer.length >= 4) {
-            let e = this.parseLine(this.buffer)
-            this.onParse(e, this.cursor)
-          }
-          return
-        }
-        {
-          let r = this.buffer.slice(0, e)
-          r.length > 0 && this.onParse(this.parseLine(r), this.cursor)
-          t(e + 1)
-        }
-      }
-      else if (this.state === 3) {
-        return
-      }
-    }
-  }
-
-  constructor(e) {
-    s(this, 'onParse', void 0)
-    s(this, 'state', void 0)
-    s(this, 'buffer', void 0)
-    s(this, 'cursor', void 0)
-    this.onParse = e
-    this.state = 0
+  constructor(callback: ParseCallback) {
+    this.onParse = callback
+    this.state = 0 // 0: initial, 1: in notes, 2: in summary, 3: completed
     this.buffer = ''
     this.cursor = 0
   }
+
+  /**
+   * Parse a single line based on its prefix
+   * @param line - The line to parse
+   * @returns Parsed line object with type and content
+   */
+  parseLine(line: string): ParsedLine {
+    if (line.startsWith('# ')) {
+      const content = line.slice(2)
+      return {
+        type: 'h1',
+        content: content.charAt(0).toUpperCase() + content.slice(1).toLowerCase(),
+      }
+    }
+
+    if (line.startsWith('## ')) {
+      return {
+        type: 'h2',
+        content: line.slice(3),
+      }
+    }
+
+    if (line.startsWith('### ')) {
+      return {
+        type: 'h2',
+        content: line.slice(4),
+      }
+    }
+
+    if (line.startsWith('- ')) {
+      return {
+        type: 'li',
+        content: line.slice(2),
+      }
+    }
+
+    return {
+      type: 'p',
+      content: line,
+    }
+  }
+
+  /**
+   * Process incoming text data and parse when appropriate delimiters are found
+   * @param text - Text to process
+   */
+  feed(text: string): void {
+    this.buffer += text
+
+    const consumeBuffer = (length: number): void => {
+      this.buffer = this.buffer.slice(length)
+      this.cursor += length
+    }
+
+    while (this.buffer.length > 0) {
+      const newlineIndex = this.buffer.indexOf('\n')
+
+      switch (this.state) {
+        case 0: // Looking for start delimiter
+          if (newlineIndex === -1)
+            return
+          if (this.buffer.slice(0, newlineIndex) === '--- BEGIN NOTES') {
+            this.state = 1
+          }
+          consumeBuffer(newlineIndex + 1)
+          break
+
+        case 1: // Looking for summary body delimiter
+          if (newlineIndex === -1)
+            return
+          if (this.buffer.slice(0, newlineIndex).startsWith('--- BEGIN SUMMARY BODY')) {
+            this.state = 2
+          }
+          consumeBuffer(newlineIndex + 1)
+          break
+
+        case 2: // Parsing content
+          if (this.buffer.startsWith('---')) {
+            this.state = 3
+            return
+          }
+
+          if (newlineIndex === -1) {
+            // Handle last line without newline
+            if (this.buffer.length >= 4) {
+              const parsedLine = this.parseLine(this.buffer)
+              this.onParse(parsedLine, this.cursor)
+            }
+            return
+          }
+
+          const line = this.buffer.slice(0, newlineIndex)
+          if (line.length > 0) {
+            const parsedLine = this.parseLine(line)
+            this.onParse(parsedLine, this.cursor)
+          }
+          consumeBuffer(newlineIndex + 1)
+          break
+
+        case 3: // Completed
+          return
+      }
+    }
+  }
 }
-export function $$l3() {
-  let e
-  let t
-  let r = []
+
+/**
+ * Create a transform stream for parsing notes
+ * Original function name: $$l3
+ */
+export function createNotesParserStream() {
+  let parser: NotesParser
+  let lastEntry: { start: number, primitive: ParsedLine } | undefined
+  const results: ParsedLine[] = []
+
   return new TransformStream({
-    start(n) {
-      e = new o((e, i) => {
-        t?.start === i
-          ? r[r.length - 1] = e
-          : (r.push(e), t = {
-              start: i,
-              primitive: e,
-            })
-        n.enqueue([...r])
+    start(controller) {
+      parser = new NotesParser((line, position) => {
+        if (lastEntry?.start === position) {
+          // Update last entry
+          results[results.length - 1] = line
+        }
+        else {
+          // Add new entry
+          results.push(line)
+          lastEntry = {
+            start: position,
+            primitive: line,
+          }
+        }
+        controller.enqueue([...results])
       })
     },
-    transform(t, r) {
-      e.feed(t.delta)
+    transform(chunk, _controller) {
+      parser.feed(chunk.delta)
     },
   })
 }
-export let $$c2 = yu({
-  onError: (e) => {
+
+/**
+ * Cortex API instance with error handling
+ * Original variable name: $$c2
+ */
+export const cortexAPI = createCortexAPI({
+  onError: (route) => {
     sendMetric('web.cortex.error', {
-      route: e,
+      route,
     })
   },
 })
-export class $$u0 {
-  constructor(e) {
-    this.stream = e
+
+/**
+ * Async iterator wrapper for readable streams
+ * Original class name: $$u0
+ */
+export class StreamAsyncIterator<T> {
+  private stream: ReadableStream<T>
+
+  constructor(stream: ReadableStream<T>) {
+    this.stream = stream
   }
 
-  async* [Symbol.asyncIterator]() {
-    let e = this.stream.getReader()
+  async*[Symbol.asyncIterator](): AsyncGenerator<T, void, unknown> {
+    const reader = this.stream.getReader()
     try {
-      for (;;) {
-        let t = e.read()
-        let {
-          done,
-          value,
-        } = await t
+      while (true) {
+        const { done, value } = await reader.read()
         if (done)
           break
         yield value
       }
     }
     finally {
-      e.releaseLock()
+      reader.releaseLock()
     }
   }
 }
-export class $$p1 {
-  constructor(e, t) {
-    this.stream = e
-    this.timeoutMs = t
+
+/**
+ * Async iterator wrapper for readable streams with timeout
+ * Original class name: $$p1
+ */
+export class StreamAsyncIteratorWithTimeout<T> {
+  private stream: ReadableStream<T>
+  private timeoutMs: number
+
+  constructor(stream: ReadableStream<T>, timeoutMs: number) {
+    this.stream = stream
+    this.timeoutMs = timeoutMs
   }
 
-  async* [Symbol.asyncIterator]() {
-    let e = this.stream.getReader()
+  async*[Symbol.asyncIterator](): AsyncGenerator<T, void, unknown> {
+    const reader = this.stream.getReader()
     try {
-      for (;;) {
-        let t = e.read()
+      while (true) {
+        const readPromise = reader.read()
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          setTimeout(() => {
+            reject(new Error('Timeout'))
+          }, this.timeoutMs)
+        })
+
         try {
-          let e = new Promise((e, t) => {
-            setTimeout(() => {
-              t(new Error('Timeout'))
-            }, this.timeoutMs)
-          })
-          let {
-            done,
-            value,
-          } = await Promise.race([t, e])
+          const { done, value } = await Promise.race([readPromise, timeoutPromise])
           if (done)
             break
           yield value
         }
-        catch (e) {
-          if (e instanceof Error && e.message === 'Timeout')
+        catch (error) {
+          if (error instanceof Error && error.message === 'Timeout') {
             break
-          throw e
+          }
+          throw error
         }
       }
     }
     finally {
-      e.releaseLock()
+      reader.releaseLock()
     }
   }
 }
-export const c6 = $$u0
-export const hI = $$p1
-export const Ay = $$c2
-export const nU = $$l3
+
+// Export aliases
+export const c6 = StreamAsyncIterator
+export const hI = StreamAsyncIteratorWithTimeout
+export const Ay = cortexAPI
+export const nU = createNotesParserStream

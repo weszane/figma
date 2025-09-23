@@ -1,5 +1,5 @@
 import { encodeBase64 } from "../905/561685";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { YJ } from "../figma_app/50224";
 import { sF } from "../figma_app/193952";
 import { Gh } from "../figma_app/707567";
@@ -13,7 +13,7 @@ export async function $$c0(e) {
   });
 }
 export let $$u3 = _$$n(async function (e, t, i = () => !0, r) {
-  let a = (await Ay.design.firstDraftGenerateV2Stream(e, sF({
+  let a = (await cortexAPI.design.firstDraftGenerateV2Stream(e, sF({
     clientLifecycleId: r
   }))).getReader();
   let o = {};

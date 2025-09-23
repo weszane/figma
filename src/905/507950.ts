@@ -1,5 +1,5 @@
 import n from "../vendor/635";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { n as _$$n } from "../905/347702";
 import { Cj, XJ, fk, jM, zs, PE, VG } from "../905/23253";
@@ -120,7 +120,7 @@ let u = _$$n(async ({
       node: n[0],
       hash: e
     }));
-    return (await Ay.design.upscaleClipdrop({
+    return (await cortexAPI.design.upscaleClipdrop({
       image_url: c,
       ...d
     }, {

@@ -8,7 +8,7 @@ import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { Lg, Aq } from "../905/843553";
@@ -210,7 +210,7 @@ function M({
       new Blob([JSON.stringify(i)], {
         type: "application/json"
       }).size / 1048576 > 1 && (i.surroundingContext = void 0);
-      return Ay.shared.adjustText({
+      return cortexAPI.shared.adjustText({
         ...i
       }, r);
     },

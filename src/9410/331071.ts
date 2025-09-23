@@ -302,7 +302,7 @@ import { p as _$$p3 } from '../figma_app/398051';
 import { aq as _$$aq } from '../figma_app/399472';
 import { S as _$$S } from '../figma_app/420927';
 import { getPluginOrWidgetContent, hasOrgPrivateResourceType } from '../figma_app/427318';
-import { Ay } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { C as _$$C2 } from '../figma_app/444297';
 import { g as _$$g5, o as _$$o5 } from '../figma_app/449363';
 import { a as _$$a5 } from '../figma_app/453187';
@@ -444,7 +444,7 @@ function eP() {
 let eV = ez;
 async function eZ(e, t, i) {
   let r;
-  return (await Ay.shared.assistantChat({
+  return (await cortexAPI.shared.assistantChat({
     messages: [...t, e]
   })).pipeThrough((r = {}, new TransformStream({
     async transform(e, t) {
@@ -1571,7 +1571,7 @@ let rk = async ({
   }
 }) => {
   let t = _$$Ay3();
-  let i = await Ay.figjam.createVisual({
+  let i = await cortexAPI.figjam.createVisual({
     prompt: '',
     visualType: 'diagram',
     directMermaidText: e
@@ -1680,7 +1680,7 @@ async function nt({
       background: t,
       clientLifecycleId: i,
       containingNodeId: r,
-      endpoint: Ay.design.firstDraftCreateImage
+      endpoint: cortexAPI.design.firstDraftCreateImage
     }));
     return !0;
   }
@@ -2936,7 +2936,7 @@ function af(e) {
           darkMode: n === 'dark'
         };
       }(f);
-      let C = await Ay.design.firstDraftMakeChanges({
+      let C = await cortexAPI.design.firstDraftMakeChanges({
         userPrompt: h,
         promptHistory: _,
         storedInitialPrompt: n,
@@ -3905,7 +3905,7 @@ async function aA(e, t) {
       jsx: t.jsx
     };
   }));
-  return (await Ay.design.firstDraftComponentize({
+  return (await cortexAPI.design.firstDraftComponentize({
     requests: i
   }, _$$sF({
     clientLifecycleId: t
@@ -4279,7 +4279,7 @@ async function aH(e, t) {
   return (await Promise.all(t.map(async t => {
     let i = await gC(t);
     let r = e.replace('{{jsx}}', i.jsx);
-    let n = await Ay.openai.completeChat({
+    let n = await cortexAPI.openai.completeChat({
       model: 'gpt-4o-2024-08-06',
       temperature: 0.5,
       n: 1,
@@ -4319,7 +4319,7 @@ async function az(e, t) {
   return (await Promise.all(t.map(async t => {
     let i = await gC(t);
     let r = e.replace('{{jsx}}', i.jsx);
-    let n = await Ay.openai.completeChat({
+    let n = await cortexAPI.openai.completeChat({
       model: 'gpt-4o-2024-08-06',
       temperature: 0.5,
       n: 1,
@@ -6144,7 +6144,7 @@ let sW = _$$z.object({
   objects: _$$z.array(sV)
 }).passthrough();
 async function sY(e, t = 1) {
-  let i = (await Ay.design.imageToShareJsx({
+  let i = (await cortexAPI.design.imageToShareJsx({
     input: {
       image: e
     },
@@ -6191,14 +6191,14 @@ async function sJ(e, t, i) {
     console.warn('No valid JSX candidate thumbnails generated, defaulting to first candidate');
     return t[0];
   }
-  let n = (await Ay.design.guiclip({
+  let n = (await cortexAPI.design.guiclip({
     image: e,
     candidates: r.map(e => e.base64)
   })).bestCandidateIndex;
   return n == null ? (console.warn('Cannot get best candidate index from server, defaulting to first valid candidate'), r[0].jsx) : r[n].jsx;
 }
 async function sq(e) {
-  let t = await Ay.design.uiParser({
+  let t = await cortexAPI.design.uiParser({
     png_b64: e
   });
   let i = {

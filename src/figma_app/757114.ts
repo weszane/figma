@@ -3,7 +3,7 @@ import { ImageSourceType } from "../905/585727";
 import { R } from "../905/531474";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { b, $ } from "../905/776478";
@@ -48,7 +48,7 @@ export async function $$f2({
     let {
       description,
       image
-    } = await Ay.design.imagesFill({
+    } = await cortexAPI.design.imagesFill({
       id: e.guid,
       width: e.size.x,
       height: e.size.y,

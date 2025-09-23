@@ -10,7 +10,7 @@ import { reportError } from "../905/11";
 import { getInitialDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { Eu, $x, tc } from "../figma_app/275370";
 import { z8 } from "../figma_app/862289";
@@ -425,7 +425,7 @@ async function z(e) {
         code: t.code
       } : null;
     }).filter(e => null !== e), b);
-    let p = await Ay.shared.extractLibraryCss({
+    let p = await cortexAPI.shared.extractLibraryCss({
       variables: x.rawVariables,
       textStyles: x.rawTextStyles,
       componentsForVariables: c,

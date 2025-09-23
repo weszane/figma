@@ -1,4 +1,4 @@
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { n as _$$n } from "../905/347702";
 import { Cj, fk, VG, XJ } from "../905/23253";
@@ -27,7 +27,7 @@ let l = _$$n(async ({
       node: i[0],
       hash: e
     }));
-    return (await Ay.design.removeBackgroundClipdrop({
+    return (await cortexAPI.design.removeBackgroundClipdrop({
       image_url: a
     }, {
       ..._$$Ay(),

@@ -3,7 +3,7 @@ import { COMPONENT_PREFIX } from "../figma_app/664063";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { analyticsEventManager } from "../905/449184";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 var n;
 async function o(e, t = 1) {
@@ -149,7 +149,7 @@ async function f(e, t, i, n, r, a) {
   let {
     suggestions,
     usage
-  } = await Ay.shared.autosuggestText({
+  } = await cortexAPI.shared.autosuggestText({
     jsx: e,
     nodeId: i,
     suggestionType: n,

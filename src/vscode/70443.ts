@@ -1,5 +1,5 @@
 import { traverseChildren } from "../figma_app/387100";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 async function i(e) {
   let t = `
   You are a helpful assistant that generates Code Connect mappings converting Figma Component properties into React code mappings.
@@ -190,7 +190,7 @@ When generating the Code Connect mapping:
   ${extraContext}
   `;
   }(e);
-  let i = await Ay.openai.completeChat({
+  let i = await cortexAPI.openai.completeChat({
     model: "gpt-4o-2024-08-06",
     messages: [{
       role: "system",

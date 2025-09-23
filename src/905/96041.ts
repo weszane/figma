@@ -21,13 +21,11 @@ import { combinedSerializationOptionsSchema } from '../905/998509'
 import { deserializeCortexErrorV2, isSerializedCortexErrorV2, OfflineError } from '../figma_app/316567'
 import { ChatExchangeSchema, figMakeRequestMessageSchema } from '../figma_app/383733'
 import { DeltaSchema, TextTonesProductTypeSchema } from '../figma_app/571325'
-import { aiAssistantChatSchema, chatSchema } from '../figma_app/686647'
+import { chatSchema as AiAssistantChatRequestSchema, aiAssistantChatSchema as AiAssistantChatResponseSchema } from '../figma_app/686647'
 import { CortexError } from '../figma_app/691470'
 import { ActionResponseSchema, ComponentPropertiesResponsesSchema, ConflictSchema, DesignImageSchema, FigmatePromptSchema, ImageRequestsSchema, ImageSchema, MobileDesignResponsesSchema, PromptHistorySchema, PromptPanelSchema, StateGroupRequestsSchema, ThemePresetSchema } from '../figma_app/705029'
 import { createTrackEvent } from '../figma_app/970433'
 
-let n
-let a
 let l = z.enum(['STICKY', 'SHAPE_WITH_TEXT', 'TEXT'], {
   invalid_type_error: 'Not an allowed type in summarize',
 })
@@ -55,7 +53,6 @@ let u = z.object({
   data: z.array(c),
   stream: z.boolean().optional(),
 })
-
 
 let m = z.object({
   delta: z.string(),
@@ -94,19 +91,12 @@ let v = z.object({
   use_cache: z.boolean().optional().default(!0),
 })
 
-
-
-
-
-
-
 let W = z.union([z.enum(['anthropic-claude-3.7-sonnet', 'anthropic-claude-4-sonnet', 'gpt-4o-mini-2024-07-18']), z.string()])
 let K = z.object({
   jsx: z.string().optional(),
   reasoning: z.string().optional(),
   trace: NodeSchema.optional(),
 })
-
 
 let q = z.object({
   jsxSerializerOverrides: combinedSerializationOptionsSchema.partial(),
@@ -136,30 +126,29 @@ let Z = z.object({
   rawUserChatDetails: UserMessageWithAttachmentsSchema,
 })
 
-let X = z.object({
+let MakeEditsDebugPromptRequestSchema = z.object({
   options: q,
 })
-let Q = z.object({
+let MakeEditsDebugPromptResponseSchema = z.object({
   systemPrompt: z.string(),
 })
-
 
 let J = ChatCompletionRequestSchema.and(v)
 
 let ee = embeddingRequestSchema.and(v)
-let et = z.object({
+let chatRequestSchema = z.object({
   messages: ChatMessagesArraySchema,
 })
-let ei = ChatCompletionChunkSchema
+let chatResponseSchema = ChatCompletionChunkSchema
 
-let en = z.object({
+let ImageEvaluatorRequestSchema = z.object({
   model: W,
   image1: z.string(),
   image2: z.string(),
   userPrompt: z.string(),
   systemPrompt: z.string(),
 })
-let er = z.object({
+let ImageEvaluatorResponseSchema = z.object({
   content: z.enum(['0', '1']),
   rationale: z.string(),
 })
@@ -292,7 +281,7 @@ let ex = z.object({
 })
 let eS = z.union([eh, e_, eb, eI])
 
-let ew = z.object({
+let TextContentFromExamplesResponseSchema = z.object({
   trace: NodeSchema.optional(),
   cortex_error: z.object({
     type: z.string(),
@@ -310,7 +299,7 @@ let eT = z.object({
   fieldName: z.string(),
   value: z.string(),
 })
-let ek = z.object({
+let TextContentFromExamplesRequestSchema = z.object({
   v: z.number(),
   data: z.object({
     fieldsToValues: z.array(z.object({
@@ -358,7 +347,6 @@ let eD = z.object({
   destScreenID: z.string().nullable(),
   score: z.number().optional(),
 })
-
 
 let eU = z.literal('generate_ideas')
 let eB = z.object({
@@ -452,7 +440,7 @@ let e5 = z.object({
   context: z.string().optional(),
   guid: z.string().optional(),
 })
-let e4 = z.union([z.object({
+let AdjustTextRequestSchema = z.union([z.object({
   action: e2,
   text: z.string(),
   surroundingContext: z.string().optional(),
@@ -462,7 +450,7 @@ let e4 = z.union([z.object({
   jsonMode: z.boolean().optional(),
   surroundingContext: z.string().optional(),
 })])
-let e3 = z.object({
+let AdjustTextResponseSchema = z.object({
   id: z.string().optional(),
   delta: z.string(),
 })
@@ -507,7 +495,7 @@ let ti = z.object({
 let tn = z.object({
   guids: z.array(z.string()),
 })
-let ta = z.object({
+let designImageGenerateRequestSchema = z.object({
   prompt: z.string(),
   negativePrompt: z.string().default('blurry, bad'),
   cfgScale: z.number().default(8),
@@ -517,7 +505,7 @@ let ta = z.object({
   numImages: z.number().default(1),
   modelType: z.nativeEnum(ImageModelType).optional(),
 })
-let ts = z.object({
+let designImageGenerateResponseSchema = z.object({
   images: z.array(z.string()),
   metadata: z.object({
     height: z.number(),
@@ -549,7 +537,6 @@ let tm = z.object({
   slideType: z.enum(['TITLE', 'CHAPTER', 'BODY']),
   content: z.array(tp),
 })
-
 
 let tf = z.object({
   text: z.string(),
@@ -588,7 +575,7 @@ let tx = z.object({
   candidateSimilarities: z.array(z.number()),
   bestSimilarity: z.number(),
 })
-let tS = z.object({
+let UIParserRequestSchema = z.object({
   png_b64: z.string(),
 })
 let tw = z.object({
@@ -599,7 +586,7 @@ let tw = z.object({
   height: z.number(),
   mask: z.string(),
 }).passthrough()
-let tC = z.object({
+let UIParserResponseSchema = z.object({
   width: z.number(),
   height: z.number(),
   objects: z.array(tw),
@@ -679,18 +666,18 @@ let tW = z.object({
   fileOrgId: z.number().optional().nullable(),
   userId: z.number().optional().nullable(),
 })
-let tY = requestSchema.merge(tW)
-let tq = z.object({
+let GenerateTextRequestSchema = requestSchema.merge(tW)
+let GenerateTextResponseSchema = z.object({
   text: z.string(),
   usage: tokenUsageSchema,
   logprobs: z.optional(logprobsSchema),
 })
-let t$ = z.object({
+let ClipdropUpscaleRequestSchema = z.object({
   image_url: z.string(),
   width: z.number().min(1).max(4096),
   height: z.number().min(1).max(4096),
 })
-let tZ = z.object({
+let ClipdropUpscaleResponseSchema = z.object({
   base64_image: z.string(),
 })
 let tX = z.object({
@@ -710,35 +697,35 @@ let tJ = z.object({
   value: z.string().describe('Value of the field'),
   collectionItemId: z.string().describe('Unique ID for the item'),
 })
-let t0 = z.discriminatedUnion('type', [tX, tQ, tJ])
-let t1 = z.object({
+let StreamCMSCollectionResponseSchema = z.discriminatedUnion('type', [tX, tQ, tJ])
+let StreamCMSCollectionRequestSchema = z.object({
   prompt: z.string(),
 })
-let t5 = z.object({
+let FirstDraftFineTuneRequestSchema = z.object({
   userPrompt: z.string(),
 })
-let t4 = z.object({
+let FirstDraftFineTuneResponseSchema = z.object({
   jsx: z.string().optional(),
   trace: NodeSchema.optional(),
 })
-let t3 = ProviderValuesArray.extend({
+let TextEmbedRequestSchema = ProviderValuesArray.extend({
   values: z.array(z.string()),
 })
-let t6 = z.object({
+let TextEmbedResponseSchema = z.object({
   embeddings: z.array(z.array(z.number())),
 })
-let t8 = outputSchemaOptions.omit({
+let GenerateObjectRequestSchema = outputSchemaOptions.omit({
   output: !0,
   schema: !0,
   schemaName: !0,
   schemaDescription: !0,
 }).merge(tW)
-let t9 = z.object({
+let GenerateObjectResponseSchema = z.object({
   object: z.any(),
   usage: tokenUsageSchema,
   logprobs: z.optional(logprobsSchema),
 })
-let ie = z.union([z.object({
+let StreamObjectResponseSchema = z.union([z.object({
   type: z.literal('object'),
   object: z.any(),
 }), z.object({
@@ -752,14 +739,14 @@ let ie = z.union([z.object({
   finishReason: completionReasonEnum,
   usage: tokenUsageSchema,
 })])
-let it = z.object({
+let AutosuggestTextRequestSchema = z.object({
   jsx: z.string(),
   nodeId: z.string(),
   suggestionType: z.number().optional(),
   existingText: z.string().optional(),
   startingChar: z.string().optional(),
 })
-let ii = z.object({
+let AutosuggestTextResponseSchema = z.object({
   suggestions: z.array(z.string()),
   usage: z.object({
     promptTokens: z.number(),
@@ -771,7 +758,7 @@ let ii = z.object({
     }).array().optional(),
   }),
 })
-let ia = z.object({
+let GenerationErrorLogRequestSchema = z.object({
   clientLifecycleId: z.string(),
   requestUuid: z.string(),
   phase: z.string(),
@@ -833,29 +820,29 @@ let i_ = z.object({
   fontSize: z.number().optional(),
   lineHeight: z.string().optional(),
 })
-let iA = z.object({
+let ExtractLibraryCssRequestSchema = z.object({
   variables: z.array(z.string()),
   textStyles: z.array(i_),
   componentsForVariables: z.array(ih),
   componentsForTypography: z.array(ih),
   fragments: z.array(ig),
 })
-let iy = z.object({
+let ExtractLibraryCssResponseSchema = z.object({
   typography: z.string(),
   cssVariables: z.string(),
   globalCss: z.string(),
 })
-let ib = z.object({
+let FigmakeEnhancePromptRequestSchema = z.object({
   prompt: z.string(),
   selection: z.object({
     text: z.string(),
     start: z.number().optional(),
   }).optional(),
 })
-let iv = z.object({
+let FigmakeEnhancePromptResponseSchema = z.object({
   delta: z.string(),
 })
-let iS = z.object({
+let MakeEditsAgentRequestSchema = z.object({
   messages: z.array(messageSchema).readonly(),
 })
 let iw = createTrackEvent({
@@ -867,8 +854,8 @@ let iw = createTrackEvent({
   }),
 })
 let iC = createToolCallSchema(iw)
-let iT = z.union([iC, UnifiedSchema])
-let ik = z.object({
+let MakeEditsAgentResponseSchema = z.union([iC, UnifiedSchema])
+let PingRequestSchema = z.object({
   fileKeyHash: z.string(),
 })
 let iR = z.object({
@@ -876,8 +863,8 @@ let iR = z.object({
   mainComponent: z.string(),
   forceProvision: z.boolean().optional(),
 })
-let iN = z.intersection(iR, ik)
-let iP = z.object({
+let UploadCodeRequestSchema = z.intersection(iR, PingRequestSchema)
+let UploadCodeResponseSchema = z.object({
   id: z.string(),
   namespace: z.string(),
   status: z.string(),
@@ -892,8 +879,8 @@ let iO = z.object({
   filesToUpsert: z.record(z.string()),
   filePathsToDelete: z.array(z.string()),
 })
-let iD = z.intersection(iO, ik)
-let iL = z.union([z.object({
+let BundleRequestSchema = z.intersection(iO, PingRequestSchema)
+let BundleResponseSchema = z.union([z.object({
   success: z.literal(!0),
   esm: z.string(),
   css: z.string(),
@@ -905,20 +892,21 @@ let iL = z.union([z.object({
 let iF = z.object({
   forceProvision: z.boolean().optional(),
 })
-let iM = z.intersection(iF, ik)
-let ij = z.object({
+let SandboxRequestSchema = z.intersection(iF, PingRequestSchema)
+let SandboxResponseSchema = z.object({
   id: z.string(),
   namespace: z.string(),
   status: z.string(),
   urls: z.record(z.string()),
 })
-let iU = z.object({})
-!(function (e) {
-  e.VEO3 = 'veo-3.0-generate-preview'
-  e.VEO2 = 'veo-2.0-generate-001'
-  e.VEO3_FAST = 'veo-3.0-fast-generate-preview'
-}(a || (a = {})))
-let iB = z.object({
+let PingResponseSchema = z.object({})
+export enum VEOModelEnum {
+  VEO3 = 'veo-3.0-generate-preview',
+  VEO2 = 'veo-2.0-generate-001',
+  VEO3_FAST = 'veo-3.0-fast-generate-preview',
+}
+
+let VideoGenerationRequestSchema = z.object({
   prompt: z.string(),
   imageUrls: z.array(z.string()).optional(),
   lastFrame: z.string().optional(),
@@ -927,24 +915,40 @@ let iB = z.object({
   durationSeconds: z.number().optional(),
   resolution: z.string().optional(),
   generateAudio: z.boolean().optional(),
-  modelType: z.nativeEnum(a).optional(),
+  modelType: z.nativeEnum(VEOModelEnum).optional(),
 })
-let iV = z.object({
+let VideoPollRequestSchema = z.object({
   operationId: z.string(),
 })
-let iG = z.object({
+let VideoGenerationResponseSchema = z.object({
   operationId: z.string(),
 })
-let iz = z.object({
+let VideoPollResponseSchema = z.object({
   video: z.string().optional(),
   done: z.boolean(),
 })
-function iH(e) {
-  let t = {
+/**
+ * Builds HTTP headers for Cortex API requests
+ * @param context - Optional request context containing metadata
+ * @returns Headers object with Content-Type and optional metadata headers
+ */
+function buildCortexHeaders(context?: {
+  orgId?: string
+  teamId?: string
+  fileKey?: string
+  userId?: string
+  clientLifecycleId?: string
+  persistentEntityId?: string
+  trackingSessionId?: string
+  clientGeneratedRequestUuid?: string
+  fileSeq?: string
+}): Record<string, string> {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   }
-  if (e != null) {
-    let {
+
+  if (context != null) {
+    const {
       orgId,
       teamId,
       fileKey,
@@ -954,450 +958,720 @@ function iH(e) {
       trackingSessionId,
       clientGeneratedRequestUuid,
       fileSeq,
-    } = e
-    t['X-Figma-Org-ID'] = orgId ?? ''
-    t['X-Figma-Team-ID'] = teamId ?? ''
-    t['X-Figma-File-Key'] = fileKey ?? ''
-    t['X-Figma-File-Seq'] = fileSeq ?? ''
-    t['X-Figma-User-ID'] = userId ?? ''
-    t['X-Figma-Client-Lifecycle-ID'] = clientLifecycleId ?? ''
-    t['X-Figma-Persistent-Entity-ID'] = persistentEntityId ?? ''
-    t['X-Figma-Cortex-Client-Generated-Request-UUID'] = clientGeneratedRequestUuid ?? ''
-    t.Tsid = trackingSessionId ?? ''
-    t['X-Referer-Service'] = 'web'
+    } = context
+
+    headers['X-Figma-Org-ID'] = orgId ?? ''
+    headers['X-Figma-Team-ID'] = teamId ?? ''
+    headers['X-Figma-File-Key'] = fileKey ?? ''
+    headers['X-Figma-File-Seq'] = fileSeq ?? ''
+    headers['X-Figma-User-ID'] = userId ?? ''
+    headers['X-Figma-Client-Lifecycle-ID'] = clientLifecycleId ?? ''
+    headers['X-Figma-Persistent-Entity-ID'] = persistentEntityId ?? ''
+    headers['X-Figma-Cortex-Client-Generated-Request-UUID'] = clientGeneratedRequestUuid ?? ''
+    headers.Tsid = trackingSessionId ?? ''
+    headers['X-Referer-Service'] = 'web'
   }
-  return t
+
+  return headers
 }
-let iW = []
-function iK(e, t, i, r) {
-  async function a(a, s, o) {
-    let l
-    let d = iH(s)
-    if (r.buildExtraHeaders) {
-      let e = structuredClone(d)
-      Object.assign(d = r.buildExtraHeaders(), e)
+
+// Global registry for API endpoints
+const apiEndpointRegistry: Array<{
+  route: string
+  requestSchema: z.ZodSchema<any>
+  responseSchema?: z.ZodSchema<any>
+  streamMessageSchema?: z.ZodSchema<any>
+  clientFunction: Fn
+}> = []
+
+/**
+ * Wraps an API endpoint with error handling, header management, and response parsing
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param responseSchema - Zod schema for response validation
+ * @param options - Configuration options
+ * @returns Async function that makes the API call
+ */
+function wrapEndpoint<TRequest, TResponse>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  responseSchema: z.ZodSchema<TResponse>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, context: any, abortController?: AbortController) => Promise<TResponse> {
+  async function makeRequest(
+    request: TRequest,
+    context: any,
+    abortController?: AbortController,
+  ): Promise<TResponse> {
+    let response: Response
+    let headers = buildCortexHeaders(context)
+
+    if (options.buildExtraHeaders) {
+      const extraHeaders = structuredClone(headers)
+      Object.assign(headers = options.buildExtraHeaders(), extraHeaders)
     }
-    let c = t.parse(a)
+
+    const parsedRequest = requestSchema.parse(request)
+
     try {
-      let t = () => (n ?? fetch)(e, {
+      const doFetch = () => (globalThis.fetch ?? fetch)(route, {
         method: 'POST',
-        headers: d,
-        body: JSON.stringify(c),
-        signal: o?.abortSignal,
+        headers,
+        body: JSON.stringify(parsedRequest),
+        signal: abortController?.signal,
       })
-      if ((l = await t()).ok) {
-        let e = getWAFActionType(l)
-        e && (await WAFValidationHandlerInstance.waitForWAFValidation(e), l = await t())
+
+      response = await doFetch()
+
+      if (response.ok) {
+        const wafAction = getWAFActionType(response)
+        if (wafAction) {
+          await WAFValidationHandlerInstance.waitForWAFValidation(wafAction)
+          response = await doFetch()
+        }
       }
     }
-    catch (e) {
-      if (iQ(e))
-        throw iJ(e, 'wrapEndpoint: offline')
-      throw e
+    catch (error) {
+      if (isNetworkError(error)) {
+        throw createOfflineError(error, 'wrapEndpoint: offline')
+      }
+      throw error
     }
-    if (!l.ok)
-      throw await i0(e, l)
-    let u = await l.json()
-    return i.parse(u)
+
+    if (!response.ok) {
+      throw await createCortexError(route, response)
+    }
+
+    const jsonResponse = await response.json()
+    return responseSchema.parse(jsonResponse)
   }
-  return async function (t, i, n) {
+
+  return async function (request: TRequest, context: any, abortController?: AbortController) {
     try {
-      return await a(t, i, n)
+      return await makeRequest(request, context, abortController)
     }
-    catch (t) {
-      r.onError && r.onError(e)
-      return t
+    catch (error) {
+      options.onError?.(route)
+      throw error
     }
   }
 }
-function iY(e, t, i, n) {
-  let r = iK(e, t, i, n)
-  let a = (e, t) => r(e, null, t)
-  iW.push({
-    route: e,
-    requestSchema: t,
-    responseSchema: i,
-    clientFunction: a,
+
+/**
+ * Creates a standard API endpoint function
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param responseSchema - Zod schema for response validation
+ * @param options - Configuration options
+ * @returns Client function for the endpoint
+ */
+function createStandardEndpoint<TRequest, TResponse>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  responseSchema: z.ZodSchema<TResponse>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, abortController?: AbortController) => Promise<TResponse> {
+  const endpoint = wrapEndpoint(route, requestSchema, responseSchema, options)
+  const clientFunction = (request: TRequest, abortController?: AbortController) =>
+    endpoint(request, null, abortController)
+
+  apiEndpointRegistry.push({
+    route,
+    requestSchema,
+    responseSchema,
+    clientFunction,
   })
-  return a
+
+  return clientFunction
 }
-function iq(e, t, i, n) {
-  let r = iK(e, t, i, n)
-  iW.push({
-    route: e,
-    requestSchema: t,
-    responseSchema: i,
-    clientFunction: r,
+
+/**
+ * Creates an API endpoint function that passes context
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param responseSchema - Zod schema for response validation
+ * @param options - Configuration options
+ * @returns Client function for the endpoint
+ */
+function createContextEndpoint<TRequest, TResponse>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  responseSchema: z.ZodSchema<TResponse>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, context: any, abortController?: AbortController) => Promise<TResponse> {
+  const endpoint = wrapEndpoint(route, requestSchema, responseSchema, options)
+
+  apiEndpointRegistry.push({
+    route,
+    requestSchema,
+    responseSchema,
+    clientFunction: endpoint,
   })
-  return r
+
+  return endpoint
 }
-function i$(e, t, i, r) {
-  async function a(a, s, l) {
-    let d
-    let c
-    let u = iH(s)
-    if (r.buildExtraHeaders) {
-      let e = structuredClone(u)
-      Object.assign(u = r.buildExtraHeaders(), e)
+
+/**
+ * Wraps a streaming API endpoint with SSE parsing and error handling
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param streamMessageSchema - Zod schema for stream message validation
+ * @param options - Configuration options
+ * @returns Async function that makes the streaming API call
+ */
+function wrapStreamingEndpoint<TRequest, TStreamMessage>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  streamMessageSchema: z.ZodSchema<TStreamMessage>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, context: any, abortController?: AbortController) => Promise<ReadableStream<TStreamMessage>> {
+  async function makeStreamingRequest(
+    request: TRequest,
+    context: any,
+    abortController?: AbortController,
+  ): Promise<ReadableStream<TStreamMessage>> {
+    let response: Response
+    let headers = buildCortexHeaders(context)
+
+    if (options.buildExtraHeaders) {
+      const extraHeaders = structuredClone(headers)
+      Object.assign(headers = options.buildExtraHeaders(), extraHeaders)
     }
-    let p = t.parse(a)
+
+    const parsedRequest = requestSchema.parse(request)
+
     try {
-      let t = () => (n ?? fetch)(e, {
+      const doFetch = () => (globalThis.fetch ?? fetch)(route, {
         method: 'POST',
-        headers: u,
-        body: JSON.stringify(p),
-        signal: l?.abortSignal,
+        headers,
+        body: JSON.stringify(parsedRequest),
+        signal: abortController?.signal,
       })
-      if ((c = await t()).ok) {
-        let e = getWAFActionType(c)
-        e && (await WAFValidationHandlerInstance.waitForWAFValidation(e), c = await t())
+
+      response = await doFetch()
+
+      if (response.ok) {
+        const wafAction = getWAFActionType(response)
+        if (wafAction) {
+          await WAFValidationHandlerInstance.waitForWAFValidation(wafAction)
+          response = await doFetch()
+        }
       }
     }
-    catch (e) {
-      if (iQ(e))
-        throw iJ(e, 'wrapEndpointStreaming: offline')
-      throw e
+    catch (error) {
+      if (isNetworkError(error)) {
+        throw createOfflineError(error, 'wrapEndpointStreaming: offline')
+      }
+      throw error
     }
-    if (!c.ok)
-      throw await i0(e, c)
-    if (!c.body) {
+
+    if (!response.ok) {
+      throw await createCortexError(route, response)
+    }
+
+    if (!response.body) {
       throw new CortexError('generic', {
-        message: `Failed to fetch ${e}, no body`,
-        status: c.status,
+        message: `Failed to fetch ${route}, no body`,
+        status: response.status,
       })
     }
-    let m = c.body.pipeThrough(function () {
-      let e
-      let t = new TextDecoder()
-      return new TransformStream({
-        start(t) {
-          e = makeParser(e => t.enqueue(e))
-        },
-        transform(i) {
-          e.feed(t.decode(i))
-        },
-      })
-    }()).pipeThrough(new TransformStream({
-      transform(e, t) {
-        if (e.type === 'event') {
-          try {
-            let i = JSON.parse(e.data)
-            let n = i1(i)
-            if (n !== null) {
-              t.error(n)
-              return
-            }
-            t.enqueue(i)
-          }
-          catch (e) {
-            t.error(new CortexError('generic', {
-              message: `Unable to parse streaming event: ${e}`,
-            }))
-          }
-        }
-      },
-    }))
-    let h = c.headers.get('X-Cortex-Request-UUID');
-    (function (e, t) {
-      if (!t)
-        return !1
-      let i = e.safeParse({
-        requestUuid: t,
-      })
-      return i.success && i.data && typeof i.data == 'object' && Object.keys(i.data).length !== 0
-    })(i, h) && (m = m.pipeThrough((d = {
-      requestUuid: h,
-    }, new TransformStream({
-      start(e) {
-        e.enqueue(d)
-      },
-      transform(e, t) {
-        t.enqueue(e)
-      },
-    }))))
-    return m.pipeThrough(new TransformStream({
-      transform(e, t) {
-        let n = (function (e) {
-          if (e == null || typeof e != 'object' || !('trace' in e) || e.trace == null)
-            return null
-          let t = NodeSchema.safeParse(e.trace)
-          return t.success ? t.data : null
-        }(e))
-        if (!n) {
-          t.enqueue(e)
-          return
-        }
-        (function (e, t) {
-          try {
-            let i = e?.fileKey
-            if (!t || !i || typeof indexedDB == 'undefined')
-              return
-            let n = 'cortex-execution-traces'
-            let r = 'traces'
-            let a = indexedDB.open(n, 1)
-            a.onupgradeneeded = function () {
-              this.result.objectStoreNames.contains(r) || this.result.createObjectStore(r, {
-                keyPath: 'fileKey',
-              })
-            }
-            a.onsuccess = function () {
-              let e = this.result.transaction(r, 'readwrite').objectStore(r)
-              let a = e.get(i)
-              a.onsuccess = () => {
-                let r = a.result
-                r && Array.isArray(r.traces)
-                  ? (console.debug(n, 'adding new trace to record', i), r.traces.push(t))
-                  : (console.debug(n, 'creating new record', i), r = {
-                      fileKey: i,
-                      traces: [t],
-                    })
-                let s = e.put(r)
-                s.onsuccess = () => {
-                  let t = e.getAllKeys()
-                  t.onsuccess = () => {
-                    let r = t.result.filter(e => e !== i)
-                    if (r.length > 30) {
-                      let t = r[Math.floor(Math.random() * r.length)]
-                      e.$$delete(t)
-                      console.debug(n, 'deleted record', t)
-                    }
-                  }
-                }
-                s.onerror = (e) => {
-                  console.error('Error storing execution trace in IndexedDB', n, e)
-                }
-              }
-              a.onerror = (e) => {
-                console.error('Error reading execution trace from IndexedDB', n, e)
-              }
-            }
-            a.onerror = (e) => {
-              console.error(`Error opening ${n} db`, e)
-            }
-          }
-          catch (e) {
-            console.error('Error storing execution trace', e)
-          }
-        })(s, n)
-        i.safeParse({
-          trace: n,
-        }).success && t.enqueue({
-          trace: n,
-        })
-      },
-    })).pipeThrough(new TransformStream({
-      transform(e, t) {
-        let n
-        try {
-          n = i.parse(e)
-        }
-        catch (e) {
-          t.error(e)
-          console.error('ERROR PARSING ZOD', e)
-          return
-        }
-        try {
-          t.enqueue(n)
-        }
-        catch (e) {
-          console.error('ERROR ENQUEUEING ZOD', e)
-        }
-      },
-    }, new CountQueuingStrategy({
-      highWaterMark: 100,
-    }), new CountQueuingStrategy({
-      highWaterMark: 100,
-    })))
+
+    // Parse SSE stream
+    let stream = response.body
+      .pipeThrough(createSSEParser())
+      .pipeThrough(createEventProcessor(streamMessageSchema))
+
+    // Add request UUID if present
+    const requestUuid = response.headers.get('X-Cortex-Request-UUID')
+    if (shouldIncludeRequestUuid(streamMessageSchema, requestUuid)) {
+      stream = stream.pipeThrough(createRequestUuidStream(requestUuid!))
+    }
+
+    // Process trace data and validate messages
+    return stream
+      .pipeThrough(createTraceProcessor(context, streamMessageSchema))
+      .pipeThrough(createMessageValidator(streamMessageSchema))
   }
-  return async function (t, i, n) {
+
+  return async function (request: TRequest, context: any, abortController?: AbortController) {
     try {
-      return await a(t, i, n)
+      return await makeStreamingRequest(request, context, abortController)
     }
-    catch (t) {
-      r.onError && r.onError(e)
-      return t
+    catch (error) {
+      options.onError?.(route)
+      throw error
     }
   }
 }
-function iZ(e, t, i, n) {
-  let r = i$(e, t, i, n)
-  let a = (e, t) => r(e, null, t)
-  iW.push({
-    route: e,
-    requestSchema: t,
-    streamMessageSchema: i,
-    clientFunction: a,
-  })
-  return a
-}
-function iX(e, t, i, n) {
-  let r = i$(e, t, i, n)
-  iW.push({
-    route: e,
-    requestSchema: t,
-    streamMessageSchema: i,
-    clientFunction: r,
-  })
-  return r
-}
-function iQ(e) {
-  let t = e.message
-  return typeof t == 'string' && (t === 'Failed to fetch' || t === 'TypeError: Load failed' || t.includes('NetworkError') || t.toLowerCase().includes('network error'))
-}
-function iJ(e, t) {
-  let i = (function (e, t) {
-    let i = e.message
-    return typeof i == 'string' ? i : t
-  }(e, t))
-  return new OfflineError({
-    message: i,
-    stack: e.stack,
+
+/**
+ * Creates an SSE parser transform stream
+ */
+function createSSEParser(): TransformStream<Uint8Array, any> {
+  let parser: ReturnType<typeof makeParser>
+  const decoder = new TextDecoder()
+
+  return new TransformStream({
+    start(controller) {
+      parser = makeParser(event => controller.enqueue(event))
+    },
+    transform(chunk) {
+      parser.feed(decoder.decode(chunk))
+    },
   })
 }
-async function i0(e, t) {
-  let i
-  try {
-    i = await t.json()
-  }
-  catch (e) {
-    return (function (e, t) {
-      switch (e.status) {
-        case 404:
-          return new CortexError('service_busy', {
-            message: 'Not found',
-            status: e.status,
-          })
-        case 502:
-          return new CortexError('service_busy', {
-            message: 'Bad Gateway',
-            status: e.status,
-          })
-        case 504:
-          return new CortexError('service_busy', {
-            message: 'Gateway Timeout',
-            status: e.status,
-          })
-        default:
-          return new CortexError('generic', {
-            message: `Unable to parse non-OK response: ${t}`,
-            status: e.status,
-          })
+
+/**
+ * Creates an event processor for SSE events
+ */
+function createEventProcessor(_schema: z.ZodSchema<any>): TransformStream<any, any> {
+  return new TransformStream({
+    transform(event, controller) {
+      if (event.type === 'event') {
+        try {
+          const data = JSON.parse(event.data)
+          const cortexError = parseCortexError(data)
+          if (cortexError !== null) {
+            controller.error(cortexError)
+            return
+          }
+          controller.enqueue(data)
+        }
+        catch (error) {
+          controller.error(new CortexError('generic', {
+            message: `Unable to parse streaming event: ${error}`,
+          }))
+        }
       }
-    }(t, e))
+    },
+  })
+}
+
+/**
+ * Checks if request UUID should be included in stream
+ */
+function shouldIncludeRequestUuid(
+  schema: z.ZodSchema<any>,
+  requestUuid: string | null,
+): boolean {
+  if (!requestUuid)
+    return false
+
+  const result = schema.safeParse({ requestUuid })
+  return result.success
+    && result.data
+    && typeof result.data === 'object'
+    && Object.keys(result.data).length !== 0
+}
+
+/**
+ * Creates a stream that enqueues request UUID as first message
+ */
+function createRequestUuidStream(requestUuid: string): TransformStream<any, any> {
+  const data = { requestUuid }
+  return new TransformStream({
+    start(controller) {
+      controller.enqueue(data)
+    },
+    transform(chunk, controller) {
+      controller.enqueue(chunk)
+    },
+  })
+}
+
+/**
+ * Creates a trace processor for execution traces
+ */
+function createTraceProcessor(
+  context: any,
+  schema: z.ZodSchema<any>,
+): TransformStream<any, any> {
+  return new TransformStream({
+    transform(chunk, controller) {
+      const trace = extractTraceFromChunk(chunk)
+      if (!trace) {
+        controller.enqueue(chunk)
+        return
+      }
+
+      storeExecutionTrace(context, trace)
+
+      if (schema.safeParse({ trace }).success) {
+        controller.enqueue({ trace })
+      }
+    },
+  })
+}
+
+/**
+ * Extracts trace from chunk if present
+ */
+function extractTraceFromChunk(chunk: any) {
+  if (chunk == null
+    || typeof chunk !== 'object'
+    || !('trace' in chunk)
+    || chunk.trace == null) {
+    return null
   }
-  let n = i1(i)
-  if (n !== null) {
-    n.sentryTags = {
-      request_uuid: i.request_uuid || i.requestUuid,
+
+  const parseResult = NodeSchema.safeParse(chunk.trace)
+  return parseResult.success ? parseResult.data : null
+}
+
+/**
+ * Stores execution trace in IndexedDB
+ */
+function storeExecutionTrace(context: any, trace: any): void {
+  try {
+    const fileKey = context?.fileKey
+    if (!trace || !fileKey || typeof indexedDB === 'undefined')
+      return
+
+    const dbName = 'cortex-execution-traces'
+    const storeName = 'traces'
+    const request = indexedDB.open(dbName, 1)
+
+    request.onupgradeneeded = function () {
+      if (!this.result.objectStoreNames.contains(storeName)) {
+        this.result.createObjectStore(storeName, { keyPath: 'fileKey' })
+      }
     }
-    return n
+
+    request.onsuccess = function () {
+      const db = this.result
+      const transaction = db.transaction(storeName, 'readwrite')
+      const store = transaction.objectStore(storeName)
+      const getReq = store.get(fileKey)
+
+      getReq.onsuccess = () => {
+        let record = getReq.result
+        if (record && Array.isArray(record.traces)) {
+          console.debug(dbName, 'adding new trace to record', fileKey)
+          record.traces.push(trace)
+        }
+        else {
+          console.debug(dbName, 'creating new record', fileKey)
+          record = { fileKey, traces: [trace] }
+        }
+
+        const putReq = store.put(record)
+        putReq.onsuccess = () => {
+          const getAllReq = store.getAllKeys()
+          getAllReq.onsuccess = () => {
+            const keys = getAllReq.result.filter(key => key !== fileKey)
+            if (keys.length > 30) {
+              const randomKey = keys[Math.floor(Math.random() * keys.length)]
+              store.delete(randomKey)
+              console.debug(dbName, 'deleted record', randomKey)
+            }
+          }
+        }
+
+        putReq.onerror = (event) => {
+          console.error('Error storing execution trace in IndexedDB', dbName, event)
+        }
+      }
+
+      getReq.onerror = (event) => {
+        console.error('Error reading execution trace from IndexedDB', dbName, event)
+      }
+    }
+
+    request.onerror = (event) => {
+      console.error(`Error opening ${dbName} db`, event)
+    }
   }
-  let r = (function (e) {
-    if (e !== null && typeof e == 'object' && e.error)
-      return e.error
-  }(i))
-  return r != null
-    ? r
+  catch (error) {
+    console.error('Error storing execution trace', error)
+  }
+}
+
+/**
+ * Creates a message validator transform stream
+ */
+function createMessageValidator<T>(schema: z.ZodSchema<T>): TransformStream<any, T> {
+  return new TransformStream({
+    transform(chunk, controller) {
+      let parsed: T
+      try {
+        parsed = schema.parse(chunk)
+      }
+      catch (error) {
+        controller.error(error)
+        console.error('ERROR PARSING ZOD', error)
+        return
+      }
+
+      try {
+        controller.enqueue(parsed)
+      }
+      catch (error) {
+        console.error('ERROR ENQUEUEING ZOD', error)
+      }
+    },
+  }, new CountQueuingStrategy({ highWaterMark: 100 }), new CountQueuingStrategy({ highWaterMark: 100 }))
+}
+
+/**
+ * Creates a streaming API endpoint function
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param streamMessageSchema - Zod schema for stream message validation
+ * @param options - Configuration options
+ * @returns Client function for the streaming endpoint
+ */
+function createStreamingEndpoint<TRequest, TStreamMessage>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  streamMessageSchema: z.ZodSchema<TStreamMessage>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, abortController?: AbortController) => Promise<ReadableStream<TStreamMessage>> {
+  const endpoint = wrapStreamingEndpoint(route, requestSchema, streamMessageSchema, options)
+  const clientFunction = (request: TRequest, abortController?: AbortController) =>
+    endpoint(request, null, abortController)
+
+  apiEndpointRegistry.push({
+    route,
+    requestSchema,
+    streamMessageSchema,
+    clientFunction,
+  })
+
+  return clientFunction
+}
+
+/**
+ * Creates a streaming API endpoint function that passes context
+ * @param route - API route path
+ * @param requestSchema - Zod schema for request validation
+ * @param streamMessageSchema - Zod schema for stream message validation
+ * @param options - Configuration options
+ * @returns Client function for the streaming endpoint
+ */
+function createContextStreamingEndpoint<TRequest, TStreamMessage>(
+  route: string,
+  requestSchema: z.ZodSchema<TRequest>,
+  streamMessageSchema: z.ZodSchema<TStreamMessage>,
+  options: {
+    buildExtraHeaders?: () => Record<string, string>
+    onError?: (route: string) => void
+  },
+): (request: TRequest, context: any, abortController?: AbortController) => Promise<ReadableStream<TStreamMessage>> {
+  const endpoint = wrapStreamingEndpoint(route, requestSchema, streamMessageSchema, options)
+
+  apiEndpointRegistry.push({
+    route,
+    requestSchema,
+    streamMessageSchema,
+    clientFunction: endpoint,
+  })
+
+  return endpoint
+}
+
+/**
+ * Checks if an error is a network error
+ */
+function isNetworkError(error: any): boolean {
+  const message = error.message
+  return typeof message === 'string' && (
+    message === 'Failed to fetch'
+    || message === 'TypeError: Load failed'
+    || message.includes('NetworkError')
+    || message.toLowerCase().includes('network error')
+  )
+}
+
+/**
+ * Creates an offline error
+ */
+function createOfflineError(error: any, defaultMessage: string) {
+  const message = typeof error.message === 'string' ? error.message : defaultMessage
+  return new OfflineError({
+    message,
+    stack: error.stack,
+  })
+}
+
+/**
+ * Creates a Cortex error from HTTP response
+ */
+async function createCortexError(route: string, response: Response): Promise<Error> {
+  let json: any
+  try {
+    json = await response.json()
+  }
+  catch (parseError) {
+    switch (response.status) {
+      case 404:
+        return new CortexError('service_busy', {
+          message: 'Not found',
+          status: response.status,
+        })
+      case 502:
+        return new CortexError('service_busy', {
+          message: 'Bad Gateway',
+          status: response.status,
+        })
+      case 504:
+        return new CortexError('service_busy', {
+          message: 'Gateway Timeout',
+          status: response.status,
+        })
+      default:
+        return new CortexError('generic', {
+          message: `Unable to parse non-OK response: ${parseError}`,
+          status: response.status,
+        })
+    }
+  }
+
+  const cortexError = parseCortexError(json)
+  if (cortexError !== null) {
+    cortexError.sentryTags = {
+      request_uuid: json.request_uuid || json.requestUuid,
+    }
+    return cortexError
+  }
+
+  const errorObj = json !== null && typeof json === 'object' && json.error ? json.error : null
+  return errorObj != null
+    ? errorObj
     : new CortexError('generic', {
-      message: `Failed to fetch ${e}`,
-      status: t.status,
+      message: `Failed to fetch ${route}`,
+      status: response.status,
     })
 }
-function i1(e) {
-  return isSerializedCortexErrorV2(e) ? deserializeCortexErrorV2(e) : e !== null && typeof e == 'object' && e.cortex_error ? new CortexError(e.cortex_error.type, e.cortex_error.data, void 0, void 0, e.cortex_error.trace) : null
+
+/**
+ * Parses Cortex error from JSON response
+ */
+function parseCortexError(json: any): CortexError | null {
+  if (isSerializedCortexErrorV2(json)) {
+    return deserializeCortexErrorV2(json)
+  }
+
+  if (json !== null
+    && typeof json === 'object'
+    && json.cortex_error) {
+    return new CortexError(
+      json.cortex_error.type,
+      json.cortex_error.data,
+      undefined,
+      undefined,
+      json.cortex_error.trace,
+    )
+  }
+
+  return null
 }
-export function $$i20(e = {}) {
+export function createCortexAPI(e = {}) {
   let t = e ?? {}
   return {
     openai: {
-      completeChat: iY('/api/cortex/dev/openai/chat/completions', J, ChatCompletionResponseSchema, t),
-      streamChat: iZ('/api/cortex/dev/openai/chat/completions', J, ChatCompletionChunkSchema, t),
-      computeEmbeddings: iY('/api/cortex/dev/openai/embeddings', ee, embeddingResponseSchema, t),
+      completeChat: createStandardEndpoint('/api/cortex/dev/openai/chat/completions', J, ChatCompletionResponseSchema, t),
+      streamChat: createStreamingEndpoint('/api/cortex/dev/openai/chat/completions', J, ChatCompletionChunkSchema, t),
+      computeEmbeddings: createStandardEndpoint('/api/cortex/dev/openai/embeddings', ee, embeddingResponseSchema, t),
     },
     figjam: {
-      cluster: iq('/api/cortex/figjam/cluster', el, eo, t),
-      streamSummarize: iX('/api/cortex/figjam/summarize', u, m, t),
-      jamGPT: iq('/api/cortex/figjam/jamgpt', y, b, t),
-      createTemplate: iX('/api/cortex/figjam/create_template', PromptModeSchema, createNodesRequestSchema, t),
-      createVisual: iq('/api/cortex/figjam/create_visual', ex, eS, t),
-      classifyCreate: iq('/api/cortex/figjam/classify_create', eN, eP, t),
-      updateVisual: iq('/api/cortex/figjam/update_visual', eG, eI, t),
-      canvasIdeate: iq('/api/cortex/figjam/canvas/ideate', tD, tL, t),
-      canvasMakeImageFromImages: iq('/api/cortex/figjam/canvas/make_image_from_canvas_content', tF, tM, t),
-      canvasEnhancePrompt: iq('/api/cortex/figjam/canvas/enhance_prompt', tj, tU, t),
+      cluster: createContextEndpoint('/api/cortex/figjam/cluster', el, eo, t),
+      streamSummarize: createContextStreamingEndpoint('/api/cortex/figjam/summarize', u, m, t),
+      jamGPT: createContextEndpoint('/api/cortex/figjam/jamgpt', y, b, t),
+      createTemplate: createContextStreamingEndpoint('/api/cortex/figjam/create_template', PromptModeSchema, createNodesRequestSchema, t),
+      createVisual: createContextEndpoint('/api/cortex/figjam/create_visual', ex, eS, t),
+      classifyCreate: createContextEndpoint('/api/cortex/figjam/classify_create', eN, eP, t),
+      updateVisual: createContextEndpoint('/api/cortex/figjam/update_visual', eG, eI, t),
+      canvasIdeate: createContextEndpoint('/api/cortex/figjam/canvas/ideate', tD, tL, t),
+      canvasMakeImageFromImages: createContextEndpoint('/api/cortex/figjam/canvas/make_image_from_canvas_content', tF, tM, t),
+      canvasEnhancePrompt: createContextEndpoint('/api/cortex/figjam/canvas/enhance_prompt', tj, tU, t),
     },
     slides: {
-      createSlides: iX('/api/cortex/slides/create_slides', tc, tm, t),
-      rewriteText: iX('/api/cortex/slides/rewrite_text', TextTonesProductTypeSchema, DeltaSchema, t),
-      speakerNotes: iX('/api/cortex/slides/speaker_notes', t_, tA, t),
-      layoutSwap: iq('/api/cortex/slides/layout/swap', is, io, t),
-      generateOutline: iX('/api/cortex/slides/outline/generate', ip, im, t),
-      createDeckFromOutline: iX('/api/cortex/slides/outline/create_deck', eJ, e1, t),
+      createSlides: createContextStreamingEndpoint('/api/cortex/slides/create_slides', tc, tm, t),
+      rewriteText: createContextStreamingEndpoint('/api/cortex/slides/rewrite_text', TextTonesProductTypeSchema, DeltaSchema, t),
+      speakerNotes: createContextStreamingEndpoint('/api/cortex/slides/speaker_notes', t_, tA, t),
+      layoutSwap: createContextEndpoint('/api/cortex/slides/layout/swap', is, io, t),
+      generateOutline: createContextStreamingEndpoint('/api/cortex/slides/outline/generate', ip, im, t),
+      createDeckFromOutline: createContextStreamingEndpoint('/api/cortex/slides/outline/create_deck', eJ, e1, t),
     },
     design: {
-      generateTextContentFromExamples: iX('/api/cortex/design/editor_ai/content_fill/generate_from_examples', ek, ew, t),
-      generateImages: iq('/api/cortex/design/editor_ai/images/generate', ta, ts, t),
-      generateVideo: iq('/api/cortex/design/editor_ai/video/generate', iB, iG, t),
-      pollVideo: iq('/api/cortex/design/editor_ai/video/poll', iV, iz, t),
-      generateMagicLinkV2: iX('/api/cortex/design/prototyping/magic_link_v2', eO, eD, t),
-      iconClassifier: iq('/api/cortex/design/prototyping/icon_classifier', iconClassifierEndpointSchema, iconClassifierEndpointsResults, t),
-      backgroundSegmentation: iq('/api/cortex/design/editor_ai/image_background_segmentation', ez, eH, t),
-      sectionDetection: iq('/api/cortex/dev/inference/image_section_detection', eW, eK, t),
-      generateRenameLayers: iX('/api/cortex/design/editor_ai/rename_layers', e8, e9, t),
-      generateSmartPaste: iq('/api/cortex/design/editor_ai/smart_paste', ti, tn, t),
-      firstDraftGenerateStream: iX('/api/cortex/design/first_draft/generate', FigmatePromptSchema, ThemePresetSchema, t),
-      firstDraftGenerateV2Stream: iX('/api/cortex/design/first_draft/generate_v2', FigmatePromptSchema, ThemePresetSchema, t),
-      firstDraftMakeChanges: iX('/api/cortex/design/first_draft/make_changes', PromptHistorySchema, ActionResponseSchema, t),
-      firstDraftCreateImage: iq('/api/cortex/design/first_draft/images/create', PromptPanelSchema, DesignImageSchema, t),
-      firstDraftIpConflict: iq('/api/cortex/design/first_draft/ip_conflict', ImageSchema, ConflictSchema, t),
-      firstDraftComponentize: iq('/api/cortex/design/first_draft/componentize', ImageRequestsSchema, MobileDesignResponsesSchema, t),
-      firstDraftSuggestProps: iq('/api/cortex/design/first_draft/suggest_props', StateGroupRequestsSchema, ComponentPropertiesResponsesSchema, t),
-      makeEdits: iX('/api/cortex/design/first_draft/make_edits', Z, K, t),
-      makeEditsCreateImage: iq('/api/cortex/design/first_draft/make_edits/images/create', PromptPanelSchema, DesignImageSchema, t),
-      removeBackgroundClipdrop: iq('/api/cortex/design/editor_ai/clipdrop_background_removal', ty, tb, t),
-      getTextImageEmbeds: iY('/api/cortex/dev/inference/text_image_embeds', ea, es, t),
-      imageToShareJsx: iY('/api/cortex/dev/inference/image_to_share_jsx', tv, tI, t),
-      guiclip: iY('/api/cortex/dev/inference/guiclip', tE, tx, t),
-      uiParser: iY('/api/cortex/dev/inference/ui_parser', tS, tC, t),
-      imagesEdit: iq('/api/cortex/design/editor_ai/images/edit', ImageCreationSchema, Base64ImageResponseSchema, t),
-      imagesFill: iq('/api/cortex/design/editor_ai/images/fill', tG, tV, t),
-      upscaleClipdrop: iq('/api/cortex/design/editor_ai/clipdrop_upscale', t$, tZ, t),
-      firstDraftFineTune: iZ('/api/cortex/dev/design/first_draft/fine_tune', t5, t4, t),
+      generateTextContentFromExamples: createContextStreamingEndpoint('/api/cortex/design/editor_ai/content_fill/generate_from_examples', TextContentFromExamplesRequestSchema, TextContentFromExamplesResponseSchema, t),
+      generateImages: createContextEndpoint('/api/cortex/design/editor_ai/images/generate', designImageGenerateRequestSchema, designImageGenerateResponseSchema, t),
+      generateVideo: createContextEndpoint('/api/cortex/design/editor_ai/video/generate', VideoGenerationRequestSchema, VideoGenerationResponseSchema, t),
+      pollVideo: createContextEndpoint('/api/cortex/design/editor_ai/video/poll', VideoPollRequestSchema, VideoPollResponseSchema, t),
+      generateMagicLinkV2: createContextStreamingEndpoint('/api/cortex/design/prototyping/magic_link_v2', eO, eD, t),
+      iconClassifier: createContextEndpoint('/api/cortex/design/prototyping/icon_classifier', iconClassifierEndpointSchema, iconClassifierEndpointsResults, t),
+      backgroundSegmentation: createContextEndpoint('/api/cortex/design/editor_ai/image_background_segmentation', ez, eH, t),
+      sectionDetection: createContextEndpoint('/api/cortex/dev/inference/image_section_detection', eW, eK, t),
+      generateRenameLayers: createContextStreamingEndpoint('/api/cortex/design/editor_ai/rename_layers', e8, e9, t),
+      generateSmartPaste: createContextEndpoint('/api/cortex/design/editor_ai/smart_paste', ti, tn, t),
+      firstDraftGenerateStream: createContextStreamingEndpoint('/api/cortex/design/first_draft/generate', FigmatePromptSchema, ThemePresetSchema, t),
+      firstDraftGenerateV2Stream: createContextStreamingEndpoint('/api/cortex/design/first_draft/generate_v2', FigmatePromptSchema, ThemePresetSchema, t),
+      firstDraftMakeChanges: createContextStreamingEndpoint('/api/cortex/design/first_draft/make_changes', PromptHistorySchema, ActionResponseSchema, t),
+      firstDraftCreateImage: createContextEndpoint('/api/cortex/design/first_draft/images/create', PromptPanelSchema, DesignImageSchema, t),
+      firstDraftIpConflict: createContextEndpoint('/api/cortex/design/first_draft/ip_conflict', ImageSchema, ConflictSchema, t),
+      firstDraftComponentize: createContextEndpoint('/api/cortex/design/first_draft/componentize', ImageRequestsSchema, MobileDesignResponsesSchema, t),
+      firstDraftSuggestProps: createContextEndpoint('/api/cortex/design/first_draft/suggest_props', StateGroupRequestsSchema, ComponentPropertiesResponsesSchema, t),
+      makeEdits: createContextStreamingEndpoint('/api/cortex/design/first_draft/make_edits', Z, K, t),
+      makeEditsCreateImage: createContextEndpoint('/api/cortex/design/first_draft/make_edits/images/create', PromptPanelSchema, DesignImageSchema, t),
+      removeBackgroundClipdrop: createContextEndpoint('/api/cortex/design/editor_ai/clipdrop_background_removal', ty, tb, t),
+      getTextImageEmbeds: createStandardEndpoint('/api/cortex/dev/inference/text_image_embeds', ea, es, t),
+      imageToShareJsx: createStandardEndpoint('/api/cortex/dev/inference/image_to_share_jsx', tv, tI, t),
+      guiclip: createStandardEndpoint('/api/cortex/dev/inference/guiclip', tE, tx, t),
+      uiParser: createStandardEndpoint('/api/cortex/dev/inference/ui_parser', UIParserRequestSchema, UIParserResponseSchema, t),
+      imagesEdit: createContextEndpoint('/api/cortex/design/editor_ai/images/edit', ImageCreationSchema, Base64ImageResponseSchema, t),
+      imagesFill: createContextEndpoint('/api/cortex/design/editor_ai/images/fill', tG, tV, t),
+      upscaleClipdrop: createContextEndpoint('/api/cortex/design/editor_ai/clipdrop_upscale', ClipdropUpscaleRequestSchema, ClipdropUpscaleResponseSchema, t),
+      firstDraftFineTune: createStreamingEndpoint('/api/cortex/dev/design/first_draft/fine_tune', FirstDraftFineTuneRequestSchema, FirstDraftFineTuneResponseSchema, t),
     },
     shared: {
-      makeEditsAgent: iX('/api/cortex/shared/make_edits_agent', iS, iT, t),
-      adjustText: iX('/api/cortex/shared/adjust_text', e4, e3, t),
-      assistantChat: iZ('/api/cortex/dev/shared/assistant/chat', et, ei, t),
-      aiAssistantChat: iX('/api/cortex/shared/ai_assistant_chat', chatSchema, aiAssistantChatSchema, t),
-      imageEvaluator: iY('/api/cortex/dev/shared/image_evaluator', en, er, t),
-      getViolationFix: iq('/api/cortex/shared/linting/get_violation_fix', ColorCornerRuleSchema, PropertyUpdatesSchema, t),
-      generateLivingDesigns: iX('/api/cortex/shared/living_designs', ChatExchangeSchema, figMakeRequestMessageSchema, t),
-      generateFigMake: iX('/api/cortex/shared/figmake', ChatExchangeSchema, figMakeRequestMessageSchema, t),
-      generationErrorLog: iq('/api/cortex/shared/generation_error_log', ia, z.object({
+      makeEditsAgent: createContextStreamingEndpoint('/api/cortex/shared/make_edits_agent', MakeEditsAgentRequestSchema, MakeEditsAgentResponseSchema, t),
+      adjustText: createContextStreamingEndpoint('/api/cortex/shared/adjust_text', AdjustTextRequestSchema, AdjustTextResponseSchema, t),
+      assistantChat: createStreamingEndpoint('/api/cortex/dev/shared/assistant/chat', chatRequestSchema, chatResponseSchema, t),
+      aiAssistantChat: createContextStreamingEndpoint('/api/cortex/shared/ai_assistant_chat', AiAssistantChatRequestSchema, AiAssistantChatResponseSchema, t),
+      imageEvaluator: createStandardEndpoint('/api/cortex/dev/shared/image_evaluator', ImageEvaluatorRequestSchema, ImageEvaluatorResponseSchema, t),
+      getViolationFix: createContextEndpoint('/api/cortex/shared/linting/get_violation_fix', ColorCornerRuleSchema, PropertyUpdatesSchema, t),
+      generateLivingDesigns: createContextStreamingEndpoint('/api/cortex/shared/living_designs', ChatExchangeSchema, figMakeRequestMessageSchema, t),
+      generateFigMake: createContextStreamingEndpoint('/api/cortex/shared/figmake', ChatExchangeSchema, figMakeRequestMessageSchema, t),
+      generationErrorLog: createContextEndpoint('/api/cortex/shared/generation_error_log', GenerationErrorLogRequestSchema, z.object({
         message: z.string(),
       }), t),
-      autosuggestText: iq('/api/cortex/shared/autosuggest_text', it, ii, t),
-      streamCMSCollection: iX('/api/cortex/shared/cms_collection', t1, t0, t),
-      extractLibraryCss: iq('/api/cortex/shared/design_system_imports/extract_library_css', iA, iy, t),
-      figmakeEnhancePrompt: iX('/api/cortex/shared/figmake/enhance_prompt', ib, iv, t),
+      autosuggestText: createContextEndpoint('/api/cortex/shared/autosuggest_text', AutosuggestTextRequestSchema, AutosuggestTextResponseSchema, t),
+      streamCMSCollection: createContextStreamingEndpoint('/api/cortex/shared/cms_collection', StreamCMSCollectionRequestSchema, StreamCMSCollectionResponseSchema, t),
+      extractLibraryCss: createContextEndpoint('/api/cortex/shared/design_system_imports/extract_library_css', ExtractLibraryCssRequestSchema, ExtractLibraryCssResponseSchema, t),
+      figmakeEnhancePrompt: createContextStreamingEndpoint('/api/cortex/shared/figmake/enhance_prompt', FigmakeEnhancePromptRequestSchema, FigmakeEnhancePromptResponseSchema, t),
     },
     foundry: {
-      ping: iq('/api/cortex/foundry/ping', ik, iU, t),
-      uploadCode: iq('/api/cortex/foundry/upload-code', iN, iP, t),
-      bundle: iq('/api/cortex/foundry/bundle', iD, iL, t),
-      sandbox: iq('/api/cortex/foundry/sandbox', iM, ij, t),
+      ping: createContextEndpoint('/api/cortex/foundry/ping', PingRequestSchema, PingResponseSchema, t),
+      uploadCode: createContextEndpoint('/api/cortex/foundry/upload-code', UploadCodeRequestSchema, UploadCodeResponseSchema, t),
+      bundle: createContextEndpoint('/api/cortex/foundry/bundle', BundleRequestSchema, BundleResponseSchema, t),
+      sandbox: createContextEndpoint('/api/cortex/foundry/sandbox', SandboxRequestSchema, SandboxResponseSchema, t),
     },
     internal: {
-      streamText: iZ('/api/cortex/dev/stream_text', tY, z.string(), t),
-      streamCMSCollection: iZ('/api/cortex/dev/stream_cms_collection', tY, t0, t),
-      generateText: iY('/api/cortex/dev/generate_text', tY, tq, t),
-      generateObject: iY('/api/cortex/dev/generate_object', t8, t9, t),
-      streamObject: iZ('/api/cortex/dev/stream_object', t8, ie, t),
-      generateImages: iY('/api/cortex/dev/generate_images', ImageGenerationRequestSchema, ImageGenerationResponseSchema, t),
-      generateContext: iZ('/api/cortex/dev/string_management/context/generate', toolChoiceSchema, z.string(), t),
-      textEmbed: iY('/api/cortex/dev/text_embed', t3, t6, t),
-      makeEditsDebugPrompt: iY('/api/cortex/dev/design/first_draft/make_edits/debug_prompt', X, Q, t),
+      streamText: createStreamingEndpoint('/api/cortex/dev/stream_text', GenerateTextRequestSchema, z.string(), t),
+      streamCMSCollection: createStreamingEndpoint('/api/cortex/dev/stream_cms_collection', GenerateTextRequestSchema, StreamCMSCollectionResponseSchema, t),
+      generateText: createStandardEndpoint('/api/cortex/dev/generate_text', GenerateTextRequestSchema, GenerateTextResponseSchema, t),
+      generateObject: createStandardEndpoint('/api/cortex/dev/generate_object', GenerateObjectRequestSchema, GenerateObjectResponseSchema, t),
+      streamObject: createStreamingEndpoint('/api/cortex/dev/stream_object', GenerateObjectRequestSchema, StreamObjectResponseSchema, t),
+      generateImages: createStandardEndpoint('/api/cortex/dev/generate_images', ImageGenerationRequestSchema, ImageGenerationResponseSchema, t),
+      generateContext: createStreamingEndpoint('/api/cortex/dev/string_management/context/generate', toolChoiceSchema, z.string(), t),
+      textEmbed: createStandardEndpoint('/api/cortex/dev/text_embed', TextEmbedRequestSchema, TextEmbedResponseSchema, t),
+      makeEditsDebugPrompt: createStandardEndpoint('/api/cortex/dev/design/first_draft/make_edits/debug_prompt', MakeEditsDebugPromptRequestSchema, MakeEditsDebugPromptResponseSchema, t),
     },
   }
 }
-export const yu = $$i20
+export const yu = createCortexAPI

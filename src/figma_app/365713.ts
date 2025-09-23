@@ -13,7 +13,7 @@ import { d as _$$d } from "../figma_app/429226";
 import { uint8ArrayToHex } from "../figma_app/930338";
 import { renderI18nText } from "../905/303541";
 import { Zl } from "../figma_app/311375";
-import { Ay, hI } from "../figma_app/432652";
+import { cortexAPI, StreamAsyncIteratorWithTimeout } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { Zh } from "../figma_app/2590";
 import { A } from "../905/202425";
@@ -310,12 +310,12 @@ async function M(e, t) {
     }, 6e4);
   });
   if ("EMPTY" === r.type) throw new gS("Empty selection");
-  let i = Ay.design.generateMagicLinkV2(r, {
+  let i = cortexAPI.design.generateMagicLinkV2(r, {
     ..._$$Ay(),
     clientLifecycleId: t
   });
   let a = await Promise.race([i, n]);
-  return new hI(a, 6e4);
+  return new StreamAsyncIteratorWithTimeout(a, 6e4);
 }
 function F(e, t) {
   let r = P(e);

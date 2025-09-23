@@ -181,7 +181,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { ci, zM } from "../figma_app/259678";
 import { S1, pF } from "../1156/867089";
 import { p as _$$p3 } from "../1156/298326";
-import { Ay as _$$Ay3 } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Vc } from "../figma_app/211694";
 import { Z as _$$Z4 } from "../1156/154963";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead, MenuSubText } from "../figma_app/860955";
@@ -5131,7 +5131,7 @@ export default function App() {
         n(!0);
         _clearChatError();
         try {
-          t = (await _$$Ay3.shared.figmakeEnhancePrompt({
+          t = (await cortexAPI.shared.figmakeEnhancePrompt({
             prompt: e
           }, {
             ..._$$Ay()

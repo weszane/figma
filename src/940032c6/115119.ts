@@ -636,7 +636,7 @@ import { b as _$$b0, yF as _$$yF, IL, MS, Rp, zQ } from '../figma_app/427309';
 import { hasContent } from '../figma_app/427318';
 import { B3, LE } from '../figma_app/427737';
 import { d as _$$d11, s as _$$s12 } from '../figma_app/429226';
-import { Ay as _$$Ay2 } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { JW } from '../figma_app/433317';
 import { Ij } from '../figma_app/433401';
 import { $0, dR as _$$dR, Ww } from '../figma_app/440875';
@@ -11834,7 +11834,7 @@ function uX() {
           featureType: t,
           ...r
         });
-        getFeatureFlags().bake_log_generation_errors && _$$Ay2.shared.generationErrorLog({
+        getFeatureFlags().bake_log_generation_errors && cortexAPI.shared.generationErrorLog({
           error: n.message.slice(0, 1e3),
           clientLifecycleId: r.clientLifecycleId,
           requestUuid: r.requestUuid ?? '',
@@ -16632,7 +16632,7 @@ class hm {
   }
 }
 async function hg(e) {
-  return await _$$Ay2.shared.streamCMSCollection({
+  return await cortexAPI.shared.streamCMSCollection({
     prompt: e
   }, {
     ..._$$Ay3()

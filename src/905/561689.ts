@@ -5,7 +5,7 @@ import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { trackFileEvent } from "../figma_app/314264";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay, sZ } from "../figma_app/948389";
 import { fk } from "../905/23253";
 import { JT } from "../figma_app/632248";
@@ -58,7 +58,7 @@ export let $$g1 = async ({
         if (h === ImageModelType.GPT_4O_IMAGE && (h = ImageProviderType.OPENAI_GPT_IMAGE_1), h && (l = h, !Object.values(ImageProviderType).includes(l))) throw new fk("Invalid edit image model type", {
           reportToSentry: !0
         });
-        a = (await Ay.design.imagesEdit({
+        a = (await cortexAPI.design.imagesEdit({
           ...(getFeatureFlags().aip_attach_reference_image ? {
             image_urls: i
           } : {
@@ -73,7 +73,7 @@ export let $$g1 = async ({
         if (h && (m = h, !Object.values(ImageModelType).includes(m))) throw new fk("Invalid make image model type", {
           reportToSentry: !0
         });
-        let e = await Ay.design.generateImages({
+        let e = await cortexAPI.design.generateImages({
           prompt: t,
           negativePrompt: "blurry, bad",
           cfgScale: 8,

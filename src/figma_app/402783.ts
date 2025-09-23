@@ -10,7 +10,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
 import { generateUUIDv4 } from "../905/871474";
 import { postUserFlag } from "../905/985254";
-import { Ay, nU, c6 } from "../figma_app/432652";
+import { cortexAPI, createNotesParserStream, StreamAsyncIterator } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
@@ -76,10 +76,10 @@ async function R({
   let P = null;
   let D = !1;
   try {
-    I = (await Ay.figjam.streamSummarize({
+    I = (await cortexAPI.figjam.streamSummarize({
       v: e,
       data: t
-    }, A)).pipeThrough(nU());
+    }, A)).pipeThrough(createNotesParserStream());
   } catch (e) {
     C(E$(e, ez.SUMMARIZE));
     return;
@@ -102,7 +102,7 @@ async function R({
   };
   let F = 0;
   try {
-    for await (let e of new c6(I)) {
+    for await (let e of new StreamAsyncIterator(I)) {
       v = e;
       let t = F % 5 == 0;
       P || (P = await M());

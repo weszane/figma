@@ -24,7 +24,7 @@ import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { vu } from "../figma_app/8833";
 import { Gc, nl, fN } from "../figma_app/456871";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { TJ } from "../figma_app/482495";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { Yh } from "../figma_app/357047";
@@ -114,7 +114,7 @@ export function $$J13(e, t, r, i) {
         text: i?.effectiveText ?? t
       };
     });
-    return Ay.slides.rewriteText({
+    return cortexAPI.slides.rewriteText({
       texts: d,
       tones: r.tones,
       productType: s ? ProductType.DESIGN : l ? ProductType.FIGJAM : ProductType.SLIDES

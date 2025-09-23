@@ -14,7 +14,7 @@ import { reportError } from "../905/11";
 import { trackFileEvent } from "../figma_app/314264";
 import { IL, Lg, SA, YK, Aq } from "../905/843553";
 import { logInfo } from "../905/714362";
-import { Ay, c6 } from "../figma_app/432652";
+import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { Zr } from "../figma_app/462456";
 import { JT } from "../figma_app/632248";
@@ -65,11 +65,11 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
   };
   let T = new Timer();
   T.start();
-  let k = await Ay.design.generateTextContentFromExamples({
+  let k = await cortexAPI.design.generateTextContentFromExamples({
     v: 0,
     data: s
   }, C);
-  for await (let i of (u.timeOfCortexRequest = T.getElapsedTime(), new c6(k))) {
+  for await (let i of (u.timeOfCortexRequest = T.getElapsedTime(), new StreamAsyncIterator(k))) {
     let s = atomStoreManager.get(w).get(n);
     if (!s || s.requestId !== a || s.status === S.CANCELLED || t.signal && t.signal.aborted) return !1;
     if (i.result) {

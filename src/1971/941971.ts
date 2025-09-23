@@ -40,7 +40,7 @@ import { permissionScopeHandler } from "../905/189185";
 import B from "../vendor/267721";
 import { trackEventAnalytics } from "../905/449184";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { J as _$$J2 } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
@@ -221,7 +221,7 @@ async function el(e, t) {
         }])),
         node: e
       })).map(async e => {
-        let t = async () => Ay.design.firstDraftIpConflict({
+        let t = async () => cortexAPI.design.firstDraftIpConflict({
           imageB64: (await e).b64
         }, {
           orgId: null,

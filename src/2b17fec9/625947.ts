@@ -485,7 +485,7 @@ import { aq as _$$aq2, Xt } from '../figma_app/399472';
 import { lJ as _$$lJ3 } from '../figma_app/407856';
 import { S4 } from '../figma_app/407993';
 import { uv as _$$uv, CR } from '../figma_app/419216';
-import { Ay as _$$Ay4 } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { cu as _$$cu, xY as _$$xY, Vv } from '../figma_app/439332';
 import { $n as _$$$n, wv as _$$wv4, K0, W1 } from '../figma_app/439493';
 import { dR as _$$dR2 } from '../figma_app/440875';
@@ -8956,7 +8956,7 @@ let us = async ({
   abortController: l
 }) => {
   let d = _$$Ay5();
-  await _$$Ay4.figjam.canvasIdeate({
+  await cortexAPI.figjam.canvasIdeate({
     nodeTextContents: t,
     nodeImageContents: i,
     selectedNodes: n,
@@ -8985,7 +8985,7 @@ let uo = async ({
   let c = _$$Ay5();
   let p = o.prompt;
   if (p += `\n${i.join('\n')}`, e) {
-    let e = await _$$Ay4.figjam.canvasEnhancePrompt({
+    let e = await cortexAPI.figjam.canvasEnhancePrompt({
       userPrompt: o.prompt,
       imageContents: t,
       outputType: 'image'
@@ -9062,7 +9062,7 @@ let ul = async ({
   abortController: c
 }) => {
   let u = _$$Ay5();
-  let p = await _$$Ay4.figjam.canvasMakeImageFromImages({
+  let p = await cortexAPI.figjam.canvasMakeImageFromImages({
     userPrompt: d.prompt,
     nodeTextContents: n,
     nodeImageContents: i,

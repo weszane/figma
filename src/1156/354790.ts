@@ -31,7 +31,7 @@ import { CortexErrorV2 } from '../figma_app/316567';
 import { wi, YZ, Z3 } from '../figma_app/325537';
 import { a5, Ho } from '../figma_app/337924';
 import { u as _$$u } from '../figma_app/353758';
-import { Ay as _$$Ay } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { openFileAtom, openFileKeyAtom } from '../figma_app/516028';
 import { nc, NJ, nM } from '../figma_app/570630';
@@ -296,12 +296,12 @@ async function et({
       let t = null;
       switch (e) {
         case lV.FIGMAKE:
-          t = _$$Ay.shared.generateFigMake;
+          t = cortexAPI.shared.generateFigMake;
           break;
         case lV.FIGMAKE_IN_DESIGN:
         case lV.CODE_IN_SITES:
         case lV.AI_ASSISTANT:
-          t = _$$Ay.shared.generateLivingDesigns;
+          t = cortexAPI.shared.generateLivingDesigns;
           break;
         default:
           noop(e);

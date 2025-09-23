@@ -7,7 +7,7 @@ import { Wc } from '../905/839044';
 import { Po } from '../905/859698';
 import { atomStoreManager } from '../figma_app/27355';
 import { Plugin } from '../figma_app/43951';
-import { Ay } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { WhiteboardAiTemplatePreviewCppBindings } from '../figma_app/763686';
 import { F9, LX } from '../figma_app/862108';
@@ -34,10 +34,10 @@ export async function $$_0({
 }) {
   let A;
   let y;
-  A = globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug ? await Ay.figjam.createTemplate({
+  A = globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug ? await cortexAPI.figjam.createTemplate({
     prompt: e,
     mode: Wc.PASSTHROUGH_XML_DEBUG_ONLY
-  }, h) : await Ay.figjam.createTemplate({
+  }, h) : await cortexAPI.figjam.createTemplate({
     prompt: e,
     mode: Wc.DESCRIPTION
   }, h);

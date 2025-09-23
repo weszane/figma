@@ -19,7 +19,7 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { uQ, NM } from "../figma_app/311375";
 import { getCurrentFileType } from "../figma_app/976749";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
 import { r as _$$r } from "../905/955316";
 import { getFullscreenFileKey } from "../figma_app/386952";
@@ -700,7 +700,7 @@ export function $$X0() {
         }
       },
       clientDependencies: {
-        streamResponse: e => Ay.shared.aiAssistantChat(e, {
+        streamResponse: e => cortexAPI.shared.aiAssistantChat(e, {
           ...sF({
             clientLifecycleId: c
           }),

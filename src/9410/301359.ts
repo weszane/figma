@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { mz } from "../figma_app/456871";
-import { Ay, c6 } from "../figma_app/432652";
+import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
 import { JT } from "../figma_app/632248";
@@ -75,8 +75,8 @@ let $$E0 = async ({
       texts: o,
       image: e
     };
-    let d = await Ay.slides.speakerNotes(l, r);
-    let m = new c6(d);
+    let d = await cortexAPI.slides.speakerNotes(l, r);
+    let m = new StreamAsyncIterator(d);
     if (t.signal.aborted) {
       _$$x({
         eventName: "stopped",

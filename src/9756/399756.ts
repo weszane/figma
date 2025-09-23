@@ -13,7 +13,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { JT } from "../figma_app/632248";
 import { RL, qy } from "../figma_app/862289";
 import { r } from "../905/189361";
@@ -71,7 +71,7 @@ async function d({
 }
 export async function $$E1(e) {
   let t;
-  let r = await Ay.design.firstDraftFineTune({
+  let r = await cortexAPI.design.firstDraftFineTune({
     userPrompt: e.userPrompt
   });
   let a = "";

@@ -64,7 +64,7 @@ import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManage
 import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError } from "../figma_app/316567";
 import { Z as _$$Z } from "../905/829242";
-import { Ay as _$$Ay, c6 } from "../figma_app/432652";
+import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { debugState } from "../905/407919";
 import { VisualBellIcon, VisualBellType } from "../905/576487";
@@ -959,11 +959,11 @@ let eU = async ({
     clientLifecycleId: i
   };
   try {
-    let e = await _$$Z(_$$Ay.slides.generateOutline({
+    let e = await _$$Z(cortexAPI.slides.generateOutline({
       description,
       deckOptions
     }, a), t.signal);
-    for await (let i of new c6(e)) {
+    for await (let i of new StreamAsyncIterator(e)) {
       if (t.signal.aborted) throw Error("Aborted");
       switch (i.type) {
         case "DECK_TITLE":
@@ -1091,14 +1091,14 @@ let tt = async ({
         }
       }
     }));
-    let t = await _$$Z(_$$Ay.slides.createDeckFromOutline({
+    let t = await _$$Z(cortexAPI.slides.createDeckFromOutline({
       outline,
       layouts: Object.fromEntries(Object.entries(layouts).map(([e, t]) => [e, {
         jsx: t.jsx,
         thumbnailPublicURL: t.thumbnailPublicURL
       }]))
     }, h), e.signal);
-    let i = new c6(t);
+    let i = new StreamAsyncIterator(t);
     let d = (AppStateTsApi?.canvasGrid().canvasGridArray.getCopy() ?? []).length;
     let x = d;
     let y = 0;
@@ -1293,7 +1293,7 @@ async function tl({
     ks(e);
   };
   try {
-    let e = await _$$Z(_$$Ay.shared.adjustText({
+    let e = await _$$Z(cortexAPI.shared.adjustText({
       action: {
         type: "REPLACE_SLIDE_CONTENT",
         slideContent: t,
@@ -1304,7 +1304,7 @@ async function tl({
       jsonMode: o.length > 1,
       surroundingContext: d.jsxStr
     }, n), r);
-    let l = new c6(e);
+    let l = new StreamAsyncIterator(e);
     let a = new Map();
     for await (let {
       delta,

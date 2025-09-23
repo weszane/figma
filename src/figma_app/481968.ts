@@ -8,7 +8,7 @@ import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
@@ -78,7 +78,7 @@ export function $$x1() {
       })), w.current = setInterval(() => {
         u.length === e.current.length + 3 ? u = e.current + "." : u += ".";
         permissionScopeHandler.system("update-cluster-placeholder-text", () => renameNode(p, u));
-      }, 1e3), Ay.figjam.cluster({
+      }, 1e3), cortexAPI.figjam.cluster({
         v,
         data,
         tokenCount: characterCount / 4

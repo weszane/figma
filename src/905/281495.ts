@@ -9,7 +9,7 @@ import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError } from "../905/11";
 import { trackFileEvent } from "../figma_app/314264";
-import { Ay as _$$Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { JB } from "../905/843553";
 import { fullscreenValue } from "../figma_app/455680";
@@ -307,7 +307,7 @@ export let $$F4 = async ({
       ..._$$Ay2(),
       clientLifecycleId: f
     };
-    let i = await _$$Ay.design.generateRenameLayers({
+    let i = await cortexAPI.design.generateRenameLayers({
       nodes: X,
       isMeteringRequest: !0,
       renameTopLayerOnly: !!ignoreDescendants

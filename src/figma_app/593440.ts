@@ -3,7 +3,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { base64ToUint8Array } from "../figma_app/930338";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
 let $$u3 = async ({
@@ -18,7 +18,7 @@ let $$u3 = async ({
     ..._$$Ay(),
     clientLifecycleId: n
   };
-  let a = Ay.design.generateVideo({
+  let a = cortexAPI.design.generateVideo({
     prompt: t,
     imageUrls: r
   }, i);
@@ -34,7 +34,7 @@ let $$u3 = async ({
       prompt: t
     }]
   })), setTimeout(async function e() {
-    let r = await Ay.design.pollVideo(c, i);
+    let r = await cortexAPI.design.pollVideo(c, i);
     if (!r.done) {
       setTimeout(e, 1e3);
       return;

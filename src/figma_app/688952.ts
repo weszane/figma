@@ -12,7 +12,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { openWindow } from "../905/508367";
 import { F as _$$F } from "../905/422355";
 import { TextWithTruncation } from "../905/984674";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { openFileKeyAtom } from "../figma_app/516028";
 export let $$y0 = registerModal(function (e) {
@@ -90,7 +90,7 @@ export let $$y0 = registerModal(function (e) {
       A(null);
       N(null);
       w(null);
-      let e = await Ay.foundry.sandbox({
+      let e = await cortexAPI.foundry.sandbox({
         fileKeyHash: k,
         forceProvision: O
       }, _$$Ay());
@@ -131,7 +131,7 @@ export let $$y0 = registerModal(function (e) {
         let e = Object.entries(t).find(([e]) => e.endsWith(".tsx") || e.endsWith(".ts"));
         r = e?.[1] || "";
       }
-      let n = await Ay.foundry.uploadCode({
+      let n = await cortexAPI.foundry.uploadCode({
         files: t,
         mainComponent: r,
         fileKeyHash: k,

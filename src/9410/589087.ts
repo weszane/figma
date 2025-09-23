@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { on } from "../figma_app/456871";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { i2 } from "../905/913055";
@@ -24,7 +24,7 @@ let w = ({
   texts: e,
   authInfo: t,
   surroundingContext: i
-}) => Ay.shared.adjustText({
+}) => cortexAPI.shared.adjustText({
   texts: e,
   action: {
     type: "SHORTEN"

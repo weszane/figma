@@ -11,7 +11,7 @@ import { reportError } from "../905/11";
 import { logWarning, logDebug } from "../905/714362";
 import { XHR } from "../905/910117";
 import { teamLibraryCache } from "../figma_app/80990";
-import { Ay as _$$Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
@@ -191,7 +191,7 @@ async function j({
         clientLifecycleId: o,
         shouldContinueStream: t,
         containingNodeId: c,
-        endpoint: _$$Ay.design.firstDraftCreateImage
+        endpoint: cortexAPI.design.firstDraftCreateImage
       });
     };
     let l = u ? u.current.logImageLoad(e) : e();
@@ -282,7 +282,7 @@ async function U({
         clientLifecycleId: c,
         shouldContinueStream: t,
         containingNodeId: u,
-        endpoint: _$$Ay.design.firstDraftCreateImage
+        endpoint: cortexAPI.design.firstDraftCreateImage
       });
     };
     let I = h ? h.current.logImageLoad(T) : T();

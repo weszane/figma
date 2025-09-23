@@ -2,7 +2,7 @@ import { getComponentInfoById, usagePropsToRawProps } from "../figma_app/664063"
 import { Z } from "../905/829242";
 import { z } from "../905/239603";
 import { gZ } from "../figma_app/964367";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { fn, ag } from "../figma_app/460003";
 import { B } from "../figma_app/325988";
 let c = ["TEXT", "VARIANT"];
@@ -151,7 +151,7 @@ export async function $$E1(e, t, r, a, s, l) {
   try {
     switch (E) {
       case "openai":
-        c = Ay.openai.completeChat({
+        c = cortexAPI.openai.completeChat({
           model: p[E],
           max_tokens: 3e3,
           temperature: 0,
@@ -163,7 +163,7 @@ export async function $$E1(e, t, r, a, s, l) {
         });
         break;
       case "google":
-        c = Ay.internal.generateObject({
+        c = cortexAPI.internal.generateObject({
           provider: "google",
           model: p[E],
           maxTokens: 3e3,

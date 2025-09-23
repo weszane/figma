@@ -10,7 +10,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
@@ -63,7 +63,7 @@ export function $$v0() {
       type: "ai-expand-mindmap-loading",
       timeoutOverride: 1 / 0
     }));
-    Ay.figjam.updateVisual({
+    cortexAPI.figjam.updateVisual({
       inputData: n,
       updateType: {
         visualType: "mindmap",

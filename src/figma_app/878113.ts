@@ -15,7 +15,7 @@ import g, { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { on, Gc } from "../figma_app/456871";
 import { trackFileEvent } from "../figma_app/314264";
-import { c6 } from "../figma_app/432652";
+import { StreamAsyncIterator } from "../figma_app/432652";
 import { Ay, Gx } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
 import { Mo, i2 } from "../905/913055";
@@ -233,7 +233,7 @@ export async function $$M0({
       targetMap: Q,
       surroundingContext: n
     }), i.stop(), X.timeOfCortexRequest = i.getElapsedTime(), t.signal.aborted || !getSingletonSceneGraph().getCurrentPage()) return;
-    let u = new c6(ei);
+    let u = new StreamAsyncIterator(ei);
     let _ = new Map();
     let g = !0;
     let A = getFeatureFlags().aip_text_undo_midstream_fix;

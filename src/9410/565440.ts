@@ -5,7 +5,7 @@ import { R } from "../9410/46722";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { B as _$$B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { wC, JT, pY } from "../figma_app/632248";
@@ -180,7 +180,7 @@ export function $$A0() {
       parameters: t,
       authInfo: i,
       surroundingContext: r
-    }) => Ay.shared.adjustText({
+    }) => cortexAPI.shared.adjustText({
       texts: e,
       action: {
         type: "TRANSLATE",

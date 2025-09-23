@@ -36,7 +36,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { B as _$$B } from "../figma_app/821179";
 import { P as _$$P } from "../3592/617429";
 import { hB } from "../figma_app/609511";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { xg, XT, Co, Yz } from "../figma_app/677646";
 let I = atom(`- IMPORTANT: Do not refactor or modify the code, unless following a specific instruction from Figma or the user.
 - Remove node-id attributes from the code
@@ -68,7 +68,7 @@ function U() {
   return e;
 }
 async function q(e, t) {
-  return await Ay.internal.streamText({
+  return await cortexAPI.internal.streamText({
     ...t,
     messages: e
   });

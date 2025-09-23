@@ -71,7 +71,7 @@ import { v0, Hn, Wb, Gd, M0 } from "../9410/341455";
 import { S as _$$S, E as _$$E } from "../figma_app/999099";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getTrackingSessionId } from "../905/471229";
-import { Ay, c6 } from "../figma_app/432652";
+import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
@@ -704,7 +704,7 @@ async function eZ({
   let n = [];
   let a = new eX(r, i, () => n.shift());
   try {
-    let i = await Ay.slides.createSlides({
+    let i = await cortexAPI.slides.createSlides({
       version: "1.1",
       data: e
     }, {
@@ -721,7 +721,7 @@ async function eZ({
     }
     let o = [];
     let l = !1;
-    for await (let e of new c6(i)) {
+    for await (let e of new StreamAsyncIterator(i)) {
       if (!a.isActive()) return;
       let i = e;
       l || "TITLE" !== i.slideType || (l = !0, t(i.content.find(e => "h1" === e.type)?.content || ""));

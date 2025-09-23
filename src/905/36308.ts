@@ -194,7 +194,7 @@ import { c1 } from '../figma_app/357047';
 import { ce } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
 import { k1 } from '../figma_app/407767';
-import { Ay as _$$Ay2 } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
@@ -3178,7 +3178,7 @@ function t1(e) {
         height: t.box.height
       }
     }))
-  }) : _$$Ay2.design.sectionDetection({
+  }) : cortexAPI.design.sectionDetection({
     image: r,
     imageCoordinates: t
   }, _$$Ay3());

@@ -337,7 +337,7 @@ import { g as _$$g6 } from '../figma_app/398051';
 import { sn as _$$sn, hf } from '../figma_app/407856';
 import { figmaReady } from '../figma_app/415217';
 import { bi as _$$bi, hg } from '../figma_app/425489';
-import { Ay as _$$Ay5 } from '../figma_app/432652';
+import { cortexAPI } from '../figma_app/432652';
 import { eY as _$$eY2 } from '../figma_app/442259';
 import { U as _$$U } from '../figma_app/449815';
 import { A0, R4 } from '../figma_app/454974';
@@ -3532,7 +3532,7 @@ async function sq(e, t, i) {
       'childrenNodes' in t && (i.children = t.childrenNodes.map(e));
       return i;
     }(c);
-    let p = await _$$Ay5.design.generateSmartPaste({
+    let p = await cortexAPI.design.generateSmartPaste({
       nodeRepresentation: u,
       tabularData: e
     }, _$$Ay6());
@@ -8365,7 +8365,7 @@ let lX = class e extends sP(sN(sR)) {
   async pasteMermaidAsDiagram(e) {
     let t = _$$Ay6();
     try {
-      let i = await _$$Ay5.figjam.createVisual({
+      let i = await cortexAPI.figjam.createVisual({
         prompt: '',
         visualType: 'diagram',
         directMermaidText: e

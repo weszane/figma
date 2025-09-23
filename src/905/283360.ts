@@ -3,7 +3,7 @@ import { LinterCppBindings, VariableResolvedDataType } from "../figma_app/763686
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
 import { oy } from "../figma_app/964367";
-import { Ay } from "../figma_app/432652";
+import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/442915";
@@ -72,7 +72,7 @@ export async function $$f1(e, t, i) {
   let u = {
     ..._$$Ay()
   };
-  let p = await Ay.shared.getViolationFix({
+  let p = await cortexAPI.shared.getViolationFix({
     targetNodeGuid: e.guid,
     inputJsx: a.jsxStr,
     ruleType: MissingRuleType.MISSING_COLOR_TOKEN,
