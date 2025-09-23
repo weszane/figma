@@ -1,8 +1,8 @@
-import { QO } from "../905/49792";
+import { handleShadowSuggestionOnPaste } from "../905/49792";
 export let $$n0;
 class a {
   logShadowReadSuggestionsOnPaste(e, t) {
-    QO(e, t);
+    handleShadowSuggestionOnPaste(e, t);
   }
 }
 export function $$s1() {

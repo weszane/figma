@@ -44,7 +44,7 @@ import { getCommonLibraryKey, memoizedProcessComponentsAndStateGroups, getFullCo
 import { Fl } from "../figma_app/236178";
 import { FX } from "../figma_app/12491";
 import { NX, k9 as _$$k3, sF } from "../figma_app/777207";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { t as _$$t3 } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
 import { u as _$$u } from "../905/290607";
@@ -64,7 +64,7 @@ import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { _A } from "../figma_app/65182";
-import { CK } from "../figma_app/517115";
+import { useUUIDSubscription } from "../figma_app/517115";
 import { j as _$$j2 } from "../figma_app/904819";
 import { M as _$$M } from "../905/771870";
 import { rp, PI } from "../figma_app/703988";
@@ -84,7 +84,7 @@ import { Dr, Wx, jB, Xx, Kk, OK, Wu, pf } from "../905/221848";
 import { S as _$$S } from "../905/459477";
 import { Pk, sX, fn } from "../905/893698";
 import { p as _$$p, c as _$$c } from "../905/875042";
-import { Ml } from "../905/92359";
+import { generateSwappingInstanceKey } from "../905/92359";
 import { jkd } from "../figma_app/27776";
 import { Tv, B_, kc, Kv, je, FK, k2, _M, y7, uR, qv, Hn, D0 } from "../905/559105";
 var b = y;
@@ -187,7 +187,7 @@ function eW(e) {
     isListView: e.instanceSwapPickerListLayout,
     loadingState: e.loadingState
   }));
-  let e2 = useAtomWithSubscription(qp);
+  let e2 = useAtomWithSubscription(filesByLibraryKeyAtom);
   let e5 = useSelector(e => e.universalInsertModal.showing);
   let e3 = openFile.key;
   let e4 = useOpenFileLibraryKey();
@@ -479,7 +479,7 @@ function eW(e) {
       item
     } = e;
     if (tp && !multiselect) {
-      let e = Ml(tp, Object.keys(sceneGraphSelection));
+      let e = generateSwappingInstanceKey(tp, Object.keys(sceneGraphSelection));
       if (isLoading(loadingState, e)) return item.node_id === tp.node_id && compareLibraryItemsAlias(item, tp);
     }
     return selectedItems.some(e => item.type === PrimaryWorkflowEnum.COMPONENT && e.type === PrimaryWorkflowEnum.COMPONENT ? !!item.component_key && item.component_key === e.component_key || !item.component_key && !e.component_key && item.node_id === e.node_id : item.type === PrimaryWorkflowEnum.STATE_GROUP && e.type === PrimaryWorkflowEnum.STATE_GROUP && (!!item.key && item.key === e.key || !item.key && !e.key && item.node_id === e.node_id));
@@ -508,7 +508,7 @@ function eW(e) {
     sourceForTracking: "Instance Swap Picker"
   });
   let tY = useSubscribedLibraryKeys();
-  let t$ = CK();
+  let t$ = useUUIDSubscription();
   let tX = useCallback((e, r, n, i, a) => {
     if (!e3) return;
     if (multiselect && i) {
@@ -523,7 +523,7 @@ function eW(e) {
     }
     let s = e.altKey;
     tp && e8(loadingStateDelete({
-      key: Ml(tp, Object.keys(sceneGraphSelection))
+      key: generateSwappingInstanceKey(tp, Object.keys(sceneGraphSelection))
     }));
     t_(r.item);
     tK({
@@ -777,7 +777,7 @@ function eW(e) {
   });
   let t4 = useMemo(() => e9 ? publishedLibraryItemsByLibraryKey[e9] ?? null : null, [e9, publishedLibraryItemsByLibraryKey]);
   let t8 = function (e, t, r, n) {
-    let a = useAtomWithSubscription(qp);
+    let a = useAtomWithSubscription(filesByLibraryKeyAtom);
     let s = useMemoStable(() => t ? new Set(t.map(e => getAssetKey(e))) : [], [t]);
     let o = useMemoStable(() => {
       Object.keys(a);

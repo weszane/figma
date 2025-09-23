@@ -10,7 +10,7 @@ import { N } from "../905/482239";
 import { getUserId } from "../905/372672";
 import { FrecencyHistoryView } from "../figma_app/43951";
 import { I as _$$I } from "../905/454965";
-import { h8 } from "../figma_app/144974";
+import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { l as _$$l } from "../905/131889";
 import { B } from "../905/108119";
 import { n as _$$n } from "../905/548236";
@@ -181,7 +181,7 @@ export function $$v1() {
   }), [e, t, r, i]);
   return {
     addFrecencyUsage: useCallback((e, t) => {
-      if (!h8()) return;
+      if (!isQaSearchFrecencyEnabled()) return;
       let r = _$$n(e);
       s.addUsage(r, t);
     }, [s]),

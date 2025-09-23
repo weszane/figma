@@ -30,7 +30,7 @@ import { FDocumentType } from "../905/862883";
 import { D as _$$D } from "../figma_app/268271";
 import { PI, rp } from "../figma_app/703988";
 import { r6 } from "../905/542608";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { p as _$$p } from "../905/42189";
 import { e as _$$e } from "../1291/265452";
 import { ik, mk, cX, hY } from "../figma_app/920333";
@@ -39,7 +39,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { lW } from "../figma_app/850075";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { lX } from "../figma_app/588397";
 import { b as _$$b } from "../905/635568";
 import { sO } from "../figma_app/21029";
@@ -63,7 +63,7 @@ let J = {
   }
 };
 function Z(e) {
-  let t = useAtomWithSubscription(qp);
+  let t = useAtomWithSubscription(filesByLibraryKeyAtom);
   let s = e.libraryKey ? t[e.libraryKey]?.name : void 0;
   let n = lW(!!e.showAttribution);
   let r = e.title ?? s ?? "";
@@ -307,7 +307,7 @@ export function $$eo1({
   let ed = el.length > 0 || !s;
   let ec = (!V.query || !e) && getInitialOptions().user_data;
   let em = cX().setSelectedCategory;
-  let e_ = !q || !fileVersion || U && !isLoaded(loadingState, yD(q.key));
+  let e_ = !q || !fileVersion || U && !isLoaded(loadingState, generateRetrievingSubscribedComponentsKey(q.key));
   let eg = hY();
   let {
     onToggleLibraryModal
@@ -487,7 +487,7 @@ export function $$ec0() {
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));
-  let o = t && fileVersion && isNullOrFailure(loadingState, yD(t.key));
+  let o = t && fileVersion && isNullOrFailure(loadingState, generateRetrievingSubscribedComponentsKey(t.key));
   useEffect(() => {
     o && e(zK());
   }, [e, o]);

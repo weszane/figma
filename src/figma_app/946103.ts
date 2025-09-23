@@ -1,51 +1,96 @@
-import { r as _$$r } from "../905/882131";
-export class $$$$i1 extends Event {
-  constructor(e, t) {
-    if (!t || !_$$r.includes(t.previousPriority)) throw TypeError(`Invalid task priority: '${t.previousPriority}'`);
-    super(e);
-    this.previousPriority = t.previousPriority;
+const VALID_PRIORITIES = ['user-blocking', 'user-visible', 'background'] as const
+type TaskPriority = typeof VALID_PRIORITIES[number]
+
+/**
+ * PriorityChange event for task priority changes
+ * (Original name: $$$$i1)
+ */
+export class TaskPriorityChangeEvent extends Event {
+  readonly previousPriority: TaskPriority
+
+  constructor(type: string, init: { previousPriority: TaskPriority }) {
+    if (!init || !VALID_PRIORITIES.includes(init.previousPriority)) {
+      throw new TypeError(`Invalid task priority: '${init.previousPriority}'`)
+    }
+    super(type)
+    this.previousPriority = init.previousPriority
   }
 }
-export class $$a0 extends AbortController {
-  constructor(e = {}) {
-    if (super(), null == e && (e = {}), "object" != typeof e) throw TypeError("'init' is not an object");
-    let t = void 0 === e.priority ? "user-visible" : e.priority;
-    if (!_$$r.includes(t)) throw TypeError(`Invalid task priority: '${t}'`);
-    this.priority_ = t;
-    this.isPriorityChanging_ = !1;
-    (function (e) {
-      let t = e.signal;
-      Object.defineProperties(t, {
-        priority: {
-          get: function () {
-            return e.priority_;
-          },
-          enumerable: !0
-        },
-        onprioritychange: {
-          value: null,
-          writable: !0,
-          enumerable: !0
-        }
-      });
-      t.addEventListener("prioritychange", e => {
-        t.onprioritychange && t.onprioritychange(e);
-      });
-    })(this);
+
+/**
+ * PriorityController for managing task priorities
+ * (Original name: $$a0)
+ */
+export class TaskController extends AbortController {
+  private priority_: TaskPriority
+  private isPriorityChanging_: boolean
+
+  constructor(init: { priority?: TaskPriority } = {}) {
+    super()
+
+    if (typeof init !== 'object') {
+      throw new TypeError('\'init\' is not an object')
+    }
+
+    const priority = init.priority ?? 'user-visible'
+
+    if (!VALID_PRIORITIES.includes(priority)) {
+      throw new TypeError(`Invalid task priority: '${priority}'`)
+    }
+
+    this.priority_ = priority
+    this.isPriorityChanging_ = false
+
+    // Setup signal properties
+    const signal = this.signal as any
+    Object.defineProperties(signal, {
+      priority: {
+        get: () => this.priority_,
+        enumerable: true,
+      },
+      onprioritychange: {
+        value: null,
+        writable: true,
+        enumerable: true,
+      },
+    })
+
+    signal.addEventListener('prioritychange', (event: TaskPriorityChangeEvent) => {
+      if (signal.onprioritychange) {
+        signal.onprioritychange(event)
+      }
+    })
   }
-  setPriority(e) {
-    if (!_$$r.includes(e)) throw TypeError("Invalid task priority: " + e);
-    if (this.isPriorityChanging_) throw new DOMException("", "NotAllowedError");
-    if (this.signal.priority === e) return;
-    this.isPriorityChanging_ = !0;
-    let t = this.priority_;
-    this.priority_ = e;
-    let r = new $$$$i1("prioritychange", {
-      previousPriority: t
-    });
-    this.signal.dispatchEvent(r);
-    this.isPriorityChanging_ = !1;
+
+  /**
+   * Sets the priority of the controller
+   * @param priority - The new priority to set
+   */
+  setPriority(priority: TaskPriority): void {
+    if (!VALID_PRIORITIES.includes(priority)) {
+      throw new TypeError(`Invalid task priority: ${priority}`)
+    }
+
+    if (this.isPriorityChanging_) {
+      throw new DOMException('', 'NotAllowedError')
+    }
+
+    if (this.signal.priority === priority) {
+      return
+    }
+
+    this.isPriorityChanging_ = true
+    const previousPriority = this.priority_
+    this.priority_ = priority
+
+    const priorityChangeEvent = new TaskPriorityChangeEvent('prioritychange', {
+      previousPriority,
+    })
+
+    this.signal.dispatchEvent(priorityChangeEvent)
+    this.isPriorityChanging_ = false
   }
 }
-export const i = $$a0;
-export const w = $$$$i1;
+
+export const i = TaskController
+export const w = TaskPriorityChangeEvent

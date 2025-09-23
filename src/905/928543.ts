@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/217163";
 import { LibraryAgeEnum, getDraftsSidebarString, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { e0 } from "../905/696396";
-import { PT } from "../905/669853";
+import { DSAApiServiceInstance } from "../905/669853";
 import { c as _$$c } from "../905/167005";
 import { i as _$$i } from "../905/565139";
 import { o as _$$o } from "../905/918279";
@@ -118,7 +118,7 @@ let $$q1 = memo(function (e) {
   }));
   let [i, a] = useState(null);
   useEffect(() => {
-    PT.getStateGroupComponents({
+    DSAApiServiceInstance.getStateGroupComponents({
       startTs: G5(_$$o[Y]).toString(),
       endTs: G5(0).toString(),
       fv: `${fileVersion || 0}`,
@@ -287,7 +287,7 @@ class Q extends PureComponent {
     };
   }
   componentDidMount() {
-    PT.getComponentFileUsage({
+    DSAApiServiceInstance.getComponentFileUsage({
       orgId: this.props.orgId || "",
       fv: `${this.props.fileVersion || 0}`,
       componentKey: this.props.component.component_key
@@ -419,7 +419,7 @@ class ee extends PureComponent {
     };
   }
   componentDidMount() {
-    this.props.item.type === PrimaryWorkflowEnum.COMPONENT ? PT.getComponent({
+    this.props.item.type === PrimaryWorkflowEnum.COMPONENT ? DSAApiServiceInstance.getComponent({
       fv: `${this.props.fileVersion || 0}`,
       componentKey: this.props.item.component_key
     }).then(e => {
@@ -427,7 +427,7 @@ class ee extends PureComponent {
       this.setState({
         statsData: t
       });
-    }).catch(() => {}) : PT.getStateGroup({
+    }).catch(() => {}) : DSAApiServiceInstance.getStateGroup({
       fv: `${this.props.fileVersion || 0}`,
       stateGroupKey: this.props.item.key
     }).then(e => {

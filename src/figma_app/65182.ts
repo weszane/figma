@@ -10,7 +10,7 @@ import { getFeatureFlags } from '../905/601108';
 import { uN } from '../figma_app/338442';
 import { selectContainingStateOrSymbolId } from '../figma_app/505098';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
-import { c5 } from '../figma_app/645694';
+import { selectMergedAssets } from '../figma_app/645694';
 import { getAssetKeyForPublish, findAssetForNode } from '../figma_app/646357';
 import { ComponentPropType, ComponentType, Fullscreen } from '../figma_app/763686';
 import { FZ, Qp } from '../figma_app/803787';
@@ -138,7 +138,7 @@ export function $$L9(e) {
 }
 export function $$P7(e, t) {
   let r = useSelector(FZ);
-  let a = useSelector(c5);
+  let a = useSelector(selectMergedAssets);
   let [s, o] = useState(() => {
     let n = [];
     if (typeof e == 'string') {

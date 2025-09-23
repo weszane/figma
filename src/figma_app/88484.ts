@@ -9,7 +9,7 @@ import { uo as _$$uo, nF } from "../905/466026";
 import { trackMultipleFileEvent } from "../figma_app/314264";
 import { FileBrowserRecentFilesByEditorTypeView, FileBrowserRecentFilesView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { f as _$$f } from "../905/289690";
 import { Ip } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
@@ -89,7 +89,7 @@ export function $$v2({
   _editorTypeRaw: e
 } = {}) {
   let t = "string" == typeof e;
-  let [r] = IT(t ? FileBrowserRecentFilesByEditorTypeView.Query({
+  let [r] = setupResourceAtomHandler(t ? FileBrowserRecentFilesByEditorTypeView.Query({
     _editorTypeRaw: e
   }) : FileBrowserRecentFilesView.Query({}));
   let i = useMemo(() => r.transform(e => "recentFiles2ByEditorType" in e.currentUser ? e.currentUser.recentFiles2ByEditorType : e.currentUser.recentFiles2), [r]);

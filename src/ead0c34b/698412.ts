@@ -10,7 +10,7 @@ import { N } from "../905/809096";
 import { getI18nString } from "../905/303541";
 import { delay } from "../905/236856";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 function f() {
   return getI18nString("billing.purchase_ai_credits.modal_hidden_title");
 }
@@ -37,7 +37,7 @@ let I = liveStoreInstance.Query({
 function C(e) {
   let r = useModalManager(e);
   return "loaded" !== function () {
-    let [e] = IT(I({}));
+    let [e] = setupResourceAtomHandler(I({}));
     let [r] = handleSuspenseRetainRelease(e);
     useEffect(() => {
       "loaded" !== r.status && reportError(_$$e.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));

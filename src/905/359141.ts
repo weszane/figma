@@ -20,7 +20,7 @@ import { ServiceCategories as _$$e2 } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { h as _$$h } from '../905/207101';
 import { c as _$$c2 } from '../905/210851';
-import { O as _$$O } from '../905/221694';
+import { libraryKeyMapAtom } from '../905/221694';
 import { V as _$$V2 } from '../905/223767';
 import { B as _$$B } from '../905/224000';
 import { Label } from '../905/270045';
@@ -36,7 +36,7 @@ import { H as _$$H, S as _$$S2 } from '../905/348433';
 import { UpgradeAction } from '../905/370443';
 import { _ as _$$_ } from '../905/381235';
 import { f as _$$f } from '../905/405189';
-import { bj as _$$bj } from '../905/420347';
+import { useLibraries } from '../905/420347';
 import { I as _$$I } from '../905/423735';
 import { Link } from '../905/438674';
 import { J as _$$J2 } from '../905/445197';
@@ -70,7 +70,6 @@ import { x as _$$x } from '../905/695363';
 import { m as _$$m } from '../905/701558';
 import { compareLibraryKeyWithString } from '../905/709171';
 import { Yt } from '../905/712714';
-import { IT } from '../905/713695';
 import { TabLoop } from '../905/718764';
 import { gB, Xm } from '../905/723791';
 import { W as _$$W2 } from '../905/729905';
@@ -97,7 +96,7 @@ import { lQ } from '../905/934246';
 import { Xm as _$$Xm } from '../905/935570';
 import { styleBuilderInstance } from '../905/941192';
 import { $3 } from '../905/946937';
-import { qp } from '../905/977779';
+import { filesByLibraryKeyAtom } from '../905/977779';
 import { h1 } from '../905/986103';
 import { LOADING_STATUS } from '../905/989992';
 import { h as _$$h3 } from '../905/994594';
@@ -283,7 +282,7 @@ function es({
   let s = isTeamLibrary(i) ? i.team_id : null;
   let o = getParentOrgId();
   let l = mq.useTabContentsWidth();
-  let [d] = IT(Yt(a));
+  let [d] = setupResourceAtomHandler(Yt(a));
   let c = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: a
   });
@@ -2016,7 +2015,7 @@ function tW({
   let o = function () {
     let e = useOpenFileLibraryKey();
     let t = useCurrentFileKey();
-    let i = _$$bj([assertNotNullish(e)], {
+    let i = useLibraries([assertNotNullish(e)], {
       revalidateOnMount: !0
     });
     let n = eu();
@@ -3297,7 +3296,7 @@ function nb({
       let r = n(function (e, t) {
         let i = Yy(t);
         return atom(t => {
-          let n = t(qp);
+          let n = t(filesByLibraryKeyAtom);
           return t(i).map(t => ({
             ...t,
             movedFromFileName: i0(t.library_key, [t], n, e)
@@ -3307,7 +3306,7 @@ function nb({
       let a = n(function (e, t) {
         let i = Bw(t);
         return atom(t => {
-          let n = t(qp);
+          let n = t(filesByLibraryKeyAtom);
           return t(i).map(t => ({
             ...t,
             movedFromFileName: i0(t.library_key, Object.values(t.newStateKeyToOutdatedItems), n, e)
@@ -3318,8 +3317,8 @@ function nb({
       let l = n(_$$jk(i));
       let d = n(kK(i));
       let c = n(openFileLibraryKeyAtom);
-      let p = n(qp);
-      let m = n(_$$O);
+      let p = n(filesByLibraryKeyAtom);
+      let m = n(libraryKeyMapAtom);
       let h = {};
       let g = (t, i) => {
         let n = getAssetLibraryKey(i);

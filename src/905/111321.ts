@@ -1,14 +1,12 @@
 import type { Atom, PrimitiveAtom } from 'jotai'
 import type { Store } from 'redux'
 import { atom } from 'jotai'
-import { noop } from 'lodash-es'
+import { atomWithDefault } from 'jotai/utils'
 
+import { noop } from 'lodash-es'
 import { createActionCreator } from '../905/73481'
 import { setupSubscriptionAtom } from '../905/142517'
 import { setupAtomWithInitialValue } from '../905/623391'
-import { atomWithDefault } from '../vendor/812047'
-
-
 
 /**
  * Sets up a Redux-integrated atom with initial value and reducer.
@@ -83,7 +81,7 @@ export function createAtomWithRedux<T>(storeAtom: () => Store<T>, initialValue: 
  * @param options - Options for notification
  * @returns The subscription atom with getStore method
  */
-export function createReduxSubscriptionAtom<T, S>(
+export function createReduxSubscriptionAtom<T = any, S = any>(
   storeAtom: () => Store<S> & { subscribeImmediate?: (listener?: () => any) => () => void } | null,
   selector: (state: S) => T,
   options: { notifyImmediate?: boolean } = {},
@@ -108,9 +106,10 @@ export function createReduxSubscriptionAtom<T, S>(
       return store.subscribe(callback)
     },
   })
-  return Object.assign(atomWithDefault(() => subscriptionAtom), {
+  const res =  Object.assign(atomWithDefault(() => subscriptionAtom), {
     getStore: storeAtom,
   })
+  return res as Atom<T> & { getStore: () => Store<S> | null }
 }
 
 // Refactored exports to match new function names

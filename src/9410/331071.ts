@@ -13,7 +13,7 @@ import { A as _$$A10 } from '../905/51743';
 import { E as _$$E3 } from '../905/53857';
 import { KeyCodes, ModifierKeyCodes } from '../905/63728';
 import { Ef } from '../905/81982';
-import { t_ as _$$t_, vx } from '../905/91038';
+import { fileByKeySelector, fileVersionSelector } from '../905/91038';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { U as _$$U } from '../905/103637';
@@ -177,7 +177,7 @@ import { BY, Jc, Sn } from '../905/946805';
 import { b as _$$b3 } from '../905/946806';
 import { a as _$$a4 } from '../905/964520';
 import { IMAGE_TYPE_VALUES } from '../905/966582';
-import { qp } from '../905/977779';
+import { filesByLibraryKeyAtom } from '../905/977779';
 import { v as _$$v3 } from '../905/981847';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
@@ -257,7 +257,7 @@ import { f as _$$f } from '../figma_app/109947';
 import { O as _$$O2 } from '../figma_app/114128';
 import { dP as _$$dP } from '../figma_app/119475';
 import { I as _$$I2 } from '../figma_app/130633';
-import { h8, KK } from '../figma_app/144974';
+import { isQaSearchFrecencyEnabled, isFirstDraftMakeChangesEnabled } from '../figma_app/144974';
 import { I9, Vr } from '../figma_app/151869';
 import { z as _$$z2 } from '../figma_app/153551';
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget, ManifestEditorType } from '../figma_app/155287';
@@ -311,7 +311,7 @@ import { isLlamaEnabledForOrg, isAIFeaturesEnabledForCurrentUser } from '../figm
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { rH as _$$rH } from '../figma_app/467741';
-import { iR as _$$iR, _i, yZ } from '../figma_app/476572';
+import { intersection, difference, equals } from '../figma_app/476572';
 import { s as _$$s5 } from '../figma_app/478542';
 import { nearlyEqual } from '../figma_app/492908';
 import { YT } from '../figma_app/506549';
@@ -819,7 +819,7 @@ async function ty(e, t) {
 async function tb(e) {
   let t = debugState.getState();
   let i = selectOpenFile(t);
-  let r = vx(t);
+  let r = fileVersionSelector(t);
   if (!i || r == null) throw new Error('No open file or file version found');
   let n = 1;
   for (; !Wg(debugState.getState()) && n <= 50;) {
@@ -831,7 +831,7 @@ async function tb(e) {
     type: _$$I2.ALL
   };
   let s = isDesignOrIllustration(getEditorTypeFromView(_$$h4(t)));
-  let o = atomStoreManager.get(qp);
+  let o = atomStoreManager.get(filesByLibraryKeyAtom);
   t = debugState.getState();
   let l = {
     type: 'input-text',
@@ -843,7 +843,7 @@ async function tb(e) {
     inDesignEditor: s,
     fileVersion: r,
     currentOrgId: resolveFileParentOrgId(t),
-    fileByKey: _$$t_(t),
+    fileByKey: fileByKeySelector(t),
     libraryByLibraryKey: o,
     includeVisualAssets: !1,
     usedAssetKeys: getSubscribedAssetKeys(t, debugState.dispatch)
@@ -3132,7 +3132,7 @@ function af(e) {
       });
     case 2:
       let z = [];
-      KK() && !getFeatureFlags().first_draft_use_gemini && (z.push({
+      isFirstDraftMakeChangesEnabled() && !getFeatureFlags().first_draft_use_gemini && (z.push({
         type: _$$is.UNDO_MAKE_CHANGES,
         callback: () => {
           b(0);
@@ -3710,7 +3710,7 @@ function ak(e) {
             if (l?.type !== 'FRAME' || l.size.x < 100 || l.size.y < 20) continue;
             let a = FirstDraftHelpers.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
             let s = [l, ...a.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e)];
-            let c = Array.from(_i(new Set(e.childrenGuids), new Set([l.guid, ...a])));
+            let c = Array.from(difference(new Set(e.childrenGuids), new Set([l.guid, ...a])));
             if (s.length >= 2 && s.length >= e.childCount - 1 && c.length <= 1) {
               let a = c[0];
               if (a) {
@@ -4449,9 +4449,9 @@ let aJ = async ({
   }
   let l = [];
   for (let e of a) {
-    let t = _i(e.expectedComponents, e.components).size;
-    let i = _i(e.components, e.expectedComponents).size;
-    let r = _$$iR(e.expectedComponents, e.components).size;
+    let t = difference(e.expectedComponents, e.components).size;
+    let i = difference(e.components, e.expectedComponents).size;
+    let r = intersection(e.expectedComponents, e.components).size;
     l.push({
       falseNegativeCount: t,
       falsePositiveCount: i,
@@ -4501,7 +4501,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
       blendMode: 'NORMAL'
     }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
-      if (!yZ(t.expectedComponents, t.components)) {
+      if (!equals(t.expectedComponents, t.components)) {
         let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
         let n = getSingletonSceneGraph().get(i.get(t.node.guid));
         if (!n) throw new Error('Failed to clone node');
@@ -4527,7 +4527,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
         };
         let s = new Map();
         for (let [e, t] of i.entries()) s.set(t, e);
-        for (let e of _i(t.expectedComponents, t.components)) {
+        for (let e of difference(t.expectedComponents, t.components)) {
           let t = i.get(e);
           a(getSingletonSceneGraph().get(t), {
             r: 1,
@@ -4536,7 +4536,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
             a: 1
           });
         }
-        for (let e of _i(t.components, t.expectedComponents)) {
+        for (let e of difference(t.components, t.expectedComponents)) {
           let t = i.get(e);
           a(getSingletonSceneGraph().get(t), {
             r: 0,
@@ -4545,7 +4545,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
             a: 1
           });
         }
-        for (let e of _$$iR(t.expectedComponents, t.components)) {
+        for (let e of intersection(t.expectedComponents, t.components)) {
           let t = i.get(e);
           a(getSingletonSceneGraph().get(t), {
             r: 0,
@@ -5612,7 +5612,7 @@ function sw({
           });
         }
         let r = [];
-        if (KK() && !getFeatureFlags().first_draft_use_gemini && r.push({
+        if (isFirstDraftMakeChangesEnabled() && !getFeatureFlags().first_draft_use_gemini && r.push({
           type: _$$is.MAKE_CHANGES,
           callback: () => {
             FirstDraftHelpers.clearFDScene();
@@ -7842,7 +7842,7 @@ function oO(e) {
     fullscreenMenuAction
   } = e;
   let r = '';
-  if (fullscreenMenuAction.searchSynonyms && (r += `Synonyms: ${fullscreenMenuAction.searchSynonyms.join(', ')}`), !h8()) return null;
+  if (fullscreenMenuAction.searchSynonyms && (r += `Synonyms: ${fullscreenMenuAction.searchSynonyms.join(', ')}`), !isQaSearchFrecencyEnabled()) return null;
   let {
     details,
     score
@@ -8273,7 +8273,7 @@ function oB({
     let l = function () {
       let e = Zr('send-to-buzz-from-design');
       let t = useSelector(selectOpenFile);
-      let i = useSelector(vx);
+      let i = useSelector(fileVersionSelector);
       let r = useSceneGraphSelector();
       let o = r.getDirectlySelectedNodes();
       let l = useMemo(() => ({

@@ -44,7 +44,7 @@ import { oW } from '../905/675859';
 import { g as _$$g2 } from '../905/687265';
 import { e0 as _$$e } from '../905/696396';
 import { setupLoadingStateHandler } from '../905/696711';
-import { IT, liveStoreInstance } from '../905/713695';
+import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { EL } from '../905/748636';
 import { G as _$$G } from '../905/750789';
@@ -2240,7 +2240,7 @@ export function $$si0({
   let s = AG();
   let a = useDispatch();
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
-  let [c] = IT(ss(l ?? ''));
+  let [c] = setupResourceAtomHandler(ss(l ?? ''));
   useEffect(() => {
     c.status === 'errors' && (c.errors.status !== 404 || s ? s && e ? customHistory.redirect(e.href) : a(FlashActions.error(getI18nString('community.actions.error_fetching_profile_information'))) : customHistory.redirect('/404'));
   }, [a, c, s, e]);

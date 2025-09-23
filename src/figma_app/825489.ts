@@ -3,7 +3,7 @@ import { l as _$$l } from "../905/716947";
 import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCustomAtom } from "../figma_app/27355";
 import s from "../vendor/239910";
 import { Xm } from "../905/723791";
-import { yZ } from "../figma_app/476572";
+import { equals } from "../figma_app/476572";
 import { canAdminPublish } from "../figma_app/275462";
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
@@ -39,7 +39,7 @@ let $$x0 = atom(e => {
   let d = hasTeamPaidAccess(o);
   return transformAndFilterSubscriptions(a, n, i, s, r, d);
 });
-let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), yZ));
+let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), equals));
 export function $$C2(e) {
   return N(e);
 }

@@ -13,8 +13,8 @@ import { Yb, wV } from "../figma_app/933328";
 import { useParentOrgOfOpenFile } from "../figma_app/543529";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
 import { selectCurrentFile } from "../figma_app/516028";
-import { E as _$$E } from "../905/128063";
-import { qU, bj } from "../905/420347";
+import { mapLibraryAttributes } from "../905/128063";
+import { setLibrariesAtom, useLibraries } from "../905/420347";
 import { getParentOrgId } from "../905/872904";
 import { SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
@@ -37,7 +37,7 @@ let R = liveStoreInstance.Query({
   fetch: e => liveStoreInstance.fetch(Yb(e)),
   output: e => ({
     libraryStats: e.data,
-    publishedLibraries: e.data.files.map(e => _$$E(e)) ?? []
+    publishedLibraries: e.data.files.map(e => mapLibraryAttributes(e)) ?? []
   })
 });
 let $$N5 = _$$n(({
@@ -61,7 +61,7 @@ let $$N5 = _$$n(({
     enabled: t && !!getFeatureFlags().dse_lk_libraries_endpoint_v2
   });
   let p = getFeatureFlags().dse_lk_libraries_endpoint_v2 ? c : d;
-  let g = Xr(qU);
+  let g = Xr(setLibrariesAtom);
   handleStatusChangeEffect(d, e => {
     let t = e.libraryStats.files.map(e => e.file);
     t.length > 0 && s(batchPutFileAction({
@@ -85,12 +85,12 @@ let $$P11 = _$$n(() => {
   let [t] = setupResourceAtomHandler(fI(void 0), {
     enabled: e
   });
-  let i = Xr(qU);
+  let i = Xr(setLibrariesAtom);
   handleStatusChangeEffect(t, e => {
-    i(e.map(e => _$$E(e)));
+    i(e.map(e => mapLibraryAttributes(e)));
   });
   return {
-    result: useMemo(() => t.data?.map(e => _$$E(e)) ?? [], [t]),
+    result: useMemo(() => t.data?.map(e => mapLibraryAttributes(e)) ?? [], [t]),
     status: t.status
   };
 });
@@ -122,7 +122,7 @@ export function $$F12(e = 0) {
 }
 export function $$M7(e, t) {
   let i = useMemo(() => Array.from(e), [e]);
-  let r = bj(i);
+  let r = useLibraries(i);
   return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === r.status ? gB(r.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loading" === t.status ? Xm() : "loaded" !== t.status ? e1([]) : gB($$j2(e, t.result)), [r, e, t]);
 }
 export function $$j2(e, t) {
@@ -136,7 +136,7 @@ export function $$U6(e, t) {
     let n = t?.hubFile?.libraryKey ?? e.library?.file?.libraryKey;
     return n ? _$$l(n) : void 0;
   }).filter(isNotNullish), [e, i]);
-  let l = bj(r);
+  let l = useLibraries(r);
   return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loaded" !== t.status ? t : gB($$B1(e, t.data, i)), [l, e, t, i]);
 }
 export function $$B1(e, t, i) {
@@ -155,7 +155,7 @@ let $$V9 = _$$n(e => {
     enabled: !!t
   });
   let r = useMemo(() => (i.data?.resourceConnectionSharingGroups ?? []).map(e => e.libraryKey ? _$$l(e.libraryKey) : null).filter(isNotNullish), [i]);
-  let l = bj(r);
+  let l = useLibraries(r);
   return useMemo(() => {
     if (getFeatureFlags().dse_library_modal_recommended_perf) return "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm();
     let t = i.data?.resourceConnectionSharingGroups;

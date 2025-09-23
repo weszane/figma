@@ -59,7 +59,7 @@ import { isLoaded } from "../905/18797";
 import { subscribedSymbolsFromLoadedPagesSelector, subscribedStateGroupsFromLoadedPagesSelector } from "../figma_app/141508";
 import { useSubscribedLibraryFileKeys, useSubscribedLibraryKeys } from "../figma_app/155728";
 import { M as _$$M } from "../905/540025";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { YG, Wg } from "../905/921418";
 import { liveStoreInstance } from "../905/713695";
 import { x as _$$x2 } from "../figma_app/612938";
@@ -766,7 +766,7 @@ export function $$t80({
     let f = useSubscribedLibraryKeys();
     let g = useSelector(e => e.library.assetsPanelSearch.query);
     let _ = useSelector(e => e.library.assetsPanelSearch.searchOptions);
-    let x = isLoaded(d, yD(o?.key || ""));
+    let x = isLoaded(d, generateRetrievingSubscribedComponentsKey(o?.key || ""));
     let y = _$$M();
     useEffect(() => {
       t && YG.sourcesDidChange();

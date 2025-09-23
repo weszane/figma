@@ -29,7 +29,7 @@ import { S0 } from "../905/863795";
 import { E as _$$E2 } from "../905/511388";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { NJ } from "../figma_app/518077";
-import { E as _$$E3 } from "../905/128063";
+import { mapLibraryAttributes } from "../905/128063";
 import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryManagementData, LibraryManagementCommunityData, FileByKeyThumbnailUrl, LibrarySubscriptionView, WorkspaceAdminLibrariesSectionView } from "../figma_app/43951";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { Ef } from "../905/81982";
@@ -83,7 +83,7 @@ import { fM } from "../figma_app/214643";
 import { l as _$$l3 } from "../469e6e40/774192";
 import { FlashActions } from "../905/573154";
 import { XF, wZ, CA } from "../figma_app/777207";
-import { liveStoreInstance, gY } from "../905/713695";
+import { liveStoreInstance, getAtomMutate } from "../905/713695";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
@@ -473,8 +473,8 @@ function eY({
   org: t
 }) {
   let a = useDispatch();
-  let r = gY(eW);
-  let l = gY(eH);
+  let r = getAtomMutate(eW);
+  let l = getAtomMutate(eH);
   let [o, d] = useState(!1);
   let [c, _] = useState(!1);
   let u = e.approvedLibraries ?? [];
@@ -566,8 +566,8 @@ function eX({
   let o = useCurrentPrivilegedPlan("WorkspaceApprovedLibrarySetting").unwrapOr(null);
   let d = o?.tier === FPlanNameType.ENTERPRISE;
   let c = o?.name;
-  let _ = gY(eJ);
-  let u = gY(eK);
+  let _ = getAtomMutate(eJ);
+  let u = getAtomMutate(eK);
   let [m, p] = useState(!1);
   let [g, h] = useState(!1);
   let v = e.approvedLibraries ?? [];
@@ -1350,8 +1350,8 @@ export function $$tx1(e) {
     onRightActionsChange
   } = e;
   let z = libraryStats ?? th;
-  let V = useMemo(() => (communityLibraryStats ?? []).map(e => _$$E3(e)), [communityLibraryStats]);
-  let W = useMemo(() => (z?.files ?? []).map(e => _$$E3(e)), [z]);
+  let V = useMemo(() => (communityLibraryStats ?? []).map(e => mapLibraryAttributes(e)), [communityLibraryStats]);
+  let W = useMemo(() => (z?.files ?? []).map(e => mapLibraryAttributes(e)), [z]);
   let H = useDispatch();
   let [Y, J] = useState(new Set(workspaceId ? [workspaceId] : []));
   let [K, Q] = useState("");

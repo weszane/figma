@@ -90,7 +90,7 @@ import { NU } from "../figma_app/204891";
 import { J as _$$J5 } from "../905/896954";
 import { trackGenericEvent } from "../figma_app/314264";
 import { getUserId, selectUser } from "../905/372672";
-import { IT as _$$IT, liveStoreInstance } from "../905/713695";
+import { setupResourceAtomHandler, liveStoreInstance } from "../905/713695";
 import { versionHandlerInstance } from "../905/985740";
 import { $ as _$$$3 } from "../905/668315";
 import { dn } from "../figma_app/994403";
@@ -960,7 +960,7 @@ let tu = forwardRef(function ({
 }, i) {
   let s = getUserId() ?? void 0;
   let o = Lz(e, void 0)?.playgroundFile;
-  let [l] = _$$IT(tm(o?.key || ""));
+  let [l] = setupResourceAtomHandler(tm(o?.key || ""));
   let d = l.data;
   let c = o?.editor_type ? mapFileTypeToEnum(o.editor_type) : null;
   let u = useRef(null);

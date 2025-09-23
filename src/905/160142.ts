@@ -13,7 +13,7 @@ import { m as _$$m } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
 import { _P, Zh, qb, Rv } from "../figma_app/2590";
 import { serializeFullViewerQueryParams } from "../figma_app/831696";
-import { s6 } from "../905/91038";
+import { isFirstPageCurrentSelector } from "../905/91038";
 import { openInBrowser } from "../figma_app/415217";
 let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   liveStore: i
@@ -31,7 +31,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   let C = e.getState();
   reportNullOrUndefined(_$$e.PROTOTYPING, C.mirror.appModel);
   let T = C.mirror.appModel.currentPage;
-  let k = s6(C);
+  let k = isFirstPageCurrentSelector(C);
   let R = C.mirror.sceneGraph.get(T);
   let N = R?.prototypeDevice?.presetIdentifier || "";
   isSlides ? e.dispatch(_P({

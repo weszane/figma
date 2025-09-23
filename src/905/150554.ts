@@ -1,262 +1,513 @@
-import { runWithConcurrency } from "../figma_app/562352";
-import { Fullscreen } from "../figma_app/763686";
-import { getSingletonSceneGraph } from "../905/700578";
-import s from "../vendor/116389";
-import { logError, logInfo } from "../905/714362";
-import { getAssetKey } from "../figma_app/646357";
-import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
-import { r6 } from "../figma_app/517115";
-import { u as _$$u } from "../905/203573";
-import { MX, H2, GG } from "../figma_app/257779";
-import { w3, ZU, e_, mA, AP, Ag, Pt, iG, n1, Sg } from "../figma_app/407767";
-var o = s;
-async function p(e, t) {
-  let {
-    node,
-    file_key
-  } = e;
-  let r = {
+import { InvalidSessionError } from '../905/203573'
+import { getSingletonSceneGraph } from '../905/700578'
+import { logError, logInfo } from '../905/714362'
+import { generateUUIDv4 } from '../905/871474'
+import { XHR } from '../905/910117'
+import { ResultSourceType, SearchEventType, TimerType } from '../figma_app/257779'
+import { aggregateComponentUsage, analyzeComponentUsage, calculateNodePositionInfo, countVisibleNonInstanceNodes, extractComponentInfo, filterComponentUsageByContext, generateThumbnailWithDuration, processAssetUsage, processComponentAssets, rankComponentsByUsage } from '../figma_app/407767'
+import { getUUID } from '../figma_app/517115'
+import { runWithConcurrency } from '../figma_app/562352'
+import { getAssetKey } from '../figma_app/646357'
+import { Fullscreen } from '../figma_app/763686'
+
+interface AssetSuggestionRequest {
+  node: any
+  file_key: string
+  type: string
+  name: string
+}
+
+interface TrackingMetadata {
+  session_id: string | null
+  search_id: string
+  node_id: string
+}
+
+interface FragmentResult {
+  file_key: string
+  node_id: string
+  score: number
+  component_usages?: any[]
+  [key: string]: any
+}
+
+interface AutoSuggestConfig {
+  searchByNodeType: 'targeted' | 'topLevel' | 'all'
+  numResults?: number
+  numConcurrentFragmentLoads: number
+  targetNodeConfig: {
+    skipLowVolumeNodes: number
+    filteringConfig: any
+    rankingConfig: any
+  }
+  topLevelNodeConfig: {
+    skipLowVolumeNodes: number
+    filteringConfig: any
+    rankingConfig: any
+  }
+}
+
+interface ComponentUsageContext {
+  [key: string]: any
+}
+
+interface ThumbnailData {
+  targetNode?: string
+  topLevelNode?: string
+}
+
+interface Logger {
+  logTimer: (source: ResultSourceType, timer: TimerType, startTime?: number) => number | undefined
+  logDebugInfo: (key: string, data: any) => void
+  logFunnelEvent: (event: SearchEventType) => void
+  debugInfo?: any
+  entryPoint?: string
+}
+
+/**
+ * Fetches asset suggestions from the API
+ * (Original function: p)
+ */
+async function fetchAssetSuggestions(
+  request: AssetSuggestionRequest,
+  thumbnailData: string,
+): Promise<{ fragments: FragmentResult[] } | undefined> {
+  const { node, file_key } = request
+
+  const trackingMetadata: TrackingMetadata = {
     session_id: null,
     search_id: generateUUIDv4(),
-    node_id: node.guid
-  };
+    node_id: node.guid,
+  }
+
   try {
+    const response = await XHR.post('/api/auto_suggest/asset_suggestions', {
+      input: {
+        type: 'image',
+        value: thumbnailData,
+      },
+      file_key,
+      tracking_metadata: trackingMetadata,
+    })
+
     return {
-      fragments: (await XHR.post("/api/auto_suggest/asset_suggestions", {
-        input: {
-          type: "image",
-          value: t
-        },
-        file_key,
-        tracking_metadata: r
-      })).data.meta.results.map(e => ({
-        ...e,
-        type: "fig-file-fragment"
-      }))
-    };
-  } catch (e) {
-    return;
+      fragments: response.data.meta.results.map((fragment: any) => ({
+        ...fragment,
+        type: 'fig-file-fragment',
+      })),
+    }
+  }
+  catch {
+    // Silently handle errors as in original implementation
+    return undefined
   }
 }
-export async function $$_0(e) {
-  let {
+
+/**
+ * Main entry point for auto-suggest functionality
+ * (Original function: $$_0)
+ */
+export async function getAutoSuggestResults(options: {
+  targetNode: any
+  topLevelNode: any
+  logger?: Logger
+  openFileKey: string
+  subscribedLibraryKeys: Set<string>
+  autoSuggestSession?: any
+  config: AutoSuggestConfig
+}): Promise<{ suggestions: any[] }> {
+  const {
     targetNode,
     topLevelNode,
-    logger
-  } = e;
-  if (!Fullscreen) return Promise.resolve({
-    suggestions: []
-  });
-  let s = getSingletonSceneGraph();
-  let o = topLevelNode;
-  if (o || (o = s.get(targetNode.findContainingFragmentOrSelf()) ?? void 0), !o) return Promise.resolve({
-    suggestions: []
-  });
-  let l = w3({
-    scene: s,
-    topLevelNode: o
-  });
-  logger?.logTimer(MX.SOURCE_FRAGMENT, H2.EXTRACT_CONTEXT);
-  logger?.logDebugInfo("contextComponentUsage", l);
-  let d = ZU(targetNode).thumbnail;
-  let c = targetNode.guid === o.guid ? d : ZU(o).thumbnail;
-  return d && c ? await $$A({
-    ...e,
-    preComputedThumbnails: {
-      targetNode: d,
-      topLevelNode: c
-    },
-    topLevelNode: o,
-    contextComponentUsage: l
-  }) : Promise.resolve({
-    suggestions: []
-  });
+    logger,
+  } = options
+
+  // Early return if fullscreen is not available
+  if (!Fullscreen) {
+    return Promise.resolve({
+      suggestions: [],
+    })
+  }
+
+  const sceneGraph = getSingletonSceneGraph()
+  let effectiveTopLevelNode = topLevelNode
+
+  // Find containing fragment if topLevelNode is not provided
+  if (!effectiveTopLevelNode) {
+    effectiveTopLevelNode = sceneGraph.get(targetNode.findContainingFragmentOrSelf()) ?? undefined
+  }
+
+  // Return early if we can't determine the topLevelNode
+  if (!effectiveTopLevelNode) {
+    return Promise.resolve({
+      suggestions: [],
+    })
+  }
+
+  // Analyze component usage in the context
+  const contextComponentUsage = analyzeComponentUsage({
+    scene: sceneGraph,
+    topLevelNode: effectiveTopLevelNode,
+  })
+
+  logger?.logTimer(ResultSourceType.SOURCE_FRAGMENT, TimerType.EXTRACT_CONTEXT)
+  logger?.logDebugInfo('contextComponentUsage', contextComponentUsage)
+
+  // Generate thumbnails for target and top level nodes
+  const targetNodeThumbnail = generateThumbnailWithDuration(targetNode).thumbnail
+  const topLevelNodeThumbnail = targetNode.guid === effectiveTopLevelNode.guid
+    ? targetNodeThumbnail
+    : generateThumbnailWithDuration(effectiveTopLevelNode).thumbnail
+
+  // Proceed only if both thumbnails are available
+  if (targetNodeThumbnail && topLevelNodeThumbnail) {
+    return await processAutoSuggest({
+      ...options,
+      preComputedThumbnails: {
+        targetNode: targetNodeThumbnail,
+        topLevelNode: topLevelNodeThumbnail,
+      },
+      topLevelNode: effectiveTopLevelNode,
+      contextComponentUsage,
+    })
+  }
+  else {
+    return Promise.resolve({
+      suggestions: [],
+    })
+  }
 }
-async function $$A({
-  targetNode: e,
-  topLevelNode: t,
-  openFileKey: i,
-  subscribedLibraryKeys: n,
-  autoSuggestSession: r,
-  logger: a,
-  config: s,
-  preComputedThumbnails: o,
-  contextComponentUsage: c
-}) {
-  let u = [];
-  a?.logFunnelEvent(GG.START);
-  a?.logDebugInfo("start", {
-    targetNodeGuid: e.guid,
-    topLevelNodeGuid: t.guid,
-    openFileKey: i,
-    subscribedLibraryKeys: Array.from(n),
-    config: s,
-    preComputedThumbnails: o
-  });
-  let p = t?.guid === e.guid;
-  let _ = e_(e, t);
+
+/**
+ * Processes auto-suggest logic for target and top-level nodes
+ * (Original function: $$A)
+ */
+async function processAutoSuggest(options: {
+  targetNode: any
+  topLevelNode: any
+  openFileKey: string
+  subscribedLibraryKeys: Set<string>
+  autoSuggestSession?: any
+  logger?: Logger
+  config: AutoSuggestConfig
+  preComputedThumbnails?: ThumbnailData
+  contextComponentUsage: ComponentUsageContext
+}): Promise<{ suggestions: any[] }> {
+  let suggestions: any[] = []
+  const {
+    targetNode,
+    topLevelNode,
+    openFileKey,
+    subscribedLibraryKeys,
+    autoSuggestSession,
+    logger,
+    config,
+    preComputedThumbnails,
+    contextComponentUsage,
+  } = options
+
+  logger?.logFunnelEvent(SearchEventType.START)
+  logger?.logDebugInfo('start', {
+    targetNodeGuid: targetNode.guid,
+    topLevelNodeGuid: topLevelNode.guid,
+    openFileKey,
+    subscribedLibraryKeys: Array.from(subscribedLibraryKeys),
+    config,
+    preComputedThumbnails,
+  })
+
+  const isTargetNodeSameAsTopLevel = topLevelNode?.guid === targetNode.guid
+  const targetNodePositionInfo = calculateNodePositionInfo(targetNode, topLevelNode)
+
   try {
-    let l;
-    let m;
-    if (["targeted", "all"].includes(s.searchByNodeType) && (l = y({
-      node: e,
-      openFileKey: i,
-      config: s,
-      configForNodeType: s.targetNodeConfig,
-      contextComponentUsage: c,
-      targetNodePositionInfo: _,
-      subscribedLibraryKeys: n,
-      autoSuggestSession: r,
-      logger: a,
-      timerContext: MX.TARGET_NODE_RESULTS,
-      preComputedThumbnail: o?.targetNode
-    })), ("topLevel" === s.searchByNodeType || "all" === s.searchByNodeType && !p) && t && (m = y({
-      node: t,
-      openFileKey: i,
-      config: s,
-      configForNodeType: s.topLevelNodeConfig,
-      contextComponentUsage: c,
-      targetNodePositionInfo: _,
-      subscribedLibraryKeys: n,
-      autoSuggestSession: r,
-      logger: a,
-      timerContext: MX.TL_NODE_RESULTS,
-      preComputedThumbnail: o?.topLevelNode
-    })), l && (u = await l), (!s.numResults || u.length < s.numResults) && m) {
-      let e = await m;
-      u = [...u, ...e];
+    let targetNodeSuggestions: Promise<any[]> | undefined
+    let topLevelNodeSuggestions: Promise<any[]> | undefined
+
+    // Process target node suggestions if configured
+    if (['targeted', 'all'].includes(config.searchByNodeType)) {
+      targetNodeSuggestions = processNodeSuggestions({
+        node: targetNode,
+        openFileKey,
+        config,
+        configForNodeType: config.targetNodeConfig,
+        contextComponentUsage,
+        targetNodePositionInfo,
+        subscribedLibraryKeys,
+        autoSuggestSession,
+        logger,
+        timerContext: ResultSourceType.TARGET_NODE_RESULTS,
+        preComputedThumbnail: preComputedThumbnails?.targetNode,
+      })
     }
-    u = u.filter((e, t, i) => i.findIndex(t => getAssetKey(t) === getAssetKey(e)) === t);
-  } catch (e) {
-    e instanceof _$$u || logError("auto_suggest", "Error getting suggestions", {
-      error: e
-    });
+
+    // Process top level node suggestions if configured
+    if (
+      (config.searchByNodeType === 'topLevel'
+        || (config.searchByNodeType === 'all' && !isTargetNodeSameAsTopLevel))
+      && topLevelNode
+    ) {
+      topLevelNodeSuggestions = processNodeSuggestions({
+        node: topLevelNode,
+        openFileKey,
+        config,
+        configForNodeType: config.topLevelNodeConfig,
+        contextComponentUsage,
+        targetNodePositionInfo,
+        subscribedLibraryKeys,
+        autoSuggestSession,
+        logger,
+        timerContext: ResultSourceType.TL_NODE_RESULTS,
+        preComputedThumbnail: preComputedThumbnails?.topLevelNode,
+      })
+    }
+
+    // Collect suggestions from both nodes
+    if (targetNodeSuggestions) {
+      suggestions = await targetNodeSuggestions
+    }
+
+    if ((!config.numResults || suggestions.length < config.numResults) && topLevelNodeSuggestions) {
+      const additionalSuggestions = await topLevelNodeSuggestions
+      suggestions = [...suggestions, ...additionalSuggestions]
+    }
+
+    // Deduplicate suggestions by asset key
+    suggestions = suggestions.filter((suggestion, index, self) =>
+      self.findIndex(item => getAssetKey(item) === getAssetKey(suggestion)) === index,
+    )
   }
-  a?.logTimer(MX.SOURCE_FRAGMENT, H2.TOTAL, 0);
-  logInfo("auto_suggest", "Auto Suggest Results", {
-    suggestions: u || "no_results",
-    debugInfo: a?.debugInfo,
-    sessionId: r6(),
-    entryPoint: a?.entryPoint
-  });
+  catch (error) {
+    if (!(error instanceof InvalidSessionError)) {
+      logError('auto_suggest', 'Error getting suggestions', {
+        error,
+      })
+    }
+  }
+
+  logger?.logTimer(ResultSourceType.SOURCE_FRAGMENT, TimerType.TOTAL, 0)
+  logInfo('auto_suggest', 'Auto Suggest Results', {
+    suggestions: suggestions || 'no_results',
+    debugInfo: logger?.debugInfo,
+    sessionId: getUUID(),
+    entryPoint: logger?.entryPoint,
+  })
+
   return {
-    suggestions: u
-  };
+    suggestions,
+  }
 }
-async function y({
-  node: e,
-  openFileKey: t,
-  config: i,
-  configForNodeType: r,
-  contextComponentUsage: a,
-  targetNodePositionInfo: s,
-  subscribedLibraryKeys: d,
-  autoSuggestSession: c,
-  logger: u,
-  timerContext: m,
-  preComputedThumbnail: _
-}) {
-  let A = u?.logTimer(m, H2.SEARCH_SUGGESTIONS_START);
-  if (mA(e) < r.skipLowVolumeNodes) {
-    u?.logFunnelEvent(GG.SKIP_LOW_VOLUME_NODE);
-    return Promise.resolve([]);
+
+/**
+ * Processes suggestions for a specific node
+ * (Original function: y)
+ */
+async function processNodeSuggestions(options: {
+  node: any
+  openFileKey: string
+  config: AutoSuggestConfig
+  configForNodeType: any
+  contextComponentUsage: ComponentUsageContext
+  targetNodePositionInfo: any
+  subscribedLibraryKeys: Set<string>
+  autoSuggestSession?: any
+  logger?: Logger
+  timerContext: ResultSourceType
+  preComputedThumbnail?: string
+}): Promise<any[]> {
+  const {
+    node,
+    openFileKey,
+    config,
+    configForNodeType,
+    contextComponentUsage,
+    targetNodePositionInfo,
+    subscribedLibraryKeys,
+    autoSuggestSession,
+    logger,
+    timerContext,
+    preComputedThumbnail,
+  } = options
+
+  let startTime = logger?.logTimer(timerContext, TimerType.SEARCH_SUGGESTIONS_START)
+
+  // Skip nodes with too few visible non-instance nodes
+  if (countVisibleNonInstanceNodes(node) < configForNodeType.skipLowVolumeNodes) {
+    logger?.logFunnelEvent(SearchEventType.SKIP_LOW_VOLUME_NODE)
+    return Promise.resolve([])
   }
-  if (0 === d.size) {
-    u?.logFunnelEvent(GG.SKIP_NO_SUBSCRIBED_LIBRARIES);
-    return Promise.resolve([]);
+
+  // Skip if no subscribed libraries
+  if (subscribedLibraryKeys.size === 0) {
+    logger?.logFunnelEvent(SearchEventType.SKIP_NO_SUBSCRIBED_LIBRARIES)
+    return Promise.resolve([])
   }
-  let y = r.filteringConfig;
-  u?.logFunnelEvent(GG.INITIATING_FRAGMENT_SEARCH);
-  let b = await p({
-    type: "input-selection",
-    node: e,
-    file_key: t,
-    name: e.name
-  }, _);
-  if (A = u?.logTimer(m, H2.FRAGMENT_SEARCH, A), !b || 0 === b.fragments.length) {
-    u?.logFunnelEvent(GG.NO_RESULTS);
-    return Promise.resolve([]);
+
+  const filteringConfig = configForNodeType.filteringConfig
+  logger?.logFunnelEvent(SearchEventType.INITIATING_FRAGMENT_SEARCH)
+
+  // Fetch asset suggestions
+  const suggestionResponse = await fetchAssetSuggestions({
+    type: 'input-selection',
+    node,
+    file_key: openFileKey,
+    name: node.name,
+  }, preComputedThumbnail || '')
+
+  startTime = logger?.logTimer(timerContext, TimerType.FRAGMENT_SEARCH, startTime)
+
+  // Handle no results
+  if (!suggestionResponse || suggestionResponse.fragments.length === 0) {
+    logger?.logFunnelEvent(SearchEventType.NO_RESULTS)
+    return Promise.resolve([])
   }
-  let v = e.findContainingFragmentOrSelf();
-  let I = Array.from(new Map(b.fragments.map(e => [`${e.file_key}_${e.node_id}`, e])).values()).filter(i => !(i.score < y.fragmentsBelowScore) && (i.file_key !== t || i.node_id !== e.guid && (!v || i.node_id !== v))).slice(0, 10);
-  if (0 === I.length) {
-    u?.logFunnelEvent(GG.NO_RESULTS);
-    return Promise.resolve([]);
+
+  const containingFragment = node.findContainingFragmentOrSelf()
+
+  // Filter and limit fragments
+  const filteredFragments = Array.from(
+    new Map(
+      suggestionResponse.fragments.map(fragment => [`${fragment.file_key}_${fragment.node_id}`, fragment]),
+    ).values(),
+  )
+    .filter(fragment =>
+      !(fragment.score < filteringConfig.fragmentsBelowScore)
+      && (fragment.file_key !== openFileKey
+        || fragment.node_id !== node.guid
+        && (!containingFragment || fragment.node_id !== containingFragment)),
+    )
+    .slice(0, 10)
+
+  // Handle no filtered results
+  if (filteredFragments.length === 0) {
+    logger?.logFunnelEvent(SearchEventType.NO_RESULTS)
+    return Promise.resolve([])
   }
-  u?.logDebugInfo(m + ".fragments", I);
-  let E = o()(o()(await runWithConcurrency(I.map(e => async () => {
-    try {
-      if (e.component_usages) return e.component_usages.map(t => AP({
-        usage: t,
-        filteringConfig: y,
-        subscribedLibraryKeys: d,
-        fragment: e,
-        targetNodePositionInfo: s
-      })).filter(e => null != e);
-      if (c) {
-        let t = await c.getFragmentScene(e);
-        let i = Ag({
-          scene: t,
-          root: t.getRoot(),
-          fragment: e,
-          targetNodePositionInfo: s,
-          filteringConfig: y,
-          subscribedLibraryKeys: d,
-          includeComponentProps: !1
-        });
-        c.unloadFragment(e);
-        return i;
+
+  logger?.logDebugInfo(`${timerContext}.fragments`, filteredFragments)
+
+  // Process fragments concurrently
+  const fragmentProcessingResults = await runWithConcurrency(
+    filteredFragments.map(fragment => async () => {
+      try {
+        if (fragment.component_usages) {
+          return fragment.component_usages
+            .map(usage => processAssetUsage({
+              usage,
+              filteringConfig,
+              subscribedLibraryKeys,
+              fragment,
+              targetNodePositionInfo,
+            }))
+            .filter(result => result != null)
+        }
+
+        if (autoSuggestSession) {
+          const fragmentScene = await autoSuggestSession.getFragmentScene(fragment)
+          const componentInfo = extractComponentInfo({
+            scene: fragmentScene,
+            root: fragmentScene.getRoot(),
+            fragment,
+            targetNodePositionInfo,
+            filteringConfig,
+            subscribedLibraryKeys,
+            includeComponentProps: false,
+          })
+          autoSuggestSession.unloadFragment(fragment)
+          return componentInfo
+        }
+
+        throw new Error('No component usage information or session provided')
       }
-      throw Error("No component usage information or session provided");
-    } catch (t) {
-      if (t instanceof _$$u) throw t;
-      logError("auto_suggest", "Error loading fragment", {
-        error: t,
-        fragment: e
-      });
-      return null;
-    }
-  }), i.numConcurrentFragmentLoads)).map(e => "resolve" === e.type ? e.resolve : null).filter(e => null != e).flat());
-  A = u?.logTimer(m, H2.EXTRACT_CONTEXT, A);
-  u?.logDebugInfo(m + ".fragmentComponentInfo", E);
-  let {
-    updatedComponentInfo,
-    debugData
-  } = Pt(E);
-  A = u?.logTimer(m, H2.ASSET_LOOKUP, A);
-  u?.logDebugInfo(m + ".updatedComponentInfoDebugData", debugData);
-  let w = iG(updatedComponentInfo);
-  A = u?.logTimer(m, H2.SUMMARIZE_CONTEXT, A);
-  u?.logDebugInfo(m + ".componentUsage", w);
-  n1({
-    componentUsage: w,
-    contextComponentUsage: a
-  });
-  let C = Sg({
-    componentUsage: w,
-    rankingConfig: r.rankingConfig
-  });
-  u?.logTimer(m, H2.FILTERING_RANKING, A);
-  u?.logDebugInfo(m + ".weightedAssets", C);
-  let T = C.map(e => e.asset).filter(e => !!e);
-  i.numResults && (T = T.slice(0, i.numResults));
-  u?.logDebugInfo(m + ".results", T);
-  0 === T.length && u?.logFunnelEvent(GG.NO_RESULTS);
-  return Promise.resolve(T);
+      catch (error) {
+        if (error instanceof InvalidSessionError) {
+          throw error
+        }
+        logError('auto_suggest', 'Error loading fragment', {
+          error,
+          fragment,
+        })
+        return null
+      }
+    }),
+    config.numConcurrentFragmentLoads,
+  )
+
+  // Flatten results
+  const componentInfo = fragmentProcessingResults
+    .map(result => result.type === 'resolve' ? result.resolve : null)
+    .filter(result => result != null)
+    .flat()
+
+  startTime = logger?.logTimer(timerContext, TimerType.EXTRACT_CONTEXT, startTime)
+  logger?.logDebugInfo(`${timerContext}.fragmentComponentInfo`, componentInfo)
+
+  // Process component assets
+  const { updatedComponentInfo, debugData } = processComponentAssets(componentInfo)
+  startTime = logger?.logTimer(timerContext, TimerType.ASSET_LOOKUP, startTime)
+  logger?.logDebugInfo(`${timerContext}.updatedComponentInfoDebugData`, debugData)
+
+  // Aggregate and filter component usage
+  const aggregatedUsage = aggregateComponentUsage(updatedComponentInfo)
+  startTime = logger?.logTimer(timerContext, TimerType.SUMMARIZE_CONTEXT, startTime)
+  logger?.logDebugInfo(`${timerContext}.componentUsage`, aggregatedUsage)
+
+  filterComponentUsageByContext({
+    componentUsage: aggregatedUsage,
+    contextComponentUsage,
+  })
+
+  // Rank components and extract assets
+  const rankedComponents = rankComponentsByUsage({
+    componentUsage: aggregatedUsage,
+    rankingConfig: configForNodeType.rankingConfig,
+  })
+
+  logger?.logTimer(timerContext, TimerType.FILTERING_RANKING, startTime)
+  logger?.logDebugInfo(`${timerContext}.weightedAssets`, rankedComponents)
+
+  let assets = rankedComponents
+    .map(component => component.asset)
+    .filter(asset => !!asset)
+
+  // Limit results if configured
+  if (config.numResults) {
+    assets = assets.slice(0, config.numResults)
+  }
+
+  logger?.logDebugInfo(`${timerContext}.results`, assets)
+
+  if (assets.length === 0) {
+    logger?.logFunnelEvent(SearchEventType.NO_RESULTS)
+  }
+
+  return Promise.resolve(assets)
 }
-export async function $$b1(e) {
-  let t = new TaskController({
-    priority: "background"
-  });
-  let i = new Promise(i => {
+
+/**
+ * Background task version of auto-suggest processing
+ * (Original function: $$b1)
+ */
+export async function getAutoSuggestResultsInBackground(options: any): Promise<any> {
+  const taskController = new TaskController({
+    priority: 'background',
+  })
+
+  const resultPromise = new Promise((resolve) => {
     scheduler.postTask(async () => {
-      i(await $$A(e));
+      resolve(await processAutoSuggest(options))
     }, {
-      signal: t.signal
-    });
-  });
-  return await i;
+      signal: taskController.signal,
+    })
+  })
+
+  return await resultPromise
 }
-export const A = $$_0;
-export const z = $$b1;
+
+// Export public API
+export const AutoSuggestService = {
+  getResults: getAutoSuggestResults,
+  getResultsInBackground: getAutoSuggestResultsInBackground,
+}
+
+export const A = getAutoSuggestResults
+export const z = getAutoSuggestResultsInBackground

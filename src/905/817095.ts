@@ -4,7 +4,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogBody, DialogFooter, DialogActionStrip, DialogContents, DialogHeader, DialogTitle } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { StatsigAPI } from "../905/325034";
 import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
@@ -310,9 +310,9 @@ let H = liveStoreInstance.Query({
 });
 let $$W0 = registerModal(function (e) {
   let t = useModalManager(e);
-  let [i, c] = IT(z(null));
+  let [i, c] = setupResourceAtomHandler(z(null));
   let u = useMemo(() => i?.data ?? {}, [i]);
-  let [p, m] = IT(H(null));
+  let [p, m] = setupResourceAtomHandler(H(null));
   let h = p?.data ?? {};
   let [g, f] = useState(0);
   let [_, A] = useReducer((e, t) => {

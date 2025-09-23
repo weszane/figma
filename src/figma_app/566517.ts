@@ -18,7 +18,7 @@ import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { Gh } from "../figma_app/707567";
 import { n as _$$n } from "../905/347702";
 import { __ } from "../figma_app/257655";
-import { B as _$$B } from "../905/94678";
+import { collectSymbolsAndStateGroups } from "../905/94678";
 import { _F, uN, vR, C, Uk } from "../figma_app/193952";
 import { mF } from "../figma_app/109758";
 async function x(e) {
@@ -430,7 +430,7 @@ async function H({
   if (!key) return;
   let _ = function (e, t, r) {
     let i = __(r);
-    for (let r of _$$B([...i], {
+    for (let r of collectSymbolsAndStateGroups([...i], {
       followInstances: !1
     })) if (e === SceneGraphHelpers.getAssetKeyForPublish(r.guid) && !t || t === Uk(r)) try {
       return getTypeInfoCached(r, {

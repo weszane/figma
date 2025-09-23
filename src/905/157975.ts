@@ -8,14 +8,14 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { Tn, fv } from "../figma_app/933328";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
 import { u as _$$u } from "../905/56919";
 import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { vx } from "../905/91038";
+import { fileVersionSelector } from "../905/91038";
 import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../figma_app/633080";
 import { e0 } from "../905/696396";
 import { O as _$$O } from "../905/480562";
@@ -77,7 +77,7 @@ function D({
     U(t);
   }, [G, V, z]);
   let q = useSelector(e => e.currentUserOrgId);
-  let $ = useSelector(vx);
+  let $ = useSelector(fileVersionSelector);
   let [Z] = Tn({
     currentOrgId: q
   });
@@ -207,7 +207,7 @@ let $$B0 = registerModal(function (e) {
   let y = useSelector(e => Object.values(cM(e)).length);
   let b = useSelector(e => Object.values(tK(e)).length);
   let v = useMemo(() => Gk(A, y, b), [A, y, b]);
-  let [I] = IT(fv(g));
+  let [I] = setupResourceAtomHandler(fv(g));
   return f ? jsx(ModalRootComponent, {
     manager: c,
     width: "fit-content",

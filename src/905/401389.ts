@@ -28,7 +28,7 @@ import { ClipboardOperation } from "../figma_app/915202";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { KeyboardReceiver } from "../905/826900";
-import { f as _$$f3 } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { JH } from "../figma_app/479313";
 import { kp, UJ, _D } from "../905/657318";
 import { zM, zK } from "../905/182453";
@@ -546,7 +546,7 @@ export class $$es2 extends RecordingComponent {
     };
     this.removeAllProperties = () => {
       A8(this.props.inheritStyleKey) && permissionScopeHandler.user("remove-all-properties", () => {
-        _$$f3(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
+        executeWithDSAAction(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
           Fullscreen?.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !1);
         });
       });

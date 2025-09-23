@@ -1,7 +1,24 @@
-export var $$n3 = (e => (e[e.FRAGMENTS = 0] = "FRAGMENTS", e[e.RECENTS = 1] = "RECENTS", e))($$n3 || {});
-let $$i7 = 4;
-let $$a4 = {
-  searchByNodeType: "all",
+/**
+ * Enum for search result types
+ * Original name: $$n3
+ */
+export enum SearchResultType {
+  FRAGMENTS = 0,
+  RECENTS = 1,
+}
+
+/**
+ * Maximum number of concurrent fragment loads
+ * Original name: $$i7
+ */
+export const MAX_CONCURRENT_FRAGMENT_LOADS: number = 4
+
+/**
+ * Search configuration settings
+ * Original name: $$a4
+ */
+export const SEARCH_CONFIG = {
+  searchByNodeType: 'all',
   targetNodeConfig: {
     skipLowVolumeNodes: 3,
     numFragments: 15,
@@ -10,13 +27,13 @@ let $$a4 = {
       fragmentCount: 0,
       avgCountPerFragment: 0,
       avgScorePerFragment: 0,
-      avgProximityScore: 0
+      avgProximityScore: 0,
     },
     filteringConfig: {
-      fragmentsBelowScore: .85,
-      proximityScoreThreshold: 0
+      fragmentsBelowScore: 0.85,
+      proximityScoreThreshold: 0,
     },
-    minRequiredResults: 2
+    minRequiredResults: 2,
   },
   topLevelNodeConfig: {
     skipLowVolumeNodes: 3,
@@ -26,39 +43,112 @@ let $$a4 = {
       fragmentCount: 0,
       avgCountPerFragment: 0,
       avgScorePerFragment: 0,
-      avgProximityScore: 1
+      avgProximityScore: 1,
     },
     filteringConfig: {
-      fragmentsBelowScore: .85,
-      proximityScoreThreshold: 0
+      fragmentsBelowScore: 0.85,
+      proximityScoreThreshold: 0,
     },
-    minRequiredResults: 1
+    minRequiredResults: 1,
   },
   loggerConfig: {
-    logFunnelEvents: !0,
-    logTimers: !0,
-    logDebugInfo: !0
+    logFunnelEvents: true,
+    logTimers: true,
+    logDebugInfo: true,
   },
   numResults: 4,
   numConcurrentFragmentLoads: 3,
-  dominantFrameConfig: {}
-};
-let $$s6 = ["GROUP", "FRAME", "SECTION", "RECTANGLE", "ROUNDED_RECTANGLE"];
-var $$o0 = (e => (e.START = "start", e.SKIP_LOW_VOLUME_NODE = "skip_low_volume_node", e.SKIP_NO_SUBSCRIBED_LIBRARIES = "skip_no_subscribed_libraries", e.INITIATING_FRAGMENT_SEARCH = "initiating_fragment_search", e.NO_RESULTS = "no_results", e.RESULTS_SHOWN = "results_shown", e.RESULT_INSERTED = "result_inserted", e.RESULT_DISMISSED = "result_dismissed", e.ABORTED = "aborted", e.PANEL_OPENED = "panel_opened", e.PANEL_CLOSED = "panel_closed", e.STARTED_SEARCH = "searched_asset", e))($$o0 || {});
-var $$l2 = (e => (e.SOURCE_FRAGMENT = "source_fragment", e.TL_NODE_RESULTS = "tl_node_results", e.TARGET_NODE_RESULTS = "target_node_results", e))($$l2 || {});
-var $$d1 = (e => (e.TOTAL = "total", e.SEARCH_SUGGESTIONS_START = "search_suggestions_start", e.FRAGMENT_SEARCH = "fragment_search", e.EXTRACT_CONTEXT = "extract_context", e.SUMMARIZE_CONTEXT = "summarize_context", e.FILTERING_RANKING = "filtering_ranking", e.ASSET_LOOKUP = "asset_lookup", e))($$d1 || {});
-var $$c8 = (e => (e.ASSET_PANEL = "asset_panel", e.EVAL = "eval", e.SHADOW_SUGGESTIONS = "shadow_suggestions", e))($$c8 || {});
-export let $$u5 = {
-  fileKey: "",
-  queryId: "",
-  selectionId: ""
-};
-export const GG = $$o0;
-export const H2 = $$d1;
-export const MX = $$l2;
-export const Ou = $$n3;
-export const PV = $$a4;
-export const YQ = $$u5;
-export const b4 = $$s6;
-export const lS = $$i7;
-export const qd = $$c8;
+  dominantFrameConfig: {},
+}
+
+/**
+ * Supported node types for search
+ * Original name: $$s6
+ */
+export const SUPPORTED_NODE_TYPES: string[] = [
+  'GROUP',
+  'FRAME',
+  'SECTION',
+  'RECTANGLE',
+  'ROUNDED_RECTANGLE',
+]
+
+/**
+ * Event types for search tracking
+ * Original name: $$o0
+ */
+export enum SearchEventType {
+  START = 'start',
+  SKIP_LOW_VOLUME_NODE = 'skip_low_volume_node',
+  SKIP_NO_SUBSCRIBED_LIBRARIES = 'skip_no_subscribed_libraries',
+  INITIATING_FRAGMENT_SEARCH = 'initiating_fragment_search',
+  NO_RESULTS = 'no_results',
+  RESULTS_SHOWN = 'results_shown',
+  RESULT_INSERTED = 'result_inserted',
+  RESULT_DISMISSED = 'result_dismissed',
+  ABORTED = 'aborted',
+  PANEL_OPENED = 'panel_opened',
+  PANEL_CLOSED = 'panel_closed',
+  STARTED_SEARCH = 'searched_asset',
+}
+
+/**
+ * Result source types
+ * Original name: $$l2
+ */
+export enum ResultSourceType {
+  SOURCE_FRAGMENT = 'source_fragment',
+  TL_NODE_RESULTS = 'tl_node_results',
+  TARGET_NODE_RESULTS = 'target_node_results',
+}
+
+/**
+ * Timer types for performance tracking
+ * Original name: $$d1
+ */
+export enum TimerType {
+  TOTAL = 'total',
+  SEARCH_SUGGESTIONS_START = 'search_suggestions_start',
+  FRAGMENT_SEARCH = 'fragment_search',
+  EXTRACT_CONTEXT = 'extract_context',
+  SUMMARIZE_CONTEXT = 'summarize_context',
+  FILTERING_RANKING = 'filtering_ranking',
+  ASSET_LOOKUP = 'asset_lookup',
+}
+
+/**
+ * Context types for search
+ * Original name: $$c8
+ */
+export enum ContextType {
+  ASSET_PANEL = 'asset_panel',
+  EVAL = 'eval',
+  SHADOW_SUGGESTIONS = 'shadow_suggestions',
+}
+
+/**
+ * Search context identifiers
+ * Original name: $$u5
+ */
+export interface SearchContext {
+  fileKey: string
+  queryId: string
+  selectionId: string
+}
+
+export const DEFAULT_SEARCH_CONTEXT: SearchContext = {
+  fileKey: '',
+  queryId: '',
+  selectionId: '',
+}
+
+// Export aliases for backward compatibility
+export const GG = SearchEventType
+export const H2 = TimerType
+export const MX = ResultSourceType
+export const Ou = SearchResultType
+export const PV = SEARCH_CONFIG
+export const YQ = DEFAULT_SEARCH_CONTEXT
+export const b4 = SUPPORTED_NODE_TYPES
+export const lS = MAX_CONCURRENT_FRAGMENT_LOADS
+export const qd = ContextType

@@ -7,9 +7,9 @@ import { Pr } from "../figma_app/774411";
 import { QP } from "../vendor/202832";
 import { Xo, Ls, W7, jJ, wv, _A, Fj, O5 } from "../905/998346";
 import { Hd, Qe, qM, tr, vE, Wo, xe } from "../905/791403";
-import { J } from "../905/223510";
+import { GroupItemType } from "../905/223510";
 import { getSingletonSceneGraph } from "../905/700578";
-import { B as _$$B2 } from "../905/94678";
+import { collectSymbolsAndStateGroups } from "../905/94678";
 import { EventEmitter } from "../905/690073";
 import { z } from "../vendor/835909";
 export let $$i4 = {
@@ -569,11 +569,11 @@ export class $$z0 {
     H(this, "options", void 0);
     H(this, "getComponentTypeSortOrder", e => {
       switch (e) {
-        case J.BUILDING_BLOCK:
+        case GroupItemType.BUILDING_BLOCK:
           return 0;
-        case J.NONE:
+        case GroupItemType.NONE:
           return 1;
-        case J.GROUPED_COMPONENT:
+        case GroupItemType.GROUPED_COMPONENT:
           return 2;
         default:
           return 3;
@@ -609,7 +609,7 @@ export class $$z0 {
         }).filter(Boolean);
       }(function (e, t) {
         let r = $$V6(t);
-        return _$$B2([...r], {
+        return collectSymbolsAndStateGroups([...r], {
           followInstances: !1
         }).filter(t => e.toLowerCase() === getComponentJSXName(t.name).toLowerCase());
       }(t, {

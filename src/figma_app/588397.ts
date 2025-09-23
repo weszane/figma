@@ -28,7 +28,7 @@ import { N as _$$N } from "../905/645480";
 import { zR as _$$zR } from "../figma_app/817077";
 import { j as _$$j } from "../905/523935";
 import { getBasename } from "../905/309735";
-import { a3 } from "../figma_app/645694";
+import { mapLibraryVariables } from "../figma_app/645694";
 import { ThemeContext, getThemeBorderStyle } from "../905/187165";
 import { cleanAssetName } from "../905/722604";
 import { PrimaryWorkflowEnum, StagingStatusEnum, hasAssetId } from "../figma_app/633080";
@@ -450,7 +450,7 @@ function ea({
 let es = memo(function ({
   variableSetID: e
 }) {
-  let t = useSelector(e => a3(e));
+  let t = useSelector(e => mapLibraryVariables(e));
   let r = useMemo(() => {
     let r = new Set();
     for (let n of Object.values(t)) if (n.variableSetId === e && (r.add(n.resolvedType), r.size >= 3)) break;

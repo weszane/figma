@@ -29,7 +29,7 @@ import { getUserPlan } from '../905/912096'
 import { resourceUtils } from '../905/989992'
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355'
 import { throwTypeError } from '../figma_app/465776'
-import { setupResourceAtomHandler } from '../figma_app/566371'
+import { getAtomMutate, setupResourceAtomHandler } from '../figma_app/566371'
 import { realtimeV2 } from '../figma_app/804490'
 import { getFalseValue } from '../figma_app/897289'
 
@@ -1440,7 +1440,7 @@ let Q = {
  */
 class QueryTimer {
   private _startTime: number
-  private _timerId: NodeJS.Timeout | null
+  private _timerId: number | null
   metadata: any
   finished: boolean
   backgrounded: boolean
@@ -1507,7 +1507,7 @@ class MetricsReporter {
   private onVisibilityChange: () => Promise<void>
   private _currentlySendingBatchedEvents: boolean = false
   private sendBatchedEvents: () => Promise<void>
-  private sendBatchedEventsInterval: NodeJS.Timeout
+  private sendBatchedEventsInterval: number
   private reportCustomEvent: (metric: string, tags?: Record<string, any>) => void
   private reportNumericEvent: (metric: string, value: number, tags?: Record<string, any>) => void
   private getDefaultTags: () => Record<string, any>
@@ -1745,5 +1745,7 @@ function useFile(id: any) {
 export let liveStoreInstance = Object.assign(liveStore, {
   useFile,
 })
-export { gY, IT } from '../figma_app/566371'
+export { getAtomMutate, setupResourceAtomHandler }
 export const M4 = liveStoreInstance
+export const IT = setupResourceAtomHandler
+export const gY = getAtomMutate

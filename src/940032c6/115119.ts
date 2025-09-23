@@ -210,7 +210,7 @@ import { Z as _$$Z3 } from '../905/521211';
 import { Button, ButtonLarge, ButtonWide } from '../905/521428';
 import { ex as _$$ex } from '../905/524523';
 import { r6 as _$$r6 } from '../905/542608';
-import { e as _$$e14 } from '../905/545750';
+import { insertSharedLibraryAsset } from '../905/545750';
 import { s as _$$s7 } from '../905/551945';
 import { l as _$$l3 } from '../905/556594';
 import { B as _$$B } from '../905/559262';
@@ -29751,7 +29751,7 @@ function TA(e) {
           let e = Tk(t);
           eu(e);
           ex(Xc.Code, e);
-          t.type === Tj.FIRST_PARTY ? (await _$$e14(t.preset.asset), eh(Xc.Code, t.preset.asset.name)) : eh(Xc.Code);
+          t.type === Tj.FIRST_PARTY ? (await insertSharedLibraryAsset(t.preset.asset), eh(Xc.Code, t.preset.asset.name)) : eh(Xc.Code);
         }
     }
   };

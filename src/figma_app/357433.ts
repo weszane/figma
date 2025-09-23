@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { FFileType } from "../figma_app/191312";
-import { Wc, PT } from "../905/669853";
+import { InsertionDetachment, DSAApiServiceInstance } from "../905/669853";
 export let $$n0;
 class l {
   constructor(e) {
@@ -14,7 +14,7 @@ class l {
     if (null == n || null == l || !d) return;
     let c = n.editorType;
     if (c === FFileType.SLIDES || c === FFileType.FIGMAKE || getFeatureFlags().dsa_restrict_actions_to_design && !this.isInDesignFile()) {
-      e === Wc.DETACHMENT && analyticsEventManager.trackDefinedEvent("design_systems_analytics.non_design_component_detached", {
+      e === InsertionDetachment.DETACHMENT && analyticsEventManager.trackDefinedEvent("design_systems_analytics.non_design_component_detached", {
         fileKey: l,
         componentKey: Object.keys(t ?? {})[0],
         editorType: c || void 0
@@ -26,7 +26,7 @@ class l {
       count: t
     }));
     try {
-      PT.recordComponentAction({
+      DSAApiServiceInstance.recordComponentAction({
         action: e,
         action_source: r,
         fileKey: l,
@@ -43,7 +43,7 @@ class l {
       count: r
     });
     if (0 !== i.length) try {
-      PT.recordStylesAction({
+      DSAApiServiceInstance.recordStylesAction({
         action: e,
         action_source: r,
         fileKey: this.state.openFile?.key,
@@ -60,7 +60,7 @@ class l {
       count: r
     });
     if (0 !== i.length) try {
-      PT.recordVariablesAction({
+      DSAApiServiceInstance.recordVariablesAction({
         action: e,
         action_source: r,
         fileKey: this.state.openFile?.key,

@@ -1,10 +1,10 @@
 import { useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { atomStoreManager } from "../figma_app/27355";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { withParsedMeta } from "../905/405710";
 import { liveStoreInstance } from "../905/713695";
-import { vx } from "../905/91038";
+import { fileVersionSelector } from "../905/91038";
 import { e_ } from "../figma_app/803787";
 import { selectSceneGraph } from "../figma_app/889655";
 import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
@@ -19,7 +19,7 @@ export function $$A2({
   productComponentStats: e,
   libraryKey: t
 }) {
-  let i = atomStoreManager.get(qp);
+  let i = atomStoreManager.get(filesByLibraryKeyAtom);
   let o = t ? i[t] : void 0;
   let l = useMemo(() => $$_1(e?.components ?? [], e?.stateGroups ?? []), [e]);
   let h = function ({
@@ -28,7 +28,7 @@ export function $$A2({
     let t = useDispatch();
     let i = useSelector(selectSceneGraph);
     let a = useSelector(e_);
-    let s = useSelector(vx);
+    let s = useSelector(fileVersionSelector);
     let o = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
     let l = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
     return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? {

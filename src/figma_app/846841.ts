@@ -42,7 +42,7 @@ import { b as _$$b } from "../figma_app/598297";
 import { g as _$$g2 } from "../905/505662";
 import { XG } from "../figma_app/98578";
 import { Ko, P5 } from "../figma_app/318590";
-import { kK } from "../figma_app/144974";
+import { shouldHideRecents } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, TC, B1, kN, ES } from "../905/198599";
 import { z as _$$z } from "../905/654860";
@@ -375,7 +375,7 @@ export function $$eR6({
   });
   let tO = useIsLoading(fi);
   let tR = g5(FDocumentType.Design).productComponents;
-  let tL = !currentSearch && !tO && (!tR.length || kK());
+  let tL = !currentSearch && !tO && (!tR.length || shouldHideRecents());
   let tP = !Q || tL;
   let tD = recentFragments ? recentFragments.length : 0;
   let tk = !th || th === qG.COMPONENTS;

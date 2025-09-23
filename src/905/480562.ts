@@ -26,7 +26,7 @@ import { G5, S6 } from "../figma_app/795674";
 import { SvgComponent } from "../905/714743";
 import { Ph } from "../905/160095";
 import { KindEnum } from "../905/129884";
-import { PT } from "../905/669853";
+import { DSAApiServiceInstance } from "../905/669853";
 import { A as _$$A2 } from "../1617/380980";
 import { resourceUtils } from "../905/989992";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -254,7 +254,7 @@ class eg extends PureComponent {
   }
   fetchInsertions(e) {
     let t = "primary" === e ? this.props.libraryFile.key : this.props.comparisonFileKey;
-    PT.getLibraryWeeklyInsertions({
+    DSAApiServiceInstance.getLibraryWeeklyInsertions({
       fileKey: t,
       startTs: G5(this.props.numDays + 7).toString(),
       endTs: S6(1).toString()
@@ -271,7 +271,7 @@ class eg extends PureComponent {
     }).catch(e => {
       console.warn(`Unable to fetch insertions, error: ${e}`);
     });
-    PT.getLibraryTeamUsage({
+    DSAApiServiceInstance.getLibraryTeamUsage({
       fileKey: t,
       startTs: G5(this.props.numDays).toString(),
       endTs: S6(1).toString()

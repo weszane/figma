@@ -157,7 +157,7 @@ import { o as _$$o2 } from "../905/89370";
 import { v as _$$v2 } from "../905/439487";
 import { W as _$$W2 } from "../905/592530";
 import { l as _$$l7 } from "../9410/367372";
-import { r as _$$r2 } from "../905/955316";
+import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { Y as _$$Y3 } from "../905/912236";
 import { useLocalStorageSync } from "../905/657224";
 import { dh as _$$dh } from "../figma_app/186343";
@@ -4668,7 +4668,7 @@ function lO() {
 let lF = new Map();
 function lU(e) {
   let t = getSingletonSceneGraph().get(AppStateTsApi?.canvasGrid().gridGUID() || "-1:-1");
-  t && _$$r2(() => {
+  t && executeInIgnoreUndoRedoScope(() => {
     _$$l3.system("slides-autorename", () => {
       t.autoRename = e;
     });
@@ -9192,7 +9192,7 @@ function cB() {
         if (!l || !l.isSlideNumber) return;
         let s = n8(l.containingSlideId, l.slideNumber, l.slideNumberSeparator || "/", t, i, n, r);
         _$$l3.system("update-slide-numbers", () => {
-          _$$r2(() => {
+          executeInIgnoreUndoRedoScope(() => {
             l.textContent !== s && (l.textContent = s);
           });
         });

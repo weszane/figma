@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { zK } from "../figma_app/913823";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isNullOrFailure, useIsLoaded } from "../905/18797";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 export function $$d1({
   disabled: e = !1
 } = {}) {
@@ -12,7 +12,7 @@ export function $$d1({
   let c = useSelector(e => e.fileVersion);
   let u = useSelector(e => e.loadingState);
   let p = useRef(0);
-  let _ = null != r && null != c ? yD(r.key) : void 0;
+  let _ = null != r && null != c ? generateRetrievingSubscribedComponentsKey(r.key) : void 0;
   useEffect(() => {
     !e && null != _ && isNullOrFailure(u, _) && p.current < 3 && (p.current += 1, t(zK()));
   }, [t, _, u, e]);

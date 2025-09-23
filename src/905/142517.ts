@@ -47,7 +47,7 @@ export function setupSubscriptionAtom<T>({
         incrementAtom()
     })
     return get()
-  })
+  }) as T
 }
 
 // Refactored export name for S

@@ -57,7 +57,7 @@ import { z as _$$z } from "../905/239603";
 import { getResourceType, mapVtToBrowseResourceType, hasContent, isFigmakeTemplate, getMainContent, hasResourceType } from "../figma_app/427318";
 import { ResourceTypeNoComment, CommunityPageType, hasClientMeta } from "../figma_app/45218";
 import { PublisherBadgeSchema } from "../figma_app/10554";
-import { liveStoreInstance, IT as _$$IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { getRequest } from "../905/910117";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { Xy, O7 } from "../figma_app/578832";
@@ -4889,7 +4889,7 @@ function aa() {
   let [{
     data: o,
     status: c
-  }] = _$$IT(categoryBySlugQuery({
+  }] = setupResourceAtomHandler(categoryBySlugQuery({
     categorySlug,
     tagSlug,
     locale: r
@@ -5162,7 +5162,7 @@ function ab(e) {
       isFetchingNextPage: r
     }, {
       fetchNextPage: o
-    }] = _$$IT(_$$a3.ResourcesPaginatedQuery({
+    }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
       resourceType: [t],
       editorType: mapEditorToType(e.editorType || _$$k2.Editors.ALL),
       price: e.price,

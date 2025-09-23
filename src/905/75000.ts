@@ -1,636 +1,709 @@
-import { c as _$$c } from '../905/94678'
-import { O as _$$O, J } from '../905/223510'
-import { k4, Uk } from '../905/327738'
-import { xb as _$$xb, _e, _j, bi, ep, fy, GN, go, Hd, hM, Ho, j3, L_, O7, QJ, R0, rB, Vv, WG } from '../905/581923'
+import { getSymbolOrStateGroupNode } from '../905/94678'
+import { GroupItemType } from '../905/223510'
+import { findInstanceNodesByGuid, getSharedVersion } from '../905/327738'
+import { areAllDefsSameTypeAndDefault, buildComponentJSXName, capitalizeFirstLetter, cleanComponentPropNameForUsage, comparePropDefs, extractModifiersFromProp, filterUniquePropDefs, getComponentJSXName, getComponentPropsTypeName, getInstanceDefaultValue, getNestedImageNodes, getTsPropKey, getTsPropType, getUniqueUsageProp, getUsagePropName, groupByCommonPrefixSorted, groupInstanceNodesBySymbol, groupNodesByPropName, isOptionalProp } from '../905/581923'
 import { getSingletonSceneGraph } from '../905/700578'
-import { $x, C as _$$C, iR, Se, vh, vR, VV, yu } from '../905/926939'
+import { BUILDING_BLOCKS_LABEL, findGroupName, getComponentGroupName, getCustomGroupName, getNodeParentPath, ICONS_GROUP, isPartOfGroup, UNKNOWN_LABEL } from '../905/926939'
 import { throwTypeError } from '../figma_app/465776'
 import { Confirmation, FirstDraftHelpers, SceneGraphHelpers } from '../figma_app/763686'
 
 let u = 'CustomImage'
-let $$p3 = `\
+export let CUSTOM_IMAGE_TYPE_STR = `\
 type ${u} = {
   // always use the string "0"
   id: string
 };`
-let $$m0 = {
+export let STRING_TYPE_REPR = {
   typeName: 'string',
 }
-let $$h7 = {
+export let BOOLEAN_TYPE_REPR = {
   typeName: 'boolean',
 }
 let g = {
   typeName: 'React.ReactNode',
 }
-let $$f6 = {
+export let IMAGE_TYPE_REPR = {
   typeName: u,
   referencedTypes: [{
     type: 'IMAGE',
   }],
 }
-function _({
+function buildPropsTypeRepr({
   component: e,
   parsedDefs: t,
 }, i) {
   let n = []
   let r = []
-  for (let e of ep(t, i)) {
+  for (let e of filterUniquePropDefs(t, i)) {
     e.typeRepr.referencedTypes && r.push(...e.typeRepr.referencedTypes)
-    let t = GN(e, void 0, i)
-    let a = Hd(e, i)
+    let t = getTsPropKey(e, void 0, i)
+    let a = getTsPropType(e, i)
     t && a && n.push(`${t}: ${a}`)
   }
-  return {
-    typeName: L_(e.name),
-    typeDefBody: `{${n.join('; ')}}`,
-    prefixComments: (function (e, t) {
-      let i = []
-      for (let n of ep(e, t)) {
-        let r = n.devFriendlyProp
-        if (r.type === 'ARRAY' && t.enableTsArrays) {
-          let t = 0
-          let n = 0
-          for (let i of e) i.devFriendlyProp.type === 'ARRAY' && i.devFriendlyProp.key === r.key && (t++, !i.isOptional && n++)
-          t === n ? i.push(`@param ${r.key} - Specify ${t} items`) : i.push(`@param ${r.key} - Specify between ${n} and ${t} items`)
+
+  // Extracted the IIFE into a named function to avoid ESLint no-unused-expressions error
+  function generatePrefixComments(e, t) {
+    let i = []
+    for (let n of filterUniquePropDefs(e, t)) {
+      let r = n.devFriendlyProp
+      if (r.type === 'ARRAY' && t.enableTsArrays) {
+        let t = 0
+        let n = 0
+        for (let i of e) {
+          if (i.devFriendlyProp.type === 'ARRAY' && i.devFriendlyProp.key === r.key) {
+            t++
+            if (!i.isOptional)
+              n++
+          }
         }
+        t === n ? i.push(`@param ${r.key} - Specify ${t} items`) : i.push(`@param ${r.key} - Specify between ${n} and ${t} items`)
       }
-      return i
-    }(t, i)),
+    }
+    return i
+  }
+
+  return {
+    typeName: getComponentPropsTypeName(e.name),
+    typeDefBody: `{${n.join('; ')}}`,
+    prefixComments: generatePrefixComments(t, i),
     referencedTypes: r,
   }
 }
-function A({
-  component: e,
-  rawProp: t,
-  seenNestedVariant: i,
-}, n) {
-  let r = $$I1(e, n, i)
-  let a = r.propsTypeRepr.typeName
-  let {
-    omit,
-    pick,
-  } = rB(t)
-  if (r.parsedDefs.length > 5 && pick && pick.length <= 2) {
-    return {
-      typeName: _({
-        component: e,
-        parsedDefs: ep(r.parsedDefs, n).filter(e => !(omit && omit.includes(j3(e.rawProp))) && (!pick || !!pick.includes(j3(e.rawProp)))),
-      }, n).typeDefBody ?? '{}',
-      referencedTypes: [{
-        type: 'COMPONENT_INLINED',
-        componentId: r.componentId,
-      }],
-    }
-  }
-  if (omit) {
-    let e = []
-    for (let t of ep(r.parsedDefs, n)) 'key' in t.devFriendlyProp && omit.includes(j3(t.rawProp)) && e.push(t.devFriendlyProp.key)
-    let t = e.map(e => `"${e}"`).join(' | ')
-    a = `Omit<${a}, ${t}>`
-  }
-  if (pick) {
-    let e = []
-    for (let t of ep(r.parsedDefs, n)) 'key' in t.devFriendlyProp && pick.includes(j3(t.rawProp)) && e.push(t.devFriendlyProp.key)
-    let t = e.map(e => `"${e}"`).join(' | ')
-    a = `Pick<${a}, ${t}>`
-  }
-  return {
-    typeName: a,
-    referencedTypes: [{
-      type: 'COMPONENT',
-      componentId: r.componentId,
-    }],
-  }
+
+/**
+ * Cache objects for type information.
+ * Original variable names: y, b
+ */
+let typeInfoCache: Record<string, any> = {}
+let typeInfoByAssetKey: Record<string, any> = {}
+
+/**
+ * Resets the cached type information.
+ * Original function name: resetTypeInfoCache
+ */
+export function resetTypeInfoCache(): void {
+  typeInfoCache = {}
+  typeInfoByAssetKey = {}
 }
-let y = {}
-let b = {}
-export function $$v2() {
-  y = {}
-  b = {}
-}
-export function $$I1(e, t, i) {
+
+/**
+ * Retrieves type information for a component node, using cache if available.
+ * Original function name: getTypeInfoCached
+ * @param node - The component or state group node.
+ * @param options - Options for type info retrieval.
+ * @param seenNestedVariant - Optional map for nested variant tracking.
+ * @returns The type information object for the node.
+ */
+export function getTypeInfoCached(
+  node: any,
+  options?: any,
+  seenNestedVariant?: any,
+): any {
   try {
-    if (!y[(e = e.isState ? e.parentNode : e).guid] || t.noTypeInfoCache) {
-      let n = E(e, t, i)
-      y[e.guid] = n
-      b[n.key] = n
+    // If node is a state, use its parent node for type info.
+    const resolvedNode = node.isState ? node.parentNode : node
+    const guid = resolvedNode.guid
+
+    // If not cached or caching is disabled, compute and cache type info.
+    if (!typeInfoCache[guid] || options?.noTypeInfoCache) {
+      const typeInfo = computeTypeInfo(resolvedNode, options, seenNestedVariant)
+      typeInfoCache[guid] = typeInfo
+      typeInfoByAssetKey[typeInfo.key] = typeInfo
     }
-    return y[e.guid]
+    return typeInfoCache[guid]
   }
-  catch (e) {
-    throw e
+  catch (error) {
+    // Log the error for debugging purposes
+    console.error('Error retrieving type info:', error)
+    throw error
   }
 }
-function E(e, t, i) {
-  let r = WG(e.name)
-  let u = (function (e, t, i) {
-    let r = (function (e, t) {
-      let i = e.componentPropertyDefinitions(Confirmation.YES)
-      let r = Object.keys(i)
-      r.reverse()
-      let a = []
-      for (let e of r) {
-        let r = i[e]
-        if (r.type === 'INSTANCE_SWAP') {
-          let i = getSingletonSceneGraph().get(r.defaultValue)
-          if (i && i.type === 'SYMBOL') {
-            if (i.name === 'Slot') {
-              a.push({
-                rawProp: e,
-                def: {
-                  type: 'SLOT',
-                },
-              })
-              continue
-            }
-            if (i.isSubscribedAsset) {
-              a.push({
-                rawProp: e,
-                def: {
-                  type: 'GROUPED_INSTANCE_SWAP',
-                  defaultValue: i.guid,
-                  groupName: i.isIconLikeContainer ? _$$C : $x,
-                },
-              })
-              continue
-            }
-            {
-              let n = $$I1(i, t)
-              let r = vR(n)
-              if (r) {
-                a.push({
-                  rawProp: e,
-                  def: {
-                    type: 'GROUPED_INSTANCE_SWAP',
-                    defaultValue: i.guid,
-                    groupName: r,
-                  },
-                })
-                continue
-              }
-            }
-          }
-        }
-        a.push({
-          rawProp: e,
-          def: r,
-        })
-      }
-      let s = _j(e)
-      for (let [e, t] of Object.entries(_e(s, 'IMAGE'))) {
-        let i = {}
-        for (let [e, n] of Object.entries(t.tagsByParentComponentId)) {
-          i[e] = {
-            background: 'normal',
-          }
-          n.transparent === 'true' && (i[e].background = 'transparent')
-          n.segment === 'true' && (i[e].background = 'segment')
-          n.desc && (i[e].desc = n.desc)
-          n.prompt && (i[e].prompt = n.prompt)
-        }
-        a.push({
-          rawProp: e,
-          def: {
-            type: 'IMAGE',
-            guidByParentComponentId: t.guidByParentComponentId,
-            tagsByParentComponentId: i,
-          },
-        })
-      }
-      let u = k4(e.guid).filter(e => !(e.isInstanceSublayer || !e.isBubbled && !t.exposeAllNestedInstances || e.componentPropertyReferences()?.mainComponent && !t.bubbleInstanceSwapProps))
-      for (let [e, i] of Object.entries(_e(u, 'NESTED_INSTANCE'))) {
-        let r = i.componentIdOrNull
-        if (!r)
-          continue
-        let s = {}
-        for (let [e, a] of Object.entries(i.tagsByParentComponentId)) {
-          s[e] = {}
-          let i = {}
-          if (a.fixed) {
-            let o = getSingletonSceneGraph().get(r)
-            if (o) {
-              let n = $$I1(o, t)
-              let r = a.fixed?.split(',').map(e => e.trim()) ?? []
-              for (let e of n.parsedDefs) {
-                if ('key' in e.devFriendlyProp && e.def.type === 'VARIANT') {
-                  let t = e.devFriendlyProp.key;
-                  (a.fixed === 'true' || r.includes(t)) && (i[t] = !0)
-                }
-              }
-              s[e].fixedVariantProperties = i
-            }
-          }
-        }
-        let o = {
-          type: 'NESTED_INSTANCE',
-          componentId: r,
-          tagsByParentComponentId: s,
-          guidByParentComponentId: i.guidByParentComponentId,
-        }
-        a.push({
-          rawProp: e,
-          def: o,
-        })
-      }
-      let p = {}
-      for (let e of a) {
-        if (p[e.rawProp]) {
-          console.error('Unexpected repeated rawProp value', {
-            rawProp: e.rawProp,
+// Original function name: E
+// This function computes type information for a component node.
+// It parses component properties, handles various types (e.g., TEXT, BOOLEAN, IMAGE, etc.),
+// and constructs the type representation, including JSX name, props, and referenced types.
+function computeTypeInfo(
+  node: any,
+  options?: any,
+  seenNestedVariant?: any,
+): any {
+  const jsxName = getComponentJSXName(node.name)
+  const parsedDefs = parseComponentDefs(node, options, seenNestedVariant)
+  const propsTypeRepr = buildPropsTypeRepr({
+    component: node,
+    parsedDefs,
+  }, options)
+  const typeStr = `type ${jsxName} = React.FC<${propsTypeRepr.typeDefBody ?? '{}'}>`
+  const componentGroupPath = getNodeParentPath(node.guid)
+  const isBuildingBlock = isPartOfGroup(componentGroupPath, BUILDING_BLOCKS_LABEL)
+  const groupName = findGroupName(componentGroupPath)
+  const isIconLike = node.isIconLikeContainer
+  const componentType = isBuildingBlock
+    ? GroupItemType.BUILDING_BLOCK
+    : groupName
+      ? GroupItemType.GROUPED_COMPONENT
+      : isIconLike
+        ? GroupItemType.GROUPED_COMPONENT
+        : GroupItemType.NONE
+  const resolvedGroupName = isBuildingBlock
+    ? BUILDING_BLOCKS_LABEL
+    : groupName ?? (isIconLike ? 'Icon' : '')
+  const version = getSharedVersion(node)
+  const defaultNodeId = node.type === 'SYMBOL' ? node.guid : node.defaultVariant?.guid ?? ''
+  const assetKey = componentType === GroupItemType.GROUPED_COMPONENT
+    ? SceneGraphHelpers.getAssetKeyForPublish(defaultNodeId)
+    : SceneGraphHelpers.getAssetKeyForPublish(node.guid)
+  const defs = node.componentPropertyDefinitions(Confirmation.YES)
+  return {
+    componentId: node.guid,
+    name: node.name,
+    defaultNodeId,
+    jsxName,
+    componentGroupPath,
+    groupName: resolvedGroupName,
+    componentType,
+    defs,
+    parsedDefs,
+    prefixTypes: generatePrefixTypes(parsedDefs, options),
+    prefixComments: propsTypeRepr.prefixComments ?? [],
+    typeStr,
+    propsTypeRepr,
+    description: node.description,
+    key: assetKey,
+    version,
+    typeInfoVersion: 3,
+  }
+}
+
+// Original nested function: (function (e, t, i) { ... })
+// Parses component property definitions into a structured format.
+function parseComponentDefs(
+  component: any,
+  options: any,
+  seenNestedVariant?: any,
+): any[] {
+  const rawDefs = extractRawDefs(component, options)
+  assignUsageProps(rawDefs)
+  const parsedDefs = processDefs(component, rawDefs, options, seenNestedVariant)
+  const sortedDefs = parsedDefs.sort(comparePropDefs)
+  return sortedDefs
+}
+
+// Original nested function: (function (e, t) { ... })
+// Extracts raw property definitions from the component.
+function extractRawDefs(component: any, options: any): Record<string, any> {
+  const defs = component.componentPropertyDefinitions(Confirmation.YES)
+  const propKeys = Object.keys(defs).reverse()
+  const rawProps: any[] = []
+
+  for (const key of propKeys) {
+    const def = defs[key]
+    if (def.type === 'INSTANCE_SWAP') {
+      const defaultNode = getSingletonSceneGraph().get(def.defaultValue)
+      if (defaultNode && defaultNode.type === 'SYMBOL') {
+        if (defaultNode.name === 'Slot') {
+          rawProps.push({
+            rawProp: key,
+            def: { type: 'SLOT' },
           })
           continue
         }
-        p[e.rawProp] = e
-      }
-      return p
-    }(e, t))
-    for (let e of go(r)) {
-      for (let t = 0; t < e.length; t++) {
-        let i = e[t]
-        i.usagePropOverride = fy({
-          index: t,
-          rawProp: i.rawProp,
-        })
+        if (defaultNode.isSubscribedAsset) {
+          rawProps.push({
+            rawProp: key,
+            def: {
+              type: 'GROUPED_INSTANCE_SWAP',
+              defaultValue: defaultNode.guid,
+              groupName: defaultNode.isIconLikeContainer ? ICONS_GROUP : UNKNOWN_LABEL,
+            },
+          })
+          continue
+        }
+        const typeInfo = getTypeInfoCached(defaultNode, options)
+        const groupName = getComponentGroupName(typeInfo)
+        if (groupName) {
+          rawProps.push({
+            rawProp: key,
+            def: {
+              type: 'GROUPED_INSTANCE_SWAP',
+              defaultValue: defaultNode.guid,
+              groupName,
+            },
+          })
+          continue
+        }
       }
     }
-    let s = {}
-    let u = {}
-    let p = {}
-    let _ = {}
-    let y = new Set()
-    let v = i ?? new Map()
-    for (let [i, c] of Object.entries(r)) {
-      let r = j3(c.usagePropOverride ?? i)
-      y.has(r) && (r = R0({
-        usageProp: r,
-        usedUsageProps: y,
-      }))
-      let I = c.def
-      if (I.type === 'NESTED_INSTANCE' && (v.get(I.componentId) ?? 0) >= 25)
-        continue
-      if (e.isStateGroup && I.type === 'NESTED_INSTANCE') {
-        let t = v.get(e.guid) ?? 0
-        v.set(e.guid, t + 1)
-      }
-      let E = (function ({
-        component: e,
-        rawProp: t,
-        definition: i,
-        seenNestedVariant: r,
-      }, s) {
-        switch (i.type) {
-          case 'TEXT':
-            return $$m0
-          case 'BOOLEAN':
-            return $$h7
-          case 'NUMBER':
-            break
-          case 'SLOT':
-            return g
-          case 'IMAGE':
-            return $$f6
-          case 'VARIANT':
-            return {
-              typeName: i.variantOptions?.map(e => `"${e}"`).join(' | ') ?? 'null',
-            }
-          case 'GROUPED_INSTANCE_SWAP':
-            return {
-              typeName: VV(i.groupName),
-              typeDefBody: '{description: string}',
-              prefixComments: ['@param description - Specify a 1 sentence description'],
-            }
-          case 'INSTANCE_SWAP':
-          {
-            if (i.preferredValues && i.preferredValues.length !== 0 && i.preferredValues.length < 10) {
-              let n = Vv({
-                component: e,
-                rawProp: t,
-              })
-              let r = []
-              let a = []
-              for (let e of i.preferredValues) {
-                let t = (function (e, t) {
-                  if (b[e] && !t.noTypeInfoCache)
-                    return b[e]
-                  let i = FirstDraftHelpers.getComponentByAssetKey(e) || FirstDraftHelpers.getStateGroupByAssetKey(e)
-                  return i ? $$S4(i, t) : null
-                }(e.key, s))
-                t && (r.push(t.jsxName), a.push({
-                  type: 'COMPONENT_JSX',
-                  componentId: t.componentId,
-                }))
-              }
-              if (r.length !== 0) {
-                return {
-                  typeName: n,
-                  typeDefBody: `ReactElement<any, ${r.join(' | ')}>`,
-                  referencedTypes: a,
-                }
+    rawProps.push({ rawProp: key, def })
+  }
+
+  // Handle nested image nodes
+  const nestedImages = getNestedImageNodes(component)
+  for (const [propName, imageData] of Object.entries(groupInstanceNodesBySymbol(nestedImages, 'IMAGE'))) {
+    const tags: Record<string, any> = {}
+    for (const [parentId, tagData] of Object.entries(imageData.tagsByParentComponentId)) {
+      tags[parentId] = { background: 'normal' }
+      if ((tagData as any).transparent === 'true')
+        tags[parentId].background = 'transparent'
+      if ((tagData as any).segment === 'true')
+        tags[parentId].background = 'segment'
+      if ((tagData as any).desc)
+        tags[parentId].desc = (tagData as any).desc
+      if ((tagData as any).prompt)
+        tags[parentId].prompt = (tagData as any).prompt
+    }
+    rawProps.push({
+      rawProp: propName,
+      def: {
+        type: 'IMAGE',
+        guidByParentComponentId: imageData.guidByParentComponentId,
+        tagsByParentComponentId: tags,
+      },
+    })
+  }
+
+  // Handle nested instance nodes
+  const instanceNodes = findInstanceNodesByGuid(component.guid).filter(
+    (node: any) =>
+      !(node.isInstanceSublayer || (!node.isBubbled && !options.exposeAllNestedInstances)
+        || (node.componentPropertyReferences()?.mainComponent && !options.bubbleInstanceSwapProps)),
+  )
+  for (const [propName, instanceData] of Object.entries(groupInstanceNodesBySymbol(instanceNodes, 'NESTED_INSTANCE'))) {
+    const componentId = instanceData.componentIdOrNull
+    if (!componentId)
+      continue
+    const tags: Record<string, any> = {}
+    for (const [parentId, tagData] of Object.entries(instanceData.tagsByParentComponentId)) {
+      tags[parentId] = {}
+      const fixedVariants: Record<string, boolean> = {}
+      if ((tagData as any).fixed) {
+        const targetComponent = getSingletonSceneGraph().get(componentId)
+        if (targetComponent) {
+          const typeInfo = getTypeInfoCached(targetComponent, options)
+          const fixedProps = (tagData as any).fixed?.split(',').map((s: string) => s.trim()) ?? []
+          for (const def of typeInfo.parsedDefs) {
+            if ('key' in def.devFriendlyProp && def.def.type === 'VARIANT') {
+              const variantKey = def.devFriendlyProp.key
+              if ((tagData as any).fixed === 'true' || fixedProps.includes(variantKey)) {
+                fixedVariants[variantKey] = true
               }
             }
-            let a = getSingletonSceneGraph().get(i.defaultValue)
-            if (a && a.type === 'SYMBOL') {
-              return A({
-                component: a,
-                rawProp: t,
-                seenNestedVariant: r,
-              }, s)
-            }
-            break
           }
-          case 'NESTED_INSTANCE':
-          {
-            let e = i.componentId
-            let a = getSingletonSceneGraph().get(e)
-            if (a && (a.type === 'SYMBOL' || a.isStateGroup)) {
-              return A({
-                component: a,
-                rawProp: t,
-                seenNestedVariant: r,
-              }, s)
-            }
-            break
-          }
-          default:
-            throwTypeError(i)
-        }
-        return null
-      }({
-        component: e,
-        rawProp: i,
-        definition: I,
-        seenNestedVariant: v,
-      }, t))
-      if (E) {
-        y.add(r)
-        p[i] = r
-        let e = E.typeName
-        _[e] = _[e] || []
-        _[e].push(r)
-        let t = {
-          def: I,
-          devFriendlyProp: (function ({
-            usageProp: e,
-            rawProp: t,
-            definition: i,
-          }) {
-            let r = {
-              key: e,
-            }
-            let s = j3(t)
-            switch (s !== e && (r.originalKey = s), i.type) {
-              case 'VARIANT':
-                return {
-                  type: 'SIMPLE_CHOICE',
-                  validOptions: i.variantOptions ?? [],
-                  valueType: 'STRING',
-                  ...r,
-                }
-              case 'INSTANCE_SWAP':
-              case 'NESTED_INSTANCE':
-              case 'SLOT':
-                return {
-                  type: 'SIMPLE',
-                  valueType: 'OBJECT',
-                  ...r,
-                }
-              case 'BOOLEAN':
-                return {
-                  type: 'SIMPLE',
-                  valueType: 'BOOLEAN',
-                  ...r,
-                }
-              case 'TEXT':
-                return {
-                  type: 'SIMPLE',
-                  valueType: 'STRING',
-                  ...r,
-                }
-              case 'NUMBER':
-                return {
-                  type: 'SIMPLE',
-                  valueType: 'UNKNOWN',
-                  ...r,
-                }
-              case 'IMAGE':
-                return {
-                  type: 'IMAGE',
-                  valueType: 'OBJECT',
-                  ...r,
-                }
-              case 'GROUPED_INSTANCE_SWAP':
-              {
-                let e = getSingletonSceneGraph().get(i.defaultValue)
-                if (!e || e.type !== 'SYMBOL') {
-                  return {
-                    type: 'SIMPLE',
-                    valueType: 'UNKNOWN',
-                    ...r,
-                  }
-                }
-                return {
-                  type: 'GROUPED_INSTANCE_SWAP',
-                  groupName: i.groupName,
-                  valueType: 'OBJECT',
-                  ...r,
-                }
-              }
-              default:
-                throwTypeError(i)
-            }
-          }({
-            usageProp: r,
-            rawProp: i,
-            definition: I,
-          })),
-          componentId: O7(I),
-          isOptional: QJ(i),
-          rawProp: i,
-          typeRepr: E,
-        }
-        u[i] = t
-        s[r] = t
-      }
-    }
-    for (let e of Object.values(_)) {
-      for (let [t, i] of Object.entries(hM(e))) {
-        if (_$$xb(i.map(e => s[e]))) {
-          for (let e = 0; e < i.length; e++) {
-            let n = i[e]
-            let r = s[n].devFriendlyProp
-            let a = {
-              type: 'ARRAY',
-              key: t,
-              index: e,
-              nonArrayKey: 'key' in r ? r.key : '',
-              valueType: r.valueType,
-            }
-            'originalKey' in r && (a.originalKey = r.originalKey)
-            s[n].devFriendlyProp = a
-          }
+          tags[parentId].fixedVariantProperties = fixedVariants
         }
       }
     }
-    let E = Object.keys(s)
-    let x = []
-    let w = {}
-    for (let e of E) {
-      let t = s[e].devFriendlyProp
-      if (t.type !== 'DERIVED_BOOLEAN') {
-        switch (t.type) {
-          case 'SIMPLE':
-          case 'SIMPLE_CHOICE':
-          case 'IMAGE':
-          case 'GROUPED_INSTANCE_SWAP':
-            w[e] = t
-            break
-          case 'ARRAY':
-            w[e] = t
-            w[t.key] = {
-              type: 'SIMPLE',
-              key: t.key,
-              valueType: t.valueType,
-            }
-            break
-          default:
-            throwTypeError(t)
+    rawProps.push({
+      rawProp: propName,
+      def: {
+        type: 'NESTED_INSTANCE',
+        componentId,
+        tagsByParentComponentId: tags,
+        guidByParentComponentId: instanceData.guidByParentComponentId,
+      },
+    })
+  }
+
+  // Ensure unique rawProps
+  const uniqueProps: Record<string, any> = {}
+  for (const prop of rawProps) {
+    if (uniqueProps[prop.rawProp]) {
+      console.error('Unexpected repeated rawProp value', { rawProp: prop.rawProp })
+      continue
+    }
+    uniqueProps[prop.rawProp] = prop
+  }
+  return uniqueProps
+}
+
+// Assigns usage prop names to grouped nodes.
+function assignUsageProps(rawDefs: Record<string, any>): void {
+  for (const group of groupNodesByPropName(rawDefs)) {
+    for (let i = 0; i < group.length; i++) {
+      const prop = group[i]
+      prop.usagePropOverride = getUsagePropName({
+        index: i,
+        rawProp: prop.rawProp,
+      })
+    }
+  }
+}
+
+// Processes raw defs into parsed defs with type representations.
+function processDefs(
+  component: any,
+  rawDefs: Record<string, any>,
+  options: any,
+  seenNestedVariant?: any,
+): any[] {
+  const usageProps = new Set<string>()
+  const propMappings: Record<string, string> = {}
+  const typeGroups: Record<string, string[]> = {}
+  const parsedDefs: any[] = []
+  const variantMap = seenNestedVariant ?? new Map()
+
+  for (const [rawProp, propData] of Object.entries(rawDefs)) {
+    let usageProp = cleanComponentPropNameForUsage(propData.usagePropOverride ?? rawProp)
+    if (usageProps.has(usageProp)) {
+      usageProp = getUniqueUsageProp({ usageProp, usedUsageProps: usageProps })
+    }
+    const def = propData.def
+    if (def.type === 'NESTED_INSTANCE' && (variantMap.get(def.componentId) ?? 0) >= 25)
+      continue
+    if (component.isStateGroup && def.type === 'NESTED_INSTANCE') {
+      const count = variantMap.get(component.guid) ?? 0
+      variantMap.set(component.guid, count + 1)
+    }
+    const typeRepr = getTypeRepresentation({
+      component,
+      rawProp,
+      definition: def,
+      seenNestedVariant: variantMap,
+    }, options)
+    if (typeRepr) {
+      usageProps.add(usageProp)
+      propMappings[rawProp] = usageProp
+      const typeName = typeRepr.typeName
+      typeGroups[typeName] = typeGroups[typeName] || []
+      typeGroups[typeName].push(usageProp)
+      const devFriendlyProp = buildDevFriendlyProp({
+        usageProp,
+        rawProp,
+        definition: def,
+      })
+      const parsedDef = {
+        def,
+        devFriendlyProp,
+        componentId: getInstanceDefaultValue(def),
+        isOptional: isOptionalProp(rawProp),
+        rawProp,
+        typeRepr,
+      }
+      parsedDefs.push(parsedDef)
+    }
+  }
+
+  // Group by common prefixes
+  for (const group of Object.values(typeGroups)) {
+    for (const [prefix, items] of Object.entries(groupByCommonPrefixSorted(group))) {
+      if (areAllDefsSameTypeAndDefault(items.map((item: string) => parsedDefs.find(d => d.devFriendlyProp.key === item)))) {
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i]
+          const def = parsedDefs.find(d => d.devFriendlyProp.key === item)
+          const originalProp = def.devFriendlyProp
+          const arrayProp: any = {
+            type: 'ARRAY',
+            key: prefix,
+            index: i,
+            nonArrayKey: 'key' in originalProp ? originalProp.key : '',
+            valueType: originalProp.valueType,
+          }
+          if ('originalKey' in originalProp)
+            arrayProp.originalKey = (originalProp as any).originalKey
+          def.devFriendlyProp = arrayProp
         }
       }
     }
-    for (let e of E) {
-      let t = s[e]
-      if (t.devFriendlyProp.type === 'SIMPLE') {
-        let i = 'Visible'
-        if (e.endsWith(i)) {
-          let n = e.slice(0, -i.length)
-          n && w[n] && (t.devFriendlyProp = {
+  }
+
+  // Finalize devFriendlyProps
+  const finalProps: Record<string, any> = {}
+  for (const def of parsedDefs) {
+    const prop = def.devFriendlyProp
+    if (prop.type !== 'DERIVED_BOOLEAN') {
+      switch (prop.type) {
+        case 'SIMPLE':
+        case 'SIMPLE_CHOICE':
+        case 'IMAGE':
+        case 'GROUPED_INSTANCE_SWAP':
+          finalProps[prop.key] = prop
+          break
+        case 'ARRAY':
+          finalProps[prop.key] = prop
+          finalProps[prop.key] = {
+            type: 'SIMPLE',
+            key: prop.key,
+            valueType: prop.valueType,
+          }
+          break
+        default:
+          throwTypeError(prop)
+      }
+    }
+  }
+
+  // Handle derived booleans
+  for (const def of parsedDefs) {
+    const prop = def.devFriendlyProp
+    if (prop.type === 'SIMPLE') {
+      const visibleSuffix = 'Visible'
+      if (prop.key.endsWith(visibleSuffix)) {
+        const baseKey = prop.key.slice(0, -visibleSuffix.length)
+        if (baseKey && finalProps[baseKey]) {
+          def.devFriendlyProp = {
             type: 'DERIVED_BOOLEAN',
             valueType: 'BOOLEAN',
-            devFriendlyProp: w[n],
-          })
-        }
-      }
-      x.push(t)
-    }
-    return x.sort(Ho)
-  }(e, t, i))
-  let y = _({
-    component: e,
-    parsedDefs: u,
-  }, t)
-  let v = `type ${r} = React.FC<${y.typeDefBody ?? '{}'}>`
-  let E = yu(e.guid)
-  let w = Se(E, vh)
-  let C = iR(E)
-  let T = e.isIconLikeContainer
-  let k = w ? J.BUILDING_BLOCK : C ? J.GROUPED_COMPONENT : T ? J.GROUPED_COMPONENT : J.NONE
-  let R = w ? vh : C ?? (T ? 'Icon' : '')
-  let N = Uk(e)
-  let P = e.type === 'SYMBOL' ? e.guid : e.defaultVariant?.guid ?? ''
-  let O = k === J.GROUPED_COMPONENT ? SceneGraphHelpers.getAssetKeyForPublish(P) : SceneGraphHelpers.getAssetKeyForPublish(e.guid)
-  let D = e.componentPropertyDefinitions(Confirmation.YES)
-  return {
-    componentId: e.guid,
-    name: e.name,
-    defaultNodeId: P,
-    jsxName: r,
-    componentGroupPath: E,
-    groupName: R,
-    componentType: k,
-    defs: D,
-    parsedDefs: u,
-    prefixTypes: (function (e, t) {
-      let i = {}
-      let r = (e, t) => {
-        e in i && (e = R0({
-          usageProp: e,
-          usedUsageProps: new Set(Object.keys(i)),
-        }))
-        i[e] = t
-      }
-      for (let i of ep(e, t)) {
-        let e = i.devFriendlyProp
-        if (e.type === 'DERIVED_BOOLEAN' || e.type === 'ARRAY' && e.index !== 0)
-          continue
-        !(function (e, t, i, r) {
-          if (t.referencedTypes) {
-            for (let s of t.referencedTypes) {
-              switch (s.type) {
-                case 'IMAGE':
-                  i(e, $$p3)
-                  break
-                case 'COMPONENT_JSX':
-                {
-                  let t = getSingletonSceneGraph().get(s.componentId)
-                  if (t) {
-                    let n = $$I1(t, r)
-                    for (let [t, r] of Object.entries(n.prefixTypes)) i(`${e}${bi(t)}`, r)
-                    i(e, n.typeStr)
-                  }
-                  break
-                }
-                case 'COMPONENT_INLINED':
-                case 'COMPONENT':
-                {
-                  let t = getSingletonSceneGraph().get(s.componentId)
-                  if (t) {
-                    let n = $$I1(t, r)
-                    for (let [t, r] of Object.entries(n.prefixTypes)) i(`${e}${bi(t)}`, r)
-                    if (s.type === 'COMPONENT') {
-                      let t = x(n.propsTypeRepr)
-                      t && i(e, t)
-                    }
-                  }
-                  break
-                }
-                default:
-                  throwTypeError(s)
-              }
-            }
+            devFriendlyProp: finalProps[baseKey],
           }
-        }(e.key, i.typeRepr, r, t))
-        let s = x(i.typeRepr)
-        if (s) {
-          r(e.key, s)
-          continue
         }
       }
-      return i
-    }(u, t)),
-    prefixComments: y.prefixComments ?? [],
-    typeStr: v,
-    propsTypeRepr: y,
-    description: e.description,
-    key: O,
-    version: N,
-    typeInfoVersion: _$$O,
-  }
-}
-function x(e) {
-  let t = []
-  if (e.typeDefBody) {
-    if (e.prefixComments?.length) {
-      for (let i of (t.push('/**'), e.prefixComments)) t.push(` * ${i}`)
-      t.push(' */')
     }
-    t.push(`type ${e.typeName} = ${e.typeDefBody};`)
-    return t.join('\n')
+  }
+
+  return parsedDefs
+}
+
+// Original nested function: (function ({ component: e, rawProp: t, definition: i, seenNestedVariant: r }, s) { ... })
+// Gets the type representation for a property definition.
+function getTypeRepresentation(
+  { component, rawProp, definition, seenNestedVariant }: any,
+  options: any,
+): any {
+  switch (definition.type) {
+    case 'TEXT':
+      return STRING_TYPE_REPR
+    case 'BOOLEAN':
+      return BOOLEAN_TYPE_REPR
+    case 'NUMBER':
+      break
+    case 'SLOT':
+      return g
+    case 'IMAGE':
+      return IMAGE_TYPE_REPR
+    case 'VARIANT':
+      return {
+        typeName: definition.variantOptions?.map((opt: string) => `"${opt}"`).join(' | ') ?? 'null',
+      }
+    case 'GROUPED_INSTANCE_SWAP':
+      return {
+        typeName: getCustomGroupName(definition.groupName),
+        typeDefBody: '{description: string}',
+        prefixComments: ['@param description - Specify a 1 sentence description'],
+      }
+    case 'INSTANCE_SWAP': {
+      if (definition.preferredValues && definition.preferredValues.length > 0 && definition.preferredValues.length < 10) {
+        const jsxName = buildComponentJSXName({ component, rawProp })
+        const componentNames: string[] = []
+        const referencedTypes: any[] = []
+        for (const pref of definition.preferredValues) {
+          const info = getComponentInfo(pref.key, options)
+          if (info) {
+            componentNames.push(info.jsxName)
+            referencedTypes.push({
+              type: 'COMPONENT_JSX',
+              componentId: info.componentId,
+            })
+          }
+        }
+        if (componentNames.length > 0) {
+          return {
+            typeName: jsxName,
+            typeDefBody: `ReactElement<any, ${componentNames.join(' | ')}>`,
+            referencedTypes,
+          }
+        }
+      }
+      const defaultNode = getSingletonSceneGraph().get(definition.defaultValue)
+      if (defaultNode && defaultNode.type === 'SYMBOL') {
+        return getComponentTypeRepr({ component: defaultNode, rawProp, seenNestedVariant }, options)
+      }
+      break
+    }
+    case 'NESTED_INSTANCE': {
+      const componentId = definition.componentId
+      const targetComponent = getSingletonSceneGraph().get(componentId)
+      if (targetComponent && (targetComponent.type === 'SYMBOL' || targetComponent.isStateGroup)) {
+        return getComponentTypeRepr({ component: targetComponent, rawProp, seenNestedVariant }, options)
+      }
+      break
+    }
+    default:
+      throwTypeError(definition)
   }
   return null
 }
-export function $$S4(e, t) {
-  let i = _$$c(e)
-  return i ? i.isState ? $$I1(i.parentNode, t) : $$I1(i, t) : null
+
+// Helper to get component type representation (extracted from A function).
+function getComponentTypeRepr(
+  { component, rawProp, seenNestedVariant }: any,
+  options: any,
+): any {
+  const typeInfo = getTypeInfoCached(component, options, seenNestedVariant)
+  const propsTypeName = typeInfo.propsTypeRepr.typeName
+  const { omit, pick } = extractModifiersFromProp(rawProp)
+  if (typeInfo.parsedDefs.length > 5 && pick && pick.length <= 2) {
+    return {
+      typeName: buildPropsTypeRepr({
+        component,
+        parsedDefs: filterUniquePropDefs(typeInfo.parsedDefs, options).filter(
+          (def: any) => !(omit && omit.includes(cleanComponentPropNameForUsage(def.rawProp)))
+            && (!pick || pick.includes(cleanComponentPropNameForUsage(def.rawProp))),
+        ),
+      }, options).typeDefBody ?? '{}',
+      referencedTypes: [{ type: 'COMPONENT_INLINED', componentId: typeInfo.componentId }],
+    }
+  }
+  let modifiedTypeName = propsTypeName
+  if (omit) {
+    const omittedKeys = filterUniquePropDefs(typeInfo.parsedDefs, options)
+      .filter((def: any) => 'key' in def.devFriendlyProp && omit.includes(cleanComponentPropNameForUsage(def.rawProp)))
+      .map((def: any) => def.devFriendlyProp.key)
+    const omitStr = omittedKeys.map((key: string) => `"${key}"`).join(' | ')
+    modifiedTypeName = `Omit<${modifiedTypeName}, ${omitStr}>`
+  }
+  if (pick) {
+    const pickedKeys = filterUniquePropDefs(typeInfo.parsedDefs, options)
+      .filter((def: any) => 'key' in def.devFriendlyProp && pick.includes(cleanComponentPropNameForUsage(def.rawProp)))
+      .map((def: any) => def.devFriendlyProp.key)
+    const pickStr = pickedKeys.map((key: string) => `"${key}"`).join(' | ')
+    modifiedTypeName = `Pick<${modifiedTypeName}, ${pickStr}>`
+  }
+  return {
+    typeName: modifiedTypeName,
+    referencedTypes: [{ type: 'COMPONENT', componentId: typeInfo.componentId }],
+  }
 }
-export function $$w5(e, t) {
-  let i = _$$c(e)
-  return i ? i.isState ? E(i.parentNode, t) : E(i, t) : null
+
+// Builds dev-friendly property object.
+function buildDevFriendlyProp({ usageProp, rawProp, definition }: any): any {
+  const baseProp: any = { key: usageProp }
+  const cleanedRaw = cleanComponentPropNameForUsage(rawProp)
+  if (cleanedRaw !== usageProp)
+    baseProp.originalKey = cleanedRaw
+  switch (definition.type) {
+    case 'VARIANT':
+      return {
+        type: 'SIMPLE_CHOICE',
+        validOptions: definition.variantOptions ?? [],
+        valueType: 'STRING',
+        ...baseProp,
+      }
+    case 'INSTANCE_SWAP':
+    case 'NESTED_INSTANCE':
+    case 'SLOT':
+      return { type: 'SIMPLE', valueType: 'OBJECT', ...baseProp }
+    case 'BOOLEAN':
+      return { type: 'SIMPLE', valueType: 'BOOLEAN', ...baseProp }
+    case 'TEXT':
+      return { type: 'SIMPLE', valueType: 'STRING', ...baseProp }
+    case 'NUMBER':
+      return { type: 'SIMPLE', valueType: 'UNKNOWN', ...baseProp }
+    case 'IMAGE':
+      return { type: 'IMAGE', valueType: 'OBJECT', ...baseProp }
+    case 'GROUPED_INSTANCE_SWAP': {
+      const defaultNode = getSingletonSceneGraph().get(definition.defaultValue)
+      if (!defaultNode || defaultNode.type !== 'SYMBOL') {
+        return { type: 'SIMPLE', valueType: 'UNKNOWN', ...baseProp }
+      }
+      return {
+        type: 'GROUPED_INSTANCE_SWAP',
+        groupName: definition.groupName,
+        valueType: 'OBJECT',
+        ...baseProp,
+      }
+    }
+    default:
+      throwTypeError(definition)
+  }
 }
-export const NU = $$m0
-export const NY = $$I1
-export const UY = $$v2
-export const Vk = $$p3
-export const Ye = $$S4
-export const Z1 = $$w5
-export const dX = $$f6
-export const oo = $$h7
+
+// Generates prefix types for the component.
+function generatePrefixTypes(parsedDefs: any[], options: any): Record<string, string> {
+  const prefixTypes: Record<string, string> = {}
+  const addType = (key: string, typeStr: string) => {
+    if (key in prefixTypes) {
+      key = getUniqueUsageProp({ usageProp: key, usedUsageProps: new Set(Object.keys(prefixTypes)) })
+    }
+    prefixTypes[key] = typeStr
+  }
+  for (const def of filterUniquePropDefs(parsedDefs, options)) {
+    const prop = def.devFriendlyProp
+    if (prop.type === 'DERIVED_BOOLEAN' || (prop.type === 'ARRAY' && prop.index !== 0))
+      continue
+    if (def.typeRepr.referencedTypes) {
+      for (const ref of def.typeRepr.referencedTypes) {
+        switch (ref.type) {
+          case 'IMAGE':
+            addType(prop.key, CUSTOM_IMAGE_TYPE_STR)
+            break
+          case 'COMPONENT_JSX': {
+            const targetComponent = getSingletonSceneGraph().get(ref.componentId)
+            if (targetComponent) {
+              const typeInfo = getTypeInfoCached(targetComponent, options)
+              for (const [subKey, subType] of Object.entries(typeInfo.prefixTypes)) {
+                addType(`${prop.key}${capitalizeFirstLetter(subKey)}`, subType as string)
+              }
+              addType(prop.key, typeInfo.typeStr)
+            }
+            break
+          }
+          case 'COMPONENT_INLINED':
+          case 'COMPONENT': {
+            const targetComponent = getSingletonSceneGraph().get(ref.componentId)
+            if (targetComponent) {
+              const typeInfo = getTypeInfoCached(targetComponent, options)
+              for (const [subKey, subType] of Object.entries(typeInfo.prefixTypes)) {
+                addType(`${prop.key}${capitalizeFirstLetter(subKey)}`, subType as string)
+              }
+              if (ref.type === 'COMPONENT') {
+                const typeStr = generateTypeString(typeInfo.propsTypeRepr)
+                if (typeStr)
+                  addType(prop.key, typeStr)
+              }
+            }
+            break
+          }
+          default:
+            throwTypeError(ref)
+        }
+      }
+    }
+    const typeStr = generateTypeString(def.typeRepr)
+    if (typeStr) {
+      addType(prop.key, typeStr)
+    }
+  }
+  return prefixTypes
+}
+
+// Generates type string from type representation (extracted from x function).
+function generateTypeString(typeRepr: any): string | null {
+  if (typeRepr.typeDefBody) {
+    const lines: string[] = []
+    if (typeRepr.prefixComments?.length) {
+      lines.push('/**')
+      for (const comment of typeRepr.prefixComments) {
+        lines.push(` * ${comment}`)
+      }
+      lines.push(' */')
+    }
+    lines.push(`type ${typeRepr.typeName} = ${typeRepr.typeDefBody};`)
+    return lines.join('\n')
+  }
+  return null
+}
+
+// Helper to get component info (simplified from original).
+function getComponentInfo(assetKey: string, options: any): any {
+  if (typeInfoByAssetKey[assetKey] && !options?.noTypeInfoCache)
+    return typeInfoByAssetKey[assetKey]
+  const component = FirstDraftHelpers.getComponentByAssetKey(assetKey) || FirstDraftHelpers.getStateGroupByAssetKey(assetKey)
+  return component ? getComponentInfoById(component, options) : null
+}
+
+export function getComponentInfoById(e, t) {
+  let i = getSymbolOrStateGroupNode(e)
+  return i ? i.isState ? getTypeInfoCached(i.parentNode, t) : getTypeInfoCached(i, t) : null
+}
+export function getComponentInfoByIdUncached(e, t) {
+  let i = getSymbolOrStateGroupNode(e)
+  return i ? i.isState ? computeTypeInfo(i.parentNode, t) : computeTypeInfo(i, t) : null
+}
+export const NU = STRING_TYPE_REPR
+export const NY = getTypeInfoCached
+export const UY = resetTypeInfoCache
+export const Vk = CUSTOM_IMAGE_TYPE_STR
+export const Ye = getComponentInfoById
+export const Z1 = getComponentInfoByIdUncached
+export const dX = IMAGE_TYPE_REPR
+export const oo = BOOLEAN_TYPE_REPR

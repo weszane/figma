@@ -1,55 +1,55 @@
-import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useMemo, Fragment as _$$Fragment, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
-import { useModalManager } from "../905/437088";
-import { ModalRootComponent } from "../905/38914";
-import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { parsePxInt } from "../figma_app/783094";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { on } from "../905/420347";
-import { IT, liveStoreInstance } from "../905/713695";
-import { H as _$$H } from "../905/216861";
-import { NO_TEAM, getDraftsSidebarString, isPublishedLibraryWithAssets } from "../figma_app/633080";
-import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { IconButton } from "../905/443068";
-import { C as _$$C } from "../905/520159";
-import { l as _$$l } from "../905/716947";
-import { selectWithShallowEqual } from "../905/103090";
-import { P as _$$P } from "../905/347284";
-import { TrackingProvider } from "../figma_app/831799";
-import { u as _$$u } from "../figma_app/187359";
-import { useOpenFileLibraryKey } from "../figma_app/516028";
-import { ev } from "../905/909811";
-import { generateRecordingKey } from "../figma_app/878298";
-import { SvgComponent } from "../905/714743";
-import { createFileLibraryKeys } from "../905/651613";
-import { b as _$$b } from "../905/937225";
-import { a as _$$a } from "../905/426262";
-import { u as _$$u2 } from "../905/831362";
-import { m as _$$m } from "../905/760316";
-import { I as _$$I } from "../905/717213";
-import { S as _$$S } from "../905/711770";
-import { kz } from "../905/691188";
-import { A as _$$A } from "../svg/562176";
-import { Tn } from "../figma_app/933328";
-import { useCurrentUserOrgId } from "../905/845253";
-import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { librariesAPI } from "../905/939602";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { qp } from "../905/977779";
-import { ud } from "../905/862913";
-import { E as _$$E } from "../905/128063";
-import { sortLibraries, useIsAssetPublishedForCurrentFile } from "../figma_app/646357";
-import { l as _$$l2 } from "../905/997221";
-import { PG, HK, Q_ } from "../905/570707";
-import { aU } from "../figma_app/757606";
-import { W as _$$W } from "../905/78565";
-import { FO } from "../905/682977";
-import { PXO } from "../figma_app/27776";
-let F = "figjam_file_row--fileThumbnail--9IG5C";
+import { Fragment as _$$Fragment, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { ModalRootComponent } from '../905/38914';
+import { W as _$$W } from '../905/78565';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
+import { selectWithShallowEqual } from '../905/103090';
+import { mapLibraryAttributes } from '../905/128063';
+import { H as _$$H } from '../905/216861';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { P as _$$P } from '../905/347284';
+import { useLibrary } from '../905/420347';
+import { a as _$$a } from '../905/426262';
+import { useModalManager } from '../905/437088';
+import { IconButton } from '../905/443068';
+import { C as _$$C } from '../905/520159';
+import { HK, PG, Q_ } from '../905/570707';
+import { getFeatureFlags } from '../905/601108';
+import { createFileLibraryKeys } from '../905/651613';
+import { FO } from '../905/682977';
+import { kz } from '../905/691188';
+import { S as _$$S } from '../905/711770';
+import { liveStoreInstance } from '../905/713695';
+import { SvgComponent } from '../905/714743';
+import { l as _$$l } from '../905/716947';
+import { I as _$$I } from '../905/717213';
+import { m as _$$m } from '../905/760316';
+import { u as _$$u2 } from '../905/831362';
+import { useCurrentUserOrgId } from '../905/845253';
+import { ud } from '../905/862913';
+import { ev } from '../905/909811';
+import { lQ } from '../905/934246';
+import { b as _$$b } from '../905/937225';
+import { librariesAPI } from '../905/939602';
+import { filesByLibraryKeyAtom } from '../905/977779';
+import { l as _$$l2 } from '../905/997221';
+import { useAtomWithSubscription } from '../figma_app/27355';
+import { PXO } from '../figma_app/27776';
+import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
+import { u as _$$u } from '../figma_app/187359';
+import { DialogBody, DialogContents, DialogHeader, DialogTitle } from '../figma_app/272243';
+import { useOpenFileLibraryKey } from '../figma_app/516028';
+import { setupResourceAtomHandler } from '../figma_app/566371';
+import { getDraftsSidebarString, isPublishedLibraryWithAssets, NO_TEAM } from '../figma_app/633080';
+import { sortLibraries, useIsAssetPublishedForCurrentFile } from '../figma_app/646357';
+import { aU } from '../figma_app/757606';
+import { parsePxInt } from '../figma_app/783094';
+import { TrackingProvider } from '../figma_app/831799';
+import { generateRecordingKey } from '../figma_app/878298';
+import { Tn } from '../figma_app/933328';
+import { A as _$$A } from '../svg/562176';
+let F = 'figjam_file_row--fileThumbnail--9IG5C';
 function j({
   file: e,
   publishedLibrary: t,
@@ -65,7 +65,7 @@ function j({
   recordingKey: p
 }) {
   let m = createFileLibraryKeys(e.key, t?.library_key ?? null);
-  let h = t?.library_name ?? "";
+  let h = t?.library_name ?? '';
   let g = _$$b(i, r, a, 0);
   let f = _$$S({
     disabled: g,
@@ -76,26 +76,26 @@ function j({
   return jsxs(_$$m, {
     libraryKey: m?.libraryKey,
     disabled: g || s || !1,
-    className: "figjam_file_row--figJamFileRow--FXwm0 figjam_file_row--_figJamFileRow--NVBXe file_row_styles--fileRowHover--WZeMw",
-    disabledClassName: "figjam_file_row--figJamFileRowNoHover--mts7E figjam_file_row--_figJamFileRow--NVBXe",
+    className: 'figjam_file_row--figJamFileRow--FXwm0 figjam_file_row--_figJamFileRow--NVBXe file_row_styles--fileRowHover--WZeMw',
+    disabledClassName: 'figjam_file_row--figJamFileRowNoHover--mts7E figjam_file_row--_figJamFileRow--NVBXe',
     hideCaret: !0,
     onClick: f,
     recordingKey: p,
     ariaLabel: h,
-    children: [o ? jsx("img", {
-      src: o ?? "",
+    children: [o ? jsx('img', {
+      src: o ?? '',
       className: F,
-      alt: ""
+      alt: ''
     }) : jsx(SvgComponent, {
       className: F,
       svg: _$$A
-    }), jsxs("div", {
-      className: "figjam_file_row--nameAndStats--bJ22f",
+    }), jsxs('div', {
+      className: 'figjam_file_row--nameAndStats--bJ22f',
       children: [jsx(_$$u2, {
         name: h,
         noMargin: !0
-      }), jsx("div", {
-        className: "figjam_file_row--figjamFileItemCount--GgBHq",
+      }), jsx('div', {
+        className: 'figjam_file_row--figjamFileItemCount--GgBHq',
         children: u ? jsx(_$$I, {
           numComponents: i,
           numStateGroups: r,
@@ -112,7 +112,7 @@ function j({
       showingDefaultSubscriptionsForUser: !1,
       showingDefaultSubscriptionsForTeamId: null,
       disabled: !d,
-      recordingKey: generateRecordingKey(p, "fileRowSubscriptionToggle")
+      recordingKey: generateRecordingKey(p, 'fileRowSubscriptionToggle')
     })]
   });
 }
@@ -125,9 +125,9 @@ function z() {
 function H() {
   let e = useSelector(e => e.selectedView);
   let t = useMemo(() => {
-    if ("fullscreen" === e.view) return mapEditorTypeToStringWithObfuscated(e.editorType);
+    if (e.view === 'fullscreen') return mapEditorTypeToStringWithObfuscated(e.editorType);
   }, [e]);
-  let [i] = IT(W(t ?? ""), {
+  let [i] = setupResourceAtomHandler(W(t ?? ''), {
     enabled: !!t
   });
   return useMemo(() => i.data?.library_thumbnail_by_library_key ?? {}, [i]);
@@ -136,11 +136,11 @@ let W = liveStoreInstance.Query({
   fetch: async e => (await librariesAPI.getDefaultLibraries({
     editorType: e
   })).data.meta,
-  key: "figjamDefaultLibraries"
+  key: 'figjamDefaultLibraries'
 });
 function K(e) {
   let t = useDispatch();
-  let i = _$$l(e.publishedLibrary?.library_key ?? "");
+  let i = _$$l(e.publishedLibrary?.library_key ?? '');
   let {
     dropdownShown,
     selectedView,
@@ -151,7 +151,7 @@ function K(e) {
     defaultPublished: e.library.defaultPublished
   }));
   let c = useOpenFileLibraryKey();
-  let [p] = IT(_$$u(i), {
+  let [p] = setupResourceAtomHandler(_$$u(i), {
     enabled: !!i
   });
   let h = useMemo(() => p.data ? p.data.components ?? [] : [], [p.data]);
@@ -168,20 +168,20 @@ function K(e) {
     return e?.[i];
   }, [T.data?.libraryThumbnailByLibraryKey, i, k, w]);
   return jsx(TrackingProvider, {
-    name: "FigjamSubscriptionFileView",
+    name: 'FigjamSubscriptionFileView',
     properties: {
       libraryKey: i
     },
     children: jsx(_$$P, {
       height: 528,
-      className: "figjam_subscription_file_view--fileView--4d2Xo",
-      children: jsxs("div", {
-        children: [!C && jsxs("div", {
-          className: "figjam_subscription_file_view--header--cDFWN",
+      className: 'figjam_subscription_file_view--fileView--4d2Xo',
+      children: jsxs('div', {
+        children: [!C && jsxs('div', {
+          className: 'figjam_subscription_file_view--header--cDFWN',
           children: [jsx(IconButton, {
-            onClick: e.backToList,
-            "aria-label": getI18nString("general.back"),
-            children: jsx(_$$C, {})
+            'onClick': e.backToList,
+            'aria-label': getI18nString('general.back'),
+            'children': jsx(_$$C, {})
           }), jsx(j, {
             canEditSubscriptions: !0,
             file: e.libraryFile,
@@ -198,7 +198,7 @@ function K(e) {
         }), jsx(ev, {
           width: e.width,
           items: f,
-          sourceForTracking: "Library Modal",
+          sourceForTracking: 'Library Modal',
           selectedView,
           dispatch: t,
           dropdownShown
@@ -207,10 +207,10 @@ function K(e) {
     })
   });
 }
-let ea = "figjam_subscriptions_list_view--teamSectionHeaderSticky--6-qao figjam_subscriptions_list_view--sectionHeader--0sArV";
+let ea = 'figjam_subscriptions_list_view--teamSectionHeaderSticky--6-qao figjam_subscriptions_list_view--sectionHeader--0sArV';
 function es(e) {
   let t = ud();
-  let i = useAtomWithSubscription(qp);
+  let i = useAtomWithSubscription(filesByLibraryKeyAtom);
   let s = useSelector(e => e.openFile);
   let o = useSelector(e => e.folders);
   let l = useSelector(e => e.library);
@@ -231,13 +231,17 @@ function es(e) {
     }) : [];
   }, [_.data]);
   let I = _.data?.libraryThumbnailByLibraryKey ?? {};
-  let E = getFeatureFlags().dse_lk_figjam_library_search ? "loaded" === f.status ? function (e, t, i, n) {
+  let E = getFeatureFlags().dse_lk_figjam_library_search ? f.status === 'loaded' ? function (e, t, i, n) {
     let r = [];
     let a = {};
     let s = e.components;
     let o = e.styles;
     let l = e.stateGroups;
-    for (let t of [e.components.filteredByTeamId, e.styles.filteredByTeamId, e.stateGroups.filteredByTeamId]) for (let e in t) for (let i in t[e]) a[_$$l(i)] = e;
+    for (let t of [e.components.filteredByTeamId, e.styles.filteredByTeamId, e.stateGroups.filteredByTeamId]) {
+      for (let e in t) {
+        for (let i in t[e]) a[_$$l(i)] = e;
+      }
+    }
     for (let e in a) {
       let d = _$$l(e);
       let c = t && t[d];
@@ -248,13 +252,13 @@ function es(e) {
       r.push({
         library_file_key: c.key,
         library_file_name: c.name,
-        library_key: _$$l2(c) ?? _$$l(""),
+        library_key: _$$l2(c) ?? _$$l(''),
         team_name: p?.name,
         team_id: u,
         workspace_id: p?.workspace_id,
-        folder_name: m && m.name || "",
-        folder_id: c.folder_id || "",
-        thumbnail_url: "",
+        folder_name: m && m.name || '',
+        folder_id: c.folder_id || '',
+        thumbnail_url: '',
         num_components: s.numAssetsByLibraryKey[d] || 0,
         num_state_groups: l.numAssetsByLibraryKey[d] || 0,
         num_styles: o.numAssetsByLibraryKey[d] || 0,
@@ -268,13 +272,17 @@ function es(e) {
       });
     }
     return r;
-  }(f.data, i, d, o) : b : "loaded" === h.status ? function (e, t, i, n) {
+  }(f.data, i, d, o) : b : h.status === 'loaded' ? function (e, t, i, n) {
     let r = [];
     let a = {};
     let s = e.components;
     let o = e.styles;
     let l = e.stateGroups;
-    for (let t of [e.components.filteredByTeamId, e.styles.filteredByTeamId, e.stateGroups.filteredByTeamId]) for (let e in t) for (let i in t[e]) a[i] = e;
+    for (let t of [e.components.filteredByTeamId, e.styles.filteredByTeamId, e.stateGroups.filteredByTeamId]) {
+      for (let e in t) {
+        for (let i in t[e]) a[i] = e;
+      }
+    }
     for (let e in a) {
       let d = t && t[e];
       if (!d) continue;
@@ -284,13 +292,13 @@ function es(e) {
       r.push({
         library_file_key: e,
         library_file_name: d.name,
-        library_key: _$$l2(d) ?? _$$l(""),
+        library_key: _$$l2(d) ?? _$$l(''),
         team_name: u?.name,
         team_id: c,
         workspace_id: u?.workspace_id,
-        folder_name: p && p.name || "",
-        folder_id: d.folder_id || "",
-        thumbnail_url: "",
+        folder_name: p && p.name || '',
+        folder_id: d.folder_id || '',
+        thumbnail_url: '',
         num_components: s.numAssetsByFileKey[e] || 0,
         num_state_groups: l.numAssetsByFileKey[e] || 0,
         num_styles: o.numAssetsByFileKey[e] || 0,
@@ -310,39 +318,39 @@ function es(e) {
   let w = s && S.length > 0 && !searchQuery;
   let C = NO_TEAM;
   return jsxs(Fragment, {
-    children: [jsx("div", {
-      className: "figjam_subscriptions_list_view--searchContainer--xaC0P",
+    children: [jsx('div', {
+      className: 'figjam_subscriptions_list_view--searchContainer--xaC0P',
       children: jsx(aU, {
         autofocus: !0,
-        entryPointForTracking: "figjam:library_subscriptions",
+        entryPointForTracking: 'figjam:library_subscriptions',
         extraSpacing: !0,
         isFigjam: !0,
         isVisible: !0,
         onChange: setSearchQuery,
-        placeholder: getI18nString("whiteboard.library_subscriptions.search_for_libraries"),
+        placeholder: getI18nString('whiteboard.library_subscriptions.search_for_libraries'),
         query: searchQuery,
-        recordingKey: "subscriptionListViewLibrarySearch",
+        recordingKey: 'subscriptionListViewLibrarySearch',
         selectOnFocus: !0
       })
     }), jsxs(_$$P, {
-      className: "figjam_subscriptions_list_view--whiteboardingFileListView--E3NJk",
+      className: 'figjam_subscriptions_list_view--whiteboardingFileListView--E3NJk',
       height: 480,
       children: [jsx(_$$W, {
         dismissable: !1,
-        buttonText: getI18nString("whiteboard.inserts.libraries_update_all"),
-        formatBannerText: e => getI18nString("whiteboard.inserts.libraries_update_to_your_components", {
+        buttonText: getI18nString('whiteboard.inserts.libraries_update_all'),
+        formatBannerText: e => getI18nString('whiteboard.inserts.libraries_update_to_your_components', {
           numUpdates: e
         })
-      }), "loading" === _.status && jsx(FO, {}), "loading" !== _.status && jsxs(Fragment, {
-        children: [searchQuery && 0 === E.length && jsx("div", {
-          className: "figjam_subscriptions_list_view--noSearchResults--0YZBG ellipsis--ellipsis--Tjyfa",
-          children: renderI18nText("whiteboard.library_subscriptions.no_results_for", {
+      }), _.status === 'loading' && jsx(FO, {}), _.status !== 'loading' && jsxs(Fragment, {
+        children: [searchQuery && E.length === 0 && jsx('div', {
+          className: 'figjam_subscriptions_list_view--noSearchResults--0YZBG ellipsis--ellipsis--Tjyfa',
+          children: renderI18nText('whiteboard.library_subscriptions.no_results_for', {
             query: searchQuery
           })
         }), w && jsxs(Fragment, {
-          children: [jsx("div", {
+          children: [jsx('div', {
             className: ea,
-            children: renderI18nText("whiteboard.library_subscriptions.in_this_file")
+            children: renderI18nText('whiteboard.library_subscriptions.in_this_file')
           }), S.map(i => {
             let r = t[i.library_file_key];
             return r ? jsx(j, {
@@ -353,7 +361,7 @@ function es(e) {
               numComponents: i.num_components,
               numStateGroups: i.num_state_groups,
               numStyles: i.num_styles,
-              publishedLibrary: _$$E(i),
+              publishedLibrary: mapLibraryAttributes(i),
               thumbnailUrl: I[i.library_key],
               viewFile: e.viewFile
             }, r.key) : null;
@@ -365,7 +373,7 @@ function es(e) {
           C = i.team_id ?? NO_TEAM;
           let d = i.team_name || getDraftsSidebarString();
           return jsxs(_$$Fragment, {
-            children: [o && jsx("div", {
+            children: [o && jsx('div', {
               className: ea,
               children: d
             }), jsx(j, {
@@ -376,15 +384,15 @@ function es(e) {
               numComponents: i.num_components,
               numStateGroups: i.num_state_groups,
               numStyles: i.num_styles,
-              publishedLibrary: _$$E(i),
-              thumbnailUrl: I[i.library_key] ?? "",
+              publishedLibrary: mapLibraryAttributes(i),
+              thumbnailUrl: I[i.library_key] ?? '',
               viewFile: e.viewFile
             })]
           }, a.key);
         }), l.defaultPublished.libraryKeys.length > 0 && !searchQuery && jsxs(Fragment, {
-          children: [jsx("div", {
+          children: [jsx('div', {
             className: ea,
-            children: renderI18nText("whiteboard.library_subscriptions.default_files")
+            children: renderI18nText('whiteboard.library_subscriptions.default_files')
           }), l.defaultPublished.libraryKeys.map(t => {
             let r = i[t];
             if (!r) return null;
@@ -411,10 +419,10 @@ function es(e) {
     })]
   });
 }
-let el = "figjam_library_modal--slidingPane--Ex7gt sliding_pane--slidingPane--6OmDU";
-let ed = "figjam_library_modal--slidingPaneLeft--uAaog sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU";
-let $$ec1 = "FIGJAM_LIBRARY_MODAL";
-let $$eu0 = registerModal(function (e) {
+let el = 'figjam_library_modal--slidingPane--Ex7gt sliding_pane--slidingPane--6OmDU';
+let ed = 'figjam_library_modal--slidingPaneLeft--uAaog sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU';
+let $$ec1 = 'FIGJAM_LIBRARY_MODAL';
+let $$eu0 = registerModal(e => {
   let t = useSelector(e => e.library);
   let i = _$$H();
   let f = useModalManager({
@@ -423,29 +431,29 @@ let $$eu0 = registerModal(function (e) {
   });
   let [_, A] = useState(null);
   let y = liveStoreInstance.useFile(_?.fileKey ?? null).data;
-  let b = on(_?.libraryKey ?? null).data;
+  let b = useLibrary(_?.libraryKey ?? null).data;
   let v = parsePxInt(PXO);
   return jsx(ModalRootComponent, {
     manager: f,
     width: v,
-    height: "dynamic",
+    height: 'dynamic',
     children: jsxs(DialogContents, {
       children: [jsx(DialogHeader, {
         children: jsx(DialogTitle, {
-          children: renderI18nText("design_systems.libraries_modal.manage_libraries")
+          children: renderI18nText('design_systems.libraries_modal.manage_libraries')
         })
       }), jsx(DialogBody, {
         padding: 0,
-        children: jsxs("div", {
-          className: "figjam_library_modal--slidingPaneContainer--ZuLV1 sliding_pane--slidingPaneContainer--RQkXf",
-          children: [jsx("div", {
+        children: jsxs('div', {
+          className: 'figjam_library_modal--slidingPaneContainer--ZuLV1 sliding_pane--slidingPaneContainer--RQkXf',
+          children: [jsx('div', {
             className: _?.libraryKey ? ed : el,
             children: jsx(es, {
               library: t,
               viewFile: A,
               onUpdateClick: lQ
             })
-          }), _ && y && jsx("div", {
+          }), _ && y && jsx('div', {
             className: _.libraryKey ? el : ed,
             children: jsx(K, {
               width: v,

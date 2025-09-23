@@ -211,7 +211,7 @@ import { g as _$$g3 } from '../figma_app/106955';
 import { wo } from '../figma_app/109130';
 import { $c, au as _$$au, D6, H1 } from '../figma_app/124493';
 import { FileProcessingStatus, autosaveAtom } from '../figma_app/139113';
-import { C7, Ii } from '../figma_app/144974';
+import { isAssetSuggestionsEnabled, isRenameLayersEnabled } from '../figma_app/144974';
 import { ap as _$$ap } from '../figma_app/149304';
 import { Dc, hV } from '../figma_app/151766';
 import { Vr } from '../figma_app/151869';
@@ -3638,7 +3638,7 @@ let ns = class e extends PureComponent {
     let n = !this.props.isObjectsPanelMenu && !this.props.isSingleSlideViewCarousel && !this.props.isBuzzCarousel && i;
     let a = this.props.isTextEditModeMenu;
     let s = P5();
-    let o = C7() && this.props.hasFragmentSearchPermission;
+    let o = isAssetSuggestionsEnabled() && this.props.hasFragmentSearchPermission;
     let d = this.props.isEligibleForDesignToSites;
     let c = Yh(this.props.appModel, 'send-to-make-from-design') && (this.props.shouldShowSendToMake?.() ?? !1);
     let u = Yh(this.props.appModel, 'send-selection-to-buzz-from-design');
@@ -3918,7 +3918,7 @@ let ns = class e extends PureComponent {
     let p = this.props.selectedView.editorType === FEditorType.Illustration;
     let h = (a || d || c || p) && Yh(this.props.appModel, 'select-node-menu') && !this.props.isObjectsPanelMenu && objectItems.length > 1;
     let m = this.props.isObjectsPanelMenu;
-    let f = m && this.props.hasAIPermission && Ii();
+    let f = m && this.props.hasAIPermission && isRenameLayersEnabled();
     let g = window.FigmaMobile;
     let x = nh(n.showComments, this.props.selectedView, this.props.viewportInfo, this.props.clientX, this.props.clientY, this.props.dispatch, g?.requestToAddDraftCommentPin);
     let y = Yh(this.props.appModel, 'swap-to-related-symbol');

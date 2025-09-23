@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import s from "lodash-es/mapValues";
 import { reportError } from "../905/11";
 import { y as _$$y } from "../figma_app/681090";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { createMetaValidator } from "../figma_app/181241";
 import { F6 } from "../905/712921";
 var o = s;
@@ -150,12 +150,12 @@ function v(e, t) {
   }
 }
 export function $$I11(e, t, i, n = {}) {
-  let [r] = IT(i, n);
+  let [r] = setupResourceAtomHandler(i, n);
   return v(r, t);
 }
 export function $$E5(e, t, i = {}) {
   let n = $$_2(null);
-  let [r] = IT(n, i);
+  let [r] = setupResourceAtomHandler(n, i);
   return v(r, e);
 }
 export function $$x8(e, t = {}) {
@@ -166,7 +166,7 @@ export function $$x8(e, t = {}) {
     } = e;
     return "" !== planParentId && !isNullish(planType);
   }(e) && (t.enabled = !1);
-  let [i] = IT($$A3(e), t);
+  let [i] = setupResourceAtomHandler($$A3(e), t);
   return i.transform(({
     product_prices: e
   }) => e[0]?.currency ?? null);
@@ -289,21 +289,21 @@ export function $$R12({
   options: n = {}
 }) {
   let r = $$_2(i ?? null);
-  let [a] = IT(r, n);
+  let [a] = setupResourceAtomHandler(r, n);
   return k(a, e, t);
 }
 export function $$N9(e, t, i, n = {}) {
   let r = y({
     planKey: e
   });
-  let [a] = IT(r, n);
+  let [a] = setupResourceAtomHandler(r, n);
   return k(a, t, i, !0);
 }
 export function $$P7(e, t, i, n = {}) {
   let r = b({
     planKey: e
   });
-  let [a] = IT(r, n);
+  let [a] = setupResourceAtomHandler(r, n);
   return k(a, t, i, !0);
 }
 export function $$O10(e) {

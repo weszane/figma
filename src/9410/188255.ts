@@ -202,7 +202,7 @@ import { XZ } from "../figma_app/176973";
 import { WB } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { getCurrentTeam } from "../figma_app/598018";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { k as _$$k3 } from "../905/443820";
@@ -238,7 +238,7 @@ import { PE } from "../figma_app/251115";
 import { Bu } from "../figma_app/604494";
 import { jx, Ij as _$$Ij, T4, af as _$$af, $9 } from "../figma_app/433401";
 import { LC } from "../figma_app/318590";
-import { C7 } from "../figma_app/144974";
+import { isAssetSuggestionsEnabled } from "../figma_app/144974";
 import { $I } from "../figma_app/322845";
 import { Bd } from "../figma_app/846841";
 import { jH } from "../figma_app/926950";
@@ -4956,7 +4956,7 @@ function nP(e, t) {
 function nF(e) {
   let t = useCurrentUserOrgId();
   let i = getCurrentTeam()?.id;
-  let [a] = IT(XZ({
+  let [a] = setupResourceAtomHandler(XZ({
     currentOrgId: t || void 0,
     currentTeamId: i,
     fileTags: ["figjam_template"],
@@ -7446,7 +7446,7 @@ function sB() {
     let l = PE();
     let d = function () {
       let e = LC();
-      return C7() && e;
+      return isAssetSuggestionsEnabled() && e;
     }();
     let c = [];
     !s && o && l && !r && c.push(sM);

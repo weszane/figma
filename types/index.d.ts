@@ -1,6 +1,7 @@
 import type { Dispatch, Store } from 'redux'
 import type { AppState as App } from './app.js'
 import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
+import { TaskController as TaskControllerPrority } from '../src/figma_app/946103.js'
 
 declare global {
   type Fn = (...args: any[]) => void
@@ -11,6 +12,8 @@ declare global {
   type AppDispatch = Dispatch<any>
   let mpGlobal: any
   type AppState = App
+  let TaskController = TaskControllerPrority
+  
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs

@@ -9,7 +9,7 @@ import { capitalize } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { trackFileEvent } from "../figma_app/314264";
-import { Cs } from "../905/420347";
+import { librariesQueryNamespace } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { fileApiHandler } from "../figma_app/787550";
@@ -73,7 +73,7 @@ async function S(e, t) {
   } = n;
   let s = isValidSessionLocalID(parseSessionLocalID(publishID));
   let l = n.sourceLibraryKey;
-  let d = (await liveStoreInstance.fetch(Cs.LibrariesByLibraryKeysQuery({
+  let d = (await liveStoreInstance.fetch(librariesQueryNamespace.LibrariesByLibraryKeysQuery({
     libraryKeys: [l],
     subscriptionFileKey: debugState.getState().openFile?.key ?? null,
     orgId: debugState.getState().currentUserOrgId
@@ -123,7 +123,7 @@ export async function $$v6(e) {
       let i = a.get(n);
       i?.sourceLibraryKey && e.add(i?.sourceLibraryKey);
     }
-    let t = await liveStoreInstance.fetch(Cs.LibrariesByLibraryKeysQuery({
+    let t = await liveStoreInstance.fetch(librariesQueryNamespace.LibrariesByLibraryKeysQuery({
       libraryKeys: Array.from(e),
       subscriptionFileKey: debugState.getState().openFile?.key ?? null,
       orgId: debugState.getState().currentUserOrgId

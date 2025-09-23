@@ -22,7 +22,7 @@ import { a6 } from "../figma_app/198840";
 import { FFileType } from "../figma_app/191312";
 import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
@@ -245,7 +245,7 @@ export function $$e_0() {
     let [{
       data: e,
       status: t
-    }] = IT(_$$_());
+    }] = setupResourceAtomHandler(_$$_());
     let r = useMemo(() => e ? e.flatMap(e => e.shelf_content) : [], [e]);
     return {
       areShelvesLoading: "loading" === t,
@@ -327,7 +327,7 @@ export function $$el8(e) {
   };
 }
 let en = getFeatureFlags().editor_file_picker_recent_files_standalone_view ? function (e) {
-  let [t] = IT(EditorFilePickerRecentFilesByEditorTypeView({
+  let [t] = setupResourceAtomHandler(EditorFilePickerRecentFilesByEditorTypeView({
     _editorTypeRaw: mapFileTypeToNumericString(e)
   }));
   let r = useMemo(() => t.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles2ByEditorType)), [t]);

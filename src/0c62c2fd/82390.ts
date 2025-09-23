@@ -238,7 +238,7 @@ import { L as _$$L4 } from '../905/704296';
 import { H as _$$H3 } from '../905/706055';
 import { D as _$$D5 } from '../905/711533';
 import { Ju as _$$Ju } from '../905/712921';
-import { gY as _$$gY, IT as _$$IT, liveStoreInstance } from '../905/713695';
+import { getAtomMutate, setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { X as _$$X6 } from '../905/718513';
 import { tT as _$$tT } from '../905/723791';
@@ -4970,7 +4970,7 @@ let np = registerModal(({
   workspace: e
 }) => {
   let t = useDispatch();
-  let r = _$$gY(n_);
+  let r = getAtomMutate(n_);
   return jsx(_$$c4, {
     title: getI18nString('workspace_view.description_modal.title'),
     subtitle: jsx('div', {
@@ -5093,7 +5093,7 @@ function nT({
   onClose: t
 }) {
   let r = useDispatch();
-  let n = _$$gY(nj);
+  let n = getAtomMutate(nj);
   let o = [{
     option: ig
   }, ...TS('base').filter(e => !areColorsEqual(e, BV(ColorOptions.BLACK, 'base'))).map(e => ({
@@ -19136,7 +19136,7 @@ function ha(e) {
   }();
   let m = function (e) {
     let t = e.join('&resource_type[]=');
-    let [r] = _$$IT(g7(t));
+    let [r] = setupResourceAtomHandler(g7(t));
     return r.data || g3();
   }(d);
   let _ = {

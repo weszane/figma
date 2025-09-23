@@ -12,7 +12,7 @@ import { batchPutFileAction, filePutAction } from "../figma_app/78808";
 import { componentBatchUpdate, defaultLibraryInitializeLibraryKeys, defaultLibraryInitialize, putMoveLibraryItemKeyMappings } from "../905/879323";
 import { tg, xZ, VF } from "../figma_app/933328";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { resolveUsedComponentsStateGroups, addTrackedState, generateDefaultLibrariesCacheKey, resolveUsedLibraries } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { YG } from "../905/921418";
@@ -24,7 +24,7 @@ import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/5
 import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { librariesAPI } from "../905/939602";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 let O = new Map();
 async function R(e, t) {
   let r = isWorkshopModeActive(e.getState().selectedView);
@@ -34,7 +34,7 @@ async function R(e, t) {
     resolveUsedComponentsStateGroups();
     return;
   }
-  let d = yD(t);
+  let d = generateRetrievingSubscribedComponentsKey(t);
   if (!isNullOrFailure(e.getState().loadingState, d)) {
     resolveUsedComponentsStateGroups();
     return;
@@ -70,7 +70,7 @@ async function R(e, t) {
     m.data.meta.files.forEach(e => {
       addTrackedState(e.key);
     });
-    let y = atomStoreManager.get(qp);
+    let y = atomStoreManager.get(filesByLibraryKeyAtom);
     let T = m.data.meta.hub_files;
     T && (T.forEach(e => {
       addTrackedState(e.id);
@@ -233,7 +233,7 @@ async function j(e, t) {
     subscribedOldKeyToNewKey: r.data.meta.move_remappings,
     localOldGuidToNewKey: {}
   }));
-  let o = atomStoreManager.get(qp);
+  let o = atomStoreManager.get(filesByLibraryKeyAtom);
   VF(r.data.meta.components, PrimaryWorkflowEnum.COMPONENT, o, e.dispatch);
   VF(r.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, o, e.dispatch);
 }

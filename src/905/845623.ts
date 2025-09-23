@@ -6,7 +6,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { partitionByPredicate } from "../905/918929";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
-import { bj } from "../905/420347";
+import { useLibraries } from "../905/420347";
 import { EverPublishedLibraryQuery, UnpublishedStylesQuery, MissingStyleKeyToLibraryKeyQuery } from "../905/404538";
 import { selectSceneGraph } from "../figma_app/889655";
 import { subscribedSymbolsNodeIdsFromLoadedPagesSelector, subscribedStateGroupsNodeIdsFromLoadedPagesSelector, allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
@@ -42,7 +42,7 @@ let E = D(() => {
 let $$x0 = _$$n(() => {
   let e = function () {
     let e = f();
-    let t = bj(e);
+    let t = useLibraries(e);
     let i = t.data;
     let [a] = setupResourceAtomHandler(EverPublishedLibraryQuery.EverPublishedLibraryQuery({
       libraryKeys: e
@@ -114,7 +114,7 @@ let $$x0 = _$$n(() => {
       });
       return Array.from(e);
     }, [h, f]);
-    let C = bj(w);
+    let C = useLibraries(w);
     let T = useMemo(() => new Set(C.data?.map(e => e.library_key)), [C]);
     let k = useMemo(() => Array.from(new Set([...Object.keys(S.data ?? {}), ...w.filter(e => !T.has(e))])), [S, w, T]);
     let [R, N] = useMemo(() => {

@@ -1,3 +1,5 @@
+import { ke } from "../src/905/309735"
+
 export interface AppState {
   optimist: any[]
   autocomplete: Autocomplete
@@ -65,7 +67,7 @@ export interface AppState {
   publishingPlugins: ActiveFileUsers
   featuredPlugins: ActiveFileUsers
   whitelistedPlugins: ActiveFileUsers
-  hubFiles: ActiveFileUsers
+  hubFiles: HubFiles
   figFilePublishedAsHubFile: ActiveFileUsers
   figFileDuplicatedFromHubFile: ActiveFileUsers
   publishingHubFiles: ActiveFileUsers
@@ -180,8 +182,125 @@ export interface AppState {
 }
 
 export interface ActiveFileUsers {
+  // [key: string]: HubFile
+}
+export interface HubFiles {
+  [key: string]: HubFile;
 }
 
+interface HubFile {
+  id: string;
+  creator: Creator;
+  thumbnail_url: string;
+  viewer_mode: string;
+  library_key: string;
+  created_at: string;
+  resized_thumbnail_urls: Resizedthumbnailurls;
+  community_publishers: Communitypublishers;
+  current_hub_file_version_id: string;
+  unpublished_at: null;
+  duplicate_count: number;
+  like_count: number;
+  comments_setting: string;
+  comment_count: number;
+  publishing_status: string;
+  category_id: null;
+  is_chat_history_removed: boolean;
+  publisher: Publisher;
+  versions: Versions;
+  client_meta: string;
+  thumbnail_is_set: boolean;
+  current_user_liked: null;
+  is_pinned: boolean;
+  redirect_canvas_url: string;
+  monetization_status: null;
+  support_contact: null;
+  badges: any[];
+  third_party_m10n_status: null;
+}
+
+interface Versions {
+  [key: string]: HubFileVersion;
+}
+
+interface HubFileVersion {
+  id: string;
+  hub_file_id: string;
+  name: string;
+  description: string;
+  version: string;
+  release_notes: null;
+  created_at: string;
+  valid_prototype: boolean;
+  client_meta: string;
+  thumbnail_guid: null;
+  creator_policy: null;
+}
+
+interface Publisher {
+  id: string;
+  location: string;
+  profile_handle: string;
+  public_at: string;
+  follower_count: number;
+  following_count: number;
+  primary_user_id: string;
+  name: string;
+  img_url: string;
+  img_urls: Imgurls;
+  current_user_is_following: null;
+  current_user_is_followed: null;
+  is_restricted_by_current_user: null;
+  realtime_token: string;
+  entity_type: string;
+  badges: any[];
+}
+
+interface Communitypublishers {
+  accepted: Accepted[];
+}
+
+interface Accepted {
+  id: string;
+  location: string;
+  profile_handle: string;
+  public_at: string;
+  follower_count: number;
+  following_count: number;
+  primary_user_id: string;
+  name: string;
+  img_url: string;
+  img_urls: Imgurls;
+  current_user_is_following: null;
+  current_user_is_followed: null;
+  is_restricted_by_current_user: null;
+  realtime_token: string;
+  entity_type: string;
+  associated_users: Associateduser[];
+  badges: any[];
+}
+
+interface Associateduser {
+  user_id: string;
+  is_primary_user: boolean;
+}
+
+interface Imgurls {
+  '120_120': string;
+  '500_500': string;
+}
+
+interface Resizedthumbnailurls {
+  '160': string;
+  '800': string;
+  '1200': string;
+}
+
+interface Creator {
+  id: string;
+  handle: string;
+  img_url: string;
+}
 export interface ActivityLogs {
   logs: any[]
   cursor: ActiveFileUsers
@@ -950,41 +1069,335 @@ export interface LeftPanel {
 }
 
 export interface Library {
-  publishedByLibraryKey: PublishedByLibraryKey
-  used__LIVEGRAPH: UsedLIVEGRAPH
-  openFilePublished__LIVEGRAPH: OpenFilePublishedLivegraph
-  openHubFilePublished__LIVEGRAPH: OpenFilePublishedLivegraph
-  local: Local
-  assetsPanelSearch: AssetsPanelSearch
-  publishProgress: PublishProgress
-  isRenamingSelectedStyle: boolean
-  localStyleSelection: null
-  defaultPublished: DefaultPublished
-  libraryUpdatesBannerDismissed: boolean
-  movedLibraryItems: MovedLibraryItems
-  libraryPublishingMode: number
-  localVariablesById: ActiveFileUsers
-  localVariableSetsById: ActiveFileUsers
-  subscribedVariablesByIdFromLoadedPages: ActiveFileUsers
-  subscribedVariableSetsByIdFromLoadedPages: ActiveFileUsers
-  knownUsedLibraryVariablesByKey: ActiveFileUsers
-  knownUsedLibraryVariableSetsByKey: ActiveFileUsers
-  publishableStateGroups: any[]
-  publishableStyles: any[]
-  publishableSymbols: any[]
-  publishableModules: any[]
-  subscribedSymbolsFromLoadedPages: any[]
-  subscribedStateGroupsFromLoadedPages: any[]
-  directlySubscribedStylesFromLoadedPages: any[]
-  indirectlySubscribedStylesFromLoadedPages: any[]
-  localSymbolsThatHaveUsagesOnLoadedPages: any[]
-  localStylesThatHaveUsagesOnLoadedPages: any[]
-  subscribedSymbolsOnCurrentPage: any[]
-  subscribedStateGroupsOnCurrentPage: any[]
-  directlySubscribedStylesOnCurrentPage: any[]
-  localSymbolsThatHaveUsagesOnCurrentPage: any[]
-  localStylesThatHaveUsagesOnCurrentPage: any[]
+  publishedByLibraryKey: PublishedByLibraryKey;
+  used__LIVEGRAPH: UsedLIVEGRAPH;
+  openFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH;
+  openHubFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH;
+  local: Local;
+  assetsPanelSearch: AssetsPanelSearch;
+  publishProgress: PublishProgress;
+  isRenamingSelectedStyle: boolean;
+  localStyleSelection: null;
+  defaultPublished: DefaultPublished;
+  libraryUpdatesBannerDismissed: boolean;
+  movedLibraryItems: MovedLibraryItems;
+  libraryPublishingMode: number;
+  localVariablesById: SourceAssetKeyToDestinationKey;
+  localVariableSetsById: SourceAssetKeyToDestinationKey;
+  subscribedVariablesByIdFromLoadedPages: SubscribedVariablesByIdFromLoadedPages;
+  subscribedVariableSetsByIdFromLoadedPages: SubscribedVariableSetsByIdFromLoadedPages;
+  knownUsedLibraryVariablesByKey: KnownUsedLibraryVariablesByKey;
+  knownUsedLibraryVariableSetsByKey: SourceAssetKeyToDestinationKey;
+  publishableStateGroups: any[];
+  publishableStyles: any[];
+  publishableSymbols: any[];
+  publishableModules: any[];
+  subscribedSymbolsFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
+  subscribedStateGroupsFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
+  directlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
+  indirectlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
+  localSymbolsThatHaveUsagesOnLoadedPages: any[];
+  localStylesThatHaveUsagesOnLoadedPages: any[];
+  subscribedSymbolsOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
+  subscribedStateGroupsOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
+  directlySubscribedStylesOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
+  localSymbolsThatHaveUsagesOnCurrentPage: any[];
+  localStylesThatHaveUsagesOnCurrentPage: any[];
 }
+
+interface SubscribedSymbolsFromLoadedPage {
+  nodeId: string;
+  key: string;
+  version: string;
+  userFacingVersion: string;
+}
+
+interface KnownUsedLibraryVariablesByKey {
+  [key: string]: Nown0;
+}
+
+interface Nown0 {
+  data: Data;
+  errors: any[];
+  status: string;
+}
+
+interface Data {
+  variable: null;
+}
+
+interface SubscribedVariableSetsByIdFromLoadedPages {
+  [key: string]: VariableExample;
+}
+
+interface VariableExample {
+  type: string;
+  subscriptionStatus: string;
+  node_id: string;
+  version: string;
+  userFacingVersion: string;
+  modes: Mode[];
+  name: string;
+  defaultModeID: string;
+  key: string;
+  library_key: string;
+  pageIds: any[];
+  isExtendable: boolean;
+  sortPosition: null;
+  publishID: string;
+  isExtension: boolean;
+}
+
+interface Mode {
+  id: string;
+  name: string;
+  sortPosition: string;
+  parentModeId: null;
+  parentVariableSetId: null;
+}
+
+interface SubscribedVariablesByIdFromLoadedPages {
+  [key: string]: VariableExample1;
+}
+
+interface VariableExample1 {
+  type: string;
+  subscriptionStatus: string;
+  variableSetId: string;
+  node_id: string;
+  sortPosition: string;
+  resolvedType: number;
+  version: string;
+  userFacingVersion: string;
+  modeValues: ModeValues;
+  description: string;
+  name: string;
+  key: string;
+  library_key: string;
+  scopes: number[];
+  codeSyntax: SourceAssetKeyToDestinationKey;
+  isSoftDeleted: boolean;
+  pageIds: string[];
+  publishID: string;
+}
+
+interface ModeValues {
+  [key: string]: _2090;
+}
+
+interface _2090 {
+  type: number;
+  resolvedType: number;
+  value: number;
+}
+
+interface MovedLibraryItems {
+  subscribed: SourceAssetKeyToDestinationKey;
+  local: SourceAssetKeyToDestinationKey;
+}
+
+interface DefaultPublished {
+  componentsByLibraryKey: ComponentsByLibraryKey;
+  stateGroupsByLibraryKey: StateGroupsByLibraryKey;
+  libraryKeys: string[];
+}
+
+interface StateGroupsByLibraryKey {
+  [key: string]: LK;
+}
+
+interface LK {
+  [key: string]: _7427;
+}
+
+interface _7427 {
+  name: string;
+  file_key: string;
+  type: string;
+  key: string;
+  thumbnail_url: string;
+  canvas_url: string;
+  version: string;
+  userFacingVersion: string;
+  description: string;
+  description_rt: string;
+  id: string;
+  node_id: string;
+  containing_frame: Containingframe3;
+  updated_at: string;
+  fill_color: null;
+  default_state_key: string;
+  min_node_width: number;
+  min_node_height: number;
+  is_template: null;
+  library_key: string;
+}
+
+interface Containingframe3 {
+  pageId: string;
+  pageName: string;
+}
+
+interface ComponentsByLibraryKey {
+  [key: string]: LibraryComponent2;
+}
+
+interface LibraryComponent2 {
+  [key: string]: NoTeamItemValueDetail;
+}
+
+interface PublishProgress {
+  state: number;
+}
+
+interface AssetsPanelSearch {
+  query: string;
+  isLoading: boolean;
+  normalizedSearchResults: any[];
+  unsubscribedSearchResults: any[];
+  shouldSearchDefaultLibraries: boolean;
+  versionForTracking: number;
+  entryPoint: string;
+}
+
+interface Local {
+  components: SourceAssetKeyToDestinationKey;
+  styles: SourceAssetKeyToDestinationKey;
+  stateGroups: SourceAssetKeyToDestinationKey;
+  modules: SourceAssetKeyToDestinationKey;
+  thumbnails: SourceAssetKeyToDestinationKey;
+}
+
+interface OpenFilePublishedLIVEGRAPH {
+  components: SourceAssetKeyToDestinationKey;
+  styles: SourceAssetKeyToDestinationKey;
+  stateGroups: SourceAssetKeyToDestinationKey;
+  variableSets: SourceAssetKeyToDestinationKey;
+  variables: SourceAssetKeyToDestinationKey;
+  modules: SourceAssetKeyToDestinationKey;
+}
+
+interface UsedLIVEGRAPH {
+  styles: Styles;
+  sourceAssetKeyToDestinationKey: SourceAssetKeyToDestinationKey;
+  sourceAssetKeyToFileName: SourceAssetKeyToDestinationKey;
+  localNodeIdToDestinationKey: SourceAssetKeyToDestinationKey;
+  localNodeIdToDestinationFileName: SourceAssetKeyToDestinationKey;
+  unnaturalKeyToNaturalKey: SourceAssetKeyToDestinationKey;
+  destinationStyleKeyToLegacySourceStyle: SourceAssetKeyToDestinationKey;
+}
+
+interface SourceAssetKeyToDestinationKey {
+}
+
+interface Styles {
+  [key: string]: StyleItemValue;
+}
+
+interface StyleItemValue {
+  status: string;
+  data: null;
+  errors: any[];
+}
+
+interface PublishedByLibraryKey {
+  components: Components;
+  stateGroups: StateGroups;
+}
+
+interface StateGroups {
+  NO_TEAM: NOTEAM2;
+}
+
+interface NOTEAM2 {
+  [key: string]: DynamicKeyValueStore;
+}
+
+interface DynamicKeyValueStore {
+  [key: string]: StateGroupItemValueInner;
+}
+
+interface StateGroupItemValueInner {
+  name: string;
+  file_key: string;
+  type: string;
+  key: string;
+  thumbnail_url: string;
+  canvas_url: string;
+  version: string;
+  userFacingVersion: string;
+  description: string;
+  description_rt: string;
+  id: string;
+  node_id: string;
+  containing_frame: Containingframe2;
+  updated_at: string;
+  fill_color: null;
+  default_state_key: string;
+  min_node_width: number;
+  min_node_height: number;
+  is_template: null;
+  library_key: string;
+}
+
+export interface Containingframe2 {
+  name: string;
+  nodeId: string;
+  pageId: string;
+  pageName: string;
+  backgroundColor: string;
+}
+
+export interface Components {
+  NO_TEAM: NOTEAM;
+}
+
+export interface NOTEAM {
+  [key: string]: NoTeamItemValue;
+}
+
+export interface NoTeamItemValue {
+  [key: string]: NoTeamItemValueDetail;
+}
+
+export interface NoTeamItemValueDetail {
+  name: string;
+  file_key: string;
+  type: string;
+  component_key: string;
+  thumbnail_url: string;
+  canvas_url: string;
+  content_hash: string;
+  userFacingVersion: string;
+  id: string;
+  description: string;
+  description_rt: string;
+  node_id: string;
+  containing_frame: Containingframe;
+  is_unflattened: boolean;
+  updated_at: string;
+  min_node_width: number;
+  min_node_height: number;
+  sort_position: null;
+  has_video: null;
+  is_template: null;
+  library_key: string;
+}
+
+interface Containingframe {
+  name: string;
+  nodeId: string;
+  pageId: string;
+  pageName: string;
+  backgroundColor: string;
+  containingStateGroup: ContainingStateGroup;
+}
+
+interface ContainingStateGroup {
+  name: string;
+  nodeId: string;
+}
+
 
 export interface AssetsPanelSearch {
   query: string
@@ -1208,7 +1621,7 @@ export interface LoadingState {
 }
 
 export interface Mirror {
-  appModel: { [key: string]: AppModelValue }
+  appModel: AppModel
   selectionProperties: SelectionProperties
   selectedStyleProperties: SelectedStyleProperties
   sceneGraph: SceneGraph
@@ -1472,9 +1885,1134 @@ export interface ChangeListeners {
   deferrableListeners: any[]
   deferredListeners: any[]
 }
+enum Actions {
+  rollbackStagedChanges = 'rollback-staged-changes',
+  commitStagedChanges = 'commit-staged-changes',
+  toggleSmartTextSubstitution = 'toggle-smart-text-substitution',
+  setConstraintsAutomaticallyToggle = 'set-constraints-automatically-toggle',
+  setConstraintsManually = 'set-constraints-manually',
+  setConstraintsAutomatically = 'set-constraints-automatically',
+  imageToDesignOracle = 'image-to-design-oracle',
+  imageToDesign = 'image-to-design',
+  mermaidToDiagram = 'mermaid-to-diagram',
+  createIdeas = 'create-ideas',
+  mindMapGenerateIdeas = 'mind-map-generate-ideas',
+  sortStickiesByStampType = 'sort-stickies-by-stamp-type',
+  sortStickiesByStampCount = 'sort-stickies-by-stamp-count',
+  sortStickiesByAuthor = 'sort-stickies-by-author',
+  sortStickiesByColor = 'sort-stickies-by-color',
+  sortStickiesByTopic = 'sort-stickies-by-topic',
+  summarizeStickies = 'summarize-stickies',
+  whiteboardGenerateContent = 'whiteboard-generate-content',
+  removePlatformShapeDefinition = 'remove-platform-shape-definition',
+  addPlatformShapeDefinition = 'add-platform-shape-definition',
+  pasteSelectionIntoBuzzFromDesign = 'paste-selection-into-buzz-from-design',
+  sendToBuzzFromDesign = 'send-to-buzz-from-design',
+  focusNextAsset = 'focus-next-asset',
+  insertSlideNumbersAllSlides = 'insert-slide-numbers-all-slides',
+  addSlideObjectAnimation = 'add-slide-object-animation',
+  skipSlides = 'skip-slides',
+  skipSlide = 'skip-slide',
+  focusSlideDown = 'focus-slide-down',
+  focusSlideUp = 'focus-slide-up',
+  focusPreviousSlide = 'focus-previous-slide',
+  focusNextSlide = 'focus-next-slide',
+  detachCmsRichText = 'detach-cms-rich-text',
+  createCmsRichTextInInstance = 'create-cms-rich-text-in-instance',
+  unskipSlides = 'unskip-slides',
+  createCmsRichText = 'create-cms-rich-text',
+  setSitesInsertsOverlay = 'set-sites-inserts-overlay',
+  setSitesViewCms = 'set-sites-view-cms',
+  setSitesViewCode = 'set-sites-view-code',
+  setSitesViewFile = 'set-sites-view-file',
+  copyOutDesignFromCode = 'copy-out-design-from-code',
+  bulkExportDesignToReact = 'bulk-export-design-to-react',
+  editCode = 'edit-code',
+  sitesCopyLink = 'sites-copy-link',
+  setAsSiteHomepage = 'set-as-site-homepage',
+  copyMakeForDesign = 'copy-make-for-design',
+  createMakeFromDesign = 'create-make-from-design',
+  focusPreviousArea = 'focus-previous-area',
+  togglePluginApiDebug = 'toggle-plugin-api-debug',
+  toggleCollaborativeTextDebug = 'toggle-collaborative-text-debug',
+  debugToggleWhiteboardPdfImportNodeReplacement = 'debug-toggle-whiteboard-pdf-import-node-replacement',
+  debugToggleShowMousePosition = 'debug-toggle-show-mouse-position',
+  slidesRewriteText = 'slides-rewrite-text',
+  slidesGenerateSpeakerNotes = 'slides-generate-speaker-notes',
+  contentFill = 'content-fill',
+  shortenText = 'shorten-text',
+  rewriteText = 'rewrite-text',
+  detectViolations = 'detect-violations',
+  makeEditsDebugReview = 'make-edits-debug-review',
+  firstDraftDebug = 'first-draft-debug',
+  firstDraftLinting = 'first-draft-linting',
+  firstDraftSuggestProps = 'first-draft-suggest-props',
+  firstDraftComponentize = 'first-draft-componentize',
+  firstDraftMakeChanges = 'first-draft-make-changes',
+  firstDraft = 'first-draft',
+  magicLink = 'magic-link',
+  autoRenameLayers = 'auto-rename-layers',
+  expandImage = 'expand-image',
+  removeBackground = 'remove-background',
+  startMindMap = 'start-mind-map',
+  setSlidesAudienceView = 'set-slides-audience-view',
+  setSitesInlinePreview = 'set-sites-inline-preview',
+  toggleDisplayGpuMetrics = 'toggle-display-gpu-metrics',
+  setToolBend = 'set-tool-bend',
+  toggleDisplayDirtyTiles = 'toggle-display-dirty-tiles',
+  showPrototypeInteractionEditModal = 'show-prototype-interaction-edit-modal',
+  addTableRowAbove = 'add-table-row-above',
+  lockSelectedSectionOnly = 'lock-selected-section-only',
+  toggleNoodlesWithoutDragging = 'toggle-noodles-without-dragging',
+  toggleSyncCursorRendering = 'toggle-sync-cursor-rendering',
+  flipHorizontal = 'flip-horizontal',
+  toggleAllowTimeSlicedEditRenderingOptimization = 'toggle-allow-time-sliced-edit-rendering-optimization',
+  changeDocumentColorProfileToSrgb = 'change-document-color-profile-to-srgb',
+  focusNextArea = 'focus-next-area',
+  assignDocumentColorProfileLegacy = 'assign-document-color-profile-legacy',
+  enterBuzzDesignMode = 'enter-buzz-design-mode',
+  setToolOldSelect = 'set-tool-old-select',
+  toggleBuzzToolMode = 'toggle-buzz-tool-mode',
+  presentSlidesPresenterView = 'present-slides-presenter-view',
+  presentSlidesAudienceView = 'present-slides-audience-view',
+  removeBreakpoint = 'remove-breakpoint',
+  presentAsPrototype = 'present-as-prototype',
+  sitesFixIssue = 'sites-fix-issue',
+  textSmallCaps = 'text-small-caps',
+  toggleStraightPencil = 'toggle-straight-pencil',
+  setImageAsProfilePicture = 'set-image-as-profile-picture',
+  focusModeResponsiveSet = 'focus-mode-responsive-set',
+  debugLogCanvasSearchIndex = 'debug-log-canvas-search-index',
+  setOpacity0 = 'set-opacity-0',
+  setOpacity4 = 'set-opacity-4',
+  debugToggleFigmakeMode = 'debug-toggle-figmake-mode',
+  debugToggleSitesMode = 'debug-toggle-sites-mode',
+  addSelectionReadyStatus = 'add-selection-ready-status',
+  toggleUi = 'toggle-ui',
+  debugSetSlidesGridMode = 'debug-set-slides-grid-mode',
+  toggleShowDotGrid = 'toggle-show-dot-grid',
+  duplicateInPlace = 'duplicate-in-place',
+  debugToggleWhiteboardMode = 'debug-toggle-whiteboard-mode',
+  setToolShapeWhiteboardManualInput = 'set-tool-shape-whiteboard-manual-input',
+  repairVariableConnections = 'repair-variable-connections',
+  testMultiplayerUpgrade = 'test-multiplayer-upgrade',
+  testAction = 'test-action',
+  keyboardLayoutDanish = 'keyboard-layout-danish',
+  resizeTableColumnDecreaseLarge = 'resize-table-column-decrease-large',
+  replaceSelectedSectionWithFrame = 'replace-selected-section-with-frame',
+  panelsMenu = 'panels-menu',
+  resizeTableColumnIncrease = 'resize-table-column-increase',
+  copyLink = 'copy-link',
+  exportAllFramesToPdf = 'export-all-frames-to-pdf',
+  resizeTableRowIncreaseLarge = 'resize-table-row-increase-large',
+  resizeTableRowDecrease = 'resize-table-row-decrease',
+  copyAsCss = 'copy-as-css',
+  setPrototypeViewPresent = 'set-prototype-view-present',
+  resizeTableRowIncrease = 'resize-table-row-increase',
+  extendTableCellSelectionDown = 'extend-table-cell-selection-down',
+  setPrototypeViewPreview = 'set-prototype-view-preview',
+  extendTableCellSelectionUp = 'extend-table-cell-selection-up',
+  linkToComponent = 'link-to-component',
+  findComponentInFile = 'find-component-in-file',
+  inlinePreviewResetSize = 'inline-preview-reset-size',
+  moveTableCellSelectionUp = 'move-table-cell-selection-up',
+  moveTableCellSelectionRight = 'move-table-cell-selection-right',
+  addDefaultCellStylesToTables = 'add-default-cell-styles-to-tables',
+  deleteCurrentTableRow = 'delete-current-table-row',
+  deleteTableContents = 'delete-table-contents',
+  removeSelectionStatus = 'remove-selection-status',
+  moveTableColumnRight = 'move-table-column-right',
+  addTableColumnAfter = 'add-table-column-after',
+  textLetterSpacingIncrease = 'text-letter-spacing-increase',
+  addTableColumnBefore = 'add-table-column-before',
+  alignBottom = 'align-bottom',
+  moveTableRowDown = 'move-table-row-down',
+  moveTableRowUp = 'move-table-row-up',
+  printRenderTree = 'print-render-tree',
+  setToolKeyboardSelect = 'set-tool-keyboard-select',
+  printImageDiagnostics = 'print-image-diagnostics',
+  removeVerticalGuides = 'remove-vertical-guides',
+  downloadWebglTrace = 'download-webgl-trace',
+  unhideAll = 'unhide-all',
+  showInspectPanel = 'show-inspect-panel',
+  toggleGridFocusView = 'toggle-grid-focus-view',
+  textAlignRight = 'text-align-right',
+  showDevModePluginsPanel = 'show-dev-mode-plugins-panel',
+  toggleRulerUnitCentimeters = 'toggle-ruler-unit-centimeters',
+  showDevModeInspectPanel = 'show-dev-mode-inspect-panel',
+  showPrototypePanel = 'show-prototype-panel',
+  toggleIncludeEverythingInTabOrder = 'toggle-include-everything-in-tab-order',
+  swapToRelatedState = 'swap-to-related-state',
+  showDesignPanel = 'show-design-panel',
+  enterDesignMode = 'enter-design-mode',
+  browseAllResourcesModal = 'browse-all-resources-modal',
+  openHelp = 'open-help',
+  testMultiplayerRejectNotLoggedIn = 'test-multiplayer-reject-not-logged-in',
+  testMultiplayerRejectTooOld = 'test-multiplayer-reject-too-old',
+  previousArtboardSameZoom = 'previous-artboard-same-zoom',
+  nextArtboardSameZoom = 'next-artboard-same-zoom',
+  hideSiblingLayers = 'hide-sibling-layers',
+  addFillToStyleSelection = 'add-fill-to-style-selection',
+  publishChangesToLibrary = 'publish-changes-to-library',
+  addStrokeToSelection = 'add-stroke-to-selection',
+  dumpUndoHistory = 'dump-undo-history',
+  toggleDisplayDirtyRects = 'toggle-display-dirty-rects',
+  openPreferencesModal = 'open-preferences-modal',
+  setToolWashiTape = 'set-tool-washi-tape',
+  pageRename = 'page-rename',
+  openReleaseNotes = 'open-release-notes',
+  openSupportForum = 'open-support-forum',
+  inlinePreviewIframeFocusStateChanged = 'inline-preview-iframe-focus-state-changed',
+  gotoLayer = 'goto-layer',
+  assignDocumentColorProfileSrgb = 'assign-document-color-profile-srgb',
+  regenerateAllInstances = 'regenerate-all-instances',
+  inlinePreviewPresentedNodeChanged = 'inline-preview-presented-node-changed',
+  inlinePreviewLoaded = 'inline-preview-loaded',
+  repairSelectedInstances = 'repair-selected-instances',
+  toggleInlineHtmlPreview = 'toggle-inline-html-preview',
+  deletePrototypeStartingPoint = 'delete-prototype-starting-point',
+  updateInteractionsStateManagementOnPage = 'update-interactions-state-management-on-page',
+  setSlidesPresenterView = 'set-slides-presenter-view',
+  removeInteractionsOnSelection = 'remove-interactions-on-selection',
+  setScrollWheelZoomEnabled = 'set-scroll-wheel-zoom-enabled',
+  pagePrevious = 'page-previous',
+  toggleRightClickPan = 'toggle-right-click-pan',
+  testMultiplayerRejectTooManyConnections = 'test-multiplayer-reject-too-many-connections',
+  toggleScrollWheelZoom = 'toggle-scroll-wheel-zoom',
+  toggleSnappingToDots = 'toggle-snapping-to-dots',
+  placeAllImages = 'place-all-images',
+  toggleUseRealmsForPluginDev = 'toggle-use-realms-for-plugin-dev',
+  toggleShowMasks = 'toggle-show-masks',
+  toggleOutlineModeHiddenLayers = 'toggle-outline-mode-hidden-layers',
+  toggleOutlines = 'toggle-outlines',
+  toggleDebugMaterializerLogs = 'toggle-debug-materializer-logs',
+  toggleDebugLayoutLogs = 'toggle-debug-layout-logs',
+  debugIncrementalLoadingAllPages = 'debug-incremental-loading-all-pages',
+  toggleDebugPageSyncLogs = 'toggle-debug-page-sync-logs',
+  toggleDebugUserSyncLogs = 'toggle-debug-user-sync-logs',
+  toggleTsmerConfig = 'toggle-tsmer-config',
+  toggleLockedForSelectedNodes = 'toggle-locked-for-selected-nodes',
+  togglePerfHud = 'toggle-perf-hud',
+  enterLayoutMode = 'enter-layout-mode',
+  toggleShowSemanticTagsOnLayerRows = 'toggle-show-semantic-tags-on-layer-rows',
+  toggleGrid = 'toggle-grid',
+  destroyAllAutoLayout = 'destroy-all-auto-layout',
+  toggleRulerUnitInches = 'toggle-ruler-unit-inches',
+  setToolShapeWhiteboardSummingJunction = 'set-tool-shape-whiteboard-summing-junction',
+  toggleLibrary = 'toggle-library',
+  togglePrintMarks = 'toggle-print-marks',
+  alignLeft = 'align-left',
+  toggleMemoryUsageIndicator = 'toggle-memory-usage-indicator',
+  toggleShowImmutableFrameSublayers = 'toggle-show-immutable-frame-sublayers',
+  debugInspectLayerFigmaScope = 'debug-inspect-layer-figma-scope',
+  textLineHeightDecrease = 'text-line-height-decrease',
+  testIndependentLayerAnimation = 'test-independent-layer-animation',
+  setToolScale = 'set-tool-scale',
+  toggleShowGuids = 'toggle-show-guids',
+  toggleIconDetection = 'toggle-icon-detection',
+  setToolCodeBlock = 'set-tool-code-block',
+  textStyleH2 = 'text-style-h2',
+  openTimer = 'open-timer',
+  toggleSectionVisibility = 'toggle-section-visibility',
+  setToolJsx = 'set-tool-jsx',
+  setToolPatternSourceSelector = 'set-tool-pattern-source-selector',
+  changeDocumentColorProfileToDisplayP3 = 'change-document-color-profile-to-display-p3',
+  setToolSitesEmbed = 'set-tool-sites-embed',
+  roundToPixels = 'round-to-pixels',
+  setToolSitesLink = 'set-tool-sites-link',
+  setToolSitesResponsiveNodeSet = 'set-tool-sites-responsive-node-set',
+  setToolSitesWebpage = 'set-tool-sites-webpage',
+  setToolSlidesYoutube = 'set-tool-slides-youtube',
+  setToolSlidesAlignmentScale = 'set-tool-slides-alignment-scale',
+  setToolSlidesPoll = 'set-tool-slides-poll',
+  setToolBrush = 'set-tool-brush',
+  setToolMeasure = 'set-tool-measure',
+  openMakePrototypeModal = 'open-make-prototype-modal',
+  setToolAnnotate = 'set-tool-annotate',
+  createTriangle = 'create-triangle',
+  toggleViewportOverlayHiding = 'toggle-viewport-overlay-hiding',
+  resizeTableColumnDecrease = 'resize-table-column-decrease',
+  setScrollWheelZoomDisabled = 'set-scroll-wheel-zoom-disabled',
+  setToolSection = 'set-tool-section',
+  linkToExistingComponent = 'link-to-existing-component',
+  setToolShapeWhiteboardPlatform = 'set-tool-shape-whiteboard-platform',
+  convertDocumentColorProfileSrgb = 'convert-document-color-profile-srgb',
+  moveTableCellSelectionLeft = 'move-table-cell-selection-left',
+  detachInstance = 'detach-instance',
+  addTableRowBelow = 'add-table-row-below',
+  setRightClickPanEnabled = 'set-right-click-pan-enabled',
+  toggleShowComments = 'toggle-show-comments',
+  toggleRulerUnitPixels = 'toggle-ruler-unit-pixels',
+  setToolShapeWhiteboardParallelogramLeft = 'set-tool-shape-whiteboard-parallelogram-left',
+  setToolMindmapTreeNucleus = 'set-tool-mindmap-tree-nucleus',
+  afterFirstRender = 'after-first-render',
+  setToolShapeWhiteboardArrowRight = 'set-tool-shape-whiteboard-arrow-right',
+  setToolShapeWhiteboardArrowLeft = 'set-tool-shape-whiteboard-arrow-left',
+  setToolShapeWhiteboardDocumentMultiple = 'set-tool-shape-whiteboard-document-multiple',
+  setToolShapeWhiteboardDocumentSingle = 'set-tool-shape-whiteboard-document-single',
+  setToolShapeWhiteboardPentagon = 'set-tool-shape-whiteboard-pentagon',
+  setToolShapeWhiteboardHexagon = 'set-tool-shape-whiteboard-hexagon',
+  setToolShapeWhiteboardShield = 'set-tool-shape-whiteboard-shield',
+  stackSelectedNodes = 'stack-selected-nodes',
+  setToolShapeWhiteboardEngQueue = 'set-tool-shape-whiteboard-eng-queue',
+  enterStagingMode = 'enter-staging-mode',
+  openTutorials = 'open-tutorials',
+  moveTableColumnLeft = 'move-table-column-left',
+  setToolShapeWhiteboardRoundedRectangle = 'set-tool-shape-whiteboard-rounded-rectangle',
+  addPrototypeStartingPoint = 'add-prototype-starting-point',
+  testNonIndependentLayerAnimation = 'test-non-independent-layer-animation',
+  setToolShapeWhiteboardTriangleDown = 'set-tool-shape-whiteboard-triangle-down',
+  setToolShapeWhiteboardDiamond = 'set-tool-shape-whiteboard-diamond',
+  setToolShapeWhiteboardEllipse = 'set-tool-shape-whiteboard-ellipse',
+  setToolShapeWhiteboardSquare = 'set-tool-shape-whiteboard-square',
+  setToolStamp = 'set-tool-stamp',
+  setToolConnectorStraightNoEndpoints = 'set-tool-connector-straight-no-endpoints',
+  setToolConnectorElbowed = 'set-tool-connector-elbowed',
+  toggleCanvasSearchDebug = 'toggle-canvas-search-debug',
+  setAsPrimaryBreakpoint = 'set-as-primary-breakpoint',
+  openLegalSummary = 'open-legal-summary',
+  toggleShowAnnotations = 'toggle-show-annotations',
+  spotlightMe = 'spotlight-me',
+  updateInstanceLayoutVersion = 'update-instance-layout-version',
+  setToolComments = 'set-tool-comments',
+  selectSameFont = 'select-same-font',
+  setToolMultiselect = 'set-tool-multiselect',
+  setToolRectangle = 'set-tool-rectangle',
+  setToolSlidesEmbed = 'set-tool-slides-embed',
+  setToolVectorLasso = 'set-tool-vector-lasso',
+  setToolSimplifyVector = 'set-tool-simplify-vector',
+  setToolCut = 'set-tool-cut',
+  clearTool = 'clear-tool',
+  setToolPencil = 'set-tool-pencil',
+  gotoRepeaterComponent = 'goto-repeater-component',
+  setToolPen = 'set-tool-pen',
+  focusLinkPanel = 'focus-link-panel',
+  setToolType = 'set-tool-type',
+  setToolSlice = 'set-tool-slice',
+  alignLeftAsGroup = 'align-left-as-group',
+  setToolShapeWhiteboardOctagon = 'set-tool-shape-whiteboard-octagon',
+  setToolFrame = 'set-tool-frame',
+  setDefaultEmojiSkinTone = 'set-default-emoji-skin-tone',
+  moveTableCellSelectionDown = 'move-table-cell-selection-down',
+  setToolShapeWhiteboardStar = 'set-tool-shape-whiteboard-star',
+  toggleEnableCodegenMcpServer = 'toggle-enable-codegen-mcp-server',
+  resetEffects = 'reset-effects',
+  toggleSpellCheck = 'toggle-spell-check',
+  toggleHangingPunctuationPreference = 'toggle-hanging-punctuation-preference',
+  applyTransformModifiers = 'apply-transform-modifiers',
+  toggleLeadingTrimPreference = 'toggle-leading-trim-preference',
+  keyboardLayoutSpanish = 'keyboard-layout-spanish',
+  keyboardLayoutItalian = 'keyboard-layout-italian',
+  selectCurrentTableRow = 'select-current-table-row',
+  testMultiplayerRejectInvalidPermissions = 'test-multiplayer-reject-invalid-permissions',
+  keyboardLayoutSwedish = 'keyboard-layout-swedish',
+  keyboardLayoutUkPc = 'keyboard-layout-uk-pc',
+  quit = 'quit',
+  convertDocumentColorProfileDisplayP3 = 'convert-document-color-profile-display-p3',
+  groupSelection = 'group-selection',
+  toggleOutlineModeObjectBounds = 'toggle-outline-mode-object-bounds',
+  keyboardLayoutHiraganaKana = 'keyboard-layout-hiragana-kana',
+  focusModeComponentSetToggle = 'focus-mode-component-set-toggle',
+  keyboardLayoutGerman = 'keyboard-layout-german',
+  setOpacity9 = 'set-opacity-9',
+  adjustRulerGuides = 'adjust-ruler-guides',
+  setOpacity7 = 'set-opacity-7',
+  renameSelection = 'rename-selection',
+  setOpacity2 = 'set-opacity-2',
+  setOpacity1 = 'set-opacity-1',
+  setToolDefault = 'set-tool-default',
+  escape = 'escape',
+  setToolOffsetPath = 'set-tool-offset-path',
+  showNudgeAmountPicker = 'show-nudge-amount-picker',
+  textEditHyperlink = 'text-edit-hyperlink',
+  toggleTextSuggestionsPreference = 'toggle-text-suggestions-preference',
+  toggleUseNumbersForOpacity = 'toggle-use-numbers-for-opacity',
+  copyAsCssRecursive = 'copy-as-css-recursive',
+  toggleDropper = 'toggle-dropper',
+  toggleAlwaysExpandAnnotations = 'toggle-always-expand-annotations',
+  setToolShapeWhiteboardPlus = 'set-tool-shape-whiteboard-plus',
+  debugPrintAsTestCode = 'debug-print-as-test-code',
+  togglePixelPreview = 'toggle-pixel-preview',
+  canvasSearchReplace = 'canvas-search-replace',
+  toggleRetinaMode = 'toggle-retina-mode',
+  canvasSearchNext = 'canvas-search-next',
+  discardAllImages = 'discard-all-images',
+  focusModeExit = 'focus-mode-exit',
+  focusMode = 'focus-mode',
+  toggleTextInputShortcutBlocking = 'toggle-text-input-shortcut-blocking',
+  multiEditText = 'multi-edit-text',
+  enter = 'enter',
+  toggleInlinePreview = 'toggle-inline-preview',
+  togglePreferences = 'toggle-preferences',
+  save = 'save',
+  toggleMenu = 'toggle-menu',
+  deselectAll = 'deselect-all',
+  backupAllOverrides = 'backup-all-overrides',
+  breakVectorNetworkIntoPaths = 'break-vector-network-into-paths',
+  setToolShapeWhiteboardPredefinedProcess = 'set-tool-shape-whiteboard-predefined-process',
+  smoothJoinSelection = 'smooth-join-selection',
+  keyboardLayoutSpanishLatam = 'keyboard-layout-spanish-latam',
+  joinSelection = 'join-selection',
+  setToolShapeWhiteboardEngFile = 'set-tool-shape-whiteboard-eng-file',
+  unlockSelectedNodes = 'unlock-selected-nodes',
+  lockSelectedNodes = 'lock-selected-nodes',
+  showRotationOrigin = 'show-rotation-origin',
+  hideSelectedNodes = 'hide-selected-nodes',
+  zoomToFit = 'zoom-to-fit',
+  zoomReset = 'zoom-reset',
+  toggleEditMode = 'toggle-edit-mode',
+  setToolVarWidthPoint = 'set-tool-var-width-point',
+  toggleShowPropertyLabels = 'toggle-show-property-labels',
+  keyboardLayoutUkMac = 'keyboard-layout-uk-mac',
+  toggleMultiplayerCursors = 'toggle-multiplayer-cursors',
+  republishSelectedComponents = 'republish-selected-components',
+  keyboardLayoutPortuguese = 'keyboard-layout-portuguese',
+  toggleCopyRenaming = 'toggle-copy-renaming',
+  toggleLayerHover = 'toggle-layer-hover',
+  disablePinchZoomFix = 'disable-pinch-zoom-fix',
+  setToolHighlighter = 'set-tool-highlighter',
+  resizeTableRowDecreaseLarge = 'resize-table-row-decrease-large',
+  toggleSnappingToObjects = 'toggle-snapping-to-objects',
+  keyboardLayoutFinnish = 'keyboard-layout-finnish',
+  toggleSnappingToPixels = 'toggle-snapping-to-pixels',
+  setToolHand = 'set-tool-hand',
+  toggleSidebar = 'toggle-sidebar',
+  componentInsert = 'component-insert',
+  togglePublish = 'toggle-publish',
+  toggleLayers = 'toggle-layers',
+  addConnectorText = 'add-connector-text',
+  zoomToSelection = 'zoom-to-selection',
+  devHandoffFocusNext = 'dev-handoff-focus-next',
+  createComment = 'create-comment',
+  packVertical = 'pack-vertical',
+  enterPreviewMode = 'enter-preview-mode',
+  copyAsPng = 'copy-as-png',
+  removeImageOverlay = 'remove-image-overlay',
+  addImageOverlay = 'add-image-overlay',
+  assignDocumentColorProfileDisplayP3 = 'assign-document-color-profile-display-p3',
+  distributeBottom = 'distribute-bottom',
+  unlockAll = 'unlock-all',
+  cropImage = 'crop-image',
+  regenerateSelectedInstances = 'regenerate-selected-instances',
+  distributeLeft = 'distribute-left',
+  textDirectionalityMenu = 'text-directionality-menu',
+  toggleProgressiveBlurEditMode = 'toggle-progressive-blur-edit-mode',
+  toggleGradientEditMode = 'toggle-gradient-edit-mode',
+  focusPreviousAsset = 'focus-previous-asset',
+  zoomIn = 'zoom-in',
+  deleteCurrentTableColumn = 'delete-current-table-column',
+  requestEditModeViaToolbar = 'request-edit-mode-via-toolbar',
+  requestEditMode = 'request-edit-mode',
+  keyboardLayoutFrenchAzerty = 'keyboard-layout-french-azerty',
+  enterInspectMode = 'enter-inspect-mode',
+  createDiamond = 'create-diamond',
+  textFontSizeIncrease = 'text-font-size-increase',
+  enterBranchingMode = 'enter-branching-mode',
+  textFontSizeDecrease = 'text-font-size-decrease',
+  selectSimilar = 'select-similar',
+  replaceSelectedText = 'replace-selected-text',
+  toggleUndoRedoDebug = 'toggle-undo-redo-debug',
+  textLineHeightIncrease = 'text-line-height-increase',
+  enterLibraryMode = 'enter-library-mode',
+  setOpacity6 = 'set-opacity-6',
+  alignTop = 'align-top',
+  textStyleNormal = 'text-style-normal',
+  textAlignCenter = 'text-align-center',
+  dumpPendingRegisters = 'dump-pending-registers',
+  textRelayout = 'text-relayout',
+  extendTableCellSelectionRight = 'extend-table-cell-selection-right',
+  resetVisible = 'reset-visible',
+  textTitleCase = 'text-title-case',
+  textLowerCase = 'text-lower-case',
+  textUpperCase = 'text-upper-case',
+  debugToggleShowVectorNetworkLabels = 'debug-toggle-show-vector-network-labels',
+  textCaseMenu = 'text-case-menu',
+  setToolShapeWhiteboardEngDatabase = 'set-tool-shape-whiteboard-eng-database',
+  keyboardLayoutReset = 'keyboard-layout-reset',
+  textSetDirectionalityRtlQa = 'text-set-directionality-rtl-qa',
+  textSetDirectionalityLtrQa = 'text-set-directionality-ltr-qa',
+  enterHistoryMode = 'enter-history-mode',
+  textSetDirectionalityLtr = 'text-set-directionality-ltr',
+  backToFiles = 'back-to-files',
+  textUpgradeExplicitLayoutVersion = 'text-upgrade-explicit-layout-version',
+  exportSelectionOrCurrentPage = 'export-selection-or-current-page',
+  copyLayerName = 'copy-layer-name',
+  textDeleteSelectionOrNextCharacter = 'text-delete-selection-or-next-character',
+  followPresenter = 'follow-presenter',
+  textDeleteSelectionOrEnd = 'text-delete-selection-or-end',
+  toggleAccessibilityDomDebug = 'toggle-accessibility-dom-debug',
+  reportNoVideoUploadPermissions = 'report-no-video-upload-permissions',
+  createSection = 'create-section',
+  toggleAnimateInfo = 'toggle-animate-info',
+  textToggleStrikethrough = 'text-toggle-strikethrough',
+  textToggleUnderline = 'text-toggle-underline',
+  togglePrototypingInfo = 'toggle-prototyping-info',
+  simplifySelectedInstancePanels = 'simplify-selected-instance-panels',
+  textToggleItalic = 'text-toggle-italic',
+  distributeHorizontalCenter = 'distribute-horizontal-center',
+  setToolShapeWhiteboardInternalStorage = 'set-tool-shape-whiteboard-internal-storage',
+  deleteSelection = 'delete-selection',
+  moveTextSelectionEnd = 'move-text-selection-end',
+  toggleStickyTools = 'toggle-sticky-tools',
+  distributeVerticalCenter = 'distribute-vertical-center',
+  collapseLayers = 'collapse-layers',
+  selectAllText = 'select-all-text',
+  distributeTop = 'distribute-top',
+  setToolLasso = 'set-tool-lasso',
+  pluginsRunLast = 'plugins-run-last',
+  startChat = 'start-chat',
+  swapToRelatedSymbol = 'swap-to-related-symbol',
+  restoreDesignInPlaceFromCode = 'restore-design-in-place-from-code',
+  packHorizontal = 'pack-horizontal',
+  resetText = 'reset-text',
+  textOriginalCase = 'text-original-case',
+  detachAllInstances = 'detach-all-instances',
+  arrangeAsList = 'arrange-as-list',
+  enterDrawMode = 'enter-draw-mode',
+  arrangeAsGrid = 'arrange-as-grid',
+  replaceSelectedFrameWithSection = 'replace-selected-frame-with-section',
+  pasteHere = 'paste-here',
+  devHandoffFocusPrevious = 'dev-handoff-focus-previous',
+  debugToggleSlidesMode = 'debug-toggle-slides-mode',
+  selectCurrentTableCell = 'select-current-table-cell',
+  resetSymbol = 'reset-symbol',
+  findCodebaseSuggestions = 'find-codebase-suggestions',
+  setToolStar = 'set-tool-star',
+  alignHorizontalCenterAsGroup = 'align-horizontal-center-as-group',
+  removeHorizontalGuides = 'remove-horizontal-guides',
+  markIncomplete = 'mark-incomplete',
+  alignVerticalCenterAsGroup = 'align-vertical-center-as-group',
+  exportNodeDirectCooper = 'export-node-direct-cooper',
+  selectPreviousNode = 'select-previous-node',
+  textStyleTitle = 'text-style-title',
+  copyToFigmaSlides = 'copy-to-figma-slides',
+  alignTopAsGroup = 'align-top-as-group',
+  copyProperties = 'copy-properties',
+  alignVerticalCenter = 'align-vertical-center',
+  createRoundedRectangle = 'create-rounded-rectangle',
+  addSkewModifierToSelection = 'add-skew-modifier-to-selection',
+  testIndependentLayerAnimationOpacity = 'test-independent-layer-animation-opacity',
+  addLinearRepeatToSelection = 'add-linear-repeat-to-selection',
+  toggleUseOldOutlineShortcuts = 'toggle-use-old-outline-shortcuts',
+  tidyUp = 'tidy-up',
+  canvasSearchPrev = 'canvas-search-prev',
+  makeVideo = 'make-video',
+  liveBooleanXor = 'live-boolean-xor',
+  textToggleOrderedList = 'text-toggle-ordered-list',
+  enterSlidesMode = 'enter-slides-mode',
+  textAdjustMenu = 'text-adjust-menu',
+  liveBooleanIntersect = 'live-boolean-intersect',
+  toggleOverlayUiRendering = 'toggle-overlay-ui-rendering',
+  copyText = 'copy-text',
+  createArc = 'create-arc',
+  setSelectionHugVertical = 'set-selection-hug-vertical',
+  setSelectionHugHorizontal = 'set-selection-hug-horizontal',
+  setSelectionFillHorizontal = 'set-selection-fill-horizontal',
+  createCodeLayerFromDesign = 'create-code-layer-from-design',
+  unstackSelection = 'unstack-selection',
+  resetName = 'reset-name',
+  migratePatternSpacing = 'migrate-pattern-spacing',
+  createStretchBrush = 'create-stretch-brush',
+  maskSelection = 'mask-selection',
+  sendBackward = 'send-backward',
+  inspectFragment = 'inspect-fragment',
+  liveBooleanUnion = 'live-boolean-union',
+  findInspiration = 'find-inspiration',
+  regenerateComponentProps = 'regenerate-component-props',
+  textSetDirectionalityRtl = 'text-set-directionality-rtl',
+  textClearListFormatting = 'text-clear-list-formatting',
+  setToolEraser = 'set-tool-eraser',
+  keyboardLayoutKorean = 'keyboard-layout-korean',
+  findSymbol = 'find-symbol',
+  createBreakpoint = 'create-breakpoint',
+  setToolConnectorStraight = 'set-tool-connector-straight',
+  setToolPaintBucket = 'set-tool-paint-bucket',
+  setToolArrow = 'set-tool-arrow',
+  createScatterBrush = 'create-scatter-brush',
+  createSectionFromSelection = 'create-section-from-selection',
+  copyAsSvg = 'copy-as-svg',
+  createSlide = 'create-slide',
+  gridSelection = 'grid-selection',
+  forcePublishStateGroup = 'force-publish-state-group',
+  upscaleImage = 'upscale-image',
+  createEllipse = 'create-ellipse',
+  resizeToFit = 'resize-to-fit',
+  debugSelection = 'debug-selection',
+  toggleCursorHighFiveWiggle = 'toggle-cursor-high-five-wiggle',
+  debugToggleDontMergeStrokeOutlines = 'debug-toggle-dont-merge-stroke-outlines',
+  setToolCodeComponent = 'set-tool-code-component',
+  ungroupSelection = 'ungroup-selection',
+  frameSelection = 'frame-selection',
+  aspectRatioLock = 'aspect-ratio-lock',
+  setAsDefaultResponsiveSet = 'set-as-default-responsive-set',
+  afterUndoRedoCommit = 'after-undo-redo-commit',
+  distributeVerticalSpacing = 'distribute-vertical-spacing',
+  makeEditsDebug = 'make-edits-debug',
+  presentSitesFullPreview = 'present-sites-full-preview',
+  setToolSlidesFacepile = 'set-tool-slides-facepile',
+  selectSameStyle = 'select-same-style',
+  selectSameEffect = 'select-same-effect',
+  selectSameText = 'select-same-text',
+  toggleBold = 'toggle-bold',
+  selectSameStroke = 'select-same-stroke',
+  resetTextStyle = 'reset-text-style',
+  toggleAnnotations = 'toggle-annotations',
+  toggleDisplayCpuTimerTree = 'toggle-display-cpu-timer-tree',
+  setToolShapeWhiteboardChevron = 'set-tool-shape-whiteboard-chevron',
+  paste = 'paste',
+  swapFillAndStroke = 'swap-fill-and-stroke',
+  setToolEllipse = 'set-tool-ellipse',
+  setOpacity3 = 'set-opacity-3',
+  setToolLine = 'set-tool-line',
+  sendToBack = 'send-to-back',
+  removeStroke = 'remove-stroke',
+  toggleShowFeatureFlagBisector = 'toggle-show-feature-flag-bisector',
+  selectAll = 'select-all',
+  removeFill = 'remove-fill',
+  addAnnotation = 'add-annotation',
+  debugToggleShowCanvasAxis = 'debug-toggle-show-canvas-axis',
+  setToolShapeWhiteboardTriangleUp = 'set-tool-shape-whiteboard-triangle-up',
+  flattenSelection = 'flatten-selection',
+  convertToRaster = 'convert-to-raster',
+  keyboardLayoutUsQwerty = 'keyboard-layout-us-qwerty',
+  repairBreakpointMultiedit = 'repair-breakpoint-multiedit',
+  addVariant = 'add-variant',
+  bringForward = 'bring-forward',
+  place = 'place',
+  textUpgradeToBidi = 'text-upgrade-to-bidi',
+  regenerateFileGeometry = 'regenerate-file-geometry',
+  bringToFront = 'bring-to-front',
+  leaveEditMode = 'leave-edit-mode',
+  textStyleH3 = 'text-style-h3',
+  flipVertical = 'flip-vertical',
+  toggleGoogleFonts = 'toggle-google-fonts',
+  pushChangesToMain = 'push-changes-to-main',
+  simulateBackToFiles = 'simulate-back-to-files',
+  setToolDefaultDevHandoff = 'set-tool-default-dev-handoff',
+  enterSlidesDesignMode = 'enter-slides-design-mode',
+  textToggleUnorderedList = 'text-toggle-unordered-list',
+  setSelectionCompletedStatus = 'set-selection-completed-status',
+  quickCreate = 'quick-create',
+  duplicate = 'duplicate',
+  removeOrphanedVariables = 'remove-orphaned-variables',
+  alignRightAsGroup = 'align-right-as-group',
+  removeDetachedSymbolId = 'remove-detached-symbol-id',
+  toggleFrameClipping = 'toggle-frame-clipping',
+  textAlignTop = 'text-align-top',
+  repairCorruptOverrideKeysForSelected = 'repair-corrupt-override-keys-for-selected',
+  cut = 'cut',
+  toggleFrameOrientation = 'toggle-frame-orientation',
+  togglePressureSensitivity = 'toggle-pressure-sensitivity',
+  createState = 'create-state',
+  openAccountSettings = 'open-account-settings',
+  pruneDerivedData = 'prune-derived-data',
+  toggleShownForSelectedNodes = 'toggle-shown-for-selected-nodes',
+  reflowImmutableFrames = 'reflow-immutable-frames',
+  openFplDebug = 'open-fpl-debug',
+  moveTextSelectionForward = 'move-text-selection-forward',
+  toggleShowSlices = 'toggle-show-slices',
+  saveAs = 'save-as',
+  restoreSoftDeletedSelection = 'restore-soft-deleted-selection',
+  toggleDisplayPixelHeatMap = 'toggle-display-pixel-heat-map',
+  resetPrototypeInteractions = 'reset-prototype-interactions',
+  pruneInvalidComponentPropRefs = 'prune-invalid-component-prop-refs',
+  selectBrokenFixedScrollingNodes = 'select-broken-fixed-scrolling-nodes',
+  rulerUnitMenu = 'ruler-unit-menu',
+  selectNextNode = 'select-next-node',
+  republishAutoLayoutComponents = 'republish-auto-layout-components',
+  assistantChat = 'assistant-chat',
+  calculateDeletedComponentsPublishedVersion = 'calculate-deleted-components-published-version',
+  setToolSitesResponsiveSet = 'set-tool-sites-responsive-set',
+  alignHorizontalCenter = 'align-horizontal-center',
+  relinkInstancesToLocalComponent = 'relink-instances-to-local-component',
+  testIndependentLayerAnimationEased = 'test-independent-layer-animation-eased',
+  removeAnnotations = 'remove-annotations',
+  selectPreviousSibling = 'select-previous-sibling',
+  addFillToSelection = 'add-fill-to-selection',
+  findSharedInstancesNeedRelinking = 'find-shared-instances-need-relinking',
+  resetOverlay = 'reset-overlay',
+  resetVariableModes = 'reset-variable-modes',
+  selectSameInstance = 'select-same-instance',
+  moveTextSelectionStart = 'move-text-selection-start',
+  reresolveVariableReferences = 'reresolve-variable-references',
+  toggleKeyboardZoomToSelection = 'toggle-keyboard-zoom-to-selection',
+  repairVariableModeValues = 'repair-variable-mode-values',
+  pruneOrphanedSlotContent = 'prune-orphaned-slot-content',
+  keyboardLayoutNorwegian = 'keyboard-layout-norwegian',
+  debugToggleFigmaScope = 'debug-toggle-figma-scope',
+  toggleInvertZoom = 'toggle-invert-zoom',
+  repairStateGroupVersions = 'repair-state-group-versions',
+  detachDeletedStyles = 'detach-deleted-styles',
+  copyPasteMenu = 'copy-paste-menu',
+  textIndentList = 'text-indent-list',
+  pageMoveToMenu = 'page-move-to-menu',
+  undo = 'undo',
+  selectNode = 'select-node',
+  toggleVariables = 'toggle-variables',
+  regenerateMissingThumbnails = 'regenerate-missing-thumbnails',
+  runSetResponsiveSettings = 'run-set-responsive-settings',
+  liveBooleanSubtract = 'live-boolean-subtract',
+  toggleFlipDuringResize = 'toggle-flip-during-resize',
+  swapNodes = 'swap-nodes',
+  generateImage = 'generate-image',
+  quickCreateDiagramSibling = 'quick-create-diagram-sibling',
+  emptySlotContents = 'empty-slot-contents',
+  cooperMakeBrandTemplates = 'cooper-make-brand-templates',
+  copy = 'copy',
+  keyboardLayoutDvorak = 'keyboard-layout-dvorak',
+  convertToSlot = 'convert-to-slot',
+  toggleHelpWidget = 'toggle-help-widget',
+  setRightClickPanDisabled = 'set-right-click-pan-disabled',
+  canvasSearchExit = 'canvas-search-exit',
+  detachDeletedVariables = 'detach-deleted-variables',
+  similarIncludesMatching = 'similar-includes-matching',
+  toggleSimilarHighlights = 'toggle-similar-highlights',
+  viewWidgetDetails = 'view-widget-details',
+  insertInteractiveElementIntoActiveSlide = 'insert-interactive-element-into-active-slide',
+  createTemplate = 'create-template',
+  exportSelectedExportablesDirect = 'export-selected-exportables-direct',
+  detachLockedTemplate = 'detach-locked-template',
+  createTemplatesFromRow = 'create-templates-from-row',
+  setToolShapeBuilder = 'set-tool-shape-builder',
+  textBoldDecrease = 'text-bold-decrease',
+  createStateGroup = 'create-state-group',
+  toggleDebugDocSyncLogs = 'toggle-debug-doc-sync-logs',
+  setDefaultStyle = 'set-default-style',
+  setToolConnectorCurved = 'set-tool-connector-curved',
+  selectAllWidgets = 'select-all-widgets',
+  moveTextSelectionBackward = 'move-text-selection-backward',
+  aspectRatioUnlock = 'aspect-ratio-unlock',
+  textAlignBottom = 'text-align-bottom',
+  setToolShapeWhiteboardTrapezoid = 'set-tool-shape-whiteboard-trapezoid',
+  keyboardLayoutChinese = 'keyboard-layout-chinese',
+  setSitesFullPreview = 'set-sites-full-preview',
+  copyAsAndroid = 'copy-as-android',
+  toggleRulers = 'toggle-rulers',
+  repairMissingOverrideKeys = 'repair-missing-override-keys',
+  setToolSlideNumber = 'set-tool-slide-number',
+  restoreSymbolOrStateGroup = 'restore-symbol-or-state-group',
+  alignBottomAsGroup = 'align-bottom-as-group',
+  setToolShapeWhiteboardParallelogramRight = 'set-tool-shape-whiteboard-parallelogram-right',
+  createSymbol = 'create-symbol',
+  toggleRecordingInteractions = 'toggle-recording-interactions',
+  createMultipleSymbols = 'create-multiple-symbols',
+  setOpacity8 = 'set-opacity-8',
+  extendTextSelectionStart = 'extend-text-selection-start',
+  insertLotsOfText = 'insert-lots-of-text',
+  copyAsCode = 'copy-as-code',
+  selectChild = 'select-child',
+  setToolRegularPolygon = 'set-tool-regular-polygon',
+  setToolShapeWhiteboardOr = 'set-tool-shape-whiteboard-or',
+  translateText = 'translate-text',
+  toggleSmartQuotes = 'toggle-smart-quotes',
+  editImage = 'edit-image',
+  toggleDisplayExpensiveTiles = 'toggle-display-expensive-tiles',
+  resetTransform = 'reset-transform',
+  resetExports = 'reset-exports',
+  endMagicLink = 'end-magic-link',
+  resetSize = 'reset-size',
+  rotateImage90Clockwise = 'rotate-image-90-clockwise',
+  toggleKeyboardShortcuts = 'toggle-keyboard-shortcuts',
+  commit = 'commit',
+  resetFill = 'reset-fill',
+  convertSlotToFrame = 'convert-slot-to-frame',
+  redrawCanvas = 'redraw-canvas',
+  textForcedSmallCaps = 'text-forced-small-caps',
+  createStateGroupRow = 'create-state-group-row',
+  setToolSticky = 'set-tool-sticky',
+  publishSelection = 'publish-selection',
+  createMultipleSymbolsAndStateGroup = 'create-multiple-symbols-and-state-group',
+  purgeAllMemory = 'purge-all-memory',
+  toggleShowArtboardOutlines = 'toggle-show-artboard-outlines',
+  setToolTable = 'set-tool-table',
+  toggleSnappingToGeometry = 'toggle-snapping-to-geometry',
+  toggleShowQuickCommandRankDebug = 'toggle-show-quick-command-rank-debug',
+  clearComponentPropsDataForSelection = 'clear-component-props-data-for-selection',
+  selectInverse = 'select-inverse',
+  pageNext = 'page-next',
+  selectMatching = 'select-matching',
+  showSelectedNodes = 'show-selected-nodes',
+  extendTextSelectionBackward = 'extend-text-selection-backward',
+  repairDuplicateSubscribedAssets = 'repair-duplicate-subscribed-assets',
+  pageCopyLink = 'page-copy-link',
+  extendTextSelectionEnd = 'extend-text-selection-end',
+  debugMagicLinkAiModel = 'debug-magic-link-ai-model',
+  combineSelectedVideoStack = 'combine-selected-video-stack',
+  resetLayer = 'reset-layer',
+  resizeTableColumnIncreaseLarge = 'resize-table-column-increase-large',
+  enterFocusView = 'enter-focus-view',
+  debugToggleDiagramLayoutPaused = 'debug-toggle-diagram-layout-paused',
+  textRemoveDecoration = 'text-remove-decoration',
+  toggleVersionHistory = 'toggle-version-history',
+  outlineStroke = 'outline-stroke',
+  selectAllSlides = 'select-all-slides',
+  createSticky = 'create-sticky',
+  setToolDefaultFigjam = 'set-tool-default-figjam',
+  resetStroke = 'reset-stroke',
+  deleteAndHealSelection = 'delete-and-heal-selection',
+  disableAllUnframedMasks = 'disable-all-unframed-masks',
+  openShapesSidebar = 'open-shapes-sidebar',
+  pasteToReplace = 'paste-to-replace',
+  toggleResourceUse = 'toggle-resource-use',
+  removeGuide = 'remove-guide',
+  toggleHangingListPreference = 'toggle-hanging-list-preference',
+  setOpacity5 = 'set-opacity-5',
+  copyAsIos = 'copy-as-ios',
+  canvasSearch = 'canvas-search',
+  togglePenToolAvoidSingleHandles = 'toggle-pen-tool-avoid-single-handles',
+  pageDelete = 'page-delete',
+  restoreAutolayoutPosition = 'restore-autolayout-position',
+  selectNextSibling = 'select-next-sibling',
+  debugPrintVectorNetworkAsTestCode = 'debug-print-vector-network-as-test-code',
+  zoomOut = 'zoom-out',
+  removeStatusInFocusView = 'remove-status-in-focus-view',
+  selectSameFill = 'select-same-fill',
+  editMakeFromDesign = 'edit-make-from-design',
+  textLetterSpacingDecrease = 'text-letter-spacing-decrease',
+  pasteOverSelection = 'paste-over-selection',
+  pageMoveTo = 'page-move-to',
+  toggleRasterEditMode = 'toggle-raster-edit-mode',
+  redoSpellChecking = 'redo-spell-checking',
+  sendSelectionToBuzzFromDesign = 'send-selection-to-buzz-from-design',
+  createSavepoint = 'create-savepoint',
+  batchPageRename = 'batch-page-rename',
+  textAlignLeft = 'text-align-left',
+  firstDraftMakeKitDebug = 'first-draft-make-kit-debug',
+  startMagicLink = 'start-magic-link',
+  trackPageRename = 'track-page-rename',
+  selectSameVariant = 'select-same-variant',
+  pageDuplicate = 'page-duplicate',
+  addTransformModifierToSelection = 'add-transform-modifier-to-selection',
+  restoreSoftDeletedVariableSets = 'restore-soft-deleted-variable-sets',
+  toggleCtrlClickContextMenu = 'toggle-ctrl-click-context-menu',
+  convertTableToStickyGrid = 'convert-table-to-sticky-grid',
+  textAlignMiddle = 'text-align-middle',
+  stackSelection = 'stack-selection',
+  exportSlidesToPdf = 'export-slides-to-pdf',
+  createTextNode = 'create-text-node',
+  import = 'import',
+  textDedentList = 'text-dedent-list',
+  nextArtboard = 'next-artboard',
+  distributeRight = 'distribute-right',
+  sendToMakeFromDesign = 'send-to-make-from-design',
+  exportAllExportables = 'export-all-exportables',
+  exportAssetsHandoff = 'export-assets-handoff',
+  setToolShapeWhiteboardSpeechBubble = 'set-tool-shape-whiteboard-speech-bubble',
+  textAlignJustified = 'text-align-justified',
+  exportSelectedExportables = 'export-selected-exportables',
+  textBoldIncrease = 'text-bold-increase',
+  setToolShapeWhiteboardEngFolder = 'set-tool-shape-whiteboard-eng-folder',
+  firstDraftFineTune = 'first-draft-fine-tune',
+  removeResponsiveTextStyleVariants = 'remove-responsive-text-style-variants',
+  pageNew = 'page-new',
+  openFontSettings = 'open-font-settings',
+  distributeHorizontalSpacing = 'distribute-horizontal-spacing',
+  debugIncrementalLoadingCurrentOnly = 'debug-incremental-loading-current-only',
+  redo = 'redo',
+  importFromCsv = 'import-from-csv',
+  mainComponent = 'main-component',
+  previousArtboard = 'previous-artboard',
+  addVariantToTemplateSet = 'add-variant-to-template-set',
+  pageMoveToNewFile = 'page-move-to-new-file',
+  createBrushMenu = 'create-brush-menu',
+  unskipSlide = 'unskip-slide',
+  textStyleH1 = 'text-style-h1',
+  extendTableCellSelectionLeft = 'extend-table-cell-selection-left',
+  togglePerfModeMedium = 'toggle-perf-mode-medium',
+  exitFocusView = 'exit-focus-view',
+  rotate180 = 'rotate-180',
+  resetFauxverride = 'reset-fauxverride',
+  copyAsMenu = 'copy-as-menu',
+  selectCurrentTableColumn = 'select-current-table-column',
+  removeInteractionsOnPage = 'remove-interactions-on-page',
+  exportSlidesTo = 'export-slides-to',
+  toggleShownLayoutGrids = 'toggle-shown-layout-grids',
+  unbindCmsSelection = 'unbind-cms-selection',
+  rotate90Clockwise = 'rotate-90-clockwise',
+  toggleFakeMpActivity = 'toggle-fake-mp-activity',
+  openShortcuts = 'open-shortcuts',
+  selectNodeMenu = 'select-node-menu',
+  migrateEffectRepeatsToTransforms = 'migrate-effect-repeats-to-transforms',
+  firstDraftMakeKit = 'first-draft-make-kit',
+  publishTemplate = 'publish-template',
+  textAlignMenu = 'text-align-menu',
+  rotate90Counterclockwise = 'rotate-90-counterclockwise',
+  alignRight = 'align-right',
+  pasteProperties = 'paste-properties',
+  createWebpage = 'create-webpage',
+  none = 'none',
+  setSelectionFillVertical = 'set-selection-fill-vertical',
+  exportBuzzAssets = 'export-buzz-assets',
+  exportSelectedVideo = 'export-selected-video',
+  createRow = 'create-row',
+  selectParent = 'select-parent',
+  runMultiStackAutoLayout = 'run-multi-stack-auto-layout',
+  pasteWidgetsAsSublayers = 'paste-widgets-as-sublayers',
+  makeEdits = 'make-edits',
+  extendTextSelectionForward = 'extend-text-selection-forward',
+}
 
+export type ActionEnabledProperties = {
+  [key in `actionEnabled__${Actions}`]: boolean;
+}
+
+export interface AppModel extends ActionEnabledProperties {
+  isInitialized: boolean
+  hasMissingFonts: boolean
+  activeUserAction: number
+  currentTool: number
+  currentStampToolName: string
+  activeCanvasEditModeType: number
+  showUi: boolean
+  showKeyboardShortcuts: boolean
+  topLevelMode: number
+  urlNodeId: string
+  showArtboardOutline: boolean
+  useRealmsForPluginDev: boolean
+  showComments: boolean
+  currentSelectedGradientStop: CurrentSelectedGradientStop
+  currentSelectedProperty: CurrentSelectedProperty
+  isUserPresent: boolean
+  showTogglePrototypeModeButton: boolean
+  forcePublishFlattened: boolean
+  prototypeCanvasUiVisible: boolean
+  showTooltips: boolean
+  prototypeBackgroundPickerOpen: boolean
+  pastableStyleCount: number
+  statePropertyToFocus: string
+  hoveredNode: string
+  multiplayerSessionState: number
+  isReadOnly: boolean
+  isSceneReadOnly: boolean
+  hyperlinkLocation: null
+  onCanvasNameEditorInfo: OnCanvasNameEditorInfo
+  votingSessionInfo: VotingSessionInfo
+  loadingEmbeds: any[]
+  temporarilyExpandedInstanceLayers: any[]
+  keyboardShortcuts: KeyboardShortcuts
+  selectedInteractions: any[]
+  hoveredInteractions: any[]
+  currentPage: string
+  pagesList: PagesList[]
+  devHandoffCodeLanguage: DevHandoffCodeLanguage
+  devHandoffPreferences: DevHandoffPreferences
+  branchingSceneState: number
+  lastBranchingStagingAction: number
+  themePreference: string
+  sceneGeneration: number
+  spellCheckSuggestions: null
+  onCanvasPillInfo: any[]
+  activeTextReviewPlugin: null
+  hotReloadPluginDev: boolean
+  useLocalRelatedLinkPlugin: boolean
+}
+
+interface CurrentSelectedProperty {
+  type: number;
+  indices: any[];
+}
+
+interface CurrentSelectedGradientStop {
+  index: number;
+  type: number;
+}
+interface DevHandoffPreferences {
+  codeExtensionPreferences: CodeExtensionPreferences;
+}
+
+interface DevHandoffCodeLanguage {
+  id: string;
+  type: string;
+}
+interface Livebooleanxor {
+  text: string;
+  originalText: string;
+}
+
+interface VotingSessionInfo {
+  sessionId: string;
+  votingStage: number;
+  userVoteLimit: number;
+  votedNodes: any[];
+  userIdToVoteStampIds: UserIdToVoteStampIds;
+}
+
+export interface KeyboardShortcuts {
+  'live-boolean-xor': Livebooleanxor[];
+  'live-boolean-intersect': Livebooleanxor[];
+  'live-boolean-subtract': Livebooleanxor[];
+  'live-boolean-union': Livebooleanxor[];
+  'select-matching': Livebooleanxor[];
+  'set-tool-measure': Livebooleanxor[];
+  'set-tool-comments': Livebooleanxor[];
+  'set-tool-default': Livebooleanxor[];
+  'set-tool-type': Livebooleanxor[];
+  'set-tool-ellipse': Livebooleanxor[];
+  'set-tool-pen': Livebooleanxor[];
+  'toggle-buzz-tool-mode': Livebooleanxor[];
+  'show-prototype-panel': Livebooleanxor[];
+  'distribute-vertical-spacing': Livebooleanxor[];
+  'tidy-up': Livebooleanxor[];
+  'align-vertical-center': Livebooleanxor[];
+  'debug-selection': Livebooleanxor[];
+  'align-bottom': Livebooleanxor[];
+  'text-bold-increase': Livebooleanxor[];
+  'text-line-height-increase': Livebooleanxor[];
+  'set-tool-arrow': Livebooleanxor[];
+  'text-line-height-decrease': Livebooleanxor[];
+  'align-top': Livebooleanxor[];
+  'text-letter-spacing-increase': Livebooleanxor[];
+  'text-letter-spacing-decrease': Livebooleanxor[];
+  'text-toggle-ordered-list': Livebooleanxor[];
+  'text-font-size-increase': Livebooleanxor[];
+  'text-align-center': Livebooleanxor[];
+  'page-next': Livebooleanxor[];
+  'next-artboard-same-zoom': Livebooleanxor[];
+  'previous-artboard-same-zoom': Livebooleanxor[];
+  'next-artboard': Livebooleanxor[];
+  'previous-artboard': Livebooleanxor[];
+  'toggle-recording-interactions': Livebooleanxor[];
+  'start-chat': Livebooleanxor[];
+  'toggle-dropper': Livebooleanxor[];
+  'toggle-edit-mode': Livebooleanxor[];
+  'text-font-size-decrease': Livebooleanxor[];
+  escape: Livebooleanxor[];
+  'find-symbol': Livebooleanxor[];
+  'detach-instance': Livebooleanxor[];
+  'text-align-left': Livebooleanxor[];
+  'toggle-pixel-preview': Livebooleanxor[];
+  'move-text-selection-end': Livebooleanxor[];
+  'toggle-library': Livebooleanxor[];
+  'toggle-grid': Livebooleanxor[];
+  'set-tool-annotate': Livebooleanxor[];
+  'text-toggle-italic': Livebooleanxor[];
+  'show-rotation-origin': Livebooleanxor[];
+  'select-previous-sibling': Livebooleanxor[];
+  'toggle-rulers': Livebooleanxor[];
+  'text-toggle-unordered-list': Livebooleanxor[];
+  'toggle-locked-for-selected-nodes': Livebooleanxor[];
+  'align-right': Livebooleanxor[];
+  'toggle-grid-focus-view': Livebooleanxor[];
+  'toggle-publish': Livebooleanxor[];
+  'set-tool-paint-bucket': Livebooleanxor[];
+  'page-previous': Livebooleanxor[];
+  'set-opacity-3': Livebooleanxor[];
+  'canvas-search-prev': Livebooleanxor[];
+  'canvas-search-next': Livebooleanxor[];
+  redo: Livebooleanxor[];
+  'text-indent-list': Livebooleanxor[];
+  'resize-to-fit': Livebooleanxor[];
+  'text-delete-selection-or-next-character': Livebooleanxor[];
+  'toggle-layers': Livebooleanxor[];
+  'text-delete-selection-or-end': Livebooleanxor[];
+  'distribute-horizontal-spacing': Livebooleanxor[];
+  'mask-selection': Livebooleanxor[];
+  'toggle-prototyping-info': Livebooleanxor[];
+  'text-dedent-list': Livebooleanxor[];
+  'toggle-shown-for-selected-nodes': Livebooleanxor[];
+  'bring-forward': Livebooleanxor[];
+  'flatten-selection': Livebooleanxor[];
+  'join-selection': Livebooleanxor[];
+  'copy-properties': Livebooleanxor[];
+  'select-child': Livebooleanxor[];
+  'toggle-ui': Livebooleanxor[];
+  'select-all': Livebooleanxor[];
+  'toggle-show-annotations': Livebooleanxor[];
+  'plugins-run-last': Livebooleanxor[];
+  'select-parent': Livebooleanxor[];
+  'focus-previous-area': Livebooleanxor[];
+  'toggle-show-comments': Livebooleanxor[];
+  'unlock-all': Livebooleanxor[];
+  'extend-text-selection-backward': Livebooleanxor[];
+  'set-tool-scale': Livebooleanxor[];
+  'toggle-menu': Livebooleanxor[];
+  'toggle-snapping-to-pixels': Livebooleanxor[];
+  'group-selection': Livebooleanxor[];
+  'set-tool-frame': Livebooleanxor[];
+  'flip-horizontal': Livebooleanxor[];
+  'move-text-selection-forward': Livebooleanxor[];
+  'unstack-selection': Livebooleanxor[];
+  'extend-text-selection-start': Livebooleanxor[];
+  'set-tool-rectangle': Livebooleanxor[];
+  'extend-text-selection-end': Livebooleanxor[];
+  'toggle-bold': Livebooleanxor[];
+  'move-text-selection-backward': Livebooleanxor[];
+  'smooth-join-selection': Livebooleanxor[];
+  'stack-selection': Livebooleanxor[];
+  undo: Livebooleanxor[];
+  'text-align-right': Livebooleanxor[];
+  'toggle-outlines': Livebooleanxor[];
+  'collapse-layers': Livebooleanxor[];
+  'canvas-search': Livebooleanxor[];
+  'set-tool-section': Livebooleanxor[];
+  'toggle-fake-mp-activity': Livebooleanxor[];
+  'component-insert': Livebooleanxor[];
+  'send-to-back': Livebooleanxor[];
+  place: Livebooleanxor[];
+  'move-text-selection-start': Livebooleanxor[];
+  'swap-fill-and-stroke': Livebooleanxor[];
+  'ungroup-selection': Livebooleanxor[];
+  'set-opacity-7': Livebooleanxor[];
+  'remove-stroke': Livebooleanxor[];
+  'set-tool-shape-builder': Livebooleanxor[];
+  'remove-fill': Livebooleanxor[];
+  'paste-properties': Livebooleanxor[];
+  'rename-selection': Livebooleanxor[];
+  'zoom-out': Livebooleanxor[];
+  'flip-vertical': Livebooleanxor[];
+  'present-as-prototype': Livebooleanxor[];
+  'toggle-shown-layout-grids': Livebooleanxor[];
+  'bring-to-front': Livebooleanxor[];
+  'select-inverse': Livebooleanxor[];
+  'text-bold-decrease': Livebooleanxor[];
+  'duplicate-in-place': Livebooleanxor[];
+  'toggle-perf-hud': Livebooleanxor[];
+  'focus-next-area': Livebooleanxor[];
+  'text-edit-hyperlink': Livebooleanxor[];
+  'send-backward': Livebooleanxor[];
+  'paste-over-selection': Livebooleanxor[];
+  'extend-text-selection-forward': Livebooleanxor[];
+  'zoom-in': Livebooleanxor[];
+  'align-left': Livebooleanxor[];
+  'text-align-justified': Livebooleanxor[];
+  'set-opacity-2': Livebooleanxor[];
+  'set-tool-hand': Livebooleanxor[];
+  'open-shortcuts': Livebooleanxor[];
+  'set-opacity-4': Livebooleanxor[];
+  'set-tool-slice': Livebooleanxor[];
+  'create-symbol': Livebooleanxor[];
+  'export-buzz-assets': Livebooleanxor[];
+  'select-next-sibling': Livebooleanxor[];
+  'set-opacity-8': Livebooleanxor[];
+  'toggle-preferences': Livebooleanxor[];
+  'paste-to-replace': Livebooleanxor[];
+  'create-section-from-selection': Livebooleanxor[];
+  'outline-stroke': Livebooleanxor[];
+  'zoom-to-selection': Livebooleanxor[];
+  'create-savepoint': Livebooleanxor[];
+  'align-horizontal-center': Livebooleanxor[];
+  'toggle-sidebar': Livebooleanxor[];
+  'set-opacity-1': Livebooleanxor[];
+  'text-toggle-strikethrough': Livebooleanxor[];
+  'show-design-panel': Livebooleanxor[];
+  'frame-selection': Livebooleanxor[];
+  'set-opacity-0': Livebooleanxor[];
+  'run-multi-stack-auto-layout': Livebooleanxor[];
+  'zoom-to-fit': Livebooleanxor[];
+  'text-toggle-underline': Livebooleanxor[];
+  'set-tool-line': Livebooleanxor[];
+  'set-opacity-5': Livebooleanxor[];
+  'set-tool-pencil': Livebooleanxor[];
+  'set-opacity-6': Livebooleanxor[];
+  'copy-as-png': Livebooleanxor[];
+  'toggle-multiplayer-cursors': Livebooleanxor[];
+  'zoom-reset': Livebooleanxor[];
+  'delete-and-heal-selection': Livebooleanxor[];
+  'set-opacity-9': Livebooleanxor[];
+  'delete-selection': Livebooleanxor[];
+}
 export interface SceneGraphSelection {
-  '2002:27': boolean
+  [key: string]: boolean
 }
 
 export interface SelectedStyleProperties {
@@ -1483,21 +3021,53 @@ export interface SelectedStyleProperties {
 }
 
 export interface SelectionPaints {
-  paints: any[]
+  paints: SelectionPaint[]
   styles: any[]
   paintsDirectlyOnSingleNode: PaintsDirectlyOnSingleNode[]
   stylesDirectlyOnSingleNode: any[]
   emptyDueToLimitExceeded: boolean
   forceUpdateForUndo: boolean
 }
-
+export interface OnCanvasNameEditorInfo {
+  mode: number;
+  x: number;
+  y: number;
+  angle: number;
+  padding: Padding;
+  margin: Padding;
+  cornerRadius: number;
+  fontSize: number;
+  measurementId: string;
+  initMeasurementText: string;
+  isCentered: boolean;
+  invertTextPosition: boolean;
+  axis: number;
+  isTLF: boolean;
+  initialText: string;
+  isShownOnLeft: boolean;
+  shouldOpenDropdown: boolean;
+  varWidthNodeId: string;
+  varWidthIndex: number;
+  varWidthTextDirection: Padding;
+}
 export interface PaintsDirectlyOnSingleNode {
   encodedPaint: string
-  paint: Paint
+  paint: FillPaint
   variableScopes: ActiveFileUsers
 }
+interface UserIdToVoteStampIds { }
+interface SelectionPaint {
+  encodedPaint: string
+  paint: FillPaint
+  count: number
+  uniqueNodesCount: number
+  uniqueNodeIds: string[]
+  conflictNodesCount: number
+  variableScopes: UserIdToVoteStampIds
+  isOnlyDirectlySelected?: boolean
+}
 
-export interface Paint {
+export interface FillPaint {
   type: string
   color: Color
   opacity: number
@@ -1683,7 +3253,7 @@ export interface SelectionProperties {
   selectionIsHyperlink: boolean
   imageHasNoStroke: boolean
   imageAspectRatio: number
-  imageOverlayPaint: Paint
+  imageOverlayPaint: FillPaint
   directlySubscribedAssetKeys: any[]
   variableConsumptionInfo: VariableConsumptionInfo
   focusNodeVariableConsumptionInfo: ActiveFileUsers
@@ -1885,39 +3455,38 @@ export interface WelcomeMusic {
 }
 
 export interface SongData {
-    error:  boolean;
-    status: number;
-    meta:   Meta[];
-    i18n:   null;
+  error: boolean
+  status: number
+  meta: Meta[]
+  i18n: null
 }
 
 export interface Meta {
-    id:               string;
-    song_id:          string;
-    title:            string;
-    artist:           string;
-    duration_ms:      number;
-    album_art:        string;
-    playback_url:     string;
-    created_at:       Date;
-    updated_at:       Date;
-    cuesheet:         Cuesheet;
-    active:           boolean;
-    chime_url:        string;
-    active_order:     number;
-    localization_key: string;
+  id: string
+  song_id: string
+  title: string
+  artist: string
+  duration_ms: number
+  album_art: string
+  playback_url: string
+  created_at: Date
+  updated_at: Date
+  cuesheet: Cuesheet
+  active: boolean
+  chime_url: string
+  active_order: number
+  localization_key: string
 }
 
 export interface Cuesheet {
-    tracks: Track[];
+  tracks: Track[]
 }
 
 export interface Track {
-    title:      string;
-    artist:     string;
-    start_time: number;
+  title: string
+  artist: string
+  start_time: number
 }
-
 
 export interface MusicMusic {
   musicMessageID: number

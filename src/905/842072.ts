@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { createVariableResConfig, mapVariableToWorkflow, searchAPIHandler } from '../905/144933';
 import { hubFileAPI } from '../905/473998';
-import { IT, liveStoreInstance } from '../905/713695';
+import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { N4 } from '../figma_app/630951';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 let d = {
@@ -71,7 +71,7 @@ let $$c1 = liveStoreInstance.Query({
 });
 export function $$u0(e) {
   let t = useFigmaLibrariesEnabled();
-  let [i] = IT($$c1({
+  let [i] = setupResourceAtomHandler($$c1({
     query: e
   }), {
     enabled: t

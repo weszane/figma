@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
 import { useLatestRef } from "../figma_app/922077";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { useHasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useFileLibraryKeys } from "../figma_app/516028";
 import { fetchUnpublishedStyles } from "../figma_app/646357";
@@ -36,7 +36,7 @@ let $$I1 = D(() => {
   }, [g, f, b, v]);
   let x = useSelector(allSubscribedStylesNodeIdsFromLoadedPagesSelector);
   let S = useSelector(e => e.fileVersion);
-  let w = useAtomWithSubscription(qp);
+  let w = useAtomWithSubscription(filesByLibraryKeyAtom);
   let C = useFileLibraryKeys();
   let T = useLatestRef(x);
   let k = useSelector(_);

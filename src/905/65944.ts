@@ -98,7 +98,7 @@ import { Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { u as _$$u } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { p as _$$p2 } from "../905/725707";
 import { ZB } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
@@ -933,7 +933,7 @@ function tR({
     i(e, t, u.position, void 0, n);
   }, [e, i, u]);
   let O = useCallback(() => {
-    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+    executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       i(e, u.color, u.position, void 0, yesNoTrackingEnum.YES);
     });
   }, [e, i, u]);
@@ -1122,7 +1122,7 @@ function tN({
     };
     r.splice(S, 1, a);
     oz("FILL_PAINT > GRADIENT_STOP_COLOR", n);
-    _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+    executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
       R({
         stops: k.stops,
         stopsVar: r

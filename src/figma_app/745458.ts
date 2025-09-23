@@ -19,7 +19,7 @@ import { AssetFilterMode, mapAssetsToKeys } from "../figma_app/646357";
 import { i as _$$i } from "../905/315328";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { aR, BE, uB, tp, J8 } from "../905/128313";
-import { Ls, m3, ZA, a3, gJ } from "../figma_app/645694";
+import { selectComponentAssetsMap, selectStateGroupAssetsMap, selectFlattenedStateGroups, mapLibraryVariables, mapLibraryVariableSets } from "../figma_app/645694";
 import { selectLocalStylesWithUsagesOnLoadedPages, selectLocalSymbolsWithUsagesOnLoadedPages, selectLocalStylesWithUsagesOnCurrentPage, selectSceneGraph, selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { directlySubscribedStylesFromLoadedPagesSelector, subscribedSymbolsFromLoadedPagesSelector, subscribedVariablesFromLoadedPagesSelector, subscribedVariableSetsFromLoadedPagesSelector, subscribedVariableSetsByIdFromLoadedPagesSelector, directlySubscribedStylesUniqueKeysOnCurrentPageSelector, subscribedSymbolsByKeyFromLoadedPagesSelector, subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
 import { PX, wi } from "../905/55146";
@@ -168,12 +168,12 @@ let G = createSelector([wi, L, getSelectedFile, uB, tp, J8, directlySubscribedSt
     includesMoveUpdatesOnCurrentPage: c
   };
 });
-let V = createDeepEqualSelector([Ls, P], (e, t) => {
+let V = createDeepEqualSelector([selectComponentAssetsMap, P], (e, t) => {
   let r = Object.keys(t);
   let n = Object.keys(e);
   return d()(r, n);
 });
-let $$H14 = createSelector([V, m3, subscribedSymbolsByKeyFromLoadedPagesSelector, selectSceneGraph], (e, t, r, n) => {
+let $$H14 = createSelector([V, selectStateGroupAssetsMap, subscribedSymbolsByKeyFromLoadedPagesSelector, selectSceneGraph], (e, t, r, n) => {
   let i = new Map();
   for (let a of e) {
     let e = r[a];
@@ -187,7 +187,7 @@ let $$H14 = createSelector([V, m3, subscribedSymbolsByKeyFromLoadedPagesSelector
   }
   return i;
 });
-let $$z10 = createSelector([Ls, ZA, P, getSelectedFile, uB, tp, subscribedSymbolsOnCurrentPageSelector, selectLocalSymbolsWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
+let $$z10 = createSelector([selectComponentAssetsMap, selectFlattenedStateGroups, P, getSelectedFile, uB, tp, subscribedSymbolsOnCurrentPageSelector, selectLocalSymbolsWithUsagesOnCurrentPage], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = !1;
   let c = new Set(s.map(e => e.key));
@@ -258,7 +258,7 @@ let $$z10 = createSelector([Ls, ZA, P, getSelectedFile, uB, tp, subscribedSymbol
   };
 });
 let W = getFileKey();
-let K = createDeepEqualSelector([a3, gJ, getSelectedFile, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
+let K = createDeepEqualSelector([mapLibraryVariables, mapLibraryVariableSets, getSelectedFile, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
   let u = {};
   let p = new Set();
   let _ = Fullscreen?.getInternalCanvasNodeId();

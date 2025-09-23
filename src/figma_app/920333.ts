@@ -12,7 +12,7 @@ import { zK } from "../figma_app/913823";
 import { setShouldSearchDefaultLibraries } from "../905/879323";
 import { _ as _$$_ } from "../905/793009";
 import { usePluginedWidgets, usePublishedPlugins } from "../figma_app/844435";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
@@ -23,7 +23,7 @@ import { Rt, Vq as _$$Vq } from "../figma_app/979658";
 import { SubscriptionStatus } from "../905/272080";
 import { EditorType } from "../figma_app/155287";
 import { $1, yz } from "../figma_app/76115";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { wR, E0 } from "../figma_app/293326";
 import { Yr1, Eg1 } from "../figma_app/27776";
 let $$R9 = parsePxInt(Yr1) + parsePxInt(Eg1) + 5;
@@ -63,11 +63,11 @@ export function $$k4() {
       shouldSearchDefaultLibraries: !0
     }));
   }, [e]);
-  let u = t && fileVersion && isNullOrFailure(loadingState, yD(t.key));
+  let u = t && fileVersion && isNullOrFailure(loadingState, generateRetrievingSubscribedComponentsKey(t.key));
   useEffect(() => {
     u && e(zK());
   }, [e, u]);
-  let p = useAtomWithSubscription(qp);
+  let p = useAtomWithSubscription(filesByLibraryKeyAtom);
   let m = $1({
     library,
     fileDataByLibraryKey: p

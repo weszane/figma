@@ -1,4 +1,4 @@
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { librariesAPI } from "../905/939602";
 let a = liveStoreInstance.Query({
   fetch: async () => (await librariesAPI.getDefaultLibraries({
@@ -6,7 +6,7 @@ let a = liveStoreInstance.Query({
   })).data.meta
 });
 export function $$s1() {
-  let [e] = IT(a({}));
+  let [e] = setupResourceAtomHandler(a({}));
   return e.data ? e.data?.components : [];
 }
 let o = liveStoreInstance.Query({
@@ -15,7 +15,7 @@ let o = liveStoreInstance.Query({
   })).data.meta
 });
 export function $$l0() {
-  let [e] = IT(o({}));
+  let [e] = setupResourceAtomHandler(o({}));
   return e.data ? e.data?.components : [];
 }
 export function $$d3() {
@@ -28,7 +28,7 @@ let c = liveStoreInstance.Query({
   })).data.meta.library_key_to_attribution
 });
 export function $$u2(e) {
-  let [t] = IT(c({
+  let [t] = setupResourceAtomHandler(c({
     enabled: e
   }));
   return t.data ? t.data : {};

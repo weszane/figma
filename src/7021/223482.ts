@@ -13,7 +13,7 @@ import { e as _$$e } from "../905/621515";
 import { collaboratorSet } from "../905/332483";
 import { selectUserFlag } from "../905/940356";
 import { FBillingModelType, FOrganizationLevelType } from "../figma_app/191312";
-import { liveStoreInstance, gY } from "../905/713695";
+import { liveStoreInstance, getAtomMutate } from "../905/713695";
 import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../figma_app/268271";
@@ -35,7 +35,7 @@ export function $$$$k0({
   org: e
 }) {
   let t = useDispatch();
-  let a = gY($$C1);
+  let a = getAtomMutate($$C1);
   let n = _$$T(e);
   let y = !!n?.data?.isEligible;
   let k = vK({

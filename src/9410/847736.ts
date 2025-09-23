@@ -44,7 +44,7 @@ import { SvgComponent } from "../905/714743";
 import { NH, gp } from "../figma_app/973927";
 import { A as _$$A } from "../6828/625002";
 import { me, Tn, GM, HE, m_, qr, Vg, Fj, eg as _$$eg } from "../9410/148230";
-import { IT as _$$IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { lQ } from "../905/934246";
@@ -533,7 +533,7 @@ function ef({
   let [{
     data: t,
     status: i
-  }] = _$$IT(_$$Q2(e));
+  }] = setupResourceAtomHandler(_$$Q2(e));
   let r = useSetAtom(bY);
   let {
     scrollPosition,

@@ -1,29 +1,85 @@
-export function $$n1(e, t) {
-  let r = new Set();
-  let [n, i] = e.size < t.size ? [e, t] : [t, e];
-  for (let e of n) i.has(e) && r.add(e);
-  return r;
-}
-export function $$i0(e, t) {
-  let r = new Set();
-  for (let n of e) t.has(n) || r.add(n);
-  return r;
-}
-export function $$a3(e, t) {
-  if (e.size !== t.size) return !1;
-  for (let r of e) if (!t.has(r)) return !1;
-  return !0;
-}
-export function $$s2(e, t, r) {
-  let n = new Map();
-  let [i, a] = e.size < t.size ? [e, t] : [t, e];
-  for (let [e, t] of i.entries()) {
-    let i = a.get(e);
-    null != i && n.set(e, r(e, t, i));
+// Original file: /Users/allen/github/fig/src/figma_app/476572.ts
+
+/**
+ * Computes the intersection of two sets.
+ * Original: $$n1
+ * @param setA - The first set.
+ * @param setB - The second set.
+ * @returns A new set containing elements present in both sets.
+ */
+export function intersection<T>(setA: Set<T>, setB: Set<T>): Set<T> {
+  const result = new Set<T>()
+  const [smaller, larger] = setA.size < setB.size ? [setA, setB] : [setB, setA]
+  for (const element of smaller) {
+    if (larger.has(element)) {
+      result.add(element)
+    }
   }
-  return n;
+  return result
 }
-export const _i = $$i0;
-export const iR = $$n1;
-export const wD = $$s2;
-export const yZ = $$a3;
+
+/**
+ * Computes the difference of two sets (elements in setA but not in setB).
+ * Original: $$i0
+ * @param setA - The first set.
+ * @param setB - The second set.
+ * @returns A new set containing elements in setA but not in setB.
+ */
+export function difference<T>(setA: Set<T>, setB: Set<T>): Set<T> {
+  const result = new Set<T>()
+  for (const element of setA) {
+    if (!setB.has(element)) {
+      result.add(element)
+    }
+  }
+  return result
+}
+
+/**
+ * Checks if two sets are equal (same size and contain the same elements).
+ * Original: $$a3
+ * @param setA - The first set.
+ * @param setB - The second set.
+ * @returns True if the sets are equal, false otherwise.
+ */
+export function equals<T>(setA: Set<T>, setB: Set<T>): boolean {
+  if (setA.size !== setB.size) {
+    return false
+  }
+  for (const element of setA) {
+    if (!setB.has(element)) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
+ * Merges two maps where keys intersect, applying a reducer function to the values.
+ * Original: $$s2
+ * @param mapA - The first map.
+ * @param mapB - The second map.
+ * @param reducer - A function to combine values from both maps for intersecting keys.
+ * @returns A new map with merged values for intersecting keys.
+ */
+export function mergeIntersectingMaps<K, V1, V2, R>(
+  mapA: Map<K, V1>,
+  mapB: Map<K, V2>,
+  reducer: (key: K, valueA: V1, valueB: V2) => R,
+): Map<K, R> {
+  const result = new Map<K, R>()
+  const [smaller, larger] = mapA.size < mapB.size ? [mapA, mapB] : [mapB, mapA]
+  for (const [key, valueSmaller] of smaller.entries()) {
+    const valueLarger = larger.get(key)
+    if (valueLarger !== undefined) {
+      result.set(key, reducer(key, valueSmaller as V1, valueLarger as V2))
+    }
+  }
+  return result
+}
+
+// Exported aliases with refactored function names
+export const _i = difference
+export const iR = intersection
+export const wD = mergeIntersectingMaps
+export const yZ = equals

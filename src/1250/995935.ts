@@ -59,7 +59,7 @@ import { Az } from "../5132/863145";
 import { pW } from "../905/160095";
 import { dl } from "../figma_app/307841";
 import { g as _$$g } from "../1250/695038";
-import { liveStoreInstance, IT, gY as _$$gY } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler, getAtomMutate } from "../905/713695";
 import { useCurrentPlanUser, isOrgGuestUser, useCurrentPublicPlan } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { w as _$$w2 } from "../7021/108292";
@@ -1934,12 +1934,12 @@ let nl = {
     });
     let s = useCurrentPlanUser("NonAdminBillingTermsBanner");
     let d = isOrgGuestUser(s?.data ?? null);
-    let [u] = IT(ef({
+    let [u] = setupResourceAtomHandler(ef({
       orgId: t?.id
     }), {
       enabled: !!t?.id && i && o && !d
     });
-    let m = _$$gY(eh);
+    let m = getAtomMutate(eh);
     let p = n.unwrapOr(!1);
     let g = s?.data?.key.parentId;
     let {

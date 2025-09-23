@@ -2,7 +2,7 @@ import { n as _$$n } from "../905/347702";
 import { FirstDraftHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { Gh } from "../figma_app/707567";
 export function $$l2(e) {
   let t = FirstDraftHelpers.getLocalDesignSystemKits();
@@ -58,7 +58,7 @@ let p = liveStoreInstance.Query({
 });
 export function $$m0() {
   let e = useCurrentFileKey();
-  let [t] = IT(c(null));
+  let [t] = setupResourceAtomHandler(c(null));
   let i = [];
   if ("loaded" === t.status) for (let n of t.data) n.fileKey !== e && i.push(n);
   let n = e && getFeatureFlags().first_draft_local_kits ? $$l2(e) : [];
@@ -71,7 +71,7 @@ export function $$m0() {
 export function $$h1() {
   let e = !1;
   let t = !1;
-  let [i] = IT(p(null));
+  let [i] = setupResourceAtomHandler(p(null));
   "loaded" === i.status && (e = i.data.isPublished, t = i.data.isDirectGeneration);
   return {
     currentFileIsFirstDraftKit: e,

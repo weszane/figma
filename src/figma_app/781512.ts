@@ -2,7 +2,7 @@ import { useMemo, useEffect, useCallback } from "react";
 import { IssueCategory, ColorPalette, HandoffBindingsCpp, SessionOrigin } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
-import { r as _$$r } from "../905/955316";
+import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 var d = (e => (e[e.DARK = 0] = "DARK", e[e.LIGHT = 1] = "LIGHT", e))(d || {});
 export function $$c5(e) {
@@ -77,7 +77,7 @@ export function $$_3(e = {
   let s = useMemo(() => [], []);
   let d = useStrictDeepEqualSceneValue(e => e.getRoot().annotationCategories);
   useEffect(() => {
-    !r && null === d && initializeIfNull && _$$r(() => {
+    !r && null === d && initializeIfNull && executeInIgnoreUndoRedoScope(() => {
       permissionScopeHandler.system("initialize-annotation-categories", () => {
         HandoffBindingsCpp.initializeAnnotationCategories();
       });
@@ -87,7 +87,7 @@ export function $$_3(e = {
 }
 export function $$h7() {
   return useCallback(e => {
-    _$$r(() => {
+    executeInIgnoreUndoRedoScope(() => {
       permissionScopeHandler.user("update-annotation-categories", () => {
         HandoffBindingsCpp.setCustomAnnotationCategories(e);
       });

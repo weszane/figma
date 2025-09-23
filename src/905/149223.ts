@@ -23,7 +23,7 @@ import { paintManager, isGradientType, validateGradientPaint } from "../figma_ap
 import { lJ } from "../905/275640";
 import { selectCurrentFile } from "../figma_app/516028";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { q } from "../905/65944";
 import { $ } from "../figma_app/297778";
 import { hW, d2 } from "../figma_app/225126";
@@ -103,7 +103,7 @@ class M extends RecordingPureComponent {
     };
     this.onColorVariableChange = e => {
       if (!e) {
-        _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+        executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = $(this.props.paint);
           this.onPaintChange(e, yesNoTrackingEnum.YES);
         });
@@ -127,7 +127,7 @@ class M extends RecordingPureComponent {
           };
           i.visible = !0;
           this.paintRef.current = i;
-          _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+          executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
             this.onPaintChange(i, yesNoTrackingEnum.YES);
           });
           let n = this.props.paint.colorVar ? hW(this.props.paint.colorVar) : void 0;

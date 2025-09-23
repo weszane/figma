@@ -12,7 +12,7 @@ import { e_ } from '../905/866195';
 import { iconClassifierEndpointSchema } from '../905/889788';
 import { Zh } from '../figma_app/2590';
 import { computeFullscreenViewportForNode } from '../figma_app/62612';
-import { Ll } from '../figma_app/144974';
+import { isMagicLinkEnabled } from '../figma_app/144974';
 import { FI, rq, Sh } from '../figma_app/262240';
 import { bA, dT, ft, k9, kC, LI, Pe } from '../figma_app/365713';
 import { findVisibleSectionChild } from '../figma_app/387100';
@@ -110,7 +110,7 @@ export let $$C1 = async ({
     }
   }));
   try {
-    if (!Ll()) throw new Error('Magic link is not enabled');
+    if (!isMagicLinkEnabled()) throw new Error('Magic link is not enabled');
     let s = i.get(f.guid);
     if (!s || !s.childrenGuids) throw new Error('No page node found');
     let o = k9(s.guid, i);

@@ -11,7 +11,7 @@ import { XHR } from "../905/910117";
 import { TextWithTruncation } from "../905/984674";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
-import { IT, gY } from "../905/713695";
+import { setupResourceAtomHandler, getAtomMutate } from "../905/713695";
 import { getCurrentTeam } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { nc } from "../figma_app/570630";
@@ -28,10 +28,10 @@ let $$S0 = registerModal(function (e) {
   let [O, R] = useState("");
   let [L, P] = useState("");
   let [D, k] = useState("");
-  let [M, F] = IT(TT({
+  let [M, F] = setupResourceAtomHandler(TT({
     fileKey: r
   }));
-  let j = gY(rY);
+  let j = getAtomMutate(rY);
   let U = lA(r);
   let B = M.data?.connectedProject;
   let G = "loaded" !== M.status;

@@ -21,7 +21,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { MH, dM, cM } from "../figma_app/803787";
 import { allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Ag } from "../figma_app/407767";
+import { extractComponentInfo } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
 import { B9, Py } from "../figma_app/346422";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
@@ -155,7 +155,7 @@ async function D(e) {
         let i = e.get(t);
         return i.isState || B(i) || i.isStateGroup;
       }).length) return;
-      let n = Ag({
+      let n = extractComponentInfo({
         scene: e,
         root: t,
         includeNestedComponents: !0,

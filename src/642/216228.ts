@@ -17,10 +17,10 @@ import { getCurrentHubFileVersionName } from '../905/71785';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { KH } from '../905/81982';
 import { F as _$$F } from '../905/84606';
-import { yD } from '../905/92359';
+import { generateRetrievingSubscribedComponentsKey } from '../905/92359';
 import { Z as _$$Z } from '../905/116724';
 import { KindEnum } from '../905/129884';
-import { A as _$$A2 } from '../905/150554';
+import { getAutoSuggestResults } from '../905/150554';
 import { showModalHandler } from '../905/156213';
 import { getThemeContextOrDefault } from '../905/158740';
 import { ServiceCategories as _$$e3 } from '../905/165054';
@@ -28,7 +28,7 @@ import { ScreenReaderOnly } from '../905/172252';
 import { y as _$$y2 } from '../905/175043';
 import { n as _$$n2 } from '../905/186638';
 import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '../905/189185';
-import { I as _$$I3 } from '../905/203573';
+import { AutoSuggestSessionManager } from '../905/203573';
 import { h as _$$h } from '../905/207101';
 import { v as _$$v } from '../905/213481';
 import { b as _$$b2 } from '../905/217163';
@@ -159,13 +159,13 @@ import { FFileType } from '../figma_app/191312';
 import { h as _$$h4 } from '../figma_app/198885';
 import { cG, hK, X3, xU } from '../figma_app/211706';
 import { q as _$$q, U as _$$U3 } from '../figma_app/213525';
-import { a as _$$a, P as _$$P3 } from '../figma_app/235371';
+import { suggestionsSeenTrackerAtom, suggestionsManagerAtom } from '../figma_app/235371';
 import { Fl, fV } from '../figma_app/236178';
 import { X3 as _$$X, c$, MM, ms, wv } from '../figma_app/236327';
 import { jO } from '../figma_app/242339';
 import { Bf } from '../figma_app/249941';
 import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } from '../figma_app/255679';
-import { GG as _$$GG, lS as _$$lS, qd as _$$qd, b4, Ou, PV, YQ } from '../figma_app/257779';
+import { SearchEventType, MAX_CONCURRENT_FRAGMENT_LOADS, ContextType, SUPPORTED_NODE_TYPES, SearchResultType, SEARCH_CONFIG, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { o as _$$o } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
 import { Ay as _$$Ay4 } from '../figma_app/272902';
@@ -181,14 +181,14 @@ import { ce as _$$ce2, Wy as _$$Wy } from '../figma_app/357202';
 import { tM as _$$tM4, Ew, Gq } from '../figma_app/361662';
 import { od } from '../figma_app/392189';
 import { Gh } from '../figma_app/397267';
-import { r8 as _$$r5, k1 } from '../figma_app/407767';
+import { shouldEnableAssetSuggestions, getAnticipationConfig } from '../figma_app/407767';
 import { NJ } from '../figma_app/419216';
 import { fullscreenValue } from '../figma_app/455680';
 import { V as _$$V3 } from '../figma_app/473391';
 import { Nz as _$$Nz, cP, FX, uY, ZI } from '../figma_app/475869';
 import { t as _$$t6 } from '../figma_app/501766';
 import { selectOpenFile, useCurrentFileKey, useOpenFileLibraryKey, useFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
-import { r6 as _$$r, CK, NB } from '../figma_app/517115';
+import { getUUID, useUUIDSubscription, initializeUUID } from '../figma_app/517115';
 import { rl as _$$rl, tM as _$$tM2, C0, MB, NR, pg } from '../figma_app/525558';
 import { vZ } from '../figma_app/527603';
 import { $c, nT as _$$nT, _K, _q, ce, CT, d5, Gd, GH, H0, HE, Kd, Kv, Mj, PK, RQ, RU, RX, Sx, T5, vr, xP, y4, YJ } from '../figma_app/540964';
@@ -214,7 +214,7 @@ import { sH as _$$sH, t6 as _$$t2, _m, aK, Cg, G3, RR, S5, W9, wV, xc } from '..
 import { sortBy, sortByWithOptions } from '../figma_app/656233';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { _ as _$$_ } from '../figma_app/658134';
-import { Mw, pJ, pW } from '../figma_app/663669';
+import { isFrameMostlyVisible, useViewportStability, useBestFrame } from '../figma_app/663669';
 import { Ay as _$$Ay, jx, W7 } from '../figma_app/675746';
 import { rp as _$$rp, PI } from '../figma_app/703988';
 import { wY } from '../figma_app/708845';
@@ -248,7 +248,7 @@ import { h as _$$h5 } from '../figma_app/935454';
 import { r6 as _$$r3, P3, ZX } from '../figma_app/950074';
 import { T as _$$T3 } from '../figma_app/962636';
 import { getCurrentFileType, isSitesFileType } from '../figma_app/976749';
-import { O as _$$O, tM as _$$tM3, gb } from '../figma_app/984498';
+import { AutoSuggestAnalyticsLogger, AUTO_SUGGEST_EVENT_PREFIX, trackAutoSuggestFunnelEvent } from '../figma_app/984498';
 import { useDebouncedCallback } from 'use-debounce';
 import iw from '../vendor/239910';
 import { useDispatch, useSelector } from 'react-redux';
@@ -542,7 +542,7 @@ function e3({
     sectionNameForTracking: u,
     sectionPosition: p,
     shouldRefocusAfterKeyboardInsert: currentView === S5.Recents,
-    sourceForTracking: s === _$$tM3 ? s : mZ
+    sourceForTracking: s === AUTO_SUGGEST_EVENT_PREFIX ? s : mZ
   });
   let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
   let es = function (e, t) {
@@ -1680,7 +1680,7 @@ function t3({
     partnerType: void 0
   });
   let u = useLibraryDisplayName([e]);
-  let p = CK();
+  let p = useUUIDSubscription();
   let h = !!c.searchSessionId;
   let m = useCallback(t => {
     let {
@@ -1810,7 +1810,7 @@ function sc({
       partnerType: void 0
     });
     let l = _m();
-    let o = CK();
+    let o = useUUIDSubscription();
     return useCallback(s => {
       analyticsEventManager.trackDefinedEvent('asset_search.result_inserted', {
         ...i,
@@ -2749,7 +2749,7 @@ async function rv({
     if (n.length === 0) throw new Error('MOCK: COULD NOT FIND ANY ASSETS - maybe they are still loading?');
     r = n.sort(() => Math.random() - 0.5).map(e => ({
       ...e,
-      suggestionSource: Ou.RECENTS
+      suggestionSource: SearchResultType.RECENTS
     }));
     let i = new Map(s);
     i.set(e, r);
@@ -2767,7 +2767,7 @@ let rw = e => e ? `${e.name} ${e.guid}` : 'NO TARGET';
 async function rT(e) {
   return getFeatureFlags().anticipation_mock ? await rv({
     targetNodeGuid: e.targetNode.guid
-  }) : await _$$A2(e);
+  }) : await getAutoSuggestResults(e);
 }
 let rM = 'asset_panel_recents--resultsWrapper--k79Vy';
 let rA = 'asset_panel_recents--resultsWrapperList--peuzW';
@@ -2803,9 +2803,9 @@ function rF({
   subscribedLibraries: i
 }) {
   let l = rH();
-  let a = Xr(_$$a);
+  let a = Xr(suggestionsSeenTrackerAtom);
   let o = useCallback(() => {
-    gb(t, _$$GG.RESULT_INSERTED, _$$qd.ASSET_PANEL);
+    trackAutoSuggestFunnelEvent(t, SearchEventType.RESULT_INSERTED, ContextType.ASSET_PANEL);
   }, [t]);
   let d = tV();
   let c = useMemo(() => {
@@ -2827,11 +2827,11 @@ function rF({
       keyboardPosition: pg([SectionType.SUGGESTIONS], n, numColumns),
       onSuccessfulAssetInsert: o,
       ...props,
-      sourceForTracking: _$$tM3
+      sourceForTracking: AUTO_SUGGEST_EVENT_PREFIX
     }, `${e.id}-${n}`));
   }, [e, d, c, o]);
   useEffect(() => {
-    e.length > 0 && t.queryId && (gb(t, _$$GG.RESULTS_SHOWN, _$$qd.ASSET_PANEL), a());
+    e.length > 0 && t.queryId && (trackAutoSuggestFunnelEvent(t, SearchEventType.RESULTS_SHOWN, ContextType.ASSET_PANEL), a());
   }, [e, t, a]);
   let p = renderI18nText('auto_suggest.asset_panel.no_libraries');
   let m = renderI18nText('auto_suggest.suggestion_shelf_no_suggestions');
@@ -2842,7 +2842,7 @@ function rF({
       children: u
     })
   });
-  NB();
+  initializeUUID();
   return jsx('div', {
     className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k',
     style: {
@@ -2868,7 +2868,7 @@ function rB() {
     isInitialized
   } = function (e = !1) {
     let t = function (e) {
-      getInitialOptions().anticipation_config || (getInitialOptions().anticipation_config = PV);
+      getInitialOptions().anticipation_config || (getInitialOptions().anticipation_config = SEARCH_CONFIG);
       let t = getInitialOptions().anticipation_config.dominantFrameConfig;
       return function ({
         targetNodeGuid: e,
@@ -2877,7 +2877,7 @@ function rB() {
         let [{
           suggestions: s,
           analyticsData: r
-        }, i] = useAtomValueAndSetter(_$$P3);
+        }, i] = useAtomValueAndSetter(suggestionsManagerAtom);
         let {
           isLoaded
         } = _$$y();
@@ -2889,7 +2889,7 @@ function rB() {
             isLoaded: _isLoaded,
             assets: g5(FDocumentType.Design).productComponents.map(e => ({
               ...e,
-              suggestionSource: Ou.RECENTS
+              suggestionSource: SearchResultType.RECENTS
             }))
           };
         }();
@@ -2898,7 +2898,7 @@ function rB() {
         useEffect(() => {
           !d && o && (c(!0), s.length === 0 && i({
             suggestions: a.assets,
-            analyticsData: YQ
+            analyticsData: DEFAULT_SEARCH_CONTEXT
           }));
         }, [o, a, d, s.length, i]);
         let {
@@ -2913,19 +2913,19 @@ function rB() {
         }) {
           let [s, r] = useState([]);
           let [i, l] = useState(`${e} - INIT`);
-          let [a, o] = useState(YQ);
+          let [a, o] = useState(DEFAULT_SEARCH_CONTEXT);
           let [d, c] = useState(!1);
           let [u, p] = useState(void 0);
           let h = useCurrentFileKey();
           let m = useSubscribedLibraryKeys();
-          let x = _$$r5();
+          let x = shouldEnableAssetSuggestions();
           useEffect(() => {
             if (t || !x) return;
             let s = getSingletonSceneGraph();
             let n = e ? s.get(e) : void 0;
             let i = new AbortController();
             if (n && h) {
-              if (n && b4.includes(n.type)) {
+              if (n && SUPPORTED_NODE_TYPES.includes(n.type)) {
                 c(!0);
                 r([]);
                 p(n.guid);
@@ -2936,16 +2936,16 @@ function rB() {
                   selectionId: n?.guid
                 };
                 o(e);
-                let t = k1();
-                let s = new _$$O({
+                let t = getAnticipationConfig();
+                let s = new AutoSuggestAnalyticsLogger({
                   analyticsData: e,
                   config: t,
-                  entryPoint: _$$qd.ASSET_PANEL
+                  entryPoint: ContextType.ASSET_PANEL
                 });
                 let {
                   signal
                 } = i;
-                let d = new _$$I3(ComponentPanelTab.COMPONENTS, i);
+                let d = new AutoSuggestSessionManager(ComponentPanelTab.COMPONENTS, i);
                 rT({
                   targetNode: n,
                   openFileKey: h,
@@ -2976,7 +2976,7 @@ function rB() {
               l(`${rw(n)} - NO TARGET/OPEN FILE`);
               c(!1);
               p(void 0);
-              o(YQ);
+              o(DEFAULT_SEARCH_CONTEXT);
             }
             return () => {
               i && i.abort();
@@ -2999,10 +2999,10 @@ function rB() {
             analyticsData: _analyticsData
           });
         }, [_suggestions, _analyticsData, i]);
-        let y = _$$r5();
+        let y = shouldEnableAssetSuggestions();
         return t || !y ? {
           suggestions: [],
-          analyticsData: YQ,
+          analyticsData: DEFAULT_SEARCH_CONTEXT,
           isLoading: !1,
           isInitialized: !1,
           suggestionsNodeGuid: void 0,
@@ -3026,9 +3026,9 @@ function rB() {
           let {
             debouncedViewportInfo,
             viewportIsStable
-          } = pJ(r);
-          let d = !!e && b4.includes(e.type) && Mw(e, debouncedViewportInfo, 0.4);
-          let c = pW(debouncedViewportInfo, s || r || d, t);
+          } = useViewportStability(r);
+          let d = !!e && SUPPORTED_NODE_TYPES.includes(e.type) && isFrameMostlyVisible(e, debouncedViewportInfo, 0.4);
+          let c = useBestFrame(debouncedViewportInfo, s || r || d, t);
           useEffect(() => {
             if (viewportIsStable && !r) {
               if (d) {
@@ -3049,7 +3049,7 @@ function rB() {
     }(e);
     return e ? {
       suggestions: [],
-      analyticsData: YQ,
+      analyticsData: DEFAULT_SEARCH_CONTEXT,
       isLoading: !1,
       isInitialized: !1,
       suggestionsNodeGuid: void 0,
@@ -3065,7 +3065,7 @@ function rB() {
     let e = !C;
     AppStateTsApi?.editorPreferences().showAssetAutoSuggest.set(e);
     b(e);
-    gb(analyticsData, e ? _$$GG.PANEL_OPENED : _$$GG.PANEL_CLOSED, _$$qd.ASSET_PANEL);
+    trackAutoSuggestFunnelEvent(analyticsData, e ? SearchEventType.PANEL_OPENED : SearchEventType.PANEL_CLOSED, ContextType.ASSET_PANEL);
   }, [C, analyticsData]);
   useEffect(() => {
     if (a.current?.clientHeight) {
@@ -3081,7 +3081,7 @@ function rB() {
     currentView
   } = wV();
   let S = currentView === S5.Libraries ? 0 : 1;
-  let k = useAtomWithSubscription(_$$a);
+  let k = useAtomWithSubscription(suggestionsSeenTrackerAtom);
   i || (!isInitialized || C && isLoading || C && l.status === 'loading' ? e = jsx(_$$k2, {
     size: 'md'
   }) : C || (e = jsx('div', {
@@ -3122,7 +3122,7 @@ function rB() {
   });
 }
 function rK() {
-  let e = _$$r5();
+  let e = shouldEnableAssetSuggestions();
   let {
     currentView
   } = wV();
@@ -3136,13 +3136,13 @@ function rG() {
     let {
       suggestions,
       analyticsData
-    } = useAtomWithSubscription(_$$P3);
+    } = useAtomWithSubscription(suggestionsManagerAtom);
     let {
       currentView
     } = wV();
     let l = useLatestRef(currentView);
     useEffect(() => {
-      !1 === t && !0 === e && suggestions.length > 0 && analyticsData.queryId && l === rL && gb(analyticsData, _$$GG.STARTED_SEARCH, _$$qd.ASSET_PANEL);
+      !1 === t && !0 === e && suggestions.length > 0 && analyticsData.queryId && l === rL && trackAutoSuggestFunnelEvent(analyticsData, SearchEventType.STARTED_SEARCH, ContextType.ASSET_PANEL);
     }, [t, e, suggestions, analyticsData, l]);
   }(), e) ? jsx(rB, {}) : null;
 }
@@ -3150,7 +3150,7 @@ function rH() {
   let e = tV();
   return Math.max(useMemo(() => {
     let t = e.numColumnsByLayout[_$$rp.NORMAL];
-    return Math.ceil(_$$lS / t) * (tc(e.componentTilePropsByLayout[_$$rp.NORMAL].thumbHeight, $H.GRID, {
+    return Math.ceil(MAX_CONCURRENT_FRAGMENT_LOADS / t) * (tc(e.componentTilePropsByLayout[_$$rp.NORMAL].thumbHeight, $H.GRID, {
       showFileName: !0
     }) + 16);
   }, [e]), 150);
@@ -6907,7 +6907,7 @@ let i4 = ({
         isLoading: !isLoaded(y, t)
       };
     });
-    let l = _ && x != null && yD(_.key) || null;
+    let l = _ && x != null && generateRetrievingSubscribedComponentsKey(_.key) || null;
     let d = !(l != null && isLoaded(y, l));
     analyticsEventManager.trackDefinedEvent('assets_panel.search_long_loading', {
       ...t,
@@ -8196,7 +8196,7 @@ function an({
       fileKey: p?.key,
       fileTeamId: p?.teamId ?? void 0,
       fileOrgId: p?.parentOrgId ?? void 0,
-      componentSuggestionSessionId: _$$r()
+      componentSuggestionSessionId: getUUID()
     });
   });
   let {

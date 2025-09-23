@@ -14,7 +14,7 @@ import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
-import { ni, kX, V2 } from "../905/63598";
+import { startLibraryUpdate, completeLibraryUpdate, failLibraryUpdate } from "../905/63598";
 import { hideModal } from "../905/156213";
 import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidating } from "../figma_app/582924";
 import { wM } from "../figma_app/852050";
@@ -296,7 +296,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
       e.start();
       try {
         let t = scopedComponentUpdates.length + scopedStateGroupUpdates.length + scopedStyleUpdates.length + scopedVariableSetUpdates.length;
-        a(ni({
+        a(startLibraryUpdate({
           total: t
         }));
         a(hideModal());
@@ -317,7 +317,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
         await Q(scopedStyleUpdates);
         let n = await ee(scopedVariableSetUpdates);
         await et(scopedLibraryAssetUpdates);
-        a(kX());
+        a(completeLibraryUpdate());
         n && a(VisualBellActions.enqueue({
           type: "default-mode-changed",
           message: getI18nString("variables.authoring_modal.default_mode_changed")
@@ -329,7 +329,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
           forwardToDatadog: !0
         });
       } catch (t) {
-        a(V2());
+        a(failLibraryUpdate());
         eo("library.update_all.failure", {
           elapsedMs: e.stop()
         }, {

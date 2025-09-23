@@ -38,7 +38,7 @@ import { ServiceCategories as _$$e2 } from "../905/165054";
 import { parseEmbedInput } from "../figma_app/916560";
 import { logError } from "../905/714362";
 import { LoadingSpinner } from "../figma_app/858013";
-import { r as _$$r } from "../905/955316";
+import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { linkMetadataHandlerInstance } from "../905/695476";
 let o = createContext(null);
@@ -1222,7 +1222,7 @@ let eY = {
         if (!e) return;
         let a = getSingletonSceneGraph().get(nodeId);
         if (a && (permissionScopeHandler.system("initializing-youtube", () => {
-          _$$r(() => {
+          executeInIgnoreUndoRedoScope(() => {
             a.resizeWithConstraints(e.width, e.height);
             a.proportionsConstrained = !0;
             let t = a.relativeTransform;
@@ -1238,7 +1238,7 @@ let eY = {
           let t = new Uint8Array(e.thumbnailImage.data);
           let l = await processImageWithThumbnail(t, "image/png", e.title);
           permissionScopeHandler.system("initializing-youtube-thumbnail", () => {
-            _$$r(() => {
+            executeInIgnoreUndoRedoScope(() => {
               a.insertImageInFillPaint(l);
             });
           });

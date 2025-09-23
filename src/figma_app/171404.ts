@@ -13,7 +13,7 @@ import { getVisibleTheme } from "../905/640017";
 import { ProductAccessTypeMap } from "../905/513035";
 import { NT } from "../figma_app/579169";
 import { FProductAccessType } from "../figma_app/191312";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { Y } from "../905/990807";
 import { z } from "../905/114980";
 import { Ki, Cx, B7 } from "../905/268793";
@@ -147,7 +147,7 @@ let S = {
 export function $$v0(e) {
   let t = useAtomWithSubscription(NT);
   let r = useMemo(() => e.numAvatarsRequested ?? EH, [e.numAvatarsRequested]);
-  let [a] = IT(Ki({
+  let [a] = setupResourceAtomHandler(Ki({
     seatType: e.seatType,
     licenseType: e.licenseType,
     planParentId: e.planData.planParentId,
@@ -176,7 +176,7 @@ function A(e) {
     planParentId: e.planData.planParentId,
     planType: e.planData.planType
   });
-  let [c] = IT(B7({
+  let [c] = setupResourceAtomHandler(B7({
     seatType: e.seatType,
     licenseType: e.licenseType,
     numAvatarsRequested: e.numAvatarsRequested,

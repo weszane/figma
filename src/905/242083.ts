@@ -268,7 +268,7 @@ import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
 import { Nl, sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { startAutosaveWait } from '../figma_app/139113';
-import { h8 } from '../figma_app/144974';
+import { isQaSearchFrecencyEnabled } from '../figma_app/144974';
 import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../figma_app/147952';
 import { H as _$$H } from '../figma_app/147959';
 import { IJ } from '../figma_app/149304';
@@ -388,7 +388,7 @@ import { BG as _$$BG } from '../figma_app/634288';
 import { BigTextInputForwardRef, ButtonBaseReversedContainer } from '../figma_app/637027';
 import { canMemberOrg } from '../figma_app/642025';
 import { Ju } from '../figma_app/644255';
-import { m3 } from '../figma_app/645694';
+import { selectStateGroupAssetsMap } from '../figma_app/645694';
 import { CN, Wz } from '../figma_app/651866';
 import { mapFilter } from '../figma_app/656233';
 import { PluginModalTypeEnum } from '../figma_app/671547';
@@ -5496,12 +5496,12 @@ let lX = class e extends sP(sN(sR)) {
     };
     this.getLatestPublishedVersionHashForComponent = (e, t) => {
       let i = this._state.fileByKey[e];
-      if (!i || !i.team_id) return F7.INVALID;
+      if (!i || !i.team_id) return 'INVALID';
       let n = this._state.library.publishedByLibraryKey.components;
-      let r = F7.INVALID;
+      let r = 'INVALID';
       let a = _$$l(i.library_key ?? generateUniqueKey(e));
       let s = n[i.team_id];
-      s?.[a]?.[t] && !s[a][t].unpublished_at && (r = s[a][t].content_hash || F7.INVALID);
+      s?.[a]?.[t] && !s[a][t].unpublished_at && (r = s[a][t].content_hash || 'INVALID');
       return r;
     };
     this.getLatestPublishedVersionForStateGroup = (e, t) => {
@@ -6932,7 +6932,7 @@ let lX = class e extends sP(sN(sR)) {
         delete window.DebuggingHelpers.reportError;
         delete window.DebuggingHelpers.simulateNullNodeAccess;
       })();
-      getFeatureFlags().internal_only_debug_tools && h8() && (window.FrecencyHelpers = iG);
+      getFeatureFlags().internal_only_debug_tools && isQaSearchFrecencyEnabled() && (window.FrecencyHelpers = iG);
       getFeatureFlags().internal_only_debug_tools && (window.QuickActionsHelpers = {
         showQuickActionsSuggestion: _$$iP,
         clearQuickActionsSuggestion: KY
@@ -7920,7 +7920,7 @@ let lX = class e extends sP(sN(sR)) {
     if (!t) return '';
     let i = t.assetKeyForPublish;
     if (!i) return '';
-    let n = m3(debugState.getState())[i];
+    let n = selectStateGroupAssetsMap(debugState.getState())[i];
     return n ? n.default_state_key : '';
   }
   formatDateTime(e) {

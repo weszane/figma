@@ -93,7 +93,7 @@ import { X as _$$X4 } from '../905/399133';
 import { LazyInputForwardRef } from '../905/408237';
 import { O as _$$O2 } from '../905/410575';
 import { $ as _$$$3 } from '../905/411599';
-import { bj } from '../905/420347';
+import { useLibraries } from '../905/420347';
 import { c as _$$c3 } from '../905/425573';
 import { F as _$$F9 } from '../905/427107';
 import { i as _$$i2 } from '../905/433860';
@@ -176,7 +176,7 @@ import { L as _$$L } from '../905/704296';
 import { sortByPosition, sortByPositionWithDefault } from '../905/706046';
 import { U as _$$U2 } from '../905/708285';
 import { n8 as _$$n8, T_ } from '../905/713167';
-import { IT, liveStoreInstance } from '../905/713695';
+import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { pn as _$$pn, If } from '../905/714538';
 import { SvgComponent, V as _$$V2 } from '../905/714743';
 import { l as _$$l } from '../905/716947';
@@ -2639,7 +2639,7 @@ function nX({
   let [t, n] = useAtomValueAndSetter(Lm);
   let l = VU();
   let r = useDispatch();
-  let i = bj([_$$l(e)]);
+  let i = useLibraries([_$$l(e)]);
   let d = i.data;
   let u = i.status === 'loading';
   let x = _M(_$$l(e));
@@ -3421,7 +3421,7 @@ function lI() {
   let [{
     data: l,
     status: r
-  }] = IT(lS(t?.id), {
+  }] = setupResourceAtomHandler(lS(t?.id), {
     enabled: n
   });
   if (!n || r === 'errors' || r === 'disabled') return null;
@@ -3511,7 +3511,7 @@ function lC({
   let [{
     data: a,
     isFetchingNextPage: s
-  }] = IT(_$$a6.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a6.ResourcesPaginatedQuery({
     resourceType: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
     caller: _$$z3.COOPER_TEMPLATE_PICKER,
     pageSize: 12,
@@ -3595,7 +3595,7 @@ function lz({
   let [{
     data: E,
     status: v
-  }] = IT(_$$a6.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a6.ResourcesPaginatedQuery({
     ...y,
     resourceIds: n
   }), {
@@ -3608,7 +3608,7 @@ function lz({
     isFetchingNextPage: k
   }, {
     fetchNextPage: C
-  }] = IT(_$$a6.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a6.ResourcesPaginatedQuery({
     ...y,
     category: e,
     tags: t,
@@ -3623,7 +3623,7 @@ function lz({
     isFetchingNextPage: R
   }, {
     fetchNextPage: L
-  }] = IT(communityShelfService.ShelfContentPaginatedQuery({
+  }] = setupResourceAtomHandler(communityShelfService.ShelfContentPaginatedQuery({
     shelfId: l,
     includeContent: !0,
     pageSize: 20
@@ -4187,7 +4187,7 @@ function lY({
   let t = Xr(_$$d2);
   let n = VU();
   let l = useDispatch();
-  let r = bj([_$$l(e)]);
+  let r = useLibraries([_$$l(e)]);
   let i = r.data;
   let d = r.status === 'loading';
   let c = _M(_$$l(e));
@@ -12720,7 +12720,7 @@ function xH() {
       isFetchingNextPage: g
     }, {
       fetchNextPage: f
-    }] = IT(x, {
+    }] = setupResourceAtomHandler(x, {
       enabled: c && r.provider === ce.UNSPLASH
     });
     let b = u ? cn.SEARCH : cn.EDITORIAL;

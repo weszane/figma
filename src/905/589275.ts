@@ -16,7 +16,7 @@ import { showModalHandler } from "../905/156213";
 import { findAssetForNode } from "../figma_app/646357";
 import { isLoading } from "../905/18797";
 import { FZ } from "../figma_app/803787";
-import { c5 } from "../figma_app/645694";
+import { selectMergedAssets } from "../figma_app/645694";
 import { selectSceneGraph } from "../figma_app/889655";
 import { rp } from "../figma_app/703988";
 import { dD } from "../905/519113";
@@ -320,7 +320,7 @@ export function $$ei0({
     permissionScopeHandler.user("toggle-preferred-prop-value", () => h(e));
   }, [h]);
   let D = useSelector(FZ);
-  let L = useSelector(c5);
+  let L = useSelector(selectMergedAssets);
   let M = useSelector(selectSceneGraph);
   let j = wS(s);
   let U = 0 === s.length && E === ComponentPropType.INSTANCE_SWAP && x ? findAssetForNode(x, M, D, L) : void 0;

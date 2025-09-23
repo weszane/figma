@@ -9,7 +9,7 @@ import { getProductType } from "../figma_app/314264";
 import { wg } from "../figma_app/101956";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { PE } from "../figma_app/251115";
-import { h8 } from "../figma_app/144974";
+import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { Jc, Sn } from "../905/946805";
 import { rE } from "../figma_app/604494";
 import { OZ } from "../905/783179";
@@ -63,7 +63,7 @@ export function $$b0() {
 export function $$T8(e) {
   switch (e) {
     case Jc.ALL:
-      return h8() ? Nv : NP;
+      return isQaSearchFrecencyEnabled() ? Nv : NP;
     case Jc.EXTENSIONS:
       return uP;
     case Jc.ASSETS:

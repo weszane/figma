@@ -12,4 +12,6 @@ function h(e, r) {
     return r(e, n[0]);
   });
 }
+
+// lodash pickBy
 module.exports = h;

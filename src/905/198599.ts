@@ -14,7 +14,7 @@ import { Point } from "../905/736624";
 import { yt, m1, SW, T1 } from "../figma_app/545293";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectOpenFile } from "../figma_app/516028";
 import { resolveFileParentOrgId, getSubscribedAssetKeys } from "../figma_app/646357";
 import { V } from "../905/342732";
@@ -25,10 +25,10 @@ import { B0, eB } from "../figma_app/807786";
 import { UR, cu, Al } from "../figma_app/707943";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { h as _$$h } from "../figma_app/198885";
-import { vx, t_ } from "../905/91038";
+import { fileVersionSelector, fileByKeySelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { searchAPIHandler } from "../905/144933";
-import { r6 } from "../figma_app/517115";
+import { getUUID } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
@@ -72,7 +72,7 @@ export function $$z2({
 export async function $$H1(e, t) {
   let i = debugState.getState();
   let n = selectOpenFile(i);
-  let d = vx(i);
+  let d = fileVersionSelector(i);
   let g = B0();
   let f = await Ci("input-text" === e.type);
   let C = atomStoreManager.get(cY("fileKey"));
@@ -104,8 +104,8 @@ export async function $$H1(e, t) {
       inDesignEditor: getEditorTypeFromView(_$$h(i)) === FEditorType.Design,
       fileVersion: d,
       currentOrgId: resolveFileParentOrgId(i),
-      fileByKey: t_(i),
-      libraryByLibraryKey: atomStoreManager.get(qp),
+      fileByKey: fileByKeySelector(i),
+      libraryByLibraryKey: atomStoreManager.get(filesByLibraryKeyAtom),
       includeVisualAssets: atomStoreManager.get(lj).length > 0,
       usedAssetKeys: getSubscribedAssetKeys(i, debugState.dispatch)
     };
@@ -191,7 +191,7 @@ export async function $$H1(e, t) {
       analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...e,
         sessionId: G ?? "",
-        componentSuggestionSessionId: r6()
+        componentSuggestionSessionId: getUUID()
       });
     }
     atomStoreManager.set($$V3, () => ({

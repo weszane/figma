@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import { getComponentInfoById } from "../figma_app/664063";
 import { isNotNullish } from "../figma_app/95419";
-import { B } from "../905/94678";
+import { collectSymbolsAndStateGroups } from "../905/94678";
 import { getFeatureFlags } from "../905/601108";
 import { z } from "../905/239603";
 import d from "../vendor/656470";
-import { _i } from "../figma_app/476572";
+import { difference } from "../figma_app/476572";
 import { logWarning } from "../905/714362";
 import { nX } from "../figma_app/445976";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -23,7 +23,7 @@ let _ = `User has also attached the following frames (represented as JSX) and th
 `;
 export function $$x0(e) {
   let t = {};
-  for (let i of B(e, {
+  for (let i of collectSymbolsAndStateGroups(e, {
     followInstances: !0
   })) {
     let e = getComponentInfoById(i.guid, {
@@ -145,8 +145,8 @@ export function $$E2({
     if (!e) return;
     let r = new Set(s.keys());
     let n = new Set(t.keys());
-    let o = _i(n, r);
-    _i(r, n).forEach(async e => {
+    let o = difference(n, r);
+    difference(r, n).forEach(async e => {
       let t = s.get(e);
       if (!t) return;
       let r = t.loadImagesAndExport([{

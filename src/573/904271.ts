@@ -70,7 +70,7 @@ import { h as _$$h2 } from "../figma_app/198885";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
-import { r6 } from "../figma_app/517115";
+import { getUUID } from "../figma_app/517115";
 import { dL } from "../figma_app/825489";
 import { Wq, od } from "../figma_app/392189";
 import { r6 as _$$r } from "../905/542608";
@@ -99,8 +99,8 @@ import { Bk, RN, Sg, $1, oV, Mt, mZ } from "../figma_app/76115";
 import { g5 } from "../figma_app/178752";
 import { FDocumentType } from "../905/862883";
 import { isBranchAlt } from "../905/760074";
-import { qp, oE } from "../905/977779";
-import { O as _$$O2 } from "../905/221694";
+import { filesByLibraryKeyAtom, libraryKeyToNameAtom } from "../905/977779";
+import { libraryKeyMapAtom } from "../905/221694";
 import { Qe, Nx } from "../figma_app/112055";
 import { D as _$$D } from "../905/367723";
 import { pR, xO } from "../figma_app/585235";
@@ -1049,7 +1049,7 @@ function t7(e, t) {
     fileKey: t?.key,
     fileTeamId: t?.teamId ?? void 0,
     fileOrgId: t?.parentOrgId ?? void 0,
-    componentSuggestionSessionId: r6()
+    componentSuggestionSessionId: getUUID()
   });
 }
 function t6({
@@ -1145,12 +1145,12 @@ function t9({
     let a = function () {
       let e = useSelector(_$$e_);
       let t = useSelector(selectOpenFile);
-      let s = useAtomWithSubscription(_$$O2);
+      let s = useAtomWithSubscription(libraryKeyMapAtom);
       let n = useSelector(MH);
       let a = useSelector(dM);
       let i = useSelector(selectTeams);
       let l = useFigmaLibrariesEnabled();
-      let d = useAtomWithSubscription(qp);
+      let d = useAtomWithSubscription(filesByLibraryKeyAtom);
       let c = Fl();
       let u = t?.teamId ? i[t.teamId] : null;
       let p = !!u && hasTeamPaidAccess(u);
@@ -1274,7 +1274,7 @@ function t9({
       let [d, c] = useState(!1);
       let u = l === Bk.List;
       let h = _$$I(Cn.AssetsPanel);
-      let p = useAtomWithSubscription(oE);
+      let p = useAtomWithSubscription(libraryKeyToNameAtom);
       let g = useMemo(() => ({
         isList: u,
         isExpanded: xO,

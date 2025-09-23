@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { updateModal } from "../905/156213";
 import { MH, dM } from "../figma_app/803787";
-import { Ls, m3 } from "../figma_app/645694";
+import { selectComponentAssetsMap, selectStateGroupAssetsMap } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { JA, VI } from "../figma_app/608944";
 export function $$u0(e, t, r) {
@@ -18,7 +18,7 @@ export function $$u0(e, t, r) {
       asset: e,
       sectionPosition: t,
       sectionNameForTracking: r
-    }); else {
+    });else {
       if (l?.type !== VI || !l?.data) return;
       o(updateModal({
         data: {
@@ -33,8 +33,8 @@ export function $$u0(e, t, r) {
   }, [isFlyoutOpen, updateFlyoutProps, e, t, r, l?.type, l?.data, o]);
 }
 export function $$p1(e) {
-  let t = useSelector(Ls);
-  let r = useSelector(m3);
+  let t = useSelector(selectComponentAssetsMap);
+  let r = useSelector(selectStateGroupAssetsMap);
   let n = useSelector(MH);
   let a = useSelector(dM);
   if (e.type === PrimaryWorkflowEnum.COMPONENT) {

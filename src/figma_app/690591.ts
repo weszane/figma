@@ -25,7 +25,7 @@ import { ud } from "../905/862913";
 import { selectUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { hasOrgUsersForUser } from "../figma_app/951233";
 import { HubTypeEnum } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
@@ -259,7 +259,7 @@ let $$Q0 = registerModal(function (e) {
   let o = useSelector(e => !!e.user);
   let l = useSelector(e => e.currentUserOrgId);
   let d = function () {
-    let [e] = IT(CommunityUniversalPostingModalRecentFileKeysView({}));
+    let [e] = setupResourceAtomHandler(CommunityUniversalPostingModalRecentFileKeysView({}));
     return useMemo(() => e.transform(e => {
       let t = [];
       for (let r of e.currentUser.recentFiles2 ?? []) r.file && t.push(r.file.key);
@@ -273,8 +273,8 @@ let $$Q0 = registerModal(function (e) {
   let H = getTotalUserWidgetsCount();
   let W = getTotalUserWidgetsWithDevelopmentCount();
   let K = Object.keys(V).length;
-  IT(se());
-  IT(fd());
+  setupResourceAtomHandler(se());
+  setupResourceAtomHandler(fd());
   useEffect(() => {
     r(searchClearQueryAction({}));
     o && (r(_J()), r(aq()));

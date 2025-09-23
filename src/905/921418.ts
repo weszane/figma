@@ -16,17 +16,17 @@ import { getSelectedFile } from "../905/766303";
 import { compareWithGeneratedKey } from "../905/709171";
 import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { getNonDeletedAssets, getPublishedAssetsForDefaultPublished, filterAssetsWithContainingStateGroup, addStateNamesToAssets, getSubscribedAssetKeys } from "../figma_app/646357";
 import { isLoaded } from "../905/18797";
 import { KH } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { generateSessionId } from "../905/574958";
-import { r6 } from "../figma_app/517115";
+import { getUUID } from "../figma_app/517115";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { Ci } from "../figma_app/318590";
 import { n as _$$n } from "../905/347702";
 import { B0, Og, BG, eB, eu, Sv } from "../figma_app/807786";
@@ -209,7 +209,7 @@ let $$G0 = new class extends M {
       let t = B0();
       let i = e.getState();
       let n = generateSessionId();
-      let r = atomStoreManager.get(qp);
+      let r = atomStoreManager.get(filesByLibraryKeyAtom);
       let s = i.library.assetsPanelSearch.query;
       let d = i.openFile?.key;
       let u = i.openFile?.teamId;
@@ -294,7 +294,7 @@ let $$G0 = new class extends M {
           ...x,
           ...o,
           sessionId: i.search.sessionId ?? "",
-          componentSuggestionSessionId: r6()
+          componentSuggestionSessionId: getUUID()
         });
         this.lastUpdatedQuery = v;
         return;
@@ -346,7 +346,7 @@ let $$G0 = new class extends M {
         ...D,
         ...F,
         sessionId: i.search.sessionId ?? "",
-        componentSuggestionSessionId: r6()
+        componentSuggestionSessionId: getUUID()
       });
       this.lastUpdatedQuery = v;
     };
@@ -364,7 +364,7 @@ let $$z3 = createOptimistThunk((e, {
 });
 let $$H5 = _$$n((e, {
   ignoreLoadingState: t = !1
-} = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && isLoaded(e.loadingState, yD(e.openFile.key))));
+} = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && isLoaded(e.loadingState, generateRetrievingSubscribedComponentsKey(e.openFile.key))));
 let W = e => e.type === PrimaryWorkflowEnum.COMPONENT;
 let K = e => e.type === PrimaryWorkflowEnum.STATE_GROUP;
 export function $$Y1(e) {

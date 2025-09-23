@@ -7,7 +7,7 @@ import { k$, gN, id, _o } from "../figma_app/847915";
 import { a as _$$a } from "../905/69481";
 import { Yh } from "../figma_app/357047";
 import { EG } from "../figma_app/995580";
-import { h8 } from "../figma_app/144974";
+import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { x0 } from "../figma_app/963341";
 import { UN } from "../905/525678";
 import { r as _$$r } from "../905/454477";
@@ -93,7 +93,7 @@ export class $$E2 {
     let n = [];
     let i = r.matchAgainst(Object.keys(this.queryStringMap));
     if (i.length) for (let t of i) {
-      if (h8() && t.score < 1) continue;
+      if (isQaSearchFrecencyEnabled() && t.score < 1) continue;
       let r = {
         ...this.queryStringMap[t.text]
       };
@@ -104,8 +104,8 @@ export class $$E2 {
   _searchForSearchItem(e, t) {
     if (!t) return [];
     let r = [];
-    r = h8() ? this._searchByFuzzyMatchAndSubstringMatch(e, t) : this._searchByFuzzyMatch(e, t);
-    let n = h8() ? ou({
+    r = isQaSearchFrecencyEnabled() ? this._searchByFuzzyMatchAndSubstringMatch(e, t) : this._searchByFuzzyMatch(e, t);
+    let n = isQaSearchFrecencyEnabled() ? ou({
       ...x0(),
       acceptsUnicode: this.acceptsUnicode
     }) : _$$r;
@@ -155,8 +155,8 @@ export function $$y0(e) {
     let t = e.extensionSearchString || "";
     r.searchKey = t;
   }
-  e.isRepairCommand && getFeatureFlags().internal_only_debug_tools && !h8() && (r.queryString = "repair");
-  e.searchSynonyms && !h8() && (r.queryString = [r.queryString, ...e.searchSynonyms].join(" "));
+  e.isRepairCommand && getFeatureFlags().internal_only_debug_tools && !isQaSearchFrecencyEnabled() && (r.queryString = "repair");
+  e.searchSynonyms && !isQaSearchFrecencyEnabled() && (r.queryString = [r.queryString, ...e.searchSynonyms].join(" "));
   return {
     itemDisplayText: t,
     searchItem: r

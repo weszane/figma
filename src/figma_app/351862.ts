@@ -446,7 +446,7 @@ export function $$tY9(e, t) {
       let i;
       switch (e.type) {
         case PrimaryWorkflowEnum.COMPONENT:
-          i = permissionScopeHandler.system("upsert-shared-symbol", () => LibraryPubSub?.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? F7.INVALID, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
+          i = permissionScopeHandler.system("upsert-shared-symbol", () => LibraryPubSub?.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? 'INVALID', e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
           break;
         case PrimaryWorkflowEnum.STATE_GROUP:
           i = permissionScopeHandler.system("upsert-shared-state-group", () => LibraryPubSub?.upsertSharedStateGroup(e.key, e.version, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));

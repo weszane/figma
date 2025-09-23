@@ -32,7 +32,7 @@ import { I7, P1 } from "../figma_app/745458";
 import { selectSceneGraph, $u } from "../figma_app/889655";
 import { LibraryTabEnum, getSubscribedVariableInfo, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { q } from "../905/296913";
@@ -84,14 +84,14 @@ export function $$er24(e) {
   let a = useCallback(r => {
     for (let n of e) {
       if (!r) {
-        _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+        executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
           permissionScopeHandler.user("clear-variant-variable-binding", () => {
             t.get(n)?.clearVariableConsumption("VARIANT_PROPERTIES");
           });
         });
         return;
       }
-      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         permissionScopeHandler.user("set-variant-variable-binding", () => {
           t.get(n)?.updateVariableConsumption("VARIANT_PROPERTIES", r);
         });
@@ -355,7 +355,7 @@ export function $$ey28(e, t, r) {
         n[e] = t;
         oz(e, t, a);
       });
-      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         setVariableConsumptionMap(n);
       });
     }, [setVariableConsumptionMap, e, i]),
@@ -364,7 +364,7 @@ export function $$ey28(e, t, r) {
       e.forEach(e => {
         r[e] = null;
       });
-      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         setVariableConsumptionMap(r, t);
       });
     }, [setVariableConsumptionMap, e])

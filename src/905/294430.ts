@@ -26,7 +26,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a2 } from "../figma_app/762558";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { zK, zM } from "../905/182453";
 import { Kx } from "../905/401389";
 import { Bf } from "../905/937445";
@@ -148,14 +148,14 @@ function ed({
           alias: n
         }
       };
-      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         s({
           ...a,
           [t]: r
         }, yesNoTrackingEnum.YES);
       });
       oz(`EFFECT_${t.slice(0, -3).toUpperCase()}`, r);
-    } else t && _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+    } else t && executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       s({
         ...a,
         [t]: void 0
@@ -1738,7 +1738,7 @@ function th(e) {
       ...e.effect,
       colorVar: r
     };
-    _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+    executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
       e.onChange(a, yesNoTrackingEnum.YES);
     });
     oz("EFFECT_COLOR", r);
@@ -1748,7 +1748,7 @@ function th(e) {
       ...e.effect,
       colorVar: void 0
     };
-    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+    executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       e.onChange(i, yesNoTrackingEnum.YES);
     });
     t.stopPropagation();
@@ -2247,7 +2247,7 @@ class tU extends PureComponent {
     };
     this.removeProperty = e => {
       let t = valueOrFallback(this.props.propertyList, []);
-      _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
+      executeWithDSAAction(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
         this.props.onChange(t.filter((t, i) => i !== e));
       });
       this.props.dispatch(hidePickerThunk());

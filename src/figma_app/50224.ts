@@ -1,7 +1,7 @@
 import { getComponentInfoById, cleanComponentPropNameForUsage, groupByCommonPrefixSorted, getInstanceIdsForDef, toCamelCase, IMAGE_NAME_FORMAT } from "../figma_app/664063";
 import { Ed } from "../figma_app/774411";
 import { throwTypeError } from "../figma_app/465776";
-import { c as _$$c } from "../905/94678";
+import { getSymbolOrStateGroupNode } from "../905/94678";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { LW } from "../figma_app/846140";
@@ -110,7 +110,7 @@ export function $$T1(e, t) {
         if ("SIMPLE_CHOICE" === e.devFriendlyProp.type) {
           let t = e.devFriendlyProp.validOptions;
           if ("INSTANCE_SWAP" === e.def.type) {
-            let e = _$$c(_[n].value);
+            let e = getSymbolOrStateGroupNode(_[n].value);
             if (!e) throw Error("Could not find component for componentProp");
             if ("SYMBOL" === e.type) {
               let r = Object.values(e.variantProperties ?? {})[0];

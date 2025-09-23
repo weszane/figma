@@ -26,7 +26,7 @@ import { Ee } from "../figma_app/392189";
 import { b as _$$b } from "../figma_app/598297";
 import { g as _$$g } from "../905/505662";
 import { eH, Ko, P5 } from "../figma_app/318590";
-import { C7 } from "../figma_app/144974";
+import { isAssetSuggestionsEnabled } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, B1, ES } from "../905/198599";
 import { z as _$$z } from "../905/654860";
@@ -462,7 +462,7 @@ export function $$eg3(e) {
 export function $$ef5(e) {
   let t = atomStoreManager.get(openFileKeyAtom);
   let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-  if (!(!t || i?.length !== 1 || i[0]?.isSlide) && (C7() && Hl({
+  if (!(!t || i?.length !== 1 || i[0]?.isSlide) && (isAssetSuggestionsEnabled() && Hl({
     type: "input-selection",
     node: i[0],
     name: i[0].name,
@@ -484,7 +484,7 @@ export function $$ef5(e) {
 }
 export function $$e_4(e, t) {
   let i = atomStoreManager.get(openFileKeyAtom);
-  if (i && (C7() && Hl({
+  if (i && (isAssetSuggestionsEnabled() && Hl({
     type: "input-image",
     imageFile: t,
     file_key: i

@@ -1,5 +1,13 @@
-import { sendMetric } from "../905/485103";
-export function $$r0(e) {
-  sendMetric(`asset_by_key_permissions_error${e}`);
+import { sendMetric } from '../905/485103'
+
+// Original: $$r0
+/**
+ * Sends a metric for asset by key permissions error.
+ * @param e - The error parameter to append to the metric string.
+ */
+export function sendAssetByKeyPermissionsErrorMetric(e: any) {
+  sendMetric(`asset_by_key_permissions_error${e}`)
 }
-export const t = $$r0;
+
+// Original: t
+export const t = sendAssetByKeyPermissionsErrorMetric

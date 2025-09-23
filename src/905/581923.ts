@@ -1,337 +1,579 @@
-import { throwTypeError } from "../figma_app/465776";
-import { Cb, wP, yu, Sn, k4, Au } from "../905/327738";
-import { getSingletonSceneGraph } from "../905/700578";
-export let $$s0 = "Component";
-export function $$o18(e) {
-  e = g(e = function (e) {
-    e.endsWith("?") && (e = e.substring(0, e.length - 1));
-    let t = e.indexOf("{");
-    -1 !== t && (e = e.substring(0, t));
-    return e;
-  }(e = h(e)));
-  e = (e = Cb(e)).replace(/[^0-9a-z]/gi, "");
-  return wP(e);
+import { findInstanceNodesByGuid, findNodesByCriteriaGUIDs, getSymbolParentGuid, moveNumbersToEnd, toCamelCase, toTitleCase } from '../905/327738'
+import { getSingletonSceneGraph } from '../905/700578'
+import { throwTypeError } from '../figma_app/465776'
+
+/**
+ * Prefix used for component names.
+ * (COMPONENT_PREFIX)
+ */
+export const COMPONENT_PREFIX = 'Component'
+
+/**
+ * Cleans a component property name for usage.
+ * Removes optional marker, modifiers, and non-alphanumeric characters.
+ * (cleanComponentPropNameForUsage)
+ */
+export function cleanComponentPropNameForUsage(propName: string): string {
+  propName = removeModifiers(removeOptionalMarker(stripHash(propName)))
+  propName = toCamelCase(propName).replace(/[^0-9a-z]/gi, '')
+  return moveNumbersToEnd(propName)
 }
-let l = /\[(\w+)(\: ?([^\[\]]+))?\]/;
-let d = RegExp(`(${l.source})*$`);
-let $$c4 = new RegExp(/^Image ?(\(.+\))?/.source + d.source);
-export function $$u15({
-  index: e,
-  rawProp: t
-}) {
-  let [i, n] = t.split("#");
-  if (!i || !n) throw Error(`Unexpected rawProp format: ${t}`);
-  let r = $$o18(i);
-  r.match(/\d+$/) && (r = r.replace(/\d+$/, ""));
-  return [`${r}${e + 1}`, n].join("#");
+
+/**
+ * Removes the optional marker '?' from the end of a string.
+ * (h)
+ */
+function removeOptionalMarker(name: string): string {
+  const [main] = name.split('#')
+  return main.endsWith('?') ? main.slice(0, -1) : main
 }
-export function $$p11(e, t) {
-  let i = {};
-  let n = {};
-  let a = {};
-  for (let t of e) {
-    let e = t.guid;
-    let r = t.containingSymbolId;
-    r && (n[e] = t, a[e] = r, i[r] = i[r] || [], i[r].push(e));
-  }
-  let s = new Set();
-  let c = {};
-  for (let e of Object.values(i)) {
-    let t = new Set();
-    for (let i of e) {
-      let e = n[i];
-      if (!e) continue;
-      let r = $$o18(e.name);
-      t.has(r) && (r = $$x8({
-        usageProp: r,
-        usedUsageProps: t
-      }));
-      t.add(r);
-      s.add(r);
-      c[i] = r;
+
+/**
+ * Removes modifiers from a string (anything after '{').
+ * (g)
+ */
+function removeModifiers(name: string): string {
+  const idx = name.indexOf('{')
+  return idx !== -1 ? name.substring(0, idx) : name
+}
+
+/**
+ * Removes trailing modifier tags from a string using regex.
+ * (g)
+ */
+function stripHash(name: string): string {
+  const match = MODIFIER_TAGS.exec(name)
+  return match?.[0] ? name.replace(match[0], '').trim() : name
+}
+
+const MODIFIER_TAG = /\[(\w+)(: ?([^[\]]+))?\]/
+// eslint-disable-next-line regexp/no-unused-capturing-group
+const MODIFIER_TAGS = new RegExp(`(${MODIFIER_TAG.source})*$`)
+export const IMAGE_NAME_FORMAT = new RegExp(/^Image ?(\(.+\))?/.source + MODIFIER_TAGS.source)
+
+/**
+ * Generates a unique usage property name for a component prop.
+ * ($$u15)
+ */
+export function getUsagePropName({
+  index,
+  rawProp,
+}: { index: number, rawProp: string }): string {
+  const [base, suffix] = rawProp.split('#')
+  if (!base || !suffix)
+    throw new Error(`Unexpected rawProp format: ${rawProp}`)
+  let usageProp = cleanComponentPropNameForUsage(base)
+  if (usageProp.match(/\d+$/))
+    usageProp = usageProp.replace(/\d+$/, '')
+  return `${usageProp}${index + 1}#${suffix}`
+}
+
+/**
+ * Groups instance nodes by their containing symbol and assigns usage property names.
+ * ($$p11)
+ */
+export function groupInstanceNodesBySymbol(
+  nodes: Array<{ guid: string, containingSymbolId?: string, name: string, type?: string }>,
+  mode: string,
+) {
+  const symbolToGuids: Record<string, string[]> = {}
+  const guidToNode: Record<string, any> = {}
+  const guidToSymbol: Record<string, string> = {}
+
+  for (const node of nodes) {
+    const { guid, containingSymbolId } = node
+    if (containingSymbolId) {
+      guidToNode[guid] = node
+      guidToSymbol[guid] = containingSymbolId
+      symbolToGuids[containingSymbolId] = symbolToGuids[containingSymbolId] || []
+      symbolToGuids[containingSymbolId].push(guid)
     }
   }
-  let u = {};
-  for (let i of e) {
-    let e = a[i.guid];
-    let n = c[i.guid];
-    if (e && n) {
-      let a = null;
-      let s = n;
-      if ("NESTED_INSTANCE" === t) {
-        if ("INSTANCE" !== i.type || !(a = yu(i))) continue;
-        s += "/" + a;
+
+  const usedProps = new Set<string>()
+  const guidToUsageProp: Record<string, string> = {}
+
+  for (const guids of Object.values(symbolToGuids)) {
+    const usageProps = new Set<string>()
+    for (const guid of guids) {
+      const node = guidToNode[guid]
+      if (!node)
+        continue
+      let usageProp = cleanComponentPropNameForUsage(node.name)
+      if (usageProps.has(usageProp)) {
+        usageProp = getUniqueUsageProp({
+          usageProp,
+          usedUsageProps: usageProps,
+        })
       }
-      let o = function (e, t) {
-        let i = e.replace(/#/g, "");
-        return [i = g(i), t].join("#");
-      }(i.name, s);
-      u[o] || (u[o] = {
-        componentIdOrNull: a,
-        guidByParentComponentId: {},
-        tagsByParentComponentId: {}
-      });
-      u[o].guidByParentComponentId[e] = i.guid;
-      let c = function (e) {
-        let t = h(e);
-        let i = d.exec(t)?.[0];
-        return i ? Object.fromEntries(i.match(RegExp(l, "g"))?.map(e => {
-          let t = l.exec(e);
-          return t ? [t[1], t[3] || "true"] : [];
-        }).filter(e => 2 === e.length) || []) : {};
-      }(i.name);
-      Object.keys(c).length > 0 && (u[o].tagsByParentComponentId[e] = c);
+      usageProps.add(usageProp)
+      usedProps.add(usageProp)
+      guidToUsageProp[guid] = usageProp
     }
   }
-  return u;
-}
-export function $$m19(e) {
-  let t = e.match(/\{(.+)\}/);
-  if (!t) return {};
-  let i = t[1].split(",");
-  return i[0].startsWith("-") ? {
-    omit: i.map(e => e.replace("-", ""))
-  } : {
-    pick: i
-  };
-}
-function h(e) {
-  let [t] = e.split("#");
-  return t;
-}
-function g(e) {
-  let t = d.exec(e);
-  return t?.[0] ? e.replace(t[0], "").trim() : e;
-}
-export function $$f7(e) {
-  return h(e).endsWith("?");
-}
-export function $$_9({
-  component: e,
-  rawProp: t
-}) {
-  let i = $$o18(t);
-  return Sn(e.name) + Sn(i);
-}
-export function $$A10(e) {
-  return Sn(e, $$s0);
-}
-export function $$y5(e) {
-  return Sn(e, $$s0) + "Props";
-}
-export function $$b17(e) {
-  let t = {};
-  if (!Array.isArray(e) || e.length < 2) return t;
-  let i = e.map($$o18);
-  for (let n = 0; n < i.length; n++) {
-    let r = i[n].replace(/\d+$/, "");
-    t[r] || (t[r] = []);
-    -1 === t[r].indexOf(e[n]) && t[r].push(e[n]);
-  }
-  let n = {};
-  for (let e in t) {
-    let i = t[e].sort((e, t) => {
-      let i = e.match(/\d+$/);
-      let n = t.match(/\d+$/);
-      return i && n ? parseInt(i[0], 10) - parseInt(n[0], 10) : e.localeCompare(t);
-    });
-    let r = function (e) {
-      if (!Array.isArray(e) || e.length < 2) return null;
-      let t = e[0].replace(/\d+$/, "");
-      for (let i = 0; i < e.length; i++) if (!e[i].startsWith(t) || parseInt(e[i].slice(t.length)) !== i + 1) return null;
-      return t + "s";
-    }(i);
-    r && (n[r] = i);
-  }
-  return n;
-}
-export function $$v6(e) {
-  return "INSTANCE_SWAP" === e.type && "string" == typeof e.defaultValue ? e.defaultValue : "NESTED_INSTANCE" === e.type ? e.componentId : null;
-}
-export function $$I21(e) {
-  if (0 === e.length) return !0;
-  let t = e[0];
-  let i = $$v6(t.def);
-  return e.every(e => t.def.type === e.def.type && i === $$v6(e.def));
-}
-export function $$E20(e, t, i = {}) {
-  let n = [];
-  for (let a of k4(e)) !a.isInstanceSublayer && (("SLOT" === t.def.type || "INSTANCE_SWAP" === t.def.type || "GROUPED_INSTANCE_SWAP" === t.def.type) && a.componentPropertyReferences()?.mainComponent === t.rawProp && n.push(a.guid), "NESTED_INSTANCE" === t.def.type && (a.isBubbled || i.exposeAllNestedInstances) && Object.values(t.def.guidByParentComponentId).includes(a.guid) && t.def.componentId === yu(a) && n.push(a.guid));
-  return n;
-}
-export function $$x8({
-  usageProp: e,
-  usedUsageProps: t
-}) {
-  if (!t.has(e)) return e;
-  let i = e.match(/^(.*?)(\d*)$/);
-  let n = i ? i[1] : e;
-  let r = 1;
-  t.forEach(e => {
-    if (e.startsWith(n)) {
-      let t = parseInt(e.slice(n.length), 10);
-      !isNaN(t) && t > r && (r = t);
-    }
-  });
-  return `${n}${r + 1}`;
-}
-export function $$S16(e) {
-  let t = {};
-  for (let i of Object.keys(e)) {
-    let e = $$o18(i);
-    t[e] = t[e] || [];
-    t[e].push(i);
-  }
-  let i = [];
-  for (let n of Object.values(t)) {
-    let t = function (e) {
-      if (e.length < 3) return [];
-      let t = e[0];
-      if (!t || !("guidByParentComponentId" in t.def) || !$$I21(e)) return [];
-      let i = {};
-      for (let t of e) {
-        if (!("guidByParentComponentId" in t.def)) return [];
-        for (let e of Object.keys(t.def.guidByParentComponentId)) {
-          i[e] = i[e] || [];
-          i[e].push(t);
+
+  const result: Record<string, any> = {}
+  for (const node of nodes) {
+    const symbolId = guidToSymbol[node.guid]
+    const usageProp = guidToUsageProp[node.guid]
+    if (symbolId && usageProp) {
+      let parentComponentId: string | null = null
+      let usagePropWithParent = usageProp
+      if (mode === 'NESTED_INSTANCE') {
+        parentComponentId = getSymbolParentGuid(node)
+        if (node.type !== 'INSTANCE' || !(parentComponentId))
+          continue
+        usagePropWithParent += `/${parentComponentId}`
+      }
+      const key = buildUsagePropKey(node.name, usagePropWithParent)
+      if (!result[key]) {
+        result[key] = {
+          componentIdOrNull: parentComponentId,
+          guidByParentComponentId: {},
+          tagsByParentComponentId: {},
         }
       }
-      let n = null;
-      for (let [t, r] of Object.entries(i)) if (r.length === e.length) {
-        n = t;
-        break;
+      result[key].guidByParentComponentId[symbolId] = node.guid
+      const tags = extractTagsFromName(node.name)
+      if (Object.keys(tags).length > 0) {
+        result[key].tagsByParentComponentId[symbolId] = tags
       }
-      if (!n) return [];
-      let s = {};
-      for (let t of e) {
-        if (!("guidByParentComponentId" in t.def)) return [];
-        let e = t.def.guidByParentComponentId[n];
-        if (!e) return [];
-        s[e] = t;
-      }
-      let o = {};
-      for (let e of Object.keys(s)) {
-        let t = getSingletonSceneGraph().get(e);
-        let i = t?.parentNode;
-        for (; i && "NONE" !== i.stackMode && (o[i.guid] = o[i.guid] || [], o[i.guid].push(e), i?.type !== "SYMBOL");) i = i.parentNode;
-      }
-      let l = Object.entries(o);
-      for (let [e, t] of (l.sort((e, t) => t[1].length - e[1].length), l)) {
-        if (t.length < 3) continue;
-        let i = new Set(t);
-        return Au(e, {
-          types: ["INSTANCE"]
-        }).filter(e => i.has(e.guid)).map(e => s[e.guid]);
-      }
-      return [];
-    }(n.map(t => e[t]));
-    t.length < 3 || i.push(t);
+    }
   }
-  return i;
+  return result
 }
-let w = e => $$c4.test(e.name) && !e.isInstanceSublayer;
-export function $$C12(e) {
-  let t = Au(e.guid, {
-    types: ["FRAME", "INSTANCE"]
-  }).filter(w);
-  w(e) && t.push(e);
-  return t;
+
+/**
+ * Builds a usage property key from name and usage property.
+ * (anonymous in $$p11)
+ */
+function buildUsagePropKey(name: string, usageProp: string): string {
+  const base = stripHash(name.replace(/#/g, ''))
+  return [base, usageProp].join('#')
 }
-function T(e) {
-  switch (e) {
-    case "VARIANT":
-      return 0;
-    case "TEXT":
-      return 1;
-    case "BOOLEAN":
-      return 2;
-    case "INSTANCE_SWAP":
-      return 3;
-    case "GROUPED_INSTANCE_SWAP":
-      return 4;
-    case "IMAGE":
-      return 5;
-    case "NESTED_INSTANCE":
-      return 6;
+
+/**
+ * Extracts modifier tags from a name string.
+ * (anonymous in $$p11)
+ */
+function extractTagsFromName(name: string): Record<string, string> {
+  const match = MODIFIER_TAGS.exec(removeOptionalMarker(name))?.[0]
+  if (!match)
+    return {}
+  return Object.fromEntries(
+    match.match(new RegExp(MODIFIER_TAG, 'g'))?.map((tag) => {
+      const parts = MODIFIER_TAG.exec(tag)
+      return parts ? [parts[1], parts[3] || 'true'] : []
+    }).filter(arr => arr.length === 2) || [],
+  )
+}
+
+/**
+ * Extracts modifiers from a prop string.
+ * (extractModifiersFromProp)
+ */
+export function extractModifiersFromProp(prop: string): { omit?: string[], pick?: string[] } {
+  const match = prop.match(/\{(.+)\}/)
+  if (!match)
+    return {}
+  const items = match[1].split(',')
+  return items[0].startsWith('-')
+    ? { omit: items.map(item => item.replace('-', '')) }
+    : { pick: items }
+}
+
+/**
+ * Checks if a prop name is optional.
+ * ($$f7)
+ */
+export function isOptionalProp(prop: string): boolean {
+  return removeOptionalMarker(prop).endsWith('?')
+}
+
+/**
+ * Builds a JSX name for a component prop.
+ * ($$_9)
+ */
+export function buildComponentJSXName({
+  component,
+  rawProp,
+}: { component: { name: string }, rawProp: string }): string {
+  const propName = cleanComponentPropNameForUsage(rawProp)
+  return toTitleCase(component.name) + toTitleCase(propName)
+}
+
+/**
+ * Gets the JSX name for a component.
+ * (getComponentJSXName)
+ */
+export function getComponentJSXName(name: string): string {
+  return toTitleCase(name, COMPONENT_PREFIX)
+}
+
+/**
+ * Gets the props type name for a component.
+ * ($$y5)
+ */
+export function getComponentPropsTypeName(name: string): string {
+  return `${toTitleCase(name, COMPONENT_PREFIX)}Props`
+}
+
+/**
+ * Groups an array of prop names by their common prefix and sorts them.
+ * (groupByCommonPrefixSorted)
+ */
+export function groupByCommonPrefixSorted(props: string[]): Record<string, string[]> {
+  const groups: Record<string, string[]> = {}
+  if (!Array.isArray(props) || props.length < 2)
+    return groups
+  const cleaned = props.map(cleanComponentPropNameForUsage)
+  for (let i = 0; i < cleaned.length; i++) {
+    const prefix = cleaned[i].replace(/\d+$/, '')
+    groups[prefix] = groups[prefix] || []
+    if (!groups[prefix].includes(props[i]))
+      groups[prefix].push(props[i])
+  }
+  const result: Record<string, string[]> = {}
+  for (const prefix in groups) {
+    const sorted = groups[prefix].sort((a, b) => {
+      const aNum = a.match(/\d+$/)
+      const bNum = b.match(/\d+$/)
+      return aNum && bNum ? parseInt(aNum[0], 10) - parseInt(bNum[0], 10) : a.localeCompare(b)
+    })
+    const plural = getPluralGroupName(sorted)
+    if (plural)
+      result[plural] = sorted
+  }
+  return result
+}
+
+/**
+ * Determines if a group of prop names forms a plural group.
+ * (anonymous in groupByCommonPrefixSorted)
+ */
+function getPluralGroupName(props: string[]): string | null {
+  if (!Array.isArray(props) || props.length < 2)
+    return null
+  const prefix = props[0].replace(/\d+$/, '')
+  for (let i = 0; i < props.length; i++) {
+    if (!props[i].startsWith(prefix) || parseInt(props[i].slice(prefix.length)) !== i + 1)
+      return null
+  }
+  return `${prefix}s`
+}
+
+/**
+ * Gets the default value for an instance swap or nested instance prop.
+ * ($$v6)
+ */
+export function getInstanceDefaultValue(def: any): string | null {
+  if (def.type === 'INSTANCE_SWAP' && typeof def.defaultValue === 'string')
+    return def.defaultValue
+  if (def.type === 'NESTED_INSTANCE')
+    return def.componentId
+  return null
+}
+
+/**
+ * Checks if all items in an array have the same type and default value.
+ * ($$I21)
+ */
+export function areAllDefsSameTypeAndDefault(arr: Array<{ def: any }>): boolean {
+  if (arr.length === 0)
+    return true
+  const first = arr[0]
+  const firstDefault = getInstanceDefaultValue(first.def)
+  return arr.every(item => first.def.type === item.def.type && firstDefault === getInstanceDefaultValue(item.def))
+}
+
+/**
+ * Finds instance node GUIDs for a given definition.
+ * (getInstanceIdsForDef)
+ */
+export function getInstanceIdsForDef(
+  guid: string,
+  prop: { def: any, rawProp: string },
+  options: { exposeAllNestedInstances?: boolean } = {},
+): string[] {
+  const result: string[] = []
+  for (const node of findInstanceNodesByGuid(guid)) {
+    if (node.isInstanceSublayer)
+      continue
+    if (
+      (['SLOT', 'INSTANCE_SWAP', 'GROUPED_INSTANCE_SWAP'].includes(prop.def.type)
+        && node.componentPropertyReferences()?.mainComponent === prop.rawProp)
+      || (prop.def.type === 'NESTED_INSTANCE'
+        && (node.isBubbled || options.exposeAllNestedInstances)
+        && Object.values(prop.def.guidByParentComponentId).includes(node.guid)
+        && prop.def.componentId === getSymbolParentGuid(node))
+    ) {
+      result.push(node.guid)
+    }
+  }
+  return result
+}
+
+/**
+ * Generates a unique usage property name if already used.
+ * ($$x8)
+ */
+export function getUniqueUsageProp({
+  usageProp,
+  usedUsageProps,
+}: { usageProp: string, usedUsageProps: Set<string> }): string {
+  if (!usedUsageProps.has(usageProp))
+    return usageProp
+  // eslint-disable-next-line regexp/no-super-linear-backtracking
+  const match = usageProp.match(/^(.*?)(\d*)$/)
+  const prefix = match ? match[1] : usageProp
+  let maxNum = 1
+  usedUsageProps.forEach((prop) => {
+    if (prop.startsWith(prefix)) {
+      const num = parseInt(prop.slice(prefix.length), 10)
+      if (!isNaN(num) && num > maxNum)
+        maxNum = num
+    }
+  })
+  return `${prefix}${maxNum + 1}`
+}
+
+/**
+ * Groups nodes by their cleaned prop name and finds sets of at least 3 related nodes.
+ * ($$S16)
+ */
+export function groupNodesByPropName(nodes: Record<string, any>): any[][] {
+  const groups: Record<string, string[]> = {}
+  for (const key of Object.keys(nodes)) {
+    const cleaned = cleanComponentPropNameForUsage(key)
+    groups[cleaned] = groups[cleaned] || []
+    groups[cleaned].push(key)
+  }
+  const result: any[][] = []
+  for (const group of Object.values(groups)) {
+    const set = findRelatedNodeSet(group.map(k => nodes[k]))
+    if (set.length >= 3)
+      result.push(set)
+  }
+  return result
+}
+
+/**
+ * Finds a set of related nodes based on parent component ID and scene graph.
+ * (anonymous in $$S16)
+ */
+function findRelatedNodeSet(nodes: any[]): any[] {
+  if (nodes.length < 3)
+    return []
+  const first = nodes[0]
+  if (!first || !('guidByParentComponentId' in first.def) || !areAllDefsSameTypeAndDefault(nodes))
+    return []
+  const parentGroups: Record<string, any[]> = {}
+  for (const node of nodes) {
+    if (!('guidByParentComponentId' in node.def))
+      return []
+    for (const parentId of Object.keys(node.def.guidByParentComponentId)) {
+      parentGroups[parentId] = parentGroups[parentId] || []
+      parentGroups[parentId].push(node)
+    }
+  }
+  let commonParent: string | null = null
+  for (const [parentId, group] of Object.entries(parentGroups)) {
+    if (group.length === nodes.length) {
+      commonParent = parentId
+      break
+    }
+  }
+  if (!commonParent)
+    return []
+  const guidToNode: Record<string, any> = {}
+  for (const node of nodes) {
+    if (!('guidByParentComponentId' in node.def))
+      return []
+    const guid = node.def.guidByParentComponentId[commonParent]
+    if (!guid)
+      return []
+    guidToNode[guid] = node
+  }
+  const stackGroups: Record<string, string[]> = {}
+  for (const guid of Object.keys(guidToNode)) {
+    let node = getSingletonSceneGraph().get(guid)
+    let parent = node?.parentNode
+    while (parent && parent.stackMode !== 'NONE') {
+      stackGroups[parent.guid] = stackGroups[parent.guid] || []
+      stackGroups[parent.guid].push(guid)
+      if (parent?.type === 'SYMBOL')
+        break
+      parent = parent.parentNode
+    }
+  }
+  const sortedGroups = Object.entries(stackGroups).sort((a, b) => b[1].length - a[1].length)
+  for (const [parentGuid, guids] of sortedGroups) {
+    if (guids.length < 3)
+      continue
+    const guidSet = new Set(guids)
+    return findNodesByCriteriaGUIDs(parentGuid, { types: ['INSTANCE'] })
+      .filter(node => guidSet.has(node.guid))
+      .map(node => guidToNode[node.guid])
+  }
+  return []
+}
+
+/**
+ * Checks if a node matches the image name format and is not an instance sublayer.
+ * (w)
+ */
+function isImageNode(node: { name: string, isInstanceSublayer?: boolean }) {
+  return IMAGE_NAME_FORMAT.test(node.name) && !node.isInstanceSublayer
+}
+
+/**
+ * Gets nested image nodes for a given node.
+ * (getNestedImageNodes)
+ */
+export function getNestedImageNodes(node: { guid: string, name: string, isInstanceSublayer?: boolean }) {
+  const nodes = findNodesByCriteriaGUIDs(node.guid, { types: ['FRAME', 'INSTANCE'] }).filter(isImageNode)
+  if (isImageNode(node))
+    nodes.push(node)
+  return nodes
+}
+
+/**
+ * Maps prop types to sort order.
+ * (T)
+ */
+function getPropTypeOrder(type: string): number {
+  switch (type) {
+    case 'VARIANT': return 0
+    case 'TEXT': return 1
+    case 'BOOLEAN': return 2
+    case 'INSTANCE_SWAP': return 3
+    case 'GROUPED_INSTANCE_SWAP': return 4
+    case 'IMAGE': return 5
+    case 'NESTED_INSTANCE': return 6
+    case 'SLOT': return 8
+    default: return 7
+  }
+}
+
+/**
+ * Sorts two prop definitions by type and array index.
+ * ($$k3)
+ */
+export function comparePropDefs(a: any, b: any): number {
+  const orderA = getPropTypeOrder(a.def.type)
+  const orderB = getPropTypeOrder(b.def.type)
+  if (orderA !== orderB)
+    return orderA - orderB
+  if (a.devFriendlyProp.type === 'ARRAY' && b.devFriendlyProp.type === 'ARRAY') {
+    return a.devFriendlyProp.index - b.devFriendlyProp.index
+  }
+  return 0
+}
+
+/**
+ * Gets the TypeScript property key for a prop definition.
+ * ($$R1)
+ */
+export function getTsPropKey(
+  propDef: any,
+  includeOptional = true,
+  options: { enableTsArrays?: boolean } = {},
+): string {
+  const prop = propDef.devFriendlyProp
+  const optional = includeOptional && propDef.isOptional ? '?' : ''
+  switch (prop.type) {
+    case 'SIMPLE':
+    case 'SIMPLE_CHOICE':
+    case 'IMAGE':
+    case 'GROUPED_INSTANCE_SWAP':
+      return `${prop.key}${optional}`
+    case 'ARRAY':
+      if (options.enableTsArrays)
+        return `${prop.key}${optional}`
+      return `${prop.nonArrayKey}${optional}`
+    case 'DERIVED_BOOLEAN':
+      return ''
     default:
-      return 7;
-    case "SLOT":
-      return 8;
+      throwTypeError(prop)
   }
 }
-export function $$k3(e, t) {
-  let i = T(e.def.type);
-  let n = T(t.def.type);
-  return i !== n ? i - n : "ARRAY" === e.devFriendlyProp.type && "ARRAY" === t.devFriendlyProp.type ? e.devFriendlyProp.index - t.devFriendlyProp.index : 0;
-}
-export function $$R1(e, t = !0, i) {
-  let r = e.devFriendlyProp;
-  let a = t && e.isOptional ? "?" : "";
-  switch (r.type) {
-    case "SIMPLE":
-    case "SIMPLE_CHOICE":
-    case "IMAGE":
-    case "GROUPED_INSTANCE_SWAP":
-      return `${r.key}${a}`;
-    case "ARRAY":
-      if (i.enableTsArrays) return `${r.key}${a}`;
-      return `${r.nonArrayKey}${a}`;
-    case "DERIVED_BOOLEAN":
-      return "";
-    default:
-      throwTypeError(r);
-  }
-}
-export function $$N2(e, t) {
-  switch (e.devFriendlyProp.type) {
-    case "DERIVED_BOOLEAN":
-      return "";
-    case "SIMPLE":
-    case "SIMPLE_CHOICE":
-    case "IMAGE":
-    case "GROUPED_INSTANCE_SWAP":
-      return e.typeRepr.typeName;
-    case "ARRAY":
-      if (t.enableTsArrays) {
-        if (e.typeRepr.typeName.startsWith("{")) return `(${e.typeRepr.typeName})[]`;
-        return `${e.typeRepr.typeName}[]`;
+
+/**
+ * Gets the TypeScript type representation for a prop definition.
+ * ($$N2)
+ */
+export function getTsPropType(
+  propDef: any,
+  options: { enableTsArrays?: boolean },
+): string {
+  switch (propDef.devFriendlyProp.type) {
+    case 'DERIVED_BOOLEAN':
+      return ''
+    case 'SIMPLE':
+    case 'SIMPLE_CHOICE':
+    case 'IMAGE':
+    case 'GROUPED_INSTANCE_SWAP':
+      return propDef.typeRepr.typeName
+    case 'ARRAY':
+      if (options.enableTsArrays) {
+        if (propDef.typeRepr.typeName.startsWith('{'))
+          return `(${propDef.typeRepr.typeName})[]`
+        return `${propDef.typeRepr.typeName}[]`
       }
-      return e.typeRepr.typeName;
+      return propDef.typeRepr.typeName
     default:
-      throwTypeError(e.devFriendlyProp);
+      throwTypeError(propDef.devFriendlyProp)
   }
 }
-export function $$P14(e, t) {
-  let i = [];
-  let n = new Set();
-  for (let r of e) {
-    let e = $$R1(r, !1, t);
-    !e || n.has(e) || (i.push(r), n.add(e));
+
+/**
+ * Filters out duplicate prop definitions by their TypeScript key.
+ * ($$P14)
+ */
+export function filterUniquePropDefs(
+  propDefs: any[],
+  options: { enableTsArrays?: boolean },
+): any[] {
+  const result: any[] = []
+  const seen = new Set<string>()
+  for (const def of propDefs) {
+    const key = getTsPropKey(def, false, options)
+    if (key && !seen.has(key)) {
+      result.push(def)
+      seen.add(key)
+    }
   }
-  return i;
+  return result
 }
-export function $$O13(e) {
-  return e.length && e[0] ? e[0].toUpperCase() + e.slice(1) : e;
+
+/**
+ * Capitalizes the first letter of a string.
+ * ($$O13)
+ */
+export function capitalizeFirstLetter(str: string): string {
+  return str.length && str[0] ? str[0].toUpperCase() + str.slice(1) : str
 }
-export const FE = $$s0;
-export const GN = $$R1;
-export const Hd = $$N2;
-export const Ho = $$k3;
-export const Ii = $$c4;
-export const L_ = $$y5;
-export const O7 = $$v6;
-export const QJ = $$f7;
-export const R0 = $$x8;
-export const Vv = $$_9;
-export const WG = $$A10;
-export const _e = $$p11;
-export const _j = $$C12;
-export const bi = $$O13;
-export const ep = $$P14;
-export const fy = $$u15;
-export const go = $$S16;
-export const hM = $$b17;
-export const j3 = $$o18;
-export const rB = $$m19;
-export const wn = $$E20;
-export const xb = $$I21;
+
+// Exported variables and functions with refactored names
+export const FE = COMPONENT_PREFIX
+export const GN = getTsPropKey
+export const Hd = getTsPropType
+export const Ho = comparePropDefs
+export const Ii = IMAGE_NAME_FORMAT
+export const L_ = getComponentPropsTypeName
+export const O7 = getInstanceDefaultValue
+export const QJ = isOptionalProp
+export const R0 = getUniqueUsageProp
+export const Vv = buildComponentJSXName
+export const WG = getComponentJSXName
+export const _e = groupInstanceNodesBySymbol
+export const _j = getNestedImageNodes
+export const bi = capitalizeFirstLetter
+export const ep = filterUniquePropDefs
+export const fy = getUsagePropName
+export const go = groupNodesByPropName
+export const hM = groupByCommonPrefixSorted
+export const j3 = cleanComponentPropNameForUsage
+export const rB = extractModifiersFromProp
+export const wn = getInstanceIdsForDef
+export const xb = areAllDefsSameTypeAndDefault

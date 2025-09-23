@@ -177,7 +177,7 @@ function createMixinNodes() {
     get sharedSymbolVersion() {
       this.setGlobalNodeID();
       let e = this.bindings.NodeTsApi.getSharedSymbolVersion(this.sceneGraph.nodeContext);
-      return e && e !== F7.INVALID ? e : null;
+      return e && e !== 'INVALID' ? e : null;
     }
     getSharedSymbolVersion() {
       this.setGlobalNodeID();

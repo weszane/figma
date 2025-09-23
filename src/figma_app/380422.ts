@@ -24,7 +24,7 @@ import { F as _$$F } from "../905/84606";
 import { Y } from "../905/411989";
 import { lX } from "../figma_app/588397";
 import { K as _$$K } from "../905/275787";
-import { kK } from "../figma_app/144974";
+import { shouldHideRecents } from "../figma_app/144974";
 import { WP } from "../905/198599";
 import { s as _$$s2 } from "../905/169089";
 import { dd } from "../figma_app/604494";
@@ -68,7 +68,7 @@ export function $$W0({
   currentSearch && "input-text" === currentSearch.input.type ? Z = currentSearch.input.query : J && (Z = J.name);
   let Q = I ? 12 : 8;
   let ee = !W && !!c;
-  let et = !currentSearch && !kK() && W || currentSearch?.result.status === "loading" || "loading" === X.status;
+  let et = !currentSearch && !shouldHideRecents() && W || currentSearch?.result.status === "loading" || "loading" === X.status;
   if (useEffect(() => {
     N?.(et);
   }, [et, N]), et) return jsxs("div", {
@@ -102,7 +102,7 @@ export function $$W0({
     })]
   });
   if (!currentSearch || "disabled" === currentSearch.result.status) {
-    if (0 === V.length || kK()) return jsx("div", {
+    if (0 === V.length || shouldHideRecents()) return jsx("div", {
       className: cssBuilderInstance.$$if(r, cssBuilderInstance.hFull).$,
       children: jsx(_$$S, {
         fillHeight: r,

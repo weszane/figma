@@ -12,6 +12,6 @@ alwaysApply: true
 - Remove dead code, redundant logic, and unused imports.
 - Follow language and project-specific naming conventions, as well as best practices for code style.
 - Prioritize readability, maintainability, and ease of understanding throughout all refactoring changes.
-- Consider adding comments or documentation to clarify complex logic or important decisions. But add the original code name like (function, variable, class names. etc.) as comments to help trace back to the original code. Also add documenttation comments like JSDoc-style comments for functions and classes.
+- Consider adding comments or documentation to clarify complex logic or important decisions. But add the original code name like (function, variable, class names. etc.) as comments to help trace back to the original code. Also add documenttation comments for functions and classes.
 - Ensure that refactored code maintains the same functionality and behavior as the original.
 - Ensure All code should define with type annotations, make it meaningful and easy to understand. This is called type safety and important!

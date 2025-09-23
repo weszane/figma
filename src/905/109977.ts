@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { Q_ } from "../905/570707";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
 import { isTeamLibrary } from "../figma_app/633080";
 import { We } from "../905/909811";
@@ -73,7 +73,7 @@ export function $$y0(e) {
   } = e;
   let _ = useSelector(_$$h);
   let y = useSelector(e => e.dropdownShown);
-  let [b] = IT(Q_(searchQuery));
+  let [b] = setupResourceAtomHandler(Q_(searchQuery));
   let E = useDispatch();
   if (!searchQuery || "loaded" !== b.status) return null;
   let x = I(b.data?.components.filteredByTeamId, maxShownItems, publishedLibrary);

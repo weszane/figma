@@ -3,7 +3,7 @@ import { filterResources } from "../figma_app/471982";
 import { fk, vb } from "../5430/823351";
 import { getCurrentLocale } from "../figma_app/598412";
 import { communityShelvesQuery } from "../figma_app/188671";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { a as _$$a, z } from "../figma_app/601188";
 import { GS } from "../5430/342380";
 export let $$u0 = 50;
@@ -33,7 +33,7 @@ export function $$m1(e, t, r) {
     isFetchingNextPage: v
   }, {
     fetchNextPage: b
-  }] = IT(_$$a.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
     ...vb(_),
     caller: z.CATEGORY,
     pageSize: r,
@@ -44,7 +44,7 @@ export function $$m1(e, t, r) {
   let [{
     data: j,
     status: w
-  }] = IT(communityShelvesQuery(categorySlug));
+  }] = setupResourceAtomHandler(communityShelvesQuery(categorySlug));
   let C = tagSlug || "loaded" !== w ? null : j;
   let L = (C?.shelf_content ?? []).filter(e => "viewer_mode" in e || "is_widget" in e);
   let T = useMemo(() => {

@@ -1,171 +1,305 @@
-import { getSingletonSceneGraph } from "../905/700578";
-import { A } from "../905/970762";
-import { Ye } from "../905/75000";
-import { j3, hM } from "../905/581923";
-import { Au } from "../905/327738";
-import { Confirmation } from "../figma_app/763686";
-import { c as _$$c } from "../905/94678";
-export function $$c0(e, t, i, n = {}) {
-  let s = Ye(t, {
-    enableTsArrays: !1,
-    exposeAllNestedInstances: n.exposeAllNestedInstances,
-    bubbleInstanceSwapProps: !0
-  });
-  if (!s) throw Error(`Could not get typeInfo for component ${t}`);
-  return A(e, s, i, {
-    enableTsArrays: !1,
-    exposeAllNestedInstances: n.exposeAllNestedInstances,
-    bubbleInstanceSwapProps: !0
-  });
+import { getComponentInfoById } from '../905/75000'
+import { getSymbolOrStateGroupNode } from '../905/94678'
+import { findNodesByCriteriaGUIDs } from '../905/327738'
+import { cleanComponentPropNameForUsage, groupByCommonPrefixSorted } from '../905/581923'
+import { getSingletonSceneGraph } from '../905/700578'
+import { filterComponentProps } from '../905/970762'
+import { Confirmation } from '../figma_app/763686'
+
+export function usagePropsToRawProps(
+  rawProps: Record<string, any>,
+  componentId: string,
+  componentInfo: any,
+  options: { exposeAllNestedInstances?: boolean } = {},
+): Record<string, any> {
+  const typeInfo = getComponentInfoById(componentId, {
+    enableTsArrays: false,
+    exposeAllNestedInstances: options.exposeAllNestedInstances,
+    bubbleInstanceSwapProps: true,
+  })
+
+  if (!typeInfo) {
+    throw new Error(`Could not get typeInfo for component ${componentId}`)
+  }
+
+  return filterComponentProps(rawProps, typeInfo, componentInfo, {
+    enableTsArrays: false,
+    exposeAllNestedInstances: options.exposeAllNestedInstances,
+    bubbleInstanceSwapProps: true,
+  })
 }
-export const R = $$c0;
-export const Y = function e(t, i) {
-  let r = getSingletonSceneGraph();
-  if ("INSTANCE" !== t.type || !t.symbolId) throw Error(`Expected INSTANCE, got ${t.type} for node ${t.guid}`);
-  let c = Ye(t.symbolId, {
-    enableTsArrays: i.enableTsArrays,
-    noTypeInfoCache: i.noTypeInfoCache,
-    bubbleInstanceSwapProps: i.bubbleInstanceSwapProps,
-    exposeAllNestedInstances: i.exposeAllNestedInstances
-  });
-  if (!c) throw Error(`Could not get typeInfo for component ${t.symbolId}`);
-  let u = Au(t.guid, {
-    types: ["INSTANCE"]
-  });
-  let p = {};
-  u.forEach(e => {
-    let t = e.componentPropertyReferences();
-    "mainComponent" in t && (p[t.mainComponent] = e.visible);
-  });
-  let m = {};
-  for (let [e, i] of Object.entries(t.componentProperties(Confirmation.YES))) m[j3(e)] = i;
-  let h = {};
-  function g({
-    devFriendlyProp: e,
-    value: t,
-    defaultValue: n,
-    componentProp: r
-  }) {
-    if (i.includeDefaultValues || void 0 === n || t !== n) {
-      if ("ARRAY" === e.type) {
-        if (i.enableTsArrays) {
-          let i = h[e.key];
-          let n = Array.isArray(i) ? i : [];
-          h[e.key] = [...n, t];
-        } else h[e.nonArrayKey] = t;
-      } else i.includeVariables && r?.boundVariables?.value ? h[e.key] = r.boundVariables.value : h[e.key] = t;
+
+export function getInstanceNodeProps(
+  instanceNode: any,
+  options: {
+    enableTsArrays?: boolean
+    noTypeInfoCache?: boolean
+    bubbleInstanceSwapProps?: boolean
+    exposeAllNestedInstances?: boolean
+    includeDefaultValues?: boolean
+    includeVariables?: boolean
+    includeCustomImageAndIconProps?: boolean
+  },
+): Record<string, any> {
+  const sceneGraph = getSingletonSceneGraph()
+
+  if (instanceNode.type !== 'INSTANCE' || !instanceNode.symbolId) {
+    throw new Error(`Expected INSTANCE, got ${instanceNode.type} for node ${instanceNode.guid}`)
+  }
+
+  const componentInfo = getComponentInfoById(instanceNode.symbolId, {
+    enableTsArrays: options.enableTsArrays,
+    noTypeInfoCache: options.noTypeInfoCache,
+    bubbleInstanceSwapProps: options.bubbleInstanceSwapProps,
+    exposeAllNestedInstances: options.exposeAllNestedInstances,
+  })
+
+  if (!componentInfo) {
+    throw new Error(`Could not get typeInfo for component ${instanceNode.symbolId}`)
+  }
+
+  const instanceNodes = findNodesByCriteriaGUIDs(instanceNode.guid, {
+    types: ['INSTANCE'],
+  })
+
+  const visibleComponents: Record<string, boolean> = {}
+  instanceNodes.forEach((node) => {
+    const componentRefs = node.componentPropertyReferences()
+    if ('mainComponent' in componentRefs) {
+      visibleComponents[componentRefs.mainComponent] = node.visible
+    }
+  })
+
+  const componentProps: Record<string, any> = {}
+  for (const [propName, propValue] of Object.entries(instanceNode.componentProperties(Confirmation.YES))) {
+    componentProps[cleanComponentPropNameForUsage(propName)] = propValue
+  }
+
+  const resultProps: Record<string, any> = {}
+
+  function addProp({
+    devFriendlyProp,
+    value,
+    defaultValue,
+    componentProp,
+  }: {
+    devFriendlyProp: any
+    value: any
+    defaultValue?: any
+    componentProp?: any
+  }): void {
+    // Skip if not including default values and value equals default
+    if (!options.includeDefaultValues && defaultValue !== undefined && value === defaultValue) {
+      return
+    }
+
+    if (devFriendlyProp.type === 'ARRAY') {
+      if (options.enableTsArrays) {
+        const existingArray = resultProps[devFriendlyProp.key]
+        const arrayValue = Array.isArray(existingArray) ? existingArray : []
+        resultProps[devFriendlyProp.key] = [...arrayValue, value]
+      }
+      else {
+        resultProps[devFriendlyProp.nonArrayKey] = value
+      }
+    }
+    else {
+      if (options.includeVariables && componentProp?.boundVariables?.value) {
+        resultProps[devFriendlyProp.key] = componentProp.boundVariables.value
+      }
+      else {
+        resultProps[devFriendlyProp.key] = value
+      }
     }
   }
-  for (let n of c.parsedDefs) {
-    var f;
-    if ("DERIVED_BOOLEAN" === n.devFriendlyProp.type) continue;
-    let a = "ARRAY" === (f = n.devFriendlyProp).type ? f.nonArrayKey : f.key;
-    let s = m[a];
-    let o = "SIMPLE_CHOICE" === n.devFriendlyProp.type ? n.devFriendlyProp.validOptions : void 0;
-    switch (n.def.type) {
-      case "BOOLEAN":
-      case "TEXT":
-      case "NUMBER":
-        if (!s) continue;
-        g({
-          devFriendlyProp: n.devFriendlyProp,
-          value: s.value,
-          defaultValue: n.def.defaultValue,
-          componentProp: s
-        });
-        break;
-      case "INSTANCE_SWAP":
-        if (!s) continue;
-        if (o && "SIMPLE_CHOICE" === n.devFriendlyProp.type) {
-          let e = _$$c(s.value);
-          if (!e) throw Error("Could not find component for componentProp");
-          if ("SYMBOL" === e.type) {
-            let t = Object.values(e.variantProperties ?? {})[0];
-            -1 !== o.indexOf(t) ? g({
-              devFriendlyProp: n.devFriendlyProp,
-              value: t
-            }) : console.error(`Could not find ${t} in ${JSON.stringify(o)}`);
+
+  for (const parsedDef of componentInfo.parsedDefs) {
+    // Skip derived booleans
+    if (parsedDef.devFriendlyProp.type === 'DERIVED_BOOLEAN') {
+      continue
+    }
+
+    const propKey = parsedDef.devFriendlyProp.type === 'ARRAY'
+      ? parsedDef.devFriendlyProp.nonArrayKey
+      : parsedDef.devFriendlyProp.key
+
+    const componentProp = componentProps[propKey]
+    const validOptions = parsedDef.devFriendlyProp.type === 'SIMPLE_CHOICE'
+      ? parsedDef.devFriendlyProp.validOptions
+      : undefined
+
+    switch (parsedDef.def.type) {
+      case 'BOOLEAN':
+      case 'TEXT':
+      case 'NUMBER':
+        if (!componentProp)
+          continue
+
+        addProp({
+          devFriendlyProp: parsedDef.devFriendlyProp,
+          value: componentProp.value,
+          defaultValue: parsedDef.def.defaultValue,
+          componentProp,
+        })
+        break
+
+      case 'INSTANCE_SWAP':
+        if (!componentProp)
+          continue
+
+        if (validOptions && parsedDef.devFriendlyProp.type === 'SIMPLE_CHOICE') {
+          const symbolNode = getSymbolOrStateGroupNode(componentProp.value)
+          if (!symbolNode) {
+            throw new Error('Could not find component for componentProp')
           }
-        } else g({
-          devFriendlyProp: n.devFriendlyProp,
-          value: s.value,
-          defaultValue: n.def.defaultValue
-        });
-        break;
-      case "VARIANT":
-        if (!s) continue;
-        if (o && "SIMPLE_CHOICE" === n.devFriendlyProp.type) {
-          let e = s.value;
-          -1 !== o.indexOf(e) ? g({
-            devFriendlyProp: n.devFriendlyProp,
-            value: s.value
-          }) : console.error(`Could not find ${e} in ${JSON.stringify(o)}`);
-        } else g({
-          devFriendlyProp: n.devFriendlyProp,
-          value: s.value,
-          defaultValue: n.def.defaultValue
-        });
-        break;
-      case "GROUPED_INSTANCE_SWAP":
-        if (!s || !i.includeCustomImageAndIconProps) continue;
-        let l = m[a].value;
-        if (i.includeDefaultValues || n.def.defaultValue !== l) {
-          let e = r.get(l);
-          if (!e) throw Error(`Could not find icon symbol ${l}`);
-          if (!p[n.rawProp]) continue;
-          let t = {
-            description: e.name
-          };
-          g({
-            devFriendlyProp: n.devFriendlyProp,
-            value: t
-          });
-        }
-        break;
-      case "IMAGE":
-        if (i.includeCustomImageAndIconProps) {
-          let e = {
-            id: "0"
-          };
-          g({
-            devFriendlyProp: n.devFriendlyProp,
-            value: e
-          });
-          continue;
-        }
-        let c = n.def.guidByParentComponentId[t.symbolId];
-        if (c) {
-          let e = r.get(c);
-          let i = e?.getSublayerIdForInstanceOfSymbol(t.guid);
-          if (i) {
-            let e = r.get(i);
-            let t = e && "fills" in e && e.fills.some(e => "IMAGE" === e.type) && "true" === e.getSharedPluginData("jsx", "isImage") && e.fills.find(e => "IMAGE" === e.type) && (e.getSharedPluginData("jsx", "description") || e.getSharedPluginData("jsx", "altText")) || null;
-            t && g({
-              devFriendlyProp: n.devFriendlyProp,
-              value: {
-                description: t
-              }
-            });
+
+          if (symbolNode.type === 'SYMBOL') {
+            const variantProp = Object.values(symbolNode.variantProperties ?? {})[0]
+            if (validOptions.includes(variantProp)) {
+              addProp({
+                devFriendlyProp: parsedDef.devFriendlyProp,
+                value: variantProp,
+              })
+            }
+            else {
+              console.error(`Could not find ${variantProp} in ${JSON.stringify(validOptions)}`)
+            }
           }
         }
-        break;
-      case "NESTED_INSTANCE":
-        let u = n.def.guidByParentComponentId[t.symbolId];
-        if (!u) continue;
-        let h = r.developerFriendlyIdFromGuid(t.guid);
-        let _ = h.startsWith("I") ? `${h};` : `I${h};`;
-        let A = `${_}${u}`;
-        let y = r.guidFromDeveloperFriendlyId(A);
-        let b = r.get(y);
-        if (b) {
-          let t = e(b, i);
-          Object.keys(t).length > 0 && g({
-            devFriendlyProp: n.devFriendlyProp,
-            value: t
-          });
+        else {
+          addProp({
+            devFriendlyProp: parsedDef.devFriendlyProp,
+            value: componentProp.value,
+            defaultValue: parsedDef.def.defaultValue,
+          })
         }
+        break
+
+      case 'VARIANT':
+        if (!componentProp)
+          continue
+
+        if (validOptions && parsedDef.devFriendlyProp.type === 'SIMPLE_CHOICE') {
+          const propValue = componentProp.value
+          if (validOptions.includes(propValue)) {
+            addProp({
+              devFriendlyProp: parsedDef.devFriendlyProp,
+              value: propValue,
+            })
+          }
+          else {
+            console.error(`Could not find ${propValue} in ${JSON.stringify(validOptions)}`)
+          }
+        }
+        else {
+          addProp({
+            devFriendlyProp: parsedDef.devFriendlyProp,
+            value: componentProp.value,
+            defaultValue: parsedDef.def.defaultValue,
+          })
+        }
+        break
+
+      case 'GROUPED_INSTANCE_SWAP':
+        if (!componentProp || !options.includeCustomImageAndIconProps)
+          continue
+
+        const iconId = componentProps[propKey].value
+        if (options.includeDefaultValues || parsedDef.def.defaultValue !== iconId) {
+          const iconSymbol = sceneGraph.get(iconId)
+          if (!iconSymbol) {
+            throw new Error(`Could not find icon symbol ${iconId}`)
+          }
+
+          if (!visibleComponents[parsedDef.rawProp])
+            continue
+
+          const iconData = {
+            description: iconSymbol.name,
+          }
+
+          addProp({
+            devFriendlyProp: parsedDef.devFriendlyProp,
+            value: iconData,
+          })
+        }
+        break
+
+      case 'IMAGE':
+        if (options.includeCustomImageAndIconProps) {
+          const imageData = {
+            id: '0',
+          }
+
+          addProp({
+            devFriendlyProp: parsedDef.devFriendlyProp,
+            value: imageData,
+          })
+          continue
+        }
+
+        const imageGuid = parsedDef.def.guidByParentComponentId[instanceNode.symbolId]
+        if (imageGuid) {
+          const imageNode = sceneGraph.get(imageGuid)
+          const sublayerId = imageNode?.getSublayerIdForInstanceOfSymbol(instanceNode.guid)
+
+          if (sublayerId) {
+            const sublayerNode = sceneGraph.get(sublayerId)
+            const imageDescription = sublayerNode
+              && 'fills' in sublayerNode
+              && sublayerNode.fills.some(fill => fill.type === 'IMAGE')
+              && sublayerNode.getSharedPluginData('jsx', 'isImage') === 'true'
+              && sublayerNode.fills.find(fill => fill.type === 'IMAGE')
+              && (sublayerNode.getSharedPluginData('jsx', 'description') || sublayerNode.getSharedPluginData('jsx', 'altText'))
+              || null
+
+            if (imageDescription) {
+              addProp({
+                devFriendlyProp: parsedDef.devFriendlyProp,
+                value: {
+                  description: imageDescription,
+                },
+              })
+            }
+          }
+        }
+        break
+
+      case 'NESTED_INSTANCE':
+        const nestedGuid = parsedDef.def.guidByParentComponentId[instanceNode.symbolId]
+        if (!nestedGuid)
+          continue
+
+        const devFriendlyId = sceneGraph.developerFriendlyIdFromGuid(instanceNode.guid)
+        const prefix = devFriendlyId.startsWith('I') ? `${devFriendlyId};` : `I${devFriendlyId};`
+        const fullDevId = `${prefix}${nestedGuid}`
+        const nestedNodeGuid = sceneGraph.guidFromDeveloperFriendlyId(fullDevId)
+        const nestedNode = sceneGraph.get(nestedNodeGuid)
+
+        if (nestedNode) {
+          // Note: This recursive call uses the original function name 'e'
+          const nestedProps = getInstanceNodeProps(nestedNode, options)
+          if (Object.keys(nestedProps).length > 0) {
+            addProp({
+              devFriendlyProp: parsedDef.devFriendlyProp,
+              value: nestedProps,
+            })
+          }
+        }
+        break
     }
   }
-  if (i.enableTsArrays) for (let [e, t] of Object.entries(hM(Object.keys(h)))) for (let i of (h[e] = t.map(e => h[e]), t)) delete h[i];
-  return h;
-};
+
+  // Group array properties if enabled
+  if (options.enableTsArrays) {
+    const groupedProps = groupByCommonPrefixSorted(Object.keys(resultProps))
+    for (const [groupName, propNames] of Object.entries(groupedProps)) {
+      resultProps[groupName] = propNames.map(name => resultProps[name])
+      for (const propName of propNames) {
+        delete resultProps[propName]
+      }
+    }
+  }
+
+  return resultProps
+}

@@ -1,6 +1,6 @@
 import n from "../vendor/656470";
 import { analyticsEventManager } from "../905/449184";
-import { wD } from "../figma_app/476572";
+import { mergeIntersectingMaps } from "../figma_app/476572";
 import { L } from "../905/950339";
 import { L as _$$L } from "../905/161832";
 import { B, R } from "../905/846153";
@@ -40,7 +40,7 @@ export class $$c0 {
           matches: [r]
         });
       }
-      t = t ? wD(t, e, (e, t, r) => ({
+      t = t ? mergeIntersectingMaps(t, e, (e, t, r) => ({
         object: e,
         matches: t.matches.concat(r.matches)
       })) : e;

@@ -26,7 +26,7 @@ import { h as _$$h3 } from '../905/123399';
 import { A as _$$A3 } from '../905/126947';
 import { setupAutofocusHandler } from '../905/128376';
 import { c as _$$c2 } from '../905/144429';
-import { A as _$$A6 } from '../905/150554';
+import { getAutoSuggestResults } from '../905/150554';
 import { showModalHandler } from '../905/156213';
 import { UpsellModalType } from '../905/165519';
 import { U as _$$U3 } from '../905/169553';
@@ -36,7 +36,7 @@ import { X7 } from '../905/193529';
 import { h as _$$h5 } from '../905/200386';
 import { N as _$$N } from '../905/201779';
 import { H as _$$H2 } from '../905/203408';
-import { I as _$$I2 } from '../905/203573';
+import { AutoSuggestSessionManager } from '../905/203573';
 import { n as _$$n } from '../905/221510';
 import { y as _$$y3 } from '../905/225297';
 import { nt as _$$nt } from '../905/226610';
@@ -185,7 +185,7 @@ import { N as _$$N7 } from '../figma_app/240060';
 import { j6 } from '../figma_app/243025';
 import { W7 } from '../figma_app/251115';
 import { Sd } from '../figma_app/253220';
-import { qd, YQ } from '../figma_app/257779';
+import { ContextType, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { gn } from '../figma_app/322845';
 import { tz as _$$tz, Kx, lk, Lw, pe, Pq, rx, SV } from '../figma_app/342355';
@@ -193,7 +193,7 @@ import { toggleFigmentDebugger } from '../figma_app/347406';
 import { c1 } from '../figma_app/357047';
 import { ce } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
-import { k1 } from '../figma_app/407767';
+import { getAnticipationConfig } from '../figma_app/407767';
 import { cortexAPI } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
@@ -226,7 +226,7 @@ import { Fn, OO, qM } from '../figma_app/913518';
 import { bb } from '../figma_app/926950';
 import { Ay as _$$Ay3 } from '../figma_app/948389';
 import { db } from '../figma_app/967873';
-import { O as _$$O5 } from '../figma_app/984498';
+import { AutoSuggestAnalyticsLogger } from '../figma_app/984498';
 import { E as _$$E6 } from '../figma_app/999099';
 let A = memo(e => {
   return jsx('svg', {
@@ -3217,7 +3217,7 @@ function iY(e) {
   let a = useSubscribedLibraryKeys();
   let [s, o] = useState(0);
   let l = {
-    ...k1(),
+    ...getAnticipationConfig(),
     loggerConfig: {
       logFunnelEvents: !1,
       logTimers: !1,
@@ -3273,16 +3273,16 @@ function iY(e) {
           });
           return t;
         }(i);
-        let n = new _$$O5({
-          analyticsData: YQ,
+        let n = new AutoSuggestAnalyticsLogger({
+          analyticsData: DEFAULT_SEARCH_CONTEXT,
           config: e,
-          entryPoint: qd.EVAL
+          entryPoint: ContextType.EVAL
         });
         let s = new AbortController();
-        let o = new _$$I2(ComponentPanelTab.COMPONENTS, s);
+        let o = new AutoSuggestSessionManager(ComponentPanelTab.COMPONENTS, s);
         let l = new iq(h, t, e);
         await Promise.all(t.map(async t => {
-          let i = await _$$A6({
+          let i = await getAutoSuggestResults({
             openFileKey: r,
             targetNode: t.targetNode,
             topLevelNode: t.topLevelNode,

@@ -39,7 +39,7 @@ import { ModalCloseButton } from "../905/17223";
 import { ButtonSecondary } from "../figma_app/637027";
 import { Be } from "../905/172516";
 import { incrementReconnectCounter } from "../figma_app/314264";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { J as _$$J } from "../905/915227";
 import { Yq } from "../figma_app/305244";
 import { z4 } from "../905/37051";
@@ -384,7 +384,7 @@ export class $$eu0 {
   async showRestoreComponentDialog(e) {
     let [t] = await Promise.all([getFullscreenViewFile(this.store), usedComponentsPromise]);
     let i = this.store.getState();
-    let n = atomStoreManager.get(qp);
+    let n = atomStoreManager.get(filesByLibraryKeyAtom);
     if (t) {
       let r = findLibraryNameForAsset(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
       t.canEdit ? this.store.dispatch(showModalHandler({

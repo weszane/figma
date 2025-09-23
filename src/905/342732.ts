@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { setAssetsSearchQuery, setAssetsSearchOptions } from "../905/879323";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { tq, g_, qi } from "../905/225265";
@@ -12,7 +12,7 @@ import { Z } from "../905/387928";
 import { YG } from "../905/921418";
 import { UQ } from "../figma_app/807786";
 export async function $$f1(e, t, i, n = {}) {
-  return (await Z()) ? await tq(e, t, i, n) : await YG.computeResultsReduxSearchTypeHelper(e, t, atomStoreManager.get(openFileAtom)?.editorType === FFileType.DESIGN, atomStoreManager.get(qp), n.sessionId ?? null, g_[i], n.queryId, n.preferLocal, n.libraryKeyBackingSelectedItems, n.selectedItems);
+  return (await Z()) ? await tq(e, t, i, n) : await YG.computeResultsReduxSearchTypeHelper(e, t, atomStoreManager.get(openFileAtom)?.editorType === FFileType.DESIGN, atomStoreManager.get(filesByLibraryKeyAtom), n.sessionId ?? null, g_[i], n.queryId, n.preferLocal, n.libraryKeyBackingSelectedItems, n.selectedItems);
 }
 export function $$_0(e) {
   let t = useSelector(UQ);

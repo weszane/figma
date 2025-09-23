@@ -21,7 +21,7 @@ import { uQ, NM } from "../figma_app/311375";
 import { getCurrentFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
-import { r as _$$r } from "../905/955316";
+import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { getFullscreenFileKey } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { useTeamPlanPublicInfo } from "../figma_app/465071";
@@ -588,7 +588,7 @@ export function $$X0() {
   } = function (e) {
     let [t, s] = useState([]);
     let n = selectCurrentUser();
-    let r = _$$r(() => function (e, t) {
+    let r = executeInIgnoreUndoRedoScope(() => function (e, t) {
       if (null == Fullscreen) throw Error("Fullscreen not loaded");
       let s = e.getInternalCanvas();
       if (!s) return null;

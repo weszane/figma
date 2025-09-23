@@ -45,7 +45,7 @@ import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979
 import { D as _$$D2 } from "../905/274925";
 import { DropdownEnableState } from "../figma_app/188152";
 import { getUserId, selectUser } from "../905/372672";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { isEmailAllowed, hasValidId, getCurrentUserOrg } from "../figma_app/336853";
 import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642025";
 import { getPluginVersion, pluginMetadata, validateAndResizeIconImage, getFirstFileOrThrow, getFullscreenViewEditorType, getPublishingRole, hasRoleOrOrgChanged, getLocalFileId, getOrgRole, isDevModePlugin, getPublishingErrors, validatePublishingData, validatePublishingDataLengths, getPublishedResourceOrNull, getPublishedResource, getPublishingData } from "../figma_app/300692";
@@ -393,7 +393,7 @@ function e2({
   removeFileCallback: c
 }) {
   let u = getUserId() ?? void 0;
-  let [p] = IT(e1(s?.key || ""));
+  let [p] = setupResourceAtomHandler(e1(s?.key || ""));
   let m = p.data;
   let g = s?.editor_type ? mapFileTypeToEnum(s.editor_type) : null;
   let f = getFeatureFlags().ext_plugin_publish_rearch ? _$$A5 : _$$A6;
@@ -3478,11 +3478,11 @@ let $$iq0 = registerModal(function (e) {
   let [{
     status: i,
     data: n
-  }] = IT(se());
+  }] = setupResourceAtomHandler(se());
   let [{
     status: a,
     data: s
-  }] = IT(fd());
+  }] = setupResourceAtomHandler(fd());
   let o = !!e.publishedPluginId;
   let l = _$$A2(e.publishedPluginId ?? "", o);
   return "loading" !== i && "loading" !== a && l.loaded ? jsx(iY, {

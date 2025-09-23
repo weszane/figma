@@ -48,8 +48,8 @@ import { e_ as _$$e_ } from "../figma_app/803787";
 import { PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { registerModal } from "../905/102752";
-import { CK } from "../figma_app/517115";
-import { tM as _$$tM, k1 } from "../figma_app/984498";
+import { useUUIDSubscription } from "../figma_app/517115";
+import { AUTO_SUGGEST_EVENT_PREFIX, trackComponentInserted } from "../figma_app/984498";
 import { _9 } from "../figma_app/76115";
 import { k as _$$k2 } from "../905/540025";
 import { H as _$$H2 } from "../905/991973";
@@ -727,7 +727,7 @@ export function $$tu1({
   }, [ep, ef]);
   let ej = Hu(e.library_key);
   let ev = Nv(!0);
-  let eS = CK();
+  let eS = useUUIDSubscription();
   let ek = useCallback(() => {
     if ("loaded" !== K.status) return;
     let r = fullscreenValue.getViewportInfo();
@@ -781,7 +781,7 @@ export function $$tu1({
       searchQuery: s,
       sectionPosition: h
     });
-    O !== _$$tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
+    O !== AUTO_SUGGEST_EVENT_PREFIX ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
       ...i,
       libraryType: ej,
       position: h,
@@ -790,7 +790,7 @@ export function $$tu1({
       sessionId: t ?? void 0,
       entryPoint: "assets-panel",
       componentSuggestionSessionId: eS
-    }) : k1({
+    }) : trackComponentInserted({
       ...i,
       position: h
     });

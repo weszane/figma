@@ -34,7 +34,7 @@ import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { fl, Ht, Pd } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { J as _$$J } from "../905/225412";
 import { h as _$$h2 } from "../905/65944";
 import { AN } from "../905/203369";
@@ -711,14 +711,14 @@ function eb({
           alias: n
         }
       };
-      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         l({
           ...s,
           [t]: r
         });
       });
       oz(`GRID_${t.slice(0, -3).toUpperCase()}`, r);
-    } else _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+    } else executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       l({
         ...s,
         [t]: void 0

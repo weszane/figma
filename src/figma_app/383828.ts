@@ -12,7 +12,7 @@ import { FDocumentType } from "../905/862883";
 import { D } from "../figma_app/335489";
 import { cP, kz, zb } from "../figma_app/264776";
 import { compareWithGeneratedKey } from "../905/709171";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { QL } from "../905/557338";
 export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
   let f = scopeAwareFunction.user("swap-to-related-symbol", (e, n) => {
@@ -123,7 +123,7 @@ export function $$T3(e, t, r) {
     publishID,
     libraryKey
   } = n;
-  let o = atomStoreManager.get(qp)[libraryKey];
+  let o = atomStoreManager.get(filesByLibraryKeyAtom)[libraryKey];
   let l = getPublishedAssetsForLibrary(t.publishedByLibraryKey.components, {
     library_key: libraryKey,
     team_id: o?.team_id ?? null

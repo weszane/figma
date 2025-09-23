@@ -1,5 +1,5 @@
 import { createErrorAccumulator } from '../905/18160';
-import { B as _$$B } from '../905/94678';
+import { collectSymbolsAndStateGroups } from '../905/94678';
 import { toArray2x3, toMatrix2x3 } from '../905/117560';
 import { bytesToHex, sha1BytesFromHex, sha1Hex, sha1HexFromString } from '../905/125019';
 import { filterFieldGroups } from '../905/154079';
@@ -71,7 +71,7 @@ function y(e, t) {
   let i = t.getCurrentPage();
   let n = t.getInternalCanvas();
   if (i && n) {
-    for (let r of _$$B([i, n], {
+    for (let r of collectSymbolsAndStateGroups([i, n], {
       followInstances: !0
     })) {
       if (g(r).toLowerCase() === e.toLowerCase()) return b(r.guid, t);
@@ -7648,7 +7648,7 @@ export async function $$rr26(e) {
     types: ['INSTANCE', 'COMPONENT']
   }).map(t => e.sceneGraph.get(t)).filter(Boolean);
   if (t.length === 0) return '';
-  let i = _$$B(t, {
+  let i = collectSymbolsAndStateGroups(t, {
     followInstances: !0
   });
   i.reverse();
@@ -8242,7 +8242,7 @@ export function $$rg40(e, t = {}) {
     }
     let l = i.ignoreFetchingComponentData ? {} : function (e, t, i) {
       let n = {};
-      for (let o of _$$B([e], {
+      for (let o of collectSymbolsAndStateGroups([e], {
         followInstances: !0
       })) {
         let e = n6({

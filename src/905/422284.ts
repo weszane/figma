@@ -32,7 +32,7 @@ import { SelectorType } from "../figma_app/707808";
 import { teamAPIClient } from "../905/834575";
 import { l as _$$l } from "../905/26554";
 import { on } from "../figma_app/292324";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { mapToEditorType } from "../figma_app/300692";
 import { jr } from "../905/792802";
@@ -113,7 +113,7 @@ let $$H = createOptimistThunk((e, t, {
       let a = "SYMBOL" === t.type;
       let s = t.parentNode;
       if (n) Fullscreen.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) usedComponentsPromise.then(async () => {
-        let t = atomStoreManager.get(qp);
+        let t = atomStoreManager.get(filesByLibraryKeyAtom);
         let n = findLibraryNameForAsset(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
         let r = await getFullscreenViewFile(e);
         r?.canEdit ? e.dispatch(showModalHandler({

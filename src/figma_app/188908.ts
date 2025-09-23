@@ -6,8 +6,8 @@ import { analyticsEventManager } from "../905/449184";
 import { NX, k9 } from "../figma_app/777207";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
-import { r6, CK } from "../figma_app/517115";
-import { tM, k1 } from "../figma_app/984498";
+import { getUUID, useUUIDSubscription } from "../figma_app/517115";
+import { AUTO_SUGGEST_EVENT_PREFIX, trackComponentInserted } from "../figma_app/984498";
 import { I } from "../figma_app/130633";
 import { k } from "../905/540025";
 import { lj } from "../905/991973";
@@ -33,7 +33,7 @@ export function $$b9() {
         fileTeamId: r?.teamId ?? void 0,
         fileOrgId: r?.parentOrgId ?? void 0,
         entrypoint: e,
-        componentSuggestionSessionId: r6()
+        componentSuggestionSessionId: getUUID()
       });
       let l = atomStoreManager.get(siteKitState).libraryKeys;
       libraryKey && l.length > 0 && l.includes(libraryKey) && "Library" === view && ["libraryCard", "settingsMenu"].includes(e) && analyticsEventManager.trackDefinedEvent("assets_panel.view_site_kit", {
@@ -193,7 +193,7 @@ export function $$L4(e) {
   let t = Nv(!0);
   let r = k();
   let i = useCurrentFileKey();
-  let s = CK();
+  let s = useUUIDSubscription();
   return useCallback(n => {
     let {
       type,
@@ -212,7 +212,7 @@ export function $$L4(e) {
       ...e,
       ...h
     });
-    e.source !== tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
+    e.source !== AUTO_SUGGEST_EVENT_PREFIX ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
       ..._,
       ...h,
       assetType: type,
@@ -222,7 +222,7 @@ export function $$L4(e) {
       sessionId: searchSessionId,
       entryPoint: "assets-panel",
       componentSuggestionSessionId: s
-    }) : k1({
+    }) : trackComponentInserted({
       assetType: type,
       assetKey: _.assetKey,
       libraryKey: _.assetLibraryKey

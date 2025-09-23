@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { permissionScopeHandler } from '../905/189185';
 import { isInvalidValue, MIXED_MARKER } from '../905/216495';
 import { getI18nString } from '../905/303541';
-import { bj } from '../905/420347';
+import { useLibraries } from '../905/420347';
 import { handleAtomEvent } from '../905/502364';
 import { Vector2D } from '../905/512402';
 import { j as _$$j } from '../905/521149';
@@ -446,7 +446,7 @@ export function $$eu10() {
   return useMemo(() => ec(t ? e : null, n), [e, n, t]);
 }
 export function $$em21(e) {
-  let t = bj([_$$l(e)]);
+  let t = useLibraries([_$$l(e)]);
   let n = t.data;
   return {
     libraries: n,

@@ -14,7 +14,7 @@ import { isFigmakeFullscreenView } from "../figma_app/552876";
 import { P } from "../905/35881";
 import { n as _$$n } from "../905/347702";
 import { PE, W7 } from "../figma_app/251115";
-import { C7 } from "../figma_app/144974";
+import { isAssetSuggestionsEnabled } from "../figma_app/144974";
 import { p9, $7 } from "../905/509613";
 let T = atom(!1);
 let I = atom(null);
@@ -69,7 +69,7 @@ export function $$O6() {
     let e = atomStoreManager.get(p9);
     return !!$7("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
   }();
-  return $$R3() && e && C7();
+  return $$R3() && e && isAssetSuggestionsEnabled();
 }
 export function $$R3() {
   let e = debugState.getState().selectedView;

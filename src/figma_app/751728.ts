@@ -8,7 +8,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { kK } from "../figma_app/144974";
+import { shouldHideRecents } from "../figma_app/144974";
 import { s as _$$s2 } from "../905/169089";
 import { x as _$$x } from "../905/773818";
 import { r as _$$r2 } from "../905/45049";
@@ -47,7 +47,7 @@ export function $$w0({
   let j = useCurrentPrivilegedPlan("FragmentsGrid").unwrapOr(null);
   let U = j?.name;
   let B = w ? 12 : 8;
-  let G = kK() || !U;
+  let G = shouldHideRecents() || !U;
   if (r?.type === "recents" && null === r.recents || k?.result.status === "loading" || y) return jsxs("div", {
     children: [g && jsx(R, {
       title: g.title,

@@ -1,204 +1,310 @@
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import { analyticsEventManager } from "../905/449184";
-import { debugState } from "../905/407919";
-import { logError, logInfo } from "../905/714362";
-import { editorTypeAtom } from "../figma_app/976749";
-import { fullscreenValue } from "../figma_app/455680";
-import { openFileKeyAtom } from "../figma_app/516028";
-import { SubscribedLibrariesAtom } from "../figma_app/155728";
-import { FEditorType } from "../figma_app/53721";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { FDocumentType } from "../905/862883";
-import { z } from "../905/150554";
-import { qd } from "../figma_app/257779";
-import { k1, OD, x_, ay, ZU, w3 } from "../figma_app/407767";
-import { fX, Z9 } from "../figma_app/663669";
-import { O as _$$O } from "../figma_app/984498";
-async function v({
-  topLevelNode: e,
-  symbolNode: t,
-  parentNode: i,
-  insertedNode: n,
-  insertedLocation: c,
-  preComputedThumbnails: y,
-  sourceForTracking: v,
-  contextComponentUsage: I
-}) {
-  if (getFeatureFlags().anticipation_suggestions_shadow) try {
-    let r = atomStoreManager.get(openFileKeyAtom) ?? void 0;
-    let l = atomStoreManager.get(editorTypeAtom);
-    if (!r || l !== FEditorType.Design) return;
-    let E = atomStoreManager.get(SubscribedLibrariesAtom);
-    if (!E) return;
-    let x = new Set(E.map(e => e.libraryKey));
-    let S = t.componentKey ?? t.stateGroupKey;
-    let w = t.sourceLibraryKey;
-    let C = !!w && x.has(w);
-    let T = w && t.publishID;
-    if (!S || !C || !T) return;
-    let k = debugState.getState().recentlyUsed.libraryItems[FDocumentType.Design].findIndex(e => e.key === S);
-    let R = k1();
-    R.numResults = null;
-    let N = new _$$O({
-      config: R,
-      entryPoint: qd.SHADOW_SUGGESTIONS
-    });
-    let {
-      suggestions
-    } = await z({
-      targetNode: e,
-      topLevelNode: e,
-      openFileKey: r,
-      subscribedLibraryKeys: x,
-      config: R,
-      preComputedThumbnails: y,
-      logger: N,
-      contextComponentUsage: I
-    });
-    let O = suggestions.findIndex(e => e.type === PrimaryWorkflowEnum.COMPONENT && e.component_key === S || e.type === PrimaryWorkflowEnum.STATE_GROUP && e.key === S);
-    let D = JSON.stringify(suggestions.map(e => ({
-      type: e.type,
-      key: e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.key : void 0,
-      libraryKey: e.library_key,
-      suggestionSource: e.suggestionSource
-    })));
-    analyticsEventManager.trackDefinedEvent("auto_suggest.suggestion_shadow_read", {
-      fileKey: r,
-      version: OD(),
-      thumbnailGenerationDuration: y.thumbnailGenerationDuration,
-      sourceForTracking: v,
-      suggestions: D,
-      numSuggestions: suggestions.length,
-      suggestionsRank: O,
-      recentsRank: k,
-      insertedNodeGuid: n.guid,
-      insertedLocation: c ? x_(c) : "",
-      insertedNodeType: n?.type,
-      insertedNodeBounds: ay(n?.absoluteBoundingBox),
-      parentNodeGuid: i?.guid,
-      parentNodeType: i?.type,
-      parentNodeBounds: ay(i?.absoluteBoundingBox),
-      topLevelNodeGuid: e?.guid,
-      topLevelNodeBounds: ay(e?.absoluteBoundingBox),
-      insertedAssetKey: S,
-      insertedAssetLibraryKey: w
-    });
-  } catch (e) {
-    logError("auto_suggest", "shadow: error logging shadow read suggestions", {
-      error: e
-    });
-  }
+import { getAutoSuggestResultsInBackground } from '../905/150554'
+import { debugState } from '../905/407919'
+import { analyticsEventManager } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { getSingletonSceneGraph } from '../905/700578'
+import { logError, logInfo } from '../905/714362'
+import { FDocumentType } from '../905/862883'
+import { atomStoreManager } from '../figma_app/27355'
+import { FEditorType } from '../figma_app/53721'
+import { SubscribedLibrariesAtom } from '../figma_app/155728'
+import { ContextType } from '../figma_app/257779'
+import { analyzeComponentUsage, generateThumbnailWithDuration, getAnticipationConfig, getDefaultConfigValue, stringifyPoint, stringifyRectangle } from '../figma_app/407767'
+import { fullscreenValue } from '../figma_app/455680'
+import { openFileKeyAtom } from '../figma_app/516028'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { getBestFrame, getFrameSelectionConfig } from '../figma_app/663669'
+import { editorTypeAtom } from '../figma_app/976749'
+import { AutoSuggestAnalyticsLogger } from '../figma_app/984498'
+
+interface ShadowSuggestionParams {
+  topLevelNode: any
+  symbolNode: any
+  parentNode: any
+  insertedNode: any
+  insertedLocation: any
+  preComputedThumbnails: any
+  sourceForTracking: string
+  contextComponentUsage: any
 }
-export function $$I2(e, t, i, a) {
-  if (!(!getFeatureFlags().anticipation_suggestions_shadow || !e || a?.startsWith("auto-suggest"))) try {
-    let r = getSingletonSceneGraph();
-    let s = r.get(i);
-    let o = s?.symbolId ? r.get(s.symbolId) : void 0;
-    let d = s?.parentNode;
-    let c = s?.findContainingTopLevelFrameOrSelf();
-    let u = c ? r.get(c) : void 0;
-    if (!s || "INSTANCE" !== s.type || !o || !d || !u) return;
-    if (c !== e.predictedTLFGuid || !e.thumbnail) {
-      logInfo("auto_suggest", "shadow: incorrect tlf prediction", {
-        topLevelNodeGuid: c,
-        preInsertionDataDominantFrameGuid: e.predictedTLFGuid,
-        preInsertionDataThumbnail: e.thumbnail
-      });
-      return;
-    }
-    v({
-      topLevelNode: u,
-      symbolNode: o,
-      parentNode: d,
-      insertedNode: s,
-      insertedLocation: t,
-      preComputedThumbnails: {
-        targetNode: e.thumbnail,
-        topLevelNode: e.thumbnail,
-        thumbnailGenerationDuration: e.thumbnailGenerationDuration
-      },
-      sourceForTracking: `local__${a}`,
-      contextComponentUsage: e.contextComponentUsage
-    });
-  } catch (e) {
-    logError("auto_suggest", "shadow: error logging shadow read suggestions", {
-      error: e
-    });
-  }
+
+interface PreInsertionData {
+  predictedTLFGuid: string
+  thumbnail: any
+  thumbnailGenerationDuration: number
+  contextComponentUsage: any
 }
-export function $$E0() {
-  if (!getFeatureFlags().anticipation_suggestions_shadow) return null;
+
+/**
+ * Process and log shadow suggestion analytics data
+ * (original function: v)
+ */
+async function processShadowSuggestion({
+  topLevelNode,
+  symbolNode,
+  parentNode,
+  insertedNode,
+  insertedLocation,
+  preComputedThumbnails,
+  sourceForTracking,
+  contextComponentUsage,
+}: ShadowSuggestionParams): Promise<void> {
+  if (!getFeatureFlags().anticipation_suggestions_shadow) {
+    return
+  }
+
   try {
-    let e = getSingletonSceneGraph();
-    let t = fullscreenValue.getViewportInfo();
-    let i = fX(t, Z9());
-    let r = i ? e.get(i) : null;
-    let a = r?.findContainingTopLevelFrameOrSelf();
-    let s = a ? e.get(a) : null;
-    if (!r || !s || !a) return null;
-    let {
-      thumbnail,
-      duration
-    } = ZU(r);
-    if (!thumbnail) return null;
-    let d = w3({
-      scene: e,
-      topLevelNode: s
-    });
+    const openFileKey = atomStoreManager.get(openFileKeyAtom) ?? undefined
+    const editorType = atomStoreManager.get(editorTypeAtom)
+
+    if (!openFileKey || editorType !== FEditorType.Design) {
+      return
+    }
+
+    const subscribedLibraries = atomStoreManager.get(SubscribedLibrariesAtom)
+    if (!subscribedLibraries) {
+      return
+    }
+
+    const subscribedLibraryKeys = new Set(subscribedLibraries.map(lib => lib.libraryKey))
+    const componentKey = symbolNode.componentKey ?? symbolNode.stateGroupKey
+    const sourceLibraryKey = symbolNode.sourceLibraryKey
+    const isSubscribedLibrary = !!sourceLibraryKey && subscribedLibraryKeys.has(sourceLibraryKey)
+    const hasPublishID = sourceLibraryKey && symbolNode.publishID
+
+    if (!componentKey || !isSubscribedLibrary || !hasPublishID) {
+      return
+    }
+
+    const recentlyUsedIndex = debugState.getState().recentlyUsed.libraryItems[FDocumentType.Design].findIndex(item => item.key === componentKey)
+
+    const config = getAnticipationConfig()
+    config.numResults = null
+
+    const analyticsLogger = new AutoSuggestAnalyticsLogger({
+      config,
+      entryPoint: ContextType.SHADOW_SUGGESTIONS,
+    })
+
+    const { suggestions } = await getAutoSuggestResultsInBackground({
+      targetNode: topLevelNode,
+      topLevelNode,
+      openFileKey,
+      subscribedLibraryKeys,
+      config,
+      preComputedThumbnails,
+      logger: analyticsLogger,
+      contextComponentUsage,
+    })
+
+    const suggestionRank = suggestions.findIndex(suggestion =>
+      (suggestion.type === PrimaryWorkflowEnum.COMPONENT && suggestion.component_key === componentKey)
+      || (suggestion.type === PrimaryWorkflowEnum.STATE_GROUP && suggestion.key === componentKey),
+    )
+
+    const serializedSuggestions = JSON.stringify(suggestions.map(suggestion => ({
+      type: suggestion.type,
+      key: suggestion.type === PrimaryWorkflowEnum.COMPONENT
+        ? suggestion.component_key
+        : suggestion.type === PrimaryWorkflowEnum.STATE_GROUP
+          ? suggestion.key
+          : undefined,
+      libraryKey: suggestion.library_key,
+      suggestionSource: suggestion.suggestionSource,
+    })))
+
+    analyticsEventManager.trackDefinedEvent('auto_suggest.suggestion_shadow_read', {
+      fileKey: openFileKey,
+      version: getDefaultConfigValue(),
+      thumbnailGenerationDuration: preComputedThumbnails.thumbnailGenerationDuration,
+      sourceForTracking,
+      suggestions: serializedSuggestions,
+      numSuggestions: suggestions.length,
+      suggestionsRank: suggestionRank,
+      recentsRank: recentlyUsedIndex,
+      insertedNodeGuid: insertedNode.guid,
+      insertedLocation: insertedLocation ? stringifyPoint(insertedLocation) : '',
+      insertedNodeType: insertedNode?.type,
+      insertedNodeBounds: stringifyRectangle(insertedNode?.absoluteBoundingBox),
+      parentNodeGuid: parentNode?.guid,
+      parentNodeType: parentNode?.type,
+      parentNodeBounds: stringifyRectangle(parentNode?.absoluteBoundingBox),
+      topLevelNodeGuid: topLevelNode?.guid,
+      topLevelNodeBounds: stringifyRectangle(topLevelNode?.absoluteBoundingBox),
+      insertedAssetKey: componentKey,
+      insertedAssetLibraryKey: sourceLibraryKey,
+    })
+  }
+  catch (error) {
+    logError('auto_suggest', 'shadow: error logging shadow read suggestions', {
+      error,
+    })
+  }
+}
+
+/**
+ * Handle shadow suggestion on node insertion
+ * (original function: $$I2)
+ */
+export function handleShadowSuggestionOnInsertion(
+  preInsertionData: PreInsertionData,
+  insertionPoint: any,
+  nodeGuid: string,
+  sourceAction: string,
+): void {
+  if (!getFeatureFlags().anticipation_suggestions_shadow
+    || !preInsertionData
+    || sourceAction?.startsWith('auto-suggest')) {
+    return
+  }
+
+  try {
+    const sceneGraph = getSingletonSceneGraph()
+    const insertedNode = sceneGraph.get(nodeGuid)
+    const symbolNode = insertedNode?.symbolId ? sceneGraph.get(insertedNode.symbolId) : undefined
+    const parentNode = insertedNode?.parentNode
+    const containingFrameGuid = insertedNode?.findContainingTopLevelFrameOrSelf()
+    const containingFrame = containingFrameGuid ? sceneGraph.get(containingFrameGuid) : undefined
+
+    if (!insertedNode
+      || insertedNode.type !== 'INSTANCE'
+      || !symbolNode
+      || !parentNode
+      || !containingFrame) {
+      return
+    }
+
+    if (containingFrameGuid !== preInsertionData.predictedTLFGuid || !preInsertionData.thumbnail) {
+      logInfo('auto_suggest', 'shadow: incorrect tlf prediction', {
+        topLevelNodeGuid: containingFrameGuid,
+        preInsertionDataDominantFrameGuid: preInsertionData.predictedTLFGuid,
+        preInsertionDataThumbnail: preInsertionData.thumbnail,
+      })
+      return
+    }
+
+    processShadowSuggestion({
+      topLevelNode: containingFrame,
+      symbolNode,
+      parentNode,
+      insertedNode,
+      insertedLocation: insertionPoint,
+      preComputedThumbnails: {
+        targetNode: preInsertionData.thumbnail,
+        topLevelNode: preInsertionData.thumbnail,
+        thumbnailGenerationDuration: preInsertionData.thumbnailGenerationDuration,
+      },
+      sourceForTracking: `local__${sourceAction}`,
+      contextComponentUsage: preInsertionData.contextComponentUsage,
+    })
+  }
+  catch (error) {
+    logError('auto_suggest', 'shadow: error logging shadow read suggestions', {
+      error,
+    })
+  }
+}
+
+/**
+ * Get pre-insertion data for shadow suggestions
+ * (original function: $$E0)
+ */
+export function getShadowSuggestionPreInsertionData(): PreInsertionData | null {
+  if (!getFeatureFlags().anticipation_suggestions_shadow) {
+    return null
+  }
+
+  try {
+    const sceneGraph = getSingletonSceneGraph()
+    const viewportInfo = fullscreenValue.getViewportInfo()
+    const bestFrameGuid = getBestFrame(viewportInfo, getFrameSelectionConfig())
+    const bestFrame = bestFrameGuid ? sceneGraph.get(bestFrameGuid) : null
+    const topLevelFrameGuid = bestFrame?.findContainingTopLevelFrameOrSelf()
+    const topLevelFrame = topLevelFrameGuid ? sceneGraph.get(topLevelFrameGuid) : null
+
+    if (!bestFrame || !topLevelFrame || !topLevelFrameGuid) {
+      return null
+    }
+
+    const { thumbnail, duration } = generateThumbnailWithDuration(bestFrame)
+    if (!thumbnail) {
+      return null
+    }
+
+    const componentUsage = analyzeComponentUsage({
+      scene: sceneGraph,
+      topLevelNode: topLevelFrame,
+    })
+
     return {
-      predictedTLFGuid: a,
+      predictedTLFGuid: topLevelFrameGuid,
       thumbnail,
       thumbnailGenerationDuration: duration,
-      contextComponentUsage: d
-    };
-  } catch (e) {
-    logError("auto_suggest", "shadow: error getting data for shadow read suggestions", {
-      error: e
-    });
-    return null;
+      contextComponentUsage: componentUsage,
+    }
+  }
+  catch (error) {
+    logError('auto_suggest', 'shadow: error getting data for shadow read suggestions', {
+      error,
+    })
+    return null
   }
 }
-export function $$x1(e, t) {
-  if (getFeatureFlags().anticipation_suggestions_shadow) try {
-    let i = getSingletonSceneGraph();
-    let r = i.get(e);
-    let a = i.get(t);
-    let s = r?.symbolId;
-    let o = s ? i.get(s) : null;
-    let l = a?.findContainingTopLevelFrameOrSelf();
-    let d = l ? i.get(l) : null;
-    if (!r || !a || !o || !d) return;
-    let {
-      thumbnail,
-      duration
-    } = ZU(d);
-    if (!thumbnail) return;
-    let p = w3({
-      scene: i,
-      topLevelNode: d
-    });
-    v({
-      topLevelNode: d,
-      symbolNode: o,
-      parentNode: a,
-      insertedNode: r,
-      insertedLocation: void 0,
+
+/**
+ * Handle shadow suggestion on paste operation
+ * (original function: $$x1)
+ */
+export function handleShadowSuggestionOnPaste(nodeGuid: string, parentGuid: string): void {
+  if (!getFeatureFlags().anticipation_suggestions_shadow) {
+    return
+  }
+
+  try {
+    const sceneGraph = getSingletonSceneGraph()
+    const node = sceneGraph.get(nodeGuid)
+    const parent = sceneGraph.get(parentGuid)
+    const symbolId = node?.symbolId
+    const symbolNode = symbolId ? sceneGraph.get(symbolId) : null
+    const containingFrameGuid = parent?.findContainingTopLevelFrameOrSelf()
+    const containingFrame = containingFrameGuid ? sceneGraph.get(containingFrameGuid) : null
+
+    if (!node || !parent || !symbolNode || !containingFrame) {
+      return
+    }
+
+    const { thumbnail, duration } = generateThumbnailWithDuration(containingFrame)
+    if (!thumbnail) {
+      return
+    }
+
+    const componentUsage = analyzeComponentUsage({
+      scene: sceneGraph,
+      topLevelNode: containingFrame,
+    })
+
+    processShadowSuggestion({
+      topLevelNode: containingFrame,
+      symbolNode,
+      parentNode: parent,
+      insertedNode: node,
+      insertedLocation: undefined,
       preComputedThumbnails: {
         targetNode: thumbnail,
         topLevelNode: thumbnail,
-        thumbnailGenerationDuration: duration
+        thumbnailGenerationDuration: duration,
       },
-      sourceForTracking: "paste",
-      contextComponentUsage: p
-    });
-  } catch (e) {
-    logError("auto_suggest", "shadow: error logging shadow read suggestions on paste", {
-      error: e
-    });
+      sourceForTracking: 'paste',
+      contextComponentUsage: componentUsage,
+    })
+  }
+  catch (error) {
+    logError('auto_suggest', 'shadow: error logging shadow read suggestions on paste', {
+      error,
+    })
   }
 }
-export const Dl = $$E0;
-export const QO = $$x1;
-export const cI = $$I2;
+
+export const Dl = getShadowSuggestionPreInsertionData
+export const QO = handleShadowSuggestionOnPaste
+export const cI = handleShadowSuggestionOnInsertion

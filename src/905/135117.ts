@@ -1,10 +1,23 @@
-import { DSACppBindings } from "../figma_app/763686";
-export function $$r0(e, t, i) {
-  DSACppBindings.startDSAAction(e, t);
+import { DSACppBindings } from '../figma_app/763686'
+
+/**
+ * Executes a callback function wrapped with DSA action start and end.
+ * Original: $$r0
+ * @param actionType - The type of DSA action.
+ * @param actionData - Additional data for the DSA action.
+ * @param callback - The function to execute within the DSA action context.
+ */
+export function executeWithDSAAction(actionType: string, actionData: any, callback: () => void): void {
+  DSACppBindings.startDSAAction(actionType, actionData);
   try {
-    i();
+    callback();
   } finally {
     DSACppBindings.endDSAAction();
   }
 }
-export const f = $$r0;
+
+/**
+ * Alias for executeWithDSAAction.
+ * Original: f
+ */
+export const f = executeWithDSAAction;

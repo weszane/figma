@@ -1,10 +1,22 @@
-import { IgnoreUndoRedoBindings } from "../figma_app/763686";
-export function $$$$r0(e) {
-  let t = IgnoreUndoRedoBindings?.openIgnoreUndoRedoScope();
+import { IgnoreUndoRedoBindings } from '../figma_app/763686'
+
+// Original name: $$$$r0
+/**
+ * Executes a given function within an ignore undo redo scope.
+ * Opens the scope, runs the function, and ensures the scope is closed in a finally block.
+ * @param fn - The function to execute within the scope.
+ * @returns The result of the executed function.
+ */
+export function executeInIgnoreUndoRedoScope<T>(fn: () => T): T {
+  const scope = IgnoreUndoRedoBindings?.openIgnoreUndoRedoScope();
   try {
-    return e();
+    return fn();
   } finally {
-    null != t && IgnoreUndoRedoBindings?.closeIgnoreUndoRedoScope(t);
+    if (scope != null) {
+      IgnoreUndoRedoBindings?.closeIgnoreUndoRedoScope(scope);
+    }
   }
 }
-export const r = $$$$r0;
+
+// Original export alias: r
+export const r = executeInIgnoreUndoRedoScope;

@@ -21,7 +21,7 @@ import { EU } from "../figma_app/835219";
 import { Q } from "../905/978641";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { l as _$$l } from "../905/716947";
-import { on } from "../905/420347";
+import { useLibrary } from "../905/420347";
 import { throwTypeError } from "../figma_app/465776";
 import { F } from "../905/171275";
 import { UI3ConditionalWrapper } from "../905/341359";
@@ -48,7 +48,7 @@ function E({
     numComponents,
     librariesIsLoading
   } = function (e) {
-    let t = on(e ? _$$l(e) : null);
+    let t = useLibrary(e ? _$$l(e) : null);
     let r = t.data;
     return {
       numComponents: r && "num_components" in r ? r.num_components : 0,

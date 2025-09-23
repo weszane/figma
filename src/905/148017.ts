@@ -26,7 +26,7 @@ import { o3, nt } from "../905/226610";
 import { Q as _$$Q } from "../figma_app/104130";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { zK, zM } from "../905/182453";
 import { e as _$$e } from "../figma_app/905311";
 import { Kx } from "../905/401389";
@@ -252,7 +252,7 @@ class ea extends PureComponent {
         nodeIds: Object.keys(this.props.sceneGraphSelection).slice(0, 50),
         layoutType: t?.[e] ? t[e]?.pattern === "GRID" ? "grid" : t[e]?.axis === "X" ? "columns" : "rows" : null
       });
-      _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
+      executeWithDSAAction(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
         this.props.onChange(t.filter((t, i) => i !== e));
       });
       fullscreenValue.deselectProperty();

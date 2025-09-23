@@ -22,7 +22,7 @@ import { r as _$$r, F as _$$F } from "../905/336143";
 import { I as _$$I } from "../905/423735";
 import { TabLoop } from "../905/718764";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { E as _$$E } from "../905/128063";
+import { mapLibraryAttributes } from "../905/128063";
 import { Yt } from "../905/712714";
 import { ZO, kz, d_, tq } from "../905/691188";
 import { C as _$$C, Y as _$$Y } from "../905/180528";
@@ -145,7 +145,7 @@ function O({
       }), jsx(_$$g, {
         productComponentStats: p.data,
         debouncedSearchQuery: t,
-        publishedLibrary: _$$E(a),
+        publishedLibrary: mapLibraryAttributes(a),
         libraryKey: i,
         onRemapLibraryClick: o,
         width: c,
@@ -606,7 +606,7 @@ function tp({
   let v = f.map(e => {
     let t = GS(e);
     if (!t) return null;
-    let i = _$$E(e);
+    let i = mapLibraryAttributes(e);
     return jsxs(_$$Fragment, {
       children: [A || y ? jsx(tl, {
         canEditSubscriptions: b,
@@ -746,7 +746,7 @@ function th({
       let s = ("alpha" === h.sortBy || "search" === h.sortBy) && b !== (t.team_id ?? NO_TEAM);
       b = t.team_id ?? NO_TEAM;
       let o = t.team_name || getDraftsSidebarString();
-      let m = _$$E(t);
+      let m = mapLibraryAttributes(t);
       return jsxs(_$$Fragment, {
         children: [s && jsx("div", {
           className: y ? tc : td,
@@ -1180,7 +1180,7 @@ function tk({
       children: renderI18nText("design_systems.libraries_modal.libraries_available_in_this_file")
     }), w.map(a => {
       let l = o && a && o[a.library_file_key];
-      let d = _$$E(a);
+      let d = mapLibraryAttributes(a);
       return jsxs(_$$Fragment, {
         children: [jsx(te, {
           canEditSubscriptions: i,
@@ -1203,7 +1203,7 @@ function tk({
       }, a.library_file_key);
     }), S.map(e => {
       let t = GS(e);
-      let r = _$$E(e);
+      let r = mapLibraryAttributes(e);
       return jsx(te, {
         canEditSubscriptions: i,
         file: t,

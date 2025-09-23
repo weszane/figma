@@ -8,7 +8,7 @@ import { useSceneGraphFromContext } from "../figma_app/722362";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { lm } from "../figma_app/745458";
 import { Rn } from "../figma_app/357047";
-import { nD } from "../905/92359";
+import { computeBackingGUIDs } from "../905/92359";
 export function $$h0(e) {
   let t = Rn("restore-symbol-or-state-group");
   let i = useSelector(e => e.mirror.appModel[t]);
@@ -27,7 +27,7 @@ export function $$h0(e) {
   let {
     backingSymbolGUID,
     backingStateGroupGUID
-  } = nD(f, h);
+  } = computeBackingGUIDs(f, h);
   let y = useMemo(() => isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID ? null : h.get(backingSymbolGUID), [backingSymbolGUID, h]);
   let b = useMemo(() => isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID ? null : h.get(backingStateGroupGUID), [backingStateGroupGUID, h]);
   let v = useMemo(() => !!y && y.isSubscribedAsset && y.sourceLibraryKey !== g, [y, g]);

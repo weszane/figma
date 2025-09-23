@@ -9,7 +9,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { liveStoreInstance, IT, gY } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler, getAtomMutate } from "../905/713695";
 import { JO, Cn, fm } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
@@ -73,7 +73,7 @@ let $$C0 = registerModal(function (e) {
     planId,
     planType
   } = e;
-  let [C, S] = IT(k({
+  let [C, S] = setupResourceAtomHandler(k({
     planId,
     planType
   }));
@@ -83,7 +83,7 @@ let $$C0 = registerModal(function (e) {
   let [N, I] = useState(JO.VIEWER);
   let [T, A] = useState(JO.VIEWER);
   let [R, O] = useState(!1);
-  let L = gY(E);
+  let L = getAtomMutate(E);
   let D = useSelector(({
     dropdownShown: e
   }) => e);

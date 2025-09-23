@@ -8,7 +8,7 @@ import { D } from "../905/417423";
 import { h as _$$h } from "../905/706725";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
-import { kK } from "../figma_app/144974";
+import { shouldHideRecents } from "../figma_app/144974";
 let h = "recent_fragments";
 let $$g0 = new class {
   constructor(e = 25, t = 6048e5) {
@@ -62,7 +62,7 @@ let $$g0 = new class {
 async function f(e, t, i) {
   try {
     let n = $$g0.getRecentsLocalStorage();
-    if (!n || kK()) {
+    if (!n || shouldHideRecents()) {
       i([]);
       return;
     }

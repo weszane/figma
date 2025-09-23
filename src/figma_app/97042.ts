@@ -9,7 +9,7 @@ import { hasResourcePresetKey } from "../figma_app/255679";
 import { isInvalidValue } from "../905/216495";
 import { useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
-import { nD } from "../905/92359";
+import { computeBackingGUIDs } from "../905/92359";
 import { zV } from "../figma_app/410317";
 let g = /(#[0-9]+:[0-9]+)/g;
 function f(e) {
@@ -97,7 +97,7 @@ export function $$S2(e, t, r) {
   let {
     backingSymbolGUID,
     backingStateGroupGUID
-  } = nD(new Set([(n?.type === "INSTANCE" ? n?.symbolId : n?.guid) ?? ""]), t);
+  } = computeBackingGUIDs(new Set([(n?.type === "INSTANCE" ? n?.symbolId : n?.guid) ?? ""]), t);
   let s = null;
   let o = null;
   if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID || (s = t.get(backingSymbolGUID)), isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID || (o = t.get(backingStateGroupGUID)), "INSTANCE" === n.type && n.symbolId) {
@@ -408,7 +408,7 @@ export function $$w1(e, t, r) {
     let {
       backingSymbolGUID,
       backingStateGroupGUID
-    } = nD(new Set([e]), t);
+    } = computeBackingGUIDs(new Set([e]), t);
     if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID) return null;
     let a = t.get(backingSymbolGUID);
     let s = isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID ? null : t.get(backingStateGroupGUID);

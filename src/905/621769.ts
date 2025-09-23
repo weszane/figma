@@ -1,5 +1,5 @@
 import { isInvalidValue } from "../905/216495";
-import { nD } from "../905/92359";
+import { computeBackingGUIDs } from "../905/92359";
 import { te } from "../figma_app/97042";
 export function $$s0(e, t, i) {
   let s = t.get(e);
@@ -10,7 +10,7 @@ export function $$s0(e, t, i) {
   let {
     backingSymbolGUID,
     backingStateGroupGUID
-  } = nD(new Set([(s?.type === "INSTANCE" ? s?.symbolId : s?.guid) ?? ""]), t);
+  } = computeBackingGUIDs(new Set([(s?.type === "INSTANCE" ? s?.symbolId : s?.guid) ?? ""]), t);
   let d = null;
   let c = null;
   if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID || (d = t.get(backingSymbolGUID)), isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID || (c = t.get(backingStateGroupGUID)), "INSTANCE" === s.type && s.symbolId) {

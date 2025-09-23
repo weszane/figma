@@ -1,70 +1,110 @@
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon } from "../905/576487";
-import { createOptimistThunk } from "../905/350402";
-import { h, I } from "../3973/647885";
-let l = "library-update";
-let d = "library-update";
-function c(e) {
-  e(VisualBellActions.enqueue({
-    type: l,
-    message: getI18nString("design_systems.update_actions.updating_assets"),
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { createOptimistThunk } from '../905/350402'
+import { VisualBellIcon } from '../905/576487'
+import { progressClearAction, progressSetAction } from '../3973/647885'
+
+// Original constants: l and d both 'library-update'
+const PROGRESS_TYPE = 'library-update'
+const PROGRESS_KEY = 'library-update'
+
+/**
+ * Enqueues a progress notification for library updates.
+ * Original function: c
+ */
+function enqueueProgressNotification(dispatch: any) {
+  dispatch(VisualBellActions.enqueue({
+    type: PROGRESS_TYPE,
+    message: getI18nString('design_systems.update_actions.updating_assets'),
     icon: VisualBellIcon.PROGRESS,
-    progressKey: d
-  }));
+    progressKey: PROGRESS_KEY,
+  }))
 }
-function u(e) {
-  return e.getState().progress[d] ?? {
+
+/**
+ * Retrieves the current progress state for library updates.
+ * Original function: u
+ */
+function getProgress(state: any) {
+  return state.getState().progress[PROGRESS_KEY] ?? {
     progress: 0,
-    total: 0
-  };
+    total: 0,
+  }
 }
-let $$p2 = createOptimistThunk((e, t) => {
-  e.dispatch(h({
-    key: d,
+
+/**
+ * Thunk to start the library update process by setting initial progress.
+ * Original: $$p2
+ */
+export const startLibraryUpdate = createOptimistThunk((dispatch: any, params: { total: number }) => {
+  dispatch(progressSetAction({
+    key: PROGRESS_KEY,
     progress: 0,
-    total: t.total
-  }));
-  c(e.dispatch);
-});
-let $$m3 = createOptimistThunk((e, t) => {
-  let i = u(e);
-  i.progress + t.delta >= i.total ? e.dispatch($$h1()) : (e.dispatch(h({
-    key: d,
-    progress: i.progress + t.delta,
-    total: i.total
-  })), c(e.dispatch));
-});
-let $$h1 = createOptimistThunk(e => {
-  let t = u(e);
-  e.dispatch(h({
-    key: d,
-    progress: t.total,
-    total: t.total
-  }));
-  e.dispatch(VisualBellActions.dequeue({
-    matchType: l
-  }));
-  e.dispatch(VisualBellActions.enqueue({
-    type: l,
-    message: getI18nString("design_systems.update_actions.update_success"),
-    icon: VisualBellIcon.CHECK
-  }));
-});
-let $$g0 = createOptimistThunk(e => {
-  e.dispatch(I({
-    key: d
-  }));
-  e.dispatch(VisualBellActions.dequeue({
-    matchType: l
-  }));
-  e.dispatch(VisualBellActions.enqueue({
-    type: l,
-    message: getI18nString("design_systems.update_actions.update_failure"),
-    icon: VisualBellIcon.EXCLAMATION
-  }));
-});
-export const V2 = $$g0;
-export const kX = $$h1;
-export const ni = $$p2;
-export const qB = $$m3;
+    total: params.total,
+  }))
+  enqueueProgressNotification(dispatch)
+})
+
+/**
+ * Thunk to update progress during library update, or complete if finished.
+ * Original: $$m3
+ */
+export const updateLibraryProgress = createOptimistThunk((dispatch: any, params: { delta: number }) => {
+  const progress = getProgress(dispatch)
+  if (progress.progress + params.delta >= progress.total) {
+    dispatch(completeLibraryUpdate())
+  }
+  else {
+    dispatch(progressSetAction({
+      key: PROGRESS_KEY,
+      progress: progress.progress + params.delta,
+      total: progress.total,
+    }))
+    enqueueProgressNotification(dispatch)
+  }
+})
+
+/**
+ * Thunk to complete the library update successfully.
+ * Original: $$h1
+ */
+export const completeLibraryUpdate = createOptimistThunk((dispatch: any) => {
+  const progress = getProgress(dispatch)
+  dispatch(progressSetAction({
+    key: PROGRESS_KEY,
+    progress: progress.total,
+    total: progress.total,
+  }))
+  dispatch(VisualBellActions.dequeue({
+    matchType: PROGRESS_TYPE,
+  }))
+  dispatch(VisualBellActions.enqueue({
+    type: PROGRESS_TYPE,
+    message: getI18nString('design_systems.update_actions.update_success'),
+    icon: VisualBellIcon.CHECK,
+  }))
+})
+
+/**
+ * Thunk to handle library update failure.
+ * Original: $$g0
+ */
+export const failLibraryUpdate = createOptimistThunk((dispatch: any) => {
+  dispatch(progressClearAction({
+    key: PROGRESS_KEY,
+  }))
+  dispatch(VisualBellActions.dequeue({
+    matchType: PROGRESS_TYPE,
+  }))
+  dispatch(VisualBellActions.enqueue({
+    type: PROGRESS_TYPE,
+    message: getI18nString('design_systems.update_actions.update_failure'),
+    icon: VisualBellIcon.EXCLAMATION,
+  }))
+})
+
+// Refactored exports with meaningful names
+export const V2 = failLibraryUpdate
+export const kX = completeLibraryUpdate
+export const ni = startLibraryUpdate
+export const qB = updateLibraryProgress

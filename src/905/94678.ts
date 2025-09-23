@@ -1,37 +1,69 @@
-import { getSingletonSceneGraph } from "../905/700578";
-import { filterNotNullish } from "../figma_app/656233";
-export function $$a1(e) {
-  let t = getSingletonSceneGraph().get(e);
-  return t?.type === "SYMBOL" || t?.isStateGroup ? t : null;
+import { getSingletonSceneGraph } from '../905/700578'
+import { filterNotNullish } from '../figma_app/656233'
+
+/**
+ * Returns the scene graph node if it is a SYMBOL or a state group.
+ * Original: $$a1
+ */
+export function getSymbolOrStateGroupNode(guid: string) {
+  const node = getSingletonSceneGraph().get(guid)
+  return node?.type === 'SYMBOL' || node?.isStateGroup ? node : null
 }
-function s(e, t) {
-  let i = e.sceneGraph;
-  return filterNotNullish(e.findAllWithCriteriaGUIDs({
-    types: t
-  }).map(e => i.get(e)));
+
+/**
+ * Finds all nodes matching the given types from the scene graph.
+ * Original: s
+ */
+function findNodesByTypes(node: { sceneGraph: Map<string, any>, findAllWithCriteriaGUIDs: ({types}: {types: string[]}) => string[] }, types: string[]) {
+  const sceneGraph = node.sceneGraph
+  return filterNotNullish(
+    node.findAllWithCriteriaGUIDs({ types }).map((guid: string) => sceneGraph.get(guid)),
+  )
 }
-export function $$o0(e, t) {
-  let i = [];
-  let n = new Set();
-  let r = [...e];
-  for (; 0 !== r.length;) {
-    let e = r.pop();
-    if (!(!e || n.has(e.guid))) {
-      if (n.add(e.guid), e.parentNode?.isStateGroup) {
-        if (r.push(e.parentNode), !t.followInstances) continue;
-      } else if ("SYMBOL" === e.type && (i.push(e), !t.followInstances)) continue;
-      if (!e.isStateGroup || (i.push(e), t.followInstances)) {
-        if (t.followInstances) {
-          if ("INSTANCE" === e.type && e.symbolId) {
-            let t = e.sceneGraph.get(e.symbolId);
-            t && r.push(t);
-          }
-          r.push(...s(e, ["INSTANCE", "COMPONENT", "COMPONENT_SET"]));
-        } else r.push(...s(e, ["COMPONENT", "COMPONENT_SET"]));
+
+/**
+ * Traverses nodes and collects SYMBOLs and state groups based on options.
+ * Original: $$o0
+ */
+export function collectSymbolsAndStateGroups(nodes: any[], options: { followInstances: boolean }) {
+  const result: any[] = []
+  const visited = new Set<string>()
+  const stack = [...nodes]
+
+  while (stack.length !== 0) {
+    const node = stack.pop()
+    if (!node || visited.has(node.guid))
+      continue
+    visited.add(node.guid)
+
+    if (node.parentNode?.isStateGroup) {
+      stack.push(node.parentNode)
+      if (!options.followInstances)
+        continue
+    }
+    else if (node.type === 'SYMBOL') {
+      result.push(node)
+      if (!options.followInstances)
+        continue
+    }
+
+    if (!node.isStateGroup || (result.push(node), options.followInstances)) {
+      if (options.followInstances) {
+        if (node.type === 'INSTANCE' && node.symbolId) {
+          const symbolNode = node.sceneGraph.get(node.symbolId)
+          if (symbolNode)
+            stack.push(symbolNode)
+        }
+        stack.push(...findNodesByTypes(node, ['INSTANCE', 'COMPONENT', 'COMPONENT_SET']))
+      }
+      else {
+        stack.push(...findNodesByTypes(node, ['COMPONENT', 'COMPONENT_SET']))
       }
     }
   }
-  return i;
+  return result
 }
-export const B = $$o0;
-export const c = $$a1;
+
+// Export aliases for backward compatibility
+export const B = collectSymbolsAndStateGroups
+export const c = getSymbolOrStateGroupNode

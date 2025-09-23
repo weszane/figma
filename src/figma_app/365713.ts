@@ -18,7 +18,7 @@ import { Ay as _$$Ay } from "../figma_app/948389";
 import { Zh } from "../figma_app/2590";
 import { A } from "../905/202425";
 import { pD } from "../905/727576";
-import { Ll } from "../figma_app/144974";
+import { isMagicLinkEnabled } from "../figma_app/144974";
 export class $$v8 extends Error {
   constructor() {
     super();
@@ -332,7 +332,7 @@ export function $$U6() {
   atomStoreManager.set(pD, renderI18nText("magic_link.running"));
 }
 export function $$B2() {
-  return Ll();
+  return isMagicLinkEnabled();
 }
 export function $$G4(e) {
   if (!$$B2() || 0 === e.length) return !1;

@@ -1,53 +1,117 @@
-import { getSingletonSceneGraph } from "../905/700578";
-import { Sn, K } from "../905/327738";
-let $$a1 = "Icons";
-let s = [$$a1];
-let $$o0 = "Unknown";
-let $$l7 = "Building Blocks";
-function d(e, t) {
-  return (e = e.replace(/[^0-9a-z]/gi, "").toLowerCase()) === (t = t.replace(/[^0-9a-z]/gi, "").toLowerCase());
+import { findUniqueSymbolOrInstanceNodes, toTitleCase } from '../905/327738'
+import { getSingletonSceneGraph } from '../905/700578'
+// Constants for group names and labels (original: $$a1, $$o0, $$l7)
+export const ICONS_GROUP = 'Icons'
+export const UNKNOWN_LABEL = 'Unknown'
+export const BUILDING_BLOCKS_LABEL = 'Building Blocks'
+
+// List of group names (original: s)
+export const GROUP_NAMES = [ICONS_GROUP]
+
+/**
+ * Normalize and compare two strings for equality, ignoring non-alphanumeric characters and case.
+ * (original: d)
+ */
+export function areNamesEqual(nameA: string, nameB: string): boolean {
+  const normalize = (str: string) => str.replace(/[^0-9a-z]/gi, '').toLowerCase()
+  return normalize(nameA) === normalize(nameB)
 }
-export function $$c3(e, t) {
-  for (let i of e.split(" / ")) if (d(i, t)) return !0;
-  return !1;
+
+/**
+ * Checks if a given name is part of a group, splitting by ' / ' and comparing each part.
+ * (original: isPartOfGroup)
+ */
+export function isPartOfGroup(name: string, group: string): boolean {
+  for (const part of name.split(' / ')) {
+    if (areNamesEqual(part, group)) {
+      return true
+    }
+  }
+  return false
 }
-export function $$u6(e) {
-  return $$p5(e.componentGroupPath);
+
+/**
+ * Returns the group name for a component node based on its group path.
+ * (original: $$u6)
+ */
+export function getComponentGroupName(node: { componentGroupPath: string }): string | null {
+  return findGroupName(node.componentGroupPath)
 }
-export function $$p5(e) {
-  for (let t of s) if ($$c3(e, t)) return t;
-  return null;
+
+/**
+ * Finds the first matching group name from GROUP_NAMES in the given path.
+ * (original: $$p5)
+ */
+export function findGroupName(path: string): string | null {
+  for (const group of GROUP_NAMES) {
+    if (isPartOfGroup(path, group)) {
+      return group
+    }
+  }
+  return null
 }
-export function $$m8(e) {
-  let t = getSingletonSceneGraph().get(e);
-  if (!t) return "";
-  let i = [];
-  let r = t.parentNode;
-  for (; r && (("CANVAS" === r.type || "SECTION" === r.type) && i.push(r.name), "CANVAS" !== r.type && "DOCUMENT" !== r.type);) r = r.parentNode;
-  i.reverse();
-  return i.join(" / ");
+
+/**
+ * Retrieves the parent path of a node, including only CANVAS and SECTION nodes.
+ * (original: getNodeParentPath)
+ */
+export function getNodeParentPath(nodeGuid: string): string {
+  const node = getSingletonSceneGraph().get(nodeGuid)
+  if (!node)
+    return ''
+  const parentNames: string[] = []
+  let parent = node.parentNode
+  while (
+    parent
+    && ((parent.type === 'CANVAS' || parent.type === 'SECTION') && parentNames.push(parent.name),
+    parent.type !== 'CANVAS' && parent.type !== 'DOCUMENT')
+  ) {
+    parent = parent.parentNode
+  }
+  parentNames.reverse()
+  return parentNames.join(' / ')
 }
-export function $$h4(e) {
-  var t;
-  t = (t = e).endsWith("s") ? t.slice(0, t.length - 1) : t;
-  return `Custom${Sn(t)}`;
+
+/**
+ * Returns a custom group name for a given string, singularizing if it ends with 's'.
+ * (original: $$h4)
+ */
+export function getCustomGroupName(name: string): string {
+  let singular = name.endsWith('s') ? name.slice(0, -1) : name
+  return `Custom${toTitleCase(singular)}`
 }
-export function $$g2(e, t, i) {
-  let n = function (e, t) {
-    let i = t.parentNode;
-    for (; i && !d(i.name, e);) i = i.parentNode;
-    return i;
-  }(e, t);
-  if (!n) return null;
-  for (let e of K(n.guid ?? "")) if (d(e.name, i)) return e.guid;
-  return null;
+
+/**
+ * Finds a node GUID by searching for a parent node with a matching name, then a child node with a matching name.
+ * (original: $$g2)
+ */
+export function findNodeGuidByNames(parentName: string, node: any, childName: string): string | null {
+  // Find parent node by name
+  function findParentByName(name: string, node: any): any {
+    let parent = node.parentNode
+    while (parent && !areNamesEqual(parent.name, name)) {
+      parent = parent.parentNode
+    }
+    return parent
+  }
+  const parentNode = findParentByName(parentName, node)
+  if (!parentNode)
+    return null
+  for (const child of findUniqueSymbolOrInstanceNodes(parentNode.guid ?? '')) {
+    if (areNamesEqual(child.name, childName)) {
+      return child.guid
+    }
+  }
+  return null
 }
-export const $x = $$o0;
-export const C = $$a1;
-export const Lq = $$g2;
-export const Se = $$c3;
-export const VV = $$h4;
-export const iR = $$p5;
-export const vR = $$u6;
-export const vh = $$l7;
-export const yu = $$m8;
+
+// Exported constants (refactored names)
+export const $x = UNKNOWN_LABEL
+export const C = ICONS_GROUP
+export const Lq = findNodeGuidByNames
+export const Se = isPartOfGroup
+export const VV = getCustomGroupName
+export const iR = findGroupName
+export const vR = getComponentGroupName
+export const vh = BUILDING_BLOCKS_LABEL
+export const yu = getNodeParentPath

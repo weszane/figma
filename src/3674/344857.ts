@@ -279,7 +279,7 @@ import { E as _$$E6 } from "../905/235326";
 import { openUrlInContext } from "../figma_app/976345";
 import { hideModalHandler, showModalHandler, hideModal } from "../905/156213";
 import { b as _$$b5 } from "../905/217163";
-import { bj } from "../905/420347";
+import { useLibraries } from "../905/420347";
 import { b as _$$b6 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
 import { figmaItemsAtom, findComponentGuidOrPublishId } from "../figma_app/854115";
@@ -332,7 +332,7 @@ import { t as _$$t5 } from "../905/150656";
 import { y$ } from "../figma_app/835219";
 import { aq as _$$aq } from "../figma_app/399472";
 import { selectIsExportRestricted, selectIsCopyExportAllowed } from "../figma_app/212807";
-import { d4 as _$$d8, be, vT, GR } from "../figma_app/474636";
+import { d4 as _$$d8, be, pluginTriggeredFromAtom, pluginIdAtom } from "../figma_app/474636";
 import { jv, Wh } from "../figma_app/985200";
 import { PluginUIManager } from "../905/261467";
 import { IN } from "../905/116101";
@@ -5243,7 +5243,7 @@ function lk({
     nodeId: e?.publishID ?? void 0,
     mainComponent: !0
   });
-  let r = bj(e?.sourceLibraryKey ? [e?.sourceLibraryKey] : []).data[0];
+  let r = useLibraries(e?.sourceLibraryKey ? [e?.sourceLibraryKey] : []).data[0];
   let d = r?.library_key ?? null;
   let c = !!d && d !== n;
   let u = useMemo(() => !!e && SceneGraphHelpers.nodeIsSoftDeleted(e.guid), [e]);
@@ -6340,7 +6340,7 @@ function sy({
   } = Bv(singleBackingSymbol, singleBackingStateGroup);
   let S = "loaded" === g.status;
   let L = f?.type === "INSTANCE" || S;
-  let R = bj(backingSymbol?.sourceLibraryKey ? [backingSymbol?.sourceLibraryKey] : []);
+  let R = useLibraries(backingSymbol?.sourceLibraryKey ? [backingSymbol?.sourceLibraryKey] : []);
   let D = R.data[0];
   let M = null;
   D && (isPublishedLibraryWithAssets(D) && isCommunityLibrary(D) ? M = D.hub_file_id : "library_file_key" in D && (M = D.library_file_key));
@@ -6549,7 +6549,7 @@ function sO() {
     }, [e?.nodeId, e?.isDetachedScene]);
     return useMemo(() => e?.isDetachedScene ? n : t, [n, e?.isDetachedScene, t]);
   }();
-  let u = bj(d ? [d] : []);
+  let u = useLibraries(d ? [d] : []);
   let p = u.data[0];
   p && ("hub_file_id" in p ? e = p.hub_file_id : "library_file_key" in p && (e = p.library_file_key));
   let h = useRef(!1);
@@ -8209,7 +8209,7 @@ let r3 = {
 function r4({
   plugin: e
 }) {
-  let t = useAtomWithSubscription(vT);
+  let t = useAtomWithSubscription(pluginTriggeredFromAtom);
   return jsx("div", {
     children: jsxs(AutoLayout, {
       width: "fill-parent",
@@ -8512,8 +8512,8 @@ function dw({
     id: qZ.CSS,
     type: "first-party"
   } : g, [g]);
-  let m = useAtomWithSubscription(GR);
-  let _ = useAtomWithSubscription(vT);
+  let m = useAtomWithSubscription(pluginIdAtom);
+  let _ = useAtomWithSubscription(pluginTriggeredFromAtom);
   return h ? m && "codegen" !== _ && "first-party" !== x.type ? jsx(dh, {
     plugin: m
   }) : jsx(dN, {

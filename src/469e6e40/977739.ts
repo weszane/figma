@@ -17,7 +17,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { handleErrorWithToast } from "../figma_app/345997";
 import { Rs } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
@@ -210,7 +210,7 @@ let $$z0 = registerModal(function ({
         return [X4.DAILY, X4.MONTHLY];
     }
   }(e);
-  let [T, A] = IT(B({
+  let [T, A] = setupResourceAtomHandler(B({
     planId: t,
     planType: e
   }));

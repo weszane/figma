@@ -5,7 +5,7 @@ import { zq, We } from "../figma_app/782261";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isLoaded } from "../905/18797";
 import { ModeType } from "../figma_app/644808";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { k } from "../905/540025";
 export function $$p1({
   allElements: e
@@ -63,7 +63,7 @@ function m(e) {
   let s = useSelector(e => e.fileVersion);
   let l = selectCurrentFile();
   let d = k();
-  let p = l && null != s && yD(l.key) || null;
+  let p = l && null != s && generateRetrievingSubscribedComponentsKey(l.key) || null;
   let h = !(null != p && isLoaded(t, p));
   useEffect(() => {
     h || function (e, t, s) {

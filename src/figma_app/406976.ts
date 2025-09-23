@@ -10,7 +10,7 @@ import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { logError } from "../905/714362";
 import { trackFileEvent } from "../figma_app/314264";
-import { ZR, O8 } from "../905/313095";
+import { getLibraryKey, createSubscribedObject } from "../905/313095";
 import { getPartnerType } from "../905/853613";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
@@ -97,7 +97,7 @@ export function $$A2(e, t, r) {
       let S = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.node_id : null;
       let A = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.sortPosition : null;
       let x = VariablesBindings.getSubscribedVariableInfo(d);
-      let N = ZR(I ?? O8(x), p.openFile);
+      let N = getLibraryKey(I ?? createSubscribedObject(x), p.openFile);
       let C = getPartnerType(N);
       let w = p.mirror.selectedStyleProperties.guid;
       w && (_ = [sessionLocalIDToString(w)]);
@@ -151,7 +151,7 @@ export function $$A2(e, t, r) {
       let p = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.node_id : null;
       let _ = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.sortPosition : null;
       let f = VariablesBindings.getSubscribedVariableInfo(r?.value);
-      let E = ZR(u ?? O8(f), n.openFile);
+      let E = getLibraryKey(u ?? createSubscribedObject(f), n.openFile);
       let b = getPartnerType(E);
       let I = n.mirror.selectedStyleProperties.guid;
       for (let t of (I && (s = [sessionLocalIDToString(I)]), s)) trackFileEvent("ds_variable_reference_set", o, n, {
@@ -187,7 +187,7 @@ export function $$x3(e, t) {
     let s = r.user && r.user.id;
     let o = atomStoreManager.get(Ev(e));
     let d = VariablesBindings.getSubscribedVariableInfo(e);
-    let u = ZR(o ?? O8(d), r.openFile);
+    let u = getLibraryKey(o ?? createSubscribedObject(d), r.openFile);
     let p = getPartnerType(u);
     for (let i of n) trackFileEvent("ds_variable_reference_set", a, r, {
       userId: s,

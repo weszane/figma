@@ -14,7 +14,7 @@ import { PN, isInteractionPathCheck } from "../figma_app/897289";
 import { setLeftPanelTab } from "../figma_app/91703";
 import { me } from "../figma_app/223206";
 import { fullscreenValue } from "../figma_app/455680";
-import { r as _$$r } from "../905/955316";
+import { executeInIgnoreUndoRedoScope } from "../905/955316";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { Ts } from "../905/994545";
 import { A as _$$A } from "../905/929620";
@@ -448,7 +448,7 @@ export let $$eu0 = new class {
               hash: i.hash
             });
         }
-        _$$r(() => {
+        executeInIgnoreUndoRedoScope(() => {
           permissionScopeHandler.system("materialize-imported-code-files-references", () => {
             e.importedCodeFiles = r;
           });

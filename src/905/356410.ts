@@ -15,7 +15,7 @@ import { $ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { FRequestStatusType } from "../figma_app/191312";
-import { IT, liveStoreInstance } from "../905/713695";
+import { setupResourceAtomHandler, liveStoreInstance } from "../905/713695";
 import { wT, UR, HX, G6, qu } from "../905/671449";
 import { is } from "../905/744076";
 import { R as _$$R } from "../905/240644";
@@ -623,7 +623,7 @@ export function $$W0(e) {
     setOptedOutOfSecurityForm,
     extensionId
   } = e;
-  let [u] = IT(K(version), {
+  let [u] = setupResourceAtomHandler(K(version), {
     enabled: !existingSecurityFormResponse
   });
   let p = (existingSecurityFormResponse ? {

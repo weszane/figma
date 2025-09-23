@@ -70,7 +70,7 @@ import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { Pd } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { om } from "../figma_app/395097";
 import { D as _$$D2, J as _$$J2 } from "../905/225412";
 import { JH, y5, Tu } from "../figma_app/479313";
@@ -621,7 +621,7 @@ export function $$tu7(e) {
     o() || r(hidePickerThunk());
     r(hideStylePicker());
     let t = valueOrFallback(c, []).filter((t, r) => r !== e);
-    _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
+    executeWithDSAAction(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
       onChange(t);
     });
     fullscreenValue.deselectProperty();
@@ -829,7 +829,7 @@ export class $$tp1 extends PureComponent {
     };
     this.updateStillImageAndSelectionPropertiesForGIF = (e, t) => permissionScopeHandler.user("update-gif-image", () => SK(e, t, this.props.selectedPropertyType));
     this.onDetachVariableClick = () => {
-      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+      executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         let e = _$$$(this.props.paint);
         this.onPaintPickerChange(e, yesNoTrackingEnum.YES);
       });
@@ -1002,7 +1002,7 @@ export let $$t_2 = forwardRef((e, t) => {
     return (t = _$$U2() ? e.paint.colorVar || e.paint.imageVar : e.paint.colorVar) && ("ALIAS" === t.dataType || "CMS_ALIAS" === t.dataType) ? t : null;
   };
   let o = () => {
-    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+    executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       let t = _$$$(e.paint);
       t.visible = !0;
       e.onChange(t, yesNoTrackingEnum.YES);
@@ -1630,7 +1630,7 @@ $$t_2.displayName = "Paint";
       };
       this.debouncedOnChangeForPaintPicker = debounce(this.onChangeForPaintPicker);
       this.onDetachVariableClick = () => {
-        _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+        executeWithDSAAction(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = _$$$(this.props.paint);
           this.onChangeForPaint(e, yesNoTrackingEnum.YES);
         });

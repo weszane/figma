@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
 import { selectCurrentUser } from "../905/372672";
 import { SubscriptionType } from "../figma_app/831101";
@@ -45,7 +45,7 @@ function y({
       data,
       status
     } = function (e) {
-      let [t] = IT(g(null), {
+      let [t] = setupResourceAtomHandler(g(null), {
         enabled: getFeatureFlags().campfire_i18n_verbiage && e
       });
       return t;

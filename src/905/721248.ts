@@ -93,7 +93,7 @@ import { q as _$$q } from '../905/932270';
 import o, { lQ } from '../905/934246';
 import { fileEntityDataMapper } from '../905/943101';
 import { a as _$$a } from '../905/964520';
-import { qp } from '../905/977779';
+import { filesByLibraryKeyAtom } from '../905/977779';
 import { Ar, GC, SS } from '../905/984793';
 import { rY } from '../905/985490';
 import { h1 } from '../905/986103';
@@ -5068,7 +5068,7 @@ let rR = memo(e => {
     conflictGroups
   } = t;
   let y = ud();
-  let b = useAtomWithSubscription(qp);
+  let b = useAtomWithSubscription(filesByLibraryKeyAtom);
   let I = useSelector(e => e.mirror.appModel.pagesList);
   let x = useMemo(() => function (e, t, i, n, r, a) {
     let s = {};

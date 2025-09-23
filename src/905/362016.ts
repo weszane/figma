@@ -22,7 +22,7 @@ import { o as _$$o } from "../905/605383";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { liveStoreInstance } from "../905/713695";
-import { PT } from "../905/669853";
+import { DSAApiServiceInstance } from "../905/669853";
 import { V as _$$V } from "../905/697254";
 import { c as _$$c2 } from "../905/167005";
 import { Xk } from "../905/712714";
@@ -251,7 +251,7 @@ function j({
   });
 }
 let U = liveStoreInstance.Query({
-  fetch: async e => (await PT.getLibraryOverview({
+  fetch: async e => (await DSAApiServiceInstance.getLibraryOverview({
     libraryFileKey: e
   })).data.meta
 });

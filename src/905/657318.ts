@@ -40,7 +40,7 @@ import { nm, j_ } from "../figma_app/745458";
 import { directlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
-import { f as _$$f } from "../905/135117";
+import { executeWithDSAAction } from "../905/135117";
 import { $$ei1 } from "../905/759609";
 import { Cf } from "../905/504727";
 import { Tu } from "../figma_app/479313";
@@ -122,7 +122,7 @@ class eA extends RecordingPureComponent {
     this.detachStyle = () => {
       this.props.dispatch(hideTooltip());
       permissionScopeHandler.user("detach-style", () => {
-        _$$f(StyleVariableOperation.STYLE_DETACH, CopyPasteType.DIRECT, () => {
+        executeWithDSAAction(StyleVariableOperation.STYLE_DETACH, CopyPasteType.DIRECT, () => {
           Fullscreen.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !0);
           Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID);
         });

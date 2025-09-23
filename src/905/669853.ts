@@ -1,214 +1,259 @@
-import { F } from '../905/422355';
-import { encodeStringToBase64 } from '../905/561685';
-import { A } from '../905/920142';
-import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
-var o = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))(o || {});
-var l = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))(l || {});
-var $$d1 = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))($$d1 || {});
-function c(e) {
-  let t = APIParameterUtils.toAPIParameters(e) ?? {};
-  let i = Object.keys(t);
-  let o = i.map(e => t[e]);
-  let l = A().utc().unix();
-  let d = ['please_use_the_public_api', l, ...o].join(',');
-  let c = F(d).slice(0, 10);
-  let u = [l, ...i].join(',');
-  return {
-    dsaToken: c,
-    dsaTokenKey: encodeStringToBase64(u)
-  };
+import md5 from 'md5'
+import { encodeStringToBase64 } from '../905/561685'
+import { A as day } from '../905/920142'
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+
+// Original o - Refactored to InsertionActionType
+export const InsertionActionType = {
+  INSERTION: 'insertion',
+  DETACHMENT: 'detachment',
+} as const
+
+// Original l - Refactored to DetachmentActionType
+export const DetachmentActionType = {
+  INSERTION: 'insertion',
+  DETACHMENT: 'detachment',
+} as const
+
+// Original $$d1 - Refactored to ActionType
+export const InsertionDetachment = {
+  INSERTION: 'insertion',
+  DETACHMENT: 'detachment',
+} as const
+
+// Original c - Refactored to generateDSAToken with added types and documentation
+interface DSATokenParams {
+  [key: string]: any
 }
-export let $$u0 = new class {
-  constructor() {
-    this.LibraryWeeklyInsertionsSchemaValidator = createNoOpValidator();
-    this.LibraryTeamUsageSchemaValidator = createNoOpValidator();
-    this.LibraryPublishedComponentsUsagesSchemaValidator = createNoOpValidator();
-    this.LibraryPublishedComponentsActionsSchemaValidator = createNoOpValidator();
-    this.LibraryOverviewSchemaValidator = createNoOpValidator();
-    this.LibrariesSchemaValidator = createNoOpValidator();
-    this.NumTeamsSchemaValidator = createNoOpValidator();
-    this.StateGroupComponentsSchemaValidator = createNoOpValidator();
-    this.ComponentFileUsageSchemaValidator = createNoOpValidator();
-    this.ComponentSchemaValidator = createNoOpValidator();
-    this.StateGroupSchemaValidator = createNoOpValidator();
-    this.OrgMigrationStatusSchemaValidator = createNoOpValidator();
-    this.LibraryStyleOverviewValidator = createNoOpValidator();
-    this.LibraryStyleDetailsValidator = createNoOpValidator();
-    this.LibraryVariableOverviewValidator = createNoOpValidator();
-    this.LibraryVariableDetailsValidator = createNoOpValidator();
-    this.RecordStylesActionValidator = createNoOpValidator();
-    this.RecordVariablesActionValidator = createNoOpValidator();
-    this.RecordComponentActionValidator = createNoOpValidator();
+
+interface DSAToken {
+  dsaToken: string
+  dsaTokenKey: string
+}
+
+/**
+ * Generates a DSA token for API authentication.
+ * @param params - The parameters to include in the token generation.
+ * @returns An object containing the DSA token and key.
+ */
+function generateDSAToken(params: DSATokenParams): DSAToken {
+  const apiParams = APIParameterUtils.toAPIParameters(params) ?? {}
+  const keys = Object.keys(apiParams)
+  const values = keys.map(key => apiParams[key])
+  const timestamp = day().utc().unix()
+  const data = ['please_use_the_public_api', timestamp, ...values].join(',')
+  const token = md5(data).slice(0, 10)
+  const keyData = [timestamp, ...keys].join(',')
+  return {
+    dsaToken: token,
+    dsaTokenKey: encodeStringToBase64(keyData),
   }
-  getLibraryWeeklyInsertions(e) {
-    let t = c(e);
-    return this.LibraryWeeklyInsertionsSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.fileKey}/weekly_insertions`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+}
+
+// Original $$u0 - Refactored to DSAApiService class with grouped methods, added types, documentation, and helper methods
+export class DSAApiService {
+  LibraryWeeklyInsertionsSchemaValidator = createNoOpValidator()
+  LibraryTeamUsageSchemaValidator = createNoOpValidator()
+  LibraryPublishedComponentsUsagesSchemaValidator = createNoOpValidator()
+  LibraryPublishedComponentsActionsSchemaValidator = createNoOpValidator()
+  LibraryOverviewSchemaValidator = createNoOpValidator()
+  LibrariesSchemaValidator = createNoOpValidator()
+  NumTeamsSchemaValidator = createNoOpValidator()
+  StateGroupComponentsSchemaValidator = createNoOpValidator()
+  ComponentFileUsageSchemaValidator = createNoOpValidator()
+  ComponentSchemaValidator = createNoOpValidator()
+  StateGroupSchemaValidator = createNoOpValidator()
+  OrgMigrationStatusSchemaValidator = createNoOpValidator()
+  LibraryStyleOverviewValidator = createNoOpValidator()
+  LibraryStyleDetailsValidator = createNoOpValidator()
+  LibraryVariableOverviewValidator = createNoOpValidator()
+  LibraryVariableDetailsValidator = createNoOpValidator()
+  RecordStylesActionValidator = createNoOpValidator()
+  RecordVariablesActionValidator = createNoOpValidator()
+  RecordComponentActionValidator = createNoOpValidator()
+
+  // Library-related methods
+  /**
+   * Gets library weekly insertions.
+   * @param params - Original e
+   */
+  getLibraryWeeklyInsertions(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/weekly_insertions`, params, this.LibraryWeeklyInsertionsSchemaValidator)
   }
-  getLibraryTeamUsage(e) {
-    let t = c(e);
-    return this.LibraryTeamUsageSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.fileKey}/team_usage`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library team usage.
+   * @param params - Original e
+   */
+  getLibraryTeamUsage(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.fileKey}/team_usage`, params, this.LibraryTeamUsageSchemaValidator)
   }
-  getLibraryPublishedComponentsUsages(e) {
-    let t = {
-      start_ts: e.startTs,
-      end_ts: e.endTs,
-      org_id: e.orgIdForLogging,
-      entrypoint: e.entrypointForLogging,
-      library_file_key: e.libraryFileKey
-    };
-    let i = c(t);
-    return this.LibraryPublishedComponentsUsagesSchemaValidator.validate(async ({
-      xr: n
-    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_usages`, APIParameterUtils.toAPIParameters({
-      ...t,
-      ...i
-    })));
+
+  /**
+   * Gets library published components usages.
+   * @param params - Original e
+   */
+  getLibraryPublishedComponentsUsages(params: any) {
+    const requestParams = {
+      start_ts: params.startTs,
+      end_ts: params.endTs,
+      org_id: params.orgIdForLogging,
+      entrypoint: params.entrypointForLogging,
+      library_file_key: params.libraryFileKey,
+    }
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_usages`, requestParams, this.LibraryPublishedComponentsUsagesSchemaValidator)
   }
-  getLibraryPublishedComponentsActions(e) {
-    let t = {
-      start_ts: e.startTs,
-      end_ts: e.endTs,
-      org_id: e.orgIdForLogging,
-      entrypoint: e.entrypointForLogging,
-      library_file_key: e.libraryFileKey
-    };
-    let i = c(t);
-    return this.LibraryPublishedComponentsActionsSchemaValidator.validate(async ({
-      xr: n
-    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_actions`, APIParameterUtils.toAPIParameters({
-      ...t,
-      ...i
-    })));
+
+  /**
+   * Gets library published components actions.
+   * @param params - Original e
+   */
+  getLibraryPublishedComponentsActions(params: any) {
+    const requestParams = {
+      start_ts: params.startTs,
+      end_ts: params.endTs,
+      org_id: params.orgIdForLogging,
+      entrypoint: params.entrypointForLogging,
+      library_file_key: params.libraryFileKey,
+    }
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/published_components_actions`, requestParams, this.LibraryPublishedComponentsActionsSchemaValidator)
   }
-  getLibraryOverview(e) {
-    let t = c(e);
-    return this.LibraryOverviewSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library_overview/${e.libraryFileKey}`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library overview.
+   * @param params - Original e
+   */
+  getLibraryOverview(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library_overview/${params.libraryFileKey}`, params, this.LibraryOverviewSchemaValidator)
   }
-  getLibraries(e) {
-    let t = c(e);
-    return this.LibrariesSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get('/api/dsa/libraries', APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets libraries.
+   * @param params - Original e
+   */
+  getLibraries(params: any) {
+    return this.makeValidatedGetRequest('/api/dsa/libraries', params, this.LibrariesSchemaValidator)
   }
-  getNumTeams(e) {
-    let t = c(e);
-    return this.NumTeamsSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get('/api/dsa/num_teams', APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library style overview.
+   * @param params - Original e
+   */
+  getLibraryStyleOverview(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/overview`, params, this.LibraryStyleOverviewValidator)
   }
-  getStateGroupComponents(e) {
-    let t = c(e);
-    return this.StateGroupComponentsSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}/components`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library style details.
+   * @param params - Original e
+   */
+  getLibraryStyleDetails(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/styles/${params.styleKey}/details`, params, this.LibraryStyleDetailsValidator)
   }
-  getComponentFileUsage(e) {
-    let t = c(e);
-    return this.ComponentFileUsageSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/component/${e.componentKey}/file_usage`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library variable overview.
+   * @param params - Original e
+   */
+  getLibraryVariableOverview(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/overview`, params, this.LibraryVariableOverviewValidator)
   }
-  getComponent(e) {
-    let t = c(e);
-    return this.ComponentSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/component/${e.componentKey}`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets library variable details.
+   * @param params - Original e
+   */
+  getLibraryVariableDetails(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/library/${params.libraryFileKey}/variables/${params.variableKey}/details`, params, this.LibraryVariableDetailsValidator)
   }
-  getStateGroup(e) {
-    let t = c(e);
-    return this.StateGroupSchemaValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  // Component-related methods
+  /**
+   * Gets component file usage.
+   * @param params - Original e
+   */
+  getComponentFileUsage(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}/file_usage`, params, this.ComponentFileUsageSchemaValidator)
   }
-  getOrgMigrationStatus(e) {
-    return this.OrgMigrationStatusSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/dsa/migration_status/${e.orgId}`));
+
+  /**
+   * Gets component.
+   * @param params - Original e
+   */
+  getComponent(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/component/${params.componentKey}`, params, this.ComponentSchemaValidator)
   }
-  getLibraryStyleOverview(e) {
-    let t = c(e);
-    return this.LibraryStyleOverviewValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/overview`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Records component action.
+   * @param params - Original e
+   */
+  recordComponentAction(params: any) {
+    return this.makeValidatedPostRequest('/api/dsa/record/component/action', params, this.RecordComponentActionValidator)
   }
-  getLibraryStyleDetails(e) {
-    let t = c(e);
-    return this.LibraryStyleDetailsValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/${e.styleKey}/details`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  // State group-related methods
+  /**
+   * Gets state group components.
+   * @param params - Original e
+   */
+  getStateGroupComponents(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}/components`, params, this.StateGroupComponentsSchemaValidator)
   }
-  getLibraryVariableOverview(e) {
-    let t = c(e);
-    return this.LibraryVariableOverviewValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/overview`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  /**
+   * Gets state group.
+   * @param params - Original e
+   */
+  getStateGroup(params: any) {
+    return this.makeValidatedGetRequest(`/api/dsa/state_group/${params.stateGroupKey}`, params, this.StateGroupSchemaValidator)
   }
-  getLibraryVariableDetails(e) {
-    let t = c(e);
-    return this.LibraryVariableDetailsValidator.validate(async ({
-      xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/${e.variableKey}/details`, APIParameterUtils.toAPIParameters({
-      ...e,
-      ...t
-    })));
+
+  // Organization-related methods
+  /**
+   * Gets number of teams.
+   * @param params - Original e
+   */
+  getNumTeams(params: any) {
+    return this.makeValidatedGetRequest('/api/dsa/num_teams', params, this.NumTeamsSchemaValidator)
   }
-  recordStylesAction(e) {
-    return this.RecordStylesActionValidator.validate(async ({
-      xr: t
-    }) => await t.post('/api/dsa/record/style/action', APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Gets organization migration status.
+   * @param params - Original e
+   */
+  getOrgMigrationStatus(params: any) {
+    return this.OrgMigrationStatusSchemaValidator.validate(async ({ xr }: any) => await xr.get(`/api/dsa/migration_status/${params.orgId}`))
   }
-  recordVariablesAction(e) {
-    return this.RecordVariablesActionValidator.validate(async ({
-      xr: t
-    }) => await t.post('/api/dsa/record/variable/action', APIParameterUtils.toAPIParameters(e)));
+
+  // Record action methods
+  /**
+   * Records styles action.
+   * @param params - Original e
+   */
+  recordStylesAction(params: any) {
+    return this.makeValidatedPostRequest('/api/dsa/record/style/action', params, this.RecordStylesActionValidator)
   }
-  recordComponentAction(e) {
-    return this.RecordComponentActionValidator.validate(async ({
-      xr: t
-    }) => await t.post('/api/dsa/record/component/action', APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Records variables action.
+   * @param params - Original e
+   */
+  recordVariablesAction(params: any) {
+    return this.makeValidatedPostRequest('/api/dsa/record/variable/action', params, this.RecordVariablesActionValidator)
   }
-}();
-export const PT = $$u0;
-export const Wc = $$d1;
+
+  // Helper methods for common API call patterns
+  private makeValidatedGetRequest(endpoint: string, params: any, validator: any) {
+    const token = generateDSAToken(params)
+    return validator.validate(async ({ xr }: any) => await xr.get(endpoint, APIParameterUtils.toAPIParameters({ ...params, ...token })))
+  }
+
+  private makeValidatedPostRequest(endpoint: string, params: any, validator: any) {
+    return validator.validate(async ({ xr }: any) => await xr.post(endpoint, APIParameterUtils.toAPIParameters(params)))
+  }
+}
+
+export const DSAApiServiceInstance = new DSAApiService()
+export const PT = DSAApiServiceInstance
+export const Wc = InsertionDetachment

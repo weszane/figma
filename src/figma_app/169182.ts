@@ -1,7 +1,8 @@
 // /Users/allen/sigma-main/src/figma_app/169182.ts
 
 // Imports from other modules
-import type { InitialOptions } from '../../../types/global'
+
+import type { InitialOptions } from '../../types/global'
 import { getFeatureFlags } from '../905/601108'
 import { parseQuerySimple } from '../905/634134'
 import { getCurrentSearch, getLanguageFallbacks, getParentPathname, getParentSearch } from '../905/806865'
@@ -19,8 +20,6 @@ interface UserConfig {
   is_free_user: boolean
   is_starter_user: boolean
 }
-
-
 
 // Original: $$c17 - Default user configuration
 export const defaultUserConfig: UserConfig = {
@@ -80,13 +79,11 @@ if (zoom_client_user_agent) {
 }
 
 // Original: $$m24 - Empty object
-const emptyObject = {}
-
+export const emptyObject = {}
 
 export function getFeatureFlagRulesExport() {
   return getFeatureFlagRules()
 }
-
 
 export function getLaunchDarklyFlagsExport() {
   return getLaunchDarklyFlags()

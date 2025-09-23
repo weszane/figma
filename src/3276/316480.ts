@@ -11,7 +11,7 @@ import { eE } from "../figma_app/106207";
 import { gp } from "../figma_app/973927";
 import { g5 } from "../figma_app/178752";
 import { getUserOrAnonymousId } from "../905/506024";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
 import { getTemplateId } from "../figma_app/190980";
@@ -116,7 +116,7 @@ export function $$D1() {
   let t = function () {
     let e = isAIFeaturesEnabledForCurrentUser();
     let t = useSelector(e => e.currentUserOrgId);
-    let [n] = IT(E(t));
+    let [n] = setupResourceAtomHandler(E(t));
     return useMemo(() => "loaded" !== n.status ? [] : function (e) {
       let t = [];
       e.plugins.forEach(e => {

@@ -3,7 +3,7 @@ import { Xr } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { generateSessionId } from "../figma_app/925970";
 import { wf } from "../905/124270";
-import { IT, liveStoreInstance } from "../905/713695";
+import { setupResourceAtomHandler, liveStoreInstance } from "../905/713695";
 import { CreatorResourceType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
 import { A as _$$A } from "../905/421315";
@@ -20,7 +20,7 @@ export function $$p0(e, t) {
     restrictOrgId,
     restrictTeamId
   });
-  let [f] = IT(g);
+  let [f] = setupResourceAtomHandler(g);
   let _ = useDebouncedCallback(t => {
     d(t);
     e && e.length > 0 && c(generateSessionId());

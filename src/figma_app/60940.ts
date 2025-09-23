@@ -3,7 +3,7 @@ import { isValidValue } from "../905/216495";
 import { XV } from "../figma_app/383828";
 import { selectSceneGraph } from "../figma_app/889655";
 import { i2 } from "../905/557338";
-import { nD } from "../905/92359";
+import { computeBackingGUIDs } from "../905/92359";
 let d = e => e.library;
 export function $$c0() {
   return createSelector([(e, t, r) => t, (e, t, r) => r, d], (e, t, r) => {
@@ -19,7 +19,7 @@ export let $$u1 = createSelector([d, selectSceneGraph, i2], (e, t, r) => {
   let {
     backingSymbolGUID,
     backingStateGroupGUID
-  } = nD(new Set(r), t);
+  } = computeBackingGUIDs(new Set(r), t);
   if (backingStateGroupGUID && isValidValue(backingStateGroupGUID) ? n = backingStateGroupGUID : backingSymbolGUID && isValidValue(backingSymbolGUID) && (n = backingSymbolGUID), !n) return null;
   let {
     selectedItem

@@ -26,7 +26,7 @@ import { lW } from "../figma_app/11182";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEventType } from "../figma_app/191312";
 import { DevModeActivity } from "../figma_app/43951";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { generateCanvasKey, versionHistoryKeyAtom, fileVersionsQuery } from "../figma_app/841351";
 import { ViewType } from "../905/535806";
 import { NK } from "../figma_app/111825";
@@ -67,7 +67,7 @@ export function $$z8(e) {
     pageSize: 200,
     versionIds: n
   });
-  let [o] = IT(a, {
+  let [o] = setupResourceAtomHandler(a, {
     enabled: !!t
   });
   useEffect(() => {

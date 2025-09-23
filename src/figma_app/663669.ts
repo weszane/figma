@@ -1,141 +1,435 @@
-import { useState, useEffect } from "react";
-import { getSingletonSceneGraph } from "../905/700578";
-import {useDebounce} from 'use-debounce';
-import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
-let $$o0 = "1.2";
-let l = {
+import type { SceneNode } from '../905/499575'
+import type { ViewportInfo } from '../figma_app/62612'
+import { useEffect, useState } from 'react'
+import { useDebounce } from 'use-debounce'
+import { getSingletonSceneGraph } from '../905/700578'
+import { getViewportInfo, getVisibleArea } from '../figma_app/62612'
+
+export const FRAME_SELECTION_VERSION = '1.2'
+
+interface FrameSelectionConfig {
+  noPanningZoomingMs: number
+  screenAreaThresholdPercentage: number
+  frameVisiblePercentage: number
+  frameNotVisiblePercentage: number
+  largestFrameWeight: number
+  mostCentralFrameWeight: number
+  maxDepth: number
+}
+
+const DEFAULT_FRAME_SELECTION_CONFIG: FrameSelectionConfig = {
   noPanningZoomingMs: 300,
-  screenAreaThresholdPercentage: .12,
-  frameVisiblePercentage: .9,
-  frameNotVisiblePercentage: .25,
-  largestFrameWeight: .3,
-  mostCentralFrameWeight: .7,
-  maxDepth: 6
-};
-export function $$d5(e, t, r) {
-  let i = $$u2(r);
-  let [a, s] = useState(void 0);
-  let {
-    viewportIsStable
-  } = $$p4(t, i);
+  screenAreaThresholdPercentage: 0.12,
+  frameVisiblePercentage: 0.9,
+  frameNotVisiblePercentage: 0.25,
+  largestFrameWeight: 0.3,
+  mostCentralFrameWeight: 0.7,
+  maxDepth: 6,
+}
+
+/**
+ * Custom hook to get the best frame based on visibility and position
+ * @param viewportInfo - Current viewport information
+ * @param isPanningOrZooming - Whether user is currently panning or zooming
+ * @param configOverride - Optional configuration overrides
+ * @returns The GUID of the best frame or undefined
+ */
+export function useBestFrame(
+  viewportInfo: ViewportInfo,
+  isPanningOrZooming: boolean,
+  configOverride?: Partial<FrameSelectionConfig>,
+): string | undefined {
+  const config = getFrameSelectionConfig(configOverride)
+  const [bestFrameGuid, setBestFrameGuid] = useState<string | undefined>(undefined)
+  const { viewportIsStable } = useViewportStability(isPanningOrZooming, config)
+
   useEffect(() => {
-    viewportIsStable && !t && s($$c3(e, i));
-  }, [e, t, viewportIsStable, i]);
-  return a;
+    if (viewportIsStable && !isPanningOrZooming) {
+      setBestFrameGuid(getBestFrame(viewportInfo, config))
+    }
+  }, [viewportInfo, isPanningOrZooming, viewportIsStable, config])
+
+  return bestFrameGuid
 }
-export function $$c3(e, t) {
-  let r = getSingletonSceneGraph().getCurrentPage();
-  if (!r) return;
-  let n = function (e, t, r) {
-    let n = function (e) {
-      let t = [];
-      for (let r of e.childrenNodes) if ("FRAME" === r.type || "SECTION" === r.type) {
-        if ("SECTION" === r.type) for (let e of r.childrenNodes) "FRAME" === e.type && t.push(e);else t.push(r);
+
+/**
+ * Determines the best frame based on visibility and position heuristics
+ * @param viewportInfo - Current viewport information
+ * @param config - Configuration for frame selection
+ * @returns The GUID of the best frame or undefined
+ */
+export function getBestFrame(
+  viewportInfo: ViewportInfo,
+  config: FrameSelectionConfig,
+): string | undefined {
+  const sceneGraph = getSingletonSceneGraph()
+  const currentPage = sceneGraph.getCurrentPage()
+
+  if (!currentPage) {
+    return undefined
+  }
+
+  // Try to find a single dominant frame first
+  const dominantFrame: any = findDominantFrame(currentPage, viewportInfo, config)
+  if (dominantFrame) {
+    return dominantFrame.guid
+  }
+
+  // Find all visible frames
+  const visibleFrames = findAllVisibleFrames(currentPage, viewportInfo, config)
+  if (!visibleFrames.length) {
+    return undefined
+  }
+
+  // Filter frames that are mostly visible
+  let candidateFrames = visibleFrames.filter(frame =>
+    isFrameMostlyVisible(frame, viewportInfo, config.frameVisiblePercentage),
+  )
+
+  // If no mostly visible frames, consider all visible frames
+  if (candidateFrames.length === 0) {
+    candidateFrames.push(...visibleFrames)
+  }
+
+  // Select the best frame based on size and centrality
+  const bestFrame: any = selectBestFrame(candidateFrames, viewportInfo, config)
+  if (bestFrame) {
+    // Walk up the parent chain to find the top-level frame
+    return findTopLevelFrame(bestFrame, viewportInfo, config).guid
+  }
+}
+
+/**
+ * Gets the frame selection configuration with defaults
+ * @param overrides - Optional configuration overrides
+ * @returns Complete configuration object
+ */
+export function getFrameSelectionConfig(overrides: Partial<FrameSelectionConfig> = {}): FrameSelectionConfig {
+  return {
+    ...DEFAULT_FRAME_SELECTION_CONFIG,
+    ...overrides,
+  }
+}
+
+/**
+ * Hook to determine viewport stability based on debouncing
+ * @param isPanningOrZooming - Whether user is currently panning or zooming
+ * @param config - Configuration for frame selection
+ * @returns Object with debounced viewport info and stability status
+ */
+export function useViewportStability(
+  isPanningOrZooming: boolean,
+  config: FrameSelectionConfig,
+) {
+  const effectiveConfig = getFrameSelectionConfig(config)
+  const viewportInfo = getViewportInfo({
+    subscribeToUpdates_expensive: !isPanningOrZooming,
+  })
+
+  const [debouncedViewportInfo, { isPending }] = useDebounce(
+    viewportInfo,
+    effectiveConfig.noPanningZoomingMs,
+    {
+      equalityFn: (prev, next) => (
+        prev.x === next.x
+        && prev.y === next.y
+        && prev.width === next.width
+        && prev.height === next.height
+        && prev.offsetX === next.offsetX
+        && prev.offsetY === next.offsetY
+        && prev.zoomScale === next.zoomScale
+      ),
+    },
+  )
+
+  return {
+    debouncedViewportInfo,
+    viewportIsStable: !isPending(),
+  }
+}
+
+/**
+ * Checks if a frame is mostly visible in the viewport
+ * @param frame - The frame to check
+ * @param viewportInfo - Current viewport information
+ * @param threshold - Visibility threshold percentage
+ * @returns Whether the frame is mostly visible
+ */
+export function isFrameMostlyVisible(
+  frame: FrameNode,
+  viewportInfo: ViewportInfo,
+  threshold: number,
+): boolean {
+  return getFrameVisibilityPercentage(frame, viewportInfo) >= threshold
+}
+
+/**
+ * Calculates what percentage of a frame is visible in the viewport
+ * @param frame - The frame to check
+ * @param viewportInfo - Current viewport information
+ * @returns Percentage of frame that is visible (0-1)
+ */
+function getFrameVisibilityPercentage(
+  frame: FrameNode,
+  viewportInfo: ViewportInfo,
+): number {
+  return getVisibleAreaOfFrame(frame, viewportInfo)
+    / (frame.absoluteBoundingBox.width * frame.absoluteBoundingBox.height)
+}
+
+/**
+ * Calculates the visible area of a frame in the viewport
+ * @param frame - The frame to check
+ * @param viewportInfo - Current viewport information
+ * @returns Visible area in pixels
+ */
+function getVisibleAreaOfFrame(
+  frame: any,
+  viewportInfo: ViewportInfo,
+): number {
+  const { offsetX, offsetY, zoomScale, width, height } = viewportInfo
+
+  const visibleLeft = Math.max(
+    frame.absoluteBoundingBox.x,
+    offsetX - width / 2 / zoomScale,
+  )
+
+  const visibleRight = Math.min(
+    frame.absoluteBoundingBox.x + frame.absoluteBoundingBox.w,
+    offsetX + width / 2 / zoomScale,
+  )
+
+  const visibleTop = Math.max(
+    frame.absoluteBoundingBox.y,
+    offsetY - height / 2 / zoomScale,
+  )
+
+  const visibleBottom = Math.min(
+    frame.absoluteBoundingBox.y + frame.absoluteBoundingBox.h,
+    offsetY + height / 2 / zoomScale,
+  )
+
+  const visibleWidth = Math.max(0, visibleRight - visibleLeft)
+  const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+
+  return visibleWidth * visibleHeight
+}
+
+/**
+ * Finds a dominant frame when only one frame is mostly visible
+ * @param page - Current page node
+ * @param viewportInfo - Current viewport information
+ * @param config - Configuration for frame selection
+ * @returns The dominant frame or undefined
+ */
+function findDominantFrame(
+  page: SceneNode,
+  viewportInfo: ViewportInfo,
+  config: FrameSelectionConfig,
+): FrameNode | undefined {
+  // Get all top-level frames and sections
+  const topLevelFrames: FrameNode[] = []
+  for (const child of page.childrenNodes) {
+    if (child.type === 'FRAME') {
+      topLevelFrames.push(child as FrameNode)
+    }
+    else if (child.type === 'SECTION') {
+      // For sections, include their frame children
+      const section = child
+      for (const sectionChild of section.childrenNodes) {
+        if (sectionChild.type === 'FRAME') {
+          topLevelFrames.push(sectionChild as FrameNode)
+        }
       }
-      return t;
-    }(e);
-    let i = [];
-    let a = [];
-    for (let e of n) {
-      let n = h(e, t);
-      n >= r.frameVisiblePercentage ? i.push(e) : n < r.frameNotVisiblePercentage && a.push(e);
     }
-    if (1 === i.length && a.length === n.length - 1) return i[0];
-  }(r, e, t);
-  if (n) return n.guid;
-  let a = function (e, t, r) {
-    let {
-      width,
-      height
-    } = getVisibleArea(t);
-    let a = width * height;
-    let o = [];
-    let l = [{
-      node: e,
-      depth: 0
-    }];
-    for (; l.length;) {
-      let {
-        node,
-        depth
-      } = l.pop();
-      if (!(depth >= r.maxDepth) && node.visible && !node.isInternalOnlyNode && !(node.opacity <= 0) && ("CANVAS" === node.type || "DOCUMENT" === node.type || ("FRAME" === node.type || "GROUP" === node.type || "SECTION" === node.type || "SLIDE_GRID" === node.type || "SLIDE_ROW" === node.type || "RESPONSIVE_SET" === node.type || "SLIDE" === node.type || "SECTION_OVERLAY" === node.type) && m(node, t) / a >= r.screenAreaThresholdPercentage)) for (let t of ("FRAME" === node.type && o.push(node), node.childrenNodes)) l.push({
-        node: t,
-        depth: depth + 1
-      });
+  }
+
+  // Categorize frames by visibility
+  const visibleFrames: FrameNode[] = []
+  const notVisibleFrames: FrameNode[] = []
+
+  for (const frame of topLevelFrames) {
+    const visibility = getFrameVisibilityPercentage(frame, viewportInfo)
+    if (visibility >= config.frameVisiblePercentage) {
+      visibleFrames.push(frame)
     }
-    return o;
-  }(r, e, t);
-  if (!a.length) return;
-  let o = a.filter(r => $$_1(r, e, t.frameVisiblePercentage));
-  o.length || o.push(...a);
-  let l = function (e, t, r) {
-    let n = e.map(e => function (e, t) {
-      let {
-        x,
-        y,
-        width,
-        height
-      } = getVisibleArea(t);
-      return Math.sqrt(Math.pow(x + width / 2 - (e.absoluteBoundingBox.x + e.absoluteBoundingBox.w / 2), 2) + Math.pow(y + height / 2 - (e.absoluteBoundingBox.y + e.absoluteBoundingBox.h / 2), 2));
-    }(e, t));
-    let i = e.map(e => m(e, t));
-    let a = Math.max(...n);
-    let o = Math.max(...i);
-    let l = n.map(e => e / a);
-    let d = i.map(e => e / o);
-    let c = l.map((e, t) => r.largestFrameWeight * d[t] - r.mostCentralFrameWeight * e);
-    return e[c.indexOf(Math.max(...c))];
-  }(o, e, t);
-  if (l) return function (e, t, r) {
-    let n = e;
-    for (; n.parentNode && "FRAME" === n.parentNode.type && $$_1(n.parentNode, t, r.frameVisiblePercentage);) n = n.parentNode;
-    return n;
-  }(l, e, t).guid;
+    else if (visibility < config.frameNotVisiblePercentage) {
+      notVisibleFrames.push(frame)
+    }
+  }
+
+  // If exactly one frame is visible and all others are not visible, return the visible one
+  if (visibleFrames.length === 1 && notVisibleFrames.length === topLevelFrames.length - 1) {
+    return visibleFrames[0]
+  }
+
+  return undefined
 }
-export function $$u2(e = {}) {
-  return {
-    ...l,
-    ...e
-  };
+
+/**
+ * Finds all visible frames in the scene graph up to a certain depth
+ * @param root - Root node to search from
+ * @param viewportInfo - Current viewport information
+ * @param config - Configuration for frame selection
+ * @returns Array of visible frames
+ */
+function findAllVisibleFrames(
+  root: SceneNode,
+  viewportInfo: ViewportInfo,
+  config: FrameSelectionConfig,
+): FrameNode[] {
+  const { width, height } = getVisibleArea(viewportInfo) as Rect
+  const totalVisibleArea = width * height
+  const visibleFrames: FrameNode[] = []
+
+  // BFS traversal with depth limit
+  const queue: Array<{ node: SceneNode, depth: number }> = [
+    { node: root, depth: 0 },
+  ]
+
+  while (queue.length > 0) {
+    const { node, depth } = queue.pop()!
+
+    // Skip if max depth reached or node is not visible
+    if (
+      depth >= config.maxDepth
+      || !node.visible
+      || node.isInternalOnlyNode
+      || node.opacity <= 0
+    ) {
+      continue
+    }
+
+    // Check if node type is valid for processing
+    const isValidNodeType = (
+      node.type === 'CANVAS'
+      || node.type === 'DOCUMENT'
+      || node.type === 'FRAME'
+      || node.type === 'GROUP'
+      || node.type === 'SECTION'
+      || node.type === 'SLIDE_GRID'
+      || node.type === 'SLIDE_ROW'
+      || node.type === 'RESPONSIVE_SET'
+      || node.type === 'SLIDE'
+      || node.type === 'SECTION_OVERLAY'
+    )
+
+    // Check if node occupies enough screen area
+    const hasSufficientArea = isValidNodeType
+      && (getVisibleAreaOfFrame(node, viewportInfo) / totalVisibleArea)
+      >= config.screenAreaThresholdPercentage
+
+    if (hasSufficientArea) {
+      // If it's a frame, add it to results
+      if (node.type === 'FRAME') {
+        visibleFrames.push(node as unknown as FrameNode)
+      }
+
+      // Add children to queue
+      for (const child of node.childrenNodes) {
+        queue.push({
+          node: child,
+          depth: depth + 1,
+        })
+      }
+    }
+  }
+
+  return visibleFrames
 }
-export function $$p4(e, t) {
-  let r = $$u2(t);
-  let n = getViewportInfo({
-    subscribeToUpdates_expensive: !e
-  });
-  let [i, {
-    isPending: o
-  }] = useDebounce(n, r.noPanningZoomingMs, {
-    equalityFn: (e, t) => e.x === t.x && e.y === t.y && e.width === t.width && e.height === t.height && e.offsetX === t.offsetX && e.offsetY === t.offsetY && e.zoomScale === t.zoomScale
-  });
-  return {
-    debouncedViewportInfo: i,
-    viewportIsStable: !o()
-  };
+
+/**
+ * Selects the best frame from candidates based on size and centrality
+ * @param frames - Candidate frames to evaluate
+ * @param viewportInfo - Current viewport information
+ * @param config - Configuration for frame selection
+ * @returns The best frame or undefined
+ */
+function selectBestFrame(
+  frames: FrameNode[],
+  viewportInfo: ViewportInfo,
+  config: FrameSelectionConfig,
+): FrameNode | undefined {
+  if (frames.length === 0) {
+    return undefined
+  }
+
+  if (frames.length === 1) {
+    return frames[0]
+  }
+
+  // Calculate distances from center for each frame
+  const centerDistances = frames.map((frame) => {
+    const { x, y, width, height } = getVisibleArea(viewportInfo) as Rect
+    const viewportCenterX = x + width / 2
+    const viewportCenterY = y + height / 2
+
+    const frameCenterX = frame.absoluteBoundingBox.x + frame.absoluteBoundingBox.width / 2
+    const frameCenterY = frame.absoluteBoundingBox.y + frame.absoluteBoundingBox.height / 2
+
+    return Math.sqrt(
+      (viewportCenterX - frameCenterX) ** 2
+      + (viewportCenterY - frameCenterY) ** 2,
+    )
+  })
+
+  // Calculate visible areas for each frame
+  const visibleAreas = frames.map(frame =>
+    getVisibleAreaOfFrame(frame, viewportInfo),
+  )
+
+  // Normalize values to 0-1 range
+  const maxDistance = Math.max(...centerDistances)
+  const maxArea = Math.max(...visibleAreas)
+
+  const normalizedDistances = centerDistances.map(d => d / maxDistance)
+  const normalizedAreas = visibleAreas.map(a => a / maxArea)
+
+  // Calculate scores (higher is better)
+  // Prefer larger frames that are closer to center
+  const scores = normalizedDistances.map((distance, index) =>
+    config.largestFrameWeight * normalizedAreas[index]
+    - config.mostCentralFrameWeight * distance,
+  )
+
+  // Find frame with highest score
+  const bestIndex = scores.indexOf(Math.max(...scores))
+  return frames[bestIndex]
 }
-export function $$_1(e, t, r) {
-  return h(e, t) >= r;
+
+/**
+ * Finds the top-level frame in a hierarchy
+ * @param frame - Starting frame
+ * @param viewportInfo - Current viewport information
+ * @param config - Configuration for frame selection
+ * @returns The top-level frame
+ */
+function findTopLevelFrame(
+  frame: SceneNode,
+  viewportInfo: ViewportInfo,
+  config: FrameSelectionConfig,
+) {
+  let currentFrame = frame
+
+  // Walk up the parent chain while parents are frames and mostly visible
+  while (
+    currentFrame.parentNode
+    && currentFrame.parentNode.type === 'FRAME'
+    && isFrameMostlyVisible(
+      currentFrame.parentNode,
+      viewportInfo,
+      config.frameVisiblePercentage,
+    )
+  ) {
+    currentFrame = currentFrame.parentNode
+  }
+
+  return currentFrame
 }
-function h(e, t) {
-  return m(e, t) / (e.absoluteBoundingBox.w * e.absoluteBoundingBox.h);
-}
-function m(e, t) {
-  let {
-    offsetX,
-    offsetY,
-    zoomScale,
-    width,
-    height
-  } = t;
-  let o = Math.max(e.absoluteBoundingBox.x, offsetX - width / 2 / zoomScale);
-  let l = Math.min(e.absoluteBoundingBox.x + e.absoluteBoundingBox.w, offsetX + width / 2 / zoomScale);
-  let d = Math.max(e.absoluteBoundingBox.y, offsetY - height / 2 / zoomScale);
-  return Math.max(0, l - o) * Math.max(0, Math.min(e.absoluteBoundingBox.y + e.absoluteBoundingBox.h, offsetY + height / 2 / zoomScale) - d);
-}
-export const JL = $$o0;
-export const Mw = $$_1;
-export const Z9 = $$u2;
-export const fX = $$c3;
-export const pJ = $$p4;
-export const pW = $$d5;
+
+export const JL = FRAME_SELECTION_VERSION
+export const Mw = isFrameMostlyVisible
+export const Z9 = getFrameSelectionConfig
+export const fX = getBestFrame
+export const pJ = useViewportStability
+export const pW = useBestFrame

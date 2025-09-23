@@ -1,8 +1,8 @@
 import { isPartOfGroup, resetTypeInfoCache, getTypeInfoCached, getComponentInfoById } from "../figma_app/664063";
-import { J } from "../905/223510";
+import { GroupItemType } from "../905/223510";
 import { __ } from "../figma_app/257655";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { B } from "../905/94678";
+import { collectSymbolsAndStateGroups } from "../905/94678";
 import { VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -52,7 +52,7 @@ export async function $$y0(e) {
 }
 async function b(e) {
   let t = __(e);
-  let r = B([...t], {
+  let r = collectSymbolsAndStateGroups([...t], {
     followInstances: !1
   }).filter(e => "SYMBOL" === e.type ? e.isSymbolPublishable : !!e.isStateGroup && !e.hiddenFromPublishing);
   return {
@@ -154,7 +154,7 @@ export async function $$C2(e, t) {
     let t = getComponentInfoById(e.symbolId ?? "", {
       enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
     });
-    if (!t || t.componentType !== J.BUILDING_BLOCK) throw Error("Expected building block");
+    if (!t || t.componentType !== GroupItemType.BUILDING_BLOCK) throw Error("Expected building block");
     return {
       name: t.jsxName,
       tag: `<${t.jsxName} />`,
@@ -184,7 +184,7 @@ export async function $$C2(e, t) {
       let t = getComponentInfoById(e.symbolId ?? "", {
         enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
       });
-      if (!t || t.componentType !== J.BUILDING_BLOCK) return null;
+      if (!t || t.componentType !== GroupItemType.BUILDING_BLOCK) return null;
     }
     if ("VERTICAL" === o.stackMode && o.childrenNodes.filter(e => "INSTANCE" === e.type).length >= 3 && o.childrenNodes.every(e => "INSTANCE" === e.type || a(e))) {
       let e = o.childrenNodes.filter(e => "INSTANCE" === e.type);

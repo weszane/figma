@@ -191,7 +191,7 @@ import { x as _$$x } from "../905/587214";
 import { yE } from "../469e6e40/471025";
 import { e as _$$e6 } from "../905/86132";
 import { F4 } from "../1881/125927";
-import { IT, liveStoreInstance } from "../905/713695";
+import { setupResourceAtomHandler, liveStoreInstance } from "../905/713695";
 import { createNoOpValidator } from "../figma_app/181241";
 import { z as _$$z2 } from "../905/284530";
 import { A as _$$A6 } from "../5724/663128";
@@ -4799,7 +4799,7 @@ function sR({
   let m = useSubscription(AllowlistPluginsSectionView, {
     orgId: e
   });
-  let [p] = IT(sD(e), {
+  let [p] = setupResourceAtomHandler(sD(e), {
     enabled: c
   });
   let g = useCallback(() => {

@@ -8,11 +8,11 @@ import { s9 } from "../figma_app/913823";
 import { Xh, M7 } from "../figma_app/933328";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
-import { bj } from "../905/420347";
+import { useLibraries } from "../905/420347";
 import { PreloadCodeConnectLk } from "../figma_app/43951";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { MH } from "../figma_app/803787";
-import { Th, WH } from "../figma_app/645694";
+import { selectAllComponentAssets, selectAllStateGroupAssets } from "../figma_app/645694";
 import { selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
 import { Q } from "../905/577205";
@@ -108,8 +108,8 @@ export function $$N3() {
   let t = useSceneGraphSelector();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let l = useSelector(subscribedSymbolsOnCurrentPageSelector);
-  let d = useSelector(Th);
-  let c = useSelector(WH);
+  let d = useSelector(selectAllComponentAssets);
+  let c = useSelector(selectAllStateGroupAssets);
   let h = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);
   let m = useMemo(() => {
     let r = new Set();
@@ -129,7 +129,7 @@ export function $$N3() {
       componentToLibraryKeyMap: n
     };
   }, [l, t, e]);
-  let g = bj(m.libraryKeys);
+  let g = useLibraries(m.libraryKeys);
   let b = useMemo(() => {
     if ("loaded" !== g.status) return l;
     let e = new Set(g.data.filter(e => "library_type" in e && "community" !== e.library_type).map(e => e.library_key));
@@ -227,7 +227,7 @@ export function $$L5() {
     atomStoreManager.set(Af, null);
   }, [e]);
   let t = x(useCurrentFileKey(), !0);
-  let [r] = IT(R({
+  let [r] = setupResourceAtomHandler(R({
     nodes: Array.from(t)
   }), {
     enabled: !!getFeatureFlags().dt_code_connect_preload_component_names_endpoint && t.size > 0
@@ -253,7 +253,7 @@ export function $$D1() {
   let r = useAtomWithSubscription(Xh);
   let a = useAtomWithSubscription(s9);
   let l = useAtomWithSubscription(M7);
-  let [u] = IT(P({
+  let [u] = setupResourceAtomHandler(P({
     assetKeys: Array.from(t)
   }), {
     enabled: !!getFeatureFlags().dt_component_browser_in_context && t.size > 0

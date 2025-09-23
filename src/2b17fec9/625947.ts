@@ -62,7 +62,7 @@ import { calculateTypography } from '../905/71149';
 import { h1 as _$$h, LQ, MX, wm } from '../905/77316';
 import { n as _$$n4 } from '../905/79930';
 import { setSideHandler } from '../905/80656';
-import { yD as _$$yD } from '../905/92359';
+import { generateRetrievingSubscribedComponentsKey } from '../905/92359';
 import { W as _$$W3 } from '../905/95038';
 import { m as _$$m6 } from '../905/99004';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
@@ -200,7 +200,6 @@ import { e0 as _$$e8 } from '../905/696396';
 import { l as _$$l0 } from '../905/697177';
 import { getSingletonSceneGraph } from '../905/700578';
 import { dG as _$$dG } from '../905/709354';
-import { IT } from '../905/713695';
 import { logDebug, logError } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { TabLoop } from '../905/718764';
@@ -501,7 +500,7 @@ import { useCurrentPlanUser, useCurrentPrivilegedPlan, useIsOrgGuestUser } from 
 import { throwTypeError } from '../figma_app/465776';
 import { IntegrationUtils, isGoogleMeetIntegration } from '../figma_app/469876';
 import { buildCommunityPath } from '../figma_app/471982';
-import { yZ as _$$yZ } from '../figma_app/476572';
+import { equals } from '../figma_app/476572';
 import { m as _$$m } from '../figma_app/477548';
 import { R1 } from '../figma_app/479760';
 import { P as _$$P5 } from '../figma_app/483257';
@@ -4524,7 +4523,7 @@ function aQ() {
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));
-  let u = a && fileVersion && isNullOrFailure(loadingState, _$$yD(a.key));
+  let u = a && fileVersion && isNullOrFailure(loadingState, generateRetrievingSubscribedComponentsKey(a.key));
   return (useEffect(() => {
     u && r(zK());
   }, [r, u]), i.length === 0) ? null : jsxs(Fragment, {
@@ -7078,7 +7077,7 @@ function lF({
       shouldSearchDefaultLibraries: !0
     }));
   }, [$]);
-  let em = m && fileVersion && isNullOrFailure(loadingState, _$$yD(m.key));
+  let em = m && fileVersion && isNullOrFailure(loadingState, generateRetrievingSubscribedComponentsKey(m.key));
   useEffect(() => {
     em && $(zK());
   }, [$, em]);
@@ -7962,7 +7961,7 @@ function d5({
   useEffect(() => {
     let e = C.current.map(e => e.title);
     let t = s.map(e => e.title);
-    let i = !_$$yZ(new Set(e), new Set(t));
+    let i = !equals(new Set(e), new Set(t));
     let n = C.current.length > 0 && !C.current.some(_$$UH) && !s.some(_$$UH);
     C.current = s;
     i && !n && Fg(s);
@@ -24427,7 +24426,7 @@ let vW = memo(({
 export function $$vz0() {
   let e = useCurrentTool();
   let [t, i] = useState(!1);
-  IT(queryDefaultLibrariesMeta({}));
+  setupResourceAtomHandler(queryDefaultLibrariesMeta({}));
   return jsx(_$$c, {
     children: jsx(_$$v, {
       setShouldShowDragAndDropBorder: i,

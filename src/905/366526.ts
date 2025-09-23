@@ -7,7 +7,7 @@ import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
 import eW from 'statsig-js';
 import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
-import { WR, X0 } from '../905/2848';
+import { resolvePromise, resolveAndResetPromise } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
 import { isNullOrFailure } from '../905/18797';
@@ -32,7 +32,7 @@ import { createActionCreator } from '../905/73481';
 import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
 import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
 import { ck as _$$ck4 } from '../905/87821';
-import { vx } from '../905/91038';
+import { fileVersionSelector } from '../905/91038';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { UserAPIHandlers } from '../905/93362';
 import { batchPutPlan, setLastVisitedPlan } from '../905/93909';
@@ -45,7 +45,7 @@ import { LivestoreBinding, LivestoreStore } from '../905/113138';
 import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
 import { eo as _$$eo, En, IN, jx, KE, Kl, SI } from '../905/116101';
 import { fullscreenPerfManager } from '../905/125218';
-import { E as _$$E4 } from '../905/128063';
+import { mapLibraryAttributes } from '../905/128063';
 import { KindEnum, PopupType, PositionEnum } from '../905/129884';
 import { filterNavigationConfig, navigationConfig } from '../905/139708';
 import { A as _$$A11 } from '../905/142432';
@@ -112,7 +112,7 @@ import { D6 as _$$D5, Nx } from '../905/345933';
 import { updateJoinStatus } from '../905/346794';
 import { P as _$$P4 } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
-import { E as _$$E8 } from '../905/355220';
+import { quickStartSetTextNodeIdAction } from '../905/355220';
 import { l as _$$l5 } from '../905/362016';
 import { selectCurrentUser } from '../905/372672';
 import { S as _$$S3 } from '../905/373189';
@@ -237,7 +237,7 @@ import { compareLibraryItemWithKey } from '../905/709171';
 import { uiVariantName } from '../905/709735';
 import { addThumbnailForDanglingStyle, replaceLocalThumbnails } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
-import { IT, liveStoreInstance } from '../905/713695';
+import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
 import { SvgComponent } from '../905/714743';
@@ -326,7 +326,7 @@ import { Mt as _$$Mt, AJ, CG, qI, vB, XJ } from '../905/959568';
 import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
 import { searchSetLastAckedQueryIdAction, searchSetQueryIdAction, setSearchTypeBehaviorAction, searchSessionEnteredSearchViewViaEnterAction, setResponseAction, handleSearchParameterChangeThunk, searchIncrementQueryCountAction, sortStateThunk, searchSessionEnteredSearchViewAction, searchClearQueryAction, startSearchSessionAction, setResponseSortStateAction, clearWorkspaceFilterThunk, searchEndSessionAction, searchRestoreSessionAction, searchThunk, searchSessionSeeMoreClickAction, searchSetScrollTopAction, searchClearResponsesAction, setFullResultsSearchResponseAction, searchSetParametersAction, searchResetFileTypeFilterAction, searchSelectedAction, searchSetLastLoadedQueryAction, setFocusAction, setResponsesAction } from '../905/977218';
-import { qp } from '../905/977779';
+import { filesByLibraryKeyAtom } from '../905/977779';
 import { postUserFlag, setAllUserFlags } from '../905/985254';
 import { Y as _$$Y4 } from '../905/986107';
 import { Q as _$$Q2 } from '../905/986450';
@@ -335,7 +335,7 @@ import { Wm } from '../905/990455';
 import { l as _$$l4 } from '../905/997221';
 import { cT as _$$cT, mI as _$$mI, P8, PG, qF, vr } from '../905/997533';
 import { OperationStatus, ProviderType } from '../3973/473379';
-import { h as _$$h6, I as _$$I3 } from '../3973/647885';
+import { progressSetAction, progressClearAction } from '../3973/647885';
 import { numericAtom, processSelector } from '../3973/697935';
 import { trackStatsigPlanKeyBootstrap } from '../3973/890507';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -3009,7 +3009,7 @@ function rY({
             recordingKey: `subscriptionListViewFileRow.${p}.${i.name}`,
             viewFile: c
           }), r && jsx(_$$C2, {
-            publishedLibrary: _$$E4(e),
+            publishedLibrary: mapLibraryAttributes(e),
             searchQuery: a,
             inline: !0,
             width: u,
@@ -3259,7 +3259,7 @@ function r7({
   let i = useDispatch();
   _$$T2();
   let r = useSelector(e => e.currentUserOrgId);
-  let a = useSelector(vx);
+  let a = useSelector(fileVersionSelector);
   let o = useSelector(e => e.modalShown);
   let [l, c] = useState(o?.type === LIBRARY_PREFERENCES_MODAL && o.data?.fileKey && {
     fileKey: o.data?.fileKey,
@@ -3271,9 +3271,9 @@ function r7({
   let [_, A] = useState(null);
   let [y, b] = useState(_$$R3.OVERVIEW);
   let v = _$$F4();
-  let [I] = IT(_$$Z2(r));
+  let [I] = setupResourceAtomHandler(_$$Z2(r));
   let E = useMemo(() => I.data?.files.map(e => e.file).find(e => e.key === l?.fileKey), [l, I.data?.files]);
-  let [x] = IT(fv(r));
+  let [x] = setupResourceAtomHandler(fv(r));
   let S = useCallback(() => {
     c(null);
     p(null);
@@ -3639,7 +3639,7 @@ function aF(e, t) {
   let i = t.component || t.state_group;
   let n = t.component ? PrimaryWorkflowEnum.COMPONENT : PrimaryWorkflowEnum.STATE_GROUP;
   let r = e.getState();
-  let a = atomStoreManager.get(qp);
+  let a = atomStoreManager.get(filesByLibraryKeyAtom);
   if (i.length === 0) return;
   let s = aL(i[0]);
   let l = i[0].library_key;
@@ -3772,7 +3772,7 @@ let aU = new _$$H6({
     let r = [];
     for (let a of t.project?.componentUpdates || []) {
       let t = a.component?.nodeId || a.nodeId || '';
-      let s = atomStoreManager.get(qp);
+      let s = atomStoreManager.get(filesByLibraryKeyAtom);
       let o = _$$l6(a.component?.libraryKey ?? a.libraryKey ?? '');
       let l = a.component?.file?.teamId || s[o]?.team_id || '';
       let d = e.getState().library.publishedByLibraryKey.components;
@@ -3824,7 +3824,7 @@ let aB = new _$$H6({
       idForDeletion: t
     }), i.file?.componentUpdates || [])) {
       let t = o.component?.nodeId || o.nodeId || '';
-      let i = atomStoreManager.get(qp);
+      let i = atomStoreManager.get(filesByLibraryKeyAtom);
       let s = _$$l6(o.component?.libraryKey ?? o.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.components;
       let d = o.component?.file?.teamId || i[s]?.team_id || '';
@@ -3987,7 +3987,7 @@ let aH = new _$$H6({
     let r = [];
     for (let a of t.project?.stateGroupUpdates || []) {
       let t = a.stateGroup?.nodeId || a.nodeId || '';
-      let s = atomStoreManager.get(qp);
+      let s = atomStoreManager.get(filesByLibraryKeyAtom);
       let o = _$$l6(a.stateGroup?.libraryKey ?? a.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = a.stateGroup?.file?.teamId || s[o]?.team_id || '';
@@ -4039,7 +4039,7 @@ let aW = new _$$H6({
       idForDeletion: t
     }), i.file?.stateGroupUpdates || [])) {
       let t = o.stateGroup?.nodeId || o.nodeId || '';
-      let i = atomStoreManager.get(qp);
+      let i = atomStoreManager.get(filesByLibraryKeyAtom);
       let s = _$$l6(o.stateGroup?.libraryKey ?? o.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = o.stateGroup?.file?.teamId || i[s]?.team_id || '';
@@ -5702,7 +5702,7 @@ function sV(e) {
   t.selectedView.view === 'fullscreen' && function (e, t, i) {
     let n = e.getState();
     let r = new Set();
-    let a = atomStoreManager.get(qp);
+    let a = atomStoreManager.get(filesByLibraryKeyAtom);
     for (let e of [n.library.publishedByLibraryKey.components, n.library.publishedByLibraryKey.stateGroups]) {
       for (let [n, s] of Object.entries(e)) {
         if (!i.has(n)) {
@@ -10030,7 +10030,7 @@ let cE = HY({
     } : e;
   },
   sceneGraph(e = cy, t) {
-    return initAction.matches(t) || _$$a4.matches(t) ? (X0(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
+    return initAction.matches(t) || _$$a4.matches(t) ? (resolveAndResetPromise(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (resolvePromise(), new SingletonSceneGraph()) : e;
   },
   sceneGraphSelection: bp,
   objectsPanelRowRebuildCounter(e = 0, t) {
@@ -10077,7 +10077,7 @@ let cw = {
   insertedTextNodeId: null
 };
 function cC(e, t) {
-  return e ? _$$E8.matches(t) ? {
+  return e ? quickStartSetTextNodeIdAction.matches(t) ? {
     ...e,
     insertedTextNodeId: t.payload.nodeId
   } : e : cw;
@@ -11230,7 +11230,7 @@ let pg = {
     } : e;
   },
   progress(e = {}, t) {
-    if (_$$h6.matches(t)) {
+    if (progressSetAction.matches(t)) {
       return {
         ...e,
         [t.payload.key]: {
@@ -11239,7 +11239,7 @@ let pg = {
         }
       };
     }
-    if (_$$I3.matches(t)) {
+    if (progressClearAction.matches(t)) {
       let i = {
         ...e
       };

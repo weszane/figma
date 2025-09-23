@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { logError } from "../905/714362";
 import { am } from "../figma_app/430563";
 import { processLocalComponents, filterAndSortPublishedItems, isCurrentStagingStatus } from "../figma_app/80990";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isPrimaryWorkflowType, arePagesEqual, areNodesEqual, isActiveStagingStatus, useIsAssetPublishedForCurrentFile, useSubscribedLibraryId } from "../figma_app/646357";
 import { QB } from "../905/921418";
@@ -115,7 +115,7 @@ export function $$N0({
 }
 let C = e => e.containing_frame?.containingStateGroup == null;
 export function $$w11(e) {
-  let t = atomStoreManager.get(qp);
+  let t = atomStoreManager.get(filesByLibraryKeyAtom);
   return O({
     itemsByTeamId: useMemo(() => function (e) {
       let t = {};

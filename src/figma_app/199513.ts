@@ -25,7 +25,7 @@ import { validateFolderName } from "../figma_app/528509";
 import { convertTeamToRaw } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
 import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { W$ } from "../905/970170";
@@ -136,7 +136,7 @@ let $ = liveStoreInstance.Query({
   }
 });
 export function $$X2(e, t = !0, r = !1) {
-  let [n] = IT($({
+  let [n] = setupResourceAtomHandler($({
     folderId: e,
     shouldShowOnlyTrashedFiles: r
   }), {

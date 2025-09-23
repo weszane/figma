@@ -50,7 +50,7 @@ import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "..
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { bj } from "../905/420347";
+import { useLibraries } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
@@ -895,7 +895,7 @@ function eV() {
   });
 }
 function eH(e) {
-  let t = bj([e])?.data?.[0];
+  let t = useLibraries([e])?.data?.[0];
   return !!t && isPublishedLibraryWithAssets(t) && isCommunityLibrary(t);
 }
 let ez = (e, t) => {
@@ -986,7 +986,7 @@ function eK({
   let I = Ur(e.template, a, s);
   let S = _$$l(backingLibraryKey ?? "");
   let A = function (e) {
-    let t = bj([e]).data[0];
+    let t = useLibraries([e]).data[0];
     let r = null;
     t && (isPublishedLibraryWithAssets(t) && isCommunityLibrary(t) ? r = t.hub_file_id : "library_file_key" in t && (r = t.library_file_key));
     return r;

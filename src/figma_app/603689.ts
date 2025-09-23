@@ -174,7 +174,7 @@ import { BannerButton } from '../905/692618';
 import { isFigmascopeView } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
-import { IT as _$$IT, liveStoreInstance } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { z5 as _$$z, Nv } from '../905/713722';
 import { XA } from '../905/714160';
 import { SvgComponent } from '../905/714743';
@@ -267,7 +267,7 @@ import { N as _$$N4 } from '../1577/472492';
 import { H as _$$H } from '../1577/640070';
 import { d as _$$d3 } from '../1577/847459';
 import { normalizePathnameStrict } from '../3973/348894';
-import { h as _$$h8 } from '../3973/647885';
+import { progressSetAction } from '../3973/647885';
 import { A as _$$A12 } from '../4711/136271';
 import { z as _$$z2 } from '../5132/283698';
 import { e7 as _$$e6 } from '../5132/288241';
@@ -415,7 +415,7 @@ import { useCurrentPlanUser, useIsOrgAdminUser } from '../figma_app/465071';
 import { assert, throwTypeError } from '../figma_app/465776';
 import { useCanAccessFullDevMode, useIsLoggedOutDevModeDemoFile, useCanUseDevModeDemoFile, useCanAccessDevModeEntryPoint } from '../figma_app/473493';
 import { A as _$$A4 } from '../figma_app/475340';
-import { yZ } from '../figma_app/476572';
+import { equals } from '../figma_app/476572';
 import { $X, n6 as _$$n2, pD as _$$pD, f7, FZ, KN, LD, ZB } from '../figma_app/476677';
 import { WH } from '../figma_app/485258';
 import { nz as _$$nz } from '../figma_app/492354';
@@ -5984,7 +5984,7 @@ let dj = atom(e => {
   }
   return t;
 });
-let dU = mg(dj, e => new Set(e.map(e => e.sourceLibraryKey)), yZ);
+let dU = mg(dj, e => new Set(e.map(e => e.sourceLibraryKey)), equals);
 function dB({
   children: e,
   maxSubscriptionsBeforeCleanup: t
@@ -6187,7 +6187,7 @@ function dH() {
         dispatch: e,
         icon: VisualBellIcon.PROGRESS,
         progressKey: 'library-publish'
-      }), u.count)), e(_$$h8({
+      }), u.count)), e(progressSetAction({
         key: 'library-publish',
         progress: n,
         total: a || 0
@@ -6260,7 +6260,7 @@ let dX = {
 };
 function dJ() {
   let e = getFullscreenFileKey();
-  let [t] = _$$IT(OpenEditorFileData({
+  let [t] = setupResourceAtomHandler(OpenEditorFileData({
     fileKey: e
   }), {
     enabled: !!e

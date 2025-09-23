@@ -3,7 +3,7 @@ import { memo, useMemo, useRef } from "react";
 import { P } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { IT } from "../905/713695";
+import { setupResourceAtomHandler } from "../905/713695";
 import { e0 } from "../905/696396";
 import { l as _$$l, n as _$$n } from "../905/402643";
 import { a as _$$a } from "../905/275092";
@@ -23,7 +23,7 @@ export let $$v0 = memo(function ({
   width: o,
   hideOpenInFileButton: m = !1
 }) {
-  let [g] = IT(lY({
+  let [g] = setupResourceAtomHandler(lY({
     libraryFileKey: e ?? "",
     styleKey: t.key
   }), {
@@ -75,7 +75,7 @@ function I({
   libraryFileKey: e,
   styleStat: t
 }) {
-  let [i] = IT(lY({
+  let [i] = setupResourceAtomHandler(lY({
     libraryFileKey: e ?? "",
     styleKey: t.key
   }), {

@@ -10,7 +10,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $z } from "../figma_app/297733";
-import { CK } from "../figma_app/517115";
+import { useUUIDSubscription } from "../figma_app/517115";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { XG } from "../figma_app/98578";
 import { Nv } from "../figma_app/318590";
@@ -42,7 +42,7 @@ export function $$C1({
   let F = useIsSelectedFigmakeFullscreen();
   let M = F ? "figmake" : "actions_assets_tab";
   let j = selectCurrentFile();
-  let U = CK();
+  let U = useUUIDSubscription();
   let B = useMemo(() => ({
     assetKey: u2(e),
     assetLibraryKey: e.library_key,

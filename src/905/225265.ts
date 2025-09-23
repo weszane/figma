@@ -10,13 +10,13 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { $ as _$$$ } from "../905/455748";
 import { asyncExecutorSubscription } from "../905/888985";
 import { WebLoggerTimer } from "../905/485103";
-import { yZ } from "../figma_app/476572";
+import { equals } from "../figma_app/476572";
 import { getExperimentConfigAsync } from "../figma_app/594947";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString } from "../905/709171";
 import { V as _$$V } from "../figma_app/473391";
-import { qp, hN } from "../905/977779";
+import { filesByLibraryKeyAtom, assetKeysSetAtom } from "../905/977779";
 import { resolveTeamId } from "../905/515860";
 import { openFileAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectedViewAtom } from "../figma_app/386952";
@@ -24,10 +24,10 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { getNonDeletedAssets, filterAssetsWithContainingStateGroup, addStateNamesToAssets } from "../figma_app/646357";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { KH } from "../905/81982";
-import { vx } from "../905/91038";
+import { fileVersionSelector } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
 import { generateSessionId } from "../905/574958";
-import { r6 } from "../figma_app/517115";
+import { getUUID } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
@@ -87,7 +87,7 @@ export function $$J1(e) {
 }
 let ee = createRemovableAtomFamily((e, t) => atom(t ?? void 0), (e, t) => e === t);
 let et = createRemovableAtomFamily(e => atom({}));
-let ei = createReduxSubscriptionAtomWithState(vx);
+let ei = createReduxSubscriptionAtomWithState(fileVersionSelector);
 let en = atom(e => e(lj).length > 0);
 let er = {
   normalizedSearchResults: [],
@@ -125,7 +125,7 @@ let ep = createRemovableAtomFamily(e => atom(t => {
   let n = t(cY("libraryKey"));
   return libraryKeyBackingSelectedItems ? new Set([...n, libraryKeyBackingSelectedItems]) : n;
 }));
-let em = selectAtom(qp, e => new Set(Object.keys(e)), yZ);
+let em = selectAtom(filesByLibraryKeyAtom, e => new Set(Object.keys(e)), equals);
 var eh = (e => (e[e.None = 0] = "None", e[e.All = 1] = "All", e[e.File = 2] = "File", e[e.Local = 3] = "Local", e))(eh || {});
 let eg = createRemovableAtomFamily(e => atom(async t => {
   let i = t(Z(e).debouncedValueAtom);
@@ -259,7 +259,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", S);
       analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...S,
-        componentSuggestionSessionId: r6(),
+        componentSuggestionSessionId: getUUID(),
         didNetworkFetch: E
       });
       await eB({
@@ -319,7 +319,7 @@ let ev = async (e, t) => {
   let a = t(ec);
   let s = t(em);
   let o = t(ep(e));
-  let l = t(hN);
+  let l = t(assetKeysSetAtom);
   let d = await eD(() => Ci(!0), "asset_search.latency_segment.permission_check", e, t);
   let {
     preferLocal

@@ -13,7 +13,7 @@ import { J } from "../905/252202";
 import { LibrarySubscriptionType } from "../figma_app/155728";
 import { isTeamLibrary } from "../figma_app/633080";
 import { A } from "../905/733171";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { n as _$$n } from "../905/64411";
 let b = "file_key_optimistic_update";
 let T = "hub_file_id_optimistic_update";
@@ -28,7 +28,7 @@ let $$I0 = createOptimistThunk((e, {
     (!0 === r || "design" === a && r.design || "whiteboard" === a && r.figjam) && (e.getState().leftPanel.activeTab === UserInterfaceElements.ASSETS || e.getState().universalInsertModal.showing ? e.dispatch(_$$n({
       libraryKey: t
     })) : e.dispatch(loadingStateDelete({
-      key: yD(n.key)
+      key: generateRetrievingSubscribedComponentsKey(n.key)
     })));
   }
 });

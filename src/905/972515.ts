@@ -28,7 +28,7 @@ import { selectOpenFile } from "../figma_app/516028";
 import { B0 } from "../figma_app/807786";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { useSubscribedLibraries } from "../figma_app/155728";
-import { CK } from "../figma_app/517115";
+import { useUUIDSubscription } from "../figma_app/517115";
 import { rp } from "../figma_app/703988";
 import { Bx, Wu } from "../905/221848";
 import { S as _$$S2 } from "../905/459477";
@@ -676,7 +676,7 @@ function eI(e) {
   let ej = _$$S2.useOpenFileProperties();
   let eU = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : void 0);
   let eB = useCurrentPublicPlan("_DrilldownPicker").unwrapOr(null)?.tier;
-  let eV = CK();
+  let eV = useUUIDSubscription();
   useEffect(() => {
     eL(searchFilter(eN));
   }, [eN, searchFilter]);

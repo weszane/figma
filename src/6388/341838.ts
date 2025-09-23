@@ -9,7 +9,7 @@ import { ts, zo, gR } from "../figma_app/120210";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isNullOrFailure } from "../905/18797";
 import { FDocumentType } from "../905/862883";
-import { yD } from "../905/92359";
+import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { wR } from "../figma_app/293326";
 import { b as _$$b } from "../1291/451154";
 import { cX, t$, kx } from "../figma_app/920333";
@@ -229,7 +229,7 @@ export function $$F0() {
       shouldSearchDefaultLibraries: !0
     }));
   }, [R]);
-  let V = e && fileVersion && isNullOrFailure(loadingState, yD(e.key));
+  let V = e && fileVersion && isNullOrFailure(loadingState, generateRetrievingSubscribedComponentsKey(e.key));
   useEffect(() => {
     V && R(zK());
   }, [R, V]);

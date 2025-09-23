@@ -48,6 +48,7 @@ import { memoizeByArgs } from '../figma_app/815945'
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186'
 import { CURRENT_VERSION_ID } from '../figma_app/841351'
 import { formatList } from '../figma_app/930338'
+import { TSSceneGraph } from './518682'
 
 /**
  * Enum for asset filter modes (original: AssetFilterMode)
@@ -1693,11 +1694,11 @@ export async function fetchStylesByKeys(dispatch: Fn, styleKeys: string[], orgId
  * @returns Array of asset objects
  */
 export function getAssetsForNodeIds(
-  sceneGraphMap: Map<string, any>,
+  sceneGraphMap: TSSceneGraph,
   symbolNodeIds: string[] = [],
   stateGroupNodeIds: string[] = [],
   publishedByLibraryKey: any,
-  fileVersion: string,
+  fileVersion: string | number,
   dispatch: any,
   includeStateGroups: boolean = false,
 ): any[] {

@@ -26,8 +26,8 @@ import { u2 } from "../figma_app/807786";
 import { hasAssetId, PrimaryWorkflowEnum, hasComponentKey } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { r as _$$r } from "../905/632622";
-import { r6 } from "../figma_app/517115";
-import { tM, k1 } from "../figma_app/984498";
+import { getUUID } from "../figma_app/517115";
+import { AUTO_SUGGEST_EVENT_PREFIX, trackComponentInserted } from "../figma_app/984498";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Nv } from "../figma_app/318590";
 import { p as _$$p } from "../905/42189";
@@ -170,7 +170,7 @@ export function $$$$j0(e) {
         ...X,
         ...e.insertLogArgsOverride
       };
-      e.sourceForTracking !== tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
+      e.sourceForTracking !== AUTO_SUGGEST_EVENT_PREFIX ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
         ...s,
         aiResultsEnabled: U,
         assetType: type,
@@ -179,8 +179,8 @@ export function $$$$j0(e) {
         query: searchQuery,
         sessionId: searchSessionId,
         entryPoint: "assets-panel" === e.sourceForTracking ? "assets-panel" : "actions_assets_tab" === e.sourceForTracking ? "actions-assets-tab" : void 0,
-        componentSuggestionSessionId: r6()
-      }) : k1({
+        componentSuggestionSessionId: getUUID()
+      }) : trackComponentInserted({
         assetKey: s.assetKey ?? "",
         libraryKey: s.assetLibraryKey,
         assetType: type,

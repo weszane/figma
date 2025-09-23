@@ -18,7 +18,7 @@ import { isEmptyObject } from '../figma_app/493477';
 import { selectOpenFileKey, selectOpenFile, selectOpenFileLibraryKey, openFileAtom } from '../figma_app/516028';
 import { isTeamFolderV2 } from '../figma_app/528509';
 import { LibrarySourceEnum, StagingStatusEnum, PrimaryWorkflowEnum } from '../figma_app/633080';
-import { c5, qV, ZA } from '../figma_app/645694';
+import { selectMergedAssets, selectFlattenedComponents, selectFlattenedStateGroups } from '../figma_app/645694';
 import { hasContainingStateGroup, getAssetKeyForPublish, getContainingStateGroupNodeId, compareAssetsByFrameAndName, isActiveStagingStatus, isStagedStatus, createLocalComponent, createLocalStateGroup, isNewOrChangedOrDeleted, compareStyles, compareAssetsByName, areValuesEqual, areFramesEqual, generateNewLocalLibraryItems, hasVariableSetError, createLocalStyle, hasAssetError } from '../figma_app/646357';
 import { sortByMultiple } from '../figma_app/656233';
 import { VariableErrorType } from '../figma_app/763686';
@@ -43,8 +43,8 @@ let z = e => e.library.openHubFilePublished__LIVEGRAPH.variables;
 let W = e => e.library.openHubFilePublished__LIVEGRAPH.variableSets;
 let K = e => e.library.openHubFilePublished__LIVEGRAPH.modules;
 let $$Y15 = createSelector([$$G13, H, z, W, $$V14], (e, t, r, n, a) => !isEmptyObject(e) || !isEmptyObject(t) || !isEmptyObject(r) || !isEmptyObject(n) || !isEmptyObject(a));
-let $ = createSelector([selectOpenFileLibraryKey, qV], (e, t) => e && t[e] || {});
-let X = createSelector([selectOpenFileLibraryKey, ZA], (e, t) => e && t[e] || {});
+let $ = createSelector([selectOpenFileLibraryKey, selectFlattenedComponents], (e, t) => e && t[e] || {});
+let X = createSelector([selectOpenFileLibraryKey, selectFlattenedStateGroups], (e, t) => e && t[e] || {});
 let q = e => e.library.local.thumbnails;
 let J = e => e.library.openFilePublished__LIVEGRAPH.styles;
 let Z = e => e.library.openFilePublished__LIVEGRAPH.variableSets;
@@ -486,7 +486,7 @@ let $$tC9 = createRemovableAtomFamily(e => atom(t => t(tn(e)) || t(tc(e)) || t(t
 let $$tw19 = createRemovableAtomFamily(e => atom(t => t(ta) || t(t_(e)) || t(ty(e)) || t(tv(e)) || t(tx(e))));
 let $$tO2 = createSelector([eA, tl], (e, t) => t.some(t => e[t.node_id]));
 createSelector([ex, tb], (e, t) => t.some(t => e[t.node_id]));
-let $$tR16 = createSelector([eT, c5], (e, t) => ({
+let $$tR16 = createSelector([eT, selectMergedAssets], (e, t) => ({
   ...t,
   ...e
 }));

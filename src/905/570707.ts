@@ -9,7 +9,7 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { resolveFileParentOrgId } from "../figma_app/646357";
 import { liveStoreInstance } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
-import { k1, vx } from "../905/91038";
+import { fileByKeyAtom, fileVersionSelector } from "../905/91038";
 import { kb } from "../figma_app/502247";
 import { NO_TEAM, LIBRARY_PREFERENCES_MODAL } from "../figma_app/633080";
 import { searchAPIHandler, mapVariableToWorkflow, createVariableResConfig as _$$YQ } from "../905/144933";
@@ -100,7 +100,7 @@ export function $$v2() {
       data: e,
       get: t
     }) => {
-      let i = t(k1);
+      let i = t(fileByKeyAtom);
       return {
         components: y(e.components, e.num_components_by_file, i),
         stateGroups: y(e.state_groups, e.num_state_groups_by_file, i),
@@ -153,7 +153,7 @@ let S = atom(e => {
   let i = e(x);
   return "team" === t.view && i?.type === LIBRARY_PREFERENCES_MODAL ? t.teamId : null;
 });
-let w = createReduxSubscriptionAtomWithState(vx);
+let w = createReduxSubscriptionAtomWithState(fileVersionSelector);
 let $$C1 = createRemovableAtomFamily(e => atom(t => {
   let i = t(I);
   let r = t(S);

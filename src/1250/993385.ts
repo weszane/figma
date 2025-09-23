@@ -1,6 +1,6 @@
 import { l as _$$l } from "../905/716947";
 import { hasContent, isCooperTemplateAsset } from "../figma_app/427318";
-import { bj } from "../905/420347";
+import { useLibraries } from "../905/420347";
 import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { searchAPIHandler } from "../905/144933";
@@ -14,7 +14,7 @@ export function $$c1(e) {
   n.forEach(e => {
     t.add(_$$l(e.library_key));
   });
-  let o = bj(Array.from(t));
+  let o = useLibraries(Array.from(t));
   let l = o.data;
   let d = new Map();
   l.forEach(e => {

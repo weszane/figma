@@ -2,20 +2,20 @@ import { G5, S6 } from "../figma_app/795674";
 import { u } from "../figma_app/187359";
 import { liveStoreInstance } from "../905/713695";
 import { librariesAPI } from "../905/939602";
-import { PT } from "../905/669853";
+import { DSAApiServiceInstance } from "../905/669853";
 import { o as _$$o } from "../905/918279";
 let d = {
   num_insertions: 0,
   num_detachments: 0
 };
 let $$c9 = liveStoreInstance.Query({
-  fetch: async e => (await PT.getComponent({
+  fetch: async e => (await DSAApiServiceInstance.getComponent({
     fv: e.fileVersion || "0",
     componentKey: e.componentKey
   })).data.meta
 });
 let $$u1 = liveStoreInstance.Query({
-  fetch: async e => (await PT.getComponentFileUsage({
+  fetch: async e => (await DSAApiServiceInstance.getComponentFileUsage({
     orgId: e.orgId || "",
     fv: e.fileVersion || "0",
     componentKey: e.componentKey
@@ -23,14 +23,14 @@ let $$u1 = liveStoreInstance.Query({
 });
 let $$p3 = liveStoreInstance.Query({
   fetch: async e => {
-    let t = PT.getLibraryPublishedComponentsUsages({
+    let t = DSAApiServiceInstance.getLibraryPublishedComponentsUsages({
       startTs: G5(_$$o[e.duration]).toString(),
       endTs: G5(0).toString(),
       libraryFileKey: e.libraryFileKey,
       orgIdForLogging: e.orgId,
       entrypointForLogging: e.entryPointForLogging
     });
-    let i = PT.getLibraryPublishedComponentsActions({
+    let i = DSAApiServiceInstance.getLibraryPublishedComponentsActions({
       startTs: G5(_$$o[e.duration]).toString(),
       endTs: G5(0).toString(),
       libraryFileKey: e.libraryFileKey,
@@ -73,7 +73,7 @@ let $$m5 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e,
     numDays: t
-  }) => h((await PT.getLibraryWeeklyInsertions({
+  }) => h((await DSAApiServiceInstance.getLibraryWeeklyInsertions({
     fileKey: e,
     startTs: G5(t + 7).toString(),
     endTs: S6(1).toString()
@@ -87,7 +87,7 @@ let $$g6 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e,
     numDays: t
-  }) => f((await PT.getLibraryTeamUsage({
+  }) => f((await DSAApiServiceInstance.getLibraryTeamUsage({
     fileKey: e,
     startTs: G5(t).toString(),
     endTs: S6(1).toString()
@@ -103,7 +103,7 @@ let f = e => {
 let $$_0 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e
-  }) => (await PT.getLibraryStyleOverview({
+  }) => (await DSAApiServiceInstance.getLibraryStyleOverview({
     libraryFileKey: e
   })).data.meta
 });
@@ -111,7 +111,7 @@ let $$A7 = liveStoreInstance.Query({
   fetch: async ({
     libraryFileKey: e,
     styleKey: t
-  }) => (await PT.getLibraryStyleDetails({
+  }) => (await DSAApiServiceInstance.getLibraryStyleDetails({
     libraryFileKey: e,
     styleKey: t
   })).data.meta
@@ -119,7 +119,7 @@ let $$A7 = liveStoreInstance.Query({
 let $$y8 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e
-  }) => (await PT.getLibraryVariableOverview({
+  }) => (await DSAApiServiceInstance.getLibraryVariableOverview({
     libraryFileKey: e
   })).data.meta
 });
@@ -127,7 +127,7 @@ let $$b2 = liveStoreInstance.Query({
   fetch: async ({
     libraryFileKey: e,
     variableKey: t
-  }) => (await PT.getLibraryVariableDetails({
+  }) => (await DSAApiServiceInstance.getLibraryVariableDetails({
     libraryFileKey: e,
     variableKey: t
   })).data.meta

@@ -38,6 +38,8 @@ export interface Rect {
   y: number;
   width: number;
   height: number;
+  w?: number
+  h?: number
 }
 
 /**

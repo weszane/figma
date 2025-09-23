@@ -4,7 +4,7 @@ import a from "../vendor/239910";
 import { logger } from "../905/651849";
 import { getI18nString } from "../905/303541";
 import { qH } from "../figma_app/934005";
-import { liveStoreInstance, IT } from "../905/713695";
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { i as _$$i } from "../905/787489";
 import { V } from "../905/223084";
 var s = a;
@@ -35,7 +35,7 @@ export function $$f1({
   planType: e,
   planId: t
 }, r = {}) {
-  let [n] = IT(m({
+  let [n] = setupResourceAtomHandler(m({
     planType: e,
     planId: t
   }), r);
@@ -91,7 +91,7 @@ let T = liveStoreInstance.Query({
   enabled: e => !!e
 });
 export function $$I0(e, t = {}) {
-  let [r] = IT(T(e), t);
+  let [r] = setupResourceAtomHandler(T(e), t);
   _$$i(r, getI18nString("plan_invoices.generic_load_error"));
   return g(r, qH.OPEN);
 }

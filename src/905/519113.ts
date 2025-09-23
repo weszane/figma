@@ -109,7 +109,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import td from "classnames";
 import { parsePxInt } from "../figma_app/783094";
-import { qp } from "../905/977779";
+import { filesByLibraryKeyAtom } from "../905/977779";
 import { setNodeSymbolPublishable, setNodePublishable, clearSelection, addToSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { M as _$$M2 } from "../905/771870";
@@ -709,7 +709,7 @@ function tF({
   let A = Um();
   let b = useSelector(e => e.library);
   let v = useSelector(e => e.fileByKey);
-  let I = useAtomWithSubscription(qp);
+  let I = useAtomWithSubscription(filesByLibraryKeyAtom);
   let E = useSelector(Wz);
   let x = useDispatch();
   let S = useMemo(MW, []);

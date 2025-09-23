@@ -36,7 +36,7 @@ import { getResourceDataOrFallback } from '../905/663269';
 import { fetchTeamRoles } from '../905/672897';
 import { d as _$$d } from '../905/693444';
 import { S3 } from '../905/708054';
-import { IT } from '../905/713695';
+import { setupResourceAtomHandler } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { yN } from '../905/727738';
 import { Qq } from '../905/736956';
@@ -831,7 +831,7 @@ function tf(e) {
     communityProfileHandle: i.community_profile_handle,
     communityProfileId: i.community_profile_id
   }), [i, l]);
-  let [u] = IT(TeamSettings({
+  let [u] = setupResourceAtomHandler(TeamSettings({
     teamId: e.team.id
   }));
   let [m] = handleSuspenseRetainRelease(u);

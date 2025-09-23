@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { getDevModeFocusId } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { _P, Zh } from "../figma_app/2590";
-import { s6 } from "../905/91038";
+import { isFirstPageCurrentSelector } from "../905/91038";
 import { hg } from "../figma_app/425489";
 import { xY } from "../figma_app/354027";
 import { s as _$$s } from "../905/291518";
@@ -26,7 +26,7 @@ export let $$y0 = createOptimistThunk((e, {
 }) => {
   let x = e.getState();
   reportNullOrUndefined(_$$e.PROTOTYPING, x.mirror.appModel);
-  let S = s6(x);
+  let S = isFirstPageCurrentSelector(x);
   let w = "" !== i ? PresentationValidationStatus.VALID : PrototypingTsApi.currentPagePrototypeStatus();
   if (w !== PresentationValidationStatus.VALID) {
     let t;

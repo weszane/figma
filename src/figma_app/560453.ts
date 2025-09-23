@@ -36,7 +36,7 @@ import { N2, Ee } from "../figma_app/392189";
 import { b as _$$b } from "../figma_app/598297";
 import { g as _$$g2 } from "../905/505662";
 import { eH as _$$eH, Nv } from "../figma_app/318590";
-import { kK } from "../figma_app/144974";
+import { shouldHideRecents } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, TC, B1, kN } from "../905/198599";
 import { cq } from "../905/794154";
@@ -151,7 +151,7 @@ export function $$ef1({
   let eS = currentSearch?.input.type === "input-text" ? currentSearch.input.query : "";
   let ev = useAtomWithSubscription(Q8);
   let eA = 0 === ev.length;
-  let ex = !currentSearch && !b && (!I.length || kK());
+  let ex = !currentSearch && !b && (!I.length || shouldHideRecents());
   let [eN, eC] = useState(!1);
   let ew = useCallback(e => {
     eC(e);

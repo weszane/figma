@@ -1,6 +1,6 @@
 import { jsx } from 'react/jsx-runtime';
 import { R } from '../905/82603';
-import { nD } from '../905/92359';
+import { computeBackingGUIDs } from '../905/92359';
 import { _ as _$$_ } from '../905/144222';
 import { isInvalidValue, isValidValue, MIXED_MARKER } from '../905/216495';
 import { getI18nString } from '../905/303541';
@@ -18,7 +18,7 @@ import { V } from '../905/735518';
 import { X } from '../905/737763';
 import { $ } from '../905/953280';
 import { RR } from '../figma_app/338442';
-import { iR } from '../figma_app/476572';
+import { intersection } from '../figma_app/476572';
 import { Fullscreen, ComponentPropType, PropertyScope, VariableResolvedDataType, VariableSetErrorType, VariableDataType } from '../figma_app/763686';
 let $$A31 = 304;
 let $$x1 = 'add-component-prop-dropdown';
@@ -175,7 +175,7 @@ export function $$G30(e, t) {
   let {
     backingSymbolGUID,
     backingStateGroupGUID
-  } = nD(new Set(e), t);
+  } = computeBackingGUIDs(new Set(e), t);
   return backingStateGroupGUID && isValidValue(backingStateGroupGUID) ? t.get(backingStateGroupGUID) : backingSymbolGUID && isValidValue(backingSymbolGUID) ? t.get(backingSymbolGUID) : MIXED_MARKER;
 }
 export function $$V25(e, t, r) {
@@ -241,7 +241,7 @@ export function $$$15(e, t) {
 export function $$X16(e, t) {
   if (!e.length) return new Set();
   let r = new Set(t[e[0]]?.hiddenProps);
-  return e.reduce((e, r) => t[r]?.hiddenProps ? iR(e, new Set(t[r].hiddenProps)) : e, r);
+  return e.reduce((e, r) => t[r]?.hiddenProps ? intersection(e, new Set(t[r].hiddenProps)) : e, r);
 }
 export function $$q21(e, t) {
   return e ? t[e]?.componentPropDefError ?? VariableSetErrorType.NONE : VariableSetErrorType.NONE;

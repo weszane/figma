@@ -81,7 +81,7 @@ import { adminPermissionConfig } from '../905/654645';
 import { A as _$$A3 } from '../905/658244';
 import { e0 as _$$e4 } from '../905/696396';
 import { IX } from '../905/712921';
-import { IT, liveStoreInstance } from '../905/713695';
+import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
 import { yN } from '../905/727738';
@@ -2218,7 +2218,7 @@ export function $$aG0(e) {
   let q = function (e, t) {
     let a = useDispatch();
     let n = useSelector(t => e && t.userTeamFlags?.[e]?.[aq]);
-    let [s] = IT(a$({
+    let [s] = setupResourceAtomHandler(a$({
       teamId: e
     }), {
       enabled: !!e && getFeatureFlags().dangling_team_users_backfill_banner && t === DashboardSections.MEMBERS
