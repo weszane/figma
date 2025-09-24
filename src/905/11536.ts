@@ -1,3 +1,5 @@
+import type { WelcomeUser } from '../../types/app'
+
 /**
  * Returns a sorted array of associated user profiles for the active community profile.
  * If no associated users are found, returns the primary user profile if available.
@@ -11,10 +13,7 @@ export function getAssociatedUserProfiles(params: {
     primary_user_id?: string
     id?: string
   } | null
-  authedUsers: {
-    byId: Record<string, { id: string, created_at: string }>
-    id: string
-  }
+  authedUsers: WelcomeUser
 }): { id: string, created_at: string }[] {
   const { authedActiveCommunityProfile, authedUsers } = params
 

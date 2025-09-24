@@ -1,3 +1,4 @@
+import type { Timer } from '../../types/app'
 import { F4 as getFigmaAppConfig } from '../figma_app/546509'
 
 /** Timer onboarding event name (original: $$i5) */
@@ -18,7 +19,7 @@ export const TIMER_INCREMENT_STEP = 1
  * @returns Remaining time in ms, or -Infinity if timer is undefined
  * (original: $$l7)
  */
-export function getTimeRemaining(timer: Timer | undefined): number {
+export function getTimeRemaining(timer: Timer['time'] | undefined): number {
   if (!timer)
     return -Infinity
   if (timer.isPaused)
@@ -32,7 +33,7 @@ export function getTimeRemaining(timer: Timer | undefined): number {
  * @returns True if timer is done or invalid
  * (original: $$d4)
  */
-export function isTimerDone(timer: Timer | undefined): boolean {
+export function isTimerDone(timer: Timer['time'] | undefined): boolean {
   const remaining = getTimeRemaining(timer)
   return !timer || timer.totalTimeMs === 0 || remaining <= -TIMER_THRESHOLD_MS
 }
@@ -43,7 +44,7 @@ export function isTimerDone(timer: Timer | undefined): boolean {
  * @returns True if timer finished
  * (original: $$c6)
  */
-export function isTimerFinished(timer: Timer | undefined): boolean {
+export function isTimerFinished(timer: Timer['time'] | undefined): boolean {
   return getTimeRemaining(timer) <= 0 && !!timer?.totalTimeMs
 }
 
@@ -53,7 +54,7 @@ export function isTimerFinished(timer: Timer | undefined): boolean {
  * @returns True if timer is paused and started
  * (original: $$u2)
  */
-export function isTimerPausedAndStarted(timer: Timer | undefined): boolean {
+export function isTimerPausedAndStarted(timer: Timer['time'] | undefined): boolean {
   return !!timer?.isPaused && timer.totalTimeMs > 0 && timer.timeRemainingMs > 0 && timer.totalTimeMs !== timer.timeRemainingMs
 }
 
@@ -74,7 +75,7 @@ export function getTotalSeconds(time: { minutes: number | string, seconds: numbe
  * @returns True if timer can be incremented
  * (original: $$_0)
  */
-export function canIncrementTimer(timer: Timer | undefined, time: { minutes: string }): boolean {
+export function canIncrementTimer(timer: Timer['time'] | undefined, time: { minutes: string }): boolean {
   const done = isTimerDone(timer)
   const remaining = getTimeRemaining(timer)
   const minutes = parseInt(time.minutes)
@@ -90,7 +91,7 @@ export function canIncrementTimer(timer: Timer | undefined, time: { minutes: str
  * @returns True if timer has run for at least 5 seconds and t >= 2
  * (original: $$h12)
  */
-export function hasTimerRunEnough(timer: Timer, t: number): boolean {
+export function hasTimerRunEnough(timer: Timer['time'], t: number): boolean {
   const remaining = getTimeRemaining(timer)
   const elapsed = timer.totalTimeMs - remaining
   return t >= 2 && elapsed >= 5000
@@ -146,13 +147,3 @@ export const YI = padTime
 export const cu = TIMER_THRESHOLD_MS
 export const fQ = hasTimerRunEnough
 export const y0 = MAX_TIMER_DURATION_MS
-
-/**
- * Timer type definition
- */
-export interface Timer {
-  isPaused: boolean
-  timeRemainingMs: number
-  timeOrigin: number
-  totalTimeMs: number
-}

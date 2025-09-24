@@ -1,4 +1,4 @@
-import { ke } from "../src/905/309735"
+import { ke } from '../src/905/309735'
 
 export interface AppState {
   optimist: any[]
@@ -6,7 +6,7 @@ export interface AppState {
   contacts: Contacts
   dropdownShown: null
   flashes: ActiveFileUsers
-  modalShown: null | {type: string, props: any}
+  modalShown: null | { type: string, props: any }
   progress: ActiveFileUsers
   visualBell: any[]
   savedPublishDescription: string
@@ -185,121 +185,121 @@ export interface ActiveFileUsers {
   // [key: string]: HubFile
 }
 export interface HubFiles {
-  [key: string]: HubFile;
+  [key: string]: HubFile
 }
 
 interface HubFile {
-  id: string;
-  creator: Creator;
-  thumbnail_url: string;
-  viewer_mode: string;
-  library_key: string;
-  created_at: string;
-  resized_thumbnail_urls: Resizedthumbnailurls;
-  community_publishers: Communitypublishers;
-  current_hub_file_version_id: string;
-  unpublished_at: null;
-  duplicate_count: number;
-  like_count: number;
-  comments_setting: string;
-  comment_count: number;
-  publishing_status: string;
-  category_id: null;
-  is_chat_history_removed: boolean;
-  publisher: Publisher;
-  versions: Versions;
-  client_meta: string;
-  thumbnail_is_set: boolean;
-  current_user_liked: null;
-  is_pinned: boolean;
-  redirect_canvas_url: string;
-  monetization_status: null;
-  support_contact: null;
-  badges: any[];
-  third_party_m10n_status: null;
+  id: string
+  creator: Creator
+  thumbnail_url: string
+  viewer_mode: string
+  library_key: string
+  created_at: string
+  resized_thumbnail_urls: Resizedthumbnailurls
+  community_publishers: Communitypublishers
+  current_hub_file_version_id: string
+  unpublished_at: null
+  duplicate_count: number
+  like_count: number
+  comments_setting: string
+  comment_count: number
+  publishing_status: string
+  category_id: null
+  is_chat_history_removed: boolean
+  publisher: Publisher
+  versions: Versions
+  client_meta: string
+  thumbnail_is_set: boolean
+  current_user_liked: null
+  is_pinned: boolean
+  redirect_canvas_url: string
+  monetization_status: null
+  support_contact: null
+  badges: any[]
+  third_party_m10n_status: null
 }
 
 interface Versions {
-  [key: string]: HubFileVersion;
+  [key: string]: HubFileVersion
 }
 
 interface HubFileVersion {
-  id: string;
-  hub_file_id: string;
-  name: string;
-  description: string;
-  version: string;
-  release_notes: null;
-  created_at: string;
-  valid_prototype: boolean;
-  client_meta: string;
-  thumbnail_guid: null;
-  creator_policy: null;
+  id: string
+  hub_file_id: string
+  name: string
+  description: string
+  version: string
+  release_notes: null
+  created_at: string
+  valid_prototype: boolean
+  client_meta: string
+  thumbnail_guid: null
+  creator_policy: null
 }
 
 interface Publisher {
-  id: string;
-  location: string;
-  profile_handle: string;
-  public_at: string;
-  follower_count: number;
-  following_count: number;
-  primary_user_id: string;
-  name: string;
-  img_url: string;
-  img_urls: Imgurls;
-  current_user_is_following: null;
-  current_user_is_followed: null;
-  is_restricted_by_current_user: null;
-  realtime_token: string;
-  entity_type: string;
-  badges: any[];
+  id: string
+  location: string
+  profile_handle: string
+  public_at: string
+  follower_count: number
+  following_count: number
+  primary_user_id: string
+  name: string
+  img_url: string
+  img_urls: Imgurls
+  current_user_is_following: null
+  current_user_is_followed: null
+  is_restricted_by_current_user: null
+  realtime_token: string
+  entity_type: string
+  badges: any[]
 }
 
 interface Communitypublishers {
-  accepted: Accepted[];
+  accepted: Accepted[]
 }
 
 interface Accepted {
-  id: string;
-  location: string;
-  profile_handle: string;
-  public_at: string;
-  follower_count: number;
-  following_count: number;
-  primary_user_id: string;
-  name: string;
-  img_url: string;
-  img_urls: Imgurls;
-  current_user_is_following: null;
-  current_user_is_followed: null;
-  is_restricted_by_current_user: null;
-  realtime_token: string;
-  entity_type: string;
-  associated_users: Associateduser[];
-  badges: any[];
+  id: string
+  location: string
+  profile_handle: string
+  public_at: string
+  follower_count: number
+  following_count: number
+  primary_user_id: string
+  name: string
+  img_url: string
+  img_urls: Imgurls
+  current_user_is_following: null
+  current_user_is_followed: null
+  is_restricted_by_current_user: null
+  realtime_token: string
+  entity_type: string
+  associated_users: Associateduser[]
+  badges: any[]
 }
 
 interface Associateduser {
-  user_id: string;
-  is_primary_user: boolean;
+  user_id: string
+  is_primary_user: boolean
 }
 
 interface Imgurls {
-  '120_120': string;
-  '500_500': string;
+  '120_120': string
+  '500_500': string
 }
 
 interface Resizedthumbnailurls {
-  '160': string;
-  '800': string;
-  '1200': string;
+  160: string
+  800: string
+  1200: string
 }
 
 interface Creator {
-  id: string;
-  handle: string;
-  img_url: string;
+  id: string
+  handle: string
+  img_url: string
 }
 export interface ActivityLogs {
   logs: any[]
@@ -1069,335 +1069,334 @@ export interface LeftPanel {
 }
 
 export interface Library {
-  publishedByLibraryKey: PublishedByLibraryKey;
-  used__LIVEGRAPH: UsedLIVEGRAPH;
-  openFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH;
-  openHubFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH;
-  local: Local;
-  assetsPanelSearch: AssetsPanelSearch;
-  publishProgress: PublishProgress;
-  isRenamingSelectedStyle: boolean;
-  localStyleSelection: null;
-  defaultPublished: DefaultPublished;
-  libraryUpdatesBannerDismissed: boolean;
-  movedLibraryItems: MovedLibraryItems;
-  libraryPublishingMode: number;
-  localVariablesById: SourceAssetKeyToDestinationKey;
-  localVariableSetsById: SourceAssetKeyToDestinationKey;
-  subscribedVariablesByIdFromLoadedPages: SubscribedVariablesByIdFromLoadedPages;
-  subscribedVariableSetsByIdFromLoadedPages: SubscribedVariableSetsByIdFromLoadedPages;
-  knownUsedLibraryVariablesByKey: KnownUsedLibraryVariablesByKey;
-  knownUsedLibraryVariableSetsByKey: SourceAssetKeyToDestinationKey;
-  publishableStateGroups: any[];
-  publishableStyles: any[];
-  publishableSymbols: any[];
-  publishableModules: any[];
-  subscribedSymbolsFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
-  subscribedStateGroupsFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
-  directlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
-  indirectlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[];
-  localSymbolsThatHaveUsagesOnLoadedPages: any[];
-  localStylesThatHaveUsagesOnLoadedPages: any[];
-  subscribedSymbolsOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
-  subscribedStateGroupsOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
-  directlySubscribedStylesOnCurrentPage: SubscribedSymbolsFromLoadedPage[];
-  localSymbolsThatHaveUsagesOnCurrentPage: any[];
-  localStylesThatHaveUsagesOnCurrentPage: any[];
+  publishedByLibraryKey: PublishedByLibraryKey
+  used__LIVEGRAPH: UsedLIVEGRAPH
+  openFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH
+  openHubFilePublished__LIVEGRAPH: OpenFilePublishedLIVEGRAPH
+  local: Local
+  assetsPanelSearch: AssetsPanelSearch
+  publishProgress: PublishProgress
+  isRenamingSelectedStyle: boolean
+  localStyleSelection: null
+  defaultPublished: DefaultPublished
+  libraryUpdatesBannerDismissed: boolean
+  movedLibraryItems: MovedLibraryItems
+  libraryPublishingMode: number
+  localVariablesById: SourceAssetKeyToDestinationKey
+  localVariableSetsById: SourceAssetKeyToDestinationKey
+  subscribedVariablesByIdFromLoadedPages: SubscribedVariablesByIdFromLoadedPages
+  subscribedVariableSetsByIdFromLoadedPages: SubscribedVariableSetsByIdFromLoadedPages
+  knownUsedLibraryVariablesByKey: KnownUsedLibraryVariablesByKey
+  knownUsedLibraryVariableSetsByKey: SourceAssetKeyToDestinationKey
+  publishableStateGroups: any[]
+  publishableStyles: any[]
+  publishableSymbols: any[]
+  publishableModules: any[]
+  subscribedSymbolsFromLoadedPages: SubscribedSymbolsFromLoadedPage[]
+  subscribedStateGroupsFromLoadedPages: SubscribedSymbolsFromLoadedPage[]
+  directlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[]
+  indirectlySubscribedStylesFromLoadedPages: SubscribedSymbolsFromLoadedPage[]
+  localSymbolsThatHaveUsagesOnLoadedPages: any[]
+  localStylesThatHaveUsagesOnLoadedPages: any[]
+  subscribedSymbolsOnCurrentPage: SubscribedSymbolsFromLoadedPage[]
+  subscribedStateGroupsOnCurrentPage: SubscribedSymbolsFromLoadedPage[]
+  directlySubscribedStylesOnCurrentPage: SubscribedSymbolsFromLoadedPage[]
+  localSymbolsThatHaveUsagesOnCurrentPage: any[]
+  localStylesThatHaveUsagesOnCurrentPage: any[]
 }
 
 interface SubscribedSymbolsFromLoadedPage {
-  nodeId: string;
-  key: string;
-  version: string;
-  userFacingVersion: string;
+  nodeId: string
+  key: string
+  version: string
+  userFacingVersion: string
 }
 
 interface KnownUsedLibraryVariablesByKey {
-  [key: string]: Nown0;
+  [key: string]: Nown0
 }
 
 interface Nown0 {
-  data: Data;
-  errors: any[];
-  status: string;
+  data: Data
+  errors: any[]
+  status: string
 }
 
 interface Data {
-  variable: null;
+  variable: null
 }
 
 interface SubscribedVariableSetsByIdFromLoadedPages {
-  [key: string]: VariableExample;
+  [key: string]: VariableExample
 }
 
 interface VariableExample {
-  type: string;
-  subscriptionStatus: string;
-  node_id: string;
-  version: string;
-  userFacingVersion: string;
-  modes: Mode[];
-  name: string;
-  defaultModeID: string;
-  key: string;
-  library_key: string;
-  pageIds: any[];
-  isExtendable: boolean;
-  sortPosition: null;
-  publishID: string;
-  isExtension: boolean;
+  type: string
+  subscriptionStatus: string
+  node_id: string
+  version: string
+  userFacingVersion: string
+  modes: Mode[]
+  name: string
+  defaultModeID: string
+  key: string
+  library_key: string
+  pageIds: any[]
+  isExtendable: boolean
+  sortPosition: null
+  publishID: string
+  isExtension: boolean
 }
 
 interface Mode {
-  id: string;
-  name: string;
-  sortPosition: string;
-  parentModeId: null;
-  parentVariableSetId: null;
+  id: string
+  name: string
+  sortPosition: string
+  parentModeId: null
+  parentVariableSetId: null
 }
 
 interface SubscribedVariablesByIdFromLoadedPages {
-  [key: string]: VariableExample1;
+  [key: string]: VariableExample1
 }
 
 interface VariableExample1 {
-  type: string;
-  subscriptionStatus: string;
-  variableSetId: string;
-  node_id: string;
-  sortPosition: string;
-  resolvedType: number;
-  version: string;
-  userFacingVersion: string;
-  modeValues: ModeValues;
-  description: string;
-  name: string;
-  key: string;
-  library_key: string;
-  scopes: number[];
-  codeSyntax: SourceAssetKeyToDestinationKey;
-  isSoftDeleted: boolean;
-  pageIds: string[];
-  publishID: string;
+  type: string
+  subscriptionStatus: string
+  variableSetId: string
+  node_id: string
+  sortPosition: string
+  resolvedType: number
+  version: string
+  userFacingVersion: string
+  modeValues: ModeValues
+  description: string
+  name: string
+  key: string
+  library_key: string
+  scopes: number[]
+  codeSyntax: SourceAssetKeyToDestinationKey
+  isSoftDeleted: boolean
+  pageIds: string[]
+  publishID: string
 }
 
 interface ModeValues {
-  [key: string]: _2090;
+  [key: string]: _2090
 }
 
 interface _2090 {
-  type: number;
-  resolvedType: number;
-  value: number;
+  type: number
+  resolvedType: number
+  value: number
 }
 
 interface MovedLibraryItems {
-  subscribed: SourceAssetKeyToDestinationKey;
-  local: SourceAssetKeyToDestinationKey;
+  subscribed: SourceAssetKeyToDestinationKey
+  local: SourceAssetKeyToDestinationKey
 }
 
 interface DefaultPublished {
-  componentsByLibraryKey: ComponentsByLibraryKey;
-  stateGroupsByLibraryKey: StateGroupsByLibraryKey;
-  libraryKeys: string[];
+  componentsByLibraryKey: ComponentsByLibraryKey
+  stateGroupsByLibraryKey: StateGroupsByLibraryKey
+  libraryKeys: string[]
 }
 
 interface StateGroupsByLibraryKey {
-  [key: string]: LK;
+  [key: string]: LK
 }
 
 interface LK {
-  [key: string]: _7427;
+  [key: string]: _7427
 }
 
 interface _7427 {
-  name: string;
-  file_key: string;
-  type: string;
-  key: string;
-  thumbnail_url: string;
-  canvas_url: string;
-  version: string;
-  userFacingVersion: string;
-  description: string;
-  description_rt: string;
-  id: string;
-  node_id: string;
-  containing_frame: Containingframe3;
-  updated_at: string;
-  fill_color: null;
-  default_state_key: string;
-  min_node_width: number;
-  min_node_height: number;
-  is_template: null;
-  library_key: string;
+  name: string
+  file_key: string
+  type: string
+  key: string
+  thumbnail_url: string
+  canvas_url: string
+  version: string
+  userFacingVersion: string
+  description: string
+  description_rt: string
+  id: string
+  node_id: string
+  containing_frame: Containingframe3
+  updated_at: string
+  fill_color: null
+  default_state_key: string
+  min_node_width: number
+  min_node_height: number
+  is_template: null
+  library_key: string
 }
 
 interface Containingframe3 {
-  pageId: string;
-  pageName: string;
+  pageId: string
+  pageName: string
 }
 
 interface ComponentsByLibraryKey {
-  [key: string]: LibraryComponent2;
+  [key: string]: LibraryComponent2
 }
 
 interface LibraryComponent2 {
-  [key: string]: NoTeamItemValueDetail;
+  [key: string]: NoTeamItemValueDetail
 }
 
 interface PublishProgress {
-  state: number;
+  state: number
 }
 
 interface AssetsPanelSearch {
-  query: string;
-  isLoading: boolean;
-  normalizedSearchResults: any[];
-  unsubscribedSearchResults: any[];
-  shouldSearchDefaultLibraries: boolean;
-  versionForTracking: number;
-  entryPoint: string;
+  query: string
+  isLoading: boolean
+  normalizedSearchResults: any[]
+  unsubscribedSearchResults: any[]
+  shouldSearchDefaultLibraries: boolean
+  versionForTracking: number
+  entryPoint: string
 }
 
 interface Local {
-  components: SourceAssetKeyToDestinationKey;
-  styles: SourceAssetKeyToDestinationKey;
-  stateGroups: SourceAssetKeyToDestinationKey;
-  modules: SourceAssetKeyToDestinationKey;
-  thumbnails: SourceAssetKeyToDestinationKey;
+  components: SourceAssetKeyToDestinationKey
+  styles: SourceAssetKeyToDestinationKey
+  stateGroups: SourceAssetKeyToDestinationKey
+  modules: SourceAssetKeyToDestinationKey
+  thumbnails: SourceAssetKeyToDestinationKey
 }
 
 interface OpenFilePublishedLIVEGRAPH {
-  components: SourceAssetKeyToDestinationKey;
-  styles: SourceAssetKeyToDestinationKey;
-  stateGroups: SourceAssetKeyToDestinationKey;
-  variableSets: SourceAssetKeyToDestinationKey;
-  variables: SourceAssetKeyToDestinationKey;
-  modules: SourceAssetKeyToDestinationKey;
+  components: SourceAssetKeyToDestinationKey
+  styles: SourceAssetKeyToDestinationKey
+  stateGroups: SourceAssetKeyToDestinationKey
+  variableSets: SourceAssetKeyToDestinationKey
+  variables: SourceAssetKeyToDestinationKey
+  modules: SourceAssetKeyToDestinationKey
 }
 
 interface UsedLIVEGRAPH {
-  styles: Styles;
-  sourceAssetKeyToDestinationKey: SourceAssetKeyToDestinationKey;
-  sourceAssetKeyToFileName: SourceAssetKeyToDestinationKey;
-  localNodeIdToDestinationKey: SourceAssetKeyToDestinationKey;
-  localNodeIdToDestinationFileName: SourceAssetKeyToDestinationKey;
-  unnaturalKeyToNaturalKey: SourceAssetKeyToDestinationKey;
-  destinationStyleKeyToLegacySourceStyle: SourceAssetKeyToDestinationKey;
+  styles: Styles
+  sourceAssetKeyToDestinationKey: SourceAssetKeyToDestinationKey
+  sourceAssetKeyToFileName: SourceAssetKeyToDestinationKey
+  localNodeIdToDestinationKey: SourceAssetKeyToDestinationKey
+  localNodeIdToDestinationFileName: SourceAssetKeyToDestinationKey
+  unnaturalKeyToNaturalKey: SourceAssetKeyToDestinationKey
+  destinationStyleKeyToLegacySourceStyle: SourceAssetKeyToDestinationKey
 }
 
 interface SourceAssetKeyToDestinationKey {
 }
 
 interface Styles {
-  [key: string]: StyleItemValue;
+  [key: string]: StyleItemValue
 }
 
 interface StyleItemValue {
-  status: string;
-  data: null;
-  errors: any[];
+  status: string
+  data: null
+  errors: any[]
 }
 
 interface PublishedByLibraryKey {
-  components: Components;
-  stateGroups: StateGroups;
+  components: Components
+  stateGroups: StateGroups
 }
 
 interface StateGroups {
-  NO_TEAM: NOTEAM2;
+  NO_TEAM: NOTEAM2
 }
 
 interface NOTEAM2 {
-  [key: string]: DynamicKeyValueStore;
+  [key: string]: DynamicKeyValueStore
 }
 
 interface DynamicKeyValueStore {
-  [key: string]: StateGroupItemValueInner;
+  [key: string]: StateGroupItemValueInner
 }
 
 interface StateGroupItemValueInner {
-  name: string;
-  file_key: string;
-  type: string;
-  key: string;
-  thumbnail_url: string;
-  canvas_url: string;
-  version: string;
-  userFacingVersion: string;
-  description: string;
-  description_rt: string;
-  id: string;
-  node_id: string;
-  containing_frame: Containingframe2;
-  updated_at: string;
-  fill_color: null;
-  default_state_key: string;
-  min_node_width: number;
-  min_node_height: number;
-  is_template: null;
-  library_key: string;
+  name: string
+  file_key: string
+  type: string
+  key: string
+  thumbnail_url: string
+  canvas_url: string
+  version: string
+  userFacingVersion: string
+  description: string
+  description_rt: string
+  id: string
+  node_id: string
+  containing_frame: Containingframe2
+  updated_at: string
+  fill_color: null
+  default_state_key: string
+  min_node_width: number
+  min_node_height: number
+  is_template: null
+  library_key: string
 }
 
 export interface Containingframe2 {
-  name: string;
-  nodeId: string;
-  pageId: string;
-  pageName: string;
-  backgroundColor: string;
+  name: string
+  nodeId: string
+  pageId: string
+  pageName: string
+  backgroundColor: string
 }
 
 export interface Components {
-  NO_TEAM: NOTEAM;
+  NO_TEAM: NOTEAM
 }
 
 export interface NOTEAM {
-  [key: string]: NoTeamItemValue;
+  [key: string]: NoTeamItemValue
 }
 
 export interface NoTeamItemValue {
-  [key: string]: NoTeamItemValueDetail;
+  [key: string]: NoTeamItemValueDetail
 }
 
 export interface NoTeamItemValueDetail {
-  name: string;
-  file_key: string;
-  type: string;
-  component_key: string;
-  thumbnail_url: string;
-  canvas_url: string;
-  content_hash: string;
-  userFacingVersion: string;
-  id: string;
-  description: string;
-  description_rt: string;
-  node_id: string;
-  containing_frame: Containingframe;
-  is_unflattened: boolean;
-  updated_at: string;
-  min_node_width: number;
-  min_node_height: number;
-  sort_position: null;
-  has_video: null;
-  is_template: null;
-  library_key: string;
+  name: string
+  file_key: string
+  type: string
+  component_key: string
+  thumbnail_url: string
+  canvas_url: string
+  content_hash: string
+  userFacingVersion: string
+  id: string
+  description: string
+  description_rt: string
+  node_id: string
+  containing_frame: Containingframe
+  is_unflattened: boolean
+  updated_at: string
+  min_node_width: number
+  min_node_height: number
+  sort_position: null
+  has_video: null
+  is_template: null
+  library_key: string
 }
 
 interface Containingframe {
-  name: string;
-  nodeId: string;
-  pageId: string;
-  pageName: string;
-  backgroundColor: string;
-  containingStateGroup: ContainingStateGroup;
+  name: string
+  nodeId: string
+  pageId: string
+  pageName: string
+  backgroundColor: string
+  containingStateGroup: ContainingStateGroup
 }
 
 interface ContainingStateGroup {
-  name: string;
-  nodeId: string;
+  name: string
+  nodeId: string
 }
-
 
 export interface AssetsPanelSearch {
   query: string
@@ -2808,208 +2807,209 @@ export interface AppModel extends ActionEnabledProperties {
 }
 
 interface CurrentSelectedProperty {
-  type: number;
-  indices: any[];
+  type: number
+  indices: any[]
 }
 
 interface CurrentSelectedGradientStop {
-  index: number;
-  type: number;
+  index: number
+  type: number
 }
 interface DevHandoffPreferences {
-  codeExtensionPreferences: CodeExtensionPreferences;
+  codeExtensionPreferences: CodeExtensionPreferences
 }
 
 interface DevHandoffCodeLanguage {
-  id: string;
-  type: string;
+  pluginLanguage: string
+  id: string
+  type: string
 }
 interface Livebooleanxor {
-  text: string;
-  originalText: string;
+  text: string
+  originalText: string
 }
 
 interface VotingSessionInfo {
-  sessionId: string;
-  votingStage: number;
-  userVoteLimit: number;
-  votedNodes: any[];
-  userIdToVoteStampIds: UserIdToVoteStampIds;
+  sessionId: string
+  votingStage: number
+  userVoteLimit: number
+  votedNodes: any[]
+  userIdToVoteStampIds: UserIdToVoteStampIds
 }
 
 export interface KeyboardShortcuts {
-  'live-boolean-xor': Livebooleanxor[];
-  'live-boolean-intersect': Livebooleanxor[];
-  'live-boolean-subtract': Livebooleanxor[];
-  'live-boolean-union': Livebooleanxor[];
-  'select-matching': Livebooleanxor[];
-  'set-tool-measure': Livebooleanxor[];
-  'set-tool-comments': Livebooleanxor[];
-  'set-tool-default': Livebooleanxor[];
-  'set-tool-type': Livebooleanxor[];
-  'set-tool-ellipse': Livebooleanxor[];
-  'set-tool-pen': Livebooleanxor[];
-  'toggle-buzz-tool-mode': Livebooleanxor[];
-  'show-prototype-panel': Livebooleanxor[];
-  'distribute-vertical-spacing': Livebooleanxor[];
-  'tidy-up': Livebooleanxor[];
-  'align-vertical-center': Livebooleanxor[];
-  'debug-selection': Livebooleanxor[];
-  'align-bottom': Livebooleanxor[];
-  'text-bold-increase': Livebooleanxor[];
-  'text-line-height-increase': Livebooleanxor[];
-  'set-tool-arrow': Livebooleanxor[];
-  'text-line-height-decrease': Livebooleanxor[];
-  'align-top': Livebooleanxor[];
-  'text-letter-spacing-increase': Livebooleanxor[];
-  'text-letter-spacing-decrease': Livebooleanxor[];
-  'text-toggle-ordered-list': Livebooleanxor[];
-  'text-font-size-increase': Livebooleanxor[];
-  'text-align-center': Livebooleanxor[];
-  'page-next': Livebooleanxor[];
-  'next-artboard-same-zoom': Livebooleanxor[];
-  'previous-artboard-same-zoom': Livebooleanxor[];
-  'next-artboard': Livebooleanxor[];
-  'previous-artboard': Livebooleanxor[];
-  'toggle-recording-interactions': Livebooleanxor[];
-  'start-chat': Livebooleanxor[];
-  'toggle-dropper': Livebooleanxor[];
-  'toggle-edit-mode': Livebooleanxor[];
-  'text-font-size-decrease': Livebooleanxor[];
-  escape: Livebooleanxor[];
-  'find-symbol': Livebooleanxor[];
-  'detach-instance': Livebooleanxor[];
-  'text-align-left': Livebooleanxor[];
-  'toggle-pixel-preview': Livebooleanxor[];
-  'move-text-selection-end': Livebooleanxor[];
-  'toggle-library': Livebooleanxor[];
-  'toggle-grid': Livebooleanxor[];
-  'set-tool-annotate': Livebooleanxor[];
-  'text-toggle-italic': Livebooleanxor[];
-  'show-rotation-origin': Livebooleanxor[];
-  'select-previous-sibling': Livebooleanxor[];
-  'toggle-rulers': Livebooleanxor[];
-  'text-toggle-unordered-list': Livebooleanxor[];
-  'toggle-locked-for-selected-nodes': Livebooleanxor[];
-  'align-right': Livebooleanxor[];
-  'toggle-grid-focus-view': Livebooleanxor[];
-  'toggle-publish': Livebooleanxor[];
-  'set-tool-paint-bucket': Livebooleanxor[];
-  'page-previous': Livebooleanxor[];
-  'set-opacity-3': Livebooleanxor[];
-  'canvas-search-prev': Livebooleanxor[];
-  'canvas-search-next': Livebooleanxor[];
-  redo: Livebooleanxor[];
-  'text-indent-list': Livebooleanxor[];
-  'resize-to-fit': Livebooleanxor[];
-  'text-delete-selection-or-next-character': Livebooleanxor[];
-  'toggle-layers': Livebooleanxor[];
-  'text-delete-selection-or-end': Livebooleanxor[];
-  'distribute-horizontal-spacing': Livebooleanxor[];
-  'mask-selection': Livebooleanxor[];
-  'toggle-prototyping-info': Livebooleanxor[];
-  'text-dedent-list': Livebooleanxor[];
-  'toggle-shown-for-selected-nodes': Livebooleanxor[];
-  'bring-forward': Livebooleanxor[];
-  'flatten-selection': Livebooleanxor[];
-  'join-selection': Livebooleanxor[];
-  'copy-properties': Livebooleanxor[];
-  'select-child': Livebooleanxor[];
-  'toggle-ui': Livebooleanxor[];
-  'select-all': Livebooleanxor[];
-  'toggle-show-annotations': Livebooleanxor[];
-  'plugins-run-last': Livebooleanxor[];
-  'select-parent': Livebooleanxor[];
-  'focus-previous-area': Livebooleanxor[];
-  'toggle-show-comments': Livebooleanxor[];
-  'unlock-all': Livebooleanxor[];
-  'extend-text-selection-backward': Livebooleanxor[];
-  'set-tool-scale': Livebooleanxor[];
-  'toggle-menu': Livebooleanxor[];
-  'toggle-snapping-to-pixels': Livebooleanxor[];
-  'group-selection': Livebooleanxor[];
-  'set-tool-frame': Livebooleanxor[];
-  'flip-horizontal': Livebooleanxor[];
-  'move-text-selection-forward': Livebooleanxor[];
-  'unstack-selection': Livebooleanxor[];
-  'extend-text-selection-start': Livebooleanxor[];
-  'set-tool-rectangle': Livebooleanxor[];
-  'extend-text-selection-end': Livebooleanxor[];
-  'toggle-bold': Livebooleanxor[];
-  'move-text-selection-backward': Livebooleanxor[];
-  'smooth-join-selection': Livebooleanxor[];
-  'stack-selection': Livebooleanxor[];
-  undo: Livebooleanxor[];
-  'text-align-right': Livebooleanxor[];
-  'toggle-outlines': Livebooleanxor[];
-  'collapse-layers': Livebooleanxor[];
-  'canvas-search': Livebooleanxor[];
-  'set-tool-section': Livebooleanxor[];
-  'toggle-fake-mp-activity': Livebooleanxor[];
-  'component-insert': Livebooleanxor[];
-  'send-to-back': Livebooleanxor[];
-  place: Livebooleanxor[];
-  'move-text-selection-start': Livebooleanxor[];
-  'swap-fill-and-stroke': Livebooleanxor[];
-  'ungroup-selection': Livebooleanxor[];
-  'set-opacity-7': Livebooleanxor[];
-  'remove-stroke': Livebooleanxor[];
-  'set-tool-shape-builder': Livebooleanxor[];
-  'remove-fill': Livebooleanxor[];
-  'paste-properties': Livebooleanxor[];
-  'rename-selection': Livebooleanxor[];
-  'zoom-out': Livebooleanxor[];
-  'flip-vertical': Livebooleanxor[];
-  'present-as-prototype': Livebooleanxor[];
-  'toggle-shown-layout-grids': Livebooleanxor[];
-  'bring-to-front': Livebooleanxor[];
-  'select-inverse': Livebooleanxor[];
-  'text-bold-decrease': Livebooleanxor[];
-  'duplicate-in-place': Livebooleanxor[];
-  'toggle-perf-hud': Livebooleanxor[];
-  'focus-next-area': Livebooleanxor[];
-  'text-edit-hyperlink': Livebooleanxor[];
-  'send-backward': Livebooleanxor[];
-  'paste-over-selection': Livebooleanxor[];
-  'extend-text-selection-forward': Livebooleanxor[];
-  'zoom-in': Livebooleanxor[];
-  'align-left': Livebooleanxor[];
-  'text-align-justified': Livebooleanxor[];
-  'set-opacity-2': Livebooleanxor[];
-  'set-tool-hand': Livebooleanxor[];
-  'open-shortcuts': Livebooleanxor[];
-  'set-opacity-4': Livebooleanxor[];
-  'set-tool-slice': Livebooleanxor[];
-  'create-symbol': Livebooleanxor[];
-  'export-buzz-assets': Livebooleanxor[];
-  'select-next-sibling': Livebooleanxor[];
-  'set-opacity-8': Livebooleanxor[];
-  'toggle-preferences': Livebooleanxor[];
-  'paste-to-replace': Livebooleanxor[];
-  'create-section-from-selection': Livebooleanxor[];
-  'outline-stroke': Livebooleanxor[];
-  'zoom-to-selection': Livebooleanxor[];
-  'create-savepoint': Livebooleanxor[];
-  'align-horizontal-center': Livebooleanxor[];
-  'toggle-sidebar': Livebooleanxor[];
-  'set-opacity-1': Livebooleanxor[];
-  'text-toggle-strikethrough': Livebooleanxor[];
-  'show-design-panel': Livebooleanxor[];
-  'frame-selection': Livebooleanxor[];
-  'set-opacity-0': Livebooleanxor[];
-  'run-multi-stack-auto-layout': Livebooleanxor[];
-  'zoom-to-fit': Livebooleanxor[];
-  'text-toggle-underline': Livebooleanxor[];
-  'set-tool-line': Livebooleanxor[];
-  'set-opacity-5': Livebooleanxor[];
-  'set-tool-pencil': Livebooleanxor[];
-  'set-opacity-6': Livebooleanxor[];
-  'copy-as-png': Livebooleanxor[];
-  'toggle-multiplayer-cursors': Livebooleanxor[];
-  'zoom-reset': Livebooleanxor[];
-  'delete-and-heal-selection': Livebooleanxor[];
-  'set-opacity-9': Livebooleanxor[];
-  'delete-selection': Livebooleanxor[];
+  'live-boolean-xor': Livebooleanxor[]
+  'live-boolean-intersect': Livebooleanxor[]
+  'live-boolean-subtract': Livebooleanxor[]
+  'live-boolean-union': Livebooleanxor[]
+  'select-matching': Livebooleanxor[]
+  'set-tool-measure': Livebooleanxor[]
+  'set-tool-comments': Livebooleanxor[]
+  'set-tool-default': Livebooleanxor[]
+  'set-tool-type': Livebooleanxor[]
+  'set-tool-ellipse': Livebooleanxor[]
+  'set-tool-pen': Livebooleanxor[]
+  'toggle-buzz-tool-mode': Livebooleanxor[]
+  'show-prototype-panel': Livebooleanxor[]
+  'distribute-vertical-spacing': Livebooleanxor[]
+  'tidy-up': Livebooleanxor[]
+  'align-vertical-center': Livebooleanxor[]
+  'debug-selection': Livebooleanxor[]
+  'align-bottom': Livebooleanxor[]
+  'text-bold-increase': Livebooleanxor[]
+  'text-line-height-increase': Livebooleanxor[]
+  'set-tool-arrow': Livebooleanxor[]
+  'text-line-height-decrease': Livebooleanxor[]
+  'align-top': Livebooleanxor[]
+  'text-letter-spacing-increase': Livebooleanxor[]
+  'text-letter-spacing-decrease': Livebooleanxor[]
+  'text-toggle-ordered-list': Livebooleanxor[]
+  'text-font-size-increase': Livebooleanxor[]
+  'text-align-center': Livebooleanxor[]
+  'page-next': Livebooleanxor[]
+  'next-artboard-same-zoom': Livebooleanxor[]
+  'previous-artboard-same-zoom': Livebooleanxor[]
+  'next-artboard': Livebooleanxor[]
+  'previous-artboard': Livebooleanxor[]
+  'toggle-recording-interactions': Livebooleanxor[]
+  'start-chat': Livebooleanxor[]
+  'toggle-dropper': Livebooleanxor[]
+  'toggle-edit-mode': Livebooleanxor[]
+  'text-font-size-decrease': Livebooleanxor[]
+  'escape': Livebooleanxor[]
+  'find-symbol': Livebooleanxor[]
+  'detach-instance': Livebooleanxor[]
+  'text-align-left': Livebooleanxor[]
+  'toggle-pixel-preview': Livebooleanxor[]
+  'move-text-selection-end': Livebooleanxor[]
+  'toggle-library': Livebooleanxor[]
+  'toggle-grid': Livebooleanxor[]
+  'set-tool-annotate': Livebooleanxor[]
+  'text-toggle-italic': Livebooleanxor[]
+  'show-rotation-origin': Livebooleanxor[]
+  'select-previous-sibling': Livebooleanxor[]
+  'toggle-rulers': Livebooleanxor[]
+  'text-toggle-unordered-list': Livebooleanxor[]
+  'toggle-locked-for-selected-nodes': Livebooleanxor[]
+  'align-right': Livebooleanxor[]
+  'toggle-grid-focus-view': Livebooleanxor[]
+  'toggle-publish': Livebooleanxor[]
+  'set-tool-paint-bucket': Livebooleanxor[]
+  'page-previous': Livebooleanxor[]
+  'set-opacity-3': Livebooleanxor[]
+  'canvas-search-prev': Livebooleanxor[]
+  'canvas-search-next': Livebooleanxor[]
+  'redo': Livebooleanxor[]
+  'text-indent-list': Livebooleanxor[]
+  'resize-to-fit': Livebooleanxor[]
+  'text-delete-selection-or-next-character': Livebooleanxor[]
+  'toggle-layers': Livebooleanxor[]
+  'text-delete-selection-or-end': Livebooleanxor[]
+  'distribute-horizontal-spacing': Livebooleanxor[]
+  'mask-selection': Livebooleanxor[]
+  'toggle-prototyping-info': Livebooleanxor[]
+  'text-dedent-list': Livebooleanxor[]
+  'toggle-shown-for-selected-nodes': Livebooleanxor[]
+  'bring-forward': Livebooleanxor[]
+  'flatten-selection': Livebooleanxor[]
+  'join-selection': Livebooleanxor[]
+  'copy-properties': Livebooleanxor[]
+  'select-child': Livebooleanxor[]
+  'toggle-ui': Livebooleanxor[]
+  'select-all': Livebooleanxor[]
+  'toggle-show-annotations': Livebooleanxor[]
+  'plugins-run-last': Livebooleanxor[]
+  'select-parent': Livebooleanxor[]
+  'focus-previous-area': Livebooleanxor[]
+  'toggle-show-comments': Livebooleanxor[]
+  'unlock-all': Livebooleanxor[]
+  'extend-text-selection-backward': Livebooleanxor[]
+  'set-tool-scale': Livebooleanxor[]
+  'toggle-menu': Livebooleanxor[]
+  'toggle-snapping-to-pixels': Livebooleanxor[]
+  'group-selection': Livebooleanxor[]
+  'set-tool-frame': Livebooleanxor[]
+  'flip-horizontal': Livebooleanxor[]
+  'move-text-selection-forward': Livebooleanxor[]
+  'unstack-selection': Livebooleanxor[]
+  'extend-text-selection-start': Livebooleanxor[]
+  'set-tool-rectangle': Livebooleanxor[]
+  'extend-text-selection-end': Livebooleanxor[]
+  'toggle-bold': Livebooleanxor[]
+  'move-text-selection-backward': Livebooleanxor[]
+  'smooth-join-selection': Livebooleanxor[]
+  'stack-selection': Livebooleanxor[]
+  'undo': Livebooleanxor[]
+  'text-align-right': Livebooleanxor[]
+  'toggle-outlines': Livebooleanxor[]
+  'collapse-layers': Livebooleanxor[]
+  'canvas-search': Livebooleanxor[]
+  'set-tool-section': Livebooleanxor[]
+  'toggle-fake-mp-activity': Livebooleanxor[]
+  'component-insert': Livebooleanxor[]
+  'send-to-back': Livebooleanxor[]
+  'place': Livebooleanxor[]
+  'move-text-selection-start': Livebooleanxor[]
+  'swap-fill-and-stroke': Livebooleanxor[]
+  'ungroup-selection': Livebooleanxor[]
+  'set-opacity-7': Livebooleanxor[]
+  'remove-stroke': Livebooleanxor[]
+  'set-tool-shape-builder': Livebooleanxor[]
+  'remove-fill': Livebooleanxor[]
+  'paste-properties': Livebooleanxor[]
+  'rename-selection': Livebooleanxor[]
+  'zoom-out': Livebooleanxor[]
+  'flip-vertical': Livebooleanxor[]
+  'present-as-prototype': Livebooleanxor[]
+  'toggle-shown-layout-grids': Livebooleanxor[]
+  'bring-to-front': Livebooleanxor[]
+  'select-inverse': Livebooleanxor[]
+  'text-bold-decrease': Livebooleanxor[]
+  'duplicate-in-place': Livebooleanxor[]
+  'toggle-perf-hud': Livebooleanxor[]
+  'focus-next-area': Livebooleanxor[]
+  'text-edit-hyperlink': Livebooleanxor[]
+  'send-backward': Livebooleanxor[]
+  'paste-over-selection': Livebooleanxor[]
+  'extend-text-selection-forward': Livebooleanxor[]
+  'zoom-in': Livebooleanxor[]
+  'align-left': Livebooleanxor[]
+  'text-align-justified': Livebooleanxor[]
+  'set-opacity-2': Livebooleanxor[]
+  'set-tool-hand': Livebooleanxor[]
+  'open-shortcuts': Livebooleanxor[]
+  'set-opacity-4': Livebooleanxor[]
+  'set-tool-slice': Livebooleanxor[]
+  'create-symbol': Livebooleanxor[]
+  'export-buzz-assets': Livebooleanxor[]
+  'select-next-sibling': Livebooleanxor[]
+  'set-opacity-8': Livebooleanxor[]
+  'toggle-preferences': Livebooleanxor[]
+  'paste-to-replace': Livebooleanxor[]
+  'create-section-from-selection': Livebooleanxor[]
+  'outline-stroke': Livebooleanxor[]
+  'zoom-to-selection': Livebooleanxor[]
+  'create-savepoint': Livebooleanxor[]
+  'align-horizontal-center': Livebooleanxor[]
+  'toggle-sidebar': Livebooleanxor[]
+  'set-opacity-1': Livebooleanxor[]
+  'text-toggle-strikethrough': Livebooleanxor[]
+  'show-design-panel': Livebooleanxor[]
+  'frame-selection': Livebooleanxor[]
+  'set-opacity-0': Livebooleanxor[]
+  'run-multi-stack-auto-layout': Livebooleanxor[]
+  'zoom-to-fit': Livebooleanxor[]
+  'text-toggle-underline': Livebooleanxor[]
+  'set-tool-line': Livebooleanxor[]
+  'set-opacity-5': Livebooleanxor[]
+  'set-tool-pencil': Livebooleanxor[]
+  'set-opacity-6': Livebooleanxor[]
+  'copy-as-png': Livebooleanxor[]
+  'toggle-multiplayer-cursors': Livebooleanxor[]
+  'zoom-reset': Livebooleanxor[]
+  'delete-and-heal-selection': Livebooleanxor[]
+  'set-opacity-9': Livebooleanxor[]
+  'delete-selection': Livebooleanxor[]
 }
 export interface SceneGraphSelection {
   [key: string]: boolean
@@ -3029,26 +3029,26 @@ export interface SelectionPaints {
   forceUpdateForUndo: boolean
 }
 export interface OnCanvasNameEditorInfo {
-  mode: number;
-  x: number;
-  y: number;
-  angle: number;
-  padding: Padding;
-  margin: Padding;
-  cornerRadius: number;
-  fontSize: number;
-  measurementId: string;
-  initMeasurementText: string;
-  isCentered: boolean;
-  invertTextPosition: boolean;
-  axis: number;
-  isTLF: boolean;
-  initialText: string;
-  isShownOnLeft: boolean;
-  shouldOpenDropdown: boolean;
-  varWidthNodeId: string;
-  varWidthIndex: number;
-  varWidthTextDirection: Padding;
+  mode: number
+  x: number
+  y: number
+  angle: number
+  padding: Padding
+  margin: Padding
+  cornerRadius: number
+  fontSize: number
+  measurementId: string
+  initMeasurementText: string
+  isCentered: boolean
+  invertTextPosition: boolean
+  axis: number
+  isTLF: boolean
+  initialText: string
+  isShownOnLeft: boolean
+  shouldOpenDropdown: boolean
+  varWidthNodeId: string
+  varWidthIndex: number
+  varWidthTextDirection: Padding
 }
 export interface PaintsDirectlyOnSingleNode {
   encodedPaint: string
@@ -3938,6 +3938,7 @@ export interface SelectedView {
   starterKitHasBeenHidden: boolean
   figjamEditorOnboardingStarted: boolean
   figjamEditorOnboardingFinishedOrDismissed: boolean
+  workshopModeInfo: any
 }
 
 export interface SharedFonts {
@@ -4060,7 +4061,12 @@ export interface RecentsAndSharing {
 export interface Timer {
   modalState: string
   audioEnabled: boolean
-  time: null
+  time: null | {
+    isPaused: boolean
+    timeRemainingMs: number
+    timeOrigin: number
+    totalTimeMs: number
+  }
   notification: null
   setBy: string
   selectedSongID: string
@@ -4104,6 +4110,7 @@ export interface UsedKeyboardShortcuts {
 }
 
 export interface WelcomeUser {
+  byId: Record<string, { id: string, created_at: string }>
   id: string
   name: string
   email: string

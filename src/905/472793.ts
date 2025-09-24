@@ -795,6 +795,7 @@ class PluginRuntime {
     }
     return category;
   };
+
   spellCheckCallback = this.createPromiseCallback({
     makeInputEvent: e => {
       let t = this.vm.newObject();

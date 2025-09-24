@@ -20,7 +20,10 @@ declare global {
     Fig: FigType
     figma: any
     FigmaMobile: any
-    store: Store
+    store: {
+      getState: () => AppState
+      dispatch: Dispatch<any>
+    }
     drainErrors: any
     __figmaDesktop: any
     __figmaDesktopGetPopoutAPI: any

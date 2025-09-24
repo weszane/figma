@@ -1,10 +1,14 @@
 import type { Store } from 'redux'
+import type { ThunkActionDispatch } from 'redux-thunk'
 
 /**
  * Holds the current state object.
  * @see D
  */
-let currentState: Store<AppState> // D
+let currentState: {
+  getState: () => AppState
+  dispatch: ThunkActionDispatch<any>
+} // D
 
 /**
  * Initializes the debug store on the window object.
@@ -36,7 +40,7 @@ export function initializeDebugStore(state: any): void {
      * @param action - The action to dispatch (ignored).
      * @returns The action itself, as required by Dispatch signature.
      */
-    dispatch(action: unknown) {
+    dispatch(action: any) {
       console.error('Action dispatch is disabled in release builds')
       return action
     },

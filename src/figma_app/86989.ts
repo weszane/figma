@@ -1,3 +1,4 @@
+import type { WelcomeUser } from '../../types/app'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAssociatedUserProfiles } from '../905/11536'
@@ -58,7 +59,7 @@ export interface CommunityResource {
  * @param onSuccess - Callback for successful checkout.
  * @param onCancel - Callback for checkout cancellation.
  */
-export function setupCommunityCheckoutHandler(user: CommunityUser, resource: CommunityResource, onSuccess?: () => void, onCancel?: () => void) {
+export function setupCommunityCheckoutHandler(user: WelcomeUser, resource: CommunityResource, onSuccess?: () => void, onCancel?: () => void) {
   return (dispatch: any) => {
     dispatch(
       showModal({
@@ -90,7 +91,7 @@ export function setupCommunityCheckoutHandler(user: CommunityUser, resource: Com
  * @param plugin - Plugin data if any.
  * @param modalType - Type of modal to show.
  */
-export function handleCommunityResourcePayment(dispatch: any, user: CommunityUser, resource: CommunityResource, localResource: any, plugin: any, modalType: ModalType) {
+export function handleCommunityResourcePayment(dispatch: any, user: WelcomeUser, resource: CommunityResource, localResource: any, plugin: any, modalType: ModalType) {
   const isAdminPublishing = getFeatureFlags().community_hub_admin && resource && isResourcePendingPublishing(resource)
 
   return new Promise<void>((resolve) => {
@@ -218,7 +219,7 @@ export function initiateResourcePurchaseFlow(resource: CommunityResource) {
       showModalHandler({
         type: PrePurchaseUserSelectorModal,
         data: {
-          onUserSelect: (selectedUser: CommunityUser) => {
+          onUserSelect: (selectedUser: WelcomeUser) => {
             trackEventAnalytics('Pre Purchase User Selector Modal - User Selected', {
               resourceType: mapResourceType(resource),
               resourceId: resource.id,
@@ -239,7 +240,7 @@ export function initiateResourcePurchaseFlow(resource: CommunityResource) {
  * @param authedUsers - List of authenticated users.
  * @param resource - The resource to check.
  */
-export function isUserEligibleForPurchase(activeProfile: CommunityUser, authedUsers: CommunityUser, resource: CommunityResource): boolean {
+export function isUserEligibleForPurchase(activeProfile: WelcomeUser, authedUsers: WelcomeUser, resource: CommunityResource): boolean {
   if (!hasMonetizedResourceMetadata(resource))
     return false
 
@@ -287,7 +288,7 @@ export function isResourceSubscriptionActive(resource: CommunityResource, paymen
  * @param resource - The resource to check.
  * @param user - The user to check.
  */
-export function isUserPublisherForResource(resource: CommunityResource, user: CommunityUser): boolean {
+export function isUserPublisherForResource(resource: CommunityResource, user: WelcomeUser): boolean {
   const { publishers } = partitionUsersByPurchaseEligibility([user], resource)
   return publishers.length > 0
 }
@@ -301,7 +302,7 @@ export function isUserPublisherForResource(resource: CommunityResource, user: Co
 function isResourceEligibleForPurchase(
   resource: CommunityResource,
   payments: Record<string, any>,
-  user?: CommunityUser,
+  user?: WelcomeUser,
 ): boolean {
   if (
     !resource

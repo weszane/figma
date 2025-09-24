@@ -29,6 +29,7 @@ export interface PropertyDescriptor<T = any, TReturn = any> {
   enumerable?: boolean;
   writable?: boolean;
   value?: INoOpVm<T>;
+  metricsKey?: string;
   get?: (this: INoOpVm<any>) => INoOpVm<T>;
   set?: (this: INoOpVm<any>, value: INoOpVm<T>) => TReturn;
 }

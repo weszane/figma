@@ -20,11 +20,7 @@ export const cortexAnalyticsPluginIds = new Set([
  * @returns Tracking context object.
  * (original: $$c0)
  */
-export function createTrackingContext(params: {
-  openFile?: { teamId?: string, key?: string }
-  currentUserOrgId?: string
-  user?: { id?: string }
-}) {
+export function createTrackingContext(params: AppState) {
   const { openFile, currentUserOrgId, user } = params
   const teamId = openFile?.teamId ?? null
   const fileKey = openFile?.key ?? null
