@@ -1,75 +1,41 @@
-import type { GridLayoutConfig, ProcessedRegion } from '../types'
-import { z } from 'zod'
-import { N as _$$N } from '../125137'
-import { permissionScopeHandler } from '../189185'
-import { Ay as _$$Ay3, jX } from '../281495'
-import { MT } from '../321380'
-import { debugState } from '../407919'
-import { uW } from '../426868'
-import { getFeatureFlags } from '../601108'
-import { k as _$$k2 } from '../651849'
-import { getSingletonSceneGraph } from '../700578'
-import { ED, xi } from '../714362'
-import { Mi } from '../736624'
-import { d1 } from '../766303'
-import { sH as _$$sH } from '../805904'
-import { loadAllPluginPages } from '../816197'
-import { u as _$$u, Kb } from '../816730'
-import { vX } from '../866640'
-import { fH, gO, HC, hp, JE, Lk, MN, SE, Vw, W$, Wh } from '../929949'
-import {
-  $x,
-  $$ as _$$$$,
-  rY as _$$rY,
-  cT,
-  Df,
-  DW,
-  hD,
-  Jk,
-  Ku,
-  Mo,
-  mx,
-  NH,
-  SU,
-  U_,
-  V8,
-  VL,
-  Wp,
-  XX,
-  yj,
-  zd,
-} from '../933084'
-import { At } from '../973142'
-import { F as _$$F2 } from '../../figma_app/8833'
-import { isNullish } from '../../figma_app/95419'
-import { mx as _$$mx, tK as _$$tK, di } from '../../figma_app/191804'
-import { eX as _$$eX, nM as _$$nM } from '../../figma_app/276332'
-import { E8 } from '../../figma_app/633080'
-import { oH } from '../../figma_app/646357'
-import { Egt, Ez5, j0r, NfO, QCv, RN1, uQ6, y0x } from '../../figma_app/763686'
-import { bh } from '../../figma_app/803787'
-import { Ag } from '../../figma_app/862289'
-import { LZ, oy } from '../../figma_app/964367'
-import {
-  createVariableAlias,
-  getAllStorageKeys,
-  getStorageValue,
-  normalizeBlendMode,
-  processURL,
-  setStorageValue,
-} from '../modules'
-import {
-  AdvancedDataStructureManager,
-  AdvancedNodeCreationManager,
-  AdvancedTransformationManager,
-  AdvancedURLProcessor,
-  AdvancedValidationManager as Phase26ValidationManager,
-} from '../modules/core-utilities-data-processing'
-import { createImageEffectsProcessingNew } from '../modules/image-effects-processing'
-import { createUtilityFunctionsNew } from '../modules/node-factory-management'
-import { createValidationLayoutProcessingNew } from '../modules/validation-layout-processing'
-import { colors } from './annotation'
-import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI } from './node-api'
+import type { GridLayoutConfig, ProcessedRegion } from '../types';
+import { z } from 'zod';
+import { N as _$$N } from '../125137';
+import { permissionScopeHandler } from '../189185';
+import { Ay as _$$Ay3, jX } from '../281495';
+import { MT } from '../321380';
+import { debugState } from '../407919';
+import { uW } from '../426868';
+import { getFeatureFlags } from '../601108';
+import { k as _$$k2 } from '../651849';
+import { getSingletonSceneGraph } from '../700578';
+import { ED, xi } from '../714362';
+import { Mi } from '../736624';
+import { d1 } from '../766303';
+import { sH as _$$sH } from '../805904';
+import { loadAllPluginPages } from '../816197';
+import { u as _$$u, Kb } from '../816730';
+import { vX } from '../866640';
+import { fH, gO, HC, hp, JE, Lk, MN, SE, Vw, W$, Wh } from '../929949';
+import { $x, $$ as _$$$$, rY as _$$rY, cT, Df, DW, hD, Jk, Ku, Mo, mx, NH, SU, U_, V8, VL, Wp, XX, yj, zd } from '../933084';
+import { At } from '../973142';
+import { F as _$$F2 } from '../../figma_app/8833';
+import { isNullish } from '../../figma_app/95419';
+import { mx as _$$mx, tK as _$$tK, di } from '../../figma_app/191804';
+import { eX as _$$eX, nM as _$$nM } from '../../figma_app/276332';
+import { E8 } from '../../figma_app/633080';
+import { oH } from '../../figma_app/646357';
+import { Egt, Ez5, j0r, NfO, QCv, RN1, uQ6, y0x } from '../../figma_app/763686';
+import { bh } from '../../figma_app/803787';
+import { Ag } from '../../figma_app/862289';
+import { deserializeJSX, serializeJSX } from '../../figma_app/964367';
+import { createVariableAlias, getAllStorageKeys, getStorageValue, normalizeBlendMode, processURL, setStorageValue } from '../modules';
+import { AdvancedDataStructureManager, AdvancedNodeCreationManager, AdvancedTransformationManager, AdvancedURLProcessor, AdvancedValidationManager as Phase26ValidationManager } from '../modules/core-utilities-data-processing';
+import { createImageEffectsProcessingNew } from '../modules/image-effects-processing';
+import { createUtilityFunctionsNew } from '../modules/node-factory-management';
+import { createValidationLayoutProcessingNew } from '../modules/validation-layout-processing';
+import { colors } from './annotation';
+import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI } from './node-api';
 
 /**
  * Original function: en
@@ -80,39 +46,37 @@ import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAP
 async function renameLayersForNode(node) {
   const {
     lockGuids,
-    renameGuids,
-  } = collectGuidsForRenaming(node)
+    renameGuids
+  } = collectGuidsForRenaming(node);
   if (renameGuids.length === 0) {
     ED('first draft', 'No layers to rename', {
       guid: node.guid,
-      name: node.name,
-    })
-    return
+      name: node.name
+    });
+    return;
   }
   try {
-    Egt.clearSelection()
+    Egt.clearSelection();
     permissionScopeHandler.user('first-draft-lint-rename-layers-temp-lock', () => {
       for (const guid of lockGuids) {
-        Egt.setNodeLocked(guid, true, false)
+        Egt.setNodeLocked(guid, true, false);
       }
-    })
-    Egt.addToSelection(renameGuids)
+    });
+    Egt.addToSelection(renameGuids);
     await Ag('First Draft Lint: Rename Layers', _$$Ay3, {
       source: uQ6.FIRST_DRAFT_LINT,
-      overwriteNames: false,
-    })
-  }
-  catch (error) {
+      overwriteNames: false
+    });
+  } catch (error) {
     xi('first draft', 'Error renaming layers', {
-      error,
-    })
-  }
-  finally {
+      error
+    });
+  } finally {
     permissionScopeHandler.user('first-draft-lint-rename-layers-temp-unlock', () => {
       for (const guid of lockGuids) {
-        Egt.setNodeLocked(guid, false, false)
+        Egt.setNodeLocked(guid, false, false);
       }
-    })
+    });
   }
 }
 
@@ -125,29 +89,26 @@ async function renameLayersForNode(node) {
 export function collectGuidsForRenaming(node) {
   const result: any = {
     lockGuids: [],
-    renameGuids: [],
-  }
-  const queue = [node.guid]
+    renameGuids: []
+  };
+  const queue = [node.guid];
   while (queue.length > 0) {
-    const currentGuid = queue.pop()
-    if (!currentGuid)
-      continue
-    const currentNode = getSingletonSceneGraph().get(currentGuid)
-    if (!currentNode)
-      continue
+    const currentGuid = queue.pop();
+    if (!currentGuid) continue;
+    const currentNode = getSingletonSceneGraph().get(currentGuid);
+    if (!currentNode) continue;
     if (jX(currentNode, false)) {
       if (shouldRenameNode(currentNode)) {
-        result.renameGuids.push(currentNode.guid)
-      }
-      else {
-        result.lockGuids.push(currentNode.guid)
+        result.renameGuids.push(currentNode.guid);
+      } else {
+        result.lockGuids.push(currentNode.guid);
       }
     }
     if (currentNode.childCount > 0) {
-      queue.push(...currentNode.childrenGuids)
+      queue.push(...currentNode.childrenGuids);
     }
   }
-  return result
+  return result;
 }
 
 /**
@@ -157,18 +118,14 @@ export function collectGuidsForRenaming(node) {
  * @returns True if the node should be renamed, false otherwise
  */
 export function shouldRenameNode(node) {
-  const name = node.name
-  if (!name)
-    return false
+  const name = node.name;
+  if (!name) return false;
 
   // Early return for nodes that should not be renamed
-  if (node.type === 'SYMBOL' || node.isStateGroup || node.isInstanceSublayer)
-    return false
-  if (name.endsWith('?') || name.startsWith('Image'))
-    return false
-  if (node.type === 'INSTANCE')
-    return false
-  return true
+  if (node.type === 'SYMBOL' || node.isStateGroup || node.isInstanceSublayer) return false;
+  if (name.endsWith('?') || name.startsWith('Image')) return false;
+  if (node.type === 'INSTANCE') return false;
+  return true;
 }
 
 /**
@@ -176,17 +133,15 @@ export function shouldRenameNode(node) {
  * Renames layers for all directly selected nodes on the current page.
  */
 export async function renameSelectedLayers() {
-  const currentPage = getSingletonSceneGraph().getCurrentPage()
-  if (!currentPage)
-    return
-  const selectedNodes = currentPage.directlySelectedNodes
+  const currentPage = getSingletonSceneGraph().getCurrentPage();
+  if (!currentPage) return;
+  const selectedNodes = currentPage.directlySelectedNodes;
   try {
     for (const node of selectedNodes) {
-      await renameLayersForNode(node)
+      await renameLayersForNode(node);
     }
-  }
-  finally {
-    currentPage.directlySelectedNodes = selectedNodes
+  } finally {
+    currentPage.directlySelectedNodes = selectedNodes;
   }
 }
 
@@ -196,7 +151,7 @@ export async function renameSelectedLayers() {
  * @returns Promise resolving to stored value
  */
 export async function getStorageValueByKey(storageKey) {
-  return await getStorageValue(storageKey)
+  return await getStorageValue(storageKey);
 }
 
 /**
@@ -205,7 +160,7 @@ export async function getStorageValueByKey(storageKey) {
  * @returns Promise resolving to array of matching keys
  */
 export async function getAllStorageKeysWithPrefix(storagePrefix) {
-  return await getAllStorageKeys(storagePrefix)
+  return await getAllStorageKeys(storagePrefix);
 }
 
 /**
@@ -219,11 +174,10 @@ export async function setStorageEntry(storageEntry) {
     ...storageEntry,
     userID: storageEntry.userID || 'default-user',
     pluginID: storageEntry.pluginID || 'default-plugin',
-    name: storageEntry.name || storageEntry.key,
-  }
-  return await setStorageValue(operationParams)
+    name: storageEntry.name || storageEntry.key
+  };
+  return await setStorageValue(operationParams);
 }
-
 export let uiColorPalette = {
   black: '#1E1E1E',
   gray: '#B3B3B3',
@@ -233,8 +187,8 @@ export let uiColorPalette = {
   green: '#14AE5C',
   blue: '#0D99FF',
   violet: '#9747FF',
-  white: '#FFFFFF',
-}
+  white: '#FFFFFF'
+};
 export let lightColorPalette = {
   darkGray: '#757575',
   lightGray: '#E6E6E6',
@@ -244,8 +198,8 @@ export let lightColorPalette = {
   lightGreen: '#AFF4C6',
   lightBlue: '#BDE3FF',
   lightViolet: '#E4CCFF',
-  white: '#FFFFFF',
-}
+  white: '#FFFFFF'
+};
 
 /**
  * Process URL Data - handles URL data processing through URL utilities
@@ -253,48 +207,44 @@ export let lightColorPalette = {
  * @returns Processed URL data
  */
 export function processUrlData(urlData) {
-  return processURL(urlData)
+  return processURL(urlData);
 }
-
 export function tq(conditionData) {
   // tq - Process condition data by delegating to enhanced condition processor
-  return tqNew(conditionData)
+  return tqNew(conditionData);
 }
-
 export function t$(e) {
   // Delegate to the extracted ReactionsActionProcessor
   // TODO: Implement proper ReactionsActionProcessor when available
-  return e
+  return e;
 }
 
 // Variable Data Types - supported data types for variable binding and resolution
-const primitiveTypes = ['BOOLEAN', 'COLOR', 'FLOAT', 'STRING'] as const
-
+const primitiveTypes = ['BOOLEAN', 'COLOR', 'FLOAT', 'STRING'] as const;
 export function processPublishStatus(e) {
-  if (isNullish(e))
-    return 'UNPUBLISHED'
+  if (isNullish(e)) return 'UNPUBLISHED';
   switch (e) {
     case E8.CURRENT:
-      return 'CURRENT'
+      return 'CURRENT';
     case E8.NEW:
     case E8.NOT_STAGED:
-      return 'UNPUBLISHED'
+      return 'UNPUBLISHED';
     case E8.CHANGED:
     case E8.DELETED:
-      return 'CHANGED'
+      return 'CHANGED';
     default:
-      return 'UNPUBLISHED'
+      return 'UNPUBLISHED';
   }
 }
 
 // Public Variable Scopes - filtered keys from j0r excluding STROKE and FONT_VARIATIONS, plus additional stroke/font properties
-const publicVariableScopes = Object.keys(j0r).filter(scopeKey => isNaN(Number(scopeKey)) && scopeKey !== 'STROKE' && scopeKey !== 'FONT_VARIATIONS').concat(['STROKE_COLOR', 'FONT_WEIGHT']) as [string, ...string[]]
+const publicVariableScopes = Object.keys(j0r).filter(scopeKey => isNaN(Number(scopeKey)) && scopeKey !== 'STROKE' && scopeKey !== 'FONT_VARIATIONS').concat(['STROKE_COLOR', 'FONT_WEIGHT']) as [string, ...string[]];
 // Public Variable Code Syntax Platform Properties - filtered numeric keys from y0x for platform-specific variable syntax
-const publicVariableCodeSyntaxPlatformProperties = Object.keys(y0x).filter(propertyKey => isNaN(Number(propertyKey))) as [string, ...string[]]
+const publicVariableCodeSyntaxPlatformProperties = Object.keys(y0x).filter(propertyKey => isNaN(Number(propertyKey))) as [string, ...string[]];
 const variableAlias = z.strictObject({
   id: z.string(),
-  type: z.literal('VARIABLE_ALIAS'),
-})
+  type: z.literal('VARIABLE_ALIAS')
+});
 export const variableDefinitions = {
   PublicVariableScope: z.enum([...publicVariableScopes]),
   PublicVariableCodeSyntaxPlatformPropType: z.enum([...publicVariableCodeSyntaxPlatformProperties]),
@@ -314,47 +264,37 @@ export const variableDefinitions = {
   VariableBindableComponentPropertyField: z.enum([...fH]),
   VariableAlias: variableAlias,
   VariableBinding: variableAlias,
-  VariableValue: z.union([z.boolean(), _$$N.FiniteNumber, z.string(), z.union([_$$N.ColorA, _$$N.Color]), variableAlias]),
-}
-
+  VariableValue: z.union([z.boolean(), _$$N.FiniteNumber, z.string(), z.union([_$$N.ColorA, _$$N.Color]), variableAlias])
+};
 export function hasResizeToFit(e) {
-  return e.type === 'FRAME' && e.resizeToFit
+  return e.type === 'FRAME' && e.resizeToFit;
 }
-
 export function processWidgetSyncData(vm, state, i) {
   return {
-    syncedState: vm.isUndefined(state)
-      ? void 0
-      : _$$u({
-          vm,
-          handle: state,
-          zSchema: z.record(z.any()).optional(),
-          property: 'cloneWidget',
-        }),
-    syncedMap: vm.isUndefined(i)
-      ? void 0
-      : _$$u({
-          vm,
-          handle: i,
-          zSchema: z.record(z.record(z.any())).optional(),
-          property: 'cloneWidget',
-        }),
-  }
+    syncedState: vm.isUndefined(state) ? void 0 : _$$u({
+      vm,
+      handle: state,
+      zSchema: z.record(z.any()).optional(),
+      property: 'cloneWidget'
+    }),
+    syncedMap: vm.isUndefined(i) ? void 0 : _$$u({
+      vm,
+      handle: i,
+      zSchema: z.record(z.record(z.any())).optional(),
+      property: 'cloneWidget'
+    })
+  };
 }
-
 export function isInImmutableContext(e, t) {
   // Module Processor Function - handles module input and target module processing (im function)
-  return !!t.isInImmutableFrame && t.type !== 'TABLE_CELL' || t.isInWidget && e.vmType !== 'scopednoopvm'
+  return !!t.isInImmutableFrame && t.type !== 'TABLE_CELL' || t.isInWidget && e.vmType !== 'scopednoopvm';
 }
-
 export function validateNamespace(namespace) {
   // Handler Processor Function - handles handler input processing and validation (ih function)
-  if (namespace.length < 3)
-    throw new Error('The namespace must be at least 3 characters')
-  if (namespace.length > 1000)
-    throw new Error('The namespace can be at most 1000 characters')
+  if (namespace.length < 3) throw new Error('The namespace must be at least 3 characters');
+  if (namespace.length > 1000) throw new Error('The namespace can be at most 1000 characters');
   if (!namespace.match(/^[\w.]+$/)) {
-    throw new Error('The namespace can only consist of alphanumeric characters, _ or .')
+    throw new Error('The namespace can only consist of alphanumeric characters, _ or .');
   }
 }
 
@@ -372,7 +312,7 @@ export function handlePaintProperty({
   mixedSentinel,
   imageStore,
   videoStore,
-  getNode,
+  getNode
 }, handle, propertyKey) {
   defineVmProp({
     handle,
@@ -381,144 +321,136 @@ export function handlePaintProperty({
       enumerable: true,
       metricsKey: `node.${propertyKey}`,
       get() {
-        const node = getNode(this)
-        const fills = node.fillsOrMixed
-        if (fills === 'mixed')
-          return mixedSentinel
-        const wrapped = vm.deepWrap(convertPaintArrayData(fills))
-        vm.deepFreezeObject(wrapped)
-        return wrapped
+        const node = getNode(this);
+        const fills = node.fillsOrMixed;
+        if (fills === 'mixed') return mixedSentinel;
+        const wrapped = vm.deepWrap(convertPaintArrayData(fills));
+        vm.deepFreezeObject(wrapped);
+        return wrapped;
       },
       set(value) {
-        const node = getNode(this)
-        const blobs = []
+        const node = getNode(this);
+        const blobs = [];
         node.fillPaintsForPluginOnly = {
           data: mapPaintConfigurations(imageStore, videoStore, _$$u({
             vm,
             handle: value,
             zSchema: _$$N.Paints,
-            property: propertyKey,
+            property: propertyKey
           }), blobs),
-          blobs,
-        }
-      },
+          blobs
+        };
+      }
     },
     canWriteInReadOnly: false,
-    hasEditScope: true,
-  })
+    hasEditScope: true
+  });
 }
-
 export function createNodeHash(vm, targetData) {
   // Data Processor Function - handles input and target data processing (i_ function)
-  let i = vm.newObject()
+  let i = vm.newObject();
   vm.defineProp(i, 'hash', {
     enumerable: false,
     metricsKey: 'node.hash',
-    value: vm.deepWrap(targetData.sha1),
-  })
-  return i
+    value: vm.deepWrap(targetData.sha1)
+  });
+  return i;
 }
-
 export function createImageProcessor(vm, imageData) {
-  const processor = vm.newObject()
+  const processor = vm.newObject();
 
   // Define hash property
   vm.defineProp(processor, 'hash', {
     enumerable: false,
     metricsKey: 'node.hash',
-    value: vm.deepWrap(imageData.sha1),
-  })
+    value: vm.deepWrap(imageData.sha1)
+  });
 
   // Define getBytesAsync function
   vm.defineFunction(processor, 'getBytesAsync', 'image.getBytesAsync', () => {
     const {
       promise,
       resolve,
-      reject,
-    } = vm.newPromise()
-    const asyncOperation = vm.registerPromise(imageData.getBytesAsync())
-    asyncOperation.then((result) => {
-      resolve(vm.deepWrap(result))
-    })
-    asyncOperation.catch((error) => {
-      reject(vm.deepWrap(error))
-    })
-    return promise
-  })
+      reject
+    } = vm.newPromise();
+    const asyncOperation = vm.registerPromise(imageData.getBytesAsync());
+    asyncOperation.then(result => {
+      resolve(vm.deepWrap(result));
+    });
+    asyncOperation.catch(error => {
+      reject(vm.deepWrap(error));
+    });
+    return promise;
+  });
 
   // Define getSizeAsync function
   vm.defineFunction(processor, 'getSizeAsync', 'image.getSizeAsync', () => {
     const {
       promise,
       resolve,
-      reject,
-    } = vm.newPromise()
+      reject
+    } = vm.newPromise();
     const processImageSize = () => {
       if (imageData.bytes) {
-        vX(imageData.bytes).then(size => resolve(vm.deepWrap(size))).catch(error => reject(vm.deepWrap(error)))
-      }
-      else {
-        imageData.getBytesAsync().then((bytes) => {
-          imageData.bytes = bytes
-          return vX(bytes)
+        vX(imageData.bytes).then(size => resolve(vm.deepWrap(size))).catch(error => reject(vm.deepWrap(error)));
+      } else {
+        imageData.getBytesAsync().then(bytes => {
+          imageData.bytes = bytes;
+          return vX(bytes);
         }).then(size => resolve(vm.deepWrap(size))).catch(() => {
-          reject(vm.newString('Image dimensions not available'))
-        })
+          reject(vm.newString('Image dimensions not available'));
+        });
       }
-    }
-    processImageSize()
-    return promise
-  })
-  return processor
+    };
+    processImageSize();
+    return promise;
+  });
+  return processor;
 }
-
 export function convertEffectType(effectType) {
   switch (effectType) {
     case 'FOREGROUND_BLUR':
-      return 'LAYER_BLUR'
+      return 'LAYER_BLUR';
     case 'REPEAT':
     case 'SYMMETRY':
-      return 'BACKGROUND_BLUR'
+      return 'BACKGROUND_BLUR';
     case 'GRAIN':
-      return 'TEXTURE'
+      return 'TEXTURE';
     default:
-      return effectType
+      return effectType;
   }
 }
-
 export function processEffect(effect) {
   // Iteration Processor Function - handles iteration input processing (iI function)
-  const type = convertEffectType(effect.type)
-  const baseEffect = effect.type === 'NOISE'
-    ? {
-        type,
-        visible: effect.visible,
-      }
-    : {
-        type,
-        visible: effect.visible,
-        radius: effect.radius,
-      }
-  const boundVariables: any = {}
+  const type = convertEffectType(effect.type);
+  const baseEffect = effect.type === 'NOISE' ? {
+    type,
+    visible: effect.visible
+  } : {
+    type,
+    visible: effect.visible,
+    radius: effect.radius
+  };
+  const boundVariables: any = {};
   if (effect.colorVar?.value?.alias) {
-    boundVariables.color = createVariableAlias(effect.colorVar.value.alias)
+    boundVariables.color = createVariableAlias(effect.colorVar.value.alias);
   }
   if (effect.spreadVar?.value?.alias) {
-    boundVariables.spread = createVariableAlias(effect.spreadVar.value.alias)
+    boundVariables.spread = createVariableAlias(effect.spreadVar.value.alias);
   }
   if (effect.radiusVar?.value?.alias) {
-    boundVariables.radius = createVariableAlias(effect.radiusVar.value.alias)
+    boundVariables.radius = createVariableAlias(effect.radiusVar.value.alias);
   }
   if (effect.xVar?.value?.alias) {
-    boundVariables.offsetX = createVariableAlias(effect.xVar.value.alias)
+    boundVariables.offsetX = createVariableAlias(effect.xVar.value.alias);
   }
   if (effect.yVar?.value?.alias) {
-    boundVariables.offsetY = createVariableAlias(effect.yVar.value.alias)
+    boundVariables.offsetY = createVariableAlias(effect.yVar.value.alias);
   }
   const processedEffect = {
     ...baseEffect,
-    boundVariables,
-  }
+    boundVariables
+  };
   switch (effect.type) {
     case 'INNER_SHADOW':
       return {
@@ -526,8 +458,8 @@ export function processEffect(effect) {
         color: effect.color,
         offset: effect.offset,
         spread: effect.spread,
-        blendMode: normalizeBlendMode(effect.blendMode),
-      }
+        blendMode: normalizeBlendMode(effect.blendMode)
+      };
     case 'DROP_SHADOW':
       return {
         ...processedEffect,
@@ -535,14 +467,14 @@ export function processEffect(effect) {
         offset: effect.offset,
         spread: effect.spread,
         blendMode: normalizeBlendMode(effect.blendMode),
-        showShadowBehindNode: effect.showShadowBehindNode,
-      }
+        showShadowBehindNode: effect.showShadowBehindNode
+      };
     case 'GRAIN':
       return {
         ...processedEffect,
         noiseSize: effect.noiseSize?.x || 0,
-        clipToShape: effect.clipToShape || false,
-      }
+        clipToShape: effect.clipToShape || false
+      };
     case 'NOISE':
       if (effect.noiseType === 'DUOTONE') {
         return {
@@ -551,8 +483,8 @@ export function processEffect(effect) {
           noiseType: 'DUOTONE',
           color: effect.color,
           secondaryColor: effect.secondaryColor || effect.color,
-          density: effect.density,
-        }
+          density: effect.density
+        };
       }
       if (effect.noiseType === 'MULTITONE') {
         return {
@@ -561,16 +493,16 @@ export function processEffect(effect) {
           noiseType: 'MULTITONE',
           color: effect.color,
           opacity: effect.opacity,
-          density: effect.density,
-        }
+          density: effect.density
+        };
       }
       return {
         ...processedEffect,
         noiseSize: effect.noiseSize?.x || 0,
         noiseType: 'MONOTONE',
         color: effect.color,
-        density: effect.density,
-      }
+        density: effect.density
+      };
     case 'GLASS':
       return {
         ...processedEffect,
@@ -578,8 +510,8 @@ export function processEffect(effect) {
         depth: effect.refractionRadius,
         lightAngle: effect.specularAngle,
         lightIntensity: effect.specularIntensity,
-        dispersion: effect.chromaticAberration,
-      }
+        dispersion: effect.chromaticAberration
+      };
     default:
       // Handle progressive blur for advanced effects
       if (getFeatureFlags().ce_il_root && effect.blurOpType === 'PROGRESSIVE') {
@@ -588,10 +520,10 @@ export function processEffect(effect) {
           blurType: 'PROGRESSIVE',
           startRadius: effect.startRadius || 0,
           startOffset: effect.startOffset,
-          endOffset: effect.endOffset,
-        }
+          endOffset: effect.endOffset
+        };
       }
-      return processedEffect
+      return processedEffect;
   }
 }
 
@@ -604,7 +536,7 @@ export function processEffect(effect) {
  * @returns The clamped value.
  */
 export function clampValue(value, min, max) {
-  return Math.min(Math.max(value, min), max)
+  return Math.min(Math.max(value, min), max);
 }
 
 /**
@@ -618,27 +550,24 @@ export function clampValue(value, min, max) {
  */
 export function validateGlassEffectValue(value, min, max, propertyName) {
   if (value > max) {
-    _$$k2.warn(`Glass effect ${propertyName} of ${value} is too large and will be clamped to ${max}`)
+    _$$k2.warn(`Glass effect ${propertyName} of ${value} is too large and will be clamped to ${max}`);
+  } else if (value < min) {
+    _$$k2.warn(`Glass effect ${propertyName} of ${value} is too small and will be clamped to ${min}`);
   }
-  else if (value < min) {
-    _$$k2.warn(`Glass effect ${propertyName} of ${value} is too small and will be clamped to ${min}`)
-  }
-  return clampValue(value, min, max)
+  return clampValue(value, min, max);
 }
-
 export function handleFrameSpread(i) {
   if (i.fills.length === 0 || i.fills.every(e => !(e.visible && e.opacity))) {
-    _$$k2.warn('The \'spread\' parameter is not supported when frames or components have no visible fills')
+    _$$k2.warn('The \'spread\' parameter is not supported when frames or components have no visible fills');
   }
   if (i.frameMaskDisabled) {
-    _$$k2.warn('The \'spread\' parameter is not supported when frames or components have "Clips content" disabled.')
+    _$$k2.warn('The \'spread\' parameter is not supported when frames or components have "Clips content" disabled.');
   }
-  return 0
+  return 0;
 }
-
 export function handleOtherSpread(i) {
-  _$$k2.warn(`Spread is not supported for node type ${i.type}`)
-  return 1
+  _$$k2.warn(`Spread is not supported for node type ${i.type}`);
+  return 1;
 }
 
 /**
@@ -650,90 +579,84 @@ export function handleOtherSpread(i) {
  */
 export function processEffectWithValidation(effect, node) {
   let processed = {
-    ...effect,
-  }
+    ...effect
+  };
 
   // Clamp progressive blur startRadius
   if ((effect.type === 'LAYER_BLUR' || effect.type === 'BACKGROUND_BLUR') && effect.blurType === 'PROGRESSIVE' && effect.startRadius && effect.startRadius > XX) {
-    _$$k2.warn(`Effect startRadius of ${effect.startRadius} is too large and will be clamped to ${XX}`)
-    processed.startRadius = clampValue(effect.startRadius, 0, XX)
+    _$$k2.warn(`Effect startRadius of ${effect.startRadius} is too large and will be clamped to ${XX}`);
+    processed.startRadius = clampValue(effect.startRadius, 0, XX);
   }
 
   // Clamp TEXTURE radius
   if (effect.type === 'TEXTURE') {
     if (effect.radius > mx) {
-      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${mx}`)
+      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${mx}`);
     }
-    processed.radius = clampValue(effect.radius, 0, mx)
+    processed.radius = clampValue(effect.radius, 0, mx);
   }
 
   // Map blurType to blurOpType and remove blurType
   if ((effect.type === 'LAYER_BLUR' || effect.type === 'BACKGROUND_BLUR') && effect.blurType) {
-    processed.blurOpType = effect.blurType
-    delete processed.blurType
+    processed.blurOpType = effect.blurType;
+    delete processed.blurType;
   }
 
   // Clamp noiseSize for NOISE or TEXTURE
   if (effect.type === 'NOISE' || effect.type === 'TEXTURE') {
     if (effect.noiseSize > Mo) {
-      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too large and will be clamped to ${Mo}`)
+      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too large and will be clamped to ${Mo}`);
+    } else if (effect.noiseSize < 0) {
+      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too small and will be clamped to 0`);
     }
-    else if (effect.noiseSize < 0) {
-      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too small and will be clamped to 0`)
-    }
-    const clampedNoiseSize = clampValue(effect.noiseSize, 0, Mo)
-    processed.noiseSize = new Mi(clampedNoiseSize, clampedNoiseSize)
+    const clampedNoiseSize = clampValue(effect.noiseSize, 0, Mo);
+    processed.noiseSize = new Mi(clampedNoiseSize, clampedNoiseSize);
   }
 
   // Handle GLASS effect property clamping and mapping
   if (effect.type === 'GLASS') {
-    if (node && !node.canHaveGlassEffect)
-      throw new Error(zd)
-    processed.refractionIntensity = validateGlassEffectValue(effect.refraction, SU, U_, 'refraction')
-    processed.refractionRadius = validateGlassEffectValue(effect.depth, Ku, Wp, 'depth')
-    processed.specularAngle = validateGlassEffectValue(effect.lightAngle, _$$$$, NH, 'lightAngle')
-    processed.specularIntensity = validateGlassEffectValue(effect.lightIntensity, VL, Jk, 'lightIntensity')
-    processed.chromaticAberration = validateGlassEffectValue(effect.dispersion, $x, _$$rY, 'dispersion')
-    processed.radius = validateGlassEffectValue(effect.radius, Df, hD, 'radius')
-    delete processed.refraction
-    delete processed.depth
-    delete processed.lightAngle
-    delete processed.lightIntensity
-    delete processed.dispersion
+    if (node && !node.canHaveGlassEffect) throw new Error(zd);
+    processed.refractionIntensity = validateGlassEffectValue(effect.refraction, SU, U_, 'refraction');
+    processed.refractionRadius = validateGlassEffectValue(effect.depth, Ku, Wp, 'depth');
+    processed.specularAngle = validateGlassEffectValue(effect.lightAngle, _$$$$, NH, 'lightAngle');
+    processed.specularIntensity = validateGlassEffectValue(effect.lightIntensity, VL, Jk, 'lightIntensity');
+    processed.chromaticAberration = validateGlassEffectValue(effect.dispersion, $x, _$$rY, 'dispersion');
+    processed.radius = validateGlassEffectValue(effect.radius, Df, hD, 'radius');
+    delete processed.refraction;
+    delete processed.depth;
+    delete processed.lightAngle;
+    delete processed.lightIntensity;
+    delete processed.dispersion;
   }
 
   // Handle spread for INNER_SHADOW and DROP_SHADOW
   if (effect.type === 'INNER_SHADOW' || effect.type === 'DROP_SHADOW') {
     if (effect.spread === undefined) {
-      delete processed.spread
-    }
-    else if (effect.spread !== 0 && (!node || !['ROUNDED_RECTANGLE', 'RECTANGLE', 'ELLIPSE'].includes(node.type) && (['INSTANCE', 'SYMBOL', 'FRAME'].includes(node.type) ? handleFrameSpread(node) : handleOtherSpread(node)))) {
-      processed.spread = 0
-    }
-    else {
+      delete processed.spread;
+    } else if (effect.spread !== 0 && (!node || !['ROUNDED_RECTANGLE', 'RECTANGLE', 'ELLIPSE'].includes(node.type) && (['INSTANCE', 'SYMBOL', 'FRAME'].includes(node.type) ? handleFrameSpread(node) : handleOtherSpread(node)))) {
+      processed.spread = 0;
+    } else {
       if (effect.spread > yj) {
-        _$$k2.warn(`Effect spread of ${effect.spread} is too large and will be clamped to ${yj}`)
+        _$$k2.warn(`Effect spread of ${effect.spread} is too large and will be clamped to ${yj}`);
+      } else if (effect.spread < cT) {
+        _$$k2.warn(`Effect spread of ${effect.spread} is too small and will be clamped to ${cT}`);
       }
-      else if (effect.spread < cT) {
-        _$$k2.warn(`Effect spread of ${effect.spread} is too small and will be clamped to ${cT}`)
-      }
-      processed.spread = clampValue(effect.spread, cT, yj)
+      processed.spread = clampValue(effect.spread, cT, yj);
     }
   }
 
   // Clamp radius for supported types
   if (effect.radius !== undefined) {
     if (effect.radius > DW) {
-      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${DW}`)
+      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${DW}`);
+    } else if (effect.radius < V8) {
+      _$$k2.warn(`Effect radius of ${effect.radius} is too small and will be clamped to ${V8}`);
     }
-    else if (effect.radius < V8) {
-      _$$k2.warn(`Effect radius of ${effect.radius} is too small and will be clamped to ${V8}`)
-    }
-    processed.radius = clampValue(effect.radius, V8, DW)
+    processed.radius = clampValue(effect.radius, V8, DW);
   }
 
   // Normalize blend mode
-  processed.blendMode = normalizeBlendMode(effect.blendMode)
+  processed.blendMode = normalizeBlendMode(effect.blendMode);
 
   // Handle bound variables for spread, color, offsetX, offsetY
   if (effect.boundVariables) {
@@ -742,42 +665,42 @@ export function processEffectWithValidation(effect, node) {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(effect.boundVariables.spread.id),
-        },
-      }
+          alias: _$$sH(effect.boundVariables.spread.id)
+        }
+      };
     }
     if (effect.boundVariables?.color?.id) {
       processed.colorVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'COLOR',
         value: {
-          alias: _$$sH(effect.boundVariables.color.id),
-        },
-      }
+          alias: _$$sH(effect.boundVariables.color.id)
+        }
+      };
     }
     if (effect.boundVariables?.offsetX?.id) {
       processed.xVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(effect.boundVariables.offsetX.id),
-        },
-      }
+          alias: _$$sH(effect.boundVariables.offsetX.id)
+        }
+      };
     }
     if (effect.boundVariables?.offsetY?.id) {
       processed.yVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(effect.boundVariables.offsetY.id),
-        },
-      }
+          alias: _$$sH(effect.boundVariables.offsetY.id)
+        }
+      };
     }
   }
 
   // Remove showShadowBehindNode if undefined for DROP_SHADOW
   if (effect.type === 'DROP_SHADOW' && effect.showShadowBehindNode === undefined) {
-    delete processed.showShadowBehindNode
+    delete processed.showShadowBehindNode;
   }
 
   // Handle radiusVar for boundVariables
@@ -786,20 +709,19 @@ export function processEffectWithValidation(effect, node) {
       dataType: 'ALIAS',
       resolvedDataType: 'FLOAT',
       value: {
-        alias: _$$sH(effect.boundVariables.radius.id),
-      },
-    }
+        alias: _$$sH(effect.boundVariables.radius.id)
+      }
+    };
   }
 
   // Remove boundVariables if present or undefined
-  if (processed.boundVariables || effect.boundVariables === undefined)
-    delete processed.boundVariables
+  if (processed.boundVariables || effect.boundVariables === undefined) delete processed.boundVariables;
 
   // Map effect type for output
   return {
     ...processed,
-    type: mapEffectTypeForOutput(effect.type),
-  }
+    type: mapEffectTypeForOutput(effect.type)
+  };
 }
 
 /**
@@ -810,160 +732,147 @@ export function processEffectWithValidation(effect, node) {
 export function mapEffectTypeForOutput(type) {
   switch (type) {
     case 'LAYER_BLUR':
-      return 'FOREGROUND_BLUR'
+      return 'FOREGROUND_BLUR';
     case 'TEXTURE':
-      return 'GRAIN'
+      return 'GRAIN';
     default:
-      return type
+      return type;
   }
 }
-
 export function iw(e) {
-  return iwNew(e)
+  return iwNew(e);
 }
-
 export function iC(e) {
-  return iCNew(e)
+  return iCNew(e);
 }
-
 export function iT(e) {
-  return iTNew(e)
+  return iTNew(e);
 }
-
 export function ik(e) {
-  return ikNew(e)
+  return ikNew(e);
 }
-
 export function iR(e) {
-  return iRNew(e)
+  return iRNew(e);
 }
-
 export function convertTextDecorationThicknessFromLegacy(legacyThickness) {
   if (legacyThickness.units === 'RAW') {
     return {
-      unit: 'AUTO',
-    }
+      unit: 'AUTO'
+    };
   }
   if (legacyThickness.units === 'PERCENT') {
     return {
       unit: 'PERCENT',
-      value: legacyThickness.value,
-    }
+      value: legacyThickness.value
+    };
   }
   if (legacyThickness.units === 'PIXELS') {
     return {
       unit: 'PIXELS',
-      value: legacyThickness.value,
-    }
+      value: legacyThickness.value
+    };
   }
-  throw new Error('Unknown textDecorationThickness unit')
+  throw new Error('Unknown textDecorationThickness unit');
 }
-
 export function convertTextDecorationThicknessToLegacy(modernThickness) {
   if (modernThickness.unit === 'AUTO') {
     return {
       units: 'RAW',
-      value: 10,
-    }
+      value: 10
+    };
   }
   if (modernThickness.unit === 'PERCENT') {
     return {
       units: 'PERCENT',
-      value: modernThickness.value || 0,
-    }
+      value: modernThickness.value || 0
+    };
   }
   if (modernThickness.unit === 'PIXELS') {
     return {
       units: 'PIXELS',
-      value: modernThickness.value || 0,
-    }
+      value: modernThickness.value || 0
+    };
   }
-  throw new Error('Unknown textDecorationThickness unit')
+  throw new Error('Unknown textDecorationThickness unit');
 }
-
 export function convertListOption(listOption) {
-  let type = 'NONE'
+  let type = 'NONE';
   if (listOption === 'ORDERED_LIST') {
-    type = 'ORDERED'
-  }
-  else if (listOption === 'UNORDERED_LIST') {
-    type = 'UNORDERED'
-  }
-  else if (listOption === 'PLAIN') {
-    type = 'NONE'
-  }
-  else {
-    throw new Error('Unknown list option')
+    type = 'ORDERED';
+  } else if (listOption === 'UNORDERED_LIST') {
+    type = 'UNORDERED';
+  } else if (listOption === 'PLAIN') {
+    type = 'NONE';
+  } else {
+    throw new Error('Unknown list option');
   }
   return {
-    type,
-  }
+    type
+  };
 }
-
 export function processGridLayout(gridLayoutConfig) {
   const config: GridLayoutConfig = {
     pattern: gridLayoutConfig.pattern === 'GRID' ? 'GRID' : gridLayoutConfig.axis === 'X' ? 'COLUMNS' : 'ROWS',
     visible: gridLayoutConfig.visible,
-    color: gridLayoutConfig.color,
-  }
+    color: gridLayoutConfig.color
+  };
 
   // Process bound variables for layout configuration
-  const boundVariables: any = {}
+  const boundVariables: any = {};
 
   // Extract and process offset variable if present
   if (gridLayoutConfig.offsetVar?.value?.alias) {
-    boundVariables.offset = createVariableAlias(gridLayoutConfig.offsetVar.value.alias)
+    boundVariables.offset = createVariableAlias(gridLayoutConfig.offsetVar.value.alias);
   }
 
   // Extract and process section size variable if present
   if (gridLayoutConfig.sectionSizeVar?.value?.alias) {
-    boundVariables.sectionSize = createVariableAlias(gridLayoutConfig.sectionSizeVar.value.alias)
+    boundVariables.sectionSize = createVariableAlias(gridLayoutConfig.sectionSizeVar.value.alias);
   }
 
   // Extract and process number of sections variable if present
   if (gridLayoutConfig.numSectionsVar?.value?.alias) {
-    boundVariables.count = createVariableAlias(gridLayoutConfig.numSectionsVar.value.alias)
+    boundVariables.count = createVariableAlias(gridLayoutConfig.numSectionsVar.value.alias);
   }
 
   // Extract and process gutter size variable if present
   if (gridLayoutConfig.gutterSizeVar?.value?.alias) {
-    boundVariables.gutterSize = createVariableAlias(gridLayoutConfig.gutterSizeVar.value.alias)
+    boundVariables.gutterSize = createVariableAlias(gridLayoutConfig.gutterSizeVar.value.alias);
   }
 
   // Assign bound variables to layout configuration with type assertion
-  config.boundVariables = boundVariables
+  config.boundVariables = boundVariables;
 
   // Process stripe pattern specific configuration
   if (gridLayoutConfig.pattern === 'STRIPES') {
     // Set gutter size and alignment type for stripe layout with type assertion
-    config.gutterSize = gridLayoutConfig.gutterSize
-    config.alignment = gridLayoutConfig.type
+    config.gutterSize = gridLayoutConfig.gutterSize;
+    config.alignment = gridLayoutConfig.type;
 
     // Configure stripe layout based on alignment type
     switch (gridLayoutConfig.type) {
       case 'MIN':
       case 'MAX':
         // For MIN/MAX alignment: set infinite count if needed, section size, and offset with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections
-        config.sectionSize = gridLayoutConfig.sectionSize
-        config.offset = gridLayoutConfig.offset
-        break
+        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
+        config.sectionSize = gridLayoutConfig.sectionSize;
+        config.offset = gridLayoutConfig.offset;
+        break;
       case 'STRETCH':
         // For STRETCH alignment: set single count if infinite, and offset with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? 1 : gridLayoutConfig.numSections
-        config.offset = gridLayoutConfig.offset
-        break
+        config.count = gridLayoutConfig.numSections === _$$F2 ? 1 : gridLayoutConfig.numSections;
+        config.offset = gridLayoutConfig.offset;
+        break;
       case 'CENTER':
         // For CENTER alignment: set infinite count if needed and section size with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections
-        config.sectionSize = gridLayoutConfig.sectionSize
+        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
+        config.sectionSize = gridLayoutConfig.sectionSize;
     }
-  }
-  else {
+  } else {
     // For non-stripe patterns, only set section size with type assertion
-    config.sectionSize = gridLayoutConfig.sectionSize
+    config.sectionSize = gridLayoutConfig.sectionSize;
   }
-  return config
+  return config;
 }
 
 /**
@@ -985,9 +894,9 @@ export function convertGridLayoutConfig(config) {
       r: 1,
       g: 0,
       b: 0,
-      a: 0.1,
-    },
-  })
+      a: 0.1
+    }
+  });
 
   // Map normalized config to internal format
   const internalConfig: GridLayoutConfig = {
@@ -999,8 +908,8 @@ export function convertGridLayoutConfig(config) {
     sectionSize: normalized.sectionSize,
     offset: normalized.offset,
     visible: normalized.visible,
-    color: normalized.color,
-  }
+    color: normalized.color
+  };
 
   // Handle bound variables if present
   if (config.boundVariables) {
@@ -1009,72 +918,69 @@ export function convertGridLayoutConfig(config) {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(config.boundVariables.count.id),
-        },
-      }
+          alias: _$$sH(config.boundVariables.count.id)
+        }
+      };
     }
     if (config.boundVariables?.sectionSize?.id) {
       internalConfig.sectionSizeVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(config.boundVariables.sectionSize.id),
-        },
-      }
+          alias: _$$sH(config.boundVariables.sectionSize.id)
+        }
+      };
     }
     if (config.boundVariables?.offset?.id) {
       internalConfig.offsetVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(config.boundVariables.offset.id),
-        },
-      }
+          alias: _$$sH(config.boundVariables.offset.id)
+        }
+      };
     }
     if (config.boundVariables?.gutterSize?.id) {
       internalConfig.gutterSizeVar = {
         dataType: 'ALIAS',
         resolvedDataType: 'FLOAT',
         value: {
-          alias: _$$sH(config.boundVariables.gutterSize.id),
-        },
-      }
+          alias: _$$sH(config.boundVariables.gutterSize.id)
+        }
+      };
     }
   }
-  return internalConfig
+  return internalConfig;
 }
-
 export function mapColorName(colorName) {
   switch (colorName) {
     case 'yellow':
-      return RN1.YELLOW
+      return RN1.YELLOW;
     case 'orange':
-      return RN1.ORANGE
+      return RN1.ORANGE;
     case 'red':
-      return RN1.RED
+      return RN1.RED;
     case 'pink':
-      return RN1.PINK
+      return RN1.PINK;
     case 'violet':
-      return RN1.VIOLET
+      return RN1.VIOLET;
     case 'blue':
-      return RN1.BLUE
+      return RN1.BLUE;
     case 'teal':
-      return RN1.TEAL
+      return RN1.TEAL;
     case 'green':
-      return RN1.GREEN
+      return RN1.GREEN;
     default:
-      throw new Error(`Unknown color name: ${colorName}`)
+      throw new Error(`Unknown color name: ${colorName}`);
   }
 }
-
 export let i5 = z.strictObject({
   label: z.string().trim().min(1),
-  color: z.enum(colors),
-})
-
+  color: z.enum(colors)
+});
 export async function loadFontsForTextNode(textNode) {
   // Font Loading Cache - stores already loaded fonts to prevent redundant loading
-  const loadedFonts: any[] = []
+  const loadedFonts: any[] = [];
 
   /**
    * Load Font If Needed Function - conditionally loads a font only if not already loaded
@@ -1084,28 +990,27 @@ export async function loadFontsForTextNode(textNode) {
    */
   async function loadFontIfNeeded(fontName) {
     // Create unique identifier from font family and style
-    const fontIdentifier: string = fontName && `${fontName.family}|${fontName.style}`
+    const fontIdentifier: string = fontName && `${fontName.family}|${fontName.style}`;
 
     // Check if font is already loaded in cache
     if (!loadedFonts.includes(fontIdentifier)) {
       // Add to cache before loading to prevent duplicate requests
-      loadedFonts.push(fontIdentifier)
+      loadedFonts.push(fontIdentifier);
 
       // Load the font using the font loading utility
-      return await uW(fontName)
+      return await uW(fontName);
     }
 
     // Font already loaded, no action needed
   }
-
   if (textNode.type === 'TEXT') {
     const {
-      characters,
-    } = textNode
+      characters
+    } = textNode;
 
     // Load fonts for all font names used in the text range
     for (const fontName of textNode.getRangeAllFontNames(0, characters.length)) {
-      await loadFontIfNeeded(fontName)
+      await loadFontIfNeeded(fontName);
     }
   }
 }
@@ -1119,29 +1024,29 @@ export async function loadFontsForTextNode(textNode) {
  */
 export function getRowColumn(targetRow?: number, targetColumn?: number) {
   // Get current canvas grid array, defaulting to empty if not available
-  const canvasGridArray = Ez5?.canvasGrid().canvasGridArray.getCopy() ?? []
+  const canvasGridArray = Ez5?.canvasGrid().canvasGridArray.getCopy() ?? [];
 
   // Calculate maximum valid row index (at least 0)
-  const maxRowIndex = Math.max(0, canvasGridArray.length - 1)
+  const maxRowIndex = Math.max(0, canvasGridArray.length - 1);
 
   // Determine target row index with fallback behavior
   const rowIndex = targetRow === undefined ? maxRowIndex // Use last row if not specified
-    : Math.min(targetRow, maxRowIndex) // Clamp to valid range if specified
+  : Math.min(targetRow, maxRowIndex); // Clamp to valid range if specified
 
   // Get the target row array, defaulting to empty if row doesn't exist
-  const currentRow = canvasGridArray[rowIndex] ?? []
+  const currentRow = canvasGridArray[rowIndex] ?? [];
 
   // Calculate maximum valid column index (at least 0)
-  const maxColumnIndex = Math.max(0, currentRow.length - 1)
+  const maxColumnIndex = Math.max(0, currentRow.length - 1);
 
   // Determine target column index with fallback behavior
   const columnIndex = targetColumn === undefined ? maxColumnIndex + 1 // Use next available column if not specified
-    : Math.min(targetColumn, maxColumnIndex + 1) // Clamp to valid range + 1 if specified
+  : Math.min(targetColumn, maxColumnIndex + 1); // Clamp to valid range + 1 if specified
 
   return {
     row: rowIndex,
-    col: columnIndex,
-  }
+    col: columnIndex
+  };
 }
 
 /**
@@ -1159,25 +1064,23 @@ export function getRowColumn(targetRow?: number, targetColumn?: number) {
  */
 export function parseColorStringWithFallbacks(colorString) {
   // Trim whitespace from input
-  colorString = colorString.trim()
+  colorString = colorString.trim();
 
   // Try parsing with di() function first
-  let parsedResult = di(colorString)
-  if (parsedResult)
-    return parsedResult
+  let parsedResult = di(colorString);
+  if (parsedResult) return parsedResult;
 
   // Try parsing with _$$mx() function for named colors
-  parsedResult = _$$mx(colorString)
-  if (parsedResult)
-    return parsedResult
+  parsedResult = _$$mx(colorString);
+  if (parsedResult) return parsedResult;
 
   // Try parsing as hex color (with or without # prefix, 3-8 characters)
   if (colorString.match(/^#?[0-9a-f]{3,8}$/i)) {
-    return _$$tK(colorString, true, 1)
+    return _$$tK(colorString, true, 1);
   }
 
   // All parsing strategies failed
-  return null
+  return null;
 }
 
 /**
@@ -1190,16 +1093,15 @@ export function normalizeColorObjectAlpha(colorInput) {
   // Check if alpha channel is already present
   if ('a' in colorInput) {
     // Color object already has alpha channel, return as-is
-    return colorInput
-  }
-  else {
+    return colorInput;
+  } else {
     // Color object missing alpha channel, add default alpha of 1.0
     return {
       r: colorInput.r,
       g: colorInput.g,
       b: colorInput.b,
-      a: 1,
-    }
+      a: 1
+    };
   }
 }
 
@@ -1214,21 +1116,20 @@ export function parseColorInput(colorInput: unknown) {
   // Handle string color inputs (hex, named colors, etc.)
   if (typeof colorInput == 'string') {
     // Parse color string using multiple parsing strategies
-    const parsedColor = parseColorStringWithFallbacks(colorInput)
+    const parsedColor = parseColorStringWithFallbacks(colorInput);
 
     // Throw error if color string could not be parsed
     if (!parsedColor) {
-      throw new Error(`failed to parse color: ${colorInput}`)
+      throw new Error(`failed to parse color: ${colorInput}`);
     }
-    return parsedColor
+    return parsedColor;
   }
 
   // Handle color object inputs - normalize with alpha channel
-  return normalizeColorObjectAlpha(colorInput)
+  return normalizeColorObjectAlpha(colorInput);
 }
-
-let timerStateEnum = z.enum(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust'])
-export let timerAndStateEvents = z.union([z.enum(['close', 'selectionchange', 'currentpagechange', 'drop', 'input', 'run', 'message', 'documentchange', 'stylechange', 'nodechange', 'textreview', 'codegen', 'generate', 'preferenceschange', 'linkpreview', 'auth', 'open', 'slidesviewchange']), timerStateEnum])
+let timerStateEnum = z.enum(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust']);
+export let timerAndStateEvents = z.union([z.enum(['close', 'selectionchange', 'currentpagechange', 'drop', 'input', 'run', 'message', 'documentchange', 'stylechange', 'nodechange', 'textreview', 'codegen', 'generate', 'preferenceschange', 'linkpreview', 'auth', 'open', 'slidesviewchange']), timerStateEnum]);
 
 /**
  * Generate Node JSX Function - creates JSX string representation for a node with visibility filtering
@@ -1238,21 +1139,21 @@ export let timerAndStateEvents = z.union([z.enum(['close', 'selectionchange', 'c
  * @returns Promise<string | null> - JSX string representation or null if node not found
  */
 export async function generateJsxFromNode(nodeReference, options: any = {
-  includeIDs: true,
+  includeIDs: true
 }) {
   // Apply default filter to only include visible elements in JSX output
-  options.filterFunction = element => element.visible
+  options.filterFunction = element => element.visible;
 
   // Get the node instance from the scene graph
-  const nodeInstance = getSingletonSceneGraph().get(nodeReference.guid)
+  const nodeInstance = getSingletonSceneGraph().get(nodeReference.guid);
   if (nodeInstance) {
     // Generate JSX representation using the JSX processor
-    const jsxResult = await oy(nodeInstance, options)
-    return jsxResult.jsxStr
+    const jsxResult = await serializeJSX(nodeInstance, options);
+    return jsxResult.jsxStr;
   }
 
   // Return null if node instance not found
-  return null
+  return null;
 }
 
 /**
@@ -1263,13 +1164,13 @@ export async function generateJsxFromNode(nodeReference, options: any = {
  * @returns Promise<string | undefined> - the GUID of the processed node
  */
 export async function getNodeGuid(nodeReference, options = {
-  includeIDs: true,
+  includeIDs: true
 }) {
   // Process node through LZ pipeline to get processing result
-  const processingResult = await LZ(nodeReference, options)
+  const processingResult = await deserializeJSX(nodeReference, options);
 
   // Extract and return the node GUID from the processing result
-  return processingResult.node?.guid
+  return processingResult.node?.guid;
 }
 
 /**
@@ -1281,116 +1182,107 @@ export async function getNodeGuid(nodeReference, options = {
 export async function wrapVmPromise({
   vm,
   promiseHandle,
-  shouldRetainResult,
+  shouldRetainResult
 }) {
   // Validate that the promise handle is valid for the VM
   if (!isVMPromiseLike(vm, promiseHandle)) {
-    return vm.undefined
+    return vm.undefined;
   }
 
   // Create and return a native promise that wraps the VM promise
   return await new Promise((promiseResolve, promiseReject) => {
     // Set up promise resolution handler
-    vm.callMethod(promiseHandle, 'then', vm.newFunction('thenCallback', (promiseResult) => {
+    vm.callMethod(promiseHandle, 'then', vm.newFunction('thenCallback', promiseResult => {
       // Retain the result handle if requested (prevents garbage collection)
       if (shouldRetainResult) {
-        vm.retainHandle(promiseResult)
+        vm.retainHandle(promiseResult);
       }
 
       // Resolve the native promise with the VM result
-      promiseResolve(promiseResult)
-      return promiseResult
-    }))
+      promiseResolve(promiseResult);
+      return promiseResult;
+    }));
 
     // Set up promise rejection handler
-    vm.callMethod(promiseHandle, 'catch', vm.newFunction('catchCallback', (promiseError) => {
+    vm.callMethod(promiseHandle, 'catch', vm.newFunction('catchCallback', promiseError => {
       // Retain the error handle if requested (prevents garbage collection)
       if (shouldRetainResult) {
-        vm.retainHandle(promiseError)
+        vm.retainHandle(promiseError);
       }
 
       // Reject the native promise with the VM error
-      promiseReject(promiseError)
-      return promiseError
-    }))
-  })
+      promiseReject(promiseError);
+      return promiseError;
+    }));
+  });
 }
-
 export function isVMPromiseLike(vmHandle, objectHandle) {
   // nu - Check if object is a thenable (has then and catch methods)
 
   if (!vmHandle.isObject(objectHandle)) {
-    return false
+    return false;
   }
-  const thenMethod = vmHandle.getProp(objectHandle, 'then')
-  const catchMethod = vmHandle.getProp(objectHandle, 'catch')
-  return vmHandle.isFunction(thenMethod) && vmHandle.isFunction(catchMethod)
+  const thenMethod = vmHandle.getProp(objectHandle, 'then');
+  const catchMethod = vmHandle.getProp(objectHandle, 'catch');
+  return vmHandle.isFunction(thenMethod) && vmHandle.isFunction(catchMethod);
 }
 
 // Phase 22: Advanced Utility Functions and Data Processing Systems - Wrapper Functions
-let _$$utilityFuncs = createUtilityFunctionsNew()
-
+let _$$utilityFuncs = createUtilityFunctionsNew();
 export function processVectorData(e) {
   return {
     vertices: e.vertices,
     segments: e.segments,
-    regions: e.regions.map((region) => {
+    regions: e.regions.map(region => {
       let processedRegion: ProcessedRegion = {
         windingRule: region.windingRule,
-        loops: region.loops,
-      }
+        loops: region.loops
+      };
 
       // Process fill style ID
-      processedRegion.fillStyleId = region.fillStyleRef ? _$$nM(region.fillStyleRef) : ''
+      processedRegion.fillStyleId = region.fillStyleRef ? _$$nM(region.fillStyleRef) : '';
 
       // Process fill paints
       if (region.fillPaints) {
-        processedRegion.fills = convertPaintArrayData(region.fillPaints.data)
+        processedRegion.fills = convertPaintArrayData(region.fillPaints.data);
       }
-      return processedRegion
-    }),
-  }
+      return processedRegion;
+    })
+  };
 }
-
 export function validateImmutableFrame(e) {
-  if (!e.isInImmutableFrame)
-    throw new Error('Expected node to be an ImmutableFrame sublayer')
-  let currentNode = e
+  if (!e.isInImmutableFrame) throw new Error('Expected node to be an ImmutableFrame sublayer');
+  let currentNode = e;
   while (currentNode && !MT(currentNode.type)) {
-    currentNode = currentNode.parentNode
+    currentNode = currentNode.parentNode;
   }
-  if (!currentNode || !MT(currentNode.type))
-    throw new Error('Failed to find containing Immutable frame')
-  return currentNode
+  if (!currentNode || !MT(currentNode.type)) throw new Error('Failed to find containing Immutable frame');
+  return currentNode;
 }
-
 export function getNodeById(nodeId, nodeMap) {
-  const node = nodeMap.get(nodeId)
+  const node = nodeMap.get(nodeId);
   if (!node) {
-    const error = new ApplicationError(`The node with id ${JSON.stringify(nodeId)} does not exist`)
-    throw error
+    const error = new ApplicationError(`The node with id ${JSON.stringify(nodeId)} does not exist`);
+    throw error;
   }
-  return node
+  return node;
 }
 
 // Phase 23: Advanced Image Processing and Effects Management Systems - Wrapper Functions
-let _$$imageEffectsProc = createImageEffectsProcessingNew(this)
-
+let _$$imageEffectsProc = createImageEffectsProcessingNew(this);
 export function iCNew(e) {
-  return _$$imageEffectsProc.convertLineHeightFromLegacy(e)
+  return _$$imageEffectsProc.convertLineHeightFromLegacy(e);
 }
-
 export function iTNew(e) {
-  return _$$imageEffectsProc.convertLineHeightToLegacy(e)
+  return _$$imageEffectsProc.convertLineHeightToLegacy(e);
 }
-
 export function ikNew(e) {
-  return _$$imageEffectsProc.convertLetterSpacingFromLegacy(e)
+  return _$$imageEffectsProc.convertLetterSpacingFromLegacy(e);
 }
 
 // Phase 24: Advanced Validation and Layout Processing Systems - Wrapper Functions
 // Initialize Phase 24 and Phase 25 processors
-let validationLayoutProc = createValidationLayoutProcessingNew(this)
+let validationLayoutProc = createValidationLayoutProcessingNew(this);
 let coreUtilitiesDataProc = {
   extractUserPluginKeyArray: AdvancedDataStructureManager.extractUserPluginKeyArray,
   extractNameFromKeyArray: AdvancedDataStructureManager.extractNameFromKeyArray,
@@ -1399,31 +1291,25 @@ let coreUtilitiesDataProc = {
   createTrackedNode: AdvancedNodeCreationManager.createTrackedNode,
   getNodeById: AdvancedNodeCreationManager.getNodeById,
   processURL: AdvancedURLProcessor.processURL,
-  isNotNull: Phase26ValidationManager.isNotNull,
-}
-
+  isNotNull: Phase26ValidationManager.isNotNull
+};
 export function iwNew(e) {
-  return validationLayoutProc.processExportSettings(e)
+  return validationLayoutProc.processExportSettings(e);
 }
-
 export function iRNew(e) {
-  return validationLayoutProc.convertTextDecorationOffsetToLegacy(e)
+  return validationLayoutProc.convertTextDecorationOffsetToLegacy(e);
 }
-
 export function tqNew(e) {
-  return coreUtilitiesDataProc.isNotNull(e)
+  return coreUtilitiesDataProc.isNotNull(e);
 }
-
 async function tnode15(e) {
-  await oH
-  let t = debugState.getState()
-  if (!d1(t))
-    return 'UNPUBLISHED'
-  let i = t.library.openFilePublished__LIVEGRAPH.styles[e.guid]
-  if (!i || i.unpublished_at || !i.content_hash)
-    return 'UNPUBLISHED'
-  let n = i.content_hash
-  return (NfO.updateStyles(), e.getStyleVersion() === n) ? 'CURRENT' : 'CHANGED'
+  await oH;
+  let t = debugState.getState();
+  if (!d1(t)) return 'UNPUBLISHED';
+  let i = t.library.openFilePublished__LIVEGRAPH.styles[e.guid];
+  if (!i || i.unpublished_at || !i.content_hash) return 'UNPUBLISHED';
+  let n = i.content_hash;
+  return (NfO.updateStyles(), e.getStyleVersion() === n) ? 'CURRENT' : 'CHANGED';
 }
 
 /**
@@ -1437,44 +1323,44 @@ export const StyleAPI = {
    */
   type({
     vm,
-    getNode,
+    getNode
   }, handle) {
     vm.defineProp(handle, 'type', {
       enumerable: true,
       metricsKey: 'style.type',
       get() {
-        const styleType = getNode(this).styleType
+        const styleType = getNode(this).styleType;
         switch (styleType) {
           case 'TEXT':
           case 'EFFECT':
           case 'GRID':
-            return vm.newString(styleType)
+            return vm.newString(styleType);
           case 'FILL':
-            return vm.newString('PAINT')
+            return vm.newString('PAINT');
           default:
-            throw new Error(`Unsupported style type: ${styleType}`)
+            throw new Error(`Unsupported style type: ${styleType}`);
         }
-      },
-    })
+      }
+    });
   },
   /**
    * Defines the 'key' property for a style object.
    * Extracts the style key from the style ID.
    */
   key({
-    vm,
+    vm
   }, handle) {
     vm.defineProp(handle, 'key', {
       enumerable: true,
       metricsKey: 'style.key',
       get() {
-        const styleId = vm.getStringProp(this, 'id')
+        const styleId = vm.getStringProp(this, 'id');
         const {
-          key,
-        } = _$$eX(styleId)!
-        return vm.newString(key)
-      },
-    })
+          key
+        } = _$$eX(styleId)!;
+        return vm.newString(key);
+      }
+    });
   },
   /**
    * Defines the 'description' property for a style object.
@@ -1482,22 +1368,22 @@ export const StyleAPI = {
    */
   description({
     vm,
-    getNode,
+    getNode
   }, handle) {
     vm.defineProp(handle, 'description', {
       enumerable: true,
       metricsKey: 'style.description',
       get() {
-        const node = getNode(this)
-        return vm.newString(At(node.description))
+        const node = getNode(this);
+        return vm.newString(At(node.description));
       },
       set(value) {
         permissionScopeHandler.plugin('plugin-description', () => {
-          getNode(this).description = vm.toString(value)
-        })
-        return vm.undefined
-      },
-    })
+          getNode(this).description = vm.toString(value);
+        });
+        return vm.undefined;
+      }
+    });
   },
   /**
    * Defines the 'remote' property for a style object.
@@ -1505,15 +1391,15 @@ export const StyleAPI = {
    */
   remote({
     vm,
-    getNode,
+    getNode
   }, handle) {
     vm.defineProp(handle, 'remote', {
       enumerable: true,
       metricsKey: 'style.remote',
       get() {
-        return vm.newBoolean(!getNode(this).isLocalStyle)
-      },
-    })
+        return vm.newBoolean(!getNode(this).isLocalStyle);
+      }
+    });
   },
   /**
    * Defines the 'consumers' property for a style object.
@@ -1527,7 +1413,7 @@ export const StyleAPI = {
     getNode,
     sceneGraph,
     documentAccessState,
-    allowIncrementalUnsafeApiCalls,
+    allowIncrementalUnsafeApiCalls
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -1539,58 +1425,56 @@ export const StyleAPI = {
       hasEditScope: false,
       enumerable: true,
       parseThis: node => getNode(node),
-      resolveValue: (styleNode) => {
-        const resultArray = vm.newArray()
-        let idx = 0
+      resolveValue: styleNode => {
+        const resultArray = vm.newArray();
+        let idx = 0;
         for (const consumer of styleNode.consumers) {
-          const consumerObj = vm.newObject()
-          const nodeObj = sceneGraph.get(consumer.id)
-          if (!nodeObj || nodeObj.isInternalOnlyNode)
-            continue
-          const nodeHandle = getNodeFactory().createNode(consumer.id, 'node.consumers')
-          if (!nodeHandle)
-            continue
-          vm.setProp(consumerObj, 'node', nodeHandle)
-          const fieldsArray = vm.newArray()
+          const consumerObj = vm.newObject();
+          const nodeObj = sceneGraph.get(consumer.id);
+          if (!nodeObj || nodeObj.isInternalOnlyNode) continue;
+          const nodeHandle = getNodeFactory().createNode(consumer.id, 'node.consumers');
+          if (!nodeHandle) continue;
+          vm.setProp(consumerObj, 'node', nodeHandle);
+          const fieldsArray = vm.newArray();
           for (let i = 0; i < consumer.inheritStyleFields.length; i++) {
-            const field = consumer.inheritStyleFields[i]
-            let fieldName = ''
+            const field = consumer.inheritStyleFields[i];
+            let fieldName = '';
             switch (field) {
               case QCv.FILL:
-                fieldName = 'fillStyleId'
-                break
+                fieldName = 'fillStyleId';
+                break;
               case QCv.STROKE:
-                fieldName = 'strokeStyleId'
-                break
+                fieldName = 'strokeStyleId';
+                break;
               case QCv.TEXT:
-                fieldName = 'textStyleId'
-                break
+                fieldName = 'textStyleId';
+                break;
               case QCv.EFFECT:
-                fieldName = 'effectStyleId'
-                break
+                fieldName = 'effectStyleId';
+                break;
               case QCv.GRID:
-                fieldName = 'gridStyleId'
-                break
+                fieldName = 'gridStyleId';
+                break;
               case QCv.DEPRECATED_STROKE:
-                fieldName = 'strokeStyleId'
-                break
+                fieldName = 'strokeStyleId';
+                break;
               default:
-                fieldName = ''
+                fieldName = '';
             }
-            vm.setProp(fieldsArray, String(i), vm.newString(fieldName))
+            vm.setProp(fieldsArray, String(i), vm.newString(fieldName));
           }
-          vm.setProp(consumerObj, 'fields', fieldsArray)
-          vm.setProp(resultArray, String(idx), consumerObj)
-          idx++
+          vm.setProp(consumerObj, 'fields', fieldsArray);
+          vm.setProp(resultArray, String(idx), consumerObj);
+          idx++;
         }
-        return resultArray
+        return resultArray;
       },
-      prepareDocument: async (styleNode) => {
-        await loadAllPluginPages(styleNode.consumers.map(c => c.id), documentAccessState)
+      prepareDocument: async styleNode => {
+        await loadAllPluginPages(styleNode.consumers.map(c => c.id), documentAccessState);
       },
       incrementalSafeApi,
-      allowIncrementalUnsafeApiCalls,
-    })
+      allowIncrementalUnsafeApiCalls
+    });
   },
   /**
    * Defines the 'getPublishStatusAsync' function for a style object.
@@ -1598,20 +1482,20 @@ export const StyleAPI = {
    */
   getPublishStatus({
     vm,
-    getNode,
+    getNode
   }, handle) {
     vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync', () => {
-      const node = getNode(this)
+      const node = getNode(this);
       const {
         promise,
         resolve,
-        reject,
-      } = vm.newPromise()
+        reject
+      } = vm.newPromise();
       vm.registerPromise(tnode15(node)).then(status => resolve(vm.newString(status)), () => {
-        reject(vm.newString('Failed to get style publish status'))
-      })
-      return promise
-    })
+        reject(vm.newString('Failed to get style publish status'));
+      });
+      return promise;
+    });
   },
   /**
    * Defines the 'remove' function for a style object.
@@ -1620,22 +1504,22 @@ export const StyleAPI = {
   remove({
     vm,
     getNode,
-    styleManager,
+    styleManager
   }, handle) {
     vm.defineFunction(handle, 'remove', 'style.remove', () => {
-      const node = getNode(this)
+      const node = getNode(this);
       permissionScopeHandler.plugin('plugin-remove-style', () => {
-        styleManager.softDeleteStyle(node)
-      })
-      return vm.undefined
-    })
+        styleManager.softDeleteStyle(node);
+      });
+      return vm.undefined;
+    });
   },
   /**
    * Defines the 'paints' property for a style object.
    * Uses the ig helper to define the property.
    */
   paints(context, handle) {
-    handlePaintProperty(context, handle, 'paints')
+    handlePaintProperty(context, handle, 'paints');
   },
   /**
    * Defines the 'boundVariables' property for a style object.
@@ -1644,7 +1528,7 @@ export const StyleAPI = {
   boundVariables({
     vm,
     defineVmProp,
-    getNode,
+    getNode
   }, handle) {
     defineVmProp({
       handle,
@@ -1654,11 +1538,11 @@ export const StyleAPI = {
         enumerable: true,
         metricsKey: 'style.boundVariables',
         get() {
-          return vm.deepWrap(getNode(this).boundVariablesForStyle)
-        },
+          return vm.deepWrap(getNode(this).boundVariablesForStyle);
+        }
       },
-      hasEditScope: false,
-    })
+      hasEditScope: false
+    });
   },
   /**
    * Defines the 'setBoundVariable' function for a style object.
@@ -1667,7 +1551,7 @@ export const StyleAPI = {
   setBoundVariable({
     vm,
     defineVmFunction,
-    getNode,
+    getNode
   }, handle) {
     defineVmFunction({
       handle,
@@ -1676,53 +1560,51 @@ export const StyleAPI = {
       isAllowedInReadOnly: false,
       hasEditScope: true,
       cb(fieldHandle, variableHandle) {
-        const styleNode = getNode(this)
+        const styleNode = getNode(this);
         if (styleNode.styleType !== 'TEXT') {
-          throw new Error('variable bindings can only be directly set on a text style')
+          throw new Error('variable bindings can only be directly set on a text style');
         }
         const field = _$$u({
           vm,
           handle: fieldHandle,
           zSchema: variableDefinitions.VariableBindableTextField,
-          property: 'field',
-        })
+          property: 'field'
+        });
         if (vm.isNull(variableHandle)) {
-          styleNode.setBoundVariable(field, null)
-          return vm.undefined
+          styleNode.setBoundVariable(field, null);
+          return vm.undefined;
         }
         if (getNode(variableHandle).type !== 'VARIABLE') {
-          throw new Error('Cannot call setBoundVariable with a non-variable node.')
+          throw new Error('Cannot call setBoundVariable with a non-variable node.');
         }
-        const variableId = vm.getStringProp(variableHandle, 'id')
-        styleNode.setBoundVariable(field, variableId)
-        return vm.undefined
-      },
-    })
-  },
-}
-let n6 = [NodeAPI.name, NodeAPI.pluginData, StyleAPI.type, StyleAPI.key, StyleAPI.description, StyleAPI.remote, StyleAPI.remove, StyleAPI.getPublishStatus, NodeAPI.documentationLinks, StyleAPI.consumers]
-export let n7 = [...n6, StyleAPI.paints, StyleAPI.boundVariables]
-export let n8 = [...n6, NodeAPI.fontSize, NodeAPI.textDecoration, NodeAPI.textDecorationStyle, NodeAPI.textDecorationSkipInk, NodeAPI.textDecorationOffset, NodeAPI.textDecorationThickness, NodeAPI.textDecorationColor, NodeAPI.fontName, NodeAPI.letterSpacing, NodeAPI.lineHeight, NodeAPI.paragraphIndent, NodeAPI.paragraphSpacing, NodeAPI.listSpacing, NodeAPI.textCase, NodeAPI.hangingPunctuation, NodeAPI.hangingList, NodeAPI.leadingTrim, StyleAPI.boundVariables, StyleAPI.setBoundVariable]
-export let n9 = [...n6, NodeAPI.effects, StyleAPI.boundVariables]
-export let re = [...n6, NodeAPI.layoutGrids, StyleAPI.boundVariables]
-
+        const variableId = vm.getStringProp(variableHandle, 'id');
+        styleNode.setBoundVariable(field, variableId);
+        return vm.undefined;
+      }
+    });
+  }
+};
+let n6 = [NodeAPI.name, NodeAPI.pluginData, StyleAPI.type, StyleAPI.key, StyleAPI.description, StyleAPI.remote, StyleAPI.remove, StyleAPI.getPublishStatus, NodeAPI.documentationLinks, StyleAPI.consumers];
+export let n7 = [...n6, StyleAPI.paints, StyleAPI.boundVariables];
+export let n8 = [...n6, NodeAPI.fontSize, NodeAPI.textDecoration, NodeAPI.textDecorationStyle, NodeAPI.textDecorationSkipInk, NodeAPI.textDecorationOffset, NodeAPI.textDecorationThickness, NodeAPI.textDecorationColor, NodeAPI.fontName, NodeAPI.letterSpacing, NodeAPI.lineHeight, NodeAPI.paragraphIndent, NodeAPI.paragraphSpacing, NodeAPI.listSpacing, NodeAPI.textCase, NodeAPI.hangingPunctuation, NodeAPI.hangingList, NodeAPI.leadingTrim, StyleAPI.boundVariables, StyleAPI.setBoundVariable];
+export let n9 = [...n6, NodeAPI.effects, StyleAPI.boundVariables];
+export let re = [...n6, NodeAPI.layoutGrids, StyleAPI.boundVariables];
 export async function rM(variableId) {
   // rM - Get publish status for a variable
 
   // Update variables and wait for any pending operations
-  NfO.updateVariables()
-  await oH
-  const currentState = debugState.getState()
+  NfO.updateVariables();
+  await oH;
+  const currentState = debugState.getState();
 
   // Check if current document is published
   if (!d1(currentState)) {
-    return 'UNPUBLISHED'
+    return 'UNPUBLISHED';
   }
 
   // Get variable status from published state
-  const publishedVariables = bh(currentState)
-  const variableInfo = publishedVariables[variableId]
-  return processPublishStatus(variableInfo?.status)
+  const publishedVariables = bh(currentState);
+  const variableInfo = publishedVariables[variableId];
+  return processPublishStatus(variableInfo?.status);
 }
-
-export let an = new Set(['codegen', 'related-link-preview', 'textreview'])
+export let an = new Set(['codegen', 'related-link-preview', 'textreview']);

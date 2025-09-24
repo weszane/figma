@@ -1,4 +1,4 @@
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 export function $$a1() {
   return useDeepEqualSceneValue(e => function (e) {
@@ -47,7 +47,7 @@ function o(e) {
   let i = r.correspondingSymbolSublayer ?? e.guid;
   let a = r.containingInstanceBackingSymbol ?? r.containingComponent;
   if (!i || !a) return null;
-  let s = t[i]?.refs?.[RR.SLOT_CONTENT_ID];
+  let s = t[i]?.refs?.[SlotSymbolType.SLOT_CONTENT_ID];
   return s && s.isLinked ? t[a]?.defs?.[s.explicitDefID] ?? null : null;
 }
 export const pN = $$s0;

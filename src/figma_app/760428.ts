@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { R as _$$R } from "../905/57445";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
@@ -79,7 +79,7 @@ export function $$q3(e) {
     }), !shouldHideButtons && jsxs("span", {
       className: MC,
       children: [jsx(yQ, {
-        nodeField: RR.OVERRIDDEN_SYMBOL_ID,
+        nodeField: SlotSymbolType.OVERRIDDEN_SYMBOL_ID,
         defaultValue: _,
         guids: instanceAndSublayerGUIDs
       }), jsx(_$$F, {
@@ -131,7 +131,7 @@ export function $$J2({
     propDef,
     instanceSwapPickerShown
   } = selectWithShallowEqual(e => ({
-    propDef: et(e, instanceAndSublayerGUIDs, RR.OVERRIDDEN_SYMBOL_ID),
+    propDef: et(e, instanceAndSublayerGUIDs, SlotSymbolType.OVERRIDDEN_SYMBOL_ID),
     instanceSwapPickerShown: e.instanceSwapPickerShown
   }));
   let {
@@ -223,7 +223,7 @@ export function $$J2({
     }) : 1 !== instanceNameDisplayOverride && propDef ? jsx("div", {
       className: I0,
       children: jsx(_$$L, {
-        nodeField: RR.OVERRIDDEN_SYMBOL_ID,
+        nodeField: SlotSymbolType.OVERRIDDEN_SYMBOL_ID,
         instanceGUIDs: instanceAndSublayerGUIDs,
         label: null
       })

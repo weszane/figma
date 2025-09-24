@@ -537,7 +537,7 @@ import { hI as _$$hI } from '../figma_app/151766';
 import { Tv as _$$Tv, I9 } from '../figma_app/151869';
 import { S2 as _$$S0, GV, P5 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
-import { dl as _$$dl, wd as _$$wd, O2 } from '../figma_app/164212';
+import { normalizeComponentPropValue, computeBackingGUID, PanelWidth } from '../figma_app/164212';
 import { z2 } from '../figma_app/165422';
 import { useStrictDeepEqualSceneValue, useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions } from '../figma_app/169182';
@@ -571,7 +571,7 @@ import { StyleIdHandler } from '../figma_app/243058';
 import { Q as _$$Q9 } from '../figma_app/246112';
 import { MM as _$$MM, UP as _$$UP } from '../figma_app/246831';
 import { Bf } from '../figma_app/249941';
-import { Si as _$$Si, uQ as _$$uQ, PE } from '../figma_app/251115';
+import { setupFigmakePermission, getCombinedAiPermission, hasJubileePermissionForDesign } from '../figma_app/251115';
 import { Pu, Py } from '../figma_app/251814';
 import { aq as _$$aq } from '../figma_app/257798';
 import { a as _$$a2 } from '../figma_app/258808';
@@ -604,7 +604,7 @@ import { B as _$$B2 } from '../figma_app/327027';
 import { gP as _$$gP, ve as _$$ve, OK } from '../figma_app/328423';
 import { L6 } from '../figma_app/328825';
 import { gm as _$$gm, pW as _$$pW2 } from '../figma_app/335781';
-import { Jr as _$$Jr } from '../figma_app/338442';
+import { ControlType } from '../figma_app/338442';
 import { Tj as _$$Tj2 } from '../figma_app/342207';
 import { aV as _$$aV2, CQ as _$$CQ, lj as _$$lj, wc as _$$wc } from '../figma_app/346269';
 import { Sk as _$$Sk } from '../figma_app/348938';
@@ -11764,7 +11764,7 @@ function uq() {
   let t = !!(e && e.key && e.name);
   let i = useIsProgressBarHiddenOrLocked();
   let n = _$$h4();
-  _$$Si(e);
+  setupFigmakePermission(e);
   let a = useMakeEmptyStateRefreshExperiment({
     logExposure: !1
   });
@@ -16693,7 +16693,7 @@ function hb() {
   let _ = t.length > 0;
   let b = () => x(d);
   let y = _ && !n;
-  let v = PE();
+  let v = hasJubileePermissionForDesign();
   let j = useSelector(e => getProductType(e.selectedView, null));
   let k = _$$a5();
   if (!m || !v) return null;
@@ -16851,7 +16851,7 @@ function hw() {
   let e = mJ();
   let t = Xr(pb);
   let i = hp();
-  let n = PE();
+  let n = hasJubileePermissionForDesign();
   return jsxs(Fragment, {
     children: [jsx('div', {
       className: 'dakota_view_empty_state--dakotaIconHeader--DAjh0',
@@ -16903,7 +16903,7 @@ function hw() {
 }
 function hS() {
   let e = useAtomWithSubscription(pb);
-  let t = PE();
+  let t = hasJubileePermissionForDesign();
   return jsx('div', {
     className: 'dakota_view_empty_state--dakotaEmptyStateContainer---1nRn',
     children: e && t ? jsx(hy, {}) : jsx('div', {
@@ -17656,7 +17656,7 @@ function h9() {
   }, [s, n?.guid, n?.exportedFromCodeFile?.guid, t, d]);
   let m = function (e) {
     let [t] = useAtomValueAndSetter(_$$zl);
-    return iP(_$$uQ() ? t : 'code', e?.codeFilePath !== void 0 && !!getFeatureFlags().multi_file_code_layers);
+    return iP(getCombinedAiPermission() ? t : 'code', e?.codeFilePath !== void 0 && !!getFeatureFlags().multi_file_code_layers);
   }(n);
   let g = _$$g_ + _$$_4;
   let {
@@ -17744,7 +17744,7 @@ function ga() {
   let t = Xr(pb);
   let i = mJ();
   let n = _$$ut2();
-  let a = PE();
+  let a = hasJubileePermissionForDesign();
   let r = hp();
   let {
     Dropdown,
@@ -28915,11 +28915,11 @@ function Td({
           let l = i.assignments[t];
           if (l && typeof l == 'string') {
             let i = [l];
-            let a = _$$wd(i, e);
+            let a = computeBackingGUID(i, e);
             a && (n[t] = a);
           }
         }
-        n[t] = _$$dl(l.type, n[t]);
+        n[t] = normalizeComponentPropValue(l.type, n[t]);
       }
       for (let [e, i] of Object.entries(n)) {
         let n = t[e];
@@ -28937,7 +28937,7 @@ function Td({
   };
   v.forEach(e => {
     e.parameterConfig?.label?.value && (e.parameterConfig.label.value = Sh(e.parameterConfig.label.value, e.name));
-    e.parameterConfig?.control === _$$Jr.SELECT && (e.parameterConfig.selectConfig.options = e.parameterConfig.selectConfig.options.map(e => ({
+    e.parameterConfig?.control === ControlType.SELECT && (e.parameterConfig.selectConfig.options = e.parameterConfig.selectConfig.options.map(e => ({
       ...e,
       label: Sh(e.label, e.value.value.toString())
     })));
@@ -28971,7 +28971,7 @@ function Td({
               for (let i of nodeIds) Fullscreen?.unbindCodeBehaviorPropAssignment(i, codeComponentId, e, t);
             });
           },
-          containerWidth: O2.RESIZABLE_SIDEBAR,
+          containerWidth: PanelWidth.RESIZABLE_SIDEBAR,
           entrypointForInstanceSwapPicker: null,
           forBubbledProps: !1,
           guids: [],

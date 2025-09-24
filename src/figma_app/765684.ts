@@ -16,7 +16,7 @@ import { isPrimaryWorkflowType } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { U } from "../905/966438";
 import { T as _$$T } from "../905/714785";
-import { JA } from "../figma_app/608944";
+import { useComponentFlyoutModal } from "../figma_app/608944";
 import { J } from "../figma_app/636279";
 import { mZ } from "../figma_app/76115";
 import { n as _$$n } from "../905/186638";
@@ -62,7 +62,7 @@ function R({
   let m = _$$n(o.item);
   let {
     isFlyoutOpen
-  } = JA();
+  } = useComponentFlyoutModal();
   let y = _$$u({
     canSwap: !0,
     openFileKey: _ ?? "",
@@ -165,7 +165,7 @@ export function $$P0({
 }) {
   let {
     closeFlyout
-  } = JA();
+  } = useComponentFlyoutModal();
   let b = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let T = Ew({
     assetKey: u2(n),

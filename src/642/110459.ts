@@ -3,7 +3,7 @@ import { useCallback, useMemo, useRef } from "react";
 import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
@@ -30,8 +30,8 @@ export function $$S0(e) {
     isDefReferencedBySelection,
     visibilityIsBoundToComponentProp
   } = selectWithShallowEqual(e => ({
-    isDefReferencedBySelection: !!s(e, RR.VISIBLE),
-    visibilityIsBoundToComponentProp: v(e, selectSceneGraphSelectionKeys(e), RR.VISIBLE)
+    isDefReferencedBySelection: !!s(e, SlotSymbolType.VISIBLE),
+    visibilityIsBoundToComponentProp: v(e, selectSceneGraphSelectionKeys(e), SlotSymbolType.VISIBLE)
   }));
   let w = SG(["VISIBLE"]).data ?? [];
   let [T] = lJ("visible");

@@ -16,7 +16,7 @@ import { l as _$$l } from "../905/202425";
 import { FEditorType } from "../figma_app/53721";
 import { jv } from "../figma_app/357047";
 import { Ig } from "../figma_app/350332";
-import { W7 } from "../figma_app/251115";
+import { hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { n } from "../905/347702";
 import { oh, Yg } from "../905/526509";
 import { JT } from "../figma_app/632248";
@@ -57,7 +57,7 @@ export function $$M0({
     fileKey: a.openFile?.key ?? "",
     productType: getProductType(a.selectedView, null),
     role: WZ(),
-    hasAiFeatureAccess: W7(),
+    hasAiFeatureAccess: hasJubileePermissionForWhiteboard(),
     ...e
   };
   if (atomStoreManager.set(zF, e.source), atomStoreManager.set(rE, s), n) {
@@ -128,7 +128,7 @@ export function $$G3(e) {
   return !!(!noDataLoaded && withinMeter);
 }
 export function $$V11(e, t = {}, r) {
-  !atomStoreManager.get(Bu) && (!(!U(e) || W7()) || atomStoreManager.get(D).has(e) || (atomStoreManager.get(dd) || atomStoreManager.set(dd, generateUUIDv4()), atomStoreManager.set(P, {
+  !atomStoreManager.get(Bu) && (!(!U(e) || hasJubileePermissionForWhiteboard()) || atomStoreManager.get(D).has(e) || (atomStoreManager.get(dd) || atomStoreManager.set(dd, generateUUIDv4()), atomStoreManager.set(P, {
     action: e,
     payload: t,
     guid: r

@@ -22,7 +22,7 @@ import { EditorPreferencesApi } from "../figma_app/740163";
 import { KindEnum } from "../905/129884";
 import { Zk } from "../figma_app/626177";
 import { Wv } from "../figma_app/711157";
-import { uQ } from "../figma_app/251115";
+import { getCombinedAiPermission } from "../figma_app/251115";
 import { QK } from "../figma_app/259678";
 import { p as _$$p } from "../905/786248";
 import { kb, JL } from "../figma_app/690664";
@@ -194,7 +194,7 @@ export function $$X1({
   let eo = exchange && exchange.messages.length > 0;
   let el = Y() && !v && !eo;
   let ed = useCallback(() => C ? e?.collaborativeSourceCode?.computeCurrentText() : e?.sourceCode, [e, C]);
-  let ec = uQ();
+  let ec = getCombinedAiPermission();
   let eu = getFeatureFlags().sites || getFeatureFlags().sts_code;
   let ep = isFigmakeSitesEnabled();
   let e_ = useIsSelectedFigmakeFullscreen();

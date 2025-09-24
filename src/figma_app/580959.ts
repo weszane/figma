@@ -60,7 +60,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
 import { useStyleSubscriptionInfo, useStyleSubscriptionName, useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { b as _$$b2 } from "../figma_app/882253";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
@@ -1043,7 +1043,7 @@ export let $$t_2 = forwardRef((e, t) => {
         [L3]: m,
         [mK]: useGrid
       }),
-      "data-onboarding-key": Lh(D8.PAINT_PANEL_ROW, e.id),
+      "data-onboarding-key": generateSlug(PanelIdentifiers.PAINT_PANEL_ROW, e.id),
       "data-testid": "paint-panel-color-value-container",
       children: u ? function ({
         boundVariableData: t

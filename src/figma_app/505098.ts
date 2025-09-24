@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { isInvalidValue } from '../905/216495';
 import { findUnique } from '../905/778115';
 import { escapeHtmlEntities } from '../905/973142';
-import { xP } from '../figma_app/164212';
+import { findCommonValue } from '../figma_app/164212';
 import { isModulePublishEnabled, isStateGroupOrSymbolOrCodeComponent } from '../figma_app/646357';
 import { selectSceneGraph, selectSceneGraphSelectionKeys, selectSelectedNodes } from '../figma_app/889655';
 
@@ -30,7 +30,7 @@ export const getResettableComponentPropAssignments = (e: any) => e.mirror.select
  * @originalName F
  */
 function getContainingSymbolId(e: any, t: any[]) {
-  return xP(t => e.get(t)?.containingSymbolId, t) ?? void 0;
+  return findCommonValue(t => e.get(t)?.containingSymbolId, t) ?? void 0;
 }
 
 /**
@@ -41,7 +41,7 @@ function getContainingSymbolId(e: any, t: any[]) {
  * @originalName $$j17
  */
 export function getContainingStateGroupId(e: any, t: any[]) {
-  return xP(t => e.get(t)?.containingStateGroupId, t) ?? void 0;
+  return findCommonValue(t => e.get(t)?.containingStateGroupId, t) ?? void 0;
 }
 
 /**
@@ -202,7 +202,7 @@ export const selectNodeFromModule = createSelector([selectModuleNodeByKeys, sele
  */
 export const selectContainingInstance = createSelector([getComponentProps, selectSceneGraphSelectionKeys], (componentProps, selectionKeys) => {
   if (componentProps) {
-    return xP(key => componentProps[key]?.containingInstance, selectionKeys) ?? undefined;
+    return findCommonValue(key => componentProps[key]?.containingInstance, selectionKeys) ?? undefined;
   }
 });
 
@@ -213,7 +213,7 @@ export const selectContainingInstance = createSelector([getComponentProps, selec
 export function createContainingInstanceBackingSymbolSelector() {
   return createSelector([getComponentProps, (e, t) => t], (componentProps, selectionKeys) => {
     if (componentProps) {
-      return xP(key => componentProps[key]?.containingInstanceBackingSymbol, selectionKeys) ?? undefined;
+      return findCommonValue(key => componentProps[key]?.containingInstanceBackingSymbol, selectionKeys) ?? undefined;
     }
   });
 }
@@ -305,7 +305,7 @@ export const selectIsSymbolOrStateGroup = createSelector([selectSelectedNodes], 
  * @originalName U
  */
 function getStateGroupIdFromBackingSymbol(componentProps: any, nodeIds: any[], sceneGraph: any) {
-  return xP(key => {
+  return findCommonValue(key => {
     const backingSymbol = componentProps[key]?.backingSymbol;
     if (backingSymbol) {
       return sceneGraph.get(backingSymbol)?.containingStateGroupId;
@@ -321,7 +321,7 @@ function getStateGroupIdFromBackingSymbol(componentProps: any, nodeIds: any[], s
  * @originalName B
  */
 function getBackingSymbol(componentProps: any, nodeIds: any[]) {
-  return xP(key => componentProps[key]?.backingSymbol ?? componentProps[key]?.containingInstanceBackingSymbol, nodeIds) ?? undefined;
+  return findCommonValue(key => componentProps[key]?.backingSymbol ?? componentProps[key]?.containingInstanceBackingSymbol, nodeIds) ?? undefined;
 }
 
 /**

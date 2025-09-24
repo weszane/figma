@@ -183,7 +183,7 @@ import { WB } from '../figma_app/192664';
 import { t as _$$t4 } from '../figma_app/235299';
 import { N as _$$N7 } from '../figma_app/240060';
 import { j6 } from '../figma_app/243025';
-import { W7 } from '../figma_app/251115';
+import { hasJubileePermissionForWhiteboard } from '../figma_app/251115';
 import { Sd } from '../figma_app/253220';
 import { ContextType, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
@@ -3823,7 +3823,7 @@ function nT(e) {
   }) : [];
 }
 function nk() {
-  return W7() && getFeatureFlags().aip_magnolia ? [{
+  return hasJubileePermissionForWhiteboard() && getFeatureFlags().aip_magnolia ? [{
     action: 'toggle-text-suggestions-preference',
     property: EditorPreferencesApi().wantsTextSuggestions,
     propertyValue: !0,

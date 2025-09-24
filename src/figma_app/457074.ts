@@ -1,59 +1,96 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { UserInterfaceElements } from "../figma_app/763686";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { localStorageRef } from "../905/657224";
-import { setLeftPanelTab } from "../figma_app/91703";
-import { isDesignFileType } from "../figma_app/976749";
-import { isStarterUserAtom } from "../figma_app/864723";
-import { d4 } from "../figma_app/202626";
-import { D } from "../905/347702";
-import { I7 } from "../figma_app/630951";
-import { selectCurrentFile } from "../figma_app/516028";
-import { Ai, jO } from "../figma_app/242339";
-export function $$g0(e) {
-  let t = [e];
-  for (; 0 !== t.length;) {
-    let e = t.shift();
-    if (!1 !== e.visible) {
-      if ("TEXT" === e.type) return !0;
-      t.push(...e.childrenNodes);
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { localStorageRef } from '../905/657224';
+import { useAtomWithSubscription } from '../figma_app/27355';
+import { setLeftPanelTab } from '../figma_app/91703';
+import { expTootipsSymbol } from '../figma_app/202626';
+import { checkUserAccess, isOnboardingComplete } from '../figma_app/242339';
+import { selectCurrentFile } from '../figma_app/516028';
+import { useHasAnyUiKit } from '../figma_app/630951';
+import { UserInterfaceElements } from '../figma_app/763686';
+import { isStarterUserAtom } from '../figma_app/864723';
+import { isDesignFileType } from '../figma_app/976749';
+// Utility function to check if a node tree contains any visible TEXT nodes
+// Original: $$g0
+/**
+ * Recursively checks if the given node or any of its visible children contain a TEXT node.
+ * @param node - The root node to start checking from.
+ * @returns True if a TEXT node is found, false otherwise.
+ */
+export function hasTextNode(node: any): boolean {
+  const queue = [node];
+  while (queue.length > 0) {
+    const currentNode = queue.shift();
+    if (currentNode.visible !== false) {
+      if (currentNode.type === 'TEXT') {
+        return true;
+      }
+      if (currentNode.childrenNodes) {
+        queue.push(...currentNode.childrenNodes);
+      }
     }
   }
-  return !1;
+  return false;
 }
-let f = "last-used-left-panel-tab";
-let E = "ASSETS_TAB";
-export function $$y1(e) {
-  localStorageRef && localStorageRef.setItem(f, e === UserInterfaceElements.ASSETS ? E : "LAYERS_TAB");
-}
-let b = D(() => {
+
+// Constants for localStorage keys and default tab
+// Original: f, E
+const LAST_USED_LEFT_PANEL_TAB_KEY = 'last-used-left-panel-tab';
+const ASSETS_TAB_VALUE = 'ASSETS_TAB';
+
+// Function to set the last used left panel tab in localStorage
+// Original: $$y1
+/**
+ * Sets the last used left panel tab in localStorage based on the provided tab.
+ * @param tab - The UserInterfaceElements tab to set.
+ */
+export function setLastUsedLeftPanelTab(tab: UserInterfaceElements): void {
   if (localStorageRef) {
-    let e = localStorageRef.getItem(f);
-    if (e) return e === E ? UserInterfaceElements.ASSETS : UserInterfaceElements.LAYERS;
+    const value = tab === UserInterfaceElements.ASSETS ? ASSETS_TAB_VALUE : 'LAYERS_TAB';
+    localStorageRef.setItem(LAST_USED_LEFT_PANEL_TAB_KEY, value);
+  }
+}
+
+// Helper function to get the last used left panel tab from localStorage
+// Original: b
+/**
+ * Retrieves the last used left panel tab from localStorage.
+ * @returns The UserInterfaceElements tab or null if not found.
+ */
+function getLastUsedLeftPanelTab(): UserInterfaceElements | null {
+  if (localStorageRef) {
+    const value = localStorageRef.getItem(LAST_USED_LEFT_PANEL_TAB_KEY);
+    if (value) {
+      return value === ASSETS_TAB_VALUE ? UserInterfaceElements.ASSETS : UserInterfaceElements.LAYERS;
+    }
   }
   return null;
-});
-export function $$T2() {
-  let e = useDispatch();
-  let t = Ai([d4]);
-  let r = jO();
-  let {
-    hasAnyUiKit
-  } = I7();
-  let p = useAtomWithSubscription(isStarterUserAtom);
-  let g = isDesignFileType();
-  let f = selectCurrentFile()?.canEdit;
+}
+
+// React hook to initialize the left panel tab based on user state and conditions
+// Original: $$T2
+/**
+ * Custom hook that dispatches the left panel tab initialization if conditions are met.
+ */
+export function useInitializeLeftPanelTab(): void {
+  const dispatch = useDispatch();
+  const hasExpTooltips = checkUserAccess([expTootipsSymbol]);
+  const onboardingComplete = isOnboardingComplete();
+  const { hasAnyUiKit } = useHasAnyUiKit();
+  const isStarterUser = useAtomWithSubscription(isStarterUserAtom);
+  const isDesignFile = isDesignFileType();
+  const canEdit = selectCurrentFile()?.canEdit;
+
   useEffect(() => {
-    if (g && f && r && !t) {
-      let t = b();
-      e(setLeftPanelTab({
-        tab: t,
-        persist: !0
+    if (isDesignFile && canEdit && onboardingComplete && !hasExpTooltips) {
+      const lastTab = getLastUsedLeftPanelTab();
+      dispatch(setLeftPanelTab({
+        tab: lastTab,
+        persist: true
       }));
     }
-  }, [e, f, g, r, t, hasAnyUiKit, p]);
+  }, [dispatch, canEdit, isDesignFile, onboardingComplete, hasExpTooltips, hasAnyUiKit, isStarterUser]);
 }
-export const C$ = $$g0;
-export const Cp = $$y1;
-export const a4 = $$T2;
+export const C$ = hasTextNode
+export const Cp = setLastUsedLeftPanelTab
+export const a4 = useInitializeLeftPanelTab

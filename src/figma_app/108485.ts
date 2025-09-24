@@ -13,7 +13,7 @@ import { jj } from "../figma_app/797994";
 import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { jO } from "../figma_app/242339";
+import { isOnboardingComplete } from "../figma_app/242339";
 import { N as _$$N2 } from "../figma_app/268271";
 import { qo } from "../905/696396";
 import { U } from "../905/455766";
@@ -31,7 +31,7 @@ export function $$O1() {
   let r = useAtomWithSubscription(userFlagsAtom);
   let O = useEditorType();
   let R = useAtomWithSubscription(zo);
-  let L = jO();
+  let L = isOnboardingComplete();
   let P = useAtomWithSubscription(pQ);
   let D = useAtomWithSubscription(_$$t);
   let k = useAtomWithSubscription(_$$N);

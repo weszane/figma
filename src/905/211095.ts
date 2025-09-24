@@ -14,11 +14,11 @@ import { selectOpenFileKey } from "../figma_app/516028";
 import { getAssetKeyForPublish } from "../figma_app/646357";
 import { selectSingleSelectedNode } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { B_, wh, Rq, T1 } from "../figma_app/164212";
+import { isComponentPropValueValid, DROPDOWN_HEIGHT, isValidNumberString, stringToFloat } from "../figma_app/164212";
 import { vS } from "../figma_app/323320";
-import { YH } from "../figma_app/583247";
+import { generateDefaultVariantPropertyName } from "../figma_app/583247";
 import { ow, NA, OC } from "../figma_app/150804";
-import { QV, Po, zh, zb } from "../figma_app/264776";
+import { sanitizePropertyName, withDeferredVariantPropDefBackfill, formatPropertyValues, trackStateGroupAnalytics } from "../figma_app/264776";
 export function $$x3({
   propType: e,
   refField: t
@@ -30,7 +30,7 @@ export function $$x3({
     stateGroupPropertySortOrder: OC(i),
     dropdownShown: i.dropdownShown,
     openFileKey: selectOpenFileKey(i),
-    defaultPropName: e === ComponentPropType.VARIANT ? YH(i) : vS(i, e, t),
+    defaultPropName: e === ComponentPropType.VARIANT ? generateDefaultVariantPropertyName(i) : vS(i, e, t),
     isInstanceSwapPickerShown: i.instanceSwapPickerShown.isShown
   }));
 }
@@ -40,7 +40,7 @@ export function $$S2({
   defaultValue: i,
   varValue: r
 }) {
-  return useMemo(() => !t.length || !B_(e, i) && !r, [i, t.length, e, r]);
+  return useMemo(() => !t.length || !isComponentPropValueValid(e, i) && !r, [i, t.length, e, r]);
 }
 export function $$w1({
   type: e,
@@ -50,7 +50,7 @@ export function $$w1({
     windowInnerHeight,
     windowInnerWidth
   } = _$$l();
-  return useMemo(() => "create" === e ? new Point(windowInnerWidth / 2 - wh / 2, windowInnerHeight / 3) : new Point(t?.initialX, t?.initialY), [windowInnerHeight, windowInnerWidth, e, t]);
+  return useMemo(() => "create" === e ? new Point(windowInnerWidth / 2 - DROPDOWN_HEIGHT / 2, windowInnerHeight / 3) : new Point(t?.initialX, t?.initialY), [windowInnerHeight, windowInnerWidth, e, t]);
 }
 export function $$C0({
   propType: e,
@@ -74,15 +74,15 @@ export function $$C0({
   });
   let _ = useCallback((e, t) => {
     let i = stateGroupPropertySortOrder || [];
-    "" !== (e = QV(e)) && (permissionScopeHandler.user("add-variant-property", () => {
-      Fullscreen && Po(() => allStates?.forEach(n => {
+    "" !== (e = sanitizePropertyName(e)) && (permissionScopeHandler.user("add-variant-property", () => {
+      Fullscreen && withDeferredVariantPropDefBackfill(() => allStates?.forEach(n => {
         let r = n.stateInfo.propertyValues;
-        r && renameNode(n.symbol.node_id, zh({
+        r && renameNode(n.symbol.node_id, formatPropertyValues({
           ...r,
           [e]: t
         }, [...i, e]));
       }), Fullscreen);
-    }), zb("Adding Property to Variant Component", stateGroup?.nodeId), fullscreenValue.commit());
+    }), trackStateGroupAnalytics("Adding Property to Variant Component", stateGroup?.nodeId), fullscreenValue.commit());
   }, [stateGroupPropertySortOrder, allStates, stateGroup]);
   return useCallback(({
     propName: n,
@@ -127,8 +127,8 @@ export function $$C0({
           }
           let i = "string" == typeof r;
           if (!i && "number" != typeof r) throw Error("Component props: Default value for Number prop is not a string or number");
-          if (i && !Rq(r)) throw Error("Component props: Failed to parse number value");
-          Fullscreen.addNumberComponentPropDef(n, i ? T1(r) : r, t ?? "", null);
+          if (i && !isValidNumberString(r)) throw Error("Component props: Failed to parse number value");
+          Fullscreen.addNumberComponentPropDef(n, i ? stringToFloat(r) : r, t ?? "", null);
           break;
         case ComponentPropType.IMAGE:
           break;

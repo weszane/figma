@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { F_, EL } from "../905/858282";
 import { sP8 } from "../figma_app/6204";
 import { _ as _$$_ } from "../figma_app/91620";
@@ -21,7 +21,7 @@ export function $$C3() {
   let t = _$$_();
   let i = useAtomWithSubscription($$x2);
   let C = useAtomWithSubscription($$y1);
-  let v = PE();
+  let v = hasJubileePermissionForDesign();
   let E = !isAIFeaturesEnabledForCurrentUser();
   let T = isWhiteboardFileType();
   let w = v || getFeatureFlags().figjam_ai_menu_items_all_access && T && E;

@@ -12,7 +12,7 @@ import { resourceUtils } from "../905/989992";
 import h from "../vendor/656470";
 import g from "../vendor/990460";
 import { logError } from "../905/714362";
-import { wJ, $Q } from "../figma_app/630951";
+import { isValidLibraryKey, useValidLibraryKey } from "../figma_app/630951";
 import { iw, cM, kX, C$, q0 } from "../905/261982";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getLibraryNames } from "../905/506188";
@@ -186,8 +186,8 @@ export function $$ea37(e) {
   }, [r]);
 }
 export function $$es21(e) {
-  let t = useMemo(() => !e || wJ(e) ? atom(null) : cp(e), [e]);
-  let r = $Q(e);
+  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : cp(e), [e]);
+  let r = useValidLibraryKey(e);
   let i = Ri(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
@@ -220,8 +220,8 @@ export function $$eo17() {
   }, [r]);
 }
 export function $$el36(e) {
-  let t = useMemo(() => !e || wJ(e) ? atom(null) : cp(e), [e]);
-  let r = $Q(e);
+  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : cp(e), [e]);
+  let r = useValidLibraryKey(e);
   let i = Ri(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
@@ -307,8 +307,8 @@ export function $$eh29(e) {
 }
 let em = _$$n(e => {
   let t = useSubscribedLibraries();
-  let r = useMemoShallow(() => t.data?.filter(e => !wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
-  let i = useMemoShallow(() => t.data?.filter(e => wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
+  let r = useMemoShallow(() => t.data?.filter(e => !isValidLibraryKey(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
+  let i = useMemoShallow(() => t.data?.filter(e => isValidLibraryKey(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
   let a = e?.enabled === !1;
   let s = useMemo(() => {
     if (a) {

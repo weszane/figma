@@ -37,7 +37,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { normalizeValue, isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
-import { lg } from "../figma_app/164212";
+import { floatToString } from "../figma_app/164212";
 import { lerp, clamp } from "../figma_app/492908";
 import { isCommandEvent } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent } from "../figma_app/878298";
@@ -318,7 +318,7 @@ function et() {
   if (!t || null == n || !width || !p || !u || isInvalidValue(t) || isInvalidValue(n)) return null;
   e = axis === Axis.X ? Math.round(width / p) : Math.round(width / u);
   let h = getFeatureFlags().ce_tv_grid_hug ? "Fill" : "Auto";
-  let m = n === LayoutSizingType.FLEX ? h : n === LayoutSizingType.HUG ? "Hug" : lg(t);
+  let m = n === LayoutSizingType.FLEX ? h : n === LayoutSizingType.HUG ? "Hug" : floatToString(t);
   let f = e => {
     var t;
     let r = (t = (t = e).trim().toLowerCase(), "auto".startsWith(t) || "fill".startsWith(t)) ? LayoutSizingType.FLEX : "hug".startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? LayoutSizingType.HUG : "fixed".startsWith(t) ? LayoutSizingType.FIXED : null;

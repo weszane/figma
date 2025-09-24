@@ -5,21 +5,21 @@ import { updateModal } from "../905/156213";
 import { MH, dM } from "../figma_app/803787";
 import { selectComponentAssetsMap, selectStateGroupAssetsMap } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { JA, VI } from "../figma_app/608944";
+import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
 export function $$u0(e, t, r) {
   let o = useDispatch();
   let l = useSelector(e => e.modalShown);
   let {
     isFlyoutOpen,
     updateFlyoutProps
-  } = JA();
+  } = useComponentFlyoutModal();
   return useCallback(() => {
     if (getFeatureFlags().dse_fpl_wave_2) isFlyoutOpen && updateFlyoutProps({
       asset: e,
       sectionPosition: t,
       sectionNameForTracking: r
     });else {
-      if (l?.type !== VI || !l?.data) return;
+      if (l?.type !== COMPONENT_FLYOUT_MODAL_TYPE || !l?.data) return;
       o(updateModal({
         data: {
           ...l?.data,
@@ -27,7 +27,7 @@ export function $$u0(e, t, r) {
           sectionPosition: t,
           sectionNameForTracking: r
         },
-        type: VI
+        type: COMPONENT_FLYOUT_MODAL_TYPE
       }));
     }
   }, [isFlyoutOpen, updateFlyoutProps, e, t, r, l?.type, l?.data, o]);

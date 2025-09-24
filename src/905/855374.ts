@@ -61,7 +61,7 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizePath } from "../905/309735";
-import { g as _$$g, s as _$$s } from "../905/578436";
+import { generateUniqueName, stripNumberSuffix } from "../905/578436";
 import { RL, Ot } from "../905/850476";
 import { compareNumbers } from "../figma_app/766708";
 import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$x, yh, Pw, hF, Wx, Od, F$, US, qQ } from "../905/782020";
@@ -3836,12 +3836,12 @@ export let $$i50 = registerModal(function () {
           setIsSidebarOpen: M,
           createMode: ez(() => (e = "Mode") => {
             if (isNullish(u)) return !1;
-            let t = permissionScopeHandler.user("add-variable-set-mode", () => VariablesBindings.addVariableSetMode(_$$g(_$$s(e), u.modes?.map(e => e.name) ?? []), u.node_id));
+            let t = permissionScopeHandler.user("add-variable-set-mode", () => VariablesBindings.addVariableSetMode(generateUniqueName(stripNumberSuffix(e), u.modes?.map(e => e.name) ?? []), u.node_id));
             return !!isValidSessionLocalID(parseSessionLocalID(t)) && (fullscreenValue.triggerAction("commit"), L(t), !0);
           }, j, eV, _),
           duplicateMode: ez(() => (e = u?.modes?.[0]?.id, t = "Mode") => {
             if (isNullish(e) || isNullish(u)) return !1;
-            let i = permissionScopeHandler.user("duplicate-variable-set-mode", () => VariablesBindings.duplicateVariableSetMode(u.node_id, e, _$$g(_$$s(t), u.modes?.map(e => e.name) ?? [])));
+            let i = permissionScopeHandler.user("duplicate-variable-set-mode", () => VariablesBindings.duplicateVariableSetMode(u.node_id, e, generateUniqueName(stripNumberSuffix(t), u.modes?.map(e => e.name) ?? [])));
             return !!isValidSessionLocalID(parseSessionLocalID(i)) && (fullscreenValue.triggerAction("commit"), L(i), !0);
           }, j, eV, _),
           deleteMode: ez(() => e => {
@@ -3865,7 +3865,7 @@ export let $$i50 = registerModal(function () {
             let a = hF(n, r);
             let s = Qo(e, i);
             let o = normalizePath(i + a);
-            s.some(e => e.name === o) && (o = _$$g(_$$s(o), s.map(e => e.name)));
+            s.some(e => e.name === o) && (o = generateUniqueName(stripNumberSuffix(o), s.map(e => e.name)));
             return permissionScopeHandler.user("move-variable-to-group", () => VariablesBindings.renameVariable(n.node_id, o));
           }, j, eV, _),
           moveSelectedGroupsToGroup: ez(({
@@ -4032,7 +4032,7 @@ export let $$i50 = registerModal(function () {
               x.forEach(n => {
                 let l = e.find(e => e.node_id === n);
                 if (l) {
-                  let e = _$$g(_$$s(l.name), o);
+                  let e = generateUniqueName(stripNumberSuffix(l.name), o);
                   s = VariablesBindings.duplicateVariable(l.node_id, e);
                   o.push(e);
                   qQ(s, null, Pf(l.name), t);

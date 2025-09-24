@@ -1,43 +1,67 @@
-import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { atom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { hideSpecificModal } from "../905/156213";
-let $$o2 = "ComponentFlyoutModal";
-let $$l0 = "ComponentFlyoutModalContent";
-let d = atom(null);
-export function $$c1() {
-  let e = useDispatch();
-  let t = useSelector(e => e.modalShown);
-  let [r, l] = useAtomValueAndSetter(d);
-  let c = useCallback(e => {
-    null === e && l(null);
-    l(t => null === t ? null : {
-      ...t,
-      ...e
-    });
-  }, [l]);
-  let u = useCallback(() => {
-    c(null);
-    e(hideSpecificModal({
-      type: $$o2
-    }));
-  }, [e, c]);
-  let p = useMemo(() => null !== r || t?.type === $$o2, [r, t?.type]);
+import type { PrimitiveAtom } from 'jotai'
+import { useCallback, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { hideSpecificModal } from '../905/156213'
+import { atom, atomStoreManager, useAtomValueAndSetter } from '../figma_app/27355'
+// Original constants: $$o2, $$l0
+const COMPONENT_FLYOUT_MODAL_TYPE = 'ComponentFlyoutModal'
+const COMPONENT_FLYOUT_MODAL_CONTENT = 'ComponentFlyoutModalContent'
+
+// Original atom: d
+const flyoutPropsAtom = atom(null) as PrimitiveAtom<any | null>
+
+/**
+ * Hook to manage the component flyout modal state and actions.
+ * Original function: $$c1
+ */
+export function useComponentFlyoutModal() {
+  const dispatch = useDispatch()
+  const modalShown = useSelector<AppState, AppState['modalShown']>(state => state.modalShown)
+  const [flyoutProps, setFlyoutProps] = useAtomValueAndSetter(flyoutPropsAtom)
+
+  const updateFlyoutProps = useCallback(
+    (props: any) => {
+      if (props === null) {
+        setFlyoutProps(null)
+      }
+      else {
+        setFlyoutProps(current => (current === null ? null : { ...current, ...props }))
+      }
+    },
+    [setFlyoutProps],
+  )
+
+  const closeFlyout = useCallback(() => {
+    updateFlyoutProps(null)
+    dispatch(hideSpecificModal({ type: COMPONENT_FLYOUT_MODAL_TYPE }))
+  }, [dispatch, updateFlyoutProps])
+
+  const isFlyoutOpen = useMemo(
+    () => flyoutProps !== null || modalShown?.type === COMPONENT_FLYOUT_MODAL_TYPE,
+    [flyoutProps, modalShown?.type],
+  )
+
   return {
-    flyoutProps: r,
-    setFlyoutProps: l,
-    updateFlyoutProps: c,
-    closeFlyout: u,
-    isFlyoutOpen: p
-  };
+    flyoutProps,
+    setFlyoutProps,
+    updateFlyoutProps,
+    closeFlyout,
+    isFlyoutOpen,
+  }
 }
-export function $$u3(e) {
-  atomStoreManager.set(d, null);
-  e(hideSpecificModal({
-    type: $$o2
-  }));
+
+/**
+ * Function to close the component flyout modal.
+ * Original function: $$u3
+ * @param dispatch - The Redux dispatch function.
+ */
+export function closeComponentFlyoutModal(dispatch: any) {
+  atomStoreManager.set(flyoutPropsAtom, null)
+  dispatch(hideSpecificModal({ type: COMPONENT_FLYOUT_MODAL_TYPE }))
 }
-export const Ev = $$l0;
-export const JA = $$c1;
-export const VI = $$o2;
-export const qr = $$u3;
+
+// Refactored exports matching original export names
+export const Ev = COMPONENT_FLYOUT_MODAL_CONTENT
+export const JA = useComponentFlyoutModal
+export const VI = COMPONENT_FLYOUT_MODAL_TYPE
+export const qr = closeComponentFlyoutModal

@@ -8,7 +8,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
-import { uN } from "../figma_app/338442";
+import { InstanceType } from "../figma_app/338442";
 import { Fullscreen, ComponentPropType, AppStateTsApi, VariableResolvedDataType, VariableDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { resolveVariableValue } from "../905/929949";
@@ -45,7 +45,7 @@ import { x as _$$x } from "../905/1253";
 import { u as _$$u2 } from "../905/419626";
 import { l6, c$ } from "../905/794875";
 import { ow, OC, NA } from "../figma_app/150804";
-import { q1, QV, zh } from "../figma_app/264776";
+import { renameProperty, sanitizePropertyName, formatPropertyValues } from "../figma_app/264776";
 import { dD, lt, Qu } from "../figma_app/941824";
 import { Y9, oO } from "../figma_app/811257";
 import { hu, V5 } from "../figma_app/260445";
@@ -55,7 +55,7 @@ import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { gJ } from "../905/923433";
 import { Ao } from "../905/748636";
-import { Pf, wh, w1, dl, X9, Rq, T1, lg, ui, Xp, wd } from "../figma_app/164212";
+import { isNotVariantPropType, DROPDOWN_HEIGHT, areSlotsEnabled, normalizeComponentPropValue, BOOLEAN_FORMATTER, isValidNumberString, stringToFloat, floatToString, getDefaultStateForStateGroup, VARIABLE_TYPE_CONFIG, computeBackingGUID } from "../figma_app/164212";
 import { xP, Zu, Kn } from "../figma_app/65182";
 import { u as _$$u3 } from "../figma_app/940920";
 import { D as _$$D } from "../905/589275";
@@ -94,14 +94,14 @@ export function $$eE1({
     autoFocus: !0
   });
   let R = useCallback(() => {
-    d && d !== e.name && (e.kind === uN.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(e.explicitDefID, d)) : permissionScopeHandler.user("edit-variant-prop-name", () => q1(e.name, d, r, s)));
+    d && d !== e.name && (e.kind === InstanceType.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(e.explicitDefID, d)) : permissionScopeHandler.user("edit-variant-prop-name", () => renameProperty(e.name, d, r, s)));
   }, [e, d, r, s]);
   let L = useCallback(() => {
     t && l(showPickerThunk({
       id: $$ef0,
       initialX: t.initialX,
       initialY: t.initialY,
-      data: e.kind === uN.TYPED ? {
+      data: e.kind === InstanceType.TYPED ? {
         defID: e.explicitDefID
       } : {
         name: d
@@ -113,7 +113,7 @@ export function $$eE1({
     c(null);
   }, [R]);
   let D = useCallback(t => {
-    Pf(e) && e.description !== t && permissionScopeHandler.user("edit-prop-def-description", () => Fullscreen?.editComponentPropDefDescription(e.explicitDefID, t));
+    isNotVariantPropType(e) && e.description !== t && permissionScopeHandler.user("edit-prop-def-description", () => Fullscreen?.editComponentPropDefDescription(e.explicitDefID, t));
   }, [e]);
   let {
     preferredValues,
@@ -136,11 +136,11 @@ export function $$eE1({
       propType: throwTypeError(e.type).toLocaleLowerCase()
     }),
     initialPosition: B,
-    initialWidth: wh,
+    initialWidth: DROPDOWN_HEIGHT,
     headerSize: "small",
     onClose: U,
     onClick: o ? () => l(vq()) : void 0,
-    recordingKey: generateRecordingKey("editComponentPropDefPicker", e.kind === uN.VARIANT ? e.name : e.explicitDefID),
+    recordingKey: generateRecordingKey("editComponentPropDefPicker", e.kind === InstanceType.VARIANT ? e.name : e.explicitDefID),
     children: [jsxs("div", {
       className: ep,
       children: [jsx("p", {
@@ -165,7 +165,7 @@ export function $$eE1({
         recordingKey: "editComponentPropName",
         value: d
       })]
-    }), Pf(e) && w1(e.type) && jsxs("div", {
+    }), isNotVariantPropType(e) && areSlotsEnabled(e.type) && jsxs("div", {
       className: "edit_component_prop_picker--descriptionContainer--tydPT",
       onMouseDown: V,
       onPointerDown: V,
@@ -180,11 +180,11 @@ export function $$eE1({
       })]
     }), jsx(eN, {
       componentPropDef: e
-    }), Pf(e) && Zu(e.type) && jsx(_$$D, {
+    }), isNotVariantPropType(e) && Zu(e.type) && jsx(_$$D, {
       addComponents: e => togglePreferredValues(e, Kn.ADD),
       entrypointForLogging: _$$S2.PreferredValuesPickerEntrypoint.EDIT_COMPONENT_PROP_PICKER,
       onSetComponents: handleSetPreferredValues,
-      propDefDefaultValue: dl(e.type, e.defaultValue),
+      propDefDefaultValue: normalizeComponentPropValue(e.type, e.defaultValue),
       propDefType: e.type,
       recordingKey: "edit-component-prop-preferred-values-picker",
       removeComponents: e => togglePreferredValues(e, Kn.REMOVE),
@@ -234,10 +234,10 @@ function ey({
     AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   }, [S]);
   let x = useCallback((r, n) => {
-    t && s && "" !== (n = QV(n)) && (permissionScopeHandler.user("rename-variant-prop-value", () => {
+    t && s && "" !== (n = sanitizePropertyName(n)) && (permissionScopeHandler.user("rename-variant-prop-value", () => {
       t.forEach(t => {
         let i = t.stateInfo.propertyValues;
-        i && i[e.name] === r && renameNode(t.symbol.node_id, zh({
+        i && i[e.name] === r && renameNode(t.symbol.node_id, formatPropertyValues({
           ...i,
           [e.name]: n
         }, s));
@@ -457,12 +457,12 @@ function eI({
 }) {
   let o = useDispatch();
   let l = useCallback(t => {
-    e.type === ComponentPropType.BOOL && t !== dl(ComponentPropType.BOOL, e.defaultValue) && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
+    e.type === ComponentPropType.BOOL && t !== normalizeComponentPropValue(ComponentPropType.BOOL, e.defaultValue) && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
   }, [e]);
   return jsx("div", {
     className: eu,
     children: r ? jsx(gJ, {
-      variableValue: s ?? resolveVariableValue(VariableResolvedDataType.BOOLEAN, dl(ComponentPropType.BOOL, e.defaultValue)),
+      variableValue: s ?? resolveVariableValue(VariableResolvedDataType.BOOLEAN, normalizeComponentPropValue(ComponentPropType.BOOL, e.defaultValue)),
       onChange: e => {
         l(e.value);
       },
@@ -471,10 +471,10 @@ function eI({
     }) : jsxs(l6, {
       ariaLabel: getI18nString("design_systems.component_properties.default_value"),
       id: "edit-component-prop-default-value-select",
-      property: dl(ComponentPropType.BOOL, e.defaultValue),
+      property: normalizeComponentPropValue(ComponentPropType.BOOL, e.defaultValue),
       onChange: l,
       dispatch: o,
-      formatter: X9,
+      formatter: BOOLEAN_FORMATTER,
       dropdownShown: t,
       inputClassName: e_,
       recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type)),
@@ -526,7 +526,7 @@ function ev({
 }) {
   let [r, a] = useState(e.type === ComponentPropType.NUMBER ? e.defaultValue : 0);
   let s = useCallback(e => {
-    Rq(e) && a(T1(e));
+    isValidNumberString(e) && a(stringToFloat(e));
   }, []);
   let o = useCallback(() => {
     e.type === ComponentPropType.NUMBER && void 0 !== r && r !== e.defaultValue && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editNumberComponentPropDefDefaultValue(e.explicitDefID, r));
@@ -548,7 +548,7 @@ function ev({
           e.stopPropagation();
           e.keyCode !== KeyCodes.ENTER || e.shiftKey || e.currentTarget.blur();
         },
-        value: lg(r),
+        value: floatToString(r),
         onFocus: e => e.currentTarget?.select(),
         recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type))
       })
@@ -581,7 +581,7 @@ function eA({
         l(uP({
           item: t,
           callback: r => {
-            let n = t.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(t, r, s) : r;
+            let n = t.type === PrimaryWorkflowEnum.STATE_GROUP ? getDefaultStateForStateGroup(t, r, s) : r;
             permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editInstanceComponentPropDefDefaultValue(e.explicitDefID, n));
           }
         }));
@@ -633,11 +633,11 @@ function eN({
 }) {
   if (e.type === ComponentPropType.SLOT) return null;
   switch (e.kind) {
-    case uN.TYPED:
+    case InstanceType.TYPED:
       return jsx(eC, {
         def: e
       });
-    case uN.VARIANT:
+    case InstanceType.VARIANT:
       return jsx(ey, {
         def: e
       });
@@ -653,7 +653,7 @@ function eC({
     variableType,
     requestedTypes,
     variableScope
-  } = Xp[e.type] ?? {};
+  } = VARIABLE_TYPE_CONFIG[e.type] ?? {};
   let c = useMemo(() => e.type !== ComponentPropType.INSTANCE_SWAP && isNotNullish(variableType) && isNotNullish(requestedTypes), [e.type, requestedTypes, variableType]);
   let u = useCallback(async n => {
     if (void 0 === n) return;
@@ -697,7 +697,7 @@ function ew({
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
   let o = useCurrentFileKey();
   let l = Um();
-  let d = useSelector(t => e?.type === ComponentPropType.INSTANCE_SWAP ? wd([e.defaultValue], t.mirror.sceneGraph) : null);
+  let d = useSelector(t => e?.type === ComponentPropType.INSTANCE_SWAP ? computeBackingGUID([e.defaultValue], t.mirror.sceneGraph) : null);
   let c = useMemo(() => e.type === ComponentPropType.BOOL || e.type === ComponentPropType.NUMBER || e.type === ComponentPropType.TEXT, [e.type]);
   let u = useMemo(() => c && e.varValue.type === VariableDataType.ALIAS, [c, e]);
   let p = useMemo(() => u ? e.varValue : void 0, [u, e]);

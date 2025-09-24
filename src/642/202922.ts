@@ -44,7 +44,7 @@ import { t8, R$, e6 } from "../figma_app/545190";
 import { K4, Z3 } from "../figma_app/461594";
 import { uQ } from "../figma_app/151869";
 import { Point } from "../905/736624";
-import { Dd, wh, C4, Pp, Fv, xb, zn, O2, OE } from "../figma_app/164212";
+import { BUBBLED_PROPS_PICKER, DROPDOWN_HEIGHT, ADD_COMPONENT_PROP_DROPDOWN, trackComponentPropsModalOpen, DisplayMode, getComponentPropDisplayName, renderComponentPropIcon, PanelWidth, DefinitionAssignment } from "../figma_app/164212";
 import { Ao } from "../905/748636";
 import { n as _$$n2 } from "../905/841238";
 import { Jp } from "../figma_app/95266";
@@ -262,10 +262,10 @@ function eo() {
   let t = useSelector(e => e.pickerShown);
   let s = useDispatch();
   let n = new Point(t?.initialX, t?.initialY);
-  return t?.id !== Dd ? null : jsx(Ao, {
+  return t?.id !== BUBBLED_PROPS_PICKER ? null : jsx(Ao, {
     title: getI18nString("design_systems.component_properties.expose_nested_instances"),
     initialPosition: n,
-    initialWidth: wh,
+    initialWidth: DROPDOWN_HEIGHT,
     headerSize: "small",
     onClose: () => {
       s(hidePickerThunk());
@@ -293,13 +293,13 @@ export function $$eg0({
   let l = useSelector(i$);
   let d = useSelector(selectNodeFromCombinedId);
   let h = !useSelector(Jp);
-  let m = useSelector(e => !!e.dropdownShown && e.dropdownShown.type === C4);
+  let m = useSelector(e => !!e.dropdownShown && e.dropdownShown.type === ADD_COMPONENT_PROP_DROPDOWN);
   let w = useSelector(e => !!e.modalShown && e.modalShown.type === _$$n2.type);
   let {
     componentDescription
   } = z6();
   let F = useSelector(e => e.pickerShown);
-  let B = m || w || F?.id === Dd;
+  let B = m || w || F?.id === BUBBLED_PROPS_PICKER;
   let K = !!useSelector(Z3).length;
   let G = useSelector(K4);
   let H = !!G?.length;
@@ -317,13 +317,13 @@ export function $$eg0({
   let Z = useCallback(e => {
     F && s(hidePickerThunk());
     m ? s(hideDropdownAction()) : s(showDropdownThunk({
-      type: C4
+      type: ADD_COMPONENT_PROP_DROPDOWN
     }));
   }, [s, F, m]);
   let Q = useCallback(e => {
-    Pp(d, !1, e, Fv.ICON);
+    trackComponentPropsModalOpen(d, !1, e, DisplayMode.ICON);
     let t = J.current;
-    let r = t ? cn(t, wh) : {};
+    let r = t ? cn(t, DROPDOWN_HEIGHT) : {};
     s(showModalHandler({
       type: _$$n2,
       data: {
@@ -338,9 +338,9 @@ export function $$eg0({
   }, [Q, d]);
   let es = useCallback(() => {
     let e = J.current;
-    let t = e ? cn(e, wh) : {};
+    let t = e ? cn(e, DROPDOWN_HEIGHT) : {};
     s(showPickerThunk({
-      id: Dd,
+      id: BUBBLED_PROPS_PICKER,
       initialX: t?.x,
       initialY: t?.y
     }));
@@ -384,7 +384,7 @@ export function $$eg0({
       }), !en && jsxs(c$, {
         className: eh,
         onClick: et,
-        recordingKey: generateRecordingKey("openCreatePropModal", xb(ComponentPropType.VARIANT)),
+        recordingKey: generateRecordingKey("openCreatePropModal", getComponentPropDisplayName(ComponentPropType.VARIANT)),
         children: [jsx(Nu, {
           children: jsx(Fragment, {
             children: jsx(_$$m, {})
@@ -393,10 +393,10 @@ export function $$eg0({
       }), ei.map(e => jsxs(c$, {
         className: eh,
         onClick: () => Q(e),
-        recordingKey: generateRecordingKey("openCreatePropModal", xb(e)),
+        recordingKey: generateRecordingKey("openCreatePropModal", getComponentPropDisplayName(e)),
         children: [jsx(Nu, {
-          children: zn(e, !0)
-        }), xb(e)]
+          children: renderComponentPropIcon(e, !0)
+        }), getComponentPropDisplayName(e)]
       }, e)), H && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(c$, {
           disabled: !0,
@@ -420,9 +420,9 @@ export function $$eg0({
           }), getI18nString("first_draft.suggest_properties")]
         })]
       })]
-    }), F?.id === Dd && jsx(eo, {}), jsx(e6, {
-      containerWidth: O2.RESIZABLE_SIDEBAR,
-      propDimension: OE.DEFINITION,
+    }), F?.id === BUBBLED_PROPS_PICKER && jsx(eo, {}), jsx(e6, {
+      containerWidth: PanelWidth.RESIZABLE_SIDEBAR,
+      propDimension: DefinitionAssignment.DEFINITION,
       guids: [d.guid],
       recordingKey: e,
       enableHidingOverflowRowsInUI3: !1,

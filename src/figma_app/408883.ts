@@ -12,7 +12,7 @@ import { wH } from "../figma_app/680166";
 import { q } from "../905/202542";
 import { JT } from "../figma_app/632248";
 import { Ig } from "../figma_app/350332";
-import { uQ } from "../figma_app/251115";
+import { getCombinedAiPermission } from "../figma_app/251115";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { e as _$$e2 } from "../figma_app/831857";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -34,7 +34,7 @@ export function $$S1() {
   let {
     withinMeter
   } = Ig(N);
-  let w = uQ();
+  let w = getCombinedAiPermission();
   let O = Mq();
   let R = getFeatureFlags().make_ai_allowlist_for_atlassian;
   let L = S === FPlanNameType.STARTER && v;

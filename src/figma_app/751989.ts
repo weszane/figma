@@ -14,7 +14,7 @@ import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { MoveDraftsTeamData } from "../figma_app/43951";
-import { jO } from "../figma_app/242339";
+import { isOnboardingComplete } from "../figma_app/242339";
 import { N } from "../figma_app/268271";
 import { qo } from "../905/696396";
 import { h as _$$h } from "../905/284399";
@@ -29,7 +29,7 @@ export function $$C0() {
   let r = useAtomWithSubscription(wg);
   let C = useEditorType();
   let w = useAtomWithSubscription(zo);
-  let O = jO();
+  let O = isOnboardingComplete();
   let R = useAtomWithSubscription(pQ);
   let L = useAtomWithSubscription(_$$t);
   let P = useAtomWithSubscription(d2);

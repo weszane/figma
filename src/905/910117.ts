@@ -34,6 +34,11 @@ interface XhrRequestSettings {
   retryCount?: number
   retryStrategyOverride?: Record<number, number>
 }
+interface Format<T> {
+  meta: T
+  error: null | string
+  status: number
+}
 export interface AjaxResponse<T = any> {
   cause?: Error
   status: number
@@ -41,7 +46,7 @@ export interface AjaxResponse<T = any> {
   contentType: string | null
   responseType?: XMLHttpRequestResponseType | ''
   wafChallenge?: any
-  data: T | null
+  data: Format<T> | null
   url?: string
   timeout?: number
 }

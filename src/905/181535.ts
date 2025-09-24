@@ -14,7 +14,7 @@ import { VisualBellActions } from "../905/302958";
 import { incrementValue } from "../905/668764";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { En } from "../figma_app/613182";
 import { _o, UV, mh, r9, kL, xn, dc, NJ } from "../figma_app/779179";
@@ -645,7 +645,7 @@ export class $$F0 extends PureComponent {
           [dc]: this.props.noBorderOnHover,
           [NJ]: !!this.props.onScrubClick || this.state.isAlternateScrubbable
         }),
-        "data-onboarding-key": Lh(D8.SCRUBBABLE_CONTROL, this.props["data-tooltip"]),
+        "data-onboarding-key": generateSlug(PanelIdentifiers.SCRUBBABLE_CONTROL, this.props["data-tooltip"]),
         "data-tooltip": this.props.tooltipForScreenReadersOnly ? null : this.props["data-tooltip"],
         "data-tooltip-max-width": this.props.tooltipForScreenReadersOnly ? null : this.props["data-tooltip-max-width"],
         "data-tooltip-proxy-element-id": this.props.tooltipForScreenReadersOnly ? null : this.props["data-tooltip-proxy-element-id"],

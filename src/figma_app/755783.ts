@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { VariableResolvedDataType, Fullscreen, VariableDataType, LayoutTabType, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
@@ -10,7 +10,7 @@ import { getObservableOrFallback } from "../figma_app/84367";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { t } from "../905/62933";
 import { Yc } from "../figma_app/930914";
-import { O4 } from "../figma_app/264776";
+import { FLATTENED_BOOLEAN_VALUES } from "../figma_app/264776";
 import { Z } from "../figma_app/221818";
 import { JV, eT } from "../figma_app/260445";
 import { u3 } from "../figma_app/152690";
@@ -28,7 +28,7 @@ export function $$T4(e) {
     requestedTypes: [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.FLOAT, VariableResolvedDataType.STRING],
     variableFilters: {
       [t.MUST_INCLUDE_ONE_OF]: {
-        [VariableResolvedDataType.STRING]: O4
+        [VariableResolvedDataType.STRING]: FLATTENED_BOOLEAN_VALUES
       },
       [t.HIDE_IN_DEFAULT_VIEW]: {
         [VariableResolvedDataType.FLOAT]: !0
@@ -38,9 +38,9 @@ export function $$T4(e) {
     metadata: e
   }, void 0, function () {
     let e = selectWithShallowEqual(e => selectSceneGraphSelectionKeys(e));
-    let t = !Yc(RR.VISIBLE, e);
+    let t = !Yc(SlotSymbolType.VISIBLE, e);
     let r = useCallback(e => {
-      permissionScopeHandler.user("add-prop-ref", () => Fullscreen.addComponentPropRef(RR.VISIBLE, e.value.explicitDefId));
+      permissionScopeHandler.user("add-prop-ref", () => Fullscreen.addComponentPropRef(SlotSymbolType.VISIBLE, e.value.explicitDefId));
     }, []);
     return useMemo(() => t ? r : void 0, [t, r]);
   }());

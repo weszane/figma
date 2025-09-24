@@ -11,8 +11,8 @@ import u from "classnames";
 import { n as _$$n } from "../vendor/547481";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { OE } from "../figma_app/164212";
-import { an } from "../figma_app/626952";
+import { DefinitionAssignment } from "../figma_app/164212";
+import { useComponentPropDefinitions } from "../figma_app/626952";
 import { Ve } from "../figma_app/812915";
 import { PM, ZO } from "../1156/108847";
 import { Cb, Vo, rO, YD } from "../figma_app/690664";
@@ -119,7 +119,7 @@ export function $$S0({
   let O = e ? "instance" === e.type ? e.allCodeInstanceNodeIds : [e.codeInstanceNode.guid] : [];
   let {
     assignmentValuesByDefId
-  } = an(O, OE.ASSIGNMENT, !0);
+  } = useComponentPropDefinitions(O, DefinitionAssignment.ASSIGNMENT, !0);
   return jsx(Fragment, {
     children: k && !figmakeInFullscreen && jsxs(G, {
       className: "devtools_code_console--panel--yn97N",

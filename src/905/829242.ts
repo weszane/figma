@@ -1,15 +1,28 @@
-export async function $$n0(e, t) {
-  if (void 0 === t) return e;
-  if (t.aborted) throw Error("Aborted");
-  let i = new Promise((e, i) => {
-    let n = () => {
-      i(Error("Aborted"));
-    };
-    t.addEventListener("abort", n);
-    t.addEventListener("abort", () => {
-      t.removeEventListener("abort", n);
-    });
-  });
-  return await Promise.race([e, i]);
+/**
+ * Races a promise with an abort signal, rejecting if the signal is aborted.
+ * @param promise - The promise to race.
+ * @param signal - The optional AbortSignal to monitor for abortion.
+ * @returns The resolved value of the promise, or throws if aborted.
+ */
+export async function withAbortSignal<T>(
+  promise: Promise<T>,
+  signal?: AbortSignal,
+): Promise<T> {
+  if (!signal)
+    return promise
+  if (signal.aborted)
+    throw new Error('Aborted')
+
+  // Create a promise that rejects on abort
+  const abortPromise = new Promise<never>((_, reject) => {
+    const abortHandler = () => reject(new Error('Aborted'))
+    signal.addEventListener('abort', abortHandler)
+    // Clean up listener after the race resolves
+    promise.finally(() => signal.removeEventListener('abort', abortHandler))
+  })
+
+  return Promise.race([promise, abortPromise])
 }
-export const Z = $$n0;
+
+// Original export name maintained for compatibility
+export const Z = withAbortSignal

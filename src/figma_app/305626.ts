@@ -7,7 +7,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText } from "../905/303541";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { ow, _f, Hf, i$ } from "../figma_app/150804";
-import { pg, A } from "../figma_app/264776";
+import { filterByErrorType, getMaxErrorType } from "../figma_app/264776";
 import { pV, jO, lG, Z7, t as _$$t, Qb, Vf, Ii } from "../figma_app/689119";
 var l = o;
 export function $$m1({
@@ -27,7 +27,7 @@ export function $$m1({
     }));
     if (stateGroupSelectionMode === StateHierarchy.STATE_GROUP) {
       let t = () => {
-        let t = pg(allStates, stateGroupError).map(e => e.symbol.node_id);
+        let t = filterByErrorType(allStates, stateGroupError).map(e => e.symbol.node_id);
         clearSelection();
         addToSelection(t);
       };
@@ -74,7 +74,7 @@ export function $$m1({
             children: renderI18nText("design_systems.states_panel.components_with_more_than_1000_variants_may_experience_performance_issues")
           });
       }
-    } else if (stateGroupSelectionMode === StateHierarchy.STATE || stateGroupSelectionMode === StateHierarchy.STATE_INSTANCE) switch (A(selectedStates)) {
+    } else if (stateGroupSelectionMode === StateHierarchy.STATE || stateGroupSelectionMode === StateHierarchy.STATE_INSTANCE) switch (getMaxErrorType(selectedStates)) {
       case StateGroupErrorType.PARSE_ERROR:
         return jsxs(Fragment, {
           children: [renderI18nText("design_systems.states_panel.layer_has_invalid_name", {

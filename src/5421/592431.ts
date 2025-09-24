@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { uN } from "../figma_app/338442";
+import { InstanceType } from "../figma_app/338442";
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { OE, O2 } from "../figma_app/164212";
-import { an } from "../figma_app/626952";
+import { DefinitionAssignment, PanelWidth } from "../figma_app/164212";
+import { useComponentPropDefinitions } from "../figma_app/626952";
 import { c as _$$c } from "../figma_app/528598";
 import { S } from "../905/459477";
 import { _H } from "../figma_app/408883";
@@ -21,7 +21,7 @@ export function $$x0({
   let {
     typedPropDefsExcludingHidden,
     assignmentValuesByDefId
-  } = an(e, OE.ASSIGNMENT, !0);
+  } = useComponentPropDefinitions(e, DefinitionAssignment.ASSIGNMENT, !0);
   let [_, b] = useState(!1);
   return (useEffect(() => {
     b(!0);
@@ -29,7 +29,7 @@ export function $$x0({
     className: "x87ps6o",
     children: jsx(_$$c, {
       assignmentValues: assignmentValuesByDefId,
-      containerWidth: O2.RESIZABLE_SIDEBAR,
+      containerWidth: PanelWidth.RESIZABLE_SIDEBAR,
       entrypointForInstanceSwapPicker: S.InstancePickerEntrypoint.INSTANCE_SWAP_PROP_INSTANCE_PANEL,
       forBubbledProps: !1,
       getInstanceSwapPickerPosition: (e, t, n, o) => {
@@ -41,7 +41,7 @@ export function $$x0({
       hideBindingButton: n,
       hideIcon: n,
       instanceSwapPickerIdPrefix: "code-editor" === d ? "code-editor-instance-swap-prop-assignment-picker-" : void 0,
-      recordingKey: generateRecordingKey(t, "propDefs", uN.TYPED),
+      recordingKey: generateRecordingKey(t, "propDefs", InstanceType.TYPED),
       sceneGraph: getSingletonSceneGraph(),
       typedPropDefs: typedPropDefsExcludingHidden,
       viewOnly: g

@@ -356,7 +356,7 @@ import { B0 } from '../figma_app/201703';
 import { Uf } from '../figma_app/223206';
 import { rM as _$$rM } from '../figma_app/241541';
 import { p as _$$p7, vo as _$$vo, xn as _$$xn2, MM } from '../figma_app/246831';
-import { PE } from '../figma_app/251115';
+import { hasJubileePermissionForDesign } from '../figma_app/251115';
 import { G as _$$G, h as _$$h2 } from '../figma_app/257072';
 import { S7 } from '../figma_app/259578';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
@@ -6522,7 +6522,7 @@ function aN({
   let [t, n] = useState('DEFAULT');
   let l = function () {
     let e = [function () {
-      let e = PE();
+      let e = hasJubileePermissionForDesign();
       let t = MK(JT.SHORTEN_TEXT);
       let n = MK(JT.REWRITE_TEXT);
       let l = MK(JT.TRANSLATE_TEXT);
@@ -6597,7 +6597,7 @@ function aN({
       return e ? r : null;
     }(), ...function () {
       let e = ii();
-      let t = PE();
+      let t = hasJubileePermissionForDesign();
       let n = Zr(JT.EDIT_IMAGE);
       let l = _$$u4();
       let r = MK(JT.REMOVE_BACKGROUND);
@@ -8249,7 +8249,7 @@ function sP() {
 function sM({
   trackingSource: e
 }) {
-  let t = PE();
+  let t = hasJubileePermissionForDesign();
   let {
     getTriggerProps,
     manager
@@ -8457,7 +8457,7 @@ function sY({
 }) {
   let l = getFeatureFlags().buzz_video_export;
   let r = getFeatureFlags().buzz_unsplash;
-  let i = PE();
+  let i = hasJubileePermissionForDesign();
   let d = _$$u4();
   let u = MK(JT.GENERATE_IMAGE);
   let x = Xr(assetCategoryAtom);
@@ -8670,7 +8670,7 @@ function s0({
   isVideo: t
 }) {
   let n = getFeatureFlags().buzz_video_export;
-  let l = PE();
+  let l = hasJubileePermissionForDesign();
   return t && n ? jsx(Fragment, {
     children: jsx(_$$E2, {
       name: _$$_2.AdjustVideoControl,
@@ -11619,7 +11619,7 @@ function u4({
   let m = useSceneGraphSelector();
   let h = Th();
   let g = trackFileEventWithStore();
-  let f = PE();
+  let f = hasJubileePermissionForDesign();
   let {
     togglePanel
   } = ew();
@@ -12685,7 +12685,7 @@ function xW() {
   });
 }
 function xH() {
-  let e = PE();
+  let e = hasJubileePermissionForDesign();
   let t = getFeatureFlags().buzz_unsplash;
   let {
     searchQuery,

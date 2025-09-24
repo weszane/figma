@@ -1,70 +1,123 @@
-import { useEffect } from "react";
-import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomValueAndSetter, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { getInitialOptions } from "../figma_app/169182";
-import { useSubscription } from "../figma_app/288654";
-import { tT } from "../905/723791";
-import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { getOrgLlamaConfig, isLlamaEnabledForOrg } from "../figma_app/459490";
-import { getCurrentFileType, editorTypeAtom } from "../figma_app/976749";
-import { useCurrentUserOrg } from "../905/845253";
-import { FFileType } from "../figma_app/191312";
-import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmaAi, FileCanUseFigmakeAi } from "../figma_app/43951";
-import { FEditorType } from "../figma_app/53721";
-import { n as _$$n } from "../905/347702";
-import { $7 } from "../905/509613";
-let E = atom(getInitialOptions().editing_file?.can_use_jubilee ?? !1);
-let y = atom(!0);
-export function $$b1(e, t) {
-  let r;
-  r = !1;
-  !isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && t && "enabled_for_gated_users" === getOrgLlamaConfig(t) && getFeatureFlags().ai_user_use_llama && (r = !0);
-  let u = useSubscription(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
-    key: e
+import { useSetAtom } from 'jotai'
+
+import { useEffect } from 'react'
+import { $7 } from '../905/509613'
+
+import { getFeatureFlags } from '../905/601108'
+import { useCurrentUserOrg } from '../905/845253'
+import { ResourceStatus } from '../905/957591'
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355'
+import { FileCanUseFigmaAi, FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmakeAi } from '../figma_app/43951'
+import { FEditorType } from '../figma_app/53721'
+import { getInitialOptions } from '../figma_app/169182'
+import { FFileType } from '../figma_app/191312'
+import { useSubscription } from '../figma_app/288654'
+import { getOrgLlamaConfig, isLlamaEnabledForOrg } from '../figma_app/459490'
+import { isInteractionOrEvalMode } from '../figma_app/897289'
+import { editorTypeAtom, getCurrentFileType } from '../figma_app/976749'
+// Atom for tracking if the file can use Jubilee AI
+export const canUseJubileeAtom = atom(getInitialOptions().editing_file?.can_use_jubilee ?? false)
+
+// Atom for tracking if the file can use Figmake AI
+export const canUseFigmakeAiAtom = atom(true)
+
+/**
+ * Sets up permission handling for Jubilee AI based on various conditions.
+ * @param fileKey - The key of the file to check permissions for.
+ * @param orgId - The organization ID.
+ */
+export function setupJubileePermission(fileKey: string, orgId?: string) {
+  let shouldUseLlama = false
+  if (!isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && orgId && getOrgLlamaConfig(orgId) === 'enabled_for_gated_users' && getFeatureFlags().ai_user_use_llama) {
+    shouldUseLlama = true
+  }
+  const subscription = useSubscription(shouldUseLlama ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
+    key: fileKey,
   }, {
-    enabled: !!e
-  });
-  let [p, _] = useAtomValueAndSetter(E);
+    enabled: !!fileKey,
+  })
+  const [, setCanUseJubilee] = useAtomValueAndSetter(canUseJubileeAtom)
   useEffect(() => {
-    if ("loaded" === u.status) {
-      let e = u.data.file;
-      e.status === tT.Loaded && e.data && _(e.data.hasPermission);
+    if (subscription.status === 'loaded') {
+      const file = subscription.data.file
+      if (file.status === ResourceStatus.Loaded && file.data) {
+        setCanUseJubilee(file.data.hasPermission)
+      }
     }
-  }, [_, u.data?.file, u.status]);
+  }, [setCanUseJubilee, subscription.data?.file, subscription.status])
 }
-let T = _$$n(() => atomStoreManager.get(E));
-let $$I2 = _$$n(() => !!((getCurrentFileType() !== FFileType.WHITEBOARD || getFeatureFlags().figjam_quick_actions_v2) && $7("useHasPermission")) && T());
-let $$S4 = _$$n(() => !!((atomStoreManager.get(editorTypeAtom) !== FEditorType.Whiteboard || getFeatureFlags().figjam_quick_actions_v2) && $7("getHasPermission")) && T());
-export function $$v3(e) {
-  let t = e?.editorType === FFileType.FIGMAKE;
-  let r = e?.key ?? "";
-  let i = Xr(y);
-  let s = useCurrentUserOrg();
-  let d = useSubscription(isLlamaEnabledForOrg(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
-    key: r
+
+/**
+ * Gets the current value of the canUseJubileeAtom.
+ * @returns The atom value.
+ */
+export const getCanUseJubilee = () => atomStoreManager.get(canUseJubileeAtom)
+
+/**
+ * Checks if Jubilee permission is available for design files.
+ * @returns True if permission is granted, false otherwise.
+ */
+export const hasJubileePermissionForDesign = () => !!((getCurrentFileType() !== FFileType.WHITEBOARD || getFeatureFlags().figjam_quick_actions_v2) && $7('useHasPermission')) && getCanUseJubilee()
+
+/**
+ * Checks if Jubilee permission is available for whiteboard files.
+ * @returns True if permission is granted, false otherwise.
+ */
+export const hasJubileePermissionForWhiteboard = () => !!((atomStoreManager.get(editorTypeAtom) !== FEditorType.Whiteboard || getFeatureFlags().figjam_quick_actions_v2) && $7('getHasPermission')) && getCanUseJubilee()
+
+/**
+ * Sets up permission handling for Figmake AI.
+ * @param options - Options object containing editorType and key.
+ */
+export function setupFigmakePermission(options?: { editorType?: FFileType, key?: string }) {
+  const isFigmake = options?.editorType === FFileType.FIGMAKE
+  const fileKey = options?.key ?? ''
+  const setCanUseFigmake = useSetAtom(canUseFigmakeAiAtom)
+  const org = useCurrentUserOrg()
+  const subscription = useSubscription(isLlamaEnabledForOrg(org) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
+    key: fileKey,
   }, {
-    enabled: !!r && t
-  });
+    enabled: !!fileKey && isFigmake,
+  })
   useEffect(() => {
-    if ("loaded" !== d.status) return;
-    let {
-      file
-    } = d.data;
-    file.status === tT.Loaded && file.data && i(file.data.hasPermission);
-  }, [i, d.data, d.status]);
+    if (subscription.status !== 'loaded')
+      return
+    const { file } = subscription.data
+    if (file.status === ResourceStatus.Loaded && file.data) {
+      setCanUseFigmake(file.data.hasPermission)
+    }
+  }, [setCanUseFigmake, subscription.data, subscription.status])
 }
-export function $$A5() {
-  let e = useAtomWithSubscription(E);
-  let t = useAtomWithSubscription(y);
-  let r = getCurrentFileType();
-  return r === FFileType.DESIGN || r === FFileType.SITES ? !!$7("useHasCodeChatPermission") && e : r === FFileType.FIGMAKE && t;
+
+/**
+ * Gets the combined permission status for AI features based on file type.
+ * @returns True if permission is granted for the current file type, false otherwise.
+ */
+export function getCombinedAiPermission() {
+  const canUseJubilee = useAtomWithSubscription(canUseJubileeAtom)
+  const canUseFigmake = useAtomWithSubscription(canUseFigmakeAiAtom)
+  const fileType = getCurrentFileType()
+  if (fileType === FFileType.DESIGN || fileType === FFileType.SITES) {
+    return !!$7('useHasCodeChatPermission') && canUseJubilee
+  }
+  if (fileType === FFileType.FIGMAKE) {
+    return canUseFigmake
+  }
+  return false
 }
-export function $$x0() {
-  return $$I2();
+
+/**
+ * Alias for hasJubileePermissionForDesign.
+ * @returns True if permission is granted, false otherwise.
+ */
+export function getJubileePermissionForDesign() {
+  return hasJubileePermissionForDesign()
 }
-export const GM = $$x0;
-export const G_ = $$b1;
-export const PE = $$I2;
-export const Si = $$v3;
-export const W7 = $$S4;
-export const uQ = $$A5;
+
+// Exported aliases with refactored names
+export const GM = getJubileePermissionForDesign
+export const G_ = setupJubileePermission
+export const PE = hasJubileePermissionForDesign
+export const Si = setupFigmakePermission
+export const W7 = hasJubileePermissionForWhiteboard
+export const uQ = getCombinedAiPermission

@@ -32,7 +32,7 @@ import { QL } from "../905/609392";
 import { getSelectedView } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { useIsLoaded } from "../905/18797";
-import { _q } from "../figma_app/242339";
+import { hasAnyOnboardingFlag } from "../figma_app/242339";
 import { FileTypeEnum } from "../905/71785";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../5430/926195";
@@ -6274,7 +6274,7 @@ export function $$sd0() {
   let t = selectCurrentUser();
   let i = useSelector(e => e.userFlags);
   return (_$$h(() => (function (e, t) {
-    let i = t.figjam_editor_onboarded || _q(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
+    let i = t.figjam_editor_onboarded || hasAnyOnboardingFlag(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
     let n = QL("after-auth-duplicate-file-id");
     let a = QL("show_eula");
     let s = QL("editor_type");

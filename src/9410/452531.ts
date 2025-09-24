@@ -7,7 +7,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { wn, HQ, Le, zu, GF, NI, JJ } from "../figma_app/61403";
 import { Of } from "../figma_app/631279";
 import { W } from "../9410/216737";
@@ -65,7 +65,7 @@ export function $$y0(e, t) {
         prioritizeSelectedNode: !0
       }, {
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.TEXT_PANEL, "font-style-button"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.TEXT_PANEL, "font-style-button"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -106,7 +106,7 @@ export function $$y0(e, t) {
         additionalDelay: 1500
       }) : t.push({
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.TEXT_PANEL, "font-picker-button"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.TEXT_PANEL, "font-picker-button"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -121,7 +121,7 @@ export function $$y0(e, t) {
         additionalDelay: 300
       }, {
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.TEXT_PANEL, "font-style-button"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.TEXT_PANEL, "font-style-button"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -136,7 +136,7 @@ export function $$y0(e, t) {
         additionalDelay: 300
       }, {
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.SCRUBBABLE_CONTROL, "font-size"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.SCRUBBABLE_CONTROL, "font-size"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -144,7 +144,7 @@ export function $$y0(e, t) {
         cursorBotMovementAnimationDuration: 600
       }, {
         type: HQ.FOCUS_INPUT,
-        selector: `[data-onboarding-key="${Lh(D8.SCRUBBABLE_CONTROL, "font-size")}"] input`,
+        selector: `[data-onboarding-key="${generateSlug(PanelIdentifiers.SCRUBBABLE_CONTROL, "font-size")}"] input`,
         additionalDelay: 500
       }, {
         type: HQ.UPDATE_SELECTED_NODE_PROPERTIES,

@@ -6,7 +6,7 @@ import { l as _$$l } from "../905/716947";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { logError } from "../905/714362";
-import { am } from "../figma_app/430563";
+import { handleFileLibrarySubscription } from "../figma_app/430563";
 import { processLocalComponents, filterAndSortPublishedItems, isCurrentStagingStatus } from "../figma_app/80990";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -249,7 +249,7 @@ export function $$k7(e, t) {
   let o = useSubscribedLibraryId(e);
   let l = T();
   return useCallback(n => {
-    a && (r(am({
+    a && (r(handleFileLibrarySubscription({
       libraryFileSubscription: {
         file_key: a.key,
         library_key: e,

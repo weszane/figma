@@ -67,7 +67,7 @@ console.log(formatted)
 // 使用 grep 查找所有导入了指定文件的文件
 const grep = spawn('grep', [
   '-Er',
-  `import\\s+.*from\\s+[\'\\"](\\.\\./|\\./)?${formatted}[\'\\"]`,
+  `import\\s+.*from\\s+[\'\\"](\\.\\./|\\./)+${formatted}[\'\\"]`,
   'src',
 ])
 function updateImportFiles(lines, renameMap, candidateFiles) {

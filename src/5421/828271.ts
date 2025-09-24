@@ -51,7 +51,7 @@ import { B as _$$B2 } from "../905/872019";
 import { a as _$$a } from "../905/29104";
 import { Zh } from "../figma_app/2590";
 import { Yh } from "../figma_app/357047";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
 import { Sn } from "../905/946805";
@@ -91,7 +91,7 @@ function eu() {
   let e = useDispatch();
   let t = useSelector(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
   let n = _$$a();
-  if (!PE()) return null;
+  if (!hasJubileePermissionForDesign()) return null;
   let i = n ? getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-v2") : getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-ga");
   return jsx("span", {
     className: "magic_link--magicLinkButton--CWefW",

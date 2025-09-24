@@ -23,7 +23,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { Yh } from "../figma_app/357047";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, qy, wj } from "../figma_app/862289";
 import { Sn } from "../905/946805";
@@ -485,7 +485,7 @@ function eo({
       children: localizedText
     });
   };
-  let m = PE();
+  let m = hasJubileePermissionForDesign();
   let g = getFeatureFlags().qa_text_features && m;
   return jsxs("div", {
     children: [jsxs("div", {

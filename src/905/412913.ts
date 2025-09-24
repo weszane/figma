@@ -18,7 +18,7 @@ export enum FileKeySourceEnum {
  * @param e - The input object.
  * @returns The file_key or the original input if nullish.
  */
-export const getFileKey = (e: any): any => isNullish(e) ? e : e.file_key
+export const getFileKey = (e?: any): any => isNullish(e) ? e : e.file_key
 
 // Refactored exports to match new names
 export const P = FileKeySourceEnum

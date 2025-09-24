@@ -6,7 +6,7 @@ import { collectSymbolsAndStateGroups } from "../905/94678";
 import { VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { gZ, oy } from "../figma_app/964367";
+import { getReactFunctionComponentDefinition, serializeJSX } from "../figma_app/964367";
 import { reportError } from "../905/11";
 import { logWarning } from "../905/714362";
 import { VN, vh, i2 } from "../905/296461";
@@ -67,7 +67,7 @@ async function T(e, t) {
         enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
       });
       if (!t) return r;
-      let i = getFeatureFlags().first_draft_share_jsx ? await gZ(e, {
+      let i = getFeatureFlags().first_draft_share_jsx ? await getReactFunctionComponentDefinition(e, {
         topLevelComponentProps: !0
       }, {
         useDivTagsForFrames: !0,
@@ -102,7 +102,7 @@ export function $$S4() {
   if (0 !== e.length && !(e.length > 1)) return e[0];
 }
 async function v(e) {
-  return (await oy(e, {
+  return (await serializeJSX(e, {
     tailwind: !0,
     includeIDs: !1,
     topLevelComponentProps: !0,

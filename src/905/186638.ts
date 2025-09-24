@@ -1,14 +1,14 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { V } from "../figma_app/473391";
-import { JA, VI } from "../figma_app/608944";
+import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
 export function $$o0(e) {
   let t = useSelector(e => e.modalShown);
   let {
     flyoutProps
-  } = JA();
+  } = useComponentFlyoutModal();
   return useMemo(() => {
-    if ((t?.type !== VI || !t?.data?.asset) && !flyoutProps || !e) return !1;
+    if ((t?.type !== COMPONENT_FLYOUT_MODAL_TYPE || !t?.data?.asset) && !flyoutProps || !e) return !1;
     let n = flyoutProps?.asset ?? t?.data?.asset;
     try {
       return V(e) === V(n);

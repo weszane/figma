@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { Z } from "../905/829242";
+import { withAbortSignal } from "../905/829242";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories } from "../905/165054";
 import { Fullscreen, Fonts, AppStateTsApi } from "../figma_app/763686";
@@ -118,7 +118,7 @@ export function $$g2({
       let i = d.getPreviewHeight(r.fontSize);
       let s = r.name;
       n.maxWidth && (s = Fullscreen.truncateText(r.fontFamily, i, r.lineHeight * (i / r.fontSize), n.maxWidth, 1, s));
-      let u = await Z(f({
+      let u = await withAbortSignal(f({
         styleId: t,
         textToRender: s,
         textColor: n.color,

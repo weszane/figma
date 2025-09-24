@@ -13,7 +13,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, isMixedArray, isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { M6 } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { a2 } from "../figma_app/762558";
 import { l6, c$, sK } from "../905/794875";
 import { mP } from "../905/566585";
@@ -176,7 +176,7 @@ export function $$N4(e) {
     ariaLabel: getI18nString("fullscreen.type_panel.font_style"),
     chevronClassName: EO,
     className: iF,
-    dataOnboardingKey: Lh(D8.TEXT_PANEL, "font-style-button"),
+    dataOnboardingKey: generateSlug(PanelIdentifiers.TEXT_PANEL, "font-style-button"),
     disabled: H,
     dispatch: L,
     dropdownAlignment: e.dropdownAlignment,

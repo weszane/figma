@@ -272,7 +272,7 @@ import { IO, CU, c6 as _$$c5 } from "../figma_app/659187";
 import { vq } from "../905/8732";
 import { selectSingleSelectedNode, selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { registerModal } from "../905/102752";
-import { Yi, k4, O2, xb as _$$xb } from "../figma_app/164212";
+import { findCommonStateGroupId, findCommonSymbolId, PanelWidth, getComponentPropDisplayName } from "../figma_app/164212";
 import { BK } from "../figma_app/545190";
 import { oD as _$$oD, d8 as _$$d6 } from "../1528/85853";
 import { E as _$$E6 } from "../905/235326";
@@ -315,7 +315,7 @@ import { Ov } from "../figma_app/598952";
 import { c as _$$c6 } from "../905/486270";
 import { stripHtmlTags } from "../905/491152";
 import { G as _$$G2 } from "../905/178509";
-import { wJ } from "../figma_app/630951";
+import { isValidLibraryKey } from "../figma_app/630951";
 import { t as _$$t4 } from "../905/241707";
 import { VU } from "../905/625959";
 import { A as _$$A15 } from "../svg/237839";
@@ -5305,7 +5305,7 @@ let lD = memo(({
     if (!g) return "";
     if ("loaded" === u.status) return u.result.isVariant ? u.result.dataStateGroupId ?? u.result.dataComponentId : u.result.dataComponentId;
     let e = g.nodeData?.playgroundGUID;
-    return e ? (Yi([e], _) || k4([e], _)) ?? "" : "";
+    return e ? (findCommonStateGroupId([e], _) || findCommonSymbolId([e], _)) ?? "" : "";
   }, [g, _, u]);
   let b = useMemo(() => _.get(y)?.name ?? "", [y, _]);
   let {
@@ -5476,7 +5476,7 @@ let lD = memo(({
                   children: [jsx("div", {
                     className: "playground_modal--propsSectionContainer--3xF-J",
                     children: jsx(_$$x2, {
-                      containerWidth: O2.UNBOUNDED,
+                      containerWidth: PanelWidth.UNBOUNDED,
                       componentProps,
                       playgroundGUID,
                       productComponentGUID: y,
@@ -5634,7 +5634,7 @@ function lK(e) {
   let u = jsx(c, {
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
-      propertyType: _$$xb(e.type === ComponentPropType.NONE ? ComponentPropType.VARIANT : e.type)
+      propertyType: getComponentPropDisplayName(e.type === ComponentPropType.NONE ? ComponentPropType.VARIANT : e.type)
     })
   });
   let p = ek()("component_props_list--propertyValue--eu4vE ellipsis--ellipsis--Tjyfa", d[e.type]);
@@ -6569,7 +6569,7 @@ function sO() {
     }
   });
   if (!v || !b || !x || u?.status === "loading") return null;
-  let j = wJ(x);
+  let j = isValidLibraryKey(x);
   let w = !1;
   m ? n && (w = "loading" === n.status || "errors" === n.status) : w = SceneGraphHelpers.nodeIsSoftDeleted(v);
   return jsx("div", {

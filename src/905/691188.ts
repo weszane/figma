@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/376628";
 import { setLeftPanelTab } from "../figma_app/91703";
-import { nE, fR, am } from "../figma_app/430563";
+import { handleTeamLibrarySubscription, handleUserLibrarySubscription, handleFileLibrarySubscription } from "../figma_app/430563";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { Ho, Ck } from "../figma_app/236178";
@@ -95,7 +95,7 @@ function j({
   existingSubscription: o
 }) {
   if (e.showingDefaultSubscriptionsForTeamId) !function (e, t, i, n, r, a) {
-    e.dispatch(nE({
+    e.dispatch(handleTeamLibrarySubscription({
       libraryTeamSubscription: {
         team_id: e.showingDefaultSubscriptionsForTeamId,
         library_key: e.libraryKey,
@@ -125,7 +125,7 @@ function j({
     d = i ?? !1;
     c = n ?? !1;
     p = r ?? !1;
-    e.dispatch(fR({
+    e.dispatch(handleUserLibrarySubscription({
       libraryUserSubscription: {
         library_key: e.libraryKey,
         subscriptions: {
@@ -148,7 +148,7 @@ function j({
   } else !function (e, t, i, n) {
     let r = e.openFile;
     if (r) {
-      if (e.dispatch(am({
+      if (e.dispatch(handleFileLibrarySubscription({
         libraryFileSubscription: {
           file_key: r.key,
           library_key: e.libraryKey,

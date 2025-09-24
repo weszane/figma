@@ -6,7 +6,7 @@ export interface AppState {
   contacts: Contacts
   dropdownShown: null
   flashes: ActiveFileUsers
-  modalShown: null
+  modalShown: null | {type: string, props: any}
   progress: ActiveFileUsers
   visualBell: any[]
   savedPublishDescription: string
@@ -3655,7 +3655,7 @@ export interface OpenFileTeam {
   orgAccess: null
   studentTeamState: string
   licenseGroup: null
-  eduGracePeriod: null
+  eduGracePeriod: null | Record<string, any>
   subscription: null
   restrictionsList: string[]
   canEdit: boolean
@@ -4226,7 +4226,7 @@ export interface UserAnalyticsData {
 }
 
 export interface UserEduGracePeriods {
-  '1306492106181799161': The1306492106181799161
+  [key: string]: The1306492106181799161
 }
 
 export interface The1306492106181799161 {

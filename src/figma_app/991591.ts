@@ -9,10 +9,10 @@ import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseSlidesAi } from "../figma_app/43951";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 export function $$h0() {
   let e = getCurrentFileType();
-  let t = PE();
+  let t = hasJubileePermissionForDesign();
   let {
     isSlidesAiEnabled
   } = $$f3();

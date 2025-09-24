@@ -223,7 +223,7 @@ export class DSAApiService {
    * @param params - Original e
    */
   getOrgMigrationStatus(params: any) {
-    return this.OrgMigrationStatusSchemaValidator.validate(async ({ xr }: any) => await xr.get(`/api/dsa/migration_status/${params.orgId}`))
+    return this.OrgMigrationStatusSchemaValidator.validate(async ({ xr }) => await xr.get(`/api/dsa/migration_status/${params.orgId}`))
   }
 
   // Record action methods

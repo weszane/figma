@@ -20,7 +20,7 @@ import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../fig
 import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
 import { useCurrentFileModules } from "../figma_app/409131";
-import { wJ } from "../figma_app/630951";
+import { isValidLibraryKey } from "../figma_app/630951";
 import { createFileLibraryKeys } from "../905/651613";
 import { hE, D1 } from "../figma_app/852050";
 var p = u;
@@ -221,7 +221,7 @@ let j = memo(function ({
   onChange: t
 }) {
   let r = e !== useCurrentFileKey();
-  let n = wJ(e);
+  let n = isValidLibraryKey(e);
   let a = useFigmaLibrariesEnabled();
   let {
     view,

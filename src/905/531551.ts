@@ -1,5 +1,5 @@
 import { flatten } from "../figma_app/656233";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { Fullscreen, PageSelectionType } from "../figma_app/13528";
 import { ComponentPropType } from "../figma_app/175377";
 let $$o1 = (e, t) => {
@@ -15,7 +15,7 @@ let $$o1 = (e, t) => {
       if (a.isLooseComponent) return;
       let s = a.containingStateGroupId;
       if (s) {
-        if (void 0 === i) i = s; else if (s !== i) return;
+        if (void 0 === i) i = s;else if (s !== i) return;
       }
     }
     return i;
@@ -28,7 +28,7 @@ let $$l4 = (e, t) => {
       let e;
       let r = t.get(n);
       if (r && (r.isInstance ? e = r.symbolId : r.isCodeInstance ? e = r.backingCodeComponent?.guid : "CODE_LAYER" === r.type && (e = r.guid), e)) {
-        if (void 0 === i) i = e; else if (e !== i) return;
+        if (void 0 === i) i = e;else if (e !== i) return;
       }
     }
     return i;
@@ -38,11 +38,11 @@ let d = (e, t, i) => {
   let o = function (e) {
     switch (e) {
       case ComponentPropType.TEXT:
-        return RR.TEXT;
+        return SlotSymbolType.TEXT;
       case ComponentPropType.INSTANCE_SWAP:
-        return RR.OVERRIDDEN_SYMBOL_ID;
+        return SlotSymbolType.OVERRIDDEN_SYMBOL_ID;
       case ComponentPropType.BOOL:
-        return RR.VISIBLE;
+        return SlotSymbolType.VISIBLE;
       default:
         throw Error(`Unsupported prop def type: ${e}`);
     }

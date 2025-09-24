@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { am } from "../figma_app/430563";
+import { handleFileLibrarySubscription } from "../figma_app/430563";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useSubscribedLibraryId } from "../figma_app/646357";
 import { QB } from "../905/921418";
@@ -15,7 +15,7 @@ export function $$p0(e, t) {
   let g = useSubscribedLibraryId(e?.library_key);
   let f = T();
   let _ = useCallback(t => {
-    h && e && (m(am({
+    h && e && (m(handleFileLibrarySubscription({
       libraryFileSubscription: {
         file_key: h.key,
         library_key: e.library_key,

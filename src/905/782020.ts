@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "../vendor/626715";
 import { compareNumbers } from "../figma_app/766708";
 import { normalizePath } from "../905/309735";
-import { g } from "../905/578436";
+import { generateUniqueName } from "../905/578436";
 import { F } from "../905/604606";
 import { X } from "../905/456000";
 import { U3, SG } from "../905/101482";
@@ -13,7 +13,7 @@ export let $$h16 = "Mode 1";
 export function $$g10(e, t, i = "") {
   let n = e.map(e => e.name);
   let r = F(t).name;
-  return g(i + r, n);
+  return generateUniqueName(i + r, n);
 }
 export function $$f4(e, t = "") {
   return A(e, t, e => e.name);
@@ -25,7 +25,7 @@ function A(e, t = "", i) {
   let n = t.slice(0, -1).split("/");
   let r = 1 === n.length ? "" : n.slice(0, -1).join("/") + "/";
   let a = Array.from(new Set(e.map(i).filter(e => e.startsWith(r) && e.replace(r, "").includes("/")).map(e => e.replace(r, "").split("/")[0])));
-  return r + g(n[n.length - 1].replace(/\d+$/, "").trim(), a) + "/";
+  return r + generateUniqueName(n[n.length - 1].replace(/\d+$/, "").trim(), a) + "/";
 }
 export function $$y7(e) {
   return function e(t) {

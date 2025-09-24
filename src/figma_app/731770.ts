@@ -10,7 +10,7 @@ import { Z as _$$Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
 import { Vr } from "../figma_app/151869";
-import { eN, zU } from "../figma_app/202626";
+import { findFirstNodeOfType, navigateAndSelect } from "../figma_app/202626";
 import { F_, EL } from "../905/858282";
 import { W } from "../figma_app/605682";
 export function $$E0({
@@ -31,7 +31,7 @@ export function $$E0({
 }) {
   let w = useDispatch();
   let O = Vr();
-  let R = x?.(getSingletonSceneGraph()) || eN(getSingletonSceneGraph(), "FRAME", O);
+  let R = x?.(getSingletonSceneGraph()) || findFirstNodeOfType(getSingletonSceneGraph(), "FRAME", O);
   let L = _$$Z();
   let [P, D] = useState(!1);
   if (_$$h(() => {
@@ -40,7 +40,7 @@ export function $$E0({
         b();
         return;
       }
-      (O?.type !== "FRAME" || N) && (await zU({
+      (O?.type !== "FRAME" || N) && (await navigateAndSelect({
         navigate: L,
         guidToSelect: R.guid
       }));

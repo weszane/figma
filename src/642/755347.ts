@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, memo } from "react";
 import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/720559";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
@@ -60,8 +60,8 @@ function K(e) {
     isDefReferencedBySelection,
     visibilityIsBoundToComponentProp
   } = selectWithShallowEqual(e => ({
-    isDefReferencedBySelection: !!t(e, RR.VISIBLE),
-    visibilityIsBoundToComponentProp: B(e, selectSceneGraphSelectionKeys(e), RR.VISIBLE)
+    isDefReferencedBySelection: !!t(e, SlotSymbolType.VISIBLE),
+    visibilityIsBoundToComponentProp: B(e, selectSceneGraphSelectionKeys(e), SlotSymbolType.VISIBLE)
   }));
   let {
     consumedVariable
@@ -254,10 +254,10 @@ export function $$ey4() {
     isDefReferencedBySelection,
     selectedGUIDs
   } = selectWithShallowEqual(e => ({
-    isDefReferencedBySelection: !!i(e, RR.VISIBLE),
+    isDefReferencedBySelection: !!i(e, SlotSymbolType.VISIBLE),
     selectedGUIDs: selectSceneGraphSelectionKeys(e)
   }));
-  let c = !Yc(RR.VISIBLE, selectedGUIDs) || isDefReferencedBySelection;
+  let c = !Yc(SlotSymbolType.VISIBLE, selectedGUIDs) || isDefReferencedBySelection;
   let [u] = lJ("opacity");
   let h = useRef(null);
   let x = useCallback((e, t) => {
@@ -324,7 +324,7 @@ let $$e_0 = memo(function (e) {
     children: [jsxs(Wv, {
       titleTx: renderI18nText("fullscreen.appearance_panel.appearance"),
       children: [!visibilityIsBoundToVariable && !shouldShowVisibilityBindingIcon && jsx(yQ, {
-        nodeField: RR.VISIBLE,
+        nodeField: SlotSymbolType.VISIBLE,
         defaultValue: visible,
         guids: selectedGUIDs
       }), jsx(_$$M, {
@@ -393,7 +393,7 @@ let $$e_0 = memo(function (e) {
       blendModeSelectId: $$ef2,
       recordingKey: e.recordingKey
     }), shouldShowPropPill && jsx(_$$L, {
-      nodeField: RR.VISIBLE,
+      nodeField: SlotSymbolType.VISIBLE,
       label: null
     }), jsx(wu, {
       showExplicitOnly: !0,

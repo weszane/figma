@@ -6,7 +6,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { wn, HQ, Le, zu, GF, NI, JJ } from "../figma_app/61403";
 import { Of } from "../figma_app/631279";
 import { W } from "../9410/216737";
@@ -71,7 +71,7 @@ export function $$x0(e, t) {
         additionalDelay: 1e3
       }, {
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.PROPERTIES_PANEL_TITLE, "fill"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.PROPERTIES_PANEL_TITLE, "fill"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -86,14 +86,14 @@ export function $$x0(e, t) {
         additionalDelay: 0
       }, {
         type: HQ.FOCUS_INPUT,
-        selector: `[data-onboarding-key="${Lh(D8.PAINT_PANEL_ROW, "paint-1-0")}"] input`,
+        selector: `[data-onboarding-key="${generateSlug(PanelIdentifiers.PAINT_PANEL_ROW, "paint-1-0")}"] input`,
         additionalDelay: 1500
       }, {
         type: HQ.CLEAR_CHAT
       });
       e && t.push({
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.PROPERTIES_PANEL_TITLE, "stroke"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.PROPERTIES_PANEL_TITLE, "stroke"),
         position: {
           x: GF.LEFT,
           y: NI.CENTER
@@ -113,7 +113,7 @@ export function $$x0(e, t) {
         additionalDelay: 10
       }, {
         type: HQ.FOCUS_INPUT,
-        selector: `[data-onboarding-key="${Lh(D8.PAINT_PANEL_ROW, "paint-2-0")}"] input`,
+        selector: `[data-onboarding-key="${generateSlug(PanelIdentifiers.PAINT_PANEL_ROW, "paint-2-0")}"] input`,
         additionalDelay: 1500
       }, {
         type: HQ.SCROLL_PROPERTIES_PANEL,
@@ -123,7 +123,7 @@ export function $$x0(e, t) {
         type: HQ.CLEAR_CHAT
       }, {
         type: HQ.TARGET_DOM_NODE,
-        dataOnboardingKey: Lh(D8.SCRUBBABLE_CONTROL, "corner-radius"),
+        dataOnboardingKey: generateSlug(PanelIdentifiers.SCRUBBABLE_CONTROL, "corner-radius"),
         offset: {
           x: -25,
           y: 5
@@ -142,7 +142,7 @@ export function $$x0(e, t) {
         additionalDelay: 10
       }, {
         type: HQ.FOCUS_INPUT,
-        selector: `[data-onboarding-key="${Lh(D8.SCRUBBABLE_CONTROL, "corner-radius")}"] input`,
+        selector: `[data-onboarding-key="${generateSlug(PanelIdentifiers.SCRUBBABLE_CONTROL, "corner-radius")}"] input`,
         additionalDelay: 2500
       }, {
         type: HQ.CLEAR_CHAT

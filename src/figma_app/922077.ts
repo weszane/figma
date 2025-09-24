@@ -22,7 +22,7 @@ export function useLatestRef(value: any) {
  * @returns The current value.
  * Original name: $$a1
  */
-export function usePersistentValue<T = any>(value: T, externalRef?: React.RefObject<any>) {
+export function usePersistentValue<T = any>(value: T, externalRef?: React.MutableRefObject<T>) {
   const internalRef = useRef<T>(undefined)
   const ref = externalRef || internalRef
   useEffect(() => {

@@ -11,7 +11,7 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectUserFlag } from "../905/940356";
-import { Ai } from "../figma_app/242339";
+import { checkUserAccess } from "../figma_app/242339";
 import { jK } from "../figma_app/989514";
 import { jr, Sf, H7 } from "../figma_app/467440";
 import { zu } from "../figma_app/61403";
@@ -158,7 +158,7 @@ export function $$x0(e) {
       e.collapseToTopRight && u(zu.RIGHT);
     }
   };
-  let N = Ai(["exp_cursor_bot_onboarding"]);
+  let N = checkUserAccess(["exp_cursor_bot_onboarding"]);
   let C = selectUserFlag("cursor_bot_v2_make_show_me_primary_cta");
   return jsxs(TrackingProvider, {
     name: e.trackingContextName,

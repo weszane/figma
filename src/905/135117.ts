@@ -7,7 +7,7 @@ import { DSACppBindings } from '../figma_app/763686'
  * @param actionData - Additional data for the DSA action.
  * @param callback - The function to execute within the DSA action context.
  */
-export function executeWithDSAAction(actionType: string, actionData: any, callback: () => void): void {
+export function executeWithDSAAction(actionType: any, actionData: any, callback: () => void): void {
   DSACppBindings.startDSAAction(actionType, actionData);
   try {
     callback();

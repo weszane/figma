@@ -57,9 +57,9 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { updateHoveredNode } from "../figma_app/741237";
 import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { selectSceneGraphSelectionKeys, selectSceneGraph } from "../figma_app/889655";
-import { D as _$$D } from "../figma_app/335489";
+import { groupInstancesByState } from "../figma_app/335489";
 import { lS } from "../figma_app/218448";
-import { cP as _$$cP } from "../figma_app/264776";
+import { processStateHierarchy } from "../figma_app/264776";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, P as _$$P2 } from "../905/200950";
 import { getFeatureFlags } from "../905/601108";
@@ -770,10 +770,10 @@ let ek = memo(function (e) {
   let s = useSelector(selectSceneGraphSelectionKeys);
   let d = useSelector(selectSceneGraph);
   let c = useIsSelectedViewFullscreenCooper();
-  let p = _$$D(s, d);
+  let p = groupInstancesByState(s, d);
   let u = useSelector(eO);
-  let h = useMemo(() => _$$cP(u, t, n, c, e.actionIndexPath), [u, t, n, e.actionIndexPath, c]);
-  let m = useMemo(() => _$$cP(l, t, n, c), [l, t, n, c]);
+  let h = useMemo(() => processStateHierarchy(u, t, n, c, e.actionIndexPath), [u, t, n, e.actionIndexPath, c]);
+  let m = useMemo(() => processStateHierarchy(l, t, n, c), [l, t, n, c]);
   let x = h || m;
   if (!x || x.mode !== StateHierarchy.STATE_OR_STATE_INSTANCE_SUBLAYER) return null;
   let {

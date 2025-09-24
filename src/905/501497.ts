@@ -5,7 +5,7 @@ import { T } from "../905/632137";
 import o from "classnames";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { GM } from "../figma_app/251115";
+import { getJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
 import { cq } from "../905/794154";
@@ -28,7 +28,7 @@ export function $$b0({
   } = cq();
   let E = sO();
   let x = useDispatch();
-  let S = GM();
+  let S = getJubileePermissionForDesign();
   return jsxs("div", {
     className: l()(sn, {
       [Xb]: i

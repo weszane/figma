@@ -41,7 +41,7 @@ import { C as _$$C } from "../figma_app/686450";
 import { bU } from "../figma_app/967154";
 import { Link } from "../905/438674";
 import { trackEventAnalytics } from "../905/449184";
-import { _P } from "../figma_app/164212";
+import { getHostnameFromUrl } from "../figma_app/164212";
 import { pT } from "../figma_app/435995";
 import { z4 } from "../figma_app/95266";
 import { u as _$$u2, a as _$$a } from "../figma_app/997280";
@@ -332,7 +332,7 @@ function ed(e) {
     displayText
   } = e;
   let s = useCallback(() => {
-    let e = _P(uri);
+    let e = getHostnameFromUrl(uri);
     trackEventAnalytics("Component documentation link clicked", {
       hostname: e
     });

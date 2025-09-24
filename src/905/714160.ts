@@ -1,17 +1,17 @@
-import { Rq, T1, lg } from "../figma_app/164212";
+import { isValidNumberString, stringToFloat, floatToString } from "../figma_app/164212";
 export let $$n1;
 class a {
   isValidFloat(e) {
-    return Rq(e);
+    return isValidNumberString(e);
   }
   isValidFloatEndingWithDecimal(e) {
-    return Rq(e) && e.endsWith(".");
+    return isValidNumberString(e) && e.endsWith(".");
   }
   stringToFloat(e) {
-    return T1(e);
+    return stringToFloat(e);
   }
   floatToString(e) {
-    return lg(e);
+    return floatToString(e);
   }
 }
 export function $$s0() {

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import { JA } from "../figma_app/608944";
+import { useComponentFlyoutModal } from "../figma_app/608944";
 export let $$i0 = "asset-description-preview";
 export function $$l1() {
   let {
     closeFlyout
-  } = JA();
+  } = useComponentFlyoutModal();
   return useCallback(() => {
     closeFlyout();
   }, [closeFlyout]);

@@ -13,7 +13,7 @@ import { FEditorType } from "../figma_app/53721";
 import { isFigmakeFullscreenView } from "../figma_app/552876";
 import { P } from "../905/35881";
 import { n as _$$n } from "../905/347702";
-import { PE, W7 } from "../figma_app/251115";
+import { hasJubileePermissionForDesign, hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { isAssetSuggestionsEnabled } from "../figma_app/144974";
 import { p9, $7 } from "../905/509613";
 let T = atom(!1);
@@ -78,11 +78,11 @@ export function $$R3() {
   return getEditorTypeIfFullscreen(e) === FEditorType.Design || t || r;
 }
 export function $$L7() {
-  let e = PE();
+  let e = hasJubileePermissionForDesign();
   return $$R3() && !!getFeatureFlags().hub_file_fragments && e;
 }
 export function $$P5() {
-  return $$R3() && !!getFeatureFlags().hub_file_fragments && W7();
+  return $$R3() && !!getFeatureFlags().hub_file_fragments && hasJubileePermissionForWhiteboard();
 }
 export const Ci = $$N0;
 export const Ko = $$x1;

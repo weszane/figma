@@ -54,7 +54,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { generateUniqueKey } from "../905/383708";
 import { TrackingProvider } from "../figma_app/831799";
-import { wJ } from "../figma_app/630951";
+import { isValidLibraryKey } from "../figma_app/630951";
 import { selectCurrentUser } from "../905/372672";
 import { Y as _$$Y2 } from "../905/465068";
 import { registerModal } from "../905/102752";
@@ -74,7 +74,7 @@ import { ResourceStatus } from "../905/663269";
 import { a as _$$a } from "../905/925868";
 import { z as _$$z, Z as _$$Z } from "../905/306088";
 import { X as _$$X2 } from "../905/376628";
-import { PP, Sn, oA as _$$oA } from "../figma_app/430563";
+import { handleWorkspaceLibrarySubscription, handleOrgLibrarySubscription, handleDeleteWorkspaceLibrarySubscription } from "../figma_app/430563";
 import { Ho } from "../figma_app/236178";
 import { hasActiveSubscriptionNotSubscribed } from "../figma_app/646357";
 import { LibrarySubscriptionType } from "../figma_app/155728";
@@ -796,7 +796,7 @@ function e9({
       slides: "SLIDES_FILES" === n ? !s : s,
       buzz: "BUZZ_FILES" === n ? !i : i
     };
-    a ? L(l) ? (S(!0), I(e5), A(l)) : r(PP({
+    a ? L(l) ? (S(!0), I(e5), A(l)) : r(handleWorkspaceLibrarySubscription({
       libraryWorkspaceSubscription: {
         id: o.librarySubscription.id,
         workspaceId: a,
@@ -805,7 +805,7 @@ function e9({
       },
       libraryName: e.name,
       workspaceName: o.name
-    })) : r(Sn({
+    })) : r(handleOrgLibrarySubscription({
       libraryOrgSubscription: {
         orgId: t.id,
         libraryKey: e.libraryKey,
@@ -849,7 +849,7 @@ function e9({
         isShowing: !0,
         onCancel: () => S(!1),
         onConfirm: () => {
-          T && (r(PP({
+          T && (r(handleWorkspaceLibrarySubscription({
             libraryWorkspaceSubscription: {
               workspaceId: a,
               libraryKey: e.libraryKey,
@@ -896,7 +896,7 @@ function e9({
           children: jsx(_$$l3, {
             on: F,
             onChange: () => {
-              a && (o.librarySubscription ? r(_$$oA({
+              a && (o.librarySubscription ? r(handleDeleteWorkspaceLibrarySubscription({
                 libraryWorkspaceSubscription: {
                   id: o.librarySubscription.id,
                   workspaceId: a,
@@ -904,7 +904,7 @@ function e9({
                 },
                 libraryName: e.name,
                 workspaceName: o.name
-              })) : r(PP({
+              })) : r(handleWorkspaceLibrarySubscription({
                 libraryWorkspaceSubscription: {
                   workspaceId: a,
                   libraryKey: e.libraryKey,
@@ -947,7 +947,7 @@ function e9({
           slides: !1,
           buzz: !1
         };
-        a ? r(PP({
+        a ? r(handleWorkspaceLibrarySubscription({
           libraryWorkspaceSubscription: {
             id: o.librarySubscription.id,
             workspaceId: a,
@@ -956,7 +956,7 @@ function e9({
           },
           libraryName: e.name,
           workspaceName: o.name
-        })) : r(Sn({
+        })) : r(handleOrgLibrarySubscription({
           libraryOrgSubscription: {
             orgId: t.id,
             libraryKey: e.libraryKey,
@@ -1159,7 +1159,7 @@ let td = registerModal(function ({
   let a = selectCurrentUser();
   let r = useSelector(e => e.currentUserOrgId);
   let l = _$$l();
-  let o = wJ(e);
+  let o = isValidLibraryKey(e);
   let d = useSubscription(LibraryManagementData, {
     fileKey: e,
     orgId: r

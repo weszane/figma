@@ -1,127 +1,202 @@
-import { useEffect, useRef } from 'react';
-import { reportError } from '../905/11';
-import { ServiceCategories } from '../905/165054';
-import { F } from '../905/422355';
-import { analyticsEventManager } from '../905/449184';
-import { getFeatureFlags } from '../905/601108';
-import { getSingletonSceneGraph } from '../905/700578';
-import { atom, useAtomWithSubscription } from '../figma_app/27355';
-import { useLatestRef } from '../figma_app/922077';
-import { OE } from '../figma_app/164212';
-import { getInitialOptions } from '../figma_app/169182';
-import { PE } from '../figma_app/251115';
-import { f as _$$f } from '../figma_app/443973';
-import { Vg } from '../figma_app/460003';
-import { p3, V2 } from '../figma_app/578955';
-import { fetchDynamicConfig } from '../figma_app/594947';
-import { RB } from '../figma_app/626952';
-import { isInteractionOrEvalMode } from '../figma_app/897289';
-let $$T2 = atom(null);
-let $$I0 = atom(void 0);
-export function $$S1() {
-  let e = useAtomWithSubscription($$T2);
-  let t = useAtomWithSubscription($$I0);
-  let r = useRef(new Map());
-  let S = useRef(0);
-  let v = getSingletonSceneGraph();
-  let A = useRef(3e5);
-  let x = useRef(0);
-  !async function () {
+import type { PrimitiveAtom } from 'jotai'
+import md5 from 'md5'
+import { useEffect, useRef } from 'react'
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { analyticsEventManager } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { getSingletonSceneGraph } from '../905/700578'
+import { atom, useAtomWithSubscription } from '../figma_app/27355'
+import { DefinitionAssignment } from '../figma_app/164212'
+import { getInitialOptions } from '../figma_app/169182'
+import { hasJubileePermissionForDesign } from '../figma_app/251115'
+import { suggestComponentContext } from '../figma_app/443973'
+import { findSingleInstanceId } from '../figma_app/460003'
+import { getAutosuggestSearchType, useAutosuggestProps } from '../figma_app/578955'
+import { fetchDynamicConfig } from '../figma_app/594947'
+import { useComponentBackingGUID } from '../figma_app/626952'
+import { isInteractionOrEvalMode } from '../figma_app/897289'
+import { useLatestRef } from '../figma_app/922077'
+
+// Original atoms and function names refactored for clarity:
+// $$T2 -> nodeIdAtom (atom for node ID)
+// $$I0 -> componentKeyAtom (atom for component key)
+// $$S1 -> useAutosuggestShadowRead (hook for autosuggest props and shadow read analytics)
+
+/**
+ * Atom for storing the current node ID.
+ */
+export const nodeIdAtom = atom(null) as PrimitiveAtom<any>
+
+/**
+ * Atom for storing the component key.
+ */
+export const componentKeyAtom = atom<any>(undefined) as PrimitiveAtom<any>
+
+/**
+ * Hook for handling autosuggest props and shadow read analytics.
+ * This hook manages autosuggest values, caches them, and logs analytics for shadow reads.
+ */
+export function useAutosuggestShadowRead() {
+  const nodeId = useAtomWithSubscription(nodeIdAtom)
+  const componentKey = useAtomWithSubscription(componentKeyAtom)
+  const autosuggestCacheRef = useRef(new Map())
+  const randomSeedRef = useRef(0)
+  const sceneGraph = getSingletonSceneGraph()
+  const delayRef = useRef(300000) // Default 5 minutes
+  const proportionRef = useRef(0)
+
+  // Fetch dynamic config for shadow reads if not in interaction/eval mode
+  useEffect(() => {
     if (!isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic) {
-      let e = await fetchDynamicConfig('autosuggest_prop_shadow_reads');
-      A.current = e.get('delayForComparisonMs', 3e5);
-      x.current = e.get('proportionLogged', 0);
+      fetchDynamicConfig('autosuggest_prop_shadow_reads').then((config) => {
+        delayRef.current = config.get('delayForComparisonMs', 300000)
+        proportionRef.current = config.get('proportionLogged', 0)
+      })
     }
-  }();
-  let N = Vg(e ? [e] : [], v);
-  let C = RB([N], OE.ASSIGNMENT);
-  useLatestRef(e) !== e && (S.current = Math.random());
-  let w = !!(PE() && getFeatureFlags().anticipation_props_shadow_reads && S.current < x.current);
-  let {
-    autosuggestedValues,
-    isLoading
-  } = V2(N, C, w, v);
-  useEffect(() => {
-    !isLoading && e && r.current.set(e, autosuggestedValues);
-  }, [isLoading, autosuggestedValues, e]);
-  let L = e ? v?.get(e) : null;
-  let P = null;
-  try {
-    P = L?.type === 'INSTANCE' ? L.componentProperties() : null;
-  } catch (e) {
-    reportError(ServiceCategories.SEARCH_EXPERIENCE, e);
+  }, [])
+
+  const instanceId = findSingleInstanceId(nodeId ? [nodeId] : [], sceneGraph)
+  const componentGuid = useComponentBackingGUID([instanceId], DefinitionAssignment.ASSIGNMENT)
+
+  // Update random seed when nodeId changes
+  const latestNodeIdRef = useLatestRef(nodeId)
+  if (latestNodeIdRef.current !== nodeId) {
+    randomSeedRef.current = Math.random()
   }
-  let D = useLatestRef(e);
+
+  const shouldLogShadowReads = !!(
+    hasJubileePermissionForDesign()
+    && getFeatureFlags().anticipation_props_shadow_reads
+    && randomSeedRef.current < proportionRef.current
+  )
+
+  const { autosuggestedValues, isLoading } = useAutosuggestProps(
+    instanceId,
+    componentGuid,
+    shouldLogShadowReads,
+    sceneGraph,
+  )
+
+  // Cache autosuggested values when not loading
   useEffect(() => {
-    e && w && setTimeout(() => {
-      let n = v?.get(e);
-      let a = r.current.get(e)?.componentProps;
-      let s = null;
+    if (!isLoading && nodeId) {
+      autosuggestCacheRef.current.set(nodeId, autosuggestedValues)
+    }
+  }, [isLoading, autosuggestedValues, nodeId])
+
+  const node = nodeId ? sceneGraph?.get(nodeId) : null
+  let currentProperties = null
+  try {
+    currentProperties = node?.type === 'INSTANCE' ? node.componentProperties() : null
+  }
+  catch (error) {
+    reportError(ServiceCategories.SEARCH_EXPERIENCE, error)
+  }
+
+  const latestNodeId = useLatestRef(nodeId)
+
+  // Effect for logging shadow read analytics after delay
+  useEffect(() => {
+    if (!nodeId || !shouldLogShadowReads)
+      return
+
+    const timeoutId = setTimeout(() => {
+      const currentNode = sceneGraph?.get(nodeId)
+      const cachedProps = autosuggestCacheRef.current.get(nodeId)?.componentProps
+      let liveProperties = null
       try {
-        s = n?.type === 'INSTANCE' ? n?.componentProperties() : null;
-      } catch (e) {
-        reportError(ServiceCategories.SEARCH_EXPERIENCE, e);
+        liveProperties = currentNode?.type === 'INSTANCE' ? currentNode?.componentProperties() : null
       }
-      if (a && s) {
-        let e = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let r = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let i = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let o = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let d = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let c = {
-          TEXT: 0,
-          VARIANT: 0
-        };
-        let p = 0;
-        Object.entries(a).forEach(t => {
-          let [n, a] = t;
-          if (s[n]) {
-            let t = s[n]?.value;
-            let l = P?.[n]?.value;
-            let u = s[n]?.type;
-            u === 'TEXT' || u === 'VARIANT' ? (e[u]++, a === t ? (r[u]++, l !== null && (a === l ? c[u]++ : d[u]++)) : l !== null && (a === l ? i[u]++ : o[u]++)) : p++;
+      catch (error) {
+        reportError(ServiceCategories.SEARCH_EXPERIENCE, error)
+      }
+
+      if (cachedProps && liveProperties) {
+        logShadowReadAnalytics(cachedProps, liveProperties, currentProperties, currentNode, componentKey)
+      }
+      autosuggestCacheRef.current.delete(nodeId)
+    }, delayRef.current)
+
+    return () => clearTimeout(timeoutId)
+  }, [nodeId, componentKey, latestNodeId, currentProperties, sceneGraph, shouldLogShadowReads])
+
+  // Helper function to log analytics
+  function logShadowReadAnalytics(
+    cachedProps: any,
+    liveProps: any,
+    initialProps: any,
+    node: any,
+    componentKey: any,
+  ) {
+    const counts = {
+      total: { TEXT: 0, VARIANT: 0 },
+      accurate: { TEXT: 0, VARIANT: 0 },
+      changedAccurate: { TEXT: 0, VARIANT: 0 },
+      changedInaccurate: { TEXT: 0, VARIANT: 0 },
+      unchangedAccurate: { TEXT: 0, VARIANT: 0 },
+      unchangedInaccurate: { TEXT: 0, VARIANT: 0 },
+    }
+    let otherPropsCount = 0
+
+    Object.entries(cachedProps).forEach(([propName, suggestedValue]) => {
+      if (liveProps[propName]) {
+        const liveValue = liveProps[propName]?.value
+        const initialValue = initialProps?.[propName]?.value
+        const propType = liveProps[propName]?.type
+
+        if (propType === 'TEXT' || propType === 'VARIANT') {
+          counts.total[propType]++
+          if (suggestedValue === liveValue) {
+            counts.accurate[propType]++
+            if (initialValue !== null) {
+              if (suggestedValue === initialValue) {
+                counts.unchangedAccurate[propType]++
+              }
+              else {
+                counts.changedAccurate[propType]++
+              }
+            }
           }
-        });
-        analyticsEventManager.trackDefinedEvent('auto_suggest.props_shadow_read', {
-          textAccuracy: r.TEXT / e.TEXT,
-          textCANCount: i.TEXT,
-          textCNNCount: o.TEXT,
-          textCRPCount: d.TEXT,
-          textCNPCount: c.TEXT,
-          textPropertyCount: e.TEXT,
-          variantAccuracy: r.VARIANT / e.VARIANT,
-          variantCANCount: i.VARIANT,
-          variantCNNCount: o.VARIANT,
-          variantCRPCount: d.VARIANT,
-          variantCNPCount: c.VARIANT,
-          variantPropertyCount: e.VARIANT,
-          missingPropertyCount: p,
-          suggestionMethod: p3(),
-          gptPromptMd5Version: F(_$$f()),
-          delayForComparisonMs: A.current,
-          numDescendants: n?.getVisibleDescendantIds().length,
-          componentKey: t
-        });
+          else if (initialValue !== null) {
+            if (suggestedValue === initialValue) {
+              counts.unchangedInaccurate[propType]++
+            }
+            else {
+              counts.changedInaccurate[propType]++
+            }
+          }
+        }
+        else {
+          otherPropsCount++
+        }
       }
-      r.current.$$delete(e);
-    }, A.current);
-  }, [e, t, D, P, v, w]);
+    })
+
+    analyticsEventManager.trackDefinedEvent('auto_suggest.props_shadow_read', {
+      textAccuracy: counts.accurate.TEXT / counts.total.TEXT,
+      textCANCount: counts.changedAccurate.TEXT,
+      textCNNCount: counts.changedInaccurate.TEXT,
+      textCRPCount: counts.unchangedAccurate.TEXT,
+      textCNPCount: counts.unchangedInaccurate.TEXT,
+      textPropertyCount: counts.total.TEXT,
+      variantAccuracy: counts.accurate.VARIANT / counts.total.VARIANT,
+      variantCANCount: counts.changedAccurate.VARIANT,
+      variantCNNCount: counts.changedInaccurate.VARIANT,
+      variantCRPCount: counts.unchangedAccurate.VARIANT,
+      variantCNPCount: counts.unchangedInaccurate.VARIANT,
+      variantPropertyCount: counts.total.VARIANT,
+      missingPropertyCount: otherPropsCount,
+      suggestionMethod: getAutosuggestSearchType(),
+      gptPromptMd5Version: md5(suggestComponentContext()),
+      delayForComparisonMs: delayRef.current,
+      numDescendants: node?.getVisibleDescendantIds().length,
+      componentKey,
+    })
+  }
 }
-export const fu = $$I0;
-export const qh = $$S1;
-export const xB = $$T2;
+
+// Updated exports to match refactored names
+export const fu = componentKeyAtom
+export const qh = useAutosuggestShadowRead
+export const xB = nodeIdAtom

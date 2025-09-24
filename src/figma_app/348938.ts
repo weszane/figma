@@ -9,7 +9,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { isRecordingEnabled } from "../figma_app/878298";
 import { isValidWidgetType } from "../figma_app/364284";
 import { K3 } from "../figma_app/678300";
-import { vo } from "../figma_app/164212";
+import { isInstanceSimplified } from "../figma_app/164212";
 import { n as _$$n } from "../figma_app/583890";
 import { indentWidth, indentWidthWithMargin } from "../figma_app/786175";
 export class $$f3 {
@@ -283,7 +283,7 @@ export function $$S2(e) {
           let a = t.nestedObjectRowHeight;
           for (let s = 0; s < i.length; s++) e(t, b(r, i, n, s, a));
         }(t, m, r)));
-        A && vo(m, t.sceneGraph) && !t.temporarilyExpandedInstanceLayers.includes(m.guid) && function (e, t, r) {
+        A && isInstanceSimplified(m, t.sceneGraph) && !t.temporarilyExpandedInstanceLayers.includes(m.guid) && function (e, t, r) {
           let n = e.nestedObjectRowHeight;
           let i = {
             rowType: "layer-expansion",

@@ -45,7 +45,7 @@ import { y0 } from "../figma_app/718307";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { useStrictDeepEqualSceneValue, $y, useDeepEqualSceneValue } from "../figma_app/167249";
 import { sp, K3 } from "../figma_app/678300";
-import { vo } from "../figma_app/164212";
+import { isInstanceSimplified } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
 import { S as _$$S2 } from "../figma_app/420927";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -1084,7 +1084,7 @@ class ez extends RecordingPureComponent {
       dispatch: this.props.dispatch,
       displayOrder: l.childrenDisplayOrder,
       expandMouseDown: this.expandMouseDown,
-      hasChildren: i.isExpandable || e.hasChildren || vo(i, this.getScene()),
+      hasChildren: i.isExpandable || e.hasChildren || isInstanceSimplified(i, this.getScene()),
       hasRefToHoveredDef: d,
       hideRowActions: this.props.hideRowActions,
       isAncestorHidden: l.isAncestorHidden,

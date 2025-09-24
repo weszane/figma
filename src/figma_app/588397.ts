@@ -34,7 +34,7 @@ import { cleanAssetName } from "../905/722604";
 import { PrimaryWorkflowEnum, StagingStatusEnum, hasAssetId } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { M as _$$M } from "../905/771870";
-import { JA } from "../figma_app/608944";
+import { useComponentFlyoutModal } from "../figma_app/608944";
 import { i as _$$i } from "../905/415810";
 import { B as _$$B } from "../905/179484";
 import { cx } from "../figma_app/76115";
@@ -270,7 +270,7 @@ function ei(e) {
   let {
     closeFlyout,
     isFlyoutOpen
-  } = JA();
+  } = useComponentFlyoutModal();
   let {
     onInsertableResourcePointerDown,
     dragState,

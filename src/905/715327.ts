@@ -47,7 +47,7 @@ import { UpgradeAction } from "../905/370443";
 import { g7, Ev } from "../905/939482";
 import { getSelectedFile } from "../905/766303";
 import { getRepoById, isBranch, getDisplayNameAlt } from "../905/760074";
-import { hT, GS } from "../figma_app/630951";
+import { transformLibraryWithCounts, transformLibraryFile } from "../figma_app/630951";
 import { t as _$$t2 } from "../figma_app/579169";
 import { fV, Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
@@ -585,7 +585,7 @@ function tp({
     showingDefaultSubscriptionsForTeamId: d
   });
   let m = Ev(p);
-  let h = useMemo(() => a ? o.map(hT) : [], [a, o]);
+  let h = useMemo(() => a ? o.map(transformLibraryWithCounts) : [], [a, o]);
   let g = CK({
     libraryFiles: h,
     currentLibrariesViewFilterState: null,
@@ -604,7 +604,7 @@ function tp({
   let b = useMemo(() => !!e && (!!l || !!d), [e, l, d]);
   if (0 === f.length) return null;
   let v = f.map(e => {
-    let t = GS(e);
+    let t = transformLibraryFile(e);
     if (!t) return null;
     let i = mapLibraryAttributes(e);
     return jsxs(_$$Fragment, {
@@ -1202,7 +1202,7 @@ function tk({
         })]
       }, a.library_file_key);
     }), S.map(e => {
-      let t = GS(e);
+      let t = transformLibraryFile(e);
       let r = mapLibraryAttributes(e);
       return jsx(te, {
         canEditSubscriptions: i,

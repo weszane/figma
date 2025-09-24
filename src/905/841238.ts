@@ -28,7 +28,7 @@ import { S as _$$S } from "../905/459477";
 import { D as _$$D, x as _$$x } from "../905/1253";
 import { NO } from "../905/498139";
 import { Xj } from "../905/748636";
-import { Ql, wd, Xp, wh, xb, ui, dl } from "../figma_app/164212";
+import { getComponentPropDefaultValue, computeBackingGUID, VARIABLE_TYPE_CONFIG, DROPDOWN_HEIGHT, getComponentPropDisplayName, getDefaultStateForStateGroup, normalizeComponentPropValue } from "../figma_app/164212";
 import { uS, c9, DD, _I } from "../905/211095";
 import { bq, dl as _$$dl, Kn, i0 } from "../figma_app/65182";
 import { D as _$$D2 } from "../905/589275";
@@ -219,9 +219,9 @@ let $$X0 = registerModal(function (e) {
     autoFocus: !0,
     onChange: X
   });
-  let [er, ea] = useState(prePopulatedDefaultValue ?? Ql(propType));
+  let [er, ea] = useState(prePopulatedDefaultValue ?? getComponentPropDefaultValue(propType));
   let [es, eo] = i0(prePopulatedDefaultValue, H);
-  let el = useMemo(() => propType === ComponentPropType.INSTANCE_SWAP && er ? wd([er], H) : null, [er, propType, H]);
+  let el = useMemo(() => propType === ComponentPropType.INSTANCE_SWAP && er ? computeBackingGUID([er], H) : null, [er, propType, H]);
   let ed = c9({
     propType,
     propName: K,
@@ -250,7 +250,7 @@ let $$X0 = registerModal(function (e) {
   }, [U, singleSelectedNode?.guid]);
   let eh = bq(eo);
   let eg = _$$dl(eo);
-  let ef = Xp[propType];
+  let ef = VARIABLE_TYPE_CONFIG[propType];
   let {
     modalWidth
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
@@ -292,7 +292,7 @@ let $$X0 = registerModal(function (e) {
     onSetPreferredProductComponents: eo,
     onClose: () => U(hideModal())
   }) : jsxs(Xj, {
-    initialWidth: wh,
+    initialWidth: DROPDOWN_HEIGHT,
     contentContainerClassName: "create_component_prop_modal--modal--Ln3y-",
     onClose: isInstanceSwapPickerShown ? () => {
       U(vq());
@@ -331,7 +331,7 @@ let $$X0 = registerModal(function (e) {
           onMouseLeave,
           onMouseUp,
           placeholder: propType === ComponentPropType.VARIANT ? "Property" : "",
-          recordingKey: generateRecordingKey("componentPropName", xb(propType)),
+          recordingKey: generateRecordingKey("componentPropName", getComponentPropDisplayName(propType)),
           value: K
         })]
       }), jsxs("div", {
@@ -354,7 +354,7 @@ let $$X0 = registerModal(function (e) {
               U(uP({
                 item: e,
                 callback: t => {
-                  em(e.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(e, t, openFileKey) : t);
+                  em(e.type === PrimaryWorkflowEnum.STATE_GROUP ? getDefaultStateForStateGroup(e, t, openFileKey) : t);
                 }
               }));
             },
@@ -365,7 +365,7 @@ let $$X0 = registerModal(function (e) {
           id: "create-component-prop-variant-input",
           onChange: e => ea(e.currentTarget.value),
           onKeyDown: ec,
-          recordingKey: generateRecordingKey("componentPropDefaultValue", xb(propType)),
+          recordingKey: generateRecordingKey("componentPropDefaultValue", getComponentPropDisplayName(propType)),
           defaultValue: er || "",
           autoCorrect: "off"
         })]
@@ -374,7 +374,7 @@ let $$X0 = registerModal(function (e) {
         borderBottom: !0,
         entrypointForLogging: _$$S.PreferredValuesPickerEntrypoint.CREATE_COMPONENT_PROP_PICKER,
         onSetComponents: eg,
-        propDefDefaultValue: dl(propType, er),
+        propDefDefaultValue: normalizeComponentPropValue(propType, er),
         propDefType: propType,
         recordingKey: "create-prop-modal-preferred-values-picker",
         removeComponents: e => eh(e, Kn.REMOVE),

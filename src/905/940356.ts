@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
  * @see $$r0
  */
 export function selectUserFlag(flagKey: string) {
-  return useSelector<ObjectOf>(state => state.userFlags[flagKey])
+  return useSelector<AppState, AppState['userFlags'][string]>(state => state.userFlags[flagKey])
 }
 
 // Export with original alias for backward compatibility

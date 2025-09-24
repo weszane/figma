@@ -20,7 +20,7 @@ import { relaxedEqual, deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { formatList } from "../figma_app/930338";
 import { rY } from "../905/985490";
-import { zn, xb } from "../figma_app/164212";
+import { renderComponentPropIcon, getComponentPropDisplayName } from "../figma_app/164212";
 import { AffineTransform } from "../905/583953";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { TI } from "../905/713722";
@@ -98,9 +98,9 @@ function D(e) {
             children: r.name
           }), jsxs("div", {
             className: "component_props_treatment_definitions--componentPropTypeValue--hjyC-",
-            children: [zn(d), jsx("span", {
+            children: [renderComponentPropIcon(d), jsx("span", {
               className: "component_props_treatment_definitions--componentPropTypeLabel--a5RDA ellipsis--ellipsis--Tjyfa",
-              children: xb(d)
+              children: getComponentPropDisplayName(d)
             })]
           })]
         }), l && jsx("div", {

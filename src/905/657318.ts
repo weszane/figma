@@ -34,7 +34,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, normalizeValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
-import { Lh, D8 } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { nm, j_ } from "../figma_app/745458";
 import { directlySubscribedStylesFromLoadedPagesSelector } from "../figma_app/141508";
@@ -433,7 +433,7 @@ class eA extends RecordingPureComponent {
     let v = {
       faded: this.props.isEmpty && !this.state.isHoveringOverTitlePanel,
       className: p ? Om : Dn,
-      "data-onboarding-key": Lh(D8.PROPERTIES_PANEL_TITLE, this.props.title),
+      "data-onboarding-key": generateSlug(PanelIdentifiers.PROPERTIES_PANEL_TITLE, this.props.title),
       isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom
     };
     let E = {

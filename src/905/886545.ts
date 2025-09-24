@@ -4,7 +4,7 @@ import { isValidVariableId } from "../905/805904";
 import { resolveVariableValue } from "../905/929949";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { g } from "../905/578436";
+import { generateUniqueName } from "../905/578436";
 import { Ot } from "../905/850476";
 import { Wc } from "../905/782020";
 export function $$p0() {
@@ -21,7 +21,7 @@ export function $$m2() {
     let i = function (e, t = "") {
       let i = e.map(e => e.name);
       let n = getI18nString("variables.variable_collection_default_name");
-      return g(t + n, i);
+      return generateUniqueName(t + n, i);
     }(e, t);
     let n = VariablesBindings.createVariableSet(i, VariableCollectionContext.VARIABLES_MODAL);
     fullscreenValue.triggerAction("commit");
@@ -33,7 +33,7 @@ export function $$h1() {
     let n = function (e, t = "") {
       let i = e.map(e => e.name);
       let n = getI18nString("variables.variable_collection_extension_default_name");
-      return g(t + n, i);
+      return generateUniqueName(t + n, i);
     }(e, i);
     let a = VariablesBindings.createVariableSetExtension(n, t);
     fullscreenValue.triggerAction("commit");

@@ -9,14 +9,14 @@ import { NT, g5 } from "../figma_app/579169";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
-import { Lh, D8, WO } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers, validateUserFileAccess } from "../figma_app/242339";
 import { N as _$$N } from "../figma_app/268271";
 import { WD4 } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
 import { uM } from "../905/738636";
 import { UpgradeAction } from "../905/370443";
 import { getNewFileConfig } from "../905/766303";
-import { oe, RJ, I7 } from "../figma_app/630951";
+import { useHasSubscribedLibrariesOrLocalComponents, uiKitsTooltipSymbol, useHasAnyUiKit } from "../figma_app/630951";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { FFileType } from "../figma_app/191312";
 import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
@@ -29,7 +29,7 @@ import { Fullscreen, UserInterfaceElements } from "../figma_app/763686";
 import { setLeftPanelTab } from "../figma_app/91703";
 import { clearSelection } from "../figma_app/741237";
 import { F_, EL } from "../905/858282";
-import { en as _$$en, aD, wy, eN, zU, nt, l7, d4 as _$$d } from "../figma_app/202626";
+import { NavigationDirection, findProductFrame, findProductTitleText, findFirstNodeOfType, navigateAndSelect, findHeroImageFrame, findLandingPageTitle, expTootipsSymbol } from "../figma_app/202626";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Vr } from "../figma_app/151869";
 import { Z as _$$Z } from "../figma_app/731770";
@@ -77,7 +77,7 @@ function k(e) {
       children: renderI18nText("design_systems.assets_panel.assets")
     })
   }));
-  oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_ending_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_ending_step.description", {
+  useHasSubscribedLibrariesOrLocalComponents() && (r = renderI18nText("tooltips_plus_onboarding.assets_ending_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_ending_step.description", {
     strongAssets: jsx("strong", {
       style: {
         display: "contents"
@@ -109,7 +109,7 @@ function k(e) {
     },
     pointsTo: "leftPanel",
     primaryCtaProps: e.primaryCtaProps,
-    targetKey: RJ,
+    targetKey: uiKitsTooltipSymbol,
     title: r,
     trackingContextName: e.forStartingPoints ? "Starting Points Assets Step" : `Tooltips+ ${o} Ending Step`,
     children: s
@@ -137,20 +137,20 @@ function j({
   let p = selectUserFlag(F.UI_KITS_ENDING);
   let h = !!selectUserFlag("started_figma_basics_onboarding");
   let m = useIsProgressBarHiddenOrLocked();
-  let [g, O] = useState(_$$en.FORWARD);
+  let [g, O] = useState(NavigationDirection.FORWARD);
   let L = useSelector(e => e.mirror.sceneGraph);
   let {
     hasAnyUiKit
-  } = I7();
+  } = useHasAnyUiKit();
   let D = hasAnyUiKit && !p;
   let j = [D].reduce((e, t) => t ? e + 1 : e, 4);
-  let U = (e, r = _$$en.FORWARD) => {
+  let U = (e, r = NavigationDirection.FORWARD) => {
     O(r);
     t(postUserFlag({
       [e]: !0
     }));
   };
-  let B = (e, r = _$$en.BACKWARD) => {
+  let B = (e, r = NavigationDirection.BACKWARD) => {
     O(r);
     t(postUserFlag({
       [e]: !1
@@ -199,7 +199,7 @@ function j({
     onClose: G,
     currentStepNum: 4,
     totalNumSteps: j,
-    getNodeToSelect: () => aD(L),
+    getNodeToSelect: () => findProductFrame(L),
     flowDirection: g
   }) : jsx(_$$P, {
     onPrimaryCtaClick: () => U(F.FORMAT_TEXT),
@@ -210,9 +210,9 @@ function j({
       totalNumSteps: j
     }),
     skip: () => {
-      g === _$$en.FORWARD ? U(F.FORMAT_TEXT) : B(F.TEXT);
+      g === NavigationDirection.FORWARD ? U(F.FORMAT_TEXT) : B(F.TEXT);
     },
-    getNodeToSelect: () => wy(L)
+    getNodeToSelect: () => findProductTitleText(L)
   }) : jsx(R, {
     onNext: () => U(F.TEXT),
     onPrevious: () => B(F.FRAME),
@@ -232,7 +232,7 @@ function z(e) {
   let r = alwaysFalseCallback2()() ? renderI18nText("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : renderI18nText("tooltips_plus_onboarding.ui_kits_step.title");
   let s = renderI18nText("tooltips_plus_onboarding.ui_kits_step.description");
   let o = "UI Kits";
-  oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
+  useHasSubscribedLibrariesOrLocalComponents() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
   useEffect(() => {
     t(setLeftPanelTab({
       tab: UserInterfaceElements.ASSETS
@@ -241,7 +241,7 @@ function z(e) {
   return jsx(VF, {
     dismissModal: e.onClose,
     disableHighlight: !0,
-    targetKey: RJ,
+    targetKey: uiKitsTooltipSymbol,
     title: r,
     trackingContextName: `Tooltips+ ${o} Step`,
     lowerLeftText: jsx(uY, {
@@ -278,7 +278,7 @@ function K({
   let t = useDispatch();
   let r = selectUserFlag("no_figma_basics_tooltips_onboarding");
   let s = useIsProgressBarHiddenOrLocked();
-  let [l, d] = useState(_$$en.FORWARD);
+  let [l, d] = useState(NavigationDirection.FORWARD);
   let c = selectUserFlag(W.FRAME);
   let u = selectUserFlag(W.TEXT);
   let p = selectUserFlag(W.FORMAT_TEXT);
@@ -288,26 +288,26 @@ function K({
   let {
     hasAnyUiKit,
     status
-  } = I7();
+  } = useHasAnyUiKit();
   let S = hasAnyUiKit && !m;
   let v = hasAnyUiKit && !g;
   let x = [hasAnyUiKit].reduce((e, t) => t ? e + 1 : e, 4);
   let N = Vr();
-  let O = () => eN(getSingletonSceneGraph(), "TEXT", N);
-  let L = (e, r = _$$en.FORWARD) => {
+  let O = () => findFirstNodeOfType(getSingletonSceneGraph(), "TEXT", N);
+  let L = (e, r = NavigationDirection.FORWARD) => {
     d(r);
     t(postUserFlag({
       [e]: !0
     }));
   };
-  let P = (e, r = _$$en.BACKWARD) => {
+  let P = (e, r = NavigationDirection.BACKWARD) => {
     d(r);
     t(postUserFlag({
       [e]: !1
     }));
   };
   let D = (e, t) => {
-    l === _$$en.FORWARD ? L(t) : P(e);
+    l === NavigationDirection.FORWARD ? L(t) : P(e);
   };
   let F = useCallback(() => {
     e();
@@ -350,7 +350,7 @@ function K({
             useLoadingBar: !0
           }),
           skip: () => {
-            l === _$$en.FORWARD ? L(W.FORMAT_TEXT) : P(W.TEXT);
+            l === NavigationDirection.FORWARD ? L(W.FORMAT_TEXT) : P(W.TEXT);
           },
           getNodeToSelect: O
         });else if (v) return jsx(k, {
@@ -394,7 +394,7 @@ function X(e) {
   let l = e.getNodeToSelect();
   _$$h(() => {
     queueMicrotask(async function () {
-      l && null === s.current ? (await zU({
+      l && null === s.current ? (await navigateAndSelect({
         navigate: a,
         guidToFocus: o?.guid,
         guidToSelect: l.guid
@@ -419,7 +419,7 @@ function X(e) {
   });
 }
 function q(e) {
-  let t = Lh(D8.PAINT_PANEL_ROW, "paint-1-0");
+  let t = generateSlug(PanelIdentifiers.PAINT_PANEL_ROW, "paint-1-0");
   return jsx(VF, {
     arrowPosition: F_.RIGHT_BODY,
     disableHighlight: !0,
@@ -444,11 +444,11 @@ function Z(e) {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();
-      n && "FRAME" === n.type ? (await zU({
+      n && "FRAME" === n.type ? (await navigateAndSelect({
         navigate: a,
         guidToFocus: t?.guid,
         guidToSelect: n.guid
-      }), r(!0)) : e.flowDirection === _$$en.FORWARD ? e.onNext() : e.onPrevious();
+      }), r(!0)) : e.flowDirection === NavigationDirection.FORWARD ? e.onNext() : e.onPrevious();
     });
   }), t) ? jsx(VF, {
     arrowPosition: _$$F_.RIGHT_BODY,
@@ -516,15 +516,15 @@ function en({
   let u = selectUserFlag(er.ASSETS);
   let p = !!selectUserFlag("started_figma_basics_onboarding");
   let h = useIsProgressBarHiddenOrLocked();
-  let [m, g] = useState(_$$en.FORWARD);
+  let [m, g] = useState(NavigationDirection.FORWARD);
   let E = useSelector(e => e.mirror.sceneGraph);
-  let b = (e, r = _$$en.FORWARD) => {
+  let b = (e, r = NavigationDirection.FORWARD) => {
     g(r);
     t(postUserFlag({
       [e]: !0
     }));
   };
-  let T = (e, r = _$$en.BACKWARD) => {
+  let T = (e, r = NavigationDirection.BACKWARD) => {
     g(r);
     t(postUserFlag({
       [e]: !1
@@ -570,14 +570,14 @@ function en({
       onClose: S,
       currentStepNum: 2,
       totalNumSteps: 5,
-      getNodeToSelect: () => nt(E),
+      getNodeToSelect: () => findHeroImageFrame(E),
       flowDirection: m
     }) : jsx(X, {
       onNext: () => b(er.EDIT_TEXT),
       onClose: S,
       currentStepNum: 1,
       totalNumSteps: 5,
-      getNodeToSelect: () => l7(E)
+      getNodeToSelect: () => findLandingPageTitle(E)
     })
   });
 }
@@ -605,7 +605,7 @@ export function $$ea1() {
   let C = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
-  let w = WO(t?.id, C, [_$$d]);
+  let w = validateUserFileAccess(t?.id, C, [expTootipsSymbol]);
   let [O, R] = useState(!1);
   let [L, P] = useState(!1);
   _$$E(uniqueId, ["Reset Onboarding", $$ei0], () => {

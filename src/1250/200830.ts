@@ -30,7 +30,7 @@ import { postUserFlag } from "../905/985254";
 import { A as _$$A } from "../905/956262";
 import { UC, uA } from "../figma_app/33126";
 import { of, mW } from "../figma_app/797994";
-import { _q } from "../figma_app/242339";
+import { hasAnyOnboardingFlag } from "../figma_app/242339";
 import { qo } from "../905/696396";
 import { U as _$$U } from "../905/455766";
 import { h as _$$h2 } from "../905/284399";
@@ -630,7 +630,7 @@ function eG() {
           let l = mW(e, "not_gen_0");
           let d = mW(e, "welcome_onboarded");
           let c = mW(e, "file_browser_onboarded");
-          let _ = [eA, ey, _q(e) || a ? null : eE];
+          let _ = [eA, ey, hasAnyOnboardingFlag(e) || a ? null : eE];
           let u = [...(a ? [] : [el, e_]), eR, isResourceHubEnabled() ? eh : ep, ea, ev];
           let m = [en, ...u];
           return s ? [] : n || l || r ? !n && (r || l) && c ? [] : r ? _ : i ? m : l ? eU() || d ? [en, ...u] : [eD, ...u] : m : c ? [] : m;

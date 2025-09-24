@@ -5,7 +5,7 @@ import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { parseHex } from "../figma_app/191804";
-import { m as _$$m } from "../figma_app/964367";
+import { reconcileJSXElement } from "../figma_app/964367";
 import { logError } from "../905/714362";
 import { SV } from "../9410/483857";
 import { _E } from "../905/788069";
@@ -340,7 +340,7 @@ export async function $$K0({
   let b = JF(i);
   let C = null;
   if (getFeatureFlags().first_draft_share_jsx) {
-    let e = await _$$m({
+    let e = await reconcileJSXElement({
       node: y,
       jsxElement: t,
       oldJSXElement: b,

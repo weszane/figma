@@ -121,7 +121,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
 import { N as _$$N4 } from "../905/482239";
 import { USER_FLAG_V2 } from "../1250/200830";
-import { jO, Ai } from "../figma_app/242339";
+import { isOnboardingComplete, checkUserAccess } from "../figma_app/242339";
 import { xZ } from "../1250/927871";
 import { f as _$$f2 } from "../1250/46310";
 import { A as _$$A6 } from "../figma_app/882803";
@@ -234,7 +234,7 @@ import { _1, kP } from "../figma_app/809086";
 import { e as _$$e3 } from "../905/383776";
 import { useIsFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser } from "../figma_app/88239";
 import { wX } from "../figma_app/710136";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { Bu } from "../figma_app/604494";
 import { jx, Ij as _$$Ij, T4, af as _$$af, $9 } from "../figma_app/433401";
 import { LC } from "../figma_app/318590";
@@ -1330,7 +1330,7 @@ function t7() {
   let n = useAtomWithSubscription(t4);
   let a = useAtomWithSubscription(t5);
   let o = useAtomWithSubscription(Ot);
-  let l = jO();
+  let l = isOnboardingComplete();
   let d = _$$e({
     overlay: Ttn,
     priority: _$$N.DEFAULT_MODAL
@@ -1442,7 +1442,7 @@ function ic() {
   let i = useStore();
   let a = useAtomWithSubscription(_$$t2);
   let o = useAtomWithSubscription(NZ);
-  let l = jO();
+  let l = isOnboardingComplete();
   let d = useAtomWithSubscription(wg);
   let {
     getConfig
@@ -1594,7 +1594,7 @@ function iw() {
   let o = useAtomWithSubscription(NZ);
   let l = useAtomWithSubscription(pQ);
   let d = useAtomWithSubscription(_$$t2);
-  let c = jO();
+  let c = isOnboardingComplete();
   let u = selectCurrentFile()?.teamId == null;
   let {
     isShowing,
@@ -7443,7 +7443,7 @@ function sB() {
     let a = useMemo(() => t, [i]);
     let s = isDevHandoffEditorType();
     let o = isDesignFileType();
-    let l = PE();
+    let l = hasJubileePermissionForDesign();
     let d = function () {
       let e = LC();
       return isAssetSuggestionsEnabled() && e;
@@ -7755,7 +7755,7 @@ function s4() {
   let t = useAtomWithSubscription(_$$t2);
   let i = useAtomWithSubscription(NZ);
   let n = useAtomWithSubscription(pQ);
-  let a = jO();
+  let a = isOnboardingComplete();
   let o = useAtomWithSubscription(s5);
   let l = useAtomWithSubscription(s3);
   let d = _$$zl(s2);
@@ -8001,7 +8001,7 @@ function ow() {
   let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_frame_formatting");
   let d = selectUserFlag("design_panel_step_shown");
   let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
-  let u = Ai(["exp_cursor_bot_onboarding"]);
+  let u = checkUserAccess(["exp_cursor_bot_onboarding"]);
   let m = _$$b5();
   _$$E2(uniqueId, "create_frame", useCallback(() => {
     !l || d || c || u || isShowing || show();
@@ -8045,7 +8045,7 @@ function oS() {
   let d = selectUserFlag("format_text_step_shown");
   let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
   let u = _$$b5();
-  let m = Ai(["exp_cursor_bot_onboarding"]);
+  let m = checkUserAccess(["exp_cursor_bot_onboarding"]);
   let [_, x] = useState(!1);
   let b = Vr();
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
@@ -8208,7 +8208,7 @@ function oH(e) {
 }
 function oX() {
   let e = useDispatch();
-  let t = PE();
+  let t = hasJubileePermissionForDesign();
   let i = userFlagExistsAtomFamily(Kt);
   let r = useAtomWithSubscription(i);
   let a = userFlagExistsAtomFamily(wl);

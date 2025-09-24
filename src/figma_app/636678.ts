@@ -6,7 +6,7 @@ import { A as _$$A } from "../905/891805";
 import { _ as _$$_ } from "../905/607842";
 import { N as _$$N } from "../905/120979";
 import { Fullscreen } from "../figma_app/763686";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -17,7 +17,7 @@ import { Xo } from "../figma_app/482495";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { cn } from "../905/959568";
 import { Xn } from "../905/429125";
-import { eM, xb, Fv, wh } from "../figma_app/164212";
+import { getSlotPropTypes, getComponentPropDisplayName, DisplayMode, DROPDOWN_HEIGHT } from "../figma_app/164212";
 import { aR } from "../figma_app/530362";
 import { yt } from "../figma_app/292212";
 import { oX, MB } from "../figma_app/930914";
@@ -34,13 +34,13 @@ export function $$w0(e) {
         propName: t
       }), [t]);
       let a = useMemo(() => {
-        let e = eM(RR.SLOT_CONTENT_ID).defaultType;
+        let e = getSlotPropTypes(SlotSymbolType.SLOT_CONTENT_ID).defaultType;
         return getI18nString("design_systems.component_properties.apply_component_property", {
-          propType: xb(e).toLocaleLowerCase()
+          propType: getComponentPropDisplayName(e).toLocaleLowerCase()
         });
       }, []);
-      let o = oX(RR.SLOT_CONTENT_ID, e, r);
-      let l = MB(RR.SLOT_CONTENT_ID);
+      let o = oX(SlotSymbolType.SLOT_CONTENT_ID, e, r);
+      let l = MB(SlotSymbolType.SLOT_CONTENT_ID);
       let d = useDeepEqualSceneValue(e => {
         if (!getFeatureFlags().dse_slots) return !1;
         let t = e.getDirectlySelectedNodes();
@@ -62,8 +62,8 @@ export function $$w0(e) {
         isSelected: l,
         dropdownTargetButtonRef: e,
         dropdown: jsx(Xn, {
-          source: Fv.ICON,
-          nodeField: RR.SLOT_CONTENT_ID,
+          source: DisplayMode.ICON,
+          nodeField: SlotSymbolType.SLOT_CONTENT_ID,
           newPropDefaultValue: r
         })
       }), [o, l, e, r, a]);
@@ -80,7 +80,7 @@ export function $$w0(e) {
       let c = useAtomWithSubscription(_$$A2);
       let u = r ?? c;
       let p = useCallback(() => {
-        let t = u?.current ? cn(u.current, wh) : {};
+        let t = u?.current ? cn(u.current, DROPDOWN_HEIGHT) : {};
         s(showPickerThunk({
           id: aR,
           initialX: t?.x,

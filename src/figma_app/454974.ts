@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { openFileAtom } from "../figma_app/516028";
-import { W7 } from "../figma_app/251115";
+import { hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
 import { Sn } from "../905/946805";
@@ -82,7 +82,7 @@ export function $$y1({
   });
 }
 export function $$b0(e) {
-  if (!W7()) return !1;
+  if (!hasJubileePermissionForWhiteboard()) return !1;
   let t = atomStoreManager.get(openFileAtom);
   if (!t?.canEdit || t.editorType !== _YF.DESIGN) return !1;
   switch (e) {

@@ -12,7 +12,7 @@ import { getSelectedFile } from "../905/766303";
 import { b as _$$b } from "../905/217163";
 import { ud } from "../905/862913";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { JA } from "../figma_app/608944";
+import { useComponentFlyoutModal } from "../figma_app/608944";
 import { n as _$$n } from "../905/186638";
 var $$y0 = (e => (e.ASSETS_PANEL = "library-item-tile-context-menu-for-assets-panel", e.LIBRARY_MODAL = "library-item-tile-context-menu-for-library-modal", e.ACTIONS_ASSETS = "library-item-tile-context-menu-for-actions-assets", e))($$y0 || {});
 let b = e => "library-item-tile-context-menu-for-assets-panel" === e || "library-item-tile-context-menu-for-library-modal" === e || "library-item-tile-context-menu-for-actions-assets" === e;
@@ -29,7 +29,7 @@ let $$E1 = memo(({
 }) => {
   let {
     isFlyoutOpen
-  } = JA();
+  } = useComponentFlyoutModal();
   let E = useSelector(e => e.library.defaultPublished.libraryKeys);
   let S = ud();
   let w = useMemo(() => getSelectedFile({

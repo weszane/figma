@@ -64,7 +64,7 @@ import { selectCurrentUser } from "../905/372672";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { TeamCanEdit } from "../figma_app/43951";
-import { jO } from "../figma_app/242339";
+import { isOnboardingComplete } from "../figma_app/242339";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { h as _$$h2 } from "../figma_app/198885";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
@@ -83,13 +83,13 @@ import { I as _$$I2, v as _$$v } from "../figma_app/130633";
 import { b as _$$b } from "../642/502017";
 import eO from "../vendor/946678";
 import { f as _$$f2 } from "../figma_app/436731";
-import { wJ } from "../figma_app/630951";
+import { isValidLibraryKey } from "../figma_app/630951";
 import { Fl, fV } from "../figma_app/236178";
 import { FX, KP } from "../figma_app/12491";
 import { NX, k9, sF } from "../figma_app/777207";
 import { t as _$$t3, E as _$$E2 } from "../905/511388";
 import { P as _$$P2, J as _$$J } from "../figma_app/582341";
-import { JA } from "../figma_app/608944";
+import { useComponentFlyoutModal } from "../figma_app/608944";
 import { l6, c$, sK } from "../905/794875";
 import { generateRecordingKey } from "../figma_app/878298";
 import { U as _$$U } from "../905/966438";
@@ -300,7 +300,7 @@ function eW(e) {
   let u = useSelector(selectOpenFile);
   let {
     closeFlyout
-  } = JA();
+  } = useComponentFlyoutModal();
   let g = Fl();
   let y = useCallback(() => {
     closeFlyout();
@@ -327,7 +327,7 @@ function eW(e) {
     return Object.keys(libraryNameByLibraryKey ?? {}).sort((e, t) => _$$f2.LEXICOGRAPHICALLY(libraryNameByLibraryKey[e], libraryNameByLibraryKey[t]));
   }, [g, fileKeyToLibraryKey, libraryNameByLibraryKey]);
   let f = useFigmaLibrariesEnabled();
-  let [b, x] = eF()(m, e => !wJ(e));
+  let [b, x] = eF()(m, e => !isValidLibraryKey(e));
   let v = x.length > 0 && f;
   let _ = useMemo(() => ({
     format: e => {
@@ -1487,7 +1487,7 @@ function t9({
     });
   }, [B.query, scrollContent.length]);
   let eN = S || B.isLoading;
-  let eI = jO();
+  let eI = isOnboardingComplete();
   let eC = k?.teamId ? b[k.teamId] : null;
   let eM = useSubscription(TeamCanEdit, {
     id: k?.teamId ?? ""

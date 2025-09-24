@@ -11,7 +11,7 @@ import { yesNoTrackingEnum } from "../figma_app/198712";
 import { _X, V5, hu } from "../figma_app/260445";
 import { u3, y$ } from "../figma_app/152690";
 import { Io, MH } from "../figma_app/394327";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
@@ -39,7 +39,7 @@ export function $$I3({
       e(Yi({
         item: t,
         callback: e => {
-          t.resolvedType === VariableResolvedDataType.STRING ? (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(RR.TEXT)), updateVariableConsumption(y$(VariableResolvedDataType.STRING, e))) : t.resolvedType === VariableResolvedDataType.FLOAT && (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(RR.TEXT)), updateVariableConsumption({
+          t.resolvedType === VariableResolvedDataType.STRING ? (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption(y$(VariableResolvedDataType.STRING, e))) : t.resolvedType === VariableResolvedDataType.FLOAT && (permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(SlotSymbolType.TEXT)), updateVariableConsumption({
             resolvedType: VariableResolvedDataType.STRING,
             type: VariableDataType.EXPRESSION,
             value: {
@@ -55,13 +55,13 @@ export function $$I3({
     let {
       textPropReferencedBySelection
     } = selectWithShallowEqual(e => ({
-      textPropReferencedBySelection: !!c(e, RR.TEXT)
+      textPropReferencedBySelection: !!c(e, SlotSymbolType.TEXT)
     }));
-    let p = Yc(RR.TEXT, l);
+    let p = Yc(SlotSymbolType.TEXT, l);
     let m = useCallback(e => {
       permissionScopeHandler.user("add-prop-ref", () => {
         clearVariableConsumption();
-        Fullscreen.addComponentPropRef(RR.TEXT, e.value.explicitDefId);
+        Fullscreen.addComponentPropRef(SlotSymbolType.TEXT, e.value.explicitDefId);
       });
     }, [clearVariableConsumption]);
     return {

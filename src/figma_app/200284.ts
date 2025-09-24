@@ -49,7 +49,7 @@ import { u as _$$u } from "../figma_app/365543";
 import { c as _$$c } from "../905/913880";
 import { Id, fI } from "../figma_app/626177";
 import { l6, c$ as _$$c$ } from "../905/794875";
-import { GM } from "../figma_app/251115";
+import { getJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
 import { Sn } from "../905/946805";
@@ -80,7 +80,7 @@ export async function $$eb0(e) {
 export function $$eT3(e) {
   let [, t] = useAtomValueAndSetter($$eg4);
   useEffect(() => (t(!0), () => t(!1)), [t]);
-  let r = GM();
+  let r = getJubileePermissionForDesign();
   let s = Os();
   let o = X7();
   let l = selectCurrentFile();

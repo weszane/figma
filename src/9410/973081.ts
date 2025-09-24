@@ -235,7 +235,7 @@ import { CR } from '../figma_app/234505';
 import { r as _$$r3 } from '../figma_app/235299';
 import { StyleIdHandler } from '../figma_app/243058';
 import { dR, Gt } from '../figma_app/248118';
-import { PE } from '../figma_app/251115';
+import { hasJubileePermissionForDesign } from '../figma_app/251115';
 import { Z1 } from '../figma_app/253220';
 import { DialogBody, DialogHiddenTitle, DialogTitle, DialogContents, DialogHeader } from '../figma_app/272243';
 import { rgbToNormalized } from '../figma_app/273493';
@@ -4295,7 +4295,7 @@ function nl(e) {
       isLimitedDevMode: isFullscreenDevHandoffView(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
-  let x = PE();
+  let x = hasJubileePermissionForDesign();
   let y = Ne();
   let b = LC();
   let C = r8();
@@ -4388,7 +4388,7 @@ function nc(e) {
       isLimitedDevMode: isFullscreenDevHandoffView(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
-  let x = PE();
+  let x = hasJubileePermissionForDesign();
   let y = Ne() && e.carouselType === 'single_slide_view';
   let b = LC();
   let C = r8();

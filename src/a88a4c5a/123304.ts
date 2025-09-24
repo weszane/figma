@@ -253,11 +253,11 @@ import { zC } from '../figma_app/186343';
 import { FFileType, FPlanNameType } from '../figma_app/191312';
 import { N3, QX } from '../figma_app/194671';
 import { pt } from '../figma_app/198840';
-import { Qf } from '../figma_app/202626';
+import { getCurrentPage } from '../figma_app/202626';
 import { ac as _$$ac, Bx, Lt, wg } from '../figma_app/210234';
 import { fV } from '../figma_app/236178';
 import { SI } from '../figma_app/241341';
-import { jO } from '../figma_app/242339';
+import { isOnboardingComplete } from '../figma_app/242339';
 import { MM } from '../figma_app/246831';
 import { tw as _$$tw, isInteractionOrEvalMode } from '../figma_app/897289';
 import { r0 as _$$r5, yU as _$$yU, d9, GM, kR, LG, qQ, QU } from '../figma_app/257614';
@@ -364,7 +364,7 @@ import { LI, Wd } from '../figma_app/970285';
 import { t6 as _$$t3 } from '../figma_app/975811';
 import { getCurrentFileType, isWhiteboardFileType, isDevHandoffEditorType, getEditorTypeOrNull } from '../figma_app/976749';
 import { P as _$$P3 } from '../figma_app/979374';
-import { qh } from '../figma_app/990334';
+import { useAutosuggestShadowRead } from '../figma_app/990334';
 import { BE } from '../figma_app/991591';
 import nc from '../vendor/128080';
 import { d4, wA } from 'react-redux';
@@ -1780,7 +1780,7 @@ function lw({
   let C = useCurrentFileKey();
   let k = d4(e => e.fileVersion);
   let E = d4(e => e.mirror.sceneGraph);
-  let S = v && Qf(E);
+  let S = v && getCurrentPage(E);
   let w = !!S && S.childCount === 0;
   let [R] = setupResourceAtomHandler(Dz({}));
   let {
@@ -2101,7 +2101,7 @@ function lV() {
   let m = _$$zl(l$).currentState === 'ui3_onboarding_was_shown_in_current_session';
   let f = _$$zl(_$$j3).currentState === 'no_figma_basics_onboarding_was_shown_in_current_session';
   let y = useAtomWithSubscription(_$$dL);
-  let _ = jO();
+  let _ = isOnboardingComplete();
   let b = u?.canEdit;
   let j = d4(e => e.leftPanel.activeTab === UserInterfaceElements.LAYERS);
   if (_$$E(uniqueId, ['Reset Visual Assets Tooltips', _$$io], () => {
@@ -10797,7 +10797,7 @@ let dN = memo(({
   let b = _ ? _.key : '';
   Gb(b);
   _$$W2();
-  qh();
+  useAutosuggestShadowRead();
   let j = BI();
   let v = _$$e3();
   let C = useIsFullscreenDevModeComponentBrowser();

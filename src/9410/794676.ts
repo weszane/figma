@@ -63,7 +63,7 @@ import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 import { YG, Wg } from "../905/921418";
 import { liveStoreInstance } from "../905/713695";
 import { x as _$$x2 } from "../figma_app/612938";
-import { a4 } from "../figma_app/457074";
+import { useInitializeLeftPanelTab } from "../figma_app/457074";
 import { RECENT_PLUGINS_FIGMA_DESIGN, RECENT_PLUGINS_FIGJAM, RECENT_PLUGINS_SLIDES, RECENT_WIDGETS_FIGMA_DESIGN, RECENT_WIDGETS_FIGJAM, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { DW } from "../figma_app/578011";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
@@ -145,7 +145,7 @@ import { N as _$$N } from "../figma_app/115586";
 import { getMemoryUsage } from "../figma_app/527873";
 import { DI } from "../figma_app/557318";
 import { WR } from "../figma_app/109130";
-import { G_ } from "../figma_app/251115";
+import { setupJubileePermission } from "../figma_app/251115";
 import { y1 } from "../figma_app/318590";
 import { Ky, RS } from "../9410/793186";
 import { FC, Wc } from "../figma_app/957070";
@@ -540,7 +540,7 @@ let t5 = memo(({
   let f = getSelectedEditorType();
   let g = useLatestRef(f);
   f !== g && g && d(recentlyUsedQuickCommands([]));
-  G_(i, s);
+  setupJubileePermission(i, s);
   OQ(i);
   y1(i);
   WR();
@@ -1089,7 +1089,7 @@ export function $$t80({
       Jm("set-tool-default");
     });
   })();
-  a4();
+  useInitializeLeftPanelTab();
   usePreventBrowserKeydown();
   (function () {
     let e = useDispatch();

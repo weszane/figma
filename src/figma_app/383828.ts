@@ -9,8 +9,8 @@ import { getPublishedAssetsForLibrary, areNodesEqual } from "../figma_app/646357
 import { getBasename, splitPath, getDirname } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
-import { D } from "../figma_app/335489";
-import { cP, kz, zb } from "../figma_app/264776";
+import { groupInstancesByState } from "../figma_app/335489";
+import { processStateHierarchy, findBestMatchingVariantState, trackStateGroupAnalytics } from "../figma_app/264776";
 import { compareWithGeneratedKey } from "../905/709171";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { QL } from "../905/557338";
@@ -39,7 +39,7 @@ export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
     sortByWithOptions(o, e => `${e.displayText}-${e.args.componentOrStateGroup?.node_id || ""}`);
     return o;
   }(e, o, l, f) : p === StateHierarchy.STATE_INSTANCE && (E = function (e, t, r, n, s, o, l) {
-    let d = cP(e, t, r, o);
+    let d = processStateHierarchy(e, t, r, o);
     if (!d || d.mode !== StateHierarchy.STATE_INSTANCE) return [];
     let {
       allStates,
@@ -48,7 +48,7 @@ export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
       selectedStates,
       selectedStatesPropertyValues
     } = d;
-    let f = D(Object.keys(n), s);
+    let f = groupInstancesByState(Object.keys(n), s);
     let E = (e, t) => {
       if (t?.property && t?.value) {
         let e = {};
@@ -64,13 +64,13 @@ export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
             ...propertyValues,
             [t.property]: t.value
           };
-          let s = kz(a, r, allStates);
+          let s = findBestMatchingVariantState(a, r, allStates);
           if (null !== s) {
             let t = s.symbol.node_id;
             e[t] = (e[t] || []).concat(f[n.symbol.node_id]);
           }
         }
-        0 !== Object.keys(e).length && (zb("Swapping A Variant", stateGroup.nodeId, {
+        0 !== Object.keys(e).length && (trackStateGroupAnalytics("Swapping A Variant", stateGroup.nodeId, {
           source: "context_menu"
         }), permissionScopeHandler.user("swap-related-symbol", () => $$A0(e)));
       }

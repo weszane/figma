@@ -48,7 +48,7 @@ import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { INSPECT_PANEL } from "../figma_app/80938";
 import { _o } from "../figma_app/701001";
 import { GQ } from "../figma_app/32128";
-import { gn, eN as _$$eN, zU } from "../figma_app/202626";
+import { findNodeByCriteria, findFirstNodeOfType, navigateAndSelect } from "../figma_app/202626";
 import { w as _$$w2 } from "../905/129046";
 import { rq } from "../905/425180";
 import { R as _$$R2, Q as _$$Q } from "../905/11928";
@@ -352,12 +352,12 @@ function ef(e) {
   let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$Z();
   t = l;
-  let s = gn({
+  let s = findNodeByCriteria({
     nodeType: "INSTANCE",
     sceneGraph: t,
     preferredName: "Hand Held Button",
     backupNames: [".Desktop / Asset / Visual Media / Key art"]
-  }) || _$$eN(t, "INSTANCE");
+  }) || findFirstNodeOfType(t, "INSTANCE");
   let u = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -431,12 +431,12 @@ function e_(e) {
   let d = useSelector(e => e.mirror.sceneGraph);
   let s = _$$Z();
   t = d;
-  let u = gn({
+  let u = findNodeByCriteria({
     nodeType: "INSTANCE",
     sceneGraph: t,
     preferredName: "Next Button",
     backupNames: ["Get Started Button"]
-  }) || _$$eN(t, "INSTANCE");
+  }) || findFirstNodeOfType(t, "INSTANCE");
   _$$h(() => {
     queueMicrotask(async function () {
       u && (clearSelection(), addToSelection([u.guid]), fullscreenValue.commit(), await s({
@@ -501,15 +501,15 @@ function eC(e) {
   let s = useSelector(e => e.mirror.sceneGraph);
   let u = _$$Z();
   t = s;
-  let c = gn({
+  let c = findNodeByCriteria({
     nodeType: "FRAME",
     sceneGraph: t,
     preferredName: "Epoch / Mobile / Library A (Scrolled)",
     backupNames: ["Epoch / Mobile / Library A"]
-  }) || _$$eN(t, "FRAME");
+  }) || findFirstNodeOfType(t, "FRAME");
   _$$h(() => {
     queueMicrotask(async function () {
-      c && (await zU({
+      c && (await navigateAndSelect({
         navigate: u,
         guidToFocus: c?.guid,
         guidToSelect: c.guid
@@ -609,12 +609,12 @@ function ej(e) {
   let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$Z();
   t = l;
-  let s = gn({
+  let s = findNodeByCriteria({
     nodeType: "SECTION",
     sceneGraph: t,
     preferredName: "Creator",
     backupNames: ["Library Experience"]
-  }) || _$$eN(t, "SECTION");
+  }) || findFirstNodeOfType(t, "SECTION");
   let u = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });

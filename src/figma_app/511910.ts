@@ -18,7 +18,7 @@ import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { U as _$$U } from "../figma_app/825971";
 import { g as _$$g } from "../figma_app/481637";
-import { Qf } from "../figma_app/202626";
+import { getCurrentPage } from "../figma_app/202626";
 import { wz } from "../figma_app/532170";
 var d = l;
 let x = "no_figma_basics_panning_and_zooming_step--selectedHeaderTitle--8-xpb";
@@ -46,7 +46,7 @@ export function $$L0({
   }, [p, u, c]);
   let _ = useFullscreenReady();
   let h = useSelector(e => e.mirror.sceneGraph);
-  let m = _ && Qf(h);
+  let m = _ && getCurrentPage(h);
   let g = !!m && m.childCount > 0;
   if (useEffect(() => {
     _ && null != h && (g && (c || d) || e());

@@ -63,7 +63,7 @@ import { x as _$$x } from "../905/764527";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
 import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError } from "../figma_app/316567";
-import { Z as _$$Z } from "../905/829242";
+import { withAbortSignal } from "../905/829242";
 import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { debugState } from "../905/407919";
@@ -71,7 +71,7 @@ import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { permissionScopeHandler as _$$l3, scopeAwareFunction as _$$nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { LOADING_STATUS } from "../905/989992";
-import { oy as _$$oy } from "../figma_app/964367";
+import { serializeJSX } from "../figma_app/964367";
 import { k9 as _$$k4 } from "../905/182598";
 import { Q as _$$Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
@@ -959,7 +959,7 @@ let eU = async ({
     clientLifecycleId: i
   };
   try {
-    let e = await _$$Z(cortexAPI.slides.generateOutline({
+    let e = await withAbortSignal(cortexAPI.slides.generateOutline({
       description,
       deckOptions
     }, a), t.signal);
@@ -1091,7 +1091,7 @@ let tt = async ({
         }
       }
     }));
-    let t = await _$$Z(cortexAPI.slides.createDeckFromOutline({
+    let t = await withAbortSignal(cortexAPI.slides.createDeckFromOutline({
       outline,
       layouts: Object.fromEntries(Object.entries(layouts).map(([e, t]) => [e, {
         jsx: t.jsx,
@@ -1194,7 +1194,7 @@ let tt = async ({
         outline
       }));
     }
-    await _$$Z(Promise.all(f), e.signal);
+    await withAbortSignal(Promise.all(f), e.signal);
     fullscreenValue.commit();
     e.signal.aborted || (debugState.dispatch(VisualBellActions.dequeue({
       matchType: eP
@@ -1229,7 +1229,7 @@ let tt = async ({
 async function ti(e) {
   if (!e) return null;
   try {
-    let t = await _$$oy(e, {
+    let t = await serializeJSX(e, {
       excludeVectorData: !0,
       onlyIncludeTopPaint: !0,
       excludeImageData: !0,
@@ -1285,7 +1285,7 @@ async function tl({
     id: e.guid,
     text: e.textContent
   }));
-  let d = await _$$oy(a, {
+  let d = await serializeJSX(a, {
     strict: !1
   });
   Vm(e, createElement(_$$A2));
@@ -1293,7 +1293,7 @@ async function tl({
     ks(e);
   };
   try {
-    let e = await _$$Z(cortexAPI.shared.adjustText({
+    let e = await withAbortSignal(cortexAPI.shared.adjustText({
       action: {
         type: "REPLACE_SLIDE_CONTENT",
         slideContent: t,

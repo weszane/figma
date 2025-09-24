@@ -7,7 +7,7 @@ import { sg } from '../905/859698';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { librariesAPI } from '../905/939602';
 import { teamLibraryCache } from '../figma_app/80990';
-import { Yi } from '../figma_app/164212';
+import { findCommonStateGroupId } from '../figma_app/164212';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { uQ } from '../figma_app/311375';
 import { getContainingStateGroupId } from '../figma_app/505098';
@@ -164,7 +164,7 @@ export function $$x0(e, t) {
     if (t.status === 'loaded') {
       let r = t.result.dataLocation === 'temp-scene';
       let n = t.result.dataComponentId ?? '';
-      let i = r ? t.result.dataStateGroupId : Yi([n], e) ?? getContainingStateGroupId(e, [n]);
+      let i = r ? t.result.dataStateGroupId : findCommonStateGroupId([n], e) ?? getContainingStateGroupId(e, [n]);
       let a = r ? $$N5(n) : e.get(n);
       return t.result.isVariant && i ? {
         backingSymbol: a,

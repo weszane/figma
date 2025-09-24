@@ -13,7 +13,7 @@ import { ImageBackedLoading } from "../figma_app/858013";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { setupPlaybackHandler, PluginAction } from "../905/656545";
-import { am } from "../figma_app/430563";
+import { handleFileLibrarySubscription } from "../figma_app/430563";
 import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
 import { getSelectedFile } from "../905/766303";
@@ -498,7 +498,7 @@ export function $$ef0({
       editingFileKey: T?.key,
       libraryKeyToSwapFrom: e,
       libraryKeyToSwapTo: R
-    }), M(N, L), i(hideModal()), T && R && j(e) && i(am({
+    }), M(N, L), i(hideModal()), T && R && j(e) && i(handleFileLibrarySubscription({
       libraryFileSubscription: {
         file_key: T.key,
         library_key: R,

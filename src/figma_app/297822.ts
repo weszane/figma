@@ -8,7 +8,7 @@ import { globalPerfTimer } from "../905/542194";
 import { getProductType } from "../figma_app/314264";
 import { wg } from "../figma_app/101956";
 import { openFileKeyAtom } from "../figma_app/516028";
-import { PE } from "../figma_app/251115";
+import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { Jc, Sn } from "../905/946805";
 import { rE } from "../figma_app/604494";
@@ -24,7 +24,7 @@ export function $$b0() {
   let r = useAtomWithSubscription(rE);
   let a = r?.source || "";
   let o = $$L14();
-  let u = PE();
+  let u = hasJubileePermissionForDesign();
   return useCallback(({
     quickActionsSessionId: r,
     quickActionsQueryId: n,

@@ -144,7 +144,7 @@ import { cq } from '../905/794154';
 import { K as _$$K } from '../905/799615';
 import _require from '../905/802325';
 import { j as _$$j2 } from '../905/813868';
-import { Z as _$$Z3 } from '../905/829242';
+import { withAbortSignal } from '../905/829242';
 import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { Um } from '../905/848862';
@@ -390,7 +390,7 @@ import { T as _$$T6 } from '../figma_app/949105';
 import { mD } from '../figma_app/955528';
 import { O as _$$O5 } from '../figma_app/959385';
 import { fJ, x0 } from '../figma_app/963341';
-import { oy as _$$oy, LZ } from '../figma_app/964367';
+import { serializeJSX, deserializeJSX } from '../figma_app/964367';
 import { getSelectedEditorType, getCurrentFileType, isWhiteboardFileType, isDevHandoffEditorType, getEditorTypeOrNull, getEditorTypeFromView } from '../figma_app/976749';
 import { gH } from '../figma_app/985200';
 import { ah as _$$ah, EG, Hr, J8 } from '../figma_app/995580';
@@ -3818,7 +3818,7 @@ function aN() {
         loaded: 1,
         total: nodes.length
       }), ab()(nodes, 10))) {
-        let s = await _$$Z3(r ? r(e) : aA(e, i), n);
+        let s = await withAbortSignal(r ? r(e) : aA(e, i), n);
         if (n.aborted) return {};
         for (let e of s) {
           if (e) {
@@ -5769,7 +5769,7 @@ async function sz(e, t, i, r, n, a, s, o) {
   let {
     node,
     issues
-  } = await LZ(i, {
+  } = await deserializeJSX(i, {
     originalSize: {
       x: n,
       y: a
@@ -6158,7 +6158,7 @@ async function sJ(e, t, i) {
     try {
       let {
         node
-      } = await LZ(e, {
+      } = await deserializeJSX(e, {
         originalSize: {
           x: i.size.x,
           y: i.size.y
@@ -6293,7 +6293,7 @@ let sZ = async ({
   } = o;
   try {
     i = await sH(a, t.node.parentNode ?? s, n, width, height, base64, mimeType);
-    let r = await _$$oy(t.node, {
+    let r = await serializeJSX(t.node, {
       normalizePxToRange01: !0,
       excludeImageData: !0,
       excludeVectorData: !0

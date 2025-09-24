@@ -25,7 +25,7 @@ import { jT, Zk } from '../figma_app/626177';
 import { Wv } from '../figma_app/711157';
 import { DE, fn } from '../figma_app/811257';
 import { generateRecordingKey } from '../figma_app/878298';
-import { Go, gZ, LZ, oy } from '../figma_app/964367';
+import { reconcileJSX, getReactFunctionComponentDefinition, deserializeJSX, serializeJSX } from '../figma_app/964367';
 let E = {
   layout: 'Include layout properties',
   rendering: 'Include rendering properties',
@@ -73,7 +73,7 @@ export function $$A0({
   let er = useCallback(async e => {
     if (ee) {
       try {
-        let t = await oy(e, {
+        let t = await serializeJSX(e, {
           ...ee,
           flavor: G,
           filterFunction: e => e.visible,
@@ -88,7 +88,7 @@ export function $$A0({
         O(t.styleInfoByName);
         let s = e.isInstance ? getSingletonSceneGraph().get(e.symbolId) : e;
         if (!ee.ignoreFetchingComponentData && s && (_$$B(e) || e.isStateGroup || e.isInstance)) {
-          let e = await gZ(s, {
+          let e = await getReactFunctionComponentDefinition(s, {
             serializeAllVariants: !0
           });
           let t = Array.from(new Set(e.prefixTypes)).join('\n');
@@ -125,12 +125,12 @@ export function $$A0({
       if (Q) {
         let s = getSingletonSceneGraph().get(Q);
         if (!s) throw new Error('Node not found');
-        await Go({
+        await reconcileJSX({
           jsxStr: e,
           node: s,
           options: t
         });
-      } else if (!(await LZ(e, t)).node) {
+      } else if (!(await deserializeJSX(e, t)).node) {
         throw new Error('Couldn\'t parse JSX');
       }
     } catch (e) {

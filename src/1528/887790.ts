@@ -7,8 +7,8 @@ import { A } from "../6828/523860";
 import { A as _$$A } from "../6828/85206";
 import { z } from "../905/284530";
 import { usePlaygroundSceneGraph } from "../figma_app/722362";
-import { O2, OE } from "../figma_app/164212";
-import { nj } from "../figma_app/626952";
+import { PanelWidth, DefinitionAssignment } from "../figma_app/164212";
+import { useSingleNodePropDefinitions } from "../figma_app/626952";
 import { qC, tO } from "../figma_app/545190";
 import { iN, NA } from "../figma_app/760428";
 import { S as _$$S } from "../905/459477";
@@ -61,7 +61,7 @@ function N({
     allStateVariantProps,
     backingStateVariantProps,
     statePropertyValues
-  } = nj(t, e, n, p);
+  } = useSingleNodePropDefinitions(t, e, n, p);
   return typedPropDefsExcludingHidden.length || variantPropDefs.length ? jsx(u, {
     titleClassName: "playground_props_section--bubbledPropsTitle--8SBPC",
     isInitiallyOpen: typedPropDefsExcludingHidden.length < qC,
@@ -70,7 +70,7 @@ function N({
       shouldHideButtons: !0,
       isInComponentPlayground: !0,
       instanceAndSublayerGUIDs: [t],
-      containerWide: o === O2.WIDE,
+      containerWide: o === PanelWidth.WIDE,
       recordingKey: s,
       instanceNameDisplayOverride: NA.NAME_ONLY
     }),
@@ -89,7 +89,7 @@ function N({
       onSelectedPropertyValueHistoryChange: d,
       onTypedPropChange: c,
       productComponentGUID: n,
-      propDimension: OE.ASSIGNMENT,
+      propDimension: DefinitionAssignment.ASSIGNMENT,
       recordingKey: s,
       sceneGraph: l,
       splitVariantAndTypedProps: !1,
@@ -124,7 +124,7 @@ export function $$y0({
     allStateVariantProps,
     backingStateVariantProps,
     statePropertyValues
-  } = nj(n ?? "", e ?? {}, r, S);
+  } = useSingleNodePropDefinitions(n ?? "", e ?? {}, r, S);
   let A = useMemo(() => T && e[n]?.bubbledNestedInstanceGUIDs || [], [e, T, n]);
   return x ? x.shouldHideError ? null : jsxs(Fragment, {
     children: [jsx("div", {
@@ -158,7 +158,7 @@ export function $$y0({
       onSelectedPropertyValueHistoryChange: b,
       onTypedPropChange: C,
       productComponentGUID: r,
-      propDimension: OE.ASSIGNMENT,
+      propDimension: DefinitionAssignment.ASSIGNMENT,
       recordingKey: c,
       sceneGraph: i,
       splitVariantAndTypedProps: !!s,

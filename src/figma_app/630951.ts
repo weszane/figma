@@ -1,45 +1,127 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { l as _$$l } from "../905/716947";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { useFigmaLibrariesEnabled } from "../figma_app/657017";
-import { getCurrentHubFileVersionName } from "../905/71785";
-import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
-import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
-import { D } from "../905/347702";
-import { useSubscribedLibraries, LibrarySubscriptionType } from "../figma_app/155728";
-let $$_4 = "ui_kits_tooltip_onboarding_key";
-let $$h7 = D(e => 22 !== e.length && !e.match(/\D/));
-export function $$m0(e) {
-  return useMemo(() => e && $$h7(e) ? e : null, [e]);
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+
+import { getCurrentHubFileVersionName } from '../905/71785'
+import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677'
+import { useAtomWithSubscription } from '../figma_app/27355'
+import { LibrarySubscriptionType, useSubscribedLibraries } from '../figma_app/155728'
+import { COMMUNITY_LIBRARY_FILE } from '../figma_app/633080'
+
+import { useFigmaLibrariesEnabled } from '../figma_app/657017'
+// Types for better type safety
+interface Publisher {
+  name: string
+  profile_handle: string
 }
-export function $$g3(e) {
-  let t = getCurrentHubFileVersionName(e);
-  let {
+
+interface LibraryFile {
+  id: string
+  thumbnail_url: string
+  library_key?: string
+  publisher: Publisher
+}
+
+interface TransformedLibraryFile {
+  name: string
+  key: string
+  type: typeof COMMUNITY_LIBRARY_FILE
+  thumbnail_url: string
+  library_key: string
+  author_name: string
+  author_handle: string
+}
+
+interface LibraryData {
+  file: TransformedLibraryFile
+  components: any[]
+  stateGroups: any[]
+  styles: any[]
+  variables: any[]
+  variableSets: any[]
+}
+
+interface LibraryWithCounts {
+  library_file_key: string
+  library_file_name: string
+  thumbnail_url: string
+  num_components: number
+  num_state_groups: number
+  num_styles: number
+  num_variable_collections: number
+  num_variables: number
+  num_module_assets: number
+  num_library_assets: number
+  type: typeof COMMUNITY_LIBRARY_FILE
+  library_key: string
+  author_name: string
+  author_handle: string
+}
+
+interface UiKitStatus {
+  hasAnyUiKit: boolean
+  status: 'loading' | 'loaded'
+}
+
+// Constants
+export const uiKitsTooltipSymbol = 'ui_kits_tooltip_onboarding_key'
+
+/**
+ * Checks if a string is a valid library key (not 22 characters long and contains only digits).
+ * Original: $$h7
+ */
+export const isValidLibraryKey = (key: string): boolean => key.length !== 22 && !key.match(/\D/)
+
+/**
+ * Hook to validate and memoize a library key.
+ * Original: $$m0
+ */
+export function useValidLibraryKey(key: string | null | undefined): string | null {
+  return useMemo(() => key && isValidLibraryKey(key) ? key : null, [key])
+}
+
+/**
+ * Transforms a library file object into a standardized format for community libraries.
+ * Original: $$g3
+ */
+export function transformCommunityLibraryFile(file: LibraryFile): TransformedLibraryFile {
+  const name = getCurrentHubFileVersionName(file)
+  const {
     id,
     thumbnail_url,
     library_key,
-    publisher
-  } = e;
+    publisher,
+  } = file
   return {
-    name: t,
+    name,
     key: id,
     type: COMMUNITY_LIBRARY_FILE,
     thumbnail_url,
-    library_key: library_key ?? _$$l(""),
+    library_key: library_key ?? '',
     author_name: publisher.name,
-    author_handle: publisher.profile_handle
-  };
+    author_handle: publisher.profile_handle,
+  }
 }
-export function $$f1(e) {
-  let {
+
+/**
+ * Transforms a library file object from a different source into a standardized format.
+ * Original: $$f1
+ */
+export function transformLibraryFile(file: {
+  library_file_name: string
+  library_file_key: string
+  thumbnail_url: string
+  library_key: string
+  author_name: string
+  author_handle: string
+}): TransformedLibraryFile {
+  const {
     library_file_name,
     library_file_key,
     thumbnail_url,
     library_key,
     author_name,
-    author_handle
-  } = e;
+    author_handle,
+  } = file
   return {
     name: library_file_name,
     key: library_file_key,
@@ -47,27 +129,32 @@ export function $$f1(e) {
     thumbnail_url,
     library_key,
     author_name,
-    author_handle
-  };
+    author_handle,
+  }
 }
-export function $$E5(e) {
-  let {
+
+/**
+ * Transforms library data by adding counts of various assets.
+ * Original: $$E5
+ */
+export function transformLibraryWithCounts(data: LibraryData): LibraryWithCounts {
+  const {
     file,
     components,
     stateGroups,
     styles,
     variables,
-    variableSets
-  } = e;
-  let {
+    variableSets,
+  } = data
+  const {
     name,
     key,
     type,
     thumbnail_url,
     library_key,
     author_name,
-    author_handle
-  } = t;
+    author_handle,
+  } = file
   return {
     library_file_key: key,
     library_file_name: name,
@@ -82,43 +169,71 @@ export function $$E5(e) {
     type,
     library_key,
     author_name,
-    author_handle
-  };
-}
-export function $$y2() {
-  let e = useFigmaLibrariesEnabled();
-  let t = useSubscribedLibraries();
-  let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
-  return e ? "loading" === t.status ? {
-    hasAnyUiKit: !1,
-    status: "loading"
-  } : t.data && "loaded" === t.status ? {
-    hasAnyUiKit: t.data.some(e => r.has(e.libraryKey)),
-    status: "loaded"
-  } : {
-    hasAnyUiKit: !1,
-    status: "loaded"
-  } : {
-    hasAnyUiKit: !1,
-    status: "loaded"
-  };
-}
-export function $$b6() {
-  let e = useSubscribedLibraries();
-  let t = useSelector(e => Object.keys(e.library.local.components).length);
-  let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
-  if (e.data && "loaded" === e.status) {
-    var n;
-    n = e.data;
-    return !!n?.some(e => !r.has(e.libraryKey) && e.subscriptionType !== LibrarySubscriptionType.COMMUNITY) || t > 0;
+    author_handle,
   }
-  return !1;
 }
-export const $Q = $$m0;
-export const GS = $$f1;
-export const I7 = $$y2;
-export const N4 = $$g3;
-export const RJ = $$_4;
-export const hT = $$E5;
-export const oe = $$b6;
-export const wJ = $$h7;
+
+/**
+ * Hook to determine if there are any UI kits available based on subscriptions and enabled libraries.
+ * Original: $$y2
+ */
+export function useHasAnyUiKit(): UiKitStatus {
+  const librariesEnabled = useFigmaLibrariesEnabled()
+  const subscribedLibraries = useSubscribedLibraries()
+  const resourceDataAndPresetKeys = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom)
+
+  if (!librariesEnabled) {
+    return {
+      hasAnyUiKit: false,
+      status: 'loaded',
+    }
+  }
+
+  if (subscribedLibraries.status === 'loading') {
+    return {
+      hasAnyUiKit: false,
+      status: 'loading',
+    }
+  }
+
+  if (subscribedLibraries.data && subscribedLibraries.status === 'loaded') {
+    return {
+      hasAnyUiKit: subscribedLibraries.data.some(lib => resourceDataAndPresetKeys.has(lib.libraryKey)),
+      status: 'loaded',
+    }
+  }
+
+  return {
+    hasAnyUiKit: false,
+    status: 'loaded',
+  }
+}
+
+/**
+ * Hook to check if there are subscribed libraries (excluding community) or local components.
+ * Original: $$b6
+ */
+export function useHasSubscribedLibrariesOrLocalComponents(): boolean {
+  const subscribedLibraries = useSubscribedLibraries()
+  const localComponentsCount = useSelector<AppState, number>((state) => Object.keys(state.library.local.components).length)
+  const resourceDataAndPresetKeys = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom)
+
+  if (subscribedLibraries.data && subscribedLibraries.status === 'loaded') {
+    const hasSubscribedNonCommunity = subscribedLibraries.data.some(
+      lib => !resourceDataAndPresetKeys.has(lib.libraryKey) && lib.subscriptionType !== LibrarySubscriptionType.COMMUNITY,
+    )
+    return hasSubscribedNonCommunity || localComponentsCount > 0
+  }
+
+  return false
+}
+
+// Legacy exports for backward compatibility (refactored names)
+export const $Q = useValidLibraryKey
+export const GS = transformLibraryFile
+export const I7 = useHasAnyUiKit
+export const N4 = transformCommunityLibraryFile
+export const RJ = uiKitsTooltipSymbol
+export const hT = transformLibraryWithCounts
+export const oe = useHasSubscribedLibrariesOrLocalComponents
+export const wJ = isValidLibraryKey

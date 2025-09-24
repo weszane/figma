@@ -7,10 +7,10 @@ import { h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { VF, uY } from "../figma_app/989514";
 import { b } from "../figma_app/5657";
-import { eN } from "../figma_app/202626";
+import { findFirstNodeOfType } from "../figma_app/202626";
 export function $$_0(e) {
   h(() => {
-    let t = eN(getSingletonSceneGraph(), "FRAME");
+    let t = findFirstNodeOfType(getSingletonSceneGraph(), "FRAME");
     if (e.hasUiKits && null != t) {
       e.skip && e.skip();
       return;

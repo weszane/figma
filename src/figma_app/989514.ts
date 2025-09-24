@@ -7,7 +7,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { Ai } from "../figma_app/242339";
+import { checkUserAccess } from "../figma_app/242339";
 import { CR, NJ } from "../figma_app/419216";
 import { x } from "../figma_app/849451";
 import { gZ, kO, Ph, wV, wx, h_, qr, R3, el, N2, Lq, b, hF, q4, bI } from "../figma_app/404712";
@@ -73,7 +73,7 @@ function y(e) {
   });
 }
 export function $$b2(e) {
-  let t = Ai(["exp_cursor_bot_onboarding"]);
+  let t = checkUserAccess(["exp_cursor_bot_onboarding"]);
   let r = !e.hideCloseButton;
   return jsxs(TrackingProvider, {
     name: e.trackingContextName,

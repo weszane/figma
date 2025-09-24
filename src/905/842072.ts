@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { createVariableResConfig, mapVariableToWorkflow, searchAPIHandler } from '../905/144933';
 import { hubFileAPI } from '../905/473998';
 import { setupResourceAtomHandler, liveStoreInstance } from '../905/713695';
-import { N4 } from '../figma_app/630951';
+import { transformCommunityLibraryFile } from '../figma_app/630951';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 let d = {
   assets: {
@@ -99,7 +99,7 @@ export function $$p2(e) {
       id
     } = e;
     return {
-      file: N4(e),
+      file: transformCommunityLibraryFile(e),
       components: assets.components.filter(e => e.hub_file_id === id),
       stateGroups: assets.stateGroups.filter(e => e.hub_file_id === id),
       styles: assets.styles.filter(e => e.hub_file_id === id),

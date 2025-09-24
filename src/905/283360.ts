@@ -2,7 +2,7 @@ import { MissingRuleType } from "../905/528903";
 import { LinterCppBindings, VariableResolvedDataType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
-import { oy } from "../figma_app/964367";
+import { serializeJSX } from "../figma_app/964367";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { openFileKeyAtom } from "../figma_app/516028";
@@ -50,7 +50,7 @@ export async function $$g0(e, t, i, n, s, o, l) {
 }
 export async function $$f1(e, t, i) {
   if (1 === t.length) return t[0]?.variable.name ?? "";
-  let a = await oy(e, {
+  let a = await serializeJSX(e, {
     includeIDs: !0,
     filterFunction: e => e.visible,
     onlyIncludeTopPaint: !0

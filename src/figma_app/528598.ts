@@ -18,7 +18,7 @@ import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { K as _$$K2 } from "../figma_app/291291";
 import { yG } from "../905/859698";
-import { RR, Jr } from "../figma_app/338442";
+import { SlotSymbolType, ControlType } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { resolveVariableValue } from "../905/929949";
@@ -78,7 +78,7 @@ import { f as _$$f } from "../figma_app/884735";
 import { selectContainingInstance } from "../figma_app/505098";
 import { K as _$$K4 } from "../905/636142";
 import { c6, zJ, qU, AN, BY, Mj, FG, ID, c1, u8, bq, CS, PQ, ty, aF, n4, K8, Ro, mD, x1, hF, Zj, nt, R4, ru, Of, l1, ZS, R3, mQ, km, dW } from "../figma_app/631970";
-import { Xp, O2, FF, Rq, T1, lg, ui } from "../figma_app/164212";
+import { VARIABLE_TYPE_CONFIG, PanelWidth, createNodeFieldAlias, isValidNumberString, stringToFloat, floatToString, getDefaultStateForStateGroup } from "../figma_app/164212";
 import { AffineTransform } from "../905/583953";
 import { deepEqual } from "../905/382883";
 import { fullscreenValue } from "../figma_app/455680";
@@ -240,12 +240,12 @@ function eU(e) {
     variableType,
     requestedTypes,
     variableScope
-  } = Xp[typedPropDef.type] || {
+  } = VARIABLE_TYPE_CONFIG[typedPropDef.type] || {
     variableType: void 0,
     requestedTypes: void 0,
     variableScope: void 0
   };
-  let Y = useMemo(() => flatten(guids.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
+  let Y = useMemo(() => flatten(guids.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, SlotSymbolType.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
   let $ = !!getFeatureFlags().sts_code && !!parameterConfig;
   let X = !hideBindingButton && !!(typedPropDef.type !== ComponentPropType.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
   let J = value && "object" == typeof value && "type" in value && value.type === VariableDataType.ALIAS;
@@ -287,7 +287,7 @@ function eU(e) {
   let ec = parameterConfig?.label?.value ?? typedPropDef.name;
   let ep = jsx("div", {
     className: w()(zJ, {
-      [qU]: containerWidth === O2.RESIZABLE_SIDEBAR,
+      [qU]: containerWidth === PanelWidth.RESIZABLE_SIDEBAR,
       [AN]: typedPropDef.type === ComponentPropType.TEXT
     }),
     children: jsx("div", {
@@ -306,7 +306,7 @@ function eU(e) {
       resolvedType: variableType,
       requestedTypes,
       onComponentPropSelected: e => {
-        let t = FF(e);
+        let t = createNodeFieldAlias(e);
         permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
       },
       onVariableSelected: async e => {
@@ -339,7 +339,7 @@ function eU(e) {
         ...e,
         value: t
       });
-      if (typedPropDef.type === ComponentPropType.TEXT) return $ && parameterConfig.control === Jr.SELECT && parameterConfig ? jsx(eX, {
+      if (typedPropDef.type === ComponentPropType.TEXT) return $ && parameterConfig.control === ControlType.SELECT && parameterConfig ? jsx(eX, {
         ...e,
         value: t,
         selectConfig: parameterConfig.selectConfig
@@ -349,21 +349,21 @@ function eU(e) {
       });
       if (typedPropDef.type === ComponentPropType.NUMBER) {
         if ($) {
-          if (parameterConfig.control === Jr.SLIDER && parameterConfig.sliderConfig && null != parameterConfig.sliderConfig.min && null != parameterConfig.sliderConfig.max && null != parameterConfig.sliderConfig.step) return jsx(eW, {
+          if (parameterConfig.control === ControlType.SLIDER && parameterConfig.sliderConfig && null != parameterConfig.sliderConfig.min && null != parameterConfig.sliderConfig.max && null != parameterConfig.sliderConfig.step) return jsx(eW, {
             ...e,
             value: t,
             min: parameterConfig.sliderConfig.min,
             max: parameterConfig.sliderConfig.max,
             step: parameterConfig.sliderConfig.step
           });
-          if (parameterConfig.control === Jr.INPUT) return jsx(e$, {
+          if (parameterConfig.control === ControlType.INPUT) return jsx(e$, {
             ...e,
             value: t,
             unit: parameterConfig.inputConfig.unit?.value,
             min: parameterConfig.inputConfig.min ? parameterConfig.inputConfig.min.value : minHack,
             max: parameterConfig.inputConfig.max?.value
           });
-          if (parameterConfig.control === Jr.SELECT && parameterConfig.selectConfig.options.length > 0) return jsx(eX, {
+          if (parameterConfig.control === ControlType.SELECT && parameterConfig.selectConfig.options.length > 0) return jsx(eX, {
             ...e,
             value: t,
             selectConfig: parameterConfig.selectConfig
@@ -448,7 +448,7 @@ function eU(e) {
         requestedTypes,
         variableScope,
         onComponentPropSelected: e => {
-          let t = FF(e);
+          let t = createNodeFieldAlias(e);
           permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
         },
         onVariableSelected: async e => {
@@ -491,25 +491,25 @@ function eU(e) {
 }
 function eB(e) {
   switch (e) {
-    case O2.REGULAR:
+    case PanelWidth.REGULAR:
     case void 0:
       return u8;
-    case O2.WIDE:
+    case PanelWidth.WIDE:
       return bq;
-    case O2.UNBOUNDED:
+    case PanelWidth.UNBOUNDED:
       return CS;
-    case O2.RESIZABLE_SIDEBAR:
+    case PanelWidth.RESIZABLE_SIDEBAR:
       return PQ;
   }
 }
 function eG(e) {
   switch (e) {
-    case O2.REGULAR:
+    case PanelWidth.REGULAR:
     case void 0:
       return ty;
-    case O2.WIDE:
+    case PanelWidth.WIDE:
       return aF;
-    case O2.UNBOUNDED:
+    case PanelWidth.UNBOUNDED:
       return n4;
   }
 }
@@ -613,10 +613,10 @@ function ez({
   let [y, b] = useState(null);
   let T = isInvalidValue(e) ? 0 : Number(e);
   let I = useMemo(() => {
-    let t = !y || !Rq(y);
-    return isInvalidValue(e) || t ? T : T1(y);
+    let t = !y || !isValidNumberString(y);
+    return isInvalidValue(e) || t ? T : stringToFloat(y);
   }, [y, e, T]);
-  let S = isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : lg(T);
+  let S = isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : floatToString(T);
   let A = () => {
     if (isNotNullish(y)) {
       let e = resolveVariableValue(VariableResolvedDataType.FLOAT, I);
@@ -928,7 +928,7 @@ function eq({
           type: VariableDataType.SYMBOL_ID,
           resolvedType: VariableResolvedDataType.SYMBOL_ID,
           value: "SymbolId:" + t
-        }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
+        }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PrimaryWorkflowEnum.STATE_GROUP ? getDefaultStateForStateGroup(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
       }
     }));
     setHoveredComponentPropDef({
@@ -936,7 +936,7 @@ function eq({
       defID: ""
     });
   }, [y, c, r, b, u, preferredValues, s, E]);
-  flatten(r.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
+  flatten(r.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, SlotSymbolType.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
   let {
     modalWidth
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
@@ -947,7 +947,7 @@ function eq({
       children: jsx(_$$x, {
         disableToggle: t,
         entrypointForLogging: m,
-        fill: d === O2.UNBOUNDED,
+        fill: d === PanelWidth.UNBOUNDED,
         getInstanceSwapPickerPosition: g,
         initialPosition: h,
         instanceSwapNode: e,

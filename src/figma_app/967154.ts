@@ -6,7 +6,7 @@ import { hideDropdownAction } from "../905/929976";
 import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { qo, cn } from "../905/959568";
-import { C4 } from "../figma_app/164212";
+import { ADD_COMPONENT_PROP_DROPDOWN } from "../figma_app/164212";
 import { selectNodeFromCombinedId, generateDescription } from "../figma_app/505098";
 import { Vr } from "../figma_app/151869";
 import { i$ } from "../figma_app/150804";
@@ -69,7 +69,7 @@ export function $$T5(e) {
     dropdownShown,
     pickerShown
   } = $$b6();
-  let s = useMemo(() => dropdownShown?.type === C4, [dropdownShown]);
+  let s = useMemo(() => dropdownShown?.type === ADD_COMPONENT_PROP_DROPDOWN, [dropdownShown]);
   let d = pickerShown?.id === Wv;
   let c = $$I2(e);
   return useCallback(e => {

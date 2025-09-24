@@ -1,196 +1,257 @@
-import { useState, useEffect } from "react";
-import { getComponentInfoById } from "../figma_app/664063";
-import { z_ } from "../figma_app/338442";
-import { getFeatureFlags } from "../905/601108";
-import { trackFileEventWithStore } from "../figma_app/901889";
-import { useCurrentFileKey } from "../figma_app/516028";
-import { u as _$$u } from "../figma_app/443973";
-import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
-import { T1 } from "../figma_app/545293";
-import { B, t as _$$t } from "../figma_app/325988";
-async function _(e) {
-  let {
-    node,
-    file_key
-  } = e;
-  let n = {
+import type { TSSceneGraph } from './518682'
+import { useEffect, useState } from 'react'
+import { getFeatureFlags } from '../905/601108'
+import { generateUUIDv4 } from '../905/871474'
+import { XHR } from '../905/910117'
+import { findComponentInStateGroup, findNearestCanvas } from '../figma_app/325988'
+import { GPTSearchType } from '../figma_app/338442'
+import { suggestComponentProps } from '../figma_app/443973'
+import { useCurrentFileKey } from '../figma_app/516028'
+import { T1 } from '../figma_app/545293'
+import { getComponentInfoById } from '../figma_app/664063'
+import { trackFileEventWithStore } from '../figma_app/901889'
+
+/**
+ * Performs fragment search by exporting a thumbnail and querying the API.
+ * @param params - The parameters including node and file_key.
+ * @returns An object with fragments or undefined on error.
+ */
+async function performFragmentSearch(params: { node: any, file_key: string }): Promise<{ fragments: any[] } | undefined> {
+  const { node, file_key } = params
+  const trackingMetadata = {
     session_id: null,
     search_id: generateUUIDv4(),
-    node_id: e.node.guid
-  };
+    node_id: node.guid,
+  }
   try {
-    let e = T1(node);
-    if (!e) throw Error("Failed to export thumbnail");
+    const thumbnail = T1(node)
+    if (!thumbnail) {
+      throw new Error('Failed to export thumbnail')
+    }
+    const response = await XHR.post('/api/auto_suggest_props/fragment_search', {
+      input: {
+        type: 'image',
+        value: thumbnail,
+      },
+      file_key,
+      tracking_metadata: trackingMetadata,
+    })
     return {
-      fragments: (await XHR.post("/api/auto_suggest_props/fragment_search", {
-        input: {
-          type: "image",
-          value: e
-        },
-        file_key,
-        tracking_metadata: n
-      })).data.meta.results.map(e => ({
-        ...e,
-        type: "fig-file-fragment"
-      }))
-    };
-  } catch (e) {
-    return;
-  }
-}
-async function m(e, t, r, n, a) {
-  let s = performance.now();
-  if (!a) {
-    console.error("Could not find the open file ");
-    return {};
-  }
-  let o = r.get(e);
-  if (!o) {
-    console.error("Could not find component in scene graph: ", e);
-    return {};
-  }
-  let l = r.get(t);
-  if (!l) {
-    console.error("Could not find selected node in scene graph: ", t);
-    return {};
-  }
-  let d = B(l);
-  let c = await _({
-    type: "input-selection",
-    node: d,
-    file_key: a,
-    name: d.name
-  });
-  if (!c || 0 === c.fragments.length) {
-    console.error("No fragment search results");
-    return Promise.resolve({});
-  }
-  let u = Array.from(new Map(c.fragments.map(e => [`${e.file_key}_${e.node_id}`, e])).values());
-  let p = getComponentInfoById(o.guid, {
-    enableTsArrays: !1
-  });
-  if (!p) {
-    console.error("Could not find selected component");
-    return Promise.resolve({});
-  }
-  let m = p.key;
-  let g = [];
-  u.forEach(e => {
-    e.component_usages?.forEach(e => {
-      if (e.key === m) {
-        let n = r.get(t);
-        let i = e.stateComponentKey && n ? _$$t(e.stateComponentKey, n, r) : null;
-        let a = {};
-        let s = i?.variantProperties();
-        s && Object.entries(s).forEach(([e, t]) => {
-          a[e] = t;
-        });
-        Object.entries(e.props).forEach(([e, t]) => {
-          let r = function (e) {
-            let t = e.split("#");
-            return 2 !== t.length ? e : t.reverse().join("#");
-          }(e);
-          let n = p?.parsedDefs.find(e => e.rawProp === r);
-          a[r] = n ? function (e, t) {
-            switch (t) {
-              case "BOOLEAN":
-                return "true" === e;
-              case "NUMBER":
-                return parseFloat(e);
-              default:
-                return e;
-            }
-          }(t, n.def.type) : t;
-        });
-        g.push(a);
-      }
-    });
-  });
-  let f = function (e) {
-    let t = {};
-    e.forEach(e => {
-      Object.entries(e).forEach(([e, r]) => {
-        t[e] || (t[e] = new Map());
-        let n = t[e].get(r) || 0;
-        t[e].set(r, n + 1);
-      });
-    });
-    let r = {};
-    for (let e in t) {
-      let n = t[e] ? Array.from(t[e].entries()).reduce((e, t) => t[1] > e[1] ? t : e)[0] : void 0;
-      n && (r[e] = n);
+      fragments: response.data.meta.results.map((result: any) => ({
+        ...result,
+        type: 'fig-file-fragment',
+      })),
     }
-    return r;
-  }(g);
-  return (n("autosuggest_props_fs_perf", {
-    totalMs: Math.round(performance.now() - s),
-    numFragments: c.fragments.length,
-    numMatchingComponents: g.length,
-    matchingComponentsUsedProps: JSON.stringify(g),
-    suggestedProps: JSON.stringify(f),
-    componentKey: p.key
-  }), 0 === Object.keys(f).length) ? Promise.resolve({}) : {
-    componentProps: f
-  };
+  }
+  catch {
+    // Error handled silently as per original logic
+    return undefined
+  }
 }
-let g = {};
-export function $$f1(e, t, r, c) {
-  let u = useCurrentFileKey();
-  let p = trackFileEventWithStore();
-  let [_, h] = useState(g);
-  let [f, y] = useState(!1);
+
+/**
+ * Aggregates the most common property values from component usages.
+ * @param usages - Array of usage objects with properties.
+ * @returns An object with the most frequent values for each property.
+ */
+function aggregateCommonProps(usages: any[]): Record<string, any> {
+  const propCounts: Record<string, Map<any, number>> = {}
+  usages.forEach((usage) => {
+    Object.entries(usage).forEach(([prop, value]) => {
+      if (!propCounts[prop]) {
+        propCounts[prop] = new Map()
+      }
+      const count = propCounts[prop].get(value) || 0
+      propCounts[prop].set(value, count + 1)
+    })
+  })
+  const aggregated: Record<string, any> = {}
+  for (const prop in propCounts) {
+    const mostFrequent = Array.from(propCounts[prop].entries()).reduce((a, b) => (b[1] > a[1] ? b : a))
+    if (mostFrequent) {
+      aggregated[prop] = mostFrequent[0]
+    }
+  }
+  return aggregated
+}
+
+/**
+ * Processes component usages to extract and transform properties.
+ * @param usages - Component usages array.
+ * @param selectedNodeId - ID of the selected node.
+ * @param sceneGraph - The scene graph map.
+ * @param componentInfo - Info of the target component.
+ * @returns Array of processed property objects.
+ */
+function processComponentUsages(usages: any[], selectedNodeId: string, sceneGraph: TSSceneGraph, componentInfo: any): any[] {
+  const processed: any[] = []
+  usages.forEach((usage) => {
+    if (usage.key === componentInfo.key) {
+      const selectedNode = sceneGraph.get(selectedNodeId)
+      const stateComponent = usage.stateComponentKey && selectedNode ? findComponentInStateGroup(usage.stateComponentKey, selectedNode, sceneGraph) : null
+      const props: Record<string, any> = {}
+      const variantProps = stateComponent?.variantProperties()
+      if (variantProps) {
+        Object.entries(variantProps).forEach(([key, value]) => {
+          props[key] = value
+        })
+      }
+      Object.entries(usage.props).forEach(([prop, value]) => {
+        const normalizedProp = prop.split('#').length === 2 ? prop.split('#').reverse().join('#') : prop
+        const def = componentInfo?.parsedDefs.find((d: any) => d.rawProp === normalizedProp)
+        props[normalizedProp] = def
+          ? (() => {
+              switch (def.def.type) {
+                case 'BOOLEAN':
+                  return value === 'true'
+                case 'NUMBER':
+                  return parseFloat(value as string)
+                default:
+                  return value
+              }
+            })()
+          : value
+      })
+      processed.push(props)
+    }
+  })
+  return processed
+}
+
+/**
+ * Autosuggests component props using fragment search.
+ * @param componentId - ID of the component.
+ * @param selectedNodeId - ID of the selected node.
+ * @param sceneGraph - The scene graph map.
+ * @param trackEvent - Function to track events.
+ * @param fileKey - The file key.
+ * @returns Promise resolving to suggested props or empty object.
+ */
+async function autosuggestPropsViaFS(
+  componentId: string,
+  selectedNodeId: string,
+  sceneGraph: TSSceneGraph,
+  trackEvent: (event: string, data: any) => void,
+  fileKey?: string,
+): Promise<{ componentProps?: Record<string, any> }> {
+  const startTime = performance.now()
+  if (!fileKey) {
+    console.error('Could not find the open file')
+    return {}
+  }
+  const component = sceneGraph.get(componentId)
+  if (!component) {
+    console.error('Could not find component in scene graph:', componentId)
+    return {}
+  }
+  const selectedNode = sceneGraph.get(selectedNodeId)
+  if (!selectedNode) {
+    console.error('Could not find selected node in scene graph:', selectedNodeId)
+    return {}
+  }
+  const canvas = findNearestCanvas(selectedNode)
+  const fragmentResult = await performFragmentSearch({
+    node: canvas,
+    file_key: fileKey,
+  })
+  if (!fragmentResult || fragmentResult.fragments.length === 0) {
+    console.error('No fragment search results')
+    return {}
+  }
+  const uniqueFragments = Array.from(new Map(fragmentResult.fragments.map(f => [`${f.file_key}_${f.node_id}`, f])).values())
+  const componentInfo = getComponentInfoById(component.guid, { enableTsArrays: false })
+  if (!componentInfo) {
+    console.error('Could not find selected component')
+    return {}
+  }
+  const processedUsages = processComponentUsages(uniqueFragments.flatMap(f => f.component_usages || []), selectedNodeId, sceneGraph, componentInfo)
+  const suggestedProps = aggregateCommonProps(processedUsages)
+  trackEvent('autosuggest_props_fs_perf', {
+    totalMs: Math.round(performance.now() - startTime),
+    numFragments: fragmentResult.fragments.length,
+    numMatchingComponents: processedUsages.length,
+    matchingComponentsUsedProps: JSON.stringify(processedUsages),
+    suggestedProps: JSON.stringify(suggestedProps),
+    componentKey: componentInfo.key,
+  })
+  return Object.keys(suggestedProps).length === 0 ? {} : { componentProps: suggestedProps }
+}
+
+/**
+ * Custom hook for autosuggesting component props.
+ * @param componentId - ID of the component.
+ * @param selectedNodeId - ID of the selected node.
+ * @param sceneGraph - The scene graph map.
+ * @param abortSignal - Abort signal for cancellation.
+ * @returns Object with autosuggested values and loading state.
+ */
+export function useAutosuggestProps(
+  componentId: string,
+  selectedNodeId: string,
+  abortSignal: boolean,
+  sceneGraph: TSSceneGraph | null,
+): { autosuggestedValues: any, isLoading: boolean } {
+  const fileKey = useCurrentFileKey()
+  const trackEvent = trackFileEventWithStore()
+  const [autosuggestedValues, setAutosuggestedValues] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
-    if (!r || !c) {
-      y(!1);
-      return;
+    if (!sceneGraph || !abortSignal) {
+      setIsLoading(false)
+      return
     }
-    h(g);
-    y(!0);
-    let n = new AbortController();
-    (function (e, t, r, n, i, s) {
-      let o;
-      switch ($$E0()) {
-        case z_.GPT:
-          o = _$$u(t, e, r, n, i);
-          break;
-        case z_.FS:
-          o = m(t, e, r, i, s);
-          break;
+    setAutosuggestedValues({})
+    setIsLoading(true)
+    const controller = new AbortController()
+    const performAutosuggest = async () => {
+      let result: any = {}
+      switch (getAutosuggestSearchType()) {
+        case GPTSearchType.GPT:
+          result = await suggestComponentProps(selectedNodeId, componentId, sceneGraph, controller.signal, trackEvent)
+          break
+        case GPTSearchType.FS:
+          result = await autosuggestPropsViaFS(componentId, selectedNodeId, sceneGraph, trackEvent, fileKey ?? undefined)
+          break
         default:
-          o = Promise.resolve({});
+          result = {}
       }
-      return o;
-    })(e, t, c, n.signal, p, u ?? void 0).then(e => {
-      if (!n.signal.aborted) {
-        h(e);
-        let r = c.get(t);
-        let n = r ? getComponentInfoById(r.guid, {
-          enableTsArrays: !1
-        }) : null;
-        0 === Object.keys(e).length && p("autosuggest_props_no_suggestions", {
-          fileKey: u,
-          componentKey: n?.key,
-          guid: r?.guid,
-          method: getFeatureFlags().anticipation_props_fs ? z_.FS : z_.GPT
-        });
+      if (!controller.signal.aborted) {
+        setAutosuggestedValues(result)
+        const node = sceneGraph.get(selectedNodeId)
+        const componentInfo = node ? getComponentInfoById(node.guid, { enableTsArrays: false }) : null
+        if (Object.keys(result).length === 0) {
+          trackEvent('autosuggest_props_no_suggestions', {
+            fileKey,
+            componentKey: componentInfo?.key,
+            guid: node?.guid,
+            method: getAutosuggestSearchType(),
+          })
+        }
       }
-    }).catch(e => {
-      "AbortError" !== e.name && console.error(`Error getting results: ${e}`);
+    }
+    performAutosuggest().catch((error) => {
+      if (error.name !== 'AbortError') {
+        console.error(`Error getting results: ${error}`)
+      }
     }).finally(() => {
-      n.signal.aborted || y(!1);
-    });
+      if (!controller.signal.aborted) {
+        setIsLoading(false)
+      }
+    })
     return () => {
-      n && n.abort();
-    };
-  }, [r, e, t]);
-  return {
-    autosuggestedValues: _,
-    isLoading: f
-  };
+      controller.abort()
+    }
+  }, [sceneGraph, componentId, selectedNodeId])
+  return { autosuggestedValues, isLoading }
 }
-export function $$E0() {
-  return getFeatureFlags().anticipation_props_fs ? z_.FS : z_.GPT;
+
+/**
+ * Gets the current autosuggest search type based on feature flags.
+ * @returns The search type.
+ */
+export function getAutosuggestSearchType(): GPTSearchType {
+  return getFeatureFlags().anticipation_props_fs ? GPTSearchType.FS : GPTSearchType.GPT
 }
-export const p3 = $$E0;
-export const V2 = $$f1;
+
+export const p3 = getAutosuggestSearchType
+export const V2 = useAutosuggestProps

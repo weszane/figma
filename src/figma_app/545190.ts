@@ -51,31 +51,31 @@ import { checkCondition } from '../figma_app/111825';
 import { P as _$$P } from '../figma_app/120873';
 import { _f, D1, i$, OC, ow } from '../figma_app/150804';
 import { mY, Px, R1, u3, y$ } from '../figma_app/152690';
-import { iz, O2, OE, wd, wh, xb, zn } from '../figma_app/164212';
+import { getVariableSetErrorMessage, PanelWidth, DefinitionAssignment, computeBackingGUID, DROPDOWN_HEIGHT, getComponentPropDisplayName, renderComponentPropIcon } from '../figma_app/164212';
 import { D5, Tj } from '../figma_app/218448';
 import { c$, ms } from '../figma_app/236327';
 import { VariableIdHandler } from '../figma_app/243058';
 import { JV } from '../figma_app/260445';
-import { bk, Jj, Po, q1, xJ, zb, zh } from '../figma_app/264776';
+import { deleteProperties, findBestMatchingState, withDeferredVariantPropDefBackfill, renameProperty, EM_DASH, trackStateGroupAnalytics, formatPropertyValues } from '../figma_app/264776';
 import { aq } from '../figma_app/305626';
 import { Pe } from '../figma_app/323320';
-import { D as _$$D } from '../figma_app/335489';
-import { uN } from '../figma_app/338442';
+import { groupInstancesByState } from '../figma_app/335489';
+import { InstanceType } from '../figma_app/338442';
 import { hg } from '../figma_app/355754';
 import { Aw } from '../figma_app/383828';
 import { setSelectedTypedPropDefId } from '../figma_app/389091';
 import { eF as _$$eF } from '../figma_app/394327';
 import { ty as _$$ty } from '../figma_app/406976';
 import { fullscreenValue } from '../figma_app/455680';
-import { Dm, Vg } from '../figma_app/460003';
+import { applyAutoSuggestedProps, findSingleInstanceId } from '../figma_app/460003';
 import { selectContainingStateGroupId } from '../figma_app/505098';
 import { c as _$$c } from '../figma_app/528598';
 import { aR, pf } from '../figma_app/530362';
 import { S as _$$S } from '../figma_app/552746';
-import { V2 } from '../figma_app/578955';
+import { useAutosuggestProps } from '../figma_app/578955';
 import { g as _$$g } from '../figma_app/594353';
 import { eP as _$$eP } from '../figma_app/613182';
-import { an, RB } from '../figma_app/626952';
+import { useComponentPropDefinitions, useComponentBackingGUID } from '../figma_app/626952';
 import { aO, BY, c6, FG, g1, K8, Me, p3, Ro, tP, zJ } from '../figma_app/631970';
 import { ZE } from '../figma_app/689119';
 import { useSceneGraphSelector } from '../figma_app/722362';
@@ -115,7 +115,7 @@ function A({
       variant: 'secondary',
       disabled: u,
       onClick: () => {
-        Dm(t, e, r, l);
+        applyAutoSuggestedProps(t, e, r, l);
       },
       children: jsxs('span', {
         className: 'props_section--autosuggestButtonText--S97lu',
@@ -244,7 +244,7 @@ function ew(e) {
     return {
       pickerShown: e.pickerShown,
       selectedComponentPropDefId: e.selectedComponentPropDefId,
-      componentWithPropDefSelected: componentPropDef.kind === uN.TYPED && r.some(e => e.explicitDefID === componentPropDef.explicitDefID),
+      componentWithPropDefSelected: componentPropDef.kind === InstanceType.TYPED && r.some(e => e.explicitDefID === componentPropDef.explicitDefID),
       allStates: ow(e) ?? [],
       propertySortOrder: OC(e) ?? []
     };
@@ -270,17 +270,17 @@ function ew(e) {
   let H = useRef(null);
   let z = useRef(null);
   let W = useRef(null);
-  let J = componentPropDef.kind === uN.TYPED ? componentPropDef.explicitDefID : void 0;
-  let Z = componentPropDef.kind === uN.TYPED ? componentPropDef.type : void 0;
-  let Q = componentPropDef.kind === uN.VARIANT ? componentPropDef.values : void 0;
+  let J = componentPropDef.kind === InstanceType.TYPED ? componentPropDef.explicitDefID : void 0;
+  let Z = componentPropDef.kind === InstanceType.TYPED ? componentPropDef.type : void 0;
+  let Q = componentPropDef.kind === InstanceType.VARIANT ? componentPropDef.values : void 0;
   let ea = selectedComponentPropDefId && selectedComponentPropDefId === J;
   let es = G !== null;
-  let el = useMemo(() => pickerShown?.id === aR && (componentPropDef.kind === uN.TYPED ? pickerShown.data.defID === J : pickerShown.data.name === componentPropDef.name), [componentPropDef, pickerShown, J]);
+  let el = useMemo(() => pickerShown?.id === aR && (componentPropDef.kind === InstanceType.TYPED ? pickerShown.data.defID === J : pickerShown.data.name === componentPropDef.name), [componentPropDef, pickerShown, J]);
   useEffect(() => {
     es && inputRef.current?.select();
   }, [es, inputRef]);
   let eu = () => {
-    G ? (V(null), componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user('edit-prop-def-name', () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && permissionScopeHandler.user('edit-variant-prop-name', () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
+    G ? (V(null), componentPropDef.kind === InstanceType.TYPED ? permissionScopeHandler.user('edit-prop-def-name', () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === InstanceType.VARIANT && permissionScopeHandler.user('edit-variant-prop-name', () => renameProperty(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
   };
   let eg = useCallback(() => {
     O(setSelectedTypedPropDefId({
@@ -288,12 +288,12 @@ function ew(e) {
     }));
     O(vq());
     let e = z.current;
-    let t = e ? cn(e, wh) : {};
+    let t = e ? cn(e, DROPDOWN_HEIGHT) : {};
     O(showPickerThunk({
       id: aR,
       initialX: t?.x,
       initialY: t?.y,
-      data: componentPropDef.kind === uN.TYPED ? {
+      data: componentPropDef.kind === InstanceType.TYPED ? {
         defID: J
       } : {
         name: componentPropDef.name
@@ -325,13 +325,13 @@ function ew(e) {
     });
   }, []);
   let eI = useCallback(e => {
-    if (componentPropDef.kind === uN.VARIANT && singletonRow) {
+    if (componentPropDef.kind === InstanceType.VARIANT && singletonRow) {
       O(hideDropdownAction());
       return;
     }
     pickerShown?.id === aR && O(hidePickerThunk());
     O(showDropdownThunk({
-      type: componentPropDef.kind === uN.TYPED ? eA : ex,
+      type: componentPropDef.kind === InstanceType.TYPED ? eA : ex,
       data: {
         position: {
           top: e.clientY,
@@ -425,7 +425,7 @@ function ew(e) {
     editComponentPropPickerShown: el,
     toggleEditPropPicker: eE,
     onDeleteProp: () => {
-      componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user('delete-prop-def', () => Fullscreen.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && permissionScopeHandler.user('delete-variant-prop', () => bk([componentPropDef.name], allStates, propertySortOrder, w));
+      componentPropDef.kind === InstanceType.TYPED ? permissionScopeHandler.user('delete-prop-def', () => Fullscreen.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && permissionScopeHandler.user('delete-variant-prop', () => deleteProperties([componentPropDef.name], allStates, propertySortOrder, w));
     },
     shouldShowErrorIcon: eF,
     preferredValuesUnpublishedError: eM,
@@ -508,7 +508,7 @@ function eO({
     }),
     'children': jsx(_$$O2, {})
   })) : useGrid && en.push(null, null), X) {
-    let e = iz(v.error, ee);
+    let e = getVariableSetErrorMessage(v.error, ee);
     en.push(jsx(eb, {
       'data-testid': `component-prop-error-icon-${D}`,
       'data-tooltip-offset-y': 1,
@@ -520,7 +520,7 @@ function eO({
     className: cssBuilderInstance.w24.$
   }));
   let ey = useMemo(() => {
-    if (v.kind === uN.VARIANT) {
+    if (v.kind === InstanceType.VARIANT) {
       if (M) return formatList(M, 'unit');
     } else {
       if (v.varValue.type === VariableDataType.ALIAS) {
@@ -539,7 +539,7 @@ function eO({
       if (v.varValue.resolvedType === VariableResolvedDataType.SLOT_CONTENT_ID) return null;
       if (v.varValue.resolvedType !== VariableResolvedDataType.SYMBOL_ID) return v.defaultValue;
       {
-        let e = wd([v.defaultValue], er);
+        let e = computeBackingGUID([v.defaultValue], er);
         if (e) return isInvalidValue(e) ? getI18nString('design_systems.instance_swap_picker.mixed') : getBasename(e.name);
       }
     }
@@ -558,7 +558,7 @@ function eO({
   let ew = jsxs(eu, {
     inputRef: S,
     canEdit: !0,
-    children: [T ? zn(T) : jsx(_$$y, {}), jsx(RecordableInput, {
+    children: [T ? renderComponentPropIcon(T) : jsx(_$$y, {}), jsx(RecordableInput, {
       className: 'component_prop_def_row--input--Heq8r props_panel--input--pkL0- raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u sf_pro--uiFontWithSFProFallback--m-p9V',
       defaultValue: v.name,
       forwardedRef: S,
@@ -590,9 +590,9 @@ function eO({
     children: [jsx('span', {
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('design_systems.component_properties.property_icon_tooltip', {
-        propertyType: xb(T ?? ComponentPropType.VARIANT)
+        propertyType: getComponentPropDisplayName(T ?? ComponentPropType.VARIANT)
       }),
-      'children': T ? zn(T) : jsx(_$$y, {})
+      'children': T ? renderComponentPropIcon(T) : jsx(_$$y, {})
     }), jsxs('div', {
       className: 'component_prop_def_row--ui3ComponentPropDefNameAndValue--2w-8p',
       children: [jsx('div', {
@@ -749,7 +749,7 @@ function eP({
   });
 }
 let e8 = {
-  format: e => e || xJ
+  format: e => e || EM_DASH
 };
 function $$e6(e) {
   let {
@@ -772,7 +772,7 @@ function $$e6(e) {
   let v = useSelector(e => e.instanceSwapPickerShown);
   let A = hg();
   let x = D5(variantPropDef.name, variantPropDef.values);
-  let N = useMemoStable(() => _$$D(guids, sceneGraph), [guids, sceneGraph]);
+  let N = useMemoStable(() => groupInstancesByState(guids, sceneGraph), [guids, sceneGraph]);
   let C = useRef(null);
   let w = useRef(null);
   let O = useId();
@@ -903,7 +903,7 @@ function $$e6(e) {
         ...propertyValues,
         [e]: t
       };
-      let o = Jj(s, r, allStateVariantProps);
+      let o = findBestMatchingState(s, r, allStateVariantProps);
       o !== null && (n[i.guid] = o);
     }
     let i = {};
@@ -917,7 +917,7 @@ function $$e6(e) {
       v?.isShown && I(vq());
       return;
     }
-    Object.keys(i).length !== 0 && (zb('Swapping A Variant', stateGroupGUID ?? '', {
+    Object.keys(i).length !== 0 && (trackStateGroupAnalytics('Swapping A Variant', stateGroupGUID ?? '', {
       source: forBubbledProps ? 'bubbled_sidebar' : 'sidebar'
     }), permissionScopeHandler.user('change-variant-prop', () => Aw(i)));
     updateHistory(r);
@@ -1076,7 +1076,7 @@ function e9({
   let m = useSelector(e => e.dropdownShown);
   return jsx('div', {
     className: u()(tP, {
-      [g1]: o === O2.WIDE,
+      [g1]: o === PanelWidth.WIDE,
       [aO]: i
     }),
     children: i ? jsx('p', {
@@ -1089,7 +1089,7 @@ function e9({
       dropdownAlignment: 'right',
       dropdownShown: m,
       dropdownWidth: 200,
-      fill: o === O2.UNBOUNDED,
+      fill: o === PanelWidth.UNBOUNDED,
       formatter: e8,
       id: `states-property-select-${d.join('-')}-${e.property}`,
       inputClassName: p3,
@@ -1226,10 +1226,10 @@ function td({
   let w = useRef(null);
   function O(e, t) {
     (t = t.trim()) !== '' && selectedStates && (permissionScopeHandler.user('rename-variant-prop', () => {
-      Fullscreen && Po(() => {
+      Fullscreen && withDeferredVariantPropDefBackfill(() => {
         for (let r of selectedStates) {
           let n = r.stateInfo.propertyValues || {};
-          renameNode(r.symbol.node_id, zh({
+          renameNode(r.symbol.node_id, formatPropertyValues({
             ...n,
             [e]: t
           }, propertySortOrder || []));
@@ -1259,7 +1259,7 @@ function td({
     'defaultValue': G,
     'forwardedRef': f,
     'onBlur': () => {
-      T && (I(null), permissionScopeHandler.user('rename-variant-property', () => q1(G, T, allStates ?? [], propertySortOrder ?? [])));
+      T && (I(null), permissionScopeHandler.user('rename-variant-property', () => renameProperty(G, T, allStates ?? [], propertySortOrder ?? [])));
     },
     'onChange': e => I(e.currentTarget.value),
     'onContextMenu': e => {
@@ -1293,7 +1293,7 @@ function td({
   });
   r = Object.keys(P[G] || {}).some(e => P[G][e] === R[G][e]);
   let W = {
-    format: e => e !== ti ? e || xJ : r ? getI18nString('design_systems.component_properties.rename_prompt') : getI18nString('design_systems.component_properties.add_new_prompt'),
+    format: e => e !== ti ? e || EM_DASH : r ? getI18nString('design_systems.component_properties.rename_prompt') : getI18nString('design_systems.component_properties.add_new_prompt'),
     parse: e => e,
     autocomplete: e => {
       for (let t of k.sort((e, t) => e.length - t.length)) {
@@ -1390,14 +1390,14 @@ function tp({
   let T = useCallback(() => {
     if (!r.length || !c) return;
     let t = r.map(t => e[t].name);
-    permissionScopeHandler.user('delete-variant-props', () => bk(t, d, u, c));
+    permissionScopeHandler.user('delete-variant-props', () => deleteProperties(t, d, u, c));
   }, [d, c, e, u, r]);
   let I = useCallback(e => {
     let t = e.map(e => e.name);
     permissionScopeHandler.user('reorder-variant-props', () => {
       d.forEach(e => {
         let r = e.stateInfo.propertyValues;
-        r && renameNode(e.symbol.node_id, zh(r, t));
+        r && renameNode(e.symbol.node_id, formatPropertyValues(r, t));
       });
     });
     fullscreenValue.commit();
@@ -1484,11 +1484,11 @@ export function $$tm3({
     backingStateVariantProps,
     statePropertyValues,
     productComponentGUID
-  } = an(e, t);
+  } = useComponentPropDefinitions(e, t);
   let A = useSceneGraphSelector();
   if (!typedPropDefsExcludingHidden.length && !variantPropDefs.length) return null;
   let N = jsx(iN, {
-    containerWide: r === O2.WIDE,
+    containerWide: r === PanelWidth.WIDE,
     canCollapse: u,
     resettableInstanceOverrides: d,
     instanceAndSublayerGUIDs: e,
@@ -1558,7 +1558,7 @@ export function $$tf1({
     backingStateVariantProps,
     statePropertyValues,
     productComponentGUID
-  } = an(t, e);
+  } = useComponentPropDefinitions(t, e);
   let v = useSceneGraphSelector();
   return jsx($$tE2, {
     allStateVariantProps,
@@ -1596,7 +1596,7 @@ export function $$tE2({
   let [l, c] = useState(void 0);
   let [u, p] = useState([]);
   let [_, m] = useState(!1);
-  let g = useSelector(i$) === StateHierarchy.STATE && r === OE.DEFINITION;
+  let g = useSelector(i$) === StateHierarchy.STATE && r === DefinitionAssignment.DEFINITION;
   useEffect(() => {
     c(void 0);
     p([]);
@@ -1693,23 +1693,23 @@ function ty({
   onSelectedPropertyValueHistoryChange: G,
   onTypedPropChange: V
 }) {
-  let H = Vg(_, k);
-  let z = RB([H], d);
+  let H = findSingleInstanceId(_, k);
+  let z = useComponentBackingGUID([H], d);
   let {
     autosuggestedValues,
     isLoading
-  } = V2(H, z, B, k);
+  } = useAutosuggestProps(H, z, B, k);
   let [Y, $] = useState(!1);
   return jsx(C, {
     children: jsxs(Fragment, {
-      children: [e && d === OE.DEFINITION && jsx(tp, {
+      children: [e && d === DefinitionAssignment.DEFINITION && jsx(tp, {
         defs: c,
         guids: _,
-        selectedIndices: r === uN.VARIANT ? a : [],
-        onSelectIndices: e => s(uN.VARIANT, e),
+        selectedIndices: r === InstanceType.VARIANT ? a : [],
+        onSelectIndices: e => s(InstanceType.VARIANT, e),
         isInStateAuthoringView: o,
-        recordingKey: generateRecordingKey(L, 'propDefs', uN.VARIANT)
-      }), e && b && d === OE.ASSIGNMENT && jsx(te, {
+        recordingKey: generateRecordingKey(L, 'propDefs', InstanceType.VARIANT)
+      }), e && b && d === DefinitionAssignment.ASSIGNMENT && jsx(te, {
         allStateVariantProps: m,
         backingStateVariantProps: f,
         containerWidth: S,
@@ -1717,7 +1717,7 @@ function ty({
         guids: _,
         hideIcon: w,
         onSelectedPropertyValueHistoryChange: G,
-        recordingKey: generateRecordingKey(L, 'propDefs', uN.VARIANT),
+        recordingKey: generateRecordingKey(L, 'propDefs', InstanceType.VARIANT),
         sceneGraph: k,
         stateGroupGUID: b,
         statePropertyValues: y,
@@ -1725,13 +1725,13 @@ function ty({
         viewOnly: N === 0 || N === 1
       }), e && t && D && jsx('div', {
         className: 'props_section--divider--5xEyL'
-      }), t && d === OE.DEFINITION && jsx(eP, {
+      }), t && d === DefinitionAssignment.DEFINITION && jsx(eP, {
         defs: u,
         guids: _,
-        selectedIndices: r === uN.TYPED ? a : [],
-        onSelectIndices: e => s(uN.TYPED, e),
-        recordingKey: generateRecordingKey(L, 'propDefs', uN.TYPED)
-      }), t && d === OE.ASSIGNMENT && jsx(_$$c, {
+        selectedIndices: r === InstanceType.TYPED ? a : [],
+        onSelectIndices: e => s(InstanceType.TYPED, e),
+        recordingKey: generateRecordingKey(L, 'propDefs', InstanceType.TYPED)
+      }), t && d === DefinitionAssignment.ASSIGNMENT && jsx(_$$c, {
         assignmentValues: h,
         containerWidth: S,
         entrypointForInstanceSwapPicker: U,
@@ -1742,7 +1742,7 @@ function ty({
         instanceSwapPickerInitialHeight: F,
         instanceSwapPickerInitialPosition: j,
         onChange: V,
-        recordingKey: generateRecordingKey(L, 'propDefs', uN.TYPED),
+        recordingKey: generateRecordingKey(L, 'propDefs', InstanceType.TYPED),
         sceneGraph: k,
         typedPropDefs: u,
         viewOnly: N === 0 || N === 2

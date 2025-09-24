@@ -4,7 +4,7 @@ import { h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
-import { zU, en } from "../figma_app/202626";
+import { navigateAndSelect, NavigationDirection } from "../figma_app/202626";
 import { F_, EL } from "../905/748636";
 export let $$u1 = "design-panel-container";
 export function $$p0(e) {
@@ -14,11 +14,11 @@ export function $$p0(e) {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();
-      n && "FRAME" === n.type ? (await zU({
+      n && "FRAME" === n.type ? (await navigateAndSelect({
         navigate: p,
         guidToFocus: t?.guid,
         guidToSelect: n.guid
-      }), r(!0)) : e.flowDirection === en.FORWARD ? e.onNext() : e.onPrevious();
+      }), r(!0)) : e.flowDirection === NavigationDirection.FORWARD ? e.onNext() : e.onPrevious();
     });
   }), t) ? jsx(VF, {
     arrowPosition: F_.RIGHT_BODY,

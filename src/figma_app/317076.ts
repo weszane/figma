@@ -14,7 +14,7 @@ import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { fileApiHandler } from "../figma_app/787550";
 import { linkMetadataHandlerInstance } from "../905/695476";
-import { k4, Yi } from "../figma_app/164212";
+import { findCommonSymbolId, findCommonStateGroupId } from "../figma_app/164212";
 let b = z.object({
   id: z.string(),
   node_id: z.string(),
@@ -49,8 +49,8 @@ export async function $$I7({
   }));
   if (!r) return a;
   let s = debugState.getState().mirror.sceneGraph;
-  let l = k4([t], s);
-  let d = Yi([t], s);
+  let l = findCommonSymbolId([t], s);
+  let d = findCommonStateGroupId([t], s);
   let c = await S(e, l);
   let u = await S(e, d);
   return [...a, ...c.map(e => ({
@@ -132,7 +132,7 @@ export async function $$v6(e) {
       let r = a.get(e);
       if (!r || "INSTANCE" !== r.type) continue;
       s(e, r.symbolId, t);
-      let n = Yi([e], a);
+      let n = findCommonStateGroupId([e], a);
       s(e, n, t);
     }
   }

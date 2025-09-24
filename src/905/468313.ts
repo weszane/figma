@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { IconButton } from "../905/443068";
 import { U as _$$U } from "../905/708285";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { VariableDataType, Command, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { X } from "../905/606795";
 import { KeyCodes } from "../905/63728";
@@ -208,7 +208,7 @@ export function $$Y2(e) {
     children: jsx("div", {
       className: X$,
       children: jsx(_$$L, {
-        nodeField: RR.TEXT,
+        nodeField: SlotSymbolType.TEXT,
         label: t
       })
     })

@@ -11,7 +11,7 @@ import { replaceSelection } from "../figma_app/741237";
 import { s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
-import { O2, OE } from "../figma_app/164212";
+import { PanelWidth, DefinitionAssignment } from "../figma_app/164212";
 import { e6 } from "../figma_app/545190";
 import { I9 } from "../figma_app/151869";
 import { selectWithShallowEqual } from "../905/103090";
@@ -57,8 +57,8 @@ export let $$M0 = memo(function (e) {
         recordingKey: e.recordingKey
       })
     }), stateGroupSelectionMode === StateHierarchy.STATE && jsx(e6, {
-      containerWidth: O2.REGULAR,
-      propDimension: OE.DEFINITION,
+      containerWidth: PanelWidth.REGULAR,
+      propDimension: DefinitionAssignment.DEFINITION,
       guids: [containingProductComponent.guid],
       recordingKey: e.recordingKey,
       entrypointForInstanceSwapPicker: null

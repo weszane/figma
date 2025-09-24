@@ -27,7 +27,7 @@ import { handleEnterMode } from "../figma_app/806075";
 import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { setNeedsUpgrade, newFileLoaded, setProgressBarState, setLeftPanelTab, showFileCreationFailureBanner } from "../figma_app/91703";
-import { am } from "../figma_app/430563";
+import { handleFileLibrarySubscription } from "../figma_app/430563";
 import { showModalHandler } from "../905/156213";
 import { hZ } from "../figma_app/990058";
 import { setTeamOptimistThunk } from "../figma_app/240735";
@@ -468,7 +468,7 @@ async function ek(e, t, i, r, p) {
     pageNodeId: "0:1"
   })) : t.figjamMakeSomethingUseCase && atomStoreManager.set(l5, t.figjamMakeSomethingUseCase)), "figmake" === t.editorType && t.figmakeInitialMessage && !getFeatureFlags().killswitch_make_initial_message && atomStoreManager.set(lA, t.figmakeInitialMessage), "design" === t.editorType && t.initialLibKey) {
     let i = _$$l(t.initialLibKey);
-    e.dispatch(am({
+    e.dispatch(handleFileLibrarySubscription({
       libraryFileSubscription: {
         file_key: x,
         library_key: i,

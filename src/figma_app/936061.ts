@@ -16,7 +16,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { B_, mo, PN, $r } from "../figma_app/141088";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { s as _$$s } from "../905/518538";
-import { Qf } from "../figma_app/202626";
+import { getCurrentPage } from "../figma_app/202626";
 import { ro, k0 } from "../figma_app/12220";
 import { E as _$$E } from "../905/884338";
 import { g as _$$g } from "../figma_app/115586";
@@ -255,7 +255,7 @@ export function $$M2(e) {
   let t;
   let r = _$$s();
   let n = useSceneGraphSelector();
-  if (!Qf(n)) return !1;
+  if (!getCurrentPage(n)) return !1;
   switch (r.orphanedBy) {
     case "deleted_pages":
       return !e.pageName;

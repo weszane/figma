@@ -37,7 +37,7 @@ import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { selectUserFlag } from "../905/940356";
 import { getObservableValue } from "../figma_app/84367";
-import { Lh, D8 as _$$D } from "../figma_app/242339";
+import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a3 } from "../905/188421";
@@ -256,7 +256,7 @@ export function $$em2({
             [wH]: a,
             [uG]: eV
           }),
-          "data-onboarding-key": Lh(_$$D.TEXT_PANEL, "font-picker-button"),
+          "data-onboarding-key": generateSlug(PanelIdentifiers.TEXT_PANEL, "font-picker-button"),
           disabled: y,
           htmlAttributes: {
             role: "combobox"

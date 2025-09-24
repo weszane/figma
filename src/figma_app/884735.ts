@@ -20,10 +20,10 @@ import { n as _$$n } from '../905/734251';
 import { EventShield } from '../905/821217';
 import { showDropdownThunk } from '../905/929976';
 import { uj0 } from '../figma_app/27776';
-import { Fv } from '../figma_app/164212';
+import { DisplayMode } from '../figma_app/164212';
 import { c$, ms } from '../figma_app/236327';
 import { en as _$$en } from '../figma_app/323320';
-import { RR } from '../figma_app/338442';
+import { SlotSymbolType } from '../figma_app/338442';
 import { setSelectedTypedPropDefId } from '../figma_app/389091';
 import { selectContainingInstance, selectContainingStateOrSymbolId, selectInstanceSublayerCheck } from '../figma_app/505098';
 import { addToSelection, clearSelection } from '../figma_app/741237';
@@ -82,7 +82,7 @@ export function $$H0(e) {
   let X = sD.concat('-', nodeField);
   let q = useRef(null);
   let J = useHandleMouseEvent(`propPill.${nodeField}`, 'click', () => {
-    !selectionHasInstanceSublayer && def && q.current && (q.current && (nodeField === RR.TEXT || nodeField === RR.VISIBLE) ? _?.showBindingUI(q.current) : V(showDropdownThunk({
+    !selectionHasInstanceSublayer && def && q.current && (q.current && (nodeField === SlotSymbolType.TEXT || nodeField === SlotSymbolType.VISIBLE) ? _?.showBindingUI(q.current) : V(showDropdownThunk({
       type: X,
       data: {
         nodeField,
@@ -174,7 +174,7 @@ export function $$H0(e) {
         children: renderI18nText('design_systems.component_properties.go_to_property')
       })
     }), jsx(Xn, {
-      source: Fv.PILL,
+      source: DisplayMode.PILL,
       nodeField,
       iconWidth: $?.current ? $.current.getBoundingClientRect().width / 2 + 10 : void 0
     })]
@@ -257,7 +257,7 @@ function K(e) {
       dataTestId: 'component-prop-pill',
       appendedClassName: m()(t$, {
         [uZ]: def.type === ComponentPropType.INSTANCE_SWAP,
-        [fd]: nodeField === RR.TEXT
+        [fd]: nodeField === SlotSymbolType.TEXT
       }),
       label,
       input,
@@ -267,7 +267,7 @@ function K(e) {
       dataTestId: 'component-prop-pill',
       appendedClassName: m()(t$, {
         [uZ]: def.type === ComponentPropType.INSTANCE_SWAP,
-        [fd]: nodeField === RR.TEXT
+        [fd]: nodeField === SlotSymbolType.TEXT
       }),
       input,
       icon: ui2RefButton,

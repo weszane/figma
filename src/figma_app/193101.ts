@@ -7,7 +7,7 @@ import { y as _$$y } from "../905/582657";
 import { o as _$$o } from "../905/530496";
 import { V } from "../905/735518";
 import { Fullscreen } from "../figma_app/763686";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
@@ -15,7 +15,7 @@ import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { getInstanceKeys, selectInstanceKeys } from "../figma_app/889655";
 import { Xn } from "../905/429125";
-import { Fv } from "../figma_app/164212";
+import { DisplayMode } from "../figma_app/164212";
 import { Yc, m as _$$m, oX, MB } from "../figma_app/930914";
 import { $H } from "../figma_app/323320";
 import { GV } from "../figma_app/159296";
@@ -123,10 +123,10 @@ export function $$j3(e) {
   let r = useAtomWithSubscription(_$$c);
   let s = useSelector(selectInstanceKeys);
   let o = _B(s);
-  let l = Yc(RR.OVERRIDDEN_SYMBOL_ID, s);
-  let d = _$$m(RR.OVERRIDDEN_SYMBOL_ID);
-  let u = oX(RR.OVERRIDDEN_SYMBOL_ID, t.current ? t : r, o);
-  let _ = MB(RR.OVERRIDDEN_SYMBOL_ID);
+  let l = Yc(SlotSymbolType.OVERRIDDEN_SYMBOL_ID, s);
+  let d = _$$m(SlotSymbolType.OVERRIDDEN_SYMBOL_ID);
+  let u = oX(SlotSymbolType.OVERRIDDEN_SYMBOL_ID, t.current ? t : r, o);
+  let _ = MB(SlotSymbolType.OVERRIDDEN_SYMBOL_ID);
   let m = useMemo(() => ({
     type: ZU.CUSTOM_ACTION,
     customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
@@ -137,8 +137,8 @@ export function $$j3(e) {
     isSelected: _,
     dropdownTargetButtonRef: t,
     dropdown: jsx(Xn, {
-      source: Fv.ICON,
-      nodeField: RR.OVERRIDDEN_SYMBOL_ID,
+      source: DisplayMode.ICON,
+      nodeField: SlotSymbolType.OVERRIDDEN_SYMBOL_ID,
       newPropDefaultValue: o
     })
   }), [u, d, _, t, o]);

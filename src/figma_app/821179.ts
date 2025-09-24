@@ -8,7 +8,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
 import { v4 } from "../figma_app/655139";
-import { wJ } from "../figma_app/630951";
+import { isValidLibraryKey } from "../figma_app/630951";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
@@ -53,7 +53,7 @@ export function $$b0() {
         nodeId: backingNodeId,
         instances: i,
         openFileKey: t,
-        isCommunityLibrary: wJ(backingLibraryKey)
+        isCommunityLibrary: isValidLibraryKey(backingLibraryKey)
       });
       if ("loaded" !== d.file.status) continue;
       let p = d.file.data?.code_connect_for_node_lk;

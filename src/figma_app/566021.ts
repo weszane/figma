@@ -32,7 +32,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
 import { hidePickerThunk } from "../figma_app/91703";
-import { _P, k4 } from "../figma_app/164212";
+import { getHostnameFromUrl, findCommonSymbolId } from "../figma_app/164212";
 import { Tv } from "../figma_app/151869";
 import { Ao } from "../905/748636";
 import { t as _$$t2 } from "../905/150656";
@@ -307,8 +307,8 @@ function X({
   let p = new Point(r?.initialX, r?.initialY);
   _$$h(() => {
     let e = r?.id === uA;
-    let t = _P(u?.uri);
-    let n = d?.map(e => r?.id === Wv ? SceneGraphHelpers.getAssetKeyForPublish(e) : r?.id === uA ? SceneGraphHelpers.getAssetKeyForPublish(k4([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());
+    let t = getHostnameFromUrl(u?.uri);
+    let n = d?.map(e => r?.id === Wv ? SceneGraphHelpers.getAssetKeyForPublish(e) : r?.id === uA ? SceneGraphHelpers.getAssetKeyForPublish(findCommonSymbolId([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());
     trackEventAnalytics("Component documentation modal opened", {
       hostname: t,
       selectedNodeIds: d,

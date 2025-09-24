@@ -1,24 +1,13 @@
-import { getComponentInfoById, usagePropsToRawProps } from "../figma_app/664063";
-import { Z } from "../905/829242";
-import { z } from "../905/239603";
-import { gZ } from "../figma_app/964367";
-import { cortexAPI } from "../figma_app/432652";
-import { fn, ag } from "../figma_app/460003";
-import { B } from "../figma_app/325988";
-let c = ["TEXT", "VARIANT"];
-var $$u = (e => (e.GOOGLE = "google", e.OPENAI = "openai", e))($$u || {});
-let p = {
-  google: "models/gemini-2.0-flash-001",
-  openai: "gpt-4o-mini-2024-07-18"
-};
-let _ = z.object({
-  suggestions: z.array(z.object({
-    propertyName: z.string().describe("Name of the property on the component that you are modifying"),
-    propertyValue: z.string().describe("Suggested value for the property"),
-    confidence: z.number().min(0).max(1).describe("Confidence score between 0 and 1")
-  }))
-});
-export function $$h0() {
+import type { TSSceneGraph } from './518682'
+import { z } from 'zod'
+import { withAbortSignal } from '../905/829242'
+import { findNearestCanvas } from '../figma_app/325988'
+import { cortexAPI } from '../figma_app/432652'
+import { extractComponentProps, serializeComponentJSX } from '../figma_app/460003'
+import { getComponentInfoById, usagePropsToRawProps } from '../figma_app/664063'
+import { getReactFunctionComponentDefinition } from '../figma_app/964367'
+
+export function suggestComponentContext() {
   let e = `
     * ### Context
     * You are acting as a Product Designer working with Figma. In Figma, components are UI elements that can be configured by props.
@@ -38,7 +27,7 @@ export function $$h0() {
     * - For VARIANT props, you must pick a value out of the list in the prop's metadata within REQUESTED_SUGGESTIONS. If the variant names are not intuitive, you should just select the default value.
 
     * Your output should always be valid JSON. You must provide a suggestion for every prop in REQUESTED_SUGGESTIONS, and none others.
-  `;
+  `
   let t = `* Your response must strictly follow this format:
   \`\`\`
   z.object({
@@ -52,170 +41,239 @@ export function $$h0() {
     ),
   })
   \`\`\`
-`;
+`
   return `
   ${e}
   ${t}
-`;
+`
 }
-let m = {
-  serializeAllVariants: !1,
-  maxVariantsResultSize: 15e4,
-  strict: !1
-};
-let g = {
-  excludeImageData: !0,
-  excludeVectorData: !0
-};
-async function $$f(e, t, r, i) {
-  let a = performance.now();
-  let o = (await gZ(r, m, g)).jsxStr;
-  let d = performance.now() - a;
-  let u = await fn(t, g);
-  let _ = performance.now() - a - d;
-  let h = getComponentInfoById(r.guid, {
-    enableTsArrays: !1
-  });
-  let f = ag(h, c);
-  let E = [{
-    role: "user",
-    content: `Here is (1) OVERALL_JSX:
+// Original code constants and schema
+const componentTypes: string[] = ['TEXT', 'VARIANT']
+
+const modelProviders = {
+  google: 'models/gemini-2.0-flash-001',
+  openai: 'gpt-4o-mini-2024-07-18',
+}
+
+const suggestionSchema = z.object({
+  suggestions: z.array(z.object({
+    propertyName: z.string().describe('Name of the property on the component that you are modifying'),
+    propertyValue: z.string().describe('Suggested value for the property'),
+    confidence: z.number().min(0).max(1).describe('Confidence score between 0 and 1'),
+  })),
+})
+
+// Original code options for component definition and serialization
+const componentDefinitionOptions = {
+  serializeAllVariants: false,
+  maxVariantsResultSize: 150000,
+  strict: false,
+}
+
+const serializationOptions = {
+  excludeImageData: true,
+  excludeVectorData: true,
+}
+
+/**
+ * Builds prompt messages for AI suggestion based on component context.
+ * Original function: $$f
+ * @param targetId - The ID of the target component.
+ * @param canvas - The nearest canvas node.
+ * @param component - The component node.
+ * @param provider - The AI provider ('openai' or 'google').
+ * @returns Object containing messages and performance tracking data.
+ */
+async function buildPromptMessages(
+  targetId: string,
+  canvas: any,
+  component: any,
+  provider: 'openai' | 'google',
+): Promise<{ messages: any[], perfTracking: any }> {
+  const startTime = performance.now()
+  const componentJsx = (await getReactFunctionComponentDefinition(component, componentDefinitionOptions, serializationOptions)).jsxStr
+  const componentJsxDuration = performance.now() - startTime
+  const overallJsx = await serializeComponentJSX(canvas, serializationOptions)
+  const topLevelDuration = performance.now() - startTime - componentJsxDuration
+  const componentInfo = getComponentInfoById(component.guid, { enableTsArrays: false })
+  const requestedSuggestions = extractComponentProps(componentInfo, componentTypes)
+
+  const messages = [
+    {
+      role: 'user',
+      content: `Here is (1) OVERALL_JSX:
           \`\`\`
-          ${u}
-          \`\`\``
-  }, {
-    role: "user",
-    content: `Here is (2) TARGET_ID:
+          ${overallJsx}
+          \`\`\``,
+    },
+    {
+      role: 'user',
+      content: `Here is (2) TARGET_ID:
           \`\`\`
-          ${e}
-          \`\`\``
-  }, {
-    role: "user",
-    content: `Here is (3) COMPONENT_JSX:
+          ${targetId}
+          \`\`\``,
+    },
+    {
+      role: 'user',
+      content: `Here is (3) COMPONENT_JSX:
           \`\`\`
-          ${o}
-          \`\`\``
-  }, {
-    role: "user",
-    content: `Here is (4) REQUESTED_SUGGESTIONS:
+          ${componentJsx}
+          \`\`\``,
+    },
+    {
+      role: 'user',
+      content: `Here is (4) REQUESTED_SUGGESTIONS:
           \`\`\`
-          ${f.toString()}
+          ${requestedSuggestions.toString()}
           \`\`\`
-          `
-  }];
-  "openai" === i && (E = E.map(e => ({
-    role: e.role,
-    content: [{
-      type: "text",
-      text: e.content
-    }]
-  })));
+          `,
+    },
+  ]
+
+  let formattedMessages: any = messages
+  if (provider === 'openai') {
+    formattedMessages = messages.map(msg => ({
+      role: msg.role,
+      content: [{ type: 'text', text: msg.content }],
+    }))
+  }
+
   return {
-    messages: E,
+    messages: formattedMessages as { role: string, content: { type: string, text: string }[] }[],
     perfTracking: {
-      componentJsxDuration: Math.round(d),
-      componentJsxStrLength: o.length,
-      topLevelDuration: Math.round(_),
-      topLevelJsxStrLength: u?.length || 0,
-      numSuggestionsRequested: f.length,
-      componentKey: h?.key,
-      model: p[i]
-    }
-  };
+      componentJsxDuration: Math.round(componentJsxDuration),
+      componentJsxStrLength: componentJsx.length,
+      topLevelDuration: Math.round(topLevelDuration),
+      topLevelJsxStrLength: overallJsx?.length || 0,
+      numSuggestionsRequested: requestedSuggestions.length,
+      componentKey: componentInfo?.key,
+      model: modelProviders[provider],
+    },
+  }
 }
-export async function $$E1(e, t, r, a, s, l) {
-  let c;
-  let u;
-  let m;
-  let g = performance.now();
-  let E = l ?? "openai";
-  let y = r.get(e);
-  if (!y) {
-    console.error("Could not find component in scene graph: ", e);
-    return {};
+
+/**
+ * Suggests component props using AI based on context.
+ * Original function: $$E1
+ * @param componentId - ID of the component.
+ * @param selectedNodeId - ID of the selected node.
+ * @param sceneGraph - Map of scene graph nodes.
+ * @param abortSignal - Abort signal for the request.
+ * @param trackEvent - Function to track events.
+ * @param provider - Optional AI provider, defaults to 'openai'.
+ * @returns Suggested props as raw props.
+ */
+export async function suggestComponentProps(
+  componentId: string,
+  selectedNodeId: string,
+  sceneGraph: TSSceneGraph,
+  abortSignal: AbortSignal,
+  trackEvent: (event: string, data: any) => void,
+  provider: 'openai' | 'google' = 'openai',
+): Promise<any> {
+  const startTime = performance.now()
+  const component = sceneGraph.get(componentId)
+  if (!component) {
+    console.error('Could not find component in scene graph: ', componentId)
+    return {}
   }
-  let b = r.get(t);
-  if (!b) {
-    console.error("Could not find selected node in scene graph: ", t);
-    return {};
+
+  const selectedNode = sceneGraph.get(selectedNodeId)
+  if (!selectedNode) {
+    console.error('Could not find selected node in scene graph: ', selectedNodeId)
+    return {}
   }
-  let T = B(b);
-  let {
-    messages,
-    perfTracking
-  } = await $$f(t, T, y, E);
-  let v = [{
-    role: "system",
-    content: $$h0()
-  }, ...messages];
+
+  const canvas = findNearestCanvas(selectedNode)
+  const { messages, perfTracking } = await buildPromptMessages(selectedNodeId, canvas, component, provider)
+
+  const fullMessages = [
+    { role: 'system', content: suggestComponentContext() },
+    ...messages,
+  ]
+
+  let aiResponse: any
   try {
-    switch (E) {
-      case "openai":
-        c = cortexAPI.openai.completeChat({
-          model: p[E],
-          max_tokens: 3e3,
+    switch (provider) {
+      case 'openai':
+        aiResponse = cortexAPI.openai.completeChat({
+          model: modelProviders[provider] as any,
+          max_tokens: 3000,
           temperature: 0,
-          response_format: {
-            type: "json_object"
-          },
-          messages: v,
-          use_cache: !0
-        });
-        break;
-      case "google":
-        c = cortexAPI.internal.generateObject({
-          provider: "google",
-          model: p[E],
-          maxTokens: 3e3,
+          response_format: { type: 'json_object' },
+          messages: fullMessages,
+          use_cache: true,
+        })
+        break
+      case 'google':
+        aiResponse = cortexAPI.internal.generateObject({
+          provider: 'google',
+          model: modelProviders[provider],
+          maxTokens: 3000,
           temperature: 0,
-          messages: v
-        });
-        break;
+          messages: fullMessages,
+        })
+        break
       default:
-        console.error("Unknown provider: ", E);
+        console.error('Unknown provider: ', provider)
+        return {}
     }
-  } catch (e) {
-    console.error("Error property suggestions", e);
   }
-  if (!c) return Promise.resolve({});
-  let A = performance.now();
+  catch (error) {
+    console.error('Error property suggestions', error)
+    return {}
+  }
+
+  if (!aiResponse)
+    return {}
+
+  const responseStartTime = performance.now()
+  let response: any
   try {
-    let e = new Promise((e, t) => {
-      setTimeout(() => {
-        t("GPT Response Timeout");
-      }, 1e4);
-    });
-    u = await Promise.race([Z(c, a), e]);
-  } catch (e) {
-    s("autosuggest_props_timeout", {
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => reject('GPT Response Timeout'), 10000)
+    })
+    response = await Promise.race([withAbortSignal(aiResponse, abortSignal), timeoutPromise])
+  }
+  catch (error) {
+    trackEvent('autosuggest_props_timeout', {
       componentKey: perfTracking.componentKey,
-      error: e.message,
-      ...perfTracking
-    });
-    return Promise.resolve({});
+      error: (error as Error).message,
+      ...perfTracking,
+    })
+    return {}
   }
-  let x = Math.round(performance.now() - A);
-  switch (E) {
-    case "openai":
-      m = _.parse(JSON.parse(u?.choices[0]?.message?.content ?? "{}")).suggestions;
-      break;
-    case "google":
-      m = u.object.suggestions ?? {};
-      break;
+
+  const responseDuration = Math.round(performance.now() - responseStartTime)
+  let suggestions: any[]
+  switch (provider) {
+    case 'openai':
+      suggestions = suggestionSchema.parse(JSON.parse(response?.choices[0]?.message?.content ?? '{}')).suggestions
+      break
+    case 'google':
+      suggestions = response.object.suggestions ?? []
+      break
     default:
-      console.error("Unknown provider: ", E);
+      console.error('Unknown provider: ', provider)
+      return {}
   }
-  let N = {};
-  for (let e of m) N[e.propertyName] = e.propertyValue;
-  let C = usagePropsToRawProps(N, e, t => getComponentInfoById(e, {
-    enableTsArrays: !1
-  }));
-  s("autosuggest_props_perf", {
-    totalMs: Math.round(performance.now() - g),
+
+  const suggestedProps: Record<string, string> = {}
+  for (const suggestion of suggestions) {
+    suggestedProps[suggestion.propertyName] = suggestion.propertyValue
+  }
+
+  const rawProps = usagePropsToRawProps(suggestedProps, componentId, id => getComponentInfoById(id, { enableTsArrays: false }))
+
+  trackEvent('autosuggest_props_perf', {
+    totalMs: Math.round(performance.now() - startTime),
     ...perfTracking,
-    gptResponseDurationMs: x
-  });
-  return C;
+    gptResponseDurationMs: responseDuration,
+  })
+
+  return rawProps
 }
-export const f = $$h0;
-export const u = $$E1;
+
+// Original exports with refactored names
+export const f = suggestComponentContext
+export const u = suggestComponentProps

@@ -1,192 +1,384 @@
-import { createContext } from "react";
-import { StateGroupErrorType, Fullscreen, StateHierarchy } from "../figma_app/763686";
-import { l as _$$l } from "../905/716947";
-import { createSelector } from "../vendor/925040";
-import { trackEventAnalytics } from "../905/449184";
-import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { fullscreenValue } from "../figma_app/455680";
-import { renameNode } from "../figma_app/741237";
-import { MIXED_MARKER } from "../905/216495";
-import { selectOpenFileKey, selectOpenFileLibraryKey } from "../figma_app/516028";
-import { createLocalComponent } from "../figma_app/646357";
-export let $$h14 = "\u2014";
-export function $$m16(e, t) {
-  return Object.keys(e).sort((e, r) => t.indexOf(e) - t.indexOf(r)).map(t => `${t}=${e[t]}`).join(", ");
+import { createContext } from 'react'
+import { createSelector } from 'reselect'
+import { MIXED_MARKER } from '../905/216495'
+
+import { trackEventAnalytics } from '../905/449184'
+import { fullscreenValue } from '../figma_app/455680'
+import { selectOpenFileKey, selectOpenFileLibraryKey } from '../figma_app/516028'
+import { createLocalComponent } from '../figma_app/646357'
+import { renameNode } from '../figma_app/741237'
+import { Fullscreen, StateGroupErrorType, StateHierarchy } from '../figma_app/763686'
+import { isSelectedViewFullscreenCooper } from '../figma_app/828186'
+
+// Refactored code with meaningful names, grouped logically, and added TypeScript documentation.
+// Original function names are preserved in comments for traceability.
+// Functions are converted to named arrow functions where appropriate for readability.
+// Nested logic simplified with early returns and helper functions.
+// Exports renamed to match refactored function names.
+
+// Constants
+export const EM_DASH = '\u2014' // Original: $$h14
+
+// Utility functions
+/**
+ * Formats an object into a comma-separated string of key=value pairs, sorted by a given order.
+ * @param obj - The object to format.
+ * @param order - Array defining the sort order of keys.
+ * @returns The formatted string.
+ */
+export function formatPropertyValues(obj: Record<string, any>, order: string[]): string { // Original: $$m16
+  return Object.keys(obj)
+    .sort((a, b) => order.indexOf(a) - order.indexOf(b))
+    .map(key => `${key}=${obj[key]}`)
+    .join(', ')
 }
-export function $$g10(e, t, r) {
-  let n = {};
-  for (let i of e) {
-    if (void 0 !== i.actionIndexPath && void 0 !== r && i.actionIndexPath.some((e, t) => e !== r[t])) continue;
-    let {
-      propertyValues
-    } = i.stateInfo;
-    if (propertyValues) for (let r of t) r in n && n[r] !== propertyValues[r] ? n[r] = n[r] && propertyValues[r] ? MIXED_MARKER : "" : n[r] = propertyValues[r] || "";
-  }
-  return n;
+
+/**
+ * Sanitizes a property name by removing commas and equals signs, then trimming.
+ * @param name - The property name to sanitize.
+ * @returns The sanitized name.
+ */
+export function sanitizePropertyName(name: string): string { // Original: $$T5
+  return name.replace(/[,=]/g, '').trim()
 }
-export function $$f0(e) {
-  let t = StateGroupErrorType.NONE;
-  for (let r of e) r.stateInfo.stateError && r.stateInfo.stateError > t && (t = r.stateInfo.stateError);
-  return t;
-}
-export function $$E11(e, t) {
-  return e.filter(e => e.stateInfo.stateError === t);
-}
-export function $$y1(e, t, r) {
-  let n = [];
-  let i = 0;
-  for (let e of r) {
-    let r = e.propertyValues;
-    if (!r) continue;
-    let a = 0;
-    for (let e of t) {
-      if (e.value !== r[e.property]) break;
-      a++;
+
+// State aggregation and error handling
+/**
+ * Aggregates property values from states, considering action index path and sort order.
+ * @param states - Array of states.
+ * @param sortOrder - Array of property names in sort order.
+ * @param actionIndexPath - Optional action index path for filtering.
+ * @returns Aggregated property values object.
+ */
+export function aggregatePropertyValues(states: any[], sortOrder: string[], actionIndexPath?: number[]): Record<string, any> { // Original: $$g10
+  const aggregated: Record<string, any> = {}
+  for (const state of states) {
+    if (actionIndexPath && state.actionIndexPath && state.actionIndexPath.some((val, idx) => val !== actionIndexPath[idx])) {
+      continue
     }
-    a > i ? (i = a, n = [e]) : a === i && n.push(e);
-  }
-  if (0 === i) return null;
-  let a = null;
-  let s = 1 / 0;
-  for (let t of n) {
-    let r = function (e, t) {
-      let r = 0;
-      for (let n in e) e[n] !== MIXED_MARKER && e[n] !== t[n] && r++;
-      return r;
-    }(e, t.propertyValues);
-    r < s && (s = r, a = t);
-  }
-  return a;
-}
-export function $$b9(e, t, r) {
-  let n = [];
-  let i = 0;
-  for (let e of r) {
-    let r = e.stateInfo.propertyValues;
-    if (!r) continue;
-    let a = 0;
-    for (let e of t) {
-      if (e.value !== r[e.property]) break;
-      a++;
+    const { propertyValues } = state.stateInfo
+    if (propertyValues) {
+      for (const prop of sortOrder) {
+        if (prop in aggregated && aggregated[prop] !== propertyValues[prop]) {
+          aggregated[prop] = aggregated[prop] && propertyValues[prop] ? MIXED_MARKER : ''
+        }
+        else {
+          aggregated[prop] = propertyValues[prop] || ''
+        }
+      }
     }
-    a > i ? (i = a, n = [e]) : a === i && n.push(e);
   }
-  if (0 === i) return null;
-  let a = null;
-  let s = 1 / 0;
-  for (let t of n) {
-    let r = function (e, t) {
-      let r = 0;
-      for (let n in e) e[n] !== MIXED_MARKER && e[n] !== t[n] && r++;
-      return r;
-    }(e, t.stateInfo.propertyValues);
-    r < s && (s = r, a = t);
+  return aggregated
+}
+
+/**
+ * Gets the maximum error type from an array of states.
+ * @param states - Array of states.
+ * @returns The highest StateGroupErrorType.
+ */
+export function getMaxErrorType(states: any[]): StateGroupErrorType { // Original: $$f0
+  let maxError = StateGroupErrorType.NONE
+  for (const state of states) {
+    if (state.stateInfo.stateError && state.stateInfo.stateError > maxError) {
+      maxError = state.stateInfo.stateError
+    }
   }
-  return a;
+  return maxError
 }
-export function $$T5(e) {
-  return e.replace(/[,=]/g, "").trim();
+
+/**
+ * Filters states by a specific error type.
+ * @param states - Array of states.
+ * @param errorType - The error type to filter by.
+ * @returns Filtered array of states.
+ */
+export function filterByErrorType(states: any[], errorType: StateGroupErrorType): any[] { // Original: $$E11
+  return states.filter(state => state.stateInfo.stateError === errorType)
 }
-export function $$I15(e, t, r) {
-  let n = Fullscreen.getStateGroupAnalyticsInfo(t);
-  trackEventAnalytics(e, {
-    ...n,
-    ...(r || {})
-  });
+
+// State matching functions
+/**
+ * Finds the best matching state based on property values and differences.
+ * @param targetValues - Target property values.
+ * @param criteria - Array of criteria objects with property and value.
+ * @param states - Array of states to search.
+ * @returns The best matching state or null.
+ */
+export function findBestMatchingState(targetValues: Record<string, any>, criteria: { property: string, value: any }[], states: any[]): any | null { // Original: $$y1
+  let candidates: any[] = []
+  let maxMatchCount = 0
+  for (const state of states) {
+    const propValues = state.propertyValues
+    if (!propValues)
+      continue
+    let matchCount = 0
+    for (const crit of criteria) {
+      if (crit.value !== propValues[crit.property])
+        break
+      matchCount++
+    }
+    if (matchCount > maxMatchCount) {
+      maxMatchCount = matchCount
+      candidates = [state]
+    }
+    else if (matchCount === maxMatchCount) {
+      candidates.push(state)
+    }
+  }
+  if (maxMatchCount === 0)
+    return null
+  let bestState = null
+  let minDiff = Infinity
+  for (const candidate of candidates) {
+    const diff = Object.keys(targetValues).reduce((count, key) => {
+      if (targetValues[key] !== MIXED_MARKER && targetValues[key] !== candidate.propertyValues[key])
+        count++
+      return count
+    }, 0)
+    if (diff < minDiff) {
+      minDiff = diff
+      bestState = candidate
+    }
+  }
+  return bestState
 }
-export function $$S4(e, t) {
-  t.setDeferVariantPropDefBackfill(!0);
+
+/**
+ * Finds the best matching variant state based on property values and differences.
+ * @param targetValues - Target property values.
+ * @param criteria - Array of criteria objects with property and value.
+ * @param states - Array of states to search.
+ * @returns The best matching state or null.
+ */
+export function findBestMatchingVariantState(targetValues: Record<string, any>, criteria: { property: string, value: any }[], states: any[]): any | null { // Original: $$b9
+  let candidates: any[] = []
+  let maxMatchCount = 0
+  for (const state of states) {
+    const propValues = state.stateInfo.propertyValues
+    if (!propValues)
+      continue
+    let matchCount = 0
+    for (const crit of criteria) {
+      if (crit.value !== propValues[crit.property])
+        break
+      matchCount++
+    }
+    if (matchCount > maxMatchCount) {
+      maxMatchCount = matchCount
+      candidates = [state]
+    }
+    else if (matchCount === maxMatchCount) {
+      candidates.push(state)
+    }
+  }
+  if (maxMatchCount === 0)
+    return null
+  let bestState = null
+  let minDiff = Infinity
+  for (const candidate of candidates) {
+    const diff = Object.keys(targetValues).reduce((count, key) => {
+      if (targetValues[key] !== MIXED_MARKER && targetValues[key] !== candidate.stateInfo.propertyValues[key])
+        count++
+      return count
+    }, 0)
+    if (diff < minDiff) {
+      minDiff = diff
+      bestState = candidate
+    }
+  }
+  return bestState
+}
+
+// Analytics and deferral
+/**
+ * Tracks analytics for state group events.
+ * @param event - The event name.
+ * @param stateGroup - The state group.
+ * @param additionalData - Optional additional data.
+ */
+export function trackStateGroupAnalytics(event: string, stateGroup: any, additionalData?: Record<string, any>): void { // Original: $$I15
+  const analyticsInfo = Fullscreen.getStateGroupAnalyticsInfo(stateGroup)
+  trackEventAnalytics(event, {
+    ...analyticsInfo,
+    ...(additionalData || {}),
+  })
+}
+
+/**
+ * Executes a function with deferred variant property definition backfill.
+ * @param fn - The function to execute.
+ * @param fullscreen - The Fullscreen instance.
+ */
+export function withDeferredVariantPropDefBackfill(fn: () => void, fullscreen: any): void { // Original: $$S4
+  fullscreen.setDeferVariantPropDefBackfill(true)
   try {
-    e();
-  } finally {
-    t.setDeferVariantPropDefBackfill(!1);
+    fn()
+  }
+  finally {
+    fullscreen.setDeferVariantPropDefBackfill(false)
   }
 }
-export function $$v12(e, t, r, n) {
-  if ("" === (t = $$T5(t)) || e === t || -1 === n.indexOf(e) || !Fullscreen) return;
-  let a = [...n];
-  a[a.indexOf(e)] = t;
-  $$S4(() => r.forEach(r => {
-    let n = r.stateInfo.propertyValues;
-    n && (n = {
-      ...n
-    })[e] && (n[t] = n[e], delete n[e], renameNode(r.symbol.node_id, $$m16(n, a)));
-  }), Fullscreen);
-  fullscreenValue.commit();
+
+// Property manipulation
+/**
+ * Renames a property in variant states.
+ * @param oldName - The old property name.
+ * @param newName - The new property name.
+ * @param states - Array of states.
+ * @param sortOrder - Array of property names in sort order.
+ */
+export function renameProperty(oldName: string, newName: string, states: any[], sortOrder: string[]): void { // Original: $$v12
+  const sanitizedNewName = sanitizePropertyName(newName)
+  if (sanitizedNewName === '' || oldName === sanitizedNewName || !sortOrder.includes(oldName) || !Fullscreen)
+    return
+  const newSortOrder = [...sortOrder]
+  newSortOrder[newSortOrder.indexOf(oldName)] = sanitizedNewName
+  withDeferredVariantPropDefBackfill(() => {
+    states.forEach((state) => {
+      const propValues = state.stateInfo.propertyValues
+      if (propValues) {
+        const newPropValues = { ...propValues }
+        if (newPropValues[oldName]) {
+          newPropValues[sanitizedNewName] = newPropValues[oldName]
+          delete newPropValues[oldName]
+          renameNode(state.symbol.node_id, formatPropertyValues(newPropValues, newSortOrder))
+        }
+      }
+    })
+  }, Fullscreen)
+  fullscreenValue.commit()
 }
-export function $$$$A6(e, t, r, n) {
-  Fullscreen && ($$I15("Deleting Property from Variant Component", n), $$S4(() => t.forEach(t => {
-    let n = t.stateInfo.propertyValues;
-    if (!n) return;
-    for (let t of (n = {
-      ...n
-    }, e)) n[t] && delete n[t];
-    let i = $$m16(n, r);
-    "" === i && (i = "Property 1=Default");
-    renameNode(t.symbol.node_id, i);
-  }), Fullscreen), fullscreenValue.commit());
+
+/**
+ * Deletes properties from variant states.
+ * @param properties - Array of property names to delete.
+ * @param states - Array of states.
+ * @param sortOrder - Array of property names in sort order.
+ * @param stateGroup - The state group for analytics.
+ */
+export function deleteProperties(properties: string[], states: any[], sortOrder: string[], stateGroup: any): void { // Original: $$$$A6
+  if (!Fullscreen)
+    return
+  trackStateGroupAnalytics('Deleting Property from Variant Component', stateGroup)
+  withDeferredVariantPropDefBackfill(() => {
+    states.forEach((state) => {
+      const propValues = state.stateInfo.propertyValues
+      if (!propValues)
+        return
+      const newPropValues = { ...propValues }
+      for (const prop of properties) {
+        if (newPropValues[prop])
+          delete newPropValues[prop]
+      }
+      let formatted = formatPropertyValues(newPropValues, sortOrder)
+      if (formatted === '')
+        formatted = 'Property 1=Default'
+      renameNode(state.symbol.node_id, formatted)
+    })
+  }, Fullscreen)
+  fullscreenValue.commit()
 }
-export function $$x8(e, t, r, n) {
+
+// State creation and processing
+/**
+ * Creates a state variant object.
+ * @param state - The original state.
+ * @param name - Optional name.
+ * @param description - Optional description.
+ * @param thumbnail - Optional thumbnail.
+ * @returns The new state object.
+ */
+export function createStateVariant(state: any, name?: string, description?: string, thumbnail?: any): any { // Original: $$x8
+  const parseActionIndexPath = (path: string | undefined): number[] => {
+    if (!path)
+      return []
+    const match = path.match(/\{(.*?)\}/)
+    return !match || match.length < 2 ? [] : match[1].trim().split(',').map(val => parseFloat(val.trim()))
+  }
   return {
-    stateInfo: e.stateInfo,
-    symbol: createLocalComponent(null, null, e.symbol, t || "", r || _$$l(""), n),
-    actionIndexPath: function (e) {
-      if (!e) return [];
-      let t = e.match(/\{(.*?)\}/);
-      return !t || t.length < 2 ? [] : t[1].trim().split(",").map(e => parseFloat(e.trim()));
-    }(e.actionIndexPath)
-  };
+    stateInfo: state.stateInfo,
+    symbol: createLocalComponent(null, null, state.symbol, name || '', description || '', thumbnail),
+    actionIndexPath: parseActionIndexPath(state.actionIndexPath),
+  }
 }
-export function $$N7(e, t, r, n, a) {
-  if (!e) return null;
-  let s = e.mode;
-  if (s === StateHierarchy.NONE) return null;
-  if (s === StateHierarchy.NON_STATE_COMPONENTS) return {
-    mode: s,
-    numSelectedNonStateComponents: e.numSelectedNonStateComponents
-  };
-  let o = e.stateGroup;
-  let l = e.stateGroupModel;
-  let d = l?.propertySortOrder?.length === 1;
-  let c = e.allStates.map(e => $$x8(e, t, r, n));
-  if (s === StateHierarchy.STATE_GROUP) return {
-    mode: s,
-    stateGroup: o,
-    stateGroupModel: l,
-    allStates: c,
-    modelIsOneDimensional: d
-  };
-  let u = e.selectedStates.map(e => $$x8(e, t, r, n));
-  let p = $$g10(u, l.propertySortOrder || [], a);
-  StateHierarchy.STATE;
+
+/**
+ * Processes state hierarchy information.
+ * @param info - The state hierarchy info.
+ * @param name - Optional name.
+ * @param description - Optional description.
+ * @param thumbnail - Optional thumbnail.
+ * @param actionIndexPath - Optional action index path.
+ * @returns Processed state hierarchy or null.
+ */
+export function processStateHierarchy(info: any, name?: string, description?: string, thumbnail?: any, actionIndexPath?: number[]): any | null { // Original: $$N7
+  if (!info)
+    return null
+  const mode = info.mode
+  if (mode === StateHierarchy.NONE)
+    return null
+  if (mode === StateHierarchy.NON_STATE_COMPONENTS) {
+    return {
+      mode,
+      numSelectedNonStateComponents: info.numSelectedNonStateComponents,
+    }
+  }
+  const stateGroup = info.stateGroup
+  const stateGroupModel = info.stateGroupModel
+  const isOneDimensional = stateGroupModel?.propertySortOrder?.length === 1
+  const allStates = info.allStates.map(state => createStateVariant(state, name, description, thumbnail))
+  if (mode === StateHierarchy.STATE_GROUP) {
+    return {
+      mode,
+      stateGroup,
+      stateGroupModel,
+      allStates,
+      modelIsOneDimensional: isOneDimensional,
+    }
+  }
+  const selectedStates = info.selectedStates.map(state => createStateVariant(state, name, description, thumbnail))
+  const selectedStatesPropertyValues = aggregatePropertyValues(selectedStates, stateGroupModel.propertySortOrder || [], actionIndexPath)
   return {
-    mode: s,
-    stateGroup: o,
-    stateGroupModel: l,
-    allStates: c,
-    modelIsOneDimensional: d,
-    selectedStates: u,
-    selectedStatesPropertyValues: p
-  };
+    mode,
+    stateGroup,
+    stateGroupModel,
+    allStates,
+    modelIsOneDimensional: isOneDimensional,
+    selectedStates,
+    selectedStatesPropertyValues,
+  }
 }
-createContext(null);
-let $$C13 = createSelector([e => e.mirror.selectionProperties.stateGroupSelectionInfo, selectOpenFileKey, selectOpenFileLibraryKey, isSelectedViewFullscreenCooper], $$N7);
-let $$w2 = [["yes", "no"], ["true", "false"], ["on", "off"]];
-let $$O3 = $$w2.reduce((e, t) => e.concat(t), []);
-export const A = $$f0;
-export const Jj = $$y1;
-export const NE = $$w2;
-export const O4 = $$O3;
-export const Po = $$S4;
-export const QV = $$T5;
-export const bk = $$$$A6;
-export const cP = $$N7;
-export const dq = $$x8;
-export const kz = $$b9;
-export const m4 = $$g10;
-export const pg = $$E11;
-export const q1 = $$v12;
-export const uL = $$C13;
-export const xJ = $$h14;
-export const zb = $$I15;
-export const zh = $$m16;
+
+// Selectors and constants
+createContext(null)
+export const stateGroupSelectionSelector = createSelector( // Original: $$C13
+  [
+    (state: any) => state.mirror.selectionProperties.stateGroupSelectionInfo,
+    selectOpenFileKey,
+    selectOpenFileLibraryKey,
+    isSelectedViewFullscreenCooper,
+  ],
+  processStateHierarchy,
+)
+
+export const BOOLEAN_VALUES = [['yes', 'no'], ['true', 'false'], ['on', 'off']] // Original: $$w2
+export const FLATTENED_BOOLEAN_VALUES = BOOLEAN_VALUES.reduce((acc, pair) => acc.concat(pair), []) // Original: $$O3
+
+// Updated exports to match refactored names
+export const A = getMaxErrorType
+export const Jj = findBestMatchingState
+export const NE = BOOLEAN_VALUES
+export const O4 = FLATTENED_BOOLEAN_VALUES
+export const Po = withDeferredVariantPropDefBackfill
+export const QV = sanitizePropertyName
+export const bk = deleteProperties
+export const cP = processStateHierarchy
+export const dq = createStateVariant
+export const kz = findBestMatchingVariantState
+export const m4 = aggregatePropertyValues
+export const pg = filterByErrorType
+export const q1 = renameProperty
+export const uL = stateGroupSelectionSelector
+export const xJ = EM_DASH
+export const zb = trackStateGroupAnalytics
+export const zh = formatPropertyValues

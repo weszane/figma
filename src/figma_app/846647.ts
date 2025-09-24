@@ -7,7 +7,7 @@ import { postUserFlag } from "../905/985254";
 import { Z } from "../905/104740";
 import { VF } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
-import { zU } from "../figma_app/202626";
+import { navigateAndSelect } from "../figma_app/202626";
 import { F_, EL } from "../905/748636";
 export let $$h0 = "text-panel-container";
 export function $$m1(e) {
@@ -18,7 +18,7 @@ export function $$m1(e) {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
       let n = e.getNodeToSelect();
-      n ? (await zU({
+      n ? (await navigateAndSelect({
         navigate: m,
         guidToFocus: t?.guid,
         guidToSelect: n.guid

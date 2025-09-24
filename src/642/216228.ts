@@ -162,7 +162,7 @@ import { q as _$$q, U as _$$U3 } from '../figma_app/213525';
 import { suggestionsSeenTrackerAtom, suggestionsManagerAtom } from '../figma_app/235371';
 import { Fl, fV } from '../figma_app/236178';
 import { X3 as _$$X, c$, MM, ms, wv } from '../figma_app/236327';
-import { jO } from '../figma_app/242339';
+import { isOnboardingComplete } from '../figma_app/242339';
 import { Bf } from '../figma_app/249941';
 import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } from '../figma_app/255679';
 import { SearchEventType, MAX_CONCURRENT_FRAGMENT_LOADS, ContextType, SUPPORTED_NODE_TYPES, SearchResultType, SEARCH_CONFIG, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
@@ -201,10 +201,10 @@ import { $A, lX as _$$lX, MT } from '../figma_app/588397';
 import { Hz } from '../figma_app/591738';
 import { selectExperimentConfigHook } from '../figma_app/594947';
 import { y as _$$y } from '../figma_app/598297';
-import { Ev, JA } from '../figma_app/608944';
+import { COMPONENT_FLYOUT_MODAL_CONTENT, useComponentFlyoutModal } from '../figma_app/608944';
 import { createTrackedAtom } from '../figma_app/615482';
 import { getCollectionSummaryStatus, getCollectionViewStatus } from '../figma_app/618433';
-import { RJ } from '../figma_app/630951';
+import { uiKitsTooltipSymbol } from '../figma_app/630951';
 import { PrimaryWorkflowEnum, LibraryTabEnum } from '../figma_app/633080';
 import { J as _$$J2 } from '../figma_app/636279';
 import { zl } from '../figma_app/641749';
@@ -482,7 +482,7 @@ function e3({
   let k = useContext(_$$U);
   let {
     isFlyoutOpen
-  } = JA();
+  } = useComponentFlyoutModal();
   let N = useCurrentFileKey();
   let I = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let {
@@ -766,7 +766,7 @@ function e7({
     }, [a, o]);
     let {
       setFlyoutProps
-    } = JA();
+    } = useComponentFlyoutModal();
     let u = useCallback((n, a, o, u, p) => {
       d();
       let h = {
@@ -3811,7 +3811,7 @@ function nc({
   let d = _$$sN();
   let {
     closeFlyout
-  } = JA();
+  } = useComponentFlyoutModal();
   let {
     setBackButtonKeyboardItem,
     focusSearchBar
@@ -8169,7 +8169,7 @@ function an({
   let s = function (e) {
     let t = selectCurrentUser();
     let s = selectCurrentFile();
-    let r = jO();
+    let r = isOnboardingComplete();
     let i = selectUserFlag('has_dismissed_component_sidebar_library_upsell_banner');
     let l = useSelector(e => e.isFreeUser);
     let a = useSelector(selectTeams);
@@ -8203,9 +8203,9 @@ function an({
     isFlyoutOpen,
     closeFlyout,
     flyoutProps
-  } = JA();
+  } = useComponentFlyoutModal();
   let _ = useCallback(e => {
-    let t = document.getElementById(Ev);
+    let t = document.getElementById(COMPONENT_FLYOUT_MODAL_CONTENT);
     isFlyoutOpen || !t || !l.current || !e.relatedTarget || l.current.contains(e.relatedTarget) || t.contains(e.relatedTarget) || closeFlyout();
   }, [isFlyoutOpen, closeFlyout]);
   return jsxs(ai, {
@@ -8234,7 +8234,7 @@ function an({
             top: '240px'
           },
           'className': b3,
-          'data-onboarding-key': RJ
+          'data-onboarding-key': uiKitsTooltipSymbol
         }), jsx(P, {
           width: c
         })]

@@ -11,10 +11,10 @@ import { KindEnum } from "../905/129884";
 import { l6, c$ } from "../905/794875";
 import { cS } from "../figma_app/334459";
 import { aq } from "../figma_app/305626";
-import { xJ, NE, kz } from "../figma_app/264776";
+import { EM_DASH, BOOLEAN_VALUES, findBestMatchingVariantState } from "../figma_app/264776";
 import { wG, lV, E3 } from "../figma_app/689119";
 let E = {
-  format: e => e || xJ
+  format: e => e || EM_DASH
 };
 function y(e) {
   let {
@@ -104,7 +104,7 @@ export function $$b1(e, t, r) {
 export function $$T0(e, t) {
   let r = t.map(e => e.toLowerCase());
   let n = null;
-  if (2 === t.length) for (let e of NE) {
+  if (2 === t.length) for (let e of BOOLEAN_VALUES) {
     let i = r.indexOf(e[0]);
     let a = r.indexOf(e[1]);
     -1 !== i && -1 !== a && (n = [t[i], t[a]]);
@@ -162,7 +162,7 @@ export let $$I2 = memo(function (e) {
           ...propertyValues,
           [e]: t
         };
-        let o = kz(s, r, allStates);
+        let o = findBestMatchingVariantState(s, r, allStates);
         null !== o && (n[i.symbol.node_id] = o);
       }
       onSelectProperty(n);

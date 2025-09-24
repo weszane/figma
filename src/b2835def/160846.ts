@@ -13,7 +13,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { Lk } from "../figma_app/122682";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/99004";
-import { qh } from "../figma_app/990334";
+import { useAutosuggestShadowRead } from "../figma_app/990334";
 import { A as _$$A } from "../9410/188255";
 import { pO } from "../figma_app/42945";
 import { J as _$$J } from "../642/485582";
@@ -90,7 +90,7 @@ import { v58 } from "../figma_app/6204";
 import { dP, m9 } from "../figma_app/947348";
 import { _ as _$$_3 } from "../642/896644";
 import { N as _$$N2 } from "../905/720559";
-import { RR } from "../figma_app/338442";
+import { SlotSymbolType } from "../figma_app/338442";
 import { generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L2 } from "../figma_app/884735";
 import { sA } from "../figma_app/841644";
@@ -293,7 +293,7 @@ let e9 = memo(function (e) {
       arcDataDisabled: !enabled.arcData,
       recordingKey: e.recordingKey
     }), shouldShowPropPill && jsx(_$$L2, {
-      nodeField: RR.VISIBLE,
+      nodeField: SlotSymbolType.VISIBLE,
       label: null
     }), jsx(wu, {
       showExplicitOnly: !0,
@@ -908,7 +908,7 @@ let tz = memo(({
   Gb(G);
   _$$W();
   _$$K2();
-  qh();
+  useAutosuggestShadowRead();
   Gx();
   (function () {
     let {

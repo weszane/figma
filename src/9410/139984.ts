@@ -10,13 +10,13 @@ import { getNewFileConfig } from "../905/766303";
 import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
-import { WO, Ai, jm, Y3 } from "../figma_app/242339";
+import { validateUserFileAccess, checkUserAccess, checkCursorBotOnboarding, isBasicOnboardingComplete } from "../figma_app/242339";
 import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
 import { N as _$$N } from "../figma_app/268271";
 import { hH, Qe } from "../9410/728210";
 import { J as _$$J } from "../figma_app/553179";
 import { iF } from "../figma_app/511910";
-import { en as _$$en } from "../figma_app/202626";
+import { NavigationDirection } from "../figma_app/202626";
 import { SyB } from "../figma_app/6204";
 import { a8, jE, mH, Dh } from "../figma_app/467440";
 import { wn, HQ, bn, Le, $2, mf, h0 } from "../figma_app/61403";
@@ -530,7 +530,7 @@ export function $$eo1() {
     let o = useOpenFileObjectWithSinatraType({
       useSinatraType: !0
     });
-    let l = WO(r?.id, o, ["exp_cursor_bot_onboarding"]);
+    let l = validateUserFileAccess(r?.id, o, ["exp_cursor_bot_onboarding"]);
     let c = e => {
       let r = {
         ...function (e) {
@@ -562,12 +562,12 @@ export function $$eo1() {
       s && o?.editor_type === FFileType.DESIGN && c();
     });
   }(uniqueId, isShowing, show);
-  let [U, G] = useState(_$$en.FORWARD);
+  let [U, G] = useState(NavigationDirection.FORWARD);
   let K = function () {
     let e = selectUserFlag("has_cursor_bot_onboarding_v2");
     let t = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
-    let i = Ai(["exp_cursor_bot_onboarding"]);
-    let r = jm(i);
+    let i = checkUserAccess(["exp_cursor_bot_onboarding"]);
+    let r = checkCursorBotOnboarding(i);
     let s = function (e) {
       let t = !!selectUserFlag("cursor_bot_v2_has_greeted_with_wave");
       let i = !!selectUserFlag(Of(wn.CREATE_FRAME, e).tutorialPlayedUserFlag);
@@ -588,9 +588,9 @@ export function $$eo1() {
     l > 0 && (d.previousTutorialCompleteUserFlag = s[l - 1].stepCompletedUserFlag);
     return d;
   }();
-  let H = Ai(["exp_cursor_bot_onboarding"]);
-  let z = Y3();
-  let X = jm(H);
+  let H = checkUserAccess(["exp_cursor_bot_onboarding"]);
+  let z = isBasicOnboardingComplete();
+  let X = checkCursorBotOnboarding(H);
   let Z = z || X;
   let Q = selectCurrentFile()?.canEdit;
   useEffect(() => {
@@ -639,12 +639,12 @@ export function $$eo1() {
     currentTutorial: K
   });
   let et = () => {
-    K.previousTutorialCompleteUserFlag && (G(_$$en.BACKWARD), O(postUserFlag({
+    K.previousTutorialCompleteUserFlag && (G(NavigationDirection.BACKWARD), O(postUserFlag({
       [K.previousTutorialCompleteUserFlag]: !1
     })));
   };
   let ei = () => {
-    G(_$$en.FORWARD);
+    G(NavigationDirection.FORWARD);
     O(postUserFlag({
       [K.stepCompletedUserFlag]: !0
     }));
@@ -654,7 +654,7 @@ export function $$eo1() {
     onClickNext: ei,
     onClickClose: ee,
     onClickBack: et,
-    skip: U === _$$en.BACKWARD ? et : ei
+    skip: U === NavigationDirection.BACKWARD ? et : ei
   });
 }
 export function $$el0({

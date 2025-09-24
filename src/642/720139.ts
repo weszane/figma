@@ -82,7 +82,7 @@ import { x as _$$x2 } from "../1528/887790";
 import { usePlaygroundSceneGraph, SceneGraphContext } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
 import { KindEnum } from "../905/129884";
-import { O2 } from "../figma_app/164212";
+import { PanelWidth } from "../figma_app/164212";
 import { Y as _$$Y2 } from "../905/411989";
 import { K0 } from "../figma_app/778125";
 import { getResourceDataOrFallback } from "../905/663269";
@@ -105,7 +105,7 @@ import { j as _$$j } from "../905/523935";
 import { M as _$$M2 } from "../905/771870";
 import { iV } from "../642/171234";
 import { T as _$$T } from "../905/714785";
-import { JA, Ev, VI } from "../figma_app/608944";
+import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_CONTENT, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
 import { LdP, wkK } from "../figma_app/27776";
 function H(e) {
   let t = RR();
@@ -464,7 +464,7 @@ function e4({
         className: "component_flyout_body--propsContainer--w8pmU",
         children: jsx(_$$x2, {
           componentProps: e.nodeData?.componentProps,
-          containerWidth: O2.UNBOUNDED,
+          containerWidth: PanelWidth.UNBOUNDED,
           errorData: _,
           instanceSwapPickerInitialHeight: 200,
           instanceSwapPickerInitialPosition: "right-center",
@@ -672,7 +672,7 @@ export function $$tu1({
   let eo = _9(e.library_key, "asset_panel_visual_assets_flyout_insert");
   let {
     closeFlyout
-  } = JA();
+  } = useComponentFlyoutModal();
   let ec = fV(e.library_key);
   let eu = selectCurrentFile();
   let ep = useDispatch();
@@ -878,7 +878,7 @@ export function $$tu1({
     width: tc,
     htmlAttributes: {
       "data-testid": "component-flyout-modal",
-      id: Ev,
+      id: COMPONENT_FLYOUT_MODAL_CONTENT,
       hidden: eE,
       onKeyDown: ew
     },
@@ -919,7 +919,7 @@ export function $$tu1({
     dataTestId: "component-flyout-modal",
     headerSize: "large",
     hidden: eE,
-    id: Ev,
+    id: COMPONENT_FLYOUT_MODAL_CONTENT,
     initialPosition: new Point(P + 1, td),
     initialWidth: tc,
     noCancelDragAndDrop: !0,
@@ -944,6 +944,6 @@ export function $$tu1({
     })
   });
 }
-export let $$tp0 = registerModal($$tu1, VI);
+export let $$tp0 = registerModal($$tu1, COMPONENT_FLYOUT_MODAL_TYPE);
 export const m = $$tp0;
 export const w = $$tu1;

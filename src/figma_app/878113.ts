@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
-import { oy } from "../figma_app/964367";
+import { serializeJSX } from "../figma_app/964367";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError, setTagGlobal } from "../905/11";
@@ -57,7 +57,7 @@ export class $$P2 extends Error {
 }
 export async function $$D6(e, t = 100) {
   let r = getSingletonSceneGraph().get(e.findContainingTopLevelFrameOrSelf());
-  return r ? (await oy(r, {
+  return r ? (await serializeJSX(r, {
     includeIDs: !0,
     excludeImageData: !0,
     excludeVectorData: !0,

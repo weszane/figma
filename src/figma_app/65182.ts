@@ -7,7 +7,7 @@ import { pf } from '../905/221848';
 import { n as _$$n } from '../905/347702';
 import { createOptimistThunk } from '../905/350402';
 import { getFeatureFlags } from '../905/601108';
-import { uN } from '../figma_app/338442';
+import { InstanceType } from '../figma_app/338442';
 import { selectContainingStateOrSymbolId } from '../figma_app/505098';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { selectMergedAssets } from '../figma_app/645694';
@@ -104,7 +104,7 @@ export function $$L9(e) {
   return {
     preferredValues: preferredProductComponents,
     togglePreferredValues: useCallback((n, i) => {
-      if (e && e.kind === uN.TYPED) {
+      if (e && e.kind === InstanceType.TYPED) {
         let a = [...t];
         n.forEach(e => {
           let t = getAssetKeyForPublish(e);
@@ -122,7 +122,7 @@ export function $$L9(e) {
       }
     }, [e, r, t]),
     handleSetPreferredValues: useCallback(t => {
-      if (e?.kind !== uN.TYPED) return;
+      if (e?.kind !== InstanceType.TYPED) return;
       let n = t.map(e => {
         let t = getAssetKeyForPublish(e);
         return {

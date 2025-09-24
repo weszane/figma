@@ -1,118 +1,215 @@
-import { traverseChildren, getParent } from "../figma_app/387100";
-import { fullscreenValue } from "../figma_app/455680";
-import { clearSelection, addToSelection } from "../figma_app/741237";
-import { e as _$$e } from "../905/986107";
-import { computeFullscreenViewportForNode } from "../figma_app/62612";
-var $$l4 = (e => (e[e.FORWARD = 0] = "FORWARD", e[e.BACKWARD = 1] = "BACKWARD", e))($$l4 || {});
-let $$d2 = "exp_tooltips_plus_onboarding";
-let c = "product page";
-function u(e, t) {
-  return t.some(t => e.toLowerCase().startsWith(t.toLowerCase()));
+// Original file: /Users/allen/sigma-main/src/figma_app/202626.ts
+// Refactored to improve readability, maintainability, and type safety.
+// Grouped related functionality: node finding utilities, specific element finders, and navigation helpers.
+// Added TypeScript types, JSDoc comments with original names, and simplified logic with early returns.
+// Renamed functions and exports to meaningful names while preserving original functionality.
+
+import type { TSSceneGraph } from './518682'
+import { computeFullscreenViewportForNode } from '../figma_app/62612'
+import { getParent, traverseChildren } from '../figma_app/387100'
+import { fullscreenValue } from '../figma_app/455680'
+import { addToSelection, clearSelection } from '../figma_app/741237'
+
+// Define types for better type safety
+interface Node {
+  type: string
+  name: string
+  guid: string
+  parentNode?: Node
 }
-export function $$p3(e, t, r) {
-  let i;
-  if (r?.type === t) return r;
-  let a = $$h0(e);
-  a && traverseChildren(a, e => {
-    if (e.type === t) {
-      i = e;
-      return "stop";
+
+interface NavigationOptions {
+  navigate: (viewport: any) => Promise<void>
+  guidToFocus?: string
+  guidToSelect: string
+}
+
+// Original: $$l4
+enum NavigationDirection {
+  FORWARD = 0,
+  BACKWARD = 1,
+}
+
+// Original: $$d2
+export const expTootipsSymbol = 'exp_tooltips_plus_onboarding'
+
+// Original: c
+const PRODUCT_PAGE_ANCESTOR = 'product page'
+
+/**
+ * Checks if a string starts with any of the given prefixes (case-insensitive).
+ * Original: u
+ */
+function startsWithAny(str: string, prefixes: string[]): boolean {
+  return prefixes.some(prefix => str.toLowerCase().startsWith(prefix.toLowerCase()))
+}
+
+/**
+ * Finds the first node of a specific type in the scene graph, starting from the current page.
+ * Original: $$p3
+ */
+export function findFirstNodeOfType(sceneGraph: TSSceneGraph, nodeType: string, startNode?: Node): Node | undefined {
+  if (startNode?.type === nodeType)
+    return startNode
+  const currentPage = getCurrentPage(sceneGraph)
+  if (!currentPage)
+    return undefined
+  let foundNode: Node | undefined
+  traverseChildren(currentPage, (node) => {
+    if (node.type === nodeType) {
+      foundNode = node
+      return 'stop'
     }
-  });
-  return i;
+  })
+  return foundNode
 }
-export function $$_5({
-  nodeType: e,
-  sceneGraph: t,
-  preferredName: r,
-  backupNames: i,
-  ancestorName: a
-}) {
-  let s;
-  let o = $$h0(t);
-  if (!o) return s;
-  let l = [];
-  return (traverseChildren(o, t => {
-    if (t.type === e && u(t.name, [r]) && (!a || a && function (e, t) {
-      let r = e.parentNode;
-      for (; r && !r.name.toLowerCase().startsWith(t.toLowerCase());) r = r.parentNode;
-      return !!r?.name.toLowerCase().startsWith(t.toLowerCase());
-    }(t, a))) {
-      s = t;
-      return "stop";
+
+/**
+ * Finds a node by type, preferred name, backup names, and optional ancestor name.
+ * Original: $$_5
+ */
+export function findNodeByCriteria({
+  nodeType,
+  sceneGraph,
+  preferredName,
+  backupNames,
+  ancestorName,
+}: {
+  nodeType: string
+  sceneGraph: TSSceneGraph
+  preferredName: string
+  backupNames?: string[]
+  ancestorName?: string
+}): Node | undefined {
+  const currentPage = getCurrentPage(sceneGraph)
+  if (!currentPage)
+    return undefined
+  let preferredMatch: Node | undefined
+  const backupMatches: Node[] = []
+  traverseChildren(currentPage, (node) => {
+    if (node.type === nodeType && startsWithAny(node.name, [preferredName])) {
+      if (!ancestorName || hasAncestorWithName(node, ancestorName)) {
+        preferredMatch = node
+        return 'stop'
+      }
     }
-    i && t.type === e && u(t.name, i) && l.push(t);
-  }), s) ? s : l.length > 0 ? l[0] : void 0;
+    if (backupNames && node.type === nodeType && startsWithAny(node.name, backupNames)) {
+      backupMatches.push(node)
+    }
+  })
+  return preferredMatch || (backupMatches.length > 0 ? backupMatches[0] : undefined)
 }
-export function $$h0(e) {
-  let t = null;
+
+/**
+ * Checks if a node has an ancestor with a name starting with the given string (case-insensitive).
+ * Helper for findNodeByCriteria.
+ */
+function hasAncestorWithName(node: Node, ancestorName: string): boolean {
+  let parent = node.parentNode
+  while (parent && !parent.name.toLowerCase().startsWith(ancestorName.toLowerCase())) {
+    parent = parent.parentNode
+  }
+  return !!parent?.name.toLowerCase().startsWith(ancestorName.toLowerCase())
+}
+
+/**
+ * Gets the current page from the scene graph, handling errors gracefully.
+ * Original: $$h0
+ */
+export function getCurrentPage(sceneGraph: TSSceneGraph): Node | null {
   try {
-    t = e.getCurrentPage();
-  } catch (e) {
-    if (e.message !== _$$e) throw e;
+    return sceneGraph.getCurrentPage()
   }
-  return t;
-}
-export function $$m8(e) {
-  return $$_5({
-    nodeType: "TEXT",
-    sceneGraph: e,
-    preferredName: "heirloom tomato",
-    backupNames: ["organic ginger", "sweet onion", "order summary", "we\u2019re farmers", "grown in"],
-    ancestorName: c
-  }) || $$p3(e, "TEXT");
-}
-export function $$g1(e) {
-  let t = $$_5({
-    nodeType: "TEXT",
-    sceneGraph: e,
-    preferredName: "heirloom tomato",
-    backupNames: ["organic ginger", "sweet onion", "order summary", "we\u2019re farmers", "grown in"],
-    ancestorName: c
-  });
-  if (t && "TEXT" === t.type) {
-    let r = getParent(e, t.guid);
-    if (r?.type === "FRAME") return r;
+  catch (error) {
+    if ((error as Error).message !== 'not implemented')
+      throw error
+    return null
   }
-  return $$p3(e, "FRAME");
 }
-export function $$f6(e) {
-  return $$_5({
-    nodeType: "TEXT",
-    sceneGraph: e,
-    preferredName: "landing page title",
-    backupNames: ["banner title", "playlist section title"]
-  }) || $$p3(e, "TEXT");
+
+/**
+ * Finds the product title text node, falling back to any TEXT node.
+ * Original: $$m8
+ */
+export function findProductTitleText(sceneGraph: TSSceneGraph): Node | undefined {
+  return findNodeByCriteria({
+    nodeType: 'TEXT',
+    sceneGraph,
+    preferredName: 'heirloom tomato',
+    backupNames: ['organic ginger', 'sweet onion', 'order summary', 'we’re farmers', 'grown in'],
+    ancestorName: PRODUCT_PAGE_ANCESTOR,
+  }) || findFirstNodeOfType(sceneGraph, 'TEXT')
 }
-export function $$E7(e) {
-  return $$_5({
-    nodeType: "FRAME",
-    sceneGraph: e,
-    preferredName: "hero image",
-    backupNames: ["banner", "playlist cover image"]
-  }) || $$p3(e, "FRAME");
+
+/**
+ * Finds the product frame, based on the product title text's parent or falling back to any FRAME.
+ * Original: $$g1
+ */
+export function findProductFrame(sceneGraph: TSSceneGraph): Node | undefined {
+  const titleText = findNodeByCriteria({
+    nodeType: 'TEXT',
+    sceneGraph,
+    preferredName: 'heirloom tomato',
+    backupNames: ['organic ginger', 'sweet onion', 'order summary', 'we’re farmers', 'grown in'],
+    ancestorName: PRODUCT_PAGE_ANCESTOR,
+  })
+  if (titleText && titleText.type === 'TEXT') {
+    const parent = getParent(sceneGraph, titleText.guid)
+    if (parent?.type === 'FRAME')
+      return parent
+  }
+  return findFirstNodeOfType(sceneGraph, 'FRAME')
 }
-export async function $$y9({
-  navigate: e,
-  guidToFocus: t,
-  guidToSelect: r
-}) {
-  clearSelection();
-  await e(computeFullscreenViewportForNode({
-    nodeId: t || r,
-    alwaysPan: !1,
-    minSizePx: t ? 200 : 32
-  }));
-  addToSelection([r]);
-  fullscreenValue.commit();
+
+/**
+ * Finds the landing page title text node, falling back to any TEXT node.
+ * Original: $$f6
+ */
+export function findLandingPageTitle(sceneGraph: TSSceneGraph): Node | undefined {
+  return findNodeByCriteria({
+    nodeType: 'TEXT',
+    sceneGraph,
+    preferredName: 'landing page title',
+    backupNames: ['banner title', 'playlist section title'],
+  }) || findFirstNodeOfType(sceneGraph, 'TEXT')
 }
-export const Qf = $$h0;
-export const aD = $$g1;
-export const d4 = $$d2;
-export const eN = $$p3;
-export const en = $$l4;
-export const gn = $$_5;
-export const l7 = $$f6;
-export const nt = $$E7;
-export const wy = $$m8;
-export const zU = $$y9;
+
+/**
+ * Finds the hero image frame, falling back to any FRAME.
+ * Original: $$E7
+ */
+export function findHeroImageFrame(sceneGraph: TSSceneGraph): Node | undefined {
+  return findNodeByCriteria({
+    nodeType: 'FRAME',
+    sceneGraph,
+    preferredName: 'hero image',
+    backupNames: ['banner', 'playlist cover image'],
+  }) || findFirstNodeOfType(sceneGraph, 'FRAME')
+}
+
+/**
+ * Navigates to a viewport and selects a node, committing fullscreen.
+ * Original: $$y9
+ */
+export async function navigateAndSelect({ navigate, guidToFocus, guidToSelect }: NavigationOptions): Promise<void> {
+  clearSelection()
+  await navigate(computeFullscreenViewportForNode({
+    nodeId: guidToFocus || guidToSelect,
+    alwaysPan: false,
+    minSizePx: guidToFocus ? 200 : 32,
+  }))
+  addToSelection([guidToSelect])
+  fullscreenValue.commit()
+}
+
+// Exports with refactored names
+export const Qf = getCurrentPage
+export const aD = findProductFrame
+export const d4 = expTootipsSymbol
+export const eN = findFirstNodeOfType
+export const en = NavigationDirection
+export const gn = findNodeByCriteria
+export const l7 = findLandingPageTitle
+export const nt = findHeroImageFrame
+export const wy = findProductTitleText
+export const zU = navigateAndSelect

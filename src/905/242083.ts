@@ -295,7 +295,7 @@ import { Wj } from '../figma_app/224338';
 import { N as _$$N3 } from '../figma_app/240060';
 import { T6 } from '../figma_app/242565';
 import { mr, U2 } from '../figma_app/247611';
-import { W7 } from '../figma_app/251115';
+import { hasJubileePermissionForWhiteboard } from '../figma_app/251115';
 import { fT as _$$fT } from '../figma_app/260703';
 import { n as _$$n3 } from '../figma_app/264395';
 import { z4 } from '../figma_app/266084';
@@ -8170,7 +8170,7 @@ let lX = class e extends sP(sN(sR)) {
     return _$$oY(t, e);
   }
   isAiDisabled() {
-    return !W7();
+    return !hasJubileePermissionForWhiteboard();
   }
   isAiDisabledFigJam() {
     return isEditDisabled({

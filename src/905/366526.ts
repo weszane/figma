@@ -428,7 +428,7 @@ import { parseOrgParentId } from '../figma_app/428858';
 import { h0, TP, Y3, zE } from '../figma_app/435872';
 import { PI as _$$PI, s6 as _$$s4, AY } from '../figma_app/443991';
 import { fullscreenValue } from '../figma_app/455680';
-import { Cp as _$$Cp } from '../figma_app/457074';
+import { setLastUsedLeftPanelTab } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
 import { useCurrentPlanUser, useIsOrgAdminUser, useIsOrgMemberOrAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_app/465071';
 import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
@@ -10228,7 +10228,7 @@ function cq(e, t) {
   return e == null ? {
     activeTab: UserInterfaceElements.LAYERS,
     shouldFocusSearchBar: !1
-  } : setLeftPanelTab.matches(t) ? (t.payload.persist && _$$Cp(t.payload.tab), {
+  } : setLeftPanelTab.matches(t) ? (t.payload.persist && setLastUsedLeftPanelTab(t.payload.tab), {
     ...e,
     activeTab: t.payload.tab,
     shouldFocusSearchBar: t.payload.shouldFocusSearchBar ?? void 0
