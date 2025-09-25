@@ -1,92 +1,155 @@
-import classNames from 'classnames';
-import { forwardRef } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { a as _$$a } from '../905/339331';
-import { r as _$$r } from '../905/571562';
-import { ButtonPrimitive } from '../905/632989';
-import { areValuesEqual, performNudge, handleParseWithError } from '../905/687992';
-import { identity, toPixels } from '../905/893109';
-import { preventEvent } from '../905/955878';
-p('stack__row__-rJHV').displayName = 'Stack.Row';
-let u = p('stack__col__4xLd-');
-function p(e) {
-  return forwardRef(({
-    fill: t,
-    gap: i = 0,
-    wrap: r,
-    align: a,
-    justify: s,
-    className: o,
-    style: l,
-    ...u
-  }, p) => jsx('div', {
-    ref: p,
-    className: classNames(e, o, {
-      stack__fill__6NGzz: t
-    }),
-    style: {
-      ...l,
-      gap: typeof i == 'number' ? toPixels(i) : i,
-      [identity('--wrap')]: r ? 'wrap' : 'nowrap',
-      justifyContent: s,
-      alignItems: a
-    },
-    ...u
-  }));
+import classNames from 'classnames'
+import { forwardRef } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { a as SVG } from '../905/339331'
+import { r as SVG1 } from '../905/571562'
+import { ButtonPrimitive } from '../905/632989'
+import { areValuesEqual, handleParseWithError, performNudge } from '../905/687992'
+import { identity, toPixels } from '../905/893109'
+import { preventEvent } from '../905/955878'
+
+const StackRow = forwardRef<HTMLDivElement, StackProps>(({
+  fill,
+  gap = 0,
+  wrap,
+  align,
+  justify,
+  className,
+  style,
+  ...restProps
+}, ref) => jsx('div', {
+  ref,
+  className: classNames('stack__row__-rJHV', className, {
+    stack__fill__6NGzz: fill,
+  }),
+  style: {
+    ...style,
+    gap: typeof gap === 'number' ? toPixels(gap) : gap,
+    [identity('--wrap')]: wrap ? 'wrap' : 'nowrap',
+    justifyContent: justify,
+    alignItems: align,
+  },
+  ...restProps,
+}))
+StackRow.displayName = 'Stack.Row'
+
+const StackCol = forwardRef<HTMLDivElement, StackProps>(({
+  fill,
+  gap = 0,
+  wrap,
+  align,
+  justify,
+  className,
+  style,
+  ...restProps
+}, ref) => jsx('div', {
+  ref,
+  className: classNames('stack__col__4xLd-', className, {
+    stack__fill__6NGzz: fill,
+  }),
+  style: {
+    ...style,
+    gap: typeof gap === 'number' ? toPixels(gap) : gap,
+    [identity('--wrap')]: wrap ? 'wrap' : 'nowrap',
+    justifyContent: justify,
+    alignItems: align,
+  },
+  ...restProps,
+}))
+StackCol.displayName = 'Stack.Col'
+
+interface StackProps {
+  fill?: boolean
+  gap?: number | string
+  wrap?: boolean
+  align?: string
+  justify?: string
+  className?: string
+  style?: React.CSSProperties
+  [key: string]: any
 }
-u.displayName = 'Stack.Col';
-export let $$h0 = forwardRef(({
-  value: e,
-  getStringValue: t,
-  formatter: i,
-  onChange: r,
-  onChangeRestricted: d
-}, c) => {
-  let {
-    min,
-    max
-  } = i;
-  let g = (n, a) => {
-    n.preventDefault();
-    let o = n.shiftKey;
-    let l = t();
-    let c = handleParseWithError(i, l, e, 'nudge', n);
-    if (c == null) return;
-    let u = e => performNudge(i, e, a, {
-      big: o
-    });
-    if (c.callback) {
-      c.callback(e => u(e).value, {
-        commit: !0
-      });
-      return;
+
+interface StepperProps {
+  value: any
+  getStringValue: () => string
+  formatter: {
+    min?: any
+    max?: any
+    parse?: (value: string) => any
+    nudge?: (value: any, delta: number, options: { big: boolean }) => any
+  }
+  onChange?: (value: any) => void
+  onChangeRestricted?: (preClamped: any, options: { value: any }) => void
+}
+
+const Stepper = forwardRef<HTMLDivElement, StepperProps>(({
+  value,
+  getStringValue,
+  formatter,
+  onChange,
+  onChangeRestricted,
+}, ref) => {
+  const { min, max } = formatter
+
+  const handleNudge = (event: React.MouseEvent, direction: number) => {
+    event.preventDefault()
+    const isBigStep = event.shiftKey
+    const stringValue = getStringValue()
+    const parseResult = handleParseWithError(formatter, stringValue, value, 'nudge', event)
+
+    if (parseResult == null) {
+      return
     }
-    let p = u(e);
-    areValuesEqual(i, e, p.value) || r?.(p.value);
-    p.value !== p.preClamped && d?.(p.preClamped, {
-      value: p.value
-    });
-  };
-  let f = {
+
+    const performNudgeOperation = (currentValue: any) => performNudge(formatter, currentValue, direction, {
+      big: isBigStep,
+    })
+
+    if (parseResult.callback) {
+      parseResult.callback((currentValue: any) => performNudgeOperation(currentValue).value, {
+        commit: true,
+      })
+      return
+    }
+
+    const nudgeResult = performNudgeOperation(value)
+    if (!areValuesEqual(formatter, value, nudgeResult.value)) {
+      onChange?.(nudgeResult.value)
+    }
+
+    if (nudgeResult.value !== nudgeResult.preClamped) {
+      onChangeRestricted?.(nudgeResult.preClamped, {
+        value: nudgeResult.value,
+      })
+    }
+  }
+
+  const buttonAttributes = {
     tabIndex: -1,
-    onPointerDown: preventEvent
-  };
-  return jsxs(u, {
-    ref: c,
-    children: [jsx(ButtonPrimitive, {
-      className: 'stepper__up__z53LA',
-      onClick: e => g(e, 1),
-      disabled: max != null && areValuesEqual(i, e, max),
-      htmlAttributes: f,
-      children: jsx(_$$a, {})
-    }), jsx(ButtonPrimitive, {
-      className: 'stepper__down__zob3i',
-      onClick: e => g(e, -1),
-      disabled: min != null && areValuesEqual(i, e, min),
-      htmlAttributes: f,
-      children: jsx(_$$r, {})
-    })]
-  });
-});
-$$h0.displayName = 'Stepper';
-export const C = $$h0;
+    onPointerDown: preventEvent,
+  }
+
+  return jsxs(StackCol, {
+    ref,
+    children: [
+      jsx(ButtonPrimitive, {
+        className: 'stepper__up__z53LA',
+        onClick: e => handleNudge(e, 1),
+        disabled: max != null && areValuesEqual(formatter, value, max),
+        htmlAttributes: buttonAttributes,
+        children: jsx(SVG, {}),
+      }),
+      jsx(ButtonPrimitive, {
+        className: 'stepper__down__zob3i',
+        onClick: e => handleNudge(e, -1),
+        disabled: min != null && areValuesEqual(formatter, value, min),
+        htmlAttributes: buttonAttributes,
+        children: jsx(SVG1, {}),
+      }),
+    ],
+  })
+})
+
+Stepper.displayName = 'Stepper'
+export { StackCol, StackRow, Stepper }
+export const C = Stepper

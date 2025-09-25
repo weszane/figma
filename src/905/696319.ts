@@ -15,7 +15,7 @@ import { setupDragHandler } from "../905/97346";
 import { containsActiveElement, focusAndSelect } from "../905/117474";
 import { N as _$$N } from "../905/427996";
 import { l as _$$l } from "../905/490996";
-import { C as _$$C } from "../905/294086";
+import { Stepper } from "../905/294086";
 import { KindEnum } from "../905/129884";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
@@ -601,7 +601,7 @@ let K = forwardRef(({
 K.displayName = "ScrubbableInput.Icon";
 forwardRef((e, t) => {
   let i = U();
-  return i && !i.ctx.inputProps.disabled && hasIncrementBy(i.ctx.formatter) ? jsx(_$$C, {
+  return i && !i.ctx.inputProps.disabled && hasIncrementBy(i.ctx.formatter) ? jsx(Stepper, {
     ref: t,
     value: i.ctx.value,
     formatter: i.ctx.formatter,

@@ -1,7 +1,7 @@
 import { createContext, forwardRef, useContext, useLayoutEffect, useState } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { InputComponent } from '../905/185998';
-import { C } from '../905/294086';
+import { Stepper } from '../905/294086';
 import { E } from '../905/427996';
 import { l as _$$l } from '../905/490996';
 import { hasIncrementBy } from '../905/687992';
@@ -45,7 +45,7 @@ g.displayName = 'FormattedInput.Field';
 export let $$f0 = g;
 forwardRef((e, t) => {
   let i = useContext(c);
-  return i && !i.inputProps.disabled && hasIncrementBy(i.formatter) ? jsx(C, {
+  return i && !i.inputProps.disabled && hasIncrementBy(i.formatter) ? jsx(Stepper, {
     ref: t,
     value: i.value,
     formatter: i.formatter,
